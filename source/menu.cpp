@@ -86,7 +86,7 @@ int direction = 0; // direction the gameprompt slides in
 static char gameregion[7];
 //power button fix
 extern u8 shutdown;
-
+extern u8 reset;
 
 //Wiilight stuff
 static vu32 *_wiilight_reg = (u32*)0xCD0000C0;
@@ -439,6 +439,9 @@ WiiMenuWindowPrompt(const char *title, const char *btn1Label, const char *btn2La
 			wiilight(0);
 			Sys_Shutdown();
 		}
+		if(reset == 1)
+			Sys_Reboot();
+			
 		if(btn1.GetState() == STATE_CLICKED) {
 			choice = 1;
 		}
@@ -553,6 +556,8 @@ WindowPrompt(const char *title, const char *msg, const char *btn1Label, const ch
 			wiilight(0);
 			Sys_Shutdown();
 		}
+		if(reset == 1)
+			Sys_Reboot();
 		if(btn1.GetState() == STATE_CLICKED) {
 			choice = 1;
 		}
@@ -1009,6 +1014,8 @@ int GameWindowPrompt()
 				wiilight(0);
 				Sys_Shutdown();
 			}
+			if(reset == 1)
+				Sys_Reboot();
 
 			if(btn1.GetState() == STATE_CLICKED) { //boot
 				choice = 1;
@@ -2096,7 +2103,8 @@ static int MenuInstall()
 
 		if (shutdown == 1)
 			Sys_Shutdown();
-
+		if(reset == 1)
+			Sys_Reboot();
 	}
 
 
@@ -2432,6 +2440,9 @@ static int MenuDiscList()
 		{
 			Sys_Shutdown();
 		}
+		if(reset == 1)
+			Sys_Reboot();
+			
 	    if(poweroffBtn.GetState() == STATE_CLICKED)
 		{
 
@@ -3024,7 +3035,9 @@ static int MenuFormat()
             }
 		if (shutdown == 1)
 			Sys_Shutdown();
-
+		if(reset == 1)
+			Sys_Reboot();
+			
 	    if(poweroffBtn.GetState() == STATE_CLICKED)
 		{
 		    choice = WindowPrompt ("Shutdown System","Are you sure?","Yes","No");
@@ -3390,7 +3403,9 @@ static int MenuSettings()
 
 			if(shutdown == 1)
 				Sys_Shutdown();
-
+			if(reset == 1)
+			Sys_Reboot();
+			
 			if(backBtn.GetState() == STATE_CLICKED)
 			{
 				//Add the procedure call to save the global configuration
@@ -3632,7 +3647,9 @@ int GameSettings(struct discHdr * header)
 
 		if(shutdown == 1)
 			Sys_Shutdown();
-
+		if(reset == 1)
+			Sys_Reboot();
+			
 		ret = optionBrowser3.GetClickedOption();
 
 		switch (ret)
@@ -3794,7 +3811,8 @@ static int MenuCheck()
 
 		if(shutdown == 1)
 			Sys_Shutdown();
-
+		if(reset == 1)
+			Sys_Reboot();
 		//Spieleliste laden
 		__Menu_GetEntries();
 

@@ -10,11 +10,12 @@
 /* Variables */
 static const char certs_fs[] ATTRIBUTE_ALIGN(32) = "/sys/cert.sys";
 u8 shutdown = 0;
+u8 reset = 0;
 
 void __Sys_ResetCallback(void)
 {
 	/* Reboot console */
-	Sys_Reboot();
+	reset = 1;
 }
 
 void __Sys_PowerCallback(void)
@@ -42,8 +43,8 @@ void Sys_Reboot(void)
 
 void Sys_Shutdown(void)
 {
-	/* Disconnect WPAD */
-	Wpad_Disconnect();
+    Wpad_Disconnect();
+
 	/* Poweroff console */
 	if(CONF_GetShutdownMode() == CONF_SHUTDOWN_IDLE) {
 		s32 ret;
