@@ -2,6 +2,7 @@
 #include <ogcsys.h>
 
 #include "sys.h"
+#include "wpad.h"
 
 /* Constants */
 #define CERTS_LEN	0x280
@@ -41,6 +42,8 @@ void Sys_Reboot(void)
 
 void Sys_Shutdown(void)
 {
+	/* Disconnect WPAD */
+	Wpad_Disconnect();
 	/* Poweroff console */
 	if(CONF_GetShutdownMode() == CONF_SHUTDOWN_IDLE) {
 		s32 ret;
