@@ -42,6 +42,8 @@
 
 #define MAX_CHARACTERS		38
 
+extern FreeTypeGX *fontClock; //CLOCK
+
 static GuiImage * coverImg = NULL;
 static GuiImageData * cover = NULL;
 
@@ -2381,6 +2383,7 @@ static int MenuDiscList()
     GuiText clockTime(theTime, 30, (GXColor){138, 138, 138, 255});
     clockTime.SetAlignment(THEME.clockAlign, ALIGN_BOTTOM);
     clockTime.SetPosition(THEME.clock_x, THEME.clock_y);
+	clockTime.SetFont(fontClock);
 
     HaltGui();
 	GuiWindow w(screenwidth, screenheight);
@@ -2609,7 +2612,7 @@ static int MenuDiscList()
 				snprintf (ID,sizeof(ID),"%c%c%c", header->id[0], header->id[1], header->id[2]);
 				snprintf (IDfull,sizeof(IDfull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
 				w.Remove(&DownloadBtn);
-				w.Remove(coverImg);
+//				w.Remove(coverImg);
 
 				if (GameIDTxt)
 				{

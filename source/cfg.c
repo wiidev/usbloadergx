@@ -177,9 +177,12 @@ void cfg_int(char *name, short *var, int count)
 
 //static char bg_path[100];
 
-void CFG_Default()
+void CFG_Default(int widescreen) // -1 = non forced Mode
 {
-	CFG.widescreen = CONF_GetAspectRatio();
+	if(widescreen == -1)
+		CFG.widescreen = CONF_GetAspectRatio();
+	else
+		CFG.widescreen = widescreen;
 
 	if (CFG.widescreen) {
 		snprintf(CFG.theme_path, sizeof(CFG.theme_path), "SD:/wtheme/");
@@ -346,6 +349,10 @@ void widescreen_set(char *name, char *val)
 	cfg_name = name;
 	cfg_val = val;
 
+	short widescreen;
+	if (cfg_bool("widescreen", &widescreen) && CFG.widescreen != widescreen)
+		CFG_Default(widescreen); //reset default when forced an other Screenmode
+/*
 	if (cfg_bool("widescreen", &CFG.widescreen)) //reset default
 	{
 		if (CFG.widescreen) {
@@ -358,6 +365,7 @@ void widescreen_set(char *name, char *val)
 			snprintf(CFG.theme_path, sizeof(CFG.theme_path), "SD:/theme/");
 		}
 	}
+*/
 }
 
 
@@ -1019,7 +1027,7 @@ void CFG_Load(int argc, char **argv)
 	//set app path
 //	chdir_app(argv[0]);
 
-	CFG_Default();
+	CFG_Default(-1); // set defaults non forced
 
 	snprintf(pathname, sizeof(pathname), "SD:/config/config.txt");
 

@@ -142,7 +142,7 @@ struct Game_CFG
 };
 
 
-void CFG_Default();
+void CFG_Default(int widescreen); // -1 = non forced mode
 void CFG_Load(int argc, char **argv);
 struct Game_CFG* CFG_get_game_opt(u8 *id);
 bool CFG_save_game_opt(u8 *id);

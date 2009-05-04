@@ -41,7 +41,8 @@
 #define CONSOLE_WIDTH		340
 #define CONSOLE_HEIGHT		218
 
-FreeTypeGX *fontSystem;
+FreeTypeGX *fontSystem=0;
+FreeTypeGX *fontClock=0;
 int ExitRequested = 0;
 bool netcheck = false;
 
@@ -145,6 +146,10 @@ main(int argc, char *argv[])
 	fontSystem = new FreeTypeGX();
 	fontSystem->loadFont(font_ttf, font_ttf_size, 0);
 	fontSystem->setCompatibilityMode(FTGX_COMPATIBILITY_DEFAULT_TEVOP_GX_PASSCLR | FTGX_COMPATIBILITY_DEFAULT_VTXDESC_GX_NONE);
+
+	fontClock = new FreeTypeGX();
+	fontClock->loadFont(clock_ttf, clock_ttf_size, 0);
+	fontClock->setCompatibilityMode(FTGX_COMPATIBILITY_DEFAULT_TEVOP_GX_PASSCLR | FTGX_COMPATIBILITY_DEFAULT_VTXDESC_GX_NONE);
 
 	InitGUIThreads();
 	MainMenu(MENU_CHECK);

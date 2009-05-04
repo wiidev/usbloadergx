@@ -622,6 +622,7 @@ class GuiText : public GuiElement
 		//!\param hor Horizontal alignment (ALIGN_LEFT, ALIGN_RIGHT, ALIGN_CENTRE)
 		//!\param vert Vertical alignment (ALIGN_TOP, ALIGN_BOTTOM, ALIGN_MIDDLE)
 		void SetAlignment(int hor, int vert);
+		void SetFont(FreeTypeGX *f);
 		//!Constantly called to draw the text
 		void Draw();
 	protected:
@@ -630,6 +631,7 @@ class GuiText : public GuiElement
 		int maxWidth; //!< Maximum width of the generated text object (for text wrapping)
 		u16 style; //!< FreeTypeGX style attributes
 		GXColor color; //!< Font color
+		FreeTypeGX *font;
 };
 
 //!Display, manage, and manipulate buttons in the GUI. Buttons can have images, icons, text, and sound set (all of which are optional)
