@@ -2311,8 +2311,9 @@ static int MenuDiscList()
 	DownloadBtn.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	DownloadBtn.SetPosition(THEME.cover_x,THEME.cover_y);//(20, 300);
 	DownloadBtn.SetSoundOver(&btnSoundOver);
-	DownloadBtn.SetTrigger(&trigA);
+
 	if (CFG.godmode == 1){//only make the button have trigger & tooltip if in godmode
+	DownloadBtn.SetTrigger(&trigA);
 	if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0){
 		DownloadBtn.SetToolTip(&ttDownloadImg,&ttDownloadTxt,205,-30);
     }
