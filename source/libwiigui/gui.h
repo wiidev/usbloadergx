@@ -372,6 +372,7 @@ class GuiElement
 		virtual void Update(GuiTrigger * t);
 		//!Called constantly to redraw the element
 		virtual void Draw();
+		virtual void DrawTooltip();
 	protected:
         //int position2; //! B Scrollbariable
 		bool visible; //!< Visibility of the element. If false, Draw() is skipped
@@ -472,6 +473,7 @@ class GuiWindow : public GuiElement
 		void MoveSelectionVert(int d);
 		//!Draws all the elements in this GuiWindow
 		void Draw();
+		void DrawTooltip();
 		//!Updates the window and all elements contains within
 		//!Allows the GuiWindow and all elements to respond to the input data specified
 		//!\param t Pointer to a GuiTrigger, containing the current input data from PAD/WPAD
@@ -696,6 +698,7 @@ class GuiButton : public GuiElement
 		void SetToolTip(GuiImage* i, GuiText * t, int x, int y);
 		//!Constantly called to draw the GuiButton
 		void Draw();
+		void DrawTooltip();
 		//!Constantly called to allow the GuiButton to respond to updated input data
 		//!\param t Pointer to a GuiTrigger, containing the current input data from PAD/WPAD
 		void Update(GuiTrigger * t);

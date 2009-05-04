@@ -97,7 +97,17 @@ void GuiWindow::Draw()
 		//Menu_DrawRectangle(0,0,screenwidth,screenheight,(GXColor){0xbe, 0xca, 0xd5, 0x70},1);
 		Menu_DrawRectangle(0,0,screenwidth,screenheight,(GXColor){0, 0, 0, 0x70},1);
 }
+void GuiWindow::DrawTooltip()
+{
+	if(_elements.size() == 0 || !this->IsVisible())
+		return;
 
+	for (u8 i = 0; i < _elements.size(); i++)
+	{
+		try	{ _elements.at(i)->DrawTooltip(); }
+		catch (const std::exception& e) { }
+	}
+}
 void GuiWindow::ResetState()
 {
 	if(state != STATE_DISABLED)

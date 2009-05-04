@@ -1671,6 +1671,7 @@ UpdateGUI (void *arg)
 		else
 		{
 			mainWindow->Draw();
+			mainWindow->DrawTooltip();
 
 			#ifdef HW_RVL
 			for(int i=3; i >= 0; i--) // so that player 1's cursor appears on top!

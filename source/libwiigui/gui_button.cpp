@@ -173,6 +173,7 @@ void GuiButton::Draw()
 	}
 
     //draw ToolTip
+/*
 	if(state == STATE_SELECTED && toolTip)
 	{
 	    if (time2 == 0)
@@ -188,10 +189,27 @@ void GuiButton::Draw()
         }
         }
 	}
-
+*/
 	this->UpdateEffects();
 }
+void GuiButton::DrawTooltip()
+{
+	if(state == STATE_SELECTED && toolTip)
+	{
+	    if (time2 == 0)
+		    time(&time2);
 
+		    time(&time1);
+
+        if (difftime(time1, time2) >= 2) {
+		toolTip->Draw();
+		if (toolTipTxt)
+        {
+			toolTipTxt->Draw();
+        }
+        }
+	}
+}
 void GuiButton::ScrollIsOn(int f)
 {
     scrollison = f;
