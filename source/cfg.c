@@ -29,6 +29,8 @@ char current_path[100];
 //int COVER_XCOORD     = 28;
 //int COVER_YCOORD     = 105;
 
+//define variables
+
 struct CFG CFG;
 struct THEME THEME;
 u8 ocarinaChoice = 0;
@@ -199,9 +201,9 @@ void CFG_Default()
 	CFG.godmode = 0;
 //	CFG.installdownload = 0;
 //	CFG.hidesettingmenu = 0;
-	snprintf(CFG.covers_path, sizeof(CFG.covers_path), "SD:/images/");
-	snprintf(CFG.disc_path, sizeof(CFG.disc_path), "SD:/images/disc/");
-	snprintf(CFG.unlockCode, sizeof(CFG.unlockCode), "ab121b");
+	snprintf(CFG.covers_path, sizeof(CFG.covers_path), "SD:/images/"); //default image path 
+	snprintf(CFG.disc_path, sizeof(CFG.disc_path), "SD:/images/disc/");//default path for disc images
+	snprintf(CFG.unlockCode, sizeof(CFG.unlockCode), "ab121b");		// default passwore
 
 	//all alignments are left top here
 	THEME.selection_x = 200;
@@ -406,12 +408,15 @@ void cfg_set(char *name, char *val)
 	cfg_map("home", "reboot", &CFG.home, CFG_HOME_REBOOT);
 	cfg_int("simple", &CFG.simple, 3);
 */
-	if (!CFG.widescreen &&(strcmp(name, "theme_path") == 0)) {
+		
+	// if these are defined in txt file, use them.  otherwise use defaults
+
+	if (!CFG.widescreen &&(strcmp(name, "theme_path") == 0)) {// if in 4:3
 		strcopy(CFG.theme_path, val, sizeof(CFG.theme_path));
 		return;
 	}
 
-	if (CFG.widescreen && strcmp(name, "wtheme_path") == 0) {
+	if (CFG.widescreen && strcmp(name, "wtheme_path") == 0) { // if in 16:9
 		strcopy(CFG.theme_path, val, sizeof(CFG.theme_path));
 		return;
 	}
@@ -831,7 +836,7 @@ void cfg_set_game_opt(struct Game_CFG *game, u8 *id)
 	game->parentalcontrol = parentalcontrolChoice;
 }
 
-bool cfg_save_global()
+bool cfg_save_global()// save global settings
 {
     struct stat st;
     if(stat("SD:/config/", &st) != 0) {
@@ -930,7 +935,7 @@ bool cfg_load_games()
 	return cfg_parsefile("SD:/config/settings.cfg", &game_set);
 }
 
-bool cfg_save_games()
+bool cfg_save_games()// save per game setings
 {
 	FILE *f;
 	int i;

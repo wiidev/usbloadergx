@@ -452,7 +452,7 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 	}
 
     WPAD_ScanPads();
-    u8 cnt, buttons = NULL;
+    u8 cnt, buttons = NULL;/////////////////////////////////////////////////////scroll by holding B and tilt wiimote
     int position1 = 0;
 
 
@@ -520,7 +520,7 @@ void GuiGameBrowser::Update(GuiTrigger * t)
     position2 = 0;
     }
 
-    if(scrollbarBoxBtn->GetState() == STATE_HELD &&
+    if(scrollbarBoxBtn->GetState() == STATE_HELD &&/////////////////////allow dragging of scrollbar box
 		scrollbarBoxBtn->GetStateChan() == t->chan &&
 		t->wpad.ir.valid && gameCnt > pagesize)
     {
@@ -548,7 +548,7 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 		scrollbarBoxBtn->SetPosition(width/2-18+7, positionbar+8);
 
 
-    if(t->Right())
+    if(t->Right())/////////////////////////////////////////////////////skip pagesize # of games if right is pressed
 	{
 		if(listOffset < gameCnt && gameCnt > pagesize)
 		{
@@ -570,7 +570,7 @@ void GuiGameBrowser::Update(GuiTrigger * t)
     } else {
 
 
-	if(t->Down())
+	if(t->Down())/////////////////////////////////////////////////////if there isn't a scrollbar and down is pressed
 	{
 		next = this->FindMenuItem(gameIndex[selectedItem], 1);
 
@@ -589,7 +589,7 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 			}
 		}
 	}
-	else if(t->Up())
+	else if(t->Up())///////////////////////////////////////////////////up
 	{
 		prev = this->FindMenuItem(gameIndex[selectedItem], -1);
 

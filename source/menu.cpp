@@ -702,7 +702,7 @@ DeviceWait(const char *title, const char *msg, const char *btn1Label, const char
 {
 	int i = 30;
 	char timer[20];
-
+	
 	GuiWindow promptWindow(472,320);
 	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	promptWindow.SetPosition(0, -10);
@@ -710,6 +710,7 @@ DeviceWait(const char *title, const char *msg, const char *btn1Label, const char
 	GuiImageData btnOutline(button_dialogue_box_png);
 	GuiTrigger trigA;
 	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
+	
 
 	GuiImageData dialogBox(dialogue_box_png);
 	GuiImage dialogBoxImg(&dialogBox);
@@ -726,7 +727,7 @@ DeviceWait(const char *title, const char *msg, const char *btn1Label, const char
 	msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	msgTxt.SetPosition(0,0);
 	msgTxt.SetMaxWidth(430);
-
+	
 	promptWindow.Append(&dialogBoxImg);
 	promptWindow.Append(&titleTxt);
 	promptWindow.Append(&msgTxt);
@@ -738,6 +739,8 @@ DeviceWait(const char *title, const char *msg, const char *btn1Label, const char
 	mainWindow->Append(&promptWindow);
 	mainWindow->ChangeFocus(&promptWindow);
 	ResumeGui();
+	
+	
 
     s32 ret2;
 	while(i >= 0)
@@ -937,7 +940,7 @@ int GameWindowPrompt()
 		}
 
 		changed = 0;
-
+		//load disc image based or what game is seleted
 		struct discHdr * header = &gameList[gameSelected];
 		WBFS_GameSize(header->id, &size);
 
@@ -1039,7 +1042,7 @@ int GameWindowPrompt()
 				promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
 			}
 
-			else if(btnRight.GetState() == STATE_CLICKED) {
+			else if(btnRight.GetState() == STATE_CLICKED) {//next game
 				promptWindow.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 50);
 				changed = 1;
 				gameSelected = (gameSelected + 1) % gameCnt;
@@ -1047,7 +1050,7 @@ int GameWindowPrompt()
 				break;
 			}
 
-			else if(btnLeft.GetState() == STATE_CLICKED) {
+			else if(btnLeft.GetState() == STATE_CLICKED) {//previous game
 				promptWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 50);
 				changed = 2;
 				gameSelected = (gameSelected - 1 + gameCnt) % gameCnt;
@@ -1289,7 +1292,7 @@ char * NetworkInitPromp(int choice2)
 			u32 i = 0;
 			char filename[11];
 	//        char filenameshort[10];
-			bool found1 = false;
+			bool found1 = false;/////add Ids of games that are missing covers to cntMissFiles
 			bool found2 = false;
 			for (i = 0; i < gameCnt && cntMissFiles < 500; i++)
 			{
@@ -1607,7 +1610,7 @@ ProgressDownloadWindow(int choice2)
 		sprintf(imgPath,"%s%s", CFG.covers_path, missingFiles[i]);
     }
 
-    struct block file = downloadfile(URLFile);
+    struct block file = downloadfile(URLFile);//reject known bad images
 
     if (file.size == 36864 || file.size <= 1024 || file.size == 7386 || file.data == NULL) {
         cntNotFound++;
@@ -2147,7 +2150,7 @@ static int MenuDiscList()
 
 	WBFS_DiskSpace(&used, &freespace);
 
-    if (!gameCnt) {
+    if (!gameCnt) { //if there is no list of games to display
         nolist = 1;
     }
 
@@ -2301,7 +2304,7 @@ static int MenuDiscList()
 	DownloadBtn.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	DownloadBtn.SetPosition(THEME.cover_x,THEME.cover_y);//(20, 300);
 	DownloadBtn.SetSoundOver(&btnSoundOver);
-	if (CFG.godmode == 1){
+	if (CFG.godmode == 1){//only make the button have trigger & tooltip if in godmode
 	if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0){
 		DownloadBtn.SetToolTip(&ttDownloadImg,&ttDownloadTxt,205,-30);
 		DownloadBtn.SetTrigger(&trigA);
@@ -2403,8 +2406,8 @@ static int MenuDiscList()
 	    VIDEO_WaitVSync ();
 
         //CLOCK
-        if ((Settings.hddinfo == Clock)&&(counter % 2000 == 0)) {
-            time_t rawtime = time(0);
+        if ((Settings.hddinfo == Clock)&&(counter % 2000 == 0)) {//only update the clock every 2000 loops
+            time_t rawtime = time(0);								//this fixes code dump caused by the clock
             timeinfo = localtime (&rawtime);
             strftime(theTime, sizeof(theTime), "%H:%M", timeinfo);
             clockTime.SetText(theTime);
@@ -2435,7 +2438,7 @@ static int MenuDiscList()
 			}
 		}
 		#endif
-
+			// respond to button presses
 		if(shutdown == 1)
 		{
 			Sys_Shutdown();
@@ -2563,8 +2566,8 @@ static int MenuDiscList()
 
 
 		//Get selected game under cursor
-		int selectimg, promptnumber;
-		promptnumber = 0;
+		int selectimg;//, promptnumber;
+		//promptnumber = 0;
 		char ID[4];
 		char IDfull[7];
 		selectimg = gameBrowser.GetSelectedOption();
@@ -2579,7 +2582,7 @@ static int MenuDiscList()
 		{
 			if (selectimg != selectedold)
 			{
-				selectedold = selectimg;
+				selectedold = selectimg;//update displayed cover, game ID, and region if the selected game changes
 				struct discHdr *header = &gameList[selectimg];
 				snprintf (ID,sizeof(ID),"%c%c%c", header->id[0], header->id[1], header->id[2]);
 				snprintf (IDfull,sizeof(IDfull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
@@ -2649,7 +2652,7 @@ static int MenuDiscList()
 				coverImg = new GuiImage(cover);
 				coverImg->SetWidescreen(CFG.widescreen);
 
-				DownloadBtn.SetImage(coverImg);
+				DownloadBtn.SetImage(coverImg);// put the new image on the download button
 				w.Append(&DownloadBtn);
 
 				if ((Settings.sinfo == GameID) || (Settings.sinfo == Both)){
@@ -2712,7 +2715,7 @@ static int MenuDiscList()
                             ios2 = 0;
                             break;
                     }
-
+						// if we have used the network or cios222 we need to reload the disklist 
                     if(networkisinitialized == 1 || ios2 == 1 || Settings.cios == ios222) {
 
 					WPAD_Flush(0);
@@ -2776,10 +2779,10 @@ static int MenuDiscList()
 					returnHere = true;
 				}
 
-				else if (choice == 3) //&& (CFG.godmode == 1))
+				else if (choice == 3) //WBFS renaming
 				{
 					wiilight(0);
-					//enter new game title
+										//enter new game title
 					char entered[40];
 					snprintf(entered, sizeof(entered), "%s", get_title(header));
 					entered[39] = '\0';
@@ -2853,8 +2856,6 @@ static int MenuFormat()
 
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
 	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, vol);
-	//btnClick.SetVolume(vol);
-	//btnSoundOver.SetVolume(vol);
 	snprintf(imgPath, sizeof(imgPath), "%swiimote_poweroff.png", CFG.theme_path);
 	GuiImageData btnpwroff(imgPath, wiimote_poweroff_png);
 	snprintf(imgPath, sizeof(imgPath), "%swiimote_poweroff_over.png", CFG.theme_path);
@@ -3591,7 +3592,7 @@ int GameSettings(struct discHdr * header)
 
 	struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
 
-	if (game_cfg)
+	if (game_cfg)//if there are saved settings for this game use them
 	{
 		videoChoice = game_cfg->video;
 		languageChoice = game_cfg->language;
@@ -3599,7 +3600,7 @@ int GameSettings(struct discHdr * header)
 		viChoice = game_cfg->vipatch;
 		iosChoice = game_cfg->ios;
 	}
-	else
+	else// otherwise use the global settings
 	{
 		videoChoice = Settings.video;
 		languageChoice = Settings.language;
@@ -3757,7 +3758,7 @@ static int MenuCheck()
 			fatUnmount("SD");
 			__io_wiisd.shutdown();
             ret2 = DeviceWait("No USB Device:", "Waiting for USB Device 30 secs", 0, 0);
-            PAD_Init();
+			PAD_Init();
             Wpad_Init();
             WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
             WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
