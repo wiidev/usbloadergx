@@ -2062,7 +2062,15 @@ static int MenuInstall()
 		u32 estimation = wbfs_estimate_disc(hdd, __WBFS_ReadDVD, NULL, ONLY_GAME_PARTITION);
 		f32 gamesize = ((f32) estimation)/1073741824;
 		char gametxt[50];
+
+		sprintf(gametxt, "%s : %.2fGB", name, gamesize);
+
+		choice = WindowPrompt("Continue install game?:",gametxt,"OK","Cancel");
+
+		if(choice == 1) {
+
 		sprintf(gametxt, "Installing game %.2fGB:", gamesize);
+
 		if (gamesize > freespace) {
 			char errortxt[50];
 			sprintf(errortxt, "Game Size: %.2fGB, Free Space: %.2fGB", gamesize, freespace);
@@ -2102,6 +2110,11 @@ static int MenuInstall()
 				wiilight(0);
 				break;
 			}
+		}
+		} else {
+		    menu = MENU_DISCLIST;
+		    wiilight(0);
+		    break;
 		}
 
 		if (shutdown == 1)
