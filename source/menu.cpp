@@ -441,7 +441,7 @@ WiiMenuWindowPrompt(const char *title, const char *btn1Label, const char *btn2La
 		}
 		if(reset == 1)
 			Sys_Reboot();
-			
+
 		if(btn1.GetState() == STATE_CLICKED) {
 			choice = 1;
 		}
@@ -702,7 +702,7 @@ DeviceWait(const char *title, const char *msg, const char *btn1Label, const char
 {
 	int i = 30;
 	char timer[20];
-	
+
 	GuiWindow promptWindow(472,320);
 	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	promptWindow.SetPosition(0, -10);
@@ -710,7 +710,7 @@ DeviceWait(const char *title, const char *msg, const char *btn1Label, const char
 	GuiImageData btnOutline(button_dialogue_box_png);
 	GuiTrigger trigA;
 	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
-	
+
 
 	GuiImageData dialogBox(dialogue_box_png);
 	GuiImage dialogBoxImg(&dialogBox);
@@ -727,7 +727,7 @@ DeviceWait(const char *title, const char *msg, const char *btn1Label, const char
 	msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	msgTxt.SetPosition(0,0);
 	msgTxt.SetMaxWidth(430);
-	
+
 	promptWindow.Append(&dialogBoxImg);
 	promptWindow.Append(&titleTxt);
 	promptWindow.Append(&msgTxt);
@@ -739,8 +739,8 @@ DeviceWait(const char *title, const char *msg, const char *btn1Label, const char
 	mainWindow->Append(&promptWindow);
 	mainWindow->ChangeFocus(&promptWindow);
 	ResumeGui();
-	
-	
+
+
 
     s32 ret2;
 	while(i >= 0)
@@ -2284,6 +2284,11 @@ static int MenuDiscList()
 	if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0)
         poweroffBtn.SetToolTip(&ttpoweroffImg,&ttpoweroffTxt,-10,-30);
 
+
+	GuiText ttsdcardTxt("Reload SD", 22, (GXColor){0, 0, 0, 255});		//TOOLTIP DATA FOR SETTINGS BUTTON
+	GuiImageData ttsdcard(tooltip_png);
+	GuiImage ttsdcardImg(&ttsdcard);
+
 	GuiImage sdcardImg(&btnsdcard);
 	sdcardImg.SetWidescreen(CFG.widescreen);
 	GuiButton sdcardBtn(btnsdcard.GetWidth(), btnsdcard.GetHeight());
@@ -2294,6 +2299,8 @@ static int MenuDiscList()
 	sdcardBtn.SetSoundClick(&btnClick);
 	sdcardBtn.SetTrigger(&trigA);
 	sdcardBtn.SetEffectGrow();
+	if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0)
+		sdcardBtn.SetToolTip(&ttsdcardImg,&ttsdcardTxt,95,-40);
 
 	//Downloading Covers
 	GuiText ttDownloadTxt("Click to Download Covers", 20, (GXColor){0, 0, 0, 255});	//TOOLTIP DATA FOR DOWNLOAD
@@ -2304,10 +2311,10 @@ static int MenuDiscList()
 	DownloadBtn.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	DownloadBtn.SetPosition(THEME.cover_x,THEME.cover_y);//(20, 300);
 	DownloadBtn.SetSoundOver(&btnSoundOver);
+	DownloadBtn.SetTrigger(&trigA);
 	if (CFG.godmode == 1){//only make the button have trigger & tooltip if in godmode
 	if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0){
 		DownloadBtn.SetToolTip(&ttDownloadImg,&ttDownloadTxt,205,-30);
-		DownloadBtn.SetTrigger(&trigA);
     }
     }
 
@@ -2445,7 +2452,7 @@ static int MenuDiscList()
 		}
 		if(reset == 1)
 			Sys_Reboot();
-			
+
 	    if(poweroffBtn.GetState() == STATE_CLICKED)
 		{
 
@@ -2700,7 +2707,7 @@ static int MenuDiscList()
 
 					wiilight(0);
 
-                    int ios2 = 0;
+                    int ios2;
                     switch(iosChoice)
                     {
                         case i249:
@@ -2715,7 +2722,8 @@ static int MenuDiscList()
                             ios2 = 0;
                             break;
                     }
-						// if we have used the network or cios222 we need to reload the disklist 
+
+                    // if we have used the network or cios222 we need to reload the disklist
                     if(networkisinitialized == 1 || ios2 == 1 || Settings.cios == ios222) {
 
 					WPAD_Flush(0);
@@ -2727,9 +2735,28 @@ static int MenuDiscList()
                     USBStorage_Deinit();
 
                     if(ios2 == 1) {
-					IOS_ReloadIOS(222);
+
+					ret = IOS_ReloadIOS(222);
+					if(ret < 0) {
+
+                    Wpad_Init();
+                    WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
+                    WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
+
+					WindowPrompt("You don't have cIOS222!","Loading in cIOS249!","OK", 0);
+
+					WPAD_Flush(0);
+                    WPAD_Disconnect(0);
+                    WPAD_Shutdown();
+
+					IOS_ReloadIOS(249);
+					ios2 = 0;
+					}
+
                     } else {
-                    IOS_ReloadIOS(249);
+
+                    ret = IOS_ReloadIOS(249);
+
                     }
 
 					ret = WBFS_Init(WBFS_DEVICE_USB);
@@ -3038,7 +3065,7 @@ static int MenuFormat()
 			Sys_Shutdown();
 		if(reset == 1)
 			Sys_Reboot();
-			
+
 	    if(poweroffBtn.GetState() == STATE_CLICKED)
 		{
 		    choice = WindowPrompt ("Shutdown System","Are you sure?","Yes","No");
@@ -3086,7 +3113,6 @@ static int MenuFormat()
 
 static int MenuSettings()
 {
-    //__Disc_SetLowMem();
 	int menu = MENU_NONE;
 	int ret;
 
@@ -3201,7 +3227,7 @@ static int MenuSettings()
 			sprintf(options2.name[0], "Tooltips");
 			sprintf(options2.name[1], "Password");
 			sprintf(options2.name[2], "Parental Ctrl");
-			sprintf(options2.name[3], "Standard cIOS");
+			sprintf(options2.name[3], "Boot Loader in");
 			sprintf(options2.name[4], " ");
 			sprintf(options2.name[5], " ");
 			sprintf(options2.name[6], " ");
@@ -3339,8 +3365,8 @@ static int MenuSettings()
 				else if (Settings.parentalcontrol == ParentalControlLevel2) sprintf (options2.value[2],"broken");
 				else if (Settings.parentalcontrol == ParentalControlLevel3) sprintf (options2.value[2],"coming soon");
 
-                if (Settings.cios == ios249) sprintf (options2.value[3],"249");
-				else if (Settings.cios == ios222) sprintf (options2.value[3],"222");
+                if (Settings.cios == ios249) sprintf (options2.value[3],"cIOS 249");
+				else if (Settings.cios == ios222) sprintf (options2.value[3],"cIOS 222");
 
 				sprintf(options2.value[4], " ");
 				sprintf(options2.value[5], " ");
@@ -3406,7 +3432,7 @@ static int MenuSettings()
 				Sys_Shutdown();
 			if(reset == 1)
 			Sys_Reboot();
-			
+
 			if(backBtn.GetState() == STATE_CLICKED)
 			{
 				//Add the procedure call to save the global configuration
@@ -3606,7 +3632,7 @@ int GameSettings(struct discHdr * header)
 		languageChoice = Settings.language;
 		ocarinaChoice = Settings.ocarina;
 		viChoice = Settings.vpatch;
-		if(Settings.cios == ios222) {
+		if(Settings.ios == i222) {
         iosChoice = i222;
 		} else {
 		iosChoice = i249;
@@ -3650,7 +3676,7 @@ int GameSettings(struct discHdr * header)
 			Sys_Shutdown();
 		if(reset == 1)
 			Sys_Reboot();
-			
+
 		ret = optionBrowser3.GetClickedOption();
 
 		switch (ret)
@@ -3952,26 +3978,6 @@ int MainMenu(int menu)
 	fatUnmount("SD");
 	__io_wiisd.shutdown();
     ExitApp();
-
-	struct discHdr *header = &gameList[gameSelected];
-	struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
-
-	if (game_cfg)
-	{
-		videoChoice = game_cfg->video;
-		languageChoice = game_cfg->language;
-		ocarinaChoice = game_cfg->ocarina;
-		viChoice = game_cfg->vipatch;
-		iosChoice = game_cfg->ios;
-	}
-	else
-	{
-		videoChoice = Settings.video;
-		languageChoice = Settings.language;
-		ocarinaChoice = Settings.ocarina;
-		viChoice = Settings.vpatch;
-		iosChoice = i249;
-	}
 
     switch(languageChoice)
     {

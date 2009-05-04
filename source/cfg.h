@@ -235,6 +235,7 @@ struct SSettings {
     int		language;
     int     ocarina;
     int     vpatch;
+    int     ios;
 	int		sinfo;
 	int		hddinfo;
 	int		rumble;
