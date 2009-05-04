@@ -188,23 +188,15 @@ void CFG_Default()
 	{
 		snprintf(CFG.theme_path, sizeof(CFG.theme_path), "SD:/theme/");
 	}
-//	CFG.simple  = 0;
-//	CFG.video	= CFG_VIDEO_DEFAULT;
-//	CFG.home	= CFG_HOME_REBOOT;
-//	CFG.download = 0;
-//	CFG.language = CFG_LANG_CONSOLE;
-//	CFG.ocarina = 0;
-//	CFG.vipatch = 0;
-//	CFG.savesettings = 0;
-	CFG.parentalcontrol = 0;
-	CFG.maxcharacters = 38;
-	CFG.godmode = 0;
-//	CFG.installdownload = 0;
-//	CFG.hidesettingmenu = 0;
+
 	snprintf(CFG.covers_path, sizeof(CFG.covers_path), "SD:/images/"); //default image path 
 	snprintf(CFG.disc_path, sizeof(CFG.disc_path), "SD:/images/disc/");//default path for disc images
 	snprintf(CFG.unlockCode, sizeof(CFG.unlockCode), "ab121b");		// default passwore
 
+	CFG.parentalcontrol = 0;
+	CFG.maxcharacters = 38;
+	CFG.godmode = 0;
+	
 	//all alignments are left top here
 	THEME.selection_x = 200;
 	THEME.selection_y = 40;
@@ -252,7 +244,6 @@ void CFG_Default()
 	THEME.clockAlign = CFG_ALIGN_CENTRE;
 	THEME.sdcard_x = 160;
 	THEME.sdcard_y = 390;
-
 }
 
 
@@ -456,104 +447,104 @@ void theme_set(char *name, char *val)
 	}
 
 	else if (strcmp(cfg_name, "covers_coords") == 0) {
-		int x,y;
-		if (sscanf(val, "%d,%d", &x, &y) == 2) {
+		short x,y;
+		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
 			THEME.cover_x = x - (x % 4);
 			THEME.cover_y = y;
 		}
 	}
 
 	else if (strcmp(cfg_name, "id_coords") == 0) {
-		int x,y;
-		if (sscanf(val, "%d,%d", &x, &y) == 2) {
+		short x,y;
+		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
 			THEME.id_x = x - (x % 4);
 			THEME.id_y = y;
 		}
 	}
 
 	else if (strcmp(cfg_name, "hddinfo_coords") == 0) {
-		int x,y;
-		if (sscanf(val, "%d,%d", &x, &y) == 2) {
+		short x,y;
+		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
 			THEME.hddInfo_x = x - (x % 4);
 			THEME.hddInfo_y = y;
 		}
 	}
 
 	else if (strcmp(cfg_name, "gamecount_coords") == 0) {
-		int x,y;
-		if (sscanf(val, "%d,%d", &x, &y) == 2) {
+		short x,y;
+		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
 			THEME.gameCnt_x = x - (x % 4);
 			THEME.gameCnt_y = y;
 		}
 	}
 
 	else if (strcmp(cfg_name, "region_coords") == 0) {
-		int x,y;
-		if (sscanf(val, "%d,%d", &x, &y) == 2) {
+		short x,y;
+		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
 			THEME.region_x = x - (x % 4);
 			THEME.region_y = y;
 		}
 	}
 
 	else if (strcmp(cfg_name, "power_coords") == 0) {
-		int x,y;
-		if (sscanf(val, "%d,%d", &x, &y) == 2) {
+		short x,y;
+		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
 			THEME.power_x = x - (x % 4);
 			THEME.power_y = y;
 		}
 	}
 
 	else if (strcmp(cfg_name, "home_coords") == 0) {
-		int x,y;
-		if (sscanf(val, "%d,%d", &x, &y) == 2) {
+		short x,y;
+		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
 			THEME.home_x = x - (x % 4);
 			THEME.home_y = y;
 		}
 	}
 
 	else if (strcmp(cfg_name, "setting_coords") == 0) {
-		int x,y;
-		if (sscanf(val, "%d,%d", &x, &y) == 2) {
+		short x,y;
+		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
 			THEME.setting_x = x - (x % 4);
 			THEME.setting_y = y;
 		}
 	}
 
 	else if (strcmp(cfg_name, "install_coords") == 0) {
-		int x,y;
-		if (sscanf(val, "%d,%d", &x, &y) == 2) {
+		short x,y;
+		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
 			THEME.install_x = x - (x % 4);
 			THEME.install_y = y;
 		}
 	}
 
 	else if (strcmp(cfg_name, "battery1_coords") == 0) {
-		int x,y;
-		if (sscanf(val, "%d,%d", &x, &y) == 2) {
+		short x,y;
+		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
 			THEME.battery1_x = x - (x % 4);
 			THEME.battery1_y = y;
 		}
 	}
 
 	else if (strcmp(cfg_name, "battery2_coords") == 0) {
-		int x,y;
-		if (sscanf(val, "%d,%d", &x, &y) == 2) {
+		short x,y;
+		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
 			THEME.battery2_x = x - (x % 4);
 			THEME.battery2_y = y;
 		}
 	}
 
 	else if (strcmp(cfg_name, "battery3_coords") == 0) {
-		int x,y;
-		if (sscanf(val, "%d,%d", &x, &y) == 2) {
+		short x,y;
+		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
 			THEME.battery3_x = x - (x % 4);
 			THEME.battery3_y = y;
 		}
 	}
 
 	else if (strcmp(cfg_name, "battery4_coords") == 0) {
-		int x,y;
-		if (sscanf(val, "%d,%d", &x, &y) == 2) {
+		short x,y;
+		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
 			THEME.battery4_x = x - (x % 4);
 			THEME.battery4_y = y;
 		}
