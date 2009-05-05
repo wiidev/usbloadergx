@@ -1411,8 +1411,10 @@ ShowProgress (s32 done, s32 total)
 
 	sprintf(prozent, "%0.2f%%", percent);
     prTxt.SetText(prozent);
+	prTxt.SetFont(fontClock);
     sprintf(timet,"Time left: %d:%02d:%02d",h,m,s);
     timeTxt.SetText(timet);
+//	timeTxt.SetFont(fontClock);
 	progressbarImg.SetTile(100*progressDone/progressTotal);
 
 }
@@ -1607,10 +1609,11 @@ ProgressDownloadWindow(int choice2)
 
 
 
-    sprintf(prozent, "%i%%", 100*i/cntMissFiles);
-    prTxt.SetText(prozent);
-    progressbarImg.SetTile(100*i/cntMissFiles);
-
+	sprintf(prozent, "%i%%", 100*i/cntMissFiles);
+	prTxt.SetText(prozent);
+	prTxt.SetFont(fontClock);
+	progressbarImg.SetTile(100*i/cntMissFiles);
+ 
     sprintf(msg, "%i file(s) left", cntMissFiles - i);
     msgTxt.SetText(msg);
     sprintf(msg2, "%s", missingFiles[i]);
