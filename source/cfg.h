@@ -62,6 +62,7 @@ struct CFG
 	short parentalcontrol;
 	short maxcharacters;
 	short godmode;
+	short xflip;
 	char unlockCode[20];
 	char covers_path[100];
 	char theme_path[100];
@@ -132,6 +133,8 @@ extern u8 languageChoice;
 extern u8 viChoice;
 extern u8 iosChoice;
 extern u8 parentalcontrolChoice;
+extern u8 xflip;
+extern u8 qboot;
 
 struct Game_CFG
 {
@@ -227,11 +230,16 @@ enum {
 };
 
 enum {
+    no,
+	yes,
+};
+/*
+enum {
 	ParentalControlOff,
 	ParentalControlLevel1,
 	ParentalControlLevel2,
 	ParentalControlLevel3
-};
+};*/
 
 struct SSettings {
     int		video;
@@ -242,11 +250,13 @@ struct SSettings {
 	int		sinfo;
 	int		hddinfo;
 	int		rumble;
+	int		xflip;
 	int		volume;
 	int     tooltips;
 	char 	unlockCode[20];
 	int		parentalcontrol;
 	int     cios;
+	int		qboot;
 };
 
 void CFG_LoadGlobal(void);

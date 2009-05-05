@@ -93,6 +93,8 @@ DefaultSettings()
 	snprintf(Settings.unlockCode, sizeof(Settings.unlockCode), "ab121b");
 	Settings.parentalcontrol = 0;
 	Settings.cios = ios249;
+	Settings.xflip = no;
+	Settings.qboot = no;
 
 	CFG_LoadGlobal();
 }

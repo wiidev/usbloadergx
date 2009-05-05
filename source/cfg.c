@@ -39,6 +39,8 @@ u8 languageChoice = 0;
 u8 viChoice = 0;
 u8 iosChoice = 0;
 u8 parentalcontrolChoice = 0;
+u8 xflip = 0;
+u8 qboot = 0;
 
 #define TITLE_MAX 65
 
@@ -199,6 +201,7 @@ void CFG_Default(int widescreen) // -1 = non forced Mode
 	CFG.parentalcontrol = 0;
 	CFG.maxcharacters = 38;
 	CFG.godmode = 0;
+	CFG.xflip = 0;
 	
 	//all alignments are left top here
 	THEME.selection_x = 200;
@@ -708,6 +711,20 @@ void global_cfg_set(char *name, char *val)
 			}
 		return;
 	}
+	else if (strcmp(name, "xflip") == 0) {
+		int i;
+		if (sscanf(val, "%d", &i) == 1) {
+            Settings.xflip = i;
+			}
+		return;
+	}
+	else if (strcmp(name, "qboot") == 0) {
+		int i;
+		if (sscanf(val, "%d", &i) == 1) {
+            Settings.qboot = i;
+			}
+		return;
+	}
 }
 
 // split line to part1 delimiter part2
@@ -873,6 +890,8 @@ bool cfg_save_global()// save global settings
 	fprintf(f, "tooltips = %d\n ", Settings.tooltips);
 	fprintf(f, "password = %s\n ", Settings.unlockCode);
 	fprintf(f, "cios = %d\n ", Settings.cios);
+	fprintf(f, "xflip = %d\n ", Settings.xflip);
+	fprintf(f, "qboot = %d\n ", Settings.qboot);
 	fclose(f);
 	return true;
 }
@@ -935,6 +954,7 @@ void game_set(char *name, char *val)
 					game->parentalcontrol = opt_c;
 				}
 			}
+			
 		}
 		// next opt
 		if (np) p = np + 1; else p = NULL;
@@ -984,6 +1004,8 @@ bool cfg_load_global()
 	Settings.vpatch = off;
 	Settings.language = ConsoleLangDefault;
 	Settings.ocarina = off;
+	Settings.xflip = off;
+	Settings.qboot = off;
 	Settings.hddinfo = HDDInfo;
 	Settings.sinfo = ((THEME.showID) ? GameID : Neither);
 	Settings.rumble = RumbleOn;

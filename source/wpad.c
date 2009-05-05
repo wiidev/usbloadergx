@@ -69,3 +69,5 @@ u32 Wpad_WaitButtons(void)
 
 	return buttons;
 }
+
+

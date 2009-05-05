@@ -1043,8 +1043,8 @@ int GameWindowPrompt()
 				choice = 3;
 				promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
 			}
-
-			else if(btnRight.GetState() == STATE_CLICKED) {//next game
+			
+			else if((btnRight.GetState() == STATE_CLICKED) && (Settings.xflip == no)){//next game
 				promptWindow.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 50);
 				changed = 1;
 				gameSelected = (gameSelected + 1) % gameCnt;
@@ -1052,13 +1052,30 @@ int GameWindowPrompt()
 				break;
 			}
 
-			else if(btnLeft.GetState() == STATE_CLICKED) {//previous game
+			else if((btnLeft.GetState() == STATE_CLICKED) && (Settings.xflip == no)){//previous game
 				promptWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 50);
 				changed = 2;
 				gameSelected = (gameSelected - 1 + gameCnt) % gameCnt;
 				btnLeft.ResetState();
 				break;
 			}
+			
+			else if((btnRight.GetState() == STATE_CLICKED) && (Settings.xflip == yes)){//next game
+				promptWindow.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 50);
+				changed = 1;
+				gameSelected = (gameSelected - 1 + gameCnt) % gameCnt;
+				btnRight.ResetState();
+				break;
+			}
+
+			else if((btnLeft.GetState() == STATE_CLICKED) && (Settings.xflip == yes)){//previous game
+				promptWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 50);
+				changed = 2;
+				gameSelected = (gameSelected + 1) % gameCnt;
+				btnLeft.ResetState();
+				break;
+			}
+			
 		}
 
 
@@ -2711,8 +2728,101 @@ static int MenuDiscList()
 				strncat(text, "...", 3);
 			}
 
+			if (Settings.qboot == yes)//quickboot game
+			{
 
-			bool returnHere = true;
+					wiilight(0);
+
+                    int ios2;
+                    switch(iosChoice)
+                    {
+                        case i249:
+                            ios2 = 0;
+                            break;
+
+                        case i222:
+                            ios2 = 1;
+                            break;
+
+                        default:
+                            ios2 = 0;
+                            break;
+                    }
+
+                    // if we have used the network or cios222 we need to reload the disklist
+                    if(networkisinitialized == 1 || ios2 == 1 || Settings.cios == ios222) {
+
+					WPAD_Flush(0);
+                    WPAD_Disconnect(0);
+                    WPAD_Shutdown();
+
+                    WDVD_Close();
+
+                    USBStorage_Deinit();
+
+                    if(ios2 == 1) {
+
+					ret = IOS_ReloadIOS(222);
+					if(ret < 0) {
+
+                    Wpad_Init();
+                    WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
+                    WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
+
+					WindowPrompt("You don't have cIOS222!","Loading in cIOS249!","OK", 0);
+
+					WPAD_Flush(0);
+                    WPAD_Disconnect(0);
+                    WPAD_Shutdown();
+
+					IOS_ReloadIOS(249);
+					ios2 = 0;
+					}
+
+                    } else {
+
+                    ret = IOS_ReloadIOS(249);
+
+                    }
+
+					ret = WBFS_Init(WBFS_DEVICE_USB);
+
+                    PAD_Init();
+                    Wpad_Init();
+                    WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
+                    WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
+
+                    ret = Disc_Init();
+                    ret = WBFS_Open();
+
+                    }
+
+					/* Set USB mode */
+					ret = Disc_SetUSB(header->id, ios2);
+					if (ret < 0) {
+						sprintf(text, "Error: %i", ret);
+						WindowPrompt(
+						"Failed to set USB:",
+						text,
+						"OK",0);
+					}
+					else {
+						/* Open disc */
+						ret = Disc_Open();
+						if (ret < 0) {
+							sprintf(text, "Error: %i", ret);
+							WindowPrompt(
+							"Failed to boot:",
+							text,
+							"OK",0);
+						}
+						else {
+							menu = MENU_EXIT;
+						}
+					}
+				}	
+				break;
+			bool returnHere = true;// prompt to start game
 			while (returnHere)
 			{
 				returnHere = false;
@@ -3281,8 +3391,8 @@ static int MenuSettings()
 			sprintf(options2.name[0], "Tooltips");
 			sprintf(options2.name[1], "Password");
 			sprintf(options2.name[2], "Boot Loader in");
-			sprintf(options2.name[3], " ");
-			sprintf(options2.name[4], " ");
+			sprintf(options2.name[3], "Flip X");
+			sprintf(options2.name[4], "Quick Boot");
 			sprintf(options2.name[5], " ");
 			sprintf(options2.name[6], " ");
 			sprintf(options2.name[7], " ");
@@ -3399,6 +3509,10 @@ static int MenuSettings()
 					Settings.tooltips = 0;
 				if ( Settings.cios > 1 )
 					Settings.cios = 0;
+				if ( Settings.xflip > 1 )
+					Settings.xflip = 0;
+				if ( Settings.qboot > 1 )
+					Settings.qboot = 0;
 
 				if (Settings.tooltips == TooltipsOn) sprintf (options2.value[0],"On");
 				else if (Settings.tooltips == TooltipsOff) sprintf (options2.value[0],"Off");
@@ -3410,8 +3524,12 @@ static int MenuSettings()
                 if (Settings.cios == ios249) sprintf (options2.value[2],"cIOS 249");
 				else if (Settings.cios == ios222) sprintf (options2.value[2],"cIOS 222");
 				
-				sprintf (options2.value[3]," ");
-				sprintf (options2.value[4]," ");
+				if (Settings.xflip == no) sprintf (options2.value[3],"No");
+				else if (Settings.xflip == yes) sprintf (options2.value[3],"Yes");
+				
+				if (Settings.qboot == no) sprintf (options2.value[4],"No");
+				else if (Settings.qboot == yes) sprintf (options2.value[4],"Yes");
+				
 				sprintf (options2.value[5]," ");
 				sprintf (options2.value[6]," ");
 				sprintf (options2.value[7]," ");
@@ -3454,6 +3572,12 @@ static int MenuSettings()
 						break;
 					case 2:
 						Settings.cios++;
+						break;
+					case 3:
+						Settings.xflip++;
+						break;
+					case 4:
+						Settings.qboot++;
 						break;
 					}
 			}
@@ -3919,7 +4043,7 @@ int MainMenu(int menu)
 	int currentMenu = menu;
 	char imgPath[100];
 
-	#ifdef HW_RVL
+	#ifdef HW_RVL 
 	snprintf(imgPath, sizeof(imgPath), "%splayer1_point.png", CFG.theme_path);
 	pointer[0] = new GuiImageData(imgPath, player1_point_png);
 	snprintf(imgPath, sizeof(imgPath), "%splayer2_point.png", CFG.theme_path);
@@ -4016,7 +4140,6 @@ int MainMenu(int menu)
 				vol = 80;
 				break;
 		}
-
 	}
 
 
