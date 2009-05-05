@@ -2819,9 +2819,8 @@ static int MenuDiscList()
 						else {
 							menu = MENU_EXIT;
 						}
-					}
+					}break;
 				}	
-				break;
 			bool returnHere = true;// prompt to start game
 			while (returnHere)
 			{
