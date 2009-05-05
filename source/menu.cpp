@@ -2820,7 +2820,7 @@ static int MenuDiscList()
 							menu = MENU_EXIT;
 						}
 					}break;
-				}	
+				}
 			bool returnHere = true;// prompt to start game
 			while (returnHere)
 			{
@@ -3277,6 +3277,7 @@ static int MenuSettings()
 	settingsbackgroundbtn.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	settingsbackgroundbtn.SetPosition(0, 0);
 	settingsbackgroundbtn.SetImage(&settingsbackground);
+	settingsbackgroundbtn.SetTrigger(&trigA);
 
     GuiText backBtnTxt("Go Back", 22, (GXColor){0, 0, 0, 255});
 	backBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
@@ -3349,7 +3350,7 @@ static int MenuSettings()
 	GuiCustomOptionBrowser optionBrowser2(396, 280, &options2, CFG.theme_path, "bg_options_settings", bg_options_settings_png, 0);
 	optionBrowser2.SetPosition(0, 90);
 	optionBrowser2.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	optionBrowser2.SetCol2Position(150);
+	optionBrowser2.SetCol2Position(180);
 	GuiWindow w(screenwidth, screenheight);
 
 	int pageToDisplay = 1;
@@ -3674,6 +3675,10 @@ static int MenuSettings()
 					lockBtnTxt.SetText("Unlock");
 				}
 				lockBtn.ResetState();
+			}
+			if(settingsbackgroundbtn.GetState() == STATE_CLICKED)
+			{
+			optionBrowser2.SetFocus(1);
 			}
 		}
 

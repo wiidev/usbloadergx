@@ -129,7 +129,7 @@ GuiCustomOptionBrowser::GuiCustomOptionBrowser(int w, int h, customOptionList * 
 		optionVal[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 		optionVal[i]->SetPosition(250,0);
 
-		optionBtn[i] = new GuiButton(width-28,GAMESELECTSIZE);
+		optionBtn[i] = new GuiButton(width,GAMESELECTSIZE);//(width-28,GAMESELECTSIZE);
 		optionBtn[i]->SetParent(this);
 		optionBtn[i]->SetLabel(optionTxt[i], 0);
 		optionBtn[i]->SetLabel(optionVal[i], 1);
@@ -138,6 +138,7 @@ GuiCustomOptionBrowser::GuiCustomOptionBrowser(int w, int h, customOptionList * 
 		optionBtn[i]->SetRumble(false);
 		optionBtn[i]->SetTrigger(trigA);
 		optionBtn[i]->SetSoundClick(btnSoundClick);
+		
 	}
 }
 
