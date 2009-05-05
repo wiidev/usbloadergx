@@ -26,6 +26,18 @@ extern const u32	bg_music_ogg_size;
 extern const u8		credits_music_ogg[];
 extern const u32	credits_music_ogg_size;
 
+extern const u8		page1_png[];
+extern const u32	page1_png_size;
+
+extern const u8		page1d_png[];
+extern const u32	page1d_png_size;
+
+extern const u8		page2d_png[];
+extern const u32	page2d_png_size;
+
+extern const u8		page2_png[];
+extern const u32	page2_png_size;
+
 extern const u8		credits_button_png[];
 extern const u32	credits_button_png_size;
 

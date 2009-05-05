@@ -3128,7 +3128,6 @@ static int MenuFormat()
 /****************************************************************************
  * MenuSettings
  ***************************************************************************/
-
 static int MenuSettings()
 {
 	int menu = MENU_NONE;
@@ -3142,6 +3141,16 @@ static int MenuSettings()
 	GuiImageData btnOutline(settings_menu_button_png);
 	snprintf(imgPath, sizeof(imgPath), "%ssettings_background.png", CFG.theme_path);
 	GuiImageData settingsbg(imgPath, settings_background_png);
+	///////////
+	snprintf(imgPath, sizeof(imgPath), "%spage1.png", CFG.theme_path);
+	GuiImageData page1(imgPath, page1_png);
+	snprintf(imgPath, sizeof(imgPath), "%spage1d.png", CFG.theme_path);
+	GuiImageData page1d(imgPath, page1d_png);
+	snprintf(imgPath, sizeof(imgPath), "%spage2.png", CFG.theme_path);
+	GuiImageData page2(imgPath, page2_png);
+	snprintf(imgPath, sizeof(imgPath), "%spage2d.png", CFG.theme_path);
+	GuiImageData page2d(imgPath, page2d_png);
+	/////////////
 
     GuiTrigger trigA;
 	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
@@ -3173,6 +3182,28 @@ static int MenuSettings()
 	backBtn.SetTrigger(&trigA);
 	backBtn.SetTrigger(&trigB);
 	backBtn.SetEffectGrow();
+	///////////////////////////////
+	GuiImage page1Img(&page1);
+	GuiImage page1dImg(&page1d);
+	GuiButton page1Btn(page1.GetWidth(), page1.GetHeight());
+	page1Btn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	page1Btn.SetPosition(-202, 90);
+	page1Btn.SetImage(&page1Img);
+	page1Btn.SetSoundOver(&btnSoundOver);
+	page1Btn.SetSoundClick(&btnClick);
+	page1Btn.SetTrigger(&trigA);
+	
+	GuiImage page2Img(&page2);
+	GuiImage page2dImg(&page2d);
+	GuiButton page2Btn(page2.GetWidth(), page2.GetHeight());
+	page2Btn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	page2Btn.SetPosition(-202, 242);
+	page2Btn.SetImage(&page2dImg);
+	page2Btn.SetSoundOver(&btnSoundOver);
+	page2Btn.SetSoundClick(&btnClick);
+	page2Btn.SetTrigger(&trigA);
+	////////////////////////////////
+	
 
 	const char * text = "Unlock";
 	if (CFG.godmode == 1)
@@ -3237,15 +3268,20 @@ static int MenuSettings()
 
 			mainWindow->Append(&w);
 			mainWindow->Append(&optionBrowser2);
+			mainWindow->Append(&page2Btn);
+			mainWindow->Append(&page1Btn);
 
 			ResumeGui();
 		}
 		else if ( pageToDisplay == 2 )
 		{
+			mainWindow->Append(&page1Btn);
+			mainWindow->Append(&page2Btn);
+		
 			sprintf(options2.name[0], "Tooltips");
 			sprintf(options2.name[1], "Password");
-			sprintf(options2.name[2], "Parental Ctrl");
-			sprintf(options2.name[3], "Boot Loader in");
+			sprintf(options2.name[2], "Boot Loader in");
+			sprintf(options2.name[3], " ");
 			sprintf(options2.name[4], " ");
 			sprintf(options2.name[5], " ");
 			sprintf(options2.name[6], " ");
@@ -3323,8 +3359,8 @@ static int MenuSettings()
 				else if (Settings.volume == v90) sprintf (options2.value[7],"90");
 				else if (Settings.volume == v100) sprintf (options2.value[7],"100");
 				else if (Settings.volume == v0) sprintf (options2.value[7],"Off");
-
-				sprintf(options2.value[8], "Go to page 2");
+				
+				sprintf (options2.value[8]," ");
 
 				ret = optionBrowser2.GetClickedOption();
 
@@ -3354,20 +3390,14 @@ static int MenuSettings()
 					case 7:
 						Settings.volume++;
 						break;
-					case 8:
-						pageToDisplay = 2;
-						menu = MENU_EXIT;
-						break;
-				}
+					}
 			}
 
 			if ( pageToDisplay == 2 )
 			{
 				if ( Settings.tooltips > 1 )
 					Settings.tooltips = 0;
-				if ( Settings.parentalcontrol > 3 )
-					Settings.parentalcontrol = 0;
-                if ( Settings.cios > 1 )
+				if ( Settings.cios > 1 )
 					Settings.cios = 0;
 
 				if (Settings.tooltips == TooltipsOn) sprintf (options2.value[0],"On");
@@ -3377,20 +3407,15 @@ static int MenuSettings()
 				else if (!strcmp("", Settings.unlockCode)) sprintf(options2.value[1], "<not set>");
 				else sprintf(options2.value[1], Settings.unlockCode);
 
-
-				if (Settings.parentalcontrol == ParentalControlOff) sprintf (options2.value[2],"Not yet");
-				else if (Settings.parentalcontrol == ParentalControlLevel1) sprintf (options2.value[2],"not working");
-				else if (Settings.parentalcontrol == ParentalControlLevel2) sprintf (options2.value[2],"broken");
-				else if (Settings.parentalcontrol == ParentalControlLevel3) sprintf (options2.value[2],"coming soon");
-
-                if (Settings.cios == ios249) sprintf (options2.value[3],"cIOS 249");
-				else if (Settings.cios == ios222) sprintf (options2.value[3],"cIOS 222");
-
-				sprintf(options2.value[4], " ");
-				sprintf(options2.value[5], " ");
-				sprintf(options2.value[6], " ");
-				sprintf(options2.value[7], " ");
-				sprintf(options2.value[8], "Go to page 1");
+                if (Settings.cios == ios249) sprintf (options2.value[2],"cIOS 249");
+				else if (Settings.cios == ios222) sprintf (options2.value[2],"cIOS 222");
+				
+				sprintf (options2.value[3]," ");
+				sprintf (options2.value[4]," ");
+				sprintf (options2.value[5]," ");
+				sprintf (options2.value[6]," ");
+				sprintf (options2.value[7]," ");
+				sprintf (options2.value[8]," ");
 
 				ret = optionBrowser2.GetClickedOption();
 
@@ -3401,10 +3426,20 @@ static int MenuSettings()
 						break;
 					case 1: // Modify Password
 						if ( CFG.godmode == 1)
-						{
+						{	
+							mainWindow->Remove(&optionBrowser2);
+							mainWindow->Remove(&page1Btn);
+							mainWindow->Remove(&page2Btn);
+							w.Remove(&backBtn);
+							w.Remove(&lockBtn);
 							char entered[20] = "";
 							strncpy(entered, Settings.unlockCode, sizeof(entered));
 							int result = OnScreenKeyboard(entered, 20);
+							mainWindow->Append(&optionBrowser2);
+							mainWindow->Append(&page1Btn);
+							mainWindow->Append(&page2Btn);
+							w.Append(&backBtn);
+							w.Append(&lockBtn);
 							if ( result == 1 )
 							{
 								strncpy(Settings.unlockCode, entered, sizeof(Settings.unlockCode));
@@ -3418,39 +3453,36 @@ static int MenuSettings()
 						}
 						break;
 					case 2:
-						if ( CFG.godmode == 1)
-						{
-							Settings.parentalcontrol++;
-						}
-						else
-						{
-							WindowPrompt("Parental Control","Console should be unlocked to modify it.","OK",0);
-						}
+						Settings.cios++;
 						break;
-					case 3:
-                        Settings.cios++;
-						break;
-					case 4:
-						break;
-					case 5:
-						break;
-					case 6:
-						break;
-					case 7:
-
-						break;
-					case 8:
-						pageToDisplay = 1;
-						menu = MENU_EXIT;
-						break;
-				}
+					}
 			}
 
 			if(shutdown == 1)
 				Sys_Shutdown();
 			if(reset == 1)
 			Sys_Reboot();
-
+			
+			if(page1Btn.GetState() == STATE_CLICKED)
+			{
+				pageToDisplay = 1;
+				page1Btn.ResetState();
+				page1Btn.SetImage(&page1Img);
+				page2Btn.SetImage(&page2dImg);
+				menu = MENU_NONE;
+				break;
+			}	
+			
+			if(page2Btn.GetState() == STATE_CLICKED)
+			{
+				pageToDisplay = 2;
+				menu = MENU_NONE;
+				page2Btn.ResetState();
+				page1Btn.SetImage(&page1dImg);
+				page2Btn.SetImage(&page2Img);
+				break;
+			}
+			
 			if(backBtn.GetState() == STATE_CLICKED)
 			{
 				//Add the procedure call to save the global configuration
@@ -3469,8 +3501,18 @@ static int MenuSettings()
 				else if ( CFG.godmode == 0 )
 				{
 					//password check to unlock Install,Delete and Format
-					char entered[20] = "";
+							mainWindow->Remove(&optionBrowser2);
+							mainWindow->Remove(&page1Btn);
+							mainWindow->Remove(&page2Btn);
+							w.Remove(&backBtn);
+							w.Remove(&lockBtn);
+						char entered[20] = "";
 					int result = OnScreenKeyboard(entered, 20);
+							mainWindow->Append(&optionBrowser2);
+							mainWindow->Append(&page1Btn);
+							mainWindow->Append(&page2Btn);
+							w.Append(&backBtn);
+							w.Append(&lockBtn);
 					if ( result == 1 )
 					{
 						if (!strcmp(entered, Settings.unlockCode)) //if password correct
@@ -3521,7 +3563,6 @@ static int MenuSettings()
 	ResumeGui();
 	return menu;
 }
-
 
 
 /********************************************************************************
