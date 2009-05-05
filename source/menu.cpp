@@ -1613,7 +1613,7 @@ ProgressDownloadWindow(int choice2)
 	prTxt.SetText(prozent);
 	prTxt.SetFont(fontClock);
 	progressbarImg.SetTile(100*i/cntMissFiles);
- 
+
     sprintf(msg, "%i file(s) left", cntMissFiles - i);
     msgTxt.SetText(msg);
     sprintf(msg2, "%s", missingFiles[i]);
@@ -4184,6 +4184,25 @@ int MainMenu(int menu)
 	fatUnmount("SD");
 	__io_wiisd.shutdown();
     ExitApp();
+
+    struct discHdr *header = &gameList[gameSelected];
+    struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
+
+    if (game_cfg) {
+
+        videoChoice = game_cfg->video;
+        languageChoice = game_cfg->language;
+        ocarinaChoice = game_cfg->ocarina;
+        viChoice = game_cfg->vipatch;
+
+    } else {
+
+        videoChoice = Settings.video;
+        languageChoice = Settings.language;
+        ocarinaChoice = Settings.ocarina;
+        viChoice = Settings.vpatch;
+    }
+
 
     switch(languageChoice)
     {
