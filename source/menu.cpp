@@ -3597,7 +3597,7 @@ int GameSettings(struct discHdr * header)
 	char imgPath[100];
 
 	GuiImageData btnOutline(settings_menu_button_png);
-	snprintf(imgPath, sizeof(imgPath), "%ssettings_background.png", CFG.theme_path);
+	snprintf(imgPath, sizeof(imgPath), "%sgamesettings_background.png", CFG.theme_path);
 	GuiImageData settingsbg(imgPath, settings_background_png);
 
     GuiTrigger trigA;
@@ -3657,7 +3657,7 @@ int GameSettings(struct discHdr * header)
 	deleteBtn.SetTrigger(&trigA);
 	deleteBtn.SetEffectGrow();
 
-	GuiCustomOptionBrowser optionBrowser3(396, 280, &options3, CFG.theme_path, "bg_options_settings", bg_options_settings_png, 0);
+	GuiCustomOptionBrowser optionBrowser3(396, 280, &options3, CFG.theme_path, "bg_options_gamesettings", bg_options_settings_png, 0);
 	optionBrowser3.SetPosition(0, 90);
 	optionBrowser3.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	optionBrowser3.SetCol2Position(150);

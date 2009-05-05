@@ -247,6 +247,9 @@ void CFG_Default(int widescreen) // -1 = non forced Mode
 	THEME.clockAlign = CFG_ALIGN_CENTRE;
 	THEME.sdcard_x = 160;
 	THEME.sdcard_y = 390;
+	THEME.gameText_r = 0;
+	THEME.gameText_g = 0;
+	THEME.gameText_b = 0;
 }
 
 
@@ -580,6 +583,15 @@ void theme_set(char *name, char *val)
 			THEME.info_r = x;
 			THEME.info_g = y;
 			THEME.info_b = z;
+		}
+	}
+	
+	else if (strcmp(cfg_name, "gametext_color") == 0) {
+		short x,y,z;
+		if (sscanf(val, "%hd,%hd, %hd", &x, &y, &z) == 3) {
+			THEME.gameText_r = x;
+			THEME.gameText_g = y;
+			THEME.gameText_b = z;
 		}
 	}
 

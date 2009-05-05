@@ -119,6 +119,9 @@ struct THEME
 	short clockAlign;
 	short sdcard_x;
 	short sdcard_y;
+	short gameText_r;
+	short gameText_g;
+	short gameText_b;
 };
 
 extern struct CFG CFG;

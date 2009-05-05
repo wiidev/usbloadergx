@@ -11,7 +11,7 @@
 
 #include <unistd.h>
 #include "gui_gamebrowser.h"
-#include "cfg.h"
+#include "../cfg.h"
 
 #define GAMESELECTSIZE      30
 extern const int vol;
@@ -129,7 +129,7 @@ GuiGameBrowser::GuiGameBrowser(int w, int h, struct discHdr * l, int gameCnt, co
 			strncat(buffer, "...", 3);
 		}
 
-		gameTxt[i] = new GuiText(buffer, 20, (GXColor){0, 0, 0, 0xff});
+		gameTxt[i] = new GuiText(buffer, 20, (GXColor){THEME.gameText_r, THEME.gameText_g, THEME.gameText_b, 0xff});
 		gameTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 		gameTxt[i]->SetPosition(24,0);
 
