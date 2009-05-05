@@ -168,7 +168,8 @@ void GuiText::Draw()
 
 	if(newSize != currentSize)
 	{
-		(font ? font : fontSystem)->changeSize(newSize);
+		fontSystem->changeSize(newSize);
+		//(font ? font : fontSystem)->changeSize(newSize);
 		currentSize = newSize;
 	}
 
@@ -198,7 +199,8 @@ void GuiText::Draw()
 
 			if(text[ch] == ' ' || ch == strlen-1)
 			{
-				if((font ? font : fontSystem)->getWidth(tmptext[linenum]) >= maxWidth)
+				//if((font ? font : fontSystem)->getWidth(tmptext[linenum]) >= maxWidth)
+				if(fontSystem->getWidth(tmptext[linenum]) >= maxWidth)
 				{
 					if(lastSpace >= 0)
 					{
@@ -229,13 +231,15 @@ void GuiText::Draw()
 
 		for(i=0; i < linenum; i++)
 		{
-			(font ? font : fontSystem)->drawText(this->GetLeft(), this->GetTop()+voffset+i*lineheight, tmptext[i], c, style);
+			//(font ? font : fontSystem)->drawText(this->GetLeft(), this->GetTop()+voffset+i*lineheight, tmptext[i], c, style);
+			fontSystem->drawText(this->GetLeft(), this->GetTop()+voffset+i*lineheight, tmptext[i], c, style);
 			delete tmptext[i];
 		}
 	}
 	else
 	{
-		(font ? font : fontSystem)->drawText(this->GetLeft(), this->GetTop()+voffset, text, c, style);
+		//(font ? font : fontSystem)->drawText(this->GetLeft(), this->GetTop()+voffset, text, c, style);
+		fontSystem->drawText(this->GetLeft(), this->GetTop()+voffset, text, c, style);
 	}
 	this->UpdateEffects();
 }

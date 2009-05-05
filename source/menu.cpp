@@ -1445,7 +1445,7 @@ ProgressWindow(const char *title, const char *msg)
 	prTxt.SetPosition(0, 40);
 
     timeTxt.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
-	timeTxt.SetPosition(0,-30);
+	timeTxt.SetPosition(0,-50);
 
 	promptWindow.Append(&dialogBoxImg);
 	promptWindow.Append(&titleTxt);
