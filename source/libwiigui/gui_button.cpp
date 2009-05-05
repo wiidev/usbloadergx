@@ -172,24 +172,6 @@ void GuiButton::Draw()
 			label[i]->Draw();
 	}
 
-    //draw ToolTip
-/*
-	if(state == STATE_SELECTED && toolTip)
-	{
-	    if (time2 == 0)
-		    time(&time2);
-
-		    time(&time1);
-
-        if (difftime(time1, time2) >= 2) {
-		toolTip->Draw();
-		if (toolTipTxt)
-        {
-			toolTipTxt->Draw();
-        }
-        }
-	}
-*/
 	this->UpdateEffects();
 }
 void GuiButton::DrawTooltip()

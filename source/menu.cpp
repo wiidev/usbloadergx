@@ -1043,7 +1043,7 @@ int GameWindowPrompt()
 				choice = 3;
 				promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
 			}
-			
+
 			else if((btnRight.GetState() == STATE_CLICKED) && (Settings.xflip == no)){//next game
 				promptWindow.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 50);
 				changed = 1;
@@ -1061,7 +1061,7 @@ int GameWindowPrompt()
 				btnLeft.ResetState();
 				break;
 			}
-			
+
 			else if((btnRight.GetState() == STATE_CLICKED) && (Settings.xflip == yes)){//previous game
 				promptWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 50);
 				changed = 2;
@@ -3280,7 +3280,6 @@ static int MenuSettings()
 	settingsbackgroundbtn.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	settingsbackgroundbtn.SetPosition(0, 0);
 	settingsbackgroundbtn.SetImage(&settingsbackground);
-	settingsbackgroundbtn.SetTrigger(&trigA);
 
     GuiText backBtnTxt("Go Back", 22, (GXColor){0, 0, 0, 255});
 	backBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
@@ -3305,7 +3304,15 @@ static int MenuSettings()
 	page1Btn.SetSoundOver(&btnSoundOver);
 	page1Btn.SetSoundClick(&btnClick);
 	page1Btn.SetTrigger(&trigA);
-	
+
+	GuiImageData ttpage(tooltip_png);
+    GuiText ttpage1Txt("Go to Page 1", 20, (GXColor){0, 0, 0, 255});
+    GuiImage ttpage1Img(&ttpage);
+
+    if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0)
+    page1Btn.SetToolTip(&ttpage1Img,&ttpage1Txt,105, 15);
+
+
 	GuiImage page2Img(&page2);
 	GuiImage page2dImg(&page2d);
 	GuiButton page2Btn(page2.GetWidth(), page2.GetHeight());
@@ -3315,8 +3322,15 @@ static int MenuSettings()
 	page2Btn.SetSoundOver(&btnSoundOver);
 	page2Btn.SetSoundClick(&btnClick);
 	page2Btn.SetTrigger(&trigA);
+
+    GuiText ttpage2Txt("Go to Page 2", 20, (GXColor){0, 0, 0, 255});
+    GuiImage ttpage2Img(&ttpage);
+
+    if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0)
+    page2Btn.SetToolTip(&ttpage2Img,&ttpage2Txt,105,0);
+
 	////////////////////////////////
-	
+
 
 	const char * text = "Unlock";
 	if (CFG.godmode == 1)
@@ -3390,7 +3404,7 @@ static int MenuSettings()
 		{
 			mainWindow->Append(&page1Btn);
 			mainWindow->Append(&page2Btn);
-		
+
 			sprintf(options2.name[0], "Tooltips");
 			sprintf(options2.name[1], "Password");
 			sprintf(options2.name[2], "Boot Loader in");
@@ -3472,7 +3486,7 @@ static int MenuSettings()
 				else if (Settings.volume == v90) sprintf (options2.value[7],"90");
 				else if (Settings.volume == v100) sprintf (options2.value[7],"100");
 				else if (Settings.volume == v0) sprintf (options2.value[7],"Off");
-				
+
 				sprintf (options2.value[8]," ");
 
 				ret = optionBrowser2.GetClickedOption();
@@ -3526,13 +3540,13 @@ static int MenuSettings()
 
                 if (Settings.cios == ios249) sprintf (options2.value[2],"cIOS 249");
 				else if (Settings.cios == ios222) sprintf (options2.value[2],"cIOS 222");
-				
+
 				if (Settings.xflip == no) sprintf (options2.value[3],"No");
 				else if (Settings.xflip == yes) sprintf (options2.value[3],"Yes");
-				
+
 				if (Settings.qboot == no) sprintf (options2.value[4],"No");
 				else if (Settings.qboot == yes) sprintf (options2.value[4],"Yes");
-				
+
 				sprintf (options2.value[5]," ");
 				sprintf (options2.value[6]," ");
 				sprintf (options2.value[7]," ");
@@ -3547,7 +3561,7 @@ static int MenuSettings()
 						break;
 					case 1: // Modify Password
 						if ( CFG.godmode == 1)
-						{	
+						{
 							mainWindow->Remove(&optionBrowser2);
 							mainWindow->Remove(&page1Btn);
 							mainWindow->Remove(&page2Btn);
@@ -3589,7 +3603,7 @@ static int MenuSettings()
 				Sys_Shutdown();
 			if(reset == 1)
 			Sys_Reboot();
-			
+
 			if(page1Btn.GetState() == STATE_CLICKED)
 			{
 				pageToDisplay = 1;
@@ -3598,8 +3612,8 @@ static int MenuSettings()
 				page2Btn.SetImage(&page2dImg);
 				menu = MENU_NONE;
 				break;
-			}	
-			
+			}
+
 			if(page2Btn.GetState() == STATE_CLICKED)
 			{
 				pageToDisplay = 2;
@@ -3609,7 +3623,7 @@ static int MenuSettings()
 				page2Btn.SetImage(&page2Img);
 				break;
 			}
-			
+
 			if(backBtn.GetState() == STATE_CLICKED)
 			{
 				//Add the procedure call to save the global configuration
@@ -4050,7 +4064,7 @@ int MainMenu(int menu)
 	int currentMenu = menu;
 	char imgPath[100];
 
-	#ifdef HW_RVL 
+	#ifdef HW_RVL
 	snprintf(imgPath, sizeof(imgPath), "%splayer1_point.png", CFG.theme_path);
 	pointer[0] = new GuiImageData(imgPath, player1_point_png);
 	snprintf(imgPath, sizeof(imgPath), "%splayer2_point.png", CFG.theme_path);

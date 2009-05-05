@@ -12,6 +12,7 @@
 #include <unistd.h>
 #include "gui_gamebrowser.h"
 #include "../cfg.h"
+#include "main.h"
 
 #define GAMESELECTSIZE      30
 extern const int vol;
@@ -83,6 +84,16 @@ GuiGameBrowser::GuiGameBrowser(int w, int h, struct discHdr * l, int gameCnt, co
 	arrowUpBtn->SetEffectOnOver(EFFECT_SCALE, 50, 130);
 	arrowUpBtn->SetSoundClick(btnSoundClick);
 
+    snprintf(imgPath, sizeof(imgPath), "%stooltip.png", themePath);
+	ttarrow = new GuiImageData(imgPath, tooltip_png);
+	ttarrowUpImg = new GuiImage(ttarrow);
+
+    ttarrowUpTxt = new GuiText("Scroll up", 20, (GXColor){0, 0, 0, 255});
+
+	if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0){
+	arrowUpBtn->SetToolTip(ttarrowUpImg,ttarrowUpTxt, -45, 0);
+	}
+
 	arrowDownBtn = new GuiButton(arrowDownImg->GetWidth(), arrowDownImg->GetHeight());
 	arrowDownBtn->SetParent(this);
 	arrowDownBtn->SetImage(arrowDownImg);
@@ -94,6 +105,13 @@ GuiGameBrowser::GuiGameBrowser(int w, int h, struct discHdr * l, int gameCnt, co
 	arrowDownBtn->SetTrigger(trigA);
 	arrowDownBtn->SetEffectOnOver(EFFECT_SCALE, 50, 130);
 	arrowDownBtn->SetSoundClick(btnSoundClick);
+
+    ttarrowDownImg = new GuiImage(ttarrow);
+    ttarrowDownTxt = new GuiText("Scroll down", 20, (GXColor){0, 0, 0, 255});
+
+	if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0){
+	arrowDownBtn->SetToolTip(ttarrowDownImg,ttarrowDownTxt, -5,-35);
+	}
 
 	scrollbarBoxBtn = new GuiButton(scrollbarBoxImg->GetWidth(), scrollbarBoxImg->GetHeight());
 	scrollbarBoxBtn->SetParent(this);
@@ -173,6 +191,11 @@ GuiGameBrowser::~GuiGameBrowser()
     delete bgGameImg;
 	delete bgGames;
 	delete bgGamesEntry;
+	delete ttarrow;
+    delete ttarrowUpImg;
+    delete ttarrowDownImg;
+	delete ttarrowDownTxt;
+	delete ttarrowUpTxt;
 
 	delete trigA;
 	delete btnSoundClick;
@@ -285,6 +308,7 @@ void GuiGameBrowser::Draw()
 		if(next >= 0)
 		{
 			game[i]->Draw();
+			game[i]->DrawTooltip();
 			next = this->FindMenuItem(next, 1);
 		}
 		else
@@ -296,6 +320,9 @@ void GuiGameBrowser::Draw()
 	arrowUpBtn->Draw();
 	arrowDownBtn->Draw();
 	scrollbarBoxBtn->Draw();
+	arrowUpBtn->DrawTooltip();
+	arrowDownBtn->DrawTooltip();
+	scrollbarBoxBtn->DrawTooltip();
     }
 	this->UpdateEffects();
 }

@@ -65,16 +65,22 @@ class GuiGameBrowser : public GuiElement
 		GuiImage * scrollbarImg;
 		GuiImage * arrowDownImg;
 		GuiImage * arrowDownOverImg;
+		GuiImage * ttarrowUpImg;
+		GuiImage * ttarrowDownImg;
 		GuiImage * arrowUpImg;
 		GuiImage * arrowUpOverImg;
 		GuiImage * scrollbarBoxImg;
 		GuiImage * scrollbarBoxOverImg;
+
+		GuiText * ttarrowDownTxt;
+		GuiText * ttarrowUpTxt;
 
 		GuiImageData * bgGames;
 		GuiImageData * bgGamesEntry;
 		GuiImageData * scrollbar;
 		GuiImageData * arrowDown;
 		GuiImageData * arrowDownOver;
+		GuiImageData * ttarrow;
 		GuiImageData * arrowUp;
 		GuiImageData * arrowUpOver;
 		GuiImageData * scrollbarBox;
