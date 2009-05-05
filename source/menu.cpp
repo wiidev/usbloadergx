@@ -895,7 +895,7 @@ int GameWindowPrompt()
 	btnLeft.SetPosition(20, 0);
 	btnLeft.SetImage(&btnLeftImg);
 	btnLeft.SetSoundOver(&btnSoundOver);
-	btnLeft.SetSoundClick(&btnClick);
+	//btnLeft.SetSoundClick(&btnClick);
 	btnLeft.SetTrigger(&trigA);
 	btnLeft.SetTrigger(&trigL);
 	btnLeft.SetTrigger(&trigMinus);
@@ -907,7 +907,7 @@ int GameWindowPrompt()
 	btnRight.SetPosition(-20, 0);
 	btnRight.SetImage(&btnRightImg);
 	btnRight.SetSoundOver(&btnSoundOver);
-	btnRight.SetSoundClick(&btnClick);
+	//btnRight.SetSoundClick(&btnClick);
 	btnRight.SetTrigger(&trigA);
 	btnRight.SetTrigger(&trigR);
 	btnRight.SetTrigger(&trigPlus);
@@ -1047,6 +1047,7 @@ int GameWindowPrompt()
 			else if((btnRight.GetState() == STATE_CLICKED) && (Settings.xflip == no)){//next game
 				promptWindow.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 50);
 				changed = 1;
+				btnClick.Play();
 				gameSelected = (gameSelected + 1) % gameCnt;
 				btnRight.ResetState();
 				break;
@@ -1055,27 +1056,29 @@ int GameWindowPrompt()
 			else if((btnLeft.GetState() == STATE_CLICKED) && (Settings.xflip == no)){//previous game
 				promptWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 50);
 				changed = 2;
+				btnClick.Play();
 				gameSelected = (gameSelected - 1 + gameCnt) % gameCnt;
 				btnLeft.ResetState();
 				break;
 			}
 			
-			else if((btnRight.GetState() == STATE_CLICKED) && (Settings.xflip == yes)){//next game
-				promptWindow.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 50);
-				changed = 1;
+			else if((btnRight.GetState() == STATE_CLICKED) && (Settings.xflip == yes)){//previous game
+				promptWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 50);
+				changed = 2;
+				btnClick.Play();
 				gameSelected = (gameSelected - 1 + gameCnt) % gameCnt;
 				btnRight.ResetState();
 				break;
 			}
 
-			else if((btnLeft.GetState() == STATE_CLICKED) && (Settings.xflip == yes)){//previous game
-				promptWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 50);
-				changed = 2;
+			else if((btnLeft.GetState() == STATE_CLICKED) && (Settings.xflip == yes)){//netx game
+				promptWindow.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 50);
+				changed = 1;
+				btnClick.Play();
 				gameSelected = (gameSelected + 1) % gameCnt;
 				btnLeft.ResetState();
 				break;
 			}
-			
 		}
 
 
@@ -1858,7 +1861,7 @@ static int OnScreenKeyboard(char * var, u16 maxlen)
 	GuiButton okBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
 
 	okBtn.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-	okBtn.SetPosition(25, -25);
+	okBtn.SetPosition(5, 15);//(25, -25);
 
 	okBtn.SetLabel(&okBtnTxt);
 	okBtn.SetImage(&okBtnImg);
@@ -1871,7 +1874,7 @@ static int OnScreenKeyboard(char * var, u16 maxlen)
 	GuiImage cancelBtnImg(&btnOutline);
 	GuiButton cancelBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
 	cancelBtn.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-	cancelBtn.SetPosition(-25, -25);
+	cancelBtn.SetPosition(-5, 15);//(-25, -25);
 	cancelBtn.SetLabel(&cancelBtnTxt);
 	cancelBtn.SetImage(&cancelBtnImg);
 	cancelBtn.SetSoundOver(&btnSoundOver);

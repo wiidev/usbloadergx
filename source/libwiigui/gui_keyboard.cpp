@@ -87,12 +87,12 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max)
 	keyTextbox = new GuiImageData(keyboard_textbox_png);
 	keyTextboxImg = new GuiImage(keyTextbox);
 	keyTextboxImg->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	keyTextboxImg->SetPosition(0, 0);
+	keyTextboxImg->SetPosition(0, 40);//(0,0);
 	this->Append(keyTextboxImg);
 
 	kbText = new GuiText(kbtextstr, 20, (GXColor){0, 0, 0, 0xff});
 	kbText->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	kbText->SetPosition(0, 13);
+	kbText->SetPosition(0, 53);//(0, 13);
 	this->Append(kbText);
 
 	key = new GuiImageData(keyboard_key_png);
@@ -120,7 +120,7 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max)
 	keyBack->SetSoundClick(keySoundClick);
 	keyBack->SetTrigger(trigA);
 	keyBack->SetTrigger(trigB);
-	keyBack->SetPosition(10*42+40, 0*42+80);
+	keyBack->SetPosition(10*42+40, 0*42+120);//(10*42+40, 0*42+80);
 	keyBack->SetEffectGrow();
 	this->Append(keyBack);
 
@@ -134,7 +134,7 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max)
 	keyCaps->SetSoundOver(keySoundOver);
 	keyCaps->SetSoundClick(keySoundClick);
 	keyCaps->SetTrigger(trigA);
-	keyCaps->SetPosition(0, 2*42+80);
+	keyCaps->SetPosition(0, 2*42+120);//(0, 2*42+80);
 	keyCaps->SetEffectGrow();
 	this->Append(keyCaps);
 
@@ -148,7 +148,7 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max)
 	keyShift->SetSoundOver(keySoundOver);
 	keyShift->SetSoundClick(keySoundClick);
 	keyShift->SetTrigger(trigA);
-	keyShift->SetPosition(21, 3*42+80);
+	keyShift->SetPosition(21, 3*42+120);//(21, 3*42+80);
 	keyShift->SetEffectGrow();
 	this->Append(keyShift);
 
@@ -160,7 +160,7 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max)
 	keySpace->SetSoundOver(keySoundOver);
 	keySpace->SetSoundClick(keySoundClick);
 	keySpace->SetTrigger(trigA);
-	keySpace->SetPosition(0, 4*42+80);
+	keySpace->SetPosition(0, 4*42+120);//(0, 4*42+80);
 	keySpace->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	keySpace->SetEffectGrow();
 	this->Append(keySpace);
@@ -183,7 +183,7 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max)
 				keyBtn[i][j]->SetSoundClick(keySoundClick);
 				keyBtn[i][j]->SetTrigger(trigA);
 				keyBtn[i][j]->SetLabel(keyTxt[i][j]);
-				keyBtn[i][j]->SetPosition(j*42+21*i+40, i*42+80);
+				keyBtn[i][j]->SetPosition(j*42+21*i+40, i*42+120);//SetPosition(j*42+21*i+40, i*42+80);
 				keyBtn[i][j]->SetEffectGrow();
 				this->Append(keyBtn[i][j]);
 			}
