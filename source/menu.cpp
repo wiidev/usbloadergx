@@ -377,7 +377,8 @@ WiiMenuWindowPrompt(const char *title, const char *btn1Label, const char *btn2La
 
 	GuiImageData dialogBox(dialogue_box_png);
 	GuiImage dialogBoxImg(&dialogBox);
-	dialogBoxImg.SetWidescreen(CFG.widescreen);///////////
+	if (Settings.wsprompt == yes){
+	dialogBoxImg.SetWidescreen(CFG.widescreen);}///////////
 
 	GuiText titleTxt(title, 26, (GXColor){0, 0, 0, 255});
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
@@ -385,7 +386,8 @@ WiiMenuWindowPrompt(const char *title, const char *btn1Label, const char *btn2La
 
 	GuiText btn1Txt(btn1Label, 22, (GXColor){0, 0, 0, 255});
 	GuiImage btn1Img(&btnOutline);
-	btn1Img.SetWidescreen(CFG.widescreen);///////////
+	if (Settings.wsprompt == yes){
+	btn1Img.SetWidescreen(CFG.widescreen);}///////////
 	GuiButton btn1(btnOutline.GetWidth(), btnOutline.GetHeight());
     btn1.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
 	btn1.SetPosition(-50, -120);
@@ -399,7 +401,8 @@ WiiMenuWindowPrompt(const char *title, const char *btn1Label, const char *btn2La
 
 	GuiText btn2Txt(btn2Label, 22, (GXColor){0, 0, 0, 255});
 	GuiImage btn2Img(&btnOutline);
-	btn2Img.SetWidescreen(CFG.widescreen);///////////
+	if (Settings.wsprompt == yes){
+	btn2Img.SetWidescreen(CFG.widescreen);}///////////
 	GuiButton btn2(btnOutline.GetWidth(), btnOutline.GetHeight());
 	btn2.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
 	btn2.SetPosition(50, -120);
@@ -412,7 +415,8 @@ WiiMenuWindowPrompt(const char *title, const char *btn1Label, const char *btn2La
 
 	GuiText btn3Txt(btn3Label, 22, (GXColor){0, 0, 0, 255});
 	GuiImage btn3Img(&btnOutline);
-	btn3Img.SetWidescreen(CFG.widescreen);///////////
+	if (Settings.wsprompt == yes){
+	btn3Img.SetWidescreen(CFG.widescreen);}///////////
 	GuiButton btn3(btnOutline.GetWidth(), btnOutline.GetHeight());
 	btn3.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
     btn3.SetPosition(0, -65);
@@ -424,7 +428,7 @@ WiiMenuWindowPrompt(const char *title, const char *btn1Label, const char *btn2La
 	btn3.SetTrigger(&trigA);
 	btn3.SetEffectGrow();
 
-	if (CFG.widescreen){/////////////adjust buttons for widescreen
+	if ((Settings.wsprompt == yes) && (CFG.widescreen)){/////////////adjust buttons for widescreen
 		btn1.SetPosition(-70, -120);
 		btn2.SetPosition(70, -120);
 		btn3.SetPosition(0, -55);
@@ -502,7 +506,8 @@ WindowPrompt(const char *title, const char *msg, const char *btn1Label, const ch
 
 	GuiImageData dialogBox(dialogue_box_png);
 	GuiImage dialogBoxImg(&dialogBox);
-	dialogBoxImg.SetWidescreen(CFG.widescreen);///////////
+	if (Settings.wsprompt == yes){
+	dialogBoxImg.SetWidescreen(CFG.widescreen);}///////////
 
 	GuiText titleTxt(title, 26, (GXColor){0, 0, 0, 255});
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
@@ -514,7 +519,8 @@ WindowPrompt(const char *title, const char *msg, const char *btn1Label, const ch
 
 	GuiText btn1Txt(btn1Label, 22, (GXColor){0, 0, 0, 255});
 	GuiImage btn1Img(&btnOutline);
-	btn1Img.SetWidescreen(CFG.widescreen);///////////
+	if (Settings.wsprompt == yes){
+	btn1Img.SetWidescreen(CFG.widescreen);}///////////
 	GuiButton btn1(btnOutline.GetWidth(), btnOutline.GetHeight());
 
 	if(btn2Label)
@@ -538,7 +544,8 @@ WindowPrompt(const char *title, const char *msg, const char *btn1Label, const ch
 
 	GuiText btn2Txt(btn2Label, 22, (GXColor){0, 0, 0, 255});
 	GuiImage btn2Img(&btnOutline);
-	btn2Img.SetWidescreen(CFG.widescreen);///////////
+	if (Settings.wsprompt == yes){
+	btn2Img.SetWidescreen(CFG.widescreen);}///////////
 	GuiButton btn2(btnOutline.GetWidth(), btnOutline.GetHeight());
 	btn2.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
 	btn2.SetPosition(-40, -45);
@@ -550,7 +557,7 @@ WindowPrompt(const char *title, const char *msg, const char *btn1Label, const ch
 	btn2.SetTrigger(&trigA);
 	btn2.SetEffectGrow();
 
-	if (CFG.widescreen){/////////////adjust buttons for widescreen
+	if ((Settings.wsprompt == yes) && (CFG.widescreen)){/////////////adjust buttons for widescreen
 		msgTxt.SetMaxWidth(330);
 		if(btn2Label)
 	{
@@ -630,7 +637,8 @@ DownloadWindowPrompt()
 
 	GuiImageData dialogBox(dialogue_box_png);
 	GuiImage dialogBoxImg(&dialogBox);
-	dialogBoxImg.SetWidescreen(CFG.widescreen);///////////
+	if (Settings.wsprompt == yes){
+	dialogBoxImg.SetWidescreen(CFG.widescreen);}///////////
 
 	GuiText titleTxt("Cover Download", 26, (GXColor){0, 0, 0, 255});
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
@@ -638,7 +646,8 @@ DownloadWindowPrompt()
 
 	GuiText btn1Txt("3D Covers", 22, (GXColor){0, 0, 0, 255});
 	GuiImage btn1Img(&btnOutline);
-	btn1Img.SetWidescreen(CFG.widescreen);///////////
+	if (Settings.wsprompt == yes){
+	btn1Img.SetWidescreen(CFG.widescreen);}///////////
 	GuiButton btn1(btnOutline.GetWidth(), btnOutline.GetHeight());
     btn1.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
 	btn1.SetPosition(-50, -120);
@@ -652,7 +661,8 @@ DownloadWindowPrompt()
 
 	GuiText btn2Txt("Normal Covers", 22, (GXColor){0, 0, 0, 255});
 	GuiImage btn2Img(&btnOutline);
-	btn2Img.SetWidescreen(CFG.widescreen);///////////
+	if (Settings.wsprompt == yes){
+	btn2Img.SetWidescreen(CFG.widescreen);}///////////
 	GuiButton btn2(btnOutline.GetWidth(), btnOutline.GetHeight());
 	btn2.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
 	btn2.SetPosition(50, -120);
@@ -665,7 +675,8 @@ DownloadWindowPrompt()
 
 	GuiText btn3Txt("Back", 22, (GXColor){0, 0, 0, 255});
 	GuiImage btn3Img(&btnOutline);
-	btn3Img.SetWidescreen(CFG.widescreen);///////////
+	if (Settings.wsprompt == yes){
+	btn3Img.SetWidescreen(CFG.widescreen);}///////////
 	GuiButton btn3(btnOutline.GetWidth(), btnOutline.GetHeight());
 	btn3.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
     btn3.SetPosition(-50, -65);
@@ -679,7 +690,8 @@ DownloadWindowPrompt()
 
     GuiText btn4Txt("Disc Images", 22, (GXColor){0, 0, 0, 255});
 	GuiImage btn4Img(&btnOutline);
-	btn4Img.SetWidescreen(CFG.widescreen);///////////
+	if (Settings.wsprompt == yes){
+	btn4Img.SetWidescreen(CFG.widescreen);}///////////
 	GuiButton btn4(btnOutline.GetWidth(), btnOutline.GetHeight());
 	btn4.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
     btn4.SetPosition(50, -65);
@@ -690,7 +702,7 @@ DownloadWindowPrompt()
 	btn4.SetTrigger(&trigA);
 	btn4.SetEffectGrow();
 
-	if (CFG.widescreen){/////////////adjust buttons for widescreen
+	if ((Settings.wsprompt == yes) && (CFG.widescreen)){/////////////adjust buttons for widescreen
 		btn1.SetPosition(-70, -120);
 		btn2.SetPosition(70, -120);
 		btn3.SetPosition(-70, -55);
@@ -761,7 +773,8 @@ DeviceWait(const char *title, const char *msg, const char *btn1Label, const char
 
 	GuiImageData dialogBox(dialogue_box_png);
 	GuiImage dialogBoxImg(&dialogBox);
-	dialogBoxImg.SetWidescreen(CFG.widescreen);///////////
+	if (Settings.wsprompt == yes){
+	dialogBoxImg.SetWidescreen(CFG.widescreen);}///////////
 
 	GuiText timerTxt(timer, 26, (GXColor){0, 0, 0, 255});
 	timerTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
@@ -902,7 +915,8 @@ int GameWindowPrompt()
 
 	GuiText btn2Txt("Back", 22, (GXColor){0, 0, 0, 255});
 	GuiImage btn2Img(&btnOutline);
-	btn2Img.SetWidescreen(CFG.widescreen);///////////
+	if (Settings.wsprompt == yes){
+	btn2Img.SetWidescreen(CFG.widescreen);}///////////
 	GuiButton btn2(btnOutline.GetWidth(), btnOutline.GetHeight());
 	//check if unlocked
 	if (CFG.godmode == 1)
@@ -926,7 +940,8 @@ int GameWindowPrompt()
 
 	GuiText btn3Txt("Settings", 22, (GXColor){0, 0, 0, 255});
 	GuiImage btn3Img(&btnOutline);
-	btn3Img.SetWidescreen(CFG.widescreen);///////////
+	if (Settings.wsprompt == yes){
+	btn3Img.SetWidescreen(CFG.widescreen);}///////////
 	GuiButton btn3(btnOutline.GetWidth(), btnOutline.GetHeight());
 	btn3.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
 	btn3.SetPosition(-50, -40);
@@ -1165,7 +1180,8 @@ DiscWait(const char *title, const char *msg, const char *btn1Label, const char *
 
 	GuiImageData dialogBox(dialogue_box_png);
 	GuiImage dialogBoxImg(&dialogBox);
-	dialogBoxImg.SetWidescreen(CFG.widescreen);///////////
+	if (Settings.wsprompt == yes){
+	dialogBoxImg.SetWidescreen(CFG.widescreen);}///////////
 
 	GuiText titleTxt(title, 26, (GXColor){0, 0, 0, 255});
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
@@ -1177,7 +1193,8 @@ DiscWait(const char *title, const char *msg, const char *btn1Label, const char *
 
 	GuiText btn1Txt(btn1Label, 22, (GXColor){0, 0, 0, 255});
 	GuiImage btn1Img(&btnOutline);
-	btn1Img.SetWidescreen(CFG.widescreen);///////////
+	if (Settings.wsprompt == yes){
+	btn1Img.SetWidescreen(CFG.widescreen);}///////////
 	GuiButton btn1(btnOutline.GetWidth(), btnOutline.GetHeight());
 
 	if(btn2Label)
@@ -1202,7 +1219,8 @@ DiscWait(const char *title, const char *msg, const char *btn1Label, const char *
 
 	GuiText btn2Txt(btn2Label, 22, (GXColor){0, 0, 0, 255});
 	GuiImage btn2Img(&btnOutline);
-	btn2Img.SetWidescreen(CFG.widescreen);///////////
+	if (Settings.wsprompt == yes){
+	btn2Img.SetWidescreen(CFG.widescreen);}///////////
 	GuiButton btn2(btnOutline.GetWidth(), btnOutline.GetHeight());
 	btn2.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
 	btn2.SetPosition(-20, -25);
@@ -1213,7 +1231,7 @@ DiscWait(const char *title, const char *msg, const char *btn1Label, const char *
 	btn2.SetTrigger(&trigA);
 	btn2.SetEffectGrow();
 
-	if (CFG.widescreen){/////////////adjust buttons for widescreen
+	if ((Settings.wsprompt == yes) && (CFG.widescreen)){/////////////adjust buttons for widescreen
 		msgTxt.SetMaxWidth(380);
 		if(btn2Label)
 	{
@@ -1281,7 +1299,8 @@ FormatingPartition(const char *title, partitionEntry *entry)
 
 	GuiImageData dialogBox(dialogue_box_png);
 	GuiImage dialogBoxImg(&dialogBox);
-	dialogBoxImg.SetWidescreen(CFG.widescreen);///////////
+	if (Settings.wsprompt == yes){
+	dialogBoxImg.SetWidescreen(CFG.widescreen);}///////////
 
 	GuiText titleTxt(title, 26, (GXColor){0, 0, 0, 255});
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
@@ -1334,7 +1353,8 @@ int NetworkInitPromp(int choice2)
 
 	GuiImageData dialogBox(dialogue_box_png);
 	GuiImage dialogBoxImg(&dialogBox);
-	dialogBoxImg.SetWidescreen(CFG.widescreen);///////////
+	if (Settings.wsprompt == yes){
+	dialogBoxImg.SetWidescreen(CFG.widescreen);}///////////
 
 	GuiText titleTxt("Initializing Network", 26, (GXColor){0, 0, 0, 255});
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
@@ -1347,7 +1367,8 @@ int NetworkInitPromp(int choice2)
 
     GuiText btn1Txt("Cancel", 22, (GXColor){0, 0, 0, 255});
 	GuiImage btn1Img(&btnOutline);
-	btn1Img.SetWidescreen(CFG.widescreen);///////////
+	if (Settings.wsprompt == yes){
+	btn1Img.SetWidescreen(CFG.widescreen);}///////////
 	GuiButton btn1(btnOutline.GetWidth(), btnOutline.GetHeight());
     btn1.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
     btn1.SetPosition(0, -45);
@@ -1359,7 +1380,7 @@ int NetworkInitPromp(int choice2)
 	btn1.SetState(STATE_SELECTED);
 	btn1.SetEffectGrow();
 
-	if (CFG.widescreen){/////////////adjust buttons for widescreen
+	if ((Settings.wsprompt == yes) && (CFG.widescreen)){/////////////adjust buttons for widescreen
 		btn1.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
 		btn1.SetPosition(0, -80);
 	}
@@ -1502,7 +1523,7 @@ ShowProgress (s32 done, s32 total)
     sprintf(timet,"Time left: %d:%02d:%02d",h,m,s);
     timeTxt.SetText(timet);
 //	timeTxt.SetFont(fontClock);
-	if (CFG.widescreen){
+	if ((Settings.wsprompt == yes) && (CFG.widescreen)){
 	progressbarImg.SetTile(78*progressDone/progressTotal);}
 	else {progressbarImg.SetTile(100*progressDone/progressTotal);}
 
@@ -1528,7 +1549,8 @@ ProgressWindow(const char *title, const char *msg)
 
 	GuiImageData dialogBox(dialogue_box_png);
 	GuiImage dialogBoxImg(&dialogBox);
-	dialogBoxImg.SetWidescreen(CFG.widescreen);///////////
+	if (Settings.wsprompt == yes){
+	dialogBoxImg.SetWidescreen(CFG.widescreen);}///////////
 
 	GuiImageData progressbarOutline(progressbar_outline_png);
 	GuiImage progressbarOutlineImg(&progressbarOutline);
@@ -1538,13 +1560,15 @@ ProgressWindow(const char *title, const char *msg)
 
 	GuiImageData progressbarEmpty(progressbar_empty_png);
 	GuiImage progressbarEmptyImg(&progressbarEmpty);
-	progressbarEmptyImg.SetWidescreen(CFG.widescreen);///////////
+	if (Settings.wsprompt == yes){
+	progressbarEmptyImg.SetWidescreen(CFG.widescreen);}///////////
 	progressbarEmptyImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 	progressbarEmptyImg.SetPosition(25, 40);
 	progressbarEmptyImg.SetTile(100);
 
 	GuiImageData progressbar(progressbar_png);
-	progressbarImg.SetWidescreen(CFG.widescreen);///////////
+	if (Settings.wsprompt == yes){
+	progressbarImg.SetWidescreen(CFG.widescreen);}///////////
 	progressbarImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 	progressbarImg.SetPosition(25, 40);
 
@@ -1561,7 +1585,7 @@ ProgressWindow(const char *title, const char *msg)
     timeTxt.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
 	timeTxt.SetPosition(0,-50);
 
-	if (CFG.widescreen){/////////////adjust for widescreen
+	if ((Settings.wsprompt == yes) && (CFG.widescreen)){/////////////adjust for widescreen
 		progressbarOutlineImg.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 		progressbarOutlineImg.SetPosition(0, 40);
 		progressbarEmptyImg.SetPosition(80,40);
@@ -1625,17 +1649,20 @@ ProgressDownloadWindow(int choice2)
 
 	GuiImageData dialogBox(dialogue_box_png);
 	GuiImage dialogBoxImg(&dialogBox);
-	dialogBoxImg.SetWidescreen(CFG.widescreen);///////////
+	if (Settings.wsprompt == yes){
+	dialogBoxImg.SetWidescreen(CFG.widescreen);}///////////
 
 	GuiImageData progressbarOutline(progressbar_outline_png);
 	GuiImage progressbarOutlineImg(&progressbarOutline);
-	progressbarOutlineImg.SetWidescreen(CFG.widescreen);///////////
+	if (Settings.wsprompt == yes){
+	progressbarOutlineImg.SetWidescreen(CFG.widescreen);}///////////
 	progressbarOutlineImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 	progressbarOutlineImg.SetPosition(25, 40);
 
 	GuiImageData progressbarEmpty(progressbar_empty_png);
 	GuiImage progressbarEmptyImg(&progressbarEmpty);
-	progressbarEmptyImg.SetWidescreen(CFG.widescreen);///////////
+	if (Settings.wsprompt == yes){
+	progressbarEmptyImg.SetWidescreen(CFG.widescreen);}///////////
 	progressbarEmptyImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 	progressbarEmptyImg.SetPosition(25, 40);
 	progressbarEmptyImg.SetTile(100);
@@ -1662,7 +1689,8 @@ ProgressDownloadWindow(int choice2)
 
     GuiText btn1Txt("Cancel", 22, (GXColor){0, 0, 0, 255});
 	GuiImage btn1Img(&btnOutline);
-	btn1Img.SetWidescreen(CFG.widescreen);///////////
+	if (Settings.wsprompt == yes){
+	btn1Img.SetWidescreen(CFG.widescreen);}///////////
 	GuiButton btn1(btnOutline.GetWidth(), btnOutline.GetHeight());
     btn1.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
     btn1.SetPosition(0, -45);
@@ -1674,7 +1702,7 @@ ProgressDownloadWindow(int choice2)
 	btn1.SetState(STATE_SELECTED);
 	btn1.SetEffectGrow();
 
-	if (CFG.widescreen){/////////////adjust for widescreen
+	if ((Settings.wsprompt == yes) && (CFG.widescreen)){/////////////adjust for widescreen
 		progressbarOutlineImg.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 		progressbarOutlineImg.SetPosition(0, 40);
 		progressbarEmptyImg.SetPosition(80,40);
@@ -1725,7 +1753,7 @@ ProgressDownloadWindow(int choice2)
 	prTxt.SetText(prozent);
 	prTxt.SetFont(fontClock);
 
-	if (CFG.widescreen){/////////////adjust for widescreen
+	if ((Settings.wsprompt == yes) && (CFG.widescreen)){/////////////adjust for widescreen
 		progressbarImg.SetPosition(80,40);
 		progressbarImg.SetTile(80*i/cntMissFiles);
 	}
@@ -1979,7 +2007,8 @@ static int OnScreenKeyboard(char * var, u16 maxlen)
 
 	GuiText okBtnTxt("OK", 22, (GXColor){0, 0, 0, 255});
 	GuiImage okBtnImg(&btnOutline);
-	okBtnImg.SetWidescreen(CFG.widescreen);///////////
+	if (Settings.wsprompt == yes){
+	okBtnImg.SetWidescreen(CFG.widescreen);}///////////
 	GuiButton okBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
 
 	okBtn.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
@@ -1994,7 +2023,8 @@ static int OnScreenKeyboard(char * var, u16 maxlen)
 
 	GuiText cancelBtnTxt("Cancel", 22, (GXColor){0, 0, 0, 255});
 	GuiImage cancelBtnImg(&btnOutline);
-	cancelBtnImg.SetWidescreen(CFG.widescreen);///////////
+	if (Settings.wsprompt == yes){
+	cancelBtnImg.SetWidescreen(CFG.widescreen);}///////////
 	GuiButton cancelBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
 	cancelBtn.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
 	cancelBtn.SetPosition(-5, 15);//(-25, -25);
@@ -2360,12 +2390,14 @@ static int MenuDiscList()
 
 	GuiImageData tooltipLarge(tooltip_large_png);
 	GuiImage tooltipLargeImg(&tooltipLarge);
-	tooltipLargeImg.SetWidescreen(CFG.widescreen);///////////
+	if (Settings.wsprompt == yes){
+	tooltipLargeImg.SetWidescreen(CFG.widescreen);}///////////
 
 	GuiText ttinstallTxt("Install a game", 22, (GXColor){0, 0, 0, 255}); //TOOLTIP DATA FOR INSTALL BUTTON
 	GuiImageData ttinstall(tooltip_medium_png);
 	GuiImage ttinstallImg(&ttinstall);
-	ttinstallImg.SetWidescreen(CFG.widescreen);///////////
+	if (Settings.wsprompt == yes){
+	ttinstallImg.SetWidescreen(CFG.widescreen);}///////////
 
 	GuiImage installBtnImg(&btnInstall);
 	GuiImage installBtnImgOver(&btnInstallOver);
@@ -3385,7 +3417,8 @@ static int MenuSettings()
     GuiText backBtnTxt("Go Back", 22, (GXColor){0, 0, 0, 255});
 	backBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
 	GuiImage backBtnImg(&btnOutline);
-	backBtnImg.SetWidescreen(CFG.widescreen);//////
+	if (Settings.wsprompt == yes){
+	backBtnImg.SetWidescreen(CFG.widescreen);}//////
 	GuiButton backBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
 	backBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	backBtn.SetPosition(-180, 400);
@@ -3472,7 +3505,7 @@ static int MenuSettings()
 	GuiCustomOptionBrowser optionBrowser2(396, 280, &options2, CFG.theme_path, "bg_options_settings", bg_options_settings_png, 0);
 	optionBrowser2.SetPosition(0, 90);
 	optionBrowser2.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	optionBrowser2.SetCol2Position(180);
+	optionBrowser2.SetCol2Position(200);
 	GuiWindow w(screenwidth, screenheight);
 
 	int pageToDisplay = 1;
@@ -3514,7 +3547,7 @@ static int MenuSettings()
 			sprintf(options2.name[1], "Boot Loader in");
 			sprintf(options2.name[2], "Flip X");
 			sprintf(options2.name[3], "Quick Boot");
-			sprintf(options2.name[4], " ");
+			sprintf(options2.name[4], "Prompts & Buttons");
 			sprintf(options2.name[5], " ");
 			sprintf(options2.name[6], " ");
 			sprintf(options2.name[7], " ");
@@ -3640,6 +3673,8 @@ static int MenuSettings()
 					Settings.xflip = 0;
 				if ( Settings.qboot > 1 )
 					Settings.qboot = 0;
+				if ( Settings.wsprompt > 1 )
+					Settings.wsprompt = 0;
 
 
 				if ( CFG.godmode != 1) sprintf(options2.value[0], "********");
@@ -3654,8 +3689,10 @@ static int MenuSettings()
 
 				if (Settings.qboot == no) sprintf (options2.value[3],"No");
 				else if (Settings.qboot == yes) sprintf (options2.value[3],"Yes");
+				
+				if (Settings.wsprompt == no) sprintf (options2.value[4],"Normal");
+				else if (Settings.wsprompt == yes) sprintf (options2.value[4],"Widescreen Fix");
 
-				sprintf (options2.value[4]," ");
 				sprintf (options2.value[5]," ");
 				sprintf (options2.value[6]," ");
 				sprintf (options2.value[7]," ");
@@ -3703,6 +3740,9 @@ static int MenuSettings()
 						break;
 					case 3:
 						Settings.qboot++;
+						break;
+					case 4:
+						Settings.wsprompt++;
 						break;
 					}
 			}
@@ -3873,7 +3913,8 @@ int GameSettings(struct discHdr * header)
     GuiText saveBtnTxt("Save", 22, (GXColor){0, 0, 0, 255});
 	saveBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
 	GuiImage saveBtnImg(&btnOutline);
-	saveBtnImg.SetWidescreen(CFG.widescreen);
+	if (Settings.wsprompt == yes){
+	saveBtnImg.SetWidescreen(CFG.widescreen);}
 	GuiButton saveBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
 	saveBtn.SetScale(0.9);
 	saveBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
@@ -3887,7 +3928,8 @@ int GameSettings(struct discHdr * header)
     GuiText cancelBtnTxt("Back", 22, (GXColor){0, 0, 0, 255});
 	cancelBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
 	GuiImage cancelBtnImg(&btnOutline);
-	cancelBtnImg.SetWidescreen(CFG.widescreen);
+	if (Settings.wsprompt == yes){
+	cancelBtnImg.SetWidescreen(CFG.widescreen);}
 	GuiButton cancelBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
 	cancelBtn.SetScale(0.9);
 	cancelBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
@@ -3902,7 +3944,8 @@ int GameSettings(struct discHdr * header)
 	GuiText deleteBtnTxt("Uninstall", 22, (GXColor){0, 0, 0, 255});
 	deleteBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
 	GuiImage deleteBtnImg(&btnOutline);
-	deleteBtnImg.SetWidescreen(CFG.widescreen);
+	if (Settings.wsprompt == yes){
+	deleteBtnImg.SetWidescreen(CFG.widescreen);}
 	GuiButton deleteBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
 	deleteBtn.SetScale(0.9);
 	deleteBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);

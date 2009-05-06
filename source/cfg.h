@@ -63,6 +63,7 @@ struct CFG
 	short maxcharacters;
 	short godmode;
 	short xflip;
+	short wsprompt;
 	char unlockCode[20];
 	char covers_path[100];
 	char theme_path[100];
@@ -136,6 +137,7 @@ extern u8 iosChoice;
 extern u8 parentalcontrolChoice;
 extern u8 xflip;
 extern u8 qboot;
+extern u8 wsprompt;
 
 struct Game_CFG
 {
@@ -258,6 +260,7 @@ struct SSettings {
 	int		parentalcontrol;
 	int     cios;
 	int		qboot;
+	int		wsprompt;
 };
 
 void CFG_LoadGlobal(void);

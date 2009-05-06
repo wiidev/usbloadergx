@@ -41,6 +41,7 @@ u8 iosChoice = 0;
 u8 parentalcontrolChoice = 0;
 u8 xflip = 0;
 u8 qboot = 0;
+u8 wsprompt = 0;
 
 #define TITLE_MAX 65
 
@@ -202,6 +203,7 @@ void CFG_Default(int widescreen) // -1 = non forced Mode
 	CFG.maxcharacters = 38;
 	CFG.godmode = 0;
 	CFG.xflip = 0;
+	CFG.wsprompt = 0;
 	
 	//all alignments are left top here
 	THEME.selection_x = 200;
@@ -733,6 +735,13 @@ void global_cfg_set(char *name, char *val)
 			}
 		return;
 	}
+	else if (strcmp(name, "wsprompt") == 0) {
+		int i;
+		if (sscanf(val, "%d", &i) == 1) {
+            Settings.wsprompt = i;
+			}
+		return;
+	}
 }
 
 // split line to part1 delimiter part2
@@ -900,6 +909,7 @@ bool cfg_save_global()// save global settings
 	fprintf(f, "cios = %d\n ", Settings.cios);
 	fprintf(f, "xflip = %d\n ", Settings.xflip);
 	fprintf(f, "qboot = %d\n ", Settings.qboot);
+	fprintf(f, "wsprompt = %d\n ", Settings.wsprompt);
 	fclose(f);
 	return true;
 }
@@ -1014,6 +1024,7 @@ bool cfg_load_global()
 	Settings.ocarina = off;
 	Settings.xflip = off;
 	Settings.qboot = off;
+	Settings.wsprompt = off;
 	Settings.hddinfo = HDDInfo;
 	Settings.sinfo = ((THEME.showID) ? GameID : Neither);
 	Settings.rumble = RumbleOn;
