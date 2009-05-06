@@ -1519,12 +1519,12 @@ ShowProgress (s32 done, s32 total)
 
 	sprintf(prozent, "%0.2f%%", percent);
     prTxt.SetText(prozent);
-	prTxt.SetFont(fontClock);
+	//prTxt.SetFont(fontClock);
     sprintf(timet,"Time left: %d:%02d:%02d",h,m,s);
     timeTxt.SetText(timet);
 //	timeTxt.SetFont(fontClock);
 	if ((Settings.wsprompt == yes) && (CFG.widescreen)){
-	progressbarImg.SetTile(78*progressDone/progressTotal);}
+	progressbarImg.SetTile(80*progressDone/progressTotal);}
 	else {progressbarImg.SetTile(100*progressDone/progressTotal);}
 
 }
@@ -1554,44 +1554,47 @@ ProgressWindow(const char *title, const char *msg)
 
 	GuiImageData progressbarOutline(progressbar_outline_png);
 	GuiImage progressbarOutlineImg(&progressbarOutline);
-	progressbarOutlineImg.SetWidescreen(CFG.widescreen);///////////
+	if (Settings.wsprompt == yes){
+	progressbarOutlineImg.SetWidescreen(CFG.widescreen);}///////////
 	progressbarOutlineImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 	progressbarOutlineImg.SetPosition(25, 40);
 
 	GuiImageData progressbarEmpty(progressbar_empty_png);
 	GuiImage progressbarEmptyImg(&progressbarEmpty);
-	if (Settings.wsprompt == yes){
-	progressbarEmptyImg.SetWidescreen(CFG.widescreen);}///////////
+	//if (Settings.wsprompt == yes){
+	//progressbarEmptyImg.SetWidescreen(CFG.widescreen);}///////////
 	progressbarEmptyImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 	progressbarEmptyImg.SetPosition(25, 40);
 	progressbarEmptyImg.SetTile(100);
 
 	GuiImageData progressbar(progressbar_png);
-	if (Settings.wsprompt == yes){
-	progressbarImg.SetWidescreen(CFG.widescreen);}///////////
+	//if (Settings.wsprompt == yes){
+	//progressbarImg.SetWidescreen(CFG.widescreen);}///////////
+	
 	progressbarImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 	progressbarImg.SetPosition(25, 40);
-
+	
 	GuiText titleTxt(title, 26, (GXColor){70, 70, 10, 255});
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	titleTxt.SetPosition(0,60);
 	GuiText msgTxt(msg, 26, (GXColor){0, 0, 0, 255});
 	msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	msgTxt.SetPosition(0,130);
-
-	prTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-	prTxt.SetPosition(0, 40);
-
-    timeTxt.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
-	timeTxt.SetPosition(0,-50);
-
+	msgTxt.SetPosition(0,120);
+	
 	if ((Settings.wsprompt == yes) && (CFG.widescreen)){/////////////adjust for widescreen
 		progressbarOutlineImg.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 		progressbarOutlineImg.SetPosition(0, 40);
 		progressbarEmptyImg.SetPosition(80,40);
 		progressbarEmptyImg.SetTile(78);
 		progressbarImg.SetPosition(80, 40);
+		msgTxt.SetMaxWidth(380);
 	}
+
+	prTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	prTxt.SetPosition(0, 40);
+
+    timeTxt.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
+	timeTxt.SetPosition(0,-50);
 
 	promptWindow.Append(&dialogBoxImg);
 	promptWindow.Append(&titleTxt);
@@ -1607,7 +1610,7 @@ ProgressWindow(const char *title, const char *msg)
 	mainWindow->Append(&promptWindow);
 	mainWindow->ChangeFocus(&promptWindow);
 	ResumeGui();
-
+	promptWindow.Append(&prTxt);
     s32 ret;
 
     ret = wbfs_add_disc(hdd, __WBFS_ReadDVD, NULL, ShowProgress, ONLY_GAME_PARTITION, 0);
@@ -1650,25 +1653,22 @@ ProgressDownloadWindow(int choice2)
 	GuiImageData dialogBox(dialogue_box_png);
 	GuiImage dialogBoxImg(&dialogBox);
 	if (Settings.wsprompt == yes){
-	dialogBoxImg.SetWidescreen(CFG.widescreen);}///////////
+	dialogBoxImg.SetWidescreen(CFG.widescreen);}
 
 	GuiImageData progressbarOutline(progressbar_outline_png);
 	GuiImage progressbarOutlineImg(&progressbarOutline);
 	if (Settings.wsprompt == yes){
-	progressbarOutlineImg.SetWidescreen(CFG.widescreen);}///////////
+	progressbarOutlineImg.SetWidescreen(CFG.widescreen);}
 	progressbarOutlineImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 	progressbarOutlineImg.SetPosition(25, 40);
 
 	GuiImageData progressbarEmpty(progressbar_empty_png);
 	GuiImage progressbarEmptyImg(&progressbarEmpty);
-	if (Settings.wsprompt == yes){
-	progressbarEmptyImg.SetWidescreen(CFG.widescreen);}///////////
 	progressbarEmptyImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 	progressbarEmptyImg.SetPosition(25, 40);
 	progressbarEmptyImg.SetTile(100);
 
 	GuiImageData progressbar(progressbar_png);
-	progressbarImg.SetWidescreen(CFG.widescreen);
 	progressbarImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 	progressbarImg.SetPosition(25, 40);
 
@@ -1690,7 +1690,7 @@ ProgressDownloadWindow(int choice2)
     GuiText btn1Txt("Cancel", 22, (GXColor){0, 0, 0, 255});
 	GuiImage btn1Img(&btnOutline);
 	if (Settings.wsprompt == yes){
-	btn1Img.SetWidescreen(CFG.widescreen);}///////////
+	btn1Img.SetWidescreen(CFG.widescreen);}
 	GuiButton btn1(btnOutline.GetWidth(), btnOutline.GetHeight());
     btn1.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
     btn1.SetPosition(0, -45);
@@ -1751,7 +1751,7 @@ ProgressDownloadWindow(int choice2)
 
 	sprintf(prozent, "%i%%", 100*i/cntMissFiles);
 	prTxt.SetText(prozent);
-	prTxt.SetFont(fontClock);
+	//prTxt.SetFont(fontClock);
 
 	if ((Settings.wsprompt == yes) && (CFG.widescreen)){/////////////adjust for widescreen
 		progressbarImg.SetPosition(80,40);
