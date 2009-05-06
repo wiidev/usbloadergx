@@ -2562,7 +2562,7 @@ static int MenuDiscList()
 	gameBrowser.SetPosition(THEME.selection_x, THEME.selection_y);
 	gameBrowser.SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
 
-    GuiText clockTime(theTime, 30, (GXColor){138, 138, 138, 255});
+    GuiText clockTime(theTime, 40, (GXColor){138, 138, 138, 255});
     clockTime.SetAlignment(THEME.clockAlign, ALIGN_BOTTOM);
     clockTime.SetPosition(THEME.clock_x, THEME.clock_y);
 	clockTime.SetFont(fontClock);
@@ -3453,7 +3453,7 @@ static int MenuSettings()
 	GuiImage page2dImg(&page2d);
 	GuiButton page2Btn(page2.GetWidth(), page2.GetHeight());
 	page2Btn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	page2Btn.SetPosition(-202, 242);
+	page2Btn.SetPosition(-202, 186);
 	page2Btn.SetImage(&page2dImg);
 	page2Btn.SetSoundOver(&btnSoundOver);
 	page2Btn.SetSoundClick(&btnClick);
@@ -3532,9 +3532,9 @@ static int MenuSettings()
 			w.Append(btnLogo);
 
 			mainWindow->Append(&w);
-			mainWindow->Append(&optionBrowser2);
 			mainWindow->Append(&page2Btn);
 			mainWindow->Append(&page1Btn);
+			mainWindow->Append(&optionBrowser2);
 
 			ResumeGui();
 		}
@@ -3542,6 +3542,7 @@ static int MenuSettings()
 		{
 			mainWindow->Append(&page1Btn);
 			mainWindow->Append(&page2Btn);
+			mainWindow->Append(&optionBrowser2);
 
 			sprintf(options2.name[0], "Password");
 			sprintf(options2.name[1], "Boot/Standard");
@@ -3715,9 +3716,9 @@ static int MenuSettings()
 							char entered[20] = "";
 							strncpy(entered, Settings.unlockCode, sizeof(entered));
 							int result = OnScreenKeyboard(entered, 20);
-							mainWindow->Append(&optionBrowser2);
 							mainWindow->Append(&page1Btn);
 							mainWindow->Append(&page2Btn);
+							mainWindow->Append(&optionBrowser2);
 							w.Append(&backBtn);
 							w.Append(&lockBtn);
 							if ( result == 1 )
@@ -3797,9 +3798,9 @@ static int MenuSettings()
 							w.Remove(&lockBtn);
 						char entered[20] = "";
 					int result = OnScreenKeyboard(entered, 20);
-							mainWindow->Append(&optionBrowser2);
 							mainWindow->Append(&page1Btn);
 							mainWindow->Append(&page2Btn);
+							mainWindow->Append(&optionBrowser2);
 							w.Append(&backBtn);
 							w.Append(&lockBtn);
 					if ( result == 1 )
