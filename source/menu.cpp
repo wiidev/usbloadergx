@@ -3544,7 +3544,7 @@ static int MenuSettings()
 			mainWindow->Append(&page2Btn);
 
 			sprintf(options2.name[0], "Password");
-			sprintf(options2.name[1], "Boot Loader in");
+			sprintf(options2.name[1], "Boot/Standard");
 			sprintf(options2.name[2], "Flip X");
 			sprintf(options2.name[3], "Quick Boot");
 			sprintf(options2.name[4], "Prompts & Buttons");
@@ -3689,7 +3689,7 @@ static int MenuSettings()
 
 				if (Settings.qboot == no) sprintf (options2.value[3],"No");
 				else if (Settings.qboot == yes) sprintf (options2.value[3],"Yes");
-				
+
 				if (Settings.wsprompt == no) sprintf (options2.value[4],"Normal");
 				else if (Settings.wsprompt == yes) sprintf (options2.value[4],"Widescreen Fix");
 
@@ -3990,7 +3990,7 @@ int GameSettings(struct discHdr * header)
 		languageChoice = Settings.language;
 		ocarinaChoice = Settings.ocarina;
 		viChoice = Settings.vpatch;
-		if(Settings.ios == i222) {
+		if(Settings.cios == ios222) {
         iosChoice = i222;
 		} else {
 		iosChoice = i249;
