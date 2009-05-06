@@ -3434,7 +3434,7 @@ static int MenuSettings()
 	GuiImage page1dImg(&page1d);
 	GuiButton page1Btn(page1.GetWidth(), page1.GetHeight());
 	page1Btn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	page1Btn.SetPosition(-202, 90);
+	page1Btn.SetPosition(-201, 90);
 	page1Btn.SetImage(&page1Img);
 	page1Btn.SetSoundOver(&btnSoundOver);
 	page1Btn.SetSoundClick(&btnClick);
@@ -3443,7 +3443,6 @@ static int MenuSettings()
 	GuiImageData ttpage(tooltip_png);
 	    GuiText ttpage1Txt("Go to Page 1", 20, (GXColor){0, 0, 0, 255});
     GuiImage ttpage1Img(&ttpage);
-	//ttpage1Img.SetWidescreen(CFG.widescreen);//////
 
     if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0)
     page1Btn.SetToolTip(&ttpage1Img,&ttpage1Txt,105, 15);
@@ -3453,7 +3452,7 @@ static int MenuSettings()
 	GuiImage page2dImg(&page2d);
 	GuiButton page2Btn(page2.GetWidth(), page2.GetHeight());
 	page2Btn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	page2Btn.SetPosition(-202, 186);
+	page2Btn.SetPosition(-201, 186);
 	page2Btn.SetImage(&page2dImg);
 	page2Btn.SetSoundOver(&btnSoundOver);
 	page2Btn.SetSoundClick(&btnClick);
@@ -3461,7 +3460,6 @@ static int MenuSettings()
 
     GuiText ttpage2Txt("Go to Page 2", 20, (GXColor){0, 0, 0, 255});
     GuiImage ttpage2Img(&ttpage);
-	//ttpage2Img.SetWidescreen(CFG.widescreen);//////
 
     if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0)
     page2Btn.SetToolTip(&ttpage2Img,&ttpage2Txt,105,0);
