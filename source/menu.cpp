@@ -1248,10 +1248,12 @@ FormatingPartition(const char *title, partitionEntry *entry)
 /****************************************************************************
  * NetworkInit
  ***************************************************************************/
-char * NetworkInitPromp(int choice2)
+int NetworkInitPromp(int choice2)
 {
-    char myIP [16];
-    char * IP = 0;
+    char hostip[16];
+    char * IP = NULL;
+    s32 ret = -1;
+
 	GuiWindow promptWindow(472,320);
 	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	promptWindow.SetPosition(0, -10);
@@ -1298,22 +1300,31 @@ char * NetworkInitPromp(int choice2)
 	mainWindow->SetState(STATE_DISABLED);
 	mainWindow->Append(&promptWindow);
 	mainWindow->ChangeFocus(&promptWindow);
+
 	ResumeGui();
 
-	VIDEO_WaitVSync();
-
-    while (!IP)
+	while (!IP)
 	{
 
-		Net_Init(myIP);
-		IP = myIP;
-		if (IP) {
+        VIDEO_WaitVSync();
+
+        ret = Net_Init(hostip);
+
+		if (ret > 0) {
+		IP = hostip;
+		}
+
+		if (ret <= 0) {
+        msgTxt.SetText("Could not initialize network!");
+		}
+
+		if (IP && ret > 0) {
 			sprintf(msg, "IP: %s", IP);
 			msgTxt.SetText(msg);
 			cntMissFiles = 0;
 			u32 i = 0;
 			char filename[11];
-	//        char filenameshort[10];
+
 			bool found1 = false;/////add Ids of games that are missing covers to cntMissFiles
 			bool found2 = false;
 			for (i = 0; i < gameCnt && cntMissFiles < 500; i++)
@@ -1348,8 +1359,9 @@ char * NetworkInitPromp(int choice2)
 			break;
 		}
 
-		if(btn1.GetState() == STATE_CLICKED) { //pending: this should be inside the for loop
+		if(btn1.GetState() == STATE_CLICKED) {
 			IP = 0;
+			ret = -1;
 			break;
 		}
 
@@ -1360,7 +1372,8 @@ char * NetworkInitPromp(int choice2)
 	mainWindow->Remove(&promptWindow);
 	mainWindow->SetState(STATE_DEFAULT);
 	ResumeGui();
-	return IP;
+
+	return ret;
 }
 
 /****************************************************************************
@@ -2503,7 +2516,14 @@ static int MenuDiscList()
 			    WPAD_Flush(0);
                 WPAD_Disconnect(0);
                 WPAD_Shutdown();
+
+                /* Set LED mode */
+                ret = CONF_GetIdleLedMode();
+                if(ret >= 0 && ret <= 2)
+                    STM_SetLedMode(ret);
+
 				STM_ShutdownToIdle();
+
 			} else if(choice == 2) {
 			    WPAD_Flush(0);
                 WPAD_Disconnect(0);
@@ -2563,17 +2583,20 @@ static int MenuDiscList()
 
 			if (choice != 0)
 			{
-				char * myIP;
+				int netset;
 				int choice2 = choice;
 
-				myIP = NetworkInitPromp(choice2);
+				netset = NetworkInitPromp(choice2);
 				networkisinitialized = 1;
-				if( !myIP )
+
+				if(netset < 0)
 				{
-					WindowPrompt("Network init error", 0, "ok",0);
+					WindowPrompt("Network init error", 0, "OK",0);
 					netcheck = false;
+
+				} else  {
+                    netcheck = true;
 				}
-				else netcheck = true;
 
 				if (netcheck)
 				{
@@ -2762,49 +2785,27 @@ static int MenuDiscList()
                     // if we have used the network or cios222 we need to reload the disklist
                     if(networkisinitialized == 1 || ios2 == 1 || Settings.cios == ios222) {
 
-					WPAD_Flush(0);
-                    WPAD_Disconnect(0);
-                    WPAD_Shutdown();
-
-                    WDVD_Close();
-
-                    USBStorage_Deinit();
 
                     if(ios2 == 1) {
 
-					ret = IOS_ReloadIOS(222);
-					if(ret < 0) {
+					ret = Sys_IosReload(222);
 
+					if(ret < 0) {
                     Wpad_Init();
                     WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
                     WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
 
 					WindowPrompt("You don't have cIOS222!","Loading in cIOS249!","OK", 0);
 
-					WPAD_Flush(0);
-                    WPAD_Disconnect(0);
-                    WPAD_Shutdown();
-
-					IOS_ReloadIOS(249);
+					Sys_IosReload(249);
 					ios2 = 0;
 					}
 
                     } else {
 
-                    ret = IOS_ReloadIOS(249);
+                    ret = Sys_IosReload(249);
 
                     }
-
-					ret = WBFS_Init(WBFS_DEVICE_USB);
-
-                    PAD_Init();
-                    Wpad_Init();
-                    WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
-                    WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
-
-                    ret = Disc_Init();
-                    ret = WBFS_Open();
-
                     }
 
 					/* Set USB mode */
@@ -2829,7 +2830,8 @@ static int MenuDiscList()
 						else {
 							menu = MENU_EXIT;
 						}
-					}break;
+					}
+					break;
 				}
 			bool returnHere = true;// prompt to start game
 			while (returnHere)
@@ -2860,53 +2862,33 @@ static int MenuDiscList()
                             break;
                     }
 
-                    // if we have used the network or cios222 we need to reload the disklist
+                                        // if we have used the network or cios222 we need to reload the disklist
                     if(networkisinitialized == 1 || ios2 == 1 || Settings.cios == ios222) {
 
-					WPAD_Flush(0);
-                    WPAD_Disconnect(0);
-                    WPAD_Shutdown();
-
-                    WDVD_Close();
-
-                    USBStorage_Deinit();
 
                     if(ios2 == 1) {
 
-					ret = IOS_ReloadIOS(222);
-					if(ret < 0) {
+					ret = Sys_IosReload(222);
 
+					if(ret < 0) {
                     Wpad_Init();
                     WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
                     WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
 
 					WindowPrompt("You don't have cIOS222!","Loading in cIOS249!","OK", 0);
 
-					WPAD_Flush(0);
-                    WPAD_Disconnect(0);
-                    WPAD_Shutdown();
-
-					IOS_ReloadIOS(249);
+					Sys_IosReload(249);
 					ios2 = 0;
 					}
 
                     } else {
 
-                    ret = IOS_ReloadIOS(249);
+                    ret = Sys_IosReload(249);
 
                     }
-
-					ret = WBFS_Init(WBFS_DEVICE_USB);
-
-                    PAD_Init();
-                    Wpad_Init();
-                    WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
-                    WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
-
-                    ret = Disc_Init();
-                    ret = WBFS_Open();
-
                     }
+
+
 
 					/* Set USB mode */
 					ret = Disc_SetUSB(header->id, ios2);

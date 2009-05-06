@@ -1,8 +1,15 @@
 #include <stdio.h>
 #include <ogcsys.h>
+#include <fat.h>
+#include <sdcard/wiisd_io.h>
 
 #include "sys.h"
 #include "wpad.h"
+#include "wdvd.h"
+#include "usbstorage.h"
+#include "disc.h"
+#include "wbfs.h"
+#include "video.h"
 
 /* Constants */
 #define CERTS_LEN	0x280
@@ -39,6 +46,45 @@ void Sys_Reboot(void)
 {
 	/* Restart console */
 	STM_RebootSystem();
+}
+
+int Sys_IosReload(int IOS)
+{
+    s32 ret;
+
+    fatUnmount("SD");
+    __io_wiisd.shutdown();
+
+    WPAD_Flush(0);
+    WPAD_Disconnect(0);
+    WPAD_Shutdown();
+
+    WDVD_Close();
+
+    USBStorage_Deinit();
+
+    ret = IOS_ReloadIOS(IOS);
+
+    if(ret < 0) {
+        return ret;
+    }
+
+    PAD_Init();
+    Wpad_Init();
+    WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
+    WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
+
+    __io_wiisd.startup();
+    fatMountSimple("SD", &__io_wiisd);
+
+    if(IOS == 249 || IOS == 222) {
+    ret = WBFS_Init(WBFS_DEVICE_USB);
+    ret = Disc_Init();
+    ret = WBFS_Open();
+    }
+
+    return ret;
+
 }
 
 void Sys_Shutdown(void)
