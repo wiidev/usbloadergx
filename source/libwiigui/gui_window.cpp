@@ -30,6 +30,7 @@ GuiWindow::~GuiWindow()
 
 void GuiWindow::Append(GuiElement* e)
 {
+	LOCK(this);
 	if (e == NULL)
 		return;
 
@@ -40,6 +41,7 @@ void GuiWindow::Append(GuiElement* e)
 
 void GuiWindow::Insert(GuiElement* e, u32 index)
 {
+	LOCK(this);
 	if (e == NULL || index > (_elements.size() - 1))
 		return;
 
@@ -50,6 +52,7 @@ void GuiWindow::Insert(GuiElement* e, u32 index)
 
 void GuiWindow::Remove(GuiElement* e)
 {
+	LOCK(this);
 	if (e == NULL)
 		return;
 
@@ -65,6 +68,7 @@ void GuiWindow::Remove(GuiElement* e)
 
 void GuiWindow::RemoveAll()
 {
+	LOCK(this);
 	_elements.clear();
 }
 
@@ -82,6 +86,7 @@ u32 GuiWindow::GetSize()
 
 void GuiWindow::Draw()
 {
+	LOCK(this);
 	if(_elements.size() == 0 || !this->IsVisible())
 		return;
 
@@ -99,6 +104,7 @@ void GuiWindow::Draw()
 }
 void GuiWindow::DrawTooltip()
 {
+	LOCK(this);
 	if(_elements.size() == 0 || !this->IsVisible())
 		return;
 
@@ -110,6 +116,7 @@ void GuiWindow::DrawTooltip()
 }
 void GuiWindow::ResetState()
 {
+	LOCK(this);
 	if(state != STATE_DISABLED)
 		state = STATE_DEFAULT;
 
@@ -122,6 +129,7 @@ void GuiWindow::ResetState()
 
 void GuiWindow::SetState(int s)
 {
+	LOCK(this);
 	state = s;
 
 	for (u8 i = 0; i < _elements.size(); i++)
@@ -133,6 +141,7 @@ void GuiWindow::SetState(int s)
 
 void GuiWindow::SetVisible(bool v)
 {
+	LOCK(this);
 	visible = v;
 
 	for (u8 i = 0; i < _elements.size(); i++)
@@ -144,6 +153,7 @@ void GuiWindow::SetVisible(bool v)
 
 void GuiWindow::SetFocus(int f)
 {
+	LOCK(this);
 	focus = f;
 
 	if(f == 1)
@@ -154,6 +164,7 @@ void GuiWindow::SetFocus(int f)
 
 void GuiWindow::ChangeFocus(GuiElement* e)
 {
+	LOCK(this);
 	if(parentElement)
 		return; // this is only intended for the main window
 
@@ -168,6 +179,7 @@ void GuiWindow::ChangeFocus(GuiElement* e)
 
 void GuiWindow::ToggleFocus(GuiTrigger * t)
 {
+	LOCK(this);
 	if(parentElement)
 		return; // this is only intended for the main window
 
@@ -266,6 +278,7 @@ int GuiWindow::GetSelected()
 // there's probably a more clever way to do this, but this way works
 void GuiWindow::MoveSelectionHor(int dir)
 {
+	LOCK(this);
 	int found = -1;
 	u16 left = 0;
 	u16 top = 0;
@@ -335,6 +348,7 @@ void GuiWindow::MoveSelectionHor(int dir)
 
 void GuiWindow::MoveSelectionVert(int dir)
 {
+	LOCK(this);
 	int found = -1;
 	u16 left = 0;
 	u16 top = 0;
@@ -386,6 +400,7 @@ void GuiWindow::MoveSelectionVert(int dir)
 
 void GuiWindow::Update(GuiTrigger * t)
 {
+	LOCK(this);
 	if(_elements.size() == 0 || (state == STATE_DISABLED && parentElement))
 		return;
 

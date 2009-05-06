@@ -289,12 +289,14 @@ GuiOptionBrowser::~GuiOptionBrowser()
 
 void GuiOptionBrowser::SetCol2Position(int x)
 {
+	LOCK(this);
 	for(int i=0; i<PAGESIZE; i++)
 		optionVal[i]->SetPosition(x,0);
 }
 
 void GuiOptionBrowser::SetFocus(int f)
 {
+	LOCK(this);
 	focus = f;
 
 	for(int i=0; i<PAGESIZE; i++)
@@ -306,6 +308,7 @@ void GuiOptionBrowser::SetFocus(int f)
 
 void GuiOptionBrowser::ResetState()
 {
+	LOCK(this);
 	if(state != STATE_DISABLED)
 	{
 		state = STATE_DEFAULT;
@@ -372,6 +375,7 @@ int GuiOptionBrowser::FindMenuItem(int currentItem, int direction)
  */
 void GuiOptionBrowser::Draw()
 {
+	LOCK(this);
 	if(!this->IsVisible())
 		return;
 
@@ -400,7 +404,9 @@ void GuiOptionBrowser::Draw()
 }
 
 void GuiOptionBrowser::Update(GuiTrigger * t)
-{	int next, prev, lang = options->length;
+{
+	LOCK(this);
+	int next, prev, lang = options->length;
 
 	//go to the last game selected
 	if ((loaded == 0) && (startat>0))

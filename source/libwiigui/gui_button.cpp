@@ -29,6 +29,7 @@ GuiButton::GuiButton(int w, int h)
 	iconHold = NULL;
 	iconClick = NULL;
 	toolTip = NULL;
+	toolTip2 = NULL;
 	toolTipTxt = NULL;
 
 	for(int i=0; i < 3; i++)
@@ -56,80 +57,96 @@ GuiButton::~GuiButton()
 
 void GuiButton::SetImage(GuiImage* img)
 {
+	LOCK(this);
 	image = img;
 	if(img) img->SetParent(this);
 }
 void GuiButton::SetImageOver(GuiImage* img)
 {
+	LOCK(this);
 	imageOver = img;
 	if(img) img->SetParent(this);
 }
 void GuiButton::SetImageHold(GuiImage* img)
 {
+	LOCK(this);
 	imageHold = img;
 	if(img) img->SetParent(this);
 }
 void GuiButton::SetImageClick(GuiImage* img)
 {
+	LOCK(this);
 	imageClick = img;
 	if(img) img->SetParent(this);
 }
 void GuiButton::SetIcon(GuiImage* img)
 {
+	LOCK(this);
 	icon = img;
 	if(img) img->SetParent(this);
 }
 void GuiButton::SetIconOver(GuiImage* img)
 {
+	LOCK(this);
 	iconOver = img;
 	if(img) img->SetParent(this);
 }
 void GuiButton::SetIconHold(GuiImage* img)
 {
+	LOCK(this);
 	iconHold = img;
 	if(img) img->SetParent(this);
 }
 void GuiButton::SetIconClick(GuiImage* img)
 {
+	LOCK(this);
 	iconClick = img;
 	if(img) img->SetParent(this);
 }
 void GuiButton::SetLabel(GuiText* txt, int n)
 {
+	LOCK(this);
 	label[n] = txt;
 	if(txt) txt->SetParent(this);
 }
 void GuiButton::SetLabelOver(GuiText* txt, int n)
 {
+	LOCK(this);
 	labelOver[n] = txt;
 	if(txt) txt->SetParent(this);
 }
 void GuiButton::SetLabelHold(GuiText* txt, int n)
 {
+	LOCK(this);
 	labelHold[n] = txt;
 	if(txt) txt->SetParent(this);
 }
 void GuiButton::SetLabelClick(GuiText* txt, int n)
 {
+	LOCK(this);
 	labelClick[n] = txt;
 	if(txt) txt->SetParent(this);
 }
 void GuiButton::SetSoundOver(GuiSound * snd)
 {
+	LOCK(this);
 	soundOver = snd;
 }
 void GuiButton::SetSoundHold(GuiSound * snd)
 {
+	LOCK(this);
 	soundHold = snd;
 }
 void GuiButton::SetSoundClick(GuiSound * snd)
 {
+	LOCK(this);
 	soundClick = snd;
 }
 
 //No delay for now
 void GuiButton::SetToolTip(GuiImage* img, GuiText * txt, int x, int y)
 {
+	LOCK(this);
 	if(img)
 	{
 
@@ -145,11 +162,24 @@ void GuiButton::SetToolTip(GuiImage* img, GuiText * txt, int x, int y)
 
 	}
 }
+void GuiButton::SetToolTip(GuiElement* tt, int x, int y, int h_align, int v_align)
+{
+	LOCK(this);
+	if(tt)
+	{
+		toolTip2 = tt;
+		toolTip2->SetParent(this);
+		toolTip2->SetAlignment(h_align, v_align);
+		toolTip2->SetPosition(x,y);
+		
+	}
+}
 /**
  * Draw the button on screen
  */
 void GuiButton::Draw()
 {
+	LOCK(this);
 	if(!this->IsVisible())
 		return;
 
@@ -176,7 +206,8 @@ void GuiButton::Draw()
 }
 void GuiButton::DrawTooltip()
 {
-	if(state == STATE_SELECTED && toolTip)
+	LOCK(this);
+	if(state == STATE_SELECTED && (toolTip || toolTip2))
 	{
 	    if (time2 == 0)
 		    time(&time2);
@@ -184,29 +215,34 @@ void GuiButton::DrawTooltip()
 		    time(&time1);
 
         if (difftime(time1, time2) >= 2) {
-		toolTip->Draw();
+		if(toolTip) toolTip->Draw();
+		if(toolTip2) toolTip2->Draw();
 		if (toolTipTxt)
         {
 			toolTipTxt->Draw();
         }
         }
 	}
+	else
+		time2 = 0;
 }
 void GuiButton::ScrollIsOn(int f)
 {
+	LOCK(this);
     scrollison = f;
 }
 
 void GuiButton::Update(GuiTrigger * t)
 {
+	LOCK(this);
 	if(state == STATE_CLICKED || state == STATE_DISABLED || !t)
 		return;
 	else if(parentElement && parentElement->GetState() == STATE_DISABLED)
 		return;
 
-    if(state != STATE_SELECTED && toolTip) {
-    time2 = 0;
-    }
+//    if(state != STATE_SELECTED && toolTip) {
+//    time2 = 0;
+//    }
 
 
 	#ifdef HW_RVL

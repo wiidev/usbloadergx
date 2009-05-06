@@ -374,6 +374,11 @@ class GuiElement
 		virtual void Draw();
 		virtual void DrawTooltip();
 	protected:
+		void Lock();
+		void Unlock();
+		mutex_t mutex;
+		friend class SimpleLock;
+		
         //int position2; //! B Scrollbariable
 		bool visible; //!< Visibility of the element. If false, Draw() is skipped
 		int focus; //!< Element focus (-1 = focus disabled, 0 = not focused, 1 = focused)
@@ -409,6 +414,15 @@ class GuiElement
 		GuiElement * parentElement; //!< Parent element
 		UpdateCallback updateCB; //!< Callback function to call when this element is updated
 };
+class SimpleLock
+{
+public:
+	SimpleLock(GuiElement *e);
+	~SimpleLock();
+private:
+	GuiElement *element;
+};
+#define LOCK(e) SimpleLock LOCK(e)
 
 //!Allows GuiElements to be grouped together into a "window"
 class GuiWindow : public GuiElement
@@ -622,7 +636,11 @@ class GuiText : public GuiElement
 		//!\param hor Horizontal alignment (ALIGN_LEFT, ALIGN_RIGHT, ALIGN_CENTRE)
 		//!\param vert Vertical alignment (ALIGN_TOP, ALIGN_BOTTOM, ALIGN_MIDDLE)
 		void SetAlignment(int hor, int vert);
+		//!Sets the font
+		//!\param f Font
 		void SetFont(FreeTypeGX *f);
+		//!Get the Horizontal Size of Text
+		int GetTextWidth();
 		//!Constantly called to draw the text
 		void Draw();
 	protected:
@@ -633,6 +651,32 @@ class GuiText : public GuiElement
 		GXColor color; //!< Font color
 		FreeTypeGX *font;
 };
+
+//!Display, manage, and manipulate tooltips in the GUI.
+class GuiTooltip : public GuiElement
+{
+	public:
+		//!Constructor 
+		//!\param t Text 
+		GuiTooltip(const char *t);
+
+		//!Destructor 
+		~ GuiTooltip(); 
+
+		//!Sets the text of the GuiTooltip element 
+		//!\param t Text 
+		void SetText(const char * t); 
+		//!Constantly called to draw the GuiButton
+		void Draw();
+
+	protected: 
+		static GuiImageData tooltipStd;
+		static GuiImageData tooltipMedium;
+		static GuiImageData tooltipLarge;
+		GuiImage image; //!< Tooltip
+		GuiText *text;
+}; 
+
 
 //!Display, manage, and manipulate buttons in the GUI. Buttons can have images, icons, text, and sound set (all of which are optional)
 class GuiButton : public GuiElement
@@ -698,6 +742,10 @@ class GuiButton : public GuiElement
 		//!Sets the button's Tooltip on over
 		//!\param i Pointer to GuiImage object, t Pointer to GuiText, x & y Positioning
 		void SetToolTip(GuiImage* i, GuiText * t, int x, int y);
+		//!Constantly called to draw the GuiButtons ToolTip
+		//!Sets the button's Tooltip on over
+		//!\param i Pointer to GuiImage object, t Pointer to GuiText, x & y Positioning
+		void SetToolTip(GuiElement* tt, int x, int y, int h=ALIGN_RIGHT, int v=ALIGN_TOP);
 		//!Constantly called to draw the GuiButton
 		void Draw();
 		void DrawTooltip();
@@ -717,6 +765,7 @@ class GuiButton : public GuiElement
 		GuiImage * iconClick; //!< Button icon for STATE_CLICKED
 		GuiImage * toolTip; //!< Tooltip for STATE_SELECTED
 		GuiText * toolTipTxt;//!< Tooltip Text
+		GuiElement *toolTip2;
 		time_t time1, time2;//!< Tooltip timeconstants
 		GuiText * label[3]; //!< Label(s) to display (default)
 		GuiText * labelOver[3]; //!< Label(s) to display for STATE_SELECTED

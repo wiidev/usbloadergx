@@ -55,6 +55,8 @@ GuiElement::GuiElement()
 	// default alignment - align to top left
 	alignmentVert = ALIGN_TOP;
 	alignmentHor = ALIGN_LEFT;
+	LWP_MutexInit(&mutex, true);
+
 }
 
 /**
@@ -62,10 +64,12 @@ GuiElement::GuiElement()
  */
 GuiElement::~GuiElement()
 {
+	LWP_MutexDestroy(mutex);
 }
 
 void GuiElement::SetParent(GuiElement * e)
 {
+	LOCK(this);
 	parentElement = e;
 }
 /**
@@ -140,6 +144,7 @@ int GuiElement::GetTop()
 
 void GuiElement::SetMinX(int x)
 {
+	LOCK(this);
 	xmin = x;
 }
 
@@ -150,6 +155,7 @@ int GuiElement::GetMinX()
 
 void GuiElement::SetMaxX(int x)
 {
+	LOCK(this);
 	xmax = x;
 }
 
@@ -160,6 +166,7 @@ int GuiElement::GetMaxX()
 
 void GuiElement::SetMinY(int y)
 {
+	LOCK(this);
 	ymin = y;
 }
 
@@ -170,6 +177,7 @@ int GuiElement::GetMinY()
 
 void GuiElement::SetMaxY(int y)
 {
+	LOCK(this);
 	ymax = y;
 }
 
@@ -207,6 +215,7 @@ int GuiElement::GetHeight()
  */
 void GuiElement::SetSize(int w, int h)
 {
+	LOCK(this);
 
 	width = w;
 	height = h;
@@ -229,11 +238,13 @@ bool GuiElement::IsVisible()
  */
 void GuiElement::SetVisible(bool v)
 {
+	LOCK(this);
 	visible = v;
 }
 
 void GuiElement::SetAlpha(int a)
 {
+	LOCK(this);
 	alpha = a;
 }
 
@@ -254,6 +265,7 @@ int GuiElement::GetAlpha()
 
 void GuiElement::SetScale(float s)
 {
+	LOCK(this);
 	scale = s;
 }
 
@@ -279,12 +291,14 @@ int GuiElement::GetStateChan()
 
 void GuiElement::SetState(int s, int c)
 {
+	LOCK(this);
 	state = s;
 	stateChan = c;
 }
 
 void GuiElement::ResetState()
 {
+	LOCK(this);
 	if(state != STATE_DISABLED)
 	{
 		state = STATE_DEFAULT;
@@ -294,16 +308,19 @@ void GuiElement::ResetState()
 
 void GuiElement::SetClickable(bool c)
 {
+	LOCK(this);
 	clickable = c;
 }
 
 void GuiElement::SetSelectable(bool s)
 {
+	LOCK(this);
 	selectable = s;
 }
 
 void GuiElement::SetHoldable(bool d)
 {
+	LOCK(this);
 	holdable = d;
 }
 
@@ -335,6 +352,7 @@ bool GuiElement::IsHoldable()
 
 void GuiElement::SetFocus(int f)
 {
+	LOCK(this);
 	focus = f;
 }
 
@@ -345,6 +363,7 @@ int GuiElement::IsFocused()
 
 void GuiElement::SetTrigger(GuiTrigger * t)
 {
+	LOCK(this);
 	if(!trigger[0])
 		trigger[0] = t;
 	else if(!trigger[1])
@@ -363,6 +382,7 @@ void GuiElement::SetTrigger(GuiTrigger * t)
 
 void GuiElement::SetTrigger(u8 i, GuiTrigger * t)
 {
+	LOCK(this);
 	trigger[i] = t;
 }
 
@@ -373,6 +393,7 @@ bool GuiElement::Rumble()
 
 void GuiElement::SetRumble(bool r)
 {
+	LOCK(this);
 	rumble = r;
 }
 
@@ -383,6 +404,7 @@ int GuiElement::GetEffect()
 
 void GuiElement::SetEffect(int eff, int amount, int target)
 {
+	LOCK(this);
 	if(eff & EFFECT_SLIDE_IN)
 	{
 		// these calculations overcompensate a little
@@ -411,6 +433,7 @@ void GuiElement::SetEffect(int eff, int amount, int target)
 
 void GuiElement::SetEffectOnOver(int eff, int amount, int target)
 {
+	LOCK(this);
 	effectsOver |= eff;
 	effectAmountOver = amount;
 	effectTargetOver = target;
@@ -423,6 +446,7 @@ void GuiElement::SetEffectGrow()
 
 void GuiElement::UpdateEffects()
 {
+	LOCK(this);
 	if(effects & (EFFECT_SLIDE_IN | EFFECT_SLIDE_OUT))
 	{
 		if(effects & EFFECT_SLIDE_IN)
@@ -530,23 +554,27 @@ void GuiElement::UpdateEffects()
 
 void GuiElement::Update(GuiTrigger * t)
 {
+	LOCK(this);
 	if(updateCB)
 		updateCB(this);
 }
 
 void GuiElement::SetUpdateCallback(UpdateCallback u)
 {
+	LOCK(this);
 	updateCB = u;
 }
 
 void GuiElement::SetPosition(int xoff, int yoff)
 {
+	LOCK(this);
 	xoffset = xoff;
 	yoffset = yoff;
 }
 
 void GuiElement::SetAlignment(int hor, int vert)
 {
+	LOCK(this);
 	alignmentHor = hor;
 	alignmentVert = vert;
 }
@@ -581,4 +609,22 @@ bool GuiElement::IsInside(int x, int y)
 	&& y > this->GetTop() && y < (this->GetTop()+height))
 		return true;
 	return false;
+}
+void GuiElement::Lock()
+{
+	LWP_MutexLock(mutex);
+}
+void GuiElement::Unlock()
+{
+	LWP_MutexUnlock(mutex);
+}
+
+
+SimpleLock::SimpleLock(GuiElement *e) : element(e)
+{
+	element->Lock();
+}
+SimpleLock::~SimpleLock()
+{
+	element->Unlock();
 }

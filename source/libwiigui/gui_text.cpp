@@ -72,9 +72,9 @@ GuiText::~GuiText()
 
 void GuiText::SetText(const char * t)
 {
+	LOCK(this);
 	if(text)
 		delete text;
-
 	text = NULL;
 
 	if(t)
@@ -93,27 +93,32 @@ void GuiText::SetPresets(int sz, GXColor c, int w, u16 s, int h, int v)
 
 void GuiText::SetFontSize(int s)
 {
+	LOCK(this);
 	size = s;
 }
 
 void GuiText::SetMaxWidth(int w)
 {
+	LOCK(this);
 	maxWidth = w;
 }
 
 void GuiText::SetColor(GXColor c)
 {
+	LOCK(this);
 	color = c;
 	alpha = c.a;
 }
 
 void GuiText::SetStyle(u16 s)
 {
+	LOCK(this);
 	style = s;
 }
 
 void GuiText::SetAlignment(int hor, int vert)
 {
+	LOCK(this);
 	style = 0;
 
 	switch(hor)
@@ -149,13 +154,30 @@ void GuiText::SetAlignment(int hor, int vert)
  */
 void GuiText::SetFont(FreeTypeGX *f)
 {
+	LOCK(this);
 	font = f;
 }
+
+int GuiText::GetTextWidth()
+{
+	LOCK(this);
+	int newSize = size*this->GetScale();
+
+	if(newSize != currentSize)
+	{
+		//fontSystem->changeSize(newSize);
+		(font ? font : fontSystem)->changeSize(newSize);
+		currentSize = newSize;
+	}
+	return (font ? font : fontSystem)->getWidth(text);
+} 
+
 /**
  * Draw the text on screen
  */
 void GuiText::Draw()
 {
+	LOCK(this);
 	if(!text)
 		return;
 

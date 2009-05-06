@@ -92,6 +92,9 @@ u8 * GuiImage::GetImage()
 
 void GuiImage::SetImage(GuiImageData * img)
 {
+	LOCK(this);
+	if(imgType == IMAGE_COLOR && image)
+		free(image);
 	image = img->GetImage();
 	width = img->GetWidth();
 	height = img->GetHeight();
@@ -100,6 +103,9 @@ void GuiImage::SetImage(GuiImageData * img)
 
 void GuiImage::SetImage(u8 * img, int w, int h)
 {
+	LOCK(this);
+	if(imgType == IMAGE_COLOR && image)
+		free(image);
 	image = img;
 	width = w;
 	height = h;
@@ -108,16 +114,19 @@ void GuiImage::SetImage(u8 * img, int w, int h)
 
 void GuiImage::SetAngle(float a)
 {
+	LOCK(this);
 	imageangle = a;
 }
 
 void GuiImage::SetTile(int t)
 {
+	LOCK(this);
 	tile = t;
 }
 
 void GuiImage::SetWidescreen(short w)
 {
+	LOCK(this);
 	widescreen = w;
 }
 
@@ -137,6 +146,7 @@ GXColor GuiImage::GetPixel(int x, int y)
 
 void GuiImage::SetPixel(int x, int y, GXColor color)
 {
+	LOCK(this);
 	if(!image || this->GetWidth() <= 0 || x < 0 || y < 0)
 		return;
 
@@ -149,11 +159,13 @@ void GuiImage::SetPixel(int x, int y, GXColor color)
 
 void GuiImage::SetStripe(int s)
 {
+	LOCK(this);
 	stripe = s;
 }
 
 void GuiImage::ColorStripe(int shift)
 {
+	LOCK(this);
 	int x, y;
 	GXColor color;
 	int alt = 0;
@@ -211,6 +223,7 @@ void GuiImage::ColorStripe(int shift)
  */
 void GuiImage::Draw()
 {
+	LOCK(this);
 	if(!image || !this->IsVisible() || tile == 0)
 		return;
 

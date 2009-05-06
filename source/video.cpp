@@ -265,7 +265,7 @@ void Menu_DrawImg(f32 xpos, f32 ypos, u16 width, u16 height, u8 data[],
 //	guMtxConcat(m2,m1,m);
 	guMtxConcat(m1,m2,m);
 
-	guMtxTransApply(m,m, xpos+width,ypos+height,0);
+	guMtxTransApply(m,m, xpos+width+0.5,ypos+height+0.5,0);
 	guMtxConcat (GXmodelView2D, m, mv);
 	GX_LoadPosMtxImm (mv, GX_PNMTX0);
 

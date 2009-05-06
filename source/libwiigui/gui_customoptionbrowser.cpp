@@ -190,12 +190,14 @@ GuiCustomOptionBrowser::~GuiCustomOptionBrowser()
 
 void GuiCustomOptionBrowser::SetCol2Position(int x)
 {
+	LOCK(this);
 	for(int i = 0; i < size; i++)
 		optionVal[i]->SetPosition(x,0);
 }
 
 void GuiCustomOptionBrowser::SetFocus(int f)
 {
+	LOCK(this);
 	focus = f;
 
 	for(int i = 0; i < size; i++)
@@ -207,6 +209,7 @@ void GuiCustomOptionBrowser::SetFocus(int f)
 
 void GuiCustomOptionBrowser::ResetState()
 {
+	LOCK(this);
 	if(state != STATE_DISABLED)
 	{
 		state = STATE_DEFAULT;
@@ -272,6 +275,7 @@ int GuiCustomOptionBrowser::FindMenuItem(int currentItem, int direction)
  */
 void GuiCustomOptionBrowser::Draw()
 {
+	LOCK(this);
 	if(!this->IsVisible())
 		return;
 
@@ -300,7 +304,9 @@ void GuiCustomOptionBrowser::Draw()
 }
 
 void GuiCustomOptionBrowser::Update(GuiTrigger * t)
-{	int next, prev, lang = options->length;
+{
+	LOCK(this);
+	int next, prev, lang = options->length;
 
 	if(state == STATE_DISABLED || !t)
 		return;

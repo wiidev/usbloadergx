@@ -2438,6 +2438,7 @@ static int MenuDiscList()
 	GuiImageData ttsettings(tooltip_png);
 	GuiImage ttsettingsImg(&ttsettings);
 	ttsettingsImg.SetWidescreen(CFG.widescreen);
+	GuiTooltip tt_settings("Settings");
 
 	GuiImage settingsBtnImg(&btnSettings);
 	settingsBtnImg.SetWidescreen(CFG.widescreen); //added
@@ -2452,8 +2453,10 @@ static int MenuDiscList()
 	settingsBtn.SetSoundClick(&btnClick);
 	settingsBtn.SetTrigger(&trigA);
 	settingsBtn.SetEffectGrow();
+//	if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0)
+//		settingsBtn.SetToolTip(&ttsettingsImg,&ttsettingsTxt,65,-30);
 	if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0)
-		settingsBtn.SetToolTip(&ttsettingsImg,&ttsettingsTxt,65,-30);
+		settingsBtn.SetToolTip(&tt_settings,65,-30);
 
 	GuiText tthomeTxt("Back to HBC or Wii Menu", 22, (GXColor){0, 0, 0, 255});	//TOOLTIP DATA FOR HOME BUTTON
 	GuiImageData tthome(tooltip_large_png);
@@ -2581,6 +2584,11 @@ static int MenuDiscList()
 	gameBrowser.SetPosition(THEME.selection_x, THEME.selection_y);
 	gameBrowser.SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
 
+    GuiText clockTimeBack("88:88", 40, (GXColor){138, 138, 138, 64});
+    clockTimeBack.SetAlignment(THEME.clockAlign, ALIGN_BOTTOM);
+    clockTimeBack.SetPosition(THEME.clock_x, THEME.clock_y);
+	clockTimeBack.SetFont(fontClock);
+
     GuiText clockTime(theTime, 40, (GXColor){138, 138, 138, 255});
     clockTime.SetAlignment(THEME.clockAlign, ALIGN_BOTTOM);
     clockTime.SetPosition(THEME.clock_x, THEME.clock_y);
@@ -2608,6 +2616,7 @@ static int MenuDiscList()
 
     if(Settings.hddinfo == Clock)
     {
+		w.Append(&clockTimeBack);
 		w.Append(&clockTime);
     }
 

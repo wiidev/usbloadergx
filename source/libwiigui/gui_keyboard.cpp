@@ -242,6 +242,7 @@ GuiKeyboard::~GuiKeyboard()
 
 void GuiKeyboard::Update(GuiTrigger * t)
 {
+	LOCK(this);
 	if(_elements.size() == 0 || (state == STATE_DISABLED && parentElement))
 		return;
 
