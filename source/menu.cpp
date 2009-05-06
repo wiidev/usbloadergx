@@ -56,8 +56,10 @@ static GuiButton * btnLogo = NULL;
 static GuiImageData * background = NULL;
 static char prozent[10] = "0%";
 static char timet[50] = " ";
+static char sizeshow[20] = " ";
 static GuiText prTxt(prozent, 26, (GXColor){0, 0, 0, 255});
 static GuiText timeTxt(prozent, 26, (GXColor){0, 0, 0, 255});
+static GuiText sizeTxt(sizeshow, 26, (GXColor){0, 0, 0, 255});
 static GuiText *GameIDTxt = NULL;
 static GuiText *GameRegionTxt = NULL;
 static GuiSound * bgMusic = NULL;
@@ -75,6 +77,7 @@ static double progressTotal = 1;
 int godmode = 0;
 int height = 224;
 int width = 160;
+static float gamesize = 0.00;
 static int startat = 0;
 static int offset = 0, networkisinitialized = 0;
 int vol = Settings.volume;
@@ -1522,6 +1525,14 @@ ShowProgress (s32 done, s32 total)
 	//prTxt.SetFont(fontClock);
     sprintf(timet,"Time left: %d:%02d:%02d",h,m,s);
     timeTxt.SetText(timet);
+
+    float gamesizedone = 0.00;
+
+    gamesizedone = gamesize * progressDone/progressTotal;
+
+    sprintf(sizeshow,"%0.2fGB/%0.2fGB", gamesizedone, gamesize);
+    sizeTxt.SetText(sizeshow);
+
 //	timeTxt.SetFont(fontClock);
 	if ((Settings.wsprompt == yes) && (CFG.widescreen)){
 	progressbarImg.SetTile(80*progressDone/progressTotal);}
@@ -1570,17 +1581,23 @@ ProgressWindow(const char *title, const char *msg)
 	GuiImageData progressbar(progressbar_png);
 	//if (Settings.wsprompt == yes){
 	//progressbarImg.SetWidescreen(CFG.widescreen);}///////////
-	
+
 	progressbarImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 	progressbarImg.SetPosition(25, 40);
-	
+
 	GuiText titleTxt(title, 26, (GXColor){70, 70, 10, 255});
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	titleTxt.SetPosition(0,60);
 	GuiText msgTxt(msg, 26, (GXColor){0, 0, 0, 255});
 	msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	msgTxt.SetPosition(0,120);
-	
+
+    timeTxt.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
+	timeTxt.SetPosition(-25,-50);
+
+    sizeTxt.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+	sizeTxt.SetPosition(30, -50);
+
 	if ((Settings.wsprompt == yes) && (CFG.widescreen)){/////////////adjust for widescreen
 		progressbarOutlineImg.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 		progressbarOutlineImg.SetPosition(0, 40);
@@ -1588,13 +1605,14 @@ ProgressWindow(const char *title, const char *msg)
 		progressbarEmptyImg.SetTile(78);
 		progressbarImg.SetPosition(80, 40);
 		msgTxt.SetMaxWidth(380);
+
+		timeTxt.SetPosition(-65,-50);
+		sizeTxt.SetPosition(70, -50);
 	}
 
 	prTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	prTxt.SetPosition(0, 40);
 
-    timeTxt.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
-	timeTxt.SetPosition(0,-50);
 
 	promptWindow.Append(&dialogBoxImg);
 	promptWindow.Append(&titleTxt);
@@ -1611,6 +1629,7 @@ ProgressWindow(const char *title, const char *msg)
 	mainWindow->ChangeFocus(&promptWindow);
 	ResumeGui();
 	promptWindow.Append(&prTxt);
+	promptWindow.Append(&sizeTxt);
     s32 ret;
 
     ret = wbfs_add_disc(hdd, __WBFS_ReadDVD, NULL, ShowProgress, ONLY_GAME_PARTITION, 0);
@@ -2236,7 +2255,7 @@ static int MenuInstall()
 
 		WBFS_DiskSpace(&used, &freespace);
 		u32 estimation = wbfs_estimate_disc(hdd, __WBFS_ReadDVD, NULL, ONLY_GAME_PARTITION);
-		f32 gamesize = ((f32) estimation)/1073741824;
+		gamesize = ((f32) estimation)/1073741824;
 		char gametxt[50];
 
 		sprintf(gametxt, "%s : %.2fGB", name, gamesize);
@@ -2245,7 +2264,7 @@ static int MenuInstall()
 
 		if(choice == 1) {
 
-		sprintf(gametxt, "Installing game %.2fGB:", gamesize);
+		sprintf(gametxt, "Installing game:");
 
 		if (gamesize > freespace) {
 			char errortxt[50];
