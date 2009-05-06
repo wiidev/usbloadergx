@@ -2497,14 +2497,18 @@ static int MenuDiscList()
 	    if(poweroffBtn.GetState() == STATE_CLICKED)
 		{
 
-		    choice = WindowPrompt ("Shutdown System","Are you sure?","Yes","No");
+		    choice = WiiMenuWindowPrompt("How to Shutdown?","Shutdown to Idle","Full Shutdown", "Cancel");
 			if(choice == 1)
 			{
 			    WPAD_Flush(0);
                 WPAD_Disconnect(0);
                 WPAD_Shutdown();
-				Sys_Shutdown();
-				//exit(0);
+				STM_ShutdownToIdle();
+			} else if(choice == 2) {
+			    WPAD_Flush(0);
+                WPAD_Disconnect(0);
+                WPAD_Shutdown();
+                STM_ShutdownToStandby();
 			} else {
 			    poweroffBtn.ResetState();
 			    gameBrowser.SetFocus(1);
@@ -2514,7 +2518,7 @@ static int MenuDiscList()
 		else if(homeBtn.GetState() == STATE_CLICKED)
 		{
 
-			choice = WiiMenuWindowPrompt ("Exit USB ISO Loader ?","Wii Menu","Back to Loader","Back");
+			choice = WiiMenuWindowPrompt("Exit USB ISO Loader ?","Wii Menu","Back to Loader","Back");
 			if(choice == 1)
 			{
                 SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0); // Back to System Menu
@@ -3387,7 +3391,7 @@ static int MenuSettings()
 			sprintf(options2.name[5], "Clock"); //CLOCK
 			sprintf(options2.name[6], "Rumble"); //RUMBLE
 			sprintf(options2.name[7], "Volume");
-			sprintf(options2.name[8], " ");
+			sprintf(options2.name[8], "Tooltips");
 
 			HaltGui();
 			w.Append(&settingsbackgroundbtn);
@@ -3408,11 +3412,11 @@ static int MenuSettings()
 			mainWindow->Append(&page1Btn);
 			mainWindow->Append(&page2Btn);
 
-			sprintf(options2.name[0], "Tooltips");
-			sprintf(options2.name[1], "Password");
-			sprintf(options2.name[2], "Boot Loader in");
-			sprintf(options2.name[3], "Flip X");
-			sprintf(options2.name[4], "Quick Boot");
+			sprintf(options2.name[0], "Password");
+			sprintf(options2.name[1], "Boot Loader in");
+			sprintf(options2.name[2], "Flip X");
+			sprintf(options2.name[3], "Quick Boot");
+			sprintf(options2.name[4], " ");
 			sprintf(options2.name[5], " ");
 			sprintf(options2.name[6], " ");
 			sprintf(options2.name[7], " ");
@@ -3441,6 +3445,8 @@ static int MenuSettings()
 					Settings.rumble = 0; //RUMBLE
 				if(Settings.volume > 10)
 					Settings.volume = 0;
+                if (Settings.tooltips > 1 )
+					Settings.tooltips = 0;
 
 				if (Settings.video == discdefault) sprintf (options2.value[0],"Disc Default");
 				else if (Settings.video == systemdefault) sprintf (options2.value[0],"System Default");
@@ -3490,7 +3496,9 @@ static int MenuSettings()
 				else if (Settings.volume == v100) sprintf (options2.value[7],"100");
 				else if (Settings.volume == v0) sprintf (options2.value[7],"Off");
 
-				sprintf (options2.value[8]," ");
+
+                if (Settings.tooltips == TooltipsOn) sprintf (options2.value[8],"On");
+				else if (Settings.tooltips == TooltipsOff) sprintf (options2.value[8],"Off");
 
 				ret = optionBrowser2.GetClickedOption();
 
@@ -3520,13 +3528,14 @@ static int MenuSettings()
 					case 7:
 						Settings.volume++;
 						break;
+                    case 8:
+						Settings.tooltips++;
+						break;
 					}
 			}
 
 			if ( pageToDisplay == 2 )
 			{
-				if ( Settings.tooltips > 1 )
-					Settings.tooltips = 0;
 				if ( Settings.cios > 1 )
 					Settings.cios = 0;
 				if ( Settings.xflip > 1 )
@@ -3534,35 +3543,33 @@ static int MenuSettings()
 				if ( Settings.qboot > 1 )
 					Settings.qboot = 0;
 
-				if (Settings.tooltips == TooltipsOn) sprintf (options2.value[0],"On");
-				else if (Settings.tooltips == TooltipsOff) sprintf (options2.value[0],"Off");
 
-				if ( CFG.godmode != 1) sprintf(options2.value[1], "********");
-				else if (!strcmp("", Settings.unlockCode)) sprintf(options2.value[1], "<not set>");
-				else sprintf(options2.value[1], Settings.unlockCode);
+				if ( CFG.godmode != 1) sprintf(options2.value[0], "********");
+				else if (!strcmp("", Settings.unlockCode)) sprintf(options2.value[0], "<not set>");
+				else sprintf(options2.value[0], Settings.unlockCode);
 
-                if (Settings.cios == ios249) sprintf (options2.value[2],"cIOS 249");
-				else if (Settings.cios == ios222) sprintf (options2.value[2],"cIOS 222");
+                if (Settings.cios == ios249) sprintf (options2.value[1],"cIOS 249");
+				else if (Settings.cios == ios222) sprintf (options2.value[1],"cIOS 222");
 
-				if (Settings.xflip == no) sprintf (options2.value[3],"No");
-				else if (Settings.xflip == yes) sprintf (options2.value[3],"Yes");
+				if (Settings.xflip == no) sprintf (options2.value[2],"No");
+				else if (Settings.xflip == yes) sprintf (options2.value[2],"Yes");
 
-				if (Settings.qboot == no) sprintf (options2.value[4],"No");
-				else if (Settings.qboot == yes) sprintf (options2.value[4],"Yes");
+				if (Settings.qboot == no) sprintf (options2.value[3],"No");
+				else if (Settings.qboot == yes) sprintf (options2.value[3],"Yes");
 
+				sprintf (options2.value[4]," ");
 				sprintf (options2.value[5]," ");
 				sprintf (options2.value[6]," ");
 				sprintf (options2.value[7]," ");
 				sprintf (options2.value[8]," ");
 
+
 				ret = optionBrowser2.GetClickedOption();
 
 				switch (ret)
 				{
-					case 0:
-						Settings.tooltips++;
-						break;
-					case 1: // Modify Password
+
+					case 0: // Modify Password
 						if ( CFG.godmode == 1)
 						{
 							mainWindow->Remove(&optionBrowser2);
@@ -3590,13 +3597,13 @@ static int MenuSettings()
 							WindowPrompt("Password change","Console should be unlocked to modify it.","OK",0);
 						}
 						break;
-					case 2:
+					case 1:
 						Settings.cios++;
 						break;
-					case 3:
+					case 2:
 						Settings.xflip++;
 						break;
-					case 4:
+					case 3:
 						Settings.qboot++;
 						break;
 					}
