@@ -253,6 +253,7 @@ void CFG_Default(int widescreen) // -1 = non forced Mode
 	THEME.gameText_r = 0;
 	THEME.gameText_g = 0;
 	THEME.gameText_b = 0;
+	THEME.pagesize = 9;
 }
 
 
@@ -598,6 +599,13 @@ void theme_set(char *name, char *val)
 		}
 	}
 
+	else if (strcmp(cfg_name, "pagesize") == 0) {
+		short x;
+		if (sscanf(val, "%hd", &x) == 1) {
+			THEME.pagesize = x;
+		}
+	}
+	
 	cfg_bool("show_id", &THEME.showID);
 	cfg_bool("show_tooltip", &THEME.showToolTip);
 	cfg_bool("show_hddinfo", &THEME.showHDD);

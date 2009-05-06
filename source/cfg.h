@@ -123,6 +123,7 @@ struct THEME
 	short gameText_r;
 	short gameText_g;
 	short gameText_b;
+	short pagesize;
 };
 
 extern struct CFG CFG;

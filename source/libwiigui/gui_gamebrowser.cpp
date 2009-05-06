@@ -25,8 +25,8 @@ GuiGameBrowser::GuiGameBrowser(int w, int h, struct discHdr * l, int gameCnt, co
 	height = h;
 	this->gameCnt = gameCnt;
 	gameList = l;
-	pagesize = (gameCnt > PAGESIZE) ? PAGESIZE : gameCnt;
-	scrollbaron = (gameCnt > PAGESIZE) ? 1 : 0;
+	pagesize = (gameCnt > THEME.pagesize) ? THEME.pagesize : gameCnt;
+	scrollbaron = (gameCnt > THEME.pagesize) ? 1 : 0;
 	selectable = true;
 	listOffset = (offset == 0) ? this->FindMenuItem(-1, 1) : offset;
 	selectedItem = selected - offset;
