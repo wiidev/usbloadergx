@@ -68,6 +68,10 @@ void ExitApp()
 	ShutoffRumble();
 	StopGX();
 	ShutdownAudio();
+
+    fatUnmount("SD");
+	__io_wiisd.shutdown();
+
     //WPAD_Flush(0);
     //WPAD_Disconnect(0);
     //WPAD_Shutdown();
@@ -134,7 +138,7 @@ main(int argc, char *argv[])
 
     __io_wiisd.startup();
 	fatMountSimple("SD", &__io_wiisd);
-	
+
 	Sys_Init();
 	//Video_SetMode();
 	//Con_Init(CONSOLE_XCOORD, CONSOLE_YCOORD, CONSOLE_WIDTH, CONSOLE_HEIGHT);

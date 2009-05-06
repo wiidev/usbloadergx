@@ -74,9 +74,6 @@ int Sys_IosReload(int IOS)
     WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
     WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
 
-    __io_wiisd.startup();
-    fatMountSimple("SD", &__io_wiisd);
-
     if(IOS == 249 || IOS == 222) {
     ret = WBFS_Init(WBFS_DEVICE_USB);
     ret = Disc_Init();

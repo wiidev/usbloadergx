@@ -423,7 +423,7 @@ WiiMenuWindowPrompt(const char *title, const char *btn1Label, const char *btn2La
 	btn3.SetTrigger(&trigB);
 	btn3.SetTrigger(&trigA);
 	btn3.SetEffectGrow();
-	
+
 	if (CFG.widescreen){/////////////adjust buttons for widescreen
 		btn1.SetPosition(-70, -120);
 		btn2.SetPosition(70, -120);
@@ -549,7 +549,7 @@ WindowPrompt(const char *title, const char *msg, const char *btn1Label, const ch
 	btn2.SetTrigger(&trigB);
 	btn2.SetTrigger(&trigA);
 	btn2.SetEffectGrow();
-	
+
 	if (CFG.widescreen){/////////////adjust buttons for widescreen
 		msgTxt.SetMaxWidth(330);
 		if(btn2Label)
@@ -563,7 +563,7 @@ WindowPrompt(const char *title, const char *msg, const char *btn1Label, const ch
 		btn1.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
 		btn1.SetPosition(0, -80);
 	}
-	}	
+	}
 	promptWindow.Append(&dialogBoxImg);
 	promptWindow.Append(&titleTxt);
 	promptWindow.Append(&msgTxt);
@@ -689,7 +689,7 @@ DownloadWindowPrompt()
 	btn4.SetSoundClick(&btnClick);
 	btn4.SetTrigger(&trigA);
 	btn4.SetEffectGrow();
-	
+
 	if (CFG.widescreen){/////////////adjust buttons for widescreen
 		btn1.SetPosition(-70, -120);
 		btn2.SetPosition(70, -120);
@@ -1212,7 +1212,7 @@ DiscWait(const char *title, const char *msg, const char *btn1Label, const char *
 	btn2.SetSoundClick(&btnClick);
 	btn2.SetTrigger(&trigA);
 	btn2.SetEffectGrow();
-	
+
 	if (CFG.widescreen){/////////////adjust buttons for widescreen
 		msgTxt.SetMaxWidth(380);
 		if(btn2Label)
@@ -1358,7 +1358,7 @@ int NetworkInitPromp(int choice2)
 	btn1.SetTrigger(&trigA);
 	btn1.SetState(STATE_SELECTED);
 	btn1.SetEffectGrow();
-	
+
 	if (CFG.widescreen){/////////////adjust buttons for widescreen
 		btn1.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
 		btn1.SetPosition(0, -80);
@@ -1560,7 +1560,7 @@ ProgressWindow(const char *title, const char *msg)
 
     timeTxt.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
 	timeTxt.SetPosition(0,-50);
-	
+
 	if (CFG.widescreen){/////////////adjust for widescreen
 		progressbarOutlineImg.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 		progressbarOutlineImg.SetPosition(0, 40);
@@ -1673,7 +1673,7 @@ ProgressDownloadWindow(int choice2)
 	btn1.SetTrigger(&trigA);
 	btn1.SetState(STATE_SELECTED);
 	btn1.SetEffectGrow();
-	
+
 	if (CFG.widescreen){/////////////adjust for widescreen
 		progressbarOutlineImg.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 		progressbarOutlineImg.SetPosition(0, 40);
@@ -1724,7 +1724,7 @@ ProgressDownloadWindow(int choice2)
 	sprintf(prozent, "%i%%", 100*i/cntMissFiles);
 	prTxt.SetText(prozent);
 	prTxt.SetFont(fontClock);
-	
+
 	if (CFG.widescreen){/////////////adjust for widescreen
 		progressbarImg.SetPosition(80,40);
 		progressbarImg.SetTile(80*i/cntMissFiles);
@@ -3429,7 +3429,7 @@ static int MenuSettings()
     GuiText ttpage2Txt("Go to Page 2", 20, (GXColor){0, 0, 0, 255});
     GuiImage ttpage2Img(&ttpage);
 	//ttpage2Img.SetWidescreen(CFG.widescreen);//////
-	
+
     if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0)
     page2Btn.SetToolTip(&ttpage2Img,&ttpage2Txt,105,0);
 
@@ -4289,8 +4289,7 @@ int MainMenu(int menu)
 	delete coverImg;
 
 	mainWindow = NULL;
-	fatUnmount("SD");
-	__io_wiisd.shutdown();
+
     ExitApp();
 
     struct discHdr *header = &gameList[gameSelected];
