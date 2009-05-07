@@ -2586,15 +2586,16 @@ static int MenuDiscList()
 	gameBrowser.SetPosition(THEME.selection_x, THEME.selection_y);
 	gameBrowser.SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
 
-    GuiText clockTimeBack("88:88", 40, (GXColor){138, 138, 138, 64});
+    GuiText clockTimeBack("88:88", 40, (GXColor){138, 138, 138, 40});
     clockTimeBack.SetAlignment(THEME.clockAlign, ALIGN_BOTTOM);
     clockTimeBack.SetPosition(THEME.clock_x, THEME.clock_y);
 	clockTimeBack.SetFont(fontClock);
 
-    GuiText clockTime(theTime, 40, (GXColor){138, 138, 138, 255});
+    GuiText clockTime(theTime, 40, (GXColor){138, 138, 138, 240});
     clockTime.SetAlignment(THEME.clockAlign, ALIGN_BOTTOM);
     clockTime.SetPosition(THEME.clock_x, THEME.clock_y);
 	clockTime.SetFont(fontClock);
+
 
     HaltGui();
 	GuiWindow w(screenwidth, screenheight);
@@ -3464,7 +3465,7 @@ static int MenuSettings()
 	GuiImage page1dImg(&page1d);
 	GuiButton page1Btn(page1.GetWidth(), page1.GetHeight());
 	page1Btn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	page1Btn.SetPosition(202, 90);
+	page1Btn.SetPosition(-202, 90);
 	page1Btn.SetImage(&page1Img);
 	page1Btn.SetSoundOver(&btnSoundOver);
 	page1Btn.SetSoundClick(&btnClick);
@@ -3482,7 +3483,7 @@ static int MenuSettings()
 	GuiImage page2dImg(&page2d);
 	GuiButton page2Btn(page2.GetWidth(), page2.GetHeight());
 	page2Btn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	page2Btn.SetPosition(202, 186);
+	page2Btn.SetPosition(-202, 186);
 	page2Btn.SetImage(&page2dImg);
 	page2Btn.SetSoundOver(&btnSoundOver);
 	page2Btn.SetSoundClick(&btnClick);
