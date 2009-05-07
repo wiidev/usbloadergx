@@ -1520,7 +1520,7 @@ ShowProgress (s32 done, s32 total)
     progressTotal = total;
 	progressDone = done;
 
-	sprintf(prozent, "%0.2f%%", percent);
+	sprintf(prozent, "%0.2f", percent);
     prTxt.SetText(prozent);
 	//prTxt.SetFont(fontClock);
     sprintf(timet,"Time left: %d:%02d:%02d",h,m,s);
@@ -1561,42 +1561,45 @@ ProgressWindow(const char *title, const char *msg)
 	GuiImageData dialogBox(dialogue_box_png);
 	GuiImage dialogBoxImg(&dialogBox);
 	if (Settings.wsprompt == yes){
-	dialogBoxImg.SetWidescreen(CFG.widescreen);}///////////
+	dialogBoxImg.SetWidescreen(CFG.widescreen);}
 
 	GuiImageData progressbarOutline(progressbar_outline_png);
 	GuiImage progressbarOutlineImg(&progressbarOutline);
 	if (Settings.wsprompt == yes){
-	progressbarOutlineImg.SetWidescreen(CFG.widescreen);}///////////
+	progressbarOutlineImg.SetWidescreen(CFG.widescreen);}
 	progressbarOutlineImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 	progressbarOutlineImg.SetPosition(25, 40);
 
 	GuiImageData progressbarEmpty(progressbar_empty_png);
 	GuiImage progressbarEmptyImg(&progressbarEmpty);
-	//if (Settings.wsprompt == yes){
-	//progressbarEmptyImg.SetWidescreen(CFG.widescreen);}///////////
 	progressbarEmptyImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 	progressbarEmptyImg.SetPosition(25, 40);
 	progressbarEmptyImg.SetTile(100);
 
 	GuiImageData progressbar(progressbar_png);
-	//if (Settings.wsprompt == yes){
-	//progressbarImg.SetWidescreen(CFG.widescreen);}///////////
 
 	progressbarImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 	progressbarImg.SetPosition(25, 40);
 
-	GuiText titleTxt(title, 26, (GXColor){70, 70, 10, 255});
+	GuiText titleTxt(title, 26, (GXColor){0, 0, 0, 255});
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	titleTxt.SetPosition(0,60);
 	GuiText msgTxt(msg, 26, (GXColor){0, 0, 0, 255});
 	msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	msgTxt.SetPosition(0,120);
+	
+	GuiText prsTxt("%", 26, (GXColor){0, 0, 0, 255});
+	prsTxt.SetAlignment(ALIGN_RIGHT, ALIGN_MIDDLE);
+	prsTxt.SetPosition(-188,40);
 
-    timeTxt.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-	timeTxt.SetPosition(-25,-50);
+    timeTxt.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+	timeTxt.SetPosition(275,-50);
 
     sizeTxt.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-	sizeTxt.SetPosition(30, -50);
+	sizeTxt.SetPosition(50, -50);
+	
+	prTxt.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
+	prTxt.SetPosition(200, 40);
 
 	if ((Settings.wsprompt == yes) && (CFG.widescreen)){/////////////adjust for widescreen
 		progressbarOutlineImg.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
@@ -1606,13 +1609,11 @@ ProgressWindow(const char *title, const char *msg)
 		progressbarImg.SetPosition(80, 40);
 		msgTxt.SetMaxWidth(380);
 
-		timeTxt.SetPosition(-65,-50);
-		sizeTxt.SetPosition(70, -50);
+		timeTxt.SetPosition(250,-50);
+		timeTxt.SetFontSize(22);
+		sizeTxt.SetPosition(90, -50);
+		sizeTxt.SetFontSize(22);
 	}
-
-	prTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-	prTxt.SetPosition(0, 40);
-
 
 	promptWindow.Append(&dialogBoxImg);
 	promptWindow.Append(&titleTxt);
@@ -1621,6 +1622,7 @@ ProgressWindow(const char *title, const char *msg)
     promptWindow.Append(&progressbarImg);
     promptWindow.Append(&progressbarOutlineImg);
     promptWindow.Append(&prTxt);
+	promptWindow.Append(&prsTxt);
     promptWindow.Append(&timeTxt);
 
 	HaltGui();
@@ -1691,7 +1693,7 @@ ProgressDownloadWindow(int choice2)
 	progressbarImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 	progressbarImg.SetPosition(25, 40);
 
-	GuiText titleTxt("Downloading file:", 26, (GXColor){70, 70, 10, 255});
+	GuiText titleTxt("Downloading file:", 26, (GXColor){0, 0, 0, 255});
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	titleTxt.SetPosition(0,60);
     char msg[25] = " ";
@@ -3462,7 +3464,7 @@ static int MenuSettings()
 	GuiImage page1dImg(&page1d);
 	GuiButton page1Btn(page1.GetWidth(), page1.GetHeight());
 	page1Btn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	page1Btn.SetPosition(-201, 90);
+	page1Btn.SetPosition(202, 90);
 	page1Btn.SetImage(&page1Img);
 	page1Btn.SetSoundOver(&btnSoundOver);
 	page1Btn.SetSoundClick(&btnClick);
@@ -3480,7 +3482,7 @@ static int MenuSettings()
 	GuiImage page2dImg(&page2d);
 	GuiButton page2Btn(page2.GetWidth(), page2.GetHeight());
 	page2Btn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	page2Btn.SetPosition(-201, 186);
+	page2Btn.SetPosition(202, 186);
 	page2Btn.SetImage(&page2dImg);
 	page2Btn.SetSoundOver(&btnSoundOver);
 	page2Btn.SetSoundClick(&btnClick);
@@ -3558,17 +3560,19 @@ static int MenuSettings()
 			w.Append(btnLogo);
 
 			mainWindow->Append(&w);
+			mainWindow->Append(&optionBrowser2);
 			mainWindow->Append(&page2Btn);
 			mainWindow->Append(&page1Btn);
-			mainWindow->Append(&optionBrowser2);
+			
 
 			ResumeGui();
 		}
 		else if ( pageToDisplay == 2 )
 		{
+			
+			mainWindow->Append(&optionBrowser2);
 			mainWindow->Append(&page1Btn);
 			mainWindow->Append(&page2Btn);
-			mainWindow->Append(&optionBrowser2);
 
 			sprintf(options2.name[0], "Password");
 			sprintf(options2.name[1], "Boot/Standard");
