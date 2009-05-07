@@ -199,7 +199,7 @@ static void WindowCredits(void * ptr)
 
 	bgMusic->Stop();
 	creditsMusic = new GuiSound(credits_music_ogg, credits_music_ogg_size, SOUND_OGG, 40);
-	creditsMusic->SetVolume(40);
+	creditsMusic->SetVolume(55);
 	creditsMusic->SetLoop(1);
 	creditsMusic->Play();
 
