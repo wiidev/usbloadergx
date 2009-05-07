@@ -1530,7 +1530,7 @@ ShowProgress (s32 done, s32 total)
 
 //	timeTxt.SetFont(fontClock);
 	if ((Settings.wsprompt == yes) && (CFG.widescreen)){
-	progressbarImg.SetTile(80*done/total);}
+	progressbarImg.SetTile(75*done/total);}
 	else {progressbarImg.SetTile(100*done/total);}
 
 }
@@ -1774,7 +1774,7 @@ ProgressDownloadWindow(int choice2)
 
 	if ((Settings.wsprompt == yes) && (CFG.widescreen)){/////////////adjust for widescreen
 		progressbarImg.SetPosition(80,40);
-		progressbarImg.SetTile(80*i/cntMissFiles);
+		progressbarImg.SetTile(75*i/cntMissFiles);
 	}
 	else{
 	progressbarImg.SetTile(100*i/cntMissFiles);}
@@ -2355,7 +2355,8 @@ static int MenuDiscList()
 	struct tm * timeinfo;
 	char theTime[80];
 	int counter = 0;
-
+	time_t lastrawtime=0;
+ 
 	WBFS_DiskSpace(&used, &freespace);
 
     if (!gameCnt) { //if there is no list of games to display
@@ -2407,17 +2408,9 @@ static int MenuDiscList()
 	gamecntTxt.SetAlignment(THEME.gameCntAlign, ALIGN_TOP);
 	gamecntTxt.SetPosition(THEME.gameCnt_x,THEME.gameCnt_y);
 
-	GuiImageData tooltipLarge(tooltip_large_png);
-	GuiImage tooltipLargeImg(&tooltipLarge);
-	if (Settings.wsprompt == yes){
-	tooltipLargeImg.SetWidescreen(CFG.widescreen);}///////////
-
-	GuiText ttinstallTxt("Install a game", 22, (GXColor){0, 0, 0, 255}); //TOOLTIP DATA FOR INSTALL BUTTON
-	GuiImageData ttinstall(tooltip_medium_png);
-	GuiImage ttinstallImg(&ttinstall);
-	if (Settings.wsprompt == yes){
-	ttinstallImg.SetWidescreen(CFG.widescreen);}///////////
-
+	GuiTooltip installBtnTT("Install a game");
+	if (Settings.wsprompt == yes)
+		installBtnTT.SetWidescreen(CFG.widescreen);///////////
 	GuiImage installBtnImg(&btnInstall);
 	GuiImage installBtnImgOver(&btnInstallOver);
 	installBtnImg.SetWidescreen(CFG.widescreen); //added
@@ -2432,13 +2425,11 @@ static int MenuDiscList()
 	installBtn.SetTrigger(&trigA);
 	installBtn.SetEffectGrow();
 	if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0)
-		installBtn.SetToolTip(&ttinstallImg,&ttinstallTxt,175,-30);
+		installBtn.SetToolTip(&installBtnTT,24,-30, ALIGN_LEFT);
 
-	GuiText ttsettingsTxt("Settings", 22, (GXColor){0, 0, 0, 255});		//TOOLTIP DATA FOR SETTINGS BUTTON
-	GuiImageData ttsettings(tooltip_png);
-	GuiImage ttsettingsImg(&ttsettings);
-	ttsettingsImg.SetWidescreen(CFG.widescreen);
-	GuiTooltip tt_settings("Settings");
+	GuiTooltip settingsBtnTT("Settings");
+	if (Settings.wsprompt == yes)
+		settingsBtnTT.SetWidescreen(CFG.widescreen);///////////
 
 	GuiImage settingsBtnImg(&btnSettings);
 	settingsBtnImg.SetWidescreen(CFG.widescreen); //added
@@ -2453,15 +2444,12 @@ static int MenuDiscList()
 	settingsBtn.SetSoundClick(&btnClick);
 	settingsBtn.SetTrigger(&trigA);
 	settingsBtn.SetEffectGrow();
-//	if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0)
-//		settingsBtn.SetToolTip(&ttsettingsImg,&ttsettingsTxt,65,-30);
 	if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0)
-		settingsBtn.SetToolTip(&tt_settings,65,-30);
+		settingsBtn.SetToolTip(&settingsBtnTT,65,-30);
 
-	GuiText tthomeTxt("Back to HBC or Wii Menu", 22, (GXColor){0, 0, 0, 255});	//TOOLTIP DATA FOR HOME BUTTON
-	GuiImageData tthome(tooltip_large_png);
-	GuiImage tthomeImg(&tthome);
-	tthomeImg.SetWidescreen(CFG.widescreen);
+	GuiTooltip homeBtnTT("Back to HBC or Wii Menu");
+	if (Settings.wsprompt == yes)
+		homeBtnTT.SetWidescreen(CFG.widescreen);///////////
 
 	GuiImage homeBtnImg(&btnhome);
 	homeBtnImg.SetWidescreen(CFG.widescreen); //added
@@ -2478,12 +2466,11 @@ static int MenuDiscList()
 	homeBtn.SetTrigger(&trigHome);
 	homeBtn.SetEffectGrow();
 	if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0)
-		homeBtn.SetToolTip(&tthomeImg,&tthomeTxt,15,-30);
+		homeBtn.SetToolTip(&homeBtnTT,15,-30);
 
-	GuiText ttpoweroffTxt("Power off the Wii", 22, (GXColor){0, 0, 0, 255}); //TOOLTIP DATA FOR POWER BUTTON
-	GuiImageData ttpoweroff(tooltip_medium_png);
-	GuiImage ttpoweroffImg(&ttpoweroff);
-	ttpoweroffImg.SetWidescreen(CFG.widescreen);
+	GuiTooltip poweroffBtnTT("Power off the Wii");
+	if (Settings.wsprompt == yes)
+		poweroffBtnTT.SetWidescreen(CFG.widescreen);///////////
 
 
     GuiImage poweroffBtnImg(&btnpwroff);
@@ -2500,13 +2487,12 @@ static int MenuDiscList()
 	poweroffBtn.SetTrigger(&trigA);
 	poweroffBtn.SetEffectGrow();
 	if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0)
-        poweroffBtn.SetToolTip(&ttpoweroffImg,&ttpoweroffTxt,-10,-30);
+		poweroffBtn.SetToolTip(&poweroffBtnTT,-10,-30);
 
 
-	GuiText ttsdcardTxt("Reload SD", 22, (GXColor){0, 0, 0, 255});		//TOOLTIP DATA FOR SETTINGS BUTTON
-	GuiImageData ttsdcard(tooltip_png);
-	GuiImage ttsdcardImg(&ttsdcard);
-	ttsdcardImg.SetWidescreen(CFG.widescreen);
+	GuiTooltip sdcardBtnTT("Reload SD");
+	if (Settings.wsprompt == yes)
+		sdcardBtnTT.SetWidescreen(CFG.widescreen);///////////
 
 	GuiImage sdcardImg(&btnsdcard);
 	sdcardImg.SetWidescreen(CFG.widescreen);
@@ -2519,26 +2505,26 @@ static int MenuDiscList()
 	sdcardBtn.SetTrigger(&trigA);
 	sdcardBtn.SetEffectGrow();
 	if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0)
-		sdcardBtn.SetToolTip(&ttsdcardImg,&ttsdcardTxt,95,-40);
+		sdcardBtn.SetToolTip(&sdcardBtnTT,95,-40);
 
 	//Downloading Covers
-	GuiText ttDownloadTxt("Click to Download Covers", 20, (GXColor){0, 0, 0, 255});	//TOOLTIP DATA FOR DOWNLOAD
-	GuiImageData ttDownload(tooltip_large_png);
-	GuiImage ttDownloadImg(&ttDownload);
-	ttDownloadImg.SetWidescreen(CFG.widescreen);
+	GuiTooltip DownloadBtnTT("Click to Download Covers");
+	if (Settings.wsprompt == yes)
+		DownloadBtnTT.SetWidescreen(CFG.widescreen);///////////
 
 	GuiButton DownloadBtn(160,224);
 	DownloadBtn.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	DownloadBtn.SetPosition(THEME.cover_x,THEME.cover_y);//(20, 300);
-	DownloadBtn.SetSoundOver(&btnSoundOver);
 
-	if (CFG.godmode == 1){//only make the button have trigger & tooltip if in godmode
-	DownloadBtn.SetTrigger(&trigA);
-	if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0){
-		DownloadBtn.SetToolTip(&ttDownloadImg,&ttDownloadTxt,205,-30);
+	if (CFG.godmode == 1)
+	{//only make the button have trigger & tooltip if in godmode
+		DownloadBtn.SetSoundOver(&btnSoundOver);
+		DownloadBtn.SetTrigger(&trigA);
+		if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0)
+			DownloadBtn.SetToolTip(&DownloadBtnTT,205,-30);
     }
-    }
-
+	else
+		DownloadBtn.SetRumble(false);
 	#ifdef HW_RVL
 	int i = 0, level;
 	char txt[3];
@@ -2585,12 +2571,12 @@ static int MenuDiscList()
 	gameBrowser.SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
 
     GuiText clockTimeBack("88:88", 40, (GXColor){138, 138, 138, 40});
-    clockTimeBack.SetAlignment(THEME.clockAlign, ALIGN_BOTTOM);
+    clockTimeBack.SetAlignment(THEME.clockAlign, ALIGN_TOP);
     clockTimeBack.SetPosition(THEME.clock_x, THEME.clock_y);
 	clockTimeBack.SetFont(fontClock);
 
     GuiText clockTime(theTime, 40, (GXColor){138, 138, 138, 240});
-    clockTime.SetAlignment(THEME.clockAlign, ALIGN_BOTTOM);
+    clockTime.SetAlignment(THEME.clockAlign, ALIGN_TOP);
     clockTime.SetPosition(THEME.clock_x, THEME.clock_y);
 	clockTime.SetFont(fontClock);
 
@@ -2642,10 +2628,14 @@ static int MenuDiscList()
 	    VIDEO_WaitVSync ();
 
         //CLOCK
-        if ((Settings.hddinfo == Clock)&&(counter % 2000 == 0)) {//only update the clock every 2000 loops
-            time_t rawtime = time(0);								//this fixes code dump caused by the clock
-            timeinfo = localtime (&rawtime);
-            strftime(theTime, sizeof(theTime), "%H:%M", timeinfo);
+		time_t rawtime = time(0);								//this fixes code dump caused by the clock
+        if (Settings.hddinfo == Clock && rawtime != lastrawtime) {//only update the clock every 2000 loops
+            lastrawtime = rawtime;
+			timeinfo = localtime (&rawtime);
+			if(rawtime & 1)
+				strftime(theTime, sizeof(theTime), "%H:%M", timeinfo);
+			else
+				strftime(theTime, sizeof(theTime), "%H %M", timeinfo);
             clockTime.SetText(theTime);
         }
 		counter++;
@@ -3469,12 +3459,12 @@ static int MenuSettings()
 	page1Btn.SetSoundClick(&btnClick);
 	page1Btn.SetTrigger(&trigA);
 
-	GuiImageData ttpage(tooltip_png);
-	    GuiText ttpage1Txt("Go to Page 1", 20, (GXColor){0, 0, 0, 255});
-    GuiImage ttpage1Img(&ttpage);
+	GuiTooltip page1BtnTT("Go to Page 1");
+	if (Settings.wsprompt == yes)
+		page1BtnTT.SetWidescreen(CFG.widescreen);///////////
 
-    if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0)
-    page1Btn.SetToolTip(&ttpage1Img,&ttpage1Txt,105, 15);
+	if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0)
+		page1Btn.SetToolTip(&page1BtnTT,105, 15);
 
 
 	GuiImage page2Img(&page2);
@@ -3487,11 +3477,12 @@ static int MenuSettings()
 	page2Btn.SetSoundClick(&btnClick);
 	page2Btn.SetTrigger(&trigA);
 
-    GuiText ttpage2Txt("Go to Page 2", 20, (GXColor){0, 0, 0, 255});
-    GuiImage ttpage2Img(&ttpage);
+	GuiTooltip page2BtnTT("Go to Page 2");
+	if (Settings.wsprompt == yes)
+		page2BtnTT.SetWidescreen(CFG.widescreen);///////////
 
-    if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0)
-    page2Btn.SetToolTip(&ttpage2Img,&ttpage2Txt,105,0);
+	if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0)
+		page2Btn.SetToolTip(&page2BtnTT,105,0);
 
 	////////////////////////////////
 

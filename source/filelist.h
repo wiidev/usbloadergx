@@ -53,8 +53,17 @@ extern const u32	button_click_pcm_size;
 extern const u8		button_click2_pcm[];
 extern const u32	button_click2_pcm_size;
 
-extern const u8     tooltip_png[];
-extern const u32    tooltip_png_size;
+///extern const u8     tooltip_png[];
+///extern const u32    tooltip_png_size;
+
+extern const u8     tooltip_left_png[];
+extern const u32    tooltip_left_png_size;
+
+extern const u8     tooltip_tile_png[];
+extern const u32    tooltip_tile_png_size;
+
+extern const u8     tooltip_right_png[];
+extern const u32    tooltip_right_png_size;
 
 extern const u8     startgame_arrow_left_png[];
 extern const u32    startgame_arrow_left_png_size;
@@ -62,11 +71,11 @@ extern const u32    startgame_arrow_left_png_size;
 extern const u8     startgame_arrow_right_png[];
 extern const u32    startgame_arrow_right_png_size;
 
-extern const u8     tooltip_medium_png[];
-extern const u32    tooltip_medium_png_size;
+///extern const u8     tooltip_medium_png[];
+///extern const u32    tooltip_medium_png_size;
 
-extern const u8     tooltip_large_png[];
-extern const u32    tooltip_large_png_size;
+///extern const u8     tooltip_large_png[];
+///extern const u32    tooltip_large_png_size;
 
 extern const u8		credits_bg_png[];
 extern const u32	credits_bg_png_size;

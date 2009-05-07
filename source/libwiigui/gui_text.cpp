@@ -30,6 +30,7 @@ GuiText::GuiText(const char * t, int s, GXColor c)
 	style = FTGX_JUSTIFY_CENTER | FTGX_ALIGN_MIDDLE;
 	maxWidth = 0;
 	font = NULL;
+	widescreen = 0; //added
 
 	alignmentHor = ALIGN_CENTRE;
 	alignmentVert = ALIGN_MIDDLE;
@@ -50,6 +51,7 @@ GuiText::GuiText(const char * t)
 	style = presetStyle;
 	maxWidth = presetMaxWidth;
 	font = NULL;
+	widescreen = 0; //added
 
 	alignmentHor = presetAlignmentHor;
 	alignmentVert = presetAlignmentVert;
@@ -166,7 +168,7 @@ int GuiText::GetTextWidth()
 	if(newSize != currentSize)
 	{
 		//fontSystem->changeSize(newSize);
-		(font ? font : fontSystem)->changeSize(newSize);
+		(font ? font : fontSystem)->changeSize(newSize, widescreen ? (newSize*3)>>2 : 0);
 		currentSize = newSize;
 	}
 	return (font ? font : fontSystem)->getWidth(text);
@@ -192,7 +194,7 @@ void GuiText::Draw()
 	if(newSize != currentSize)
 	{
 		//fontSystem->changeSize(newSize);
-		(font ? font : fontSystem)->changeSize(newSize);
+		(font ? font : fontSystem)->changeSize(newSize, widescreen ? (newSize*3)>>2 : 0);
 		currentSize = newSize;
 	}
 

@@ -301,7 +301,7 @@ class GuiElement
 		void SetScale(float s);
 		//!Gets the element's current scale
 		//!Considers scale, scaleDyn, and the parent element's GetScale() value
-		float GetScale();
+		virtual float GetScale();
 		//!Set a new GuiTrigger for the element
 		//!\param t Pointer to GuiTrigger
 		void SetTrigger(GuiTrigger * t);
@@ -551,7 +551,7 @@ class GuiImage : public GuiElement
 		//!Sets the number of times to draw the image horizontally
 		//!\param t Number of times to draw the image
 		void SetTile(int t);
-		// not NULL set horizontal scale to 0.8 //added
+		// not NULL set horizontal scale to 0.75 //added
 		void SetWidescreen(short w);
 		//!Constantly called to draw the image
 		void Draw();
@@ -641,6 +641,8 @@ class GuiText : public GuiElement
 		void SetFont(FreeTypeGX *f);
 		//!Get the Horizontal Size of Text
 		int GetTextWidth();
+		// not NULL set horizontal scale to 0.75 //added
+		void SetWidescreen(short w);
 		//!Constantly called to draw the text
 		void Draw();
 	protected:
@@ -650,6 +652,7 @@ class GuiText : public GuiElement
 		u16 style; //!< FreeTypeGX style attributes
 		GXColor color; //!< Font color
 		FreeTypeGX *font;
+		short widescreen; //added
 };
 
 //!Display, manage, and manipulate tooltips in the GUI.
@@ -663,17 +666,20 @@ class GuiTooltip : public GuiElement
 		//!Destructor 
 		~ GuiTooltip(); 
 
+		//!Gets the element's current scale
+		//!Considers scale, scaleDyn, and the parent element's GetScale() value
+		float GetScale();
 		//!Sets the text of the GuiTooltip element 
 		//!\param t Text 
 		void SetText(const char * t); 
+		void SetWidescreen(short w); // timely a dummy
 		//!Constantly called to draw the GuiButton
 		void Draw();
 
 	protected: 
-		static GuiImageData tooltipStd;
-		static GuiImageData tooltipMedium;
-		static GuiImageData tooltipLarge;
-		GuiImage image; //!< Tooltip
+		GuiImage leftImage; //!< Tooltip left-image 
+		GuiImage tileImage; //!< Tooltip tile-image
+		GuiImage rightImage; //!< Tooltip right-image
 		GuiText *text;
 }; 
 
@@ -741,7 +747,7 @@ class GuiButton : public GuiElement
 		//!Constantly called to draw the GuiButtons ToolTip
 		//!Sets the button's Tooltip on over
 		//!\param i Pointer to GuiImage object, t Pointer to GuiText, x & y Positioning
-		void SetToolTip(GuiImage* i, GuiText * t, int x, int y);
+//		void SetToolTip(GuiImage* i, GuiText * t, int x, int y);
 		//!Constantly called to draw the GuiButtons ToolTip
 		//!Sets the button's Tooltip on over
 		//!\param i Pointer to GuiImage object, t Pointer to GuiText, x & y Positioning

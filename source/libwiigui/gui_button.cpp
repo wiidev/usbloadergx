@@ -144,6 +144,7 @@ void GuiButton::SetSoundClick(GuiSound * snd)
 }
 
 //No delay for now
+/*
 void GuiButton::SetToolTip(GuiImage* img, GuiText * txt, int x, int y)
 {
 	LOCK(this);
@@ -162,6 +163,7 @@ void GuiButton::SetToolTip(GuiImage* img, GuiText * txt, int x, int y)
 
 	}
 }
+*/
 void GuiButton::SetToolTip(GuiElement* tt, int x, int y, int h_align, int v_align)
 {
 	LOCK(this);
@@ -210,6 +212,43 @@ void GuiButton::DrawTooltip()
 	if(state == STATE_SELECTED && (toolTip || toolTip2))
 	{
 	    if (time2 == 0)
+		{
+			time(&time1);
+		    time2 = time1;
+		}
+		if(time1 != 0)	// timer läuft
+			time(&time1);
+		
+		if(time1 == 0 || difftime(time1, time2) >= 2)
+		{
+			if(time1 != 0)	// timer gerade abgelaufen
+				if(toolTip2) toolTip2->SetEffect(EFFECT_FADE, 20);
+			time1 = 0;
+			if(toolTip2) toolTip2->Draw();
+			if(toolTip) toolTip->Draw();
+			if (toolTipTxt)
+			{
+				toolTipTxt->Draw();
+			}
+			return;
+        }
+	}
+	else
+	{
+		if(time2 != 0 && time1 == 0) // timer abgelaufen, gerade DESELECT
+			if(toolTip2) toolTip2->SetEffect(EFFECT_FADE, -20);
+		time2 = 0;
+	}
+	if(toolTip2 && toolTip2->GetEffect())
+		toolTip2->Draw();
+}
+/*
+void GuiButton::DrawTooltip()
+{
+	LOCK(this);
+	if(state == STATE_SELECTED && (toolTip || toolTip2))
+	{
+	    if (time2 == 0)
 		    time(&time2);
 
 		    time(&time1);
@@ -226,6 +265,7 @@ void GuiButton::DrawTooltip()
 	else
 		time2 = 0;
 }
+*/
 void GuiButton::ScrollIsOn(int f)
 {
 	LOCK(this);

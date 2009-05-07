@@ -10,18 +10,23 @@
 
 #include "gui.h"
 
-GuiImageData GuiTooltip::tooltipStd(tooltip_png);
-GuiImageData GuiTooltip::tooltipMedium(tooltip_medium_png);
-GuiImageData GuiTooltip::tooltipLarge(tooltip_large_png);
+static GuiImageData tooltipLeft(tooltip_left_png);
+static GuiImageData tooltipTile(tooltip_tile_png);
+static GuiImageData tooltipRight(tooltip_right_png);
 
 
 /**
  * Constructor for the GuiTooltip class. 
  */ 
 GuiTooltip::GuiTooltip(const char *t)
+:
+leftImage(&tooltipLeft), tileImage(&tooltipTile), rightImage(&tooltipRight)
 {
 	text = NULL;
-	image.SetParent(this); 
+	height = leftImage.GetHeight();
+	leftImage.SetParent(this); 
+	tileImage.SetParent(this); 
+	rightImage.SetParent(this); 
 	SetText(t);
 }
 
@@ -31,6 +36,16 @@ GuiTooltip::GuiTooltip(const char *t)
 GuiTooltip::~GuiTooltip()
 {
 	if(text)	delete text;	
+}
+
+float GuiTooltip::GetScale()
+{
+	float s = scale * scaleDyn;
+
+//	if(parentElement)
+//		s *= parentElement->GetScale();
+
+	return s;
 }
 
 /* !Sets the text of the GuiTooltip element 
@@ -44,24 +59,20 @@ void GuiTooltip::SetText(const char * t)
 		delete text;
 		text = NULL;
 	}
-	int t_width = 24;
+	int tile_cnt = 0;
 	if(t && (text = new GuiText(t, 22, (GXColor){0, 0, 0, 255})))
 	{
 		text->SetParent(this); 
-		t_width += text->GetTextWidth();
+		tile_cnt = (text->GetTextWidth()-12) /tileImage.GetWidth();
+		if(tile_cnt < 0) tile_cnt = 0;
 	}
-
-	if(t_width > tooltipMedium.GetWidth())
-		image.SetImage(&tooltipLarge);
-	else if(t_width > tooltipStd.GetWidth())
-		image.SetImage(&tooltipMedium);
-	else
-		image.SetImage(&tooltipStd);
-	image.SetPosition(0, 0);
-	width = image.GetWidth();
-	height = image.GetHeight();
+	tileImage.SetPosition(leftImage.GetWidth(), 0); 
+	tileImage.SetTile(tile_cnt);
+	rightImage.SetPosition(leftImage.GetWidth() + tile_cnt * tileImage.GetWidth(), 0); 
+	width = leftImage.GetWidth() + tile_cnt * tileImage.GetWidth() + rightImage.GetWidth();
 }
 
+void GuiTooltip::SetWidescreen(short){}
 /*
  * Draw the Tooltip on screen
  */
@@ -70,7 +81,9 @@ void GuiTooltip::Draw()
 	LOCK(this);
 	if(!this->IsVisible()) return; 
 
-	image.Draw(); 
+	leftImage.Draw(); 
+	tileImage.Draw(); 
+	rightImage.Draw(); 
 	if(text) text->Draw();
 
 	this->UpdateEffects();

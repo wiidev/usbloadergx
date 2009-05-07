@@ -205,10 +205,10 @@ void FreeTypeGX::unloadFont() {
 	this->fontData.clear();
 }
 
-void FreeTypeGX::changeSize(FT_UInt pointSize) {
+void FreeTypeGX::changeSize(FT_UInt vPointSize, FT_UInt hPointSize/*=0*/) {
 	this->unloadFont();
-	this->ftPointSize = pointSize;
-	FT_Set_Pixel_Sizes(this->ftFace, 0, this->ftPointSize);
+	this->ftPointSize = vPointSize;
+	FT_Set_Pixel_Sizes(this->ftFace, hPointSize, this->ftPointSize);
 }
 
 /**
