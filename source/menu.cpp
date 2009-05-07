@@ -72,8 +72,6 @@ static lwp_t guithread = LWP_THREAD_NULL;
 static bool guiHalt = true;
 static GuiImageData progressbar(progressbar_png);
 static GuiImage progressbarImg(&progressbar);
-static double progressDone = 0;
-static double progressTotal = 1;
 int godmode = 0;
 int height = 224;
 int width = 160;
@@ -1517,9 +1515,6 @@ ShowProgress (s32 done, s32 total)
 	percent = (done * 100.0) / total;
 	//size    = (hdd->wbfs_sec_sz / GB_SIZE) * total;
 
-    progressTotal = total;
-	progressDone = done;
-
 	sprintf(prozent, "%0.2f", percent);
     prTxt.SetText(prozent);
 	//prTxt.SetFont(fontClock);
@@ -1528,15 +1523,15 @@ ShowProgress (s32 done, s32 total)
 
     float gamesizedone = 0.00;
 
-    gamesizedone = gamesize * progressDone/progressTotal;
+    gamesizedone = gamesize * done/total;
 
     sprintf(sizeshow,"%0.2fGB/%0.2fGB", gamesizedone, gamesize);
     sizeTxt.SetText(sizeshow);
 
 //	timeTxt.SetFont(fontClock);
 	if ((Settings.wsprompt == yes) && (CFG.widescreen)){
-	progressbarImg.SetTile(80*progressDone/progressTotal);}
-	else {progressbarImg.SetTile(100*progressDone/progressTotal);}
+	progressbarImg.SetTile(80*done/total);}
+	else {progressbarImg.SetTile(100*done/total);}
 
 }
 
@@ -1587,7 +1582,7 @@ ProgressWindow(const char *title, const char *msg)
 	GuiText msgTxt(msg, 26, (GXColor){0, 0, 0, 255});
 	msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	msgTxt.SetPosition(0,120);
-	
+
 	GuiText prsTxt("%", 26, (GXColor){0, 0, 0, 255});
 	prsTxt.SetAlignment(ALIGN_RIGHT, ALIGN_MIDDLE);
 	prsTxt.SetPosition(-188,40);
@@ -1597,7 +1592,7 @@ ProgressWindow(const char *title, const char *msg)
 
     sizeTxt.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
 	sizeTxt.SetPosition(50, -50);
-	
+
 	prTxt.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 	prTxt.SetPosition(200, 40);
 
@@ -1632,7 +1627,10 @@ ProgressWindow(const char *title, const char *msg)
 	ResumeGui();
 	promptWindow.Append(&prTxt);
 	promptWindow.Append(&sizeTxt);
+
     s32 ret;
+
+    __Disc_SetLowMem();
 
     ret = wbfs_add_disc(hdd, __WBFS_ReadDVD, NULL, ShowProgress, ONLY_GAME_PARTITION, 0);
 
@@ -2231,11 +2229,11 @@ static int MenuInstall()
 
 		Disc_ReadHeader(&headerdisc);
 		name = headerdisc.title;
-		if (strlen(name) < (22 + 3)) {
+		if (strlen(name) < (34 + 3)) {
 			memset(buffer, 0, sizeof(buffer));
 			sprintf(name, "%s", name);
 			} else {
-			strncpy(buffer, name,  MAX_CHARACTERS);
+			strncpy(buffer, name,  34);
 			strncat(buffer, "...", 3);
 			sprintf(name, "%s", buffer);
 		}
@@ -3564,13 +3562,13 @@ static int MenuSettings()
 			mainWindow->Append(&optionBrowser2);
 			mainWindow->Append(&page2Btn);
 			mainWindow->Append(&page1Btn);
-			
+
 
 			ResumeGui();
 		}
 		else if ( pageToDisplay == 2 )
 		{
-			
+
 			mainWindow->Append(&optionBrowser2);
 			mainWindow->Append(&page1Btn);
 			mainWindow->Append(&page2Btn);
