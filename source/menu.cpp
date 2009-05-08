@@ -1530,7 +1530,7 @@ ShowProgress (s32 done, s32 total)
 
 //	timeTxt.SetFont(fontClock);
 	if ((Settings.wsprompt == yes) && (CFG.widescreen)){
-	progressbarImg.SetTile(75*done/total);}
+	progressbarImg.SetTile(80*done/total);}
 	else {progressbarImg.SetTile(100*done/total);}
 
 }
@@ -1774,7 +1774,7 @@ ProgressDownloadWindow(int choice2)
 
 	if ((Settings.wsprompt == yes) && (CFG.widescreen)){/////////////adjust for widescreen
 		progressbarImg.SetPosition(80,40);
-		progressbarImg.SetTile(75*i/cntMissFiles);
+		progressbarImg.SetTile(80*i/cntMissFiles);
 	}
 	else{
 	progressbarImg.SetTile(100*i/cntMissFiles);}
