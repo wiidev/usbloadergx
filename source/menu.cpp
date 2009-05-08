@@ -2739,6 +2739,7 @@ static int MenuDiscList()
 
 		else if(DownloadBtn.GetState() == STATE_CLICKED)
 		{
+		    if(isSdInserted() == 1) {
 			choice = DownloadWindowPrompt(); // ask for download choice
 
 			if (choice != 0)
@@ -2787,6 +2788,9 @@ static int MenuDiscList()
 					}
 				}
 			}
+            } else {
+			WindowPrompt("No SD-Card inserted!", "Insert a SD-Card to download images.", "OK", 0);
+            }
 			DownloadBtn.ResetState();
 			gameBrowser.SetFocus(1);
 		}//end download
@@ -3789,7 +3793,9 @@ static int MenuSettings()
 			if(backBtn.GetState() == STATE_CLICKED)
 			{
 				//Add the procedure call to save the global configuration
+				if(isSdInserted() == 1) {
 				cfg_save_global();
+				}
 				menu = MENU_DISCLIST;
 				pageToDisplay = 0;
 				break;
@@ -4072,6 +4078,7 @@ int GameSettings(struct discHdr * header)
 
 		if(saveBtn.GetState() == STATE_CLICKED)
 		{
+		    if(isSdInserted() == 1) {
 				if (CFG_save_game_opt(header->id))
 				{
 					WindowPrompt("Successfully Saved", 0, "OK", 0);
@@ -4080,6 +4087,9 @@ int GameSettings(struct discHdr * header)
 				{
 					WindowPrompt("Save Failed", 0, "OK", 0);
 				}
+		    } else {
+                WindowPrompt("No SD-Card inserted!", "Insert a SD-Card to save.", "OK", 0);
+		    }
 
 			saveBtn.ResetState();
 			optionBrowser3.SetFocus(1);
