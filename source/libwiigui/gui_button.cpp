@@ -29,8 +29,6 @@ GuiButton::GuiButton(int w, int h)
 	iconHold = NULL;
 	iconClick = NULL;
 	toolTip = NULL;
-	toolTip2 = NULL;
-	toolTipTxt = NULL;
 
 	for(int i=0; i < 3; i++)
 	{
@@ -169,10 +167,10 @@ void GuiButton::SetToolTip(GuiElement* tt, int x, int y, int h_align, int v_alig
 	LOCK(this);
 	if(tt)
 	{
-		toolTip2 = tt;
-		toolTip2->SetParent(this);
-		toolTip2->SetAlignment(h_align, v_align);
-		toolTip2->SetPosition(x,y);
+		toolTip = tt;
+		toolTip->SetParent(this);
+		toolTip->SetAlignment(h_align, v_align);
+		toolTip->SetPosition(x,y);
 		
 	}
 }
@@ -209,7 +207,7 @@ void GuiButton::Draw()
 void GuiButton::DrawTooltip()
 {
 	LOCK(this);
-	if(state == STATE_SELECTED && (toolTip || toolTip2))
+	if(state == STATE_SELECTED && toolTip)
 	{
 	    if (time2 == 0)
 		{
@@ -222,50 +220,21 @@ void GuiButton::DrawTooltip()
 		if(time1 == 0 || difftime(time1, time2) >= 2)
 		{
 			if(time1 != 0)	// timer gerade abgelaufen
-				if(toolTip2) toolTip2->SetEffect(EFFECT_FADE, 20);
+				toolTip->SetEffect(EFFECT_FADE, 20);
 			time1 = 0;
-			if(toolTip2) toolTip2->Draw();
-			if(toolTip) toolTip->Draw();
-			if (toolTipTxt)
-			{
-				toolTipTxt->Draw();
-			}
+			toolTip->Draw();
 			return;
         }
 	}
 	else
 	{
 		if(time2 != 0 && time1 == 0) // timer abgelaufen, gerade DESELECT
-			if(toolTip2) toolTip2->SetEffect(EFFECT_FADE, -20);
+			if(toolTip) toolTip->SetEffect(EFFECT_FADE, -20);
 		time2 = 0;
 	}
-	if(toolTip2 && toolTip2->GetEffect())
-		toolTip2->Draw();
+	if(toolTip && toolTip->GetEffect())
+		toolTip->Draw();
 }
-/*
-void GuiButton::DrawTooltip()
-{
-	LOCK(this);
-	if(state == STATE_SELECTED && (toolTip || toolTip2))
-	{
-	    if (time2 == 0)
-		    time(&time2);
-
-		    time(&time1);
-
-        if (difftime(time1, time2) >= 2) {
-		if(toolTip) toolTip->Draw();
-		if(toolTip2) toolTip2->Draw();
-		if (toolTipTxt)
-        {
-			toolTipTxt->Draw();
-        }
-        }
-	}
-	else
-		time2 = 0;
-}
-*/
 void GuiButton::ScrollIsOn(int f)
 {
 	LOCK(this);

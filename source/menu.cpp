@@ -1861,7 +1861,8 @@ UpdateGUI (void *arg)
 		else
 		{
 			mainWindow->Draw();
-			mainWindow->DrawTooltip();
+			if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0)
+				mainWindow->DrawTooltip();
 
 			#ifdef HW_RVL
 			for(int i=3; i >= 0; i--) // so that player 1's cursor appears on top!
@@ -1871,7 +1872,7 @@ UpdateGUI (void *arg)
 						96, 96, pointer[i]->GetImage(), userInput[i].wpad.ir.angle, CFG.widescreen? 0.8 : 1, 1, 255);
 				if(Settings.rumble == RumbleOn)
 				{
-				DoRumble(i);
+					DoRumble(i);
 				}
 			}
 			#endif
@@ -2424,8 +2425,7 @@ static int MenuDiscList()
 	installBtn.SetSoundClick(&btnClick);
 	installBtn.SetTrigger(&trigA);
 	installBtn.SetEffectGrow();
-	if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0)
-		installBtn.SetToolTip(&installBtnTT,24,-30, ALIGN_LEFT);
+	installBtn.SetToolTip(&installBtnTT,24,-30, ALIGN_LEFT);
 
 	GuiTooltip settingsBtnTT("Settings");
 	if (Settings.wsprompt == yes)
@@ -2444,8 +2444,7 @@ static int MenuDiscList()
 	settingsBtn.SetSoundClick(&btnClick);
 	settingsBtn.SetTrigger(&trigA);
 	settingsBtn.SetEffectGrow();
-	if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0)
-		settingsBtn.SetToolTip(&settingsBtnTT,65,-30);
+	settingsBtn.SetToolTip(&settingsBtnTT,65,-30);
 
 	GuiTooltip homeBtnTT("Back to HBC or Wii Menu");
 	if (Settings.wsprompt == yes)
@@ -2465,8 +2464,7 @@ static int MenuDiscList()
 	homeBtn.SetTrigger(&trigA);
 	homeBtn.SetTrigger(&trigHome);
 	homeBtn.SetEffectGrow();
-	if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0)
-		homeBtn.SetToolTip(&homeBtnTT,15,-30);
+	homeBtn.SetToolTip(&homeBtnTT,15,-30);
 
 	GuiTooltip poweroffBtnTT("Power off the Wii");
 	if (Settings.wsprompt == yes)
@@ -2486,8 +2484,7 @@ static int MenuDiscList()
 	poweroffBtn.SetSoundClick(&btnClick);
 	poweroffBtn.SetTrigger(&trigA);
 	poweroffBtn.SetEffectGrow();
-	if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0)
-		poweroffBtn.SetToolTip(&poweroffBtnTT,-10,-30);
+	poweroffBtn.SetToolTip(&poweroffBtnTT,-10,-30);
 
 
 	GuiTooltip sdcardBtnTT("Reload SD");
@@ -2504,8 +2501,7 @@ static int MenuDiscList()
 	sdcardBtn.SetSoundClick(&btnClick);
 	sdcardBtn.SetTrigger(&trigA);
 	sdcardBtn.SetEffectGrow();
-	if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0)
-		sdcardBtn.SetToolTip(&sdcardBtnTT,95,-40);
+	sdcardBtn.SetToolTip(&sdcardBtnTT,95,-40);
 
 	//Downloading Covers
 	GuiTooltip DownloadBtnTT("Click to Download Covers");
@@ -2520,8 +2516,7 @@ static int MenuDiscList()
 	{//only make the button have trigger & tooltip if in godmode
 		DownloadBtn.SetSoundOver(&btnSoundOver);
 		DownloadBtn.SetTrigger(&trigA);
-		if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0)
-			DownloadBtn.SetToolTip(&DownloadBtnTT,205,-30);
+		DownloadBtn.SetToolTip(&DownloadBtnTT,205,-30);
     }
 	else
 		DownloadBtn.SetRumble(false);
@@ -3463,8 +3458,7 @@ static int MenuSettings()
 	if (Settings.wsprompt == yes)
 		page1BtnTT.SetWidescreen(CFG.widescreen);///////////
 
-	if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0)
-		page1Btn.SetToolTip(&page1BtnTT,105, 15);
+	page1Btn.SetToolTip(&page1BtnTT,105, 15);
 
 
 	GuiImage page2Img(&page2);
@@ -3481,8 +3475,7 @@ static int MenuSettings()
 	if (Settings.wsprompt == yes)
 		page2BtnTT.SetWidescreen(CFG.widescreen);///////////
 
-	if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0)
-		page2Btn.SetToolTip(&page2BtnTT,105,0);
+	page2Btn.SetToolTip(&page2BtnTT,105,0);
 
 	////////////////////////////////
 

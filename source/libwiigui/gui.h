@@ -746,11 +746,7 @@ class GuiButton : public GuiElement
 		void SetSoundClick(GuiSound * s);
 		//!Constantly called to draw the GuiButtons ToolTip
 		//!Sets the button's Tooltip on over
-		//!\param i Pointer to GuiImage object, t Pointer to GuiText, x & y Positioning
-//		void SetToolTip(GuiImage* i, GuiText * t, int x, int y);
-		//!Constantly called to draw the GuiButtons ToolTip
-		//!Sets the button's Tooltip on over
-		//!\param i Pointer to GuiImage object, t Pointer to GuiText, x & y Positioning
+		//!\param tt Pointer to GuiElement object, x & y Positioning, h & v Align
 		void SetToolTip(GuiElement* tt, int x, int y, int h=ALIGN_RIGHT, int v=ALIGN_TOP);
 		//!Constantly called to draw the GuiButton
 		void Draw();
@@ -769,9 +765,7 @@ class GuiButton : public GuiElement
 		GuiImage * iconOver; //!< Button icon for STATE_SELECTED
 		GuiImage * iconHold; //!< Button icon for STATE_HELD
 		GuiImage * iconClick; //!< Button icon for STATE_CLICKED
-		GuiImage * toolTip; //!< Tooltip for STATE_SELECTED
-		GuiText * toolTipTxt;//!< Tooltip Text
-		GuiElement *toolTip2;
+		GuiElement *toolTip;
 		time_t time1, time2;//!< Tooltip timeconstants
 		GuiText * label[3]; //!< Label(s) to display (default)
 		GuiText * labelOver[3]; //!< Label(s) to display for STATE_SELECTED
