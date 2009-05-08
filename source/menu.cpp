@@ -198,7 +198,7 @@ static void WindowCredits(void * ptr)
 		}
 
 	bgMusic->Stop();
-	creditsMusic = new GuiSound(credits_music_ogg, credits_music_ogg_size, SOUND_OGG, 40);
+	creditsMusic = new GuiSound(credits_music_ogg, credits_music_ogg_size, SOUND_OGG, 55);
 	creditsMusic->SetVolume(55);
 	creditsMusic->SetLoop(1);
 	creditsMusic->Play();
@@ -2357,7 +2357,7 @@ static int MenuDiscList()
 	char theTime[80];
 	int counter = 0;
 	time_t lastrawtime=0;
- 
+
 	WBFS_DiskSpace(&used, &freespace);
 
     if (!gameCnt) { //if there is no list of games to display
