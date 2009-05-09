@@ -62,7 +62,7 @@ struct CFG
 	short parentalcontrol;
 	short maxcharacters;
 	short godmode;
-	short xflip;
+    short xflip;
 	short wsprompt;
 	char unlockCode[20];
 	char covers_path[100];

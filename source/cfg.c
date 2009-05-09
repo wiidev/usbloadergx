@@ -195,7 +195,7 @@ void CFG_Default(int widescreen) // -1 = non forced Mode
 		snprintf(CFG.theme_path, sizeof(CFG.theme_path), "SD:/theme/");
 	}
 
-	snprintf(CFG.covers_path, sizeof(CFG.covers_path), "SD:/images/"); //default image path 
+	snprintf(CFG.covers_path, sizeof(CFG.covers_path), "SD:/images/"); //default image path
 	snprintf(CFG.disc_path, sizeof(CFG.disc_path), "SD:/images/disc/");//default path for disc images
 	snprintf(CFG.unlockCode, sizeof(CFG.unlockCode), "ab121b");		// default passwore
 
@@ -204,7 +204,7 @@ void CFG_Default(int widescreen) // -1 = non forced Mode
 	CFG.godmode = 0;
 	CFG.xflip = 0;
 	CFG.wsprompt = 0;
-	
+
 	//all alignments are left top here
 	THEME.selection_x = 200;
 	THEME.selection_y = 40;
@@ -416,7 +416,7 @@ void cfg_set(char *name, char *val)
 	cfg_map("home", "reboot", &CFG.home, CFG_HOME_REBOOT);
 	cfg_int("simple", &CFG.simple, 3);
 */
-		
+
 	// if these are defined in txt file, use them.  otherwise use defaults
 
 	if (!CFG.widescreen &&(strcmp(name, "theme_path") == 0)) {// if in 4:3
@@ -591,7 +591,7 @@ void theme_set(char *name, char *val)
 			THEME.info_b = z;
 		}
 	}
-	
+
 	else if (strcmp(cfg_name, "gametext_color") == 0) {
 		short x,y,z;
 		if (sscanf(val, "%hd,%hd, %hd", &x, &y, &z) == 3) {
@@ -607,7 +607,7 @@ void theme_set(char *name, char *val)
 			THEME.pagesize = x;
 		}
 	}
-	
+
 	cfg_bool("show_id", &THEME.showID);
 	cfg_bool("show_tooltip", &THEME.showToolTip);
 	cfg_bool("show_hddinfo", &THEME.showHDD);
@@ -909,7 +909,19 @@ bool cfg_save_global()// save global settings
 	fprintf(f, "cios = %d\n ", Settings.cios);
 	fprintf(f, "xflip = %d\n ", Settings.xflip);
 	fprintf(f, "qboot = %d\n ", Settings.qboot);
-	fprintf(f, "wsprompt = %d\n ", Settings.wsprompt);
+	fprintf(f, "parentalcontrol = %d\n ", CFG.parentalcontrol);
+	fprintf(f, "cover_path = %s\n ", CFG.covers_path);
+	if(CFG.widescreen) {
+	fprintf(f, "wtheme_path = %s\n ", CFG.theme_path);
+	} else {
+	fprintf(f, "theme_path = %s\n ", CFG.theme_path);
+	}
+	fprintf(f, "disc_path = %s\n ", CFG.disc_path);
+	if(!strcmp("", Settings.unlockCode)) {
+	fprintf(f, "godmode = %d\n ", CFG.godmode);
+	} else {
+    fprintf(f, "godmode = %d\n ", 0);
+	}
 	fclose(f);
 	return true;
 }
@@ -972,7 +984,7 @@ void game_set(char *name, char *val)
 					game->parentalcontrol = opt_c;
 				}
 			}
-			
+
 		}
 		// next opt
 		if (np) p = np + 1; else p = NULL;
@@ -1082,7 +1094,7 @@ void CFG_Load(int argc, char **argv)
 
 	CFG_Default(-1); // set defaults non forced
 
-	snprintf(pathname, sizeof(pathname), "SD:/config/config.txt");
+	snprintf(pathname, sizeof(pathname), "SD:/config/global_settings.cfg");
 
 	cfg_parsefile(pathname, &widescreen_set); //first set widescreen
 	cfg_parsefile(pathname, &cfg_set); //then set config and layout options

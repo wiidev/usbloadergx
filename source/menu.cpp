@@ -3233,7 +3233,11 @@ static int MenuSettings()
     GuiTrigger trigL;
 	trigL.SetButtonOnlyTrigger(-1, WPAD_BUTTON_LEFT | WPAD_CLASSIC_BUTTON_LEFT, PAD_BUTTON_LEFT);
 	GuiTrigger trigR;
-	trigL.SetButtonOnlyTrigger(-1, WPAD_BUTTON_RIGHT | WPAD_CLASSIC_BUTTON_RIGHT, PAD_BUTTON_RIGHT);
+	trigR.SetButtonOnlyTrigger(-1, WPAD_BUTTON_RIGHT | WPAD_CLASSIC_BUTTON_RIGHT, PAD_BUTTON_RIGHT);
+    GuiTrigger trigMinus;
+	trigMinus.SetButtonOnlyTrigger(-1, WPAD_BUTTON_MINUS | WPAD_CLASSIC_BUTTON_MINUS, 0);
+	GuiTrigger trigPlus;
+	trigPlus.SetButtonOnlyTrigger(-1, WPAD_BUTTON_PLUS | WPAD_CLASSIC_BUTTON_PLUS, 0);
 
     GuiText titleTxt("Settings", 28, (GXColor){0, 0, 0, 255});
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
@@ -3271,6 +3275,7 @@ static int MenuSettings()
 	page1Btn.SetSoundClick(&btnClick);
 	page1Btn.SetTrigger(&trigA);
 	page1Btn.SetTrigger(&trigL);
+	page1Btn.SetTrigger(&trigMinus);
 
 	GuiTooltip page1BtnTT("Go to Page 1");
 	if (Settings.wsprompt == yes)
@@ -3289,6 +3294,7 @@ static int MenuSettings()
 	page2Btn.SetSoundClick(&btnClick);
 	page2Btn.SetTrigger(&trigA);
 	page2Btn.SetTrigger(&trigR);
+	page2Btn.SetTrigger(&trigPlus);
 
 	GuiTooltip page2BtnTT("Go to Page 2");
 	if (Settings.wsprompt == yes)
@@ -3381,10 +3387,10 @@ static int MenuSettings()
 			sprintf(options2.name[2], "Flip X");
 			sprintf(options2.name[3], "Quick Boot");
 			sprintf(options2.name[4], "Prompts & Buttons");
-			sprintf(options2.name[5], " ");
-			sprintf(options2.name[6], " ");
-			sprintf(options2.name[7], " ");
-			sprintf(options2.name[8], " ");
+			sprintf(options2.name[5], "Parentalcontrol");
+			sprintf(options2.name[6], "Cover Path");
+			sprintf(options2.name[7], "Discimage Path");
+			sprintf(options2.name[8], "Theme Path");
 
 		}
 		while(menu == MENU_NONE)
@@ -3508,6 +3514,8 @@ static int MenuSettings()
 					Settings.qboot = 0;
 				if ( Settings.wsprompt > 1 )
 					Settings.wsprompt = 0;
+                if (CFG.parentalcontrol > 3 )
+					CFG.parentalcontrol = 0;
 
 
 				if ( CFG.godmode != 1) sprintf(options2.value[0], "********");
@@ -3526,11 +3534,20 @@ static int MenuSettings()
 				if (Settings.wsprompt == no) sprintf (options2.value[4],"Normal");
 				else if (Settings.wsprompt == yes) sprintf (options2.value[4],"Widescreen Fix");
 
-				sprintf (options2.value[5]," ");
-				sprintf (options2.value[6]," ");
-				sprintf (options2.value[7]," ");
-				sprintf (options2.value[8]," ");
+                if (CFG.godmode != 1) sprintf(options2.value[5], "********");
+				else if(CFG.parentalcontrol == 0) sprintf(options2.value[5], "0");
+				else if(CFG.parentalcontrol == 1) sprintf(options2.value[5], "1");
+				else if(CFG.parentalcontrol == 2) sprintf(options2.value[5], "2");
+				else if(CFG.parentalcontrol == 3) sprintf(options2.value[5], "3");
 
+				if (CFG.godmode != 1) sprintf(options2.value[6], "********");
+				else sprintf(options2.value[6], CFG.covers_path);
+
+				if (CFG.godmode != 1) sprintf(options2.value[7], "********");
+				else sprintf(options2.value[7], CFG.disc_path);
+
+				if (CFG.godmode != 1) sprintf(options2.value[8], "********");
+				else sprintf(options2.value[8], CFG.theme_path);
 
 				ret = optionBrowser2.GetClickedOption();
 
@@ -3548,9 +3565,9 @@ static int MenuSettings()
 							char entered[20] = "";
 							strncpy(entered, Settings.unlockCode, sizeof(entered));
 							int result = OnScreenKeyboard(entered, 20);
+							mainWindow->Append(&optionBrowser2);
 							mainWindow->Append(&page1Btn);
 							mainWindow->Append(&page2Btn);
-							mainWindow->Append(&optionBrowser2);
 							w.Append(&backBtn);
 							w.Append(&lockBtn);
 							if ( result == 1 )
@@ -3576,6 +3593,93 @@ static int MenuSettings()
 						break;
 					case 4:
 						Settings.wsprompt++;
+						break;
+                    case 5:
+                        CFG.parentalcontrol++;
+                        break;
+                    case 6:
+                        if ( CFG.godmode == 1)
+                        {
+							mainWindow->Remove(&optionBrowser2);
+							mainWindow->Remove(&page1Btn);
+							mainWindow->Remove(&page2Btn);
+							w.Remove(&backBtn);
+							w.Remove(&lockBtn);
+							char entered[20] = "";
+							strncpy(entered, CFG.covers_path, sizeof(entered));
+							int result = OnScreenKeyboard(entered, 20);
+							mainWindow->Append(&optionBrowser2);
+							mainWindow->Append(&page1Btn);
+							mainWindow->Append(&page2Btn);
+							w.Append(&backBtn);
+							w.Append(&lockBtn);
+							if ( result == 1 )
+							{
+								strncpy(CFG.covers_path, entered, sizeof(CFG.covers_path));
+								WindowPrompt("Coverpath Changed",0,"OK",0,0,0);
+								cfg_save_global();
+							}
+						}
+						else
+						{
+							WindowPrompt("Coverpath change","Console should be unlocked to modify it.","OK",0,0,0);
+						}
+						break;
+                    case 7:
+                        if ( CFG.godmode == 1)
+                        {
+							mainWindow->Remove(&optionBrowser2);
+							mainWindow->Remove(&page1Btn);
+							mainWindow->Remove(&page2Btn);
+							w.Remove(&backBtn);
+							w.Remove(&lockBtn);
+							char entered[20] = "";
+							strncpy(entered, CFG.disc_path, sizeof(entered));
+							int result = OnScreenKeyboard(entered, 20);
+							mainWindow->Append(&optionBrowser2);
+							mainWindow->Append(&page1Btn);
+							mainWindow->Append(&page2Btn);
+							w.Append(&backBtn);
+							w.Append(&lockBtn);
+							if ( result == 1 )
+							{
+								strncpy(CFG.disc_path, entered, sizeof(CFG.disc_path));
+								WindowPrompt("Discpath Changed",0,"OK",0,0,0);
+								cfg_save_global();
+							}
+						}
+						else
+						{
+							WindowPrompt("Discpath change","Console should be unlocked to modify it.","OK",0,0,0);
+						}
+						break;
+                    case 8:
+                        if ( CFG.godmode == 1)
+                        {
+							mainWindow->Remove(&optionBrowser2);
+							mainWindow->Remove(&page1Btn);
+							mainWindow->Remove(&page2Btn);
+							w.Remove(&backBtn);
+							w.Remove(&lockBtn);
+							char entered[20] = "";
+							strncpy(entered, CFG.theme_path, sizeof(entered));
+							int result = OnScreenKeyboard(entered, 20);
+							mainWindow->Append(&optionBrowser2);
+							mainWindow->Append(&page1Btn);
+							mainWindow->Append(&page2Btn);
+							w.Append(&backBtn);
+							w.Append(&lockBtn);
+							if ( result == 1 )
+							{
+								strncpy(CFG.theme_path, entered, sizeof(CFG.theme_path));
+								WindowPrompt("Themepath Changed",0,"OK",0,0,0);
+								cfg_save_global();
+							}
+						}
+						else
+						{
+							WindowPrompt("Themepath change","Console should be unlocked to modify it.","OK",0,0,0);
+						}
 						break;
 					}
 			}
