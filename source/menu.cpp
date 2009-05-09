@@ -99,7 +99,7 @@ void wiilight(int enable){             // Toggle wiilight (thanks Bool for wiili
     *_wiilight_reg=val;}
 
 //Prototypes
-int WindowPrompt(const char *title, const char *msg, const char *btn1Label, const char *btn2Label);
+int WindowPrompt(const char *title, const char *msg, const char *btn1Label, const char *btn2Label, const char *btn3Label, const char *btn4Label);
 static void HaltGui();
 static void ResumeGui();
 
@@ -354,141 +354,19 @@ static void WindowCredits(void * ptr)
 }
 
 /****************************************************************************
- * WiiMenuWindowPrompt
- * Display Menu WindowPrompt
- ***************************************************************************/
-
-int
-WiiMenuWindowPrompt(const char *title, const char *btn1Label, const char *btn2Label, const char *btn3Label)
-{
-	int choice = -1;
-
-	GuiWindow promptWindow(472,320);
-	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-	promptWindow.SetPosition(0, -10);
-	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
-	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, vol);
-	GuiImageData btnOutline(button_dialogue_box_png);
-
-
-	GuiTrigger trigA;
-	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
-	GuiTrigger trigB;
-	trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
-
-	GuiImageData dialogBox(dialogue_box_png);
-	GuiImage dialogBoxImg(&dialogBox);
-	if (Settings.wsprompt == yes){
-	dialogBoxImg.SetWidescreen(CFG.widescreen);}///////////
-
-	GuiText titleTxt(title, 26, (GXColor){0, 0, 0, 255});
-	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	titleTxt.SetPosition(0,55);
-
-	GuiText btn1Txt(btn1Label, 22, (GXColor){0, 0, 0, 255});
-	GuiImage btn1Img(&btnOutline);
-	if (Settings.wsprompt == yes){
-	btn1Img.SetWidescreen(CFG.widescreen);}///////////
-	GuiButton btn1(btnOutline.GetWidth(), btnOutline.GetHeight());
-    btn1.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-	btn1.SetPosition(-50, -120);
-	btn1.SetImage(&btn1Img);
-	btn1.SetLabel(&btn1Txt);
-	btn1.SetSoundOver(&btnSoundOver);
-	btn1.SetSoundClick(&btnClick);
-	btn1.SetTrigger(&trigA);
-	btn1.SetState(STATE_SELECTED);
-	btn1.SetEffectGrow();
-
-	GuiText btn2Txt(btn2Label, 22, (GXColor){0, 0, 0, 255});
-	GuiImage btn2Img(&btnOutline);
-	if (Settings.wsprompt == yes){
-	btn2Img.SetWidescreen(CFG.widescreen);}///////////
-	GuiButton btn2(btnOutline.GetWidth(), btnOutline.GetHeight());
-	btn2.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-	btn2.SetPosition(50, -120);
-	btn2.SetLabel(&btn2Txt);
-	btn2.SetImage(&btn2Img);
-	btn2.SetSoundOver(&btnSoundOver);
-	btn2.SetSoundClick(&btnClick);
-	btn2.SetTrigger(&trigA);
-	btn2.SetEffectGrow();
-
-	GuiText btn3Txt(btn3Label, 22, (GXColor){0, 0, 0, 255});
-	GuiImage btn3Img(&btnOutline);
-	if (Settings.wsprompt == yes){
-	btn3Img.SetWidescreen(CFG.widescreen);}///////////
-	GuiButton btn3(btnOutline.GetWidth(), btnOutline.GetHeight());
-	btn3.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
-    btn3.SetPosition(0, -65);
-	btn3.SetLabel(&btn3Txt);
-	btn3.SetImage(&btn3Img);
-	btn3.SetSoundOver(&btnSoundOver);
-	btn3.SetSoundClick(&btnClick);
-	btn3.SetTrigger(&trigB);
-	btn3.SetTrigger(&trigA);
-	btn3.SetEffectGrow();
-
-	if ((Settings.wsprompt == yes) && (CFG.widescreen)){/////////////adjust buttons for widescreen
-		btn1.SetPosition(-70, -120);
-		btn2.SetPosition(70, -120);
-		btn3.SetPosition(0, -55);
-		btn1Txt.SetFontSize(20);
-		btn2Txt.SetFontSize(20);
-		btn3Txt.SetFontSize(20);}
-
-	promptWindow.Append(&dialogBoxImg);
-	promptWindow.Append(&titleTxt);
-	promptWindow.Append(&btn1);
-    promptWindow.Append(&btn2);
-    promptWindow.Append(&btn3);
-	promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
-
-	HaltGui();
-	mainWindow->SetState(STATE_DISABLED);
-	mainWindow->Append(&promptWindow);
-	mainWindow->ChangeFocus(&promptWindow);
-	ResumeGui();
-
-	while(choice == -1)
-	{
-		VIDEO_WaitVSync();
-		if(shutdown == 1)
-		{
-			wiilight(0);
-			Sys_Shutdown();
-		}
-		if(reset == 1)
-			Sys_Reboot();
-
-		if(btn1.GetState() == STATE_CLICKED) {
-			choice = 1;
-		}
-		else if(btn2.GetState() == STATE_CLICKED) {
-			choice = 2;
-		}
-        else if(btn3.GetState() == STATE_CLICKED) {
-            choice = 0;
-        }
-	}
-
-	promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
-	while(promptWindow.GetEffect() > 0) usleep(50);
-	HaltGui();
-	mainWindow->Remove(&promptWindow);
-	mainWindow->SetState(STATE_DEFAULT);
-	ResumeGui();
-	return choice;
-}
-
-/****************************************************************************
  * WindowPrompt
  *
  * Displays a prompt window to user, with information, an error message, or
- * presenting a user with a choice
+ * presenting a user with a choice of up to 4 Buttons.
+ *
+ * Give him 1 Titel, 1 Subtitel and 4 Buttons
+ * If titel/subtitle or one of the buttons is not needed give him a 0 on that
+ * place.
  ***************************************************************************/
 int
-WindowPrompt(const char *title, const char *msg, const char *btn1Label, const char *btn2Label)
+WindowPrompt(const char *title, const char *msg, const char *btn1Label,
+                const char *btn2Label, const char *btn3Label,
+                const char *btn4Label)
 {
 	int choice = -1;
 
@@ -523,18 +401,6 @@ WindowPrompt(const char *title, const char *msg, const char *btn1Label, const ch
 	if (Settings.wsprompt == yes){
 	btn1Img.SetWidescreen(CFG.widescreen);}///////////
 	GuiButton btn1(btnOutline.GetWidth(), btnOutline.GetHeight());
-
-	if(btn2Label)
-	{
-		btn1.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-		btn1.SetPosition(40, -45);
-	}
-	else
-	{
-		btn1.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
-		btn1.SetPosition(0, -45);
-	}
-
 	btn1.SetLabel(&btn1Txt);
 	btn1.SetImage(&btn1Img);
 	btn1.SetSoundOver(&btnSoundOver);
@@ -548,37 +414,160 @@ WindowPrompt(const char *title, const char *msg, const char *btn1Label, const ch
 	if (Settings.wsprompt == yes){
 	btn2Img.SetWidescreen(CFG.widescreen);}///////////
 	GuiButton btn2(btnOutline.GetWidth(), btnOutline.GetHeight());
-	btn2.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-	btn2.SetPosition(-40, -45);
 	btn2.SetLabel(&btn2Txt);
 	btn2.SetImage(&btn2Img);
 	btn2.SetSoundOver(&btnSoundOver);
 	btn2.SetSoundClick(&btnClick);
+	if(!btn3Label && !btn4Label)
 	btn2.SetTrigger(&trigB);
 	btn2.SetTrigger(&trigA);
 	btn2.SetEffectGrow();
 
+    GuiText btn3Txt(btn3Label, 22, (GXColor){0, 0, 0, 255});
+	GuiImage btn3Img(&btnOutline);
+	if (Settings.wsprompt == yes){
+	btn3Img.SetWidescreen(CFG.widescreen);}///////////
+	GuiButton btn3(btnOutline.GetWidth(), btnOutline.GetHeight());
+	btn3.SetLabel(&btn3Txt);
+	btn3.SetImage(&btn3Img);
+	btn3.SetSoundOver(&btnSoundOver);
+	btn3.SetSoundClick(&btnClick);
+	if(!btn4Label)
+	btn3.SetTrigger(&trigB);
+	btn3.SetTrigger(&trigA);
+	btn3.SetEffectGrow();
+
+    GuiText btn4Txt(btn4Label, 22, (GXColor){0, 0, 0, 255});
+	GuiImage btn4Img(&btnOutline);
+	if (Settings.wsprompt == yes){
+	btn4Img.SetWidescreen(CFG.widescreen);}///////////
+	GuiButton btn4(btnOutline.GetWidth(), btnOutline.GetHeight());
+	btn4.SetLabel(&btn4Txt);
+	btn4.SetImage(&btn4Img);
+	btn4.SetSoundOver(&btnSoundOver);
+	btn4.SetSoundClick(&btnClick);
+	if(btn4Label)
+	btn4.SetTrigger(&trigB);
+	btn4.SetTrigger(&trigA);
+	btn4.SetEffectGrow();
+
 	if ((Settings.wsprompt == yes) && (CFG.widescreen)){/////////////adjust buttons for widescreen
 		msgTxt.SetMaxWidth(330);
-		if(btn2Label)
-	{
-		btn1.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-		btn2.SetPosition(-70, -80);
-		btn1.SetPosition(70, -80);
+        btn1Txt.SetFontSize(20);
+		btn2Txt.SetFontSize(20);
+		btn3Txt.SetFontSize(20);
+		btn4Txt.SetFontSize(20);
+
+		if(btn2Label && !btn3Label && !btn4Label)
+        {
+            btn1.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+            btn1.SetPosition(70, -80);
+            btn2.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
+            btn2.SetPosition(-70, -80);
+            btn3.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
+            btn3.SetPosition(-70, -55);
+            btn4.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+            btn4.SetPosition(70, -55);
+        } else if(btn2Label && btn3Label && !btn4Label) {
+            btn1.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+            btn1.SetPosition(70, -120);
+            btn2.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
+            btn2.SetPosition(-70, -120);
+            btn3.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
+            btn3.SetPosition(0, -55);
+            btn4.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+            btn4.SetPosition(70, -55);
+        } else if(btn2Label && btn3Label && btn4Label) {
+            btn1.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+            btn1.SetPosition(70, -120);
+            btn2.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
+            btn2.SetPosition(-70, -120);
+            btn3.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+            btn3.SetPosition(70, -55);
+            btn4.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
+            btn4.SetPosition(-70, -55);
+        }   else if(!btn2Label && btn3Label && btn4Label) {
+            btn1.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
+            btn1.SetPosition(0, -120);
+            btn2.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
+            btn2.SetPosition(-70, -120);
+            btn3.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+            btn3.SetPosition(70, -55);
+            btn4.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
+            btn4.SetPosition(-70, -55);
+        } else {
+            btn1.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
+            btn1.SetPosition(0, -80);
+            btn2.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+            btn2.SetPosition(70, -120);
+            btn3.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
+            btn3.SetPosition(-70, -55);
+            btn4.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+            btn4.SetPosition(70, -55);
+        }
+	} else {
+
+	    if(btn2Label && !btn3Label && !btn4Label) {
+            btn1.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+            btn1.SetPosition(40, -45);
+            btn2.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
+            btn2.SetPosition(-40, -45);
+            btn3.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+            btn3.SetPosition(50, -65);
+            btn4.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
+            btn4.SetPosition(-50, -65);
+	    } else if(btn2Label && btn3Label && !btn4Label) {
+            btn1.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+            btn1.SetPosition(50, -120);
+            btn2.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
+            btn2.SetPosition(-50, -120);
+            btn3.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
+            btn3.SetPosition(0, -65);
+            btn4.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
+            btn4.SetPosition(-50, -65);
+	    } else if(btn2Label && btn3Label && btn4Label) {
+	        btn1.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+            btn1.SetPosition(50, -120);
+            btn2.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
+            btn2.SetPosition(-50, -120);
+            btn3.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+            btn3.SetPosition(50, -65);
+            btn4.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
+            btn4.SetPosition(-50, -65);
+	    } else if(!btn2Label && btn3Label && btn4Label) {
+	        btn1.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
+            btn1.SetPosition(0, -120);
+            btn2.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
+            btn2.SetPosition(-50, -120);
+            btn3.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+            btn3.SetPosition(50, -65);
+            btn4.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
+            btn4.SetPosition(-50, -65);
+	    } else {
+	        btn1.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
+            btn1.SetPosition(0, -45);
+            btn2.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+            btn2.SetPosition(50, -120);
+            btn3.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+            btn3.SetPosition(50, -65);
+            btn4.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
+            btn4.SetPosition(-50, -65);
+	    }
+
 	}
-	else
-	{
-		btn1.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
-		btn1.SetPosition(0, -80);
-	}
-	}
+
 	promptWindow.Append(&dialogBoxImg);
 	promptWindow.Append(&titleTxt);
 	promptWindow.Append(&msgTxt);
-	promptWindow.Append(&btn1);
 
+	if(btn1Label)
+	promptWindow.Append(&btn1);
 	if(btn2Label)
 		promptWindow.Append(&btn2);
+    if(btn3Label)
+		promptWindow.Append(&btn3);
+    if(btn4Label)
+		promptWindow.Append(&btn4);
 
 	promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
 	HaltGui();
@@ -601,6 +590,18 @@ WindowPrompt(const char *title, const char *msg, const char *btn1Label, const ch
 			choice = 1;
 		}
 		else if(btn2.GetState() == STATE_CLICKED) {
+		    if(!btn3Label)
+			choice = 0;
+			else
+			choice = 2;
+		}
+		else if(btn3.GetState() == STATE_CLICKED) {
+		    if(!btn4Label)
+			choice = 0;
+			else
+			choice = 3;
+		}
+		else if(btn4.GetState() == STATE_CLICKED) {
 			choice = 0;
 		}
 	}
@@ -612,224 +613,6 @@ WindowPrompt(const char *title, const char *msg, const char *btn1Label, const ch
 	mainWindow->SetState(STATE_DEFAULT);
 	ResumeGui();
 	return choice;
-}
-
-/****************************************************************************
- * DownloadWindowPrompt
- * Display download
- ***************************************************************************/
-int
-DownloadWindowPrompt()
-{
-	int choice = -1;
-
-	GuiWindow promptWindow(472,320);
-	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-	promptWindow.SetPosition(0, -10);
-	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
-	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, vol);
-	GuiImageData btnOutline(button_dialogue_box_png);
-
-
-	GuiTrigger trigA;
-	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
-	GuiTrigger trigB;
-	trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
-
-	GuiImageData dialogBox(dialogue_box_png);
-	GuiImage dialogBoxImg(&dialogBox);
-	if (Settings.wsprompt == yes){
-	dialogBoxImg.SetWidescreen(CFG.widescreen);}///////////
-
-	GuiText titleTxt("Cover Download", 26, (GXColor){0, 0, 0, 255});
-	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	titleTxt.SetPosition(0,55);
-
-	GuiText btn1Txt("3D Covers", 22, (GXColor){0, 0, 0, 255});
-	GuiImage btn1Img(&btnOutline);
-	if (Settings.wsprompt == yes){
-	btn1Img.SetWidescreen(CFG.widescreen);}///////////
-	GuiButton btn1(btnOutline.GetWidth(), btnOutline.GetHeight());
-    btn1.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-	btn1.SetPosition(-50, -120);
-	btn1.SetImage(&btn1Img);
-	btn1.SetLabel(&btn1Txt);
-	btn1.SetSoundOver(&btnSoundOver);
-	btn1.SetSoundClick(&btnClick);
-	btn1.SetTrigger(&trigA);
-	btn1.SetState(STATE_SELECTED);
-	btn1.SetEffectGrow();
-
-	GuiText btn2Txt("Normal Covers", 22, (GXColor){0, 0, 0, 255});
-	GuiImage btn2Img(&btnOutline);
-	if (Settings.wsprompt == yes){
-	btn2Img.SetWidescreen(CFG.widescreen);}///////////
-	GuiButton btn2(btnOutline.GetWidth(), btnOutline.GetHeight());
-	btn2.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-	btn2.SetPosition(50, -120);
-	btn2.SetLabel(&btn2Txt);
-	btn2.SetImage(&btn2Img);
-	btn2.SetSoundOver(&btnSoundOver);
-	btn2.SetSoundClick(&btnClick);
-	btn2.SetTrigger(&trigA);
-	btn2.SetEffectGrow();
-
-	GuiText btn3Txt("Back", 22, (GXColor){0, 0, 0, 255});
-	GuiImage btn3Img(&btnOutline);
-	if (Settings.wsprompt == yes){
-	btn3Img.SetWidescreen(CFG.widescreen);}///////////
-	GuiButton btn3(btnOutline.GetWidth(), btnOutline.GetHeight());
-	btn3.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-    btn3.SetPosition(-50, -65);
-	btn3.SetLabel(&btn3Txt);
-	btn3.SetImage(&btn3Img);
-	btn3.SetSoundOver(&btnSoundOver);
-	btn3.SetSoundClick(&btnClick);
-	btn3.SetTrigger(&trigB);
-	btn3.SetTrigger(&trigA);
-	btn3.SetEffectGrow();
-
-    GuiText btn4Txt("Disc Images", 22, (GXColor){0, 0, 0, 255});
-	GuiImage btn4Img(&btnOutline);
-	if (Settings.wsprompt == yes){
-	btn4Img.SetWidescreen(CFG.widescreen);}///////////
-	GuiButton btn4(btnOutline.GetWidth(), btnOutline.GetHeight());
-	btn4.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-    btn4.SetPosition(50, -65);
-	btn4.SetLabel(&btn4Txt);
-	btn4.SetImage(&btn4Img);
-	btn4.SetSoundOver(&btnSoundOver);
-	btn4.SetSoundClick(&btnClick);
-	btn4.SetTrigger(&trigA);
-	btn4.SetEffectGrow();
-
-	if ((Settings.wsprompt == yes) && (CFG.widescreen)){/////////////adjust buttons for widescreen
-		btn1.SetPosition(-70, -120);
-		btn2.SetPosition(70, -120);
-		btn3.SetPosition(-70, -55);
-		btn4.SetPosition(70, -55);
-		btn1Txt.SetFontSize(20);
-		btn2Txt.SetFontSize(20);
-		btn3Txt.SetFontSize(20);
-		btn4Txt.SetFontSize(20);
-	}
-
-	promptWindow.Append(&dialogBoxImg);
-	promptWindow.Append(&titleTxt);
-	promptWindow.Append(&btn1);
-    promptWindow.Append(&btn2);
-    promptWindow.Append(&btn3);
-    promptWindow.Append(&btn4);
-
-	promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
-	HaltGui();
-	mainWindow->SetState(STATE_DISABLED);
-	mainWindow->Append(&promptWindow);
-	mainWindow->ChangeFocus(&promptWindow);
-	ResumeGui();
-
-	while(choice == -1)
-	{
-		VIDEO_WaitVSync();
-		if(btn1.GetState() == STATE_CLICKED) {
-			choice = 2;
-		}
-		else if(btn2.GetState() == STATE_CLICKED) {
-			choice = 1;
-		}
-        else if(btn4.GetState() == STATE_CLICKED) {
-            choice = 3;
-        }
-        else if(btn3.GetState() == STATE_CLICKED) {
-            choice = 0;
-        }
-	}
-
-	promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
-	while(promptWindow.GetEffect() > 0) usleep(50);
-	HaltGui();
-	mainWindow->Remove(&promptWindow);
-	mainWindow->SetState(STATE_DEFAULT);
-	ResumeGui();
-	return choice;
-}
-
-/****************************************************************************
- * DeviceWait
- ***************************************************************************/
-int
-DeviceWait(const char *title, const char *msg, const char *btn1Label, const char *btn2Label)
-{
-	int i = 30;
-	char timer[20];
-
-	GuiWindow promptWindow(472,320);
-	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-	promptWindow.SetPosition(0, -10);
-
-	GuiImageData btnOutline(button_dialogue_box_png);
-	GuiTrigger trigA;
-	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
-
-
-	GuiImageData dialogBox(dialogue_box_png);
-	GuiImage dialogBoxImg(&dialogBox);
-	if (Settings.wsprompt == yes){
-	dialogBoxImg.SetWidescreen(CFG.widescreen);}///////////
-
-	GuiText timerTxt(timer, 26, (GXColor){0, 0, 0, 255});
-	timerTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	timerTxt.SetPosition(0,200);
-
-	GuiText titleTxt(title, 26, (GXColor){0, 0, 0, 255});
-	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	titleTxt.SetPosition(0,60);
-
-	GuiText msgTxt(msg, 22, (GXColor){0, 0, 0, 255});
-	msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-	msgTxt.SetPosition(0,0);
-	msgTxt.SetMaxWidth(430);
-
-	promptWindow.Append(&dialogBoxImg);
-	promptWindow.Append(&titleTxt);
-	promptWindow.Append(&msgTxt);
-	promptWindow.Append(&timerTxt);
-
-	promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
-	HaltGui();
-	mainWindow->SetState(STATE_DISABLED);
-	mainWindow->Append(&promptWindow);
-	mainWindow->ChangeFocus(&promptWindow);
-	ResumeGui();
-
-
-
-    s32 ret2;
-	while(i >= 0)
-	{
-		sprintf(timer, "%u s left", i);
-		timerTxt.SetText(timer);
-		VIDEO_WaitVSync();
-        if(Settings.cios == ios222) {
-        ret2 = IOS_ReloadIOS(222);
-        } else {
-	    ret2 = IOS_ReloadIOS(249);
-        }
-		sleep(1);
-		ret2 = WBFS_Init(WBFS_DEVICE_USB);
-        if(ret2>=0)
-        break;
-
-        i--;
-	}
-
-	promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
-	while(promptWindow.GetEffect() > 0) usleep(50);
-	HaltGui();
-	mainWindow->Remove(&promptWindow);
-	mainWindow->SetState(STATE_DEFAULT);
-	ResumeGui();
-	return ret2;
 }
 
 /****************************************************************************
@@ -1161,11 +944,10 @@ int GameWindowPrompt()
  * DiscWait
  ***************************************************************************/
 int
-DiscWait(const char *title, const char *msg, const char *btn1Label, const char *btn2Label)
+DiscWait(const char *title, const char *msg, const char *btn1Label, const char *btn2Label, int IsDeviceWait)
 {
-	int choice = -1;
+	int choice = -1, i = 30, ret = 0;
     u32 cover = 0;
-	s32 ret;
 
 	GuiWindow promptWindow(472,320);
 	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
@@ -1177,7 +959,6 @@ DiscWait(const char *title, const char *msg, const char *btn1Label, const char *
 	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 	GuiTrigger trigB;
 	trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
-
 
 	GuiImageData dialogBox(dialogue_box_png);
 	GuiImage dialogBoxImg(&dialogBox);
@@ -1247,13 +1028,21 @@ DiscWait(const char *title, const char *msg, const char *btn1Label, const char *
 	}
 	}
 
+    char timer[20];
+	GuiText timerTxt(timer, 26, (GXColor){0, 0, 0, 255});
+	timerTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	timerTxt.SetPosition(0,160);
+
 	promptWindow.Append(&dialogBoxImg);
 	promptWindow.Append(&titleTxt);
 	promptWindow.Append(&msgTxt);
-	promptWindow.Append(&btn1);
 
+	if(btn1Label)
+	promptWindow.Append(&btn1);
 	if(btn2Label)
 		promptWindow.Append(&btn2);
+    if(IsDeviceWait)
+	promptWindow.Append(&timerTxt);
 
 	promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
 	HaltGui();
@@ -1262,16 +1051,36 @@ DiscWait(const char *title, const char *msg, const char *btn1Label, const char *
 	mainWindow->ChangeFocus(&promptWindow);
 	ResumeGui();
 
-	while(!(cover & 0x2))
-	{
-		VIDEO_WaitVSync();
-		if(btn1.GetState() == STATE_CLICKED) {
-			choice = 1;
-			break;
-		}
-		ret = WDVD_GetCoverStatus(&cover);
-		if (ret < 0)
-			return ret;
+	if(IsDeviceWait) {
+        while(i >= 0)
+        {
+            sprintf(timer, "%u secs left", i);
+            timerTxt.SetText(timer);
+            VIDEO_WaitVSync();
+            if(Settings.cios == ios222) {
+            ret = IOS_ReloadIOS(222);
+            } else {
+            ret = IOS_ReloadIOS(249);
+            }
+            sleep(1);
+            ret = WBFS_Init(WBFS_DEVICE_USB);
+            if(ret>=0)
+            break;
+
+            i--;
+        }
+	} else {
+        while(!(cover & 0x2))
+        {
+            VIDEO_WaitVSync();
+            if(btn1.GetState() == STATE_CLICKED) {
+                choice = 1;
+                break;
+            }
+            ret = WDVD_GetCoverStatus(&cover);
+            if (ret < 0)
+                break;
+        }
 	}
 
 	promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
@@ -1280,7 +1089,7 @@ DiscWait(const char *title, const char *msg, const char *btn1Label, const char *
 	mainWindow->Remove(&promptWindow);
 	mainWindow->SetState(STATE_DEFAULT);
 	ResumeGui();
-	return 0;
+	return ret;
 }
 
 /****************************************************************************
@@ -1751,7 +1560,7 @@ ProgressDownloadWindow(int choice2)
         char dircovers[100];
         snprintf(dircovers,strlen(CFG.covers_path),"%s",CFG.covers_path);
         if (mkdir(dircovers, 0777) == -1) {
-        WindowPrompt("Error:","Can't create directory","OK",0);
+        WindowPrompt("Error:","Can't create directory","OK",0,0,0);
         cntMissFiles = 0;
         }
     }
@@ -1759,7 +1568,7 @@ ProgressDownloadWindow(int choice2)
         char dirdiscs[100];
         snprintf(dirdiscs,strlen(CFG.disc_path),"%s",CFG.disc_path);
         if (mkdir(dirdiscs, 0777) == -1) {
-        WindowPrompt("Error:","Can't create directory","OK",0);
+        WindowPrompt("Error:","Can't create directory","OK",0,0,0);
         cntMissFiles = 0;
         }
     }
@@ -2203,22 +2012,22 @@ static int MenuInstall()
 		}
 		#endif
 
-		ret = DiscWait("Insert Disk","Waiting...","Cancel",0);
+		ret = DiscWait("Insert Disk","Waiting...","Cancel",0,0);
 		if (ret < 0) {
-			WindowPrompt ("Error reading Disc",0,"Back",0);
+			WindowPrompt ("Error reading Disc",0,"Back",0,0,0);
 			menu = MENU_DISCLIST;
 			break;
 		}
 		ret = Disc_Open();
 		if (ret < 0) {
-			WindowPrompt ("Could not open Disc",0,"Back",0);
+			WindowPrompt ("Could not open Disc",0,"Back",0,0,0);
 			menu = MENU_DISCLIST;
 			break;
 		}
 
 		ret = Disc_IsWii();
 		if (ret < 0) {
-			choice = WindowPrompt ("Not a Wii Disc","Insert a Wii Disc!","OK","Back");
+			choice = WindowPrompt ("Not a Wii Disc","Insert a Wii Disc!","OK","Back",0,0);
 
 			if (choice == 1) {
 				menu = MENU_INSTALL;
@@ -2241,13 +2050,13 @@ static int MenuInstall()
 
 		ret = WBFS_CheckGame(headerdisc.id);
 		if (ret) {
-			WindowPrompt ("Game is already installed:",name,"Back",0);
+			WindowPrompt ("Game is already installed:",name,"Back",0,0,0);
 			menu = MENU_DISCLIST;
 			break;
 		}
 		hdd = GetHddInfo();
 		if (!hdd) {
-			WindowPrompt ("No HDD found!","Error!!","Back",0);
+			WindowPrompt ("No HDD found!","Error!!","Back",0,0,0);
 			menu = MENU_DISCLIST;
 			break;
 			}
@@ -2261,7 +2070,7 @@ static int MenuInstall()
 
 		sprintf(gametxt, "%s : %.2fGB", name, gamesize);
 
-		choice = WindowPrompt("Continue install game?",gametxt,"OK","Cancel");
+		choice = WindowPrompt("Continue install game?",gametxt,"OK","Cancel",0,0);
 
 		if(choice == 1) {
 
@@ -2270,18 +2079,18 @@ static int MenuInstall()
 		if (gamesize > freespace) {
 			char errortxt[50];
 			sprintf(errortxt, "Game Size: %.2fGB, Free Space: %.2fGB", gamesize, freespace);
-			choice = WindowPrompt("Not enough free space!",errortxt,"Go on", "Return");
+			choice = WindowPrompt("Not enough free space!",errortxt,"Go on", "Return",0,0);
 			if (choice == 1) {
 				ret = ProgressWindow(gametxt, name);
 				if (ret != 0) {
-					WindowPrompt ("Install error!",0,"Back",0);
+					WindowPrompt ("Install error!",0,"Back",0,0,0);
 					menu = MENU_DISCLIST;
 					break;
 				}
 				else {
 					__Menu_GetEntries(); //get the entries again
 					wiilight(1);
-					WindowPrompt ("Successfully installed:",name,"OK",0);
+					WindowPrompt ("Successfully installed:",name,"OK",0,0,0);
 					menu = MENU_DISCLIST;
 					wiilight(0);
 					break;
@@ -2295,13 +2104,13 @@ static int MenuInstall()
 		else {
 			ret = ProgressWindow(gametxt, name);
 			if (ret != 0) {
-				WindowPrompt ("Install error!",0,"Back",0);
+				WindowPrompt ("Install error!",0,"Back",0,0,0);
 				menu = MENU_DISCLIST;
 					break;
 			} else {
 				__Menu_GetEntries(); //get the entries again
 				wiilight(1);
-				WindowPrompt ("Successfully installed:",name,"OK",0);
+				WindowPrompt ("Successfully installed:",name,"OK",0,0,0);
 				menu = MENU_DISCLIST;
 				wiilight(0);
 				break;
@@ -2670,8 +2479,8 @@ static int MenuDiscList()
 	    if(poweroffBtn.GetState() == STATE_CLICKED)
 		{
 
-		    choice = WiiMenuWindowPrompt("How to Shutdown?","Shutdown to Idle","Full Shutdown", "Cancel");
-			if(choice == 1)
+		    choice = WindowPrompt("How to Shutdown?",0,"Full Shutdown", "Shutdown to Idle", "Cancel",0);
+			if(choice == 2)
 			{
 			    WPAD_Flush(0);
                 WPAD_Disconnect(0);
@@ -2684,7 +2493,7 @@ static int MenuDiscList()
 
 				STM_ShutdownToIdle();
 
-			} else if(choice == 2) {
+			} else if(choice == 1) {
 			    WPAD_Flush(0);
                 WPAD_Disconnect(0);
                 WPAD_Shutdown();
@@ -2698,12 +2507,12 @@ static int MenuDiscList()
 		else if(homeBtn.GetState() == STATE_CLICKED)
 		{
 
-			choice = WiiMenuWindowPrompt("Exit USB ISO Loader ?","Wii Menu","Back to Loader","Back");
-			if(choice == 1)
+			choice = WindowPrompt("Exit USB ISO Loader ?",0, "Back to Loader","Wii Menu","Back",0);
+			if(choice == 2)
 			{
                 SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0); // Back to System Menu
 			}
-			else if (choice == 2)
+			else if (choice == 1)
 			{
 				if (*(unsigned int*) 0x80001800) exit(0);
 				// Channel Version
@@ -2717,7 +2526,7 @@ static int MenuDiscList()
         }
 		else if(installBtn.GetState() == STATE_CLICKED)
 		{
-				choice = WindowPrompt ("Install a game?",0,"Yes","No");
+				choice = WindowPrompt("Install a game?",0,"Yes","No",0,0);
 				if (choice == 1)
 				{
 					menu = MENU_INSTALL;
@@ -2732,7 +2541,7 @@ static int MenuDiscList()
 
 		else if(sdcardBtn.GetState() == STATE_CLICKED)
 		{
-			__io_wiisd.shutdown();
+            __io_wiisd.shutdown();
 			__io_wiisd.startup();
 			break;
 		}
@@ -2740,7 +2549,7 @@ static int MenuDiscList()
 		else if(DownloadBtn.GetState() == STATE_CLICKED)
 		{
 		    if(isSdInserted() == 1) {
-			choice = DownloadWindowPrompt(); // ask for download choice
+			choice = WindowPrompt("Cover Download", 0, "Normal Covers", "3D Covers", "Disc Images", "Back"); // ask for download choice
 
 			if (choice != 0)
 			{
@@ -2752,7 +2561,7 @@ static int MenuDiscList()
 
 				if(netset < 0)
 				{
-					WindowPrompt("Network init error", 0, "OK",0);
+					WindowPrompt("Network init error", 0, "OK",0,0,0);
 					netcheck = false;
 
 				} else  {
@@ -2769,27 +2578,27 @@ static int MenuDiscList()
 						i = 0;
 
 						sprintf(tempCnt,"Missing %i files",cntMissFiles);
-						choice = WindowPrompt("Download Boxart image?",tempCnt,"Yes","No");
+						choice = WindowPrompt("Download Boxart image?",tempCnt,"Yes","No",0,0);
 						//WindowPrompt("Downloading","Please Wait Downloading Covers",0,0);
 						if (choice == 1)
 						{
 							ret = ProgressDownloadWindow(choice2);
 							if (ret == 0) {
-							WindowPrompt("Download finished",0,"OK",0);
+							WindowPrompt("Download finished",0,"OK",0,0,0);
 							} else {
                             sprintf(tempCnt,"%i files not found on the server!",ret);
-                            WindowPrompt("Download finished",tempCnt,"OK",0);
+                            WindowPrompt("Download finished",tempCnt,"OK",0,0,0);
 							}
 						}
 					}
 					else
 					{
-						WindowPrompt("No file missing!",0,"OK",0);
+						WindowPrompt("No file missing!",0,"OK",0,0,0);
 					}
 				}
 			}
             } else {
-			WindowPrompt("No SD-Card inserted!", "Insert a SD-Card to download images.", "OK", 0);
+			WindowPrompt("No SD-Card inserted!", "Insert a SD-Card to download images.", "OK", 0,0,0);
             }
 			DownloadBtn.ResetState();
 			gameBrowser.SetFocus(1);
@@ -2959,7 +2768,7 @@ static int MenuDiscList()
                     WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
                     WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
 
-					WindowPrompt("You don't have cIOS222!","Loading in cIOS249!","OK", 0);
+					WindowPrompt("You don't have cIOS222!","Loading in cIOS249!","OK", 0,0,0);
 
 					Sys_IosReload(249);
 					ios2 = 0;
@@ -2979,7 +2788,7 @@ static int MenuDiscList()
 						WindowPrompt(
 						"Failed to set USB:",
 						text,
-						"OK",0);
+						"OK",0,0,0);
 					}
 					else {
 						/* Open disc */
@@ -2989,7 +2798,7 @@ static int MenuDiscList()
 							WindowPrompt(
 							"Failed to boot:",
 							text,
-							"OK",0);
+							"OK",0,0,0);
 						}
 						else {
 							menu = MENU_EXIT;
@@ -3039,7 +2848,7 @@ static int MenuDiscList()
                     WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
                     WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
 
-					WindowPrompt("You don't have cIOS222!","Loading in cIOS249!","OK", 0);
+					WindowPrompt("You don't have cIOS222!","Loading in cIOS249!","OK", 0,0,0);
 
 					Sys_IosReload(249);
 					ios2 = 0;
@@ -3061,7 +2870,7 @@ static int MenuDiscList()
 						WindowPrompt(
 						"Failed to set USB:",
 						text,
-						"OK",0);
+						"OK",0,0,0);
 					}
 					else {
 						/* Open disc */
@@ -3071,7 +2880,7 @@ static int MenuDiscList()
 							WindowPrompt(
 							"Failed to boot:",
 							text,
-							"OK",0);
+							"OK",0,0,0);
 						}
 						else {
 							menu = MENU_EXIT;
@@ -3327,17 +3136,17 @@ static int MenuFormat()
                         "Do you want to format:",
                         text,
                         "Yes",
-                        "No");
+                        "No",0,0);
                     if(choice == 1) {
                     ret = FormatingPartition("Formatting, please wait...", entry);
                         if (ret < 0) {
-                            WindowPrompt("Error:","Failed formating","Return",0);
+                            WindowPrompt("Error:","Failed formating","Return",0,0,0);
                             menu = MENU_SETTINGS;
 
                         } else {
                             WBFS_Open();
                             sprintf(text, "%s formated!", text);
-                            WindowPrompt("Success:",text,"OK",0);
+                            WindowPrompt("Success:",text,"OK",0,0,0);
                             menu = MENU_DISCLIST;
                         }
                     }
@@ -3351,7 +3160,7 @@ static int MenuFormat()
 
 	    if(poweroffBtn.GetState() == STATE_CLICKED)
 		{
-		    choice = WindowPrompt ("Shutdown System","Are you sure?","Yes","No");
+		    choice = WindowPrompt ("Shutdown System","Are you sure?","Yes","No",0,0);
 			if(choice == 1)
 			{
 			    WPAD_Flush(0);
@@ -3362,7 +3171,7 @@ static int MenuFormat()
 
 		} else if(exitBtn.GetState() == STATE_CLICKED)
 		{
-		    choice = WindowPrompt ("Return to Wii Menu","Are you sure?","Yes","No");
+		    choice = WindowPrompt ("Return to Wii Menu","Are you sure?","Yes","No",0,0);
 			if(choice == 1)
 			{
                 SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
@@ -3741,13 +3550,13 @@ static int MenuSettings()
 							if ( result == 1 )
 							{
 								strncpy(Settings.unlockCode, entered, sizeof(Settings.unlockCode));
-								WindowPrompt("Password Changed","Password has been changed","OK",0);
+								WindowPrompt("Password Changed","Password has been changed","OK",0,0,0);
 								cfg_save_global();
 							}
 						}
 						else
 						{
-							WindowPrompt("Password change","Console should be unlocked to modify it.","OK",0);
+							WindowPrompt("Password change","Console should be unlocked to modify it.","OK",0,0,0);
 						}
 						break;
 					case 1:
@@ -3828,7 +3637,7 @@ static int MenuSettings()
 						{
 							if (CFG.godmode == 0)
 							{
-								WindowPrompt("Correct Password","Install, Rename, and Delete are unlocked.","OK",0);
+								WindowPrompt("Correct Password","Install, Rename, and Delete are unlocked.","OK",0,0,0);
 								CFG.godmode = 1;
 								__Menu_GetEntries();
 								menu = MENU_DISCLIST;
@@ -3836,16 +3645,16 @@ static int MenuSettings()
 						}
 						else
 						{
-							WindowPrompt("Wrong Password","USB Loader is protected.","OK",0);
+							WindowPrompt("Wrong Password","USB Loader is protected.","OK",0,0,0);
 						}
 					}
 				}
 				else
 				{
-					int choice = WindowPrompt ("Lock Console","Are you sure?","Yes","No");
+					int choice = WindowPrompt ("Lock Console","Are you sure?","Yes","No",0,0);
 					if(choice == 1)
 					{
-						WindowPrompt("Console Locked","USB Loader is now protected.","OK",0);
+						WindowPrompt("Console Locked","USB Loader is now protected.","OK",0,0,0);
 						CFG.godmode = 0;
 						__Menu_GetEntries();
 						menu = MENU_DISCLIST;
@@ -4081,14 +3890,14 @@ int GameSettings(struct discHdr * header)
 		    if(isSdInserted() == 1) {
 				if (CFG_save_game_opt(header->id))
 				{
-					WindowPrompt("Successfully Saved", 0, "OK", 0);
+					WindowPrompt("Successfully Saved", 0, "OK", 0,0,0);
 				}
 				else
 				{
-					WindowPrompt("Save Failed", 0, "OK", 0);
+					WindowPrompt("Save Failed", 0, "OK", 0,0,0);
 				}
 		    } else {
-                WindowPrompt("No SD-Card inserted!", "Insert a SD-Card to save.", "OK", 0);
+                WindowPrompt("No SD-Card inserted!", "Insert a SD-Card to save.", "OK", 0,0,0);
 		    }
 
 			saveBtn.ResetState();
@@ -4106,7 +3915,7 @@ int GameSettings(struct discHdr * header)
 			int choice = WindowPrompt(
 					"Do you really want to delete:",
 					gameName,
-					"Yes","Cancel");
+					"Yes","Cancel",0,0);
 
 			if (choice == 1)
 			{
@@ -4116,14 +3925,14 @@ int GameSettings(struct discHdr * header)
 					WindowPrompt(
 					"Can't delete:",
 					gameName,
-					"OK",0);
+					"OK",0,0,0);
 				}
 				else {
 					__Menu_GetEntries();
 					WindowPrompt(
 					"Successfully deleted:",
 					gameName,
-					"OK",0);
+					"OK",0,0,0);
 					retVal = 1;
 				}
 				break;
@@ -4165,7 +3974,7 @@ static int MenuCheck()
         {
 			fatUnmount("SD");
 			__io_wiisd.shutdown();
-            ret2 = DeviceWait("No USB Device:", "Waiting for USB Device 30 secs", 0, 0);
+            ret2 = DiscWait("No USB Device:", "Waiting for USB Device", 0, 0, 1);
 			PAD_Init();
             Wpad_Init();
             WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
@@ -4174,7 +3983,7 @@ static int MenuCheck()
 			fatMountSimple("SD", &__io_wiisd);
         }
         if (ret2 < 0) {
-            WindowPrompt ("ERROR:","USB-Device not found!", "ok", 0);
+            WindowPrompt ("ERROR:","USB-Device not found!", "ok", 0,0,0);
             SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
         } else {
             PAD_Init();
@@ -4187,7 +3996,7 @@ static int MenuCheck()
 
         ret2 = Disc_Init();
         if (ret2 < 0) {
-            WindowPrompt ("Error","Could not initialize DIP module!", "ok", 0);
+            WindowPrompt ("Error","Could not initialize DIP module!", "ok", 0,0,0);
             SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
         }
 
@@ -4198,7 +4007,7 @@ static int MenuCheck()
             choice = WindowPrompt("No WBFS partition found!",
                                     "You need to format a partition.",
                                     "Format",
-                                    "Return");
+                                    "Return",0,0);
                 if(choice == 0)
                 {
                     SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
@@ -4209,7 +4018,7 @@ static int MenuCheck()
                     ret2 = Partition_GetEntries(partitions, &sector_size);
                     if (ret2 < 0) {
 
-                            WindowPrompt ("No partitions found!",0, "Restart", 0);
+                            WindowPrompt ("No partitions found!",0, "Restart", 0,0,0);
                             SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
 
                     }
