@@ -3522,7 +3522,8 @@ static int MenuSettings()
 				else if (!strcmp("", Settings.unlockCode)) sprintf(options2.value[0], "<not set>");
 				else sprintf(options2.value[0], Settings.unlockCode);
 
-                if (Settings.cios == ios249) sprintf (options2.value[1],"cIOS 249");
+                if (CFG.godmode != 1) sprintf(options2.value[1], "********");
+                else if (Settings.cios == ios249) sprintf (options2.value[1],"cIOS 249");
 				else if (Settings.cios == ios222) sprintf (options2.value[1],"cIOS 222");
 
 				if (Settings.xflip == no) sprintf (options2.value[2],"No");
@@ -3540,14 +3541,11 @@ static int MenuSettings()
 				else if(CFG.parentalcontrol == 2) sprintf(options2.value[5], "2");
 				else if(CFG.parentalcontrol == 3) sprintf(options2.value[5], "3");
 
-				if (CFG.godmode != 1) sprintf(options2.value[6], "********");
-				else sprintf(options2.value[6], CFG.covers_path);
+				sprintf(options2.value[6], CFG.covers_path);
 
-				if (CFG.godmode != 1) sprintf(options2.value[7], "********");
-				else sprintf(options2.value[7], CFG.disc_path);
+				sprintf(options2.value[7], CFG.disc_path);
 
-				if (CFG.godmode != 1) sprintf(options2.value[8], "********");
-				else sprintf(options2.value[8], CFG.theme_path);
+				sprintf(options2.value[8], CFG.theme_path);
 
 				ret = optionBrowser2.GetClickedOption();
 
@@ -3583,6 +3581,7 @@ static int MenuSettings()
 						}
 						break;
 					case 1:
+                        if ( CFG.godmode == 1)
 						Settings.cios++;
 						break;
 					case 2:
@@ -3595,6 +3594,7 @@ static int MenuSettings()
 						Settings.wsprompt++;
 						break;
                     case 5:
+                        if ( CFG.godmode == 1)
                         CFG.parentalcontrol++;
                         break;
                     case 6:
