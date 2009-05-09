@@ -946,7 +946,7 @@ int GameWindowPrompt()
 int
 DiscWait(const char *title, const char *msg, const char *btn1Label, const char *btn2Label, int IsDeviceWait)
 {
-	int choice = -1, i = 30, ret = 0;
+	int i = 30, ret = 0;
     u32 cover = 0;
 
 	GuiWindow promptWindow(472,320);
@@ -1074,7 +1074,7 @@ DiscWait(const char *title, const char *msg, const char *btn1Label, const char *
         {
             VIDEO_WaitVSync();
             if(btn1.GetState() == STATE_CLICKED) {
-                choice = 1;
+                btn1.ResetState();
                 break;
             }
             ret = WDVD_GetCoverStatus(&cover);
@@ -3230,6 +3230,10 @@ static int MenuSettings()
 	trigHome.SetButtonOnlyTrigger(-1, WPAD_BUTTON_HOME | WPAD_CLASSIC_BUTTON_HOME, 0);
 	GuiTrigger trigB;
 	trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
+    GuiTrigger trigL;
+	trigL.SetButtonOnlyTrigger(-1, WPAD_BUTTON_LEFT | WPAD_CLASSIC_BUTTON_LEFT, PAD_BUTTON_LEFT);
+	GuiTrigger trigR;
+	trigL.SetButtonOnlyTrigger(-1, WPAD_BUTTON_RIGHT | WPAD_CLASSIC_BUTTON_RIGHT, PAD_BUTTON_RIGHT);
 
     GuiText titleTxt("Settings", 28, (GXColor){0, 0, 0, 255});
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
@@ -3266,6 +3270,7 @@ static int MenuSettings()
 	page1Btn.SetSoundOver(&btnSoundOver);
 	page1Btn.SetSoundClick(&btnClick);
 	page1Btn.SetTrigger(&trigA);
+	page1Btn.SetTrigger(&trigL);
 
 	GuiTooltip page1BtnTT("Go to Page 1");
 	if (Settings.wsprompt == yes)
@@ -3283,6 +3288,7 @@ static int MenuSettings()
 	page2Btn.SetSoundOver(&btnSoundOver);
 	page2Btn.SetSoundClick(&btnClick);
 	page2Btn.SetTrigger(&trigA);
+	page2Btn.SetTrigger(&trigR);
 
 	GuiTooltip page2BtnTT("Go to Page 2");
 	if (Settings.wsprompt == yes)
