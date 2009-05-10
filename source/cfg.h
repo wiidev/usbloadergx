@@ -235,6 +235,8 @@ enum {
 enum {
     no,
 	yes,
+	sysmenu,
+	wtf,
 };
 /*
 enum {

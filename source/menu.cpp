@@ -705,8 +705,8 @@ int GameWindowPrompt()
 	//check if unlocked
 	if (CFG.godmode == 1)
 	{
-		btn2.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-		btn2.SetPosition(40, -40);
+		btn2.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
+		btn2.SetPosition(-50, -40);
 	}
 	else
 	{
@@ -727,8 +727,8 @@ int GameWindowPrompt()
 	if (Settings.wsprompt == yes){
 	btn3Img.SetWidescreen(CFG.widescreen);}///////////
 	GuiButton btn3(btnOutline.GetWidth(), btnOutline.GetHeight());
-	btn3.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-	btn3.SetPosition(-50, -40);
+	btn3.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+	btn3.SetPosition(50, -40);
 	btn3.SetLabel(&btn3Txt);
 	btn3.SetImage(&btn3Img);
 	btn3.SetSoundOver(&btnSoundOver);
@@ -890,7 +890,7 @@ int GameWindowPrompt()
 				choice = 3;
 				promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
 			}
-
+			// this next part is long because nobody could agree on what the left/right buttons should do 
 			else if((btnRight.GetState() == STATE_CLICKED) && (Settings.xflip == no)){//next game
 				promptWindow.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 50);
 				changed = 1;
@@ -921,6 +921,42 @@ int GameWindowPrompt()
 			else if((btnLeft.GetState() == STATE_CLICKED) && (Settings.xflip == yes)){//netx game
 				promptWindow.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 50);
 				changed = 1;
+				btnClick.Play();
+				gameSelected = (gameSelected + 1) % gameCnt;
+				btnLeft.ResetState();
+				break;
+			}
+			
+			else if((btnRight.GetState() == STATE_CLICKED) && (Settings.xflip == sysmenu)){//previous game
+				promptWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 50);
+				changed = 2;
+				btnClick.Play();
+				gameSelected = (gameSelected + 1) % gameCnt;
+				btnRight.ResetState();
+				break;
+			}
+
+			else if((btnLeft.GetState() == STATE_CLICKED) && (Settings.xflip == sysmenu)){//netx game
+				promptWindow.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 50);
+				changed = 1;
+				btnClick.Play();
+				gameSelected = (gameSelected - 1 + gameCnt) % gameCnt;
+				btnLeft.ResetState();
+				break;
+			}
+			
+			else if((btnRight.GetState() == STATE_CLICKED) && (Settings.xflip == wtf)){//previous game
+				promptWindow.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 50);
+				changed = 1;
+				btnClick.Play();
+				gameSelected = (gameSelected - 1 + gameCnt) % gameCnt;
+				btnRight.ResetState();
+				break;
+			}
+
+			else if((btnLeft.GetState() == STATE_CLICKED) && (Settings.xflip == wtf)){//netx game
+				promptWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 50);
+				changed = 2;
 				btnClick.Play();
 				gameSelected = (gameSelected + 1) % gameCnt;
 				btnLeft.ResetState();
@@ -1670,7 +1706,7 @@ UpdateGUI (void *arg)
 		else
 		{
 			mainWindow->Draw();
-			if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0)
+			//if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0)
 				mainWindow->DrawTooltip();
 
 			#ifdef HW_RVL
@@ -3508,7 +3544,7 @@ static int MenuSettings()
 			{
 				if ( Settings.cios > 1 )
 					Settings.cios = 0;
-				if ( Settings.xflip > 1 )
+				if ( Settings.xflip > 3 )
 					Settings.xflip = 0;
 				if ( Settings.qboot > 1 )
 					Settings.qboot = 0;
@@ -3526,8 +3562,10 @@ static int MenuSettings()
                 else if (Settings.cios == ios249) sprintf (options2.value[1],"cIOS 249");
 				else if (Settings.cios == ios222) sprintf (options2.value[1],"cIOS 222");
 
-				if (Settings.xflip == no) sprintf (options2.value[2],"No");
-				else if (Settings.xflip == yes) sprintf (options2.value[2],"Yes");
+				if (Settings.xflip == no) sprintf (options2.value[2],"Right/Next");
+				else if (Settings.xflip == yes) sprintf (options2.value[2],"Left/Prev");
+				else if (Settings.xflip == sysmenu) sprintf (options2.value[2],"Like SysMenu");
+				else if (Settings.xflip == wtf) sprintf (options2.value[2],"Right/Prev");
 
 				if (Settings.qboot == no) sprintf (options2.value[3],"No");
 				else if (Settings.qboot == yes) sprintf (options2.value[3],"Yes");
@@ -3783,6 +3821,7 @@ static int MenuSettings()
 			if(settingsbackgroundbtn.GetState() == STATE_CLICKED)
 			{
 			optionBrowser2.SetFocus(1);
+			break;
 			}
 		}
 
