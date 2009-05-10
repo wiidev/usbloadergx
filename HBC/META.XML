@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<app version="1">
+  <name>USB Loader GX</name>
+  <coder>USB Loader GX Team</coder>
+  <version>1.0</version>
+  <release_date>20090118030000</release_date>
+  <short_description>Coders: USB Loader GX Team.</short_description> 
+  <long_description>USB Loader GX is an USB-Game-Loader with a GUI made with libwiigui. You can install your games to your HDDs and play them. It is an interactiv GUI where you can fully use WiiMote Pointer/Classic Controller and Gamecube Controller. Coders: dimok/nIxx/cyrex/giantpune/Hungyip84/Neorame/WiiShizza/ardi.</long_description> 
+
+</app>

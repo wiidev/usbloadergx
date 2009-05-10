@@ -207,7 +207,7 @@ static void WindowCredits(void * ptr)
 
 	bool exit = false;
 	int i = 0;
-	int y = 95;
+	int y = 20;
 
 	GuiWindow creditsWindow(screenwidth,screenheight);
 	GuiWindow creditsWindowBox(580,448);
@@ -224,17 +224,26 @@ static void WindowCredits(void * ptr)
 	starImg.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	starImg.SetPosition(500,335);
 
-	int numEntries = 15;
+	int numEntries = 18;
 	GuiText * txt[numEntries];
+	
+	txt[i] = new GuiText("Credits", 26, (GXColor){255, 255, 255, 255});
+	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(0,12); i++;
+	
+	txt[i] = new GuiText("V 1 .0", 18, (GXColor){255, 255, 255, 255});
+	txt[i]->SetAlignment(ALIGN_RIGHT, ALIGN_TOP); txt[i]->SetPosition(0,y); i++; y+=34;
+	
+	txt[i] = new GuiText("USB Loader GX", 24, (GXColor){255, 255, 255, 255});
+	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(0,y); i++; y+=26;
 
 	txt[i] = new GuiText("Official Site: http://code.google.com/p/usbloader-gui/", 20, (GXColor){255, 255, 255, 255});
-	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(0,y); i++; y+=26;
+	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(0,y); i++; y+=28;
 
 	txt[i]->SetPresets(22, (GXColor){255, 255, 255,  255}, 0,
 			FTGX_JUSTIFY_LEFT | FTGX_ALIGN_TOP, ALIGN_LEFT, ALIGN_TOP);
 
 	txt[i] = new GuiText("Coding:");
-	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(100,y);
+	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(170,y);
 	i++;
 
 	txt[i] = new GuiText("dimok");
@@ -258,7 +267,7 @@ static void WindowCredits(void * ptr)
 	y+=24;
 
 	txt[i] = new GuiText("Design:");
-	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(100,y);
+	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(170,y);
 	i++;
 
 	txt[i] = new GuiText("cyrex");
@@ -274,24 +283,24 @@ static void WindowCredits(void * ptr)
 	txt[i] = new GuiText("WiiShizza");
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(320,y);
 	i++;
-	y+=24;
+	y+=28;
 
-	txt[i] = new GuiText("Ocarina & Vidpatch thanks to:");
-	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(100,y);
-	i++;
-	y+=22;
-
-	txt[i] = new GuiText("Fishears & WiiPower");
-	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(320,y);
-	i++;
-	y+=26;
-
-	txt[i] = new GuiText("Special thanks to Tantric for libwiigui");
+	txt[i] = new GuiText("Special thanks to:");
 	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(0,y);
 	i++;
 	y+=22;
 
-	txt[i] = new GuiText("and to Waninkoko & Kwiirk for the USB Loader ");
+	txt[i] = new GuiText("Fishears/Nuke for Ocarina & WiiPower for Vidpatch");
+	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(0,y);
+	i++;
+	y+=22;
+
+	txt[i] = new GuiText("Tantric for the libwiigui");
+	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(0,y);
+	i++;
+	y+=22;
+
+	txt[i] = new GuiText("Waninkoko & Kwiirk for the USB Loader");
 	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(0,y);
 	i++;
 	y+=22;
