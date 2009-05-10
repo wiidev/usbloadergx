@@ -1596,16 +1596,20 @@ ProgressDownloadWindow(int choice2)
         char dircovers[100];
         snprintf(dircovers,strlen(CFG.covers_path),"%s",CFG.covers_path);
         if (mkdir(dircovers, 0777) == -1) {
-        WindowPrompt("Error:","Can't create directory","OK",0,0,0);
-        cntMissFiles = 0;
+            if(subfoldercheck(dircovers) != 1) {
+            WindowPrompt("Error:","Can't create directory","OK",0,0,0);
+            cntMissFiles = 0;
+            }
         }
     }
     if(stat(CFG.disc_path,&st) != 0) {
         char dirdiscs[100];
         snprintf(dirdiscs,strlen(CFG.disc_path),"%s",CFG.disc_path);
         if (mkdir(dirdiscs, 0777) == -1) {
-        WindowPrompt("Error:","Can't create directory","OK",0,0,0);
-        cntMissFiles = 0;
+            if(subfoldercheck(dirdiscs) != 1) {
+            WindowPrompt("Error:","Can't create directory","OK",0,0,0);
+            cntMissFiles = 0;
+            }
         }
     }
 
@@ -1855,7 +1859,7 @@ err:
  * Opens an on-screen keyboard window, with the data entered being stored
  * into the specified variable.
  ***************************************************************************/
-static int OnScreenKeyboard(char * var, u16 maxlen)
+static int OnScreenKeyboard(char * var, u32 maxlen)
 {
 	int save = -1;
 
@@ -3242,6 +3246,7 @@ static int MenuSettings()
 {
 	int menu = MENU_NONE;
 	int ret;
+	char cfgtext[20];
 
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
 	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, vol);
@@ -3579,11 +3584,33 @@ static int MenuSettings()
 				else if(CFG.parentalcontrol == 2) sprintf(options2.value[5], "2");
 				else if(CFG.parentalcontrol == 3) sprintf(options2.value[5], "3");
 
-				sprintf(options2.value[6], CFG.covers_path);
 
-				sprintf(options2.value[7], CFG.disc_path);
+                if (strlen(CFG.covers_path) < (9 + 3)) {
+				sprintf(cfgtext, "%s", CFG.covers_path);
+                } else {
+				strncpy(cfgtext, CFG.covers_path,  9);
+				cfgtext[9] = '\0';
+				strncat(cfgtext, "...", 3);
+                }
+				sprintf(options2.value[6], "%s", cfgtext);
 
-				sprintf(options2.value[8], CFG.theme_path);
+                if (strlen(CFG.disc_path) < (9 + 3)) {
+				sprintf(cfgtext, "%s", CFG.disc_path);
+                } else {
+				strncpy(cfgtext, CFG.disc_path,  9);
+				cfgtext[9] = '\0';
+				strncat(cfgtext, "...", 3);
+                }
+				sprintf(options2.value[7], "%s", cfgtext);
+
+                if (strlen(CFG.theme_path) < (9 + 3)) {
+				sprintf(cfgtext, "%s", CFG.theme_path);
+                } else {
+				strncpy(cfgtext, CFG.theme_path,  9);
+				cfgtext[9] = '\0';
+				strncat(cfgtext, "...", 3);
+                }
+				sprintf(options2.value[8], "%s", cfgtext);
 
 				ret = optionBrowser2.GetClickedOption();
 
@@ -3643,9 +3670,9 @@ static int MenuSettings()
 							mainWindow->Remove(&page2Btn);
 							w.Remove(&backBtn);
 							w.Remove(&lockBtn);
-							char entered[50] = "";
+							char entered[43] = "";
 							strncpy(entered, CFG.covers_path, sizeof(entered));
-							int result = OnScreenKeyboard(entered, 50);
+							int result = OnScreenKeyboard(entered,43);
 							mainWindow->Append(&optionBrowser2);
 							mainWindow->Append(&page1Btn);
 							mainWindow->Append(&page2Btn);
@@ -3671,9 +3698,9 @@ static int MenuSettings()
 							mainWindow->Remove(&page2Btn);
 							w.Remove(&backBtn);
 							w.Remove(&lockBtn);
-							char entered[50] = "";
+							char entered[43] = "";
 							strncpy(entered, CFG.disc_path, sizeof(entered));
-							int result = OnScreenKeyboard(entered, 50);
+							int result = OnScreenKeyboard(entered, 43);
 							mainWindow->Append(&optionBrowser2);
 							mainWindow->Append(&page1Btn);
 							mainWindow->Append(&page2Btn);
@@ -3699,9 +3726,9 @@ static int MenuSettings()
 							mainWindow->Remove(&page2Btn);
 							w.Remove(&backBtn);
 							w.Remove(&lockBtn);
-							char entered[50] = "";
+							char entered[43] = "";
 							strncpy(entered, CFG.theme_path, sizeof(entered));
-							int result = OnScreenKeyboard(entered, 50);
+							int result = OnScreenKeyboard(entered, 43);
 							mainWindow->Append(&optionBrowser2);
 							mainWindow->Append(&page1Btn);
 							mainWindow->Append(&page2Btn);
