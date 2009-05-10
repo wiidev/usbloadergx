@@ -909,6 +909,7 @@ bool cfg_save_global()// save global settings
 	fprintf(f, "cios = %d\n ", Settings.cios);
 	fprintf(f, "xflip = %d\n ", Settings.xflip);
 	fprintf(f, "qboot = %d\n ", Settings.qboot);
+	fprintf(f, "wsprompt = %d\n", Settings.wsprompt);
 	fprintf(f, "parentalcontrol = %d\n ", CFG.parentalcontrol);
 	fprintf(f, "cover_path = %s\n ", CFG.covers_path);
 	if(CFG.widescreen) {

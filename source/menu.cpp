@@ -808,7 +808,7 @@ int GameWindowPrompt()
 			strncat(gameName, "...", 3);
 		}
 
-		snprintf(imgPath,sizeof(imgPath),"%s%s.png", CFG.disc_path, ID); //changed to current id
+		snprintf(imgPath,sizeof(imgPath),"%s%s.png", CFG.disc_path, IDFull); //changed to current id
 
 		if (diskCover)
 			delete diskCover;
@@ -818,7 +818,7 @@ int GameWindowPrompt()
 		if (!diskCover->GetImage())
 		{
 			delete diskCover;
-			snprintf(imgPath, sizeof(imgPath), "%s%s.png", CFG.disc_path, IDFull); //changed to current full id
+			snprintf(imgPath, sizeof(imgPath), "%s%s.png", CFG.disc_path, ID); //changed to current full id
 			diskCover = new GuiImageData(imgPath, 0);
 			if (!diskCover->GetImage())
 			{
@@ -890,7 +890,7 @@ int GameWindowPrompt()
 				choice = 3;
 				promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
 			}
-			// this next part is long because nobody could agree on what the left/right buttons should do 
+			// this next part is long because nobody could agree on what the left/right buttons should do
 			else if((btnRight.GetState() == STATE_CLICKED) && (Settings.xflip == no)){//next game
 				promptWindow.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 50);
 				changed = 1;
@@ -926,7 +926,7 @@ int GameWindowPrompt()
 				btnLeft.ResetState();
 				break;
 			}
-			
+
 			else if((btnRight.GetState() == STATE_CLICKED) && (Settings.xflip == sysmenu)){//previous game
 				promptWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 50);
 				changed = 2;
@@ -944,7 +944,7 @@ int GameWindowPrompt()
 				btnLeft.ResetState();
 				break;
 			}
-			
+
 			else if((btnRight.GetState() == STATE_CLICKED) && (Settings.xflip == wtf)){//previous game
 				promptWindow.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 50);
 				changed = 1;
@@ -1706,7 +1706,7 @@ UpdateGUI (void *arg)
 		else
 		{
 			mainWindow->Draw();
-			//if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0)
+			if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0)
 				mainWindow->DrawTooltip();
 
 			#ifdef HW_RVL
@@ -2713,12 +2713,12 @@ static int MenuDiscList()
 					cover = NULL;
 				}
 
-				snprintf(imgPath, sizeof(imgPath), "%s%s.png", CFG.covers_path, ID);
+				snprintf(imgPath, sizeof(imgPath), "%s%s.png", CFG.covers_path, IDfull);
 				cover = new GuiImageData(imgPath,0); //load short id
 				if (!cover->GetImage()) //if could not load the short id image
 				{
 					delete cover;
-					snprintf(imgPath, sizeof(imgPath), "%s%s.png", CFG.covers_path, IDfull);
+					snprintf(imgPath, sizeof(imgPath), "%s%s.png", CFG.covers_path, ID);
 					cover = new GuiImageData(imgPath, 0); //load full id image
 					if (!cover->GetImage())
 					{
@@ -3643,9 +3643,9 @@ static int MenuSettings()
 							mainWindow->Remove(&page2Btn);
 							w.Remove(&backBtn);
 							w.Remove(&lockBtn);
-							char entered[20] = "";
+							char entered[50] = "";
 							strncpy(entered, CFG.covers_path, sizeof(entered));
-							int result = OnScreenKeyboard(entered, 20);
+							int result = OnScreenKeyboard(entered, 50);
 							mainWindow->Append(&optionBrowser2);
 							mainWindow->Append(&page1Btn);
 							mainWindow->Append(&page2Btn);
@@ -3671,9 +3671,9 @@ static int MenuSettings()
 							mainWindow->Remove(&page2Btn);
 							w.Remove(&backBtn);
 							w.Remove(&lockBtn);
-							char entered[20] = "";
+							char entered[50] = "";
 							strncpy(entered, CFG.disc_path, sizeof(entered));
-							int result = OnScreenKeyboard(entered, 20);
+							int result = OnScreenKeyboard(entered, 50);
 							mainWindow->Append(&optionBrowser2);
 							mainWindow->Append(&page1Btn);
 							mainWindow->Append(&page2Btn);
@@ -3699,9 +3699,9 @@ static int MenuSettings()
 							mainWindow->Remove(&page2Btn);
 							w.Remove(&backBtn);
 							w.Remove(&lockBtn);
-							char entered[20] = "";
+							char entered[50] = "";
 							strncpy(entered, CFG.theme_path, sizeof(entered));
-							int result = OnScreenKeyboard(entered, 20);
+							int result = OnScreenKeyboard(entered, 50);
 							mainWindow->Append(&optionBrowser2);
 							mainWindow->Append(&page1Btn);
 							mainWindow->Append(&page2Btn);
@@ -3772,8 +3772,8 @@ static int MenuSettings()
 							mainWindow->Remove(&page2Btn);
 							w.Remove(&backBtn);
 							w.Remove(&lockBtn);
-						char entered[20] = "";
-					int result = OnScreenKeyboard(entered, 20);
+                            char entered[20] = "";
+                            int result = OnScreenKeyboard(entered, 20);
 							mainWindow->Append(&page1Btn);
 							mainWindow->Append(&page2Btn);
 							mainWindow->Append(&optionBrowser2);
