@@ -98,9 +98,9 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max)
 	key = new GuiImageData(keyboard_key_png);
 	keyOver = new GuiImageData(keyboard_key_over_png);
 	keyMedium = new GuiImageData(keyboard_mediumkey_png);
-	keyMediumOver = new GuiImageData(keyboard_mediumkey_over_png);
+	keyMediumOver = new GuiImageData(keyboard_mediumkey_png);
 	keyLarge = new GuiImageData(keyboard_largekey_png);
-	keyLargeOver = new GuiImageData(keyboard_largekey_over_png);
+	keyLargeOver = new GuiImageData(keyboard_largekey_png);
 
 	keySoundOver = new GuiSound(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
 	keySoundClick = new GuiSound(button_click_pcm, button_click_pcm_size, SOUND_PCM, vol);
