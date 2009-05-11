@@ -49,6 +49,11 @@ static GuiImageData * cover = NULL;
 
 //char GamesHDD[320][14];
 
+static GuiButton * settingsBtn = NULL;
+static GuiButton * homeBtn = NULL;
+static GuiButton * poweroffBtn = NULL;
+static GuiButton * installBtn = NULL;
+
 static struct discHdr *gameList = NULL;
 static GuiImageData * pointer[4];
 static GuiImage * bgImg = NULL;
@@ -3748,6 +3753,46 @@ static int MenuSettings()
 								strncpy(CFG.theme_path, entered, sizeof(CFG.theme_path));
 								WindowPrompt("Themepath Changed",0,"OK",0,0,0);
 								cfg_save_global();
+								mainWindow->Remove(bgImg);
+								CFG_Load1();
+								CFG_LoadGlobal();
+								menu = MENU_SETTINGS;
+								#ifdef HW_RVL
+	snprintf(imgPath, sizeof(imgPath), "%splayer1_point.png", CFG.theme_path);
+	pointer[0] = new GuiImageData(imgPath, player1_point_png);
+	snprintf(imgPath, sizeof(imgPath), "%splayer2_point.png", CFG.theme_path);
+	pointer[1] = new GuiImageData(imgPath, player2_point_png);
+	snprintf(imgPath, sizeof(imgPath), "%splayer3_point.png", CFG.theme_path);
+	pointer[2] = new GuiImageData(imgPath, player3_point_png);
+	snprintf(imgPath, sizeof(imgPath), "%splayer4_point.png", CFG.theme_path);
+	pointer[3] = new GuiImageData(imgPath, player4_point_png);
+	#endif
+								if (CFG.widescreen)
+								snprintf(imgPath, sizeof(imgPath), "%swbackground.png", CFG.theme_path);
+									else
+								snprintf(imgPath, sizeof(imgPath), "%sbackground.png", CFG.theme_path);
+
+								background = new GuiImageData(imgPath, CFG.widescreen? wbackground_png : background_png);
+
+								bgImg = new GuiImage(background);
+								mainWindow->Append(bgImg);
+								mainWindow->Append(&w);
+								
+								w.Append(&settingsbackgroundbtn);
+			w.Append(&titleTxt);
+			w.Append(&backBtn);
+			w.Append(&lockBtn);
+			w.Append(btnLogo);
+								
+								mainWindow->Append(&optionBrowser2);
+							mainWindow->Append(&page1Btn);
+							mainWindow->Append(&page2Btn);
+							w.Append(&backBtn);
+							w.Append(&lockBtn);
+								//installBtn->SetPosition(THEME.install_x, THEME.install_y);
+								//poweroffBtn->SetPosition(THEME.power_x, THEME.power_y);
+								////homeBtn->SetPosition(THEME.home_x, THEME.home_y);
+								//settingsBtn->SetPosition(THEME.setting_x, THEME.setting_y);
 							}
 						}
 						else

@@ -46,6 +46,7 @@ FreeTypeGX *fontClock=0;
 int ExitRequested = 0;
 bool netcheck = false;
 
+
 /*Networking - Forsaekn*/
 int Net_Init(char *ip){
 
@@ -107,6 +108,8 @@ DefaultSettings()
 int
 main(int argc, char *argv[])
 {
+
+
 
 	s32 ret2;
 

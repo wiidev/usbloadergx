@@ -1143,6 +1143,40 @@ void CFG_Load(int argc, char **argv)
 
 //	cfg_parsearg(argc, argv);
 }
+void CFG_Load1()
+{
+	char pathname[200];
+//	bool ret = false;
+
+	//set app path
+//	chdir_app(argv[0]);
+
+	CFG_Default(-1); // set defaults non forced
+
+	snprintf(pathname, sizeof(pathname), "SD:/config/global_settings.cfg");
+
+	cfg_parsefile(pathname, &widescreen_set); //first set widescreen
+	cfg_parsefile(pathname, &cfg_set); //then set config and layout options
+
+	snprintf(pathname, sizeof(pathname), "%stheme.txt", CFG.theme_path);
+	cfg_parsefile(pathname, &theme_set); //finally set console information
+
+//	if (!ret)
+//	{
+//		cfg_parsefile("SD:/config.txt", &widescreen_set);
+//		cfg_parsefile("SD:/config.txt", &cfg_set);
+//		cfg_parsefile("SD:/config.txt", &console_set);
+//	}
+
+	snprintf(pathname, sizeof(pathname), "SD:/config/titles.txt");
+	cfg_parsetitlefile(pathname, &title_set);
+
+	// load per-game settings
+	cfg_load_games();
+
+
+//	cfg_parsearg(argc, argv);
+}
 
 void CFG_LoadGlobal(void)
 {
