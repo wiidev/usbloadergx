@@ -1341,16 +1341,22 @@ void
 ShowProgress (s32 done, s32 total)
 {
 
-    static time_t start;
+ 	static time_t start;
 	static u32 expected;
 
     f32 percent; //, size;
 	u32 d, h, m, s;
+	static int last_percent;
+	static u32 last_d;
+	static int last_gamesizedone;
 
 	//first time
 	if (!done) {
 		start    = time(0);
 		expected = 300;
+		last_percent = -1;
+		last_d = 0;
+		last_gamesizedone = -1;
 	}
 
 	//Elapsed time
@@ -1374,19 +1380,31 @@ ShowProgress (s32 done, s32 total)
 	percent = (done * 100.0) / total;
 	//size    = (hdd->wbfs_sec_sz / GB_SIZE) * total;
 
-	sprintf(prozent, "%0.2f", percent);
-    prTxt.SetText(prozent);
+	if(last_percent != (int)(percent*100))
+	{
+		last_percent = (int)(percent*100);
+		sprintf(prozent, "%d.%.2d", last_percent/100, last_percent%100);
+		prTxt.SetText(prozent);
+	}
 	//prTxt.SetFont(fontClock);
-    sprintf(timet,"Time left: %d:%02d:%02d",h,m,s);
-    timeTxt.SetText(timet);
+	if(last_d != d)
+	{
+		last_d = d;
+		sprintf(timet,"Time left: %d:%02d:%02d",h,m,s);
+		timeTxt.SetText(timet);
+	}
 
     float gamesizedone = 0.00;
 
     gamesizedone = gamesize * done/total;
 
-    sprintf(sizeshow,"%0.2fGB/%0.2fGB", gamesizedone, gamesize);
-    sizeTxt.SetText(sizeshow);
-
+	if(last_gamesizedone != (int)(gamesizedone*100));
+	{
+		last_gamesizedone = (int)(gamesizedone*100);
+		int int_gamesize = (int)(gamesize*100);
+		sprintf(sizeshow,"%d.%.2dGB/%d.%.2dGB", last_gamesizedone/100, last_gamesizedone%100, int_gamesize/100, int_gamesize%100);
+		sizeTxt.SetText(sizeshow);
+	}
 //	timeTxt.SetFont(fontClock);
 	if ((Settings.wsprompt == yes) && (CFG.widescreen)){
 	progressbarImg.SetTile(80*done/total);}
@@ -2218,7 +2236,6 @@ static int MenuDiscList()
 	//CLOCK
 	struct tm * timeinfo;
 	char theTime[80];
-	int counter = 0;
 	time_t lastrawtime=0;
 
 	WBFS_DiskSpace(&used, &freespace);
@@ -2496,8 +2513,6 @@ static int MenuDiscList()
 				strftime(theTime, sizeof(theTime), "%H %M", timeinfo);
             clockTime.SetText(theTime);
         }
-		counter++;
-
 	    #ifdef HW_RVL
 		for(i=0; i < 4; i++)
 		{

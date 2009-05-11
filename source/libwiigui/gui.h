@@ -376,7 +376,7 @@ class GuiElement
 	protected:
 		void Lock();
 		void Unlock();
-		mutex_t mutex;
+		static mutex_t mutex;
 		friend class SimpleLock;
 		
         //int position2; //! B Scrollbariable
@@ -422,9 +422,9 @@ public:
 private:
 	GuiElement *element;
 };
-//#define LOCK(e) SimpleLock LOCK(e)
+#define LOCK(e) SimpleLock LOCK(e)
 //disabled because of problems with FW 4.0
-#define LOCK(e) 
+//#define LOCK(e) 
 
 //!Allows GuiElements to be grouped together into a "window"
 class GuiWindow : public GuiElement

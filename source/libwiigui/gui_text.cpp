@@ -67,7 +67,7 @@ GuiText::~GuiText()
 {
 	if(text)
 	{
-		delete text;
+		delete [] text;
 		text = NULL;
 	}
 }
@@ -76,7 +76,7 @@ void GuiText::SetText(const char * t)
 {
 	LOCK(this);
 	if(text)
-		delete text;
+		delete [] text;
 	text = NULL;
 
 	if(t)

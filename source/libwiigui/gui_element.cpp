@@ -13,6 +13,7 @@
 /**
  * Constructor for the Object class.
  */
+mutex_t GuiElement::mutex = 0;
 GuiElement::GuiElement()
 {
 	xoffset = 0;
@@ -55,8 +56,7 @@ GuiElement::GuiElement()
 	// default alignment - align to top left
 	alignmentVert = ALIGN_TOP;
 	alignmentHor = ALIGN_LEFT;
-	LWP_MutexInit(&mutex, true);
-
+	if(mutex == 0)	LWP_MutexInit(&mutex, true);
 }
 
 /**
@@ -64,7 +64,7 @@ GuiElement::GuiElement()
  */
 GuiElement::~GuiElement()
 {
-	LWP_MutexDestroy(mutex);
+//	LWP_MutexDestroy(mutex);
 }
 
 void GuiElement::SetParent(GuiElement * e)
