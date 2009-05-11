@@ -786,7 +786,7 @@ typedef struct _keytype {
 class GuiKeyboard : public GuiWindow
 {
 	public:
-		GuiKeyboard(char * t, u32 m);
+		GuiKeyboard(char * t, u32 m, int min);
 		~GuiKeyboard();
 		void Update(GuiTrigger * t);
 		char kbtextstr[256];
@@ -809,6 +809,10 @@ class GuiKeyboard : public GuiWindow
 		GuiImage * keyBackImg;
 		GuiImage * keyBackOverImg;
 		GuiButton * keyBack;
+		GuiText * keyClearText;
+		GuiImage * keyClearImg;
+		GuiImage * keyClearOverImg;
+		GuiButton * keyClear;
 		GuiImage * keySpaceImg;
 		GuiImage * keySpaceOverImg;
 		GuiButton * keySpace;

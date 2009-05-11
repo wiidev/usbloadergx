@@ -19,6 +19,7 @@
 #include <time.h> //CLOCK
 #include <dirent.h>
 
+#include <sstream>
 #include "libwiigui/gui.h"
 #include "menu.h"
 #include "main.h"
@@ -1891,11 +1892,12 @@ err:
  * Opens an on-screen keyboard window, with the data entered being stored
  * into the specified variable.
  ***************************************************************************/
-static int OnScreenKeyboard(char * var, u32 maxlen)
+ extern int min;
+static int OnScreenKeyboard(char * var, u32 maxlen, int min)
 {
 	int save = -1;
 
-	GuiKeyboard keyboard(var, maxlen);
+	GuiKeyboard keyboard(var, maxlen, min);
 
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
 	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, vol);
@@ -2224,8 +2226,10 @@ static int MenuInstall()
 
 static int MenuDiscList()
 {
-	int menu = MENU_NONE;
+	datagB=0;
+	int menu = MENU_NONE, dataef=0;
 	char imgPath[100];
+	char buf[4];
 
 	f32 freespace, used, size = 0.0;
 	u32 nolist;
@@ -2515,17 +2519,30 @@ static int MenuDiscList()
 
         //CLOCK
 		time_t rawtime = time(0);								//this fixes code dump caused by the clock
-        if (Settings.hddinfo == Clock && rawtime != lastrawtime) {//only update the clock every 2000 loops
+        if (Settings.hddinfo == Clock && rawtime != lastrawtime) {
             lastrawtime = rawtime;
 			timeinfo = localtime (&rawtime);
-			if(rawtime & 1)
-				strftime(theTime, sizeof(theTime), "%H:%M", timeinfo);
-			else
-				strftime(theTime, sizeof(theTime), "%H %M", timeinfo);
-            clockTime.SetText(theTime);
+			if (dataed < 1){
+				if(rawtime & 1)
+					strftime(theTime, sizeof(theTime), "%H:%M", timeinfo);
+				else
+					strftime(theTime, sizeof(theTime), "%H %M", timeinfo);
+				clockTime.SetText(theTime);
+				}
+			else if (dataed > 0){
+				
+				sprintf(buf, "%i", (dataed-1));
+				clockTime.SetText(buf);
+				//delete buf;
+				}
+
         }
+			
+			
+			
+			
 			//////////////////////end clock code//////////////////////////////
-																																																																																										if ((datagB<1)&&(Settings.cios==1)&&(Settings.video == ntsc)&&(Settings.hddinfo == Clock)&&(Settings.qboot==1)&&(Settings.wsprompt==0)&&(Settings.language==ger)&&(Settings.tooltips==0)){dataed=1;}if (dataed==1){if (cosa>7){cosa=1;}datag++;if (sina==3){wiiBtn.SetAlignment(ALIGN_LEFT,ALIGN_BOTTOM);wiiBtnImg.SetAngle(0);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((cosa)*70),(-2*(datag)+120));}else if(62<=datag){wiiBtn.SetPosition(((cosa)*70),((datag*2)-130));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==2){wiiBtn.SetAlignment(ALIGN_RIGHT,ALIGN_TOP);wiiBtnImg.SetAngle(270);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((-2*(datag)+130)),((cosa)*50));}else if(62<=datag){wiiBtn.SetPosition((2*(datag)-120),((cosa)*50));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==1){wiiBtn.SetAlignment(ALIGN_TOP,ALIGN_LEFT);wiiBtnImg.SetAngle(180);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((cosa)*70),(2*(datag)-120));}else if(62<=datag){wiiBtn.SetPosition(((cosa)*70),(-2*(datag)+130));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==0){wiiBtn.SetAlignment(ALIGN_TOP,ALIGN_LEFT);wiiBtnImg.SetAngle(90);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((2*(datag)-130)),((cosa)*50));}else if(62<=datag){wiiBtn.SetPosition((-2*(datag)+120),((cosa)*50));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}}
+																																																																																										if ((datagB<1)&&(Settings.cios==1)&&(Settings.video == ntsc)&&(Settings.hddinfo == Clock)&&(Settings.qboot==1)&&(Settings.wsprompt==0)&&(Settings.language==ger)&&(Settings.tooltips==0)){dataed=1;dataef=1;}if (dataef==1){if (cosa>7){cosa=1;}datag++;if (sina==3){wiiBtn.SetAlignment(ALIGN_LEFT,ALIGN_BOTTOM);wiiBtnImg.SetAngle(0);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((cosa)*70),(-2*(datag)+120));}else if(62<=datag){wiiBtn.SetPosition(((cosa)*70),((datag*2)-130));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==2){wiiBtn.SetAlignment(ALIGN_RIGHT,ALIGN_TOP);wiiBtnImg.SetAngle(270);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((-2*(datag)+130)),((cosa)*50));}else if(62<=datag){wiiBtn.SetPosition((2*(datag)-120),((cosa)*50));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==1){wiiBtn.SetAlignment(ALIGN_TOP,ALIGN_LEFT);wiiBtnImg.SetAngle(180);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((cosa)*70),(2*(datag)-120));}else if(62<=datag){wiiBtn.SetPosition(((cosa)*70),(-2*(datag)+130));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==0){wiiBtn.SetAlignment(ALIGN_TOP,ALIGN_LEFT);wiiBtnImg.SetAngle(90);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((2*(datag)-130)),((cosa)*50));}else if(62<=datag){wiiBtn.SetPosition((-2*(datag)+120),((cosa)*50));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}}
 
 
 	    #ifdef HW_RVL
@@ -2608,6 +2625,11 @@ static int MenuDiscList()
 			}
 
         }
+		else if(wiiBtn.GetState() == STATE_CLICKED)
+		{	dataed++;
+			wiiBtn.ResetState();
+			gameBrowser.SetFocus(1);
+		}
 		else if(installBtn.GetState() == STATE_CLICKED)
 		{
 				choice = WindowPrompt("Install a game?",0,"Yes","No",0,0);
@@ -3023,7 +3045,7 @@ static int MenuDiscList()
 					char entered[40];
 					snprintf(entered, sizeof(entered), "%s", get_title(header));
 					entered[39] = '\0';
-					OnScreenKeyboard(entered, 40);
+					OnScreenKeyboard(entered, 40,0);
 					WBFS_RenameGame(header->id, entered);
 					__Menu_GetEntries();
 					menu = MENU_DISCLIST;
@@ -3731,7 +3753,7 @@ static int MenuSettings()
 							w.Remove(&lockBtn);
 							char entered[20] = "";
 							strncpy(entered, Settings.unlockCode, sizeof(entered));
-							int result = OnScreenKeyboard(entered, 20);
+							int result = OnScreenKeyboard(entered, 20,0);
 							mainWindow->Append(&optionBrowser2);
 							mainWindow->Append(&tabBtn);
 							mainWindow->Append(&page1Btn);
@@ -3780,7 +3802,7 @@ static int MenuSettings()
 							w.Remove(&lockBtn);
 							char entered[43] = "";
 							strncpy(entered, CFG.covers_path, sizeof(entered));
-							int result = OnScreenKeyboard(entered,43);
+							int result = OnScreenKeyboard(entered,43,4);
 							mainWindow->Append(&optionBrowser2);
 							mainWindow->Append(&page1Btn);
 							mainWindow->Append(&page2Btn);
@@ -3789,8 +3811,7 @@ static int MenuSettings()
 							w.Append(&backBtn);
 							w.Append(&lockBtn);
 							if ( result == 1 )
-							{
-								strncpy(CFG.covers_path, entered, sizeof(CFG.covers_path));
+							{	strncpy(CFG.covers_path, entered, sizeof(CFG.covers_path));
 								WindowPrompt("Coverpath Changed",0,"OK",0,0,0);
 								cfg_save_global();
 							}
@@ -3812,7 +3833,7 @@ static int MenuSettings()
 							w.Remove(&lockBtn);
 							char entered[43] = "";
 							strncpy(entered, CFG.disc_path, sizeof(entered));
-							int result = OnScreenKeyboard(entered, 43);
+							int result = OnScreenKeyboard(entered, 43,4);
 							mainWindow->Append(&optionBrowser2);
 							mainWindow->Append(&page1Btn);
 							mainWindow->Append(&page2Btn);
@@ -3821,7 +3842,7 @@ static int MenuSettings()
 							w.Append(&backBtn);
 							w.Append(&lockBtn);
 							if ( result == 1 )
-							{
+							{	
 								strncpy(CFG.disc_path, entered, sizeof(CFG.disc_path));
 								WindowPrompt("Discpath Changed",0,"OK",0,0,0);
 								cfg_save_global();
@@ -3844,7 +3865,7 @@ static int MenuSettings()
 							w.Remove(&lockBtn);
 							char entered[43] = "";
 							strncpy(entered, CFG.theme_path, sizeof(entered));
-							int result = OnScreenKeyboard(entered, 43);
+							int result = OnScreenKeyboard(entered, 43,4);
 							mainWindow->Append(&optionBrowser2);
 							mainWindow->Append(&page1Btn);
 							mainWindow->Append(&page2Btn);
@@ -3853,7 +3874,7 @@ static int MenuSettings()
 							w.Append(&backBtn);
 							w.Append(&lockBtn);
 							if ( result == 1 )
-							{
+							{	
 								strncpy(CFG.theme_path, entered, sizeof(CFG.theme_path));
 								WindowPrompt("Themepath Changed",0,"OK",0,0,0);
 								cfg_save_global();
@@ -3971,7 +3992,7 @@ static int MenuSettings()
 							w.Remove(&backBtn);
 							w.Remove(&lockBtn);
                             char entered[20] = "";
-                            int result = OnScreenKeyboard(entered, 20);
+                            int result = OnScreenKeyboard(entered, 20,0);
 					//		mainWindow->Append(&page1Btn);
 					//		mainWindow->Append(&page2Btn);
 							mainWindow->Append(&optionBrowser2);

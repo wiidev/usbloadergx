@@ -13,12 +13,14 @@
  * Constructor for the GuiKeyboard class.
  */
 extern const int vol;
-GuiKeyboard::GuiKeyboard(char * t, u32 max)
+unsigned int m;
+GuiKeyboard::GuiKeyboard(char * t, u32 max, int min)
 {
 	width = 540;
 	height = 400;
 	shift = 0;
 	caps = 0;
+	m = min;
 	selectable = true;
 	focus = 0; // allow focus
 	alignmentHor = ALIGN_CENTRE;
@@ -123,6 +125,20 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max)
 	keyBack->SetPosition(10*42+40, 0*42+120);//(10*42+40, 0*42+80);
 	keyBack->SetEffectGrow();
 	this->Append(keyBack);
+	
+	keyClearImg = new GuiImage(keyMedium);
+	keyClearOverImg = new GuiImage(keyMediumOver);
+	keyClearText = new GuiText("clear", 20, (GXColor){0, 0, 0, 0xff});
+	keyClear = new GuiButton(keyMedium->GetWidth(), keyMedium->GetHeight());
+	keyClear->SetImage(keyClearImg);
+	keyClear->SetImageOver(keyClearOverImg);
+	keyClear->SetLabel(keyClearText);
+	keyClear->SetSoundOver(keySoundOver);
+	keyClear->SetSoundClick(keySoundClick);
+	keyClear->SetTrigger(trigA);
+	keyClear->SetPosition(10*42+40, 4*42+120);//(10*42+40, 0*42+80);
+	keyClear->SetEffectGrow();
+	this->Append(keyClear);
 
 	keyCapsImg = new GuiImage(keyMedium);
 	keyCapsOverImg = new GuiImage(keyMediumOver);
@@ -261,11 +277,20 @@ void GuiKeyboard::Update(GuiTrigger * t)
 		}
 		keySpace->SetState(STATE_SELECTED, t->chan);
 	}
-	else if(keyBack->GetState() == STATE_CLICKED)
+	else if(keyBack->GetState() == STATE_CLICKED) 
 	{
+		if (strlen(kbtextstr) >(m)){
+		kbtextstr[strlen(kbtextstr)-1] = 0;
+		kbText->SetText(kbtextstr);}
+		keyBack->SetState(STATE_SELECTED, t->chan);
+	}
+	else if(keyClear->GetState() == STATE_CLICKED) 
+	{	clearMore:
+		if (strlen(kbtextstr) >(m)){
 		kbtextstr[strlen(kbtextstr)-1] = 0;
 		kbText->SetText(kbtextstr);
-		keyBack->SetState(STATE_SELECTED, t->chan);
+		goto clearMore;}
+		keyClear->SetState(STATE_SELECTED, t->chan);
 	}
 	else if(keyShift->GetState() == STATE_CLICKED)
 	{
