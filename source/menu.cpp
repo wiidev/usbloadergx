@@ -19,7 +19,6 @@
 #include <time.h> //CLOCK
 #include <dirent.h>
 
-#include <sstream>
 #include "libwiigui/gui.h"
 #include "menu.h"
 #include "main.h"
