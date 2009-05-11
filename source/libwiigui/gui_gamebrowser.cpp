@@ -529,9 +529,11 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 		t->wpad.ir.valid && gameCnt > pagesize)
     {
 		scrollbarBoxBtn->SetPosition(width/2-18+7,0);
-		int position = t->wpad.ir.y - 50 - scrollbarBoxBtn->GetTop();
+		//int position = t->wpad.ir.y - 50 - scrollbarBoxBtn->GetTop();
+		int position = t->wpad.ir.y - 32 - scrollbarBoxBtn->GetTop();
 
-		listOffset = (position * gameCnt)/180 - selectedItem;
+		//listOffset = (position * gameCnt)/180 - selectedItem;
+		listOffset = (position * gameCnt)/237 - selectedItem;
 
 		if(listOffset <= 0)
 		{
