@@ -23,7 +23,7 @@ static u32 sector_size = SDHC_SECTOR_SIZE;
 bool SDHC_Init(void)
 {
 	s32 ret;
-
+ 
 	/* Already open */
 	if (fd > 0)
 		return true;

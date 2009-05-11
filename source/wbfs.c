@@ -24,7 +24,7 @@ static rw_sector_callback_t readCallback  = NULL;
 static rw_sector_callback_t writeCallback = NULL;
 
 /* Variables */
-
+ 
 static u32 nb_sectors, sector_size;
 void __WBFS_Spinner(s32 x, s32 max)
 {

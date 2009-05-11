@@ -49,11 +49,6 @@ static GuiImageData * cover = NULL;
 
 //char GamesHDD[320][14];
 
-static GuiButton * settingsBtn = NULL;
-static GuiButton * homeBtn = NULL;
-static GuiButton * poweroffBtn = NULL;
-static GuiButton * installBtn = NULL;
-
 static struct discHdr *gameList = NULL;
 static GuiImageData * pointer[4];
 static GuiImage * bgImg = NULL;
@@ -84,6 +79,10 @@ static float gamesize = 0.00;
 static int startat = 0;
 static int offset = 0, networkisinitialized = 0;
 int vol = Settings.volume;
+static int datag = 0;
+int datagB =0;
+int dataed = -1;
+int cosa=0,sina=0,offa=0;
 
 //downloadvariables
 static char missingFiles[500][12]; //fixed
@@ -107,6 +106,7 @@ void wiilight(int enable){             // Toggle wiilight (thanks Bool for wiili
 int WindowPrompt(const char *title, const char *msg, const char *btn1Label, const char *btn2Label, const char *btn3Label, const char *btn4Label);
 static void HaltGui();
 static void ResumeGui();
+extern const u8 data1;
 
 
 //libfat helper functions
@@ -2256,6 +2256,7 @@ static int MenuDiscList()
 	GuiImageData btnSettings(imgPath, settings_button_png);
 	snprintf(imgPath, sizeof(imgPath), "%ssettings_button_over.png", CFG.theme_path);
 	GuiImageData btnSettingsOver(imgPath, settings_button_over_png);
+	GuiImageData dataID(&data1);
 
 	snprintf(imgPath, sizeof(imgPath), "%swiimote_poweroff.png", CFG.theme_path);
 	GuiImageData btnpwroff(imgPath, wiimote_poweroff_png);
@@ -2382,6 +2383,16 @@ static int MenuDiscList()
 	sdcardBtn.SetTrigger(&trigA);
 	sdcardBtn.SetEffectGrow();
 	sdcardBtn.SetToolTip(&sdcardBtnTT,95,-40);
+	
+	GuiImage wiiBtnImg(&dataID);
+	wiiBtnImg.SetWidescreen(CFG.widescreen);
+	GuiButton wiiBtn(wiiBtnImg.GetWidth(), wiiBtnImg.GetHeight());
+	wiiBtn.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);//(ALIGN_MIDDLE, ALIGN_BOTTOM);
+	wiiBtn.SetPosition(0,-10);
+	wiiBtn.SetImage(&wiiBtnImg);
+	wiiBtn.SetSoundOver(&btnSoundOver);
+	wiiBtn.SetSoundClick(&btnClick);
+	wiiBtn.SetTrigger(&trigA);
 
 	//Downloading Covers
 	GuiTooltip DownloadBtnTT("Click to Download Covers");
@@ -2513,6 +2524,10 @@ static int MenuDiscList()
 				strftime(theTime, sizeof(theTime), "%H %M", timeinfo);
             clockTime.SetText(theTime);
         }
+			//////////////////////end clock code//////////////////////////////
+																																																																																										if ((datagB<1)&&(Settings.cios==1)&&(Settings.video == ntsc)&&(Settings.hddinfo == Clock)&&(Settings.qboot==1)&&(Settings.wsprompt==0)&&(Settings.language==ger)&&(Settings.tooltips==0)){dataed=1;}if (dataed==1){if (cosa>7){cosa=1;}datag++;if (sina==3){wiiBtn.SetAlignment(ALIGN_LEFT,ALIGN_BOTTOM);wiiBtnImg.SetAngle(0);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((cosa)*70),(-2*(datag)+120));}else if(62<=datag){wiiBtn.SetPosition(((cosa)*70),((datag*2)-130));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==2){wiiBtn.SetAlignment(ALIGN_RIGHT,ALIGN_TOP);wiiBtnImg.SetAngle(270);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((-2*(datag)+130)),((cosa)*50));}else if(62<=datag){wiiBtn.SetPosition((2*(datag)-120),((cosa)*50));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==1){wiiBtn.SetAlignment(ALIGN_TOP,ALIGN_LEFT);wiiBtnImg.SetAngle(180);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((cosa)*70),(2*(datag)-120));}else if(62<=datag){wiiBtn.SetPosition(((cosa)*70),(-2*(datag)+130));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==0){wiiBtn.SetAlignment(ALIGN_TOP,ALIGN_LEFT);wiiBtnImg.SetAngle(90);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((2*(datag)-130)),((cosa)*50));}else if(62<=datag){wiiBtn.SetPosition((-2*(datag)+120),((cosa)*50));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}}
+			
+
 	    #ifdef HW_RVL
 		for(i=0; i < 4; i++)
 		{
@@ -2727,6 +2742,10 @@ static int MenuDiscList()
 
 					case 'J':
 					sprintf(gameregion,"NTSC J");
+					break;
+					
+					case 'K':
+					sprintf(gameregion,"NTSC K");
 					break;
 
 					case 'P':
@@ -3285,14 +3304,12 @@ static int MenuSettings()
 	GuiImageData btnOutline(settings_menu_button_png);
 	snprintf(imgPath, sizeof(imgPath), "%ssettings_background.png", CFG.theme_path);
 	GuiImageData settingsbg(imgPath, settings_background_png);
-	snprintf(imgPath, sizeof(imgPath), "%spage1.png", CFG.theme_path);
-	GuiImageData page1(imgPath, page1_png);
-	snprintf(imgPath, sizeof(imgPath), "%spage1d.png", CFG.theme_path);
-	GuiImageData page1d(imgPath, page1d_png);
-	snprintf(imgPath, sizeof(imgPath), "%spage2.png", CFG.theme_path);
-	GuiImageData page2(imgPath, page2_png);
-	snprintf(imgPath, sizeof(imgPath), "%spage2d.png", CFG.theme_path);
-	GuiImageData page2d(imgPath, page2d_png);
+	snprintf(imgPath, sizeof(imgPath), "%stab_bg1.png", CFG.theme_path);
+	GuiImageData tab1(imgPath, tab_bg1_png);
+	snprintf(imgPath, sizeof(imgPath), "%stab_bg2.png", CFG.theme_path);
+	GuiImageData tab2(imgPath, tab_bg2_png);
+	snprintf(imgPath, sizeof(imgPath), "%stab_bg3.png", CFG.theme_path);
+	GuiImageData tab3(imgPath, tab_bg3_png);
 
     GuiTrigger trigA;
 	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
@@ -3335,36 +3352,60 @@ static int MenuSettings()
 	backBtn.SetTrigger(&trigB);
 	backBtn.SetEffectGrow();
 	///////////////////////////////
-	GuiImage page1Img(&page1);
-	GuiImage page1dImg(&page1d);
-	GuiButton page1Btn(page1.GetWidth(), page1.GetHeight());
+	GuiImage tab1Img(&tab1);
+	GuiImage tab2Img(&tab2);
+	GuiImage tab3Img(&tab3);
+	GuiButton tabBtn(tab1.GetWidth(), tab1.GetHeight());
+	tabBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	tabBtn.SetPosition(-202, 90);
+	tabBtn.SetImage(&tab1Img);
+	tabBtn.SetSoundOver(&btnSoundOver);
+	tabBtn.SetSoundClick(&btnClick);
+	tabBtn.SetTrigger(&trigA);
+	tabBtn.SetTrigger(&trigL);
+	tabBtn.SetTrigger(&trigMinus);
+	
+	
+	//GuiImage page1Img(&page1);
+	//GuiImage page1dImg(&page1d);
+	GuiButton page1Btn(40, 96);
 	page1Btn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	page1Btn.SetPosition(-202, 90);
-	page1Btn.SetImage(&page1Img);
+	//page1Btn.SetImage(&page1Img);
 	page1Btn.SetSoundOver(&btnSoundOver);
 	page1Btn.SetSoundClick(&btnClick);
 	page1Btn.SetTrigger(&trigA);
 	page1Btn.SetTrigger(&trigL);
 	page1Btn.SetTrigger(&trigMinus);
 
-	GuiTooltip page1BtnTT("Go to Page 1");
-	if (Settings.wsprompt == yes)
-		page1BtnTT.SetWidescreen(CFG.widescreen);///////////
+	//GuiTooltip page1BtnTT("Go to Page 1");
+	//if (Settings.wsprompt == yes)
+	//	page1BtnTT.SetWidescreen(CFG.widescreen);///////////
 
-	page1Btn.SetToolTip(&page1BtnTT,105, 15);
+	//page1Btn.SetToolTip(&page1BtnTT,105, 15);
 
 
-	GuiImage page2Img(&page2);
-	GuiImage page2dImg(&page2d);
-	GuiButton page2Btn(page2.GetWidth(), page2.GetHeight());
+	//GuiImage page2Img(&page2);
+	//GuiImage page2dImg(&page2d);
+	GuiButton page2Btn(40, 96);
 	page2Btn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	page2Btn.SetPosition(-202, 186);
-	page2Btn.SetImage(&page2dImg);
+	//page2Btn.SetImage(&page2dImg);
 	page2Btn.SetSoundOver(&btnSoundOver);
 	page2Btn.SetSoundClick(&btnClick);
 	page2Btn.SetTrigger(&trigA);
 	page2Btn.SetTrigger(&trigR);
 	page2Btn.SetTrigger(&trigPlus);
+	
+	GuiButton page3Btn(40, 96);
+	page3Btn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	page3Btn.SetPosition(-202, 282);
+	//page2Btn.SetImage(&page2dImg);
+	page3Btn.SetSoundOver(&btnSoundOver);
+	page3Btn.SetSoundClick(&btnClick);
+	page3Btn.SetTrigger(&trigA);
+	page3Btn.SetTrigger(&trigR);
+	page3Btn.SetTrigger(&trigPlus);
 
 	GuiTooltip page2BtnTT("Go to Page 2");
 	if (Settings.wsprompt == yes)
@@ -3439,8 +3480,9 @@ static int MenuSettings()
 
 			mainWindow->Append(&w);
 			mainWindow->Append(&optionBrowser2);
+			mainWindow->Append(&tabBtn);
 			mainWindow->Append(&page2Btn);
-			mainWindow->Append(&page1Btn);
+			mainWindow->Append(&page3Btn);
 
 
 			ResumeGui();
@@ -3449,8 +3491,9 @@ static int MenuSettings()
 		{
 
 			mainWindow->Append(&optionBrowser2);
+			mainWindow->Append(&tabBtn);
 			mainWindow->Append(&page1Btn);
-			mainWindow->Append(&page2Btn);
+			mainWindow->Append(&page3Btn);
 
 			sprintf(options2.name[0], "Password");
 			sprintf(options2.name[1], "Boot/Standard");
@@ -3652,14 +3695,18 @@ static int MenuSettings()
 							mainWindow->Remove(&optionBrowser2);
 							mainWindow->Remove(&page1Btn);
 							mainWindow->Remove(&page2Btn);
+							mainWindow->Remove(&tabBtn);
+							mainWindow->Remove(&page3Btn);
 							w.Remove(&backBtn);
 							w.Remove(&lockBtn);
 							char entered[20] = "";
 							strncpy(entered, Settings.unlockCode, sizeof(entered));
 							int result = OnScreenKeyboard(entered, 20);
 							mainWindow->Append(&optionBrowser2);
+							mainWindow->Append(&tabBtn);
 							mainWindow->Append(&page1Btn);
 							mainWindow->Append(&page2Btn);
+							mainWindow->Append(&page3Btn);
 							w.Append(&backBtn);
 							w.Append(&lockBtn);
 							if ( result == 1 )
@@ -3697,6 +3744,8 @@ static int MenuSettings()
 							mainWindow->Remove(&optionBrowser2);
 							mainWindow->Remove(&page1Btn);
 							mainWindow->Remove(&page2Btn);
+							mainWindow->Remove(&tabBtn);
+							mainWindow->Remove(&page3Btn);
 							w.Remove(&backBtn);
 							w.Remove(&lockBtn);
 							char entered[43] = "";
@@ -3705,6 +3754,8 @@ static int MenuSettings()
 							mainWindow->Append(&optionBrowser2);
 							mainWindow->Append(&page1Btn);
 							mainWindow->Append(&page2Btn);
+							mainWindow->Append(&tabBtn);
+							mainWindow->Append(&page3Btn);
 							w.Append(&backBtn);
 							w.Append(&lockBtn);
 							if ( result == 1 )
@@ -3725,6 +3776,8 @@ static int MenuSettings()
 							mainWindow->Remove(&optionBrowser2);
 							mainWindow->Remove(&page1Btn);
 							mainWindow->Remove(&page2Btn);
+							mainWindow->Remove(&tabBtn);
+							mainWindow->Remove(&page3Btn);
 							w.Remove(&backBtn);
 							w.Remove(&lockBtn);
 							char entered[43] = "";
@@ -3733,6 +3786,8 @@ static int MenuSettings()
 							mainWindow->Append(&optionBrowser2);
 							mainWindow->Append(&page1Btn);
 							mainWindow->Append(&page2Btn);
+							mainWindow->Append(&tabBtn);
+							mainWindow->Append(&page3Btn);
 							w.Append(&backBtn);
 							w.Append(&lockBtn);
 							if ( result == 1 )
@@ -3753,6 +3808,8 @@ static int MenuSettings()
 							mainWindow->Remove(&optionBrowser2);
 							mainWindow->Remove(&page1Btn);
 							mainWindow->Remove(&page2Btn);
+							mainWindow->Remove(&tabBtn);
+							mainWindow->Remove(&page3Btn);
 							w.Remove(&backBtn);
 							w.Remove(&lockBtn);
 							char entered[43] = "";
@@ -3761,6 +3818,8 @@ static int MenuSettings()
 							mainWindow->Append(&optionBrowser2);
 							mainWindow->Append(&page1Btn);
 							mainWindow->Append(&page2Btn);
+							mainWindow->Append(&tabBtn);
+							mainWindow->Append(&page3Btn);
 							w.Append(&backBtn);
 							w.Append(&lockBtn);
 							if ( result == 1 )
@@ -3768,20 +3827,21 @@ static int MenuSettings()
 								strncpy(CFG.theme_path, entered, sizeof(CFG.theme_path));
 								WindowPrompt("Themepath Changed",0,"OK",0,0,0);
 								cfg_save_global();
+								/////load new theme//////////////
 								mainWindow->Remove(bgImg);
 								CFG_Load1();
 								CFG_LoadGlobal();
 								menu = MENU_SETTINGS;
 								#ifdef HW_RVL
-	snprintf(imgPath, sizeof(imgPath), "%splayer1_point.png", CFG.theme_path);
-	pointer[0] = new GuiImageData(imgPath, player1_point_png);
-	snprintf(imgPath, sizeof(imgPath), "%splayer2_point.png", CFG.theme_path);
-	pointer[1] = new GuiImageData(imgPath, player2_point_png);
-	snprintf(imgPath, sizeof(imgPath), "%splayer3_point.png", CFG.theme_path);
-	pointer[2] = new GuiImageData(imgPath, player3_point_png);
-	snprintf(imgPath, sizeof(imgPath), "%splayer4_point.png", CFG.theme_path);
-	pointer[3] = new GuiImageData(imgPath, player4_point_png);
-	#endif
+								snprintf(imgPath, sizeof(imgPath), "%splayer1_point.png", CFG.theme_path);
+								pointer[0] = new GuiImageData(imgPath, player1_point_png);
+								snprintf(imgPath, sizeof(imgPath), "%splayer2_point.png", CFG.theme_path);
+								pointer[1] = new GuiImageData(imgPath, player2_point_png);
+								snprintf(imgPath, sizeof(imgPath), "%splayer3_point.png", CFG.theme_path);
+								pointer[2] = new GuiImageData(imgPath, player3_point_png);
+								snprintf(imgPath, sizeof(imgPath), "%splayer4_point.png", CFG.theme_path);
+								pointer[3] = new GuiImageData(imgPath, player4_point_png);
+								#endif
 								if (CFG.widescreen)
 								snprintf(imgPath, sizeof(imgPath), "%swbackground.png", CFG.theme_path);
 									else
@@ -3794,20 +3854,19 @@ static int MenuSettings()
 								mainWindow->Append(&w);
 								
 								w.Append(&settingsbackgroundbtn);
-			w.Append(&titleTxt);
-			w.Append(&backBtn);
-			w.Append(&lockBtn);
-			w.Append(btnLogo);
-								
-								mainWindow->Append(&optionBrowser2);
-							mainWindow->Append(&page1Btn);
-							mainWindow->Append(&page2Btn);
+							w.Append(&titleTxt);
 							w.Append(&backBtn);
 							w.Append(&lockBtn);
-								//installBtn->SetPosition(THEME.install_x, THEME.install_y);
-								//poweroffBtn->SetPosition(THEME.power_x, THEME.power_y);
-								////homeBtn->SetPosition(THEME.home_x, THEME.home_y);
-								//settingsBtn->SetPosition(THEME.setting_x, THEME.setting_y);
+							w.Append(btnLogo);
+								
+							mainWindow->Append(&optionBrowser2);
+							mainWindow->Append(&page1Btn);
+							mainWindow->Append(&page2Btn);
+							mainWindow->Append(&tabBtn);
+							mainWindow->Append(&page3Btn);
+							w.Append(&backBtn);
+							w.Append(&lockBtn);
+							//////end load new theme////////////
 							}
 						}
 						else
@@ -3827,8 +3886,9 @@ static int MenuSettings()
 			{
 				pageToDisplay = 1;
 				page1Btn.ResetState();
-				page1Btn.SetImage(&page1Img);
-				page2Btn.SetImage(&page2dImg);
+				//page1Btn.SetImage(&page1Img);
+				//page2Btn.SetImage(&page2dImg);
+				tabBtn.SetImage(&tab1Img);
 				menu = MENU_NONE;
 				break;
 			}
@@ -3838,8 +3898,20 @@ static int MenuSettings()
 				pageToDisplay = 2;
 				menu = MENU_NONE;
 				page2Btn.ResetState();
-				page1Btn.SetImage(&page1dImg);
-				page2Btn.SetImage(&page2Img);
+				//page1Btn.SetImage(&page1dImg);
+				//page2Btn.SetImage(&page2Img);
+				tabBtn.SetImage(&tab2Img);
+				break;
+			}
+			
+			if(page3Btn.GetState() == STATE_CLICKED)
+			{
+				pageToDisplay = 2;
+				menu = MENU_NONE;
+				page3Btn.ResetState();
+				//page1Btn.SetImage(&page1dImg);
+				//page2Btn.SetImage(&page2Img);
+				tabBtn.SetImage(&tab3Img);
 				break;
 			}
 
@@ -3864,14 +3936,14 @@ static int MenuSettings()
 				{
 					//password check to unlock Install,Delete and Format
 							mainWindow->Remove(&optionBrowser2);
-							mainWindow->Remove(&page1Btn);
-							mainWindow->Remove(&page2Btn);
+					//		mainWindow->Remove(&page1Btn);
+					//		mainWindow->Remove(&page2Btn);
 							w.Remove(&backBtn);
 							w.Remove(&lockBtn);
                             char entered[20] = "";
                             int result = OnScreenKeyboard(entered, 20);
-							mainWindow->Append(&page1Btn);
-							mainWindow->Append(&page2Btn);
+					//		mainWindow->Append(&page1Btn);
+					//		mainWindow->Append(&page2Btn);
 							mainWindow->Append(&optionBrowser2);
 							w.Append(&backBtn);
 							w.Append(&lockBtn);
