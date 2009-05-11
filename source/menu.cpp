@@ -231,13 +231,13 @@ static void WindowCredits(void * ptr)
 
 	int numEntries = 18;
 	GuiText * txt[numEntries];
-	
+
 	txt[i] = new GuiText("Credits", 26, (GXColor){255, 255, 255, 255});
 	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(0,12); i++;
-	
+
 	txt[i] = new GuiText("V 1 .0", 18, (GXColor){255, 255, 255, 255});
 	txt[i]->SetAlignment(ALIGN_RIGHT, ALIGN_TOP); txt[i]->SetPosition(0,y); i++; y+=34;
-	
+
 	txt[i] = new GuiText("USB Loader GX", 24, (GXColor){255, 255, 255, 255});
 	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(0,y); i++; y+=26;
 
@@ -2383,7 +2383,7 @@ static int MenuDiscList()
 	sdcardBtn.SetTrigger(&trigA);
 	sdcardBtn.SetEffectGrow();
 	sdcardBtn.SetToolTip(&sdcardBtnTT,95,-40);
-	
+
 	GuiImage wiiBtnImg(&dataID);
 	wiiBtnImg.SetWidescreen(CFG.widescreen);
 	GuiButton wiiBtn(wiiBtnImg.GetWidth(), wiiBtnImg.GetHeight());
@@ -2526,7 +2526,7 @@ static int MenuDiscList()
         }
 			//////////////////////end clock code//////////////////////////////
 																																																																																										if ((datagB<1)&&(Settings.cios==1)&&(Settings.video == ntsc)&&(Settings.hddinfo == Clock)&&(Settings.qboot==1)&&(Settings.wsprompt==0)&&(Settings.language==ger)&&(Settings.tooltips==0)){dataed=1;}if (dataed==1){if (cosa>7){cosa=1;}datag++;if (sina==3){wiiBtn.SetAlignment(ALIGN_LEFT,ALIGN_BOTTOM);wiiBtnImg.SetAngle(0);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((cosa)*70),(-2*(datag)+120));}else if(62<=datag){wiiBtn.SetPosition(((cosa)*70),((datag*2)-130));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==2){wiiBtn.SetAlignment(ALIGN_RIGHT,ALIGN_TOP);wiiBtnImg.SetAngle(270);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((-2*(datag)+130)),((cosa)*50));}else if(62<=datag){wiiBtn.SetPosition((2*(datag)-120),((cosa)*50));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==1){wiiBtn.SetAlignment(ALIGN_TOP,ALIGN_LEFT);wiiBtnImg.SetAngle(180);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((cosa)*70),(2*(datag)-120));}else if(62<=datag){wiiBtn.SetPosition(((cosa)*70),(-2*(datag)+130));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==0){wiiBtn.SetAlignment(ALIGN_TOP,ALIGN_LEFT);wiiBtnImg.SetAngle(90);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((2*(datag)-130)),((cosa)*50));}else if(62<=datag){wiiBtn.SetPosition((-2*(datag)+120),((cosa)*50));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}}
-			
+
 
 	    #ifdef HW_RVL
 		for(i=0; i < 4; i++)
@@ -2743,7 +2743,7 @@ static int MenuDiscList()
 					case 'J':
 					sprintf(gameregion,"NTSC J");
 					break;
-					
+
 					case 'K':
 					sprintf(gameregion,"NTSC K");
 					break;
@@ -2827,6 +2827,21 @@ static int MenuDiscList()
 
 					wiilight(0);
 
+						struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
+
+                        if (game_cfg)//if there are saved settings for this game use them
+                        {
+                            iosChoice = game_cfg->ios;
+                        }
+                        else// otherwise use the global settings
+                        {
+                            if(Settings.cios == ios222) {
+                            iosChoice = i222;
+                            } else {
+                            iosChoice = i249;
+                            }
+                        }
+
                     int ios2;
                     switch(iosChoice)
                     {
@@ -2906,6 +2921,21 @@ static int MenuDiscList()
 				{
 
 					wiilight(0);
+
+                        struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
+
+                        if (game_cfg)//if there are saved settings for this game use them
+                        {
+                            iosChoice = game_cfg->ios;
+                        }
+                        else// otherwise use the global settings
+                        {
+                            if(Settings.cios == ios222) {
+                            iosChoice = i222;
+                            } else {
+                            iosChoice = i249;
+                            }
+                        }
 
                     int ios2;
                     switch(iosChoice)
@@ -3364,8 +3394,8 @@ static int MenuSettings()
 	tabBtn.SetTrigger(&trigA);
 	tabBtn.SetTrigger(&trigL);
 	tabBtn.SetTrigger(&trigMinus);
-	
-	
+
+
 	//GuiImage page1Img(&page1);
 	//GuiImage page1dImg(&page1d);
 	GuiButton page1Btn(40, 96);
@@ -3396,7 +3426,7 @@ static int MenuSettings()
 	page2Btn.SetTrigger(&trigA);
 	page2Btn.SetTrigger(&trigR);
 	page2Btn.SetTrigger(&trigPlus);
-	
+
 	GuiButton page3Btn(40, 96);
 	page3Btn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	page3Btn.SetPosition(-202, 282);
@@ -3852,13 +3882,13 @@ static int MenuSettings()
 								bgImg = new GuiImage(background);
 								mainWindow->Append(bgImg);
 								mainWindow->Append(&w);
-								
+
 								w.Append(&settingsbackgroundbtn);
 							w.Append(&titleTxt);
 							w.Append(&backBtn);
 							w.Append(&lockBtn);
 							w.Append(btnLogo);
-								
+
 							mainWindow->Append(&optionBrowser2);
 							mainWindow->Append(&page1Btn);
 							mainWindow->Append(&page2Btn);
@@ -3903,7 +3933,7 @@ static int MenuSettings()
 				tabBtn.SetImage(&tab2Img);
 				break;
 			}
-			
+
 			if(page3Btn.GetState() == STATE_CLICKED)
 			{
 				pageToDisplay = 2;
