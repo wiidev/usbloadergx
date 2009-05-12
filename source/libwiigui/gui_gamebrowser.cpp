@@ -532,8 +532,8 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 		//int position = t->wpad.ir.y - 50 - scrollbarBoxBtn->GetTop();
 		int position = t->wpad.ir.y - 32 - scrollbarBoxBtn->GetTop();
 
-		//listOffset = (position * gameCnt)/180 - selectedItem;
-		listOffset = (position * gameCnt)/237 - selectedItem;
+		//listOffset = (position * gameCnt)/237 - selectedItem;
+		listOffset = (position * gameCnt)/(25.2 * pagesize) - selectedItem;
 
 		if(listOffset <= 0)
 		{
@@ -547,10 +547,11 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 		}
 
 	}
-        int positionbar = 237*(listOffset + selectedItem) / gameCnt;
+        //int positionbar = 237*(listOffset + selectedItem) / gameCnt;
+		int positionbar = (25.2 * pagesize)*(listOffset + selectedItem) / gameCnt;
 
-        if(positionbar > 216)
-		positionbar = 216;
+        if(positionbar > (24 * pagesize))//if(positionbar > 216)
+		positionbar = (24 * pagesize);//positionbar = 216;
 		scrollbarBoxBtn->SetPosition(width/2-18+7, positionbar+8);
 
 
