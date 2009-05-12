@@ -2529,17 +2529,17 @@ static int MenuDiscList()
 				clockTime.SetText(theTime);
 				}
 			else if (dataed > 0){
-				
+
 				sprintf(buf, "%i", (dataed-1));
 				clockTime.SetText(buf);
 				//delete buf;
 				}
 
         }
-			
-			
-			
-			
+
+
+
+
 			//////////////////////end clock code//////////////////////////////
 																																																																																										if ((datagB<1)&&(Settings.cios==1)&&(Settings.video == ntsc)&&(Settings.hddinfo == Clock)&&(Settings.qboot==1)&&(Settings.wsprompt==0)&&(Settings.language==ger)&&(Settings.tooltips==0)){dataed=1;dataef=1;}if (dataef==1){if (cosa>7){cosa=1;}datag++;if (sina==3){wiiBtn.SetAlignment(ALIGN_LEFT,ALIGN_BOTTOM);wiiBtnImg.SetAngle(0);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((cosa)*70),(-2*(datag)+120));}else if(62<=datag){wiiBtn.SetPosition(((cosa)*70),((datag*2)-130));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==2){wiiBtn.SetAlignment(ALIGN_RIGHT,ALIGN_TOP);wiiBtnImg.SetAngle(270);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((-2*(datag)+130)),((cosa)*50));}else if(62<=datag){wiiBtn.SetPosition((2*(datag)-120),((cosa)*50));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==1){wiiBtn.SetAlignment(ALIGN_TOP,ALIGN_LEFT);wiiBtnImg.SetAngle(180);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((cosa)*70),(2*(datag)-120));}else if(62<=datag){wiiBtn.SetPosition(((cosa)*70),(-2*(datag)+130));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==0){wiiBtn.SetAlignment(ALIGN_TOP,ALIGN_LEFT);wiiBtnImg.SetAngle(90);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((2*(datag)-130)),((cosa)*50));}else if(62<=datag){wiiBtn.SetPosition((-2*(datag)+120),((cosa)*50));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}}
 
@@ -3841,7 +3841,7 @@ static int MenuSettings()
 							w.Append(&backBtn);
 							w.Append(&lockBtn);
 							if ( result == 1 )
-							{	
+							{
 								strncpy(CFG.disc_path, entered, sizeof(CFG.disc_path));
 								WindowPrompt("Discpath Changed",0,"OK",0,0,0);
 								cfg_save_global();
@@ -3873,7 +3873,7 @@ static int MenuSettings()
 							w.Append(&backBtn);
 							w.Append(&lockBtn);
 							if ( result == 1 )
-							{	
+							{
 								strncpy(CFG.theme_path, entered, sizeof(CFG.theme_path));
 								WindowPrompt("Themepath Changed",0,"OK",0,0,0);
 								cfg_save_global();
@@ -4339,8 +4339,31 @@ static int MenuCheck()
         ret2 = WBFS_Init(WBFS_DEVICE_USB);
         if (ret2 < 0)
         {
+            //shutdown SD
 			fatUnmount("SD");
 			__io_wiisd.shutdown();
+			//initialize WiiMote for Prompt
+            Wpad_Init();
+            WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
+            WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
+
+            ret2 = WindowPrompt("No USB Device found.",
+                    "Do you want to retry for 30secs?",
+                    "Try cIOS249", "Try cIOS222",
+                    "Back to WiiMenu", 0);
+
+            if(ret2 == 1) {
+            Settings.cios = ios249;
+            } else if(ret2 == 2) {
+            Settings.cios = ios222;
+            } else {
+            SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
+            }
+            //shutdown WiiMote before IOS Reload
+            WPAD_Flush(0);
+            WPAD_Disconnect(0);
+            WPAD_Shutdown();
+
             ret2 = DiscWait("No USB Device:", "Waiting for USB Device", 0, 0, 1);
 			PAD_Init();
             Wpad_Init();
