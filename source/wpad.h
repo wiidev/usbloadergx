@@ -3,8 +3,6 @@
 
 #include <wiiuse/wpad.h>
 
-#include <asndlib.h>
-
 #ifdef __cplusplus
 extern "C"
 {

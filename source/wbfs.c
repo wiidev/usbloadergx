@@ -24,7 +24,7 @@ static rw_sector_callback_t readCallback  = NULL;
 static rw_sector_callback_t writeCallback = NULL;
 
 /* Variables */
- 
+
 static u32 nb_sectors, sector_size;
 void __WBFS_Spinner(s32 x, s32 max)
 {
@@ -247,7 +247,7 @@ s32 WBFS_Init(u32 device)
 			if (!nb_sectors)
 				return -1;
 		}
-		else 
+		else
 			return ret;
 		break;
 	case WBFS_DEVICE_SDHC:
@@ -262,12 +262,12 @@ s32 WBFS_Init(u32 device)
 			/* Device info */
 			nb_sectors  = 0;
 			sector_size = SDHC_SECTOR_SIZE;
-		} 
+		}
 		else
 			return -1;
 		break;
 	}
-	
+
 	return 0;
 }
 //s32 WBFS_Init(void)
@@ -293,15 +293,15 @@ s32 WBFS_Init(u32 device, u32 timeout)
 	u32 cnt;
 	s32 ret;
 
-	// Wrong timeout 
+	// Wrong timeout
 	if (!timeout)
 		return -1;
 
-	// Try to mount device 
+	// Try to mount device
 	for (cnt = 0; cnt < timeout; cnt++) {
 		switch (device) {
 		case WBFS_DEVICE_USB: {
-			// Initialize USB storage 
+			// Initialize USB storage
 			ret = USBStorage_Init();
 
 			if (ret >= 0) {
@@ -317,11 +317,11 @@ s32 WBFS_Init(u32 device, u32 timeout)
 		}
 
 		case WBFS_DEVICE_SDHC: {
-			// Initialize SDHC 
+			// Initialize SDHC
 			ret = SDHC_Init();
 
 			if (ret) {
-				// Setup callbacks 
+				// Setup callbacks
 				readCallback  = __WBFS_ReadSDHC;
 				writeCallback = __WBFS_WriteSDHC;
 
@@ -338,7 +338,7 @@ s32 WBFS_Init(u32 device, u32 timeout)
 			return -1;
 		}
 
-		// Sleep 1 second 
+		// Sleep 1 second
 		sleep(1);
 	}
 

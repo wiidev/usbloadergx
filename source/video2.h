@@ -1,8 +1,6 @@
 #ifndef _VIDEO2_H_
 #define _VIDEO2_H_
 
-#include <asndlib.h>
-
 #ifdef __cplusplus
 extern "C"
 {

@@ -1,8 +1,6 @@
 #ifndef _DISC_H_
 #define _DISC_H_
 
-#include <asndlib.h>
-
 #ifdef __cplusplus
 extern "C"
 {

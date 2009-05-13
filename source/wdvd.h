@@ -1,8 +1,6 @@
 #ifndef _WDVD_H_
 #define _WDVD_H_
 
-#include <asndlib.h>
-
 #ifdef __cplusplus
 extern "C"
 {

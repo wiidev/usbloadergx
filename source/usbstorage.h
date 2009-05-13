@@ -1,8 +1,6 @@
 #ifndef _USBSTORAGE_H_
 #define _USBSTORAGE_H_
 
-#include <asndlib.h>
-
 #ifdef __cplusplus
 extern "C"
 {

@@ -134,7 +134,7 @@ if (dir == NULL) //If empty
 		}
 	}
 
-	qsort(mp3files, countmp3, sizeof(char[30]), filenamescmp);
+	qsort(mp3files, countmp3, sizeof(char[80]), filenamescmp);
 
 return countmp3;
 }

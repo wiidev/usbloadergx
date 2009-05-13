@@ -211,7 +211,7 @@ u32 wbfs_extract_file(wbfs_disc_t*d, char *path);
 // remove some sanity checks
 void wbfs_set_force_mode(int force);
 
-u32 wbfs_estimate_disc(
+float wbfs_estimate_disc(
 		wbfs_t *p, read_wiidisc_callback_t read_src_wii_disc,
 		void *callback_data,
 		partition_selector_t sel);

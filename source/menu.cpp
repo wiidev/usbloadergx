@@ -846,12 +846,12 @@ int GameWindowPrompt()
 		sizeTxt.SetText(sizeText);
 		msgTxt.SetText(gameName);
 		char* pch;
-  
+
 			pch=strrchr((gameName),'_');
-  
+
 			if (pch!=NULL){msgTxt.SetPosition(0, 16);}
 			else {msgTxt.SetPosition(0, 1);}
-		
+
 
 		HaltGui();
 		mainWindow->SetState(STATE_DISABLED);
@@ -2145,8 +2145,8 @@ static int MenuInstall()
 		f32 freespace, used;
 
 		WBFS_DiskSpace(&used, &freespace);
-		u32 estimation = wbfs_estimate_disc(hdd, __WBFS_ReadDVD, NULL, ONLY_GAME_PARTITION);
-		gamesize = ((f32) estimation)/1073741824;
+		float estimation = wbfs_estimate_disc(hdd, __WBFS_ReadDVD, NULL, ONLY_GAME_PARTITION);
+		gamesize =  estimation/1073741824;
 		char gametxt[50];
 
 		sprintf(gametxt, "%s : %.2fGB", name, gamesize);
@@ -4528,7 +4528,7 @@ int MenuMp3()
 
     customOptionList options2(500);
     char mp3path[30] = "SD:/mp3/";
-    char fullpath[100];
+    char fullpath[110];
 	int countmp3 = GetFiles(mp3path);
 
     for (cnt = 0; cnt < countmp3; cnt++) {
@@ -4588,9 +4588,9 @@ int MenuMp3()
 	GuiImageData pause(imgPath, mp3_pause_png);
 	snprintf(imgPath, sizeof(imgPath), "%sstartgame_arrow_right.png", CFG.theme_path);
 	GuiImageData play(imgPath, startgame_arrow_right_png);
-	
-	
-	
+
+
+
 	GuiImage nextBtnImg(&next);
 	GuiButton nextBtn(next.GetWidth(), next.GetHeight());
 	nextBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
@@ -4601,7 +4601,7 @@ int MenuMp3()
 	nextBtn.SetTrigger(&trigA);
 	nextBtn.SetTrigger(&trigR);
 	nextBtn.SetEffectGrow();
-	
+
 	GuiImage prevBtnImg(&prev);
 	prevBtnImg.SetWidescreen(CFG.widescreen);
 	GuiButton prevBtn(prev.GetWidth(), prev.GetHeight());
@@ -4613,7 +4613,7 @@ int MenuMp3()
 	prevBtn.SetTrigger(&trigA);
 	prevBtn.SetTrigger(&trigL);
 	prevBtn.SetEffectGrow();
-	
+
 	GuiImage playBtnImg(&play);
 	playBtnImg.SetWidescreen(CFG.widescreen);
 	GuiButton playBtn(play.GetWidth(), play.GetHeight());
@@ -4625,7 +4625,7 @@ int MenuMp3()
 	playBtn.SetTrigger(&trigA);
 	playBtn.SetTrigger(&trigPlus);
 	playBtn.SetEffectGrow();
-	
+
 	GuiImage stopBtnImg(&stop);
 	stopBtnImg.SetWidescreen(CFG.widescreen);
 	GuiButton stopBtn(stop.GetWidth(), stop.GetHeight());
@@ -4637,7 +4637,7 @@ int MenuMp3()
 	stopBtn.SetTrigger(&trigA);
 	stopBtn.SetTrigger(&trigMinus);
 	stopBtn.SetEffectGrow();
-	
+
 	GuiImage pauseBtnImg(&pause);
 	pauseBtnImg.SetWidescreen(CFG.widescreen);
 
@@ -4685,11 +4685,11 @@ int MenuMp3()
 			//playBtn.SetImage(&playBtnImg);isplaying=true;
 			//if (isplaying==true){playBtn.SetImage(&pauseBtnImg);isplaying=false;}
             playBtn.ResetState();
-			
+
     }
-	
+
 	if(nextBtn.GetState() == STATE_CLICKED)
-			{	
+			{
 			StopMp3();
 			songPlaying++;
 			if (songPlaying>(countmp3 - 1)){songPlaying=0;}
@@ -4701,7 +4701,7 @@ int MenuMp3()
 				//break;
 			}
 	if(prevBtn.GetState() == STATE_CLICKED)
-			{	
+			{
 				StopMp3();
 				songPlaying--;
 				if (songPlaying<0){songPlaying=(countmp3 - 1);}
