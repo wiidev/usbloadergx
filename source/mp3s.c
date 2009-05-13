@@ -103,6 +103,12 @@ return 0;
 }
 */
 
+s32 filenamescmp(const void *a, const void *b)
+{
+	/* Compare strings */
+	return stricmp((char *)a, (char *)b);
+}
+
 int GetFiles(char * mp3path)
 {
 int countmp3 = 0;
@@ -127,5 +133,8 @@ if (dir == NULL) //If empty
 			}
 		}
 	}
+
+	qsort(mp3files, countmp3, sizeof(char[30]), filenamescmp);
+
 return countmp3;
 }
