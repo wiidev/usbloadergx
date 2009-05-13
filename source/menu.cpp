@@ -4511,6 +4511,7 @@ int MenuMp3()
     int menu = MENU_NONE, cnt = 0;
     int ret = 0;
     int scrollon, i = 0;
+	char imgPath[100];
 
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
 	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, vol);
@@ -4548,32 +4549,99 @@ int MenuMp3()
 	GuiButton cancelBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
 	cancelBtn.SetScale(0.9);
 	cancelBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	cancelBtn.SetPosition(180, 400);
+	cancelBtn.SetPosition(210, 400);
 	cancelBtn.SetLabel(&cancelBtnTxt);
 	cancelBtn.SetImage(&cancelBtnImg);
 	cancelBtn.SetSoundOver(&btnSoundOver);
 	cancelBtn.SetTrigger(&trigA);
 	cancelBtn.SetEffectGrow();
 
-    GuiText playBtnTxt("Play", 22, (GXColor){0, 0, 0, 255});
-	cancelBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
-	GuiImage playBtnImg(&btnOutline);
-	if (Settings.wsprompt == yes){
-	cancelBtnImg.SetWidescreen(CFG.widescreen);}
-	GuiButton playBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
-	playBtn.SetScale(0.9);
+    bool isplaying = false;
+	int songPlaying=0;
+
+	GuiTrigger trigHome;
+	trigHome.SetButtonOnlyTrigger(-1, WPAD_BUTTON_HOME | WPAD_CLASSIC_BUTTON_HOME, 0);
+	GuiTrigger trigL;
+	trigL.SetButtonOnlyTrigger(-1, WPAD_BUTTON_LEFT | WPAD_CLASSIC_BUTTON_LEFT, PAD_BUTTON_LEFT);
+	GuiTrigger trigR;
+	trigR.SetButtonOnlyTrigger(-1, WPAD_BUTTON_RIGHT | WPAD_CLASSIC_BUTTON_RIGHT, PAD_BUTTON_RIGHT);
+    GuiTrigger trigMinus;
+	trigMinus.SetButtonOnlyTrigger(-1, WPAD_BUTTON_MINUS | WPAD_CLASSIC_BUTTON_MINUS, 0);
+	GuiTrigger trigPlus;
+	trigPlus.SetButtonOnlyTrigger(-1, WPAD_BUTTON_PLUS | WPAD_CLASSIC_BUTTON_PLUS, 0);
+
+	int playerIsUp=0;
+	snprintf(imgPath, sizeof(imgPath), "%sarrow_next.png", CFG.theme_path);
+	GuiImageData next(imgPath, arrow_next_png);
+	snprintf(imgPath, sizeof(imgPath), "%sarrow_previous.png", CFG.theme_path);
+	GuiImageData prev(imgPath, arrow_previous_png);
+	snprintf(imgPath, sizeof(imgPath), "%smp3_stop.png", CFG.theme_path);
+	GuiImageData stop(imgPath, mp3_stop_png);
+	snprintf(imgPath, sizeof(imgPath), "%smp3_pause.png", CFG.theme_path);
+	GuiImageData pause(imgPath, mp3_pause_png);
+	snprintf(imgPath, sizeof(imgPath), "%sstartgame_arrow_right.png", CFG.theme_path);
+	GuiImageData play(imgPath, startgame_arrow_right_png);
+	
+	
+	
+	GuiImage nextBtnImg(&next);
+	GuiButton nextBtn(next.GetWidth(), next.GetHeight());
+	nextBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	nextBtn.SetPosition(100, 400);
+	nextBtn.SetImage(&nextBtnImg);
+	nextBtn.SetSoundOver(&btnSoundOver);
+	nextBtn.SetSoundClick(&btnClick);
+	nextBtn.SetTrigger(&trigA);
+	nextBtn.SetTrigger(&trigR);
+	nextBtn.SetEffectGrow();
+	
+	GuiImage prevBtnImg(&prev);
+	prevBtnImg.SetWidescreen(CFG.widescreen);
+	GuiButton prevBtn(prev.GetWidth(), prev.GetHeight());
+	prevBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	prevBtn.SetPosition(-100, 400);
+	prevBtn.SetImage(&prevBtnImg);
+	prevBtn.SetSoundOver(&btnSoundOver);
+	prevBtn.SetSoundClick(&btnClick);
+	prevBtn.SetTrigger(&trigA);
+	prevBtn.SetTrigger(&trigL);
+	prevBtn.SetEffectGrow();
+	
+	GuiImage playBtnImg(&play);
+	playBtnImg.SetWidescreen(CFG.widescreen);
+	GuiButton playBtn(play.GetWidth(), play.GetHeight());
 	playBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	playBtn.SetPosition(-180, 400);
-	playBtn.SetLabel(&playBtnTxt);
+	playBtn.SetPosition(42, 400);
 	playBtn.SetImage(&playBtnImg);
 	playBtn.SetSoundOver(&btnSoundOver);
+	playBtn.SetSoundClick(&btnClick);
 	playBtn.SetTrigger(&trigA);
+	playBtn.SetTrigger(&trigPlus);
 	playBtn.SetEffectGrow();
+	
+	GuiImage stopBtnImg(&stop);
+	stopBtnImg.SetWidescreen(CFG.widescreen);
+	GuiButton stopBtn(stop.GetWidth(), stop.GetHeight());
+	stopBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	stopBtn.SetPosition(-27, 400);
+	stopBtn.SetImage(&stopBtnImg);
+	stopBtn.SetSoundOver(&btnSoundOver);
+	stopBtn.SetSoundClick(&btnClick);
+	stopBtn.SetTrigger(&trigA);
+	stopBtn.SetTrigger(&trigMinus);
+	stopBtn.SetEffectGrow();
+	
+	GuiImage pauseBtnImg(&pause);
+	pauseBtnImg.SetWidescreen(CFG.widescreen);
 
     HaltGui();
 	GuiWindow w(screenwidth, screenheight);
     w.Append(&cancelBtn);
     w.Append(&playBtn);
+	w.Append(&playBtn);
+	w.Append(&nextBtn);
+	w.Append(&prevBtn);
+	w.Append(&stopBtn);
     mainWindow->Append(&optionBrowser4);
     mainWindow->Append(&w);
 
@@ -4595,22 +4663,59 @@ int MenuMp3()
         if(i == ret) {
             sprintf(fullpath,"%s%s", mp3path,mp3files[ret]);
             PlayMp3(fullpath);
+			songPlaying=ret;
             SetMp3Volume(127);
         }
     }
 
     if (playBtn.GetState() == STATE_CLICKED) {
-
+			StopMp3();
             ret = optionBrowser4.GetSelectedOption();
+			songPlaying=ret;
 			sprintf(fullpath,"%s%s", mp3path,mp3files[ret]);
-            //bgMusic->Stop();
             PlayMp3(fullpath);
             SetMp3Volume(127);
+			//playBtn.SetImage(&playBtnImg);isplaying=true;
+			//if (isplaying==true){playBtn.SetImage(&pauseBtnImg);isplaying=false;}
             playBtn.ResetState();
+			
     }
+	
+	if(nextBtn.GetState() == STATE_CLICKED)
+			{	
+			StopMp3();
+			songPlaying++;
+			//ret = (optionBrowser4.GetSelectedOption()+1);
+			sprintf(fullpath,"%s%s", mp3path,mp3files[songPlaying]);
+            PlayMp3(fullpath);
+            SetMp3Volume(127);
+			nextBtn.ResetState();
+				//break;
+			}
+	if(prevBtn.GetState() == STATE_CLICKED)
+			{	
+				StopMp3();
+				songPlaying--;
+				//ret = (optionBrowser4.GetSelectedOption()-1);
+				sprintf(fullpath,"%s%s", mp3path,mp3files[songPlaying]);
+				PlayMp3(fullpath);
+				SetMp3Volume(127);
+				prevBtn.ResetState();
+				//break;
+			}
+	if(stopBtn.GetState() == STATE_CLICKED)
+			{	StopMp3();
+				stopBtn.ResetState();
+				playBtn.SetImage(&playBtnImg);
+				//break;
+			}
 	}
 
 	HaltGui();
+	w.Remove(&playBtn);
+	w.Remove(&nextBtn);
+	w.Remove(&prevBtn);
+	w.Remove(&stopBtn);
 	mainWindow->Remove(&optionBrowser4);
 	mainWindow->Remove(&w);
 	ResumeGui();
