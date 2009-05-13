@@ -386,6 +386,12 @@ void GuiElement::SetTrigger(u8 i, GuiTrigger * t)
 	trigger[i] = t;
 }
 
+void GuiElement::RemoveTrigger(u8 i)
+{
+	LOCK(this);
+	trigger[i] = NULL;
+}
+
 bool GuiElement::Rumble()
 {
 	return rumble;

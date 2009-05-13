@@ -3410,24 +3410,17 @@ static int MenuSettings()
 	tabBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	tabBtn.SetPosition(-202, 90);
 	tabBtn.SetImage(&tab1Img);
-	tabBtn.SetSoundOver(&btnSoundOver);
-	tabBtn.SetSoundClick(&btnClick);
-	tabBtn.SetTrigger(&trigA);
-	tabBtn.SetTrigger(&trigL);
-	tabBtn.SetTrigger(&trigMinus);
 
 
-	//GuiImage page1Img(&page1);
-	//GuiImage page1dImg(&page1d);
+	
 	GuiButton page1Btn(40, 96);
 	page1Btn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	page1Btn.SetPosition(-202, 90);
-	//page1Btn.SetImage(&page1Img);
 	page1Btn.SetSoundOver(&btnSoundOver);
 	page1Btn.SetSoundClick(&btnClick);
-	page1Btn.SetTrigger(&trigA);
-	page1Btn.SetTrigger(&trigL);
-	page1Btn.SetTrigger(&trigMinus);
+	page1Btn.SetTrigger(0, &trigA);
+	//page1Btn.SetTrigger(&trigL);
+	//page1Btn.SetTrigger(&trigMinus);
 
 	//GuiTooltip page1BtnTT("Go to Page 1");
 	//if (Settings.wsprompt == yes)
@@ -3444,9 +3437,9 @@ static int MenuSettings()
 	//page2Btn.SetImage(&page2dImg);
 	page2Btn.SetSoundOver(&btnSoundOver);
 	page2Btn.SetSoundClick(&btnClick);
-	page2Btn.SetTrigger(&trigA);
-	page2Btn.SetTrigger(&trigR);
-	page2Btn.SetTrigger(&trigPlus);
+	page2Btn.SetTrigger(0, &trigA);
+	page2Btn.SetTrigger(1, &trigR);
+	page2Btn.SetTrigger(2, &trigPlus);
 
 	GuiButton page3Btn(40, 96);
 	page3Btn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
@@ -3454,9 +3447,9 @@ static int MenuSettings()
 	//page2Btn.SetImage(&page2dImg);
 	page3Btn.SetSoundOver(&btnSoundOver);
 	page3Btn.SetSoundClick(&btnClick);
-	page3Btn.SetTrigger(&trigA);
-	page3Btn.SetTrigger(&trigR);
-	page3Btn.SetTrigger(&trigPlus);
+	page3Btn.SetTrigger(0, &trigA);
+	page3Btn.SetTrigger(1, &trigR);
+	page3Btn.SetTrigger(2, &trigPlus);
 
 	GuiTooltip page2BtnTT("Go to Page 2");
 	if (Settings.wsprompt == yes)
@@ -3528,6 +3521,18 @@ static int MenuSettings()
 			w.Append(&backBtn);
 			w.Append(&lockBtn);
 			w.Append(btnLogo);
+			//set triggers for tabs
+			page1Btn.RemoveTrigger(1);
+			page1Btn.RemoveTrigger(2);
+			page2Btn.RemoveTrigger(1);
+			page2Btn.RemoveTrigger(2);
+			page3Btn.RemoveTrigger(1);
+			page3Btn.RemoveTrigger(2);
+			page2Btn.SetTrigger(1, &trigPlus);
+			page2Btn.SetTrigger(2, &trigR);
+			page3Btn.SetTrigger(1, &trigMinus);
+			page3Btn.SetTrigger(2, &trigL);
+			
 
 			mainWindow->Append(&w);
 			mainWindow->Append(&optionBrowser2);
@@ -3540,6 +3545,16 @@ static int MenuSettings()
 		}
 		else if ( pageToDisplay == 2 )
 		{
+			page1Btn.RemoveTrigger(1);
+			page1Btn.RemoveTrigger(2);
+			page2Btn.RemoveTrigger(1);
+			page2Btn.RemoveTrigger(2);
+			page3Btn.RemoveTrigger(1);
+			page3Btn.RemoveTrigger(2);
+			page1Btn.SetTrigger(1, &trigMinus);
+			page1Btn.SetTrigger(2, &trigL);
+			page3Btn.SetTrigger(1, &trigPlus);
+			page3Btn.SetTrigger(2, &trigR);
 
 			mainWindow->Append(&optionBrowser2);
 			mainWindow->Append(&tabBtn);
@@ -3555,6 +3570,35 @@ static int MenuSettings()
 			sprintf(options2.name[6], "Cover Path");
 			sprintf(options2.name[7], "Discimage Path");
 			sprintf(options2.name[8], "Theme Path");
+
+		}
+		else if ( pageToDisplay == 3 )
+		{
+			page1Btn.RemoveTrigger(1);
+			page1Btn.RemoveTrigger(2);
+			page2Btn.RemoveTrigger(1);
+			page2Btn.RemoveTrigger(2);
+			page3Btn.RemoveTrigger(1);
+			page3Btn.RemoveTrigger(2);
+			page2Btn.SetTrigger(1, &trigMinus);
+			page2Btn.SetTrigger(2, &trigL);
+			page1Btn.SetTrigger(1, &trigPlus);
+			page1Btn.SetTrigger(2, &trigR);
+
+			mainWindow->Append(&optionBrowser2);
+			mainWindow->Append(&tabBtn);
+			mainWindow->Append(&page1Btn);
+			mainWindow->Append(&page3Btn);
+
+			sprintf(options2.name[0], " ");
+			sprintf(options2.name[1], " ");
+			sprintf(options2.name[2], " ");
+			sprintf(options2.name[3], "Under");
+			sprintf(options2.name[4], "Construction");
+			sprintf(options2.name[5], " ");
+			sprintf(options2.name[6], " ");
+			sprintf(options2.name[7], " ");
+			sprintf(options2.name[8], " ");
 
 		}
 		while(menu == MENU_NONE)
@@ -3926,6 +3970,17 @@ static int MenuSettings()
 						break;
 					}
 			}
+			if (pageToDisplay == 3){
+			sprintf(options2.value[0], " ");
+			sprintf(options2.value[1], " ");
+			sprintf(options2.value[2], " ");
+			sprintf(options2.value[3], " ");
+			sprintf(options2.value[4], " ");
+			sprintf(options2.value[5], " ");
+			sprintf(options2.value[6], " ");
+			sprintf(options2.value[7], " ");
+			sprintf(options2.value[8], " ");
+			}
 
 			if(shutdown == 1)
 				Sys_Shutdown();
@@ -3956,7 +4011,7 @@ static int MenuSettings()
 
 			if(page3Btn.GetState() == STATE_CLICKED)
 			{
-				pageToDisplay = 2;
+				pageToDisplay = 3;
 				menu = MENU_NONE;
 				page3Btn.ResetState();
 				//page1Btn.SetImage(&page1dImg);

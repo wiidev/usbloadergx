@@ -309,6 +309,9 @@ class GuiElement
 		//!\param i Index of trigger array to set
 		//!\param t Pointer to GuiTrigger
 		void SetTrigger(u8 i, GuiTrigger * t);
+		//!Remove GuiTrigger for the element
+		//!\param i Index of trigger array to set
+		void RemoveTrigger(u8 i);
 		//!Checks whether rumble was requested by the element
 		//!\return true is rumble was requested, false otherwise
 		bool Rumble();
@@ -378,7 +381,7 @@ class GuiElement
 		void Unlock();
 		static mutex_t mutex;
 		friend class SimpleLock;
-		
+
         //int position2; //! B Scrollbariable
 		bool visible; //!< Visibility of the element. If false, Draw() is skipped
 		int focus; //!< Element focus (-1 = focus disabled, 0 = not focused, 1 = focused)
@@ -424,7 +427,7 @@ private:
 };
 #define LOCK(e) SimpleLock LOCK(e)
 //disabled because of problems with FW 4.0
-//#define LOCK(e) 
+//#define LOCK(e)
 
 //!Allows GuiElements to be grouped together into a "window"
 class GuiWindow : public GuiElement
@@ -661,29 +664,29 @@ class GuiText : public GuiElement
 class GuiTooltip : public GuiElement
 {
 	public:
-		//!Constructor 
-		//!\param t Text 
+		//!Constructor
+		//!\param t Text
 		GuiTooltip(const char *t);
 
-		//!Destructor 
-		~ GuiTooltip(); 
+		//!Destructor
+		~ GuiTooltip();
 
 		//!Gets the element's current scale
 		//!Considers scale, scaleDyn, and the parent element's GetScale() value
 		float GetScale();
-		//!Sets the text of the GuiTooltip element 
-		//!\param t Text 
-		void SetText(const char * t); 
+		//!Sets the text of the GuiTooltip element
+		//!\param t Text
+		void SetText(const char * t);
 		void SetWidescreen(short w); // timely a dummy
 		//!Constantly called to draw the GuiButton
 		void Draw();
 
-	protected: 
-		GuiImage leftImage; //!< Tooltip left-image 
+	protected:
+		GuiImage leftImage; //!< Tooltip left-image
 		GuiImage tileImage; //!< Tooltip tile-image
 		GuiImage rightImage; //!< Tooltip right-image
 		GuiText *text;
-}; 
+};
 
 
 //!Display, manage, and manipulate buttons in the GUI. Buttons can have images, icons, text, and sound set (all of which are optional)
