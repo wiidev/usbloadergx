@@ -845,6 +845,13 @@ int GameWindowPrompt()
 		diskImg.SetImage(diskCover);
 		sizeTxt.SetText(sizeText);
 		msgTxt.SetText(gameName);
+		char* pch;
+  
+			pch=strrchr((gameName),'_');
+  
+			if (pch!=NULL){msgTxt.SetPosition(0, 16);}
+			else {msgTxt.SetPosition(0, 1);}
+		
 
 		HaltGui();
 		mainWindow->SetState(STATE_DISABLED);
@@ -4556,7 +4563,7 @@ int MenuMp3()
 	cancelBtn.SetTrigger(&trigA);
 	cancelBtn.SetEffectGrow();
 
-    bool isplaying = false;
+//    bool isplaying = false;
 	int songPlaying=0;
 
 	GuiTrigger trigHome;
@@ -4570,7 +4577,7 @@ int MenuMp3()
 	GuiTrigger trigPlus;
 	trigPlus.SetButtonOnlyTrigger(-1, WPAD_BUTTON_PLUS | WPAD_CLASSIC_BUTTON_PLUS, 0);
 
-	int playerIsUp=0;
+//	int playerIsUp=0;
 	snprintf(imgPath, sizeof(imgPath), "%sarrow_next.png", CFG.theme_path);
 	GuiImageData next(imgPath, arrow_next_png);
 	snprintf(imgPath, sizeof(imgPath), "%sarrow_previous.png", CFG.theme_path);
@@ -4685,6 +4692,7 @@ int MenuMp3()
 			{	
 			StopMp3();
 			songPlaying++;
+			if (songPlaying>(countmp3 - 1)){songPlaying=0;}
 			//ret = (optionBrowser4.GetSelectedOption()+1);
 			sprintf(fullpath,"%s%s", mp3path,mp3files[songPlaying]);
             PlayMp3(fullpath);
@@ -4696,6 +4704,7 @@ int MenuMp3()
 			{	
 				StopMp3();
 				songPlaying--;
+				if (songPlaying<0){songPlaying=(countmp3 - 1);}
 				//ret = (optionBrowser4.GetSelectedOption()-1);
 				sprintf(fullpath,"%s%s", mp3path,mp3files[songPlaying]);
 				PlayMp3(fullpath);

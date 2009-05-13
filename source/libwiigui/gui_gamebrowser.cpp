@@ -136,6 +136,12 @@ GuiGameBrowser::GuiGameBrowser(int w, int h, struct discHdr * l, int gameCnt, co
 		gameTxt[i] = new GuiText(buffer, 20, (GXColor){THEME.gameText_r, THEME.gameText_g, THEME.gameText_b, 0xff});
 		gameTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 		gameTxt[i]->SetPosition(24,0);
+		char* pch;
+  
+			pch=strrchr((buffer),'_');
+  
+			if (pch!=NULL){gameTxt[i]->SetPosition(24, 15);}
+			else {gameTxt[i]->SetPosition(24, 0);}
 
 		gameBg[i] = new GuiImage(bgGamesEntry);
 
@@ -351,6 +357,12 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 			}
 
 			gameTxt[i]->SetText(buffer);
+			char* pch;
+  
+			pch=strrchr((buffer),'_');
+  
+			if (pch!=NULL){gameTxt[i]->SetPosition(24, 15);}
+			else {gameTxt[i]->SetPosition(24, 0);}
 			gameIndex[i] = next;
 			next = this->FindMenuItem(next, 1);
 		}
