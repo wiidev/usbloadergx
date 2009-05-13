@@ -3494,7 +3494,7 @@ static int MenuSettings()
 	btnLogo->SetUpdateCallback(WindowCredits);
 
 	customOptionList options2(9);
-	GuiCustomOptionBrowser optionBrowser2(396, 280, &options2, CFG.theme_path, "bg_options_settings", bg_options_settings_png, 0);
+	GuiCustomOptionBrowser optionBrowser2(396, 280, &options2, CFG.theme_path, "bg_options_settings", bg_options_settings_png, 0, 200);
 	optionBrowser2.SetPosition(0, 90);
 	optionBrowser2.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	optionBrowser2.SetCol2Position(200);
@@ -4224,7 +4224,7 @@ int GameSettings(struct discHdr * header)
 	deleteBtn.SetTrigger(&trigA);
 	deleteBtn.SetEffectGrow();
 
-	GuiCustomOptionBrowser optionBrowser3(396, 280, &options3, CFG.theme_path, "bg_options_gamesettings", bg_options_settings_png, 0);
+	GuiCustomOptionBrowser optionBrowser3(396, 280, &options3, CFG.theme_path, "bg_options_gamesettings", bg_options_settings_png, 0, 150);
 	optionBrowser3.SetPosition(0, 90);
 	optionBrowser3.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	optionBrowser3.SetCol2Position(150);
@@ -4536,7 +4536,7 @@ int MenuMp3()
     } else {
     scrollon = 1;
     }
-	GuiCustomOptionBrowser optionBrowser4(396, 280, &options2, CFG.theme_path, "bg_options_settings", bg_options_settings_png, scrollon);
+	GuiCustomOptionBrowser optionBrowser4(396, 280, &options2, CFG.theme_path, "bg_options_settings", bg_options_settings_png, scrollon, 50);
 	optionBrowser4.SetPosition(0, 90);
 	optionBrowser4.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	optionBrowser4.SetCol2Position(65);

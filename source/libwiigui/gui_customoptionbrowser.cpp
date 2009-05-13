@@ -16,12 +16,13 @@
 #define GAMESELECTSIZE      30
 
 static int scrollbaron = 0;
+int coL2;
 //int vol;
 extern const int vol;
 /**
  * Constructor for the GuiCustomOptionBrowser class.
  */
-GuiCustomOptionBrowser::GuiCustomOptionBrowser(int w, int h, customOptionList * l, const char *themePath, const char *custombg, const u8 *imagebg, int scrollon)
+GuiCustomOptionBrowser::GuiCustomOptionBrowser(int w, int h, customOptionList * l, const char *themePath, const char *custombg, const u8 *imagebg, int scrollon,int col2)
 {
 	width = w;
 	height = h;
@@ -32,6 +33,7 @@ GuiCustomOptionBrowser::GuiCustomOptionBrowser(int w, int h, customOptionList * 
 	listOffset = this->FindMenuItem(-1, 1);
 	selectedItem = 0;
 	focus = 1; // allow focus
+	coL2 = col2;
 	char imgPath[100];
 
 	trigA = new GuiTrigger;
@@ -122,13 +124,13 @@ GuiCustomOptionBrowser::GuiCustomOptionBrowser(int w, int h, customOptionList * 
 		optionTxt[i] = new GuiText(options->name[i], 20, (GXColor){0, 0, 0, 0xff});
 		optionTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 		optionTxt[i]->SetPosition(24,0);
-
+		
 		optionBg[i] = new GuiImage(bgOptionsEntry);
 		
 		optionVal[i] = new GuiText(NULL, 20, (GXColor){0, 0, 0, 0xff});
 		optionVal[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 		optionVal[i]->SetPosition(250,0);
-
+		
 		optionBtn[i] = new GuiButton(width,GAMESELECTSIZE);//(width-28,GAMESELECTSIZE);
 		optionBtn[i]->SetParent(this);
 		optionBtn[i]->SetLabel(optionTxt[i], 0);
@@ -339,6 +341,13 @@ void GuiCustomOptionBrowser::Update(GuiTrigger * t)
 
 			optionTxt[i]->SetText(options->name[next]);
 			optionVal[i]->SetText(options->value[next]);
+			char* pch;
+  
+			pch=strrchr((options->value[next]),'_');
+  
+			if (pch!=NULL){optionVal[i]->SetPosition(coL2, 15);}
+			else {optionVal[i]->SetPosition(coL2, 0);}
+			
 			optionIndex[i] = next;
 			next = this->FindMenuItem(next, 1);
 		}

@@ -32,7 +32,7 @@ class customOptionList {
 class GuiCustomOptionBrowser : public GuiElement
 {
 	public:
-		GuiCustomOptionBrowser(int w, int h, customOptionList * l, const char * themePath, const char *custombg, const u8 *imagebg, int scrollbar);
+		GuiCustomOptionBrowser(int w, int h, customOptionList * l, const char * themePath, const char *custombg, const u8 *imagebg, int scrollbar, int col2);
 		~GuiCustomOptionBrowser();
 		void SetCol2Position(int x);
 		int FindMenuItem(int c, int d);

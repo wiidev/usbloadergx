@@ -9,6 +9,8 @@
  ***************************************************************************/
 
 #include "gui.h"
+#include <stdio.h>
+#include <string.h>
 /**
  * Constructor for the GuiKeyboard class.
  */
@@ -338,7 +340,13 @@ void GuiKeyboard::Update(GuiTrigger * t)
 			}
 		}
 	}
-
+char* pch;
+  
+  pch=strrchr(kbtextstr,'_');
+  
+  if (pch!=NULL){kbText->SetPosition(0, 68);}
+  else {kbText->SetPosition(0, 53);}
+  
 	this->ToggleFocus(t);
 
 	if(focus) // only send actions to this window if it's in focus
