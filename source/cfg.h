@@ -79,6 +79,7 @@ struct THEME
 	short cover_x;
 	short cover_y;
 	short showID;
+	short maxcharacters;
 	short id_x;
 	short id_y;
 	short region_x;

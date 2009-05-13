@@ -13,8 +13,12 @@
 #include "gui_gamebrowser.h"
 #include "../cfg.h"
 
+#include <string.h>
+#include <sstream>
+
 #define GAMESELECTSIZE      30
 extern const int vol;
+int txtscroll = 0;
 /**
  * Constructor for the GuiGameBrowser class.
  */
@@ -114,18 +118,18 @@ GuiGameBrowser::GuiGameBrowser(int w, int h, struct discHdr * l, int gameCnt, co
 	gameTxt = new GuiText * [pagesize];
 	gameBg = new GuiImage * [pagesize];
 
-	char buffer[CFG.maxcharacters + 4];
+	char buffer[THEME.maxcharacters + 4];
 
 	for(int i=0; i < pagesize; i++)
 	{
-		if (strlen(get_title(&gameList[i])) < (u32)(CFG.maxcharacters + 3))
+		if (strlen(get_title(&gameList[i])) < (u32)(THEME.maxcharacters + 3))
 		{
 			sprintf(buffer, "%s", get_title(&gameList[i]));
 		}
 		else
 		{
-			sprintf(buffer, get_title(&gameList[i]),  CFG.maxcharacters);
-			buffer[CFG.maxcharacters] = '\0';
+			sprintf(buffer, get_title(&gameList[i]),  THEME.maxcharacters);
+			buffer[THEME.maxcharacters] = '\0';
 			strncat(buffer, "...", 3);
 		}
 
@@ -314,8 +318,7 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 	// scrolldelay affects how fast the list scrolls
 	// when the arrows are clicked
 	float scrolldelay = 3.5;
-
-
+	
     if (scrollbaron == 1) {
 	// update the location of the scroll box based on the position in the option list
 		arrowUpBtn->Update(t);
@@ -324,7 +327,7 @@ void GuiGameBrowser::Update(GuiTrigger * t)
     }
 
 	next = listOffset;
-	char buffer[CFG.maxcharacters + 4];
+	char buffer[THEME.maxcharacters + 4];
 
 	for(int i=0; i<pagesize; i++)
 	{
@@ -336,14 +339,14 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 				game[i]->SetState(STATE_DEFAULT);
 			}
 
-			if (strlen(get_title(&gameList[next])) < (u32)(CFG.maxcharacters + 3))
+			if (strlen(get_title(&gameList[next])) < (u32)(THEME.maxcharacters + 3))
 			{
 				sprintf(buffer, "%s", get_title(&gameList[next]));
 			}
 			else
 			{
-				sprintf(buffer, get_title(&gameList[next]),  CFG.maxcharacters);
-				buffer[CFG.maxcharacters] = '\0';
+				sprintf(buffer, get_title(&gameList[next]), THEME.maxcharacters);
+				buffer[THEME.maxcharacters] = '\0';
 				strncat(buffer, "...", 3);
 			}
 
