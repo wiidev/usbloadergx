@@ -7,8 +7,8 @@ class customOptionList {
 			value = new char * [size];
 			for (int i = 0; i < size; i++)
 			{
-				name[i] = new char[30];
-				value[i] = new char[20];
+				name[i] = new char[40];
+				value[i] = new char[40];
 			}
 			length = size;
 		};

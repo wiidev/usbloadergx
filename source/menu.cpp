@@ -39,6 +39,7 @@
 #include "cfg.h"
 #include "libwiigui/gui_customoptionbrowser.h"
 #include "libwiigui/gui_gamebrowser.h"
+#include "mp3s.h"
 
 #define MAX_CHARACTERS		38
 
@@ -3412,7 +3413,7 @@ static int MenuSettings()
 	tabBtn.SetImage(&tab1Img);
 
 
-	
+
 	GuiButton page1Btn(40, 96);
 	page1Btn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	page1Btn.SetPosition(-202, 90);
@@ -3532,7 +3533,7 @@ static int MenuSettings()
 			page2Btn.SetTrigger(2, &trigR);
 			page3Btn.SetTrigger(1, &trigMinus);
 			page3Btn.SetTrigger(2, &trigL);
-			
+
 
 			mainWindow->Append(&w);
 			mainWindow->Append(&optionBrowser2);
@@ -3590,7 +3591,7 @@ static int MenuSettings()
 			mainWindow->Append(&page1Btn);
 			mainWindow->Append(&page3Btn);
 
-			sprintf(options2.name[0], " ");
+			sprintf(options2.name[0], "MP3 Menu");
 			sprintf(options2.name[1], " ");
 			sprintf(options2.name[2], " ");
 			sprintf(options2.name[3], "Under");
@@ -3599,6 +3600,8 @@ static int MenuSettings()
 			sprintf(options2.name[6], " ");
 			sprintf(options2.name[7], " ");
 			sprintf(options2.name[8], " ");
+
+
 
 		}
 		while(menu == MENU_NONE)
@@ -3980,6 +3983,18 @@ static int MenuSettings()
 			sprintf(options2.value[6], " ");
 			sprintf(options2.value[7], " ");
 			sprintf(options2.value[8], " ");
+
+			ret = optionBrowser2.GetClickedOption();
+
+			switch(ret) {
+
+                    case 0:
+                        menu = MENU_MP3;
+                        pageToDisplay = 0;
+                        break;
+
+			}
+
 			}
 
 			if(shutdown == 1)
@@ -4045,6 +4060,7 @@ static int MenuSettings()
 					//		mainWindow->Remove(&page2Btn);
 							w.Remove(&backBtn);
 							w.Remove(&lockBtn);
+							w.Remove(&tabBtn);
                             char entered[20] = "";
                             int result = OnScreenKeyboard(entered, 20,0);
 					//		mainWindow->Append(&page1Btn);
@@ -4052,6 +4068,7 @@ static int MenuSettings()
 							mainWindow->Append(&optionBrowser2);
 							w.Append(&backBtn);
 							w.Append(&lockBtn);
+							w.Append(&tabBtn);
 					if ( result == 1 )
 					{
 						if (!strcmp(entered, Settings.unlockCode)) //if password correct
@@ -4375,6 +4392,8 @@ int GameSettings(struct discHdr * header)
 	return retVal;
 }
 
+
+
 /****************************************************************************
  * MenuCheck
  ***************************************************************************/
@@ -4487,6 +4506,119 @@ static int MenuCheck()
 	return menu;
 }
 
+int MenuMp3()
+{
+    int menu = MENU_NONE, cnt = 0;
+    int ret = 0;
+    int scrollon, i = 0;
+
+	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
+	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, vol);
+
+    GuiTrigger trigA;
+	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
+
+    customOptionList options2(500);
+    char mp3path[30] = "SD:/mp3/";
+    char fullpath[100];
+	int countmp3 = GetFiles(mp3path);
+
+    for (cnt = 0; cnt < countmp3; cnt++) {
+        snprintf(options2.value[cnt], 30, "%s", mp3files[cnt]);
+        sprintf (options2.name[cnt],"%i.", cnt+1);
+    }
+    options2.length = cnt;
+
+    GuiImageData btnOutline(settings_menu_button_png);
+    if(cnt < 9) {
+    scrollon = 0;
+    } else {
+    scrollon = 1;
+    }
+	GuiCustomOptionBrowser optionBrowser4(396, 280, &options2, CFG.theme_path, "bg_options_settings", bg_options_settings_png, scrollon);
+	optionBrowser4.SetPosition(0, 90);
+	optionBrowser4.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	optionBrowser4.SetCol2Position(65);
+
+    GuiText cancelBtnTxt("Back", 22, (GXColor){0, 0, 0, 255});
+	cancelBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
+	GuiImage cancelBtnImg(&btnOutline);
+	if (Settings.wsprompt == yes){
+	cancelBtnImg.SetWidescreen(CFG.widescreen);}
+	GuiButton cancelBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
+	cancelBtn.SetScale(0.9);
+	cancelBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	cancelBtn.SetPosition(180, 400);
+	cancelBtn.SetLabel(&cancelBtnTxt);
+	cancelBtn.SetImage(&cancelBtnImg);
+	cancelBtn.SetSoundOver(&btnSoundOver);
+	cancelBtn.SetTrigger(&trigA);
+	cancelBtn.SetEffectGrow();
+
+    GuiText playBtnTxt("Play", 22, (GXColor){0, 0, 0, 255});
+	cancelBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
+	GuiImage playBtnImg(&btnOutline);
+	if (Settings.wsprompt == yes){
+	cancelBtnImg.SetWidescreen(CFG.widescreen);}
+	GuiButton playBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
+	playBtn.SetScale(0.9);
+	playBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	playBtn.SetPosition(-180, 400);
+	playBtn.SetLabel(&playBtnTxt);
+	playBtn.SetImage(&playBtnImg);
+	playBtn.SetSoundOver(&btnSoundOver);
+	playBtn.SetTrigger(&trigA);
+	playBtn.SetEffectGrow();
+
+    HaltGui();
+	GuiWindow w(screenwidth, screenheight);
+    w.Append(&cancelBtn);
+    w.Append(&playBtn);
+    mainWindow->Append(&optionBrowser4);
+    mainWindow->Append(&w);
+
+	ResumeGui();
+
+	while(menu == MENU_NONE)
+	{
+	 if (cancelBtn.GetState() == STATE_CLICKED)
+		{
+			menu = MENU_DISCLIST;
+			CloseMp3();
+			bgMusic->Play();
+			break;
+		}
+
+    ret = optionBrowser4.GetClickedOption();
+
+    for(i = 0; i < countmp3; i++) {
+        if(i == ret) {
+            sprintf(fullpath,"%s%s", mp3path,mp3files[ret]);
+            PlayMp3(fullpath);
+            SetMp3Volume(127);
+        }
+    }
+
+    if (playBtn.GetState() == STATE_CLICKED) {
+
+            ret = optionBrowser4.GetSelectedOption();
+			sprintf(fullpath,"%s%s", mp3path,mp3files[ret]);
+            //bgMusic->Stop();
+            PlayMp3(fullpath);
+            SetMp3Volume(127);
+            playBtn.ResetState();
+    }
+	}
+
+	HaltGui();
+	mainWindow->Remove(&optionBrowser4);
+	mainWindow->Remove(&w);
+	ResumeGui();
+	return menu;
+
+
+return menu;
+}
 /****************************************************************************
  * MainMenu
  ***************************************************************************/
@@ -4548,6 +4680,9 @@ int MainMenu(int menu)
 				break;
             case MENU_DISCLIST:
 				currentMenu = MenuDiscList();
+				break;
+            case MENU_MP3:
+				currentMenu = MenuMp3();
 				break;
 			default: // unrecognized menu
 				currentMenu = MenuCheck();

@@ -31,13 +31,12 @@ LDFLAGS		=	-g $(MACHDEP) -Wl,-Map,$(notdir $@).map,--section-start,.init=0x80a00
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project
 #---------------------------------------------------------------------------------
-LIBS :=	-lfat -lpngu -lpng -lmetaphrasis -lm -lz -lwiiuse -lbte -lasnd -logc -ltremor -lfreetype
+LIBS :=	-lfat -lpngu -lpng -lmetaphrasis -lm -lz -lwiiuse -lmad -lbte -lasnd -logc -ltremor -lfreetype
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
 # include and lib
 #---------------------------------------------------------------------------------
 LIBDIRS	:= $(DEVKITPPC)/lib $(CURDIR)
-
 #---------------------------------------------------------------------------------
 # no real need to edit anything past this point unless you need to add additional
 # rules for different file extensions
