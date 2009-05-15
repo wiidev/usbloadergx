@@ -70,6 +70,10 @@ struct CFG
 	char disc_path[100];
 };
 
+struct LANGUAGE
+{char Install[20];
+};
+
 struct THEME
 {
 	int selection_x;
@@ -80,6 +84,7 @@ struct THEME
 	short cover_y;
 	short showID;
 	short maxcharacters;
+	short batteryUnused;
 	short id_x;
 	short id_y;
 	short region_x;
@@ -130,6 +135,7 @@ struct THEME
 
 extern struct CFG CFG;
 extern struct THEME THEME;
+extern struct LANGUAGE LANGUAGE;
 extern u8 ocarinaChoice;
 extern u8 videoChoice;
 extern u8 languageChoice;

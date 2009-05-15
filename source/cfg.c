@@ -33,6 +33,7 @@ char current_path[100];
 
 struct CFG CFG;
 struct THEME THEME;
+struct LANGUAGE LANGUAGE;
 u8 ocarinaChoice = 0;
 u8 videoChoice = 0;
 u8 languageChoice = 0;
@@ -234,6 +235,7 @@ void CFG_Default(int widescreen) // -1 = non forced Mode
 	THEME.selection_y = 40;
 	THEME.selection_w = 396;
 	THEME.selection_h = 280;
+	THEME.batteryUnused = 70;
 	THEME.cover_x = 26;
 	THEME.cover_y = 55;
 	THEME.showID = 1;
@@ -630,6 +632,13 @@ void theme_set(char *name, char *val)
 		short x;
 		if (sscanf(val, "%hd", &x) == 1) {
 			THEME.pagesize = x;
+		}
+	}
+	
+	else if (strcmp(cfg_name, "batteryUnused") == 0) {
+		short x;
+		if (sscanf(val, "%hd", &x) == 1) {
+			THEME.batteryUnused = x;
 		}
 	}
 	

@@ -678,6 +678,9 @@ int GameWindowPrompt()
 	GuiImageData dialogBox(imgPath, CFG.widescreen ? wdialogue_box_startgame_png : dialogue_box_startgame_png);
 	GuiImage dialogBoxImg(&dialogBox);
 
+	GuiTooltip nameBtnTT("Rename Game on WBFS");
+	if (Settings.wsprompt == yes)
+		nameBtnTT.SetWidescreen(CFG.widescreen);
 	GuiText msgTxt("", 22, (GXColor){50, 50, 50, 255});
 	GuiButton nameBtn(120,50);
 	nameBtn.SetLabel(&msgTxt);
@@ -686,6 +689,7 @@ int GameWindowPrompt()
 	nameBtn.SetPosition(0,-122);
 	nameBtn.SetSoundOver(&btnSoundOver);
 	nameBtn.SetSoundClick(&btnClick);
+	nameBtn.SetToolTip(&nameBtnTT,24,-30, ALIGN_LEFT);
 
 	if (CFG.godmode == 1){
 		nameBtn.SetTrigger(&trigA);
@@ -2000,9 +2004,17 @@ static int MenuInstall()
 
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
 
-    GuiImageData battery(battery_png);
-	GuiImageData batteryRed(battery_red_png);
-	GuiImageData batteryBar(battery_bar_png);
+    //GuiImageData battery(battery_png);
+	//GuiImageData batteryRed(battery_red_png);
+	//GuiImageData batteryBar(battery_bar_png);
+	char imgPath[100];
+	
+	snprintf(imgPath, sizeof(imgPath), "%sbattery.png", CFG.theme_path);
+	GuiImageData battery(imgPath, battery_png);
+	snprintf(imgPath, sizeof(imgPath), "%sbattery_red.png", CFG.theme_path);
+	GuiImageData batteryRed(imgPath, battery_red_png);
+	snprintf(imgPath, sizeof(imgPath), "%sbattery_bar.png", CFG.theme_path);
+	GuiImageData batteryBar(imgPath, battery_bar_png);
 
 
 	#ifdef HW_RVL
@@ -2020,7 +2032,7 @@ static int MenuInstall()
 			sprintf(txt, "P%d", i+1);
 		else
 			sprintf(txt, "P%d", i+1);
-
+			
 		batteryTxt[i] = new GuiText(txt, 22, (GXColor){THEME.info_r, THEME.info_g, THEME.info_b, 255});
 		batteryTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 		batteryImg[i] = new GuiImage(&battery);
@@ -2279,10 +2291,13 @@ static int MenuDiscList()
 	GuiImageData btnhomeOver(imgPath, menu_button_over_png);
 	snprintf(imgPath, sizeof(imgPath), "%sSDcard.png", CFG.theme_path);
 	GuiImageData btnsdcard(imgPath, sdcard_png);
-
-    GuiImageData battery(battery_png);
-	GuiImageData batteryRed(battery_red_png);
-	GuiImageData batteryBar(battery_bar_png);
+	
+	snprintf(imgPath, sizeof(imgPath), "%sbattery.png", CFG.theme_path);
+	GuiImageData battery(imgPath, battery_png);
+	snprintf(imgPath, sizeof(imgPath), "%sbattery_red.png", CFG.theme_path);
+	GuiImageData batteryRed(imgPath, battery_red_png);
+	snprintf(imgPath, sizeof(imgPath), "%sbattery_bar.png", CFG.theme_path);
+	GuiImageData batteryBar(imgPath, battery_bar_png);
 
     GuiTrigger trigA;
 	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
@@ -2454,7 +2469,7 @@ static int MenuDiscList()
 		batteryBtn[i]->SetIcon(batteryImg[i]);
 		batteryBtn[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 		batteryBtn[i]->SetRumble(false);
-		batteryBtn[i]->SetAlpha(70);
+		batteryBtn[i]->SetAlpha(THEME.batteryUnused);
 	}
 
 	batteryBtn[0]->SetPosition(THEME.battery1_x, THEME.battery1_y);
@@ -2572,7 +2587,7 @@ static int MenuDiscList()
 			{
 				batteryImg[i]->SetTile(0);
 				batteryImg[i]->SetImage(&battery);
-				batteryBtn[i]->SetAlpha(70);
+				batteryBtn[i]->SetAlpha(THEME.batteryUnused);
 			}
 		}
 		#endif
@@ -4063,19 +4078,22 @@ static int MenuSettings()
 				{
 					//password check to unlock Install,Delete and Format
 							mainWindow->Remove(&optionBrowser2);
-					//		mainWindow->Remove(&page1Btn);
-					//		mainWindow->Remove(&page2Btn);
+							mainWindow->Remove(&page1Btn);
+							mainWindow->Remove(&page2Btn);
+							mainWindow->Remove(&tabBtn);
+							mainWindow->Remove(&page3Btn);
 							w.Remove(&backBtn);
 							w.Remove(&lockBtn);
-							w.Remove(&tabBtn);
                             char entered[20] = "";
                             int result = OnScreenKeyboard(entered, 20,0);
-					//		mainWindow->Append(&page1Btn);
-					//		mainWindow->Append(&page2Btn);
 							mainWindow->Append(&optionBrowser2);
+							mainWindow->Append(&tabBtn);
+							mainWindow->Append(&page1Btn);
+							mainWindow->Append(&page2Btn);
+							mainWindow->Append(&page3Btn);
 							w.Append(&backBtn);
 							w.Append(&lockBtn);
-							w.Append(&tabBtn);
+							mainWindow->Append(&tabBtn);
 					if ( result == 1 )
 					{
 						if (!strcmp(entered, Settings.unlockCode)) //if password correct
