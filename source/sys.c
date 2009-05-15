@@ -1,7 +1,5 @@
 #include <stdio.h>
 #include <ogcsys.h>
-#include <fat.h>
-#include <sdcard/wiisd_io.h>
 
 #include "sys.h"
 #include "wpad.h"
@@ -10,6 +8,7 @@
 #include "disc.h"
 #include "wbfs.h"
 #include "video.h"
+#include "fatmounter.h"
 
 /* Constants */
 #define CERTS_LEN	0x280
@@ -52,8 +51,8 @@ int Sys_IosReload(int IOS)
 {
     s32 ret;
 
-    fatUnmount("SD");
-    __io_wiisd.shutdown();
+    SDCard_deInit();
+    USBDevice_deInit();
 
     WPAD_Flush(0);
     WPAD_Disconnect(0);
@@ -74,7 +73,7 @@ int Sys_IosReload(int IOS)
     WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
     WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
 
-    if(IOS == 249 || IOS == 222) {
+    if(IOS == 249 || IOS == 222 || IOS == 223) {
     ret = WBFS_Init(WBFS_DEVICE_USB);
     ret = Disc_Init();
     ret = WBFS_Open();

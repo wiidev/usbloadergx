@@ -5,7 +5,6 @@
  * menu.cpp
  * Menu flow routines - handles all menu logic
  ***************************************************************************/
-
 #include <gccore.h>
 #include <ogcsys.h>
 #include <stdio.h>
@@ -13,8 +12,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <wiiuse/wpad.h>
-#include <fat.h>
-#include <sdcard/wiisd_io.h>
 #include <stdio.h> //CLOCK
 #include <time.h> //CLOCK
 #include <dirent.h>
@@ -40,6 +37,7 @@
 #include "libwiigui/gui_customoptionbrowser.h"
 #include "libwiigui/gui_gamebrowser.h"
 #include "mp3s.h"
+#include "fatmounter.h"
 
 #define MAX_CHARACTERS		38
 
@@ -109,33 +107,6 @@ static void HaltGui();
 static void ResumeGui();
 extern const u8 data1;
 
-
-//libfat helper functions
-int isSdInserted() {    return __io_wiisd.isInserted(); }
-
-//Initialise SD CARD
-int SDCard_Init()
-{
-    __io_wiisd.startup();
-    if (!isSdInserted()){
-        printf("No SD card inserted!");
-        return -1;
-
-    }    if (!fatMountSimple ("SD", &__io_wiisd)){
-        printf("Failed to mount front SD card!");
-        return -1;
-    }
-
-    return 1;
-}
-
-void SDCARD_deInit()
-{
-    //First unmount all the devs...
-    fatUnmount ("SD");
-    //...and then shutdown em!
-    __io_wiisd.shutdown();
-}
 
 bool findfile(const char * filename, const char * path)
 {
@@ -897,7 +868,7 @@ int GameWindowPrompt()
 
 			if(btn1.GetState() == STATE_CLICKED) { //boot
 				choice = 1;
-				SDCARD_deInit();
+				SDCard_deInit();
 			}
 
 			else if(btn2.GetState() == STATE_CLICKED) { //back
@@ -2001,7 +1972,6 @@ static int MenuInstall()
 	char *name;
 	static char buffer[MAX_CHARACTERS + 4];
 
-
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
 
     //GuiImageData battery(battery_png);
@@ -2015,7 +1985,6 @@ static int MenuInstall()
 	GuiImageData batteryRed(imgPath, battery_red_png);
 	snprintf(imgPath, sizeof(imgPath), "%sbattery_bar.png", CFG.theme_path);
 	GuiImageData batteryBar(imgPath, battery_bar_png);
-
 
 	#ifdef HW_RVL
 	int i = 0, level;
@@ -2245,6 +2214,7 @@ static int MenuInstall()
 
 static int MenuDiscList()
 {
+
 	datagB=0;
 	int menu = MENU_NONE, dataef=0;
 	char imgPath[100];
@@ -2492,7 +2462,6 @@ static int MenuDiscList()
     clockTime.SetPosition(THEME.clock_x, THEME.clock_y);
 	clockTime.SetFont(fontClock);
 
-
     HaltGui();
 	GuiWindow w(screenwidth, screenheight);
 
@@ -2669,9 +2638,11 @@ static int MenuDiscList()
 
 		else if(sdcardBtn.GetState() == STATE_CLICKED)
 		{
-            __io_wiisd.shutdown();
-			__io_wiisd.startup();
-			break;
+            SDCard_deInit();
+            USBDevice_deInit();
+            SDCard_Init();
+            USBDevice_Init();
+			sdcardBtn.ResetState();
 		}
 
 		else if(DownloadBtn.GetState() == STATE_CLICKED)
@@ -3080,7 +3051,7 @@ static int MenuDiscList()
 		}
 	}
 
-	HaltGui();
+    HaltGui();
 
 	#ifdef HW_RVL
 	for(i=0; i < 4; i++)
@@ -3154,14 +3125,6 @@ static int MenuFormat()
 	GuiTrigger trigHome;
 	trigHome.SetButtonOnlyTrigger(-1, WPAD_BUTTON_HOME | WPAD_CLASSIC_BUTTON_HOME, 0);
 
-    GuiText titleTxt("Select the Partition", 18, (GXColor){0, 0, 0, 255});
-	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	titleTxt.SetPosition(10,40);
-
-    GuiText titleTxt2("you want to format:", 18, (GXColor){0, 0, 0, 255});
-	titleTxt2.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	titleTxt2.SetPosition(20,60);
-
     GuiImage poweroffBtnImg(&btnpwroff);
 	GuiImage poweroffBtnImgOver(&btnpwroffOver);
 	poweroffBtnImg.SetWidescreen(CFG.widescreen);
@@ -3181,8 +3144,8 @@ static int MenuFormat()
 	exitBtnImg.SetWidescreen(CFG.widescreen);
 	exitBtnImgOver.SetWidescreen(CFG.widescreen);
 	GuiButton exitBtn(btnhome.GetWidth(), btnhome.GetHeight());
-	exitBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	exitBtn.SetPosition(240, 367);
+	exitBtn.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+	exitBtn.SetPosition(0, -10);
 	exitBtn.SetImage(&exitBtnImg);
 	exitBtn.SetImageOver(&exitBtnImgOver);
 	exitBtn.SetSoundOver(&btnSoundOver);
@@ -3235,11 +3198,10 @@ static int MenuFormat()
 	GuiOptionBrowser optionBrowser(THEME.selection_w, THEME.selection_h, &options, CFG.theme_path, bg_options_png, 1, 0);
 	optionBrowser.SetPosition(THEME.selection_x, THEME.selection_y);
 	optionBrowser.SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
+    optionBrowser.SetCol2Position(200);
 
     HaltGui();
 	GuiWindow w(screenwidth, screenheight);
-    w.Append(&titleTxt);
-    w.Append(&titleTxt2);
     w.Append(&poweroffBtn);
 	w.Append(&exitBtn);
 
@@ -3881,7 +3843,11 @@ static int MenuSettings()
 							if ( result == 1 )
 							{	strncpy(CFG.covers_path, entered, sizeof(CFG.covers_path));
 								WindowPrompt("Coverpath Changed",0,"OK",0,0,0);
-								cfg_save_global();
+								if(isSdInserted() == 1) {
+                                    cfg_save_global();
+                                } else {
+                                    WindowPrompt("No SD-Card inserted!", "Insert a SD-Card to save.", "OK", 0,0,0);
+                                }
 							}
 						}
 						else
@@ -3913,7 +3879,11 @@ static int MenuSettings()
 							{
 								strncpy(CFG.disc_path, entered, sizeof(CFG.disc_path));
 								WindowPrompt("Discpath Changed",0,"OK",0,0,0);
-								cfg_save_global();
+								if(isSdInserted() == 1) {
+                                    cfg_save_global();
+                                } else {
+                                    WindowPrompt("No SD-Card inserted!", "Insert a SD-Card to save.", "OK", 0,0,0);
+                                }
 							}
 						}
 						else
@@ -3945,7 +3915,11 @@ static int MenuSettings()
 							{
 								strncpy(CFG.theme_path, entered, sizeof(CFG.theme_path));
 								WindowPrompt("Themepath Changed",0,"OK",0,0,0);
-								cfg_save_global();
+								if(isSdInserted() == 1) {
+                                    cfg_save_global();
+                                } else {
+                                    WindowPrompt("No SD-Card inserted!", "Insert a SD-Card to save.", "OK", 0,0,0);
+                                }
 								/////load new theme//////////////
 								mainWindow->Remove(bgImg);
 								CFG_Load1();
@@ -4434,13 +4408,11 @@ static int MenuCheck()
 
 		VIDEO_WaitVSync ();
 
-
         ret2 = WBFS_Init(WBFS_DEVICE_USB);
         if (ret2 < 0)
         {
             //shutdown SD
-			fatUnmount("SD");
-			__io_wiisd.shutdown();
+			SDCard_deInit();
 			//initialize WiiMote for Prompt
             Wpad_Init();
             WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
@@ -4468,8 +4440,7 @@ static int MenuCheck()
             Wpad_Init();
             WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
             WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
-            __io_wiisd.startup();
-			fatMountSimple("SD", &__io_wiisd);
+            SDCard_Init();
         }
         if (ret2 < 0) {
             WindowPrompt ("ERROR:","USB-Device not found!", "ok", 0,0,0);
@@ -4479,8 +4450,7 @@ static int MenuCheck()
             Wpad_Init();
             WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
             WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
-            __io_wiisd.startup();
-			fatMountSimple("SD", &__io_wiisd);
+            SDCard_Init();
         }
 
         ret2 = Disc_Init();
@@ -4490,7 +4460,6 @@ static int MenuCheck()
         }
 
         ret2 = WBFS_Open();
-
         if (ret2 < 0) {
 
             choice = WindowPrompt("No WBFS partition found!",
@@ -4523,10 +4492,8 @@ static int MenuCheck()
 		//Spieleliste laden
 		__Menu_GetEntries();
 
-
+        if(menu == MENU_NONE)
 		menu = MENU_DISCLIST;
-
-
 
 	return menu;
 }
