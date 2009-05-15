@@ -13,7 +13,7 @@ int USBDevice_Init()
     //right now only mounts first partition and only under IOS36
     __io_usbstorage.startup();
 
-    if (fatMountSimple("USB", &__io_usbstorage, 0, CACHE)) {
+    if (fatMount("USB", &__io_usbstorage, 0, CACHE)) {
     return 1;
     }
 

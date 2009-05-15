@@ -26,6 +26,7 @@ GuiGameBrowser::GuiGameBrowser(int w, int h, struct discHdr * l, int gameCnt, co
 {
 	width = w;
 	height = h;
+	if (gameCnt == 0) gameCnt = 1;
 	this->gameCnt = gameCnt;
 	gameList = l;
 	pagesize = (gameCnt > THEME.pagesize) ? THEME.pagesize : gameCnt;
@@ -137,9 +138,9 @@ GuiGameBrowser::GuiGameBrowser(int w, int h, struct discHdr * l, int gameCnt, co
 		gameTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 		gameTxt[i]->SetPosition(24,0);
 		char* pch;
-  
+
 			pch=strrchr((buffer),'_');
-  
+
 			if (pch!=NULL){gameTxt[i]->SetPosition(24, 15);}
 			else {gameTxt[i]->SetPosition(24, 0);}
 
@@ -324,7 +325,7 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 	// scrolldelay affects how fast the list scrolls
 	// when the arrows are clicked
 	float scrolldelay = 3.5;
-	
+
     if (scrollbaron == 1) {
 	// update the location of the scroll box based on the position in the option list
 		arrowUpBtn->Update(t);
@@ -358,9 +359,9 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 
 			gameTxt[i]->SetText(buffer);
 			char* pch;
-  
+
 			pch=strrchr((buffer),'_');
-  
+
 			if (pch!=NULL){gameTxt[i]->SetPosition(24, 15);}
 			else {gameTxt[i]->SetPosition(24, 0);}
 			gameIndex[i] = next;
