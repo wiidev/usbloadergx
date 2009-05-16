@@ -34,6 +34,7 @@
 #include "patchcode.h"
 #include "wpad.h"
 #include "cfg.h"
+#include "language.h"
 #include "libwiigui/gui_customoptionbrowser.h"
 #include "libwiigui/gui_gamebrowser.h"
 #include "mp3s.h"
@@ -201,10 +202,10 @@ static void WindowCredits(void * ptr)
 	starImg.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	starImg.SetPosition(500,335);
 
-	int numEntries = 18;
+	int numEntries = 25;
 	GuiText * txt[numEntries];
 
-	txt[i] = new GuiText("Credits", 26, (GXColor){255, 255, 255, 255});
+	txt[i] = new GuiText(LANGUAGE.Credits, 26, (GXColor){255, 255, 255, 255});
 	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(0,12); i++;
 
 	txt[i] = new GuiText("V 1 .0", 18, (GXColor){255, 255, 255, 255});
@@ -213,8 +214,11 @@ static void WindowCredits(void * ptr)
 	txt[i] = new GuiText("USB Loader GX", 24, (GXColor){255, 255, 255, 255});
 	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(0,y); i++; y+=26;
 
-	txt[i] = new GuiText("Official Site: http://code.google.com/p/usbloader-gui/", 20, (GXColor){255, 255, 255, 255});
-	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(0,y); i++; y+=28;
+	txt[i] = new GuiText(": http://code.google.com/p/usbloader-gui/", 20, (GXColor){255, 255, 255, 255});
+	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(50,y); i++; //y+=28;
+	
+	txt[i] = new GuiText(LANGUAGE.OfficialSite, 20, (GXColor){255, 255, 255, 255});
+	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(-180,y); i++; y+=28;
 
 	txt[i]->SetPresets(22, (GXColor){255, 255, 255,  255}, 0,
 			FTGX_JUSTIFY_LEFT | FTGX_ALIGN_TOP, ALIGN_LEFT, ALIGN_TOP);
@@ -262,27 +266,44 @@ static void WindowCredits(void * ptr)
 	i++;
 	y+=28;
 
-	txt[i] = new GuiText("Special thanks to:");
-	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(0,y);
+	txt[i] = new GuiText(LANGUAGE.Specialthanksto);
+	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(-50,y);
+	i++;
+	
+	txt[i] = new GuiText(":");
+	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(30,y+3);
 	i++;
 	y+=22;
 
-	txt[i] = new GuiText("Fishears/Nuke for Ocarina & WiiPower for Vidpatch");
+	txt[i] = new GuiText("Fishears/Nuke        Ocarina & WiiPower       Vidpatch");
 	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(0,y);
+	i++;
+	txt[i] = new GuiText(LANGUAGE.For);
+	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(-80,y);
+	i++;
+	txt[i] = new GuiText(LANGUAGE.For);
+	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(130,y);
+	i++;
+	
+	y+=22;
+
+	txt[i] = new GuiText("Tantric         libwiigui");
+	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(0,y);
+	i++;
+	txt[i] = new GuiText(LANGUAGE.For);
+	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(-3,y);
 	i++;
 	y+=22;
 
-	txt[i] = new GuiText("Tantric for the libwiigui");
+	txt[i] = new GuiText("Waninkoko & Kwiirk         USB Loader");
 	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(0,y);
+	i++;
+	txt[i] = new GuiText(LANGUAGE.For);
+	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(30,y);
 	i++;
 	y+=22;
 
-	txt[i] = new GuiText("Waninkoko & Kwiirk for the USB Loader");
-	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(0,y);
-	i++;
-	y+=22;
-
-	txt[i] = new GuiText("and releasing the source code ;)");
+	txt[i] = new GuiText(LANGUAGE.theUSBLoaderandreleasingthesourcecode);
 	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(0,y);
 	i++;
 	y+=22;
@@ -649,7 +670,7 @@ int GameWindowPrompt()
 	GuiImageData dialogBox(imgPath, CFG.widescreen ? wdialogue_box_startgame_png : dialogue_box_startgame_png);
 	GuiImage dialogBoxImg(&dialogBox);
 
-	GuiTooltip nameBtnTT("Rename Game on WBFS");
+	GuiTooltip nameBtnTT(LANGUAGE.RenameGameonWBFS);
 	if (Settings.wsprompt == yes)
 		nameBtnTT.SetWidescreen(CFG.widescreen);
 	GuiText msgTxt("", 22, (GXColor){50, 50, 50, 255});
@@ -712,7 +733,7 @@ int GameWindowPrompt()
 	btn2.SetTrigger(&trigA);
 	btn2.SetEffectGrow();
 
-	GuiText btn3Txt("Settings", 22, (GXColor){0, 0, 0, 255});
+	GuiText btn3Txt(LANGUAGE.settings, 22, (GXColor){0, 0, 0, 255});
 	GuiImage btn3Img(&btnOutline);
 	if (Settings.wsprompt == yes){
 	btn3Img.SetWidescreen(CFG.widescreen);}///////////
@@ -1087,7 +1108,7 @@ DiscWait(const char *title, const char *msg, const char *btn1Label, const char *
 	if(IsDeviceWait) {
         while(i >= 0)
         {
-            sprintf(timer, "%u secs left", i);
+            sprintf(timer, "%u%s", i,LANGUAGE.secondsleft);
             timerTxt.SetText(timer);
             VIDEO_WaitVSync();
             if(Settings.cios == ios222) {
@@ -1199,7 +1220,7 @@ int NetworkInitPromp(int choice2)
 	if (Settings.wsprompt == yes){
 	dialogBoxImg.SetWidescreen(CFG.widescreen);}///////////
 
-	GuiText titleTxt("Initializing Network", 26, (GXColor){0, 0, 0, 255});
+	GuiText titleTxt(LANGUAGE.InitializingNetwork, 26, (GXColor){0, 0, 0, 255});
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	titleTxt.SetPosition(0,60);
 
@@ -1208,7 +1229,7 @@ int NetworkInitPromp(int choice2)
 	msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	msgTxt.SetPosition(0,-40);
 
-    GuiText btn1Txt("Cancel", 22, (GXColor){0, 0, 0, 255});
+    GuiText btn1Txt(LANGUAGE.Cancel, 22, (GXColor){0, 0, 0, 255});
 	GuiImage btn1Img(&btnOutline);
 	if (Settings.wsprompt == yes){
 	btn1Img.SetWidescreen(CFG.widescreen);}///////////
@@ -1253,7 +1274,7 @@ int NetworkInitPromp(int choice2)
 		}
 
 		if (ret <= 0) {
-        msgTxt.SetText("Could not initialize network!");
+        msgTxt.SetText(LANGUAGE.Couldnotinitializenetwork);
 		}
 
 		if (IP && ret > 0) {
@@ -1373,7 +1394,7 @@ ShowProgress (s32 done, s32 total)
 	if(last_d != d)
 	{
 		last_d = d;
-		sprintf(timet,"Time left: %d:%02d:%02d",h,m,s);
+		sprintf(timet,"%s %d:%02d:%02d",LANGUAGE.Timeleft,h,m,s);
 		timeTxt.SetText(timet);
 	}
 
@@ -1551,7 +1572,7 @@ ProgressDownloadWindow(int choice2)
 	progressbarImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 	progressbarImg.SetPosition(25, 40);
 
-	GuiText titleTxt("Downloading file:", 26, (GXColor){0, 0, 0, 255});
+	GuiText titleTxt(LANGUAGE.Downloadingfile, 26, (GXColor){0, 0, 0, 255});
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	titleTxt.SetPosition(0,60);
     char msg[25] = " ";
@@ -1566,7 +1587,7 @@ ProgressDownloadWindow(int choice2)
 	prTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	prTxt.SetPosition(0, 40);
 
-    GuiText btn1Txt("Cancel", 22, (GXColor){0, 0, 0, 255});
+    GuiText btn1Txt(LANGUAGE.Cancel, 22, (GXColor){0, 0, 0, 255});
 	GuiImage btn1Img(&btnOutline);
 	if (Settings.wsprompt == yes){
 	btn1Img.SetWidescreen(CFG.widescreen);}
@@ -1612,7 +1633,7 @@ ProgressDownloadWindow(int choice2)
         snprintf(dircovers,strlen(CFG.covers_path),"%s",CFG.covers_path);
         if (mkdir(dircovers, 0777) == -1) {
             if(subfoldercheck(dircovers) != 1) {
-            WindowPrompt("Error:","Can't create directory","OK",0,0,0);
+            WindowPrompt(LANGUAGE.Error,LANGUAGE.Cantcreatedirectory,LANGUAGE.ok,0,0,0);
             cntMissFiles = 0;
             }
         }
@@ -1622,7 +1643,7 @@ ProgressDownloadWindow(int choice2)
         snprintf(dirdiscs,strlen(CFG.disc_path),"%s",CFG.disc_path);
         if (mkdir(dirdiscs, 0777) == -1) {
             if(subfoldercheck(dirdiscs) != 1) {
-            WindowPrompt("Error:","Can't create directory","OK",0,0,0);
+            WindowPrompt(LANGUAGE.Error,LANGUAGE.Cantcreatedirectory,LANGUAGE.ok,0,0,0);
             cntMissFiles = 0;
             }
         }
@@ -1643,7 +1664,7 @@ ProgressDownloadWindow(int choice2)
 	else{
 	progressbarImg.SetTile(100*i/cntMissFiles);}
 
-    sprintf(msg, "%i file(s) left", cntMissFiles - i);
+    sprintf(msg, "%i %s", cntMissFiles - i, LANGUAGE.filesleft);
     msgTxt.SetText(msg);
     sprintf(msg2, "%s", missingFiles[i]);
     msg2Txt.SetText(msg2);
@@ -1890,7 +1911,7 @@ static int OnScreenKeyboard(char * var, u32 maxlen, int min)
 	GuiTrigger trigB;
 	trigB.SetSimpleTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 
-	GuiText okBtnTxt("OK", 22, (GXColor){0, 0, 0, 255});
+	GuiText okBtnTxt(LANGUAGE.ok, 22, (GXColor){0, 0, 0, 255});
 	GuiImage okBtnImg(&btnOutline);
 	if (Settings.wsprompt == yes){
 	okBtnImg.SetWidescreen(CFG.widescreen);}///////////
@@ -1899,14 +1920,14 @@ static int OnScreenKeyboard(char * var, u32 maxlen, int min)
 	okBtn.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
 	okBtn.SetPosition(5, 15);//(25, -25);
 
-	okBtn.SetLabel(&okBtnTxt);
+	okBtn.SetLabel(&okBtnTxt);//
 	okBtn.SetImage(&okBtnImg);
 	okBtn.SetSoundOver(&btnSoundOver);
 	okBtn.SetSoundClick(&btnClick);
 	okBtn.SetTrigger(&trigA);
 	okBtn.SetEffectGrow();
 
-	GuiText cancelBtnTxt("Cancel", 22, (GXColor){0, 0, 0, 255});
+	GuiText cancelBtnTxt(LANGUAGE.Cancel, 22, (GXColor){0, 0, 0, 255});
 	GuiImage cancelBtnImg(&btnOutline);
 	if (Settings.wsprompt == yes){
 	cancelBtnImg.SetWidescreen(CFG.widescreen);}///////////
@@ -2074,22 +2095,22 @@ static int MenuInstall()
 		}
 		#endif
 
-		ret = DiscWait("Insert Disk","Waiting...","Cancel",0,0);
+		ret = DiscWait(LANGUAGE.InsertDisk,LANGUAGE.Waiting,LANGUAGE.Cancel,0,0);
 		if (ret < 0) {
-			WindowPrompt ("Error reading Disc",0,"Back",0,0,0);
+			WindowPrompt (LANGUAGE.ErrorreadingDisc,0,LANGUAGE.Back,0,0,0);
 			menu = MENU_DISCLIST;
 			break;
 		}
 		ret = Disc_Open();
 		if (ret < 0) {
-			WindowPrompt ("Could not open Disc",0,"Back",0,0,0);
+			WindowPrompt (LANGUAGE.CouldnotopenDisc,0,LANGUAGE.Back,0,0,0);
 			menu = MENU_DISCLIST;
 			break;
 		}
 
 		ret = Disc_IsWii();
 		if (ret < 0) {
-			choice = WindowPrompt ("Not a Wii Disc","Insert a Wii Disc!","OK","Back",0,0);
+			choice = WindowPrompt (LANGUAGE.NotaWiiDisc,LANGUAGE.InsertaWiiDisc,LANGUAGE.ok,LANGUAGE.Back,0,0);
 
 			if (choice == 1) {
 				menu = MENU_INSTALL;
@@ -2112,13 +2133,13 @@ static int MenuInstall()
 
 		ret = WBFS_CheckGame(headerdisc.id);
 		if (ret) {
-			WindowPrompt ("Game is already installed:",name,"Back",0,0,0);
+			WindowPrompt (LANGUAGE.Gameisalreadyinstalled,name,LANGUAGE.Back,0,0,0);
 			menu = MENU_DISCLIST;
 			break;
 		}
 		hdd = GetHddInfo();
 		if (!hdd) {
-			WindowPrompt ("No HDD found!","Error!!","Back",0,0,0);
+			WindowPrompt (LANGUAGE.NoHDDfound,LANGUAGE.Error,LANGUAGE.Back,0,0,0);
 			menu = MENU_DISCLIST;
 			break;
 			}
@@ -2132,27 +2153,27 @@ static int MenuInstall()
 
 		sprintf(gametxt, "%s : %.2fGB", name, gamesize);
 
-		choice = WindowPrompt("Continue install game?",gametxt,"OK","Cancel",0,0);
+		choice = WindowPrompt(LANGUAGE.Continueinstallgame,gametxt,LANGUAGE.ok,LANGUAGE.Cancel,0,0);
 
 		if(choice == 1) {
 
-		sprintf(gametxt, "Installing game:");
+		sprintf(gametxt, LANGUAGE.Installinggame);
 
 		if (gamesize > freespace) {
 			char errortxt[50];
-			sprintf(errortxt, "Game Size: %.2fGB, Free Space: %.2fGB", gamesize, freespace);
-			choice = WindowPrompt("Not enough free space!",errortxt,"Go on", "Return",0,0);
+			sprintf(errortxt, "%s: %.2fGB, %s: %.2fGB",LANGUAGE.GameSize, gamesize, LANGUAGE.FreeSpace, freespace);
+			choice = WindowPrompt(LANGUAGE.Notenoughfreespace,errortxt,LANGUAGE.ok, LANGUAGE.Return,0,0);
 			if (choice == 1) {
 				ret = ProgressWindow(gametxt, name);
 				if (ret != 0) {
-					WindowPrompt ("Install error!",0,"Back",0,0,0);
+					WindowPrompt (LANGUAGE.Installerror,0,LANGUAGE.Back,0,0,0);
 					menu = MENU_DISCLIST;
 					break;
 				}
 				else {
 					__Menu_GetEntries(); //get the entries again
 					wiilight(1);
-					WindowPrompt ("Successfully installed:",name,"OK",0,0,0);
+					WindowPrompt (LANGUAGE.Successfullyinstalled,name,LANGUAGE.ok,0,0,0);
 					menu = MENU_DISCLIST;
 					wiilight(0);
 					break;
@@ -2166,13 +2187,13 @@ static int MenuInstall()
 		else {
 			ret = ProgressWindow(gametxt, name);
 			if (ret != 0) {
-				WindowPrompt ("Install error!",0,"Back",0,0,0);
+				WindowPrompt (LANGUAGE.Installerror,0,LANGUAGE.Back,0,0,0);
 				menu = MENU_DISCLIST;
 					break;
 			} else {
 				__Menu_GetEntries(); //get the entries again
 				wiilight(1);
-				WindowPrompt ("Successfully installed:",name,"OK",0,0,0);
+				WindowPrompt (LANGUAGE.Successfullyinstalled,name,LANGUAGE.ok,0,0,0);
 				menu = MENU_DISCLIST;
 				wiilight(0);
 				break;
@@ -2275,18 +2296,18 @@ static int MenuDiscList()
 	trigHome.SetButtonOnlyTrigger(-1, WPAD_BUTTON_HOME | WPAD_CLASSIC_BUTTON_HOME, 0);
 
     char spaceinfo[30];
-	sprintf(spaceinfo,"%.2fGB of %.2fGB free",freespace,(freespace+used));
+	sprintf(spaceinfo,"%.2fGB %s %.2fGB %s",freespace,LANGUAGE.of,(freespace+used),LANGUAGE.free);
 	GuiText usedSpaceTxt(spaceinfo, 18, (GXColor){THEME.info_r, THEME.info_g, THEME.info_b, 255});
 	usedSpaceTxt.SetAlignment(THEME.hddInfoAlign, ALIGN_TOP);
 	usedSpaceTxt.SetPosition(THEME.hddInfo_x, THEME.hddInfo_y);
 
 	char GamesCnt[15];
-	sprintf(GamesCnt,"Games: %i",gameCnt);
+	sprintf(GamesCnt,"%s: %i",LANGUAGE.Games, gameCnt);
 	GuiText gamecntTxt(GamesCnt, 18, (GXColor){THEME.info_r, THEME.info_g, THEME.info_b, 255});
 	gamecntTxt.SetAlignment(THEME.gameCntAlign, ALIGN_TOP);
 	gamecntTxt.SetPosition(THEME.gameCnt_x,THEME.gameCnt_y);
 
-	GuiTooltip installBtnTT("Install a game");
+	GuiTooltip installBtnTT(LANGUAGE.Installagame);
 	if (Settings.wsprompt == yes)
 		installBtnTT.SetWidescreen(CFG.widescreen);///////////
 	GuiImage installBtnImg(&btnInstall);
@@ -2304,7 +2325,7 @@ static int MenuDiscList()
 	installBtn.SetEffectGrow();
 	installBtn.SetToolTip(&installBtnTT,24,-30, ALIGN_LEFT);
 
-	GuiTooltip settingsBtnTT("Settings");
+	GuiTooltip settingsBtnTT(LANGUAGE.settings);
 	if (Settings.wsprompt == yes)
 		settingsBtnTT.SetWidescreen(CFG.widescreen);///////////
 
@@ -2323,7 +2344,7 @@ static int MenuDiscList()
 	settingsBtn.SetEffectGrow();
 	settingsBtn.SetToolTip(&settingsBtnTT,65,-30);
 
-	GuiTooltip homeBtnTT("Back to HBC or Wii Menu");
+	GuiTooltip homeBtnTT(LANGUAGE.BacktoHBCorWiiMenu);
 	if (Settings.wsprompt == yes)
 		homeBtnTT.SetWidescreen(CFG.widescreen);///////////
 
@@ -2343,7 +2364,7 @@ static int MenuDiscList()
 	homeBtn.SetEffectGrow();
 	homeBtn.SetToolTip(&homeBtnTT,15,-30);
 
-	GuiTooltip poweroffBtnTT("Power off the Wii");
+	GuiTooltip poweroffBtnTT(LANGUAGE.PowerofftheWii);
 	if (Settings.wsprompt == yes)
 		poweroffBtnTT.SetWidescreen(CFG.widescreen);///////////
 
@@ -2364,7 +2385,7 @@ static int MenuDiscList()
 	poweroffBtn.SetToolTip(&poweroffBtnTT,-10,-30);
 
 
-	GuiTooltip sdcardBtnTT("Reload SD");
+	GuiTooltip sdcardBtnTT(LANGUAGE.ReloadSD);
 	if (Settings.wsprompt == yes)
 		sdcardBtnTT.SetWidescreen(CFG.widescreen);///////////
 
@@ -2391,7 +2412,7 @@ static int MenuDiscList()
 	wiiBtn.SetTrigger(&trigA);
 
 	//Downloading Covers
-	GuiTooltip DownloadBtnTT("Click to Download Covers");
+	GuiTooltip DownloadBtnTT(LANGUAGE.ClicktoDownloadCovers);
 	if (Settings.wsprompt == yes)
 		DownloadBtnTT.SetWidescreen(CFG.widescreen);///////////
 
@@ -2571,7 +2592,7 @@ static int MenuDiscList()
 	    if(poweroffBtn.GetState() == STATE_CLICKED)
 		{
 
-		    choice = WindowPrompt("How to Shutdown?",0,"Full Shutdown", "Shutdown to Idle", "Cancel",0);
+		    choice = WindowPrompt(LANGUAGE.HowtoShutdown,0,LANGUAGE.FullShutdown, LANGUAGE.ShutdowntoIdle, LANGUAGE.Cancel,0);
 			if(choice == 2)
 			{
 			    WPAD_Flush(0);
@@ -2599,7 +2620,7 @@ static int MenuDiscList()
 		else if(homeBtn.GetState() == STATE_CLICKED)
 		{
 
-			choice = WindowPrompt("Exit USB ISO Loader ?",0, "Back to Loader","Wii Menu","Back",0);
+			choice = WindowPrompt(LANGUAGE.ExitUSBISOLoader,0, LANGUAGE.BacktoLoader,LANGUAGE.WiiMenu,LANGUAGE.Back,0);
 			if(choice == 2)
 			{
                 SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0); // Back to System Menu
@@ -2623,7 +2644,7 @@ static int MenuDiscList()
 		}
 		else if(installBtn.GetState() == STATE_CLICKED)
 		{
-				choice = WindowPrompt("Install a game?",0,"Yes","No",0,0);
+				choice = WindowPrompt(LANGUAGE.Installagame,0,LANGUAGE.Yes,LANGUAGE.No,0,0);
 				if (choice == 1)
 				{
 					menu = MENU_INSTALL;
@@ -2648,7 +2669,7 @@ static int MenuDiscList()
 		else if(DownloadBtn.GetState() == STATE_CLICKED)
 		{
 		    if(isSdInserted() == 1) {
-			choice = WindowPrompt("Cover Download", 0, "Normal Covers", "3D Covers", "Disc Images", "Back"); // ask for download choice
+			choice = WindowPrompt(LANGUAGE.CoverDownload, 0, LANGUAGE.NormalCovers, LANGUAGE.t3Covers, LANGUAGE.DiscImages, LANGUAGE.Back); // ask for download choice
 
 			if (choice != 0)
 			{
@@ -2660,7 +2681,7 @@ static int MenuDiscList()
 
 				if(netset < 0)
 				{
-					WindowPrompt("Network init error", 0, "OK",0,0,0);
+					WindowPrompt(LANGUAGE.Networkiniterror, 0, LANGUAGE.ok,0,0,0);
 					netcheck = false;
 
 				} else  {
@@ -2676,28 +2697,28 @@ static int MenuDiscList()
 						char tempCnt[40];
 						i = 0;
 
-						sprintf(tempCnt,"Missing %i files",cntMissFiles);
-						choice = WindowPrompt("Download Boxart image?",tempCnt,"Yes","No",0,0);
+						sprintf(tempCnt,"%i %s",cntMissFiles,LANGUAGE.Missingfiles);
+						choice = WindowPrompt(LANGUAGE.DownloadBoxartimage,tempCnt,LANGUAGE.Yes,LANGUAGE.No,0,0);
 						//WindowPrompt("Downloading","Please Wait Downloading Covers",0,0);
 						if (choice == 1)
 						{
 							ret = ProgressDownloadWindow(choice2);
 							if (ret == 0) {
-							WindowPrompt("Download finished",0,"OK",0,0,0);
+							WindowPrompt(LANGUAGE.Downloadfinished,0,LANGUAGE.ok,0,0,0);
 							} else {
-                            sprintf(tempCnt,"%i files not found on the server!",ret);
-                            WindowPrompt("Download finished",tempCnt,"OK",0,0,0);
+                            sprintf(tempCnt,"%i %s",ret,LANGUAGE.filesnotfoundontheserver);
+                            WindowPrompt(LANGUAGE.Downloadfinished,tempCnt,LANGUAGE.ok,0,0,0);
 							}
 						}
 					}
 					else
 					{
-						WindowPrompt("No file missing!",0,"OK",0,0,0);
+						WindowPrompt(LANGUAGE.Nofilemissing,0,LANGUAGE.ok,0,0,0);
 					}
 				}
 			}
             } else {
-			WindowPrompt("No SD-Card inserted!", "Insert a SD-Card to download images.", "OK", 0,0,0);
+			WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtodownloadimages, LANGUAGE.ok, 0,0,0);
             }
 			DownloadBtn.ResetState();
 			gameBrowser.SetFocus(1);
@@ -2886,7 +2907,7 @@ static int MenuDiscList()
                     WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
                     WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
 
-					WindowPrompt("You don't have cIOS222!","Loading in cIOS249!","OK", 0,0,0);
+					WindowPrompt(LANGUAGE.YoudonthavecIOS,LANGUAGE.LoadingincIOS,LANGUAGE.ok, 0,0,0);
 
 					Sys_IosReload(249);
 					ios2 = 0;
@@ -2902,21 +2923,21 @@ static int MenuDiscList()
 					/* Set USB mode */
 					ret = Disc_SetUSB(header->id, ios2);
 					if (ret < 0) {
-						sprintf(text, "Error: %i", ret);
+						sprintf(text, "%s %i", LANGUAGE.Error,ret);
 						WindowPrompt(
-						"Failed to set USB:",
+						LANGUAGE.FailedtosetUSB,
 						text,
-						"OK",0,0,0);
+						LANGUAGE.ok,0,0,0);
 					}
 					else {
 						/* Open disc */
 						ret = Disc_Open();
 						if (ret < 0) {
-							sprintf(text, "Error: %i", ret);
+							sprintf(text, "%s %i",LANGUAGE.Error, ret);
 							WindowPrompt(
-							"Failed to boot:",
+							LANGUAGE.Failedtoboot,
 							text,
-							"OK",0,0,0);
+							LANGUAGE.ok,0,0,0);
 						}
 						else {
 							menu = MENU_EXIT;
@@ -2981,7 +3002,7 @@ static int MenuDiscList()
                     WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
                     WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
 
-					WindowPrompt("You don't have cIOS222!","Loading in cIOS249!","OK", 0,0,0);
+					WindowPrompt(LANGUAGE.YoudonthavecIOS,LANGUAGE.LoadingincIOS,LANGUAGE.ok, 0,0,0);
 
 					Sys_IosReload(249);
 					ios2 = 0;
@@ -2999,21 +3020,21 @@ static int MenuDiscList()
 					/* Set USB mode */
 					ret = Disc_SetUSB(header->id, ios2);
 					if (ret < 0) {
-						sprintf(text, "Error: %i", ret);
+						sprintf(text, "%s %i", LANGUAGE.Error, ret);
 						WindowPrompt(
-						"Failed to set USB:",
+						LANGUAGE.FailedtosetUSB,
 						text,
-						"OK",0,0,0);
+						LANGUAGE.ok,0,0,0);
 					}
 					else {
 						/* Open disc */
 						ret = Disc_Open();
 						if (ret < 0) {
-							sprintf(text, "Error: %i", ret);
+							sprintf(text, "%s %i",LANGUAGE.Error, ret);
 							WindowPrompt(
-							"Failed to boot:",
+							LANGUAGE.Failedtoboot,
 							text,
-							"OK",0,0,0);
+							LANGUAGE.ok,0,0,0);
 						}
 						else {
 							menu = MENU_EXIT;
@@ -3096,11 +3117,11 @@ static int MenuFormat()
 		f32 size = entry->size * (sector_size / GB_SIZE);
 
         if (size) {
-            sprintf(options.name[cnt], "Partition %d:", cnt+1);
+            sprintf(options.name[cnt], "%s %d:",LANGUAGE.Partition, cnt+1);
             sprintf (options.value[cnt],"%.2fGB", size);
         } else {
-            sprintf(options.name[cnt], "Partition %d:", cnt+1);
-            sprintf (options.value[cnt],"(Can't be formated)");
+            sprintf(options.name[cnt], "%s %d:",LANGUAGE.Partition, cnt+1);
+            sprintf (options.value[cnt],LANGUAGE.Cantbeformated);
         }
     }
 
@@ -3255,22 +3276,22 @@ static int MenuFormat()
                 if (cnt == selected) {
                     partitionEntry *entry = &partitions[selected];
                         if (entry->size) {
-                        sprintf(text, "Partition %d : %.2fGB", selected+1, entry->size * (sector_size / GB_SIZE));
+                        sprintf(text, "%s %d : %.2fGB",LANGUAGE.Partition, selected+1, entry->size * (sector_size / GB_SIZE));
                         choice = WindowPrompt(
-                        "Do you want to format:",
+                        LANGUAGE.Doyouwanttoformat,
                         text,
-                        "Yes",
-                        "No",0,0);
+                        LANGUAGE.Yes,
+                        LANGUAGE.No,0,0);
                     if(choice == 1) {
-                    ret = FormatingPartition("Formatting, please wait...", entry);
+                    ret = FormatingPartition(LANGUAGE.Formattingpleasewait, entry);
                         if (ret < 0) {
-                            WindowPrompt("Error:","Failed formating","Return",0,0,0);
+                            WindowPrompt(LANGUAGE.Error,LANGUAGE.Failedformating,LANGUAGE.Return,0,0,0);
                             menu = MENU_SETTINGS;
 
                         } else {
                             WBFS_Open();
-                            sprintf(text, "%s formated!", text);
-                            WindowPrompt("Success:",text,"OK",0,0,0);
+                            sprintf(text, "%s %s", text,LANGUAGE.formated);
+                            WindowPrompt(LANGUAGE.Success,text,LANGUAGE.ok,0,0,0);
                             menu = MENU_DISCLIST;
                         }
                     }
@@ -3284,7 +3305,7 @@ static int MenuFormat()
 
 	    if(poweroffBtn.GetState() == STATE_CLICKED)
 		{
-		    choice = WindowPrompt ("Shutdown System","Are you sure?","Yes","No",0,0);
+		    choice = WindowPrompt (LANGUAGE.ShutdownSystem,LANGUAGE.Areyousure,LANGUAGE.Yes,LANGUAGE.No,0,0);
 			if(choice == 1)
 			{
 			    WPAD_Flush(0);
@@ -3295,7 +3316,7 @@ static int MenuFormat()
 
 		} else if(exitBtn.GetState() == STATE_CLICKED)
 		{
-		    choice = WindowPrompt ("Return to Wii Menu","Are you sure?","Yes","No",0,0);
+		    choice = WindowPrompt (LANGUAGE.ReturntoWiiMenu,LANGUAGE.Areyousure,LANGUAGE.Yes,LANGUAGE.No,0,0);
 			if(choice == 1)
 			{
                 SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
@@ -3362,7 +3383,7 @@ static int MenuSettings()
 	GuiTrigger trigPlus;
 	trigPlus.SetButtonOnlyTrigger(-1, WPAD_BUTTON_PLUS | WPAD_CLASSIC_BUTTON_PLUS, 0);
 
-    GuiText titleTxt("Settings", 28, (GXColor){0, 0, 0, 255});
+    GuiText titleTxt(LANGUAGE.settings, 28, (GXColor){0, 0, 0, 255});
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	titleTxt.SetPosition(0,40);
 
@@ -3372,7 +3393,7 @@ static int MenuSettings()
 	settingsbackgroundbtn.SetPosition(0, 0);
 	settingsbackgroundbtn.SetImage(&settingsbackground);
 
-    GuiText backBtnTxt("Go Back", 22, (GXColor){0, 0, 0, 255});
+    GuiText backBtnTxt(LANGUAGE.Back , 22, (GXColor){0, 0, 0, 255});
 	backBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
 	GuiImage backBtnImg(&btnOutline);
 	if (Settings.wsprompt == yes){
@@ -3436,18 +3457,18 @@ static int MenuSettings()
 	page3Btn.SetTrigger(1, &trigR);
 	page3Btn.SetTrigger(2, &trigPlus);
 
-	GuiTooltip page2BtnTT("Go to Page 2");
-	if (Settings.wsprompt == yes)
-		page2BtnTT.SetWidescreen(CFG.widescreen);///////////
+//	GuiTooltip page2BtnTT("%s 2",LANGUAGE.GotoPage);
+//	if (Settings.wsprompt == yes)
+//		page2BtnTT.SetWidescreen(CFG.widescreen);///////////
 
-	page2Btn.SetToolTip(&page2BtnTT,105,0);
+//	page2Btn.SetToolTip(&page2BtnTT,105,0);
 
 	////////////////////////////////
 
 
-	const char * text = "Unlock";
+	const char * text = LANGUAGE.Unlock;
 	if (CFG.godmode == 1)
-			text = "Lock";
+			text = LANGUAGE.Lock;
 	GuiText lockBtnTxt(text, 22, (GXColor){0, 0, 0, 255});
 	lockBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
 	GuiImage lockBtnImg(&btnOutline);
@@ -3490,15 +3511,15 @@ static int MenuSettings()
 		menu = MENU_NONE;
 		if ( pageToDisplay == 1)
 		{
-			sprintf(options2.name[0], "Video Mode");
-			sprintf(options2.name[1], "VIDTV Patch");
-			sprintf(options2.name[2], "Language");
+			sprintf(options2.name[0], LANGUAGE.VideoMode);
+			sprintf(options2.name[1], LANGUAGE.VIDTVPatch);
+			sprintf(options2.name[2], LANGUAGE.Language);
 			sprintf(options2.name[3], "Ocarina");
-			sprintf(options2.name[4], "Display");
-			sprintf(options2.name[5], "Clock"); //CLOCK
-			sprintf(options2.name[6], "Rumble"); //RUMBLE
-			sprintf(options2.name[7], "Volume");
-			sprintf(options2.name[8], "Tooltips");
+			sprintf(options2.name[4], LANGUAGE.Display);
+			sprintf(options2.name[5], LANGUAGE.Clock); //CLOCK
+			sprintf(options2.name[6], LANGUAGE.Rumble); //RUMBLE
+			sprintf(options2.name[7], LANGUAGE.Volume);
+			sprintf(options2.name[8], LANGUAGE.Tooltips);
 
 			HaltGui();
 			w.Append(&settingsbackgroundbtn);
@@ -3546,15 +3567,15 @@ static int MenuSettings()
 			mainWindow->Append(&page1Btn);
 			mainWindow->Append(&page3Btn);
 
-			sprintf(options2.name[0], "Password");
-			sprintf(options2.name[1], "Boot/Standard");
-			sprintf(options2.name[2], "Flip X");
-			sprintf(options2.name[3], "Quick Boot");
-			sprintf(options2.name[4], "Prompts & Buttons");
-			sprintf(options2.name[5], "Parentalcontrol");
-			sprintf(options2.name[6], "Cover Path");
-			sprintf(options2.name[7], "Discimage Path");
-			sprintf(options2.name[8], "Theme Path");
+			sprintf(options2.name[0], LANGUAGE.Password);
+			sprintf(options2.name[1], LANGUAGE.BootStandard);
+			sprintf(options2.name[2], LANGUAGE.FlipX);
+			sprintf(options2.name[3], LANGUAGE.QuickBoot);
+			sprintf(options2.name[4], LANGUAGE.PromptsButtons);
+			sprintf(options2.name[5], LANGUAGE.Parentalcontrol);
+			sprintf(options2.name[6], LANGUAGE.CoverPath);
+			sprintf(options2.name[7], LANGUAGE.DiscimagePath);
+			sprintf(options2.name[8], LANGUAGE.ThemePath);
 
 		}
 		else if ( pageToDisplay == 3 )
@@ -3575,8 +3596,8 @@ static int MenuSettings()
 			mainWindow->Append(&page1Btn);
 			mainWindow->Append(&page3Btn);
 
-			sprintf(options2.name[0], "MP3 Menu");
-			sprintf(options2.name[1], " ");
+			sprintf(options2.name[0], LANGUAGE.MP3Menu);
+			sprintf(options2.name[1], LANGUAGE.AppLanguage);
 			sprintf(options2.name[2], " ");
 			sprintf(options2.name[3], "Under");
 			sprintf(options2.name[4], "Construction");
@@ -3613,41 +3634,41 @@ static int MenuSettings()
                 if (Settings.tooltips > 1 )
 					Settings.tooltips = 0;
 
-				if (Settings.video == discdefault) sprintf (options2.value[0],"Disc Default");
-				else if (Settings.video == systemdefault) sprintf (options2.value[0],"System Default");
-				else if (Settings.video == patch) sprintf (options2.value[0],"Auto Patch");
-				else if (Settings.video == pal50) sprintf (options2.value[0],"Force PAL50");
-				else if (Settings.video == pal60) sprintf (options2.value[0],"Force PAL60");
-				else if (Settings.video == ntsc) sprintf (options2.value[0],"Force NTSC");
+				if (Settings.video == discdefault) sprintf (options2.value[0],LANGUAGE.DiscDefault);
+				else if (Settings.video == systemdefault) sprintf (options2.value[0],LANGUAGE.SystemDefault);
+				else if (Settings.video == patch) sprintf (options2.value[0],LANGUAGE.AutoPatch);
+				else if (Settings.video == pal50) sprintf (options2.value[0],"%s PAL50",LANGUAGE.Force);
+				else if (Settings.video == pal60) sprintf (options2.value[0],"%s PAL60",LANGUAGE.Force);
+				else if (Settings.video == ntsc) sprintf (options2.value[0],"%s NTSC",LANGUAGE.Force);
 
-				if (Settings.vpatch == on) sprintf (options2.value[1],"On");
-				else if (Settings.vpatch == off) sprintf (options2.value[1],"Off");
+				if (Settings.vpatch == on) sprintf (options2.value[1],LANGUAGE.ON);
+				else if (Settings.vpatch == off) sprintf (options2.value[1],LANGUAGE.OFF);
 
-				if (Settings.language == ConsoleLangDefault) sprintf (options2.value[2],"Console Default");
-				else if (Settings.language == jap) sprintf (options2.value[2],"Japanese");
-				else if (Settings.language == ger) sprintf (options2.value[2],"German");
-				else if (Settings.language == eng) sprintf (options2.value[2],"English");
-				else if (Settings.language == fren) sprintf (options2.value[2],"French");
-				else if (Settings.language == esp) sprintf (options2.value[2],"Spanish");
-				else if (Settings.language == it) sprintf (options2.value[2],"Italian");
-				else if (Settings.language == dut) sprintf (options2.value[2],"Dutch");
-				else if (Settings.language == schin) sprintf (options2.value[2],"S. Chinese");
-				else if (Settings.language == tchin) sprintf (options2.value[2],"T. Chinese");
-				else if (Settings.language == kor) sprintf (options2.value[2],"Korean");
+				if (Settings.language == ConsoleLangDefault) sprintf (options2.value[2],LANGUAGE.ConsoleDefault);
+				else if (Settings.language == jap) sprintf (options2.value[2],LANGUAGE.Japanese);
+				else if (Settings.language == ger) sprintf (options2.value[2],LANGUAGE.German);
+				else if (Settings.language == eng) sprintf (options2.value[2],LANGUAGE.English);
+				else if (Settings.language == fren) sprintf (options2.value[2],LANGUAGE.French);
+				else if (Settings.language == esp) sprintf (options2.value[2],LANGUAGE.Spanish);
+				else if (Settings.language == it) sprintf (options2.value[2],LANGUAGE.Italian);
+				else if (Settings.language == dut) sprintf (options2.value[2],LANGUAGE.Dutch);
+				else if (Settings.language == schin) sprintf (options2.value[2],LANGUAGE.SChinese);
+				else if (Settings.language == tchin) sprintf (options2.value[2],LANGUAGE.TChinese);
+				else if (Settings.language == kor) sprintf (options2.value[2],LANGUAGE.Korean);
 
-				if (Settings.ocarina == on) sprintf (options2.value[3],"On");
-				else if (Settings.ocarina == off) sprintf (options2.value[3],"Off");
+				if (Settings.ocarina == on) sprintf (options2.value[3],LANGUAGE.ON);
+				else if (Settings.ocarina == off) sprintf (options2.value[3],LANGUAGE.OFF);
 
-				if (Settings.sinfo == GameID) sprintf (options2.value[4],"Game ID");
-				else if (Settings.sinfo == GameRegion) sprintf (options2.value[4],"Game Region");
-				else if (Settings.sinfo == Both) sprintf (options2.value[4],"Both");
-				else if (Settings.sinfo == Neither) sprintf (options2.value[4],"Neither");
+				if (Settings.sinfo == GameID) sprintf (options2.value[4],LANGUAGE.GameID);
+				else if (Settings.sinfo == GameRegion) sprintf (options2.value[4],LANGUAGE.GameRegion);
+				else if (Settings.sinfo == Both) sprintf (options2.value[4],LANGUAGE.Both);
+				else if (Settings.sinfo == Neither) sprintf (options2.value[4],LANGUAGE.Neither);
 
-				if (Settings.hddinfo == HDDInfo) sprintf (options2.value[5],"Off");
-				else if (Settings.hddinfo == Clock) sprintf (options2.value[5],"On");
+				if (Settings.hddinfo == HDDInfo) sprintf (options2.value[5],LANGUAGE.OFF);
+				else if (Settings.hddinfo == Clock) sprintf (options2.value[5],LANGUAGE.ON);
 
-				if (Settings.rumble == RumbleOn) sprintf (options2.value[6],"On");
-				else if (Settings.rumble == RumbleOff) sprintf (options2.value[6],"Off");
+				if (Settings.rumble == RumbleOn) sprintf (options2.value[6],LANGUAGE.ON);
+				else if (Settings.rumble == RumbleOff) sprintf (options2.value[6],LANGUAGE.OFF);
 
 				if (Settings.volume == v10) sprintf (options2.value[7],"10");
 				else if (Settings.volume == v20) sprintf (options2.value[7],"20");
@@ -3659,11 +3680,11 @@ static int MenuSettings()
 				else if (Settings.volume == v80) sprintf (options2.value[7],"80");
 				else if (Settings.volume == v90) sprintf (options2.value[7],"90");
 				else if (Settings.volume == v100) sprintf (options2.value[7],"100");
-				else if (Settings.volume == v0) sprintf (options2.value[7],"Off");
+				else if (Settings.volume == v0) sprintf (options2.value[7],LANGUAGE.OFF);
 
 
-                if (Settings.tooltips == TooltipsOn) sprintf (options2.value[8],"On");
-				else if (Settings.tooltips == TooltipsOff) sprintf (options2.value[8],"Off");
+                if (Settings.tooltips == TooltipsOn) sprintf (options2.value[8],LANGUAGE.ON);
+				else if (Settings.tooltips == TooltipsOff) sprintf (options2.value[8],LANGUAGE.OFF);
 
 				ret = optionBrowser2.GetClickedOption();
 
@@ -3714,23 +3735,23 @@ static int MenuSettings()
 
 
 				if ( CFG.godmode != 1) sprintf(options2.value[0], "********");
-				else if (!strcmp("", Settings.unlockCode)) sprintf(options2.value[0], "<not set>");
+				else if (!strcmp("", Settings.unlockCode)) sprintf(options2.value[0], LANGUAGE.notset);
 				else sprintf(options2.value[0], Settings.unlockCode);
 
                 if (CFG.godmode != 1) sprintf(options2.value[1], "********");
                 else if (Settings.cios == ios249) sprintf (options2.value[1],"cIOS 249");
 				else if (Settings.cios == ios222) sprintf (options2.value[1],"cIOS 222");
 
-				if (Settings.xflip == no) sprintf (options2.value[2],"Right/Next");
-				else if (Settings.xflip == yes) sprintf (options2.value[2],"Left/Prev");
+				if (Settings.xflip == no) sprintf (options2.value[2],"%s/%s",LANGUAGE.Right,LANGUAGE.Next);
+				else if (Settings.xflip == yes) sprintf (options2.value[2],"%s/%s",LANGUAGE.Left,LANGUAGE.Prev);
 				else if (Settings.xflip == sysmenu) sprintf (options2.value[2],"Like SysMenu");
-				else if (Settings.xflip == wtf) sprintf (options2.value[2],"Right/Prev");
+				else if (Settings.xflip == wtf) sprintf (options2.value[2],"%s/%s",LANGUAGE.Right,LANGUAGE.Prev);
 
-				if (Settings.qboot == no) sprintf (options2.value[3],"No");
-				else if (Settings.qboot == yes) sprintf (options2.value[3],"Yes");
+				if (Settings.qboot == no) sprintf (options2.value[3],LANGUAGE.No);
+				else if (Settings.qboot == yes) sprintf (options2.value[3],LANGUAGE.Yes);
 
-				if (Settings.wsprompt == no) sprintf (options2.value[4],"Normal");
-				else if (Settings.wsprompt == yes) sprintf (options2.value[4],"Widescreen Fix");
+				if (Settings.wsprompt == no) sprintf (options2.value[4],LANGUAGE.Normal);
+				else if (Settings.wsprompt == yes) sprintf (options2.value[4],LANGUAGE.WidescreenFix);
 
                 if (CFG.godmode != 1) sprintf(options2.value[5], "********");
 				else if(CFG.parentalcontrol == 0) sprintf(options2.value[5], "0");
@@ -3794,13 +3815,13 @@ static int MenuSettings()
 							if ( result == 1 )
 							{
 								strncpy(Settings.unlockCode, entered, sizeof(Settings.unlockCode));
-								WindowPrompt("Password Changed","Password has been changed","OK",0,0,0);
+								WindowPrompt(LANGUAGE.PasswordChanged,LANGUAGE.Passwordhasbeenchanged,LANGUAGE.ok,0,0,0);
 								cfg_save_global();
 							}
 						}
 						else
 						{
-							WindowPrompt("Password change","Console should be unlocked to modify it.","OK",0,0,0);
+							WindowPrompt(LANGUAGE.Passwordchange,LANGUAGE.Consoleshouldbeunlockedtomodifyit,LANGUAGE.ok,0,0,0);
 						}
 						break;
 					case 1:
@@ -3842,17 +3863,17 @@ static int MenuSettings()
 							w.Append(&lockBtn);
 							if ( result == 1 )
 							{	strncpy(CFG.covers_path, entered, sizeof(CFG.covers_path));
-								WindowPrompt("Coverpath Changed",0,"OK",0,0,0);
+								WindowPrompt(LANGUAGE.CoverpathChanged,0,LANGUAGE.ok,0,0,0);
 								if(isSdInserted() == 1) {
                                     cfg_save_global();
                                 } else {
-                                    WindowPrompt("No SD-Card inserted!", "Insert a SD-Card to save.", "OK", 0,0,0);
+                                    WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
                                 }
 							}
 						}
 						else
 						{
-							WindowPrompt("Coverpath change","Console should be unlocked to modify it.","OK",0,0,0);
+							WindowPrompt(LANGUAGE.Coverpathchange,LANGUAGE.Consoleshouldbeunlockedtomodifyit,LANGUAGE.ok,0,0,0);
 						}
 						break;
                     case 7:
@@ -3878,17 +3899,17 @@ static int MenuSettings()
 							if ( result == 1 )
 							{
 								strncpy(CFG.disc_path, entered, sizeof(CFG.disc_path));
-								WindowPrompt("Discpath Changed",0,"OK",0,0,0);
+								WindowPrompt(LANGUAGE.DiscpathChanged,0,LANGUAGE.ok,0,0,0);
 								if(isSdInserted() == 1) {
                                     cfg_save_global();
                                 } else {
-                                    WindowPrompt("No SD-Card inserted!", "Insert a SD-Card to save.", "OK", 0,0,0);
+                                    WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
                                 }
 							}
 						}
 						else
 						{
-							WindowPrompt("Discpath change","Console should be unlocked to modify it.","OK",0,0,0);
+							WindowPrompt(LANGUAGE.Discpathchange,LANGUAGE.Consoleshouldbeunlockedtomodifyit,LANGUAGE.ok,0,0,0);
 						}
 						break;
                     case 8:
@@ -3914,15 +3935,15 @@ static int MenuSettings()
 							if ( result == 1 )
 							{
 								strncpy(CFG.theme_path, entered, sizeof(CFG.theme_path));
-								WindowPrompt("Themepath Changed",0,"OK",0,0,0);
+								WindowPrompt(LANGUAGE.ThemepathChanged,0,LANGUAGE.ok,0,0,0);
 								if(isSdInserted() == 1) {
                                     cfg_save_global();
                                 } else {
-                                    WindowPrompt("No SD-Card inserted!", "Insert a SD-Card to save.", "OK", 0,0,0);
+                                    WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
                                 }
 								/////load new theme//////////////
 								mainWindow->Remove(bgImg);
-								CFG_Load1();
+								CFG_ReLoad();
 								CFG_LoadGlobal();
 								menu = MENU_SETTINGS;
 								#ifdef HW_RVL
@@ -3964,14 +3985,23 @@ static int MenuSettings()
 						}
 						else
 						{
-							WindowPrompt("Themepath change","Console should be unlocked to modify it.","OK",0,0,0);
+							WindowPrompt(LANGUAGE.Themepathchange,LANGUAGE.Consoleshouldbeunlockedtomodifyit,LANGUAGE.ok,0,0,0);
 						}
 						break;
 					}
 			}
 			if (pageToDisplay == 3){
 			sprintf(options2.value[0], " ");
-			sprintf(options2.value[1], " ");
+			
+			if (strlen(CFG.language_path) < (9 + 3)) {
+				sprintf(cfgtext, "%s", CFG.language_path);
+                } else {
+				strncpy(cfgtext, CFG.language_path,  9);
+				cfgtext[9] = '\0';
+				strncat(cfgtext, "...", 3);
+                }
+				sprintf(options2.value[1], "%s", cfgtext);
+				
 			sprintf(options2.value[2], " ");
 			sprintf(options2.value[3], " ");
 			sprintf(options2.value[4], " ");
@@ -3988,6 +4018,47 @@ static int MenuSettings()
                         menu = MENU_MP3;
                         pageToDisplay = 0;
                         break;
+						/////
+						
+					case 1: // language file path
+						if ( CFG.godmode == 1)
+						{
+							mainWindow->Remove(&optionBrowser2);
+							mainWindow->Remove(&page1Btn);
+							mainWindow->Remove(&page2Btn);
+							mainWindow->Remove(&tabBtn);
+							mainWindow->Remove(&page3Btn);
+							w.Remove(&backBtn);
+							w.Remove(&lockBtn);
+							char entered[40] = "";
+							strncpy(entered, CFG.language_path, sizeof(entered));
+							int result = OnScreenKeyboard(entered, 40,0);
+							mainWindow->Append(&optionBrowser2);
+							mainWindow->Append(&tabBtn);
+							mainWindow->Append(&page1Btn);
+							mainWindow->Append(&page2Btn);
+							mainWindow->Append(&page3Btn);
+							w.Append(&backBtn);
+							w.Append(&lockBtn);
+							if ( result == 1 )
+							{	strncpy(CFG.language_path, entered, sizeof(CFG.language_path));
+								if(isSdInserted() == 1) {
+                                    cfg_save_global();
+									//CFG_ReLoad();
+									//CFG_LoadGlobal();
+									CFG_ReLoad();
+                                } else {
+                                    WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
+                                }
+								
+							}
+						}
+						else
+						{
+							WindowPrompt(LANGUAGE.Langchange,LANGUAGE.Consoleshouldbeunlockedtomodifyit,LANGUAGE.ok,0,0,0);
+						}
+						break;
+						
 
 			}
 
@@ -4074,7 +4145,7 @@ static int MenuSettings()
 						{
 							if (CFG.godmode == 0)
 							{
-								WindowPrompt("Correct Password","Install, Rename, and Delete are unlocked.","OK",0,0,0);
+								WindowPrompt(LANGUAGE.CorrectPassword,LANGUAGE.InstallRenameandDeleteareunlocked,LANGUAGE.ok,0,0,0);
 								CFG.godmode = 1;
 								__Menu_GetEntries();
 								menu = MENU_DISCLIST;
@@ -4082,16 +4153,16 @@ static int MenuSettings()
 						}
 						else
 						{
-							WindowPrompt("Wrong Password","USB Loader is protected.","OK",0,0,0);
+							WindowPrompt(LANGUAGE.WrongPassword,LANGUAGE.USBLoaderisprotected,LANGUAGE.ok,0,0,0);
 						}
 					}
 				}
 				else
 				{
-					int choice = WindowPrompt ("Lock Console","Are you sure?","Yes","No",0,0);
+					int choice = WindowPrompt (LANGUAGE.LockConsole,LANGUAGE.Areyousure,LANGUAGE.Yes,LANGUAGE.No,0,0);
 					if(choice == 1)
 					{
-						WindowPrompt("Console Locked","USB Loader is now protected.","OK",0,0,0);
+						WindowPrompt(LANGUAGE.ConsoleLocked,LANGUAGE.USBLoaderisprotected,LANGUAGE.ok,0,0,0);
 						CFG.godmode = 0;
 						__Menu_GetEntries();
 						menu = MENU_DISCLIST;
@@ -4099,11 +4170,11 @@ static int MenuSettings()
 				}
 				if ( CFG.godmode == 1)
 				{
-					lockBtnTxt.SetText("Lock");
+					lockBtnTxt.SetText(LANGUAGE.Lock);
 				}
 				else
 				{
-					lockBtnTxt.SetText("Unlock");
+					lockBtnTxt.SetText(LANGUAGE.Unlock);
 				}
 				lockBtn.ResetState();
 			}
@@ -4146,9 +4217,9 @@ int GameSettings(struct discHdr * header)
 	}
 
 	customOptionList options3(5);
-	sprintf(options3.name[0], "Video Mode");
-	sprintf(options3.name[1], "VIDTV Patch");
-	sprintf(options3.name[2], "Language");
+	sprintf(options3.name[0], LANGUAGE.VideoMode);
+	sprintf(options3.name[1], LANGUAGE.VIDTVPatch);
+	sprintf(options3.name[2], LANGUAGE.Language);
 	sprintf(options3.name[3], "Ocarina");
 	sprintf(options3.name[4], "IOS");
 
@@ -4177,7 +4248,7 @@ int GameSettings(struct discHdr * header)
 	settingsbackgroundbtn.SetPosition(0, 0);
 	settingsbackgroundbtn.SetImage(&settingsbackground);
 
-    GuiText saveBtnTxt("Save", 22, (GXColor){0, 0, 0, 255});
+    GuiText saveBtnTxt(LANGUAGE.Save, 22, (GXColor){0, 0, 0, 255});
 	saveBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
 	GuiImage saveBtnImg(&btnOutline);
 	if (Settings.wsprompt == yes){
@@ -4192,7 +4263,7 @@ int GameSettings(struct discHdr * header)
 	saveBtn.SetTrigger(&trigA);
 	saveBtn.SetEffectGrow();
 
-    GuiText cancelBtnTxt("Back", 22, (GXColor){0, 0, 0, 255});
+    GuiText cancelBtnTxt(LANGUAGE.Back, 22, (GXColor){0, 0, 0, 255});
 	cancelBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
 	GuiImage cancelBtnImg(&btnOutline);
 	if (Settings.wsprompt == yes){
@@ -4208,7 +4279,7 @@ int GameSettings(struct discHdr * header)
 	cancelBtn.SetTrigger(&trigB);
 	cancelBtn.SetEffectGrow();
 
-	GuiText deleteBtnTxt("Uninstall", 22, (GXColor){0, 0, 0, 255});
+	GuiText deleteBtnTxt(LANGUAGE.Uninstall, 22, (GXColor){0, 0, 0, 255});
 	deleteBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
 	GuiImage deleteBtnImg(&btnOutline);
 	if (Settings.wsprompt == yes){
@@ -4269,30 +4340,30 @@ int GameSettings(struct discHdr * header)
 
 		VIDEO_WaitVSync ();
 
-		if (videoChoice == discdefault) sprintf (options3.value[0],"Disc Default");
-		else if (videoChoice == systemdefault) sprintf (options3.value[0],"System Default");
-		else if (videoChoice == patch) sprintf (options3.value[0],"Auto Patch");
-		else if (videoChoice == pal50) sprintf (options3.value[0],"Force PAL50");
-		else if (videoChoice == pal60) sprintf (options3.value[0],"Force PAL60");
-		else if (videoChoice == ntsc) sprintf (options3.value[0],"Force NTSC");
+		if (videoChoice == discdefault) sprintf (options3.value[0],LANGUAGE.DiscDefault);
+		else if (videoChoice == systemdefault) sprintf (options3.value[0],LANGUAGE.SystemDefault);
+		else if (videoChoice == patch) sprintf (options3.value[0],LANGUAGE.AutoPatch);
+		else if (videoChoice == pal50) sprintf (options3.value[0],"%s PAL50",LANGUAGE.Force);
+		else if (videoChoice == pal60) sprintf (options3.value[0],"%s PAL60",LANGUAGE.Force);
+		else if (videoChoice == ntsc) sprintf (options3.value[0],"%s NTSC",LANGUAGE.Force);
 
-        if (viChoice == on) sprintf (options3.value[1],"ON");
-		else if (viChoice == off) sprintf (options3.value[1],"OFF");
+        if (viChoice == on) sprintf (options3.value[1],LANGUAGE.ON);
+		else if (viChoice == off) sprintf (options3.value[1],LANGUAGE.OFF);
 
-		if (languageChoice == ConsoleLangDefault) sprintf (options3.value[2],"Console Default");
-		else if (languageChoice == jap) sprintf (options3.value[2],"Japanese");
-		else if (languageChoice == ger) sprintf (options3.value[2],"German");
-		else if (languageChoice == eng) sprintf (options3.value[2],"English");
-		else if (languageChoice == fren) sprintf (options3.value[2],"French");
-		else if (languageChoice == esp) sprintf (options3.value[2],"Spanish");
-        else if (languageChoice == it) sprintf (options3.value[2],"Italian");
-		else if (languageChoice == dut) sprintf (options3.value[2],"Dutch");
-		else if (languageChoice == schin) sprintf (options3.value[2],"S. Chinese");
-		else if (languageChoice == tchin) sprintf (options3.value[2],"T. Chinese");
-		else if (languageChoice == kor) sprintf (options3.value[2],"Korean");
+		if (languageChoice == ConsoleLangDefault) sprintf (options3.value[2],LANGUAGE.ConsoleDefault);
+		else if (languageChoice == jap) sprintf (options3.value[2],LANGUAGE.Japanese);
+		else if (languageChoice == ger) sprintf (options3.value[2],LANGUAGE.German);
+		else if (languageChoice == eng) sprintf (options3.value[2],LANGUAGE.English);
+		else if (languageChoice == fren) sprintf (options3.value[2],LANGUAGE.French);
+		else if (languageChoice == esp) sprintf (options3.value[2],LANGUAGE.Spanish);
+        else if (languageChoice == it) sprintf (options3.value[2],LANGUAGE.Italian);
+		else if (languageChoice == dut) sprintf (options3.value[2],LANGUAGE.Dutch);
+		else if (languageChoice == schin) sprintf (options3.value[2],LANGUAGE.SChinese);
+		else if (languageChoice == tchin) sprintf (options3.value[2],LANGUAGE.TChinese);
+		else if (languageChoice == kor) sprintf (options3.value[2],LANGUAGE.Korean);
 
-        if (ocarinaChoice == on) sprintf (options3.value[3],"ON");
-		else if (ocarinaChoice == off) sprintf (options3.value[3],"OFF");
+        if (ocarinaChoice == on) sprintf (options3.value[3],LANGUAGE.ON);
+		else if (ocarinaChoice == off) sprintf (options3.value[3],LANGUAGE.OFF);
 
 		if (iosChoice == i249) sprintf (options3.value[4],"249");
 		else if (iosChoice == i222) sprintf (options3.value[4],"222");
@@ -4328,14 +4399,14 @@ int GameSettings(struct discHdr * header)
 		    if(isSdInserted() == 1) {
 				if (CFG_save_game_opt(header->id))
 				{
-					WindowPrompt("Successfully Saved", 0, "OK", 0,0,0);
+					WindowPrompt(LANGUAGE.SuccessfullySaved, 0, LANGUAGE.ok, 0,0,0);
 				}
 				else
 				{
-					WindowPrompt("Save Failed", 0, "OK", 0,0,0);
+					WindowPrompt(LANGUAGE.SaveFailed, 0, LANGUAGE.ok, 0,0,0);
 				}
 		    } else {
-                WindowPrompt("No SD-Card inserted!", "Insert a SD-Card to save.", "OK", 0,0,0);
+                WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
 		    }
 
 			saveBtn.ResetState();
@@ -4351,9 +4422,9 @@ int GameSettings(struct discHdr * header)
 		if (deleteBtn.GetState() == STATE_CLICKED)
 		{
 			int choice = WindowPrompt(
-					"Do you really want to delete:",
+					LANGUAGE.Doyoureallywanttodelete,
 					gameName,
-					"Yes","Cancel",0,0);
+					LANGUAGE.Yes,LANGUAGE.Cancel,0,0);
 
 			if (choice == 1)
 			{
@@ -4361,16 +4432,16 @@ int GameSettings(struct discHdr * header)
 				if (ret < 0)
 				{
 					WindowPrompt(
-					"Can't delete:",
+					LANGUAGE.Cantdelete,
 					gameName,
-					"OK",0,0,0);
+					LANGUAGE.ok,0,0,0);
 				}
 				else {
 					__Menu_GetEntries();
 					WindowPrompt(
-					"Successfully deleted:",
+					LANGUAGE.Successfullydeleted,
 					gameName,
-					"OK",0,0,0);
+					LANGUAGE.ok,0,0,0);
 					retVal = 1;
 				}
 				break;
@@ -4418,10 +4489,10 @@ static int MenuCheck()
             WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
             WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
 
-            ret2 = WindowPrompt("No USB Device found.",
-                    "Do you want to retry for 30secs?",
-                    "Try cIOS249", "Try cIOS222",
-                    "Back to WiiMenu", 0);
+            ret2 = WindowPrompt(LANGUAGE.NoUSBDevicefound,
+                    LANGUAGE.Doyouwanttoretryfor30secs,
+                    "cIOS249", "cIOS222",
+                    LANGUAGE.BacktoWiiMenu, 0);
 
             if(ret2 == 1) {
             Settings.cios = ios249;
@@ -4435,7 +4506,7 @@ static int MenuCheck()
             WPAD_Disconnect(0);
             WPAD_Shutdown();
 
-            ret2 = DiscWait("No USB Device:", "Waiting for USB Device", 0, 0, 1);
+            ret2 = DiscWait(LANGUAGE.NoUSBDevice, LANGUAGE.WaitingforUSBDevice, 0, 0, 1);
 			PAD_Init();
             Wpad_Init();
             WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
@@ -4443,7 +4514,7 @@ static int MenuCheck()
             SDCard_Init();
         }
         if (ret2 < 0) {
-            WindowPrompt ("ERROR:","USB-Device not found!", "ok", 0,0,0);
+            WindowPrompt (LANGUAGE.Error,LANGUAGE.USBDevicenotfound, LANGUAGE.ok, 0,0,0);
             SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
         } else {
             PAD_Init();
@@ -4455,17 +4526,17 @@ static int MenuCheck()
 
         ret2 = Disc_Init();
         if (ret2 < 0) {
-            WindowPrompt ("Error","Could not initialize DIP module!", "ok", 0,0,0);
+            WindowPrompt (LANGUAGE.Error,LANGUAGE.CouldnotinitializeDIPmodule,LANGUAGE.ok, 0,0,0);
             SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
         }
 
         ret2 = WBFS_Open();
         if (ret2 < 0) {
 
-            choice = WindowPrompt("No WBFS partition found!",
-                                    "You need to format a partition.",
-                                    "Format",
-                                    "Return",0,0);
+            choice = WindowPrompt(LANGUAGE.NoWBFSpartitionfound,
+                                    LANGUAGE.Youneedtoformatapartition,
+                                    LANGUAGE.Format,
+                                    LANGUAGE.Return,0,0);
                 if(choice == 0)
                 {
                     SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
@@ -4476,7 +4547,7 @@ static int MenuCheck()
                     ret2 = Partition_GetEntries(partitions, &sector_size);
                     if (ret2 < 0) {
 
-                            WindowPrompt ("No partitions found!",0, "Restart", 0,0,0);
+                            WindowPrompt (LANGUAGE.Nopartitionsfound,0, LANGUAGE.Restart, 0,0,0);
                             SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
 
                     }
@@ -4533,7 +4604,7 @@ int MenuMp3()
 	optionBrowser4.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	optionBrowser4.SetCol2Position(65);
 
-    GuiText cancelBtnTxt("Back", 22, (GXColor){0, 0, 0, 255});
+    GuiText cancelBtnTxt(LANGUAGE.Back, 22, (GXColor){0, 0, 0, 255});
 	cancelBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
 	GuiImage cancelBtnImg(&btnOutline);
 	if (Settings.wsprompt == yes){
@@ -4984,7 +5055,7 @@ int MainMenu(int menu)
     int ret = 0;
     ret = Disc_WiiBoot(videoselected, cheat, vipatch);
     if (ret < 0) {
-        printf("    ERROR: BOOT ERROR! (ret = %d)\n", ret);
+        printf("%s (ret = %d)\n",LANGUAGE.Error, ret);
         SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
     }
 

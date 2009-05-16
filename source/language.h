@@ -1,0 +1,194 @@
+#include <gctypes.h>
+#include "disc.h"
+
+#ifndef _LANGUAGE_H_
+#define _LANGUAGE_H_
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+struct LANGUAGE
+{
+
+	char t3Covers[10];
+	char AppLanguage[10];
+	char Areyousure[15];
+	char AutoPatch[15];
+	char Back[10];
+	char BacktoHBCorWiiMenu[25];
+	char BacktoLoader[20];
+	char BacktoWiiMenu[20];
+	char BootStandard[20];
+	char Both[8];
+	char Cantcreatedirectory[25];
+	char Cancel[10];
+	char Cantbeformated[30];
+	char Cantdelete[25];
+	char ClicktoDownloadCovers[30];
+	char Clock[10];
+	char Continueinstallgame[25];
+	char ConsoleDefault[25];
+	char Consoleshouldbeunlockedtomodifyit[50];
+	char ConsoleLocked[25];
+	char CorrectPassword[25];
+	char Couldnotinitializenetwork[30];
+	char CouldnotopenDisc[52];
+	char CouldnotinitializeDIPmodule[30];
+	char CoverDownload[25];
+	char CoverPath[20];
+	char CoverpathChanged[30];
+	char Coverpathchange[30];
+	char Credits[15];
+	char DiscImages[15];
+	char DiscimagePath[25];
+	char DiscpathChanged[25];
+	char Discpathchange[25];
+	char DiscDefault[25];
+	char Display[20];
+	char Doyouwanttoformat[30];
+	char Doyoureallywanttodelete[35];
+	char Doyouwanttoretryfor30secs[50];
+	char Downloadingfile[30];
+	char DownloadBoxartimage[30];
+	char Downloadfinished[30];
+	char Error[10];
+	char BOOTERROR[15];
+	char ErrorreadingDisc[25];
+	char ExitUSBISOLoader[25];
+	char InitializingNetwork[30];
+	char InsertDisk[25];
+	char InsertaWiiDisc[25];
+	char InsertaSDCardtodownloadimages[50];
+	char InsertaSDCardtosave[35];
+	char InstallRenameandDeleteareunlocked[50];
+	char Installerror[30];
+	char Installagame[30];
+	char Installinggame[30];
+	char Failedtoboot[30];
+	char FailedtomountfrontSDcard[50];
+	char FailedtosetUSB[30];
+	char Failedformating[30];
+	char filesnotfoundontheserver[50];
+	char filesleft[30];
+	char FlipX[30];
+	char Force[30];
+	char Youneedtoformatapartition[50];
+	char Format[30];
+	char Formattingpleasewait[50];
+	char formated[30];
+	char free[30];
+	char FreeSpace[30];
+	char FullShutdown[30];
+	char GameID[30];
+	char Games[30];
+	char Gameisalreadyinstalled[50];
+	char GameRegion[30];
+	char GameSize[30];
+	char GoBack[30];
+	char GotoPage[30];///////
+	char HowtoShutdown[30];
+	char Language[20];
+	char Langchange[20];
+	char Left[30];
+	char LikeSysMenu[30];
+	char LoadingincIOS[40];
+	char Lock[30];
+	char LockConsole[40];
+	char MP3Menu[30];
+	char Missingfiles[40];
+	char Networkiniterror[50];
+	char Neither[40];
+	char Next[40];
+	char No[40];
+	char Nofilemissing[50];
+	char NoHDDfound[40];
+	char NoSDcardinserted[50];
+	char Nopartitionsfound[50];
+	char NoUSBDevice[40];
+	char NoWBFSpartitionfound[50];
+	char NormalCovers[40];
+	char Normal[30];
+	char NotaWiiDisc[40];
+	char NoUSBDevicefound[50];
+	char Notenoughfreespace[50];
+	char notset[30];
+	char of[10];
+	char OFF[10];
+	char OfficialSite[30];
+	char ok[8];
+	char ON[10];
+	char Parentalcontrol[25];
+	char Partition[20];
+	char Password[20];
+	char PasswordChanged[30];
+	char Passwordhasbeenchanged[50];
+	char Passwordchange[30];
+	char PowerofftheWii[30];
+	char Prev[10];
+	char PromptsButtons[30];
+	char ReloadSD[20];
+	char RenameGameonWBFS[30];
+	char Restart[15];
+	char Return[15];
+	char ReturntoWiiMenu[30];
+	char Right[15];
+	char Rumble[15];
+	char QuickBoot[20];
+	char Save[15];
+	char SaveFailed[20];
+	char Specialthanksto[25];
+	char For[10];
+	char theUSBLoaderandreleasingthesourcecode[100];
+	char secondsleft[20];
+	char SelectthePartition[25];
+	char youwanttoformat[20];
+	char settings[15];
+	char ShutdowntoIdle[25];
+	char ShutdownSystem[25];
+	char Success[15];
+	char Successfullyinstalled[40];
+	char Successfullydeleted[40];
+	char SuccessfullySaved[40];
+	char SystemDefault[30];
+	char ThemePath[20];
+	char ThemepathChanged[30];
+	char Themepathchange[30];
+	char Try[10];
+	char Tooltips[15];
+	char Timeleft[15];
+	char Unlock[10];
+	char Uninstall[15];
+	char USBLoaderisprotected[40];
+	char USBDevicenotfound[40];
+	char VideoMode[15];
+	char VIDTVPatch[15];
+	char Volume[15];
+	char Waiting[15];
+	char WaitingforUSBDevice[40];
+	char WidescreenFix[40];
+	char WiiMenu[15];
+	char WrongPassword[30];
+	char Yes[10];
+	char YoudonthavecIOS[30];
+	char Japanese[20];
+	char German[20];
+	char English[20];
+	char French[20];
+	char Spanish[20];
+	char Italian[20];
+	char Dutch[20];
+	char SChinese[20];
+	char TChinese[20];
+	char Korean[20];
+};
+
+
+extern struct LANGUAGE LANGUAGE;
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif

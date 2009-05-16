@@ -68,11 +68,9 @@ struct CFG
 	char covers_path[100];
 	char theme_path[100];
 	char disc_path[100];
+	char language_path[100];
 };
 
-struct LANGUAGE
-{char Install[20];
-};
 
 struct THEME
 {
@@ -133,9 +131,11 @@ struct THEME
 	short pagesize;
 };
 
+
+
+
 extern struct CFG CFG;
 extern struct THEME THEME;
-extern struct LANGUAGE LANGUAGE;
 extern u8 ocarinaChoice;
 extern u8 videoChoice;
 extern u8 languageChoice;
@@ -160,7 +160,8 @@ struct Game_CFG
 
 void CFG_Default(int widescreen); // -1 = non forced mode
 void CFG_Load(int argc, char **argv);
-void CFG_Load1();
+void CFG_ReLoad();
+void lang_defualt();
 struct Game_CFG* CFG_get_game_opt(u8 *id);
 bool CFG_save_game_opt(u8 *id);
 bool CFG_forget_game_opt(u8 *id);

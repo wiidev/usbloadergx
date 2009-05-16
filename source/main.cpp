@@ -31,6 +31,7 @@
 #include "video2.h"
 #include "wpad.h"
 #include "cfg.h"
+#include "language.c"
 
 
 /* Constants */
@@ -109,10 +110,11 @@ main(int argc, char *argv[])
 	s32 ret2;
 
     SDCard_Init();
-
+	lang_default();
 	CFG_Load(argc, argv);
 
 	DefaultSettings();
+	
 
 	SDCard_deInit();
 

@@ -6,7 +6,11 @@
 #include <ctype.h>
 #include <ogcsys.h>
 #include "cfg.h"
-
+#include "language.h"
+//#include "language.c"
+extern void language_set();
+extern void lang_default();
+extern char* strcopy();
 struct SSettings Settings;
 //struct SSettings2 Settings2;
 
@@ -33,7 +37,6 @@ char current_path[100];
 
 struct CFG CFG;
 struct THEME THEME;
-struct LANGUAGE LANGUAGE;
 u8 ocarinaChoice = 0;
 u8 videoChoice = 0;
 u8 languageChoice = 0;
@@ -222,7 +225,8 @@ void CFG_Default(int widescreen) // -1 = non forced Mode
 
 	snprintf(CFG.covers_path, sizeof(CFG.covers_path), "SD:/images/"); //default image path
 	snprintf(CFG.disc_path, sizeof(CFG.disc_path), "SD:/images/disc/");//default path for disc images
-	snprintf(CFG.unlockCode, sizeof(CFG.unlockCode), "ab121b");		// default passwore
+	snprintf(CFG.unlockCode, sizeof(CFG.unlockCode), "ab121b");		// default password
+	snprintf(CFG.language_path, sizeof(CFG.language_path), "SD:/config/language.txt");
 
 	CFG.parentalcontrol = 0;
 	CFG.maxcharacters = 38;
@@ -286,12 +290,7 @@ void CFG_Default(int widescreen) // -1 = non forced Mode
 }
 
 
-char* strcopy(char *dest, char *src, int size)
-{
-	strncpy(dest,src,size);
-	dest[size-1] = 0;
-	return dest;
-}
+
 
 char *cfg_get_title(u8 *id)
 {
@@ -451,6 +450,7 @@ void cfg_set(char *name, char *val)
 		return;
 	}
 
+	
 	if (CFG.widescreen && strcmp(name, "wtheme_path") == 0) { // if in 16:9
 		strcopy(CFG.theme_path, val, sizeof(CFG.theme_path));
 		return;
@@ -466,6 +466,11 @@ void cfg_set(char *name, char *val)
 		return;
 	}
 
+	if (strcmp(name, "language_path") == 0) {
+		strcopy(CFG.language_path, val, sizeof(CFG.language_path));
+		return;
+	}
+
 	cfg_int("parentalcontrol", &CFG.parentalcontrol, 4);
 	cfg_bool("godmode", &CFG.godmode);
 
@@ -473,7 +478,17 @@ void cfg_set(char *name, char *val)
 		strcopy(CFG.unlockCode, val, sizeof(CFG.unlockCode));
 		return;
 	}
+	
+
+	
+	
+	/*if (strcmp(name, "lang_path") == 0) {
+		strcopy(, val, sizeof(CFG.unlockCode));
+		return;
+	}*/
 }
+
+
 
 void theme_set(char *name, char *val)
 {
@@ -648,7 +663,10 @@ void theme_set(char *name, char *val)
 			THEME.maxcharacters = x;
 		}
 	}
-
+	
+	
+	
+	
 	cfg_bool("show_id", &THEME.showID);
 	cfg_bool("show_tooltip", &THEME.showToolTip);
 	cfg_bool("show_hddinfo", &THEME.showHDD);
@@ -959,6 +977,7 @@ bool cfg_save_global()// save global settings
 	fprintf(f, "theme_path = %s\n ", CFG.theme_path);
 	}
 	fprintf(f, "disc_path = %s\n ", CFG.disc_path);
+	fprintf(f, "language_path = %s\n ", CFG.language_path);
 	if(!strcmp("", Settings.unlockCode)) {
 	fprintf(f, "godmode = %d\n ", CFG.godmode);
 	} else {
@@ -1143,6 +1162,9 @@ void CFG_Load(int argc, char **argv)
 
 	snprintf(pathname, sizeof(pathname), "%stheme.txt", CFG.theme_path);
 	cfg_parsefile(pathname, &theme_set); //finally set console information
+	
+	snprintf(pathname, sizeof(pathname), CFG.language_path);
+	cfg_parsefile(pathname, &language_set);
 
 //	if (!ret)
 //	{
@@ -1160,8 +1182,8 @@ void CFG_Load(int argc, char **argv)
 
 //	cfg_parsearg(argc, argv);
 }
-void CFG_Load1()
-{
+void CFG_ReLoad()
+{	
 	char pathname[200];
 //	bool ret = false;
 
@@ -1177,6 +1199,10 @@ void CFG_Load1()
 
 	snprintf(pathname, sizeof(pathname), "%stheme.txt", CFG.theme_path);
 	cfg_parsefile(pathname, &theme_set); //finally set console information
+	
+	snprintf(pathname, sizeof(pathname), "%slanguage.txt",CFG.language_path);
+	cfg_parsefile(pathname, &language_set);
+
 
 //	if (!ret)
 //	{
@@ -1190,6 +1216,7 @@ void CFG_Load1()
 
 	// load per-game settings
 	cfg_load_games();
+	lang_default();
 
 
 //	cfg_parsearg(argc, argv);
