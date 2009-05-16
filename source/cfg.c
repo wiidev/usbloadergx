@@ -7,10 +7,7 @@
 #include <ogcsys.h>
 #include "cfg.h"
 #include "language.h"
-//#include "language.c"
-extern void language_set();
-extern void lang_default();
-extern char* strcopy();
+
 struct SSettings Settings;
 //struct SSettings2 Settings2;
 
@@ -450,7 +447,7 @@ void cfg_set(char *name, char *val)
 		return;
 	}
 
-	
+
 	if (CFG.widescreen && strcmp(name, "wtheme_path") == 0) { // if in 16:9
 		strcopy(CFG.theme_path, val, sizeof(CFG.theme_path));
 		return;
@@ -478,10 +475,10 @@ void cfg_set(char *name, char *val)
 		strcopy(CFG.unlockCode, val, sizeof(CFG.unlockCode));
 		return;
 	}
-	
 
-	
-	
+
+
+
 	/*if (strcmp(name, "lang_path") == 0) {
 		strcopy(, val, sizeof(CFG.unlockCode));
 		return;
@@ -649,24 +646,24 @@ void theme_set(char *name, char *val)
 			THEME.pagesize = x;
 		}
 	}
-	
+
 	else if (strcmp(cfg_name, "batteryUnused") == 0) {
 		short x;
 		if (sscanf(val, "%hd", &x) == 1) {
 			THEME.batteryUnused = x;
 		}
 	}
-	
+
 	else if (strcmp(cfg_name, "maxcharacters") == 0) {
 		short x;
 		if (sscanf(val, "%hd", &x) == 1) {
 			THEME.maxcharacters = x;
 		}
 	}
-	
-	
-	
-	
+
+
+
+
 	cfg_bool("show_id", &THEME.showID);
 	cfg_bool("show_tooltip", &THEME.showToolTip);
 	cfg_bool("show_hddinfo", &THEME.showHDD);
@@ -1145,7 +1142,7 @@ bool CFG_forget_game_opt(u8 *id)
 	return cfg_save_games();
 }
 
-void CFG_Load(int argc, char **argv)
+void CFG_Load()
 {
 	char pathname[200];
 //	bool ret = false;
@@ -1162,7 +1159,7 @@ void CFG_Load(int argc, char **argv)
 
 	snprintf(pathname, sizeof(pathname), "%stheme.txt", CFG.theme_path);
 	cfg_parsefile(pathname, &theme_set); //finally set console information
-	
+
 	snprintf(pathname, sizeof(pathname), CFG.language_path);
 	cfg_parsefile(pathname, &language_set);
 
@@ -1178,46 +1175,6 @@ void CFG_Load(int argc, char **argv)
 
 	// load per-game settings
 	cfg_load_games();
-
-
-//	cfg_parsearg(argc, argv);
-}
-void CFG_ReLoad()
-{	
-	char pathname[200];
-//	bool ret = false;
-
-	//set app path
-//	chdir_app(argv[0]);
-
-	CFG_Default(-1); // set defaults non forced
-
-	snprintf(pathname, sizeof(pathname), "SD:/config/global_settings.cfg");
-
-	cfg_parsefile(pathname, &widescreen_set); //first set widescreen
-	cfg_parsefile(pathname, &cfg_set); //then set config and layout options
-
-	snprintf(pathname, sizeof(pathname), "%stheme.txt", CFG.theme_path);
-	cfg_parsefile(pathname, &theme_set); //finally set console information
-	
-	snprintf(pathname, sizeof(pathname), "%slanguage.txt",CFG.language_path);
-	cfg_parsefile(pathname, &language_set);
-
-
-//	if (!ret)
-//	{
-//		cfg_parsefile("SD:/config.txt", &widescreen_set);
-//		cfg_parsefile("SD:/config.txt", &cfg_set);
-//		cfg_parsefile("SD:/config.txt", &console_set);
-//	}
-
-	snprintf(pathname, sizeof(pathname), "SD:/config/titles.txt");
-	cfg_parsetitlefile(pathname, &title_set);
-
-	// load per-game settings
-	cfg_load_games();
-	lang_default();
-
 
 //	cfg_parsearg(argc, argv);
 }

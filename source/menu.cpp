@@ -216,7 +216,7 @@ static void WindowCredits(void * ptr)
 
 	txt[i] = new GuiText(": http://code.google.com/p/usbloader-gui/", 20, (GXColor){255, 255, 255, 255});
 	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(50,y); i++; //y+=28;
-	
+
 	txt[i] = new GuiText(LANGUAGE.OfficialSite, 20, (GXColor){255, 255, 255, 255});
 	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(-180,y); i++; y+=28;
 
@@ -269,7 +269,7 @@ static void WindowCredits(void * ptr)
 	txt[i] = new GuiText(LANGUAGE.Specialthanksto);
 	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(-50,y);
 	i++;
-	
+
 	txt[i] = new GuiText(":");
 	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(30,y+3);
 	i++;
@@ -284,7 +284,7 @@ static void WindowCredits(void * ptr)
 	txt[i] = new GuiText(LANGUAGE.For);
 	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(130,y);
 	i++;
-	
+
 	y+=22;
 
 	txt[i] = new GuiText("Tantric         libwiigui");
@@ -1999,7 +1999,7 @@ static int MenuInstall()
 	//GuiImageData batteryRed(battery_red_png);
 	//GuiImageData batteryBar(battery_bar_png);
 	char imgPath[100];
-	
+
 	snprintf(imgPath, sizeof(imgPath), "%sbattery.png", CFG.theme_path);
 	GuiImageData battery(imgPath, battery_png);
 	snprintf(imgPath, sizeof(imgPath), "%sbattery_red.png", CFG.theme_path);
@@ -2022,7 +2022,7 @@ static int MenuInstall()
 			sprintf(txt, "P%d", i+1);
 		else
 			sprintf(txt, "P%d", i+1);
-			
+
 		batteryTxt[i] = new GuiText(txt, 22, (GXColor){THEME.info_r, THEME.info_g, THEME.info_b, 255});
 		batteryTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 		batteryImg[i] = new GuiImage(&battery);
@@ -2282,7 +2282,7 @@ static int MenuDiscList()
 	GuiImageData btnhomeOver(imgPath, menu_button_over_png);
 	snprintf(imgPath, sizeof(imgPath), "%sSDcard.png", CFG.theme_path);
 	GuiImageData btnsdcard(imgPath, sdcard_png);
-	
+
 	snprintf(imgPath, sizeof(imgPath), "%sbattery.png", CFG.theme_path);
 	GuiImageData battery(imgPath, battery_png);
 	snprintf(imgPath, sizeof(imgPath), "%sbattery_red.png", CFG.theme_path);
@@ -3943,7 +3943,7 @@ static int MenuSettings()
                                 }
 								/////load new theme//////////////
 								mainWindow->Remove(bgImg);
-								CFG_ReLoad();
+								CFG_Load();
 								CFG_LoadGlobal();
 								menu = MENU_SETTINGS;
 								#ifdef HW_RVL
@@ -3992,7 +3992,7 @@ static int MenuSettings()
 			}
 			if (pageToDisplay == 3){
 			sprintf(options2.value[0], " ");
-			
+
 			if (strlen(CFG.language_path) < (9 + 3)) {
 				sprintf(cfgtext, "%s", CFG.language_path);
                 } else {
@@ -4001,7 +4001,7 @@ static int MenuSettings()
 				strncat(cfgtext, "...", 3);
                 }
 				sprintf(options2.value[1], "%s", cfgtext);
-				
+
 			sprintf(options2.value[2], " ");
 			sprintf(options2.value[3], " ");
 			sprintf(options2.value[4], " ");
@@ -4019,7 +4019,7 @@ static int MenuSettings()
                         pageToDisplay = 0;
                         break;
 						/////
-						
+
 					case 1: // language file path
 						if ( CFG.godmode == 1)
 						{
@@ -4044,13 +4044,15 @@ static int MenuSettings()
 							{	strncpy(CFG.language_path, entered, sizeof(CFG.language_path));
 								if(isSdInserted() == 1) {
                                     cfg_save_global();
-									//CFG_ReLoad();
-									//CFG_LoadGlobal();
-									CFG_ReLoad();
+                                    lang_default();
+									CFG_Load();
+									menu = MENU_SETTINGS;
+									pageToDisplay = 0;
+
                                 } else {
                                     WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
                                 }
-								
+
 							}
 						}
 						else
@@ -4058,7 +4060,7 @@ static int MenuSettings()
 							WindowPrompt(LANGUAGE.Langchange,LANGUAGE.Consoleshouldbeunlockedtomodifyit,LANGUAGE.ok,0,0,0);
 						}
 						break;
-						
+
 
 			}
 

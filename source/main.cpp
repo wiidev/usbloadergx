@@ -31,7 +31,7 @@
 #include "video2.h"
 #include "wpad.h"
 #include "cfg.h"
-#include "language.c"
+#include "language.h"
 
 
 /* Constants */
@@ -111,10 +111,10 @@ main(int argc, char *argv[])
 
     SDCard_Init();
 	lang_default();
-	CFG_Load(argc, argv);
+	CFG_Load();
 
 	DefaultSettings();
-	
+
 
 	SDCard_deInit();
 

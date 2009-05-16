@@ -12,18 +12,18 @@ extern "C"
 struct LANGUAGE
 {
 
-	char t3Covers[10];
-	char AppLanguage[10];
+	char t3Covers[20];
+	char AppLanguage[20];
 	char Areyousure[15];
 	char AutoPatch[15];
-	char Back[10];
+	char Back[15];
 	char BacktoHBCorWiiMenu[25];
 	char BacktoLoader[20];
 	char BacktoWiiMenu[20];
 	char BootStandard[20];
 	char Both[8];
 	char Cantcreatedirectory[25];
-	char Cancel[10];
+	char Cancel[20];
 	char Cantbeformated[30];
 	char Cantdelete[25];
 	char ClicktoDownloadCovers[30];
@@ -115,10 +115,10 @@ struct LANGUAGE
 	char Notenoughfreespace[50];
 	char notset[30];
 	char of[10];
-	char OFF[10];
+	char OFF[15];
 	char OfficialSite[30];
 	char ok[8];
-	char ON[10];
+	char ON[15];
 	char Parentalcontrol[25];
 	char Partition[20];
 	char Password[20];
@@ -126,7 +126,7 @@ struct LANGUAGE
 	char Passwordhasbeenchanged[50];
 	char Passwordchange[30];
 	char PowerofftheWii[30];
-	char Prev[10];
+	char Prev[20];
 	char PromptsButtons[30];
 	char ReloadSD[20];
 	char RenameGameonWBFS[30];
@@ -144,7 +144,7 @@ struct LANGUAGE
 	char secondsleft[20];
 	char SelectthePartition[25];
 	char youwanttoformat[20];
-	char settings[15];
+	char settings[25];
 	char ShutdowntoIdle[25];
 	char ShutdownSystem[25];
 	char Success[15];
@@ -155,10 +155,10 @@ struct LANGUAGE
 	char ThemePath[20];
 	char ThemepathChanged[30];
 	char Themepathchange[30];
-	char Try[10];
+	char Try[20];
 	char Tooltips[15];
 	char Timeleft[15];
-	char Unlock[10];
+	char Unlock[20];
 	char Uninstall[15];
 	char USBLoaderisprotected[40];
 	char USBDevicenotfound[40];
@@ -170,7 +170,7 @@ struct LANGUAGE
 	char WidescreenFix[40];
 	char WiiMenu[15];
 	char WrongPassword[30];
-	char Yes[10];
+	char Yes[20];
 	char YoudonthavecIOS[30];
 	char Japanese[20];
 	char German[20];
@@ -184,8 +184,11 @@ struct LANGUAGE
 	char Korean[20];
 };
 
-
 extern struct LANGUAGE LANGUAGE;
+
+char* strcopy(char *dest, char *src, int size);
+void lang_default();
+void language_set(char *name, char *val);
 
 #ifdef __cplusplus
 }
