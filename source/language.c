@@ -196,7 +196,11 @@ void language_set(char *name, char *val)
 {
 	cfg_name = name;
 	cfg_val = val;
-	
+
+	if (strcmp(name, "t3Covers") == 0) {
+		strcopy(LANGUAGE.t3Covers, val, sizeof(LANGUAGE.t3Covers));
+		return;
+	}
 	if (strcmp(name, "Specialthanksto") == 0) {
 		strcopy(LANGUAGE.Specialthanksto, val, sizeof(LANGUAGE.Specialthanksto));
 		return;
@@ -445,7 +449,7 @@ void language_set(char *name, char *val)
 		strcopy(LANGUAGE.FlipX, val, sizeof(LANGUAGE.FlipX));
 		return;
 	}
-	if (strcmp(name, "for") == 0) {
+	if (strcmp(name, "For") == 0) {
 		strcopy(LANGUAGE.For, val, sizeof(LANGUAGE.For));
 		return;
 	}
@@ -709,7 +713,7 @@ void language_set(char *name, char *val)
 		strcopy(LANGUAGE.Specialthanksto, val, sizeof(LANGUAGE.Specialthanksto));
 		return;
 	}
-	if (strcmp(name, "theUSBLoaderandreleasingthesourcecode") == 0) {
+	if (strcmp(name, "theUSBLoaderandreleasingthesourcecodethe") == 0) {
 		strcopy(LANGUAGE.theUSBLoaderandreleasingthesourcecode, val, sizeof(LANGUAGE.theUSBLoaderandreleasingthesourcecode));
 		return;
 	}
@@ -877,6 +881,6 @@ void language_set(char *name, char *val)
 		strcopy(LANGUAGE.Korean, val, sizeof(LANGUAGE.Korean));
 		return;
 	}
-	
+
 }
 

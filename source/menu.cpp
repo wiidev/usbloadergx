@@ -708,7 +708,7 @@ int GameWindowPrompt()
 	btn1.SetState(STATE_SELECTED);
 	//btn1.SetEffectGrow(); just commented it out if anybody wants to use it again.
 
-	GuiText btn2Txt("Back", 22, (GXColor){0, 0, 0, 255});
+	GuiText btn2Txt(LANGUAGE.Back, 22, (GXColor){0, 0, 0, 255});
 	GuiImage btn2Img(&btnOutline);
 	if (Settings.wsprompt == yes){
 	btn2Img.SetWidescreen(CFG.widescreen);}///////////
@@ -3059,10 +3059,12 @@ static int MenuDiscList()
 					char entered[40];
 					snprintf(entered, sizeof(entered), "%s", get_title(header));
 					entered[39] = '\0';
-					OnScreenKeyboard(entered, 40,0);
+					int result = OnScreenKeyboard(entered, 40,0);
+					if (result == 1) {
 					WBFS_RenameGame(header->id, entered);
 					__Menu_GetEntries();
 					menu = MENU_DISCLIST;
+					}
 				}
 
 
@@ -3744,7 +3746,7 @@ static int MenuSettings()
 
 				if (Settings.xflip == no) sprintf (options2.value[2],"%s/%s",LANGUAGE.Right,LANGUAGE.Next);
 				else if (Settings.xflip == yes) sprintf (options2.value[2],"%s/%s",LANGUAGE.Left,LANGUAGE.Prev);
-				else if (Settings.xflip == sysmenu) sprintf (options2.value[2],"Like SysMenu");
+				else if (Settings.xflip == sysmenu) sprintf (options2.value[2],"%s", LANGUAGE.LikeSysMenu);
 				else if (Settings.xflip == wtf) sprintf (options2.value[2],"%s/%s",LANGUAGE.Right,LANGUAGE.Prev);
 
 				if (Settings.qboot == no) sprintf (options2.value[3],"%s",LANGUAGE.No);
