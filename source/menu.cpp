@@ -2157,7 +2157,7 @@ static int MenuInstall()
 
 		if(choice == 1) {
 
-		sprintf(gametxt, LANGUAGE.Installinggame);
+		sprintf(gametxt, "%s", LANGUAGE.Installinggame);
 
 		if (gamesize > freespace) {
 			char errortxt[50];
@@ -2660,9 +2660,9 @@ static int MenuDiscList()
 		else if(sdcardBtn.GetState() == STATE_CLICKED)
 		{
             SDCard_deInit();
-            USBDevice_deInit();
+            //USBDevice_deInit();
             SDCard_Init();
-            USBDevice_Init();
+            //USBDevice_Init();
 			sdcardBtn.ResetState();
 		}
 
@@ -3511,15 +3511,15 @@ static int MenuSettings()
 		menu = MENU_NONE;
 		if ( pageToDisplay == 1)
 		{
-			sprintf(options2.name[0], LANGUAGE.VideoMode);
-			sprintf(options2.name[1], LANGUAGE.VIDTVPatch);
-			sprintf(options2.name[2], LANGUAGE.Language);
+			sprintf(options2.name[0],"%s", LANGUAGE.VideoMode);
+			sprintf(options2.name[1],"%s", LANGUAGE.VIDTVPatch);
+			sprintf(options2.name[2],"%s", LANGUAGE.Language);
 			sprintf(options2.name[3], "Ocarina");
-			sprintf(options2.name[4], LANGUAGE.Display);
-			sprintf(options2.name[5], LANGUAGE.Clock); //CLOCK
-			sprintf(options2.name[6], LANGUAGE.Rumble); //RUMBLE
-			sprintf(options2.name[7], LANGUAGE.Volume);
-			sprintf(options2.name[8], LANGUAGE.Tooltips);
+			sprintf(options2.name[4],"%s", LANGUAGE.Display);
+			sprintf(options2.name[5],"%s", LANGUAGE.Clock); //CLOCK
+			sprintf(options2.name[6],"%s", LANGUAGE.Rumble); //RUMBLE
+			sprintf(options2.name[7],"%s", LANGUAGE.Volume);
+			sprintf(options2.name[8],"%s", LANGUAGE.Tooltips);
 
 			HaltGui();
 			w.Append(&settingsbackgroundbtn);
@@ -3567,15 +3567,15 @@ static int MenuSettings()
 			mainWindow->Append(&page1Btn);
 			mainWindow->Append(&page3Btn);
 
-			sprintf(options2.name[0], LANGUAGE.Password);
-			sprintf(options2.name[1], LANGUAGE.BootStandard);
-			sprintf(options2.name[2], LANGUAGE.FlipX);
-			sprintf(options2.name[3], LANGUAGE.QuickBoot);
-			sprintf(options2.name[4], LANGUAGE.PromptsButtons);
-			sprintf(options2.name[5], LANGUAGE.Parentalcontrol);
-			sprintf(options2.name[6], LANGUAGE.CoverPath);
-			sprintf(options2.name[7], LANGUAGE.DiscimagePath);
-			sprintf(options2.name[8], LANGUAGE.ThemePath);
+			sprintf(options2.name[0],"%s", LANGUAGE.Password);
+			sprintf(options2.name[1],"%s", LANGUAGE.BootStandard);
+			sprintf(options2.name[2],"%s", LANGUAGE.FlipX);
+			sprintf(options2.name[3],"%s", LANGUAGE.QuickBoot);
+			sprintf(options2.name[4],"%s", LANGUAGE.PromptsButtons);
+			sprintf(options2.name[5],"%s", LANGUAGE.Parentalcontrol);
+			sprintf(options2.name[6],"%s", LANGUAGE.CoverPath);
+			sprintf(options2.name[7],"%s", LANGUAGE.DiscimagePath);
+			sprintf(options2.name[8],"%s", LANGUAGE.ThemePath);
 
 		}
 		else if ( pageToDisplay == 3 )
@@ -3596,8 +3596,8 @@ static int MenuSettings()
 			mainWindow->Append(&page1Btn);
 			mainWindow->Append(&page3Btn);
 
-			sprintf(options2.name[0], LANGUAGE.MP3Menu);
-			sprintf(options2.name[1], LANGUAGE.AppLanguage);
+			sprintf(options2.name[0],"%s", LANGUAGE.MP3Menu);
+			sprintf(options2.name[1],"%s", LANGUAGE.AppLanguage);
 			sprintf(options2.name[2], " ");
 			sprintf(options2.name[3], "Under");
 			sprintf(options2.name[4], "Construction");
@@ -3634,41 +3634,41 @@ static int MenuSettings()
                 if (Settings.tooltips > 1 )
 					Settings.tooltips = 0;
 
-				if (Settings.video == discdefault) sprintf (options2.value[0],LANGUAGE.DiscDefault);
-				else if (Settings.video == systemdefault) sprintf (options2.value[0],LANGUAGE.SystemDefault);
-				else if (Settings.video == patch) sprintf (options2.value[0],LANGUAGE.AutoPatch);
+				if (Settings.video == discdefault) sprintf (options2.value[0],"%s",LANGUAGE.DiscDefault);
+				else if (Settings.video == systemdefault) sprintf (options2.value[0],"%s",LANGUAGE.SystemDefault);
+				else if (Settings.video == patch) sprintf (options2.value[0],"%s",LANGUAGE.AutoPatch);
 				else if (Settings.video == pal50) sprintf (options2.value[0],"%s PAL50",LANGUAGE.Force);
 				else if (Settings.video == pal60) sprintf (options2.value[0],"%s PAL60",LANGUAGE.Force);
 				else if (Settings.video == ntsc) sprintf (options2.value[0],"%s NTSC",LANGUAGE.Force);
 
-				if (Settings.vpatch == on) sprintf (options2.value[1],LANGUAGE.ON);
-				else if (Settings.vpatch == off) sprintf (options2.value[1],LANGUAGE.OFF);
+				if (Settings.vpatch == on) sprintf (options2.value[1],"%s",LANGUAGE.ON);
+				else if (Settings.vpatch == off) sprintf (options2.value[1],"%s",LANGUAGE.OFF);
 
-				if (Settings.language == ConsoleLangDefault) sprintf (options2.value[2],LANGUAGE.ConsoleDefault);
-				else if (Settings.language == jap) sprintf (options2.value[2],LANGUAGE.Japanese);
-				else if (Settings.language == ger) sprintf (options2.value[2],LANGUAGE.German);
-				else if (Settings.language == eng) sprintf (options2.value[2],LANGUAGE.English);
-				else if (Settings.language == fren) sprintf (options2.value[2],LANGUAGE.French);
-				else if (Settings.language == esp) sprintf (options2.value[2],LANGUAGE.Spanish);
-				else if (Settings.language == it) sprintf (options2.value[2],LANGUAGE.Italian);
-				else if (Settings.language == dut) sprintf (options2.value[2],LANGUAGE.Dutch);
-				else if (Settings.language == schin) sprintf (options2.value[2],LANGUAGE.SChinese);
-				else if (Settings.language == tchin) sprintf (options2.value[2],LANGUAGE.TChinese);
-				else if (Settings.language == kor) sprintf (options2.value[2],LANGUAGE.Korean);
+				if (Settings.language == ConsoleLangDefault) sprintf (options2.value[2],"%s",LANGUAGE.ConsoleDefault);
+				else if (Settings.language == jap) sprintf (options2.value[2],"%s",LANGUAGE.Japanese);
+				else if (Settings.language == ger) sprintf (options2.value[2],"%s",LANGUAGE.German);
+				else if (Settings.language == eng) sprintf (options2.value[2],"%s",LANGUAGE.English);
+				else if (Settings.language == fren) sprintf (options2.value[2],"%s",LANGUAGE.French);
+				else if (Settings.language == esp) sprintf (options2.value[2],"%s",LANGUAGE.Spanish);
+				else if (Settings.language == it) sprintf (options2.value[2],"%s",LANGUAGE.Italian);
+				else if (Settings.language == dut) sprintf (options2.value[2],"%s",LANGUAGE.Dutch);
+				else if (Settings.language == schin) sprintf (options2.value[2],"%s",LANGUAGE.SChinese);
+				else if (Settings.language == tchin) sprintf (options2.value[2],"%s",LANGUAGE.TChinese);
+				else if (Settings.language == kor) sprintf (options2.value[2],"%s",LANGUAGE.Korean);
 
-				if (Settings.ocarina == on) sprintf (options2.value[3],LANGUAGE.ON);
-				else if (Settings.ocarina == off) sprintf (options2.value[3],LANGUAGE.OFF);
+				if (Settings.ocarina == on) sprintf (options2.value[3],"%s",LANGUAGE.ON);
+				else if (Settings.ocarina == off) sprintf (options2.value[3],"%s",LANGUAGE.OFF);
 
-				if (Settings.sinfo == GameID) sprintf (options2.value[4],LANGUAGE.GameID);
-				else if (Settings.sinfo == GameRegion) sprintf (options2.value[4],LANGUAGE.GameRegion);
-				else if (Settings.sinfo == Both) sprintf (options2.value[4],LANGUAGE.Both);
-				else if (Settings.sinfo == Neither) sprintf (options2.value[4],LANGUAGE.Neither);
+				if (Settings.sinfo == GameID) sprintf (options2.value[4],"%s",LANGUAGE.GameID);
+				else if (Settings.sinfo == GameRegion) sprintf (options2.value[4],"%s",LANGUAGE.GameRegion);
+				else if (Settings.sinfo == Both) sprintf (options2.value[4],"%s",LANGUAGE.Both);
+				else if (Settings.sinfo == Neither) sprintf (options2.value[4],"%s",LANGUAGE.Neither);
 
-				if (Settings.hddinfo == HDDInfo) sprintf (options2.value[5],LANGUAGE.OFF);
-				else if (Settings.hddinfo == Clock) sprintf (options2.value[5],LANGUAGE.ON);
+				if (Settings.hddinfo == HDDInfo) sprintf (options2.value[5],"%s",LANGUAGE.OFF);
+				else if (Settings.hddinfo == Clock) sprintf (options2.value[5],"%s",LANGUAGE.ON);
 
-				if (Settings.rumble == RumbleOn) sprintf (options2.value[6],LANGUAGE.ON);
-				else if (Settings.rumble == RumbleOff) sprintf (options2.value[6],LANGUAGE.OFF);
+				if (Settings.rumble == RumbleOn) sprintf (options2.value[6],"%s",LANGUAGE.ON);
+				else if (Settings.rumble == RumbleOff) sprintf (options2.value[6],"%s",LANGUAGE.OFF);
 
 				if (Settings.volume == v10) sprintf (options2.value[7],"10");
 				else if (Settings.volume == v20) sprintf (options2.value[7],"20");
@@ -3680,11 +3680,11 @@ static int MenuSettings()
 				else if (Settings.volume == v80) sprintf (options2.value[7],"80");
 				else if (Settings.volume == v90) sprintf (options2.value[7],"90");
 				else if (Settings.volume == v100) sprintf (options2.value[7],"100");
-				else if (Settings.volume == v0) sprintf (options2.value[7],LANGUAGE.OFF);
+				else if (Settings.volume == v0) sprintf (options2.value[7],"%s",LANGUAGE.OFF);
 
 
-                if (Settings.tooltips == TooltipsOn) sprintf (options2.value[8],LANGUAGE.ON);
-				else if (Settings.tooltips == TooltipsOff) sprintf (options2.value[8],LANGUAGE.OFF);
+                if (Settings.tooltips == TooltipsOn) sprintf (options2.value[8],"%s",LANGUAGE.ON);
+				else if (Settings.tooltips == TooltipsOff) sprintf (options2.value[8],"%s",LANGUAGE.OFF);
 
 				ret = optionBrowser2.GetClickedOption();
 
@@ -3735,7 +3735,7 @@ static int MenuSettings()
 
 
 				if ( CFG.godmode != 1) sprintf(options2.value[0], "********");
-				else if (!strcmp("", Settings.unlockCode)) sprintf(options2.value[0], LANGUAGE.notset);
+				else if (!strcmp("", Settings.unlockCode)) sprintf(options2.value[0], "%s",LANGUAGE.notset);
 				else sprintf(options2.value[0], Settings.unlockCode);
 
                 if (CFG.godmode != 1) sprintf(options2.value[1], "********");
@@ -3747,11 +3747,11 @@ static int MenuSettings()
 				else if (Settings.xflip == sysmenu) sprintf (options2.value[2],"Like SysMenu");
 				else if (Settings.xflip == wtf) sprintf (options2.value[2],"%s/%s",LANGUAGE.Right,LANGUAGE.Prev);
 
-				if (Settings.qboot == no) sprintf (options2.value[3],LANGUAGE.No);
-				else if (Settings.qboot == yes) sprintf (options2.value[3],LANGUAGE.Yes);
+				if (Settings.qboot == no) sprintf (options2.value[3],"%s",LANGUAGE.No);
+				else if (Settings.qboot == yes) sprintf (options2.value[3],"%s",LANGUAGE.Yes);
 
-				if (Settings.wsprompt == no) sprintf (options2.value[4],LANGUAGE.Normal);
-				else if (Settings.wsprompt == yes) sprintf (options2.value[4],LANGUAGE.WidescreenFix);
+				if (Settings.wsprompt == no) sprintf (options2.value[4],"%s",LANGUAGE.Normal);
+				else if (Settings.wsprompt == yes) sprintf (options2.value[4],"%s",LANGUAGE.WidescreenFix);
 
                 if (CFG.godmode != 1) sprintf(options2.value[5], "********");
 				else if(CFG.parentalcontrol == 0) sprintf(options2.value[5], "0");
@@ -4219,9 +4219,9 @@ int GameSettings(struct discHdr * header)
 	}
 
 	customOptionList options3(5);
-	sprintf(options3.name[0], LANGUAGE.VideoMode);
-	sprintf(options3.name[1], LANGUAGE.VIDTVPatch);
-	sprintf(options3.name[2], LANGUAGE.Language);
+	sprintf(options3.name[0],"%s", LANGUAGE.VideoMode);
+	sprintf(options3.name[1],"%s", LANGUAGE.VIDTVPatch);
+	sprintf(options3.name[2],"%s", LANGUAGE.Language);
 	sprintf(options3.name[3], "Ocarina");
 	sprintf(options3.name[4], "IOS");
 
@@ -4342,30 +4342,30 @@ int GameSettings(struct discHdr * header)
 
 		VIDEO_WaitVSync ();
 
-		if (videoChoice == discdefault) sprintf (options3.value[0],LANGUAGE.DiscDefault);
-		else if (videoChoice == systemdefault) sprintf (options3.value[0],LANGUAGE.SystemDefault);
-		else if (videoChoice == patch) sprintf (options3.value[0],LANGUAGE.AutoPatch);
+		if (videoChoice == discdefault) sprintf (options3.value[0],"%s",LANGUAGE.DiscDefault);
+		else if (videoChoice == systemdefault) sprintf (options3.value[0],"%s",LANGUAGE.SystemDefault);
+		else if (videoChoice == patch) sprintf (options3.value[0],"%s",LANGUAGE.AutoPatch);
 		else if (videoChoice == pal50) sprintf (options3.value[0],"%s PAL50",LANGUAGE.Force);
 		else if (videoChoice == pal60) sprintf (options3.value[0],"%s PAL60",LANGUAGE.Force);
 		else if (videoChoice == ntsc) sprintf (options3.value[0],"%s NTSC",LANGUAGE.Force);
 
-        if (viChoice == on) sprintf (options3.value[1],LANGUAGE.ON);
-		else if (viChoice == off) sprintf (options3.value[1],LANGUAGE.OFF);
+        if (viChoice == on) sprintf (options3.value[1],"%s",LANGUAGE.ON);
+		else if (viChoice == off) sprintf (options3.value[1],"%s",LANGUAGE.OFF);
 
-		if (languageChoice == ConsoleLangDefault) sprintf (options3.value[2],LANGUAGE.ConsoleDefault);
-		else if (languageChoice == jap) sprintf (options3.value[2],LANGUAGE.Japanese);
-		else if (languageChoice == ger) sprintf (options3.value[2],LANGUAGE.German);
-		else if (languageChoice == eng) sprintf (options3.value[2],LANGUAGE.English);
-		else if (languageChoice == fren) sprintf (options3.value[2],LANGUAGE.French);
-		else if (languageChoice == esp) sprintf (options3.value[2],LANGUAGE.Spanish);
-        else if (languageChoice == it) sprintf (options3.value[2],LANGUAGE.Italian);
-		else if (languageChoice == dut) sprintf (options3.value[2],LANGUAGE.Dutch);
-		else if (languageChoice == schin) sprintf (options3.value[2],LANGUAGE.SChinese);
-		else if (languageChoice == tchin) sprintf (options3.value[2],LANGUAGE.TChinese);
-		else if (languageChoice == kor) sprintf (options3.value[2],LANGUAGE.Korean);
+		if (languageChoice == ConsoleLangDefault) sprintf (options3.value[2],"%s",LANGUAGE.ConsoleDefault);
+		else if (languageChoice == jap) sprintf (options3.value[2],"%s",LANGUAGE.Japanese);
+		else if (languageChoice == ger) sprintf (options3.value[2],"%s",LANGUAGE.German);
+		else if (languageChoice == eng) sprintf (options3.value[2],"%s",LANGUAGE.English);
+		else if (languageChoice == fren) sprintf (options3.value[2],"%s",LANGUAGE.French);
+		else if (languageChoice == esp) sprintf (options3.value[2],"%s",LANGUAGE.Spanish);
+        else if (languageChoice == it) sprintf (options3.value[2],"%s",LANGUAGE.Italian);
+		else if (languageChoice == dut) sprintf (options3.value[2],"%s",LANGUAGE.Dutch);
+		else if (languageChoice == schin) sprintf (options3.value[2],"%s",LANGUAGE.SChinese);
+		else if (languageChoice == tchin) sprintf (options3.value[2],"%s",LANGUAGE.TChinese);
+		else if (languageChoice == kor) sprintf (options3.value[2],"%s",LANGUAGE.Korean);
 
-        if (ocarinaChoice == on) sprintf (options3.value[3],LANGUAGE.ON);
-		else if (ocarinaChoice == off) sprintf (options3.value[3],LANGUAGE.OFF);
+        if (ocarinaChoice == on) sprintf (options3.value[3],"%s",LANGUAGE.ON);
+		else if (ocarinaChoice == off) sprintf (options3.value[3],"%s",LANGUAGE.OFF);
 
 		if (iosChoice == i249) sprintf (options3.value[4],"249");
 		else if (iosChoice == i222) sprintf (options3.value[4],"222");
