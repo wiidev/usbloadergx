@@ -540,6 +540,11 @@ void language_set(char *name, char *val)
 		strcopy(LANGUAGE.HowtoShutdown, val, sizeof(LANGUAGE.HowtoShutdown));
 		return;
 	}
+	if (strcmp(name, "Keyboard") == 0) {
+		strcopy(LANGUAGE.keyboard, val, sizeof(LANGUAGE.keyboard));
+		return;
+	}
+
 	if (strcmp(name, "Language") == 0) {
 		strcopy(LANGUAGE.Language, val, sizeof(LANGUAGE.Language));
 		return;

@@ -3078,10 +3078,10 @@ static int MenuDiscList()
 				{
 					wiilight(0);
 										//enter new game title
-					char entered[40];
+					char entered[60];
 					snprintf(entered, sizeof(entered), "%s", get_title(header));
-					entered[39] = '\0';
-					int result = OnScreenKeyboard(entered, 40,0);
+					entered[59] = '\0';
+					int result = OnScreenKeyboard(entered, 60,0);
 					if (result == 1) {
 					WBFS_RenameGame(header->id, entered);
 					__Menu_GetEntries();
