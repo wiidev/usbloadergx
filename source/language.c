@@ -15,6 +15,18 @@ char* strcopy(char *dest, char *src, int size)
 	return dest;
 }
 
+bool checkfile(char * path)
+{
+    FILE * f;
+    f = fopen(path,"r");
+    if(f) {
+    fclose(f);
+    return true;
+    }
+    fclose(f);
+return false;
+}
+
 void lang_default()
 {
 snprintf(LANGUAGE.ok, sizeof(LANGUAGE.ok), "OK");
@@ -77,6 +89,7 @@ snprintf(LANGUAGE.FailedtomountfrontSDcard, sizeof(LANGUAGE.FailedtomountfrontSD
 snprintf(LANGUAGE.FailedtosetUSB, sizeof(LANGUAGE.FailedtosetUSB), "Failed to set USB:");
 snprintf(LANGUAGE.Failedformating, sizeof(LANGUAGE.Failedformating), "Failed formating");
 snprintf(LANGUAGE.filesnotfoundontheserver, sizeof(LANGUAGE.filesnotfoundontheserver), "files not found on the server!");
+snprintf(LANGUAGE.Filenotfound, sizeof(LANGUAGE.Filenotfound), "File not found.");
 snprintf(LANGUAGE.filesleft, sizeof(LANGUAGE.filesleft), "file(s) left");
 snprintf(LANGUAGE.FlipX, sizeof(LANGUAGE.FlipX), "Flip-X");
 snprintf(LANGUAGE.Force, sizeof(LANGUAGE.Force), "Force");
@@ -100,6 +113,7 @@ snprintf(LANGUAGE.Language, sizeof(LANGUAGE.Language), "Game Language");
 snprintf(LANGUAGE.Left, sizeof(LANGUAGE.Left), "Left");
 snprintf(LANGUAGE.LikeSysMenu, sizeof(LANGUAGE.LikeSysMenu), "Like SysMenu");
 snprintf(LANGUAGE.LoadingincIOS, sizeof(LANGUAGE.LoadingincIOS), "Loading in cIOS249");
+snprintf(LANGUAGE.Loadingstandardlanguage, sizeof(LANGUAGE.Loadingstandardlanguage), "Loading standard language.");
 snprintf(LANGUAGE.Lock, sizeof(LANGUAGE.Lock), "Lock");
 snprintf(LANGUAGE.LockConsole, sizeof(LANGUAGE.LockConsole), "Lock Console");
 snprintf(LANGUAGE.MP3Menu, sizeof(LANGUAGE.MP3Menu), "MP3 Menu");
@@ -161,10 +175,14 @@ snprintf(LANGUAGE.SystemDefault, sizeof(LANGUAGE.SystemDefault), "System Default
 snprintf(LANGUAGE.ThemePath, sizeof(LANGUAGE.ThemePath), "ThemePath");
 snprintf(LANGUAGE.ThemepathChanged, sizeof(LANGUAGE.ThemepathChanged), "Themepath Changed");
 snprintf(LANGUAGE.Themepathchange, sizeof(LANGUAGE.Themepathchange), "Themepath change");
+snprintf(LANGUAGE.Titlestxtpath, sizeof(LANGUAGE.Titlestxtpath), "titles.txt Path");
+snprintf(LANGUAGE.Titlestxtpathchange, sizeof(LANGUAGE.Titlestxtpathchange), "Path of titles.txt change");
+snprintf(LANGUAGE.TitlestxtpathChanged, sizeof(LANGUAGE.TitlestxtpathChanged), "Path of titles.txt changed.");
 snprintf(LANGUAGE.Try, sizeof(LANGUAGE.Try), "Try");
 snprintf(LANGUAGE.Tooltips, sizeof(LANGUAGE.Tooltips), "Tooltips");
 snprintf(LANGUAGE.Timeleft, sizeof(LANGUAGE.Timeleft), "Time left:");
 snprintf(LANGUAGE.Unlock, sizeof(LANGUAGE.Unlock), "Unlock");
+snprintf(LANGUAGE.Unicodefix, sizeof(LANGUAGE.Unicodefix), "Unicode Fix");
 snprintf(LANGUAGE.Uninstall, sizeof(LANGUAGE.Uninstall), "Uninstall");
 snprintf(LANGUAGE.USBLoaderisprotected, sizeof(LANGUAGE.USBLoaderisprotected), "USB Loader GX is protected");
 snprintf(LANGUAGE.USBDevicenotfound, sizeof(LANGUAGE.USBDevicenotfound), "USB Device not found");
@@ -442,6 +460,10 @@ void language_set(char *name, char *val)
 		strcopy(LANGUAGE.filesnotfoundontheserver, val, sizeof(LANGUAGE.filesnotfoundontheserver));
 		return;
 	}
+	if (strcmp(name, "Filenotfound") == 0) {
+		strcopy(LANGUAGE.Filenotfound, val, sizeof(LANGUAGE.Filenotfound));
+		return;
+	}
 	if (strcmp(name, "filesleft") == 0) {
 		strcopy(LANGUAGE.filesleft, val, sizeof(LANGUAGE.filesleft));
 		return;
@@ -536,6 +558,10 @@ void language_set(char *name, char *val)
 	}
 	if (strcmp(name, "LoadingincIOS") == 0) {
 		strcopy(LANGUAGE.LoadingincIOS, val, sizeof(LANGUAGE.LoadingincIOS));
+		return;
+	}
+	if (strcmp(name, "Loadingstandardlanguage") == 0) {
+		strcopy(LANGUAGE.Loadingstandardlanguage, val, sizeof(LANGUAGE.Loadingstandardlanguage));
 		return;
 	}
 	if (strcmp(name, "Lock") == 0) {
@@ -774,6 +800,18 @@ void language_set(char *name, char *val)
 		strcopy(LANGUAGE.Themepathchange, val, sizeof(LANGUAGE.Themepathchange));
 		return;
 	}
+	if (strcmp(name, "Titlestxtpath") == 0) {
+		strcopy(LANGUAGE.Titlestxtpath, val, sizeof(LANGUAGE.Titlestxtpath));
+		return;
+	}
+	if (strcmp(name, "Titlestxtpathchange") == 0) {
+		strcopy(LANGUAGE.Titlestxtpathchange, val, sizeof(LANGUAGE.Titlestxtpathchange));
+		return;
+	}
+	if (strcmp(name, "TitlestxtpathChanged") == 0) {
+		strcopy(LANGUAGE.TitlestxtpathChanged, val, sizeof(LANGUAGE.TitlestxtpathChanged));
+		return;
+	}
 	if (strcmp(name, "Try") == 0) {
 		strcopy(LANGUAGE.Try, val, sizeof(LANGUAGE.Try));
 		return;
@@ -788,6 +826,10 @@ void language_set(char *name, char *val)
 	}
 	if (strcmp(name, "Unlock") == 0) {
 		strcopy(LANGUAGE.Unlock, val, sizeof(LANGUAGE.Unlock));
+		return;
+	}
+	if (strcmp(name, "Unicodefix") == 0) {
+		strcopy(LANGUAGE.Unicodefix, val, sizeof(LANGUAGE.Unicodefix));
 		return;
 	}
 	if (strcmp(name, "Uninstall") == 0) {

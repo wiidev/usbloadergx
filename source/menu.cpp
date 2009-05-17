@@ -278,15 +278,15 @@ static void WindowCredits(void * ptr)
 	txt[i] = new GuiText("Fishears/Nuke        Ocarina & WiiPower       Vidpatch");
 	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(0,y);
 	i++;
-	
+
 	txt[i] = new GuiText(LANGUAGE.For);
 	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(-80,y);
 	char* pch;
 	char* pch2;
-  
+
 			pch=strrchr((LANGUAGE.For),'_');
 			pch2=strrchr((LANGUAGE.For),'p');
-  
+
 			if ((pch!=NULL)||(pch2!=NULL)){txt[i]->SetPosition(-80, y+5);}
 			else {txt[i]->SetPosition(-80, y);}
 	i++;
@@ -294,7 +294,7 @@ static void WindowCredits(void * ptr)
 	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(130,y);
 	pch=strrchr((LANGUAGE.For),'_');
 	pch2=strrchr((LANGUAGE.For),'p');
-  
+
 			if ((pch!=NULL)||(pch2!=NULL)){txt[i]->SetPosition(130, y+5);}
 			else {txt[i]->SetPosition(130, y);}
 	i++;
@@ -1921,7 +1921,7 @@ static int OnScreenKeyboard(char * var, u32 maxlen, int min)
 	if (Settings.keyset == us) keyset = 0;
 	else if (Settings.keyset == dvorak) keyset = 1;
 	else if (Settings.keyset == euro) keyset = 2;
-			 
+
 	GuiKeyboard keyboard(var, maxlen, min, keyset);
 
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
@@ -3625,13 +3625,13 @@ static int MenuSettings()
 			mainWindow->Append(&page3Btn);
 
 
-			sprintf(options2.name[0], "%s",LANGUAGE.MP3Menu);
+			sprintf(options2.name[0], "%s",LANGUAGE.Titlestxtpath);
 			sprintf(options2.name[1], "%s",LANGUAGE.AppLanguage);
-			sprintf(options2.name[2], "%s", LANGUAGE.keyboard);
-			sprintf(options2.name[3], "Under");
-			sprintf(options2.name[4], "Construction");
-			sprintf(options2.name[5], " ");
-			sprintf(options2.name[6], " ");
+			sprintf(options2.name[2], "%s",LANGUAGE.keyboard);
+			sprintf(options2.name[3], "%s",LANGUAGE.Unicodefix);
+			sprintf(options2.name[4], "%s",LANGUAGE.MP3Menu);
+			sprintf(options2.name[5], "Under");
+			sprintf(options2.name[6], "Construction");
 			sprintf(options2.name[7], " ");
 			sprintf(options2.name[8], " ");
 
@@ -3672,11 +3672,11 @@ static int MenuSettings()
 
 				//if (Settings.vpatch == on) sprintf (options2.value[1],"%s",LANGUAGE.ON);
 				//else if (Settings.vpatch == off) sprintf (options2.value[1],"%s",LANGUAGE.OFF);
-				
+
 				if (Settings.vpatch == on) sprintf (options2.value[1],"%s",LANGUAGE.ON);
 				else if (Settings.vpatch == off) sprintf (options2.value[1],"%s",LANGUAGE.OFF);
 
-				
+
 
 				if (Settings.language == ConsoleLangDefault) sprintf (options2.value[2],"%s",LANGUAGE.ConsoleDefault);
 				else if (Settings.language == jap) sprintf (options2.value[2],"%s",LANGUAGE.Japanese);
@@ -4025,13 +4025,21 @@ static int MenuSettings()
 					}
 			}
 			if (pageToDisplay == 3){
-			
-			
+
+
 			if ( Settings.keyset > 2 )
 					Settings.keyset = 0;
-					
-					
-			sprintf(options2.value[0], " ");
+            if ( Settings.unicodefix > 1 )
+					Settings.unicodefix = 0;
+
+            if (strlen(CFG.titlestxt_path) < (9 + 3)) {
+            sprintf(cfgtext, "%s", CFG.titlestxt_path);
+            } else {
+            strncpy(cfgtext, CFG.titlestxt_path,  9);
+            cfgtext[9] = '\0';
+            strncat(cfgtext, "...", 3);
+            }
+            sprintf(options2.value[0], "%s", cfgtext);
 
 			if (strlen(CFG.language_path) < (9 + 3)) {
 				sprintf(cfgtext, "%s", CFG.language_path);
@@ -4042,13 +4050,15 @@ static int MenuSettings()
                 }
 				sprintf(options2.value[1], "%s", cfgtext);
 
-			
+
 			if (Settings.keyset == us) sprintf (options2.value[2],"QWERTY");
 			else if (Settings.keyset == dvorak) sprintf (options2.value[2],"DVORAK");
 			else if (Settings.keyset == euro) sprintf (options2.value[2],"QWERTZ");
-				
-			sprintf(options2.value[3], " ");
-			sprintf(options2.value[4], " ");
+
+            if (Settings.unicodefix == off) sprintf (options2.value[3],"%s",LANGUAGE.OFF);
+            else if (Settings.unicodefix == on) sprintf (options2.value[3],"%s",LANGUAGE.ON);
+
+            sprintf(options2.value[4], " ");
 			sprintf(options2.value[5], " ");
 			sprintf(options2.value[6], " ");
 			sprintf(options2.value[7], " ");
@@ -4059,11 +4069,41 @@ static int MenuSettings()
 			switch(ret) {
 
                     case 0:
-                        menu = MENU_MP3;
-                        pageToDisplay = 0;
-                        break;
-						/////
-
+                         if ( CFG.godmode == 1)
+                            {
+                                mainWindow->Remove(&optionBrowser2);
+                                mainWindow->Remove(&page1Btn);
+                                mainWindow->Remove(&page2Btn);
+                                mainWindow->Remove(&tabBtn);
+                                mainWindow->Remove(&page3Btn);
+                                w.Remove(&backBtn);
+                                w.Remove(&lockBtn);
+                                char entered[43] = "";
+                                strncpy(entered, CFG.titlestxt_path, sizeof(entered));
+                                int result = OnScreenKeyboard(entered,43,4);
+                                mainWindow->Append(&optionBrowser2);
+                                mainWindow->Append(&page1Btn);
+                                mainWindow->Append(&page2Btn);
+                                mainWindow->Append(&tabBtn);
+                                mainWindow->Append(&page3Btn);
+                                w.Append(&backBtn);
+                                w.Append(&lockBtn);
+                                if ( result == 1 )
+                                {	strncpy(CFG.titlestxt_path, entered, sizeof(CFG.titlestxt_path));
+                                    WindowPrompt(LANGUAGE.TitlestxtpathChanged,0,LANGUAGE.ok,0,0,0);
+                                    if(isSdInserted() == 1) {
+                                        cfg_save_global();
+                                        CFG_Load();
+                                    } else {
+                                        WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                WindowPrompt(LANGUAGE.Titlestxtpathchange,LANGUAGE.Consoleshouldbeunlockedtomodifyit,LANGUAGE.ok,0,0,0);
+                            }
+                            break;
 					case 1: // language file path
 						if ( CFG.godmode == 1)
 						{
@@ -4088,6 +4128,9 @@ static int MenuSettings()
 							{	strncpy(CFG.language_path, entered, sizeof(CFG.language_path));
 								if(isSdInserted() == 1) {
                                     cfg_save_global();
+                                    if(!checkfile(CFG.language_path)) {
+                                    WindowPrompt(LANGUAGE.Filenotfound,LANGUAGE.Loadingstandardlanguage,LANGUAGE.ok,0,0,0);
+                                    }
                                     lang_default();
 									CFG_Load();
 									menu = MENU_SETTINGS;
@@ -4107,9 +4150,13 @@ static int MenuSettings()
 					case 2:
 						Settings.keyset++;
 						break;
-						
-
-
+                    case 3:
+                        Settings.unicodefix++;
+                        break;
+                    case 4:
+                        menu = MENU_MP3;
+                        pageToDisplay = 0;
+                        break;
 
 			}
 

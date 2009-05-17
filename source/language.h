@@ -70,6 +70,7 @@ struct LANGUAGE
 	char FailedtomountfrontSDcard[50];
 	char FailedtosetUSB[30];
 	char Failedformating[30];
+	char Filenotfound[30];
 	char filesnotfoundontheserver[50];
 	char filesleft[30];
 	char FlipX[30];
@@ -95,6 +96,7 @@ struct LANGUAGE
 	char Left[30];
 	char LikeSysMenu[30];
 	char LoadingincIOS[40];
+	char Loadingstandardlanguage[40];
 	char Lock[30];
 	char LockConsole[40];
 	char MP3Menu[30];
@@ -156,10 +158,14 @@ struct LANGUAGE
 	char ThemePath[20];
 	char ThemepathChanged[30];
 	char Themepathchange[30];
+	char Titlestxtpath[40];
+	char Titlestxtpathchange[40];
+	char TitlestxtpathChanged[40];
 	char Try[20];
 	char Tooltips[15];
 	char Timeleft[15];
 	char Unlock[20];
+	char Unicodefix[20];
 	char Uninstall[15];
 	char USBLoaderisprotected[40];
 	char USBDevicenotfound[40];
@@ -188,6 +194,7 @@ struct LANGUAGE
 extern struct LANGUAGE LANGUAGE;
 
 char* strcopy(char *dest, char *src, int size);
+bool checkfile(char * path);
 void lang_default();
 void language_set(char *name, char *val);
 

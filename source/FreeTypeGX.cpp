@@ -21,6 +21,9 @@
  */
 
 #include "FreeTypeGX.h"
+#include "CH2Unicode.h"
+#include "main.h"
+#include "cfg.h"
 
 /**
  * Default constructor for the FreeTypeGX class.
@@ -56,9 +59,14 @@ wchar_t* FreeTypeGX::charToWideChar(char* strChar) {
       wchar_t *strWChar;
       strWChar = new wchar_t[strlen(strChar) + 1];
 
+    if(Settings.unicodefix == 1) {
+        CH2Unicode(strChar, strWChar);
+    } else {
       char *tempSrc = strChar;
       wchar_t *tempDest = strWChar;
       while((*tempDest++ = *tempSrc++));
+    }
+
 
       return strWChar;
 }

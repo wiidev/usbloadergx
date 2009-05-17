@@ -68,6 +68,7 @@ struct CFG
 	char covers_path[100];
 	char theme_path[100];
 	char disc_path[100];
+	char titlestxt_path[100];
 	char language_path[100];
 	short keyset;
 };
@@ -280,6 +281,7 @@ struct SSettings {
 	int		qboot;
 	int		wsprompt;
 	int		keyset;
+	int     unicodefix;
 };
 
 void CFG_LoadGlobal(void);

@@ -98,6 +98,7 @@ DefaultSettings()
 	Settings.cios = ios249;
 	Settings.xflip = no;
 	Settings.qboot = no;
+	Settings.unicodefix = no;
 
 	CFG_LoadGlobal();
 }

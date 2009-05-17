@@ -21,7 +21,7 @@ struct SSettings Settings;
 
 
 char *cfg_path = "SD:/apps/usbloader/";
-//char *setting_path = "SD:/apps/usbloader/settings.cfg";
+//char *setting_path = "SD:/apps/usbloader/GXGameSettings.cfg";
 char current_path[100];
 
 /* configurable fields */
@@ -230,9 +230,10 @@ void CFG_Default(int widescreen) // -1 = non forced Mode
 	}
 
 	snprintf(CFG.covers_path, sizeof(CFG.covers_path), "SD:/images/"); //default image path
-	snprintf(CFG.disc_path, sizeof(CFG.disc_path), "SD:/images/disc/");//default path for disc images
+	snprintf(CFG.disc_path, sizeof(CFG.disc_path), "SD:/images/disc/");
+	snprintf(CFG.titlestxt_path, sizeof(CFG.titlestxt_path), "SD:/config/");//default path for disc images
 	snprintf(CFG.unlockCode, sizeof(CFG.unlockCode), "ab121b");		// default password
-	snprintf(CFG.language_path, sizeof(CFG.language_path), "SD:/config/language.txt");
+	snprintf(CFG.language_path, sizeof(CFG.language_path), "SD:/config/language/");
 
 	CFG.parentalcontrol = 0;
 	CFG.maxcharacters = 38;
@@ -471,7 +472,10 @@ void cfg_set(char *name, char *val)
 		strcopy(CFG.disc_path, val, sizeof(CFG.disc_path));
 		return;
 	}
-
+    if (strcmp(name, "titlestxt_path") == 0) {
+		strcopy(CFG.titlestxt_path, val, sizeof(CFG.titlestxt_path));
+		return;
+	}
 	if (strcmp(name, "language_path") == 0) {
 		strcopy(CFG.language_path, val, sizeof(CFG.language_path));
 		return;
@@ -733,7 +737,7 @@ void global_cfg_set(char *name, char *val)
 		}
 		return;
 	}
-	
+
 	else if (strcmp(name, "keyset") == 0) {
 		int i;
 		if (sscanf(val, "%d", &i) == 1) {
@@ -813,6 +817,13 @@ void global_cfg_set(char *name, char *val)
 		if (sscanf(val, "%d", &i) == 1) {
             Settings.wsprompt = i;
 			}
+		return;
+	}
+	else if (strcmp(name, "unicodefix") == 0) {
+		int i;
+		if (sscanf(val, "%d", &i) == 1) {
+			Settings.unicodefix =i;
+		}
 		return;
 	}
 }
@@ -961,9 +972,9 @@ bool cfg_save_global()// save global settings
         mkdir("SD:/config", 0777);
     }
     FILE *f;
-	f = fopen("SD:/config/global_settings.cfg", "wb");
+	f = fopen("SD:/config/GXGlobal.cfg", "wb");
 	if (!f) {
-		printf("Error saving %s\n", "global_settings.cfg");
+		printf("Error saving %s\n", "GXGlobal.cfg");
 		sleep(1);
 		return false;
 	}
@@ -983,6 +994,7 @@ bool cfg_save_global()// save global settings
 	fprintf(f, "keyset = %d\n ", Settings.keyset);
 	fprintf(f, "xflip = %d\n ", Settings.xflip);
 	fprintf(f, "qboot = %d\n ", Settings.qboot);
+	fprintf(f, "unicodefix = %d\n ", Settings.unicodefix);
 	fprintf(f, "wsprompt = %d\n", Settings.wsprompt);
 	fprintf(f, "parentalcontrol = %d\n ", CFG.parentalcontrol);
 	fprintf(f, "cover_path = %s\n ", CFG.covers_path);
@@ -993,6 +1005,7 @@ bool cfg_save_global()// save global settings
 	}
 	fprintf(f, "disc_path = %s\n ", CFG.disc_path);
 	fprintf(f, "language_path = %s\n ", CFG.language_path);
+	fprintf(f, "titlestxt_path = %s\n ", CFG.titlestxt_path);
 	if(!strcmp("", Settings.unlockCode)) {
 	fprintf(f, "godmode = %d\n ", CFG.godmode);
 	} else {
@@ -1069,7 +1082,7 @@ void game_set(char *name, char *val)
 
 bool cfg_load_games()
 {
-	return cfg_parsefile("SD:/config/settings.cfg", &game_set);
+	return cfg_parsefile("SD:/config/GXGameSettings.cfg", &game_set);
 }
 
 bool cfg_save_games()// save per game setings
@@ -1077,9 +1090,9 @@ bool cfg_save_games()// save per game setings
 	FILE *f;
 	int i;
 	mkdir("SD:/config/", 0777);
-	f = fopen("SD:/config/settings.cfg", "wb");
+	f = fopen("SD:/config/GXGameSettings.cfg", "wb");
 	if (!f) {
-		printf("Error saving %s\n", "settings.cfg");
+		printf("Error saving %s\n", "GXGameSettings.cfg");
 		sleep(1);
 		return false;
 	}
@@ -1123,7 +1136,7 @@ bool cfg_load_global()
 	}
 	Settings.volume = v80;
 
-	return cfg_parsefile("SD:/config/global_settings.cfg", &global_cfg_set);
+	return cfg_parsefile("SD:/config/GXGlobal.cfg", &global_cfg_set);
 }
 
 
@@ -1171,12 +1184,12 @@ void CFG_Load()
 
 	CFG_Default(-1); // set defaults non forced
 
-	snprintf(pathname, sizeof(pathname), "SD:/config/global_settings.cfg");
+	snprintf(pathname, sizeof(pathname), "SD:/config/GXGlobal.cfg");
 
 	cfg_parsefile(pathname, &widescreen_set); //first set widescreen
 	cfg_parsefile(pathname, &cfg_set); //then set config and layout options
 
-	snprintf(pathname, sizeof(pathname), "%stheme.txt", CFG.theme_path);
+	snprintf(pathname, sizeof(pathname), "%sGXtheme.cfg", CFG.theme_path);
 	cfg_parsefile(pathname, &theme_set); //finally set console information
 
 	snprintf(pathname, sizeof(pathname), CFG.language_path);
@@ -1189,7 +1202,7 @@ void CFG_Load()
 //		cfg_parsefile("SD:/config.txt", &console_set);
 //	}
 
-	snprintf(pathname, sizeof(pathname), "SD:/config/titles.txt");
+	snprintf(pathname, sizeof(pathname), "%stitles.txt", CFG.titlestxt_path);
 	cfg_parsetitlefile(pathname, &title_set);
 
 	// load per-game settings
@@ -1204,14 +1217,14 @@ void CFG_Load()
 
 	CFG_Default(-1); // set defaults non forced
 
-	snprintf(pathname, sizeof(pathname), "SD:/config/global_settings.cfg");
+	snprintf(pathname, sizeof(pathname), "SD:/config/GXGlobal.cfg");
 
 	cfg_parsefile(pathname, &widescreen_set); //first set widescreen
 	cfg_parsefile(pathname, &cfg_set); //then set config and layout options
 
-	snprintf(pathname, sizeof(pathname), "%stheme.txt", CFG.theme_path);
+	snprintf(pathname, sizeof(pathname), "%sGXtheme.cfg", CFG.theme_path);
 	cfg_parsefile(pathname, &theme_set); //finally set console information
-	
+
 	snprintf(pathname, sizeof(pathname), "%slanguage.txt",CFG.language_path);
 	cfg_parsefile(pathname, &language_set);
 
@@ -1239,7 +1252,7 @@ void CFG_Load()
 >>>>>>> .r348*/
 void CFG_LoadGlobal(void)
 {
-	cfg_parsefile("SD:/config/global_settings.cfg", &global_cfg_set);
+	cfg_parsefile("SD:/config/GXGlobal.cfg", &global_cfg_set);
 }
 
 void CFG_Cleanup(void)
