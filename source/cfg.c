@@ -7,7 +7,15 @@
 #include <ogcsys.h>
 #include "cfg.h"
 #include "language.h"
+/*<<<<<<< .mine
+//#include "language.c"
+extern void language_set();
+extern void lang_default();
+extern void language_set();
+extern char* strcopy();
+=======
 
+>>>>>>> .r348*/
 struct SSettings Settings;
 //struct SSettings2 Settings2;
 
@@ -43,6 +51,7 @@ u8 parentalcontrolChoice = 0;
 u8 xflip = 0;
 u8 qboot = 0;
 u8 wsprompt = 0;
+u8 keyset = 0;
 
 #define TITLE_MAX 65
 
@@ -724,6 +733,14 @@ void global_cfg_set(char *name, char *val)
 		}
 		return;
 	}
+	
+	else if (strcmp(name, "keyset") == 0) {
+		int i;
+		if (sscanf(val, "%d", &i) == 1) {
+			Settings.keyset = i;
+		}
+		return;
+	}
 	else if (strcmp(name, "hddinfo") == 0) {
 		int i;
 		if (sscanf(val, "%d", &i) == 1) {
@@ -963,6 +980,7 @@ bool cfg_save_global()// save global settings
 	fprintf(f, "tooltips = %d\n ", Settings.tooltips);
 	fprintf(f, "password = %s\n ", Settings.unlockCode);
 	fprintf(f, "cios = %d\n ", Settings.cios);
+	fprintf(f, "keyset = %d\n ", Settings.keyset);
 	fprintf(f, "xflip = %d\n ", Settings.xflip);
 	fprintf(f, "qboot = %d\n ", Settings.qboot);
 	fprintf(f, "wsprompt = %d\n", Settings.wsprompt);
@@ -1095,6 +1113,7 @@ bool cfg_load_global()
 	Settings.xflip = off;
 	Settings.qboot = off;
 	Settings.wsprompt = off;
+	Settings.keyset = us;
 	Settings.hddinfo = HDDInfo;
 	Settings.sinfo = ((THEME.showID) ? GameID : Neither);
 	Settings.rumble = RumbleOn;
@@ -1178,7 +1197,46 @@ void CFG_Load()
 
 //	cfg_parsearg(argc, argv);
 }
+/*
+<<<<<<< .mine
+	//set app path
+//	chdir_app(argv[0]);
 
+	CFG_Default(-1); // set defaults non forced
+
+	snprintf(pathname, sizeof(pathname), "SD:/config/global_settings.cfg");
+
+	cfg_parsefile(pathname, &widescreen_set); //first set widescreen
+	cfg_parsefile(pathname, &cfg_set); //then set config and layout options
+
+	snprintf(pathname, sizeof(pathname), "%stheme.txt", CFG.theme_path);
+	cfg_parsefile(pathname, &theme_set); //finally set console information
+	
+	snprintf(pathname, sizeof(pathname), "%slanguage.txt",CFG.language_path);
+	cfg_parsefile(pathname, &language_set);
+
+
+//	if (!ret)
+//	{
+//		cfg_parsefile("SD:/config.txt", &widescreen_set);
+//		cfg_parsefile("SD:/config.txt", &cfg_set);
+//		cfg_parsefile("SD:/config.txt", &console_set);
+//	}
+
+	snprintf(pathname, sizeof(pathname), "SD:/config/titles.txt");
+	cfg_parsetitlefile(pathname, &title_set);
+
+	// load per-game settings
+	cfg_load_games();
+	lang_default();
+	language_set();
+
+
+//	cfg_parsearg(argc, argv);
+}
+
+=======
+>>>>>>> .r348*/
 void CFG_LoadGlobal(void)
 {
 	cfg_parsefile("SD:/config/global_settings.cfg", &global_cfg_set);

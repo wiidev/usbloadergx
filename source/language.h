@@ -89,6 +89,7 @@ struct LANGUAGE
 	char GoBack[30];
 	char GotoPage[30];///////
 	char HowtoShutdown[30];
+	char keyboard[15];
 	char Language[20];
 	char Langchange[20];
 	char Left[30];

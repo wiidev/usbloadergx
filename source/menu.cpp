@@ -278,11 +278,25 @@ static void WindowCredits(void * ptr)
 	txt[i] = new GuiText("Fishears/Nuke        Ocarina & WiiPower       Vidpatch");
 	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(0,y);
 	i++;
+	
 	txt[i] = new GuiText(LANGUAGE.For);
 	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(-80,y);
+	char* pch;
+	char* pch2;
+  
+			pch=strrchr((LANGUAGE.For),'_');
+			pch2=strrchr((LANGUAGE.For),'p');
+  
+			if ((pch!=NULL)||(pch2!=NULL)){txt[i]->SetPosition(-80, y+5);}
+			else {txt[i]->SetPosition(-80, y);}
 	i++;
 	txt[i] = new GuiText(LANGUAGE.For);
 	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(130,y);
+	pch=strrchr((LANGUAGE.For),'_');
+	pch2=strrchr((LANGUAGE.For),'p');
+  
+			if ((pch!=NULL)||(pch2!=NULL)){txt[i]->SetPosition(130, y+5);}
+			else {txt[i]->SetPosition(130, y);}
 	i++;
 
 	y+=22;
@@ -291,7 +305,9 @@ static void WindowCredits(void * ptr)
 	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(0,y);
 	i++;
 	txt[i] = new GuiText(LANGUAGE.For);
-	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(-3,y);
+	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); //txt[i]->SetPosition(-3,y);
+	if ((pch!=NULL)||(pch2!=NULL)){txt[i]->SetPosition(-3, y+5);}
+			else {txt[i]->SetPosition(-3, y);}
 	i++;
 	y+=22;
 
@@ -300,6 +316,8 @@ static void WindowCredits(void * ptr)
 	i++;
 	txt[i] = new GuiText(LANGUAGE.For);
 	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(30,y);
+	if ((pch!=NULL)||(pch2!=NULL)){txt[i]->SetPosition(30, y+5);}
+			else {txt[i]->SetPosition(30, y);}
 	i++;
 	y+=22;
 
@@ -1899,8 +1917,12 @@ err:
 static int OnScreenKeyboard(char * var, u32 maxlen, int min)
 {
 	int save = -1;
-
-	GuiKeyboard keyboard(var, maxlen, min);
+	int keyset = 0;
+	if (Settings.keyset == us) keyset = 0;
+	else if (Settings.keyset == dvorak) keyset = 1;
+	else if (Settings.keyset == euro) keyset = 2;
+			 
+	GuiKeyboard keyboard(var, maxlen, min, keyset);
 
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
 	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, vol);
@@ -3513,10 +3535,13 @@ static int MenuSettings()
 		menu = MENU_NONE;
 		if ( pageToDisplay == 1)
 		{
-			sprintf(options2.name[0],"%s", LANGUAGE.VideoMode);
-			sprintf(options2.name[1],"%s", LANGUAGE.VIDTVPatch);
-			sprintf(options2.name[2],"%s", LANGUAGE.Language);
+
+			sprintf(options2.name[0], "%s",LANGUAGE.VideoMode);
+			sprintf(options2.name[1], "%s",LANGUAGE.VIDTVPatch);
+			sprintf(options2.name[2], "%s",LANGUAGE.Language);
+
 			sprintf(options2.name[3], "Ocarina");
+
 			sprintf(options2.name[4],"%s", LANGUAGE.Display);
 			sprintf(options2.name[5],"%s", LANGUAGE.Clock); //CLOCK
 			sprintf(options2.name[6],"%s", LANGUAGE.Rumble); //RUMBLE
@@ -3579,6 +3604,7 @@ static int MenuSettings()
 			sprintf(options2.name[7],"%s", LANGUAGE.DiscimagePath);
 			sprintf(options2.name[8],"%s", LANGUAGE.ThemePath);
 
+
 		}
 		else if ( pageToDisplay == 3 )
 		{
@@ -3598,9 +3624,10 @@ static int MenuSettings()
 			mainWindow->Append(&page1Btn);
 			mainWindow->Append(&page3Btn);
 
-			sprintf(options2.name[0],"%s", LANGUAGE.MP3Menu);
-			sprintf(options2.name[1],"%s", LANGUAGE.AppLanguage);
-			sprintf(options2.name[2], " ");
+
+			sprintf(options2.name[0], "%s",LANGUAGE.MP3Menu);
+			sprintf(options2.name[1], "%s",LANGUAGE.AppLanguage);
+			sprintf(options2.name[2], "%s", LANGUAGE.keyboard);
 			sprintf(options2.name[3], "Under");
 			sprintf(options2.name[4], "Construction");
 			sprintf(options2.name[5], " ");
@@ -3643,8 +3670,13 @@ static int MenuSettings()
 				else if (Settings.video == pal60) sprintf (options2.value[0],"%s PAL60",LANGUAGE.Force);
 				else if (Settings.video == ntsc) sprintf (options2.value[0],"%s NTSC",LANGUAGE.Force);
 
+				//if (Settings.vpatch == on) sprintf (options2.value[1],"%s",LANGUAGE.ON);
+				//else if (Settings.vpatch == off) sprintf (options2.value[1],"%s",LANGUAGE.OFF);
+				
 				if (Settings.vpatch == on) sprintf (options2.value[1],"%s",LANGUAGE.ON);
 				else if (Settings.vpatch == off) sprintf (options2.value[1],"%s",LANGUAGE.OFF);
+
+				
 
 				if (Settings.language == ConsoleLangDefault) sprintf (options2.value[2],"%s",LANGUAGE.ConsoleDefault);
 				else if (Settings.language == jap) sprintf (options2.value[2],"%s",LANGUAGE.Japanese);
@@ -3993,6 +4025,12 @@ static int MenuSettings()
 					}
 			}
 			if (pageToDisplay == 3){
+			
+			
+			if ( Settings.keyset > 2 )
+					Settings.keyset = 0;
+					
+					
 			sprintf(options2.value[0], " ");
 
 			if (strlen(CFG.language_path) < (9 + 3)) {
@@ -4004,7 +4042,11 @@ static int MenuSettings()
                 }
 				sprintf(options2.value[1], "%s", cfgtext);
 
-			sprintf(options2.value[2], " ");
+			
+			if (Settings.keyset == us) sprintf (options2.value[2],"QWERTY");
+			else if (Settings.keyset == dvorak) sprintf (options2.value[2],"DVORAK");
+			else if (Settings.keyset == euro) sprintf (options2.value[2],"QWERTZ");
+				
 			sprintf(options2.value[3], " ");
 			sprintf(options2.value[4], " ");
 			sprintf(options2.value[5], " ");
@@ -4062,6 +4104,11 @@ static int MenuSettings()
 							WindowPrompt(LANGUAGE.Langchange,LANGUAGE.Consoleshouldbeunlockedtomodifyit,LANGUAGE.ok,0,0,0);
 						}
 						break;
+					case 2:
+						Settings.keyset++;
+						break;
+						
+
 
 
 			}

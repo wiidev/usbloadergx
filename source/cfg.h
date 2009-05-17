@@ -69,6 +69,7 @@ struct CFG
 	char theme_path[100];
 	char disc_path[100];
 	char language_path[100];
+	short keyset;
 };
 
 
@@ -145,6 +146,7 @@ extern u8 parentalcontrolChoice;
 extern u8 xflip;
 extern u8 qboot;
 extern u8 wsprompt;
+extern u8 keyset;
 
 struct Game_CFG
 {
@@ -247,6 +249,11 @@ enum {
 	sysmenu,
 	wtf,
 };
+enum {
+	us,
+	dvorak,
+	euro,
+};
 /*
 enum {
 	ParentalControlOff,
@@ -272,6 +279,7 @@ struct SSettings {
 	int     cios;
 	int		qboot;
 	int		wsprompt;
+	int		keyset;
 };
 
 void CFG_LoadGlobal(void);

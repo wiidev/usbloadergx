@@ -16,13 +16,17 @@
  */
 extern const int vol;
 unsigned int m;
-GuiKeyboard::GuiKeyboard(char * t, u32 max, int min)
+//const Key thekeys;
+GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
 {
 	width = 540;
 	height = 400;
 	shift = 0;
 	caps = 0;
+	alt = 0;
+	alt2 = 0;
 	m = min;
+	int mode = lang;
 	selectable = true;
 	focus = 0; // allow focus
 	alignmentHor = ALIGN_CENTRE;
@@ -31,6 +35,8 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min)
 	kbtextstr[max] = 0;
 	kbtextmaxlen = max;
 
+	//QWERTY//
+	if (mode == 0){
 	Key thekeys[4][11] = {
 	{
 		{'1','!'},
@@ -86,7 +92,123 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min)
 		{'\0','\0'}
 	}
 	};
-	memcpy(keys, thekeys, sizeof(thekeys));
+	
+	memcpy(keys, thekeys, sizeof(thekeys));}
+	//DVORAK//
+	if (mode == 1){
+	Key thekeys[4][11] = {
+	{
+		{'1','!','\0'},
+		{'2','@','\0'},
+		{'3','#','\0'},
+		{'4','$','\0'},
+		{'5','%','\0'},
+		{'6','^','\0'},
+		{'7','&','\0'},
+		{'8','*','\0'},
+		{'9','(','\0'},
+		{'0',')','\0'},
+		{'\0','\0','\0'}
+	},
+	{
+		{'\'','"','\0'},		
+		{',','<','\0'},
+		{'.','>','\0'},
+		{'p','P','\0'},
+		{'y','Y','\0'},
+		{'f','F','\0'},
+		{'g','G','\0'},
+		{'c','C','\0'},
+		{'r','R','\0'},
+		{'l','L','\0'},
+		{'/','?','\0'}
+	},
+	{
+		{'a','A','m'},
+		{'o','O','m'},
+		{'e','E','m'},
+		{'u','U','m'},
+		{'i','I','m'},
+		{'d','D','m'},
+		{'h','H','m'},
+		{'t','T','m'},
+		{'n','N','m'},
+		{'s','S','m'},
+		{'-','_','m'}
+	},
+
+	{
+		{';',':','\0'},
+		{'q','Q','\0'},
+		{'j','J','\0'},
+		{'k','K','\0'},
+		{'x','X','\0'},
+		{'b','B','\0'},
+		{'m','M','\0'},
+		{'w','W','\0'},
+		{'v','V','\0'},
+		{'z','Z','\0'},
+		{'\0','\0','\0'}
+	}
+	};
+	memcpy(keys, thekeys, sizeof(thekeys));}
+	//QWETRZ//
+	if (mode == 2){
+	Key thekeys[4][11] = {
+	{
+		{'1','!','^','À'},
+		{'2','"','²','à'},
+		{'3','#','³','È'},
+		{'4','$','«','è'},
+		{'5','%','»','Ì'},
+		{'6','&','„','ì'},
+		{'7','/','”','Ò'},
+		{'8','(','[','ò'},
+		{'9',')',']','Ù'},
+		{'0','=','§','ù'},
+		{'ß','?','\'','Ý'}
+	},
+	{
+		{'q','Q','@','Á'},		
+		{'w','W','\0','á'},
+		{'e','E','€','É'},
+		{'r','R','\0','é'},
+		{'t','T','\0','Í'},
+		{'z','Z','\0','í'},
+		{'u','U','\0','Ó'},
+		{'i','I','\0','ó'},
+		{'o','O','\0','Ú'},
+		{'p','P','\0','ú'},
+		{'ü','Ü','\0','ý'}
+	},
+	{
+		{'a','A','\0','Â'},
+		{'s','S','\0','â'},
+		{'d','D','\0','Ê'},
+		{'f','F','\0','ê'},
+		{'g','G','\0','Î'},
+		{'h','H','\0','î'},
+		{'j','J','\0','Ô'},
+		{'k','K','\0','ô'},
+		{'l','L','\0','Û'},
+		{'ö','Ö','\0','û'},
+		{'ä','Ä','\0','Ÿ'}
+	},
+	{
+		{'<','>','|','Ã'},
+		{'y','Y','\0','ã'},
+		{'x','X','\0','Ñ'},
+		{'c','C','ç','ñ'},
+		{'v','V','©','Ï'},
+		{'b','B','\0','ï'},
+		{'n','N','\0','Õ'},
+		{'m','M','\0','õ'},
+		{',',';','µ','ÿ'},
+		{'.',':','\0','\0'},
+		{'-','_','\0','\0'}
+	}
+	};
+	memcpy(keys, thekeys, sizeof(thekeys));}
 
 	keyTextbox = new GuiImageData(keyboard_textbox_png);
 	keyTextboxImg = new GuiImage(keyTextbox);
@@ -124,7 +246,10 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min)
 	keyBack->SetSoundClick(keySoundClick);
 	keyBack->SetTrigger(trigA);
 	keyBack->SetTrigger(trigB);
-	keyBack->SetPosition(10*42+40, 0*42+120);//(10*42+40, 0*42+80);
+	if (mode == 2){
+	keyBack->SetPosition(11*42+40, 0*42+120);}
+	else{
+	keyBack->SetPosition(10*42+40, 0*42+120);}//(10*42+40, 0*42+80);
 	keyBack->SetEffectGrow();
 	this->Append(keyBack);
 	
@@ -141,6 +266,34 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min)
 	keyClear->SetPosition(10*42+40, 4*42+120);//(10*42+40, 0*42+80);
 	keyClear->SetEffectGrow();
 	this->Append(keyClear);
+	
+	keyAltImg = new GuiImage(keyMedium);
+	keyAltOverImg = new GuiImage(keyMediumOver);
+	keyAltText = new GuiText("Alt Gr", 20, (GXColor){0, 0, 0, 0xff});
+	keyAlt = new GuiButton(keyMedium->GetWidth(), keyMedium->GetHeight());
+	keyAlt->SetImage(keyAltImg);
+	keyAlt->SetImageOver(keyAltOverImg);
+	keyAlt->SetLabel(keyAltText);
+	keyAlt->SetSoundOver(keySoundOver);
+	keyAlt->SetSoundClick(keySoundClick);
+	keyAlt->SetTrigger(trigA);
+	keyAlt->SetPosition(84, 4*42+120);//(10*42+40, 4*42+120);
+	keyAlt->SetEffectGrow();
+	if (mode == 2){this->Append(keyAlt);}
+	
+	keyAlt2Img = new GuiImage(keyMedium);
+	keyAlt2OverImg = new GuiImage(keyMediumOver);
+	keyAlt2Text = new GuiText("Accent", 20, (GXColor){0, 0, 0, 0xff});
+	keyAlt2 = new GuiButton(keyMedium->GetWidth(), keyMedium->GetHeight());
+	keyAlt2->SetImage(keyAlt2Img);
+	keyAlt2->SetImageOver(keyAlt2OverImg);
+	keyAlt2->SetLabel(keyAlt2Text);
+	keyAlt2->SetSoundOver(keySoundOver);
+	keyAlt2->SetSoundClick(keySoundClick);
+	keyAlt2->SetTrigger(trigA);
+	keyAlt2->SetPosition(8*42+40, 4*42+120);//(10*42+40, 4*42+120);
+	keyAlt2->SetEffectGrow();
+	if (mode == 2){this->Append(keyAlt2);}
 
 	keyCapsImg = new GuiImage(keyMedium);
 	keyCapsOverImg = new GuiImage(keyMediumOver);
@@ -225,6 +378,10 @@ GuiKeyboard::~GuiKeyboard()
 	delete keyShiftImg;
 	delete keyShiftOverImg;
 	delete keyShift;
+	if (keyAlt)
+	{delete keyAlt;}
+	if (keyAlt2)
+	{delete keyAlt2;}
 	delete keyBackText;
 	delete keyBackImg;
 	delete keyBackOverImg;
@@ -297,7 +454,23 @@ void GuiKeyboard::Update(GuiTrigger * t)
 	else if(keyShift->GetState() == STATE_CLICKED)
 	{
 		shift ^= 1;
+		if(alt) alt ^= 1;
+		if(alt2) alt2 ^= 1;
 		keyShift->SetState(STATE_SELECTED, t->chan);
+	}
+	else if(keyAlt->GetState() == STATE_CLICKED)
+	{
+		alt ^= 1;
+		if(shift) shift ^= 1;
+		if(alt2) alt2 ^= 1;
+		keyAlt->SetState(STATE_SELECTED, t->chan);
+	}
+	else if(keyAlt2->GetState() == STATE_CLICKED)
+	{
+		alt2 ^= 1;
+		if(shift) shift ^= 1;
+		if(alt) alt ^= 1;
+		keyAlt2->SetState(STATE_SELECTED, t->chan);
 	}
 	else if(keyCaps->GetState() == STATE_CLICKED)
 	{
@@ -315,6 +488,10 @@ void GuiKeyboard::Update(GuiTrigger * t)
 			{
 				if(shift || caps)
 					txt[0] = keys[i][j].chShift;
+				else if(alt)
+					txt[0] = keys[i][j].chalt;
+				else if(alt2)
+					txt[0] = keys[i][j].chalt2;
 				else
 					txt[0] = keys[i][j].ch;
 
@@ -328,6 +505,22 @@ void GuiKeyboard::Update(GuiTrigger * t)
 						{
 							kbtextstr[strlen(kbtextstr)] = keys[i][j].chShift;
 							if(shift) shift ^= 1;
+							if(alt) alt ^= 1;
+							if(alt2) alt2 ^= 1;
+						}
+						else if(alt)
+						{
+							kbtextstr[strlen(kbtextstr)] = keys[i][j].chalt;
+							if(shift) shift ^= 1;
+							if(alt) alt ^= 1;
+							if(alt2) alt2 ^= 1;
+						}
+						else if(alt2)
+						{
+							kbtextstr[strlen(kbtextstr)] = keys[i][j].chalt2;
+							if(shift) shift ^= 1;
+							if(alt) alt ^= 1;
+							if(alt2) alt2 ^= 1;
 						}
 						else
 						{

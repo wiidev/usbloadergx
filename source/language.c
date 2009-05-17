@@ -82,6 +82,7 @@ snprintf(LANGUAGE.FlipX, sizeof(LANGUAGE.FlipX), "Flip-X");
 snprintf(LANGUAGE.Force, sizeof(LANGUAGE.Force), "Force");
 snprintf(LANGUAGE.Youneedtoformatapartition, sizeof(LANGUAGE.Youneedtoformatapartition), "You need to format a partition");
 snprintf(LANGUAGE.Format, sizeof(LANGUAGE.Format), "Format");
+snprintf(LANGUAGE.keyboard, sizeof(LANGUAGE.keyboard), "Keyboard");
 snprintf(LANGUAGE.Formattingpleasewait, sizeof(LANGUAGE.Formattingpleasewait), "Formatting, please wait...");
 snprintf(LANGUAGE.formated, sizeof(LANGUAGE.formated), "formatted!");
 snprintf(LANGUAGE.free, sizeof(LANGUAGE.free), "free");

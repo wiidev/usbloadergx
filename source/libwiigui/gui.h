@@ -782,14 +782,14 @@ class GuiButton : public GuiElement
 };
 
 typedef struct _keytype {
-	char ch, chShift;
+	char ch, chShift, chalt, chalt2;
 } Key;
 
 //!On-screen keyboard
 class GuiKeyboard : public GuiWindow
 {
 	public:
-		GuiKeyboard(char * t, u32 m, int min);
+		GuiKeyboard(char * t, u32 m, int min, int lang);
 		~GuiKeyboard();
 		void Update(GuiTrigger * t);
 		char kbtextstr[256];
@@ -798,12 +798,22 @@ class GuiKeyboard : public GuiWindow
 		Key keys[4][11];
 		int shift;
 		int caps;
+		int alt;
+		int alt2;
 		GuiText * kbText;
 		GuiImage * keyTextboxImg;
 		GuiText * keyCapsText;
 		GuiImage * keyCapsImg;
 		GuiImage * keyCapsOverImg;
 		GuiButton * keyCaps;
+		GuiText * keyAltText;
+		GuiImage * keyAltImg;
+		GuiImage * keyAltOverImg;
+		GuiButton * keyAlt;
+		GuiText * keyAlt2Text;
+		GuiImage * keyAlt2Img;
+		GuiImage * keyAlt2OverImg;
+		GuiButton * keyAlt2;
 		GuiText * keyShiftText;
 		GuiImage * keyShiftImg;
 		GuiImage * keyShiftOverImg;
