@@ -236,6 +236,12 @@ extern const u32	battery_png_size;
 extern const u8		battery_bar_png[];
 extern const u32	battery_bar_png_size;
 
+extern const u8		battery_white_png[];
+extern const u32	battery_white_png_size;
+
+extern const u8		battery_bar_white_png[];
+extern const u32	battery_bar_white_png_size;
+
 extern const u8		battery_red_png[];
 extern const u32	battery_red_png_size;
 
@@ -247,6 +253,21 @@ extern const u32	arrow_previous_png_size;
 
 extern const u8		mp3_pause_png[];
 extern const u32	mp3_pause_png_size;
+
+extern const u8		exit_top_png[];
+extern const u32	exit_top_png_size;
+
+extern const u8		exit_top_over_png[];
+extern const u32	exit_top_over_png_size;
+
+extern const u8		exit_bottom_png[];
+extern const u32	exit_bottom_png_size;
+
+extern const u8		exit_bottom_over_png[];
+extern const u32	exit_bottom_over_png_size;
+
+extern const u8		exit_button_png[];
+extern const u32	exit_button_png_size;
 
 extern const u8		mp3_stop_png[];
 extern const u32	mp3_stop_png_size;

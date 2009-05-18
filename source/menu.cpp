@@ -645,6 +645,263 @@ WindowPrompt(const char *title, const char *msg, const char *btn1Label,
 }
 
 /****************************************************************************
+ * WindowExitPrompt
+ *
+ * Displays a prompt window to user, with information, an error message, or
+ * presenting a user with a choice of up to 4 Buttons.
+ *
+ * Give him 1 Titel, 1 Subtitel and 4 Buttons
+ * If titel/subtitle or one of the buttons is not needed give him a 0 on that
+ * place.
+ ***************************************************************************/
+int
+WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
+                const char *btn2Label, const char *btn3Label,
+                const char *btn4Label)
+{
+	int choice = -1;
+	char imgPath[100];
+	GuiWindow promptWindow(640,480);
+	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	promptWindow.SetPosition(0, 0);
+	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
+	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, vol);
+	
+	GuiImageData top(exit_top_png);
+	GuiImageData topOver(exit_top_over_png);
+	GuiImageData bottom(exit_bottom_png);
+	GuiImageData bottomOver(exit_bottom_over_png);
+	GuiImageData button(exit_button_png);
+	
+	snprintf(imgPath, sizeof(imgPath), "%sbattery_white.png", CFG.theme_path);
+	GuiImageData battery(imgPath, battery_white_png);
+	snprintf(imgPath, sizeof(imgPath), "%sbattery_red.png", CFG.theme_path);
+	GuiImageData batteryRed(imgPath, battery_red_png);
+	snprintf(imgPath, sizeof(imgPath), "%sbattery_bar_white.png", CFG.theme_path);
+	GuiImageData batteryBar(imgPath, battery_bar_white_png);
+
+	#ifdef HW_RVL
+	int i = 0, level;
+	char txt[3];
+	GuiText * batteryTxt[4];
+	GuiImage * batteryImg[4];
+	GuiImage * batteryBarImg[4];
+	GuiButton * batteryBtn[4];
+
+	for(i=0; i < 4; i++)
+	{
+
+		if(i == 0)
+			sprintf(txt, "P%d", i+1);
+		else
+			sprintf(txt, "P%d", i+1);
+
+		batteryTxt[i] = new GuiText(txt, 22, (GXColor){255,255,255, 255});
+		batteryTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
+		//batteryTxt[i]->SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_OUT, 50);
+		batteryImg[i] = new GuiImage(&battery);
+		batteryImg[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
+		//batteryImg[i]->SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_OUT, 50);
+		batteryImg[i]->SetPosition(36, 0);
+		batteryImg[i]->SetTile(0);
+		batteryBarImg[i] = new GuiImage(&batteryBar);
+		batteryBarImg[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
+		//batteryBarImg[i]->SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_OUT, 50);
+		batteryBarImg[i]->SetPosition(33, 0);
+
+		batteryBtn[i] = new GuiButton(40, 20);
+		batteryBtn[i]->SetLabel(batteryTxt[i]);
+		batteryBtn[i]->SetImage(batteryBarImg[i]);
+		batteryBtn[i]->SetIcon(batteryImg[i]);
+		batteryBtn[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
+		batteryBtn[i]->SetRumble(false);
+		batteryBtn[i]->SetAlpha(70);
+		batteryBtn[i]->SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_IN, 50);
+	}
+
+
+	batteryBtn[0]->SetPosition(180,150);
+	batteryBtn[1]->SetPosition(284, 150);
+	batteryBtn[2]->SetPosition(388, 150);
+	batteryBtn[3]->SetPosition(494, 150);
+		#endif
+	
+
+    GuiTrigger trigA;
+	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
+	GuiTrigger trigB;
+	trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
+	GuiTrigger trigHome;
+	trigHome.SetButtonOnlyTrigger(-1, WPAD_BUTTON_HOME | WPAD_CLASSIC_BUTTON_HOME, 0);
+
+	
+
+	GuiText titleTxt("HOME Menu", 36, (GXColor){255, 255, 255, 255});
+	titleTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	titleTxt.SetPosition(50,40);
+	/*GuiText msgTxt(msg, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
+	msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	msgTxt.SetPosition(0,-40);
+	msgTxt.SetMaxWidth(430);*/
+
+	GuiText btn1Txt("Close", 22, (GXColor){0, 0, 0, 255});
+	btn1Txt.SetAlignment(ALIGN_TOP, ALIGN_RIGHT);
+	btn1Txt.SetPosition(-50, 50);
+	
+	GuiImage btn1Img(&top);
+	GuiImage btn1OverImg(&topOver);
+	GuiButton btn1(top.GetWidth(), top.GetHeight());
+	btn1.SetLabel(&btn1Txt);
+	btn1.SetImage(&btn1Img);
+	btn1.SetImageOver(&btn1OverImg);
+	btn1.SetSoundOver(&btnSoundOver);
+	btn1.SetSoundClick(&btnClick);
+	btn1.SetTrigger(&trigA);
+	btn1.SetTrigger(&trigB);
+	btn1.SetTrigger(&trigHome);
+	//btn1.SetState(STATE_SELECTED);
+	//btn1.SetEffectGrow();
+	btn1.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	btn1.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
+    btn1.SetPosition(0, 0);
+
+	GuiText btn2Txt(btn1Label, 38, (GXColor){0, 0, 0, 255});
+	GuiImage btn2Img(&button);
+	if (Settings.wsprompt == yes){
+	btn2Img.SetWidescreen(CFG.widescreen);}///////////
+	GuiButton btn2(button.GetWidth(), button.GetHeight());
+	btn2.SetLabel(&btn2Txt);
+	btn2.SetImage(&btn2Img);
+	btn2.SetSoundOver(&btnSoundOver);
+	btn2.SetSoundClick(&btnClick);
+	btn2.SetTrigger(&trigA);
+	btn2.SetEffectGrow();
+	btn2.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+    btn2.SetPosition(-150, 0);
+
+    GuiText btn3Txt(btn2Label, 38, (GXColor){0, 0, 0, 255});
+	GuiImage btn3Img(&button);
+	if (Settings.wsprompt == yes){
+	btn3Img.SetWidescreen(CFG.widescreen);}///////////
+	GuiButton btn3(button.GetWidth(), button.GetHeight());
+	btn3.SetLabel(&btn3Txt);
+	btn3.SetImage(&btn3Img);
+	btn3.SetSoundOver(&btnSoundOver);
+	btn3.SetSoundClick(&btnClick);
+	btn3.SetTrigger(&trigA);
+	btn3.SetEffectGrow();
+	btn3.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+    btn3.SetPosition(150, 0);
+
+    //GuiText btn4Txt("EAT A DICK", 28, (GXColor){255, 255, 255, 255});
+	btn1Txt.SetAlignment(ALIGN_BOTTOM, ALIGN_CENTRE);
+	btn1Txt.SetPosition(0, -50);
+	GuiImage btn4Img(&bottom);
+	GuiImage btn4OverImg(&bottomOver);
+	GuiButton btn4(bottom.GetWidth(), bottom.GetHeight());
+	//btn4.SetLabel(&btn4Txt);
+	btn4.SetImage(&btn4Img);
+	btn4.SetImageOver(&btn4OverImg);
+	btn4.SetSoundOver(&btnSoundOver);
+	btn4.SetSoundClick(&btnClick);
+	btn4.SetTrigger(&trigA);
+	//btn4.SetEffectGrow();
+	btn4.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+    btn4.SetPosition(0,0);//(0, -120);
+	btn4.SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_IN, 50);
+
+	btn2Txt.SetFontSize(22);
+	btn3Txt.SetFontSize(22);
+
+	
+	promptWindow.Append(&btn1);
+	promptWindow.Append(&btn2);
+    promptWindow.Append(&btn3);
+    promptWindow.Append(&btn4);
+	promptWindow.Append(&titleTxt);
+	#ifdef HW_RVL
+	promptWindow.Append(batteryBtn[0]);
+		promptWindow.Append(batteryBtn[1]);
+		promptWindow.Append(batteryBtn[2]);
+		promptWindow.Append(batteryBtn[3]);
+		batteryBtn[0]->SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_OUT, 50);
+		batteryBtn[1]->SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_OUT, 50);
+		batteryBtn[2]->SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_OUT, 50);
+		batteryBtn[3]->SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_OUT, 50);
+		#endif
+
+	HaltGui();
+	mainWindow->SetState(STATE_DISABLED);
+	mainWindow->Append(&promptWindow);
+	mainWindow->ChangeFocus(&promptWindow);
+	ResumeGui();
+
+	while(choice == -1)
+	{
+		VIDEO_WaitVSync();
+		
+		#ifdef HW_RVL
+		for(i=0; i < 4; i++)
+		{
+			if(WPAD_Probe(i, NULL) == WPAD_ERR_NONE) // controller connected
+			{
+				level = (userInput[i].wpad.battery_level / 100.0) * 4;
+				if(level > 4) level = 4;
+				batteryImg[i]->SetTile(level);
+
+				if(level == 0)
+					batteryBarImg[i]->SetImage(&batteryRed);
+				else
+					batteryBarImg[i]->SetImage(&batteryBar);
+
+				batteryBtn[i]->SetAlpha(255);
+			}
+			else // controller not connected
+			{
+				batteryImg[i]->SetTile(0);
+				batteryImg[i]->SetImage(&battery);
+				batteryBtn[i]->SetAlpha(70);
+			}
+		}
+		#endif
+		
+		
+		if(shutdown == 1)
+		{
+			wiilight(0);
+			Sys_Shutdown();
+		}
+		if(reset == 1)
+			Sys_Reboot();
+		if(btn1.GetState() == STATE_CLICKED) {
+			choice = 1;
+		}
+		else if(btn2.GetState() == STATE_CLICKED) {
+		    btn1.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
+			btn2.SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_OUT, 50);
+			while(btn2.GetEffect() > 0) usleep(50);
+			choice = 2;
+		}
+		else if(btn3.GetState() == STATE_CLICKED) {
+		    btn1.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
+			btn2.SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_OUT, 50);
+			while(btn2.GetEffect() > 0) usleep(50);
+			choice = 3;
+		}
+		else if(btn4.GetState() == STATE_CLICKED) {
+			choice = 0;
+		}
+	}
+
+	while(promptWindow.GetEffect() > 0) usleep(50);
+	HaltGui();
+	mainWindow->Remove(&promptWindow);
+	mainWindow->SetState(STATE_DEFAULT);
+	ResumeGui();
+	return choice;
+}
+
+/****************************************************************************
  * GameWindowPrompt
  *
  * Displays a prompt window to user, with information, an error message, or
@@ -2670,12 +2927,12 @@ static int MenuDiscList()
 		else if(homeBtn.GetState() == STATE_CLICKED)
 		{
 
-			choice = WindowPrompt(LANGUAGE.ExitUSBISOLoader,0, LANGUAGE.BacktoLoader,LANGUAGE.WiiMenu,LANGUAGE.Back,0);
-			if(choice == 2)
+			choice = WindowExitPrompt(LANGUAGE.ExitUSBISOLoader,0, LANGUAGE.BacktoLoader,LANGUAGE.WiiMenu,LANGUAGE.Back,0);
+			if(choice == 3)
 			{
                 SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0); // Back to System Menu
 			}
-			else if (choice == 1)
+			else if (choice == 2)
 			{
 				if (*(unsigned int*) 0x80001800) exit(0);
 				// Channel Version
