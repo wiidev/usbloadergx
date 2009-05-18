@@ -57,9 +57,9 @@ static GuiImageData * background = NULL;
 static char prozent[10] = "0%";
 static char timet[50] = " ";
 static char sizeshow[20] = " ";
-static GuiText prTxt(prozent, 26, (GXColor){0, 0, 0, 255});
-static GuiText timeTxt(prozent, 26, (GXColor){0, 0, 0, 255});
-static GuiText sizeTxt(sizeshow, 26, (GXColor){0, 0, 0, 255});
+static GuiText prTxt(prozent, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
+static GuiText timeTxt(prozent, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
+static GuiText sizeTxt(sizeshow, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 static GuiText *GameIDTxt = NULL;
 static GuiText *GameRegionTxt = NULL;
 static GuiSound * bgMusic = NULL;
@@ -400,7 +400,11 @@ WindowPrompt(const char *title, const char *msg, const char *btn1Label,
 	promptWindow.SetPosition(0, -10);
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
 	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, vol);
-	GuiImageData btnOutline(button_dialogue_box_png);
+	char imgPath[50];
+	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
+	GuiImageData btnOutline(imgPath, button_dialogue_box_png);
+	snprintf(imgPath, sizeof(imgPath), "%sdialogue_box.png", CFG.theme_path);
+	GuiImageData dialogBox(imgPath, dialogue_box_png);
 
 
 	GuiTrigger trigA;
@@ -408,20 +412,20 @@ WindowPrompt(const char *title, const char *msg, const char *btn1Label,
 	GuiTrigger trigB;
 	trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 
-	GuiImageData dialogBox(dialogue_box_png);
+	//GuiImageData dialogBox(dialogue_box_png);
 	GuiImage dialogBoxImg(&dialogBox);
 	if (Settings.wsprompt == yes){
 	dialogBoxImg.SetWidescreen(CFG.widescreen);}///////////
 
-	GuiText titleTxt(title, 26, (GXColor){0, 0, 0, 255});
+	GuiText titleTxt(title, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	titleTxt.SetPosition(0,55);
-	GuiText msgTxt(msg, 22, (GXColor){0, 0, 0, 255});
+	GuiText msgTxt(msg, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	msgTxt.SetPosition(0,-40);
 	msgTxt.SetMaxWidth(430);
 
-	GuiText btn1Txt(btn1Label, 22, (GXColor){0, 0, 0, 255});
+	GuiText btn1Txt(btn1Label, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	GuiImage btn1Img(&btnOutline);
 	if (Settings.wsprompt == yes){
 	btn1Img.SetWidescreen(CFG.widescreen);}///////////
@@ -434,7 +438,7 @@ WindowPrompt(const char *title, const char *msg, const char *btn1Label,
 	btn1.SetState(STATE_SELECTED);
 	btn1.SetEffectGrow();
 
-	GuiText btn2Txt(btn2Label, 22, (GXColor){0, 0, 0, 255});
+	GuiText btn2Txt(btn2Label, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	GuiImage btn2Img(&btnOutline);
 	if (Settings.wsprompt == yes){
 	btn2Img.SetWidescreen(CFG.widescreen);}///////////
@@ -448,7 +452,7 @@ WindowPrompt(const char *title, const char *msg, const char *btn1Label,
 	btn2.SetTrigger(&trigA);
 	btn2.SetEffectGrow();
 
-    GuiText btn3Txt(btn3Label, 22, (GXColor){0, 0, 0, 255});
+    GuiText btn3Txt(btn3Label, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	GuiImage btn3Img(&btnOutline);
 	if (Settings.wsprompt == yes){
 	btn3Img.SetWidescreen(CFG.widescreen);}///////////
@@ -462,7 +466,7 @@ WindowPrompt(const char *title, const char *msg, const char *btn1Label,
 	btn3.SetTrigger(&trigA);
 	btn3.SetEffectGrow();
 
-    GuiText btn4Txt(btn4Label, 22, (GXColor){0, 0, 0, 255});
+    GuiText btn4Txt(btn4Label, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	GuiImage btn4Img(&btnOutline);
 	if (Settings.wsprompt == yes){
 	btn4Img.SetWidescreen(CFG.widescreen);}///////////
@@ -660,7 +664,12 @@ int GameWindowPrompt()
 	promptWindow.SetPosition(0, -10);
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
 	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, vol);
-	GuiImageData btnOutline(button_dialogue_box_png);
+	
+	char imgPath[100];
+	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
+	GuiImageData btnOutline(imgPath, button_dialogue_box_png);
+	
+	
 	GuiImageData imgLeft(startgame_arrow_left_png);
 	GuiImageData imgRight(startgame_arrow_right_png);
 
@@ -678,8 +687,6 @@ int GameWindowPrompt()
 	GuiTrigger trigMinus;
 	trigMinus.SetButtonOnlyTrigger(-1, WPAD_BUTTON_MINUS | WPAD_CLASSIC_BUTTON_MINUS, 0);
 
-	char imgPath[100];
-
 	if (CFG.widescreen)
 		snprintf(imgPath, sizeof(imgPath), "%swdialogue_box_startgame.png", CFG.theme_path);
 	else
@@ -691,7 +698,7 @@ int GameWindowPrompt()
 	GuiTooltip nameBtnTT(LANGUAGE.RenameGameonWBFS);
 	if (Settings.wsprompt == yes)
 		nameBtnTT.SetWidescreen(CFG.widescreen);
-	GuiText msgTxt("", 22, (GXColor){50, 50, 50, 255});
+	GuiText msgTxt("", 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{50, 50, 50, 255});
 	GuiButton nameBtn(120,50);
 	nameBtn.SetLabel(&msgTxt);
 	nameBtn.SetLabelOver(&msgTxt);
@@ -706,7 +713,7 @@ int GameWindowPrompt()
 		nameBtn.SetEffectGrow();
 	}
 
-    GuiText sizeTxt("", 22, (GXColor){50, 50, 50, 255}); //TODO: get the size here
+    GuiText sizeTxt("", 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{50, 50, 50, 255}); //TODO: get the size here
 	sizeTxt.SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
 	sizeTxt.SetPosition(-60,70);
 
@@ -726,7 +733,7 @@ int GameWindowPrompt()
 	btn1.SetState(STATE_SELECTED);
 	//btn1.SetEffectGrow(); just commented it out if anybody wants to use it again.
 
-	GuiText btn2Txt(LANGUAGE.Back, 22, (GXColor){0, 0, 0, 255});
+	GuiText btn2Txt(LANGUAGE.Back, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	GuiImage btn2Img(&btnOutline);
 	if (Settings.wsprompt == yes){
 	btn2Img.SetWidescreen(CFG.widescreen);}///////////
@@ -751,7 +758,7 @@ int GameWindowPrompt()
 	btn2.SetTrigger(&trigA);
 	btn2.SetEffectGrow();
 
-	GuiText btn3Txt(LANGUAGE.settings, 22, (GXColor){0, 0, 0, 255});
+	GuiText btn3Txt(LANGUAGE.settings, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	GuiImage btn3Img(&btnOutline);
 	if (Settings.wsprompt == yes){
 	btn3Img.SetWidescreen(CFG.widescreen);}///////////
@@ -1026,26 +1033,30 @@ DiscWait(const char *title, const char *msg, const char *btn1Label, const char *
 	promptWindow.SetPosition(0, -10);
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
 	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, vol);
-	GuiImageData btnOutline(button_dialogue_box_png);
+	
+	char imgPath[100];
+	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
+	GuiImageData btnOutline(imgPath, button_dialogue_box_png);
+	snprintf(imgPath, sizeof(imgPath), "%sdialogue_box.png", CFG.theme_path);
+	GuiImageData dialogBox(imgPath, dialogue_box_png);
 	GuiTrigger trigA;
 	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 	GuiTrigger trigB;
 	trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 
-	GuiImageData dialogBox(dialogue_box_png);
 	GuiImage dialogBoxImg(&dialogBox);
 	if (Settings.wsprompt == yes){
 	dialogBoxImg.SetWidescreen(CFG.widescreen);}///////////
 
-	GuiText titleTxt(title, 26, (GXColor){0, 0, 0, 255});
+	GuiText titleTxt(title, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	titleTxt.SetPosition(0,60);
-	GuiText msgTxt(msg, 22, (GXColor){0, 0, 0, 255});
+	GuiText msgTxt(msg, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	msgTxt.SetPosition(0,-40);
 	msgTxt.SetMaxWidth(430);
 
-	GuiText btn1Txt(btn1Label, 22, (GXColor){0, 0, 0, 255});
+	GuiText btn1Txt(btn1Label, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	GuiImage btn1Img(&btnOutline);
 	if (Settings.wsprompt == yes){
 	btn1Img.SetWidescreen(CFG.widescreen);}///////////
@@ -1071,7 +1082,7 @@ DiscWait(const char *title, const char *msg, const char *btn1Label, const char *
 	btn1.SetState(STATE_SELECTED);
 	btn1.SetEffectGrow();
 
-	GuiText btn2Txt(btn2Label, 22, (GXColor){0, 0, 0, 255});
+	GuiText btn2Txt(btn2Label, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	GuiImage btn2Img(&btnOutline);
 	if (Settings.wsprompt == yes){
 	btn2Img.SetWidescreen(CFG.widescreen);}///////////
@@ -1101,7 +1112,7 @@ DiscWait(const char *title, const char *msg, const char *btn1Label, const char *
 	}
 
     char timer[20];
-	GuiText timerTxt(timer, 26, (GXColor){0, 0, 0, 255});
+	GuiText timerTxt(timer, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	timerTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	timerTxt.SetPosition(0,160);
 
@@ -1174,17 +1185,22 @@ FormatingPartition(const char *title, partitionEntry *entry)
 	GuiWindow promptWindow(472,320);
 	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	promptWindow.SetPosition(0, -10);
+	
+	char imgPath[100];
+	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
+	GuiImageData btnOutline(imgPath, button_dialogue_box_png);
+	snprintf(imgPath, sizeof(imgPath), "%sdialogue_box.png", CFG.theme_path);
+	GuiImageData dialogBox(imgPath, dialogue_box_png);
 
-	GuiImageData btnOutline(button_dialogue_box_png);
+	
 	GuiTrigger trigA;
 	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 
-	GuiImageData dialogBox(dialogue_box_png);
 	GuiImage dialogBoxImg(&dialogBox);
 	if (Settings.wsprompt == yes){
 	dialogBoxImg.SetWidescreen(CFG.widescreen);}///////////
 
-	GuiText titleTxt(title, 26, (GXColor){0, 0, 0, 255});
+	GuiText titleTxt(title, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	titleTxt.SetPosition(0,60);
 
@@ -1229,25 +1245,28 @@ int NetworkInitPromp(int choice2)
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
 	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, vol);
 
-	GuiImageData btnOutline(button_dialogue_box_png);
+	char imgPath[100];
+	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
+	GuiImageData btnOutline(imgPath, button_dialogue_box_png);
+	snprintf(imgPath, sizeof(imgPath), "%sdialogue_box.png", CFG.theme_path);
+	GuiImageData dialogBox(imgPath, dialogue_box_png);
 	GuiTrigger trigA;
 	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 
-	GuiImageData dialogBox(dialogue_box_png);
 	GuiImage dialogBoxImg(&dialogBox);
 	if (Settings.wsprompt == yes){
 	dialogBoxImg.SetWidescreen(CFG.widescreen);}///////////
 
-	GuiText titleTxt(LANGUAGE.InitializingNetwork, 26, (GXColor){0, 0, 0, 255});
+	GuiText titleTxt(LANGUAGE.InitializingNetwork, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	titleTxt.SetPosition(0,60);
 
 	char msg[20] = " ";
-	GuiText msgTxt(msg, 22, (GXColor){0, 0, 0, 255});
+	GuiText msgTxt(msg, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	msgTxt.SetPosition(0,-40);
 
-    GuiText btn1Txt(LANGUAGE.Cancel, 22, (GXColor){0, 0, 0, 255});
+    GuiText btn1Txt(LANGUAGE.Cancel, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	GuiImage btn1Img(&btnOutline);
 	if (Settings.wsprompt == yes){
 	btn1Img.SetWidescreen(CFG.widescreen);}///////////
@@ -1448,11 +1467,14 @@ ProgressWindow(const char *title, const char *msg)
 	GuiWindow promptWindow(472,320);
 	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	promptWindow.SetPosition(0, -10);
-	GuiImageData btnOutline(button_dialogue_box_png);
+	char imgPath[100];
+	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
+	GuiImageData btnOutline(imgPath, button_dialogue_box_png);
+	snprintf(imgPath, sizeof(imgPath), "%sdialogue_box.png", CFG.theme_path);
+	GuiImageData dialogBox(imgPath, dialogue_box_png);
 	GuiTrigger trigA;
 	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 
-	GuiImageData dialogBox(dialogue_box_png);
 	GuiImage dialogBoxImg(&dialogBox);
 	if (Settings.wsprompt == yes){
 	dialogBoxImg.SetWidescreen(CFG.widescreen);}
@@ -1475,14 +1497,14 @@ ProgressWindow(const char *title, const char *msg)
 	progressbarImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 	progressbarImg.SetPosition(25, 40);
 
-	GuiText titleTxt(title, 26, (GXColor){0, 0, 0, 255});
+	GuiText titleTxt(title, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	titleTxt.SetPosition(0,60);
-	GuiText msgTxt(msg, 26, (GXColor){0, 0, 0, 255});
+	GuiText msgTxt(msg, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	msgTxt.SetPosition(0,120);
 
-	GuiText prsTxt("%", 26, (GXColor){0, 0, 0, 255});
+	GuiText prsTxt("%", 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	prsTxt.SetAlignment(ALIGN_RIGHT, ALIGN_MIDDLE);
 	prsTxt.SetPosition(-188,40);
 
@@ -1564,11 +1586,14 @@ ProgressDownloadWindow(int choice2)
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
 	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, vol);
 
-	GuiImageData btnOutline(button_dialogue_box_png);
+	char imgPath[100];
+	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
+	GuiImageData btnOutline(imgPath, button_dialogue_box_png);
+	snprintf(imgPath, sizeof(imgPath), "%sdialogue_box.png", CFG.theme_path);
+	GuiImageData dialogBox(imgPath, dialogue_box_png);
 	GuiTrigger trigA;
 	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 
-	GuiImageData dialogBox(dialogue_box_png);
 	GuiImage dialogBoxImg(&dialogBox);
 	if (Settings.wsprompt == yes){
 	dialogBoxImg.SetWidescreen(CFG.widescreen);}
@@ -1590,22 +1615,22 @@ ProgressDownloadWindow(int choice2)
 	progressbarImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 	progressbarImg.SetPosition(25, 40);
 
-	GuiText titleTxt(LANGUAGE.Downloadingfile, 26, (GXColor){0, 0, 0, 255});
+	GuiText titleTxt(LANGUAGE.Downloadingfile, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	titleTxt.SetPosition(0,60);
     char msg[25] = " ";
-	GuiText msgTxt(msg, 26, (GXColor){0, 0, 0, 255});
+	GuiText msgTxt(msg, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	msgTxt.SetPosition(0,130);
 	char msg2[15] = " ";
-	GuiText msg2Txt(msg2, 26, (GXColor){0, 0, 0, 255});
+	GuiText msg2Txt(msg2, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	msg2Txt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	msg2Txt.SetPosition(0,100);
 
 	prTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	prTxt.SetPosition(0, 40);
 
-    GuiText btn1Txt(LANGUAGE.Cancel, 22, (GXColor){0, 0, 0, 255});
+    GuiText btn1Txt(LANGUAGE.Cancel, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	GuiImage btn1Img(&btnOutline);
 	if (Settings.wsprompt == yes){
 	btn1Img.SetWidescreen(CFG.widescreen);}
@@ -1927,13 +1952,16 @@ static int OnScreenKeyboard(char * var, u32 maxlen, int min)
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
 	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, vol);
 
-	GuiImageData btnOutline(button_dialogue_box_png);
+	char imgPath[50];
+	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
+	GuiImageData btnOutline(imgPath, button_dialogue_box_png);
+	
 	GuiTrigger trigA;
 	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 	GuiTrigger trigB;
 	trigB.SetSimpleTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 
-	GuiText okBtnTxt(LANGUAGE.ok, 22, (GXColor){0, 0, 0, 255});
+	GuiText okBtnTxt(LANGUAGE.ok, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	GuiImage okBtnImg(&btnOutline);
 	if (Settings.wsprompt == yes){
 	okBtnImg.SetWidescreen(CFG.widescreen);}///////////
@@ -1949,7 +1977,7 @@ static int OnScreenKeyboard(char * var, u32 maxlen, int min)
 	okBtn.SetTrigger(&trigA);
 	okBtn.SetEffectGrow();
 
-	GuiText cancelBtnTxt(LANGUAGE.Cancel, 22, (GXColor){0, 0, 0, 255});
+	GuiText cancelBtnTxt(LANGUAGE.Cancel, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	GuiImage cancelBtnImg(&btnOutline);
 	if (Settings.wsprompt == yes){
 	cancelBtnImg.SetWidescreen(CFG.widescreen);}///////////
@@ -3382,7 +3410,9 @@ static int MenuSettings()
 
 	char imgPath[100];
 
-	GuiImageData btnOutline(settings_menu_button_png);
+	
+	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
+	GuiImageData btnOutline(imgPath, button_dialogue_box_png);
 	snprintf(imgPath, sizeof(imgPath), "%ssettings_background.png", CFG.theme_path);
 	GuiImageData settingsbg(imgPath, settings_background_png);
 	snprintf(imgPath, sizeof(imgPath), "%stab_bg1.png", CFG.theme_path);
@@ -3417,7 +3447,7 @@ static int MenuSettings()
 	settingsbackgroundbtn.SetPosition(0, 0);
 	settingsbackgroundbtn.SetImage(&settingsbackground);
 
-    GuiText backBtnTxt(LANGUAGE.Back , 22, (GXColor){0, 0, 0, 255});
+    GuiText backBtnTxt(LANGUAGE.Back , 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	backBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
 	GuiImage backBtnImg(&btnOutline);
 	if (Settings.wsprompt == yes){
@@ -3493,7 +3523,7 @@ static int MenuSettings()
 	const char * text = LANGUAGE.Unlock;
 	if (CFG.godmode == 1)
 			text = LANGUAGE.Lock;
-	GuiText lockBtnTxt(text, 22, (GXColor){0, 0, 0, 255});
+	GuiText lockBtnTxt(text, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	lockBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
 	GuiImage lockBtnImg(&btnOutline);
 	lockBtnImg.SetWidescreen(CFG.widescreen);//////
@@ -4325,7 +4355,8 @@ int GameSettings(struct discHdr * header)
 
 	char imgPath[100];
 
-	GuiImageData btnOutline(settings_menu_button_png);
+	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
+	GuiImageData btnOutline(imgPath, button_dialogue_box_png);
 	snprintf(imgPath, sizeof(imgPath), "%sgamesettings_background.png", CFG.theme_path);
 	GuiImageData settingsbg(imgPath, settings_background_png);
 
@@ -4346,7 +4377,7 @@ int GameSettings(struct discHdr * header)
 	settingsbackgroundbtn.SetPosition(0, 0);
 	settingsbackgroundbtn.SetImage(&settingsbackground);
 
-    GuiText saveBtnTxt(LANGUAGE.Save, 22, (GXColor){0, 0, 0, 255});
+    GuiText saveBtnTxt(LANGUAGE.Save, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	saveBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
 	GuiImage saveBtnImg(&btnOutline);
 	if (Settings.wsprompt == yes){
@@ -4361,7 +4392,7 @@ int GameSettings(struct discHdr * header)
 	saveBtn.SetTrigger(&trigA);
 	saveBtn.SetEffectGrow();
 
-    GuiText cancelBtnTxt(LANGUAGE.Back, 22, (GXColor){0, 0, 0, 255});
+    GuiText cancelBtnTxt(LANGUAGE.Back, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	cancelBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
 	GuiImage cancelBtnImg(&btnOutline);
 	if (Settings.wsprompt == yes){
@@ -4377,7 +4408,7 @@ int GameSettings(struct discHdr * header)
 	cancelBtn.SetTrigger(&trigB);
 	cancelBtn.SetEffectGrow();
 
-	GuiText deleteBtnTxt(LANGUAGE.Uninstall, 22, (GXColor){0, 0, 0, 255});
+	GuiText deleteBtnTxt(LANGUAGE.Uninstall, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	deleteBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
 	GuiImage deleteBtnImg(&btnOutline);
 	if (Settings.wsprompt == yes){
@@ -4691,8 +4722,9 @@ int MenuMp3()
     }
     options2.length = cnt;
 
-    GuiImageData btnOutline(settings_menu_button_png);
-    if(cnt < 9) {
+    snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
+	GuiImageData btnOutline(imgPath, button_dialogue_box_png);
+	if(cnt < 9) {
     scrollon = 0;
     } else {
     scrollon = 1;
@@ -4702,7 +4734,7 @@ int MenuMp3()
 	optionBrowser4.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	optionBrowser4.SetCol2Position(65);
 
-    GuiText cancelBtnTxt(LANGUAGE.Back, 22, (GXColor){0, 0, 0, 255});
+    GuiText cancelBtnTxt(LANGUAGE.Back, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	cancelBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
 	GuiImage cancelBtnImg(&btnOutline);
 	if (Settings.wsprompt == yes){

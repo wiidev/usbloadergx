@@ -285,6 +285,9 @@ void CFG_Default(int widescreen) // -1 = non forced Mode
 	THEME.info_r = 63;
 	THEME.info_g = 154;
 	THEME.info_b = 192;
+	THEME.prompttxt_r = 0;
+	THEME.prompttxt_g = 0;
+	THEME.prompttxt_b = 0;
 	THEME.clock_x = 0;
 	THEME.clock_y = 330;
 	THEME.clockAlign = CFG_ALIGN_CENTRE;
@@ -650,6 +653,15 @@ void theme_set(char *name, char *val)
 			THEME.gameText_r = x;
 			THEME.gameText_g = y;
 			THEME.gameText_b = z;
+		}
+	}
+
+	else if (strcmp(cfg_name, "prompttext_color") == 0) {
+		short x,y,z;
+		if (sscanf(val, "%hd,%hd, %hd", &x, &y, &z) == 3) {
+			THEME.prompttxt_r = x;
+			THEME.prompttxt_g = y;
+			THEME.prompttxt_b = z;
 		}
 	}
 

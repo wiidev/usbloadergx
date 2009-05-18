@@ -122,6 +122,9 @@ struct THEME
 	short info_r;
 	short info_g;
 	short info_b;
+	short prompttxt_r;
+	short prompttxt_g;
+	short prompttxt_b;
 	short clock_x;
 	short clock_y;
 	short clockAlign;
