@@ -202,7 +202,7 @@ static void WindowCredits(void * ptr)
 	starImg.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	starImg.SetPosition(500,335);
 
-	int numEntries = 25;
+	int numEntries = 24;
 	GuiText * txt[numEntries];
 
 	txt[i] = new GuiText(LANGUAGE.Credits, 26, (GXColor){255, 255, 255, 255});
@@ -659,20 +659,31 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
                 const char *btn2Label, const char *btn3Label,
                 const char *btn4Label)
 {
-	int choice = -1;
+    GuiSound * homein = NULL;
+    homein = new GuiSound(menuin_ogg, menuin_ogg_size, SOUND_OGG, vol);
+    homein->SetVolume(vol);
+	homein->SetLoop(0);
+	homein->Play();
+
+	GuiSound * homeout = NULL;
+    homeout = new GuiSound(menuout_ogg, menuout_ogg_size, SOUND_OGG, vol);
+    homeout->SetVolume(vol);
+	homeout->SetLoop(0);
+
+    int choice = -1;
 	char imgPath[100];
 	GuiWindow promptWindow(640,480);
-	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	promptWindow.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	promptWindow.SetPosition(0, 0);
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
 	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, vol);
-	
+
 	GuiImageData top(exit_top_png);
 	GuiImageData topOver(exit_top_over_png);
 	GuiImageData bottom(exit_bottom_png);
 	GuiImageData bottomOver(exit_bottom_over_png);
 	GuiImageData button(exit_button_png);
-	
+
 	snprintf(imgPath, sizeof(imgPath), "%sbattery_white.png", CFG.theme_path);
 	GuiImageData battery(imgPath, battery_white_png);
 	snprintf(imgPath, sizeof(imgPath), "%sbattery_red.png", CFG.theme_path);
@@ -681,7 +692,7 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 	GuiImageData batteryBar(imgPath, battery_bar_white_png);
 
 	#ifdef HW_RVL
-	int i = 0, level;
+	int i = 0, ret = 0, level;
 	char txt[3];
 	GuiText * batteryTxt[4];
 	GuiImage * batteryImg[4];
@@ -698,15 +709,12 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 
 		batteryTxt[i] = new GuiText(txt, 22, (GXColor){255,255,255, 255});
 		batteryTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-		//batteryTxt[i]->SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_OUT, 50);
 		batteryImg[i] = new GuiImage(&battery);
 		batteryImg[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-		//batteryImg[i]->SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_OUT, 50);
 		batteryImg[i]->SetPosition(36, 0);
 		batteryImg[i]->SetTile(0);
 		batteryBarImg[i] = new GuiImage(&batteryBar);
 		batteryBarImg[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-		//batteryBarImg[i]->SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_OUT, 50);
 		batteryBarImg[i]->SetPosition(33, 0);
 
 		batteryBtn[i] = new GuiButton(40, 20);
@@ -719,13 +727,11 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 		batteryBtn[i]->SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_IN, 50);
 	}
 
-
 	batteryBtn[0]->SetPosition(180,150);
 	batteryBtn[1]->SetPosition(284, 150);
 	batteryBtn[2]->SetPosition(388, 150);
 	batteryBtn[3]->SetPosition(494, 150);
-		#endif
-	
+    #endif
 
     GuiTrigger trigA;
 	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
@@ -734,20 +740,14 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 	GuiTrigger trigHome;
 	trigHome.SetButtonOnlyTrigger(-1, WPAD_BUTTON_HOME | WPAD_CLASSIC_BUTTON_HOME, 0);
 
-	
-
 	GuiText titleTxt("HOME Menu", 36, (GXColor){255, 255, 255, 255});
 	titleTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	titleTxt.SetPosition(50,40);
-	/*GuiText msgTxt(msg, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
-	msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-	msgTxt.SetPosition(0,-40);
-	msgTxt.SetMaxWidth(430);*/
+	titleTxt.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
 
-	GuiText btn1Txt("Close", 22, (GXColor){0, 0, 0, 255});
-	btn1Txt.SetAlignment(ALIGN_TOP, ALIGN_RIGHT);
-	btn1Txt.SetPosition(-50, 50);
-	
+	GuiText btn1Txt("Close", 28, (GXColor){0, 0, 0, 255});
+	btn1Txt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	btn1Txt.SetPosition(214,17);
 	GuiImage btn1Img(&top);
 	GuiImage btn1OverImg(&topOver);
 	GuiButton btn1(top.GetWidth(), top.GetHeight());
@@ -755,12 +755,7 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 	btn1.SetImage(&btn1Img);
 	btn1.SetImageOver(&btn1OverImg);
 	btn1.SetSoundOver(&btnSoundOver);
-	btn1.SetSoundClick(&btnClick);
 	btn1.SetTrigger(&trigA);
-	btn1.SetTrigger(&trigB);
-	btn1.SetTrigger(&trigHome);
-	//btn1.SetState(STATE_SELECTED);
-	//btn1.SetEffectGrow();
 	btn1.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	btn1.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
     btn1.SetPosition(0, 0);
@@ -778,6 +773,8 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 	btn2.SetEffectGrow();
 	btn2.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     btn2.SetPosition(-150, 0);
+	btn2.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_IN, 50);
+	btn2.SetRumble(false);
 
     GuiText btn3Txt(btn2Label, 38, (GXColor){0, 0, 0, 255});
 	GuiImage btn3Img(&button);
@@ -792,43 +789,37 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 	btn3.SetEffectGrow();
 	btn3.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     btn3.SetPosition(150, 0);
+	btn3.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_IN, 50);
+	btn3.SetRumble(false);
 
-    //GuiText btn4Txt("EAT A DICK", 28, (GXColor){255, 255, 255, 255});
-	btn1Txt.SetAlignment(ALIGN_BOTTOM, ALIGN_CENTRE);
-	btn1Txt.SetPosition(0, -50);
 	GuiImage btn4Img(&bottom);
 	GuiImage btn4OverImg(&bottomOver);
 	GuiButton btn4(bottom.GetWidth(), bottom.GetHeight());
-	//btn4.SetLabel(&btn4Txt);
 	btn4.SetImage(&btn4Img);
 	btn4.SetImageOver(&btn4OverImg);
 	btn4.SetSoundOver(&btnSoundOver);
-	btn4.SetSoundClick(&btnClick);
 	btn4.SetTrigger(&trigA);
-	//btn4.SetEffectGrow();
+	btn4.SetTrigger(&trigB);
+	btn4.SetTrigger(&trigHome);
 	btn4.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-    btn4.SetPosition(0,0);//(0, -120);
+    btn4.SetPosition(0,0);
 	btn4.SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_IN, 50);
 
 	btn2Txt.SetFontSize(22);
 	btn3Txt.SetFontSize(22);
 
-	
-	promptWindow.Append(&btn1);
 	promptWindow.Append(&btn2);
     promptWindow.Append(&btn3);
     promptWindow.Append(&btn4);
+    promptWindow.Append(&btn1);
 	promptWindow.Append(&titleTxt);
+
 	#ifdef HW_RVL
 	promptWindow.Append(batteryBtn[0]);
-		promptWindow.Append(batteryBtn[1]);
-		promptWindow.Append(batteryBtn[2]);
-		promptWindow.Append(batteryBtn[3]);
-		batteryBtn[0]->SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_OUT, 50);
-		batteryBtn[1]->SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_OUT, 50);
-		batteryBtn[2]->SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_OUT, 50);
-		batteryBtn[3]->SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_OUT, 50);
-		#endif
+    promptWindow.Append(batteryBtn[1]);
+    promptWindow.Append(batteryBtn[2]);
+    promptWindow.Append(batteryBtn[3]);
+    #endif
 
 	HaltGui();
 	mainWindow->SetState(STATE_DISABLED);
@@ -839,7 +830,7 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 	while(choice == -1)
 	{
 		VIDEO_WaitVSync();
-		
+
 		#ifdef HW_RVL
 		for(i=0; i < 4; i++)
 		{
@@ -864,8 +855,8 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 			}
 		}
 		#endif
-		
-		
+
+
 		if(shutdown == 1)
 		{
 			wiilight(0);
@@ -875,28 +866,64 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 			Sys_Reboot();
 		if(btn1.GetState() == STATE_CLICKED) {
 			choice = 1;
+            btn1.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
+			btn4.SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_OUT, 50);
+            btn2.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 50);
+            btn3.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 50);
+			titleTxt.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
+			#ifdef HW_RVL
+			for (int i = 0; i < 4; i++)
+			batteryBtn[i]->SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_OUT, 50);
+            #endif
 		}
 		else if(btn2.GetState() == STATE_CLICKED) {
-		    btn1.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
-			btn2.SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_OUT, 50);
-			while(btn2.GetEffect() > 0) usleep(50);
+            ret = WindowPrompt(LANGUAGE.Areyousure, 0, LANGUAGE.Yes, LANGUAGE.No, 0, 0);
+			if (ret == 1) {
 			choice = 2;
+			}
+			HaltGui();
+            mainWindow->SetState(STATE_DISABLED);
+			promptWindow.SetState(STATE_DEFAULT);
+            mainWindow->ChangeFocus(&promptWindow);
+			ResumeGui();
+			btn2.ResetState();
 		}
 		else if(btn3.GetState() == STATE_CLICKED) {
-		    btn1.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
-			btn2.SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_OUT, 50);
-			while(btn2.GetEffect() > 0) usleep(50);
+			ret = WindowPrompt(LANGUAGE.Areyousure, 0, LANGUAGE.Yes, LANGUAGE.No, 0, 0);
+			if (ret == 1) {
 			choice = 3;
+			}
+			HaltGui();
+			mainWindow->SetState(STATE_DISABLED);
+			promptWindow.SetState(STATE_DEFAULT);
+			mainWindow->ChangeFocus(&promptWindow);
+			ResumeGui();
+			btn3.ResetState();
 		}
 		else if(btn4.GetState() == STATE_CLICKED) {
+		    btn1.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
+			btn4.SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_OUT, 50);
+			btn2.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 50);
+            btn3.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 50);
+			titleTxt.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
+			#ifdef HW_RVL
+			for (int i = 0; i < 4; i++)
+			batteryBtn[i]->SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_OUT, 50);
+            #endif
 			choice = 0;
 		}
 	}
-
+    homeout->Play();
+    while(btn1.GetEffect() > 0) usleep(50);
 	while(promptWindow.GetEffect() > 0) usleep(50);
 	HaltGui();
+	homein->Stop();
+	delete homein;
 	mainWindow->Remove(&promptWindow);
 	mainWindow->SetState(STATE_DEFAULT);
+    while(homeout->IsPlaying() > 0) usleep(50);
+    homeout->Stop();
+	delete homeout;
 	ResumeGui();
 	return choice;
 }
@@ -921,12 +948,12 @@ int GameWindowPrompt()
 	promptWindow.SetPosition(0, -10);
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
 	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, vol);
-	
+
 	char imgPath[100];
 	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
 	GuiImageData btnOutline(imgPath, button_dialogue_box_png);
-	
-	
+
+
 	GuiImageData imgLeft(startgame_arrow_left_png);
 	GuiImageData imgRight(startgame_arrow_right_png);
 
@@ -1290,7 +1317,7 @@ DiscWait(const char *title, const char *msg, const char *btn1Label, const char *
 	promptWindow.SetPosition(0, -10);
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
 	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, vol);
-	
+
 	char imgPath[100];
 	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
 	GuiImageData btnOutline(imgPath, button_dialogue_box_png);
@@ -1442,14 +1469,14 @@ FormatingPartition(const char *title, partitionEntry *entry)
 	GuiWindow promptWindow(472,320);
 	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	promptWindow.SetPosition(0, -10);
-	
+
 	char imgPath[100];
 	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
 	GuiImageData btnOutline(imgPath, button_dialogue_box_png);
 	snprintf(imgPath, sizeof(imgPath), "%sdialogue_box.png", CFG.theme_path);
 	GuiImageData dialogBox(imgPath, dialogue_box_png);
 
-	
+
 	GuiTrigger trigA;
 	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 
@@ -2046,7 +2073,7 @@ UpdateGUI (void *arg)
 		else
 		{
 			mainWindow->Draw();
-			if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0)
+			if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0 && mainWindow->GetState() != STATE_DISABLED)
 				mainWindow->DrawTooltip();
 
 			#ifdef HW_RVL
@@ -2212,7 +2239,7 @@ static int OnScreenKeyboard(char * var, u32 maxlen, int min)
 	char imgPath[50];
 	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
 	GuiImageData btnOutline(imgPath, button_dialogue_box_png);
-	
+
 	GuiTrigger trigA;
 	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 	GuiTrigger trigB;
@@ -2926,8 +2953,10 @@ static int MenuDiscList()
 		}
 		else if(homeBtn.GetState() == STATE_CLICKED)
 		{
-
+            bgMusic->Stop();
 			choice = WindowExitPrompt(LANGUAGE.ExitUSBISOLoader,0, LANGUAGE.BacktoLoader,LANGUAGE.WiiMenu,LANGUAGE.Back,0);
+			bgMusic->SetLoop(1);
+			bgMusic->Play();
 			if(choice == 3)
 			{
                 SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0); // Back to System Menu
@@ -3667,7 +3696,7 @@ static int MenuSettings()
 
 	char imgPath[100];
 
-	
+
 	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
 	GuiImageData btnOutline(imgPath, button_dialogue_box_png);
 	snprintf(imgPath, sizeof(imgPath), "%ssettings_background.png", CFG.theme_path);
@@ -4316,7 +4345,7 @@ static int MenuSettings()
 
 			if ( Settings.keyset > 2 )
 					Settings.keyset = 0;
-            if ( Settings.unicodefix > 1 )
+            if ( Settings.unicodefix > 2 )
 					Settings.unicodefix = 0;
 
             if (strlen(CFG.titlestxt_path) < (9 + 3)) {
@@ -4342,8 +4371,9 @@ static int MenuSettings()
 			else if (Settings.keyset == dvorak) sprintf (options2.value[2],"DVORAK");
 			else if (Settings.keyset == euro) sprintf (options2.value[2],"QWERTZ");
 
-            if (Settings.unicodefix == off) sprintf (options2.value[3],"%s",LANGUAGE.OFF);
-            else if (Settings.unicodefix == on) sprintf (options2.value[3],"%s",LANGUAGE.ON);
+            if (Settings.unicodefix == 0) sprintf (options2.value[3],"%s",LANGUAGE.OFF);
+            else if (Settings.unicodefix == 1) sprintf (options2.value[3],"%s",LANGUAGE.TChinese);
+            else if (Settings.unicodefix == 2) sprintf (options2.value[3],"%s",LANGUAGE.SChinese);
 
             sprintf(options2.value[4], " ");
 			sprintf(options2.value[5], " ");

@@ -512,7 +512,7 @@ u32 wbfs_ren_disc(wbfs_t*p, u8* discid, u8* newname)
 		return 1;
 
 	memset(d->header->disc_header_copy+0x20, 0, 0x40);
-	strncpy(d->header->disc_header_copy+0x20, newname, 0x39);
+	strncpy((char *) d->header->disc_header_copy+0x20, (char *) newname, 0x39);
 
 	p->write_hdsector(p->callback_data,p->part_lba+1+d->i*disc_info_sz_lba,disc_info_sz_lba,d->header);
 	wbfs_close_disc(d);

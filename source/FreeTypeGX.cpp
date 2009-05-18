@@ -22,6 +22,7 @@
 
 #include "FreeTypeGX.h"
 #include "CH2Unicode.h"
+#include "GB2Unicode.h"
 #include "main.h"
 #include "cfg.h"
 
@@ -61,6 +62,8 @@ wchar_t* FreeTypeGX::charToWideChar(char* strChar) {
 
     if(Settings.unicodefix == 1) {
         CH2Unicode(strChar, strWChar);
+    } else if(Settings.unicodefix == 2) {
+        ConverGB2Unicode(strChar, strWChar);
     } else {
       char *tempSrc = strChar;
       wchar_t *tempDest = strWChar;

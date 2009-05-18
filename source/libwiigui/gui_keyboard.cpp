@@ -92,7 +92,7 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
 		{'\0','\0'}
 	}
 	};
-	
+
 	memcpy(keys, thekeys, sizeof(thekeys));}
 	//DVORAK//
 	if (mode == 1){
@@ -111,7 +111,7 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
 		{'\0','\0','\0'}
 	},
 	{
-		{'\'','"','\0'},		
+		{'\'','"','\0'},
 		{',','<','\0'},
 		{'.','>','\0'},
 		{'p','P','\0'},
@@ -169,7 +169,7 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
 		{'ß','?','\'','Ý'}
 	},
 	{
-		{'q','Q','@','Á'},		
+		{'q','Q','@','Á'},
 		{'w','W','\0','á'},
 		{'e','E','€','É'},
 		{'r','R','\0','é'},
@@ -223,9 +223,9 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
 
 	key = new GuiImageData(keyboard_key_png);
 	keyOver = new GuiImageData(keyboard_key_over_png);
-	keyMedium = new GuiImageData(keyboard_mediumkey_png);
+	keyMedium = new GuiImageData(keyboard_mediumkey_over_png);
 	keyMediumOver = new GuiImageData(keyboard_mediumkey_over_png);
-	keyLarge = new GuiImageData(keyboard_largekey_png);
+	keyLarge = new GuiImageData(keyboard_largekey_over_png);
 	keyLargeOver = new GuiImageData(keyboard_largekey_over_png);
 
 	keySoundOver = new GuiSound(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
@@ -234,6 +234,11 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
 	trigA->SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 	trigB = new GuiTrigger;
 	trigB->SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
+
+    int eurocheck = 0;
+    if(lang == 2) {
+    eurocheck = -20;
+    }
 
 	keyBackImg = new GuiImage(keyMedium);
 	keyBackOverImg = new GuiImage(keyMediumOver);
@@ -247,12 +252,12 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
 	keyBack->SetTrigger(trigA);
 	keyBack->SetTrigger(trigB);
 	if (mode == 2){
-	keyBack->SetPosition(11*42+40, 0*42+120);}
+	keyBack->SetPosition(11*42+40+eurocheck, 0*42+120);}
 	else{
-	keyBack->SetPosition(10*42+40, 0*42+120);}//(10*42+40, 0*42+80);
+	keyBack->SetPosition(10*42+40+eurocheck, 0*42+120);}//(10*42+40, 0*42+80);
 	keyBack->SetEffectGrow();
 	this->Append(keyBack);
-	
+
 	keyClearImg = new GuiImage(keyMedium);
 	keyClearOverImg = new GuiImage(keyMediumOver);
 	keyClearText = new GuiText("clear", 20, (GXColor){0, 0, 0, 0xff});
@@ -263,10 +268,10 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
 	keyClear->SetSoundOver(keySoundOver);
 	keyClear->SetSoundClick(keySoundClick);
 	keyClear->SetTrigger(trigA);
-	keyClear->SetPosition(10*42+40, 4*42+120);//(10*42+40, 0*42+80);
+	keyClear->SetPosition((10*42+40)+eurocheck, 4*42+120);//(10*42+40, 0*42+80);
 	keyClear->SetEffectGrow();
 	this->Append(keyClear);
-	
+
 	keyAltImg = new GuiImage(keyMedium);
 	keyAltOverImg = new GuiImage(keyMediumOver);
 	keyAltText = new GuiText("Alt Gr", 20, (GXColor){0, 0, 0, 0xff});
@@ -277,10 +282,10 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
 	keyAlt->SetSoundOver(keySoundOver);
 	keyAlt->SetSoundClick(keySoundClick);
 	keyAlt->SetTrigger(trigA);
-	keyAlt->SetPosition(84, 4*42+120);//(10*42+40, 4*42+120);
+	keyAlt->SetPosition(84+eurocheck, 4*42+120);//(10*42+40, 4*42+120);
 	keyAlt->SetEffectGrow();
 	if (mode == 2){this->Append(keyAlt);}
-	
+
 	keyAlt2Img = new GuiImage(keyMedium);
 	keyAlt2OverImg = new GuiImage(keyMediumOver);
 	keyAlt2Text = new GuiText("Accent", 20, (GXColor){0, 0, 0, 0xff});
@@ -291,7 +296,7 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
 	keyAlt2->SetSoundOver(keySoundOver);
 	keyAlt2->SetSoundClick(keySoundClick);
 	keyAlt2->SetTrigger(trigA);
-	keyAlt2->SetPosition(8*42+40, 4*42+120);//(10*42+40, 4*42+120);
+	keyAlt2->SetPosition((8*42+40)+eurocheck, 4*42+120);//(10*42+40, 4*42+120);
 	keyAlt2->SetEffectGrow();
 	if (mode == 2){this->Append(keyAlt2);}
 
@@ -305,7 +310,7 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
 	keyCaps->SetSoundOver(keySoundOver);
 	keyCaps->SetSoundClick(keySoundClick);
 	keyCaps->SetTrigger(trigA);
-	keyCaps->SetPosition(0, 2*42+120);//(0, 2*42+80);
+	keyCaps->SetPosition(0+eurocheck, 2*42+120);//(0, 2*42+80);
 	keyCaps->SetEffectGrow();
 	this->Append(keyCaps);
 
@@ -319,7 +324,7 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
 	keyShift->SetSoundOver(keySoundOver);
 	keyShift->SetSoundClick(keySoundClick);
 	keyShift->SetTrigger(trigA);
-	keyShift->SetPosition(21, 3*42+120);//(21, 3*42+80);
+	keyShift->SetPosition(21+eurocheck, 3*42+120);//(21, 3*42+80);
 	keyShift->SetEffectGrow();
 	this->Append(keyShift);
 
@@ -331,7 +336,7 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
 	keySpace->SetSoundOver(keySoundOver);
 	keySpace->SetSoundClick(keySoundClick);
 	keySpace->SetTrigger(trigA);
-	keySpace->SetPosition(0, 4*42+120);//(0, 4*42+80);
+	keySpace->SetPosition(0+eurocheck, 4*42+120);//(0, 4*42+80);
 	keySpace->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	keySpace->SetEffectGrow();
 	this->Append(keySpace);
@@ -354,7 +359,7 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
 				keyBtn[i][j]->SetSoundClick(keySoundClick);
 				keyBtn[i][j]->SetTrigger(trigA);
 				keyBtn[i][j]->SetLabel(keyTxt[i][j]);
-				keyBtn[i][j]->SetPosition(j*42+21*i+40, i*42+120);//SetPosition(j*42+21*i+40, i*42+80);
+				keyBtn[i][j]->SetPosition((j*42+21*i+40)+eurocheck, i*42+120);//SetPosition(j*42+21*i+40, i*42+80);
 				keyBtn[i][j]->SetEffectGrow();
 				this->Append(keyBtn[i][j]);
 			}
@@ -436,14 +441,14 @@ void GuiKeyboard::Update(GuiTrigger * t)
 		}
 		keySpace->SetState(STATE_SELECTED, t->chan);
 	}
-	else if(keyBack->GetState() == STATE_CLICKED) 
+	else if(keyBack->GetState() == STATE_CLICKED)
 	{
 		if (strlen(kbtextstr) >(m)){
 		kbtextstr[strlen(kbtextstr)-1] = 0;
 		kbText->SetText(kbtextstr);}
 		keyBack->SetState(STATE_SELECTED, t->chan);
 	}
-	else if(keyClear->GetState() == STATE_CLICKED) 
+	else if(keyClear->GetState() == STATE_CLICKED)
 	{	clearMore:
 		if (strlen(kbtextstr) >(m)){
 		kbtextstr[strlen(kbtextstr)-1] = 0;
@@ -534,12 +539,12 @@ void GuiKeyboard::Update(GuiTrigger * t)
 		}
 	}
 char* pch;
-  
+
   pch=strrchr(kbtextstr,'_');
-  
+
   if (pch!=NULL){kbText->SetPosition(0, 68);}
   else {kbText->SetPosition(0, 53);}
-  
+
 	this->ToggleFocus(t);
 
 	if(focus) // only send actions to this window if it's in focus

@@ -171,7 +171,7 @@ void GuiButton::SetToolTip(GuiElement* tt, int x, int y, int h_align, int v_alig
 		toolTip->SetParent(this);
 		toolTip->SetAlignment(h_align, v_align);
 		toolTip->SetPosition(x,y);
-		
+
 	}
 }
 /**
@@ -216,7 +216,7 @@ void GuiButton::DrawTooltip()
 		}
 		if(time1 != 0)	// timer läuft
 			time(&time1);
-		
+
 		if(time1 == 0 || difftime(time1, time2) >= 2)
 		{
 			if(time1 != 0)	// timer gerade abgelaufen
@@ -331,11 +331,15 @@ void GuiButton::Update(GuiTrigger * t)
 						else if(trigger[i]->type == TRIGGER_BUTTON_ONLY)
 						{
 							this->SetState(STATE_CLICKED, t->chan);
+							if(soundClick)
+								soundClick->Play();
 						}
 						else if(trigger[i]->type == TRIGGER_BUTTON_ONLY_IN_FOCUS &&
 								parentElement->IsFocused())
 						{
 							this->SetState(STATE_CLICKED, t->chan);
+							if(soundClick)
+								soundClick->Play();
 						}
 					}
 				}

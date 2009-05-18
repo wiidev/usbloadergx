@@ -26,6 +26,12 @@ extern const u32	bg_music_ogg_size;
 extern const u8		credits_music_ogg[];
 extern const u32	credits_music_ogg_size;
 
+extern const u8		menuin_ogg[];
+extern const u32	menuin_ogg_size;
+
+extern const u8		menuout_ogg[];
+extern const u32	menuout_ogg_size;
+
 extern const u8		tab_bg1_png[];
 extern const u32	tab_bg1_png_size;
 
@@ -134,14 +140,8 @@ extern const u32	keyboard_key_png_size;
 extern const u8		keyboard_key_over_png[];
 extern const u32	keyboard_key_over_png_size;
 
-extern const u8		keyboard_mediumkey_png[];
-extern const u32	keyboard_mediumkey_png_size;
-
 extern const u8		keyboard_mediumkey_over_png[];
 extern const u32	keyboard_mediumkey_over_png_size;
-
-extern const u8		keyboard_largekey_png[];
-extern const u32	keyboard_largekey_png_size;
 
 extern const u8		keyboard_largekey_over_png[];
 extern const u32	keyboard_largekey_over_png_size;
