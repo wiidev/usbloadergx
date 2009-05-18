@@ -1,7 +1,7 @@
 //GB2Unicode.c
 
 
-#include "Gb2Unicode.h"
+#include "GB2Unicode.h"
 
 
 
@@ -988,10 +988,10 @@ int ConverGB2Unicode(char *szFrom,wchar_t *wszTo)
 			if (j>=0xB0A1 && j<=0xF7FE)
 					wszTo[k]=bGbUnicodedat2[(szFrom[i]-0xB0)*94+ (unsigned char)szFrom[i+1]-0xA1];
 			i++;
-			k++;								
+			k++;
 		}
 	}
-	wszTo[k]=0; 
-	return k;	
+	wszTo[k]=0;
+	return k;
 }
 
