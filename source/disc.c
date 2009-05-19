@@ -136,7 +136,7 @@ void __Disc_SetVMode(u8 videoselected)
 void __Disc_SetTime(void)
 {
 	/* Extern */
-	extern void settime(long long);
+	extern void settime(u64);
 
 	/* Set proper time */
 	settime(secs_to_ticks(time(NULL) - 946684800));

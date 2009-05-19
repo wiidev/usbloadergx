@@ -1978,11 +1978,8 @@ ProgressDownloadWindow(int choice2)
 
 	while (i < cntMissFiles) {
 
-
-
 	sprintf(prozent, "%i%%", 100*i/cntMissFiles);
 	prTxt.SetText(prozent);
-	//prTxt.SetFont(fontClock);
 
 	if ((Settings.wsprompt == yes) && (CFG.widescreen)){/////////////adjust for widescreen
 		progressbarImg.SetPosition(80,40);
@@ -2024,13 +2021,10 @@ ProgressDownloadWindow(int choice2)
         // save png to sd card
         FILE *pfile;
         pfile = fopen(imgPath, "wb");
-		if (!pfile)
-			return -1;
         fwrite(file.data,1,file.size,pfile);
         fclose (pfile);
         free(file.data);
     }
-
     i++;
     }
 

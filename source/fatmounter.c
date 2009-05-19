@@ -1,9 +1,10 @@
 #include <fat.h>
+#include <sys/dir.h>
 #include <ogc/lwp_watchdog.h>
 #include <ogc/mutex.h>
+#include <ogc/system.h>
 #include <ogc/usbstorage.h>
 #include <sdcard/wiisd_io.h>
-#include <sys/dir.h>
 
 #define CACHE 8
 
@@ -13,7 +14,7 @@ int USBDevice_Init()
     //right now only mounts first partition and only under IOS36
     __io_usbstorage.startup();
 
-    if (fatMount("USB", &__io_usbstorage, 0, CACHE)) {
+    if (fatMountSimple("USB", &__io_usbstorage)) {
     return 1;
     }
 
