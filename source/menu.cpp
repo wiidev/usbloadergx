@@ -2829,11 +2829,11 @@ static int MenuDiscList()
     HaltGui();
 	GuiWindow w(screenwidth, screenheight);
 
-	if((Settings.hddinfo == HDDInfo && THEME.showHDD == -1) || THEME.showHDD == 1) //force show hdd info
+	if(THEME.showHDD == -1 || THEME.showHDD == 1) //force show hdd info
 	{
 		w.Append(&usedSpaceTxt);
 	}
-	if((Settings.hddinfo == HDDInfo && THEME.showGameCnt == -1) || THEME.showGameCnt == 1) //force show game cnt info
+	if(THEME.showGameCnt == -1 || THEME.showGameCnt == 1) //force show game cnt info
 	{
 		w.Append(&gamecntTxt);
 	}
