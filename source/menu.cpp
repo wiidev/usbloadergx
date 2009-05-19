@@ -2699,7 +2699,7 @@ static int MenuDiscList()
 	homeBtn.SetImage(&homeBtnImg);
 	homeBtn.SetImageOver(&homeBtnImgOver);
 	homeBtn.SetSoundOver(&btnSoundOver);
-	homeBtn.SetSoundClick(&btnClick);
+	//homeBtn.SetSoundClick(&btnClick);
 	homeBtn.SetTrigger(&trigA);
 	homeBtn.SetTrigger(&trigHome);
 	homeBtn.SetEffectGrow();
@@ -2769,6 +2769,7 @@ static int MenuDiscList()
     }
 	else
 		DownloadBtn.SetRumble(false);
+	/*
 	#ifdef HW_RVL
 	int i = 0, level;
 	char txt[3];
@@ -2809,6 +2810,7 @@ static int MenuDiscList()
 	batteryBtn[2]->SetPosition(THEME.battery3_x, THEME.battery3_y);
 	batteryBtn[3]->SetPosition(THEME.battery4_x, THEME.battery4_y);
 	#endif
+	*/
 
 	GuiGameBrowser gameBrowser(THEME.selection_w, THEME.selection_h, gameList, gameCnt, CFG.theme_path, bg_options_png, startat, offset);
 	gameBrowser.SetPosition(THEME.selection_x, THEME.selection_y);
@@ -2849,7 +2851,7 @@ static int MenuDiscList()
 		w.Append(&clockTimeBack);
 		w.Append(&clockTime);
     }
-
+	/*
 	if (THEME.showBattery)
 	{
 		#ifdef HW_RVL
@@ -2859,7 +2861,7 @@ static int MenuDiscList()
 		w.Append(batteryBtn[3]);
 		#endif
 	}
-
+	*/
     mainWindow->Append(&gameBrowser);
     mainWindow->Append(&w);
 
@@ -2897,7 +2899,7 @@ static int MenuDiscList()
 			//////////////////////end clock code//////////////////////////////
 																																																																																										if ((datagB<1)&&(Settings.cios==1)&&(Settings.video == ntsc)&&(Settings.hddinfo == Clock)&&(Settings.qboot==1)&&(Settings.wsprompt==0)&&(Settings.language==ger)&&(Settings.tooltips==0)){dataed=1;dataef=1;}if (dataef==1){if (cosa>7){cosa=1;}datag++;if (sina==3){wiiBtn.SetAlignment(ALIGN_LEFT,ALIGN_BOTTOM);wiiBtnImg.SetAngle(0);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((cosa)*70),(-2*(datag)+120));}else if(62<=datag){wiiBtn.SetPosition(((cosa)*70),((datag*2)-130));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==2){wiiBtn.SetAlignment(ALIGN_RIGHT,ALIGN_TOP);wiiBtnImg.SetAngle(270);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((-2*(datag)+130)),((cosa)*50));}else if(62<=datag){wiiBtn.SetPosition((2*(datag)-120),((cosa)*50));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==1){wiiBtn.SetAlignment(ALIGN_TOP,ALIGN_LEFT);wiiBtnImg.SetAngle(180);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((cosa)*70),(2*(datag)-120));}else if(62<=datag){wiiBtn.SetPosition(((cosa)*70),(-2*(datag)+130));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==0){wiiBtn.SetAlignment(ALIGN_TOP,ALIGN_LEFT);wiiBtnImg.SetAngle(90);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((2*(datag)-130)),((cosa)*50));}else if(62<=datag){wiiBtn.SetPosition((-2*(datag)+120),((cosa)*50));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}}
 
-
+		/*
 	    #ifdef HW_RVL
 		for(i=0; i < 4; i++)
 		{
@@ -2922,6 +2924,7 @@ static int MenuDiscList()
 			}
 		}
 		#endif
+		*/
 			// respond to button presses
 		if(shutdown == 1)
 		{
@@ -3038,7 +3041,7 @@ static int MenuDiscList()
 
 					{
 						char tempCnt[40];
-						i = 0;
+						//i = 0;
 
 						sprintf(tempCnt,"%i %s",cntMissFiles,LANGUAGE.Missingfiles);
 						choice = WindowPrompt(LANGUAGE.DownloadBoxartimage,tempCnt,LANGUAGE.Yes,LANGUAGE.No,0,0);
@@ -3418,7 +3421,7 @@ static int MenuDiscList()
 	}
 
     HaltGui();
-
+	/*
 	#ifdef HW_RVL
 	for(i=0; i < 4; i++)
 	{
@@ -3428,7 +3431,7 @@ static int MenuDiscList()
 		delete batteryBtn[i];
 	}
 	#endif
-
+	*/
 	mainWindow->Remove(&gameBrowser);
 	mainWindow->Remove(&w);
 	ResumeGui();
