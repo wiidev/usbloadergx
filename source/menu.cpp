@@ -684,6 +684,7 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 	GuiImageData bottomOver(exit_bottom_over_png);
 	GuiImageData button(exit_button_png);
 	GuiImageData wiimote(wiimote_png);
+	GuiImageData close(closebutton_png);
 
 	snprintf(imgPath, sizeof(imgPath), "%sbattery_white.png", CFG.theme_path);
 	GuiImageData battery(imgPath, battery_white_png);
@@ -742,17 +743,25 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 	trigHome.SetButtonOnlyTrigger(-1, WPAD_BUTTON_HOME | WPAD_CLASSIC_BUTTON_HOME, 0);
 
 	GuiText titleTxt("HOME Menu", 36, (GXColor){255, 255, 255, 255});
-	titleTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	titleTxt.SetPosition(50,40);
+	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	titleTxt.SetPosition(-180,40);
 	titleTxt.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
 
-	GuiText btn1Txt("Close", 28, (GXColor){0, 0, 0, 255});
-	btn1Txt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-	btn1Txt.SetPosition(214,17);
+	GuiText btn1Txt("  Close", 28, (GXColor){0, 0, 0, 255});
+	GuiImage closeImg(&close);
+	if (Settings.wsprompt == yes){
+	closeImg.SetWidescreen(CFG.widescreen);}///////////
+	GuiButton closeBtn(close.GetWidth(), close.GetHeight());
+	closeBtn.SetImage(&closeImg);
+	closeBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	closeBtn.SetPosition(205,42);
+	closeBtn.SetLabel(&btn1Txt);
+	closeBtn.SetRumble(false);
+	closeBtn.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
+	
 	GuiImage btn1Img(&top);
 	GuiImage btn1OverImg(&topOver);
 	GuiButton btn1(top.GetWidth(), top.GetHeight());
-	btn1.SetLabel(&btn1Txt);
 	btn1.SetImage(&btn1Img);
 	btn1.SetImageOver(&btn1OverImg);
 	btn1.SetSoundOver(&btnSoundOver);
@@ -819,6 +828,7 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
     promptWindow.Append(&btn3);
     promptWindow.Append(&btn4);
     promptWindow.Append(&btn1);
+	promptWindow.Append(&closeBtn);
 	promptWindow.Append(&titleTxt);
 	promptWindow.Append(&wiimoteImg);
 
@@ -874,7 +884,8 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 			Sys_Reboot();
 		if(btn1.GetState() == STATE_CLICKED) {
 			choice = 1;
-            btn1.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
+			btn1.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
+			closeBtn.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
 			btn4.SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_OUT, 50);
             btn2.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 50);
             btn3.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 50);
@@ -915,6 +926,7 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 		}
 		else if(btn4.GetState() == STATE_CLICKED) {
 		    btn1.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
+			closeBtn.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
 			btn4.SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_OUT, 50);
 			btn2.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 50);
             btn3.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 50);

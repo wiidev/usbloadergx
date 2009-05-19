@@ -17,6 +17,9 @@ extern const u32	font_ttf_size;
 extern const u8		clock_ttf[];
 extern const u32	clock_ttf_size;
 
+extern const u8		closebutton_png[];
+extern const u32	closebutton_png_size;
+
 extern const u8		sdcard_png[];
 extern const u32	sdcard_png_size;
 
