@@ -20,6 +20,9 @@ extern const u32	clock_ttf_size;
 extern const u8		sdcard_png[];
 extern const u32	sdcard_png_size;
 
+extern const u8		wiimote_png[];
+extern const u32	wiimote_png_size;
+
 extern const u8		bg_music_ogg[];
 extern const u32	bg_music_ogg_size;
 

@@ -683,6 +683,7 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 	GuiImageData bottom(exit_bottom_png);
 	GuiImageData bottomOver(exit_bottom_over_png);
 	GuiImageData button(exit_button_png);
+	GuiImageData wiimote(wiimote_png);
 
 	snprintf(imgPath, sizeof(imgPath), "%sbattery_white.png", CFG.theme_path);
 	GuiImageData battery(imgPath, battery_white_png);
@@ -807,12 +808,19 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 
 	btn2Txt.SetFontSize(22);
 	btn3Txt.SetFontSize(22);
+	
+	GuiImage wiimoteImg(&wiimote);
+	if (Settings.wsprompt == yes){wiimoteImg.SetWidescreen(CFG.widescreen);}
+	wiimoteImg.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+	wiimoteImg.SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_IN, 50);
+	wiimoteImg.SetPosition(50,210);
 
 	promptWindow.Append(&btn2);
     promptWindow.Append(&btn3);
     promptWindow.Append(&btn4);
     promptWindow.Append(&btn1);
 	promptWindow.Append(&titleTxt);
+	promptWindow.Append(&wiimoteImg);
 
 	#ifdef HW_RVL
 	promptWindow.Append(batteryBtn[0]);
@@ -871,10 +879,15 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
             btn2.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 50);
             btn3.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 50);
 			titleTxt.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
+			wiimoteImg.SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_OUT, 50);
 			#ifdef HW_RVL
 			for (int i = 0; i < 4; i++)
 			batteryBtn[i]->SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_OUT, 50);
             #endif
+		}
+		else if(btn4.GetState() == STATE_SELECTED)
+		{
+			wiimoteImg.SetPosition(50,165);
 		}
 		else if(btn2.GetState() == STATE_CLICKED) {
             ret = WindowPrompt(LANGUAGE.Areyousure, 0, LANGUAGE.Yes, LANGUAGE.No, 0, 0);
@@ -906,11 +919,16 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 			btn2.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 50);
             btn3.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 50);
 			titleTxt.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
+			wiimoteImg.SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_OUT, 50);
 			#ifdef HW_RVL
 			for (int i = 0; i < 4; i++)
 			batteryBtn[i]->SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_OUT, 50);
             #endif
 			choice = 0;
+		}
+		else if(btn4.GetState() != STATE_SELECTED)
+		{
+			wiimoteImg.SetPosition(50,210);
 		}
 	}
     homeout->Play();
