@@ -952,11 +952,11 @@ int GameWindowPrompt()
 	char imgPath[100];
 	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
 	GuiImageData btnOutline(imgPath, button_dialogue_box_png);
-
-
-	GuiImageData imgLeft(startgame_arrow_left_png);
-	GuiImageData imgRight(startgame_arrow_right_png);
-
+	
+	snprintf(imgPath, sizeof(imgPath), "%sstartgame_arrow_left.png", CFG.theme_path);
+	GuiImageData imgLeft(imgPath, startgame_arrow_left_png);
+	snprintf(imgPath, sizeof(imgPath), "%sstartgame_arrow_right.png", CFG.theme_path);
+	GuiImageData imgRight(imgPath, startgame_arrow_right_png);
 
 	GuiTrigger trigA;
 	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
@@ -1763,20 +1763,27 @@ ProgressWindow(const char *title, const char *msg)
 	if (Settings.wsprompt == yes){
 	dialogBoxImg.SetWidescreen(CFG.widescreen);}
 
-	GuiImageData progressbarOutline(progressbar_outline_png);
+	snprintf(imgPath, sizeof(imgPath), "%sprogressbar_outline.png", CFG.theme_path);
+	GuiImageData progressbarOutline(imgPath, progressbar_outline_png);
+	
+	//GuiImageData progressbarOutline(progressbar_outline_png);
 	GuiImage progressbarOutlineImg(&progressbarOutline);
 	if (Settings.wsprompt == yes){
 	progressbarOutlineImg.SetWidescreen(CFG.widescreen);}
 	progressbarOutlineImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 	progressbarOutlineImg.SetPosition(25, 40);
 
-	GuiImageData progressbarEmpty(progressbar_empty_png);
+	snprintf(imgPath, sizeof(imgPath), "%sprogressbar_empty.png", CFG.theme_path);
+	GuiImageData progressbarEmpty(imgPath, progressbar_empty_png);
+	//GuiImageData progressbarEmpty(progressbar_empty_png);
 	GuiImage progressbarEmptyImg(&progressbarEmpty);
 	progressbarEmptyImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 	progressbarEmptyImg.SetPosition(25, 40);
 	progressbarEmptyImg.SetTile(100);
 
-	GuiImageData progressbar(progressbar_png);
+	snprintf(imgPath, sizeof(imgPath), "%sprogressbar.png", CFG.theme_path);
+	GuiImageData progressbar(imgPath, progressbar_png);
+	//GuiImageData progressbar(progressbar_png);
 
 	progressbarImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 	progressbarImg.SetPosition(25, 40);
@@ -1882,20 +1889,26 @@ ProgressDownloadWindow(int choice2)
 	if (Settings.wsprompt == yes){
 	dialogBoxImg.SetWidescreen(CFG.widescreen);}
 
-	GuiImageData progressbarOutline(progressbar_outline_png);
+	snprintf(imgPath, sizeof(imgPath), "%sprogressbar_outline.png", CFG.theme_path);
+	GuiImageData progressbarOutline(imgPath, progressbar_outline_png);
+	//GuiImageData progressbarOutline(progressbar_outline_png);
 	GuiImage progressbarOutlineImg(&progressbarOutline);
 	if (Settings.wsprompt == yes){
 	progressbarOutlineImg.SetWidescreen(CFG.widescreen);}
 	progressbarOutlineImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 	progressbarOutlineImg.SetPosition(25, 40);
 
-	GuiImageData progressbarEmpty(progressbar_empty_png);
+	snprintf(imgPath, sizeof(imgPath), "%sprogressbar_empty.png", CFG.theme_path);
+	GuiImageData progressbarEmpty(imgPath, progressbar_empty_png);
+	//GuiImageData progressbarEmpty(progressbar_empty_png);
 	GuiImage progressbarEmptyImg(&progressbarEmpty);
 	progressbarEmptyImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 	progressbarEmptyImg.SetPosition(25, 40);
 	progressbarEmptyImg.SetTile(100);
 
-	GuiImageData progressbar(progressbar_png);
+	snprintf(imgPath, sizeof(imgPath), "%sprogressbar.png", CFG.theme_path);
+	GuiImageData progressbar(imgPath, progressbar_png);
+	//GuiImageData progressbar(progressbar_png);
 	progressbarImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 	progressbarImg.SetPosition(25, 40);
 
@@ -3833,7 +3846,7 @@ static int MenuSettings()
 	btnLogo->SetUpdateCallback(WindowCredits);
 
 	customOptionList options2(9);
-	GuiCustomOptionBrowser optionBrowser2(396, 280, &options2, CFG.theme_path, "bg_options_settings", bg_options_settings_png, 0, 200);
+	GuiCustomOptionBrowser optionBrowser2(396, 280, &options2, CFG.theme_path, "bg_options_settings.png", bg_options_settings_png, 0, 200);
 	optionBrowser2.SetPosition(0, 90);
 	optionBrowser2.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	optionBrowser2.SetCol2Position(200);
@@ -4704,10 +4717,10 @@ int GameSettings(struct discHdr * header)
 	deleteBtn.SetTrigger(&trigA);
 	deleteBtn.SetEffectGrow();
 
-	GuiCustomOptionBrowser optionBrowser3(396, 280, &options3, CFG.theme_path, "bg_options_gamesettings", bg_options_settings_png, 0, 150);
+	GuiCustomOptionBrowser optionBrowser3(396, 280, &options3, CFG.theme_path, "bg_options_gamesettings.png", bg_options_settings_png, 0, 200);
 	optionBrowser3.SetPosition(0, 90);
 	optionBrowser3.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	optionBrowser3.SetCol2Position(150);
+	optionBrowser3.SetCol2Position(200);
 
     HaltGui();
 	GuiWindow w(screenwidth, screenheight);
@@ -5010,10 +5023,10 @@ int MenuMp3()
     } else {
     scrollon = 1;
     }
-	GuiCustomOptionBrowser optionBrowser4(396, 280, &options2, CFG.theme_path, "bg_options_settings", bg_options_settings_png, scrollon, 50);
+	GuiCustomOptionBrowser optionBrowser4(396, 280, &options2, CFG.theme_path, "bg_options_settings.png", bg_options_settings_png, scrollon, 85);
 	optionBrowser4.SetPosition(0, 90);
 	optionBrowser4.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	optionBrowser4.SetCol2Position(65);
+	optionBrowser4.SetCol2Position(85);
 
     GuiText cancelBtnTxt(LANGUAGE.Back, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	cancelBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
