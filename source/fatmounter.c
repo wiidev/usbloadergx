@@ -6,7 +6,8 @@
 #include <ogc/usbstorage.h>
 #include <sdcard/wiisd_io.h>
 
-#define CACHE 8
+#define CACHE 4
+#define SECTORS 64
 
 
 int USBDevice_Init()
@@ -14,7 +15,7 @@ int USBDevice_Init()
     //right now only mounts first partition and only under IOS36
     __io_usbstorage.startup();
 
-    if (fatMountSimple("USB", &__io_usbstorage)) {
+    if (fatMount("USB", &__io_usbstorage, 0, CACHE, SECTORS)) {
     return 1;
     }
 
@@ -41,7 +42,7 @@ int SDCard_Init()
     if (!isSdInserted()){
         return -1;
     }
-    if (fatMountSimple("SD", &__io_wiisd)) {
+    if (fatMount("SD", &__io_wiisd, 0, CACHE, SECTORS)) {
         return 1;
     }
 return -1;
