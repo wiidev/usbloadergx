@@ -131,6 +131,8 @@ class GuiSound
 		~GuiSound();
 		//!Start sound playback
 		void Play();
+		//!Start sound playback from ogg file
+		int PlayOggFile(char * path);
 		//!Stop sound playback
 		void Stop();
 		//!Pause sound playback
@@ -146,6 +148,11 @@ class GuiSound
 		//!Set the sound to loop playback (only applies to OGG)
 		//!\param l Loop (true to loop)
 		void SetLoop(bool l);
+		//!Get the playing time in ms for that moment (only applies to OGG)
+		s32 GetPlayTime();
+		//!Set the starting point or playtime for skipping (only applies to OGG)
+		//!\param time in ms
+		void SetPlayTime(s32 time);
 	protected:
 		const u8 * sound; //!< Pointer to the sound data
 		int type; //!< Sound format type (SOUND_PCM or SOUND_OGG)

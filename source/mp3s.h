@@ -6,7 +6,7 @@ extern "C"
 {
 #endif
 
-char mp3files[500][80];
+char mp3files[300][70];
 
 void StopMp3();
 void SetMp3Volume(u32 vol);

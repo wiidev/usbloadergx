@@ -17,6 +17,8 @@ struct LANGUAGE
 	char Areyousure[50];
 	char AutoPatch[20];
 	char Back[20];
+	char Backgroundmusic[80];
+	char Backgroundmusicpath[100];
 	char BacktoHBCorWiiMenu[50];
 	char BacktoLoader[50];
 	char BacktoWiiMenu[50];
@@ -97,6 +99,7 @@ struct LANGUAGE
 	char LikeSysMenu[50];
 	char LoadingincIOS[50];
 	char Loadingstandardlanguage[80];
+	char Loadingstandardmusic[80];
 	char Lock[30];
 	char LockConsole[50];
 	char MP3Menu[40];
@@ -116,6 +119,7 @@ struct LANGUAGE
 	char NotaWiiDisc[40];
 	char NoUSBDevicefound[50];
 	char Notenoughfreespace[50];
+	char Notasupportedformat[100];
 	char notset[40];
 	char of[30];
 	char OFF[30];
@@ -148,6 +152,8 @@ struct LANGUAGE
 	char SelectthePartition[50];
 	char youwanttoformat[50];
 	char settings[50];
+	char Setasbackgroundmusic[90];
+	char Standard[30];
 	char ShutdowntoIdle[50];
 	char ShutdownSystem[50];
 	char Success[30];

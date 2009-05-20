@@ -35,6 +35,8 @@ snprintf(LANGUAGE.t3Covers, sizeof(LANGUAGE.t3Covers), "3D Covers");
 snprintf(LANGUAGE.Areyousure, sizeof(LANGUAGE.Areyousure), "Are you sure?");
 snprintf(LANGUAGE.AutoPatch, sizeof(LANGUAGE.AutoPatch), "AutoPatch");
 snprintf(LANGUAGE.Back, sizeof(LANGUAGE.Back), "Back");
+snprintf(LANGUAGE.Backgroundmusic, sizeof(LANGUAGE.Backgroundmusic), "Backgroundmusic");
+snprintf(LANGUAGE.Backgroundmusicpath, sizeof(LANGUAGE.Backgroundmusicpath), "Backgroundmusic Path changed.");
 snprintf(LANGUAGE.BacktoHBCorWiiMenu, sizeof(LANGUAGE.BacktoHBCorWiiMenu), "Back to HBC or Wii Menu");
 snprintf(LANGUAGE.BacktoLoader, sizeof(LANGUAGE.BacktoLoader), "Back to Loader");
 snprintf(LANGUAGE.BacktoWiiMenu, sizeof(LANGUAGE.BacktoWiiMenu), "Back to Wii Menu");
@@ -107,13 +109,13 @@ snprintf(LANGUAGE.Gameisalreadyinstalled, sizeof(LANGUAGE.Gameisalreadyinstalled
 snprintf(LANGUAGE.GameRegion, sizeof(LANGUAGE.GameRegion), "Game Region");
 snprintf(LANGUAGE.GameSize, sizeof(LANGUAGE.GameSize), "Game Size");
 snprintf(LANGUAGE.GoBack, sizeof(LANGUAGE.GoBack), "Go Back");
-//snprintf(LANGUAGE.GotoPage, sizeof(LANGUAGE.GotoPage), "Go to Page");
 snprintf(LANGUAGE.HowtoShutdown, sizeof(LANGUAGE.HowtoShutdown), "How to Shutdown?");
 snprintf(LANGUAGE.Language, sizeof(LANGUAGE.Language), "Game Language");
 snprintf(LANGUAGE.Left, sizeof(LANGUAGE.Left), "Left");
 snprintf(LANGUAGE.LikeSysMenu, sizeof(LANGUAGE.LikeSysMenu), "Like SysMenu");
 snprintf(LANGUAGE.LoadingincIOS, sizeof(LANGUAGE.LoadingincIOS), "Loading in cIOS249");
 snprintf(LANGUAGE.Loadingstandardlanguage, sizeof(LANGUAGE.Loadingstandardlanguage), "Loading standard language.");
+snprintf(LANGUAGE.Loadingstandardmusic, sizeof(LANGUAGE.Loadingstandardmusic), "Loading standard music.");
 snprintf(LANGUAGE.Lock, sizeof(LANGUAGE.Lock), "Lock");
 snprintf(LANGUAGE.LockConsole, sizeof(LANGUAGE.LockConsole), "Lock Console");
 snprintf(LANGUAGE.MP3Menu, sizeof(LANGUAGE.MP3Menu), "MP3 Menu");
@@ -133,6 +135,7 @@ snprintf(LANGUAGE.Normal, sizeof(LANGUAGE.Normal), "Normal");
 snprintf(LANGUAGE.NotaWiiDisc, sizeof(LANGUAGE.NotaWiiDisc), "Not a Wii Disc");
 snprintf(LANGUAGE.NoUSBDevicefound, sizeof(LANGUAGE.NoUSBDevicefound), "No USB Device found.");
 snprintf(LANGUAGE.Notenoughfreespace, sizeof(LANGUAGE.Notenoughfreespace), "Not enough free space!");
+snprintf(LANGUAGE.Notasupportedformat, sizeof(LANGUAGE.Notasupportedformat), "Not supported format!");
 snprintf(LANGUAGE.notset, sizeof(LANGUAGE.notset), "not set");
 snprintf(LANGUAGE.of, sizeof(LANGUAGE.of), "of");
 snprintf(LANGUAGE.OFF, sizeof(LANGUAGE.OFF), "OFF");
@@ -161,9 +164,11 @@ snprintf(LANGUAGE.Specialthanksto, sizeof(LANGUAGE.Specialthanksto), "Special th
 snprintf(LANGUAGE.For, sizeof(LANGUAGE.For), "for");
 snprintf(LANGUAGE.theUSBLoaderandreleasingthesourcecode, sizeof(LANGUAGE.theUSBLoaderandreleasingthesourcecode), "and releasing the source code");
 snprintf(LANGUAGE.secondsleft, sizeof(LANGUAGE.secondsleft), "seconds left");
+snprintf(LANGUAGE.Setasbackgroundmusic, sizeof(LANGUAGE.Setasbackgroundmusic), "Set as backgroundmusic?");
 snprintf(LANGUAGE.SelectthePartition, sizeof(LANGUAGE.SelectthePartition), "Select the Partition");
 snprintf(LANGUAGE.Specialthanksto, sizeof(LANGUAGE.Specialthanksto), "Special thanks to");
 snprintf(LANGUAGE.youwanttoformat, sizeof(LANGUAGE.youwanttoformat), "you want to format");
+snprintf(LANGUAGE.Standard, sizeof(LANGUAGE.Standard), "Standard");
 snprintf(LANGUAGE.settings, sizeof(LANGUAGE.settings), "Settings");
 snprintf(LANGUAGE.ShutdowntoIdle, sizeof(LANGUAGE.ShutdowntoIdle), "Shutdown to Idle");
 snprintf(LANGUAGE.ShutdownSystem, sizeof(LANGUAGE.ShutdownSystem), "Shutdown System");
@@ -242,6 +247,14 @@ void language_set(char *name, char *val)
 	}
 	if (strcmp(name, "Back") == 0) {
 		strcopy(LANGUAGE.Back, val, sizeof(LANGUAGE.Back));
+		return;
+	}
+	if (strcmp(name, "Backgroundmusic") == 0) {
+		strcopy(LANGUAGE.Backgroundmusic, val, sizeof(LANGUAGE.Backgroundmusic));
+		return;
+	}
+	if (strcmp(name, "Backgroundmusicpath") == 0) {
+		strcopy(LANGUAGE.Backgroundmusicpath, val, sizeof(LANGUAGE.Backgroundmusicpath));
 		return;
 	}
 	if (strcmp(name, "BacktoHBCorWiiMenu") == 0) {
@@ -569,6 +582,10 @@ void language_set(char *name, char *val)
 		strcopy(LANGUAGE.Loadingstandardlanguage, val, sizeof(LANGUAGE.Loadingstandardlanguage));
 		return;
 	}
+	if (strcmp(name, "Loadingstandardmusic") == 0) {
+		strcopy(LANGUAGE.Loadingstandardmusic, val, sizeof(LANGUAGE.Loadingstandardmusic));
+		return;
+	}
 	if (strcmp(name, "Lock") == 0) {
 		strcopy(LANGUAGE.Lock, val, sizeof(LANGUAGE.Lock));
 		return;
@@ -643,6 +660,10 @@ void language_set(char *name, char *val)
 	}
 	if (strcmp(name, "Notenoughfreespace") == 0) {
 		strcopy(LANGUAGE.Notenoughfreespace, val, sizeof(LANGUAGE.Notenoughfreespace));
+		return;
+	}
+	if (strcmp(name, "Notasupportedformat") == 0) {
+		strcopy(LANGUAGE.Notasupportedformat, val, sizeof(LANGUAGE.Notasupportedformat));
 		return;
 	}
 	if (strcmp(name, "notset") == 0) {
@@ -765,12 +786,20 @@ void language_set(char *name, char *val)
 		strcopy(LANGUAGE.settings, val, sizeof(LANGUAGE.settings));
 		return;
 	}
+	if (strcmp(name, "Setasbackgroundmusic") == 0) {
+		strcopy(LANGUAGE.Setasbackgroundmusic, val, sizeof(LANGUAGE.Setasbackgroundmusic));
+		return;
+	}
 	if (strcmp(name, "ShutdowntoIdle") == 0) {
 		strcopy(LANGUAGE.ShutdowntoIdle, val, sizeof(LANGUAGE.ShutdowntoIdle));
 		return;
 	}
 	if (strcmp(name, "ShutdownSystem") == 0) {
 		strcopy(LANGUAGE.ShutdownSystem, val, sizeof(LANGUAGE.ShutdownSystem));
+		return;
+	}
+	if (strcmp(name, "Standard") == 0) {
+		strcopy(LANGUAGE.Standard, val, sizeof(LANGUAGE.Standard));
 		return;
 	}
 	if (strcmp(name, "Success") == 0) {

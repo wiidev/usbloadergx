@@ -42,6 +42,38 @@ GuiSound::~GuiSound()
 		StopOgg();
 }
 
+int GuiSound::PlayOggFile(char * path)
+{   /*
+    u32 filesize = 0;
+    char * bufferogg = NULL;
+    size_t resultogg;
+
+    FILE * pFile;
+    pFile = fopen (path, "rb");
+
+    // get file size:
+    fseek (pFile , 0 , SEEK_END);
+    filesize = ftell (pFile);
+    rewind (pFile);
+
+    // allocate memory to contain the whole file:
+    bufferogg = (char*) malloc (sizeof(char)*filesize);
+    if (bufferogg == NULL) {fputs ("   Memory error",stderr); exit (2);}
+
+    // copy the file into the buffer:
+    resultogg = fread (bufferogg,1,filesize,pFile);
+    if (resultogg != filesize) {fputs ("   Reading error",stderr); exit (3);}
+
+	fclose (pFile);
+
+	sound = (const u8 *) bufferogg;
+	length = filesize;
+    */
+    int ret = PlayOggFromFile(path, loop);
+    SetVolumeOgg(255*(volume/100.0));
+    return ret;
+}
+
 void GuiSound::Play()
 {
 	int vol;
@@ -57,7 +89,7 @@ void GuiSound::Play()
 		break;
 
 		case SOUND_OGG:
-		voice = 0;
+		voice = ASND_GetFirstUnusedVoice();
 		if(loop)
 			PlayOgg(mem_open((char *)sound, length), 0, OGG_INFINITE_TIME);
 		else
@@ -150,4 +182,14 @@ void GuiSound::SetVolume(int vol)
 void GuiSound::SetLoop(bool l)
 {
 	loop = l;
+}
+
+s32 GuiSound::GetPlayTime()
+{
+	return GetTimeOgg();
+}
+
+void GuiSound::SetPlayTime(s32 time_pos)
+{
+	SetTimeOgg(time_pos);
 }

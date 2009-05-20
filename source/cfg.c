@@ -234,6 +234,8 @@ void CFG_Default(int widescreen) // -1 = non forced Mode
 	snprintf(CFG.titlestxt_path, sizeof(CFG.titlestxt_path), "SD:/config/");//default path for disc images
 	snprintf(CFG.unlockCode, sizeof(CFG.unlockCode), "ab121b");		// default password
 	snprintf(CFG.language_path, sizeof(CFG.language_path), "SD:/config/language/");
+	snprintf(CFG.oggload_path, sizeof(CFG.oggload_path), "SD:/config/backgroundmusic/");
+    sprintf(CFG.ogg_path, "notset");
 
 	CFG.parentalcontrol = 0;
 	CFG.maxcharacters = 38;
@@ -481,6 +483,14 @@ void cfg_set(char *name, char *val)
 	}
 	if (strcmp(name, "language_path") == 0) {
 		strcopy(CFG.language_path, val, sizeof(CFG.language_path));
+		return;
+	}
+	if (strcmp(name, "oggload_path") == 0) {
+		strcopy(CFG.oggload_path, val, sizeof(CFG.oggload_path));
+		return;
+	}
+    if (strcmp(name, "ogg_path") == 0) {
+		strcopy(CFG.ogg_path, val, sizeof(CFG.ogg_path));
 		return;
 	}
 
@@ -1017,12 +1027,14 @@ bool cfg_save_global()// save global settings
 	}
 	fprintf(f, "disc_path = %s\n ", CFG.disc_path);
 	fprintf(f, "language_path = %s\n ", CFG.language_path);
+	fprintf(f, "oggload_path = %s\n ", CFG.oggload_path);
 	fprintf(f, "titlestxt_path = %s\n ", CFG.titlestxt_path);
 	if(!strcmp("", Settings.unlockCode)) {
 	fprintf(f, "godmode = %d\n ", CFG.godmode);
 	} else {
     fprintf(f, "godmode = %d\n ", 0);
 	}
+	fprintf(f, "ogg_path = %s\n ", CFG.ogg_path);
 	fclose(f);
 	return true;
 }

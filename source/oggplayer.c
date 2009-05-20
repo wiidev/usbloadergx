@@ -25,7 +25,10 @@
  */
 
 #include "oggplayer.h"
+#include "mp3s.h"
 #include <gccore.h>
+#include <malloc.h>
+#include <stdlib.h>
 
 /* OGG control */
 
@@ -287,6 +290,43 @@ int PlayOgg(int fd, int time_pos, int mode)
 	return 0;
 }
 
+
+int PlayOggFromFile(char * path, int loop) {
+
+    u32 filesize = 0;
+    char * bufferogg = NULL;
+    size_t resultogg;
+
+    FILE * pFile;
+    pFile = fopen (path, "rb");
+
+    //Check that pFile exist
+    if (pFile==NULL){
+        return -1;
+    }
+
+    // get file size:
+    fseek (pFile , 0 , SEEK_END);
+    filesize = ftell (pFile);
+    rewind (pFile);
+
+    // allocate memory to contain the whole file:
+    bufferogg = (char*) malloc (sizeof(char)*filesize);
+    if (bufferogg == NULL) {fputs ("   Memory error",stderr); exit (2);}
+
+    // copy the file into the buffer:
+    resultogg = fread (bufferogg,1,filesize,pFile);
+    if (resultogg != filesize) {fputs ("   Reading error",stderr); exit (3);}
+
+	fclose (pFile);
+
+    if (loop)
+    return PlayOgg(mem_open((char *)bufferogg, filesize), 0, OGG_INFINITE_TIME);
+    else
+    return PlayOgg(mem_open((char *)bufferogg, filesize), 0, OGG_ONE_TIME);
+}
+
+
 void PauseOgg(int pause)
 {
 	if (pause)
@@ -325,6 +365,7 @@ int StatusOgg()
 void SetVolumeOgg(int volume)
 {
 	private_ogg.volume = volume;
+	SND_Pause(0);
 
 	SND_ChangeVolumeVoice(0, volume, volume);
 }

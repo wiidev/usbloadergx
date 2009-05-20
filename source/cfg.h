@@ -70,6 +70,8 @@ struct CFG
 	char disc_path[100];
 	char titlestxt_path[100];
 	char language_path[100];
+	char oggload_path[100];
+	char ogg_path[150];
 	short keyset;
 };
 

@@ -69,6 +69,12 @@ extern "C"
 int PlayOgg(int fd, int time_pos, int mode);
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* int PlayOgg(char * path, int loop);
+    Just give the function the full device+path to OGG to play it
+    loop = 1 for Loop and 0 for one time playing
+*/
+int PlayOggFromFile(char * path, int loop);
+/*------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /* void StopOgg();
 
