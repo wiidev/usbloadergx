@@ -52,7 +52,7 @@ void GuiDiskCover::Draw()
 		return;
 	float currScale = this->GetScale();
 //	Menu_DrawDiskCoverShadow(this->GetLeft(), this->GetTop(), 190, width, height, 40, image, imageangle, deg_beta, widescreen ? currScale*0.8 : currScale, currScale, this->GetAlpha(), true);
-	Menu_DrawDiskCover(this->GetLeft(), this->GetTop(), 50, width, height, 55, image, imageangle, deg_beta, widescreen ? currScale*0.8 : currScale, currScale, 128, true);
+	Menu_DrawDiskCover(this->GetLeft(), this->GetTop(), 50, width, height, 55, image, imageangle, deg_beta, widescreen ? currScale*0.8 : currScale, currScale, 64, true);
 	Menu_DrawDiskCover(this->GetLeft(), this->GetTop(), 50, width, height, 55, image, imageangle, deg_beta, widescreen ? currScale*0.8 : currScale, currScale, this->GetAlpha(), false);
 
 	if(eff_step)

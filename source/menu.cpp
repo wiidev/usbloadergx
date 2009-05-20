@@ -1219,44 +1219,54 @@ int GameWindowPrompt()
 			}
 		}
 
-		diskImg.SetImage(diskCover);
 
 
 		if (changed == 3){
-			diskImg.SetBeta(180);
+			diskImg.SetImage(diskCover2);
+			diskImg.SetBeta(0);
 			diskImg.SetBetaRotateEffect(-90, 15);
-			diskImg2.SetImage(diskCover2);
+			diskImg2.SetImage(diskCover);
 			diskImg2.SetAngle(diskImg.GetAngle());
-			diskImg2.SetBeta(0);
+			diskImg2.SetBeta(180);
 			diskImg2.SetBetaRotateEffect(-90, 15);
 			sizeTxt.SetEffect(EFFECT_FADE, -17);
 			nameTxt.SetEffect(EFFECT_FADE, -17);
 			ResumeGui();
 			while(nameTxt.GetEffect() > 0 || diskImg.GetBetaRotateEffect()) usleep(50);
 			HaltGui();
+			diskImg.SetImage(diskCover);
+			diskImg.SetBeta(90);
 			diskImg.SetBetaRotateEffect(-90, 15);
+			diskImg2.SetImage(diskCover2);
+			diskImg2.SetBeta(270);
 			diskImg2.SetBetaRotateEffect(-90, 15);
 			sizeTxt.SetEffect(EFFECT_FADE, 17);
 			nameTxt.SetEffect(EFFECT_FADE, 17);
 		}
 		else if (changed == 4){
-			diskImg.SetBeta(180);
+			diskImg.SetImage(diskCover2);
+			diskImg.SetBeta(0);
 			diskImg.SetBetaRotateEffect(90, 15);
-			diskImg2.SetImage(diskCover2);
+			diskImg2.SetImage(diskCover);
 			diskImg2.SetAngle(diskImg.GetAngle());
-			diskImg2.SetBeta(0);
+			diskImg2.SetBeta(180);
 			diskImg2.SetBetaRotateEffect(90, 15);
 			sizeTxt.SetEffect(EFFECT_FADE, -17);
 			nameTxt.SetEffect(EFFECT_FADE, -17);
 			ResumeGui();
 			while(nameTxt.GetEffect() > 0 || diskImg.GetBetaRotateEffect()) usleep(50);
 			HaltGui();
+			diskImg.SetImage(diskCover);
+			diskImg.SetBeta(270);
 			diskImg.SetBetaRotateEffect(90, 15);
+			diskImg2.SetImage(diskCover2);
+			diskImg2.SetBeta(90);
 			diskImg2.SetBetaRotateEffect(90, 15);
 			sizeTxt.SetEffect(EFFECT_FADE, 17);
 			nameTxt.SetEffect(EFFECT_FADE, 17);
 		}
-
+		else
+			diskImg.SetImage(diskCover);
 		sizeTxt.SetText(sizeText);
 		nameTxt.SetText(gameName);
 		char* pch;

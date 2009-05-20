@@ -378,19 +378,19 @@ void Menu_DrawDiskCover(f32 xpos, f32 ypos, f32 zpos, u16 width, u16 height, u16
 	{
 	GX_Begin(GX_QUADS, GX_VTXFMT0,4);
 	GX_Position3f32(-width, -height,  0);
-	GX_Color4u8(0x60,0x60,0x60,alpha);
+	GX_Color4u8(0,0,0,alpha);
 	GX_TexCoord2f32(0, 0);
 
 	GX_Position3f32(width, -height,  0);
-	GX_Color4u8(0x60,0x60,0x60,alpha);
+	GX_Color4u8(0,0,0,alpha);
 	GX_TexCoord2f32(1, 0);
 
 	GX_Position3f32(width, height,  0);
-	GX_Color4u8(0x60,0x60,0x60,alpha);
+	GX_Color4u8(0,0,0,alpha);
 	GX_TexCoord2f32(1, 1);
 
 	GX_Position3f32(-width, height,  0);
-	GX_Color4u8(0x60,0x60,0x60,alpha);
+	GX_Color4u8(0,0,0,alpha);
 	GX_TexCoord2f32(0, 1);
 	}
 	else
