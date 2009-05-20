@@ -5127,7 +5127,7 @@ int MenuOGG()
 	backBtn.SetTrigger(&trigB);
 	backBtn.SetEffectGrow();
 
-    customOptionList options2(300);
+    customOptionList options2(countmp3);
 
     for (cnt = 0; cnt < countmp3; cnt++) {
         snprintf(options2.value[cnt], 30, "%s", mp3files[cnt]);
@@ -5144,7 +5144,7 @@ int MenuOGG()
 	GuiCustomOptionBrowser optionBrowser4(396, 280, &options2, CFG.theme_path, "bg_options_settings.png", bg_options_settings_png, scrollon, 85);
 	optionBrowser4.SetPosition(0, 90);
 	optionBrowser4.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	optionBrowser4.SetCol2Position(45);
+	optionBrowser4.SetCol2Position(30);
 
 	int songPlaying=0;
 
@@ -5257,6 +5257,7 @@ int MenuOGG()
                 if(isSdInserted() == 1) {
                     cfg_save_global();
                     if(!strcmp("", CFG.oggload_path)) {
+                    sprintf(CFG.ogg_path, "notset");
                     bgMusic->Play();
                     }
                     menu = MENU_OGG;
@@ -5282,6 +5283,7 @@ int MenuOGG()
         WindowPrompt(LANGUAGE.Notasupportedformat, LANGUAGE.Loadingstandardmusic, LANGUAGE.ok, 0,0,0);
         sprintf(CFG.ogg_path, "notset");
         bgMusic->Play();
+        SetVolumeOgg(255*(vol/100.0));
         } else {
         snprintf(CFG.ogg_path, sizeof(CFG.ogg_path), "%s", fullpath);
         cfg_save_global();

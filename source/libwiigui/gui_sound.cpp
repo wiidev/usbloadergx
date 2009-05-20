@@ -89,7 +89,7 @@ void GuiSound::Play()
 		break;
 
 		case SOUND_OGG:
-		voice = ASND_GetFirstUnusedVoice();
+		voice = 0;
 		if(loop)
 			PlayOgg(mem_open((char *)sound, length), 0, OGG_INFINITE_TIME);
 		else

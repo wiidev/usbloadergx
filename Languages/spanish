@@ -17,7 +17,7 @@
  Clock = Reloj
  Continueinstallgame = ¿Continuar instalando juego?
  ConsoleDefault = Pred. Consola
- Consoleshouldbeunlockedtomodifyit = Consola debe desbloquearse para modificarla.
+ Consoleshouldbeunlockedtomodifyit = Debes desbloquear la consola para modificar.
  ConsoleLocked = Consola Bloqueada
  CorrectPassword = Contraseña Correcta
  Couldnotinitializenetwork = ¡No se pudo iniciar la Conexión!

@@ -293,6 +293,7 @@ int PlayOgg(int fd, int time_pos, int mode)
 
 int PlayOggFromFile(char * path, int loop) {
 
+    StopOgg();
     u32 filesize = 0;
     char * bufferogg = NULL;
     size_t resultogg;
