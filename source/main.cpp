@@ -84,7 +84,7 @@ DefaultSettings()
 	Settings.vpatch = off;
 	Settings.language = ConsoleLangDefault;
 	Settings.ocarina = off;
-	Settings.hddinfo = HDDInfo;
+	Settings.hddinfo = hr12;
 	Settings.sinfo = ((THEME.showID) ? GameID : Neither);
 	Settings.rumble = RumbleOn;
 	if (THEME.showRegion)

@@ -30,6 +30,7 @@ return false;
 void lang_default()
 {
 snprintf(LANGUAGE.ok, sizeof(LANGUAGE.ok), "OK");
+snprintf(LANGUAGE.addToFavorite, sizeof(LANGUAGE.addToFavorite), "Favorite");
 snprintf(LANGUAGE.AppLanguage, sizeof(LANGUAGE.AppLanguage), "App Language");
 snprintf(LANGUAGE.t3Covers, sizeof(LANGUAGE.t3Covers), "3D Covers");
 snprintf(LANGUAGE.Areyousure, sizeof(LANGUAGE.Areyousure), "Are you sure?");
@@ -74,6 +75,7 @@ snprintf(LANGUAGE.Downloadingfile, sizeof(LANGUAGE.Downloadingfile), "Downloadin
 snprintf(LANGUAGE.DownloadBoxartimage, sizeof(LANGUAGE.DownloadBoxartimage), "Download Boxart image?");
 snprintf(LANGUAGE.Downloadfinished, sizeof(LANGUAGE.Downloadfinished), "Download finished");
 snprintf(LANGUAGE.Error, sizeof(LANGUAGE.Error), "Error !");
+snprintf(LANGUAGE.hour, sizeof(LANGUAGE.hour), "Hour");
 snprintf(LANGUAGE.BOOTERROR, sizeof(LANGUAGE.BOOTERROR), "BOOT ERROR");
 snprintf(LANGUAGE.ErrorreadingDisc, sizeof(LANGUAGE.ErrorreadingDisc), "Error reading Disc");
 snprintf(LANGUAGE.ExitUSBISOLoader, sizeof(LANGUAGE.ExitUSBISOLoader), "Exit USB Loader GX?");
@@ -223,6 +225,10 @@ void language_set(char *name, char *val)
 
 	if (strcmp(name, "t3Covers") == 0) {
 		strcopy(LANGUAGE.t3Covers, val, sizeof(LANGUAGE.t3Covers));
+		return;
+	}
+	if (strcmp(name, "addToFavorite") == 0) {
+		strcopy(LANGUAGE.addToFavorite, val, sizeof(LANGUAGE.addToFavorite));
 		return;
 	}
 	if (strcmp(name, "Specialthanksto") == 0) {
@@ -491,6 +497,10 @@ void language_set(char *name, char *val)
 	}
 	if (strcmp(name, "Force") == 0) {
 		strcopy(LANGUAGE.Force, val, sizeof(LANGUAGE.Force));
+		return;
+	}
+	if (strcmp(name, "hour") == 0) {
+		strcopy(LANGUAGE.hour, val, sizeof(LANGUAGE.hour));
 		return;
 	}
 	if (strcmp(name, "Youneedtoformatapartition") == 0) {

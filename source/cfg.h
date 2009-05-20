@@ -144,10 +144,13 @@ struct THEME
 extern struct CFG CFG;
 extern struct THEME THEME;
 extern u8 ocarinaChoice;
+extern u8 fave;
+extern u8 playcnt;
 extern u8 videoChoice;
 extern u8 languageChoice;
 extern u8 viChoice;
 extern u8 iosChoice;
+extern u8 faveChoice;
 extern u8 parentalcontrolChoice;
 extern u8 xflip;
 extern u8 qboot;
@@ -164,13 +167,21 @@ struct Game_CFG
 	u8 ios;
 	u8 parentalcontrol;
 };
+struct Game_NUM
+{
+	u8 id[8];
+	u8 favorite;
+	u8 count;
+};
 
 
 void CFG_Default(int widescreen); // -1 = non forced mode
 void CFG_Load();
 void lang_defualt();
 struct Game_CFG* CFG_get_game_opt(u8 *id);
+struct Game_NUM* CFG_get_game_num(u8 *id);
 bool CFG_save_game_opt(u8 *id);
+bool CFG_save_game_num(u8 *id);
 bool CFG_forget_game_opt(u8 *id);
 int subfoldercheck(char * directory);
 
@@ -221,8 +232,9 @@ enum {
 };
 
 enum {
-	HDDInfo,
-	Clock,
+	hr12,
+	hr24,
+	Off,
 };
 
 enum {

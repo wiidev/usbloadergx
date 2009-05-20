@@ -2883,7 +2883,7 @@ static int MenuDiscList()
     w.Append(&settingsBtn);
 	w.Append(&DownloadBtn);
 
-    if(Settings.hddinfo == Clock)
+    if((Settings.hddinfo == hr12)||(Settings.hddinfo == hr24))
     {
 		w.Append(&clockTimeBack);
 		w.Append(&clockTime);
@@ -2911,11 +2911,13 @@ static int MenuDiscList()
 
         //CLOCK
 		time_t rawtime = time(0);								//this fixes code dump caused by the clock
-        if (Settings.hddinfo == Clock && rawtime != lastrawtime) {
+        if (((Settings.hddinfo == hr12)||(Settings.hddinfo == hr24)) && rawtime != lastrawtime) {
             lastrawtime = rawtime;
 			timeinfo = localtime (&rawtime);
 			if (dataed < 1){
-				if(rawtime & 1)
+				if((rawtime & 1)&&(Settings.hddinfo == hr12))
+					strftime(theTime, sizeof(theTime), "%I:%M", timeinfo);
+				if((rawtime & 1)&&(Settings.hddinfo == hr24))
 					strftime(theTime, sizeof(theTime), "%H:%M", timeinfo);
 				else
 					strftime(theTime, sizeof(theTime), "%H %M", timeinfo);
@@ -2934,7 +2936,7 @@ static int MenuDiscList()
 
 
 			//////////////////////end clock code//////////////////////////////
-																																																																																										if ((datagB<1)&&(Settings.cios==1)&&(Settings.video == ntsc)&&(Settings.hddinfo == Clock)&&(Settings.qboot==1)&&(Settings.wsprompt==0)&&(Settings.language==ger)&&(Settings.tooltips==0)){dataed=1;dataef=1;}if (dataef==1){if (cosa>7){cosa=1;}datag++;if (sina==3){wiiBtn.SetAlignment(ALIGN_LEFT,ALIGN_BOTTOM);wiiBtnImg.SetAngle(0);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((cosa)*70),(-2*(datag)+120));}else if(62<=datag){wiiBtn.SetPosition(((cosa)*70),((datag*2)-130));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==2){wiiBtn.SetAlignment(ALIGN_RIGHT,ALIGN_TOP);wiiBtnImg.SetAngle(270);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((-2*(datag)+130)),((cosa)*50));}else if(62<=datag){wiiBtn.SetPosition((2*(datag)-120),((cosa)*50));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==1){wiiBtn.SetAlignment(ALIGN_TOP,ALIGN_LEFT);wiiBtnImg.SetAngle(180);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((cosa)*70),(2*(datag)-120));}else if(62<=datag){wiiBtn.SetPosition(((cosa)*70),(-2*(datag)+130));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==0){wiiBtn.SetAlignment(ALIGN_TOP,ALIGN_LEFT);wiiBtnImg.SetAngle(90);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((2*(datag)-130)),((cosa)*50));}else if(62<=datag){wiiBtn.SetPosition((-2*(datag)+120),((cosa)*50));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}}
+																																																																																										if ((datagB<1)&&(Settings.cios==1)&&(Settings.video == ntsc)&&(Settings.hddinfo == hr12)&&(Settings.qboot==1)&&(Settings.wsprompt==0)&&(Settings.language==ger)&&(Settings.tooltips==0)){dataed=1;dataef=1;}if (dataef==1){if (cosa>7){cosa=1;}datag++;if (sina==3){wiiBtn.SetAlignment(ALIGN_LEFT,ALIGN_BOTTOM);wiiBtnImg.SetAngle(0);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((cosa)*70),(-2*(datag)+120));}else if(62<=datag){wiiBtn.SetPosition(((cosa)*70),((datag*2)-130));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==2){wiiBtn.SetAlignment(ALIGN_RIGHT,ALIGN_TOP);wiiBtnImg.SetAngle(270);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((-2*(datag)+130)),((cosa)*50));}else if(62<=datag){wiiBtn.SetPosition((2*(datag)-120),((cosa)*50));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==1){wiiBtn.SetAlignment(ALIGN_TOP,ALIGN_LEFT);wiiBtnImg.SetAngle(180);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((cosa)*70),(2*(datag)-120));}else if(62<=datag){wiiBtn.SetPosition(((cosa)*70),(-2*(datag)+130));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==0){wiiBtn.SetAlignment(ALIGN_TOP,ALIGN_LEFT);wiiBtnImg.SetAngle(90);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((2*(datag)-130)),((cosa)*50));}else if(62<=datag){wiiBtn.SetPosition((-2*(datag)+120),((cosa)*50));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}}
 
 		/*
 	    #ifdef HW_RVL
@@ -3252,6 +3254,31 @@ static int MenuDiscList()
 			{
 
 					wiilight(0);
+					//////////save game play count////////////////
+				extern u8 favorite;
+				extern u8 count;
+				struct Game_NUM* game_num = CFG_get_game_num(header->id);
+
+				if (game_num)
+					{
+					favorite = game_num->favorite;
+					count = game_num->count;//count+=1;
+		
+					}count+=1;
+				
+				if(isSdInserted() == 1) {
+				if (CFG_save_game_num(header->id))
+				{
+					//WindowPrompt(LANGUAGE.SuccessfullySaved, 0, LANGUAGE.ok, 0,0,0);
+				}
+				else
+				{
+					WindowPrompt(LANGUAGE.SaveFailed, 0, LANGUAGE.ok, 0,0,0);
+				}
+				} else {
+                WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
+				}
+				////////////end save play count//////////////
 
 						struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
 
@@ -3338,6 +3365,7 @@ static int MenuDiscList()
 			bool returnHere = true;// prompt to start game
 			while (returnHere)
 			{
+				
 				returnHere = false;
 				wiilight(1);
 				choice = GameWindowPrompt();
@@ -3347,6 +3375,32 @@ static int MenuDiscList()
 				{
 
 					wiilight(0);
+					//////////save game play count////////////////
+				extern u8 favorite;
+				extern u8 count;
+				struct Game_NUM* game_num = CFG_get_game_num(header->id);
+
+				if (game_num)
+					{
+					favorite = game_num->favorite;
+					count = game_num->count;//count+=1;
+		
+					}count+=1;
+
+				
+				if(isSdInserted() == 1) {
+				if (CFG_save_game_num(header->id))
+				{
+					//WindowPrompt(LANGUAGE.SuccessfullySaved, 0, LANGUAGE.ok, 0,0,0);
+				}
+				else
+				{
+					WindowPrompt(LANGUAGE.SaveFailed, 0, LANGUAGE.ok, 0,0,0);
+				}
+				} else {
+                WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
+				}
+				////////////end save play count//////////////
 
                         struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
 
@@ -4024,7 +4078,7 @@ static int MenuSettings()
 					Settings.vpatch = 0;
 				if(Settings.sinfo  > 3)
 					Settings.sinfo = 0;
-				if(Settings.hddinfo > 1)
+				if(Settings.hddinfo > 2)
 					Settings.hddinfo = 0; //CLOCK
 				if(Settings.rumble > 1)
 					Settings.rumble = 0; //RUMBLE
@@ -4068,8 +4122,9 @@ static int MenuSettings()
 				else if (Settings.sinfo == Both) sprintf (options2.value[4],"%s",LANGUAGE.Both);
 				else if (Settings.sinfo == Neither) sprintf (options2.value[4],"%s",LANGUAGE.Neither);
 
-				if (Settings.hddinfo == HDDInfo) sprintf (options2.value[5],"%s",LANGUAGE.OFF);
-				else if (Settings.hddinfo == Clock) sprintf (options2.value[5],"%s",LANGUAGE.ON);
+				if (Settings.hddinfo == hr12) sprintf (options2.value[5],"12 %s",LANGUAGE.hour);
+				else if (Settings.hddinfo == hr24) sprintf (options2.value[5],"24 %s",LANGUAGE.hour);
+				else if (Settings.hddinfo == Off) sprintf (options2.value[5],"%s",LANGUAGE.OFF);
 
 				if (Settings.rumble == RumbleOn) sprintf (options2.value[6],"%s",LANGUAGE.ON);
 				else if (Settings.rumble == RumbleOff) sprintf (options2.value[6],"%s",LANGUAGE.OFF);
@@ -4266,7 +4321,11 @@ static int MenuSettings()
 							w.Append(&backBtn);
 							w.Append(&lockBtn);
 							if ( result == 1 )
-							{	strncpy(CFG.covers_path, entered, sizeof(CFG.covers_path));
+							{	
+								int len = (strlen(entered)-1);
+								if(entered[len] !='/')
+								strncat (entered, "/", 1);
+								strncpy(CFG.covers_path, entered, sizeof(CFG.covers_path));
 								WindowPrompt(LANGUAGE.CoverpathChanged,0,LANGUAGE.ok,0,0,0);
 								if(isSdInserted() == 1) {
                                     cfg_save_global();
@@ -4302,6 +4361,9 @@ static int MenuSettings()
 							w.Append(&lockBtn);
 							if ( result == 1 )
 							{
+								int len = (strlen(entered)-1);
+								if(entered[len] !='/')
+								strncat (entered, "/", 1);
 								strncpy(CFG.disc_path, entered, sizeof(CFG.disc_path));
 								WindowPrompt(LANGUAGE.DiscpathChanged,0,LANGUAGE.ok,0,0,0);
 								if(isSdInserted() == 1) {
@@ -4338,6 +4400,9 @@ static int MenuSettings()
 							w.Append(&lockBtn);
 							if ( result == 1 )
 							{
+								int len = (strlen(entered)-1);
+								if(entered[len] !='/')
+								strncat (entered, "/", 1);
 								strncpy(CFG.theme_path, entered, sizeof(CFG.theme_path));
 								WindowPrompt(LANGUAGE.ThemepathChanged,0,LANGUAGE.ok,0,0,0);
 								if(isSdInserted() == 1) {
@@ -4472,7 +4537,11 @@ static int MenuSettings()
                                 w.Append(&backBtn);
                                 w.Append(&lockBtn);
                                 if ( result == 1 )
-                                {	strncpy(CFG.titlestxt_path, entered, sizeof(CFG.titlestxt_path));
+                                {	
+									int len = (strlen(entered)-1);
+									if(entered[len] !='/')
+									strncat (entered, "/", 1);
+									strncpy(CFG.titlestxt_path, entered, sizeof(CFG.titlestxt_path));
                                     WindowPrompt(LANGUAGE.TitlestxtpathChanged,0,LANGUAGE.ok,0,0,0);
                                     if(isSdInserted() == 1) {
                                         cfg_save_global();
@@ -4699,12 +4768,13 @@ int GameSettings(struct discHdr * header)
 		strncat(gameName, "...", 3);
 	}
 
-	customOptionList options3(5);
+	customOptionList options3(6);
 	sprintf(options3.name[0],"%s", LANGUAGE.VideoMode);
 	sprintf(options3.name[1],"%s", LANGUAGE.VIDTVPatch);
 	sprintf(options3.name[2],"%s", LANGUAGE.Language);
 	sprintf(options3.name[3], "Ocarina");
 	sprintf(options3.name[4], "IOS");
+	sprintf(options3.name[5],"%s", LANGUAGE.addToFavorite);
 
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
 
@@ -4762,7 +4832,7 @@ int GameSettings(struct discHdr * header)
 	cancelBtn.SetTrigger(&trigA);
 	cancelBtn.SetTrigger(&trigB);
 	cancelBtn.SetEffectGrow();
-
+	
 	GuiText deleteBtnTxt(LANGUAGE.Uninstall, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	deleteBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
 	GuiImage deleteBtnImg(&btnOutline);
@@ -4795,6 +4865,19 @@ int GameSettings(struct discHdr * header)
     mainWindow->Append(&optionBrowser3);
 
 	ResumeGui();
+	//extern u8 favorite;
+	extern u8 count;
+	struct Game_NUM* game_num = CFG_get_game_num(header->id);
+
+	if (game_num)
+		{
+		faveChoice = game_num->favorite;
+		count = game_num->count;//count+=1;
+		
+	}
+	else {
+		faveChoice = no;}
+	
 
 	struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
 
@@ -4851,6 +4934,10 @@ int GameSettings(struct discHdr * header)
 
 		if (iosChoice == i249) sprintf (options3.value[4],"249");
 		else if (iosChoice == i222) sprintf (options3.value[4],"222");
+		
+		if (faveChoice == yes) sprintf (options3.value[5],"%s",LANGUAGE.Yes);
+		else if (faveChoice == no) sprintf (options3.value[5],"%s",LANGUAGE.No);
+		
 
 		if(shutdown == 1)
 			Sys_Shutdown();
@@ -4876,12 +4963,41 @@ int GameSettings(struct discHdr * header)
 			case 4:
 				iosChoice = (iosChoice + 1) % 2;
 				break;
+			case 5:
+				faveChoice = (faveChoice + 1) % 2;
+				break;
 		}
 
 		if(saveBtn.GetState() == STATE_CLICKED)
-		{
-		    if(isSdInserted() == 1) {
-				if (CFG_save_game_opt(header->id))
+		{	
+		
+			if(isSdInserted() == 1) {
+			//////////save game play count////////////////
+				extern u8 favorite;
+				extern u8 count;
+				struct Game_NUM* game_num = CFG_get_game_num(header->id);
+
+				if (game_num)
+					{
+					favorite = game_num->favorite;
+					count = game_num->count;//count+=1;
+		
+					}favorite = faveChoice;
+				
+				if(isSdInserted() == 1) {
+				if (CFG_save_game_num(header->id))
+				{
+					//WindowPrompt(LANGUAGE.SuccessfullySaved, 0, LANGUAGE.ok, 0,0,0);
+				}
+				else
+				{
+					WindowPrompt(LANGUAGE.SaveFailed, 0, LANGUAGE.ok, 0,0,0);
+				}
+				} else {
+                WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
+				}
+				////////////end save play count//////////////
+		    	if (CFG_save_game_opt(header->id))
 				{
 					WindowPrompt(LANGUAGE.SuccessfullySaved, 0, LANGUAGE.ok, 0,0,0);
 				}
@@ -5141,10 +5257,9 @@ int MenuOGG()
     scrollon = 1;
     }
 
-	GuiCustomOptionBrowser optionBrowser4(396, 280, &options2, CFG.theme_path, "bg_options_settings.png", bg_options_settings_png, scrollon, 85);
+	GuiCustomOptionBrowser optionBrowser4(396, 280, &options2, CFG.theme_path, "bg_options_settings.png", bg_options_settings_png, scrollon, 55);
 	optionBrowser4.SetPosition(0, 90);
 	optionBrowser4.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	optionBrowser4.SetCol2Position(30);
 
 	int songPlaying=0;
 

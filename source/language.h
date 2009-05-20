@@ -13,6 +13,7 @@ struct LANGUAGE
 {
 
 	char t3Covers[50];
+	char addToFavorite[20];
 	char AppLanguage[50];
 	char Areyousure[50];
 	char AutoPatch[20];
@@ -92,6 +93,7 @@ struct LANGUAGE
 	char GoBack[50];
 	char GotoPage[50];///////
 	char HowtoShutdown[50];
+	char hour[10];
 	char keyboard[50];
 	char Language[50];
 	char Langchange[50];
