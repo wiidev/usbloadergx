@@ -1705,8 +1705,6 @@ ShowProgress (s32 done, s32 total)
 	static u32 expected;
 
 	u32 d, h, m, s;
-	static time_t last_time;
-	time_t time_now = 0;
 
 	//first time
 	if (!done) {
@@ -1731,14 +1729,6 @@ ShowProgress (s32 done, s32 total)
 	m = (d / 60) % 60;
 	s =  d % 60;
 
-	if(last_time == 0)
-	time(&last_time);
-
-    time(&time_now);
-
-    /** Update that crap only every 0.5 secs **/
-    if (difftime(time_now,last_time) > 0.5) {
-
     //Calculate percentage/size
 	f32 percent = (done * 100.0) / total;
 
@@ -1756,9 +1746,6 @@ ShowProgress (s32 done, s32 total)
 	if ((Settings.wsprompt == yes) && (CFG.widescreen)){
 	progressbarImg.SetTile((int)(80*done/total));}
 	else {progressbarImg.SetTile((int)(100*done/total));}
-
-    last_time = 0;
-    }
 
 }
 
