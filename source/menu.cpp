@@ -2915,13 +2915,20 @@ static int MenuDiscList()
             lastrawtime = rawtime;
 			timeinfo = localtime (&rawtime);
 			if (dataed < 1){
-				if((rawtime & 1)&&(Settings.hddinfo == hr12))
+				if(Settings.hddinfo == hr12){
+					if(rawtime & 1)
 					strftime(theTime, sizeof(theTime), "%I:%M", timeinfo);
-				if((rawtime & 1)&&(Settings.hddinfo == hr24))
+					else
+					strftime(theTime, sizeof(theTime), "%I %M", timeinfo);
+					}
+				if(Settings.hddinfo == hr24){
+					if(rawtime & 1)
 					strftime(theTime, sizeof(theTime), "%H:%M", timeinfo);
-				else
+					else
 					strftime(theTime, sizeof(theTime), "%H %M", timeinfo);
+					}
 				clockTime.SetText(theTime);
+				
 				}
 			else if (dataed > 0){
 
