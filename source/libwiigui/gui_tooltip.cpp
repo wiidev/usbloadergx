@@ -72,7 +72,7 @@ void GuiTooltip::SetText(const char * t)
 	width = leftImage.GetWidth() + tile_cnt * tileImage.GetWidth() + rightImage.GetWidth();
 }
 
-void GuiTooltip::SetWidescreen(short){}
+void GuiTooltip::SetWidescreen(bool){}
 /*
  * Draw the Tooltip on screen
  */

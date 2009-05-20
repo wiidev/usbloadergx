@@ -141,7 +141,7 @@ ResetVideo_Menu()
 	GX_SetTexCoordGen(GX_TEXCOORD0, GX_TG_MTX2x4, GX_TG_TEX0, GX_IDENTITY);
 
 	guMtxIdentity(GXmodelView2D);
-	guMtxTransApply (GXmodelView2D, GXmodelView2D, 0.0F, 0.0F, -50.0F);
+	guMtxTransApply (GXmodelView2D, GXmodelView2D, 0.0F, 0.0F, -200.0F);
 	GX_LoadPosMtxImm(GXmodelView2D,GX_PNMTX0);
 
 	guOrtho(p,0,479,0,639,0,300);
@@ -240,7 +240,7 @@ void Menu_Render()
  *
  * Draws the specified image on screen using GX
  ***************************************************************************/
-void Menu_DrawImg(f32 xpos, f32 ypos, u16 width, u16 height, u8 data[],
+void Menu_DrawImg(f32 xpos, f32 ypos, f32 zpos, u16 width, u16 height, u8 data[],
 	f32 degrees, f32 scaleX, f32 scaleY, u8 alpha)
 {
 	if(data == NULL)
@@ -265,7 +265,7 @@ void Menu_DrawImg(f32 xpos, f32 ypos, u16 width, u16 height, u8 data[],
 //	guMtxConcat(m2,m1,m);
 	guMtxConcat(m1,m2,m);
 
-	guMtxTransApply(m,m, xpos+width+0.5,ypos+height+0.5,0);
+	guMtxTransApply(m,m, xpos+width+0.5,ypos+height+0.5,zpos);
 	guMtxConcat (GXmodelView2D, m, mv);
 	GX_LoadPosMtxImm (mv, GX_PNMTX0);
 
@@ -324,4 +324,98 @@ void Menu_DrawRectangle(f32 x, f32 y, f32 width, f32 height, GXColor color, u8 f
 		GX_Color4u8(color.r, color.g, color.b, color.a);
 	}
 	GX_End();
+}
+
+void Menu_DrawDiskCover(f32 xpos, f32 ypos, f32 zpos, u16 width, u16 height, u16 distance,u8 data[],
+	f32 deg_alpha, f32 deg_beta, f32 scaleX, f32 scaleY, u8 alpha, bool shadow)
+{
+	if(data == NULL)
+		return;
+
+	GXTexObj texObj;
+
+	GX_InitTexObj(&texObj, data, width,height, GX_TF_RGBA8,GX_CLAMP, GX_CLAMP,GX_FALSE);
+	GX_LoadTexObj(&texObj, GX_TEXMAP0);
+	GX_InvalidateTexAll();
+
+	GX_SetTevOp (GX_TEVSTAGE0, GX_MODULATE);
+	GX_SetVtxDesc (GX_VA_TEX0, GX_DIRECT);
+	
+	
+	f32 cos_beta = cos(DegToRad(deg_beta));
+	f32 s_offset_y = (zpos + (cos_beta * distance)) * tan(DegToRad(5));
+	f32 s_offset_x = (cos_beta<0?-cos_beta:cos_beta) * s_offset_y;
+	f32 s_offset_z = (s_offset_y<0 ? 0 : s_offset_y)*2;
+
+	Mtx m,m1,m2,m3,m4, mv;
+	width *=.5;
+	height*=.5;
+	guMtxIdentity (m4);
+	guMtxTransApply(m4,m4, 0, 0, distance);
+	
+	guMtxIdentity (m1);
+	guMtxScaleApply(m1,m1,scaleX,scaleY,1.0);
+	Vector axis2 = (Vector) {0 , 1, 0 };
+	guMtxRotAxisDeg (m2, &axis2, deg_beta);
+	Vector axis = (Vector) {0 , 0, 1 };
+	guMtxRotAxisDeg (m3, &axis, deg_alpha);
+//	guMtxConcat(m2,m1,m);
+	guMtxConcat(m3,m4,m3); // move distance then rotate z-axis 
+	guMtxConcat(m2,m3,m2); // rotate y-axis 
+	guMtxConcat(m1,m2,m); // scale
+	
+	if(shadow)
+		guMtxTransApply(m,m, xpos+width+0.5+s_offset_x,ypos+height+0.5+s_offset_y,zpos-s_offset_z);
+	else
+		guMtxTransApply(m,m, xpos+width+0.5,ypos+height+0.5,zpos);
+
+
+
+	guMtxConcat (GXmodelView2D, m, mv);
+	GX_LoadPosMtxImm (mv, GX_PNMTX0);
+
+	if(shadow)
+	{
+	GX_Begin(GX_QUADS, GX_VTXFMT0,4);
+	GX_Position3f32(-width, -height,  0);
+	GX_Color4u8(0x60,0x60,0x60,alpha);
+	GX_TexCoord2f32(0, 0);
+
+	GX_Position3f32(width, -height,  0);
+	GX_Color4u8(0x60,0x60,0x60,alpha);
+	GX_TexCoord2f32(1, 0);
+
+	GX_Position3f32(width, height,  0);
+	GX_Color4u8(0x60,0x60,0x60,alpha);
+	GX_TexCoord2f32(1, 1);
+
+	GX_Position3f32(-width, height,  0);
+	GX_Color4u8(0x60,0x60,0x60,alpha);
+	GX_TexCoord2f32(0, 1);
+	}
+	else
+	{
+	GX_Begin(GX_QUADS, GX_VTXFMT0,4);
+	GX_Position3f32(-width, -height,  0);
+	GX_Color4u8(0xFF,0xFF,0xFF,alpha);
+	GX_TexCoord2f32(0, 0);
+
+	GX_Position3f32(width, -height,  0);
+	GX_Color4u8(0xFF,0xFF,0xFF,alpha);
+	GX_TexCoord2f32(1, 0);
+
+	GX_Position3f32(width, height,  0);
+	GX_Color4u8(0xFF,0xFF,0xFF,alpha);
+	GX_TexCoord2f32(1, 1);
+
+	GX_Position3f32(-width, height,  0);
+	GX_Color4u8(0xFF,0xFF,0xFF,alpha);
+	GX_TexCoord2f32(0, 1);
+	}
+
+	GX_End();
+	GX_LoadPosMtxImm (GXmodelView2D, GX_PNMTX0);
+
+	GX_SetTevOp (GX_TEVSTAGE0, GX_PASSCLR);
+	GX_SetVtxDesc (GX_VA_TEX0, GX_NONE);
 }

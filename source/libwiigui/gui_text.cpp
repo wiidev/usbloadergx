@@ -11,6 +11,7 @@
 #include "gui.h"
 
 static int currentSize = 0;
+static int currentWidescreen = 0;
 static int presetSize = 0;
 static int presetMaxWidth = 0;
 static int presetAlignmentHor = 0;
@@ -165,15 +166,21 @@ int GuiText::GetTextWidth()
 	LOCK(this);
 	int newSize = size*this->GetScale();
 
-	if(newSize != currentSize)
+	if(newSize != currentSize || currentWidescreen != widescreen)
 	{
 		//fontSystem->changeSize(newSize);
-		(font ? font : fontSystem)->changeSize(newSize, widescreen ? (newSize*3)>>2 : 0);
+		(font ? font : fontSystem)->changeSize(newSize, widescreen ? newSize*0.8 : 0);
 		currentSize = newSize;
+		currentWidescreen = widescreen;
 	}
 	return (font ? font : fontSystem)->getWidth(text);
 } 
 
+void GuiText::SetWidescreen(bool w)
+{
+	LOCK(this);
+	widescreen = w;
+}
 /**
  * Draw the text on screen
  */
@@ -191,11 +198,12 @@ void GuiText::Draw()
 
 	int newSize = size*this->GetScale();
 
-	if(newSize != currentSize)
+	if(newSize != currentSize || currentWidescreen != widescreen)
 	{
 		//fontSystem->changeSize(newSize);
-		(font ? font : fontSystem)->changeSize(newSize, widescreen ? (newSize*3)>>2 : 0);
+		(font ? font : fontSystem)->changeSize(newSize, widescreen ? newSize*0.8 : 0);
 		currentSize = newSize;
+		currentWidescreen = widescreen;
 	}
 
 	int voffset = 0;

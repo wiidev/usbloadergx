@@ -266,6 +266,7 @@ enum {
 	yes,
 	sysmenu,
 	wtf,
+	disk3d,
 };
 enum {
 	us,

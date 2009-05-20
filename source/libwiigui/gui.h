@@ -560,11 +560,13 @@ class GuiImage : public GuiElement
 		//!Sets the image rotation angle for drawing
 		//!\param a Angle (in degrees)
 		void SetAngle(float a);
+		//!Gets the image rotation angle for drawing
+		float GetAngle();
 		//!Sets the number of times to draw the image horizontally
 		//!\param t Number of times to draw the image
 		void SetTile(int t);
-		// not NULL set horizontal scale to 0.75 //added
-		void SetWidescreen(short w);
+		// true set horizontal scale to 0.8 //added
+		void SetWidescreen(bool w);
 		//!Constantly called to draw the image
 		void Draw();
 		//!Gets the image data
@@ -595,6 +597,7 @@ class GuiImage : public GuiElement
 		//!Does not alter the image data
 		//!\param s Alpha amount to draw over the image
 		void SetStripe(int s);
+		s32 z;
 	protected:
 		int imgType; //!< Type of image data (IMAGE_TEXTURE, IMAGE_COLOR, IMAGE_DATA)
 		u8 * image; //!< Poiner to image data. May be shared with GuiImageData data
@@ -654,7 +657,7 @@ class GuiText : public GuiElement
 		//!Get the Horizontal Size of Text
 		int GetTextWidth();
 		// not NULL set horizontal scale to 0.75 //added
-		void SetWidescreen(short w);
+		void SetWidescreen(bool w);
 		//!Constantly called to draw the text
 		void Draw();
 	protected:
@@ -684,7 +687,7 @@ class GuiTooltip : public GuiElement
 		//!Sets the text of the GuiTooltip element
 		//!\param t Text
 		void SetText(const char * t);
-		void SetWidescreen(short w); // timely a dummy
+		void SetWidescreen(bool w); // timely a dummy
 		//!Constantly called to draw the GuiButton
 		void Draw();
 

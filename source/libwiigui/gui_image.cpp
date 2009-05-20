@@ -117,6 +117,10 @@ void GuiImage::SetAngle(float a)
 	LOCK(this);
 	imageangle = a;
 }
+float GuiImage::GetAngle()
+{
+	return imageangle;
+}
 
 void GuiImage::SetTile(int t)
 {
@@ -124,7 +128,7 @@ void GuiImage::SetTile(int t)
 	tile = t;
 }
 
-void GuiImage::SetWidescreen(short w)
+void GuiImage::SetWidescreen(bool w)
 {
 	LOCK(this);
 	widescreen = w;
@@ -233,7 +237,7 @@ void GuiImage::Draw()
 	if(tile > 0)
 	{
 		for(int i=0; i<tile; i++)
-			Menu_DrawImg(currLeft+width*i, this->GetTop(), width, height, image, imageangle, widescreen ? currScale*0.80 : currScale, currScale, this->GetAlpha());
+			Menu_DrawImg(currLeft+width*i, this->GetTop(), 0, width, height, image, imageangle, widescreen ? currScale*0.80 : currScale, currScale, this->GetAlpha());
 	}
 	else
 	{
@@ -241,7 +245,7 @@ void GuiImage::Draw()
 		if(scale != 1)
 			currLeft = currLeft - width/2 + (width*scale)/2;
 
-		Menu_DrawImg(currLeft, this->GetTop(), width, height, image, imageangle, widescreen ? currScale*0.80 : currScale, currScale, this->GetAlpha());
+		Menu_DrawImg(currLeft, this->GetTop(), 0, width, height, image, imageangle, widescreen ? currScale*0.80 : currScale, currScale, this->GetAlpha());
 	}
 
 	if(stripe > 0)

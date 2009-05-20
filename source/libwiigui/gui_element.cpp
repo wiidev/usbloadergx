@@ -405,6 +405,7 @@ void GuiElement::SetRumble(bool r)
 
 int GuiElement::GetEffect()
 {
+	LOCK(this);
 	return effects;
 }
 
