@@ -1299,6 +1299,27 @@ int GameWindowPrompt()
 				Sys_Reboot();
 
 			if(btn1.GetState() == STATE_CLICKED) { //boot
+				//////////save game play count////////////////
+				extern u8 favorite;
+				extern u8 count;
+				struct Game_NUM* game_num = CFG_get_game_num(header->id);
+				if (game_num)
+					{
+					favorite = game_num->favorite;
+					count = game_num->count;//count+=1;
+					}count+=1;
+				if(isSdInserted() == 1) {
+				if (CFG_save_game_num(header->id))
+				{
+					//WindowPrompt(LANGUAGE.SuccessfullySaved, 0, LANGUAGE.ok, 0,0,0);
+				}
+				else
+				{
+					//WindowPrompt(LANGUAGE.SaveFailed, 0, LANGUAGE.ok, 0,0,0);
+				}
+				}
+				////////////end save play count//////////////
+			
 				choice = 1;
 				SDCard_deInit();
 			}
@@ -3253,8 +3274,6 @@ static int MenuDiscList()
 				{
 					WindowPrompt(LANGUAGE.SaveFailed, 0, LANGUAGE.ok, 0,0,0);
 				}
-				} else {
-                WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
 				}
 				////////////end save play count//////////////
 
@@ -3353,36 +3372,8 @@ static int MenuDiscList()
 				{
 
 					wiilight(0);
-					//////////save game play count////////////////
-				extern u8 favorite;
-				extern u8 count;
-				struct Game_NUM* game_num = CFG_get_game_num(header->id);
-
-				if (game_num)
-					{
-					favorite = game_num->favorite;
-					count = game_num->count;//count+=1;
-
-					}count+=1;
-
-
-				if(isSdInserted() == 1) {
-				if (CFG_save_game_num(header->id))
-				{
-					//WindowPrompt(LANGUAGE.SuccessfullySaved, 0, LANGUAGE.ok, 0,0,0);
-				}
-				else
-				{
-					WindowPrompt(LANGUAGE.SaveFailed, 0, LANGUAGE.ok, 0,0,0);
-				}
-				} else {
-                WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
-				}
-				////////////end save play count//////////////
-
-                        struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
-
-                        if (game_cfg)//if there are saved settings for this game use them
+					     struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
+						if (game_cfg)//if there are saved settings for this game use them
                         {
                             iosChoice = game_cfg->ios;
                         }

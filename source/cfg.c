@@ -1169,7 +1169,7 @@ bool cfg_load_games()
 
 bool cfg_load_game_num()
 {
-	return cfg_parsefile("SD:/config/GXGameCount.cfg", &game_set_num);
+	return cfg_parsefile("SD:/config/GXGameFavorites.cfg", &game_set_num);
 }
 
 bool cfg_save_games()// save per game setings
@@ -1208,9 +1208,9 @@ bool cfg_save_game_num()
 	FILE *f;
 	int i;
 	mkdir("SD:/config/", 0777);
-	f = fopen("SD:/config/GXGameCount.cfg", "wb");
+	f = fopen("SD:/config/GXGameFavorites.cfg", "wb");
 	if (!f) {
-		printf("Error saving %s\n", "GXGameCount.cfg");
+		printf("Error saving %s\n", "GXGameFavorites.cfg");
 		sleep(1);
 		return false;
 	}
