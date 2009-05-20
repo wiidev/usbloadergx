@@ -507,14 +507,6 @@ void cfg_set(char *name, char *val)
 		strcopy(CFG.unlockCode, val, sizeof(CFG.unlockCode));
 		return;
 	}
-
-
-
-
-	/*if (strcmp(name, "lang_path") == 0) {
-		strcopy(, val, sizeof(CFG.unlockCode));
-		return;
-	}*/
 }
 
 
@@ -1136,9 +1128,9 @@ void game_set_num(char *name, char *val)
 	if (strncmp(name, "game:", 5) != 0) return;
 	trimcopy((char*)id, name+5, sizeof(id));
 	game = cfg_get_game_num(id);
-	
+
 	cfg_set_game_num(game, id);
-	
+
 
 	// parse val
 	// first split options by ;
@@ -1149,10 +1141,10 @@ void game_set_num(char *name, char *val)
 		np = strchr(p, ';');
 		if (np) trim_n_copy(opt, p, np-p, sizeof(opt));
 		else trimcopy(opt, p, sizeof(opt));
-		
+
 		char opt_name[100], opt_val[100];
 		if (trimsplit(opt, opt_name, opt_val, ':', sizeof(opt_name))){
-			
+
 			short opt_c;
 			if (strcmp("favorite", opt_name) == 0) {
 				if (sscanf(opt_val, "%hd", &opt_c) == 1) {
@@ -1165,7 +1157,7 @@ void game_set_num(char *name, char *val)
 				}
 			}
 		}
-		
+
 		if (np) p = np + 1; else p = NULL;
 	}
 }

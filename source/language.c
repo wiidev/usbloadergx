@@ -84,6 +84,7 @@ snprintf(LANGUAGE.InsertDisk, sizeof(LANGUAGE.InsertDisk), "Insert Disk");
 snprintf(LANGUAGE.InsertaWiiDisc, sizeof(LANGUAGE.InsertaWiiDisc), "Insert a Wii Disc!");
 snprintf(LANGUAGE.InsertaSDCardtodownloadimages, sizeof(LANGUAGE.InsertaSDCardtodownloadimages), "Insert an SD-Card to download images.");
 snprintf(LANGUAGE.InsertaSDCardtosave, sizeof(LANGUAGE.InsertaSDCardtosave), "Insert an SD-Card to save.");
+snprintf(LANGUAGE.InsertaSDCardtousethatoption, sizeof(LANGUAGE.InsertaSDCardtousethatoption), "Insert an SD-Card to use this option.");
 snprintf(LANGUAGE.InstallRenameandDeleteareunlocked, sizeof(LANGUAGE.InstallRenameandDeleteareunlocked), "All the features of USB Loader GX are unlocked.");
 snprintf(LANGUAGE.Installerror, sizeof(LANGUAGE.Installerror), "Install Error!");
 snprintf(LANGUAGE.Installagame, sizeof(LANGUAGE.Installagame), "Install a game");
@@ -437,6 +438,10 @@ void language_set(char *name, char *val)
 	}
 	if (strcmp(name, "InsertaSDCardtodownloadimages") == 0) {
 		strcopy(LANGUAGE.InsertaSDCardtodownloadimages, val, sizeof(LANGUAGE.InsertaSDCardtodownloadimages));
+		return;
+	}
+	if (strcmp(name, "InsertaSDCardtousethatoption") == 0) {
+		strcopy(LANGUAGE.InsertaSDCardtousethatoption, val, sizeof(LANGUAGE.InsertaSDCardtousethatoption));
 		return;
 	}
 	if (strcmp(name, "InsertaSDCardtosave") == 0) {

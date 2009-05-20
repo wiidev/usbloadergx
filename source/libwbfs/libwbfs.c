@@ -431,7 +431,7 @@ u32 wbfs_add_disc(wbfs_t*p,read_wiidisc_callback_t read_src_wii_disc,
         info = wbfs_ioalloc(p->disc_info_sz);
         read_src_wii_disc(callback_data,0,0x100,info->disc_header_copy);
 
-        copy_buffer = wbfs_ioalloc(p->wbfs_sec_sz);
+        copy_buffer = wbfs_ioalloc(p->wii_sec_sz);
         if(!copy_buffer)
                 ERROR("alloc memory");
         tot=0;
@@ -439,26 +439,31 @@ u32 wbfs_add_disc(wbfs_t*p,read_wiidisc_callback_t read_src_wii_disc,
         if(spinner){
                 // count total number to write for spinner
                 for(i=0; i<p->n_wbfs_sec_per_disc;i++)
-                        if(copy_1_1 || block_used(used,i,wii_sec_per_wbfs_sect)) tot++;
+                        if(copy_1_1 || block_used(used,i,wii_sec_per_wbfs_sect)) tot += wii_sec_per_wbfs_sect;
                 spinner(0,tot);
         }
         for(i=0; i<p->n_wbfs_sec_per_disc;i++){
                 u16 bl = 0;
                 if(copy_1_1 || block_used(used,i,wii_sec_per_wbfs_sect)) {
+                        u16 j;
+
                         bl = alloc_block(p);
                         if (bl==0xffff)
                                 ERROR("no space left on device (disc full)");
-                        read_src_wii_disc(callback_data,i*(p->wbfs_sec_sz>>2),p->wbfs_sec_sz,copy_buffer);
+                        for(j=0; j<wii_sec_per_wbfs_sect;j++) {
+                                u32 offset = (i*(p->wbfs_sec_sz>>2)) + (j*(p->wii_sec_sz>>2));
 
-                        //fix the partition table.
-                        if(i==(0x40000>>p->wbfs_sec_sz_s))
-                                wd_fix_partition_table(d, sel, copy_buffer+(0x40000&(p->wbfs_sec_sz-1)));
+                                read_src_wii_disc(callback_data,offset,p->wii_sec_sz,copy_buffer);
 
-                        p->write_hdsector(p->callback_data,p->part_lba+bl*(p->wbfs_sec_sz/p->hd_sec_sz),
-                                          p->wbfs_sec_sz/p->hd_sec_sz,copy_buffer);
-                        cur++;
-                        if(spinner)
-                                spinner(cur,tot);
+                                //fix the partition table
+                                if(offset == (0x40000>>2))
+                                             wd_fix_partition_table(d, sel, copy_buffer);
+                                p->write_hdsector(p->callback_data,p->part_lba+bl*(p->wbfs_sec_sz/p->hd_sec_sz)+j*(p->wii_sec_sz/p->hd_sec_sz),
+                                             p->wii_sec_sz/p->hd_sec_sz,copy_buffer);
+                                cur++;
+                                if(spinner)
+                                             spinner(cur,tot);
+                        }
                 }
                 info->wlba_table[i] = wbfs_htons(bl);
         }
@@ -479,6 +484,7 @@ error:
 
         return 0;
 }
+
 u32 wbfs_rm_disc(wbfs_t*p, u8* discid)
 {
         wbfs_disc_t *d = wbfs_open_disc(p,discid);

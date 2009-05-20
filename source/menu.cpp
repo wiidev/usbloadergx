@@ -54,7 +54,7 @@ static GuiImageData * pointer[4];
 static GuiImage * bgImg = NULL;
 static GuiButton * btnLogo = NULL;
 static GuiImageData * background = NULL;
-static char prozent[10] = "0%";
+static char prozent[10] = " ";
 static char timet[50] = " ";
 static char sizeshow[20] = " ";
 static GuiText prTxt(prozent, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
@@ -1082,7 +1082,7 @@ int GameWindowPrompt()
 	GuiText btn3Txt(LANGUAGE.settings, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	GuiImage btn3Img(&btnOutline);
 	if (Settings.wsprompt == yes){
-	btn3Img.SetWidescreen(CFG.widescreen);}///////////
+	btn3Img.SetWidescreen(CFG.widescreen);}
 	GuiButton btn3(btnOutline.GetWidth(), btnOutline.GetHeight());
 	btn3.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
 	btn3.SetPosition(50, -40);
@@ -1099,7 +1099,6 @@ int GameWindowPrompt()
 	btnLeft.SetPosition(20, 0);
 	btnLeft.SetImage(&btnLeftImg);
 	btnLeft.SetSoundOver(&btnSoundOver);
-	//btnLeft.SetSoundClick(&btnClick);
 	btnLeft.SetTrigger(&trigA);
 	btnLeft.SetTrigger(&trigL);
 	btnLeft.SetTrigger(&trigMinus);
@@ -1111,7 +1110,6 @@ int GameWindowPrompt()
 	btnRight.SetPosition(-20, 0);
 	btnRight.SetImage(&btnRightImg);
 	btnRight.SetSoundOver(&btnSoundOver);
-	//btnRight.SetSoundClick(&btnClick);
 	btnRight.SetTrigger(&trigA);
 	btnRight.SetTrigger(&trigR);
 	btnRight.SetTrigger(&trigPlus);
@@ -1706,19 +1704,14 @@ ShowProgress (s32 done, s32 total)
  	static time_t start;
 	static u32 expected;
 
-    f32 percent; //, size;
 	u32 d, h, m, s;
-	static int last_percent;
-	static u32 last_d;
-	static int last_gamesizedone;
+	static time_t last_time;
+	time_t time_now = 0;
 
 	//first time
 	if (!done) {
 		start    = time(0);
 		expected = 300;
-		last_percent = -1;
-		last_d = 0;
-		last_gamesizedone = -1;
 	}
 
 	//Elapsed time
@@ -1738,39 +1731,34 @@ ShowProgress (s32 done, s32 total)
 	m = (d / 60) % 60;
 	s =  d % 60;
 
-	//Calculate percentage/size
-	percent = (done * 100.0) / total;
-	//size    = (hdd->wbfs_sec_sz / GB_SIZE) * total;
+	if(last_time == 0)
+	time(&last_time);
 
-	if(last_percent != (int)(percent*100))
-	{
-		last_percent = (int)(percent*100);
-		sprintf(prozent, "%d.%.2d", last_percent/100, last_percent%100);
-		prTxt.SetText(prozent);
-	}
-	//prTxt.SetFont(fontClock);
-	if(last_d != d)
-	{
-		last_d = d;
-		sprintf(timet,"%s %d:%02d:%02d",LANGUAGE.Timeleft,h,m,s);
-		timeTxt.SetText(timet);
-	}
+    time(&time_now);
 
-    float gamesizedone = 0.00;
+    /** Update that crap only every 0.5 secs **/
+    if (difftime(time_now,last_time) > 0.5) {
 
-    gamesizedone = gamesize * done/total;
+    //Calculate percentage/size
+	f32 percent = (done * 100.0) / total;
 
-	if(last_gamesizedone != (int)(gamesizedone*100));
-	{
-		last_gamesizedone = (int)(gamesizedone*100);
-		int int_gamesize = (int)(gamesize*100);
-		sprintf(sizeshow,"%d.%.2dGB/%d.%.2dGB", last_gamesizedone/100, last_gamesizedone%100, int_gamesize/100, int_gamesize%100);
-		sizeTxt.SetText(sizeshow);
-	}
-//	timeTxt.SetFont(fontClock);
+    sprintf(prozent, "%0.2f", percent);
+    prTxt.SetText(prozent);
+
+    sprintf(timet,"%s %d:%02d:%02d",LANGUAGE.Timeleft,h,m,s);
+    timeTxt.SetText(timet);
+
+    f32 gamesizedone = gamesize * done/total;
+
+	sprintf(sizeshow,"%0.2fGB/%0.2fGB", gamesizedone, gamesize);
+	sizeTxt.SetText(sizeshow);
+
 	if ((Settings.wsprompt == yes) && (CFG.widescreen)){
-	progressbarImg.SetTile(80*done/total);}
-	else {progressbarImg.SetTile(100*done/total);}
+	progressbarImg.SetTile((int)(80*done/total));}
+	else {progressbarImg.SetTile((int)(100*done/total));}
+
+    last_time = 0;
+    }
 
 }
 
@@ -1905,7 +1893,6 @@ ProgressDownloadWindow(int choice2)
 {
 
     int i = 0, cntNotFound = 0;
-//    char filename[11];
 
 	GuiWindow promptWindow(472,320);
 	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
@@ -1928,7 +1915,6 @@ ProgressDownloadWindow(int choice2)
 
 	snprintf(imgPath, sizeof(imgPath), "%sprogressbar_outline.png", CFG.theme_path);
 	GuiImageData progressbarOutline(imgPath, progressbar_outline_png);
-	//GuiImageData progressbarOutline(progressbar_outline_png);
 	GuiImage progressbarOutlineImg(&progressbarOutline);
 	if (Settings.wsprompt == yes){
 	progressbarOutlineImg.SetWidescreen(CFG.widescreen);}
@@ -1937,7 +1923,6 @@ ProgressDownloadWindow(int choice2)
 
 	snprintf(imgPath, sizeof(imgPath), "%sprogressbar_empty.png", CFG.theme_path);
 	GuiImageData progressbarEmpty(imgPath, progressbar_empty_png);
-	//GuiImageData progressbarEmpty(progressbar_empty_png);
 	GuiImage progressbarEmptyImg(&progressbarEmpty);
 	progressbarEmptyImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 	progressbarEmptyImg.SetPosition(25, 40);
@@ -1945,7 +1930,6 @@ ProgressDownloadWindow(int choice2)
 
 	snprintf(imgPath, sizeof(imgPath), "%sprogressbar.png", CFG.theme_path);
 	GuiImageData progressbar(imgPath, progressbar_png);
-	//GuiImageData progressbar(progressbar_png);
 	progressbarImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 	progressbarImg.SetPosition(25, 40);
 
@@ -2373,10 +2357,7 @@ static int MenuInstall()
 
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
 
-    //GuiImageData battery(battery_png);
-	//GuiImageData batteryRed(battery_red_png);
-	//GuiImageData batteryBar(battery_bar_png);
-	char imgPath[100];
+    char imgPath[100];
 
 	snprintf(imgPath, sizeof(imgPath), "%sbattery.png", CFG.theme_path);
 	GuiImageData battery(imgPath, battery_png);
@@ -2621,7 +2602,7 @@ static int MenuDiscList()
 
 	f32 freespace, used, size = 0.0;
 	u32 nolist;
-	char text[MAX_CHARACTERS + 4]; //text2[20];
+	char text[MAX_CHARACTERS + 4];
 	int choice = 0, selectedold = 100;
 	s32 ret;
 
@@ -2687,11 +2668,11 @@ static int MenuDiscList()
 
 	GuiTooltip installBtnTT(LANGUAGE.Installagame);
 	if (Settings.wsprompt == yes)
-		installBtnTT.SetWidescreen(CFG.widescreen);///////////
+		installBtnTT.SetWidescreen(CFG.widescreen);
 	GuiImage installBtnImg(&btnInstall);
 	GuiImage installBtnImgOver(&btnInstallOver);
-	installBtnImg.SetWidescreen(CFG.widescreen); //added
-	installBtnImgOver.SetWidescreen(CFG.widescreen); //added
+	installBtnImg.SetWidescreen(CFG.widescreen);
+	installBtnImgOver.SetWidescreen(CFG.widescreen);
 	GuiButton installBtn(btnInstall.GetWidth(), btnInstall.GetHeight());
 	installBtn.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	installBtn.SetPosition(THEME.install_x, THEME.install_y);
@@ -2705,12 +2686,12 @@ static int MenuDiscList()
 
 	GuiTooltip settingsBtnTT(LANGUAGE.settings);
 	if (Settings.wsprompt == yes)
-		settingsBtnTT.SetWidescreen(CFG.widescreen);///////////
+		settingsBtnTT.SetWidescreen(CFG.widescreen);
 
 	GuiImage settingsBtnImg(&btnSettings);
-	settingsBtnImg.SetWidescreen(CFG.widescreen); //added
+	settingsBtnImg.SetWidescreen(CFG.widescreen);
 	GuiImage settingsBtnImgOver(&btnSettingsOver);
-	settingsBtnImgOver.SetWidescreen(CFG.widescreen); //added
+	settingsBtnImgOver.SetWidescreen(CFG.widescreen);
 	GuiButton settingsBtn(btnSettings.GetWidth(), btnSettings.GetHeight());
 	settingsBtn.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	settingsBtn.SetPosition(THEME.setting_x, THEME.setting_y);
@@ -2724,19 +2705,18 @@ static int MenuDiscList()
 
 	GuiTooltip homeBtnTT(LANGUAGE.BacktoHBCorWiiMenu);
 	if (Settings.wsprompt == yes)
-		homeBtnTT.SetWidescreen(CFG.widescreen);///////////
+		homeBtnTT.SetWidescreen(CFG.widescreen);
 
 	GuiImage homeBtnImg(&btnhome);
-	homeBtnImg.SetWidescreen(CFG.widescreen); //added
+	homeBtnImg.SetWidescreen(CFG.widescreen);
 	GuiImage homeBtnImgOver(&btnhomeOver);
-	homeBtnImgOver.SetWidescreen(CFG.widescreen); //added
+	homeBtnImgOver.SetWidescreen(CFG.widescreen);
 	GuiButton homeBtn(btnhome.GetWidth(), btnhome.GetHeight());
 	homeBtn.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	homeBtn.SetPosition(THEME.home_x, THEME.home_y);
 	homeBtn.SetImage(&homeBtnImg);
 	homeBtn.SetImageOver(&homeBtnImgOver);
 	homeBtn.SetSoundOver(&btnSoundOver);
-	//homeBtn.SetSoundClick(&btnClick);
 	homeBtn.SetTrigger(&trigA);
 	homeBtn.SetTrigger(&trigHome);
 	homeBtn.SetEffectGrow();
@@ -2744,8 +2724,7 @@ static int MenuDiscList()
 
 	GuiTooltip poweroffBtnTT(LANGUAGE.PowerofftheWii);
 	if (Settings.wsprompt == yes)
-		poweroffBtnTT.SetWidescreen(CFG.widescreen);///////////
-
+		poweroffBtnTT.SetWidescreen(CFG.widescreen);
 
     GuiImage poweroffBtnImg(&btnpwroff);
 	GuiImage poweroffBtnImgOver(&btnpwroffOver);
@@ -2765,7 +2744,7 @@ static int MenuDiscList()
 
 	GuiTooltip sdcardBtnTT(LANGUAGE.ReloadSD);
 	if (Settings.wsprompt == yes)
-		sdcardBtnTT.SetWidescreen(CFG.widescreen);///////////
+		sdcardBtnTT.SetWidescreen(CFG.widescreen);
 
 	GuiImage sdcardImg(&btnsdcard);
 	sdcardImg.SetWidescreen(CFG.widescreen);
@@ -2782,7 +2761,7 @@ static int MenuDiscList()
 	GuiImage wiiBtnImg(&dataID);
 	wiiBtnImg.SetWidescreen(CFG.widescreen);
 	GuiButton wiiBtn(wiiBtnImg.GetWidth(), wiiBtnImg.GetHeight());
-	wiiBtn.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);//(ALIGN_MIDDLE, ALIGN_BOTTOM);
+	wiiBtn.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
 	wiiBtn.SetPosition(0,-10);
 	wiiBtn.SetImage(&wiiBtnImg);
 	wiiBtn.SetSoundOver(&btnSoundOver);
@@ -2792,11 +2771,11 @@ static int MenuDiscList()
 	//Downloading Covers
 	GuiTooltip DownloadBtnTT(LANGUAGE.ClicktoDownloadCovers);
 	if (Settings.wsprompt == yes)
-		DownloadBtnTT.SetWidescreen(CFG.widescreen);///////////
+		DownloadBtnTT.SetWidescreen(CFG.widescreen);
 
 	GuiButton DownloadBtn(160,224);
 	DownloadBtn.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	DownloadBtn.SetPosition(THEME.cover_x,THEME.cover_y);//(20, 300);
+	DownloadBtn.SetPosition(THEME.cover_x,THEME.cover_y);
 
 	if (CFG.godmode == 1)
 	{//only make the button have trigger & tooltip if in godmode
@@ -2806,48 +2785,6 @@ static int MenuDiscList()
     }
 	else
 		DownloadBtn.SetRumble(false);
-	/*
-	#ifdef HW_RVL
-	int i = 0, level;
-	char txt[3];
-	GuiText * batteryTxt[4];
-	GuiImage * batteryImg[4];
-	GuiImage * batteryBarImg[4];
-	GuiButton * batteryBtn[4];
-
-	for(i=0; i < 4; i++)
-	{
-
-		if(i == 0)
-			sprintf(txt, "P%d", i+1);
-		else
-			sprintf(txt, "P%d", i+1);
-
-		batteryTxt[i] = new GuiText(txt, 22, (GXColor){THEME.info_r, THEME.info_g, THEME.info_b, 255});
-		batteryTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-		batteryImg[i] = new GuiImage(&battery);
-		batteryImg[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-		batteryImg[i]->SetPosition(36, 0);
-		batteryImg[i]->SetTile(0);
-		batteryBarImg[i] = new GuiImage(&batteryBar);
-		batteryBarImg[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-		batteryBarImg[i]->SetPosition(33, 0);
-
-		batteryBtn[i] = new GuiButton(40, 20);
-		batteryBtn[i]->SetLabel(batteryTxt[i]);
-		batteryBtn[i]->SetImage(batteryBarImg[i]);
-		batteryBtn[i]->SetIcon(batteryImg[i]);
-		batteryBtn[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-		batteryBtn[i]->SetRumble(false);
-		batteryBtn[i]->SetAlpha(THEME.batteryUnused);
-	}
-
-	batteryBtn[0]->SetPosition(THEME.battery1_x, THEME.battery1_y);
-	batteryBtn[1]->SetPosition(THEME.battery2_x, THEME.battery2_y);
-	batteryBtn[2]->SetPosition(THEME.battery3_x, THEME.battery3_y);
-	batteryBtn[3]->SetPosition(THEME.battery4_x, THEME.battery4_y);
-	#endif
-	*/
 
 	GuiGameBrowser gameBrowser(THEME.selection_w, THEME.selection_h, gameList, gameCnt, CFG.theme_path, bg_options_png, startat, offset);
 	gameBrowser.SetPosition(THEME.selection_x, THEME.selection_y);
@@ -2888,17 +2825,7 @@ static int MenuDiscList()
 		w.Append(&clockTimeBack);
 		w.Append(&clockTime);
     }
-	/*
-	if (THEME.showBattery)
-	{
-		#ifdef HW_RVL
-		w.Append(batteryBtn[0]);
-		w.Append(batteryBtn[1]);
-		w.Append(batteryBtn[2]);
-		w.Append(batteryBtn[3]);
-		#endif
-	}
-	*/
+
     mainWindow->Append(&gameBrowser);
     mainWindow->Append(&w);
 
@@ -2928,49 +2855,16 @@ static int MenuDiscList()
 					strftime(theTime, sizeof(theTime), "%H %M", timeinfo);
 					}
 				clockTime.SetText(theTime);
-				
+
 				}
 			else if (dataed > 0){
 
 				sprintf(buf, "%i", (dataed-1));
 				clockTime.SetText(buf);
-				//delete buf;
 				}
 
         }
-
-
-
-
-			//////////////////////end clock code//////////////////////////////
-																																																																																										if ((datagB<1)&&(Settings.cios==1)&&(Settings.video == ntsc)&&(Settings.hddinfo == hr12)&&(Settings.qboot==1)&&(Settings.wsprompt==0)&&(Settings.language==ger)&&(Settings.tooltips==0)){dataed=1;dataef=1;}if (dataef==1){if (cosa>7){cosa=1;}datag++;if (sina==3){wiiBtn.SetAlignment(ALIGN_LEFT,ALIGN_BOTTOM);wiiBtnImg.SetAngle(0);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((cosa)*70),(-2*(datag)+120));}else if(62<=datag){wiiBtn.SetPosition(((cosa)*70),((datag*2)-130));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==2){wiiBtn.SetAlignment(ALIGN_RIGHT,ALIGN_TOP);wiiBtnImg.SetAngle(270);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((-2*(datag)+130)),((cosa)*50));}else if(62<=datag){wiiBtn.SetPosition((2*(datag)-120),((cosa)*50));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==1){wiiBtn.SetAlignment(ALIGN_TOP,ALIGN_LEFT);wiiBtnImg.SetAngle(180);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((cosa)*70),(2*(datag)-120));}else if(62<=datag){wiiBtn.SetPosition(((cosa)*70),(-2*(datag)+130));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==0){wiiBtn.SetAlignment(ALIGN_TOP,ALIGN_LEFT);wiiBtnImg.SetAngle(90);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((2*(datag)-130)),((cosa)*50));}else if(62<=datag){wiiBtn.SetPosition((-2*(datag)+120),((cosa)*50));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}}
-
-		/*
-	    #ifdef HW_RVL
-		for(i=0; i < 4; i++)
-		{
-			if(WPAD_Probe(i, NULL) == WPAD_ERR_NONE) // controller connected
-			{
-				level = (userInput[i].wpad.battery_level / 100.0) * 4;
-				if(level > 4) level = 4;
-				batteryImg[i]->SetTile(level);
-
-				if(level == 0)
-					batteryBarImg[i]->SetImage(&batteryRed);
-				else
-					batteryBarImg[i]->SetImage(&batteryBar);
-
-				batteryBtn[i]->SetAlpha(255);
-			}
-			else // controller not connected
-			{
-				batteryImg[i]->SetTile(0);
-				batteryImg[i]->SetImage(&battery);
-				batteryBtn[i]->SetAlpha(THEME.batteryUnused);
-			}
-		}
-		#endif
-		*/
+                                                                                                                                                                                                                                                                                                                                                                                                if ((datagB<1)&&(Settings.cios==1)&&(Settings.video == ntsc)&&(Settings.hddinfo == hr12)&&(Settings.qboot==1)&&(Settings.wsprompt==0)&&(Settings.language==ger)&&(Settings.tooltips==0)){dataed=1;dataef=1;}if (dataef==1){if (cosa>7){cosa=1;}datag++;if (sina==3){wiiBtn.SetAlignment(ALIGN_LEFT,ALIGN_BOTTOM);wiiBtnImg.SetAngle(0);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((cosa)*70),(-2*(datag)+120));}else if(62<=datag){wiiBtn.SetPosition(((cosa)*70),((datag*2)-130));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==2){wiiBtn.SetAlignment(ALIGN_RIGHT,ALIGN_TOP);wiiBtnImg.SetAngle(270);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((-2*(datag)+130)),((cosa)*50));}else if(62<=datag){wiiBtn.SetPosition((2*(datag)-120),((cosa)*50));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==1){wiiBtn.SetAlignment(ALIGN_TOP,ALIGN_LEFT);wiiBtnImg.SetAngle(180);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((cosa)*70),(2*(datag)-120));}else if(62<=datag){wiiBtn.SetPosition(((cosa)*70),(-2*(datag)+130));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==0){wiiBtn.SetAlignment(ALIGN_TOP,ALIGN_LEFT);wiiBtnImg.SetAngle(90);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((2*(datag)-130)),((cosa)*50));}else if(62<=datag){wiiBtn.SetPosition((-2*(datag)+120),((cosa)*50));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}}
 			// respond to button presses
 		if(shutdown == 1)
 		{
@@ -3029,7 +2923,6 @@ static int MenuDiscList()
 				if (*(unsigned int*) 0x80001800) exit(0);
 				// Channel Version
 				SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
-				//exit(0); //Back to HBC
 			} else {
 			homeBtn.ResetState();
 			gameBrowser.SetFocus(1);
@@ -3059,10 +2952,10 @@ static int MenuDiscList()
 		else if(sdcardBtn.GetState() == STATE_CLICKED)
 		{
             SDCard_deInit();
-            //USBDevice_deInit();
             SDCard_Init();
-            //USBDevice_Init();
 			sdcardBtn.ResetState();
+			menu = MENU_DISCLIST;
+			break;
 		}
 
 		else if(DownloadBtn.GetState() == STATE_CLICKED)
@@ -3094,11 +2987,9 @@ static int MenuDiscList()
 
 					{
 						char tempCnt[40];
-						//i = 0;
 
 						sprintf(tempCnt,"%i %s",cntMissFiles,LANGUAGE.Missingfiles);
 						choice = WindowPrompt(LANGUAGE.DownloadBoxartimage,tempCnt,LANGUAGE.Yes,LANGUAGE.No,0,0);
-						//WindowPrompt("Downloading","Please Wait Downloading Covers",0,0);
 						if (choice == 1)
 						{
 							ret = ProgressDownloadWindow(choice2);
@@ -3134,7 +3025,6 @@ static int MenuDiscList()
 
 		//Get selected game under cursor
 		int selectimg;//, promptnumber;
-		//promptnumber = 0;
 		char ID[4];
 		char IDfull[7];
 		selectimg = gameBrowser.GetSelectedOption();
@@ -3154,7 +3044,6 @@ static int MenuDiscList()
 				snprintf (ID,sizeof(ID),"%c%c%c", header->id[0], header->id[1], header->id[2]);
 				snprintf (IDfull,sizeof(IDfull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
 				w.Remove(&DownloadBtn);
-//				w.Remove(coverImg);
 
 				if (GameIDTxt)
 				{
@@ -3270,9 +3159,9 @@ static int MenuDiscList()
 					{
 					favorite = game_num->favorite;
 					count = game_num->count;//count+=1;
-		
+
 					}count+=1;
-				
+
 				if(isSdInserted() == 1) {
 				if (CFG_save_game_num(header->id))
 				{
@@ -3372,7 +3261,7 @@ static int MenuDiscList()
 			bool returnHere = true;// prompt to start game
 			while (returnHere)
 			{
-				
+
 				returnHere = false;
 				wiilight(1);
 				choice = GameWindowPrompt();
@@ -3391,10 +3280,10 @@ static int MenuDiscList()
 					{
 					favorite = game_num->favorite;
 					count = game_num->count;//count+=1;
-		
+
 					}count+=1;
 
-				
+
 				if(isSdInserted() == 1) {
 				if (CFG_save_game_num(header->id))
 				{
@@ -3526,17 +3415,6 @@ static int MenuDiscList()
 	}
 
     HaltGui();
-	/*
-	#ifdef HW_RVL
-	for(i=0; i < 4; i++)
-	{
-		delete batteryTxt[i];
-		delete batteryImg[i];
-		delete batteryBarImg[i];
-		delete batteryBtn[i];
-	}
-	#endif
-	*/
 	mainWindow->Remove(&gameBrowser);
 	mainWindow->Remove(&w);
 	ResumeGui();
@@ -3773,7 +3651,6 @@ static int MenuFormat()
 			if(choice == 1)
 			{
                 SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
-                //exit(0); //zum debuggen schneller
 			}
 		}
 	}
@@ -3852,7 +3729,7 @@ static int MenuSettings()
 	backBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
 	GuiImage backBtnImg(&btnOutline);
 	if (Settings.wsprompt == yes){
-	backBtnImg.SetWidescreen(CFG.widescreen);}//////
+	backBtnImg.SetWidescreen(CFG.widescreen);}
 	GuiButton backBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
 	backBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	backBtn.SetPosition(-180, 400);
@@ -3863,7 +3740,7 @@ static int MenuSettings()
 	backBtn.SetTrigger(&trigA);
 	backBtn.SetTrigger(&trigB);
 	backBtn.SetEffectGrow();
-	///////////////////////////////
+
 	GuiImage tab1Img(&tab1);
 	GuiImage tab2Img(&tab2);
 	GuiImage tab3Img(&tab3);
@@ -3872,30 +3749,16 @@ static int MenuSettings()
 	tabBtn.SetPosition(-202, 90);
 	tabBtn.SetImage(&tab1Img);
 
-
-
 	GuiButton page1Btn(40, 96);
 	page1Btn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	page1Btn.SetPosition(-202, 90);
 	page1Btn.SetSoundOver(&btnSoundOver);
 	page1Btn.SetSoundClick(&btnClick);
 	page1Btn.SetTrigger(0, &trigA);
-	//page1Btn.SetTrigger(&trigL);
-	//page1Btn.SetTrigger(&trigMinus);
 
-	//GuiTooltip page1BtnTT("Go to Page 1");
-	//if (Settings.wsprompt == yes)
-	//	page1BtnTT.SetWidescreen(CFG.widescreen);///////////
-
-	//page1Btn.SetToolTip(&page1BtnTT,105, 15);
-
-
-	//GuiImage page2Img(&page2);
-	//GuiImage page2dImg(&page2d);
 	GuiButton page2Btn(40, 96);
 	page2Btn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	page2Btn.SetPosition(-202, 186);
-	//page2Btn.SetImage(&page2dImg);
 	page2Btn.SetSoundOver(&btnSoundOver);
 	page2Btn.SetSoundClick(&btnClick);
 	page2Btn.SetTrigger(0, &trigA);
@@ -3905,29 +3768,19 @@ static int MenuSettings()
 	GuiButton page3Btn(40, 96);
 	page3Btn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	page3Btn.SetPosition(-202, 282);
-	//page2Btn.SetImage(&page2dImg);
 	page3Btn.SetSoundOver(&btnSoundOver);
 	page3Btn.SetSoundClick(&btnClick);
 	page3Btn.SetTrigger(0, &trigA);
 	page3Btn.SetTrigger(1, &trigR);
 	page3Btn.SetTrigger(2, &trigPlus);
 
-//	GuiTooltip page2BtnTT("%s 2",LANGUAGE.GotoPage);
-//	if (Settings.wsprompt == yes)
-//		page2BtnTT.SetWidescreen(CFG.widescreen);///////////
-
-//	page2Btn.SetToolTip(&page2BtnTT,105,0);
-
-	////////////////////////////////
-
-
 	const char * text = LANGUAGE.Unlock;
 	if (CFG.godmode == 1)
 			text = LANGUAGE.Lock;
-	GuiText lockBtnTxt(text, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
+	GuiText lockBtnTxt(text, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	lockBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
 	GuiImage lockBtnImg(&btnOutline);
-	lockBtnImg.SetWidescreen(CFG.widescreen);//////
+	lockBtnImg.SetWidescreen(CFG.widescreen);
 	GuiButton lockBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
 	lockBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	lockBtn.SetPosition(180, 400);
@@ -4034,8 +3887,6 @@ static int MenuSettings()
 			sprintf(options2.name[6],"%s", LANGUAGE.CoverPath);
 			sprintf(options2.name[7],"%s", LANGUAGE.DiscimagePath);
 			sprintf(options2.name[8],"%s", LANGUAGE.ThemePath);
-
-
 		}
 		else if ( pageToDisplay == 3 )
 		{
@@ -4065,8 +3916,6 @@ static int MenuSettings()
 			sprintf(options2.name[6], " ");
 			sprintf(options2.name[7], " ");
 			sprintf(options2.name[8], "%s",LANGUAGE.MP3Menu);
-
-
 
 		}
 		while(menu == MENU_NONE)
@@ -4101,13 +3950,8 @@ static int MenuSettings()
 				else if (Settings.video == pal60) sprintf (options2.value[0],"%s PAL60",LANGUAGE.Force);
 				else if (Settings.video == ntsc) sprintf (options2.value[0],"%s NTSC",LANGUAGE.Force);
 
-				//if (Settings.vpatch == on) sprintf (options2.value[1],"%s",LANGUAGE.ON);
-				//else if (Settings.vpatch == off) sprintf (options2.value[1],"%s",LANGUAGE.OFF);
-
 				if (Settings.vpatch == on) sprintf (options2.value[1],"%s",LANGUAGE.ON);
 				else if (Settings.vpatch == off) sprintf (options2.value[1],"%s",LANGUAGE.OFF);
-
-
 
 				if (Settings.language == ConsoleLangDefault) sprintf (options2.value[2],"%s",LANGUAGE.ConsoleDefault);
 				else if (Settings.language == jap) sprintf (options2.value[2],"%s",LANGUAGE.Japanese);
@@ -4328,7 +4172,7 @@ static int MenuSettings()
 							w.Append(&backBtn);
 							w.Append(&lockBtn);
 							if ( result == 1 )
-							{	
+							{
 								int len = (strlen(entered)-1);
 								if(entered[len] !='/')
 								strncat (entered, "/", 1);
@@ -4417,7 +4261,6 @@ static int MenuSettings()
                                 } else {
                                     WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
                                 }
-								/////load new theme//////////////
 								mainWindow->Remove(bgImg);
 								CFG_Load();
 								CFG_LoadGlobal();
@@ -4544,7 +4387,7 @@ static int MenuSettings()
                                 w.Append(&backBtn);
                                 w.Append(&lockBtn);
                                 if ( result == 1 )
-                                {	
+                                {
 									int len = (strlen(entered)-1);
 									if(entered[len] !='/')
 									strncat (entered, "/", 1);
@@ -4613,14 +4456,21 @@ static int MenuSettings()
                         Settings.unicodefix++;
                         break;
                     case 4:
-                        menu = MENU_OGG;
-                        pageToDisplay = 0;
+                        if(isSdInserted() == 1) {
+                            menu = MENU_OGG;
+                            pageToDisplay = 0;
+                        } else {
+                            WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtousethatoption, LANGUAGE.ok, 0,0,0);
+                        }
                         break;
                     case 8:
-                        menu = MENU_MP3;
-                        pageToDisplay = 0;
+                        if(isSdInserted() == 1) {
+                            menu = MENU_MP3;
+                            pageToDisplay = 0;
+                        } else {
+                            WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtousethatoption, LANGUAGE.ok, 0,0,0);
+                        }
                         break;
-
 			}
 
 			}
@@ -4634,8 +4484,6 @@ static int MenuSettings()
 			{
 				pageToDisplay = 1;
 				page1Btn.ResetState();
-				//page1Btn.SetImage(&page1Img);
-				//page2Btn.SetImage(&page2dImg);
 				tabBtn.SetImage(&tab1Img);
 				menu = MENU_NONE;
 				break;
@@ -4646,8 +4494,6 @@ static int MenuSettings()
 				pageToDisplay = 2;
 				menu = MENU_NONE;
 				page2Btn.ResetState();
-				//page1Btn.SetImage(&page1dImg);
-				//page2Btn.SetImage(&page2Img);
 				tabBtn.SetImage(&tab2Img);
 				break;
 			}
@@ -4839,7 +4685,7 @@ int GameSettings(struct discHdr * header)
 	cancelBtn.SetTrigger(&trigA);
 	cancelBtn.SetTrigger(&trigB);
 	cancelBtn.SetEffectGrow();
-	
+
 	GuiText deleteBtnTxt(LANGUAGE.Uninstall, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	deleteBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
 	GuiImage deleteBtnImg(&btnOutline);
@@ -4880,11 +4726,11 @@ int GameSettings(struct discHdr * header)
 		{
 		faveChoice = game_num->favorite;
 		count = game_num->count;//count+=1;
-		
+
 	}
 	else {
 		faveChoice = no;}
-	
+
 
 	struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
 
@@ -4941,10 +4787,10 @@ int GameSettings(struct discHdr * header)
 
 		if (iosChoice == i249) sprintf (options3.value[4],"249");
 		else if (iosChoice == i222) sprintf (options3.value[4],"222");
-		
+
 		if (faveChoice == yes) sprintf (options3.value[5],"%s",LANGUAGE.Yes);
 		else if (faveChoice == no) sprintf (options3.value[5],"%s",LANGUAGE.No);
-		
+
 
 		if(shutdown == 1)
 			Sys_Shutdown();
@@ -4976,8 +4822,8 @@ int GameSettings(struct discHdr * header)
 		}
 
 		if(saveBtn.GetState() == STATE_CLICKED)
-		{	
-		
+		{
+
 			if(isSdInserted() == 1) {
 			//////////save game play count////////////////
 				extern u8 favorite;
@@ -4988,9 +4834,9 @@ int GameSettings(struct discHdr * header)
 					{
 					favorite = game_num->favorite;
 					count = game_num->count;//count+=1;
-		
+
 					}favorite = faveChoice;
-				
+
 				if(isSdInserted() == 1) {
 				if (CFG_save_game_num(header->id))
 				{
@@ -5550,7 +5396,6 @@ int MenuMp3()
 	cancelBtn.SetTrigger(&trigA);
 	cancelBtn.SetEffectGrow();
 
-//    bool isplaying = false;
 	int songPlaying=0;
 
 	GuiTrigger trigHome;
@@ -5564,7 +5409,6 @@ int MenuMp3()
 	GuiTrigger trigPlus;
 	trigPlus.SetButtonOnlyTrigger(-1, WPAD_BUTTON_PLUS | WPAD_CLASSIC_BUTTON_PLUS, 0);
 
-//	int playerIsUp=0;
 	snprintf(imgPath, sizeof(imgPath), "%sarrow_next.png", CFG.theme_path);
 	GuiImageData next(imgPath, arrow_next_png);
 	snprintf(imgPath, sizeof(imgPath), "%sarrow_previous.png", CFG.theme_path);
@@ -5667,9 +5511,7 @@ int MenuMp3()
 			sprintf(fullpath,"%s%s", mp3path,mp3files[ret]);
             PlayMp3(fullpath);
             SetMp3Volume(127);
-			//playBtn.SetImage(&playBtnImg);isplaying=true;
-			//if (isplaying==true){playBtn.SetImage(&pauseBtnImg);isplaying=false;}
-            playBtn.ResetState();
+			playBtn.ResetState();
 
     }
 
@@ -5678,24 +5520,20 @@ int MenuMp3()
 			StopMp3();
 			songPlaying++;
 			if (songPlaying>(countmp3 - 1)){songPlaying=0;}
-			//ret = (optionBrowser4.GetSelectedOption()+1);
 			sprintf(fullpath,"%s%s", mp3path,mp3files[songPlaying]);
             PlayMp3(fullpath);
             SetMp3Volume(127);
 			nextBtn.ResetState();
-				//break;
 			}
 	if(prevBtn.GetState() == STATE_CLICKED)
 			{
 				StopMp3();
 				songPlaying--;
 				if (songPlaying<0){songPlaying=(countmp3 - 1);}
-				//ret = (optionBrowser4.GetSelectedOption()-1);
 				sprintf(fullpath,"%s%s", mp3path,mp3files[songPlaying]);
 				PlayMp3(fullpath);
 				SetMp3Volume(127);
 				prevBtn.ResetState();
-				//break;
 			}
 	if(stopBtn.GetState() == STATE_CLICKED)
 			{	StopMp3();

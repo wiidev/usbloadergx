@@ -42,7 +42,7 @@ int SDCard_Init()
     if (!isSdInserted()){
         return -1;
     }
-    if (fatMountSimple("SD", &__io_wiisd)) {
+    if (fatMount("SD", &__io_wiisd, 0, CACHE, SECTORS)) {
         return 1;
     }
 return -1;

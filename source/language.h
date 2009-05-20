@@ -65,6 +65,7 @@ struct LANGUAGE
 	char InsertaWiiDisc[50];
 	char InsertaSDCardtodownloadimages[80];
 	char InsertaSDCardtosave[60];
+	char InsertaSDCardtousethatoption[100];
 	char InstallRenameandDeleteareunlocked[100];
 	char Installerror[50];
 	char Installagame[50];
