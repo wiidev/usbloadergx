@@ -202,8 +202,8 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
 		{'v','V','©','Ï'},
 		{'b','B','\0','ï'},
 		{'n','N','\0','Õ'},
-		{'m','M','\0','õ'},
-		{',',';','µ','ÿ'},
+		{'m','M','µ','õ'},
+		{',',';','\0','ÿ'},
 		{'.',':','\0','\0'},
 		{'-','_','\0','\0'}
 	}
@@ -538,12 +538,8 @@ void GuiKeyboard::Update(GuiTrigger * t)
 			}
 		}
 	}
-char* pch;
 
-  pch=strrchr(kbtextstr,'_');
-
-  if (pch!=NULL){kbText->SetPosition(0, 68);}
-  else {kbText->SetPosition(0, 53);}
+	kbText->SetPosition(0, 53);
 
 	this->ToggleFocus(t);
 

@@ -342,12 +342,7 @@ void GuiCustomOptionBrowser::Update(GuiTrigger * t)
 
 			optionTxt[i]->SetText(options->name[next]);
 			optionVal[i]->SetText(options->value[next]);
-			char* pch;
-
-			pch=strrchr((options->value[next]),'_');
-
-			if (pch!=NULL){optionVal[i]->SetPosition(coL2, 15);}
-			else {optionVal[i]->SetPosition(coL2, 0);}
+			optionVal[i]->SetPosition(coL2, 0);
 
 			optionIndex[i] = next;
 			next = this->FindMenuItem(next, 1);

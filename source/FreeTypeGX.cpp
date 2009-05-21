@@ -625,7 +625,7 @@ uint16_t FreeTypeGX::getHeight(wchar_t const *text) {
  */
 ftgxDataOffset FreeTypeGX::getOffset(wchar_t *text) {
 	uint16_t strLength = wcslen(text);
-	uint16_t strMax = 0, strMin = 0;
+	int16_t strMax = 0, strMin = 0;
 
 	for (uint16_t i = 0; i < strLength; i++) {
 

@@ -288,22 +288,11 @@ static void WindowCredits(void * ptr)
 
 	txt[i] = new GuiText(LANGUAGE.For);
 	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(-80,y);
-	char* pch;
-	char* pch2;
-
-			pch=strrchr((LANGUAGE.For),'_');
-			pch2=strrchr((LANGUAGE.For),'p');
-
-			if ((pch!=NULL)||(pch2!=NULL)){txt[i]->SetPosition(-80, y+5);}
-			else {txt[i]->SetPosition(-80, y);}
+	txt[i]->SetPosition(-80, y);
 	i++;
 	txt[i] = new GuiText(LANGUAGE.For);
 	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(130,y);
-	pch=strrchr((LANGUAGE.For),'_');
-	pch2=strrchr((LANGUAGE.For),'p');
-
-			if ((pch!=NULL)||(pch2!=NULL)){txt[i]->SetPosition(130, y+5);}
-			else {txt[i]->SetPosition(130, y);}
+	txt[i]->SetPosition(130, y);
 	i++;
 
 	y+=22;
@@ -313,8 +302,7 @@ static void WindowCredits(void * ptr)
 	i++;
 	txt[i] = new GuiText(LANGUAGE.For);
 	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); //txt[i]->SetPosition(-3,y);
-	if ((pch!=NULL)||(pch2!=NULL)){txt[i]->SetPosition(-3, y+5);}
-			else {txt[i]->SetPosition(-3, y);}
+	txt[i]->SetPosition(-3, y);
 	i++;
 	y+=22;
 
@@ -323,8 +311,7 @@ static void WindowCredits(void * ptr)
 	i++;
 	txt[i] = new GuiText(LANGUAGE.For);
 	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(30,y);
-	if ((pch!=NULL)||(pch2!=NULL)){txt[i]->SetPosition(30, y+5);}
-			else {txt[i]->SetPosition(30, y);}
+	txt[i]->SetPosition(30, y);
 	i++;
 	y+=22;
 
@@ -1308,12 +1295,7 @@ int GameWindowPrompt()
 		playcntTxt.SetText(PlayCnt);
  		btnFavoriteImg.SetImage(faveChoice ? &imgFavorite : &imgNotFavorite);
 
-		char* pch;
-
-			pch=strrchr((gameName),'_');
-
-			if (pch!=NULL){nameTxt.SetPosition(0, 16);}
-			else {nameTxt.SetPosition(0, 1);}
+		nameTxt.SetPosition(0, 1);
 
 		if(changed != 3 && changed != 4) // changed==3 or changed==4 --> only Resume the GUI
 		{
