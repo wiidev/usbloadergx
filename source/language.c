@@ -154,6 +154,7 @@ snprintf(LANGUAGE.Password, sizeof(LANGUAGE.Password), "Password");
 snprintf(LANGUAGE.PasswordChanged, sizeof(LANGUAGE.PasswordChanged), "Password Changed");
 snprintf(LANGUAGE.Passwordhasbeenchanged, sizeof(LANGUAGE.Passwordhasbeenchanged), "Password has been changed");
 snprintf(LANGUAGE.Passwordchange, sizeof(LANGUAGE.Passwordchange), "Password change");
+snprintf(LANGUAGE.Plays, sizeof(LANGUAGE.Plays), "Play Count");
 snprintf(LANGUAGE.PowerofftheWii, sizeof(LANGUAGE.PowerofftheWii), "Power off the Wii");
 snprintf(LANGUAGE.Prev, sizeof(LANGUAGE.Prev), "Prev");
 snprintf(LANGUAGE.PromptsButtons, sizeof(LANGUAGE.PromptsButtons), "Prompts Buttons");
@@ -743,6 +744,10 @@ void language_set(char *name, char *val)
 	}
 	if (strcmp(name, "Passwordchange") == 0) {
 		strcopy(LANGUAGE.Passwordchange, val, sizeof(LANGUAGE.Passwordchange));
+		return;
+	}
+	if (strcmp(name, "Plays") == 0) {
+		strcopy(LANGUAGE.Plays, val, sizeof(LANGUAGE.Plays));
 		return;
 	}
 	if (strcmp(name, "PowerofftheWii") == 0) {

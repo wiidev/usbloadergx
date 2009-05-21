@@ -42,6 +42,7 @@ class GuiGameBrowser : public GuiElement
 		void Draw();
 		void Update(GuiTrigger * t);
 		int GetOffset();
+		void Reload(struct discHdr * l, int count);
 		//GuiText * optionVal[PAGESIZE];
 	protected:
 		int selectedItem;

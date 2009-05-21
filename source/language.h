@@ -140,6 +140,7 @@ struct LANGUAGE
 	char Passwordhasbeenchanged[80];
 	char Passwordchange[50];
 	char PowerofftheWii[50];
+	char Plays[20];
 	char Prev[50];
 	char PromptsButtons[50];
 	char ReloadSD[50];

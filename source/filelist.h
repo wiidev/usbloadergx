@@ -248,4 +248,10 @@ extern const u32	exit_button_png_size;
 extern const u8		mp3_stop_png[];
 extern const u32	mp3_stop_png_size;
 
+extern const u8		favorite_png[];
+extern const u32	favorite_png_size;
+
+extern const u8		not_favorite_png[];
+extern const u32	not_favorite_png_size;
+
 #endif

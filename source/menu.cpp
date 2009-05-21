@@ -83,6 +83,7 @@ static int datag = 0;
 int datagB =0;
 int dataed = -1;
 int cosa=0,sina=0,offa=0;
+u8 dispFave=0;
 
 //downloadvariables
 static char missingFiles[500][12]; //fixed
@@ -991,6 +992,8 @@ int GameWindowPrompt()
 	char ID[4];
 	char IDFull[7];
 	char gameName[CFG.maxcharacters + 4];
+	u8 faveChoice = 0;
+	u8 playCount = 0;
 
 	GuiWindow promptWindow(472,320);
 	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
@@ -1001,6 +1004,11 @@ int GameWindowPrompt()
 	char imgPath[100];
 	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
 	GuiImageData btnOutline(imgPath, button_dialogue_box_png);
+
+	snprintf(imgPath, sizeof(imgPath), "%sfavorite.png", CFG.theme_path);
+	GuiImageData imgFavorite(imgPath, favorite_png);
+	snprintf(imgPath, sizeof(imgPath), "%snot_favorite.png", CFG.theme_path);
+	GuiImageData imgNotFavorite(imgPath, not_favorite_png);
 
 	snprintf(imgPath, sizeof(imgPath), "%sstartgame_arrow_left.png", CFG.theme_path);
 	GuiImageData imgLeft(imgPath, startgame_arrow_left_png);
@@ -1064,6 +1072,11 @@ int GameWindowPrompt()
 	diskImg2.SetAngle(angle);
 	diskImg2.SetBeta(180);
 
+	char PlayCnt[25] = "";
+	GuiText playcntTxt(PlayCnt, 18, (GXColor){THEME.info_r, THEME.info_g, THEME.info_b, 255});
+	playcntTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	playcntTxt.SetPosition(-115,45);
+
 	GuiButton btn1(160, 160);
 	btn1.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	btn1.SetPosition(0, -20);
@@ -1116,6 +1129,17 @@ int GameWindowPrompt()
 	btn3.SetTrigger(&trigA);
 	btn3.SetEffectGrow();
 
+	GuiImage btnFavoriteImg;
+	btnFavoriteImg.SetWidescreen(CFG.widescreen);
+	GuiButton btnFavorite(imgFavorite.GetWidth(), imgFavorite.GetHeight());
+	btnFavorite.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	btnFavorite.SetPosition(-125, -60);
+	btnFavorite.SetImage(&btnFavoriteImg);
+	btnFavorite.SetSoundOver(&btnSoundOver);
+	btnFavorite.SetSoundClick(&btnClick);
+	btnFavorite.SetTrigger(&trigA);
+	btnFavorite.SetEffectGrow();
+
 	GuiImage btnLeftImg(&imgLeft);
 	GuiButton btnLeft(imgLeft.GetWidth(), imgLeft.GetHeight());
 	btnLeft.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
@@ -1141,10 +1165,12 @@ int GameWindowPrompt()
 	promptWindow.Append(&dialogBoxImg);
 	promptWindow.Append(&nameBtn);
 	promptWindow.Append(&sizeTxt);
+	promptWindow.Append(&playcntTxt);
 //	promptWindow.Append(&btn1); // move down at last apended
 	promptWindow.Append(&btn2);
 	promptWindow.Append(&btnLeft);
 	promptWindow.Append(&btnRight);
+	promptWindow.Append(&btnFavorite);
 
 	//check if unlocked
 	if (CFG.godmode == 1)
@@ -1269,6 +1295,19 @@ int GameWindowPrompt()
 			diskImg.SetImage(diskCover);
 		sizeTxt.SetText(sizeText);
 		nameTxt.SetText(gameName);
+
+		struct Game_NUM* game_num = CFG_get_game_num(header->id);
+		if (game_num) {
+			playCount = game_num->count;
+			faveChoice = game_num->favorite;
+		} else {
+			playCount = 0;
+			faveChoice = 0;
+		}
+		sprintf(PlayCnt,"%s: %i",LANGUAGE.Plays, playCount);
+		playcntTxt.SetText(PlayCnt);
+ 		btnFavoriteImg.SetImage(faveChoice ? &imgFavorite : &imgNotFavorite);
+
 		char* pch;
 
 			pch=strrchr((gameName),'_');
@@ -1340,6 +1379,22 @@ int GameWindowPrompt()
 				choice = 3;
 				promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
 			}
+
+			else if(btnFavorite.GetState() == STATE_CLICKED){//switch favorite
+				if(isSdInserted() == 1) {
+					faveChoice = !faveChoice;
+					btnFavoriteImg.SetImage(faveChoice ? &imgFavorite : &imgNotFavorite);
+					extern u8 favorite;
+					struct Game_NUM* game_num = CFG_get_game_num(header->id);
+					if (game_num) {
+						favorite = game_num->favorite;
+					}
+					favorite = faveChoice;
+					CFG_save_game_num(header->id);
+				}
+				btnFavorite.ResetState();
+			}
+
 			// this next part is long because nobody could agree on what the left/right buttons should do
 			else if((btnRight.GetState() == STATE_CLICKED) && (Settings.xflip == no)){//next game
 				promptWindow.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 50);
@@ -2324,26 +2379,24 @@ s32 __Menu_GetEntries(void)
 
 	/* Get header list */
 	ret = WBFS_GetHeaders(buffer, cnt, sizeof(struct discHdr));
-	if (ret < 0)
-		goto err;
+	if (ret < 0) {
+		if(buffer) free(buffer);
+		return ret;
+	}
 		
-	/////////////show favorites only///////////////////////
-	if (Settings.sort==fave){
+	/* Filters */
+	if (Settings.sort==fave || dispFave) {
 		u32 cnt2 = 0;
 
 		for (u32 i = 0; i < cnt; i++)
 		{
-		header = &buffer[i];
-				u8 favorite = 0;
-				struct Game_NUM* game_num = CFG_get_game_num(header->id);
-				if (game_num)
-					{
-					favorite = game_num->favorite;}
-				if (favorite==1)
-				
-			
-			//if (get_block(header) < CFG.parentalcontrol)
-			{
+			header = &buffer[i];
+			u8 favorite = 0;
+			struct Game_NUM* game_num = CFG_get_game_num(header->id);
+			if (game_num) {
+				favorite = game_num->favorite;
+			}
+			if (favorite==1) {
 				buffer2 = (discHdr *) realloc(buffer2, (cnt2+1) * sizeof(struct discHdr));
 				if (!buffer2)
 				{
@@ -2359,12 +2412,8 @@ s32 __Menu_GetEntries(void)
 		buffer = buffer2;
 		buffer2 = NULL;
 		cnt = cnt2;
-		//if (cnt==0){Settings.sort=all;__Menu_GetEntries();}
-		
-		qsort(buffer, cnt, sizeof(struct discHdr), __Menu_EntryCmp);
 	}	
-		
-	else {
+
 	if (CFG.parentalcontrol && !CFG.godmode)
 	{
 	u32 cnt2 = 0;
@@ -2388,14 +2437,14 @@ s32 __Menu_GetEntries(void)
 		buffer = buffer2;
 		buffer2 = NULL;
 		cnt = cnt2;
-	}if (Settings.sort==all){qsort(buffer, cnt, sizeof(struct discHdr), __Menu_EntryCmp);}
-	else //if (Settings.sort==pcount)
-	{qsort(buffer, cnt, sizeof(struct discHdr), __Menu_EntryCmpCount);}
 	}
-	
 
-	/* Sort entries */
-	//qsort(buffer, cnt, sizeof(struct discHdr), __Menu_EntryCmp);
+	if (Settings.sort==pcount) {
+		qsort(buffer, cnt, sizeof(struct discHdr), __Menu_EntryCmpCount);
+	}
+	else {
+		qsort(buffer, cnt, sizeof(struct discHdr), __Menu_EntryCmp);
+	}
 
 	/* Free memory */
 	if (gameList)
@@ -2403,19 +2452,13 @@ s32 __Menu_GetEntries(void)
 
 	/* Set values */
 	gameList = buffer;
+	buffer = NULL;
 	gameCnt  = cnt;
 
 	/* Reset variables */
 	gameSelected = gameStart = 0;
 
 	return 0;
-
-err:
-	/* Free memory */
-	if (buffer)
-		free(buffer);
-
-	return ret;
 }
 
 /****************************************************************************
@@ -2827,6 +2870,11 @@ static int MenuDiscList()
 	snprintf(imgPath, sizeof(imgPath), "%sbattery_bar.png", CFG.theme_path);
 	GuiImageData batteryBar(imgPath, battery_bar_png);
 
+	snprintf(imgPath, sizeof(imgPath), "%sfavorite.png", CFG.theme_path);
+	GuiImageData imgFavoriteOn(imgPath, favorite_png);
+	snprintf(imgPath, sizeof(imgPath), "%snot_favorite.png", CFG.theme_path);
+	GuiImageData imgFavoriteOff(imgPath, not_favorite_png);
+
     GuiTrigger trigA;
 	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
     GuiTrigger trigHome;
@@ -2946,6 +2994,17 @@ static int MenuDiscList()
 	wiiBtn.SetSoundClick(&btnClick);
 	wiiBtn.SetTrigger(&trigA);
 
+	GuiImage favoriteBtnImg(dispFave ? &imgFavoriteOn : &imgFavoriteOff);;
+	favoriteBtnImg.SetWidescreen(CFG.widescreen);
+	GuiButton favoriteBtn(imgFavoriteOn.GetWidth(), imgFavoriteOn.GetHeight());
+	favoriteBtn.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	favoriteBtn.SetPosition(-90, 105);
+	favoriteBtn.SetImage(&favoriteBtnImg);
+	favoriteBtn.SetSoundOver(&btnSoundOver);
+	favoriteBtn.SetSoundClick(&btnClick);
+	favoriteBtn.SetTrigger(&trigA);
+	favoriteBtn.SetEffectGrow();
+
 	//Downloading Covers
 	GuiTooltip DownloadBtnTT(LANGUAGE.ClicktoDownloadCovers);
 	if (Settings.wsprompt == yes)
@@ -2997,6 +3056,7 @@ static int MenuDiscList()
 	w.Append(&homeBtn);
     w.Append(&settingsBtn);
 	w.Append(&DownloadBtn);
+	w.Append(&favoriteBtn);
 
     if((Settings.hddinfo == hr12)||(Settings.hddinfo == hr24))
     {
@@ -3200,6 +3260,16 @@ static int MenuDiscList()
 
 		}
 
+		else if(favoriteBtn.GetState() == STATE_CLICKED)
+		{
+			dispFave = !dispFave;
+			__Menu_GetEntries();
+			gameBrowser.Reload(gameList, gameCnt);
+			sprintf(GamesCnt,"%s: %i",LANGUAGE.Games, gameCnt);
+			gamecntTxt.SetText(GamesCnt);
+			favoriteBtnImg.SetImage(dispFave ? &imgFavoriteOn : &imgFavoriteOff);
+			favoriteBtn.ResetState();
+		}
 
 		//Get selected game under cursor
 		int selectimg;//, promptnumber;

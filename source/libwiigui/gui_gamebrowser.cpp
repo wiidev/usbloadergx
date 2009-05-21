@@ -636,3 +636,18 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 	if(updateCB)
 		updateCB(this);
 }
+
+void GuiGameBrowser::Reload(struct discHdr * l, int count)
+{
+	LOCK(this);
+	gameList = l;
+	gameCnt = count;
+	if (gameCnt == 0) gameCnt = 1;
+	scrollbaron = (gameCnt > THEME.pagesize) ? 1 : 0;
+	pagesize = (gameCnt > THEME.pagesize) ? THEME.pagesize : gameCnt;
+	selectedItem = 0;
+	listOffset = 0;
+
+	for(int i=0; i<pagesize; i++)
+		game[i]->ResetState();
+}
