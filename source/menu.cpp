@@ -772,7 +772,7 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 	GuiButton closeBtn(close.GetWidth(), close.GetHeight());
 	closeBtn.SetImage(&closeImg);
 	closeBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	closeBtn.SetPosition(220,48);
+	closeBtn.SetPosition(205,40);
 	closeBtn.SetLabel(&closeTxt);
 	closeBtn.SetRumble(false);
 	closeBtn.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
@@ -2408,35 +2408,43 @@ s32 __Menu_GetEntries(void)
 				cnt2++;
 			}
 		}
-		free(buffer);
-		buffer = buffer2;
-		buffer2 = NULL;
+		if (buffer2) {
+			free(buffer);
+			buffer = buffer2;
+			buffer2 = NULL;
+		} else {
+			memset(buffer, 0, len);
+		}
 		cnt = cnt2;
 	}
 
 	if (CFG.parentalcontrol && !CFG.godmode)
 	{
-	u32 cnt2 = 0;
+	u32 cnt3 = 0;
 
 		for (u32 i = 0; i < cnt; i++)
 		{
 		if (get_block(header) < CFG.parentalcontrol)
 			{
-				buffer2 = (discHdr *) realloc(buffer2, (cnt2+1) * sizeof(struct discHdr));
+				buffer2 = (discHdr *) realloc(buffer2, (cnt3+1) * sizeof(struct discHdr));
 				if (!buffer2)
 				{
 					free(buffer);
 					return -1;
 				}
 
-				memcpy((buffer2 + cnt2), (buffer + i), sizeof(struct discHdr));
-				cnt2++;
+				memcpy((buffer2 + cnt3), (buffer + i), sizeof(struct discHdr));
+				cnt3++;
 			}
 		}
-		free(buffer);
-		buffer = buffer2;
-		buffer2 = NULL;
-		cnt = cnt2;
+		if (buffer2) {
+			free(buffer);
+			buffer = buffer2;
+			buffer2 = NULL;
+		} else {
+			memset(buffer, 0, len);
+		}
+		cnt = cnt3;
 	}
 
 	if (Settings.sort==pcount) {
