@@ -14,6 +14,7 @@ struct LANGUAGE
 
 	char t3Covers[50];
 	char addToFavorite[20];
+	char all[10];
 	char AppLanguage[50];
 	char Areyousure[50];
 	char AutoPatch[20];
@@ -43,6 +44,7 @@ struct LANGUAGE
 	char CoverPath[50];
 	char CoverpathChanged[50];
 	char Coverpathchange[50];
+	char count[20];
 	char Credits[30];
 	char DiscImages[50];
 	char DiscimagePath[50];
@@ -74,6 +76,7 @@ struct LANGUAGE
 	char FailedtomountfrontSDcard[80];
 	char FailedtosetUSB[50];
 	char Failedformating[50];
+	char fave[15];
 	char Filenotfound[50];
 	char filesnotfoundontheserver[80];
 	char filesleft[50];
@@ -100,6 +103,7 @@ struct LANGUAGE
 	char Langchange[50];
 	char Left[50];
 	char LikeSysMenu[50];
+	char ListSort[20];
 	char LoadingincIOS[50];
 	char Loadingstandardlanguage[80];
 	char Loadingstandardmusic[80];

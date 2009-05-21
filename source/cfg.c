@@ -50,6 +50,7 @@ u8 viChoice = 0;
 u8 iosChoice = 0;
 u8 parentalcontrolChoice = 0;
 u8 xflip = 0;
+u8 sort = 0;
 u8 qboot = 0;
 u8 wsprompt = 0;
 u8 keyset = 0;
@@ -757,6 +758,13 @@ void global_cfg_set(char *name, char *val)
 		}
 		return;
 	}
+	else if (strcmp(name, "sort") == 0) {
+		int i;
+		if (sscanf(val, "%d", &i) == 1) {
+			Settings.sort = i;
+		}
+		return;
+	}
 
 	else if (strcmp(name, "keyset") == 0) {
 		int i;
@@ -1030,6 +1038,7 @@ bool cfg_save_global()// save global settings
 	fprintf(f, "volume = %d\n ", Settings.volume);
 	fprintf(f, "tooltips = %d\n ", Settings.tooltips);
 	fprintf(f, "password = %s\n ", Settings.unlockCode);
+	fprintf(f, "sort = %d\n ", Settings.sort);
 	fprintf(f, "cios = %d\n ", Settings.cios);
 	fprintf(f, "keyset = %d\n ", Settings.keyset);
 	fprintf(f, "xflip = %d\n ", Settings.xflip);
@@ -1268,7 +1277,7 @@ struct Game_NUM* CFG_get_game_num(u8 *id)
 {
 	int i;
 	for (i=0; i<num_saved_game_num; i++) {
-		if (memcmp(id, cfg_game_num[i].id, 2) == 0) {
+		if (memcmp(id, cfg_game_num[i].id, 6) == 0) {
 			return &cfg_game_num[i];
 		}
 	}

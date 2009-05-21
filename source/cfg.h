@@ -144,7 +144,7 @@ struct THEME
 extern struct CFG CFG;
 extern struct THEME THEME;
 extern u8 ocarinaChoice;
-extern u8 fave;
+extern u8 sort;
 extern u8 playcnt;
 extern u8 videoChoice;
 extern u8 languageChoice;
@@ -154,6 +154,7 @@ extern u8 faveChoice;
 extern u8 parentalcontrolChoice;
 extern u8 xflip;
 extern u8 qboot;
+extern u8 sort;
 extern u8 wsprompt;
 extern u8 keyset;
 
@@ -236,6 +237,11 @@ enum {
 	hr24,
 	Off,
 };
+enum {
+	all,
+	fave,
+	pcount,
+};
 
 enum {
 	RumbleOff,
@@ -300,6 +306,7 @@ struct SSettings {
 	int		wsprompt;
 	int		keyset;
 	int     unicodefix;
+	int		sort;
 };
 
 void CFG_LoadGlobal(void);

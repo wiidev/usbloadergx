@@ -2253,12 +2253,44 @@ InitGUIThreads()
  * EntryCmp
  ***************************************************************************/
 s32 __Menu_EntryCmp(const void *a, const void *b)
+
 {
+
 	struct discHdr *hdr1 = (struct discHdr *)a;
+
 	struct discHdr *hdr2 = (struct discHdr *)b;
 
+
+
 	/* Compare strings */
+
 	return stricmp(get_title(hdr1), get_title(hdr2));
+
+}
+
+s32 __Menu_EntryCmpCount(const void *a, const void *b)
+{
+	s32 ret;
+
+	struct discHdr *hdr1 = (struct discHdr *)a;
+
+	struct discHdr *hdr2 = (struct discHdr *)b;
+
+	/* Compare Play Count */
+	u8 count1 = 0;
+	u8 count2 = 0;
+	struct Game_NUM* game_num1 = CFG_get_game_num(hdr1->id);
+	struct Game_NUM* game_num2 = CFG_get_game_num(hdr2->id);
+
+
+
+	if (game_num1) count1 = game_num1->count;
+	if (game_num2) count2 = game_num2->count;
+
+	ret = (s32) (count2-count1);
+	if (ret == 0) return stricmp(get_title(hdr1), get_title(hdr2));
+	
+	return ret;
 }
 
 /****************************************************************************
@@ -2266,7 +2298,7 @@ s32 __Menu_EntryCmp(const void *a, const void *b)
  ***************************************************************************/
 
 s32 __Menu_GetEntries(void)
-{
+{	
 	struct discHdr *buffer = NULL;
 	struct discHdr *buffer2 = NULL;
 	struct discHdr *header = NULL;
@@ -2294,15 +2326,23 @@ s32 __Menu_GetEntries(void)
 	ret = WBFS_GetHeaders(buffer, cnt, sizeof(struct discHdr));
 	if (ret < 0)
 		goto err;
-
-	if (CFG.parentalcontrol && !CFG.godmode)
-	{
+		
+	/////////////show favorites only///////////////////////
+	if (Settings.sort==fave){
 		u32 cnt2 = 0;
 
 		for (u32 i = 0; i < cnt; i++)
 		{
-			header = &buffer[i];
-			if (get_block(header) < CFG.parentalcontrol)
+		header = &buffer[i];
+				u8 favorite = 0;
+				struct Game_NUM* game_num = CFG_get_game_num(header->id);
+				if (game_num)
+					{
+					favorite = game_num->favorite;}
+				if (favorite==1)
+				
+			
+			//if (get_block(header) < CFG.parentalcontrol)
 			{
 				buffer2 = (discHdr *) realloc(buffer2, (cnt2+1) * sizeof(struct discHdr));
 				if (!buffer2)
@@ -2319,10 +2359,43 @@ s32 __Menu_GetEntries(void)
 		buffer = buffer2;
 		buffer2 = NULL;
 		cnt = cnt2;
+		//if (cnt==0){Settings.sort=all;__Menu_GetEntries();}
+		
+		qsort(buffer, cnt, sizeof(struct discHdr), __Menu_EntryCmp);
+	}	
+		
+	else {
+	if (CFG.parentalcontrol && !CFG.godmode)
+	{
+	u32 cnt2 = 0;
+
+		for (u32 i = 0; i < cnt; i++)
+		{
+		if (get_block(header) < CFG.parentalcontrol)
+			{
+				buffer2 = (discHdr *) realloc(buffer2, (cnt2+1) * sizeof(struct discHdr));
+				if (!buffer2)
+				{
+					free(buffer);
+					return -1;
+				}
+
+				memcpy((buffer2 + cnt2), (buffer + i), sizeof(struct discHdr));
+				cnt2++;
+			}
+		}
+		free(buffer);
+		buffer = buffer2;
+		buffer2 = NULL;
+		cnt = cnt2;
+	}if (Settings.sort==all){qsort(buffer, cnt, sizeof(struct discHdr), __Menu_EntryCmp);}
+	else //if (Settings.sort==pcount)
+	{qsort(buffer, cnt, sizeof(struct discHdr), __Menu_EntryCmpCount);}
 	}
+	
 
 	/* Sort entries */
-	qsort(buffer, cnt, sizeof(struct discHdr), __Menu_EntryCmp);
+	//qsort(buffer, cnt, sizeof(struct discHdr), __Menu_EntryCmp);
 
 	/* Free memory */
 	if (gameList)
@@ -2702,6 +2775,8 @@ static int MenuDiscList()
 	int menu = MENU_NONE, dataef=0;
 	char imgPath[100];
 	char buf[4];
+	__Menu_GetEntries();
+	if (gameCnt==0){Settings.sort=all;__Menu_GetEntries();}
 
 	f32 freespace, used, size = 0.0;
 	u32 nolist;
@@ -3986,7 +4061,7 @@ static int MenuSettings()
 			sprintf(options2.name[2], "%s",LANGUAGE.keyboard);
 			sprintf(options2.name[3], "%s",LANGUAGE.Unicodefix);
 			sprintf(options2.name[4], "%s",LANGUAGE.Backgroundmusic);
-			sprintf(options2.name[5], " ");
+			sprintf(options2.name[5], "%s",LANGUAGE.ListSort);
 			sprintf(options2.name[6], " ");
 			sprintf(options2.name[7], " ");
 			sprintf(options2.name[8], "%s",LANGUAGE.MP3Menu);
@@ -4391,6 +4466,8 @@ static int MenuSettings()
 					Settings.keyset = 0;
             if ( Settings.unicodefix > 2 )
 					Settings.unicodefix = 0;
+			if ( Settings.sort > 2 )
+					Settings.sort = 0;
 
             if (strlen(CFG.titlestxt_path) < (9 + 3)) {
             sprintf(cfgtext, "%s", CFG.titlestxt_path);
@@ -4432,7 +4509,9 @@ static int MenuSettings()
             sprintf(options2.value[4], "%s", cfgtext);
             }
 
-			sprintf(options2.value[5], " ");
+			if (Settings.sort == all) sprintf (options2.value[5],"%s",LANGUAGE.all);
+            else if (Settings.sort == fave) sprintf (options2.value[5],"%s",LANGUAGE.fave);
+            else if (Settings.sort == pcount) sprintf (options2.value[5],"%s",LANGUAGE.count);
 			sprintf(options2.value[6], " ");
 			sprintf(options2.value[7], " ");
 			sprintf(options2.value[8], "not working!");
@@ -4545,6 +4624,10 @@ static int MenuSettings()
                         } else {
                             WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtousethatoption, LANGUAGE.ok, 0,0,0);
                         }
+                        break;
+					case 5:
+                        Settings.sort++;
+						//__Menu_GetEntries();
                         break;
 			}
 

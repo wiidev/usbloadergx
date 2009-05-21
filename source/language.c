@@ -31,6 +31,7 @@ void lang_default()
 {
 snprintf(LANGUAGE.ok, sizeof(LANGUAGE.ok), "OK");
 snprintf(LANGUAGE.addToFavorite, sizeof(LANGUAGE.addToFavorite), "Favorite");
+snprintf(LANGUAGE.all, sizeof(LANGUAGE.all), "Alphabetical");
 snprintf(LANGUAGE.AppLanguage, sizeof(LANGUAGE.AppLanguage), "App Language");
 snprintf(LANGUAGE.t3Covers, sizeof(LANGUAGE.t3Covers), "3D Covers");
 snprintf(LANGUAGE.Areyousure, sizeof(LANGUAGE.Areyousure), "Are you sure?");
@@ -61,6 +62,7 @@ snprintf(LANGUAGE.CoverDownload, sizeof(LANGUAGE.CoverDownload), "Cover Download
 snprintf(LANGUAGE.CoverPath, sizeof(LANGUAGE.CoverPath), "Cover Path");
 snprintf(LANGUAGE.CoverpathChanged, sizeof(LANGUAGE.CoverpathChanged), "Coverpath Changed");
 snprintf(LANGUAGE.Coverpathchange, sizeof(LANGUAGE.Coverpathchange), "Coverpath change");
+snprintf(LANGUAGE.count, sizeof(LANGUAGE.count), "Play Count");
 snprintf(LANGUAGE.Credits, sizeof(LANGUAGE.Credits), "Credits");
 snprintf(LANGUAGE.DiscImages, sizeof(LANGUAGE.DiscImages), "Disc Images");
 snprintf(LANGUAGE.DiscimagePath, sizeof(LANGUAGE.DiscimagePath), "Discimage Path");
@@ -93,6 +95,7 @@ snprintf(LANGUAGE.Failedtoboot, sizeof(LANGUAGE.Failedtoboot), "Failed to boot:"
 snprintf(LANGUAGE.FailedtomountfrontSDcard, sizeof(LANGUAGE.FailedtomountfrontSDcard), "Failed to mount front SD-card");
 snprintf(LANGUAGE.FailedtosetUSB, sizeof(LANGUAGE.FailedtosetUSB), "Failed to set USB:");
 snprintf(LANGUAGE.Failedformating, sizeof(LANGUAGE.Failedformating), "Failed formating");
+snprintf(LANGUAGE.fave, sizeof(LANGUAGE.fave), "Favorites");
 snprintf(LANGUAGE.filesnotfoundontheserver, sizeof(LANGUAGE.filesnotfoundontheserver), "files not found on the server!");
 snprintf(LANGUAGE.Filenotfound, sizeof(LANGUAGE.Filenotfound), "File not found.");
 snprintf(LANGUAGE.filesleft, sizeof(LANGUAGE.filesleft), "file(s) left");
@@ -117,6 +120,7 @@ snprintf(LANGUAGE.Language, sizeof(LANGUAGE.Language), "Game Language");
 snprintf(LANGUAGE.Left, sizeof(LANGUAGE.Left), "Left");
 snprintf(LANGUAGE.LikeSysMenu, sizeof(LANGUAGE.LikeSysMenu), "Like SysMenu");
 snprintf(LANGUAGE.LoadingincIOS, sizeof(LANGUAGE.LoadingincIOS), "Loading in cIOS249");
+snprintf(LANGUAGE.ListSort, sizeof(LANGUAGE.ListSort), "Sort Game List");
 snprintf(LANGUAGE.Loadingstandardlanguage, sizeof(LANGUAGE.Loadingstandardlanguage), "Loading standard language.");
 snprintf(LANGUAGE.Loadingstandardmusic, sizeof(LANGUAGE.Loadingstandardmusic), "Loading standard music.");
 snprintf(LANGUAGE.Lock, sizeof(LANGUAGE.Lock), "Lock");
@@ -232,6 +236,10 @@ void language_set(char *name, char *val)
 		strcopy(LANGUAGE.addToFavorite, val, sizeof(LANGUAGE.addToFavorite));
 		return;
 	}
+	if (strcmp(name, "all") == 0) {
+		strcopy(LANGUAGE.all, val, sizeof(LANGUAGE.all));
+		return;
+	}
 	if (strcmp(name, "Specialthanksto") == 0) {
 		strcopy(LANGUAGE.Specialthanksto, val, sizeof(LANGUAGE.Specialthanksto));
 		return;
@@ -340,6 +348,10 @@ void language_set(char *name, char *val)
 		strcopy(LANGUAGE.CouldnotinitializeDIPmodule, val, sizeof(LANGUAGE.CouldnotinitializeDIPmodule));
 		return;
 	}
+	if (strcmp(name, "count") == 0) {
+		strcopy(LANGUAGE.count, val, sizeof(LANGUAGE.count));
+		return;
+	}
 	if (strcmp(name, "CoverDownload") == 0) {
 		strcopy(LANGUAGE.CoverDownload, val, sizeof(LANGUAGE.CoverDownload));
 		return;
@@ -422,6 +434,10 @@ void language_set(char *name, char *val)
 	}
 	if (strcmp(name, "ExitUSBISOLoader") == 0) {
 		strcopy(LANGUAGE.ExitUSBISOLoader, val, sizeof(LANGUAGE.ExitUSBISOLoader));
+		return;
+	}
+	if (strcmp(name, "fave") == 0) {
+		strcopy(LANGUAGE.fave, val, sizeof(LANGUAGE.fave));
 		return;
 	}
 	if (strcmp(name, "InitializingNetwork") == 0) {
@@ -587,6 +603,10 @@ void language_set(char *name, char *val)
 	}
 	if (strcmp(name, "LikeSysMenu") == 0) {
 		strcopy(LANGUAGE.LikeSysMenu, val, sizeof(LANGUAGE.LikeSysMenu));
+		return;
+	}
+	if (strcmp(name, "ListSort") == 0) {
+		strcopy(LANGUAGE.ListSort, val, sizeof(LANGUAGE.ListSort));
 		return;
 	}
 	if (strcmp(name, "LoadingincIOS") == 0) {
