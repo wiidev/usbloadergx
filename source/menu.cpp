@@ -2722,7 +2722,6 @@ static int MenuDiscList()
 	char imgPath[100];
 	char buf[4];
 	__Menu_GetEntries();
-	if (gameCnt==0){Settings.sort=all;__Menu_GetEntries();}
 
 	f32 freespace, used, size = 0.0;
 	u32 nolist;
@@ -3170,7 +3169,7 @@ static int MenuDiscList()
 			gameBrowser.Reload(gameList, gameCnt);
 			sprintf(GamesCnt,"%s: %i",LANGUAGE.Games, gameCnt);
 			gamecntTxt.SetText(GamesCnt);
-			selectedold=-1;
+			selectedold = 1;
 			favoriteBtnImg.SetImage(dispFave ? &imgFavoriteOn : &imgFavoriteOff);
 			favoriteBtn.ResetState();
 		}

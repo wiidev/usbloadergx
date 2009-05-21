@@ -26,22 +26,14 @@ GuiGameBrowser::GuiGameBrowser(int w, int h, struct discHdr * l, int gameCnt, co
 {
 	width = w;
 	height = h;
-	if (gameCnt == 0) {
-	focus = 0;
-	dontsetfocus = 1;
-	} else {
-    gameList = l;
-	dontsetfocus = 0;
-    focus = 1;
-	}
 	this->gameCnt = gameCnt;
-
-	pagesize = (gameCnt > THEME.pagesize) ? THEME.pagesize : gameCnt;
-	scrollbaron = (gameCnt > THEME.pagesize) ? 1 : 0;
+	gameList = l;
+	pagesize = THEME.pagesize;
+	scrollbaron = (gameCnt > pagesize) ? 1 : 0;
 	selectable = true;
 	listOffset = (offset == 0) ? this->FindMenuItem(-1, 1) : offset;
 	selectedItem = selected - offset;
-	 // allow focus
+	focus = 1; // allow focus
 	char imgPath[100];
 
 	trigA = new GuiTrigger;
@@ -205,7 +197,6 @@ GuiGameBrowser::~GuiGameBrowser()
 void GuiGameBrowser::SetFocus(int f)
 {
 	LOCK(this);
-	if(!dontsetfocus)
 	focus = f;
 
 	for(int i=0; i<pagesize; i++)
@@ -250,7 +241,7 @@ int GuiGameBrowser::GetClickedOption()
 }
 
 int GuiGameBrowser::GetSelectedOption()
-{
+{	
 	int found = -1;
 	for(int i=0; i<pagesize; i++)
 	{
@@ -371,7 +362,7 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 			game[i]->SetState(STATE_DISABLED);
 		}
 
-		if(focus || !dontsetfocus)
+		if(focus)
 		{
 			if(i != selectedItem && game[i]->GetState() == STATE_SELECTED)
 				game[i]->ResetState();
@@ -388,7 +379,7 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 	}
 
 	// pad/joystick navigation
-	if(!focus || dontsetfocus)
+	if(!focus)
 		return; // skip navigation
 
     if (scrollbaron == 1) {
@@ -640,8 +631,7 @@ void GuiGameBrowser::Reload(struct discHdr * l, int count)
 	LOCK(this);
 	gameList = l;
 	gameCnt = count;
-	scrollbaron = (gameCnt > THEME.pagesize) ? 1 : 0;
-	pagesize = (gameCnt > THEME.pagesize) ? THEME.pagesize : gameCnt;
+	scrollbaron = (gameCnt > pagesize) ? 1 : 0;
 	selectedItem = 0;
 	listOffset = 0;
 
