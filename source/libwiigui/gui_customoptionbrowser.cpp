@@ -124,13 +124,13 @@ GuiCustomOptionBrowser::GuiCustomOptionBrowser(int w, int h, customOptionList * 
 		optionTxt[i] = new GuiText(options->name[i], 20, (GXColor){0, 0, 0, 0xff});
 		optionTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 		optionTxt[i]->SetPosition(24,0);
-		
+
 		optionBg[i] = new GuiImage(bgOptionsEntry);
-		
+
 		optionVal[i] = new GuiText(NULL, 20, (GXColor){0, 0, 0, 0xff});
 		optionVal[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 		optionVal[i]->SetPosition(250,0);
-		
+
 		optionBtn[i] = new GuiButton(width,GAMESELECTSIZE);//(width-28,GAMESELECTSIZE);
 		optionBtn[i]->SetParent(this);
 		optionBtn[i]->SetLabel(optionTxt[i], 0);
@@ -140,7 +140,7 @@ GuiCustomOptionBrowser::GuiCustomOptionBrowser(int w, int h, customOptionList * 
 		optionBtn[i]->SetRumble(false);
 		optionBtn[i]->SetTrigger(trigA);
 		optionBtn[i]->SetSoundClick(btnSoundClick);
-		
+
 	}
 }
 
@@ -206,6 +206,7 @@ void GuiCustomOptionBrowser::SetFocus(int f)
 		optionBtn[i]->ResetState();
 
 	if(f == 1)
+        optionBtn[selectedItem]->ResetState();
 		optionBtn[selectedItem]->SetState(STATE_SELECTED);
 }
 
@@ -312,13 +313,13 @@ void GuiCustomOptionBrowser::Update(GuiTrigger * t)
 
 	if(state == STATE_DISABLED || !t)
 		return;
-												
-	
+
+
 	// scrolldelay affects how fast the list scrolls
 	// when the arrows are clicked
 	float scrolldelay = 3.5;
-	
-	
+
+
     if (scrollbaron == 1) {
 	// update the location of the scroll box based on the position in the option list
 
@@ -342,12 +343,12 @@ void GuiCustomOptionBrowser::Update(GuiTrigger * t)
 			optionTxt[i]->SetText(options->name[next]);
 			optionVal[i]->SetText(options->value[next]);
 			char* pch;
-  
+
 			pch=strrchr((options->value[next]),'_');
-  
+
 			if (pch!=NULL){optionVal[i]->SetPosition(coL2, 15);}
 			else {optionVal[i]->SetPosition(coL2, 0);}
-			
+
 			optionIndex[i] = next;
 			next = this->FindMenuItem(next, 1);
 		}
@@ -359,10 +360,11 @@ void GuiCustomOptionBrowser::Update(GuiTrigger * t)
 
 		if(focus)
 		{
-			if(i != selectedItem && optionBtn[i]->GetState() == STATE_SELECTED)
+			if(i != selectedItem && optionBtn[i]->GetState() == STATE_SELECTED) {
 				optionBtn[i]->ResetState();
-			else if(i == selectedItem && optionBtn[i]->GetState() == STATE_DEFAULT)
-				optionBtn[selectedItem]->SetState(STATE_SELECTED, t->chan);
+			} else if(i == selectedItem && optionBtn[i]->GetState() == STATE_DEFAULT) {
+				optionBtn[selectedItem]->SetState(STATE_SELECTED);
+			}
 		}
 
 		optionBtn[i]->Update(t);
@@ -371,6 +373,7 @@ void GuiCustomOptionBrowser::Update(GuiTrigger * t)
 		{
 			selectedItem = i;
 		}
+
 	}
 
 	// pad/joystick navigation
@@ -378,16 +381,16 @@ void GuiCustomOptionBrowser::Update(GuiTrigger * t)
 		return; // skip navigation
 
     if (scrollbaron == 1) {
-		
-	if (t->Down() || 
+
+	if (t->Down() ||
 	arrowDownBtn->GetState() == STATE_CLICKED || ////////////////////////////////////////////down
-	arrowDownBtn->GetState() == STATE_HELD) 
+	arrowDownBtn->GetState() == STATE_HELD)
 	{
 
 		next = this->FindMenuItem(optionIndex[selectedItem], 1);
-		
+
 		if(next >= 0)
-		{	
+		{
 			if(selectedItem == size-1)
 			{
 				// move list down by 1
@@ -412,11 +415,11 @@ void GuiCustomOptionBrowser::Update(GuiTrigger * t)
 
         } else {
             arrowDownBtn->ResetState();
-			
+
         }
-        
+
 	}
-	else if(t->Up() || 
+	else if(t->Up() ||
 	arrowUpBtn->GetState() == STATE_CLICKED || ////////////////////////////////////////////up
 	arrowUpBtn->GetState() == STATE_HELD)
 	{
@@ -448,8 +451,8 @@ void GuiCustomOptionBrowser::Update(GuiTrigger * t)
 
         } else {
             arrowUpBtn->ResetState();
-			
-        }  
+
+        }
 	}
 
     if(scrollbarBoxBtn->GetState() == STATE_HELD &&

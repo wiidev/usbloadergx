@@ -6,7 +6,7 @@
 #include <ogc/usbstorage.h>
 #include <sdcard/wiisd_io.h>
 
-#define CACHE 4
+#define CACHE 1
 #define SECTORS 64
 
 

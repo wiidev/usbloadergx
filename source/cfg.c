@@ -913,7 +913,7 @@ bool cfg_parsefile(char *fname, void (*set_func)(char*, char*))
 	char line[200];
 
 	//printf("opening(%s)\n", fname);
-	f = fopen(fname, "rb");
+	f = fopen(fname, "rt");
 	if (!f) {
 		//printf("error opening(%s)\n", fname);
 		return false;
@@ -933,7 +933,7 @@ bool cfg_parsetitlefile(char *fname, void (*set_func)(char*, char*, u8))
 	char line[200];
 
 	//printf("opening(%s)\n", fname);
-	f = fopen(fname, "rb");
+	f = fopen(fname, "rt");
 	if (!f) {
 		//printf("error opening(%s)\n", fname);
 		return false;
@@ -1020,7 +1020,7 @@ bool cfg_save_global()// save global settings
         mkdir("SD:/config", 0777);
     }
     FILE *f;
-	f = fopen("SD:/config/GXGlobal.cfg", "wb");
+	f = fopen("SD:/config/GXGlobal.cfg", "wt");
 	if (!f) {
 		printf("Error saving %s\n", "GXGlobal.cfg");
 		sleep(1);
@@ -1186,7 +1186,7 @@ bool cfg_save_games()// save per game setings
 	FILE *f;
 	int i;
 	mkdir("SD:/config/", 0777);
-	f = fopen("SD:/config/GXGameSettings.cfg", "wb");
+	f = fopen("SD:/config/GXGameSettings.cfg", "wt");
 	if (!f) {
 		printf("Error saving %s\n", "GXGameSettings.cfg");
 		sleep(1);
@@ -1217,7 +1217,7 @@ bool cfg_save_game_num()
 	FILE *f;
 	int i;
 	mkdir("SD:/config/", 0777);
-	f = fopen("SD:/config/GXGameFavorites.cfg", "wb");
+	f = fopen("SD:/config/GXGameFavorites.cfg", "wt");
 	if (!f) {
 		printf("Error saving %s\n", "GXGameFavorites.cfg");
 		sleep(1);
