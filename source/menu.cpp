@@ -3188,6 +3188,7 @@ static int MenuDiscList()
 			gameBrowser.Reload(gameList, gameCnt);
 			sprintf(GamesCnt,"%s: %i",LANGUAGE.Games, gameCnt);
 			gamecntTxt.SetText(GamesCnt);
+			selectedold=-1;
 			favoriteBtnImg.SetImage(dispFave ? &imgFavoriteOn : &imgFavoriteOff);
 			favoriteBtn.ResetState();
 		}
