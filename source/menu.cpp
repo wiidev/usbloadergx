@@ -3091,8 +3091,10 @@ static int MenuDiscList()
 
 		else if(sdcardBtn.GetState() == STATE_CLICKED)
 		{
-            SDCard_deInit();
-            SDCard_Init();
+			SDCard_deInit();
+			SDCard_Init();
+			startat = gameBrowser.GetSelectedOption();
+			offset = gameBrowser.GetOffset();
 			sdcardBtn.ResetState();
 			menu = MENU_DISCLIST;
 			break;
