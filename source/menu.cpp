@@ -759,12 +759,12 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 	GuiTrigger trigHome;
 	trigHome.SetButtonOnlyTrigger(-1, WPAD_BUTTON_HOME | WPAD_CLASSIC_BUTTON_HOME, 0);
 
-	GuiText titleTxt("HOME Menu", 36, (GXColor){255, 255, 255, 255});
+	GuiText titleTxt(LANGUAGE.Homemenu, 36, (GXColor){255, 255, 255, 255});
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	titleTxt.SetPosition(-180,40);
 	titleTxt.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
 
-	GuiText closeTxt("  Close", 28, (GXColor){0, 0, 0, 255});
+	GuiText closeTxt(LANGUAGE.Close, 28, (GXColor){0, 0, 0, 255});
 	GuiImage closeImg(&close);
 	if (Settings.wsprompt == yes){
 	closeTxt.SetWidescreen(CFG.widescreen);
@@ -772,7 +772,7 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 	GuiButton closeBtn(close.GetWidth(), close.GetHeight());
 	closeBtn.SetImage(&closeImg);
 	closeBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	closeBtn.SetPosition(205,42);
+	closeBtn.SetPosition(220,48);
 	closeBtn.SetLabel(&closeTxt);
 	closeBtn.SetRumble(false);
 	closeBtn.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
@@ -1358,7 +1358,7 @@ int GameWindowPrompt()
 				}
 				}
 				////////////end save play count//////////////
-			
+
 				choice = 1;
 				SDCard_deInit();
 			}
@@ -2344,7 +2344,7 @@ s32 __Menu_EntryCmpCount(const void *a, const void *b)
 
 	ret = (s32) (count2-count1);
 	if (ret == 0) return stricmp(get_title(hdr1), get_title(hdr2));
-	
+
 	return ret;
 }
 
@@ -2353,7 +2353,7 @@ s32 __Menu_EntryCmpCount(const void *a, const void *b)
  ***************************************************************************/
 
 s32 __Menu_GetEntries(void)
-{	
+{
 	struct discHdr *buffer = NULL;
 	struct discHdr *buffer2 = NULL;
 	struct discHdr *header = NULL;
@@ -2383,7 +2383,7 @@ s32 __Menu_GetEntries(void)
 		if(buffer) free(buffer);
 		return ret;
 	}
-		
+
 	/* Filters */
 	if (Settings.sort==fave || dispFave) {
 		u32 cnt2 = 0;
@@ -2412,7 +2412,7 @@ s32 __Menu_GetEntries(void)
 		buffer = buffer2;
 		buffer2 = NULL;
 		cnt = cnt2;
-	}	
+	}
 
 	if (CFG.parentalcontrol && !CFG.godmode)
 	{
@@ -2585,60 +2585,8 @@ static int MenuInstall()
 	snprintf(imgPath, sizeof(imgPath), "%sbattery_bar.png", CFG.theme_path);
 	GuiImageData batteryBar(imgPath, battery_bar_png);
 
-	#ifdef HW_RVL
-	int i = 0, level;
-	char txt[3];
-	GuiText * batteryTxt[4];
-	GuiImage * batteryImg[4];
-	GuiImage * batteryBarImg[4];
-	GuiButton * batteryBtn[4];
-
-	for(i=0; i < 4; i++)
-	{
-
-		if(i == 0)
-			sprintf(txt, "P%d", i+1);
-		else
-			sprintf(txt, "P%d", i+1);
-
-		batteryTxt[i] = new GuiText(txt, 22, (GXColor){THEME.info_r, THEME.info_g, THEME.info_b, 255});
-		batteryTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-		batteryImg[i] = new GuiImage(&battery);
-		batteryImg[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-		batteryImg[i]->SetPosition(36, 0);
-		batteryImg[i]->SetTile(0);
-		batteryBarImg[i] = new GuiImage(&batteryBar);
-		batteryBarImg[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-		batteryBarImg[i]->SetPosition(33, 0);
-
-		batteryBtn[i] = new GuiButton(40, 20);
-		batteryBtn[i]->SetLabel(batteryTxt[i]);
-		batteryBtn[i]->SetImage(batteryBarImg[i]);
-		batteryBtn[i]->SetIcon(batteryImg[i]);
-		batteryBtn[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-		batteryBtn[i]->SetRumble(false);
-		batteryBtn[i]->SetAlpha(70);
-	}
-
-
-	batteryBtn[0]->SetPosition(THEME.battery1_x, THEME.battery1_y);
-	batteryBtn[1]->SetPosition(THEME.battery2_x, THEME.battery2_y);
-	batteryBtn[2]->SetPosition(THEME.battery3_x, THEME.battery3_y);
-	batteryBtn[3]->SetPosition(THEME.battery4_x, THEME.battery4_y);
-	#endif
-
     HaltGui();
 	GuiWindow w(screenwidth, screenheight);
-
-	if (THEME.showBattery)
-	{
-		#ifdef HW_RVL
-		w.Append(batteryBtn[0]);
-		w.Append(batteryBtn[1]);
-		w.Append(batteryBtn[2]);
-		w.Append(batteryBtn[3]);
-		#endif
-	}
 
     mainWindow->Append(&w);
 
@@ -2647,31 +2595,6 @@ static int MenuInstall()
 	while(menu == MENU_NONE)
 	{
 	    VIDEO_WaitVSync ();
-
-		#ifdef HW_RVL
-		for(i=0; i < 4; i++)
-		{
-			if(WPAD_Probe(i, NULL) == WPAD_ERR_NONE) // controller connected
-			{
-				level = (userInput[i].wpad.battery_level / 100.0) * 4;
-				if(level > 4) level = 4;
-				batteryImg[i]->SetTile(level);
-
-				if(level == 0)
-					batteryBarImg[i]->SetImage(&batteryRed);
-				else
-					batteryBarImg[i]->SetImage(&batteryBar);
-
-				batteryBtn[i]->SetAlpha(255);
-			}
-			else // controller not connected
-			{
-				batteryImg[i]->SetTile(0);
-				batteryImg[i]->SetImage(&battery);
-				batteryBtn[i]->SetAlpha(70);
-			}
-		}
-		#endif
 
 		ret = DiscWait(LANGUAGE.InsertDisk,LANGUAGE.Waiting,LANGUAGE.Cancel,0,0);
 		if (ret < 0) {
@@ -2791,16 +2714,6 @@ static int MenuInstall()
 
 
 	HaltGui();
-
-	#ifdef HW_RVL
-	for(i=0; i < 4; i++)
-	{
-		delete batteryTxt[i];
-		delete batteryImg[i];
-		delete batteryBarImg[i];
-		delete batteryBtn[i];
-	}
-	#endif
 
 	mainWindow->Remove(&w);
 	ResumeGui();

@@ -392,6 +392,7 @@ class GuiElement
         //int position2; //! B Scrollbariable
 		bool visible; //!< Visibility of the element. If false, Draw() is skipped
 		int focus; //!< Element focus (-1 = focus disabled, 0 = not focused, 1 = focused)
+		int dontsetfocus; //!<If 0 games dont set the focus
 		int width; //!< Element width
 		int height; //!< Element height
 		int xoffset; //!< Element X offset

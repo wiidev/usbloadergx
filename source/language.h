@@ -13,11 +13,11 @@ struct LANGUAGE
 {
 
 	char t3Covers[50];
-	char addToFavorite[20];
-	char all[10];
+	char addToFavorite[50];
+	char all[30];
 	char AppLanguage[50];
 	char Areyousure[50];
-	char AutoPatch[20];
+	char AutoPatch[30];
 	char Back[20];
 	char Backgroundmusic[80];
 	char Backgroundmusicpath[100];
@@ -25,13 +25,14 @@ struct LANGUAGE
 	char BacktoLoader[50];
 	char BacktoWiiMenu[50];
 	char BootStandard[50];
-	char Both[15];
+	char Both[35];
 	char Cantcreatedirectory[50];
 	char Cancel[20];
 	char Cantbeformated[50];
 	char Cantdelete[50];
 	char ClicktoDownloadCovers[50];
 	char Clock[20];
+	char Close[20];
 	char Continueinstallgame[50];
 	char ConsoleDefault[50];
 	char Consoleshouldbeunlockedtomodifyit[100];
@@ -97,13 +98,14 @@ struct LANGUAGE
 	char GoBack[50];
 	char GotoPage[50];///////
 	char HowtoShutdown[50];
-	char hour[10];
+	char Homemenu[30];
+	char hour[30];
 	char keyboard[50];
 	char Language[50];
 	char Langchange[50];
 	char Left[50];
 	char LikeSysMenu[50];
-	char ListSort[20];
+	char ListSort[30];
 	char LoadingincIOS[50];
 	char Loadingstandardlanguage[80];
 	char Loadingstandardmusic[80];

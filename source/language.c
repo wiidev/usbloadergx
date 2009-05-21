@@ -50,6 +50,7 @@ snprintf(LANGUAGE.Cantbeformated, sizeof(LANGUAGE.Cantbeformated), "Can't be for
 snprintf(LANGUAGE.Cantdelete, sizeof(LANGUAGE.Cantdelete), "Can't delete:");
 snprintf(LANGUAGE.ClicktoDownloadCovers, sizeof(LANGUAGE.ClicktoDownloadCovers), "Click to Download Covers");
 snprintf(LANGUAGE.Clock, sizeof(LANGUAGE.Clock), "Clock");
+snprintf(LANGUAGE.Close, sizeof(LANGUAGE.Close), "Close");
 snprintf(LANGUAGE.Continueinstallgame, sizeof(LANGUAGE.Continueinstallgame), "Continue to install game?");
 snprintf(LANGUAGE.ConsoleDefault, sizeof(LANGUAGE.ConsoleDefault), "Console Default");
 snprintf(LANGUAGE.Consoleshouldbeunlockedtomodifyit, sizeof(LANGUAGE.Consoleshouldbeunlockedtomodifyit), "Console should be unlocked to modify it.");
@@ -78,6 +79,7 @@ snprintf(LANGUAGE.DownloadBoxartimage, sizeof(LANGUAGE.DownloadBoxartimage), "Do
 snprintf(LANGUAGE.Downloadfinished, sizeof(LANGUAGE.Downloadfinished), "Download finished");
 snprintf(LANGUAGE.Error, sizeof(LANGUAGE.Error), "Error !");
 snprintf(LANGUAGE.hour, sizeof(LANGUAGE.hour), "Hour");
+snprintf(LANGUAGE.Homemenu, sizeof(LANGUAGE.Homemenu), "HOME Menu");
 snprintf(LANGUAGE.BOOTERROR, sizeof(LANGUAGE.BOOTERROR), "BOOT ERROR");
 snprintf(LANGUAGE.ErrorreadingDisc, sizeof(LANGUAGE.ErrorreadingDisc), "Error reading Disc");
 snprintf(LANGUAGE.ExitUSBISOLoader, sizeof(LANGUAGE.ExitUSBISOLoader), "Exit USB Loader GX?");
@@ -315,6 +317,10 @@ void language_set(char *name, char *val)
 	}
 	if (strcmp(name, "Clock") == 0) {
 		strcopy(LANGUAGE.Clock, val, sizeof(LANGUAGE.Clock));
+		return;
+	}
+	if (strcmp(name, "Close") == 0) {
+		strcopy(LANGUAGE.Close, val, sizeof(LANGUAGE.Close));
 		return;
 	}
 	if (strcmp(name, "Continueinstallgame") == 0) {
@@ -579,6 +585,10 @@ void language_set(char *name, char *val)
 	}
 	if (strcmp(name, "GotoPage") == 0) {
 		strcopy(LANGUAGE.GotoPage, val, sizeof(LANGUAGE.GotoPage));
+		return;
+	}
+	if (strcmp(name, "Homemenu") == 0) {
+		strcopy(LANGUAGE.Homemenu, val, sizeof(LANGUAGE.Homemenu));
 		return;
 	}
 	if (strcmp(name, "HowtoShutdown") == 0) {
