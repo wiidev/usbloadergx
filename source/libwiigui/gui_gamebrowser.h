@@ -45,10 +45,12 @@ class GuiGameBrowser : public GuiElement
 		void Reload(struct discHdr * l, int count);
 		//GuiText * optionVal[PAGESIZE];
 	protected:
+		void UpdateListEntries();
 		int selectedItem;
 		int listOffset;
 		int scrollbaron;
 		int pagesize;
+		int maxTextWidth;
 
 		struct discHdr * gameList;
 		int gameCnt;
@@ -56,6 +58,7 @@ class GuiGameBrowser : public GuiElement
 		int * gameIndex;
 		GuiButton ** game;
 		GuiText ** gameTxt;
+		GuiText ** gameTxtOver;
 		GuiImage ** gameBg;
 
 		GuiButton * arrowUpBtn;

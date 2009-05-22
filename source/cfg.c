@@ -246,7 +246,7 @@ void CFG_Default(int widescreen) // -1 = non forced Mode
     sprintf(CFG.ogg_path, "notset");
 
 	CFG.parentalcontrol = 0;
-	CFG.maxcharacters = 38;
+//	CFG.maxcharacters = 38;
 	CFG.godmode = 0;
 	CFG.xflip = 0;
 	CFG.wsprompt = 0;
@@ -260,7 +260,7 @@ void CFG_Default(int widescreen) // -1 = non forced Mode
 	THEME.cover_x = 26;
 	THEME.cover_y = 55;
 	THEME.showID = 1;
-	THEME.maxcharacters = 36;
+//	THEME.maxcharacters = 36;
 	THEME.id_x = 68;
 	THEME.id_y = 305;
 	THEME.region_x = 68;
@@ -689,13 +689,14 @@ void theme_set(char *name, char *val)
 		}
 	}
 
+/*
 	else if (strcmp(cfg_name, "maxcharacters") == 0) {
 		short x;
 		if (sscanf(val, "%hd", &x) == 1) {
 			THEME.maxcharacters = x;
 		}
 	}
-
+*/
 
 
 

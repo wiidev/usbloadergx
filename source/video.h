@@ -20,5 +20,6 @@ void Menu_DrawRectangle(f32 x, f32 y, f32 width, f32 height, GXColor color, u8 f
 
 extern int screenheight;
 extern int screenwidth;
+extern u32 frameCount;
 
 #endif

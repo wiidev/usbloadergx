@@ -60,7 +60,7 @@ struct CFG
 //	short savesettings;
 	short widescreen;
 	short parentalcontrol;
-	short maxcharacters;
+//	short maxcharacters;
 	short godmode;
     short xflip;
 	short wsprompt;
@@ -85,7 +85,7 @@ struct THEME
 	short cover_x;
 	short cover_y;
 	short showID;
-	short maxcharacters;
+//	short maxcharacters;
 	short batteryUnused;
 	short id_x;
 	short id_y;

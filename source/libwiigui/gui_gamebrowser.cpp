@@ -48,6 +48,8 @@ GuiGameBrowser::GuiGameBrowser(int w, int h, struct discHdr * l, int gameCnt, co
 	bgGameImg = new GuiImage(bgGames);
 	bgGameImg->SetParent(this);
 	bgGameImg->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
+	
+	maxTextWidth = bgGameImg->GetWidth() - 24 - 4;
 
 	snprintf(imgPath, sizeof(imgPath), "%sbg_options_entry.png", themePath);
 	bgGamesEntry = new GuiImageData(imgPath, bg_options_entry_png);
@@ -58,6 +60,8 @@ GuiGameBrowser::GuiGameBrowser(int w, int h, struct discHdr * l, int gameCnt, co
 	scrollbarImg->SetParent(this);
 	scrollbarImg->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
 	scrollbarImg->SetPosition(0, 4);
+
+	maxTextWidth -= scrollbarImg->GetWidth() + 4;
 
 	snprintf(imgPath, sizeof(imgPath), "%sscrollbar_arrowdown.png", themePath);
 	arrowDown = new GuiImageData(imgPath, scrollbar_arrowdown_png);
@@ -115,37 +119,35 @@ GuiGameBrowser::GuiGameBrowser(int w, int h, struct discHdr * l, int gameCnt, co
 	gameIndex = new int[pagesize];
 	game = new GuiButton * [pagesize];
 	gameTxt = new GuiText * [pagesize];
+	gameTxtOver = new GuiText * [pagesize];
 	gameBg = new GuiImage * [pagesize];
-
-	char buffer[THEME.maxcharacters + 4];
 
 	for(int i=0; i < pagesize; i++)
 	{
-		if (strlen(get_title(&gameList[i])) < (u32)(THEME.maxcharacters + 3))
-		{
-			sprintf(buffer, "%s", get_title(&gameList[i]));
-		}
-		else
-		{
-			sprintf(buffer, get_title(&gameList[i]),  THEME.maxcharacters);
-			buffer[THEME.maxcharacters] = '\0';
-			strncat(buffer, "...", 3);
-		}
-
-		gameTxt[i] = new GuiText(buffer, 20, (GXColor){THEME.gameText_r, THEME.gameText_g, THEME.gameText_b, 0xff});
+		gameTxt[i] = new GuiText(get_title(&gameList[i]), 20, (GXColor){THEME.gameText_r, THEME.gameText_g, THEME.gameText_b, 0xff});
 		gameTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 		gameTxt[i]->SetPosition(24,0);
-
+		gameTxt[i]->SetMaxWidth(maxTextWidth, GuiText::DOTTED);
+		
+		
+		gameTxtOver[i] = new GuiText(get_title(&gameList[i]), 20, (GXColor){THEME.gameText_r, THEME.gameText_g, THEME.gameText_b, 0xff});
+		gameTxtOver[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
+		gameTxtOver[i]->SetPosition(24,0);
+		gameTxtOver[i]->SetMaxWidth(maxTextWidth, GuiText::SCROLL);
+		
 		gameBg[i] = new GuiImage(bgGamesEntry);
 
 		game[i] = new GuiButton(width-28,GAMESELECTSIZE);
 		game[i]->SetParent(this);
 		game[i]->SetLabel(gameTxt[i]);
+		game[i]->SetLabelOver(gameTxtOver[i]);
 		game[i]->SetImageOver(gameBg[i]);
 		game[i]->SetPosition(5,GAMESELECTSIZE*i+4);
 		game[i]->SetRumble(false);
 		game[i]->SetTrigger(trigA);
 		game[i]->SetSoundClick(btnSoundClick);
+		
+		gameIndex[i] = i;
 	}
 }
 
@@ -182,12 +184,14 @@ GuiGameBrowser::~GuiGameBrowser()
 	for(int i=0; i<pagesize; i++)
 	{
 		delete gameTxt[i];
+		delete gameTxtOver[i];
 		delete gameBg[i];
 		delete game[i];
 	}
 	delete [] gameIndex;
 	delete [] game;
 	delete [] gameTxt;
+	delete [] gameTxtOver;
 	delete [] gameBg;
 }
 
@@ -303,6 +307,34 @@ void GuiGameBrowser::Draw()
     }
 	this->UpdateEffects();
 }
+void GuiGameBrowser::UpdateListEntries()
+{
+	int next = listOffset;
+	for(int i=0; i<pagesize; i++)
+	{
+			if(next >= 0)
+			{
+				if(game[i]->GetState() == STATE_DISABLED)
+				{
+					game[i]->SetVisible(true);
+					game[i]->SetState(STATE_DEFAULT);
+				}
+				gameTxt[i]->SetText(get_title(&gameList[next]));
+				gameTxt[i]->SetPosition(24, 0);
+				gameTxtOver[i]->SetText(get_title(&gameList[next]));
+				gameTxtOver[i]->SetPosition(24, 0);
+
+				gameIndex[i] = next;
+				next = this->FindMenuItem(next, 1);
+			}
+			else
+			{
+				game[i]->SetVisible(false);
+				game[i]->SetState(STATE_DISABLED);
+			}
+//		}
+	}
+}
 
 void GuiGameBrowser::Update(GuiTrigger * t)
 {
@@ -311,6 +343,7 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 		return;
 
 	int next, prev;
+	int old_listOffset = listOffset;
     static int position2;
 	// scrolldelay affects how fast the list scrolls
 	// when the arrows are clicked
@@ -324,40 +357,11 @@ void GuiGameBrowser::Update(GuiTrigger * t)
     }
 
 	next = listOffset;
-	char buffer[THEME.maxcharacters + 4];
 
 	for(int i=0; i<pagesize; i++)
 	{
 		if(next >= 0)
-		{
-			if(game[i]->GetState() == STATE_DISABLED)
-			{
-				game[i]->SetVisible(true);
-				game[i]->SetState(STATE_DEFAULT);
-			}
-
-			if (strlen(get_title(&gameList[next])) < (u32)(THEME.maxcharacters + 3))
-			{
-				sprintf(buffer, "%s", get_title(&gameList[next]));
-			}
-			else
-			{
-				sprintf(buffer, get_title(&gameList[next]), THEME.maxcharacters);
-				buffer[THEME.maxcharacters] = '\0';
-				strncat(buffer, "...", 3);
-			}
-
-			gameTxt[i]->SetText(buffer);
-			gameTxt[i]->SetPosition(24, 0);
-
-			gameIndex[i] = next;
 			next = this->FindMenuItem(next, 1);
-		}
-		else
-		{
-			game[i]->SetVisible(false);
-			game[i]->SetState(STATE_DISABLED);
-		}
 
 		if(focus)
 		{
@@ -379,246 +383,259 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 	if(!focus)
 		return; // skip navigation
 
-    if (scrollbaron == 1) {
-
-	if (t->Down() ||
-	arrowDownBtn->GetState() == STATE_CLICKED || ////////////////////////////////////////////down
-	arrowDownBtn->GetState() == STATE_HELD)
+    if (scrollbaron == 1)
 	{
 
-
-		next = this->FindMenuItem(gameIndex[selectedItem], 1);
-
-		if(next >= 0)
+		if (t->Down() ||
+				arrowDownBtn->GetState() == STATE_CLICKED || ////////////////////////////////////////////down
+				arrowDownBtn->GetState() == STATE_HELD)
 		{
-			if(selectedItem == pagesize-1)
+
+
+			next = this->FindMenuItem(gameIndex[selectedItem], 1);
+
+			if(next >= 0)
 			{
-				// move list down by 1
-				listOffset = this->FindMenuItem(listOffset, 1);
+				if(selectedItem == pagesize-1)
+				{
+					// move list down by 1
+					listOffset = this->FindMenuItem(listOffset, 1);
+//					UpdateEntries();
+				}
+				else if(game[selectedItem+1]->IsVisible())
+				{
+					game[selectedItem]->ResetState();
+					game[selectedItem+1]->SetState(STATE_SELECTED, t->chan);
+					selectedItem++;
+				}
+				scrollbarBoxBtn->Draw();
+				usleep(10000 * scrolldelay);
 			}
-			else if(game[selectedItem+1]->IsVisible())
+			WPAD_ScanPads();
+			u8 cnt, buttons = NULL;
+			/* Get pressed buttons */
+			for (cnt = 0; cnt < 4; cnt++)
+				buttons |= WPAD_ButtonsHeld(cnt);
+			if (buttons == WPAD_BUTTON_A)
 			{
-				game[selectedItem]->ResetState();
-				game[selectedItem+1]->SetState(STATE_SELECTED, t->chan);
-				selectedItem++;
-			}
-			scrollbarBoxBtn->Draw();
-			usleep(10000 * scrolldelay);
-
-
-		}WPAD_ScanPads();
-        u8 cnt, buttons = NULL;
-        /* Get pressed buttons */
-        for (cnt = 0; cnt < 4; cnt++)
-            buttons |= WPAD_ButtonsHeld(cnt);
-        if (buttons == WPAD_BUTTON_A) {
-
-        } else {
-            arrowDownBtn->ResetState();
-
-        }
-
-	}
-	else if(t->Up() ||
-	arrowUpBtn->GetState() == STATE_CLICKED || ////////////////////////////////////////////up
-	arrowUpBtn->GetState() == STATE_HELD)
-	{
-		prev = this->FindMenuItem(gameIndex[selectedItem], -1);
-
-		if(prev >= 0)
-		{
-			if(selectedItem == 0)
-			{
-				// move list up by 1
-				listOffset = prev;
 			}
 			else
 			{
-				game[selectedItem]->ResetState();
-				game[selectedItem-1]->SetState(STATE_SELECTED, t->chan);
-				selectedItem--;
+				arrowDownBtn->ResetState();
 			}
-			scrollbarBoxBtn->Draw();
-			usleep(10000 * scrolldelay);
-
-
 		}
+		else if(t->Up() ||
+					arrowUpBtn->GetState() == STATE_CLICKED || ////////////////////////////////////////////up
+					arrowUpBtn->GetState() == STATE_HELD)
+		{
+			prev = this->FindMenuItem(gameIndex[selectedItem], -1);
 
+			if(prev >= 0)
+			{
+				if(selectedItem == 0)
+				{
+					// move list up by 1
+					listOffset = prev;
+//					UpdateEntries();
+				}
+				else
+				{
+					game[selectedItem]->ResetState();
+					game[selectedItem-1]->SetState(STATE_SELECTED, t->chan);
+					selectedItem--;
+				}
+				scrollbarBoxBtn->Draw();
+				usleep(10000 * scrolldelay);
+			}
+			WPAD_ScanPads();
+			u8 cnt, buttons = NULL;
+			/* Get pressed buttons */
+			for (cnt = 0; cnt < 4; cnt++)
+				buttons |= WPAD_ButtonsHeld(cnt);
+			if (buttons == WPAD_BUTTON_A)
+			{
+			}
+			else
+			{
+				arrowUpBtn->ResetState();
+			}
+		}
 		WPAD_ScanPads();
-        u8 cnt, buttons = NULL;
-        /* Get pressed buttons */
-        for (cnt = 0; cnt < 4; cnt++)
-            buttons |= WPAD_ButtonsHeld(cnt);
-        if (buttons == WPAD_BUTTON_A) {
-
-        } else {
-            arrowUpBtn->ResetState();
-
-        }
-	}
-
-    WPAD_ScanPads();
-    u8 cnt, buttons = NULL;/////////////////////////////////////////////////////scroll by holding B and tilt wiimote
-    int position1 = 0;
+		u8 cnt, buttons = NULL;/////////////////////////////////////////////////////scroll by holding B and tilt wiimote
+		int position1 = 0;
 
 
-    position1 = t->wpad.ir.y;
+		position1 = t->wpad.ir.y;
 
-    if (position2 == 0 && position1 > 0) {
-    position2 = position1;
-    }
-
-    for (cnt = 0; cnt < 4; cnt++)
-        buttons |= WPAD_ButtonsHeld(cnt);
-
-    if (buttons == WPAD_BUTTON_B && position1 > 0) {
-        scrollbarBoxBtn->ScrollIsOn(1);
-        if (position2 > position1) {
-
-		prev = this->FindMenuItem(gameIndex[selectedItem], -1);
-
-		if(prev >= 0)
+		if (position2 == 0 && position1 > 0)
 		{
-			if(selectedItem == 0)
-			{
-				// move list up by 1
-				listOffset = prev;
-			}
-			else
-			{
-				game[selectedItem]->ResetState();
-				game[selectedItem-1]->SetState(STATE_SELECTED, t->chan);
-				selectedItem--;
-			}
-			scrollbarBoxBtn->Draw();
-			usleep(10000 * scrolldelay);
-
-
+			position2 = position1;
 		}
 
-        } else if (position2 < position1) {
+		for (cnt = 0; cnt < 4; cnt++)
+			buttons |= WPAD_ButtonsHeld(cnt);
 
-
-		next = this->FindMenuItem(gameIndex[selectedItem], 1);
-
-		if(next >= 0)
+		if (buttons == WPAD_BUTTON_B && position1 > 0)
 		{
-			if(selectedItem == pagesize-1)
+			scrollbarBoxBtn->ScrollIsOn(1);
+			if (position2 > position1) 
 			{
-				// move list down by 1
-				listOffset = this->FindMenuItem(listOffset, 1);
+
+				prev = this->FindMenuItem(gameIndex[selectedItem], -1);
+
+				if(prev >= 0)
+				{
+					if(selectedItem == 0)
+					{
+						// move list up by 1
+						listOffset = prev;
+//						UpdateEntries();
+					}
+					else
+					{
+						game[selectedItem]->ResetState();
+						game[selectedItem-1]->SetState(STATE_SELECTED, t->chan);
+						selectedItem--;
+					}
+					scrollbarBoxBtn->Draw();
+					usleep(10000 * scrolldelay);
+
+
+				}
+
 			}
-			else if(game[selectedItem+1]->IsVisible())
+			else if (position2 < position1)
 			{
-				game[selectedItem]->ResetState();
-				game[selectedItem+1]->SetState(STATE_SELECTED, t->chan);
-				selectedItem++;
+				next = this->FindMenuItem(gameIndex[selectedItem], 1);
+
+				if(next >= 0)
+				{
+					if(selectedItem == pagesize-1)
+					{
+						// move list down by 1
+						listOffset = this->FindMenuItem(listOffset, 1);
+//						UpdateEntries();
+					}
+					else if(game[selectedItem+1]->IsVisible())
+					{
+						game[selectedItem]->ResetState();
+						game[selectedItem+1]->SetState(STATE_SELECTED, t->chan);
+						selectedItem++;
+					}
+					scrollbarBoxBtn->Draw();
+					usleep(10000 * scrolldelay);
+				}
 			}
-			scrollbarBoxBtn->Draw();
-			usleep(10000 * scrolldelay);
-
 
 		}
-        }
-
-    } else if (!buttons) {
-    scrollbarBoxBtn->ScrollIsOn(0);
-    position2 = 0;
-    }
-
-    if(scrollbarBoxBtn->GetState() == STATE_HELD &&/////////////////////allow dragging of scrollbar box
-		scrollbarBoxBtn->GetStateChan() == t->chan &&
-		t->wpad.ir.valid && gameCnt > pagesize)
-    {
-		scrollbarBoxBtn->SetPosition(width/2-18+7,0);
-		//int position = t->wpad.ir.y - 50 - scrollbarBoxBtn->GetTop();
-		int position = t->wpad.ir.y - 32 - scrollbarBoxBtn->GetTop();
-
-		//listOffset = (position * gameCnt)/237 - selectedItem;
-		listOffset = (position * gameCnt)/(25.2 * pagesize) - selectedItem;
-
-		if(listOffset <= 0)
+		else if (!buttons)
 		{
-			listOffset = 0;
-			selectedItem = 0;
-		}
-		else if(listOffset+pagesize >= gameCnt)
-		{
-			listOffset = gameCnt - pagesize;
-			selectedItem = pagesize-1;
+			scrollbarBoxBtn->ScrollIsOn(0);
+			position2 = 0;
 		}
 
-	}
-        //int positionbar = 237*(listOffset + selectedItem) / gameCnt;
+		if(scrollbarBoxBtn->GetState() == STATE_HELD &&/////////////////////allow dragging of scrollbar box
+			scrollbarBoxBtn->GetStateChan() == t->chan &&
+			t->wpad.ir.valid && gameCnt > pagesize)
+		{
+			scrollbarBoxBtn->SetPosition(width/2-18+7,0);
+			//int position = t->wpad.ir.y - 50 - scrollbarBoxBtn->GetTop();
+			int position = t->wpad.ir.y - 32 - scrollbarBoxBtn->GetTop();
+
+			//listOffset = (position * gameCnt)/237 - selectedItem;
+			listOffset = (position * gameCnt)/(25.2 * pagesize) - selectedItem;
+//			UpdateEntries();
+
+			if(listOffset <= 0)
+			{
+				listOffset = 0;
+//				UpdateEntries();
+				selectedItem = 0;
+			}
+			else if(listOffset+pagesize >= gameCnt)
+			{
+				listOffset = gameCnt - pagesize;
+//				UpdateEntries();
+				selectedItem = pagesize-1;
+			}
+
+		}
+		//int positionbar = 237*(listOffset + selectedItem) / gameCnt;
 		int positionbar = (25.2 * pagesize)*(listOffset + selectedItem) / gameCnt;
 
-        if(positionbar > (24 * pagesize))//if(positionbar > 216)
-		positionbar = (24 * pagesize);//positionbar = 216;
+		if(positionbar > (24 * pagesize))//if(positionbar > 216)
+			positionbar = (24 * pagesize);//positionbar = 216;
 		scrollbarBoxBtn->SetPosition(width/2-18+7, positionbar+8);
 
 
-    if(t->Right())/////////////////////////////////////////////////////skip pagesize # of games if right is pressed
-	{
-		if(listOffset < gameCnt && gameCnt > pagesize)
+		if(t->Right())/////////////////////////////////////////////////////skip pagesize # of games if right is pressed
 		{
-			listOffset =listOffset+ pagesize;
-			if(listOffset+pagesize >= gameCnt)
-            listOffset = gameCnt-pagesize;
-		}
-	}
-	else if(t->Left())
-	{
-		if(listOffset > 0)
-		{
-			listOffset =listOffset- pagesize;
-			if(listOffset < 0)
-				listOffset = 0;
-		}
-	}
-
-    } else {
-
-
-	if(t->Down())/////////////////////////////////////////////////////if there isn't a scrollbar and down is pressed
-	{
-		next = this->FindMenuItem(gameIndex[selectedItem], 1);
-
-		if(next >= 0)
-		{
-			if(selectedItem == pagesize-1)
+			if(listOffset < gameCnt && gameCnt > pagesize)
 			{
-				// move list down by 1
-				listOffset = this->FindMenuItem(listOffset, 1);
-			}
-			else if(game[selectedItem+1]->IsVisible())
-			{
-				game[selectedItem]->ResetState();
-				game[selectedItem+1]->SetState(STATE_SELECTED, t->chan);
-				selectedItem++;
+				listOffset =listOffset+ pagesize;
+				if(listOffset+pagesize >= gameCnt)
+					listOffset = gameCnt-pagesize;
+//				UpdateEntries();
 			}
 		}
-	}
-	else if(t->Up())///////////////////////////////////////////////////up
-	{
-		prev = this->FindMenuItem(gameIndex[selectedItem], -1);
-
-		if(prev >= 0)
+		else if(t->Left())
 		{
-			if(selectedItem == 0)
+			if(listOffset > 0)
 			{
-				// move list up by 1
-				listOffset = prev;
-			}
-			else
-			{
-				game[selectedItem]->ResetState();
-				game[selectedItem-1]->SetState(STATE_SELECTED, t->chan);
-				selectedItem--;
+				listOffset =listOffset- pagesize;
+				if(listOffset < 0)
+					listOffset = 0;
+//				UpdateEntries();
 			}
 		}
+
 	}
+	else
+	{
+		if(t->Down())/////////////////////////////////////////////////////if there isn't a scrollbar and down is pressed
+		{
+			next = this->FindMenuItem(gameIndex[selectedItem], 1);
+
+			if(next >= 0)
+			{
+				if(selectedItem == pagesize-1)
+				{
+					// move list down by 1
+					listOffset = this->FindMenuItem(listOffset, 1);
+//					UpdateEntries();
+				}
+				else if(game[selectedItem+1]->IsVisible())
+				{
+					game[selectedItem]->ResetState();
+					game[selectedItem+1]->SetState(STATE_SELECTED, t->chan);
+					selectedItem++;
+				}
+			}
+		}
+		else if(t->Up())///////////////////////////////////////////////////up
+		{
+			prev = this->FindMenuItem(gameIndex[selectedItem], -1);
+
+			if(prev >= 0)
+			{
+				if(selectedItem == 0)
+				{
+					// move list up by 1
+					listOffset = prev;
+//					UpdateEntries();
+				}
+				else
+				{
+					game[selectedItem]->ResetState();
+					game[selectedItem-1]->SetState(STATE_SELECTED, t->chan);
+					selectedItem--;
+				}
+			}
+		}
     }
-
+	if(old_listOffset != listOffset)
+		UpdateListEntries();
+	
 	if(updateCB)
 		updateCB(this);
 }
@@ -631,6 +648,7 @@ void GuiGameBrowser::Reload(struct discHdr * l, int count)
 	scrollbaron = (gameCnt > pagesize) ? 1 : 0;
 	selectedItem = 0;
 	listOffset = 0;
+	UpdateListEntries();
 
 	for(int i=0; i<pagesize; i++)
 		game[i]->ResetState();

@@ -979,7 +979,6 @@ int GameWindowPrompt()
 	f32 size = 0.0;
 	char ID[4];
 	char IDFull[7];
-	char gameName[CFG.maxcharacters + 4];
 	u8 faveChoice = 0;
 	u16 playCount = 0;
 
@@ -1030,6 +1029,7 @@ int GameWindowPrompt()
 	GuiText nameTxt("", 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{50, 50, 50, 255});
 	if (Settings.wsprompt == yes)
 		nameTxt.SetWidescreen(CFG.widescreen);
+	nameTxt.SetMaxWidth(350, GuiText::SCROLL);
 	GuiButton nameBtn(120,50);
 	nameBtn.SetLabel(&nameTxt);
 //	nameBtn.SetLabelOver(&nameTxt);
@@ -1193,7 +1193,6 @@ int GameWindowPrompt()
 			diskCover = NULL;
 		}
 
-//		changed = 0;
 		//load disc image based or what game is seleted
 		struct discHdr * header = &gameList[gameSelected];
 		WBFS_GameSize(header->id, &size);
@@ -1202,17 +1201,6 @@ int GameWindowPrompt()
 
 		snprintf (ID,sizeof(ID),"%c%c%c", header->id[0], header->id[1], header->id[2]);
 		snprintf (IDFull,sizeof(IDFull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
-
-		//set name
-		if (strlen(get_title(header)) < (u32)(CFG.maxcharacters + 3)) {
-			sprintf(gameName, "%s", get_title(header));
-		}
-		else {
-			strncpy(gameName, get_title(header), CFG.maxcharacters);
-			gameName[CFG.maxcharacters] = '\0';
-			strncat(gameName, "...", 3);
-		}
-
 
 		if (diskCover)
 			delete diskCover;
@@ -1282,7 +1270,7 @@ int GameWindowPrompt()
 		else
 			diskImg.SetImage(diskCover);
 		sizeTxt.SetText(sizeText);
-		nameTxt.SetText(gameName);
+		nameTxt.SetText(get_title(header));
 
 		struct Game_NUM* game_num = CFG_get_game_num(header->id);
 		if (game_num) {
@@ -2616,11 +2604,12 @@ static int MenuInstall()
 
 		Disc_ReadHeader(&headerdisc);
 		name = headerdisc.title;
-		if (strlen(name) < (34 + 3)) {
+		if (strlen(name) < (MAX_CHARACTERS + 3)) {
 			memset(buffer, 0, sizeof(buffer));
 			sprintf(name, "%s", name);
 			} else {
-			strncpy(buffer, name,  34);
+			strncpy(buffer, name,  MAX_CHARACTERS);
+			buffer[MAX_CHARACTERS] = '\0';
 			strncat(buffer, "...", 3);
 			sprintf(name, "%s", buffer);
 		}
@@ -4855,9 +4844,10 @@ int GameSettings(struct discHdr * header)
 	GuiTrigger trigB;
 	trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 
-    GuiText titleTxt(gameName, 28, (GXColor){0, 0, 0, 255});
+    GuiText titleTxt(get_title(header), 28, (GXColor){0, 0, 0, 255});
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	titleTxt.SetPosition(0,40);
+	titleTxt.SetPosition(12,40);
+	titleTxt.SetMaxWidth(356, GuiText::SCROLL);
 
     GuiImage settingsbackground(&settingsbg);
 	GuiButton settingsbackgroundbtn(settingsbackground.GetWidth(), settingsbackground.GetHeight());

@@ -641,7 +641,7 @@ class GuiText : public GuiElement
 		//!Sets the maximum width of the drawn texture image
 		//!If the text exceeds this, it is wrapped to the next line
 		//!\param w Maximum width
-		void SetMaxWidth(int w);
+		void SetMaxWidth(int w, short m=GuiText::WRAP);
 		//!Sets the font color
 		//!\param c Font color
 		void SetColor(GXColor c);
@@ -661,10 +661,19 @@ class GuiText : public GuiElement
 		void SetWidescreen(bool w);
 		//!Constantly called to draw the text
 		void Draw();
+		enum {
+			WRAP,
+			DOTTED,
+			SCROLL
+		};
 	protected:
 		wchar_t* text; //!< Unicode text value
 		int size; //!< Font size
 		int maxWidth; //!< Maximum width of the generated text object (for text wrapping)
+		short wrapMode;
+		short scrollPos1;
+		short scrollPos2;
+		u32 scrollDelay;
 		u16 style; //!< FreeTypeGX style attributes
 		GXColor color; //!< Font color
 		FreeTypeGX *font;
