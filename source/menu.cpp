@@ -1367,9 +1367,11 @@ int GameWindowPrompt()
 					faveChoice = !faveChoice;
 					btnFavoriteImg.SetImage(faveChoice ? &imgFavorite : &imgNotFavorite);
 					extern u8 favorite;
+					extern u8 count;
 					struct Game_NUM* game_num = CFG_get_game_num(header->id);
 					if (game_num) {
 						favorite = game_num->favorite;
+						count = game_num->count;
 					}
 					favorite = faveChoice;
 					CFG_save_game_num(header->id);
@@ -2367,7 +2369,7 @@ s32 __Menu_GetEntries(void)
 	}
 
 	/* Filters */
-	if (Settings.sort==fave || dispFave) {
+	if (Settings.fave) {
 		u32 cnt2 = 0;
 
 		for (u32 i = 0; i < cnt; i++)
@@ -2909,7 +2911,6 @@ static int MenuDiscList()
 	wiiBtn.SetSoundClick(&btnClick);
 	wiiBtn.SetTrigger(&trigA);
 
-	//GuiImage favoriteBtnImg((Settings.sort==fave) ? &imgFavoriteOn : &imgFavoriteOff);;
 	GuiImage favoriteBtnImg(&imgfavIcon);
 	favoriteBtnImg.SetWidescreen(CFG.widescreen);
 	GuiButton favoriteBtn(imgfavIcon.GetWidth(), imgfavIcon.GetHeight());
@@ -2926,7 +2927,7 @@ static int MenuDiscList()
 	abcBtnImg.SetWidescreen(CFG.widescreen);
 	GuiButton abcBtn(abcBtnImg.GetWidth(), abcBtnImg.GetHeight());
 	abcBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);//(ALIGN_CENTRE, ALIGN_MIDDLE);
-	abcBtn.SetPosition(-40, 15);
+	abcBtn.SetPosition(-30, 15);
 	abcBtn.SetImage(&abcBtnImg);
 	abcBtn.SetSoundOver(&btnSoundOver);
 	abcBtn.SetSoundClick(&btnClick);
@@ -2939,7 +2940,7 @@ static int MenuDiscList()
 	countBtnImg.SetWidescreen(CFG.widescreen);
 	GuiButton countBtn(countBtnImg.GetWidth(), countBtnImg.GetHeight());
 	countBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);//(ALIGN_CENTRE, ALIGN_MIDDLE);
-	countBtn.SetPosition(0, 15);
+	countBtn.SetPosition(10, 15);
 	countBtn.SetImage(&countBtnImg);
 	countBtn.SetSoundOver(&btnSoundOver);
 	countBtn.SetSoundClick(&btnClick);
@@ -2947,8 +2948,8 @@ static int MenuDiscList()
 	countBtn.SetEffectGrow();
 	countBtn.SetAlpha(70);
 	
-	if (Settings.sort==fave)favoriteBtn.SetAlpha(255);
-	else if (Settings.sort==all)abcBtn.SetAlpha(255);
+	if (Settings.fave)favoriteBtn.SetAlpha(255);
+	if (Settings.sort==all)abcBtn.SetAlpha(255);
 	else if (Settings.sort==pcount)countBtn.SetAlpha(255);
 
 	//Downloading Covers
@@ -3212,59 +3213,49 @@ static int MenuDiscList()
 
 		else if(favoriteBtn.GetState() == STATE_CLICKED)
 		{
-			//dispFave = !dispFave;
-			Settings.sort=fave;
+			Settings.fave=!Settings.fave;
 			if(isSdInserted() == 1) {
 				cfg_save_global();
-				}
+			}
 			__Menu_GetEntries();
 			gameBrowser.Reload(gameList, gameCnt);
 			sprintf(GamesCnt,"%s: %i",LANGUAGE.Games, gameCnt);
 			gamecntTxt.SetText(GamesCnt);
 			selectedold = 1;
-			//favoriteBtnImg.SetImage((Settings.sort==fave) ? &imgFavoriteOn : &imgFavoriteOff);
 			favoriteBtn.ResetState();
-			favoriteBtn.SetAlpha(255);
-			abcBtn.SetAlpha(70);
-			countBtn.SetAlpha(70);
+			favoriteBtn.SetAlpha(Settings.fave ? 255 : 70);
 		}
 
 		else if(abcBtn.GetState() == STATE_CLICKED)
 		{
-			//dispFave = !dispFave;
-			Settings.sort=all;
-			if(isSdInserted() == 1) {
-				cfg_save_global();
+			if(Settings.sort != all) {
+				Settings.sort=all;
+				if(isSdInserted() == 1) {
+					cfg_save_global();
 				}
-			__Menu_GetEntries();
-			gameBrowser.Reload(gameList, gameCnt);
-			sprintf(GamesCnt,"%s: %i",LANGUAGE.Games, gameCnt);
-			gamecntTxt.SetText(GamesCnt);
-			selectedold = 1;
-			//favoriteBtnImg.SetImage((Settings.sort==fave) ? &imgFavoriteOn : &imgFavoriteOff);
+				__Menu_GetEntries();
+				gameBrowser.Reload(gameList, gameCnt);
+				selectedold = 1;
+				abcBtn.SetAlpha(255);
+				countBtn.SetAlpha(70);
+			}
 			abcBtn.ResetState();
-			favoriteBtn.SetAlpha(70);
-			abcBtn.SetAlpha(255);
-			countBtn.SetAlpha(70);
 		}
 
 		else if(countBtn.GetState() == STATE_CLICKED)
 		{
-			//dispFave = !dispFave;
-			if(isSdInserted() == 1) {
-				cfg_save_global();
+			if(Settings.sort != pcount) {	
+				Settings.sort=pcount;			
+				if(isSdInserted() == 1) {
+					cfg_save_global();
 				}
-			Settings.sort=pcount;
-			__Menu_GetEntries();
-			gameBrowser.Reload(gameList, gameCnt);
-			sprintf(GamesCnt,"%s: %i",LANGUAGE.Games, gameCnt);
-			gamecntTxt.SetText(GamesCnt);
-			selectedold = 1;
-			//favoriteBtnImg.SetImage((Settings.sort==fave) ? &imgFavoriteOn : &imgFavoriteOff);
+				__Menu_GetEntries();
+				gameBrowser.Reload(gameList, gameCnt);
+				selectedold = 1;
+				abcBtn.SetAlpha(70);
+				countBtn.SetAlpha(255);
+			}
 			countBtn.ResetState();
-			favoriteBtn.SetAlpha(70);
-			abcBtn.SetAlpha(70);
-			countBtn.SetAlpha(255);
 		}
 
 		//Get selected game under cursor

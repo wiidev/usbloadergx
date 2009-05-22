@@ -51,6 +51,7 @@ u8 iosChoice = 0;
 u8 parentalcontrolChoice = 0;
 u8 xflip = 0;
 u8 sort = 0;
+u8 fave = 0;
 u8 qboot = 0;
 u8 wsprompt = 0;
 u8 keyset = 0;
@@ -765,7 +766,13 @@ void global_cfg_set(char *name, char *val)
 		}
 		return;
 	}
-
+	else if (strcmp(name, "fave") == 0) {
+		int i;
+		if (sscanf(val, "%d", &i) == 1) {
+			Settings.fave = i;
+		}
+		return;
+	}
 	else if (strcmp(name, "keyset") == 0) {
 		int i;
 		if (sscanf(val, "%d", &i) == 1) {
@@ -1039,6 +1046,7 @@ bool cfg_save_global()// save global settings
 	fprintf(f, "tooltips = %d\n ", Settings.tooltips);
 	fprintf(f, "password = %s\n ", Settings.unlockCode);
 	fprintf(f, "sort = %d\n ", Settings.sort);
+	fprintf(f, "fave = %d\n ", Settings.fave);
 	fprintf(f, "cios = %d\n ", Settings.cios);
 	fprintf(f, "keyset = %d\n ", Settings.keyset);
 	fprintf(f, "xflip = %d\n ", Settings.xflip);
