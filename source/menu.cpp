@@ -752,6 +752,7 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 	titleTxt.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
 
 	GuiText closeTxt(LANGUAGE.Close, 28, (GXColor){0, 0, 0, 255});
+	closeTxt.SetPosition(10,3);
 	GuiImage closeImg(&close);
 	if (Settings.wsprompt == yes){
 	closeTxt.SetWidescreen(CFG.widescreen);
@@ -759,7 +760,7 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 	GuiButton closeBtn(close.GetWidth(), close.GetHeight());
 	closeBtn.SetImage(&closeImg);
 	closeBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	closeBtn.SetPosition(205,40);
+	closeBtn.SetPosition(190,30);
 	closeBtn.SetLabel(&closeTxt);
 	closeBtn.SetRumble(false);
 	closeBtn.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
@@ -2790,7 +2791,7 @@ static int MenuDiscList()
 	//GuiImageData imgFavoriteOff(imgPath, not_favorite_png);
 	snprintf(imgPath, sizeof(imgPath), "%splayCountIcon.png", CFG.theme_path);
 	GuiImageData imgplayCountIcon(imgPath, playCountIcon_png);
-	
+
 
     GuiTrigger trigA;
 	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
@@ -2934,7 +2935,7 @@ static int MenuDiscList()
 	abcBtn.SetTrigger(&trigA);
 	abcBtn.SetEffectGrow();
 	abcBtn.SetAlpha(70);
-	
+
 
 	GuiImage countBtnImg(&imgplayCountIcon);
 	countBtnImg.SetWidescreen(CFG.widescreen);
@@ -2947,7 +2948,7 @@ static int MenuDiscList()
 	countBtn.SetTrigger(&trigA);
 	countBtn.SetEffectGrow();
 	countBtn.SetAlpha(70);
-	
+
 	if (Settings.fave)favoriteBtn.SetAlpha(255);
 	if (Settings.sort==all)abcBtn.SetAlpha(255);
 	else if (Settings.sort==pcount)countBtn.SetAlpha(255);
@@ -3244,8 +3245,8 @@ static int MenuDiscList()
 
 		else if(countBtn.GetState() == STATE_CLICKED)
 		{
-			if(Settings.sort != pcount) {	
-				Settings.sort=pcount;			
+			if(Settings.sort != pcount) {
+				Settings.sort=pcount;
 				if(isSdInserted() == 1) {
 					cfg_save_global();
 				}

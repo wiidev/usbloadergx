@@ -1,12 +1,15 @@
- Specialthanksto = Agradecimento a
  t3Covers = Capas 3D
+ addToFavorite = Adicionar aos favoritos
+ all = Alfabética
  AppLanguage = Idioma
  Areyousure = Tem a certeza?
  AutoPatch = Patch automático 
  Back = Voltar
+ Backgroundmusic = Música de fundo
+ Backgroundmusicpath = Pasta Música Fundo
  BacktoHBCorWiiMenu = Voltar ao Loader/Menu da Wii
- BacktoLoader = Voltar ao Loader
- BacktoWiiMenu = Voltar ao Menu da Wii
+ BacktoLoader = Loader
+ BacktoWiiMenu = Menu da Wii
  BootStandard = Arranque/Standard
  Both = Ambos
  Cantcreatedirectory = Não foi possível criar a pasta
@@ -15,6 +18,7 @@
  Cantdelete = Não foi possível apagar:
  ClicktoDownloadCovers = Carregue para descarregar capas
  Clock = Relógio
+ Close = Fechar
  Continueinstallgame = Continuar instalação do jogo?
  ConsoleDefault = Predefinição Consola
  Consoleshouldbeunlockedtomodifyit = É necessário desbloquear a configuração para poder modificar o parâmetro.
@@ -27,6 +31,7 @@
  CoverPath = Pasta Capas
  CoverpathChanged = Pasta das Capas alterado
  Coverpathchange = Alterar Pasta das Capas
+ count = Vezes jogadas
  Credits = Créditos
  DiscImages = Imagens de Disco
  DiscimagePath = Pasta Imagens Disco
@@ -41,6 +46,7 @@
  DownloadBoxartimage = Descarregar imagem da Caixa?
  Downloadfinished = Download Terminado
  Error = Erro !
+ hour = Horas
  BOOTERROR = ERRO DE ARRANQUE
  ErrorreadingDisc = Erro ao ler o Disco
  ExitUSBISOLoader = Pretende sair do USB Loader GX?
@@ -49,6 +55,7 @@
  InsertaWiiDisc = Insira um Disco da Wii!
  InsertaSDCardtodownloadimages = Insira um cartão SD para descarregar as imagens.
  InsertaSDCardtosave = Insira um cartão SD para guardar.
+ InsertaSDCardtousethatoption = Insira um cartão SD para usar esta funcionalidade.
  InstallRenameandDeleteareunlocked = As configurações estão desbloqueadas.
  Installerror = Erro de Instalação!
  Installagame = Instalar um jogo
@@ -57,6 +64,7 @@
  FailedtomountfrontSDcard = Falha ao montar cartão SD
  FailedtosetUSB = Falha ao iniciar USB:
  Failedformating = Falha ao formatar
+ fave = Favoritos
  Filenotfound = Ficheiro não encontrado.
  filesnotfoundontheserver =  ficheiros não encontrados no servidor!
  filesleft =  ficheiros(s) restante(s)
@@ -77,13 +85,16 @@
  GoBack = Voltar
  //GotoPage = Ir para a Página
  HowtoShutdown = Como desligar a consola?
+ Homemenu = Menú Inicial
  Keyboard = Teclado
  Language = Idioma
  Langchange = Alterar Idioma
  Left = Esquerda
  LikeSysMenu = Igual ao Menu da Wii
+ ListSort = Ordenação Jogos
  LoadingincIOS = Carregando com o cIOS249
  Loadingstandardlanguage = Carregado idioma padrão.
+ Loadingstandardmusic = Carregando música padrão.
  Lock = Bloquear
  LockConsole = Bloquear Configurações
  MP3Menu = Menu MP3
@@ -103,7 +114,7 @@
  NotaWiiDisc = Não é um Disco da Wii
  NoUSBDevicefound = Nenhum dispositivo USB encontrado.
  Notenoughfreespace = Não há espaço livre suficiente!
- notset = não há
+ notset = não definido
  of = de
  OFF = Desligado
  OfficialSite = Site Oficial
@@ -115,10 +126,11 @@
  PasswordChanged = Password Alterada
  Passwordhasbeenchanged = A Password foi alterada
  Passwordchange = Alterar Password
+ Plays = Vezes jogadas
  PowerofftheWii = Desligar a Wii
  Prev = Anterior
  PromptsButtons = Mensagens/Botões
- ReloadSD = Actualizar SD
+ ReloadSD = Actualizar do cartão SD
  RenameGameonWBFS = Alterar nome do jogo na partição WBFS
  Restart = Reiniciar
  Return = Voltar
@@ -137,12 +149,13 @@
  secondsleft =  segundos restantes
  SelectthePartition = Seleccione a Partição
  youwanttoformat = Deseja formatar?
+ Standard = Standard
  settings = Configurações
  ShutdowntoIdle = Standby
  ShutdownSystem = Desligar
  Success = Sucesso:
  Successfullyinstalled = Instalado com Sucesso:
- Successfullydeleted = Apagado com Sucesso:
+ Successfullydeleted = Removido com Sucesso:
  SuccessfullySaved = Gravado com Sucesso
  SystemDefault = Predefinição Sistema
  ThemePath = Pasta Temas 
@@ -163,10 +176,9 @@
  WaitingforUSBDevice = Aguardando pelo Dispositivo USB
  WidescreenFix = Correcção Widescreen
  WiiMenu = Menu da Wii
- WrongPassword = Password incorreta
+ WrongPassword = Password Incorrecta
  Yes = Sim
  YoudonthavecIOS = cIOS222 não instalado
- Close = Fechar
  Japanese = Japonês
  German = Alemão
  English = Inglês
@@ -177,5 +189,6 @@
  SChinese = Chinês Simplificado
  TChinese = Chinês Tradicional
  Korean = Coreano
- // Portuguese(pt-pt) Translation File for GUI USB Loader v1 rev360
+ // Portuguese(pt-pt) Language File rev4.4 (22-05-2009 9:54) for GUI USB Loader GX 1
+ // Tested with Loader rev385
  // Translated by Sky8000
