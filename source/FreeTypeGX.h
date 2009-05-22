@@ -166,13 +166,14 @@
  * Font face character glyph relevant data structure.
  */
 typedef struct ftgxCharData_ {
-	uint16_t glyphAdvanceX;	/**< Character glyph X coordinate advance in pixels. */
-	uint16_t glyphIndex;	/**< Charachter glyph index in the font face. */
+	int16_t renderOffsetX;		/**< Texture X axis bearing offset. */
+	uint16_t glyphAdvanceX;		/**< Character glyph X coordinate advance in pixels. */
+	uint16_t glyphIndex;		/**< Charachter glyph index in the font face. */
 
-	uint16_t textureWidth;	/**< Texture width in pixels/bytes. */
-	uint16_t textureHeight;	/**< Texture glyph height in pixels/bytes. */
+	uint16_t textureWidth;		/**< Texture width in pixels/bytes. */
+	uint16_t textureHeight;		/**< Texture glyph height in pixels/bytes. */
 
-	uint16_t renderOffsetY;	/**< Texture Y axis bearing offset. */
+	int16_t renderOffsetY;		/**< Texture Y axis bearing offset. */
 	int16_t renderOffsetMax;	/**< Texture Y axis bearing maximum value. */
 	int16_t renderOffsetMin;	/**< Texture Y axis bearing minimum value. */
 

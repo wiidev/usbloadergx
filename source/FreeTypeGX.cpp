@@ -308,13 +308,14 @@ ftgxCharData *FreeTypeGX::cacheGlyphData(wchar_t charCode) {
 			textureHeight = adjustTextureHeight(glyphBitmap->rows, this->textureFormat);
 
 			this->fontData[charCode] = (ftgxCharData){
+				this->ftSlot->bitmap_left,
 				this->ftSlot->advance.x >> 6,
 				gIndex,
 				textureWidth,
 				textureHeight,
 				this->ftSlot->bitmap_top,
 				this->ftSlot->bitmap_top,
-				textureHeight - this->ftSlot->bitmap_top,
+				glyphBitmap->rows - this->ftSlot->bitmap_top,
 				NULL
 			};
 			this->loadGlyphData(glyphBitmap, &this->fontData[charCode]);
@@ -487,7 +488,7 @@ uint16_t FreeTypeGX::drawText(int16_t x, int16_t y, wchar_t *text, GXColor color
 			}
 
 			GX_InitTexObj(&glyphTexture, glyphData->glyphDataTexture, glyphData->textureWidth, glyphData->textureHeight, this->textureFormat, GX_CLAMP, GX_CLAMP, GX_FALSE);
-			this->copyTextureToFramebuffer(&glyphTexture, glyphData->textureWidth, glyphData->textureHeight, x_pos - x_offset, y - glyphData->renderOffsetY - y_offset, color);
+			this->copyTextureToFramebuffer(&glyphTexture, glyphData->textureWidth, glyphData->textureHeight, x_pos + glyphData->renderOffsetX - x_offset, y - glyphData->renderOffsetY - y_offset, color);
 
 			x_pos += glyphData->glyphAdvanceX;
 			printed++;
