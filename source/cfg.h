@@ -145,7 +145,7 @@ extern struct CFG CFG;
 extern struct THEME THEME;
 extern u8 ocarinaChoice;
 extern u8 sort;
-extern u8 playcnt;
+extern u16 playcnt;
 extern u8 videoChoice;
 extern u8 languageChoice;
 extern u8 viChoice;
@@ -172,7 +172,7 @@ struct Game_NUM
 {
 	u8 id[8];
 	u8 favorite;
-	u8 count;
+	u16 count;
 };
 
 

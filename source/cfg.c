@@ -55,7 +55,7 @@ u8 qboot = 0;
 u8 wsprompt = 0;
 u8 keyset = 0;
 u8 favorite = 0;
-u8 count = 0;
+u16 count = 0;
 
 #define TITLE_MAX 65
 
@@ -252,7 +252,7 @@ void CFG_Default(int widescreen) // -1 = non forced Mode
 
 	//all alignments are left top here
 	THEME.selection_x = 200;
-	THEME.selection_y = 40;
+	THEME.selection_y = 49;//40;
 	THEME.selection_w = 396;
 	THEME.selection_h = 280;
 	THEME.batteryUnused = 70;
@@ -298,7 +298,7 @@ void CFG_Default(int widescreen) // -1 = non forced Mode
 	THEME.prompttxt_g = 0;
 	THEME.prompttxt_b = 0;
 	THEME.clock_x = 0;
-	THEME.clock_y = 330;
+	THEME.clock_y = 335;//330;
 	THEME.clockAlign = CFG_ALIGN_CENTRE;
 	THEME.sdcard_x = 160;
 	THEME.sdcard_y = 390;

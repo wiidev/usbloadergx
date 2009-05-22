@@ -980,7 +980,7 @@ int GameWindowPrompt()
 	char IDFull[7];
 	char gameName[CFG.maxcharacters + 4];
 	u8 faveChoice = 0;
-	u8 playCount = 0;
+	u16 playCount = 0;
 
 	GuiWindow promptWindow(472,320);
 	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
@@ -1322,7 +1322,7 @@ int GameWindowPrompt()
 			if(btn1.GetState() == STATE_CLICKED) { //boot
 				//////////save game play count////////////////
 				extern u8 favorite;
-				extern u8 count;
+				extern u16 count;
 				struct Game_NUM* game_num = CFG_get_game_num(header->id);
 				if (game_num)
 					{
@@ -2314,8 +2314,8 @@ s32 __Menu_EntryCmpCount(const void *a, const void *b)
 	struct discHdr *hdr2 = (struct discHdr *)b;
 
 	/* Compare Play Count */
-	u8 count1 = 0;
-	u8 count2 = 0;
+	u16 count1 = 0;
+	u16 count2 = 0;
 	struct Game_NUM* game_num1 = CFG_get_game_num(hdr1->id);
 	struct Game_NUM* game_num2 = CFG_get_game_num(hdr2->id);
 
@@ -2772,10 +2772,23 @@ static int MenuDiscList()
 	snprintf(imgPath, sizeof(imgPath), "%sbattery_bar.png", CFG.theme_path);
 	GuiImageData batteryBar(imgPath, battery_bar_png);
 
-	snprintf(imgPath, sizeof(imgPath), "%sfavorite.png", CFG.theme_path);
+	/*snprintf(imgPath, sizeof(imgPath), "%sfavorite.png", CFG.theme_path);
 	GuiImageData imgFavoriteOn(imgPath, favorite_png);
 	snprintf(imgPath, sizeof(imgPath), "%snot_favorite.png", CFG.theme_path);
-	GuiImageData imgFavoriteOff(imgPath, not_favorite_png);
+	GuiImageData imgFavoriteOff(imgPath, not_favorite_png);*/
+
+    snprintf(imgPath, sizeof(imgPath), "%sfavIcon.png", CFG.theme_path);
+	GuiImageData imgfavIcon(imgPath, favIcon_png);
+	//snprintf(imgPath, sizeof(imgPath), "%snot_favorite.png", CFG.theme_path);
+	//GuiImageData imgFavoriteOff(imgPath, not_favorite_png);
+
+    snprintf(imgPath, sizeof(imgPath), "%sabcIcon.png", CFG.theme_path);
+	GuiImageData imgabcIcon(imgPath, abcIcon_png);
+	//snprintf(imgPath, sizeof(imgPath), "%snot_favorite.png", CFG.theme_path);
+	//GuiImageData imgFavoriteOff(imgPath, not_favorite_png);
+	snprintf(imgPath, sizeof(imgPath), "%splayCountIcon.png", CFG.theme_path);
+	GuiImageData imgplayCountIcon(imgPath, playCountIcon_png);
+	
 
     GuiTrigger trigA;
 	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
@@ -2896,16 +2909,47 @@ static int MenuDiscList()
 	wiiBtn.SetSoundClick(&btnClick);
 	wiiBtn.SetTrigger(&trigA);
 
-	GuiImage favoriteBtnImg(dispFave ? &imgFavoriteOn : &imgFavoriteOff);;
+	//GuiImage favoriteBtnImg((Settings.sort==fave) ? &imgFavoriteOn : &imgFavoriteOff);;
+	GuiImage favoriteBtnImg(&imgfavIcon);
 	favoriteBtnImg.SetWidescreen(CFG.widescreen);
-	GuiButton favoriteBtn(imgFavoriteOn.GetWidth(), imgFavoriteOn.GetHeight());
-	favoriteBtn.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-	favoriteBtn.SetPosition(-90, 105);
+	GuiButton favoriteBtn(imgfavIcon.GetWidth(), imgfavIcon.GetHeight());
+	favoriteBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);//(ALIGN_CENTRE, ALIGN_MIDDLE);
+	favoriteBtn.SetPosition(-80, 15);
 	favoriteBtn.SetImage(&favoriteBtnImg);
 	favoriteBtn.SetSoundOver(&btnSoundOver);
 	favoriteBtn.SetSoundClick(&btnClick);
 	favoriteBtn.SetTrigger(&trigA);
 	favoriteBtn.SetEffectGrow();
+	favoriteBtn.SetAlpha(70);
+
+	GuiImage abcBtnImg(&imgabcIcon);
+	abcBtnImg.SetWidescreen(CFG.widescreen);
+	GuiButton abcBtn(abcBtnImg.GetWidth(), abcBtnImg.GetHeight());
+	abcBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);//(ALIGN_CENTRE, ALIGN_MIDDLE);
+	abcBtn.SetPosition(-40, 15);
+	abcBtn.SetImage(&abcBtnImg);
+	abcBtn.SetSoundOver(&btnSoundOver);
+	abcBtn.SetSoundClick(&btnClick);
+	abcBtn.SetTrigger(&trigA);
+	abcBtn.SetEffectGrow();
+	abcBtn.SetAlpha(70);
+	
+
+	GuiImage countBtnImg(&imgplayCountIcon);
+	countBtnImg.SetWidescreen(CFG.widescreen);
+	GuiButton countBtn(countBtnImg.GetWidth(), countBtnImg.GetHeight());
+	countBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);//(ALIGN_CENTRE, ALIGN_MIDDLE);
+	countBtn.SetPosition(0, 15);
+	countBtn.SetImage(&countBtnImg);
+	countBtn.SetSoundOver(&btnSoundOver);
+	countBtn.SetSoundClick(&btnClick);
+	countBtn.SetTrigger(&trigA);
+	countBtn.SetEffectGrow();
+	countBtn.SetAlpha(70);
+	
+	if (Settings.sort==fave)favoriteBtn.SetAlpha(255);
+	else if (Settings.sort==all)abcBtn.SetAlpha(255);
+	else if (Settings.sort==pcount)countBtn.SetAlpha(255);
 
 	//Downloading Covers
 	GuiTooltip DownloadBtnTT(LANGUAGE.ClicktoDownloadCovers);
@@ -2959,6 +3003,8 @@ static int MenuDiscList()
     w.Append(&settingsBtn);
 	w.Append(&DownloadBtn);
 	w.Append(&favoriteBtn);
+	w.Append(&abcBtn);
+	w.Append(&countBtn);
 
     if((Settings.hddinfo == hr12)||(Settings.hddinfo == hr24))
     {
@@ -3166,14 +3212,59 @@ static int MenuDiscList()
 
 		else if(favoriteBtn.GetState() == STATE_CLICKED)
 		{
-			dispFave = !dispFave;
+			//dispFave = !dispFave;
+			Settings.sort=fave;
+			if(isSdInserted() == 1) {
+				cfg_save_global();
+				}
 			__Menu_GetEntries();
 			gameBrowser.Reload(gameList, gameCnt);
 			sprintf(GamesCnt,"%s: %i",LANGUAGE.Games, gameCnt);
 			gamecntTxt.SetText(GamesCnt);
 			selectedold = 1;
-			favoriteBtnImg.SetImage(dispFave ? &imgFavoriteOn : &imgFavoriteOff);
+			//favoriteBtnImg.SetImage((Settings.sort==fave) ? &imgFavoriteOn : &imgFavoriteOff);
 			favoriteBtn.ResetState();
+			favoriteBtn.SetAlpha(255);
+			abcBtn.SetAlpha(70);
+			countBtn.SetAlpha(70);
+		}
+
+		else if(abcBtn.GetState() == STATE_CLICKED)
+		{
+			//dispFave = !dispFave;
+			Settings.sort=all;
+			if(isSdInserted() == 1) {
+				cfg_save_global();
+				}
+			__Menu_GetEntries();
+			gameBrowser.Reload(gameList, gameCnt);
+			sprintf(GamesCnt,"%s: %i",LANGUAGE.Games, gameCnt);
+			gamecntTxt.SetText(GamesCnt);
+			selectedold = 1;
+			//favoriteBtnImg.SetImage((Settings.sort==fave) ? &imgFavoriteOn : &imgFavoriteOff);
+			abcBtn.ResetState();
+			favoriteBtn.SetAlpha(70);
+			abcBtn.SetAlpha(255);
+			countBtn.SetAlpha(70);
+		}
+
+		else if(countBtn.GetState() == STATE_CLICKED)
+		{
+			//dispFave = !dispFave;
+			if(isSdInserted() == 1) {
+				cfg_save_global();
+				}
+			Settings.sort=pcount;
+			__Menu_GetEntries();
+			gameBrowser.Reload(gameList, gameCnt);
+			sprintf(GamesCnt,"%s: %i",LANGUAGE.Games, gameCnt);
+			gamecntTxt.SetText(GamesCnt);
+			selectedold = 1;
+			//favoriteBtnImg.SetImage((Settings.sort==fave) ? &imgFavoriteOn : &imgFavoriteOff);
+			countBtn.ResetState();
+			favoriteBtn.SetAlpha(70);
+			abcBtn.SetAlpha(70);
+			countBtn.SetAlpha(255);
 		}
 
 		//Get selected game under cursor
@@ -3305,7 +3396,7 @@ static int MenuDiscList()
 					wiilight(0);
 					//////////save game play count////////////////
 				extern u8 favorite;
-				extern u8 count;
+				extern u16 count;
 				struct Game_NUM* game_num = CFG_get_game_num(header->id);
 
 				if (game_num)
@@ -4036,7 +4127,7 @@ static int MenuSettings()
 			sprintf(options2.name[2], "%s",LANGUAGE.keyboard);
 			sprintf(options2.name[3], "%s",LANGUAGE.Unicodefix);
 			sprintf(options2.name[4], "%s",LANGUAGE.Backgroundmusic);
-			sprintf(options2.name[5], "%s",LANGUAGE.ListSort);
+			sprintf(options2.name[5], " ");
 			sprintf(options2.name[6], " ");
 			sprintf(options2.name[7], " ");
 			sprintf(options2.name[8], "%s",LANGUAGE.MP3Menu);
@@ -4441,8 +4532,8 @@ static int MenuSettings()
 					Settings.keyset = 0;
             if ( Settings.unicodefix > 2 )
 					Settings.unicodefix = 0;
-			if ( Settings.sort > 2 )
-					Settings.sort = 0;
+			//if ( Settings.sort > 2 )
+			//		Settings.sort = 0;
 
             if (strlen(CFG.titlestxt_path) < (9 + 3)) {
             sprintf(cfgtext, "%s", CFG.titlestxt_path);
@@ -4484,9 +4575,7 @@ static int MenuSettings()
             sprintf(options2.value[4], "%s", cfgtext);
             }
 
-			if (Settings.sort == all) sprintf (options2.value[5],"%s",LANGUAGE.all);
-            else if (Settings.sort == fave) sprintf (options2.value[5],"%s",LANGUAGE.fave);
-            else if (Settings.sort == pcount) sprintf (options2.value[5],"%s",LANGUAGE.count);
+			sprintf(options2.value[5], " ");
 			sprintf(options2.value[6], " ");
 			sprintf(options2.value[7], " ");
 			sprintf(options2.value[8], "not working!");
@@ -4599,10 +4688,6 @@ static int MenuSettings()
                         } else {
                             WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtousethatoption, LANGUAGE.ok, 0,0,0);
                         }
-                        break;
-					case 5:
-                        Settings.sort++;
-						//__Menu_GetEntries();
                         break;
 			}
 
@@ -4760,7 +4845,7 @@ int GameSettings(struct discHdr * header)
 	sprintf(options3.name[2],"%s", LANGUAGE.Language);
 	sprintf(options3.name[3], "Ocarina");
 	sprintf(options3.name[4], "IOS");
-	sprintf(options3.name[5],"%s", LANGUAGE.addToFavorite);
+	sprintf(options3.name[5],"Parental Control");//sprintf(options3.name[5],"%s", LANGUAGE.addToFavorite);
 
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
 
@@ -4855,7 +4940,7 @@ int GameSettings(struct discHdr * header)
 
 	ResumeGui();
 	//extern u8 favorite;
-	extern u8 count;
+	/*extern u16 count;
 	struct Game_NUM* game_num = CFG_get_game_num(header->id);
 
 	if (game_num)
@@ -4865,7 +4950,7 @@ int GameSettings(struct discHdr * header)
 
 	}
 	else {
-		faveChoice = no;}
+		faveChoice = no;}*/
 
 
 	struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
@@ -4877,6 +4962,7 @@ int GameSettings(struct discHdr * header)
 		ocarinaChoice = game_cfg->ocarina;
 		viChoice = game_cfg->vipatch;
 		iosChoice = game_cfg->ios;
+		parentalcontrolChoice = game_cfg->parentalcontrol;
 	}
 	else// otherwise use the global settings
 	{
@@ -4889,6 +4975,7 @@ int GameSettings(struct discHdr * header)
 		} else {
 		iosChoice = i249;
 		}
+		parentalcontrolChoice = 0;
 	}
 
 	while(!exit)
@@ -4924,8 +5011,10 @@ int GameSettings(struct discHdr * header)
 		if (iosChoice == i249) sprintf (options3.value[4],"249");
 		else if (iosChoice == i222) sprintf (options3.value[4],"222");
 
-		if (faveChoice == yes) sprintf (options3.value[5],"%s",LANGUAGE.Yes);
-		else if (faveChoice == no) sprintf (options3.value[5],"%s",LANGUAGE.No);
+		if (parentalcontrolChoice == 0) sprintf (options3.value[5],"0 (Always)");
+		else if (parentalcontrolChoice == 1) sprintf (options3.value[5],"1");
+		else if (parentalcontrolChoice == 2) sprintf (options3.value[5],"2");
+		else if (parentalcontrolChoice == 3) sprintf (options3.value[5],"3 (Mature)");
 
 
 		if(shutdown == 1)
@@ -4953,7 +5042,7 @@ int GameSettings(struct discHdr * header)
 				iosChoice = (iosChoice + 1) % 2;
 				break;
 			case 5:
-				faveChoice = (faveChoice + 1) % 2;
+				parentalcontrolChoice = (parentalcontrolChoice + 1) % 4;
 				break;
 		}
 
@@ -4961,7 +5050,7 @@ int GameSettings(struct discHdr * header)
 		{
 
 			if(isSdInserted() == 1) {
-			//////////save game play count////////////////
+			/*//////////save game play count////////////////
 				extern u8 favorite;
 				extern u8 count;
 				struct Game_NUM* game_num = CFG_get_game_num(header->id);
@@ -4985,7 +5074,7 @@ int GameSettings(struct discHdr * header)
 				} else {
                 WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
 				}
-				////////////end save play count//////////////
+				*////////////end save play count//////////////
 		    	if (CFG_save_game_opt(header->id))
 				{
 					WindowPrompt(LANGUAGE.SuccessfullySaved, 0, LANGUAGE.ok, 0,0,0);

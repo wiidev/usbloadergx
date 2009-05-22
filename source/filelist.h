@@ -254,4 +254,13 @@ extern const u32	favorite_png_size;
 extern const u8		not_favorite_png[];
 extern const u32	not_favorite_png_size;
 
+extern const u8		favIcon_png[];
+extern const u32	favIcon_png_size;
+
+extern const u8		abcIcon_png[];
+extern const u32	abcIcon_png_size;
+
+extern const u8		playCountIcon_png[];
+extern const u32	playCountIcon_png_size;
+
 #endif
