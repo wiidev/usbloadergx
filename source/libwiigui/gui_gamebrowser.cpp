@@ -154,7 +154,6 @@ GuiGameBrowser::GuiGameBrowser(int w, int h, struct discHdr * l, int gameCnt, co
  */
 GuiGameBrowser::~GuiGameBrowser()
 {
-    if (scrollbaron == 1) {
 	delete arrowUpBtn;
 	delete arrowDownBtn;
 	delete scrollbarBoxBtn;
@@ -172,8 +171,7 @@ GuiGameBrowser::~GuiGameBrowser()
 	delete arrowUpOver;
 	delete scrollbarBox;
 	delete scrollbarBoxOver;
-    }
-    delete bgGameImg;
+	delete bgGameImg;
 	delete bgGames;
 	delete bgGamesEntry;
 
