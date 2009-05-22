@@ -51,7 +51,7 @@ GuiGameBrowser::GuiGameBrowser(int w, int h, struct discHdr * l, int gameCnt, co
 
 	snprintf(imgPath, sizeof(imgPath), "%sbg_options_entry.png", themePath);
 	bgGamesEntry = new GuiImageData(imgPath, bg_options_entry_png);
-    if (scrollbaron == 1) {
+
 	snprintf(imgPath, sizeof(imgPath), "%sscrollbar.png", themePath);
 	scrollbar = new GuiImageData(imgPath, scrollbar_png);
 	scrollbarImg = new GuiImage(scrollbar);
@@ -107,11 +107,10 @@ GuiGameBrowser::GuiGameBrowser(int w, int h, struct discHdr * l, int gameCnt, co
 	scrollbarBoxBtn->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	scrollbarBoxBtn->SetSelectable(false);
 	scrollbarBoxBtn->SetEffectOnOver(EFFECT_SCALE, 50, 120);
-    scrollbarBoxBtn->SetMinY(0);
+   	scrollbarBoxBtn->SetMinY(0);
 	scrollbarBoxBtn->SetMaxY(height-30);
 	scrollbarBoxBtn->SetHoldable(true);
 	scrollbarBoxBtn->SetTrigger(trigHeldA);
-    }
 
 	gameIndex = new int[pagesize];
 	game = new GuiButton * [pagesize];
