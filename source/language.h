@@ -59,6 +59,8 @@ struct LANGUAGE
 	char Downloadingfile[50];
 	char DownloadBoxartimage[50];
 	char Downloadfinished[50];
+	char Defaultgamesettings[50];
+	char Defaultsettings[40];
 	char Error[30];
 	char BOOTERROR[50];
 	char ErrorreadingDisc[50];
@@ -135,6 +137,7 @@ struct LANGUAGE
 	char OfficialSite[50];
 	char ok[30];
 	char ON[30];
+	char OnlyInstall[50];
 	char Parentalcontrol[50];
 	char Partition[50];
 	char Password[50];
@@ -192,6 +195,7 @@ struct LANGUAGE
 	char WaitingforUSBDevice[80];
 	char WidescreenFix[50];
 	char WiiMenu[50];
+	char Wiilight[20];
 	char WrongPassword[50];
 	char Yes[20];
 	char YoudonthavecIOS[70];

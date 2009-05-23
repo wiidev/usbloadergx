@@ -862,6 +862,13 @@ void global_cfg_set(char *name, char *val)
 		}
 		return;
 	}
+	else if (strcmp(name, "wiilight") == 0) {
+		int i;
+		if (sscanf(val, "%d", &i) == 1) {
+            Settings.wiilight = i;
+			}
+		return;
+	}
 }
 
 // split line to part1 delimiter part2
@@ -1071,6 +1078,7 @@ bool cfg_save_global()// save global settings
     fprintf(f, "godmode = %d\n ", 0);
 	}
 	fprintf(f, "ogg_path = %s\n ", CFG.ogg_path);
+	fprintf(f, "wiilight = %d\n ", Settings.wiilight);
 	fclose(f);
 	return true;
 }

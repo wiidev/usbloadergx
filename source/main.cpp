@@ -32,6 +32,7 @@
 #include "wpad.h"
 #include "cfg.h"
 #include "language.h"
+#include "fat.h"
 
 
 /* Constants */
@@ -99,6 +100,7 @@ DefaultSettings()
 	Settings.xflip = no;
 	Settings.qboot = no;
 	Settings.unicodefix = 0;
+	Settings.wiilight = 1;
 
 	CFG_LoadGlobal();
 }
@@ -134,6 +136,8 @@ main(int argc, char *argv[])
 		printf("ERROR: cIOS could not be loaded!");
 		SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
 	}
+
+    fatInit(1, true);
 
     SDCard_Init();
 

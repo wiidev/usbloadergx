@@ -141,27 +141,6 @@ void GuiButton::SetSoundClick(GuiSound * snd)
 	soundClick = snd;
 }
 
-//No delay for now
-/*
-void GuiButton::SetToolTip(GuiImage* img, GuiText * txt, int x, int y)
-{
-	LOCK(this);
-	if(img)
-	{
-
-		toolTip = img;
-		img->SetParent(this);
-		img->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
-		img->SetPosition(x,y);
-		if(txt)
-		{
-			toolTipTxt = txt;
-			txt->SetParent(img);
-		}
-
-	}
-}
-*/
 void GuiButton::SetToolTip(GuiElement* tt, int x, int y, int h_align, int v_align)
 {
 	LOCK(this);
@@ -248,11 +227,6 @@ void GuiButton::Update(GuiTrigger * t)
 		return;
 	else if(parentElement && parentElement->GetState() == STATE_DISABLED)
 		return;
-
-//    if(state != STATE_SELECTED && toolTip) {
-//    time2 = 0;
-//    }
-
 
 	#ifdef HW_RVL
 	// cursor

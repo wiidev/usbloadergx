@@ -206,7 +206,6 @@ void GuiCustomOptionBrowser::SetFocus(int f)
 		optionBtn[i]->ResetState();
 
 	if(f == 1)
-        optionBtn[selectedItem]->ResetState();
 		optionBtn[selectedItem]->SetState(STATE_SELECTED);
 }
 

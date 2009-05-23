@@ -77,6 +77,8 @@ snprintf(LANGUAGE.Doyouwanttoretryfor30secs, sizeof(LANGUAGE.Doyouwanttoretryfor
 snprintf(LANGUAGE.Downloadingfile, sizeof(LANGUAGE.Downloadingfile), "Downloading file:");
 snprintf(LANGUAGE.DownloadBoxartimage, sizeof(LANGUAGE.DownloadBoxartimage), "Download Boxart image?");
 snprintf(LANGUAGE.Downloadfinished, sizeof(LANGUAGE.Downloadfinished), "Download finished");
+snprintf(LANGUAGE.Defaultgamesettings, sizeof(LANGUAGE.Defaultgamesettings), "Default Gamesettings");
+snprintf(LANGUAGE.Defaultsettings, sizeof(LANGUAGE.Defaultsettings), "Default Settings");
 snprintf(LANGUAGE.Error, sizeof(LANGUAGE.Error), "Error !");
 snprintf(LANGUAGE.hour, sizeof(LANGUAGE.hour), "Hour");
 snprintf(LANGUAGE.Homemenu, sizeof(LANGUAGE.Homemenu), "HOME Menu");
@@ -150,6 +152,7 @@ snprintf(LANGUAGE.of, sizeof(LANGUAGE.of), "of");
 snprintf(LANGUAGE.OFF, sizeof(LANGUAGE.OFF), "OFF");
 snprintf(LANGUAGE.OfficialSite, sizeof(LANGUAGE.OfficialSite), "Official Site");
 snprintf(LANGUAGE.ON, sizeof(LANGUAGE.ON), "ON");
+snprintf(LANGUAGE.OnlyInstall, sizeof(LANGUAGE.OnlyInstall), "Only for Install");
 snprintf(LANGUAGE.Parentalcontrol, sizeof(LANGUAGE.Parentalcontrol), "Parental control");
 snprintf(LANGUAGE.Partition, sizeof(LANGUAGE.Partition), "Partition");
 snprintf(LANGUAGE.Password, sizeof(LANGUAGE.Password), "Password");
@@ -208,6 +211,7 @@ snprintf(LANGUAGE.Waiting, sizeof(LANGUAGE.Waiting), "Waiting...");
 snprintf(LANGUAGE.WaitingforUSBDevice, sizeof(LANGUAGE.WaitingforUSBDevice), "Waiting for USB Device");
 snprintf(LANGUAGE.WidescreenFix, sizeof(LANGUAGE.WidescreenFix), "Widescreen Fix");
 snprintf(LANGUAGE.WiiMenu, sizeof(LANGUAGE.WiiMenu), "Wii Menu");
+snprintf(LANGUAGE.Wiilight, sizeof(LANGUAGE.Wiilight), "Wiilight");
 snprintf(LANGUAGE.WrongPassword, sizeof(LANGUAGE.WrongPassword), "Wrong Password");
 snprintf(LANGUAGE.Yes, sizeof(LANGUAGE.Yes), "Yes");
 snprintf(LANGUAGE.YoudonthavecIOS, sizeof(LANGUAGE.YoudonthavecIOS), "You don't have cIOS222");
@@ -425,6 +429,14 @@ void language_set(char *name, char *val)
 	}
 	if (strcmp(name, "Downloadfinished") == 0) {
 		strcopy(LANGUAGE.Downloadfinished, val, sizeof(LANGUAGE.Downloadfinished));
+		return;
+	}
+	if (strcmp(name, "Defaultgamesettings") == 0) {
+		strcopy(LANGUAGE.Defaultgamesettings, val, sizeof(LANGUAGE.Defaultgamesettings));
+		return;
+	}
+	if (strcmp(name, "Defaultsettings") == 0) {
+		strcopy(LANGUAGE.Defaultsettings, val, sizeof(LANGUAGE.Defaultsettings));
 		return;
 	}
 	if (strcmp(name, "Error") == 0) {
@@ -728,6 +740,10 @@ void language_set(char *name, char *val)
 		strcopy(LANGUAGE.OfficialSite, val, sizeof(LANGUAGE.OfficialSite));
 		return;
 	}
+	if (strcmp(name, "OnlyInstall") == 0) {
+		strcopy(LANGUAGE.OnlyInstall, val, sizeof(LANGUAGE.OnlyInstall));
+		return;
+	}
 	if (strcmp(name, "ON") == 0) {
 		strcopy(LANGUAGE.ON, val, sizeof(LANGUAGE.ON));
 		return;
@@ -954,6 +970,10 @@ void language_set(char *name, char *val)
 	}
 	if (strcmp(name, "WiiMenu") == 0) {
 		strcopy(LANGUAGE.WiiMenu, val, sizeof(LANGUAGE.WiiMenu));
+		return;
+	}
+	if (strcmp(name, "Wiilight") == 0) {
+		strcopy(LANGUAGE.Wiilight, val, sizeof(LANGUAGE.Wiilight));
 		return;
 	}
 	if (strcmp(name, "WrongPassword") == 0) {

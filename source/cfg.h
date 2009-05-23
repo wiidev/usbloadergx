@@ -278,35 +278,29 @@ enum {
 	dvorak,
 	euro,
 };
-/*
-enum {
-	ParentalControlOff,
-	ParentalControlLevel1,
-	ParentalControlLevel2,
-	ParentalControlLevel3
-};*/
 
 struct SSettings {
-	int	video;
-	int	language;
+	int	    video;
+	int	    language;
 	int     ocarina;
 	int     vpatch;
 	int     ios;
-	int	sinfo;
-	int	hddinfo;
-	int	rumble;
-	int	xflip;
-	int	volume;
+	int	    sinfo;
+	int	    hddinfo;
+	int	    rumble;
+	int	    xflip;
+	int	    volume;
 	int     tooltips;
 	char 	unlockCode[20];
-	int	parentalcontrol;
+	int	    parentalcontrol;
 	int     cios;
-	int	qboot;
-	int	wsprompt;
-	int	keyset;
+	int	    qboot;
+	int	    wsprompt;
+	int	    keyset;
 	int     unicodefix;
-	int	sort;
-	int	fave;
+	int	    sort;
+	int	    fave;
+	int     wiilight;
 };
 
 void CFG_LoadGlobal(void);
