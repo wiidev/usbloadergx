@@ -1,4 +1,4 @@
-/****************************************************************************
+4/****************************************************************************
  * libwiigui Template
  * Tantric 2009
  *
@@ -3206,7 +3206,7 @@ static int MenuDiscList()
 			}
 			else if (choice == 2)
 			{
-				if (*(unsigned int*) 0x80001800) exit(0);
+				if (*((u32*) 0x80001800)) exit(0);
 				// Channel Version
 				SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
 			} else {
@@ -5193,6 +5193,7 @@ int GameSettings(struct discHdr * header)
                         iosChoice = i249;
                     }
                     parentalcontrolChoice = 0;
+                    CFG_forget_game_opt(header->id);
                 }
                 break;
 		}
