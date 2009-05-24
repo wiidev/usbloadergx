@@ -20,9 +20,9 @@ struct SSettings Settings;
 //struct SSettings2 Settings2;
 
 
-char *cfg_path = "SD:/apps/usbloader/";
+//char *cfg_path = "SD:/apps/usbloader/";
 //char *setting_path = "SD:/apps/usbloader/GXGameSettings.cfg";
-char current_path[100];
+//char current_path[100];
 
 /* configurable fields */
 
