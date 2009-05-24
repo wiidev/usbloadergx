@@ -211,8 +211,9 @@ static void WindowCredits(void * ptr)
 
 	txt[i] = new GuiText(LANGUAGE.Credits, 26, (GXColor){255, 255, 255, 255});
 	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(0,12); i++;
-	
-	char SvnRev[10] = "";	sprintf(SvnRev, "r%s", SVN_REV);
+
+	char SvnRev[10];	snprintf(SvnRev, 7, "Rev%s", SVN_REV);
+
 	txt[i] = new GuiText(SvnRev, 18, (GXColor){255, 255, 255, 255});
 	txt[i]->SetAlignment(ALIGN_RIGHT, ALIGN_TOP); txt[i]->SetPosition(0,y); i++; y+=34;
 
@@ -4938,7 +4939,7 @@ static int MenuSettings()
 				}
 				else if (choice == 2)
 				{
-					if (*(unsigned int*) 0x80001800) exit(0);
+					if (*((u32*) 0x80001800)) exit(0);
 					// Channel Version
 					SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
 				}
@@ -4953,7 +4954,6 @@ static int MenuSettings()
 			break;
 			}
 		}
-
 	}
 	HaltGui();
 	delete btnLogo;
