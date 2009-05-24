@@ -263,4 +263,25 @@ extern const u32	abcIcon_png_size;
 extern const u8		playCountIcon_png[];
 extern const u32	playCountIcon_png_size;
 
+extern const u8		arrangeGrid_png[];
+extern const u32	arrangeGrid_png_size;
+
+extern const u8		arrangeCarosselle_png[];
+extern const u32	arrangeCarosselle_png_size;
+
+extern const u8		favIcon_gray_png[];
+extern const u32	favIcon_gray_png_size;
+
+extern const u8		abcIcon_gray_png[];
+extern const u32	abcIcon_gray_png_size;
+
+extern const u8		playCountIcon_gray_png[];
+extern const u32	playCountIcon_gray_png_size;
+
+extern const u8		arrangeGrid_gray_png[];
+extern const u32	arrangeGrid_gray_png_size;
+
+extern const u8		arrangeCarosselle_gray_png[];
+extern const u32	arrangeCarosselle_gray_png_size;
+
 #endif

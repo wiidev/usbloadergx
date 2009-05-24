@@ -1130,6 +1130,10 @@ int GameWindowPrompt()
 	btnFavorite.SetEffectGrow();
 
 	GuiImage btnLeftImg(&imgLeft);
+	if (Settings.wsprompt == yes)
+		{
+			btnLeftImg.SetWidescreen(CFG.widescreen);
+		}
 	GuiButton btnLeft(imgLeft.GetWidth(), imgLeft.GetHeight());
 	btnLeft.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 	btnLeft.SetPosition(20, 0);
@@ -1141,6 +1145,10 @@ int GameWindowPrompt()
 	btnLeft.SetEffectGrow();
 
 	GuiImage btnRightImg(&imgRight);
+	if (Settings.wsprompt == yes)
+		{
+			btnRightImg.SetWidescreen(CFG.widescreen);
+		}
 	GuiButton btnRight(imgRight.GetWidth(), imgRight.GetHeight());
 	btnRight.SetAlignment(ALIGN_RIGHT, ALIGN_MIDDLE);
 	btnRight.SetPosition(-20, 0);
@@ -2768,25 +2776,28 @@ static int MenuDiscList()
 	GuiImageData batteryRed(imgPath, battery_red_png);
 	snprintf(imgPath, sizeof(imgPath), "%sbattery_bar.png", CFG.theme_path);
 	GuiImageData batteryBar(imgPath, battery_bar_png);
-
-	/*snprintf(imgPath, sizeof(imgPath), "%sfavorite.png", CFG.theme_path);
-	GuiImageData imgFavoriteOn(imgPath, favorite_png);
-	snprintf(imgPath, sizeof(imgPath), "%snot_favorite.png", CFG.theme_path);
-	GuiImageData imgFavoriteOff(imgPath, not_favorite_png);*/
-
+	//NEW
     snprintf(imgPath, sizeof(imgPath), "%sfavIcon.png", CFG.theme_path);
 	GuiImageData imgfavIcon(imgPath, favIcon_png);
-	//snprintf(imgPath, sizeof(imgPath), "%snot_favorite.png", CFG.theme_path);
-	//GuiImageData imgFavoriteOff(imgPath, not_favorite_png);
-
+    snprintf(imgPath, sizeof(imgPath), "%sfavIcon_gray.png", CFG.theme_path);
+	GuiImageData imgfavIcon_gray(imgPath, favIcon_gray_png);
     snprintf(imgPath, sizeof(imgPath), "%sabcIcon.png", CFG.theme_path);
 	GuiImageData imgabcIcon(imgPath, abcIcon_png);
-	//snprintf(imgPath, sizeof(imgPath), "%snot_favorite.png", CFG.theme_path);
-	//GuiImageData imgFavoriteOff(imgPath, not_favorite_png);
+    snprintf(imgPath, sizeof(imgPath), "%sabcIcon_gray.png", CFG.theme_path);
+	GuiImageData imgabcIcon_gray(imgPath, abcIcon_gray_png);
 	snprintf(imgPath, sizeof(imgPath), "%splayCountIcon.png", CFG.theme_path);
 	GuiImageData imgplayCountIcon(imgPath, playCountIcon_png);
-
-
+	snprintf(imgPath, sizeof(imgPath), "%splayCountIcon_gray.png", CFG.theme_path);
+	GuiImageData imgplayCountIcon_gray(imgPath, playCountIcon_gray_png);
+	snprintf(imgPath, sizeof(imgPath), "%sarrangeGrid.png", CFG.theme_path);
+	GuiImageData imgarrangeGrid(imgPath, arrangeGrid_png);
+	snprintf(imgPath, sizeof(imgPath), "%sarrangeGrid_gray.png", CFG.theme_path);
+	GuiImageData imgarrangeGrid_gray(imgPath, arrangeGrid_gray_png);
+	snprintf(imgPath, sizeof(imgPath), "%sarrangeCarosselle.png", CFG.theme_path);
+	GuiImageData imgarrangeCarosselle(imgPath, arrangeCarosselle_png);
+	snprintf(imgPath, sizeof(imgPath), "%sarrangeCarosselle_gray.png", CFG.theme_path);
+	GuiImageData imgarrangeCarosselle_gray(imgPath, arrangeCarosselle_gray_png);
+	
     GuiTrigger trigA;
 	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
     GuiTrigger trigHome;
@@ -2907,45 +2918,93 @@ static int MenuDiscList()
 	wiiBtn.SetTrigger(&trigA);
 
 	GuiImage favoriteBtnImg(&imgfavIcon);
+	GuiImage favoriteBtnImg_g(&imgfavIcon_gray);
 	favoriteBtnImg.SetWidescreen(CFG.widescreen);
-	GuiButton favoriteBtn(imgfavIcon.GetWidth(), imgfavIcon.GetHeight());
+	favoriteBtnImg_g.SetWidescreen(CFG.widescreen);
+	GuiButton favoriteBtn(favoriteBtnImg.GetWidth(), favoriteBtnImg.GetHeight());
 	favoriteBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);//(ALIGN_CENTRE, ALIGN_MIDDLE);
-	favoriteBtn.SetPosition(-80, 15);
-	favoriteBtn.SetImage(&favoriteBtnImg);
+	favoriteBtn.SetPosition(20, 15);
+	favoriteBtn.SetImage(&favoriteBtnImg_g);
 	favoriteBtn.SetSoundOver(&btnSoundOver);
 	favoriteBtn.SetSoundClick(&btnClick);
 	favoriteBtn.SetTrigger(&trigA);
 	favoriteBtn.SetEffectGrow();
-	favoriteBtn.SetAlpha(70);
+	favoriteBtn.SetAlpha(180);
 
 	GuiImage abcBtnImg(&imgabcIcon);
 	abcBtnImg.SetWidescreen(CFG.widescreen);
+	GuiImage abcBtnImg_g(&imgabcIcon_gray);
+	abcBtnImg_g.SetWidescreen(CFG.widescreen);
 	GuiButton abcBtn(abcBtnImg.GetWidth(), abcBtnImg.GetHeight());
 	abcBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);//(ALIGN_CENTRE, ALIGN_MIDDLE);
-	abcBtn.SetPosition(-30, 15);
-	abcBtn.SetImage(&abcBtnImg);
+	abcBtn.SetPosition(52, 15);
+	abcBtn.SetImage(&abcBtnImg_g);
 	abcBtn.SetSoundOver(&btnSoundOver);
 	abcBtn.SetSoundClick(&btnClick);
 	abcBtn.SetTrigger(&trigA);
 	abcBtn.SetEffectGrow();
-	abcBtn.SetAlpha(70);
+	abcBtn.SetAlpha(180);
 
 
 	GuiImage countBtnImg(&imgplayCountIcon);
 	countBtnImg.SetWidescreen(CFG.widescreen);
+	GuiImage countBtnImg_g(&imgplayCountIcon_gray);
+	countBtnImg_g.SetWidescreen(CFG.widescreen);
 	GuiButton countBtn(countBtnImg.GetWidth(), countBtnImg.GetHeight());
 	countBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);//(ALIGN_CENTRE, ALIGN_MIDDLE);
-	countBtn.SetPosition(10, 15);
-	countBtn.SetImage(&countBtnImg);
+	countBtn.SetPosition(84, 15);
+	countBtn.SetImage(&countBtnImg_g);
+	countBtn.SetImage(&countBtnImg_g);
 	countBtn.SetSoundOver(&btnSoundOver);
 	countBtn.SetSoundClick(&btnClick);
 	countBtn.SetTrigger(&trigA);
 	countBtn.SetEffectGrow();
-	countBtn.SetAlpha(70);
+	countBtn.SetAlpha(180);
+	
+	//NEW
+	GuiImage gridBtnImg(&imgarrangeGrid);
+	gridBtnImg.SetWidescreen(CFG.widescreen);
+	GuiImage gridBtnImg_g(&imgarrangeGrid_gray);
+	gridBtnImg_g.SetWidescreen(CFG.widescreen);
+	GuiButton gridBtn(gridBtnImg.GetWidth(), gridBtnImg.GetHeight());
+	gridBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);//(ALIGN_CENTRE, ALIGN_MIDDLE);
+	gridBtn.SetPosition(116, 15);
+	gridBtn.SetImage(&gridBtnImg_g);
+	gridBtn.SetSoundOver(&btnSoundOver);
+	gridBtn.SetSoundClick(&btnClick);
+	gridBtn.SetTrigger(&trigA);
+	gridBtn.SetEffectGrow();
+	gridBtn.SetAlpha(180);
+	
+	GuiImage carosselleBtnImg(&imgarrangeCarosselle);
+	carosselleBtnImg.SetWidescreen(CFG.widescreen);
+	GuiImage carosselleBtnImg_g(&imgarrangeCarosselle_gray);
+	carosselleBtnImg_g.SetWidescreen(CFG.widescreen);
+	GuiButton carosselleBtn(carosselleBtnImg.GetWidth(), carosselleBtnImg.GetHeight());
+	carosselleBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);//(ALIGN_CENTRE, ALIGN_MIDDLE);
+	carosselleBtn.SetPosition(148, 15);
+	carosselleBtn.SetImage(&carosselleBtnImg_g);
+	carosselleBtn.SetSoundOver(&btnSoundOver);
+	carosselleBtn.SetSoundClick(&btnClick);
+	carosselleBtn.SetTrigger(&trigA);
+	carosselleBtn.SetEffectGrow();
+	carosselleBtn.SetAlpha(180);
 
-	if (Settings.fave)favoriteBtn.SetAlpha(255);
-	if (Settings.sort==all)abcBtn.SetAlpha(255);
-	else if (Settings.sort==pcount)countBtn.SetAlpha(255);
+	if (Settings.fave)
+	{
+		favoriteBtn.SetImage(&favoriteBtnImg);
+		favoriteBtn.SetAlpha(255);
+	}
+	if (Settings.sort==all)
+	{
+		abcBtn.SetImage(&abcBtnImg);
+		abcBtn.SetAlpha(255);
+	}
+	else if (Settings.sort==pcount)
+	{
+		countBtn.SetImage(&countBtnImg);
+		countBtn.SetAlpha(255);
+	}
 
 	//Downloading Covers
 	GuiTooltip DownloadBtnTT(LANGUAGE.ClicktoDownloadCovers);
@@ -3001,6 +3060,9 @@ static int MenuDiscList()
 	w.Append(&favoriteBtn);
 	w.Append(&abcBtn);
 	w.Append(&countBtn);
+	//NEW
+	w.Append(&gridBtn);
+	w.Append(&carosselleBtn);
 
     if((Settings.hddinfo == hr12)||(Settings.hddinfo == hr24))
     {
@@ -3083,6 +3145,7 @@ static int MenuDiscList()
 			}
 
 		}
+		//BLA
 		else if(homeBtn.GetState() == STATE_CLICKED)
 		{
 		    s32 thetimeofbg = bgMusic->GetPlayTime();
@@ -3218,7 +3281,7 @@ static int MenuDiscList()
 			gamecntTxt.SetText(GamesCnt);
 			selectedold = 1;
 			favoriteBtn.ResetState();
-			favoriteBtn.SetAlpha(Settings.fave ? 255 : 70);
+			Settings.fave ? (favoriteBtn.SetImage(&favoriteBtnImg), favoriteBtn.SetAlpha(255)) : (favoriteBtn.SetImage(&favoriteBtnImg_g), favoriteBtn.SetAlpha(180));
 		}
 
 		else if(abcBtn.GetState() == STATE_CLICKED)
@@ -3231,8 +3294,10 @@ static int MenuDiscList()
 				__Menu_GetEntries();
 				gameBrowser.Reload(gameList, gameCnt);
 				selectedold = 1;
+				abcBtn.SetImage(&abcBtnImg);
 				abcBtn.SetAlpha(255);
-				countBtn.SetAlpha(70);
+				countBtn.SetImage(&countBtnImg_g);
+				countBtn.SetAlpha(180);
 			}
 			abcBtn.ResetState();
 		}
@@ -3247,7 +3312,9 @@ static int MenuDiscList()
 				__Menu_GetEntries();
 				gameBrowser.Reload(gameList, gameCnt);
 				selectedold = 1;
-				abcBtn.SetAlpha(70);
+				abcBtn.SetImage(&abcBtnImg_g);
+				abcBtn.SetAlpha(180);
+				countBtn.SetImage(&countBtnImg);
 				countBtn.SetAlpha(255);
 			}
 			countBtn.ResetState();
@@ -3882,6 +3949,7 @@ static int MenuSettings()
 	int menu = MENU_NONE;
 	int ret;
 	char cfgtext[20];
+	int choice = 0; //BLA
 
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
 	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, vol);
@@ -3941,6 +4009,12 @@ static int MenuSettings()
 	backBtn.SetTrigger(&trigA);
 	backBtn.SetTrigger(&trigB);
 	backBtn.SetEffectGrow();
+	
+	//BLA
+	GuiButton homo(1,1);
+	homo.SetTrigger(&trigHome);
+	homo.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	homo.SetPosition(0,0);
 
 	GuiImage tab1Img(&tab1);
 	GuiImage tab2Img(&tab2);
@@ -4039,6 +4113,7 @@ static int MenuSettings()
 			w.Append(&backBtn);
 			w.Append(&lockBtn);
 			w.Append(btnLogo);
+			w.Append(&homo);
 			//set triggers for tabs
 			page1Btn.RemoveTrigger(1);
 			page1Btn.RemoveTrigger(2);
@@ -4805,6 +4880,42 @@ static int MenuSettings()
 					lockBtnTxt.SetText(LANGUAGE.Unlock);
 				}
 				lockBtn.ResetState();
+			}
+			//BLA
+			else if(homo.GetState() == STATE_CLICKED)
+			{
+				optionBrowser2.SetState(STATE_DISABLED);
+				s32 thetimeofbg = bgMusic->GetPlayTime();
+				bgMusic->Stop();
+				choice = WindowExitPrompt(LANGUAGE.ExitUSBISOLoader,0, LANGUAGE.BacktoLoader,LANGUAGE.WiiMenu,LANGUAGE.Back,0);
+				if(!strcmp("", CFG.oggload_path) || !strcmp("notset", CFG.ogg_path)) 
+				{
+					bgMusic->Play();
+				} 
+				else 
+				{
+					bgMusic->PlayOggFile(CFG.ogg_path);
+				}
+				bgMusic->SetPlayTime(thetimeofbg);
+				SetVolumeOgg(255*(vol/100.0));
+
+				if(choice == 3)
+				{
+					SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0); // Back to System Menu
+				}
+				else if (choice == 2)
+				{
+					if (*(unsigned int*) 0x80001800) exit(0);
+					// Channel Version
+					SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
+				} 
+				else 
+				{
+					homo.ResetState();
+					//optionBrowser2.SetState(STATE_DEFAULT);
+					//optionBrowser2.SetFocus(1);
+				}
+
 			}
 			if(settingsbackgroundbtn.GetState() == STATE_CLICKED)
 			{
