@@ -19,12 +19,13 @@ TARGET		:=	boot
 BUILD		:=	build
 SOURCES		:=	source source/libwiigui source/images source/fonts source/sounds source/libwbfs
 INCLUDES	:=	source
+SVNDEV		:=	-D'SVN_REV="$(shell svnversion -n ..)"'
 
 #---------------------------------------------------------------------------------
 # options for code generation
 #---------------------------------------------------------------------------------
 
-CFLAGS		=	-g -O2 -Wall $(MACHDEP) $(INCLUDE)
+CFLAGS		=	-g -O2 -Wall $(SVNDEV) $(MACHDEP) $(INCLUDE)
 CXXFLAGS	=	-save-temps -Xassembler -aln=$@.lst $(CFLAGS)
 LDFLAGS		=	-g $(MACHDEP) -Wl,-Map,$(notdir $@).map,--section-start,.init=0x80a00100
 

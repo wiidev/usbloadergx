@@ -211,8 +211,9 @@ static void WindowCredits(void * ptr)
 
 	txt[i] = new GuiText(LANGUAGE.Credits, 26, (GXColor){255, 255, 255, 255});
 	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(0,12); i++;
-
-	txt[i] = new GuiText("V 1 .0", 18, (GXColor){255, 255, 255, 255});
+	
+	char SvnRev[10] = "";	sprintf(SvnRev, "r%s", SVN_REV);
+	txt[i] = new GuiText(SvnRev, 18, (GXColor){255, 255, 255, 255});
 	txt[i]->SetAlignment(ALIGN_RIGHT, ALIGN_TOP); txt[i]->SetPosition(0,y); i++; y+=34;
 
 	txt[i] = new GuiText("USB Loader GX", 24, (GXColor){255, 255, 255, 255});
