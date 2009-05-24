@@ -413,10 +413,10 @@ WindowPrompt(const char *title, const char *msg, const char *btn1Label,
 	GuiTrigger trigB;
 	trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 
-	//GuiImageData dialogBox(dialogue_box_png);
 	GuiImage dialogBoxImg(&dialogBox);
 	if (Settings.wsprompt == yes){
-	dialogBoxImg.SetWidescreen(CFG.widescreen);}///////////
+	dialogBoxImg.SetWidescreen(CFG.widescreen);
+	}
 
 	GuiText titleTxt(title, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
@@ -430,7 +430,8 @@ WindowPrompt(const char *title, const char *msg, const char *btn1Label,
 	GuiImage btn1Img(&btnOutline);
 	if (Settings.wsprompt == yes){
 	btn1Txt.SetWidescreen(CFG.widescreen);
-	btn1Img.SetWidescreen(CFG.widescreen);}///////////
+	btn1Img.SetWidescreen(CFG.widescreen);
+	}
 	GuiButton btn1(btnOutline.GetWidth(), btnOutline.GetHeight());
 	btn1.SetLabel(&btn1Txt);
 	btn1.SetImage(&btn1Img);
@@ -444,7 +445,8 @@ WindowPrompt(const char *title, const char *msg, const char *btn1Label,
 	GuiImage btn2Img(&btnOutline);
 	if (Settings.wsprompt == yes){
 	btn2Txt.SetWidescreen(CFG.widescreen);
-	btn2Img.SetWidescreen(CFG.widescreen);}///////////
+	btn2Img.SetWidescreen(CFG.widescreen);
+	}
 	GuiButton btn2(btnOutline.GetWidth(), btnOutline.GetHeight());
 	btn2.SetLabel(&btn2Txt);
 	btn2.SetImage(&btn2Img);
@@ -459,7 +461,8 @@ WindowPrompt(const char *title, const char *msg, const char *btn1Label,
 	GuiImage btn3Img(&btnOutline);
 	if (Settings.wsprompt == yes){
 	btn3Txt.SetWidescreen(CFG.widescreen);
-	btn3Img.SetWidescreen(CFG.widescreen);}///////////
+	btn3Img.SetWidescreen(CFG.widescreen);
+	}
 	GuiButton btn3(btnOutline.GetWidth(), btnOutline.GetHeight());
 	btn3.SetLabel(&btn3Txt);
 	btn3.SetImage(&btn3Img);
@@ -474,7 +477,8 @@ WindowPrompt(const char *title, const char *msg, const char *btn1Label,
 	GuiImage btn4Img(&btnOutline);
 	if (Settings.wsprompt == yes){
 	btn4Txt.SetWidescreen(CFG.widescreen);
-	btn4Img.SetWidescreen(CFG.widescreen);}///////////
+	btn4Img.SetWidescreen(CFG.widescreen);
+	}
 	GuiButton btn4(btnOutline.GetWidth(), btnOutline.GetHeight());
 	btn4.SetLabel(&btn4Txt);
 	btn4.SetImage(&btn4Img);
@@ -757,7 +761,8 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 	GuiImage closeImg(&close);
 	if (Settings.wsprompt == yes){
 	closeTxt.SetWidescreen(CFG.widescreen);
-	closeImg.SetWidescreen(CFG.widescreen);}///////////
+	closeImg.SetWidescreen(CFG.widescreen);
+	}
 	GuiButton closeBtn(close.GetWidth(), close.GetHeight());
 	closeBtn.SetImage(&closeImg);
 	closeBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
@@ -777,11 +782,12 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 	btn1.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
     btn1.SetPosition(0, 0);
 
-	GuiText btn2Txt(btn1Label, 34, (GXColor){0, 0, 0, 255});
+	GuiText btn2Txt(btn1Label, 28, (GXColor){0, 0, 0, 255});
 	GuiImage btn2Img(&button);
 	if (Settings.wsprompt == yes){
 	btn2Txt.SetWidescreen(CFG.widescreen);
-	btn2Img.SetWidescreen(CFG.widescreen);}///////////
+	btn2Img.SetWidescreen(CFG.widescreen);
+	}
 	GuiButton btn2(button.GetWidth(), button.GetHeight());
 	btn2.SetLabel(&btn2Txt);
 	btn2.SetImage(&btn2Img);
@@ -794,11 +800,12 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 	btn2.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_IN, 50);
 	btn2.SetRumble(false);
 
-    GuiText btn3Txt(btn2Label, 34, (GXColor){0, 0, 0, 255});
+    GuiText btn3Txt(btn2Label, 28, (GXColor){0, 0, 0, 255});
 	GuiImage btn3Img(&button);
 	if (Settings.wsprompt == yes){
 	btn3Txt.SetWidescreen(CFG.widescreen);
-	btn3Img.SetWidescreen(CFG.widescreen);}///////////
+	btn3Img.SetWidescreen(CFG.widescreen);
+	}
 	GuiButton btn3(button.GetWidth(), button.GetHeight());
 	btn3.SetLabel(&btn3Txt);
 	btn3.SetImage(&btn3Img);
@@ -823,9 +830,6 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 	btn4.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
     btn4.SetPosition(0,0);
 	btn4.SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_IN, 50);
-
-//	btn2Txt.SetFontSize(22);
-//	btn3Txt.SetFontSize(22);
 
 	GuiImage wiimoteImg(&wiimote);
 	if (Settings.wsprompt == yes){wiimoteImg.SetWidescreen(CFG.widescreen);}
@@ -1081,7 +1085,8 @@ int GameWindowPrompt()
 	GuiImage btn2Img(&btnOutline);
 	if (Settings.wsprompt == yes){
 	btn2Txt.SetWidescreen(CFG.widescreen);
-	btn2Img.SetWidescreen(CFG.widescreen);}///////////
+	btn2Img.SetWidescreen(CFG.widescreen);
+	}
 	GuiButton btn2(btnOutline.GetWidth(), btnOutline.GetHeight());
 	//check if unlocked
 	if (CFG.godmode == 1)
@@ -1327,7 +1332,7 @@ int GameWindowPrompt()
 					favorite = game_num->favorite;
 					count = game_num->count;//count+=1;
 					}count+=1;
-				if(isSdInserted() == 1) {
+				if(isSdInserted()) {
 				if (CFG_save_game_num(header->id))
 				{
 					//WindowPrompt(LANGUAGE.SuccessfullySaved, 0, LANGUAGE.ok, 0,0,0);
@@ -1361,7 +1366,7 @@ int GameWindowPrompt()
 			}
 
 			else if(btnFavorite.GetState() == STATE_CLICKED){//switch favorite
-				if(isSdInserted() == 1) {
+				if(isSdInserted()) {
 					faveChoice = !faveChoice;
 					btnFavoriteImg.SetImage(faveChoice ? &imgFavorite : &imgNotFavorite);
 					extern u8 favorite;
@@ -1512,7 +1517,8 @@ DiscWait(const char *title, const char *msg, const char *btn1Label, const char *
 
 	GuiImage dialogBoxImg(&dialogBox);
 	if (Settings.wsprompt == yes){
-	dialogBoxImg.SetWidescreen(CFG.widescreen);}///////////
+	dialogBoxImg.SetWidescreen(CFG.widescreen);
+	}
 
 	GuiText titleTxt(title, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
@@ -1526,7 +1532,8 @@ DiscWait(const char *title, const char *msg, const char *btn1Label, const char *
 	GuiImage btn1Img(&btnOutline);
 	if (Settings.wsprompt == yes){
 	btn1Txt.SetWidescreen(CFG.widescreen);
-	btn1Img.SetWidescreen(CFG.widescreen);}///////////
+	btn1Img.SetWidescreen(CFG.widescreen);
+	}
 	GuiButton btn1(btnOutline.GetWidth(), btnOutline.GetHeight());
 
 	if(btn2Label)
@@ -1553,7 +1560,8 @@ DiscWait(const char *title, const char *msg, const char *btn1Label, const char *
 	GuiImage btn2Img(&btnOutline);
 	if (Settings.wsprompt == yes){
 	btn2Txt.SetWidescreen(CFG.widescreen);
-	btn2Img.SetWidescreen(CFG.widescreen);}///////////
+	btn2Img.SetWidescreen(CFG.widescreen);
+	}
 	GuiButton btn2(btnOutline.GetWidth(), btnOutline.GetHeight());
 	btn2.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
 	btn2.SetPosition(-20, -25);
@@ -1666,7 +1674,8 @@ FormatingPartition(const char *title, partitionEntry *entry)
 
 	GuiImage dialogBoxImg(&dialogBox);
 	if (Settings.wsprompt == yes){
-	dialogBoxImg.SetWidescreen(CFG.widescreen);}///////////
+	dialogBoxImg.SetWidescreen(CFG.widescreen);
+	}
 
 	GuiText titleTxt(title, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
@@ -1723,7 +1732,8 @@ int NetworkInitPromp(int choice2)
 
 	GuiImage dialogBoxImg(&dialogBox);
 	if (Settings.wsprompt == yes){
-	dialogBoxImg.SetWidescreen(CFG.widescreen);}///////////
+	dialogBoxImg.SetWidescreen(CFG.widescreen);
+	}
 
 	GuiText titleTxt(LANGUAGE.InitializingNetwork, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
@@ -1738,7 +1748,8 @@ int NetworkInitPromp(int choice2)
 	GuiImage btn1Img(&btnOutline);
 	if (Settings.wsprompt == yes){
 	btn1Txt.SetWidescreen(CFG.widescreen);
-	btn1Img.SetWidescreen(CFG.widescreen);}///////////
+	btn1Img.SetWidescreen(CFG.widescreen);
+	}
 	GuiButton btn1(btnOutline.GetWidth(), btnOutline.GetHeight());
     btn1.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
     btn1.SetPosition(0, -45);
@@ -2207,6 +2218,37 @@ ProgressDownloadWindow(int choice2)
 
 	}
 
+    /**Temporary redownloading 1st image because of a fucking corruption bug **/
+
+    char URLFile[100];
+    if (choice2 == 2) {
+		sprintf(URLFile,"http://www.theotherzone.com/wii/3d/176/248/%s",missingFiles[0]); // For 3D Covers
+		sprintf(imgPath,"%s%s", CFG.covers_path, missingFiles[0]);
+    }
+    if(choice2 == 3) {
+		sprintf(URLFile,"http://www.theotherzone.com/wii/diskart/160/160/%s",missingFiles[0]);
+		sprintf(imgPath,"%s%s", CFG.disc_path, missingFiles[0]);
+    }
+    if(choice2 == 1) {
+		sprintf(URLFile,"http://www.theotherzone.com/wii/resize/160/224/%s",missingFiles[0]);
+		sprintf(imgPath,"%s%s", CFG.covers_path, missingFiles[0]);
+    }
+
+    struct block file = downloadfile(URLFile);
+
+    if (file.size == 36864 || file.size <= 1024 || file.size == 7386 || file.data == NULL) {
+    } else {
+    if(file.data != NULL)
+    {
+        // save png to sd card
+        FILE *pfile;
+        pfile = fopen(imgPath, "wb");
+        fwrite(file.data,1,file.size,pfile);
+        fclose (pfile);
+        free(file.data);
+    }
+    }
+
 
 	HaltGui();
 	mainWindow->Remove(&promptWindow);
@@ -2216,7 +2258,7 @@ ProgressDownloadWindow(int choice2)
 	if (cntNotFound != 0) {
 	    return cntNotFound;
 	} else {
-	return 0;
+        return 0;
 	}
 }
 
@@ -2484,13 +2526,14 @@ static int OnScreenKeyboard(char * var, u32 maxlen, int min)
 	GuiImage okBtnImg(&btnOutline);
 	if (Settings.wsprompt == yes){
 	okBtnTxt.SetWidescreen(CFG.widescreen);
-	okBtnImg.SetWidescreen(CFG.widescreen);}///////////
+	okBtnImg.SetWidescreen(CFG.widescreen);
+	}
 	GuiButton okBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
 
 	okBtn.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-	okBtn.SetPosition(5, 15);//(25, -25);
+	okBtn.SetPosition(5, 15);
 
-	okBtn.SetLabel(&okBtnTxt);//
+	okBtn.SetLabel(&okBtnTxt);
 	okBtn.SetImage(&okBtnImg);
 	okBtn.SetSoundOver(&btnSoundOver);
 	okBtn.SetSoundClick(&btnClick);
@@ -2501,7 +2544,8 @@ static int OnScreenKeyboard(char * var, u32 maxlen, int min)
 	GuiImage cancelBtnImg(&btnOutline);
 	if (Settings.wsprompt == yes){
 	cancelBtnTxt.SetWidescreen(CFG.widescreen);
-	cancelBtnImg.SetWidescreen(CFG.widescreen);}///////////
+	cancelBtnImg.SetWidescreen(CFG.widescreen);
+	}
 	GuiButton cancelBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
 	cancelBtn.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
 	cancelBtn.SetPosition(-5, 15);//(-25, -25);
@@ -2776,7 +2820,7 @@ static int MenuDiscList()
 	GuiImageData batteryRed(imgPath, battery_red_png);
 	snprintf(imgPath, sizeof(imgPath), "%sbattery_bar.png", CFG.theme_path);
 	GuiImageData batteryBar(imgPath, battery_bar_png);
-	//NEW
+
     snprintf(imgPath, sizeof(imgPath), "%sfavIcon.png", CFG.theme_path);
 	GuiImageData imgfavIcon(imgPath, favIcon_png);
     snprintf(imgPath, sizeof(imgPath), "%sfavIcon_gray.png", CFG.theme_path);
@@ -2797,7 +2841,7 @@ static int MenuDiscList()
 	GuiImageData imgarrangeCarosselle(imgPath, arrangeCarosselle_png);
 	snprintf(imgPath, sizeof(imgPath), "%sarrangeCarosselle_gray.png", CFG.theme_path);
 	GuiImageData imgarrangeCarosselle_gray(imgPath, arrangeCarosselle_gray_png);
-	
+
     GuiTrigger trigA;
 	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
     GuiTrigger trigHome;
@@ -2960,8 +3004,7 @@ static int MenuDiscList()
 	countBtn.SetTrigger(&trigA);
 	countBtn.SetEffectGrow();
 	countBtn.SetAlpha(180);
-	
-	//NEW
+
 	GuiImage gridBtnImg(&imgarrangeGrid);
 	gridBtnImg.SetWidescreen(CFG.widescreen);
 	GuiImage gridBtnImg_g(&imgarrangeGrid_gray);
@@ -2975,7 +3018,7 @@ static int MenuDiscList()
 	gridBtn.SetTrigger(&trigA);
 	gridBtn.SetEffectGrow();
 	gridBtn.SetAlpha(180);
-	
+
 	GuiImage carosselleBtnImg(&imgarrangeCarosselle);
 	carosselleBtnImg.SetWidescreen(CFG.widescreen);
 	GuiImage carosselleBtnImg_g(&imgarrangeCarosselle_gray);
@@ -3060,7 +3103,6 @@ static int MenuDiscList()
 	w.Append(&favoriteBtn);
 	w.Append(&abcBtn);
 	w.Append(&countBtn);
-	//NEW
 	w.Append(&gridBtn);
 	w.Append(&carosselleBtn);
 
@@ -3145,7 +3187,6 @@ static int MenuDiscList()
 			}
 
 		}
-		//BLA
 		else if(homeBtn.GetState() == STATE_CLICKED)
 		{
 		    s32 thetimeofbg = bgMusic->GetPlayTime();
@@ -3200,6 +3241,9 @@ static int MenuDiscList()
 			SDCard_Init();
 			startat = gameBrowser.GetSelectedOption();
 			offset = gameBrowser.GetOffset();
+            if(isSdInserted()) {
+            CFG_Load();
+            }
 			sdcardBtn.ResetState();
 			menu = MENU_DISCLIST;
 			break;
@@ -3207,7 +3251,7 @@ static int MenuDiscList()
 
 		else if(DownloadBtn.GetState() == STATE_CLICKED)
 		{
-		    if(isSdInserted() == 1) {
+		    if(isSdInserted()) {
 			choice = WindowPrompt(LANGUAGE.CoverDownload, 0, LANGUAGE.NormalCovers, LANGUAGE.t3Covers, LANGUAGE.DiscImages, LANGUAGE.Back); // ask for download choice
 
 			if (choice != 0)
@@ -3272,7 +3316,7 @@ static int MenuDiscList()
 		else if(favoriteBtn.GetState() == STATE_CLICKED)
 		{
 			Settings.fave=!Settings.fave;
-			if(isSdInserted() == 1) {
+			if(isSdInserted()) {
 				cfg_save_global();
 			}
 			__Menu_GetEntries();
@@ -3288,7 +3332,7 @@ static int MenuDiscList()
 		{
 			if(Settings.sort != all) {
 				Settings.sort=all;
-				if(isSdInserted() == 1) {
+				if(isSdInserted()) {
 					cfg_save_global();
 				}
 				__Menu_GetEntries();
@@ -3306,7 +3350,7 @@ static int MenuDiscList()
 		{
 			if(Settings.sort != pcount) {
 				Settings.sort=pcount;
-				if(isSdInserted() == 1) {
+				if(isSdInserted()) {
 					cfg_save_global();
 				}
 				__Menu_GetEntries();
@@ -3455,11 +3499,11 @@ static int MenuDiscList()
 				if (game_num)
 					{
 					favorite = game_num->favorite;
-					count = game_num->count;//count+=1;
+					count = game_num->count;
 
 					}count+=1;
 
-				if(isSdInserted() == 1) {
+				if(isSdInserted()) {
 				if (CFG_save_game_num(header->id))
 				{
 					//WindowPrompt(LANGUAGE.SuccessfullySaved, 0, LANGUAGE.ok, 0,0,0);
@@ -3949,7 +3993,7 @@ static int MenuSettings()
 	int menu = MENU_NONE;
 	int ret;
 	char cfgtext[20];
-	int choice = 0; //BLA
+	int choice = 0;
 
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
 	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, vol);
@@ -4009,8 +4053,7 @@ static int MenuSettings()
 	backBtn.SetTrigger(&trigA);
 	backBtn.SetTrigger(&trigB);
 	backBtn.SetEffectGrow();
-	
-	//BLA
+
 	GuiButton homo(1,1);
 	homo.SetTrigger(&trigHome);
 	homo.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
@@ -4403,7 +4446,6 @@ static int MenuSettings()
 							{
 								strncpy(Settings.unlockCode, entered, sizeof(Settings.unlockCode));
 								WindowPrompt(LANGUAGE.PasswordChanged,LANGUAGE.Passwordhasbeenchanged,LANGUAGE.ok,0,0,0);
-								cfg_save_global();
 							}
 						}
 						else
@@ -4455,9 +4497,7 @@ static int MenuSettings()
 								strncat (entered, "/", 1);
 								strncpy(CFG.covers_path, entered, sizeof(CFG.covers_path));
 								WindowPrompt(LANGUAGE.CoverpathChanged,0,LANGUAGE.ok,0,0,0);
-								if(isSdInserted() == 1) {
-                                    cfg_save_global();
-                                } else {
+								if(!isSdInserted()) {
                                     WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
                                 }
 							}
@@ -4494,9 +4534,7 @@ static int MenuSettings()
 								strncat (entered, "/", 1);
 								strncpy(CFG.disc_path, entered, sizeof(CFG.disc_path));
 								WindowPrompt(LANGUAGE.DiscpathChanged,0,LANGUAGE.ok,0,0,0);
-								if(isSdInserted() == 1) {
-                                    cfg_save_global();
-                                } else {
+								if(!isSdInserted()) {
                                     WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
                                 }
 							}
@@ -4533,10 +4571,10 @@ static int MenuSettings()
 								strncat (entered, "/", 1);
 								strncpy(CFG.theme_path, entered, sizeof(CFG.theme_path));
 								WindowPrompt(LANGUAGE.ThemepathChanged,0,LANGUAGE.ok,0,0,0);
-								if(isSdInserted() == 1) {
-                                    cfg_save_global();
-                                } else {
+								if(!isSdInserted()) {
                                     WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
+                                } else {
+                                    cfg_save_global();
                                 }
 								mainWindow->Remove(bgImg);
 								CFG_Load();
@@ -4563,7 +4601,7 @@ static int MenuSettings()
 								mainWindow->Append(bgImg);
 								mainWindow->Append(&w);
 
-								w.Append(&settingsbackgroundbtn);
+                            w.Append(&settingsbackgroundbtn);
 							w.Append(&titleTxt);
 							w.Append(&backBtn);
 							w.Append(&lockBtn);
@@ -4576,7 +4614,6 @@ static int MenuSettings()
 							mainWindow->Append(&page3Btn);
 							w.Append(&backBtn);
 							w.Append(&lockBtn);
-							//////end load new theme////////////
 							}
 						}
 						else
@@ -4675,7 +4712,7 @@ static int MenuSettings()
 									strncat (entered, "/", 1);
 									strncpy(CFG.titlestxt_path, entered, sizeof(CFG.titlestxt_path));
                                     WindowPrompt(LANGUAGE.TitlestxtpathChanged,0,LANGUAGE.ok,0,0,0);
-                                    if(isSdInserted() == 1) {
+                                    if(isSdInserted()) {
                                         cfg_save_global();
                                         CFG_Load();
                                     } else {
@@ -4710,7 +4747,7 @@ static int MenuSettings()
 							w.Append(&lockBtn);
 							if ( result == 1 )
 							{	strncpy(CFG.language_path, entered, sizeof(CFG.language_path));
-								if(isSdInserted() == 1) {
+								if(isSdInserted()) {
                                     cfg_save_global();
                                     if(!checkfile(CFG.language_path)) {
                                     WindowPrompt(LANGUAGE.Filenotfound,LANGUAGE.Loadingstandardlanguage,LANGUAGE.ok,0,0,0);
@@ -4719,11 +4756,9 @@ static int MenuSettings()
 									CFG_Load();
 									menu = MENU_SETTINGS;
 									pageToDisplay = 0;
-
                                 } else {
                                     WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
                                 }
-
 							}
 						}
 						else
@@ -4738,7 +4773,7 @@ static int MenuSettings()
                         Settings.unicodefix++;
                         break;
                     case 4:
-                        if(isSdInserted() == 1) {
+                        if(isSdInserted()) {
                             menu = MENU_OGG;
                             pageToDisplay = 0;
                         } else {
@@ -4808,7 +4843,7 @@ static int MenuSettings()
 			if(backBtn.GetState() == STATE_CLICKED)
 			{
 				//Add the procedure call to save the global configuration
-				if(isSdInserted() == 1) {
+				if(isSdInserted()) {
 				cfg_save_global();
 				}
 				menu = MENU_DISCLIST;
@@ -4842,17 +4877,15 @@ static int MenuSettings()
 							w.Append(&backBtn);
 							w.Append(&lockBtn);
 							mainWindow->Append(&tabBtn);
-					if ( result == 1 )
-					{
-						if (!strcmp(entered, Settings.unlockCode)) //if password correct
-						{
-							if (CFG.godmode == 0)
-							{
+                            if ( result == 1 ) {
+                            if (!strcmp(entered, Settings.unlockCode)) //if password correct
+                            {
+                            if (CFG.godmode == 0) {
 								WindowPrompt(LANGUAGE.CorrectPassword,LANGUAGE.InstallRenameandDeleteareunlocked,LANGUAGE.ok,0,0,0);
 								CFG.godmode = 1;
 								__Menu_GetEntries();
 								menu = MENU_DISCLIST;
-							}
+                            }
 						}
 						else
 						{
@@ -4863,8 +4896,7 @@ static int MenuSettings()
 				else
 				{
 					int choice = WindowPrompt (LANGUAGE.LockConsole,LANGUAGE.Areyousure,LANGUAGE.Yes,LANGUAGE.No,0,0);
-					if(choice == 1)
-					{
+					if(choice == 1) {
 						WindowPrompt(LANGUAGE.ConsoleLocked,LANGUAGE.USBLoaderisprotected,LANGUAGE.ok,0,0,0);
 						CFG.godmode = 0;
 						__Menu_GetEntries();
@@ -4881,18 +4913,18 @@ static int MenuSettings()
 				}
 				lockBtn.ResetState();
 			}
-			//BLA
 			else if(homo.GetState() == STATE_CLICKED)
 			{
+			    cfg_save_global();
 				optionBrowser2.SetState(STATE_DISABLED);
 				s32 thetimeofbg = bgMusic->GetPlayTime();
 				bgMusic->Stop();
 				choice = WindowExitPrompt(LANGUAGE.ExitUSBISOLoader,0, LANGUAGE.BacktoLoader,LANGUAGE.WiiMenu,LANGUAGE.Back,0);
-				if(!strcmp("", CFG.oggload_path) || !strcmp("notset", CFG.ogg_path)) 
+				if(!strcmp("", CFG.oggload_path) || !strcmp("notset", CFG.ogg_path))
 				{
 					bgMusic->Play();
-				} 
-				else 
+				}
+				else
 				{
 					bgMusic->PlayOggFile(CFG.ogg_path);
 				}
@@ -4908,14 +4940,11 @@ static int MenuSettings()
 					if (*(unsigned int*) 0x80001800) exit(0);
 					// Channel Version
 					SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
-				} 
-				else 
+				}
+				else
 				{
 					homo.ResetState();
-					//optionBrowser2.SetState(STATE_DEFAULT);
-					//optionBrowser2.SetFocus(1);
 				}
-
 			}
 			if(settingsbackgroundbtn.GetState() == STATE_CLICKED)
 			{
@@ -5171,7 +5200,7 @@ int GameSettings(struct discHdr * header)
 		if(saveBtn.GetState() == STATE_CLICKED)
 		{
 
-			if(isSdInserted() == 1) {
+			if(isSdInserted()) {
                 if (CFG_save_game_opt(header->id))
 				{
 					WindowPrompt(LANGUAGE.SuccessfullySaved, 0, LANGUAGE.ok, 0,0,0);
@@ -5553,7 +5582,7 @@ int MenuOGG()
                     sprintf(CFG.ogg_path, "notset");
                     bgMusic->Play();
                     }
-                    //cfg_save_global();
+                    cfg_save_global();
                     menu = MENU_OGG;
                     break;
                 } else {
