@@ -947,6 +947,7 @@ bool cfg_parsefile(char *fname, void (*set_func)(char*, char*))
 		if (line[0] == '#') continue;
 		cfg_parseline(line, set_func);
 	}
+	fclose(f);
 	return true;
 }
 
@@ -967,6 +968,7 @@ bool cfg_parsetitlefile(char *fname, void (*set_func)(char*, char*, u8))
 		if (line[0] == '#') continue;
 		cfg_parsetitleline(line, set_func);
 	}
+	fclose(f);
 	return true;
 }
 
