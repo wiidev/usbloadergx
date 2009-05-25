@@ -57,6 +57,7 @@ u8 wsprompt = 0;
 u8 keyset = 0;
 u8 favorite = 0;
 u16 count = 0;
+u8 listDisplay = 0;
 
 #define TITLE_MAX 65
 
@@ -869,6 +870,13 @@ void global_cfg_set(char *name, char *val)
 			}
 		return;
 	}
+	else if (strcmp(name, "gameDisplay") == 0) {
+		int i;
+		if (sscanf(val, "%d", &i) == 1) {
+            Settings.gameDisplay = i;
+			}
+		return;
+	}
 }
 
 // split line to part1 delimiter part2
@@ -1079,6 +1087,7 @@ bool cfg_save_global()// save global settings
 	}
 	fprintf(f, "ogg_path = %s\n ", CFG.ogg_path);
 	fprintf(f, "wiilight = %d\n ", Settings.wiilight);
+	fprintf(f, "gameDisplay = %d\n ", Settings.gameDisplay);
 	fclose(f);
 	return true;
 }
@@ -1265,6 +1274,7 @@ bool cfg_load_global()
 	Settings.wsprompt = off;
 	Settings.keyset = us;
 	Settings.hddinfo = hr12;
+	Settings.gameDisplay = list;
 	Settings.sinfo = ((THEME.showID) ? GameID : Neither);
 	Settings.rumble = RumbleOn;
 	if (THEME.showRegion)

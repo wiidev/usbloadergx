@@ -157,6 +157,7 @@ extern u8 sort;
 extern u8 fave;
 extern u8 wsprompt;
 extern u8 keyset;
+extern u8 gameDisplay;
 
 struct Game_CFG
 {
@@ -277,6 +278,12 @@ enum {
 	us,
 	dvorak,
 	euro,
+	azerty,
+};
+enum {
+	list,
+	grid,
+	carousel,
 };
 
 struct SSettings {
@@ -301,6 +308,7 @@ struct SSettings {
 	int	    sort;
 	int	    fave;
 	int     wiilight;
+	int		gameDisplay;
 };
 
 void CFG_LoadGlobal(void);

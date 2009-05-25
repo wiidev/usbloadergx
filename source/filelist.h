@@ -281,6 +281,9 @@ extern const u32	playCountIcon_gray_png_size;
 extern const u8		arrangeGrid_gray_png[];
 extern const u32	arrangeGrid_gray_png_size;
 
+extern const u8		arrangeList_gray_png[];
+extern const u32	arrangeList_gray_png_size;
+
 extern const u8		arrangeCarosselle_gray_png[];
 extern const u32	arrangeCarosselle_gray_png_size;
 

@@ -209,6 +209,64 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
 	}
 	};
 	memcpy(keys, thekeys, sizeof(thekeys));}
+	
+	//AZERTY//
+        if (mode == 3){
+        Key thekeys[4][11] = {
+        {
+                {'1','&','²','À'},
+                {'2','~','³','é'},
+                {'3','"','#','È'},
+                {'4','`','«','ù'},
+                {'5','(','[','Ì'},
+                {'6','-','|','ì'},
+                {'7','µ','»','è'},
+                {'8','_','\'','ò'},
+                {'9','+','^','ç'},
+                {'0','=','@','à'},
+                {'°',')',']','Ý'}
+        },
+        {
+                {'a','A','Æ','Á'},
+                {'z','Z','Œ','á'},
+                {'e','E','€','É'},
+                {'r','R','®','ë'},
+                {'t','T','†','Í'},
+                {'y','Y','ÿ','í'},
+                {'u','U','Õ','Ó'},
+                {'i','I','õ','Ò'},
+                {'o','O','Ø','Ú'},
+                {'p','P','ø','ú'},
+                {'$','£','¤','ý'}
+        },
+        {
+                {'q','Q','æ','Â'},
+                {'s','S','œ','â'},
+                {'d','D','\0','Ê'},
+                {'f','F','ß','ê'},
+                {'g','G','\0','Î'},
+                {'h','H','\0','î'},
+                {'j','J','\0','Ô'},
+                {'k','K','\0','ô'},
+                {'l','L','\0','Û'},
+                {'m','M','\0','û'},
+                {'*','%','\0','Ù'}
+        },
+        {
+                {'<','>','\0','Ã'},
+                {'w','W','\0','Ä'},
+                {'x','X','\0','Ë'},
+                {'c','C','©','Ç'},
+                {'v','V','“','Ï'},
+                {'b','B','”','ï'},
+                {'n','N','\0','Ñ'},
+                {',','?','\0','ñ'},
+                {';','.','\0','ó'},
+                {':','/','\0','ö'},
+                {'!','§','\0','Ö'}
+        }
+        };
+        memcpy(keys, thekeys, sizeof(thekeys));}
 
 	keyTextbox = new GuiImageData(keyboard_textbox_png);
 	keyTextboxImg = new GuiImage(keyTextbox);
@@ -236,7 +294,7 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
 	trigB->SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 
     int eurocheck = 0;
-    if(lang == 2) {
+    if(mode > 1) {
     eurocheck = -20;
     }
 
@@ -251,7 +309,7 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
 	keyBack->SetSoundClick(keySoundClick);
 	keyBack->SetTrigger(trigA);
 	keyBack->SetTrigger(trigB);
-	if (mode == 2){
+	if (mode > 1){
 	keyBack->SetPosition(11*42+40+eurocheck, 0*42+120);}
 	else{
 	keyBack->SetPosition(10*42+40+eurocheck, 0*42+120);}//(10*42+40, 0*42+80);
@@ -284,7 +342,7 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
 	keyAlt->SetTrigger(trigA);
 	keyAlt->SetPosition(84+eurocheck, 4*42+120);//(10*42+40, 4*42+120);
 	keyAlt->SetEffectGrow();
-	if (mode == 2){this->Append(keyAlt);}
+	if (mode > 1){this->Append(keyAlt);}
 
 	keyAlt2Img = new GuiImage(keyMedium);
 	keyAlt2OverImg = new GuiImage(keyMediumOver);
@@ -298,7 +356,7 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
 	keyAlt2->SetTrigger(trigA);
 	keyAlt2->SetPosition((8*42+40)+eurocheck, 4*42+120);//(10*42+40, 4*42+120);
 	keyAlt2->SetEffectGrow();
-	if (mode == 2){this->Append(keyAlt2);}
+	if (mode > 1){this->Append(keyAlt2);}
 
 	keyCapsImg = new GuiImage(keyMedium);
 	keyCapsOverImg = new GuiImage(keyMediumOver);
