@@ -3011,7 +3011,7 @@ static int MenuDiscList()
 	countBtn.SetEffectGrow();
 	countBtn.SetAlpha(180);
 
-	
+
 	GuiImage gridBtnImg(&imgarrangeGrid);
 	gridBtnImg.SetWidescreen(CFG.widescreen);
 	GuiImage gridBtnImg_g(&imgarrangeGrid_gray);
@@ -3088,7 +3088,7 @@ static int MenuDiscList()
 	gameBrowser.SetPosition(THEME.selection_x, THEME.selection_y);
 	gameBrowser.SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
 
-    GuiGameGrid gameGrid(640,400, gameList, gameCnt, CFG.theme_path, bg_options_png, startat, offset);
+    GuiGameGrid gameGrid(640,400, gameList, gameCnt, CFG.theme_path, bg_options_png, 0, 0);
 	gameGrid.SetPosition(0,20);
 	gameGrid.SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
 
@@ -3362,7 +3362,7 @@ static int MenuDiscList()
 			if (Settings.gameDisplay==list){
 				gameBrowser.Reload(gameList, gameCnt);}
 			else if (Settings.gameDisplay==grid){
-				gameGrid.Reload(gameList, gameCnt);}
+            gameGrid.Reload(gameList, gameCnt);}
 			gameBrowser.Reload(gameList, gameCnt);
 			sprintf(GamesCnt,"%s: %i",LANGUAGE.Games, gameCnt);
 			gamecntTxt.SetText(GamesCnt);
@@ -3412,12 +3412,12 @@ static int MenuDiscList()
 			}
 			countBtn.ResetState();
 		}
-		
+
 		else if(gridBtn.GetState() == STATE_CLICKED)
 		{
 			if (Settings.gameDisplay==list){
 			Settings.gameDisplay=grid;
-			
+
 			mainWindow->Remove(&gameBrowser);
 			mainWindow->Append(&gameGrid);
 			if (GameIDTxt)w.Remove(GameIDTxt);
@@ -3429,19 +3429,23 @@ static int MenuDiscList()
 			countBtn.SetPosition(-16,13);
 			gridBtn.SetPosition(16,13);
 			carosselleBtn.SetPosition(48,13);
+
+            if((Settings.hddinfo == hr12)||(Settings.hddinfo == hr24)) {
 			clockTime.SetPosition(THEME.clock_x, THEME.clock_y+3);
 			clockTimeBack.SetPosition(THEME.clock_x, THEME.clock_y+3);
 			w.Append(&clockTime);
 			w.Append(&clockTimeBack);
+			}
+
 			w.Append(&favoriteBtn);
 			w.Append(&abcBtn);
 			w.Append(&countBtn);
 			w.Append(&gridBtn);
 			w.Append(&carosselleBtn);}
-			
+
 			else if (Settings.gameDisplay==grid){
 			Settings.gameDisplay=list;
-			
+
 			mainWindow->Remove(&gameGrid);
 			mainWindow->Append(&gameBrowser);
 			gridBtn.SetImage(&gridBtnImg_g);
@@ -3450,29 +3454,32 @@ static int MenuDiscList()
 			countBtn.SetPosition(84,15);
 			gridBtn.SetPosition(116,15);
 			carosselleBtn.SetPosition(148,15);
+
+			if((Settings.hddinfo == hr12)||(Settings.hddinfo == hr24)) {
 			clockTime.SetPosition(THEME.clock_x, THEME.clock_y);
 			clockTimeBack.SetPosition(THEME.clock_x, THEME.clock_y);
 			w.Append(&clockTime);
 			w.Append(&clockTimeBack);
+			}
 			w.Append(&favoriteBtn);
 			w.Append(&abcBtn);
 			w.Append(&countBtn);
 			w.Append(&gridBtn);
 			w.Append(&carosselleBtn);}
-			
+
 			if(isSdInserted()) {
 				cfg_save_global();
-			}			
-			
+			}
+
 			//menu = MENU_DISCLIST;
 			gridBtn.ResetState();
 		}
-		
+
 		if (Settings.gameDisplay==grid){
 		int selectimg;
 		selectimg = gameGrid.GetSelectedOption();
 	    gameSelected = gameGrid.GetClickedOption();}
-		
+
 		if (Settings.gameDisplay==list) {
 		//Get selected game under cursor
 		int selectimg;//, promptnumber;
@@ -3480,8 +3487,8 @@ static int MenuDiscList()
 		char IDfull[7];
 		selectimg = gameBrowser.GetSelectedOption();
 	    gameSelected = gameBrowser.GetClickedOption();
-		
-		
+
+
 		if (gameSelected > 0) //if click occured
 			selectimg = gameSelected;
 
