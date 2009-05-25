@@ -18,9 +18,7 @@
 
 #define GAMESELECTSIZE      30
 extern const int vol;
-//int txtscroll = 0;
-int changed = 0;
-int tooMuch;
+
 /**
  * Constructor for the GuiGameGrid class.
  */
@@ -51,7 +49,8 @@ GuiGameGrid::GuiGameGrid(int w, int h, struct discHdr * l, int gameCnt, const ch
 	trigMinus = new GuiTrigger;
 	trigMinus->SetButtonOnlyTrigger(-1, WPAD_BUTTON_MINUS | WPAD_CLASSIC_BUTTON_MINUS, 0);
 
-	btnSoundClick = new GuiSound(button_click_pcm, button_click_pcm_size, SOUND_PCM, vol);
+	btnSoundClick = new GuiSound(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, vol);
+	btnSoundOver = new GuiSound(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
 
 	snprintf(imgPath, sizeof(imgPath), "%sstartgame_arrow_left.png", CFG.theme_path);
 	imgLeft = new GuiImageData(imgPath, startgame_arrow_left_png);
@@ -65,6 +64,7 @@ GuiGameGrid::GuiGameGrid(int w, int h, struct discHdr * l, int gameCnt, const ch
 	btnLeft->SetParent(this);
 	btnLeft->SetImage(btnLeftImg);
 	btnLeft->SetSoundOver(btnSoundOver);
+	btnLeft->SetSoundClick(btnSoundClick);
 	btnLeft->SetTrigger(trigA);
 	btnLeft->SetTrigger(trigL);
 	btnLeft->SetTrigger(trigMinus);
@@ -77,6 +77,7 @@ GuiGameGrid::GuiGameGrid(int w, int h, struct discHdr * l, int gameCnt, const ch
 	btnRight->SetPosition(-20, -30);
 	btnRight->SetImage(btnRightImg);
 	btnRight->SetSoundOver(btnSoundOver);
+	btnRight->SetSoundClick(btnSoundClick);
 	btnRight->SetTrigger(trigA);
 	btnRight->SetTrigger(trigR);
 	btnRight->SetTrigger(trigPlus);
@@ -128,12 +129,16 @@ GuiGameGrid::GuiGameGrid(int w, int h, struct discHdr * l, int gameCnt, const ch
 		if (i>3)game[i]->SetPosition(117+(i-4)*110,185);
 		game[i]->SetRumble(false);
 		game[i]->SetTrigger(trigA);
+		game[i]->SetSoundOver(btnSoundOver);
 		game[i]->SetSoundClick(btnSoundClick);
 		game[i]->SetEffectGrow();
 		game[i]->SetVisible(true);
-		if (((changed+pagesize)>gameCnt)&&(i>((gameCnt-changed)-1)))
-        game[i]->SetVisible(false);
-		coverImg[i]->SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
+		game[i]->SetClickable(true);
+        coverImg[i]->SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
+        if (((changed+pagesize)>gameCnt)&&(i>((gameCnt-changed)-1))) {
+            game[i]->SetVisible(false);
+            game[i]->SetClickable(false);
+        }
 	}
 }
 
@@ -297,7 +302,6 @@ void GuiGameGrid::Update(GuiTrigger * t)
 				game[i]->SetVisible(true);
 				game[i]->SetState(STATE_DEFAULT);
 			}
-
 			gameIndex[i] = next;
 			next = this->FindMenuItem(next, 1);
 		}
@@ -312,9 +316,8 @@ void GuiGameGrid::Update(GuiTrigger * t)
 			if(i != selectedItem && game[i]->GetState() == STATE_SELECTED)
 				game[i]->ResetState();
 			else if(i == selectedItem && game[i]->GetState() == STATE_DEFAULT)
-				game[selectedItem]->SetState(STATE_SELECTED);
+				game[selectedItem]->SetState(STATE_SELECTED, t->chan);
 		}
-
 		game[i]->Update(t);
 
 		if(game[i]->GetState() == STATE_SELECTED)
@@ -327,7 +330,7 @@ void GuiGameGrid::Update(GuiTrigger * t)
 	if(!focus)
 		return; // skip navigation
 
-	if ((t->Right()  || btnRight->GetState() == STATE_CLICKED) ) {
+	if ((t->Right()  || btnRight->GetState() == STATE_CLICKED)) {
 
 		changed += pagesize;
 		if (changed>gameCnt-1)
@@ -371,9 +374,12 @@ void GuiGameGrid::Update(GuiTrigger * t)
                 coverImg[i]->SetPosition(-10,-35);
 				game[i]->SetImage(coverImg[i]);
 				game[i]->SetVisible(true);
-				coverImg[i]->SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_IN, 65);
-				if (((changed+pagesize)>gameCnt)&&(i>((gameCnt-changed)-1)))
-					game[i]->SetVisible(false);//}
+				game[i]->SetClickable(true);
+				coverImg[i]->SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_IN, 65);
+				if (((changed+pagesize)>gameCnt)&&(i>((gameCnt-changed)-1))) {
+					game[i]->SetVisible(false);
+					game[i]->SetClickable(false);
+				}
         }
     btnRight->ResetState();
 
@@ -424,13 +430,15 @@ void GuiGameGrid::Update(GuiTrigger * t)
                 game[i]->ResetState();
                 game[i]->SetVisible(true);
 				game[i]->SetImage(coverImg[i]);
-				coverImg[i]->SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_IN, 65);//}
-				if (((changed+pagesize)>gameCnt)&&(i>((gameCnt-changed)-1)))
+				game[i]->SetClickable(true);
+				coverImg[i]->SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_IN, 65);
+				if (((changed+pagesize)>gameCnt)&&(i>((gameCnt-changed)-1))) {
 					game[i]->SetVisible(false);
+					game[i]->SetClickable(false);
 				}
+		}
             btnLeft->ResetState();
 	}
-
 
 	if(updateCB)
 		updateCB(this);
@@ -442,7 +450,6 @@ void GuiGameGrid::Reload(struct discHdr * l, int count)
 	gameList = l;
 	gameCnt = count;
 	changed=0;
-	tooMuch=(gameCnt-(gameCnt%12));
 	scrollbaron = (gameCnt > pagesize) ? 1 : 0;
 	selectedItem = 0;
 	listOffset = 0;
@@ -450,9 +457,7 @@ void GuiGameGrid::Reload(struct discHdr * l, int count)
 	char IDfull[7];
 	char imgPath[100];
 
-	for(int i=0; i<pagesize; i++)
-		{
-		coverImg[i]->SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 50);
+	for(int i=0; i<pagesize; i++) {
 
 		if(coverImg[i]) {
         delete coverImg[i];
@@ -492,9 +497,11 @@ void GuiGameGrid::Reload(struct discHdr * l, int count)
                 game[i]->ResetState();
                 game[i]->SetVisible(true);
 				game[i]->SetImage(coverImg[i]);
-				coverImg[i]->SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);//}
-				if (((changed+pagesize)>gameCnt)&&(i>((gameCnt-changed)-1)))
-                game[i]->SetVisible(false);
-
-				game[i]->ResetState();}
+				game[i]->SetClickable(true);
+				coverImg[i]->SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
+				if (((changed+pagesize)>gameCnt)&&(i>((gameCnt-changed)-1))) {
+					game[i]->SetVisible(false);
+					game[i]->SetClickable(false);
+				}
+    }
 }

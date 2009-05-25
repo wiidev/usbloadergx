@@ -3124,7 +3124,9 @@ static int MenuDiscList()
 		w.Append(&installBtn);
 	w.Append(&homeBtn);
     w.Append(&settingsBtn);
+    if (Settings.gameDisplay==list){
 	w.Append(&DownloadBtn);
+    }
 	w.Append(&favoriteBtn);
 	w.Append(&abcBtn);
 	w.Append(&countBtn);
@@ -3411,39 +3413,36 @@ static int MenuDiscList()
 				countBtn.SetAlpha(255);
 			}
 			countBtn.ResetState();
-		}
 
-		else if(gridBtn.GetState() == STATE_CLICKED)
-		{
+		} else if(gridBtn.GetState() == STATE_CLICKED) {
 			if (Settings.gameDisplay==list){
 			Settings.gameDisplay=grid;
-
 			mainWindow->Remove(&gameBrowser);
 			mainWindow->Append(&gameGrid);
+
 			if (GameIDTxt)w.Remove(GameIDTxt);
 			if (GameRegionTxt)w.Remove(GameRegionTxt);
-			if (coverImg)w.Remove(&DownloadBtn);
+            w.Remove(&DownloadBtn);
+
 			gridBtn.SetImage(&listBtnImg_g);
 			favoriteBtn.SetPosition(-80,13);
 			abcBtn.SetPosition(-48,13);
 			countBtn.SetPosition(-16,13);
 			gridBtn.SetPosition(16,13);
 			carosselleBtn.SetPosition(48,13);
-
             if((Settings.hddinfo == hr12)||(Settings.hddinfo == hr24)) {
-			clockTime.SetPosition(THEME.clock_x, THEME.clock_y+3);
-			clockTimeBack.SetPosition(THEME.clock_x, THEME.clock_y+3);
-			w.Append(&clockTime);
-			w.Append(&clockTimeBack);
+                clockTime.SetPosition(THEME.clock_x, THEME.clock_y+3);
+                clockTimeBack.SetPosition(THEME.clock_x, THEME.clock_y+3);
+                w.Append(&clockTime);
+                w.Append(&clockTimeBack);
 			}
-
 			w.Append(&favoriteBtn);
 			w.Append(&abcBtn);
 			w.Append(&countBtn);
 			w.Append(&gridBtn);
-			w.Append(&carosselleBtn);}
+			w.Append(&carosselleBtn);
 
-			else if (Settings.gameDisplay==grid){
+			} else if (Settings.gameDisplay==grid){
 			Settings.gameDisplay=list;
 
 			mainWindow->Remove(&gameGrid);
@@ -3465,12 +3464,12 @@ static int MenuDiscList()
 			w.Append(&abcBtn);
 			w.Append(&countBtn);
 			w.Append(&gridBtn);
-			w.Append(&carosselleBtn);}
-
+			w.Append(&carosselleBtn);
+			w.Append(&DownloadBtn);
+			}
 			if(isSdInserted()) {
 				cfg_save_global();
 			}
-
 			//menu = MENU_DISCLIST;
 			gridBtn.ResetState();
 		}
@@ -3478,7 +3477,8 @@ static int MenuDiscList()
 		if (Settings.gameDisplay==grid){
 		int selectimg;
 		selectimg = gameGrid.GetSelectedOption();
-	    gameSelected = gameGrid.GetClickedOption();}
+	    gameSelected = gameGrid.GetClickedOption();
+	    }
 
 		if (Settings.gameDisplay==list) {
 		//Get selected game under cursor
