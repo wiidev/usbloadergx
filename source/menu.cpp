@@ -212,7 +212,8 @@ static void WindowCredits(void * ptr)
 	txt[i] = new GuiText(LANGUAGE.Credits, 26, (GXColor){255, 255, 255, 255});
 	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(0,12); i++;
 
-	char SvnRev[10];	snprintf(SvnRev, 7, "Rev%s", SVN_REV);
+	char SvnRev[10];
+	snprintf(SvnRev, 10, "Rev%s", SVN_REV);
 
 	txt[i] = new GuiText(SvnRev, 18, (GXColor){255, 255, 255, 255});
 	txt[i]->SetAlignment(ALIGN_RIGHT, ALIGN_TOP); txt[i]->SetPosition(0,y); i++; y+=34;
@@ -1067,7 +1068,7 @@ int GameWindowPrompt()
 	diskImg2.SetAngle(angle);
 	diskImg2.SetBeta(180);
 
-	char PlayCnt[25] = "";
+	char PlayCnt[25];
 	GuiText playcntTxt(PlayCnt, 18, (GXColor){THEME.info_r, THEME.info_g, THEME.info_b, 255});
 	playcntTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	playcntTxt.SetPosition(-115,45);
@@ -2446,23 +2447,22 @@ s32 __Menu_GetEntries(void)
 		cnt = cnt2;
 	}
 
-	if (CFG.parentalcontrol && !CFG.godmode)
-	{
-	u32 cnt3 = 0;
+	if (CFG.parentalcontrol && !CFG.godmode) {
+		u32 cnt2 = 0;
 
 		for (u32 i = 0; i < cnt; i++)
 		{
-		if (get_block(header) < CFG.parentalcontrol)
-			{
-				buffer2 = (discHdr *) realloc(buffer2, (cnt3+1) * sizeof(struct discHdr));
+			header = &buffer[i];
+			if (get_block(header) < CFG.parentalcontrol) {
+				buffer2 = (discHdr *) realloc(buffer2, (cnt2+1) * sizeof(struct discHdr));
 				if (!buffer2)
 				{
 					free(buffer);
 					return -1;
 				}
 
-				memcpy((buffer2 + cnt3), (buffer + i), sizeof(struct discHdr));
-				cnt3++;
+				memcpy((buffer2 + cnt2), (buffer + i), sizeof(struct discHdr));
+				cnt2++;
 			}
 		}
 		if (buffer2) {
@@ -2472,7 +2472,7 @@ s32 __Menu_GetEntries(void)
 		} else {
 			memset(buffer, 0, len);
 		}
-		cnt = cnt3;
+		cnt = cnt2;
 	}
 
 	if (Settings.sort==pcount) {
