@@ -64,7 +64,7 @@ enum
 	ALIGN_BOTTOM,
 	ALIGN_MIDDLE
 };
-
+#define ALIGN_CENTER ALIGN_CENTRE
 enum
 {
 	STATE_DEFAULT,
@@ -631,23 +631,32 @@ class GuiText : public GuiElement
 		//!\param sz Font size
 		//!\param c Font color
 		//!\param w Maximum width of texture image (for text wrapping)
-		//!\param s Font size
+		//!\param wrap Wrapmode when w>0
+		//!\param s Font style
 		//!\param h Text alignment (horizontal)
 		//!\param v Text alignment (vertical)
-		void SetPresets(int sz, GXColor c, int w, u16 s, int h, int v);
+		static void SetPresets(int sz, GXColor c, int w, int wrap, u16 s, int h, int v);
 		//!Sets the font size
 		//!\param s Font size
 		void SetFontSize(int s);
 		//!Sets the maximum width of the drawn texture image
 		//!If the text exceeds this, it is wrapped to the next line
 		//!\param w Maximum width
+		//!\param m WrapMode
+		enum {
+			WRAP,
+			DOTTED,
+			SCROLL,
+			MARQUEE
+		};
 		void SetMaxWidth(int w, short m=GuiText::WRAP);
 		//!Sets the font color
 		//!\param c Font color
 		void SetColor(GXColor c);
 		//!Sets the FreeTypeGX style attributes
 		//!\param s Style attributes
-		void SetStyle(u16 s);
+		//!\param m Style-Mask attributes
+		void SetStyle(u16 s, u16 m=0xffff);
 		//!Sets the text alignment
 		//!\param hor Horizontal alignment (ALIGN_LEFT, ALIGN_RIGHT, ALIGN_CENTRE)
 		//!\param vert Vertical alignment (ALIGN_TOP, ALIGN_BOTTOM, ALIGN_MIDDLE)
@@ -661,11 +670,6 @@ class GuiText : public GuiElement
 		void SetWidescreen(bool w);
 		//!Constantly called to draw the text
 		void Draw();
-		enum {
-			WRAP,
-			DOTTED,
-			SCROLL
-		};
 	protected:
 		wchar_t* text; //!< Unicode text value
 		int size; //!< Font size
@@ -673,6 +677,7 @@ class GuiText : public GuiElement
 		short wrapMode;
 		short scrollPos1;
 		short scrollPos2;
+		short scrollOffset;
 		u32 scrollDelay;
 		u16 style; //!< FreeTypeGX style attributes
 		GXColor color; //!< Font color

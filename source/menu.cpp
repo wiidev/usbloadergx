@@ -43,7 +43,6 @@
 #include "fatmounter.h"
 
 #define MAX_CHARACTERS		38
-
 extern FreeTypeGX *fontClock; //CLOCK
 
 static GuiImage * coverImg = NULL;
@@ -227,7 +226,7 @@ static void WindowCredits(void * ptr)
 	txt[i] = new GuiText(LANGUAGE.OfficialSite, 20, (GXColor){255, 255, 255, 255});
 	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(-180,y); i++; y+=28;
 
-	txt[i]->SetPresets(22, (GXColor){255, 255, 255,  255}, 0,
+	GuiText::SetPresets(22, (GXColor){255, 255, 255,  255}, 0, GuiText::WRAP, 
 			FTGX_JUSTIFY_LEFT | FTGX_ALIGN_TOP, ALIGN_LEFT, ALIGN_TOP);
 
 	txt[i] = new GuiText("Coding:");
@@ -3365,7 +3364,7 @@ static int MenuDiscList()
 				gameBrowser.Reload(gameList, gameCnt);}
 			else if (Settings.gameDisplay==grid){
             gameGrid.Reload(gameList, gameCnt);}
-			gameBrowser.Reload(gameList, gameCnt);
+//			gameBrowser.Reload(gameList, gameCnt);
 			sprintf(GamesCnt,"%s: %i",LANGUAGE.Games, gameCnt);
 			gamecntTxt.SetText(GamesCnt);
 			selectedold = 1;

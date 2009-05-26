@@ -300,10 +300,10 @@ void GuiGameBrowser::Draw()
 	}
 
     if(scrollbaron == 1) {
-	scrollbarImg->Draw();
-	arrowUpBtn->Draw();
-	arrowDownBtn->Draw();
-	scrollbarBoxBtn->Draw();
+		scrollbarImg->Draw();
+		arrowUpBtn->Draw();
+		arrowDownBtn->Draw();
+		scrollbarBoxBtn->Draw();
     }
 	this->UpdateEffects();
 }
