@@ -116,6 +116,9 @@ typedef struct _paddata {
 #define EFFECT_FADE					64
 #define EFFECT_SCALE				128
 #define EFFECT_COLOR_TRANSITION		256
+#define EFFECT_PULSE                512
+#define EFFECT_ROCK_VERTICLE        1024
+#define EFFECT_GOROUND              2048
 
 //!Sound conversion and playback. A wrapper for other sound libraries - ASND, libmad, ltremor, etc
 class GuiSound
@@ -337,6 +340,8 @@ class GuiElement
 		void SetEffectOnOver(int e, int a, int t=0);
 		//!Shortcut to SetEffectOnOver(EFFECT_SCALE, 4, 110)
 		void SetEffectGrow();
+		//!Stops the current element effect
+		void StopEffect();
 		//!Gets the current element effects
 		//!\return element effects
 		int GetEffect();
@@ -403,6 +408,9 @@ class GuiElement
 		int xmax; //!< Element's max X offset allowed
 		int xoffsetDyn; //!< Element X offset, dynamic (added to xoffset value for animation effects)
 		int yoffsetDyn; //!< Element Y offset, dynamic (added to yoffset value for animation effects)
+		f32 degree;     //!< Degree for flying stuff
+		f32 yoffsetDynFloat; //!< Integer sucks float is need by some parts
+		int changervar; //!< Changervariable for some stuff
 		int alpha; //!< Element alpha value (0-255)
 		f32 scale; //!< Element scale (1 = 100%)
 		int alphaDyn; //!< Element alpha, dynamic (multiplied by alpha value for blending/fading effects)

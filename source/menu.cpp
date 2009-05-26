@@ -1612,6 +1612,8 @@ DiscWait(const char *title, const char *msg, const char *btn1Label, const char *
 	mainWindow->ChangeFocus(&promptWindow);
 	ResumeGui();
 
+    SDCard_deInit();
+
 	if(IsDeviceWait) {
         while(i >= 0)
         {
@@ -1625,7 +1627,7 @@ DiscWait(const char *title, const char *msg, const char *btn1Label, const char *
             }
             sleep(1);
             ret = WBFS_Init(WBFS_DEVICE_USB);
-            if(ret>=0)
+			if(ret>=0)
             break;
 
             i--;
@@ -5405,18 +5407,16 @@ static int MenuCheck()
         ret2 = WBFS_Init(WBFS_DEVICE_USB);
         if (ret2 < 0)
         {
-            //shutdown SD
-			SDCard_deInit();
 			//initialize WiiMote for Prompt
             Wpad_Init();
             WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
             WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
-
             ret2 = WindowPrompt(LANGUAGE.NoUSBDevicefound,
                     LANGUAGE.Doyouwanttoretryfor30secs,
                     "cIOS249", "cIOS222",
                     LANGUAGE.BacktoWiiMenu, 0);
-
+            //shutdown SD
+			SDCard_deInit();
             if(ret2 == 1) {
             Settings.cios = ios249;
             } else if(ret2 == 2) {
@@ -5429,7 +5429,8 @@ static int MenuCheck()
             WPAD_Disconnect(0);
             WPAD_Shutdown();
 
-            ret2 = DiscWait(LANGUAGE.NoUSBDevice, LANGUAGE.WaitingforUSBDevice, 0, 0, 1);
+            SDCard_Init();
+			ret2 = DiscWait(LANGUAGE.NoUSBDevice, LANGUAGE.WaitingforUSBDevice, 0, 0, 1);
 			PAD_Init();
             Wpad_Init();
             WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
@@ -5437,7 +5438,9 @@ static int MenuCheck()
             SDCard_Init();
         }
         if (ret2 < 0) {
-            WindowPrompt (LANGUAGE.Error,LANGUAGE.USBDevicenotfound, LANGUAGE.ok, 0,0,0);
+            SDCard_Init();
+			WindowPrompt (LANGUAGE.Error,LANGUAGE.USBDevicenotfound, LANGUAGE.ok, 0,0,0);
+			SDCard_deInit();
             SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
         } else {
             PAD_Init();
@@ -5449,17 +5452,20 @@ static int MenuCheck()
 
         ret2 = Disc_Init();
         if (ret2 < 0) {
+			SDCard_Init();
             WindowPrompt (LANGUAGE.Error,LANGUAGE.CouldnotinitializeDIPmodule,LANGUAGE.ok, 0,0,0);
+			SDCard_deInit();
             SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
         }
 
         ret2 = WBFS_Open();
         if (ret2 < 0) {
-
+			SDCard_Init();
             choice = WindowPrompt(LANGUAGE.NoWBFSpartitionfound,
                                     LANGUAGE.Youneedtoformatapartition,
                                     LANGUAGE.Format,
                                     LANGUAGE.Return,0,0);
+			SDCard_deInit();
                 if(choice == 0)
                 {
                     SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
@@ -5469,8 +5475,9 @@ static int MenuCheck()
 					u32 sector_size;
                     ret2 = Partition_GetEntries(partitions, &sector_size);
                     if (ret2 < 0) {
-
+							SDCard_Init();
                             WindowPrompt (LANGUAGE.Nopartitionsfound,0, LANGUAGE.Restart, 0,0,0);
+							SDCard_deInit();
                             SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
 
                     }

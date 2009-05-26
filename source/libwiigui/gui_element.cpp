@@ -44,6 +44,7 @@ GuiElement::GuiElement()
 	updateCB = NULL;
 	yoffsetDyn = 0;
 	xoffsetDyn = 0;
+	yoffsetDynFloat = 0;
 	alphaDyn = -1;
 	scaleDyn = 1;
 	effects = 0;
@@ -52,6 +53,8 @@ GuiElement::GuiElement()
 	effectsOver = 0;
 	effectAmountOver = 0;
 	effectTargetOver = 0;
+	degree = 0;
+	changervar = 0;
 
 	// default alignment - align to top left
 	alignmentVert = ALIGN_TOP;
@@ -89,7 +92,7 @@ int GuiElement::GetLeft()
 		pLeft = parentElement->GetLeft();
 	}
 
-	if(effects & (EFFECT_SLIDE_IN | EFFECT_SLIDE_OUT))
+	if(effects & (EFFECT_SLIDE_IN | EFFECT_SLIDE_OUT | EFFECT_GOROUND | EFFECT_ROCK_VERTICLE))
 		pLeft += xoffsetDyn;
 
 	switch(alignmentHor)
@@ -124,7 +127,7 @@ int GuiElement::GetTop()
 		pTop = parentElement->GetTop();
 	}
 
-	if(effects & (EFFECT_SLIDE_IN | EFFECT_SLIDE_OUT))
+	if(effects & (EFFECT_SLIDE_IN | EFFECT_SLIDE_OUT | EFFECT_GOROUND | EFFECT_ROCK_VERTICLE))
 		pTop += yoffsetDyn;
 
 	switch(alignmentVert)
@@ -424,6 +427,7 @@ void GuiElement::SetEffect(int eff, int amount, int target)
 		else if(eff & EFFECT_SLIDE_RIGHT)
 			xoffsetDyn = screenwidth;
 	}
+
 	if(eff & EFFECT_FADE && amount > 0)
 	{
 		alphaDyn = 0;
@@ -431,6 +435,14 @@ void GuiElement::SetEffect(int eff, int amount, int target)
 	else if(eff & EFFECT_FADE && amount < 0)
 	{
 		alphaDyn = alpha;
+
+	} else if(eff & EFFECT_GOROUND) {
+        xoffsetDyn = 0;
+        yoffsetDyn = -200;
+	} else if(eff & EFFECT_ROCK_VERTICLE) {
+	    changervar = 0;
+        yoffsetDyn = 0;
+        yoffsetDynFloat = 0.0;
 	}
 
 	effects |= eff;
@@ -451,10 +463,26 @@ void GuiElement::SetEffectGrow()
 	SetEffectOnOver(EFFECT_SCALE, 4, 110);
 }
 
+void GuiElement::StopEffect()
+{
+    xoffsetDyn = 0;
+	yoffsetDyn = 0;
+	effects = 0;
+	effectsOver = 0;
+	effectAmount = 0;
+	effectAmountOver = 0;
+	effectTarget = 0;
+	effectTargetOver = 0;
+	scaleDyn = 1;
+	degree = 0;
+	changervar = 0;
+}
+
 void GuiElement::UpdateEffects()
 {
 	LOCK(this);
-	if(effects & (EFFECT_SLIDE_IN | EFFECT_SLIDE_OUT))
+
+	if(effects & (EFFECT_SLIDE_IN | EFFECT_SLIDE_OUT | EFFECT_GOROUND))
 	{
 		if(effects & EFFECT_SLIDE_IN)
 		{
@@ -531,6 +559,42 @@ void GuiElement::UpdateEffects()
 			}
 		}
 	}
+
+    if(effects & EFFECT_GOROUND) {
+
+        if(degree < 2*PI) { //here we can let it cicle less/more than 2*PI which is 360°
+        int Radius = 200;   //this needs to be moved to a global variable
+        degree += 0.08;     //this defines the flying speed
+
+        xoffsetDyn = (int)(Radius*cos(degree-PI/2)); //here we can make the startdegree different
+        yoffsetDyn = (int)(Radius*sin(degree-PI/2)); //(by changing the radian degree of cos/sin
+
+        } else {
+            xoffsetDyn = 0;
+            yoffsetDyn += 0.08*100;
+            if(yoffsetDyn >= 0) {
+            effects = 0;
+            degree = 0;
+            }
+        }
+    }
+
+    if(effects & EFFECT_ROCK_VERTICLE) {
+        //move up to 10pixel above 0
+        if(changervar == 0 && yoffsetDynFloat < 11.0) {
+            yoffsetDynFloat += (effectAmount*0.01);
+        } else if(yoffsetDynFloat > 10.0) {
+            changervar = 1;
+        }
+        //move down till 10pixel under 0
+        if(changervar == 1 && yoffsetDynFloat > -11.0) {
+            yoffsetDynFloat -= (effectAmount*0.01);
+        } else if(yoffsetDynFloat < -10.0) {
+            changervar = 0;
+        }
+        yoffsetDyn = (int)(yoffsetDynFloat);
+    }
+
 	if(effects & EFFECT_FADE)
 	{
 		alphaDyn += effectAmount;
@@ -546,7 +610,7 @@ void GuiElement::UpdateEffects()
 			effects = 0; // shut off effect
 		}
 	}
-	if(effects & EFFECT_SCALE)
+    if(effects & EFFECT_SCALE)
 	{
 		scaleDyn += effectAmount/100.0;
 
@@ -556,6 +620,21 @@ void GuiElement::UpdateEffects()
 			scaleDyn = effectTarget/100.0;
 			effects = 0; // shut off effect
 		}
+	}
+	if(effects & EFFECT_PULSE)
+	{
+	    int percent = 10; //go down from target by this
+
+	    if((scaleDyn <= (effectTarget*0.01)) && (!changervar)) {
+            scaleDyn += (effectAmount*0.001);
+	    } else if(scaleDyn > (effectTarget*0.01)) {
+            changervar = 1;
+	    }
+	    if((scaleDyn >= ((effectTarget-percent)*0.01)) && (changervar)) {
+            scaleDyn -= (effectAmount*0.001);
+	    } else if(scaleDyn < ((effectTarget-percent)*0.01)) {
+            changervar = 0;
+	    }
 	}
 }
 
