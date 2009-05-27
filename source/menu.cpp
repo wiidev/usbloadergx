@@ -3436,6 +3436,7 @@ static int MenuDiscList()
 			if (Settings.gameDisplay==list){
 			Settings.gameDisplay=grid;
 			mainWindow->Remove(&gameBrowser);
+			gameGrid.Reload(gameList, gameCnt); // initialize before append
 			mainWindow->Append(&gameGrid);
 
 			if (GameIDTxt)w.Remove(GameIDTxt);
@@ -3464,6 +3465,7 @@ static int MenuDiscList()
 			Settings.gameDisplay=list;
 
 			mainWindow->Remove(&gameGrid);
+			gameBrowser.Reload(gameList, gameCnt); // initialize before append
 			mainWindow->Append(&gameBrowser);
 			gridBtn.SetImage(&gridBtnImg_g);
 			favoriteBtn.SetPosition(20,15);
