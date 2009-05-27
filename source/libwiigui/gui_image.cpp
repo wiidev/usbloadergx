@@ -234,6 +234,11 @@ void GuiImage::Draw()
 	float currScale = this->GetScale();
 	int currLeft = this->GetLeft();
 
+    float currAngleDyn = this->GetAngleDyn();
+
+    if(currAngleDyn)
+    imageangle = currAngleDyn;
+
 	if(tile > 0)
 	{
 		for(int i=0; i<tile; i++)

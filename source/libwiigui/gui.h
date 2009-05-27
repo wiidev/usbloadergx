@@ -306,6 +306,9 @@ class GuiElement
 		//!Considers alpha, alphaDyn, and the parent element's GetAlpha() value
 		//!\return alpha
 		int GetAlpha();
+		//!Gets the element's AngleDyn value
+		//!\return alpha
+		float GetAngleDyn();
 		//!Sets the element's scale
 		//!\param s scale (1 is 100%)
 		void SetScale(float s);
@@ -339,7 +342,9 @@ class GuiElement
         //!\param circles Circleamount in degree ike 180 for 1/2 circle or 720 for 2 circles
         //!\param r Circle Radius in pixel
         //!\param startdegree Degree where to start circling
-		void SetEffect(int e, int speed, int circles, int r, int startdegree);
+        //!\param anglespeedset Set the speed of Angle rotating make 1 for same speed as Circlespeed
+        //!       or 0.5 for half the speed of the circlingspeed. Turn Anglecircling off by 0 to this param.
+		void SetEffect(int e, int speed, int circles, int r, int startdegree, f32 anglespeedset);
 		//!Sets an effect to be enabled on wiimote cursor over
 		//!\param e Effect to enable
 		//!\param a Amount of the effect (usage varies on effect)
@@ -423,6 +428,8 @@ class GuiElement
 		int changervar; //!< Changervariable for some stuff
 		int alpha; //!< Element alpha value (0-255)
 		f32 scale; //!< Element scale (1 = 100%)
+		f32 angleDyn; //!< AngleDyn for EFFECT_GOROUND
+		f32 anglespeed; //!<Anglespeedvariable for EFFECT_GOROUND
 		int alphaDyn; //!< Element alpha, dynamic (multiplied by alpha value for blending/fading effects)
 		f32 scaleDyn; //!< Element scale, dynamic (multiplied by alpha value for blending/fading effects)
 		bool rumble; //!< Wiimote rumble (on/off) - set to on when this element requests a rumble event

@@ -53,11 +53,13 @@ GuiElement::GuiElement()
 	effectsOver = 0;
 	effectAmountOver = 0;
 	effectTargetOver = 0;
-	frequency = 0;
+	frequency = 0.0;
 	changervar = 0;
     degree = -90*PI/180;
     circleamount = 360;
     Radius = 150;
+    angleDyn = 0.0;
+    anglespeed = 0.0;
 
 	// default alignment - align to top left
 	alignmentVert = ALIGN_TOP;
@@ -132,6 +134,7 @@ int GuiElement::GetTop()
 
 	if(effects & (EFFECT_SLIDE_IN | EFFECT_SLIDE_OUT | EFFECT_GOROUND | EFFECT_ROCK_VERTICLE))
 		pTop += yoffsetDyn;
+
 
 	switch(alignmentVert)
 	{
@@ -267,6 +270,19 @@ int GuiElement::GetAlpha()
 		a *= parentElement->GetAlpha()/255.0;
 
 	return a;
+}
+
+float GuiElement::GetAngleDyn()
+{
+    float a = 0.0;
+
+    if(angleDyn)
+    a = angleDyn;
+
+    if(parentElement && !angleDyn)
+    a = parentElement->GetAngleDyn();
+
+    return a;
 }
 
 void GuiElement::SetScale(float s)
@@ -415,7 +431,7 @@ int GuiElement::GetEffect()
 	return effects;
 }
 
-void GuiElement::SetEffect(int eff, int speed, int circles, int r, int startdegree) {
+void GuiElement::SetEffect(int eff, int speed, int circles, int r, int startdegree, f32 anglespeedset) {
 
     if(eff & EFFECT_GOROUND) {
         xoffsetDyn = 0;             //!position of circle in x
@@ -423,6 +439,8 @@ void GuiElement::SetEffect(int eff, int speed, int circles, int r, int startdegr
         Radius = r;                 //!Radius of the circle
         degree = startdegree*PI/180;//!for example -90 (°) to start at top of circle
         circleamount = circles;     //!circleamoutn in degrees for example 360 for 1 circle
+        angleDyn = 0.0;             //!this is used by the code to calc the angle
+        anglespeed = anglespeedset; //!This is anglespeed depending on circle speed 1 is same speed and 0.5 half speed
     }
     effects |= eff;
     effectAmount = speed;           //!Circlespeed
@@ -489,6 +507,8 @@ void GuiElement::StopEffect()
 	scaleDyn = 1;
 	frequency = 0;
 	changervar = 0;
+	angleDyn = 0;
+	anglespeed = 0.0;
 }
 
 void GuiElement::UpdateEffects()
@@ -578,24 +598,31 @@ void GuiElement::UpdateEffects()
         //!< check out gui.h for info
         if(abs(frequency) < PI*circleamount/180) {
 
+        angleDyn = (frequency+degree) * 180/PI * anglespeed;
         frequency += effectAmount*0.001;
+
         xoffsetDyn = (int)(Radius*cos(frequency+degree));
         yoffsetDyn = (int)(Radius*sin(frequency+degree));
 
         } else {
-            //fly back to the middle
-            if(xoffsetDyn < 0)
-            xoffsetDyn += frequency*100;
-            else xoffsetDyn = 0;
-            if(xoffsetDyn > 0)
-            xoffsetDyn -= frequency*100;
+
+            //Angle go back to start value (has to be 0.0001 when near 0 but not 0 so that the if state goes through)
+            //value 0.0001 isnt noticeable that's why i chose it.
+            angleDyn = degree* 180/PI * anglespeed +0.0001;
+            //Reset Angle to 0
+            //angleDyn = 0.0001;
+
+            //fly back to the middle tolerance to 0 is +- 10pixel
+            if(xoffsetDyn < -10)
+            xoffsetDyn += abs(effectAmount)*0.1;
+            else if(xoffsetDyn > 10)
+            xoffsetDyn -= abs(effectAmount)*0.1;
             else xoffsetDyn = 0;
 
-            if(yoffsetDyn < 0)
-            yoffsetDyn += frequency*100;
-            else yoffsetDyn = 0;
-            if(yoffsetDyn > 0)
-            yoffsetDyn -= frequency*100;
+            if(yoffsetDyn < -10)
+            yoffsetDyn += abs(effectAmount)*0.1;
+            else if(yoffsetDyn > 10)
+            yoffsetDyn -= abs(effectAmount)*0.1;
             else yoffsetDyn = 0;
 
             if(xoffsetDyn == 0 && yoffsetDyn == 0) {
