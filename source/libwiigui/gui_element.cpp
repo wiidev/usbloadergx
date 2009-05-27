@@ -53,8 +53,11 @@ GuiElement::GuiElement()
 	effectsOver = 0;
 	effectAmountOver = 0;
 	effectTargetOver = 0;
-	degree = 0;
+	frequency = 0;
 	changervar = 0;
+    degree = -90*PI/180;
+    circleamount = 360;
+    Radius = 150;
 
 	// default alignment - align to top left
 	alignmentVert = ALIGN_TOP;
@@ -412,6 +415,19 @@ int GuiElement::GetEffect()
 	return effects;
 }
 
+void GuiElement::SetEffect(int eff, int speed, int circles, int r, int startdegree) {
+
+    if(eff & EFFECT_GOROUND) {
+        xoffsetDyn = 0;             //!position of circle in x
+        yoffsetDyn = 0;             //!position of circle in y
+        Radius = r;                 //!Radius of the circle
+        degree = startdegree*PI/180;//!for example -90 (°) to start at top of circle
+        circleamount = circles;     //!circleamoutn in degrees for example 360 for 1 circle
+    }
+    effects |= eff;
+    effectAmount = speed;           //!Circlespeed
+}
+
 void GuiElement::SetEffect(int eff, int amount, int target)
 {
 	LOCK(this);
@@ -436,9 +452,6 @@ void GuiElement::SetEffect(int eff, int amount, int target)
 	{
 		alphaDyn = alpha;
 
-	} else if(eff & EFFECT_GOROUND) {
-        xoffsetDyn = 0;
-        yoffsetDyn = -200;
 	} else if(eff & EFFECT_ROCK_VERTICLE) {
 	    changervar = 0;
         yoffsetDyn = 0;
@@ -474,7 +487,7 @@ void GuiElement::StopEffect()
 	effectTarget = 0;
 	effectTargetOver = 0;
 	scaleDyn = 1;
-	degree = 0;
+	frequency = 0;
 	changervar = 0;
 }
 
@@ -562,19 +575,33 @@ void GuiElement::UpdateEffects()
 
     if(effects & EFFECT_GOROUND) {
 
-        if(degree < 2*PI) { //here we can let it cicle less/more than 2*PI which is 360°
-        int Radius = 200;   //this needs to be moved to a global variable
-        degree += 0.08;     //this defines the flying speed
+        //!< check out gui.h for info
+        if(abs(frequency) < PI*circleamount/180) {
 
-        xoffsetDyn = (int)(Radius*cos(degree-PI/2)); //here we can make the startdegree different
-        yoffsetDyn = (int)(Radius*sin(degree-PI/2)); //(by changing the radian degree of cos/sin
+        frequency += effectAmount*0.001;
+        xoffsetDyn = (int)(Radius*cos(frequency+degree));
+        yoffsetDyn = (int)(Radius*sin(frequency+degree));
 
         } else {
-            xoffsetDyn = 0;
-            yoffsetDyn += 0.08*100;
-            if(yoffsetDyn >= 0) {
-            effects = 0;
-            degree = 0;
+            //fly back to the middle
+            if(xoffsetDyn < 0)
+            xoffsetDyn += frequency*100;
+            else xoffsetDyn = 0;
+            if(xoffsetDyn > 0)
+            xoffsetDyn -= frequency*100;
+            else xoffsetDyn = 0;
+
+            if(yoffsetDyn < 0)
+            yoffsetDyn += frequency*100;
+            else yoffsetDyn = 0;
+            if(yoffsetDyn > 0)
+            yoffsetDyn -= frequency*100;
+            else yoffsetDyn = 0;
+
+            if(xoffsetDyn == 0 && yoffsetDyn == 0) {
+                effects = 0;
+                frequency = 0;
+                Radius = 0;
             }
         }
     }

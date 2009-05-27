@@ -333,6 +333,13 @@ class GuiElement
 		//!\param a Amount of the effect (usage varies on effect)
 		//!\param t Target amount of the effect (usage varies on effect)
 		void SetEffect(int e, int a, int t=0);
+        //!This SetEffect is for EFFECT_GOROUND only
+        //!\param e Effect to enable
+        //!\param speed is for Circlespeed
+        //!\param circles Circleamount in degree ike 180 for 1/2 circle or 720 for 2 circles
+        //!\param r Circle Radius in pixel
+        //!\param startdegree Degree where to start circling
+		void SetEffect(int e, int speed, int circles, int r, int startdegree);
 		//!Sets an effect to be enabled on wiimote cursor over
 		//!\param e Effect to enable
 		//!\param a Amount of the effect (usage varies on effect)
@@ -408,7 +415,10 @@ class GuiElement
 		int xmax; //!< Element's max X offset allowed
 		int xoffsetDyn; //!< Element X offset, dynamic (added to xoffset value for animation effects)
 		int yoffsetDyn; //!< Element Y offset, dynamic (added to yoffset value for animation effects)
-		f32 degree;     //!< Degree for flying stuff
+		f32 degree; //!< Degree where to start for EFFECT_GOROUND enter it in ° like 60°
+		f32 frequency; //!< Speed for EFFECT_GOROUND || can also be negative for other direction
+		int Radius; //!< The radius in which the Element goes round for EFFECT_GOROUND
+		int circleamount; //!< Circleamount for the EFFECT_GOROUND effect
 		f32 yoffsetDynFloat; //!< Integer sucks float is need by some parts
 		int changervar; //!< Changervariable for some stuff
 		int alpha; //!< Element alpha value (0-255)

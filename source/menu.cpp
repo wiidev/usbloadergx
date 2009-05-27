@@ -227,7 +227,7 @@ static void WindowCredits(void * ptr)
 	txt[i] = new GuiText(LANGUAGE.OfficialSite, 20, (GXColor){255, 255, 255, 255});
 	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(-180,y); i++; y+=28;
 
-	GuiText::SetPresets(22, (GXColor){255, 255, 255,  255}, 0, GuiText::WRAP, 
+	GuiText::SetPresets(22, (GXColor){255, 255, 255,  255}, 0, GuiText::WRAP,
 			FTGX_JUSTIFY_LEFT | FTGX_ALIGN_TOP, ALIGN_LEFT, ALIGN_TOP);
 
 	txt[i] = new GuiText("Coding:");
@@ -3150,6 +3150,23 @@ static int MenuDiscList()
 	{
 
 	    VIDEO_WaitVSync ();
+
+	    if(carosselleBtn.GetState() == STATE_CLICKED) {
+            carosselleBtn.SetEffect(EFFECT_GOROUND, 80, 180, 50, -45);
+            countBtn.SetEffect(EFFECT_GOROUND, -80, 180, 50, -45);
+            abcBtn.SetEffect(EFFECT_GOROUND, 80, 180, 50, -45);
+            favoriteBtn.SetEffect(EFFECT_GOROUND, -80, 360, 50, -45);
+            wiiBtn.SetEffect(EFFECT_GOROUND, 80, 180, 150, 180);
+            poweroffBtn.SetEffect(EFFECT_GOROUND, -80, 360, 150, 50);
+            sdcardBtn.SetEffect(EFFECT_GOROUND, 80, 360, 150, 80);
+            poweroffBtn.SetEffect(EFFECT_GOROUND, -80, 360, 60, 180);
+            settingsBtn.SetEffect(EFFECT_GOROUND, 80, 360, 200, 180);
+            homeBtn.SetEffect(EFFECT_GOROUND, 80, 360, 200, 180);
+            installBtn.SetEffect(EFFECT_GOROUND, -80, 360, 60, -90);
+            gridBtn.SetEffect(EFFECT_GOROUND, -80, 360, 50, 0);
+            DownloadBtn.SetEffect(EFFECT_GOROUND, 160, 720, 300, 0);
+            carosselleBtn.ResetState();
+	    }
 
         //CLOCK
 		time_t rawtime = time(0);								//this fixes code dump caused by the clock
