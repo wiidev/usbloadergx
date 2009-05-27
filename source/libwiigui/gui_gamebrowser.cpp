@@ -149,6 +149,7 @@ GuiGameBrowser::GuiGameBrowser(int w, int h, struct discHdr * l, int gameCnt, co
 		
 		gameIndex[i] = i;
 	}
+	UpdateListEntries();
 }
 
 /**
