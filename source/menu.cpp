@@ -3285,7 +3285,7 @@ static int MenuDiscList()
 	favoriteBtnImg_g.SetWidescreen(CFG.widescreen);
 	GuiButton favoriteBtn(favoriteBtnImg.GetWidth(), favoriteBtnImg.GetHeight());
 	favoriteBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);//(ALIGN_CENTRE, ALIGN_MIDDLE);
-	favoriteBtn.SetPosition(20, 15);
+	//Set Pos later favoriteBtn.SetPosition(20, 15);
 	favoriteBtn.SetImage(&favoriteBtnImg_g);
 	favoriteBtn.SetSoundOver(&btnSoundOver);
 	favoriteBtn.SetSoundClick(&btnClick);
@@ -3299,7 +3299,7 @@ static int MenuDiscList()
 	abcBtnImg_g.SetWidescreen(CFG.widescreen);
 	GuiButton abcBtn(abcBtnImg.GetWidth(), abcBtnImg.GetHeight());
 	abcBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);//(ALIGN_CENTRE, ALIGN_MIDDLE);
-	abcBtn.SetPosition(52, 15);
+	//Set Pos later abcBtn.SetPosition(52, 15);
 	abcBtn.SetImage(&abcBtnImg_g);
 	abcBtn.SetSoundOver(&btnSoundOver);
 	abcBtn.SetSoundClick(&btnClick);
@@ -3314,7 +3314,7 @@ static int MenuDiscList()
 	countBtnImg_g.SetWidescreen(CFG.widescreen);
 	GuiButton countBtn(countBtnImg.GetWidth(), countBtnImg.GetHeight());
 	countBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);//(ALIGN_CENTRE, ALIGN_MIDDLE);
-	countBtn.SetPosition(84, 15);
+	//Set Pos later countBtn.SetPosition(84, 15);
 	countBtn.SetImage(&countBtnImg_g);
 	countBtn.SetImage(&countBtnImg_g);
 	countBtn.SetSoundOver(&btnSoundOver);
@@ -3332,7 +3332,7 @@ static int MenuDiscList()
 	listBtnImg_g.SetWidescreen(CFG.widescreen);
 	GuiButton gridBtn(gridBtnImg.GetWidth(), gridBtnImg.GetHeight());
 	gridBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);//(ALIGN_CENTRE, ALIGN_MIDDLE);
-	gridBtn.SetPosition(116, 15);
+	//Set Pos later gridBtn.SetPosition(116, 15);
 	gridBtn.SetImage(&gridBtnImg_g);
 	gridBtn.SetSoundOver(&btnSoundOver);
 	gridBtn.SetSoundClick(&btnClick);
@@ -3347,7 +3347,7 @@ static int MenuDiscList()
 	carosselleBtnImg_g.SetWidescreen(CFG.widescreen);
 	GuiButton carosselleBtn(carosselleBtnImg.GetWidth(), carosselleBtnImg.GetHeight());
 	carosselleBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);//(ALIGN_CENTRE, ALIGN_MIDDLE);
-	carosselleBtn.SetPosition(148, 15);
+	//Set Pos later carosselleBtn.SetPosition(148, 15);
 	carosselleBtn.SetImage(&carosselleBtnImg_g);
 	carosselleBtn.SetSoundOver(&btnSoundOver);
 	carosselleBtn.SetSoundClick(&btnClick);
@@ -3370,13 +3370,44 @@ static int MenuDiscList()
 		countBtn.SetImage(&countBtnImg);
 		countBtn.SetAlpha(255);
 	}
-	if (Settings.gameDisplay==grid){
+	if (Settings.gameDisplay==grid)
+	{
+		if(CFG.widescreen)
+		{
 			favoriteBtn.SetPosition(-80,13);
 			abcBtn.SetPosition(-48,13);
 			countBtn.SetPosition(-16,13);
 			gridBtn.SetPosition(16,13);
 			carosselleBtn.SetPosition(48,13);
-			}
+		}
+		else
+		{
+			favoriteBtn.SetPosition(-100,13);
+			abcBtn.SetPosition(-60,13);
+			countBtn.SetPosition(-20,13);
+			gridBtn.SetPosition(20,13);
+			carosselleBtn.SetPosition(60,13);
+		}
+	}
+	else // List-Mode
+	{
+		if(CFG.widescreen)
+		{
+			favoriteBtn.SetPosition(20,13);
+			abcBtn.SetPosition(52,13);
+			countBtn.SetPosition(84,13);
+			gridBtn.SetPosition(116,13);
+			carosselleBtn.SetPosition(148,13);
+		}
+		else
+		{
+			favoriteBtn.SetPosition(0,13);
+			abcBtn.SetPosition(40,13);
+			countBtn.SetPosition(80,13);
+			gridBtn.SetPosition(120,13);
+			carosselleBtn.SetPosition(160,13);
+		}
+	}
 
 	//Downloading Covers
 	GuiTooltip DownloadBtnTT(LANGUAGE.ClicktoDownloadCovers);
@@ -3755,12 +3786,23 @@ static int MenuDiscList()
             w.Remove(&DownloadBtn);
 
 			gridBtn.SetImage(&listBtnImg_g);
-			favoriteBtn.SetPosition(-80,13);
-			abcBtn.SetPosition(-48,13);
-			countBtn.SetPosition(-16,13);
-			gridBtn.SetPosition(16,13);
-			carosselleBtn.SetPosition(48,13);
-            if((Settings.hddinfo == hr12)||(Settings.hddinfo == hr24)) {
+			if(CFG.widescreen)
+			{
+				favoriteBtn.SetPosition(-80,13);
+				abcBtn.SetPosition(-48,13);
+				countBtn.SetPosition(-16,13);
+				gridBtn.SetPosition(16,13);
+				carosselleBtn.SetPosition(48,13);
+			}
+			else
+			{
+				favoriteBtn.SetPosition(-100,13);
+				abcBtn.SetPosition(-60,13);
+				countBtn.SetPosition(-20,13);
+				gridBtn.SetPosition(20,13);
+				carosselleBtn.SetPosition(60,13);
+			}
+			if((Settings.hddinfo == hr12)||(Settings.hddinfo == hr24)) {
                 clockTime.SetPosition(THEME.clock_x, THEME.clock_y+3);
                 clockTimeBack.SetPosition(THEME.clock_x, THEME.clock_y+3);
                 w.Append(&clockTime);
@@ -3779,11 +3821,22 @@ static int MenuDiscList()
 			gameBrowser.Reload(gameList, gameCnt); // initialize before append
 			mainWindow->Append(&gameBrowser);
 			gridBtn.SetImage(&gridBtnImg_g);
-			favoriteBtn.SetPosition(20,15);
-			abcBtn.SetPosition(52,15);
-			countBtn.SetPosition(84,15);
-			gridBtn.SetPosition(116,15);
-			carosselleBtn.SetPosition(148,15);
+			if(CFG.widescreen)
+			{
+				favoriteBtn.SetPosition(20,15);
+				abcBtn.SetPosition(52,15);
+				countBtn.SetPosition(84,15);
+				gridBtn.SetPosition(116,15);
+				carosselleBtn.SetPosition(148,15);
+			}
+			else
+			{
+				favoriteBtn.SetPosition(0,13);
+				abcBtn.SetPosition(40,13);
+				countBtn.SetPosition(80,13);
+				gridBtn.SetPosition(120,13);
+				carosselleBtn.SetPosition(160,13);
+			}
 
 			if((Settings.hddinfo == hr12)||(Settings.hddinfo == hr24)) {
 			clockTime.SetPosition(THEME.clock_x, THEME.clock_y);
