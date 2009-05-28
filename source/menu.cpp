@@ -42,6 +42,7 @@
 #include "libwiigui/gui_diskcover.h"
 #include "mp3s.h"
 #include "fatmounter.h"
+#include "updater.h"
 
 #define MAX_CHARACTERS		38
 extern FreeTypeGX *fontClock; //CLOCK
@@ -228,7 +229,7 @@ static void WindowCredits(void * ptr)
 	txt[i] = new GuiText(LANGUAGE.OfficialSite, 20, (GXColor){255, 255, 255, 255});
 	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(-180,y); i++; y+=28;
 
-	GuiText::SetPresets(22, (GXColor){255, 255, 255,  255}, 0, GuiText::WRAP,
+	txt[i]->SetPresets(22, (GXColor){255, 255, 255,  255}, 0,
 			FTGX_JUSTIFY_LEFT | FTGX_ALIGN_TOP, ALIGN_LEFT, ALIGN_TOP);
 
 	txt[i] = new GuiText("Coding:");
@@ -2173,9 +2174,9 @@ ProgressDownloadWindow(int choice2)
 	if ((Settings.wsprompt == yes) && (CFG.widescreen)){/////////////adjust for widescreen
 		progressbarImg.SetPosition(80,40);
 		progressbarImg.SetTile(80*i/cntMissFiles);
+	} else {
+        progressbarImg.SetTile(100*i/cntMissFiles);
 	}
-	else{
-	progressbarImg.SetTile(100*i/cntMissFiles);}
 
     sprintf(msg, "%i %s", cntMissFiles - i, LANGUAGE.filesleft);
     msgTxt.SetText(msg);
@@ -2266,6 +2267,315 @@ ProgressDownloadWindow(int choice2)
 	} else {
         return 0;
 	}
+}
+
+/****************************************************************************
+ * ProgressWindow
+ *
+ * Opens a window, which displays progress to the user. Can either display a
+ * progress bar showing % completion, or a throbber that only shows that an
+ * action is in progress.
+ ***************************************************************************/
+int
+ProgressUpdateWindow()
+{
+
+    int ret = 0, failed = 0;
+    const unsigned int blocksize = 1024;
+    char hostip[16];
+    char * IP = NULL;
+    u8 blockbuffer[blocksize] ATTRIBUTE_ALIGN(32);
+
+	GuiWindow promptWindow(472,320);
+	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	promptWindow.SetPosition(0, -10);
+
+    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
+	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, vol);
+
+	char imgPath[100];
+	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
+	GuiImageData btnOutline(imgPath, button_dialogue_box_png);
+	snprintf(imgPath, sizeof(imgPath), "%sdialogue_box.png", CFG.theme_path);
+	GuiImageData dialogBox(imgPath, dialogue_box_png);
+	GuiTrigger trigA;
+	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
+
+	GuiImage dialogBoxImg(&dialogBox);
+	if (Settings.wsprompt == yes){
+	dialogBoxImg.SetWidescreen(CFG.widescreen);}
+
+	snprintf(imgPath, sizeof(imgPath), "%sprogressbar_outline.png", CFG.theme_path);
+	GuiImageData progressbarOutline(imgPath, progressbar_outline_png);
+	GuiImage progressbarOutlineImg(&progressbarOutline);
+	if (Settings.wsprompt == yes){
+	progressbarOutlineImg.SetWidescreen(CFG.widescreen);}
+	progressbarOutlineImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
+	progressbarOutlineImg.SetPosition(25, 7);
+
+	snprintf(imgPath, sizeof(imgPath), "%sprogressbar_empty.png", CFG.theme_path);
+	GuiImageData progressbarEmpty(imgPath, progressbar_empty_png);
+	GuiImage progressbarEmptyImg(&progressbarEmpty);
+	progressbarEmptyImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
+	progressbarEmptyImg.SetPosition(25, 7);
+	progressbarEmptyImg.SetTile(100);
+
+	snprintf(imgPath, sizeof(imgPath), "%sprogressbar.png", CFG.theme_path);
+	GuiImageData progressbar(imgPath, progressbar_png);
+	progressbarImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
+	progressbarImg.SetPosition(25, 7);
+
+    char title[50];
+    sprintf(title, "%s", "Checking for Updates");
+	GuiText titleTxt(title, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
+	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	titleTxt.SetPosition(0,50);
+    char msg[50];
+    sprintf(msg, "%s", LANGUAGE.InitializingNetwork);
+	GuiText msgTxt(msg, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
+	msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	msgTxt.SetPosition(0,140);
+	char msg2[50] = " ";
+	GuiText msg2Txt(msg2, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
+	msg2Txt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	msg2Txt.SetPosition(0, 50);
+
+	prTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	prTxt.SetPosition(0, 7);
+
+    GuiText btn1Txt(LANGUAGE.Cancel, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
+	GuiImage btn1Img(&btnOutline);
+	if (Settings.wsprompt == yes){
+	btn1Txt.SetWidescreen(CFG.widescreen);
+	btn1Img.SetWidescreen(CFG.widescreen);}
+	GuiButton btn1(btnOutline.GetWidth(), btnOutline.GetHeight());
+    btn1.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
+    btn1.SetPosition(0, -40);
+	btn1.SetLabel(&btn1Txt);
+	btn1.SetImage(&btn1Img);
+	btn1.SetSoundOver(&btnSoundOver);
+	btn1.SetSoundClick(&btnClick);
+	btn1.SetTrigger(&trigA);
+	btn1.SetState(STATE_SELECTED);
+	btn1.SetEffectGrow();
+
+	if ((Settings.wsprompt == yes) && (CFG.widescreen)){/////////////adjust for widescreen
+		progressbarOutlineImg.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+		progressbarOutlineImg.SetPosition(0, 7);
+		progressbarEmptyImg.SetPosition(80,7);
+		progressbarEmptyImg.SetTile(78);
+		progressbarImg.SetPosition(80, 7);
+	}
+
+	promptWindow.Append(&dialogBoxImg);
+	promptWindow.Append(&titleTxt);
+	promptWindow.Append(&msgTxt);
+	promptWindow.Append(&msg2Txt);
+    promptWindow.Append(&btn1);
+
+    promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
+
+	HaltGui();
+	mainWindow->SetState(STATE_DISABLED);
+	mainWindow->Append(&promptWindow);
+	mainWindow->ChangeFocus(&promptWindow);
+	ResumeGui();
+
+    struct stat st;
+    if(stat(CFG.update_path, &st) != 0) {
+        char dir[100];
+        snprintf(dir,strlen(CFG.update_path),"%s",CFG.update_path);
+        if (mkdir(dir, 0777) == -1) {
+            if(subfoldercheck(dir) != 1) {
+            WindowPrompt(LANGUAGE.Error,LANGUAGE.Cantcreatedirectory,LANGUAGE.ok,0,0,0);
+            ret = -1;
+            failed = -1;
+            }
+        }
+    }
+
+    char dolpath[150];
+    char dolpathsuccess[150];
+    snprintf(dolpath, sizeof(dolpath), "%sbootnew.dol", CFG.update_path);
+    snprintf(dolpathsuccess, sizeof(dolpathsuccess), "%sboot.dol", CFG.update_path);
+
+	while (!IP && !(ret < 0)) {
+
+        VIDEO_WaitVSync();
+
+        ret = Net_Init(hostip);
+
+		if (ret > 0) {
+		IP = hostip;
+		msgTxt.SetText(IP);
+		}
+
+		if (ret <= 0) {
+        msgTxt.SetText(LANGUAGE.Couldnotinitializenetwork);
+		}
+
+        if(btn1.GetState() == STATE_CLICKED) {
+			IP = 0;
+			ret = -1;
+			failed = -1;
+			btn1.ResetState();
+			break;
+		}
+	}
+
+	if(IP && ret >= 0) {
+
+    networkisinitialized = 1;
+
+    int revnumber = 0;
+    int currentrev = atoi(SVN_REV);
+
+	SDCard_deInit();
+    struct block file = downloadfile("http://www.techjawa.com/usbloadergx/rev.txt");
+	FILE *pfile;
+	SDCard_Init();
+
+    if(file.data != NULL)
+    {
+        char revtxt[10];
+        pfile = fopen("SD:/rev.txt", "w");
+        fwrite(file.data,1,file.size,pfile);
+        fclose(pfile);
+        //has to be repeated or it isnt working (first file download bug)
+        pfile = fopen("SD:/rev.txt", "w");
+        fwrite(file.data,1,file.size,pfile);
+        fclose(pfile);
+        //"w+" doesnt work, needs to be reopened as "r"
+        pfile = fopen("SD:/rev.txt", "r");
+        int c = 0, i = 0;
+        while(c != EOF || i < 10) {
+            c = fgetc(pfile);
+            if (c != EOF) {
+            revtxt[i] = c;
+            } else {
+            revtxt[i] = 0x00;
+            break;
+            }
+            i++;
+        }
+        fclose(pfile);
+        revnumber = atoi(revtxt);
+        remove("SD:/rev.txt");
+        free(file.data);
+    }
+
+    if(revnumber > currentrev) {
+        sprintf(msg, "Rev%i available.", revnumber);
+        int choice = WindowPrompt(msg, "Do you want to update?", LANGUAGE.Yes, LANGUAGE.No, 0, 0);
+        if(choice == 1) {
+            sprintf(title, "%s", "Updating USB Loader GX");
+            titleTxt.SetText(title);
+            msgTxt.SetPosition(0,100);
+            promptWindow.Append(&progressbarEmptyImg);
+            promptWindow.Append(&progressbarImg);
+            promptWindow.Append(&progressbarOutlineImg);
+            promptWindow.Append(&prTxt);
+            sprintf(msg, "Updating to Rev%i", revnumber);
+            msgTxt.SetText(msg);
+            int filesize = downloadrev("http://www.techjawa.com/usbloadergx/boot.dol");
+            if(filesize > 0) {
+                pfile = fopen(dolpath, "wb");
+                for (int i = 0; i < filesize; i += blocksize) {
+                    sprintf(prozent, "%i%%", 100*i/filesize);
+                    prTxt.SetText(prozent);
+                    if ((Settings.wsprompt == yes) && (CFG.widescreen)){/////////////adjust for widescreen
+                        progressbarImg.SetTile(80*i/filesize);
+                    } else {
+                        progressbarImg.SetTile(100*i/filesize);
+                    }
+                    sprintf(msg2, "%iKB/%iKB", i/1024, filesize/1024);
+                    msg2Txt.SetText(msg2);
+
+                    if(btn1.GetState() == STATE_CLICKED) {
+                        fclose(pfile);
+                        remove(dolpath);
+                        failed = -1;
+                        btn1.ResetState();
+                        break;
+                    }
+
+                    u32 blksize;
+                    blksize = (u32)(filesize - i);
+                    if (blksize > blocksize)
+                        blksize = blocksize;
+
+                    ret = network_read(blockbuffer, blksize);
+                    if ((u32)ret != blksize) {
+                        failed = -1;
+                        ret = -1;
+                        fclose(pfile);
+                        remove(dolpath);
+                        break;
+                    }
+                    fwrite(blockbuffer,1,blksize, pfile);
+                }
+                fclose(pfile);
+                if(!failed) {
+                //remove old
+                if(checkfile(dolpathsuccess)){
+                        remove(dolpathsuccess);
+                }
+                //rename new to old
+                rename(dolpath, dolpathsuccess);
+
+                //get the icon.png and the meta.xml
+                char xmliconpath[150];
+                file = downloadfile("http://www.techjawa.com/usbloadergx/meta.file");
+                if(file.data != NULL){
+                    sprintf(xmliconpath, "%smeta.xml", CFG.update_path);
+                    pfile = fopen(xmliconpath, "wb");
+                    fwrite(file.data,1,file.size,pfile);
+                    fclose(pfile);
+                    free(file.data);
+                }
+                file = downloadfile("http://www.techjawa.com/usbloadergx/icon.png");
+                if(file.data != NULL){
+                    sprintf(xmliconpath, "%sicon.png", CFG.update_path);
+                    pfile = fopen(xmliconpath, "wb");
+                    fwrite(file.data,1,file.size,pfile);
+                    fclose(pfile);
+                    free(file.data);
+                }
+                }
+            } else {
+            failed = -1;
+            }
+        } else {
+        ret = -1;
+        }
+
+    } else {
+        WindowPrompt("No new updates", 0, "OK", 0, 0, 0);
+        ret = -1;
+    }
+
+    }
+
+    CloseConnection();
+
+    if(!failed && ret >= 0) {
+        WindowPrompt("Successfully updated ", "Restarting the Loader", "OK", 0, 0, 0);
+        if (*((u32*) 0x80001800)) exit(0);
+        SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
+    }
+
+    promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
+	while(promptWindow.GetEffect() > 0) usleep(50);
+
+	HaltGui();
+	mainWindow->Remove(&promptWindow);
+	mainWindow->SetState(STATE_DEFAULT);
+	ResumeGui();
+
+    if(failed != 0)
+    return failed;
+
+    return 1;
 }
 
 
@@ -4140,7 +4450,6 @@ static int MenuSettings()
 
 	char imgPath[100];
 
-
 	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
 	GuiImageData btnOutline(imgPath, button_dialogue_box_png);
 	snprintf(imgPath, sizeof(imgPath), "%ssettings_background.png", CFG.theme_path);
@@ -4151,6 +4460,8 @@ static int MenuSettings()
 	GuiImageData tab2(imgPath, tab_bg2_png);
 	snprintf(imgPath, sizeof(imgPath), "%stab_bg3.png", CFG.theme_path);
 	GuiImageData tab3(imgPath, tab_bg3_png);
+	snprintf(imgPath, sizeof(imgPath), "%supdateRev.png", CFG.theme_path);
+	GuiImageData updateRevImgData(imgPath, updateRev_png);
 
     GuiTrigger trigA;
 	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
@@ -4249,6 +4560,19 @@ static int MenuSettings()
 	lockBtn.SetTrigger(&trigA);
 	lockBtn.SetEffectGrow();
 
+    GuiImage updateBtnImg(&updateRevImgData);
+	updateBtnImg.SetWidescreen(CFG.widescreen);
+	GuiButton updateBtn(updateBtnImg.GetWidth(), updateBtnImg.GetHeight());
+	updateBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	updateBtn.SetPosition(70, 400);
+	updateBtn.SetImage(&updateBtnImg);
+	updateBtn.SetSoundOver(&btnSoundOver);
+	updateBtn.SetSoundClick(&btnClick);
+	updateBtn.SetTrigger(&trigA);
+	updateBtn.SetVisible(false);
+	updateBtn.SetClickable(false);
+	updateBtn.SetEffectGrow();
+
 	GuiImageData logo(credits_button_png);
 	GuiImage logoImg(&logo);
 	GuiImageData logoOver(credits_button_over_png);
@@ -4295,6 +4619,7 @@ static int MenuSettings()
 			w.Append(&titleTxt);
 			w.Append(&backBtn);
 			w.Append(&lockBtn);
+			w.Append(&updateBtn);
 			w.Append(btnLogo);
 			w.Append(&homo);
 			//set triggers for tabs
@@ -4372,7 +4697,7 @@ static int MenuSettings()
 			sprintf(options2.name[3], "%s",LANGUAGE.Unicodefix);
 			sprintf(options2.name[4], "%s",LANGUAGE.Backgroundmusic);
 			sprintf(options2.name[5], "%s",LANGUAGE.Wiilight);
-			sprintf(options2.name[6], " ");
+			sprintf(options2.name[6], "%s",LANGUAGE.Updatepath);
 			sprintf(options2.name[7], "%s",LANGUAGE.MP3Menu);
 			sprintf(options2.name[8], "%s",LANGUAGE.Defaultsettings);
 
@@ -4572,6 +4897,7 @@ static int MenuSettings()
 							mainWindow->Remove(&page3Btn);
 							w.Remove(&backBtn);
 							w.Remove(&lockBtn);
+							w.Remove(&updateBtn);
 							char entered[20] = "";
 							strncpy(entered, Settings.unlockCode, sizeof(entered));
 							int result = OnScreenKeyboard(entered, 20,0);
@@ -4582,6 +4908,7 @@ static int MenuSettings()
 							mainWindow->Append(&page3Btn);
 							w.Append(&backBtn);
 							w.Append(&lockBtn);
+							w.Append(&updateBtn);
 							if ( result == 1 )
 							{
 								strncpy(Settings.unlockCode, entered, sizeof(Settings.unlockCode));
@@ -4620,6 +4947,7 @@ static int MenuSettings()
 							mainWindow->Remove(&page3Btn);
 							w.Remove(&backBtn);
 							w.Remove(&lockBtn);
+							w.Remove(&updateBtn);
 							char entered[43] = "";
 							strncpy(entered, CFG.covers_path, sizeof(entered));
 							int result = OnScreenKeyboard(entered,43,4);
@@ -4630,6 +4958,7 @@ static int MenuSettings()
 							mainWindow->Append(&page3Btn);
 							w.Append(&backBtn);
 							w.Append(&lockBtn);
+							w.Append(&updateBtn);
 							if ( result == 1 )
 							{
 								int len = (strlen(entered)-1);
@@ -4657,6 +4986,7 @@ static int MenuSettings()
 							mainWindow->Remove(&page3Btn);
 							w.Remove(&backBtn);
 							w.Remove(&lockBtn);
+							w.Remove(&updateBtn);
 							char entered[43] = "";
 							strncpy(entered, CFG.disc_path, sizeof(entered));
 							int result = OnScreenKeyboard(entered, 43,4);
@@ -4667,6 +4997,7 @@ static int MenuSettings()
 							mainWindow->Append(&page3Btn);
 							w.Append(&backBtn);
 							w.Append(&lockBtn);
+							w.Append(&updateBtn);
 							if ( result == 1 )
 							{
 								int len = (strlen(entered)-1);
@@ -4694,6 +5025,7 @@ static int MenuSettings()
 							mainWindow->Remove(&page3Btn);
 							w.Remove(&backBtn);
 							w.Remove(&lockBtn);
+							w.Remove(&updateBtn);
 							char entered[43] = "";
 							strncpy(entered, CFG.theme_path, sizeof(entered));
 							int result = OnScreenKeyboard(entered, 43,4);
@@ -4704,6 +5036,7 @@ static int MenuSettings()
 							mainWindow->Append(&page3Btn);
 							w.Append(&backBtn);
 							w.Append(&lockBtn);
+							w.Append(&updateBtn);
 							if ( result == 1 )
 							{
 								int len = (strlen(entered)-1);
@@ -4745,6 +5078,7 @@ static int MenuSettings()
 							w.Append(&titleTxt);
 							w.Append(&backBtn);
 							w.Append(&lockBtn);
+							w.Append(&updateBtn);
 							w.Append(btnLogo);
 
 							mainWindow->Append(&optionBrowser2);
@@ -4754,6 +5088,7 @@ static int MenuSettings()
 							mainWindow->Append(&page3Btn);
 							w.Append(&backBtn);
 							w.Append(&lockBtn);
+							w.Append(&updateBtn);
 							}
 						}
 						else
@@ -4818,7 +5153,15 @@ static int MenuSettings()
             else if (Settings.wiilight == 1) sprintf (options2.value[5],"%s",LANGUAGE.ON);
             else if (Settings.wiilight == 2) sprintf (options2.value[5],"%s",LANGUAGE.OnlyInstall);
 
-			sprintf(options2.value[6], " ");
+            if (strlen(CFG.update_path) < (9 + 3)) {
+				sprintf(cfgtext, "%s", CFG.update_path);
+            } else {
+				strncpy(cfgtext, CFG.update_path,  9);
+				cfgtext[9] = '\0';
+                strncat(cfgtext, "...", 3);
+            }
+            sprintf(options2.value[6], "%s", cfgtext);
+
 			sprintf(options2.value[7], "not working!");
 			sprintf(options2.value[8], " ");
 
@@ -4836,6 +5179,7 @@ static int MenuSettings()
                                 mainWindow->Remove(&page3Btn);
                                 w.Remove(&backBtn);
                                 w.Remove(&lockBtn);
+                                w.Remove(&updateBtn);
                                 char entered[43] = "";
                                 strncpy(entered, CFG.titlestxt_path, sizeof(entered));
                                 int result = OnScreenKeyboard(entered,43,4);
@@ -4846,6 +5190,7 @@ static int MenuSettings()
                                 mainWindow->Append(&page3Btn);
                                 w.Append(&backBtn);
                                 w.Append(&lockBtn);
+                                w.Append(&updateBtn);
                                 if ( result == 1 )
                                 {
 									int len = (strlen(entered)-1);
@@ -4876,6 +5221,7 @@ static int MenuSettings()
 							mainWindow->Remove(&page3Btn);
 							w.Remove(&backBtn);
 							w.Remove(&lockBtn);
+							w.Remove(&updateBtn);
 							char entered[40] = "";
 							strncpy(entered, CFG.language_path, sizeof(entered));
 							int result = OnScreenKeyboard(entered, 40,0);
@@ -4886,6 +5232,7 @@ static int MenuSettings()
 							mainWindow->Append(&page3Btn);
 							w.Append(&backBtn);
 							w.Append(&lockBtn);
+							w.Append(&updateBtn);
 							if ( result == 1 )
 							{	strncpy(CFG.language_path, entered, sizeof(CFG.language_path));
 								if(isSdInserted()) {
@@ -4932,6 +5279,40 @@ static int MenuSettings()
                             WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtousethatoption, LANGUAGE.ok, 0,0,0);
                         }
                         break;
+                    case 6:
+                        if ( CFG.godmode == 1)
+                            {
+                                mainWindow->Remove(&optionBrowser2);
+                                mainWindow->Remove(&page1Btn);
+                                mainWindow->Remove(&page2Btn);
+                                mainWindow->Remove(&tabBtn);
+                                mainWindow->Remove(&page3Btn);
+                                w.Remove(&backBtn);
+                                w.Remove(&lockBtn);
+                                w.Remove(&updateBtn);
+                                char entered[43] = "";
+                                strncpy(entered, CFG.update_path, sizeof(entered));
+                                int result = OnScreenKeyboard(entered,43,4);
+                                mainWindow->Append(&optionBrowser2);
+                                mainWindow->Append(&page1Btn);
+                                mainWindow->Append(&page2Btn);
+                                mainWindow->Append(&tabBtn);
+                                mainWindow->Append(&page3Btn);
+                                w.Append(&backBtn);
+                                w.Append(&lockBtn);
+                                w.Append(&updateBtn);
+                                if ( result == 1 )
+                                {
+									int len = (strlen(entered)-1);
+									if(entered[len] !='/')
+									strncat (entered, "/", 1);
+									strncpy(CFG.update_path, entered, sizeof(CFG.update_path));
+                                    WindowPrompt(LANGUAGE.Updatepathchanged,0,LANGUAGE.ok,0,0,0);
+                                }
+                            } else {
+                                WindowPrompt(0,LANGUAGE.Consoleshouldbeunlockedtomodifyit,LANGUAGE.ok,0,0,0);
+                            }
+                            break;
                     case 8:
                         int choice = WindowPrompt(LANGUAGE.Areyousure, 0, LANGUAGE.Yes, LANGUAGE.Cancel, 0, 0);
                         if(choice == 1) {
@@ -4992,6 +5373,34 @@ static int MenuSettings()
 				break;
 			}
 
+			if(updateBtn.GetState() == STATE_CLICKED) {
+			    if(isSdInserted() && CFG.godmode) {
+                mainWindow->Remove(&optionBrowser2);
+                mainWindow->Remove(&page1Btn);
+                mainWindow->Remove(&page2Btn);
+                mainWindow->Remove(&tabBtn);
+                mainWindow->Remove(&page3Btn);
+                w.Remove(&backBtn);
+                w.Remove(&lockBtn);
+                w.Remove(&updateBtn);
+                int ret = ProgressUpdateWindow();
+				if(ret < 0) {
+				WindowPrompt(LANGUAGE.Updatefailed,0,LANGUAGE.ok,0,0,0);
+				}
+                mainWindow->Append(&optionBrowser2);
+                mainWindow->Append(&page1Btn);
+                mainWindow->Append(&page2Btn);
+                mainWindow->Append(&tabBtn);
+                mainWindow->Append(&page3Btn);
+                w.Append(&backBtn);
+                w.Append(&lockBtn);
+                w.Append(&updateBtn);
+			    } else {
+                    WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtousethatoption, LANGUAGE.ok, 0,0,0);
+			    }
+                updateBtn.ResetState();
+			}
+
 			if(lockBtn.GetState() == STATE_CLICKED)
 			{
 				if (!strcmp("", Settings.unlockCode))
@@ -5008,6 +5417,7 @@ static int MenuSettings()
 							mainWindow->Remove(&page3Btn);
 							w.Remove(&backBtn);
 							w.Remove(&lockBtn);
+							w.Remove(&updateBtn);
                             char entered[20] = "";
                             int result = OnScreenKeyboard(entered, 20,0);
 							mainWindow->Append(&optionBrowser2);
@@ -5017,6 +5427,7 @@ static int MenuSettings()
 							mainWindow->Append(&page3Btn);
 							w.Append(&backBtn);
 							w.Append(&lockBtn);
+							w.Append(&updateBtn);
 							mainWindow->Append(&tabBtn);
                             if ( result == 1 ) {
                             if (!strcmp(entered, Settings.unlockCode)) //if password correct
@@ -5086,6 +5497,13 @@ static int MenuSettings()
 				{
 					homo.ResetState();
 				}
+			}
+			if(CFG.godmode) {
+                updateBtn.SetVisible(true);
+                updateBtn.SetClickable(true);
+			} else {
+                updateBtn.SetVisible(false);
+                updateBtn.SetClickable(false);
 			}
 			if(settingsbackgroundbtn.GetState() == STATE_CLICKED)
 			{

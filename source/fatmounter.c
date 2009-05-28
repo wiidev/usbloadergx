@@ -51,7 +51,7 @@ return -1;
 void SDCard_deInit()
 {
     //First unmount all the devs...
-    fatUnmount("SD");
+    fatUnmount("SD:/");
     //...and then shutdown em!
     __io_wiisd.shutdown();
 }

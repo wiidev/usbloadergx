@@ -232,3 +232,14 @@ struct block downloadfile(const char *url)
 
 	return file;
 }
+
+s32 GetConnection(char * domain) {
+
+    u32 ipaddress = getipbynamecached(domain);
+    if(ipaddress == 0) {
+        return -1;
+    }
+    s32 connection = server_connect(ipaddress, 80);
+    return connection;
+
+}

@@ -188,6 +188,9 @@ struct LANGUAGE
 	char Uninstall[50];
 	char USBLoaderisprotected[80];
 	char USBDevicenotfound[80];
+	char Updatepath[50];
+	char Updatepathchanged[50];
+	char Updatefailed[40];
 	char VideoMode[50];
 	char VIDTVPatch[50];
 	char Volume[50];

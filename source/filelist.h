@@ -287,4 +287,7 @@ extern const u32	arrangeList_gray_png_size;
 extern const u8		arrangeCarosselle_gray_png[];
 extern const u32	arrangeCarosselle_gray_png_size;
 
+extern const u8		updateRev_png[];
+extern const u32	updateRev_png_size;
+
 #endif

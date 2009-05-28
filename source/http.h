@@ -19,7 +19,7 @@ extern "C"
 #include "dns.h"
 
 /**
- * A simple structure to keep track of the size of a malloc()ated block of memory 
+ * A simple structure to keep track of the size of a malloc()ated block of memory
  */
 struct block
 {
@@ -30,6 +30,7 @@ struct block
 extern const struct block emptyblock;
 
 struct block downloadfile(const char *url);
+s32 GetConnection(char * domain);
 
 #ifdef __cplusplus
 }

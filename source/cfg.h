@@ -72,6 +72,7 @@ struct CFG
 	char language_path[100];
 	char oggload_path[100];
 	char ogg_path[150];
+	char update_path[150];
 	short keyset;
 };
 

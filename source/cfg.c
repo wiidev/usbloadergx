@@ -244,6 +244,7 @@ void CFG_Default(int widescreen) // -1 = non forced Mode
 	snprintf(CFG.unlockCode, sizeof(CFG.unlockCode), "ab121b");		// default password
 	snprintf(CFG.language_path, sizeof(CFG.language_path), "SD:/config/language/");
 	snprintf(CFG.oggload_path, sizeof(CFG.oggload_path), "SD:/config/backgroundmusic/");
+    snprintf(CFG.update_path, sizeof(CFG.update_path), "SD:/apps/usbloader_gx/");
     sprintf(CFG.ogg_path, "notset");
 
 	CFG.parentalcontrol = 0;
@@ -492,6 +493,10 @@ void cfg_set(char *name, char *val)
 	}
 	if (strcmp(name, "language_path") == 0) {
 		strcopy(CFG.language_path, val, sizeof(CFG.language_path));
+		return;
+	}
+	if (strcmp(name, "update_path") == 0) {
+		strcopy(CFG.update_path, val, sizeof(CFG.update_path));
 		return;
 	}
 	if (strcmp(name, "oggload_path") == 0) {
@@ -1090,6 +1095,7 @@ bool cfg_save_global()// save global settings
 	fprintf(f, "ogg_path = %s\n ", CFG.ogg_path);
 	fprintf(f, "wiilight = %d\n ", Settings.wiilight);
 	fprintf(f, "gameDisplay = %d\n ", Settings.gameDisplay);
+	fprintf(f, "update_path = %s\n ", CFG.update_path);
 	fclose(f);
 	return true;
 }

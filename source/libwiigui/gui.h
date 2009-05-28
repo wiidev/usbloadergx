@@ -664,7 +664,7 @@ class GuiText : public GuiElement
 		//!\param s Font style
 		//!\param h Text alignment (horizontal)
 		//!\param v Text alignment (vertical)
-		static void SetPresets(int sz, GXColor c, int w, int wrap, u16 s, int h, int v);
+		void SetPresets(int sz, GXColor c, int w, u16 s, int h, int v);
 		//!Sets the font size
 		//!\param s Font size
 		void SetFontSize(int s);
@@ -672,12 +672,14 @@ class GuiText : public GuiElement
 		//!If the text exceeds this, it is wrapped to the next line
 		//!\param w Maximum width
 		//!\param m WrapMode
+		/*
 		enum {
 			WRAP,
 			DOTTED,
 			SCROLL,
 			MARQUEE
 		};
+		*/
 		void SetMaxWidth(int w, short m=GuiText::WRAP);
 		//!Sets the font color
 		//!\param c Font color
@@ -685,7 +687,7 @@ class GuiText : public GuiElement
 		//!Sets the FreeTypeGX style attributes
 		//!\param s Style attributes
 		//!\param m Style-Mask attributes
-		void SetStyle(u16 s, u16 m=0xffff);
+		void SetStyle(u16 s/*, u16 m=0xffff*/);
 		//!Sets the text alignment
 		//!\param hor Horizontal alignment (ALIGN_LEFT, ALIGN_RIGHT, ALIGN_CENTRE)
 		//!\param vert Vertical alignment (ALIGN_TOP, ALIGN_BOTTOM, ALIGN_MIDDLE)
@@ -699,6 +701,12 @@ class GuiText : public GuiElement
 		void SetWidescreen(bool w);
 		//!Constantly called to draw the text
 		void Draw();
+        enum {
+			WRAP,
+			DOTTED,
+			SCROLL,
+			MARQUEE
+		};
 	protected:
 		wchar_t* text; //!< Unicode text value
 		int size; //!< Font size
