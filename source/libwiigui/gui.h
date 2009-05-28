@@ -819,6 +819,8 @@ class GuiButton : public GuiElement
 		//!Sets the sound to play on click
 		//!\param s Pointer to GuiSound object
 		void SetSoundClick(GuiSound * s);
+		//!\param reset the soundover to NULL
+		void RemoveSoundOver();
 		//!Constantly called to draw the GuiButtons ToolTip
 		//!Sets the button's Tooltip on over
 		//!\param tt Pointer to GuiElement object, x & y Positioning, h & v Align

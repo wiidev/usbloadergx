@@ -254,6 +254,12 @@ void GuiButton::SetToolTip(GuiElement* tt, int x, int y, int h_align, int v_alig
 
 	}
 }
+
+void GuiButton::RemoveSoundOver()
+{
+	LOCK(this);
+	soundOver = NULL;
+}
 /**
  * Draw the button on screen
  */

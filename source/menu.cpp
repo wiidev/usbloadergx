@@ -1024,7 +1024,7 @@ int GameWindowPrompt()
 
     GuiText sizeTxt("", 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{50, 50, 50, 255}); //TODO: get the size here
 	sizeTxt.SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
-	sizeTxt.SetPosition(-60,70);
+	sizeTxt.SetPosition(-110,70);
 
 //	GuiImage diskImg;
 	GuiDiskCover diskImg;
@@ -1084,7 +1084,15 @@ int GameWindowPrompt()
 	
 	GuiImage btnFavoriteImg;
 	btnFavoriteImg.SetWidescreen(CFG.widescreen);
-	GuiButton btnFavorite(&btnFavoriteImg,&btnFavoriteImg, 2, 5, -125, -60, &trigA, &btnSoundOver, &btnClick,1);
+	//GuiButton btnFavorite(&btnFavoriteImg,&btnFavoriteImg, 2, 5, -125, -60, &trigA, &btnSoundOver, &btnClick,1);
+	GuiButton btnFavorite(imgFavorite.GetWidth(), imgFavorite.GetHeight());
+	btnFavorite.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	btnFavorite.SetPosition(-125, -60);
+	btnFavorite.SetImage(&btnFavoriteImg);
+	btnFavorite.SetSoundOver(&btnSoundOver);
+	btnFavorite.SetSoundClick(&btnClick);
+	btnFavorite.SetTrigger(&trigA);
+	btnFavorite.SetEffectGrow();
 	
 	GuiImage btnLeftImg(&imgLeft);
 	if (Settings.wsprompt == yes)

@@ -138,6 +138,7 @@ GuiGameGrid::GuiGameGrid(int w, int h, struct discHdr * l, int gameCnt, const ch
         if (((changed+pagesize)>gameCnt)&&(i>((gameCnt-changed)-1))) {
             game[i]->SetVisible(false);
             game[i]->SetClickable(false);
+			game[i]->RemoveSoundOver();
         }
 	}
 }
@@ -375,10 +376,12 @@ void GuiGameGrid::Update(GuiTrigger * t)
 				game[i]->SetImage(coverImg[i]);
 				game[i]->SetVisible(true);
 				game[i]->SetClickable(true);
+				game[i]->SetSoundOver(btnSoundOver);
 				coverImg[i]->SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_IN, 65);
 				if (((changed+pagesize)>gameCnt)&&(i>((gameCnt-changed)-1))) {
 					game[i]->SetVisible(false);
 					game[i]->SetClickable(false);
+					game[i]->RemoveSoundOver();
 				}
         }
     btnRight->ResetState();
@@ -430,11 +433,13 @@ void GuiGameGrid::Update(GuiTrigger * t)
                 game[i]->ResetState();
                 game[i]->SetVisible(true);
 				game[i]->SetImage(coverImg[i]);
+				game[i]->SetSoundOver(btnSoundOver);
 				game[i]->SetClickable(true);
 				coverImg[i]->SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_IN, 65);
 				if (((changed+pagesize)>gameCnt)&&(i>((gameCnt-changed)-1))) {
 					game[i]->SetVisible(false);
 					game[i]->SetClickable(false);
+					game[i]->RemoveSoundOver();
 				}
 		}
             btnLeft->ResetState();
