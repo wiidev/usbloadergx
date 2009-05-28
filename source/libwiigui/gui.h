@@ -344,7 +344,9 @@ class GuiElement
         //!\param startdegree Degree where to start circling
         //!\param anglespeedset Set the speed of Angle rotating make 1 for same speed as Circlespeed
         //!       or 0.5 for half the speed of the circlingspeed. Turn Anglecircling off by 0 to this param.
-		void SetEffect(int e, int speed, int circles, int r, int startdegree, f32 anglespeedset);
+        //!\param center_x x co-ordinate of the center of circle.
+	//!\param center_y y co-ordinate of the center of circle.
+		void SetEffect(int e, int speed, int circles, int r, int startdegree, f32 anglespeedset, int center_x, int center_y);
 		//!Sets an effect to be enabled on wiimote cursor over
 		//!\param e Effect to enable
 		//!\param a Amount of the effect (usage varies on effect)
@@ -420,6 +422,8 @@ class GuiElement
 		int xmax; //!< Element's max X offset allowed
 		int xoffsetDyn; //!< Element X offset, dynamic (added to xoffset value for animation effects)
 		int yoffsetDyn; //!< Element Y offset, dynamic (added to yoffset value for animation effects)
+		int temp_xoffset; //!< Element Temp X offset
+		int temp_yoffset; //!< Element Temp Y offset
 		f32 degree; //!< Degree where to start for EFFECT_GOROUND enter it in ° like 60°
 		f32 frequency; //!< Speed for EFFECT_GOROUND || can also be negative for other direction
 		int Radius; //!< The radius in which the Element goes round for EFFECT_GOROUND

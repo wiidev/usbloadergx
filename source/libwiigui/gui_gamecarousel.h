@@ -32,6 +32,8 @@ class GuiGameCarousel : public GuiElement
 		int gameCnt;
 
 		int * gameIndex;
+		int * bob;
+
 		GuiButton ** game;
 		GuiText ** gameTxt;
 

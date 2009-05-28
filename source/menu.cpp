@@ -32,6 +32,7 @@
 #include "libwbfs/libwbfs.h"
 #include "sys.h"
 #include "libwiigui/gui_gamegrid.h"
+#include "libwiigui/gui_gamecarousel.h"
 #include "patchcode.h"
 #include "wpad.h"
 #include "cfg.h"

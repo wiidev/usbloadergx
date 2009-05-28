@@ -431,16 +431,18 @@ int GuiElement::GetEffect()
 	return effects;
 }
 
-void GuiElement::SetEffect(int eff, int speed, int circles, int r, int startdegree, f32 anglespeedset) {
+void GuiElement::SetEffect(int eff, int speed, int circles, int r, int startdegree, f32 anglespeedset, int center_x, int center_y) {
 
     if(eff & EFFECT_GOROUND) {
-        xoffsetDyn = 0;             //!position of circle in x
-        yoffsetDyn = 0;             //!position of circle in y
-        Radius = r;                 //!Radius of the circle
-        degree = startdegree*PI/180;//!for example -90 (°) to start at top of circle
-        circleamount = circles;     //!circleamoutn in degrees for example 360 for 1 circle
-        angleDyn = 0.0;             //!this is used by the code to calc the angle
-        anglespeed = anglespeedset; //!This is anglespeed depending on circle speed 1 is same speed and 0.5 half speed
+        xoffsetDyn = 0;              //!position of circle in x
+        yoffsetDyn = 0;              //!position of circle in y
+        Radius = r;                  //!Radius of the circle
+        degree = startdegree*PI/180; //!for example -90 (°) to start at top of circle
+        circleamount = circles;      //!circleamoutn in degrees for example 360 for 1 circle
+        angleDyn = 0.0f;             //!this is used by the code to calc the angle
+        anglespeed = anglespeedset;  //!This is anglespeed depending on circle speed 1 is same speed and 0.5 half speed
+	temp_xoffset = center_x;     //!position of center in x
+	temp_yoffset = center_y;     //!position of center in y
     }
     effects |= eff;
     effectAmount = speed;           //!Circlespeed
@@ -596,41 +598,23 @@ void GuiElement::UpdateEffects()
     if(effects & EFFECT_GOROUND) {
 
         //!< check out gui.h for info
-        if(abs(frequency) < PI*circleamount/180) {
+	xoffset = temp_xoffset;
+	yoffset = temp_yoffset;
 
-        angleDyn = (frequency+degree) * 180/PI * anglespeed;
-        frequency += effectAmount*0.001;
+        if(fabs(frequency) < PI*((f32) circleamount)/180.0f) {
+
+        angleDyn = ((frequency+degree) * 180.0f/PI + 90.0f) * anglespeed;
+        frequency += effectAmount*0.001f;
 
         xoffsetDyn = (int)(Radius*cos(frequency+degree));
         yoffsetDyn = (int)(Radius*sin(frequency+degree));
 
         } else {
-
-            //Angle go back to start value (has to be 0.0001 when near 0 but not 0 so that the if state goes through)
-            //value 0.0001 isnt noticeable that's why i chose it.
-            angleDyn = degree* 180/PI * anglespeed +0.0001;
-            //Reset Angle to 0
-            //angleDyn = 0.0001;
-
-            //fly back to the middle tolerance to 0 is +- 10pixel
-            if(xoffsetDyn < -10)
-            xoffsetDyn += abs(effectAmount)*0.1;
-            else if(xoffsetDyn > 10)
-            xoffsetDyn -= abs(effectAmount)*0.1;
-            else xoffsetDyn = 0;
-
-            if(yoffsetDyn < -10)
-            yoffsetDyn += abs(effectAmount)*0.1;
-            else if(yoffsetDyn > 10)
-            yoffsetDyn -= abs(effectAmount)*0.1;
-            else yoffsetDyn = 0;
-
-            if(xoffsetDyn == 0 && yoffsetDyn == 0) {
-                effects = 0;
-                frequency = 0;
-                Radius = 0;
-            }
-        }
+		effects = 0;
+		frequency = 0;
+		xoffset += xoffsetDyn;
+		yoffset += yoffsetDyn;
+	}
     }
 
     if(effects & EFFECT_ROCK_VERTICLE) {
