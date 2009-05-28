@@ -3153,20 +3153,20 @@ static int MenuDiscList()
 	    VIDEO_WaitVSync ();
 
 	    if(carosselleBtn.GetState() == STATE_CLICKED) {
-            carosselleBtn.SetEffect(EFFECT_GOROUND, 80, 180, 50, -45, 1);
-            countBtn.SetEffect(EFFECT_GOROUND, -80, 180, 50, -45, 1);
-            abcBtn.SetEffect(EFFECT_GOROUND, 80, 180, 50, -45, 1);
-            favoriteBtn.SetEffect(EFFECT_GOROUND, -80, 360, 50, -45, 1);
-            wiiBtn.SetEffect(EFFECT_GOROUND, 80, 180, 150, 180, 1);
-            poweroffBtn.SetEffect(EFFECT_GOROUND, -80, 360, 150, 50, 1);
-            sdcardBtn.SetEffect(EFFECT_GOROUND, 80, 360, 150, 80, 1);
-            poweroffBtn.SetEffect(EFFECT_GOROUND, -80, 360, 60, 180, 1);
-            settingsBtn.SetEffect(EFFECT_GOROUND, 80, 360, 200, 180, 1);
-            homeBtn.SetEffect(EFFECT_GOROUND, 80, 360, 200, 180, 1);
-            installBtn.SetEffect(EFFECT_GOROUND, -80, 360, 60, -90, 1);
-            gridBtn.SetEffect(EFFECT_GOROUND, -80, 360, 50, 0, 1);
-            DownloadBtn.SetEffect(EFFECT_GOROUND, 100, 720, 300, 0, 1);
-            carosselleBtn.ResetState();
+//            carosselleBtn.SetEffect(EFFECT_GOROUND, 80, 180, 50, -45, 1);
+//            countBtn.SetEffect(EFFECT_GOROUND, -80, 180, 50, -45, 1);
+//            abcBtn.SetEffect(EFFECT_GOROUND, 80, 180, 50, -45, 1);
+//            favoriteBtn.SetEffect(EFFECT_GOROUND, -80, 360, 50, -45, 1);
+//            wiiBtn.SetEffect(EFFECT_GOROUND, 80, 180, 150, 180, 1);
+//            poweroffBtn.SetEffect(EFFECT_GOROUND, -80, 360, 150, 50, 1);
+//            sdcardBtn.SetEffect(EFFECT_GOROUND, 80, 360, 150, 80, 1);
+//            poweroffBtn.SetEffect(EFFECT_GOROUND, -80, 360, 60, 180, 1);
+//            settingsBtn.SetEffect(EFFECT_GOROUND, 80, 360, 200, 180, 1);
+//            homeBtn.SetEffect(EFFECT_GOROUND, 80, 360, 200, 180, 1);
+//            installBtn.SetEffect(EFFECT_GOROUND, -80, 360, 60, -90, 1);
+//            gridBtn.SetEffect(EFFECT_GOROUND, -80, 360, 50, 0, 1);
+//            DownloadBtn.SetEffect(EFFECT_GOROUND, 100, 720, 300, 0, 1);
+//            carosselleBtn.ResetState();
 	    }
 
         //CLOCK
