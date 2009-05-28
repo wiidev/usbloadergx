@@ -13,12 +13,12 @@
 static int currentSize = 0;
 static int currentWidescreen = 0;
 static int presetSize = 0;
+static GXColor presetColor = (GXColor){255, 255, 255, 255};
 static int presetMaxWidth = 0;
 static int presetWrapMode = GuiText::WRAP;
+static u16 presetStyle = FTGX_NULL;
 static int presetAlignmentHor = 0;
 static int presetAlignmentVert = 0;
-static u16 presetStyle = 0;
-static GXColor presetColor = (GXColor){255, 255, 255, 255};
 
 /**
  * Constructor for the GuiText class.
@@ -42,7 +42,7 @@ GuiText::GuiText(const char * t, int s, GXColor c)
 	alignmentVert = ALIGN_MIDDLE;
 
 	if(t)
-		text = fontSystem->charToWideChar((char *)t);
+		text = FreeTypeGX::charToWideChar((char *)t);
 }
 
 /**
@@ -67,7 +67,7 @@ GuiText::GuiText(const char * t)
 	alignmentVert = presetAlignmentVert;
 
 	if(t)
-		text = fontSystem->charToWideChar((char *)t);
+		text = FreeTypeGX::charToWideChar((char *)t);
 }
 
 /**
@@ -90,17 +90,18 @@ void GuiText::SetText(const char * t)
 	text = NULL;
 
 	if(t)
-		text = fontSystem->charToWideChar((char *)t);
+		text = FreeTypeGX::charToWideChar((char *)t);
 	scrollPos2 = 0;
 	scrollDelay = 0;
 }
 
-void GuiText::SetPresets(int sz, GXColor c, int w, u16 s, int h, int v)
+void GuiText::SetPresets(int sz, GXColor c, int w, int wrap, u16 s, int h, int v)
 {
 	presetSize = sz;
 	presetColor = c;
-	presetStyle = s;
 	presetMaxWidth = w;
+	presetWrapMode = wrap;
+	presetStyle = s;
 	presetAlignmentHor = h;
 	presetAlignmentVert = v;
 }
@@ -125,16 +126,17 @@ void GuiText::SetColor(GXColor c)
 	alpha = c.a;
 }
 
-void GuiText::SetStyle(u16 s)
+void GuiText::SetStyle(u16 s, u16 m/*=0xffff*/)
 {
 	LOCK(this);
-	style = s;
+	style &= ~m;
+	style |= s & m;
 }
 
 void GuiText::SetAlignment(int hor, int vert)
 {
 	LOCK(this);
-	style = 0;
+	style = FTGX_NULL;
 
 	switch(hor)
 	{
@@ -220,8 +222,8 @@ void GuiText::Draw()
 
 	int voffset = 0;
 
-	if(alignmentVert == ALIGN_MIDDLE)
-		voffset = -newSize/2 + 2;
+//	if(alignmentVert == ALIGN_MIDDLE)
+//		voffset = -newSize/2 + 2;
 
 	if(maxWidth > 0 && (font ? font : fontSystem)->getWidth(text) > maxWidth)
 	{
@@ -312,10 +314,11 @@ void GuiText::Draw()
 		else if(wrapMode == GuiText::SCROLL) // text scroller
 		{
 			wchar_t save;
-
+		
 			if(scrollPos2 == 0 || frameCount > scrollDelay+5)
 			{
 				scrollPos1 = 0;
+				scrollOffset = 0;
 				for(scrollPos2 = wcslen(text); scrollPos2 > 1; scrollPos2--)
 				{
 					save = text[scrollPos2]; // save Pos2
@@ -329,7 +332,14 @@ void GuiText::Draw()
 			}
 			else if(scrollPos2 > 0 && frameCount >= scrollDelay)
 			{
-				scrollPos1++;
+				
+				if(--scrollOffset < 0)
+				{
+					wchar_t tmp[] = { text[scrollPos1], text[scrollPos1+1], 0 };
+					scrollOffset += (font ? font : fontSystem)->getWidth(tmp) - (font ? font : fontSystem)->getWidth(tmp+1);
+					scrollPos1++;
+				}
+				
 				int strlen = wcslen(text);
 				for(; scrollPos2 < strlen; scrollPos2++)
 				{
@@ -337,7 +347,7 @@ void GuiText::Draw()
 					text[scrollPos2+1] = 0;
 					int textWidth = (font ? font : fontSystem)->getWidth(&text[scrollPos1]);
 					text[scrollPos2+1] = save; // restore Pos2
-					if(textWidth > maxWidth)
+					if(textWidth+scrollOffset > maxWidth)
 						break;
 				}
 				if(scrollPos2 == strlen)
@@ -346,20 +356,28 @@ void GuiText::Draw()
 					scrollDelay = frameCount+25; // when dir-change wait 25 Frames
 				}
 				else
-					scrollDelay = frameCount+10; // wait 10 Frames
+					scrollDelay = frameCount+1; // wait 1 Frames
 			}
 			else if(frameCount >= scrollDelay)
 			{
 				scrollPos2 = -scrollPos2;
+				
+				scrollOffset++;
+				wchar_t tmp[] = { text[scrollPos1-1], text[scrollPos1], 0 };
+				int tmpOffset = (font ? font : fontSystem)->getWidth(tmp) - (font ? font : fontSystem)->getWidth(tmp+1);
+				if(scrollOffset >= tmpOffset)
+				{
+					scrollOffset -= tmpOffset;
+					scrollPos1--;
+				}
 
-				scrollPos1--;
 				for(; scrollPos2 > scrollPos1; scrollPos2--)
 				{
 					save = text[scrollPos2]; // save Pos2
 					text[scrollPos2] = 0;
 					int textWidth = (font ? font : fontSystem)->getWidth(&text[scrollPos1]);
 					text[scrollPos2] = save; // restore Pos2
-					if(textWidth <= maxWidth)
+					if(textWidth+scrollOffset <= maxWidth)
 						break;
 				}
 				if(scrollPos1 == 0)
@@ -368,13 +386,28 @@ void GuiText::Draw()
 					scrollDelay = frameCount+25; // when dir-change wait 25 Frames
 				}
 				else
-					scrollDelay = frameCount+10; // wait 10 Frames
+					scrollDelay = frameCount+1; // wait 10 Frames
 
 				scrollPos2 = -scrollPos2;
 			}
+			
+			uint16_t drawStyle = style;
+			uint16_t drawX = this->GetLeft() + scrollOffset;
+			
+			if((drawStyle & FTGX_JUSTIFY_MASK) == FTGX_JUSTIFY_CENTER)
+			{
+				drawStyle = (drawStyle & ~FTGX_JUSTIFY_MASK) | FTGX_JUSTIFY_LEFT;
+				drawX -= maxWidth >> 1;
+			}
+			else if((drawStyle & FTGX_JUSTIFY_MASK) == FTGX_JUSTIFY_RIGHT)
+			{
+				drawStyle = (drawStyle & ~FTGX_JUSTIFY_MASK) | FTGX_JUSTIFY_LEFT;
+				drawX -= maxWidth;
+			}
+			
 			save = text[abs(scrollPos2)]; // save Pos2
 			text[abs(scrollPos2)] = 0;
-			(font ? font : fontSystem)->drawText(this->GetLeft(), this->GetTop()+voffset, &text[scrollPos1], c, style);
+			(font ? font : fontSystem)->drawText(drawX, this->GetTop()+voffset, &text[scrollPos1], c, drawStyle);
 			text[abs(scrollPos2)] = save; // restore Pos2
 		}
 	}
