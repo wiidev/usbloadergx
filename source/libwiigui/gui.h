@@ -751,7 +751,21 @@ class GuiButton : public GuiElement
 		//!\param w Width
 		//!\param h Height
 		GuiButton(int w, int h);
+		//!\param img is the button GuiImage.  it uses the height & width of this image for the button
+		//!\param imgOver is the button's over GuiImage
+		//!\param hor is horizontal alingment of the button
+		//!\param vert is verticle alignment of the button
+		//!\param x is xposition of the button
+		//!\param y is yposition of the button
+		//!\param trig is a GuiTrigger to assign to this button 
+		//!\param sndOver is a GuiSound used for soundOnOver for this button
+		//!\param sndClick is a GuiSound used for clickSound of this button
+		//!\param grow sets effect grow for this button.  1 for yes ;0 for no 
 		GuiButton(GuiImage* img, GuiImage* imgOver, int hor, int vert, int x, int y, GuiTrigger* trig, GuiSound* sndOver, GuiSound* sndClick, u8 grow);
+		//!\param same as all the parameters for the above button plus the following 
+		//!\param tt is a GuiTooltip assigned to this button
+		//!\param ttx and tty are the xPOS and yPOS for this tooltip in relationship to the button
+		//!\param h_align and v_align are horizontal and verticle alignment for the tooltip in relationship to the button
 		GuiButton(GuiImage* img, GuiImage* imgOver, int hor, int vert, int x, int y, GuiTrigger* trig, GuiSound* sndOver, GuiSound* sndClick, u8 grow, GuiTooltip* tt, int ttx, int tty, int h_align, int v_align);
 		//!Destructor
 		~GuiButton();

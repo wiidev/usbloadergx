@@ -3144,7 +3144,8 @@ static int MenuDiscList()
 	listBtnImg_g.SetWidescreen(CFG.widescreen);
 	GuiButton gridBtn(&gridBtnImg_g,&gridBtnImg_g, 2, 3, 116, 15, &trigA, &btnSoundOver, &btnClick,1);
 	gridBtn.SetAlpha(180);
-	if (Settings.gameDisplay==grid)gridBtn.SetImage(&listBtnImg_g);
+	if (Settings.gameDisplay==grid){gridBtn.SetImage(&listBtnImg_g);
+	gridBtn.SetImageOver(&listBtnImg_g);}
 
 	GuiImage carosselleBtnImg(&imgarrangeCarosselle);
 	carosselleBtnImg.SetWidescreen(CFG.widescreen);
@@ -3186,6 +3187,7 @@ static int MenuDiscList()
 			gridBtn.SetPosition(20,13);
 			carosselleBtn.SetPosition(60,13);
 		}
+		
 	}
 	else // List-Mode
 	{
@@ -3584,6 +3586,7 @@ static int MenuDiscList()
             w.Remove(&DownloadBtn);
 
 			gridBtn.SetImage(&listBtnImg_g);
+			gridBtn.SetImageOver(&listBtnImg_g);
 			if(CFG.widescreen)
 			{
 				favoriteBtn.SetPosition(-80,13);
@@ -3619,6 +3622,7 @@ static int MenuDiscList()
 			gameBrowser.Reload(gameList, gameCnt); // initialize before append
 			mainWindow->Append(&gameBrowser);
 			gridBtn.SetImage(&gridBtnImg_g);
+			gridBtn.SetImageOver(&gridBtnImg_g);
 			if(CFG.widescreen)
 			{
 				favoriteBtn.SetPosition(20,15);
