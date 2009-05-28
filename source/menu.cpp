@@ -437,14 +437,10 @@ WindowPrompt(const char *title, const char *msg, const char *btn1Label,
 	btn1Txt.SetWidescreen(CFG.widescreen);
 	btn1Img.SetWidescreen(CFG.widescreen);
 	}
-	GuiButton btn1(btnOutline.GetWidth(), btnOutline.GetHeight());
+	
+	GuiButton btn1(&btn1Img, &btn1Img, 0,3,0,0,&trigA,&btnSoundOver,&btnClick,1);
 	btn1.SetLabel(&btn1Txt);
-	btn1.SetImage(&btn1Img);
-	btn1.SetSoundOver(&btnSoundOver);
-	btn1.SetSoundClick(&btnClick);
-	btn1.SetTrigger(&trigA);
 	btn1.SetState(STATE_SELECTED);
-	btn1.SetEffectGrow();
 
 	GuiText btn2Txt(btn2Label, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	GuiImage btn2Img(&btnOutline);
@@ -452,15 +448,10 @@ WindowPrompt(const char *title, const char *msg, const char *btn1Label,
 	btn2Txt.SetWidescreen(CFG.widescreen);
 	btn2Img.SetWidescreen(CFG.widescreen);
 	}
-	GuiButton btn2(btnOutline.GetWidth(), btnOutline.GetHeight());
+	GuiButton btn2(&btn2Img, &btn2Img, 0,3,0,0,&trigA,&btnSoundOver,&btnClick,1);
 	btn2.SetLabel(&btn2Txt);
-	btn2.SetImage(&btn2Img);
-	btn2.SetSoundOver(&btnSoundOver);
-	btn2.SetSoundClick(&btnClick);
 	if(!btn3Label && !btn4Label)
 	btn2.SetTrigger(&trigB);
-	btn2.SetTrigger(&trigA);
-	btn2.SetEffectGrow();
 
     GuiText btn3Txt(btn3Label, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	GuiImage btn3Img(&btnOutline);
@@ -468,15 +459,10 @@ WindowPrompt(const char *title, const char *msg, const char *btn1Label,
 	btn3Txt.SetWidescreen(CFG.widescreen);
 	btn3Img.SetWidescreen(CFG.widescreen);
 	}
-	GuiButton btn3(btnOutline.GetWidth(), btnOutline.GetHeight());
+	GuiButton btn3(&btn3Img, &btn3Img, 0,3,0,0,&trigA,&btnSoundOver,&btnClick,1);
 	btn3.SetLabel(&btn3Txt);
-	btn3.SetImage(&btn3Img);
-	btn3.SetSoundOver(&btnSoundOver);
-	btn3.SetSoundClick(&btnClick);
 	if(!btn4Label)
 	btn3.SetTrigger(&trigB);
-	btn3.SetTrigger(&trigA);
-	btn3.SetEffectGrow();
 
     GuiText btn4Txt(btn4Label, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	GuiImage btn4Img(&btnOutline);
@@ -484,22 +470,13 @@ WindowPrompt(const char *title, const char *msg, const char *btn1Label,
 	btn4Txt.SetWidescreen(CFG.widescreen);
 	btn4Img.SetWidescreen(CFG.widescreen);
 	}
-	GuiButton btn4(btnOutline.GetWidth(), btnOutline.GetHeight());
+	GuiButton btn4(&btn4Img, &btn4Img, 0,3,0,0,&trigA,&btnSoundOver,&btnClick,1);
 	btn4.SetLabel(&btn4Txt);
-	btn4.SetImage(&btn4Img);
-	btn4.SetSoundOver(&btnSoundOver);
-	btn4.SetSoundClick(&btnClick);
 	if(btn4Label)
 	btn4.SetTrigger(&trigB);
-	btn4.SetTrigger(&trigA);
-	btn4.SetEffectGrow();
 
 	if ((Settings.wsprompt == yes) && (CFG.widescreen)){/////////////adjust buttons for widescreen
 		msgTxt.SetMaxWidth(330);
-//        btn1Txt.SetFontSize(20);
-//		btn2Txt.SetFontSize(20);
-//		btn3Txt.SetFontSize(20);
-//		btn4Txt.SetFontSize(20);
 
 		if(btn2Label && !btn3Label && !btn4Label)
         {
@@ -686,6 +663,7 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 
     int choice = -1;
 	char imgPath[100];
+	u8 HBC=0;
 	GuiWindow promptWindow(640,480);
 	promptWindow.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	promptWindow.SetPosition(0, 0);
@@ -747,6 +725,19 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 	batteryBtn[1]->SetPosition(284, 150);
 	batteryBtn[2]->SetPosition(388, 150);
 	batteryBtn[3]->SetPosition(494, 150);
+	
+	       
+    char * sig = (char *)0x80001804;
+    if(
+        sig[0] == 'S' &&
+        sig[1] == 'T' &&
+        sig[2] == 'U' &&
+        sig[3] == 'B' &&
+        sig[4] == 'H' &&
+        sig[5] == 'A' &&
+        sig[6] == 'X' &&
+        sig[7] == 'X')
+        HBC=1; // Exit to HBC
     #endif
 
     GuiTrigger trigA;
@@ -778,14 +769,8 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 
 	GuiImage btn1Img(&top);
 	GuiImage btn1OverImg(&topOver);
-	GuiButton btn1(top.GetWidth(), top.GetHeight());
-	btn1.SetImage(&btn1Img);
-	btn1.SetImageOver(&btn1OverImg);
-	btn1.SetSoundOver(&btnSoundOver);
-	btn1.SetTrigger(&trigA);
-	btn1.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	GuiButton btn1(&btn1Img,&btn1OverImg, 0, 3, 0, 0, &trigA, &btnSoundOver, &btnClick,0);
 	btn1.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
-    btn1.SetPosition(0, 0);
 
 	GuiText btn2Txt(btn1Label, 28, (GXColor){0, 0, 0, 255});
 	GuiImage btn2Img(&button);
@@ -793,17 +778,11 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 	btn2Txt.SetWidescreen(CFG.widescreen);
 	btn2Img.SetWidescreen(CFG.widescreen);
 	}
-	GuiButton btn2(button.GetWidth(), button.GetHeight());
+	GuiButton btn2(&btn2Img,&btn2Img, 2, 5, -150, 0, &trigA, &btnSoundOver, &btnClick,1);
 	btn2.SetLabel(&btn2Txt);
-	btn2.SetImage(&btn2Img);
-	btn2.SetSoundOver(&btnSoundOver);
-	btn2.SetSoundClick(&btnClick);
-	btn2.SetTrigger(&trigA);
-	btn2.SetEffectGrow();
-	btn2.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-    btn2.SetPosition(-150, 0);
 	btn2.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_IN, 50);
 	btn2.SetRumble(false);
+	if (HBC==1){btn2.SetPosition(-150, 0);}
 
     GuiText btn3Txt(btn2Label, 28, (GXColor){0, 0, 0, 255});
 	GuiImage btn3Img(&button);
@@ -811,29 +790,18 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 	btn3Txt.SetWidescreen(CFG.widescreen);
 	btn3Img.SetWidescreen(CFG.widescreen);
 	}
-	GuiButton btn3(button.GetWidth(), button.GetHeight());
+	GuiButton btn3(&btn3Img,&btn3Img, 2, 5, 150, 0, &trigA, &btnSoundOver, &btnClick,1);
 	btn3.SetLabel(&btn3Txt);
-	btn3.SetImage(&btn3Img);
-	btn3.SetSoundOver(&btnSoundOver);
-	btn3.SetSoundClick(&btnClick);
-	btn3.SetTrigger(&trigA);
-	btn3.SetEffectGrow();
-	btn3.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-    btn3.SetPosition(150, 0);
 	btn3.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_IN, 50);
 	btn3.SetRumble(false);
+	if (HBC==1){btn3.SetPosition(150, 0);}
+	else {btn3.SetPosition(0,0);}
 
 	GuiImage btn4Img(&bottom);
 	GuiImage btn4OverImg(&bottomOver);
-	GuiButton btn4(bottom.GetWidth(), bottom.GetHeight());
-	btn4.SetImage(&btn4Img);
-	btn4.SetImageOver(&btn4OverImg);
-	btn4.SetSoundOver(&btnSoundOver);
-	btn4.SetTrigger(&trigA);
+	GuiButton btn4(&btn4Img,&btn4OverImg, 0, 4, 0, 0, &trigA, &btnSoundOver, &btnClick,0);
 	btn4.SetTrigger(&trigB);
 	btn4.SetTrigger(&trigHome);
-	btn4.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-    btn4.SetPosition(0,0);
 	btn4.SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_IN, 50);
 
 	GuiImage wiimoteImg(&wiimote);
@@ -842,7 +810,7 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 	wiimoteImg.SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_IN, 50);
 	wiimoteImg.SetPosition(50,210);
 
-	promptWindow.Append(&btn2);
+	if (HBC==1){promptWindow.Append(&btn2);}
     promptWindow.Append(&btn3);
     promptWindow.Append(&btn4);
     promptWindow.Append(&btn1);
@@ -1084,7 +1052,6 @@ int GameWindowPrompt()
 	btn1.SetSoundClick(&btnClick);
 	btn1.SetTrigger(&trigA);
 	btn1.SetState(STATE_SELECTED);
-	//btn1.SetEffectGrow(); just commented it out if anybody wants to use it again.
 
 	GuiText btn2Txt(LANGUAGE.Back, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	GuiImage btn2Img(&btnOutline);
@@ -1092,8 +1059,7 @@ int GameWindowPrompt()
 	btn2Txt.SetWidescreen(CFG.widescreen);
 	btn2Img.SetWidescreen(CFG.widescreen);
 	}
-	GuiButton btn2(btnOutline.GetWidth(), btnOutline.GetHeight());
-	//check if unlocked
+	GuiButton btn2(&btn2Img,&btn2Img, 1, 5, 0, 0, &trigA, &btnSoundOver, &btnClick,1);
 	if (CFG.godmode == 1)
 	{
 		btn2.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
@@ -1106,74 +1072,42 @@ int GameWindowPrompt()
 	}
 
 	btn2.SetLabel(&btn2Txt);
-	btn2.SetImage(&btn2Img);
-	btn2.SetSoundOver(&btnSoundOver);
-	btn2.SetSoundClick(&btnClick);
 	btn2.SetTrigger(&trigB);
-	btn2.SetTrigger(&trigA);
-	btn2.SetEffectGrow();
-
+	
 	GuiText btn3Txt(LANGUAGE.settings, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	GuiImage btn3Img(&btnOutline);
 	if (Settings.wsprompt == yes){
 	btn3Txt.SetWidescreen(CFG.widescreen);
 	btn3Img.SetWidescreen(CFG.widescreen);}
-	GuiButton btn3(btnOutline.GetWidth(), btnOutline.GetHeight());
-	btn3.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-	btn3.SetPosition(50, -40);
+	GuiButton btn3(&btn3Img,&btn3Img, 0, 4, 50, -40, &trigA, &btnSoundOver, &btnClick,1);
 	btn3.SetLabel(&btn3Txt);
-	btn3.SetImage(&btn3Img);
-	btn3.SetSoundOver(&btnSoundOver);
-	btn3.SetSoundClick(&btnClick);
-	btn3.SetTrigger(&trigA);
-	btn3.SetEffectGrow();
-
+	
 	GuiImage btnFavoriteImg;
 	btnFavoriteImg.SetWidescreen(CFG.widescreen);
-	GuiButton btnFavorite(imgFavorite.GetWidth(), imgFavorite.GetHeight());
-	btnFavorite.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-	btnFavorite.SetPosition(-125, -60);
-	btnFavorite.SetImage(&btnFavoriteImg);
-	btnFavorite.SetSoundOver(&btnSoundOver);
-	btnFavorite.SetSoundClick(&btnClick);
-	btnFavorite.SetTrigger(&trigA);
-	btnFavorite.SetEffectGrow();
-
+	GuiButton btnFavorite(&btnFavoriteImg,&btnFavoriteImg, 2, 5, -125, -60, &trigA, &btnSoundOver, &btnClick,1);
+	
 	GuiImage btnLeftImg(&imgLeft);
 	if (Settings.wsprompt == yes)
 		{
 			btnLeftImg.SetWidescreen(CFG.widescreen);
 		}
-	GuiButton btnLeft(imgLeft.GetWidth(), imgLeft.GetHeight());
-	btnLeft.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-	btnLeft.SetPosition(20, 0);
-	btnLeft.SetImage(&btnLeftImg);
-	btnLeft.SetSoundOver(&btnSoundOver);
-	btnLeft.SetTrigger(&trigA);
+	GuiButton btnLeft(&btnLeftImg,&btnLeftImg, 0, 5, 20, 0, &trigA, &btnSoundOver, &btnClick,1);
 	btnLeft.SetTrigger(&trigL);
 	btnLeft.SetTrigger(&trigMinus);
-	btnLeft.SetEffectGrow();
-
+	
 	GuiImage btnRightImg(&imgRight);
 	if (Settings.wsprompt == yes)
 		{
 			btnRightImg.SetWidescreen(CFG.widescreen);
 		}
-	GuiButton btnRight(imgRight.GetWidth(), imgRight.GetHeight());
-	btnRight.SetAlignment(ALIGN_RIGHT, ALIGN_MIDDLE);
-	btnRight.SetPosition(-20, 0);
-	btnRight.SetImage(&btnRightImg);
-	btnRight.SetSoundOver(&btnSoundOver);
-	btnRight.SetTrigger(&trigA);
+	GuiButton btnRight(&btnRightImg,&btnRightImg, 1, 5, -20, 0, &trigA, &btnSoundOver, &btnClick,1);
 	btnRight.SetTrigger(&trigR);
 	btnRight.SetTrigger(&trigPlus);
-	btnRight.SetEffectGrow();
-
+	
 	promptWindow.Append(&dialogBoxImg);
 	promptWindow.Append(&nameBtn);
 	promptWindow.Append(&sizeTxt);
 	promptWindow.Append(&playcntTxt);
-//	promptWindow.Append(&btn1); // move down at last apended
 	promptWindow.Append(&btn2);
 	promptWindow.Append(&btnLeft);
 	promptWindow.Append(&btnRight);
@@ -1539,8 +1473,8 @@ DiscWait(const char *title, const char *msg, const char *btn1Label, const char *
 	btn1Txt.SetWidescreen(CFG.widescreen);
 	btn1Img.SetWidescreen(CFG.widescreen);
 	}
-	GuiButton btn1(btnOutline.GetWidth(), btnOutline.GetHeight());
-
+	GuiButton btn1(&btn1Img,&btn1Img, 1, 5, 0, 0, &trigA, &btnSoundOver, &btnClick,1);
+	
 	if(btn2Label)
 	{
 		btn1.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
@@ -1553,30 +1487,18 @@ DiscWait(const char *title, const char *msg, const char *btn1Label, const char *
 	}
 
 	btn1.SetLabel(&btn1Txt);
-	btn1.SetImage(&btn1Img);
-	btn1.SetSoundOver(&btnSoundOver);
-	btn1.SetSoundClick(&btnClick);
 	btn1.SetTrigger(&trigB);
-	btn1.SetTrigger(&trigA);
 	btn1.SetState(STATE_SELECTED);
-	btn1.SetEffectGrow();
-
+	
 	GuiText btn2Txt(btn2Label, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	GuiImage btn2Img(&btnOutline);
 	if (Settings.wsprompt == yes){
 	btn2Txt.SetWidescreen(CFG.widescreen);
 	btn2Img.SetWidescreen(CFG.widescreen);
 	}
-	GuiButton btn2(btnOutline.GetWidth(), btnOutline.GetHeight());
-	btn2.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-	btn2.SetPosition(-20, -25);
+	GuiButton btn2(&btn2Img,&btn2Img, 1, 4, -20, -25, &trigA, &btnSoundOver, &btnClick,1);
 	btn2.SetLabel(&btn2Txt);
-	btn2.SetImage(&btn2Img);
-	btn2.SetSoundOver(&btnSoundOver);
-	btn2.SetSoundClick(&btnClick);
-	btn2.SetTrigger(&trigA);
-	btn2.SetEffectGrow();
-
+	
 	if ((Settings.wsprompt == yes) && (CFG.widescreen)){/////////////adjust buttons for widescreen
 		msgTxt.SetMaxWidth(380);
 		if(btn2Label)
@@ -1757,17 +1679,10 @@ int NetworkInitPromp(int choice2)
 	btn1Txt.SetWidescreen(CFG.widescreen);
 	btn1Img.SetWidescreen(CFG.widescreen);
 	}
-	GuiButton btn1(btnOutline.GetWidth(), btnOutline.GetHeight());
-    btn1.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
-    btn1.SetPosition(0, -45);
+	GuiButton btn1(&btn1Img,&btn1Img, 2, 4, 0, -45, &trigA, &btnSoundOver, &btnClick,1);
 	btn1.SetLabel(&btn1Txt);
-	btn1.SetImage(&btn1Img);
-	btn1.SetSoundOver(&btnSoundOver);
-	btn1.SetSoundClick(&btnClick);
-	btn1.SetTrigger(&trigA);
 	btn1.SetState(STATE_SELECTED);
-	btn1.SetEffectGrow();
-
+	
 	if ((Settings.wsprompt == yes) && (CFG.widescreen)){/////////////adjust buttons for widescreen
 		btn1.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
 		btn1.SetPosition(0, -80);
@@ -1946,7 +1861,6 @@ ProgressWindow(const char *title, const char *msg)
 	snprintf(imgPath, sizeof(imgPath), "%sprogressbar_outline.png", CFG.theme_path);
 	GuiImageData progressbarOutline(imgPath, progressbar_outline_png);
 
-	//GuiImageData progressbarOutline(progressbar_outline_png);
 	GuiImage progressbarOutlineImg(&progressbarOutline);
 	if (Settings.wsprompt == yes){
 	progressbarOutlineImg.SetWidescreen(CFG.widescreen);}
@@ -1955,7 +1869,6 @@ ProgressWindow(const char *title, const char *msg)
 
 	snprintf(imgPath, sizeof(imgPath), "%sprogressbar_empty.png", CFG.theme_path);
 	GuiImageData progressbarEmpty(imgPath, progressbar_empty_png);
-	//GuiImageData progressbarEmpty(progressbar_empty_png);
 	GuiImage progressbarEmptyImg(&progressbarEmpty);
 	progressbarEmptyImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 	progressbarEmptyImg.SetPosition(25, 40);
@@ -1963,8 +1876,7 @@ ProgressWindow(const char *title, const char *msg)
 
 	snprintf(imgPath, sizeof(imgPath), "%sprogressbar.png", CFG.theme_path);
 	GuiImageData progressbar(imgPath, progressbar_png);
-	//GuiImageData progressbar(progressbar_png);
-
+	
 	progressbarImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 	progressbarImg.SetPosition(25, 40);
 
@@ -2108,17 +2020,10 @@ ProgressDownloadWindow(int choice2)
 	if (Settings.wsprompt == yes){
 	btn1Txt.SetWidescreen(CFG.widescreen);
 	btn1Img.SetWidescreen(CFG.widescreen);}
-	GuiButton btn1(btnOutline.GetWidth(), btnOutline.GetHeight());
-    btn1.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
-    btn1.SetPosition(0, -45);
+	GuiButton btn1(&btn1Img,&btn1Img, 2, 4, 0, -45, &trigA, &btnSoundOver, &btnClick,1);
 	btn1.SetLabel(&btn1Txt);
-	btn1.SetImage(&btn1Img);
-	btn1.SetSoundOver(&btnSoundOver);
-	btn1.SetSoundClick(&btnClick);
-	btn1.SetTrigger(&trigA);
 	btn1.SetState(STATE_SELECTED);
-	btn1.SetEffectGrow();
-
+	
 	if ((Settings.wsprompt == yes) && (CFG.widescreen)){/////////////adjust for widescreen
 		progressbarOutlineImg.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 		progressbarOutlineImg.SetPosition(0, 40);
@@ -2326,7 +2231,7 @@ ProgressUpdateWindow()
 	progressbarImg.SetPosition(25, 7);
 
     char title[50];
-    sprintf(title, "%s", "Checking for Updates");
+    sprintf(title, "%s", LANGUAGE.CheckingforUpdates);
 	GuiText titleTxt(title, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	titleTxt.SetPosition(0,50);
@@ -2348,17 +2253,10 @@ ProgressUpdateWindow()
 	if (Settings.wsprompt == yes){
 	btn1Txt.SetWidescreen(CFG.widescreen);
 	btn1Img.SetWidescreen(CFG.widescreen);}
-	GuiButton btn1(btnOutline.GetWidth(), btnOutline.GetHeight());
-    btn1.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
-    btn1.SetPosition(0, -40);
+	GuiButton btn1(&btn1Img,&btn1Img, 2, 4, 0, -40, &trigA, &btnSoundOver, &btnClick,1);
 	btn1.SetLabel(&btn1Txt);
-	btn1.SetImage(&btn1Img);
-	btn1.SetSoundOver(&btnSoundOver);
-	btn1.SetSoundClick(&btnClick);
-	btn1.SetTrigger(&trigA);
 	btn1.SetState(STATE_SELECTED);
-	btn1.SetEffectGrow();
-
+	
 	if ((Settings.wsprompt == yes) && (CFG.widescreen)){/////////////adjust for widescreen
 		progressbarOutlineImg.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 		progressbarOutlineImg.SetPosition(0, 7);
@@ -2465,10 +2363,11 @@ ProgressUpdateWindow()
     }
 
     if(revnumber > currentrev) {
-        sprintf(msg, "Rev%i available.", revnumber);
-        int choice = WindowPrompt(msg, "Do you want to update?", LANGUAGE.Yes, LANGUAGE.No, 0, 0);
+        sprintf(msg, "Rev%i %s.", revnumber, LANGUAGE.available);
+        int choice = WindowPrompt(msg, LANGUAGE.Doyouwanttoupdate, LANGUAGE.Yes, LANGUAGE.No, 0, 0);
         if(choice == 1) {
-            sprintf(title, "%s", "Updating USB Loader GX");
+            //sprintf(title, "%s", "%s USB Loader GX", LANGUAGE.updating);
+            sprintf(title, "%s USB Loader GX", LANGUAGE.updating);
             titleTxt.SetText(title);
             msgTxt.SetPosition(0,100);
             promptWindow.Append(&progressbarEmptyImg);
@@ -2550,7 +2449,7 @@ ProgressUpdateWindow()
         }
 
     } else {
-        WindowPrompt("No new updates", 0, "OK", 0, 0, 0);
+        WindowPrompt(LANGUAGE.Nonewupdates, 0, LANGUAGE.ok, 0, 0, 0);
         ret = -1;
     }
 
@@ -2559,7 +2458,7 @@ ProgressUpdateWindow()
     CloseConnection();
 
     if(!failed && ret >= 0) {
-        WindowPrompt("Successfully updated ", "Restarting the Loader", "OK", 0, 0, 0);
+        WindowPrompt(LANGUAGE.Successfullyupdated , LANGUAGE.Restarting, LANGUAGE.ok, 0, 0, 0);
         if (*((u32*) 0x80001800)) exit(0);
         SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
     }
@@ -2844,35 +2743,18 @@ static int OnScreenKeyboard(char * var, u32 maxlen, int min)
 	okBtnTxt.SetWidescreen(CFG.widescreen);
 	okBtnImg.SetWidescreen(CFG.widescreen);
 	}
-	GuiButton okBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
-
-	okBtn.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-	okBtn.SetPosition(5, 15);
-
+	GuiButton okBtn(&okBtnImg,&okBtnImg, 0, 4, 5, 15, &trigA, &btnSoundOver, &btnClick,1);
 	okBtn.SetLabel(&okBtnTxt);
-	okBtn.SetImage(&okBtnImg);
-	okBtn.SetSoundOver(&btnSoundOver);
-	okBtn.SetSoundClick(&btnClick);
-	okBtn.SetTrigger(&trigA);
-	okBtn.SetEffectGrow();
-
 	GuiText cancelBtnTxt(LANGUAGE.Cancel, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	GuiImage cancelBtnImg(&btnOutline);
 	if (Settings.wsprompt == yes){
 	cancelBtnTxt.SetWidescreen(CFG.widescreen);
 	cancelBtnImg.SetWidescreen(CFG.widescreen);
 	}
-	GuiButton cancelBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
-	cancelBtn.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-	cancelBtn.SetPosition(-5, 15);//(-25, -25);
+	GuiButton cancelBtn(&cancelBtnImg,&cancelBtnImg, 1, 4, -5, 15, &trigA, &btnSoundOver, &btnClick,1);
 	cancelBtn.SetLabel(&cancelBtnTxt);
-	cancelBtn.SetImage(&cancelBtnImg);
-	cancelBtn.SetSoundOver(&btnSoundOver);
-	cancelBtn.SetSoundClick(&btnClick);
-	cancelBtn.SetTrigger(&trigA);
 	cancelBtn.SetTrigger(&trigB);
-	cancelBtn.SetEffectGrow();
-
+	
 	keyboard.Append(&okBtn);
 	keyboard.Append(&cancelBtn);
 
@@ -3184,17 +3066,10 @@ static int MenuDiscList()
 	GuiImage installBtnImgOver(&btnInstallOver);
 	installBtnImg.SetWidescreen(CFG.widescreen);
 	installBtnImgOver.SetWidescreen(CFG.widescreen);
-	GuiButton installBtn(btnInstall.GetWidth(), btnInstall.GetHeight());
-	installBtn.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	installBtn.SetPosition(THEME.install_x, THEME.install_y);
-	installBtn.SetImage(&installBtnImg);
-	installBtn.SetImageOver(&installBtnImgOver);
-	installBtn.SetSoundOver(&btnSoundOver);
-	installBtn.SetSoundClick(&btnClick);
-	installBtn.SetTrigger(&trigA);
-	installBtn.SetEffectGrow();
-	installBtn.SetToolTip(&installBtnTT,24,-30, ALIGN_LEFT);
-
+	
+	GuiButton installBtn(&installBtnImg, &installBtnImgOver, ALIGN_LEFT, ALIGN_TOP, THEME.install_x, THEME.install_y, &trigA, &btnSoundOver, &btnClick, 1, &installBtnTT,24,-30, 0,5);
+	
+	
 	GuiTooltip settingsBtnTT(LANGUAGE.settings);
 	if (Settings.wsprompt == yes)
 		settingsBtnTT.SetWidescreen(CFG.widescreen);
@@ -3203,17 +3078,7 @@ static int MenuDiscList()
 	settingsBtnImg.SetWidescreen(CFG.widescreen);
 	GuiImage settingsBtnImgOver(&btnSettingsOver);
 	settingsBtnImgOver.SetWidescreen(CFG.widescreen);
-	GuiButton settingsBtn(btnSettings.GetWidth(), btnSettings.GetHeight());
-	settingsBtn.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	settingsBtn.SetPosition(THEME.setting_x, THEME.setting_y);
-	settingsBtn.SetImage(&settingsBtnImg);
-	settingsBtn.SetImageOver(&settingsBtnImgOver);
-	settingsBtn.SetSoundOver(&btnSoundOver);
-	settingsBtn.SetSoundClick(&btnClick);
-	settingsBtn.SetTrigger(&trigA);
-	settingsBtn.SetEffectGrow();
-	settingsBtn.SetToolTip(&settingsBtnTT,65,-30);
-
+	GuiButton settingsBtn(&settingsBtnImg,&settingsBtnImgOver, 0, 3, THEME.setting_x, THEME.setting_y, &trigA, &btnSoundOver, &btnClick,1,&settingsBtnTT,65,-30,0,5);
 	GuiTooltip homeBtnTT(LANGUAGE.BacktoHBCorWiiMenu);
 	if (Settings.wsprompt == yes)
 		homeBtnTT.SetWidescreen(CFG.widescreen);
@@ -3222,17 +3087,9 @@ static int MenuDiscList()
 	homeBtnImg.SetWidescreen(CFG.widescreen);
 	GuiImage homeBtnImgOver(&btnhomeOver);
 	homeBtnImgOver.SetWidescreen(CFG.widescreen);
-	GuiButton homeBtn(btnhome.GetWidth(), btnhome.GetHeight());
-	homeBtn.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	homeBtn.SetPosition(THEME.home_x, THEME.home_y);
-	homeBtn.SetImage(&homeBtnImg);
-	homeBtn.SetImageOver(&homeBtnImgOver);
-	homeBtn.SetSoundOver(&btnSoundOver);
-	homeBtn.SetTrigger(&trigA);
+	GuiButton homeBtn(&homeBtnImg,&homeBtnImgOver, 0, 3, THEME.home_x, THEME.home_y, &trigA, &btnSoundOver, &btnClick,1,&homeBtnTT,15,-30,1,5);
 	homeBtn.SetTrigger(&trigHome);
-	homeBtn.SetEffectGrow();
-	homeBtn.SetToolTip(&homeBtnTT,15,-30);
-
+	
 	GuiTooltip poweroffBtnTT(LANGUAGE.PowerofftheWii);
 	if (Settings.wsprompt == yes)
 		poweroffBtnTT.SetWidescreen(CFG.widescreen);
@@ -3241,17 +3098,8 @@ static int MenuDiscList()
 	GuiImage poweroffBtnImgOver(&btnpwroffOver);
 	poweroffBtnImg.SetWidescreen(CFG.widescreen);
 	poweroffBtnImgOver.SetWidescreen(CFG.widescreen);
-	GuiButton poweroffBtn(btnpwroff.GetWidth(), btnpwroff.GetHeight());
-	poweroffBtn.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	poweroffBtn.SetPosition(THEME.power_x, THEME.power_y);
-	poweroffBtn.SetImage(&poweroffBtnImg);
-	poweroffBtn.SetImageOver(&poweroffBtnImgOver);
-	poweroffBtn.SetSoundOver(&btnSoundOver);
-	poweroffBtn.SetSoundClick(&btnClick);
-	poweroffBtn.SetTrigger(&trigA);
-	poweroffBtn.SetEffectGrow();
-	poweroffBtn.SetToolTip(&poweroffBtnTT,-10,-30);
-
+	GuiButton poweroffBtn(&poweroffBtnImg,&poweroffBtnImgOver, 0, 3, THEME.power_x, THEME.power_y, &trigA, &btnSoundOver, &btnClick,1,&poweroffBtnTT,-10,-30,1,5);
+	
 
 	GuiTooltip sdcardBtnTT(LANGUAGE.ReloadSD);
 	if (Settings.wsprompt == yes)
@@ -3259,52 +3107,24 @@ static int MenuDiscList()
 
 	GuiImage sdcardImg(&btnsdcard);
 	sdcardImg.SetWidescreen(CFG.widescreen);
-	GuiButton sdcardBtn(btnsdcard.GetWidth(), btnsdcard.GetHeight());
-	sdcardBtn.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	sdcardBtn.SetPosition(THEME.sdcard_x, THEME.sdcard_y);
-	sdcardBtn.SetImage(&sdcardImg);
-	sdcardBtn.SetSoundOver(&btnSoundOver);
-	sdcardBtn.SetSoundClick(&btnClick);
-	sdcardBtn.SetTrigger(&trigA);
-	sdcardBtn.SetEffectGrow();
-	sdcardBtn.SetToolTip(&sdcardBtnTT,95,-40);
-
+	GuiButton sdcardBtn(&sdcardImg,&sdcardImg, 0, 3, THEME.sdcard_x, THEME.sdcard_y, &trigA, &btnSoundOver, &btnClick,1,&sdcardBtnTT,15,-30,0,5);
+	
 	GuiImage wiiBtnImg(&dataID);
 	wiiBtnImg.SetWidescreen(CFG.widescreen);
-	GuiButton wiiBtn(wiiBtnImg.GetWidth(), wiiBtnImg.GetHeight());
-	wiiBtn.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-	wiiBtn.SetPosition(0,-10);
-	wiiBtn.SetImage(&wiiBtnImg);
-	wiiBtn.SetSoundOver(&btnSoundOver);
-	wiiBtn.SetSoundClick(&btnClick);
-	wiiBtn.SetTrigger(&trigA);
-
+	GuiButton wiiBtn(&wiiBtnImg,&wiiBtnImg, 0, 4, 0, -10, &trigA, &btnSoundOver, &btnClick,0);
+	
 	GuiImage favoriteBtnImg(&imgfavIcon);
 	GuiImage favoriteBtnImg_g(&imgfavIcon_gray);
 	favoriteBtnImg.SetWidescreen(CFG.widescreen);
 	favoriteBtnImg_g.SetWidescreen(CFG.widescreen);
-	GuiButton favoriteBtn(favoriteBtnImg.GetWidth(), favoriteBtnImg.GetHeight());
-	favoriteBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);//(ALIGN_CENTRE, ALIGN_MIDDLE);
-	//Set Pos later favoriteBtn.SetPosition(20, 15);
-	favoriteBtn.SetImage(&favoriteBtnImg_g);
-	favoriteBtn.SetSoundOver(&btnSoundOver);
-	favoriteBtn.SetSoundClick(&btnClick);
-	favoriteBtn.SetTrigger(&trigA);
-	favoriteBtn.SetEffectGrow();
+	GuiButton favoriteBtn(&favoriteBtnImg_g,&favoriteBtnImg_g, 2, 3, 20, 15, &trigA, &btnSoundOver, &btnClick,1);
 	favoriteBtn.SetAlpha(180);
 
 	GuiImage abcBtnImg(&imgabcIcon);
 	abcBtnImg.SetWidescreen(CFG.widescreen);
 	GuiImage abcBtnImg_g(&imgabcIcon_gray);
 	abcBtnImg_g.SetWidescreen(CFG.widescreen);
-	GuiButton abcBtn(abcBtnImg.GetWidth(), abcBtnImg.GetHeight());
-	abcBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);//(ALIGN_CENTRE, ALIGN_MIDDLE);
-	//Set Pos later abcBtn.SetPosition(52, 15);
-	abcBtn.SetImage(&abcBtnImg_g);
-	abcBtn.SetSoundOver(&btnSoundOver);
-	abcBtn.SetSoundClick(&btnClick);
-	abcBtn.SetTrigger(&trigA);
-	abcBtn.SetEffectGrow();
+	GuiButton abcBtn(&abcBtnImg_g,&abcBtnImg_g, 2, 3, 52, 15, &trigA, &btnSoundOver, &btnClick,1);
 	abcBtn.SetAlpha(180);
 
 
@@ -3312,15 +3132,7 @@ static int MenuDiscList()
 	countBtnImg.SetWidescreen(CFG.widescreen);
 	GuiImage countBtnImg_g(&imgplayCountIcon_gray);
 	countBtnImg_g.SetWidescreen(CFG.widescreen);
-	GuiButton countBtn(countBtnImg.GetWidth(), countBtnImg.GetHeight());
-	countBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);//(ALIGN_CENTRE, ALIGN_MIDDLE);
-	//Set Pos later countBtn.SetPosition(84, 15);
-	countBtn.SetImage(&countBtnImg_g);
-	countBtn.SetImage(&countBtnImg_g);
-	countBtn.SetSoundOver(&btnSoundOver);
-	countBtn.SetSoundClick(&btnClick);
-	countBtn.SetTrigger(&trigA);
-	countBtn.SetEffectGrow();
+	GuiButton countBtn(&countBtnImg_g,&countBtnImg_g, 2, 3, 84, 15, &trigA, &btnSoundOver, &btnClick,1);
 	countBtn.SetAlpha(180);
 
 
@@ -3330,14 +3142,7 @@ static int MenuDiscList()
 	GuiImage listBtnImg_g(&imgarrangeList_gray);
 	gridBtnImg_g.SetWidescreen(CFG.widescreen);
 	listBtnImg_g.SetWidescreen(CFG.widescreen);
-	GuiButton gridBtn(gridBtnImg.GetWidth(), gridBtnImg.GetHeight());
-	gridBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);//(ALIGN_CENTRE, ALIGN_MIDDLE);
-	//Set Pos later gridBtn.SetPosition(116, 15);
-	gridBtn.SetImage(&gridBtnImg_g);
-	gridBtn.SetSoundOver(&btnSoundOver);
-	gridBtn.SetSoundClick(&btnClick);
-	gridBtn.SetTrigger(&trigA);
-	gridBtn.SetEffectGrow();
+	GuiButton gridBtn(&gridBtnImg_g,&gridBtnImg_g, 2, 3, 116, 15, &trigA, &btnSoundOver, &btnClick,1);
 	gridBtn.SetAlpha(180);
 	if (Settings.gameDisplay==grid)gridBtn.SetImage(&listBtnImg_g);
 
@@ -3345,14 +3150,7 @@ static int MenuDiscList()
 	carosselleBtnImg.SetWidescreen(CFG.widescreen);
 	GuiImage carosselleBtnImg_g(&imgarrangeCarosselle_gray);
 	carosselleBtnImg_g.SetWidescreen(CFG.widescreen);
-	GuiButton carosselleBtn(carosselleBtnImg.GetWidth(), carosselleBtnImg.GetHeight());
-	carosselleBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);//(ALIGN_CENTRE, ALIGN_MIDDLE);
-	//Set Pos later carosselleBtn.SetPosition(148, 15);
-	carosselleBtn.SetImage(&carosselleBtnImg_g);
-	carosselleBtn.SetSoundOver(&btnSoundOver);
-	carosselleBtn.SetSoundClick(&btnClick);
-	carosselleBtn.SetTrigger(&trigA);
-	carosselleBtn.SetEffectGrow();
+	GuiButton carosselleBtn(&carosselleBtnImg_g,&carosselleBtnImg_g, 2, 3, 148, 15, &trigA, &btnSoundOver, &btnClick,1);
 	carosselleBtn.SetAlpha(180);
 
 	if (Settings.fave)
@@ -4295,31 +4093,14 @@ static int MenuFormat()
 	GuiImage poweroffBtnImgOver(&btnpwroffOver);
 	poweroffBtnImg.SetWidescreen(CFG.widescreen);
 	poweroffBtnImgOver.SetWidescreen(CFG.widescreen);
-	GuiButton poweroffBtn(btnpwroff.GetWidth(), btnpwroff.GetHeight());
-	poweroffBtn.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	poweroffBtn.SetPosition(THEME.power_x, THEME.power_y);
-	poweroffBtn.SetImage(&poweroffBtnImg);
-	poweroffBtn.SetImageOver(&poweroffBtnImgOver);
-	poweroffBtn.SetSoundOver(&btnSoundOver);
-	poweroffBtn.SetSoundClick(&btnClick);
-	poweroffBtn.SetTrigger(&trigA);
-	poweroffBtn.SetEffectGrow();
-
+	GuiButton poweroffBtn(&poweroffBtnImg,&poweroffBtnImgOver, 0, 3, THEME.power_x, THEME.power_y, &trigA, &btnSoundOver, &btnClick,1);
 	GuiImage exitBtnImg(&btnhome);
 	GuiImage exitBtnImgOver(&btnhomeOver);
 	exitBtnImg.SetWidescreen(CFG.widescreen);
 	exitBtnImgOver.SetWidescreen(CFG.widescreen);
-	GuiButton exitBtn(btnhome.GetWidth(), btnhome.GetHeight());
-	exitBtn.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-	exitBtn.SetPosition(0, -10);
-	exitBtn.SetImage(&exitBtnImg);
-	exitBtn.SetImageOver(&exitBtnImgOver);
-	exitBtn.SetSoundOver(&btnSoundOver);
-	exitBtn.SetSoundClick(&btnClick);
-	exitBtn.SetTrigger(&trigA);
+	GuiButton exitBtn(&exitBtnImg,&exitBtnImgOver, 0, 3, 0,-10, &trigA, &btnSoundOver, &btnClick,1);
 	exitBtn.SetTrigger(&trigHome);
-	exitBtn.SetEffectGrow();
-
+	
 	#ifdef HW_RVL
 	int i = 0, level;
 	char txt[3];
@@ -4547,17 +4328,10 @@ static int MenuSettings()
 	if (Settings.wsprompt == yes){
 	backBtnTxt.SetWidescreen(CFG.widescreen);
 	backBtnImg.SetWidescreen(CFG.widescreen);}
-	GuiButton backBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
-	backBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	backBtn.SetPosition(-180, 400);
+	GuiButton backBtn(&backBtnImg,&backBtnImg, 2, 3, -180, 400, &trigA, &btnSoundOver, &btnClick,1);
 	backBtn.SetLabel(&backBtnTxt);
-	backBtn.SetImage(&backBtnImg);
-	backBtn.SetSoundOver(&btnSoundOver);
-	backBtn.SetSoundClick(&btnClick);
-	backBtn.SetTrigger(&trigA);
 	backBtn.SetTrigger(&trigB);
-	backBtn.SetEffectGrow();
-
+	
 	GuiButton homo(1,1);
 	homo.SetTrigger(&trigHome);
 	homo.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
@@ -4603,29 +4377,15 @@ static int MenuSettings()
 	lockBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
 	GuiImage lockBtnImg(&btnOutline);
 	lockBtnImg.SetWidescreen(CFG.widescreen);
-	GuiButton lockBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
-	lockBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	lockBtn.SetPosition(180, 400);
+	GuiButton lockBtn(&lockBtnImg,&lockBtnImg, 2, 3, 180, 400, &trigA, &btnSoundOver, &btnClick,1);
 	lockBtn.SetLabel(&lockBtnTxt);
-	lockBtn.SetImage(&lockBtnImg);
-	lockBtn.SetSoundOver(&btnSoundOver);
-	lockBtn.SetSoundClick(&btnClick);
-	lockBtn.SetTrigger(&trigA);
-	lockBtn.SetEffectGrow();
-
+	
     GuiImage updateBtnImg(&updateRevImgData);
 	updateBtnImg.SetWidescreen(CFG.widescreen);
-	GuiButton updateBtn(updateBtnImg.GetWidth(), updateBtnImg.GetHeight());
-	updateBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	updateBtn.SetPosition(70, 400);
-	updateBtn.SetImage(&updateBtnImg);
-	updateBtn.SetSoundOver(&btnSoundOver);
-	updateBtn.SetSoundClick(&btnClick);
-	updateBtn.SetTrigger(&trigA);
+	GuiButton updateBtn(&updateBtnImg,&updateBtnImg, 2, 3, 70, 400, &trigA, &btnSoundOver, &btnClick,1);
 	updateBtn.SetVisible(false);
 	updateBtn.SetClickable(false);
-	updateBtn.SetEffectGrow();
-
+	
 	GuiImageData logo(credits_button_png);
 	GuiImage logoImg(&logo);
 	GuiImageData logoOver(credits_button_over_png);
@@ -5605,6 +5365,7 @@ int GameSettings(struct discHdr * header)
     sprintf(options3.name[6],"%s", LANGUAGE.Defaultgamesettings);
 
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
+	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, vol);
 
 	char imgPath[100];
 
@@ -5637,49 +5398,31 @@ int GameSettings(struct discHdr * header)
 	if (Settings.wsprompt == yes){
 	saveBtnTxt.SetWidescreen(CFG.widescreen);
 	saveBtnImg.SetWidescreen(CFG.widescreen);}
-	GuiButton saveBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
+	GuiButton saveBtn(&saveBtnImg,&saveBtnImg, 2, 3, -180, 400, &trigA, &btnSoundOver, &btnClick,1);
 	saveBtn.SetScale(0.9);
-	saveBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	saveBtn.SetPosition(-180, 400);
 	saveBtn.SetLabel(&saveBtnTxt);
-	saveBtn.SetImage(&saveBtnImg);
-	saveBtn.SetSoundOver(&btnSoundOver);
-	saveBtn.SetTrigger(&trigA);
-	saveBtn.SetEffectGrow();
-
+	
     GuiText cancelBtnTxt(LANGUAGE.Back, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	cancelBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
 	GuiImage cancelBtnImg(&btnOutline);
 	if (Settings.wsprompt == yes){
 	cancelBtnTxt.SetWidescreen(CFG.widescreen);
 	cancelBtnImg.SetWidescreen(CFG.widescreen);}
-	GuiButton cancelBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
+	GuiButton cancelBtn(&cancelBtnImg,&cancelBtnImg, 2, 3, 180, 400, &trigA, &btnSoundOver, &btnClick,1);
 	cancelBtn.SetScale(0.9);
-	cancelBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	cancelBtn.SetPosition(180, 400);
 	cancelBtn.SetLabel(&cancelBtnTxt);
-	cancelBtn.SetImage(&cancelBtnImg);
-	cancelBtn.SetSoundOver(&btnSoundOver);
-	cancelBtn.SetTrigger(&trigA);
 	cancelBtn.SetTrigger(&trigB);
-	cancelBtn.SetEffectGrow();
-
+	
 	GuiText deleteBtnTxt(LANGUAGE.Uninstall, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	deleteBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
 	GuiImage deleteBtnImg(&btnOutline);
 	if (Settings.wsprompt == yes){
 	deleteBtnTxt.SetWidescreen(CFG.widescreen);
 	deleteBtnImg.SetWidescreen(CFG.widescreen);}
-	GuiButton deleteBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
+	GuiButton deleteBtn(&deleteBtnImg,&deleteBtnImg, 2, 3, 0, 400, &trigA, &btnSoundOver, &btnClick,1);
 	deleteBtn.SetScale(0.9);
-	deleteBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	deleteBtn.SetPosition(0, 400);
 	deleteBtn.SetLabel(&deleteBtnTxt);
-	deleteBtn.SetImage(&deleteBtnImg);
-	deleteBtn.SetSoundOver(&btnSoundOver);
-	deleteBtn.SetTrigger(&trigA);
-	deleteBtn.SetEffectGrow();
-
+	
 	GuiCustomOptionBrowser optionBrowser3(396, 280, &options3, CFG.theme_path, "bg_options_gamesettings.png", bg_options_settings_png, 0, 200);
 	optionBrowser3.SetPosition(0, 90);
 	optionBrowser3.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);

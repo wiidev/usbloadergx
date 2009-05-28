@@ -35,6 +35,7 @@ snprintf(LANGUAGE.all, sizeof(LANGUAGE.all), "Alphabetical");
 snprintf(LANGUAGE.AppLanguage, sizeof(LANGUAGE.AppLanguage), "App Language");
 snprintf(LANGUAGE.t3Covers, sizeof(LANGUAGE.t3Covers), "3D Covers");
 snprintf(LANGUAGE.Areyousure, sizeof(LANGUAGE.Areyousure), "Are you sure?");
+snprintf(LANGUAGE.available, sizeof(LANGUAGE.available), "available");
 snprintf(LANGUAGE.AutoPatch, sizeof(LANGUAGE.AutoPatch), "AutoPatch");
 snprintf(LANGUAGE.Back, sizeof(LANGUAGE.Back), "Back");
 snprintf(LANGUAGE.Backgroundmusic, sizeof(LANGUAGE.Backgroundmusic), "Backgroundmusic");
@@ -47,6 +48,7 @@ snprintf(LANGUAGE.Both, sizeof(LANGUAGE.Both), "Both");
 snprintf(LANGUAGE.Cantcreatedirectory, sizeof(LANGUAGE.Cantcreatedirectory), "Can't create directory");
 snprintf(LANGUAGE.Cancel, sizeof(LANGUAGE.Cancel), "Cancel");
 snprintf(LANGUAGE.Cantbeformated, sizeof(LANGUAGE.Cantbeformated), "Can't be formated");
+snprintf(LANGUAGE.CheckingforUpdates, sizeof(LANGUAGE.CheckingforUpdates), "Checking for Updates");
 snprintf(LANGUAGE.Cantdelete, sizeof(LANGUAGE.Cantdelete), "Can't delete:");
 snprintf(LANGUAGE.ClicktoDownloadCovers, sizeof(LANGUAGE.ClicktoDownloadCovers), "Click to Download Covers");
 snprintf(LANGUAGE.Clock, sizeof(LANGUAGE.Clock), "Clock");
@@ -74,6 +76,7 @@ snprintf(LANGUAGE.Display, sizeof(LANGUAGE.Display), "Display");
 snprintf(LANGUAGE.Doyouwanttoformat, sizeof(LANGUAGE.Doyouwanttoformat), "Do you want to format:");
 snprintf(LANGUAGE.Doyoureallywanttodelete, sizeof(LANGUAGE.Doyoureallywanttodelete), "Do you really want to delete:");
 snprintf(LANGUAGE.Doyouwanttoretryfor30secs, sizeof(LANGUAGE.Doyouwanttoretryfor30secs), "Do you want to retry for 30 secs?");
+snprintf(LANGUAGE.Doyouwanttoupdate, sizeof(LANGUAGE.Doyouwanttoupdate), "Do you want to update");
 snprintf(LANGUAGE.Downloadingfile, sizeof(LANGUAGE.Downloadingfile), "Downloading file");
 snprintf(LANGUAGE.DownloadBoxartimage, sizeof(LANGUAGE.DownloadBoxartimage), "Download Boxart image?");
 snprintf(LANGUAGE.Downloadfinished, sizeof(LANGUAGE.Downloadfinished), "Download finished");
@@ -134,6 +137,7 @@ snprintf(LANGUAGE.Missingfiles, sizeof(LANGUAGE.Missingfiles), "Missing files");
 snprintf(LANGUAGE.Networkiniterror, sizeof(LANGUAGE.Networkiniterror), "Network init error");
 snprintf(LANGUAGE.Neither, sizeof(LANGUAGE.Neither), "Neither");
 snprintf(LANGUAGE.Next, sizeof(LANGUAGE.Next), "Next");
+snprintf(LANGUAGE.Nonewupdates, sizeof(LANGUAGE.Nonewupdates), "No new updates.");
 snprintf(LANGUAGE.No, sizeof(LANGUAGE.No), "No");
 snprintf(LANGUAGE.Nofilemissing, sizeof(LANGUAGE.Nofilemissing), "No file missing!");
 snprintf(LANGUAGE.NoHDDfound, sizeof(LANGUAGE.NoHDDfound), "No HDD found!");
@@ -166,6 +170,7 @@ snprintf(LANGUAGE.PromptsButtons, sizeof(LANGUAGE.PromptsButtons), "Prompts Butt
 snprintf(LANGUAGE.ReloadSD, sizeof(LANGUAGE.ReloadSD), "Reload SD");
 snprintf(LANGUAGE.RenameGameonWBFS, sizeof(LANGUAGE.RenameGameonWBFS), "Rename Game on WBFS");
 snprintf(LANGUAGE.Restart, sizeof(LANGUAGE.Restart), "Restart");
+snprintf(LANGUAGE.Restarting, sizeof(LANGUAGE.Restarting), "Restarting...");
 snprintf(LANGUAGE.Return, sizeof(LANGUAGE.Return), "Return");
 snprintf(LANGUAGE.ReturntoWiiMenu, sizeof(LANGUAGE.ReturntoWiiMenu), "Return to Wii Menu");
 snprintf(LANGUAGE.Right, sizeof(LANGUAGE.Right), "Right");
@@ -187,6 +192,7 @@ snprintf(LANGUAGE.ShutdowntoIdle, sizeof(LANGUAGE.ShutdowntoIdle), "Shutdown to 
 snprintf(LANGUAGE.ShutdownSystem, sizeof(LANGUAGE.ShutdownSystem), "Shutdown System");
 snprintf(LANGUAGE.Success, sizeof(LANGUAGE.Success), "Success:");
 snprintf(LANGUAGE.Successfullyinstalled, sizeof(LANGUAGE.Successfullyinstalled), "Successfully installed:");
+snprintf(LANGUAGE.Successfullyupdated, sizeof(LANGUAGE.Successfullyupdated), "Successfully Updated");
 snprintf(LANGUAGE.Successfullydeleted, sizeof(LANGUAGE.Successfullydeleted), "Successfully deleted:");
 snprintf(LANGUAGE.SuccessfullySaved, sizeof(LANGUAGE.SuccessfullySaved), "Successfully Saved");
 snprintf(LANGUAGE.SystemDefault, sizeof(LANGUAGE.SystemDefault), "System Default");
@@ -199,6 +205,7 @@ snprintf(LANGUAGE.TitlestxtpathChanged, sizeof(LANGUAGE.TitlestxtpathChanged), "
 snprintf(LANGUAGE.Try, sizeof(LANGUAGE.Try), "Try");
 snprintf(LANGUAGE.Tooltips, sizeof(LANGUAGE.Tooltips), "Tooltips");
 snprintf(LANGUAGE.Timeleft, sizeof(LANGUAGE.Timeleft), "Time left:");
+snprintf(LANGUAGE.updating, sizeof(LANGUAGE.updating), "Updating");
 snprintf(LANGUAGE.Unlock, sizeof(LANGUAGE.Unlock), "Unlock");
 snprintf(LANGUAGE.Unicodefix, sizeof(LANGUAGE.Unicodefix), "Unicode Fix");
 snprintf(LANGUAGE.Uninstall, sizeof(LANGUAGE.Uninstall), "Uninstall");
@@ -1043,6 +1050,31 @@ void language_set(char *name, char *val)
 		strcopy(LANGUAGE.Korean, val, sizeof(LANGUAGE.Korean));
 		return;
 	}
+	if (strcmp(name, "Successfullyupdated") == 0) {
+		strcopy(LANGUAGE.Successfullyupdated, val, sizeof(LANGUAGE.Successfullyupdated));
+		return;
+	}
+	if (strcmp(name, "Nonewupdates") == 0) {
+		strcopy(LANGUAGE.Nonewupdates, val, sizeof(LANGUAGE.Nonewupdates));
+		return;
+	}
+	if (strcmp(name, "Restarting") == 0) {
+		strcopy(LANGUAGE.Restarting, val, sizeof(LANGUAGE.Restarting));
+		return;
+	}
+	if (strcmp(name, "available") == 0) {
+		strcopy(LANGUAGE.available, val, sizeof(LANGUAGE.available));
+		return;
+	}
+	if (strcmp(name, "Doyouwanttoupdate") == 0) {
+		strcopy(LANGUAGE.Doyouwanttoupdate, val, sizeof(LANGUAGE.Doyouwanttoupdate));
+		return;
+	}
+	if (strcmp(name, "updating") == 0) {
+		strcopy(LANGUAGE.updating, val, sizeof(LANGUAGE.updating));
+		return;
+	}
+	
 
 }
 

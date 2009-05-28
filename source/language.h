@@ -16,6 +16,7 @@ struct LANGUAGE
 	char addToFavorite[50];
 	char all[30];
 	char AppLanguage[50];
+	char available[20];
 	char Areyousure[50];
 	char AutoPatch[30];
 	char Back[20];
@@ -30,6 +31,7 @@ struct LANGUAGE
 	char Cancel[20];
 	char Cantbeformated[50];
 	char Cantdelete[50];
+	char CheckingforUpdates[40];
 	char ClicktoDownloadCovers[50];
 	char Clock[20];
 	char Close[20];
@@ -56,6 +58,7 @@ struct LANGUAGE
 	char Doyouwanttoformat[50];
 	char Doyoureallywanttodelete[50];
 	char Doyouwanttoretryfor30secs[80];
+	char Doyouwanttoupdate[50];
 	char Downloadingfile[50];
 	char DownloadBoxartimage[50];
 	char Downloadfinished[50];
@@ -125,6 +128,7 @@ struct LANGUAGE
 	char Nopartitionsfound[50];
 	char NoUSBDevice[40];
 	char NoWBFSpartitionfound[50];
+	char Nonewupdates[40];
 	char NormalCovers[40];
 	char Normal[30];
 	char NotaWiiDisc[40];
@@ -151,6 +155,7 @@ struct LANGUAGE
 	char ReloadSD[50];
 	char RenameGameonWBFS[50];
 	char Restart[30];
+	char Restarting[20];
 	char Return[30];
 	char ReturntoWiiMenu[50];
 	char Right[30];
@@ -171,6 +176,7 @@ struct LANGUAGE
 	char ShutdownSystem[50];
 	char Success[30];
 	char Successfullyinstalled[80];
+	char Successfullyupdated[70];
 	char Successfullydeleted[60];
 	char SuccessfullySaved[50];
 	char SystemDefault[50];
@@ -188,6 +194,7 @@ struct LANGUAGE
 	char Uninstall[50];
 	char USBLoaderisprotected[80];
 	char USBDevicenotfound[80];
+	char updating[25];
 	char Updatepath[50];
 	char Updatepathchanged[50];
 	char Updatefailed[40];

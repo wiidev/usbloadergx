@@ -46,6 +46,107 @@ GuiButton::GuiButton(int w, int h)
 	clickable = true;
 }
 
+GuiButton::GuiButton(GuiImage* img, GuiImage* imgOver, int hor, int vert, int x, int y, GuiTrigger* trig, GuiSound* sndOver, GuiSound* sndClick, u8 grow)
+{
+	width = img->GetWidth();
+	height = img->GetHeight();
+	image = img;
+	image->SetParent(this);
+	imageOver = imgOver;
+	imageOver->SetParent(this);
+	imageHold = NULL;
+	imageClick = NULL;
+	icon = NULL;
+	iconOver = NULL;
+	iconHold = NULL;
+	iconClick = NULL;
+	toolTip = NULL;
+	alignmentHor = hor;
+	alignmentVert = vert;
+	xoffset = x;
+	yoffset = y;
+	trigger[0] = trig;
+	
+	//SetAlignment(h_align, v_align);
+	//SetPosition(x,y);
+
+	
+
+	for(int i=0; i < 3; i++)
+	{
+		label[i] = NULL;
+		labelOver[i] = NULL;
+		labelHold[i] = NULL;
+		labelClick[i] = NULL;
+	}
+
+	soundOver = sndOver;
+	soundHold = NULL;
+	soundClick = sndClick;
+	selectable = true;
+	holdable = false;
+	clickable = true;
+	
+	if (grow==1){
+	effectsOver |= EFFECT_SCALE;
+	effectAmountOver = 4;
+	effectTargetOver = 110;
+	}
+}
+
+GuiButton::GuiButton(GuiImage* img, GuiImage* imgOver, int hor, int vert, int x, int y, GuiTrigger* trig, GuiSound* sndOver, GuiSound* sndClick, u8 grow, GuiTooltip* tt, int ttx, int tty, int h_align, int v_align)
+{
+	width = img->GetWidth();
+	height = img->GetHeight();
+	image = img;
+	image->SetParent(this);
+	imageOver = imgOver;
+	imageOver->SetParent(this);
+	imageHold = NULL;
+	imageClick = NULL;
+	icon = NULL;
+	iconOver = NULL;
+	iconHold = NULL;
+	iconClick = NULL;
+	toolTip = NULL;
+	alignmentHor = hor;
+	alignmentVert = vert;
+	xoffset = x;
+	yoffset = y;
+	trigger[0] = trig;
+	
+	//SetAlignment(h_align, v_align);
+	//SetPosition(x,y);
+
+	
+
+	for(int i=0; i < 3; i++)
+	{
+		label[i] = NULL;
+		labelOver[i] = NULL;
+		labelHold[i] = NULL;
+		labelClick[i] = NULL;
+	}
+
+	soundOver = sndOver;
+	soundHold = NULL;
+	soundClick = sndClick;
+	selectable = true;
+	holdable = false;
+	clickable = true;
+	
+	if (grow==1){
+	effectsOver |= EFFECT_SCALE;
+	effectAmountOver = 4;
+	effectTargetOver = 110;
+	}
+	
+	toolTip = tt;
+	toolTip->SetParent(this);
+	toolTip->SetAlignment(h_align, v_align);
+	toolTip->SetPosition(ttx,tty);
+}
+
 /**
  * Destructor for the GuiButton class.
  */

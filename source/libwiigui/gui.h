@@ -751,6 +751,8 @@ class GuiButton : public GuiElement
 		//!\param w Width
 		//!\param h Height
 		GuiButton(int w, int h);
+		GuiButton(GuiImage* img, GuiImage* imgOver, int hor, int vert, int x, int y, GuiTrigger* trig, GuiSound* sndOver, GuiSound* sndClick, u8 grow);
+		GuiButton(GuiImage* img, GuiImage* imgOver, int hor, int vert, int x, int y, GuiTrigger* trig, GuiSound* sndOver, GuiSound* sndClick, u8 grow, GuiTooltip* tt, int ttx, int tty, int h_align, int v_align);
 		//!Destructor
 		~GuiButton();
 		//!Sets the button's image
