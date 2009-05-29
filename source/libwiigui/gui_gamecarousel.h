@@ -24,7 +24,6 @@ class GuiGameCarousel : public GuiElement
 		int listOffset;
 		int scrollbaron;
 		int pagesize;
-		int changed;
 		int firstPic;
 		int speed;
 

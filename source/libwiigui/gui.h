@@ -346,7 +346,7 @@ class GuiElement
         //!       or 0.5 for half the speed of the circlingspeed. Turn Anglecircling off by 0 to this param.
         //!\param center_x x co-ordinate of the center of circle.
 	//!\param center_y y co-ordinate of the center of circle.
-		void SetEffect(int e, int speed, int circles, int r, int startdegree, f32 anglespeedset, int center_x, int center_y);
+		void SetEffect(int e, int speed, f32 circles, int r, f32 startdegree, f32 anglespeedset, int center_x, int center_y);
 		//!Sets an effect to be enabled on wiimote cursor over
 		//!\param e Effect to enable
 		//!\param a Amount of the effect (usage varies on effect)
@@ -359,6 +359,9 @@ class GuiElement
 		//!Gets the current element effects
 		//!\return element effects
 		int GetEffect();
+		//!Gets the current element on over effects
+		//!\return element on over effects
+		int GetEffectOnOver();
 		//!Checks whether the specified coordinates are within the element's boundaries
 		//!\param x X coordinate
 		//!\param y Y coordinate
@@ -427,7 +430,8 @@ class GuiElement
 		f32 degree; //!< Degree where to start for EFFECT_GOROUND enter it in ° like 60°
 		f32 frequency; //!< Speed for EFFECT_GOROUND || can also be negative for other direction
 		int Radius; //!< The radius in which the Element goes round for EFFECT_GOROUND
-		int circleamount; //!< Circleamount for the EFFECT_GOROUND effect
+		f32 circleamount; //!< Circleamount for the EFFECT_GOROUND effect
+		f32 xoffsetDynFloat; //!< Integer sucks float is need by some parts
 		f32 yoffsetDynFloat; //!< Integer sucks float is need by some parts
 		int changervar; //!< Changervariable for some stuff
 		int alpha; //!< Element alpha value (0-255)

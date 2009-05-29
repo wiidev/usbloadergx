@@ -53,13 +53,13 @@ GuiElement::GuiElement()
 	effectsOver = 0;
 	effectAmountOver = 0;
 	effectTargetOver = 0;
-	frequency = 0.0;
+	frequency = 0.0f;
 	changervar = 0;
-    degree = -90*PI/180;
-    circleamount = 360;
-    Radius = 150;
-    angleDyn = 0.0;
-    anglespeed = 0.0;
+	degree = -90.0f;
+	circleamount = 360.0f;
+	Radius = 150;
+	angleDyn = 0.0f;
+	anglespeed = 0.0f;
 
 	// default alignment - align to top left
 	alignmentVert = ALIGN_TOP;
@@ -431,18 +431,24 @@ int GuiElement::GetEffect()
 	return effects;
 }
 
-void GuiElement::SetEffect(int eff, int speed, int circles, int r, int startdegree, f32 anglespeedset, int center_x, int center_y) {
+int GuiElement::GetEffectOnOver()
+{
+	LOCK(this);
+	return effectsOver;
+}
+
+void GuiElement::SetEffect(int eff, int speed, f32 circles, int r, f32 startdegree, f32 anglespeedset, int center_x, int center_y) {
 
     if(eff & EFFECT_GOROUND) {
-        xoffsetDyn = 0;              //!position of circle in x
-        yoffsetDyn = 0;              //!position of circle in y
-        Radius = r;                  //!Radius of the circle
-        degree = startdegree*PI/180; //!for example -90 (°) to start at top of circle
-        circleamount = circles;      //!circleamoutn in degrees for example 360 for 1 circle
-        angleDyn = 0.0f;             //!this is used by the code to calc the angle
-        anglespeed = anglespeedset;  //!This is anglespeed depending on circle speed 1 is same speed and 0.5 half speed
-	temp_xoffset = center_x;     //!position of center in x
-	temp_yoffset = center_y;     //!position of center in y
+        xoffsetDyn = 0;             //!position of circle in x
+        yoffsetDyn = 0;             //!position of circle in y
+        Radius = r;                 //!radius of the circle
+        degree = startdegree;       //!for example -90 (°) to start at top of circle
+        circleamount = circles;     //!circleamoutn in degrees for example 360 for 1 circle
+        angleDyn = 0.0f;            //!this is used by the code to calc the angle
+        anglespeed = anglespeedset; //!This is anglespeed depending on circle speed 1 is same speed and 0.5 half speed
+	temp_xoffset = center_x;    //!position of center in x
+	temp_yoffset = center_y;    //!position of center in y
     }
     effects |= eff;
     effectAmount = speed;           //!Circlespeed
@@ -498,7 +504,7 @@ void GuiElement::SetEffectGrow()
 
 void GuiElement::StopEffect()
 {
-    xoffsetDyn = 0;
+	xoffsetDyn = 0;
 	yoffsetDyn = 0;
 	effects = 0;
 	effectsOver = 0;
@@ -507,10 +513,10 @@ void GuiElement::StopEffect()
 	effectTarget = 0;
 	effectTargetOver = 0;
 	scaleDyn = 1;
-	frequency = 0;
+	frequency = 0.0f;
 	changervar = 0;
-	angleDyn = 0;
-	anglespeed = 0.0;
+	//angleDyn = 0.0f;
+	anglespeed = 0.0f;
 }
 
 void GuiElement::UpdateEffects()
@@ -596,24 +602,23 @@ void GuiElement::UpdateEffects()
 	}
 
     if(effects & EFFECT_GOROUND) {
-
         //!< check out gui.h for info
 	xoffset = temp_xoffset;
 	yoffset = temp_yoffset;
-
-        if(fabs(frequency) < PI*((f32) circleamount)/180.0f) {
-
-        angleDyn = ((frequency+degree) * 180.0f/PI + 90.0f) * anglespeed;
-        frequency += effectAmount*0.001f;
-
-        xoffsetDyn = (int)(Radius*cos(frequency+degree));
-        yoffsetDyn = (int)(Radius*sin(frequency+degree));
-
+        if(fabs(frequency) < circleamount) {
+        	angleDyn = (frequency+degree+90.0f) * anglespeed;
+        	xoffsetDyn = (int) lround(((f32) Radius)*cos((frequency+degree)*PI/180.0f));
+        	yoffsetDyn = (int) lround(((f32) Radius)*sin((frequency+degree)*PI/180.0f));
+		frequency += ((f32) effectAmount)*0.01f;
         } else {
-		effects = 0;
-		frequency = 0;
+		f32 temp_frequency = ((effectAmount<0)?-1.0f:1.0f)*circleamount;
+		angleDyn = (temp_frequency+degree+90.0f) * anglespeed;
+		xoffsetDyn = (int) lround(((f32) Radius)*cos((temp_frequency+degree)*PI/180.0f));
+		yoffsetDyn = (int) lround(((f32) Radius)*sin((temp_frequency+degree)*PI/180.0f));
 		xoffset += xoffsetDyn;
 		yoffset += yoffsetDyn;
+		effects ^= EFFECT_GOROUND;
+		frequency = 0.0f;
 	}
     }
 

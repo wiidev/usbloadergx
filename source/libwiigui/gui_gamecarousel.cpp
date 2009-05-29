@@ -14,9 +14,16 @@
 #include "../cfg.h"
 
 #include <string.h>
+#include <math.h>
 #include <sstream>
 
-#define GAMESELECTSIZE      30
+#define SCALE		0.8f
+#define DEG_OFFSET	7
+#define RADIUS		780
+#define IN_SPEED	175
+#define SHIFT_SPEED	100
+#define PAGESIZE	9
+
 extern const int vol;
 
 /**
@@ -28,14 +35,12 @@ GuiGameCarousel::GuiGameCarousel(int w, int h, struct discHdr * l, int gameCnt, 
 	height = h;
 	this->gameCnt = gameCnt;
 	gameList = l;
-	pagesize = 7;
-	changed = 0;
-	selectable = true;
+	pagesize = (gameCnt < PAGESIZE) ? gameCnt : PAGESIZE;
 	listOffset = (offset == 0) ? this->FindMenuItem(-1, 1) : offset;
+	selectable = true;
 	selectedItem = selected - offset;
 	focus = 1;					 // allow focus
 	firstPic = 0;
-	speed = 50000;
 	char imgPath[100];
 
 	trigA = new GuiTrigger;
@@ -58,10 +63,12 @@ GuiGameCarousel::GuiGameCarousel(int w, int h, struct discHdr * l, int gameCnt, 
 	snprintf(imgPath, sizeof(imgPath), "%sstartgame_arrow_right.png", CFG.theme_path);
 	imgRight = new GuiImageData(imgPath, startgame_arrow_right_png);
 
+	int btnHeight = (int) lround(sqrt(RADIUS*RADIUS - 90000)-RADIUS-50);
+
 	btnLeftImg = new GuiImage(imgLeft);
 	btnLeft = new GuiButton(imgLeft->GetWidth(), imgLeft->GetHeight());
 	btnLeft->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-	btnLeft->SetPosition(20, -100);
+	btnLeft->SetPosition(20, btnHeight);
 	btnLeft->SetParent(this);
 	btnLeft->SetImage(btnLeftImg);
 	btnLeft->SetSoundOver(btnSoundOver);
@@ -74,7 +81,7 @@ GuiGameCarousel::GuiGameCarousel(int w, int h, struct discHdr * l, int gameCnt, 
 	btnRight = new GuiButton(imgRight->GetWidth(), imgRight->GetHeight());
 	btnRight->SetParent(this);
 	btnRight->SetAlignment(ALIGN_RIGHT, ALIGN_MIDDLE);
-	btnRight->SetPosition(-20, -100);
+	btnRight->SetPosition(-20, btnHeight);
 	btnRight->SetImage(btnRightImg);
 	btnRight->SetSoundOver(btnSoundOver);
 	btnRight->SetTrigger(trigA);
@@ -86,9 +93,9 @@ GuiGameCarousel::GuiGameCarousel(int w, int h, struct discHdr * l, int gameCnt, 
 	game = new GuiButton * [pagesize];
 	coverImg = new GuiImage * [pagesize];
 	cover = new GuiImageData * [pagesize];
-	bob = new int[7];
+	bob = new int[pagesize];
 
-	for(int i=0; i<7; i++) {
+	for(int i=0; i<pagesize; i++) {
 		bob[i]=i;
 	}
 
@@ -96,7 +103,7 @@ GuiGameCarousel::GuiGameCarousel(int w, int h, struct discHdr * l, int gameCnt, 
 	char IDfull[7];
 	for(int i=0; i < pagesize; i++) {
 
-		struct discHdr *header = &gameList[i];
+		struct discHdr *header = &gameList[(listOffset+i)%gameCnt];
 		snprintf (ID,sizeof(ID),"%c%c%c", header->id[0], header->id[1], header->id[2]);
 		snprintf (IDfull,sizeof(IDfull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
 
@@ -117,7 +124,7 @@ GuiGameCarousel::GuiGameCarousel(int w, int h, struct discHdr * l, int gameCnt, 
 		}
 
 		coverImg[i] = new GuiImage(cover[i]);
-		coverImg[i]->SetScale(0.8);
+		coverImg[i]->SetScale(SCALE);
 		coverImg[i]->SetWidescreen(CFG.widescreen);
 		game[i] = new GuiButton(122,244);
 		game[i]->SetParent(this);
@@ -127,7 +134,7 @@ GuiGameCarousel::GuiGameCarousel(int w, int h, struct discHdr * l, int gameCnt, 
 		game[i]->SetRumble(false);
 		game[i]->SetTrigger(trigA);
 		game[i]->SetSoundClick(btnSoundClick);
-		game[i]->SetEffect(EFFECT_GOROUND, -50, 49, 780, 298+7*i, 1, 0, 740);
+		game[i]->SetEffect(EFFECT_GOROUND, IN_SPEED,  90-(pagesize-2*i-1)*DEG_OFFSET/2, RADIUS, 180, 1, 0, RADIUS);
 	}
 }
 
@@ -170,7 +177,7 @@ void GuiGameCarousel::SetFocus(int f)
 		game[i]->ResetState();
 
 	if(f == 1)
-		game[selectedItem]->SetState(STATE_SELECTED);
+		game[bob[selectedItem]]->SetState(STATE_SELECTED);
 }
 
 
@@ -190,7 +197,7 @@ void GuiGameCarousel::ResetState()
 
 int GuiGameCarousel::GetOffset()
 {
-	return changed;
+	return listOffset;
 }
 
 
@@ -198,9 +205,9 @@ int GuiGameCarousel::GetClickedOption()
 {
 	int found = -1;
 	for(int i=0; i<pagesize; i++) {
-		if(game[i]->GetState() == STATE_CLICKED) {
-			game[i]->SetState(STATE_SELECTED);
-			found = changed+i;
+		if(game[bob[i]]->GetState() == STATE_CLICKED) {
+			game[bob[i]]->SetState(STATE_SELECTED);
+			found = listOffset+i;
 			break;
 		}
 	}
@@ -212,9 +219,9 @@ int GuiGameCarousel::GetSelectedOption()
 {
 	int found = -1;
 	for(int i=0; i<pagesize; i++) {
-		if(game[i]->GetState() == STATE_SELECTED) {
-			game[i]->SetState(STATE_SELECTED);
-			found = changed+i;
+		if(game[bob[i]]->GetState() == STATE_SELECTED) {
+			game[bob[i]]->SetState(STATE_SELECTED);
+			found = listOffset+i;
 			break;
 		}
 	}
@@ -233,7 +240,10 @@ int GuiGameCarousel::FindMenuItem(int currentItem, int direction)
 	int nextItem = currentItem + direction;
 
 	if(nextItem < 0 || nextItem >= gameCnt)
-		return -1;
+		if(gameCnt <= pagesize)
+			return -1;
+		else
+			nextItem = (nextItem < 0) ? nextItem + gameCnt : nextItem - gameCnt;
 
 	if(strlen(get_title(&gameList[nextItem])) > 0)
 		return nextItem;
@@ -260,8 +270,11 @@ void GuiGameCarousel::Draw()
 		} else break;
 	}
 
-	btnRight->Draw();
-	btnLeft->Draw();
+	if(gameCnt > pagesize) {
+		btnRight->Draw();
+		btnLeft->Draw();
+	}
+
 	this->UpdateEffects();
 }
 
@@ -272,8 +285,8 @@ void GuiGameCarousel::Update(GuiTrigger * t)
 	if(state == STATE_DISABLED || !t)
 		return;
 
-	if(game[0]->GetEffect() == 0) {
-		for(int i=0; i<7; i++) {
+	if(!(game[0]->GetEffect() || game[0]->GetEffectOnOver())) {
+		for(int i=0; i<pagesize; i++) {
 			game[i]->SetEffectGrow();
 		}
 	}
@@ -289,89 +302,112 @@ void GuiGameCarousel::Update(GuiTrigger * t)
 
 	for(int i=0; i<pagesize; i++) {
 		if(next >= 0) {
-			if(game[i]->GetState() == STATE_DISABLED) {
-				game[i]->SetVisible(true);
-				game[i]->SetState(STATE_DEFAULT);
+			if(game[bob[i]]->GetState() == STATE_DISABLED) {
+				game[bob[i]]->SetVisible(true);
+				game[bob[i]]->SetState(STATE_DEFAULT);
 			}
 			gameIndex[i] = next;
 			next = this->FindMenuItem(next, 1);
 		} else {
-			game[i]->SetVisible(false);
-			game[i]->SetState(STATE_DISABLED);
+			game[bob[i]]->SetVisible(false);
+			game[bob[i]]->SetState(STATE_DISABLED);
 		}
 
 		if(focus) {
-			if(i != selectedItem && game[i]->GetState() == STATE_SELECTED)
-				game[i]->ResetState();
-			else if(i == selectedItem && game[i]->GetState() == STATE_DEFAULT);
-				game[selectedItem]->SetState(STATE_SELECTED, t->chan);
+			if(i != selectedItem && game[bob[i]]->GetState() == STATE_SELECTED)
+				game[bob[i]]->ResetState();
+			else if(i == selectedItem && game[bob[i]]->GetState() == STATE_DEFAULT);
+				game[bob[selectedItem]]->SetState(STATE_SELECTED, t->chan);
 		}
-		game[i]->Update(t);
+		game[bob[i]]->Update(t);
 
-		if(game[i]->GetState() == STATE_SELECTED) {
+		if(game[bob[i]]->GetState() == STATE_SELECTED) {
 			selectedItem = i;
 		}
 	}
 
 	// navigation
-	if(!focus)
+	if(!focus || game[0]->GetEffect() || gameCnt <= pagesize)
 		return; // skip navigation
 
 	if (t->Left()  || btnLeft->GetState() == STATE_CLICKED) {
-		changed++;
-		if (changed > (gameCnt-1))
-			changed=0;
+		WPAD_ScanPads();
+		u16 buttons = 0;
+		for(int i=0; i<4; i++)
+			buttons |= WPAD_ButtonsHeld(i);
+		if(!((buttons & WPAD_BUTTON_A) || (buttons & WPAD_BUTTON_MINUS) || t->Left())) {
+			btnLeft->ResetState();
+			return;
+		}
+
+		for(int i=0; i<pagesize; i++) {
+			game[i]->StopEffect();
+		}
+		listOffset++;
+		if (listOffset > (gameCnt-1))
+			listOffset=0;
 		firstPic++;
-		if (firstPic>6)
+		if (firstPic > (pagesize-1))
 			firstPic=0;
 		
-		for (int i=0; i<7; i++) {
-			bob[i] = (firstPic+i < 7) ? firstPic+i : firstPic+i-7;
+		for (int i=0; i<pagesize; i++) {
+			bob[i] = (firstPic+i)%pagesize;
 		}
 
-		int index = (changed+7 < gameCnt) ? changed+7 : changed+7-gameCnt;
-		struct discHdr *header = &gameList[index];
+		struct discHdr *header = &gameList[(listOffset + pagesize-1) % gameCnt];
 		snprintf (ID,sizeof(ID),"%c%c%c", header->id[0], header->id[1], header->id[2]);
 		snprintf (IDfull,sizeof(IDfull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
-		delete cover[bob[6]];
+		delete cover[bob[pagesize-1]];
 		snprintf(imgPath, sizeof(imgPath), "%s%s.png", CFG.covers_path, IDfull); //Load full id image
-		cover[bob[6]] = new GuiImageData(imgPath,0);
-		if (!cover[bob[6]]->GetImage()) {
-			delete cover[bob[6]];
+		cover[bob[pagesize-1]] = new GuiImageData(imgPath,0);
+		if (!cover[bob[pagesize-1]]->GetImage()) {
+			delete cover[bob[pagesize-1]];
 			snprintf(imgPath, sizeof(imgPath), "%s%s.png", CFG.covers_path, ID); //Load short id image
-			cover[bob[6]] = new GuiImageData(imgPath, 0);
-			if (!cover[bob[6]]->GetImage()) {
-				delete cover[bob[6]];
+			cover[bob[pagesize-1]] = new GuiImageData(imgPath, 0);
+			if (!cover[bob[pagesize-1]]->GetImage()) {
+				delete cover[bob[pagesize-1]];
 				snprintf(imgPath, sizeof(imgPath), "%snoimage.png", CFG.covers_path); //Load no image
-				cover[bob[6]] = new GuiImageData(imgPath, nocover_png);
+				cover[bob[pagesize-1]] = new GuiImageData(imgPath, nocover_png);
 			}
 		}
-		delete coverImg[bob[6]];
-		coverImg[bob[6]] = new GuiImage(cover[bob[6]]);
-		coverImg[bob[6]]->SetScale(0.8);
-		coverImg[bob[6]]->SetWidescreen(CFG.widescreen);
-		game[bob[6]]->SetImage(coverImg[bob[6]]);
+		delete coverImg[bob[pagesize-1]];
+		coverImg[bob[pagesize-1]] = new GuiImage(cover[bob[pagesize-1]]);
+		coverImg[bob[pagesize-1]]->SetScale(SCALE);
+		coverImg[bob[pagesize-1]]->SetWidescreen(CFG.widescreen);
+		game[bob[pagesize-1]]->SetImage(coverImg[bob[pagesize-1]]);
+		game[bob[pagesize-1]]->SetPosition(0, RADIUS);
 
-		for (int i=0; i<7; i++) {
-			game[bob[i]]->SetEffect(EFFECT_GOROUND, -50, 7, 780, 256+7*i, 1, 0, 740);
+		for (int i=0; i<pagesize; i++) {
+			//game[bob[i]]->SetEffect(EFFECT_GOROUND, -125, 7, 780, 256+7*i, 1, 0, 740);
+			game[bob[i]]->SetEffect(EFFECT_GOROUND, -SHIFT_SPEED, DEG_OFFSET, RADIUS, 270-(pagesize-2*i-3)*DEG_OFFSET/2, 1, 0, RADIUS);
 		}
-
-		btnLeft->ResetState();
 	}
 
 	else if(t->Right()  || btnRight->GetState() == STATE_CLICKED) {
-		changed--;
-		if (changed<0)
-			changed=(gameCnt-1);		
-		firstPic--;
-		if (firstPic<0)
-			firstPic=6;
-
-		for(int i=0; i<7; i++) {
-			bob[i] = (firstPic+i < 7) ? firstPic+i : firstPic+i-7;
+		WPAD_ScanPads();
+		u16 buttons = 0;
+		for(int i=0; i<4; i++)
+			buttons |= WPAD_ButtonsHeld(i);
+		if(!((buttons & WPAD_BUTTON_A) || (buttons & WPAD_BUTTON_PLUS) || t->Right())) {
+			btnRight->ResetState();
+			return;
 		}
 
-		struct discHdr *header = &gameList[changed];
+		for(int i=0; i<pagesize; i++) {
+			game[i]->StopEffect();
+		}
+		listOffset--;
+		if (listOffset<0)
+			listOffset=(gameCnt-1);		
+		firstPic--;
+		if (firstPic<0)
+			firstPic=(pagesize-1);
+
+		for(int i=0; i<pagesize; i++) {
+			bob[i] = (firstPic+i)%pagesize;
+		}
+
+		struct discHdr *header = &gameList[listOffset];
 		snprintf (ID,sizeof(ID),"%c%c%c", header->id[0], header->id[1], header->id[2]);
 		snprintf (IDfull,sizeof(IDfull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
 		delete cover[bob[0]];
@@ -389,15 +425,15 @@ void GuiGameCarousel::Update(GuiTrigger * t)
 		}
 		delete coverImg[bob[0]];
 		coverImg[bob[0]] = new GuiImage(cover[bob[0]]);
-		coverImg[bob[0]]->SetScale(0.8);
+		coverImg[bob[0]]->SetScale(SCALE);
 		coverImg[bob[0]]->SetWidescreen(CFG.widescreen);
 		game[bob[0]]->SetImage(coverImg[bob[0]]);
+		game[bob[0]]->SetPosition(0, RADIUS);
 
-		for(int i=0; i<7; i++) {
-			game[bob[i]]->SetEffect(EFFECT_GOROUND, 50, 7, 780, 242+7*i, 1, 0, 740);
+		for(int i=0; i<pagesize; i++) {
+			//game[bob[i]]->SetEffect(EFFECT_GOROUND, 125, 7, 780, 242+7*i, 1, 0, 740);
+			game[bob[i]]->SetEffect(EFFECT_GOROUND, SHIFT_SPEED, DEG_OFFSET, RADIUS, 270-(pagesize-2*i+1)*DEG_OFFSET/2, 1, 0, RADIUS);
 		}
-		
-		btnRight->ResetState();
 	}
 
 	if(updateCB)
@@ -408,23 +444,24 @@ void GuiGameCarousel::Update(GuiTrigger * t)
 void GuiGameCarousel::Reload(struct discHdr * l, int count)
 {
 	LOCK(this);
-	gameList = l;
 	gameCnt = count;
-	changed=0;
-	selectedItem = 0;
-	listOffset = 0;
+	gameList = l;
+	pagesize = (gameCnt < PAGESIZE) ? gameCnt : PAGESIZE;
+	listOffset = this->FindMenuItem(-1, 1);
+	selectedItem = 0 + listOffset;
+	focus = 1;
 	firstPic = 0;
+	char imgPath[100];
 
-	for(int i=0; i<7; i++) {
+	for(int i=0; i<pagesize; i++) {
 		bob[i]=i;
 	}
 
 	char ID[4];
 	char IDfull[7];
-	char imgPath[100];
 	for(int i=0; i < pagesize; i++) {
 
-		struct discHdr *header = &gameList[i];
+		struct discHdr *header = &gameList[(listOffset+i)%gameCnt];
 		snprintf (ID,sizeof(ID),"%c%c%c", header->id[0], header->id[1], header->id[2]);
 		snprintf (IDfull,sizeof(IDfull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
 
@@ -445,7 +482,7 @@ void GuiGameCarousel::Reload(struct discHdr * l, int count)
 		}
 
 		coverImg[i] = new GuiImage(cover[i]);
-		coverImg[i]->SetScale(0.8);
+		coverImg[i]->SetScale(SCALE);
 		coverImg[i]->SetWidescreen(CFG.widescreen);
 		game[i] = new GuiButton(122,244);
 		game[i]->SetParent(this);
@@ -455,6 +492,7 @@ void GuiGameCarousel::Reload(struct discHdr * l, int count)
 		game[i]->SetRumble(false);
 		game[i]->SetTrigger(trigA);
 		game[i]->SetSoundClick(btnSoundClick);
-		game[i]->SetEffect(EFFECT_GOROUND, -50, 49, 780, 305+7*i, 1, 0, 740);
+		game[i]->SetEffect(EFFECT_GOROUND, IN_SPEED,  180-(pagesize-2*i-1)*DEG_OFFSET/2, RADIUS, 180, 1, 0, RADIUS);
 	}
 }
+
