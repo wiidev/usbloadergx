@@ -215,7 +215,7 @@ static void WindowCredits(void * ptr)
 	snprintf(SvnRev, 10, "Rev%s", SVN_REV);
 
 	txt[i] = new GuiText(SvnRev, 18, (GXColor){255, 255, 255, 255});
-	txt[i]->SetAlignment(ALIGN_RIGHT, ALIGN_TOP); txt[i]->SetPosition(0,y); i++; y+=34;
+	txt[i]->SetAlignment(ALIGN_RIGHT, ALIGN_TOP); txt[i]->SetPosition(-30,y); i++; y+=34;
 
 	txt[i] = new GuiText("USB Loader GX", 24, (GXColor){255, 255, 255, 255});
 	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(0,y); i++; y+=26;
@@ -434,7 +434,7 @@ WindowPrompt(const char *title, const char *msg, const char *btn1Label,
 	btn1Txt.SetWidescreen(CFG.widescreen);
 	btn1Img.SetWidescreen(CFG.widescreen);
 	}
-	
+
 	GuiButton btn1(&btn1Img, &btn1Img, 0,3,0,0,&trigA,&btnSoundOver,&btnClick,1);
 	btn1.SetLabel(&btn1Txt);
 	btn1.SetState(STATE_SELECTED);
@@ -722,8 +722,8 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 	batteryBtn[1]->SetPosition(284, 150);
 	batteryBtn[2]->SetPosition(388, 150);
 	batteryBtn[3]->SetPosition(494, 150);
-	
-	       
+
+
     char * sig = (char *)0x80001804;
     if(
         sig[0] == 'S' &&
@@ -1068,7 +1068,7 @@ int GameWindowPrompt()
 
 	btn2.SetLabel(&btn2Txt);
 	btn2.SetTrigger(&trigB);
-	
+
 	GuiText btn3Txt(LANGUAGE.settings, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	GuiImage btn3Img(&btnOutline);
 	if (Settings.wsprompt == yes){
@@ -1076,7 +1076,7 @@ int GameWindowPrompt()
 	btn3Img.SetWidescreen(CFG.widescreen);}
 	GuiButton btn3(&btn3Img,&btn3Img, 0, 4, 50, -40, &trigA, &btnSoundOver, &btnClick,1);
 	btn3.SetLabel(&btn3Txt);
-	
+
 	GuiImage btnFavoriteImg;
 	btnFavoriteImg.SetWidescreen(CFG.widescreen);
 	//GuiButton btnFavorite(&btnFavoriteImg,&btnFavoriteImg, 2, 5, -125, -60, &trigA, &btnSoundOver, &btnClick,1);
@@ -1088,7 +1088,7 @@ int GameWindowPrompt()
 	btnFavorite.SetSoundClick(&btnClick);
 	btnFavorite.SetTrigger(&trigA);
 	btnFavorite.SetEffectGrow();
-	
+
 	GuiImage btnLeftImg(&imgLeft);
 	if (Settings.wsprompt == yes)
 		{
@@ -1097,7 +1097,7 @@ int GameWindowPrompt()
 	GuiButton btnLeft(&btnLeftImg,&btnLeftImg, 0, 5, 20, 0, &trigA, &btnSoundOver, &btnClick,1);
 	btnLeft.SetTrigger(&trigL);
 	btnLeft.SetTrigger(&trigMinus);
-	
+
 	GuiImage btnRightImg(&imgRight);
 	if (Settings.wsprompt == yes)
 		{
@@ -1106,7 +1106,7 @@ int GameWindowPrompt()
 	GuiButton btnRight(&btnRightImg,&btnRightImg, 1, 5, -20, 0, &trigA, &btnSoundOver, &btnClick,1);
 	btnRight.SetTrigger(&trigR);
 	btnRight.SetTrigger(&trigPlus);
-	
+
 	promptWindow.Append(&dialogBoxImg);
 	promptWindow.Append(&nameBtn);
 	promptWindow.Append(&sizeTxt);
@@ -1475,7 +1475,7 @@ DiscWait(const char *title, const char *msg, const char *btn1Label, const char *
 	btn1Img.SetWidescreen(CFG.widescreen);
 	}
 	GuiButton btn1(&btn1Img,&btn1Img, 1, 5, 0, 0, &trigA, &btnSoundOver, &btnClick,1);
-	
+
 	if(btn2Label)
 	{
 		btn1.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
@@ -1490,7 +1490,7 @@ DiscWait(const char *title, const char *msg, const char *btn1Label, const char *
 	btn1.SetLabel(&btn1Txt);
 	btn1.SetTrigger(&trigB);
 	btn1.SetState(STATE_SELECTED);
-	
+
 	GuiText btn2Txt(btn2Label, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	GuiImage btn2Img(&btnOutline);
 	if (Settings.wsprompt == yes){
@@ -1499,7 +1499,7 @@ DiscWait(const char *title, const char *msg, const char *btn1Label, const char *
 	}
 	GuiButton btn2(&btn2Img,&btn2Img, 1, 4, -20, -25, &trigA, &btnSoundOver, &btnClick,1);
 	btn2.SetLabel(&btn2Txt);
-	
+
 	if ((Settings.wsprompt == yes) && (CFG.widescreen)){/////////////adjust buttons for widescreen
 		msgTxt.SetMaxWidth(380);
 		if(btn2Label)
@@ -1681,7 +1681,7 @@ int NetworkInitPromp(int choice2)
 	GuiButton btn1(&btn1Img,&btn1Img, 2, 4, 0, -45, &trigA, &btnSoundOver, &btnClick,1);
 	btn1.SetLabel(&btn1Txt);
 	btn1.SetState(STATE_SELECTED);
-	
+
 	if ((Settings.wsprompt == yes) && (CFG.widescreen)){/////////////adjust buttons for widescreen
 		btn1.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
 		btn1.SetPosition(0, -80);
@@ -1871,7 +1871,7 @@ ProgressWindow(const char *title, const char *msg)
 
 	snprintf(imgPath, sizeof(imgPath), "%sprogressbar.png", CFG.theme_path);
 	GuiImageData progressbar(imgPath, progressbar_png);
-	
+
 	progressbarImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 	progressbarImg.SetPosition(25, 40);
 
@@ -2018,7 +2018,7 @@ ProgressDownloadWindow(int choice2)
 	GuiButton btn1(&btn1Img,&btn1Img, 2, 4, 0, -45, &trigA, &btnSoundOver, &btnClick,1);
 	btn1.SetLabel(&btn1Txt);
 	btn1.SetState(STATE_SELECTED);
-	
+
 	if ((Settings.wsprompt == yes) && (CFG.widescreen)){/////////////adjust for widescreen
 		progressbarOutlineImg.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 		progressbarOutlineImg.SetPosition(0, 40);
@@ -2248,7 +2248,7 @@ ProgressUpdateWindow()
 	GuiButton btn1(&btn1Img,&btn1Img, 2, 4, 0, -40, &trigA, &btnSoundOver, &btnClick,1);
 	btn1.SetLabel(&btn1Txt);
 	btn1.SetState(STATE_SELECTED);
-	
+
 	if ((Settings.wsprompt == yes) && (CFG.widescreen)){/////////////adjust for widescreen
 		progressbarOutlineImg.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 		progressbarOutlineImg.SetPosition(0, 7);
@@ -2356,8 +2356,8 @@ ProgressUpdateWindow()
 
     if(revnumber > currentrev) {
         sprintf(msg, "Rev%i %s.", revnumber, LANGUAGE.available);
-        int choice = WindowPrompt(msg, LANGUAGE.Doyouwanttoupdate, LANGUAGE.Yes, LANGUAGE.No, 0, 0);
-        if(choice == 1) {
+        int choice = WindowPrompt(msg, LANGUAGE.Doyouwanttoupdate, LANGUAGE.Updatedol, LANGUAGE.Updateall, LANGUAGE.No, 0);
+        if(choice == 1 || choice == 2) {
             titleTxt.SetTextf("%s USB Loader GX", LANGUAGE.updating);
             msgTxt.SetPosition(0,100);
             promptWindow.Append(&progressbarEmptyImg);
@@ -2409,6 +2409,7 @@ ProgressUpdateWindow()
                 //rename new to old
                 rename(dolpath, dolpathsuccess);
 
+                if(choice == 2) {
                 //get the icon.png and the meta.xml
                 char xmliconpath[150];
                 file = downloadfile("http://www.techjawa.com/usbloadergx/meta.file");
@@ -2426,6 +2427,7 @@ ProgressUpdateWindow()
                     fwrite(file.data,1,file.size,pfile);
                     fclose(pfile);
                     free(file.data);
+                }
                 }
                 }
             } else {
@@ -2446,6 +2448,7 @@ ProgressUpdateWindow()
 
     if(!failed && ret >= 0) {
         WindowPrompt(LANGUAGE.Successfullyupdated , LANGUAGE.Restarting, LANGUAGE.ok, 0, 0, 0);
+        ExitApp();
         if (*((u32*) 0x80001800)) exit(0);
         SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
     }
@@ -2741,7 +2744,7 @@ static int OnScreenKeyboard(char * var, u32 maxlen, int min)
 	GuiButton cancelBtn(&cancelBtnImg,&cancelBtnImg, 1, 4, -5, 15, &trigA, &btnSoundOver, &btnClick,1);
 	cancelBtn.SetLabel(&cancelBtnTxt);
 	cancelBtn.SetTrigger(&trigB);
-	
+
 	keyboard.Append(&okBtn);
 	keyboard.Append(&cancelBtn);
 
@@ -3052,10 +3055,10 @@ static int MenuDiscList()
 	GuiImage installBtnImgOver(&btnInstallOver);
 	installBtnImg.SetWidescreen(CFG.widescreen);
 	installBtnImgOver.SetWidescreen(CFG.widescreen);
-	
+
 	GuiButton installBtn(&installBtnImg, &installBtnImgOver, ALIGN_LEFT, ALIGN_TOP, THEME.install_x, THEME.install_y, &trigA, &btnSoundOver, &btnClick, 1, &installBtnTT,24,-30, 0,5);
-	
-	
+
+
 	GuiTooltip settingsBtnTT(LANGUAGE.settings);
 	if (Settings.wsprompt == yes)
 		settingsBtnTT.SetWidescreen(CFG.widescreen);
@@ -3075,7 +3078,7 @@ static int MenuDiscList()
 	homeBtnImgOver.SetWidescreen(CFG.widescreen);
 	GuiButton homeBtn(&homeBtnImg,&homeBtnImgOver, 0, 3, THEME.home_x, THEME.home_y, &trigA, &btnSoundOver, &btnClick,1,&homeBtnTT,15,-30,1,5);
 	homeBtn.SetTrigger(&trigHome);
-	
+
 	GuiTooltip poweroffBtnTT(LANGUAGE.PowerofftheWii);
 	if (Settings.wsprompt == yes)
 		poweroffBtnTT.SetWidescreen(CFG.widescreen);
@@ -3085,7 +3088,7 @@ static int MenuDiscList()
 	poweroffBtnImg.SetWidescreen(CFG.widescreen);
 	poweroffBtnImgOver.SetWidescreen(CFG.widescreen);
 	GuiButton poweroffBtn(&poweroffBtnImg,&poweroffBtnImgOver, 0, 3, THEME.power_x, THEME.power_y, &trigA, &btnSoundOver, &btnClick,1,&poweroffBtnTT,-10,-30,1,5);
-	
+
 
 	GuiTooltip sdcardBtnTT(LANGUAGE.ReloadSD);
 	if (Settings.wsprompt == yes)
@@ -3094,11 +3097,11 @@ static int MenuDiscList()
 	GuiImage sdcardImg(&btnsdcard);
 	sdcardImg.SetWidescreen(CFG.widescreen);
 	GuiButton sdcardBtn(&sdcardImg,&sdcardImg, 0, 3, THEME.sdcard_x, THEME.sdcard_y, &trigA, &btnSoundOver, &btnClick,1,&sdcardBtnTT,15,-30,0,5);
-	
+
 	GuiImage wiiBtnImg(&dataID);
 	wiiBtnImg.SetWidescreen(CFG.widescreen);
 	GuiButton wiiBtn(&wiiBtnImg,&wiiBtnImg, 0, 4, 0, -10, &trigA, &btnSoundOver, &btnClick,0);
-	
+
 	GuiImage favoriteBtnImg(&imgfavIcon);
 	GuiImage favoriteBtnImg_g(&imgfavIcon_gray);
 	favoriteBtnImg.SetWidescreen(CFG.widescreen);
@@ -3173,7 +3176,7 @@ static int MenuDiscList()
 			gridBtn.SetPosition(THEME.grid_x+4-THEME.sortBarOffset, THEME.grid_y);
 			carosselleBtn.SetPosition(THEME.carousel_x+12-THEME.sortBarOffset, THEME.carousel_y);
 		}
-		
+
 	}
 	else // List-Mode
 	{
@@ -3376,10 +3379,12 @@ static int MenuDiscList()
 
 			if(choice == 3)
 			{
+			    ExitApp();
                 SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0); // Back to System Menu
 			}
 			else if (choice == 2)
 			{
+			    ExitApp();
 				if (*((u32*) 0x80001800)) exit(0);
 				// Channel Version
 				SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
@@ -4087,7 +4092,7 @@ static int MenuFormat()
 	exitBtnImgOver.SetWidescreen(CFG.widescreen);
 	GuiButton exitBtn(&exitBtnImg,&exitBtnImgOver, 0, 3, 0,-10, &trigA, &btnSoundOver, &btnClick,1);
 	exitBtn.SetTrigger(&trigHome);
-	
+
 	#ifdef HW_RVL
 	int i = 0, level;
 	char txt[3];
@@ -4232,6 +4237,7 @@ static int MenuFormat()
 		    choice = WindowPrompt (LANGUAGE.ReturntoWiiMenu,LANGUAGE.Areyousure,LANGUAGE.Yes,LANGUAGE.No,0,0);
 			if(choice == 1)
 			{
+			    ExitApp();
                 SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
 			}
 		}
@@ -4317,7 +4323,7 @@ static int MenuSettings()
 	GuiButton backBtn(&backBtnImg,&backBtnImg, 2, 3, -180, 400, &trigA, &btnSoundOver, &btnClick,1);
 	backBtn.SetLabel(&backBtnTxt);
 	backBtn.SetTrigger(&trigB);
-	
+
 	GuiButton homo(1,1);
 	homo.SetTrigger(&trigHome);
 	homo.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
@@ -4365,13 +4371,13 @@ static int MenuSettings()
 	lockBtnImg.SetWidescreen(CFG.widescreen);
 	GuiButton lockBtn(&lockBtnImg,&lockBtnImg, 2, 3, 180, 400, &trigA, &btnSoundOver, &btnClick,1);
 	lockBtn.SetLabel(&lockBtnTxt);
-	
+
     GuiImage updateBtnImg(&updateRevImgData);
 	updateBtnImg.SetWidescreen(CFG.widescreen);
 	GuiButton updateBtn(&updateBtnImg,&updateBtnImg, 2, 3, 70, 400, &trigA, &btnSoundOver, &btnClick,1);
 	updateBtn.SetVisible(false);
 	updateBtn.SetClickable(false);
-	
+
 	GuiImageData logo(credits_button_png);
 	GuiImage logoImg(&logo);
 	GuiImageData logoOver(credits_button_over_png);
@@ -5123,6 +5129,7 @@ static int MenuSettings()
                 mainWindow->Remove(&page2Btn);
                 mainWindow->Remove(&tabBtn);
                 mainWindow->Remove(&page3Btn);
+                w.Remove(btnLogo);
                 w.Remove(&backBtn);
                 w.Remove(&lockBtn);
                 w.Remove(&updateBtn);
@@ -5138,6 +5145,7 @@ static int MenuSettings()
                 w.Append(&backBtn);
                 w.Append(&lockBtn);
                 w.Append(&updateBtn);
+                w.Append(btnLogo);
 			    } else {
                     WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtousethatoption, LANGUAGE.ok, 0,0,0);
 			    }
@@ -5228,10 +5236,12 @@ static int MenuSettings()
 
 				if(choice == 3)
 				{
+				    ExitApp();
 					SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0); // Back to System Menu
 				}
 				else if (choice == 2)
 				{
+				    ExitApp();
 					if (*((u32*) 0x80001800)) exit(0);
 					// Channel Version
 					SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
@@ -5331,7 +5341,7 @@ int GameSettings(struct discHdr * header)
 	GuiButton saveBtn(&saveBtnImg,&saveBtnImg, 2, 3, -180, 400, &trigA, &btnSoundOver, &btnClick,1);
 	saveBtn.SetScale(0.9);
 	saveBtn.SetLabel(&saveBtnTxt);
-	
+
     GuiText cancelBtnTxt(LANGUAGE.Back, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	cancelBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
 	GuiImage cancelBtnImg(&btnOutline);
@@ -5342,7 +5352,7 @@ int GameSettings(struct discHdr * header)
 	cancelBtn.SetScale(0.9);
 	cancelBtn.SetLabel(&cancelBtnTxt);
 	cancelBtn.SetTrigger(&trigB);
-	
+
 	GuiText deleteBtnTxt(LANGUAGE.Uninstall, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	deleteBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
 	GuiImage deleteBtnImg(&btnOutline);
@@ -5352,7 +5362,7 @@ int GameSettings(struct discHdr * header)
 	GuiButton deleteBtn(&deleteBtnImg,&deleteBtnImg, 2, 3, 0, 400, &trigA, &btnSoundOver, &btnClick,1);
 	deleteBtn.SetScale(0.9);
 	deleteBtn.SetLabel(&deleteBtnTxt);
-	
+
 	GuiCustomOptionBrowser optionBrowser3(396, 280, &options3, CFG.theme_path, "bg_options_gamesettings.png", bg_options_settings_png, 0, 200);
 	optionBrowser3.SetPosition(0, 90);
 	optionBrowser3.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
@@ -5585,6 +5595,7 @@ static int MenuCheck()
             } else if(ret2 == 2) {
             Settings.cios = ios222;
             } else {
+            ExitApp();
             SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
             }
             //shutdown WiiMote before IOS Reload
@@ -5604,6 +5615,7 @@ static int MenuCheck()
             SDCard_Init();
 			WindowPrompt (LANGUAGE.Error,LANGUAGE.USBDevicenotfound, LANGUAGE.ok, 0,0,0);
 			SDCard_deInit();
+			ExitApp();
             SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
         } else {
             PAD_Init();
@@ -5618,6 +5630,7 @@ static int MenuCheck()
 			SDCard_Init();
             WindowPrompt (LANGUAGE.Error,LANGUAGE.CouldnotinitializeDIPmodule,LANGUAGE.ok, 0,0,0);
 			SDCard_deInit();
+			ExitApp();
             SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
         }
 
@@ -5631,6 +5644,7 @@ static int MenuCheck()
 			SDCard_deInit();
                 if(choice == 0)
                 {
+                    ExitApp();
                     SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
 
                 } else {
@@ -5641,6 +5655,7 @@ static int MenuCheck()
 							SDCard_Init();
                             WindowPrompt (LANGUAGE.Nopartitionsfound,0, LANGUAGE.Restart, 0,0,0);
 							SDCard_deInit();
+							ExitApp();
                             SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
 
                     }
@@ -6009,7 +6024,7 @@ int MenuMp3()
 	int countmp3 = GetFiles(mp3path);
 
 	customOptionList options2(countmp3);
-   
+
      for (cnt = 0; cnt < countmp3; cnt++) {
 		char tmp[30];
         snprintf(tmp , 30, "%s", mp3files[cnt]);
@@ -6479,6 +6494,7 @@ int MainMenu(int menu)
     ret = Disc_WiiBoot(videoselected, cheat, vipatch);
     if (ret < 0) {
         printf("%s (ret = %d)\n",LANGUAGE.Error, ret);
+        ExitApp();
         SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
     }
 

@@ -76,7 +76,7 @@ snprintf(LANGUAGE.Display, sizeof(LANGUAGE.Display), "Display");
 snprintf(LANGUAGE.Doyouwanttoformat, sizeof(LANGUAGE.Doyouwanttoformat), "Do you want to format:");
 snprintf(LANGUAGE.Doyoureallywanttodelete, sizeof(LANGUAGE.Doyoureallywanttodelete), "Do you really want to delete:");
 snprintf(LANGUAGE.Doyouwanttoretryfor30secs, sizeof(LANGUAGE.Doyouwanttoretryfor30secs), "Do you want to retry for 30 secs?");
-snprintf(LANGUAGE.Doyouwanttoupdate, sizeof(LANGUAGE.Doyouwanttoupdate), "Do you want to update");
+snprintf(LANGUAGE.Doyouwanttoupdate, sizeof(LANGUAGE.Doyouwanttoupdate), "How do you want to update?");
 snprintf(LANGUAGE.Downloadingfile, sizeof(LANGUAGE.Downloadingfile), "Downloading file");
 snprintf(LANGUAGE.DownloadBoxartimage, sizeof(LANGUAGE.DownloadBoxartimage), "Download Boxart image?");
 snprintf(LANGUAGE.Downloadfinished, sizeof(LANGUAGE.Downloadfinished), "Download finished");
@@ -212,6 +212,8 @@ snprintf(LANGUAGE.Uninstall, sizeof(LANGUAGE.Uninstall), "Uninstall");
 snprintf(LANGUAGE.Updatepath, sizeof(LANGUAGE.Updatepath), "Updatepath");
 snprintf(LANGUAGE.Updatepathchanged, sizeof(LANGUAGE.Updatepathchanged), "Updatepath changed.");
 snprintf(LANGUAGE.Updatefailed, sizeof(LANGUAGE.Updatefailed), "Update failed");
+snprintf(LANGUAGE.Updatedol, sizeof(LANGUAGE.Updatedol), "Update DOL");
+snprintf(LANGUAGE.Updateall, sizeof(LANGUAGE.Updateall), "Update All");
 snprintf(LANGUAGE.USBLoaderisprotected, sizeof(LANGUAGE.USBLoaderisprotected), "USB Loader GX is protected");
 snprintf(LANGUAGE.USBDevicenotfound, sizeof(LANGUAGE.USBDevicenotfound), "USB Device not found");
 snprintf(LANGUAGE.VideoMode, sizeof(LANGUAGE.VideoMode), "Video Mode");
@@ -958,6 +960,14 @@ void language_set(char *name, char *val)
 		strcopy(LANGUAGE.Updatefailed, val, sizeof(LANGUAGE.Updatefailed));
 		return;
 	}
+	if (strcmp(name, "Updatedol") == 0) {
+		strcopy(LANGUAGE.Updatedol, val, sizeof(LANGUAGE.Updatedol));
+		return;
+	}
+	if (strcmp(name, "Updateall") == 0) {
+		strcopy(LANGUAGE.Updateall, val, sizeof(LANGUAGE.Updateall));
+		return;
+	}
 	if (strcmp(name, "USBLoaderisprotected") == 0) {
 		strcopy(LANGUAGE.USBLoaderisprotected, val, sizeof(LANGUAGE.USBLoaderisprotected));
 		return;
@@ -1074,7 +1084,7 @@ void language_set(char *name, char *val)
 		strcopy(LANGUAGE.updating, val, sizeof(LANGUAGE.updating));
 		return;
 	}
-	
+
 
 }
 
