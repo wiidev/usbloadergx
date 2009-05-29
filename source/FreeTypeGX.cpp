@@ -439,14 +439,17 @@ void FreeTypeGX::loadGlyphData(FT_Bitmap *bmp, ftgxCharData *charData) {
  */
 int16_t FreeTypeGX::getStyleOffsetWidth(uint16_t width, uint16_t format) {
 
-	if (format & FTGX_JUSTIFY_LEFT ) {
-		return 0;
-	}
-	else if (format & FTGX_JUSTIFY_CENTER ) {
-		return -(width >> 1);
-	}
-	else if (format & FTGX_JUSTIFY_RIGHT ) {
-		return -width;
+	switch(format & FTGX_JUSTIFY_MASK)
+	{
+		case FTGX_JUSTIFY_LEFT:
+			return 0;
+			
+		default:
+		case FTGX_JUSTIFY_CENTER:
+			return -(width >> 1);
+		
+		case FTGX_JUSTIFY_RIGHT:
+			return -width;
 	}
 
 	return 0;

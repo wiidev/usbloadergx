@@ -1,31 +1,33 @@
 #include "gui.h"
+extern int SetValue(int i, const char *format, ...) __attribute__((format(printf,2,3)));
 
 class customOptionList {
 	public:
-		customOptionList(int size) {
-			name = new char * [size];
-			value = new char * [size];
-			for (int i = 0; i < size; i++)
-			{
-				name[i] = new char[40];
-				value[i] = new char[40];
-			}
-			length = size;
-		};
-		~customOptionList(){
-			for (int i = 0; i < length; i++)
-			{
-				delete [] name[i];
-				delete [] value[i];
-			}
-			delete [] name;
-			delete [] value;
-		};
-
-	public:
+		customOptionList(int size);
+		~customOptionList();
+		void SetName(int i, const char *format, ...) __attribute__((format (printf, 3, 4)));
+		const char *GetName(int i)
+		{
+			if(i >= 0 && i < length && name[i])
+				return name[i];
+			else
+				return "";
+		}
+		void SetValue(int i, const char *format, ...) __attribute__((format (printf, 3, 4)));
+		const char *GetValue(int i)
+		{
+			if(i >= 0 && i < length && value[i])
+				return value[i];
+			else
+				return "";
+		}
+		int GetLength()	{ return length; }
+		bool IsChanged() { bool ret = changed; changed = false; return ret;}
+	private:
 		int length;
 		char ** name;
 		char ** value;
+		bool changed;
 };
 
 //!Display a list of menu options
@@ -34,7 +36,6 @@ class GuiCustomOptionBrowser : public GuiElement
 	public:
 		GuiCustomOptionBrowser(int w, int h, customOptionList * l, const char * themePath, const char *custombg, const u8 *imagebg, int scrollbar, int col2);
 		~GuiCustomOptionBrowser();
-		void SetCol2Position(int x);
 		int FindMenuItem(int c, int d);
 		int GetClickedOption();
 		int GetSelectedOption();
@@ -42,16 +43,20 @@ class GuiCustomOptionBrowser : public GuiElement
 		void SetFocus(int f);
 		void Draw();
 		void Update(GuiTrigger * t);
-		GuiText ** optionVal;
 	protected:
+		void UpdateListEntries();
 		int selectedItem;
 		int listOffset;
 		int size;
+		int coL2;
+		int scrollbaron;
 
 		customOptionList * options;
 		int * optionIndex;
 		GuiButton ** optionBtn;
 		GuiText ** optionTxt;
+		GuiText ** optionVal;
+		GuiText ** optionValOver;
 		GuiImage ** optionBg;
 
 		GuiButton * arrowUpBtn;

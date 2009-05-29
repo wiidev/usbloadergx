@@ -201,7 +201,7 @@ int subfoldercheck(char * directory);
 
 //Astidof - Begin of modification
 enum {
-	ConsoleLangDefault,
+	ConsoleLangDefault=0,
 	jap,
 	eng,
 	ger,
@@ -211,21 +211,25 @@ enum {
 	dut,
 	schin,
 	tchin,
-	kor
+	kor,
+	
+	settings_language_max // always the last entry
 };
 
 enum {
-    systemdefault,
+    systemdefault=0,
     discdefault,
 	patch,
 	pal50,
 	pal60,
-	ntsc
+	ntsc,
+	settings_video_max // always the last entry
 };
 
 enum {
-    off,
+    off=0,
 	on,
+	settings_off_on_max // always the last entry
 };
 
 enum {
@@ -233,40 +237,45 @@ enum {
 	GameRegion,
 	Both,
 	Neither,
+	settings_sinfo_max // always the last entry
 };
 
 enum {
-	i249,
+	i249=0,
 	i222,
 };
 
 enum {
-	ios249,
+	ios249=0,
 	ios222,
+	settings_cios_max // always the last entry
 };
 
 enum {
-	hr12,
+	hr12=0,
 	hr24,
 	Off,
+	settings_clock_max // always the last entry
 };
 enum {
-	all,
+	all=0,
 	pcount,
 };
 
 enum {
-	RumbleOff,
+	RumbleOff=0,
 	RumbleOn,
+	settings_rumble_max // always the last entry
 };
 
 enum {
-	TooltipsOff,
+	TooltipsOff=0,
 	TooltipsOn,
+	settings_tooltips_max // always the last entry
 };
 
 enum {
-	v10,
+	v10=0,
 	v20,
 	v30,
 	v40,
@@ -277,27 +286,35 @@ enum {
 	v90,
 	v100,
 	v0,
+	settings_volume_max // always the last entry
 };
 
 enum {
-    no,
+    no=0,
 	yes,
 	sysmenu,
 	wtf,
 	disk3d,
+	settings_xflip_max // always the last entry
 };
 enum {
-	us,
+	us=0,
 	dvorak,
 	euro,
 	azerty,
+	settings_keyset_max // always the last entry
 };
 enum {
 	list,
 	grid,
 	carousel,
 };
+enum {
+	scrollDefault,
+	scrollMarquee,
 
+	settings_scrolleffect_max // always the last entry
+};
 struct SSettings {
 	int	    video;
 	int	    language;

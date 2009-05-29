@@ -57,12 +57,9 @@ static GuiImageData * pointer[4];
 static GuiImage * bgImg = NULL;
 static GuiButton * btnLogo = NULL;
 static GuiImageData * background = NULL;
-static char prozent[10] = " ";
-static char timet[50] = " ";
-static char sizeshow[20] = " ";
-static GuiText prTxt(prozent, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
-static GuiText timeTxt(prozent, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
-static GuiText sizeTxt(sizeshow, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+static GuiText prTxt(NULL, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+static GuiText timeTxt(NULL, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+static GuiText sizeTxt(NULL, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 static GuiText *GameIDTxt = NULL;
 static GuiText *GameRegionTxt = NULL;
 static GuiSound * bgMusic = NULL;
@@ -953,7 +950,6 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 int GameWindowPrompt()
 {
 	int choice = -1, angle = 0;
-	char sizeText[15];
 	f32 size = 0.0;
 	char ID[4];
 	char IDFull[7];
@@ -1022,9 +1018,9 @@ int GameWindowPrompt()
 		nameBtn.SetEffectGrow();
 	}
 
-    GuiText sizeTxt("", 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{50, 50, 50, 255}); //TODO: get the size here
+    GuiText sizeTxt(NULL, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{50, 50, 50, 255}); //TODO: get the size here
 	sizeTxt.SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
-	sizeTxt.SetPosition(-110,70);
+	sizeTxt.SetPosition(-60,70);
 
 //	GuiImage diskImg;
 	GuiDiskCover diskImg;
@@ -1038,8 +1034,7 @@ int GameWindowPrompt()
 	diskImg2.SetAngle(angle);
 	diskImg2.SetBeta(180);
 
-	char PlayCnt[25];
-	GuiText playcntTxt(PlayCnt, 18, (GXColor){THEME.info_r, THEME.info_g, THEME.info_b, 255});
+	GuiText playcntTxt(NULL, 18, (GXColor){THEME.info_r, THEME.info_g, THEME.info_b, 255});
 	playcntTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	playcntTxt.SetPosition(-115,45);
 
@@ -1156,9 +1151,6 @@ int GameWindowPrompt()
 
 		//load disc image based or what game is seleted
 		struct discHdr * header = &gameList[gameSelected];
-		WBFS_GameSize(header->id, &size);
-
-		snprintf(sizeText, sizeof(sizeText), "%.2fGB", size); //set size text
 
 		snprintf (ID,sizeof(ID),"%c%c%c", header->id[0], header->id[1], header->id[2]);
 		snprintf (IDFull,sizeof(IDFull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
@@ -1230,7 +1222,9 @@ int GameWindowPrompt()
 		}
 		else
 			diskImg.SetImage(diskCover);
-		sizeTxt.SetText(sizeText);
+
+		WBFS_GameSize(header->id, &size);
+		sizeTxt.SetTextf("%.2fGB", size); //set size text;
 		nameTxt.SetText(get_title(header));
 
 		struct Game_NUM* game_num = CFG_get_game_num(header->id);
@@ -1241,8 +1235,7 @@ int GameWindowPrompt()
 			playCount = 0;
 			faveChoice = 0;
 		}
-		sprintf(PlayCnt,"%s: %i",LANGUAGE.Plays, playCount);
-		playcntTxt.SetText(PlayCnt);
+		playcntTxt.SetTextf("%s: %i",LANGUAGE.Plays, playCount);
  		btnFavoriteImg.SetImage(faveChoice ? &imgFavorite : &imgNotFavorite);
 
 		nameTxt.SetPosition(0, 1);
@@ -1522,8 +1515,7 @@ DiscWait(const char *title, const char *msg, const char *btn1Label, const char *
 	}
 	}
 
-    char timer[20];
-	GuiText timerTxt(timer, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
+	GuiText timerTxt(NULL, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	timerTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	timerTxt.SetPosition(0,160);
 
@@ -1550,8 +1542,7 @@ DiscWait(const char *title, const char *msg, const char *btn1Label, const char *
 	if(IsDeviceWait) {
         while(i >= 0)
         {
-            sprintf(timer, "%u%s", i,LANGUAGE.secondsleft);
-            timerTxt.SetText(timer);
+            timerTxt.SetTextf("%u%s", i,LANGUAGE.secondsleft);
             VIDEO_WaitVSync();
             if(Settings.cios == ios222) {
             ret = IOS_ReloadIOS(222);
@@ -1725,8 +1716,7 @@ int NetworkInitPromp(int choice2)
 		}
 
 		if (IP && ret > 0) {
-			sprintf(msg, "IP: %s", IP);
-			msgTxt.SetText(msg);
+			msgTxt.SetTextf("IP: %s", IP);
 			cntMissFiles = 0;
 			u32 i = 0;
 			char filename[11];
@@ -1823,16 +1813,13 @@ ShowProgress (s32 done, s32 total)
     //Calculate percentage/size
 	f32 percent = (done * 100.0) / total;
 
-    sprintf(prozent, "%0.2f", percent);
-    prTxt.SetText(prozent);
+    prTxt.SetTextf("%0.2f", percent);
 
-    sprintf(timet,"%s %d:%02d:%02d",LANGUAGE.Timeleft,h,m,s);
-    timeTxt.SetText(timet);
+    timeTxt.SetTextf("%s %d:%02d:%02d",LANGUAGE.Timeleft,h,m,s);
 
     f32 gamesizedone = gamesize * done/total;
 
-	sprintf(sizeshow,"%0.2fGB/%0.2fGB", gamesizedone, gamesize);
-	sizeTxt.SetText(sizeshow);
+	sizeTxt.SetTextf("%0.2fGB/%0.2fGB", gamesizedone, gamesize);
 
 	if ((Settings.wsprompt == yes) && (CFG.widescreen)){
 	progressbarImg.SetTile((int)(80*done/total));}
@@ -2011,12 +1998,12 @@ ProgressDownloadWindow(int choice2)
 	GuiText titleTxt(LANGUAGE.Downloadingfile, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	titleTxt.SetPosition(0,60);
-    char msg[25] = " ";
-	GuiText msgTxt(msg, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
+
+	GuiText msgTxt(NULL, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	msgTxt.SetPosition(0,130);
-	char msg2[15] = " ";
-	GuiText msg2Txt(msg2, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
+
+	GuiText msg2Txt(NULL, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	msg2Txt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	msg2Txt.SetPosition(0,100);
 
@@ -2081,8 +2068,7 @@ ProgressDownloadWindow(int choice2)
 
 	while (i < cntMissFiles) {
 
-	sprintf(prozent, "%i%%", 100*i/cntMissFiles);
-	prTxt.SetText(prozent);
+	prTxt.SetTextf("%i%%", 100*i/cntMissFiles);
 
 	if ((Settings.wsprompt == yes) && (CFG.widescreen)){/////////////adjust for widescreen
 		progressbarImg.SetPosition(80,40);
@@ -2091,10 +2077,8 @@ ProgressDownloadWindow(int choice2)
         progressbarImg.SetTile(100*i/cntMissFiles);
 	}
 
-    sprintf(msg, "%i %s", cntMissFiles - i, LANGUAGE.filesleft);
-    msgTxt.SetText(msg);
-    sprintf(msg2, "%s", missingFiles[i]);
-    msg2Txt.SetText(msg2);
+    msgTxt.SetTextf("%i %s", cntMissFiles - i, LANGUAGE.filesleft);
+    msg2Txt.SetTextf("%s", missingFiles[i]);
 
     //download boxart image
     char imgPath[100];
@@ -2374,29 +2358,24 @@ ProgressUpdateWindow()
         sprintf(msg, "Rev%i %s.", revnumber, LANGUAGE.available);
         int choice = WindowPrompt(msg, LANGUAGE.Doyouwanttoupdate, LANGUAGE.Yes, LANGUAGE.No, 0, 0);
         if(choice == 1) {
-            //sprintf(title, "%s", "%s USB Loader GX", LANGUAGE.updating);
-            sprintf(title, "%s USB Loader GX", LANGUAGE.updating);
-            titleTxt.SetText(title);
+            titleTxt.SetTextf("%s USB Loader GX", LANGUAGE.updating);
             msgTxt.SetPosition(0,100);
             promptWindow.Append(&progressbarEmptyImg);
             promptWindow.Append(&progressbarImg);
             promptWindow.Append(&progressbarOutlineImg);
             promptWindow.Append(&prTxt);
-            sprintf(msg, "Updating to Rev%i", revnumber);
-            msgTxt.SetText(msg);
+            msgTxt.SetTextf("Updating to Rev%i", revnumber);
             int filesize = downloadrev("http://www.techjawa.com/usbloadergx/boot.dol");
             if(filesize > 0) {
                 pfile = fopen(dolpath, "wb");
                 for (int i = 0; i < filesize; i += blocksize) {
-                    sprintf(prozent, "%i%%", 100*i/filesize);
-                    prTxt.SetText(prozent);
+                    prTxt.SetTextf("%i%%", 100*i/filesize);
                     if ((Settings.wsprompt == yes) && (CFG.widescreen)){/////////////adjust for widescreen
                         progressbarImg.SetTile(80*i/filesize);
                     } else {
                         progressbarImg.SetTile(100*i/filesize);
                     }
-                    sprintf(msg2, "%iKB/%iKB", i/1024, filesize/1024);
-                    msg2Txt.SetText(msg2);
+                    msg2Txt.SetTextf("%iKB/%iKB", i/1024, filesize/1024);
 
                     if(btn1.GetState() == STATE_CLICKED) {
                         fclose(pfile);
@@ -2975,7 +2954,6 @@ static int MenuDiscList()
 	datagB=0;
 	int menu = MENU_NONE, dataef=0;
 	char imgPath[100];
-	char buf[4];
 	__Menu_GetEntries();
 
 	f32 freespace, used, size = 0.0;
@@ -2986,7 +2964,7 @@ static int MenuDiscList()
 
 	//CLOCK
 	struct tm * timeinfo;
-	char theTime[80];
+	char theTime[80]="";
 	time_t lastrawtime=0;
 
 	WBFS_DiskSpace(&used, &freespace);
@@ -3341,8 +3319,7 @@ static int MenuDiscList()
 				}
 			else if (dataed > 0){
 
-				sprintf(buf, "%i", (dataed-1));
-				clockTime.SetText(buf);
+				clockTime.SetTextf("%i", (dataed-1));
 				}
 
         }
@@ -3533,9 +3510,7 @@ static int MenuDiscList()
 				gameBrowser.Reload(gameList, gameCnt);}
 			else if (Settings.gameDisplay==grid){
             gameGrid.Reload(gameList, gameCnt);}
-//			gameBrowser.Reload(gameList, gameCnt);
-			sprintf(GamesCnt,"%s: %i",LANGUAGE.Games, gameCnt);
-			gamecntTxt.SetText(GamesCnt);
+			gamecntTxt.SetTextf("%s: %i",LANGUAGE.Games, gameCnt);
 			selectedold = 1;
 			favoriteBtn.ResetState();
 			Settings.fave ? (favoriteBtn.SetImage(&favoriteBtnImg), favoriteBtn.SetAlpha(255)) : (favoriteBtn.SetImage(&favoriteBtnImg_g), favoriteBtn.SetAlpha(180));
@@ -4288,7 +4263,6 @@ static int MenuSettings()
 {
 	int menu = MENU_NONE;
 	int ret;
-	char cfgtext[20];
 	int choice = 0;
 
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
@@ -4414,10 +4388,9 @@ static int MenuSettings()
 	btnLogo->SetUpdateCallback(WindowCredits);
 
 	customOptionList options2(9);
-	GuiCustomOptionBrowser optionBrowser2(396, 280, &options2, CFG.theme_path, "bg_options_settings.png", bg_options_settings_png, 0, 200);
+	GuiCustomOptionBrowser optionBrowser2(396, 280, &options2, CFG.theme_path, "bg_options_settings.png", bg_options_settings_png, 0, 150);
 	optionBrowser2.SetPosition(0, 90);
 	optionBrowser2.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	optionBrowser2.SetCol2Position(200);
 	GuiWindow w(screenwidth, screenheight);
 
 	int pageToDisplay = 1;
@@ -4427,17 +4400,17 @@ static int MenuSettings()
 		if ( pageToDisplay == 1)
 		{
 
-			sprintf(options2.name[0], "%s",LANGUAGE.VideoMode);
-			sprintf(options2.name[1], "%s",LANGUAGE.VIDTVPatch);
-			sprintf(options2.name[2], "%s",LANGUAGE.Language);
+			options2.SetName(0, "%s",LANGUAGE.VideoMode);
+			options2.SetName(1, "%s",LANGUAGE.VIDTVPatch);
+			options2.SetName(2, "%s",LANGUAGE.Language);
 
-			sprintf(options2.name[3], "Ocarina");
+			options2.SetName(3, "Ocarina");
 
-			sprintf(options2.name[4],"%s", LANGUAGE.Display);
-			sprintf(options2.name[5],"%s", LANGUAGE.Clock); //CLOCK
-			sprintf(options2.name[6],"%s", LANGUAGE.Rumble); //RUMBLE
-			sprintf(options2.name[7],"%s", LANGUAGE.Volume);
-			sprintf(options2.name[8],"%s", LANGUAGE.Tooltips);
+			options2.SetName(4,"%s", LANGUAGE.Display);
+			options2.SetName(5,"%s", LANGUAGE.Clock); //CLOCK
+			options2.SetName(6,"%s", LANGUAGE.Rumble); //RUMBLE
+			options2.SetName(7,"%s", LANGUAGE.Volume);
+			options2.SetName(8,"%s", LANGUAGE.Tooltips);
 
 			HaltGui();
 			w.Append(&settingsbackgroundbtn);
@@ -4487,15 +4460,15 @@ static int MenuSettings()
 			mainWindow->Append(&page1Btn);
 			mainWindow->Append(&page3Btn);
 
-			sprintf(options2.name[0],"%s", LANGUAGE.Password);
-			sprintf(options2.name[1],"%s", LANGUAGE.BootStandard);
-			sprintf(options2.name[2],"%s", LANGUAGE.FlipX);
-			sprintf(options2.name[3],"%s", LANGUAGE.QuickBoot);
-			sprintf(options2.name[4],"%s", LANGUAGE.PromptsButtons);
-			sprintf(options2.name[5],"%s", LANGUAGE.Parentalcontrol);
-			sprintf(options2.name[6],"%s", LANGUAGE.CoverPath);
-			sprintf(options2.name[7],"%s", LANGUAGE.DiscimagePath);
-			sprintf(options2.name[8],"%s", LANGUAGE.ThemePath);
+			options2.SetName(0,"%s", LANGUAGE.Password);
+			options2.SetName(1,"%s", LANGUAGE.BootStandard);
+			options2.SetName(2,"%s", LANGUAGE.FlipX);
+			options2.SetName(3,"%s", LANGUAGE.QuickBoot);
+			options2.SetName(4,"%s", LANGUAGE.PromptsButtons);
+			options2.SetName(5,"%s", LANGUAGE.Parentalcontrol);
+			options2.SetName(6,"%s", LANGUAGE.CoverPath);
+			options2.SetName(7,"%s", LANGUAGE.DiscimagePath);
+			options2.SetName(8,"%s", LANGUAGE.ThemePath);
 		}
 		else if ( pageToDisplay == 3 )
 		{
@@ -4516,15 +4489,15 @@ static int MenuSettings()
 			mainWindow->Append(&page3Btn);
 
 
-			sprintf(options2.name[0], "%s",LANGUAGE.Titlestxtpath);
-			sprintf(options2.name[1], "%s",LANGUAGE.AppLanguage);
-			sprintf(options2.name[2], "%s",LANGUAGE.keyboard);
-			sprintf(options2.name[3], "%s",LANGUAGE.Unicodefix);
-			sprintf(options2.name[4], "%s",LANGUAGE.Backgroundmusic);
-			sprintf(options2.name[5], "%s",LANGUAGE.Wiilight);
-			sprintf(options2.name[6], "%s",LANGUAGE.Updatepath);
-			sprintf(options2.name[7], "%s",LANGUAGE.MP3Menu);
-			sprintf(options2.name[8], "%s",LANGUAGE.Defaultsettings);
+			options2.SetName(0, "%s",LANGUAGE.Titlestxtpath);
+			options2.SetName(1, "%s",LANGUAGE.AppLanguage);
+			options2.SetName(2, "%s",LANGUAGE.keyboard);
+			options2.SetName(3, "%s",LANGUAGE.Unicodefix);
+			options2.SetName(4, "%s",LANGUAGE.Backgroundmusic);
+			options2.SetName(5, "%s",LANGUAGE.Wiilight);
+			options2.SetName(6, "%s",LANGUAGE.Updatepath);
+			options2.SetName(7, "%s",LANGUAGE.MP3Menu);
+			options2.SetName(8, "%s",LANGUAGE.Defaultsettings);
 
 		}
 		while(menu == MENU_NONE)
@@ -4533,77 +4506,77 @@ static int MenuSettings()
 
 			if ( pageToDisplay == 1 )
 			{
-				if(Settings.video > 5)
+				if(Settings.video >= settings_video_max)
 					Settings.video = 0;
-				if(Settings.language  > 10)
+				if(Settings.language  >= settings_language_max)
 					Settings.language = 0;
-				if(Settings.ocarina  > 1)
+				if(Settings.ocarina >= settings_off_on_max)
 					Settings.ocarina = 0;
-				if(Settings.vpatch  > 1)
+				if(Settings.vpatch >= settings_off_on_max)
 					Settings.vpatch = 0;
-				if(Settings.sinfo  > 3)
+				if(Settings.sinfo  >= settings_sinfo_max)
 					Settings.sinfo = 0;
-				if(Settings.hddinfo > 2)
+				if(Settings.hddinfo >= settings_clock_max)
 					Settings.hddinfo = 0; //CLOCK
-				if(Settings.rumble > 1)
+				if(Settings.rumble >= settings_rumble_max)
 					Settings.rumble = 0; //RUMBLE
-				if(Settings.volume > 10)
+				if(Settings.volume >= settings_volume_max)
 					Settings.volume = 0;
-                if (Settings.tooltips > 1 )
+                if (Settings.tooltips >= settings_tooltips_max)
 					Settings.tooltips = 0;
 
-				if (Settings.video == discdefault) sprintf (options2.value[0],"%s",LANGUAGE.DiscDefault);
-				else if (Settings.video == systemdefault) sprintf (options2.value[0],"%s",LANGUAGE.SystemDefault);
-				else if (Settings.video == patch) sprintf (options2.value[0],"%s",LANGUAGE.AutoPatch);
-				else if (Settings.video == pal50) sprintf (options2.value[0],"%s PAL50",LANGUAGE.Force);
-				else if (Settings.video == pal60) sprintf (options2.value[0],"%s PAL60",LANGUAGE.Force);
-				else if (Settings.video == ntsc) sprintf (options2.value[0],"%s NTSC",LANGUAGE.Force);
+				if (Settings.video == discdefault) options2.SetValue(0,"%s",LANGUAGE.DiscDefault);
+				else if (Settings.video == systemdefault) options2.SetValue(0,"%s",LANGUAGE.SystemDefault);
+				else if (Settings.video == patch) options2.SetValue(0,"%s",LANGUAGE.AutoPatch);
+				else if (Settings.video == pal50) options2.SetValue(0,"%s PAL50",LANGUAGE.Force);
+				else if (Settings.video == pal60) options2.SetValue(0,"%s PAL60",LANGUAGE.Force);
+				else if (Settings.video == ntsc) options2.SetValue(0,"%s NTSC",LANGUAGE.Force);
 
-				if (Settings.vpatch == on) sprintf (options2.value[1],"%s",LANGUAGE.ON);
-				else if (Settings.vpatch == off) sprintf (options2.value[1],"%s",LANGUAGE.OFF);
+				if (Settings.vpatch == on) options2.SetValue(1,"%s",LANGUAGE.ON);
+				else if (Settings.vpatch == off) options2.SetValue(1,"%s",LANGUAGE.OFF);
 
-				if (Settings.language == ConsoleLangDefault) sprintf (options2.value[2],"%s",LANGUAGE.ConsoleDefault);
-				else if (Settings.language == jap) sprintf (options2.value[2],"%s",LANGUAGE.Japanese);
-				else if (Settings.language == ger) sprintf (options2.value[2],"%s",LANGUAGE.German);
-				else if (Settings.language == eng) sprintf (options2.value[2],"%s",LANGUAGE.English);
-				else if (Settings.language == fren) sprintf (options2.value[2],"%s",LANGUAGE.French);
-				else if (Settings.language == esp) sprintf (options2.value[2],"%s",LANGUAGE.Spanish);
-				else if (Settings.language == it) sprintf (options2.value[2],"%s",LANGUAGE.Italian);
-				else if (Settings.language == dut) sprintf (options2.value[2],"%s",LANGUAGE.Dutch);
-				else if (Settings.language == schin) sprintf (options2.value[2],"%s",LANGUAGE.SChinese);
-				else if (Settings.language == tchin) sprintf (options2.value[2],"%s",LANGUAGE.TChinese);
-				else if (Settings.language == kor) sprintf (options2.value[2],"%s",LANGUAGE.Korean);
+				if (Settings.language == ConsoleLangDefault) options2.SetValue(2,"%s",LANGUAGE.ConsoleDefault);
+				else if (Settings.language == jap) options2.SetValue(2,"%s",LANGUAGE.Japanese);
+				else if (Settings.language == ger) options2.SetValue(2,"%s",LANGUAGE.German);
+				else if (Settings.language == eng) options2.SetValue(2,"%s",LANGUAGE.English);
+				else if (Settings.language == fren) options2.SetValue(2,"%s",LANGUAGE.French);
+				else if (Settings.language == esp) options2.SetValue(2,"%s",LANGUAGE.Spanish);
+				else if (Settings.language == it) options2.SetValue(2,"%s",LANGUAGE.Italian);
+				else if (Settings.language == dut) options2.SetValue(2,"%s",LANGUAGE.Dutch);
+				else if (Settings.language == schin) options2.SetValue(2,"%s",LANGUAGE.SChinese);
+				else if (Settings.language == tchin) options2.SetValue(2,"%s",LANGUAGE.TChinese);
+				else if (Settings.language == kor) options2.SetValue(2,"%s",LANGUAGE.Korean);
 
-				if (Settings.ocarina == on) sprintf (options2.value[3],"%s",LANGUAGE.ON);
-				else if (Settings.ocarina == off) sprintf (options2.value[3],"%s",LANGUAGE.OFF);
+				if (Settings.ocarina == on) options2.SetValue(3,"%s",LANGUAGE.ON);
+				else if (Settings.ocarina == off) options2.SetValue(3,"%s",LANGUAGE.OFF);
 
-				if (Settings.sinfo == GameID) sprintf (options2.value[4],"%s",LANGUAGE.GameID);
-				else if (Settings.sinfo == GameRegion) sprintf (options2.value[4],"%s",LANGUAGE.GameRegion);
-				else if (Settings.sinfo == Both) sprintf (options2.value[4],"%s",LANGUAGE.Both);
-				else if (Settings.sinfo == Neither) sprintf (options2.value[4],"%s",LANGUAGE.Neither);
+				if (Settings.sinfo == GameID) options2.SetValue(4,"%s",LANGUAGE.GameID);
+				else if (Settings.sinfo == GameRegion) options2.SetValue(4,"%s",LANGUAGE.GameRegion);
+				else if (Settings.sinfo == Both) options2.SetValue(4,"%s",LANGUAGE.Both);
+				else if (Settings.sinfo == Neither) options2.SetValue(4,"%s",LANGUAGE.Neither);
 
-				if (Settings.hddinfo == hr12) sprintf (options2.value[5],"12 %s",LANGUAGE.hour);
-				else if (Settings.hddinfo == hr24) sprintf (options2.value[5],"24 %s",LANGUAGE.hour);
-				else if (Settings.hddinfo == Off) sprintf (options2.value[5],"%s",LANGUAGE.OFF);
+				if (Settings.hddinfo == hr12) options2.SetValue(5,"12 %s",LANGUAGE.hour);
+				else if (Settings.hddinfo == hr24) options2.SetValue(5,"24 %s",LANGUAGE.hour);
+				else if (Settings.hddinfo == Off) options2.SetValue(5,"%s",LANGUAGE.OFF);
 
-				if (Settings.rumble == RumbleOn) sprintf (options2.value[6],"%s",LANGUAGE.ON);
-				else if (Settings.rumble == RumbleOff) sprintf (options2.value[6],"%s",LANGUAGE.OFF);
+				if (Settings.rumble == RumbleOn) options2.SetValue(6,"%s",LANGUAGE.ON);
+				else if (Settings.rumble == RumbleOff) options2.SetValue(6,"%s",LANGUAGE.OFF);
 
-				if (Settings.volume == v10) sprintf (options2.value[7],"10");
-				else if (Settings.volume == v20) sprintf (options2.value[7],"20");
-				else if (Settings.volume == v30) sprintf (options2.value[7],"30");
-				else if (Settings.volume == v40) sprintf (options2.value[7],"40");
-				else if (Settings.volume == v50) sprintf (options2.value[7],"50");
-				else if (Settings.volume == v60) sprintf (options2.value[7],"60");
-				else if (Settings.volume == v70) sprintf (options2.value[7],"70");
-				else if (Settings.volume == v80) sprintf (options2.value[7],"80");
-				else if (Settings.volume == v90) sprintf (options2.value[7],"90");
-				else if (Settings.volume == v100) sprintf (options2.value[7],"100");
-				else if (Settings.volume == v0) sprintf (options2.value[7],"%s",LANGUAGE.OFF);
+				if (Settings.volume == v10) options2.SetValue(7,"10");
+				else if (Settings.volume == v20) options2.SetValue(7,"20");
+				else if (Settings.volume == v30) options2.SetValue(7,"30");
+				else if (Settings.volume == v40) options2.SetValue(7,"40");
+				else if (Settings.volume == v50) options2.SetValue(7,"50");
+				else if (Settings.volume == v60) options2.SetValue(7,"60");
+				else if (Settings.volume == v70) options2.SetValue(7,"70");
+				else if (Settings.volume == v80) options2.SetValue(7,"80");
+				else if (Settings.volume == v90) options2.SetValue(7,"90");
+				else if (Settings.volume == v100) options2.SetValue(7,"100");
+				else if (Settings.volume == v0) options2.SetValue(7,"%s",LANGUAGE.OFF);
 
 
-                if (Settings.tooltips == TooltipsOn) sprintf (options2.value[8],"%s",LANGUAGE.ON);
-				else if (Settings.tooltips == TooltipsOff) sprintf (options2.value[8],"%s",LANGUAGE.OFF);
+                if (Settings.tooltips == TooltipsOn) options2.SetValue(8,"%s",LANGUAGE.ON);
+				else if (Settings.tooltips == TooltipsOff) options2.SetValue(8,"%s",LANGUAGE.OFF);
 
 				ret = optionBrowser2.GetClickedOption();
 
@@ -4641,9 +4614,9 @@ static int MenuSettings()
 
 			if ( pageToDisplay == 2 )
 			{
-				if ( Settings.cios > 1 )
+				if ( Settings.cios >= settings_cios_max)
 					Settings.cios = 0;
-				if ( Settings.xflip > 4 )
+				if ( Settings.xflip >= settings_xflip_max)
 					Settings.xflip = 0;
 				if ( Settings.qboot > 1 )
 					Settings.qboot = 0;
@@ -4653,59 +4626,35 @@ static int MenuSettings()
 					CFG.parentalcontrol = 0;
 
 
-				if ( CFG.godmode != 1) sprintf(options2.value[0], "********");
-				else if (!strcmp("", Settings.unlockCode)) sprintf(options2.value[0], "%s",LANGUAGE.notset);
-				else sprintf(options2.value[0], Settings.unlockCode);
+				if ( CFG.godmode != 1) options2.SetValue(0, "********");
+				else if (!strcmp("", Settings.unlockCode)) options2.SetValue(0, "%s",LANGUAGE.notset);
+				else options2.SetValue(0, Settings.unlockCode);
 
-                if (CFG.godmode != 1) sprintf(options2.value[1], "********");
-                else if (Settings.cios == ios249) sprintf (options2.value[1],"cIOS 249");
-				else if (Settings.cios == ios222) sprintf (options2.value[1],"cIOS 222");
+                if (CFG.godmode != 1) options2.SetValue(1, "********");
+                else if (Settings.cios == ios249) options2.SetValue(1,"cIOS 249");
+				else if (Settings.cios == ios222) options2.SetValue(1,"cIOS 222");
 
-				if (Settings.xflip == no) sprintf (options2.value[2],"%s/%s",LANGUAGE.Right,LANGUAGE.Next);
-				else if (Settings.xflip == yes) sprintf (options2.value[2],"%s/%s",LANGUAGE.Left,LANGUAGE.Prev);
-				else if (Settings.xflip == sysmenu) sprintf (options2.value[2],"%s", LANGUAGE.LikeSysMenu);
-				else if (Settings.xflip == wtf) sprintf (options2.value[2],"%s/%s",LANGUAGE.Right,LANGUAGE.Prev);
-				else if (Settings.xflip == disk3d) sprintf (options2.value[2],"DiskFlip");
+				if (Settings.xflip == no) options2.SetValue(2,"%s/%s",LANGUAGE.Right,LANGUAGE.Next);
+				else if (Settings.xflip == yes) options2.SetValue(2,"%s/%s",LANGUAGE.Left,LANGUAGE.Prev);
+				else if (Settings.xflip == sysmenu) options2.SetValue(2,"%s", LANGUAGE.LikeSysMenu);
+				else if (Settings.xflip == wtf) options2.SetValue(2,"%s/%s",LANGUAGE.Right,LANGUAGE.Prev);
+				else if (Settings.xflip == disk3d) options2.SetValue(2,"DiskFlip");
 
-				if (Settings.qboot == no) sprintf (options2.value[3],"%s",LANGUAGE.No);
-				else if (Settings.qboot == yes) sprintf (options2.value[3],"%s",LANGUAGE.Yes);
+				if (Settings.qboot == no) options2.SetValue(3,"%s",LANGUAGE.No);
+				else if (Settings.qboot == yes) options2.SetValue(3,"%s",LANGUAGE.Yes);
 
-				if (Settings.wsprompt == no) sprintf (options2.value[4],"%s",LANGUAGE.Normal);
-				else if (Settings.wsprompt == yes) sprintf (options2.value[4],"%s",LANGUAGE.WidescreenFix);
+				if (Settings.wsprompt == no) options2.SetValue(4,"%s",LANGUAGE.Normal);
+				else if (Settings.wsprompt == yes) options2.SetValue(4,"%s",LANGUAGE.WidescreenFix);
 
-                if (CFG.godmode != 1) sprintf(options2.value[5], "********");
-				else if(CFG.parentalcontrol == 0) sprintf(options2.value[5], "0");
-				else if(CFG.parentalcontrol == 1) sprintf(options2.value[5], "1");
-				else if(CFG.parentalcontrol == 2) sprintf(options2.value[5], "2");
-				else if(CFG.parentalcontrol == 3) sprintf(options2.value[5], "3");
+                if (CFG.godmode != 1) options2.SetValue(5, "********");
+				else if(CFG.parentalcontrol == 0) options2.SetValue(5, "0");
+				else if(CFG.parentalcontrol == 1) options2.SetValue(5, "1");
+				else if(CFG.parentalcontrol == 2) options2.SetValue(5, "2");
+				else if(CFG.parentalcontrol == 3) options2.SetValue(5, "3");
 
-
-                if (strlen(CFG.covers_path) < (9 + 3)) {
-				sprintf(cfgtext, "%s", CFG.covers_path);
-                } else {
-				strncpy(cfgtext, CFG.covers_path,  9);
-				cfgtext[9] = '\0';
-				strncat(cfgtext, "...", 3);
-                }
-				sprintf(options2.value[6], "%s", cfgtext);
-
-                if (strlen(CFG.disc_path) < (9 + 3)) {
-				sprintf(cfgtext, "%s", CFG.disc_path);
-                } else {
-				strncpy(cfgtext, CFG.disc_path,  9);
-				cfgtext[9] = '\0';
-				strncat(cfgtext, "...", 3);
-                }
-				sprintf(options2.value[7], "%s", cfgtext);
-
-                if (strlen(CFG.theme_path) < (9 + 3)) {
-				sprintf(cfgtext, "%s", CFG.theme_path);
-                } else {
-				strncpy(cfgtext, CFG.theme_path,  9);
-				cfgtext[9] = '\0';
-				strncat(cfgtext, "...", 3);
-                }
-				sprintf(options2.value[8], "%s", cfgtext);
+				options2.SetValue(6, "%s", CFG.covers_path);
+				options2.SetValue(7, "%s", CFG.disc_path);
+				options2.SetValue(8, "%s", CFG.theme_path);
 
 				ret = optionBrowser2.GetClickedOption();
 
@@ -4923,119 +4872,88 @@ static int MenuSettings()
 						break;
 					}
 			}
-			if (pageToDisplay == 3){
+			if (pageToDisplay == 3)
+			{
 
-
-			if ( Settings.keyset > 3 )
+				if ( Settings.keyset >= settings_keyset_max)
 					Settings.keyset = 0;
-            if ( Settings.unicodefix > 2 )
+				if ( Settings.unicodefix > 2 )
 					Settings.unicodefix = 0;
-            if ( Settings.wiilight > 2 )
+				if ( Settings.wiilight > 2 )
 					Settings.wiilight = 0;
 
-            if (strlen(CFG.titlestxt_path) < (9 + 3)) {
-            sprintf(cfgtext, "%s", CFG.titlestxt_path);
-            } else {
-            strncpy(cfgtext, CFG.titlestxt_path,  9);
-            cfgtext[9] = '\0';
-            strncat(cfgtext, "...", 3);
-            }
-            sprintf(options2.value[0], "%s", cfgtext);
+				options2.SetValue(0, "%s", CFG.titlestxt_path);
 
-			if (strlen(CFG.language_path) < (9 + 3)) {
-				sprintf(cfgtext, "%s", CFG.language_path);
-            } else {
-				strncpy(cfgtext, CFG.language_path,  9);
-				cfgtext[9] = '\0';
-				strncat(cfgtext, "...", 3);
-            }
-            sprintf(options2.value[1], "%s", cfgtext);
+				options2.SetValue(1, "%s", CFG.language_path);
 
+				if (Settings.keyset == us) options2.SetValue(2,"QWERTY");
+				else if (Settings.keyset == dvorak) options2.SetValue(2,"DVORAK");
+				else if (Settings.keyset == euro) options2.SetValue(2,"QWERTZ");
+				else if (Settings.keyset == azerty) options2.SetValue(2,"AZERTY");
 
-			if (Settings.keyset == us) sprintf (options2.value[2],"QWERTY");
-			else if (Settings.keyset == dvorak) sprintf (options2.value[2],"DVORAK");
-			else if (Settings.keyset == euro) sprintf (options2.value[2],"QWERTZ");
-			else if (Settings.keyset == azerty) sprintf (options2.value[2],"AZERTY");
+				if (Settings.unicodefix == 0) options2.SetValue(3,"%s",LANGUAGE.OFF);
+				else if (Settings.unicodefix == 1) options2.SetValue(3,"%s",LANGUAGE.TChinese);
+				else if (Settings.unicodefix == 2) options2.SetValue(3,"%s",LANGUAGE.SChinese);
 
-            if (Settings.unicodefix == 0) sprintf (options2.value[3],"%s",LANGUAGE.OFF);
-            else if (Settings.unicodefix == 1) sprintf (options2.value[3],"%s",LANGUAGE.TChinese);
-            else if (Settings.unicodefix == 2) sprintf (options2.value[3],"%s",LANGUAGE.SChinese);
+				if(!strcmp("notset", CFG.ogg_path) || !strcmp("",CFG.oggload_path))
+					options2.SetValue(4, "%s", LANGUAGE.Standard);
+				else
+					options2.SetValue(4, "%s", CFG.ogg_path);
 
-            if(!strcmp("notset", CFG.ogg_path) || !strcmp("",CFG.oggload_path)) {
-            sprintf(options2.value[4], "%s", LANGUAGE.Standard);
-            } else {
-            if (strlen(CFG.ogg_path) < (9 + 3)) {
-				sprintf(cfgtext, "%s", CFG.ogg_path);
-            } else {
-				strncpy(cfgtext, CFG.ogg_path,  9);
-				cfgtext[9] = '\0';
-				strncat(cfgtext, "...", 3);
-            }
-            sprintf(options2.value[4], "%s", cfgtext);
-            }
+				if (Settings.wiilight == 0) options2.SetValue(5,"%s",LANGUAGE.OFF);
+				else if (Settings.wiilight == 1) options2.SetValue(5,"%s",LANGUAGE.ON);
+				else if (Settings.wiilight == 2) options2.SetValue(5,"%s",LANGUAGE.OnlyInstall);
 
-			if (Settings.wiilight == 0) sprintf (options2.value[5],"%s",LANGUAGE.OFF);
-            else if (Settings.wiilight == 1) sprintf (options2.value[5],"%s",LANGUAGE.ON);
-            else if (Settings.wiilight == 2) sprintf (options2.value[5],"%s",LANGUAGE.OnlyInstall);
+				options2.SetValue(6, "%s", CFG.update_path);
+				options2.SetValue(7, "not working!");
+				options2.SetValue(8, " ");
 
-            if (strlen(CFG.update_path) < (9 + 3)) {
-				sprintf(cfgtext, "%s", CFG.update_path);
-            } else {
-				strncpy(cfgtext, CFG.update_path,  9);
-				cfgtext[9] = '\0';
-                strncat(cfgtext, "...", 3);
-            }
-            sprintf(options2.value[6], "%s", cfgtext);
+				ret = optionBrowser2.GetClickedOption();
 
-			sprintf(options2.value[7], "not working!");
-			sprintf(options2.value[8], " ");
-
-			ret = optionBrowser2.GetClickedOption();
-
-			switch(ret) {
-
-                    case 0:
-                         if ( CFG.godmode == 1)
-                            {
-                                mainWindow->Remove(&optionBrowser2);
-                                mainWindow->Remove(&page1Btn);
-                                mainWindow->Remove(&page2Btn);
-                                mainWindow->Remove(&tabBtn);
-                                mainWindow->Remove(&page3Btn);
-                                w.Remove(&backBtn);
-                                w.Remove(&lockBtn);
-                                w.Remove(&updateBtn);
-                                char entered[43] = "";
-                                strncpy(entered, CFG.titlestxt_path, sizeof(entered));
-                                int result = OnScreenKeyboard(entered,43,4);
-                                mainWindow->Append(&optionBrowser2);
-                                mainWindow->Append(&page1Btn);
-                                mainWindow->Append(&page2Btn);
-                                mainWindow->Append(&tabBtn);
-                                mainWindow->Append(&page3Btn);
-                                w.Append(&backBtn);
-                                w.Append(&lockBtn);
-                                w.Append(&updateBtn);
-                                if ( result == 1 )
-                                {
-									int len = (strlen(entered)-1);
-									if(entered[len] !='/')
-									strncat (entered, "/", 1);
-									strncpy(CFG.titlestxt_path, entered, sizeof(CFG.titlestxt_path));
-                                    WindowPrompt(LANGUAGE.TitlestxtpathChanged,0,LANGUAGE.ok,0,0,0);
-                                    if(isSdInserted()) {
-                                        cfg_save_global();
-                                        CFG_Load();
-                                    } else {
-                                        WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                WindowPrompt(LANGUAGE.Titlestxtpathchange,LANGUAGE.Consoleshouldbeunlockedtomodifyit,LANGUAGE.ok,0,0,0);
-                            }
-                            break;
+				switch(ret)
+				{
+					case 0:
+						if ( CFG.godmode == 1)
+						{
+							mainWindow->Remove(&optionBrowser2);
+							mainWindow->Remove(&page1Btn);
+							mainWindow->Remove(&page2Btn);
+							mainWindow->Remove(&tabBtn);
+							mainWindow->Remove(&page3Btn);
+							w.Remove(&backBtn);
+							w.Remove(&lockBtn);
+							w.Remove(&updateBtn);
+							char entered[43] = "";
+							strncpy(entered, CFG.titlestxt_path, sizeof(entered));
+							int result = OnScreenKeyboard(entered,43,4);
+							mainWindow->Append(&optionBrowser2);
+							mainWindow->Append(&page1Btn);
+							mainWindow->Append(&page2Btn);
+							mainWindow->Append(&tabBtn);
+							mainWindow->Append(&page3Btn);
+							w.Append(&backBtn);
+							w.Append(&lockBtn);
+							w.Append(&updateBtn);
+							if ( result == 1 )
+							{
+								int len = (strlen(entered)-1);
+								if(entered[len] !='/')
+								strncat (entered, "/", 1);
+								strncpy(CFG.titlestxt_path, entered, sizeof(CFG.titlestxt_path));
+								WindowPrompt(LANGUAGE.TitlestxtpathChanged,0,LANGUAGE.ok,0,0,0);
+								if(isSdInserted()) {
+									cfg_save_global();
+									CFG_Load();
+								} else {
+									WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
+								}
+							}
+						}
+						else
+						{
+							WindowPrompt(LANGUAGE.Titlestxtpathchange,LANGUAGE.Consoleshouldbeunlockedtomodifyit,LANGUAGE.ok,0,0,0);
+						}
+						break;
 					case 1: // language file path
 						if ( CFG.godmode == 1)
 						{
@@ -5061,17 +4979,17 @@ static int MenuSettings()
 							if ( result == 1 )
 							{	strncpy(CFG.language_path, entered, sizeof(CFG.language_path));
 								if(isSdInserted()) {
-                                    cfg_save_global();
-                                    if(!checkfile(CFG.language_path)) {
-                                    WindowPrompt(LANGUAGE.Filenotfound,LANGUAGE.Loadingstandardlanguage,LANGUAGE.ok,0,0,0);
-                                    }
-                                    lang_default();
+									cfg_save_global();
+									if(!checkfile(CFG.language_path)) {
+									WindowPrompt(LANGUAGE.Filenotfound,LANGUAGE.Loadingstandardlanguage,LANGUAGE.ok,0,0,0);
+									}
+									lang_default();
 									CFG_Load();
 									menu = MENU_SETTINGS;
 									pageToDisplay = 0;
-                                } else {
-                                    WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
-                                }
+								} else {
+									WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
+								}
 							}
 						}
 						else
@@ -5082,83 +5000,83 @@ static int MenuSettings()
 					case 2:
 						Settings.keyset++;
 						break;
-                    case 3:
-                        Settings.unicodefix++;
-                        break;
-                    case 4:
-                        if(isSdInserted()) {
-                            menu = MENU_OGG;
-                            pageToDisplay = 0;
-                        } else {
-                            WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtousethatoption, LANGUAGE.ok, 0,0,0);
-                        }
-                        break;
-                    case 5:
-                        Settings.wiilight++;
-                        break;
-                    case 7:
-                        if(isSdInserted()) {
-                            menu = MENU_MP3;
-                            pageToDisplay = 0;
-                        } else {
-                            WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtousethatoption, LANGUAGE.ok, 0,0,0);
-                        }
-                        break;
-                    case 6:
-                        if ( CFG.godmode == 1)
-                            {
-                                mainWindow->Remove(&optionBrowser2);
-                                mainWindow->Remove(&page1Btn);
-                                mainWindow->Remove(&page2Btn);
-                                mainWindow->Remove(&tabBtn);
-                                mainWindow->Remove(&page3Btn);
-                                w.Remove(&backBtn);
-                                w.Remove(&lockBtn);
-                                w.Remove(&updateBtn);
-                                char entered[43] = "";
-                                strncpy(entered, CFG.update_path, sizeof(entered));
-                                int result = OnScreenKeyboard(entered,43,4);
-                                mainWindow->Append(&optionBrowser2);
-                                mainWindow->Append(&page1Btn);
-                                mainWindow->Append(&page2Btn);
-                                mainWindow->Append(&tabBtn);
-                                mainWindow->Append(&page3Btn);
-                                w.Append(&backBtn);
-                                w.Append(&lockBtn);
-                                w.Append(&updateBtn);
-                                if ( result == 1 )
-                                {
-									int len = (strlen(entered)-1);
-									if(entered[len] !='/')
-									strncat (entered, "/", 1);
-									strncpy(CFG.update_path, entered, sizeof(CFG.update_path));
-                                    WindowPrompt(LANGUAGE.Updatepathchanged,0,LANGUAGE.ok,0,0,0);
-                                }
-                            } else {
-                                WindowPrompt(0,LANGUAGE.Consoleshouldbeunlockedtomodifyit,LANGUAGE.ok,0,0,0);
-                            }
-                            break;
-                    case 8:
-                        int choice = WindowPrompt(LANGUAGE.Areyousure, 0, LANGUAGE.Yes, LANGUAGE.Cancel, 0, 0);
-                        if(choice == 1) {
-						if(isSdInserted()) {
-                            remove("SD:/config/GXGlobal.cfg");
-                        }
-                        lang_default();
-                        CFG_Load();
-                        DefaultSettings();
-                        menu = MENU_SETTINGS;
-                        pageToDisplay = 0;
+					case 3:
+						Settings.unicodefix++;
+						break;
+					case 4:
+						if(isSdInserted())
+						{
+							menu = MENU_OGG;
+							pageToDisplay = 0;
 						}
-                        break;
-			}
-
+						else
+							WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtousethatoption, LANGUAGE.ok, 0,0,0);
+						break;
+					case 5:
+						Settings.wiilight++;
+						break;
+					case 7:
+						if(isSdInserted())
+						{
+							menu = MENU_MP3;
+							pageToDisplay = 0;
+						} else
+							WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtousethatoption, LANGUAGE.ok, 0,0,0);
+						break;
+					case 6:
+						if ( CFG.godmode == 1)
+						{
+							mainWindow->Remove(&optionBrowser2);
+							mainWindow->Remove(&page1Btn);
+							mainWindow->Remove(&page2Btn);
+							mainWindow->Remove(&tabBtn);
+							mainWindow->Remove(&page3Btn);
+							w.Remove(&backBtn);
+							w.Remove(&lockBtn);
+							w.Remove(&updateBtn);
+							char entered[43] = "";
+							strncpy(entered, CFG.update_path, sizeof(entered));
+							int result = OnScreenKeyboard(entered,43,4);
+							mainWindow->Append(&optionBrowser2);
+							mainWindow->Append(&page1Btn);
+							mainWindow->Append(&page2Btn);
+							mainWindow->Append(&tabBtn);
+							mainWindow->Append(&page3Btn);
+							w.Append(&backBtn);
+							w.Append(&lockBtn);
+							w.Append(&updateBtn);
+							if ( result == 1 )
+							{
+								int len = (strlen(entered)-1);
+								if(entered[len] !='/')
+								strncat (entered, "/", 1);
+								strncpy(CFG.update_path, entered, sizeof(CFG.update_path));
+								WindowPrompt(LANGUAGE.Updatepathchanged,0,LANGUAGE.ok,0,0,0);
+							}
+						}
+						else
+							WindowPrompt(0,LANGUAGE.Consoleshouldbeunlockedtomodifyit,LANGUAGE.ok,0,0,0);
+						break;
+					case 8:
+						int choice = WindowPrompt(LANGUAGE.Areyousure, 0, LANGUAGE.Yes, LANGUAGE.Cancel, 0, 0);
+						if(choice == 1)
+						{
+							if(isSdInserted())
+								remove("SD:/config/GXGlobal.cfg");
+							lang_default();
+							CFG_Load();
+							DefaultSettings();
+							menu = MENU_SETTINGS;
+							pageToDisplay = 0;
+						}
+						break;
+				}
 			}
 
 			if(shutdown == 1)
 				Sys_Shutdown();
 			if(reset == 1)
-			Sys_Reboot();
+				Sys_Reboot();
 
 			if(page1Btn.GetState() == STATE_CLICKED)
 			{
@@ -5368,13 +5286,13 @@ int GameSettings(struct discHdr * header)
 	}
 
 	customOptionList options3(7);
-	sprintf(options3.name[0],"%s", LANGUAGE.VideoMode);
-	sprintf(options3.name[1],"%s", LANGUAGE.VIDTVPatch);
-	sprintf(options3.name[2],"%s", LANGUAGE.Language);
-	sprintf(options3.name[3], "Ocarina");
-	sprintf(options3.name[4], "IOS");
-	sprintf(options3.name[5],"Parental Control");//sprintf(options3.name[5],"%s", LANGUAGE.addToFavorite);
-    sprintf(options3.name[6],"%s", LANGUAGE.Defaultgamesettings);
+	options3.SetName(0,"%s", LANGUAGE.VideoMode);
+	options3.SetName(1,"%s", LANGUAGE.VIDTVPatch);
+	options3.SetName(2,"%s", LANGUAGE.Language);
+	options3.SetName(3, "Ocarina");
+	options3.SetName(4, "IOS");
+	options3.SetName(5,"%s", LANGUAGE.addToFavorite);
+	options3.SetName(6,"%s", LANGUAGE.Defaultgamesettings);
 
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
 	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, vol);
@@ -5438,7 +5356,6 @@ int GameSettings(struct discHdr * header)
 	GuiCustomOptionBrowser optionBrowser3(396, 280, &options3, CFG.theme_path, "bg_options_gamesettings.png", bg_options_settings_png, 0, 200);
 	optionBrowser3.SetPosition(0, 90);
 	optionBrowser3.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	optionBrowser3.SetCol2Position(200);
 
     HaltGui();
 	GuiWindow w(screenwidth, screenheight);
@@ -5483,38 +5400,38 @@ int GameSettings(struct discHdr * header)
 
 		VIDEO_WaitVSync ();
 
-		if (videoChoice == discdefault) sprintf (options3.value[0],"%s",LANGUAGE.DiscDefault);
-		else if (videoChoice == systemdefault) sprintf (options3.value[0],"%s",LANGUAGE.SystemDefault);
-		else if (videoChoice == patch) sprintf (options3.value[0],"%s",LANGUAGE.AutoPatch);
-		else if (videoChoice == pal50) sprintf (options3.value[0],"%s PAL50",LANGUAGE.Force);
-		else if (videoChoice == pal60) sprintf (options3.value[0],"%s PAL60",LANGUAGE.Force);
-		else if (videoChoice == ntsc) sprintf (options3.value[0],"%s NTSC",LANGUAGE.Force);
+		if (videoChoice == discdefault) options3.SetValue(0,"%s",LANGUAGE.DiscDefault);
+		else if (videoChoice == systemdefault) options3.SetValue(0,"%s",LANGUAGE.SystemDefault);
+		else if (videoChoice == patch) options3.SetValue(0,"%s",LANGUAGE.AutoPatch);
+		else if (videoChoice == pal50) options3.SetValue(0,"%s PAL50",LANGUAGE.Force);
+		else if (videoChoice == pal60) options3.SetValue(0,"%s PAL60",LANGUAGE.Force);
+		else if (videoChoice == ntsc) options3.SetValue(0,"%s NTSC",LANGUAGE.Force);
 
-        if (viChoice == on) sprintf (options3.value[1],"%s",LANGUAGE.ON);
-		else if (viChoice == off) sprintf (options3.value[1],"%s",LANGUAGE.OFF);
+        if (viChoice == on) options3.SetValue(1,"%s",LANGUAGE.ON);
+		else if (viChoice == off) options3.SetValue(1,"%s",LANGUAGE.OFF);
 
-		if (languageChoice == ConsoleLangDefault) sprintf (options3.value[2],"%s",LANGUAGE.ConsoleDefault);
-		else if (languageChoice == jap) sprintf (options3.value[2],"%s",LANGUAGE.Japanese);
-		else if (languageChoice == ger) sprintf (options3.value[2],"%s",LANGUAGE.German);
-		else if (languageChoice == eng) sprintf (options3.value[2],"%s",LANGUAGE.English);
-		else if (languageChoice == fren) sprintf (options3.value[2],"%s",LANGUAGE.French);
-		else if (languageChoice == esp) sprintf (options3.value[2],"%s",LANGUAGE.Spanish);
-        else if (languageChoice == it) sprintf (options3.value[2],"%s",LANGUAGE.Italian);
-		else if (languageChoice == dut) sprintf (options3.value[2],"%s",LANGUAGE.Dutch);
-		else if (languageChoice == schin) sprintf (options3.value[2],"%s",LANGUAGE.SChinese);
-		else if (languageChoice == tchin) sprintf (options3.value[2],"%s",LANGUAGE.TChinese);
-		else if (languageChoice == kor) sprintf (options3.value[2],"%s",LANGUAGE.Korean);
+		if (languageChoice == ConsoleLangDefault) options3.SetValue(2,"%s",LANGUAGE.ConsoleDefault);
+		else if (languageChoice == jap) options3.SetValue(2,"%s",LANGUAGE.Japanese);
+		else if (languageChoice == ger) options3.SetValue(2,"%s",LANGUAGE.German);
+		else if (languageChoice == eng) options3.SetValue(2,"%s",LANGUAGE.English);
+		else if (languageChoice == fren) options3.SetValue(2,"%s",LANGUAGE.French);
+		else if (languageChoice == esp) options3.SetValue(2,"%s",LANGUAGE.Spanish);
+        else if (languageChoice == it) options3.SetValue(2,"%s",LANGUAGE.Italian);
+		else if (languageChoice == dut) options3.SetValue(2,"%s",LANGUAGE.Dutch);
+		else if (languageChoice == schin) options3.SetValue(2,"%s",LANGUAGE.SChinese);
+		else if (languageChoice == tchin) options3.SetValue(2,"%s",LANGUAGE.TChinese);
+		else if (languageChoice == kor) options3.SetValue(2,"%s",LANGUAGE.Korean);
 
-        if (ocarinaChoice == on) sprintf (options3.value[3],"%s",LANGUAGE.ON);
-		else if (ocarinaChoice == off) sprintf (options3.value[3],"%s",LANGUAGE.OFF);
+        if (ocarinaChoice == on) options3.SetValue(3,"%s",LANGUAGE.ON);
+		else if (ocarinaChoice == off) options3.SetValue(3,"%s",LANGUAGE.OFF);
 
-		if (iosChoice == i249) sprintf (options3.value[4],"249");
-		else if (iosChoice == i222) sprintf (options3.value[4],"222");
+		if (iosChoice == i249) options3.SetValue(4,"249");
+		else if (iosChoice == i222) options3.SetValue(4,"222");
 
-		if (parentalcontrolChoice == 0) sprintf (options3.value[5],"0 (Always)");
-		else if (parentalcontrolChoice == 1) sprintf (options3.value[5],"1");
-		else if (parentalcontrolChoice == 2) sprintf (options3.value[5],"2");
-		else if (parentalcontrolChoice == 3) sprintf (options3.value[5],"3 (Mature)");
+		if (parentalcontrolChoice == 0) options3.SetValue(5,"0 (Always)");
+		else if (parentalcontrolChoice == 1) options3.SetValue(5,"1");
+		else if (parentalcontrolChoice == 2) options3.SetValue(5,"2");
+		else if (parentalcontrolChoice == 3) options3.SetValue(5,"3 (Mature)");
 
 
 		if(shutdown == 1)
@@ -5522,7 +5439,7 @@ int GameSettings(struct discHdr * header)
 		if(reset == 1)
 			Sys_Reboot();
 
-        sprintf(options3.value[6]," ");
+        options3.SetValue(6," ");
 
 		ret = optionBrowser3.GetClickedOption();
 
@@ -5823,10 +5740,12 @@ int MenuOGG()
     customOptionList options2(countmp3);
 
     for (cnt = 0; cnt < countmp3; cnt++) {
-        snprintf(options2.value[cnt], 30, "%s", mp3files[cnt]);
-        sprintf (options2.name[cnt],"%i.", cnt+1);
+		char tmp[30];
+        snprintf(tmp , 30, "%s", mp3files[cnt]);
+        options2.SetValue(cnt, "%s", tmp);
+        options2.SetName(cnt,"%i.", cnt+1);
     }
-    options2.length = cnt;
+ //   options2.length = cnt;
 
 	if(cnt < 9) {
     scrollon = 0;
@@ -6085,16 +6004,19 @@ int MenuMp3()
     GuiTrigger trigA;
 	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 
-    customOptionList options2(500);
     char mp3path[30] = "SD:/mp3/";
     char fullpath[110];
 	int countmp3 = GetFiles(mp3path);
 
-    for (cnt = 0; cnt < countmp3; cnt++) {
-        snprintf(options2.value[cnt], 30, "%s", mp3files[cnt]);
-        sprintf (options2.name[cnt],"%i.", cnt+1);
+	customOptionList options2(countmp3);
+   
+     for (cnt = 0; cnt < countmp3; cnt++) {
+		char tmp[30];
+        snprintf(tmp , 30, "%s", mp3files[cnt]);
+        options2.SetValue(cnt, "%s", tmp);
+        options2.SetName(cnt,"%i.", cnt+1);
     }
-    options2.length = cnt;
+ //   options2.length = cnt;
 
     snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
 	GuiImageData btnOutline(imgPath, button_dialogue_box_png);
@@ -6106,7 +6028,6 @@ int MenuMp3()
 	GuiCustomOptionBrowser optionBrowser4(396, 280, &options2, CFG.theme_path, "bg_options_settings.png", bg_options_settings_png, scrollon, 85);
 	optionBrowser4.SetPosition(0, 90);
 	optionBrowser4.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	optionBrowser4.SetCol2Position(85);
 
     GuiText cancelBtnTxt(LANGUAGE.Back, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
 	cancelBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);

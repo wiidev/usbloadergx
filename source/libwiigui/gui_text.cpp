@@ -94,6 +94,18 @@ void GuiText::SetText(const char * t)
 	scrollPos2 = 0;
 	scrollDelay = 0;
 }
+void GuiText::SetTextf(const char *format, ...)
+{
+	char *tmp=0;
+	va_list va;
+	va_start(va, format);
+	if((vasprintf(&tmp, format, va)>=0) && tmp)
+	{
+		this->SetText(tmp);
+		free(tmp);
+	}
+	va_end(va);
+}
 
 void GuiText::SetPresets(int sz, GXColor c, int w, int wrap, u16 s, int h, int v)
 {
@@ -178,6 +190,9 @@ void GuiText::SetFont(FreeTypeGX *f)
 int GuiText::GetTextWidth()
 {
 	LOCK(this);
+	if(!text)
+		return 0;
+	
 	int newSize = size*this->GetScale();
 
 	if(newSize != currentSize || currentWidescreen != widescreen)

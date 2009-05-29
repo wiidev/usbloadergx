@@ -313,27 +313,26 @@ void GuiGameBrowser::UpdateListEntries()
 	int next = listOffset;
 	for(int i=0; i<pagesize; i++)
 	{
-			if(next >= 0)
+		if(next >= 0)
+		{
+			if(game[i]->GetState() == STATE_DISABLED)
 			{
-				if(game[i]->GetState() == STATE_DISABLED)
-				{
-					game[i]->SetVisible(true);
-					game[i]->SetState(STATE_DEFAULT);
-				}
-				gameTxt[i]->SetText(get_title(&gameList[next]));
-				gameTxt[i]->SetPosition(24, 0);
-				gameTxtOver[i]->SetText(get_title(&gameList[next]));
-				gameTxtOver[i]->SetPosition(24, 0);
+				game[i]->SetVisible(true);
+				game[i]->SetState(STATE_DEFAULT);
+			}
+			gameTxt[i]->SetText(get_title(&gameList[next]));
+			gameTxt[i]->SetPosition(24, 0);
+			gameTxtOver[i]->SetText(get_title(&gameList[next]));
+			gameTxtOver[i]->SetPosition(24, 0);
 
-				gameIndex[i] = next;
-				next = this->FindMenuItem(next, 1);
-			}
-			else
-			{
-				game[i]->SetVisible(false);
-				game[i]->SetState(STATE_DISABLED);
-			}
-//		}
+			gameIndex[i] = next;
+			next = this->FindMenuItem(next, 1);
+		}
+		else
+		{
+			game[i]->SetVisible(false);
+			game[i]->SetState(STATE_DISABLED);
+		}
 	}
 }
 
@@ -437,7 +436,6 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 				{
 					// move list up by 1
 					listOffset = prev;
-//					UpdateEntries();
 				}
 				else
 				{
@@ -500,10 +498,7 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 					}
 					scrollbarBoxBtn->Draw();
 					usleep(10000 * scrolldelay);
-
-
 				}
-
 			}
 			else if (position2 < position1)
 			{
@@ -603,7 +598,6 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 				{
 					// move list down by 1
 					listOffset = this->FindMenuItem(listOffset, 1);
-//					UpdateEntries();
 				}
 				else if(game[selectedItem+1]->IsVisible())
 				{
@@ -623,7 +617,6 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 				{
 					// move list up by 1
 					listOffset = prev;
-//					UpdateEntries();
 				}
 				else
 				{
