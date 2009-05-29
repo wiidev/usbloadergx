@@ -104,6 +104,17 @@ struct THEME
 	short battery2_y;
 	short battery3_y;
 	short battery4_y;
+	short favorite_x;
+	short favorite_y;
+	short abc_x;
+	short abc_y;
+	short grid_x;
+	short grid_y;
+	short carousel_x;
+	short carousel_y;
+	short count_x;
+	short count_y;
+	short sortBarOffset;
 //	short showPower;
 //	short showHome;
 	short setting_x;

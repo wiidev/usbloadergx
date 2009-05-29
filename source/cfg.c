@@ -309,6 +309,17 @@ void CFG_Default(int widescreen) // -1 = non forced Mode
 	THEME.gameText_g = 0;
 	THEME.gameText_b = 0;
 	THEME.pagesize = 9;
+	THEME.favorite_x = 20;
+	THEME.favorite_y = 13;
+	THEME.abc_x = 52;
+	THEME.abc_y = 13;
+	THEME.grid_x = 116;
+	THEME.grid_y = 13;
+	THEME.carousel_x = 148;
+	THEME.carousel_y = 13;
+	THEME.count_x = 84;
+	THEME.count_y = 13;
+	THEME.sortBarOffset = 100;
 }
 
 
@@ -651,6 +662,53 @@ void theme_set(char *name, char *val)
 		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
 			THEME.sdcard_x = x - (x % 4);
 			THEME.sdcard_y = y;
+		}
+	}
+
+	else if (strcmp(cfg_name, "favorite_coords") == 0) {
+		short x,y;
+		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
+			THEME.favorite_x = x - (x % 4);
+			THEME.favorite_y = y;
+		}
+	}
+
+	else if (strcmp(cfg_name, "abc_coords") == 0) {
+		short x,y;
+		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
+			THEME.abc_x = x - (x % 4);
+			THEME.abc_y = y;
+		}
+	}
+
+	else if (strcmp(cfg_name, "count_coords") == 0) {
+		short x,y;
+		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
+			THEME.count_x = x - (x % 4);
+			THEME.count_y = y;
+		}
+	}
+
+	else if (strcmp(cfg_name, "carousel_coords") == 0) {
+		short x,y;
+		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
+			THEME.carousel_x = x - (x % 4);
+			THEME.carousel_y = y;
+		}
+	}
+
+	else if (strcmp(cfg_name, "grid_coords") == 0) {
+		short x,y;
+		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
+			THEME.grid_x = x - (x % 4);
+			THEME.grid_y = y;
+		}
+	}
+
+	else if (strcmp(cfg_name, "sortBarOffset") == 0) {
+		short x;
+		if (sscanf(val, "%hd", &x) == 1) {
+			THEME.sortBarOffset = x;
 		}
 	}
 

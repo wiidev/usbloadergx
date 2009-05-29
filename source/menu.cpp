@@ -3125,14 +3125,14 @@ static int MenuDiscList()
 	GuiImage favoriteBtnImg_g(&imgfavIcon_gray);
 	favoriteBtnImg.SetWidescreen(CFG.widescreen);
 	favoriteBtnImg_g.SetWidescreen(CFG.widescreen);
-	GuiButton favoriteBtn(&favoriteBtnImg_g,&favoriteBtnImg_g, 2, 3, 20, 15, &trigA, &btnSoundOver, &btnClick,1);
+	GuiButton favoriteBtn(&favoriteBtnImg_g,&favoriteBtnImg_g, 2, 3, THEME.favorite_x, THEME.favorite_y, &trigA, &btnSoundOver, &btnClick,1);
 	favoriteBtn.SetAlpha(180);
 
 	GuiImage abcBtnImg(&imgabcIcon);
 	abcBtnImg.SetWidescreen(CFG.widescreen);
 	GuiImage abcBtnImg_g(&imgabcIcon_gray);
 	abcBtnImg_g.SetWidescreen(CFG.widescreen);
-	GuiButton abcBtn(&abcBtnImg_g,&abcBtnImg_g, 2, 3, 52, 15, &trigA, &btnSoundOver, &btnClick,1);
+	GuiButton abcBtn(&abcBtnImg_g,&abcBtnImg_g, 2, 3, THEME.abc_x, THEME.abc_y, &trigA, &btnSoundOver, &btnClick,1);
 	abcBtn.SetAlpha(180);
 
 
@@ -3140,7 +3140,7 @@ static int MenuDiscList()
 	countBtnImg.SetWidescreen(CFG.widescreen);
 	GuiImage countBtnImg_g(&imgplayCountIcon_gray);
 	countBtnImg_g.SetWidescreen(CFG.widescreen);
-	GuiButton countBtn(&countBtnImg_g,&countBtnImg_g, 2, 3, 84, 15, &trigA, &btnSoundOver, &btnClick,1);
+	GuiButton countBtn(&countBtnImg_g,&countBtnImg_g, 2, 3, THEME.count_x, THEME.count_y, &trigA, &btnSoundOver, &btnClick,1);
 	countBtn.SetAlpha(180);
 
 
@@ -3150,7 +3150,7 @@ static int MenuDiscList()
 	GuiImage listBtnImg_g(&imgarrangeList_gray);
 	gridBtnImg_g.SetWidescreen(CFG.widescreen);
 	listBtnImg_g.SetWidescreen(CFG.widescreen);
-	GuiButton gridBtn(&gridBtnImg_g,&gridBtnImg_g, 2, 3, 116, 15, &trigA, &btnSoundOver, &btnClick,1);
+	GuiButton gridBtn(&gridBtnImg_g,&gridBtnImg_g, 2, 3, THEME.grid_x, THEME.grid_y, &trigA, &btnSoundOver, &btnClick,1);
 	gridBtn.SetAlpha(180);
 	if (Settings.gameDisplay==grid){gridBtn.SetImage(&listBtnImg_g);
 	gridBtn.SetImageOver(&listBtnImg_g);}
@@ -3159,7 +3159,7 @@ static int MenuDiscList()
 	carosselleBtnImg.SetWidescreen(CFG.widescreen);
 	GuiImage carosselleBtnImg_g(&imgarrangeCarosselle_gray);
 	carosselleBtnImg_g.SetWidescreen(CFG.widescreen);
-	GuiButton carosselleBtn(&carosselleBtnImg_g,&carosselleBtnImg_g, 2, 3, 148, 15, &trigA, &btnSoundOver, &btnClick,1);
+	GuiButton carosselleBtn(&carosselleBtnImg_g,&carosselleBtnImg_g, 2, 3, THEME.carousel_x, THEME.carousel_y, &trigA, &btnSoundOver, &btnClick,1);
 	carosselleBtn.SetAlpha(180);
 
 	if (Settings.fave)
@@ -3181,19 +3181,19 @@ static int MenuDiscList()
 	{
 		if(CFG.widescreen)
 		{
-			favoriteBtn.SetPosition(-80,13);
-			abcBtn.SetPosition(-48,13);
-			countBtn.SetPosition(-16,13);
-			gridBtn.SetPosition(16,13);
-			carosselleBtn.SetPosition(48,13);
+			favoriteBtn.SetPosition(THEME.favorite_x-THEME.sortBarOffset, THEME.favorite_y);
+			abcBtn.SetPosition(THEME.abc_x-THEME.sortBarOffset, THEME.abc_y);
+			countBtn.SetPosition(THEME.count_x-THEME.sortBarOffset, THEME.count_y);
+			gridBtn.SetPosition(THEME.grid_x-THEME.sortBarOffset, THEME.grid_y);
+			carosselleBtn.SetPosition(THEME.carousel_x-THEME.sortBarOffset, THEME.carousel_y);
 		}
 		else
 		{
-			favoriteBtn.SetPosition(-100,13);
-			abcBtn.SetPosition(-60,13);
-			countBtn.SetPosition(-20,13);
-			gridBtn.SetPosition(20,13);
-			carosselleBtn.SetPosition(60,13);
+			favoriteBtn.SetPosition(THEME.favorite_x-20-THEME.sortBarOffset, THEME.favorite_y);
+			abcBtn.SetPosition(THEME.abc_x-12-THEME.sortBarOffset, THEME.abc_y);
+			countBtn.SetPosition(THEME.count_x-4-THEME.sortBarOffset, THEME.count_y);
+			gridBtn.SetPosition(THEME.grid_x+4-THEME.sortBarOffset, THEME.grid_y);
+			carosselleBtn.SetPosition(THEME.carousel_x+12-THEME.sortBarOffset, THEME.carousel_y);
 		}
 		
 	}
@@ -3201,19 +3201,19 @@ static int MenuDiscList()
 	{
 		if(CFG.widescreen)
 		{
-			favoriteBtn.SetPosition(20,13);
-			abcBtn.SetPosition(52,13);
-			countBtn.SetPosition(84,13);
-			gridBtn.SetPosition(116,13);
-			carosselleBtn.SetPosition(148,13);
+			favoriteBtn.SetPosition(THEME.favorite_x, THEME.favorite_y);
+			abcBtn.SetPosition(THEME.abc_x, THEME.abc_y);
+			countBtn.SetPosition(THEME.count_x, THEME.count_y);
+			gridBtn.SetPosition(THEME.grid_x, THEME.grid_y);
+			carosselleBtn.SetPosition(THEME.carousel_x, THEME.carousel_y);
 		}
 		else
 		{
-			favoriteBtn.SetPosition(0,13);
-			abcBtn.SetPosition(40,13);
-			countBtn.SetPosition(80,13);
-			gridBtn.SetPosition(120,13);
-			carosselleBtn.SetPosition(160,13);
+			favoriteBtn.SetPosition(THEME.favorite_x-20, THEME.favorite_y);
+			abcBtn.SetPosition(THEME.abc_x-12, THEME.abc_y);
+			countBtn.SetPosition(THEME.count_x-4, THEME.count_y);
+			gridBtn.SetPosition(THEME.grid_x+4, THEME.grid_y);
+			carosselleBtn.SetPosition(THEME.carousel_x+12, THEME.carousel_y);
 		}
 	}
 
@@ -3597,20 +3597,20 @@ static int MenuDiscList()
 			gridBtn.SetImageOver(&listBtnImg_g);
 			if(CFG.widescreen)
 			{
-				favoriteBtn.SetPosition(-80,13);
-				abcBtn.SetPosition(-48,13);
-				countBtn.SetPosition(-16,13);
-				gridBtn.SetPosition(16,13);
-				carosselleBtn.SetPosition(48,13);
+				favoriteBtn.SetPosition(THEME.favorite_x-THEME.sortBarOffset, THEME.favorite_y);
+				abcBtn.SetPosition(THEME.abc_x-THEME.sortBarOffset, THEME.abc_y);
+				countBtn.SetPosition(THEME.count_x-THEME.sortBarOffset, THEME.count_y);
+				gridBtn.SetPosition(THEME.grid_x-THEME.sortBarOffset, THEME.grid_y);
+				carosselleBtn.SetPosition(THEME.carousel_x-THEME.sortBarOffset, THEME.carousel_y);
 			}
 			else
 			{
-				favoriteBtn.SetPosition(-100,13);
-				abcBtn.SetPosition(-60,13);
-				countBtn.SetPosition(-20,13);
-				gridBtn.SetPosition(20,13);
-				carosselleBtn.SetPosition(60,13);
-			}
+				favoriteBtn.SetPosition(THEME.favorite_x-20-THEME.sortBarOffset, THEME.favorite_y);
+				abcBtn.SetPosition(THEME.abc_x-12-THEME.sortBarOffset, THEME.abc_y);
+				countBtn.SetPosition(THEME.count_x-4-THEME.sortBarOffset, THEME.count_y);
+				gridBtn.SetPosition(THEME.grid_x+4-THEME.sortBarOffset, THEME.grid_y);
+				carosselleBtn.SetPosition(THEME.carousel_x+12-THEME.sortBarOffset, THEME.carousel_y);
+				}
 			if((Settings.hddinfo == hr12)||(Settings.hddinfo == hr24)) {
                 clockTime.SetPosition(THEME.clock_x, THEME.clock_y+3);
                 clockTimeBack.SetPosition(THEME.clock_x, THEME.clock_y+3);
@@ -3633,19 +3633,19 @@ static int MenuDiscList()
 			gridBtn.SetImageOver(&gridBtnImg_g);
 			if(CFG.widescreen)
 			{
-				favoriteBtn.SetPosition(20,15);
-				abcBtn.SetPosition(52,15);
-				countBtn.SetPosition(84,15);
-				gridBtn.SetPosition(116,15);
-				carosselleBtn.SetPosition(148,15);
+				favoriteBtn.SetPosition(THEME.favorite_x, THEME.favorite_y);
+				abcBtn.SetPosition(THEME.abc_x, THEME.abc_y);
+				countBtn.SetPosition(THEME.count_x, THEME.count_y);
+				gridBtn.SetPosition(THEME.grid_x, THEME.grid_y);
+				carosselleBtn.SetPosition(THEME.carousel_x, THEME.carousel_y);
 			}
 			else
 			{
-				favoriteBtn.SetPosition(0,13);
-				abcBtn.SetPosition(40,13);
-				countBtn.SetPosition(80,13);
-				gridBtn.SetPosition(120,13);
-				carosselleBtn.SetPosition(160,13);
+				favoriteBtn.SetPosition(THEME.favorite_x-20, THEME.favorite_y);
+				abcBtn.SetPosition(THEME.abc_x-12, THEME.abc_y);
+				countBtn.SetPosition(THEME.count_x-4, THEME.count_y);
+				gridBtn.SetPosition(THEME.grid_x+4, THEME.grid_y);
+				carosselleBtn.SetPosition(THEME.carousel_x+12, THEME.carousel_y);
 			}
 
 			if((Settings.hddinfo == hr12)||(Settings.hddinfo == hr24)) {
