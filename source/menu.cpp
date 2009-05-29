@@ -2356,7 +2356,7 @@ ProgressUpdateWindow()
 
     if(revnumber > currentrev) {
         sprintf(msg, "Rev%i %s.", revnumber, LANGUAGE.available);
-        int choice = WindowPrompt(msg, LANGUAGE.Doyouwanttoupdate, LANGUAGE.Updatedol, LANGUAGE.Updateall, LANGUAGE.No, 0);
+        int choice = WindowPrompt(msg, LANGUAGE.Doyouwanttoupdate, LANGUAGE.Updatedol, LANGUAGE.Updateall, LANGUAGE.Cancel, 0);
         if(choice == 1 || choice == 2) {
             titleTxt.SetTextf("%s USB Loader GX", LANGUAGE.updating);
             msgTxt.SetPosition(0,100);
@@ -2944,6 +2944,8 @@ static int MenuInstall()
 
 	mainWindow->Remove(&w);
 	ResumeGui();
+	SDCard_deInit();
+	SDCard_Init();
 	return menu;
 }
 

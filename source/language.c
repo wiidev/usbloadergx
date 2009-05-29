@@ -956,6 +956,10 @@ void language_set(char *name, char *val)
 		strcopy(LANGUAGE.Updatepathchanged, val, sizeof(LANGUAGE.Updatepathchanged));
 		return;
 	}
+	if (strcmp(name, "CheckingforUpdates") == 0) {
+		strcopy(LANGUAGE.CheckingforUpdates, val, sizeof(LANGUAGE.CheckingforUpdates));
+		return;
+	}
 	if (strcmp(name, "Updatefailed") == 0) {
 		strcopy(LANGUAGE.Updatefailed, val, sizeof(LANGUAGE.Updatefailed));
 		return;

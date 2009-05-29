@@ -190,7 +190,7 @@ struct Game_NUM
 
 
 void CFG_Default(int widescreen); // -1 = non forced mode
-void CFG_Load();
+void CFG_Load(void);
 void lang_defualt();
 struct Game_CFG* CFG_get_game_opt(u8 *id);
 struct Game_NUM* CFG_get_game_num(u8 *id);
@@ -212,7 +212,7 @@ enum {
 	schin,
 	tchin,
 	kor,
-	
+
 	settings_language_max // always the last entry
 };
 
