@@ -26,6 +26,7 @@ class GuiGameCarousel : public GuiElement
 		int pagesize;
 		int firstPic;
 		int speed;
+		int clickedItem;
 
 		struct discHdr * gameList;
 		int gameCnt;

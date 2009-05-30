@@ -437,6 +437,12 @@ int GuiElement::GetEffectOnOver()
 	return effectsOver;
 }
 
+float GuiElement::GetFrequency()
+{
+	LOCK(this);
+	return frequency;
+}
+
 void GuiElement::SetEffect(int eff, int speed, f32 circles, int r, f32 startdegree, f32 anglespeedset, int center_x, int center_y) {
 
     if(eff & EFFECT_GOROUND) {

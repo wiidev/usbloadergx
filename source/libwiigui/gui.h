@@ -347,6 +347,9 @@ class GuiElement
         //!\param center_x x co-ordinate of the center of circle.
 	//!\param center_y y co-ordinate of the center of circle.
 		void SetEffect(int e, int speed, f32 circles, int r, f32 startdegree, f32 anglespeedset, int center_x, int center_y);
+		//!Gets the frequency from the above effect
+		//!\return element frequency
+		float GetFrequency();
 		//!Sets an effect to be enabled on wiimote cursor over
 		//!\param e Effect to enable
 		//!\param a Amount of the effect (usage varies on effect)

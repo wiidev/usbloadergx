@@ -263,11 +263,14 @@ extern const u32	abcIcon_png_size;
 extern const u8		playCountIcon_png[];
 extern const u32	playCountIcon_png_size;
 
+extern const u8		arrangeList_png[];
+extern const u32	arrangeList_png_size;
+
 extern const u8		arrangeGrid_png[];
 extern const u32	arrangeGrid_png_size;
 
-extern const u8		arrangeCarosselle_png[];
-extern const u32	arrangeCarosselle_png_size;
+extern const u8		arrangeCarousel_png[];
+extern const u32	arrangeCarousel_png_size;
 
 extern const u8		favIcon_gray_png[];
 extern const u32	favIcon_gray_png_size;
@@ -284,8 +287,8 @@ extern const u32	arrangeGrid_gray_png_size;
 extern const u8		arrangeList_gray_png[];
 extern const u32	arrangeList_gray_png_size;
 
-extern const u8		arrangeCarosselle_gray_png[];
-extern const u32	arrangeCarosselle_gray_png_size;
+extern const u8		arrangeCarousel_gray_png[];
+extern const u32	arrangeCarousel_gray_png_size;
 
 extern const u8		updateRev_png[];
 extern const u32	updateRev_png_size;

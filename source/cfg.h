@@ -108,6 +108,8 @@ struct THEME
 	short favorite_y;
 	short abc_x;
 	short abc_y;
+	short list_x;
+	short list_y;
 	short grid_x;
 	short grid_y;
 	short carousel_x;

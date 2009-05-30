@@ -3026,12 +3026,14 @@ static int MenuDiscList()
 	GuiImageData imgarrangeGrid(imgPath, arrangeGrid_png);
 	snprintf(imgPath, sizeof(imgPath), "%sarrangeGrid_gray.png", CFG.theme_path);
 	GuiImageData imgarrangeGrid_gray(imgPath, arrangeGrid_gray_png);
+	snprintf(imgPath, sizeof(imgPath), "%sarrangeList.png", CFG.theme_path);
+	GuiImageData imgarrangeList(imgPath, arrangeList_png);
 	snprintf(imgPath, sizeof(imgPath), "%sarrangeList_gray.png", CFG.theme_path);
 	GuiImageData imgarrangeList_gray(imgPath, arrangeList_gray_png);
-	snprintf(imgPath, sizeof(imgPath), "%sarrangeCarosselle.png", CFG.theme_path);
-	GuiImageData imgarrangeCarosselle(imgPath, arrangeCarosselle_png);
-	snprintf(imgPath, sizeof(imgPath), "%sarrangeCarosselle_gray.png", CFG.theme_path);
-	GuiImageData imgarrangeCarosselle_gray(imgPath, arrangeCarosselle_gray_png);
+	snprintf(imgPath, sizeof(imgPath), "%sarrangeCarousel.png", CFG.theme_path);
+	GuiImageData imgarrangeCarousel(imgPath, arrangeCarousel_png);
+	snprintf(imgPath, sizeof(imgPath), "%sarrangeCarousel_gray.png", CFG.theme_path);
+	GuiImageData imgarrangeCarousel_gray(imgPath, arrangeCarousel_gray_png);
 
     GuiTrigger trigA;
 	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
@@ -3127,23 +3129,28 @@ static int MenuDiscList()
 	countBtn.SetAlpha(180);
 
 
+	GuiImage listBtnImg(&imgarrangeList);
+	listBtnImg.SetWidescreen(CFG.widescreen);
+	GuiImage listBtnImg_g(&imgarrangeList_gray);
+	listBtnImg_g.SetWidescreen(CFG.widescreen);
+	GuiButton listBtn(&listBtnImg_g,&listBtnImg_g, 2, 3, THEME.list_x, THEME.list_y, &trigA, &btnSoundOver, &btnClick,1);
+	listBtn.SetAlpha(180);
+
+
 	GuiImage gridBtnImg(&imgarrangeGrid);
 	gridBtnImg.SetWidescreen(CFG.widescreen);
 	GuiImage gridBtnImg_g(&imgarrangeGrid_gray);
-	GuiImage listBtnImg_g(&imgarrangeList_gray);
 	gridBtnImg_g.SetWidescreen(CFG.widescreen);
-	listBtnImg_g.SetWidescreen(CFG.widescreen);
 	GuiButton gridBtn(&gridBtnImg_g,&gridBtnImg_g, 2, 3, THEME.grid_x, THEME.grid_y, &trigA, &btnSoundOver, &btnClick,1);
 	gridBtn.SetAlpha(180);
-	if (Settings.gameDisplay==grid){gridBtn.SetImage(&listBtnImg_g);
-	gridBtn.SetImageOver(&listBtnImg_g);}
 
-	GuiImage carosselleBtnImg(&imgarrangeCarosselle);
-	carosselleBtnImg.SetWidescreen(CFG.widescreen);
-	GuiImage carosselleBtnImg_g(&imgarrangeCarosselle_gray);
-	carosselleBtnImg_g.SetWidescreen(CFG.widescreen);
-	GuiButton carosselleBtn(&carosselleBtnImg_g,&carosselleBtnImg_g, 2, 3, THEME.carousel_x, THEME.carousel_y, &trigA, &btnSoundOver, &btnClick,1);
-	carosselleBtn.SetAlpha(180);
+
+	GuiImage carouselBtnImg(&imgarrangeCarousel);
+	carouselBtnImg.SetWidescreen(CFG.widescreen);
+	GuiImage carouselBtnImg_g(&imgarrangeCarousel_gray);
+	carouselBtnImg_g.SetWidescreen(CFG.widescreen);
+	GuiButton carouselBtn(&carouselBtnImg_g,&carouselBtnImg_g, 2, 3, THEME.carousel_x, THEME.carousel_y, &trigA, &btnSoundOver, &btnClick,1);
+	carouselBtn.SetAlpha(180);
 
 	if (Settings.fave)
 	{
@@ -3160,43 +3167,61 @@ static int MenuDiscList()
 		countBtn.SetImage(&countBtnImg);
 		countBtn.SetAlpha(255);
 	}
-	if (Settings.gameDisplay==grid)
+	if (Settings.gameDisplay==list)
 	{
-		if(CFG.widescreen)
-		{
-			favoriteBtn.SetPosition(THEME.favorite_x-THEME.sortBarOffset, THEME.favorite_y);
-			abcBtn.SetPosition(THEME.abc_x-THEME.sortBarOffset, THEME.abc_y);
-			countBtn.SetPosition(THEME.count_x-THEME.sortBarOffset, THEME.count_y);
-			gridBtn.SetPosition(THEME.grid_x-THEME.sortBarOffset, THEME.grid_y);
-			carosselleBtn.SetPosition(THEME.carousel_x-THEME.sortBarOffset, THEME.carousel_y);
-		}
-		else
-		{
-			favoriteBtn.SetPosition(THEME.favorite_x-20-THEME.sortBarOffset, THEME.favorite_y);
-			abcBtn.SetPosition(THEME.abc_x-12-THEME.sortBarOffset, THEME.abc_y);
-			countBtn.SetPosition(THEME.count_x-4-THEME.sortBarOffset, THEME.count_y);
-			gridBtn.SetPosition(THEME.grid_x+4-THEME.sortBarOffset, THEME.grid_y);
-			carosselleBtn.SetPosition(THEME.carousel_x+12-THEME.sortBarOffset, THEME.carousel_y);
-		}
-
+		listBtn.SetImage(&listBtnImg);
+		listBtn.SetAlpha(255);
 	}
-	else // List-Mode
+	else if (Settings.gameDisplay==grid)
+	{
+		gridBtn.SetImage(&gridBtnImg);
+		gridBtn.SetAlpha(255);
+	}
+	else if (Settings.gameDisplay==carousel)
+	{
+		carouselBtn.SetImage(&carouselBtnImg);
+		carouselBtn.SetAlpha(255);
+	}
+	if (Settings.gameDisplay==list)
 	{
 		if(CFG.widescreen)
 		{
 			favoriteBtn.SetPosition(THEME.favorite_x, THEME.favorite_y);
 			abcBtn.SetPosition(THEME.abc_x, THEME.abc_y);
 			countBtn.SetPosition(THEME.count_x, THEME.count_y);
+			listBtn.SetPosition(THEME.list_x, THEME.list_y);
 			gridBtn.SetPosition(THEME.grid_x, THEME.grid_y);
-			carosselleBtn.SetPosition(THEME.carousel_x, THEME.carousel_y);
+			carouselBtn.SetPosition(THEME.carousel_x, THEME.carousel_y);
 		}
 		else
 		{
 			favoriteBtn.SetPosition(THEME.favorite_x-20, THEME.favorite_y);
 			abcBtn.SetPosition(THEME.abc_x-12, THEME.abc_y);
 			countBtn.SetPosition(THEME.count_x-4, THEME.count_y);
-			gridBtn.SetPosition(THEME.grid_x+4, THEME.grid_y);
-			carosselleBtn.SetPosition(THEME.carousel_x+12, THEME.carousel_y);
+			listBtn.SetPosition(THEME.list_x+4, THEME.list_y);
+			gridBtn.SetPosition(THEME.grid_x+12, THEME.grid_y);
+			carouselBtn.SetPosition(THEME.carousel_x+20, THEME.carousel_y);
+		}
+	}
+	else
+	{
+		if(CFG.widescreen)
+		{
+			favoriteBtn.SetPosition(THEME.favorite_x-THEME.sortBarOffset, THEME.favorite_y);
+			abcBtn.SetPosition(THEME.abc_x-THEME.sortBarOffset, THEME.abc_y);
+			countBtn.SetPosition(THEME.count_x-THEME.sortBarOffset, THEME.count_y);
+			listBtn.SetPosition(THEME.list_x-THEME.sortBarOffset, THEME.list_y);
+			gridBtn.SetPosition(THEME.grid_x-THEME.sortBarOffset, THEME.grid_y);
+			carouselBtn.SetPosition(THEME.carousel_x-THEME.sortBarOffset, THEME.carousel_y);
+		}
+		else
+		{
+			favoriteBtn.SetPosition(THEME.favorite_x-20-THEME.sortBarOffset, THEME.favorite_y);
+			abcBtn.SetPosition(THEME.abc_x-12-THEME.sortBarOffset, THEME.abc_y);
+			countBtn.SetPosition(THEME.count_x-4-THEME.sortBarOffset, THEME.count_y);
+			listBtn.SetPosition(THEME.list_x+4-THEME.sortBarOffset, THEME.list_y);
+			gridBtn.SetPosition(THEME.grid_x+12-THEME.sortBarOffset, THEME.grid_y);
+			carouselBtn.SetPosition(THEME.carousel_x+20-THEME.sortBarOffset, THEME.carousel_y);
 		}
 	}
 
@@ -3222,25 +3247,29 @@ static int MenuDiscList()
 	gameBrowser.SetPosition(THEME.selection_x, THEME.selection_y);
 	gameBrowser.SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
 
-    GuiGameGrid gameGrid(640,400, gameList, gameCnt, CFG.theme_path, bg_options_png, 0, 0);
+	GuiGameGrid gameGrid(640,400, gameList, gameCnt, CFG.theme_path, bg_options_png, 0, 0);
 	gameGrid.SetPosition(0,20);
 	gameGrid.SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
 
-    GuiText clockTimeBack("88:88", 40, (GXColor){138, 138, 138, 40});
-    clockTimeBack.SetAlignment(THEME.clockAlign, ALIGN_TOP);
-    clockTimeBack.SetPosition(THEME.clock_x, THEME.clock_y);
+	GuiGameCarousel gameCarousel(640, 400, gameList, gameCnt, CFG.theme_path, bg_options_png, startat, offset);
+	gameCarousel.SetPosition(0,-20);
+	gameCarousel.SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
+
+	GuiText clockTimeBack("88:88", 40, (GXColor){138, 138, 138, 40});
+	clockTimeBack.SetAlignment(THEME.clockAlign, ALIGN_TOP);
+	clockTimeBack.SetPosition(THEME.clock_x, THEME.clock_y);
 	clockTimeBack.SetFont(fontClock);
-	if (Settings.gameDisplay==grid){
-    clockTimeBack.SetPosition(THEME.clock_x, THEME.clock_y+3);}
+	if (Settings.gameDisplay==grid || Settings.gameDisplay==carousel) {
+		clockTimeBack.SetPosition(THEME.clock_x, THEME.clock_y+3);
+	}
+	GuiText clockTime(theTime, 40, (GXColor){138, 138, 138, 240});
+	clockTime.SetAlignment(THEME.clockAlign, ALIGN_TOP);
+	clockTime.SetPosition(THEME.clock_x, THEME.clock_y);	clockTime.SetFont(fontClock);
+	if (Settings.gameDisplay==grid || Settings.gameDisplay==carousel) {
+		clockTime.SetPosition(THEME.clock_x, THEME.clock_y+3);
+	}
 
-    GuiText clockTime(theTime, 40, (GXColor){138, 138, 138, 240});
-    clockTime.SetAlignment(THEME.clockAlign, ALIGN_TOP);
-    clockTime.SetPosition(THEME.clock_x, THEME.clock_y);
-	clockTime.SetFont(fontClock);
-	if (Settings.gameDisplay==grid){
-    clockTime.SetPosition(THEME.clock_x, THEME.clock_y+3);}
-
-    HaltGui();
+	HaltGui();
 	GuiWindow w(screenwidth, screenheight);
 
 	if(THEME.showHDD == -1 || THEME.showHDD == 1) //force show hdd info
@@ -3257,77 +3286,62 @@ static int MenuDiscList()
 	if (CFG.godmode)
 		w.Append(&installBtn);
 	w.Append(&homeBtn);
-    w.Append(&settingsBtn);
-    if (Settings.gameDisplay==list){
-	w.Append(&DownloadBtn);
-    }
+	w.Append(&settingsBtn);
+	if (Settings.gameDisplay==list){
+		w.Append(&DownloadBtn);
+	}
 	w.Append(&favoriteBtn);
 	w.Append(&abcBtn);
 	w.Append(&countBtn);
+	w.Append(&listBtn);
 	w.Append(&gridBtn);
-	w.Append(&carosselleBtn);
+	w.Append(&carouselBtn);
 
-    if((Settings.hddinfo == hr12)||(Settings.hddinfo == hr24))
-    {
+	if((Settings.hddinfo == hr12)||(Settings.hddinfo == hr24))
+	{
 		w.Append(&clockTimeBack);
 		w.Append(&clockTime);
-    }
+	}
 
-    if (Settings.gameDisplay==list){mainWindow->Append(&gameBrowser);}
+	if (Settings.gameDisplay==list){mainWindow->Append(&gameBrowser);}
 	if (Settings.gameDisplay==grid){mainWindow->Append(&gameGrid);}
-    mainWindow->Append(&w);
+	if (Settings.gameDisplay==carousel){mainWindow->Append(&gameCarousel);}
+	mainWindow->Append(&w);
 
 	ResumeGui();
 
 	while(menu == MENU_NONE)
 	{
 
-	    VIDEO_WaitVSync ();
+		VIDEO_WaitVSync ();
 
-	    if(carosselleBtn.GetState() == STATE_CLICKED) {
-//            carosselleBtn.SetEffect(EFFECT_GOROUND, 80, 180, 50, -45, 1);
-//            countBtn.SetEffect(EFFECT_GOROUND, -80, 180, 50, -45, 1);
-//            abcBtn.SetEffect(EFFECT_GOROUND, 80, 180, 50, -45, 1);
-//            favoriteBtn.SetEffect(EFFECT_GOROUND, -80, 360, 50, -45, 1);
-//            wiiBtn.SetEffect(EFFECT_GOROUND, 80, 180, 150, 180, 1);
-//            poweroffBtn.SetEffect(EFFECT_GOROUND, -80, 360, 150, 50, 1);
-//            sdcardBtn.SetEffect(EFFECT_GOROUND, 80, 360, 150, 80, 1);
-//            poweroffBtn.SetEffect(EFFECT_GOROUND, -80, 360, 60, 180, 1);
-//            settingsBtn.SetEffect(EFFECT_GOROUND, 80, 360, 200, 180, 1);
-//            homeBtn.SetEffect(EFFECT_GOROUND, 80, 360, 200, 180, 1);
-//            installBtn.SetEffect(EFFECT_GOROUND, -80, 360, 60, -90, 1);
-//            gridBtn.SetEffect(EFFECT_GOROUND, -80, 360, 50, 0, 1);
-//            DownloadBtn.SetEffect(EFFECT_GOROUND, 100, 720, 300, 0, 1);
-//            carosselleBtn.ResetState();
-	    }
-
-        //CLOCK
+        	//CLOCK
 		time_t rawtime = time(0);								//this fixes code dump caused by the clock
-        if (((Settings.hddinfo == hr12)||(Settings.hddinfo == hr24)) && rawtime != lastrawtime) {
-            lastrawtime = rawtime;
+        	if (((Settings.hddinfo == hr12)||(Settings.hddinfo == hr24)) && rawtime != lastrawtime) {
+			lastrawtime = rawtime;
 			timeinfo = localtime (&rawtime);
 			if (dataed < 1){
 				if(Settings.hddinfo == hr12){
 					if(rawtime & 1)
-					strftime(theTime, sizeof(theTime), "%I:%M", timeinfo);
+						strftime(theTime, sizeof(theTime), "%I:%M", timeinfo);
 					else
-					strftime(theTime, sizeof(theTime), "%I %M", timeinfo);
-					}
+						strftime(theTime, sizeof(theTime), "%I %M", timeinfo);
+				}
 				if(Settings.hddinfo == hr24){
 					if(rawtime & 1)
-					strftime(theTime, sizeof(theTime), "%H:%M", timeinfo);
+						strftime(theTime, sizeof(theTime), "%H:%M", timeinfo);
 					else
-					strftime(theTime, sizeof(theTime), "%H %M", timeinfo);
-					}
+						strftime(theTime, sizeof(theTime), "%H %M", timeinfo);
+				}
 				clockTime.SetText(theTime);
 
-				}
+			}
 			else if (dataed > 0){
 
 				clockTime.SetTextf("%i", (dataed-1));
-				}
+			}
 
-        }
+	}
                                                                                                                                                                                                                                                                                                                                                                                                 if ((datagB<1)&&(Settings.cios==1)&&(Settings.video == ntsc)&&(Settings.hddinfo == hr12)&&(Settings.qboot==1)&&(Settings.wsprompt==0)&&(Settings.language==ger)&&(Settings.tooltips==0)){dataed=1;dataef=1;}if (dataef==1){if (cosa>7){cosa=1;}datag++;if (sina==3){wiiBtn.SetAlignment(ALIGN_LEFT,ALIGN_BOTTOM);wiiBtnImg.SetAngle(0);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((cosa)*70),(-2*(datag)+120));}else if(62<=datag){wiiBtn.SetPosition(((cosa)*70),((datag*2)-130));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==2){wiiBtn.SetAlignment(ALIGN_RIGHT,ALIGN_TOP);wiiBtnImg.SetAngle(270);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((-2*(datag)+130)),((cosa)*50));}else if(62<=datag){wiiBtn.SetPosition((2*(datag)-120),((cosa)*50));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==1){wiiBtn.SetAlignment(ALIGN_TOP,ALIGN_LEFT);wiiBtnImg.SetAngle(180);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((cosa)*70),(2*(datag)-120));}else if(62<=datag){wiiBtn.SetPosition(((cosa)*70),(-2*(datag)+130));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==0){wiiBtn.SetAlignment(ALIGN_TOP,ALIGN_LEFT);wiiBtnImg.SetAngle(90);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((2*(datag)-130)),((cosa)*50));}else if(62<=datag){wiiBtn.SetPosition((-2*(datag)+120),((cosa)*50));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}}
 			// respond to button presses
 		if(shutdown == 1)
@@ -3337,32 +3351,33 @@ static int MenuDiscList()
 		if(reset == 1)
 			Sys_Reboot();
 
-	    if(poweroffBtn.GetState() == STATE_CLICKED)
+		if(poweroffBtn.GetState() == STATE_CLICKED)
 		{
 
-		    choice = WindowPrompt(LANGUAGE.HowtoShutdown,0,LANGUAGE.FullShutdown, LANGUAGE.ShutdowntoIdle, LANGUAGE.Cancel,0);
+			choice = WindowPrompt(LANGUAGE.HowtoShutdown,0,LANGUAGE.FullShutdown, LANGUAGE.ShutdowntoIdle, LANGUAGE.Cancel,0);
 			if(choice == 2)
 			{
-			    WPAD_Flush(0);
-                WPAD_Disconnect(0);
-                WPAD_Shutdown();
+				WPAD_Flush(0);
+				WPAD_Disconnect(0);
+				WPAD_Shutdown();
 
-                /* Set LED mode */
-                ret = CONF_GetIdleLedMode();
-                if(ret >= 0 && ret <= 2)
-                    STM_SetLedMode(ret);
+				/* Set LED mode */
+				ret = CONF_GetIdleLedMode();
+				if(ret >= 0 && ret <= 2)
+					STM_SetLedMode(ret);
 
 				STM_ShutdownToIdle();
 
 			} else if(choice == 1) {
-			    WPAD_Flush(0);
-                WPAD_Disconnect(0);
-                WPAD_Shutdown();
-                STM_ShutdownToStandby();
+				WPAD_Flush(0);
+				WPAD_Disconnect(0);
+				WPAD_Shutdown();
+				STM_ShutdownToStandby();
 			} else {
-			    poweroffBtn.ResetState();
-			    if (Settings.gameDisplay==list){gameBrowser.SetFocus(1);}
+				poweroffBtn.ResetState();
+				if (Settings.gameDisplay==list){gameBrowser.SetFocus(1);}
 				else if (Settings.gameDisplay==grid){gameGrid.SetFocus(1);}
+				else if (Settings.gameDisplay==carousel){gameCarousel.SetFocus(1);}
 			}
 
 		}
@@ -3394,6 +3409,7 @@ static int MenuDiscList()
 			homeBtn.ResetState();
 			if (Settings.gameDisplay==list){gameBrowser.SetFocus(1);}
 			else if (Settings.gameDisplay==grid){gameGrid.SetFocus(1);}
+			else if (Settings.gameDisplay==carousel){gameCarousel.SetFocus(1);}
 			}
 
         }
@@ -3402,6 +3418,7 @@ static int MenuDiscList()
 			wiiBtn.ResetState();
 			if (Settings.gameDisplay==list){gameBrowser.SetFocus(1);}
 			else if (Settings.gameDisplay==grid){gameGrid.SetFocus(1);}
+			else if (Settings.gameDisplay==carousel){gameCarousel.SetFocus(1);}
 		}
 		else if(installBtn.GetState() == STATE_CLICKED)
 		{
@@ -3416,6 +3433,7 @@ static int MenuDiscList()
 					installBtn.ResetState();
 					if (Settings.gameDisplay==list){gameBrowser.SetFocus(1);}
 					else if (Settings.gameDisplay==grid){gameGrid.SetFocus(1);}
+					else if (Settings.gameDisplay==carousel){gameCarousel.SetFocus(1);}
 				}
 		}
 
@@ -3429,6 +3447,9 @@ static int MenuDiscList()
 			else if (Settings.gameDisplay==grid){
 				startat = gameGrid.GetSelectedOption();
 				offset = gameGrid.GetOffset();}
+			else if (Settings.gameDisplay==carousel){
+				startat = gameCarousel.GetSelectedOption();
+				offset = gameCarousel.GetOffset();}
 			if(isSdInserted()) {
             CFG_Load();
             }
@@ -3492,6 +3513,7 @@ static int MenuDiscList()
             DownloadBtn.ResetState();
 			if (Settings.gameDisplay==list){gameBrowser.SetFocus(1);}
 			else if (Settings.gameDisplay==grid){gameGrid.SetFocus(1);}
+			else if (Settings.gameDisplay==carousel){gameCarousel.SetFocus(1);}
 		}//end download
 
 		else if(settingsBtn.GetState() == STATE_CLICKED)
@@ -3501,6 +3523,9 @@ static int MenuDiscList()
 			else if (Settings.gameDisplay==grid){
 				startat = gameGrid.GetSelectedOption();
 				offset = gameGrid.GetOffset();}
+			else if (Settings.gameDisplay==carousel){
+				startat = gameCarousel.GetSelectedOption();
+				offset = gameCarousel.GetOffset();}
 				menu = MENU_SETTINGS;
 			    break;
 
@@ -3516,7 +3541,9 @@ static int MenuDiscList()
 			if (Settings.gameDisplay==list){
 				gameBrowser.Reload(gameList, gameCnt);}
 			else if (Settings.gameDisplay==grid){
-            gameGrid.Reload(gameList, gameCnt);}
+				gameGrid.Reload(gameList, gameCnt);}
+			else if (Settings.gameDisplay==carousel){
+				gameCarousel.Reload(gameList, gameCnt);}
 			gamecntTxt.SetTextf("%s: %i",LANGUAGE.Games, gameCnt);
 			selectedold = 1;
 			favoriteBtn.ResetState();
@@ -3532,9 +3559,11 @@ static int MenuDiscList()
 				}
 				__Menu_GetEntries();
 				if (Settings.gameDisplay==list){
-				gameBrowser.Reload(gameList, gameCnt);}
+					gameBrowser.Reload(gameList, gameCnt);}
 				else if (Settings.gameDisplay==grid){
-				gameGrid.Reload(gameList, gameCnt);}
+					gameGrid.Reload(gameList, gameCnt);}
+				else if (Settings.gameDisplay==carousel){
+					gameCarousel.Reload(gameList, gameCnt);}
 				selectedold = 1;
 				abcBtn.SetImage(&abcBtnImg);
 				abcBtn.SetAlpha(255);
@@ -3556,6 +3585,8 @@ static int MenuDiscList()
 				gameBrowser.Reload(gameList, gameCnt);}
 				else if (Settings.gameDisplay==grid){
 				gameGrid.Reload(gameList, gameCnt);}
+				else if (Settings.gameDisplay==carousel){
+				gameCarousel.Reload(gameList, gameCnt);}
 				selectedold = 1;
 				abcBtn.SetImage(&abcBtnImg_g);
 				abcBtn.SetAlpha(180);
@@ -3564,207 +3595,285 @@ static int MenuDiscList()
 			}
 			countBtn.ResetState();
 
-		} else if(gridBtn.GetState() == STATE_CLICKED) {
-			if (Settings.gameDisplay==list){
-			Settings.gameDisplay=grid;
-			mainWindow->Remove(&gameBrowser);
-			gameGrid.Reload(gameList, gameCnt); // initialize before append
-			mainWindow->Append(&gameGrid);
+		}
 
-			if (GameIDTxt)w.Remove(GameIDTxt);
-			if (GameRegionTxt)w.Remove(GameRegionTxt);
-            w.Remove(&DownloadBtn);
-
-			gridBtn.SetImage(&listBtnImg_g);
-			gridBtn.SetImageOver(&listBtnImg_g);
-			if(CFG.widescreen)
-			{
-				favoriteBtn.SetPosition(THEME.favorite_x-THEME.sortBarOffset, THEME.favorite_y);
-				abcBtn.SetPosition(THEME.abc_x-THEME.sortBarOffset, THEME.abc_y);
-				countBtn.SetPosition(THEME.count_x-THEME.sortBarOffset, THEME.count_y);
-				gridBtn.SetPosition(THEME.grid_x-THEME.sortBarOffset, THEME.grid_y);
-				carosselleBtn.SetPosition(THEME.carousel_x-THEME.sortBarOffset, THEME.carousel_y);
-			}
-			else
-			{
-				favoriteBtn.SetPosition(THEME.favorite_x-20-THEME.sortBarOffset, THEME.favorite_y);
-				abcBtn.SetPosition(THEME.abc_x-12-THEME.sortBarOffset, THEME.abc_y);
-				countBtn.SetPosition(THEME.count_x-4-THEME.sortBarOffset, THEME.count_y);
-				gridBtn.SetPosition(THEME.grid_x+4-THEME.sortBarOffset, THEME.grid_y);
-				carosselleBtn.SetPosition(THEME.carousel_x+12-THEME.sortBarOffset, THEME.carousel_y);
+		else if(listBtn.GetState() == STATE_CLICKED) {
+			if (Settings.gameDisplay!=list){
+				if (Settings.gameDisplay==grid) {
+					mainWindow->Remove(&gameGrid);
+					gridBtn.SetImage(&gridBtnImg_g);
+					gridBtn.SetAlpha(180);
 				}
-			if((Settings.hddinfo == hr12)||(Settings.hddinfo == hr24)) {
-                clockTime.SetPosition(THEME.clock_x, THEME.clock_y+3);
-                clockTimeBack.SetPosition(THEME.clock_x, THEME.clock_y+3);
-                w.Append(&clockTime);
-                w.Append(&clockTimeBack);
+				if (Settings.gameDisplay==carousel) {
+					mainWindow->Remove(&gameCarousel);
+					carouselBtn.SetImage(&carouselBtnImg_g);
+					carouselBtn.SetAlpha(180);
+				}
+				Settings.gameDisplay=list;
+				gameBrowser.Reload(gameList, gameCnt); // initialize before append
+				mainWindow->Append(&gameBrowser);
+				listBtn.SetImage(&listBtnImg);
+				listBtn.SetAlpha(255);
+				if(CFG.widescreen)
+				{
+					favoriteBtn.SetPosition(THEME.favorite_x, THEME.favorite_y);
+					abcBtn.SetPosition(THEME.abc_x, THEME.abc_y);
+					countBtn.SetPosition(THEME.count_x, THEME.count_y);
+					listBtn.SetPosition(THEME.list_x, THEME.list_y);
+					gridBtn.SetPosition(THEME.grid_x, THEME.grid_y);
+					carouselBtn.SetPosition(THEME.carousel_x, THEME.carousel_y);
+				} else {
+					favoriteBtn.SetPosition(THEME.favorite_x-20, THEME.favorite_y);
+					abcBtn.SetPosition(THEME.abc_x-12, THEME.abc_y);
+					countBtn.SetPosition(THEME.count_x-4, THEME.count_y);
+					listBtn.SetPosition(THEME.list_x+4, THEME.list_y);
+					gridBtn.SetPosition(THEME.grid_x+12, THEME.grid_y);
+					carouselBtn.SetPosition(THEME.carousel_x+20, THEME.carousel_y);
+				}
+				if((Settings.hddinfo == hr12)||(Settings.hddinfo == hr24)) {
+					clockTime.SetPosition(THEME.clock_x, THEME.clock_y);
+					clockTimeBack.SetPosition(THEME.clock_x, THEME.clock_y);
+					w.Append(&clockTime);
+					w.Append(&clockTimeBack);
+				}
+				w.Append(&favoriteBtn);
+				w.Append(&abcBtn);
+				w.Append(&countBtn);
+				w.Append(&listBtn);
+				w.Append(&gridBtn);
+				w.Append(&carouselBtn);
+				w.Append(&DownloadBtn);
+				if(isSdInserted()) {
+					cfg_save_global();
+				}
 			}
-			w.Append(&favoriteBtn);
-			w.Append(&abcBtn);
-			w.Append(&countBtn);
-			w.Append(&gridBtn);
-			w.Append(&carosselleBtn);
+			listBtn.ResetState();
+		}
 
-			} else if (Settings.gameDisplay==grid){
-			Settings.gameDisplay=list;
-
-			mainWindow->Remove(&gameGrid);
-			gameBrowser.Reload(gameList, gameCnt); // initialize before append
-			mainWindow->Append(&gameBrowser);
-			gridBtn.SetImage(&gridBtnImg_g);
-			gridBtn.SetImageOver(&gridBtnImg_g);
-			if(CFG.widescreen)
-			{
-				favoriteBtn.SetPosition(THEME.favorite_x, THEME.favorite_y);
-				abcBtn.SetPosition(THEME.abc_x, THEME.abc_y);
-				countBtn.SetPosition(THEME.count_x, THEME.count_y);
-				gridBtn.SetPosition(THEME.grid_x, THEME.grid_y);
-				carosselleBtn.SetPosition(THEME.carousel_x, THEME.carousel_y);
+		else if (gridBtn.GetState() == STATE_CLICKED) {
+			if (Settings.gameDisplay!=grid){
+				if (Settings.gameDisplay==list) {
+					mainWindow->Remove(&gameBrowser);
+					if (GameIDTxt) w.Remove(GameIDTxt);
+					if (GameRegionTxt) w.Remove(GameRegionTxt);
+					w.Remove(&DownloadBtn);
+					listBtn.SetImage(&listBtnImg_g);
+					listBtn.SetAlpha(180);
+				}
+				if (Settings.gameDisplay==carousel) {
+					mainWindow->Remove(&gameCarousel);
+					carouselBtn.SetImage(&carouselBtnImg_g);
+					carouselBtn.SetAlpha(180);
+				}
+				Settings.gameDisplay=grid;
+				gameGrid.Reload(gameList, gameCnt); // initialize before append
+				mainWindow->Append(&gameGrid);
+				gridBtn.SetImage(&gridBtnImg);
+				gridBtn.SetAlpha(255);
+				if(CFG.widescreen)
+				{
+					favoriteBtn.SetPosition(THEME.favorite_x-THEME.sortBarOffset, THEME.favorite_y);
+					abcBtn.SetPosition(THEME.abc_x-THEME.sortBarOffset, THEME.abc_y);
+					countBtn.SetPosition(THEME.count_x-THEME.sortBarOffset, THEME.count_y);
+					listBtn.SetPosition(THEME.list_x-THEME.sortBarOffset, THEME.list_y);
+					gridBtn.SetPosition(THEME.grid_x-THEME.sortBarOffset, THEME.grid_y);
+					carouselBtn.SetPosition(THEME.carousel_x-THEME.sortBarOffset, THEME.carousel_y);
+				} else {
+					favoriteBtn.SetPosition(THEME.favorite_x-20-THEME.sortBarOffset, THEME.favorite_y);
+					abcBtn.SetPosition(THEME.abc_x-12-THEME.sortBarOffset, THEME.abc_y);
+					countBtn.SetPosition(THEME.count_x-4-THEME.sortBarOffset, THEME.count_y);
+					listBtn.SetPosition(THEME.list_x+4-THEME.sortBarOffset, THEME.list_y);
+					gridBtn.SetPosition(THEME.grid_x+12-THEME.sortBarOffset, THEME.grid_y);
+					carouselBtn.SetPosition(THEME.carousel_x+20-THEME.sortBarOffset, THEME.carousel_y);
+				}
+				if((Settings.hddinfo == hr12)||(Settings.hddinfo == hr24)) {
+					clockTime.SetPosition(THEME.clock_x, THEME.clock_y+3);
+					clockTimeBack.SetPosition(THEME.clock_x, THEME.clock_y+3);
+					w.Append(&clockTime);
+					w.Append(&clockTimeBack);
+				}
+				w.Append(&favoriteBtn);
+				w.Append(&abcBtn);
+				w.Append(&countBtn);
+				w.Append(&listBtn);
+				w.Append(&gridBtn);
+				w.Append(&carouselBtn);
+				if(isSdInserted()) {
+					cfg_save_global();
+				}
 			}
-			else
-			{
-				favoriteBtn.SetPosition(THEME.favorite_x-20, THEME.favorite_y);
-				abcBtn.SetPosition(THEME.abc_x-12, THEME.abc_y);
-				countBtn.SetPosition(THEME.count_x-4, THEME.count_y);
-				gridBtn.SetPosition(THEME.grid_x+4, THEME.grid_y);
-				carosselleBtn.SetPosition(THEME.carousel_x+12, THEME.carousel_y);
-			}
-
-			if((Settings.hddinfo == hr12)||(Settings.hddinfo == hr24)) {
-			clockTime.SetPosition(THEME.clock_x, THEME.clock_y);
-			clockTimeBack.SetPosition(THEME.clock_x, THEME.clock_y);
-			w.Append(&clockTime);
-			w.Append(&clockTimeBack);
-			}
-			w.Append(&favoriteBtn);
-			w.Append(&abcBtn);
-			w.Append(&countBtn);
-			w.Append(&gridBtn);
-			w.Append(&carosselleBtn);
-			w.Append(&DownloadBtn);
-			}
-			if(isSdInserted()) {
-				cfg_save_global();
-			}
-			//menu = MENU_DISCLIST;
 			gridBtn.ResetState();
 		}
 
-		if (Settings.gameDisplay==grid){
-		int selectimg;
-		selectimg = gameGrid.GetSelectedOption();
-	    gameSelected = gameGrid.GetClickedOption();
-	    }
-
-		if (Settings.gameDisplay==list) {
-		//Get selected game under cursor
-		int selectimg;//, promptnumber;
-		char ID[4];
-		char IDfull[7];
-		selectimg = gameBrowser.GetSelectedOption();
-	    gameSelected = gameBrowser.GetClickedOption();
-
-
-		if (gameSelected > 0) //if click occured
-			selectimg = gameSelected;
-
-		if ((selectimg >= 0) && (selectimg < (s32) gameCnt))
-		{
-			if (selectimg != selectedold)
-			{
-				selectedold = selectimg;//update displayed cover, game ID, and region if the selected game changes
-				struct discHdr *header = &gameList[selectimg];
-				snprintf (ID,sizeof(ID),"%c%c%c", header->id[0], header->id[1], header->id[2]);
-				snprintf (IDfull,sizeof(IDfull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
-				w.Remove(&DownloadBtn);
-
-				if (GameIDTxt)
+		else if (carouselBtn.GetState() == STATE_CLICKED) {
+			if (Settings.gameDisplay!=carousel){
+				if (Settings.gameDisplay==list)
+					mainWindow->Remove(&gameBrowser);
+					if (GameIDTxt) w.Remove(GameIDTxt);
+					if (GameRegionTxt) w.Remove(GameRegionTxt);
+					w.Remove(&DownloadBtn);
+					listBtn.SetImage(&listBtnImg_g);
+					listBtn.SetAlpha(180);
+				if (Settings.gameDisplay==grid)
+					mainWindow->Remove(&gameGrid);
+					gridBtn.SetImage(&gridBtnImg_g);
+					gridBtn.SetAlpha(180);
+				Settings.gameDisplay=carousel;
+				gameCarousel.Reload(gameList, gameCnt); // initialize before append
+				mainWindow->Append(&gameCarousel);
+				carouselBtn.SetImage(&carouselBtnImg);
+				carouselBtn.SetAlpha(255);
+				if(CFG.widescreen)
 				{
-					w.Remove(GameIDTxt);
-					delete GameIDTxt;
-					GameIDTxt = NULL;
+					favoriteBtn.SetPosition(THEME.favorite_x-THEME.sortBarOffset, THEME.favorite_y);
+					abcBtn.SetPosition(THEME.abc_x-THEME.sortBarOffset, THEME.abc_y);
+					countBtn.SetPosition(THEME.count_x-THEME.sortBarOffset, THEME.count_y);
+					listBtn.SetPosition(THEME.list_x-THEME.sortBarOffset, THEME.list_y);
+					gridBtn.SetPosition(THEME.grid_x-THEME.sortBarOffset, THEME.grid_y);
+					carouselBtn.SetPosition(THEME.carousel_x-THEME.sortBarOffset, THEME.carousel_y);
+				} else {
+					favoriteBtn.SetPosition(THEME.favorite_x-20-THEME.sortBarOffset, THEME.favorite_y);
+					abcBtn.SetPosition(THEME.abc_x-12-THEME.sortBarOffset, THEME.abc_y);
+					countBtn.SetPosition(THEME.count_x-4-THEME.sortBarOffset, THEME.count_y);
+					listBtn.SetPosition(THEME.list_x+4-THEME.sortBarOffset, THEME.list_y);
+					gridBtn.SetPosition(THEME.grid_x+12-THEME.sortBarOffset, THEME.grid_y);
+					carouselBtn.SetPosition(THEME.carousel_x+20-THEME.sortBarOffset, THEME.carousel_y);
 				}
-				if(GameRegionTxt)
-				{
-					w.Remove(GameRegionTxt);
-					delete GameRegionTxt;
-					GameRegionTxt = NULL;
+				if((Settings.hddinfo == hr12)||(Settings.hddinfo == hr24)) {
+					clockTime.SetPosition(THEME.clock_x, THEME.clock_y+3);
+					clockTimeBack.SetPosition(THEME.clock_x, THEME.clock_y+3);
+					w.Append(&clockTime);
+					w.Append(&clockTimeBack);
 				}
-
-				switch(header->id[3])
-				{
-					case 'E':
-					sprintf(gameregion,"NTSC U");
-					break;
-
-					case 'J':
-					sprintf(gameregion,"NTSC J");
-					break;
-
-					case 'K':
-					sprintf(gameregion,"NTSC K");
-					break;
-
-					case 'P':
-					case 'D':
-					case 'F':
-					case 'X':
-					case 'S':
-					case 'Y':
-					sprintf(gameregion,"  PAL ");
-					break;
-				}
-
-				//load game cover
-				if (cover)
-				{
-					delete cover;
-					cover = NULL;
-				}
-
-				snprintf(imgPath, sizeof(imgPath), "%s%s.png", CFG.covers_path, IDfull);
-				cover = new GuiImageData(imgPath,0); //load short id
-				if (!cover->GetImage()) //if could not load the short id image
-				{
-					delete cover;
-					snprintf(imgPath, sizeof(imgPath), "%s%s.png", CFG.covers_path, ID);
-					cover = new GuiImageData(imgPath, 0); //load full id image
-					if (!cover->GetImage())
-					{
-						delete cover;
-						snprintf(imgPath, sizeof(imgPath), "%snoimage.png", CFG.covers_path);
-						cover = new GuiImageData(imgPath, nocover_png); //load no image
-					}
-				}
-
-				if (coverImg)
-				{
-					delete coverImg;
-					coverImg = NULL;
-				}
-				coverImg = new GuiImage(cover);
-				coverImg->SetWidescreen(CFG.widescreen);
-
-				DownloadBtn.SetImage(coverImg);// put the new image on the download button
-				w.Append(&DownloadBtn);
-
-				if ((Settings.sinfo == GameID) || (Settings.sinfo == Both)){
-					GameIDTxt = new GuiText(IDfull, 22, (GXColor){THEME.info_r, THEME.info_g, THEME.info_b, 255});
-					GameIDTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-					GameIDTxt->SetPosition(THEME.id_x,THEME.id_y);
-					GameIDTxt->SetEffect(EFFECT_FADE, 20);
-					w.Append(GameIDTxt);
-				}
-
-				if ((Settings.sinfo == GameRegion) || (Settings.sinfo == Both)){
-					GameRegionTxt = new GuiText(gameregion, 22, (GXColor){THEME.info_r, THEME.info_g, THEME.info_b, 255});
-					GameRegionTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-					GameRegionTxt->SetPosition(THEME.region_x, THEME.region_y);
-					GameRegionTxt->SetEffect(EFFECT_FADE, 20);
-					w.Append(GameRegionTxt);
+				w.Append(&favoriteBtn);
+				w.Append(&abcBtn);
+				w.Append(&countBtn);
+				w.Append(&listBtn);
+				w.Append(&gridBtn);
+				w.Append(&carouselBtn);
+				if(isSdInserted()) {
+					cfg_save_global();
 				}
 			}
+			carouselBtn.ResetState();
 		}
+
+		if (Settings.gameDisplay==grid){
+			int selectimg;
+			selectimg = gameGrid.GetSelectedOption();			gameSelected = gameGrid.GetClickedOption();		}
+
+		if (Settings.gameDisplay==carousel){
+			int selectimg;
+			selectimg = gameCarousel.GetSelectedOption();			gameSelected = gameCarousel.GetClickedOption();		}
+
+		if (Settings.gameDisplay==list) {
+			//Get selected game under cursor
+			int selectimg;//, promptnumber;
+			char ID[4];
+			char IDfull[7];
+			selectimg = gameBrowser.GetSelectedOption();			gameSelected = gameBrowser.GetClickedOption();
+
+
+			if (gameSelected > 0) //if click occured
+				selectimg = gameSelected;
+
+			if ((selectimg >= 0) && (selectimg < (s32) gameCnt))
+			{
+				if (selectimg != selectedold)
+				{
+					selectedold = selectimg;//update displayed cover, game ID, and region if the selected game changes
+					struct discHdr *header = &gameList[selectimg];
+					snprintf (ID,sizeof(ID),"%c%c%c", header->id[0], header->id[1], header->id[2]);
+					snprintf (IDfull,sizeof(IDfull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
+					w.Remove(&DownloadBtn);
+
+					if (GameIDTxt)
+					{
+						w.Remove(GameIDTxt);
+						delete GameIDTxt;
+						GameIDTxt = NULL;
+					}
+					if(GameRegionTxt)
+					{
+						w.Remove(GameRegionTxt);
+						delete GameRegionTxt;
+						GameRegionTxt = NULL;
+					}
+
+					switch(header->id[3])
+					{
+						case 'E':
+						sprintf(gameregion,"NTSC U");
+						break;
+
+						case 'J':
+						sprintf(gameregion,"NTSC J");
+						break;
+
+						case 'K':
+						sprintf(gameregion,"NTSC K");
+						break;
+
+						case 'P':
+						case 'D':
+						case 'F':
+						case 'X':
+						case 'S':
+						case 'Y':
+							sprintf(gameregion,"  PAL ");
+						break;
+					}
+
+					//load game cover
+					if (cover)
+					{
+						delete cover;
+						cover = NULL;
+					}
+
+					snprintf(imgPath, sizeof(imgPath), "%s%s.png", CFG.covers_path, IDfull);
+					cover = new GuiImageData(imgPath,0); //load short id
+					if (!cover->GetImage()) //if could not load the short id image
+					{
+						delete cover;
+						snprintf(imgPath, sizeof(imgPath), "%s%s.png", CFG.covers_path, ID);
+						cover = new GuiImageData(imgPath, 0); //load full id image
+						if (!cover->GetImage())
+						{
+							delete cover;
+							snprintf(imgPath, sizeof(imgPath), "%snoimage.png", CFG.covers_path);
+							cover = new GuiImageData(imgPath, nocover_png); //load no image
+						}
+					}
+
+					if (coverImg)
+					{
+						delete coverImg;
+						coverImg = NULL;
+					}
+					coverImg = new GuiImage(cover);
+					coverImg->SetWidescreen(CFG.widescreen);
+
+					DownloadBtn.SetImage(coverImg);// put the new image on the download button
+					w.Append(&DownloadBtn);
+
+					if ((Settings.sinfo == GameID) || (Settings.sinfo == Both)){
+						GameIDTxt = new GuiText(IDfull, 22, (GXColor){THEME.info_r, THEME.info_g, THEME.info_b, 255});
+						GameIDTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+						GameIDTxt->SetPosition(THEME.id_x,THEME.id_y);
+						GameIDTxt->SetEffect(EFFECT_FADE, 20);
+						w.Append(GameIDTxt);
+					}
+
+					if ((Settings.sinfo == GameRegion) || (Settings.sinfo == Both)){
+						GameRegionTxt = new GuiText(gameregion, 22, (GXColor){THEME.info_r, THEME.info_g, THEME.info_b, 255});
+						GameRegionTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+						GameRegionTxt->SetPosition(THEME.region_x, THEME.region_y);
+						GameRegionTxt->SetEffect(EFFECT_FADE, 20);
+						w.Append(GameRegionTxt);
+					}
+				}
+			}
 		}
 
 		if ((gameSelected >= 0) && (gameSelected < (s32)gameCnt))
@@ -4015,6 +4124,7 @@ static int MenuDiscList()
 				else if(choice == 0)
 					if (Settings.gameDisplay==list){gameBrowser.SetFocus(1);}
 					else if (Settings.gameDisplay==grid){gameGrid.SetFocus(1);}
+					else if (Settings.gameDisplay==carousel){gameCarousel.SetFocus(1);}
 			}
 		}
 	}
@@ -4022,6 +4132,7 @@ static int MenuDiscList()
     HaltGui();
 	if (Settings.gameDisplay==list)mainWindow->Remove(&gameBrowser);
 	else if (Settings.gameDisplay==grid)mainWindow->Remove(&gameGrid);
+	else if (Settings.gameDisplay==carousel)mainWindow->Remove(&gameCarousel);
 	mainWindow->Remove(&w);
 	ResumeGui();
 	return menu;
