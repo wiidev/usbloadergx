@@ -6,6 +6,7 @@
 #include "wdvd.h"
 #include "wpad.h"
 #include "patchcode.h"
+#include "disc.h"
 #include "kenobiwii.h" /*FISHEARS*/
 
 /*KENOBI! - FISHEARS*/
