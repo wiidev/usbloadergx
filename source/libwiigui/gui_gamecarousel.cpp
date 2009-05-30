@@ -316,12 +316,12 @@ void GuiGameCarousel::Update(GuiTrigger * t)
 			game[bob[i]]->SetState(STATE_DISABLED);
 		}
 
-//		if(focus) {
-//			if(i != selectedItem && game[bob[i]]->GetState() == STATE_SELECTED)
-//				game[bob[i]]->ResetState();
-//			else if(i == selectedItem && game[bob[i]]->GetState() == STATE_DEFAULT);
-//				game[bob[selectedItem]]->SetState(STATE_SELECTED, t->chan);
-//		}
+		if(focus) {
+			if(i != selectedItem && game[bob[i]]->GetState() == STATE_SELECTED)
+				game[bob[i]]->ResetState();
+			else if(i == selectedItem && game[bob[i]]->GetState() == STATE_DEFAULT);
+				game[bob[selectedItem]]->SetState(STATE_SELECTED, t->chan);
+		}
 		game[bob[i]]->Update(t);
 
 		if(game[bob[i]]->GetState() == STATE_SELECTED) {
