@@ -340,6 +340,7 @@ struct SSettings {
 	int	    fave;
 	int     wiilight;
 	int		gameDisplay;
+	int     patchcountrystrings;
 };
 
 void CFG_LoadGlobal(void);

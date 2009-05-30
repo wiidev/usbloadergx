@@ -48,7 +48,7 @@ GuiGameBrowser::GuiGameBrowser(int w, int h, struct discHdr * l, int gameCnt, co
 	bgGameImg = new GuiImage(bgGames);
 	bgGameImg->SetParent(this);
 	bgGameImg->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-	
+
 	maxTextWidth = bgGameImg->GetWidth() - 24 - 4;
 
 	snprintf(imgPath, sizeof(imgPath), "%sbg_options_entry.png", themePath);
@@ -128,13 +128,13 @@ GuiGameBrowser::GuiGameBrowser(int w, int h, struct discHdr * l, int gameCnt, co
 		gameTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 		gameTxt[i]->SetPosition(24,0);
 		gameTxt[i]->SetMaxWidth(maxTextWidth, GuiText::DOTTED);
-		
-		
+
+
 		gameTxtOver[i] = new GuiText(get_title(&gameList[i]), 20, (GXColor){THEME.gameText_r, THEME.gameText_g, THEME.gameText_b, 0xff});
 		gameTxtOver[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 		gameTxtOver[i]->SetPosition(24,0);
 		gameTxtOver[i]->SetMaxWidth(maxTextWidth, GuiText::SCROLL);
-		
+
 		gameBg[i] = new GuiImage(bgGamesEntry);
 
 		game[i] = new GuiButton(width-28,GAMESELECTSIZE);
@@ -146,7 +146,7 @@ GuiGameBrowser::GuiGameBrowser(int w, int h, struct discHdr * l, int gameCnt, co
 		game[i]->SetRumble(false);
 		game[i]->SetTrigger(trigA);
 		game[i]->SetSoundClick(btnSoundClick);
-		
+
 		gameIndex[i] = i;
 	}
 	UpdateListEntries();
@@ -243,7 +243,7 @@ int GuiGameBrowser::GetClickedOption()
 }
 
 int GuiGameBrowser::GetSelectedOption()
-{	
+{
 	int found = -1;
 	for(int i=0; i<pagesize; i++)
 	{
@@ -477,7 +477,7 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 		if (buttons == WPAD_BUTTON_B && position1 > 0)
 		{
 			scrollbarBoxBtn->ScrollIsOn(1);
-			if (position2 > position1) 
+			if (position2 > position1)
 			{
 
 				prev = this->FindMenuItem(gameIndex[selectedItem], -1);
@@ -629,7 +629,7 @@ void GuiGameBrowser::Update(GuiTrigger * t)
     }
 	if(old_listOffset != listOffset)
 		UpdateListEntries();
-	
+
 	if(updateCB)
 		updateCB(this);
 }
@@ -642,6 +642,7 @@ void GuiGameBrowser::Reload(struct discHdr * l, int count)
 	scrollbaron = (gameCnt > pagesize) ? 1 : 0;
 	selectedItem = 0;
 	listOffset = 0;
+	focus = 1;
 	UpdateListEntries();
 
 	for(int i=0; i<pagesize; i++)

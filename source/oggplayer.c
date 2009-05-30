@@ -25,7 +25,6 @@
  */
 
 #include "oggplayer.h"
-#include "mp3s.h"
 #include <gccore.h>
 #include <malloc.h>
 #include <stdlib.h>

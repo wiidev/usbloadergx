@@ -132,7 +132,7 @@ snprintf(LANGUAGE.Loadingstandardlanguage, sizeof(LANGUAGE.Loadingstandardlangua
 snprintf(LANGUAGE.Loadingstandardmusic, sizeof(LANGUAGE.Loadingstandardmusic), "Loading standard music.");
 snprintf(LANGUAGE.Lock, sizeof(LANGUAGE.Lock), "Lock");
 snprintf(LANGUAGE.LockConsole, sizeof(LANGUAGE.LockConsole), "Lock Console");
-snprintf(LANGUAGE.MP3Menu, sizeof(LANGUAGE.MP3Menu), "MP3 Menu");
+snprintf(LANGUAGE.Patchcountrystrings, sizeof(LANGUAGE.Patchcountrystrings), "Patch Country Strings");
 snprintf(LANGUAGE.Missingfiles, sizeof(LANGUAGE.Missingfiles), "Missing files");
 snprintf(LANGUAGE.Networkiniterror, sizeof(LANGUAGE.Networkiniterror), "Network init error");
 snprintf(LANGUAGE.Neither, sizeof(LANGUAGE.Neither), "Neither");
@@ -664,8 +664,8 @@ void language_set(char *name, char *val)
 		strcopy(LANGUAGE.LockConsole, val, sizeof(LANGUAGE.LockConsole));
 		return;
 	}
-	if (strcmp(name, "MP3Menu") == 0) {
-		strcopy(LANGUAGE.MP3Menu, val, sizeof(LANGUAGE.MP3Menu));
+	if (strcmp(name, "Patchcountrystrings") == 0) {
+		strcopy(LANGUAGE.Patchcountrystrings, val, sizeof(LANGUAGE.Patchcountrystrings));
 		return;
 	}
 	if (strcmp(name, "Missingfiles") == 0) {

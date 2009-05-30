@@ -62,6 +62,8 @@ int Sys_IosReload(int IOS)
 
     USBStorage_Deinit();
 
+    __IOS_ShutdownSubsystems();
+
     ret = IOS_ReloadIOS(IOS);
 
     if(ret < 0) {
@@ -73,7 +75,7 @@ int Sys_IosReload(int IOS)
     WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
     WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
 
-    if(IOS == 249 || IOS == 222 || IOS == 223) {
+    if(IOS == 249 || IOS == 222) {
     ret = WBFS_Init(WBFS_DEVICE_USB);
     ret = Disc_Init();
     ret = WBFS_Open();

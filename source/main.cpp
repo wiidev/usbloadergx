@@ -101,6 +101,7 @@ DefaultSettings()
 	Settings.qboot = no;
 	Settings.unicodefix = 0;
 	Settings.wiilight = 1;
+	Settings.patchcountrystrings = 0;
 
 	CFG_LoadGlobal();
 }
@@ -136,8 +137,6 @@ main(int argc, char *argv[])
 		printf("ERROR: cIOS could not be loaded!");
 		SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
 	}
-
-    fatInit(1, true);
 
     SDCard_Init();
 

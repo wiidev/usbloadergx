@@ -116,7 +116,7 @@ struct LANGUAGE
 	char Loadingstandardmusic[80];
 	char Lock[30];
 	char LockConsole[50];
-	char MP3Menu[40];
+	char Patchcountrystrings[80];
 	char Missingfiles[50];
 	char Networkiniterror[50];
 	char Neither[40];

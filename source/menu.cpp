@@ -40,7 +40,7 @@
 #include "libwiigui/gui_customoptionbrowser.h"
 #include "libwiigui/gui_gamebrowser.h"
 #include "libwiigui/gui_diskcover.h"
-#include "mp3s.h"
+#include "listfiles.h"
 #include "fatmounter.h"
 #include "updater.h"
 
@@ -3609,9 +3609,13 @@ static int MenuDiscList()
 					carouselBtn.SetImage(&carouselBtnImg_g);
 					carouselBtn.SetAlpha(180);
 				}
+				HaltGui();
+				mainWindow->Remove(&w);
 				Settings.gameDisplay=list;
 				gameBrowser.Reload(gameList, gameCnt); // initialize before append
 				mainWindow->Append(&gameBrowser);
+				mainWindow->Append(&w);
+				ResumeGui();
 				listBtn.SetImage(&listBtnImg);
 				listBtn.SetAlpha(255);
 				if(CFG.widescreen)
@@ -3665,9 +3669,13 @@ static int MenuDiscList()
 					carouselBtn.SetImage(&carouselBtnImg_g);
 					carouselBtn.SetAlpha(180);
 				}
+				HaltGui();
+				mainWindow->Remove(&w);
 				Settings.gameDisplay=grid;
 				gameGrid.Reload(gameList, gameCnt); // initialize before append
 				mainWindow->Append(&gameGrid);
+				mainWindow->Append(&w);
+				ResumeGui();
 				gridBtn.SetImage(&gridBtnImg);
 				gridBtn.SetAlpha(255);
 				if(CFG.widescreen)
@@ -3718,9 +3726,13 @@ static int MenuDiscList()
 					mainWindow->Remove(&gameGrid);
 					gridBtn.SetImage(&gridBtnImg_g);
 					gridBtn.SetAlpha(180);
+				HaltGui();
+				mainWindow->Remove(&w);
 				Settings.gameDisplay=carousel;
 				gameCarousel.Reload(gameList, gameCnt); // initialize before append
 				mainWindow->Append(&gameCarousel);
+				mainWindow->Append(&w);
+				ResumeGui();
 				carouselBtn.SetImage(&carouselBtnImg);
 				carouselBtn.SetAlpha(255);
 				if(CFG.widescreen)
@@ -4042,7 +4054,7 @@ static int MenuDiscList()
                             break;
                     }
 
-                                        // if we have used the network or cios222 we need to reload the disklist
+                    // if we have used the network or cios222 we need to reload the disklist
                     if(networkisinitialized == 1 || ios2 == 1 || Settings.cios == ios222) {
 
 
@@ -4088,6 +4100,7 @@ static int MenuDiscList()
 							LANGUAGE.Failedtoboot,
 							text,
 							LANGUAGE.ok,0,0,0);
+
 						}
 						else {
 							menu = MENU_EXIT;
@@ -4615,7 +4628,7 @@ static int MenuSettings()
 			options2.SetName(4, "%s",LANGUAGE.Backgroundmusic);
 			options2.SetName(5, "%s",LANGUAGE.Wiilight);
 			options2.SetName(6, "%s",LANGUAGE.Updatepath);
-			options2.SetName(7, "%s",LANGUAGE.MP3Menu);
+			options2.SetName(7, "%s",LANGUAGE.Patchcountrystrings);
 			options2.SetName(8, "%s",LANGUAGE.Defaultsettings);
 
 		}
@@ -5000,6 +5013,8 @@ static int MenuSettings()
 					Settings.unicodefix = 0;
 				if ( Settings.wiilight > 2 )
 					Settings.wiilight = 0;
+                if ( Settings.patchcountrystrings > 1)
+                    Settings.patchcountrystrings = 0;
 
 				options2.SetValue(0, "%s", CFG.titlestxt_path);
 
@@ -5024,7 +5039,10 @@ static int MenuSettings()
 				else if (Settings.wiilight == 2) options2.SetValue(5,"%s",LANGUAGE.OnlyInstall);
 
 				options2.SetValue(6, "%s", CFG.update_path);
-				options2.SetValue(7, "not working!");
+
+				if (Settings.patchcountrystrings == 0) options2.SetValue(7,"%s",LANGUAGE.OFF);
+				else if (Settings.patchcountrystrings == 1) options2.SetValue(7,"%s",LANGUAGE.ON);
+
 				options2.SetValue(8, " ");
 
 				ret = optionBrowser2.GetClickedOption();
@@ -5135,13 +5153,8 @@ static int MenuSettings()
 						Settings.wiilight++;
 						break;
 					case 7:
-						if(isSdInserted())
-						{
-							menu = MENU_MP3;
-							pageToDisplay = 0;
-						} else
-							WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtousethatoption, LANGUAGE.ok, 0,0,0);
-						break;
+                        Settings.patchcountrystrings++;
+                        break;
 					case 6:
 						if ( CFG.godmode == 1)
 						{
@@ -5819,7 +5832,7 @@ int MenuOGG()
 
     char fullpath[150];
     char shortpath[35];
-	int countmp3 = GetFiles(CFG.oggload_path);
+	int countoggs = GetFiles(CFG.oggload_path);
 
     if(!strcmp("", CFG.oggload_path)) {
         sprintf(shortpath, "%s", LANGUAGE.Standard);
@@ -5848,12 +5861,13 @@ int MenuOGG()
 	oggmenubackground.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	oggmenubackground.SetPosition(0, 0);
 
-    GuiText backBtnTxt(LANGUAGE.Back , 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
+    GuiText backBtnTxt(LANGUAGE.Back , 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	backBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
 	GuiImage backBtnImg(&btnOutline);
 	if (Settings.wsprompt == yes){
 	backBtnTxt.SetWidescreen(CFG.widescreen);
-	backBtnImg.SetWidescreen(CFG.widescreen);}//////
+	backBtnImg.SetWidescreen(CFG.widescreen);
+	}
 	GuiButton backBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
 	backBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	backBtn.SetPosition(-180, 400);
@@ -5865,11 +5879,11 @@ int MenuOGG()
 	backBtn.SetTrigger(&trigB);
 	backBtn.SetEffectGrow();
 
-    customOptionList options2(countmp3);
+    customOptionList options2(countoggs);
 
-    for (cnt = 0; cnt < countmp3; cnt++) {
+    for (cnt = 0; cnt < countoggs; cnt++) {
 		char tmp[30];
-        snprintf(tmp , 30, "%s", mp3files[cnt]);
+        snprintf(tmp , 30, "%s", alldirfiles[cnt]);
         options2.SetValue(cnt, "%s", tmp);
         options2.SetName(cnt,"%i.", cnt+1);
     }
@@ -5961,7 +5975,7 @@ int MenuOGG()
 	{
 
     if (backBtn.GetState() == STATE_CLICKED) {
-            if(nothingchanged == 1 && countmp3 > 0) {
+            if(nothingchanged == 1 && countoggs > 0) {
             if(!strcmp("", CFG.oggload_path) || !strcmp("notset", CFG.ogg_path)) {
                 bgMusic->Play();
             } else {
@@ -6008,7 +6022,7 @@ int MenuOGG()
                     WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
                 }
             }
-        if(countmp3 > 0) {
+        if(countoggs > 0) {
             optionBrowser4.SetFocus(1);
         }
         pathBtn.ResetState();
@@ -6017,9 +6031,9 @@ int MenuOGG()
     ret = optionBrowser4.GetClickedOption();
 
     if(ret>=0) {
-        choice = WindowPrompt(LANGUAGE.Setasbackgroundmusic,mp3files[ret],LANGUAGE.Yes,LANGUAGE.No,0,0);
+        choice = WindowPrompt(LANGUAGE.Setasbackgroundmusic,alldirfiles[ret],LANGUAGE.Yes,LANGUAGE.No,0,0);
         if(choice == 1) {
-        snprintf(fullpath,150,"%s%s",CFG.oggload_path,mp3files[ret]);
+        snprintf(fullpath,150,"%s%s",CFG.oggload_path,alldirfiles[ret]);
         choice = bgMusic->PlayOggFile(fullpath);
         if(choice < 0) {
         WindowPrompt(LANGUAGE.Notasupportedformat, LANGUAGE.Loadingstandardmusic, LANGUAGE.ok, 0,0,0);
@@ -6036,11 +6050,11 @@ int MenuOGG()
         optionBrowser4.SetFocus(1);
     }
 
-    if (playBtn.GetState() == STATE_CLICKED && countmp3 > 0) {
-         if(countmp3 > 0) {
+    if (playBtn.GetState() == STATE_CLICKED && countoggs > 0) {
+         if(countoggs > 0) {
             ret = optionBrowser4.GetSelectedOption();
 			songPlaying=ret;
-            snprintf(fullpath, 150,"%s%s", CFG.oggload_path,mp3files[ret]);
+            snprintf(fullpath, 150,"%s%s", CFG.oggload_path,alldirfiles[ret]);
             choice = bgMusic->PlayOggFile(fullpath);
             if(choice < 0) {
             WindowPrompt(LANGUAGE.Notasupportedformat, LANGUAGE.Loadingstandardmusic, LANGUAGE.ok, 0,0,0);
@@ -6059,10 +6073,10 @@ int MenuOGG()
     }
 
 	if(nextBtn.GetState() == STATE_CLICKED){
-	    if(countmp3 > 0) {
+	    if(countoggs > 0) {
 			songPlaying++;
-			if (songPlaying>(countmp3 - 1)){songPlaying=0;}
-            snprintf(fullpath,150,"%s%s", CFG.oggload_path,mp3files[songPlaying]);
+			if (songPlaying>(countoggs - 1)){songPlaying=0;}
+            snprintf(fullpath,150,"%s%s", CFG.oggload_path,alldirfiles[songPlaying]);
             choice = bgMusic->PlayOggFile(fullpath);
             if(choice < 0) {
             WindowPrompt(LANGUAGE.Notasupportedformat, LANGUAGE.Loadingstandardmusic, LANGUAGE.ok, 0,0,0);
@@ -6079,10 +6093,10 @@ int MenuOGG()
 			nextBtn.ResetState();
     }
 	if(prevBtn.GetState() == STATE_CLICKED) {
-	    if(countmp3 > 0) {
+	    if(countoggs > 0) {
             songPlaying--;
-            if (songPlaying<0){songPlaying=(countmp3 - 1);}
-            snprintf(fullpath,150,"%s%s", CFG.oggload_path,mp3files[songPlaying]);
+            if (songPlaying<0){songPlaying=(countoggs - 1);}
+            snprintf(fullpath,150,"%s%s", CFG.oggload_path,alldirfiles[songPlaying]);
             choice = bgMusic->PlayOggFile(fullpath);
             if(choice < 0) {
             WindowPrompt(LANGUAGE.Notasupportedformat, LANGUAGE.Loadingstandardmusic, LANGUAGE.ok, 0,0,0);
@@ -6099,7 +6113,7 @@ int MenuOGG()
         prevBtn.ResetState();
     }
 	if(stopBtn.GetState() == STATE_CLICKED) {
-	    if(countmp3 > 0) {
+	    if(countoggs > 0) {
             StopOgg();
             nothingchanged = 1;
             optionBrowser4.SetFocus(1);
@@ -6116,221 +6130,6 @@ int MenuOGG()
     return menu;
 }
 
-/****************************************************************************
- * MenuMp3
- ***************************************************************************/
-int MenuMp3()
-{
-    int menu = MENU_NONE, cnt = 0;
-    int ret = 0;
-    int scrollon, i = 0;
-	char imgPath[100];
-
-	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
-	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, vol);
-
-    GuiTrigger trigA;
-	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
-
-    char mp3path[30] = "SD:/mp3/";
-    char fullpath[110];
-	int countmp3 = GetFiles(mp3path);
-
-	customOptionList options2(countmp3);
-
-     for (cnt = 0; cnt < countmp3; cnt++) {
-		char tmp[30];
-        snprintf(tmp , 30, "%s", mp3files[cnt]);
-        options2.SetValue(cnt, "%s", tmp);
-        options2.SetName(cnt,"%i.", cnt+1);
-    }
- //   options2.length = cnt;
-
-    snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
-	GuiImageData btnOutline(imgPath, button_dialogue_box_png);
-	if(cnt < 9) {
-    scrollon = 0;
-    } else {
-    scrollon = 1;
-    }
-	GuiCustomOptionBrowser optionBrowser4(396, 280, &options2, CFG.theme_path, "bg_options_settings.png", bg_options_settings_png, scrollon, 85);
-	optionBrowser4.SetPosition(0, 90);
-	optionBrowser4.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-
-    GuiText cancelBtnTxt(LANGUAGE.Back, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255}); //{0, 0, 0, 255});
-	cancelBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
-	GuiImage cancelBtnImg(&btnOutline);
-	if (Settings.wsprompt == yes){
-	cancelBtnTxt.SetWidescreen(CFG.widescreen);
-	cancelBtnImg.SetWidescreen(CFG.widescreen);}
-	GuiButton cancelBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
-	cancelBtn.SetScale(0.9);
-	cancelBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	cancelBtn.SetPosition(210, 400);
-	cancelBtn.SetLabel(&cancelBtnTxt);
-	cancelBtn.SetImage(&cancelBtnImg);
-	cancelBtn.SetSoundOver(&btnSoundOver);
-	cancelBtn.SetTrigger(&trigA);
-	cancelBtn.SetEffectGrow();
-
-	int songPlaying=0;
-
-	GuiTrigger trigHome;
-	trigHome.SetButtonOnlyTrigger(-1, WPAD_BUTTON_HOME | WPAD_CLASSIC_BUTTON_HOME, 0);
-	GuiTrigger trigL;
-	trigL.SetButtonOnlyTrigger(-1, WPAD_BUTTON_LEFT | WPAD_CLASSIC_BUTTON_LEFT, PAD_BUTTON_LEFT);
-	GuiTrigger trigR;
-	trigR.SetButtonOnlyTrigger(-1, WPAD_BUTTON_RIGHT | WPAD_CLASSIC_BUTTON_RIGHT, PAD_BUTTON_RIGHT);
-    GuiTrigger trigMinus;
-	trigMinus.SetButtonOnlyTrigger(-1, WPAD_BUTTON_MINUS | WPAD_CLASSIC_BUTTON_MINUS, 0);
-	GuiTrigger trigPlus;
-	trigPlus.SetButtonOnlyTrigger(-1, WPAD_BUTTON_PLUS | WPAD_CLASSIC_BUTTON_PLUS, 0);
-
-	snprintf(imgPath, sizeof(imgPath), "%sarrow_next.png", CFG.theme_path);
-	GuiImageData next(imgPath, arrow_next_png);
-	snprintf(imgPath, sizeof(imgPath), "%sarrow_previous.png", CFG.theme_path);
-	GuiImageData prev(imgPath, arrow_previous_png);
-	snprintf(imgPath, sizeof(imgPath), "%smp3_stop.png", CFG.theme_path);
-	GuiImageData stop(imgPath, mp3_stop_png);
-	snprintf(imgPath, sizeof(imgPath), "%smp3_pause.png", CFG.theme_path);
-	GuiImageData pause(imgPath, mp3_pause_png);
-	snprintf(imgPath, sizeof(imgPath), "%sstartgame_arrow_right.png", CFG.theme_path);
-	GuiImageData play(imgPath, startgame_arrow_right_png);
-
-	GuiImage nextBtnImg(&next);
-	GuiButton nextBtn(next.GetWidth(), next.GetHeight());
-	nextBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	nextBtn.SetPosition(100, 400);
-	nextBtn.SetImage(&nextBtnImg);
-	nextBtn.SetSoundOver(&btnSoundOver);
-	nextBtn.SetSoundClick(&btnClick);
-	nextBtn.SetTrigger(&trigA);
-	nextBtn.SetTrigger(&trigR);
-	nextBtn.SetEffectGrow();
-
-	GuiImage prevBtnImg(&prev);
-	prevBtnImg.SetWidescreen(CFG.widescreen);
-	GuiButton prevBtn(prev.GetWidth(), prev.GetHeight());
-	prevBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	prevBtn.SetPosition(-100, 400);
-	prevBtn.SetImage(&prevBtnImg);
-	prevBtn.SetSoundOver(&btnSoundOver);
-	prevBtn.SetSoundClick(&btnClick);
-	prevBtn.SetTrigger(&trigA);
-	prevBtn.SetTrigger(&trigL);
-	prevBtn.SetEffectGrow();
-
-	GuiImage playBtnImg(&play);
-	playBtnImg.SetWidescreen(CFG.widescreen);
-	GuiButton playBtn(play.GetWidth(), play.GetHeight());
-	playBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	playBtn.SetPosition(42, 400);
-	playBtn.SetImage(&playBtnImg);
-	playBtn.SetSoundOver(&btnSoundOver);
-	playBtn.SetSoundClick(&btnClick);
-	playBtn.SetTrigger(&trigA);
-	playBtn.SetTrigger(&trigPlus);
-	playBtn.SetEffectGrow();
-
-	GuiImage stopBtnImg(&stop);
-	stopBtnImg.SetWidescreen(CFG.widescreen);
-	GuiButton stopBtn(stop.GetWidth(), stop.GetHeight());
-	stopBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	stopBtn.SetPosition(-27, 400);
-	stopBtn.SetImage(&stopBtnImg);
-	stopBtn.SetSoundOver(&btnSoundOver);
-	stopBtn.SetSoundClick(&btnClick);
-	stopBtn.SetTrigger(&trigA);
-	stopBtn.SetTrigger(&trigMinus);
-	stopBtn.SetEffectGrow();
-
-	GuiImage pauseBtnImg(&pause);
-	pauseBtnImg.SetWidescreen(CFG.widescreen);
-
-    HaltGui();
-	GuiWindow w(screenwidth, screenheight);
-    w.Append(&cancelBtn);
-    w.Append(&playBtn);
-	w.Append(&playBtn);
-	w.Append(&nextBtn);
-	w.Append(&prevBtn);
-	w.Append(&stopBtn);
-    mainWindow->Append(&optionBrowser4);
-    mainWindow->Append(&w);
-
-	ResumeGui();
-
-	while(menu == MENU_NONE)
-	{
-	 if (cancelBtn.GetState() == STATE_CLICKED)
-		{
-			menu = MENU_DISCLIST;
-			CloseMp3();
-			bgMusic->Play();
-			break;
-		}
-
-    ret = optionBrowser4.GetClickedOption();
-
-    for(i = 0; i < countmp3; i++) {
-        if(i == ret) {
-            sprintf(fullpath,"%s%s", mp3path,mp3files[ret]);
-            PlayMp3(fullpath);
-			songPlaying=ret;
-            SetMp3Volume(127);
-        }
-    }
-
-    if (playBtn.GetState() == STATE_CLICKED) {
-			StopMp3();
-            ret = optionBrowser4.GetSelectedOption();
-			songPlaying=ret;
-			sprintf(fullpath,"%s%s", mp3path,mp3files[ret]);
-            PlayMp3(fullpath);
-            SetMp3Volume(127);
-			playBtn.ResetState();
-
-    }
-
-	if(nextBtn.GetState() == STATE_CLICKED)
-			{
-			StopMp3();
-			songPlaying++;
-			if (songPlaying>(countmp3 - 1)){songPlaying=0;}
-			sprintf(fullpath,"%s%s", mp3path,mp3files[songPlaying]);
-            PlayMp3(fullpath);
-            SetMp3Volume(127);
-			nextBtn.ResetState();
-			}
-	if(prevBtn.GetState() == STATE_CLICKED)
-			{
-				StopMp3();
-				songPlaying--;
-				if (songPlaying<0){songPlaying=(countmp3 - 1);}
-				sprintf(fullpath,"%s%s", mp3path,mp3files[songPlaying]);
-				PlayMp3(fullpath);
-				SetMp3Volume(127);
-				prevBtn.ResetState();
-			}
-	if(stopBtn.GetState() == STATE_CLICKED)
-			{	StopMp3();
-				stopBtn.ResetState();
-				playBtn.SetImage(&playBtnImg);
-				//break;
-			}
-	}
-
-	HaltGui();
-	w.Remove(&playBtn);
-	w.Remove(&nextBtn);
-	w.Remove(&prevBtn);
-	w.Remove(&stopBtn);
-	mainWindow->Remove(&optionBrowser4);
-	mainWindow->Remove(&w);
-	ResumeGui();
-
-return menu;
-}
 /****************************************************************************
  * MainMenu
  ***************************************************************************/
@@ -6398,9 +6197,6 @@ int MainMenu(int menu)
 				break;
             case MENU_DISCLIST:
 				currentMenu = MenuDiscList();
-				break;
-            case MENU_MP3:
-				currentMenu = MenuMp3();
 				break;
             case MENU_OGG:
 				currentMenu = MenuOGG();
@@ -6539,7 +6335,7 @@ int MainMenu(int menu)
                         break;
     }
 
-    u32 videoselected = 0;
+    u8 videoselected = 0;
 
     switch(videoChoice)
     {
@@ -6557,17 +6353,20 @@ int MainMenu(int menu)
 
                         case ntsc:
                                 videoselected = 3;
+						break;
 
                         case systemdefault:
 
                                 videoselected = 4;
                         break;
+
                         case patch:
 
                                 videoselected = 5;
                         break;
+
                         default:
-                                videoselected = 3;
+                                videoselected = 0;
                         break;
     }
 
@@ -6604,9 +6403,8 @@ int MainMenu(int menu)
     }
 
     int ret = 0;
-    ret = Disc_WiiBoot(videoselected, cheat, vipatch);
+    ret = Disc_WiiBoot(videoselected, cheat, vipatch, Settings.patchcountrystrings);
     if (ret < 0) {
-        printf("%s (ret = %d)\n",LANGUAGE.Error, ret);
         ExitApp();
         SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
     }

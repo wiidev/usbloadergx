@@ -217,7 +217,7 @@ bool Search_and_patch_Video_Modes(void *Address, u32 Size, GXRModeObj* Table[])
 	return found;
 }
 
-s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch)
+s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8 patchcountrystring)
 {
 	app_entry appldr_entry;
 	app_init  appldr_init;
@@ -307,13 +307,17 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch)
 
 	    /*GAME HOOK - FISHEARS*/
 		dogamehooks(dst,len);
-		
+
 		if (vipatch)
 			vidolpatcher(dst,len);
 
 
 		/*LANGUAGE PATCH - FISHEARS*/
 		langpatcher(dst,len);
+
+		/*Thanks to WiiPower*/
+		if(patchcountrystring == 1)
+		PatchCountryStrings(dst, len);
 
 		DCFlushRange(dst, len);
 	}

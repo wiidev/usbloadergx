@@ -248,7 +248,7 @@ s32 Disc_IsWii(void)
 	return 0;
 }
 
-s32 Disc_BootPartition(u64 offset, u8 videoselected, u8 cheat, u8 vipatch)
+s32 Disc_BootPartition(u64 offset, u8 videoselected, u8 cheat, u8 vipatch, u8 patchcountrystring)
 {
 	entry_point p_entry;
 
@@ -260,7 +260,7 @@ s32 Disc_BootPartition(u64 offset, u8 videoselected, u8 cheat, u8 vipatch)
 		return ret;
 
 	/* Run apploader */
-	ret = Apploader_Run(&p_entry, cheat, videoselected, vipatch);
+	ret = Apploader_Run(&p_entry, cheat, videoselected, vipatch, patchcountrystring);
 	if (ret < 0)
 		return ret;
 
@@ -295,7 +295,7 @@ s32 Disc_BootPartition(u64 offset, u8 videoselected, u8 cheat, u8 vipatch)
 	return 0;
 }
 
-s32 Disc_WiiBoot(u8 videoselected, u8 cheat, u8 vipatch)
+s32 Disc_WiiBoot(u8 videoselected, u8 cheat, u8 vipatch, u8 patchcountrystring)
 {
 	u64 offset;
 	s32 ret;
@@ -306,5 +306,85 @@ s32 Disc_WiiBoot(u8 videoselected, u8 cheat, u8 vipatch)
 		return ret;
 
 	/* Boot partition */
-	return Disc_BootPartition(offset, videoselected, cheat, vipatch);
+	return Disc_BootPartition(offset, videoselected, cheat, vipatch, patchcountrystring);
+}
+
+void PatchCountryStrings(void *Address, int Size)
+{
+    u8 SearchPattern[4]    = { 0x00, 0x00, 0x00, 0x00 };
+    u8 PatchData[4]        = { 0x00, 0x00, 0x00, 0x00 };
+    u8 *Addr            = (u8*)Address;
+
+    int wiiregion = CONF_GetRegion();
+
+    switch (wiiregion)
+    {
+        case CONF_REGION_JP:
+            SearchPattern[0] = 0x00;
+            SearchPattern[1] = 0x4A; // J
+            SearchPattern[2] = 0x50; // P
+            break;
+        case CONF_REGION_EU:
+            SearchPattern[0] = 0x02;
+            SearchPattern[1] = 0x45; // E
+            SearchPattern[2] = 0x55; // U
+            break;
+        case CONF_REGION_KR:
+            SearchPattern[0] = 0x04;
+            SearchPattern[1] = 0x4B; // K
+            SearchPattern[2] = 0x52; // R
+            break;
+        case CONF_REGION_CN:
+            SearchPattern[0] = 0x05;
+            SearchPattern[1] = 0x43; // C
+            SearchPattern[2] = 0x4E; // N
+            break;
+        case CONF_REGION_US:
+        default:
+            SearchPattern[0] = 0x01;
+            SearchPattern[1] = 0x55; // U
+            SearchPattern[2] = 0x53; // S
+    }
+
+    switch (diskid[3])
+    {
+        case 'J':
+            PatchData[1] = 0x4A; // J
+            PatchData[2] = 0x50; // P
+            break;
+
+        case 'D':
+        case 'F':
+        case 'P':
+        case 'X':
+        case 'Y':
+            PatchData[1] = 0x45; // E
+            PatchData[2] = 0x55; // U
+            break;
+
+        case 'E':
+        default:
+            PatchData[1] = 0x55; // U
+            PatchData[2] = 0x53; // S
+    }
+
+    while (Size >= 4)
+    {
+        if (Addr[0] == SearchPattern[0] && Addr[1] == SearchPattern[1] && Addr[2] == SearchPattern[2] && Addr[3] == SearchPattern[3])
+        {
+            //*Addr = PatchData[0];
+            Addr += 1;
+            *Addr = PatchData[1];
+            Addr += 1;
+            *Addr = PatchData[2];
+            Addr += 1;
+            //*Addr = PatchData[3];
+            Addr += 1;
+            Size -= 4;
+        } else
+        {
+            Addr += 4;
+            Size -= 4;
+        }
+    }
 }
