@@ -31,6 +31,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ogc/machine/processor.h>
+//shit i added
+#include <string.h>
+
 
 #include "pngu/pngu.h"
 #include "video.h"
@@ -75,6 +78,79 @@ void Background_Show(int x, int y, int z, u8 * data, int angle, int scaleX, int 
 	Menu_DrawImg(x, y, z, imgProp.imgWidth, imgProp.imgHeight, data, angle, scaleX, scaleY, alpha);
 }
 
+char thePath[100];
+static char *cfg_name, *cfg_val;
+
+
+char* strcopy(char *dest, char *src, int size)
+{
+	strncpy(dest,src,size);
+	dest[size-1] = 0;
+	return dest;
+}
+
+char* trimcopy(char *dest, char *src, int size)
+{
+	int len;
+	while (*src == ' ') src++;
+	len = strlen(src);
+	// trim trailing " \r\n"
+	while (len > 0 && strchr(" \r\n", src[len-1])) len--;
+	if (len >= size) len = size-1;
+	strncpy(dest, src, len);
+	dest[len] = 0;
+	return dest;
+}
+
+
+
+void cfg_parseline(char *line, void (*set_func)(char*, char*))
+{
+	// split name = value
+	char tmp[200], name[100], val[100];
+	strcopy(tmp, line, sizeof(tmp));
+	char *eq = strchr(tmp, '=');
+	if (!eq) return;
+	*eq = 0;
+	trimcopy(name, tmp, sizeof(name));
+	trimcopy(val, eq+1, sizeof(val));
+	set_func(name, val);
+}
+
+
+
+bool cfg_parsefile(char *fname, void (*set_func)(char*, char*))
+{
+	FILE *f;
+	char line[200];
+
+	f = fopen(fname, "r");
+	if (!f) {
+		return false;
+	}
+	while (fgets(line, sizeof(line), f)) {
+		// lines starting with # are comments
+		if (line[0] == '#') continue;
+		cfg_parseline(line, set_func);
+	}
+	fclose(f);
+	return true;
+}
+
+
+char pathname[200];
+void cfg_set(char *name, char *val)
+{
+	cfg_name = name;
+	cfg_val = val;
+
+	if (strcmp(name, "update_path") == 0) {
+		strcopy(thePath, val, sizeof(thePath));
+		return;
+	}
+	
+}
+
 
 int main(int argc, char **argv) {
 
@@ -84,8 +160,9 @@ int main(int argc, char **argv) {
 	int exeSize              = 0;
 	u32 exeEntryPointAddress = 0;
 	entrypoint exeEntryPoint;
-
-
+	
+	
+	
     /* int videomod */
     InitVideo();
 
@@ -102,11 +179,24 @@ int main(int argc, char **argv) {
     __io_wiisd.startup();
 	fatMount("SD", &__io_wiisd, 0, 32, 128);
 
-    /* Open dol File and check exist */
-	exeFile = fopen ("SD:/apps/usbloader_gx/boot.dol" ,"rb");
+    /* write default path*/
+	snprintf(thePath, sizeof(thePath), "SD:/apps/usbloader_gx/");
+	
+	// check to see if there is a path in the GXglobal file 
+	snprintf(pathname, sizeof(pathname), "SD:/config/GXGlobal.cfg");
+	cfg_parsefile(pathname, &cfg_set);
+	
+	//add boot.dol to our path
+	snprintf(pathname, sizeof(pathname), "%sboot.dol", thePath);
+	
+	/* Open dol File and check exist */
+	exeFile = fopen (pathname ,"rb");
+	
+	//boot.dol wasn't found.  Try for the elf.
 	if (exeFile==NULL) {
 	    fclose(exeFile);
-		exeFile = fopen ("SD:/apps/usbloader_gx/boot.elf" ,"rb");
+		snprintf(pathname, sizeof(pathname), "%sboot.elf", thePath);
+		exeFile = fopen (pathname ,"rb");
 		if (exeFile==NULL) {
 		SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
 		}
