@@ -12,12 +12,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <wiiuse/wpad.h>
-
-#include "input.h"
-#include "libwiigui/gui.h"
-
-#include "cfg.h"
+#include <math.h>
 
 #define DEFAULT_FIFO_SIZE 256 * 1024
 static unsigned int *xfb[2] = { NULL, NULL }; // Double buffered
@@ -25,42 +20,6 @@ static int whichfb = 0; // Switch
 static GXRModeObj *vmode; // Menu video mode
 static unsigned char gp_fifo[DEFAULT_FIFO_SIZE] ATTRIBUTE_ALIGN (32);
 static Mtx GXmodelView2D;
-int screenheight;
-int screenwidth;
-u32 frameCount = 0;
-
-/****************************************************************************
- * UpdatePadsCB
- *
- * called by postRetraceCallback in InitGCVideo - scans gcpad and wpad
- ***************************************************************************/
-static void
-UpdatePadsCB ()
-{
-	frameCount++;
-	#ifdef HW_RVL
-	WPAD_ScanPads();
-	#endif
-	PAD_ScanPads();
-
-	for(int i=3; i >= 0; i--)
-	{
-		#ifdef HW_RVL
-		memcpy(&userInput[i].wpad, WPAD_Data(i), sizeof(WPADData));
-		#endif
-
-		userInput[i].chan = i;
-		userInput[i].pad.btns_d = PAD_ButtonsDown(i);
-		userInput[i].pad.btns_u = PAD_ButtonsUp(i);
-		userInput[i].pad.btns_h = PAD_ButtonsHeld(i);
-		userInput[i].pad.stickX = PAD_StickX(i);
-		userInput[i].pad.stickY = PAD_StickY(i);
-		userInput[i].pad.substickX = PAD_SubStickX(i);
-		userInput[i].pad.substickY = PAD_SubStickY(i);
-		userInput[i].pad.triggerL = PAD_TriggerL(i);
-		userInput[i].pad.triggerR = PAD_TriggerR(i);
-	}
-}
 
 /****************************************************************************
  * StartGX
@@ -167,17 +126,7 @@ InitVideo ()
 	VIDEO_Init();
 	vmode = VIDEO_GetPreferredMode(NULL); // get default video mode
 
-	// widescreen fix
-	if(CFG.widescreen)
-	{
-		vmode->viWidth = VI_MAX_WIDTH_PAL-12;
-		vmode->viXOrigin = ((VI_MAX_WIDTH_PAL - vmode->viWidth) / 2) + 2;
-	}
-
 	VIDEO_Configure (vmode);
-
-	screenheight = 480;
-	screenwidth = vmode->fbWidth;
 
 	// Allocate the video buffers
 	xfb[0] = (u32 *) MEM_K0_TO_K1 (SYS_AllocateFramebuffer (vmode));
@@ -190,9 +139,6 @@ InitVideo ()
 	VIDEO_ClearFrameBuffer (vmode, xfb[0], COLOR_BLACK);
 	VIDEO_ClearFrameBuffer (vmode, xfb[1], COLOR_BLACK);
 	VIDEO_SetNextFramebuffer (xfb[0]);
-
-	// video callback
-	VIDEO_SetPostRetraceCallback ((VIRetraceCallback)UpdatePadsCB);
 
 	VIDEO_SetBlack (FALSE);
 	VIDEO_Flush ();
@@ -264,7 +210,6 @@ void Menu_DrawImg(f32 xpos, f32 ypos, f32 zpos, u16 width, u16 height, u8 data[]
 	guMtxScaleApply(m1,m1,scaleX,scaleY,1.0);
 	Vector axis = (Vector) {0 , 0, 1 };
 	guMtxRotAxisDeg (m2, &axis, degrees);
-//	guMtxConcat(m2,m1,m);
 	guMtxConcat(m1,m2,m);
 
 	guMtxTransApply(m,m, xpos+width+0.5,ypos+height+0.5,zpos);
@@ -287,134 +232,6 @@ void Menu_DrawImg(f32 xpos, f32 ypos, f32 zpos, u16 width, u16 height, u8 data[]
 	GX_Position3f32(-width, height,  0);
 	GX_Color4u8(0xFF,0xFF,0xFF,alpha);
 	GX_TexCoord2f32(0, 1);
-	GX_End();
-	GX_LoadPosMtxImm (GXmodelView2D, GX_PNMTX0);
-
-	GX_SetTevOp (GX_TEVSTAGE0, GX_PASSCLR);
-	GX_SetVtxDesc (GX_VA_TEX0, GX_NONE);
-}
-
-/****************************************************************************
- * Menu_DrawRectangle
- *
- * Draws a rectangle at the specified coordinates using GX
- ***************************************************************************/
-void Menu_DrawRectangle(f32 x, f32 y, f32 width, f32 height, GXColor color, u8 filled)
-{
-	u8 fmt;
-	long n;
-	int i;
-	f32 x2 = x+width;
-	f32 y2 = y+height;
-	Vector v[] = {{x,y,0.0f}, {x2,y,0.0f}, {x2,y2,0.0f}, {x,y2,0.0f}, {x,y,0.0f}};
-
-	if(!filled)
-	{
-		fmt = GX_LINESTRIP;
-		n = 5;
-	}
-	else
-	{
-		fmt = GX_TRIANGLEFAN;
-		n = 4;
-	}
-
-	GX_Begin(fmt, GX_VTXFMT0, n);
-	for(i=0; i<n; i++)
-	{
-		GX_Position3f32(v[i].x, v[i].y,  v[i].z);
-		GX_Color4u8(color.r, color.g, color.b, color.a);
-	}
-	GX_End();
-}
-
-void Menu_DrawDiskCover(f32 xpos, f32 ypos, f32 zpos, u16 width, u16 height, u16 distance,u8 data[],
-	f32 deg_alpha, f32 deg_beta, f32 scaleX, f32 scaleY, u8 alpha, bool shadow)
-{
-	if(data == NULL)
-		return;
-
-	GXTexObj texObj;
-
-	GX_InitTexObj(&texObj, data, width,height, GX_TF_RGBA8,GX_CLAMP, GX_CLAMP,GX_FALSE);
-	GX_LoadTexObj(&texObj, GX_TEXMAP0);
-	GX_InvalidateTexAll();
-
-	GX_SetTevOp (GX_TEVSTAGE0, GX_MODULATE);
-	GX_SetVtxDesc (GX_VA_TEX0, GX_DIRECT);
-	
-	
-	f32 cos_beta = cos(DegToRad(deg_beta));
-	f32 s_offset_y = (zpos + (cos_beta * distance)) * tan(DegToRad(5));
-	f32 s_offset_x = (cos_beta<0?-cos_beta:cos_beta) * s_offset_y;
-	f32 s_offset_z = (s_offset_y<0 ? 0 : s_offset_y)*2;
-
-	Mtx m,m1,m2,m3,m4, mv;
-	width *=.5;
-	height*=.5;
-	guMtxIdentity (m4);
-	guMtxTransApply(m4,m4, 0, 0, distance);
-	
-	guMtxIdentity (m1);
-	guMtxScaleApply(m1,m1,scaleX,scaleY,1.0);
-	Vector axis2 = (Vector) {0 , 1, 0 };
-	guMtxRotAxisDeg (m2, &axis2, deg_beta);
-	Vector axis = (Vector) {0 , 0, 1 };
-	guMtxRotAxisDeg (m3, &axis, deg_alpha);
-//	guMtxConcat(m2,m1,m);
-	guMtxConcat(m3,m4,m3); // move distance then rotate z-axis 
-	guMtxConcat(m2,m3,m2); // rotate y-axis 
-	guMtxConcat(m1,m2,m); // scale
-	
-	if(shadow)
-		guMtxTransApply(m,m, xpos+width+0.5+s_offset_x,ypos+height+0.5+s_offset_y,zpos-s_offset_z);
-	else
-		guMtxTransApply(m,m, xpos+width+0.5,ypos+height+0.5,zpos);
-
-
-
-	guMtxConcat (GXmodelView2D, m, mv);
-	GX_LoadPosMtxImm (mv, GX_PNMTX0);
-
-	if(shadow)
-	{
-	GX_Begin(GX_QUADS, GX_VTXFMT0,4);
-	GX_Position3f32(-width, -height,  0);
-	GX_Color4u8(0,0,0,alpha);
-	GX_TexCoord2f32(0, 0);
-
-	GX_Position3f32(width, -height,  0);
-	GX_Color4u8(0,0,0,alpha);
-	GX_TexCoord2f32(1, 0);
-
-	GX_Position3f32(width, height,  0);
-	GX_Color4u8(0,0,0,alpha);
-	GX_TexCoord2f32(1, 1);
-
-	GX_Position3f32(-width, height,  0);
-	GX_Color4u8(0,0,0,alpha);
-	GX_TexCoord2f32(0, 1);
-	}
-	else
-	{
-	GX_Begin(GX_QUADS, GX_VTXFMT0,4);
-	GX_Position3f32(-width, -height,  0);
-	GX_Color4u8(0xFF,0xFF,0xFF,alpha);
-	GX_TexCoord2f32(0, 0);
-
-	GX_Position3f32(width, -height,  0);
-	GX_Color4u8(0xFF,0xFF,0xFF,alpha);
-	GX_TexCoord2f32(1, 0);
-
-	GX_Position3f32(width, height,  0);
-	GX_Color4u8(0xFF,0xFF,0xFF,alpha);
-	GX_TexCoord2f32(1, 1);
-
-	GX_Position3f32(-width, height,  0);
-	GX_Color4u8(0xFF,0xFF,0xFF,alpha);
-	GX_TexCoord2f32(0, 1);
-	}
-
 	GX_End();
 	GX_LoadPosMtxImm (GXmodelView2D, GX_PNMTX0);
 

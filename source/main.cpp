@@ -1,164 +1,161 @@
-/****************************************************************************
- * libwiigui Template
- * Tantric 2009
+/*
+ *      loadMii loader v0.3
+ *      main.c
+ *      http://code.google.com/p/loadmii
  *
- * demo.cpp
- * Basic template/demonstration of libwiigui capabilities. For a
- * full-featured app using many more extensions, check out Snes9x GX.
- ***************************************************************************/
+ *      Copyright 2009 The Lemon Man
+ *      Thanks to luccax, Wiipower, Aurelio and crediar
+ *      usbGecko powered by Nuke
+ *
+ *      This program is free software; you can redistribute it and/or modify
+ *      it under the terms of the GNU General Public License as published by
+ *      the Free Software Foundation; either version 2 of the License, or
+ *      (at your option) any later version.
+ *
+ *      This program is distributed in the hope that it will be useful,
+ *      but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *      GNU General Public License for more details.
+ *
+ *      You should have received a copy of the GNU General Public License
+ *      along with this program; if not, write to the Free Software
+ *      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ *      MA 02110-1301, USA.
+ */
 
 #include <gccore.h>
+#include <wiiuse/wpad.h>
+#include <fat.h>
+#include <sdcard/wiisd_io.h>
+#include <malloc.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <ogcsys.h>
-#include <unistd.h>
-#include <wiiuse/wpad.h>
+#include <ogc/machine/processor.h>
 
-#include "FreeTypeGX.h"
+#include "pngu/pngu.h"
 #include "video.h"
-#include "audio.h"
-#include "menu.h"
-#include "input.h"
 #include "filelist.h"
-#include "main.h"
-#include "http.h"
-#include "dns.h"
-#include "fatmounter.h"
-#include "disc.h"
-#include "wbfs.h"
-#include "sys.h"
-#include "video2.h"
-#include "wpad.h"
-#include "cfg.h"
-#include "language.h"
-#include "fat.h"
+#include "dolloader.h"
+#include "elfloader.h"
 
 
-/* Constants */
-#define CONSOLE_XCOORD		260
-#define CONSOLE_YCOORD		115
-#define CONSOLE_WIDTH		340
-#define CONSOLE_HEIGHT		218
-
-FreeTypeGX *fontSystem=0;
-FreeTypeGX *fontClock=0;
-int ExitRequested = 0;
-bool netcheck = false;
+PNGUPROP imgProp;
+IMGCTX ctx;
 
 
-/*Networking - Forsaekn*/
-int Net_Init(char *ip){
+u8 * GetImageData(void) {
 
-	s32 res;
-    while ((res = net_init()) == -EAGAIN)
-	{
-		usleep(100 * 1000); //100ms
-	}
+	u8 * data = NULL;
 
-    if (if_config(ip, NULL, NULL, true) < 0) {
-		printf("      Error reading IP address, exiting");
-		usleep(1000 * 1000 * 1); //1 sec
-		return FALSE;
-	}
-	return TRUE;
+	int ret;
+
+	ctx = PNGU_SelectImageFromBuffer(background_png);
+	if (!ctx)
+		return NULL;
+
+	ret = PNGU_GetImageProperties(ctx, &imgProp);
+	if (ret != PNGU_OK)
+		return NULL;
+
+    int len = imgProp.imgWidth * imgProp.imgHeight * 4;
+
+    if(len%32) len += (32-len%32);
+    data = (u8 *)memalign (32, len);
+    ret = PNGU_DecodeTo4x4RGBA8 (ctx, imgProp.imgWidth, imgProp.imgHeight, data, 255);
+	DCFlushRange(data, len);
+
+	PNGU_ReleaseImageContext(ctx);
+
+    return data;
 }
 
-void ExitApp()
+void Background_Show(int x, int y, int z, u8 * data, int angle, int scaleX, int scaleY, int alpha)
 {
-	ShutoffRumble();
-	StopGX();
-	ShutdownAudio();
-
-    SDCard_deInit();
-
-    //WPAD_Flush(0);
-    //WPAD_Disconnect(0);
-    //WPAD_Shutdown();
-	//exit(0);
-}
-
-void
-DefaultSettings()
-{
-	Settings.video = discdefault;
-	Settings.vpatch = off;
-	Settings.language = ConsoleLangDefault;
-	Settings.ocarina = off;
-	Settings.hddinfo = hr12;
-	Settings.sinfo = ((THEME.showID) ? GameID : Neither);
-	Settings.rumble = RumbleOn;
-	if (THEME.showRegion)
-	{
-		Settings.sinfo = ((Settings.sinfo == GameID) ? Both : GameRegion);
-	}
-	Settings.volume = v80;
-	Settings.tooltips = TooltipsOn;
-	snprintf(Settings.unlockCode, sizeof(Settings.unlockCode), "ab121b");
-	Settings.parentalcontrol = 0;
-	Settings.cios = ios249;
-	Settings.xflip = no;
-	Settings.qboot = no;
-	Settings.unicodefix = 0;
-	Settings.wiilight = 1;
-	Settings.patchcountrystrings = 0;
-
-	CFG_LoadGlobal();
+	/* Draw image */
+	Menu_DrawImg(x, y, z, imgProp.imgWidth, imgProp.imgHeight, data, angle, scaleX, scaleY, alpha);
 }
 
 
-int
-main(int argc, char *argv[])
-{
+int main(int argc, char **argv) {
 
-	s32 ret2;
-
-    SDCard_Init();
-	lang_default();
-	CFG_Load();
-
-	DefaultSettings();
+	u32 cookie;
+	FILE *exeFile;
+	void *exeBuffer          = (void *)EXECUTABLE_MEM_ADDR;
+	int exeSize              = 0;
+	u32 exeEntryPointAddress = 0;
+	entrypoint exeEntryPoint;
 
 
-	SDCard_deInit();
+    /* int videomod */
+    InitVideo();
 
-    /* Load Custom IOS */
-    if(Settings.cios == ios222) {
-        ret2 = IOS_ReloadIOS(222);
-        if (ret2 < 0) {
-            Settings.cios = ios249;
-            ret2 = IOS_ReloadIOS(249);
-        }
-	} else {
-	    ret2 = IOS_ReloadIOS(249);
-	}
+    /* get imagedata */
+    u8 * imgdata = GetImageData();
 
-	if (ret2 < 0) {
-		printf("ERROR: cIOS could not be loaded!");
+    /* fadein of image */
+    for(int i = 0; i < 255; i = i+10) {
+    if(i>255) i = 255;
+	Background_Show(0, 0, 0, imgdata, 0, 1, 1, i);
+    Menu_Render();
+    }
+    /* check devices */
+    __io_wiisd.startup();
+	fatMount("SD", &__io_wiisd, 0, 32, 128);
+
+    /* Open dol File and check exist */
+	exeFile = fopen ("SD:/apps/usbloader_gx/boot.dol" ,"rb");
+	if (exeFile==NULL) {
+	    fclose(exeFile);
+		exeFile = fopen ("SD:/apps/usbloader_gx/boot.elf" ,"rb");
+		if (exeFile==NULL) {
 		SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
+		}
 	}
 
-    SDCard_Init();
+	fseek (exeFile, 0, SEEK_END);
+	exeSize = ftell(exeFile);
+	fseek (exeFile, 0, SEEK_SET);
+	if(fread (exeBuffer, 1, exeSize, exeFile) != (unsigned int) exeSize) {
+		printf("Can't open DOL File...\n");
+		SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);;
+	}
 
-	Sys_Init();
-	//Video_SetMode();
-	//Con_Init(CONSOLE_XCOORD, CONSOLE_YCOORD, CONSOLE_WIDTH, CONSOLE_HEIGHT);
-	//Wpad_Init();
+	fclose (exeFile);
 
-    PAD_Init();
-	InitVideo(); // Initialise video
-	InitAudio(); // Initialize audio
+    /* load entry point */
+	struct __argv args[10];
 
+	int ret = valid_elf_image(exeBuffer);
+	if (ret == 1) {
+        exeEntryPointAddress = load_elf_image(exeBuffer);
+	} else {
+        exeEntryPointAddress = load_dol_image(exeBuffer, args);
+	}
 
-	fontSystem = new FreeTypeGX();
-	fontSystem->loadFont(font_ttf, font_ttf_size, 0);
-	fontSystem->setCompatibilityMode(FTGX_COMPATIBILITY_DEFAULT_TEVOP_GX_PASSCLR | FTGX_COMPATIBILITY_DEFAULT_VTXDESC_GX_NONE);
+    /* fadeout of image */
+    for(int i = 255; i > 1; i = i-7) {
+        if(i < 0) i = 0;
+        Background_Show(0, 0, 0, imgdata, 0, 1, 1, i);
+        Menu_Render();
+	}
 
-	fontClock = new FreeTypeGX();
-	fontClock->loadFont(clock_ttf, clock_ttf_size, 0);
-	fontClock->setCompatibilityMode(FTGX_COMPATIBILITY_DEFAULT_TEVOP_GX_PASSCLR | FTGX_COMPATIBILITY_DEFAULT_VTXDESC_GX_NONE);
+	fatUnmount("SD");
+    __io_wiisd.shutdown();
+    StopGX();
 
-	InitGUIThreads();
-	MainMenu(MENU_CHECK);
+	if (exeEntryPointAddress == 0) {
+		printf("EntryPointAddress failed...\n");
+		SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);;
+	}
+
+	exeEntryPoint = (entrypoint) exeEntryPointAddress;
+
+    /* cleaning up and load dol */
+	SYS_ResetSystem(SYS_SHUTDOWN, 0, 0);
+	_CPU_ISR_Disable (cookie);
+	__exception_closeall ();
+	exeEntryPoint ();
+	_CPU_ISR_Restore (cookie);
 	return 0;
+
 }
