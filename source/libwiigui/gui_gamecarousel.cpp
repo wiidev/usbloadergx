@@ -159,7 +159,13 @@ GuiGameCarousel::~GuiGameCarousel()
 	delete btnLeft;
 
 	delete trigA;
+	delete trigHeldA;
+	delete trigL;
+	delete trigR;
+	delete trigPlus;
+	delete trigMinus;
 	delete btnSoundClick;
+	delete btnSoundOver;
 
 	for(int i=0; i<pagesize; i++) {
 		delete game[i];

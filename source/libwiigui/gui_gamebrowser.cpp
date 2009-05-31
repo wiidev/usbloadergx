@@ -179,9 +179,10 @@ GuiGameBrowser::~GuiGameBrowser()
 	delete bgGamesEntry;
 
 	delete trigA;
+	delete trigHeldA;
 	delete btnSoundClick;
+	delete btnSoundOver;
 
-//	delete optionBg;
 	for(int i=0; i<pagesize; i++)
 	{
 		delete gameTxt[i];

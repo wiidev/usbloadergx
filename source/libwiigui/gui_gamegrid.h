@@ -31,7 +31,6 @@ class GuiGameGrid : public GuiElement
 
 		int * gameIndex;
 		GuiButton ** game;
-		GuiText ** gameTxt;
 
 		GuiImage ** coverImg;
 		GuiImageData ** cover;
@@ -47,6 +46,7 @@ class GuiGameGrid : public GuiElement
 
 		GuiSound * btnSoundOver;
 		GuiSound * btnSoundClick;
+
 		GuiTrigger * trigA;
 		GuiTrigger * trigL;
 		GuiTrigger * trigR;
