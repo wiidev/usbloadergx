@@ -2509,14 +2509,16 @@ UpdateGUI (void *arg)
 				{
 					DoRumble(i);
 				}
-				if(WPAD_Probe(i, NULL) == WPAD_ERR_NO_CONTROLLER){
+				/*if(WPAD_Probe(i, NULL) == WPAD_ERR_NO_CONTROLLER){
 					noControllers++;
 					if (noControllers == 4){
 						mainWindow->SetState(STATE_DISABLED);
 					}
 				}
 				else {noControllers =0;
-					mainWindow->SetState(STATE_DEFAULT);}
+					if (mainWindow->GetState()==STATE_DISABLED);
+					
+					mainWindow->SetState(STATE_DEFAULT);}*/
 				
 			}
 			#endif
@@ -4502,6 +4504,7 @@ static int MenuSettings()
 	tabBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	tabBtn.SetPosition(-202, 90);
 	tabBtn.SetImage(&tab1Img);
+	tabBtn.SetRumble(false);
 
 	GuiButton page1Btn(40, 96);
 	page1Btn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
