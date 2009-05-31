@@ -24,7 +24,7 @@
 #define SHIFT_SPEED	100
 #define SPEED_STEP	4
 #define PAGESIZE	9
-#define SAFETY		320
+#define SAFETY		9
 
 extern const int vol;
 
@@ -97,7 +97,7 @@ GuiGameCarousel::GuiGameCarousel(int w, int h, struct discHdr * l, int gameCnt, 
 	game = new GuiButton * [pagesize];
 	bob = new int[pagesize];
 	coverImg = new GuiImage * [gameCnt];
-	cover = new GuiImageData * [gameCnt];	
+	cover = new GuiImageData * [gameCnt];
 
 	for(int i=0; i<pagesize; i++) {
 		bob[i]=i;
@@ -129,7 +129,7 @@ GuiGameCarousel::GuiGameCarousel(int w, int h, struct discHdr * l, int gameCnt, 
 		coverImg[i]->SetScale(SCALE);
 		coverImg[i]->SetWidescreen(CFG.widescreen);
 	}
-	
+
 	for(int i=0; i < pagesize; i++) {
 		game[i] = new GuiButton(122,244);
 		game[i]->SetParent(this);
@@ -330,7 +330,7 @@ void GuiGameCarousel::Update(GuiTrigger * t)
 		if(game[bob[i]]->GetState() == STATE_CLICKED) {
 			clickedItem = i;
 		}
-		
+
 	}
 
 	// navigation
@@ -354,19 +354,19 @@ void GuiGameCarousel::Update(GuiTrigger * t)
 
 		listOffset = (listOffset+1 < gameCnt) ? listOffset+1 : 0;
 		firstPic = (firstPic+1 < pagesize) ? firstPic+1 : 0;
-		
+
 		for (int i=0; i<pagesize; i++) {
 			bob[i] = (firstPic+i)%pagesize;
 		}
 
 		game[bob[pagesize-1]]->SetImage(coverImg[(listOffset + pagesize-1) % gameCnt]);
 		game[bob[pagesize-1]]->SetPosition(0, RADIUS);
-		
+
 
 		for (int i=0; i<pagesize; i++) {
 			game[bob[i]]->SetEffect(EFFECT_GOROUND, -speed, DEG_OFFSET, RADIUS, 270-(pagesize-2*i-3)*DEG_OFFSET/2, 1, 0, RADIUS);
-			
-		
+
+
 		}
 		speed+=SPEED_STEP;
 	}
@@ -385,7 +385,7 @@ void GuiGameCarousel::Update(GuiTrigger * t)
 		for(int i=0; i<pagesize; i++) {
 			game[i]->StopEffect();
 		}
-		listOffset = (listOffset-1 < 0) ? gameCnt-1 : listOffset-1;	
+		listOffset = (listOffset-1 < 0) ? gameCnt-1 : listOffset-1;
 		firstPic = (firstPic-1 < 0) ? pagesize-1 : firstPic-1;
 
 		for(int i=0; i<pagesize; i++) {
@@ -438,7 +438,7 @@ void GuiGameCarousel::Reload(struct discHdr * l, int count)
 	game = new GuiButton * [pagesize];
 	bob = new int[pagesize];
 	coverImg = new GuiImage * [gameCnt];
-	cover = new GuiImageData * [gameCnt];	
+	cover = new GuiImageData * [gameCnt];
 
 	for(int i=0; i<pagesize; i++) {
 		bob[i]=i;
@@ -471,7 +471,7 @@ void GuiGameCarousel::Reload(struct discHdr * l, int count)
 		coverImg[i]->SetScale(SCALE);
 		coverImg[i]->SetWidescreen(CFG.widescreen);
 	}
-	
+
 	for(int i=0; i < pagesize; i++) {
 		game[i] = new GuiButton(122,244);
 		game[i]->SetParent(this);

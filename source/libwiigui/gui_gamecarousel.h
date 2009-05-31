@@ -35,7 +35,6 @@ class GuiGameCarousel : public GuiElement
 		int * bob;
 
 		GuiButton ** game;
-		GuiText ** gameTxt;
 
 		GuiImage ** coverImg;
 		GuiImageData ** cover;

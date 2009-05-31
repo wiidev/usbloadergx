@@ -16,7 +16,7 @@
 #include <string.h>
 #include <sstream>
 
-#define GAMESELECTSIZE      30
+
 extern const int vol;
 
 /**
@@ -157,7 +157,13 @@ GuiGameGrid::~GuiGameGrid()
 	delete btnLeft;
 
 	delete trigA;
+	delete trigHeldA;
+	delete trigL;
+	delete trigR;
+	delete trigPlus;
+	delete trigMinus;
 	delete btnSoundClick;
+	delete btnSoundOver;
 
 	for(int i=0; i<pagesize; i++)
 	{
@@ -168,6 +174,8 @@ GuiGameGrid::~GuiGameGrid()
 	}
 	delete [] gameIndex;
 	delete [] game;
+	delete [] cover;
+	delete [] coverImg;
 }
 
 void GuiGameGrid::SetFocus(int f)

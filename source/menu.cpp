@@ -3278,9 +3278,9 @@ static int MenuDiscList()
 	gameGrid.SetPosition(0,20);
 	gameGrid.SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
 
-	//GuiGameCarousel gameCarousel(640, 400, gameList, gameCnt, CFG.theme_path, bg_options_png, startat, offset);
-	//gameCarousel.SetPosition(0,-20);
-	//gameCarousel.SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
+	GuiGameCarousel gameCarousel(640, 400, gameList, gameCnt, CFG.theme_path, bg_options_png, startat, offset);
+	gameCarousel.SetPosition(0,-20);
+	gameCarousel.SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
 
 	GuiText clockTimeBack("88:88", 40, (GXColor){138, 138, 138, 40});
 	clockTimeBack.SetAlignment(THEME.clockAlign, ALIGN_TOP);
@@ -3291,7 +3291,8 @@ static int MenuDiscList()
 	}
 	GuiText clockTime(theTime, 40, (GXColor){138, 138, 138, 240});
 	clockTime.SetAlignment(THEME.clockAlign, ALIGN_TOP);
-	clockTime.SetPosition(THEME.clock_x, THEME.clock_y);	clockTime.SetFont(fontClock);
+	clockTime.SetPosition(THEME.clock_x, THEME.clock_y);
+	clockTime.SetFont(fontClock);
 	if (Settings.gameDisplay==grid || Settings.gameDisplay==carousel) {
 		clockTime.SetPosition(THEME.clock_x, THEME.clock_y+3);
 	}
@@ -3332,7 +3333,7 @@ static int MenuDiscList()
 
 	if (Settings.gameDisplay==list){mainWindow->Append(&gameBrowser);}
 	if (Settings.gameDisplay==grid){mainWindow->Append(&gameGrid);}
-	//if (Settings.gameDisplay==carousel){mainWindow->Append(&gameCarousel);}
+	if (Settings.gameDisplay==carousel){mainWindow->Append(&gameCarousel);}
 	mainWindow->Append(&w);
 
 	ResumeGui();
@@ -3404,7 +3405,7 @@ static int MenuDiscList()
 				poweroffBtn.ResetState();
 				if (Settings.gameDisplay==list){gameBrowser.SetFocus(1);}
 				else if (Settings.gameDisplay==grid){gameGrid.SetFocus(1);}
-				//else if (Settings.gameDisplay==carousel){gameCarousel.SetFocus(1);}
+				else if (Settings.gameDisplay==carousel){gameCarousel.SetFocus(1);}
 			}
 
 		}
@@ -3436,7 +3437,7 @@ static int MenuDiscList()
 			homeBtn.ResetState();
 			if (Settings.gameDisplay==list){gameBrowser.SetFocus(1);}
 			else if (Settings.gameDisplay==grid){gameGrid.SetFocus(1);}
-			//else if (Settings.gameDisplay==carousel){gameCarousel.SetFocus(1);}
+			else if (Settings.gameDisplay==carousel){gameCarousel.SetFocus(1);}
 			}
 
         }
@@ -3445,7 +3446,7 @@ static int MenuDiscList()
 			wiiBtn.ResetState();
 			if (Settings.gameDisplay==list){gameBrowser.SetFocus(1);}
 			else if (Settings.gameDisplay==grid){gameGrid.SetFocus(1);}
-			//else if (Settings.gameDisplay==carousel){gameCarousel.SetFocus(1);}
+			else if (Settings.gameDisplay==carousel){gameCarousel.SetFocus(1);}
 		}
 		else if(installBtn.GetState() == STATE_CLICKED)
 		{
@@ -3460,7 +3461,7 @@ static int MenuDiscList()
 					installBtn.ResetState();
 					if (Settings.gameDisplay==list){gameBrowser.SetFocus(1);}
 					else if (Settings.gameDisplay==grid){gameGrid.SetFocus(1);}
-					//else if (Settings.gameDisplay==carousel){gameCarousel.SetFocus(1);}
+					else if (Settings.gameDisplay==carousel){gameCarousel.SetFocus(1);}
 				}
 		}
 
@@ -3474,9 +3475,9 @@ static int MenuDiscList()
 			else if (Settings.gameDisplay==grid){
 				startat = gameGrid.GetSelectedOption();
 				offset = gameGrid.GetOffset();}
-			//else if (Settings.gameDisplay==carousel){
-			//	startat = gameCarousel.GetSelectedOption();
-			//	offset = gameCarousel.GetOffset();}
+			else if (Settings.gameDisplay==carousel){
+				startat = gameCarousel.GetSelectedOption();
+				offset = gameCarousel.GetOffset();}
 			if(isSdInserted()) {
             CFG_Load();
             }
@@ -3540,7 +3541,7 @@ static int MenuDiscList()
             DownloadBtn.ResetState();
 			if (Settings.gameDisplay==list){gameBrowser.SetFocus(1);}
 			else if (Settings.gameDisplay==grid){gameGrid.SetFocus(1);}
-			//else if (Settings.gameDisplay==carousel){gameCarousel.SetFocus(1);}
+			else if (Settings.gameDisplay==carousel){gameCarousel.SetFocus(1);}
 		}//end download
 
 		else if(settingsBtn.GetState() == STATE_CLICKED)
@@ -3550,10 +3551,9 @@ static int MenuDiscList()
 			else if (Settings.gameDisplay==grid){
 				startat = gameGrid.GetSelectedOption();
 				offset = gameGrid.GetOffset();}
-			/*else if (Settings.gameDisplay==carousel){
+			else if (Settings.gameDisplay==carousel){
 				startat = gameCarousel.GetSelectedOption();
 				offset = gameCarousel.GetOffset();}
-				 */
 				menu = MENU_SETTINGS;
 			    break;
 
@@ -3570,8 +3570,8 @@ static int MenuDiscList()
 				gameBrowser.Reload(gameList, gameCnt);}
 			else if (Settings.gameDisplay==grid){
 				gameGrid.Reload(gameList, gameCnt);}
-			//else if (Settings.gameDisplay==carousel){
-			//	gameCarousel.Reload(gameList, gameCnt);}
+			else if (Settings.gameDisplay==carousel){
+				gameCarousel.Reload(gameList, gameCnt);}
 			gamecntTxt.SetTextf("%s: %i",LANGUAGE.Games, gameCnt);
 			selectedold = 1;
 			favoriteBtn.ResetState();
@@ -3592,8 +3592,8 @@ static int MenuDiscList()
 					gameBrowser.Reload(gameList, gameCnt);}
 				else if (Settings.gameDisplay==grid){
 					gameGrid.Reload(gameList, gameCnt);}
-				//else if (Settings.gameDisplay==carousel){
-				//	gameCarousel.Reload(gameList, gameCnt);}
+				else if (Settings.gameDisplay==carousel){
+					gameCarousel.Reload(gameList, gameCnt);}
 				selectedold = 1;
 				abcBtn.SetImage(&abcBtnImg);
 				abcBtn.SetImageOver(&abcBtnImg);
@@ -3617,8 +3617,8 @@ static int MenuDiscList()
 				gameBrowser.Reload(gameList, gameCnt);}
 				else if (Settings.gameDisplay==grid){
 				gameGrid.Reload(gameList, gameCnt);}
-				//else if (Settings.gameDisplay==carousel){
-				//gameCarousel.Reload(gameList, gameCnt);}
+				else if (Settings.gameDisplay==carousel){
+				gameCarousel.Reload(gameList, gameCnt);}
 				selectedold = 1;
 				abcBtn.SetImage(&abcBtnImg_g);
 				abcBtn.SetImageOver(&abcBtnImg_g);
@@ -3639,12 +3639,12 @@ static int MenuDiscList()
 					gridBtn.SetImageOver(&gridBtnImg_g);
 					gridBtn.SetAlpha(180);
 				}
-				/*if (Settings.gameDisplay==carousel) {
+				if (Settings.gameDisplay==carousel) {
 					mainWindow->Remove(&gameCarousel);
 					carouselBtn.SetImage(&carouselBtnImg_g);
 					carouselBtn.SetImageOver(&carouselBtnImg_g);
 					carouselBtn.SetAlpha(180);
-				}*/
+				}
 				HaltGui();
 				mainWindow->Remove(&w);
 				Settings.gameDisplay=list;
@@ -3702,12 +3702,12 @@ static int MenuDiscList()
 					listBtn.SetImageOver(&listBtnImg_g);
 					listBtn.SetAlpha(180);
 				}
-				/*if (Settings.gameDisplay==carousel) {
+				if (Settings.gameDisplay==carousel) {
 					mainWindow->Remove(&gameCarousel);
 					carouselBtn.SetImage(&carouselBtnImg_g);
 					carouselBtn.SetImageOver(&carouselBtnImg_g);
 					carouselBtn.SetAlpha(180);
-				}*/
+				}
 				HaltGui();
 				mainWindow->Remove(&w);
 				Settings.gameDisplay=grid;
@@ -3754,7 +3754,7 @@ static int MenuDiscList()
 		}
 
 		else if (carouselBtn.GetState() == STATE_CLICKED) {
-			/*if (Settings.gameDisplay!=carousel){
+			if (Settings.gameDisplay!=carousel){
 				if (Settings.gameDisplay==list)
 					mainWindow->Remove(&gameBrowser);
 					if (GameIDTxt) w.Remove(GameIDTxt);
@@ -3810,25 +3810,28 @@ static int MenuDiscList()
 					cfg_save_global();
 				}
 			}
-			*/
 			carouselBtn.ResetState();
 		}
 
 		if (Settings.gameDisplay==grid){
 			int selectimg;
-			selectimg = gameGrid.GetSelectedOption();			gameSelected = gameGrid.GetClickedOption();		}
-        /*
+			selectimg = gameGrid.GetSelectedOption();
+			gameSelected = gameGrid.GetClickedOption();
+		}
+
 		if (Settings.gameDisplay==carousel){
 			int selectimg;
-			selectimg = gameCarousel.GetSelectedOption();			gameSelected = gameCarousel.GetClickedOption();		}
-		*/
+			selectimg = gameCarousel.GetSelectedOption();
+			gameSelected = gameCarousel.GetClickedOption();
+		}
 
 		if (Settings.gameDisplay==list) {
 			//Get selected game under cursor
 			int selectimg;//, promptnumber;
 			char ID[4];
 			char IDfull[7];
-			selectimg = gameBrowser.GetSelectedOption();			gameSelected = gameBrowser.GetClickedOption();
+			selectimg = gameBrowser.GetSelectedOption();
+			gameSelected = gameBrowser.GetClickedOption();
 
 
 			if (gameSelected > 0) //if click occured
@@ -3949,7 +3952,7 @@ static int MenuDiscList()
 			if (Settings.qboot == yes)//quickboot game
 			{
 
-                wiilight(0);
+					wiilight(0);
 					//////////save game play count////////////////
 				extern u8 favorite;
 				extern u16 count;
@@ -4182,7 +4185,7 @@ static int MenuDiscList()
 				else if(choice == 0)
 					if (Settings.gameDisplay==list){gameBrowser.SetFocus(1);}
 					else if (Settings.gameDisplay==grid){gameGrid.SetFocus(1);}
-					//else if (Settings.gameDisplay==carousel){gameCarousel.SetFocus(1);}
+					else if (Settings.gameDisplay==carousel){gameCarousel.SetFocus(1);}
 			}
 		}
 	}
@@ -4190,7 +4193,7 @@ static int MenuDiscList()
     HaltGui();
 	if (Settings.gameDisplay==list)mainWindow->Remove(&gameBrowser);
 	else if (Settings.gameDisplay==grid)mainWindow->Remove(&gameGrid);
-	//else if (Settings.gameDisplay==carousel)mainWindow->Remove(&gameCarousel);
+	else if (Settings.gameDisplay==carousel)mainWindow->Remove(&gameCarousel);
 	mainWindow->Remove(&w);
 	ResumeGui();
 	return menu;
