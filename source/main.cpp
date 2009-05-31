@@ -70,6 +70,7 @@ void ExitApp()
 	StopGX();
 	ShutdownAudio();
 
+    if(isSdInserted())
     SDCard_deInit();
 
     //WPAD_Flush(0);

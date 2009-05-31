@@ -51,8 +51,8 @@ int Sys_IosReload(int IOS)
 {
     s32 ret;
 
+    if(isSdInserted())
     SDCard_deInit();
-    USBDevice_deInit();
 
     WPAD_Flush(0);
     WPAD_Disconnect(0);

@@ -6,8 +6,8 @@
 #include <ogc/usbstorage.h>
 #include <sdcard/wiisd_io.h>
 
-#define CACHE 1
-#define SECTORS 64
+#define CACHE 32
+#define SECTORS 128
 
 
 int USBDevice_Init()
@@ -25,7 +25,7 @@ return -1;
 void USBDevice_deInit()
 {
     //First unmount all the devs...
-    fatUnmount("USB");
+    fatUnmount("USB:/");
     //...and then shutdown em!
     __io_usbstorage.shutdown();
 }
