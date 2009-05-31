@@ -2483,10 +2483,10 @@ ProgressUpdateWindow()
  *
  * Primary thread to allow GUI to respond to state changes, and draws GUI
  ***************************************************************************/
-
+int noControllers=0;
 static void *
 UpdateGUI (void *arg)
-{
+{	
 	while(1)
 	{
 		if(guiHalt)
@@ -2509,6 +2509,15 @@ UpdateGUI (void *arg)
 				{
 					DoRumble(i);
 				}
+				if(WPAD_Probe(i, NULL) == WPAD_ERR_NO_CONTROLLER){
+					noControllers++;
+					if (noControllers == 4){
+						mainWindow->SetState(STATE_DISABLED);
+					}
+				}
+				else {noControllers =0;
+					mainWindow->SetState(STATE_DEFAULT);}
+				
 			}
 			#endif
 
