@@ -707,6 +707,14 @@ void theme_set(char *name, char *val)
 		}
 	}
 
+	else if (strcmp(cfg_name, "list_coords") == 0) {
+		short x,y;
+		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
+			THEME.list_x = x - (x % 4);
+			THEME.list_y = y;
+		}
+	}
+
 	else if (strcmp(cfg_name, "sortBarOffset") == 0) {
 		short x;
 		if (sscanf(val, "%hd", &x) == 1) {

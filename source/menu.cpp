@@ -951,8 +951,9 @@ int GameWindowPrompt()
 {
 	int choice = -1, angle = 0;
 	f32 size = 0.0;
-	char ID[4];
+	char ID[5];
 	char IDFull[7];
+	
 	u8 faveChoice = 0;
 	u16 playCount = 0;
 
@@ -1166,12 +1167,21 @@ int GameWindowPrompt()
 			delete diskCover;
 			snprintf(imgPath, sizeof(imgPath), "%s%s.png", CFG.disc_path, ID); //changed to current id
 			diskCover = new GuiImageData(imgPath, 0);
+			
+			
+		if (!diskCover->GetImage())
+		{	snprintf (ID,sizeof(ID),"%c%c%c%c", header->id[0], header->id[1], header->id[2], header->id[3]);
+		
+			delete diskCover;
+			snprintf(imgPath, sizeof(imgPath), "%s%s.png", CFG.disc_path, ID); //changed to current id
+			diskCover = new GuiImageData(imgPath, 0);
 			if (!diskCover->GetImage())
 			{
 				delete diskCover;
 				snprintf(imgPath, sizeof(imgPath), "%snodisc.png", CFG.disc_path); //changed to nodisc.png
 				diskCover = new GuiImageData(imgPath,nodisc_png);
 			}
+		}
 		}
 
 
@@ -3155,31 +3165,37 @@ static int MenuDiscList()
 	if (Settings.fave)
 	{
 		favoriteBtn.SetImage(&favoriteBtnImg);
+		favoriteBtn.SetImageOver(&favoriteBtnImg);
 		favoriteBtn.SetAlpha(255);
 	}
 	if (Settings.sort==all)
 	{
 		abcBtn.SetImage(&abcBtnImg);
+		abcBtn.SetImageOver(&abcBtnImg);
 		abcBtn.SetAlpha(255);
 	}
 	else if (Settings.sort==pcount)
 	{
 		countBtn.SetImage(&countBtnImg);
+		countBtn.SetImageOver(&countBtnImg);
 		countBtn.SetAlpha(255);
 	}
 	if (Settings.gameDisplay==list)
 	{
 		listBtn.SetImage(&listBtnImg);
+		listBtn.SetImageOver(&listBtnImg);
 		listBtn.SetAlpha(255);
 	}
 	else if (Settings.gameDisplay==grid)
 	{
 		gridBtn.SetImage(&gridBtnImg);
+		gridBtn.SetImageOver(&gridBtnImg);
 		gridBtn.SetAlpha(255);
 	}
 	else if (Settings.gameDisplay==carousel)
 	{
 		carouselBtn.SetImage(&carouselBtnImg);
+		carouselBtn.SetImageOver(&carouselBtnImg);
 		carouselBtn.SetAlpha(255);
 	}
 	if (Settings.gameDisplay==list)
@@ -3547,7 +3563,9 @@ static int MenuDiscList()
 			gamecntTxt.SetTextf("%s: %i",LANGUAGE.Games, gameCnt);
 			selectedold = 1;
 			favoriteBtn.ResetState();
-			Settings.fave ? (favoriteBtn.SetImage(&favoriteBtnImg), favoriteBtn.SetAlpha(255)) : (favoriteBtn.SetImage(&favoriteBtnImg_g), favoriteBtn.SetAlpha(180));
+			Settings.fave ? (favoriteBtn.SetImage(&favoriteBtnImg),favoriteBtn.SetImageOver(&favoriteBtnImg), 
+							favoriteBtn.SetAlpha(255)) : (favoriteBtn.SetImage(&favoriteBtnImg_g),
+							favoriteBtn.SetImageOver(&favoriteBtnImg_g), favoriteBtn.SetAlpha(180));
 		}
 
 		else if(abcBtn.GetState() == STATE_CLICKED)
@@ -3566,8 +3584,10 @@ static int MenuDiscList()
 					gameCarousel.Reload(gameList, gameCnt);}
 				selectedold = 1;
 				abcBtn.SetImage(&abcBtnImg);
+				abcBtn.SetImageOver(&abcBtnImg);
 				abcBtn.SetAlpha(255);
 				countBtn.SetImage(&countBtnImg_g);
+				countBtn.SetImageOver(&countBtnImg_g);
 				countBtn.SetAlpha(180);
 			}
 			abcBtn.ResetState();
@@ -3589,8 +3609,10 @@ static int MenuDiscList()
 				gameCarousel.Reload(gameList, gameCnt);}
 				selectedold = 1;
 				abcBtn.SetImage(&abcBtnImg_g);
+				abcBtn.SetImageOver(&abcBtnImg_g);
 				abcBtn.SetAlpha(180);
 				countBtn.SetImage(&countBtnImg);
+				countBtn.SetImageOver(&countBtnImg);
 				countBtn.SetAlpha(255);
 			}
 			countBtn.ResetState();
@@ -3602,11 +3624,13 @@ static int MenuDiscList()
 				if (Settings.gameDisplay==grid) {
 					mainWindow->Remove(&gameGrid);
 					gridBtn.SetImage(&gridBtnImg_g);
+					gridBtn.SetImageOver(&gridBtnImg_g);
 					gridBtn.SetAlpha(180);
 				}
 				if (Settings.gameDisplay==carousel) {
 					mainWindow->Remove(&gameCarousel);
 					carouselBtn.SetImage(&carouselBtnImg_g);
+					carouselBtn.SetImageOver(&carouselBtnImg_g);
 					carouselBtn.SetAlpha(180);
 				}
 				HaltGui();
@@ -3617,6 +3641,7 @@ static int MenuDiscList()
 				mainWindow->Append(&w);
 				ResumeGui();
 				listBtn.SetImage(&listBtnImg);
+				listBtn.SetImageOver(&listBtnImg);
 				listBtn.SetAlpha(255);
 				if(CFG.widescreen)
 				{
@@ -3662,11 +3687,13 @@ static int MenuDiscList()
 					if (GameRegionTxt) w.Remove(GameRegionTxt);
 					w.Remove(&DownloadBtn);
 					listBtn.SetImage(&listBtnImg_g);
+					listBtn.SetImageOver(&listBtnImg_g);
 					listBtn.SetAlpha(180);
 				}
 				if (Settings.gameDisplay==carousel) {
 					mainWindow->Remove(&gameCarousel);
 					carouselBtn.SetImage(&carouselBtnImg_g);
+					carouselBtn.SetImageOver(&carouselBtnImg_g);
 					carouselBtn.SetAlpha(180);
 				}
 				HaltGui();
@@ -3677,6 +3704,7 @@ static int MenuDiscList()
 				mainWindow->Append(&w);
 				ResumeGui();
 				gridBtn.SetImage(&gridBtnImg);
+				gridBtn.SetImageOver(&gridBtnImg);
 				gridBtn.SetAlpha(255);
 				if(CFG.widescreen)
 				{
@@ -3721,10 +3749,12 @@ static int MenuDiscList()
 					if (GameRegionTxt) w.Remove(GameRegionTxt);
 					w.Remove(&DownloadBtn);
 					listBtn.SetImage(&listBtnImg_g);
+					listBtn.SetImageOver(&listBtnImg_g);
 					listBtn.SetAlpha(180);
 				if (Settings.gameDisplay==grid)
 					mainWindow->Remove(&gameGrid);
 					gridBtn.SetImage(&gridBtnImg_g);
+					gridBtn.SetImageOver(&gridBtnImg_g);
 					gridBtn.SetAlpha(180);
 				HaltGui();
 				mainWindow->Remove(&w);
@@ -3734,6 +3764,7 @@ static int MenuDiscList()
 				mainWindow->Append(&w);
 				ResumeGui();
 				carouselBtn.SetImage(&carouselBtnImg);
+				carouselBtn.SetImageOver(&carouselBtnImg);
 				carouselBtn.SetAlpha(255);
 				if(CFG.widescreen)
 				{
@@ -5427,7 +5458,7 @@ int GameSettings(struct discHdr * header)
 	options3.SetName(2,"%s", LANGUAGE.Language);
 	options3.SetName(3, "Ocarina");
 	options3.SetName(4, "IOS");
-	options3.SetName(5,"%s", LANGUAGE.addToFavorite);
+	options3.SetName(5,"%s", LANGUAGE.Parentalcontrol);
 	options3.SetName(6,"%s", LANGUAGE.Defaultgamesettings);
 
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
