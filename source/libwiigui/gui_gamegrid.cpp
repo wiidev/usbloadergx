@@ -125,8 +125,8 @@ GuiGameGrid::GuiGameGrid(int w, int h, struct discHdr * l, int gameCnt, const ch
 		game[i]->SetImage(coverImg[i]);
 		coverImg[i]->SetParent(game[i]);
 		coverImg[i]->SetPosition(-10,-35);
-		if (i<4)game[i]->SetPosition(117+i*110,25);
-		if (i>3)game[i]->SetPosition(117+(i-4)*110,185);
+		if (i<4)game[i]->SetPosition((117+i*110)+THEME.gamegrid_x,25+THEME.gamegrid_y);
+		if (i>3)game[i]->SetPosition((117+(i-4)*110)+THEME.gamegrid_x,185+THEME.gamegrid_y);
 		game[i]->SetRumble(false);
 		game[i]->SetTrigger(trigA);
 		game[i]->SetSoundOver(btnSoundOver);

@@ -3274,22 +3274,23 @@ static int MenuDiscList()
 	gameBrowser.SetPosition(THEME.selection_x, THEME.selection_y);
 	gameBrowser.SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
 
-	GuiGameGrid gameGrid(640,400, gameList, gameCnt, CFG.theme_path, bg_options_png, 0, 0);
-	gameGrid.SetPosition(0,20);
+	GuiGameGrid gameGrid(THEME.gamegrid_w,THEME.gamegrid_h, gameList, gameCnt, CFG.theme_path, bg_options_png, 0, 0);
+	gameGrid.SetPosition(THEME.gamegrid_x,THEME.gamegrid_y);
 	gameGrid.SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
 
+	//GuiGameCarousel gameCarousel(THEME.gamecarousel_w, THEME.gamecarousel_h, gameList, gameCnt, CFG.theme_path, bg_options_png, startat, offset);
 	GuiGameCarousel gameCarousel(640, 400, gameList, gameCnt, CFG.theme_path, bg_options_png, startat, offset);
-	gameCarousel.SetPosition(0,-20);
+	gameCarousel.SetPosition(THEME.gamecarousel_x,THEME.gamecarousel_y);
 	gameCarousel.SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
 
-	GuiText clockTimeBack("88:88", 40, (GXColor){138, 138, 138, 40});
+	GuiText clockTimeBack("88:88", 40, (GXColor){THEME.clock_r, THEME.clock_g, THEME.clock_b, 40});
 	clockTimeBack.SetAlignment(THEME.clockAlign, ALIGN_TOP);
 	clockTimeBack.SetPosition(THEME.clock_x, THEME.clock_y);
 	clockTimeBack.SetFont(fontClock);
 	if (Settings.gameDisplay==grid || Settings.gameDisplay==carousel) {
 		clockTimeBack.SetPosition(THEME.clock_x, THEME.clock_y+3);
 	}
-	GuiText clockTime(theTime, 40, (GXColor){138, 138, 138, 240});
+	GuiText clockTime(theTime, 40, (GXColor){THEME.clock_r, THEME.clock_g, THEME.clock_b, 240});
 	clockTime.SetAlignment(THEME.clockAlign, ALIGN_TOP);
 	clockTime.SetPosition(THEME.clock_x, THEME.clock_y);
 	clockTime.SetFont(fontClock);

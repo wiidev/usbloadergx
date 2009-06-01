@@ -8,7 +8,9 @@
 
 #include "gui.h"
 #include "../wpad.h"
+#include "../cfg.h"
 #include "gui_customoptionbrowser.h"
+
 
 #include <unistd.h>
 
@@ -182,16 +184,16 @@ GuiCustomOptionBrowser::GuiCustomOptionBrowser(int w, int h, customOptionList * 
 
 	for(int i=0; i < size; i++)
 	{
-		optionTxt[i] = new GuiText(options->GetName(i), 20, (GXColor){0, 0, 0, 0xff});
+		optionTxt[i] = new GuiText(options->GetName(i), 20, (GXColor){THEME.settingsTxt_r, THEME.settingsTxt_g, THEME.settingsTxt_b, 0xff});
 		optionTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 		optionTxt[i]->SetPosition(24,0);
 
 		optionBg[i] = new GuiImage(bgOptionsEntry);
 
-		optionVal[i] = new GuiText(NULL, 20, (GXColor){0, 0, 0, 0xff});
+		optionVal[i] = new GuiText(NULL, 20, (GXColor){THEME.settingsTxt_r, THEME.settingsTxt_g, THEME.settingsTxt_b, 0xff});
 		optionVal[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 
-		optionValOver[i] = new GuiText(NULL, 20, (GXColor){0, 0, 0, 0xff});
+		optionValOver[i] = new GuiText(NULL, 20, (GXColor){THEME.settingsTxt_r, THEME.settingsTxt_g, THEME.settingsTxt_b, 0xff});
 		optionValOver[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 
 		optionBtn[i] = new GuiButton(width,GAMESELECTSIZE);//(width-28,GAMESELECTSIZE);

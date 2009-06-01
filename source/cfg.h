@@ -83,6 +83,14 @@ struct THEME
 	int selection_y;
 	int selection_w;
 	int selection_h;
+	int gamegrid_x;
+	int gamegrid_y;
+	int gamegrid_w;
+	int gamegrid_h;
+	int gamecarousel_x;
+	int gamecarousel_y;
+	int gamecarousel_w;
+	int gamecarousel_h;
 	short cover_x;
 	short cover_y;
 	short showID;
@@ -141,6 +149,12 @@ struct THEME
 	short prompttxt_r;
 	short prompttxt_g;
 	short prompttxt_b;
+	short settingsTxt_r;
+	short settingsTxt_g;
+	short settingsTxt_b;
+	short clock_r;
+	short clock_g;
+	short clock_b;
 	short clock_x;
 	short clock_y;
 	short clockAlign;

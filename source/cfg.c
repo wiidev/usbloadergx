@@ -259,6 +259,20 @@ void CFG_Default(int widescreen) // -1 = non forced Mode
 	THEME.selection_w = 396;
 	THEME.selection_h = 280;
 	THEME.batteryUnused = 70;
+	THEME.gamegrid_w = 640;
+	THEME.gamegrid_h = 400;
+	THEME.gamegrid_x = 0;
+	THEME.gamegrid_y = 20;
+	THEME.gamecarousel_w = 640;
+	THEME.gamecarousel_h = 400;
+	THEME.gamecarousel_x = 0;
+	THEME.gamecarousel_y = -20;
+	THEME.clock_r = 138;
+	THEME.clock_g = 138;
+	THEME.clock_b = 138;
+	THEME.settingsTxt_r = 0; 
+	THEME.settingsTxt_g = 0;
+	THEME.settingsTxt_b = 0;
 	THEME.cover_x = 26;
 	THEME.cover_y = 55;
 	THEME.showID = 1;
@@ -547,6 +561,26 @@ void theme_set(char *name, char *val)
 		}
 	}
 
+	if(strcmp(cfg_name, "gamegrid_coords") == 0) {
+		int x,y,w,h;
+		if (sscanf(val, "%d,%d,%d,%d", &x, &y, &w, &h) == 4) {
+			THEME.gamegrid_x = x - (x % 4);
+			THEME.gamegrid_y = y;
+			THEME.gamegrid_w = w;
+			THEME.gamegrid_h = h;
+		}
+	}
+
+	if(strcmp(cfg_name, "gamecarousel_coords") == 0) {
+		int x,y,w,h;
+		if (sscanf(val, "%d,%d,%d,%d", &x, &y, &w, &h) == 4) {
+			THEME.gamecarousel_x = x - (x % 4);
+			THEME.gamecarousel_y = y;
+			THEME.gamecarousel_w = w;
+			THEME.gamecarousel_h = h;
+		}
+	}
+
 	else if (strcmp(cfg_name, "covers_coords") == 0) {
 		short x,y;
 		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
@@ -746,6 +780,24 @@ void theme_set(char *name, char *val)
 			THEME.prompttxt_r = x;
 			THEME.prompttxt_g = y;
 			THEME.prompttxt_b = z;
+		}
+	}
+
+	else if (strcmp(cfg_name, "clock_color") == 0) {
+		short x,y,z;
+		if (sscanf(val, "%hd,%hd, %hd", &x, &y, &z) == 3) {
+			THEME.clock_r = x;
+			THEME.clock_g = y;
+			THEME.clock_b = z;
+		}
+	}
+
+	else if (strcmp(cfg_name, "settingstext_color") == 0) {
+		short x,y,z;
+		if (sscanf(val, "%hd,%hd, %hd", &x, &y, &z) == 3) {
+			THEME.settingsTxt_r = x;
+			THEME.settingsTxt_g = y;
+			THEME.settingsTxt_b = z;
 		}
 	}
 
