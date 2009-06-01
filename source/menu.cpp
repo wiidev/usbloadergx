@@ -3102,6 +3102,7 @@ static int MenuDiscList()
 	GuiImage homeBtnImgOver(&btnhomeOver);
 	homeBtnImgOver.SetWidescreen(CFG.widescreen);
 	GuiButton homeBtn(&homeBtnImg,&homeBtnImgOver, 0, 3, THEME.home_x, THEME.home_y, &trigA, &btnSoundOver, &btnClick,1,&homeBtnTT,15,-30,1,5);
+	homeBtn.RemoveSoundClick();
 	homeBtn.SetTrigger(&trigHome);
 
 	GuiTooltip poweroffBtnTT(LANGUAGE.PowerofftheWii);

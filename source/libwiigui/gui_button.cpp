@@ -260,6 +260,11 @@ void GuiButton::RemoveSoundOver()
 	LOCK(this);
 	soundOver = NULL;
 }
+void GuiButton::RemoveSoundClick()
+{
+	LOCK(this);
+	soundClick = NULL;
+}
 /**
  * Draw the button on screen
  */

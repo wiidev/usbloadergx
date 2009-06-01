@@ -12,6 +12,7 @@
 #include <unistd.h>
 #include "gui_gamegrid.h"
 #include "../cfg.h"
+#include "../main.h"
 
 #include <string.h>
 #include <sstream>
@@ -58,6 +59,8 @@ GuiGameGrid::GuiGameGrid(int w, int h, struct discHdr * l, int gameCnt, const ch
 	imgRight = new GuiImageData(imgPath, startgame_arrow_right_png);
 
 	btnLeftImg = new GuiImage(imgLeft);
+	if (Settings.wsprompt == yes)
+		btnLeftImg->SetWidescreen(CFG.widescreen);
 	btnLeft = new GuiButton(imgLeft->GetWidth(), imgLeft->GetHeight());
 	btnLeft->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 	btnLeft->SetPosition(20, -30);
@@ -71,6 +74,8 @@ GuiGameGrid::GuiGameGrid(int w, int h, struct discHdr * l, int gameCnt, const ch
 	btnLeft->SetEffectGrow();
 
 	btnRightImg = new GuiImage(imgRight);
+	if (Settings.wsprompt == yes)
+		btnRightImg->SetWidescreen(CFG.widescreen);
 	btnRight = new GuiButton(imgRight->GetWidth(), imgRight->GetHeight());
 	btnRight->SetParent(this);
 	btnRight->SetAlignment(ALIGN_RIGHT, ALIGN_MIDDLE);
