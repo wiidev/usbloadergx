@@ -346,10 +346,8 @@ void GuiGameCarousel::Update(GuiTrigger * t)
 		return; // skip navigation
 
 	if (t->Left()  || btnLeft->GetState() == STATE_CLICKED) {
-		WPAD_ScanPads();
-		u16 buttons = 0;
-		for(int i=0; i<4; i++)
-			buttons |= WPAD_ButtonsHeld(i);
+
+		u16 buttons = ButtonsHold();
 		if(!((buttons & WPAD_BUTTON_A) || (buttons & WPAD_BUTTON_MINUS) || t->Left())) {
 			btnLeft->ResetState();
 			speed = SHIFT_SPEED;
@@ -380,10 +378,8 @@ void GuiGameCarousel::Update(GuiTrigger * t)
 	}
 
 	else if(t->Right()  || btnRight->GetState() == STATE_CLICKED) {
-		WPAD_ScanPads();
-		u16 buttons = 0;
-		for(int i=0; i<4; i++)
-			buttons |= WPAD_ButtonsHeld(i);
+
+		u16 buttons = ButtonsHold();
 		if(!((buttons & WPAD_BUTTON_A) || (buttons & WPAD_BUTTON_PLUS) || t->Right())) {
 			btnRight->ResetState();
 			speed=SHIFT_SPEED;

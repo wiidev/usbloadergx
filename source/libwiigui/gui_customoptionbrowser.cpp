@@ -196,7 +196,7 @@ GuiCustomOptionBrowser::GuiCustomOptionBrowser(int w, int h, customOptionList * 
 		optionValOver[i] = new GuiText(NULL, 20, (GXColor){THEME.settingsTxt_r, THEME.settingsTxt_g, THEME.settingsTxt_b, 0xff});
 		optionValOver[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 
-		optionBtn[i] = new GuiButton(width,GAMESELECTSIZE);//(width-28,GAMESELECTSIZE);
+		optionBtn[i] = new GuiButton(width-28,GAMESELECTSIZE);
 		optionBtn[i]->SetParent(this);
 		optionBtn[i]->SetLabel(optionTxt[i], 0);
 		optionBtn[i]->SetLabel(optionVal[i], 1);
@@ -491,12 +491,7 @@ void GuiCustomOptionBrowser::Update(GuiTrigger * t)
 				scrollbarBoxBtn->Draw();
 				usleep(10000 * scrolldelay);
 			}
-			WPAD_ScanPads();
-			u8 cnt, buttons = NULL;
-			/* Get pressed buttons */
-			for (cnt = 0; cnt < 4; cnt++)
-				buttons |= WPAD_ButtonsHeld(cnt);
-			if (buttons == WPAD_BUTTON_A)
+			if (ButtonsHold() == WPAD_BUTTON_A)
 			{
 			}
 			else
@@ -528,12 +523,7 @@ void GuiCustomOptionBrowser::Update(GuiTrigger * t)
 
 
 			}
-			WPAD_ScanPads();
-			u8 cnt, buttons = NULL;
-			/* Get pressed buttons */
-			for (cnt = 0; cnt < 4; cnt++)
-				buttons |= WPAD_ButtonsHeld(cnt);
-			if (buttons == WPAD_BUTTON_A)
+			if (ButtonsHold() == WPAD_BUTTON_A)
 			{
 			}
 			else

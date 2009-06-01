@@ -43,31 +43,59 @@ void Wpad_Disconnect(void)
 	WPAD_Shutdown();
 }
 
-u32 Wpad_GetButtons(void)
-{
-	u32 buttons = 0, cnt;
+u32 ButtonsHold(void) {
 
-	/* Scan pads */
-	WPAD_ScanPads();
+    int i;
+    u32 buttons = 0;
 
-	/* Get pressed buttons */
-	for (cnt = 0; cnt < MAX_WIIMOTES; cnt++)
-		buttons |= WPAD_ButtonsDown(cnt);
+    WPAD_ScanPads();
+    PAD_ScanPads();
 
-	return buttons;
-}
-
-u32 Wpad_WaitButtons(void)
-{
-	u32 buttons = 0;
-
-	/* Wait for button pressing */
-	while (!buttons) {
-		buttons = Wpad_GetButtons();
-		VIDEO_WaitVSync();
+    for(i=3; i >= 0; i--)
+	{
+	    buttons |= PAD_ButtonsHeld(i);
+	    buttons |= WPAD_ButtonsHeld(i);
 	}
-
-	return buttons;
+    return buttons;
 }
 
+u32 ButtonsPressed(void) {
 
+    int i;
+    u32 buttons = 0;
+
+    WPAD_ScanPads();
+    PAD_ScanPads();
+
+    for(i=3; i >= 0; i--)
+	{
+	    buttons |= PAD_ButtonsDown(i);
+	    buttons |= WPAD_ButtonsDown(i);
+	}
+    return buttons;
+
+/*  Don't remove this commented out code it might be useful for checking which buttons were pressed/hold
+
+    if(buttons & (PAD_BUTTON_LEFT | PAD_BUTTON_RIGHT | PAD_BUTTON_DOWN | PAD_BUTTON_UP
+                    | PAD_BUTTON_A | PAD_BUTTON_B | PAD_BUTTON_X | PAD_BUTTON_Y | PAD_BUTTON_MENU
+                    | PAD_BUTTON_START | WPAD_BUTTON_2 | WPAD_BUTTON_1
+                    | WPAD_BUTTON_B | WPAD_BUTTON_A | WPAD_BUTTON_MINUS
+                    | WPAD_BUTTON_HOME | WPAD_BUTTON_LEFT | WPAD_BUTTON_RIGHT
+                    | WPAD_BUTTON_DOWN | WPAD_BUTTON_UP | WPAD_BUTTON_PLUS
+                    | WPAD_NUNCHUK_BUTTON_Z | WPAD_NUNCHUK_BUTTON_C
+                    | WPAD_CLASSIC_BUTTON_UP | WPAD_CLASSIC_BUTTON_LEFT
+                    | WPAD_CLASSIC_BUTTON_ZR | WPAD_CLASSIC_BUTTON_X
+                    | WPAD_CLASSIC_BUTTON_A | WPAD_CLASSIC_BUTTON_Y
+                    | WPAD_CLASSIC_BUTTON_B | WPAD_CLASSIC_BUTTON_ZL
+                    | WPAD_CLASSIC_BUTTON_FULL_R | WPAD_CLASSIC_BUTTON_PLUS
+                    | WPAD_CLASSIC_BUTTON_HOME | WPAD_CLASSIC_BUTTON_MINUS
+                    | WPAD_CLASSIC_BUTTON_FULL_L | WPAD_CLASSIC_BUTTON_DOWN
+                    | WPAD_CLASSIC_BUTTON_RIGHT | WPAD_GUITAR_HERO_3_BUTTON_STRUM_UP
+                    | WPAD_GUITAR_HERO_3_BUTTON_YELLOW | WPAD_GUITAR_HERO_3_BUTTON_GREEN
+                    | WPAD_GUITAR_HERO_3_BUTTON_BLUE | WPAD_GUITAR_HERO_3_BUTTON_RED
+                    | WPAD_GUITAR_HERO_3_BUTTON_ORANGE | WPAD_GUITAR_HERO_3_BUTTON_PLUS
+                    | WPAD_GUITAR_HERO_3_BUTTON_MINUS | WPAD_GUITAR_HERO_3_BUTTON_STRUM_DOWN)
+      )
+*/
+
+}

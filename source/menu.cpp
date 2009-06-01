@@ -50,20 +50,17 @@ extern FreeTypeGX *fontClock; //CLOCK
 static GuiImage * coverImg = NULL;
 static GuiImageData * cover = NULL;
 
-//char GamesHDD[320][14];
-
 static struct discHdr *gameList = NULL;
 static GuiImageData * pointer[4];
 static GuiImage * bgImg = NULL;
-static GuiButton * btnLogo = NULL;
 static GuiImageData * background = NULL;
 static GuiText prTxt(NULL, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 static GuiText timeTxt(NULL, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 static GuiText sizeTxt(NULL, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
-static GuiText *GameIDTxt = NULL;
-static GuiText *GameRegionTxt = NULL;
+static GuiText * GameIDTxt = NULL;
+static GuiText * GameRegionTxt = NULL;
 static GuiSound * bgMusic = NULL;
-static wbfs_t *hdd = NULL;
+static wbfs_t * hdd = NULL;
 static u32 gameCnt = 0;
 static s32 gameSelected = 0, gameStart = 0;
 static GuiWindow * mainWindow = NULL;
@@ -168,14 +165,11 @@ HaltGui()
  * WindowCredits
  * Display credits
  ***************************************************************************/
-static void WindowCredits(void * ptr)
+void WindowCredits()
 {
 	int angle = 0;
 	GuiSound * creditsMusic = NULL;
 
-	if(btnLogo->GetState() != STATE_CLICKED) {
-		return;
-		}
     s32 thetimeofbg = bgMusic->GetPlayTime();
 	StopOgg();
 
@@ -183,8 +177,6 @@ static void WindowCredits(void * ptr)
 	creditsMusic->SetVolume(55);
 	creditsMusic->SetLoop(1);
 	creditsMusic->Play();
-
-	btnLogo->ResetState();
 
 	bool exit = false;
 	int i = 0;
@@ -330,47 +322,39 @@ static void WindowCredits(void * ptr)
 	creditsWindow.Append(&creditsWindowBox);
 	creditsWindow.Append(&starImg);
 
+    creditsWindow.SetEffect(EFFECT_FADE, 30);
+
+	HaltGui();
+	mainWindow->SetState(STATE_DISABLED);
+	mainWindow->Append(&creditsWindow);
+	ResumeGui();
+
 	while(!exit)
 	{
-		creditsWindow.Draw();
-
-		angle ++;
-		angle = int(angle) % 360;
-		usleep(12000);
+		angle++;
+		if(angle > 360)
+		angle = 0;
+        usleep(12000);
 		starImg.SetAngle(angle);
+		if(ButtonsPressed() != 0)
+		exit = true;
 
-		for(i=3; i >= 0; i--)
-		{
-			#ifdef HW_RVL
-			if(userInput[i].wpad.ir.valid)
-				Menu_DrawImg(userInput[i].wpad.ir.x-48, userInput[i].wpad.ir.y-48, 200.0,
-					96, 96, pointer[i]->GetImage(), userInput[i].wpad.ir.angle, CFG.widescreen? 0.8 : 1, 1, 255);
-			if(Settings.rumble == RumbleOn){
-				DoRumble(i);
-				}
-			#endif
-		}
-
-		Menu_Render();
-
-		for(i=0; i < 4; i++)
-		{
-			if(userInput[i].wpad.btns_d || userInput[i].pad.btns_d)
-				exit = true;
-		}
 	}
 
-	// clear buttons pressed
-	for(i=0; i < 4; i++)
-	{
-		userInput[i].wpad.btns_d = 0;
-		userInput[i].pad.btns_d = 0;
-	}
 	creditsMusic->Stop();
-	for(i=0; i < numEntries; i++)
-		delete txt[i];
 
 	delete creditsMusic;
+
+    creditsWindow.SetEffect(EFFECT_FADE, -30);
+	while(creditsWindow.GetEffect() > 0) usleep(50);
+	HaltGui();
+	mainWindow->Remove(&creditsWindow);
+	mainWindow->SetState(STATE_DEFAULT);
+	for(i=0; i < numEntries; i++) {
+		delete txt[i];
+		txt[i] = NULL;
+	}
+	ResumeGui();
 
 	if(!strcmp("", CFG.oggload_path) || !strcmp("notset", CFG.ogg_path)) {
         bgMusic->Play();
@@ -4559,16 +4543,16 @@ static int MenuSettings()
 	GuiImage logoImg(&logo);
 	GuiImageData logoOver(credits_button_over_png);
 	GuiImage logoImgOver(&logoOver);
-	btnLogo = new GuiButton(logoImg.GetWidth(), logoImg.GetHeight());
-	btnLogo->SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
-	btnLogo->SetPosition(0, -35);
-	btnLogo->SetImage(&logoImg);
-	btnLogo->SetImageOver(&logoImgOver);
-	btnLogo->SetEffectGrow();
-	btnLogo->SetSoundOver(&btnSoundOver);
-	btnLogo->SetSoundClick(&btnClick);
-	btnLogo->SetTrigger(&trigA);
-	btnLogo->SetUpdateCallback(WindowCredits);
+
+    GuiButton btnLogo(logoImg.GetWidth(), logoImg.GetHeight());
+	btnLogo.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
+	btnLogo.SetPosition(0, -35);
+	btnLogo.SetImage(&logoImg);
+	btnLogo.SetImageOver(&logoImgOver);
+	btnLogo.SetEffectGrow();
+	btnLogo.SetSoundOver(&btnSoundOver);
+	btnLogo.SetSoundClick(&btnClick);
+	btnLogo.SetTrigger(&trigA);
 
 	customOptionList options2(9);
 	GuiCustomOptionBrowser optionBrowser2(396, 280, &options2, CFG.theme_path, "bg_options_settings.png", bg_options_settings_png, 0, 150);
@@ -4601,7 +4585,7 @@ static int MenuSettings()
 			w.Append(&backBtn);
 			w.Append(&lockBtn);
 			w.Append(&updateBtn);
-			w.Append(btnLogo);
+			w.Append(&btnLogo);
 			w.Append(&homo);
 			//set triggers for tabs
 			page1Btn.RemoveTrigger(1);
@@ -5036,7 +5020,7 @@ static int MenuSettings()
 							w.Append(&backBtn);
 							w.Append(&lockBtn);
 							w.Append(&updateBtn);
-							w.Append(btnLogo);
+							w.Append(&btnLogo);
 
 							mainWindow->Append(&optionBrowser2);
 							mainWindow->Append(&page1Btn);
@@ -5306,7 +5290,7 @@ static int MenuSettings()
                 mainWindow->Remove(&page2Btn);
                 mainWindow->Remove(&tabBtn);
                 mainWindow->Remove(&page3Btn);
-                w.Remove(btnLogo);
+                w.Remove(&btnLogo);
                 w.Remove(&backBtn);
                 w.Remove(&lockBtn);
                 w.Remove(&updateBtn);
@@ -5322,11 +5306,34 @@ static int MenuSettings()
                 w.Append(&backBtn);
                 w.Append(&lockBtn);
                 w.Append(&updateBtn);
-                w.Append(btnLogo);
+                w.Append(&btnLogo);
 			    } else {
                     WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtousethatoption, LANGUAGE.ok, 0,0,0);
 			    }
                 updateBtn.ResetState();
+			}
+
+            if(btnLogo.GetState() == STATE_CLICKED) {
+                mainWindow->Remove(&optionBrowser2);
+                mainWindow->Remove(&page1Btn);
+                mainWindow->Remove(&page2Btn);
+                mainWindow->Remove(&tabBtn);
+                mainWindow->Remove(&page3Btn);
+                w.Remove(&btnLogo);
+                w.Remove(&backBtn);
+                w.Remove(&lockBtn);
+                w.Remove(&updateBtn);
+                WindowCredits();
+                mainWindow->Append(&optionBrowser2);
+                mainWindow->Append(&page1Btn);
+                mainWindow->Append(&page2Btn);
+                mainWindow->Append(&tabBtn);
+                mainWindow->Append(&page3Btn);
+                w.Append(&backBtn);
+                w.Append(&lockBtn);
+                w.Append(&updateBtn);
+                w.Append(&btnLogo);
+                btnLogo.ResetState();
 			}
 
 			if(lockBtn.GetState() == STATE_CLICKED)
@@ -5443,8 +5450,6 @@ static int MenuSettings()
 		}
 	}
 	HaltGui();
-	delete btnLogo;
-	btnLogo = NULL;
 	mainWindow->Remove(&optionBrowser2);
 	mainWindow->Remove(&w);
 	ResumeGui();
@@ -6304,15 +6309,15 @@ int MainMenu(int menu)
 	delete background;
 	delete bgImg;
 	delete mainWindow;
-	delete pointer[0];
-	delete pointer[1];
-	delete pointer[2];
-	delete pointer[3];
-
+	mainWindow = NULL;
+    delete pointer[0];
+    delete pointer[1];
+    delete pointer[2];
+    delete pointer[3];
+    delete GameRegionTxt;
+    delete GameIDTxt;
 	delete cover;
 	delete coverImg;
-
-	mainWindow = NULL;
 
     ExitApp();
 
@@ -6346,7 +6351,7 @@ int MainMenu(int menu)
                         break;
 
                         case eng:
-                                configbytes[0] = 0x01;
+								configbytes[0] = 0x01;
                         break;
 
                         case ger:

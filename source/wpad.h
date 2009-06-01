@@ -2,6 +2,7 @@
 #define _WPAD_H_
 
 #include <wiiuse/wpad.h>
+#include <ogc/pad.h>
 
 #ifdef __cplusplus
 extern "C"
@@ -11,8 +12,8 @@ extern "C"
 /* Prototypes */
 s32  Wpad_Init(void);
 void Wpad_Disconnect(void);
-u32  Wpad_GetButtons(void);
-u32  Wpad_WaitButtons(void);
+u32  ButtonsPressed(void);
+u32  ButtonsHold(void);
 
 #ifdef __cplusplus
 }

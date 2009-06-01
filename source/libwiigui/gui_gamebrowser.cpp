@@ -411,12 +411,7 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 				scrollbarBoxBtn->Draw();
 				usleep(10000 * scrolldelay);
 			}
-			WPAD_ScanPads();
-			u8 cnt, buttons = NULL;
-			/* Get pressed buttons */
-			for (cnt = 0; cnt < 4; cnt++)
-				buttons |= WPAD_ButtonsHeld(cnt);
-			if (buttons == WPAD_BUTTON_A)
+			if (ButtonsHold() == WPAD_BUTTON_A)
 			{
 			}
 			else
@@ -446,12 +441,7 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 				scrollbarBoxBtn->Draw();
 				usleep(10000 * scrolldelay);
 			}
-			WPAD_ScanPads();
-			u8 cnt, buttons = NULL;
-			/* Get pressed buttons */
-			for (cnt = 0; cnt < 4; cnt++)
-				buttons |= WPAD_ButtonsHeld(cnt);
-			if (buttons == WPAD_BUTTON_A)
+			if (ButtonsHold() == WPAD_BUTTON_A)
 			{
 			}
 			else
@@ -459,8 +449,6 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 				arrowUpBtn->ResetState();
 			}
 		}
-		WPAD_ScanPads();
-		u8 cnt, buttons = NULL;/////////////////////////////////////////////////////scroll by holding B and tilt wiimote
 		int position1 = 0;
 
 
@@ -471,10 +459,7 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 			position2 = position1;
 		}
 
-		for (cnt = 0; cnt < 4; cnt++)
-			buttons |= WPAD_ButtonsHeld(cnt);
-
-		if (buttons == WPAD_BUTTON_B && position1 > 0)
+		if (ButtonsHold() == WPAD_BUTTON_B && position1 > 0)
 		{
 			scrollbarBoxBtn->ScrollIsOn(1);
 			if (position2 > position1)
@@ -524,7 +509,7 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 			}
 
 		}
-		else if (!buttons)
+		else if(ButtonsHold() != WPAD_BUTTON_B)
 		{
 			scrollbarBoxBtn->ScrollIsOn(0);
 			position2 = 0;
