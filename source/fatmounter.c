@@ -7,12 +7,14 @@
 #include <ogc/usbstorage.h>
 #include <sdcard/wiisd_io.h>
 
-#define CACHE 4
-#define SECTORS 64
+//these are the only stable and speed is good
+#define CACHE 32
+#define SECTORS 128
 
 
 int USBDevice_Init()
 {
+    return 0;
 	//closing all open Files write back the cache and then shutdown em!
 	fatUnmount("USB:/");
 	//right now only mounts first partition
@@ -24,6 +26,7 @@ int USBDevice_Init()
 
 void USBDevice_deInit()
 {
+    return;
 	//closing all open Files write back the cache and then shutdown em!
 	fatUnmount("USB:/");
 }
