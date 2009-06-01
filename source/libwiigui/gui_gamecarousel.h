@@ -55,6 +55,5 @@ class GuiGameCarousel : public GuiElement
 		GuiTrigger * trigR;
 		GuiTrigger * trigPlus;
 		GuiTrigger * trigMinus;
-		GuiTrigger * trigHeldA;
 };
 #endif

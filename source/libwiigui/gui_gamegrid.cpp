@@ -459,6 +459,17 @@ void GuiGameGrid::Update(GuiTrigger * t)
 
 void GuiGameGrid::Reload(struct discHdr * l, int count)
 {
+	for(int i=0; i<pagesize; i++)
+	{
+		delete game[i];
+		delete coverImg[i];
+		delete cover[i];
+	}
+	delete [] gameIndex;
+	delete [] game;
+	delete [] cover;
+	delete [] coverImg;
+
 	LOCK(this);
 	gameList = l;
 	gameCnt = count;
@@ -470,16 +481,12 @@ void GuiGameGrid::Reload(struct discHdr * l, int count)
 	char IDfull[7];
 	char imgPath[100];
 
-	for(int i=0; i<pagesize; i++) {
+    gameIndex = new int[pagesize];
+	game = new GuiButton * [pagesize];
+	coverImg = new GuiImage * [pagesize];
+	cover = new GuiImageData * [pagesize];
 
-		if(coverImg[i]) {
-        delete coverImg[i];
-        coverImg[i] = NULL;
-		}
-		if(cover[i]) {
-        delete cover[i];
-        cover[i] = NULL;
-		}
+	for(int i=0; i<pagesize; i++) {
 
 			struct discHdr *header = &gameList[i+changed];
             snprintf (ID,sizeof(ID),"%c%c%c", header->id[0], header->id[1], header->id[2]);
@@ -501,20 +508,29 @@ void GuiGameGrid::Reload(struct discHdr * l, int count)
 						cover[i] = new GuiImageData(imgPath, nocover_png); //load no image
 					}
 				}
-
 				coverImg[i] = new GuiImage(cover[i]);
 				coverImg[i]->SetWidescreen(CFG.widescreen);
 				coverImg[i]->SetScale(0.6);
-				coverImg[i]->SetParent(game[i]);
+                game[i] = new GuiButton(coverImg[i]->GetWidth()*.45,coverImg[i]->GetHeight()*.7);
+                game[i]->SetParent(this);
+                game[i]->SetAlignment(ALIGN_TOP,ALIGN_LEFT);
+                game[i]->SetImage(coverImg[i]);
+                coverImg[i]->SetParent(game[i]);
                 coverImg[i]->SetPosition(-10,-35);
-                game[i]->ResetState();
+                if (i<4)game[i]->SetPosition((117+i*110)+THEME.gamegrid_x,25+THEME.gamegrid_y);
+                if (i>3)game[i]->SetPosition((117+(i-4)*110)+THEME.gamegrid_x,185+THEME.gamegrid_y);
+                game[i]->SetRumble(false);
+                game[i]->SetTrigger(trigA);
+                game[i]->SetSoundOver(btnSoundOver);
+                game[i]->SetSoundClick(btnSoundClick);
+                game[i]->SetEffectGrow();
                 game[i]->SetVisible(true);
-				game[i]->SetImage(coverImg[i]);
-				game[i]->SetClickable(true);
-				coverImg[i]->SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
-				if (((changed+pagesize)>gameCnt)&&(i>((gameCnt-changed)-1))) {
-					game[i]->SetVisible(false);
-					game[i]->SetClickable(false);
-				}
+                game[i]->SetClickable(true);
+                coverImg[i]->SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
+                if (((changed+pagesize)>gameCnt)&&(i>((gameCnt-changed)-1))) {
+                    game[i]->SetVisible(false);
+                    game[i]->SetClickable(false);
+                    game[i]->RemoveSoundOver();
+                }
     }
 }

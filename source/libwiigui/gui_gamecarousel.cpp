@@ -23,19 +23,18 @@
 #define IN_SPEED	175
 #define SHIFT_SPEED	100
 #define SPEED_STEP	4
-#define PAGESIZE	9
-#define SAFETY		9
+#define SAFETY		320
 
 extern const int vol;
 
 /**
  * Constructor for the GuiGameCarousel class.
  */
-GuiGameCarousel::GuiGameCarousel(int w, int h, struct discHdr * l, int gameCnt, const char *themePath, const u8 *imagebg, int selected, int offset)
+GuiGameCarousel::GuiGameCarousel(int w, int h, struct discHdr * l, int count, const char *themePath, const u8 *imagebg, int selected, int offset)
 {
 	width = w;
 	height = h;
-	this->gameCnt = (gameCnt < SAFETY) ? gameCnt : SAFETY;
+	gameCnt = (count < SAFETY) ? count : SAFETY;
 	gameList = l;
 	pagesize = (gameCnt < PAGESIZE) ? gameCnt : PAGESIZE;
 	listOffset = (offset == 0) ? this->FindMenuItem(-1, 1) : offset;
@@ -49,7 +48,6 @@ GuiGameCarousel::GuiGameCarousel(int w, int h, struct discHdr * l, int gameCnt, 
 
 	trigA = new GuiTrigger;
 	trigA->SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
-	trigHeldA = new GuiTrigger;
 	trigL = new GuiTrigger;
 	trigL->SetButtonOnlyTrigger(-1, WPAD_BUTTON_LEFT | WPAD_CLASSIC_BUTTON_LEFT, PAD_BUTTON_LEFT);
 	trigR = new GuiTrigger;
@@ -159,7 +157,6 @@ GuiGameCarousel::~GuiGameCarousel()
 	delete btnLeft;
 
 	delete trigA;
-	delete trigHeldA;
 	delete trigL;
 	delete trigR;
 	delete trigPlus;
@@ -430,7 +427,7 @@ void GuiGameCarousel::Reload(struct discHdr * l, int count)
 
 	LOCK(this);
 
-	gameCnt = count;
+	gameCnt = (count < SAFETY) ? count : SAFETY;
 	gameList = l;
 	pagesize = (gameCnt < PAGESIZE) ? gameCnt : PAGESIZE;
 	listOffset = this->FindMenuItem(-1, 1);

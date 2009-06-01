@@ -62,7 +62,7 @@ void customOptionList::SetValue(int i, const char *format, ...)
 		va_start(va, format);
 		vasprintf(&tmp, format, va);
 		va_end(va);
-		
+
 		if(tmp)
 		{
 			if(value[i] && !strcmp(tmp, value[i]))
@@ -240,9 +240,9 @@ GuiCustomOptionBrowser::~GuiCustomOptionBrowser()
 	delete bgOptionsEntry;
 
 	delete trigA;
+	delete trigHeldA;
 	delete btnSoundClick;
 
-//	delete optionBg;
 	for(int i = 0; i < size; i++)
 	{
 		delete optionTxt[i];
@@ -405,7 +405,7 @@ void GuiCustomOptionBrowser::UpdateListEntries()
 		{
 			optionVal[i]->SetPosition(coL2,0);
 			optionVal[i]->SetMaxWidth(bgOptionsImg->GetWidth() - (coL2+24), GuiText::DOTTED);
-			
+
 			optionValOver[i]->SetPosition(coL2,0);
 			optionValOver[i]->SetMaxWidth(bgOptionsImg->GetWidth() - (coL2+24), GuiText::SCROLL);
 		}
@@ -435,7 +435,7 @@ void GuiCustomOptionBrowser::Update(GuiTrigger * t)
 		arrowDownBtn->Update(t);
 		scrollbarBoxBtn->Update(t);
     }
-	
+
 	next = listOffset;
 
 	for(int i=0; i < size; i++)
@@ -632,7 +632,7 @@ void GuiCustomOptionBrowser::Update(GuiTrigger * t)
     }
 	if(old_listOffset != listOffset)
 		UpdateListEntries();
-	
+
 	if(updateCB)
 		updateCB(this);
 }

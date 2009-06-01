@@ -181,7 +181,6 @@ GuiGameBrowser::~GuiGameBrowser()
 	delete trigA;
 	delete trigHeldA;
 	delete btnSoundClick;
-	delete btnSoundOver;
 
 	for(int i=0; i<pagesize; i++)
 	{
