@@ -8,6 +8,8 @@
 #include "disc.h"
 #include "wbfs.h"
 #include "video.h"
+#include "audio.h"
+#include "menu.h"
 #include "fatmounter.h"
 
 /* Constants */
@@ -41,9 +43,21 @@ void Sys_Init(void)
 	SYS_SetPowerCallback(__Sys_PowerCallback);
 }
 
+static void _ExitApp()
+{
+	ExitGUIThreads();
+	StopGX();
+	ShutdownAudio();
+
+    SDCard_deInit();
+	USBDevice_deInit();
+}
+
+
 void Sys_Reboot(void)
 {
 	/* Restart console */
+	_ExitApp();
 	STM_RebootSystem();
 }
 
@@ -51,8 +65,9 @@ int Sys_IosReload(int IOS)
 {
     s32 ret;
 
-    if(isSdInserted())
+	//shutdown SD and USB before IOS Reload in DiscWait
     SDCard_deInit();
+    USBDevice_deInit();
 
     WPAD_Flush(0);
     WPAD_Disconnect(0);
@@ -62,35 +77,49 @@ int Sys_IosReload(int IOS)
 
     USBStorage_Deinit();
 
-    __IOS_ShutdownSubsystems();
-
     ret = IOS_ReloadIOS(IOS);
-
-    if(ret < 0) {
-        return ret;
-    }
 
     PAD_Init();
     Wpad_Init();
     WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
     WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
 
-    if(IOS == 249 || IOS == 222) {
-    ret = WBFS_Init(WBFS_DEVICE_USB);
-    ret = Disc_Init();
-    ret = WBFS_Open();
+    if(ret < 0) {
+        return ret;
     }
+ 
+    if(IOS == 249 || IOS == 222 || IOS == 223) {
+		ret = WBFS_Init(WBFS_DEVICE_USB);
+		if(ret>=0)
+		{
+			ret = Disc_Init();
+			if(ret>=0)
+				ret = WBFS_Open();
+		}
+	}
+	//reinitialize SD and USB
+    SDCard_Init();
+    USBDevice_Init();
 
     return ret;
 
 }
 
-void Sys_Shutdown(void)
+
+
+#define ShutdownToDefault	0
+#define ShutdownToIdle		1
+#define ShutdownToStandby	2
+
+static void _Sys_Shutdown(int SHUTDOWN_MODE)
 {
-    Wpad_Disconnect();
+	_ExitApp();
+	WPAD_Flush(0);
+	WPAD_Disconnect(0);
+	WPAD_Shutdown();
 
 	/* Poweroff console */
-	if(CONF_GetShutdownMode() == CONF_SHUTDOWN_IDLE) {
+	if((CONF_GetShutdownMode() == CONF_SHUTDOWN_IDLE &&  SHUTDOWN_MODE != ShutdownToStandby) || SHUTDOWN_MODE == ShutdownToIdle) {
 		s32 ret;
 
 		/* Set LED mode */
@@ -105,11 +134,35 @@ void Sys_Shutdown(void)
 		STM_ShutdownToStandby();
 	}
 }
+void Sys_Shutdown(void)
+{
+	_Sys_Shutdown(ShutdownToDefault);
+}
+void Sys_ShutdownToIdel(void)
+{
+	_Sys_Shutdown(ShutdownToIdle);
+}
+void Sys_ShutdownToStandby(void)
+{
+	_Sys_Shutdown(ShutdownToStandby);
+}
 
 void Sys_LoadMenu(void)
 {
+	_ExitApp();
 	/* Return to the Wii system menu */
 	SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
+}
+
+void Sys_BackToLoader(void)
+{
+	if (*((u32*) 0x80001800))
+	{
+		_ExitApp();
+		exit(0);
+	}
+	// Channel Version
+	Sys_LoadMenu();
 }
 
 s32 Sys_GetCerts(signed_blob **certs, u32 *len)

@@ -43,7 +43,6 @@
 
 FreeTypeGX *fontSystem=0;
 FreeTypeGX *fontClock=0;
-int ExitRequested = 0;
 bool netcheck = false;
 
 
@@ -62,21 +61,6 @@ int Net_Init(char *ip){
 		return FALSE;
 	}
 	return TRUE;
-}
-
-void ExitApp()
-{
-	ShutoffRumble();
-	StopGX();
-	ShutdownAudio();
-
-    if(isSdInserted())
-    SDCard_deInit();
-
-    //WPAD_Flush(0);
-    //WPAD_Disconnect(0);
-    //WPAD_Shutdown();
-	//exit(0);
 }
 
 void
@@ -107,6 +91,9 @@ DefaultSettings()
 	CFG_LoadGlobal();
 }
 
+// check for libfat.a from 1. Jun 2009
+extern int LibFat4USB_Loader_GX;
+int fatCheck = LibFat4USB_Loader_GX; // remove when libfat newer than 1. Jun 2009
 
 int
 main(int argc, char *argv[])
@@ -114,14 +101,14 @@ main(int argc, char *argv[])
 
 	s32 ret2;
 
-    SDCard_Init();
+    SDCard_Init(); // mount SD for loading cfg's
 	lang_default();
 	CFG_Load();
 
 	DefaultSettings();
 
 
-	SDCard_deInit();
+	SDCard_deInit();// unmount SD for reloading IOS
 
     /* Load Custom IOS */
     if(Settings.cios == ios222) {
@@ -139,17 +126,18 @@ main(int argc, char *argv[])
 		SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
 	}
 
-    SDCard_Init();
+    SDCard_Init(); // now mount SD:/
+    USBDevice_Init(); // and mount USB:/
 
 	Sys_Init();
-	//Video_SetMode();
-	//Con_Init(CONSOLE_XCOORD, CONSOLE_YCOORD, CONSOLE_WIDTH, CONSOLE_HEIGHT);
-	//Wpad_Init();
 
-    PAD_Init();
 	InitVideo(); // Initialise video
 	InitAudio(); // Initialize audio
 
+    PAD_Init(); // initialize PAD/WPAD
+	Wpad_Init();
+	WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
+	WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
 
 	fontSystem = new FreeTypeGX();
 	fontSystem->loadFont(font_ttf, font_ttf_size, 0);

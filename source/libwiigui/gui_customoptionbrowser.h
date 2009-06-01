@@ -1,5 +1,4 @@
 #include "gui.h"
-extern int SetValue(int i, const char *format, ...) __attribute__((format(printf,2,3)));
 
 class customOptionList {
 	public:

@@ -73,7 +73,7 @@ u32 do_sd_code(char *filename)
 
 	fp = fopen(filepath, "rb");
 	if (!fp) {
-		fatUnmount("SD");
+		fatUnmount("SD:/");
 	__io_wiisd.shutdown();
 		return 0;
 	}
@@ -93,7 +93,7 @@ u32 do_sd_code(char *filename)
 	if(ret != filesize){
 		free(filebuff);
 		fclose(fp);
-		fatUnmount("SD");
+		fatUnmount("SD:/");
 	__io_wiisd.shutdown();
 		return 0;
 	}
@@ -106,7 +106,7 @@ u32 do_sd_code(char *filename)
 	free(filebuff);
 	fclose(fp);
 
-	fatUnmount("SD");
+	fatUnmount("SD:/");
 	__io_wiisd.shutdown();
 
 	return 1;

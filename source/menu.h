@@ -11,7 +11,16 @@
 
 #include <ogcsys.h>
 
-void InitGUIThreads();
+#ifdef __cplusplus
+//extern "C"
+//{
+#endif
+void InitGUIThreads(void);
+void ExitGUIThreads(void);
+#ifdef __cplusplus
+//}
+#endif
+
 int MainMenu (int menuitem);
 void wiilight(int enable);
 int GameSettings(struct discHdr *);

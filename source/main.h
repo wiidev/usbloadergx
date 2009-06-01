@@ -12,9 +12,7 @@
 
 extern struct SSettings Settings;
 
-void ExitApp();
 void DefaultSettings();
-extern int ExitRequested;
 extern FreeTypeGX *fontSystem;
 extern bool netcheck;
 extern int Net_Init(char *ip);
