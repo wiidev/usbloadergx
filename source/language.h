@@ -200,6 +200,7 @@ struct LANGUAGE
 	char Updatefailed[40];
 	char Updatedol[40];
 	char Updateall[40];
+	char Updateto[40];
 	char VideoMode[50];
 	char VIDTVPatch[50];
 	char Volume[50];

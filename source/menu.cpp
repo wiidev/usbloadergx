@@ -2369,7 +2369,7 @@ ProgressUpdateWindow()
             promptWindow.Append(&progressbarImg);
             promptWindow.Append(&progressbarOutlineImg);
             promptWindow.Append(&prTxt);
-            msgTxt.SetTextf("Updating to Rev%i", revnumber);
+            msgTxt.SetTextf("%s Rev%i", LANGUAGE.Updateto, revnumber);
             int filesize = downloadrev("http://www.techjawa.com/usbloadergx/boot.dol");
             if(filesize > 0) {
                 pfile = fopen(dolpath, "wb");
@@ -5786,7 +5786,7 @@ static int MenuCheck()
             //shutdown SD and USB before IOS Reload in DiscWait
 			SDCard_deInit();
 			USBDevice_deInit();
-			
+
 			ret2 = DiscWait(LANGUAGE.NoUSBDevice, LANGUAGE.WaitingforUSBDevice, 0, 0, 1);
 			//reinitialize WiiMote for Prompt
  			PAD_Init();
@@ -5801,7 +5801,7 @@ static int MenuCheck()
 			WindowPrompt (LANGUAGE.Error,LANGUAGE.USBDevicenotfound, LANGUAGE.ok, 0,0,0);
             Sys_LoadMenu();
 		}
-		
+
         ret2 = Disc_Init();
         if (ret2 < 0) {
             WindowPrompt (LANGUAGE.Error,LANGUAGE.CouldnotinitializeDIPmodule,LANGUAGE.ok, 0,0,0);

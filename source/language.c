@@ -214,6 +214,7 @@ snprintf(LANGUAGE.Updatepathchanged, sizeof(LANGUAGE.Updatepathchanged), "Update
 snprintf(LANGUAGE.Updatefailed, sizeof(LANGUAGE.Updatefailed), "Update failed");
 snprintf(LANGUAGE.Updatedol, sizeof(LANGUAGE.Updatedol), "Update DOL");
 snprintf(LANGUAGE.Updateall, sizeof(LANGUAGE.Updateall), "Update All");
+snprintf(LANGUAGE.Updateto, sizeof(LANGUAGE.Updateto), "Update to");
 snprintf(LANGUAGE.USBLoaderisprotected, sizeof(LANGUAGE.USBLoaderisprotected), "USB Loader GX is protected");
 snprintf(LANGUAGE.USBDevicenotfound, sizeof(LANGUAGE.USBDevicenotfound), "USB Device not found");
 snprintf(LANGUAGE.VideoMode, sizeof(LANGUAGE.VideoMode), "Video Mode");
@@ -970,6 +971,10 @@ void language_set(char *name, char *val)
 	}
 	if (strcmp(name, "Updateall") == 0) {
 		strcopy(LANGUAGE.Updateall, val, sizeof(LANGUAGE.Updateall));
+		return;
+	}
+	if (strcmp(name, "Updateto") == 0) {
+		strcopy(LANGUAGE.Updateto, val, sizeof(LANGUAGE.Updateto));
 		return;
 	}
 	if (strcmp(name, "USBLoaderisprotected") == 0) {

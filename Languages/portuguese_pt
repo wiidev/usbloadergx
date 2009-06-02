@@ -2,6 +2,7 @@
  addToFavorite = Adicionar aos favoritos
  all = Alfabética
  AppLanguage = Idioma
+ available = disponível
  Areyousure = Tem a certeza?
  AutoPatch = Patch automático 
  Back = Voltar
@@ -16,6 +17,7 @@
  Cancel = Cancelar
  Cantbeformated = Não pode pode ser formatado
  Cantdelete = Não foi possível apagar:
+ CheckingforUpdates = Procurando Actualizações
  ClicktoDownloadCovers = Carregue para descarregar capas
  Clock = Relógio
  Close = Fechar
@@ -42,9 +44,12 @@
  Doyouwanttoformat = Deseja FORMATAR:
  Doyoureallywanttodelete = Quer mesmo REMOVER o jogo:
  Doyouwanttoretryfor30secs = Deseja tentar novamente dentro de 30 segs?
+ Doyouwanttoupdate = Como pretende actualizar o programa?
  Downloadingfile = Descarregando ficheiro:
  DownloadBoxartimage = Descarregar imagem da Caixa?
  Downloadfinished = Download Terminado
+ Defaultgamesettings = Repor Configuração do Jogo
+ Defaultsettings = Repor Configurações
  Error = Erro !
  hour = Horas
  BOOTERROR = ERRO DE ARRANQUE
@@ -97,7 +102,7 @@
  Loadingstandardmusic = Carregando música padrão.
  Lock = Bloquear
  LockConsole = Bloquear Configurações
- MP3Menu = Menu MP3
+ Patchcountrystrings = Patch Definições Regionais
  Missingfiles = Ficheiros em falta
  Networkiniterror = Erro ao inicializar ligação de rede
  Neither = Nenhum
@@ -109,6 +114,7 @@
  Nopartitionsfound = Não foram encontradas partições
  NoUSBDevice = Nenhum dispositivo USB encontrado
  NoWBFSpartitionfound = Não foi encontrada nenhuma partição WBFS
+ Nonewupdates = Não existem novas actualizações.
  NormalCovers = Capas Normais
  Normal = Normal
  NotaWiiDisc = Não é um Disco da Wii
@@ -120,6 +126,7 @@
  OfficialSite = Site Oficial
  ok = OK
  ON = Ligado
+ OnlyInstall = Apenas na instalação
  Parentalcontrol = Controlo Parental
  Partition = Partição
  Password = Password
@@ -133,6 +140,7 @@
  ReloadSD = Actualizar do cartão SD
  RenameGameonWBFS = Alterar nome do jogo na partição WBFS
  Restart = Reiniciar
+ Restarting = Reiniciando...
  Return = Voltar
  ReturntoWii = Menu da Wii
  Right = Direita
@@ -141,7 +149,7 @@
  Save = Gravar
  SaveFailed = Falha ao Gravar
  Specialthanksto = Agradecimentos
- Titlestxtpath = Pasta Titles.txt
+ Titlestxtpath = Pasta titles.txt
  TitlestxtpathChanged = Pasta do ficheiro titles.txt alterada.
  Titlestxtpathchange = Alterar pasta do titles.txt
  For = pelo
@@ -155,6 +163,7 @@
  ShutdownSystem = Desligar
  Success = Sucesso:
  Successfullyinstalled = Instalado com Sucesso:
+ Successfullyupdated = Programa actualizado com Sucesso
  Successfullydeleted = Removido com Sucesso:
  SuccessfullySaved = Gravado com Sucesso
  SystemDefault = Predefinição Sistema
@@ -169,13 +178,20 @@
  Uninstall = Remover
  USBLoaderisprotected = O USB Loader GX está bloqueado
  USBDevicenotfound = Dispositivo USB não encontrado
+ updating = Actualizando
+ Updatepath = Pasta Actualizações
+ Updatepathchanged = A pasta das actualizações foi alterada.
+ Updatefailed = Erro ao actualizar
+ Updatedol = Actualizar DOL
+ Updateall = Actualizar Tudo
  VideoMode = Modo de Vídeo
  VIDTVPatch = Patch VIDTV
  Volume = Volume
  Waiting = Aguardando...
  WaitingforUSBDevice = Aguardando pelo Dispositivo USB
- WidescreenFix = Correcção Widescreen
+ WidescreenFix = Correcção 16:9
  WiiMenu = Menu da Wii
+ Wiilight = Iluminação Leitor
  WrongPassword = Password Incorrecta
  Yes = Sim
  YoudonthavecIOS = cIOS222 não instalado
@@ -189,6 +205,6 @@
  SChinese = Chinês Simplificado
  TChinese = Chinês Tradicional
  Korean = Coreano
- // Portuguese(pt-pt) Language File rev4.4 (22-05-2009 9:54) for GUI USB Loader GX 1
- // Tested with Loader rev385
+ // Portuguese(pt-pt) Language File rev10 (31-05-2009 11:41 GMT) for USB Loader GX 1
+ // Initial tests with Loader rev433
  // Translated by Sky8000
