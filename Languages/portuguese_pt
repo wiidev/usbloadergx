@@ -102,7 +102,7 @@
  Loadingstandardmusic = Carregando música padrão.
  Lock = Bloquear
  LockConsole = Bloquear Configurações
- Patchcountrystrings = Patch Definições Regionais
+ Patchcountrystrings = Patch Jogos Importados
  Missingfiles = Ficheiros em falta
  Networkiniterror = Erro ao inicializar ligação de rede
  Neither = Nenhum
@@ -184,6 +184,7 @@
  Updatefailed = Erro ao actualizar
  Updatedol = Actualizar DOL
  Updateall = Actualizar Tudo
+ Updateto = Actualizando para
  VideoMode = Modo de Vídeo
  VIDTVPatch = Patch VIDTV
  Volume = Volume
@@ -205,6 +206,6 @@
  SChinese = Chinês Simplificado
  TChinese = Chinês Tradicional
  Korean = Coreano
- // Portuguese(pt-pt) Language File rev10 (31-05-2009 11:41 GMT) for USB Loader GX 1
- // Initial tests with Loader rev433
+ // Portuguese(pt-pt) Language File rev11 (02-06-2009 18:02 GMT) for USB Loader GX 1
+ // Added strings for rev450
  // Translated by Sky8000

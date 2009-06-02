@@ -186,6 +186,7 @@ Updatepathchanged = Dossier de Mise à Jour changé.
 Updatefailed = Mise à Jour échouée
 Updatedol = DOL seul
 Updateall = Totale
+Updateto = vers la
 USBLoaderisprotected = USB Loader GX est verrouillé
 USBDevicenotfound = Périphérique USB introuvable
 VideoMode = Mode vidéo
