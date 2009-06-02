@@ -250,6 +250,9 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
 	/* Initialize apploader */
 	appldr_init(__noprint);
 
+	/* ERROR 002 fix (thanks to WiiPower for sharing this)*/
+    *(u32 *)0x80003140 = *(u32 *)0x80003188;
+
     if (cheat)
     {
 		/*HOOKS STUFF - FISHEARS*/
@@ -319,9 +322,6 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
 		/*Thanks to WiiPower*/
 		if(patchcountrystring == 1)
 		PatchCountryStrings(dst, len);
-
-        /* ERROR 002 fix (thanks to WiiPower for sharing this)*/
-		*(u32 *)0x80003140 = *(u32 *)0x80003188;
 
 		DCFlushRange(dst, len);
 	}
