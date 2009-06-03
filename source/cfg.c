@@ -1577,6 +1577,8 @@ void CFG_Load(void)
 
 	snprintf(pathname, sizeof(pathname), "%stitles.txt", CFG.titlestxt_path);
 	cfg_parsefile(pathname, &title_set);
+	
+	cfg_parsefile("SD:/config/GXGameSettings.cfg", &parental_set);
 
 	// load per-game settings
 	cfg_load_games();
