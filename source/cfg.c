@@ -65,12 +65,19 @@ struct ID_Title
 {
 	u8 id[5];
 	char title[TITLE_MAX];
-	u8 block;
 };
 
+struct ID_Control
+{
+	u8 id[5];
+	u8 block;
+};
 // renamed titles
 int num_title = 0; //number of titles
 struct ID_Title *cfg_title = NULL;
+
+int num_control = 0;
+struct ID_Control *cfg_control = NULL;
 
 #define MAX_SAVED_GAMES 1000
 #define MAX_SAVED_GAME_NUM 1000
@@ -359,7 +366,7 @@ char *get_title(struct discHdr *header)
 	return header->title;
 }
 
-void title_set(char *id, char *title, u8 block)
+void title_set(char *id, char *title)
 {
 	char *idt = cfg_get_title((u8*)id);
 	if (idt) {
@@ -375,7 +382,6 @@ void title_set(char *id, char *title, u8 block)
 		// add
 		memcpy(cfg_title[num_title].id, id, 4);
 		cfg_title[num_title].id[4] = 0;
-		cfg_title[num_title].block = block;
 		strcopy(cfg_title[num_title].title, title, TITLE_MAX);
 		num_title++;
 	}
@@ -384,9 +390,9 @@ void title_set(char *id, char *title, u8 block)
 u8 cfg_get_block(u8 *id)
 {
 	int i;
-	for (i=0; i<num_title; i++) {
-		if (memcmp(id, cfg_title[i].id, 4) == 0) {
-			return cfg_title[i].block;
+	for (i=0; i<num_control; i++) {
+		if (memcmp(id, cfg_control[i].id, 4) == 0) {
+			return cfg_control[i].block;
 		}
 	}
 	return 0;
@@ -1296,6 +1302,56 @@ void game_set(char *name, char *val)
 		if (np) p = np + 1; else p = NULL;
 	}
 }
+
+void parental_set(char *name, char *val)
+{
+	// sample line:
+	// game:RTNP41 = video:game; language:english; ocarina:0;
+	// game:RYWP01 = video:patch; language:console; ocarina:1;
+	//printf("GAME: '%s=%s'\n", name, val);
+	u8 id[8];
+
+	if (strncmp(name, "game:", 5) != 0) return;
+	trimcopy((char*)id, name+5, sizeof(id));
+
+	// parse val
+	// first split options by ;
+	char opt[100], *p, *np;
+	p = val;
+
+	while(p) {
+		np = strchr(p, ';');
+		if (np) trim_n_copy(opt, p, np-p, sizeof(opt));
+		else trimcopy(opt, p, sizeof(opt));
+		//printf("GAME(%s) (%s)\n", id, opt); sleep(1);
+		// parse opt 'language:english'
+		char opt_name[100], opt_val[100];
+		if (trimsplit(opt, opt_name, opt_val, ':', sizeof(opt_name))){
+			//printf("GAME(%s) (%s=%s)\n", id, opt_name, opt_val); sleep(1);
+			short opt_c;
+
+			if (strcmp("pctrl", opt_name) == 0) {
+				if (sscanf(opt_val, "%hd", &opt_c) == 1) {
+					cfg_control = realloc(cfg_control, (num_control+1) * sizeof(struct ID_Control));
+					if (!cfg_control) {
+					// error
+						num_control = 0;
+						return;
+					}
+					// add
+					memcpy(cfg_control[num_control].id, id, 4);
+					cfg_control[num_control].id[4] = 0;
+					cfg_control[num_control].block = opt_c;
+					num_control++;
+				}
+			}
+
+		}
+		// next opt
+		if (np) p = np + 1; else p = NULL;
+	}
+}
+
 void game_set_num(char *name, char *val)
 {
 	u8 id[8];
@@ -1520,7 +1576,7 @@ void CFG_Load(void)
 //	}
 
 	snprintf(pathname, sizeof(pathname), "%stitles.txt", CFG.titlestxt_path);
-	cfg_parsetitlefile(pathname, &title_set);
+	cfg_parsefile(pathname, &title_set);
 
 	// load per-game settings
 	cfg_load_games();
