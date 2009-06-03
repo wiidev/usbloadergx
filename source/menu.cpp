@@ -2128,7 +2128,7 @@ ProgressDownloadWindow(int choice2)
 	}
 
     /**Temporary redownloading 1st image because of a fucking corruption bug **/
-/*
+
     char URLFile[100];
     if (choice2 == 2) {
 		sprintf(URLFile,"http://www.theotherzone.com/wii/3d/176/248/%s",missingFiles[0]); // For 3D Covers
@@ -2157,7 +2157,7 @@ ProgressDownloadWindow(int choice2)
         free(file.data);
     }
     }
-*/
+
 
 	HaltGui();
 	mainWindow->Remove(&promptWindow);
