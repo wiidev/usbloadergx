@@ -63,34 +63,6 @@ int Net_Init(char *ip){
 	return TRUE;
 }
 
-void
-DefaultSettings()
-{
-	Settings.video = discdefault;
-	Settings.vpatch = off;
-	Settings.language = ConsoleLangDefault;
-	Settings.ocarina = off;
-	Settings.hddinfo = hr12;
-	Settings.sinfo = ((THEME.showID) ? GameID : Neither);
-	Settings.rumble = RumbleOn;
-	if (THEME.showRegion)
-	{
-		Settings.sinfo = ((Settings.sinfo == GameID) ? Both : GameRegion);
-	}
-	Settings.volume = v80;
-	Settings.tooltips = TooltipsOn;
-	snprintf(Settings.unlockCode, sizeof(Settings.unlockCode), "ab121b");
-	Settings.parentalcontrol = 0;
-	Settings.cios = ios249;
-	Settings.xflip = no;
-	Settings.qboot = no;
-	Settings.unicodefix = 0;
-	Settings.wiilight = 1;
-	Settings.patchcountrystrings = 0;
-
-	CFG_LoadGlobal();
-}
-
 // check for libfat.a from 1. Jun 2009
 extern int LibFat4USB_Loader_GX;
 int fatCheck = LibFat4USB_Loader_GX; // remove when libfat newer than 1. Jun 2009
@@ -104,9 +76,6 @@ main(int argc, char *argv[])
     SDCard_Init(); // mount SD for loading cfg's
 	lang_default();
 	CFG_Load();
-
-	DefaultSettings();
-
 
 	SDCard_deInit();// unmount SD for reloading IOS
 

@@ -358,10 +358,10 @@ void WindowCredits()
 	}
 	ResumeGui();
 
-	if(!strcmp("", CFG.oggload_path) || !strcmp("notset", CFG.ogg_path)) {
+	if(!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path)) {
         bgMusic->Play();
     } else {
-        bgMusic->PlayOggFile(CFG.ogg_path);
+        bgMusic->PlayOggFile(Settings.ogg_path);
     }
     bgMusic->SetPlayTime(thetimeofbg);
     SetVolumeOgg(255*(vol/100.0));
@@ -1000,7 +1000,7 @@ int GameWindowPrompt()
 	nameBtn.SetSoundClick(&btnClick);
 	nameBtn.SetToolTip(&nameBtnTT,24,-30, ALIGN_LEFT);
 
-	if (CFG.godmode == 1){
+	if (Settings.godmode == 1){
 		nameBtn.SetTrigger(&trigA);
 		nameBtn.SetEffectGrow();
 	}
@@ -1042,7 +1042,7 @@ int GameWindowPrompt()
 	btn2Img.SetWidescreen(CFG.widescreen);
 	}
 	GuiButton btn2(&btn2Img,&btn2Img, 1, 5, 0, 0, &trigA, &btnSoundOver, &btnClick,1);
-	if (CFG.godmode == 1)
+	if (Settings.godmode == 1)
 	{
 		btn2.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
 		btn2.SetPosition(-50, -40);
@@ -1104,7 +1104,7 @@ int GameWindowPrompt()
 	promptWindow.Append(&btnFavorite);
 
 	//check if unlocked
-	if (CFG.godmode == 1)
+	if (Settings.godmode == 1)
 	{
     promptWindow.Append(&btn3);
 	}
@@ -1145,13 +1145,13 @@ int GameWindowPrompt()
 		if (diskCover)
 			delete diskCover;
 
-		snprintf(imgPath,sizeof(imgPath),"%s%s.png", CFG.disc_path, IDFull); //changed to current full id
+		snprintf(imgPath,sizeof(imgPath),"%s%s.png", Settings.disc_path, IDFull); //changed to current full id
 		diskCover = new GuiImageData(imgPath,0);
 
 		if (!diskCover->GetImage())
 		{
 			delete diskCover;
-			snprintf(imgPath, sizeof(imgPath), "%s%s.png", CFG.disc_path, ID); //changed to current id
+			snprintf(imgPath, sizeof(imgPath), "%s%s.png", Settings.disc_path, ID); //changed to current id
 			diskCover = new GuiImageData(imgPath, 0);
 
 
@@ -1159,12 +1159,12 @@ int GameWindowPrompt()
 		{	snprintf (ID,sizeof(ID),"%c%c%c%c", header->id[0], header->id[1], header->id[2], header->id[3]);
 
 			delete diskCover;
-			snprintf(imgPath, sizeof(imgPath), "%s%s.png", CFG.disc_path, ID); //changed to current id
+			snprintf(imgPath, sizeof(imgPath), "%s%s.png", Settings.disc_path, ID); //changed to current id
 			diskCover = new GuiImageData(imgPath, 0);
 			if (!diskCover->GetImage())
 			{
 				delete diskCover;
-				snprintf(imgPath, sizeof(imgPath), "%snodisc.png", CFG.disc_path); //changed to nodisc.png
+				snprintf(imgPath, sizeof(imgPath), "%snodisc.png", Settings.disc_path); //changed to nodisc.png
 				diskCover = new GuiImageData(imgPath,nodisc_png);
 			}
 		}
@@ -1723,10 +1723,10 @@ int NetworkInitPromp(int choice2)
 				if (choice2 != 3) {
 
 					snprintf (filename,sizeof(filename),"%c%c%c.png", header->id[0], header->id[1], header->id[2]);
-					found2 = findfile(filename, CFG.covers_path);
+					found2 = findfile(filename, Settings.covers_path);
 					snprintf(filename,sizeof(filename),"%c%c%c%c%c%c.png",header->id[0], header->id[1], header->id[2],
 																		header->id[3], header->id[4], header->id[5]); //full id
-					found1 = findfile(filename, CFG.covers_path);
+					found1 = findfile(filename, Settings.covers_path);
 					if (!found1 && !found2) //if could not find any image
 					{
 						snprintf(missingFiles[cntMissFiles],11,"%s",filename);
@@ -1735,10 +1735,10 @@ int NetworkInitPromp(int choice2)
 				}
 				else if (choice2 == 3) {
 					snprintf (filename,sizeof(filename),"%c%c%c.png", header->id[0], header->id[1], header->id[2]);
-					found2 = findfile(filename, CFG.disc_path);
+					found2 = findfile(filename, Settings.disc_path);
 					snprintf(filename,sizeof(filename),"%c%c%c%c%c%c.png",header->id[0], header->id[1], header->id[2],
 																		header->id[3], header->id[4], header->id[5]); //full id
-					found1 = findfile(filename,CFG.disc_path);
+					found1 = findfile(filename,Settings.disc_path);
 					if (!found1 && !found2)
 					{
 						snprintf(missingFiles[cntMissFiles],11,"%s",filename);
@@ -2039,9 +2039,9 @@ ProgressDownloadWindow(int choice2)
 
     //check if directory exist and if not create one
     struct stat st;
-    if(stat(CFG.covers_path, &st) != 0) {
+    if(stat(Settings.covers_path, &st) != 0) {
         char dircovers[100];
-        snprintf(dircovers,strlen(CFG.covers_path),"%s",CFG.covers_path);
+        snprintf(dircovers,strlen(Settings.covers_path),"%s",Settings.covers_path);
         if (mkdir(dircovers, 0777) == -1) {
             if(subfoldercheck(dircovers) != 1) {
             WindowPrompt(LANGUAGE.Error,LANGUAGE.Cantcreatedirectory,LANGUAGE.ok,0,0,0);
@@ -2049,9 +2049,9 @@ ProgressDownloadWindow(int choice2)
             }
         }
     }
-    if(stat(CFG.disc_path,&st) != 0) {
+    if(stat(Settings.disc_path,&st) != 0) {
         char dirdiscs[100];
-        snprintf(dirdiscs,strlen(CFG.disc_path),"%s",CFG.disc_path);
+        snprintf(dirdiscs,strlen(Settings.disc_path),"%s",Settings.disc_path);
         if (mkdir(dirdiscs, 0777) == -1) {
             if(subfoldercheck(dirdiscs) != 1) {
             WindowPrompt(LANGUAGE.Error,LANGUAGE.Cantcreatedirectory,LANGUAGE.ok,0,0,0);
@@ -2085,17 +2085,17 @@ ProgressDownloadWindow(int choice2)
 		if (choice2 == 2)
 		{
 			sprintf(URLFile,"http://www.theotherzone.com/wii/3d/176/248/%s",missingFiles[i]); // For 3D Covers
-			sprintf(imgPath,"%s%s", CFG.covers_path, missingFiles[i]);
+			sprintf(imgPath,"%s%s", Settings.covers_path, missingFiles[i]);
 		}
 		if(choice2 == 3)
 		{
 			sprintf(URLFile,"http://www.theotherzone.com/wii/diskart/160/160/%s",missingFiles[i]);
-			sprintf(imgPath,"%s%s", CFG.disc_path, missingFiles[i]);
+			sprintf(imgPath,"%s%s", Settings.disc_path, missingFiles[i]);
 		}
 		if(choice2 == 1)
 		{
 			sprintf(URLFile,"http://www.theotherzone.com/wii/resize/160/224/%s",missingFiles[i]);
-			sprintf(imgPath,"%s%s", CFG.covers_path, missingFiles[i]);
+			sprintf(imgPath,"%s%s", Settings.covers_path, missingFiles[i]);
 		}
 
 		struct block file = downloadfile(URLFile);//reject known bad images
@@ -2132,15 +2132,15 @@ ProgressDownloadWindow(int choice2)
     char URLFile[100];
     if (choice2 == 2) {
 		sprintf(URLFile,"http://www.theotherzone.com/wii/3d/176/248/%s",missingFiles[0]); // For 3D Covers
-		sprintf(imgPath,"%s%s", CFG.covers_path, missingFiles[0]);
+		sprintf(imgPath,"%s%s", Settings.covers_path, missingFiles[0]);
     }
     if(choice2 == 3) {
 		sprintf(URLFile,"http://www.theotherzone.com/wii/diskart/160/160/%s",missingFiles[0]);
-		sprintf(imgPath,"%s%s", CFG.disc_path, missingFiles[0]);
+		sprintf(imgPath,"%s%s", Settings.disc_path, missingFiles[0]);
     }
     if(choice2 == 1) {
 		sprintf(URLFile,"http://www.theotherzone.com/wii/resize/160/224/%s",missingFiles[0]);
-		sprintf(imgPath,"%s%s", CFG.covers_path, missingFiles[0]);
+		sprintf(imgPath,"%s%s", Settings.covers_path, missingFiles[0]);
     }
 
     struct block file = downloadfile(URLFile);
@@ -2277,9 +2277,9 @@ ProgressUpdateWindow()
 	ResumeGui();
 
     struct stat st;
-    if(stat(CFG.update_path, &st) != 0) {
+    if(stat(Settings.update_path, &st) != 0) {
         char dir[100];
-        snprintf(dir,strlen(CFG.update_path),"%s",CFG.update_path);
+        snprintf(dir,strlen(Settings.update_path),"%s",Settings.update_path);
         if (mkdir(dir, 0777) == -1) {
             if(subfoldercheck(dir) != 1) {
             WindowPrompt(LANGUAGE.Error,LANGUAGE.Cantcreatedirectory,LANGUAGE.ok,0,0,0);
@@ -2291,8 +2291,8 @@ ProgressUpdateWindow()
 
     char dolpath[150];
     char dolpathsuccess[150];
-    snprintf(dolpath, sizeof(dolpath), "%sbootnew.dol", CFG.update_path);
-    snprintf(dolpathsuccess, sizeof(dolpathsuccess), "%sboot.dol", CFG.update_path);
+    snprintf(dolpath, sizeof(dolpath), "%sbootnew.dol", Settings.update_path);
+    snprintf(dolpathsuccess, sizeof(dolpathsuccess), "%sboot.dol", Settings.update_path);
 
 	while (!IP && !(ret < 0)) {
 
@@ -2419,7 +2419,7 @@ ProgressUpdateWindow()
                 char xmliconpath[150];
                 file = downloadfile("http://www.techjawa.com/usbloadergx/meta.file");
                 if(file.data != NULL){
-                    sprintf(xmliconpath, "%smeta.xml", CFG.update_path);
+                    sprintf(xmliconpath, "%smeta.xml", Settings.update_path);
                     pfile = fopen(xmliconpath, "wb");
                     fwrite(file.data,1,file.size,pfile);
                     fclose(pfile);
@@ -2427,7 +2427,7 @@ ProgressUpdateWindow()
                 }
                 file = downloadfile("http://www.techjawa.com/usbloadergx/icon.png");
                 if(file.data != NULL){
-                    sprintf(xmliconpath, "%sicon.png", CFG.update_path);
+                    sprintf(xmliconpath, "%sicon.png", Settings.update_path);
                     pfile = fopen(xmliconpath, "wb");
                     fwrite(file.data,1,file.size,pfile);
                     fclose(pfile);
@@ -2667,13 +2667,13 @@ s32 __Menu_GetEntries(void)
 		cnt = cnt2;
 	}
 
-	if (CFG.parentalcontrol && !CFG.godmode) {
+	if (Settings.parentalcontrol && !Settings.godmode) {
 		u32 cnt2 = 0;
 
 		for (u32 i = 0; i < cnt; i++)
 		{
 			header = &buffer[i];
-			if (get_block(header) < CFG.parentalcontrol) {
+			if (get_block(header) < Settings.parentalcontrol) {
 				buffer2 = (discHdr *) realloc(buffer2, (cnt2+1) * sizeof(struct discHdr));
 				if (!buffer2)
 				{
@@ -3261,7 +3261,7 @@ static int MenuDiscList()
 	DownloadBtn.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	DownloadBtn.SetPosition(THEME.cover_x,THEME.cover_y);
 
-	if (CFG.godmode == 1)
+	if (Settings.godmode == 1)
 	{//only make the button have trigger & tooltip if in godmode
 		DownloadBtn.SetSoundOver(&btnSoundOver);
 		DownloadBtn.SetTrigger(&trigA);
@@ -3312,7 +3312,7 @@ static int MenuDiscList()
 
 	w.Append(&sdcardBtn);
 	w.Append(&poweroffBtn);
-	if (CFG.godmode)
+	if (Settings.godmode)
 		w.Append(&installBtn);
 	w.Append(&homeBtn);
 	w.Append(&settingsBtn);
@@ -3402,10 +3402,10 @@ static int MenuDiscList()
 		    s32 thetimeofbg = bgMusic->GetPlayTime();
             bgMusic->Stop();
 			choice = WindowExitPrompt(LANGUAGE.ExitUSBISOLoader,0, LANGUAGE.BacktoLoader,LANGUAGE.WiiMenu,LANGUAGE.Back,0);
-			if(!strcmp("", CFG.oggload_path) || !strcmp("notset", CFG.ogg_path)) {
+			if(!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path)) {
                 bgMusic->Play();
             } else {
-                bgMusic->PlayOggFile(CFG.ogg_path);
+                bgMusic->PlayOggFile(Settings.ogg_path);
             }
             bgMusic->SetPlayTime(thetimeofbg);
             SetVolumeOgg(255*(vol/100.0));
@@ -3875,17 +3875,17 @@ static int MenuDiscList()
 						cover = NULL;
 					}
 
-					snprintf(imgPath, sizeof(imgPath), "%s%s.png", CFG.covers_path, IDfull);
+					snprintf(imgPath, sizeof(imgPath), "%s%s.png", Settings.covers_path, IDfull);
 					cover = new GuiImageData(imgPath,0); //load short id
 					if (!cover->GetImage()) //if could not load the short id image
 					{
 						delete cover;
-						snprintf(imgPath, sizeof(imgPath), "%s%s.png", CFG.covers_path, ID);
+						snprintf(imgPath, sizeof(imgPath), "%s%s.png", Settings.covers_path, ID);
 						cover = new GuiImageData(imgPath, 0); //load full id image
 						if (!cover->GetImage())
 						{
 							delete cover;
-							snprintf(imgPath, sizeof(imgPath), "%snoimage.png", CFG.covers_path);
+							snprintf(imgPath, sizeof(imgPath), "%snoimage.png", Settings.covers_path);
 							cover = new GuiImageData(imgPath, nocover_png); //load no image
 						}
 					}
@@ -4507,7 +4507,7 @@ static int MenuSettings()
 	page3Btn.SetTrigger(2, &trigPlus);
 
 	const char * text = LANGUAGE.Unlock;
-	if (CFG.godmode == 1)
+	if (Settings.godmode == 1)
 			text = LANGUAGE.Lock;
 	GuiText lockBtnTxt(text, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	lockBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
@@ -4772,15 +4772,15 @@ static int MenuSettings()
 					Settings.qboot = 0;
 				if ( Settings.wsprompt > 1 )
 					Settings.wsprompt = 0;
-                if (CFG.parentalcontrol > 3 )
-					CFG.parentalcontrol = 0;
+                if (Settings.parentalcontrol > 3 )
+					Settings.parentalcontrol = 0;
 
 
-				if ( CFG.godmode != 1) options2.SetValue(0, "********");
+				if ( Settings.godmode != 1) options2.SetValue(0, "********");
 				else if (!strcmp("", Settings.unlockCode)) options2.SetValue(0, "%s",LANGUAGE.notset);
 				else options2.SetValue(0, Settings.unlockCode);
 
-                if (CFG.godmode != 1) options2.SetValue(1, "********");
+                if (Settings.godmode != 1) options2.SetValue(1, "********");
                 else if (Settings.cios == ios249) options2.SetValue(1,"cIOS 249");
 				else if (Settings.cios == ios222) options2.SetValue(1,"cIOS 222");
 
@@ -4796,14 +4796,14 @@ static int MenuSettings()
 				if (Settings.wsprompt == no) options2.SetValue(4,"%s",LANGUAGE.Normal);
 				else if (Settings.wsprompt == yes) options2.SetValue(4,"%s",LANGUAGE.WidescreenFix);
 
-                if (CFG.godmode != 1) options2.SetValue(5, "********");
-				else if(CFG.parentalcontrol == 0) options2.SetValue(5, "0");
-				else if(CFG.parentalcontrol == 1) options2.SetValue(5, "1");
-				else if(CFG.parentalcontrol == 2) options2.SetValue(5, "2");
-				else if(CFG.parentalcontrol == 3) options2.SetValue(5, "3");
+                if (Settings.godmode != 1) options2.SetValue(5, "********");
+				else if(Settings.parentalcontrol == 0) options2.SetValue(5, "0");
+				else if(Settings.parentalcontrol == 1) options2.SetValue(5, "1");
+				else if(Settings.parentalcontrol == 2) options2.SetValue(5, "2");
+				else if(Settings.parentalcontrol == 3) options2.SetValue(5, "3");
 
-				options2.SetValue(6, "%s", CFG.covers_path);
-				options2.SetValue(7, "%s", CFG.disc_path);
+				options2.SetValue(6, "%s", Settings.covers_path);
+				options2.SetValue(7, "%s", Settings.disc_path);
 				options2.SetValue(8, "%s", CFG.theme_path);
 
 				ret = optionBrowser2.GetClickedOption();
@@ -4812,7 +4812,7 @@ static int MenuSettings()
 				{
 
 					case 0: // Modify Password
-						if ( CFG.godmode == 1)
+						if ( Settings.godmode == 1)
 						{
 							mainWindow->Remove(&optionBrowser2);
 							mainWindow->Remove(&page1Btn);
@@ -4845,7 +4845,7 @@ static int MenuSettings()
 						}
 						break;
 					case 1:
-                        if ( CFG.godmode == 1)
+                        if ( Settings.godmode == 1)
 						Settings.cios++;
 						break;
 					case 2:
@@ -4858,11 +4858,11 @@ static int MenuSettings()
 						Settings.wsprompt++;
 						break;
                     case 5:
-                        if ( CFG.godmode == 1)
-                        CFG.parentalcontrol++;
+                        if ( Settings.godmode == 1)
+                        Settings.parentalcontrol++;
                         break;
                     case 6:
-                        if ( CFG.godmode == 1)
+                        if ( Settings.godmode == 1)
                         {
 							mainWindow->Remove(&optionBrowser2);
 							mainWindow->Remove(&page1Btn);
@@ -4873,7 +4873,7 @@ static int MenuSettings()
 							w.Remove(&lockBtn);
 							w.Remove(&updateBtn);
 							char entered[43] = "";
-							strncpy(entered, CFG.covers_path, sizeof(entered));
+							strncpy(entered, Settings.covers_path, sizeof(entered));
 							int result = OnScreenKeyboard(entered,43,4);
 							mainWindow->Append(&optionBrowser2);
 							mainWindow->Append(&page1Btn);
@@ -4888,7 +4888,7 @@ static int MenuSettings()
 								int len = (strlen(entered)-1);
 								if(entered[len] !='/')
 								strncat (entered, "/", 1);
-								strncpy(CFG.covers_path, entered, sizeof(CFG.covers_path));
+								strncpy(Settings.covers_path, entered, sizeof(Settings.covers_path));
 								WindowPrompt(LANGUAGE.CoverpathChanged,0,LANGUAGE.ok,0,0,0);
 								if(!isSdInserted()) {
                                     WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
@@ -4901,7 +4901,7 @@ static int MenuSettings()
 						}
 						break;
                     case 7:
-                        if ( CFG.godmode == 1)
+                        if ( Settings.godmode == 1)
                         {
 							mainWindow->Remove(&optionBrowser2);
 							mainWindow->Remove(&page1Btn);
@@ -4912,7 +4912,7 @@ static int MenuSettings()
 							w.Remove(&lockBtn);
 							w.Remove(&updateBtn);
 							char entered[43] = "";
-							strncpy(entered, CFG.disc_path, sizeof(entered));
+							strncpy(entered, Settings.disc_path, sizeof(entered));
 							int result = OnScreenKeyboard(entered, 43,4);
 							mainWindow->Append(&optionBrowser2);
 							mainWindow->Append(&page1Btn);
@@ -4927,7 +4927,7 @@ static int MenuSettings()
 								int len = (strlen(entered)-1);
 								if(entered[len] !='/')
 								strncat (entered, "/", 1);
-								strncpy(CFG.disc_path, entered, sizeof(CFG.disc_path));
+								strncpy(Settings.disc_path, entered, sizeof(Settings.disc_path));
 								WindowPrompt(LANGUAGE.DiscpathChanged,0,LANGUAGE.ok,0,0,0);
 								if(!isSdInserted()) {
                                     WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
@@ -4940,7 +4940,7 @@ static int MenuSettings()
 						}
 						break;
                     case 8:
-                        if ( CFG.godmode == 1)
+                        if ( Settings.godmode == 1)
                         {
 							mainWindow->Remove(&optionBrowser2);
 							mainWindow->Remove(&page1Btn);
@@ -5034,9 +5034,9 @@ static int MenuSettings()
                 if ( Settings.patchcountrystrings > 1)
                     Settings.patchcountrystrings = 0;
 
-				options2.SetValue(0, "%s", CFG.titlestxt_path);
+				options2.SetValue(0, "%s", Settings.titlestxt_path);
 
-				options2.SetValue(1, "%s", CFG.language_path);
+				options2.SetValue(1, "%s", Settings.language_path);
 
 				if (Settings.keyset == us) options2.SetValue(2,"QWERTY");
 				else if (Settings.keyset == dvorak) options2.SetValue(2,"DVORAK");
@@ -5047,16 +5047,16 @@ static int MenuSettings()
 				else if (Settings.unicodefix == 1) options2.SetValue(3,"%s",LANGUAGE.TChinese);
 				else if (Settings.unicodefix == 2) options2.SetValue(3,"%s",LANGUAGE.SChinese);
 
-				if(!strcmp("notset", CFG.ogg_path) || !strcmp("",CFG.oggload_path))
+				if(!strcmp("notset", Settings.ogg_path) || !strcmp("",Settings.oggload_path))
 					options2.SetValue(4, "%s", LANGUAGE.Standard);
 				else
-					options2.SetValue(4, "%s", CFG.ogg_path);
+					options2.SetValue(4, "%s", Settings.ogg_path);
 
 				if (Settings.wiilight == 0) options2.SetValue(5,"%s",LANGUAGE.OFF);
 				else if (Settings.wiilight == 1) options2.SetValue(5,"%s",LANGUAGE.ON);
 				else if (Settings.wiilight == 2) options2.SetValue(5,"%s",LANGUAGE.OnlyInstall);
 
-				options2.SetValue(6, "%s", CFG.update_path);
+				options2.SetValue(6, "%s", Settings.update_path);
 
 				if (Settings.patchcountrystrings == 0) options2.SetValue(7,"%s",LANGUAGE.OFF);
 				else if (Settings.patchcountrystrings == 1) options2.SetValue(7,"%s",LANGUAGE.ON);
@@ -5068,7 +5068,7 @@ static int MenuSettings()
 				switch(ret)
 				{
 					case 0:
-						if ( CFG.godmode == 1)
+						if ( Settings.godmode == 1)
 						{
 							mainWindow->Remove(&optionBrowser2);
 							mainWindow->Remove(&page1Btn);
@@ -5079,7 +5079,7 @@ static int MenuSettings()
 							w.Remove(&lockBtn);
 							w.Remove(&updateBtn);
 							char entered[43] = "";
-							strncpy(entered, CFG.titlestxt_path, sizeof(entered));
+							strncpy(entered, Settings.titlestxt_path, sizeof(entered));
 							int result = OnScreenKeyboard(entered,43,4);
 							mainWindow->Append(&optionBrowser2);
 							mainWindow->Append(&page1Btn);
@@ -5094,7 +5094,7 @@ static int MenuSettings()
 								int len = (strlen(entered)-1);
 								if(entered[len] !='/')
 								strncat (entered, "/", 1);
-								strncpy(CFG.titlestxt_path, entered, sizeof(CFG.titlestxt_path));
+								strncpy(Settings.titlestxt_path, entered, sizeof(Settings.titlestxt_path));
 								WindowPrompt(LANGUAGE.TitlestxtpathChanged,0,LANGUAGE.ok,0,0,0);
 								if(isSdInserted()) {
 									cfg_save_global();
@@ -5110,7 +5110,7 @@ static int MenuSettings()
 						}
 						break;
 					case 1: // language file path
-						if ( CFG.godmode == 1)
+						if ( Settings.godmode == 1)
 						{
 							mainWindow->Remove(&optionBrowser2);
 							mainWindow->Remove(&page1Btn);
@@ -5121,7 +5121,7 @@ static int MenuSettings()
 							w.Remove(&lockBtn);
 							w.Remove(&updateBtn);
 							char entered[40] = "";
-							strncpy(entered, CFG.language_path, sizeof(entered));
+							strncpy(entered, Settings.language_path, sizeof(entered));
 							int result = OnScreenKeyboard(entered, 40,0);
 							mainWindow->Append(&optionBrowser2);
 							mainWindow->Append(&tabBtn);
@@ -5132,10 +5132,10 @@ static int MenuSettings()
 							w.Append(&lockBtn);
 							w.Append(&updateBtn);
 							if ( result == 1 )
-							{	strncpy(CFG.language_path, entered, sizeof(CFG.language_path));
+							{	strncpy(Settings.language_path, entered, sizeof(Settings.language_path));
 								if(isSdInserted()) {
 									cfg_save_global();
-									if(!checkfile(CFG.language_path)) {
+									if(!checkfile(Settings.language_path)) {
 									WindowPrompt(LANGUAGE.Filenotfound,LANGUAGE.Loadingstandardlanguage,LANGUAGE.ok,0,0,0);
 									}
 									lang_default();
@@ -5174,7 +5174,7 @@ static int MenuSettings()
                         Settings.patchcountrystrings++;
                         break;
 					case 6:
-						if ( CFG.godmode == 1)
+						if ( Settings.godmode == 1)
 						{
 							mainWindow->Remove(&optionBrowser2);
 							mainWindow->Remove(&page1Btn);
@@ -5185,7 +5185,7 @@ static int MenuSettings()
 							w.Remove(&lockBtn);
 							w.Remove(&updateBtn);
 							char entered[43] = "";
-							strncpy(entered, CFG.update_path, sizeof(entered));
+							strncpy(entered, Settings.update_path, sizeof(entered));
 							int result = OnScreenKeyboard(entered,43,4);
 							mainWindow->Append(&optionBrowser2);
 							mainWindow->Append(&page1Btn);
@@ -5200,7 +5200,7 @@ static int MenuSettings()
 								int len = (strlen(entered)-1);
 								if(entered[len] !='/')
 								strncat (entered, "/", 1);
-								strncpy(CFG.update_path, entered, sizeof(CFG.update_path));
+								strncpy(Settings.update_path, entered, sizeof(Settings.update_path));
 								WindowPrompt(LANGUAGE.Updatepathchanged,0,LANGUAGE.ok,0,0,0);
 							}
 						}
@@ -5215,7 +5215,6 @@ static int MenuSettings()
 								remove("SD:/config/GXGlobal.cfg");
 							lang_default();
 							CFG_Load();
-							DefaultSettings();
 							menu = MENU_SETTINGS;
 							pageToDisplay = 0;
 						}
@@ -5267,7 +5266,7 @@ static int MenuSettings()
 			}
 
 			if(updateBtn.GetState() == STATE_CLICKED) {
-			    if(isSdInserted() && CFG.godmode) {
+			    if(isSdInserted() && Settings.godmode) {
                 mainWindow->Remove(&optionBrowser2);
                 mainWindow->Remove(&page1Btn);
                 mainWindow->Remove(&page2Btn);
@@ -5323,9 +5322,9 @@ static int MenuSettings()
 			{
 				if (!strcmp("", Settings.unlockCode))
 				{
-					CFG.godmode = !CFG.godmode;
+					Settings.godmode = !Settings.godmode;
 				}
-				else if ( CFG.godmode == 0 )
+				else if ( Settings.godmode == 0 )
 				{
 					//password check to unlock Install,Delete and Format
 							mainWindow->Remove(&optionBrowser2);
@@ -5350,9 +5349,9 @@ static int MenuSettings()
                             if ( result == 1 ) {
                             if (!strcmp(entered, Settings.unlockCode)) //if password correct
                             {
-                            if (CFG.godmode == 0) {
+                            if (Settings.godmode == 0) {
 								WindowPrompt(LANGUAGE.CorrectPassword,LANGUAGE.InstallRenameandDeleteareunlocked,LANGUAGE.ok,0,0,0);
-								CFG.godmode = 1;
+								Settings.godmode = 1;
 								__Menu_GetEntries();
 								menu = MENU_DISCLIST;
                             }
@@ -5368,12 +5367,12 @@ static int MenuSettings()
 					int choice = WindowPrompt (LANGUAGE.LockConsole,LANGUAGE.Areyousure,LANGUAGE.Yes,LANGUAGE.No,0,0);
 					if(choice == 1) {
 						WindowPrompt(LANGUAGE.ConsoleLocked,LANGUAGE.USBLoaderisprotected,LANGUAGE.ok,0,0,0);
-						CFG.godmode = 0;
+						Settings.godmode = 0;
 						__Menu_GetEntries();
 						menu = MENU_DISCLIST;
 					}
 				}
-				if ( CFG.godmode == 1)
+				if ( Settings.godmode == 1)
 				{
 					lockBtnTxt.SetText(LANGUAGE.Lock);
 				}
@@ -5390,13 +5389,13 @@ static int MenuSettings()
 				s32 thetimeofbg = bgMusic->GetPlayTime();
 				bgMusic->Stop();
 				choice = WindowExitPrompt(LANGUAGE.ExitUSBISOLoader,0, LANGUAGE.BacktoLoader,LANGUAGE.WiiMenu,LANGUAGE.Back,0);
-				if(!strcmp("", CFG.oggload_path) || !strcmp("notset", CFG.ogg_path))
+				if(!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path))
 				{
 					bgMusic->Play();
 				}
 				else
 				{
-					bgMusic->PlayOggFile(CFG.ogg_path);
+					bgMusic->PlayOggFile(Settings.ogg_path);
 				}
 				bgMusic->SetPlayTime(thetimeofbg);
 				SetVolumeOgg(255*(vol/100.0));
@@ -5414,7 +5413,7 @@ static int MenuSettings()
 					homo.ResetState();
 				}
 			}
-			if(CFG.godmode) {
+			if(Settings.godmode) {
                 updateBtn.SetVisible(true);
                 updateBtn.SetClickable(true);
 			} else {
@@ -5872,15 +5871,15 @@ int MenuOGG()
 
     char fullpath[150];
     char shortpath[35];
-	int countoggs = GetFiles(CFG.oggload_path);
+	int countoggs = GetFiles(Settings.oggload_path);
 
-    if(!strcmp("", CFG.oggload_path)) {
+    if(!strcmp("", Settings.oggload_path)) {
         sprintf(shortpath, "%s", LANGUAGE.Standard);
-	} else if (strlen(CFG.oggload_path) < (27 + 3)) {
-		sprintf(shortpath, "%s", CFG.oggload_path);
+	} else if (strlen(Settings.oggload_path) < (27 + 3)) {
+		sprintf(shortpath, "%s", Settings.oggload_path);
 	}
 	else {
-		strncpy(shortpath, CFG.oggload_path,  27);
+		strncpy(shortpath, Settings.oggload_path,  27);
 		shortpath[27] = '\0';
 		strncat(shortpath, "...", 3);
 	}
@@ -6016,10 +6015,10 @@ int MenuOGG()
 
     if (backBtn.GetState() == STATE_CLICKED) {
             if(nothingchanged == 1 && countoggs > 0) {
-            if(!strcmp("", CFG.oggload_path) || !strcmp("notset", CFG.ogg_path)) {
+            if(!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path)) {
                 bgMusic->Play();
             } else {
-                bgMusic->PlayOggFile(CFG.ogg_path);
+                bgMusic->PlayOggFile(Settings.ogg_path);
             }
             }
 			menu = MENU_SETTINGS;
@@ -6035,7 +6034,7 @@ int MenuOGG()
             w.Remove(&prevBtn);
             w.Remove(&stopBtn);
             char entered[43] = "";
-            strncpy(entered, CFG.oggload_path, sizeof(entered));
+            strncpy(entered, Settings.oggload_path, sizeof(entered));
             int result = OnScreenKeyboard(entered,43,0);
             mainWindow->Append(&optionBrowser4);
             w.Append(&pathBtn);
@@ -6048,11 +6047,11 @@ int MenuOGG()
                 int len = (strlen(entered)-1);
                 if(entered[len] !='/')
                 strncat (entered, "/", 1);
-                strncpy(CFG.oggload_path, entered, sizeof(CFG.oggload_path));
+                strncpy(Settings.oggload_path, entered, sizeof(Settings.oggload_path));
                 WindowPrompt(LANGUAGE.Backgroundmusicpath,0,LANGUAGE.ok,0,0,0);
                 if(isSdInserted()) {
-                    if(!strcmp("", CFG.oggload_path)) {
-                    sprintf(CFG.ogg_path, "notset");
+                    if(!strcmp("", Settings.oggload_path)) {
+                    sprintf(Settings.ogg_path, "notset");
                     bgMusic->Play();
                     }
                     cfg_save_global();
@@ -6073,15 +6072,15 @@ int MenuOGG()
     if(ret>=0) {
         choice = WindowPrompt(LANGUAGE.Setasbackgroundmusic,alldirfiles[ret],LANGUAGE.Yes,LANGUAGE.No,0,0);
         if(choice == 1) {
-        snprintf(fullpath,150,"%s%s",CFG.oggload_path,alldirfiles[ret]);
+        snprintf(fullpath,150,"%s%s",Settings.oggload_path,alldirfiles[ret]);
         choice = bgMusic->PlayOggFile(fullpath);
         if(choice < 0) {
         WindowPrompt(LANGUAGE.Notasupportedformat, LANGUAGE.Loadingstandardmusic, LANGUAGE.ok, 0,0,0);
-        sprintf(CFG.ogg_path, "notset");
+        sprintf(Settings.ogg_path, "notset");
         bgMusic->Play();
         SetVolumeOgg(255*(vol/100.0));
         } else {
-        snprintf(CFG.ogg_path, sizeof(CFG.ogg_path), "%s", fullpath);
+        snprintf(Settings.ogg_path, sizeof(Settings.ogg_path), "%s", fullpath);
         cfg_save_global();
         SetVolumeOgg(255*(vol/100.0));
         nothingchanged = 0;
@@ -6094,14 +6093,14 @@ int MenuOGG()
          if(countoggs > 0) {
             ret = optionBrowser4.GetSelectedOption();
 			songPlaying=ret;
-            snprintf(fullpath, 150,"%s%s", CFG.oggload_path,alldirfiles[ret]);
+            snprintf(fullpath, 150,"%s%s", Settings.oggload_path,alldirfiles[ret]);
             choice = bgMusic->PlayOggFile(fullpath);
             if(choice < 0) {
             WindowPrompt(LANGUAGE.Notasupportedformat, LANGUAGE.Loadingstandardmusic, LANGUAGE.ok, 0,0,0);
-            if(!strcmp("", CFG.oggload_path) || !strcmp("notset", CFG.ogg_path)) {
+            if(!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path)) {
                 bgMusic->Play();
             } else {
-                bgMusic->PlayOggFile(CFG.ogg_path);
+                bgMusic->PlayOggFile(Settings.ogg_path);
             }
             }
             SetVolumeOgg(255*(vol/100.0));
@@ -6116,14 +6115,14 @@ int MenuOGG()
 	    if(countoggs > 0) {
 			songPlaying++;
 			if (songPlaying>(countoggs - 1)){songPlaying=0;}
-            snprintf(fullpath,150,"%s%s", CFG.oggload_path,alldirfiles[songPlaying]);
+            snprintf(fullpath,150,"%s%s", Settings.oggload_path,alldirfiles[songPlaying]);
             choice = bgMusic->PlayOggFile(fullpath);
             if(choice < 0) {
             WindowPrompt(LANGUAGE.Notasupportedformat, LANGUAGE.Loadingstandardmusic, LANGUAGE.ok, 0,0,0);
-            if(!strcmp("", CFG.oggload_path) || !strcmp("notset", CFG.ogg_path)) {
+            if(!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path)) {
                 bgMusic->Play();
             } else {
-                bgMusic->PlayOggFile(CFG.ogg_path);
+                bgMusic->PlayOggFile(Settings.ogg_path);
             }
             }
             nothingchanged = 1;
@@ -6136,14 +6135,14 @@ int MenuOGG()
 	    if(countoggs > 0) {
             songPlaying--;
             if (songPlaying<0){songPlaying=(countoggs - 1);}
-            snprintf(fullpath,150,"%s%s", CFG.oggload_path,alldirfiles[songPlaying]);
+            snprintf(fullpath,150,"%s%s", Settings.oggload_path,alldirfiles[songPlaying]);
             choice = bgMusic->PlayOggFile(fullpath);
             if(choice < 0) {
             WindowPrompt(LANGUAGE.Notasupportedformat, LANGUAGE.Loadingstandardmusic, LANGUAGE.ok, 0,0,0);
-            if(!strcmp("", CFG.oggload_path) || !strcmp("notset", CFG.ogg_path)) {
+            if(!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path)) {
                 bgMusic->Play();
             } else {
-                bgMusic->PlayOggFile(CFG.ogg_path);
+                bgMusic->PlayOggFile(Settings.ogg_path);
             }
             }
             nothingchanged = 1;
@@ -6211,10 +6210,10 @@ int MainMenu(int menu)
     bgMusic->SetVolume(vol);
 	bgMusic->SetLoop(1); //loop music
     // startup music
-    if(!strcmp("", CFG.oggload_path) || !strcmp("notset", CFG.ogg_path)) {
+    if(!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path)) {
         bgMusic->Play();
     } else {
-        bgMusic->PlayOggFile(CFG.ogg_path);
+        bgMusic->PlayOggFile(Settings.ogg_path);
     }
 
 	while(currentMenu != MENU_EXIT)

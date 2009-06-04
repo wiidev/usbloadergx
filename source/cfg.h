@@ -42,38 +42,11 @@ extern "C"
 #define CFG_ALIGN_MIDDLE 5
 
 extern char *cfg_path;
-//extern char *cfg_images_path;
 
 struct CFG
 {
-//	char *background;
-//	short covers;
-//	short simple;
-//	short video;
-//	short language;
-//	short ocarina;
-//	short vipatch;
-//	short home;
-//	short download;
-//	short installdownload;
-//	short hidesettingmenu;
-//	short savesettings;
 	short widescreen;
-	short parentalcontrol;
-//	short maxcharacters;
-	short godmode;
-    short xflip;
-	short wsprompt;
-	char unlockCode[20];
-	char covers_path[100];
 	char theme_path[100];
-	char disc_path[100];
-	char titlestxt_path[100];
-	char language_path[100];
-	char oggload_path[100];
-	char ogg_path[150];
-	char update_path[150];
-	short keyset;
 };
 
 
@@ -355,6 +328,16 @@ struct SSettings {
 	int     wiilight;
 	int		gameDisplay;
 	int     patchcountrystrings;
+	short	godmode;
+	char	covers_path[100];
+	char	theme_path[100];
+	char	wtheme_path[100];
+	char	disc_path[100];
+	char	titlestxt_path[100];
+	char	language_path[100];
+	char	oggload_path[100];
+	char	ogg_path[150];
+	char	update_path[150];
 };
 
 void CFG_LoadGlobal(void);

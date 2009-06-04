@@ -103,19 +103,19 @@ GuiGameGrid::GuiGameGrid(int w, int h, struct discHdr * l, int gameCnt, const ch
 				snprintf (ID,sizeof(ID),"%c%c%c", header->id[0], header->id[1], header->id[2]);
 				snprintf (IDfull,sizeof(IDfull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
 
-				snprintf(imgPath, sizeof(imgPath), "%s%s.png", CFG.covers_path, IDfull);
+				snprintf(imgPath, sizeof(imgPath), "%s%s.png", Settings.covers_path, IDfull);
 				cover[i] = new GuiImageData(imgPath,0); //load short id
 				if (!cover[i]->GetImage()) //if could not load the short id image
 				{
 					delete cover[i];
 					cover[i] = NULL;
-					snprintf(imgPath, sizeof(imgPath), "%s%s.png", CFG.covers_path, ID);
+					snprintf(imgPath, sizeof(imgPath), "%s%s.png", Settings.covers_path, ID);
 					cover[i] = new GuiImageData(imgPath, 0); //load full id image
 					if (!cover[i]->GetImage())
 					{
 						delete cover[i];
 						cover[i] = NULL;
-						snprintf(imgPath, sizeof(imgPath), "%snoimage.png", CFG.covers_path);
+						snprintf(imgPath, sizeof(imgPath), "%snoimage.png", Settings.covers_path);
 						cover[i] = new GuiImageData(imgPath, nocover_png); //load no image
 					}
 				}
@@ -364,19 +364,19 @@ void GuiGameGrid::Update(GuiTrigger * t)
             snprintf (ID,sizeof(ID),"%c%c%c", header->id[0], header->id[1], header->id[2]);
             snprintf (IDfull,sizeof(IDfull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
 
-            snprintf(imgPath, sizeof(imgPath), "%s%s.png", CFG.covers_path, IDfull);
+            snprintf(imgPath, sizeof(imgPath), "%s%s.png", Settings.covers_path, IDfull);
             cover[i] = new GuiImageData(imgPath,0); //load short id
 				if (!cover[i]->GetImage()) //if could not load the short id image
 				{
 					delete cover[i];
 					cover[i] = NULL;
-					snprintf(imgPath, sizeof(imgPath), "%s%s.png", CFG.covers_path, ID);
+					snprintf(imgPath, sizeof(imgPath), "%s%s.png", Settings.covers_path, ID);
 					cover[i] = new GuiImageData(imgPath, 0); //load full id image
 					if (!cover[i]->GetImage())
 					{
 						delete cover[i];
 						cover[i] = NULL;
-						snprintf(imgPath, sizeof(imgPath), "%snoimage.png", CFG.covers_path);
+						snprintf(imgPath, sizeof(imgPath), "%snoimage.png", Settings.covers_path);
 						cover[i] = new GuiImageData(imgPath, nocover_png); //load no image
 					}
 				}
@@ -421,19 +421,19 @@ void GuiGameGrid::Update(GuiTrigger * t)
 				snprintf (ID,sizeof(ID),"%c%c%c", header->id[0], header->id[1], header->id[2]);
 				snprintf (IDfull,sizeof(IDfull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
 
-				snprintf(imgPath, sizeof(imgPath), "%s%s.png", CFG.covers_path, IDfull);
+				snprintf(imgPath, sizeof(imgPath), "%s%s.png", Settings.covers_path, IDfull);
 				cover[i] = new GuiImageData(imgPath,0); //load short id
 				if (!cover[i]->GetImage()) //if could not load the short id image
 				{
 					delete cover[i];
 					cover[i] = NULL;
-					snprintf(imgPath, sizeof(imgPath), "%s%s.png", CFG.covers_path, ID);
+					snprintf(imgPath, sizeof(imgPath), "%s%s.png", Settings.covers_path, ID);
 					cover[i] = new GuiImageData(imgPath, 0); //load full id image
 					if (!cover[i]->GetImage())
 					{
 						delete cover[i];
 						cover[i] = NULL;
-						snprintf(imgPath, sizeof(imgPath), "%snoimage.png", CFG.covers_path);
+						snprintf(imgPath, sizeof(imgPath), "%snoimage.png", Settings.covers_path);
 						cover[i] = new GuiImageData(imgPath, nocover_png); //load no image
 					}
 				}
@@ -497,19 +497,19 @@ void GuiGameGrid::Reload(struct discHdr * l, int count)
             snprintf (ID,sizeof(ID),"%c%c%c", header->id[0], header->id[1], header->id[2]);
             snprintf (IDfull,sizeof(IDfull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
 
-            snprintf(imgPath, sizeof(imgPath), "%s%s.png", CFG.covers_path, IDfull);
+            snprintf(imgPath, sizeof(imgPath), "%s%s.png", Settings.covers_path, IDfull);
             cover[i] = new GuiImageData(imgPath,0); //load short id
 				if (!cover[i]->GetImage()) //if could not load the short id image
 				{
 					delete cover[i];
 					cover[i] = NULL;
-					snprintf(imgPath, sizeof(imgPath), "%s%s.png", CFG.covers_path, ID);
+					snprintf(imgPath, sizeof(imgPath), "%s%s.png", Settings.covers_path, ID);
 					cover[i] = new GuiImageData(imgPath, 0); //load full id image
 					if (!cover[i]->GetImage())
 					{
 						delete cover[i];
 						cover[i] = NULL;
-						snprintf(imgPath, sizeof(imgPath), "%snoimage.png", CFG.covers_path);
+						snprintf(imgPath, sizeof(imgPath), "%snoimage.png", Settings.covers_path);
 						cover[i] = new GuiImageData(imgPath, nocover_png); //load no image
 					}
 				}

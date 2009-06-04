@@ -115,15 +115,15 @@ GuiGameCarousel::GuiGameCarousel(int w, int h, struct discHdr * l, int count, co
 		snprintf (ID,sizeof(ID),"%c%c%c", header->id[0], header->id[1], header->id[2]);
 		snprintf (IDfull,sizeof(IDfull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
 
-		snprintf(imgPath, sizeof(imgPath), "%s%s.png", CFG.covers_path, IDfull); //Load full id image
+		snprintf(imgPath, sizeof(imgPath), "%s%s.png", Settings.covers_path, IDfull); //Load full id image
 		cover[i] = new GuiImageData(imgPath,0);
 		if (!cover[i]->GetImage()) {
 			delete cover[i];
-			snprintf(imgPath, sizeof(imgPath), "%s%s.png", CFG.covers_path, ID); //Load short id image
+			snprintf(imgPath, sizeof(imgPath), "%s%s.png", Settings.covers_path, ID); //Load short id image
 			cover[i] = new GuiImageData(imgPath, 0);
 			if (!cover[i]->GetImage()) {
 				delete cover[i];
-				snprintf(imgPath, sizeof(imgPath), "%snoimage.png", CFG.covers_path); //Load no image
+				snprintf(imgPath, sizeof(imgPath), "%snoimage.png", Settings.covers_path); //Load no image
 				cover[i] = new GuiImageData(imgPath, nocover_png);
 			}
 		}
@@ -458,15 +458,15 @@ void GuiGameCarousel::Reload(struct discHdr * l, int count)
 		snprintf (ID,sizeof(ID),"%c%c%c", header->id[0], header->id[1], header->id[2]);
 		snprintf (IDfull,sizeof(IDfull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
 
-		snprintf(imgPath, sizeof(imgPath), "%s%s.png", CFG.covers_path, IDfull); //Load full id image
+		snprintf(imgPath, sizeof(imgPath), "%s%s.png", Settings.covers_path, IDfull); //Load full id image
 		cover[i] = new GuiImageData(imgPath,0);
 		if (!cover[i]->GetImage()) {
 			delete cover[i];
-			snprintf(imgPath, sizeof(imgPath), "%s%s.png", CFG.covers_path, ID); //Load short id image
+			snprintf(imgPath, sizeof(imgPath), "%s%s.png", Settings.covers_path, ID); //Load short id image
 			cover[i] = new GuiImageData(imgPath, 0);
 			if (!cover[i]->GetImage()) {
 				delete cover[i];
-				snprintf(imgPath, sizeof(imgPath), "%snoimage.png", CFG.covers_path); //Load no image
+				snprintf(imgPath, sizeof(imgPath), "%snoimage.png", Settings.covers_path); //Load no image
 				cover[i] = new GuiImageData(imgPath, nocover_png);
 			}
 		}

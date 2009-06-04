@@ -7,36 +7,16 @@
 #include <ogcsys.h>
 #include "cfg.h"
 #include "language.h"
-/*<<<<<<< .mine
-//#include "language.c"
-extern void language_set();
-extern void lang_default();
-extern void language_set();
-extern char* strcopy();
-=======
 
->>>>>>> .r348*/
 struct SSettings Settings;
-//struct SSettings2 Settings2;
+
 
 
 char *cfg_path = "SD:/apps/usbloader/";
-//char *setting_path = "SD:/apps/usbloader/GXGameSettings.cfg";
+
 char current_path[100];
 
 /* configurable fields */
-
-/* default */
-//int ENTRIES_PER_PAGE = 12;
-//int MAX_CHARACTERS   = 37;
-//int CONSOLE_XCOORD   = 260;
-//int CONSOLE_YCOORD   = 30;
-//int CONSOLE_WIDTH    = 340;
-//int CONSOLE_HEIGHT   = 290;
-//int CONSOLE_FG_COLOR = 15;
-//int CONSOLE_BG_COLOR = 0;
-//int COVER_XCOORD     = 28;
-//int COVER_YCOORD     = 105;
 
 //define variables
 
@@ -245,107 +225,127 @@ void CFG_Default(int widescreen) // -1 = non forced Mode
 		snprintf(CFG.theme_path, sizeof(CFG.theme_path), "SD:/theme/");
 	}
 
-	snprintf(CFG.covers_path, sizeof(CFG.covers_path), "SD:/images/"); //default image path
-	snprintf(CFG.disc_path, sizeof(CFG.disc_path), "SD:/images/disc/");
-	snprintf(CFG.titlestxt_path, sizeof(CFG.titlestxt_path), "SD:/config/");//default path for disc images
-	snprintf(CFG.unlockCode, sizeof(CFG.unlockCode), "ab121b");		// default password
-	snprintf(CFG.language_path, sizeof(CFG.language_path), "SD:/config/language/");
-	snprintf(CFG.oggload_path, sizeof(CFG.oggload_path), "SD:/config/backgroundmusic/");
-    snprintf(CFG.update_path, sizeof(CFG.update_path), "SD:/apps/usbloader_gx/");
-    sprintf(CFG.ogg_path, "notset");
+	if (widescreen == -1)
+	{
+		snprintf(Settings.covers_path, sizeof(Settings.covers_path), "SD:/images/"); //default image path
+		snprintf(Settings.disc_path, sizeof(Settings.disc_path), "SD:/images/disc/");
+		snprintf(Settings.titlestxt_path, sizeof(Settings.titlestxt_path), "SD:/config/");//default path for disc images
+		snprintf(Settings.unlockCode, sizeof(Settings.unlockCode), "ab121b");		// default password
+		snprintf(Settings.language_path, sizeof(Settings.language_path), "SD:/config/language/");
+		snprintf(Settings.oggload_path, sizeof(Settings.oggload_path), "SD:/config/backgroundmusic/");
+		snprintf(Settings.update_path, sizeof(Settings.update_path), "SD:/apps/usbloader_gx/");
+		sprintf(Settings.ogg_path, "notset");
 
-	CFG.parentalcontrol = 0;
-//	CFG.maxcharacters = 38;
-	CFG.godmode = 0;
-	CFG.xflip = 0;
-	CFG.wsprompt = 0;
-
-	//all alignments are left top here
-	THEME.selection_x = 200;
-	THEME.selection_y = 49;//40;
-	THEME.selection_w = 396;
-	THEME.selection_h = 280;
-	THEME.batteryUnused = 70;
-	THEME.gamegrid_w = 640;
-	THEME.gamegrid_h = 400;
-	THEME.gamegrid_x = 0;
-	THEME.gamegrid_y = 20;
-	THEME.gamecarousel_w = 640;
-	THEME.gamecarousel_h = 400;
-	THEME.gamecarousel_x = 0;
-	THEME.gamecarousel_y = -20;
-	THEME.clock_r = 138;
-	THEME.clock_g = 138;
-	THEME.clock_b = 138;
-	THEME.settingsTxt_r = 0; 
-	THEME.settingsTxt_g = 0;
-	THEME.settingsTxt_b = 0;
-	THEME.cover_x = 26;
-	THEME.cover_y = 55;
-	THEME.showID = 1;
-//	THEME.maxcharacters = 36;
-	THEME.id_x = 68;
-	THEME.id_y = 305;
-	THEME.region_x = 68;
-	THEME.region_y = 30;
-	THEME.power_x = 576;
-	THEME.power_y = 355;
-	THEME.home_x = 485;//215;
-	THEME.home_y = 367;
-	THEME.setting_x = 60;//-210
-	THEME.setting_y = 367;
-	THEME.showHDD = -1; //default, non-force mode
-	THEME.showGameCnt = -1; //default, non-force mode
-	THEME.showToolTip = 1; //1 means use settings, 0 means force turn off
-	THEME.install_x = 16;//-280
-	THEME.install_y = 355;
-	THEME.showBattery = 1;
-	THEME.showRegion = 1;
-	THEME.hddInfo_x = 0;
-	THEME.hddInfo_y = 410;
-	THEME.hddInfoAlign = CFG_ALIGN_CENTRE;
-	THEME.gameCnt_x = 0;
-	THEME.gameCnt_y = 430;
-	THEME.gameCntAlign = CFG_ALIGN_CENTRE;
-	THEME.battery1_x = 245;
-	THEME.battery1_y = 400;
-	THEME.battery2_x = 335;
-	THEME.battery2_y = 400;
-	THEME.battery3_x = 245;
-	THEME.battery3_y = 425;
-	THEME.battery4_x = 335;
-	THEME.battery4_y = 425;
-	THEME.info_r = 63;
-	THEME.info_g = 154;
-	THEME.info_b = 192;
-	THEME.prompttxt_r = 0;
-	THEME.prompttxt_g = 0;
-	THEME.prompttxt_b = 0;
-	THEME.clock_x = 0;
-	THEME.clock_y = 335;//330;
-	THEME.clockAlign = CFG_ALIGN_CENTRE;
-	THEME.sdcard_x = 160;
-	THEME.sdcard_y = 390;
-	THEME.gameText_r = 0;
-	THEME.gameText_g = 0;
-	THEME.gameText_b = 0;
-	THEME.pagesize = 9;
-	THEME.favorite_x = 4;
-	THEME.favorite_y = 13;
-	THEME.abc_x = 36;
-	THEME.abc_y = 13;
-	THEME.list_x = 100;
-	THEME.list_y = 13;
-	THEME.grid_x = 132;
-	THEME.grid_y = 13;
-	THEME.carousel_x = 164;
-	THEME.carousel_y = 13;
-	THEME.count_x = 68;
-	THEME.count_y = 13;
-	THEME.sortBarOffset = 100;
+		//all alignments are left top here
+		THEME.selection_x = 200;
+		THEME.selection_y = 49;//40;
+		THEME.selection_w = 396;
+		THEME.selection_h = 280;
+		THEME.batteryUnused = 70;
+		THEME.gamegrid_w = 640;
+		THEME.gamegrid_h = 400;
+		THEME.gamegrid_x = 0;
+		THEME.gamegrid_y = 20;
+		THEME.gamecarousel_w = 640;
+		THEME.gamecarousel_h = 400;
+		THEME.gamecarousel_x = 0;
+		THEME.gamecarousel_y = -20;
+		THEME.clock_r = 138;
+		THEME.clock_g = 138;
+		THEME.clock_b = 138;
+		THEME.settingsTxt_r = 0; 
+		THEME.settingsTxt_g = 0;
+		THEME.settingsTxt_b = 0;
+		THEME.cover_x = 26;
+		THEME.cover_y = 55;
+		THEME.showID = 1;
+	//	THEME.maxcharacters = 36;
+		THEME.id_x = 68;
+		THEME.id_y = 305;
+		THEME.region_x = 68;
+		THEME.region_y = 30;
+		THEME.power_x = 576;
+		THEME.power_y = 355;
+		THEME.home_x = 485;//215;
+		THEME.home_y = 367;
+		THEME.setting_x = 60;//-210
+		THEME.setting_y = 367;
+		THEME.showHDD = -1; //default, non-force mode
+		THEME.showGameCnt = -1; //default, non-force mode
+		THEME.showToolTip = 1; //1 means use settings, 0 means force turn off
+		THEME.install_x = 16;//-280
+		THEME.install_y = 355;
+		THEME.showBattery = 1;
+		THEME.showRegion = 1;
+		THEME.hddInfo_x = 0;
+		THEME.hddInfo_y = 410;
+		THEME.hddInfoAlign = CFG_ALIGN_CENTRE;
+		THEME.gameCnt_x = 0;
+		THEME.gameCnt_y = 430;
+		THEME.gameCntAlign = CFG_ALIGN_CENTRE;
+		THEME.battery1_x = 245;
+		THEME.battery1_y = 400;
+		THEME.battery2_x = 335;
+		THEME.battery2_y = 400;
+		THEME.battery3_x = 245;
+		THEME.battery3_y = 425;
+		THEME.battery4_x = 335;
+		THEME.battery4_y = 425;
+		THEME.info_r = 63;
+		THEME.info_g = 154;
+		THEME.info_b = 192;
+		THEME.prompttxt_r = 0;
+		THEME.prompttxt_g = 0;
+		THEME.prompttxt_b = 0;
+		THEME.clock_x = 0;
+		THEME.clock_y = 335;//330;
+		THEME.clockAlign = CFG_ALIGN_CENTRE;
+		THEME.sdcard_x = 160;
+		THEME.sdcard_y = 390;
+		THEME.gameText_r = 0;
+		THEME.gameText_g = 0;
+		THEME.gameText_b = 0;
+		THEME.pagesize = 9;
+		THEME.favorite_x = 4;
+		THEME.favorite_y = 13;
+		THEME.abc_x = 36;
+		THEME.abc_y = 13;
+		THEME.list_x = 100;
+		THEME.list_y = 13;
+		THEME.grid_x = 132;
+		THEME.grid_y = 13;
+		THEME.carousel_x = 164;
+		THEME.carousel_y = 13;
+		THEME.count_x = 68;
+		THEME.count_y = 13;
+		THEME.sortBarOffset = 100;
+	}
 }
 
-
+void Global_Default(void)
+{
+	Settings.video = discdefault;
+	Settings.vpatch = off;
+	Settings.language = ConsoleLangDefault;
+	Settings.ocarina = off;
+	Settings.hddinfo = hr12;
+	Settings.sinfo = ((THEME.showID) ? GameID : Neither);
+	Settings.rumble = RumbleOn;
+	if (THEME.showRegion)
+	{
+		Settings.sinfo = ((Settings.sinfo == GameID) ? Both : GameRegion);
+	}
+	Settings.volume = v80;
+	Settings.tooltips = TooltipsOn;
+	snprintf(Settings.unlockCode, sizeof(Settings.unlockCode), "ab121b");
+	Settings.parentalcontrol = 0;
+	Settings.cios = ios249;
+	Settings.xflip = no;
+	Settings.qboot = no;
+	Settings.unicodefix = 0;
+	Settings.wiilight = 1;
+	Settings.patchcountrystrings = 0;
+}
 
 
 char *cfg_get_title(u8 *id)
@@ -442,61 +442,14 @@ void widescreen_set(char *name, char *val)
 	short widescreen;
 	if (cfg_bool("widescreen", &widescreen) && CFG.widescreen != widescreen)
 		CFG_Default(widescreen); //reset default when forced an other Screenmode
-/*
-	if (cfg_bool("widescreen", &CFG.widescreen)) //reset default
-	{
-		if (CFG.widescreen) {
-//			snprintf(CFG.covers_path, sizeof(CFG.covers_path), "SD:/wimages/");
-			snprintf(CFG.theme_path, sizeof(CFG.theme_path), "SD:/wtheme/");
-		}
-		else
-		{
-//			snprintf(CFG.covers_path, sizeof(CFG.covers_path), "SD:/images/");
-			snprintf(CFG.theme_path, sizeof(CFG.theme_path), "SD:/theme/");
-		}
-	}
-*/
 }
 
 
 
-void cfg_set(char *name, char *val)
+void path_set(char *name, char *val)
 {
 	cfg_name = name;
 	cfg_val = val;
-/*
-	if (!CFG.widescreen &&(strcmp(name, "images_path") == 0)) {
-		strcopy(CFG.images_path, val, sizeof(CFG.images_path));
-		snprintf(bg_path, sizeof(bg_path), "%sbg.png", CFG.images_path); //reset path
-		return;
-	}
-
-	if (CFG.widescreen && strcmp(name, "wimages_path") == 0) {
-		strcopy(CFG.images_path, val, sizeof(CFG.images_path));
-		snprintf(bg_path, sizeof(bg_path), "%swbg.png", CFG.images_path); //reset path
-		return;
-	}
-
-	if (cfg_map_auto("video", map_video, &CFG.video))
-		return;
-
-	if (cfg_map_auto("language", map_language, &CFG.language))
-		return;
-
-	if (cfg_map_auto("layout", map_layout, &CFG.layout)) {
-		cfg_layout();
-	}
-
-	cfg_bool("ocarina", &CFG.ocarina);
-	cfg_bool("covers", &CFG.covers);
-	cfg_bool("download",  &CFG.download);
-	cfg_bool("savesettings", &CFG.savesettings);
-	cfg_bool("installdownload", &CFG.installdownload);
-	cfg_bool("hidesettingmenu", &CFG.hidesettingmenu);
-	cfg_map("home", "exit",   &CFG.home, CFG_HOME_EXIT);
-	cfg_map("home", "reboot", &CFG.home, CFG_HOME_REBOOT);
-	cfg_int("simple", &CFG.simple, 3);
-*/
 
 	// if these are defined in txt file, use them.  otherwise use defaults
 
@@ -505,49 +458,43 @@ void cfg_set(char *name, char *val)
 		return;
 	}
 
-
 	if (CFG.widescreen && strcmp(name, "wtheme_path") == 0) { // if in 16:9
 		strcopy(CFG.theme_path, val, sizeof(CFG.theme_path));
 		return;
 	}
 
 	if (strcmp(name, "cover_path") == 0) {
-		strcopy(CFG.covers_path, val, sizeof(CFG.covers_path));
+		strcopy(Settings.covers_path, val, sizeof(Settings.covers_path));
 		return;
 	}
 
 	if (strcmp(name, "disc_path") == 0) {
-		strcopy(CFG.disc_path, val, sizeof(CFG.disc_path));
+		strcopy(Settings.disc_path, val, sizeof(Settings.disc_path));
 		return;
 	}
     if (strcmp(name, "titlestxt_path") == 0) {
-		strcopy(CFG.titlestxt_path, val, sizeof(CFG.titlestxt_path));
+		strcopy(Settings.titlestxt_path, val, sizeof(Settings.titlestxt_path));
 		return;
 	}
 	if (strcmp(name, "language_path") == 0) {
-		strcopy(CFG.language_path, val, sizeof(CFG.language_path));
+		strcopy(Settings.language_path, val, sizeof(Settings.language_path));
 		return;
 	}
 	if (strcmp(name, "update_path") == 0) {
-		strcopy(CFG.update_path, val, sizeof(CFG.update_path));
+		strcopy(Settings.update_path, val, sizeof(Settings.update_path));
 		return;
 	}
 	if (strcmp(name, "oggload_path") == 0) {
-		strcopy(CFG.oggload_path, val, sizeof(CFG.oggload_path));
+		strcopy(Settings.oggload_path, val, sizeof(Settings.oggload_path));
 		return;
 	}
     if (strcmp(name, "ogg_path") == 0) {
-		strcopy(CFG.ogg_path, val, sizeof(CFG.ogg_path));
+		strcopy(Settings.ogg_path, val, sizeof(Settings.ogg_path));
 		return;
 	}
 
-	cfg_int("parentalcontrol", &CFG.parentalcontrol, 4);
-	cfg_bool("godmode", &CFG.godmode);
+	return;
 
-	if (strcmp(name, "unlock_code") == 0) {
-		strcopy(CFG.unlockCode, val, sizeof(CFG.unlockCode));
-		return;
-	}
 }
 
 
@@ -1015,6 +962,10 @@ void global_cfg_set(char *name, char *val)
 			}
 		return;
 	}
+
+	cfg_bool("godmode", &Settings.godmode);
+
+	return;
 }
 
 // split line to part1 delimiter part2
@@ -1213,26 +1164,26 @@ bool cfg_save_global()// save global settings
 	fprintf(f, "qboot = %d\n ", Settings.qboot);
 	fprintf(f, "unicodefix = %d\n ", Settings.unicodefix);
 	fprintf(f, "wsprompt = %d\n", Settings.wsprompt);
-	fprintf(f, "parentalcontrol = %d\n ", CFG.parentalcontrol);
-	fprintf(f, "cover_path = %s\n ", CFG.covers_path);
+	fprintf(f, "parentalcontrol = %d\n ", Settings.parentalcontrol);
+	fprintf(f, "cover_path = %s\n ", Settings.covers_path);
 	if(CFG.widescreen) {
 	fprintf(f, "wtheme_path = %s\n ", CFG.theme_path);
 	} else {
 	fprintf(f, "theme_path = %s\n ", CFG.theme_path);
 	}
-	fprintf(f, "disc_path = %s\n ", CFG.disc_path);
-	fprintf(f, "language_path = %s\n ", CFG.language_path);
-	fprintf(f, "oggload_path = %s\n ", CFG.oggload_path);
-	fprintf(f, "titlestxt_path = %s\n ", CFG.titlestxt_path);
+	fprintf(f, "disc_path = %s\n ", Settings.disc_path);
+	fprintf(f, "language_path = %s\n ", Settings.language_path);
+	fprintf(f, "oggload_path = %s\n ", Settings.oggload_path);
+	fprintf(f, "titlestxt_path = %s\n ", Settings.titlestxt_path);
 	if(!strcmp("", Settings.unlockCode)) {
-	fprintf(f, "godmode = %d\n ", CFG.godmode);
+	fprintf(f, "godmode = %d\n ", Settings.godmode);
 	} else {
     fprintf(f, "godmode = %d\n ", 0);
 	}
-	fprintf(f, "ogg_path = %s\n ", CFG.ogg_path);
+	fprintf(f, "ogg_path = %s\n ", Settings.ogg_path);
 	fprintf(f, "wiilight = %d\n ", Settings.wiilight);
 	fprintf(f, "gameDisplay = %d\n ", Settings.gameDisplay);
-	fprintf(f, "update_path = %s\n ", CFG.update_path);
+	fprintf(f, "update_path = %s\n ", Settings.update_path);
 	fprintf(f, "patchcountrystrings = %d\n ", Settings.patchcountrystrings);
 	fclose(f);
 	return true;
@@ -1560,22 +1511,15 @@ void CFG_Load(void)
 	snprintf(pathname, sizeof(pathname), "SD:/config/GXGlobal.cfg");
 
 	cfg_parsefile(pathname, &widescreen_set); //first set widescreen
-	cfg_parsefile(pathname, &cfg_set); //then set config and layout options
+	cfg_parsefile(pathname, &path_set); //then set config and layout options
 
 	snprintf(pathname, sizeof(pathname), "%sGXtheme.cfg", CFG.theme_path);
-	cfg_parsefile(pathname, &theme_set); //finally set console information
+	cfg_parsefile(pathname, &theme_set); //finally set theme information
 
-	snprintf(pathname, sizeof(pathname), CFG.language_path);
+	snprintf(pathname, sizeof(pathname), Settings.language_path);
 	cfg_parsefile(pathname, &language_set);
 
-//	if (!ret)
-//	{
-//		cfg_parsefile("SD:/config.txt", &widescreen_set);
-//		cfg_parsefile("SD:/config.txt", &cfg_set);
-//		cfg_parsefile("SD:/config.txt", &console_set);
-//	}
-
-	snprintf(pathname, sizeof(pathname), "%stitles.txt", CFG.titlestxt_path);
+	snprintf(pathname, sizeof(pathname), "%stitles.txt", Settings.titlestxt_path);
 	cfg_parsefile(pathname, &title_set);
 	
 	cfg_parsefile("SD:/config/GXGameSettings.cfg", &parental_set);
@@ -1584,48 +1528,12 @@ void CFG_Load(void)
 	cfg_load_games();
 	cfg_load_game_num();
 
-//	cfg_parsearg(argc, argv);
-}
-/*
-<<<<<<< .mine
-	//set app path
-//	chdir_app(argv[0]);
-
-	CFG_Default(-1); // set defaults non forced
-
-	snprintf(pathname, sizeof(pathname), "SD:/config/GXGlobal.cfg");
-
-	cfg_parsefile(pathname, &widescreen_set); //first set widescreen
-	cfg_parsefile(pathname, &cfg_set); //then set config and layout options
-
-	snprintf(pathname, sizeof(pathname), "%sGXtheme.cfg", CFG.theme_path);
-	cfg_parsefile(pathname, &theme_set); //finally set console information
-
-	snprintf(pathname, sizeof(pathname), "%slanguage.txt",CFG.language_path);
-	cfg_parsefile(pathname, &language_set);
-
-
-//	if (!ret)
-//	{
-//		cfg_parsefile("SD:/config.txt", &widescreen_set);
-//		cfg_parsefile("SD:/config.txt", &cfg_set);
-//		cfg_parsefile("SD:/config.txt", &console_set);
-//	}
-
-	snprintf(pathname, sizeof(pathname), "SD:/config/titles.txt");
-	cfg_parsetitlefile(pathname, &title_set);
-
-	// load per-game settings
-	cfg_load_games();
-	lang_default();
-	language_set();
-
+	Global_Default(); //global default depends on theme information
+	CFG_LoadGlobal();
 
 //	cfg_parsearg(argc, argv);
 }
 
-=======
->>>>>>> .r348*/
 void CFG_LoadGlobal(void)
 {
 	cfg_parsefile("SD:/config/GXGlobal.cfg", &global_cfg_set);
