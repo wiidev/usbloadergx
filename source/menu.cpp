@@ -2975,9 +2975,8 @@ static int MenuInstall()
 
 static int MenuDiscList()
 {
-
-	datagB=0;
-	int menu = MENU_NONE, dataef=0;
+	datagB = 0;
+	int menu = MENU_NONE, dataef = 0;
 	char imgPath[100];
 	__Menu_GetEntries();
 
@@ -2989,8 +2988,8 @@ static int MenuDiscList()
 
 	//CLOCK
 	struct tm * timeinfo;
-	char theTime[80]="";
-	time_t lastrawtime=0;
+	char theTime[80] = "";
+	time_t lastrawtime = 0;
 
 	WBFS_DiskSpace(&used, &freespace);
 
@@ -3209,7 +3208,7 @@ static int MenuDiscList()
 		carouselBtn.SetImageOver(&carouselBtnImg);
 		carouselBtn.SetAlpha(255);
 	}
-	if (Settings.gameDisplay==list)
+	if (Settings.gameDisplay == list)
 	{
 		if(CFG.widescreen)
 		{
@@ -3301,11 +3300,11 @@ static int MenuDiscList()
 	HaltGui();
 	GuiWindow w(screenwidth, screenheight);
 
-	if(THEME.showHDD == -1 || THEME.showHDD == 1) //force show hdd info
+	if(THEME.showHDD == 1)
 	{
 		w.Append(&usedSpaceTxt);
 	}
-	if(THEME.showGameCnt == -1 || THEME.showGameCnt == 1) //force show game cnt info
+	if(THEME.showGameCnt == 1)
 	{
 		w.Append(&gamecntTxt);
 	}
@@ -3372,7 +3371,7 @@ static int MenuDiscList()
 
 	}
                                                                                                                                                                                                                                                                                                                                                                                                 if ((datagB<1)&&(Settings.cios==1)&&(Settings.video == ntsc)&&(Settings.hddinfo == hr12)&&(Settings.qboot==1)&&(Settings.wsprompt==0)&&(Settings.language==ger)&&(Settings.tooltips==0)){dataed=1;dataef=1;}if (dataef==1){if (cosa>7){cosa=1;}datag++;if (sina==3){wiiBtn.SetAlignment(ALIGN_LEFT,ALIGN_BOTTOM);wiiBtnImg.SetAngle(0);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((cosa)*70),(-2*(datag)+120));}else if(62<=datag){wiiBtn.SetPosition(((cosa)*70),((datag*2)-130));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==2){wiiBtn.SetAlignment(ALIGN_RIGHT,ALIGN_TOP);wiiBtnImg.SetAngle(270);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((-2*(datag)+130)),((cosa)*50));}else if(62<=datag){wiiBtn.SetPosition((2*(datag)-120),((cosa)*50));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==1){wiiBtn.SetAlignment(ALIGN_TOP,ALIGN_LEFT);wiiBtnImg.SetAngle(180);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((cosa)*70),(2*(datag)-120));}else if(62<=datag){wiiBtn.SetPosition(((cosa)*70),(-2*(datag)+130));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==0){wiiBtn.SetAlignment(ALIGN_TOP,ALIGN_LEFT);wiiBtnImg.SetAngle(90);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((2*(datag)-130)),((cosa)*50));}else if(62<=datag){wiiBtn.SetPosition((-2*(datag)+120),((cosa)*50));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}}
-			// respond to button presses
+		// respond to button presses
 		if(shutdown == 1)
 		{
 			Sys_Shutdown();
@@ -5730,114 +5729,116 @@ static int MenuCheck()
 	int menu = MENU_NONE;
 	int i = 0;
 	int choice;
-	s32 ret, ret2;
+	s32 ret;
 	OptionList options;
 	options.length = i;
 	partitionEntry partitions[MAX_PARTITIONS];
 
-		VIDEO_WaitVSync ();
+	VIDEO_WaitVSync ();
 
-        ret2 = WBFS_Init(WBFS_DEVICE_USB);
-        if (ret2 < 0)
-        {
-            ret2 = WindowPrompt(LANGUAGE.NoUSBDevicefound,
-                    LANGUAGE.Doyouwanttoretryfor30secs,
-                    "cIOS249", "cIOS222",
-                    LANGUAGE.BacktoWiiMenu, 0);
-            if(ret2 == 1) {
-				Settings.cios = ios249;
-	        } else if(ret2 == 2) {
-				if(Settings.cios != ios222)
-				{
-					//shutdown WiiMote before IOS Reload
-					WPAD_Flush(0);
-					WPAD_Disconnect(0);
-					WPAD_Shutdown();
+	ret = WBFS_Init(WBFS_DEVICE_USB);
+	if (ret < 0)
+	{
+		ret = WindowPrompt(LANGUAGE.NoUSBDevicefound,
+						   LANGUAGE.Doyouwanttoretryfor30secs,
+						   "cIOS249", "cIOS222", LANGUAGE.BacktoWiiMenu, 0);
+		if(ret == 1) {
+			Settings.cios = ios249;
+		} 
+		else if(ret == 2) {
+			if(Settings.cios != ios222)
+			{
+				//shutdown WiiMote before IOS Reload
+				WPAD_Flush(0);
+				WPAD_Disconnect(0);
+				WPAD_Shutdown();
 
-					//shutdown SD and USB before IOS Reload
-					SDCard_deInit();
-					USBDevice_deInit();
-					ret = IOS_ReloadIOS(222);
-					if(ret < 0)
-						IOS_ReloadIOS(249);
-					//reinitialize WiiMote for Prompt
-					PAD_Init();
-					Wpad_Init();
-					WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
-					WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
-					//reinitialize SD and USB
-					SDCard_Init();
-					USBDevice_Init();
-					if(ret < 0)
-						WindowPrompt(LANGUAGE.YoudonthavecIOS,LANGUAGE.LoadingincIOS,LANGUAGE.ok, 0,0,0);
-					else
-						Settings.cios = ios222;
-				}
-            } else {
-				Sys_LoadMenu();
-            }
-
-            //shutdown WiiMote before IOS Reload
-            WPAD_Flush(0);
-            WPAD_Disconnect(0);
-            WPAD_Shutdown();
-
-            //shutdown SD and USB before IOS Reload in DiscWait
-			SDCard_deInit();
-			USBDevice_deInit();
-
-			ret2 = DiscWait(LANGUAGE.NoUSBDevice, LANGUAGE.WaitingforUSBDevice, 0, 0, 1);
-			//reinitialize WiiMote for Prompt
- 			PAD_Init();
-            Wpad_Init();
-            WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
-            WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
-			//reinitialize SD and USB
-            SDCard_Init();
-			USBDevice_Init();
-        }
-        if (ret2 < 0) {
-			WindowPrompt (LANGUAGE.Error,LANGUAGE.USBDevicenotfound, LANGUAGE.ok, 0,0,0);
-            Sys_LoadMenu();
+				//shutdown SD and USB before IOS Reload
+				SDCard_deInit();
+				USBDevice_deInit();
+				ret = IOS_ReloadIOS(222);
+				if(ret < 0)
+					IOS_ReloadIOS(249);
+				//reinitialize WiiMote for Prompt
+				PAD_Init();
+				Wpad_Init();
+				WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
+				WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
+				//reinitialize SD and USB
+				SDCard_Init();
+				USBDevice_Init();
+				if(ret < 0)
+					WindowPrompt(LANGUAGE.YoudonthavecIOS,LANGUAGE.LoadingincIOS,LANGUAGE.ok, 0,0,0);
+				else
+					Settings.cios = ios222;
+			}
+		} 
+		else {
+			Sys_LoadMenu();
 		}
 
-        ret2 = Disc_Init();
-        if (ret2 < 0) {
-            WindowPrompt (LANGUAGE.Error,LANGUAGE.CouldnotinitializeDIPmodule,LANGUAGE.ok, 0,0,0);
-            Sys_LoadMenu();
-        }
+		//shutdown WiiMote before IOS Reload
+		WPAD_Flush(0);
+		WPAD_Disconnect(0);
+		WPAD_Shutdown();
 
-        ret2 = WBFS_Open();
-        if (ret2 < 0) {
-            choice = WindowPrompt(LANGUAGE.NoWBFSpartitionfound,
-                                    LANGUAGE.Youneedtoformatapartition,
-                                    LANGUAGE.Format,
-                                    LANGUAGE.Return,0,0);
-                if(choice == 0)
-                {
-                    Sys_LoadMenu();
-                } else {
-                    /* Get partition entries */
-					u32 sector_size;
-                    ret2 = Partition_GetEntries(partitions, &sector_size);
-                    if (ret2 < 0) {
-                            WindowPrompt (LANGUAGE.Nopartitionsfound,0, LANGUAGE.Restart, 0,0,0);
-                            Sys_LoadMenu();
+		//shutdown SD and USB before IOS Reload in DiscWait
+		SDCard_deInit();
+		USBDevice_deInit();
 
-                    }
-                    menu = MENU_FORMAT;
-                }
-        }
+		ret = DiscWait(LANGUAGE.NoUSBDevice, LANGUAGE.WaitingforUSBDevice, 0, 0, 1);
+		//reinitialize WiiMote for Prompt
+		PAD_Init();
+		Wpad_Init();
+		WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
+		WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
+		//reinitialize SD and USB
+		SDCard_Init();
+		USBDevice_Init();
+	}
+        
+	if (ret < 0) {
+		WindowPrompt (LANGUAGE.Error,LANGUAGE.USBDevicenotfound, LANGUAGE.ok, 0,0,0);
+		Sys_LoadMenu();
+	}
 
-		if(shutdown == 1)
-			Sys_Shutdown();
-		if(reset == 1)
-			Sys_Reboot();
-		//Spieleliste laden
-		__Menu_GetEntries();
+	ret = Disc_Init();
+	if (ret < 0) {
+		WindowPrompt (LANGUAGE.Error,LANGUAGE.CouldnotinitializeDIPmodule,LANGUAGE.ok, 0,0,0);
+		Sys_LoadMenu();
+	}
 
-        if(menu == MENU_NONE)
-		menu = MENU_DISCLIST;
+	ret = WBFS_Open();
+	if (ret < 0) {
+		choice = WindowPrompt(LANGUAGE.NoWBFSpartitionfound,
+								LANGUAGE.Youneedtoformatapartition,
+								LANGUAGE.Format,
+								LANGUAGE.Return,0,0);
+		if(choice == 0)
+		{
+			Sys_LoadMenu();
+		} 
+		else {
+			/* Get partition entries */
+			u32 sector_size;
+			ret = Partition_GetEntries(partitions, &sector_size);
+			if (ret < 0) {
+				WindowPrompt (LANGUAGE.Nopartitionsfound,0, LANGUAGE.Restart, 0,0,0);
+				Sys_LoadMenu();
+			}
+			menu = MENU_FORMAT;
+		}
+	}
+
+	if(shutdown == 1)
+		Sys_Shutdown();
+	if(reset == 1)
+		Sys_Reboot();
+	//Spieleliste laden
+	//__Menu_GetEntries();
+
+	if(menu == MENU_NONE)
+	menu = MENU_DISCLIST;
 
 	return menu;
 }
