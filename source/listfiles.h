@@ -6,8 +6,7 @@ extern "C"
 {
 #endif
 
-char alldirfiles[300][70];
-
+bool findfile(const char * filename, const char * path);
 int GetFiles(char * filespath);
 
 

@@ -15,6 +15,14 @@
 /* Constants */
 #define CERTS_LEN	0x280
 
+//Wiilight stuff
+static vu32 *_wiilight_reg = (u32*)0xCD0000C0;
+void wiilight(int enable) {             // Toggle wiilight (thanks Bool for wiilight source)
+    u32 val = (*_wiilight_reg&~0x20);
+    if(enable && Settings.wiilight) val |= 0x20;
+    *_wiilight_reg=val;
+}
+
 /* Variables */
 static const char certs_fs[] ATTRIBUTE_ALIGN(32) = "/sys/cert.sys";
 u8 shutdown = 0;
@@ -87,7 +95,7 @@ int Sys_IosReload(int IOS)
     if(ret < 0) {
         return ret;
     }
- 
+
     if(IOS == 249 || IOS == 222 || IOS == 223) {
 		ret = WBFS_Init(WBFS_DEVICE_USB);
 		if(ret>=0)

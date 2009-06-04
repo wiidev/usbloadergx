@@ -253,7 +253,7 @@ void CFG_Default(int widescreen) // -1 = non forced Mode
 		THEME.clock_r = 138;
 		THEME.clock_g = 138;
 		THEME.clock_b = 138;
-		THEME.settingsTxt_r = 0; 
+		THEME.settingsTxt_r = 0;
 		THEME.settingsTxt_g = 0;
 		THEME.settingsTxt_b = 0;
 		THEME.cover_x = 26;
@@ -1521,7 +1521,7 @@ void CFG_Load(void)
 
 	snprintf(pathname, sizeof(pathname), "%stitles.txt", Settings.titlestxt_path);
 	cfg_parsefile(pathname, &title_set);
-	
+
 	cfg_parsefile("SD:/config/GXGameSettings.cfg", &parental_set);
 
 	// load per-game settings

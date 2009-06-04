@@ -10,20 +10,14 @@
 #define _MENU_H_
 
 #include <ogcsys.h>
+#include "main.h"
+#include "cfg.h"
 
-#ifdef __cplusplus
-//extern "C"
-//{
-#endif
 void InitGUIThreads(void);
 void ExitGUIThreads(void);
-#ifdef __cplusplus
-//}
-#endif
 
 int MainMenu (int menuitem);
-void wiilight(int enable);
-int GameSettings(struct discHdr *);
+
 enum
 {
 	MENU_EXIT = -1,

@@ -33,6 +33,7 @@ s32 WBFS_RemoveGame(u8 *);
 s32 WBFS_GameSize(u8 *, f32 *);
 s32 WBFS_DiskSpace(f32 *, f32 *);
 s32 WBFS_RenameGame(u8 *, const void *);
+f32 WBFS_EstimeGameSize(void);
 
 #ifdef __cplusplus
 }

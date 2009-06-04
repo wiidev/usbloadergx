@@ -1,6 +1,9 @@
 #ifndef _SYS_H_
 #define _SYS_H_
 
+
+void wiilight(int enable);
+
 #ifdef __cplusplus
 extern "C"
 //{

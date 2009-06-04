@@ -4,12 +4,36 @@
 #include <gccore.h>
 #include <fat.h>
 #include <sys/dir.h>
+#include <dirent.h>
 #include <unistd.h>
 
 #include "listfiles.h"
 
 
+char alldirfiles[300][70];
 char filename[80];
+
+bool findfile(const char * filename, const char * path)
+{
+DIR *dir;
+struct dirent *file;
+
+dir = opendir(path);
+
+char temp[11];
+while ((file = readdir(dir)))
+{
+	snprintf(temp,sizeof(temp),"%s",file->d_name);
+    if (!strncmpi(temp,filename,11))
+		{
+		//WindowPrompt(path, filename,"go" ,0);
+		closedir(dir);
+		return true;
+		}
+	}
+  closedir(dir);
+  return false;
+}
 
 
 s32 filenamescmp(const void *a, const void *b)
