@@ -63,10 +63,6 @@ int Net_Init(char *ip){
 	return TRUE;
 }
 
-// check for libfat.a from 1. Jun 2009
-extern int LibFat4USB_Loader_GX;
-int fatCheck = LibFat4USB_Loader_GX; // remove when libfat newer than 1. Jun 2009
-
 int
 main(int argc, char *argv[])
 {
