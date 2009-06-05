@@ -16,6 +16,8 @@ int USBDevice_Init()
 {
     return 0;
 	//closing all open Files write back the cache and then shutdown em!
+	__io_usbstorage.startup();
+
 	fatUnmount("USB:/");
 	//right now only mounts first partition
 	if (fatMount("USB", &__io_usbstorage, 0, CACHE, SECTORS)) {
@@ -29,6 +31,7 @@ void USBDevice_deInit()
     return;
 	//closing all open Files write back the cache and then shutdown em!
 	fatUnmount("USB:/");
+	__io_usbstorage.shutdown();
 }
 
 int isSdInserted()
@@ -39,6 +42,8 @@ int isSdInserted()
 int SDCard_Init()
 {
 	//closing all open Files write back the cache and then shutdown em!
+	__io_wiisd.startup();
+
 	fatUnmount("SD:/");
 	//right now only mounts first partition
 	if (fatMount("SD", &__io_wiisd, 0, CACHE, SECTORS))
@@ -50,4 +55,5 @@ void SDCard_deInit()
 {
 	//closing all open Files write back the cache and then shutdown em!
 	fatUnmount("SD:/");
+	__io_wiisd.shutdown();
 }

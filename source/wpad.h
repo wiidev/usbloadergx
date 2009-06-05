@@ -2,7 +2,6 @@
 #define _WPAD_H_
 
 #include <wiiuse/wpad.h>
-#include <ogc/pad.h>
 
 #ifdef __cplusplus
 extern "C"

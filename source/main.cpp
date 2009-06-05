@@ -96,11 +96,13 @@ main(int argc, char *argv[])
 
 	Sys_Init();
 
+	/** PAD_Init has to be before InitVideo don't move that **/
+    PAD_Init(); // initialize PAD/WPAD
+	Wpad_Init();
+
 	InitVideo(); // Initialise video
 	InitAudio(); // Initialize audio
 
-    PAD_Init(); // initialize PAD/WPAD
-	Wpad_Init();
 	WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
 	WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
 

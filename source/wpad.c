@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <ogcsys.h>
+#include <ogc/pad.h>
 
 #include "sys.h"
 #include "wpad.h"

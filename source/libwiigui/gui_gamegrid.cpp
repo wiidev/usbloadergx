@@ -464,7 +464,10 @@ void GuiGameGrid::Update(GuiTrigger * t)
 
 void GuiGameGrid::Reload(struct discHdr * l, int count)
 {
-	for(int i=0; i<pagesize; i++)
+	LOCK(this);
+
+	/**Removing old data **/
+    for(int i=0; i<pagesize; i++)
 	{
 		delete game[i];
 		delete coverImg[i];
@@ -475,7 +478,6 @@ void GuiGameGrid::Reload(struct discHdr * l, int count)
 	delete [] cover;
 	delete [] coverImg;
 
-	LOCK(this);
 	gameList = l;
 	gameCnt = count;
 	changed=0;
