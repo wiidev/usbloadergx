@@ -180,6 +180,11 @@ bool MenuOGG()
 	while(!returnhere)
 	{
 
+    if(shutdown == 1)
+		Sys_Shutdown();
+	if(reset == 1)
+        Sys_Reboot();
+
     if (backBtn.GetState() == STATE_CLICKED) {
             if(nothingchanged == 1 && countoggs > 0) {
             if(!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path)) {
@@ -188,6 +193,7 @@ bool MenuOGG()
                 bgMusic->PlayOggFile(Settings.ogg_path);
             }
             }
+            backBtn.ResetState();
 			break;
     }
 
@@ -424,6 +430,11 @@ int MenuLanguageSelect()
 
 	while(!returnhere)
 	{
+
+    if(shutdown == 1)
+		Sys_Shutdown();
+	if(reset == 1)
+        Sys_Reboot();
 
     if (backBtn.GetState() == STATE_CLICKED) {
 

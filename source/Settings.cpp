@@ -1,4 +1,3 @@
-#include <string.h>
 #include <unistd.h>
 
 #include "menu.h"
@@ -997,16 +996,19 @@ int MenuSettings()
                     optionBrowser2.SetEffect(EFFECT_FADE, 20);
 			        while(optionBrowser2.GetEffect() > 0) usleep(50);
 
+
                     char * oggfile;
-                    oggfile = strrchr(Settings.ogg_path, '/')+1;
 
                     while(!exit)
                     {
                         VIDEO_WaitVSync ();
 
-                        if(!strcmp("notset", Settings.ogg_path) || !strcmp("",Settings.oggload_path))
+                        bool returnhere = true;
+
+                        if(!strcmp("notset", Settings.ogg_path))
                             options2.SetValue(0, "%s", LANGUAGE.Standard);
                         else {
+                            oggfile = strrchr(Settings.ogg_path, '/')+1;
                             options2.SetValue(0, "%s", oggfile);
                         }
 
@@ -1066,7 +1068,6 @@ int MenuSettings()
                                     w.SetEffect(EFFECT_FADE, -20);
                                     while(w.GetEffect()>0) usleep(50);
                                     mainWindow->Remove(&w);
-                                    bool returnhere = true;
                                     while(returnhere)
                                         returnhere = MenuOGG();
                                     HaltGui();
