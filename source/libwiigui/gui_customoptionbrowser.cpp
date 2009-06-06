@@ -8,6 +8,7 @@
 
 #include "gui.h"
 #include "../wpad.h"
+#include "../main.h"
 #include "../cfg.h"
 #include "gui_customoptionbrowser.h"
 
@@ -77,10 +78,6 @@ void customOptionList::SetValue(int i, const char *format, ...)
 	}
 }
 
-
-
-//int vol;
-extern const int vol;
 /**
  * Constructor for the GuiCustomOptionBrowser class.
  */
@@ -102,7 +99,7 @@ GuiCustomOptionBrowser::GuiCustomOptionBrowser(int w, int h, customOptionList * 
 	trigA->SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
     trigHeldA = new GuiTrigger;
 	trigHeldA->SetHeldTrigger(-1, WPAD_BUTTON_A, PAD_BUTTON_A);
-	btnSoundClick = new GuiSound(button_click_pcm, button_click_pcm_size, SOUND_PCM, vol);
+	btnSoundClick = new GuiSound(button_click_pcm, button_click_pcm_size, SOUND_PCM, Settings.sfxvolume);
 
 	snprintf(imgPath, sizeof(imgPath), "%s%s", themePath, custombg);
 	bgOptions = new GuiImageData(imgPath, imagebg);
@@ -315,6 +312,14 @@ int GuiCustomOptionBrowser::GetSelectedOption()
 	return found;
 }
 
+void GuiCustomOptionBrowser::SetClickable(bool enable)
+{
+	for(int i = 0; i < size; i++)
+	{
+		optionBtn[i]->SetClickable(enable);
+	}
+}
+
 /****************************************************************************
  * FindMenuItem
  *
@@ -419,8 +424,10 @@ void GuiCustomOptionBrowser::Update(GuiTrigger * t)
 	if(state == STATE_DISABLED || !t)
 		return;
 
-	if(options->IsChanged())
+	if(options->IsChanged()) {
+		coL2 = 0;
 		UpdateListEntries();
+	}
 	int old_listOffset = listOffset;
 
 	// scrolldelay affects how fast the list scrolls

@@ -1,4 +1,5 @@
 #include <string.h>
+#include <unistd.h>
 
 #include "menu.h"
 #include "filelist.h"
@@ -10,6 +11,7 @@
 #include "fatmounter.h"
 #include "PromptWindows.h"
 #include "getentries.h"
+#include "SettingsPrompts.h"
 
 /*** Extern functions ***/
 extern void ResumeGui();
@@ -23,7 +25,6 @@ extern GuiImageData * pointer[4];
 extern GuiImageData * background;
 extern u8 shutdown;
 extern u8 reset;
-extern int vol;
 
 /****************************************************************************
  * MenuSettings
@@ -33,9 +34,19 @@ int MenuSettings()
 	int menu = MENU_NONE;
 	int ret;
 	int choice = 0;
+	bool exit = false;
 
-	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
-	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, vol);
+	enum {
+    FADE,
+	LEFT,
+	RIGHT
+    };
+
+	int slidedirection = FADE;
+
+	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
+	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
+    GuiSound btnClick1(button_click_pcm, button_click_pcm_size, SOUND_PCM, Settings.sfxvolume);
 
 	char imgPath[100];
 
@@ -43,14 +54,30 @@ int MenuSettings()
 	GuiImageData btnOutline(imgPath, button_dialogue_box_png);
 	snprintf(imgPath, sizeof(imgPath), "%ssettings_background.png", CFG.theme_path);
 	GuiImageData settingsbg(imgPath, settings_background_png);
-	snprintf(imgPath, sizeof(imgPath), "%stab_bg1.png", CFG.theme_path);
-	GuiImageData tab1(imgPath, tab_bg1_png);
-	snprintf(imgPath, sizeof(imgPath), "%stab_bg2.png", CFG.theme_path);
-	GuiImageData tab2(imgPath, tab_bg2_png);
-	snprintf(imgPath, sizeof(imgPath), "%stab_bg3.png", CFG.theme_path);
-	GuiImageData tab3(imgPath, tab_bg3_png);
-	snprintf(imgPath, sizeof(imgPath), "%supdateRev.png", CFG.theme_path);
-	GuiImageData updateRevImgData(imgPath, updateRev_png);
+
+	snprintf(imgPath, sizeof(imgPath), "%ssettings_title.png", CFG.theme_path);
+	GuiImageData MainButtonImgData(imgPath, settings_title_png);
+
+	snprintf(imgPath, sizeof(imgPath), "%ssettings_title_over.png", CFG.theme_path);
+	GuiImageData MainButtonImgOverData(imgPath, settings_title_over_png);
+
+	snprintf(imgPath, sizeof(imgPath), "%spageindicator.png", CFG.theme_path);
+	GuiImageData PageindicatorImgData(imgPath, pageindicator_png);
+
+    snprintf(imgPath, sizeof(imgPath), "%sstartgame_arrow_left.png", CFG.theme_path);
+	GuiImageData arrow_left(imgPath, startgame_arrow_left_png);
+
+	snprintf(imgPath, sizeof(imgPath), "%sstartgame_arrow_right.png", CFG.theme_path);
+	GuiImageData arrow_right(imgPath, startgame_arrow_right_png);
+
+    snprintf(imgPath, sizeof(imgPath), "%scredits_button.png", CFG.theme_path);
+	GuiImageData creditsImgData(imgPath, credits_button_png);
+
+    snprintf(imgPath, sizeof(imgPath), "%scredits_button_over.png", CFG.theme_path);
+	GuiImageData creditsOver(imgPath, credits_button_over_png);
+
+	GuiImage creditsImg(&creditsImgData);
+	GuiImage creditsImgOver(&creditsOver);
 
     GuiTrigger trigA;
 	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
@@ -72,806 +99,1319 @@ int MenuSettings()
 	titleTxt.SetPosition(0,40);
 
     GuiImage settingsbackground(&settingsbg);
-	GuiButton settingsbackgroundbtn(settingsbackground.GetWidth(), settingsbackground.GetHeight());
-	settingsbackgroundbtn.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	settingsbackgroundbtn.SetPosition(0, 0);
-	settingsbackgroundbtn.SetImage(&settingsbackground);
 
     GuiText backBtnTxt(LANGUAGE.Back , 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	backBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
 	GuiImage backBtnImg(&btnOutline);
 	if (Settings.wsprompt == yes){
 	backBtnTxt.SetWidescreen(CFG.widescreen);
-	backBtnImg.SetWidescreen(CFG.widescreen);}
+	backBtnImg.SetWidescreen(CFG.widescreen);
+	}
 	GuiButton backBtn(&backBtnImg,&backBtnImg, 2, 3, -180, 400, &trigA, &btnSoundOver, &btnClick,1);
 	backBtn.SetLabel(&backBtnTxt);
 	backBtn.SetTrigger(&trigB);
 
 	GuiButton homo(1,1);
 	homo.SetTrigger(&trigHome);
-	homo.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	homo.SetPosition(0,0);
 
-	GuiImage tab1Img(&tab1);
-	GuiImage tab2Img(&tab2);
-	GuiImage tab3Img(&tab3);
-	GuiButton tabBtn(tab1.GetWidth(), tab1.GetHeight());
-	tabBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	tabBtn.SetPosition(-202, 90);
-	tabBtn.SetImage(&tab1Img);
-	tabBtn.SetRumble(false);
+	GuiImage PageindicatorImg1(&PageindicatorImgData);
+	GuiText PageindicatorTxt1("1", 22, (GXColor){0, 0, 0, 255});
+	GuiButton PageIndicatorBtn1(PageindicatorImg1.GetWidth(), PageindicatorImg1.GetHeight());
+	PageIndicatorBtn1.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	PageIndicatorBtn1.SetPosition(200, 400);
+	PageIndicatorBtn1.SetImage(&PageindicatorImg1);
+	PageIndicatorBtn1.SetLabel(&PageindicatorTxt1);
+	PageIndicatorBtn1.SetSoundOver(&btnSoundOver);
+	PageIndicatorBtn1.SetSoundClick(&btnClick1);
+	PageIndicatorBtn1.SetTrigger(&trigA);
+	PageIndicatorBtn1.SetEffectGrow();
 
-	GuiButton page1Btn(40, 96);
-	page1Btn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	page1Btn.SetPosition(-202, 90);
-	page1Btn.SetSoundOver(&btnSoundOver);
-	page1Btn.SetSoundClick(&btnClick);
-	page1Btn.SetTrigger(0, &trigA);
+	GuiImage PageindicatorImg2(&PageindicatorImgData);
+	GuiText PageindicatorTxt2("2", 22, (GXColor){0, 0, 0, 255});
+	GuiButton PageIndicatorBtn2(PageindicatorImg2.GetWidth(), PageindicatorImg2.GetHeight());
+	PageIndicatorBtn2.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	PageIndicatorBtn2.SetPosition(235, 400);
+	PageIndicatorBtn2.SetImage(&PageindicatorImg2);
+	PageIndicatorBtn2.SetLabel(&PageindicatorTxt2);
+	PageIndicatorBtn2.SetSoundOver(&btnSoundOver);
+	PageIndicatorBtn2.SetSoundClick(&btnClick1);
+	PageIndicatorBtn2.SetTrigger(&trigA);
+	PageIndicatorBtn2.SetEffectGrow();
 
-	GuiButton page2Btn(40, 96);
-	page2Btn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	page2Btn.SetPosition(-202, 186);
-	page2Btn.SetSoundOver(&btnSoundOver);
-	page2Btn.SetSoundClick(&btnClick);
-	page2Btn.SetTrigger(0, &trigA);
-	page2Btn.SetTrigger(1, &trigR);
-	page2Btn.SetTrigger(2, &trigPlus);
+	GuiImage GoLeftImg(&arrow_left);
+	GuiButton GoLeftBtn(GoLeftImg.GetWidth(), GoLeftImg.GetHeight());
+	GoLeftBtn.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
+	GoLeftBtn.SetPosition(25, -25);
+	GoLeftBtn.SetImage(&GoLeftImg);
+	GoLeftBtn.SetSoundOver(&btnSoundOver);
+	GoLeftBtn.SetSoundClick(&btnClick);
+	GoLeftBtn.SetEffectGrow();
+	GoLeftBtn.SetTrigger(&trigA);
+	GoLeftBtn.SetTrigger(&trigL);
+	GoLeftBtn.SetTrigger(&trigMinus);
 
-	GuiButton page3Btn(40, 96);
-	page3Btn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	page3Btn.SetPosition(-202, 282);
-	page3Btn.SetSoundOver(&btnSoundOver);
-	page3Btn.SetSoundClick(&btnClick);
-	page3Btn.SetTrigger(0, &trigA);
-	page3Btn.SetTrigger(1, &trigR);
-	page3Btn.SetTrigger(2, &trigPlus);
+	GuiImage GoRightImg(&arrow_right);
+	GuiButton GoRightBtn(GoRightImg.GetWidth(), GoRightImg.GetHeight());
+	GoRightBtn.SetAlignment(ALIGN_RIGHT, ALIGN_MIDDLE);
+	GoRightBtn.SetPosition(-25, -25);
+	GoRightBtn.SetImage(&GoRightImg);
+	GoRightBtn.SetSoundOver(&btnSoundOver);
+	GoRightBtn.SetSoundClick(&btnClick);
+	GoRightBtn.SetEffectGrow();
+	GoRightBtn.SetTrigger(&trigA);
+	GoRightBtn.SetTrigger(&trigR);
+	GoRightBtn.SetTrigger(&trigPlus);
 
-	const char * text = LANGUAGE.Unlock;
-	if (Settings.godmode == 1)
-			text = LANGUAGE.Lock;
-	GuiText lockBtnTxt(text, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
-	lockBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
-	GuiImage lockBtnImg(&btnOutline);
-	lockBtnImg.SetWidescreen(CFG.widescreen);
-	GuiButton lockBtn(&lockBtnImg,&lockBtnImg, 2, 3, 180, 400, &trigA, &btnSoundOver, &btnClick,1);
-	lockBtn.SetLabel(&lockBtnTxt);
+    char MainButtonText[50];
+    snprintf(MainButtonText, sizeof(MainButtonText), "%s", " ");
 
-    GuiImage updateBtnImg(&updateRevImgData);
-	updateBtnImg.SetWidescreen(CFG.widescreen);
-	GuiButton updateBtn(&updateBtnImg,&updateBtnImg, 2, 3, 70, 400, &trigA, &btnSoundOver, &btnClick,1);
-	updateBtn.SetVisible(false);
-	updateBtn.SetClickable(false);
+    GuiImage MainButton1Img(&MainButtonImgData);
+    GuiImage MainButton1ImgOver(&MainButtonImgOverData);
+    GuiText MainButton1Txt(MainButtonText, 22, (GXColor){0, 0, 0, 255});
+	MainButton1Txt.SetMaxWidth(MainButton1Img.GetWidth());
+    GuiButton MainButton1(MainButton1Img.GetWidth(), MainButton1Img.GetHeight());
+    MainButton1.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	MainButton1.SetPosition(0, 90);
+	MainButton1.SetImage(&MainButton1Img);
+	MainButton1.SetImageOver(&MainButton1ImgOver);
+	MainButton1.SetLabel(&MainButton1Txt);
+	MainButton1.SetSoundOver(&btnSoundOver);
+	MainButton1.SetSoundClick(&btnClick1);
+	MainButton1.SetEffectGrow();
+	MainButton1.SetTrigger(&trigA);
 
-	GuiImageData logo(credits_button_png);
-	GuiImage logoImg(&logo);
-	GuiImageData logoOver(credits_button_over_png);
-	GuiImage logoImgOver(&logoOver);
+    GuiImage MainButton2Img(&MainButtonImgData);
+    GuiImage MainButton2ImgOver(&MainButtonImgOverData);
+    GuiText MainButton2Txt(MainButtonText, 22, (GXColor){0, 0, 0, 255});
+	MainButton2Txt.SetMaxWidth(MainButton2Img.GetWidth());
+    GuiButton MainButton2(MainButton2Img.GetWidth(), MainButton2Img.GetHeight());
+    MainButton2.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	MainButton2.SetPosition(0, 160);
+	MainButton2.SetImage(&MainButton2Img);
+	MainButton2.SetImageOver(&MainButton2ImgOver);
+	MainButton2.SetLabel(&MainButton2Txt);
+	MainButton2.SetSoundOver(&btnSoundOver);
+	MainButton2.SetSoundClick(&btnClick1);
+	MainButton2.SetEffectGrow();
+	MainButton2.SetTrigger(&trigA);
 
-    GuiButton btnLogo(logoImg.GetWidth(), logoImg.GetHeight());
-	btnLogo.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
-	btnLogo.SetPosition(0, -35);
-	btnLogo.SetImage(&logoImg);
-	btnLogo.SetImageOver(&logoImgOver);
-	btnLogo.SetEffectGrow();
-	btnLogo.SetSoundOver(&btnSoundOver);
-	btnLogo.SetSoundClick(&btnClick);
-	btnLogo.SetTrigger(&trigA);
+    GuiImage MainButton3Img(&MainButtonImgData);
+    GuiImage MainButton3ImgOver(&MainButtonImgOverData);
+    GuiText MainButton3Txt(MainButtonText, 22, (GXColor){0, 0, 0, 255});
+	MainButton3Txt.SetMaxWidth(MainButton3Img.GetWidth());
+    GuiButton MainButton3(MainButton3Img.GetWidth(), MainButton3Img.GetHeight());
+    MainButton3.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	MainButton3.SetPosition(0, 230);
+	MainButton3.SetImage(&MainButton3Img);
+	MainButton3.SetImageOver(&MainButton3ImgOver);
+	MainButton3.SetLabel(&MainButton3Txt);
+	MainButton3.SetSoundOver(&btnSoundOver);
+	MainButton3.SetSoundClick(&btnClick1);
+	MainButton3.SetEffectGrow();
+	MainButton3.SetTrigger(&trigA);
+
+    GuiImage MainButton4Img(&MainButtonImgData);
+    GuiImage MainButton4ImgOver(&MainButtonImgOverData);
+    GuiText MainButton4Txt(MainButtonText, 22, (GXColor){0, 0, 0, 255});
+	MainButton4Txt.SetMaxWidth(MainButton4Img.GetWidth());
+    GuiButton MainButton4(MainButton4Img.GetWidth(), MainButton4Img.GetHeight());
+    MainButton4.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	MainButton4.SetPosition(0, 300);
+	MainButton4.SetImage(&MainButton4Img);
+	MainButton4.SetImageOver(&MainButton4ImgOver);
+	MainButton4.SetLabel(&MainButton4Txt);
+	MainButton4.SetSoundOver(&btnSoundOver);
+	MainButton4.SetSoundClick(&btnClick1);
+	MainButton4.SetEffectGrow();
+	MainButton4.SetTrigger(&trigA);
 
 	customOptionList options2(9);
 	GuiCustomOptionBrowser optionBrowser2(396, 280, &options2, CFG.theme_path, "bg_options_settings.png", bg_options_settings_png, 0, 150);
 	optionBrowser2.SetPosition(0, 90);
 	optionBrowser2.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+
 	GuiWindow w(screenwidth, screenheight);
 
 	int pageToDisplay = 1;
 	while ( pageToDisplay > 0) //set pageToDisplay to 0 to quit
 	{
+	    VIDEO_WaitVSync ();
+
 		menu = MENU_NONE;
+
 		if ( pageToDisplay == 1)
 		{
+		    /** Standard procedure made in all pages **/
+			MainButton1.StopEffect();
+			MainButton2.StopEffect();
+			MainButton3.StopEffect();
+			MainButton4.StopEffect();
 
-			options2.SetName(0, "%s",LANGUAGE.VideoMode);
-			options2.SetName(1, "%s",LANGUAGE.VIDTVPatch);
-			options2.SetName(2, "%s",LANGUAGE.Language);
-
-			options2.SetName(3, "Ocarina");
-
-			options2.SetName(4,"%s", LANGUAGE.Display);
-			options2.SetName(5,"%s", LANGUAGE.Clock); //CLOCK
-			options2.SetName(6,"%s", LANGUAGE.Rumble); //RUMBLE
-			options2.SetName(7,"%s", LANGUAGE.Volume);
-			options2.SetName(8,"%s", LANGUAGE.Tooltips);
+            if(slidedirection == RIGHT) {
+            MainButton1.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 35);
+            MainButton2.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 35);
+            MainButton3.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 35);
+            MainButton4.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 35);
+            while (MainButton1.GetEffect()>0) usleep(50);
+            }
+            else if(slidedirection == LEFT) {
+            MainButton1.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 35);
+            MainButton2.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 35);
+            MainButton3.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 35);
+            MainButton4.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 35);
+            while (MainButton1.GetEffect()>0) usleep(50);
+            }
 
 			HaltGui();
-			w.Append(&settingsbackgroundbtn);
+
+            snprintf(MainButtonText, sizeof(MainButtonText), "%s", LANGUAGE.GUISettings);
+            MainButton1Txt.SetText(MainButtonText);
+            snprintf(MainButtonText, sizeof(MainButtonText), "%s", LANGUAGE.Gameload);
+            MainButton2Txt.SetText(MainButtonText);
+            snprintf(MainButtonText, sizeof(MainButtonText), "%s", LANGUAGE.Parentalcontrol);
+            MainButton3Txt.SetText(MainButtonText);
+            snprintf(MainButtonText, sizeof(MainButtonText), "%s", LANGUAGE.Sound);
+            MainButton4Txt.SetText(MainButtonText);
+
+			mainWindow->RemoveAll();
+			mainWindow->Append(&w);
+			w.RemoveAll();
+            w.Append(&settingsbackground);
+            w.Append(&PageIndicatorBtn1);
+            w.Append(&PageIndicatorBtn2);
 			w.Append(&titleTxt);
 			w.Append(&backBtn);
-			w.Append(&lockBtn);
-			w.Append(&updateBtn);
-			w.Append(&btnLogo);
 			w.Append(&homo);
-			//set triggers for tabs
-			page1Btn.RemoveTrigger(1);
-			page1Btn.RemoveTrigger(2);
-			page2Btn.RemoveTrigger(1);
-			page2Btn.RemoveTrigger(2);
-			page3Btn.RemoveTrigger(1);
-			page3Btn.RemoveTrigger(2);
-			page2Btn.SetTrigger(1, &trigPlus);
-			page2Btn.SetTrigger(2, &trigR);
-			page3Btn.SetTrigger(1, &trigMinus);
-			page3Btn.SetTrigger(2, &trigL);
+			w.Append(&GoRightBtn);
+			w.Append(&GoLeftBtn);
+			w.Append(&MainButton1);
+			w.Append(&MainButton2);
+			w.Append(&MainButton3);
+			w.Append(&MainButton4);
 
+			PageIndicatorBtn1.SetAlpha(255);
+			PageIndicatorBtn2.SetAlpha(50);
+
+			/** Creditsbutton change **/
+			MainButton4.SetImage(&MainButton4Img);
+			MainButton4.SetImageOver(&MainButton4ImgOver);
+
+			/** Disable ability to click through MainButtons */
+			optionBrowser2.SetClickable(false);
+
+			MainButton1.StopEffect();
+			MainButton2.StopEffect();
+			MainButton3.StopEffect();
+			MainButton4.StopEffect();
+
+			MainButton1.SetEffectGrow();
+			MainButton2.SetEffectGrow();
+			MainButton3.SetEffectGrow();
+			MainButton4.SetEffectGrow();
+
+            if(slidedirection == FADE) {
+            MainButton1.SetEffect(EFFECT_FADE, 20);
+			MainButton2.SetEffect(EFFECT_FADE, 20);
+            MainButton3.SetEffect(EFFECT_FADE, 20);
+            MainButton4.SetEffect(EFFECT_FADE, 20);
+            }
+            else if(slidedirection == LEFT) {
+            MainButton1.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_IN, 35);
+			MainButton2.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_IN, 35);
+            MainButton3.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_IN, 35);
+            MainButton4.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_IN, 35);
+            }
+            else if(slidedirection == RIGHT) {
+            MainButton1.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_IN, 35);
+			MainButton2.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_IN, 35);
+            MainButton3.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_IN, 35);
+            MainButton4.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_IN, 35);
+            }
 
 			mainWindow->Append(&w);
-			mainWindow->Append(&optionBrowser2);
-			mainWindow->Append(&tabBtn);
-			mainWindow->Append(&page2Btn);
-			mainWindow->Append(&page3Btn);
-
 
 			ResumeGui();
+
+			while(MainButton1.GetEffect() > 0) usleep(50);
+
 		}
 		else if ( pageToDisplay == 2 )
 		{
-			page1Btn.RemoveTrigger(1);
-			page1Btn.RemoveTrigger(2);
-			page2Btn.RemoveTrigger(1);
-			page2Btn.RemoveTrigger(2);
-			page3Btn.RemoveTrigger(1);
-			page3Btn.RemoveTrigger(2);
-			page1Btn.SetTrigger(1, &trigMinus);
-			page1Btn.SetTrigger(2, &trigL);
-			page3Btn.SetTrigger(1, &trigPlus);
-			page3Btn.SetTrigger(2, &trigR);
+			/** Standard procedure made in all pages **/
+			MainButton1.StopEffect();
+			MainButton2.StopEffect();
+			MainButton3.StopEffect();
+			MainButton4.StopEffect();
 
-			mainWindow->Append(&optionBrowser2);
-			mainWindow->Append(&tabBtn);
-			mainWindow->Append(&page1Btn);
-			mainWindow->Append(&page3Btn);
+            if(slidedirection == RIGHT) {
+            MainButton1.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 35);
+            MainButton2.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 35);
+            MainButton3.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 35);
+            MainButton4.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 35);
+            while (MainButton1.GetEffect()>0) usleep(50);
+            }
+            else if(slidedirection == LEFT) {
+            MainButton1.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 35);
+            MainButton2.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 35);
+            MainButton3.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 35);
+            MainButton4.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 35);
+            while (MainButton1.GetEffect()>0) usleep(50);
+            }
 
-			options2.SetName(0,"%s", LANGUAGE.Password);
-			options2.SetName(1,"%s", LANGUAGE.BootStandard);
-			options2.SetName(2,"%s", LANGUAGE.FlipX);
-			options2.SetName(3,"%s", LANGUAGE.QuickBoot);
-			options2.SetName(4,"%s", LANGUAGE.PromptsButtons);
-			options2.SetName(5,"%s", LANGUAGE.Parentalcontrol);
-			options2.SetName(6,"%s", LANGUAGE.CoverPath);
-			options2.SetName(7,"%s", LANGUAGE.DiscimagePath);
-			options2.SetName(8,"%s", LANGUAGE.ThemePath);
+			HaltGui();
+
+            snprintf(MainButtonText, sizeof(MainButtonText), "%s", LANGUAGE.Custompaths);
+            MainButton1Txt.SetText(MainButtonText);
+            snprintf(MainButtonText, sizeof(MainButtonText), "%s", LANGUAGE.Update);
+            MainButton2Txt.SetText(MainButtonText);
+            snprintf(MainButtonText, sizeof(MainButtonText), "%s", LANGUAGE.Defaultsettings);
+            MainButton3Txt.SetText(MainButtonText);
+            snprintf(MainButtonText, sizeof(MainButtonText), "%s", LANGUAGE.Credits);
+            MainButton4Txt.SetText(MainButtonText);
+
+			mainWindow->RemoveAll();
+			mainWindow->Append(&w);
+			w.RemoveAll();
+            w.Append(&settingsbackground);
+            w.Append(&PageIndicatorBtn1);
+            w.Append(&PageIndicatorBtn2);
+			w.Append(&titleTxt);
+			w.Append(&backBtn);
+			w.Append(&homo);
+			w.Append(&GoRightBtn);
+			w.Append(&GoLeftBtn);
+			w.Append(&MainButton1);
+			w.Append(&MainButton2);
+			w.Append(&MainButton3);
+			w.Append(&MainButton4);
+
+			PageIndicatorBtn1.SetAlpha(50);
+			PageIndicatorBtn2.SetAlpha(255);
+
+			/** Creditsbutton change **/
+			MainButton4.SetImage(&creditsImg);
+			MainButton4.SetImageOver(&creditsImgOver);
+
+			/** Disable ability to click through MainButtons */
+			optionBrowser2.SetClickable(false);
+
+			MainButton1.StopEffect();
+			MainButton2.StopEffect();
+			MainButton3.StopEffect();
+			MainButton4.StopEffect();
+
+			MainButton1.SetEffectGrow();
+			MainButton2.SetEffectGrow();
+			MainButton3.SetEffectGrow();
+			MainButton4.SetEffectGrow();
+
+            if(slidedirection == FADE) {
+            MainButton1.SetEffect(EFFECT_FADE, 20);
+			MainButton2.SetEffect(EFFECT_FADE, 20);
+            MainButton3.SetEffect(EFFECT_FADE, 20);
+            MainButton4.SetEffect(EFFECT_FADE, 20);
+            }
+            else if(slidedirection == LEFT) {
+            MainButton1.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_IN, 35);
+			MainButton2.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_IN, 35);
+            MainButton3.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_IN, 35);
+            MainButton4.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_IN, 35);
+            }
+            else if(slidedirection == RIGHT) {
+            MainButton1.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_IN, 35);
+			MainButton2.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_IN, 35);
+            MainButton3.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_IN, 35);
+            MainButton4.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_IN, 35);
+            }
+
+			mainWindow->Append(&w);
+
+			ResumeGui();
+
+			while(MainButton1.GetEffect() > 0) usleep(50);
+
 		}
-		else if ( pageToDisplay == 3 )
-		{
-			page1Btn.RemoveTrigger(1);
-			page1Btn.RemoveTrigger(2);
-			page2Btn.RemoveTrigger(1);
-			page2Btn.RemoveTrigger(2);
-			page3Btn.RemoveTrigger(1);
-			page3Btn.RemoveTrigger(2);
-			page2Btn.SetTrigger(1, &trigMinus);
-			page2Btn.SetTrigger(2, &trigL);
-			page1Btn.SetTrigger(1, &trigPlus);
-			page1Btn.SetTrigger(2, &trigR);
 
-			mainWindow->Append(&optionBrowser2);
-			mainWindow->Append(&tabBtn);
-			mainWindow->Append(&page1Btn);
-			mainWindow->Append(&page3Btn);
-
-			options2.SetName(0, "%s",LANGUAGE.Titlestxtpath);
-			options2.SetName(1, "%s",LANGUAGE.AppLanguage);
-			options2.SetName(2, "%s",LANGUAGE.keyboard);
-			options2.SetName(3, "%s",LANGUAGE.Unicodefix);
-			options2.SetName(4, "%s",LANGUAGE.Backgroundmusic);
-			options2.SetName(5, "%s",LANGUAGE.Wiilight);
-			options2.SetName(6, "%s",LANGUAGE.Updatepath);
-			options2.SetName(7, "%s",LANGUAGE.Patchcountrystrings);
-			options2.SetName(8, "%s",LANGUAGE.Defaultsettings);
-
-		}
 		while(menu == MENU_NONE)
 		{
 			VIDEO_WaitVSync ();
 
 			if ( pageToDisplay == 1 )
 			{
-				if(Settings.video >= settings_video_max)
-					Settings.video = 0;
-				if(Settings.language  >= settings_language_max)
-					Settings.language = 0;
-				if(Settings.ocarina >= settings_off_on_max)
-					Settings.ocarina = 0;
-				if(Settings.vpatch >= settings_off_on_max)
-					Settings.vpatch = 0;
-				if(Settings.sinfo  >= settings_sinfo_max)
-					Settings.sinfo = 0;
-				if(Settings.hddinfo >= settings_clock_max)
-					Settings.hddinfo = 0; //CLOCK
-				if(Settings.rumble >= settings_rumble_max)
-					Settings.rumble = 0; //RUMBLE
-				if(Settings.volume >= settings_volume_max)
-					Settings.volume = 0;
-                if (Settings.tooltips >= settings_tooltips_max)
-					Settings.tooltips = 0;
+			    if(MainButton1.GetState() == STATE_CLICKED) {
+                    MainButton1.SetEffect(EFFECT_FADE, -20);
+                    MainButton2.SetEffect(EFFECT_FADE, -20);
+                    MainButton3.SetEffect(EFFECT_FADE, -20);
+                    MainButton4.SetEffect(EFFECT_FADE, -20);
+                    while(MainButton1.GetEffect() > 0) usleep(50);
+                    HaltGui();
+                    w.Remove(&PageIndicatorBtn1);
+                    w.Remove(&PageIndicatorBtn2);
+                    w.Remove(&GoRightBtn);
+                    w.Remove(&GoLeftBtn);
+                    w.Remove(&MainButton1);
+                    w.Remove(&MainButton2);
+                    w.Remove(&MainButton3);
+                    w.Remove(&MainButton4);
+                    titleTxt.SetText(LANGUAGE.GUISettings);
+                    exit = false;
+                    options2.SetName(0, "%s",LANGUAGE.AppLanguage);
+                    options2.SetName(1, "%s",LANGUAGE.Display);
+                    options2.SetName(2, "%s",LANGUAGE.Clock);
+                    options2.SetName(3, "%s",LANGUAGE.Tooltips);
+                    options2.SetName(4, "%s",LANGUAGE.FlipX);
+                    options2.SetName(5, "%s",LANGUAGE.PromptsButtons);
+                    options2.SetName(6, "%s",LANGUAGE.keyboard);
+                    options2.SetName(7, "%s",LANGUAGE.Wiilight);
+                    options2.SetName(8, "%s", LANGUAGE.Rumble);
+                    for(int i = 0; i < 9; i++) options2.SetValue(i, NULL);
+                    w.Append(&optionBrowser2);
+                    optionBrowser2.SetClickable(true);
+                    ResumeGui();
 
-				if (Settings.video == discdefault) options2.SetValue(0,"%s",LANGUAGE.DiscDefault);
-				else if (Settings.video == systemdefault) options2.SetValue(0,"%s",LANGUAGE.SystemDefault);
-				else if (Settings.video == patch) options2.SetValue(0,"%s",LANGUAGE.AutoPatch);
-				else if (Settings.video == pal50) options2.SetValue(0,"%s PAL50",LANGUAGE.Force);
-				else if (Settings.video == pal60) options2.SetValue(0,"%s PAL60",LANGUAGE.Force);
-				else if (Settings.video == ntsc) options2.SetValue(0,"%s NTSC",LANGUAGE.Force);
+                    VIDEO_WaitVSync ();
+                    optionBrowser2.SetEffect(EFFECT_FADE, 20);
+			        while(optionBrowser2.GetEffect() > 0) usleep(50);
 
-				if (Settings.vpatch == on) options2.SetValue(1,"%s",LANGUAGE.ON);
-				else if (Settings.vpatch == off) options2.SetValue(1,"%s",LANGUAGE.OFF);
+                    int returnhere = 1;
+                    char * languagefile;
+                    languagefile = strrchr(Settings.language_path, '/')+1;
 
-				if (Settings.language == ConsoleLangDefault) options2.SetValue(2,"%s",LANGUAGE.ConsoleDefault);
-				else if (Settings.language == jap) options2.SetValue(2,"%s",LANGUAGE.Japanese);
-				else if (Settings.language == ger) options2.SetValue(2,"%s",LANGUAGE.German);
-				else if (Settings.language == eng) options2.SetValue(2,"%s",LANGUAGE.English);
-				else if (Settings.language == fren) options2.SetValue(2,"%s",LANGUAGE.French);
-				else if (Settings.language == esp) options2.SetValue(2,"%s",LANGUAGE.Spanish);
-				else if (Settings.language == it) options2.SetValue(2,"%s",LANGUAGE.Italian);
-				else if (Settings.language == dut) options2.SetValue(2,"%s",LANGUAGE.Dutch);
-				else if (Settings.language == schin) options2.SetValue(2,"%s",LANGUAGE.SChinese);
-				else if (Settings.language == tchin) options2.SetValue(2,"%s",LANGUAGE.TChinese);
-				else if (Settings.language == kor) options2.SetValue(2,"%s",LANGUAGE.Korean);
+                    while(!exit)
+                    {
+                        VIDEO_WaitVSync ();
 
-				if (Settings.ocarina == on) options2.SetValue(3,"%s",LANGUAGE.ON);
-				else if (Settings.ocarina == off) options2.SetValue(3,"%s",LANGUAGE.OFF);
+                        returnhere = 1;
 
-				if (Settings.sinfo == GameID) options2.SetValue(4,"%s",LANGUAGE.GameID);
-				else if (Settings.sinfo == GameRegion) options2.SetValue(4,"%s",LANGUAGE.GameRegion);
-				else if (Settings.sinfo == Both) options2.SetValue(4,"%s",LANGUAGE.Both);
-				else if (Settings.sinfo == Neither) options2.SetValue(4,"%s",LANGUAGE.Neither);
+                        if(Settings.sinfo  >= settings_sinfo_max)
+                            Settings.sinfo = 0;
+                        if(Settings.hddinfo >= settings_clock_max)
+                            Settings.hddinfo = 0; //CLOCK
+                        if (Settings.tooltips >= settings_tooltips_max)
+                            Settings.tooltips = 0;
+                        if ( Settings.xflip >= settings_xflip_max)
+                            Settings.xflip = 0;
+                        if ( Settings.wsprompt > 1 )
+                            Settings.wsprompt = 0;
+                        if ( Settings.keyset >= settings_keyset_max)
+                            Settings.keyset = 0;
+                        if ( Settings.wiilight > 2 )
+                            Settings.wiilight = 0;
+                        if(Settings.rumble >= settings_rumble_max)
+                            Settings.rumble = 0; //RUMBLE
 
-				if (Settings.hddinfo == hr12) options2.SetValue(5,"12 %s",LANGUAGE.hour);
-				else if (Settings.hddinfo == hr24) options2.SetValue(5,"24 %s",LANGUAGE.hour);
-				else if (Settings.hddinfo == Off) options2.SetValue(5,"%s",LANGUAGE.OFF);
+                        if(!strcmp("notset", Settings.language_path))
+                            options2.SetValue(0, "%s", LANGUAGE.Default);
+                        else
+                            options2.SetValue(0, "%s", languagefile);
 
-				if (Settings.rumble == RumbleOn) options2.SetValue(6,"%s",LANGUAGE.ON);
-				else if (Settings.rumble == RumbleOff) options2.SetValue(6,"%s",LANGUAGE.OFF);
+                        if (Settings.sinfo == GameID) options2.SetValue(1,"%s",LANGUAGE.GameID);
+                        else if (Settings.sinfo == GameRegion) options2.SetValue(1,"%s",LANGUAGE.GameRegion);
+                        else if (Settings.sinfo == Both) options2.SetValue(1,"%s",LANGUAGE.Both);
+                        else if (Settings.sinfo == Neither) options2.SetValue(1,"%s",LANGUAGE.Neither);
 
-				if (Settings.volume == v10) options2.SetValue(7,"10");
-				else if (Settings.volume == v20) options2.SetValue(7,"20");
-				else if (Settings.volume == v30) options2.SetValue(7,"30");
-				else if (Settings.volume == v40) options2.SetValue(7,"40");
-				else if (Settings.volume == v50) options2.SetValue(7,"50");
-				else if (Settings.volume == v60) options2.SetValue(7,"60");
-				else if (Settings.volume == v70) options2.SetValue(7,"70");
-				else if (Settings.volume == v80) options2.SetValue(7,"80");
-				else if (Settings.volume == v90) options2.SetValue(7,"90");
-				else if (Settings.volume == v100) options2.SetValue(7,"100");
-				else if (Settings.volume == v0) options2.SetValue(7,"%s",LANGUAGE.OFF);
+                        if (Settings.hddinfo == hr12) options2.SetValue(2,"12 %s",LANGUAGE.hour);
+                        else if (Settings.hddinfo == hr24) options2.SetValue(2,"24 %s",LANGUAGE.hour);
+                        else if (Settings.hddinfo == Off) options2.SetValue(2,"%s",LANGUAGE.OFF);
 
+                        if (Settings.tooltips == TooltipsOn) options2.SetValue(3,"%s",LANGUAGE.ON);
+                        else if (Settings.tooltips == TooltipsOff) options2.SetValue(3,"%s",LANGUAGE.OFF);
 
-                if (Settings.tooltips == TooltipsOn) options2.SetValue(8,"%s",LANGUAGE.ON);
-				else if (Settings.tooltips == TooltipsOff) options2.SetValue(8,"%s",LANGUAGE.OFF);
+                        if (Settings.xflip == no) options2.SetValue(4,"%s/%s",LANGUAGE.Right,LANGUAGE.Next);
+                        else if (Settings.xflip == yes) options2.SetValue(4,"%s/%s",LANGUAGE.Left,LANGUAGE.Prev);
+                        else if (Settings.xflip == sysmenu) options2.SetValue(4,"%s", LANGUAGE.LikeSysMenu);
+                        else if (Settings.xflip == wtf) options2.SetValue(4,"%s/%s",LANGUAGE.Right,LANGUAGE.Prev);
+                        else if (Settings.xflip == disk3d) options2.SetValue(4,"DiskFlip");
 
-				ret = optionBrowser2.GetClickedOption();
+                        if (Settings.wsprompt == no) options2.SetValue(5,"%s",LANGUAGE.Normal);
+                        else if (Settings.wsprompt == yes) options2.SetValue(5,"%s",LANGUAGE.WidescreenFix);
 
-				switch (ret)
-				{
-					case 0:
-						Settings.video++;
-						break;
-					case 1:
-						Settings.vpatch++;
-						break;
-					case 2:
-						Settings.language++;
-						break;
-					case 3:
-						Settings.ocarina++;
-						break;
-					case 4:  // Game Code and Region
-						Settings.sinfo++;
-						break;
-					case 5:  //CLOCK
-						Settings.hddinfo++;
-						break;
-					case 6:  //Rumble
-						Settings.rumble++;
-						break;
-					case 7:
-						Settings.volume++;
-						break;
-                    case 8:
-						Settings.tooltips++;
-						break;
-					}
-			}
+                        if (Settings.keyset == us) options2.SetValue(6,"QWERTY");
+                        else if (Settings.keyset == dvorak) options2.SetValue(6,"DVORAK");
+                        else if (Settings.keyset == euro) options2.SetValue(6,"QWERTZ");
+                        else if (Settings.keyset == azerty) options2.SetValue(6,"AZERTY");
 
-			if ( pageToDisplay == 2 )
-			{
-				if ( Settings.cios >= settings_cios_max)
-					Settings.cios = 0;
-				if ( Settings.xflip >= settings_xflip_max)
-					Settings.xflip = 0;
-				if ( Settings.qboot > 1 )
-					Settings.qboot = 0;
-				if ( Settings.wsprompt > 1 )
-					Settings.wsprompt = 0;
-                if (Settings.parentalcontrol > 3 )
-					Settings.parentalcontrol = 0;
+                        if (Settings.wiilight == 0) options2.SetValue(7,"%s",LANGUAGE.OFF);
+                        else if (Settings.wiilight == 1) options2.SetValue(7,"%s",LANGUAGE.ON);
+                        else if (Settings.wiilight == 2) options2.SetValue(7,"%s",LANGUAGE.OnlyInstall);
 
+                        if (Settings.rumble == RumbleOn) options2.SetValue(8,"%s",LANGUAGE.ON);
+                        else if (Settings.rumble == RumbleOff) options2.SetValue(8,"%s",LANGUAGE.OFF);
 
-				if ( Settings.godmode != 1) options2.SetValue(0, "********");
-				else if (!strcmp("", Settings.unlockCode)) options2.SetValue(0, "%s",LANGUAGE.notset);
-				else options2.SetValue(0, Settings.unlockCode);
-
-                if (Settings.godmode != 1) options2.SetValue(1, "********");
-                else if (Settings.cios == ios249) options2.SetValue(1,"cIOS 249");
-				else if (Settings.cios == ios222) options2.SetValue(1,"cIOS 222");
-
-				if (Settings.xflip == no) options2.SetValue(2,"%s/%s",LANGUAGE.Right,LANGUAGE.Next);
-				else if (Settings.xflip == yes) options2.SetValue(2,"%s/%s",LANGUAGE.Left,LANGUAGE.Prev);
-				else if (Settings.xflip == sysmenu) options2.SetValue(2,"%s", LANGUAGE.LikeSysMenu);
-				else if (Settings.xflip == wtf) options2.SetValue(2,"%s/%s",LANGUAGE.Right,LANGUAGE.Prev);
-				else if (Settings.xflip == disk3d) options2.SetValue(2,"DiskFlip");
-
-				if (Settings.qboot == no) options2.SetValue(3,"%s",LANGUAGE.No);
-				else if (Settings.qboot == yes) options2.SetValue(3,"%s",LANGUAGE.Yes);
-
-				if (Settings.wsprompt == no) options2.SetValue(4,"%s",LANGUAGE.Normal);
-				else if (Settings.wsprompt == yes) options2.SetValue(4,"%s",LANGUAGE.WidescreenFix);
-
-                if (Settings.godmode != 1) options2.SetValue(5, "********");
-				else if(Settings.parentalcontrol == 0) options2.SetValue(5, "0");
-				else if(Settings.parentalcontrol == 1) options2.SetValue(5, "1");
-				else if(Settings.parentalcontrol == 2) options2.SetValue(5, "2");
-				else if(Settings.parentalcontrol == 3) options2.SetValue(5, "3");
-
-				options2.SetValue(6, "%s", Settings.covers_path);
-				options2.SetValue(7, "%s", Settings.disc_path);
-				options2.SetValue(8, "%s", CFG.theme_path);
-
-				ret = optionBrowser2.GetClickedOption();
-
-				switch (ret)
-				{
-
-					case 0: // Modify Password
-						if ( Settings.godmode == 1)
-						{
-							mainWindow->Remove(&optionBrowser2);
-							mainWindow->Remove(&page1Btn);
-							mainWindow->Remove(&page2Btn);
-							mainWindow->Remove(&tabBtn);
-							mainWindow->Remove(&page3Btn);
-							w.Remove(&backBtn);
-							w.Remove(&lockBtn);
-							w.Remove(&updateBtn);
-							char entered[20] = "";
-							strncpy(entered, Settings.unlockCode, sizeof(entered));
-							int result = OnScreenKeyboard(entered, 20,0);
-							mainWindow->Append(&optionBrowser2);
-							mainWindow->Append(&tabBtn);
-							mainWindow->Append(&page1Btn);
-							mainWindow->Append(&page2Btn);
-							mainWindow->Append(&page3Btn);
-							w.Append(&backBtn);
-							w.Append(&lockBtn);
-							w.Append(&updateBtn);
-							if ( result == 1 )
-							{
-								strncpy(Settings.unlockCode, entered, sizeof(Settings.unlockCode));
-								WindowPrompt(LANGUAGE.PasswordChanged,LANGUAGE.Passwordhasbeenchanged,LANGUAGE.ok,0,0,0);
-							}
-						}
-						else
-						{
-							WindowPrompt(LANGUAGE.Passwordchange,LANGUAGE.Consoleshouldbeunlockedtomodifyit,LANGUAGE.ok,0,0,0);
-						}
-						break;
-					case 1:
-                        if ( Settings.godmode == 1)
-						Settings.cios++;
-						break;
-					case 2:
-						Settings.xflip++;
-						break;
-					case 3:
-						Settings.qboot++;
-						break;
-					case 4:
-						Settings.wsprompt++;
-						break;
-                    case 5:
-                        if ( Settings.godmode == 1)
-                        Settings.parentalcontrol++;
-                        break;
-                    case 6:
-                        if ( Settings.godmode == 1)
+                        if(backBtn.GetState() == STATE_CLICKED)
                         {
-							mainWindow->Remove(&optionBrowser2);
-							mainWindow->Remove(&page1Btn);
-							mainWindow->Remove(&page2Btn);
-							mainWindow->Remove(&tabBtn);
-							mainWindow->Remove(&page3Btn);
-							w.Remove(&backBtn);
-							w.Remove(&lockBtn);
-							w.Remove(&updateBtn);
-							char entered[43] = "";
-							strncpy(entered, Settings.covers_path, sizeof(entered));
-							int result = OnScreenKeyboard(entered,43,4);
-							mainWindow->Append(&optionBrowser2);
-							mainWindow->Append(&page1Btn);
-							mainWindow->Append(&page2Btn);
-							mainWindow->Append(&tabBtn);
-							mainWindow->Append(&page3Btn);
-							w.Append(&backBtn);
-							w.Append(&lockBtn);
-							w.Append(&updateBtn);
-							if ( result == 1 )
-							{
-								int len = (strlen(entered)-1);
-								if(entered[len] !='/')
-								strncat (entered, "/", 1);
-								strncpy(Settings.covers_path, entered, sizeof(Settings.covers_path));
-								WindowPrompt(LANGUAGE.CoverpathChanged,0,LANGUAGE.ok,0,0,0);
-								if(!isSdInserted()) {
-                                    WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
-                                }
-							}
-						}
-						else
-						{
-							WindowPrompt(LANGUAGE.Coverpathchange,LANGUAGE.Consoleshouldbeunlockedtomodifyit,LANGUAGE.ok,0,0,0);
-						}
-						break;
-                    case 7:
-                        if ( Settings.godmode == 1)
+                            backBtn.ResetState();
+                            exit = true;
+                            break;
+                        }
+
+                        if(shutdown == 1)
+                            Sys_Shutdown();
+                        else if(reset == 1)
+                            Sys_Reboot();
+
+                        else if(menu == MENU_DISCLIST) {
+                            w.Remove(&optionBrowser2);
+                            w.Remove(&backBtn);
+                            WindowCredits();
+                            w.Append(&optionBrowser2);
+                            w.Append(&backBtn);
+                        }
+                        else if(homo.GetState() == STATE_CLICKED)
                         {
-							mainWindow->Remove(&optionBrowser2);
-							mainWindow->Remove(&page1Btn);
-							mainWindow->Remove(&page2Btn);
-							mainWindow->Remove(&tabBtn);
-							mainWindow->Remove(&page3Btn);
-							w.Remove(&backBtn);
-							w.Remove(&lockBtn);
-							w.Remove(&updateBtn);
-							char entered[43] = "";
-							strncpy(entered, Settings.disc_path, sizeof(entered));
-							int result = OnScreenKeyboard(entered, 43,4);
-							mainWindow->Append(&optionBrowser2);
-							mainWindow->Append(&page1Btn);
-							mainWindow->Append(&page2Btn);
-							mainWindow->Append(&tabBtn);
-							mainWindow->Append(&page3Btn);
-							w.Append(&backBtn);
-							w.Append(&lockBtn);
-							w.Append(&updateBtn);
-							if ( result == 1 )
-							{
-								int len = (strlen(entered)-1);
-								if(entered[len] !='/')
-								strncat (entered, "/", 1);
-								strncpy(Settings.disc_path, entered, sizeof(Settings.disc_path));
-								WindowPrompt(LANGUAGE.DiscpathChanged,0,LANGUAGE.ok,0,0,0);
-								if(!isSdInserted()) {
-                                    WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
-                                }
-							}
-						}
-						else
-						{
-							WindowPrompt(LANGUAGE.Discpathchange,LANGUAGE.Consoleshouldbeunlockedtomodifyit,LANGUAGE.ok,0,0,0);
-						}
-						break;
-                    case 8:
-                        if ( Settings.godmode == 1)
+                            cfg_save_global();
+                            optionBrowser2.SetState(STATE_DISABLED);
+                            s32 thetimeofbg = bgMusic->GetPlayTime();
+                            bgMusic->Stop();
+                            choice = WindowExitPrompt(LANGUAGE.ExitUSBISOLoader,0, LANGUAGE.BacktoLoader,LANGUAGE.WiiMenu,LANGUAGE.Back,0);
+                            if(!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path))
+                            {
+                                bgMusic->Play();
+                            } else {
+                                bgMusic->PlayOggFile(Settings.ogg_path);
+                            }
+                            bgMusic->SetPlayTime(thetimeofbg);
+                            SetVolumeOgg(255*(Settings.volume/100.0));
+                            if(choice == 3) {
+                                Sys_LoadMenu(); // Back to System Menu
+                            } else if (choice == 2) {
+                                Sys_BackToLoader();
+                            } else {
+                                homo.ResetState();
+                            }
+                            optionBrowser2.SetState(STATE_DEFAULT);
+                        }
+
+                        ret = optionBrowser2.GetClickedOption();
+
+                        switch (ret)
                         {
-							mainWindow->Remove(&optionBrowser2);
-							mainWindow->Remove(&page1Btn);
-							mainWindow->Remove(&page2Btn);
-							mainWindow->Remove(&tabBtn);
-							mainWindow->Remove(&page3Btn);
-							w.Remove(&backBtn);
-							w.Remove(&lockBtn);
-							w.Remove(&updateBtn);
-							char entered[43] = "";
-							strncpy(entered, CFG.theme_path, sizeof(entered));
-							int result = OnScreenKeyboard(entered, 43,4);
-							mainWindow->Append(&optionBrowser2);
-							mainWindow->Append(&page1Btn);
-							mainWindow->Append(&page2Btn);
-							mainWindow->Append(&tabBtn);
-							mainWindow->Append(&page3Btn);
-							w.Append(&backBtn);
-							w.Append(&lockBtn);
-							w.Append(&updateBtn);
-							if ( result == 1 )
-							{
-								int len = (strlen(entered)-1);
-								if(entered[len] !='/')
-								strncat (entered, "/", 1);
-								strncpy(CFG.theme_path, entered, sizeof(CFG.theme_path));
-								WindowPrompt(LANGUAGE.ThemepathChanged,0,LANGUAGE.ok,0,0,0);
-								if(!isSdInserted()) {
-                                    WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
+                            case 0:
+                                if(isSdInserted()) {
+                                if ( Settings.godmode == 1)
+                                {
+                                    w.SetEffect(EFFECT_FADE, -20);
+                                    while(w.GetEffect()>0) usleep(50);
+                                    mainWindow->Remove(&w);
+                                    while(returnhere == 1)
+                                    returnhere = MenuLanguageSelect();
+                                    if(returnhere == 2) {
+                                        menu = MENU_SETTINGS;
+                                        pageToDisplay = 0;
+                                        exit = true;
+                                        mainWindow->Append(&w);
+                                        break;
+                                    } else {
+                                    HaltGui();
+                                    mainWindow->Append(&w);
+                                    w.SetEffect(EFFECT_FADE, 20);
+                                    ResumeGui();
+                                    while(w.GetEffect()>0) usleep(50);
+                                    }
                                 } else {
-                                    cfg_save_global();
+                                    WindowPrompt(LANGUAGE.Langchange,LANGUAGE.Consoleshouldbeunlockedtomodifyit,LANGUAGE.ok,0,0,0);
                                 }
-								mainWindow->Remove(bgImg);
-								CFG_Load();
-								CFG_LoadGlobal();
-								menu = MENU_SETTINGS;
-								#ifdef HW_RVL
-								snprintf(imgPath, sizeof(imgPath), "%splayer1_point.png", CFG.theme_path);
-								pointer[0] = new GuiImageData(imgPath, player1_point_png);
-								snprintf(imgPath, sizeof(imgPath), "%splayer2_point.png", CFG.theme_path);
-								pointer[1] = new GuiImageData(imgPath, player2_point_png);
-								snprintf(imgPath, sizeof(imgPath), "%splayer3_point.png", CFG.theme_path);
-								pointer[2] = new GuiImageData(imgPath, player3_point_png);
-								snprintf(imgPath, sizeof(imgPath), "%splayer4_point.png", CFG.theme_path);
-								pointer[3] = new GuiImageData(imgPath, player4_point_png);
-								#endif
-								if (CFG.widescreen)
-								snprintf(imgPath, sizeof(imgPath), "%swbackground.png", CFG.theme_path);
-									else
-								snprintf(imgPath, sizeof(imgPath), "%sbackground.png", CFG.theme_path);
+                                } else {
+                                    WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtousethatoption, LANGUAGE.ok, 0,0,0);
+                                }
+                                break;
+                            case 1:
+                                Settings.sinfo++;
+                                break;
+                            case 2:
+                                Settings.hddinfo++;
+                                break;
+                            case 3:
+                                Settings.tooltips++;
+                                break;
+                            case 4:
+                                Settings.xflip++;
+                                break;
+                            case 5:
+                                Settings.wsprompt++;
+                                break;
+                            case 6:
+                                Settings.keyset++;
+                                break;
+                            case 7:
+                                Settings.wiilight++;
+                                break;
+                            case 8:
+                                Settings.rumble++;
+                                break;
+                            }
+                    }
+                    optionBrowser2.SetEffect(EFFECT_FADE, -20);
+                    while(optionBrowser2.GetEffect() > 0) usleep(50);
+                    titleTxt.SetText(LANGUAGE.settings);
+                    slidedirection = FADE;
+                    if(returnhere != 2)
+                    pageToDisplay = 1;
+                    MainButton1.ResetState();
+                    break;
+                }
 
-								background = new GuiImageData(imgPath, CFG.widescreen? wbackground_png : background_png);
+                if(MainButton2.GetState() == STATE_CLICKED) {
+                    MainButton1.SetEffect(EFFECT_FADE, -20);
+                    MainButton2.SetEffect(EFFECT_FADE, -20);
+                    MainButton3.SetEffect(EFFECT_FADE, -20);
+                    MainButton4.SetEffect(EFFECT_FADE, -20);
+                    while(MainButton2.GetEffect() > 0) usleep(50);
+                    HaltGui();
+                    w.Remove(&PageIndicatorBtn1);
+                    w.Remove(&PageIndicatorBtn2);
+                    w.Remove(&GoRightBtn);
+                    w.Remove(&GoLeftBtn);
+                    w.Remove(&MainButton1);
+                    w.Remove(&MainButton2);
+                    w.Remove(&MainButton3);
+                    w.Remove(&MainButton4);
+                    titleTxt.SetText(LANGUAGE.Gameload);
+                    exit = false;
+                    options2.SetName(0, "%s",LANGUAGE.VideoMode);
+                    options2.SetName(1, "%s",LANGUAGE.VIDTVPatch);
+                    options2.SetName(2, "%s",LANGUAGE.Patchcountrystrings);
+                    options2.SetName(3, "Ocarina");
+                    options2.SetName(4,"%s", LANGUAGE.BootStandard);
+                    options2.SetName(5, "%s",LANGUAGE.QuickBoot);
+                    options2.SetName(6, NULL);
+                    options2.SetName(7, NULL);
+                    options2.SetName(8, NULL);
+                    for(int i = 0; i < 9; i++) options2.SetValue(i, NULL);
+                    w.Append(&optionBrowser2);
+                    optionBrowser2.SetClickable(true);
+                    ResumeGui();
 
-								bgImg = new GuiImage(background);
-								mainWindow->Append(bgImg);
-								mainWindow->Append(&w);
+                    VIDEO_WaitVSync ();
+                    optionBrowser2.SetEffect(EFFECT_FADE, 20);
+			        while(optionBrowser2.GetEffect() > 0) usleep(50);
 
-                            w.Append(&settingsbackgroundbtn);
-							w.Append(&titleTxt);
-							w.Append(&backBtn);
-							w.Append(&lockBtn);
-							w.Append(&updateBtn);
-							w.Append(&btnLogo);
+                    while(!exit)
+                    {
+                        VIDEO_WaitVSync ();
+                        if(Settings.video >= settings_video_max)
+                            Settings.video = 0;
+                        if(Settings.vpatch >= settings_off_on_max)
+                            Settings.vpatch = 0;
+                        if ( Settings.patchcountrystrings > 1)
+                            Settings.patchcountrystrings = 0;
+                        if(Settings.ocarina >= settings_off_on_max)
+                            Settings.ocarina = 0;
+                        if ( Settings.qboot > 1 )
+                            Settings.qboot = 0;
+                        if ( Settings.cios >= settings_cios_max)
+                            Settings.cios = 0;
 
-							mainWindow->Append(&optionBrowser2);
-							mainWindow->Append(&page1Btn);
-							mainWindow->Append(&page2Btn);
-							mainWindow->Append(&tabBtn);
-							mainWindow->Append(&page3Btn);
-							w.Append(&backBtn);
-							w.Append(&lockBtn);
-							w.Append(&updateBtn);
-							}
-						}
-						else
-						{
-							WindowPrompt(LANGUAGE.Themepathchange,LANGUAGE.Consoleshouldbeunlockedtomodifyit,LANGUAGE.ok,0,0,0);
-						}
-						break;
-					}
+                        if (Settings.video == discdefault) options2.SetValue(0,"%s",LANGUAGE.DiscDefault);
+                        else if (Settings.video == systemdefault) options2.SetValue(0,"%s",LANGUAGE.SystemDefault);
+                        else if (Settings.video == patch) options2.SetValue(0,"%s",LANGUAGE.AutoPatch);
+                        else if (Settings.video == pal50) options2.SetValue(0,"%s PAL50",LANGUAGE.Force);
+                        else if (Settings.video == pal60) options2.SetValue(0,"%s PAL60",LANGUAGE.Force);
+                        else if (Settings.video == ntsc) options2.SetValue(0,"%s NTSC",LANGUAGE.Force);
+
+                        if (Settings.vpatch == on) options2.SetValue(1,"%s",LANGUAGE.ON);
+                        else if (Settings.vpatch == off) options2.SetValue(1,"%s",LANGUAGE.OFF);
+
+                        if (Settings.patchcountrystrings == 0) options2.SetValue(2,"%s",LANGUAGE.OFF);
+                        else if (Settings.patchcountrystrings == 1) options2.SetValue(2,"%s",LANGUAGE.ON);
+
+                        if (Settings.ocarina == on) options2.SetValue(3,"%s",LANGUAGE.ON);
+                        else if (Settings.ocarina == off) options2.SetValue(3,"%s",LANGUAGE.OFF);
+
+                       if (Settings.godmode != 1) options2.SetValue(4, "********");
+                        else if (Settings.cios == ios249) options2.SetValue(4,"cIOS 249");
+                        else if (Settings.cios == ios222) options2.SetValue(4,"cIOS 222");
+
+                        if (Settings.qboot == no) options2.SetValue(5,"%s",LANGUAGE.No);
+                        else if (Settings.qboot == yes) options2.SetValue(5,"%s",LANGUAGE.Yes);
+
+                        if(backBtn.GetState() == STATE_CLICKED)
+                        {
+                            backBtn.ResetState();
+                            exit = true;
+                            break;
+                        }
+
+                        if(shutdown == 1)
+                            Sys_Shutdown();
+                        else if(reset == 1)
+                            Sys_Reboot();
+
+                        else if(homo.GetState() == STATE_CLICKED)
+                        {
+                            cfg_save_global();
+                            optionBrowser2.SetState(STATE_DISABLED);
+                            s32 thetimeofbg = bgMusic->GetPlayTime();
+                            bgMusic->Stop();
+                            choice = WindowExitPrompt(LANGUAGE.ExitUSBISOLoader,0, LANGUAGE.BacktoLoader,LANGUAGE.WiiMenu,LANGUAGE.Back,0);
+                            if(!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path))
+                            {
+                                bgMusic->Play();
+                            } else {
+                                bgMusic->PlayOggFile(Settings.ogg_path);
+                            }
+                            bgMusic->SetPlayTime(thetimeofbg);
+                            SetVolumeOgg(255*(Settings.volume/100.0));
+                            if(choice == 3) {
+                                Sys_LoadMenu(); // Back to System Menu
+                            } else if (choice == 2) {
+                                Sys_BackToLoader();
+                            } else {
+                                homo.ResetState();
+                            }
+                            optionBrowser2.SetState(STATE_DEFAULT);
+                        }
+
+                        ret = optionBrowser2.GetClickedOption();
+
+                        switch (ret)
+                        {
+                            case 0:
+                                Settings.video++;
+                                break;
+                            case 1:
+                                Settings.vpatch++;
+                                break;
+                            case 2:
+                                Settings.patchcountrystrings++;
+                                break;
+                            case 3:
+                                Settings.ocarina++;
+                                break;
+                            case 4:
+                                if(Settings.godmode)
+                                Settings.cios++;
+                                break;
+                            case 5:
+                                Settings.qboot++;
+                                break;
+                        }
+                    }
+                    optionBrowser2.SetEffect(EFFECT_FADE, -20);
+                    while(optionBrowser2.GetEffect() > 0) usleep(50);
+                    titleTxt.SetText(LANGUAGE.settings);
+                    slidedirection = FADE;
+                    pageToDisplay = 1;
+                    MainButton2.ResetState();
+                    break;
+                }
+
+                if(MainButton3.GetState() == STATE_CLICKED) {
+                    MainButton1.SetEffect(EFFECT_FADE, -20);
+                    MainButton2.SetEffect(EFFECT_FADE, -20);
+                    MainButton3.SetEffect(EFFECT_FADE, -20);
+                    MainButton4.SetEffect(EFFECT_FADE, -20);
+                    while(MainButton3.GetEffect() > 0) usleep(50);
+                    HaltGui();
+                    w.Remove(&PageIndicatorBtn1);
+                    w.Remove(&PageIndicatorBtn2);
+                    w.Remove(&GoRightBtn);
+                    w.Remove(&GoLeftBtn);
+                    w.Remove(&MainButton1);
+                    w.Remove(&MainButton2);
+                    w.Remove(&MainButton3);
+                    w.Remove(&MainButton4);
+                    titleTxt.SetText(LANGUAGE.Parentalcontrol);
+                    exit = false;
+                    if(Settings.godmode)
+                    options2.SetName(0, "Console");
+                    options2.SetName(1, "%s", LANGUAGE.Password);
+                    options2.SetName(2, "%s",LANGUAGE.Controllevel);
+                    options2.SetName(3, NULL);
+                    options2.SetName(4, NULL);
+                    options2.SetName(5, NULL);
+                    options2.SetName(6, NULL);
+                    options2.SetName(7, NULL);
+                    options2.SetName(8, NULL);
+                    for(int i = 0; i < 9; i++) options2.SetValue(i, NULL);
+                    w.Append(&optionBrowser2);
+                    optionBrowser2.SetClickable(true);
+                    ResumeGui();
+
+                    VIDEO_WaitVSync ();
+                    optionBrowser2.SetEffect(EFFECT_FADE, 20);
+			        while(optionBrowser2.GetEffect() > 0) usleep(50);
+
+                    while(!exit)
+                    {
+                        VIDEO_WaitVSync ();
+
+                        if (Settings.parentalcontrol > 3 )
+                            Settings.parentalcontrol = 0;
+
+                        if( Settings.godmode == 1 ) options2.SetValue(0, "Unlocked");
+                        else if( Settings.godmode == 0 ) options2.SetValue(0, "Locked");
+
+                        if ( Settings.godmode != 1) options2.SetValue(1, "********");
+                        else if (!strcmp("", Settings.unlockCode)) options2.SetValue(1, "%s",LANGUAGE.notset);
+                        else options2.SetValue(1, Settings.unlockCode);
+
+                        if (Settings.godmode != 1) options2.SetValue(2, "********");
+                        else if(Settings.parentalcontrol == 0) options2.SetValue(2, "%s", LANGUAGE.OFF);
+                        else if(Settings.parentalcontrol == 1) options2.SetValue(2, "1");
+                        else if(Settings.parentalcontrol == 2) options2.SetValue(2, "2");
+                        else if(Settings.parentalcontrol == 3) options2.SetValue(2, "3");
+
+                        if(backBtn.GetState() == STATE_CLICKED)
+                        {
+                            backBtn.ResetState();
+                            exit = true;
+                            break;
+                        }
+
+                        if(shutdown == 1)
+                            Sys_Shutdown();
+                        else if(reset == 1)
+                            Sys_Reboot();
+
+                        else if(homo.GetState() == STATE_CLICKED)
+                        {
+                            cfg_save_global();
+                            optionBrowser2.SetState(STATE_DISABLED);
+                            s32 thetimeofbg = bgMusic->GetPlayTime();
+                            bgMusic->Stop();
+                            choice = WindowExitPrompt(LANGUAGE.ExitUSBISOLoader,0, LANGUAGE.BacktoLoader,LANGUAGE.WiiMenu,LANGUAGE.Back,0);
+                            if(!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path))
+                            {
+                                bgMusic->Play();
+                            } else {
+                                bgMusic->PlayOggFile(Settings.ogg_path);
+                            }
+                            bgMusic->SetPlayTime(thetimeofbg);
+                            SetVolumeOgg(255*(Settings.volume/100.0));
+                            if(choice == 3) {
+                                Sys_LoadMenu(); // Back to System Menu
+                            } else if (choice == 2) {
+                                Sys_BackToLoader();
+                            } else {
+                                homo.ResetState();
+                            }
+                            optionBrowser2.SetState(STATE_DEFAULT);
+                        }
+
+                        ret = optionBrowser2.GetClickedOption();
+
+                        switch (ret)
+                        {
+                            case 0:
+                                if (!strcmp("", Settings.unlockCode))
+                                {
+                                    Settings.godmode = !Settings.godmode;
+                                    break;
+                                }
+                                else if ( Settings.godmode == 0 ) {
+                                    //password check to unlock Install,Delete and Format
+                                    w.Remove(&optionBrowser2);
+                                    w.Remove(&backBtn);
+                                    char entered[20] = "";
+                                    int result = OnScreenKeyboard(entered, 20,0);
+                                    w.Append(&optionBrowser2);
+                                    w.Append(&backBtn);
+                                    if ( result == 1 ) {
+                                        if (!strcmp(entered, Settings.unlockCode)) //if password correct
+                                        {
+                                            if (Settings.godmode == 0) {
+                                                WindowPrompt(LANGUAGE.CorrectPassword,LANGUAGE.InstallRenameandDeleteareunlocked,LANGUAGE.ok,0,0,0);
+                                                Settings.godmode = 1;
+                                                __Menu_GetEntries();
+                                                menu = MENU_DISCLIST;
+                                            }
+                                        } else {
+                                                WindowPrompt(LANGUAGE.WrongPassword,LANGUAGE.USBLoaderisprotected,LANGUAGE.ok,0,0,0);
+                                        }
+                                    }
+                                } else {
+                                    int choice = WindowPrompt (LANGUAGE.LockConsole,LANGUAGE.Areyousure,LANGUAGE.Yes,LANGUAGE.No,0,0);
+                                    if(choice == 1) {
+                                        WindowPrompt(LANGUAGE.ConsoleLocked,LANGUAGE.USBLoaderisprotected,LANGUAGE.ok,0,0,0);
+                                        Settings.godmode = 0;
+                                        __Menu_GetEntries();
+                                        menu = MENU_DISCLIST;
+                                    }
+                                }
+                                break;
+                            case 1:// Modify Password
+                                if ( Settings.godmode == 1)
+                                {
+                                    w.Remove(&optionBrowser2);
+                                    w.Remove(&backBtn);
+                                    char entered[20] = "";
+                                    strncpy(entered, Settings.unlockCode, sizeof(entered));
+                                    int result = OnScreenKeyboard(entered, 20,0);
+                                    w.Append(&optionBrowser2);
+                                    w.Append(&backBtn);
+                                    if ( result == 1 ) {
+                                        strncpy(Settings.unlockCode, entered, sizeof(Settings.unlockCode));
+                                        WindowPrompt(LANGUAGE.PasswordChanged,LANGUAGE.Passwordhasbeenchanged,LANGUAGE.ok,0,0,0);
+                                    }
+                                } else {
+                                    WindowPrompt(LANGUAGE.Passwordchange,LANGUAGE.Consoleshouldbeunlockedtomodifyit,LANGUAGE.ok,0,0,0);
+                                }
+                                break;
+                            case 2:
+                                if(Settings.godmode)
+                                Settings.parentalcontrol++;
+                                break;
+                        }
+                    }
+                    optionBrowser2.SetEffect(EFFECT_FADE, -20);
+                    while(optionBrowser2.GetEffect() > 0) usleep(50);
+                    titleTxt.SetText(LANGUAGE.settings);
+                    slidedirection = FADE;
+                    pageToDisplay = 1;
+                    MainButton3.ResetState();
+                    break;
+                }
+
+                if(MainButton4.GetState() == STATE_CLICKED) {
+                    MainButton1.SetEffect(EFFECT_FADE, -20);
+                    MainButton2.SetEffect(EFFECT_FADE, -20);
+                    MainButton3.SetEffect(EFFECT_FADE, -20);
+                    MainButton4.SetEffect(EFFECT_FADE, -20);
+                    while(MainButton4.GetEffect() > 0) usleep(50);
+                    HaltGui();
+                    w.Remove(&PageIndicatorBtn1);
+                    w.Remove(&PageIndicatorBtn2);
+                    w.Remove(&GoRightBtn);
+                    w.Remove(&GoLeftBtn);
+                    w.Remove(&MainButton1);
+                    w.Remove(&MainButton2);
+                    w.Remove(&MainButton3);
+                    w.Remove(&MainButton4);
+                    titleTxt.SetText(LANGUAGE.Sound);
+                    exit = false;
+                    options2.SetName(0, "%s",LANGUAGE.Backgroundmusic);
+                    options2.SetName(1, "%s",LANGUAGE.Volume);
+                    options2.SetName(2, "%s",LANGUAGE.SFXVolume);
+                    options2.SetName(3, NULL);
+                    options2.SetName(4, NULL);
+                    options2.SetName(5, NULL);
+                    options2.SetName(6, NULL);
+                    options2.SetName(7, NULL);
+                    options2.SetName(8, NULL);
+                    for(int i = 0; i < 9; i++) options2.SetValue(i, NULL);
+                    w.Append(&optionBrowser2);
+                    optionBrowser2.SetClickable(true);
+                    ResumeGui();
+
+                    VIDEO_WaitVSync ();
+                    optionBrowser2.SetEffect(EFFECT_FADE, 20);
+			        while(optionBrowser2.GetEffect() > 0) usleep(50);
+
+                    char * oggfile;
+                    oggfile = strrchr(Settings.ogg_path, '/')+1;
+
+                    while(!exit)
+                    {
+                        VIDEO_WaitVSync ();
+
+                        if(!strcmp("notset", Settings.ogg_path) || !strcmp("",Settings.oggload_path))
+                            options2.SetValue(0, "%s", LANGUAGE.Standard);
+                        else {
+                            options2.SetValue(0, "%s", oggfile);
+                        }
+
+                        if(Settings.volume > 0)
+                        options2.SetValue(1,"%i", Settings.volume);
+                        else
+                        options2.SetValue(1,"%s", LANGUAGE.OFF);
+                        if(Settings.sfxvolume > 0)
+                        options2.SetValue(2,"%i", Settings.sfxvolume);
+                        else
+                        options2.SetValue(2,"%s", LANGUAGE.OFF);
+
+                        if(backBtn.GetState() == STATE_CLICKED)
+                        {
+                            backBtn.ResetState();
+                            exit = true;
+                            break;
+                        }
+
+                        if(shutdown == 1)
+                            Sys_Shutdown();
+                        else if(reset == 1)
+                            Sys_Reboot();
+
+                        else if(homo.GetState() == STATE_CLICKED)
+                        {
+                            cfg_save_global();
+                            optionBrowser2.SetState(STATE_DISABLED);
+                            s32 thetimeofbg = bgMusic->GetPlayTime();
+                            bgMusic->Stop();
+                            choice = WindowExitPrompt(LANGUAGE.ExitUSBISOLoader,0, LANGUAGE.BacktoLoader,LANGUAGE.WiiMenu,LANGUAGE.Back,0);
+                            if(!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path))
+                            {
+                                bgMusic->Play();
+                            } else {
+                                bgMusic->PlayOggFile(Settings.ogg_path);
+                            }
+                            bgMusic->SetPlayTime(thetimeofbg);
+                            SetVolumeOgg(255*(Settings.volume/100.0));
+                            if(choice == 3) {
+                                Sys_LoadMenu(); // Back to System Menu
+                            } else if (choice == 2) {
+                                Sys_BackToLoader();
+                            } else {
+                                homo.ResetState();
+                            }
+                            optionBrowser2.SetState(STATE_DEFAULT);
+                        }
+
+                        ret = optionBrowser2.GetClickedOption();
+
+                        switch (ret)
+                        {
+                            case 0:
+                                if(isSdInserted())
+                                {
+                                    w.SetEffect(EFFECT_FADE, -20);
+                                    while(w.GetEffect()>0) usleep(50);
+                                    mainWindow->Remove(&w);
+                                    bool returnhere = true;
+                                    while(returnhere)
+                                        returnhere = MenuOGG();
+                                    HaltGui();
+                                    mainWindow->Append(&w);
+                                    w.SetEffect(EFFECT_FADE, 20);
+                                    ResumeGui();
+                                    while(w.GetEffect()>0) usleep(50);
+                                }
+                                else
+                                    WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtousethatoption, LANGUAGE.ok, 0,0,0);
+                                break;
+                            case 1:
+                                Settings.volume += 10;
+                                if(Settings.volume > 100)
+                                    Settings.volume = 0;
+                                SetVolumeOgg(255*(Settings.volume/100.0));
+                                break;
+                            case 2:
+                                Settings.sfxvolume += 10;
+                                if(Settings.sfxvolume > 100)
+                                    Settings.sfxvolume = 0;
+                                btnSoundOver.SetVolume(Settings.sfxvolume);
+                                btnClick.SetVolume(Settings.sfxvolume);
+                                btnClick1.SetVolume(Settings.sfxvolume);
+                                break;
+                        }
+                    }
+                    optionBrowser2.SetEffect(EFFECT_FADE, -20);
+                    while(optionBrowser2.GetEffect() > 0) usleep(50);
+                    titleTxt.SetText(LANGUAGE.settings);
+                    slidedirection = FADE;
+                    pageToDisplay = 1;
+                    MainButton4.ResetState();
+                    break;
+                }
 			}
-			if (pageToDisplay == 3)
+
+			if ( pageToDisplay == 2)
 			{
+                if(MainButton1.GetState() == STATE_CLICKED) {
+                    MainButton1.SetEffect(EFFECT_FADE, -20);
+                    MainButton2.SetEffect(EFFECT_FADE, -20);
+                    MainButton3.SetEffect(EFFECT_FADE, -20);
+                    MainButton4.SetEffect(EFFECT_FADE, -20);
+                    while(MainButton1.GetEffect() > 0) usleep(50);
+                    HaltGui();
+                    w.Remove(&PageIndicatorBtn1);
+                    w.Remove(&PageIndicatorBtn2);
+                    w.Remove(&GoRightBtn);
+                    w.Remove(&GoLeftBtn);
+                    w.Remove(&MainButton1);
+                    w.Remove(&MainButton2);
+                    w.Remove(&MainButton3);
+                    w.Remove(&MainButton4);
+                    titleTxt.SetText(LANGUAGE.Custompaths);
+                    exit = false;
+                    if(Settings.godmode)
+                    options2.SetName(0, "%s", LANGUAGE.CoverPath);
+                    options2.SetName(1, "%s", LANGUAGE.DiscimagePath);
+                    options2.SetName(2, "%s", LANGUAGE.ThemePath);
+                    options2.SetName(3, "%s", LANGUAGE.Titlestxtpath);
+                    options2.SetName(4, "%s", LANGUAGE.Updatepath);
+                    options2.SetName(5, NULL);
+                    options2.SetName(6, NULL);
+                    options2.SetName(7, NULL);
+                    options2.SetName(8, NULL);
+                    for(int i = 0; i < 9; i++) options2.SetValue(i, NULL);
+                    w.Append(&optionBrowser2);
+                    optionBrowser2.SetClickable(true);
+                    ResumeGui();
 
-				if ( Settings.keyset >= settings_keyset_max)
-					Settings.keyset = 0;
-				if ( Settings.unicodefix > 2 )
-					Settings.unicodefix = 0;
-				if ( Settings.wiilight > 2 )
-					Settings.wiilight = 0;
-                if ( Settings.patchcountrystrings > 1)
-                    Settings.patchcountrystrings = 0;
+                    VIDEO_WaitVSync ();
+                    optionBrowser2.SetEffect(EFFECT_FADE, 20);
+			        while(optionBrowser2.GetEffect() > 0) usleep(50);
 
-				options2.SetValue(0, "%s", Settings.titlestxt_path);
+			        if(Settings.godmode) {
 
-				options2.SetValue(1, "%s", Settings.language_path);
+                    while(!exit)
+                    {
+                        VIDEO_WaitVSync ();
 
-				if (Settings.keyset == us) options2.SetValue(2,"QWERTY");
-				else if (Settings.keyset == dvorak) options2.SetValue(2,"DVORAK");
-				else if (Settings.keyset == euro) options2.SetValue(2,"QWERTZ");
-				else if (Settings.keyset == azerty) options2.SetValue(2,"AZERTY");
+                        options2.SetValue(0, "%s", Settings.covers_path);
+                        options2.SetValue(1, "%s", Settings.disc_path);
+                        options2.SetValue(2, "%s", CFG.theme_path);
+                        options2.SetValue(3, "%s", Settings.titlestxt_path);
+                        options2.SetValue(4, "%s", Settings.update_path);
 
-				if (Settings.unicodefix == 0) options2.SetValue(3,"%s",LANGUAGE.OFF);
-				else if (Settings.unicodefix == 1) options2.SetValue(3,"%s",LANGUAGE.TChinese);
-				else if (Settings.unicodefix == 2) options2.SetValue(3,"%s",LANGUAGE.SChinese);
+                        if(backBtn.GetState() == STATE_CLICKED)
+                        {
+                            backBtn.ResetState();
+                            exit = true;
+                            break;
+                        }
 
-				if(!strcmp("notset", Settings.ogg_path) || !strcmp("",Settings.oggload_path))
-					options2.SetValue(4, "%s", LANGUAGE.Standard);
-				else
-					options2.SetValue(4, "%s", Settings.ogg_path);
+                        if(shutdown == 1)
+                            Sys_Shutdown();
+                        else if(reset == 1)
+                            Sys_Reboot();
 
-				if (Settings.wiilight == 0) options2.SetValue(5,"%s",LANGUAGE.OFF);
-				else if (Settings.wiilight == 1) options2.SetValue(5,"%s",LANGUAGE.ON);
-				else if (Settings.wiilight == 2) options2.SetValue(5,"%s",LANGUAGE.OnlyInstall);
+                        else if(homo.GetState() == STATE_CLICKED)
+                        {
+                            cfg_save_global();
+                            optionBrowser2.SetState(STATE_DISABLED);
+                            s32 thetimeofbg = bgMusic->GetPlayTime();
+                            bgMusic->Stop();
+                            choice = WindowExitPrompt(LANGUAGE.ExitUSBISOLoader,0, LANGUAGE.BacktoLoader,LANGUAGE.WiiMenu,LANGUAGE.Back,0);
+                            if(!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path))
+                            {
+                                bgMusic->Play();
+                            } else {
+                                bgMusic->PlayOggFile(Settings.ogg_path);
+                            }
+                            bgMusic->SetPlayTime(thetimeofbg);
+                            SetVolumeOgg(255*(Settings.volume/100.0));
+                            if(choice == 3) {
+                                Sys_LoadMenu(); // Back to System Menu
+                            } else if (choice == 2) {
+                                Sys_BackToLoader();
+                            } else {
+                                homo.ResetState();
+                            }
+                            optionBrowser2.SetState(STATE_DEFAULT);
+                        }
 
-				options2.SetValue(6, "%s", Settings.update_path);
+                        ret = optionBrowser2.GetClickedOption();
 
-				if (Settings.patchcountrystrings == 0) options2.SetValue(7,"%s",LANGUAGE.OFF);
-				else if (Settings.patchcountrystrings == 1) options2.SetValue(7,"%s",LANGUAGE.ON);
+                        switch (ret)
+                        {
+                            case 0:
+                                if ( Settings.godmode == 1)
+                                {
+                                    w.Remove(&optionBrowser2);
+                                    w.Remove(&backBtn);
+                                    char entered[43] = "";
+                                    strncpy(entered, Settings.covers_path, sizeof(entered));
+                                    int result = OnScreenKeyboard(entered,43,4);
+                                    w.Append(&optionBrowser2);
+                                    w.Append(&backBtn);
+                                    if ( result == 1 )
+                                    {
+                                        int len = (strlen(entered)-1);
+                                        if(entered[len] !='/')
+                                        strncat (entered, "/", 1);
+                                        strncpy(Settings.covers_path, entered, sizeof(Settings.covers_path));
+                                        WindowPrompt(LANGUAGE.CoverpathChanged,0,LANGUAGE.ok,0,0,0);
+                                        if(!isSdInserted()) {
+                                            WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
+                                        }
+                                    }
+                                } else {
+                                    WindowPrompt(LANGUAGE.Coverpathchange,LANGUAGE.Consoleshouldbeunlockedtomodifyit,LANGUAGE.ok,0,0,0);
+                                }
+                                break;
+                            case 1:
+                                if ( Settings.godmode == 1)
+                                {
+                                    w.Remove(&optionBrowser2);
+                                    w.Remove(&backBtn);
+                                    char entered[43] = "";
+                                    strncpy(entered, Settings.disc_path, sizeof(entered));
+                                    int result = OnScreenKeyboard(entered, 43,4);
+                                    w.Append(&optionBrowser2);
+                                    w.Append(&backBtn);
+                                    if ( result == 1 )
+                                    {
+                                        int len = (strlen(entered)-1);
+                                        if(entered[len] !='/')
+                                        strncat (entered, "/", 1);
+                                        strncpy(Settings.disc_path, entered, sizeof(Settings.disc_path));
+                                        WindowPrompt(LANGUAGE.DiscpathChanged,0,LANGUAGE.ok,0,0,0);
+                                        if(!isSdInserted()) {
+                                            WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
+                                        }
+                                    }
+                                } else {
+                                    WindowPrompt(LANGUAGE.Discpathchange,LANGUAGE.Consoleshouldbeunlockedtomodifyit,LANGUAGE.ok,0,0,0);
+                                }
+                                break;
+                            case 2:
+                                if ( Settings.godmode == 1)
+                                {
+                                    w.Remove(&optionBrowser2);
+                                    w.Remove(&backBtn);
+                                    char entered[43] = "";
+                                    strncpy(entered, CFG.theme_path, sizeof(entered));
+                                    int result = OnScreenKeyboard(entered, 43,4);
+                                    HaltGui();
+                                    w.RemoveAll();
+                                    if ( result == 1 )
+                                    {
+                                        int len = (strlen(entered)-1);
+                                        if(entered[len] !='/')
+                                        strncat (entered, "/", 1);
+                                        strncpy(CFG.theme_path, entered, sizeof(CFG.theme_path));
+                                        WindowPrompt(LANGUAGE.ThemepathChanged,0,LANGUAGE.ok,0,0,0);
+                                        if(!isSdInserted()) {
+                                            WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
+                                        } else {
+                                            cfg_save_global();
+                                        }
+                                        mainWindow->Remove(bgImg);
+                                        CFG_Load();
+                                        CFG_LoadGlobal();
+                                        menu = MENU_SETTINGS;
+                                        #ifdef HW_RVL
+                                        snprintf(imgPath, sizeof(imgPath), "%splayer1_point.png", CFG.theme_path);
+                                        pointer[0] = new GuiImageData(imgPath, player1_point_png);
+                                        snprintf(imgPath, sizeof(imgPath), "%splayer2_point.png", CFG.theme_path);
+                                        pointer[1] = new GuiImageData(imgPath, player2_point_png);
+                                        snprintf(imgPath, sizeof(imgPath), "%splayer3_point.png", CFG.theme_path);
+                                        pointer[2] = new GuiImageData(imgPath, player3_point_png);
+                                        snprintf(imgPath, sizeof(imgPath), "%splayer4_point.png", CFG.theme_path);
+                                        pointer[3] = new GuiImageData(imgPath, player4_point_png);
+                                        #endif
+                                        if (CFG.widescreen)
+                                        snprintf(imgPath, sizeof(imgPath), "%swbackground.png", CFG.theme_path);
+                                            else
+                                        snprintf(imgPath, sizeof(imgPath), "%sbackground.png", CFG.theme_path);
 
-				options2.SetValue(8, " ");
+                                        background = new GuiImageData(imgPath, CFG.widescreen? wbackground_png : background_png);
 
-				ret = optionBrowser2.GetClickedOption();
+                                        bgImg = new GuiImage(background);
+                                        mainWindow->Append(bgImg);
+                                        mainWindow->Append(&w);
+                                    }
+                                    w.Append(&settingsbackground);
+                                    w.Append(&titleTxt);
+                                    w.Append(&backBtn);
+                                    w.Append(&optionBrowser2);
+                                    ResumeGui();
+                                } else {
+                                    WindowPrompt(LANGUAGE.Themepathchange,LANGUAGE.Consoleshouldbeunlockedtomodifyit,LANGUAGE.ok,0,0,0);
+                                }
+                                break;
+                        }
+                    }
+                    /** If not godmode don't let him inside **/
+                    } else {
+                        WindowPrompt(LANGUAGE.ConsoleLocked, LANGUAGE.UnlockConsoletousethisOption, LANGUAGE.ok, 0, 0, 0);
+                    }
+                    optionBrowser2.SetEffect(EFFECT_FADE, -20);
+                    while(optionBrowser2.GetEffect() > 0) usleep(50);
+                    titleTxt.SetText(LANGUAGE.settings);
+                    slidedirection = FADE;
+                    pageToDisplay = 2;
+                    MainButton1.ResetState();
+                    break;
+                }
 
-				switch(ret)
-				{
-					case 0:
-						if ( Settings.godmode == 1)
-						{
-							mainWindow->Remove(&optionBrowser2);
-							mainWindow->Remove(&page1Btn);
-							mainWindow->Remove(&page2Btn);
-							mainWindow->Remove(&tabBtn);
-							mainWindow->Remove(&page3Btn);
-							w.Remove(&backBtn);
-							w.Remove(&lockBtn);
-							w.Remove(&updateBtn);
-							char entered[43] = "";
-							strncpy(entered, Settings.titlestxt_path, sizeof(entered));
-							int result = OnScreenKeyboard(entered,43,4);
-							mainWindow->Append(&optionBrowser2);
-							mainWindow->Append(&page1Btn);
-							mainWindow->Append(&page2Btn);
-							mainWindow->Append(&tabBtn);
-							mainWindow->Append(&page3Btn);
-							w.Append(&backBtn);
-							w.Append(&lockBtn);
-							w.Append(&updateBtn);
-							if ( result == 1 )
-							{
-								int len = (strlen(entered)-1);
-								if(entered[len] !='/')
-								strncat (entered, "/", 1);
-								strncpy(Settings.titlestxt_path, entered, sizeof(Settings.titlestxt_path));
-								WindowPrompt(LANGUAGE.TitlestxtpathChanged,0,LANGUAGE.ok,0,0,0);
-								if(isSdInserted()) {
-									cfg_save_global();
-									CFG_Load();
-								} else {
-									WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
-								}
-							}
-						}
-						else
-						{
-							WindowPrompt(LANGUAGE.Titlestxtpathchange,LANGUAGE.Consoleshouldbeunlockedtomodifyit,LANGUAGE.ok,0,0,0);
-						}
-						break;
-					case 1: // language file path
-						if ( Settings.godmode == 1)
-						{
-							mainWindow->Remove(&optionBrowser2);
-							mainWindow->Remove(&page1Btn);
-							mainWindow->Remove(&page2Btn);
-							mainWindow->Remove(&tabBtn);
-							mainWindow->Remove(&page3Btn);
-							w.Remove(&backBtn);
-							w.Remove(&lockBtn);
-							w.Remove(&updateBtn);
-							char entered[40] = "";
-							strncpy(entered, Settings.language_path, sizeof(entered));
-							int result = OnScreenKeyboard(entered, 40,0);
-							mainWindow->Append(&optionBrowser2);
-							mainWindow->Append(&tabBtn);
-							mainWindow->Append(&page1Btn);
-							mainWindow->Append(&page2Btn);
-							mainWindow->Append(&page3Btn);
-							w.Append(&backBtn);
-							w.Append(&lockBtn);
-							w.Append(&updateBtn);
-							if ( result == 1 )
-							{	strncpy(Settings.language_path, entered, sizeof(Settings.language_path));
-								if(isSdInserted()) {
-									cfg_save_global();
-									if(!checkfile(Settings.language_path)) {
-									WindowPrompt(LANGUAGE.Filenotfound,LANGUAGE.Loadingstandardlanguage,LANGUAGE.ok,0,0,0);
-									}
-									lang_default();
-									CFG_Load();
-									menu = MENU_SETTINGS;
-									pageToDisplay = 0;
-								} else {
-									WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
-								}
-							}
-						}
-						else
-						{
-							WindowPrompt(LANGUAGE.Langchange,LANGUAGE.Consoleshouldbeunlockedtomodifyit,LANGUAGE.ok,0,0,0);
-						}
-						break;
-					case 2:
-						Settings.keyset++;
-						break;
-					case 3:
-						Settings.unicodefix++;
-						break;
-					case 4:
-						if(isSdInserted())
-						{
-							menu = MENU_OGG;
-							pageToDisplay = 0;
-						}
-						else
-							WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtousethatoption, LANGUAGE.ok, 0,0,0);
-						break;
-					case 5:
-						Settings.wiilight++;
-						break;
-					case 7:
-                        Settings.patchcountrystrings++;
-                        break;
-					case 6:
-						if ( Settings.godmode == 1)
-						{
-							mainWindow->Remove(&optionBrowser2);
-							mainWindow->Remove(&page1Btn);
-							mainWindow->Remove(&page2Btn);
-							mainWindow->Remove(&tabBtn);
-							mainWindow->Remove(&page3Btn);
-							w.Remove(&backBtn);
-							w.Remove(&lockBtn);
-							w.Remove(&updateBtn);
-							char entered[43] = "";
-							strncpy(entered, Settings.update_path, sizeof(entered));
-							int result = OnScreenKeyboard(entered,43,4);
-							mainWindow->Append(&optionBrowser2);
-							mainWindow->Append(&page1Btn);
-							mainWindow->Append(&page2Btn);
-							mainWindow->Append(&tabBtn);
-							mainWindow->Append(&page3Btn);
-							w.Append(&backBtn);
-							w.Append(&lockBtn);
-							w.Append(&updateBtn);
-							if ( result == 1 )
-							{
-								int len = (strlen(entered)-1);
-								if(entered[len] !='/')
-								strncat (entered, "/", 1);
-								strncpy(Settings.update_path, entered, sizeof(Settings.update_path));
-								WindowPrompt(LANGUAGE.Updatepathchanged,0,LANGUAGE.ok,0,0,0);
-							}
-						}
-						else
-							WindowPrompt(0,LANGUAGE.Consoleshouldbeunlockedtomodifyit,LANGUAGE.ok,0,0,0);
-						break;
-					case 8:
-						int choice = WindowPrompt(LANGUAGE.Areyousure, 0, LANGUAGE.Yes, LANGUAGE.Cancel, 0, 0);
-						if(choice == 1)
-						{
+                if(MainButton2.GetState() == STATE_CLICKED) {
+                    MainButton1.SetEffect(EFFECT_FADE, -20);
+                    MainButton2.SetEffect(EFFECT_FADE, -20);
+                    MainButton3.SetEffect(EFFECT_FADE, -20);
+                    MainButton4.SetEffect(EFFECT_FADE, -20);
+                    while(MainButton2.GetEffect() > 0) usleep(50);
+                    w.Remove(&PageIndicatorBtn1);
+                    w.Remove(&PageIndicatorBtn2);
+                    w.Remove(&GoRightBtn);
+                    w.Remove(&GoLeftBtn);
+                    w.Remove(&MainButton1);
+                    w.Remove(&MainButton2);
+                    w.Remove(&MainButton3);
+                    w.Remove(&MainButton4);
+                    if(isSdInserted() && Settings.godmode) {
+                    w.Remove(&optionBrowser2);
+                    w.Remove(&backBtn);
+                    int ret = ProgressUpdateWindow();
+                    if(ret < 0) {
+                        WindowPrompt(LANGUAGE.Updatefailed,0,LANGUAGE.ok,0,0,0);
+                    }
+                    w.Append(&optionBrowser2);
+                    w.Append(&backBtn);
+                    } else {
+                        WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtousethatoption, LANGUAGE.ok, 0,0,0);
+                    }
+                    slidedirection = FADE;
+                    pageToDisplay = 2;
+                    MainButton2.ResetState();
+                    break;
+                }
+
+                if(MainButton3.GetState() == STATE_CLICKED) {
+                    MainButton1.SetEffect(EFFECT_FADE, -20);
+                    MainButton2.SetEffect(EFFECT_FADE, -20);
+                    MainButton3.SetEffect(EFFECT_FADE, -20);
+                    MainButton4.SetEffect(EFFECT_FADE, -20);
+                    while(MainButton3.GetEffect() > 0) usleep(50);
+                    w.Remove(&PageIndicatorBtn1);
+                    w.Remove(&PageIndicatorBtn2);
+                    w.Remove(&GoRightBtn);
+                    w.Remove(&GoLeftBtn);
+                    w.Remove(&MainButton1);
+                    w.Remove(&MainButton2);
+                    w.Remove(&MainButton3);
+                    w.Remove(&MainButton4);
+                    w.Remove(&backBtn);
+                    w.Remove(&optionBrowser2);
+                    if(Settings.godmode) {
+                    int choice = WindowPrompt(LANGUAGE.Areyousure, 0, LANGUAGE.Yes, LANGUAGE.Cancel, 0, 0);
+                    if(choice == 1) {
 							if(isSdInserted())
 								remove("SD:/config/GXGlobal.cfg");
 							lang_default();
 							CFG_Load();
 							menu = MENU_SETTINGS;
 							pageToDisplay = 0;
-						}
-						break;
-				}
+                    }
+                    } else {
+                        WindowPrompt(LANGUAGE.ConsoleLocked, LANGUAGE.UnlockConsoletousethisOption, LANGUAGE.ok, 0, 0, 0);
+                    }
+                    w.Append(&backBtn);
+                    w.Append(&optionBrowser2);
+                    slidedirection = FADE;
+                    pageToDisplay = 2;
+                    MainButton3.ResetState();
+                    break;
+                }
+
+                if(MainButton4.GetState() == STATE_CLICKED) {
+                    MainButton1.SetEffect(EFFECT_FADE, -20);
+                    MainButton2.SetEffect(EFFECT_FADE, -20);
+                    MainButton3.SetEffect(EFFECT_FADE, -20);
+                    MainButton4.SetEffect(EFFECT_FADE, -20);
+                    while(MainButton4.GetEffect() > 0) usleep(50);
+                    w.Remove(&PageIndicatorBtn1);
+                    w.Remove(&PageIndicatorBtn2);
+                    w.Remove(&GoRightBtn);
+                    w.Remove(&GoLeftBtn);
+                    w.Remove(&MainButton1);
+                    w.Remove(&MainButton2);
+                    w.Remove(&MainButton3);
+                    w.Remove(&MainButton4);
+                    WindowCredits();
+                    slidedirection = FADE;
+                    pageToDisplay = 2;
+                    MainButton4.ResetState();
+                    break;
+                }
 			}
 
 			if(shutdown == 1)
 				Sys_Shutdown();
 			if(reset == 1)
 				Sys_Reboot();
-
-			if(page1Btn.GetState() == STATE_CLICKED)
-			{
-				pageToDisplay = 1;
-				page1Btn.ResetState();
-				tabBtn.SetImage(&tab1Img);
-				menu = MENU_NONE;
-				break;
-			}
-
-			if(page2Btn.GetState() == STATE_CLICKED)
-			{
-				pageToDisplay = 2;
-				menu = MENU_NONE;
-				page2Btn.ResetState();
-				tabBtn.SetImage(&tab2Img);
-				break;
-			}
-
-			if(page3Btn.GetState() == STATE_CLICKED)
-			{
-				pageToDisplay = 3;
-				menu = MENU_NONE;
-				page3Btn.ResetState();
-				tabBtn.SetImage(&tab3Img);
-				break;
-			}
 
 			if(backBtn.GetState() == STATE_CLICKED)
 			{
@@ -884,124 +1424,50 @@ int MenuSettings()
 				break;
 			}
 
-			if(updateBtn.GetState() == STATE_CLICKED) {
-			    if(isSdInserted() && Settings.godmode) {
-                mainWindow->Remove(&optionBrowser2);
-                mainWindow->Remove(&page1Btn);
-                mainWindow->Remove(&page2Btn);
-                mainWindow->Remove(&tabBtn);
-                mainWindow->Remove(&page3Btn);
-                w.Remove(&btnLogo);
-                w.Remove(&backBtn);
-                w.Remove(&lockBtn);
-                w.Remove(&updateBtn);
-                int ret = ProgressUpdateWindow();
-				if(ret < 0) {
-				WindowPrompt(LANGUAGE.Updatefailed,0,LANGUAGE.ok,0,0,0);
-				}
-                mainWindow->Append(&optionBrowser2);
-                mainWindow->Append(&page1Btn);
-                mainWindow->Append(&page2Btn);
-                mainWindow->Append(&tabBtn);
-                mainWindow->Append(&page3Btn);
-                w.Append(&backBtn);
-                w.Append(&lockBtn);
-                w.Append(&updateBtn);
-                w.Append(&btnLogo);
-			    } else {
-                    WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtousethatoption, LANGUAGE.ok, 0,0,0);
-			    }
-                updateBtn.ResetState();
-			}
-
-            if(btnLogo.GetState() == STATE_CLICKED) {
-                mainWindow->Remove(&optionBrowser2);
-                mainWindow->Remove(&page1Btn);
-                mainWindow->Remove(&page2Btn);
-                mainWindow->Remove(&tabBtn);
-                mainWindow->Remove(&page3Btn);
-                w.Remove(&btnLogo);
-                w.Remove(&backBtn);
-                w.Remove(&lockBtn);
-                w.Remove(&updateBtn);
-                WindowCredits();
-                mainWindow->Append(&optionBrowser2);
-                mainWindow->Append(&page1Btn);
-                mainWindow->Append(&page2Btn);
-                mainWindow->Append(&tabBtn);
-                mainWindow->Append(&page3Btn);
-                w.Append(&backBtn);
-                w.Append(&lockBtn);
-                w.Append(&updateBtn);
-                w.Append(&btnLogo);
-                btnLogo.ResetState();
-			}
-
-			if(lockBtn.GetState() == STATE_CLICKED)
+			if(GoLeftBtn.GetState() == STATE_CLICKED)
 			{
-				if (!strcmp("", Settings.unlockCode))
-				{
-					Settings.godmode = !Settings.godmode;
-				}
-				else if ( Settings.godmode == 0 )
-				{
-					//password check to unlock Install,Delete and Format
-							mainWindow->Remove(&optionBrowser2);
-							mainWindow->Remove(&page1Btn);
-							mainWindow->Remove(&page2Btn);
-							mainWindow->Remove(&tabBtn);
-							mainWindow->Remove(&page3Btn);
-							w.Remove(&backBtn);
-							w.Remove(&lockBtn);
-							w.Remove(&updateBtn);
-                            char entered[20] = "";
-                            int result = OnScreenKeyboard(entered, 20,0);
-							mainWindow->Append(&optionBrowser2);
-							mainWindow->Append(&tabBtn);
-							mainWindow->Append(&page1Btn);
-							mainWindow->Append(&page2Btn);
-							mainWindow->Append(&page3Btn);
-							w.Append(&backBtn);
-							w.Append(&lockBtn);
-							w.Append(&updateBtn);
-							mainWindow->Append(&tabBtn);
-                            if ( result == 1 ) {
-                            if (!strcmp(entered, Settings.unlockCode)) //if password correct
-                            {
-                            if (Settings.godmode == 0) {
-								WindowPrompt(LANGUAGE.CorrectPassword,LANGUAGE.InstallRenameandDeleteareunlocked,LANGUAGE.ok,0,0,0);
-								Settings.godmode = 1;
-								__Menu_GetEntries();
-								menu = MENU_DISCLIST;
-                            }
-						}
-						else
-						{
-							WindowPrompt(LANGUAGE.WrongPassword,LANGUAGE.USBLoaderisprotected,LANGUAGE.ok,0,0,0);
-						}
-					}
-				}
-				else
-				{
-					int choice = WindowPrompt (LANGUAGE.LockConsole,LANGUAGE.Areyousure,LANGUAGE.Yes,LANGUAGE.No,0,0);
-					if(choice == 1) {
-						WindowPrompt(LANGUAGE.ConsoleLocked,LANGUAGE.USBLoaderisprotected,LANGUAGE.ok,0,0,0);
-						Settings.godmode = 0;
-						__Menu_GetEntries();
-						menu = MENU_DISCLIST;
-					}
-				}
-				if ( Settings.godmode == 1)
-				{
-					lockBtnTxt.SetText(LANGUAGE.Lock);
-				}
-				else
-				{
-					lockBtnTxt.SetText(LANGUAGE.Unlock);
-				}
-				lockBtn.ResetState();
+                pageToDisplay--;
+                /** Change direction of the flying buttons **/
+                if(pageToDisplay < 1)
+                pageToDisplay = 2;
+                slidedirection = LEFT;
+                GoLeftBtn.ResetState();
+                break;
 			}
-			else if(homo.GetState() == STATE_CLICKED)
+
+			if(GoRightBtn.GetState() == STATE_CLICKED)
+			{
+                pageToDisplay++;
+                /** Change direction of the flying buttons **/
+                if(pageToDisplay > 2)
+                pageToDisplay = 1;
+                slidedirection = RIGHT;
+                GoRightBtn.ResetState();
+                break;
+			}
+
+			if(PageIndicatorBtn1.GetState() == STATE_CLICKED)
+			{
+			    if(pageToDisplay == 2) {
+                slidedirection = LEFT;
+                pageToDisplay = 1;
+                PageIndicatorBtn1.ResetState();
+                break;
+                }
+                PageIndicatorBtn1.ResetState();
+			}
+			else if(PageIndicatorBtn2.GetState() == STATE_CLICKED)
+			{
+                if(pageToDisplay == 1) {
+                slidedirection = RIGHT;
+                pageToDisplay = 2;
+                PageIndicatorBtn2.ResetState();
+                break;
+                } else
+                PageIndicatorBtn2.ResetState();
+			}
+
+			if(homo.GetState() == STATE_CLICKED)
 			{
 			    cfg_save_global();
 				optionBrowser2.SetState(STATE_DISABLED);
@@ -1011,41 +1477,28 @@ int MenuSettings()
 				if(!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path))
 				{
 					bgMusic->Play();
-				}
-				else
-				{
+				} else {
 					bgMusic->PlayOggFile(Settings.ogg_path);
 				}
 				bgMusic->SetPlayTime(thetimeofbg);
-				SetVolumeOgg(255*(vol/100.0));
+				SetVolumeOgg(255*(Settings.volume/100.0));
 
 				if(choice == 3)
 				{
 					Sys_LoadMenu(); // Back to System Menu
-				}
-				else if (choice == 2)
-				{
+				} else if (choice == 2) {
 					Sys_BackToLoader();
-				}
-				else
-				{
+				} else {
 					homo.ResetState();
 				}
-			}
-			if(Settings.godmode) {
-                updateBtn.SetVisible(true);
-                updateBtn.SetClickable(true);
-			} else {
-                updateBtn.SetVisible(false);
-                updateBtn.SetClickable(false);
-			}
-			if(settingsbackgroundbtn.GetState() == STATE_CLICKED)
-			{
-			optionBrowser2.SetFocus(1);
-			break;
+                optionBrowser2.SetState(STATE_DEFAULT);
 			}
 		}
 	}
+
+	w.SetEffect(EFFECT_FADE, -20);
+	while(w.GetEffect()>0) usleep(50);
+
 	HaltGui();
 	mainWindow->RemoveAll();
 	mainWindow->Append(bgImg);
@@ -1074,17 +1527,18 @@ int GameSettings(struct discHdr * header)
 		strncat(gameName, "...", 3);
 	}
 
-	customOptionList options3(7);
+	customOptionList options3(8);
 	options3.SetName(0,"%s", LANGUAGE.VideoMode);
 	options3.SetName(1,"%s", LANGUAGE.VIDTVPatch);
 	options3.SetName(2,"%s", LANGUAGE.Language);
 	options3.SetName(3, "Ocarina");
 	options3.SetName(4, "IOS");
 	options3.SetName(5,"%s", LANGUAGE.Parentalcontrol);
-	options3.SetName(6,"%s", LANGUAGE.Defaultgamesettings);
+	options3.SetName(6,"%s", "Error 002 fix");
+	options3.SetName(7,"%s", LANGUAGE.Defaultgamesettings);
 
-	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
-	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, vol);
+	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
+	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
 
 	char imgPath[100];
 
@@ -1153,11 +1607,9 @@ int GameSettings(struct discHdr * header)
 	w.Append(&deleteBtn);
 	w.Append(&saveBtn);
 	w.Append(&cancelBtn);
+    w.Append(&optionBrowser3);
 
     mainWindow->Append(&w);
-    mainWindow->Append(&optionBrowser3);
-
-	ResumeGui();
 
 	struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
 
@@ -1169,6 +1621,7 @@ int GameSettings(struct discHdr * header)
 		viChoice = game_cfg->vipatch;
 		iosChoice = game_cfg->ios;
 		parentalcontrolChoice = game_cfg->parentalcontrol;
+		fix002 = game_cfg->errorfix002;
 	}
 	else
 	{
@@ -1182,7 +1635,10 @@ int GameSettings(struct discHdr * header)
 		iosChoice = i249;
 		}
 		parentalcontrolChoice = 0;
+		fix002 = off;
 	}
+
+	ResumeGui();
 
 	while(!exit)
 	{
@@ -1222,13 +1678,15 @@ int GameSettings(struct discHdr * header)
 		else if (parentalcontrolChoice == 2) options3.SetValue(5,"2");
 		else if (parentalcontrolChoice == 3) options3.SetValue(5,"3 (Mature)");
 
+        if (fix002 == on) options3.SetValue(6,LANGUAGE.ON);
+		else if (fix002 == off) options3.SetValue(6,LANGUAGE.OFF);
 
 		if(shutdown == 1)
 			Sys_Shutdown();
 		if(reset == 1)
 			Sys_Reboot();
 
-        options3.SetValue(6, " ");
+        options3.SetValue(7, NULL);
 
 		ret = optionBrowser3.GetClickedOption();
 
@@ -1253,12 +1711,16 @@ int GameSettings(struct discHdr * header)
 				parentalcontrolChoice = (parentalcontrolChoice + 1) % 4;
 				break;
             case 6:
+                fix002 = (fix002+1) % 2;
+                break;
+            case 7:
                 int choice = WindowPrompt(LANGUAGE.Areyousure,0,LANGUAGE.Yes,LANGUAGE.Cancel,0,0);
                 if(choice == 1) {
                     videoChoice = discdefault;
                     viChoice = off;
                     languageChoice = ConsoleLangDefault;
                     ocarinaChoice = off;
+                    fix002 = off;
                     if(Settings.cios == ios222) {
                         iosChoice = i222;
                     } else {
@@ -1333,7 +1795,6 @@ int GameSettings(struct discHdr * header)
 	}
 
 	HaltGui();
-	mainWindow->Remove(&optionBrowser3);
 	mainWindow->Remove(&w);
 	ResumeGui();
 

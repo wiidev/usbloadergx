@@ -29,6 +29,7 @@ u8 languageChoice = 0;
 u8 viChoice = 0;
 u8 iosChoice = 0;
 u8 parentalcontrolChoice = 0;
+u8 fix002 = 0;
 u8 xflip = 0;
 u8 sort = 0;
 u8 fave = 0;
@@ -232,6 +233,7 @@ void CFG_Default(int widescreen) // -1 = non forced Mode
 		snprintf(Settings.titlestxt_path, sizeof(Settings.titlestxt_path), "SD:/config/");//default path for disc images
 		snprintf(Settings.unlockCode, sizeof(Settings.unlockCode), "ab121b");		// default password
 		snprintf(Settings.language_path, sizeof(Settings.language_path), "SD:/config/language/");
+		snprintf(Settings.languagefiles_path, sizeof(Settings.languagefiles_path), "SD:/config/language/");
 		snprintf(Settings.oggload_path, sizeof(Settings.oggload_path), "SD:/config/backgroundmusic/");
 		snprintf(Settings.update_path, sizeof(Settings.update_path), "SD:/apps/usbloader_gx/");
 		sprintf(Settings.ogg_path, "notset");
@@ -335,7 +337,8 @@ void Global_Default(void)
 	{
 		Settings.sinfo = ((Settings.sinfo == GameID) ? Both : GameRegion);
 	}
-	Settings.volume = v80;
+	Settings.volume = 80;
+	Settings.sfxvolume = 80;
 	Settings.tooltips = TooltipsOn;
 	snprintf(Settings.unlockCode, sizeof(Settings.unlockCode), "ab121b");
 	Settings.parentalcontrol = 0;
@@ -478,6 +481,10 @@ void path_set(char *name, char *val)
 	}
 	if (strcmp(name, "language_path") == 0) {
 		strcopy(Settings.language_path, val, sizeof(Settings.language_path));
+		return;
+	}
+	if (strcmp(name, "languagefiles_path") == 0) {
+		strcopy(Settings.languagefiles_path, val, sizeof(Settings.languagefiles_path));
 		return;
 	}
 	if (strcmp(name, "update_path") == 0) {
@@ -888,6 +895,13 @@ void global_cfg_set(char *name, char *val)
 		}
 		return;
 	}
+	else if (strcmp(name, "sfxvolume") == 0) {
+		int i;
+		if (sscanf(val, "%d", &i) == 1) {
+			Settings.sfxvolume = i;
+		}
+		return;
+	}
 	else if (strcmp(name, "tooltips") == 0) {
 		int i;
 		if (sscanf(val, "%d", &i) == 1) {
@@ -1104,6 +1118,7 @@ void cfg_set_game_opt(struct Game_CFG *game, u8 *id)
 	game->vipatch = viChoice;
 	game->ios = iosChoice;
 	game->parentalcontrol = parentalcontrolChoice;
+	game->errorfix002 = fix002;
 }
 
 struct Game_NUM* cfg_get_game_num(u8 *id)
@@ -1154,6 +1169,7 @@ bool cfg_save_global()// save global settings
 	fprintf(f, "sinfo = %d\n ", Settings.sinfo);
 	fprintf(f, "rumble = %d\n ", Settings.rumble);
 	fprintf(f, "volume = %d\n ", Settings.volume);
+	fprintf(f, "sfxvolume = %d\n ", Settings.sfxvolume);
 	fprintf(f, "tooltips = %d\n ", Settings.tooltips);
 	fprintf(f, "password = %s\n ", Settings.unlockCode);
 	fprintf(f, "sort = %d\n ", Settings.sort);
@@ -1173,6 +1189,7 @@ bool cfg_save_global()// save global settings
 	}
 	fprintf(f, "disc_path = %s\n ", Settings.disc_path);
 	fprintf(f, "language_path = %s\n ", Settings.language_path);
+	fprintf(f, "languagefiles_path = %s\n ", Settings.languagefiles_path);
 	fprintf(f, "oggload_path = %s\n ", Settings.oggload_path);
 	fprintf(f, "titlestxt_path = %s\n ", Settings.titlestxt_path);
 	if(!strcmp("", Settings.unlockCode)) {
@@ -1245,6 +1262,11 @@ void game_set(char *name, char *val)
 			if (strcmp("pctrl", opt_name) == 0) {
 				if (sscanf(opt_val, "%hd", &opt_c) == 1) {
 					game->parentalcontrol = opt_c;
+				}
+			}
+			if (strcmp("errorfix002", opt_name) == 0) {
+				if (sscanf(opt_val, "%hd", &opt_c) == 1) {
+					game->errorfix002 = opt_c;
 				}
 			}
 
@@ -1383,7 +1405,8 @@ bool cfg_save_games()
 		fprintf(f, "ocarina:%d; ", cfg_game[i].ocarina);
 		fprintf(f, "vipatch:%d; ", cfg_game[i].vipatch);
 		fprintf(f, "ios:%d;", cfg_game[i].ios);
-		fprintf(f, "pctrl:%d;\n", cfg_game[i].parentalcontrol);
+		fprintf(f, "pctrl:%d;", cfg_game[i].parentalcontrol);
+		fprintf(f, "errorfix002:%d;\n", cfg_game[i].errorfix002);
 	}
 	fprintf(f, "# END\n");
 	fclose(f);
@@ -1438,7 +1461,8 @@ bool cfg_load_global()
 	{
 		Settings.sinfo = ((Settings.sinfo == GameID) ? Both : GameRegion);
 	}
-	Settings.volume = v80;
+	Settings.volume = 80;
+	Settings.sfxvolume = 80;
 
 	return cfg_parsefile("SD:/config/GXGlobal.cfg", &global_cfg_set);
 }

@@ -7,7 +7,8 @@ extern "C"
 #endif
 
 bool findfile(const char * filename, const char * path);
-int GetFiles(char * filespath);
+char * GetFileName(int i);
+int GetAllDirFiles(char * filespath);
 
 
 #ifdef __cplusplus

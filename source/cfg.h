@@ -152,6 +152,7 @@ extern u8 viChoice;
 extern u8 iosChoice;
 extern u8 faveChoice;
 extern u8 parentalcontrolChoice;
+extern u8 fix002;
 extern u8 xflip;
 extern u8 qboot;
 extern u8 sort;
@@ -169,6 +170,7 @@ struct Game_CFG
 	u8 vipatch;
 	u8 ios;
 	u8 parentalcontrol;
+	u8 errorfix002;
 };
 struct Game_NUM
 {
@@ -201,7 +203,6 @@ enum {
 	schin,
 	tchin,
 	kor,
-
 	settings_language_max // always the last entry
 };
 
@@ -264,21 +265,6 @@ enum {
 };
 
 enum {
-	v10=0,
-	v20,
-	v30,
-	v40,
-	v50,
-	v60,
-	v70,
-	v80,
-	v90,
-	v100,
-	v0,
-	settings_volume_max // always the last entry
-};
-
-enum {
     no=0,
 	yes,
 	sysmenu,
@@ -297,11 +283,11 @@ enum {
 	list,
 	grid,
 	carousel,
+	settings_display_max
 };
 enum {
 	scrollDefault,
 	scrollMarquee,
-
 	settings_scrolleffect_max // always the last entry
 };
 struct SSettings {
@@ -315,6 +301,7 @@ struct SSettings {
 	int	    rumble;
 	int	    xflip;
 	int	    volume;
+	int     sfxvolume;
 	int     tooltips;
 	char 	unlockCode[20];
 	int	    parentalcontrol;
@@ -335,6 +322,7 @@ struct SSettings {
 	char	disc_path[100];
 	char	titlestxt_path[100];
 	char	language_path[100];
+	char	languagefiles_path[100];
 	char	oggload_path[100];
 	char	ogg_path[150];
 	char	update_path[150];

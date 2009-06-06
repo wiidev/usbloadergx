@@ -26,8 +26,6 @@
 #define SPEED_STEP	4
 #define SAFETY		320
 
-extern const int vol;
-
 /**
  * Constructor for the GuiGameCarousel class.
  */
@@ -58,8 +56,8 @@ GuiGameCarousel::GuiGameCarousel(int w, int h, struct discHdr * l, int count, co
 	trigMinus = new GuiTrigger;
 	trigMinus->SetButtonOnlyTrigger(-1, WPAD_BUTTON_MINUS | WPAD_CLASSIC_BUTTON_MINUS, 0);
 
-	btnSoundClick = new GuiSound(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, vol);
-	btnSoundOver = new GuiSound(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
+	btnSoundClick = new GuiSound(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
+	btnSoundOver = new GuiSound(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
 
 	snprintf(imgPath, sizeof(imgPath), "%sstartgame_arrow_left.png", CFG.theme_path);
 	imgLeft = new GuiImageData(imgPath, startgame_arrow_left_png);

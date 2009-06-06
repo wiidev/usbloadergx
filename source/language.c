@@ -57,6 +57,7 @@ snprintf(LANGUAGE.Continueinstallgame, sizeof(LANGUAGE.Continueinstallgame), "Co
 snprintf(LANGUAGE.ConsoleDefault, sizeof(LANGUAGE.ConsoleDefault), "Console Default");
 snprintf(LANGUAGE.Consoleshouldbeunlockedtomodifyit, sizeof(LANGUAGE.Consoleshouldbeunlockedtomodifyit), "Console should be unlocked to modify it.");
 snprintf(LANGUAGE.ConsoleLocked, sizeof(LANGUAGE.ConsoleLocked), "Console Locked");
+snprintf(LANGUAGE.Controllevel, sizeof(LANGUAGE.Controllevel), "Controllevel");
 snprintf(LANGUAGE.CorrectPassword, sizeof(LANGUAGE.CorrectPassword), "Correct Password");
 snprintf(LANGUAGE.Couldnotinitializenetwork, sizeof(LANGUAGE.Couldnotinitializenetwork), "Could not initialize network!");
 snprintf(LANGUAGE.CouldnotopenDisc, sizeof(LANGUAGE.CouldnotopenDisc), "Could not open Disc");
@@ -67,6 +68,7 @@ snprintf(LANGUAGE.CoverpathChanged, sizeof(LANGUAGE.CoverpathChanged), "Coverpat
 snprintf(LANGUAGE.Coverpathchange, sizeof(LANGUAGE.Coverpathchange), "Coverpath change");
 snprintf(LANGUAGE.count, sizeof(LANGUAGE.count), "Play Count");
 snprintf(LANGUAGE.Credits, sizeof(LANGUAGE.Credits), "Credits");
+snprintf(LANGUAGE.Custompaths, sizeof(LANGUAGE.Custompaths), "Custom Paths");
 snprintf(LANGUAGE.DiscImages, sizeof(LANGUAGE.DiscImages), "Disc Images");
 snprintf(LANGUAGE.DiscimagePath, sizeof(LANGUAGE.DiscimagePath), "Discimage Path");
 snprintf(LANGUAGE.DiscpathChanged, sizeof(LANGUAGE.DiscpathChanged), "Discpath Changed");
@@ -77,11 +79,13 @@ snprintf(LANGUAGE.Doyouwanttoformat, sizeof(LANGUAGE.Doyouwanttoformat), "Do you
 snprintf(LANGUAGE.Doyoureallywanttodelete, sizeof(LANGUAGE.Doyoureallywanttodelete), "Do you really want to delete:");
 snprintf(LANGUAGE.Doyouwanttoretryfor30secs, sizeof(LANGUAGE.Doyouwanttoretryfor30secs), "Do you want to retry for 30 secs?");
 snprintf(LANGUAGE.Doyouwanttoupdate, sizeof(LANGUAGE.Doyouwanttoupdate), "How do you want to update?");
+snprintf(LANGUAGE.Doyouwanttochangelanguage, sizeof(LANGUAGE.Doyouwanttochangelanguage), "Do you want to change language?");
 snprintf(LANGUAGE.Downloadingfile, sizeof(LANGUAGE.Downloadingfile), "Downloading file");
 snprintf(LANGUAGE.DownloadBoxartimage, sizeof(LANGUAGE.DownloadBoxartimage), "Download Boxart image?");
 snprintf(LANGUAGE.Downloadfinished, sizeof(LANGUAGE.Downloadfinished), "Download finished");
 snprintf(LANGUAGE.Defaultgamesettings, sizeof(LANGUAGE.Defaultgamesettings), "Default Gamesettings");
 snprintf(LANGUAGE.Defaultsettings, sizeof(LANGUAGE.Defaultsettings), "Default Settings");
+snprintf(LANGUAGE.Default, sizeof(LANGUAGE.Default), "Default");
 snprintf(LANGUAGE.Error, sizeof(LANGUAGE.Error), "Error !");
 snprintf(LANGUAGE.hour, sizeof(LANGUAGE.hour), "Hour");
 snprintf(LANGUAGE.Homemenu, sizeof(LANGUAGE.Homemenu), "HOME Menu");
@@ -122,8 +126,11 @@ snprintf(LANGUAGE.Gameisalreadyinstalled, sizeof(LANGUAGE.Gameisalreadyinstalled
 snprintf(LANGUAGE.GameRegion, sizeof(LANGUAGE.GameRegion), "Game Region");
 snprintf(LANGUAGE.GameSize, sizeof(LANGUAGE.GameSize), "Game Size");
 snprintf(LANGUAGE.GoBack, sizeof(LANGUAGE.GoBack), "Go Back");
+snprintf(LANGUAGE.GUISettings, sizeof(LANGUAGE.GUISettings), "GUI Settings");
+snprintf(LANGUAGE.Gameload, sizeof(LANGUAGE.Gameload), "Game Load");
 snprintf(LANGUAGE.HowtoShutdown, sizeof(LANGUAGE.HowtoShutdown), "How to Shutdown?");
 snprintf(LANGUAGE.Language, sizeof(LANGUAGE.Language), "Game Language");
+snprintf(LANGUAGE.Languagepathchanged, sizeof(LANGUAGE.Languagepathchanged), "Languagepath changed.");
 snprintf(LANGUAGE.Left, sizeof(LANGUAGE.Left), "Left");
 snprintf(LANGUAGE.LikeSysMenu, sizeof(LANGUAGE.LikeSysMenu), "Like SysMenu");
 snprintf(LANGUAGE.LoadingincIOS, sizeof(LANGUAGE.LoadingincIOS), "Loading in cIOS249");
@@ -157,7 +164,7 @@ snprintf(LANGUAGE.OFF, sizeof(LANGUAGE.OFF), "OFF");
 snprintf(LANGUAGE.OfficialSite, sizeof(LANGUAGE.OfficialSite), "Official Site");
 snprintf(LANGUAGE.ON, sizeof(LANGUAGE.ON), "ON");
 snprintf(LANGUAGE.OnlyInstall, sizeof(LANGUAGE.OnlyInstall), "Only for Install");
-snprintf(LANGUAGE.Parentalcontrol, sizeof(LANGUAGE.Parentalcontrol), "Parental control");
+snprintf(LANGUAGE.Parentalcontrol, sizeof(LANGUAGE.Parentalcontrol), "Parental Control");
 snprintf(LANGUAGE.Partition, sizeof(LANGUAGE.Partition), "Partition");
 snprintf(LANGUAGE.Password, sizeof(LANGUAGE.Password), "Password");
 snprintf(LANGUAGE.PasswordChanged, sizeof(LANGUAGE.PasswordChanged), "Password Changed");
@@ -188,6 +195,7 @@ snprintf(LANGUAGE.Specialthanksto, sizeof(LANGUAGE.Specialthanksto), "Special th
 snprintf(LANGUAGE.youwanttoformat, sizeof(LANGUAGE.youwanttoformat), "you want to format");
 snprintf(LANGUAGE.Standard, sizeof(LANGUAGE.Standard), "Standard");
 snprintf(LANGUAGE.settings, sizeof(LANGUAGE.settings), "Settings");
+snprintf(LANGUAGE.Sound, sizeof(LANGUAGE.Sound), "Sound");
 snprintf(LANGUAGE.ShutdowntoIdle, sizeof(LANGUAGE.ShutdowntoIdle), "Shutdown to Idle");
 snprintf(LANGUAGE.ShutdownSystem, sizeof(LANGUAGE.ShutdownSystem), "Shutdown System");
 snprintf(LANGUAGE.Success, sizeof(LANGUAGE.Success), "Success:");
@@ -207,6 +215,7 @@ snprintf(LANGUAGE.Tooltips, sizeof(LANGUAGE.Tooltips), "Tooltips");
 snprintf(LANGUAGE.Timeleft, sizeof(LANGUAGE.Timeleft), "Time left:");
 snprintf(LANGUAGE.updating, sizeof(LANGUAGE.updating), "Updating");
 snprintf(LANGUAGE.Unlock, sizeof(LANGUAGE.Unlock), "Unlock");
+snprintf(LANGUAGE.UnlockConsoletousethisOption, sizeof(LANGUAGE.UnlockConsoletousethisOption), "Unlock console to use this option.");
 snprintf(LANGUAGE.Unicodefix, sizeof(LANGUAGE.Unicodefix), "Unicode Fix");
 snprintf(LANGUAGE.Uninstall, sizeof(LANGUAGE.Uninstall), "Uninstall");
 snprintf(LANGUAGE.Updatepath, sizeof(LANGUAGE.Updatepath), "Updatepath");
@@ -215,11 +224,13 @@ snprintf(LANGUAGE.Updatefailed, sizeof(LANGUAGE.Updatefailed), "Update failed");
 snprintf(LANGUAGE.Updatedol, sizeof(LANGUAGE.Updatedol), "Update DOL");
 snprintf(LANGUAGE.Updateall, sizeof(LANGUAGE.Updateall), "Update All");
 snprintf(LANGUAGE.Updateto, sizeof(LANGUAGE.Updateto), "Update to");
+snprintf(LANGUAGE.Update, sizeof(LANGUAGE.Update), "Update");
 snprintf(LANGUAGE.USBLoaderisprotected, sizeof(LANGUAGE.USBLoaderisprotected), "USB Loader GX is protected");
 snprintf(LANGUAGE.USBDevicenotfound, sizeof(LANGUAGE.USBDevicenotfound), "USB Device not found");
 snprintf(LANGUAGE.VideoMode, sizeof(LANGUAGE.VideoMode), "Video Mode");
 snprintf(LANGUAGE.VIDTVPatch, sizeof(LANGUAGE.VIDTVPatch), "VIDTV Patch");
-snprintf(LANGUAGE.Volume, sizeof(LANGUAGE.Volume), "Volume");
+snprintf(LANGUAGE.Volume, sizeof(LANGUAGE.Volume), "Music Volume");
+snprintf(LANGUAGE.SFXVolume, sizeof(LANGUAGE.SFXVolume), "SFX Volume");
 snprintf(LANGUAGE.Waiting, sizeof(LANGUAGE.Waiting), "Waiting...");
 snprintf(LANGUAGE.WaitingforUSBDevice, sizeof(LANGUAGE.WaitingforUSBDevice), "Waiting for USB Device");
 snprintf(LANGUAGE.WidescreenFix, sizeof(LANGUAGE.WidescreenFix), "Widescreen Fix");
@@ -356,6 +367,10 @@ void language_set(char *name, char *val)
 		strcopy(LANGUAGE.ConsoleLocked, val, sizeof(LANGUAGE.ConsoleLocked));
 		return;
 	}
+	if (strcmp(name, "Controllevel") == 0) {
+		strcopy(LANGUAGE.Controllevel, val, sizeof(LANGUAGE.Controllevel));
+		return;
+	}
 	if (strcmp(name, "CorrectPassword") == 0) {
 		strcopy(LANGUAGE.CorrectPassword, val, sizeof(LANGUAGE.CorrectPassword));
 		return;
@@ -396,6 +411,10 @@ void language_set(char *name, char *val)
 		strcopy(LANGUAGE.Credits, val, sizeof(LANGUAGE.Credits));
 		return;
 	}
+	if (strcmp(name, "Custompaths") == 0) {
+		strcopy(LANGUAGE.Custompaths, val, sizeof(LANGUAGE.Custompaths));
+		return;
+	}
 	if (strcmp(name, "DiscImages") == 0) {
 		strcopy(LANGUAGE.DiscImages, val, sizeof(LANGUAGE.DiscImages));
 		return;
@@ -432,6 +451,10 @@ void language_set(char *name, char *val)
 		strcopy(LANGUAGE.Doyouwanttoretryfor30secs, val, sizeof(LANGUAGE.Doyouwanttoretryfor30secs));
 		return;
 	}
+	if (strcmp(name, "Doyouwanttochangelanguage") == 0) {
+		strcopy(LANGUAGE.Doyouwanttochangelanguage, val, sizeof(LANGUAGE.Doyouwanttochangelanguage));
+		return;
+	}
 	if (strcmp(name, "Downloadingfile") == 0) {
 		strcopy(LANGUAGE.Downloadingfile, val, sizeof(LANGUAGE.Downloadingfile));
 		return;
@@ -450,6 +473,10 @@ void language_set(char *name, char *val)
 	}
 	if (strcmp(name, "Defaultsettings") == 0) {
 		strcopy(LANGUAGE.Defaultsettings, val, sizeof(LANGUAGE.Defaultsettings));
+		return;
+	}
+	if (strcmp(name, "Default") == 0) {
+		strcopy(LANGUAGE.Default, val, sizeof(LANGUAGE.Default));
 		return;
 	}
 	if (strcmp(name, "Error") == 0) {
@@ -608,6 +635,14 @@ void language_set(char *name, char *val)
 		strcopy(LANGUAGE.GoBack, val, sizeof(LANGUAGE.GoBack));
 		return;
 	}
+	if (strcmp(name, "GUISettings") == 0) {
+		strcopy(LANGUAGE.GUISettings, val, sizeof(LANGUAGE.GUISettings));
+		return;
+	}
+	if (strcmp(name, "Gameload") == 0) {
+		strcopy(LANGUAGE.Gameload, val, sizeof(LANGUAGE.Gameload));
+		return;
+	}
 	if (strcmp(name, "GotoPage") == 0) {
 		strcopy(LANGUAGE.GotoPage, val, sizeof(LANGUAGE.GotoPage));
 		return;
@@ -624,9 +659,12 @@ void language_set(char *name, char *val)
 		strcopy(LANGUAGE.keyboard, val, sizeof(LANGUAGE.keyboard));
 		return;
 	}
-
 	if (strcmp(name, "Language") == 0) {
 		strcopy(LANGUAGE.Language, val, sizeof(LANGUAGE.Language));
+		return;
+	}
+	if (strcmp(name, "Languagepathchanged") == 0) {
+		strcopy(LANGUAGE.Languagepathchanged, val, sizeof(LANGUAGE.Languagepathchanged));
 		return;
 	}
 	if (strcmp(name, "Langchange") == 0) {
@@ -869,6 +907,10 @@ void language_set(char *name, char *val)
 		strcopy(LANGUAGE.Setasbackgroundmusic, val, sizeof(LANGUAGE.Setasbackgroundmusic));
 		return;
 	}
+	if (strcmp(name, "Sound") == 0) {
+		strcopy(LANGUAGE.Sound, val, sizeof(LANGUAGE.Sound));
+		return;
+	}
 	if (strcmp(name, "ShutdowntoIdle") == 0) {
 		strcopy(LANGUAGE.ShutdowntoIdle, val, sizeof(LANGUAGE.ShutdowntoIdle));
 		return;
@@ -941,6 +983,10 @@ void language_set(char *name, char *val)
 		strcopy(LANGUAGE.Unlock, val, sizeof(LANGUAGE.Unlock));
 		return;
 	}
+	if (strcmp(name, "UnlockConsoletousethisOption") == 0) {
+		strcopy(LANGUAGE.UnlockConsoletousethisOption, val, sizeof(LANGUAGE.UnlockConsoletousethisOption));
+		return;
+	}
 	if (strcmp(name, "Unicodefix") == 0) {
 		strcopy(LANGUAGE.Unicodefix, val, sizeof(LANGUAGE.Unicodefix));
 		return;
@@ -977,6 +1023,10 @@ void language_set(char *name, char *val)
 		strcopy(LANGUAGE.Updateto, val, sizeof(LANGUAGE.Updateto));
 		return;
 	}
+	if (strcmp(name, "Update") == 0) {
+		strcopy(LANGUAGE.Update, val, sizeof(LANGUAGE.Update));
+		return;
+	}
 	if (strcmp(name, "USBLoaderisprotected") == 0) {
 		strcopy(LANGUAGE.USBLoaderisprotected, val, sizeof(LANGUAGE.USBLoaderisprotected));
 		return;
@@ -995,6 +1045,10 @@ void language_set(char *name, char *val)
 	}
 	if (strcmp(name, "Volume") == 0) {
 		strcopy(LANGUAGE.Volume, val, sizeof(LANGUAGE.Volume));
+		return;
+	}
+	if (strcmp(name, "SFXVolume") == 0) {
+		strcopy(LANGUAGE.SFXVolume, val, sizeof(LANGUAGE.SFXVolume));
 		return;
 	}
 	if (strcmp(name, "Waiting") == 0) {

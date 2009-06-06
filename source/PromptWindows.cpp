@@ -22,7 +22,6 @@
 #include "getentries.h"
 
 /*** Variables that are also used extern ***/
-char missingFiles[500][12];
 int cntMissFiles = 0;
 int networkisinitialized;
 
@@ -32,6 +31,7 @@ static GuiText timeTxt(NULL, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g,
 static GuiText sizeTxt(NULL, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 static GuiImageData progressbar(progressbar_png);
 static GuiImage progressbarImg(&progressbar);
+static char missingFiles[500][12];
 
 /*** Extern variables ***/
 extern GuiWindow * mainWindow;
@@ -42,7 +42,6 @@ extern float gamesize;
 extern struct discHdr * gameList;
 extern u8 shutdown;
 extern u8 reset;
-extern int vol;
 
 /*** Extern functions ***/
 extern void ResumeGui();
@@ -65,8 +64,8 @@ int OnScreenKeyboard(char * var, u32 maxlen, int min)
 
 	GuiKeyboard keyboard(var, maxlen, min, keyset);
 
-	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
-	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, vol);
+	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
+	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
 
 	char imgPath[50];
 	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
@@ -139,7 +138,7 @@ void WindowCredits()
 	StopOgg();
 
 	creditsMusic = new GuiSound(credits_music_ogg, credits_music_ogg_size, SOUND_OGG, 55);
-	creditsMusic->SetVolume(55);
+	creditsMusic->SetVolume(60);
 	creditsMusic->SetLoop(1);
 	creditsMusic->Play();
 
@@ -327,7 +326,7 @@ void WindowCredits()
         bgMusic->PlayOggFile(Settings.ogg_path);
     }
     bgMusic->SetPlayTime(thetimeofbg);
-    SetVolumeOgg(255*(vol/100.0));
+    SetVolumeOgg(255*(Settings.volume/100.0));
 }
 
 /****************************************************************************
@@ -350,8 +349,9 @@ WindowPrompt(const char *title, const char *msg, const char *btn1Label,
 	GuiWindow promptWindow(472,320);
 	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	promptWindow.SetPosition(0, -10);
-	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
-	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, vol);
+
+	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
+	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
 	char imgPath[50];
 	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
 	GuiImageData btnOutline(imgPath, button_dialogue_box_png);
@@ -597,14 +597,14 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
                 const char *btn4Label)
 {
     GuiSound * homein = NULL;
-    homein = new GuiSound(menuin_ogg, menuin_ogg_size, SOUND_OGG, vol);
-    homein->SetVolume(vol);
+    homein = new GuiSound(menuin_ogg, menuin_ogg_size, SOUND_OGG, Settings.sfxvolume);
+    homein->SetVolume(Settings.sfxvolume);
 	homein->SetLoop(0);
 	homein->Play();
 
 	GuiSound * homeout = NULL;
-    homeout = new GuiSound(menuout_ogg, menuout_ogg_size, SOUND_OGG, vol);
-    homeout->SetVolume(vol);
+    homeout = new GuiSound(menuout_ogg, menuout_ogg_size, SOUND_OGG, Settings.sfxvolume);
+    homeout->SetVolume(Settings.sfxvolume);
 	homeout->SetLoop(0);
 
     int choice = -1;
@@ -613,8 +613,8 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 	GuiWindow promptWindow(640,480);
 	promptWindow.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	promptWindow.SetPosition(0, 0);
-	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
-	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, vol);
+	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
+	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
 
 	GuiImageData top(exit_top_png);
 	GuiImageData topOver(exit_top_over_png);
@@ -909,8 +909,8 @@ int GameWindowPrompt()
 	GuiWindow promptWindow(472,320);
 	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	promptWindow.SetPosition(0, -10);
-	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
-	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, vol);
+	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
+	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
 
 	char imgPath[100];
 	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
@@ -1401,8 +1401,8 @@ DiscWait(const char *title, const char *msg, const char *btn1Label, const char *
 	GuiWindow promptWindow(472,320);
 	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	promptWindow.SetPosition(0, -10);
-	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
-	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, vol);
+	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
+	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
 
 	char imgPath[100];
 	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
@@ -1604,8 +1604,8 @@ int NetworkInitPromp(int choice2)
 	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	promptWindow.SetPosition(0, -10);
 
-    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
-	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, vol);
+    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
+	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
 
 	char imgPath[100];
 	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
@@ -1922,8 +1922,8 @@ ProgressDownloadWindow(int choice2)
 	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	promptWindow.SetPosition(0, -10);
 
-    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
-	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, vol);
+    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
+	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
 
 	char imgPath[100];
 	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
@@ -2159,8 +2159,8 @@ ProgressUpdateWindow()
 	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	promptWindow.SetPosition(0, -10);
 
-    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
-	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, vol);
+    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
+	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
 
 	char imgPath[100];
 	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
@@ -2435,4 +2435,9 @@ ProgressUpdateWindow()
     return failed;
 
     return 1;
+}
+
+char * GetMissingFiles()
+{
+    return (char *) missingFiles;
 }

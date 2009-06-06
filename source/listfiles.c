@@ -10,8 +10,8 @@
 #include "listfiles.h"
 
 
-char alldirfiles[300][70];
-char filename[80];
+static char alldirfiles[300][70];
+char filenames[80];
 
 bool findfile(const char * filename, const char * path)
 {
@@ -35,6 +35,10 @@ while ((file = readdir(dir)))
   return false;
 }
 
+char * GetFileName(int i)
+{
+    return alldirfiles[i];
+}
 
 s32 filenamescmp(const void *a, const void *b)
 {
@@ -42,7 +46,7 @@ s32 filenamescmp(const void *a, const void *b)
 	return stricmp((char *)a, (char *)b);
 }
 
-int GetFiles(char * filespath)
+int GetAllDirFiles(char * filespath)
 {
 
 int countfiles = 0;
@@ -57,12 +61,12 @@ if (dir == NULL) //If empty
 	}
 	else
 	{
-	while (dirnext(dir,filename,&st) == 0)
+	while (dirnext(dir,filenames,&st) == 0)
 		{
 		if ((st.st_mode & S_IFDIR) == 0)
 			{
 			// st.st_mode & S_IFDIR indicates a directory
-			snprintf(alldirfiles[countfiles], 70, "%s", filename);
+			snprintf(alldirfiles[countfiles], 70, "%s", filenames);
 			countfiles++;
 			}
 		}

@@ -38,15 +38,6 @@ extern const u32	menuin_ogg_size;
 extern const u8		menuout_ogg[];
 extern const u32	menuout_ogg_size;
 
-extern const u8		tab_bg1_png[];
-extern const u32	tab_bg1_png_size;
-
-extern const u8		tab_bg2_png[];
-extern const u32	tab_bg2_png_size;
-
-extern const u8		tab_bg3_png[];
-extern const u32	tab_bg3_png_size;
-
 extern const u8		credits_button_png[];
 extern const u32	credits_button_png_size;
 
@@ -290,7 +281,13 @@ extern const u32	arrangeList_gray_png_size;
 extern const u8		arrangeCarousel_gray_png[];
 extern const u32	arrangeCarousel_gray_png_size;
 
-extern const u8		updateRev_png[];
-extern const u32	updateRev_png_size;
+extern const u8		settings_title_png[];
+extern const u32	settings_title_png_size;
+
+extern const u8		settings_title_over_png[];
+extern const u32	settings_title_over_png_size;
+
+extern const u8		pageindicator_png[];
+extern const u32	pageindicator_png_size;
 
 #endif

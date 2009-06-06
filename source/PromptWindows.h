@@ -21,5 +21,6 @@ int NetworkInitPromp(int choice2);
 int ProgressWindow(const char *title, const char *msg);
 int ProgressDownloadWindow(int choice2);
 int ProgressUpdateWindow();
+char * GetMissingFiles();
 
 #endif

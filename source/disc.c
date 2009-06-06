@@ -248,7 +248,7 @@ s32 Disc_IsWii(void)
 	return 0;
 }
 
-s32 Disc_BootPartition(u64 offset, u8 videoselected, u8 cheat, u8 vipatch, u8 patchcountrystring)
+s32 Disc_BootPartition(u64 offset, u8 videoselected, u8 cheat, u8 vipatch, u8 patchcountrystring, u8 error002fix)
 {
 	entry_point p_entry;
 
@@ -260,7 +260,7 @@ s32 Disc_BootPartition(u64 offset, u8 videoselected, u8 cheat, u8 vipatch, u8 pa
 		return ret;
 
 	/* Run apploader */
-	ret = Apploader_Run(&p_entry, cheat, videoselected, vipatch, patchcountrystring);
+	ret = Apploader_Run(&p_entry, cheat, videoselected, vipatch, patchcountrystring, error002fix);
 	if (ret < 0)
 		return ret;
 
@@ -295,7 +295,7 @@ s32 Disc_BootPartition(u64 offset, u8 videoselected, u8 cheat, u8 vipatch, u8 pa
 	return 0;
 }
 
-s32 Disc_WiiBoot(u8 videoselected, u8 cheat, u8 vipatch, u8 patchcountrystring)
+s32 Disc_WiiBoot(u8 videoselected, u8 cheat, u8 vipatch, u8 patchcountrystring, u8 error002fix)
 {
 	u64 offset;
 	s32 ret;
@@ -306,7 +306,7 @@ s32 Disc_WiiBoot(u8 videoselected, u8 cheat, u8 vipatch, u8 patchcountrystring)
 		return ret;
 
 	/* Boot partition */
-	return Disc_BootPartition(offset, videoselected, cheat, vipatch, patchcountrystring);
+	return Disc_BootPartition(offset, videoselected, cheat, vipatch, patchcountrystring, error002fix);
 }
 
 void PatchCountryStrings(void *Address, int Size)

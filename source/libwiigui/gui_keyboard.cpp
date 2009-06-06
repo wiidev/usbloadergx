@@ -9,12 +9,13 @@
  ***************************************************************************/
 
 #include "gui.h"
+#include "../main.h"
+#include "../cfg.h"
 #include <stdio.h>
 #include <string.h>
 /**
  * Constructor for the GuiKeyboard class.
  */
-extern const int vol;
 unsigned int m;
 //const Key thekeys;
 GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
@@ -209,7 +210,7 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
 	}
 	};
 	memcpy(keys, thekeys, sizeof(thekeys));}
-	
+
 	//AZERTY//
         if (mode == 3){
         Key thekeys[4][11] = {
@@ -286,8 +287,8 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
 	keyLarge = new GuiImageData(keyboard_largekey_over_png);
 	keyLargeOver = new GuiImageData(keyboard_largekey_over_png);
 
-	keySoundOver = new GuiSound(button_over_pcm, button_over_pcm_size, SOUND_PCM, vol);
-	keySoundClick = new GuiSound(button_click_pcm, button_click_pcm_size, SOUND_PCM, vol);
+	keySoundOver = new GuiSound(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
+	keySoundClick = new GuiSound(button_click_pcm, button_click_pcm_size, SOUND_PCM, Settings.sfxvolume);
 	trigA = new GuiTrigger;
 	trigA->SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 	trigB = new GuiTrigger;
@@ -302,7 +303,7 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
 	keyBackOverImg = new GuiImage(keyMediumOver);
 	keyBackText = new GuiText("Back", 20, (GXColor){0, 0, 0, 0xff});
 	//GuiButton(GuiImage* img, GuiImage* imgOver, int hor, int vert, int x, int y, GuiTrigger* trig, GuiSound* sndOver, GuiSound* sndClick, u8 grow);
-		
+
 	//keyBack = new GuiButton(keyMedium->GetWidth(), keyMedium->GetHeight());
 	keyBack = new GuiButton(keyBackImg, keyBackOverImg, 0, 3, 11*42+40+eurocheck, 0*42+120, trigA, keySoundOver, keySoundClick,1);
 	//keyBack->SetImage(keyBackImg);

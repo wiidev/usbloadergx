@@ -38,6 +38,7 @@ class GuiCustomOptionBrowser : public GuiElement
 		int FindMenuItem(int c, int d);
 		int GetClickedOption();
 		int GetSelectedOption();
+		void SetClickable(bool enable);
 		void ResetState();
 		void SetFocus(int f);
 		void Draw();

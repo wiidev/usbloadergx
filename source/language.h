@@ -11,7 +11,6 @@ extern "C"
 
 struct LANGUAGE
 {
-
 	char t3Covers[50];
 	char addToFavorite[50];
 	char all[30];
@@ -39,6 +38,7 @@ struct LANGUAGE
 	char ConsoleDefault[50];
 	char Consoleshouldbeunlockedtomodifyit[100];
 	char ConsoleLocked[50];
+	char Controllevel[50];
 	char CorrectPassword[50];
 	char Couldnotinitializenetwork[50];
 	char CouldnotopenDisc[50];
@@ -49,6 +49,7 @@ struct LANGUAGE
 	char Coverpathchange[50];
 	char count[20];
 	char Credits[30];
+	char Custompaths[60];
 	char DiscImages[50];
 	char DiscimagePath[50];
 	char DiscpathChanged[50];
@@ -59,11 +60,13 @@ struct LANGUAGE
 	char Doyoureallywanttodelete[50];
 	char Doyouwanttoretryfor30secs[80];
 	char Doyouwanttoupdate[50];
+	char Doyouwanttochangelanguage[80];
 	char Downloadingfile[50];
 	char DownloadBoxartimage[50];
 	char Downloadfinished[50];
 	char Defaultgamesettings[50];
 	char Defaultsettings[40];
+	char Default[40];
 	char Error[30];
 	char BOOTERROR[50];
 	char ErrorreadingDisc[50];
@@ -101,12 +104,15 @@ struct LANGUAGE
 	char GameRegion[50];
 	char GameSize[50];
 	char GoBack[50];
-	char GotoPage[50];///////
+	char GotoPage[50];
+	char GUISettings[80];
+	char Gameload[50];
 	char HowtoShutdown[50];
 	char Homemenu[30];
 	char hour[30];
 	char keyboard[50];
 	char Language[50];
+	char Languagepathchanged[80];
 	char Langchange[50];
 	char Left[50];
 	char LikeSysMenu[50];
@@ -172,6 +178,7 @@ struct LANGUAGE
 	char settings[50];
 	char Setasbackgroundmusic[90];
 	char Standard[30];
+	char Sound[40];
 	char ShutdowntoIdle[50];
 	char ShutdownSystem[50];
 	char Success[30];
@@ -190,6 +197,7 @@ struct LANGUAGE
 	char Tooltips[50];
 	char Timeleft[50];
 	char Unlock[50];
+	char UnlockConsoletousethisOption[100];
 	char Unicodefix[50];
 	char Uninstall[50];
 	char USBLoaderisprotected[80];
@@ -201,9 +209,11 @@ struct LANGUAGE
 	char Updatedol[40];
 	char Updateall[40];
 	char Updateto[40];
+	char Update[40];
 	char VideoMode[50];
 	char VIDTVPatch[50];
 	char Volume[50];
+	char SFXVolume[50];
 	char Waiting[50];
 	char WaitingforUSBDevice[80];
 	char WidescreenFix[50];
