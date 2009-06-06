@@ -220,8 +220,13 @@ int GuiGameCarousel::GetClickedOption()
 {
 	int found = -1;
 	if (clickedItem>-1){
+		if (game[bob[clickedItem+1]]->GetState()==STATE_SELECTED){
+			found= (clickedItem+listOffset+1) % gameCnt;
+			game[bob[clickedItem+1]]->SetState(STATE_SELECTED);
+			game[bob[clickedItem]]->SetState(STATE_SELECTED);}
+		else {
 		game[bob[clickedItem]]->SetState(STATE_SELECTED);
-		found= (clickedItem+listOffset) % gameCnt;
+		found= (clickedItem+listOffset) % gameCnt;}
 		clickedItem=-1;
 	}
 	return found;
@@ -231,7 +236,7 @@ int GuiGameCarousel::GetClickedOption()
 int GuiGameCarousel::GetSelectedOption()
 {
 	int found = -1;
-	for(int i=0; i<pagesize; i++) {
+	for(int i=pagesize-1; i>-1; i--) {
 		if(game[bob[i]]->GetState() == STATE_SELECTED) {
 			game[bob[i]]->SetState(STATE_SELECTED);
 			found = (listOffset+i) % gameCnt;
