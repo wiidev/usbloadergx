@@ -813,7 +813,6 @@ int MenuSettings()
                     w.Remove(&MainButton4);
                     titleTxt.SetText(LANGUAGE.Parentalcontrol);
                     exit = false;
-                    if(Settings.godmode)
                     options2.SetName(0, "Console");
                     options2.SetName(1, "%s", LANGUAGE.Password);
                     options2.SetName(2, "%s",LANGUAGE.Controllevel);
@@ -1341,7 +1340,7 @@ int MenuSettings()
                     w.Append(&optionBrowser2);
                     w.Append(&backBtn);
                     } else {
-                        WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtousethatoption, LANGUAGE.ok, 0,0,0);
+                        WindowPrompt(LANGUAGE.ConsoleLocked, LANGUAGE.UnlockConsoletousethisOption, LANGUAGE.ok, 0,0,0);
                     }
                     slidedirection = FADE;
                     pageToDisplay = 2;

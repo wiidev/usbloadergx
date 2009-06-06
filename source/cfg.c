@@ -231,8 +231,9 @@ void CFG_Default(int widescreen) // -1 = non forced Mode
 		snprintf(Settings.covers_path, sizeof(Settings.covers_path), "SD:/images/"); //default image path
 		snprintf(Settings.disc_path, sizeof(Settings.disc_path), "SD:/images/disc/");
 		snprintf(Settings.titlestxt_path, sizeof(Settings.titlestxt_path), "SD:/config/");//default path for disc images
-		snprintf(Settings.unlockCode, sizeof(Settings.unlockCode), "ab121b");		// default password
-		snprintf(Settings.language_path, sizeof(Settings.language_path), "SD:/config/language/");
+		char * empty = "";
+		snprintf(Settings.unlockCode, sizeof(Settings.unlockCode), empty);		// default password
+		snprintf(Settings.language_path, sizeof(Settings.language_path), "notset");
 		snprintf(Settings.languagefiles_path, sizeof(Settings.languagefiles_path), "SD:/config/language/");
 		snprintf(Settings.oggload_path, sizeof(Settings.oggload_path), "SD:/config/backgroundmusic/");
 		snprintf(Settings.update_path, sizeof(Settings.update_path), "SD:/apps/usbloader_gx/");
@@ -340,7 +341,9 @@ void Global_Default(void)
 	Settings.volume = 80;
 	Settings.sfxvolume = 80;
 	Settings.tooltips = TooltipsOn;
-	snprintf(Settings.unlockCode, sizeof(Settings.unlockCode), "ab121b");
+	char * empty = "";
+	snprintf(Settings.unlockCode, sizeof(Settings.unlockCode), empty);
+	Settings.godmode = 1;
 	Settings.parentalcontrol = 0;
 	Settings.cios = ios249;
 	Settings.xflip = no;

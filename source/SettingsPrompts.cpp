@@ -248,6 +248,7 @@ bool MenuOGG()
     if(ret>=0) {
         choice = WindowPrompt(LANGUAGE.Setasbackgroundmusic,GetFileName(ret),LANGUAGE.Yes,LANGUAGE.No,0,0);
         if(choice == 1) {
+        StopOgg();
         snprintf(fullpath,150,"%s%s",Settings.oggload_path,GetFileName(ret));
         choice = bgMusic->PlayOggFile(fullpath);
         if(choice < 0) {
