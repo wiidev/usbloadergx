@@ -37,6 +37,7 @@ snprintf(LANGUAGE.t3Covers, sizeof(LANGUAGE.t3Covers), "3D Covers");
 snprintf(LANGUAGE.Areyousure, sizeof(LANGUAGE.Areyousure), "Are you sure?");
 snprintf(LANGUAGE.available, sizeof(LANGUAGE.available), "available");
 snprintf(LANGUAGE.AutoPatch, sizeof(LANGUAGE.AutoPatch), "AutoPatch");
+snprintf(LANGUAGE.Always, sizeof(LANGUAGE.Always), "0 (Always)");
 snprintf(LANGUAGE.Back, sizeof(LANGUAGE.Back), "Back");
 snprintf(LANGUAGE.Backgroundmusic, sizeof(LANGUAGE.Backgroundmusic), "Backgroundmusic");
 snprintf(LANGUAGE.Backgroundmusicpath, sizeof(LANGUAGE.Backgroundmusicpath), "Backgroundmusic Path changed.");
@@ -137,10 +138,11 @@ snprintf(LANGUAGE.LoadingincIOS, sizeof(LANGUAGE.LoadingincIOS), "Loading in cIO
 snprintf(LANGUAGE.ListSort, sizeof(LANGUAGE.ListSort), "Sort Game List");
 snprintf(LANGUAGE.Loadingstandardlanguage, sizeof(LANGUAGE.Loadingstandardlanguage), "Loading standard language.");
 snprintf(LANGUAGE.Loadingstandardmusic, sizeof(LANGUAGE.Loadingstandardmusic), "Loading standard music.");
-snprintf(LANGUAGE.Lock, sizeof(LANGUAGE.Lock), "Lock");
+snprintf(LANGUAGE.Locked, sizeof(LANGUAGE.Locked), "Locked");
 snprintf(LANGUAGE.LockConsole, sizeof(LANGUAGE.LockConsole), "Lock Console");
 snprintf(LANGUAGE.Patchcountrystrings, sizeof(LANGUAGE.Patchcountrystrings), "Patch Country Strings");
 snprintf(LANGUAGE.Missingfiles, sizeof(LANGUAGE.Missingfiles), "Missing files");
+snprintf(LANGUAGE.Mature, sizeof(LANGUAGE.Mature), "3 (Mature)");
 snprintf(LANGUAGE.Networkiniterror, sizeof(LANGUAGE.Networkiniterror), "Network init error");
 snprintf(LANGUAGE.Neither, sizeof(LANGUAGE.Neither), "Neither");
 snprintf(LANGUAGE.Next, sizeof(LANGUAGE.Next), "Next");
@@ -214,7 +216,7 @@ snprintf(LANGUAGE.Try, sizeof(LANGUAGE.Try), "Try");
 snprintf(LANGUAGE.Tooltips, sizeof(LANGUAGE.Tooltips), "Tooltips");
 snprintf(LANGUAGE.Timeleft, sizeof(LANGUAGE.Timeleft), "Time left:");
 snprintf(LANGUAGE.updating, sizeof(LANGUAGE.updating), "Updating");
-snprintf(LANGUAGE.Unlock, sizeof(LANGUAGE.Unlock), "Unlock");
+snprintf(LANGUAGE.Unlocked, sizeof(LANGUAGE.Unlocked), "Unlocked");
 snprintf(LANGUAGE.UnlockConsoletousethisOption, sizeof(LANGUAGE.UnlockConsoletousethisOption), "Unlock console to use this option.");
 snprintf(LANGUAGE.Unicodefix, sizeof(LANGUAGE.Unicodefix), "Unicode Fix");
 snprintf(LANGUAGE.Uninstall, sizeof(LANGUAGE.Uninstall), "Uninstall");
@@ -289,6 +291,10 @@ void language_set(char *name, char *val)
 	}
 	if (strcmp(name, "AutoPatch") == 0) {
 		strcopy(LANGUAGE.AutoPatch, val, sizeof(LANGUAGE.AutoPatch));
+		return;
+	}
+	if (strcmp(name, "Always") == 0) {
+		strcopy(LANGUAGE.Always, val, sizeof(LANGUAGE.Always));
 		return;
 	}
 	if (strcmp(name, "Back") == 0) {
@@ -695,8 +701,8 @@ void language_set(char *name, char *val)
 		strcopy(LANGUAGE.Loadingstandardmusic, val, sizeof(LANGUAGE.Loadingstandardmusic));
 		return;
 	}
-	if (strcmp(name, "Lock") == 0) {
-		strcopy(LANGUAGE.Lock, val, sizeof(LANGUAGE.Lock));
+	if (strcmp(name, "Locked") == 0) {
+		strcopy(LANGUAGE.Locked, val, sizeof(LANGUAGE.Locked));
 		return;
 	}
 	if (strcmp(name, "LockConsole") == 0) {
@@ -709,6 +715,10 @@ void language_set(char *name, char *val)
 	}
 	if (strcmp(name, "Missingfiles") == 0) {
 		strcopy(LANGUAGE.Missingfiles, val, sizeof(LANGUAGE.Missingfiles));
+		return;
+	}
+	if (strcmp(name, "Mature") == 0) {
+		strcopy(LANGUAGE.Mature, val, sizeof(LANGUAGE.Mature));
 		return;
 	}
 	if (strcmp(name, "Networkiniterror") == 0) {
@@ -979,8 +989,8 @@ void language_set(char *name, char *val)
 		strcopy(LANGUAGE.Timeleft, val, sizeof(LANGUAGE.Timeleft));
 		return;
 	}
-	if (strcmp(name, "Unlock") == 0) {
-		strcopy(LANGUAGE.Unlock, val, sizeof(LANGUAGE.Unlock));
+	if (strcmp(name, "Unlocked") == 0) {
+		strcopy(LANGUAGE.Unlocked, val, sizeof(LANGUAGE.Unlocked));
 		return;
 	}
 	if (strcmp(name, "UnlockConsoletousethisOption") == 0) {

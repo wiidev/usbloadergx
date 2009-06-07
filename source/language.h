@@ -18,6 +18,7 @@ struct LANGUAGE
 	char available[20];
 	char Areyousure[50];
 	char AutoPatch[30];
+	char Always[50];
 	char Back[20];
 	char Backgroundmusic[80];
 	char Backgroundmusicpath[100];
@@ -120,10 +121,11 @@ struct LANGUAGE
 	char LoadingincIOS[50];
 	char Loadingstandardlanguage[80];
 	char Loadingstandardmusic[80];
-	char Lock[30];
+	char Locked[30];
 	char LockConsole[50];
 	char Patchcountrystrings[80];
 	char Missingfiles[50];
+	char Mature[50];
 	char Networkiniterror[50];
 	char Neither[40];
 	char Next[40];
@@ -196,7 +198,7 @@ struct LANGUAGE
 	char Try[30];
 	char Tooltips[50];
 	char Timeleft[50];
-	char Unlock[50];
+	char Unlocked[50];
 	char UnlockConsoletousethisOption[100];
 	char Unicodefix[50];
 	char Uninstall[50];

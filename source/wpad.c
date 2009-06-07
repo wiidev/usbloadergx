@@ -49,13 +49,17 @@ u32 ButtonsHold(void) {
     int i;
     u32 buttons = 0;
 
+    #ifdef HW_RVL
     WPAD_ScanPads();
+    #endif
     PAD_ScanPads();
 
     for(i=3; i >= 0; i--)
 	{
 	    buttons |= PAD_ButtonsHeld(i);
+	    #ifdef HW_RVL
 	    buttons |= WPAD_ButtonsHeld(i);
+        #endif
 	}
     return buttons;
 }
@@ -65,13 +69,17 @@ u32 ButtonsPressed(void) {
     int i;
     u32 buttons = 0;
 
+    #ifdef HW_RVL
     WPAD_ScanPads();
+    #endif
     PAD_ScanPads();
 
     for(i=3; i >= 0; i--)
 	{
 	    buttons |= PAD_ButtonsDown(i);
+	    #ifdef HW_RVL
 	    buttons |= WPAD_ButtonsDown(i);
+        #endif
 	}
     return buttons;
 

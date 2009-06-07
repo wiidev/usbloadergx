@@ -1,3 +1,4 @@
+#include <string.h>
 #include <unistd.h>
 
 #include "menu.h"
@@ -837,8 +838,8 @@ int MenuSettings()
                         if (Settings.parentalcontrol > 3 )
                             Settings.parentalcontrol = 0;
 
-                        if( Settings.godmode == 1 ) options2.SetValue(0, "Unlocked");
-                        else if( Settings.godmode == 0 ) options2.SetValue(0, "Locked");
+                        if( Settings.godmode == 1 ) options2.SetValue(0, LANGUAGE.Unlocked);
+                        else if( Settings.godmode == 0 ) options2.SetValue(0, LANGUAGE.Locked);
 
                         if ( Settings.godmode != 1) options2.SetValue(1, "********");
                         else if (!strcmp("", Settings.unlockCode)) options2.SetValue(1, "%s",LANGUAGE.notset);
@@ -1642,8 +1643,7 @@ int GameSettings(struct discHdr * header)
 
 	while(!exit)
 	{
-
-		VIDEO_WaitVSync ();
+		VIDEO_WaitVSync();
 
 		if (videoChoice == discdefault) options3.SetValue(0,"%s",LANGUAGE.DiscDefault);
 		else if (videoChoice == systemdefault) options3.SetValue(0,"%s",LANGUAGE.SystemDefault);
@@ -1673,20 +1673,20 @@ int GameSettings(struct discHdr * header)
 		if (iosChoice == i249) options3.SetValue(4,"249");
 		else if (iosChoice == i222) options3.SetValue(4,"222");
 
-		if (parentalcontrolChoice == 0) options3.SetValue(5,"0 (Always)");
+		if (parentalcontrolChoice == 0) options3.SetValue(5, LANGUAGE.Always);
 		else if (parentalcontrolChoice == 1) options3.SetValue(5,"1");
 		else if (parentalcontrolChoice == 2) options3.SetValue(5,"2");
-		else if (parentalcontrolChoice == 3) options3.SetValue(5,"3 (Mature)");
+		else if (parentalcontrolChoice == 3) options3.SetValue(5, LANGUAGE.Mature);
 
         if (fix002 == on) options3.SetValue(6,LANGUAGE.ON);
 		else if (fix002 == off) options3.SetValue(6,LANGUAGE.OFF);
+
+        options3.SetValue(7, NULL);
 
 		if(shutdown == 1)
 			Sys_Shutdown();
 		if(reset == 1)
 			Sys_Reboot();
-
-        options3.SetValue(7, NULL);
 
 		ret = optionBrowser3.GetClickedOption();
 

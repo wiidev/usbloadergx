@@ -66,11 +66,6 @@ GuiButton::GuiButton(GuiImage* img, GuiImage* imgOver, int hor, int vert, int x,
 	xoffset = x;
 	yoffset = y;
 	trigger[0] = trig;
-	
-	//SetAlignment(h_align, v_align);
-	//SetPosition(x,y);
-
-	
 
 	for(int i=0; i < 3; i++)
 	{
@@ -86,7 +81,7 @@ GuiButton::GuiButton(GuiImage* img, GuiImage* imgOver, int hor, int vert, int x,
 	selectable = true;
 	holdable = false;
 	clickable = true;
-	
+
 	if (grow==1){
 	effectsOver |= EFFECT_SCALE;
 	effectAmountOver = 4;
@@ -114,11 +109,6 @@ GuiButton::GuiButton(GuiImage* img, GuiImage* imgOver, int hor, int vert, int x,
 	xoffset = x;
 	yoffset = y;
 	trigger[0] = trig;
-	
-	//SetAlignment(h_align, v_align);
-	//SetPosition(x,y);
-
-	
 
 	for(int i=0; i < 3; i++)
 	{
@@ -134,13 +124,13 @@ GuiButton::GuiButton(GuiImage* img, GuiImage* imgOver, int hor, int vert, int x,
 	selectable = true;
 	holdable = false;
 	clickable = true;
-	
-	if (grow==1){
+
+	if (grow==1) {
 	effectsOver |= EFFECT_SCALE;
 	effectAmountOver = 4;
 	effectTargetOver = 110;
 	}
-	
+
 	toolTip = tt;
 	toolTip->SetParent(this);
 	toolTip->SetAlignment(h_align, v_align);

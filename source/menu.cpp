@@ -15,7 +15,6 @@
 #include "libwiigui/gui.h"
 #include "libwiigui/gui_gamegrid.h"
 #include "libwiigui/gui_gamecarousel.h"
-#include "libwiigui/gui_customoptionbrowser.h"
 #include "libwiigui/gui_gamebrowser.h"
 #include "menu.h"
 #include "audio.h"
@@ -1328,7 +1327,20 @@ static int MenuDiscList()
 				else if (choice == 2)
 				{
 					wiilight(0);
-					if (GameSettings(header) == 1) //if deleted
+					HaltGui();
+                    if (Settings.gameDisplay==list) mainWindow->Remove(&gameBrowser);
+                    else if (Settings.gameDisplay==grid) mainWindow->Remove(&gameGrid);
+                    else if (Settings.gameDisplay==carousel) mainWindow->Remove(&gameCarousel);
+                    mainWindow->Remove(&w);
+                    ResumeGui();
+					int settret = GameSettings(header);
+					HaltGui();
+                    if (Settings.gameDisplay==list)  mainWindow->Append(&gameBrowser);
+                    else if (Settings.gameDisplay==grid) mainWindow->Append(&gameGrid);
+                    else if (Settings.gameDisplay==carousel) mainWindow->Append(&gameCarousel);
+                    mainWindow->Append(&w);
+                    ResumeGui();
+					if (settret == 1) //if deleted
 					{
 						menu = MENU_DISCLIST;
 						break;
@@ -1457,7 +1469,7 @@ static int MenuInstall()
 		f32 freespace, used;
 
 		WBFS_DiskSpace(&used, &freespace);
-		float gamesize = WBFS_EstimeGameSize()/GB_SIZE;
+		gamesize = WBFS_EstimeGameSize()/GB_SIZE;
 		char gametxt[50];
 
 		sprintf(gametxt, "%s : %.2fGB", name, gamesize);
