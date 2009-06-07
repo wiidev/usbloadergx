@@ -225,7 +225,7 @@ int MenuSettings()
 	MainButton4.SetEffectGrow();
 	MainButton4.SetTrigger(&trigA);
 
-	customOptionList options2(9);
+	customOptionList options2(10);
 	GuiCustomOptionBrowser optionBrowser2(396, 280, &options2, CFG.theme_path, "bg_options_settings.png", bg_options_settings_png, 0, 150);
 	optionBrowser2.SetPosition(0, 90);
 	optionBrowser2.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
@@ -298,6 +298,9 @@ int MenuSettings()
 
 			/** Disable ability to click through MainButtons */
 			optionBrowser2.SetClickable(false);
+			/** Default no scrollbar and reset position **/
+			optionBrowser2.SetScrollbar(0);
+			optionBrowser2.SetOffset(0);
 
 			MainButton1.StopEffect();
 			MainButton2.StopEffect();
@@ -394,6 +397,9 @@ int MenuSettings()
 
 			/** Disable ability to click through MainButtons */
 			optionBrowser2.SetClickable(false);
+			/** Default no scrollbar and reset position **/
+			optionBrowser2.SetScrollbar(0);
+			optionBrowser2.SetOffset(0);
 
 			MainButton1.StopEffect();
 			MainButton2.StopEffect();
@@ -463,8 +469,10 @@ int MenuSettings()
                     options2.SetName(5, "%s",LANGUAGE.PromptsButtons);
                     options2.SetName(6, "%s",LANGUAGE.keyboard);
                     options2.SetName(7, "%s",LANGUAGE.Wiilight);
-                    options2.SetName(8, "%s", LANGUAGE.Rumble);
-                    for(int i = 0; i < 9; i++) options2.SetValue(i, NULL);
+                    options2.SetName(8, "%s",LANGUAGE.Rumble);
+                    options2.SetName(9, "%s",LANGUAGE.Unicodefix);
+                    for(int i = 0; i < 10; i++) options2.SetValue(i, NULL);
+                    optionBrowser2.SetScrollbar(1);
                     w.Append(&optionBrowser2);
                     optionBrowser2.SetClickable(true);
                     ResumeGui();
@@ -499,6 +507,8 @@ int MenuSettings()
                             Settings.wiilight = 0;
                         if(Settings.rumble >= settings_rumble_max)
                             Settings.rumble = 0; //RUMBLE
+                        if ( Settings.unicodefix > 2 )
+                            Settings.unicodefix = 0;
 
                         if(!strcmp("notset", Settings.language_path))
                             options2.SetValue(0, "%s", LANGUAGE.Default);
@@ -537,6 +547,10 @@ int MenuSettings()
 
                         if (Settings.rumble == RumbleOn) options2.SetValue(8,"%s",LANGUAGE.ON);
                         else if (Settings.rumble == RumbleOff) options2.SetValue(8,"%s",LANGUAGE.OFF);
+
+                        if (Settings.unicodefix == 0) options2.SetValue(9,"%s",LANGUAGE.OFF);
+                        else if (Settings.unicodefix == 1) options2.SetValue(9,"%s",LANGUAGE.TChinese);
+                        else if (Settings.unicodefix == 2) options2.SetValue(9,"%s",LANGUAGE.SChinese);
 
                         if(backBtn.GetState() == STATE_CLICKED)
                         {
@@ -639,6 +653,9 @@ int MenuSettings()
                             case 8:
                                 Settings.rumble++;
                                 break;
+                            case 9:
+                                Settings.unicodefix++;
+                                break;
                             }
                     }
                     optionBrowser2.SetEffect(EFFECT_FADE, -20);
@@ -677,7 +694,8 @@ int MenuSettings()
                     options2.SetName(6, NULL);
                     options2.SetName(7, NULL);
                     options2.SetName(8, NULL);
-                    for(int i = 0; i < 9; i++) options2.SetValue(i, NULL);
+                    options2.SetName(9, NULL);
+                    for(int i = 0; i < 10; i++) options2.SetValue(i, NULL);
                     w.Append(&optionBrowser2);
                     optionBrowser2.SetClickable(true);
                     ResumeGui();
@@ -822,7 +840,8 @@ int MenuSettings()
                     options2.SetName(6, NULL);
                     options2.SetName(7, NULL);
                     options2.SetName(8, NULL);
-                    for(int i = 0; i < 9; i++) options2.SetValue(i, NULL);
+                    options2.SetName(9, NULL);
+                    for(int i = 0; i < 10; i++) options2.SetValue(i, NULL);
                     w.Append(&optionBrowser2);
                     optionBrowser2.SetClickable(true);
                     ResumeGui();
@@ -988,7 +1007,8 @@ int MenuSettings()
                     options2.SetName(6, NULL);
                     options2.SetName(7, NULL);
                     options2.SetName(8, NULL);
-                    for(int i = 0; i < 9; i++) options2.SetValue(i, NULL);
+                    options2.SetName(9, NULL);
+                    for(int i = 0; i < 10; i++) options2.SetValue(i, NULL);
                     w.Append(&optionBrowser2);
                     optionBrowser2.SetClickable(true);
                     ResumeGui();
@@ -1135,7 +1155,8 @@ int MenuSettings()
                     options2.SetName(6, NULL);
                     options2.SetName(7, NULL);
                     options2.SetName(8, NULL);
-                    for(int i = 0; i < 9; i++) options2.SetValue(i, NULL);
+                    options2.SetName(9, NULL);
+                    for(int i = 0; i < 10; i++) options2.SetValue(i, NULL);
                     w.Append(&optionBrowser2);
                     optionBrowser2.SetClickable(true);
                     ResumeGui();
@@ -1302,6 +1323,58 @@ int MenuSettings()
                                 } else {
                                     WindowPrompt(LANGUAGE.Themepathchange,LANGUAGE.Consoleshouldbeunlockedtomodifyit,LANGUAGE.ok,0,0,0);
                                 }
+                                break;
+                            case 3:
+                                if ( Settings.godmode == 1)
+                                {
+                                    w.Remove(&optionBrowser2);
+                                    w.Remove(&backBtn);
+                                    char entered[43] = "";
+                                    strncpy(entered, Settings.titlestxt_path, sizeof(entered));
+                                    int result = OnScreenKeyboard(entered,43,4);
+                                    w.Append(&optionBrowser2);
+                                    w.Append(&backBtn);
+                                    if ( result == 1 )
+                                    {
+                                        int len = (strlen(entered)-1);
+                                        if(entered[len] !='/')
+                                        strncat (entered, "/", 1);
+                                        strncpy(Settings.titlestxt_path, entered, sizeof(Settings.titlestxt_path));
+                                        WindowPrompt(LANGUAGE.TitlestxtpathChanged,0,LANGUAGE.ok,0,0,0);
+                                        if(isSdInserted()) {
+                                            cfg_save_global();
+                                            CFG_Load();
+                                        } else {
+                                            WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    WindowPrompt(LANGUAGE.Titlestxtpathchange,LANGUAGE.Consoleshouldbeunlockedtomodifyit,LANGUAGE.ok,0,0,0);
+                                }
+                                break;
+                            case 4:
+                                if ( Settings.godmode == 1)
+                                {
+                                    w.Remove(&optionBrowser2);
+                                    w.Remove(&backBtn);
+                                    char entered[43] = "";
+                                    strncpy(entered, Settings.update_path, sizeof(entered));
+                                    int result = OnScreenKeyboard(entered,43,4);
+                                    w.Append(&optionBrowser2);
+                                    w.Append(&backBtn);
+                                    if ( result == 1 )
+                                    {
+                                        int len = (strlen(entered)-1);
+                                        if(entered[len] !='/')
+                                        strncat (entered, "/", 1);
+                                        strncpy(Settings.update_path, entered, sizeof(Settings.update_path));
+                                        WindowPrompt(LANGUAGE.Updatepathchanged,0,LANGUAGE.ok,0,0,0);
+                                    }
+                                }
+                                else
+                                    WindowPrompt(0,LANGUAGE.Consoleshouldbeunlockedtomodifyit,LANGUAGE.ok,0,0,0);
                                 break;
                         }
                     }

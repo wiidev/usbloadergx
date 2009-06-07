@@ -358,26 +358,31 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 
 	next = listOffset;
 
-	for(int i=0; i<pagesize; i++)
-	{
-		if(next >= 0)
-			next = this->FindMenuItem(next, 1);
+    u32 buttonshold = ButtonsHold();
 
-		if(focus)
-		{
-			if(i != selectedItem && game[i]->GetState() == STATE_SELECTED)
-				game[i]->ResetState();
-			else if(i == selectedItem && game[i]->GetState() == STATE_DEFAULT)
-				game[selectedItem]->SetState(STATE_SELECTED, t->chan);
-		}
+    if(buttonshold != WPAD_BUTTON_UP && buttonshold != WPAD_BUTTON_DOWN) {
 
-		game[i]->Update(t);
+        for(int i=0; i<pagesize; i++)
+        {
+            if(next >= 0)
+                next = this->FindMenuItem(next, 1);
 
-		if(game[i]->GetState() == STATE_SELECTED)
-		{
-			selectedItem = i;
-		}
-	}
+            if(focus)
+            {
+                if(i != selectedItem && game[i]->GetState() == STATE_SELECTED)
+                    game[i]->ResetState();
+                else if(i == selectedItem && game[i]->GetState() == STATE_DEFAULT)
+                    game[selectedItem]->SetState(STATE_SELECTED, t->chan);
+            }
+
+            game[i]->Update(t);
+
+            if(game[i]->GetState() == STATE_SELECTED)
+            {
+                selectedItem = i;
+            }
+        }
+    }
 
 	// pad/joystick navigation
 	if(!focus)
@@ -387,10 +392,9 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 	{
 
 		if (t->Down() ||
-				arrowDownBtn->GetState() == STATE_CLICKED || ////////////////////////////////////////////down
+				arrowDownBtn->GetState() == STATE_CLICKED ||
 				arrowDownBtn->GetState() == STATE_HELD)
 		{
-
 
 			next = this->FindMenuItem(gameIndex[selectedItem], 1);
 
@@ -411,11 +415,7 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 				scrollbarBoxBtn->Draw();
 				usleep(10000 * scrolldelay);
 			}
-			if (ButtonsHold() == WPAD_BUTTON_A)
-			{
-			}
-			else
-			{
+			if (buttonshold != WPAD_BUTTON_A){
 				arrowDownBtn->ResetState();
 			}
 		}
@@ -441,11 +441,7 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 				scrollbarBoxBtn->Draw();
 				usleep(10000 * scrolldelay);
 			}
-			if (ButtonsHold() == WPAD_BUTTON_A)
-			{
-			}
-			else
-			{
+			if (buttonshold != WPAD_BUTTON_A){
 				arrowUpBtn->ResetState();
 			}
 		}
@@ -459,7 +455,7 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 			position2 = position1;
 		}
 
-		if (ButtonsHold() == WPAD_BUTTON_B && position1 > 0)
+		if (buttonshold == WPAD_BUTTON_B && position1 > 0)
 		{
 			scrollbarBoxBtn->ScrollIsOn(1);
 			if (position2 > position1)
@@ -509,7 +505,7 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 			}
 
 		}
-		else if(ButtonsHold() != WPAD_BUTTON_B)
+		else if(buttonshold != WPAD_BUTTON_B)
 		{
 			scrollbarBoxBtn->ScrollIsOn(0);
 			position2 = 0;

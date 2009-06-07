@@ -39,6 +39,8 @@ class GuiCustomOptionBrowser : public GuiElement
 		int GetClickedOption();
 		int GetSelectedOption();
 		void SetClickable(bool enable);
+		void SetScrollbar(int enable);
+		void SetOffset(int optionnumber);
 		void ResetState();
 		void SetFocus(int f);
 		void Draw();
