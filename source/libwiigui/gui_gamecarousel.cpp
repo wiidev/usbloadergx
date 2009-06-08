@@ -219,15 +219,15 @@ int GuiGameCarousel::GetOffset()
 int GuiGameCarousel::GetClickedOption()
 {
 	int found = -1;
-	if (clickedItem>-1){
-		if (game[bob[clickedItem+1]]->GetState()==STATE_SELECTED){
-			found= (clickedItem+listOffset+1) % gameCnt;
-			game[bob[clickedItem+1]]->SetState(STATE_SELECTED);
-			game[bob[clickedItem]]->SetState(STATE_SELECTED);}
-		else {
-		game[bob[clickedItem]]->SetState(STATE_SELECTED);
-		found= (clickedItem+listOffset) % gameCnt;}
-		clickedItem=-1;
+	if (clickedItem>=0 && clickedItem<=pagesize){
+		if (game[bob[(clickedItem+1) % pagesize]]->GetState()==STATE_SELECTED){
+			found = (clickedItem+listOffset+1) % gameCnt;
+			game[bob[(clickedItem+1) % pagesize]]->SetState(STATE_SELECTED);
+			game[bob[clickedItem]]->SetState(STATE_SELECTED);
+		} else {
+			game[bob[clickedItem]]->SetState(STATE_SELECTED);
+			found= (clickedItem+listOffset) % gameCnt;}
+			clickedItem=-1;
 	}
 	return found;
 }

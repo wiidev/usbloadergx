@@ -300,14 +300,15 @@ void GuiGameBrowser::Draw()
 			break;
 	}
 
-    if(scrollbaron == 1) {
+	if(scrollbaron == 1) {
 		scrollbarImg->Draw();
 		arrowUpBtn->Draw();
 		arrowDownBtn->Draw();
 		scrollbarBoxBtn->Draw();
-    }
+	}
 	this->UpdateEffects();
 }
+
 void GuiGameBrowser::UpdateListEntries()
 {
 	int next = listOffset;
@@ -344,17 +345,17 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 
 	int next, prev;
 	int old_listOffset = listOffset;
-    static int position2;
+	static int position2;
 	// scrolldelay affects how fast the list scrolls
 	// when the arrows are clicked
 	float scrolldelay = 3.5;
 
-    if (scrollbaron == 1) {
-	// update the location of the scroll box based on the position in the option list
+	if (scrollbaron == 1) {
+		// update the location of the scroll box based on the position in the option list
 		arrowUpBtn->Update(t);
 		arrowDownBtn->Update(t);
 		scrollbarBoxBtn->Update(t);
-    }
+	}
 
 	next = listOffset;
 
@@ -384,16 +385,14 @@ void GuiGameBrowser::Update(GuiTrigger * t)
         }
     }
 
-	// pad/joystick navigation
-	if(!focus)
+	// pad and joystick navigation
+	if(!focus || !gameCnt)
 		return; // skip navigation
 
-    if (scrollbaron == 1)
+	if (scrollbaron == 1)
 	{
 
-		if (t->Down() ||
-				arrowDownBtn->GetState() == STATE_CLICKED ||
-				arrowDownBtn->GetState() == STATE_HELD)
+		if (t->Down() || arrowDownBtn->GetState() == STATE_CLICKED || arrowDownBtn->GetState() == STATE_HELD) //down
 		{
 
 			next = this->FindMenuItem(gameIndex[selectedItem], 1);
@@ -404,7 +403,6 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 				{
 					// move list down by 1
 					listOffset = this->FindMenuItem(listOffset, 1);
-//					UpdateEntries();
 				}
 				else if(game[selectedItem+1]->IsVisible())
 				{
@@ -415,13 +413,10 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 				scrollbarBoxBtn->Draw();
 				usleep(10000 * scrolldelay);
 			}
-			if (buttonshold != WPAD_BUTTON_A){
+			if (!(ButtonsHold() & WPAD_BUTTON_A))
 				arrowDownBtn->ResetState();
-			}
 		}
-		else if(t->Up() ||
-					arrowUpBtn->GetState() == STATE_CLICKED || ////////////////////////////////////////////up
-					arrowUpBtn->GetState() == STATE_HELD)
+		else if(t->Up() || arrowUpBtn->GetState() == STATE_CLICKED || arrowUpBtn->GetState() == STATE_HELD) //up
 		{
 			prev = this->FindMenuItem(gameIndex[selectedItem], -1);
 
@@ -441,21 +436,17 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 				scrollbarBoxBtn->Draw();
 				usleep(10000 * scrolldelay);
 			}
-			if (buttonshold != WPAD_BUTTON_A){
+			if (!(ButtonsHold() & WPAD_BUTTON_A))
 				arrowUpBtn->ResetState();
-			}
 		}
-		int position1 = 0;
-
-
-		position1 = t->wpad.ir.y;
+		int position1 = t->wpad.ir.y;
 
 		if (position2 == 0 && position1 > 0)
 		{
 			position2 = position1;
 		}
 
-		if (buttonshold == WPAD_BUTTON_B && position1 > 0)
+		if ((buttonshold & WPAD_BUTTON_B) && position1 > 0)
 		{
 			scrollbarBoxBtn->ScrollIsOn(1);
 			if (position2 > position1)
@@ -469,7 +460,6 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 					{
 						// move list up by 1
 						listOffset = prev;
-//						UpdateEntries();
 					}
 					else
 					{
@@ -491,7 +481,6 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 					{
 						// move list down by 1
 						listOffset = this->FindMenuItem(listOffset, 1);
-//						UpdateEntries();
 					}
 					else if(game[selectedItem+1]->IsVisible())
 					{
@@ -505,54 +494,46 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 			}
 
 		}
-		else if(buttonshold != WPAD_BUTTON_B)
+		else if(!(buttonshold & WPAD_BUTTON_B))
 		{
 			scrollbarBoxBtn->ScrollIsOn(0);
 			position2 = 0;
 		}
 
-		if(scrollbarBoxBtn->GetState() == STATE_HELD &&/////////////////////allow dragging of scrollbar box
-			scrollbarBoxBtn->GetStateChan() == t->chan &&
-			t->wpad.ir.valid && gameCnt > pagesize)
+		if(scrollbarBoxBtn->GetState() == STATE_HELD && scrollbarBoxBtn->GetStateChan() == t->chan && t->wpad.ir.valid && gameCnt > pagesize)
 		{
+			// allow dragging of scrollbar box
 			scrollbarBoxBtn->SetPosition(width/2-18+7,0);
-			//int position = t->wpad.ir.y - 50 - scrollbarBoxBtn->GetTop();
 			int position = t->wpad.ir.y - 32 - scrollbarBoxBtn->GetTop();
 
-			//listOffset = (position * gameCnt)/237 - selectedItem;
 			listOffset = (position * gameCnt)/(25.2 * pagesize) - selectedItem;
-//			UpdateEntries();
 
 			if(listOffset <= 0)
 			{
 				listOffset = 0;
-//				UpdateEntries();
 				selectedItem = 0;
 			}
 			else if(listOffset+pagesize >= gameCnt)
 			{
 				listOffset = gameCnt - pagesize;
-//				UpdateEntries();
 				selectedItem = pagesize-1;
 			}
 
 		}
-		//int positionbar = 237*(listOffset + selectedItem) / gameCnt;
 		int positionbar = (25.2 * pagesize)*(listOffset + selectedItem) / gameCnt;
 
-		if(positionbar > (24 * pagesize))//if(positionbar > 216)
-			positionbar = (24 * pagesize);//positionbar = 216;
+		if(positionbar > (24 * pagesize))
+			positionbar = (24 * pagesize);
 		scrollbarBoxBtn->SetPosition(width/2-18+7, positionbar+8);
 
 
-		if(t->Right())/////////////////////////////////////////////////////skip pagesize # of games if right is pressed
+		if(t->Right()) //skip pagesize # of games if right is pressed
 		{
 			if(listOffset < gameCnt && gameCnt > pagesize)
 			{
 				listOffset =listOffset+ pagesize;
 				if(listOffset+pagesize >= gameCnt)
 					listOffset = gameCnt-pagesize;
-//				UpdateEntries();
 			}
 		}
 		else if(t->Left())
@@ -562,14 +543,13 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 				listOffset =listOffset- pagesize;
 				if(listOffset < 0)
 					listOffset = 0;
-//				UpdateEntries();
 			}
 		}
 
 	}
 	else
 	{
-		if(t->Down())/////////////////////////////////////////////////////if there isn't a scrollbar and down is pressed
+		if(t->Down()) //if there isn't a scrollbar and down is pressed
 		{
 			next = this->FindMenuItem(gameIndex[selectedItem], 1);
 
@@ -588,7 +568,7 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 				}
 			}
 		}
-		else if(t->Up())///////////////////////////////////////////////////up
+		else if(t->Up()) //up
 		{
 			prev = this->FindMenuItem(gameIndex[selectedItem], -1);
 
@@ -607,7 +587,8 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 				}
 			}
 		}
-    }
+	}
+
 	if(old_listOffset != listOffset)
 		UpdateListEntries();
 
