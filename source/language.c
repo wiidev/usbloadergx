@@ -38,6 +38,7 @@ snprintf(LANGUAGE.Areyousure, sizeof(LANGUAGE.Areyousure), "Are you sure?");
 snprintf(LANGUAGE.available, sizeof(LANGUAGE.available), "available");
 snprintf(LANGUAGE.AutoPatch, sizeof(LANGUAGE.AutoPatch), "AutoPatch");
 snprintf(LANGUAGE.Always, sizeof(LANGUAGE.Always), "0 (Always)");
+snprintf(LANGUAGE.awesometool, sizeof(LANGUAGE.awesometool), "for his awesome tool");
 snprintf(LANGUAGE.Back, sizeof(LANGUAGE.Back), "Back");
 snprintf(LANGUAGE.Backgroundmusic, sizeof(LANGUAGE.Backgroundmusic), "Backgroundmusic");
 snprintf(LANGUAGE.Backgroundmusicpath, sizeof(LANGUAGE.Backgroundmusicpath), "Backgroundmusic Path changed.");
@@ -87,6 +88,7 @@ snprintf(LANGUAGE.Downloadfinished, sizeof(LANGUAGE.Downloadfinished), "Download
 snprintf(LANGUAGE.Defaultgamesettings, sizeof(LANGUAGE.Defaultgamesettings), "Default Gamesettings");
 snprintf(LANGUAGE.Defaultsettings, sizeof(LANGUAGE.Defaultsettings), "Default Settings");
 snprintf(LANGUAGE.Default, sizeof(LANGUAGE.Default), "Default");
+snprintf(LANGUAGE.diversepatches, sizeof(LANGUAGE.diversepatches), "for diverse patches");
 snprintf(LANGUAGE.Error, sizeof(LANGUAGE.Error), "Error !");
 snprintf(LANGUAGE.hour, sizeof(LANGUAGE.hour), "Hour");
 snprintf(LANGUAGE.Homemenu, sizeof(LANGUAGE.Homemenu), "HOME Menu");
@@ -118,6 +120,8 @@ snprintf(LANGUAGE.Format, sizeof(LANGUAGE.Format), "Format");
 snprintf(LANGUAGE.keyboard, sizeof(LANGUAGE.keyboard), "Keyboard");
 snprintf(LANGUAGE.Formattingpleasewait, sizeof(LANGUAGE.Formattingpleasewait), "Formatting, please wait...");
 snprintf(LANGUAGE.formated, sizeof(LANGUAGE.formated), "formatted!");
+snprintf(LANGUAGE.Forhostingcovers, sizeof(LANGUAGE.Forhostingcovers), "for hosting the covers/discarts");
+snprintf(LANGUAGE.Forhostingupdatefiles, sizeof(LANGUAGE.Forhostingupdatefiles), "for hosting the update files");
 snprintf(LANGUAGE.free, sizeof(LANGUAGE.free), "free");
 snprintf(LANGUAGE.FreeSpace, sizeof(LANGUAGE.FreeSpace), "Free Space");
 snprintf(LANGUAGE.FullShutdown, sizeof(LANGUAGE.FullShutdown), "Full Shutdown");
@@ -187,13 +191,12 @@ snprintf(LANGUAGE.Rumble, sizeof(LANGUAGE.Rumble), "Rumble");
 snprintf(LANGUAGE.QuickBoot, sizeof(LANGUAGE.QuickBoot), "Quick Boot");
 snprintf(LANGUAGE.Save, sizeof(LANGUAGE.Save), "Save");
 snprintf(LANGUAGE.SaveFailed, sizeof(LANGUAGE.SaveFailed), "Save Failed");
-snprintf(LANGUAGE.Specialthanksto, sizeof(LANGUAGE.Specialthanksto), "Special thanks to");
+snprintf(LANGUAGE.Specialthanksto, sizeof(LANGUAGE.Specialthanksto), "Special thanks to:");
 snprintf(LANGUAGE.For, sizeof(LANGUAGE.For), "for");
-snprintf(LANGUAGE.theUSBLoaderandreleasingthesourcecode, sizeof(LANGUAGE.theUSBLoaderandreleasingthesourcecode), "and releasing the source code");
+snprintf(LANGUAGE.theUSBLoaderandreleasingthesourcecode, sizeof(LANGUAGE.theUSBLoaderandreleasingthesourcecode), "for the USB Loader source code");
 snprintf(LANGUAGE.secondsleft, sizeof(LANGUAGE.secondsleft), "seconds left");
 snprintf(LANGUAGE.Setasbackgroundmusic, sizeof(LANGUAGE.Setasbackgroundmusic), "Set as backgroundmusic?");
 snprintf(LANGUAGE.SelectthePartition, sizeof(LANGUAGE.SelectthePartition), "Select the Partition");
-snprintf(LANGUAGE.Specialthanksto, sizeof(LANGUAGE.Specialthanksto), "Special thanks to");
 snprintf(LANGUAGE.youwanttoformat, sizeof(LANGUAGE.youwanttoformat), "you want to format");
 snprintf(LANGUAGE.Standard, sizeof(LANGUAGE.Standard), "Standard");
 snprintf(LANGUAGE.settings, sizeof(LANGUAGE.settings), "Settings");
@@ -206,6 +209,7 @@ snprintf(LANGUAGE.Successfullyupdated, sizeof(LANGUAGE.Successfullyupdated), "Su
 snprintf(LANGUAGE.Successfullydeleted, sizeof(LANGUAGE.Successfullydeleted), "Successfully deleted:");
 snprintf(LANGUAGE.SuccessfullySaved, sizeof(LANGUAGE.SuccessfullySaved), "Successfully Saved");
 snprintf(LANGUAGE.SystemDefault, sizeof(LANGUAGE.SystemDefault), "System Default");
+snprintf(LANGUAGE.Thanksto, sizeof(LANGUAGE.Thanksto), "Big thanks to:");
 snprintf(LANGUAGE.ThemePath, sizeof(LANGUAGE.ThemePath), "ThemePath");
 snprintf(LANGUAGE.ThemepathChanged, sizeof(LANGUAGE.ThemepathChanged), "Themepath Changed");
 snprintf(LANGUAGE.Themepathchange, sizeof(LANGUAGE.Themepathchange), "Themepath change");
@@ -295,6 +299,10 @@ void language_set(char *name, char *val)
 	}
 	if (strcmp(name, "Always") == 0) {
 		strcopy(LANGUAGE.Always, val, sizeof(LANGUAGE.Always));
+		return;
+	}
+	if (strcmp(name, "awesometool") == 0) {
+		strcopy(LANGUAGE.awesometool, val, sizeof(LANGUAGE.awesometool));
 		return;
 	}
 	if (strcmp(name, "Back") == 0) {
@@ -485,6 +493,10 @@ void language_set(char *name, char *val)
 		strcopy(LANGUAGE.Default, val, sizeof(LANGUAGE.Default));
 		return;
 	}
+	if (strcmp(name, "diversepatches") == 0) {
+		strcopy(LANGUAGE.diversepatches, val, sizeof(LANGUAGE.diversepatches));
+		return;
+	}
 	if (strcmp(name, "Error") == 0) {
 		strcopy(LANGUAGE.Error, val, sizeof(LANGUAGE.Error));
 		return;
@@ -603,6 +615,14 @@ void language_set(char *name, char *val)
 	}
 	if (strcmp(name, "formated") == 0) {
 		strcopy(LANGUAGE.formated, val, sizeof(LANGUAGE.formated));
+		return;
+	}
+	if (strcmp(name, "Forhostingcovers") == 0) {
+		strcopy(LANGUAGE.Forhostingcovers, val, sizeof(LANGUAGE.Forhostingcovers));
+		return;
+	}
+	if (strcmp(name, "Forhostingupdatefiles") == 0) {
+		strcopy(LANGUAGE.Forhostingupdatefiles, val, sizeof(LANGUAGE.Forhostingupdatefiles));
 		return;
 	}
 	if (strcmp(name, "free") == 0) {
@@ -889,10 +909,6 @@ void language_set(char *name, char *val)
 		strcopy(LANGUAGE.SaveFailed, val, sizeof(LANGUAGE.SaveFailed));
 		return;
 	}
-	if (strcmp(name, "Specialthanksto") == 0) {
-		strcopy(LANGUAGE.Specialthanksto, val, sizeof(LANGUAGE.Specialthanksto));
-		return;
-	}
 	if (strcmp(name, "theUSBLoaderandreleasingthesourcecodethe") == 0) {
 		strcopy(LANGUAGE.theUSBLoaderandreleasingthesourcecode, val, sizeof(LANGUAGE.theUSBLoaderandreleasingthesourcecode));
 		return;
@@ -951,6 +967,10 @@ void language_set(char *name, char *val)
 	}
 	if (strcmp(name, "SystemDefault") == 0) {
 		strcopy(LANGUAGE.SystemDefault, val, sizeof(LANGUAGE.SystemDefault));
+		return;
+	}
+	if (strcmp(name, "Thanksto") == 0) {
+		strcopy(LANGUAGE.Thanksto, val, sizeof(LANGUAGE.Thanksto));
 		return;
 	}
 	if (strcmp(name, "ThemePath") == 0) {

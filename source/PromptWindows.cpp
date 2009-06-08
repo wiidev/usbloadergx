@@ -161,7 +161,7 @@ void WindowCredits()
 	starImg.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	starImg.SetPosition(505,350);
 
-	int numEntries = 25;
+	int numEntries = 20;
 	GuiText * txt[numEntries];
 
 	txt[i] = new GuiText(LANGUAGE.Credits, 26, (GXColor){255, 255, 255, 255});
@@ -186,96 +186,81 @@ void WindowCredits()
 			FTGX_JUSTIFY_LEFT | FTGX_ALIGN_TOP, ALIGN_LEFT, ALIGN_TOP);
 
 	txt[i] = new GuiText("Coding:");
-	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(170,y);
+	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(70,y);
 	i++;
 
-	txt[i] = new GuiText("dimok");
-	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(320,y);
-	i++;
-	y+=22;
-
-	txt[i] = new GuiText("nIxx");
-	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(320,y);
-	i++;
-	y+=22;
-
-	txt[i] = new GuiText("hungyip84");
-	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(320,y);
-	i++;
-	y+=22;
-
-	txt[i] = new GuiText("giantpune");
-	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(320,y);
-	i++;
-	y+=22;
-	txt[i] = new GuiText("ardi");
-	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(320,y);
+	txt[i] = new GuiText("dimok / nIxx");
+	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(220,y);
 	i++;
 	y+=24;
 
+	txt[i] = new GuiText("hungyip84 / giantpune");
+	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(220,y);
+	i++;
+	y+=24;
+
+	txt[i] = new GuiText("ardi / DrayX7");
+	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(220,y);
+	i++;
+	y+=34;
+
 	txt[i] = new GuiText("Design:");
-	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(170,y);
+	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(70,y);
 	i++;
 
-	txt[i] = new GuiText("cyrex");
-	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(320,y);
+	txt[i] = new GuiText("cyrex / NeoRame / WiiShizzza");
+	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(220,y);
+	i++;
+	y+=20;
+
+	txt[i] = new GuiText(" ");
+	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(220,y);
 	i++;
 	y+=22;
 
-	txt[i] = new GuiText("NeoRame");
-	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(320,y);
+	txt[i] = new GuiText(LANGUAGE.Thanksto);
+	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(70,y);
 	i++;
-	y+=22;
 
-	txt[i] = new GuiText("WiiShizza");
-	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(320,y);
+    char text[100];
+    sprintf(text, "djtaz %s", LANGUAGE.Forhostingcovers);
+	txt[i] = new GuiText(text);
+	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(220,y);
 	i++;
-	y+=28;
+	y+=24;
+
+    sprintf(text, "CorneliousJD %s", LANGUAGE.Forhostingupdatefiles);
+	txt[i] = new GuiText(text);
+	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(220,y);
+	i++;
+	y+=30;
 
 	txt[i] = new GuiText(LANGUAGE.Specialthanksto);
-	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(-50,y);
+	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(70,y);
 	i++;
+	y+=24;
 
-	txt[i] = new GuiText(":");
-	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(30,y+3);
+    sprintf(text, "Tantric %s LibWiiGui", LANGUAGE.awesometool);
+	txt[i] = new GuiText(text);
+	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(100,y);
 	i++;
 	y+=22;
 
-	txt[i] = new GuiText("Fishears/Nuke        Ocarina & WiiPower       Vidpatch");
-	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(0,y);
-	i++;
-
-	txt[i] = new GuiText(LANGUAGE.For);
-	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(-80,y);
-	txt[i]->SetPosition(-80, y);
-	i++;
-	txt[i] = new GuiText(LANGUAGE.For);
-	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(130,y);
-	txt[i]->SetPosition(130, y);
-	i++;
-
-	y+=22;
-
-	txt[i] = new GuiText("Tantric         libwiigui");
-	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(0,y);
-	i++;
-	txt[i] = new GuiText(LANGUAGE.For);
-	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); //txt[i]->SetPosition(-3,y);
-	txt[i]->SetPosition(-3, y);
+    sprintf(text, "Waninkoko & Kwiirk %s", LANGUAGE.theUSBLoaderandreleasingthesourcecode);
+	txt[i] = new GuiText(text);
+	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(100,y);
 	i++;
 	y+=22;
 
-	txt[i] = new GuiText("Waninkoko & Kwiirk         USB Loader");
-	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(0,y);
-	i++;
-	txt[i] = new GuiText(LANGUAGE.For);
-	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(30,y);
-	txt[i]->SetPosition(30, y);
+    sprintf(text, "Fishears/Nuke %s Ocarina", LANGUAGE.For);
+	txt[i] = new GuiText(text);
+	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(100,y);
 	i++;
 	y+=22;
 
-	txt[i] = new GuiText(LANGUAGE.theUSBLoaderandreleasingthesourcecode);
-	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(0,y);
+    sprintf(text, "WiiPower %s", LANGUAGE.diversepatches);
+	txt[i] = new GuiText(text);
+	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(100,y);
 	i++;
 	y+=22;
 

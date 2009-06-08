@@ -19,6 +19,7 @@ struct LANGUAGE
 	char Areyousure[50];
 	char AutoPatch[30];
 	char Always[50];
+	char awesometool[50];
 	char Back[20];
 	char Backgroundmusic[80];
 	char Backgroundmusicpath[100];
@@ -68,6 +69,7 @@ struct LANGUAGE
 	char Defaultgamesettings[50];
 	char Defaultsettings[40];
 	char Default[40];
+	char diversepatches[60];
 	char Error[30];
 	char BOOTERROR[50];
 	char ErrorreadingDisc[50];
@@ -92,6 +94,8 @@ struct LANGUAGE
 	char filesleft[50];
 	char FlipX[50];
 	char Force[50];
+	char Forhostingcovers[80];
+	char Forhostingupdatefiles[80];
 	char Youneedtoformatapartition[80];
 	char Format[50];
 	char Formattingpleasewait[70];
@@ -189,6 +193,7 @@ struct LANGUAGE
 	char Successfullydeleted[60];
 	char SuccessfullySaved[50];
 	char SystemDefault[50];
+	char Thanksto[50];
 	char ThemePath[50];
 	char ThemepathChanged[50];
 	char Themepathchange[80];
