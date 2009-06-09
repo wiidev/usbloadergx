@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/dir.h>
 #include <ogcsys.h>
 #include <unistd.h>
 #include <wiiuse/wpad.h>
@@ -68,12 +69,32 @@ main(int argc, char *argv[])
 {
 
 	s32 ret2;
+	
+	SDCard_Init(); // mount SD for loading cfg's
+	USBDevice_Init(); // and mount USB:/
+	bool bootDevice_found=false;
+	if(argc >= 1)
+	{
+		if(!strncasecmp(argv[0], "usb:/", 5))
+		{
+			strcpy(bootDevice, "USB:");
+			bootDevice_found = true;
+		}
+		else if(!strncasecmp(argv[0], "sd:/", 4))
+			bootDevice_found = true;
+	}
+	if(!bootDevice_found)
+	{
+		//try USB
+        if((stat("USB:/apps/usbloader_gx/boot.dol", NULL) == 0) || (stat("USB:/apps/usbloader_gx/boot.elf", NULL) == 0))
+			strcpy(bootDevice, "USB:");
+	}
 
-    SDCard_Init(); // mount SD for loading cfg's
 	lang_default();
 	CFG_Load();
 
 	SDCard_deInit();// unmount SD for reloading IOS
+	USBDevice_deInit();// unmount USB for reloading IOS
 
     /* Load Custom IOS */
     if(Settings.cios == ios222) {

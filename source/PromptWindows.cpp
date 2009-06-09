@@ -1216,7 +1216,8 @@ int GameWindowPrompt()
 					favorite = game_num->favorite;
 					count = game_num->count;//count+=1;
 					}count+=1;
-				if(isSdInserted()) {
+				//if(isSdInserted()) {
+				if(isInserted(bootDevice)) {
 				if (CFG_save_game_num(header->id))
 				{
 					//WindowPrompt(LANGUAGE.SuccessfullySaved, 0, LANGUAGE.ok, 0,0,0);
@@ -1250,7 +1251,8 @@ int GameWindowPrompt()
 			}
 
 			else if(btnFavorite.GetState() == STATE_CLICKED){//switch favorite
-				if(isSdInserted()) {
+				//if(isSdInserted()) {
+				if(isInserted(bootDevice)) {
 					faveChoice = !faveChoice;
 					btnFavoriteImg.SetImage(faveChoice ? &imgFavorite : &imgNotFavorite);
 					extern u8 favorite;
@@ -2285,15 +2287,17 @@ ProgressUpdateWindow()
     if(file.data != NULL)
     {
         char revtxt[10];
-        pfile = fopen("SD:/rev.txt", "w");
+		char rev_txt[14];
+		sprintf(rev_txt, "%s:/rev.txt", bootDevice);
+        pfile = fopen(rev_txt, "w");
         fwrite(file.data,1,file.size,pfile);
         fclose(pfile);
         //has to be repeated or it isnt working (first file download bug)
-        pfile = fopen("SD:/rev.txt", "w");
+        pfile = fopen(rev_txt, "w");
         fwrite(file.data,1,file.size,pfile);
         fclose(pfile);
         //"w+" doesnt work, needs to be reopened as "r"
-        pfile = fopen("SD:/rev.txt", "r");
+        pfile = fopen(rev_txt, "r");
         int c = 0, i = 0;
         while(c != EOF || i < 10) {
             c = fgetc(pfile);
@@ -2307,7 +2311,7 @@ ProgressUpdateWindow()
         }
         fclose(pfile);
         revnumber = atoi(revtxt);
-        remove("SD:/rev.txt");
+        remove(rev_txt);
         free(file.data);
     }
 

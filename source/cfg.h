@@ -41,7 +41,8 @@ extern "C"
 #define CFG_ALIGN_BOTTOM 4
 #define CFG_ALIGN_MIDDLE 5
 
-extern char *cfg_path;
+extern char bootDevice[10];
+//extern char *cfg_path;
 
 struct CFG
 {
@@ -160,6 +161,7 @@ extern u8 fave;
 extern u8 wsprompt;
 extern u8 keyset;
 extern u8 gameDisplay;
+
 
 struct Game_CFG
 {

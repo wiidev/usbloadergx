@@ -231,7 +231,8 @@ bool MenuOGG()
                 strncat (entered, "/", 1);
                 strncpy(Settings.oggload_path, entered, sizeof(Settings.oggload_path));
                 WindowPrompt(LANGUAGE.Backgroundmusicpath,0,LANGUAGE.ok,0,0,0);
-                if(isSdInserted()) {
+//                if(isSdInserted()) {
+				if(isInserted(bootDevice)) {
                     if(!strcmp("", Settings.oggload_path)) {
                     sprintf(Settings.ogg_path, "notset");
                     bgMusic->Play();
@@ -473,7 +474,8 @@ int MenuLanguageSelect()
                 strncat (entered, "/", 1);
                 strncpy(Settings.languagefiles_path, entered, sizeof(Settings.languagefiles_path));
                 WindowPrompt(LANGUAGE.Languagepathchanged,0,LANGUAGE.ok,0,0,0);
-                if(isSdInserted()) {
+//                if(isSdInserted()) {
+				if(isInserted(bootDevice)) {
                     cfg_save_global();
                     returnhere = 1;
                     break;
@@ -492,7 +494,8 @@ int MenuLanguageSelect()
     if(ret>=0) {
         choice = WindowPrompt(LANGUAGE.Doyouwanttochangelanguage, 0, LANGUAGE.Yes, LANGUAGE.Cancel,0,0);
         if(choice == 1) {
-        if(isSdInserted()) {
+//        if(isSdInserted()) {
+		if(isInserted(bootDevice)) {
             snprintf(Settings.language_path, sizeof(Settings.language_path), "%s%s", Settings.languagefiles_path, GetFileName(ret));
             cfg_save_global();
             if(!checkfile(Settings.language_path)) {

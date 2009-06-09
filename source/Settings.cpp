@@ -601,7 +601,8 @@ int MenuSettings()
                         switch (ret)
                         {
                             case 0:
-                                if(isSdInserted()) {
+                                //if(isSdInserted()) {
+								if(isInserted(bootDevice)) {
                                 if ( Settings.godmode == 1)
                                 {
                                     w.SetEffect(EFFECT_FADE, -20);
@@ -1101,7 +1102,8 @@ int MenuSettings()
                         switch (ret)
                         {
                             case 0:
-                                if(isSdInserted())
+                                //if(isSdInserted())
+								if(isInserted(bootDevice))
                                 {
                                     w.SetEffect(EFFECT_FADE, -20);
                                     while(w.GetEffect()>0) usleep(50);
@@ -1252,8 +1254,9 @@ int MenuSettings()
                                         strncat (entered, "/", 1);
                                         strncpy(Settings.covers_path, entered, sizeof(Settings.covers_path));
                                         WindowPrompt(LANGUAGE.CoverpathChanged,0,LANGUAGE.ok,0,0,0);
-                                        if(!isSdInserted()) {
-                                            WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
+//                                        if(!isSdInserted()) {
+										if(!isInserted(bootDevice)) {
+                                          WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
                                         }
                                     }
                                 } else {
@@ -1277,7 +1280,8 @@ int MenuSettings()
                                         strncat (entered, "/", 1);
                                         strncpy(Settings.disc_path, entered, sizeof(Settings.disc_path));
                                         WindowPrompt(LANGUAGE.DiscpathChanged,0,LANGUAGE.ok,0,0,0);
-                                        if(!isSdInserted()) {
+//                                        if(!isSdInserted()) {
+										if(!isInserted(bootDevice)) {
                                             WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
                                         }
                                     }
@@ -1302,7 +1306,8 @@ int MenuSettings()
                                         strncat (entered, "/", 1);
                                         strncpy(CFG.theme_path, entered, sizeof(CFG.theme_path));
                                         WindowPrompt(LANGUAGE.ThemepathChanged,0,LANGUAGE.ok,0,0,0);
-                                        if(!isSdInserted()) {
+//                                        if(!isSdInserted()) {
+										if(!isInserted(bootDevice)) {
                                             WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
                                         } else {
                                             cfg_save_global();
@@ -1358,7 +1363,8 @@ int MenuSettings()
                                         strncat (entered, "/", 1);
                                         strncpy(Settings.titlestxt_path, entered, sizeof(Settings.titlestxt_path));
                                         WindowPrompt(LANGUAGE.TitlestxtpathChanged,0,LANGUAGE.ok,0,0,0);
-                                        if(isSdInserted()) {
+//                                        if(isSdInserted()) {
+										if(isInserted(bootDevice)) {
                                             cfg_save_global();
                                             CFG_Load();
                                         } else {
@@ -1422,7 +1428,8 @@ int MenuSettings()
                     w.Remove(&MainButton2);
                     w.Remove(&MainButton3);
                     w.Remove(&MainButton4);
-                    if(isSdInserted() && Settings.godmode) {
+//                    if(isSdInserted() && Settings.godmode) {
+					if(isInserted(bootDevice) && Settings.godmode) {
                     w.Remove(&optionBrowser2);
                     w.Remove(&backBtn);
                     int ret = ProgressUpdateWindow();
@@ -1459,8 +1466,13 @@ int MenuSettings()
                     if(Settings.godmode) {
                     int choice = WindowPrompt(LANGUAGE.Areyousure, 0, LANGUAGE.Yes, LANGUAGE.Cancel, 0, 0);
                     if(choice == 1) {
-							if(isSdInserted())
-								remove("SD:/config/GXGlobal.cfg");
+//							if(isSdInserted())
+							if(isInserted(bootDevice))
+							{
+								char GXGlobal_cfg[26];
+								sprintf(GXGlobal_cfg, "%s/config/GXGlobal.cfg", bootDevice);
+								remove(GXGlobal_cfg);
+							}
 							lang_default();
 							CFG_Load();
 							menu = MENU_SETTINGS;
@@ -1507,7 +1519,8 @@ int MenuSettings()
 			if(backBtn.GetState() == STATE_CLICKED)
 			{
 				//Add the procedure call to save the global configuration
-				if(isSdInserted()) {
+//				if(isSdInserted()) {
+				if(isInserted(bootDevice)) {
 				cfg_save_global();
 				}
 				menu = MENU_DISCLIST;
@@ -1825,7 +1838,8 @@ int GameSettings(struct discHdr * header)
 		if(saveBtn.GetState() == STATE_CLICKED)
 		{
 
-			if(isSdInserted()) {
+//			if(isSdInserted()) {
+			if(isInserted(bootDevice)) {
                 if (CFG_save_game_opt(header->id))
 				{
 					WindowPrompt(LANGUAGE.SuccessfullySaved, 0, LANGUAGE.ok, 0,0,0);

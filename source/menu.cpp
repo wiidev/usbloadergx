@@ -688,7 +688,8 @@ static int MenuDiscList()
                         else if (Settings.gameDisplay==carousel){
                                 startat = gameCarousel->GetSelectedOption();
                                 offset = gameCarousel->GetOffset();}
-                        if(isSdInserted()) {
+                        //if(isSdInserted()) {
+						if(isInserted(bootDevice)) {
             CFG_Load();
             }
                         sdcardBtn.ResetState();
@@ -698,7 +699,8 @@ static int MenuDiscList()
 
                 else if(DownloadBtn.GetState() == STATE_CLICKED)
                 {
-                    if(isSdInserted()) {
+                    //if(isSdInserted()) {
+					if(isInserted(bootDevice)) {
                         choice = WindowPrompt(LANGUAGE.CoverDownload, 0, LANGUAGE.NormalCovers, LANGUAGE.t3Covers, LANGUAGE.DiscImages, LANGUAGE.Back); // ask for download choice
 
                         if (choice != 0)
@@ -771,7 +773,8 @@ static int MenuDiscList()
                 else if(favoriteBtn.GetState() == STATE_CLICKED)
                 {
                         Settings.fave=!Settings.fave;
-                        if(isSdInserted()) {
+                        //if(isSdInserted()) {
+						if(isInserted(bootDevice)) {
                                 cfg_save_global();
                         }
                         __Menu_GetEntries();
@@ -797,7 +800,8 @@ static int MenuDiscList()
                 {
                         if(Settings.sort != all) {
                                 Settings.sort=all;
-                                if(isSdInserted()) {
+                                //if(isSdInserted()) {
+								if(isInserted(bootDevice)) {
                                         cfg_save_global();
                                 }
                                 __Menu_GetEntries();
@@ -826,7 +830,8 @@ static int MenuDiscList()
                 {
                         if(Settings.sort != pcount) {
                                 Settings.sort=pcount;
-                                if(isSdInserted()) {
+                                //if(isSdInserted()) {
+								if(isInserted(bootDevice)) {
                                         cfg_save_global();
                                 }
                                 __Menu_GetEntries();
@@ -1223,7 +1228,8 @@ static int MenuDiscList()
 
                                         }count+=1;
 
-                                if(isSdInserted()) {
+                                //if(isSdInserted()) {
+								if(isInserted(bootDevice)) {
                                 if (CFG_save_game_num(header->id))
                                 {
                                         //WindowPrompt(LANGUAGE.SuccessfullySaved, 0, LANGUAGE.ok, 0,0,0);

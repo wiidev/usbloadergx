@@ -9,6 +9,7 @@ extern "C"
 int USBDevice_Init();
 void USBDevice_deInit();
 int isSdInserted();
+int isInserted(const char *path);
 int SDCard_Init();
 void SDCard_deInit();
 

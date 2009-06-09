@@ -184,3 +184,88 @@ s32 USBStorage_WriteSectors(u32 sector, u32 numSectors, const void *buffer)
 
 	return ret;
 }
+
+
+#define DEVICE_TYPE_WII_UMS (('W'<<24)|('U'<<16)|('M'<<8)|'S')
+
+
+bool umsio_Startup()
+{
+	return USBStorage_Init() == 0;
+}
+
+bool umsio_IsInserted()
+{
+	return true; // allways true
+}
+bool umsio_ReadSectors(sec_t sector, sec_t numSectors, u8 *buffer)
+{
+	u32 cnt = 0;
+	s32 ret;
+	/* Do reads */
+	while (cnt < numSectors)
+	{
+		u32   sectors = (numSectors - cnt);
+
+		/* Read sectors is too big */
+		if (sectors > 32)
+			sectors = 32;
+
+		/* USB read */
+		ret = USBStorage_ReadSectors(sector + cnt, sectors, &buffer[cnt*512]);
+		if (ret < 0)
+			return false;
+
+		/* Increment counter */
+		cnt += sectors;
+	}
+
+	return true;
+}
+
+bool umsio_WriteSectors(sec_t sector, sec_t numSectors, const u8* buffer)
+{
+	u32 cnt = 0;
+	s32 ret;
+
+	/* Do writes */
+	while (cnt < numSectors)
+	{
+		u32   sectors = (numSectors - cnt);
+
+		/* Write sectors is too big */
+		if (sectors > 32)
+			sectors = 32;
+
+		/* USB write */
+		ret = USBStorage_WriteSectors(sector + cnt, sectors, &buffer[cnt * 512]);
+		if (ret < 0)
+			return false;
+
+		/* Increment counter */
+		cnt += sectors;
+	}
+
+	return true;
+}
+bool umsio_ClearStatus(void)
+{
+	return true;
+}
+
+bool umsio_Shutdown()
+{
+	USBStorage_Deinit();
+	return true;
+}
+const DISC_INTERFACE __io_wiiums =
+{
+DEVICE_TYPE_WII_UMS,
+FEATURE_MEDIUM_CANREAD | FEATURE_MEDIUM_CANWRITE | FEATURE_WII_USB,
+(FN_MEDIUM_STARTUP)&umsio_Startup,
+	(FN_MEDIUM_ISINSERTED)&umsio_IsInserted,
+	(FN_MEDIUM_READSECTORS)&umsio_ReadSectors,
+	(FN_MEDIUM_WRITESECTORS)&umsio_WriteSectors,
+	(FN_MEDIUM_CLEARSTATUS)&umsio_ClearStatus,
+	(FN_MEDIUM_SHUTDOWN)&umsio_Shutdown
+};

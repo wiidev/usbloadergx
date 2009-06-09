@@ -48,31 +48,24 @@ s32 filenamescmp(const void *a, const void *b)
 
 int GetAllDirFiles(char * filespath)
 {
-
-int countfiles = 0;
-
-struct stat st;
-DIR_ITER* dir;
-dir = diropen (filespath);
-
-if (dir == NULL) //If empty
-	{
+	int countfiles = 0;
+	
+	struct stat st;
+	DIR_ITER* dir;
+	dir = diropen (filespath);
+	
+	if (dir == NULL) //If empty
        return 0;
-	}
-	else
-	{
 	while (dirnext(dir,filenames,&st) == 0)
-		{
+	{
 		if ((st.st_mode & S_IFDIR) == 0)
-			{
+		{
 			// st.st_mode & S_IFDIR indicates a directory
 			snprintf(alldirfiles[countfiles], 70, "%s", filenames);
 			countfiles++;
-			}
 		}
 	}
-
+	dirclose(dir);
 	qsort(alldirfiles, countfiles, sizeof(char[70]), filenamescmp);
-
-return countfiles;
+	return countfiles;
 }
