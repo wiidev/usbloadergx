@@ -6,7 +6,7 @@ extern "C"
 {
 #endif
 
-char update_path[150];
+extern char update_path[150];
 
 void cfg_set(char *name, char *val);
 bool cfg_parsefile(char * fname, void (*set_func)(char*, char*));

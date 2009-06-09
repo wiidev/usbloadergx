@@ -8,6 +8,8 @@
 
 #include "cfg.h"
 
+char update_path[150]="";
+
 static char *cfg_name, *cfg_val;
 
 char* strcopy(char *dest, char *src, int size)
