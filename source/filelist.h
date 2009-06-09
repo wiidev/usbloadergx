@@ -32,6 +32,18 @@ extern const u32	bg_music_ogg_size;
 extern const u8		credits_music_ogg[];
 extern const u32	credits_music_ogg_size;
 
+extern const u8		gameinfo1_png[];
+extern const u32	gameinfo1_png_size;
+
+extern const u8		gameinfo2_png[];
+extern const u32	gameinfo2_png_size;
+
+extern const u8		gameinfo1a_png[];
+extern const u32	gameinfo1a_png_size;
+
+extern const u8		gameinfo2a_png[];
+extern const u32	gameinfo2a_png_size;
+
 extern const u8		menuin_ogg[];
 extern const u32	menuin_ogg_size;
 
@@ -289,5 +301,142 @@ extern const u32	settings_title_over_png_size;
 
 extern const u8		pageindicator_png[];
 extern const u32	pageindicator_png_size;
+
+extern const u8		Wiimote1_png[];
+extern const u32	Wiimote1_png_size;
+
+extern const u8		Wiimote2_png[];
+extern const u32	Wiimote2_png_size; 
+
+extern const u8		wifi1_png[];
+extern const u32	wifi1_png_size;
+
+extern const u8		wifi2_png[];
+extern const u32	wifi2png_size;
+
+extern const u8		wifi3_png[];
+extern const u32	wifi3_png_size;
+
+extern const u8		wifi4_png[];
+extern const u32	wifi4_png_size;
+
+extern const u8		wifi8_png[];
+extern const u32	wifi8_png_size;
+
+extern const u8		Wiimote4_png[];
+extern const u32	Wiimote4_png_size;
+
+extern const u8		norating_png[];
+extern const u32	norating_png_size;
+
+extern const u8		guitar_png[];
+extern const u32	guitar_png_size;
+
+extern const u8		microphone_png[];
+extern const u32	microphone_png_size;
+
+extern const u8		gcncontroller_png[];
+extern const u32	gcncontroller_png_size;
+
+extern const u8		classiccontroller_png[];
+extern const u32	classiccontroller_png_size;
+
+extern const u8		nunchuck_png[];
+extern const u32	nunchuck_png_size;
+
+extern const u8		guitarR_png[];
+extern const u32	guitarR_png_size;
+
+extern const u8		microphoneR_png[];
+extern const u32	microphoneR_png_size;
+
+extern const u8		gcncontrollerR_png[];
+extern const u32	gcncontrollerR_png_size;
+
+extern const u8		classiccontrollerR_png[];
+extern const u32	classiccontrollerR_png_size;
+
+extern const u8		nunchuckR_png[];
+extern const u32	nunchuckR_png_size;
+
+extern const u8		dancepadR_png[];
+extern const u32	dancepadR_size;
+
+extern const u8		balanceboard_png[];
+extern const u32	balanceboard_png_size;
+
+extern const u8		balanceboardR_png[];
+extern const u32	balanceboardR_png_size;
+
+extern const u8		dancepad_png[];
+extern const u32	dancepad_png_size;
+
+extern const u8		drumsR_png[];
+extern const u32	drumsR_png_size;
+
+extern const u8		drums_png[];
+extern const u32	drums_png_size;
+
+extern const u8		motionplusR_png[];
+extern const u32	motionplusR_png_size;
+
+extern const u8		motionplus_png[];
+extern const u32	motionplus_png_size;
+
+extern const u8		wheelR_png[];
+extern const u32	wheelR_png_size;
+
+extern const u8		wheel_png[];
+extern const u32	wheel_png_size;
+
+extern const u8		esrb_ec_png[];
+extern const u32	esrb_ec_png_size;
+
+extern const u8		esrb_e_png[];
+extern const u32	esrb_e_png_size;
+
+extern const u8		esrb_eten_png[];
+extern const u32	esrb_eten_png_size;
+
+extern const u8		esrb_t_png[];
+extern const u32	esrb_t_png_size;
+
+extern const u8		esrb_m_png[];
+extern const u32	esrb_m_png_size;
+
+extern const u8		esrb_ao_png[];
+extern const u32	esrb_ao_png_size;
+
+extern const u8		cero_a_png[];
+extern const u32	cero_a_png_size;
+
+extern const u8		cero_b_png[];
+extern const u32	cero_b_png_size;
+
+extern const u8		cero_c_png[];
+extern const u32	cero_c_png_size;
+
+extern const u8		cero_d_png[];
+extern const u32	cero_d_png_size;
+
+extern const u8		cero_z_png[];
+extern const u32	cero_z_png_size;
+
+extern const u8		pegi_3_png[];
+extern const u32	pegi_3_png_size;
+
+extern const u8		pegi_7_png[];
+extern const u32	pegi_7_png_size;
+
+extern const u8		pegi_12_png[];
+extern const u32	pegi_12_png_size;
+
+extern const u8		pegi_16_png[];
+extern const u32	pegi_16_png_size;
+
+extern const u8		pegi_18_png[];
+extern const u32	pegi_18_png_size;
+
+
 
 #endif

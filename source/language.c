@@ -185,6 +185,7 @@ snprintf(LANGUAGE.RenameGameonWBFS, sizeof(LANGUAGE.RenameGameonWBFS), "Rename G
 snprintf(LANGUAGE.Restart, sizeof(LANGUAGE.Restart), "Restart");
 snprintf(LANGUAGE.Restarting, sizeof(LANGUAGE.Restarting), "Restarting...");
 snprintf(LANGUAGE.Return, sizeof(LANGUAGE.Return), "Return");
+snprintf(LANGUAGE.released, sizeof(LANGUAGE.released), "Released");
 snprintf(LANGUAGE.ReturntoWiiMenu, sizeof(LANGUAGE.ReturntoWiiMenu), "Return to Wii Menu");
 snprintf(LANGUAGE.Right, sizeof(LANGUAGE.Right), "Right");
 snprintf(LANGUAGE.Rumble, sizeof(LANGUAGE.Rumble), "Rumble");
@@ -255,6 +256,21 @@ snprintf(LANGUAGE.Dutch, sizeof(LANGUAGE.Dutch), "Dutch");
 snprintf(LANGUAGE.SChinese, sizeof(LANGUAGE.SChinese), "SChinese");
 snprintf(LANGUAGE.TChinese, sizeof(LANGUAGE.TChinese), "TChinese");
 snprintf(LANGUAGE.Korean, sizeof(LANGUAGE.Korean), "Korean");
+snprintf(LANGUAGE.january, sizeof(LANGUAGE.january), "Jan");
+snprintf(LANGUAGE.february, sizeof(LANGUAGE.february), "Feb");
+snprintf(LANGUAGE.march, sizeof(LANGUAGE.march), "Mar");
+snprintf(LANGUAGE.april, sizeof(LANGUAGE.april), "Apr");
+snprintf(LANGUAGE.may, sizeof(LANGUAGE.may), "May");
+snprintf(LANGUAGE.june, sizeof(LANGUAGE.june), "June");
+snprintf(LANGUAGE.july, sizeof(LANGUAGE.july), "July");
+snprintf(LANGUAGE.august, sizeof(LANGUAGE.august), "Aug");
+snprintf(LANGUAGE.september, sizeof(LANGUAGE.september), "Sept");
+snprintf(LANGUAGE.october, sizeof(LANGUAGE.october), "Oct");
+snprintf(LANGUAGE.november, sizeof(LANGUAGE.november), "Nov");
+snprintf(LANGUAGE.december, sizeof(LANGUAGE.december), "Dec");
+snprintf(LANGUAGE.developedby, sizeof(LANGUAGE.developedby), "Developed by");
+snprintf(LANGUAGE.publishedby, sizeof(LANGUAGE.publishedby), "Published by");
+snprintf(LANGUAGE.wififeatures, sizeof(LANGUAGE.wififeatures), "WiFi Features");
 };
 
 

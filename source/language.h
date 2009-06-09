@@ -10,7 +10,25 @@ extern "C"
 #endif
 
 struct LANGUAGE
-{
+{	
+	char released[15];
+	char publishedby[25];
+	char developedby[25];
+	char january[15];
+	char february[15];
+	char march[15];
+	char april[15];
+	char may[15];
+	char june[15];
+	char july[15];
+	char august[15];
+	char september[15];
+	char october[15];
+	char november[15];
+	char december[15];
+	char wififeatures[20];
+	
+	
 	char t3Covers[50];
 	char addToFavorite[50];
 	char all[30];

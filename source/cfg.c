@@ -7,6 +7,8 @@
 #include <ogcsys.h>
 #include "cfg.h"
 #include "language.h"
+#include "xml.h" /* XML - Lustar*/
+#include "mxml/mxml.h"
 
 struct SSettings Settings;
 
@@ -1554,6 +1556,11 @@ void CFG_Load(void)
 	// load per-game settings
 	cfg_load_games();
 	cfg_load_game_num();
+
+	/* load renamed titles from proper names and game info XML, needs to be after cfg_load_games - Lustar */
+	//snprintf(pathname, sizeof(pathname), "%s%s", Settings.titlestxt_path, "wiitdb.zip");
+	//OpenXMLFile(pathname);
+	//LoadTitlesFromXML("English", false); // options can be added to set force title language to any language and force Japanese title to English
 
 	Global_Default(); //global default depends on theme information
 	CFG_LoadGlobal();
