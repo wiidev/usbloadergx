@@ -687,11 +687,11 @@ int MenuSettings()
                     exit = false;
                     options2.SetName(0, "%s",LANGUAGE.VideoMode);
                     options2.SetName(1, "%s",LANGUAGE.VIDTVPatch);
-                    options2.SetName(2, "%s",LANGUAGE.Patchcountrystrings);
-                    options2.SetName(3, "Ocarina");
-                    options2.SetName(4,"%s", LANGUAGE.BootStandard);
-                    options2.SetName(5, "%s",LANGUAGE.QuickBoot);
-                    options2.SetName(6, NULL);
+                    options2.SetName(2, "%s",LANGUAGE.Language);
+                    options2.SetName(3, "%s",LANGUAGE.Patchcountrystrings);
+                    options2.SetName(4, "Ocarina");
+                    options2.SetName(5,"%s", LANGUAGE.BootStandard);
+                    options2.SetName(6, "%s",LANGUAGE.QuickBoot);
                     options2.SetName(7, NULL);
                     options2.SetName(8, NULL);
                     options2.SetName(9, NULL);
@@ -719,6 +719,8 @@ int MenuSettings()
                             Settings.qboot = 0;
                         if ( Settings.cios >= settings_cios_max)
                             Settings.cios = 0;
+                        if ( Settings.language >= settings_language_max)
+                            Settings.language = 0;
 
                         if (Settings.video == discdefault) options2.SetValue(0,"%s",LANGUAGE.DiscDefault);
                         else if (Settings.video == systemdefault) options2.SetValue(0,"%s",LANGUAGE.SystemDefault);
@@ -730,18 +732,30 @@ int MenuSettings()
                         if (Settings.vpatch == on) options2.SetValue(1,"%s",LANGUAGE.ON);
                         else if (Settings.vpatch == off) options2.SetValue(1,"%s",LANGUAGE.OFF);
 
-                        if (Settings.patchcountrystrings == 0) options2.SetValue(2,"%s",LANGUAGE.OFF);
-                        else if (Settings.patchcountrystrings == 1) options2.SetValue(2,"%s",LANGUAGE.ON);
+                        if (Settings.language == ConsoleLangDefault) options2.SetValue(2,"%s",LANGUAGE.ConsoleDefault);
+                        else if (Settings.language == jap) options2.SetValue(2,"%s",LANGUAGE.Japanese);
+                        else if (Settings.language == ger) options2.SetValue(2,"%s",LANGUAGE.German);
+                        else if (Settings.language == eng) options2.SetValue(2,"%s",LANGUAGE.English);
+                        else if (Settings.language == fren) options2.SetValue(2,"%s",LANGUAGE.French);
+                        else if (Settings.language == esp) options2.SetValue(2,"%s",LANGUAGE.Spanish);
+                        else if (Settings.language == it) options2.SetValue(2,"%s",LANGUAGE.Italian);
+                        else if (Settings.language == dut) options2.SetValue(2,"%s",LANGUAGE.Dutch);
+                        else if (Settings.language == schin) options2.SetValue(2,"%s",LANGUAGE.SChinese);
+                        else if (Settings.language == tchin) options2.SetValue(2,"%s",LANGUAGE.TChinese);
+                        else if (Settings.language == kor) options2.SetValue(2,"%s",LANGUAGE.Korean);
 
-                        if (Settings.ocarina == on) options2.SetValue(3,"%s",LANGUAGE.ON);
-                        else if (Settings.ocarina == off) options2.SetValue(3,"%s",LANGUAGE.OFF);
+                        if (Settings.patchcountrystrings == 0) options2.SetValue(3,"%s",LANGUAGE.OFF);
+                        else if (Settings.patchcountrystrings == 1) options2.SetValue(3,"%s",LANGUAGE.ON);
 
-                       if (Settings.godmode != 1) options2.SetValue(4, "********");
-                        else if (Settings.cios == ios249) options2.SetValue(4,"cIOS 249");
-                        else if (Settings.cios == ios222) options2.SetValue(4,"cIOS 222");
+                        if (Settings.ocarina == on) options2.SetValue(4,"%s",LANGUAGE.ON);
+                        else if (Settings.ocarina == off) options2.SetValue(4,"%s",LANGUAGE.OFF);
 
-                        if (Settings.qboot == no) options2.SetValue(5,"%s",LANGUAGE.No);
-                        else if (Settings.qboot == yes) options2.SetValue(5,"%s",LANGUAGE.Yes);
+                       if (Settings.godmode != 1) options2.SetValue(5, "********");
+                        else if (Settings.cios == ios249) options2.SetValue(5,"cIOS 249");
+                        else if (Settings.cios == ios222) options2.SetValue(5,"cIOS 222");
+
+                        if (Settings.qboot == no) options2.SetValue(6,"%s",LANGUAGE.No);
+                        else if (Settings.qboot == yes) options2.SetValue(6,"%s",LANGUAGE.Yes);
 
                         if(backBtn.GetState() == STATE_CLICKED)
                         {
@@ -791,16 +805,19 @@ int MenuSettings()
                                 Settings.vpatch++;
                                 break;
                             case 2:
-                                Settings.patchcountrystrings++;
+                                Settings.language++;
                                 break;
                             case 3:
-                                Settings.ocarina++;
+                                Settings.patchcountrystrings++;
                                 break;
                             case 4:
+                                Settings.ocarina++;
+                                break;
+                            case 5:
                                 if(Settings.godmode)
                                 Settings.cios++;
                                 break;
-                            case 5:
+                            case 6:
                                 Settings.qboot++;
                                 break;
                         }
