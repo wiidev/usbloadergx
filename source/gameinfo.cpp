@@ -333,51 +333,40 @@ showGameInfo(char *ID, u8 *headerID)
 
 	dialogBoxImg1 = new GuiImage(&dialogBox1);
 	dialogBoxImg1->SetAlignment(0,3);
-	dialogBoxImg1->SetPosition(0,0);
+	dialogBoxImg1->SetPosition(-9,0);
 	
 	dialogBoxImg2 = new GuiImage(&dialogBox2);
 	dialogBoxImg2->SetAlignment(0,3);
-	dialogBoxImg2->SetPosition(150,0);
+	dialogBoxImg2->SetPosition(145,0);
 	
 	dialogBoxImg3 = new GuiImage(&dialogBox3);
 	dialogBoxImg3->SetAlignment(0,3);
-	dialogBoxImg3->SetPosition(300,0);
+	dialogBoxImg3->SetPosition(301,0);
 	
 	dialogBoxImg4 = new GuiImage(&dialogBox4);
 	dialogBoxImg4->SetAlignment(0,3);
-	dialogBoxImg4->SetPosition(450,0);
+	dialogBoxImg4->SetPosition(457,0);
 
 	
 	gameinfoWindow.Append(dialogBoxImg1);
 	gameinfoWindow.Append(dialogBoxImg2);
 	gameinfoWindow.Append(dialogBoxImg3);
 	gameinfoWindow.Append(dialogBoxImg4);
-//	gameinfoWindow.Append(&titleTxt);
-	
-	//coverart
-	//snprintf(imgPath, sizeof(imgPath), "%s%s.png", Settings.covers_path, IDfull);
-	//				cover = new GuiImageData(imgPath,0); //load short id
-	//				if (!cover->GetImage()) //if could not load the short id image
-	//				{
-	//					delete cover;
-						snprintf(imgPath, sizeof(imgPath), "%s%s.png", Settings.covers_path, ID);
-						cover = new GuiImageData(imgPath, 0); //load full id image
-						if (!cover->GetImage())
-						{
-							delete cover;
-							snprintf(imgPath, sizeof(imgPath), "%snoimage.png", Settings.covers_path);
-							cover = new GuiImageData(imgPath, nocover_png); //load no image
-						}
-	//				}
 
-	//				if (coverImg)
-	//				{
-						delete coverImg;
-						coverImg = NULL;
-	//				}
-					coverImg = new GuiImage(cover);
-					coverImg->SetWidescreen(CFG.widescreen);
-					coverImg->SetPosition(15,30);
+	snprintf(imgPath, sizeof(imgPath), "%s%s.png", Settings.covers_path, ID);
+	cover = new GuiImageData(imgPath, 0); //load full id image
+	if (!cover->GetImage())
+	{
+		delete cover;
+		snprintf(imgPath, sizeof(imgPath), "%snoimage.png", Settings.covers_path);
+		cover = new GuiImageData(imgPath, nocover_png); //load no image
+	}
+		delete coverImg;
+		coverImg = NULL;
+
+	coverImg = new GuiImage(cover);
+	coverImg->SetWidescreen(CFG.widescreen);
+	coverImg->SetPosition(15,30);
 	gameinfoWindow.Append(coverImg);
 	
 	// # of players
@@ -393,7 +382,7 @@ showGameInfo(char *ID, u8 *headerID)
 		playersImg->SetPosition(intputX , inputY);
 		playersImg->SetAlignment(0,4);
 		gameinfoWindow.Append(playersImg);
-		intputX += (CFG.widescreen ? playersImg->GetWidth() * .8 : playersImg->GetWidth());
+		intputX += (CFG.widescreen ? playersImg->GetWidth() * .8 : playersImg->GetWidth())+5;
 		}
 	
 	//draw the inupt types for this game
@@ -403,7 +392,7 @@ showGameInfo(char *ID, u8 *headerID)
 			nunchuckImg->SetPosition(intputX , inputY);
 			nunchuckImg->SetAlignment(0,4);
 			gameinfoWindow.Append(nunchuckImg);
-			intputX += (CFG.widescreen ? nunchuckImg->GetWidth() * .8 : nunchuckImg->GetWidth());}
+			intputX += (CFG.widescreen ? nunchuckImg->GetWidth() * .8 : nunchuckImg->GetWidth())+5;}
 			
 			if (classiccontroller==1){
 			classiccontrollerImg = new GuiImage(classiccontrollerImgData);
@@ -411,7 +400,7 @@ showGameInfo(char *ID, u8 *headerID)
 			classiccontrollerImg->SetPosition(intputX , inputY);
 			classiccontrollerImg->SetAlignment(0,4);
 			gameinfoWindow.Append(classiccontrollerImg);
-			intputX += (CFG.widescreen ? classiccontrollerImg->GetWidth() * .8 : classiccontrollerImg->GetWidth());}
+			intputX += (CFG.widescreen ? classiccontrollerImg->GetWidth() * .8 : classiccontrollerImg->GetWidth())+5;}
 			
 			if (gamecube==1){
 			gcImg = new GuiImage(gamecubeImgData);
@@ -419,7 +408,7 @@ showGameInfo(char *ID, u8 *headerID)
 			gcImg->SetPosition(intputX , inputY);
 			gcImg->SetAlignment(0,4);
 			gameinfoWindow.Append(gcImg);
-			intputX += (CFG.widescreen ? gcImg->GetWidth() * .8 : gcImg->GetWidth());}
+			intputX += (CFG.widescreen ? gcImg->GetWidth() * .8 : gcImg->GetWidth())+5;}
 			
 			if (wheel==1){
 			wheelImg = new GuiImage(wheelImgData);
@@ -427,7 +416,7 @@ showGameInfo(char *ID, u8 *headerID)
 			wheelImg->SetPosition(intputX , inputY);
 			wheelImg->SetAlignment(0,4);
 			gameinfoWindow.Append(wheelImg);
-			intputX += (CFG.widescreen ? wheelImg->GetWidth() * .8 : wheelImg->GetWidth());}
+			intputX += (CFG.widescreen ? wheelImg->GetWidth() * .8 : wheelImg->GetWidth())+5;}
 			
 			if (guitar==1){
 			guitarImg = new GuiImage(guitarImgData);
@@ -435,7 +424,7 @@ showGameInfo(char *ID, u8 *headerID)
 			guitarImg->SetPosition(intputX , inputY);
 			guitarImg->SetAlignment(0,4);
 			gameinfoWindow.Append(guitarImg);
-			intputX += (CFG.widescreen ? guitarImg->GetWidth() * .8 : guitarImg->GetWidth());}
+			intputX += (CFG.widescreen ? guitarImg->GetWidth() * .8 : guitarImg->GetWidth())+5;}
 			
 			if (drums==1){
 			drumsImg = new GuiImage(drumsImgData);
@@ -443,7 +432,7 @@ showGameInfo(char *ID, u8 *headerID)
 			drumsImg->SetPosition(intputX , inputY);
 			drumsImg->SetAlignment(0,4);
 			gameinfoWindow.Append(drumsImg);
-			intputX += (CFG.widescreen ? drumsImg->GetWidth() * .8 : drumsImg->GetWidth());}
+			intputX += (CFG.widescreen ? drumsImg->GetWidth() * .8 : drumsImg->GetWidth())+5;}
 			
 			if (microphone==1){
 			microphoneImg = new GuiImage(microphoneImgData);
@@ -451,7 +440,7 @@ showGameInfo(char *ID, u8 *headerID)
 			microphoneImg->SetPosition(intputX , inputY);
 			microphoneImg->SetAlignment(0,4);
 			gameinfoWindow.Append(microphoneImg);
-			intputX += (CFG.widescreen ? microphoneImg->GetWidth() * .8 : microphoneImg->GetWidth());}
+			intputX += (CFG.widescreen ? microphoneImg->GetWidth() * .8 : microphoneImg->GetWidth())+5;}
 			
 			if (dancepad==1){
 			dancepadImg = new GuiImage(dancepadImgData);
@@ -459,7 +448,7 @@ showGameInfo(char *ID, u8 *headerID)
 			dancepadImg->SetPosition(intputX , inputY);
 			dancepadImg->SetAlignment(0,4);
 			gameinfoWindow.Append(dancepadImg);
-			intputX += (CFG.widescreen ? dancepadImg->GetWidth() * .8 : dancepadImg->GetWidth());}
+			intputX += (CFG.widescreen ? dancepadImg->GetWidth() * .8 : dancepadImg->GetWidth())+5;}
 			
 			if (motionplus==1){
 			motionplusImg = new GuiImage(motionplusImgData);
@@ -467,7 +456,7 @@ showGameInfo(char *ID, u8 *headerID)
 			motionplusImg->SetPosition(intputX , inputY);
 			motionplusImg->SetAlignment(0,4);
 			gameinfoWindow.Append(motionplusImg);
-			intputX += (CFG.widescreen ? motionplusImg->GetWidth() * .8 : motionplusImg->GetWidth());}
+			intputX += (CFG.widescreen ? motionplusImg->GetWidth() * .8 : motionplusImg->GetWidth())+5;}
 
 	
 	
@@ -488,7 +477,7 @@ showGameInfo(char *ID, u8 *headerID)
 		wifiplayersImg->SetPosition(intputX , inputY);
 		wifiplayersImg->SetAlignment(0,4);
 		gameinfoWindow.Append(wifiplayersImg);
-		intputX += (CFG.widescreen ? wifiplayersImg->GetWidth() * .8 : wifiplayersImg->GetWidth());
+		intputX += (CFG.widescreen ? wifiplayersImg->GetWidth() * .8 : wifiplayersImg->GetWidth())+5;
 		}
 
 	// ratings		                
@@ -543,7 +532,7 @@ showGameInfo(char *ID, u8 *headerID)
 		ratingImg->SetPosition(-25 , inputY);
 		ratingImg->SetAlignment(1,4);
 		gameinfoWindow.Append(ratingImg);
-		intputX += (CFG.widescreen ? ratingImg->GetWidth() * .8 : ratingImg->GetWidth());
+		intputX += (CFG.widescreen ? ratingImg->GetWidth() * .8 : ratingImg->GetWidth())+5;
 		
 	}
 	
@@ -646,7 +635,7 @@ debugTxt = new GuiText(linebuf, 18, (GXColor){0,0,0, 255});
 			gameinfoWindow.Append(publisherTxt);}
 	
 	//don't bother us txt
-	snprintf(linebuf, sizeof(linebuf), "Don't bother the USB Loader QX Team about errors in this file.");
+	snprintf(linebuf, sizeof(linebuf), "Don't bother the USB Loader GX Team about errors in this file.");
 	betaTxt = new GuiText(linebuf, 14, (GXColor){0,0,0, 255});
 			betaTxt->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM); betaTxt->SetPosition(-17,-20);//  
 			gameinfoWindow.Append(betaTxt);
@@ -676,19 +665,19 @@ debugTxt = new GuiText(linebuf, 18, (GXColor){0,0,0, 255});
 			synopsisTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP); synopsisTxt->SetPosition(0,0); 
 			dialogBoxImg11 = new GuiImage(&dialogBox1);
 			dialogBoxImg11->SetAlignment(0,3);
-			dialogBoxImg11->SetPosition(0,0);
+			dialogBoxImg11->SetPosition(-9,0);
 			
 			dialogBoxImg22 = new GuiImage(&dialogBox2);
 			dialogBoxImg22->SetAlignment(0,3);
-			dialogBoxImg22->SetPosition(150,0);
+			dialogBoxImg22->SetPosition(145,0);
 			
 			dialogBoxImg33 = new GuiImage(&dialogBox3);
 			dialogBoxImg33->SetAlignment(0,3);
-			dialogBoxImg33->SetPosition(300,0);
+			dialogBoxImg33->SetPosition(301,0);
 			
 			dialogBoxImg44 = new GuiImage(&dialogBox4);
 			dialogBoxImg44->SetAlignment(0,3);
-			dialogBoxImg44->SetPosition(450,0);
+			dialogBoxImg44->SetPosition(457,0);
 
 			
 			gameinfoWindow2.Append(dialogBoxImg11);
@@ -706,7 +695,7 @@ debugTxt = new GuiText(linebuf, 18, (GXColor){0,0,0, 255});
 
 	
 
-	gameinfoWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
+	gameinfoWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_IN, 50);
 	HaltGui();
 	mainWindow->SetState(STATE_DISABLED);
 	mainWindow->Append(&gameinfoWindow);
@@ -763,14 +752,14 @@ debugTxt = new GuiText(linebuf, 18, (GXColor){0,0,0, 255});
 		}
 		}
 	if (page==1){
-	gameinfoWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
+	gameinfoWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 50);
 	while(gameinfoWindow.GetEffect() > 0) usleep(50);
 	HaltGui();
 	mainWindow->Remove(&gameinfoWindow);
 	mainWindow->SetState(STATE_DEFAULT);
 	ResumeGui();}
 	else {
-	gameinfoWindow2.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
+	gameinfoWindow2.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 50);
 	while(gameinfoWindow2.GetEffect() > 0) usleep(50);
 	HaltGui();
 	mainWindow->Remove(&gameinfoWindow2);
