@@ -1035,10 +1035,10 @@ void GuiGameGrid::Update(GuiTrigger * t)
 		if(!((buttons & WPAD_BUTTON_A) || (buttons & WPAD_BUTTON_PLUS) || t->Right())) {
 			btnRight->ResetState();
 			speed=SHIFT_SPEED;
-			goback=1;
+			//goback=1;
 			return;
 		}
-		//goRight=12;
+		goRight=12;
 		
 		
 		
