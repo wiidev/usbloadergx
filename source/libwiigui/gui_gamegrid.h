@@ -18,25 +18,34 @@ class GuiGameGrid : public GuiElement
 		void Update(GuiTrigger * t);
 		int GetOffset();
 		void Reload(struct discHdr * l, int count);
-		//GuiText * optionVal[PAGESIZE];
+		void ChangeRows(int n);
 	protected:
 		int selectedItem;
 		int listOffset;
 		int scrollbaron;
 		int pagesize;
-		int changed;
+		int firstPic;
+		int speed;
+		int clickedItem;
+		int rows;
 
 		struct discHdr * gameList;
 		int gameCnt;
 
 		int * gameIndex;
+		int * bob;
+
 		GuiButton ** game;
 
 		GuiImage ** coverImg;
 		GuiImageData ** cover;
-
+		
+		GuiText * debugTxt;
+		
 		GuiButton * btnRight;
 		GuiButton * btnLeft;
+		GuiButton * btnRowUp;
+		GuiButton * btnRowDown;
 
 		GuiImage * btnLeftImg;
 		GuiImage * btnRightImg;
@@ -46,12 +55,12 @@ class GuiGameGrid : public GuiElement
 
 		GuiSound * btnSoundOver;
 		GuiSound * btnSoundClick;
-
 		GuiTrigger * trigA;
 		GuiTrigger * trigL;
 		GuiTrigger * trigR;
 		GuiTrigger * trigPlus;
 		GuiTrigger * trigMinus;
-		GuiTrigger * trigHeldA;
+		GuiTrigger * trig1;
+		GuiTrigger * trig2;
 };
 #endif

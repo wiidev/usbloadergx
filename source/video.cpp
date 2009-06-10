@@ -242,8 +242,8 @@ void Menu_Render()
  *
  * Draws the specified image on screen using GX
  ***************************************************************************/
-void Menu_DrawImg(f32 xpos, f32 ypos, f32 zpos, u16 width, u16 height, u8 data[],
-	f32 degrees, f32 scaleX, f32 scaleY, u8 alpha)
+void Menu_DrawImg(f32 xpos, f32 ypos, f32 zpos, f32 width, f32 height, u8 data[],
+	f32 degrees, f32 scaleX, f32 scaleY, u8 alpha, int XX1, int YY1,int XX2, int YY2,int XX3, int YY3,int XX4, int YY4)
 {
 	if(data == NULL)
 		return;
@@ -270,23 +270,27 @@ void Menu_DrawImg(f32 xpos, f32 ypos, f32 zpos, u16 width, u16 height, u8 data[]
 	guMtxTransApply(m,m, xpos+width+0.5,ypos+height+0.5,zpos);
 	guMtxConcat (GXmodelView2D, m, mv);
 	GX_LoadPosMtxImm (mv, GX_PNMTX0);
+//
 
 	GX_Begin(GX_QUADS, GX_VTXFMT0,4);
-	GX_Position3f32(-width, -height,  0);
+	GX_Position3f32(-width+XX1 , -height+YY1,  0);
 	GX_Color4u8(0xFF,0xFF,0xFF,alpha);
 	GX_TexCoord2f32(0, 0);
 
-	GX_Position3f32(width, -height,  0);
+	GX_Position3f32(width+XX2, -height+YY2,  0);
 	GX_Color4u8(0xFF,0xFF,0xFF,alpha);
 	GX_TexCoord2f32(1, 0);
 
-	GX_Position3f32(width, height,  0);
+	GX_Position3f32(width+XX3, height+YY3,  0);
 	GX_Color4u8(0xFF,0xFF,0xFF,alpha);
 	GX_TexCoord2f32(1, 1);
 
-	GX_Position3f32(-width, height,  0);
+	GX_Position3f32(-width+XX4, height+YY4,  0);
 	GX_Color4u8(0xFF,0xFF,0xFF,alpha);
 	GX_TexCoord2f32(0, 1);
+	
+//
+
 	GX_End();
 	GX_LoadPosMtxImm (GXmodelView2D, GX_PNMTX0);
 

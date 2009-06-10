@@ -716,7 +716,6 @@ debugTxt = new GuiText(linebuf, 18, (GXColor){0,0,0, 255});
 		
 		if ((backBtn.GetState()==STATE_CLICKED)||(backBtn.GetState()==STATE_HELD)){
 		choice=1;
-		eatADick();
 		synopsisTxt = NULL;
 		break;}
 		
@@ -757,6 +756,7 @@ debugTxt = new GuiText(linebuf, 18, (GXColor){0,0,0, 255});
 	HaltGui();
 	mainWindow->Remove(&gameinfoWindow);
 	mainWindow->SetState(STATE_DEFAULT);
+	eatADick();
 	ResumeGui();}
 	else {
 	gameinfoWindow2.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 50);

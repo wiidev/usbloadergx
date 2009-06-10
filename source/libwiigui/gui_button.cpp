@@ -255,6 +255,20 @@ void GuiButton::RemoveSoundClick()
 	LOCK(this);
 	soundClick = NULL;
 }
+void GuiButton::SetSkew(int XX1, int YY1,int XX2, int YY2,int XX3, int YY3,int XX4, int YY4)
+{ 
+	
+		image->xx1 = XX1;
+		image->yy1 = YY1;
+		image->xx2 = XX2;
+		image->yy2 = YY2;
+		image->xx3 = XX3;
+		image->yy3 = YY3;
+		image->xx4 = XX4;
+		image->yy4 = YY4;
+}
+
+
 /**
  * Draw the button on screen
  */

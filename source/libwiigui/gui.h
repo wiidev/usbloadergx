@@ -635,6 +635,24 @@ class GuiImage : public GuiElement
 		//!\param s Alpha amount to draw over the image
 		void SetStripe(int s);
 		s32 z;
+		void SetSkew(int XX1, int YY1,int XX2, int YY2,int XX3, int YY3,int XX4, int YY4);
+		
+		int xx1;
+		int yy1;
+		int xx2;
+		int yy2;
+		int xx3;
+		int yy3;
+		int xx4;
+		int yy4;
+		int rxx1;
+		int ryy1;
+		int rxx2;
+		int ryy2;
+		int rxx3;
+		int ryy3;
+		int rxx4;
+		int ryy4;
 	protected:
 		int imgType; //!< Type of image data (IMAGE_TEXTURE, IMAGE_COLOR, IMAGE_DATA)
 		u8 * image; //!< Poiner to image data. May be shared with GuiImageData data
@@ -843,6 +861,7 @@ class GuiButton : public GuiElement
 		void Update(GuiTrigger * t);
 		//!Deactivate/Activate pointing on Games while B scrolling
 		void ScrollIsOn(int f);
+		void SetSkew(int XX1, int YY1,int XX2, int YY2,int XX3, int YY3,int XX4, int YY4);
 	protected:
 		GuiImage * image; //!< Button image (default)
 		GuiImage * imageOver; //!< Button image for STATE_SELECTED

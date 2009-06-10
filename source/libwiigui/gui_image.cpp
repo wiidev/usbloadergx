@@ -21,6 +21,14 @@ GuiImage::GuiImage()
 	tile = -1;
 	stripe = 0;
 	widescreen = 0;
+	xx1 = 0;
+	yy1 = 0;
+	xx2 = 0;
+	yy2 = 0;
+	xx3 = 0;
+	yy3 = 0;
+	xx4 = 0;
+	yy4 = 0;
 	imgType = IMAGE_DATA;
 }
 
@@ -33,6 +41,14 @@ GuiImage::GuiImage(GuiImageData * img)
 	tile = -1;
 	stripe = 0;
 	widescreen = 0;
+	xx1 = 0;
+	yy1 = 0;
+	xx2 = 0;
+	yy2 = 0;
+	xx3 = 0;
+	yy3 = 0;
+	xx4 = 0;
+	yy4 = 0;
 	imgType = IMAGE_DATA;
 }
 
@@ -45,6 +61,14 @@ GuiImage::GuiImage(u8 * img, int w, int h)
 	tile = -1;
 	stripe = 0;
 	widescreen = 0;
+	xx1 = 0;
+	yy1 = 0;
+	xx2 = 0;
+	yy2 = 0;
+	xx3 = 0;
+	yy3 = 0;
+	xx4 = 0;
+	yy4 = 0;
 	imgType = IMAGE_TEXTURE;
 }
 
@@ -57,6 +81,14 @@ GuiImage::GuiImage(int w, int h, GXColor c)
 	tile = -1;
 	stripe = 0;
 	widescreen = 0;
+	xx1 = 0;
+	yy1 = 0;
+	xx2 = 0;
+	yy2 = 0;
+	xx3 = 0;
+	yy3 = 0;
+	xx4 = 0;
+	yy4 = 0;
 	imgType = IMAGE_COLOR;
 
 	if(!image)
@@ -167,6 +199,21 @@ void GuiImage::SetStripe(int s)
 	stripe = s;
 }
 
+void GuiImage::SetSkew(int XX1, int YY1,int XX2, int YY2,int XX3, int YY3,int XX4, int YY4)
+{ 
+	
+		xx1 = XX1;
+		yy1 = YY1;
+		xx2 = XX2;
+		yy2 = YY2;
+		xx3 = XX3;
+		yy3 = YY3;
+		xx4 = XX4;
+		yy4 = YY4;
+}
+
+
+
 void GuiImage::ColorStripe(int shift)
 {
 	LOCK(this);
@@ -225,6 +272,7 @@ void GuiImage::ColorStripe(int shift)
 /**
  * Draw the button on screen
  */
+
 void GuiImage::Draw()
 {
 	LOCK(this);
@@ -238,24 +286,29 @@ void GuiImage::Draw()
 
     if(currAngleDyn)
     imageangle = currAngleDyn;
+	
+
 
 	if(tile > 0)
 	{
 		for(int i=0; i<tile; i++)
-			Menu_DrawImg(currLeft+width*i, this->GetTop(), 0, width, height, image, imageangle, widescreen ? currScale*0.80 : currScale, currScale, this->GetAlpha());
-	}
+			Menu_DrawImg(currLeft+width*i, this->GetTop(), 0, width, height, image, imageangle, widescreen ? currScale*0.80 : currScale, currScale, this->GetAlpha(), xx1,yy1,xx2,yy2,xx3,yy3,xx4,yy4);
+		}
 	else
 	{
 		// temporary (maybe), used to correct offset for scaled images
 		if(scale != 1)
 			currLeft = currLeft - width/2 + (width*scale)/2;
 
-		Menu_DrawImg(currLeft, this->GetTop(), 0, width, height, image, imageangle, widescreen ? currScale*0.80 : currScale, currScale, this->GetAlpha());
-	}
+		Menu_DrawImg(currLeft, this->GetTop(), 0, width, height, image, imageangle, widescreen ? currScale*0.80 : currScale, currScale, this->GetAlpha(), xx1,yy1,xx2,yy2,xx3,yy3,xx4,yy4);
+		}
 
 	if(stripe > 0)
 		for(int y=0; y < this->GetHeight(); y+=6)
 			Menu_DrawRectangle(currLeft,this->GetTop()+y,this->GetWidth(),3,(GXColor){0, 0, 0, stripe},1);
+
+
+	
 
 	this->UpdateEffects();
 }

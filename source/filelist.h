@@ -101,6 +101,9 @@ extern const u32    settings_background_png_size;
 extern const u8     nocover_png[];
 extern const u32    nocover_png_size;
 
+extern const u8     nocoverFlat_png[];
+extern const u32    nocoverFlat_png_size;
+
 extern const u8     nodisc_png[];
 extern const u32    nodisc_png_size;
 
