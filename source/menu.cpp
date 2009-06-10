@@ -185,8 +185,8 @@ static int MenuDiscList()
 	int selectImg1 = 0;
 	char ID[4];
     char IDfull[7];
-	
-	
+
+
         datagB=0;
         int menu = MENU_NONE, dataef=0;
         char imgPath[100];
@@ -341,8 +341,8 @@ static int MenuDiscList()
         GuiButton gameInfo(0,0);
 		gameInfo.SetTrigger(&trig2);
 		gameInfo.SetSoundClick(&btnClick);
-	
-		
+
+
 		GuiImage wiiBtnImg(&dataID);
         wiiBtnImg.SetWidescreen(CFG.widescreen);
         GuiButton wiiBtn(&wiiBtnImg,&wiiBtnImg, 0, 4, 0, -10, &trigA, &btnSoundOver, &btnClick,0);
@@ -677,6 +677,7 @@ static int MenuDiscList()
 
                 else if(sdcardBtn.GetState() == STATE_CLICKED)
                 {
+                        USBDevice_Init()
                         SDCard_deInit();
                         SDCard_Init();
                         if (Settings.gameDisplay==list){
@@ -1067,7 +1068,7 @@ static int MenuDiscList()
 				struct discHdr *header = &gameList[selectImg1];
 					snprintf (ID,sizeof(ID),"%c%c%c", header->id[0], header->id[1], header->id[2]);
 					snprintf (IDfull,sizeof(IDfull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
-	
+
 				choice = showGameInfo(IDfull, header->id);
 				if (choice>0){
 				gameInfo.ResetState();
@@ -1091,7 +1092,7 @@ static int MenuDiscList()
                 if (Settings.gameDisplay==list) {
                         //Get selected game under cursor
                         int selectimg;//, promptnumber;
-                        
+
                         selectimg = gameBrowser->GetSelectedOption();
                         gameSelected = gameBrowser->GetClickedOption();
 						selectImg1=selectimg;
@@ -1198,7 +1199,7 @@ static int MenuDiscList()
                                 }
                         }
                 }
-				
+
 				if ((gameSelected >= 0) && (gameSelected < (s32)gameCnt))
                 {
                         struct discHdr *header = &gameList[gameSelected];
