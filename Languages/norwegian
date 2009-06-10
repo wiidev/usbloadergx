@@ -1,4 +1,4 @@
-//r429, Norwegian v4, 29.05.2009
+//r450, Norwegian v5, 03.06.2009
 ok = OK
 addToFavorite = Favoritt
 all = Alfabetisk
@@ -46,7 +46,7 @@ Display = Vis
 Doyouwanttoformat = Vil du formatere:
 Doyoureallywanttodelete = Er du sikker på at du vil slette:
 Doyouwanttoretryfor30secs = Vil du fortsette å prøve i 30 sekunder?
-Doyouwanttoupdate = Vil du oppdatere?
+Doyouwanttoupdate = Hvordan vil du oppdatere?
 Downloadingfile = Laster ned fil:
 DownloadBoxartimage = Last ned cover bilde?
 Downloadfinished = Nedlasting ferdig
@@ -102,7 +102,7 @@ Loadingstandardlanguage = Laster standard språk.
 Loadingstandardmusic = Laster standard musikk.
 Lock = Lås
 LockConsole = Lås konsoll
-MP3Menu = MP3 meny
+Patchcountrystrings = Patch land strenger
 Missingfiles = Manglende filer
 Networkiniterror = Nettverk init feil
 Neither = Ingen
@@ -183,6 +183,7 @@ Updatepathchanged = Oppdatering sti endret.
 Updatefailed = Mislykket oppdatering
 Updatedol = Oppdater DOL
 Updateall = Oppdater alt
+Updateto = Oppdater til
 USBLoaderisprotected = USB Loader GX er beskyttet
 USBDevicenotfound = USB enhet ikke funnet
 VideoMode = Video modus

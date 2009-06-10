@@ -4,7 +4,9 @@
  AppLanguage = Idioma
  available = disponível
  Areyousure = Tem a certeza?
- AutoPatch = Patch automático 
+ AutoPatch = Patch automático
+ Always = 0 (Sempre)
+ awesometool = pela sua espectacular ferramenta
  Back = Voltar
  Backgroundmusic = Música de fundo
  Backgroundmusicpath = Pasta Música Fundo
@@ -25,6 +27,7 @@
  ConsoleDefault = Predefinição Consola
  Consoleshouldbeunlockedtomodifyit = É necessário desbloquear a configuração para poder modificar o parâmetro.
  ConsoleLocked = Configuração Bloqueada
+ Controllevel = Nível de Controle
  CorrectPassword = Password Correcta
  Couldnotinitializenetwork = Não foi possível incializar a Ligação de Rede!
  CouldnotopenDisc = Não foi possível abrir o Disco
@@ -35,6 +38,7 @@
  Coverpathchange = Alterar Pasta das Capas
  count = Vezes jogadas
  Credits = Créditos
+ Custompaths = Personalização de Pastas
  DiscImages = Imagens de Disco
  DiscimagePath = Pasta Imagens Disco
  DiscpathChanged = Pasta das Imagens Disco alterada
@@ -45,11 +49,14 @@
  Doyoureallywanttodelete = Quer mesmo REMOVER o jogo:
  Doyouwanttoretryfor30secs = Deseja tentar novamente dentro de 30 segs?
  Doyouwanttoupdate = Como pretende actualizar o programa?
+ Doyouwanttochangelanguage = Deseja alterar o idioma?
  Downloadingfile = Descarregando ficheiro:
  DownloadBoxartimage = Descarregar imagem da Caixa?
  Downloadfinished = Download Terminado
  Defaultgamesettings = Repor Configuração do Jogo
  Defaultsettings = Repor Configurações
+ Default = Predefinição
+ diversepatches = por diversos patches
  Error = Erro !
  hour = Horas
  BOOTERROR = ERRO DE ARRANQUE
@@ -79,6 +86,8 @@
  Format = Formatar
  Formattingpleasewait = Formatando, por favor aguarde...
  formated =  formatado!
+ Forhostingcovers = por alojar capas/imagens de disco
+ Forhostingupdatefiles = por alojar actualizações
  free =  livres
  FreeSpace = Espaço Livre
  FullShutdown = Desligar
@@ -88,11 +97,14 @@
  GameRegion = Região
  GameSize = Tamanho do Jogo
  GoBack = Voltar
- //GotoPage = Ir para a Página
+ GotoPage = Ir para a Página
+ GUISettings = Definições do Interface
+ Gameload = Carregamento de Jogos
  HowtoShutdown = Como desligar a consola?
  Homemenu = Menú Inicial
  Keyboard = Teclado
  Language = Idioma
+ Languagepathchanged = Caminho para o ficheiro de Idioma alterado.
  Langchange = Alterar Idioma
  Left = Esquerda
  LikeSysMenu = Igual ao Menu da Wii
@@ -100,10 +112,11 @@
  LoadingincIOS = Carregando com o cIOS249
  Loadingstandardlanguage = Carregado idioma padrão.
  Loadingstandardmusic = Carregando música padrão.
- Lock = Bloquear
+ Locked = Bloqueado
  LockConsole = Bloquear Configurações
  Patchcountrystrings = Patch Jogos Importados
  Missingfiles = Ficheiros em falta
+ Mature = 3 (Adulto)
  Networkiniterror = Erro ao inicializar ligação de rede
  Neither = Nenhum
  Next = Próximo
@@ -140,24 +153,26 @@
  ReloadSD = Actualizar do cartão SD
  RenameGameonWBFS = Alterar nome do jogo na partição WBFS
  Restart = Reiniciar
- Restarting = Reiniciando...
+ Restarting = Carregue em Ok para reiniciar
  Return = Voltar
+ released = Lançado
  ReturntoWii = Menu da Wii
  Right = Direita
  Rumble = Vibração
  QuickBoot = Arranque Rápido
  Save = Gravar
  SaveFailed = Falha ao Gravar
- Specialthanksto = Agradecimentos
+ Specialthanksto = Agradecimentos especiais para:
  Titlestxtpath = Pasta titles.txt
  TitlestxtpathChanged = Pasta do ficheiro titles.txt alterada.
  Titlestxtpathchange = Alterar pasta do titles.txt
  For = pelo
- theUSBLoaderandreleasingthesourcecodethe = e ter disponibilizado o código fonte
+ theUSBLoaderandreleasingthesourcecodethe = pelo código fonte do USB Loader
  secondsleft =  segundos restantes
  SelectthePartition = Seleccione a Partição
  youwanttoformat = Deseja formatar?
  Standard = Standard
+ Sound = Audio
  settings = Configurações
  ShutdowntoIdle = Standby
  ShutdownSystem = Desligar
@@ -167,13 +182,15 @@
  Successfullydeleted = Removido com Sucesso:
  SuccessfullySaved = Gravado com Sucesso
  SystemDefault = Predefinição Sistema
+ Thanksto = Agradecimentos:
  ThemePath = Pasta Temas 
  ThemepathChanged = Pasta dos Temas alterada
  Themepathchange = Alterar pasta dos Temas
  Try = Tentar
  Tooltips = Dicas
  Timeleft = Tempo restante:
- Unlock = Desbloquear
+ Unlocked = Desbloqueado
+ UnlockConsoletousethisOption = Desbloquear configuração antes de usar esta opção.
  Unicodefix = Corrigir Unicode
  Uninstall = Remover
  USBLoaderisprotected = O USB Loader GX está bloqueado
@@ -185,9 +202,11 @@
  Updatedol = Actualizar DOL
  Updateall = Actualizar Tudo
  Updateto = Actualizando para
+ Update = Verificar Actualizações
  VideoMode = Modo de Vídeo
  VIDTVPatch = Patch VIDTV
- Volume = Volume
+ Volume = Volume Música
+ SFXVolume = Volume Efeitos
  Waiting = Aguardando...
  WaitingforUSBDevice = Aguardando pelo Dispositivo USB
  WidescreenFix = Correcção 16:9
@@ -206,6 +225,22 @@
  SChinese = Chinês Simplificado
  TChinese = Chinês Tradicional
  Korean = Coreano
- // Portuguese(pt-pt) Language File rev11 (02-06-2009 18:02 GMT) for USB Loader GX 1
- // Added strings for rev450
+ january = Jan
+ february = Fev
+ march = Mar
+ april = Abr
+ may = Mai
+ june = Jun
+ july = Jul
+ august = Ago
+ september = Set
+ october = Out
+ november = Nov
+ december = Dez
+ publishedby = Publicado por
+ developedby = Desenvolvido por
+ wififeatures = Rede sem fios
+ // Portuguese(pt-pt) Language File rev13.1 (10-06-2009 09:12 GMT) for USB Loader GX 1
+ // Added strings for rev476+
+ // Tested with rev482
  // Translated by Sky8000
