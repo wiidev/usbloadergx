@@ -10,7 +10,7 @@ extern "C"
 #endif
 
 struct LANGUAGE
-{	
+{
 	char released[15];
 	char publishedby[25];
 	char developedby[25];
@@ -27,8 +27,8 @@ struct LANGUAGE
 	char november[15];
 	char december[15];
 	char wififeatures[20];
-	
-	
+
+
 	char t3Covers[50];
 	char addToFavorite[50];
 	char all[30];
@@ -67,6 +67,8 @@ struct LANGUAGE
 	char CoverPath[50];
 	char CoverpathChanged[50];
 	char Coverpathchange[50];
+	char Cheatcodespathchanged[80];
+	char Cheatcodespath[80];
 	char count[20];
 	char Credits[30];
 	char Custompaths[60];

@@ -68,6 +68,8 @@ snprintf(LANGUAGE.CoverDownload, sizeof(LANGUAGE.CoverDownload), "Cover Download
 snprintf(LANGUAGE.CoverPath, sizeof(LANGUAGE.CoverPath), "Cover Path");
 snprintf(LANGUAGE.CoverpathChanged, sizeof(LANGUAGE.CoverpathChanged), "Coverpath Changed");
 snprintf(LANGUAGE.Coverpathchange, sizeof(LANGUAGE.Coverpathchange), "Coverpath change");
+snprintf(LANGUAGE.Cheatcodespathchanged, sizeof(LANGUAGE.Cheatcodespathchanged), "Cheatcodes Path changed");
+snprintf(LANGUAGE.Cheatcodespath, sizeof(LANGUAGE.Cheatcodespath), "Cheatcodes Path");
 snprintf(LANGUAGE.count, sizeof(LANGUAGE.count), "Play Count");
 snprintf(LANGUAGE.Credits, sizeof(LANGUAGE.Credits), "Credits");
 snprintf(LANGUAGE.Custompaths, sizeof(LANGUAGE.Custompaths), "Custom Paths");
@@ -435,6 +437,14 @@ void language_set(char *name, char *val)
 	}
 	if (strcmp(name, "Coverpathchange") == 0) {
 		strcopy(LANGUAGE.Coverpathchange, val, sizeof(LANGUAGE.Coverpathchange));
+		return;
+	}
+	if (strcmp(name, "Cheatcodespath") == 0) {
+		strcopy(LANGUAGE.Cheatcodespath, val, sizeof(LANGUAGE.Cheatcodespath));
+		return;
+	}
+	if (strcmp(name, "Cheatcodespathchanged") == 0) {
+		strcopy(LANGUAGE.Cheatcodespathchanged, val, sizeof(LANGUAGE.Cheatcodespathchanged));
 		return;
 	}
 	if (strcmp(name, "Credits") == 0) {

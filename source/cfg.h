@@ -328,6 +328,7 @@ struct SSettings {
 	char	oggload_path[100];
 	char	ogg_path[150];
 	char	update_path[150];
+	char	Cheatcodespath[100];
 };
 
 void CFG_LoadGlobal(void);

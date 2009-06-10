@@ -26,53 +26,41 @@
 #include <gccore.h>
 #include <malloc.h>
 #include <sys/unistd.h>
-#include <fat.h>
 #include <sdcard/wiisd_io.h>
 #include "ogc/ipc.h"
 #include "fst.h"
 #include "dvd_broadway.h"
 #include "wpad.h"
+#include "cfg.h"
+#include "fatmounter.h"
 
+extern struct SSettings Settings;
 
-#define FSTDIRTYPE 1
-#define FSTFILETYPE 0
-#define ENTRYSIZE 0xC
-#define FILEDIR	"SD:/codes"
-
-#define MAX_FILENAME_LEN	128
-
-
-static vu32 dvddone = 0;
-
-
-// Real basic
 u32 do_sd_code(char *filename)
 {
 	FILE *fp;
 	u8 *filebuff;
 	u32 filesize;
 	u32 ret;
-	char filepath[128];
-
-	ret = fatMountSimple("SD", &__io_wiisd);
-
-	if (!ret) {
-		return 0;
-	}
+	char filepath[150];
 
 	fflush(stdout);
 
-	sprintf(filepath, FILEDIR "/%s", filename);
-	filepath[16] = 0x2E;
-	filepath[17] = 0x67;
-	filepath[18] = 0x63;
-	filepath[19] = 0x74;
-	filepath[20] = 0;
-	//printf("filename %s\n",filepath);
+    SDCard_Init();
+	USBDevice_Init();
+
+	sprintf(filepath, "%s%s", Settings.Cheatcodespath, filename);
+	filepath[strlen(Settings.Cheatcodespath)+6] = 0x2E;
+	filepath[strlen(Settings.Cheatcodespath)+7] = 0x67;
+	filepath[strlen(Settings.Cheatcodespath)+8] = 0x63;
+	filepath[strlen(Settings.Cheatcodespath)+9] = 0x74;
+	filepath[strlen(Settings.Cheatcodespath)+10] = 0;
+
 
 	fp = fopen(filepath, "rb");
 	if (!fp) {
-		fatUnmount("SD:/");
+        USBDevice_deInit();
+        SDCard_deInit();
 		return 0;
 	}
 
@@ -84,6 +72,8 @@ u32 do_sd_code(char *filename)
 	if(filebuff == 0){
 		fclose(fp);
 		sleep(2);
+        USBDevice_deInit();
+        SDCard_deInit();
 		return 0;
 	}
 
@@ -91,19 +81,19 @@ u32 do_sd_code(char *filename)
 	if(ret != filesize){
 		free(filebuff);
 		fclose(fp);
-		fatUnmount("SD:/");
+        USBDevice_deInit();
+        SDCard_deInit();
 		return 0;
 	}
 
-        memcpy((void*)0x800027E8,filebuff,filesize);
-        *(vu8*)0x80001807 = 0x01;
-
-
+    memcpy((void*)0x800027E8,filebuff,filesize);
+    *(vu8*)0x80001807 = 0x01;
 
 	free(filebuff);
 	fclose(fp);
 
-	fatUnmount("SD:/");
+	USBDevice_deInit();
+    SDCard_deInit();
 
 	return 1;
 }

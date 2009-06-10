@@ -1170,7 +1170,7 @@ int MenuSettings()
                     options2.SetName(2, "%s", LANGUAGE.ThemePath);
                     options2.SetName(3, "%s", LANGUAGE.Titlestxtpath);
                     options2.SetName(4, "%s", LANGUAGE.Updatepath);
-                    options2.SetName(5, NULL);
+                    options2.SetName(5, "%s", LANGUAGE.Cheatcodespath);
                     options2.SetName(6, NULL);
                     options2.SetName(7, NULL);
                     options2.SetName(8, NULL);
@@ -1195,6 +1195,7 @@ int MenuSettings()
                         options2.SetValue(2, "%s", CFG.theme_path);
                         options2.SetValue(3, "%s", Settings.titlestxt_path);
                         options2.SetValue(4, "%s", Settings.update_path);
+                        options2.SetValue(5, "%s", Settings.Cheatcodespath);
 
                         if(backBtn.GetState() == STATE_CLICKED)
                         {
@@ -1394,6 +1395,28 @@ int MenuSettings()
                                         strncat (entered, "/", 1);
                                         strncpy(Settings.update_path, entered, sizeof(Settings.update_path));
                                         WindowPrompt(LANGUAGE.Updatepathchanged,0,LANGUAGE.ok,0,0,0);
+                                    }
+                                }
+                                else
+                                    WindowPrompt(0,LANGUAGE.Consoleshouldbeunlockedtomodifyit,LANGUAGE.ok,0,0,0);
+                                break;
+                            case 5:
+                                if ( Settings.godmode == 1)
+                                {
+                                    w.Remove(&optionBrowser2);
+                                    w.Remove(&backBtn);
+                                    char entered[43] = "";
+                                    strncpy(entered, Settings.Cheatcodespath, sizeof(entered));
+                                    int result = OnScreenKeyboard(entered,43,0);
+                                    w.Append(&optionBrowser2);
+                                    w.Append(&backBtn);
+                                    if ( result == 1 )
+                                    {
+                                        int len = (strlen(entered)-1);
+                                        if(entered[len] !='/')
+                                        strncat (entered, "/", 1);
+                                        strncpy(Settings.Cheatcodespath, entered, sizeof(Settings.Cheatcodespath));
+                                        WindowPrompt(LANGUAGE.Cheatcodespathchanged,0,LANGUAGE.ok,0,0,0);
                                     }
                                 }
                                 else

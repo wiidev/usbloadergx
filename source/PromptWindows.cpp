@@ -2288,7 +2288,7 @@ ProgressUpdateWindow()
     {
         char revtxt[10];
 		char rev_txt[14];
-		sprintf(rev_txt, "%s:/rev.txt", bootDevice);
+		sprintf(rev_txt, "%srev.txt", Settings.update_path);
         pfile = fopen(rev_txt, "w");
         fwrite(file.data,1,file.size,pfile);
         fclose(pfile);

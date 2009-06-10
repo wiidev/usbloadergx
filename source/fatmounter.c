@@ -150,11 +150,11 @@ int USBDevice_Init()
 	//closing all open Files write back the cache and then shutdown em!
 	fatUnmount("USB:/");
 	//right now mounts first FAT-partition
-	if (fatMount("USB", &__io_usbstorage, GetFATPartition(&__io_usbstorage), CACHE, SECTORS)) {
-		//try first mount with libogc
+	if (fatMount("USB", &__io_wiiums, GetFATPartition(&__io_wiiums), CACHE, SECTORS)) {
+		//try first mount with cIOS
 		return 1;
-	} else 	if (fatMount("USB", &__io_wiiums, GetFATPartition(&__io_wiiums), CACHE, SECTORS)) {
-		//try now mount with cIOS
+    } else if (fatMount("USB", &__io_usbstorage, GetFATPartition(&__io_usbstorage), CACHE, SECTORS)) {
+		//try now mount with libogc
 		return 1;
 	}
 	return -1;
