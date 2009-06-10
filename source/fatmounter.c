@@ -74,7 +74,7 @@ static bool _FAT_partition_isFAT(const DISC_INTERFACE* disc, sec_t startSector)
 	}
 
 	// Now verify that this is indeed a FAT partition
-	if (memcmp(sectorBuffer + BPB_FAT16_fileSysType, FAT_SIG, sizeof(FAT_SIG)) && 
+	if (memcmp(sectorBuffer + BPB_FAT16_fileSysType, FAT_SIG, sizeof(FAT_SIG)) &&
 		memcmp(sectorBuffer + BPB_FAT32_fileSysType, FAT_SIG, sizeof(FAT_SIG)))
 	{
 		return false;
@@ -97,7 +97,7 @@ sec_t GetFATPartition(const DISC_INTERFACE* disc)
 	int i;
 	uint8_t sectorBuffer[BYTES_PER_READ] = {0};
 	sec_t startSector = 0;
-	
+
 	if(!disc->startup())
 		return 0;
 
@@ -158,6 +158,13 @@ int USBDevice_Init()
 		return 1;
 	}
 	return -1;
+}
+void USBDevice_ReInit()
+{
+    __io_usbstorage.shutdown();
+    __io_wiiums.shutdown();
+    if(__io_usbstorage.startup()) return;
+    else __io_wiiums.startup();
 }
 
 void USBDevice_deInit()
