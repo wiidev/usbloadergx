@@ -175,7 +175,6 @@ bool OpenXMLFile(char *filename)
 	} else {
 		//if (xmldebug);
 		//	xmlloadtime = dbg_time2(NULL);
-		nodetree = emptynode;
 		return true;
 	}
 }
@@ -373,8 +372,9 @@ bool LoadGameInfoFromXML(char* gameid, char* langtxt)
 /* gameid: full game id */
 /* langcode: "English","French","German" */
 {
-	if (nodeindex == NULL || nodedata == NULL)
-	    return;
+	bool exist=false;
+	if (nodeindex == NULL)
+		return exist;
 		
 	/* convert language text into ISO 639 two-letter language codes */
 	char langcode[100] = "";
@@ -390,6 +390,7 @@ bool LoadGameInfoFromXML(char* gameid, char* langtxt)
 	/* search for game matching gameid */
     while (1)
     {
+		exist=true;
         nodeid = mxmlIndexFind(nodeindex,"id", NULL);
 	    if (nodeid != NULL) {
 			get_text(nodeid, element_text, sizeof(element_text));
