@@ -5,6 +5,7 @@
 #include "main.h"
 
 
+
 struct discHdr * gameList;
 u32 gameCnt;
 s32 gameSelected, gameStart;

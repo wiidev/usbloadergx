@@ -26,6 +26,7 @@ struct LANGUAGE
 	char october[15];
 	char november[15];
 	char december[15];
+	char XMLTitles[15];
 	char wififeatures[20];
 
 

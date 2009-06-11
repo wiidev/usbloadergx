@@ -273,6 +273,8 @@ snprintf(LANGUAGE.december, sizeof(LANGUAGE.december), "Dec");
 snprintf(LANGUAGE.developedby, sizeof(LANGUAGE.developedby), "Developed by");
 snprintf(LANGUAGE.publishedby, sizeof(LANGUAGE.publishedby), "Published by");
 snprintf(LANGUAGE.wififeatures, sizeof(LANGUAGE.wififeatures), "WiFi Features");
+snprintf(LANGUAGE.XMLTitles, sizeof(LANGUAGE.XMLTitles), "Titles from XML");
+	
 };
 
 

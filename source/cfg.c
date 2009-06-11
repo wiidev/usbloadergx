@@ -355,6 +355,7 @@ void Global_Default(void)
 	Settings.unicodefix = 0;
 	Settings.wiilight = 1;
 	Settings.patchcountrystrings = 0;
+	Settings.titlesOverride = 0;
 }
 
 
@@ -980,6 +981,13 @@ void global_cfg_set(char *name, char *val)
 			}
 		return;
 	}
+	else if (strcmp(name, "titlesOverride") == 0) {
+		int i;
+		if (sscanf(val, "%d", &i) == 1) {
+            Settings.titlesOverride = i;
+			}
+		return;
+	}
 	else if (strcmp(name, "gameDisplay") == 0) {
 		int i;
 		if (sscanf(val, "%d", &i) == 1) {
@@ -1216,6 +1224,7 @@ bool cfg_save_global()// save global settings
 	fprintf(f, "gameDisplay = %d\n ", Settings.gameDisplay);
 	fprintf(f, "update_path = %s\n ", Settings.update_path);
 	fprintf(f, "Cheatcodespath = %s\n ", Settings.Cheatcodespath);
+	fprintf(f, "titlesOverride = %d\n ", Settings.titlesOverride);
 	fprintf(f, "patchcountrystrings = %d\n ", Settings.patchcountrystrings);
 	fclose(f);
 	return true;
@@ -1492,6 +1501,7 @@ bool cfg_load_global()
 	}
 	Settings.volume = 80;
 	Settings.sfxvolume = 80;
+	Settings.titlesOverride = 0;
 
 	return cfg_parsefile(GXGlobal_cfg, &global_cfg_set);
 }
@@ -1551,6 +1561,16 @@ bool CFG_forget_game_opt(u8 *id)
 	return cfg_save_games();
 }
 
+void CFG_LoadXml()
+{
+	char pathname[200];
+	/* load renamed titles from proper names and game info XML, needs to be after cfg_load_games - Lustar */
+	snprintf(pathname, sizeof(pathname), "%s%s", Settings.titlestxt_path, "wiitdb.xml");
+	OpenXMLFile(pathname);
+	LoadTitlesFromXML("English", false); // options can be added to set force title language to any language and force Japanese title to English
+
+	}
+
 void CFG_Load(void)
 {
 	char pathname[200];
@@ -1582,11 +1602,8 @@ void CFG_Load(void)
 	cfg_load_games();
 	cfg_load_game_num();
 
-	/* load renamed titles from proper names and game info XML, needs to be after cfg_load_games - Lustar */
-	//snprintf(pathname, sizeof(pathname), "%s%s", Settings.titlestxt_path, "wiitdb.zip");
-	//OpenXMLFile(pathname);
-	//LoadTitlesFromXML("English", false); // options can be added to set force title language to any language and force Japanese title to English
-
+	if (Settings.titlesOverride==1)CFG_LoadXml();
+	
 	Global_Default(); //global default depends on theme information
 	CFG_LoadGlobal();
 

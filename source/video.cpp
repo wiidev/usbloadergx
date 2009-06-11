@@ -298,6 +298,7 @@ void Menu_DrawImg(f32 xpos, f32 ypos, f32 zpos, f32 width, f32 height, u8 data[]
 	GX_SetVtxDesc (GX_VA_TEX0, GX_NONE);
 }
 
+
 /****************************************************************************
  * Menu_DrawRectangle
  *

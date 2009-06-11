@@ -13,6 +13,8 @@
 #include "getentries.h"
 #include "SettingsPrompts.h"
 
+#define MAXOPTIONS 11
+
 /*** Extern functions ***/
 extern void ResumeGui();
 extern void HaltGui();
@@ -225,7 +227,7 @@ int MenuSettings()
 	MainButton4.SetEffectGrow();
 	MainButton4.SetTrigger(&trigA);
 
-	customOptionList options2(10);
+	customOptionList options2(MAXOPTIONS);
 	GuiCustomOptionBrowser optionBrowser2(396, 280, &options2, CFG.theme_path, "bg_options_settings.png", bg_options_settings_png, 0, 150);
 	optionBrowser2.SetPosition(0, 90);
 	optionBrowser2.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
@@ -461,6 +463,7 @@ int MenuSettings()
                     w.Remove(&MainButton4);
                     titleTxt.SetText(LANGUAGE.GUISettings);
                     exit = false;
+					for(int i = 0; i <= MAXOPTIONS; i++) options2.SetName(i, NULL);
                     options2.SetName(0, "%s",LANGUAGE.AppLanguage);
                     options2.SetName(1, "%s",LANGUAGE.Display);
                     options2.SetName(2, "%s",LANGUAGE.Clock);
@@ -471,7 +474,8 @@ int MenuSettings()
                     options2.SetName(7, "%s",LANGUAGE.Wiilight);
                     options2.SetName(8, "%s",LANGUAGE.Rumble);
                     options2.SetName(9, "%s",LANGUAGE.Unicodefix);
-                    for(int i = 0; i < 10; i++) options2.SetValue(i, NULL);
+                    options2.SetName(10, "%s",LANGUAGE.XMLTitles);
+                    for(int i = 0; i <= MAXOPTIONS; i++) options2.SetValue(i, NULL);
                     optionBrowser2.SetScrollbar(1);
                     w.Append(&optionBrowser2);
                     optionBrowser2.SetClickable(true);
@@ -509,7 +513,8 @@ int MenuSettings()
                             Settings.rumble = 0; //RUMBLE
                         if ( Settings.unicodefix > 2 )
                             Settings.unicodefix = 0;
-
+						if(Settings.titlesOverride >= 2)
+							Settings.titlesOverride = 0;
                         if(!strcmp("notset", Settings.language_path))
                             options2.SetValue(0, "%s", LANGUAGE.Default);
                         else
@@ -552,11 +557,14 @@ int MenuSettings()
                         else if (Settings.unicodefix == 1) options2.SetValue(9,"%s",LANGUAGE.TChinese);
                         else if (Settings.unicodefix == 2) options2.SetValue(9,"%s",LANGUAGE.SChinese);
 
-                        if(backBtn.GetState() == STATE_CLICKED)
+                        if (Settings.titlesOverride == 0) options2.SetValue(10,"%s",LANGUAGE.OFF);
+                        else if (Settings.titlesOverride == 1) options2.SetValue(10,"%s",LANGUAGE.ON);
+                        
+						if(backBtn.GetState() == STATE_CLICKED)
                         {
                             backBtn.ResetState();
                             exit = true;
-                            break;
+							break;
                         }
 
                         if(shutdown == 1)
@@ -657,6 +665,16 @@ int MenuSettings()
                             case 9:
                                 Settings.unicodefix++;
                                 break;
+                            case 10:
+								//HaltGui();  this isn't done on the fly yet.  you have to restart the loader for it to take effect
+                                Settings.titlesOverride++;
+								//if(isInserted(bootDevice)) {
+                                //cfg_save_global();
+								//}
+								//CFG_Load();
+								//__Menu_GetEntries();
+								//ResumeGui();
+                                break;
                             }
                     }
                     optionBrowser2.SetEffect(EFFECT_FADE, -20);
@@ -686,6 +704,7 @@ int MenuSettings()
                     w.Remove(&MainButton4);
                     titleTxt.SetText(LANGUAGE.Gameload);
                     exit = false;
+					for(int i = 0; i <= MAXOPTIONS; i++) options2.SetName(i, NULL);
                     options2.SetName(0, "%s",LANGUAGE.VideoMode);
                     options2.SetName(1, "%s",LANGUAGE.VIDTVPatch);
                     options2.SetName(2, "%s",LANGUAGE.Language);
@@ -693,10 +712,7 @@ int MenuSettings()
                     options2.SetName(4, "Ocarina");
                     options2.SetName(5,"%s", LANGUAGE.BootStandard);
                     options2.SetName(6, "%s",LANGUAGE.QuickBoot);
-                    options2.SetName(7, NULL);
-                    options2.SetName(8, NULL);
-                    options2.SetName(9, NULL);
-                    for(int i = 0; i < 10; i++) options2.SetValue(i, NULL);
+                    for(int i = 0; i <= MAXOPTIONS; i++) options2.SetValue(i, NULL);
                     w.Append(&optionBrowser2);
                     optionBrowser2.SetClickable(true);
                     ResumeGui();
@@ -849,17 +865,11 @@ int MenuSettings()
                     w.Remove(&MainButton4);
                     titleTxt.SetText(LANGUAGE.Parentalcontrol);
                     exit = false;
+					for(int i = 0; i <= MAXOPTIONS; i++) options2.SetName(i, NULL);
                     options2.SetName(0, "Console");
                     options2.SetName(1, "%s", LANGUAGE.Password);
                     options2.SetName(2, "%s",LANGUAGE.Controllevel);
-                    options2.SetName(3, NULL);
-                    options2.SetName(4, NULL);
-                    options2.SetName(5, NULL);
-                    options2.SetName(6, NULL);
-                    options2.SetName(7, NULL);
-                    options2.SetName(8, NULL);
-                    options2.SetName(9, NULL);
-                    for(int i = 0; i < 10; i++) options2.SetValue(i, NULL);
+                    for(int i = 0; i <= MAXOPTIONS; i++) options2.SetValue(i, NULL);
                     w.Append(&optionBrowser2);
                     optionBrowser2.SetClickable(true);
                     ResumeGui();
@@ -1016,17 +1026,11 @@ int MenuSettings()
                     w.Remove(&MainButton4);
                     titleTxt.SetText(LANGUAGE.Sound);
                     exit = false;
+					for(int i = 0; i <= MAXOPTIONS; i++) options2.SetName(i, NULL);
                     options2.SetName(0, "%s",LANGUAGE.Backgroundmusic);
                     options2.SetName(1, "%s",LANGUAGE.Volume);
                     options2.SetName(2, "%s",LANGUAGE.SFXVolume);
-                    options2.SetName(3, NULL);
-                    options2.SetName(4, NULL);
-                    options2.SetName(5, NULL);
-                    options2.SetName(6, NULL);
-                    options2.SetName(7, NULL);
-                    options2.SetName(8, NULL);
-                    options2.SetName(9, NULL);
-                    for(int i = 0; i < 10; i++) options2.SetValue(i, NULL);
+                    for(int i = 0; i <= MAXOPTIONS; i++) options2.SetValue(i, NULL);
                     w.Append(&optionBrowser2);
                     optionBrowser2.SetClickable(true);
                     ResumeGui();
@@ -1164,6 +1168,7 @@ int MenuSettings()
                     w.Remove(&MainButton4);
                     titleTxt.SetText(LANGUAGE.Custompaths);
                     exit = false;
+					for(int i = 0; i <= MAXOPTIONS; i++) options2.SetName(i, NULL);
                     if(Settings.godmode)
                     options2.SetName(0, "%s", LANGUAGE.CoverPath);
                     options2.SetName(1, "%s", LANGUAGE.DiscimagePath);
@@ -1171,11 +1176,7 @@ int MenuSettings()
                     options2.SetName(3, "%s", LANGUAGE.Titlestxtpath);
                     options2.SetName(4, "%s", LANGUAGE.Updatepath);
                     options2.SetName(5, "%s", LANGUAGE.Cheatcodespath);
-                    options2.SetName(6, NULL);
-                    options2.SetName(7, NULL);
-                    options2.SetName(8, NULL);
-                    options2.SetName(9, NULL);
-                    for(int i = 0; i < 10; i++) options2.SetValue(i, NULL);
+                    for(int i = 0; i <= MAXOPTIONS; i++) options2.SetValue(i, NULL);
                     w.Append(&optionBrowser2);
                     optionBrowser2.SetClickable(true);
                     ResumeGui();

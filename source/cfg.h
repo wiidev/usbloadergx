@@ -329,10 +329,12 @@ struct SSettings {
 	char	ogg_path[150];
 	char	update_path[150];
 	char	Cheatcodespath[100];
+	int		titlesOverride;
 };
 
 void CFG_LoadGlobal(void);
 bool cfg_save_global(void);
+void CFG_LoadXml();
 //Astidof - End of modification
 
 char *get_title(struct discHdr *header);

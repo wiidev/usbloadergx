@@ -50,13 +50,14 @@ struct gameXMLinfo gameinfo;
 struct gameXMLinfo gameinfo_reset;
 
 bool OpenXMLFile(char* filename);
-void LoadGameInfoFromXML(char* gameid, char* langcode);
+bool LoadGameInfoFromXML(char* gameid, char* langcode);
 void LoadTitlesFromXML(char *langcode, bool forcejptoen);
 void GetPublisherFromGameid(char *idtxt, char *dest);
 char *ConvertLangTextToCode(char *langtext);
 void ConvertRating(char *ratingvalue, char *fromrating, char *torating, char *destvalue);
 void PrintGameInfo(bool showfullinfo);
 void FreeXMLMemory();
+void FreeXMLDeletePart();
 
 void title_set(char *id, char *title);
 

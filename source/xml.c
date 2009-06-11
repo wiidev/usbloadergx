@@ -11,12 +11,12 @@ Load game information from XML - Lustar
 #include "unzip/unzip.h"
 
 
-bool xmldebug = false;
+static bool xmldebug = false;
 
 extern struct SSettings Settings; // for loader GX
 
 
-char langlist[11][22] =
+static char langlist[11][22] =
 {{"Console Default"},
 {"Japanese"},
 {"English"},
@@ -29,7 +29,7 @@ char langlist[11][22] =
 {"T. Chinese"},
 {"Korean"}};
 
-char langcodes[11][22] =
+static char langcodes[11][22] =
 {{""},
 {"JA"},
 {"EN"},
@@ -42,17 +42,29 @@ char langcodes[11][22] =
 {"ZH"},
 {"KO"}};
 
-char element_text[5000];
+static char element_text[5000];
 
-mxml_node_t *nodetree;
-mxml_node_t *nodedata;
-mxml_node_t *nodeid;
-mxml_node_t *nodeidtmp;
-mxml_node_t *nodefound;
-mxml_index_t *nodeindex;
-mxml_index_t *nodeindextmp;
+static mxml_node_t *nodetree=NULL;
+static mxml_node_t *nodedata=NULL;
+static mxml_node_t *nodeid=NULL;
+static mxml_node_t *nodeidtmp=NULL;
+static mxml_node_t *nodefound=NULL;
+static mxml_index_t *nodeindex=NULL;
+static mxml_index_t *nodeindextmp=NULL;
 
 int xmlloadtime = 0;
+
+void FreeXMLDeletePart()
+{
+    /* free memory */
+	mxmlIndexDelete(nodeindex);	
+	mxmlIndexDelete(nodeindextmp); 
+    mxmlDelete(nodeid);
+    mxmlDelete(nodeidtmp);	
+    mxmlDelete(nodefound);	
+    mxmlDelete(nodedata);	
+    mxmlDelete(nodetree);  
+}	
 
 
 /* get_text() taken as is from mini-mxml example mxmldoc.c */
@@ -255,9 +267,10 @@ void ConvertRating(char *ratingvalue, char *fromrating, char *torating, char *de
 void LoadTitlesFromXML(char *langtxt, bool forcejptoen)
 /* langtxt: set to "English","French","German", to force language for all titles, or "" to load title depending on each game's setting */
 /* forcejptoen: set to true to load English title instead of Japanese title when game is set to Japanese */
-{
+{	
+
 	if (nodeindex == NULL)
-	    return;
+	    return ;
                 
 	bool forcelang = false;
 	if (strcmp(langtxt,""))
@@ -305,11 +318,13 @@ void LoadTitlesFromXML(char *langtxt, bool forcejptoen)
 	
 			/* load title from nodes */
 			nodefound = mxmlFindElement(nodeid, nodedata, "locale", "lang", "EN", MXML_NO_DESCEND);
-			if (nodefound != NULL) {
+			if (nodefound != NULL){// &&(Settings.titlesOverride==1)){
 				GetTextFromNode(nodefound, nodedata, "title", NULL, NULL, MXML_DESCEND, title_text_EN);
+			
 			}
 			nodefound = mxmlFindElement(nodeid, nodedata, "locale", "lang", langcode, MXML_NO_DESCEND);
 			if (nodefound != NULL) {
+			
 				GetTextFromNode(nodefound, nodedata, "title", NULL, NULL, MXML_DESCEND, title_text);
 			}
 			/* fall back to English title if prefered language was not found */
@@ -355,12 +370,12 @@ void GetPublisherFromGameid(char *idtxt, char *dest)
 }
 
 
-void LoadGameInfoFromXML(char* gameid, char* langtxt)
+bool LoadGameInfoFromXML(char* gameid, char* langtxt)
 /* gameid: full game id */
 /* langcode: "English","French","German" */
-{
+{	bool exist=false;
 	if (nodeindex == NULL)
-	    return;
+	    return exist;
 		
 	/* convert language text into ISO 639 two-letter language codes */
 	char langcode[100] = "";
@@ -375,7 +390,7 @@ void LoadGameInfoFromXML(char* gameid, char* langtxt)
 		
 	/* search for game matching gameid */
     while (strcmp(element_text,gameid) != 0)
-    {
+    {	exist=true;
         nodeid = mxmlIndexFind(nodeindex,"id", NULL);
 	    if (nodeid != NULL) {
 			get_text(nodeid, element_text, sizeof(element_text));
@@ -411,12 +426,13 @@ void LoadGameInfoFromXML(char* gameid, char* langtxt)
 		/* text from child elements */
 		nodefound = mxmlFindElement(nodeid, nodedata, "locale", "lang", "EN", MXML_NO_DESCEND);
 		if (nodefound != NULL) {
+			//if  (Settings.titlesOverride==1)
 			GetTextFromNode(nodefound, nodedata, "title", NULL, NULL, MXML_DESCEND, gameinfo.title_EN);
 			GetTextFromNode(nodefound, nodedata, "synopsis", NULL, NULL, MXML_DESCEND, gameinfo.synopsis_EN);
 		}
 		nodefound = mxmlFindElement(nodeid, nodedata, "locale", "lang", langcode, MXML_NO_DESCEND);
 		if (nodefound != NULL) {
-			GetTextFromNode(nodefound, nodedata, "title", NULL, NULL, MXML_DESCEND, gameinfo.title);
+			//GetTextFromNode(nodefound, nodedata, "title", NULL, NULL, MXML_DESCEND, gameinfo.title);
 			GetTextFromNode(nodefound, nodedata, "synopsis", NULL, NULL, MXML_DESCEND, gameinfo.synopsis);
 		}
 		// fall back to English title and synopsis if prefered language was not found
@@ -509,10 +525,10 @@ void LoadGameInfoFromXML(char* gameid, char* langtxt)
 		ConvertRating(gameinfo.ratingvalue, gameinfo.ratingtype, "PEGI",gameinfo.ratingvaluePEGI);
 
 		//PrintGameInfo();
-	
-    } else {
+	exist=true;
+    } else {exist=false;
 	    /*game not found */
-	}
+	}return exist;
 }
 
 

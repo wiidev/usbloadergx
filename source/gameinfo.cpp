@@ -20,61 +20,6 @@
 
 #include "xml.h"
 
-GuiText * debugTxt = NULL;
-
-int cnt;
-GuiImageData * playersImgData = NULL;
-GuiImage * playersImg = NULL;
-
-GuiImageData * wifiplayersImgData = NULL;
-GuiImage * wifiplayersImg = NULL;
-GuiImage * ratingImg = NULL;
-
-GuiImage * classiccontrollerImg;
-GuiImage * nunchuckImg;
-GuiImage * guitarImg;
-GuiImage * drumsImg;
-GuiImage * dancepadImg;
-GuiImage * motionplusImg;
-GuiImage * wheelImg;
-GuiImage * balanceboardImg;
-GuiImage * microphoneImg;
-GuiImage * gcImg;
-GuiImage * dialogBoxImg1;
-GuiImage * dialogBoxImg2;
-GuiImage * dialogBoxImg3;
-GuiImage * dialogBoxImg4;
-GuiImage * dialogBoxImg11;
-GuiImage * dialogBoxImg22;
-GuiImage * dialogBoxImg33;
-GuiImage * dialogBoxImg44;
-GuiImage * coverImg;
-GuiImage * coverImg2;
-
-GuiImageData * classiccontrollerImgData = NULL;
-GuiImageData * nunchuckImgData = NULL;
-GuiImageData * guitarImgData = NULL;
-GuiImageData * drumsImgData = NULL;
-GuiImageData * motionplusImgData = NULL;
-GuiImageData * wheelImgData = NULL;
-GuiImageData * balanceboardImgData = NULL;
-GuiImageData * dancepadImgData = NULL;
-GuiImageData * microphoneImgData = NULL;
-GuiImageData * gamecubeImgData = NULL;
-GuiImageData * ratingImgData = NULL;
-GuiImageData * cover = NULL;
-
-GuiText * releasedTxt = NULL;
-GuiText * publisherTxt = NULL;
-GuiText * developerTxt = NULL;
-GuiText * titleTxt = NULL;
-GuiText * synopsisTxt = NULL;
-GuiText * genreTxt = NULL;
-GuiText * betaTxt = NULL;
-GuiText * beta1Txt = NULL;
-GuiText ** wifiTxt = NULL;
-
-
 /*** Extern variables ***/
 extern GuiWindow * mainWindow;
 extern GuiSound * bgMusic;
@@ -85,61 +30,6 @@ extern u8 reset;
 extern void ResumeGui();
 extern void HaltGui();
 
-void eatADick()
-{
-// use this to display variables on the window GuiText * debugTxt = NULL;
-
-playersImgData = NULL;
-playersImg = NULL;
-
-wifiplayersImgData = NULL;
-wifiplayersImg = NULL;
-ratingImg = NULL;
-
-classiccontrollerImg = NULL;
-nunchuckImg = NULL;
-guitarImg = NULL;
-drumsImg = NULL;
-dancepadImg = NULL;
-motionplusImg = NULL;
-wheelImg = NULL;
-balanceboardImg = NULL;
-microphoneImg = NULL;
-gcImg = NULL;
-dialogBoxImg1 = NULL;
-dialogBoxImg2 = NULL;
-dialogBoxImg3 = NULL;
-dialogBoxImg4 = NULL;
-dialogBoxImg11 = NULL;
-dialogBoxImg22 = NULL;
-dialogBoxImg33 = NULL;
-dialogBoxImg44 = NULL;
-coverImg = NULL;
-coverImg2 = NULL;
-
-classiccontrollerImgData = NULL;
-nunchuckImgData = NULL;
-guitarImgData = NULL;
-drumsImgData = NULL;
-motionplusImgData = NULL;
-wheelImgData = NULL;
-balanceboardImgData = NULL;
-dancepadImgData = NULL;
-microphoneImgData = NULL;
-gamecubeImgData = NULL;
-ratingImgData = NULL;
-cover = NULL;
-
-releasedTxt = NULL;
-publisherTxt = NULL;
-developerTxt = NULL;
-titleTxt = NULL;
-synopsisTxt = NULL;
-genreTxt = NULL;
-betaTxt = NULL;
-beta1Txt = NULL;
-}
-
 
 /****************************************************************************
 * gameinfo
@@ -147,6 +37,19 @@ beta1Txt = NULL;
 int
 showGameInfo(char *ID, u8 *headerID)
 {
+	u8 nodata=1;
+    	//load the xml shit
+	char pathname[100];
+	snprintf(pathname, sizeof(pathname), "%s%s", Settings.titlestxt_path, "wiitdb.zip");
+	bool fileexists = OpenXMLFile(pathname);
+	if(!fileexists) {
+        snprintf(pathname, sizeof(pathname), "%s%s", Settings.titlestxt_path, "wiitdb.xml");
+        fileexists = OpenXMLFile(pathname);
+	}
+    if(fileexists) {
+	snprintf(pathname, sizeof(pathname), "English");
+	if (Settings.titlesOverride==1)LoadTitlesFromXML(pathname, false); // options can be added to set force title language to any language and force Japanese title to English
+
 	int choice = -1;
 	//int i = 0;
 	int y = 0, y1 = 32;
@@ -163,6 +66,58 @@ showGameInfo(char *ID, u8 *headerID)
 	microphone=0;
 	int newline=1;
 	u8 page =1;
+
+   // GuiText * debugTxt = NULL;
+
+    GuiImageData * playersImgData = NULL;
+    GuiImage * playersImg = NULL;
+
+    GuiImageData * wifiplayersImgData = NULL;
+    GuiImage * wifiplayersImg = NULL;
+    GuiImage * ratingImg = NULL;
+
+    GuiImage * classiccontrollerImg = NULL;
+    GuiImage * nunchuckImg = NULL;
+    GuiImage * guitarImg = NULL;
+    GuiImage * drumsImg = NULL;
+    GuiImage * dancepadImg = NULL;
+    GuiImage * motionplusImg = NULL;
+    GuiImage * wheelImg = NULL;
+    GuiImage * balanceboardImg = NULL;
+    GuiImage * microphoneImg = NULL;
+    GuiImage * gcImg = NULL;
+    GuiImage * dialogBoxImg1 = NULL;
+    GuiImage * dialogBoxImg2 = NULL;
+    GuiImage * dialogBoxImg3 = NULL;
+    GuiImage * dialogBoxImg4 = NULL;
+    GuiImage * dialogBoxImg11 = NULL;
+    GuiImage * dialogBoxImg22 = NULL;
+    GuiImage * dialogBoxImg33 = NULL;
+    GuiImage * dialogBoxImg44 = NULL;
+    GuiImage * coverImg = NULL;
+    GuiImage * coverImg2 = NULL;
+
+    GuiImageData * classiccontrollerImgData = NULL;
+    GuiImageData * nunchuckImgData = NULL;
+    GuiImageData * guitarImgData = NULL;
+    GuiImageData * drumsImgData = NULL;
+    GuiImageData * motionplusImgData = NULL;
+    GuiImageData * wheelImgData = NULL;
+    GuiImageData * balanceboardImgData = NULL;
+    GuiImageData * dancepadImgData = NULL;
+    GuiImageData * microphoneImgData = NULL;
+    GuiImageData * gamecubeImgData = NULL;
+    GuiImageData * ratingImgData = NULL;
+    GuiImageData * cover = NULL;
+
+    GuiText * releasedTxt = NULL;
+    GuiText * publisherTxt = NULL;
+    GuiText * developerTxt = NULL;
+    GuiText * titleTxt = NULL;
+    GuiText * synopsisTxt = NULL;
+    GuiText * genreTxt = NULL;
+    GuiText * betaTxt = NULL;
+    GuiText * beta1Txt = NULL;
 
 	GuiWindow gameinfoWindow(600,308);
 	gameinfoWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
@@ -190,31 +145,23 @@ showGameInfo(char *ID, u8 *headerID)
 	GuiImageData dialogBox3(imgPath, gameinfo2_png);
 	snprintf(imgPath, sizeof(imgPath), "%sgameinfo2a_png.png", CFG.theme_path);
 	GuiImageData dialogBox4(imgPath, gameinfo2a_png);
-	
+
 	GuiTrigger trigA;
 	trigA.SetButtonOnlyTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 	GuiTrigger trigB;
 	trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 
-	
+
 	GuiButton backBtn(0,0);
 	backBtn.SetPosition(-20,-20);
 	backBtn.SetTrigger(&trigB);
 	gameinfoWindow.Append(&backBtn);
-	
+
 	GuiButton nextBtn(0,0);
 	nextBtn.SetPosition(20,20);
 	nextBtn.SetTrigger(&trigA);
 	gameinfoWindow.Append(&nextBtn);
-	
-	//load the xml shit
-	char pathname[100];
-	snprintf(pathname, sizeof(pathname), "%s%s", Settings.titlestxt_path, "wiitdb.zip");
-	OpenXMLFile(pathname);
-	snprintf(pathname, sizeof(pathname), "English");
-	LoadTitlesFromXML(pathname, false); // options can be added to set force title language to any language and force Japanese title to English
 
-	
 	/*struct Game_CFG *game_cfg = NULL;
 	int opt_lang;
 	char langtexttmp[11][22] =
@@ -235,95 +182,95 @@ showGameInfo(char *ID, u8 *headerID)
 	} else {
 		opt_lang = Settings.language;
 	}*/
-	LoadGameInfoFromXML(ID,pathname);
+	if (LoadGameInfoFromXML(ID,pathname))nodata=0;
 	//LoadGameInfoFromXML(ID,langtexttmp[opt_lang]);
 	char linebuf[1000] = "";
 	char linebuf2[100] = "";
-	
+
 	// set images for required input
 	for (int i=0;strcmp(gameinfo.accessories_required[i+1],"") != 0;i++)
 			{
 			if (strcmp(gameinfo.accessories_required[i+1],"nunchuk")==0)
 			{nunchuckImgData = new GuiImageData(nunchuckR_png);nunchuk=1;}
-			else 
+			else
 			nunchuckImgData = new GuiImageData(nunchuck_png);
-			
+
 			if (strcmp(gameinfo.accessories_required[i+1],"classiccontroller")==0)
 			{classiccontrollerImgData = new GuiImageData(classiccontrollerR_png);classiccontroller=1;}
-			else 
+			else
 			classiccontrollerImgData = new GuiImageData(classiccontroller_png);
-			
+
 			if (strcmp(gameinfo.accessories_required[i+1],"guitar")==0)
 			{guitarImgData = new GuiImageData(guitarR_png);guitar=1;}
-			else 
+			else
 			guitarImgData = new GuiImageData(guitar_png);
-			
+
 			if (strcmp(gameinfo.accessories_required[i+1],"gamecube")==0)
 			{gamecubeImgData = new GuiImageData(gcncontrollerR_png);gamecube=1;}
-			else 
+			else
 			gamecubeImgData = new GuiImageData(gcncontroller_png);
-			
+
 			if (strcmp(gameinfo.accessories_required[i+1],"wheel")==0)
 			{wheelImgData = new GuiImageData(wheelR_png);wheel=1;}
-			else 
+			else
 			wheelImgData = new GuiImageData(wheel_png);
-			
+
 			if (strcmp(gameinfo.accessories_required[i+1],"motionplus")==0)
 			{motionplusImgData = new GuiImageData(motionplusR_png);motionplus=1;}
-			else 
+			else
 			motionplusImgData = new GuiImageData(motionplus_png);
-			
+
 			if (strcmp(gameinfo.accessories_required[i+1],"drums")==0)
 			{drumsImgData = new GuiImageData(drumsR_png);drums=1;}
-			else 
+			else
 			drumsImgData = new GuiImageData(drums_png);
-			
+
 			if (strcmp(gameinfo.accessories_required[i+1],"microphone")==0)
 			{microphoneImgData = new GuiImageData(microphoneR_png);microphone=1;}
-			else 
+			else
 			microphoneImgData = new GuiImageData(microphone_png);
-			
+
 			if (strcmp(gameinfo.accessories_required[i+1],"balanceboard")==0)
 			{balanceboardImgData = new GuiImageData(balanceboardR_png);balanceboard=1;}
-			else 
+			else
 			balanceboardImgData = new GuiImageData(balanceboard_png);
-			
+
 			if (strcmp(gameinfo.accessories_required[i+1],"dancepad")==0)
 			{dancepadImgData = new GuiImageData(dancepadR_png);dancepad=1;}
-			else 
+			else
 			dancepadImgData = new GuiImageData(dancepad_png);
-			
+
 			}
 	for (int i=0;strcmp(gameinfo.accessories[i+1],"") != 0;i++)
 			{
-			
+
 			if (strcmp(gameinfo.accessories_required[i],"classiccontroller")==0)
 			classiccontroller=1;
-			
+
 			if (strcmp(gameinfo.accessories[i+1],"nunchuk")==0)
 			{nunchuk=1;}
-			
+
 			if (strcmp(gameinfo.accessories[i+1],"guitar")==0)
 			guitar=1;
-			
+
 			if (strcmp(gameinfo.accessories_required[i],"drums")==0)
 			drums=1;
-			
+
 			if (strcmp(gameinfo.accessories_required[i],"dancepad")==0)
 			dancepad=1;
-			
+
 			if (strcmp(gameinfo.accessories_required[i],"motionplus")==0)
 			motionplus=1;
-			
+
 			if (strcmp(gameinfo.accessories_required[i],"wheel")==0)
 			wheel=1;
-			
+
 			if (strcmp(gameinfo.accessories_required[i],"balanceboard")==0)
 			balanceboard=1;
-			
+
 			if (strcmp(gameinfo.accessories_required[i],"microphone")==0)
 			microphone=1;
-			
+
 			if (strcmp(gameinfo.accessories_required[i],"gamecube")==0)
 			gamecube=1;
 	}
@@ -334,20 +281,20 @@ showGameInfo(char *ID, u8 *headerID)
 	dialogBoxImg1 = new GuiImage(&dialogBox1);
 	dialogBoxImg1->SetAlignment(0,3);
 	dialogBoxImg1->SetPosition(-9,0);
-	
+
 	dialogBoxImg2 = new GuiImage(&dialogBox2);
 	dialogBoxImg2->SetAlignment(0,3);
 	dialogBoxImg2->SetPosition(145,0);
-	
+
 	dialogBoxImg3 = new GuiImage(&dialogBox3);
 	dialogBoxImg3->SetAlignment(0,3);
 	dialogBoxImg3->SetPosition(301,0);
-	
+
 	dialogBoxImg4 = new GuiImage(&dialogBox4);
 	dialogBoxImg4->SetAlignment(0,3);
 	dialogBoxImg4->SetPosition(457,0);
 
-	
+
 	gameinfoWindow.Append(dialogBoxImg1);
 	gameinfoWindow.Append(dialogBoxImg2);
 	gameinfoWindow.Append(dialogBoxImg3);
@@ -368,7 +315,7 @@ showGameInfo(char *ID, u8 *headerID)
 	coverImg->SetWidescreen(CFG.widescreen);
 	coverImg->SetPosition(15,30);
 	gameinfoWindow.Append(coverImg);
-	
+
 	// # of players
 	if (strcmp(gameinfo.players,"") != 0) {
 		playersImgData = new GuiImageData(Wiimote1_png);
@@ -376,7 +323,7 @@ showGameInfo(char *ID, u8 *headerID)
 			playersImgData= new GuiImageData(Wiimote2_png);}
 		if (atoi(gameinfo.players)>2){
 			playersImgData= new GuiImageData(Wiimote4_png);}
-	
+
 		playersImg = new GuiImage(playersImgData);
 		playersImg->SetWidescreen(CFG.widescreen);
 		playersImg->SetPosition(intputX , inputY);
@@ -384,7 +331,7 @@ showGameInfo(char *ID, u8 *headerID)
 		gameinfoWindow.Append(playersImg);
 		intputX += (CFG.widescreen ? playersImg->GetWidth() * .8 : playersImg->GetWidth())+5;
 		}
-	
+
 	//draw the inupt types for this game
 			if (nunchuk==1){
 			nunchuckImg = new GuiImage(nunchuckImgData);
@@ -393,7 +340,7 @@ showGameInfo(char *ID, u8 *headerID)
 			nunchuckImg->SetAlignment(0,4);
 			gameinfoWindow.Append(nunchuckImg);
 			intputX += (CFG.widescreen ? nunchuckImg->GetWidth() * .8 : nunchuckImg->GetWidth())+5;}
-			
+
 			if (classiccontroller==1){
 			classiccontrollerImg = new GuiImage(classiccontrollerImgData);
 			classiccontrollerImg->SetWidescreen(CFG.widescreen);
@@ -401,7 +348,7 @@ showGameInfo(char *ID, u8 *headerID)
 			classiccontrollerImg->SetAlignment(0,4);
 			gameinfoWindow.Append(classiccontrollerImg);
 			intputX += (CFG.widescreen ? classiccontrollerImg->GetWidth() * .8 : classiccontrollerImg->GetWidth())+5;}
-			
+
 			if (gamecube==1){
 			gcImg = new GuiImage(gamecubeImgData);
 			gcImg->SetWidescreen(CFG.widescreen);
@@ -409,7 +356,7 @@ showGameInfo(char *ID, u8 *headerID)
 			gcImg->SetAlignment(0,4);
 			gameinfoWindow.Append(gcImg);
 			intputX += (CFG.widescreen ? gcImg->GetWidth() * .8 : gcImg->GetWidth())+5;}
-			
+
 			if (wheel==1){
 			wheelImg = new GuiImage(wheelImgData);
 			wheelImg->SetWidescreen(CFG.widescreen);
@@ -417,7 +364,7 @@ showGameInfo(char *ID, u8 *headerID)
 			wheelImg->SetAlignment(0,4);
 			gameinfoWindow.Append(wheelImg);
 			intputX += (CFG.widescreen ? wheelImg->GetWidth() * .8 : wheelImg->GetWidth())+5;}
-			
+
 			if (guitar==1){
 			guitarImg = new GuiImage(guitarImgData);
 			guitarImg->SetWidescreen(CFG.widescreen);
@@ -425,7 +372,7 @@ showGameInfo(char *ID, u8 *headerID)
 			guitarImg->SetAlignment(0,4);
 			gameinfoWindow.Append(guitarImg);
 			intputX += (CFG.widescreen ? guitarImg->GetWidth() * .8 : guitarImg->GetWidth())+5;}
-			
+
 			if (drums==1){
 			drumsImg = new GuiImage(drumsImgData);
 			drumsImg->SetWidescreen(CFG.widescreen);
@@ -433,7 +380,7 @@ showGameInfo(char *ID, u8 *headerID)
 			drumsImg->SetAlignment(0,4);
 			gameinfoWindow.Append(drumsImg);
 			intputX += (CFG.widescreen ? drumsImg->GetWidth() * .8 : drumsImg->GetWidth())+5;}
-			
+
 			if (microphone==1){
 			microphoneImg = new GuiImage(microphoneImgData);
 			microphoneImg->SetWidescreen(CFG.widescreen);
@@ -441,7 +388,7 @@ showGameInfo(char *ID, u8 *headerID)
 			microphoneImg->SetAlignment(0,4);
 			gameinfoWindow.Append(microphoneImg);
 			intputX += (CFG.widescreen ? microphoneImg->GetWidth() * .8 : microphoneImg->GetWidth())+5;}
-			
+
 			if (dancepad==1){
 			dancepadImg = new GuiImage(dancepadImgData);
 			dancepadImg->SetWidescreen(CFG.widescreen);
@@ -449,7 +396,7 @@ showGameInfo(char *ID, u8 *headerID)
 			dancepadImg->SetAlignment(0,4);
 			gameinfoWindow.Append(dancepadImg);
 			intputX += (CFG.widescreen ? dancepadImg->GetWidth() * .8 : dancepadImg->GetWidth())+5;}
-			
+
 			if (motionplus==1){
 			motionplusImg = new GuiImage(motionplusImgData);
 			motionplusImg->SetWidescreen(CFG.widescreen);
@@ -458,20 +405,18 @@ showGameInfo(char *ID, u8 *headerID)
 			gameinfoWindow.Append(motionplusImg);
 			intputX += (CFG.widescreen ? motionplusImg->GetWidth() * .8 : motionplusImg->GetWidth())+5;}
 
-	
-	
-	
+
+
+
 		// # online players
-	if (strcmp(gameinfo.wifiplayers,"") != 0) {
+	if ((strcmp(gameinfo.wifiplayers,"") != 0) && (strcmp(gameinfo.wifiplayers,"0") != 0)){
 		wifiplayersImgData = new GuiImageData(wifi1_png);
 		if (atoi(gameinfo.wifiplayers)>1){
 			wifiplayersImgData= new GuiImageData(wifi2_png);}
 		if (atoi(gameinfo.wifiplayers)>2){
 			wifiplayersImgData= new GuiImageData(wifi4_png);}
-	
 		if (atoi(gameinfo.wifiplayers)>4){
 			wifiplayersImgData= new GuiImageData(wifi8_png);}
-	
 		wifiplayersImg = new GuiImage(wifiplayersImgData);
 		wifiplayersImg->SetWidescreen(CFG.widescreen);
 		wifiplayersImg->SetPosition(intputX , inputY);
@@ -480,23 +425,23 @@ showGameInfo(char *ID, u8 *headerID)
 		intputX += (CFG.widescreen ? wifiplayersImg->GetWidth() * .8 : wifiplayersImg->GetWidth())+5;
 		}
 
-	// ratings		                
-	if (strcmp(gameinfo.ratingtype,"") !=0){ 
+	// ratings
+	if (strcmp(gameinfo.ratingtype,"") !=0){
 	if (strcmp(gameinfo.ratingtype,"ESRB")==0) {
 		if (strcmp(gameinfo.ratingvalueESRB,"EC")==0)
 			ratingImgData = new GuiImageData(esrb_ec_png);
-		else if (strcmp(gameinfo.ratingvalueESRB,"E")==0) 
+		else if (strcmp(gameinfo.ratingvalueESRB,"E")==0)
 			ratingImgData = new GuiImageData(esrb_e_png);
 		else if (strcmp(gameinfo.ratingvalueESRB,"E10+")==0)
 			ratingImgData = new GuiImageData(esrb_eten_png);
-		else if (strcmp(gameinfo.ratingvalueESRB,"T")==0) 
+		else if (strcmp(gameinfo.ratingvalueESRB,"T")==0)
 			ratingImgData = new GuiImageData(esrb_t_png);
-		else if (strcmp(gameinfo.ratingvalueESRB,"M")==0) 
+		else if (strcmp(gameinfo.ratingvalueESRB,"M")==0)
 			ratingImgData = new GuiImageData(esrb_m_png);
 		else if (strcmp(gameinfo.ratingvalueESRB,"AO")==0)
 			ratingImgData = new GuiImageData(esrb_ao_png);
 		else {ratingImgData = new GuiImageData(norating_png);}
-		}													//there are 2 values here cause some countries are stupid and 
+		}													//there are 2 values here cause some countries are stupid and
 	else if (strcmp(gameinfo.ratingtype,"PEGI")==0) {//can't use the same as everybody else
 		if ((strcmp(gameinfo.ratingvaluePEGI,"3")==0)||(strcmp(gameinfo.ratingvaluePEGI,"4")==0))
 			ratingImgData = new GuiImageData(pegi_3_png);
@@ -510,7 +455,7 @@ showGameInfo(char *ID, u8 *headerID)
 			ratingImgData = new GuiImageData(pegi_18_png);
 		else {ratingImgData = new GuiImageData(norating_png);}
 		}
-		
+
 	else if (strcmp(gameinfo.ratingtype,"CERO")==0) {
 		if (strcmp(gameinfo.ratingvalueCERO,"A")==0)
 			ratingImgData = new GuiImageData(cero_a_png);
@@ -533,30 +478,30 @@ showGameInfo(char *ID, u8 *headerID)
 		ratingImg->SetAlignment(1,4);
 		gameinfoWindow.Append(ratingImg);
 		intputX += (CFG.widescreen ? ratingImg->GetWidth() * .8 : ratingImg->GetWidth())+5;
-		
+
 	}
-	
-//////////debugging line	
+
+//////////debugging line
 /*	snprintf(linebuf, sizeof(linebuf), "%s  %s  %s  %s %i %s",gameinfo.ratingtype ,gameinfo.ratingvalueESRB,gameinfo.ratingvaluePEGI,gameinfo.ratingvalueCERO, ass,LANGUAGE.released);
-	
+
 		for (int i=0;strcmp(gameinfo.accessories_required[i+1],"") != 0;i++)
 			{
 				snprintf(linebuf, sizeof(linebuf), "%s  %s",linebuf, gameinfo.accessories_required[i+1]);
 			}
-	
+
 debugTxt = new GuiText(linebuf, 18, (GXColor){0,0,0, 255});
 			debugTxt->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM); debugTxt->SetPosition(0,0);
 			gameinfoWindow.Append(debugTxt);*/
-	
+
 	if (strcmp(gameinfo.title,"") != 0)
 	{snprintf(linebuf, sizeof(linebuf), "%s",gameinfo.title);
 	titleTxt = new GuiText(linebuf, 22, (GXColor){0,0,0, 255});
 	if (titleTxt->GetWidth()>300)titleTxt->SetFontSize(18);
 			titleTxt->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); titleTxt->SetPosition(txtXOffset,12+y);  y+=24;
 			gameinfoWindow.Append(titleTxt);}
-						
-	
-	
+
+
+
 		//date
 	snprintf(linebuf2, sizeof(linebuf2), " ");
 	if (strcmp(gameinfo.day,"") != 0)
@@ -601,9 +546,9 @@ debugTxt = new GuiText(linebuf, 18, (GXColor){0,0,0, 255});
                 snprintf(linebuf2, sizeof(linebuf2), "%s%s ", linebuf2, LANGUAGE.december);
                 break;
 	}
-	}	
-	if (strcmp(gameinfo.year,"") != 0)newline=1;
-	{snprintf(linebuf, sizeof(linebuf), "%s : %s%s", LANGUAGE.released, linebuf2, gameinfo.year);
+	}
+	if (strcmp(gameinfo.year,"") != 0){newline=1;
+	snprintf(linebuf, sizeof(linebuf), "%s : %s%s", LANGUAGE.released, linebuf2, gameinfo.year);
 	releasedTxt = new GuiText(linebuf, 16, (GXColor){0,0,0, 255});
 	if (releasedTxt->GetWidth()>300) newline=2;
 			releasedTxt->SetAlignment(ALIGN_RIGHT, ALIGN_TOP); releasedTxt->SetPosition(-17,12+y);  y+=(20 * newline);newline=1;
@@ -615,7 +560,7 @@ debugTxt = new GuiText(linebuf, 18, (GXColor){0,0,0, 255});
 	if (genreTxt->GetWidth()>300) newline=2;
 			genreTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP); genreTxt->SetPosition(205,12+y1);  y1+=(25 * newline);newline=1;
 			gameinfoWindow.Append(genreTxt);}
-	
+
 	//developer
 	if (strcmp(gameinfo.developer,"") != 0 && strcmp(gameinfo.developer,gameinfo.publisher) != 0)
 			{snprintf(linebuf, sizeof(linebuf), "%s %s", LANGUAGE.developedby, gameinfo.developer);
@@ -633,58 +578,58 @@ debugTxt = new GuiText(linebuf, 18, (GXColor){0,0,0, 255});
 			publisherTxt->SetMaxWidth(250,GuiText::WRAP);
 			publisherTxt->SetAlignment(ALIGN_RIGHT, ALIGN_TOP); publisherTxt->SetPosition(-17,12+y);  y+=(20 * newline);newline=1;
 			gameinfoWindow.Append(publisherTxt);}
-	
+
 	//don't bother us txt
 	snprintf(linebuf, sizeof(linebuf), "Don't bother the USB Loader GX Team about errors in this file.");
 	betaTxt = new GuiText(linebuf, 14, (GXColor){0,0,0, 255});
-			betaTxt->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM); betaTxt->SetPosition(-17,-20);//  
+			betaTxt->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM); betaTxt->SetPosition(-17,-20);//
 			gameinfoWindow.Append(betaTxt);
 	snprintf(linebuf, sizeof(linebuf), "A site will be available in the near nuture to submit changes.");
 	beta1Txt = new GuiText(linebuf, 14, (GXColor){0,0,0, 255});
 			beta1Txt->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM); beta1Txt->SetPosition(-17,-10);
 			gameinfoWindow.Append(beta1Txt);
-			
+
 	// WiFi Shit  commented out cause it has a code dump in it still
 	/*if (strcmp(gameinfo.wififeatures[0],"") != 0){
 		snprintf(linebuf, sizeof(linebuf), "%s:",LANGUAGE.wififeatures);
-					wifiTxt[0] = new GuiText(linebuf, 16, (GXColor){0,0,0, 255});
-					wifiTxt[0]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); wifiTxt[0]->SetPosition(205,12+y);  y+=(20 * newline);
-					gameinfoWindow.Append(wifiTxt[0]);}
-	for (int i=1;strcmp(gameinfo.wififeatures[i],"") != 0;i++)  
+					wifiTxt = new GuiText(linebuf, 16, (GXColor){0,0,0, 255});
+					wifiTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP); wifiTxt->SetPosition(205,12+y);  y+=(20 * newline);
+					gameinfoWindow.Append(wifiTxt);}
+	for (int i=1;strcmp(gameinfo.wififeatures[i],"") != 0;i++)
 			{
 				snprintf(linebuf, sizeof(linebuf), "%s",gameinfo.wififeatures[i]);
 					wifiTxt[i] = new GuiText(linebuf, 16, (GXColor){0,0,0, 255});
 					wifiTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); wifiTxt[i]->SetPosition(210,12+y);  y+=(20 * newline);
 					gameinfoWindow.Append(wifiTxt[i]);}*/
-	
+
 	//synopsis
 	if (strcmp(gameinfo.synopsis,"") != 0)
 			{snprintf(linebuf, sizeof(linebuf), "%s", gameinfo.synopsis);
 			synopsisTxt = new GuiText(linebuf, 16, (GXColor){0,0,0, 255});
 			synopsisTxt->SetMaxWidth(350,GuiText::WRAP);
-			synopsisTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP); synopsisTxt->SetPosition(0,0); 
+			synopsisTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP); synopsisTxt->SetPosition(0,0);
 			dialogBoxImg11 = new GuiImage(&dialogBox1);
 			dialogBoxImg11->SetAlignment(0,3);
 			dialogBoxImg11->SetPosition(-9,0);
-			
+
 			dialogBoxImg22 = new GuiImage(&dialogBox2);
 			dialogBoxImg22->SetAlignment(0,3);
 			dialogBoxImg22->SetPosition(145,0);
-			
+
 			dialogBoxImg33 = new GuiImage(&dialogBox3);
 			dialogBoxImg33->SetAlignment(0,3);
 			dialogBoxImg33->SetPosition(301,0);
-			
+
 			dialogBoxImg44 = new GuiImage(&dialogBox4);
 			dialogBoxImg44->SetAlignment(0,3);
 			dialogBoxImg44->SetPosition(457,0);
 
-			
+
 			gameinfoWindow2.Append(dialogBoxImg11);
 			gameinfoWindow2.Append(dialogBoxImg22);
 			gameinfoWindow2.Append(dialogBoxImg33);
 			gameinfoWindow2.Append(dialogBoxImg44);
-			
+
 			txtWindow.Append(synopsisTxt);
 			coverImg2 = new GuiImage(cover);
 			coverImg2->SetWidescreen(CFG.widescreen);
@@ -693,7 +638,7 @@ debugTxt = new GuiText(linebuf, 18, (GXColor){0,0,0, 255});
 			gameinfoWindow2.Append(&txtWindow);
 			}
 
-	
+
 
 	gameinfoWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_IN, 50);
 	HaltGui();
@@ -701,7 +646,7 @@ debugTxt = new GuiText(linebuf, 18, (GXColor){0,0,0, 255});
 	mainWindow->Append(&gameinfoWindow);
 	mainWindow->ChangeFocus(&gameinfoWindow);
 	ResumeGui();
-	
+
 	while(choice == -1)
 	{
 		VIDEO_WaitVSync();
@@ -712,23 +657,23 @@ debugTxt = new GuiText(linebuf, 18, (GXColor){0,0,0, 255});
 		}
 		if(reset == 1)
 			Sys_Reboot();
-			
-		
+
+
 		if ((backBtn.GetState()==STATE_CLICKED)||(backBtn.GetState()==STATE_HELD)){
 		choice=1;
 		synopsisTxt = NULL;
 		break;}
-		
+
 		else if (((nextBtn.GetState()==STATE_CLICKED)||(nextBtn.GetState()==STATE_HELD))&&
 		(strcmp(gameinfo.synopsis,"") != 0)){
-			
+
 			if (page==1){
 			nextBtn.ResetState();
 			HaltGui();
 			gameinfoWindow.SetVisible(false);
 			gameinfoWindow2.SetVisible(true);
 			coverImg->SetPosition(15,30);
-			
+
 			backBtn.SetClickable(false);
 			gameinfoWindow2.Append(&nextBtn);
 			mainWindow->Append(&gameinfoWindow2);
@@ -756,7 +701,64 @@ debugTxt = new GuiText(linebuf, 18, (GXColor){0,0,0, 255});
 	HaltGui();
 	mainWindow->Remove(&gameinfoWindow);
 	mainWindow->SetState(STATE_DEFAULT);
-	eatADick();
+
+// use this to display variables on the window GuiText * debugTxt = NULL;
+    delete playersImgData;
+    delete playersImg;
+
+    delete wifiplayersImgData;
+    delete wifiplayersImg;
+    delete ratingImg;
+
+    delete classiccontrollerImg;
+    delete nunchuckImg;
+    delete guitarImg;
+    delete drumsImg;
+    delete dancepadImg;
+    delete motionplusImg;
+    delete wheelImg;
+    delete balanceboardImg;
+    delete microphoneImg;
+    delete gcImg;
+    delete dialogBoxImg1;
+    delete dialogBoxImg2;
+    delete dialogBoxImg3;
+    delete dialogBoxImg4;
+    delete dialogBoxImg11;
+    delete dialogBoxImg22;
+    delete dialogBoxImg33;
+    delete dialogBoxImg44;
+    delete coverImg;
+    delete coverImg2;
+
+    delete classiccontrollerImgData;
+    delete nunchuckImgData;
+    delete guitarImgData;
+    delete drumsImgData;
+    delete motionplusImgData;
+    delete wheelImgData;
+    delete balanceboardImgData;
+    delete dancepadImgData;
+    delete microphoneImgData;
+    delete gamecubeImgData;
+    delete ratingImgData;
+    delete cover;
+
+    delete releasedTxt;
+    delete publisherTxt;
+    delete developerTxt;
+    delete titleTxt;
+    delete synopsisTxt;
+    delete genreTxt;
+    delete betaTxt;
+    delete beta1Txt;
+	if (nodata==0)FreeXMLMemory();
+	//void FreeXMLDeletePart();
+	/*
+	nodeid
+<dimok> nodefound
+	*/
+
 	ResumeGui();}
 	else {
 	gameinfoWindow2.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 50);
@@ -765,6 +767,12 @@ debugTxt = new GuiText(linebuf, 18, (GXColor){0,0,0, 255});
 	mainWindow->Remove(&gameinfoWindow2);
 	mainWindow->SetState(STATE_DEFAULT);
 	ResumeGui();}
+	//FreeXMLMemory();
 	return choice;
+
+    /* File not found */
+    } else {
+        return -1;
+    }
 }
 

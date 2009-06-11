@@ -773,6 +773,17 @@ void GuiGameGrid::Update(GuiTrigger * t)
 	if (goback==1)mover2= (mover2<0? mover2+1:mover2-1);
 	if (mover2==0)goback=0;
 	
+	/*u16 buttons = ButtonsHold();
+		if(buttons & WPAD_BUTTON_B) {
+			int x = t->wpad.ir.x;
+			int center = this->GetWidth()/2;
+			if (x<center)goLeft=12;
+			else if (x>center)goRight=12;
+			usleep(x<center? x*250:((center*2 - x)*250));
+			for(int i=0; i<pagesize; i++) {game[i]->Draw();}
+			//return;
+		}*/
+	
 	
 	// navigation
 	if(!focus || gameCnt <= pagesize || (game[bob[0]]->GetEffect() && game[bob[pagesize-1]]->GetEffect()))
@@ -1047,6 +1058,7 @@ void GuiGameGrid::Update(GuiTrigger * t)
 	if (goRight>0){
 	if (mover<11){
 	
+	
 	//int offset1 = listOffset-1, offset2 = listOffset-2;
 	
 	for (int i=1; i<(rows+1); i++){ 
@@ -1288,8 +1300,8 @@ void GuiGameGrid::Update(GuiTrigger * t)
 	}
 	
 	if (btnRowUp->GetState() == STATE_CLICKED) {
-		if (rows==1)this->ChangeRows(2);
-		else if (rows==2)this->ChangeRows(3);
+		if ((rows==1)&&(gameCnt>=16))this->ChangeRows(2);
+		else if ((rows==2)&&(gameCnt>=42))this->ChangeRows(3);
 		btnRowUp->ResetState();
 		return;
 	}
@@ -1316,7 +1328,7 @@ void GuiGameGrid::Reload(struct discHdr * l, int count)
 		delete cover[i];
 	}
 
-	delete [] bob;
+	//delete [] bob;
 	delete [] game;
 	delete [] coverImg;
 	delete [] cover;
@@ -1330,24 +1342,27 @@ void GuiGameGrid::Reload(struct discHdr * l, int count)
 	focus = 1;					 // allow focus
 	firstPic = 0;
 	clickedItem = -1;
-	speed = SHIFT_SPEED;
+	gameCnt=count;
+	//speed = SHIFT_SPEED;
 	char imgPath[100];
 	
-	if ((count<42)&&(rows==3))rows=2;
-	if ((count<16)&&(rows==2))rows=1;
-	
+	if (count<42)rows=2;
+	if (count<16)rows=1;
+	//rows=1;
 	if (rows==1)pagesize = 6;
 	else if (rows==2)pagesize = 16;
 	else if (rows==3)pagesize = 42;
-	//gameIndex = new int[pagesize];
+	
 	game = new GuiButton * [pagesize];
-	bob = new int[pagesize];
+	//bob = new int[pagesize];
 	coverImg = new GuiImage * [gameCnt];
 	cover = new GuiImageData * [gameCnt];
 
 	for(int i=0; i<pagesize; i++) {
 		bob[i]=i;
 	}
+	
+	firstPic=0;
 
 	char ID[4];
 	char IDfull[7];
@@ -1402,159 +1417,159 @@ void GuiGameGrid::Reload(struct discHdr * l, int count)
 		
 		if (rows==1)
 		{
-		game[0]->SetPosition(-70,74);
-		game[1]->SetPosition(88,74);
-		game[2]->SetPosition(239,74);
-		game[3]->SetPosition(390,74);
-		game[4]->SetPosition(550,74);
+		game[bob[0]]->SetPosition(-70,74);
+		game[bob[1]]->SetPosition(88,74);
+		game[bob[2]]->SetPosition(239,74);
+		game[bob[3]]->SetPosition(390,74);
+		game[bob[4]]->SetPosition(550,74);
 		
-		game[0]->SetSkew(-10,-44,10,-26,10,26,-10,44);
-		game[1]->SetSkew(-6,-22,6,-14,6,14,-6,22);
-		game[2]->SetSkew(0,-11,0,-11,0,11,0,11);
-		game[3]->SetSkew(-6,-14,6,-22,6,22,-6,14);
-		game[4]->SetSkew(-10,-26,10,-44,10,44,-10,26);
+		game[bob[0]]->SetSkew(-10,-44,10,-26,10,26,-10,44);
+		game[bob[1]]->SetSkew(-6,-22,6,-14,6,14,-6,22);
+		game[bob[2]]->SetSkew(0,-11,0,-11,0,11,0,11);
+		game[bob[3]]->SetSkew(-6,-14,6,-22,6,22,-6,14);
+		game[bob[4]]->SetSkew(-10,-26,10,-44,10,44,-10,26);
 		}
 		else if (rows ==2)
 		{
-		game[0]->SetPosition(3,50);
-		game[1]->SetPosition(3,193);
-		game[2]->SetPosition(97,50);
-		game[3]->SetPosition(97,193);
-		game[4]->SetPosition(187,50);
-		game[5]->SetPosition(187,193);
-		game[6]->SetPosition(272,50);
-		game[7]->SetPosition(272,193);
-		game[8]->SetPosition(358,50);
-		game[9]->SetPosition(358,193);
-		game[10]->SetPosition(449,50);
-		game[11]->SetPosition(449,193);
-		game[12]->SetPosition(545,50);
-		game[13]->SetPosition(545,193);
-		game[14]->SetPosition(700,0);
-		game[15]->SetPosition(700,0);
+		game[bob[0]]->SetPosition(3,50);
+		game[bob[1]]->SetPosition(3,193);
+		game[bob[2]]->SetPosition(97,50);
+		game[bob[3]]->SetPosition(97,193);
+		game[bob[4]]->SetPosition(187,50);
+		game[bob[5]]->SetPosition(187,193);
+		game[bob[6]]->SetPosition(272,50);
+		game[bob[7]]->SetPosition(272,193);
+		game[bob[8]]->SetPosition(358,50);
+		game[bob[9]]->SetPosition(358,193);
+		game[bob[10]]->SetPosition(449,50);
+		game[bob[11]]->SetPosition(449,193);
+		game[bob[12]]->SetPosition(545,50);
+		game[bob[13]]->SetPosition(545,193);
+		game[bob[14]]->SetPosition(700,0);
+		game[bob[15]]->SetPosition(700,0);
 		
 		
-		game[0]->SetSkew(-4.5,-49,4.5,-27,4.5,0,-4.5,0);
-		game[1]->SetSkew(-4.5,0,4.5,0,4.5,27,-4.5,49);
-		game[2]->SetSkew(-4,-22,4,-14,4,0,-4,0);
-		game[3]->SetSkew(-4,0,4,0,4,14,-4,22);
-		game[4]->SetSkew(0,-9,0,-5,0,0,0,0);
-		game[5]->SetSkew(0,0,0,0,0,5,0,9);
-		game[6]->SetSkew(0,0,0,0,0,0,0,0);
-		game[7]->SetSkew(0,0,0,0,0,0,0,0);
-		game[8]->SetSkew(0,-5,0,-9,0,0,0,0);
-		game[9]->SetSkew(0,0,0,0,0,9,0,5);
-		game[10]->SetSkew(-4,-14,4,-22,4,0,-4,0);
-		game[11]->SetSkew(-4,0,4,0,4,22,-4,14);
-		game[12]->SetSkew(-4.5,-27,4.5,-49,4.5,0,-4.5,0);
-		game[13]->SetSkew(-4.5,0,4.5,0,4.5,49,-4.5,27);
+		game[bob[0]]->SetSkew(-4.5,-49,4.5,-27,4.5,0,-4.5,0);
+		game[bob[1]]->SetSkew(-4.5,0,4.5,0,4.5,27,-4.5,49);
+		game[bob[2]]->SetSkew(-4,-22,4,-14,4,0,-4,0);
+		game[bob[3]]->SetSkew(-4,0,4,0,4,14,-4,22);
+		game[bob[4]]->SetSkew(0,-9,0,-5,0,0,0,0);
+		game[bob[5]]->SetSkew(0,0,0,0,0,5,0,9);
+		game[bob[6]]->SetSkew(0,0,0,0,0,0,0,0);
+		game[bob[7]]->SetSkew(0,0,0,0,0,0,0,0);
+		game[bob[8]]->SetSkew(0,-5,0,-9,0,0,0,0);
+		game[bob[9]]->SetSkew(0,0,0,0,0,9,0,5);
+		game[bob[10]]->SetSkew(-4,-14,4,-22,4,0,-4,0);
+		game[bob[11]]->SetSkew(-4,0,4,0,4,22,-4,14);
+		game[bob[12]]->SetSkew(-4.5,-27,4.5,-49,4.5,0,-4.5,0);
+		game[bob[13]]->SetSkew(-4.5,0,4.5,0,4.5,49,-4.5,27);
 		}
 		
 		else if (rows==3)
 		{
-		game[0]->SetPosition(13,58);
-		game[1]->SetPosition(13,153);
-		game[2]->SetPosition(13,250);
+		game[bob[0]]->SetPosition(13,58);
+		game[bob[1]]->SetPosition(13,153);
+		game[bob[2]]->SetPosition(13,250);
 		
-		game[3]->SetPosition(68,67);
-		game[4]->SetPosition(68,153);
-		game[5]->SetPosition(68,239);
+		game[bob[3]]->SetPosition(68,67);
+		game[bob[4]]->SetPosition(68,153);
+		game[bob[5]]->SetPosition(68,239);
 		
-		game[6]->SetPosition(120,74);
-		game[7]->SetPosition(120,153);
-		game[8]->SetPosition(120,232);
+		game[bob[6]]->SetPosition(120,74);
+		game[bob[7]]->SetPosition(120,153);
+		game[bob[8]]->SetPosition(120,232);
 		
-		game[9]->SetPosition(170,78);
-		game[10]->SetPosition(170,153);
-		game[11]->SetPosition(170,228);
+		game[bob[9]]->SetPosition(170,78);
+		game[bob[10]]->SetPosition(170,153);
+		game[bob[11]]->SetPosition(170,228);
 		
-		game[12]->SetPosition(214,80);
-		game[13]->SetPosition(214,153);
-		game[14]->SetPosition(214,226);
+		game[bob[12]]->SetPosition(214,80);
+		game[bob[13]]->SetPosition(214,153);
+		game[bob[14]]->SetPosition(214,226);
 		
-		game[15]->SetPosition(258,81);
-		game[16]->SetPosition(258,153);
-		game[17]->SetPosition(258,224);
+		game[bob[15]]->SetPosition(258,81);
+		game[bob[16]]->SetPosition(258,153);
+		game[bob[17]]->SetPosition(258,224);
 		
-		game[18]->SetPosition(302,81);
-		game[19]->SetPosition(302,153);
-		game[20]->SetPosition(302,223);
+		game[bob[18]]->SetPosition(302,81);
+		game[bob[19]]->SetPosition(302,153);
+		game[bob[20]]->SetPosition(302,223);
 		
-		game[21]->SetPosition(346,81);
-		game[22]->SetPosition(346,153);
-		game[23]->SetPosition(346,223);
+		game[bob[21]]->SetPosition(346,81);
+		game[bob[22]]->SetPosition(346,153);
+		game[bob[23]]->SetPosition(346,223);
 		
-		game[24]->SetPosition(390,80);
-		game[25]->SetPosition(390,153);
-		game[26]->SetPosition(390,225);
+		game[bob[24]]->SetPosition(390,80);
+		game[bob[25]]->SetPosition(390,153);
+		game[bob[26]]->SetPosition(390,225);
 		
-		game[27]->SetPosition(434,77);
-		game[28]->SetPosition(434,153);
-		game[29]->SetPosition(434,227);
+		game[bob[27]]->SetPosition(434,77);
+		game[bob[28]]->SetPosition(434,153);
+		game[bob[29]]->SetPosition(434,227);
 		
-		game[30]->SetPosition(484,73);
-		game[31]->SetPosition(484,153);
-		game[32]->SetPosition(484,231);
+		game[bob[30]]->SetPosition(484,73);
+		game[bob[31]]->SetPosition(484,153);
+		game[bob[32]]->SetPosition(484,231);
 		
-		game[33]->SetPosition(537,67);
-		game[34]->SetPosition(537,153);
-		game[35]->SetPosition(537,239);
+		game[bob[33]]->SetPosition(537,67);
+		game[bob[34]]->SetPosition(537,153);
+		game[bob[35]]->SetPosition(537,239);
 		
-		game[36]->SetPosition(591,58);
-		game[37]->SetPosition(591,153);
-		game[38]->SetPosition(591,250);
+		game[bob[36]]->SetPosition(591,58);
+		game[bob[37]]->SetPosition(591,153);
+		game[bob[38]]->SetPosition(591,250);
 		
-		game[0]->SetSkew(-38,-110,15,-42,15,65,-38,32);
-		game[1]->SetSkew(-38,-75,15,-48,15,45,-38,72);
-		game[2]->SetSkew(-38,-52,15,-70,15,27,-38,100);
+		game[bob[0]]->SetSkew(-38,-110,15,-42,15,65,-38,32);
+		game[bob[1]]->SetSkew(-38,-75,15,-48,15,45,-38,72);
+		game[bob[2]]->SetSkew(-38,-52,15,-70,15,27,-38,100);
 		
-		game[3]->SetSkew(-38,-70,15,-24,15,40,-38,27);
-		game[4]->SetSkew(-38,-50,15,-35,15,40,-38,50);
-		game[5]->SetSkew(-38,-34,15,-47,15,24,-38,58);
+		game[bob[3]]->SetSkew(-38,-70,15,-24,15,40,-38,27);
+		game[bob[4]]->SetSkew(-38,-50,15,-35,15,40,-38,50);
+		game[bob[5]]->SetSkew(-38,-34,15,-47,15,24,-38,58);
 		
-		game[6]->SetSkew(-27,-55,19,-22,19,30,-27,22);
-		game[7]->SetSkew(-27,-40,19,-30,19,30,-27,40);
-		game[8]->SetSkew(-27,-20,19,-30,19,20,-27,50);
+		game[bob[6]]->SetSkew(-27,-55,19,-22,19,30,-27,22);
+		game[bob[7]]->SetSkew(-27,-40,19,-30,19,30,-27,40);
+		game[bob[8]]->SetSkew(-27,-20,19,-30,19,20,-27,50);
 		
-		game[9]->SetSkew(-19,-28,0,-17,0,15,-19,10);
-		game[10]->SetSkew(-19,-30,0,-20,0,12,-19,30);
-		game[11]->SetSkew(-19,-15,0,-20,0,10,-19,24);
+		game[bob[9]]->SetSkew(-19,-28,0,-17,0,15,-19,10);
+		game[bob[10]]->SetSkew(-19,-30,0,-20,0,12,-19,30);
+		game[bob[11]]->SetSkew(-19,-15,0,-20,0,10,-19,24);
 		
-		game[12]->SetSkew(-10,-20,3,-13,3,14,-10,10);
-		game[13]->SetSkew(-10,-20,3,-18,3,18,-10,20);
-		game[14]->SetSkew(-10,-10,3,-10,3,0,-10,10);
+		game[bob[12]]->SetSkew(-10,-20,3,-13,3,14,-10,10);
+		game[bob[13]]->SetSkew(-10,-20,3,-18,3,18,-10,20);
+		game[bob[14]]->SetSkew(-10,-10,3,-10,3,0,-10,10);
 		
-		game[15]->SetSkew(-10,-15,3,-12,3,13,-10,13);
-		game[16]->SetSkew(-10,-17,3,-10,3,10,-10,17);
-		game[17]->SetSkew(-10,-10,3,-15,3,10,-10,10);
+		game[bob[15]]->SetSkew(-10,-15,3,-12,3,13,-10,13);
+		game[bob[16]]->SetSkew(-10,-17,3,-10,3,10,-10,17);
+		game[bob[17]]->SetSkew(-10,-10,3,-15,3,10,-10,10);
 		
-		game[18]->SetSkew(-10,-10,3,-10,3,14,-10,14);
-		game[19]->SetSkew(-10,-10,3,-10,3,10,-10,10);//middle
-		game[20]->SetSkew(-10,-10,3,-10,3,10,-10,10);
+		game[bob[18]]->SetSkew(-10,-10,3,-10,3,14,-10,14);
+		game[bob[19]]->SetSkew(-10,-10,3,-10,3,10,-10,10);//middle
+		game[bob[20]]->SetSkew(-10,-10,3,-10,3,10,-10,10);
 		
-		game[21]->SetSkew(-14,-10,4,-20,3,10,-14,10);
-		game[22]->SetSkew(-14,-10,4,-17,3,17,-14,10);
-		game[23]->SetSkew(-14,-10,4,-10,3,10,-14,10);
+		game[bob[21]]->SetSkew(-14,-10,4,-20,3,10,-14,10);
+		game[bob[22]]->SetSkew(-14,-10,4,-17,3,17,-14,10);
+		game[bob[23]]->SetSkew(-14,-10,4,-10,3,10,-14,10);
 		
-		game[24]->SetSkew(-10,-13,3,-20,3,14,-10,10);
-		game[25]->SetSkew(-10,-18,3,-20,3,20,-10,18);
-		game[26]->SetSkew(-10,-10,3,-10,3,20,-10,5);
+		game[bob[24]]->SetSkew(-10,-13,3,-20,3,14,-10,10);
+		game[bob[25]]->SetSkew(-10,-18,3,-20,3,20,-10,18);
+		game[bob[26]]->SetSkew(-10,-10,3,-10,3,20,-10,5);
 		
-		game[27]->SetSkew(-19,-17,0,-28,0,10,-19,15);
-		game[28]->SetSkew(-19,-20,0,-30,0,30,-19,12);
-		game[29]->SetSkew(-19,-20,0,-15,0,30,-19,10);
+		game[bob[27]]->SetSkew(-19,-17,0,-28,0,10,-19,15);
+		game[bob[28]]->SetSkew(-19,-20,0,-30,0,30,-19,12);
+		game[bob[29]]->SetSkew(-19,-20,0,-15,0,30,-19,10);
 		
-		game[30]->SetSkew(-27,-22,19,-55,19,22,-27,30);
-		game[31]->SetSkew(-27,-30,19,-40,19,40,-27,30);
-		game[32]->SetSkew(-27,-30,19,-20,19,55,-27,20);
+		game[bob[30]]->SetSkew(-27,-22,19,-55,19,22,-27,30);
+		game[bob[31]]->SetSkew(-27,-30,19,-40,19,40,-27,30);
+		game[bob[32]]->SetSkew(-27,-30,19,-20,19,55,-27,20);
 		
-		game[33]->SetSkew(-38,-24,15,-70,15,27,-38,40);
-		game[34]->SetSkew(-38,-35,15,-50,15,50,-38,40);
-		game[35]->SetSkew(-38,-47,15,-34,15,58,-38,24);
+		game[bob[33]]->SetSkew(-38,-24,15,-70,15,27,-38,40);
+		game[bob[34]]->SetSkew(-38,-35,15,-50,15,50,-38,40);
+		game[bob[35]]->SetSkew(-38,-47,15,-34,15,58,-38,24);
 		
-		game[36]->SetSkew(-38,-42,15,-110,15,32,-38,60);
-		game[37]->SetSkew(-38,-48,15,-75,15,70,-38,45);
-		game[38]->SetSkew(-38,-70,15,-52,15,100,-38,27);
+		game[bob[36]]->SetSkew(-38,-42,15,-110,15,32,-38,60);
+		game[bob[37]]->SetSkew(-38,-48,15,-75,15,70,-38,45);
+		game[bob[38]]->SetSkew(-38,-70,15,-52,15,100,-38,27);
 		}
 		
 	
