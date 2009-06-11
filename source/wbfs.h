@@ -20,7 +20,9 @@ enum {
 /* Prototypes */
 
 s32 WBFS_Init(u32);
-s32 WBFS_Open(void);
+s32 WBFS_Open();
+s32 WBFS_Open2(int partition);
+s32 GetPartition();
 s32 WBFS_Close(void);
 s32 WBFS_Format(u32, u32);
 s32 WBFS_GetCount(u32 *);

@@ -17,8 +17,11 @@
 #define IOCTL_DI_OFFSET		0xD9
 #define IOCTL_DI_STOPMOTOR	0xE3
 #define IOCTL_DI_SETUSBMODE	0xF4
-#define IOCTL_DI_SETWBFSMODE    0xfe
 #define IOCTL_DI_DISABLERESET	0xF6
+
+/** Hermes IOS222 **/
+#define DI_SETWBFSMODE	0xfe
+#define DI_SETOFFSETBASE 0xf1
 
 /* Variables */
 static u32 inbuf[8]  ATTRIBUTE_ALIGN(32);
@@ -26,7 +29,6 @@ static u32 outbuf[8] ATTRIBUTE_ALIGN(32);
 
 static const char di_fs[] ATTRIBUTE_ALIGN(32) = "/dev/di";
 static s32 di_fd = -1;
-
 
 s32 WDVD_Init(void)
 {
@@ -106,6 +108,13 @@ s32 WDVD_Seek(u64 offset)
 	inbuf[1] = (u32)(offset >> 2);
 
 	ret = IOS_Ioctl(di_fd, IOCTL_DI_SEEK, inbuf, sizeof(inbuf), outbuf, sizeof(outbuf));
+	if(ret!=1)
+		{
+	    // Try old cIOS 222
+		/* Drive seek */
+		inbuf[0] = DI_SETOFFSETBASE << 24;
+		ret = IOS_Ioctl(di_fd, DI_SETOFFSETBASE, inbuf, sizeof(inbuf), outbuf, sizeof(outbuf));
+		}
 	if (ret < 0)
 		return ret;
 
@@ -312,25 +321,33 @@ s32 WDVD_DisableReset(u8 val)
 	return (ret == 1) ? 0 : -ret;
 }
 
-s32 WDVD_SetUSBMode(u8 *id, int ios222)
+/** Hermes **/
+s32 WDVD_SetUSBMode(u8 *id, s32 partition)
 {
 	s32 ret;
 
 	memset(inbuf, 0, sizeof(inbuf));
 
 	/* Set USB mode */
-	if(ios222 == 1) {
-    inbuf[0] = IOCTL_DI_SETWBFSMODE << 24;
-	} else {
 	inbuf[0] = IOCTL_DI_SETUSBMODE << 24;
-	}
 	inbuf[1] = (id) ? 1 : 0;
+
 
 	/* Copy ID */
 	if (id)
+		{
 		memcpy(&inbuf[2], id, 6);
+		inbuf[5] = partition;
+		}
 
 	ret = IOS_Ioctl(di_fd, IOCTL_DI_SETUSBMODE, inbuf, sizeof(inbuf), outbuf, sizeof(outbuf));
+	if(ret!=1)
+		{ // Try old cIOS 222
+		/* Set USB mode */
+		inbuf[0] = DI_SETWBFSMODE << 24;
+		ret = IOS_Ioctl(di_fd, DI_SETWBFSMODE, inbuf, sizeof(inbuf), outbuf, sizeof(outbuf));
+		}
+
 	if (ret < 0)
 		return ret;
 

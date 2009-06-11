@@ -23,7 +23,7 @@ s32 WDVD_Read(void *, u32, u64);
 s32 WDVD_WaitForDisc(void);
 s32 WDVD_GetCoverStatus(u32 *);
 s32 WDVD_DisableReset(u8);
-s32 WDVD_SetUSBMode(u8 *, int ios222);
+s32 WDVD_SetUSBMode(u8 *, s32);
 
 #ifdef __cplusplus
 }

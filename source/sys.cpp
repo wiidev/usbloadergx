@@ -11,6 +11,7 @@
 #include "audio.h"
 #include "menu.h"
 #include "fatmounter.h"
+#include "mload.h"
 
 /* Constants */
 #define CERTS_LEN	0x280
@@ -59,6 +60,8 @@ static void _ExitApp()
 
     SDCard_deInit();
 	USBDevice_deInit();
+    mload_set_ES_ioctlv_vector(NULL);
+	mload_close();
 }
 
 
@@ -81,11 +84,12 @@ int Sys_IosReload(int IOS)
     WPAD_Disconnect(0);
     WPAD_Shutdown();
 
+    USBStorage_Deinit();
     WDVD_Close();
 
-    USBStorage_Deinit();
-
     ret = IOS_ReloadIOS(IOS);
+
+    if(IOS == 222) load_ehc_module();
 
     PAD_Init();
     Wpad_Init();
@@ -96,13 +100,17 @@ int Sys_IosReload(int IOS)
         return ret;
     }
 
-    if(IOS == 249 || IOS == 222 || IOS == 223) {
+    if(IOS == 249 || IOS == 222) {
 		ret = WBFS_Init(WBFS_DEVICE_USB);
 		if(ret>=0)
 		{
 			ret = Disc_Init();
+			int i = 0;
 			if(ret>=0)
-				ret = WBFS_Open();
+			for(i = 0; i < 4; i++) {
+				ret = WBFS_Open2(i);
+				if(ret == 0) break;
+			}
 		}
 	}
 	//reinitialize SD and USB
@@ -110,7 +118,6 @@ int Sys_IosReload(int IOS)
     USBDevice_Init();
 
     return ret;
-
 }
 
 

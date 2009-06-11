@@ -123,6 +123,15 @@ wbfs_t*wbfs_open_hd(rw_sector_callback_t read_hdsector,
                  void *callback_data,
                  int hd_sector_size, int num_hd_sector, int reset);
 
+/* call wbfs_open_hd at first time to find the WBFS partition on the HDD (max 4 partitions)
+
+wbfs_get_partition_LBA receive 0 to 3 as partition index (first, second...) and return 0xFFFFFFFF if WBFS partition is not finded
+
+
+*/
+
+u32 wbfs_get_partition_LBA(int index);
+
 /*! @brief open a wbfs partition
    @param read_hdsector,write_hdsector: accessors to the partition
    @hd_sector_size: size of the hd sector. Can be set to zero if the partition in already initialized

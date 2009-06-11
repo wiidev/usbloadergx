@@ -19,6 +19,7 @@
 #include "updater.h"
 #include "http.h"
 #include "partition.h"
+#include "usbstorage.h"
 #include "getentries.h"
 
 /*** Variables that are also used extern ***/
@@ -1489,9 +1490,9 @@ DiscWait(const char *title, const char *msg, const char *btn1Label, const char *
             timerTxt.SetTextf("%u %s", i,LANGUAGE.secondsleft);
             VIDEO_WaitVSync();
             if(Settings.cios == ios222) {
-            ret = IOS_ReloadIOS(222);
+            ret = Sys_IosReload(222);
             } else {
-            ret = IOS_ReloadIOS(249);
+            ret = Sys_IosReload(249);
             }
             sleep(1);
             ret = WBFS_Init(WBFS_DEVICE_USB);
@@ -1878,9 +1879,11 @@ ProgressWindow(const char *title, const char *msg)
 
     s32 ret;
 
-    __Disc_SetLowMem();
+    USBStorage_Watchdog(0);
 
     ret = wbfs_add_disc(hdd, __WBFS_ReadDVD, NULL, ShowProgress, ONLY_GAME_PARTITION, 0);
+
+    USBStorage_Watchdog(1);
 
 	HaltGui();
 	mainWindow->Remove(&promptWindow);

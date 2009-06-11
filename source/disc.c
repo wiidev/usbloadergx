@@ -33,6 +33,9 @@ void __Disc_SetLowMem(void)
 	*(vu32 *)0x800000F8 = 0x0E7BE2C0;
 	*(vu32 *)0x800000FC = 0x2B73A840;
 
+    /** online check **/
+	memcpy((u32*) 0x80003180, (u32*) 0x80000000, 4);
+
 	/* Copy disc ID */
 	memcpy((void *)0x80003180, (void *)0x80000000, 4);
 

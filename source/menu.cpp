@@ -32,6 +32,7 @@
 #include "PromptWindows.h"
 #include "Settings.h"
 #include "gameinfo.h"
+#include "mload.h"
 
 //#include "xml.h" /* XML - Lustar*/
 
@@ -1216,8 +1217,8 @@ static int MenuDiscList()
                         if (Settings.qboot == yes)//quickboot game
                         {
 
-                                        wiilight(0);
-                                        //////////save game play count////////////////
+                                wiilight(0);
+                                //////////save game play count////////////////
                                 extern u8 favorite;
                                 extern u16 count;
                                 struct Game_NUM* game_num = CFG_get_game_num(header->id);
@@ -1241,87 +1242,12 @@ static int MenuDiscList()
                                 }
                                 }
                                 ////////////end save play count//////////////
-
-                                                struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
-
-                        if (game_cfg)//if there are saved settings for this game use them
-                        {
-                            iosChoice = game_cfg->ios;
+                            menu = MENU_EXIT;
+                            break;
                         }
-                        else// otherwise use the global settings
-                        {
-                            if(Settings.cios == ios222) {
-                            iosChoice = i222;
-                            } else {
-                            iosChoice = i249;
-                            }
-                        }
-
-                    int ios2;
-                    switch(iosChoice)
-                    {
-                        case i249:
-                            ios2 = 0;
-                            break;
-
-                        case i222:
-                            ios2 = 1;
-                            break;
-
-                        default:
-                            ios2 = 0;
-                            break;
-                    }
-
-                    // if we have used the network or cios222 we need to reload the disklist
-                    if(networkisinitialized == 1 || ios2 == 1 || Settings.cios == ios222)
-                                        {
-                                                if(ios2 == 1)
-                                                {
-                                                        ret = Sys_IosReload(222);
-
-                                                        if(ret < 0)
-                                                        {
-                                                                WindowPrompt(LANGUAGE.YoudonthavecIOS,LANGUAGE.LoadingincIOS,LANGUAGE.ok, 0,0,0);
-                                                                Sys_IosReload(249);
-                                                                ios2 = 0;
-                                                        }
-                                                }
-                                                else
-                                                {
-                                                        ret = Sys_IosReload(249);
-                                                }
-                                        }
-
-                                        /* Set USB mode */
-                                        ret = Disc_SetUSB(header->id, ios2);
-                                        if (ret < 0) {
-                                                sprintf(text, "%s %i", LANGUAGE.Error,ret);
-                                                WindowPrompt(
-                                                LANGUAGE.FailedtosetUSB,
-                                                text,
-                                                LANGUAGE.ok,0,0,0);
-                                        }
-                                        else {
-                                                /* Open disc */
-                                                ret = Disc_Open();
-                                                if (ret < 0) {
-                                                        sprintf(text, "%s %i",LANGUAGE.Error, ret);
-                                                        WindowPrompt(
-                                                        LANGUAGE.Failedtoboot,
-                                                        text,
-                                                        LANGUAGE.ok,0,0,0);
-                                                }
-                                                else {
-                                                        menu = MENU_EXIT;
-                                                }
-                                        }
-                                        break;
-                                }
                         bool returnHere = true;// prompt to start game
                         while (returnHere)
                         {
-
                                 returnHere = false;
                                 if(Settings.wiilight != 2) wiilight(1);
                                 choice = GameWindowPrompt();
@@ -1329,101 +1255,26 @@ static int MenuDiscList()
 
                                 if(choice == 1)
                                 {
-
                                         wiilight(0);
-                                             struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
-                                                if (game_cfg)//if there are saved settings for this game use them
-                        {
-                            iosChoice = game_cfg->ios;
-                        }
-                        else// otherwise use the global settings
-                        {
-                            if(Settings.cios == ios222) {
-                            iosChoice = i222;
-                            } else {
-                            iosChoice = i249;
-                            }
-                        }
-
-
-                    int ios2;
-                    switch(iosChoice)
-                    {
-                        case i249:
-                            ios2 = 0;
-                            break;
-
-                        case i222:
-                            ios2 = 1;
-                            break;
-
-                        default:
-                            ios2 = 0;
-                            break;
-                    }
-
-                    // if we have used the network or cios222 we need to reload the disklist
-                                        if(networkisinitialized == 1 || ios2 == 1 || Settings.cios == ios222)
-                                        {
-                                                if(ios2 == 1)
-                                                {
-                                                        ret = Sys_IosReload(222);
-                                                        if(ret < 0)
-                                                        {
-                                                                WindowPrompt(LANGUAGE.YoudonthavecIOS,LANGUAGE.LoadingincIOS,LANGUAGE.ok, 0,0,0);
-                                                                Sys_IosReload(249);
-                                                                ios2 = 0;
-                                                        }
-                                                }
-                                                else
-                                                {
-                                                        ret = Sys_IosReload(249);
-                                                }
-                                        }
-
-
-
-                                        /* Set USB mode */
-                                        ret = Disc_SetUSB(header->id, ios2);
-                                        if (ret < 0) {
-                                                sprintf(text, "%s %i", LANGUAGE.Error, ret);
-                                                WindowPrompt(
-                                                LANGUAGE.FailedtosetUSB,
-                                                text,
-                                                LANGUAGE.ok,0,0,0);
-                                        }
-                                        else {
-                                                /* Open disc */
-                                                ret = Disc_Open();
-                                                if (ret < 0) {
-                                                        sprintf(text, "%s %i",LANGUAGE.Error, ret);
-                                                        WindowPrompt(
-                                                        LANGUAGE.Failedtoboot,
-                                                        text,
-                                                        LANGUAGE.ok,0,0,0);
-
-                                                }
-                                                else {
-                                                        menu = MENU_EXIT;
-                                                }
-                                        }
+                                        returnHere = false;
+                                        menu = MENU_EXIT;
                                 }
                                 else if (choice == 2)
                                 {
                                         wiilight(0);
                                         HaltGui();
-                    if (Settings.gameDisplay==list) mainWindow->Remove(gameBrowser);
-                    else if (Settings.gameDisplay==grid) mainWindow->Remove(gameGrid);
-                    else if (Settings.gameDisplay==carousel) mainWindow->Remove(gameCarousel);
-                    mainWindow->Remove(&w);
-                    ResumeGui();
+                                        if (Settings.gameDisplay==list) mainWindow->Remove(gameBrowser);
+                                        else if (Settings.gameDisplay==grid) mainWindow->Remove(gameGrid);
+                                        else if (Settings.gameDisplay==carousel) mainWindow->Remove(gameCarousel);
+                                        mainWindow->Remove(&w);
+                                        ResumeGui();
                                         int settret = GameSettings(header);
                                         HaltGui();
-                    if (Settings.gameDisplay==list)  mainWindow->Append(gameBrowser);
-                    else if (Settings.gameDisplay==grid) mainWindow->Append(gameGrid);
-                    else if (Settings.gameDisplay==carousel) mainWindow->Append(gameCarousel);
-                    mainWindow->Append(&w);
-                    ResumeGui();
+                                        if (Settings.gameDisplay==list)  mainWindow->Append(gameBrowser);
+                                        else if (Settings.gameDisplay==grid) mainWindow->Append(gameGrid);
+                                        else if (Settings.gameDisplay==carousel) mainWindow->Append(gameCarousel);
+                                        mainWindow->Append(&w);
+                                        ResumeGui();
                                         if (settret == 1) //if deleted
                                         {
                                                 menu = MENU_DISCLIST;
@@ -1446,12 +1297,11 @@ static int MenuDiscList()
                                         menu = MENU_DISCLIST;
                                         }
                                 }
-
-
-                                else if(choice == 0)
+                                else if(choice == 0) {
                                         if (Settings.gameDisplay==list){gameBrowser->SetFocus(1);}
                                         else if (Settings.gameDisplay==grid){gameGrid->SetFocus(1);}
                                         else if (Settings.gameDisplay==carousel){gameCarousel->SetFocus(1);}
+                                }
                         }
                 }
         }
@@ -1479,11 +1329,7 @@ static int MenuInstall()
 	int menu = MENU_NONE;
     static struct discHdr headerdisc ATTRIBUTE_ALIGN(32);
 
-    if(Settings.cios == ios222) {
-    Disc_SetUSB(NULL, 1);
-    } else {
-    Disc_SetUSB(NULL, 0);
-    }
+    Disc_SetUSB(NULL, GetPartition());
 
     int ret, choice = 0;
 	char *name;
@@ -1741,7 +1587,10 @@ static int MenuFormat()
                             menu = MENU_SETTINGS;
 
                         } else {
-                            WBFS_Open();
+                            for(int i = 0; i < 4; i++) {
+                            ret = WBFS_Open2(i);
+                            if(ret == 0) break;
+                            }
                             sprintf(text, "%s %s", text,LANGUAGE.formated);
                             WindowPrompt(LANGUAGE.Success,text,LANGUAGE.ok,0,0,0);
                             menu = MENU_DISCLIST;
@@ -1791,7 +1640,7 @@ static int MenuCheck()
 	int menu = MENU_NONE;
 	int i = 0;
 	int choice;
-	s32 ret, ret2;
+	s32 ret2;
 	OptionList options;
 	options.length = i;
 	partitionEntry partitions[MAX_PARTITIONS];
@@ -1810,26 +1659,10 @@ static int MenuCheck()
 	        } else if(ret2 == 2) {
 				if(Settings.cios != ios222)
 				{
-					//shutdown WiiMote before IOS Reload
-					WPAD_Flush(0);
-					WPAD_Disconnect(0);
-					WPAD_Shutdown();
-
-					//shutdown SD and USB before IOS Reload
-					SDCard_deInit();
-					USBDevice_deInit();
-					ret = IOS_ReloadIOS(222);
-					if(ret < 0)
-						IOS_ReloadIOS(249);
-					//reinitialize WiiMote for Prompt
-					PAD_Init();
-					Wpad_Init();
-					WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
-					WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
-					//reinitialize SD and USB
-					SDCard_Init();
-					USBDevice_Init();
-					if(ret < 0)
+					ret2 = Sys_IosReload(222);
+					if(ret2 < 0)
+						Sys_IosReload(249);
+					if(ret2 < 0)
 						WindowPrompt(LANGUAGE.YoudonthavecIOS,LANGUAGE.LoadingincIOS,LANGUAGE.ok, 0,0,0);
 					else
 						Settings.cios = ios222;
@@ -1838,21 +1671,7 @@ static int MenuCheck()
 				Sys_LoadMenu();
             }
 
-            //shutdown WiiMote before IOS Reload
-            WPAD_Flush(0);
-            WPAD_Disconnect(0);
-            WPAD_Shutdown();
-
-            //shutdown SD and USB before IOS Reload in DiscWait
-			SDCard_deInit();
-			USBDevice_deInit();
-
 			ret2 = DiscWait(LANGUAGE.NoUSBDevice, LANGUAGE.WaitingforUSBDevice, 0, 0, 1);
-			//reinitialize WiiMote for Prompt
- 			PAD_Init();
-            Wpad_Init();
-            WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
-            WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
 			//reinitialize SD and USB
             SDCard_Init();
 			USBDevice_Init();
@@ -1868,7 +1687,10 @@ static int MenuCheck()
             Sys_LoadMenu();
         }
 
-        ret2 = WBFS_Open();
+        for(i = 0; i < 4; i++) {
+        ret2 = WBFS_Open2(i);
+        if(ret2 == 0) break;
+        }
         if (ret2 < 0) {
             choice = WindowPrompt(LANGUAGE.NoWBFSpartitionfound,
                                     LANGUAGE.Youneedtoformatapartition,
@@ -1973,8 +1795,8 @@ int MainMenu(int menu)
 				break;
 		}
 	}
-	ExitGUIThreads();
 
+	ExitGUIThreads();
 
     bgMusic->Stop();
 	delete bgMusic;
@@ -1994,28 +1816,62 @@ int MainMenu(int menu)
 	StopGX();
 	ShutdownAudio();
 
-    SDCard_deInit();
-	USBDevice_deInit();
-
+	int ret = 0;
     struct discHdr *header = &gameList[gameSelected];
+
     struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
 
     if (game_cfg) {
-
         videoChoice = game_cfg->video;
         languageChoice = game_cfg->language;
         ocarinaChoice = game_cfg->ocarina;
         viChoice = game_cfg->vipatch;
         fix002 = game_cfg->errorfix002;
-
+        iosChoice = game_cfg->ios;
     } else {
-
         videoChoice = Settings.video;
         languageChoice = Settings.language;
         ocarinaChoice = Settings.ocarina;
         viChoice = Settings.vpatch;
+		if(Settings.cios == ios222) {
+        iosChoice = i222;
+		} else {
+		iosChoice = i249;
+		}
         fix002 = off;
     }
+    int ios2;
+    switch(iosChoice) {
+            case i249:
+                ios2 = 249;
+                break;
+
+            case i222:
+                ios2 = 222;
+                break;
+
+            default:
+                ios2 = 249;
+                break;
+    }
+
+    if(networkisinitialized == 1 || (iosChoice == i249 && Settings.cios == 1) || (iosChoice == i222 && Settings.cios == 0)) {
+        /*Needed for IOS Reload */
+        ResumeGui();
+        ret = Sys_IosReload(ios2);
+        if(ret < 0) {
+            Sys_IosReload(249);
+            exit(0);
+        }
+    }
+
+    ret = Disc_SetUSB(header->id, GetPartition());
+    if(ret < 0) Sys_BackToLoader();
+    ret = Disc_Open();
+    if(ret < 0) Sys_BackToLoader();
+
+    SDCard_deInit();
+	USBDevice_deInit();
 
     u8 errorfixer002 = 0;
     switch(fix002)
@@ -2146,7 +2002,7 @@ int MainMenu(int menu)
                         break;
     }
 
-    int ret = 0;
+    mload_close();
     ret = Disc_WiiBoot(videoselected, cheat, vipatch, Settings.patchcountrystrings, errorfixer002);
     if (ret < 0) {
         Sys_LoadMenu();

@@ -34,6 +34,7 @@
 #include "cfg.h"
 #include "language.h"
 #include "fat.h"
+#include "mload.h"
 
 
 /* Constants */
@@ -69,7 +70,7 @@ main(int argc, char *argv[])
 {
 
 	s32 ret2;
-	
+
 	SDCard_Init(); // mount SD for loading cfg's
 	USBDevice_Init(); // and mount USB:/
 	bool bootDevice_found=false;

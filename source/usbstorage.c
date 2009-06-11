@@ -33,12 +33,14 @@ distribution.
 
 /* IOCTL commands */
 #define UMS_BASE			(('U'<<24)|('M'<<16)|('S'<<8))
-#define USB_IOCTL_UMS_INIT	        (UMS_BASE+0x1)
+#define USB_IOCTL_UMS_INIT	        	(UMS_BASE+0x1)
 #define USB_IOCTL_UMS_GET_CAPACITY      (UMS_BASE+0x2)
 #define USB_IOCTL_UMS_READ_SECTORS      (UMS_BASE+0x3)
-#define USB_IOCTL_UMS_WRITE_SECTORS	(UMS_BASE+0x4)
-#define USB_IOCTL_UMS_READ_STRESS	(UMS_BASE+0x5)
-#define USB_IOCTL_UMS_SET_VERBOSE	(UMS_BASE+0x6)
+#define USB_IOCTL_UMS_WRITE_SECTORS		(UMS_BASE+0x4)
+#define USB_IOCTL_UMS_READ_STRESS		(UMS_BASE+0x5)
+#define USB_IOCTL_UMS_SET_VERBOSE		(UMS_BASE+0x6)
+#define USB_IOCTL_UMS_UNMOUNT			(UMS_BASE+0x10)
+#define USB_IOCTL_UMS_WATCHDOG			(UMS_BASE+0x80)
 
 #define UMS_HEAPSIZE			0x10000
 
@@ -94,7 +96,8 @@ s32 USBStorage_Init(void)
 		return fd;
 
 	/* Initialize USB storage */
-	IOS_IoctlvFormat(hid, fd, USB_IOCTL_UMS_INIT, ":");
+	ret = IOS_IoctlvFormat(hid, fd, USB_IOCTL_UMS_INIT, ":");
+    if(ret<0) goto err;
 
 	/* Get device capacity */
 	ret = USBStorage_GetCapacity(NULL);
@@ -120,6 +123,20 @@ void USBStorage_Deinit(void)
 		IOS_Close(fd);
 		fd = -1;
 	}
+}
+
+/** Hermes **/
+s32 USBStorage_Watchdog(u32 on_off)
+{
+	if (fd >= 0) {
+		s32 ret;
+
+		ret = IOS_IoctlvFormat(hid, fd, USB_IOCTL_UMS_WATCHDOG, "i:", on_off);
+
+		return ret;
+	}
+
+	return IPC_ENOENT;
 }
 
 s32 USBStorage_ReadSectors(u32 sector, u32 numSectors, void *buffer)
