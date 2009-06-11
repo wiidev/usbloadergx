@@ -4,9 +4,8 @@ Load game information from XML - Lustar
  - MiniZip adapted by Tantric
 */
 
+#include <mxml.h>
 #include "cfg.h"
-
-#include "mxml/mxml.h"
 #include "xml.h"
 #include "unzip/unzip.h"
 
@@ -176,6 +175,7 @@ bool OpenXMLFile(char *filename)
 	} else {
 		//if (xmldebug);
 		//	xmlloadtime = dbg_time2(NULL);
+		nodetree = emptynode;
 		return true;
 	}
 }
@@ -267,10 +267,9 @@ void ConvertRating(char *ratingvalue, char *fromrating, char *torating, char *de
 void LoadTitlesFromXML(char *langtxt, bool forcejptoen)
 /* langtxt: set to "English","French","German", to force language for all titles, or "" to load title depending on each game's setting */
 /* forcejptoen: set to true to load English title instead of Japanese title when game is set to Japanese */
-{	
-
-	if (nodeindex == NULL)
-	    return ;
+{
+	if (nodeindex == NULL || nodedata == NULL)
+	    return;
                 
 	bool forcelang = false;
 	if (strcmp(langtxt,""))
@@ -373,9 +372,9 @@ void GetPublisherFromGameid(char *idtxt, char *dest)
 bool LoadGameInfoFromXML(char* gameid, char* langtxt)
 /* gameid: full game id */
 /* langcode: "English","French","German" */
-{	bool exist=false;
-	if (nodeindex == NULL)
-	    return exist;
+{
+	if (nodeindex == NULL || nodedata == NULL)
+	    return;
 		
 	/* convert language text into ISO 639 two-letter language codes */
 	char langcode[100] = "";
@@ -389,11 +388,13 @@ bool LoadGameInfoFromXML(char* gameid, char* langtxt)
 	*element_text = 0;
 		
 	/* search for game matching gameid */
-    while (strcmp(element_text,gameid) != 0)
-    {	exist=true;
+    while (1)
+    {
         nodeid = mxmlIndexFind(nodeindex,"id", NULL);
 	    if (nodeid != NULL) {
 			get_text(nodeid, element_text, sizeof(element_text));
+			if (!strcmp(element_text,gameid))
+				break;
 	    } else {
 			break;
 	    }

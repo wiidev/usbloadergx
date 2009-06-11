@@ -5,10 +5,11 @@
 #include <sys/stat.h>
 #include <ctype.h>
 #include <ogcsys.h>
+#include <mxml.h>
 #include "cfg.h"
 #include "language.h"
 #include "xml.h" /* XML - Lustar*/
-#include "mxml/mxml.h"
+
 
 struct SSettings Settings;
 
