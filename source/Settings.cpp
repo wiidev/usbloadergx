@@ -1690,6 +1690,12 @@ int GameSettings(struct discHdr * header)
 	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
 
 	char imgPath[100];
+	
+	snprintf(imgPath, sizeof(imgPath), "%ssettings_top.png", CFG.theme_path);
+	GuiImageData settingsTop(imgPath, settings_top_png);
+	
+	snprintf(imgPath, sizeof(imgPath), "%ssettings_bottom.png", CFG.theme_path);
+	GuiImageData settingsBottom(imgPath, settings_bottom_png);
 
 	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
 	GuiImageData btnOutline(imgPath, button_dialogue_box_png);
@@ -1707,12 +1713,21 @@ int GameSettings(struct discHdr * header)
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	titleTxt.SetPosition(12,40);
 	titleTxt.SetMaxWidth(356, GuiText::SCROLL);
+	titleTxt.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 35);
 
     GuiImage settingsbackground(&settingsbg);
 	GuiButton settingsbackgroundbtn(settingsbackground.GetWidth(), settingsbackground.GetHeight());
 	settingsbackgroundbtn.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	settingsbackgroundbtn.SetPosition(0, 0);
 	settingsbackgroundbtn.SetImage(&settingsbackground);
+	
+	GuiImage settingsTopImg(&settingsTop);
+	settingsTopImg.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	settingsTopImg.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 35);
+	
+	GuiImage settingsBottomImg(&settingsBottom);
+	settingsBottomImg.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+	settingsBottomImg.SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_IN, 35);
 
     GuiText saveBtnTxt(LANGUAGE.Save, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	saveBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
@@ -1723,6 +1738,7 @@ int GameSettings(struct discHdr * header)
 	GuiButton saveBtn(&saveBtnImg,&saveBtnImg, 2, 3, -180, 400, &trigA, &btnSoundOver, &btnClick,1);
 	saveBtn.SetScale(0.9);
 	saveBtn.SetLabel(&saveBtnTxt);
+	saveBtn.SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_IN, 35);
 
     GuiText cancelBtnTxt(LANGUAGE.Back, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	cancelBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
@@ -1734,6 +1750,7 @@ int GameSettings(struct discHdr * header)
 	cancelBtn.SetScale(0.9);
 	cancelBtn.SetLabel(&cancelBtnTxt);
 	cancelBtn.SetTrigger(&trigB);
+	cancelBtn.SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_IN, 35);
 
 	GuiText deleteBtnTxt(LANGUAGE.Uninstall, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	deleteBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
@@ -1744,6 +1761,7 @@ int GameSettings(struct discHdr * header)
 	GuiButton deleteBtn(&deleteBtnImg,&deleteBtnImg, 2, 3, 0, 400, &trigA, &btnSoundOver, &btnClick,1);
 	deleteBtn.SetScale(0.9);
 	deleteBtn.SetLabel(&deleteBtnTxt);
+	deleteBtn.SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_IN, 35);
 
 	GuiCustomOptionBrowser optionBrowser3(396, 280, &options3, CFG.theme_path, "bg_options_gamesettings.png", bg_options_settings_png, 0, 200);
 	optionBrowser3.SetPosition(0, 90);
@@ -1752,6 +1770,8 @@ int GameSettings(struct discHdr * header)
     HaltGui();
 	GuiWindow w(screenwidth, screenheight);
 	w.Append(&settingsbackgroundbtn);
+	w.Append(&settingsTopImg);
+	w.Append(&settingsBottomImg);
     w.Append(&titleTxt);
 	w.Append(&deleteBtn);
 	w.Append(&saveBtn);
