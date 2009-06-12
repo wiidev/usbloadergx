@@ -559,7 +559,7 @@ int MenuSettings()
 
                         if (Settings.titlesOverride == 0) options2.SetValue(10,"%s",LANGUAGE.OFF);
                         else if (Settings.titlesOverride == 1) options2.SetValue(10,"%s",LANGUAGE.ON);
-                        
+
 						if(backBtn.GetState() == STATE_CLICKED)
                         {
                             backBtn.ResetState();
@@ -1799,6 +1799,7 @@ int GameSettings(struct discHdr * header)
 
 		if (iosChoice == i249) options3.SetValue(4,"249");
 		else if (iosChoice == i222) options3.SetValue(4,"222");
+		else if (iosChoice == i223) options3.SetValue(4,"223");
 
 		if (parentalcontrolChoice == 0) options3.SetValue(5, LANGUAGE.Always);
 		else if (parentalcontrolChoice == 1) options3.SetValue(5,"1");
@@ -1832,7 +1833,7 @@ int GameSettings(struct discHdr * header)
 				ocarinaChoice = (ocarinaChoice + 1) % 2;
 				break;
 			case 4:
-				iosChoice = (iosChoice + 1) % 2;
+				iosChoice = (iosChoice + 1) % 3;
 				break;
 			case 5:
 				parentalcontrolChoice = (parentalcontrolChoice + 1) % 4;

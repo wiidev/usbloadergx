@@ -33,6 +33,7 @@
 #include "Settings.h"
 #include "gameinfo.h"
 #include "mload.h"
+#include "usbstorage.h"
 
 //#include "xml.h" /* XML - Lustar*/
 
@@ -1654,18 +1655,33 @@ static int MenuCheck()
                     LANGUAGE.Doyouwanttoretryfor30secs,
                     "cIOS249", "cIOS222",
                     LANGUAGE.BacktoWiiMenu, 0);
+            SDCard_deInit();
+            USBDevice_deInit();
+            WPAD_Flush(0);
+            WPAD_Disconnect(0);
+            WPAD_Shutdown();
             if(ret2 == 1) {
 				Settings.cios = ios249;
 	        } else if(ret2 == 2) {
 				if(Settings.cios != ios222)
 				{
+				    HaltGui();
 					ret2 = Sys_IosReload(222);
 					if(ret2 < 0)
 						Sys_IosReload(249);
-					if(ret2 < 0)
+                    ResumeGui();
+					if(ret2 < 0) {
+                        Wpad_Init();
+                        WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
+                        WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
 						WindowPrompt(LANGUAGE.YoudonthavecIOS,LANGUAGE.LoadingincIOS,LANGUAGE.ok, 0,0,0);
-					else
+                        WPAD_Flush(0);
+                        WPAD_Disconnect(0);
+                        WPAD_Shutdown();
+					} else {
 						Settings.cios = ios222;
+						load_ehc_module();
+					}
 				}
             } else {
 				Sys_LoadMenu();
@@ -1675,6 +1691,9 @@ static int MenuCheck()
 			//reinitialize SD and USB
             SDCard_Init();
 			USBDevice_Init();
+			Wpad_Init();
+            WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
+            WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
         }
         if (ret2 < 0) {
 			WindowPrompt (LANGUAGE.Error,LANGUAGE.USBDevicenotfound, LANGUAGE.ok, 0,0,0);
@@ -1850,21 +1869,24 @@ int MainMenu(int menu)
                 ios2 = 222;
                 break;
 
+            case i223:
+                ios2 = 223;
+                break;
+
             default:
                 ios2 = 249;
                 break;
     }
 
-    if(networkisinitialized == 1 || (iosChoice == i249 && Settings.cios == 1) || (iosChoice == i222 && Settings.cios == 0)) {
-        /*Needed for IOS Reload */
-        ResumeGui();
+    if(iosChoice == i223 || networkisinitialized == 1
+        || (iosChoice == i249 && Settings.cios == 1)
+        || (iosChoice == i222 && Settings.cios == 0)) {
+        if(networkisinitialized == 1) ResumeGui();
         ret = Sys_IosReload(ios2);
         if(ret < 0) {
             Sys_IosReload(249);
-            exit(0);
         }
     }
-
     ret = Disc_SetUSB(header->id, GetPartition());
     if(ret < 0) Sys_BackToLoader();
     ret = Disc_Open();
@@ -1872,6 +1894,7 @@ int MainMenu(int menu)
 
     SDCard_deInit();
 	USBDevice_deInit();
+    USBStorage_Deinit();
 
     u8 errorfixer002 = 0;
     switch(fix002)

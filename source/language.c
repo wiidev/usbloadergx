@@ -196,7 +196,7 @@ snprintf(LANGUAGE.Save, sizeof(LANGUAGE.Save), "Save");
 snprintf(LANGUAGE.SaveFailed, sizeof(LANGUAGE.SaveFailed), "Save Failed");
 snprintf(LANGUAGE.Specialthanksto, sizeof(LANGUAGE.Specialthanksto), "Special thanks to:");
 snprintf(LANGUAGE.For, sizeof(LANGUAGE.For), "for");
-snprintf(LANGUAGE.theUSBLoaderandreleasingthesourcecode, sizeof(LANGUAGE.theUSBLoaderandreleasingthesourcecode), "for the USB Loader source code");
+snprintf(LANGUAGE.theUSBLoaderandreleasingthesourcecode, sizeof(LANGUAGE.theUSBLoaderandreleasingthesourcecode), "for the USB Loader source");
 snprintf(LANGUAGE.secondsleft, sizeof(LANGUAGE.secondsleft), "seconds left");
 snprintf(LANGUAGE.Setasbackgroundmusic, sizeof(LANGUAGE.Setasbackgroundmusic), "Set as backgroundmusic?");
 snprintf(LANGUAGE.SelectthePartition, sizeof(LANGUAGE.SelectthePartition), "Select the Partition");
@@ -274,7 +274,7 @@ snprintf(LANGUAGE.developedby, sizeof(LANGUAGE.developedby), "Developed by");
 snprintf(LANGUAGE.publishedby, sizeof(LANGUAGE.publishedby), "Published by");
 snprintf(LANGUAGE.wififeatures, sizeof(LANGUAGE.wififeatures), "WiFi Features");
 snprintf(LANGUAGE.XMLTitles, sizeof(LANGUAGE.XMLTitles), "Titles from XML");
-	
+
 };
 
 

@@ -289,6 +289,8 @@ s32 Disc_BootPartition(u64 offset, u8 videoselected, u8 cheat, u8 vipatch, u8 pa
     WPAD_Disconnect(0);
     WPAD_Shutdown();
 
+    WDVD_Close();
+
 	/* Shutdown IOS subsystems */
  	SYS_ResetSystem(SYS_SHUTDOWN, 0, 0);
 

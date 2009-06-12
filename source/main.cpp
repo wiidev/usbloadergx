@@ -113,6 +113,8 @@ main(int argc, char *argv[])
 		SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
 	}
 
+    if(Settings.cios == ios222) load_ehc_module();
+
     SDCard_Init(); // now mount SD:/
     USBDevice_Init(); // and mount USB:/
 

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <ogcsys.h>
+#include <unistd.h>
 
 #include "sys.h"
 #include "wpad.h"
@@ -74,11 +75,13 @@ void Sys_Reboot(void)
 
 int Sys_IosReload(int IOS)
 {
-    s32 ret;
+    s32 ret = -1;
 
 	//shutdown SD and USB before IOS Reload in DiscWait
     SDCard_deInit();
     USBDevice_deInit();
+
+    mload_close();
 
     WPAD_Flush(0);
     WPAD_Disconnect(0);
@@ -87,32 +90,32 @@ int Sys_IosReload(int IOS)
     USBStorage_Deinit();
     WDVD_Close();
 
-    ret = IOS_ReloadIOS(IOS);
-
-    if(IOS == 222) load_ehc_module();
+    if(IOS == 249 || IOS == 222 || IOS == 223) {
+        for(int i = 0; i < 10; i++) {
+            ret = IOS_ReloadIOS(IOS);
+            if(ret < 0) return ret;
+            if(IOS == 222 || IOS == 223) load_ehc_module();
+            ret = WBFS_Init(WBFS_DEVICE_USB);
+            if(!(ret < 0)) break;
+            sleep(1);
+            USBStorage_Deinit();
+    }
+    if(ret>=0) {
+			ret = Disc_Init();
+			int i = 0;
+			if(ret>=0) {
+			for(i = 0; i < 4; i++) {
+				ret = WBFS_Open2(i);
+				if(ret == 0) break;
+			}
+			}
+		} else Sys_BackToLoader();
+	}
 
     PAD_Init();
     Wpad_Init();
     WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
     WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
-
-    if(ret < 0) {
-        return ret;
-    }
-
-    if(IOS == 249 || IOS == 222) {
-		ret = WBFS_Init(WBFS_DEVICE_USB);
-		if(ret>=0)
-		{
-			ret = Disc_Init();
-			int i = 0;
-			if(ret>=0)
-			for(i = 0; i < 4; i++) {
-				ret = WBFS_Open2(i);
-				if(ret == 0) break;
-			}
-		}
-	}
 	//reinitialize SD and USB
     SDCard_Init();
     USBDevice_Init();

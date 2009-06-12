@@ -21,6 +21,7 @@
 #include "partition.h"
 #include "usbstorage.h"
 #include "getentries.h"
+#include "mload.h"
 
 /*** Variables that are also used extern ***/
 int cntMissFiles = 0;
@@ -241,13 +242,13 @@ void WindowCredits()
 	i++;
 	y+=24;
 
-    sprintf(text, "Tantric %s LibWiiGui", LANGUAGE.awesometool);
+    sprintf(text, "Waninkoko, Kwiirk & Hermes %s", LANGUAGE.theUSBLoaderandreleasingthesourcecode);
 	txt[i] = new GuiText(text);
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(100,y);
 	i++;
 	y+=22;
 
-    sprintf(text, "Waninkoko & Kwiirk %s", LANGUAGE.theUSBLoaderandreleasingthesourcecode);
+    sprintf(text, "Tantric %s LibWiiGui", LANGUAGE.awesometool);
 	txt[i] = new GuiText(text);
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(100,y);
 	i++;
@@ -1487,13 +1488,16 @@ DiscWait(const char *title, const char *msg, const char *btn1Label, const char *
 	if(IsDeviceWait) {
         while(i >= 0)
         {
-            timerTxt.SetTextf("%u %s", i,LANGUAGE.secondsleft);
             VIDEO_WaitVSync();
+            timerTxt.SetTextf("%u %s", i,LANGUAGE.secondsleft);
+            HaltGui();
             if(Settings.cios == ios222) {
-            ret = Sys_IosReload(222);
+            ret = IOS_ReloadIOS(222);
+            load_ehc_module();
             } else {
-            ret = Sys_IosReload(249);
+            ret = IOS_ReloadIOS(249);
             }
+            ResumeGui();
             sleep(1);
             ret = WBFS_Init(WBFS_DEVICE_USB);
 			if(ret>=0)
