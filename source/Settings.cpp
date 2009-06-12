@@ -51,6 +51,13 @@ int MenuSettings()
     GuiSound btnClick1(button_click_pcm, button_click_pcm_size, SOUND_PCM, Settings.sfxvolume);
 
 	char imgPath[100];
+	
+	snprintf(imgPath, sizeof(imgPath), "%ssettings_top.png", CFG.theme_path);
+	GuiImageData settingsTop(imgPath, settings_top_png);
+	
+	snprintf(imgPath, sizeof(imgPath), "%ssettings_bottom.png", CFG.theme_path);
+	GuiImageData settingsBottom(imgPath, settings_bottom_png);
+
 
 	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
 	GuiImageData btnOutline(imgPath, button_dialogue_box_png);
@@ -80,6 +87,14 @@ int MenuSettings()
 
 	GuiImage creditsImg(&creditsImgData);
 	GuiImage creditsImgOver(&creditsOver);
+	
+	GuiImage settingsTopImg(&settingsTop);
+	settingsTopImg.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	settingsTopImg.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 35);
+	
+	GuiImage settingsBottomImg(&settingsBottom);
+	settingsBottomImg.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+	settingsBottomImg.SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_IN, 35);
 
     GuiTrigger trigA;
 	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
@@ -99,6 +114,7 @@ int MenuSettings()
     GuiText titleTxt(LANGUAGE.settings, 28, (GXColor){0, 0, 0, 255});
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	titleTxt.SetPosition(0,40);
+	titleTxt.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 35);
 
     GuiImage settingsbackground(&settingsbg);
 
@@ -112,6 +128,7 @@ int MenuSettings()
 	GuiButton backBtn(&backBtnImg,&backBtnImg, 2, 3, -180, 400, &trigA, &btnSoundOver, &btnClick,1);
 	backBtn.SetLabel(&backBtnTxt);
 	backBtn.SetTrigger(&trigB);
+	backBtn.SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_IN, 35);
 
 	GuiButton homo(1,1);
 	homo.SetTrigger(&trigHome);
@@ -279,6 +296,8 @@ int MenuSettings()
 			mainWindow->Append(&w);
 			w.RemoveAll();
             w.Append(&settingsbackground);
+			w.Append(&settingsTopImg);
+			w.Append(&settingsBottomImg);
             w.Append(&PageIndicatorBtn1);
             w.Append(&PageIndicatorBtn2);
 			w.Append(&titleTxt);
@@ -378,6 +397,8 @@ int MenuSettings()
 			mainWindow->Append(&w);
 			w.RemoveAll();
             w.Append(&settingsbackground);
+			w.Append(&settingsTopImg);
+			w.Append(&settingsBottomImg);
             w.Append(&PageIndicatorBtn1);
             w.Append(&PageIndicatorBtn2);
 			w.Append(&titleTxt);
