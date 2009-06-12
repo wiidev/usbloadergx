@@ -25,7 +25,7 @@
 #include "sys.h"
 #include "patchcode.h"
 #include "wpad.h"
-#include "language.h"
+#include "language/language.h"
 #include "listfiles.h"
 #include "fatmounter.h"
 #include "getentries.h"

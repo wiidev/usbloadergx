@@ -4,7 +4,7 @@
 
 #include "filelist.h"
 #include "sys.h"
-#include "language.h"
+#include "language/language.h"
 #include "libwiigui/gui.h"
 #include "libwiigui/gui_customoptionbrowser.h"
 #include "listfiles.h"

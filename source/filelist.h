@@ -11,12 +11,6 @@
 
 #include <gccore.h>
 
-extern const u8		settings_top_png[];
-extern const u32	settings_top_png_size;
-
-extern const u8		settings_bottom_png[];
-extern const u32	settings_bottom_png_size;
-
 extern const u8		font_ttf[];
 extern const u32	font_ttf_size;
 

@@ -56,6 +56,7 @@ struct LANGUAGE
 	char Clock[20];
 	char Close[20];
 	char Continueinstallgame[50];
+	char Console[50];
 	char ConsoleDefault[50];
 	char Consoleshouldbeunlockedtomodifyit[100];
 	char ConsoleLocked[50];
@@ -92,6 +93,7 @@ struct LANGUAGE
 	char Default[40];
 	char diversepatches[60];
 	char Error[30];
+	char Error002fix[50];
 	char BOOTERROR[50];
 	char ErrorreadingDisc[50];
 	char ExitUSBISOLoader[50];

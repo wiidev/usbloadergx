@@ -56,6 +56,7 @@ snprintf(LANGUAGE.ClicktoDownloadCovers, sizeof(LANGUAGE.ClicktoDownloadCovers),
 snprintf(LANGUAGE.Clock, sizeof(LANGUAGE.Clock), "Clock");
 snprintf(LANGUAGE.Close, sizeof(LANGUAGE.Close), "Close");
 snprintf(LANGUAGE.Continueinstallgame, sizeof(LANGUAGE.Continueinstallgame), "Continue to install game?");
+snprintf(LANGUAGE.Console, sizeof(LANGUAGE.Console), "Console");
 snprintf(LANGUAGE.ConsoleDefault, sizeof(LANGUAGE.ConsoleDefault), "Console Default");
 snprintf(LANGUAGE.Consoleshouldbeunlockedtomodifyit, sizeof(LANGUAGE.Consoleshouldbeunlockedtomodifyit), "Console should be unlocked to modify it.");
 snprintf(LANGUAGE.ConsoleLocked, sizeof(LANGUAGE.ConsoleLocked), "Console Locked");
@@ -92,6 +93,7 @@ snprintf(LANGUAGE.Defaultsettings, sizeof(LANGUAGE.Defaultsettings), "Default Se
 snprintf(LANGUAGE.Default, sizeof(LANGUAGE.Default), "Default");
 snprintf(LANGUAGE.diversepatches, sizeof(LANGUAGE.diversepatches), "for diverse patches");
 snprintf(LANGUAGE.Error, sizeof(LANGUAGE.Error), "Error !");
+snprintf(LANGUAGE.Error002fix, sizeof(LANGUAGE.Error002fix), "Error 002 fix");
 snprintf(LANGUAGE.hour, sizeof(LANGUAGE.hour), "Hour");
 snprintf(LANGUAGE.Homemenu, sizeof(LANGUAGE.Homemenu), "HOME Menu");
 snprintf(LANGUAGE.BOOTERROR, sizeof(LANGUAGE.BOOTERROR), "BOOT ERROR");
@@ -389,6 +391,10 @@ void language_set(char *name, char *val)
 		strcopy(LANGUAGE.Continueinstallgame, val, sizeof(LANGUAGE.Continueinstallgame));
 		return;
 	}
+	if (strcmp(name, "Console") == 0) {
+		strcopy(LANGUAGE.Console, val, sizeof(LANGUAGE.Console));
+		return;
+	}
 	if (strcmp(name, "ConsoleDefault") == 0) {
 		strcopy(LANGUAGE.ConsoleDefault, val, sizeof(LANGUAGE.ConsoleDefault));
 		return;
@@ -527,6 +533,10 @@ void language_set(char *name, char *val)
 	}
 	if (strcmp(name, "Error") == 0) {
 		strcopy(LANGUAGE.Error, val, sizeof(LANGUAGE.Error));
+		return;
+	}
+	if (strcmp(name, "Error002fix") == 0) {
+		strcopy(LANGUAGE.Error002fix, val, sizeof(LANGUAGE.Error002fix));
 		return;
 	}
 	if (strcmp(name, "BOOTERROR") == 0) {
@@ -1203,6 +1213,10 @@ void language_set(char *name, char *val)
 	}
 	if (strcmp(name, "updating") == 0) {
 		strcopy(LANGUAGE.updating, val, sizeof(LANGUAGE.updating));
+		return;
+	}
+    if (strcmp(name, "XMLTitles") == 0) {
+		strcopy(LANGUAGE.XMLTitles, val, sizeof(LANGUAGE.XMLTitles));
 		return;
 	}
 

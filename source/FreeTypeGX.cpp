@@ -21,8 +21,9 @@
  */
 
 #include "FreeTypeGX.h"
-#include "CH2Unicode.h"
-#include "GB2Unicode.h"
+#include "language/CH2Unicode.h"
+#include "language/GB2Unicode.h"
+#include "language/sjis2unicode.h"
 #include "main.h"
 #include "cfg.h"
 
@@ -95,6 +96,8 @@ wchar_t* FreeTypeGX::charToWideChar(char* strChar) {
         CH2Unicode(strChar, strWChar);
     } else if(Settings.unicodefix == 2) {
         ConverGB2Unicode(strChar, strWChar);
+    } else if(Settings.unicodefix == 3) {
+        _sjis2unicode(strChar, strWChar);
     } else {
       char *tempSrc = strChar;
       wchar_t *tempDest = strWChar;
@@ -443,11 +446,11 @@ int16_t FreeTypeGX::getStyleOffsetWidth(uint16_t width, uint16_t format) {
 	{
 		case FTGX_JUSTIFY_LEFT:
 			return 0;
-			
+
 		default:
 		case FTGX_JUSTIFY_CENTER:
 			return -(width >> 1);
-		
+
 		case FTGX_JUSTIFY_RIGHT:
 			return -width;
 	}
@@ -469,23 +472,23 @@ int16_t FreeTypeGX::getStyleOffsetHeight(ftgxDataOffset *offset, uint16_t format
 	{
 		case FTGX_ALIGN_TOP:
 			return offset->ascender;
-		
+
 		default:
 		case FTGX_ALIGN_MIDDLE:
 			return  (offset->ascender + offset->descender + 1) >> 1;
-		
+
 		case FTGX_ALIGN_BOTTOM:
 			return offset->descender;
-		
+
 		case FTGX_ALIGN_BASELINE:
 			return 0;
-		
+
 		case FTGX_ALIGN_GLYPH_TOP:
 			return offset->max;
-		
+
 		case FTGX_ALIGN_GLYPH_MIDDLE:
 			return (offset->max + offset->min + 1) >> 1;
-		
+
 		case FTGX_ALIGN_GLYPH_BOTTOM:
 			return offset->min;
 	}
@@ -679,8 +682,8 @@ uint16_t FreeTypeGX::getHeight(wchar_t const *text) {
  * pixel height below the font origin line and returns the values in an addressible structure.
  *
  * @param text	NULL terminated string to calculate.
- * @param offset returns the max and min values above and below the font origin line        
- * 
+ * @param offset returns the max and min values above and below the font origin line
+ *
  */
 ftgxDataOffset* FreeTypeGX::getOffset(wchar_t *text, ftgxDataOffset* offset) {
 	uint16_t strLength = wcslen(text);

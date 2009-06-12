@@ -32,7 +32,7 @@
 #include "video2.h"
 #include "wpad.h"
 #include "cfg.h"
-#include "language.h"
+#include "language/language.h"
 #include "fat.h"
 #include "mload.h"
 

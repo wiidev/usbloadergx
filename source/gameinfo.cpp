@@ -13,7 +13,7 @@
 #include "sys.h"
 #include "wpad.h"
 #include "wbfs.h"
-#include "language.h"
+#include "language/language.h"
 #include "libwiigui/gui.h"
 #include "fatmounter.h"
 #include "listfiles.h"

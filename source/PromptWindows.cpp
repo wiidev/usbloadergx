@@ -11,7 +11,7 @@
 #include "wpad.h"
 #include "wbfs.h"
 #include "wdvd.h"
-#include "language.h"
+#include "language/language.h"
 #include "libwiigui/gui.h"
 #include "libwiigui/gui_diskcover.h"
 #include "fatmounter.h"
