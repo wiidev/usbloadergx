@@ -12,6 +12,8 @@
 #include <unistd.h>
 #include "gui_gamegrid.h"
 #include "../settings/cfg.h"
+#include "../prompts/PromptWindows.h"
+#include "../language/language.h"
 
 #include <string.h>
 #include <math.h>
@@ -34,7 +36,6 @@ extern const int vol;
 int mover=0, mover2=0; 
 u8 goback=0;
 int goLeft = 0, goRight=0;
-
 char debugbuffer[100];
 
 /**
@@ -55,12 +56,18 @@ GuiGameGrid::GuiGameGrid(int w, int h, struct discHdr * l, int count, const char
 	speed = SHIFT_SPEED;
 	char imgPath[100];
 	rows =3;
+	
+	
+	
 	if ((count<42)&&(rows==3))rows=2;
 	if ((count<16)&&(rows==2))rows=1;
+	if (gameCnt<6)gameCnt=6;
 	
 	if (rows==1)pagesize = 6;
 	else if (rows==2)pagesize = 16;
 	else if (rows==3)pagesize = 42;
+	
+	//if (realCnt<pagesize)listOffset=5;//pagesize-(pagesize-realCnt)/2+1;
 
 	trigA = new GuiTrigger;
 	trigA->SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
@@ -144,8 +151,9 @@ GuiGameGrid::GuiGameGrid(int w, int h, struct discHdr * l, int count, const char
 
 	char ID[4];
 	char IDfull[7];
-
-	for(int i=0; i < gameCnt; i++) {
+	int n = gameCnt>pagesize?gameCnt:pagesize;
+	//for(int i=0; i < gameCnt; i++) {
+	for(int i=0; i < n; i++) {
 
 		struct discHdr *header = &gameList[i];
 		snprintf (ID,sizeof(ID),"%c%c%c", header->id[0], header->id[1], header->id[2]);
@@ -178,7 +186,7 @@ GuiGameGrid::GuiGameGrid(int w, int h, struct discHdr * l, int count, const char
 		game[i]->SetParent(this);
 		game[i]->SetAlignment(ALIGN_TOP,ALIGN_LEFT);
 		game[i]->SetPosition(-200,740);
-		game[i]->SetImage(coverImg[(listOffset+i) % gameCnt]);
+		game[i]->SetImage(coverImg[((listOffset+i) % gameCnt)]);
 		if (rows==3)coverImg[(listOffset+i) % gameCnt]->SetPosition(0,-80);// only for 3 rows
 		if (rows==2)coverImg[(listOffset+i) % gameCnt]->SetPosition(0,-50);// only for 2 rows
 		game[i]->SetRumble(false);
@@ -194,7 +202,7 @@ GuiGameGrid::GuiGameGrid(int w, int h, struct discHdr * l, int count, const char
             game[i]->SetClickable(false);
 			game[i]->RemoveSoundOver();}
 		
-	if(CFG.widescreen)
+	if(CFG.widescreen){
 		
 		if (rows==1)
 		{
@@ -353,7 +361,10 @@ GuiGameGrid::GuiGameGrid(int w, int h, struct discHdr * l, int count, const char
 		game[38]->SetSkew(-38,-70,15,-52,15,100,-38,27);
 		}
 		
-		
+		}
+		else 
+		WindowPrompt("Oops","Your Wii must be in 16:9 mode to see the gamewall.",0, LANGUAGE.ok, 0,0);
+                        
 		
 
 }
@@ -507,7 +518,7 @@ void GuiGameGrid::Draw()
 
 	btnRowUp->Draw();
 	btnRowDown->Draw();
-	//debugTxt->Draw();
+	debugTxt->Draw();
 
 	this->UpdateEffects();
 }
@@ -517,32 +528,32 @@ void GuiGameGrid::Draw()
  */
 void GuiGameGrid::ChangeRows(int n)
 {
-	//delete old buttons
-//	for(int i=0; i<pagesize; i++) {
-//		game[i]=NULL;
-//	}
+
 	
 	
 	//resize game covers
+	
+	
+	
+	
+		rows=n;
 	for(int i=0; i < gameCnt; i++) {
-
+		coverImg[i] = new GuiImage(cover[i]);
 		coverImg[i]->SetWidescreen(CFG.widescreen);
-		if (n==1)coverImg[i]->SetScale(1);
-		else if (n==2)coverImg[i]->SetScale(.6);//these are the numbers for 2 rows
-		else if (n==3)coverImg[i]->SetScale(.26);//these are the numbers for 3 rows
+		if (rows==2)coverImg[i]->SetScale(.6);//these are the numbers for 2 rows
+		else if (rows==3)coverImg[i]->SetScale(.26);//these are the numbers for 3 rows
 		
 	}
-	
 	//set  pagesize
 	if (n==1)pagesize=6;
 	else if (n==2)pagesize=16;
 	else if (n==3)pagesize=42;
 	
-	rows=n;
+
 	firstPic=0;
 	
 	// create new buttons based on pagesize
-	for(int i=0; i < 42; i++) {
+	for(int i=0; i < pagesize; i++) {
 		if (n==1)game[i]->SetSize(160,224);//for 1 row
 		if (n==2)game[i]->SetSize(75,133);//these are the numbers for 2 rows
 		else if (n==3)game[i]->SetSize(35,68);//these are the numbers for 3 rows
@@ -727,9 +738,11 @@ void GuiGameGrid::Update(GuiTrigger * t)
 			game[i]->SetEffectGrow();
 		}
 	}
-		
+	//if (realCnt!=0)goRight=(12*(pagesize-realCnt)/2);
 	// for debugging
-	//debugTxt->Draw();
+	snprintf(debugbuffer, sizeof(debugbuffer), "gameCnt: %i listOffset: %i", gameCnt,listOffset);
+	debugTxt->SetText(debugbuffer);
+		debugTxt->Draw();
 	
 	btnRight->Update(t);
 	btnLeft->Update(t);
