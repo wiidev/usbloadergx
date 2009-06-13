@@ -1816,6 +1816,9 @@ int MainMenu(int menu)
 	delete cover;
 	delete coverImg;
 
+	ShutdownAudio();
+	StopGX();
+
 	int ret = 0;
     struct discHdr *header = &gameList[gameSelected];
 
@@ -1869,6 +1872,9 @@ int MainMenu(int menu)
     if(ret < 0) Sys_BackToLoader();
     ret = Disc_Open();
     if(ret < 0) Sys_BackToLoader();
+
+    SDCard_deInit();
+	USBDevice_deInit();
 
     u8 errorfixer002 = 0;
     switch(fix002)
@@ -1998,13 +2004,6 @@ int MainMenu(int menu)
                                 vipatch = 0;
                         break;
     }
-
-	ShutdownAudio();
-	StopGX();
-    SDCard_deInit();
-	USBDevice_deInit();
-    USBStorage_Deinit();
-    mload_close();
 
     ret = Disc_WiiBoot(videoselected, cheat, vipatch, Settings.patchcountrystrings, errorfixer002);
     if (ret < 0) {
