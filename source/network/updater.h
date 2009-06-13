@@ -1,21 +1,18 @@
 #ifndef _UPDATER_H_
 #define _UPDATER_H_
 
-#ifdef __cplusplus
-extern "C"
-{
-#endif
-
-extern bool netcheck;
-
-int Net_Init(char *ip);
+void Initialize_Network(void);
+bool IsNetworkInit(void);
+char * GetNetworkIP(void);
 s32 network_request(const char * request);
-s32 network_read(void *buf, u32 len);
-s32 downloadrev(const char * url);
+s32 network_read(u8 *buf, u32 len);
+s32 download_request(const char * url);
 void CloseConnection();
+int CheckUpdate();
 
-#ifdef __cplusplus
-}
-#endif
+void HaltNetworkThread();
+void ResumeNetworkThread();
+void InitNetworkThread();
+void ShutdownNetworkThread();
 
 #endif

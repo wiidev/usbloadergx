@@ -25,7 +25,6 @@
 
 /*** Variables that are also used extern ***/
 int cntMissFiles = 0;
-int networkisinitialized;
 
 /*** Variables used only in this file ***/
 static GuiText prTxt(NULL, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
@@ -1584,14 +1583,10 @@ FormatingPartition(const char *title, partitionEntry *entry)
 
 
 /****************************************************************************
- * NetworkInit
+ * SearchMissingImages
  ***************************************************************************/
-int NetworkInitPromp(int choice2)
+void SearchMissingImages(int choice2)
 {
-    char hostip[16];
-    char * IP = NULL;
-    s32 ret = -1;
-
 	GuiWindow promptWindow(472,320);
 	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	promptWindow.SetPosition(0, -10);
@@ -1649,23 +1644,24 @@ int NetworkInitPromp(int choice2)
 
 	ResumeGui();
 
-	while (!IP)
-	{
+	while (!IsNetworkInit()) {
 
         VIDEO_WaitVSync();
 
-        ret = Net_Init(hostip);
+        Initialize_Network();
 
-		if (ret > 0) {
-		IP = hostip;
-		}
-
-		if (ret <= 0) {
+		if (!IsNetworkInit()) {
         msgTxt.SetText(LANGUAGE.Couldnotinitializenetwork);
 		}
 
-		if (IP && ret > 0) {
-			msgTxt.SetTextf("IP: %s", IP);
+		if(btn1.GetState() == STATE_CLICKED) {
+			btn1.ResetState();
+			break;
+		}
+    }
+
+    if (IsNetworkInit()) {
+            msgTxt.SetTextf("IP: %s", GetNetworkIP());
 			cntMissFiles = 0;
 			u32 i = 0;
 			char filename[11];
@@ -1701,16 +1697,8 @@ int NetworkInitPromp(int choice2)
 					}
 				}
 			}
-			break;
 		}
 
-		if(btn1.GetState() == STATE_CLICKED) {
-			IP = 0;
-			ret = -1;
-			break;
-		}
-
-    }
 	promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
 	while(promptWindow.GetEffect() > 0) usleep(50);
 	HaltGui();
@@ -1718,9 +1706,7 @@ int NetworkInitPromp(int choice2)
 	mainWindow->SetState(STATE_DEFAULT);
 	ResumeGui();
 
-    networkisinitialized = 1;
-
-	return ret;
+	return;
 }
 
 /****************************************************************************
@@ -2139,15 +2125,11 @@ ProgressDownloadWindow(int choice2)
  * progress bar showing % completion, or a throbber that only shows that an
  * action is in progress.
  ***************************************************************************/
-int
-ProgressUpdateWindow()
-{
+#define BLOCKSIZE           1024
 
+int ProgressUpdateWindow()
+{
     int ret = 0, failed = 0;
-    const unsigned int blocksize = 1024;
-    char hostip[16];
-    char * IP = NULL;
-    u8 blockbuffer[blocksize] ATTRIBUTE_ALIGN(32);
 
 	GuiWindow promptWindow(472,320);
 	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
@@ -2255,23 +2237,19 @@ ProgressUpdateWindow()
     snprintf(dolpath, sizeof(dolpath), "%sbootnew.dol", Settings.update_path);
     snprintf(dolpathsuccess, sizeof(dolpathsuccess), "%sboot.dol", Settings.update_path);
 
-	while (!IP && !(ret < 0)) {
+	while (!IsNetworkInit()) {
 
         VIDEO_WaitVSync();
 
-        ret = Net_Init(hostip);
+        Initialize_Network();
 
-		if (ret > 0) {
-		IP = hostip;
-		msgTxt.SetText(IP);
-		}
-
-		if (ret <= 0) {
+		if (IsNetworkInit()) {
+		msgTxt.SetText(GetNetworkIP());
+		} else {
         msgTxt.SetText(LANGUAGE.Couldnotinitializenetwork);
 		}
 
         if(btn1.GetState() == STATE_CLICKED) {
-			IP = 0;
 			ret = -1;
 			failed = -1;
 			btn1.ResetState();
@@ -2279,30 +2257,13 @@ ProgressUpdateWindow()
 		}
 	}
 
-	if(IP && ret >= 0) {
+	if(IsNetworkInit() && ret >= 0) {
 
-    networkisinitialized = 1;
+    int newrev = CheckUpdate();
 
-    int revnumber = 0;
-    int currentrev = atoi(SVN_REV);
+    if(newrev > 0) {
 
-///	SDCard_deInit();
-    struct block file = downloadfile("http://www.techjawa.com/usbloadergx/rev.txt");
-	FILE *pfile;
-///	SDCard_Init();
-
-    if(file.data != NULL)
-    {
-        char revtxt[10];
-		u8 i;
-		for(i=0; i<9 || i<file.size; i++)
-			revtxt[i] = file.data[i];
-		revtxt[i] = 0;
-        revnumber = atoi(revtxt);
-    }
-
-    if(revnumber > currentrev) {
-        sprintf(msg, "Rev%i %s.", revnumber, LANGUAGE.available);
+        sprintf(msg, "Rev%i %s.", newrev, LANGUAGE.available);
         int choice = WindowPrompt(msg, LANGUAGE.Doyouwanttoupdate, LANGUAGE.Updatedol, LANGUAGE.Updateall, LANGUAGE.Cancel, 0);
         if(choice == 1 || choice == 2) {
             titleTxt.SetTextf("%s USB Loader GX", LANGUAGE.updating);
@@ -2311,13 +2272,15 @@ ProgressUpdateWindow()
             promptWindow.Append(&progressbarImg);
             promptWindow.Append(&progressbarOutlineImg);
             promptWindow.Append(&prTxt);
-            msgTxt.SetTextf("%s Rev%i", LANGUAGE.Updateto, revnumber);
-            int filesize = downloadrev("http://www.techjawa.com/usbloadergx/boot.dol");
+            msgTxt.SetTextf("%s Rev%i", LANGUAGE.Updateto, newrev);
+            s32 filesize = download_request("http://www.techjawa.com/usbloadergx/boot.dol");
             if(filesize > 0) {
+                FILE * pfile;
                 pfile = fopen(dolpath, "wb");
-                for (int i = 0; i < filesize; i += blocksize) {
+                u8 blockbuffer[BLOCKSIZE] ATTRIBUTE_ALIGN(32);
+                for (s32 i = 0; i < filesize; i += BLOCKSIZE) {
                     prTxt.SetTextf("%i%%", 100*i/filesize);
-                    if ((Settings.wsprompt == yes) && (CFG.widescreen)){/////////////adjust for widescreen
+                    if ((Settings.wsprompt == yes) && (CFG.widescreen)) {
                         progressbarImg.SetTile(80*i/filesize);
                     } else {
                         progressbarImg.SetTile(100*i/filesize);
@@ -2334,11 +2297,11 @@ ProgressUpdateWindow()
 
                     u32 blksize;
                     blksize = (u32)(filesize - i);
-                    if (blksize > blocksize)
-                        blksize = blocksize;
+                    if (blksize > BLOCKSIZE)
+                        blksize = BLOCKSIZE;
 
                     ret = network_read(blockbuffer, blksize);
-                    if ((u32)ret != blksize) {
+                    if (ret != (s32) blksize) {
                         failed = -1;
                         ret = -1;
                         fclose(pfile);
@@ -2359,7 +2322,7 @@ ProgressUpdateWindow()
                 if(choice == 2) {
                 //get the icon.png and the meta.xml
                 char xmliconpath[150];
-                file = downloadfile("http://www.techjawa.com/usbloadergx/meta.file");
+                struct block file = downloadfile("http://www.techjawa.com/usbloadergx/meta.file");
                 if(file.data != NULL){
                     sprintf(xmliconpath, "%smeta.xml", Settings.update_path);
                     pfile = fopen(xmliconpath, "wb");

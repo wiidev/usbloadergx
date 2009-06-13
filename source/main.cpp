@@ -18,8 +18,6 @@
 
 #include "usbloader/wbfs.h"
 #include "usbloader/video2.h"
-#include "network/http.h"
-#include "network/dns.h"
 #include "settings/cfg.h"
 #include "language/language.h"
 #include "mload/mload.h"

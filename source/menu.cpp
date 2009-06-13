@@ -64,7 +64,6 @@ extern FreeTypeGX *fontClock;
 extern u8 shutdown;
 extern u8 reset;
 extern int cntMissFiles;
-extern int networkisinitialized;
 extern struct discHdr * gameList;
 extern u32 gameCnt;
 extern s32 gameSelected, gameStart;
@@ -170,6 +169,7 @@ void ExitGUIThreads()
 {
 	ExitRequested = 1;
 	LWP_JoinThread(guithread, NULL);
+	guithread = LWP_THREAD_NULL;
 }
 
 
@@ -709,22 +709,15 @@ static int MenuDiscList()
 
                         if (choice != 0)
                         {
-                                int netset;
                                 int choice2 = choice;
 
-                                netset = NetworkInitPromp(choice2);
+                                SearchMissingImages(choice2);
 
-                                if(netset < 0)
+                                if(IsNetworkInit() == false)
                                 {
-                                        WindowPrompt(LANGUAGE.Networkiniterror, 0, LANGUAGE.ok,0,0,0);
-                                        netcheck = false;
+                                   WindowPrompt(LANGUAGE.Networkiniterror, 0, LANGUAGE.ok,0,0,0);
 
-                                } else  {
-                    netcheck = true;
-                                }
-
-                                if (netcheck)
-                                {
+                                } else {
 
                                         if (GetMissingFiles() != NULL && cntMissFiles > 0)
 
@@ -1872,7 +1865,7 @@ int MainMenu(int menu)
                 break;
     }
 
-    if(IOS_GetVersion() != ios2 || networkisinitialized == 1) {
+    if(IOS_GetVersion() != ios2 || IsNetworkInit() == true) {
         ret = Sys_IosReload(ios2);
         if(ret < 0) {
             Sys_IosReload(249);
