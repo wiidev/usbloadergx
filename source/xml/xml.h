@@ -43,6 +43,7 @@ struct gameXMLinfo
 	char iso_sha1[50];
 	int accessoryCnt;
 	int accessoryReqCnt;
+	int wifiCnt;
 	
 } ;
 

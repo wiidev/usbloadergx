@@ -65,7 +65,7 @@ showGameInfo(char *ID, u8 *headerID)
 	int newline=1;
 	u8 page =1;
 
-   // GuiText * debugTxt = NULL;
+ //   GuiText * debugTxt = NULL;
 
     GuiImageData * playersImgData = NULL;
     GuiImage * playersImg = NULL;
@@ -116,6 +116,7 @@ showGameInfo(char *ID, u8 *headerID)
     GuiText * genreTxt = NULL;
     GuiText * betaTxt = NULL;
     GuiText * beta1Txt = NULL;
+//	GuiText ** wifiTxt = NULL;
 
 	GuiWindow gameinfoWindow(600,308);
 	gameinfoWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
@@ -186,90 +187,90 @@ showGameInfo(char *ID, u8 *headerID)
 	char linebuf2[100] = "";
 
 	// set images for required input
-	for (int i=0;strcmp(gameinfo.accessories_required[i+1],"") != 0;i++)
+	for (int i=1;strcmp(gameinfo.accessories_required[i],"") != 0;i++)
 			{
-			if (strcmp(gameinfo.accessories_required[i+1],"nunchuk")==0)
+			if (strcmp(gameinfo.accessories_required[i],"nunchuk")==0)
 			{nunchuckImgData = new GuiImageData(nunchuckR_png);nunchuk=1;}
 			else
 			nunchuckImgData = new GuiImageData(nunchuck_png);
 
-			if (strcmp(gameinfo.accessories_required[i+1],"classiccontroller")==0)
+			if (strcmp(gameinfo.accessories_required[i],"classiccontroller")==0)
 			{classiccontrollerImgData = new GuiImageData(classiccontrollerR_png);classiccontroller=1;}
 			else
 			classiccontrollerImgData = new GuiImageData(classiccontroller_png);
 
-			if (strcmp(gameinfo.accessories_required[i+1],"guitar")==0)
+			if (strcmp(gameinfo.accessories_required[i],"guitar")==0)
 			{guitarImgData = new GuiImageData(guitarR_png);guitar=1;}
 			else
 			guitarImgData = new GuiImageData(guitar_png);
 
-			if (strcmp(gameinfo.accessories_required[i+1],"gamecube")==0)
+			if (strcmp(gameinfo.accessories_required[i],"gamecube")==0)
 			{gamecubeImgData = new GuiImageData(gcncontrollerR_png);gamecube=1;}
 			else
 			gamecubeImgData = new GuiImageData(gcncontroller_png);
 
-			if (strcmp(gameinfo.accessories_required[i+1],"wheel")==0)
+			if (strcmp(gameinfo.accessories_required[i],"wheel")==0)
 			{wheelImgData = new GuiImageData(wheelR_png);wheel=1;}
 			else
 			wheelImgData = new GuiImageData(wheel_png);
 
-			if (strcmp(gameinfo.accessories_required[i+1],"motionplus")==0)
+			if (strcmp(gameinfo.accessories_required[i],"motionplus")==0)
 			{motionplusImgData = new GuiImageData(motionplusR_png);motionplus=1;}
 			else
 			motionplusImgData = new GuiImageData(motionplus_png);
 
-			if (strcmp(gameinfo.accessories_required[i+1],"drums")==0)
+			if (strcmp(gameinfo.accessories_required[i],"drums")==0)
 			{drumsImgData = new GuiImageData(drumsR_png);drums=1;}
 			else
 			drumsImgData = new GuiImageData(drums_png);
 
-			if (strcmp(gameinfo.accessories_required[i+1],"microphone")==0)
+			if (strcmp(gameinfo.accessories_required[i],"microphone")==0)
 			{microphoneImgData = new GuiImageData(microphoneR_png);microphone=1;}
 			else
 			microphoneImgData = new GuiImageData(microphone_png);
 
-			if (strcmp(gameinfo.accessories_required[i+1],"balanceboard")==0)
+			if (strcmp(gameinfo.accessories_required[i],"balanceboard")==0)
 			{balanceboardImgData = new GuiImageData(balanceboardR_png);balanceboard=1;}
 			else
 			balanceboardImgData = new GuiImageData(balanceboard_png);
 
-			if (strcmp(gameinfo.accessories_required[i+1],"dancepad")==0)
+			if (strcmp(gameinfo.accessories_required[i],"dancepad")==0)
 			{dancepadImgData = new GuiImageData(dancepadR_png);dancepad=1;}
 			else
 			dancepadImgData = new GuiImageData(dancepad_png);
 
 			}
-	for (int i=0;strcmp(gameinfo.accessories[i+1],"") != 0;i++)
+	for (int i=1;strcmp(gameinfo.accessories[i],"") != 0;i++)
 			{
 
-			if (strcmp(gameinfo.accessories_required[i],"classiccontroller")==0)
+			if (strcmp(gameinfo.accessories[i],"classiccontroller")==0)
 			classiccontroller=1;
 
-			if (strcmp(gameinfo.accessories[i+1],"nunchuk")==0)
+			if (strcmp(gameinfo.accessories[i],"nunchuk")==0)
 			{nunchuk=1;}
 
-			if (strcmp(gameinfo.accessories[i+1],"guitar")==0)
+			if (strcmp(gameinfo.accessories[i],"guitar")==0)
 			guitar=1;
 
-			if (strcmp(gameinfo.accessories_required[i],"drums")==0)
+			if (strcmp(gameinfo.accessories[i],"drums")==0)
 			drums=1;
 
-			if (strcmp(gameinfo.accessories_required[i],"dancepad")==0)
+			if (strcmp(gameinfo.accessories[i],"dancepad")==0)
 			dancepad=1;
 
-			if (strcmp(gameinfo.accessories_required[i],"motionplus")==0)
+			if (strcmp(gameinfo.accessories[i],"motionplus")==0)
 			motionplus=1;
 
-			if (strcmp(gameinfo.accessories_required[i],"wheel")==0)
+			if (strcmp(gameinfo.accessories[i],"wheel")==0)
 			wheel=1;
 
-			if (strcmp(gameinfo.accessories_required[i],"balanceboard")==0)
+			if (strcmp(gameinfo.accessories[i],"balanceboard")==0)
 			balanceboard=1;
 
-			if (strcmp(gameinfo.accessories_required[i],"microphone")==0)
+			if (strcmp(gameinfo.accessories[i],"microphone")==0)
 			microphone=1;
 
-			if (strcmp(gameinfo.accessories_required[i],"gamecube")==0)
+			if (strcmp(gameinfo.accessories[i],"gamecube")==0)
 			gamecube=1;
 	}
 
@@ -415,6 +416,12 @@ showGameInfo(char *ID, u8 *headerID)
 			wifiplayersImgData= new GuiImageData(wifi4_png);}
 		if (atoi(gameinfo.wifiplayers)>4){
 			wifiplayersImgData= new GuiImageData(wifi8_png);}
+		/*if (atoi(gameinfo.wifiplayers)>8){       uncomment this when we actually have these images and it is needed
+			wifiplayersImgData= new GuiImageData(wifi12_png);}
+		if (atoi(gameinfo.wifiplayers)>12){
+			wifiplayersImgData= new GuiImageData(wifi16_png);}
+		if (atoi(gameinfo.wifiplayers)>16){
+			wifiplayersImgData= new GuiImageData(wifi32_png);}*/
 		wifiplayersImg = new GuiImage(wifiplayersImgData);
 		wifiplayersImg->SetWidescreen(CFG.widescreen);
 		wifiplayersImg->SetPosition(intputX , inputY);
@@ -439,7 +446,7 @@ showGameInfo(char *ID, u8 *headerID)
 		else if (strcmp(gameinfo.ratingvalueESRB,"AO")==0)
 			ratingImgData = new GuiImageData(esrb_ao_png);
 		else {ratingImgData = new GuiImageData(norating_png);}
-		}													//there are 2 values here cause some countries are stupid and
+		}											//there are 2 values here cause some countries are stupid and
 	else if (strcmp(gameinfo.ratingtype,"PEGI")==0) {//can't use the same as everybody else
 		if ((strcmp(gameinfo.ratingvaluePEGI,"3")==0)||(strcmp(gameinfo.ratingvaluePEGI,"4")==0))
 			ratingImgData = new GuiImageData(pegi_3_png);
@@ -453,11 +460,9 @@ showGameInfo(char *ID, u8 *headerID)
 			ratingImgData = new GuiImageData(pegi_18_png);
 		else {ratingImgData = new GuiImageData(norating_png);}
 		}
-
 	else if (strcmp(gameinfo.ratingtype,"CERO")==0) {
 		if (strcmp(gameinfo.ratingvalueCERO,"A")==0)
 			ratingImgData = new GuiImageData(cero_a_png);
-			//ratingImgData = new GuiImageData(cero_b_png);
 		else if (strcmp(gameinfo.ratingvalueCERO,"B")==0)
 			ratingImgData = new GuiImageData(cero_b_png);
 		else if (strcmp(gameinfo.ratingvalueCERO,"C")==0)
@@ -480,16 +485,17 @@ showGameInfo(char *ID, u8 *headerID)
 	}
 
 //////////debugging line
-/*	snprintf(linebuf, sizeof(linebuf), "%s  %s  %s  %s %i %s",gameinfo.ratingtype ,gameinfo.ratingvalueESRB,gameinfo.ratingvaluePEGI,gameinfo.ratingvalueCERO, ass,LANGUAGE.released);
+//	snprintf(linebuf, sizeof(linebuf), "%s%s%s%s%i%i%i",gameinfo.accessories_required[1],gameinfo.accessories[1],gameinfo.accessories[2],gameinfo.accessories[3],gameinfo.accessoryCnt,
+//	guitar,microphone);
 
-		for (int i=0;strcmp(gameinfo.accessories_required[i+1],"") != 0;i++)
+		/*for (int i=0;strcmp(gameinfo.accessories_required[i+1],"") != 0;i++)
 			{
 				snprintf(linebuf, sizeof(linebuf), "%s  %s",linebuf, gameinfo.accessories_required[i+1]);
-			}
+			}*/
 
-debugTxt = new GuiText(linebuf, 18, (GXColor){0,0,0, 255});
-			debugTxt->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM); debugTxt->SetPosition(0,0);
-			gameinfoWindow.Append(debugTxt);*/
+//debugTxt = new GuiText(linebuf, 18, (GXColor){0,0,0, 255});
+//			debugTxt->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM); debugTxt->SetPosition(0,0);
+//			gameinfoWindow.Append(debugTxt);
 
 	if (strcmp(gameinfo.title,"") != 0)
 	{snprintf(linebuf, sizeof(linebuf), "%s",gameinfo.title);
@@ -588,18 +594,20 @@ debugTxt = new GuiText(linebuf, 18, (GXColor){0,0,0, 255});
 			gameinfoWindow.Append(beta1Txt);
 
 	// WiFi Shit  commented out cause it has a code dump in it still
-	/*if (strcmp(gameinfo.wififeatures[0],"") != 0){
-		snprintf(linebuf, sizeof(linebuf), "%s:",LANGUAGE.wififeatures);
-					wifiTxt = new GuiText(linebuf, 16, (GXColor){0,0,0, 255});
-					wifiTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP); wifiTxt->SetPosition(205,12+y);  y+=(20 * newline);
-					gameinfoWindow.Append(wifiTxt);}
-	for (int i=1;strcmp(gameinfo.wififeatures[i],"") != 0;i++)
+//	wifiTxt = new GuiText * [gameinfo.wifiCnt];
+//	int wifiY=0;
+	/*for (int i=gameinfo.wifiCnt;strcmp(gameinfo.wififeatures[i],"") != 0;i--)
 			{
 				snprintf(linebuf, sizeof(linebuf), "%s",gameinfo.wififeatures[i]);
 					wifiTxt[i] = new GuiText(linebuf, 16, (GXColor){0,0,0, 255});
-					wifiTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); wifiTxt[i]->SetPosition(210,12+y);  y+=(20 * newline);
+					wifiTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); wifiTxt[i]->SetPosition(215,200+wifiY);  wifiY-=(20 * newline);
 					gameinfoWindow.Append(wifiTxt[i]);}*/
 
+	/*if (strcmp(gameinfo.wififeatures[1],"") != 0){
+		snprintf(linebuf, sizeof(linebuf), "%s:",LANGUAGE.wififeatures);
+					wifiTxt[0] = new GuiText(linebuf, 16, (GXColor){0,0,0, 255});
+					wifiTxt[0]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); wifiTxt[0]->SetPosition(205,200+wifiY);  //wifiY+=(20 * newline);
+					gameinfoWindow.Append(wifiTxt[0]);}*/
 	//synopsis
 	if (strcmp(gameinfo.synopsis,"") != 0)
 			{snprintf(linebuf, sizeof(linebuf), "%s", gameinfo.synopsis);
@@ -700,7 +708,7 @@ debugTxt = new GuiText(linebuf, 18, (GXColor){0,0,0, 255});
 	mainWindow->Remove(&gameinfoWindow);
 	mainWindow->SetState(STATE_DEFAULT);
 
-// use this to display variables on the window GuiText * debugTxt = NULL;
+
     delete playersImgData;
     delete playersImg;
 
@@ -750,6 +758,12 @@ debugTxt = new GuiText(linebuf, 18, (GXColor){0,0,0, 255});
     delete genreTxt;
     delete betaTxt;
     delete beta1Txt;
+	/*if (gameinfo.wifiCnt>0){
+		for(int i=0; i<gameinfo.wifiCnt; i++)
+			{
+				delete wifiTxt[i];
+			}
+		}*/
 	if (nodata==0)FreeXMLMemory();
 	//void FreeXMLDeletePart();
 	/*

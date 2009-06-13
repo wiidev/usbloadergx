@@ -518,7 +518,7 @@ void GuiGameGrid::Draw()
 
 	btnRowUp->Draw();
 	btnRowDown->Draw();
-	debugTxt->Draw();
+	//debugTxt->Draw();
 
 	this->UpdateEffects();
 }
@@ -529,14 +529,7 @@ void GuiGameGrid::Draw()
 void GuiGameGrid::ChangeRows(int n)
 {
 
-	
-	
-	//resize game covers
-	
-	
-	
-	
-		rows=n;
+	rows=n;
 	for(int i=0; i < gameCnt; i++) {
 		coverImg[i] = new GuiImage(cover[i]);
 		coverImg[i]->SetWidescreen(CFG.widescreen);
@@ -740,9 +733,9 @@ void GuiGameGrid::Update(GuiTrigger * t)
 	}
 	//if (realCnt!=0)goRight=(12*(pagesize-realCnt)/2);
 	// for debugging
-	snprintf(debugbuffer, sizeof(debugbuffer), "gameCnt: %i listOffset: %i", gameCnt,listOffset);
-	debugTxt->SetText(debugbuffer);
-		debugTxt->Draw();
+	//snprintf(debugbuffer, sizeof(debugbuffer), "count: %i listOffset: %i", count,listOffset);
+	//debugTxt->SetText(debugbuffer);
+	//	debugTxt->Draw();
 	
 	btnRight->Update(t);
 	btnLeft->Update(t);
@@ -799,7 +792,7 @@ void GuiGameGrid::Update(GuiTrigger * t)
 	
 	
 	// navigation
-	if(!focus || gameCnt <= pagesize || (game[bob[0]]->GetEffect() && game[bob[pagesize-1]]->GetEffect()))
+	if(!focus || gameCnt < pagesize || (game[bob[0]]->GetEffect() && game[bob[pagesize-1]]->GetEffect()))
 		return; // skip navigation
 
 	if (t->Left()  || btnLeft->GetState() == STATE_CLICKED) {
@@ -810,7 +803,6 @@ void GuiGameGrid::Update(GuiTrigger * t)
 		if(!((buttons & WPAD_BUTTON_A) || (buttons & WPAD_BUTTON_MINUS) || t->Left())) {
 			btnLeft->ResetState();
 			speed = SHIFT_SPEED;
-			//goback=1;
 			return;
 		}goLeft=12;
 		
@@ -825,11 +817,7 @@ void GuiGameGrid::Update(GuiTrigger * t)
 			if (rows==2)coverImg[(listOffset + pagesize-i) % gameCnt]->SetPosition(0,-50);// only for 2 rows
 		
 			}
-		//game[bob[pagesize-1]]->SetPosition(0, RADIUS);
-
 		if (mover<11){
-		//for (int i=0; i<pagesize; i++) {
-			//game[bob[i]]->SetEffect(EFFECT_GOROUND, -speed, DEG_OFFSET, RADIUS, 270-(pagesize-2*i-3)*DEG_OFFSET/2, 1, 0, RADIUS);
 		if(CFG.widescreen)
 				{
 		if (rows==1){
@@ -1035,7 +1023,6 @@ void GuiGameGrid::Update(GuiTrigger * t)
 		}
 		mover++;
 		goLeft--;
-		//if (mover2<12)mover2++;
 		
 		}
 		else {goLeft=0;mover=0;
@@ -1045,9 +1032,7 @@ void GuiGameGrid::Update(GuiTrigger * t)
 		for (int i=0; i<pagesize; i++) {
 			bob[i] = (firstPic+i)%pagesize;
 		}
-		snprintf(debugbuffer, sizeof(debugbuffer), "pagesize: %i listOffset: %i  gameCnt: %i   firstPic: %i", pagesize,listOffset,gameCnt,firstPic);
-		debugTxt->SetText(debugbuffer);
-	
+		
 	}
 	}
 	
@@ -1059,7 +1044,6 @@ void GuiGameGrid::Update(GuiTrigger * t)
 		if(!((buttons & WPAD_BUTTON_A) || (buttons & WPAD_BUTTON_PLUS) || t->Right())) {
 			btnRight->ResetState();
 			speed=SHIFT_SPEED;
-			//goback=1;
 			return;
 		}
 		goRight=12;
@@ -1072,7 +1056,6 @@ void GuiGameGrid::Update(GuiTrigger * t)
 	if (mover<11){
 	
 	
-	//int offset1 = listOffset-1, offset2 = listOffset-2;
 	
 	for (int i=1; i<(rows+1); i++){ 
 		int tmp = listOffset-i;
@@ -1085,11 +1068,6 @@ void GuiGameGrid::Update(GuiTrigger * t)
 			if (rows==3)coverImg[tmp]->SetPosition(0,-80);// only for 3 rows
 			if (rows==2)coverImg[tmp]->SetPosition(0,-50);// only for 2 rows   
 			}
-		//if (listOffset==0)listOffset=(gameCnt-1); 
-		//game[bob[5]]->SetImage(coverImg[listOffset-rows]);  rows==1
-		//if (listOffset==0)listOffset=(gameCnt-1); 
-		//game[bob[14]]->SetImage(coverImg[listOffset-2]);
-		//game[bob[15]]->SetImage(coverImg[listOffset-1]);
 		if(CFG.widescreen)
 				{
 		if (rows==1){
@@ -1295,7 +1273,6 @@ void GuiGameGrid::Update(GuiTrigger * t)
 		}
 		mover++;
 		goRight--;
-		//if (mover2>-12)mover2--;
 		
 		}
 		else {goRight=0;mover=0;

@@ -464,7 +464,7 @@ bool LoadGameInfoFromXML(char* gameid, char* langtxt)
 		GetTextFromNode(nodeid, nodedata, "wi-fi", "players", NULL, MXML_NO_DESCEND, gameinfo.wifiplayers);
 		nodefound = mxmlFindElement(nodeid, nodedata, "wi-fi", NULL, NULL, MXML_NO_DESCEND);
 		if (nodefound != NULL) {
-			int incr = 0;
+			gameinfo.wifiCnt = 0;
 			nodeindextmp = mxmlIndexNew(nodefound,"feature", NULL);
 			nodeidtmp = mxmlIndexReset(nodeindextmp);
 			
@@ -472,9 +472,9 @@ bool LoadGameInfoFromXML(char* gameid, char* langtxt)
 			{
 				nodeidtmp = mxmlIndexFind(nodeindextmp,"feature", NULL);
 				if (nodeidtmp != NULL) {
-					++incr;
-					GetTextFromNode(nodeidtmp, nodedata, "feature", NULL, NULL, MXML_DESCEND, gameinfo.wififeatures[incr]);
-				}
+					++gameinfo.wifiCnt;
+					GetTextFromNode(nodeidtmp, nodedata, "feature", NULL, NULL, MXML_DESCEND, gameinfo.wififeatures[gameinfo.wifiCnt]);
+				}gameinfo.wififeatures[gameinfo.wifiCnt][0] = toupper(gameinfo.wififeatures[gameinfo.wifiCnt][0]);
 			}
 		}
 		
