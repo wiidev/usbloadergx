@@ -37,6 +37,7 @@ int mover=0, mover2=0;
 u8 goback=0;
 int goLeft = 0, goRight=0;
 char debugbuffer[100];
+int c;
 
 /**
  * Constructor for the GuiGamegrid class.
@@ -47,6 +48,7 @@ GuiGameGrid::GuiGameGrid(int w, int h, struct discHdr * l, int count, const char
 	height = h;
 	gameCnt = (count < SAFETY) ? count : SAFETY;
 	gameList = l;
+	c=count;
 	listOffset = (offset == 0) ? this->FindMenuItem(-1, 1) : offset;
 	selectable = true;
 	selectedItem = selected - offset;
@@ -137,7 +139,7 @@ GuiGameGrid::GuiGameGrid(int w, int h, struct discHdr * l, int count, const char
 	btnRowDown->SetTrigger(trig1);
 	
 	
-	
+	//if (count>0){
 
 	gameIndex = new int[pagesize];
 	game = new GuiButton * [pagesize];
@@ -365,7 +367,7 @@ GuiGameGrid::GuiGameGrid(int w, int h, struct discHdr * l, int count, const char
 		else 
 		WindowPrompt("Oops","Your Wii must be in 16:9 mode to see the gamewall.",0, LANGUAGE.ok, 0,0);
                         
-		
+		//}
 
 }
 
@@ -501,7 +503,9 @@ void GuiGameGrid::Draw()
 	LOCK(this);
 	if(!this->IsVisible())
 		return;
-
+	
+	if(c>0){
+	
 	int next = listOffset;
 
 	for(int i=0; i<pagesize; i++) {
@@ -519,8 +523,10 @@ void GuiGameGrid::Draw()
 	btnRowUp->Draw();
 	btnRowDown->Draw();
 	//debugTxt->Draw();
+	
 
 	this->UpdateEffects();
+	}
 }
 
 /**
@@ -792,7 +798,7 @@ void GuiGameGrid::Update(GuiTrigger * t)
 	
 	
 	// navigation
-	if(!focus || gameCnt < pagesize || (game[bob[0]]->GetEffect() && game[bob[pagesize-1]]->GetEffect()))
+	if(!focus || gameCnt < pagesize || (c==0)||(game[bob[0]]->GetEffect() && game[bob[pagesize-1]]->GetEffect()))
 		return; // skip navigation
 
 	if (t->Left()  || btnLeft->GetState() == STATE_CLICKED) {
@@ -1289,14 +1295,14 @@ void GuiGameGrid::Update(GuiTrigger * t)
 		}
 	}
 	
-	if (btnRowUp->GetState() == STATE_CLICKED) {
+	if ((btnRowUp->GetState() == STATE_CLICKED)&&(c>0)) {
 		if ((rows==1)&&(gameCnt>=16))this->ChangeRows(2);
 		else if ((rows==2)&&(gameCnt>=42))this->ChangeRows(3);
 		btnRowUp->ResetState();
 		return;
 	}
 
-	if (btnRowDown->GetState() == STATE_CLICKED) {
+	if ((btnRowDown->GetState() == STATE_CLICKED)&&(c>0)) {
 		if (rows==3)this->ChangeRows(2);
 		else if (rows==2)this->ChangeRows(1);
 		btnRowDown->ResetState();
