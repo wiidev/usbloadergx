@@ -15,7 +15,6 @@
 #define wbfs_malloc(x)		malloc(x)
 #define wbfs_free(x)		free(x)
 #define wbfs_ioalloc(x)		memalign(32, x)
-#define wbfs_iofree(x) free(x) // XXX should allocate in a ios heap
 #define wbfs_iofree(x)		free(x)
 #define wbfs_be16(x)		(*((u16*)(x)))
 #define wbfs_be32(x)		(*((u32*)(x)))

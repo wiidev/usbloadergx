@@ -20,9 +20,7 @@ enum {
 /* Prototypes */
 
 s32 WBFS_Init(u32);
-s32 WBFS_Open();
-s32 WBFS_Open2(int partition);
-s32 GetPartition();
+s32 WBFS_Open(void);
 s32 WBFS_Close(void);
 s32 WBFS_Format(u32, u32);
 s32 WBFS_GetCount(u32 *);
@@ -36,6 +34,10 @@ s32 WBFS_GameSize(u8 *, f32 *);
 s32 WBFS_DiskSpace(f32 *, f32 *);
 s32 WBFS_RenameGame(u8 *, const void *);
 f32 WBFS_EstimeGameSize(void);
+
+s32 __WBFS_ReadUSB(void *fp, u32 lba, u32 count, void *iobuf);
+s32 __WBFS_WriteUSB(void *fp, u32 lba, u32 count, void *iobuf);
+
 
 #ifdef __cplusplus
 }

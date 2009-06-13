@@ -217,10 +217,10 @@ s32 Disc_Wait(void)
 	return 0;
 }
 
-s32 Disc_SetUSB(u8 *id, int ios222)
+s32 Disc_SetUSB(u8 *id)
 {
 	/* Set USB mode */
-	return WDVD_SetUSBMode(id, ios222);
+	return WDVD_SetUSBMode(id);
 }
 
 s32 Disc_ReadHeader(void *outbuf)

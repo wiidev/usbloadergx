@@ -1324,7 +1324,7 @@ static int MenuInstall()
 	int menu = MENU_NONE;
     static struct discHdr headerdisc ATTRIBUTE_ALIGN(32);
 
-    Disc_SetUSB(NULL, GetPartition());
+    Disc_SetUSB(NULL);
 
     int ret, choice = 0;
 	char *name;
@@ -1582,10 +1582,7 @@ static int MenuFormat()
                             menu = MENU_SETTINGS;
 
                         } else {
-                            for(int i = 0; i < 4; i++) {
-                            ret = WBFS_Open2(i);
-                            if(ret == 0) break;
-                            }
+                            ret = WBFS_Open();
                             sprintf(text, "%s %s", text,LANGUAGE.formated);
                             WindowPrompt(LANGUAGE.Success,text,LANGUAGE.ok,0,0,0);
                             menu = MENU_DISCLIST;
@@ -1700,10 +1697,7 @@ static int MenuCheck()
             Sys_LoadMenu();
         }
 
-        for(i = 0; i < 4; i++) {
-        ret2 = WBFS_Open2(i);
-        if(ret2 == 0) break;
-        }
+        ret2 = WBFS_Open();
         if (ret2 < 0) {
             choice = WindowPrompt(LANGUAGE.NoWBFSpartitionfound,
                                     LANGUAGE.Youneedtoformatapartition,
@@ -1871,7 +1865,7 @@ int MainMenu(int menu)
             Sys_IosReload(249);
         }
     }
-    ret = Disc_SetUSB(header->id, GetPartition());
+    ret = Disc_SetUSB(header->id);
     if(ret < 0) Sys_BackToLoader();
     ret = Disc_Open();
     if(ret < 0) Sys_BackToLoader();

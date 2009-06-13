@@ -322,7 +322,7 @@ s32 WDVD_DisableReset(u8 val)
 }
 
 /** Hermes **/
-s32 WDVD_SetUSBMode(u8 *id, s32 partition)
+s32 WDVD_SetUSBMode(u8 *id)
 {
 	s32 ret;
 
@@ -334,19 +334,17 @@ s32 WDVD_SetUSBMode(u8 *id, s32 partition)
 
 
 	/* Copy ID */
-	if (id)
-		{
+	if (id) {
 		memcpy(&inbuf[2], id, 6);
-		inbuf[5] = partition;
-		}
+    }
 
 	ret = IOS_Ioctl(di_fd, IOCTL_DI_SETUSBMODE, inbuf, sizeof(inbuf), outbuf, sizeof(outbuf));
-	if(ret!=1)
-		{ // Try old cIOS 222
+	if(ret!=1) {
+	    // Try old cIOS 222
 		/* Set USB mode */
 		inbuf[0] = DI_SETWBFSMODE << 24;
 		ret = IOS_Ioctl(di_fd, DI_SETWBFSMODE, inbuf, sizeof(inbuf), outbuf, sizeof(outbuf));
-		}
+    }
 
 	if (ret < 0)
 		return ret;

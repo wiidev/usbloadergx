@@ -81,14 +81,13 @@ int Sys_IosReload(int IOS)
     SDCard_deInit();
     USBDevice_deInit();
 
-    mload_close();
-
     WPAD_Flush(0);
     WPAD_Disconnect(0);
     WPAD_Shutdown();
 
-    USBStorage_Deinit();
     WDVD_Close();
+
+    USBStorage_Deinit();
 
     if(IOS == 249 || IOS == 222 || IOS == 223) {
         for(int i = 0; i < 10; i++) {
@@ -102,12 +101,8 @@ int Sys_IosReload(int IOS)
     }
     if(ret>=0) {
 			ret = Disc_Init();
-			int i = 0;
 			if(ret>=0) {
-			for(i = 0; i < 4; i++) {
-				ret = WBFS_Open2(i);
-				if(ret == 0) break;
-			}
+			ret = WBFS_Open();
 			}
 		} else Sys_BackToLoader();
 	}

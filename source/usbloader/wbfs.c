@@ -22,7 +22,6 @@ static wbfs_t *hdd = NULL;
 /* WBFS callbacks */
 static rw_sector_callback_t readCallback  = NULL;
 static rw_sector_callback_t writeCallback = NULL;
-static int current_partition = 0;
 
 /* Variables */
 
@@ -75,35 +74,6 @@ void __WBFS_Spinner(s32 x, s32 max)
 wbfs_t *GetHddInfo(void)
 {
     return hdd;
-}
-
-s32 WBFS_Open2(int index) // index 0-3
-{
-	u32 lba;
-	/* Close hard disk */
-	if (hdd)
-		wbfs_close(hdd);hdd=0;
-
-	lba = wbfs_get_partition_LBA(index);
-
-	current_partition = index & 3;
-
-	if(lba==0xFFFFFFFF)
-		{
-		if((index & 3)==0) return WBFS_Open();
-		return -1;
-		}
-	/* Open hard disk */
-	hdd = wbfs_open_partition(readCallback, writeCallback, NULL, sector_size, 0, lba, 0);
-	if (!hdd)
-		return -1;
-
-	return 0;
-}
-
-s32 GetPartition()
-{
-    return current_partition;
 }
 
 s32 __WBFS_ReadDVD(void *fp, u32 lba, u32 len, void *iobuf)
