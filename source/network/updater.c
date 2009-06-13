@@ -6,6 +6,24 @@
 #include "http.h"
 
 static s32 connection;
+bool netcheck = false;
+
+/*Networking - Forsaekn*/
+int Net_Init(char *ip){
+
+	s32 res;
+    while ((res = net_init()) == -EAGAIN)
+	{
+		usleep(100 * 1000); //100ms
+	}
+
+    if (if_config(ip, NULL, NULL, true) < 0) {
+		printf("      Error reading IP address, exiting");
+		usleep(1000 * 1000 * 1); //1 sec
+		return FALSE;
+	}
+	return TRUE;
+}
 
 s32 network_request(const char * request)
 {

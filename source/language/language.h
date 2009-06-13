@@ -1,5 +1,4 @@
 #include <gctypes.h>
-#include "disc.h"
 
 #ifndef _LANGUAGE_H_
 #define _LANGUAGE_H_

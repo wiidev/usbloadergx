@@ -17,7 +17,9 @@ include $(DEVKITPPC)/wii_rules
 #---------------------------------------------------------------------------------
 TARGET		:=	boot
 BUILD		:=	build
-SOURCES		:=	source source/libwiigui source/images source/fonts source/sounds source/libwbfs source/unzip source/language
+SOURCES		:=	source source/libwiigui source/images source/fonts source/sounds \
+				source/libwbfs source/unzip source/language source/mload source/patches \
+				source/usbloader source/xml source/network source/settings source/prompts
 INCLUDES	:=	source
 SVNDEV		:=	-D'SVN_REV="$(shell svnversion -n ..)"'
 

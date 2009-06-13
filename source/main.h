@@ -14,7 +14,5 @@ extern struct SSettings Settings;
 
 void DefaultSettings();
 extern FreeTypeGX *fontSystem;
-extern bool netcheck;
-extern int Net_Init(char *ip);
 
 #endif

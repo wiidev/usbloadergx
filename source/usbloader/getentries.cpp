@@ -1,7 +1,7 @@
 #include <string.h>
 
-#include "wbfs.h"
-#include "cfg.h"
+#include "settings/cfg.h"
+#include "usbloader/wbfs.h"
 #include "main.h"
 
 
@@ -58,7 +58,7 @@ s32 __Menu_EntryCmpCount(const void *a, const void *b)
  * Get Gamelist
  ***************************************************************************/
 
-s32 __Menu_GetEntries(void)
+int __Menu_GetEntries(void)
 {
 	struct discHdr *buffer = NULL;
 	struct discHdr *buffer2 = NULL;

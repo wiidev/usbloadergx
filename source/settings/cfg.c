@@ -6,9 +6,11 @@
 #include <ctype.h>
 #include <ogcsys.h>
 #include <mxml.h>
-#include "cfg.h"
+
 #include "language/language.h"
-#include "xml.h" /* XML - Lustar*/
+#include "xml/xml.h" /* XML - Lustar*/
+#include "cfg.h"
+
 
 
 struct SSettings Settings;
@@ -1604,7 +1606,7 @@ void CFG_Load(void)
 	cfg_load_game_num();
 
 	if (Settings.titlesOverride==1)CFG_LoadXml();
-	
+
 	Global_Default(); //global default depends on theme information
 	CFG_LoadGlobal();
 

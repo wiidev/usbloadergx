@@ -2,14 +2,9 @@
 #define _HTTP_H_
 
 #include <errno.h>
-#include <network.h>
 #include <ogcsys.h>
-#include <string.h>
-
-#include <stdio.h>
 #include <stdarg.h>
 #include <string.h>
-#include <errno.h>
 
 #ifdef __cplusplus
 extern "C"

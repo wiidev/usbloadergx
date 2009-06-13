@@ -2,12 +2,12 @@
 #include <ogcsys.h>
 #include <string.h>
 
+#include "patches/patchcode.h"
+#include "patches/kenobiwii.h" /*FISHEARS*/
 #include "apploader.h"
 #include "wdvd.h"
 #include "wpad.h"
-#include "patchcode.h"
 #include "disc.h"
-#include "kenobiwii.h" /*FISHEARS*/
 
 /*KENOBI! - FISHEARS*/
 extern const unsigned char kenobiwii[];

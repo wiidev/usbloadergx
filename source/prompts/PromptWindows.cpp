@@ -5,23 +5,23 @@
 #include <string.h>
 #include <dirent.h>
 
+#include "usbloader/wbfs.h"
+#include "usbloader/wdvd.h"
+#include "usbloader/partition.h"
+#include "usbloader/usbstorage.h"
+#include "usbloader/getentries.h"
+#include "language/language.h"
+#include "libwiigui/gui.h"
+#include "libwiigui/gui_diskcover.h"
+#include "network/updater.h"
+#include "network/http.h"
+#include "mload/mload.h"
+#include "fatmounter.h"
+#include "listfiles.h"
 #include "menu.h"
 #include "filelist.h"
 #include "sys.h"
 #include "wpad.h"
-#include "wbfs.h"
-#include "wdvd.h"
-#include "language/language.h"
-#include "libwiigui/gui.h"
-#include "libwiigui/gui_diskcover.h"
-#include "fatmounter.h"
-#include "listfiles.h"
-#include "updater.h"
-#include "http.h"
-#include "partition.h"
-#include "usbstorage.h"
-#include "getentries.h"
-#include "mload.h"
 
 /*** Variables that are also used extern ***/
 int cntMissFiles = 0;

@@ -9,7 +9,7 @@
 #include "gui.h"
 #include "../wpad.h"
 #include "../main.h"
-#include "../cfg.h"
+#include "../settings/cfg.h"
 #include "gui_customoptionbrowser.h"
 
 #include <unistd.h>

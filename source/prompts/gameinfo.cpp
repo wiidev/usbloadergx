@@ -5,20 +5,18 @@
 #include <string.h>
 #include <dirent.h>
 
-
-#include "gameinfo.h"
-
+#include "usbloader/wbfs.h"
+#include "language/language.h"
+#include "libwiigui/gui.h"
+#include "../xml/xml.h"
 #include "menu.h"
 #include "filelist.h"
 #include "sys.h"
 #include "wpad.h"
-#include "wbfs.h"
-#include "language/language.h"
-#include "libwiigui/gui.h"
 #include "fatmounter.h"
 #include "listfiles.h"
+#include "gameinfo.h"
 
-#include "xml.h"
 
 /*** Extern variables ***/
 extern GuiWindow * mainWindow;

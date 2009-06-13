@@ -5,12 +5,11 @@
 #include <ogc/lwp_watchdog.h>
 #include <wiiuse/wpad.h>
 
-
+#include "patches/fst.h"
 #include "apploader.h"
 #include "disc.h"
 #include "video.h"
 #include "wdvd.h"
-#include "fst.h"
 
 /* Constants */
 #define PTABLE_OFFSET	0x40000

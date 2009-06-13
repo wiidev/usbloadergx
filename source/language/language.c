@@ -5,7 +5,10 @@
 #include <sys/stat.h>
 #include <ctype.h>
 #include <ogcsys.h>
+
+#include "usbloader/disc.h"
 #include "language.h"
+
 static char *cfg_name, *cfg_val;
 
 char* strcopy(char *dest, char *src, int size)

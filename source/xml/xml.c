@@ -5,8 +5,8 @@ Load game information from XML - Lustar
 */
 
 #include <mxml.h>
-#include "cfg.h"
-#include "xml.h"
+#include "settings/cfg.h"
+#include "xml/xml.h"
 #include "unzip/unzip.h"
 
 

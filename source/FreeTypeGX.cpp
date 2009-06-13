@@ -24,8 +24,9 @@
 #include "language/CH2Unicode.h"
 #include "language/GB2Unicode.h"
 #include "language/sjis2unicode.h"
+#include "settings/cfg.h"
+
 #include "main.h"
-#include "cfg.h"
 
 /*! \struct ftgxCharData_
  *

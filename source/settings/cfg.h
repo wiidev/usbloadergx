@@ -2,12 +2,13 @@
 #define _CFG_H_
 
 #include <gctypes.h>
-#include "disc.h"
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif
+
+#include "usbloader/disc.h"
 
 #define CFG_HOME_REBOOT 0
 #define CFG_HOME_EXIT   1

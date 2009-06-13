@@ -11,7 +11,7 @@
 
 #include <unistd.h>
 #include "gui_gamegrid.h"
-#include "../cfg.h"
+#include "../settings/cfg.h"
 
 #include <string.h>
 #include <math.h>

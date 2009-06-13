@@ -11,7 +11,7 @@
 
 #include <unistd.h>
 #include "gui_gamecarousel.h"
-#include "../cfg.h"
+#include "../settings/cfg.h"
 #include "../main.h"
 
 #include <string.h>

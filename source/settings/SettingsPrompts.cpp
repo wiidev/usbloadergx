@@ -2,16 +2,16 @@
 #include <unistd.h>
 #include <string.h>
 
-#include "filelist.h"
-#include "sys.h"
 #include "language/language.h"
+#include "prompts/PromptWindows.h"
 #include "libwiigui/gui.h"
 #include "libwiigui/gui_customoptionbrowser.h"
+#include "settings/cfg.h"
 #include "listfiles.h"
-#include "cfg.h"
 #include "main.h"
-#include "PromptWindows.h"
 #include "fatmounter.h"
+#include "filelist.h"
+#include "sys.h"
 
 
 /*** Extern variables ***/

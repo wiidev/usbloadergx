@@ -8,7 +8,7 @@
 #ifndef _PROMPTWINDOWS_H_
 #define _PROMPTWINDOWS_H_
 
-#include "partition.h"
+#include "usbloader/partition.h"
 
 void WindowCredits();
 int OnScreenKeyboard(char * var, u32 maxlen, int min);

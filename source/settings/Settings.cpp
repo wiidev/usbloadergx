@@ -1,17 +1,17 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "menu.h"
-#include "filelist.h"
-#include "sys.h"
-#include "wbfs.h"
+#include "usbloader/wbfs.h"
+#include "usbloader/getentries.h"
 #include "language/language.h"
 #include "libwiigui/gui.h"
 #include "libwiigui/gui_customoptionbrowser.h"
+#include "prompts/PromptWindows.h"
+#include "settings/SettingsPrompts.h"
 #include "fatmounter.h"
-#include "PromptWindows.h"
-#include "getentries.h"
-#include "SettingsPrompts.h"
+#include "menu.h"
+#include "filelist.h"
+#include "sys.h"
 
 #define MAXOPTIONS 11
 
@@ -960,7 +960,7 @@ int MenuSettings()
                                             if (Settings.godmode == 0) {
                                                 WindowPrompt(LANGUAGE.CorrectPassword,LANGUAGE.InstallRenameandDeleteareunlocked,LANGUAGE.ok,0,0,0);
                                                 Settings.godmode = 1;
-                                                __Menu_GetEntries();
+                                                //__Menu_GetEntries();
                                                 menu = MENU_DISCLIST;
                                             }
                                         } else {
@@ -972,7 +972,7 @@ int MenuSettings()
                                     if(choice == 1) {
                                         WindowPrompt(LANGUAGE.ConsoleLocked,LANGUAGE.USBLoaderisprotected,LANGUAGE.ok,0,0,0);
                                         Settings.godmode = 0;
-                                        __Menu_GetEntries();
+                                        //__Menu_GetEntries();
                                         menu = MENU_DISCLIST;
                                     }
                                 }
@@ -1906,7 +1906,7 @@ int GameSettings(struct discHdr * header)
 					LANGUAGE.ok,0,0,0);
 				}
 				else {
-					__Menu_GetEntries();
+					//__Menu_GetEntries();
 					WindowPrompt(
 					LANGUAGE.Successfullydeleted,
 					gameName,

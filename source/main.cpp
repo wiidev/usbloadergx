@@ -16,6 +16,13 @@
 #include <unistd.h>
 #include <wiiuse/wpad.h>
 
+#include "usbloader/wbfs.h"
+#include "usbloader/video2.h"
+#include "network/http.h"
+#include "network/dns.h"
+#include "settings/cfg.h"
+#include "language/language.h"
+#include "mload/mload.h"
 #include "FreeTypeGX.h"
 #include "video.h"
 #include "audio.h"
@@ -23,18 +30,10 @@
 #include "input.h"
 #include "filelist.h"
 #include "main.h"
-#include "http.h"
-#include "dns.h"
 #include "fatmounter.h"
-#include "disc.h"
-#include "wbfs.h"
 #include "sys.h"
-#include "video2.h"
 #include "wpad.h"
-#include "cfg.h"
-#include "language/language.h"
 #include "fat.h"
-#include "mload.h"
 
 
 /* Constants */
@@ -45,25 +44,6 @@
 
 FreeTypeGX *fontSystem=0;
 FreeTypeGX *fontClock=0;
-bool netcheck = false;
-
-
-/*Networking - Forsaekn*/
-int Net_Init(char *ip){
-
-	s32 res;
-    while ((res = net_init()) == -EAGAIN)
-	{
-		usleep(100 * 1000); //100ms
-	}
-
-    if (if_config(ip, NULL, NULL, true) < 0) {
-		printf("      Error reading IP address, exiting");
-		usleep(1000 * 1000 * 1); //1 sec
-		return FALSE;
-	}
-	return TRUE;
-}
 
 int
 main(int argc, char *argv[])
@@ -100,6 +80,7 @@ main(int argc, char *argv[])
     /* Load Custom IOS */
     if(Settings.cios == ios222) {
         ret2 = IOS_ReloadIOS(222);
+        load_ehc_module();
         if (ret2 < 0) {
             Settings.cios = ios249;
             ret2 = IOS_ReloadIOS(249);
@@ -112,8 +93,6 @@ main(int argc, char *argv[])
 		printf("ERROR: cIOS could not be loaded!");
 		SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
 	}
-
-    if(Settings.cios == ios222) load_ehc_module();
 
     SDCard_Init(); // now mount SD:/
     USBDevice_Init(); // and mount USB:/

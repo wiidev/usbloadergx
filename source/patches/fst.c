@@ -27,11 +27,12 @@
 #include <malloc.h>
 #include <sys/unistd.h>
 #include <sdcard/wiisd_io.h>
+
+#include "settings/cfg.h"
 #include "ogc/ipc.h"
 #include "fst.h"
 #include "dvd_broadway.h"
 #include "wpad.h"
-#include "cfg.h"
 #include "fatmounter.h"
 
 extern struct SSettings Settings;

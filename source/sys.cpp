@@ -2,17 +2,17 @@
 #include <ogcsys.h>
 #include <unistd.h>
 
-#include "sys.h"
-#include "wpad.h"
-#include "wdvd.h"
-#include "usbstorage.h"
-#include "disc.h"
-#include "wbfs.h"
+#include "usbloader/wdvd.h"
+#include "usbloader/usbstorage.h"
+#include "usbloader/disc.h"
+#include "usbloader/wbfs.h"
+#include "mload/mload.h"
 #include "video.h"
 #include "audio.h"
 #include "menu.h"
 #include "fatmounter.h"
-#include "mload.h"
+#include "sys.h"
+#include "wpad.h"
 
 /* Constants */
 #define CERTS_LEN	0x280

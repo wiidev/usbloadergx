@@ -16,24 +16,25 @@
 #include "libwiigui/gui_gamegrid.h"
 #include "libwiigui/gui_gamecarousel.h"
 #include "libwiigui/gui_gamebrowser.h"
+#include "usbloader/usbstorage.h"
+#include "usbloader/wbfs.h"
+#include "usbloader/disc.h"
+#include "usbloader/getentries.h"
+#include "language/language.h"
+#include "settings/Settings.h"
+#include "prompts/PromptWindows.h"
+#include "prompts/gameinfo.h"
+#include "mload/mload.h"
+#include "patches/patchcode.h"
+#include "network/updater.h"
 #include "menu.h"
 #include "audio.h"
 #include "input.h"
-#include "wbfs.h"
-#include "disc.h"
 #include "filelist.h"
 #include "sys.h"
-#include "patchcode.h"
 #include "wpad.h"
-#include "language/language.h"
 #include "listfiles.h"
 #include "fatmounter.h"
-#include "getentries.h"
-#include "PromptWindows.h"
-#include "Settings.h"
-#include "gameinfo.h"
-#include "mload.h"
-#include "usbstorage.h"
 
 //#include "xml.h" /* XML - Lustar*/
 
@@ -147,6 +148,7 @@ UpdateGUI (void *arg)
 					Menu_DrawRectangle(0,0,screenwidth,screenheight,(GXColor){0, 0, 0, a},1);
 					Menu_Render();
 				}
+				mainWindow->RemoveAll();
 				ShutoffRumble();
 				return 0;
 			}
@@ -1814,7 +1816,6 @@ int MainMenu(int menu)
 				break;
 		}
 	}
-
 	ExitGUIThreads();
 
     bgMusic->Stop();

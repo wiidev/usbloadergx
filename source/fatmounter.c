@@ -7,7 +7,8 @@
 #include <ogc/system.h>
 #include <ogc/usbstorage.h>
 #include <sdcard/wiisd_io.h>
-#include "usbstorage.h"
+
+#include "usbloader/usbstorage.h"
 
 //these are the only stable and speed is good
 #define CACHE 32

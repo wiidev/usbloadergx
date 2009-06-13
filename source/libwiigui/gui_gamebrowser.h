@@ -2,7 +2,7 @@
 #define _GUIGAMEBROWSER_H_
 
 #include "gui.h"
-#include "../disc.h"
+#include "../usbloader/disc.h"
 
 class GuiGameBrowser : public GuiElement
 {

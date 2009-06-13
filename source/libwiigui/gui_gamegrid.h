@@ -2,7 +2,7 @@
 #define _GUIGAMEGRID_H_
 
 #include "gui.h"
-#include "../disc.h"
+#include "../usbloader/disc.h"
 
 class GuiGameGrid : public GuiElement
 {

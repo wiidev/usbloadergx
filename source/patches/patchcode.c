@@ -23,8 +23,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <gccore.h>
+#include "usbloader/apploader.h"
 #include "geckomenu.h"
-#include "apploader.h"
 #include "patchcode.h"
 #include "fwrite_patch.h"
 
