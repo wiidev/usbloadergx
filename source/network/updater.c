@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <ogcsys.h>
-#include <network.h>
 
 #include "http.h"
 

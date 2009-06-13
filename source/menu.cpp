@@ -118,6 +118,7 @@ UpdateGUI (void *arg)
 		}
 		else
 		{
+		    if(!ExitRequested) {
 			mainWindow->Draw();
 			if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0 && mainWindow->GetState() != STATE_DISABLED)
 				mainWindow->DrawTooltip();
@@ -140,8 +141,7 @@ UpdateGUI (void *arg)
 			for(int i=0; i < 4; i++)
 				mainWindow->Update(&userInput[i]);
 
-			if(ExitRequested)
-			{
+			} else {
 				for(int a = 5; a < 255; a += 10)
 				{
 					mainWindow->Draw();
@@ -209,9 +209,9 @@ static int MenuDiscList()
 
         WBFS_DiskSpace(&used, &freespace);
 
-    if (!gameCnt) { //if there is no list of games to display
-        nolist = 1;
-    }
+        if (!gameCnt) { //if there is no list of games to display
+            nolist = 1;
+        }
 
 
         GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
@@ -246,13 +246,13 @@ static int MenuDiscList()
         snprintf(imgPath, sizeof(imgPath), "%sbattery_bar.png", CFG.theme_path);
         GuiImageData batteryBar(imgPath, battery_bar_png);
 
-    snprintf(imgPath, sizeof(imgPath), "%sfavIcon.png", CFG.theme_path);
+        snprintf(imgPath, sizeof(imgPath), "%sfavIcon.png", CFG.theme_path);
         GuiImageData imgfavIcon(imgPath, favIcon_png);
-    snprintf(imgPath, sizeof(imgPath), "%sfavIcon_gray.png", CFG.theme_path);
+        snprintf(imgPath, sizeof(imgPath), "%sfavIcon_gray.png", CFG.theme_path);
         GuiImageData imgfavIcon_gray(imgPath, favIcon_gray_png);
-    snprintf(imgPath, sizeof(imgPath), "%sabcIcon.png", CFG.theme_path);
+        snprintf(imgPath, sizeof(imgPath), "%sabcIcon.png", CFG.theme_path);
         GuiImageData imgabcIcon(imgPath, abcIcon_png);
-    snprintf(imgPath, sizeof(imgPath), "%sabcIcon_gray.png", CFG.theme_path);
+        snprintf(imgPath, sizeof(imgPath), "%sabcIcon_gray.png", CFG.theme_path);
         GuiImageData imgabcIcon_gray(imgPath, abcIcon_gray_png);
         snprintf(imgPath, sizeof(imgPath), "%splayCountIcon.png", CFG.theme_path);
         GuiImageData imgplayCountIcon(imgPath, playCountIcon_png);
@@ -271,15 +271,15 @@ static int MenuDiscList()
         snprintf(imgPath, sizeof(imgPath), "%sarrangeCarousel_gray.png", CFG.theme_path);
         GuiImageData imgarrangeCarousel_gray(imgPath, arrangeCarousel_gray_png);
 
-    GuiTrigger trigA;
+        GuiTrigger trigA;
         trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
-    GuiTrigger trigHome;
+        GuiTrigger trigHome;
         trigHome.SetButtonOnlyTrigger(-1, WPAD_BUTTON_HOME | WPAD_CLASSIC_BUTTON_HOME, 0);
-	GuiTrigger trig2;
-	trig2.SetButtonOnlyTrigger(-1, WPAD_BUTTON_2 | WPAD_CLASSIC_BUTTON_X, 0);
+        GuiTrigger trig2;
+        trig2.SetButtonOnlyTrigger(-1, WPAD_BUTTON_2 | WPAD_CLASSIC_BUTTON_X, 0);
 
 
-    char spaceinfo[30];
+        char spaceinfo[30];
         sprintf(spaceinfo,"%.2fGB %s %.2fGB %s",freespace,LANGUAGE.of,(freespace+used),LANGUAGE.free);
         GuiText usedSpaceTxt(spaceinfo, 18, (GXColor){THEME.info_r, THEME.info_g, THEME.info_b, 255});
         usedSpaceTxt.SetAlignment(THEME.hddInfoAlign, ALIGN_TOP);
@@ -327,7 +327,7 @@ static int MenuDiscList()
         if (Settings.wsprompt == yes)
                 poweroffBtnTT.SetWidescreen(CFG.widescreen);
 
-    GuiImage poweroffBtnImg(&btnpwroff);
+        GuiImage poweroffBtnImg(&btnpwroff);
         GuiImage poweroffBtnImgOver(&btnpwroffOver);
         poweroffBtnImg.SetWidescreen(CFG.widescreen);
         poweroffBtnImgOver.SetWidescreen(CFG.widescreen);
@@ -1816,25 +1816,19 @@ int MainMenu(int menu)
 				break;
 		}
 	}
-	ExitGUIThreads();
 
+	ExitGUIThreads();
     bgMusic->Stop();
 	delete bgMusic;
 	delete background;
 	delete bgImg;
 	delete mainWindow;
-	mainWindow = NULL;
-    delete pointer[0];
-    delete pointer[1];
-    delete pointer[2];
-    delete pointer[3];
+	for(int i = 0; i < 4; i++)
+    delete pointer[i];
     delete GameRegionTxt;
     delete GameIDTxt;
 	delete cover;
 	delete coverImg;
-
-	StopGX();
-	ShutdownAudio();
 
 	int ret = 0;
     struct discHdr *header = &gameList[gameSelected];
@@ -1879,10 +1873,7 @@ int MainMenu(int menu)
                 break;
     }
 
-    if(iosChoice == i223 || networkisinitialized == 1
-        || (iosChoice == i249 && Settings.cios == 1)
-        || (iosChoice == i222 && Settings.cios == 0)) {
-        if(networkisinitialized == 1) ResumeGui();
+    if(IOS_GetVersion() != ios2 || networkisinitialized == 1) {
         ret = Sys_IosReload(ios2);
         if(ret < 0) {
             Sys_IosReload(249);
@@ -1892,10 +1883,6 @@ int MainMenu(int menu)
     if(ret < 0) Sys_BackToLoader();
     ret = Disc_Open();
     if(ret < 0) Sys_BackToLoader();
-
-    SDCard_deInit();
-	USBDevice_deInit();
-    USBStorage_Deinit();
 
     u8 errorfixer002 = 0;
     switch(fix002)
@@ -2026,7 +2013,13 @@ int MainMenu(int menu)
                         break;
     }
 
+	ShutdownAudio();
+	StopGX();
+    SDCard_deInit();
+	USBDevice_deInit();
+    USBStorage_Deinit();
     mload_close();
+
     ret = Disc_WiiBoot(videoselected, cheat, vipatch, Settings.patchcountrystrings, errorfixer002);
     if (ret < 0) {
         Sys_LoadMenu();
