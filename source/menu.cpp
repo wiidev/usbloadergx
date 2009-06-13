@@ -681,7 +681,6 @@ static int MenuDiscList()
 
                 else if(sdcardBtn.GetState() == STATE_CLICKED)
                 {
-                        USBDevice_ReInit();
                         SDCard_deInit();
                         SDCard_Init();
                         if (Settings.gameDisplay==list){

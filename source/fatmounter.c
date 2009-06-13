@@ -160,13 +160,6 @@ int USBDevice_Init()
 	}
 	return -1;
 }
-void USBDevice_ReInit()
-{
-    __io_usbstorage.shutdown();
-    __io_wiiums.shutdown();
-    if(__io_usbstorage.startup()) return;
-    else __io_wiiums.startup();
-}
 
 void USBDevice_deInit()
 {

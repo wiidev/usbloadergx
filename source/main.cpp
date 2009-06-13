@@ -35,6 +35,7 @@
 #include "wpad.h"
 #include "fat.h"
 
+//#define SPECIAL_FOR_ARDI // Fix Problem with Trekstor Classic 250GB
 
 /* Constants */
 #define CONSOLE_XCOORD		260
@@ -48,8 +49,20 @@ FreeTypeGX *fontClock=0;
 int
 main(int argc, char *argv[])
 {
-
 	s32 ret2;
+	u8 preloaded_ios = 0;
+#ifdef SPECIAL_FOR_ARDI
+	if( (ret2 = IOS_ReloadIOS(249)) >=0 )
+		preloaded_ios = 249;
+	else
+	{
+		if( (ret2 = IOS_ReloadIOS(222)) >=0 )
+		{
+			load_ehc_module();
+			preloaded_ios = 222;
+		}
+	}
+#endif
 
 	SDCard_Init(); // mount SD for loading cfg's
 	USBDevice_Init(); // and mount USB:/
@@ -78,14 +91,14 @@ main(int argc, char *argv[])
 	USBDevice_deInit();// unmount USB for reloading IOS
 
     /* Load Custom IOS */
-    if(Settings.cios == ios222) {
+    if(Settings.cios == ios222 && preloaded_ios != 222) {
         ret2 = IOS_ReloadIOS(222);
         load_ehc_module();
         if (ret2 < 0) {
             Settings.cios = ios249;
             ret2 = IOS_ReloadIOS(249);
         }
-	} else {
+	} else if(preloaded_ios != 249) {
 	    ret2 = IOS_ReloadIOS(249);
 	}
 

@@ -2294,32 +2294,11 @@ ProgressUpdateWindow()
     if(file.data != NULL)
     {
         char revtxt[10];
-		char rev_txt[14];
-		sprintf(rev_txt, "%srev.txt", Settings.update_path);
-        pfile = fopen(rev_txt, "w");
-        fwrite(file.data,1,file.size,pfile);
-        fclose(pfile);
-        //has to be repeated or it isnt working (first file download bug)
-        pfile = fopen(rev_txt, "w");
-        fwrite(file.data,1,file.size,pfile);
-        fclose(pfile);
-        //"w+" doesnt work, needs to be reopened as "r"
-        pfile = fopen(rev_txt, "r");
-        int c = 0, i = 0;
-        while(c != EOF || i < 10) {
-            c = fgetc(pfile);
-            if (c != EOF) {
-            revtxt[i] = c;
-            } else {
-            revtxt[i] = 0x00;
-            break;
-            }
-            i++;
-        }
-        fclose(pfile);
+		u8 i;
+		for(i=0; i<9 || i<file.size; i++)
+			revtxt[i] = file.data[i];
+		revtxt[i] = 0;
         revnumber = atoi(revtxt);
-        remove(rev_txt);
-        free(file.data);
     }
 
     if(revnumber > currentrev) {

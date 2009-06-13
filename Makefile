@@ -8,7 +8,6 @@ $(error "Please set DEVKITPPC in your environment. export DEVKITPPC=<path to>dev
 endif
 
 include $(DEVKITPPC)/wii_rules
-
 #---------------------------------------------------------------------------------
 # TARGET is the name of the output
 # BUILD is the directory where object files & intermediate files will be placed
@@ -27,8 +26,8 @@ SVNDEV		:=	-D'SVN_REV="$(shell svnversion -n ..)"'
 # options for code generation
 #---------------------------------------------------------------------------------
 
-CFLAGS		=	-g -O2 -Wall $(SVNDEV) $(MACHDEP) $(INCLUDE)
-CXXFLAGS	=	-save-temps -Xassembler -aln=$@.lst $(CFLAGS)
+CFLAGS		=	-g -O2 -save-temps -Wall $(SVNDEV) $(MACHDEP) $(INCLUDE)
+CXXFLAGS	=	-Xassembler -aln=$@.lst $(CFLAGS)
 LDFLAGS		=	-g $(MACHDEP) -Wl,-Map,$(notdir $@).map,--section-start,.init=0x80a00100
 
 #---------------------------------------------------------------------------------
