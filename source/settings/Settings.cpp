@@ -37,6 +37,10 @@ int MenuSettings()
 	int ret;
 	int choice = 0;
 	bool exit = false;
+	
+	// backup game language setting
+	int opt_lang = 0;
+	opt_lang = Settings.language;
 
 	enum {
     FADE,
@@ -1628,9 +1632,20 @@ int MenuSettings()
 	w.SetEffect(EFFECT_FADE, -20);
 	while(w.GetEffect()>0) usleep(50);
 
+
+	// if language has changed, reload titles
+	int opt_langnew = 0;
+	opt_langnew = Settings.language; 
+	if (Settings.titlesOverride==1 && opt_lang != opt_langnew) {
+		CFG_LoadXml(true, true, false); // open file, reload titles, do not keep in memory
+		menu = MENU_DISCLIST;
+	}
+	
 	HaltGui();
+
 	mainWindow->RemoveAll();
 	mainWindow->Append(bgImg);
+		
 	ResumeGui();
 	return menu;
 }
@@ -1644,7 +1659,7 @@ int GameSettings(struct discHdr * header)
 	bool exit = false;
 	int ret;
 	int retVal = 0;
-
+		
 	char gameName[31];
 
 	if (strlen(get_title(header)) < (27 + 3)) {
@@ -1766,7 +1781,9 @@ int GameSettings(struct discHdr * header)
 		parentalcontrolChoice = 0;
 		fix002 = off;
 	}
-
+	
+	int opt_lang = languageChoice; // backup language setting
+	
 	ResumeGui();
 
 	while(!exit)
@@ -1868,6 +1885,14 @@ int GameSettings(struct discHdr * header)
 			if(isInserted(bootDevice)) {
                 if (CFG_save_game_opt(header->id))
 				{
+					// if language has changed, reload titles
+					int opt_langnew = 0;
+					game_cfg = CFG_get_game_opt(header->id);
+					if (game_cfg) opt_langnew = game_cfg->language;							
+					if (Settings.titlesOverride==1 && opt_lang != opt_langnew) {
+						CFG_LoadXml(true, true, false); // open file, reload titles, do not keep in memory
+					}
+					// titles are refreshed in menu.cpp as soon as this function returns
 					WindowPrompt(LANGUAGE.SuccessfullySaved, 0, LANGUAGE.ok, 0,0,0);
 				}
 				else

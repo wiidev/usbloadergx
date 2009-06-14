@@ -336,7 +336,7 @@ struct SSettings {
 
 void CFG_LoadGlobal(void);
 bool cfg_save_global(void);
-void CFG_LoadXml();
+void CFG_LoadXml(bool openfile, bool loadtitles, bool freemem);
 //Astidof - End of modification
 
 char *get_title(struct discHdr *header);

@@ -41,6 +41,7 @@ struct gameXMLinfo
 	char iso_crc[10];
 	char iso_md5[50];
 	char iso_sha1[50];
+	int descriptorCnt;
 	int accessoryCnt;
 	int accessoryReqCnt;
 	int wifiCnt;
@@ -58,7 +59,6 @@ char *ConvertLangTextToCode(char *langtext);
 void ConvertRating(char *ratingvalue, char *fromrating, char *torating, char *destvalue);
 void PrintGameInfo(bool showfullinfo);
 void FreeXMLMemory();
-void FreeXMLDeletePart();
 
 void title_set(char *id, char *title);
 

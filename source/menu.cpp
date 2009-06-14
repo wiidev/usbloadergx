@@ -1264,6 +1264,7 @@ static int MenuDiscList()
                                         mainWindow->Remove(&w);
                                         ResumeGui();
                                         int settret = GameSettings(header);
+										menu = MENU_DISCLIST; // refresh titles (needed if the language setting has changed)
                                         HaltGui();
                                         if (Settings.gameDisplay==list)  mainWindow->Append(gameBrowser);
                                         else if (Settings.gameDisplay==grid) mainWindow->Append(gameGrid);

@@ -10,5 +10,4 @@
 
 int MenuSettings();
 int GameSettings(struct discHdr * header);
-
 #endif

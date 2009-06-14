@@ -36,17 +36,16 @@ int
 showGameInfo(char *ID, u8 *headerID)
 {
 	u8 nodata=1;
-    	//load the xml shit
+    //load the xml shit
 	char pathname[100];
 	snprintf(pathname, sizeof(pathname), "%s%s", Settings.titlestxt_path, "wiitdb.zip");
+	// database should always be zipped, while it may be convenient detecting and loading from .xml may lead to confusion:
 	bool fileexists = OpenXMLFile(pathname);
 	if(!fileexists) {
         snprintf(pathname, sizeof(pathname), "%s%s", Settings.titlestxt_path, "wiitdb.xml");
         fileexists = OpenXMLFile(pathname);
 	}
     if(fileexists) {
-	snprintf(pathname, sizeof(pathname), "English");
-	if (Settings.titlesOverride==1)LoadTitlesFromXML(pathname, false); // options can be added to set force title language to any language and force Japanese title to English
 
 	int choice = -1;
 	//int i = 0;
@@ -116,7 +115,7 @@ showGameInfo(char *ID, u8 *headerID)
     GuiText * genreTxt = NULL;
     GuiText * betaTxt = NULL;
     GuiText * beta1Txt = NULL;
-//	GuiText ** wifiTxt = NULL;
+	GuiText ** wifiTxt = NULL;
 
 	GuiWindow gameinfoWindow(600,308);
 	gameinfoWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
@@ -160,8 +159,8 @@ showGameInfo(char *ID, u8 *headerID)
 	nextBtn.SetPosition(20,20);
 	nextBtn.SetTrigger(&trigA);
 	gameinfoWindow.Append(&nextBtn);
-
-	/*struct Game_CFG *game_cfg = NULL;
+	
+	struct Game_CFG *game_cfg = NULL;
 	int opt_lang;
 	char langtexttmp[11][22] =
 	{{"Console Default"},
@@ -175,14 +174,13 @@ showGameInfo(char *ID, u8 *headerID)
 	{"S. Chinese"},
 	{"T. Chinese"},
 	{"Korean"}};
-	game_cfg = CFG_get_game_opt(headerID);
+	game_cfg = CFG_get_game_opt((u8*)ID);
 	if (game_cfg) {
 		opt_lang = game_cfg->language;
 	} else {
 		opt_lang = Settings.language;
-	}*/
-	if (LoadGameInfoFromXML(ID,pathname))nodata=0;
-	//LoadGameInfoFromXML(ID,langtexttmp[opt_lang]);
+	}
+	if (LoadGameInfoFromXML(ID,langtexttmp[opt_lang]))nodata=0;
 	char linebuf[1000] = "";
 	char linebuf2[100] = "";
 
@@ -504,8 +502,6 @@ showGameInfo(char *ID, u8 *headerID)
 			titleTxt->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); titleTxt->SetPosition(txtXOffset,12+y);  y+=24;
 			gameinfoWindow.Append(titleTxt);}
 
-
-
 		//date
 	snprintf(linebuf2, sizeof(linebuf2), " ");
 	if (strcmp(gameinfo.day,"") != 0)
@@ -593,21 +589,22 @@ showGameInfo(char *ID, u8 *headerID)
 			beta1Txt->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM); beta1Txt->SetPosition(-17,-10);
 			gameinfoWindow.Append(beta1Txt);
 
-	// WiFi Shit  commented out cause it has a code dump in it still
-//	wifiTxt = new GuiText * [gameinfo.wifiCnt];
-//	int wifiY=0;
-	/*for (int i=gameinfo.wifiCnt;strcmp(gameinfo.wififeatures[i],"") != 0;i--)
-			{
-				snprintf(linebuf, sizeof(linebuf), "%s",gameinfo.wififeatures[i]);
-					wifiTxt[i] = new GuiText(linebuf, 16, (GXColor){0,0,0, 255});
-					wifiTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); wifiTxt[i]->SetPosition(215,200+wifiY);  wifiY-=(20 * newline);
-					gameinfoWindow.Append(wifiTxt[i]);}*/
+	wifiTxt = new GuiText * [gameinfo.wifiCnt + 1];
+	int wifiY=0;
+	for (int i=1;i<=gameinfo.wifiCnt;i++)
+		{
+			snprintf(linebuf, sizeof(linebuf), "%s",gameinfo.wififeatures[i]);
+				wifiTxt[i] = new GuiText(linebuf, 16, (GXColor){0,0,0, 255});
+				wifiTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); wifiTxt[i]->SetPosition(215,200+wifiY);  wifiY-=(20 * newline);
+				gameinfoWindow.Append(wifiTxt[i]);
+		}
 
-	/*if (strcmp(gameinfo.wififeatures[1],"") != 0){
+	if (strcmp(gameinfo.wififeatures[1],"") != 0){
 		snprintf(linebuf, sizeof(linebuf), "%s:",LANGUAGE.wififeatures);
 					wifiTxt[0] = new GuiText(linebuf, 16, (GXColor){0,0,0, 255});
 					wifiTxt[0]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); wifiTxt[0]->SetPosition(205,200+wifiY);  //wifiY+=(20 * newline);
-					gameinfoWindow.Append(wifiTxt[0]);}*/
+					gameinfoWindow.Append(wifiTxt[0]);
+	}
 	//synopsis
 	if (strcmp(gameinfo.synopsis,"") != 0)
 			{snprintf(linebuf, sizeof(linebuf), "%s", gameinfo.synopsis);
@@ -758,19 +755,13 @@ showGameInfo(char *ID, u8 *headerID)
     delete genreTxt;
     delete betaTxt;
     delete beta1Txt;
-	/*if (gameinfo.wifiCnt>0){
-		for(int i=0; i<gameinfo.wifiCnt; i++)
+	if (gameinfo.wifiCnt>0){
+		for(int i=1; i<=gameinfo.wifiCnt; i++)
 			{
 				delete wifiTxt[i];
 			}
-		}*/
+		}
 	if (nodata==0)FreeXMLMemory();
-	//void FreeXMLDeletePart();
-	/*
-	nodeid
-<dimok> nodefound
-	*/
-
 	ResumeGui();}
 	else {
 	gameinfoWindow2.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 50);
@@ -779,7 +770,7 @@ showGameInfo(char *ID, u8 *headerID)
 	mainWindow->Remove(&gameinfoWindow2);
 	mainWindow->SetState(STATE_DEFAULT);
 	ResumeGui();}
-	//FreeXMLMemory();
+	FreeXMLMemory();
 	return choice;
 
     /* File not found */

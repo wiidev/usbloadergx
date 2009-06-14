@@ -1564,15 +1564,17 @@ bool CFG_forget_game_opt(u8 *id)
 	return cfg_save_games();
 }
 
-void CFG_LoadXml()
+void CFG_LoadXml(bool openfile, bool loadtitles, bool freemem)
 {
-	char pathname[200];
 	/* load renamed titles from proper names and game info XML, needs to be after cfg_load_games - Lustar */
-	snprintf(pathname, sizeof(pathname), "%s%s", Settings.titlestxt_path, "wiitdb.xml");
-	OpenXMLFile(pathname);
-	LoadTitlesFromXML("English", false); // options can be added to set force title language to any language and force Japanese title to English
-
-	}
+	char pathname[200];
+	snprintf(pathname, sizeof(pathname), "%s%s", Settings.titlestxt_path, "wiitdb.zip");
+	if (openfile) OpenXMLFile(pathname);
+	char forcedlanguage[100] = "";
+	if (loadtitles) LoadTitlesFromXML(forcedlanguage, true); // options can be added to set force title language to any language and force Japanese title to English
+										// true = force english for al Japanese tiles, this should be set to true as long as Japanese titles are not displayed properly
+	if (freemem) FreeXMLMemory(); // free memory as soon as titles are loaded, the file will need to be loaded again if needed
+}
 
 void CFG_Load(void)
 {
@@ -1595,9 +1597,6 @@ void CFG_Load(void)
 	snprintf(pathname, sizeof(pathname), Settings.language_path);
 	cfg_parsefile(pathname, &language_set);
 
-	snprintf(pathname, sizeof(pathname), "%stitles.txt", Settings.titlestxt_path);
-	cfg_parsefile(pathname, &title_set);
-
 	snprintf(pathname, sizeof(pathname), "%s/config/GXGameSettings.cfg", bootDevice);
 	cfg_parsefile(pathname, &parental_set);
 
@@ -1605,11 +1604,15 @@ void CFG_Load(void)
 	cfg_load_games();
 	cfg_load_game_num();
 
-	if (Settings.titlesOverride==1)CFG_LoadXml();
-
 	Global_Default(); //global default depends on theme information
 	CFG_LoadGlobal();
-
+	
+	if (Settings.titlesOverride==1) CFG_LoadXml(true, true, false); // load titles, do not keep in memory
+	
+	// loaded after database to override database titles with custom titles
+	snprintf(pathname, sizeof(pathname), "%stitles.txt", Settings.titlestxt_path);
+	cfg_parsefile(pathname, &title_set);
+	
 //	cfg_parsearg(argc, argv);
 }
 

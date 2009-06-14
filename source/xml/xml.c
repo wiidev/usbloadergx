@@ -4,16 +4,18 @@ Load game information from XML - Lustar
  - MiniZip adapted by Tantric
 */
 
+#include <malloc.h>
 #include <mxml.h>
+#include "unzip/unzip.h"
 #include "settings/cfg.h"
 #include "xml/xml.h"
-#include "unzip/unzip.h"
+//#include "cfg.h"
+//#include "xml.h"
 
 
+bool xml_loaded = false;
 static bool xmldebug = false;
-
 extern struct SSettings Settings; // for loader GX
-
 
 static char langlist[11][22] =
 {{"Console Default"},
@@ -53,17 +55,6 @@ static mxml_index_t *nodeindextmp=NULL;
 
 int xmlloadtime = 0;
 
-void FreeXMLDeletePart()
-{
-    /* free memory */
-	mxmlIndexDelete(nodeindex);	
-	mxmlIndexDelete(nodeindextmp); 
-    mxmlDelete(nodeid);
-    mxmlDelete(nodeidtmp);	
-    mxmlDelete(nodefound);	
-    mxmlDelete(nodedata);	
-    mxmlDelete(nodetree);  
-}	
 
 
 /* get_text() taken as is from mini-mxml example mxmldoc.c */
@@ -123,10 +114,7 @@ void GetTextFromNode(mxml_node_t *currentnode, mxml_node_t *topnode, char *noden
 
 bool OpenXMLFile(char *filename)
 {
-	mxml_node_t *nodetree;
-	
-//	if (xmldebug)
-//		dbg_time1();
+//	if (xmldebug) dbg_time1();
 	
 	char* strresult = strstr(filename,".zip");
     if (strresult == NULL) {
@@ -149,9 +137,13 @@ bool OpenXMLFile(char *filename)
 		unz_file_info zipfileinfo;
 		unzGetCurrentFileInfo(unzfile, &zipfileinfo, NULL, 0, NULL, 0, NULL, 0);	
 		int zipfilebuffersize = zipfileinfo.uncompressed_size;
-		char * zipfilebuffer = (char *) calloc(1,zipfilebuffersize);
-		if (zipfilebuffer == NULL)
+		char * zipfilebuffer = malloc(zipfilebuffersize);
+		memset(zipfilebuffer, 0, zipfilebuffersize);
+		if (zipfilebuffer == NULL) {
+			unzCloseCurrentFile(unzfile);
+			unzClose(unzfile);
 			return false;
+		}
 		
 		unzReadCurrentFile(unzfile, zipfilebuffer, zipfilebuffersize);
 		unzCloseCurrentFile(unzfile);
@@ -175,6 +167,7 @@ bool OpenXMLFile(char *filename)
 	} else {
 		//if (xmldebug);
 		//	xmlloadtime = dbg_time2(NULL);
+		xml_loaded = true;
 		return true;
 	}
 }
@@ -183,13 +176,15 @@ bool OpenXMLFile(char *filename)
 void FreeXMLMemory()
 {
     /* free memory */
-	mxmlIndexDelete(nodeindex);
-	mxmlIndexDelete(nodeindextmp);
-    mxmlDelete(nodeid);
-    mxmlDelete(nodeidtmp);
-    mxmlDelete(nodefound);
-    mxmlDelete(nodedata);
-    mxmlDelete(nodetree);
+	if (xml_loaded) {
+		mxmlIndexDelete(nodeindex);
+		mxmlIndexDelete(nodeindextmp);
+		mxmlDelete(nodeidtmp);
+		mxmlDelete(nodefound);
+		mxmlDelete(nodedata);
+		mxmlDelete(nodetree);
+		xml_loaded = false;
+	}
 }	
 
 
@@ -284,7 +279,6 @@ void LoadTitlesFromXML(char *langtxt, bool forcejptoen)
 	char id_text[10];
 	char title_text[500] = "";
 	char title_text_EN[500] = "";
-
 	/* search index of id elements, load all id/titles text */
     while (nodeid != NULL)
     {
@@ -304,8 +298,8 @@ void LoadTitlesFromXML(char *langtxt, bool forcejptoen)
 				if (game_cfg) {
 					opt_lang = game_cfg->language;
 				} else {
-					// opt_lang = CFG.language; // for config loader
-					opt_lang = Settings.language; // for loader GX
+					//opt_lang = CFG.language; // for Configurable Loader
+					opt_lang = Settings.language; // for Loader GX
 				}
                 strcpy(langcode,ConvertLangTextToCode(langlist[opt_lang]));
 			}
@@ -373,7 +367,7 @@ bool LoadGameInfoFromXML(char* gameid, char* langtxt)
 /* langcode: "English","French","German" */
 {
 	bool exist=false;
-	if (nodeindex == NULL)
+	if (nodeindex == NULL || nodedata == NULL)
 		return exist;
 		
 	/* convert language text into ISO 639 two-letter language codes */
@@ -428,13 +422,12 @@ bool LoadGameInfoFromXML(char* gameid, char* langtxt)
 		/* text from child elements */
 		nodefound = mxmlFindElement(nodeid, nodedata, "locale", "lang", "EN", MXML_NO_DESCEND);
 		if (nodefound != NULL) {
-			//if  (Settings.titlesOverride==1)
 			GetTextFromNode(nodefound, nodedata, "title", NULL, NULL, MXML_DESCEND, gameinfo.title_EN);
 			GetTextFromNode(nodefound, nodedata, "synopsis", NULL, NULL, MXML_DESCEND, gameinfo.synopsis_EN);
 		}
 		nodefound = mxmlFindElement(nodeid, nodedata, "locale", "lang", langcode, MXML_NO_DESCEND);
 		if (nodefound != NULL) {
-			//GetTextFromNode(nodefound, nodedata, "title", NULL, NULL, MXML_DESCEND, gameinfo.title);
+			GetTextFromNode(nodefound, nodedata, "title", NULL, NULL, MXML_DESCEND, gameinfo.title);
 			GetTextFromNode(nodefound, nodedata, "synopsis", NULL, NULL, MXML_DESCEND, gameinfo.synopsis);
 		}
 		// fall back to English title and synopsis if prefered language was not found
@@ -480,7 +473,7 @@ bool LoadGameInfoFromXML(char* gameid, char* langtxt)
 		
 		nodefound = mxmlFindElement(nodeid, nodedata, "rating", NULL, NULL, MXML_NO_DESCEND);
 		if (nodefound != NULL) {
-			int incr = 0;
+			gameinfo.descriptorCnt=0;
 			nodeindextmp = mxmlIndexNew(nodefound,"descriptor", NULL);
 			nodeidtmp = mxmlIndexReset(nodeindextmp);
 			
@@ -488,8 +481,8 @@ bool LoadGameInfoFromXML(char* gameid, char* langtxt)
 			{
 				nodeidtmp = mxmlIndexFind(nodeindextmp,"descriptor", NULL);
 				if (nodeidtmp != NULL) {
-					++incr;
-					GetTextFromNode(nodeidtmp, nodedata, "descriptor", NULL, NULL, MXML_DESCEND, gameinfo.ratingdescriptors[incr]);
+					++gameinfo.descriptorCnt;
+					GetTextFromNode(nodeidtmp, nodedata, "descriptor", NULL, NULL, MXML_DESCEND, gameinfo.ratingdescriptors[gameinfo.descriptorCnt]);
 				}
 			}
 		}
@@ -497,8 +490,6 @@ bool LoadGameInfoFromXML(char* gameid, char* langtxt)
 		GetTextFromNode(nodeid, nodedata, "input", "players", NULL, MXML_NO_DESCEND, gameinfo.players);
 		nodefound = mxmlFindElement(nodeid, nodedata, "input", NULL, NULL, MXML_NO_DESCEND);
 		if (nodefound != NULL) {
-			//int incr = 0;
-			//int incrreq = 0;
 			gameinfo.accessoryCnt=0;
 			gameinfo.accessoryReqCnt=0;
 	
@@ -513,7 +504,6 @@ bool LoadGameInfoFromXML(char* gameid, char* langtxt)
 						++gameinfo.accessoryReqCnt;
 						strcpy(gameinfo.accessories_required[gameinfo.accessoryReqCnt],mxmlElementGetAttr(nodeidtmp, "type"));
 					} else {
-						//++incr;
 						++gameinfo.accessoryCnt;
 						strcpy(gameinfo.accessories[gameinfo.accessoryCnt],mxmlElementGetAttr(nodeidtmp, "type"));
 					}
@@ -527,9 +517,11 @@ bool LoadGameInfoFromXML(char* gameid, char* langtxt)
 		ConvertRating(gameinfo.ratingvalue, gameinfo.ratingtype, "PEGI",gameinfo.ratingvaluePEGI);
 
 		//PrintGameInfo();
-	exist=true;
-    } else {exist=false;
+		
+		exist=true;
+    } else {
 	    /*game not found */
+		exist=false;
 	}return exist;
 }
 
@@ -590,9 +582,9 @@ void PrintGameInfo(bool showfullinfo)
 		char linebuf[1000] = "";
 		
 		if (xmldebug) {
-			char xmltime[100];
-			sprintf(xmltime,"%d",xmlloadtime);
-			printf("xml load time: %s\n",xmltime);
+			//char xmltime[100];
+			//sprintf(xmltime,"%d",xmlloadtime);
+			//printf("xml load time: %s\n",xmltime);
             /*
 			printf("xml forcelang: %s\n",CFG.db_lang);
 			printf("xml url: %s\n",CFG.db_url);
@@ -601,8 +593,20 @@ void PrintGameInfo(bool showfullinfo)
 			sprintf(xmljptoen,"%d",CFG.db_JPtoEN);
 			printf("xml JPtoEN: %s\n",xmljptoen);
 			*/
+			
+			// guidebug
+			struct mallinfo mymallinfo = mallinfo();
+			char memtotal[100];
+			char memused[100];
+			char memnotinuse[100];
+			char memcanbefreed[100];
+			sprintf(memtotal,"%d",mymallinfo.arena/1024);
+			sprintf(memused,"%d",mymallinfo.uordblks/1024);
+			sprintf(memnotinuse,"%d",mymallinfo.fordblks/1024);
+			sprintf(memcanbefreed,"%d",mymallinfo.keepcost/1024);
+			printf("allocated:%sKB used:%sKB notused:%sKB canbefreed:%s", memtotal, memused, memnotinuse, memcanbefreed);
 		}
-		
+
 		//printf("%s: ",gameidfull);
 		//printf("%s\n",gameinfo.title);
 		if (strcmp(gameinfo.year,"") != 0)
