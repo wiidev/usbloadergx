@@ -27,6 +27,7 @@ struct gameXMLinfo
 	char month[10];
 	char day[10];
 	char genre[500];
+	char genresplit[100][500];
 	char ratingtype[10];
 	char ratingvalue[10];
 	char ratingdescriptors[100][500];
@@ -62,7 +63,9 @@ void FreeXMLMemory();
 
 void title_set(char *id, char *title);
 
-
+void trim_copy(char *input, char *output);
+void trim_inplace(char *s);
+char *trim_nocopy(char *s);
 
 #ifdef __cplusplus
 }

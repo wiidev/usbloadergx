@@ -185,94 +185,90 @@ showGameInfo(char *ID, u8 *headerID)
 
 	// set images for required input
 	for (int i=1;strcmp(gameinfo.accessories_required[i],"") != 0;i++)
-			{
-			if (strcmp(gameinfo.accessories_required[i],"nunchuk")==0)
-			{nunchuckImgData = new GuiImageData(nunchuckR_png);nunchuk=1;}
-			else
-			nunchuckImgData = new GuiImageData(nunchuck_png);
+	{
+		if (strcmp(gameinfo.accessories_required[i],"nunchuk")==0)
+		{nunchuckImgData = new GuiImageData(nunchuckR_png);nunchuk=1;}
+		else
+		nunchuckImgData = new GuiImageData(nunchuck_png);
 
-			if (strcmp(gameinfo.accessories_required[i],"classiccontroller")==0)
-			{classiccontrollerImgData = new GuiImageData(classiccontrollerR_png);classiccontroller=1;}
-			else
-			classiccontrollerImgData = new GuiImageData(classiccontroller_png);
+		if (strcmp(gameinfo.accessories_required[i],"classiccontroller")==0)
+		{classiccontrollerImgData = new GuiImageData(classiccontrollerR_png);classiccontroller=1;}
+		else
+		classiccontrollerImgData = new GuiImageData(classiccontroller_png);
 
-			if (strcmp(gameinfo.accessories_required[i],"guitar")==0)
-			{guitarImgData = new GuiImageData(guitarR_png);guitar=1;}
-			else
-			guitarImgData = new GuiImageData(guitar_png);
+		if (strcmp(gameinfo.accessories_required[i],"guitar")==0)
+		{guitarImgData = new GuiImageData(guitarR_png);guitar=1;}
+		else
+		guitarImgData = new GuiImageData(guitar_png);
 
-			if (strcmp(gameinfo.accessories_required[i],"gamecube")==0)
-			{gamecubeImgData = new GuiImageData(gcncontrollerR_png);gamecube=1;}
-			else
-			gamecubeImgData = new GuiImageData(gcncontroller_png);
+		if (strcmp(gameinfo.accessories_required[i],"gamecube")==0)
+		{gamecubeImgData = new GuiImageData(gcncontrollerR_png);gamecube=1;}
+		else
+		gamecubeImgData = new GuiImageData(gcncontroller_png);
 
-			if (strcmp(gameinfo.accessories_required[i],"wheel")==0)
-			{wheelImgData = new GuiImageData(wheelR_png);wheel=1;}
-			else
-			wheelImgData = new GuiImageData(wheel_png);
+		if (strcmp(gameinfo.accessories_required[i],"wheel")==0)
+		{wheelImgData = new GuiImageData(wheelR_png);wheel=1;}
+		else
+		wheelImgData = new GuiImageData(wheel_png);
 
-			if (strcmp(gameinfo.accessories_required[i],"motionplus")==0)
-			{motionplusImgData = new GuiImageData(motionplusR_png);motionplus=1;}
-			else
-			motionplusImgData = new GuiImageData(motionplus_png);
+		if (strcmp(gameinfo.accessories_required[i],"motionplus")==0)
+		{motionplusImgData = new GuiImageData(motionplusR_png);motionplus=1;}
+		else
+		motionplusImgData = new GuiImageData(motionplus_png);
 
-			if (strcmp(gameinfo.accessories_required[i],"drums")==0)
-			{drumsImgData = new GuiImageData(drumsR_png);drums=1;}
-			else
-			drumsImgData = new GuiImageData(drums_png);
+		if (strcmp(gameinfo.accessories_required[i],"drums")==0)
+		{drumsImgData = new GuiImageData(drumsR_png);drums=1;}
+		else
+		drumsImgData = new GuiImageData(drums_png);
 
-			if (strcmp(gameinfo.accessories_required[i],"microphone")==0)
-			{microphoneImgData = new GuiImageData(microphoneR_png);microphone=1;}
-			else
-			microphoneImgData = new GuiImageData(microphone_png);
+		if (strcmp(gameinfo.accessories_required[i],"microphone")==0)
+		{microphoneImgData = new GuiImageData(microphoneR_png);microphone=1;}
+		else
+		microphoneImgData = new GuiImageData(microphone_png);
 
-			if (strcmp(gameinfo.accessories_required[i],"balanceboard")==0)
-			{balanceboardImgData = new GuiImageData(balanceboardR_png);balanceboard=1;}
-			else
-			balanceboardImgData = new GuiImageData(balanceboard_png);
+		if (strcmp(gameinfo.accessories_required[i],"balanceboard")==0)
+		{balanceboardImgData = new GuiImageData(balanceboardR_png);balanceboard=1;}
+		else
+		balanceboardImgData = new GuiImageData(balanceboard_png);
 
-			if (strcmp(gameinfo.accessories_required[i],"dancepad")==0)
-			{dancepadImgData = new GuiImageData(dancepadR_png);dancepad=1;}
-			else
-			dancepadImgData = new GuiImageData(dancepad_png);
+		if (strcmp(gameinfo.accessories_required[i],"dancepad")==0)
+		{dancepadImgData = new GuiImageData(dancepadR_png);dancepad=1;}
+		else
+		dancepadImgData = new GuiImageData(dancepad_png);
 
-			}
-	for (int i=1;strcmp(gameinfo.accessories[i],"") != 0;i++)
-			{
-
-			if (strcmp(gameinfo.accessories[i],"classiccontroller")==0)
-			classiccontroller=1;
-
-			if (strcmp(gameinfo.accessories[i],"nunchuk")==0)
-			{nunchuk=1;}
-
-			if (strcmp(gameinfo.accessories[i],"guitar")==0)
-			guitar=1;
-
-			if (strcmp(gameinfo.accessories[i],"drums")==0)
-			drums=1;
-
-			if (strcmp(gameinfo.accessories[i],"dancepad")==0)
-			dancepad=1;
-
-			if (strcmp(gameinfo.accessories[i],"motionplus")==0)
-			motionplus=1;
-
-			if (strcmp(gameinfo.accessories[i],"wheel")==0)
-			wheel=1;
-
-			if (strcmp(gameinfo.accessories[i],"balanceboard")==0)
-			balanceboard=1;
-
-			if (strcmp(gameinfo.accessories[i],"microphone")==0)
-			microphone=1;
-
-			if (strcmp(gameinfo.accessories[i],"gamecube")==0)
-			gamecube=1;
 	}
+	for (int i=1;strcmp(gameinfo.accessories[i],"") != 0;i++)
+	{
+		if (strcmp(gameinfo.accessories[i],"classiccontroller")==0)
+		classiccontroller=1;
 
+		if (strcmp(gameinfo.accessories[i],"nunchuk")==0)
+		{nunchuk=1;}
 
+		if (strcmp(gameinfo.accessories[i],"guitar")==0)
+		guitar=1;
 
+		if (strcmp(gameinfo.accessories[i],"drums")==0)
+		drums=1;
+
+		if (strcmp(gameinfo.accessories[i],"dancepad")==0)
+		dancepad=1;
+
+		if (strcmp(gameinfo.accessories[i],"motionplus")==0)
+		motionplus=1;
+
+		if (strcmp(gameinfo.accessories[i],"wheel")==0)
+		wheel=1;
+
+		if (strcmp(gameinfo.accessories[i],"balanceboard")==0)
+		balanceboard=1;
+
+		if (strcmp(gameinfo.accessories[i],"microphone")==0)
+		microphone=1;
+
+		if (strcmp(gameinfo.accessories[i],"gamecube")==0)
+		gamecube=1;
+	}
 
 	dialogBoxImg1 = new GuiImage(&dialogBox1);
 	dialogBoxImg1->SetAlignment(0,3);
@@ -326,7 +322,7 @@ showGameInfo(char *ID, u8 *headerID)
 		playersImg->SetAlignment(0,4);
 		gameinfoWindow.Append(playersImg);
 		intputX += (CFG.widescreen ? playersImg->GetWidth() * .8 : playersImg->GetWidth())+5;
-		}
+	}
 
 	//draw the inupt types for this game
 			if (nunchuk==1){
@@ -425,7 +421,7 @@ showGameInfo(char *ID, u8 *headerID)
 		wifiplayersImg->SetAlignment(0,4);
 		gameinfoWindow.Append(wifiplayersImg);
 		intputX += (CFG.widescreen ? wifiplayersImg->GetWidth() * .8 : wifiplayersImg->GetWidth())+5;
-		}
+	}
 
 	// ratings
 	if (strcmp(gameinfo.ratingtype,"") !=0){
@@ -501,7 +497,7 @@ showGameInfo(char *ID, u8 *headerID)
 			titleTxt->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); titleTxt->SetPosition(txtXOffset,12+y);  y+=24;
 			gameinfoWindow.Append(titleTxt);}
 
-		//date
+	//date
 	snprintf(linebuf2, sizeof(linebuf2), " ");
 	if (strcmp(gameinfo.day,"") != 0)
 	{snprintf(linebuf2, sizeof(linebuf2), "%s ", gameinfo.day);}
@@ -553,30 +549,35 @@ showGameInfo(char *ID, u8 *headerID)
 			releasedTxt->SetAlignment(ALIGN_RIGHT, ALIGN_TOP); releasedTxt->SetPosition(-17,12+y);  y+=(20 * newline);newline=1;
 			gameinfoWindow.Append(releasedTxt);}
 	//genre
-	if (strcmp(gameinfo.genre,"") != 0)
-	{snprintf(linebuf, sizeof(linebuf), "%s", gameinfo.genre);
-	genreTxt = new GuiText(linebuf, 16, (GXColor){0,0,0, 255});
-	if (genreTxt->GetWidth()>300) newline=2;
-			genreTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP); genreTxt->SetPosition(205,12+y1);  y1+=(25 * newline);newline=1;
-			gameinfoWindow.Append(genreTxt);}
+	if (strcmp(gameinfo.genresplit[1],"") != 0){
+		for (int i=1;strcmp(gameinfo.genresplit[i],"") !=0;i++)
+		{
+			snprintf(linebuf, sizeof(linebuf), "%s", gameinfo.genresplit[i]);
+			genreTxt = new GuiText(linebuf, 16, (GXColor){0,0,0, 255});
+			genreTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP); genreTxt->SetPosition(205,12+y1);  y1+=(20 * i);
+			gameinfoWindow.Append(genreTxt);
+		}
+	}
 
 	//developer
-	if (strcmp(gameinfo.developer,"") != 0 && strcmp(gameinfo.developer,gameinfo.publisher) != 0)
-			{snprintf(linebuf, sizeof(linebuf), "%s %s", LANGUAGE.developedby, gameinfo.developer);
-			developerTxt = new GuiText(linebuf, 16, (GXColor){0,0,0, 255});
-			if (developerTxt->GetWidth()>250) newline=2;
-			developerTxt->SetMaxWidth(250,GuiText::WRAP);
-			developerTxt->SetAlignment(ALIGN_RIGHT, ALIGN_TOP); developerTxt->SetPosition(-17,12+y); y+=(40 * newline);newline=1;
-			gameinfoWindow.Append(developerTxt);}
+	if (strcmp(gameinfo.developer,"") != 0 && strcmp(gameinfo.developer,gameinfo.publisher) != 0)	{
+		snprintf(linebuf, sizeof(linebuf), "%s %s", LANGUAGE.developedby, gameinfo.developer);
+		developerTxt = new GuiText(linebuf, 16, (GXColor){0,0,0, 255});
+		if (developerTxt->GetWidth()>250) newline=2;
+		developerTxt->SetMaxWidth(250,GuiText::WRAP);
+		developerTxt->SetAlignment(ALIGN_RIGHT, ALIGN_TOP); developerTxt->SetPosition(-17,12+y); y+=(40 * newline);newline=1;
+		gameinfoWindow.Append(developerTxt);
+	}
 
 	//publisher
-	if (strcmp(gameinfo.publisher,"") != 0)
-	{snprintf(linebuf, sizeof(linebuf), "%s %s", LANGUAGE.publishedby, gameinfo.publisher);
-	publisherTxt = new GuiText(linebuf, 16, (GXColor){0,0,0, 255});
-			if (publisherTxt->GetWidth()>250) newline=2;
-			publisherTxt->SetMaxWidth(250,GuiText::WRAP);
-			publisherTxt->SetAlignment(ALIGN_RIGHT, ALIGN_TOP); publisherTxt->SetPosition(-17,12+y);  y+=(20 * newline);newline=1;
-			gameinfoWindow.Append(publisherTxt);}
+	if (strcmp(gameinfo.publisher,"") != 0){
+		snprintf(linebuf, sizeof(linebuf), "%s %s", LANGUAGE.publishedby, gameinfo.publisher);
+		publisherTxt = new GuiText(linebuf, 16, (GXColor){0,0,0, 255});
+		if (publisherTxt->GetWidth()>250) newline=2;
+		publisherTxt->SetMaxWidth(250,GuiText::WRAP);
+		publisherTxt->SetAlignment(ALIGN_RIGHT, ALIGN_TOP); publisherTxt->SetPosition(-17,12+y);  y+=(20 * newline);newline=1;
+		gameinfoWindow.Append(publisherTxt);
+	}
 
 	//don't bother us txt
 	snprintf(linebuf, sizeof(linebuf), "Don't bother the USB Loader GX Team about errors in this file.");

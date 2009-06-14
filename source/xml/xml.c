@@ -391,7 +391,6 @@ bool LoadGameInfoFromXML(char* gameid, char* langtxt)
 	/* search for game matching gameid */
     while (1)
     {
-
         nodeid = mxmlIndexFind(nodeindex,"id", NULL);
 	    if (nodeid != NULL) {
 			get_text(nodeid, element_text, sizeof(element_text));
@@ -525,6 +524,29 @@ bool LoadGameInfoFromXML(char* gameid, char* langtxt)
 		ConvertRating(gameinfo.ratingvalue, gameinfo.ratingtype, "ESRB",gameinfo.ratingvalueESRB);
 		ConvertRating(gameinfo.ratingvalue, gameinfo.ratingtype, "PEGI",gameinfo.ratingvaluePEGI);
 
+		/* provide genre as an array: gameinfo.genresplit */
+		if (strcmp(gameinfo.genre,"") != 0){
+			const char *delimgenre = ",;";
+			char genretxt[500];
+			strcpy(genretxt,gameinfo.genre);
+			char *splitresult;
+			splitresult = strtok(genretxt, delimgenre);
+			if (splitresult != NULL) {
+				trim_inplace(splitresult);
+				strcpy(gameinfo.genresplit[1],splitresult);
+				int incr = 1;
+				while (splitresult != NULL)
+				{
+					splitresult = strtok(NULL, delimgenre);
+					if (splitresult != NULL && strcmp(splitresult,"")!=0) {
+						++incr;
+						trim_inplace(splitresult);
+						strcpy(gameinfo.genresplit[incr],splitresult);
+					}
+				}
+			}
+		}
+		
 		//PrintGameInfo();
 		
 		exist=true;
@@ -649,5 +671,48 @@ void PrintGameInfo(bool showfullinfo)
 		printf("%s\n",linebuf);
 		strcpy(linebuf,"");
 	}
+}
+
+
+
+
+/* trim leading and trailing whitespace functions, by calv */
+void trim_copy(char *input, char *output)
+{
+  char *end = output;
+  char c;
+  while(*input && isspace(*input))
+    ++input;
+
+  while(*input)
+  {
+    c = *(output++) = *(input++);
+
+    if( !isspace(c) )
+      end = output;
+  }
+  *end = 0;
+}
+
+void trim_inplace(char *s)
+{
+  trim_copy(s, s);
+}
+
+char *trim_nocopy(char *s)
+{
+  char *start = s;
+  while(*start && isspace(*start))
+    ++start;
+
+  char *i = start;
+  char *end = start;
+  while(*i)
+  {
+    if( !isspace(*(i++)) )
+      end = i;
+  }
+  *end = 0;
+  return start;
 }
 
