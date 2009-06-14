@@ -62,10 +62,7 @@ void PrintGameInfo(bool showfullinfo);
 void FreeXMLMemory();
 
 void title_set(char *id, char *title);
-
-void trim_copy(char *input, char *output);
-void trim_inplace(char *s);
-char *trim_nocopy(char *s);
+char* trimcopy(char *dest, char *src, int size);
 
 #ifdef __cplusplus
 }

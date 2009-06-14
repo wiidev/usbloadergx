@@ -532,16 +532,18 @@ bool LoadGameInfoFromXML(char* gameid, char* langtxt)
 			char *splitresult;
 			splitresult = strtok(genretxt, delimgenre);
 			if (splitresult != NULL) {
-				trim_inplace(splitresult);
+				trimcopy(splitresult,splitresult,strlen(splitresult)+1);
 				strcpy(gameinfo.genresplit[1],splitresult);
+				gameinfo.genresplit[1][0] = toupper(gameinfo.genresplit[1][0]);
 				int incr = 1;
 				while (splitresult != NULL)
 				{
 					splitresult = strtok(NULL, delimgenre);
 					if (splitresult != NULL && strcmp(splitresult,"")!=0) {
 						++incr;
-						trim_inplace(splitresult);
+						trimcopy(splitresult,splitresult,strlen(splitresult)+1);
 						strcpy(gameinfo.genresplit[incr],splitresult);
+						gameinfo.genresplit[incr][0] = toupper(gameinfo.genresplit[incr][0]);
 					}
 				}
 			}
@@ -674,45 +676,4 @@ void PrintGameInfo(bool showfullinfo)
 }
 
 
-
-
-/* trim leading and trailing whitespace functions, by calv */
-void trim_copy(char *input, char *output)
-{
-  char *end = output;
-  char c;
-  while(*input && isspace(*input))
-    ++input;
-
-  while(*input)
-  {
-    c = *(output++) = *(input++);
-
-    if( !isspace(c) )
-      end = output;
-  }
-  *end = 0;
-}
-
-void trim_inplace(char *s)
-{
-  trim_copy(s, s);
-}
-
-char *trim_nocopy(char *s)
-{
-  char *start = s;
-  while(*start && isspace(*start))
-    ++start;
-
-  char *i = start;
-  char *end = start;
-  while(*i)
-  {
-    if( !isspace(*(i++)) )
-      end = i;
-  }
-  *end = 0;
-  return start;
-}
 

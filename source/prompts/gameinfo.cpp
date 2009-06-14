@@ -593,10 +593,14 @@ showGameInfo(char *ID, u8 *headerID)
 	int wifiY=0;
 	for (int i=1;i<=gameinfo.wifiCnt;i++)
 		{
-			snprintf(linebuf, sizeof(linebuf), "%s",gameinfo.wififeatures[i]);
-				wifiTxt[i] = new GuiText(linebuf, 16, (GXColor){0,0,0, 255});
-				wifiTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); wifiTxt[i]->SetPosition(215,200+wifiY);  wifiY-=(20 * newline);
-				gameinfoWindow.Append(wifiTxt[i]);
+			if (strcmp(gameinfo.wififeatures[i],"Nintendods") == 0) {
+				snprintf(linebuf, sizeof(linebuf), "Nintendo DS");
+			} else {
+				snprintf(linebuf, sizeof(linebuf), "%s",gameinfo.wififeatures[i]);
+			}
+			wifiTxt[i] = new GuiText(linebuf, 16, (GXColor){0,0,0, 255});
+			wifiTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); wifiTxt[i]->SetPosition(215,200+wifiY);  wifiY-=(20 * newline);
+			gameinfoWindow.Append(wifiTxt[i]);
 		}
 
 	if (strcmp(gameinfo.wififeatures[1],"") != 0){

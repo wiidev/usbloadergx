@@ -1884,13 +1884,18 @@ int GameSettings(struct discHdr * header)
                     }
                     parentalcontrolChoice = 0;
                     CFG_forget_game_opt(header->id);
+					// if default language is different than language from main settings, reload titles
+					int opt_langnew = 0;
+					opt_langnew = Settings.language;
+					if (Settings.titlesOverride==1 && opt_lang != opt_langnew)
+						CFG_LoadXml(true, true, false); // open file, reload titles, do not keep in memory
+						// titles are refreshed in menu.cpp as soon as this function returns
                 }
                 break;
 		}
 
 		if(saveBtn.GetState() == STATE_CLICKED)
 		{
-
 //			if(isSdInserted()) {
 			if(isInserted(bootDevice)) {
                 if (CFG_save_game_opt(header->id))
@@ -1899,10 +1904,9 @@ int GameSettings(struct discHdr * header)
 					int opt_langnew = 0;
 					game_cfg = CFG_get_game_opt(header->id);
 					if (game_cfg) opt_langnew = game_cfg->language;
-					if (Settings.titlesOverride==1 && opt_lang != opt_langnew) {
+					if (Settings.titlesOverride==1 && opt_lang != opt_langnew)
 						CFG_LoadXml(true, true, false); // open file, reload titles, do not keep in memory
-					}
-					// titles are refreshed in menu.cpp as soon as this function returns
+						// titles are refreshed in menu.cpp as soon as this function returns
 					WindowPrompt(LANGUAGE.SuccessfullySaved, 0, LANGUAGE.ok, 0,0,0);
 				}
 				else
