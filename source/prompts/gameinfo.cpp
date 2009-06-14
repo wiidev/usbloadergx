@@ -35,7 +35,6 @@ extern void HaltGui();
 int
 showGameInfo(char *ID, u8 *headerID)
 {
-	u8 nodata=1;
     //load the xml shit
 	char pathname[100];
 	snprintf(pathname, sizeof(pathname), "%s%s", Settings.titlestxt_path, "wiitdb.zip");
@@ -180,7 +179,7 @@ showGameInfo(char *ID, u8 *headerID)
 	} else {
 		opt_lang = Settings.language;
 	}
-	if (LoadGameInfoFromXML(ID,langtexttmp[opt_lang]))nodata=0;
+	LoadGameInfoFromXML(ID,langtexttmp[opt_lang]);
 	char linebuf[1000] = "";
 	char linebuf2[100] = "";
 
@@ -507,7 +506,7 @@ showGameInfo(char *ID, u8 *headerID)
 	if (strcmp(gameinfo.day,"") != 0)
 	{snprintf(linebuf2, sizeof(linebuf2), "%s ", gameinfo.day);}
 	if (strcmp(gameinfo.month,"") != 0){
-	switch (atoi(gameinfo.month))
+		switch (atoi(gameinfo.month))
 		{
 			case 1:
 				snprintf(linebuf2, sizeof(linebuf2), "%s%s ", linebuf2, LANGUAGE.january);
@@ -606,42 +605,40 @@ showGameInfo(char *ID, u8 *headerID)
 					gameinfoWindow.Append(wifiTxt[0]);
 	}
 	//synopsis
-	if (strcmp(gameinfo.synopsis,"") != 0)
-			{snprintf(linebuf, sizeof(linebuf), "%s", gameinfo.synopsis);
-			synopsisTxt = new GuiText(linebuf, 16, (GXColor){0,0,0, 255});
-			synopsisTxt->SetMaxWidth(350,GuiText::WRAP);
-			synopsisTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP); synopsisTxt->SetPosition(0,0);
-			dialogBoxImg11 = new GuiImage(&dialogBox1);
-			dialogBoxImg11->SetAlignment(0,3);
-			dialogBoxImg11->SetPosition(-9,0);
+	if (strcmp(gameinfo.synopsis,"") != 0)	{
+		snprintf(linebuf, sizeof(linebuf), "%s", gameinfo.synopsis);
+		synopsisTxt = new GuiText(linebuf, 16, (GXColor){0,0,0, 255});
+		synopsisTxt->SetMaxWidth(350,GuiText::WRAP);
+		synopsisTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP); synopsisTxt->SetPosition(0,0);
+		dialogBoxImg11 = new GuiImage(&dialogBox1);
+		dialogBoxImg11->SetAlignment(0,3);
+		dialogBoxImg11->SetPosition(-9,0);
 
-			dialogBoxImg22 = new GuiImage(&dialogBox2);
-			dialogBoxImg22->SetAlignment(0,3);
-			dialogBoxImg22->SetPosition(145,0);
+		dialogBoxImg22 = new GuiImage(&dialogBox2);
+		dialogBoxImg22->SetAlignment(0,3);
+		dialogBoxImg22->SetPosition(145,0);
 
-			dialogBoxImg33 = new GuiImage(&dialogBox3);
-			dialogBoxImg33->SetAlignment(0,3);
-			dialogBoxImg33->SetPosition(301,0);
+		dialogBoxImg33 = new GuiImage(&dialogBox3);
+		dialogBoxImg33->SetAlignment(0,3);
+		dialogBoxImg33->SetPosition(301,0);
 
-			dialogBoxImg44 = new GuiImage(&dialogBox4);
-			dialogBoxImg44->SetAlignment(0,3);
-			dialogBoxImg44->SetPosition(457,0);
-
-
-			gameinfoWindow2.Append(dialogBoxImg11);
-			gameinfoWindow2.Append(dialogBoxImg22);
-			gameinfoWindow2.Append(dialogBoxImg33);
-			gameinfoWindow2.Append(dialogBoxImg44);
-
-			txtWindow.Append(synopsisTxt);
-			coverImg2 = new GuiImage(cover);
-			coverImg2->SetWidescreen(CFG.widescreen);
-			coverImg2->SetPosition(15,30);
-			gameinfoWindow2.Append(coverImg2);
-			gameinfoWindow2.Append(&txtWindow);
-			}
+		dialogBoxImg44 = new GuiImage(&dialogBox4);
+		dialogBoxImg44->SetAlignment(0,3);
+		dialogBoxImg44->SetPosition(457,0);
 
 
+		gameinfoWindow2.Append(dialogBoxImg11);
+		gameinfoWindow2.Append(dialogBoxImg22);
+		gameinfoWindow2.Append(dialogBoxImg33);
+		gameinfoWindow2.Append(dialogBoxImg44);
+
+		txtWindow.Append(synopsisTxt);
+		coverImg2 = new GuiImage(cover);
+		coverImg2->SetWidescreen(CFG.widescreen);
+		coverImg2->SetPosition(15,30);
+		gameinfoWindow2.Append(coverImg2);
+		gameinfoWindow2.Append(&txtWindow);
+	}
 
 	gameinfoWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_IN, 50);
 	HaltGui();
@@ -697,80 +694,81 @@ showGameInfo(char *ID, u8 *headerID)
 			}
 			nextBtn.ResetState();
 		}
-		}
+	}
 	if (page==1){
-	gameinfoWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 50);
-	while(gameinfoWindow.GetEffect() > 0) usleep(50);
-	HaltGui();
-	mainWindow->Remove(&gameinfoWindow);
-	mainWindow->SetState(STATE_DEFAULT);
+		gameinfoWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 50);
+		while(gameinfoWindow.GetEffect() > 0) usleep(50);
+		HaltGui();
+		mainWindow->Remove(&gameinfoWindow);
+		mainWindow->SetState(STATE_DEFAULT);
 
 
-    delete playersImgData;
-    delete playersImg;
+		delete playersImgData;
+		delete playersImg;
 
-    delete wifiplayersImgData;
-    delete wifiplayersImg;
-    delete ratingImg;
+		delete wifiplayersImgData;
+		delete wifiplayersImg;
+		delete ratingImg;
 
-    delete classiccontrollerImg;
-    delete nunchuckImg;
-    delete guitarImg;
-    delete drumsImg;
-    delete dancepadImg;
-    delete motionplusImg;
-    delete wheelImg;
-    delete balanceboardImg;
-    delete microphoneImg;
-    delete gcImg;
-    delete dialogBoxImg1;
-    delete dialogBoxImg2;
-    delete dialogBoxImg3;
-    delete dialogBoxImg4;
-    delete dialogBoxImg11;
-    delete dialogBoxImg22;
-    delete dialogBoxImg33;
-    delete dialogBoxImg44;
-    delete coverImg;
-    delete coverImg2;
+		delete classiccontrollerImg;
+		delete nunchuckImg;
+		delete guitarImg;
+		delete drumsImg;
+		delete dancepadImg;
+		delete motionplusImg;
+		delete wheelImg;
+		delete balanceboardImg;
+		delete microphoneImg;
+		delete gcImg;
+		delete dialogBoxImg1;
+		delete dialogBoxImg2;
+		delete dialogBoxImg3;
+		delete dialogBoxImg4;
+		delete dialogBoxImg11;
+		delete dialogBoxImg22;
+		delete dialogBoxImg33;
+		delete dialogBoxImg44;
+		delete coverImg;
+		delete coverImg2;
 
-    delete classiccontrollerImgData;
-    delete nunchuckImgData;
-    delete guitarImgData;
-    delete drumsImgData;
-    delete motionplusImgData;
-    delete wheelImgData;
-    delete balanceboardImgData;
-    delete dancepadImgData;
-    delete microphoneImgData;
-    delete gamecubeImgData;
-    delete ratingImgData;
-    delete cover;
+		delete classiccontrollerImgData;
+		delete nunchuckImgData;
+		delete guitarImgData;
+		delete drumsImgData;
+		delete motionplusImgData;
+		delete wheelImgData;
+		delete balanceboardImgData;
+		delete dancepadImgData;
+		delete microphoneImgData;
+		delete gamecubeImgData;
+		delete ratingImgData;
+		delete cover;
 
-    delete releasedTxt;
-    delete publisherTxt;
-    delete developerTxt;
-    delete titleTxt;
-    delete synopsisTxt;
-    delete genreTxt;
-    delete betaTxt;
-    delete beta1Txt;
-	if (gameinfo.wifiCnt>0){
-		for(int i=1; i<=gameinfo.wifiCnt; i++)
+		delete releasedTxt;
+		delete publisherTxt;
+		delete developerTxt;
+		delete titleTxt;
+		delete synopsisTxt;
+		delete genreTxt;
+		delete betaTxt;
+		delete beta1Txt;
+		if (gameinfo.wifiCnt>0){
+			for(int i=1; i<=gameinfo.wifiCnt; i++)
 			{
 				delete wifiTxt[i];
 			}
 		}
-	if (nodata==0)FreeXMLMemory();
-	ResumeGui();}
-	else {
-	gameinfoWindow2.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 50);
-	while(gameinfoWindow2.GetEffect() > 0) usleep(50);
-	HaltGui();
-	mainWindow->Remove(&gameinfoWindow2);
-	mainWindow->SetState(STATE_DEFAULT);
-	ResumeGui();}
-	FreeXMLMemory();
+		FreeXMLMemory();
+		ResumeGui();
+	} else {
+		gameinfoWindow2.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 50);
+		while(gameinfoWindow2.GetEffect() > 0) usleep(50);
+		HaltGui();
+		mainWindow->Remove(&gameinfoWindow2);
+		mainWindow->SetState(STATE_DEFAULT);
+		FreeXMLMemory();
+		ResumeGui();
+	}
 	return choice;
 
     /* File not found */

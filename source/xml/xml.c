@@ -53,9 +53,8 @@ static mxml_node_t *nodefound=NULL;
 static mxml_index_t *nodeindex=NULL;
 static mxml_index_t *nodeindextmp=NULL;
 
+
 int xmlloadtime = 0;
-
-
 
 /* get_text() taken as is from mini-mxml example mxmldoc.c */
 /* get_text() - Get the text for a node. */
@@ -114,7 +113,15 @@ void GetTextFromNode(mxml_node_t *currentnode, mxml_node_t *topnode, char *noden
 
 bool OpenXMLFile(char *filename)
 {
-//	if (xmldebug) dbg_time1();
+	//if (xmldebug) dbg_time1();
+
+	nodeid=NULL;
+	nodedata=NULL;
+	nodetree=NULL;
+	nodeidtmp=NULL;
+	nodefound=NULL;
+	nodeindex=NULL;
+	nodeindextmp=NULL;
 	
 	char* strresult = strstr(filename,".zip");
     if (strresult == NULL) {
@@ -165,8 +172,7 @@ bool OpenXMLFile(char *filename)
 	if (nodedata == NULL) {
 	    return false;
 	} else {
-		//if (xmldebug);
-		//	xmlloadtime = dbg_time2(NULL);
+		//if (xmldebug)	xmlloadtime = dbg_time2(NULL);
 		xml_loaded = true;
 		return true;
 	}
@@ -179,6 +185,7 @@ void FreeXMLMemory()
 	if (xml_loaded) {
 		mxmlIndexDelete(nodeindex);
 		mxmlIndexDelete(nodeindextmp);
+		mxmlDelete(nodeid);
 		mxmlDelete(nodeidtmp);
 		mxmlDelete(nodefound);
 		mxmlDelete(nodedata);
@@ -384,12 +391,14 @@ bool LoadGameInfoFromXML(char* gameid, char* langtxt)
 	/* search for game matching gameid */
     while (1)
     {
-		exist=true;
+
         nodeid = mxmlIndexFind(nodeindex,"id", NULL);
 	    if (nodeid != NULL) {
 			get_text(nodeid, element_text, sizeof(element_text));
-			if (!strcmp(element_text,gameid))
+			if (!strcmp(element_text,gameid)) {
+				exist=true;
 				break;
+			}
 	    } else {
 			break;
 	    }
