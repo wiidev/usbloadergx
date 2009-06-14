@@ -27,9 +27,9 @@
 #include <malloc.h>
 #include <sys/unistd.h>
 #include <sdcard/wiisd_io.h>
+#include <ogc/ipc.h>
 
 #include "settings/cfg.h"
-#include "ogc/ipc.h"
 #include "fst.h"
 #include "dvd_broadway.h"
 #include "wpad.h"
@@ -45,8 +45,6 @@ u32 do_sd_code(char *filename)
 	u32 ret;
 	char filepath[150];
 
-	fflush(stdout);
-
     SDCard_Init();
 	USBDevice_Init();
 
@@ -56,7 +54,6 @@ u32 do_sd_code(char *filename)
 	filepath[strlen(Settings.Cheatcodespath)+8] = 0x63;
 	filepath[strlen(Settings.Cheatcodespath)+9] = 0x74;
 	filepath[strlen(Settings.Cheatcodespath)+10] = 0;
-
 
 	fp = fopen(filepath, "rb");
 	if (!fp) {

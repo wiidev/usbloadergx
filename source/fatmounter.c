@@ -11,8 +11,8 @@
 #include "usbloader/usbstorage.h"
 
 //these are the only stable and speed is good
-#define CACHE 32
-#define SECTORS 128
+#define CACHE 8
+#define SECTORS 64
 
 enum BPB {
 	BPB_jmpBoot = 0x00,
