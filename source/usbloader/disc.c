@@ -23,8 +23,8 @@ static char gameid[8];
 
 void __Disc_SetLowMem(void)
 {
-    *(vu32 *)0x80000020 = 0x0D15EA5E;       // System Magic
-    *(vu32 *)0x80000024 = 0x00000001;       // Version
+    //*(vu32 *)0x80000020 = 0x0D15EA5E;       // System Magic
+    //*(vu32 *)0x80000024 = 0x00000001;       // Version
 
 	*(vu32 *)0x80000030 = 0x00000000;       // Arena Low
 	*(vu32 *)0x800000F4 = 0x817E5480;       // BI2
@@ -40,7 +40,7 @@ void __Disc_SetLowMem(void)
 	memcpy((void *)0x80003180, (void *)0x80000000, 4);
 
 	/* Flush cache */
-	DCFlushRange((void *)0x80000000, 0x17FFFFF);
+	DCFlushRange((void *)0x80000000, 0x3F00);
 }
 
 void __Disc_SetVMode(u8 videoselected)

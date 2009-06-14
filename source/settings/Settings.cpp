@@ -1671,7 +1671,7 @@ int GameSettings(struct discHdr * header)
 		strncat(gameName, "...", 3);
 	}
 
-	customOptionList options3(8);
+	customOptionList options3(9);
 	options3.SetName(0,"%s", LANGUAGE.VideoMode);
 	options3.SetName(1,"%s", LANGUAGE.VIDTVPatch);
 	options3.SetName(2,"%s", LANGUAGE.Language);
