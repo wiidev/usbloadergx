@@ -36,7 +36,7 @@ struct LANGUAGE
 	char available[20];
 	char Areyousure[50];
 	char AutoPatch[30];
-	char Always[50];
+	char Adultsonly[50];
 	char awesometool[50];
 	char Back[20];
 	char Backgroundmusic[80];
@@ -52,6 +52,7 @@ struct LANGUAGE
 	char Cantdelete[50];
 	char CheckingforUpdates[40];
 	char ClicktoDownloadCovers[50];
+	char Child[40];
 	char Clock[20];
 	char Close[20];
 	char Continueinstallgame[50];
@@ -96,6 +97,7 @@ struct LANGUAGE
 	char BOOTERROR[50];
 	char ErrorreadingDisc[50];
 	char ExitUSBISOLoader[50];
+	char Everyone[50];
 	char InitializingNetwork[50];
 	char InsertDisk[50];
 	char InsertaWiiDisc[50];
@@ -216,6 +218,7 @@ struct LANGUAGE
 	char Successfullydeleted[60];
 	char SuccessfullySaved[50];
 	char SystemDefault[50];
+	char Teen[50];
 	char Thanksto[50];
 	char ThemePath[50];
 	char ThemepathChanged[50];

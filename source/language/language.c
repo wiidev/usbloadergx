@@ -40,7 +40,7 @@ snprintf(LANGUAGE.t3Covers, sizeof(LANGUAGE.t3Covers), "3D Covers");
 snprintf(LANGUAGE.Areyousure, sizeof(LANGUAGE.Areyousure), "Are you sure?");
 snprintf(LANGUAGE.available, sizeof(LANGUAGE.available), "available");
 snprintf(LANGUAGE.AutoPatch, sizeof(LANGUAGE.AutoPatch), "AutoPatch");
-snprintf(LANGUAGE.Always, sizeof(LANGUAGE.Always), "0 (Always)");
+snprintf(LANGUAGE.Adultsonly, sizeof(LANGUAGE.Adultsonly), "4 (Adults Only 18+)");
 snprintf(LANGUAGE.awesometool, sizeof(LANGUAGE.awesometool), "for his awesome tool");
 snprintf(LANGUAGE.Back, sizeof(LANGUAGE.Back), "Back");
 snprintf(LANGUAGE.Backgroundmusic, sizeof(LANGUAGE.Backgroundmusic), "Backgroundmusic");
@@ -56,6 +56,7 @@ snprintf(LANGUAGE.Cantbeformated, sizeof(LANGUAGE.Cantbeformated), "Can't be for
 snprintf(LANGUAGE.CheckingforUpdates, sizeof(LANGUAGE.CheckingforUpdates), "Checking for Updates");
 snprintf(LANGUAGE.Cantdelete, sizeof(LANGUAGE.Cantdelete), "Can't delete:");
 snprintf(LANGUAGE.ClicktoDownloadCovers, sizeof(LANGUAGE.ClicktoDownloadCovers), "Click to Download Covers");
+snprintf(LANGUAGE.Child, sizeof(LANGUAGE.Child), "1 (Child 7+)");
 snprintf(LANGUAGE.Clock, sizeof(LANGUAGE.Clock), "Clock");
 snprintf(LANGUAGE.Close, sizeof(LANGUAGE.Close), "Close");
 snprintf(LANGUAGE.Continueinstallgame, sizeof(LANGUAGE.Continueinstallgame), "Continue to install game?");
@@ -102,6 +103,7 @@ snprintf(LANGUAGE.Homemenu, sizeof(LANGUAGE.Homemenu), "HOME Menu");
 snprintf(LANGUAGE.BOOTERROR, sizeof(LANGUAGE.BOOTERROR), "BOOT ERROR");
 snprintf(LANGUAGE.ErrorreadingDisc, sizeof(LANGUAGE.ErrorreadingDisc), "Error reading Disc");
 snprintf(LANGUAGE.ExitUSBISOLoader, sizeof(LANGUAGE.ExitUSBISOLoader), "Exit USB Loader GX?");
+snprintf(LANGUAGE.Everyone, sizeof(LANGUAGE.Everyone), "0 (Everyone)");
 snprintf(LANGUAGE.InitializingNetwork, sizeof(LANGUAGE.InitializingNetwork), "Initializing Network");
 snprintf(LANGUAGE.InsertDisk, sizeof(LANGUAGE.InsertDisk), "Insert Disk");
 snprintf(LANGUAGE.InsertaWiiDisc, sizeof(LANGUAGE.InsertaWiiDisc), "Insert a Wii Disc!");
@@ -153,7 +155,7 @@ snprintf(LANGUAGE.Locked, sizeof(LANGUAGE.Locked), "Locked");
 snprintf(LANGUAGE.LockConsole, sizeof(LANGUAGE.LockConsole), "Lock Console");
 snprintf(LANGUAGE.Patchcountrystrings, sizeof(LANGUAGE.Patchcountrystrings), "Patch Country Strings");
 snprintf(LANGUAGE.Missingfiles, sizeof(LANGUAGE.Missingfiles), "Missing files");
-snprintf(LANGUAGE.Mature, sizeof(LANGUAGE.Mature), "3 (Mature)");
+snprintf(LANGUAGE.Mature, sizeof(LANGUAGE.Mature), "3 (Mature 16+)");
 snprintf(LANGUAGE.Networkiniterror, sizeof(LANGUAGE.Networkiniterror), "Network init error");
 snprintf(LANGUAGE.Neither, sizeof(LANGUAGE.Neither), "Neither");
 snprintf(LANGUAGE.Next, sizeof(LANGUAGE.Next), "Next");
@@ -218,6 +220,7 @@ snprintf(LANGUAGE.Successfullyupdated, sizeof(LANGUAGE.Successfullyupdated), "Su
 snprintf(LANGUAGE.Successfullydeleted, sizeof(LANGUAGE.Successfullydeleted), "Successfully deleted:");
 snprintf(LANGUAGE.SuccessfullySaved, sizeof(LANGUAGE.SuccessfullySaved), "Successfully Saved");
 snprintf(LANGUAGE.SystemDefault, sizeof(LANGUAGE.SystemDefault), "System Default");
+snprintf(LANGUAGE.Teen, sizeof(LANGUAGE.Teen), "2 (Teen 12+)");
 snprintf(LANGUAGE.Thanksto, sizeof(LANGUAGE.Thanksto), "Big thanks to:");
 snprintf(LANGUAGE.ThemePath, sizeof(LANGUAGE.ThemePath), "ThemePath");
 snprintf(LANGUAGE.ThemepathChanged, sizeof(LANGUAGE.ThemepathChanged), "Themepath Changed");
@@ -303,6 +306,10 @@ void language_set(char *name, char *val)
 		strcopy(LANGUAGE.all, val, sizeof(LANGUAGE.all));
 		return;
 	}
+	if (strcmp(name, "Teen") == 0) {
+		strcopy(LANGUAGE.Teen, val, sizeof(LANGUAGE.Teen));
+		return;
+	}
 	if (strcmp(name, "Specialthanksto") == 0) {
 		strcopy(LANGUAGE.Specialthanksto, val, sizeof(LANGUAGE.Specialthanksto));
 		return;
@@ -323,8 +330,8 @@ void language_set(char *name, char *val)
 		strcopy(LANGUAGE.AutoPatch, val, sizeof(LANGUAGE.AutoPatch));
 		return;
 	}
-	if (strcmp(name, "Always") == 0) {
-		strcopy(LANGUAGE.Always, val, sizeof(LANGUAGE.Always));
+	if (strcmp(name, "Adultsonly") == 0) {
+		strcopy(LANGUAGE.Adultsonly, val, sizeof(LANGUAGE.Adultsonly));
 		return;
 	}
 	if (strcmp(name, "awesometool") == 0) {
@@ -553,6 +560,10 @@ void language_set(char *name, char *val)
 	}
 	if (strcmp(name, "ExitUSBISOLoader") == 0) {
 		strcopy(LANGUAGE.ExitUSBISOLoader, val, sizeof(LANGUAGE.ExitUSBISOLoader));
+		return;
+	}
+	if (strcmp(name, "Everyone") == 0) {
+		strcopy(LANGUAGE.Everyone, val, sizeof(LANGUAGE.Everyone));
 		return;
 	}
 	if (strcmp(name, "fave") == 0) {

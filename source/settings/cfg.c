@@ -36,6 +36,7 @@ u8 viChoice = 0;
 u8 iosChoice = 0;
 u8 parentalcontrolChoice = 0;
 u8 fix002 = 0;
+u8 countrystrings = 0;
 u8 onlinefix = 0;
 u8 xflip = 0;
 u8 sort = 0;
@@ -360,6 +361,7 @@ void Global_Default(void)
 	Settings.wiilight = 1;
 	Settings.patchcountrystrings = 0;
 	Settings.titlesOverride = 0;
+	Settings.error002 = 0;
 }
 
 
@@ -985,6 +987,13 @@ void global_cfg_set(char *name, char *val)
 			}
 		return;
 	}
+	else if (strcmp(name, "error002") == 0) {
+		int i;
+		if (sscanf(val, "%d", &i) == 1) {
+            Settings.error002 = i;
+			}
+		return;
+	}
 	else if (strcmp(name, "titlesOverride") == 0) {
 		int i;
 		if (sscanf(val, "%d", &i) == 1) {
@@ -1142,6 +1151,7 @@ void cfg_set_game_opt(struct Game_CFG *game, u8 *id)
 	game->ios = iosChoice;
 	game->parentalcontrol = parentalcontrolChoice;
 	game->errorfix002 = fix002;
+	game->patchcountrystrings = countrystrings;
 	game->onlinegame = onlinefix;
 }
 
@@ -1231,6 +1241,7 @@ bool cfg_save_global()// save global settings
 	fprintf(f, "Cheatcodespath = %s\n ", Settings.Cheatcodespath);
 	fprintf(f, "titlesOverride = %d\n ", Settings.titlesOverride);
 	fprintf(f, "patchcountrystrings = %d\n ", Settings.patchcountrystrings);
+	fprintf(f, "error002 = %d\n ", Settings.error002);
 	fclose(f);
 	return true;
 }
@@ -1296,6 +1307,11 @@ void game_set(char *name, char *val)
 			if (strcmp("errorfix002", opt_name) == 0) {
 				if (sscanf(opt_val, "%hd", &opt_c) == 1) {
 					game->errorfix002 = opt_c;
+				}
+			}
+			if (strcmp("patchcountrystrings", opt_name) == 0) {
+				if (sscanf(opt_val, "%hd", &opt_c) == 1) {
+					game->patchcountrystrings = opt_c;
 				}
 			}
 			if (strcmp("onlinegame", opt_name) == 0) {
@@ -1449,6 +1465,7 @@ bool cfg_save_games()
 		fprintf(f, "ios:%d; ", cfg_game[i].ios);
 		fprintf(f, "pctrl:%d; ", cfg_game[i].parentalcontrol);
 		fprintf(f, "errorfix002:%d; ", cfg_game[i].errorfix002);
+		fprintf(f, "patchcountrystrings:%d; ", cfg_game[i].patchcountrystrings);
 		fprintf(f, "onlinegame:%d;\n", cfg_game[i].onlinegame);
 	}
 	fprintf(f, "# END\n");

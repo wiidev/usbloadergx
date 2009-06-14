@@ -1827,6 +1827,7 @@ int MainMenu(int menu)
         fix002 = game_cfg->errorfix002;
         onlinefix = game_cfg->onlinegame;
         iosChoice = game_cfg->ios;
+        countrystrings = game_cfg->patchcountrystrings;
     } else {
         videoChoice = Settings.video;
         languageChoice = Settings.language;
@@ -1837,8 +1838,9 @@ int MainMenu(int menu)
 		} else {
 		iosChoice = i249;
 		}
-        fix002 = off;
+        fix002 = Settings.error002;
         onlinefix = off;
+        countrystrings = Settings.patchcountrystrings;
     }
     int ios2;
     switch(iosChoice) {
@@ -2000,7 +2002,7 @@ int MainMenu(int menu)
                         break;
     }
 
-    ret = Disc_WiiBoot(videoselected, cheat, vipatch, Settings.patchcountrystrings, errorfixer002);
+    ret = Disc_WiiBoot(videoselected, cheat, vipatch, countrystrings, errorfixer002);
     if (ret < 0) {
         Sys_LoadMenu();
     }

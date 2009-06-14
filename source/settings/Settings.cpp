@@ -717,6 +717,7 @@ int MenuSettings()
                     options2.SetName(4, "Ocarina");
                     options2.SetName(5,"%s", LANGUAGE.BootStandard);
                     options2.SetName(6, "%s",LANGUAGE.QuickBoot);
+                    options2.SetName(7, "%s",LANGUAGE.Error002fix);
                     for(int i = 0; i <= MAXOPTIONS; i++) options2.SetValue(i, NULL);
                     w.Append(&optionBrowser2);
                     optionBrowser2.SetClickable(true);
@@ -743,6 +744,8 @@ int MenuSettings()
                             Settings.cios = 0;
                         if ( Settings.language >= settings_language_max)
                             Settings.language = 0;
+                        if(Settings.ocarina >= settings_off_on_max)
+                            Settings.ocarina = 0;
 
                         if (Settings.video == discdefault) options2.SetValue(0,"%s",LANGUAGE.DiscDefault);
                         else if (Settings.video == systemdefault) options2.SetValue(0,"%s",LANGUAGE.SystemDefault);
@@ -778,6 +781,9 @@ int MenuSettings()
 
                         if (Settings.qboot == no) options2.SetValue(6,"%s",LANGUAGE.No);
                         else if (Settings.qboot == yes) options2.SetValue(6,"%s",LANGUAGE.Yes);
+
+                        if (Settings.error002 == no) options2.SetValue(7,"%s",LANGUAGE.No);
+                        else if (Settings.error002 == yes) options2.SetValue(7,"%s",LANGUAGE.Yes);
 
                         if(backBtn.GetState() == STATE_CLICKED)
                         {
@@ -842,6 +848,9 @@ int MenuSettings()
                             case 6:
                                 Settings.qboot++;
                                 break;
+                            case 7:
+                                Settings.error002++;
+                                break;
                         }
                     }
                     optionBrowser2.SetEffect(EFFECT_FADE, -20);
@@ -887,7 +896,7 @@ int MenuSettings()
                     {
                         VIDEO_WaitVSync ();
 
-                        if (Settings.parentalcontrol > 3 )
+                        if (Settings.parentalcontrol > 4 )
                             Settings.parentalcontrol = 0;
 
                         if( Settings.godmode == 1 ) options2.SetValue(0, LANGUAGE.Unlocked);
@@ -898,10 +907,11 @@ int MenuSettings()
                         else options2.SetValue(1, Settings.unlockCode);
 
                         if (Settings.godmode != 1) options2.SetValue(2, "********");
-                        else if(Settings.parentalcontrol == 0) options2.SetValue(2, "%s", LANGUAGE.OFF);
-                        else if(Settings.parentalcontrol == 1) options2.SetValue(2, "1");
-                        else if(Settings.parentalcontrol == 2) options2.SetValue(2, "2");
-                        else if(Settings.parentalcontrol == 3) options2.SetValue(2, "3");
+                        else if(Settings.parentalcontrol == 0) options2.SetValue(2, LANGUAGE.Everyone);
+                        else if(Settings.parentalcontrol == 1) options2.SetValue(2, LANGUAGE.Child);
+                        else if(Settings.parentalcontrol == 2) options2.SetValue(2, LANGUAGE.Teen);
+                        else if(Settings.parentalcontrol == 3) options2.SetValue(2, LANGUAGE.Mature);
+                        else if(Settings.parentalcontrol == 4) options2.SetValue(2, LANGUAGE.Adultsonly);
 
                         if(backBtn.GetState() == STATE_CLICKED)
                         {
@@ -1671,7 +1681,7 @@ int GameSettings(struct discHdr * header)
 		strncat(gameName, "...", 3);
 	}
 
-	customOptionList options3(9);
+	customOptionList options3(10);
 	options3.SetName(0,"%s", LANGUAGE.VideoMode);
 	options3.SetName(1,"%s", LANGUAGE.VIDTVPatch);
 	options3.SetName(2,"%s", LANGUAGE.Language);
@@ -1680,7 +1690,8 @@ int GameSettings(struct discHdr * header)
 	options3.SetName(5,"%s", LANGUAGE.Parentalcontrol);
 	options3.SetName(6,"%s", LANGUAGE.Error002fix);
 	options3.SetName(7,"%s", LANGUAGE.Onlinefix);
-	options3.SetName(8,"%s", LANGUAGE.Defaultgamesettings);
+	options3.SetName(8,"%s", LANGUAGE.Patchcountrystrings);
+	options3.SetName(9,"%s", LANGUAGE.Defaultgamesettings);
 
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
 	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
@@ -1741,7 +1752,7 @@ int GameSettings(struct discHdr * header)
 	deleteBtn.SetScale(0.9);
 	deleteBtn.SetLabel(&deleteBtnTxt);
 
-	GuiCustomOptionBrowser optionBrowser3(396, 280, &options3, CFG.theme_path, "bg_options_gamesettings.png", bg_options_settings_png, 0, 200);
+	GuiCustomOptionBrowser optionBrowser3(396, 280, &options3, CFG.theme_path, "bg_options_gamesettings.png", bg_options_settings_png, 1, 200);
 	optionBrowser3.SetPosition(0, 90);
 	optionBrowser3.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 
@@ -1768,6 +1779,7 @@ int GameSettings(struct discHdr * header)
 		parentalcontrolChoice = game_cfg->parentalcontrol;
 		fix002 = game_cfg->errorfix002;
 		onlinefix = game_cfg->onlinegame;
+		countrystrings = game_cfg->patchcountrystrings;
 	}
 	else
 	{
@@ -1781,8 +1793,9 @@ int GameSettings(struct discHdr * header)
 		iosChoice = i249;
 		}
 		parentalcontrolChoice = 0;
-		fix002 = off;
+		fix002 = Settings.error002;
 		onlinefix = off;
+		countrystrings = Settings.patchcountrystrings;
 	}
 
 	int opt_lang = languageChoice; // backup language setting
@@ -1822,10 +1835,11 @@ int GameSettings(struct discHdr * header)
 		else if (iosChoice == i222) options3.SetValue(4,"222");
 		else if (iosChoice == i223) options3.SetValue(4,"223");
 
-		if (parentalcontrolChoice == 0) options3.SetValue(5, LANGUAGE.Always);
-		else if (parentalcontrolChoice == 1) options3.SetValue(5,"1");
-		else if (parentalcontrolChoice == 2) options3.SetValue(5,"2");
+		if (parentalcontrolChoice == 0) options3.SetValue(5, LANGUAGE.Everyone);
+		else if (parentalcontrolChoice == 1) options3.SetValue(5, LANGUAGE.Child);
+		else if (parentalcontrolChoice == 2) options3.SetValue(5, LANGUAGE.Teen);
 		else if (parentalcontrolChoice == 3) options3.SetValue(5, LANGUAGE.Mature);
+		else if (parentalcontrolChoice == 4) options3.SetValue(5, LANGUAGE.Adultsonly);
 
         if (fix002 == on) options3.SetValue(6,LANGUAGE.ON);
 		else if (fix002 == off) options3.SetValue(6,LANGUAGE.OFF);
@@ -1833,7 +1847,10 @@ int GameSettings(struct discHdr * header)
         if (onlinefix == on) options3.SetValue(7,LANGUAGE.ON);
 		else if (onlinefix == off) options3.SetValue(7,LANGUAGE.OFF);
 
-        options3.SetValue(8, NULL);
+        if (countrystrings == on) options3.SetValue(8,LANGUAGE.ON);
+		else if (countrystrings == off) options3.SetValue(8,LANGUAGE.OFF);
+
+        options3.SetValue(9, NULL);
 
 		if(shutdown == 1)
 			Sys_Shutdown();
@@ -1860,7 +1877,7 @@ int GameSettings(struct discHdr * header)
 				iosChoice = (iosChoice + 1) % 3;
 				break;
 			case 5:
-				parentalcontrolChoice = (parentalcontrolChoice + 1) % 4;
+				parentalcontrolChoice = (parentalcontrolChoice + 1) % 5;
 				break;
             case 6:
                 fix002 = (fix002+1) % 2;
@@ -1869,6 +1886,9 @@ int GameSettings(struct discHdr * header)
                 onlinefix = (onlinefix+1) % 2;
                 break;
             case 8:
+                countrystrings = (countrystrings+1) % 2;
+                break;
+            case 9:
                 int choice = WindowPrompt(LANGUAGE.Areyousure,0,LANGUAGE.Yes,LANGUAGE.Cancel,0,0);
                 if(choice == 1) {
                     videoChoice = discdefault;
@@ -1877,6 +1897,7 @@ int GameSettings(struct discHdr * header)
                     ocarinaChoice = off;
                     fix002 = off;
                     onlinefix = off;
+                    countrystrings = off;
                     if(Settings.cios == ios222) {
                         iosChoice = i222;
                     } else {
