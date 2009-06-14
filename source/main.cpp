@@ -53,9 +53,15 @@ u8 * GetImageData(void) {
 
 	int ret;
 
-	ctx = PNGU_SelectImageFromBuffer(background_png);
-	if (!ctx)
-		return NULL;
+	if (CONF_GetAspectRatio()) {
+        ctx = PNGU_SelectImageFromBuffer(background169_png);
+        if (!ctx)
+            return NULL;
+    } else {
+        ctx = PNGU_SelectImageFromBuffer(background_png);
+        if (!ctx)
+            return NULL;
+    }
 
 	ret = PNGU_GetImageProperties(ctx, &imgProp);
 	if (ret != PNGU_OK)
@@ -80,7 +86,7 @@ void Background_Show(int x, int y, int z, u8 * data, int angle, int scaleX, int 
 }
 
 
-int main(int argc, char **argv) 
+int main(int argc, char **argv)
 {
 	u32 cookie;
 	FILE *exeFile = NULL;
@@ -103,7 +109,7 @@ int main(int argc, char **argv)
 	SDCard_Init();
 	USBDevice_Init();
 	char cfgpath[256];
-	
+
 	sprintf(cfgpath, "SD:/config/GXGlobal.cfg");
 	if(!cfg_parsefile(cfgpath, &cfg_set)) //no cfg-File on SD: try USB:
 	{
@@ -157,7 +163,7 @@ int main(int argc, char **argv)
 		SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
 	}
 	fclose (exeFile);
-	
+
 	/* load entry point */
 	struct __argv args;
 	bzero(&args, sizeof(args));

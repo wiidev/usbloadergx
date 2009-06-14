@@ -14,4 +14,7 @@
 extern const u8		background_png[];
 extern const u32	background_png_size;
 
+extern const u8		background169_png[];
+extern const u32	background169_png_size;
+
 #endif
