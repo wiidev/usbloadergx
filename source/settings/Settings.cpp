@@ -744,8 +744,8 @@ int MenuSettings()
                             Settings.cios = 0;
                         if ( Settings.language >= settings_language_max)
                             Settings.language = 0;
-                        if(Settings.ocarina >= settings_off_on_max)
-                            Settings.ocarina = 0;
+                        if(Settings.error002 >= settings_off_on_max)
+                            Settings.error002 = 0;
 
                         if (Settings.video == discdefault) options2.SetValue(0,"%s",LANGUAGE.DiscDefault);
                         else if (Settings.video == systemdefault) options2.SetValue(0,"%s",LANGUAGE.SystemDefault);
@@ -907,7 +907,7 @@ int MenuSettings()
                         else options2.SetValue(1, Settings.unlockCode);
 
                         if (Settings.godmode != 1) options2.SetValue(2, "********");
-                        else if(Settings.parentalcontrol == 0) options2.SetValue(2, LANGUAGE.Everyone);
+                        else if(Settings.parentalcontrol == 0) options2.SetValue(2, LANGUAGE.OFF);
                         else if(Settings.parentalcontrol == 1) options2.SetValue(2, LANGUAGE.Child);
                         else if(Settings.parentalcontrol == 2) options2.SetValue(2, LANGUAGE.Teen);
                         else if(Settings.parentalcontrol == 3) options2.SetValue(2, LANGUAGE.Mature);
@@ -1891,13 +1891,13 @@ int GameSettings(struct discHdr * header)
             case 9:
                 int choice = WindowPrompt(LANGUAGE.Areyousure,0,LANGUAGE.Yes,LANGUAGE.Cancel,0,0);
                 if(choice == 1) {
-                    videoChoice = discdefault;
-                    viChoice = off;
-                    languageChoice = ConsoleLangDefault;
-                    ocarinaChoice = off;
-                    fix002 = off;
+                    videoChoice = Settings.video;
+                    viChoice = Settings.vpatch;
+                    languageChoice = Settings.language;
+                    ocarinaChoice = Settings.ocarina;
+                    fix002 = Settings.error002;
                     onlinefix = off;
-                    countrystrings = off;
+                    countrystrings = Settings.patchcountrystrings;
                     if(Settings.cios == ios222) {
                         iosChoice = i222;
                     } else {

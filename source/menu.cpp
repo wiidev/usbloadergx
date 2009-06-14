@@ -867,7 +867,10 @@ static int MenuDiscList()
                                 */
                                 Settings.gameDisplay=list;
                                 menu = MENU_DISCLIST;
-                listBtn.ResetState();
+                                if(isInserted(bootDevice)) {
+                                cfg_save_global();
+                                }
+                                listBtn.ResetState();
                                 break;
                 } else {
                                 /*gameBrowser.Reload(gameList, gameCnt); // initialize before append
@@ -939,7 +942,10 @@ static int MenuDiscList()
                                 */
                                 Settings.gameDisplay=grid;
                                 menu = MENU_DISCLIST;
-                gridBtn.ResetState();
+                                if(isInserted(bootDevice)) {
+                                cfg_save_global();
+                                }
+                                gridBtn.ResetState();
                                 break;
                         } else {
                                 /*
@@ -1007,7 +1013,10 @@ static int MenuDiscList()
                                 */
                                 Settings.gameDisplay=carousel;
                                 menu = MENU_DISCLIST;
-                carouselBtn.ResetState();
+                                if(isInserted(bootDevice)) {
+                                cfg_save_global();
+                                }
+                                carouselBtn.ResetState();
                                 break;
                 } else {
                                 /*
@@ -1411,15 +1420,14 @@ static int MenuInstall()
 			sprintf(errortxt, "%s: %.2fGB, %s: %.2fGB",LANGUAGE.GameSize, gamesize, LANGUAGE.FreeSpace, freespace);
 			choice = WindowPrompt(LANGUAGE.Notenoughfreespace,errortxt,LANGUAGE.ok, LANGUAGE.Return,0,0);
 			if (choice == 1) {
-			    wiilight(1);
 				ret = ProgressWindow(gametxt, name);
+                wiilight(0);
 				if (ret != 0) {
 					WindowPrompt (LANGUAGE.Installerror,0,LANGUAGE.Back,0,0,0);
 					menu = MENU_DISCLIST;
 					break;
 				}
 				else {
-				    wiilight(1);
 					__Menu_GetEntries(); //get the entries again
 					WindowPrompt (LANGUAGE.Successfullyinstalled,name,LANGUAGE.ok,0,0,0);
 					menu = MENU_DISCLIST;
@@ -1433,6 +1441,7 @@ static int MenuInstall()
 		}
 		else {
 			ret = ProgressWindow(gametxt, name);
+            wiilight(0);
 			if (ret != 0) {
 				WindowPrompt (LANGUAGE.Installerror,0,LANGUAGE.Back,0,0,0);
 				menu = MENU_DISCLIST;
