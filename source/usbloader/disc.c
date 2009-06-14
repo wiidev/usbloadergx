@@ -23,20 +23,24 @@ static char gameid[8];
 
 void __Disc_SetLowMem(void)
 {
+    *(vu32 *)0x80000020 = 0x0D15EA5E;       // System Magic
+    *(vu32 *)0x80000024 = 0x00000001;       // Version
+
+	*(vu32 *)0x80000030 = 0x00000000;       // Arena Low
+	*(vu32 *)0x800000F4 = 0x817E5480;       // BI2
+	*(vu32 *)0x800000F8 = 0x0E7BE2C0;       // Console Bus Speed
+	*(vu32 *)0x800000FC = 0x2B73A840;       // Console CPU Speed
+
 	/* Setup low memory */
-	*(vu32 *)0x80000030 = 0x00000000;
 	*(vu32 *)0x80000060 = 0x38A00040;
 	*(vu32 *)0x800000E4 = 0x80431A80;
 	*(vu32 *)0x800000EC = 0x81800000;
-	*(vu32 *)0x800000F4 = 0x817E5480;
-	*(vu32 *)0x800000F8 = 0x0E7BE2C0;
-	*(vu32 *)0x800000FC = 0x2B73A840;
 
 	/* Copy disc ID */
 	memcpy((void *)0x80003180, (void *)0x80000000, 4);
 
 	/* Flush cache */
-	DCFlushRange((void *)0x80000000, 0x3F00);
+	DCFlushRange((void *)0x80000000, 0x17FFFFF);
 }
 
 void __Disc_SetVMode(u8 videoselected)
@@ -95,19 +99,18 @@ void __Disc_SetVMode(u8 videoselected)
 	break;
 
 	case 1:
-        vmode_reg = 1;
-        progressive = (CONF_GetProgressiveScan() > 0) && VIDEO_HaveComponentCable();
-        vmode     = (progressive) ? &TVEurgb60Hz480Prog : &TVPal528IntDf;
+        vmode     =  &TVPal528IntDf;
+        vmode_reg = (vmode->viTVMode) >> 2;
         break;
     case 2:
-        vmode_reg = 5;
         progressive = (CONF_GetProgressiveScan() > 0) && VIDEO_HaveComponentCable();
-        vmode     = (progressive) ? &TVEurgb60Hz480Prog : &TVEurgb60Hz480IntDf;
+        vmode     = (progressive) ? &TVNtsc480Prog : &TVEurgb60Hz480IntDf;
+        vmode_reg = (vmode->viTVMode) >> 2;
         break;
     case 3:
-        vmode_reg = 0;
         progressive = (CONF_GetProgressiveScan() > 0) && VIDEO_HaveComponentCable();
         vmode     = (progressive) ? &TVNtsc480Prog : &TVNtsc480IntDf;
+        vmode_reg = (vmode->viTVMode) >> 2;
         break;
     case 4:
  //       vmode     = VIDEO_GetPreferredMode(NULL);

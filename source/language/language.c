@@ -177,6 +177,7 @@ snprintf(LANGUAGE.OFF, sizeof(LANGUAGE.OFF), "OFF");
 snprintf(LANGUAGE.OfficialSite, sizeof(LANGUAGE.OfficialSite), "Official Site");
 snprintf(LANGUAGE.ON, sizeof(LANGUAGE.ON), "ON");
 snprintf(LANGUAGE.OnlyInstall, sizeof(LANGUAGE.OnlyInstall), "Only for Install");
+snprintf(LANGUAGE.Onlinefix, sizeof(LANGUAGE.Onlinefix), "Online fix");
 snprintf(LANGUAGE.Parentalcontrol, sizeof(LANGUAGE.Parentalcontrol), "Parental Control");
 snprintf(LANGUAGE.Partition, sizeof(LANGUAGE.Partition), "Partition");
 snprintf(LANGUAGE.Password, sizeof(LANGUAGE.Password), "Password");
@@ -868,6 +869,10 @@ void language_set(char *name, char *val)
 	}
 	if (strcmp(name, "ON") == 0) {
 		strcopy(LANGUAGE.ON, val, sizeof(LANGUAGE.ON));
+		return;
+	}
+	if (strcmp(name, "Onlinefix") == 0) {
+		strcopy(LANGUAGE.Onlinefix, val, sizeof(LANGUAGE.Onlinefix));
 		return;
 	}
 	if (strcmp(name, "Parentalcontrol") == 0) {

@@ -176,6 +176,7 @@ struct LANGUAGE
 	char ok[30];
 	char ON[30];
 	char OnlyInstall[50];
+	char Onlinefix[50];
 	char Parentalcontrol[50];
 	char Partition[50];
 	char Password[50];

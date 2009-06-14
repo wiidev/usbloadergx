@@ -37,7 +37,7 @@ int MenuSettings()
 	int ret;
 	int choice = 0;
 	bool exit = false;
-	
+
 	// backup game language setting
 	int opt_lang = 0;
 	opt_lang = Settings.language;
@@ -1635,17 +1635,17 @@ int MenuSettings()
 
 	// if language has changed, reload titles
 	int opt_langnew = 0;
-	opt_langnew = Settings.language; 
+	opt_langnew = Settings.language;
 	if (Settings.titlesOverride==1 && opt_lang != opt_langnew) {
 		CFG_LoadXml(true, true, false); // open file, reload titles, do not keep in memory
 		menu = MENU_DISCLIST;
 	}
-	
+
 	HaltGui();
 
 	mainWindow->RemoveAll();
 	mainWindow->Append(bgImg);
-		
+
 	ResumeGui();
 	return menu;
 }
@@ -1659,7 +1659,7 @@ int GameSettings(struct discHdr * header)
 	bool exit = false;
 	int ret;
 	int retVal = 0;
-		
+
 	char gameName[31];
 
 	if (strlen(get_title(header)) < (27 + 3)) {
@@ -1679,7 +1679,8 @@ int GameSettings(struct discHdr * header)
 	options3.SetName(4, "IOS");
 	options3.SetName(5,"%s", LANGUAGE.Parentalcontrol);
 	options3.SetName(6,"%s", LANGUAGE.Error002fix);
-	options3.SetName(7,"%s", LANGUAGE.Defaultgamesettings);
+	options3.SetName(7,"%s", LANGUAGE.Onlinefix);
+	options3.SetName(8,"%s", LANGUAGE.Defaultgamesettings);
 
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
 	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
@@ -1766,6 +1767,7 @@ int GameSettings(struct discHdr * header)
 		iosChoice = game_cfg->ios;
 		parentalcontrolChoice = game_cfg->parentalcontrol;
 		fix002 = game_cfg->errorfix002;
+		onlinefix = game_cfg->onlinegame;
 	}
 	else
 	{
@@ -1780,10 +1782,11 @@ int GameSettings(struct discHdr * header)
 		}
 		parentalcontrolChoice = 0;
 		fix002 = off;
+		onlinefix = off;
 	}
-	
+
 	int opt_lang = languageChoice; // backup language setting
-	
+
 	ResumeGui();
 
 	while(!exit)
@@ -1827,7 +1830,10 @@ int GameSettings(struct discHdr * header)
         if (fix002 == on) options3.SetValue(6,LANGUAGE.ON);
 		else if (fix002 == off) options3.SetValue(6,LANGUAGE.OFF);
 
-        options3.SetValue(7, NULL);
+        if (onlinefix == on) options3.SetValue(7,LANGUAGE.ON);
+		else if (onlinefix == off) options3.SetValue(7,LANGUAGE.OFF);
+
+        options3.SetValue(8, NULL);
 
 		if(shutdown == 1)
 			Sys_Shutdown();
@@ -1860,6 +1866,9 @@ int GameSettings(struct discHdr * header)
                 fix002 = (fix002+1) % 2;
                 break;
             case 7:
+                onlinefix = (onlinefix+1) % 2;
+                break;
+            case 8:
                 int choice = WindowPrompt(LANGUAGE.Areyousure,0,LANGUAGE.Yes,LANGUAGE.Cancel,0,0);
                 if(choice == 1) {
                     videoChoice = discdefault;
@@ -1867,6 +1876,7 @@ int GameSettings(struct discHdr * header)
                     languageChoice = ConsoleLangDefault;
                     ocarinaChoice = off;
                     fix002 = off;
+                    onlinefix = off;
                     if(Settings.cios == ios222) {
                         iosChoice = i222;
                     } else {
@@ -1888,7 +1898,7 @@ int GameSettings(struct discHdr * header)
 					// if language has changed, reload titles
 					int opt_langnew = 0;
 					game_cfg = CFG_get_game_opt(header->id);
-					if (game_cfg) opt_langnew = game_cfg->language;							
+					if (game_cfg) opt_langnew = game_cfg->language;
 					if (Settings.titlesOverride==1 && opt_lang != opt_langnew) {
 						CFG_LoadXml(true, true, false); // open file, reload titles, do not keep in memory
 					}

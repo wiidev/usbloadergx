@@ -515,16 +515,10 @@ static int MenuDiscList()
         clockTimeBack.SetAlignment(THEME.clockAlign, ALIGN_TOP);
         clockTimeBack.SetPosition(THEME.clock_x, THEME.clock_y);
         clockTimeBack.SetFont(fontClock);
-        if (Settings.gameDisplay==grid || Settings.gameDisplay==carousel) {
-                clockTimeBack.SetPosition(THEME.clock_x, THEME.clock_y+3);
-        }
         GuiText clockTime(theTime, 40, (GXColor){THEME.clock_r, THEME.clock_g, THEME.clock_b, 240});
         clockTime.SetAlignment(THEME.clockAlign, ALIGN_TOP);
         clockTime.SetPosition(THEME.clock_x, THEME.clock_y);
         clockTime.SetFont(fontClock);
-        if (Settings.gameDisplay==grid || Settings.gameDisplay==carousel) {
-                clockTime.SetPosition(THEME.clock_x, THEME.clock_y+3);
-        }
 
         HaltGui();
         GuiWindow w(screenwidth, screenheight);
@@ -1831,6 +1825,7 @@ int MainMenu(int menu)
         ocarinaChoice = game_cfg->ocarina;
         viChoice = game_cfg->vipatch;
         fix002 = game_cfg->errorfix002;
+        onlinefix = game_cfg->onlinegame;
         iosChoice = game_cfg->ios;
     } else {
         videoChoice = Settings.video;
@@ -1843,6 +1838,7 @@ int MainMenu(int menu)
 		iosChoice = i249;
 		}
         fix002 = off;
+        onlinefix = off;
     }
     int ios2;
     switch(iosChoice) {
@@ -1863,7 +1859,7 @@ int MainMenu(int menu)
                 break;
     }
 
-    if(IOS_GetVersion() != ios2 || IsNetworkInit() == true) {
+    if(IOS_GetVersion() != ios2 || (IsNetworkInit() == true && onlinefix == on)) {
         ret = Sys_IosReload(ios2);
         if(ret < 0) {
             Sys_IosReload(249);
@@ -1944,33 +1940,31 @@ int MainMenu(int menu)
     switch(videoChoice)
     {
                         case discdefault:
-                                videoselected = 0;
+                            videoselected = 0;
                         break;
 
                         case pal50:
-                                videoselected = 1;
+                            videoselected = 1;
                         break;
 
                         case pal60:
-                                videoselected = 2;
+                            videoselected = 2;
                         break;
 
                         case ntsc:
-                                videoselected = 3;
+                            videoselected = 3;
 						break;
 
                         case systemdefault:
-
-                                videoselected = 4;
+                            videoselected = 4;
                         break;
 
                         case patch:
-
-                                videoselected = 5;
+                            videoselected = 5;
                         break;
 
                         default:
-                                videoselected = 0;
+                            videoselected = 0;
                         break;
     }
 

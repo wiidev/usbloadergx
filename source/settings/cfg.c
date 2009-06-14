@@ -36,6 +36,7 @@ u8 viChoice = 0;
 u8 iosChoice = 0;
 u8 parentalcontrolChoice = 0;
 u8 fix002 = 0;
+u8 onlinefix = 0;
 u8 xflip = 0;
 u8 sort = 0;
 u8 fave = 0;
@@ -267,7 +268,7 @@ void CFG_Default(int widescreen) // -1 = non forced Mode
 		THEME.settingsTxt_g = 0;
 		THEME.settingsTxt_b = 0;
 		THEME.cover_x = 26;
-		THEME.cover_y = 55;
+		THEME.cover_y = 58;
 		THEME.showID = 1;
 	//	THEME.maxcharacters = 36;
 		THEME.id_x = 68;
@@ -1141,6 +1142,7 @@ void cfg_set_game_opt(struct Game_CFG *game, u8 *id)
 	game->ios = iosChoice;
 	game->parentalcontrol = parentalcontrolChoice;
 	game->errorfix002 = fix002;
+	game->onlinegame = onlinefix;
 }
 
 struct Game_NUM* cfg_get_game_num(u8 *id)
@@ -1296,6 +1298,11 @@ void game_set(char *name, char *val)
 					game->errorfix002 = opt_c;
 				}
 			}
+			if (strcmp("onlinegame", opt_name) == 0) {
+				if (sscanf(opt_val, "%hd", &opt_c) == 1) {
+					game->onlinegame = opt_c;
+				}
+			}
 
 		}
 		// next opt
@@ -1439,9 +1446,10 @@ bool cfg_save_games()
 		if (s) fprintf(f, "language:%s; ", s);
 		fprintf(f, "ocarina:%d; ", cfg_game[i].ocarina);
 		fprintf(f, "vipatch:%d; ", cfg_game[i].vipatch);
-		fprintf(f, "ios:%d;", cfg_game[i].ios);
-		fprintf(f, "pctrl:%d;", cfg_game[i].parentalcontrol);
-		fprintf(f, "errorfix002:%d;\n", cfg_game[i].errorfix002);
+		fprintf(f, "ios:%d; ", cfg_game[i].ios);
+		fprintf(f, "pctrl:%d; ", cfg_game[i].parentalcontrol);
+		fprintf(f, "errorfix002:%d; ", cfg_game[i].errorfix002);
+		fprintf(f, "onlinegame:%d;\n", cfg_game[i].onlinegame);
 	}
 	fprintf(f, "# END\n");
 	fclose(f);
@@ -1606,13 +1614,13 @@ void CFG_Load(void)
 
 	Global_Default(); //global default depends on theme information
 	CFG_LoadGlobal();
-	
+
 	if (Settings.titlesOverride==1) CFG_LoadXml(true, true, false); // load titles, do not keep in memory
-	
+
 	// loaded after database to override database titles with custom titles
 	snprintf(pathname, sizeof(pathname), "%stitles.txt", Settings.titlestxt_path);
 	cfg_parsefile(pathname, &title_set);
-	
+
 //	cfg_parsearg(argc, argv);
 }
 
