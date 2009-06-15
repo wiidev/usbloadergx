@@ -245,6 +245,12 @@ void GuiButton::SetToolTip(GuiElement* tt, int x, int y, int h_align, int v_alig
 	}
 }
 
+void GuiButton::RemoveToolTip()
+{
+	LOCK(this);
+		toolTip = NULL;
+}
+
 void GuiButton::RemoveSoundOver()
 {
 	LOCK(this);
@@ -335,7 +341,6 @@ void GuiButton::ScrollIsOn(int f)
 	LOCK(this);
     scrollison = f;
 }
-
 void GuiButton::Update(GuiTrigger * t)
 {
 	LOCK(this);
@@ -492,3 +497,4 @@ void GuiButton::Update(GuiTrigger * t)
 	if(updateCB)
 		updateCB(this);
 }
+

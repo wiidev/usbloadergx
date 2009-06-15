@@ -52,7 +52,10 @@ class GuiGameGrid : public GuiElement
 
 		GuiImageData * imgLeft;
 		GuiImageData * imgRight;
-
+		
+		GuiTooltip * titleTT;
+		
+        
 		GuiSound * btnSoundOver;
 		GuiSound * btnSoundClick;
 		GuiTrigger * trigA;

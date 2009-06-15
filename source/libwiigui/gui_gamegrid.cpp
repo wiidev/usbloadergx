@@ -14,6 +14,7 @@
 #include "../settings/cfg.h"
 #include "../prompts/PromptWindows.h"
 #include "../language/language.h"
+#include "../menu.h"
 
 #include <string.h>
 #include <math.h>
@@ -38,6 +39,9 @@ u8 goback=0;
 int goLeft = 0, goRight=0;
 char debugbuffer[100];
 int c;
+int selectedOld=0;
+int wait=0,wait1=0;
+bool isover=false;
 
 /**
  * Constructor for the GuiGamegrid class.
@@ -108,10 +112,10 @@ GuiGameGrid::GuiGameGrid(int w, int h, struct discHdr * l, int count, const char
 	btnLeft->SetTrigger(trigMinus);
 	btnLeft->SetEffectGrow();
 	
-	debugTxt = new GuiText("fag", 14, (GXColor){0,0,0, 255});
+	/*debugTxt = new GuiText("fag", 14, (GXColor){0,0,0, 255});
 	debugTxt->SetParent(this);
 	debugTxt->SetAlignment(2,5); 
-	debugTxt->SetPosition(0,180);  
+	debugTxt->SetPosition(0,180);*/  
 	
 
 	btnRightImg = new GuiImage(imgRight);
@@ -139,6 +143,16 @@ GuiGameGrid::GuiGameGrid(int w, int h, struct discHdr * l, int count, const char
 	btnRowDown->SetTrigger(trig1);
 	
 	
+//	titleTxt = new GuiText("test");
+	
+	titleTT = new GuiTooltip("test");
+	titleTT->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	titleTT->SetPosition(-100,0);
+	
+//        if (Settings.wsprompt == yes)
+//                installBtnTT.SetWidescreen(CFG.widescreen);
+	
+	
 	//if (count>0){
 
 	gameIndex = new int[pagesize];
@@ -146,6 +160,7 @@ GuiGameGrid::GuiGameGrid(int w, int h, struct discHdr * l, int count, const char
 	bob = new int[pagesize];
 	coverImg = new GuiImage * [gameCnt];
 	cover = new GuiImageData * [gameCnt];
+	//titleTxt = new GuiText * [gameCnt];
 
 	for(int i=0; i<pagesize; i++) {
 		bob[i]=i;
@@ -178,6 +193,9 @@ GuiGameGrid::GuiGameGrid(int w, int h, struct discHdr * l, int count, const char
 		coverImg[i]->SetWidescreen(CFG.widescreen);
 		if (rows==2)coverImg[i]->SetScale(.6);//these are the numbers for 2 rows
 		else if (rows==3)coverImg[i]->SetScale(.26);//these are the numbers for 3 rows
+		
+		//titleTxt[i] = new GuiText(get_title(&gameList[i]), 20, (GXColor){0,0,0, 0xff});
+		
 		
 	}
 	
@@ -470,8 +488,6 @@ int GuiGameGrid::GetSelectedOption()
 	}
 	return found;
 }
-
-
 /****************************************************************************
  * FindMenuItem
  *
@@ -523,11 +539,17 @@ void GuiGameGrid::Draw()
 	btnRowUp->Draw();
 	btnRowDown->Draw();
 	//debugTxt->Draw();
+	if ((wait>75)&&(Settings.tooltips == TooltipsOn))
+	titleTT->Draw();
+	
+	
 	
 
 	this->UpdateEffects();
 	}
 }
+
+
 
 /**
  * Change the number of rows 
@@ -741,7 +763,7 @@ void GuiGameGrid::Update(GuiTrigger * t)
 	// for debugging
 	//snprintf(debugbuffer, sizeof(debugbuffer), "count: %i listOffset: %i", count,listOffset);
 	//debugTxt->SetText(debugbuffer);
-	//	debugTxt->Draw();
+	//debugTxt->Draw();
 	
 	btnRight->Update(t);
 	btnLeft->Update(t);
@@ -1295,6 +1317,53 @@ void GuiGameGrid::Update(GuiTrigger * t)
 		}
 	}
 	
+	
+	int ttoffset=0;
+	if (rows==1)ttoffset=70;
+	if (rows==2)ttoffset=35;
+	char titlebuffer[50];
+	int selected = this->GetSelectedOption();
+	//3 different loops here with different alignment for tooltips
+	//depending on where on the screen the game is
+	for(int i=0; i < (pagesize/3); i++) {
+		game[i]->RemoveToolTip();
+		
+		if (game[bob[i]]->GetState()==STATE_SELECTED)
+		{
+		
+		game[bob[i]]->SetToolTip(titleTT,ttoffset,0,0,5);
+		}
+	}	
+	for(int i=(pagesize/3); i < (2* pagesize/3); i++) {
+		game[i]->RemoveToolTip();
+		
+		if (game[bob[i]]->GetState()==STATE_SELECTED)
+		{
+		game[bob[i]]->SetToolTip(titleTT,0,0,2,5);
+		isover=true;
+		}
+	}	
+	for(int i=(2* pagesize/3); i < pagesize; i++) {
+		game[i]->RemoveToolTip();
+		
+		if (game[bob[i]]->GetState()==STATE_SELECTED)
+		{
+		game[bob[i]]->SetToolTip(titleTT,-ttoffset,0,1,5);
+		}
+	}	
+	snprintf(titlebuffer, sizeof(titlebuffer), "%s",get_title(&gameList[this->GetSelectedOption()]));
+	if (selected!=selectedOld){
+		delete titleTT;
+		titleTT = new GuiTooltip(titlebuffer);
+		wait=0;wait1=0;
+	}
+	selectedOld=selected;
+	if (wait1==0){wait++;if(wait>500)wait1=1;}//500 *2 is the time that the tooltips stay on screen
+	if ((wait1==1)&&(wait>-1)){wait--;}
+	
+		
+	//snprintf(debugbuffer, sizeof(debugbuffer), "faggot %i %s", GetOverImage(t),get_title(&gameList[this->GetSelectedOption()]));
+	//debugTxt->SetText(debugbuffer);
 	if ((btnRowUp->GetState() == STATE_CLICKED)&&(c>0)) {
 		if ((rows==1)&&(gameCnt>=16))this->ChangeRows(2);
 		else if ((rows==2)&&(gameCnt>=42))this->ChangeRows(3);

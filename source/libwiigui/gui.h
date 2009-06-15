@@ -853,6 +853,8 @@ class GuiButton : public GuiElement
 		//!Sets the button's Tooltip on over
 		//!\param tt Pointer to GuiElement object, x & y Positioning, h & v Align
 		void SetToolTip(GuiElement* tt, int x, int y, int h=ALIGN_RIGHT, int v=ALIGN_TOP);
+		
+		void RemoveToolTip();
 		//!Constantly called to draw the GuiButton
 		void Draw();
 		void DrawTooltip();
