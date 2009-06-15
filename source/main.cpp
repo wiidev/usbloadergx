@@ -25,13 +25,10 @@
  */
 
 #include <gccore.h>
-#include <wiiuse/wpad.h>
-#include <fat.h>
-#include <sdcard/wiisd_io.h>
 #include <malloc.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include <ogc/machine/processor.h>
 
 #include "pngu/pngu.h"
@@ -43,8 +40,8 @@
 #include "fatmounter.h"
 
 
-PNGUPROP imgProp;
-IMGCTX ctx;
+static PNGUPROP imgProp;
+static IMGCTX ctx;
 
 
 u8 * GetImageData(void) {
@@ -108,49 +105,65 @@ int main(int argc, char **argv)
 	/* check devices */
 	SDCard_Init();
 	USBDevice_Init();
+
 	char cfgpath[256];
+	bool result = false;
 
 	sprintf(cfgpath, "SD:/config/GXGlobal.cfg");
-	if(!cfg_parsefile(cfgpath, &cfg_set)) //no cfg-File on SD: try USB:
+	result = cfg_parsefile(cfgpath, &cfg_set);
+	if(!result) //no cfg-File on SD: try USB:
 	{
 		sprintf(cfgpath, "USB:/config/GXGlobal.cfg");
-		cfg_parsefile(cfgpath, &cfg_set);
+		result = cfg_parsefile(cfgpath, &cfg_set);
 	}
-	if(update_path[0] == '\0') // non cfg-File loaded or update_path not set
+
+    if(result)
+    {
+        sprintf(cfgpath, "%sboot.dol", update_path);
+        /* Open dol File and check exist */
+        exeFile = fopen (cfgpath, "rb");
+        if (exeFile==NULL)
+        {
+            sprintf(cfgpath, "%sboot.elf", update_path);
+            exeFile = fopen (cfgpath,"rb");
+        }
+        if (exeFile==NULL)
+            result = false;
+        else
+        result = true;
+    }
+
+	if(!result) // non cfg-File loaded or update_path not set
 	{
 		/* Open dol File and check exist */
-		strcpy(cfgpath, "SD:/apps/usbloader_gx/boot.dol");
+		sprintf(cfgpath, "SD:/apps/usbloader_gx/boot.dol");
 		exeFile = fopen (cfgpath ,"rb");
 		if (exeFile==NULL)
 		{
-			strcpy(cfgpath, "SD:/apps/usbloader_gx/boot.elf");
+			sprintf(cfgpath, "SD:/apps/usbloader_gx/boot.elf");
 			exeFile = fopen (cfgpath ,"rb");
 		}
 		if (exeFile==NULL)
 		{
-			strcpy(cfgpath, "USB:/apps/usbloader_gx/boot.dol");
+			sprintf(cfgpath, "USB:/apps/usbloader_gx/boot.dol");
 			exeFile = fopen (cfgpath ,"rb");
 		}
 		if (exeFile==NULL)
 		{
-			strcpy(cfgpath, "USB:/apps/usbloader_gx/boot.elf");
+			sprintf(cfgpath, "USB:/apps/usbloader_gx/boot.elf");
 			exeFile = fopen (cfgpath ,"rb");
 		}
-		if (exeFile==NULL)
+		// if nothing found exiting
+		if (exeFile==NULL) {
+            printf("\n\n\t\tCan't find DOL File...\n");
+            Menu_Render();
+            sleep(3);
+            fclose (exeFile);
+            SDCard_deInit();
+            USBDevice_deInit();
+            StopGX();
 			SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
-	}
-	else
-	{
-		sprintf(cfgpath, "%sboot.dol", update_path);
-		/* Open dol File and check exist */
-		exeFile = fopen (cfgpath, "rb");
-		if (exeFile==NULL)
-		{
-			sprintf(cfgpath, "%sboot.elf", update_path);
-			exeFile = fopen (cfgpath,"rb");
 		}
-		if (exeFile==NULL)
-			SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
 	}
 
 	fseek (exeFile, 0, SEEK_END);
@@ -159,7 +172,13 @@ int main(int argc, char **argv)
 
 	if(fread (exeBuffer, 1, exeSize, exeFile) != (unsigned int) exeSize)
 	{
-		printf("Can't open DOL File...\n");
+		printf("\n\n\t\tCan't open DOL File...\n");
+		Menu_Render();
+        fclose (exeFile);
+		sleep(3);
+        SDCard_deInit();
+        USBDevice_deInit();
+        StopGX();
 		SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
 	}
 	fclose (exeFile);
@@ -172,7 +191,7 @@ int main(int argc, char **argv)
 	args.commandLine = (char*)malloc(args.length);
 	if (!args.commandLine) SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
 	strcpy(args.commandLine, cfgpath);
-	args.commandLine[args.length - 1] = '\x00';
+	args.commandLine[args.length - 1] = '\0';
 	args.argc = 1;
 	args.argv = &args.commandLine;
 	args.endARGV = args.argv + 1;
@@ -195,6 +214,12 @@ int main(int argc, char **argv)
 	StopGX();
 	if (exeEntryPointAddress == 0) {
 		printf("EntryPointAddress  failed...\n");
+        Menu_Render();
+        sleep(3);
+        fclose (exeFile);
+        SDCard_deInit();
+        USBDevice_deInit();
+        StopGX();
 		SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);;
 	}
 	exeEntryPoint = (entrypoint) exeEntryPointAddress;

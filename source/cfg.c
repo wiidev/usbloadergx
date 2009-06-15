@@ -8,7 +8,7 @@
 
 #include "cfg.h"
 
-char update_path[150]="";
+char update_path[150];
 
 static char *cfg_name, *cfg_val;
 
