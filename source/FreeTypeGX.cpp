@@ -20,6 +20,7 @@
  * along with FreeTypeGX.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <sys/stat.h>
 #include "FreeTypeGX.h"
 #include "language/CH2Unicode.h"
 #include "language/GB2Unicode.h"
@@ -77,6 +78,7 @@ FreeTypeGX::FreeTypeGX(uint8_t textureFormat, uint8_t vertexIndex) {
  * Default destructor for the FreeTypeGX class.
  */
 FreeTypeGX::~FreeTypeGX() {
+	FT_Done_FreeType(this->ftLibrary);
 	this->unloadFont();
 }
 
@@ -205,11 +207,13 @@ void FreeTypeGX::setDefaultMode() {
  * @param pointSize	The desired point size this wrapper's configured font face.
  * @param cacheAll	Optional flag to specify if all font characters should be cached when the class object is created. If specified as false the characters only become cached the first time they are used. If not specified default value is false.
  */
-uint16_t FreeTypeGX::loadFont(uint8_t* fontBuffer, FT_Long bufferSize, FT_UInt pointSize, bool cacheAll) {
+#include <unistd.h>
+uint16_t FreeTypeGX::loadFont(char* fontPath, uint8_t* fontBuffer, FT_Long bufferSize, FT_UInt pointSize, bool cacheAll) {
 	this->unloadFont();
 	this->ftPointSize = pointSize;
-
-	FT_New_Memory_Face(this->ftLibrary, (FT_Byte *)fontBuffer, bufferSize, 0, &this->ftFace);
+	struct stat st;
+	if( !( fontPath && (stat(fontPath, &st)==0) && (FT_New_Face(this->ftLibrary, fontPath, 0, &this->ftFace)==0) ) )
+		FT_New_Memory_Face(this->ftLibrary, (FT_Byte *)fontBuffer, bufferSize, 0, &this->ftFace);
 
 	if(this->ftPointSize > 0)
 		FT_Set_Pixel_Sizes(this->ftFace, 0, this->ftPointSize);
@@ -228,8 +232,8 @@ uint16_t FreeTypeGX::loadFont(uint8_t* fontBuffer, FT_Long bufferSize, FT_UInt p
  *
  * \overload
  */
-uint16_t FreeTypeGX::loadFont(const uint8_t* fontBuffer, FT_Long bufferSize, FT_UInt pointSize, bool cacheAll) {
-	return this->loadFont((uint8_t *)fontBuffer, bufferSize, pointSize, cacheAll);
+uint16_t FreeTypeGX::loadFont(const char* fontPath, const uint8_t* fontBuffer, FT_Long bufferSize, FT_UInt pointSize, bool cacheAll) {
+	return this->loadFont((char*)fontPath, (uint8_t *)fontBuffer, bufferSize, pointSize, cacheAll);
 }
 
 /**

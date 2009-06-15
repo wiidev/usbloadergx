@@ -78,7 +78,8 @@ main(int argc, char *argv[])
 	if(!bootDevice_found)
 	{
 		//try USB
-        if((stat("USB:/apps/usbloader_gx/boot.dol", NULL) == 0) || (stat("USB:/apps/usbloader_gx/boot.elf", NULL) == 0))
+		struct stat st;
+        if((stat("USB:/apps/usbloader_gx/boot.dol", &st) == 0) || (stat("USB:/apps/usbloader_gx/boot.elf", NULL) == 0))
 			strcpy(bootDevice, "USB:");
 	}
 
@@ -119,13 +120,28 @@ main(int argc, char *argv[])
 
 	WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
 	WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
-
+printf("\n\n       load Font\n");
 	fontSystem = new FreeTypeGX();
-	fontSystem->loadFont(font_ttf, font_ttf_size, 0);
+	char *fontPath=0;
+	asprintf(&fontPath, "%sfont.ttf", CFG.theme_path);
+printf("       from: %s\n", fontPath);
+printf("       5\n");
+sleep(1);
+printf("       4\n");
+sleep(1);
+printf("       3\n");
+sleep(1);
+printf("       2\n");
+sleep(1);
+printf("       1\n");
+sleep(1);
+printf("       0\n");
+	fontSystem->loadFont(fontPath, font_ttf, font_ttf_size, 0);
 	fontSystem->setCompatibilityMode(FTGX_COMPATIBILITY_DEFAULT_TEVOP_GX_PASSCLR | FTGX_COMPATIBILITY_DEFAULT_VTXDESC_GX_NONE);
+	free(fontPath);
 
 	fontClock = new FreeTypeGX();
-	fontClock->loadFont(clock_ttf, clock_ttf_size, 0);
+	fontClock->loadFont(NULL, clock_ttf, clock_ttf_size, 0);
 	fontClock->setCompatibilityMode(FTGX_COMPATIBILITY_DEFAULT_TEVOP_GX_PASSCLR | FTGX_COMPATIBILITY_DEFAULT_VTXDESC_GX_NONE);
 
 	InitGUIThreads();
