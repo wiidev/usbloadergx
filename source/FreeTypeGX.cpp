@@ -207,7 +207,6 @@ void FreeTypeGX::setDefaultMode() {
  * @param pointSize	The desired point size this wrapper's configured font face.
  * @param cacheAll	Optional flag to specify if all font characters should be cached when the class object is created. If specified as false the characters only become cached the first time they are used. If not specified default value is false.
  */
-#include <unistd.h>
 uint16_t FreeTypeGX::loadFont(char* fontPath, uint8_t* fontBuffer, FT_Long bufferSize, FT_UInt pointSize, bool cacheAll) {
 	this->unloadFont();
 	this->ftPointSize = pointSize;

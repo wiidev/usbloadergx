@@ -120,22 +120,10 @@ main(int argc, char *argv[])
 
 	WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
 	WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
-printf("\n\n       load Font\n");
+
 	fontSystem = new FreeTypeGX();
 	char *fontPath=0;
 	asprintf(&fontPath, "%sfont.ttf", CFG.theme_path);
-printf("       from: %s\n", fontPath);
-printf("       5\n");
-sleep(1);
-printf("       4\n");
-sleep(1);
-printf("       3\n");
-sleep(1);
-printf("       2\n");
-sleep(1);
-printf("       1\n");
-sleep(1);
-printf("       0\n");
 	fontSystem->loadFont(fontPath, font_ttf, font_ttf_size, 0);
 	fontSystem->setCompatibilityMode(FTGX_COMPATIBILITY_DEFAULT_TEVOP_GX_PASSCLR | FTGX_COMPATIBILITY_DEFAULT_VTXDESC_GX_NONE);
 	free(fontPath);
