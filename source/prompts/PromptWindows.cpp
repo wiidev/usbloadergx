@@ -168,11 +168,11 @@ void WindowCredits()
 	txt[i] = new GuiText(LANGUAGE.Credits, 26, (GXColor){255, 255, 255, 255});
 	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(0,12); i++;
 
-	char SvnRev[10];
-	snprintf(SvnRev, 10, "Rev%s", SVN_REV);
+	char SvnRev[30];
+	snprintf(SvnRev,sizeof(SvnRev), "Rev%s   IOS%u (Rev %u)", SVN_REV, IOS_GetVersion(), IOS_GetRevision());
 
-	txt[i] = new GuiText(SvnRev, 18, (GXColor){255, 255, 255, 255});
-	txt[i]->SetAlignment(ALIGN_RIGHT, ALIGN_TOP); txt[i]->SetPosition(-30,y); i++; y+=34;
+	txt[i] = new GuiText(SvnRev, 16, (GXColor){255, 255, 255, 255});
+	txt[i]->SetAlignment(ALIGN_RIGHT, ALIGN_TOP); txt[i]->SetPosition(0,y); i++; y+=34;
 
 	txt[i] = new GuiText("USB Loader GX", 24, (GXColor){255, 255, 255, 255});
 	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(0,y); i++; y+=26;
