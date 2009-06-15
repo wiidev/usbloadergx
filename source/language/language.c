@@ -386,6 +386,10 @@ void language_set(char *name, char *val)
 		strcopy(LANGUAGE.Cantdelete, val, sizeof(LANGUAGE.Cantdelete));
 		return;
 	}
+	if (strcmp(name, "Child") == 0) {
+        strcopy(LANGUAGE.Child, val, sizeof(LANGUAGE.Child));
+        return;
+    }
 	if (strcmp(name, "ClicktoDownloadCovers") == 0) {
 		strcopy(LANGUAGE.ClicktoDownloadCovers, val, sizeof(LANGUAGE.ClicktoDownloadCovers));
 		return;
