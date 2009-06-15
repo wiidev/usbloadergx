@@ -79,7 +79,7 @@ main(int argc, char *argv[])
 	{
 		//try USB
 		struct stat st;
-        if((stat("USB:/apps/usbloader_gx/boot.dol", &st) == 0) || (stat("USB:/apps/usbloader_gx/boot.elf", NULL) == 0))
+        if((stat("USB:/apps/usbloader_gx/boot.dol", &st) == 0) || (stat("USB:/apps/usbloader_gx/boot.elf", &st) == 0))
 			strcpy(bootDevice, "USB:");
 	}
 
