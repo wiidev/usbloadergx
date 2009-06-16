@@ -148,6 +148,7 @@ GuiGameGrid::GuiGameGrid(int w, int h, struct discHdr * l, int count, const char
 	titleTT = new GuiTooltip("test");
 	titleTT->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	titleTT->SetPosition(-100,0);
+	titleTT->SetAlpha(175);
 	
 //        if (Settings.wsprompt == yes)
 //                installBtnTT.SetWidescreen(CFG.widescreen);
@@ -1355,6 +1356,7 @@ void GuiGameGrid::Update(GuiTrigger * t)
 	if (selected!=selectedOld){
 		delete titleTT;
 		titleTT = new GuiTooltip(titlebuffer);
+		titleTT->SetAlpha(175);
 		wait=0;wait1=0;
 	}
 	selectedOld=selected;

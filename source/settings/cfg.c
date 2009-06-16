@@ -223,6 +223,7 @@ void CFG_Default(int widescreen) // -1 = non forced Mode
 		snprintf(Settings.oggload_path, sizeof(Settings.oggload_path), "%s/config/backgroundmusic/", bootDevice);
 		snprintf(Settings.update_path, sizeof(Settings.update_path), "%s/apps/usbloader_gx/", bootDevice);
 		snprintf(Settings.Cheatcodespath, sizeof(Settings.Cheatcodespath), "%s/codes/", bootDevice);
+		snprintf(Settings.dolpath, sizeof(Settings.dolpath), "%s/", bootDevice);
 		sprintf(Settings.ogg_path, "notset");
 
 		//all alignments are left top here
@@ -488,6 +489,10 @@ void path_set(char *name, char *val)
 	}
 	if (strcmp(name, "oggload_path") == 0) {
 		strcopy(Settings.oggload_path, val, sizeof(Settings.oggload_path));
+		return;
+	}
+    if (strcmp(name, "dolpath") == 0) {
+		strcopy(Settings.dolpath, val, sizeof(Settings.dolpath));
 		return;
 	}
     if (strcmp(name, "ogg_path") == 0) {
@@ -1212,6 +1217,7 @@ bool cfg_save_global()// save global settings
 	} else {
     fprintf(f, "godmode = %d\n ", 0);
 	}
+	fprintf(f, "dolpath = %s\n ", Settings.dolpath);
 	fprintf(f, "ogg_path = %s\n ", Settings.ogg_path);
 	fprintf(f, "wiilight = %d\n ", Settings.wiilight);
 	fprintf(f, "gameDisplay = %d\n ", Settings.gameDisplay);

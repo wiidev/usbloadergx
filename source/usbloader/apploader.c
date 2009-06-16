@@ -9,6 +9,7 @@
 #include "wpad.h"
 #include "disc.h"
 #include "alternatedol.h"
+#include "settings/cfg.h"
 
 /*KENOBI! - FISHEARS*/
 extern const unsigned char kenobiwii[];
@@ -30,7 +31,7 @@ static u8 *appldr = (u8 *)0x81200000;
 
 /* Variables */
 static u32 buffer[0x20] ATTRIBUTE_ALIGN(32);
-
+struct SSettings Settings;
 
 static void __noprint(const char *fmt, ...)
 {
@@ -340,7 +341,11 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
     if(alternatedol == 1) {
         void *dolbuffer;
         int dollen;
-        char * path = "SD:/";
+		
+		char * path = Settings.dolpath;
+		//snprintf(path, sizeof(path), Settings.dolpath);
+		
+        //char * path = "SD:/";
         bool dolloaded = Load_Dol(&dolbuffer, &dollen, path);
         if(dolloaded) {
             Remove_001_Protection(dolbuffer, dollen);

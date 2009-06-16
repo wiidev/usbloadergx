@@ -70,6 +70,9 @@ struct LANGUAGE
 	char CoverPath[50];
 	char CoverpathChanged[50];
 	char Coverpathchange[50];
+	char DolPath[50];
+	char DolpathChanged[50];
+	char Dolpathchange[50];
 	char Cheatcodespathchanged[80];
 	char Cheatcodespath[80];
 	char count[20];
