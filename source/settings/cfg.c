@@ -18,14 +18,6 @@ struct SSettings Settings;
 
 char bootDevice[10] = "SD:";
 
-//char *cfg_path = "SD:/apps/usbloader/";
-
-char current_path[100];
-
-/* configurable fields */
-
-//define variables
-
 struct CFG CFG;
 struct THEME THEME;
 u8 ocarinaChoice = 0;
@@ -1008,7 +1000,7 @@ bool trimsplit(char *line, char *part1, char *part2, char delim, int size)
 void cfg_parseline(char *line, void (*set_func)(char*, char*))
 {
 	// split name = value
-	char tmp[200], name[100], val[100];
+	char tmp[200], name[200], val[200];
 	strcopy(tmp, line, sizeof(tmp));
 	char *eq = strchr(tmp, '=');
 	if (!eq) return;
@@ -1022,7 +1014,7 @@ void cfg_parseline(char *line, void (*set_func)(char*, char*))
 void cfg_parsetitleline(char *line, void (*set_func)(char*, char*, u8))
 {
 	// split name = value
-	char tmp[200], name[100], val[100];
+	char tmp[200], name[200], val[200];
 	int block = 0;
 	strcopy(tmp, line, sizeof(tmp));
 	char *eq = strchr(tmp, '=');
@@ -1247,7 +1239,7 @@ void game_set(char *name, char *val)
 
 	// parse val
 	// first split options by ;
-	char opt[100], *p, *np;
+	char opt[200], *p, *np;
 	p = val;
 
 	while(p) {
@@ -1256,7 +1248,7 @@ void game_set(char *name, char *val)
 		else trimcopy(opt, p, sizeof(opt));
 		//printf("GAME(%s) (%s)\n", id, opt); sleep(1);
 		// parse opt 'language:english'
-		char opt_name[100], opt_val[100];
+		char opt_name[200], opt_val[200];
 		if (trimsplit(opt, opt_name, opt_val, ':', sizeof(opt_name))){
 			//printf("GAME(%s) (%s=%s)\n", id, opt_name, opt_val); sleep(1);
 			short opt_v, opt_l, opt_c;
@@ -1327,7 +1319,7 @@ void parental_set(char *name, char *val)
 
 	// parse val
 	// first split options by ;
-	char opt[100], *p, *np;
+	char opt[200], *p, *np;
 	p = val;
 
 	while(p) {
@@ -1336,7 +1328,7 @@ void parental_set(char *name, char *val)
 		else trimcopy(opt, p, sizeof(opt));
 		//printf("GAME(%s) (%s)\n", id, opt); sleep(1);
 		// parse opt 'language:english'
-		char opt_name[100], opt_val[100];
+		char opt_name[200], opt_val[200];
 		if (trimsplit(opt, opt_name, opt_val, ':', sizeof(opt_name))){
 			//printf("GAME(%s) (%s=%s)\n", id, opt_name, opt_val); sleep(1);
 			short opt_c;
@@ -1376,7 +1368,7 @@ void game_set_num(char *name, char *val)
 
 	// parse val
 	// first split options by ;
-	char opt[100], *p, *np;
+	char opt[200], *p, *np;
 	p = val;
 
 	while(p) {
@@ -1384,7 +1376,7 @@ void game_set_num(char *name, char *val)
 		if (np) trim_n_copy(opt, p, np-p, sizeof(opt));
 		else trimcopy(opt, p, sizeof(opt));
 
-		char opt_name[100], opt_val[100];
+		char opt_name[200], opt_val[200];
 		if (trimsplit(opt, opt_name, opt_val, ':', sizeof(opt_name))){
 
 			short opt_c;
@@ -1422,7 +1414,7 @@ bool cfg_save_games()
 {
 	FILE *f;
 	int i;
-	char GXGameSettings_cfg[32];
+	char GXGameSettings_cfg[50];
 	sprintf(GXGameSettings_cfg, "%s/config", bootDevice);
 	mkdir(GXGameSettings_cfg, 0777);
 
@@ -1584,7 +1576,7 @@ void CFG_LoadXml(bool openfile, bool loadtitles, bool freemem)
 	char pathname[200];
 	snprintf(pathname, sizeof(pathname), "%s%s", Settings.titlestxt_path, "wiitdb.zip");
 	if (openfile) OpenXMLFile(pathname);
-	char forcedlanguage[100] = "";
+	char forcedlanguage[200] = "";
 	if (loadtitles) LoadTitlesFromXML(forcedlanguage, true); // options can be added to set force title language to any language and force Japanese title to English
 										// true = force english for al Japanese tiles, this should be set to true as long as Japanese titles are not displayed properly
 	if (freemem) FreeXMLMemory(); // free memory as soon as titles are loaded, the file will need to be loaded again if needed
