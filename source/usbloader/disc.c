@@ -10,6 +10,7 @@
 #include "disc.h"
 #include "video.h"
 #include "wdvd.h"
+#include "alternatedol.h"
 
 /* Constants */
 #define PTABLE_OFFSET	0x40000
@@ -253,7 +254,7 @@ s32 Disc_IsWii(void)
 	return 0;
 }
 
-s32 Disc_BootPartition(u64 offset, u8 videoselected, u8 cheat, u8 vipatch, u8 patchcountrystring, u8 error002fix)
+s32 Disc_BootPartition(u64 offset, u8 videoselected, u8 cheat, u8 vipatch, u8 patchcountrystring, u8 error002fix, u8 alternatedol)
 {
 	entry_point p_entry;
 
@@ -265,7 +266,7 @@ s32 Disc_BootPartition(u64 offset, u8 videoselected, u8 cheat, u8 vipatch, u8 pa
 		return ret;
 
 	/* Run apploader */
-	ret = Apploader_Run(&p_entry, cheat, videoselected, vipatch, patchcountrystring, error002fix);
+	ret = Apploader_Run(&p_entry, cheat, videoselected, vipatch, patchcountrystring, error002fix, alternatedol);
 	if (ret < 0)
 		return ret;
 
@@ -300,7 +301,7 @@ s32 Disc_BootPartition(u64 offset, u8 videoselected, u8 cheat, u8 vipatch, u8 pa
 	return 0;
 }
 
-s32 Disc_WiiBoot(u8 videoselected, u8 cheat, u8 vipatch, u8 patchcountrystring, u8 error002fix)
+s32 Disc_WiiBoot(u8 videoselected, u8 cheat, u8 vipatch, u8 patchcountrystring, u8 error002fix, u8 alternatedol)
 {
 	u64 offset;
 	s32 ret;
@@ -311,7 +312,7 @@ s32 Disc_WiiBoot(u8 videoselected, u8 cheat, u8 vipatch, u8 patchcountrystring, 
 		return ret;
 
 	/* Boot partition */
-	return Disc_BootPartition(offset, videoselected, cheat, vipatch, patchcountrystring, error002fix);
+	return Disc_BootPartition(offset, videoselected, cheat, vipatch, patchcountrystring, error002fix, alternatedol);
 }
 
 void PatchCountryStrings(void *Address, int Size)

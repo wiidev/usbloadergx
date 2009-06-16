@@ -1681,7 +1681,7 @@ int GameSettings(struct discHdr * header)
 		strncat(gameName, "...", 3);
 	}
 
-	customOptionList options3(10);
+	customOptionList options3(11);
 	options3.SetName(0,"%s", LANGUAGE.VideoMode);
 	options3.SetName(1,"%s", LANGUAGE.VIDTVPatch);
 	options3.SetName(2,"%s", LANGUAGE.Language);
@@ -1691,7 +1691,8 @@ int GameSettings(struct discHdr * header)
 	options3.SetName(6,"%s", LANGUAGE.Error002fix);
 	options3.SetName(7,"%s", LANGUAGE.Onlinefix);
 	options3.SetName(8,"%s", LANGUAGE.Patchcountrystrings);
-	options3.SetName(9,"%s", LANGUAGE.Defaultgamesettings);
+	options3.SetName(9,"%s", LANGUAGE.Alternatedol);
+	options3.SetName(10,"%s", LANGUAGE.Defaultgamesettings);
 
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
 	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
@@ -1780,6 +1781,7 @@ int GameSettings(struct discHdr * header)
 		fix002 = game_cfg->errorfix002;
 		onlinefix = game_cfg->onlinegame;
 		countrystrings = game_cfg->patchcountrystrings;
+		alternatedol = game_cfg->loadalternatedol;
 	}
 	else
 	{
@@ -1796,6 +1798,7 @@ int GameSettings(struct discHdr * header)
 		fix002 = Settings.error002;
 		onlinefix = off;
 		countrystrings = Settings.patchcountrystrings;
+		alternatedol = off;
 	}
 
 	int opt_lang = languageChoice; // backup language setting
@@ -1850,7 +1853,10 @@ int GameSettings(struct discHdr * header)
         if (countrystrings == on) options3.SetValue(8,LANGUAGE.ON);
 		else if (countrystrings == off) options3.SetValue(8,LANGUAGE.OFF);
 
-        options3.SetValue(9, NULL);
+        if (alternatedol == on) options3.SetValue(9,LANGUAGE.ON);
+		else if (alternatedol == off) options3.SetValue(9,LANGUAGE.OFF);
+
+        options3.SetValue(10, NULL);
 
 		if(shutdown == 1)
 			Sys_Shutdown();
@@ -1889,6 +1895,9 @@ int GameSettings(struct discHdr * header)
                 countrystrings = (countrystrings+1) % 2;
                 break;
             case 9:
+                alternatedol = (alternatedol+1) % 2;
+                break;
+            case 10:
                 int choice = WindowPrompt(LANGUAGE.Areyousure,0,LANGUAGE.Yes,LANGUAGE.Cancel,0,0);
                 if(choice == 1) {
                     videoChoice = Settings.video;
@@ -1898,6 +1907,7 @@ int GameSettings(struct discHdr * header)
                     fix002 = Settings.error002;
                     onlinefix = off;
                     countrystrings = Settings.patchcountrystrings;
+                    alternatedol = off;
                     if(Settings.cios == ios222) {
                         iosChoice = i222;
                     } else {

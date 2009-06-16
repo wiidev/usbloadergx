@@ -8,6 +8,7 @@
 #include "wdvd.h"
 #include "wpad.h"
 #include "disc.h"
+#include "alternatedol.h"
 
 /*KENOBI! - FISHEARS*/
 extern const unsigned char kenobiwii[];
@@ -218,7 +219,57 @@ bool Search_and_patch_Video_Modes(void *Address, u32 Size, GXRModeObj* Table[])
 	return found;
 }
 
-s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8 patchcountrystring, u8 error002fix)
+void gamepatches(void * dst, int len, u8 videoSelected, u8 patchcountrystring, u8 vipatch)
+{
+    GXRModeObj** table = NULL;
+    if (videoSelected == 5) // patch
+
+		{
+			switch(CONF_GetVideo())
+			{
+			case CONF_VIDEO_PAL:
+				if(CONF_GetEuRGB60() > 0)
+				{
+					table = NTSC2PAL60;
+				}
+				else
+				{
+					table = NTSC2PAL;
+				}
+				break;
+
+			case CONF_VIDEO_MPAL:
+
+
+
+				table = NTSC2PAL;
+				break;
+
+
+            default:
+				table = PAL2NTSC;
+				break;
+			}
+			Search_and_patch_Video_Modes(dst, len, table);
+		}
+
+	    /*GAME HOOK - FISHEARS*/
+		dogamehooks(dst,len);
+
+		if (vipatch)
+			vidolpatcher(dst,len);
+
+
+		/*LANGUAGE PATCH - FISHEARS*/
+		langpatcher(dst,len);
+
+		/*Thanks to WiiPower*/
+		if(patchcountrystring == 1)
+		PatchCountryStrings(dst, len);
+
+}
+
+s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8 patchcountrystring, u8 error002fix, u8 alternatedol)
 {
 	app_entry appldr_entry;
 	app_init  appldr_init;
@@ -269,7 +320,6 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
 	for (;;) {
 		void *dst = NULL;
 		int len = 0, offset = 0;
-        GXRModeObj** table = NULL;
 
 		/* Run apploader main function */
 		ret = appldr_main(&dst, &len, &offset);
@@ -279,59 +329,32 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
 		/* Read data from DVD */
 		WDVD_Read(dst, len, (u64)(offset << 2));
 
-
-		if (videoSelected == 5) // patch
-
-		{
-			switch(CONF_GetVideo())
-			{
-			case CONF_VIDEO_PAL:
-				if(CONF_GetEuRGB60() > 0)
-				{
-					table = NTSC2PAL60;
-				}
-				else
-				{
-					table = NTSC2PAL;
-				}
-				break;
-
-			case CONF_VIDEO_MPAL:
-
-
-
-				table = NTSC2PAL;
-				break;
-
-
-            default:
-				table = PAL2NTSC;
-				break;
-			}
-			Search_and_patch_Video_Modes(dst, len, table);
-		}
-
-	    /*GAME HOOK - FISHEARS*/
-		dogamehooks(dst,len);
-
-		if (vipatch)
-			vidolpatcher(dst,len);
-
-
-		/*LANGUAGE PATCH - FISHEARS*/
-		langpatcher(dst,len);
-
-		/*Thanks to WiiPower*/
-		if(patchcountrystring == 1)
-		PatchCountryStrings(dst, len);
+        gamepatches(dst, len, videoSelected, patchcountrystring, vipatch);
 
 		DCFlushRange(dst, len);
 	}
-	/* Set entry point from apploader */
-	*entry = appldr_final();
+
+    *entry = appldr_final();
+
+    /** Load alternate dol if set **/
+    if(alternatedol == 1) {
+        void *dolbuffer;
+        int dollen;
+        char * path = "SD:/";
+        bool dolloaded = Load_Dol(&dolbuffer, &dollen, path);
+        if(dolloaded) {
+            Remove_001_Protection(dolbuffer, dollen);
+
+            DCFlushRange(dolbuffer, dollen);
+
+            gamepatches(dolbuffer, dollen, videoSelected, patchcountrystring, vipatch);
+
+            DCFlushRange(dolbuffer, dollen);
+
+            /* Set entry point from apploader */
+            *entry = (entry_point) load_dol_image(dolbuffer);
+        }
+    }
 
 	return 0;
 }
-#ifdef __cplusplus
-}
-#endif

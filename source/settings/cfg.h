@@ -156,6 +156,7 @@ extern u8 faveChoice;
 extern u8 parentalcontrolChoice;
 extern u8 fix002;
 extern u8 countrystrings;
+extern u8 alternatedol;
 extern u8 onlinefix;
 extern u8 xflip;
 extern u8 qboot;
@@ -176,6 +177,7 @@ struct Game_CFG
 	u8 ios;
 	u8 parentalcontrol;
 	u8 errorfix002;
+	u8 loadalternatedol;
 	u8 patchcountrystrings;
 	u8 onlinegame;
 };

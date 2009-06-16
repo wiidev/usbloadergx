@@ -37,6 +37,7 @@ u8 iosChoice = 0;
 u8 parentalcontrolChoice = 0;
 u8 fix002 = 0;
 u8 countrystrings = 0;
+u8 alternatedol = 0;
 u8 onlinefix = 0;
 u8 xflip = 0;
 u8 sort = 0;
@@ -1128,6 +1129,7 @@ void cfg_set_game_opt(struct Game_CFG *game, u8 *id)
 	game->parentalcontrol = parentalcontrolChoice;
 	game->errorfix002 = fix002;
 	game->patchcountrystrings = countrystrings;
+	game->loadalternatedol = alternatedol;
 	game->onlinegame = onlinefix;
 }
 
@@ -1290,12 +1292,16 @@ void game_set(char *name, char *val)
 					game->patchcountrystrings = opt_c;
 				}
 			}
+			if (strcmp("loadalternatedol", opt_name) == 0) {
+				if (sscanf(opt_val, "%hd", &opt_c) == 1) {
+					game->loadalternatedol = opt_c;
+				}
+			}
 			if (strcmp("onlinegame", opt_name) == 0) {
 				if (sscanf(opt_val, "%hd", &opt_c) == 1) {
 					game->onlinegame = opt_c;
 				}
 			}
-
 		}
 		// next opt
 		if (np) p = np + 1; else p = NULL;
@@ -1442,6 +1448,7 @@ bool cfg_save_games()
 		fprintf(f, "pctrl:%d; ", cfg_game[i].parentalcontrol);
 		fprintf(f, "errorfix002:%d; ", cfg_game[i].errorfix002);
 		fprintf(f, "patchcountrystrings:%d; ", cfg_game[i].patchcountrystrings);
+		fprintf(f, "loadalternatedol:%d; ", cfg_game[i].loadalternatedol);
 		fprintf(f, "onlinegame:%d;\n", cfg_game[i].onlinegame);
 	}
 	fprintf(f, "# END\n");

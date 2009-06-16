@@ -37,6 +37,7 @@ struct LANGUAGE
 	char Areyousure[50];
 	char AutoPatch[30];
 	char Adultsonly[50];
+	char Alternatedol[50];
 	char awesometool[50];
 	char Back[20];
 	char Backgroundmusic[80];
