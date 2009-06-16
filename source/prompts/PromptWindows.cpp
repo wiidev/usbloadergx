@@ -1988,23 +1988,15 @@ ProgressDownloadWindow(int choice2)
     //check if directory exist and if not create one
     struct stat st;
     if(stat(Settings.covers_path, &st) != 0) {
-        char dircovers[100];
-        snprintf(dircovers,strlen(Settings.covers_path),"%s",Settings.covers_path);
-        if (mkdir(dircovers, 0777) == -1) {
-            if(subfoldercheck(dircovers) != 1) {
-            WindowPrompt(LANGUAGE.Error,LANGUAGE.Cantcreatedirectory,LANGUAGE.ok,0,0,0);
-            cntMissFiles = 0;
-            }
+        if(subfoldercreate(Settings.covers_path) != 1) {
+        WindowPrompt(LANGUAGE.Error,LANGUAGE.Cantcreatedirectory,LANGUAGE.ok,0,0,0);
+        cntMissFiles = 0;
         }
     }
     if(stat(Settings.disc_path,&st) != 0) {
-        char dirdiscs[100];
-        snprintf(dirdiscs,strlen(Settings.disc_path),"%s",Settings.disc_path);
-        if (mkdir(dirdiscs, 0777) == -1) {
-            if(subfoldercheck(dirdiscs) != 1) {
-            WindowPrompt(LANGUAGE.Error,LANGUAGE.Cantcreatedirectory,LANGUAGE.ok,0,0,0);
-            cntMissFiles = 0;
-            }
+        if(subfoldercreate(Settings.disc_path) != 1) {
+        WindowPrompt(LANGUAGE.Error,LANGUAGE.Cantcreatedirectory,LANGUAGE.ok,0,0,0);
+        cntMissFiles = 0;
         }
     }
 
@@ -2221,14 +2213,10 @@ int ProgressUpdateWindow()
 
     struct stat st;
     if(stat(Settings.update_path, &st) != 0) {
-        char dir[100];
-        snprintf(dir,strlen(Settings.update_path),"%s",Settings.update_path);
-        if (mkdir(dir, 0777) == -1) {
-            if(subfoldercheck(dir) != 1) {
-            WindowPrompt(LANGUAGE.Error,LANGUAGE.Cantcreatedirectory,LANGUAGE.ok,0,0,0);
-            ret = -1;
-            failed = -1;
-            }
+        if(subfoldercreate(Settings.update_path) != 1) {
+        WindowPrompt(LANGUAGE.Error,LANGUAGE.Cantcreatedirectory,LANGUAGE.ok,0,0,0);
+        ret = -1;
+        failed = -1;
         }
     }
 

@@ -171,30 +171,6 @@ bool cfg_map(char *name, char *val, short *var, short id)
 	return false;
 }
 
-int subfoldercheck(char * dircovers) {
-        //check forsubfolders
-        char dircheck[100];
-        char dirslash[100];
-		int cnt = 0;
-		char * pch;
-        struct stat st;
-
-        sprintf(dirslash, "%s/", dircovers);
-
-        if(stat(dirslash, &st) != 0) {
-        pch = strrchr(dircovers, '/');
-        cnt = pch-dircovers;
-        snprintf(dircheck, cnt+1, "%s", dircovers);
-        subfoldercheck(dircheck);
-        }
-
-        if (mkdir(dircovers, 0777) == -1) {
-        return 0;
-        }
-
-return 1;
-}
-
 bool cfg_bool(char *name, short *var)
 {
 	return (cfg_map(name, "0", var, 0) || cfg_map(name, "1", var, 1));

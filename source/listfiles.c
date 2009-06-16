@@ -35,6 +35,30 @@ while ((file = readdir(dir)))
   return false;
 }
 
+bool subfoldercreate(char * fullpath) {
+        //check forsubfolders
+        char dircheck[300];
+        char dirnoslash[300];
+		char * pch = NULL;
+		u32 cnt = 0;
+        struct stat st;
+
+        snprintf(dirnoslash, strlen(fullpath), "%s", fullpath);
+
+        if(stat(fullpath, &st) != 0) {
+        pch = strrchr(dirnoslash, '/');
+        cnt = pch-dirnoslash;
+        snprintf(dircheck, cnt+2, "%s", dirnoslash);
+        subfoldercreate(dircheck);
+        };
+
+        if (mkdir(dirnoslash, 0777) == -1) {
+        return false;
+        }
+
+return true;
+}
+
 char * GetFileName(int i)
 {
     return alldirfiles[i];
@@ -49,11 +73,11 @@ s32 filenamescmp(const void *a, const void *b)
 int GetAllDirFiles(char * filespath)
 {
 	int countfiles = 0;
-	
+
 	struct stat st;
 	DIR_ITER* dir;
 	dir = diropen (filespath);
-	
+
 	if (dir == NULL) //If empty
        return 0;
 	while (dirnext(dir,filenames,&st) == 0)

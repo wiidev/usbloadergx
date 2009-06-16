@@ -9,7 +9,7 @@ extern "C"
 bool findfile(const char * filename, const char * path);
 char * GetFileName(int i);
 int GetAllDirFiles(char * filespath);
-
+bool subfoldercreate(char * fullpath);
 
 #ifdef __cplusplus
 }

@@ -122,7 +122,7 @@ main(int argc, char *argv[])
 	WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
 
 	fontSystem = new FreeTypeGX();
-	char *fontPath=0;
+	char *fontPath = NULL;
 	asprintf(&fontPath, "%sfont.ttf", CFG.theme_path);
 	fontSystem->loadFont(fontPath, font_ttf, font_ttf_size, 0);
 	fontSystem->setCompatibilityMode(FTGX_COMPATIBILITY_DEFAULT_TEVOP_GX_PASSCLR | FTGX_COMPATIBILITY_DEFAULT_VTXDESC_GX_NONE);
