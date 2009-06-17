@@ -11,6 +11,7 @@
 #include <string.h>
 #include <stdio.h> //CLOCK
 #include <time.h>
+#include <ogc/machine/processor.h>
 
 #include "libwiigui/gui.h"
 #include "libwiigui/gui_gamegrid.h"
@@ -1834,7 +1835,6 @@ int MainMenu(int menu)
         ocarinaChoice = game_cfg->ocarina;
         viChoice = game_cfg->vipatch;
         fix002 = game_cfg->errorfix002;
-        onlinefix = game_cfg->onlinegame;
         iosChoice = game_cfg->ios;
         countrystrings = game_cfg->patchcountrystrings;
         alternatedol = game_cfg->loadalternatedol;
@@ -1849,7 +1849,6 @@ int MainMenu(int menu)
 		iosChoice = i249;
 		}
         fix002 = Settings.error002;
-        onlinefix = off;
         countrystrings = Settings.patchcountrystrings;
         alternatedol = off;
     }
@@ -1872,12 +1871,25 @@ int MainMenu(int menu)
                 break;
     }
 
-    if(IOS_GetVersion() != ios2 || (IsNetworkInit() == true && onlinefix == on)) {
-        ret = Sys_IosReload(ios2);
-        if(ret < 0) {
-            Sys_IosReload(249);
-        }
-    }
+	bool onlinefix = IsNetworkInit();
+	if(onlinefix && IOS_GetVersion() == ios2) {
+		s32 kd_fd, ret;
+		STACK_ALIGN(u8, kd_buf, 0x20, 32);
+
+		kd_fd = IOS_Open("/dev/net/kd/request", 0);
+		if (kd_fd >= 0) {
+			ret = IOS_Ioctl(kd_fd, 7, NULL, 0, kd_buf, 0x20);
+			if(ret >= 0)
+				onlinefix = false; // fixed no IOS reload needed
+			IOS_Close(kd_fd);
+		}
+	}
+	if(IOS_GetVersion() != ios2 || onlinefix == true) {
+		ret = Sys_IosReload(ios2);
+		if(ret < 0) {
+			Sys_IosReload(249);
+		}
+	}
     ret = Disc_SetUSB(header->id);
     if(ret < 0) Sys_BackToLoader();
     ret = Disc_Open();

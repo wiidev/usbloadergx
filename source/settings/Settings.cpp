@@ -1718,10 +1718,9 @@ int GameSettings(struct discHdr * header)
 	options3.SetName(4, "IOS");
 	options3.SetName(5,"%s", LANGUAGE.Parentalcontrol);
 	options3.SetName(6,"%s", LANGUAGE.Error002fix);
-	options3.SetName(7,"%s", LANGUAGE.Onlinefix);
-	options3.SetName(8,"%s", LANGUAGE.Patchcountrystrings);
-	options3.SetName(9,"%s", LANGUAGE.Alternatedol);
-	options3.SetName(10,"%s", LANGUAGE.Defaultgamesettings);
+	options3.SetName(7,"%s", LANGUAGE.Patchcountrystrings);
+	options3.SetName(8,"%s", LANGUAGE.Alternatedol);
+	options3.SetName(9,"%s", LANGUAGE.Defaultgamesettings);
 
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
 	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
@@ -1808,7 +1807,6 @@ int GameSettings(struct discHdr * header)
 		iosChoice = game_cfg->ios;
 		parentalcontrolChoice = game_cfg->parentalcontrol;
 		fix002 = game_cfg->errorfix002;
-		onlinefix = game_cfg->onlinegame;
 		countrystrings = game_cfg->patchcountrystrings;
 		alternatedol = game_cfg->loadalternatedol;
 	}
@@ -1825,7 +1823,6 @@ int GameSettings(struct discHdr * header)
 		}
 		parentalcontrolChoice = 0;
 		fix002 = Settings.error002;
-		onlinefix = off;
 		countrystrings = Settings.patchcountrystrings;
 		alternatedol = off;
 	}
@@ -1876,16 +1873,13 @@ int GameSettings(struct discHdr * header)
         if (fix002 == on) options3.SetValue(6,LANGUAGE.ON);
 		else if (fix002 == off) options3.SetValue(6,LANGUAGE.OFF);
 
-        if (onlinefix == on) options3.SetValue(7,LANGUAGE.ON);
-		else if (onlinefix == off) options3.SetValue(7,LANGUAGE.OFF);
+        if (countrystrings == on) options3.SetValue(7,LANGUAGE.ON);
+		else if (countrystrings == off) options3.SetValue(7,LANGUAGE.OFF);
 
-        if (countrystrings == on) options3.SetValue(8,LANGUAGE.ON);
-		else if (countrystrings == off) options3.SetValue(8,LANGUAGE.OFF);
+        if (alternatedol == on) options3.SetValue(8,LANGUAGE.ON);
+		else if (alternatedol == off) options3.SetValue(8,LANGUAGE.OFF);
 
-        if (alternatedol == on) options3.SetValue(9,LANGUAGE.ON);
-		else if (alternatedol == off) options3.SetValue(9,LANGUAGE.OFF);
-
-        options3.SetValue(10, NULL);
+        options3.SetValue(9, NULL);
 
 		if(shutdown == 1)
 			Sys_Shutdown();
@@ -1918,15 +1912,12 @@ int GameSettings(struct discHdr * header)
                 fix002 = (fix002+1) % 2;
                 break;
             case 7:
-                onlinefix = (onlinefix+1) % 2;
-                break;
-            case 8:
                 countrystrings = (countrystrings+1) % 2;
                 break;
-            case 9:
+            case 8:
                 alternatedol = (alternatedol+1) % 2;
                 break;
-            case 10:
+            case 9:
                 int choice = WindowPrompt(LANGUAGE.Areyousure,0,LANGUAGE.Yes,LANGUAGE.Cancel,0,0);
                 if(choice == 1) {
                     videoChoice = Settings.video;
@@ -1934,7 +1925,6 @@ int GameSettings(struct discHdr * header)
                     languageChoice = Settings.language;
                     ocarinaChoice = Settings.ocarina;
                     fix002 = Settings.error002;
-                    onlinefix = off;
                     countrystrings = Settings.patchcountrystrings;
                     alternatedol = off;
                     if(Settings.cios == ios222) {
