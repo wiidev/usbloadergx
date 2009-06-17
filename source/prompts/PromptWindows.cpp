@@ -13,7 +13,7 @@
 #include "language/language.h"
 #include "libwiigui/gui.h"
 #include "libwiigui/gui_diskcover.h"
-#include "network/updater.h"
+#include "network/networkops.h"
 #include "network/http.h"
 #include "mload/mload.h"
 #include "fatmounter.h"

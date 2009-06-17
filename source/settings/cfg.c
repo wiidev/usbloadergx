@@ -1439,7 +1439,7 @@ bool cfg_save_games()
 		fprintf(f, "pctrl:%d; ", cfg_game[i].parentalcontrol);
 		fprintf(f, "errorfix002:%d; ", cfg_game[i].errorfix002);
 		fprintf(f, "patchcountrystrings:%d; ", cfg_game[i].patchcountrystrings);
-		fprintf(f, "loadalternatedol:%d; ", cfg_game[i].loadalternatedol);
+		fprintf(f, "loadalternatedol:%d;\n", cfg_game[i].loadalternatedol);
 	}
 	fprintf(f, "# END\n");
 	fclose(f);

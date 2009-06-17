@@ -11,7 +11,6 @@
 #include <string.h>
 #include <stdio.h> //CLOCK
 #include <time.h>
-#include <ogc/machine/processor.h>
 
 #include "libwiigui/gui.h"
 #include "libwiigui/gui_gamegrid.h"
@@ -27,7 +26,7 @@
 #include "prompts/gameinfo.h"
 #include "mload/mload.h"
 #include "patches/patchcode.h"
-#include "network/updater.h"
+#include "network/networkops.h"
 #include "menu.h"
 #include "audio.h"
 #include "input.h"
@@ -1871,19 +1870,7 @@ int MainMenu(int menu)
                 break;
     }
 
-	bool onlinefix = IsNetworkInit();
-	if(onlinefix && IOS_GetVersion() == ios2) {
-		s32 kd_fd, ret;
-		STACK_ALIGN(u8, kd_buf, 0x20, 32);
-
-		kd_fd = IOS_Open("/dev/net/kd/request", 0);
-		if (kd_fd >= 0) {
-			ret = IOS_Ioctl(kd_fd, 7, NULL, 0, kd_buf, 0x20);
-			if(ret >= 0)
-				onlinefix = false; // fixed no IOS reload needed
-			IOS_Close(kd_fd);
-		}
-	}
+	bool onlinefix = ShutdownWC24();
 	if(IOS_GetVersion() != ios2 || onlinefix == true) {
 		ret = Sys_IosReload(ios2);
 		if(ret < 0) {
