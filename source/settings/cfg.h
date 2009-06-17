@@ -197,6 +197,7 @@ struct Game_NUM* CFG_get_game_num(u8 *id);
 bool CFG_save_game_opt(u8 *id);
 bool CFG_save_game_num(u8 *id);
 bool CFG_forget_game_opt(u8 *id);
+bool CFG_forget_game_num(u8 *id);
 
 //Astidof - Begin of modification
 enum {

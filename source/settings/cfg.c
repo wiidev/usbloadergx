@@ -1570,6 +1570,20 @@ bool CFG_forget_game_opt(u8 *id)
 	return cfg_save_games();
 }
 
+bool CFG_forget_game_num(u8 *id)
+{
+	struct Game_NUM *game = CFG_get_game_num(id);
+	int i;
+	if (!game) return true;
+	// move entries down
+	num_saved_game_num--;
+	for (i=game-cfg_game_num; i<num_saved_game_num; i++) {
+		cfg_game[i] = cfg_game[i+1];
+	}
+	memset(&cfg_game[num_saved_game_num], 0, sizeof(struct Game_NUM));
+	return cfg_save_game_num();
+}
+
 void CFG_LoadXml(bool openfile, bool loadtitles, bool freemem)
 {
 	/* load renamed titles from proper names and game info XML, needs to be after cfg_load_games - Lustar */

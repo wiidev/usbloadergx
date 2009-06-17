@@ -1995,8 +1995,11 @@ int GameSettings(struct discHdr * header)
 					LANGUAGE.Yes,LANGUAGE.Cancel,0,0);
 
 			if (choice == 1)
-			{
-				ret = WBFS_RemoveGame(header->id);
+			{	
+				CFG_forget_game_opt(header->id);
+				CFG_forget_game_num(header->id);
+				
+				/*ret = WBFS_RemoveGame(header->id);
 				if (ret < 0)
 				{
 					WindowPrompt(
@@ -2011,7 +2014,7 @@ int GameSettings(struct discHdr * header)
 					gameName,
 					LANGUAGE.ok,0,0,0);
 					retVal = 1;
-				}
+				}*/
 				break;
 			}
 			else if (choice == 0)
