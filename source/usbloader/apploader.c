@@ -341,12 +341,8 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
     if(alternatedol == 1) {
         void *dolbuffer;
         int dollen;
-		
-		char * path = Settings.dolpath;
-		//snprintf(path, sizeof(path), Settings.dolpath);
-		
-        //char * path = "SD:/";
-        bool dolloaded = Load_Dol(&dolbuffer, &dollen, path);
+
+        bool dolloaded = Load_Dol(&dolbuffer, &dollen, Settings.dolpath);
         if(dolloaded) {
             Remove_001_Protection(dolbuffer, dollen);
 

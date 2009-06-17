@@ -12,33 +12,33 @@ extern "C"
 
 struct gameXMLinfo
 {
-	char id[8];
-	char version[50];
+	char id[10];
+	char version[500];
 	char region[10];
-	char title[100];
+	char title[500];
 	char synopsis[2000];
-	char title_EN[100];
+	char title_EN[500];
 	char synopsis_EN[2000];
-	char locales[15][50];
-	char developer[75];
-	char publisher[75];
-	char publisherfromid[75];
+	char locales[100][500];
+	char developer[500];
+	char publisher[500];
+	char publisherfromid[500];
 	char year[10];
 	char month[10];
 	char day[10];
-	char genre[40];
-	char genresplit[10][15];
-	char ratingtype[6];
-	char ratingvalue[6];
-	char ratingdescriptors[20][15];
-	char ratingvalueCERO[6];
-	char ratingvalueESRB[6];
-	char ratingvaluePEGI[6];
-	char wifiplayers[4];
-	char wififeatures[10][15];
-	char players[4];
-	char accessories[10][15];
-	char accessories_required[10][15];
+	char genre[500];
+	char genresplit[100][500];
+	char ratingtype[10];
+	char ratingvalue[10];
+	char ratingdescriptors[100][500];
+	char ratingvalueCERO[10];
+	char ratingvalueESRB[10];
+	char ratingvaluePEGI[10];
+	char wifiplayers[10];
+	char wififeatures[100][500];
+	char players[10];
+	char accessories[100][500];
+	char accessories_required[100][500];
 	char iso_crc[10];
 	char iso_md5[50];
 	char iso_sha1[50];
@@ -46,7 +46,7 @@ struct gameXMLinfo
 	int accessoryCnt;
 	int accessoryReqCnt;
 	int wifiCnt;
-	
+
 } ;
 
 struct gameXMLinfo gameinfo;
