@@ -575,7 +575,7 @@ int MenuSettings()
 						else if (Settings.screensaver == 4) options2.SetValue(11,"20 min");
 						else if (Settings.screensaver == 5) options2.SetValue(11,"30 min");
 						else if (Settings.screensaver == 6) options2.SetValue(11,"1 hour");
-						
+
 						if(backBtn.GetState() == STATE_CLICKED)
                         {
                             backBtn.ResetState();
@@ -694,7 +694,7 @@ int MenuSettings()
 							case 11:
                                 Settings.screensaver++;
                                 break;
-                            
+
                            }
                     }
                     optionBrowser2.SetEffect(EFFECT_FADE, -20);
@@ -1481,7 +1481,7 @@ int MenuSettings()
                                     WindowPrompt(LANGUAGE.Dolpathchange,LANGUAGE.Consoleshouldbeunlockedtomodifyit,LANGUAGE.ok,0,0,0);
                                 }
                                 break;
-                            
+
                         }
                     }
                     /** If not godmode don't let him inside **/
@@ -1725,7 +1725,7 @@ int GameSettings(struct discHdr * header)
 		strncat(gameName, "...", 3);
 	}
 
-	customOptionList options3(11);
+	customOptionList options3(12);
 	options3.SetName(0,"%s", LANGUAGE.VideoMode);
 	options3.SetName(1,"%s", LANGUAGE.VIDTVPatch);
 	options3.SetName(2,"%s", LANGUAGE.Language);
@@ -1735,7 +1735,8 @@ int GameSettings(struct discHdr * header)
 	options3.SetName(6,"%s", LANGUAGE.Error002fix);
 	options3.SetName(7,"%s", LANGUAGE.Patchcountrystrings);
 	options3.SetName(8,"%s", LANGUAGE.Alternatedol);
-	options3.SetName(9,"%s", LANGUAGE.Defaultgamesettings);
+	options3.SetName(9,"%s", LANGUAGE.Blockiosreload);
+	options3.SetName(10,"%s", LANGUAGE.Defaultgamesettings);
 
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
 	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
@@ -1824,6 +1825,7 @@ int GameSettings(struct discHdr * header)
 		fix002 = game_cfg->errorfix002;
 		countrystrings = game_cfg->patchcountrystrings;
 		alternatedol = game_cfg->loadalternatedol;
+		reloadblock = game_cfg->iosreloadblock;
 	}
 	else
 	{
@@ -1840,6 +1842,7 @@ int GameSettings(struct discHdr * header)
 		fix002 = Settings.error002;
 		countrystrings = Settings.patchcountrystrings;
 		alternatedol = off;
+		reloadblock = off;
 	}
 
 	int opt_lang = languageChoice; // backup language setting
@@ -1894,7 +1897,10 @@ int GameSettings(struct discHdr * header)
         if (alternatedol == on) options3.SetValue(8,LANGUAGE.ON);
 		else if (alternatedol == off) options3.SetValue(8,LANGUAGE.OFF);
 
-        options3.SetValue(9, NULL);
+        if (reloadblock == on) options3.SetValue(9,LANGUAGE.ON);
+		else if (reloadblock == off) options3.SetValue(9,LANGUAGE.OFF);
+
+        options3.SetValue(10, NULL);
 
 		if(shutdown == 1)
 			Sys_Shutdown();
@@ -1933,6 +1939,9 @@ int GameSettings(struct discHdr * header)
                 alternatedol = (alternatedol+1) % 2;
                 break;
             case 9:
+                reloadblock = (reloadblock+1) % 2;
+                break;
+            case 10:
                 int choice = WindowPrompt(LANGUAGE.Areyousure,0,LANGUAGE.Yes,LANGUAGE.Cancel,0,0);
                 if(choice == 1) {
                     videoChoice = Settings.video;
@@ -1942,6 +1951,7 @@ int GameSettings(struct discHdr * header)
                     fix002 = Settings.error002;
                     countrystrings = Settings.patchcountrystrings;
                     alternatedol = off;
+                    reloadblock = off;
                     if(Settings.cios == ios222) {
                         iosChoice = i222;
                     } else {
@@ -2000,7 +2010,7 @@ int GameSettings(struct discHdr * header)
 					LANGUAGE.Yes,LANGUAGE.Cancel,0,0);
 
 			if (choice == 1)
-			{	
+			{
 				CFG_forget_game_opt(header->id);
 				CFG_forget_game_num(header->id);
 				ret = WBFS_RemoveGame(header->id);

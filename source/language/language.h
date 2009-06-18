@@ -47,6 +47,7 @@ struct LANGUAGE
 	char BacktoWiiMenu[50];
 	char BootStandard[50];
 	char Both[35];
+	char Blockiosreload[60];
 	char Cantcreatedirectory[50];
 	char Cancel[20];
 	char Cantbeformated[50];

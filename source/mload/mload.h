@@ -184,6 +184,7 @@ int mload_set_ES_ioctlv_vector(void *starlet_addr);
 
 /*--------------------------------------------------------------------------------------------------------------*/
 int load_ehc_module();
+int patch_cios_data();
 
 
 #ifdef __cplusplus

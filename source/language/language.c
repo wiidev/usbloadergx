@@ -51,6 +51,7 @@ snprintf(LANGUAGE.BacktoLoader, sizeof(LANGUAGE.BacktoLoader), "Back to Loader")
 snprintf(LANGUAGE.BacktoWiiMenu, sizeof(LANGUAGE.BacktoWiiMenu), "Back to Wii Menu");
 snprintf(LANGUAGE.BootStandard, sizeof(LANGUAGE.BootStandard), "Boot/Standard");
 snprintf(LANGUAGE.Both, sizeof(LANGUAGE.Both), "Both");
+snprintf(LANGUAGE.Blockiosreload, sizeof(LANGUAGE.Blockiosreload), "Block IOS Reload");
 snprintf(LANGUAGE.Cantcreatedirectory, sizeof(LANGUAGE.Cantcreatedirectory), "Can't create directory");
 snprintf(LANGUAGE.Cancel, sizeof(LANGUAGE.Cancel), "Cancel");
 snprintf(LANGUAGE.Cantbeformated, sizeof(LANGUAGE.Cantbeformated), "Can't be formated");
@@ -371,6 +372,10 @@ void language_set(char *name, char *val)
 	}
 	if (strcmp(name, "BootStandard") == 0) {
 		strcopy(LANGUAGE.BootStandard, val, sizeof(LANGUAGE.BootStandard));
+		return;
+	}
+	if (strcmp(name, "Blockiosreload") == 0) {
+		strcopy(LANGUAGE.Blockiosreload, val, sizeof(LANGUAGE.Blockiosreload));
 		return;
 	}
 	if (strcmp(name, "Both") == 0) {

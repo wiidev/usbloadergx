@@ -152,7 +152,7 @@ UpdateGUI (void *arg)
 				return 0;
 			}
 		}
-		
+
 		switch (Settings.screensaver)
 		{
 			case 1:
@@ -173,10 +173,10 @@ UpdateGUI (void *arg)
 			case 6:
 				WPad_SetIdleTime(3600);
 				break;
-			
+
 		}
-		 
-		
+
+
 
 	}
 	return NULL;
@@ -215,8 +215,8 @@ static int MenuDiscList()
 	int selectImg1 = 0;
 	char ID[4];
     char IDfull[7];
-		
-		//SCREENSAVER 
+
+		//SCREENSAVER
 		//WPad_SetIdleTime(300); //needs the time in seconds
 		int check = 0; //to skip the first cycle when wiimote isn't completely connected
 
@@ -1332,16 +1332,16 @@ static int MenuDiscList()
                                 }
                         }
                 }
-			// to skip the first call of windowScreensaver at startup when wiimote is not connected 
+			// to skip the first call of windowScreensaver at startup when wiimote is not connected
 			if(IsWpadConnected()){check = 1;}
-			
-			// screensaver is called when wiimote shuts down, depending on the wiimotet idletime 
+
+			// screensaver is called when wiimote shuts down, depending on the wiimotet idletime
 			if(!IsWpadConnected() && check == 1)
 			{
 				WindowScreensaver();
 			}
 		}
-		
+
     HaltGui();
         mainWindow->RemoveAll();
         mainWindow->Append(bgImg);
@@ -1781,8 +1781,8 @@ int MainMenu(int menu)
 
 	int currentMenu = menu;
 	char imgPath[100];
-	
-	
+
+
 
 	#ifdef HW_RVL
 	snprintf(imgPath, sizeof(imgPath), "%splayer1_point.png", CFG.theme_path);
@@ -1844,8 +1844,8 @@ int MainMenu(int menu)
 				currentMenu = MenuCheck();
 				break;
 		}
-		
-		
+
+
 	}
 
 	ExitGUIThreads();
@@ -1878,6 +1878,7 @@ int MainMenu(int menu)
         iosChoice = game_cfg->ios;
         countrystrings = game_cfg->patchcountrystrings;
         alternatedol = game_cfg->loadalternatedol;
+        reloadblock = game_cfg->iosreloadblock;
     } else {
         videoChoice = Settings.video;
         languageChoice = Settings.language;
@@ -1891,6 +1892,7 @@ int MainMenu(int menu)
         fix002 = Settings.error002;
         countrystrings = Settings.patchcountrystrings;
         alternatedol = off;
+        reloadblock = off;
     }
     int ios2;
     switch(iosChoice) {
@@ -1925,6 +1927,11 @@ int MainMenu(int menu)
 
     SDCard_deInit();
 	USBDevice_deInit();
+
+	if(reloadblock == on && (IOS_GetVersion() == 222 || IOS_GetVersion() == 223)) {
+        patch_cios_data();
+        mload_close();
+	}
 
     u8 errorfixer002 = 0;
     switch(fix002)

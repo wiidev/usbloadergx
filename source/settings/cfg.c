@@ -28,6 +28,7 @@ u8 viChoice = 0;
 u8 iosChoice = 0;
 u8 parentalcontrolChoice = 0;
 u8 fix002 = 0;
+u8 reloadblock = 0;
 u8 countrystrings = 0;
 u8 alternatedol = 0;
 u8 xflip = 0;
@@ -1132,6 +1133,7 @@ void cfg_set_game_opt(struct Game_CFG *game, u8 *id)
 	game->ios = iosChoice;
 	game->parentalcontrol = parentalcontrolChoice;
 	game->errorfix002 = fix002;
+	game->iosreloadblock = reloadblock;
 	game->patchcountrystrings = countrystrings;
 	game->loadalternatedol = alternatedol;
 }
@@ -1292,6 +1294,11 @@ void game_set(char *name, char *val)
 					game->errorfix002 = opt_c;
 				}
 			}
+			if (strcmp("iosreloadblock", opt_name) == 0) {
+				if (sscanf(opt_val, "%hd", &opt_c) == 1) {
+					game->iosreloadblock = opt_c;
+				}
+			}
 			if (strcmp("patchcountrystrings", opt_name) == 0) {
 				if (sscanf(opt_val, "%hd", &opt_c) == 1) {
 					game->patchcountrystrings = opt_c;
@@ -1447,6 +1454,7 @@ bool cfg_save_games()
 		fprintf(f, "ios:%d; ", cfg_game[i].ios);
 		fprintf(f, "pctrl:%d; ", cfg_game[i].parentalcontrol);
 		fprintf(f, "errorfix002:%d; ", cfg_game[i].errorfix002);
+		fprintf(f, "iosreloadblock:%d; ", cfg_game[i].iosreloadblock);
 		fprintf(f, "patchcountrystrings:%d; ", cfg_game[i].patchcountrystrings);
 		fprintf(f, "loadalternatedol:%d;\n", cfg_game[i].loadalternatedol);
 	}
