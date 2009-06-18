@@ -13,7 +13,7 @@
 #include "filelist.h"
 #include "sys.h"
 
-#define MAXOPTIONS 11
+#define MAXOPTIONS 12
 
 /*** Extern functions ***/
 extern void ResumeGui();
@@ -479,6 +479,7 @@ int MenuSettings()
                     options2.SetName(8, "%s",LANGUAGE.Rumble);
                     options2.SetName(9, "%s",LANGUAGE.Unicodefix);
                     options2.SetName(10, "%s",LANGUAGE.XMLTitles);
+                    options2.SetName(11, "Screensaver");
                     for(int i = 0; i <= MAXOPTIONS; i++) options2.SetValue(i, NULL);
                     optionBrowser2.SetScrollbar(1);
                     w.Append(&optionBrowser2);
@@ -515,6 +516,8 @@ int MenuSettings()
                             Settings.wiilight = 0;
                         if(Settings.rumble >= settings_rumble_max)
                             Settings.rumble = 0; //RUMBLE
+                        if(Settings.screensaver >= settings_screensaver_max)
+                            Settings.screensaver = 0; //RUMBLE
                         if ( Settings.unicodefix > 3 )
                             Settings.unicodefix = 0;
 						if(Settings.titlesOverride >= 2)
@@ -565,6 +568,14 @@ int MenuSettings()
                         if (Settings.titlesOverride == 0) options2.SetValue(10,"%s",LANGUAGE.OFF);
                         else if (Settings.titlesOverride == 1) options2.SetValue(10,"%s",LANGUAGE.ON);
 
+						if (Settings.screensaver == 0) options2.SetValue(11,"%s",LANGUAGE.OFF);
+                        else if (Settings.screensaver == 1) options2.SetValue(11,"3 min");
+						else if (Settings.screensaver == 2) options2.SetValue(11,"5 min");
+						else if (Settings.screensaver == 3) options2.SetValue(11,"10 min");
+						else if (Settings.screensaver == 4) options2.SetValue(11,"20 min");
+						else if (Settings.screensaver == 5) options2.SetValue(11,"30 min");
+						else if (Settings.screensaver == 6) options2.SetValue(11,"1 hour");
+						
 						if(backBtn.GetState() == STATE_CLICKED)
                         {
                             backBtn.ResetState();
@@ -680,7 +691,11 @@ int MenuSettings()
 								//__Menu_GetEntries();
 								//ResumeGui();
                                 break;
-                            }
+							case 11:
+                                Settings.screensaver++;
+                                break;
+                            
+                           }
                     }
                     optionBrowser2.SetEffect(EFFECT_FADE, -20);
                     while(optionBrowser2.GetEffect() > 0) usleep(50);

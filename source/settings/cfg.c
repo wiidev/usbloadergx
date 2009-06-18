@@ -330,6 +330,7 @@ void Global_Default(void)
 	Settings.wiilight = 1;
 	Settings.patchcountrystrings = 0;
 	Settings.titlesOverride = 0;
+	Settings.screensaver = 3;
 	Settings.error002 = 0;
 }
 
@@ -981,6 +982,13 @@ void global_cfg_set(char *name, char *val)
 			}
 		return;
 	}
+	else if (strcmp(name, "screensaver") == 0) {
+		int i;
+		if (sscanf(val, "%d", &i) == 1) {
+            Settings.screensaver = i;
+			}
+		return;
+	}
 
 	cfg_bool("godmode", &Settings.godmode);
 
@@ -1215,6 +1223,7 @@ bool cfg_save_global()// save global settings
 	fprintf(f, "Cheatcodespath = %s\n ", Settings.Cheatcodespath);
 	fprintf(f, "titlesOverride = %d\n ", Settings.titlesOverride);
 	fprintf(f, "patchcountrystrings = %d\n ", Settings.patchcountrystrings);
+	fprintf(f, "screensaver = %d\n ", Settings.screensaver);
 	fprintf(f, "error002 = %d\n ", Settings.error002);
 	fclose(f);
 	return true;

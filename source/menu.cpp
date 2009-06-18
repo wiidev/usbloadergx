@@ -152,6 +152,32 @@ UpdateGUI (void *arg)
 				return 0;
 			}
 		}
+		
+		switch (Settings.screensaver)
+		{
+			case 1:
+				WPad_SetIdleTime(180);
+				break;
+            case 2:
+				WPad_SetIdleTime(300);
+				break;
+            case 3:
+				WPad_SetIdleTime(600);
+				break;
+            case 4:
+				WPad_SetIdleTime(1200);
+				break;
+            case 5:
+				WPad_SetIdleTime(1800);
+				break;
+			case 6:
+				WPad_SetIdleTime(3600);
+				break;
+			
+		}
+		 
+		
+
 	}
 	return NULL;
 }
@@ -191,7 +217,7 @@ static int MenuDiscList()
     char IDfull[7];
 		
 		//SCREENSAVER 
-		WPad_SetIdleTime(300); //needs the time in seconds
+		//WPad_SetIdleTime(300); //needs the time in seconds
 		int check = 0; //to skip the first cycle when wiimote isn't completely connected
 
         datagB=0;
@@ -1306,10 +1332,10 @@ static int MenuDiscList()
                                 }
                         }
                 }
-			/* to skip the first call of windowScreensaver at startup when wiimote is not connected */
+			// to skip the first call of windowScreensaver at startup when wiimote is not connected 
 			if(IsWpadConnected()){check = 1;}
 			
-			/* screensaver is called when wiimote shuts down, depending on the wiimotet idletime */
+			// screensaver is called when wiimote shuts down, depending on the wiimotet idletime 
 			if(!IsWpadConnected() && check == 1)
 			{
 				WindowScreensaver();
@@ -1755,6 +1781,8 @@ int MainMenu(int menu)
 
 	int currentMenu = menu;
 	char imgPath[100];
+	
+	
 
 	#ifdef HW_RVL
 	snprintf(imgPath, sizeof(imgPath), "%splayer1_point.png", CFG.theme_path);
@@ -1816,6 +1844,8 @@ int MainMenu(int menu)
 				currentMenu = MenuCheck();
 				break;
 		}
+		
+		
 	}
 
 	ExitGUIThreads();

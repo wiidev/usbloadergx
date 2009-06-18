@@ -273,6 +273,16 @@ enum {
 };
 
 enum {
+	min3=1,
+	min5,
+	min10,
+	min20,
+	min30,
+	min60,
+	settings_screensaver_max // always the last entry
+};
+
+enum {
     no=0,
 	yes,
 	sysmenu,
@@ -323,6 +333,7 @@ struct SSettings {
 	int     wiilight;
 	int		gameDisplay;
 	int     patchcountrystrings;
+	int     screensaver;
 	short	godmode;
 	char	covers_path[100];
 	char	theme_path[100];
