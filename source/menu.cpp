@@ -189,7 +189,10 @@ static int MenuDiscList()
 	int selectImg1 = 0;
 	char ID[4];
     char IDfull[7];
-
+		
+		//SCREENSAVER 
+		WPad_SetIdleTime(300); //needs the time in seconds
+		int check = 0; //to skip the first cycle when wiimote isn't completely connected
 
         datagB=0;
         int menu = MENU_NONE, dataef=0;
@@ -1303,8 +1306,16 @@ static int MenuDiscList()
                                 }
                         }
                 }
-        }
-
+			/* to skip the first call of windowScreensaver at startup when wiimote is not connected */
+			if(IsWpadConnected()){check = 1;}
+			
+			/* screensaver is called when wiimote shuts down, depending on the wiimotet idletime */
+			if(!IsWpadConnected() && check == 1)
+			{
+				WindowScreensaver();
+			}
+		}
+		
     HaltGui();
         mainWindow->RemoveAll();
         mainWindow->Append(bgImg);

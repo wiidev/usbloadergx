@@ -16,6 +16,11 @@ void __Wpad_PowerCallback(s32 chan)
 	shutdown = 1;
 }
 
+void WPad_SetIdleTime(u32 seconds)
+{
+	/*Set idle time for wiimote*/
+	 WPAD_SetIdleTimeout(seconds);
+}
 
 s32 Wpad_Init(void)
 {
@@ -42,6 +47,24 @@ void Wpad_Disconnect(void)
 
 	/* Shutdown Wiimote subsystem */
 	WPAD_Shutdown();
+}
+
+bool IsWpadConnected()
+{
+    int i = 0;
+	u32 test = 0;
+	int notconnected = 0;
+    #ifdef HW_RVL
+    for(i = 0; i < 4; i++) {
+        if(WPAD_Probe(i, &test) == WPAD_ERR_NO_CONTROLLER) {
+            notconnected++;
+        }
+    }
+    #endif
+    if(notconnected < 4)
+        return true;
+    else
+        return false;
 }
 
 u32 ButtonsHold(void) {

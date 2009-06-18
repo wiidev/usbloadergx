@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <dirent.h>
+#include <time.h>
+#include <stdlib.h>
 
 #include "usbloader/wbfs.h"
 #include "usbloader/wdvd.h"
@@ -313,6 +315,58 @@ void WindowCredits()
     }
     bgMusic->SetPlayTime(thetimeofbg);
     SetVolumeOgg(255*(Settings.volume/100.0));
+}
+
+/****************************************************************************
+ * WindowScreensaver
+ * Display screensaver
+ ***************************************************************************/
+void WindowScreensaver()
+{
+	int i = 0;
+	bool exit = false;
+	
+	/* initialize random seed: */
+	srand ( time(NULL) );
+	
+	GuiImageData GXlogo(gxlogo_png);
+	GuiImage GXlogoImg(&GXlogo);
+	GXlogoImg.SetPosition(172,152);
+	GXlogoImg.SetAlignment(ALIGN_LEFT,ALIGN_TOP);
+	
+	GuiImage BackgroundImg(640,480,(GXColor){0, 0, 0, 255});
+	BackgroundImg.SetPosition(0,0);
+	BackgroundImg.SetAlignment(ALIGN_LEFT,ALIGN_TOP);	
+		
+	GuiWindow screensaverWindow(screenwidth,screenheight);
+	screensaverWindow.Append(&BackgroundImg);
+	screensaverWindow.Append(&GXlogoImg);
+	
+	HaltGui();
+	mainWindow->SetState(STATE_DISABLED);
+	mainWindow->Append(&screensaverWindow);
+	ResumeGui();
+
+	while(!exit)
+	{		
+			i++;
+			if(IsWpadConnected())
+			{
+				exit = true;
+			}
+			/* Set position only every 400000th loop */
+			if((i % 8000000) == 0)
+			{
+				/* Set random position */
+				GXlogoImg.SetPosition((rand() % 345), (rand() % 305));
+			}
+
+	}
+	
+	HaltGui();
+	mainWindow->Remove(&screensaverWindow);
+	mainWindow->SetState(STATE_DEFAULT);
+	ResumeGui();
 }
 
 /****************************************************************************

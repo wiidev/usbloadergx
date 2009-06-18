@@ -13,6 +13,8 @@ s32  Wpad_Init(void);
 void Wpad_Disconnect(void);
 u32  ButtonsPressed(void);
 u32  ButtonsHold(void);
+bool IsWpadConnected();
+void WPad_SetIdleTime(u32 seconds);
 
 #ifdef __cplusplus
 }
