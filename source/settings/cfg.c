@@ -37,8 +37,8 @@ u8 fave = 0;
 u8 qboot = 0;
 u8 wsprompt = 0;
 u8 keyset = 0;
-u8 favorite = 0;
-u16 count = 0;
+u8 favoritevar = 0;
+u16 playcount = 0;
 u8 listDisplay = 0;
 
 #define TITLE_MAX 65
@@ -1161,8 +1161,8 @@ void cfg_set_game_num(struct Game_NUM *game, u8 *id)
 {
 	strncpy((char*)game->id, (char*)id, 6);
 	game->id[6] = 0;
-	game->favorite = favorite;
-	game->count = count;
+	game->favorite = favoritevar;
+	game->count = playcount;
 }
 
 

@@ -141,9 +141,6 @@ struct THEME
 	short pagesize;
 };
 
-
-
-
 extern struct CFG CFG;
 extern struct THEME THEME;
 extern u8 ocarinaChoice;
@@ -152,7 +149,6 @@ extern u8 videoChoice;
 extern u8 languageChoice;
 extern u8 viChoice;
 extern u8 iosChoice;
-extern u8 faveChoice;
 extern u8 parentalcontrolChoice;
 extern u8 fix002;
 extern u8 reloadblock;
@@ -165,6 +161,8 @@ extern u8 fave;
 extern u8 wsprompt;
 extern u8 keyset;
 extern u8 gameDisplay;
+extern u16 playcount;
+extern u8 favoritevar;
 
 
 struct Game_CFG

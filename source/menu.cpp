@@ -1245,30 +1245,22 @@ static int MenuDiscList()
                         {
 
                                 wiilight(0);
+								if(isInserted(bootDevice)) {
                                 //////////save game play count////////////////
-                                extern u8 favorite;
-                                extern u16 count;
                                 struct Game_NUM* game_num = CFG_get_game_num(header->id);
 
-                                if (game_num)
-                                        {
-                                        favorite = game_num->favorite;
-                                        count = game_num->count;
+                                if (game_num) {
+                                    favoritevar = game_num->favorite;
+                                    playcount = game_num->count;
+                                } else {
+                                    favoritevar = 0;
+                                    playcount = 0;
+                                }
+                                playcount += 1;
 
-                                        }count+=1;
+                                CFG_save_game_num(header->id);
+                                }
 
-                                //if(isSdInserted()) {
-								if(isInserted(bootDevice)) {
-                                if (CFG_save_game_num(header->id))
-                                {
-                                        //WindowPrompt(LANGUAGE.SuccessfullySaved, 0, LANGUAGE.ok, 0,0,0);
-                                }
-                                else
-                                {
-                                        WindowPrompt(LANGUAGE.SaveFailed, 0, LANGUAGE.ok, 0,0,0);
-                                }
-                                }
-                                ////////////end save play count//////////////
                             menu = MENU_EXIT;
                             break;
                         }

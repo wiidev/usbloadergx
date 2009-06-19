@@ -325,30 +325,30 @@ void WindowScreensaver()
 {
 	int i = 0;
 	bool exit = false;
-	
+
 	/* initialize random seed: */
 	srand ( time(NULL) );
-	
+
 	GuiImageData GXlogo(gxlogo_png);
 	GuiImage GXlogoImg(&GXlogo);
 	GXlogoImg.SetPosition(172,152);
 	GXlogoImg.SetAlignment(ALIGN_LEFT,ALIGN_TOP);
-	
+
 	GuiImage BackgroundImg(640,480,(GXColor){0, 0, 0, 255});
 	BackgroundImg.SetPosition(0,0);
-	BackgroundImg.SetAlignment(ALIGN_LEFT,ALIGN_TOP);	
-		
+	BackgroundImg.SetAlignment(ALIGN_LEFT,ALIGN_TOP);
+
 	GuiWindow screensaverWindow(screenwidth,screenheight);
 	screensaverWindow.Append(&BackgroundImg);
 	screensaverWindow.Append(&GXlogoImg);
-	
+
 	HaltGui();
 	mainWindow->SetState(STATE_DISABLED);
 	mainWindow->Append(&screensaverWindow);
 	ResumeGui();
 
 	while(!exit)
-	{		
+	{
 			i++;
 			if(IsWpadConnected())
 			{
@@ -362,7 +362,7 @@ void WindowScreensaver()
 			}
 
 	}
-	
+
 	HaltGui();
 	mainWindow->Remove(&screensaverWindow);
 	mainWindow->SetState(STATE_DEFAULT);
@@ -943,9 +943,6 @@ int GameWindowPrompt()
 	char ID[5];
 	char IDFull[7];
 
-	u8 faveChoice = 0;
-	u16 playCount = 0;
-
 	GuiWindow promptWindow(472,320);
 	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	promptWindow.SetPosition(0, -10);
@@ -1228,14 +1225,14 @@ int GameWindowPrompt()
 
 		struct Game_NUM* game_num = CFG_get_game_num(header->id);
 		if (game_num) {
-			playCount = game_num->count;
-			faveChoice = game_num->favorite;
+			playcount = game_num->count;
+			favoritevar = game_num->favorite;
 		} else {
-			playCount = 0;
-			faveChoice = 0;
+			playcount = 0;
+			favoritevar = 0;
 		}
-		playcntTxt.SetTextf("%s: %i",LANGUAGE.Plays, playCount);
- 		btnFavoriteImg.SetImage(faveChoice ? &imgFavorite : &imgNotFavorite);
+		playcntTxt.SetTextf("%s: %i",LANGUAGE.Plays, playcount);
+ 		btnFavoriteImg.SetImage(favoritevar ? &imgFavorite : &imgNotFavorite);
 
 		nameTxt.SetPosition(0, 1);
 
@@ -1261,28 +1258,20 @@ int GameWindowPrompt()
 			if(reset == 1) //for reset button
 				Sys_Reboot();
 
-			if(btn1.GetState() == STATE_CLICKED) { //boot
-				//////////save game play count////////////////
-				extern u8 favorite;
-				extern u16 count;
+			if(btn1.GetState() == STATE_CLICKED) {
+			    //playcounter
 				struct Game_NUM* game_num = CFG_get_game_num(header->id);
-				if (game_num)
-					{
-					favorite = game_num->favorite;
-					count = game_num->count;//count+=1;
-					}count+=1;
-				//if(isSdInserted()) {
+				if (game_num) {
+					favoritevar = game_num->favorite;
+					playcount = game_num->count;
+                } else {
+                    favoritevar = 0;
+                    playcount = 0;
+                }
+				playcount += 1;
 				if(isInserted(bootDevice)) {
-				if (CFG_save_game_num(header->id))
-				{
-					//WindowPrompt(LANGUAGE.SuccessfullySaved, 0, LANGUAGE.ok, 0,0,0);
+				CFG_save_game_num(header->id);
 				}
-				else
-				{
-					//WindowPrompt(LANGUAGE.SaveFailed, 0, LANGUAGE.ok, 0,0,0);
-				}
-				}
-				////////////end save play count//////////////
 
 				choice = 1;
 				SDCard_deInit();
@@ -1308,17 +1297,17 @@ int GameWindowPrompt()
 			else if(btnFavorite.GetState() == STATE_CLICKED){//switch favorite
 				//if(isSdInserted()) {
 				if(isInserted(bootDevice)) {
-					faveChoice = !faveChoice;
-					btnFavoriteImg.SetImage(faveChoice ? &imgFavorite : &imgNotFavorite);
-					extern u8 favorite;
-					extern u8 count;
-					struct Game_NUM* game_num = CFG_get_game_num(header->id);
+					struct Game_NUM * game_num = CFG_get_game_num(header->id);
 					if (game_num) {
-						favorite = game_num->favorite;
-						count = game_num->count;
+						playcount = game_num->count;
+                        favoritevar = game_num->favorite;
+					} else {
+					    playcount = 0;
+                        favoritevar = 0;
 					}
-					favorite = faveChoice;
-					CFG_save_game_num(header->id);
+					favoritevar = (favoritevar + 1) % 2;
+                    CFG_save_game_num(header->id);
+					btnFavoriteImg.SetImage(favoritevar ? &imgFavorite : &imgNotFavorite);
 				}
 				btnFavorite.ResetState();
 			}

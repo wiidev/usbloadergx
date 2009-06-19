@@ -220,7 +220,7 @@ bool Search_and_patch_Video_Modes(void *Address, u32 Size, GXRModeObj* Table[])
 	return found;
 }
 
-/** Anti 002 fix for cIOS 249 rev < 12 thanks to WiiPower **/
+/** Anti 002 fix for IOS 249 rev < 12 thanks to WiiPower **/
 void Anti_002_fix(void *Address, int Size)
 {
 	u8 SearchPattern[12] = 	{ 0x2C, 0x00, 0x00, 0x00, 0x48, 0x00, 0x02, 0x14, 0x3C, 0x60, 0x80, 0x00 };
