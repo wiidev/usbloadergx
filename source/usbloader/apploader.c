@@ -220,6 +220,25 @@ bool Search_and_patch_Video_Modes(void *Address, u32 Size, GXRModeObj* Table[])
 	return found;
 }
 
+/** Anti 002 fix for cIOS 249 rev < 12 thanks to WiiPower **/
+void Anti_002_fix(void *Address, int Size)
+{
+	u8 SearchPattern[12] = 	{ 0x2C, 0x00, 0x00, 0x00, 0x48, 0x00, 0x02, 0x14, 0x3C, 0x60, 0x80, 0x00 };
+	u8 PatchData[12] = 		{ 0x2C, 0x00, 0x00, 0x00, 0x40, 0x82, 0x02, 0x14, 0x3C, 0x60, 0x80, 0x00 };
+
+	void *Addr = Address;
+	void *Addr_end = Address+Size;
+
+	while(Addr <= Addr_end-sizeof(SearchPattern))
+	{
+		if(memcmp(Addr, SearchPattern, sizeof(SearchPattern))==0)
+		{
+			memcpy(Addr,PatchData,sizeof(PatchData));
+		}
+		Addr += 4;
+	}
+}
+
 void gamepatches(void * dst, int len, u8 videoSelected, u8 patchcountrystring, u8 vipatch)
 {
     GXRModeObj** table = NULL;
@@ -267,6 +286,9 @@ void gamepatches(void * dst, int len, u8 videoSelected, u8 patchcountrystring, u
 		/*Thanks to WiiPower*/
 		if(patchcountrystring == 1)
 		PatchCountryStrings(dst, len);
+
+		if(Settings.anti002fix == on)
+		Anti_002_fix(dst, len);
 
 }
 

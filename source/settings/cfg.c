@@ -333,6 +333,7 @@ void Global_Default(void)
 	Settings.titlesOverride = 0;
 	Settings.screensaver = 3;
 	Settings.error002 = 0;
+	Settings.anti002fix = 0;
 }
 
 
@@ -969,6 +970,13 @@ void global_cfg_set(char *name, char *val)
 			}
 		return;
 	}
+	else if (strcmp(name, "anti002fix") == 0) {
+		int i;
+		if (sscanf(val, "%d", &i) == 1) {
+            Settings.anti002fix = i;
+			}
+		return;
+	}
 	else if (strcmp(name, "titlesOverride") == 0) {
 		int i;
 		if (sscanf(val, "%d", &i) == 1) {
@@ -1227,6 +1235,7 @@ bool cfg_save_global()// save global settings
 	fprintf(f, "patchcountrystrings = %d\n ", Settings.patchcountrystrings);
 	fprintf(f, "screensaver = %d\n ", Settings.screensaver);
 	fprintf(f, "error002 = %d\n ", Settings.error002);
+	fprintf(f, "anti002fix = %d\n ", Settings.anti002fix);
 	fclose(f);
 	return true;
 }

@@ -32,6 +32,7 @@ struct LANGUAGE
 	char t3Covers[50];
 	char addToFavorite[50];
 	char all[30];
+	char Anti002fix[50];
 	char AppLanguage[50];
 	char available[20];
 	char Areyousure[50];

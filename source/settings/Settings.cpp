@@ -733,6 +733,7 @@ int MenuSettings()
                     options2.SetName(5,"%s", LANGUAGE.BootStandard);
                     options2.SetName(6, "%s",LANGUAGE.QuickBoot);
                     options2.SetName(7, "%s",LANGUAGE.Error002fix);
+                    options2.SetName(8, "%s",LANGUAGE.Anti002fix);
                     for(int i = 0; i <= MAXOPTIONS; i++) options2.SetValue(i, NULL);
                     w.Append(&optionBrowser2);
                     optionBrowser2.SetClickable(true);
@@ -761,6 +762,8 @@ int MenuSettings()
                             Settings.language = 0;
                         if(Settings.error002 >= settings_off_on_max)
                             Settings.error002 = 0;
+                        if(Settings.anti002fix >= settings_off_on_max)
+                            Settings.anti002fix = 0;
 
                         if (Settings.video == discdefault) options2.SetValue(0,"%s",LANGUAGE.DiscDefault);
                         else if (Settings.video == systemdefault) options2.SetValue(0,"%s",LANGUAGE.SystemDefault);
@@ -799,6 +802,9 @@ int MenuSettings()
 
                         if (Settings.error002 == no) options2.SetValue(7,"%s",LANGUAGE.No);
                         else if (Settings.error002 == yes) options2.SetValue(7,"%s",LANGUAGE.Yes);
+
+                        if (Settings.anti002fix == no) options2.SetValue(8,"%s",LANGUAGE.No);
+                        else if (Settings.anti002fix == yes) options2.SetValue(8,"%s",LANGUAGE.Yes);
 
                         if(backBtn.GetState() == STATE_CLICKED)
                         {
@@ -865,6 +871,9 @@ int MenuSettings()
                                 break;
                             case 7:
                                 Settings.error002++;
+                                break;
+                            case 8:
+                                Settings.anti002fix++;
                                 break;
                         }
                     }

@@ -351,6 +351,7 @@ struct SSettings {
 	char	Cheatcodespath[100];
 	int		titlesOverride;
 	short   error002;
+	short   anti002fix;
 };
 
 void CFG_LoadGlobal(void);

@@ -35,6 +35,7 @@ void lang_default()
 snprintf(LANGUAGE.ok, sizeof(LANGUAGE.ok), "OK");
 snprintf(LANGUAGE.addToFavorite, sizeof(LANGUAGE.addToFavorite), "Favorite");
 snprintf(LANGUAGE.all, sizeof(LANGUAGE.all), "Alphabetical");
+snprintf(LANGUAGE.Anti002fix, sizeof(LANGUAGE.Anti002fix), "Anti 002 fix");
 snprintf(LANGUAGE.AppLanguage, sizeof(LANGUAGE.AppLanguage), "App Language");
 snprintf(LANGUAGE.Alternatedol, sizeof(LANGUAGE.Alternatedol), "Alternate DOL");
 snprintf(LANGUAGE.t3Covers, sizeof(LANGUAGE.t3Covers), "3D Covers");
@@ -320,6 +321,10 @@ void language_set(char *name, char *val)
 	}
 	if (strcmp(name, "ok") == 0) {
 		strcopy(LANGUAGE.ok, val, sizeof(LANGUAGE.ok));
+		return;
+	}
+	if (strcmp(name, "Anti002fix") == 0) {
+		strcopy(LANGUAGE.Anti002fix, val, sizeof(LANGUAGE.Anti002fix));
 		return;
 	}
 	if (strcmp(name, "AppLanguage") == 0) {
