@@ -73,6 +73,10 @@ bool OpenXMLDatabase(char* xmlfilepath, char* argdblang, bool argJPtoEN, bool op
 		snprintf(pathname, sizeof(pathname), "%s%s", pathname, xmlcfg_filename);
 		if (openfile) opensuccess = OpenXMLFile(pathname);
 		if (!opensuccess) {
+			snprintf(pathname, sizeof(pathname), "%swiitdb.zip", pathname);
+		if (openfile) opensuccess = OpenXMLFile(pathname);
+			}
+		if (!opensuccess) {
 			CloseXMLDatabase();
 			return false;
 		}

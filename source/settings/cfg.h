@@ -62,6 +62,7 @@ struct THEME
 	int gamegrid_y;
 	int gamegrid_w;
 	int gamegrid_h;
+	int tooltipAlpha;
 	int gamecarousel_x;
 	int gamecarousel_y;
 	int gamecarousel_w;

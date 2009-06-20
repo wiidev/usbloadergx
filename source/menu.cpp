@@ -321,6 +321,7 @@ static int MenuDiscList()
         GuiTooltip installBtnTT(LANGUAGE.Installagame);
         if (Settings.wsprompt == yes)
                 installBtnTT.SetWidescreen(CFG.widescreen);
+			installBtnTT.SetAlpha(THEME.tooltipAlpha);
         GuiImage installBtnImg(&btnInstall);
         GuiImage installBtnImgOver(&btnInstallOver);
         installBtnImg.SetWidescreen(CFG.widescreen);
@@ -332,7 +333,7 @@ static int MenuDiscList()
         GuiTooltip settingsBtnTT(LANGUAGE.settings);
         if (Settings.wsprompt == yes)
                 settingsBtnTT.SetWidescreen(CFG.widescreen);
-
+		settingsBtnTT.SetAlpha(THEME.tooltipAlpha);
         GuiImage settingsBtnImg(&btnSettings);
         settingsBtnImg.SetWidescreen(CFG.widescreen);
         GuiImage settingsBtnImgOver(&btnSettingsOver);
@@ -353,7 +354,7 @@ static int MenuDiscList()
         GuiTooltip poweroffBtnTT(LANGUAGE.PowerofftheWii);
         if (Settings.wsprompt == yes)
                 poweroffBtnTT.SetWidescreen(CFG.widescreen);
-
+		poweroffBtnTT.SetAlpha(THEME.tooltipAlpha);
         GuiImage poweroffBtnImg(&btnpwroff);
         GuiImage poweroffBtnImgOver(&btnpwroffOver);
         poweroffBtnImg.SetWidescreen(CFG.widescreen);
@@ -364,7 +365,7 @@ static int MenuDiscList()
         GuiTooltip sdcardBtnTT(LANGUAGE.ReloadSD);
         if (Settings.wsprompt == yes)
                 sdcardBtnTT.SetWidescreen(CFG.widescreen);
-
+		sdcardBtnTT.SetAlpha(THEME.tooltipAlpha);
         GuiImage sdcardImg(&btnsdcard);
         sdcardImg.SetWidescreen(CFG.widescreen);
         GuiButton sdcardBtn(&sdcardImg,&sdcardImg, 0, 3, THEME.sdcard_x, THEME.sdcard_y, &trigA, &btnSoundOver, &btnClick,1,&sdcardBtnTT,15,-30,0,5);
@@ -504,7 +505,7 @@ static int MenuDiscList()
         GuiTooltip DownloadBtnTT(LANGUAGE.ClicktoDownloadCovers);
         if (Settings.wsprompt == yes)
                 DownloadBtnTT.SetWidescreen(CFG.widescreen);
-
+		DownloadBtnTT.SetAlpha(THEME.tooltipAlpha);
         GuiButton DownloadBtn(160,224);
         DownloadBtn.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
         DownloadBtn.SetPosition(THEME.cover_x,THEME.cover_y);

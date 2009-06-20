@@ -245,6 +245,7 @@ void CFG_Default(int widescreen) // -1 = non forced Mode
 		THEME.region_x = 68;
 		THEME.region_y = 30;
 		THEME.power_x = 576;
+		THEME.tooltipAlpha = 255;
 		THEME.power_y = 355;
 		THEME.home_x = 485;//215;
 		THEME.home_y = 367;
@@ -766,6 +767,12 @@ void theme_set(char *name, char *val)
 		short x;
 		if (sscanf(val, "%hd", &x) == 1) {
 			THEME.batteryUnused = x;
+		}
+	}
+	else if (strcmp(cfg_name, "tooltipAlpha") == 0) {
+		short x;
+		if (sscanf(val, "%hd", &x) == 1) {
+			THEME.tooltipAlpha = x;
 		}
 	}
 
