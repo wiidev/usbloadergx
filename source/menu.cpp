@@ -11,7 +11,6 @@
 #include <string.h>
 #include <stdio.h> //CLOCK
 #include <time.h>
-#include <ogc/machine/processor.h>
 
 #include "libwiigui/gui.h"
 #include "libwiigui/gui_gamegrid.h"
@@ -1683,34 +1682,12 @@ static int MenuCheck()
             if(ret2 == 1) {
 				Settings.cios = ios249;
 	        } else if(ret2 == 2) {
-				if(Settings.cios != ios222)
-				{
-				    HaltGui();
-					ret2 = Sys_IosReload(222);
-					if(ret2 < 0)
-						Sys_IosReload(249);
-                    ResumeGui();
-					if(ret2 < 0) {
-                        Wpad_Init();
-                        WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
-                        WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
-						WindowPrompt(LANGUAGE.YoudonthavecIOS,LANGUAGE.LoadingincIOS,LANGUAGE.ok, 0,0,0);
-                        WPAD_Flush(0);
-                        WPAD_Disconnect(0);
-                        WPAD_Shutdown();
-					} else {
-						Settings.cios = ios222;
-						load_ehc_module();
-					}
-				}
+                Settings.cios = ios222;
             } else {
 				Sys_LoadMenu();
             }
-
 			ret2 = DiscWait(LANGUAGE.NoUSBDevice, LANGUAGE.WaitingforUSBDevice, 0, 0, 1);
 			//reinitialize SD and USB
-            SDCard_Init();
-			USBDevice_Init();
 			Wpad_Init();
             WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
             WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
@@ -1747,6 +1724,9 @@ static int MenuCheck()
                     menu = MENU_FORMAT;
                 }
         }
+
+        SDCard_Init();
+        USBDevice_Init();
 
 		if(shutdown == 1)
 			Sys_Shutdown();
@@ -1901,19 +1881,7 @@ int MainMenu(int menu)
                 break;
     }
 
-	bool onlinefix = IsNetworkInit();
-	if(onlinefix && IOS_GetVersion() == ios2) {
-		s32 kd_fd, ret;
-		STACK_ALIGN(u8, kd_buf, 0x20, 32);
-
-		kd_fd = IOS_Open("/dev/net/kd/request", 0);
-		if (kd_fd >= 0) {
-			ret = IOS_Ioctl(kd_fd, 7, NULL, 0, kd_buf, 0x20);
-			if(ret >= 0)
-				onlinefix = false; // fixed no IOS reload needed
-			IOS_Close(kd_fd);
-		}
-	}
+	bool onlinefix = ShutdownWC24();
 	if(IOS_GetVersion() != ios2 || onlinefix == true) {
 		ret = Sys_IosReload(ios2);
 		if(ret < 0) {

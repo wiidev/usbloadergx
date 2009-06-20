@@ -194,10 +194,11 @@ struct Game_CFG* CFG_get_game_opt(u8 *id);
 struct Game_NUM* CFG_get_game_num(u8 *id);
 bool CFG_save_game_opt(u8 *id);
 bool CFG_save_game_num(u8 *id);
+bool CFG_reset_all_playcounters();
 bool CFG_forget_game_opt(u8 *id);
 bool CFG_forget_game_num(u8 *id);
 
-//Astidof - Begin of modification
+
 enum {
 	ConsoleLangDefault=0,
 	jap,
@@ -356,7 +357,6 @@ struct SSettings {
 
 void CFG_LoadGlobal(void);
 bool cfg_save_global(void);
-//Astidof - End of modification
 
 bool OpenXMLDatabase(char* xmlfilepath, char* argdblang, bool argJPtoEN, bool openfile, bool loadtitles, bool freemem);
 

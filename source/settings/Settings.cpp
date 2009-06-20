@@ -478,7 +478,7 @@ int MenuSettings()
                     options2.SetName(7, "%s",LANGUAGE.Wiilight);
                     options2.SetName(8, "%s",LANGUAGE.Rumble);
                     options2.SetName(10, "%s",LANGUAGE.XMLTitles);
-                    options2.SetName(11, "Screensaver");
+                    options2.SetName(11, "%s",LANGUAGE.Screensaver);
                     for(int i = 0; i <= MAXOPTIONS; i++) options2.SetValue(i, NULL);
                     optionBrowser2.SetScrollbar(1);
                     w.Append(&optionBrowser2);
@@ -673,14 +673,7 @@ int MenuSettings()
                             case 9:
                                 break;
                             case 10:
-								//HaltGui();  this isn't done on the fly yet.  you have to restart the loader for it to take effect
                                 Settings.titlesOverride++;
-								//if(isInserted(bootDevice)) {
-                                //cfg_save_global();
-								//}
-								//CFG_Load();
-								//__Menu_GetEntries();
-								//ResumeGui();
                                 break;
 							case 11:
                                 Settings.screensaver++;
@@ -1736,7 +1729,8 @@ int GameSettings(struct discHdr * header)
 	options3.SetName(7,"%s", LANGUAGE.Patchcountrystrings);
 	options3.SetName(8,"%s", LANGUAGE.Alternatedol);
 	options3.SetName(9,"%s", LANGUAGE.Blockiosreload);
-	options3.SetName(10,"%s", LANGUAGE.Defaultgamesettings);
+	options3.SetName(10,"%s", LANGUAGE.Resetplaycounter);
+	options3.SetName(11,"%s", LANGUAGE.Defaultgamesettings);
 
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
 	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
@@ -1901,6 +1895,7 @@ int GameSettings(struct discHdr * header)
 		else if (reloadblock == off) options3.SetValue(9,LANGUAGE.OFF);
 
         options3.SetValue(10, NULL);
+        options3.SetValue(11, NULL);
 
 		if(shutdown == 1)
 			Sys_Shutdown();
@@ -1942,6 +1937,24 @@ int GameSettings(struct discHdr * header)
                 reloadblock = (reloadblock+1) % 2;
                 break;
             case 10:
+                int result;
+				result = WindowPrompt(LANGUAGE.Areyousure,0,LANGUAGE.Yes,LANGUAGE.Cancel,0,0);
+				if(result == 1) {
+					if(isInserted(bootDevice)) {
+					struct Game_NUM* game_num = CFG_get_game_num(header->id);
+					if (game_num) {
+						favoritevar = game_num->favorite;
+						playcount = game_num->count;
+					} else {
+						favoritevar = 0;
+						playcount = 0;
+					}
+					playcount = 0;
+					CFG_save_game_num(header->id);
+                }
+				}
+                break;
+            case 11:
                 int choice = WindowPrompt(LANGUAGE.Areyousure,0,LANGUAGE.Yes,LANGUAGE.Cancel,0,0);
                 if(choice == 1) {
                     videoChoice = Settings.video;

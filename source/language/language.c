@@ -199,6 +199,7 @@ snprintf(LANGUAGE.ReloadSD, sizeof(LANGUAGE.ReloadSD), "Reload SD");
 snprintf(LANGUAGE.RenameGameonWBFS, sizeof(LANGUAGE.RenameGameonWBFS), "Rename Game on WBFS");
 snprintf(LANGUAGE.Restart, sizeof(LANGUAGE.Restart), "Restart");
 snprintf(LANGUAGE.Restarting, sizeof(LANGUAGE.Restarting), "Restarting...");
+snprintf(LANGUAGE.Resetplaycounter, sizeof(LANGUAGE.Resetplaycounter), "Reset Playcounter");
 snprintf(LANGUAGE.Return, sizeof(LANGUAGE.Return), "Return");
 snprintf(LANGUAGE.released, sizeof(LANGUAGE.released), "Released");
 snprintf(LANGUAGE.ReturntoWiiMenu, sizeof(LANGUAGE.ReturntoWiiMenu), "Return to Wii Menu");
@@ -210,6 +211,7 @@ snprintf(LANGUAGE.SaveFailed, sizeof(LANGUAGE.SaveFailed), "Save Failed");
 snprintf(LANGUAGE.Specialthanksto, sizeof(LANGUAGE.Specialthanksto), "Special thanks to:");
 snprintf(LANGUAGE.For, sizeof(LANGUAGE.For), "for");
 snprintf(LANGUAGE.theUSBLoaderandreleasingthesourcecode, sizeof(LANGUAGE.theUSBLoaderandreleasingthesourcecode), "for the USB Loader source");
+snprintf(LANGUAGE.Screensaver, sizeof(LANGUAGE.Screensaver), "Screensaver");
 snprintf(LANGUAGE.secondsleft, sizeof(LANGUAGE.secondsleft), "seconds left");
 snprintf(LANGUAGE.Setasbackgroundmusic, sizeof(LANGUAGE.Setasbackgroundmusic), "Set as backgroundmusic?");
 snprintf(LANGUAGE.SelectthePartition, sizeof(LANGUAGE.SelectthePartition), "Select the Partition");
@@ -998,6 +1000,10 @@ void language_set(char *name, char *val)
 		strcopy(LANGUAGE.theUSBLoaderandreleasingthesourcecode, val, sizeof(LANGUAGE.theUSBLoaderandreleasingthesourcecode));
 		return;
 	}
+	if (strcmp(name, "Screensaver") == 0) {
+		strcopy(LANGUAGE.Screensaver, val, sizeof(LANGUAGE.Screensaver));
+		return;
+	}
 	if (strcmp(name, "secondsleft") == 0) {
 		strcopy(LANGUAGE.secondsleft, val, sizeof(LANGUAGE.secondsleft));
 		return;
@@ -1244,6 +1250,10 @@ void language_set(char *name, char *val)
 	}
 	if (strcmp(name, "Restarting") == 0) {
 		strcopy(LANGUAGE.Restarting, val, sizeof(LANGUAGE.Restarting));
+		return;
+	}
+	if (strcmp(name, "Resetplaycounter") == 0) {
+		strcopy(LANGUAGE.Resetplaycounter, val, sizeof(LANGUAGE.Resetplaycounter));
 		return;
 	}
 	if (strcmp(name, "available") == 0) {

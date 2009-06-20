@@ -197,6 +197,7 @@ struct LANGUAGE
 	char RenameGameonWBFS[50];
 	char Restart[30];
 	char Restarting[20];
+	char Resetplaycounter[50];
 	char Return[30];
 	char ReturntoWiiMenu[50];
 	char Right[30];
@@ -207,6 +208,7 @@ struct LANGUAGE
 	char Specialthanksto[50];
 	char For[20];
 	char theUSBLoaderandreleasingthesourcecode[100];
+	char Screensaver[50];
 	char secondsleft[50];
 	char SelectthePartition[50];
 	char youwanttoformat[50];

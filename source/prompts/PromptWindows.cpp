@@ -2310,6 +2310,7 @@ int ProgressUpdateWindow()
                 pfile = fopen(dolpath, "wb");
                 u8 blockbuffer[BLOCKSIZE] ATTRIBUTE_ALIGN(32);
                 for (s32 i = 0; i < filesize; i += BLOCKSIZE) {
+                    VIDEO_WaitVSync();
                     prTxt.SetTextf("%i%%", 100*i/filesize);
                     if ((Settings.wsprompt == yes) && (CFG.widescreen)) {
                         progressbarImg.SetTile(80*i/filesize);
