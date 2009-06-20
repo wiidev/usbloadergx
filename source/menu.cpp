@@ -1661,15 +1661,15 @@ static int MenuCheck()
 	int menu = MENU_NONE;
 	int i = 0;
 	int choice;
-	s32 ret2;
+	s32 ret2, wbfsinit;
 	OptionList options;
 	options.length = i;
 	partitionEntry partitions[MAX_PARTITIONS];
 
 		VIDEO_WaitVSync ();
 
-        ret2 = WBFS_Init(WBFS_DEVICE_USB);
-        if (ret2 < 0)
+        wbfsinit = WBFS_Init(WBFS_DEVICE_USB);
+        if (wbfsinit < 0)
         {
             ret2 = WindowPrompt(LANGUAGE.NoUSBDevicefound,
                     LANGUAGE.Doyouwanttoretryfor30secs,
@@ -1692,11 +1692,11 @@ static int MenuCheck()
 			Wpad_Init();
             WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
             WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
+            if (ret2 < 0) {
+                WindowPrompt (LANGUAGE.Error,LANGUAGE.USBDevicenotfound, LANGUAGE.ok, 0,0,0);
+                Sys_LoadMenu();
+            }
         }
-        if (ret2 < 0) {
-			WindowPrompt (LANGUAGE.Error,LANGUAGE.USBDevicenotfound, LANGUAGE.ok, 0,0,0);
-            Sys_LoadMenu();
-		}
 
         ret2 = Disc_Init();
         if (ret2 < 0) {
@@ -1726,18 +1726,27 @@ static int MenuCheck()
                 }
         }
 
-        SDCard_Init();
-        USBDevice_Init();
-
 		if(shutdown == 1)
 			Sys_Shutdown();
 		if(reset == 1)
 			Sys_Reboot();
+
+        if(wbfsinit < 0) {
+            sleep(1);
+        }
+
 		//Spieleliste laden
 		__Menu_GetEntries();
 
         if(menu == MENU_NONE)
 		menu = MENU_DISCLIST;
+
+        //for HDDs with issues
+		if(wbfsinit < 0) {
+		    sleep(1);
+            USBDevice_Init();
+            SDCard_Init();
+		}
 
 	return menu;
 }
@@ -1750,8 +1759,6 @@ int MainMenu(int menu)
 
 	int currentMenu = menu;
 	char imgPath[100];
-
-
 
 	#ifdef HW_RVL
 	snprintf(imgPath, sizeof(imgPath), "%splayer1_point.png", CFG.theme_path);
