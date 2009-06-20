@@ -337,63 +337,53 @@ extern const u32	norating_png_size;
 
 extern const u8		guitar_png[];
 extern const u32	guitar_png_size;
-
-extern const u8		microphone_png[];
-extern const u32	microphone_png_size;
-
-extern const u8		gcncontroller_png[];
-extern const u32	gcncontroller_png_size;
-
-extern const u8		classiccontroller_png[];
-extern const u32	classiccontroller_png_size;
-
-extern const u8		nunchuck_png[];
-extern const u32	nunchuck_png_size;
-
 extern const u8		guitarR_png[];
 extern const u32	guitarR_png_size;
 
+extern const u8		microphone_png[];
+extern const u32	microphone_png_size;
 extern const u8		microphoneR_png[];
 extern const u32	microphoneR_png_size;
 
+extern const u8		gcncontroller_png[];
+extern const u32	gcncontroller_png_size;
 extern const u8		gcncontrollerR_png[];
 extern const u32	gcncontrollerR_png_size;
 
+extern const u8		classiccontroller_png[];
+extern const u32	classiccontroller_png_size;
 extern const u8		classiccontrollerR_png[];
 extern const u32	classiccontrollerR_png_size;
 
-extern const u8		nunchuckR_png[];
-extern const u32	nunchuckR_png_size;
+extern const u8		nunchuk_png[];
+extern const u32	nunchuk_png_size;
+extern const u8		nunchukR_png[];
+extern const u32	nunchukR_png_size;
 
 extern const u8		dancepadR_png[];
 extern const u32	dancepadR_size;
-
-extern const u8		balanceboard_png[];
-extern const u32	balanceboard_png_size;
-
-extern const u8		balanceboardR_png[];
-extern const u32	balanceboardR_png_size;
-
 extern const u8		dancepad_png[];
 extern const u32	dancepad_png_size;
 
-extern const u8		drumsR_png[];
-extern const u32	drumsR_png_size;
+extern const u8		balanceboard_png[];
+extern const u32	balanceboard_png_size;
+extern const u8		balanceboardR_png[];
+extern const u32	balanceboardR_png_size;
 
 extern const u8		drums_png[];
 extern const u32	drums_png_size;
-
-extern const u8		motionplusR_png[];
-extern const u32	motionplusR_png_size;
+extern const u8		drumsR_png[];
+extern const u32	drumsR_png_size;
 
 extern const u8		motionplus_png[];
 extern const u32	motionplus_png_size;
-
-extern const u8		wheelR_png[];
-extern const u32	wheelR_png_size;
+extern const u8		motionplusR_png[];
+extern const u32	motionplusR_png_size;
 
 extern const u8		wheel_png[];
 extern const u32	wheel_png_size;
+extern const u8		wheelR_png[];
+extern const u32	wheelR_png_size;
 
 extern const u8		esrb_ec_png[];
 extern const u32	esrb_ec_png_size;

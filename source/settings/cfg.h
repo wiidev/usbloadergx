@@ -327,7 +327,6 @@ struct SSettings {
 	int	    qboot;
 	int	    wsprompt;
 	int	    keyset;
-	int     unicodefix;
 	int	    sort;
 	int	    fave;
 	int     wiilight;
@@ -347,15 +346,19 @@ struct SSettings {
 	char	dolpath[150];
 	char	update_path[150];
 	char	Cheatcodespath[100];
-	int		titlesOverride;
 	short   error002;
+	int		titlesOverride; // db_titles
+	char	db_url[200];
+	char	db_language[100];
+	int		db_JPtoEN;
 	short   anti002fix;
 };
 
 void CFG_LoadGlobal(void);
 bool cfg_save_global(void);
-void CFG_LoadXml(bool openfile, bool loadtitles, bool freemem);
 //Astidof - End of modification
+
+bool OpenXMLDatabase(char* xmlfilepath, char* argdblang, bool argJPtoEN, bool openfile, bool loadtitles, bool freemem);
 
 char *get_title(struct discHdr *header);
 u8 get_block(struct discHdr *header);

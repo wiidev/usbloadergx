@@ -22,9 +22,6 @@
 
 #include <sys/stat.h>
 #include "FreeTypeGX.h"
-#include "language/CH2Unicode.h"
-#include "language/GB2Unicode.h"
-#include "language/sjis2unicode.h"
 #include "settings/cfg.h"
 
 #include "main.h"
@@ -92,23 +89,22 @@ FreeTypeGX::~FreeTypeGX() {
  * @return Wide character representation of supplied character string.
  */
 wchar_t* FreeTypeGX::charToWideChar(char* strChar) {
-      wchar_t *strWChar;
-      strWChar = new wchar_t[strlen(strChar) + 1];
+	wchar_t *strWChar;
+	strWChar = new wchar_t[strlen(strChar) + 1];
 
-    if(Settings.unicodefix == 1) {
-        CH2Unicode(strChar, strWChar);
-    } else if(Settings.unicodefix == 2) {
-        ConverGB2Unicode(strChar, strWChar);
-    } else if(Settings.unicodefix == 3) {
-        _sjis2unicode(strChar, strWChar);
-    } else {
-      char *tempSrc = strChar;
-      wchar_t *tempDest = strWChar;
-      while((*tempDest++ = *tempSrc++));
-    }
+	// UTF-8
+	int	bt;
+	bt = mbstowcs(strWChar, strChar, strlen(strChar));
+	if(bt > 0) {
+		strWChar[bt] = (wchar_t)'\0';
+		return strWChar;
+	}
 
+	char *tempSrc = strChar;
+	wchar_t *tempDest = strWChar;
+	while((*tempDest++ = *tempSrc++));
 
-      return strWChar;
+	return strWChar;
 }
 
 /**
@@ -202,6 +198,7 @@ void FreeTypeGX::setDefaultMode() {
  *
  * This routine takes a precompiled true type font buffer and loads the necessary processed data into memory. This routine should be called before drawText will succeed.
  *
+ * @param fontPath		filename with path to load font from file in memory.
  * @param fontBuffer	A pointer in memory to a precompiled true type font buffer.
  * @param bufferSize	Size of the true type font buffer in bytes.
  * @param pointSize	The desired point size this wrapper's configured font face.
@@ -211,8 +208,21 @@ uint16_t FreeTypeGX::loadFont(char* fontPath, uint8_t* fontBuffer, FT_Long buffe
 	this->unloadFont();
 	this->ftPointSize = pointSize;
 	struct stat st;
-	if( !( fontPath && (stat(fontPath, &st)==0) && (FT_New_Face(this->ftLibrary, fontPath, 0, &this->ftFace)==0) ) )
-		FT_New_Memory_Face(this->ftLibrary, (FT_Byte *)fontBuffer, bufferSize, 0, &this->ftFace);
+
+	if(fontPath && (stat(fontPath, &st)==0)) {
+		FILE *fontfile = fopen(fontPath, "rb");
+		if (fontfile) {
+			fseek(fontfile, 0, SEEK_END);
+			bufferSize = ftell(fontfile);
+			fseek(fontfile, 0, SEEK_SET);
+			fontBuffer = (uint8_t*)malloc(bufferSize);
+			if (fontBuffer != NULL) {
+				fread(fontBuffer, 1, bufferSize, fontfile);
+			}
+			fclose(fontfile);
+		}
+	}
+	FT_New_Memory_Face(this->ftLibrary, (FT_Byte *)fontBuffer, bufferSize, 0, &this->ftFace);
 
 	if(this->ftPointSize > 0)
 		FT_Set_Pixel_Sizes(this->ftFace, 0, this->ftPointSize);

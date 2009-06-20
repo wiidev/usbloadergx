@@ -28,7 +28,6 @@ struct LANGUAGE
 	char XMLTitles[15];
 	char wififeatures[20];
 
-
 	char t3Covers[50];
 	char addToFavorite[50];
 	char all[30];
@@ -236,7 +235,6 @@ struct LANGUAGE
 	char Timeleft[50];
 	char Unlocked[50];
 	char UnlockConsoletousethisOption[100];
-	char Unicodefix[50];
 	char Uninstall[50];
 	char USBLoaderisprotected[80];
 	char USBDevicenotfound[80];

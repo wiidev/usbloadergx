@@ -8,7 +8,5 @@
 #ifndef _GAMEINFO_H_
 #define _GAMEINFO_H_
 
-
-int showGameInfo(char *ID, u8 *headerID);
-void eatADick();
+int showGameInfo(char *ID);
 #endif

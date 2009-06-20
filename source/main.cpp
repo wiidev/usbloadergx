@@ -121,12 +121,21 @@ main(int argc, char *argv[])
 	WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
 	WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
 
+	// load main font from file, or default to built-in font
 	fontSystem = new FreeTypeGX();
 	char *fontPath = NULL;
-	asprintf(&fontPath, "%sfont.ttf", CFG.theme_path);
-	fontSystem->loadFont(fontPath, font_ttf, font_ttf_size, 0);
-	fontSystem->setCompatibilityMode(FTGX_COMPATIBILITY_DEFAULT_TEVOP_GX_PASSCLR | FTGX_COMPATIBILITY_DEFAULT_VTXDESC_GX_NONE);
-	free(fontPath);
+	asprintf(&fontPath, "%sfont.ttf", CFG.theme_path);	
+	u8* fontbuf = NULL;
+	int fontbuffersize = NULL;
+	FILE *fontfile = fopen(fontPath, "rb");
+	if (fontfile) {
+		fclose(fontfile);
+		fontSystem->loadFont(fontPath, fontbuf, fontbuffersize, 0);
+		fontSystem->setCompatibilityMode(FTGX_COMPATIBILITY_DEFAULT_TEVOP_GX_PASSCLR | FTGX_COMPATIBILITY_DEFAULT_VTXDESC_GX_NONE);
+	} else {
+		fontSystem->loadFont(NULL, font_ttf, font_ttf_size, 0);
+		fontSystem->setCompatibilityMode(FTGX_COMPATIBILITY_DEFAULT_TEVOP_GX_PASSCLR | FTGX_COMPATIBILITY_DEFAULT_VTXDESC_GX_NONE);
+	}
 
 	fontClock = new FreeTypeGX();
 	fontClock->loadFont(NULL, clock_ttf, clock_ttf_size, 0);
@@ -136,3 +145,5 @@ main(int argc, char *argv[])
 	MainMenu(MENU_CHECK);
 	return 0;
 }
+
+

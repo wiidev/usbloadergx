@@ -327,12 +327,14 @@ void Global_Default(void)
 	Settings.cios = ios249;
 	Settings.xflip = no;
 	Settings.qboot = no;
-	Settings.unicodefix = 0;
 	Settings.wiilight = 1;
 	Settings.patchcountrystrings = 0;
-	Settings.titlesOverride = 0;
-	Settings.screensaver = 3;
 	Settings.error002 = 0;
+	Settings.titlesOverride = 0;
+	snprintf(Settings.db_url, sizeof(Settings.db_url), empty);
+	snprintf(Settings.db_language, sizeof(Settings.db_language), empty);
+	Settings.db_JPtoEN = 0;
+	Settings.screensaver = 3;
 	Settings.anti002fix = 0;
 }
 
@@ -942,13 +944,6 @@ void global_cfg_set(char *name, char *val)
 			}
 		return;
 	}
-	else if (strcmp(name, "unicodefix") == 0) {
-		int i;
-		if (sscanf(val, "%d", &i) == 1) {
-			Settings.unicodefix =i;
-		}
-		return;
-	}
 	else if (strcmp(name, "wiilight") == 0) {
 		int i;
 		if (sscanf(val, "%d", &i) == 1) {
@@ -981,6 +976,13 @@ void global_cfg_set(char *name, char *val)
 		int i;
 		if (sscanf(val, "%d", &i) == 1) {
             Settings.titlesOverride = i;
+			}
+		return;
+	}
+	else if (strcmp(name, "db_JPtoEN") == 0) {
+		int i;
+		if (sscanf(val, "%d", &i) == 1) {
+            Settings.db_JPtoEN = i;
 			}
 		return;
 	}
@@ -1206,7 +1208,6 @@ bool cfg_save_global()// save global settings
 	fprintf(f, "keyset = %d\n ", Settings.keyset);
 	fprintf(f, "xflip = %d\n ", Settings.xflip);
 	fprintf(f, "qboot = %d\n ", Settings.qboot);
-	fprintf(f, "unicodefix = %d\n ", Settings.unicodefix);
 	fprintf(f, "wsprompt = %d\n", Settings.wsprompt);
 	fprintf(f, "parentalcontrol = %d\n ", Settings.parentalcontrol);
 	fprintf(f, "cover_path = %s\n ", Settings.covers_path);
@@ -1232,6 +1233,9 @@ bool cfg_save_global()// save global settings
 	fprintf(f, "update_path = %s\n ", Settings.update_path);
 	fprintf(f, "Cheatcodespath = %s\n ", Settings.Cheatcodespath);
 	fprintf(f, "titlesOverride = %d\n ", Settings.titlesOverride);
+	//fprintf(f, "db_url = %s\n ", Settings.db_url);
+	//fprintf(f, "db_JPtoEN = %d\n ", Settings.db_JPtoEN);
+	//fprintf(f, "db_language = %d\n ", Settings.language);
 	fprintf(f, "patchcountrystrings = %d\n ", Settings.patchcountrystrings);
 	fprintf(f, "screensaver = %d\n ", Settings.screensaver);
 	fprintf(f, "error002 = %d\n ", Settings.error002);
@@ -1465,7 +1469,7 @@ bool cfg_save_games()
 		fprintf(f, "errorfix002:%d; ", cfg_game[i].errorfix002);
 		fprintf(f, "iosreloadblock:%d; ", cfg_game[i].iosreloadblock);
 		fprintf(f, "patchcountrystrings:%d; ", cfg_game[i].patchcountrystrings);
-		fprintf(f, "loadalternatedol:%d;\n", cfg_game[i].loadalternatedol);
+		fprintf(f, "loadalternatedol:%d; ", cfg_game[i].loadalternatedol);
 	}
 	fprintf(f, "# END\n");
 	fclose(f);
@@ -1528,8 +1532,12 @@ bool cfg_load_global()
 	}
 	Settings.volume = 80;
 	Settings.sfxvolume = 80;
+	
 	Settings.titlesOverride = 0;
-
+	char * empty = "";
+	snprintf(Settings.db_url, sizeof(Settings.db_url), empty);
+	snprintf(Settings.db_language, sizeof(Settings.db_language), empty);
+	Settings.db_JPtoEN = 0;
 	return cfg_parsefile(GXGlobal_cfg, &global_cfg_set);
 }
 
@@ -1602,17 +1610,6 @@ bool CFG_forget_game_num(u8 *id)
 	return cfg_save_game_num();
 }
 
-void CFG_LoadXml(bool openfile, bool loadtitles, bool freemem)
-{
-	/* load renamed titles from proper names and game info XML, needs to be after cfg_load_games - Lustar */
-	char pathname[200];
-	snprintf(pathname, sizeof(pathname), "%s%s", Settings.titlestxt_path, "wiitdb.zip");
-	if (openfile) OpenXMLFile(pathname);
-	char forcedlanguage[200] = "";
-	if (loadtitles) LoadTitlesFromXML(forcedlanguage, true); // options can be added to set force title language to any language and force Japanese title to English
-										// true = force english for al Japanese tiles, this should be set to true as long as Japanese titles are not displayed properly
-	if (freemem) FreeXMLMemory(); // free memory as soon as titles are loaded, the file will need to be loaded again if needed
-}
 
 void CFG_Load(void)
 {
@@ -1645,7 +1642,7 @@ void CFG_Load(void)
 	Global_Default(); //global default depends on theme information
 	CFG_LoadGlobal();
 
-	if (Settings.titlesOverride==1) CFG_LoadXml(true, true, false); // load titles, do not keep in memory
+	if (Settings.titlesOverride==1) OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, true, false); // open file, load titles, do not keep in memory
 
 	// loaded after database to override database titles with custom titles
 	snprintf(pathname, sizeof(pathname), "%stitles.txt", Settings.titlestxt_path);

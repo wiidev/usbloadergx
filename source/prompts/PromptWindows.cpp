@@ -2067,17 +2067,17 @@ ProgressDownloadWindow(int choice2)
 		char URLFile[100];
 		if (choice2 == 2)
 		{
-			sprintf(URLFile,"http://www.theotherzone.com/wii/3d/176/248/%s",missingFiles[i]); // For 3D Covers
+			sprintf(URLFile,"http://www.wiiboxart.com/3d/176/248/%s",missingFiles[i]); // For 3D Covers
 			sprintf(imgPath,"%s%s", Settings.covers_path, missingFiles[i]);
 		}
 		if(choice2 == 3)
 		{
-			sprintf(URLFile,"http://www.theotherzone.com/wii/diskart/160/160/%s",missingFiles[i]);
+			sprintf(URLFile,"http://www.wiiboxart.com/diskart/160/160/%s",missingFiles[i]);
 			sprintf(imgPath,"%s%s", Settings.disc_path, missingFiles[i]);
 		}
 		if(choice2 == 1)
 		{
-			sprintf(URLFile,"http://www.theotherzone.com/wii/resize/160/224/%s",missingFiles[i]);
+			sprintf(URLFile,"http://www.wiiboxart.com/resize/160/224/%s",missingFiles[i]);
 			sprintf(imgPath,"%s%s", Settings.covers_path, missingFiles[i]);
 		}
 
@@ -2114,15 +2114,15 @@ ProgressDownloadWindow(int choice2)
 
     char URLFile[100];
     if (choice2 == 2) {
-		sprintf(URLFile,"http://www.theotherzone.com/wii/3d/176/248/%s",missingFiles[0]); // For 3D Covers
+		sprintf(URLFile,"http://www.wiiboxart.com/3d/176/248/%s",missingFiles[0]); // For 3D Covers
 		sprintf(imgPath,"%s%s", Settings.covers_path, missingFiles[0]);
     }
     if(choice2 == 3) {
-		sprintf(URLFile,"http://www.theotherzone.com/wii/diskart/160/160/%s",missingFiles[0]);
+		sprintf(URLFile,"http://www.wiiboxart.com/diskart/160/160/%s",missingFiles[0]);
 		sprintf(imgPath,"%s%s", Settings.disc_path, missingFiles[0]);
     }
     if(choice2 == 1) {
-		sprintf(URLFile,"http://www.theotherzone.com/wii/resize/160/224/%s",missingFiles[0]);
+		sprintf(URLFile,"http://www.wiiboxart.com/resize/160/224/%s",missingFiles[0]);
 		sprintf(imgPath,"%s%s", Settings.covers_path, missingFiles[0]);
     }
 

@@ -8,58 +8,64 @@ extern "C"
 {
 #endif
 
+// open database, close database, load info for a game
+bool OpenXMLDatabase(char* xmlfilepath, char* argdblang, bool argJPtoEN, bool openfile, bool loadtitles, bool keepopen);
+void CloseXMLDatabase();
+bool LoadGameInfoFromXML(char* gameid, char* langcode);
 
+
+#define XML_ELEMMAX 15
 
 struct gameXMLinfo
-{
-	char id[10];
-	char version[500];
-	char region[10];
-	char title[500];
+{	
+	char id[7];
+	char version[50];
+	char region[7];
+	char title[100];
 	char synopsis[2000];
-	char title_EN[500];
+	char title_EN[100];
 	char synopsis_EN[2000];
-	char locales[100][500];
-	char developer[500];
-	char publisher[500];
-	char publisherfromid[500];
-	char year[10];
-	char month[10];
-	char day[10];
-	char genre[500];
-	char genresplit[100][500];
-	char ratingtype[10];
-	char ratingvalue[10];
-	char ratingdescriptors[100][500];
-	char ratingvalueCERO[10];
-	char ratingvalueESRB[10];
-	char ratingvaluePEGI[10];
-	char wifiplayers[10];
-	char wififeatures[100][500];
-	char players[10];
-	char accessories[100][500];
-	char accessories_required[100][500];
-	char iso_crc[10];
-	char iso_md5[50];
-	char iso_sha1[50];
+	char locales[XML_ELEMMAX+1][3];
+	int localeCnt;
+	char developer[75];
+	char publisher[75];
+	char publisherfromid[75];
+	char year[5];
+	char month[3];
+	char day[3];
+	char genre[75];
+	char genresplit[XML_ELEMMAX+1][20];
+	int genreCnt;
+	char ratingtype[5];
+	char ratingvalue[5];
+	char ratingdescriptors[XML_ELEMMAX+1][40];
 	int descriptorCnt;
-	int accessoryCnt;
-	int accessoryReqCnt;
+	char ratingvalueCERO[5];
+	char ratingvalueESRB[5];
+	char ratingvaluePEGI[5];
+	char wifiplayers[4];
+	char wififeatures[XML_ELEMMAX+1][20];
 	int wifiCnt;
-
+	char players[4];
+	char accessories[XML_ELEMMAX+1][20];
+	int accessoryCnt;
+	char accessoriesReq[XML_ELEMMAX+1][20];
+	int accessoryReqCnt;
+	char iso_crc[9];
+	char iso_md5[33];
+	char iso_sha1[41];
 } ;
 
 struct gameXMLinfo gameinfo;
 struct gameXMLinfo gameinfo_reset;
 
 bool OpenXMLFile(char* filename);
-bool LoadGameInfoFromXML(char* gameid, char* langcode);
 void LoadTitlesFromXML(char *langcode, bool forcejptoen);
-void GetPublisherFromGameid(char *idtxt, char *dest);
+void GetPublisherFromGameid(char *idtxt, char *dest, int destsize);
 char *ConvertLangTextToCode(char *langtext);
-void ConvertRating(char *ratingvalue, char *fromrating, char *torating, char *destvalue);
+void ConvertRating(char *ratingvalue, char *fromrating, char *torating, char *destvalue, int destsize);
 void PrintGameInfo(bool showfullinfo);
-void FreeXMLMemory();
+char *MemInfo();
 
 void title_set(char *id, char *title);
 char* trimcopy(char *dest, char *src, int size);

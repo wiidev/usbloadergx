@@ -11,6 +11,7 @@
 #include <string.h>
 #include <stdio.h> //CLOCK
 #include <time.h>
+#include <ogc/machine/processor.h>
 
 #include "libwiigui/gui.h"
 #include "libwiigui/gui_gamegrid.h"
@@ -35,8 +36,6 @@
 #include "wpad.h"
 #include "listfiles.h"
 #include "fatmounter.h"
-
-//#include "xml.h" /* XML - Lustar*/
 
 #define MAX_CHARACTERS		38
 #define GB_SIZE		1073741824.0
@@ -1093,15 +1092,12 @@ static int MenuDiscList()
             }
                 }
 				else if (gameInfo.GetState() == STATE_CLICKED) {
-				struct discHdr *header = &gameList[selectImg1];
-					snprintf (ID,sizeof(ID),"%c%c%c", header->id[0], header->id[1], header->id[2]);
-					snprintf (IDfull,sizeof(IDfull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
-
-				choice = showGameInfo(IDfull, header->id);
-				if (choice>0){
-				gameInfo.ResetState();
-			//break;
-			}
+					struct discHdr *header = &gameList[selectImg1];
+                    snprintf (IDfull,sizeof(IDfull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
+					choice = showGameInfo(IDfull);
+					//if (choice>0){
+						gameInfo.ResetState();
+					//}
 		}
 
                 if (Settings.gameDisplay==grid){
@@ -1905,7 +1901,19 @@ int MainMenu(int menu)
                 break;
     }
 
-	bool onlinefix = ShutdownWC24();
+	bool onlinefix = IsNetworkInit();
+	if(onlinefix && IOS_GetVersion() == ios2) {
+		s32 kd_fd, ret;
+		STACK_ALIGN(u8, kd_buf, 0x20, 32);
+
+		kd_fd = IOS_Open("/dev/net/kd/request", 0);
+		if (kd_fd >= 0) {
+			ret = IOS_Ioctl(kd_fd, 7, NULL, 0, kd_buf, 0x20);
+			if(ret >= 0)
+				onlinefix = false; // fixed no IOS reload needed
+			IOS_Close(kd_fd);
+		}
+	}
 	if(IOS_GetVersion() != ios2 || onlinefix == true) {
 		ret = Sys_IosReload(ios2);
 		if(ret < 0) {
