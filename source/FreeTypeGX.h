@@ -219,6 +219,7 @@ class FreeTypeGX {
 	private:
 		FT_Library ftLibrary;	/**< FreeType FT_Library instance. */
 		FT_Face ftFace;			/**< FreeType reusable FT_Face typographic object. */
+		FT_Byte *ftFace_fromFile;
 		FT_GlyphSlot ftSlot;	/**< FreeType reusable FT_GlyphSlot glyph container object. */
 		FT_UInt ftPointSize;	/**< Requested size of the rendered font. */
 		bool ftKerningEnabled;	/**< Flag indicating the availability of font kerning data. */
@@ -235,6 +236,7 @@ class FreeTypeGX {
 		static int16_t getStyleOffsetHeight(ftgxDataOffset *offset, uint16_t format);
 
 		void unloadFont();
+		void clearGlyphData();
 		ftgxCharData *cacheGlyphData(wchar_t charCode);
 		uint16_t cacheGlyphDataComplete();
 		void loadGlyphData(FT_Bitmap *bmp, ftgxCharData *charData);

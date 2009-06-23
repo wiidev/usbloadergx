@@ -1,0 +1,781 @@
+# USB Loader GX language source file.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: USB Loader GX\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-06-22 20:10+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "0 (Everyone)"
+msgstr ""
+
+msgid "1 (Child 7+)"
+msgstr ""
+
+msgid "2 (Teen 12+)"
+msgstr ""
+
+msgid "3 (Mature 16+)"
+msgstr ""
+
+msgid "3D Covers"
+msgstr ""
+
+msgid "4 (Adults Only 18+)"
+msgstr ""
+
+msgid "All the features of USB Loader GX are unlocked."
+msgstr "Kaikki asetukset on nyt käytettävissä."
+
+msgid "Alternate DOL"
+msgstr ""
+
+msgid "Anti 002 fix"
+msgstr ""
+
+msgid "App Language"
+msgstr "Ohjelman kieli"
+
+msgid "Apr"
+msgstr ""
+
+msgid "Are you sure?"
+msgstr "Oletko varma?"
+
+msgid "Aug"
+msgstr ""
+
+msgid "AutoPatch"
+msgstr "AutoPatch"
+
+msgid "Back"
+msgstr "Takaisin"
+
+msgid "Back to HBC or Wii Menu"
+msgstr "Takaisin HBC:hen tai Wii Menuun"
+
+msgid "Back to Loader"
+msgstr "HBC"
+
+msgid "Back to Wii Menu"
+msgstr "Takaisin Wii Menuun"
+
+msgid "Backgroundmusic"
+msgstr ""
+
+msgid "Backgroundmusic Path changed."
+msgstr ""
+
+msgid "Big thanks to:"
+msgstr ""
+
+msgid "Block IOS Reload"
+msgstr ""
+
+msgid "Boot/Standard"
+msgstr "Käynnistys/Standardi"
+
+msgid "Both"
+msgstr ""
+
+msgid "Can't be formated"
+msgstr "Ei voida formatoida"
+
+msgid "Can't create directory"
+msgstr "Ei voi luoda kansiota"
+
+msgid "Can't delete:"
+msgstr "Ei voida poistaa:"
+
+msgid "Cancel"
+msgstr "Peruuta"
+
+msgid "Cheatcodes Path"
+msgstr ""
+
+msgid "Cheatcodes Path changed"
+msgstr ""
+
+msgid "Checking for Updates"
+msgstr ""
+
+msgid "Click to Download Covers"
+msgstr "Klikkaa ladataksesi kansia"
+
+msgid "Clock"
+msgstr "Kello"
+
+msgid "Close"
+msgstr ""
+
+msgid "Console"
+msgstr ""
+
+msgid "Console Default"
+msgstr "Konsolin oletus"
+
+msgid "Console Locked"
+msgstr "Konsoli lukittu"
+
+msgid "Console should be unlocked to modify it."
+msgstr "Avaa konsolin lukitus muokataksesi asetuksia."
+
+msgid "Continue to install game?"
+msgstr "Jatka pelin asennusta?"
+
+msgid "Controllevel"
+msgstr ""
+
+msgid "Correct Password"
+msgstr "Oikea salasana"
+
+msgid "Could not initialize DIP module!"
+msgstr "DIP Moduulia ei voitu alustaa!"
+
+msgid "Could not initialize network!"
+msgstr "Verkkoon ei voitu yhdistää!"
+
+msgid "Could not open Disc"
+msgstr "Levyä ei voitu lukea"
+
+msgid "Cover Download"
+msgstr "kansien lataus"
+
+msgid "Cover Path"
+msgstr "kansien sijainti"
+
+msgid "Coverpath Changed"
+msgstr "kansien sijainti muutettu"
+
+msgid "Credits"
+msgstr "Tekijät"
+
+msgid "Custom Paths"
+msgstr ""
+
+msgid "Dec"
+msgstr ""
+
+msgid "Default"
+msgstr ""
+
+msgid "Default Gamesettings"
+msgstr ""
+
+msgid "Default Settings"
+msgstr ""
+
+msgid "Developed by"
+msgstr ""
+
+msgid "Disc Default"
+msgstr "Levy oletus"
+
+msgid "Disc Images"
+msgstr "Levykuvat"
+
+msgid "Discimage Path"
+msgstr "Levykuvien sijainti"
+
+msgid "Discpath Changed"
+msgstr "Levykuvien sijainti muutettu"
+
+msgid "Discpath change"
+msgstr "Levykuvien sijainti"
+
+msgid "DiskFlip"
+msgstr ""
+
+msgid "Display"
+msgstr "Näyttö"
+
+msgid "Do you really want to delete:"
+msgstr "Haluatko varmasti formatoida:"
+
+msgid "Do you want to change language?"
+msgstr ""
+
+msgid "Do you want to format:"
+msgstr "Haluatko formatoida:"
+
+msgid "Do you want to retry for 30 secs?"
+msgstr "Haluatko odottaa 30 sekuntia?"
+
+msgid "Dol Path"
+msgstr ""
+
+msgid "Dolpath Changed"
+msgstr ""
+
+msgid "Dolpath change"
+msgstr ""
+
+msgid "Download Boxart image?"
+msgstr "Lataa kansikuva?"
+
+msgid "Download finished"
+msgstr "Lataus valmistunut"
+
+msgid "Downloading file"
+msgstr "Lataa tiedostoa:"
+
+msgid "Dutch"
+msgstr "Hollanti"
+
+msgid "English"
+msgstr "Englanti"
+
+msgid "Error !"
+msgstr "Virhe !"
+
+msgid "Error 002 fix"
+msgstr ""
+
+msgid "Error reading Disc"
+msgstr "Virhe luettaessa levyä"
+
+msgid "Exit USB Loader GX?"
+msgstr "Poistu USB Loader GX:stä?"
+
+msgid "Failed formating"
+msgstr "Formatointi ei onnistunut"
+
+msgid "Feb"
+msgstr ""
+
+msgid "File not found."
+msgstr ""
+
+msgid "Flip-X"
+msgstr "käännä-X"
+
+msgid "Force"
+msgstr "Pakota"
+
+msgid "Format"
+msgstr "Formatoi"
+
+msgid "Formatting, please wait..."
+msgstr "Formatoi, odota..."
+
+msgid "Free Space"
+msgstr "Vapaata tilaa"
+
+msgid "French"
+msgstr "Ranska"
+
+msgid "Full Shutdown"
+msgstr "Täysi sammutus"
+
+msgid "GUI Settings"
+msgstr ""
+
+msgid "Game ID"
+msgstr "Peli ID"
+
+msgid "Game Language"
+msgstr "Kieli"
+
+msgid "Game Load"
+msgstr ""
+
+msgid "Game Region"
+msgstr "Alue"
+
+msgid "Game Size"
+msgstr "Pelin koko"
+
+msgid "Game is already installed:"
+msgstr "Peli on jo asennettu:"
+
+msgid "Games"
+msgstr "Pelejä"
+
+msgid "German"
+msgstr "Saksa"
+
+msgid "HOME Menu"
+msgstr ""
+
+msgid "Hour"
+msgstr ""
+
+msgid "How do you want to update?"
+msgstr ""
+
+msgid "How to Shutdown?"
+msgstr "Miten sammutetaan?"
+
+msgid "Initializing Network"
+msgstr "Yhdistää verkkoon"
+
+msgid "Insert Disk"
+msgstr "Aseta levy Wiihin"
+
+msgid "Insert an SD-Card to download images."
+msgstr "Aseta SD-kortti ladataksesi kansia."
+
+msgid "Insert an SD-Card to save."
+msgstr "Aseta SD-kortti tallentaaksesi asetuksia."
+
+msgid "Insert an SD-Card to use this option."
+msgstr ""
+
+msgid "Install Error!"
+msgstr "Asennusvirhe!"
+
+msgid "Install a game"
+msgstr "Asenna peli"
+
+msgid "Installing game:"
+msgstr "Asentaa peliä:"
+
+msgid "Italian"
+msgstr "Italia"
+
+msgid "Jan"
+msgstr ""
+
+msgid "Japanese"
+msgstr "Japani"
+
+msgid "July"
+msgstr ""
+
+msgid "June"
+msgstr ""
+
+msgid "Keyboard"
+msgstr ""
+
+msgid "Korean"
+msgstr "Korea"
+
+msgid "Language change:"
+msgstr ""
+
+msgid "Languagepath changed."
+msgstr ""
+
+msgid "Left"
+msgstr "Vasen"
+
+msgid "Like SysMenu"
+msgstr "Kuin wii-menu"
+
+msgid "Loading standard language."
+msgstr ""
+
+msgid "Loading standard music."
+msgstr ""
+
+msgid "Lock Console"
+msgstr "Lukitse konsoli"
+
+msgid "Locked"
+msgstr ""
+
+msgid "Mar"
+msgstr ""
+
+msgid "May"
+msgstr ""
+
+msgid "Missing files"
+msgstr "tiedostoa puuttuu"
+
+msgid "Music Volume"
+msgstr "Voimakkuus"
+
+msgid "Neither"
+msgstr "Ei kumpikaan"
+
+msgid "Network init error"
+msgstr "Verkon alustusvirhe"
+
+msgid "Next"
+msgstr "Seuraava"
+
+msgid "No"
+msgstr "Ei"
+
+msgid "No SD-Card inserted!"
+msgstr "SD-korttia ei ole asetettu wiihin!"
+
+msgid "No USB Device"
+msgstr "Ei USB-laitetta"
+
+msgid "No USB Device found."
+msgstr "USB-laitetta ei löytynyt."
+
+msgid "No WBFS partition found"
+msgstr "Ei WBFS-osioita löytynyt"
+
+msgid "No file missing!"
+msgstr "Ei tiedostoja kadoksissa!"
+
+msgid "No new updates."
+msgstr ""
+
+msgid "No partitions found"
+msgstr "Osioita ei löytynyt"
+
+msgid "Normal"
+msgstr "Normaali"
+
+msgid "Normal Covers"
+msgstr "Normaalit kannet"
+
+msgid "Not a Wii Disc"
+msgstr "Ei Wii-levy"
+
+msgid "Not enough free space!"
+msgstr "Ei tarpeeksi tilaa!"
+
+msgid "Not supported format!"
+msgstr ""
+
+msgid "Nov"
+msgstr ""
+
+msgid "OFF"
+msgstr "OFF"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "ON"
+msgstr "ON"
+
+msgid "Oct"
+msgstr ""
+
+msgid "Official Site"
+msgstr "Virallinen sivusto"
+
+msgid "Only for Install"
+msgstr ""
+
+msgid "Parental Control"
+msgstr "Valvonta"
+
+msgid "Parental control"
+msgstr ""
+
+msgid "Partition"
+msgstr "Osio"
+
+msgid "Password"
+msgstr "Salasana"
+
+msgid "Password Changed"
+msgstr "Salasana muutettu"
+
+msgid "Password has been changed"
+msgstr "Salasana on muutettu"
+
+msgid "Patch Country Strings"
+msgstr ""
+
+msgid "Path of titles.txt change"
+msgstr ""
+
+msgid "Path of titles.txt changed."
+msgstr ""
+
+msgid "Play Count"
+msgstr ""
+
+msgid "Power off the Wii"
+msgstr "Sammuta Wii"
+
+msgid "Prev"
+msgstr "Edellinen"
+
+msgid "Prompts Buttons"
+msgstr "Napit"
+
+msgid "Published by"
+msgstr ""
+
+msgid "Quick Boot"
+msgstr "Pikakäynnistys"
+
+msgid "Released"
+msgstr ""
+
+msgid "Reload SD"
+msgstr "Uudelleenlataa SD"
+
+msgid "Rename Game on WBFS"
+msgstr "Uudelleennimeä peli"
+
+msgid "Reset Playcounter"
+msgstr ""
+
+msgid "Restart"
+msgstr "Käynnistä uudelleen"
+
+msgid "Restarting..."
+msgstr ""
+
+msgid "Return"
+msgstr "Palaa"
+
+msgid "Return to Wii Menu"
+msgstr ""
+
+msgid "Right"
+msgstr "Oikea"
+
+msgid "Rumble"
+msgstr "Värinä"
+
+msgid "SChinese"
+msgstr "SKiina"
+
+msgid "SFX Volume"
+msgstr ""
+
+msgid "Save"
+msgstr "Tallenna"
+
+msgid "Save Failed"
+msgstr "Tallennus ei onnistunut"
+
+msgid "Screensaver"
+msgstr ""
+
+msgid "Sept"
+msgstr ""
+
+msgid "Set as backgroundmusic?"
+msgstr ""
+
+msgid "Settings"
+msgstr "Asetukset"
+
+msgid "Shutdown System"
+msgstr "Sammuta järjestelmä"
+
+msgid "Shutdown to Idle"
+msgstr "Valmiustila"
+
+msgid "Sound"
+msgstr ""
+
+msgid "Spanish"
+msgstr "Espanja"
+
+msgid "Special thanks to:"
+msgstr "Erikoiskiitokset"
+
+msgid "Standard"
+msgstr ""
+
+msgid "Success:"
+msgstr "Onnistui:"
+
+msgid "Successfully Saved"
+msgstr "Tallennettu onnistuneesti"
+
+msgid "Successfully Updated"
+msgstr ""
+
+msgid "Successfully deleted:"
+msgstr "Poistettu onnistuneesti:"
+
+msgid "Successfully installed:"
+msgstr "Asennettu onnistuneesti:"
+
+msgid "System Default"
+msgstr "Wiin oletus"
+
+msgid "TChinese"
+msgstr "TKiina"
+
+msgid "ThemePath"
+msgstr "Teeman sijainti"
+
+msgid "Themepath Changed"
+msgstr "Teeman sijainti muutettu"
+
+msgid "Themepath change"
+msgstr "Teeman sijainti"
+
+msgid "Time left:"
+msgstr "Aikaa jäljellä:"
+
+msgid "Titles from XML"
+msgstr ""
+
+msgid "Tooltips"
+msgstr "vinkit"
+
+msgid "USB Device not found"
+msgstr "USB-laitetta ei löytynyt"
+
+msgid "USB Loader GX is protected"
+msgstr "USB Loader GX on suojattu."
+
+msgid "Uninstall"
+msgstr "Poista"
+
+msgid "Unlock console to use this option."
+msgstr ""
+
+msgid "Unlocked"
+msgstr ""
+
+msgid "Update"
+msgstr ""
+
+msgid "Update All"
+msgstr ""
+
+msgid "Update DOL"
+msgstr ""
+
+msgid "Update failed"
+msgstr ""
+
+msgid "Update to"
+msgstr ""
+
+msgid "Updatepath"
+msgstr ""
+
+msgid "Updatepath changed."
+msgstr ""
+
+msgid "Updating"
+msgstr ""
+
+msgid "VIDTV Patch"
+msgstr "VIDTV korjaus"
+
+msgid "Video Mode"
+msgstr "Video tila"
+
+msgid "Waiting for USB Device"
+msgstr "Odottaa USB-laitetta..."
+
+msgid "Waiting..."
+msgstr "Odottaa..."
+
+msgid "WiFi Features"
+msgstr ""
+
+msgid "Widescreen Fix"
+msgstr "Laajakuva korjaus"
+
+msgid "Wii Menu"
+msgstr "Wii Menu"
+
+msgid "Wiilight"
+msgstr ""
+
+msgid "Wrong Password"
+msgstr "Väärä salasana"
+
+msgid "Yes"
+msgstr "Kyllä"
+
+msgid "You need to format a partition"
+msgstr "Sinun täytyy formatoida osio"
+
+msgid "available"
+msgstr ""
+
+msgid "file(s) left"
+msgstr "tiedosto(j)a jäljellä"
+
+msgid "files not found on the server!"
+msgstr "tiedostoja ei löytynyt serveriltä!"
+
+msgid "for"
+msgstr ""
+
+msgid "for diverse patches"
+msgstr ""
+
+msgid "for his awesome tool"
+msgstr ""
+
+msgid "for hosting the covers/discarts"
+msgstr ""
+
+msgid "for hosting the update files"
+msgstr ""
+
+msgid "for the USB Loader source"
+msgstr "ja lähdekoodin julkaisemisesta"
+
+msgid "formatted!"
+msgstr "formatoitu!"
+
+msgid "free"
+msgstr "vapaa"
+
+msgid "not set"
+msgstr "ei asetettu"
+
+msgid "of"
+msgstr "josta"
+
+msgid "seconds left"
+msgstr "sekuntia jäljellä"
+
+msgid "titles.txt Path"
+msgstr ""
+
+#~ msgid "Coverpath change"
+#~ msgstr "kansien sijainti"
+
+#~ msgid "BOOT ERROR"
+#~ msgstr "BOOTTAUS VIRHE"
+
+#~ msgid "Insert a Wii Disc!"
+#~ msgstr "Aseta Wii-levy!"
+
+#~ msgid "Failed to boot:"
+#~ msgstr "Käynnistys ei onnistunut:"
+
+#~ msgid "Failed to mount front SD-card"
+#~ msgstr "Ei voinut asentaa SD-korttia"
+
+#~ msgid "Failed to set USB:"
+#~ msgstr "USB:ta ei voitu asentaa:"
+
+#~ msgid "Go Back"
+#~ msgstr "Mene takaisin"
+
+#~ msgid "Language change"
+#~ msgstr "Kielen muuttaminen"
+
+#~ msgid "Loading in cIOS249"
+#~ msgstr "Lataa cIOS249"
+
+#~ msgid "No HDD found!"
+#~ msgstr "Kovalevyä ei löytynyt!"
+
+#~ msgid "Password change"
+#~ msgstr "Salasanan vaihto"
+
+#~ msgid "Select the Partition"
+#~ msgstr "Valitse osio"
+
+#~ msgid "you want to format"
+#~ msgstr "jonka haluat formatoida"
+
+#~ msgid "Try"
+#~ msgstr "Yritä"
+
+#~ msgid "You don't have cIOS222"
+#~ msgstr "Sinulla ei ole  cIOS222:sta"

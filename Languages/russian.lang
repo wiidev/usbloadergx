@@ -1,0 +1,787 @@
+# USB Loader GX language source file.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: USB Loader GX\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-06-22 20:10+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "0 (Everyone)"
+msgstr ""
+
+msgid "1 (Child 7+)"
+msgstr ""
+
+msgid "2 (Teen 12+)"
+msgstr ""
+
+msgid "3 (Mature 16+)"
+msgstr ""
+
+msgid "3D Covers"
+msgstr "3D Обложки"
+
+msgid "4 (Adults Only 18+)"
+msgstr ""
+
+msgid "All the features of USB Loader GX are unlocked."
+msgstr "Все функции USB Loader GX разблокированы."
+
+msgid "Alternate DOL"
+msgstr ""
+
+msgid "Anti 002 fix"
+msgstr ""
+
+msgid "App Language"
+msgstr "Язык приложения"
+
+msgid "Apr"
+msgstr ""
+
+msgid "Are you sure?"
+msgstr "Вы уверены ?"
+
+msgid "Aug"
+msgstr ""
+
+msgid "AutoPatch"
+msgstr "Авто Патч"
+
+msgid "Back"
+msgstr "Назад"
+
+msgid "Back to HBC or Wii Menu"
+msgstr "Вернуться в HBC или меню Wii"
+
+msgid "Back to Loader"
+msgstr "Вернуться в загрузчик"
+
+msgid "Back to Wii Menu"
+msgstr "Вернуться в меню Wii"
+
+msgid "Backgroundmusic"
+msgstr "Фоновая музыка"
+
+msgid "Backgroundmusic Path changed."
+msgstr "Путь к фоновой музыке"
+
+msgid "Big thanks to:"
+msgstr ""
+
+msgid "Block IOS Reload"
+msgstr ""
+
+msgid "Boot/Standard"
+msgstr "Загрузка/Стандарт"
+
+msgid "Both"
+msgstr "Оба"
+
+msgid "Can't be formated"
+msgstr "Невозможно отформатировать"
+
+msgid "Can't create directory"
+msgstr "Не могу создать папку"
+
+msgid "Can't delete:"
+msgstr "Невозможно удалить:"
+
+msgid "Cancel"
+msgstr "Отмена"
+
+msgid "Cheatcodes Path"
+msgstr ""
+
+msgid "Cheatcodes Path changed"
+msgstr ""
+
+msgid "Checking for Updates"
+msgstr ""
+
+msgid "Click to Download Covers"
+msgstr "Нажми, чтобы скачать обложки"
+
+msgid "Clock"
+msgstr "Часы"
+
+msgid "Close"
+msgstr "Закрыть"
+
+msgid "Console"
+msgstr ""
+
+msgid "Console Default"
+msgstr "По умолчанию (консоль)"
+
+msgid "Console Locked"
+msgstr "Консоль заблокирована"
+
+msgid "Console should be unlocked to modify it."
+msgstr "Для изменения консоль должна быть разблокирована."
+
+msgid "Continue to install game?"
+msgstr "Продолжить установку игры ?"
+
+msgid "Controllevel"
+msgstr ""
+
+msgid "Correct Password"
+msgstr "Правильный пароль"
+
+msgid "Could not initialize DIP module!"
+msgstr "Не могу запустить модуль DIP!"
+
+msgid "Could not initialize network!"
+msgstr "Не могу инициализировать сеть!"
+
+msgid "Could not open Disc"
+msgstr "Не могу прочесть диск"
+
+msgid "Cover Download"
+msgstr "Скачать обложку"
+
+msgid "Cover Path"
+msgstr "Путь к обложкам"
+
+msgid "Coverpath Changed"
+msgstr "Путь к обложкам был изменен."
+
+msgid "Credits"
+msgstr "Об авторах"
+
+msgid "Custom Paths"
+msgstr ""
+
+msgid "Dec"
+msgstr ""
+
+msgid "Default"
+msgstr ""
+
+msgid "Default Gamesettings"
+msgstr ""
+
+msgid "Default Settings"
+msgstr "Установки по умолчанию"
+
+msgid "Developed by"
+msgstr ""
+
+msgid "Disc Default"
+msgstr "По умолчанию (диск)"
+
+msgid "Disc Images"
+msgstr "Изображения дисков"
+
+msgid "Discimage Path"
+msgstr "путь к изображениям дисков"
+
+msgid "Discpath Changed"
+msgstr "путь к изображениям дисков изменен"
+
+msgid "Discpath change"
+msgstr "изменить путь к изображениям дисков"
+
+msgid "DiskFlip"
+msgstr ""
+
+msgid "Display"
+msgstr "Отображать"
+
+msgid "Do you really want to delete:"
+msgstr "Вы хотите удалить:"
+
+msgid "Do you want to change language?"
+msgstr ""
+
+msgid "Do you want to format:"
+msgstr "Вы хотите отформатировать:"
+
+msgid "Do you want to retry for 30 secs?"
+msgstr "Хотите попробовать еще раз на 30 секунд?"
+
+msgid "Dol Path"
+msgstr ""
+
+msgid "Dolpath Changed"
+msgstr ""
+
+msgid "Dolpath change"
+msgstr ""
+
+msgid "Download Boxart image?"
+msgstr "Скачать обложку диска?"
+
+msgid "Download finished"
+msgstr "Скачивание завершено"
+
+msgid "Downloading file"
+msgstr "Скачиваю файл:"
+
+msgid "Dutch"
+msgstr "Голландский"
+
+msgid "English"
+msgstr "Английский"
+
+msgid "Error !"
+msgstr "Ошибка !"
+
+msgid "Error 002 fix"
+msgstr ""
+
+msgid "Error reading Disc"
+msgstr "Ошибка чтения диска"
+
+msgid "Exit USB Loader GX?"
+msgstr "Выйти из USB Loader GX?"
+
+msgid "Failed formating"
+msgstr "Форматирование не удалось"
+
+msgid "Feb"
+msgstr ""
+
+msgid "File not found."
+msgstr "Файл не найден"
+
+msgid "Flip-X"
+msgstr "Flip-X"
+
+msgid "Force"
+msgstr "Принудительно"
+
+msgid "Format"
+msgstr "Форматировать"
+
+msgid "Formatting, please wait..."
+msgstr "Форматирую, пожалуйста подождите..."
+
+msgid "Free Space"
+msgstr "Свободное пространство"
+
+msgid "French"
+msgstr "Французский"
+
+msgid "Full Shutdown"
+msgstr "Полное отключение"
+
+msgid "GUI Settings"
+msgstr ""
+
+msgid "Game ID"
+msgstr "ID игры"
+
+msgid "Game Language"
+msgstr "Язык"
+
+msgid "Game Load"
+msgstr ""
+
+msgid "Game Region"
+msgstr "Регион"
+
+msgid "Game Size"
+msgstr "Размер игры"
+
+msgid "Game is already installed:"
+msgstr "Игра уже установлена:"
+
+msgid "Games"
+msgstr "Игры"
+
+msgid "German"
+msgstr "Немецкий"
+
+msgid "HOME Menu"
+msgstr "Домашнее Меню"
+
+msgid "Hour"
+msgstr "час"
+
+msgid "How do you want to update?"
+msgstr "Вы хотите обновить программу"
+
+msgid "How to Shutdown?"
+msgstr "Способ отключения?"
+
+msgid "Initializing Network"
+msgstr "Инициализирую сеть"
+
+msgid "Insert Disk"
+msgstr "Вставьте диск"
+
+msgid "Insert an SD-Card to download images."
+msgstr "Для скачивания изображений вставьте SD карту."
+
+msgid "Insert an SD-Card to save."
+msgstr "Для сохранения вставьте SD карту."
+
+msgid "Insert an SD-Card to use this option."
+msgstr "Для использования этой функции нужна SD карта"
+
+msgid "Install Error!"
+msgstr "Ошибка установки!"
+
+msgid "Install a game"
+msgstr "Установить игру"
+
+msgid "Installing game:"
+msgstr "Устанавливаю игру:"
+
+msgid "Italian"
+msgstr "Итальянский"
+
+msgid "Jan"
+msgstr ""
+
+msgid "Japanese"
+msgstr "Японский"
+
+msgid "July"
+msgstr ""
+
+msgid "June"
+msgstr ""
+
+msgid "Keyboard"
+msgstr ""
+
+msgid "Korean"
+msgstr "Корейский"
+
+msgid "Language change:"
+msgstr ""
+
+msgid "Languagepath changed."
+msgstr ""
+
+msgid "Left"
+msgstr "Налево"
+
+msgid "Like SysMenu"
+msgstr "как SysMenu"
+
+msgid "Loading standard language."
+msgstr "Загрузка языка по умолчанию"
+
+msgid "Loading standard music."
+msgstr "Загрузка стандартной музыки"
+
+msgid "Lock Console"
+msgstr "Заблокировать консоль"
+
+msgid "Locked"
+msgstr ""
+
+msgid "Mar"
+msgstr ""
+
+msgid "May"
+msgstr ""
+
+msgid "Missing files"
+msgstr "Отсутствующие файлы"
+
+msgid "Music Volume"
+msgstr "Громкость"
+
+msgid "Neither"
+msgstr "Ни то, ни другое"
+
+msgid "Network init error"
+msgstr "Ошибка инициализации сети"
+
+msgid "Next"
+msgstr "Следующий"
+
+msgid "No"
+msgstr "Нет"
+
+msgid "No SD-Card inserted!"
+msgstr "SD карта не вставлена!"
+
+msgid "No USB Device"
+msgstr "Нет USB устройств"
+
+msgid "No USB Device found."
+msgstr "USB устройств не обнаружено"
+
+msgid "No WBFS partition found"
+msgstr "Не найден раздел WBFS"
+
+msgid "No file missing!"
+msgstr "Файл не найден!"
+
+msgid "No new updates."
+msgstr "Нет обновлений"
+
+msgid "No partitions found"
+msgstr "Разделы не найдены"
+
+msgid "Normal"
+msgstr "Обычный"
+
+msgid "Normal Covers"
+msgstr "Обычные обложки"
+
+msgid "Not a Wii Disc"
+msgstr "Это не диск Wii"
+
+msgid "Not enough free space!"
+msgstr "Не хватает свободного места!"
+
+msgid "Not supported format!"
+msgstr "Формат не поддерживается"
+
+msgid "Nov"
+msgstr ""
+
+msgid "OFF"
+msgstr "ВЫКЛ"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "ON"
+msgstr "ВКЛ"
+
+msgid "Oct"
+msgstr ""
+
+msgid "Official Site"
+msgstr "Официальный сайт"
+
+msgid "Only for Install"
+msgstr "Только установка"
+
+msgid "Parental Control"
+msgstr "Родительский контроль"
+
+msgid "Parental control"
+msgstr ""
+
+msgid "Partition"
+msgstr "Раздел"
+
+msgid "Password"
+msgstr "Пароль"
+
+msgid "Password Changed"
+msgstr "Пароль изменен"
+
+msgid "Password has been changed"
+msgstr "Пароль был изменен"
+
+msgid "Patch Country Strings"
+msgstr ""
+
+msgid "Path of titles.txt change"
+msgstr "изменить путь к titles.txt"
+
+msgid "Path of titles.txt changed."
+msgstr "путь к titles.txt изменён"
+
+msgid "Play Count"
+msgstr "Воспроизводится"
+
+msgid "Power off the Wii"
+msgstr "Выключить Wii"
+
+msgid "Prev"
+msgstr "Предыдущий"
+
+msgid "Prompts Buttons"
+msgstr "Кнопки приглашения"
+
+msgid "Published by"
+msgstr ""
+
+msgid "Quick Boot"
+msgstr "Быстрая загрузка"
+
+msgid "Released"
+msgstr ""
+
+msgid "Reload SD"
+msgstr "Перечитать SD карту"
+
+msgid "Rename Game on WBFS"
+msgstr "Переименовать игры в WBFS"
+
+msgid "Reset Playcounter"
+msgstr ""
+
+msgid "Restart"
+msgstr "Перезапустить"
+
+msgid "Restarting..."
+msgstr ""
+
+msgid "Return"
+msgstr "Вернуться"
+
+msgid "Return to Wii Menu"
+msgstr ""
+
+msgid "Right"
+msgstr "Направо"
+
+msgid "Rumble"
+msgstr "Вибрация"
+
+msgid "SChinese"
+msgstr "Упрощенный китайский"
+
+msgid "SFX Volume"
+msgstr ""
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "Save Failed"
+msgstr "Сохранение не удалось"
+
+msgid "Screensaver"
+msgstr ""
+
+msgid "Sept"
+msgstr ""
+
+msgid "Set as backgroundmusic?"
+msgstr "установить как фоновую музыку"
+
+msgid "Settings"
+msgstr "Установки"
+
+msgid "Shutdown System"
+msgstr "Выключить систему"
+
+msgid "Shutdown to Idle"
+msgstr "Перевести в режим сна"
+
+msgid "Sound"
+msgstr ""
+
+msgid "Spanish"
+msgstr "Испанский"
+
+msgid "Special thanks to:"
+msgstr "Отдельные благодарности"
+
+msgid "Standard"
+msgstr "Стандартный"
+
+msgid "Success:"
+msgstr "Успех:"
+
+msgid "Successfully Saved"
+msgstr "Успешно сохранено"
+
+msgid "Successfully Updated"
+msgstr "Успешно обновлено"
+
+msgid "Successfully deleted:"
+msgstr "Успешно удалено:"
+
+msgid "Successfully installed:"
+msgstr "Успешно установлено:"
+
+msgid "System Default"
+msgstr "По умолчанию"
+
+msgid "TChinese"
+msgstr "Традиционный китайский"
+
+msgid "ThemePath"
+msgstr "Путь к темам"
+
+msgid "Themepath Changed"
+msgstr "путь к темам изменён"
+
+msgid "Themepath change"
+msgstr "изменить путь к темам"
+
+msgid "Time left:"
+msgstr "Осталось времени:"
+
+msgid "Titles from XML"
+msgstr ""
+
+msgid "Tooltips"
+msgstr "Подсказки"
+
+msgid "USB Device not found"
+msgstr "USB устройство не найдено"
+
+msgid "USB Loader GX is protected"
+msgstr "USB Loader GX заблокирован"
+
+msgid "Uninstall"
+msgstr "Деинсталлировать"
+
+msgid "Unlock console to use this option."
+msgstr ""
+
+msgid "Unlocked"
+msgstr ""
+
+msgid "Update"
+msgstr ""
+
+msgid "Update All"
+msgstr "Обновить всё"
+
+msgid "Update DOL"
+msgstr "Обновить DOL"
+
+msgid "Update failed"
+msgstr "Обновление не удалось"
+
+msgid "Update to"
+msgstr ""
+
+msgid "Updatepath"
+msgstr "Путь к обновлениям"
+
+msgid "Updatepath changed."
+msgstr "Путь к обновлениям изменен"
+
+msgid "Updating"
+msgstr "обновляю"
+
+msgid "VIDTV Patch"
+msgstr "патч VIDTV"
+
+msgid "Video Mode"
+msgstr "Видео режим"
+
+msgid "Waiting for USB Device"
+msgstr "Ожидание USB устройства"
+
+msgid "Waiting..."
+msgstr "Ожидание..."
+
+msgid "WiFi Features"
+msgstr ""
+
+msgid "Widescreen Fix"
+msgstr "Широкоформатный фикс"
+
+msgid "Wii Menu"
+msgstr "Меню Wii"
+
+msgid "Wiilight"
+msgstr "подсветка Wii"
+
+msgid "Wrong Password"
+msgstr "Неверный пароль"
+
+msgid "Yes"
+msgstr "Да"
+
+msgid "You need to format a partition"
+msgstr "Требуется форматирование раздела"
+
+msgid "available"
+msgstr ""
+
+msgid "file(s) left"
+msgstr "осталось файлов:"
+
+msgid "files not found on the server!"
+msgstr "файлы не найдены на сервере!"
+
+msgid "for"
+msgstr "за"
+
+msgid "for diverse patches"
+msgstr ""
+
+msgid "for his awesome tool"
+msgstr ""
+
+msgid "for hosting the covers/discarts"
+msgstr ""
+
+msgid "for hosting the update files"
+msgstr ""
+
+msgid "for the USB Loader source"
+msgstr "выпуск и публикацию исходного кода"
+
+msgid "formatted!"
+msgstr "форматирование завершено!"
+
+msgid "free"
+msgstr "свободно"
+
+msgid "not set"
+msgstr "не установлено"
+
+msgid "of"
+msgstr "из"
+
+msgid "seconds left"
+msgstr "секунд осталось"
+
+msgid "titles.txt Path"
+msgstr "путь к titles.txt"
+
+#~ msgid "Favorite"
+#~ msgstr "Добавить в избранное"
+
+#~ msgid "Coverpath change"
+#~ msgstr "Сменить путь к обложкам"
+
+#~ msgid "BOOT ERROR"
+#~ msgstr "ОШИБКА ЗАГРУЗКИ"
+
+#~ msgid "Insert a Wii Disc!"
+#~ msgstr "Вставьте диск от Wii!"
+
+#~ msgid "Failed to boot:"
+#~ msgstr "Ошибка загрузки:"
+
+#~ msgid "Failed to mount front SD-card"
+#~ msgstr "Ошибка при монтировании SD карты"
+
+#~ msgid "Failed to set USB:"
+#~ msgstr "Ошибка инициализации USB:"
+
+#~ msgid "Go Back"
+#~ msgstr "Назад"
+
+#~ msgid "Language change"
+#~ msgstr "Сменить язык"
+
+#~ msgid "Sort Game List"
+#~ msgstr "Сортировка списка"
+
+#~ msgid "Loading in cIOS249"
+#~ msgstr "загружаю с cIOS249"
+
+#~ msgid "No HDD found!"
+#~ msgstr "HDD не найден!"
+
+#~ msgid "Password change"
+#~ msgstr "Сменить пароль"
+
+#~ msgid "Select the Partition"
+#~ msgstr "Выберите раздел,"
+
+#~ msgid "you want to format"
+#~ msgstr "который вы хотите отформатировать"
+
+#~ msgid "Try"
+#~ msgstr "Попытка"
+
+#~ msgid "You don't have cIOS222"
+#~ msgstr "У вас не установлен cIOS222"

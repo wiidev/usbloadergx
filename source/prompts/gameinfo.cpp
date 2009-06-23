@@ -6,7 +6,7 @@
 #include <dirent.h>
 
 #include "usbloader/wbfs.h"
-#include "language/language.h"
+#include "language/gettext.h"
 #include "libwiigui/gui.h"
 #include "../xml/xml.h"
 #include "menu.h"
@@ -474,7 +474,7 @@ int showGameInfo(char *ID)
 
 		//publisher
 		if (strcmp(gameinfo.publisher,"") != 0){
-			snprintf(linebuf, sizeof(linebuf), "%s %s", LANGUAGE.publishedby, gameinfo.publisher);
+			snprintf(linebuf, sizeof(linebuf), "%s %s", tr("Published by"), gameinfo.publisher);
 			publisherTxt = new GuiText(linebuf, 16, (GXColor){0,0,0, 255});
 			if (publisherTxt->GetWidth()>250) newline=2;
 			publisherTxt->SetMaxWidth(250,GuiText::WRAP);
@@ -484,7 +484,7 @@ int showGameInfo(char *ID)
 		
 		//developer
 		if (strcmp(gameinfo.developer,"") != 0 && strcasecmp(gameinfo.developer,gameinfo.publisher) != 0)	{
-			snprintf(linebuf, sizeof(linebuf), "%s %s", LANGUAGE.developedby, gameinfo.developer);
+			snprintf(linebuf, sizeof(linebuf), "%s %s", tr("Developed by"), gameinfo.developer);
 			developerTxt = new GuiText(linebuf, 16, (GXColor){0,0,0, 255});
 			if (developerTxt->GetWidth()>250) newline=2;
 			developerTxt->SetMaxWidth(250,GuiText::WRAP);
@@ -500,45 +500,45 @@ int showGameInfo(char *ID)
 			switch (atoi(gameinfo.month))
 			{
 				case 1:
-					snprintf(linebuf2, sizeof(linebuf2), "%s%s ", linebuf2, LANGUAGE.january);
+					snprintf(linebuf2, sizeof(linebuf2), "%s%s ", linebuf2, tr("Jan"));
 					break;
 				case 2:
-					snprintf(linebuf2, sizeof(linebuf2), "%s%s ", linebuf2, LANGUAGE.february);
+					snprintf(linebuf2, sizeof(linebuf2), "%s%s ", linebuf2, tr("Feb"));
 					break;
 				case 3:
-					snprintf(linebuf2, sizeof(linebuf2), "%s%s ", linebuf2, LANGUAGE.march);
+					snprintf(linebuf2, sizeof(linebuf2), "%s%s ", linebuf2, tr("Mar"));
 					break;
 				case 4:
-					snprintf(linebuf2, sizeof(linebuf2), "%s%s ", linebuf2, LANGUAGE.april);
+					snprintf(linebuf2, sizeof(linebuf2), "%s%s ", linebuf2, tr("Apr"));
 					break;
 				case 5:
-					snprintf(linebuf2, sizeof(linebuf2), "%s%s ", linebuf2, LANGUAGE.may);
+					snprintf(linebuf2, sizeof(linebuf2), "%s%s ", linebuf2, tr("May"));
 					break;
 				case 6:
-				   snprintf(linebuf2, sizeof(linebuf2), "%s%s ", linebuf2, LANGUAGE.june);
+				   snprintf(linebuf2, sizeof(linebuf2), "%s%s ", linebuf2, tr("June"));
 					break;
 				case 7:
-					snprintf(linebuf2, sizeof(linebuf2), "%s%s ", linebuf2, LANGUAGE.july);
+					snprintf(linebuf2, sizeof(linebuf2), "%s%s ", linebuf2, tr("July"));
 					break;
 				case 8:
-					snprintf(linebuf2, sizeof(linebuf2), "%s%s ", linebuf2, LANGUAGE.august);
+					snprintf(linebuf2, sizeof(linebuf2), "%s%s ", linebuf2, tr("Aug"));
 					break;
 				case 9:
-					snprintf(linebuf2, sizeof(linebuf2), "%s%s ", linebuf2, LANGUAGE.september);
+					snprintf(linebuf2, sizeof(linebuf2), "%s%s ", linebuf2, tr("Sept"));
 					break;
 				case 10:
-					snprintf(linebuf2, sizeof(linebuf2), "%s%s ", linebuf2, LANGUAGE.october);
+					snprintf(linebuf2, sizeof(linebuf2), "%s%s ", linebuf2, tr("Oct"));
 					break;
 				case 11:
-					snprintf(linebuf2, sizeof(linebuf2), "%s%s ", linebuf2, LANGUAGE.november);
+					snprintf(linebuf2, sizeof(linebuf2), "%s%s ", linebuf2, tr("Nov"));
 					break;
 				case 12:
-					snprintf(linebuf2, sizeof(linebuf2), "%s%s ", linebuf2, LANGUAGE.december);
+					snprintf(linebuf2, sizeof(linebuf2), "%s%s ", linebuf2, tr("Dec"));
 					break;
 			}
 		}
 		if (strcmp(gameinfo.year,"") != 0){
-			snprintf(linebuf, sizeof(linebuf), "%s : %s%s", LANGUAGE.released, linebuf2, gameinfo.year);
+			snprintf(linebuf, sizeof(linebuf), "%s : %s%s", tr("Released"), linebuf2, gameinfo.year);
 			releasedTxt = new GuiText(linebuf, 16, (GXColor){0,0,0, 255});
 			if (releasedTxt->GetWidth()>300) newline=2;
 			releasedTxt->SetAlignment(ALIGN_RIGHT, ALIGN_TOP); releasedTxt->SetPosition(-17,12+indexy);  indexy+=(20 * newline);newline=1;
@@ -570,7 +570,7 @@ int showGameInfo(char *ID)
 				gameinfoWindow.Append(wifiTxt[i]);
 			}
 		if (strcmp(gameinfo.wififeatures[1],"") != 0){
-			snprintf(linebuf, sizeof(linebuf), "%s:",LANGUAGE.wififeatures);
+			snprintf(linebuf, sizeof(linebuf), "%s:",tr("WiFi Features"));
 			wifiTxt[0] = new GuiText(linebuf, 16, (GXColor){0,0,0, 255});
 			wifiTxt[0]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); wifiTxt[0]->SetPosition(205,200+wifiY);
 			gameinfoWindow.Append(wifiTxt[0]);

@@ -1,0 +1,787 @@
+# USB Loader GX language source file.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: USB Loader GX\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-06-22 20:10+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "0 (Everyone)"
+msgstr "0 (Iedereen 0+)"
+
+msgid "1 (Child 7+)"
+msgstr "1 (Kinderen 7+)"
+
+msgid "2 (Teen 12+)"
+msgstr "2 (Tiener 12+)"
+
+msgid "3 (Mature 16+)"
+msgstr "3 (Adolescenten 16+)"
+
+msgid "3D Covers"
+msgstr "3D Hoesjes"
+
+msgid "4 (Adults Only 18+)"
+msgstr "4 (Volwassen 18+)"
+
+msgid "All the features of USB Loader GX are unlocked."
+msgstr "Alle functies zijn vrijgegeven."
+
+msgid "Alternate DOL"
+msgstr "Dol afwisselen"
+
+msgid "Anti 002 fix"
+msgstr ""
+
+msgid "App Language"
+msgstr "Taal"
+
+msgid "Apr"
+msgstr "Apr"
+
+msgid "Are you sure?"
+msgstr "Zeker weten?"
+
+msgid "Aug"
+msgstr "Aug"
+
+msgid "AutoPatch"
+msgstr "Automatisch patchen"
+
+msgid "Back"
+msgstr "Terug"
+
+msgid "Back to HBC or Wii Menu"
+msgstr "Terug naar HBC of Wii Menu"
+
+msgid "Back to Loader"
+msgstr "Terug naar lader"
+
+msgid "Back to Wii Menu"
+msgstr "Terug naar Wii Menu"
+
+msgid "Backgroundmusic"
+msgstr "Achtergrondmuziek"
+
+msgid "Backgroundmusic Path changed."
+msgstr "Locatie achtergrondmuziek gewijzigd"
+
+msgid "Big thanks to:"
+msgstr "Grote dank aan:"
+
+msgid "Block IOS Reload"
+msgstr ""
+
+msgid "Boot/Standard"
+msgstr "Start/Standaard"
+
+msgid "Both"
+msgstr "Beide"
+
+msgid "Can't be formated"
+msgstr "Kan niet worden geformatteerd"
+
+msgid "Can't create directory"
+msgstr "Kan map niet aanmaken"
+
+msgid "Can't delete:"
+msgstr "Kan niet verwijderen:"
+
+msgid "Cancel"
+msgstr "Annuleren"
+
+msgid "Cheatcodes Path"
+msgstr "Locatie cheats"
+
+msgid "Cheatcodes Path changed"
+msgstr "Locatie cheats gewijzigd"
+
+msgid "Checking for Updates"
+msgstr "Controleren op updates"
+
+msgid "Click to Download Covers"
+msgstr "Klik om hoesjes te downloaden"
+
+msgid "Clock"
+msgstr "Klok"
+
+msgid "Close"
+msgstr "Sluiten"
+
+msgid "Console"
+msgstr "Console"
+
+msgid "Console Default"
+msgstr "Console standaard"
+
+msgid "Console Locked"
+msgstr "Console vergrendeld"
+
+msgid "Console should be unlocked to modify it."
+msgstr "Console moet worden vrijgegeven."
+
+msgid "Continue to install game?"
+msgstr "Installatie spel voortzetten?"
+
+msgid "Controllevel"
+msgstr "Controle level"
+
+msgid "Correct Password"
+msgstr "Juiste wachtwoord"
+
+msgid "Could not initialize DIP module!"
+msgstr "Kan de DIP module niet initialiseren!"
+
+msgid "Could not initialize network!"
+msgstr "Kan netwerk niet initialiseren!"
+
+msgid "Could not open Disc"
+msgstr "Kan DVD niet laden"
+
+msgid "Cover Download"
+msgstr "Download hoesjes"
+
+msgid "Cover Path"
+msgstr "Locatie hoesjes"
+
+msgid "Coverpath Changed"
+msgstr "Locatie hoesjes gewijzigd"
+
+msgid "Credits"
+msgstr "Aftiteling"
+
+msgid "Custom Paths"
+msgstr "Bestandslocaties"
+
+msgid "Dec"
+msgstr "Dec"
+
+msgid "Default"
+msgstr "Standaard"
+
+msgid "Default Gamesettings"
+msgstr "Standaardinstelling"
+
+msgid "Default Settings"
+msgstr "Standaardinstellingen"
+
+msgid "Developed by"
+msgstr "Ontwikkeld door"
+
+msgid "Disc Default"
+msgstr "DVD standaard"
+
+msgid "Disc Images"
+msgstr "DVD labels"
+
+msgid "Discimage Path"
+msgstr "Locatie DVD labels"
+
+msgid "Discpath Changed"
+msgstr "Locatie DVD labels gewijzigd"
+
+msgid "Discpath change"
+msgstr "Locatie DVD labels wijzigen"
+
+msgid "DiskFlip"
+msgstr ""
+
+msgid "Display"
+msgstr "Tonen"
+
+msgid "Do you really want to delete:"
+msgstr "Wil je echt verwijderen:"
+
+msgid "Do you want to change language?"
+msgstr "Wil je de taal wijzigen?"
+
+msgid "Do you want to format:"
+msgstr "Wil je formatteren:"
+
+msgid "Do you want to retry for 30 secs?"
+msgstr "Wil je 30 sec. lang opnieuw proberen?"
+
+msgid "Dol Path"
+msgstr "Locatie dol"
+
+msgid "Dolpath Changed"
+msgstr "Locatie dol gewijzigd"
+
+msgid "Dolpath change"
+msgstr "Locatie dol wijzigen"
+
+msgid "Download Boxart image?"
+msgstr "Hoesjes downloaden?"
+
+msgid "Download finished"
+msgstr "Downloaden voltooid"
+
+msgid "Downloading file"
+msgstr "Bestand downloaden"
+
+msgid "Dutch"
+msgstr "Nederlands"
+
+msgid "English"
+msgstr "Engels"
+
+msgid "Error !"
+msgstr "Fout !"
+
+msgid "Error 002 fix"
+msgstr "Herstel fout 002"
+
+msgid "Error reading Disc"
+msgstr "Fout bij lezen DVD"
+
+msgid "Exit USB Loader GX?"
+msgstr "USB Loader GX Afsluiten?"
+
+msgid "Failed formating"
+msgstr "Formatteren mislukt"
+
+msgid "Feb"
+msgstr "Feb"
+
+msgid "File not found."
+msgstr "Bestand niet gevonden."
+
+msgid "Flip-X"
+msgstr "X omwisselen"
+
+msgid "Force"
+msgstr "Forceer"
+
+msgid "Format"
+msgstr "Formatteer"
+
+msgid "Formatting, please wait..."
+msgstr "Bezig met formatteren..."
+
+msgid "Free Space"
+msgstr "Vrije ruimte"
+
+msgid "French"
+msgstr "Frans"
+
+msgid "Full Shutdown"
+msgstr "Volledig uitzetten"
+
+msgid "GUI Settings"
+msgstr "Menu opties"
+
+msgid "Game ID"
+msgstr "Spel ID"
+
+msgid "Game Language"
+msgstr "Taal spel"
+
+msgid "Game Load"
+msgstr "Spel opties"
+
+msgid "Game Region"
+msgstr "Spel Regio"
+
+msgid "Game Size"
+msgstr "Spel grootte"
+
+msgid "Game is already installed:"
+msgstr "Spel is al geïnstalleerd:"
+
+msgid "Games"
+msgstr "Spellen"
+
+msgid "German"
+msgstr "Duits"
+
+msgid "HOME Menu"
+msgstr "HOME Menu"
+
+msgid "Hour"
+msgstr "Uur"
+
+msgid "How do you want to update?"
+msgstr "Hoe wil je updaten?"
+
+msgid "How to Shutdown?"
+msgstr "Hoe uitzetten?"
+
+msgid "Initializing Network"
+msgstr "Netwerk Initializeren"
+
+msgid "Insert Disk"
+msgstr "Voeg een DVD in"
+
+msgid "Insert an SD-Card to download images."
+msgstr "Voer een SD kaart in om afbeeldingen te downloaden."
+
+msgid "Insert an SD-Card to save."
+msgstr "Voer een SD kaart in om op te slaan."
+
+msgid "Insert an SD-Card to use this option."
+msgstr "Voer een SD kaart in om deze optie te gebruiken."
+
+msgid "Install Error!"
+msgstr "Installatiefout!"
+
+msgid "Install a game"
+msgstr "Spel installeren"
+
+msgid "Installing game:"
+msgstr "Bezig met installeren:"
+
+msgid "Italian"
+msgstr "Italiaans"
+
+msgid "Jan"
+msgstr "Jan"
+
+msgid "Japanese"
+msgstr "Japans"
+
+msgid "July"
+msgstr "Jul"
+
+msgid "June"
+msgstr "Jun"
+
+msgid "Keyboard"
+msgstr "Toetsenbord"
+
+msgid "Korean"
+msgstr "Koreaans"
+
+msgid "Language change:"
+msgstr ""
+
+msgid "Languagepath changed."
+msgstr "Locatie taal gewijzigd."
+
+msgid "Left"
+msgstr "Links"
+
+msgid "Like SysMenu"
+msgstr "Als systeemmenu"
+
+msgid "Loading standard language."
+msgstr "Standaardtaal laden."
+
+msgid "Loading standard music."
+msgstr "Standaardmuziek laden."
+
+msgid "Lock Console"
+msgstr "Console vergrendelen"
+
+msgid "Locked"
+msgstr "Vergrendeld"
+
+msgid "Mar"
+msgstr "Mrt"
+
+msgid "May"
+msgstr "Mei"
+
+msgid "Missing files"
+msgstr "Missende bestanden"
+
+msgid "Music Volume"
+msgstr "Muziekvolume"
+
+msgid "Neither"
+msgstr "Geen"
+
+msgid "Network init error"
+msgstr "Netwerk init. fout"
+
+msgid "Next"
+msgstr "Volgende"
+
+msgid "No"
+msgstr "Nee"
+
+msgid "No SD-Card inserted!"
+msgstr "Geen SD kaart gevonden!"
+
+msgid "No USB Device"
+msgstr "Geen USB apparaat"
+
+msgid "No USB Device found."
+msgstr "Geen USB apparaat gevonden."
+
+msgid "No WBFS partition found"
+msgstr "Geen WBFS partitie gevonden"
+
+msgid "No file missing!"
+msgstr "Geen missende bestanden!"
+
+msgid "No new updates."
+msgstr "Geen nieuwe updates."
+
+msgid "No partitions found"
+msgstr "Geen partities gevonden"
+
+msgid "Normal"
+msgstr "Normaal"
+
+msgid "Normal Covers"
+msgstr "Gewone hoesjes"
+
+msgid "Not a Wii Disc"
+msgstr "Geen Wii DVD"
+
+msgid "Not enough free space!"
+msgstr "Niet genoeg vrije ruimte!"
+
+msgid "Not supported format!"
+msgstr "Formatteren niet ondersteund!"
+
+msgid "Nov"
+msgstr "Nov"
+
+msgid "OFF"
+msgstr "Uit"
+
+msgid "OK"
+msgstr "Ok"
+
+msgid "ON"
+msgstr "Aan"
+
+msgid "Oct"
+msgstr "Okt"
+
+msgid "Official Site"
+msgstr "Officiele site"
+
+msgid "Only for Install"
+msgstr "Alleen installeren"
+
+msgid "Parental Control"
+msgstr "Ouderlijk toezicht"
+
+msgid "Parental control"
+msgstr ""
+
+msgid "Partition"
+msgstr "Partitie"
+
+msgid "Password"
+msgstr "Wachtwoord"
+
+msgid "Password Changed"
+msgstr "Wachtwoord gewijzigd"
+
+msgid "Password has been changed"
+msgstr "Wachtwoord is gewijzigd"
+
+msgid "Patch Country Strings"
+msgstr "Regios herstellen"
+
+msgid "Path of titles.txt change"
+msgstr "Locatie titles.txt wijzigen"
+
+msgid "Path of titles.txt changed."
+msgstr "Locatie titles.txt gewijzigd."
+
+msgid "Play Count"
+msgstr "Gespeeld"
+
+msgid "Power off the Wii"
+msgstr "Wii uitschakelen"
+
+msgid "Prev"
+msgstr "Vorige"
+
+msgid "Prompts Buttons"
+msgstr "Weergave knoppen"
+
+msgid "Published by"
+msgstr "Uitgegeven door"
+
+msgid "Quick Boot"
+msgstr "Snelle start"
+
+msgid "Released"
+msgstr ""
+
+msgid "Reload SD"
+msgstr "SD herladen"
+
+msgid "Rename Game on WBFS"
+msgstr "Spel hernoemen op WBFS"
+
+msgid "Reset Playcounter"
+msgstr ""
+
+msgid "Restart"
+msgstr "Herstarten"
+
+msgid "Restarting..."
+msgstr "Herstarten..."
+
+msgid "Return"
+msgstr "Terug"
+
+msgid "Return to Wii Menu"
+msgstr "Terug naar Wii menu"
+
+msgid "Right"
+msgstr "Rechts"
+
+msgid "Rumble"
+msgstr "Trilfunctie"
+
+msgid "SChinese"
+msgstr "SChinees"
+
+msgid "SFX Volume"
+msgstr "Volume effecten"
+
+msgid "Save"
+msgstr "Opslaan"
+
+msgid "Save Failed"
+msgstr "Opslaan mislukt"
+
+msgid "Screensaver"
+msgstr ""
+
+msgid "Sept"
+msgstr "Sept"
+
+msgid "Set as backgroundmusic?"
+msgstr "Instellen als achtergrondmuziek?"
+
+msgid "Settings"
+msgstr "Instellingen"
+
+msgid "Shutdown System"
+msgstr "Systeem uitzetten"
+
+msgid "Shutdown to Idle"
+msgstr "Slaapstand"
+
+msgid "Sound"
+msgstr "Geluid"
+
+msgid "Spanish"
+msgstr "Spaans"
+
+msgid "Special thanks to:"
+msgstr "Speciale dank aan:"
+
+msgid "Standard"
+msgstr "Standaard"
+
+msgid "Success:"
+msgstr "Succes:"
+
+msgid "Successfully Saved"
+msgstr "met succes opgeslagen!"
+
+msgid "Successfully Updated"
+msgstr "met succes geupdate!"
+
+msgid "Successfully deleted:"
+msgstr "met succes verwijderd:"
+
+msgid "Successfully installed:"
+msgstr "Met succes geinstalleerd:"
+
+msgid "System Default"
+msgstr "Systeem standaard"
+
+msgid "TChinese"
+msgstr "TChinees"
+
+msgid "ThemePath"
+msgstr "Locatie thema"
+
+msgid "Themepath Changed"
+msgstr "Locatie thema gewijzigd"
+
+msgid "Themepath change"
+msgstr "Locatie thema wijzigen"
+
+msgid "Time left:"
+msgstr "Tijd over:"
+
+msgid "Titles from XML"
+msgstr "XML titels"
+
+msgid "Tooltips"
+msgstr "Hulptekstbalonnen"
+
+msgid "USB Device not found"
+msgstr "USB Apparaat niet gevonden!"
+
+msgid "USB Loader GX is protected"
+msgstr "USB Loader GX is vergrendeld"
+
+msgid "Uninstall"
+msgstr "Verwijderen"
+
+msgid "Unlock console to use this option."
+msgstr "Console moet worden vrijgegeven."
+
+msgid "Unlocked"
+msgstr "Vrijgegeven"
+
+msgid "Update"
+msgstr "Updaten"
+
+msgid "Update All"
+msgstr "Alles updaten"
+
+msgid "Update DOL"
+msgstr "DOL updaten"
+
+msgid "Update failed"
+msgstr "Update mislukt"
+
+msgid "Update to"
+msgstr "Updaten naar"
+
+msgid "Updatepath"
+msgstr "Locatie update"
+
+msgid "Updatepath changed."
+msgstr "Updatelocatie gewijzigd."
+
+msgid "Updating"
+msgstr "Updaten"
+
+msgid "VIDTV Patch"
+msgstr "VIDTV patchen"
+
+msgid "Video Mode"
+msgstr "Video mode"
+
+msgid "Waiting for USB Device"
+msgstr "Wachten op USB apparaat…"
+
+msgid "Waiting..."
+msgstr "Wachten..."
+
+msgid "WiFi Features"
+msgstr "WiFi functies"
+
+msgid "Widescreen Fix"
+msgstr "Breedbeeld"
+
+msgid "Wii Menu"
+msgstr "Wii Menu"
+
+msgid "Wiilight"
+msgstr "Wii verlichting"
+
+msgid "Wrong Password"
+msgstr "Foute wachtwoord!"
+
+msgid "Yes"
+msgstr "Ja"
+
+msgid "You need to format a partition"
+msgstr "Je moet een partitie formatteren"
+
+msgid "available"
+msgstr "beschikbaar"
+
+msgid "file(s) left"
+msgstr "Bestanden resterend"
+
+msgid "files not found on the server!"
+msgstr "Bestanden niet gevonden op server!"
+
+msgid "for"
+msgstr "voor"
+
+msgid "for diverse patches"
+msgstr "voor vele correcties"
+
+msgid "for his awesome tool"
+msgstr "voor zijn geweldige programma"
+
+msgid "for hosting the covers/discarts"
+msgstr "(upload van afbeeldingen)"
+
+msgid "for hosting the update files"
+msgstr "(upload van  updates)"
+
+msgid "for the USB Loader source"
+msgstr ""
+
+msgid "formatted!"
+msgstr "geformatteerd!"
+
+msgid "free"
+msgstr "vrij"
+
+msgid "not set"
+msgstr "niet ingesteld"
+
+msgid "of"
+msgstr "van"
+
+msgid "seconds left"
+msgstr "seconden over:"
+
+msgid "titles.txt Path"
+msgstr "Locatie titles.txt"
+
+#~ msgid "Alphabetical"
+#~ msgstr "Alfabetisch"
+
+#~ msgid "BOOT ERROR"
+#~ msgstr "STARTFOUT"
+
+#~ msgid "Coverpath change"
+#~ msgstr "Locatie hoesjes wijzigen"
+
+#~ msgid "Failed to boot:"
+#~ msgstr "Starten mislukt:"
+
+#~ msgid "Failed to mount front SD-card"
+#~ msgstr "Kan SD kaart niet laden"
+
+#~ msgid "Failed to set USB:"
+#~ msgstr "Kan USB niet initialiseren:"
+
+#~ msgid "Favorites"
+#~ msgstr "Favorieten"
+
+#~ msgid "Go Back"
+#~ msgstr "Terug"
+
+#~ msgid "Insert a Wii Disc!"
+#~ msgstr "Voer een Wii DVD in!!"
+
+#~ msgid "Sort Game List"
+#~ msgstr "Spellenlijst sorteren"
+
+#~ msgid "Loading in cIOS249"
+#~ msgstr "Laden met cIOS249"
+
+#~ msgid "No HDD found!"
+#~ msgstr "Geen HDD gevonden!"
+
+#~ msgid "Password change"
+#~ msgstr "Wachtwoord wijzigen"
+
+#~ msgid "Select the Partition"
+#~ msgstr "Kies een partitie"
+
+#~ msgid "Try"
+#~ msgstr "Probeer"
+
+#~ msgid "You don't have cIOS222"
+#~ msgstr "cIOS222 niet gevonden"
+
+#~ msgid "you want to format"
+#~ msgstr "Wil je formatteren?"

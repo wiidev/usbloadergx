@@ -2,7 +2,7 @@
 #include <unistd.h>
 #include <string.h>
 
-#include "language/language.h"
+#include "language/gettext.h"
 #include "prompts/PromptWindows.h"
 #include "libwiigui/gui.h"
 #include "libwiigui/gui_customoptionbrowser.h"
@@ -59,7 +59,7 @@ bool MenuOGG()
 	int countoggs = GetAllDirFiles(Settings.oggload_path);
 
     if(!strcmp("", Settings.oggload_path)) {
-        sprintf(shortpath, "%s", LANGUAGE.Standard);
+        sprintf(shortpath, "%s", tr("Standard"));
 	} else {
 		sprintf(shortpath, "%s", Settings.oggload_path);
 	}
@@ -80,7 +80,7 @@ bool MenuOGG()
 	oggmenubackground.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	oggmenubackground.SetPosition(0, 0);
 
-    GuiText backBtnTxt(LANGUAGE.Back , 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+    GuiText backBtnTxt(tr("Back") , 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	backBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
 	GuiImage backBtnImg(&btnOutline);
 	if (Settings.wsprompt == yes){
@@ -98,7 +98,7 @@ bool MenuOGG()
 	backBtn.SetTrigger(&trigB);
 	backBtn.SetEffectGrow();
 
-	GuiText defaultBtnTxt(LANGUAGE.Default , 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	GuiText defaultBtnTxt(tr("Default") , 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	defaultBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
 	GuiImage defaultBtnImg(&btnOutline);
 	if (Settings.wsprompt == yes){
@@ -198,7 +198,7 @@ bool MenuOGG()
     }
 
     if (defaultBtn.GetState() == STATE_CLICKED) {
-            choice = WindowPrompt(LANGUAGE.Loadingstandardmusic,0,LANGUAGE.ok, LANGUAGE.Cancel,0,0);
+            choice = WindowPrompt(tr("Loading standard music."),0,tr("OK"), tr("Cancel"),0,0);
             if (choice == 1) {
             sprintf(Settings.ogg_path, "notset");
             bgMusic->Play();
@@ -230,7 +230,7 @@ bool MenuOGG()
                 if(entered[len] !='/')
                 strncat (entered, "/", 1);
                 strncpy(Settings.oggload_path, entered, sizeof(Settings.oggload_path));
-                WindowPrompt(LANGUAGE.Backgroundmusicpath,0,LANGUAGE.ok,0,0,0);
+                WindowPrompt(tr("Backgroundmusic Path changed."),0,tr("OK"),0,0,0);
 //                if(isSdInserted()) {
 				if(isInserted(bootDevice)) {
                     if(!strcmp("", Settings.oggload_path)) {
@@ -241,7 +241,7 @@ bool MenuOGG()
                     returnhere = true;
                     break;
                 } else {
-                    WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
+                    WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"), 0,0,0);
                 }
             }
         if(countoggs > 0) {
@@ -253,13 +253,13 @@ bool MenuOGG()
     ret = optionBrowser4.GetClickedOption();
 
     if(ret>=0) {
-        choice = WindowPrompt(LANGUAGE.Setasbackgroundmusic,GetFileName(ret),LANGUAGE.Yes,LANGUAGE.No,0,0);
+        choice = WindowPrompt(tr("Set as backgroundmusic?"),GetFileName(ret),tr("Yes"),tr("No"),0,0);
         if(choice == 1) {
         StopOgg();
         snprintf(fullpath,150,"%s%s",Settings.oggload_path,GetFileName(ret));
         choice = bgMusic->PlayOggFile(fullpath);
         if(choice < 0) {
-        WindowPrompt(LANGUAGE.Notasupportedformat, LANGUAGE.Loadingstandardmusic, LANGUAGE.ok, 0,0,0);
+        WindowPrompt(tr("Not supported format!"), tr("Loading standard music."), tr("OK"), 0,0,0);
         sprintf(Settings.ogg_path, "notset");
         bgMusic->Play();
         SetVolumeOgg(255*(Settings.volume/100.0));
@@ -279,7 +279,7 @@ bool MenuOGG()
             snprintf(fullpath, 150,"%s%s", Settings.oggload_path,GetFileName(ret));
             choice = bgMusic->PlayOggFile(fullpath);
             if(choice < 0) {
-            WindowPrompt(LANGUAGE.Notasupportedformat, LANGUAGE.Loadingstandardmusic, LANGUAGE.ok, 0,0,0);
+            WindowPrompt(tr("Not supported format!"), tr("Loading standard music."), tr("OK"), 0,0,0);
             if(!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path)) {
                 bgMusic->Play();
             } else {
@@ -342,7 +342,7 @@ int MenuLanguageSelect()
 	int countfiles = GetAllDirFiles(Settings.languagefiles_path);
 
     if(!strcmp("", Settings.languagefiles_path)) {
-        sprintf(fullpath, "%s", LANGUAGE.Standard);
+        sprintf(fullpath, "%s", tr("Standard"));
 	} else {
 		sprintf(fullpath, "%s", Settings.languagefiles_path);
 	}
@@ -363,7 +363,7 @@ int MenuLanguageSelect()
 	oggmenubackground.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	oggmenubackground.SetPosition(0, 0);
 
-    GuiText backBtnTxt(LANGUAGE.Back , 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+    GuiText backBtnTxt(tr("Back") , 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	backBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
 	GuiImage backBtnImg(&btnOutline);
 	if (Settings.wsprompt == yes){
@@ -381,7 +381,7 @@ int MenuLanguageSelect()
 	backBtn.SetTrigger(&trigB);
 	backBtn.SetEffectGrow();
 
-	GuiText defaultBtnTxt(LANGUAGE.Default , 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	GuiText defaultBtnTxt(tr("Default") , 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	defaultBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
 	GuiImage defaultBtnImg(&btnOutline);
 	if (Settings.wsprompt == yes) {
@@ -401,8 +401,13 @@ int MenuLanguageSelect()
     customOptionList options2(countfiles);
 
     for (cnt = 0; cnt < countfiles; cnt++) {
-        options2.SetName(cnt, "%s", GetFileName(cnt));
+		char filename[64];
+		strncpy(filename, GetFileName(cnt),63);
+		char *dot = strchr(filename, '.');
+		if(dot) *dot='\0';
+        options2.SetName(cnt, "%s", filename);
         options2.SetValue(cnt, NULL);
+		
     }
 
 	if(cnt < 9) {
@@ -444,11 +449,12 @@ int MenuLanguageSelect()
     }
 
     if (defaultBtn.GetState() == STATE_CLICKED) {
-            choice = WindowPrompt(LANGUAGE.Loadingstandardlanguage,0,LANGUAGE.ok, LANGUAGE.Cancel,0,0);
+            choice = WindowPrompt(tr("Loading standard language."),0,tr("OK"), tr("Cancel"),0,0);
             if (choice == 1) {
             sprintf(Settings.language_path, "notset");
             cfg_save_global();
-            lang_default();
+			gettextCleanUp();
+            //lang_default();
             CFG_Load();
             returnhere = 2;
             }
@@ -473,14 +479,14 @@ int MenuLanguageSelect()
                 if(entered[len] !='/')
                 strncat (entered, "/", 1);
                 strncpy(Settings.languagefiles_path, entered, sizeof(Settings.languagefiles_path));
-                WindowPrompt(LANGUAGE.Languagepathchanged,0,LANGUAGE.ok,0,0,0);
+                WindowPrompt(tr("Languagepath changed."),0,tr("OK"),0,0,0);
 //                if(isSdInserted()) {
 				if(isInserted(bootDevice)) {
                     cfg_save_global();
                     returnhere = 1;
                     break;
                 } else {
-                    WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
+                    WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"), 0,0,0);
                 }
             }
         if(countfiles > 0) {
@@ -492,22 +498,23 @@ int MenuLanguageSelect()
     ret = optionBrowser4.GetClickedOption();
 
     if(ret>=0) {
-        choice = WindowPrompt(LANGUAGE.Doyouwanttochangelanguage, 0, LANGUAGE.Yes, LANGUAGE.Cancel,0,0);
+        choice = WindowPrompt(tr("Do you want to change language?"), 0, tr("Yes"), tr("Cancel"),0,0);
         if(choice == 1) {
 //        if(isSdInserted()) {
 		if(isInserted(bootDevice)) {
             snprintf(Settings.language_path, sizeof(Settings.language_path), "%s%s", Settings.languagefiles_path, GetFileName(ret));
             cfg_save_global();
             if(!checkfile(Settings.language_path)) {
-                sprintf(Settings.language_path, "notset");
-                WindowPrompt(LANGUAGE.Filenotfound,LANGUAGE.Loadingstandardlanguage,LANGUAGE.ok,0,0,0);
+                sprintf(Settings.language_path, tr("not set"));
+                WindowPrompt(tr("File not found."),tr("Loading standard language."),tr("OK"),0,0,0);
             }
-            lang_default();
+            gettextCleanUp();
+			//lang_default();
             CFG_Load();
             returnhere = 2;
             break;
         } else {
-            WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtosave, LANGUAGE.ok, 0,0,0);
+            WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"), 0,0,0);
         }
         }
         optionBrowser4.SetFocus(1);

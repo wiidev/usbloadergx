@@ -19,7 +19,7 @@
 #include "usbloader/wbfs.h"
 #include "usbloader/video2.h"
 #include "settings/cfg.h"
-#include "language/language.h"
+#include "language/gettext.h"
 #include "mload/mload.h"
 #include "FreeTypeGX.h"
 #include "video.h"
@@ -83,7 +83,8 @@ main(int argc, char *argv[])
 			strcpy(bootDevice, "USB:");
 	}
 
-	lang_default();
+	gettextCleanUp();
+	//lang_default();
 	CFG_Load();
 
 	SDCard_deInit();// unmount SD for reloading IOS
@@ -125,17 +126,9 @@ main(int argc, char *argv[])
 	fontSystem = new FreeTypeGX();
 	char *fontPath = NULL;
 	asprintf(&fontPath, "%sfont.ttf", CFG.theme_path);	
-	u8* fontbuf = NULL;
-	int fontbuffersize = NULL;
-	FILE *fontfile = fopen(fontPath, "rb");
-	if (fontfile) {
-		fclose(fontfile);
-		fontSystem->loadFont(fontPath, fontbuf, fontbuffersize, 0);
-		fontSystem->setCompatibilityMode(FTGX_COMPATIBILITY_DEFAULT_TEVOP_GX_PASSCLR | FTGX_COMPATIBILITY_DEFAULT_VTXDESC_GX_NONE);
-	} else {
-		fontSystem->loadFont(NULL, font_ttf, font_ttf_size, 0);
-		fontSystem->setCompatibilityMode(FTGX_COMPATIBILITY_DEFAULT_TEVOP_GX_PASSCLR | FTGX_COMPATIBILITY_DEFAULT_VTXDESC_GX_NONE);
-	}
+	fontSystem->loadFont(fontPath, font_ttf, font_ttf_size, 0);
+	fontSystem->setCompatibilityMode(FTGX_COMPATIBILITY_DEFAULT_TEVOP_GX_PASSCLR | FTGX_COMPATIBILITY_DEFAULT_VTXDESC_GX_NONE);
+	free(fontPath);
 
 	fontClock = new FreeTypeGX();
 	fontClock->loadFont(NULL, clock_ttf, clock_ttf_size, 0);

@@ -12,7 +12,7 @@
 #include "usbloader/partition.h"
 #include "usbloader/usbstorage.h"
 #include "usbloader/getentries.h"
-#include "language/language.h"
+#include "language/gettext.h"
 #include "libwiigui/gui.h"
 #include "libwiigui/gui_diskcover.h"
 #include "network/networkops.h"
@@ -79,7 +79,7 @@ int OnScreenKeyboard(char * var, u32 maxlen, int min)
 	GuiTrigger trigB;
 	trigB.SetSimpleTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 
-	GuiText okBtnTxt(LANGUAGE.ok, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	GuiText okBtnTxt(tr("OK"), 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	GuiImage okBtnImg(&btnOutline);
 	if (Settings.wsprompt == yes){
 	okBtnTxt.SetWidescreen(CFG.widescreen);
@@ -87,7 +87,7 @@ int OnScreenKeyboard(char * var, u32 maxlen, int min)
 	}
 	GuiButton okBtn(&okBtnImg,&okBtnImg, 0, 4, 5, 15, &trigA, &btnSoundOver, &btnClick,1);
 	okBtn.SetLabel(&okBtnTxt);
-	GuiText cancelBtnTxt(LANGUAGE.Cancel, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	GuiText cancelBtnTxt(tr("Cancel"), 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	GuiImage cancelBtnImg(&btnOutline);
 	if (Settings.wsprompt == yes){
 	cancelBtnTxt.SetWidescreen(CFG.widescreen);
@@ -167,7 +167,7 @@ void WindowCredits()
 	int numEntries = 20;
 	GuiText * txt[numEntries];
 
-	txt[i] = new GuiText(LANGUAGE.Credits, 26, (GXColor){255, 255, 255, 255});
+	txt[i] = new GuiText(tr("Credits"), 26, (GXColor){255, 255, 255, 255});
 	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(0,12); i++;
 
 	char SvnRev[30];
@@ -182,7 +182,7 @@ void WindowCredits()
 	txt[i] = new GuiText(": http://code.google.com/p/usbloader-gui/", 20, (GXColor){255, 255, 255, 255});
 	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(50,y); i++; //y+=28;
 
-	txt[i] = new GuiText(LANGUAGE.OfficialSite, 20, (GXColor){255, 255, 255, 255});
+	txt[i] = new GuiText(tr("Official Site"), 20, (GXColor){255, 255, 255, 255});
 	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(-180,y); i++; y+=28;
 
 	GuiText::SetPresets(22, (GXColor){255, 255, 255,  255}, 0, GuiText::WRAP,
@@ -221,47 +221,47 @@ void WindowCredits()
 	i++;
 	y+=22;
 
-	txt[i] = new GuiText(LANGUAGE.Thanksto);
+	txt[i] = new GuiText(tr("Big thanks to:"));
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(70,y);
 	i++;
 
     char text[100];
-    sprintf(text, "djtaz %s", LANGUAGE.Forhostingcovers);
+    sprintf(text, "djtaz %s", tr("for hosting the covers/discarts"));
 	txt[i] = new GuiText(text);
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(220,y);
 	i++;
 	y+=24;
 
-    sprintf(text, "CorneliousJD %s", LANGUAGE.Forhostingupdatefiles);
+    sprintf(text, "CorneliousJD %s", tr("for hosting the update files"));
 	txt[i] = new GuiText(text);
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(220,y);
 	i++;
 	y+=30;
 
-	txt[i] = new GuiText(LANGUAGE.Specialthanksto);
+	txt[i] = new GuiText(tr("Special thanks to:"));
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(70,y);
 	i++;
 	y+=24;
 
-    sprintf(text, "Waninkoko, Kwiirk & Hermes %s", LANGUAGE.theUSBLoaderandreleasingthesourcecode);
+    sprintf(text, "Waninkoko, Kwiirk & Hermes %s", tr("for the USB Loader source"));
 	txt[i] = new GuiText(text);
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(100,y);
 	i++;
 	y+=22;
 
-    sprintf(text, "Tantric %s LibWiiGui", LANGUAGE.awesometool);
+    sprintf(text, "Tantric %s LibWiiGui", tr("for his awesome tool"));
 	txt[i] = new GuiText(text);
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(100,y);
 	i++;
 	y+=22;
 
-    sprintf(text, "Fishears/Nuke %s Ocarina", LANGUAGE.For);
+    sprintf(text, "Fishears/Nuke %s Ocarina", tr("for"));
 	txt[i] = new GuiText(text);
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(100,y);
 	i++;
 	y+=22;
 
-    sprintf(text, "WiiPower %s", LANGUAGE.diversepatches);
+    sprintf(text, "WiiPower %s", tr("for diverse patches"));
 	txt[i] = new GuiText(text);
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(100,y);
 	i++;
@@ -733,12 +733,12 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 	GuiTrigger trigHome;
 	trigHome.SetButtonOnlyTrigger(-1, WPAD_BUTTON_HOME | WPAD_CLASSIC_BUTTON_HOME, 0);
 
-	GuiText titleTxt(LANGUAGE.Homemenu, 36, (GXColor){255, 255, 255, 255});
+	GuiText titleTxt(tr("HOME Menu"), 36, (GXColor){255, 255, 255, 255});
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	titleTxt.SetPosition(-180,40);
 	titleTxt.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
 
-	GuiText closeTxt(LANGUAGE.Close, 28, (GXColor){0, 0, 0, 255});
+	GuiText closeTxt(tr("Close"), 28, (GXColor){0, 0, 0, 255});
 	closeTxt.SetPosition(10,3);
 	GuiImage closeImg(&close);
 	if (Settings.wsprompt == yes){
@@ -873,7 +873,7 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 			wiimoteImg.SetPosition(50,165);
 		}
 		else if(btn2.GetState() == STATE_CLICKED) {
-            ret = WindowPrompt(LANGUAGE.Areyousure, 0, LANGUAGE.Yes, LANGUAGE.No, 0, 0);
+            ret = WindowPrompt(tr("Are you sure?"), 0, tr("Yes"), tr("No"), 0, 0);
 			if (ret == 1) {
 			choice = 2;
 			}
@@ -885,7 +885,7 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 			btn2.ResetState();
 		}
 		else if(btn3.GetState() == STATE_CLICKED) {
-			ret = WindowPrompt(LANGUAGE.Areyousure, 0, LANGUAGE.Yes, LANGUAGE.No, 0, 0);
+			ret = WindowPrompt(tr("Are you sure?"), 0, tr("Yes"), tr("No"), 0, 0);
 			if (ret == 1) {
 			choice = 3;
 			}
@@ -984,7 +984,7 @@ int GameWindowPrompt()
 	GuiImageData dialogBox(imgPath, CFG.widescreen ? wdialogue_box_startgame_png : dialogue_box_startgame_png);
 	GuiImage dialogBoxImg(&dialogBox);
 
-	GuiTooltip nameBtnTT(LANGUAGE.RenameGameonWBFS);
+	GuiTooltip nameBtnTT(tr("Rename Game on WBFS"));
 	if (Settings.wsprompt == yes)
 		nameBtnTT.SetWidescreen(CFG.widescreen);
 	GuiText nameTxt("", 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
@@ -1035,7 +1035,7 @@ int GameWindowPrompt()
 	btn1.SetTrigger(&trigA);
 	btn1.SetState(STATE_SELECTED);
 
-	GuiText btn2Txt(LANGUAGE.Back, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	GuiText btn2Txt(tr("Back"), 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	GuiImage btn2Img(&btnOutline);
 	if (Settings.wsprompt == yes){
 	btn2Txt.SetWidescreen(CFG.widescreen);
@@ -1056,7 +1056,7 @@ int GameWindowPrompt()
 	btn2.SetLabel(&btn2Txt);
 	btn2.SetTrigger(&trigB);
 
-	GuiText btn3Txt(LANGUAGE.settings, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	GuiText btn3Txt(tr("Settings"), 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	GuiImage btn3Img(&btnOutline);
 	if (Settings.wsprompt == yes){
 	btn3Txt.SetWidescreen(CFG.widescreen);
@@ -1231,7 +1231,7 @@ int GameWindowPrompt()
 			playcount = 0;
 			favoritevar = 0;
 		}
-		playcntTxt.SetTextf("%s: %i",LANGUAGE.Plays, playcount);
+		playcntTxt.SetTextf("%s: %i",tr("Play Count"), playcount);
  		btnFavoriteImg.SetImage(favoritevar ? &imgFavorite : &imgNotFavorite);
 
 		nameTxt.SetPosition(0, 1);
@@ -1531,7 +1531,7 @@ DiscWait(const char *title, const char *msg, const char *btn1Label, const char *
         while(i >= 0)
         {
             VIDEO_WaitVSync();
-            timerTxt.SetTextf("%u %s", i,LANGUAGE.secondsleft);
+            timerTxt.SetTextf("%u %s", i,tr("seconds left"));
             HaltGui();
             if(Settings.cios == ios222) {
             ret = IOS_ReloadIOS(222);
@@ -1650,7 +1650,7 @@ void SearchMissingImages(int choice2)
 	dialogBoxImg.SetWidescreen(CFG.widescreen);
 	}
 
-	GuiText titleTxt(LANGUAGE.InitializingNetwork, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	GuiText titleTxt(tr("Initializing Network"), 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	titleTxt.SetPosition(0,60);
 
@@ -1659,7 +1659,7 @@ void SearchMissingImages(int choice2)
 	msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	msgTxt.SetPosition(0,-40);
 
-    GuiText btn1Txt(LANGUAGE.Cancel, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+    GuiText btn1Txt(tr("Cancel"), 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	GuiImage btn1Img(&btnOutline);
 	if (Settings.wsprompt == yes){
 	btn1Txt.SetWidescreen(CFG.widescreen);
@@ -1694,7 +1694,7 @@ void SearchMissingImages(int choice2)
         Initialize_Network();
 
 		if (!IsNetworkInit()) {
-        msgTxt.SetText(LANGUAGE.Couldnotinitializenetwork);
+        msgTxt.SetText(tr("Could not initialize network!"));
 		}
 
 		if(btn1.GetState() == STATE_CLICKED) {
@@ -1795,7 +1795,7 @@ ShowProgress (s32 done, s32 total)
 
     prTxt.SetTextf("%0.2f", percent);
 
-    timeTxt.SetTextf("%s %d:%02d:%02d",LANGUAGE.Timeleft,h,m,s);
+    timeTxt.SetTextf("%s %d:%02d:%02d",tr("Time left:"),h,m,s);
 
     f32 gamesizedone = gamesize * done/total;
 
@@ -1980,7 +1980,7 @@ ProgressDownloadWindow(int choice2)
 	progressbarImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 	progressbarImg.SetPosition(25, 40);
 
-	GuiText titleTxt(LANGUAGE.Downloadingfile, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	GuiText titleTxt(tr("Downloading file"), 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	titleTxt.SetPosition(0,60);
 
@@ -1995,7 +1995,7 @@ ProgressDownloadWindow(int choice2)
 	prTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	prTxt.SetPosition(0, 40);
 
-    GuiText btn1Txt(LANGUAGE.Cancel, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+    GuiText btn1Txt(tr("Cancel"), 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	GuiImage btn1Img(&btnOutline);
 	if (Settings.wsprompt == yes){
 	btn1Txt.SetWidescreen(CFG.widescreen);
@@ -2032,13 +2032,13 @@ ProgressDownloadWindow(int choice2)
     struct stat st;
     if(stat(Settings.covers_path, &st) != 0) {
         if(subfoldercreate(Settings.covers_path) != 1) {
-        WindowPrompt(LANGUAGE.Error,LANGUAGE.Cantcreatedirectory,LANGUAGE.ok,0,0,0);
+        WindowPrompt(tr("Error !"),tr("Can't create directory"),tr("OK"),0,0,0);
         cntMissFiles = 0;
         }
     }
     if(stat(Settings.disc_path,&st) != 0) {
         if(subfoldercreate(Settings.disc_path) != 1) {
-        WindowPrompt(LANGUAGE.Error,LANGUAGE.Cantcreatedirectory,LANGUAGE.ok,0,0,0);
+        WindowPrompt(tr("Error !"),tr("Can't create directory"),tr("OK"),0,0,0);
         cntMissFiles = 0;
         }
     }
@@ -2059,7 +2059,7 @@ ProgressDownloadWindow(int choice2)
 			progressbarImg.SetTile(100*i/cntMissFiles);
 		}
 
-		msgTxt.SetTextf("%i %s", cntMissFiles - i, LANGUAGE.filesleft);
+		msgTxt.SetTextf("%i %s", cntMissFiles - i, tr("file(s) left"));
 		msg2Txt.SetTextf("%s", missingFiles[i]);
 
 		//download boxart image
@@ -2206,12 +2206,12 @@ int ProgressUpdateWindow()
 	progressbarImg.SetPosition(25, 7);
 
     char title[50];
-    sprintf(title, "%s", LANGUAGE.CheckingforUpdates);
+    sprintf(title, "%s", tr("Checking for Updates"));
 	GuiText titleTxt(title, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	titleTxt.SetPosition(0,50);
     char msg[50];
-    sprintf(msg, "%s", LANGUAGE.InitializingNetwork);
+    sprintf(msg, "%s", tr("Initializing Network"));
 	GuiText msgTxt(msg, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	msgTxt.SetPosition(0,140);
@@ -2223,7 +2223,7 @@ int ProgressUpdateWindow()
 	prTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	prTxt.SetPosition(0, 7);
 
-    GuiText btn1Txt(LANGUAGE.Cancel, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+    GuiText btn1Txt(tr("Cancel"), 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	GuiImage btn1Img(&btnOutline);
 	if (Settings.wsprompt == yes){
 	btn1Txt.SetWidescreen(CFG.widescreen);
@@ -2257,7 +2257,7 @@ int ProgressUpdateWindow()
     struct stat st;
     if(stat(Settings.update_path, &st) != 0) {
         if(subfoldercreate(Settings.update_path) != 1) {
-        WindowPrompt(LANGUAGE.Error,LANGUAGE.Cantcreatedirectory,LANGUAGE.ok,0,0,0);
+        WindowPrompt(tr("Error !"),tr("Can't create directory"),tr("OK"),0,0,0);
         ret = -1;
         failed = -1;
         }
@@ -2277,7 +2277,7 @@ int ProgressUpdateWindow()
 		if (IsNetworkInit()) {
 		msgTxt.SetText(GetNetworkIP());
 		} else {
-        msgTxt.SetText(LANGUAGE.Couldnotinitializenetwork);
+        msgTxt.SetText(tr("Could not initialize network!"));
 		}
 
         if(btn1.GetState() == STATE_CLICKED) {
@@ -2294,16 +2294,16 @@ int ProgressUpdateWindow()
 
     if(newrev > 0) {
 
-        sprintf(msg, "Rev%i %s.", newrev, LANGUAGE.available);
-        int choice = WindowPrompt(msg, LANGUAGE.Doyouwanttoupdate, LANGUAGE.Updatedol, LANGUAGE.Updateall, LANGUAGE.Cancel, 0);
+        sprintf(msg, "Rev%i %s.", newrev, tr("available"));
+        int choice = WindowPrompt(msg, tr("How do you want to update?"), tr("Update DOL"), tr("Update All"), tr("Cancel"), 0);
         if(choice == 1 || choice == 2) {
-            titleTxt.SetTextf("%s USB Loader GX", LANGUAGE.updating);
+            titleTxt.SetTextf("%s USB Loader GX", tr("Updating"));
             msgTxt.SetPosition(0,100);
             promptWindow.Append(&progressbarEmptyImg);
             promptWindow.Append(&progressbarImg);
             promptWindow.Append(&progressbarOutlineImg);
             promptWindow.Append(&prTxt);
-            msgTxt.SetTextf("%s Rev%i", LANGUAGE.Updateto, newrev);
+            msgTxt.SetTextf("%s Rev%i", tr("Update to"), newrev);
             s32 filesize = download_request("http://www.techjawa.com/usbloadergx/boot.dol");
             if(filesize > 0) {
                 FILE * pfile;
@@ -2380,7 +2380,7 @@ int ProgressUpdateWindow()
         }
 
     } else {
-        WindowPrompt(LANGUAGE.Nonewupdates, 0, LANGUAGE.ok, 0, 0, 0);
+        WindowPrompt(tr("No new updates."), 0, tr("OK"), 0, 0, 0);
         ret = -1;
     }
 
@@ -2389,7 +2389,7 @@ int ProgressUpdateWindow()
     CloseConnection();
 
     if(!failed && ret >= 0) {
-        WindowPrompt(LANGUAGE.Successfullyupdated , LANGUAGE.Restarting, LANGUAGE.ok, 0, 0, 0);
+        WindowPrompt(tr("Successfully Updated") , tr("Restarting..."), tr("OK"), 0, 0, 0);
         Sys_BackToLoader();
     }
 

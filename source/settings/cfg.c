@@ -7,7 +7,7 @@
 #include <ogcsys.h>
 #include <mxml.h>
 
-#include "language/language.h"
+#include "language/gettext.h"
 #include "xml/xml.h" /* XML - Lustar*/
 #include "cfg.h"
 
@@ -115,6 +115,12 @@ struct TextMap map_alignment[] =
 	{ "middle",   CFG_ALIGN_MIDDLE },
 	{ NULL, -1 }
 };
+char* strcopy(char *dest, char *src, int size)
+{
+	strncpy(dest,src,size);
+	dest[size-1] = 0;
+	return dest;
+}
 
 int map_get_id(struct TextMap *map, char *name)
 {
@@ -1668,7 +1674,8 @@ void CFG_Load(void)
 	cfg_parsefile(pathname, &theme_set); //finally set theme information
 
 	snprintf(pathname, sizeof(pathname), Settings.language_path);
-	cfg_parsefile(pathname, &language_set);
+	gettextLoadLanguage(pathname);
+//	cfg_parsefile(pathname, &language_set);
 
 	snprintf(pathname, sizeof(pathname), "%s/config/GXGameSettings.cfg", bootDevice);
 	cfg_parsefile(pathname, &parental_set);

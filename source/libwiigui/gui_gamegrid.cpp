@@ -13,7 +13,7 @@
 #include "gui_gamegrid.h"
 #include "../settings/cfg.h"
 #include "../prompts/PromptWindows.h"
-#include "../language/language.h"
+#include "../language/gettext.h"
 #include "../menu.h"
 
 #include <string.h>
@@ -384,7 +384,7 @@ GuiGameGrid::GuiGameGrid(int w, int h, struct discHdr * l, int count, const char
 		
 		}
 		else 
-		WindowPrompt("Oops","Your Wii must be in 16:9 mode to see the gamewall.",0, LANGUAGE.ok, 0,0);
+		WindowPrompt("Oops","Your Wii must be in 16:9 mode to see the gamewall.",0, tr("OK"), 0,0);
                         
 		//}
 

@@ -1,0 +1,793 @@
+# USB Loader GX language source file.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: USB Loader GX\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-06-22 20:10+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "0 (Everyone)"
+msgstr ""
+
+msgid "1 (Child 7+)"
+msgstr ""
+
+msgid "2 (Teen 12+)"
+msgstr ""
+
+msgid "3 (Mature 16+)"
+msgstr "Mature"
+
+msgid "3D Covers"
+msgstr "3D ｶﾊﾞｰ"
+
+msgid "4 (Adults Only 18+)"
+msgstr ""
+
+msgid "All the features of USB Loader GX are unlocked."
+msgstr "全ての機能がｱﾝﾛｯｸされました"
+
+msgid "Alternate DOL"
+msgstr ""
+
+msgid "Anti 002 fix"
+msgstr ""
+
+msgid "App Language"
+msgstr "Appの表示言語"
+
+msgid "Apr"
+msgstr "4月"
+
+msgid "Are you sure?"
+msgstr "実行しますか?"
+
+msgid "Aug"
+msgstr "8月"
+
+msgid "AutoPatch"
+msgstr "自動ﾊﾟｯﾁ"
+
+msgid "Back"
+msgstr "もどる"
+
+msgid "Back to HBC or Wii Menu"
+msgstr "HBC/Wiiﾒﾆｭｰへもどる"
+
+msgid "Back to Loader"
+msgstr "HBCへもどる"
+
+msgid "Back to Wii Menu"
+msgstr "Wiiﾒﾆｭｰへもどる"
+
+msgid "Backgroundmusic"
+msgstr "ｻｳﾝﾄﾞ"
+
+msgid "Backgroundmusic Path changed."
+msgstr "ｻｳﾝﾄﾞのPath"
+
+msgid "Big thanks to:"
+msgstr "Thanks to"
+
+msgid "Block IOS Reload"
+msgstr ""
+
+msgid "Boot/Standard"
+msgstr "ﾌﾞｰﾄ/標準"
+
+msgid "Both"
+msgstr "両方"
+
+msgid "Can't be formated"
+msgstr "ﾌｫｰﾏｯﾄに失敗しました"
+
+msgid "Can't create directory"
+msgstr "ﾃﾞｨﾚｸﾄﾘ作成に失敗しました"
+
+msgid "Can't delete:"
+msgstr "削除に失敗しました:"
+
+msgid "Cancel"
+msgstr "ｷｬﾝｾﾙ"
+
+msgid "Cheatcodes Path"
+msgstr ""
+
+msgid "Cheatcodes Path changed"
+msgstr ""
+
+msgid "Checking for Updates"
+msgstr "最新版を確認中"
+
+msgid "Click to Download Covers"
+msgstr "ｶﾊﾞｰをﾀﾞｳﾝﾛｰﾄﾞするにはｸﾘｯｸして下さい"
+
+msgid "Clock"
+msgstr "Clock"
+
+msgid "Close"
+msgstr "閉じる"
+
+msgid "Console"
+msgstr ""
+
+msgid "Console Default"
+msgstr "ﾃﾞﾌｫﾙﾄｺﾝｿｰﾙ"
+
+msgid "Console Locked"
+msgstr "ｺﾝｿｰﾙがﾛｯｸされています"
+
+msgid "Console should be unlocked to modify it."
+msgstr "変更にはｺﾝｿｰﾙのﾛｯｸ解除が必要です"
+
+msgid "Continue to install game?"
+msgstr "ｹﾞｰﾑのｲﾝｽﾄｰﾙを続けますか?"
+
+msgid "Controllevel"
+msgstr "コントロール・レベル"
+
+msgid "Correct Password"
+msgstr "正しいﾊﾟｽﾜｰﾄﾞ"
+
+msgid "Could not initialize DIP module!"
+msgstr "DIPﾓｼﾞｭｰﾙの初期化ができません!"
+
+msgid "Could not initialize network!"
+msgstr "ﾈｯﾄﾜｰｸの初期化ができません!"
+
+msgid "Could not open Disc"
+msgstr "ﾃﾞｨｽｸｵｰﾌﾟﾝに失敗しました"
+
+msgid "Cover Download"
+msgstr "ｶﾊﾞｰ ﾀﾞｳﾝﾛｰﾄﾞ"
+
+msgid "Cover Path"
+msgstr "ｶﾊﾞｰﾊﾟｽ"
+
+msgid "Coverpath Changed"
+msgstr "ｶﾊﾞｰﾊﾟｽを変更しました"
+
+msgid "Credits"
+msgstr "協力"
+
+msgid "Custom Paths"
+msgstr "カスタムPath"
+
+msgid "Dec"
+msgstr "12月"
+
+msgid "Default"
+msgstr "ﾃﾞﾌｫﾙﾄ"
+
+msgid "Default Gamesettings"
+msgstr "ｹﾞｰﾑ設定(ﾃﾞﾌｫﾙﾄ)"
+
+msgid "Default Settings"
+msgstr "設定(ﾃﾞﾌｫﾙﾄ)"
+
+msgid "Developed by"
+msgstr "開発者："
+
+msgid "Disc Default"
+msgstr "ﾃﾞﾌｫﾙﾄﾃﾞｨｽｸ"
+
+msgid "Disc Images"
+msgstr "ﾃﾞｨｽｸｲﾒｰｼﾞ"
+
+msgid "Discimage Path"
+msgstr "ﾃﾞｨｽｸｲﾒｰｼﾞﾊﾟｽ"
+
+msgid "Discpath Changed"
+msgstr "ﾃﾞｨｽｸﾊﾟｽを変更しました"
+
+msgid "Discpath change"
+msgstr "ﾃﾞｨｽｸﾊﾟｽの変更"
+
+msgid "DiskFlip"
+msgstr ""
+
+msgid "Display"
+msgstr "ﾃﾞｨｽﾌﾟﾚｲ"
+
+msgid "Do you really want to delete:"
+msgstr "削除しますか:"
+
+msgid "Do you want to change language?"
+msgstr "言語設定を変更しますか?"
+
+msgid "Do you want to format:"
+msgstr "ﾌｫｰﾏｯﾄしますか:"
+
+msgid "Do you want to retry for 30 secs?"
+msgstr "再実行しますか?(30秒)"
+
+msgid "Dol Path"
+msgstr ""
+
+msgid "Dolpath Changed"
+msgstr ""
+
+msgid "Dolpath change"
+msgstr ""
+
+msgid "Download Boxart image?"
+msgstr "Boxart ｲﾒｰｼﾞをﾀﾞｳﾝﾛｰﾄﾞしますか?"
+
+msgid "Download finished"
+msgstr "ﾀﾞｳﾝﾛｰﾄﾞを終了しました"
+
+msgid "Downloading file"
+msgstr "ﾌｧｲﾙのﾀﾞｳﾝﾛｰﾄﾞ中:"
+
+msgid "Dutch"
+msgstr "ｵﾗﾝﾀﾞ語"
+
+msgid "English"
+msgstr "英語"
+
+msgid "Error !"
+msgstr "Error !"
+
+msgid "Error 002 fix"
+msgstr ""
+
+msgid "Error reading Disc"
+msgstr "ﾃﾞｨｽｸ読込み失敗"
+
+msgid "Exit USB Loader GX?"
+msgstr "USB Loader GXを終了しますか?"
+
+msgid "Failed formating"
+msgstr "ﾌｫｰﾏｯﾄに失敗しました"
+
+msgid "Feb"
+msgstr "2月"
+
+msgid "File not found."
+msgstr "ﾌｧｲﾙを検出できませんでした"
+
+msgid "Flip-X"
+msgstr "Flip-X"
+
+msgid "Force"
+msgstr "Force"
+
+msgid "Format"
+msgstr "ﾌｫｰﾏｯﾄ"
+
+msgid "Formatting, please wait..."
+msgstr "ﾌｫｰﾏｯﾄ中です、暫くお待ち下さい..."
+
+msgid "Free Space"
+msgstr "空き容量"
+
+msgid "French"
+msgstr "ﾌﾗﾝｽ語"
+
+msgid "Full Shutdown"
+msgstr "完全ｼｬｯﾄﾀﾞｳﾝ"
+
+msgid "GUI Settings"
+msgstr "GUI設定"
+
+msgid "Game ID"
+msgstr "ｹﾞｰﾑID"
+
+msgid "Game Language"
+msgstr "言語"
+
+msgid "Game Load"
+msgstr "ｹﾞｰﾑ読込み"
+
+msgid "Game Region"
+msgstr "ｹﾞｰﾑの地域情報"
+
+msgid "Game Size"
+msgstr "ｹﾞｰﾑｻｲｽﾞ"
+
+msgid "Game is already installed:"
+msgstr "ｹﾞｰﾑは既にｲﾝｽﾄｰﾙ済みです:"
+
+msgid "Games"
+msgstr "ｹﾞｰﾑ"
+
+msgid "German"
+msgstr "ﾄﾞｲﾂ語"
+
+msgid "HOME Menu"
+msgstr "ﾎｰﾑﾒﾆｭ-"
+
+msgid "Hour"
+msgstr "時間"
+
+msgid "How do you want to update?"
+msgstr "更新を実行しますか?"
+
+msgid "How to Shutdown?"
+msgstr "ｼｬｯﾄﾀﾞｳﾝの方法は?"
+
+msgid "Initializing Network"
+msgstr "ﾈｯﾄﾜｰｸの初期化中..."
+
+msgid "Insert Disk"
+msgstr "ﾃﾞｨｽｸ挿入"
+
+msgid "Insert an SD-Card to download images."
+msgstr "ｲﾒｰｼﾞをﾀﾞｳﾝﾛｰﾄﾞするSDｶｰﾄﾞを挿入して下さい"
+
+msgid "Insert an SD-Card to save."
+msgstr "保存するSDｶｰﾄﾞを挿入して下さい"
+
+msgid "Insert an SD-Card to use this option."
+msgstr "このｵﾌﾟｼｮﾝを使用するのにSDｶｰﾄﾞを挿入して下さい"
+
+msgid "Install Error!"
+msgstr "Install Error!"
+
+msgid "Install a game"
+msgstr "ｹﾞｰﾑｲﾝｽﾄｰﾙ"
+
+msgid "Installing game:"
+msgstr "ｹﾞｰﾑをｲﾝｽﾄｰﾙ中:"
+
+msgid "Italian"
+msgstr "ｲﾀﾘｱ語"
+
+msgid "Jan"
+msgstr "1月"
+
+msgid "Japanese"
+msgstr "日本語"
+
+msgid "July"
+msgstr "7月"
+
+msgid "June"
+msgstr "6月"
+
+msgid "Keyboard"
+msgstr ""
+
+msgid "Korean"
+msgstr "韓国語"
+
+msgid "Language change:"
+msgstr ""
+
+msgid "Languagepath changed."
+msgstr "言語PATHを変更しました"
+
+msgid "Left"
+msgstr "左"
+
+msgid "Like SysMenu"
+msgstr "Like SysMenu"
+
+msgid "Loading standard language."
+msgstr "標準の言語をロード中..."
+
+msgid "Loading standard music."
+msgstr "cIOS249ロード"
+
+msgid "Lock Console"
+msgstr "ｺﾝｿｰﾙをﾛｯｸする"
+
+msgid "Locked"
+msgstr "ﾛｯｸ"
+
+msgid "Mar"
+msgstr "3月"
+
+msgid "May"
+msgstr "5月"
+
+msgid "Missing files"
+msgstr "検出できなかったﾌｧｲﾙ"
+
+msgid "Music Volume"
+msgstr "ﾎﾞﾘｭｰﾑ"
+
+msgid "Neither"
+msgstr "どちらでもない"
+
+msgid "Network init error"
+msgstr "Network initialization error"
+
+msgid "Next"
+msgstr "次へ"
+
+msgid "No"
+msgstr "いいえ"
+
+msgid "No SD-Card inserted!"
+msgstr "SDｶｰﾄﾞを検出できませんでした!"
+
+msgid "No USB Device"
+msgstr "USBﾃﾞﾊﾞｲｽを検出できませんでした"
+
+msgid "No USB Device found."
+msgstr "USBﾃﾞﾊﾞｲｽﾞが検出されていません"
+
+msgid "No WBFS partition found"
+msgstr "WBFSﾊﾟｰﾃｨｼｮﾝを検出できませんでした"
+
+msgid "No file missing!"
+msgstr "ﾌｧｲﾙを検出できませんでした!"
+
+msgid "No new updates."
+msgstr "更新はありません"
+
+msgid "No partitions found"
+msgstr "ﾊﾟｰﾃｨｼｮﾝを検出できませんでした"
+
+msgid "Normal"
+msgstr "Normal(4:3)"
+
+msgid "Normal Covers"
+msgstr "ﾉ-ﾏﾙｶﾊﾞｰ"
+
+msgid "Not a Wii Disc"
+msgstr "Wiiﾃﾞｨｽｸではありません"
+
+msgid "Not enough free space!"
+msgstr "空容量が不足しています!"
+
+msgid "Not supported format!"
+msgstr "ｻﾎﾟｰﾄされていないﾌｫｰﾏｯﾄです"
+
+msgid "Nov"
+msgstr "11月"
+
+msgid "OFF"
+msgstr "オフ"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "ON"
+msgstr "オン"
+
+msgid "Oct"
+msgstr "10月"
+
+msgid "Official Site"
+msgstr "ｵﾌｨｼｬﾙｻｲﾄ"
+
+msgid "Only for Install"
+msgstr "ｲﾝｽﾄｰﾙのみ"
+
+msgid "Parental Control"
+msgstr "ﾋﾟｱﾚﾝﾀﾙｺﾝﾄﾛｰﾙ"
+
+msgid "Parental control"
+msgstr ""
+
+msgid "Partition"
+msgstr "ﾊﾟｰﾃｨｼｮﾝ"
+
+msgid "Password"
+msgstr "ﾊﾟｽﾜｰﾄﾞ"
+
+msgid "Password Changed"
+msgstr "ﾊﾟｽﾜｰﾄﾞ変更"
+
+msgid "Password has been changed"
+msgstr "ﾊﾟｽﾜｰﾄﾞを変更しました"
+
+msgid "Patch Country Strings"
+msgstr "MP3ﾒﾆｭｰ"
+
+msgid "Path of titles.txt change"
+msgstr "titles.txtのPath変更"
+
+msgid "Path of titles.txt changed."
+msgstr "titles.txtのPathを変更しました"
+
+msgid "Play Count"
+msgstr "ﾌﾟﾚｲ時間"
+
+msgid "Power off the Wii"
+msgstr "Wiiの電源を切る"
+
+msgid "Prev"
+msgstr "前へ"
+
+msgid "Prompts Buttons"
+msgstr "ﾎﾞﾀﾝ入力:"
+
+msgid "Published by"
+msgstr "発行者："
+
+msgid "Quick Boot"
+msgstr "ｸｲｯｸ起動"
+
+msgid "Released"
+msgstr ""
+
+msgid "Reload SD"
+msgstr "SDｶｰﾄﾞのﾘﾛｰﾄﾞ"
+
+msgid "Rename Game on WBFS"
+msgstr "WBFS上のｹﾞｰﾑ名変更"
+
+msgid "Reset Playcounter"
+msgstr ""
+
+msgid "Restart"
+msgstr "ﾘｽﾀｰﾄ"
+
+msgid "Restarting..."
+msgstr "再起動"
+
+msgid "Return"
+msgstr "もどる"
+
+msgid "Return to Wii Menu"
+msgstr "Wiiﾒﾆｭｰへもどる"
+
+msgid "Right"
+msgstr "右"
+
+msgid "Rumble"
+msgstr "振動"
+
+msgid "SChinese"
+msgstr "中国語(簡体字)"
+
+msgid "SFX Volume"
+msgstr "SFX音量"
+
+msgid "Save"
+msgstr "ｾｰﾌﾞ"
+
+msgid "Save Failed"
+msgstr "ｾｰﾌﾞに失敗しました"
+
+msgid "Screensaver"
+msgstr ""
+
+msgid "Sept"
+msgstr "9月"
+
+msgid "Set as backgroundmusic?"
+msgstr "ｻｳﾝﾄﾞとして設定する"
+
+msgid "Settings"
+msgstr "設定"
+
+msgid "Shutdown System"
+msgstr "ｼｽﾃﾑを終了する"
+
+msgid "Shutdown to Idle"
+msgstr "ｼｽﾃﾑをｱｲﾄﾞﾙ状態にする"
+
+msgid "Sound"
+msgstr "ｻｳﾝﾄﾞ"
+
+msgid "Spanish"
+msgstr "ｽﾍﾟｲﾝ語"
+
+msgid "Special thanks to:"
+msgstr "この場を借りて感謝します"
+
+msgid "Standard"
+msgstr "標準"
+
+msgid "Success:"
+msgstr "成功:"
+
+msgid "Successfully Saved"
+msgstr "ｾｰﾌﾞに成功:"
+
+msgid "Successfully Updated"
+msgstr "更新に成功しました"
+
+msgid "Successfully deleted:"
+msgstr "削除に成功:"
+
+msgid "Successfully installed:"
+msgstr "ｲﾝｽﾄｰﾙに成功:"
+
+msgid "System Default"
+msgstr "ﾃﾞﾌｫﾙﾄｼｽﾃﾑ"
+
+msgid "TChinese"
+msgstr "中国語(繁体字)"
+
+msgid "ThemePath"
+msgstr "ﾃｰﾏﾊﾟｽ"
+
+msgid "Themepath Changed"
+msgstr "ﾃｰﾏﾊﾟｽを変更しました"
+
+msgid "Themepath change"
+msgstr "ﾃｰﾏﾊﾟｽの変更"
+
+msgid "Time left:"
+msgstr "残り時間:"
+
+msgid "Titles from XML"
+msgstr ""
+
+msgid "Tooltips"
+msgstr "ﾂｰﾙﾋﾝﾄ"
+
+msgid "USB Device not found"
+msgstr "USBﾃﾞﾊﾞｲｽを検出できませんでした"
+
+msgid "USB Loader GX is protected"
+msgstr "USB Loaderは保護されています"
+
+msgid "Uninstall"
+msgstr "ｱﾝｲﾝｽﾄｰﾙ"
+
+msgid "Unlock console to use this option."
+msgstr "このｵﾌﾟｼｮﾝを有効にするのにﾛｯｸを解除します"
+
+msgid "Unlocked"
+msgstr "ｱﾝﾛｯｸ"
+
+msgid "Update"
+msgstr "更新"
+
+msgid "Update All"
+msgstr "全てを更新"
+
+msgid "Update DOL"
+msgstr "DOLファイルを更新"
+
+msgid "Update failed"
+msgstr "更新に失敗しました"
+
+msgid "Update to"
+msgstr "Update to"
+
+msgid "Updatepath"
+msgstr "更新Path"
+
+msgid "Updatepath changed."
+msgstr "更新Pathを変更しました"
+
+msgid "Updating"
+msgstr "更新中"
+
+msgid "VIDTV Patch"
+msgstr "VIDTVﾊﾟｯﾁ"
+
+msgid "Video Mode"
+msgstr "ﾋﾞﾃﾞｵﾓｰﾄﾞ"
+
+msgid "Waiting for USB Device"
+msgstr "USBﾃﾞﾊﾞｲｽの応答待ち"
+
+msgid "Waiting..."
+msgstr "暫くお待ちください..."
+
+msgid "WiFi Features"
+msgstr "WiFi機能"
+
+msgid "Widescreen Fix"
+msgstr "ﾜｲﾄﾞｽｸﾘｰﾝ(16:9)"
+
+msgid "Wii Menu"
+msgstr "Wiiﾒﾆｭｰ"
+
+msgid "Wiilight"
+msgstr "Wii light"
+
+msgid "Wrong Password"
+msgstr "間違ったﾊﾟｽﾜｰﾄﾞ"
+
+msgid "Yes"
+msgstr "はい"
+
+msgid "You need to format a partition"
+msgstr "ﾊﾟｰﾃｨｼｮﾝをﾌｫｰﾏｯﾄして下さい"
+
+msgid "available"
+msgstr "利用可能"
+
+msgid "file(s) left"
+msgstr "file(s) left(残りのﾌｧｲﾙ数)"
+
+msgid "files not found on the server!"
+msgstr "ｻｰﾊﾞｰにﾌｧｲﾙがありません!"
+
+msgid "for"
+msgstr "for"
+
+msgid "for diverse patches"
+msgstr "1月"
+
+msgid "for his awesome tool"
+msgstr "1月"
+
+msgid "for hosting the covers/discarts"
+msgstr "ｶﾊﾞｰを配布"
+
+msgid "for hosting the update files"
+msgstr "更新ﾌｧｲﾙを配布"
+
+msgid "for the USB Loader source"
+msgstr ""
+
+msgid "formatted!"
+msgstr "ﾌｫｰﾏｯﾄ完了!"
+
+msgid "free"
+msgstr "空き"
+
+msgid "not set"
+msgstr "ｾｯﾄされてません"
+
+msgid "of"
+msgstr "of"
+
+msgid "seconds left"
+msgstr "完了までの秒数"
+
+msgid "titles.txt Path"
+msgstr "Titles.txt Path"
+
+#~ msgid "Favorite"
+#~ msgstr "お気に入り"
+
+#~ msgid "Alphabetical"
+#~ msgstr "全て"
+
+#~ msgid "Coverpath change"
+#~ msgstr "ｶﾊﾞｰﾊﾟｽの変更"
+
+#~ msgid "BOOT ERROR"
+#~ msgstr "BOOT ERROR"
+
+#~ msgid "Insert a Wii Disc!"
+#~ msgstr "Wiiﾃﾞｨｽｸを挿入して下さい!"
+
+#~ msgid "Failed to boot:"
+#~ msgstr "起動に失敗:"
+
+#~ msgid "Failed to mount front SD-card"
+#~ msgstr "SDｶｰﾄﾞの認識に失敗しました"
+
+#~ msgid "Failed to set USB:"
+#~ msgstr "USB接続に失敗:"
+
+#~ msgid "Favorites"
+#~ msgstr "お気に入り"
+
+#~ msgid "Go Back"
+#~ msgstr "もどる"
+
+#~ msgid "Language change"
+#~ msgstr "言語の変更"
+
+#~ msgid "Sort Game List"
+#~ msgstr "ﾘｽﾄの整理"
+
+#~ msgid "Loading in cIOS249"
+#~ msgstr "cIOS249をロード中..."
+
+#~ msgid "No HDD found!"
+#~ msgstr "HDDを検出できませんでした!"
+
+#~ msgid "Password change"
+#~ msgstr "ﾊﾟｽﾜｰﾄﾞ変更"
+
+#~ msgid "Select the Partition"
+#~ msgstr "ﾊﾟｰﾃｨｼｮﾝ選択"
+
+#~ msgid "you want to format"
+#~ msgstr "ﾌｫｰﾏｯﾄを実行する"
+
+#~ msgid "Try"
+#~ msgstr "試みる"
+
+#~ msgid "You don't have cIOS222"
+#~ msgstr "cIOS222が検出できませんでした"

@@ -20,7 +20,7 @@
 #include "usbloader/wbfs.h"
 #include "usbloader/disc.h"
 #include "usbloader/getentries.h"
-#include "language/language.h"
+#include "language/gettext.h"
 #include "settings/Settings.h"
 #include "prompts/PromptWindows.h"
 #include "prompts/gameinfo.h"
@@ -307,18 +307,18 @@ static int MenuDiscList()
 
 
         char spaceinfo[30];
-        sprintf(spaceinfo,"%.2fGB %s %.2fGB %s",freespace,LANGUAGE.of,(freespace+used),LANGUAGE.free);
+        sprintf(spaceinfo,"%.2fGB %s %.2fGB %s",freespace,tr("of"),(freespace+used),tr("free"));
         GuiText usedSpaceTxt(spaceinfo, 18, (GXColor){THEME.info_r, THEME.info_g, THEME.info_b, 255});
         usedSpaceTxt.SetAlignment(THEME.hddInfoAlign, ALIGN_TOP);
         usedSpaceTxt.SetPosition(THEME.hddInfo_x, THEME.hddInfo_y);
 
         char GamesCnt[15];
-        sprintf(GamesCnt,"%s: %i",LANGUAGE.Games, gameCnt);
+        sprintf(GamesCnt,"%s: %i",tr("Games"), gameCnt);
         GuiText gamecntTxt(GamesCnt, 18, (GXColor){THEME.info_r, THEME.info_g, THEME.info_b, 255});
         gamecntTxt.SetAlignment(THEME.gameCntAlign, ALIGN_TOP);
         gamecntTxt.SetPosition(THEME.gameCnt_x,THEME.gameCnt_y);
 
-        GuiTooltip installBtnTT(LANGUAGE.Installagame);
+        GuiTooltip installBtnTT(tr("Install a game"));
         if (Settings.wsprompt == yes)
                 installBtnTT.SetWidescreen(CFG.widescreen);
 			installBtnTT.SetAlpha(THEME.tooltipAlpha);
@@ -330,7 +330,7 @@ static int MenuDiscList()
         GuiButton installBtn(&installBtnImg, &installBtnImgOver, ALIGN_LEFT, ALIGN_TOP, THEME.install_x, THEME.install_y, &trigA, &btnSoundOver, &btnClick, 1, &installBtnTT,24,-30, 0,5);
 
 
-        GuiTooltip settingsBtnTT(LANGUAGE.settings);
+        GuiTooltip settingsBtnTT(tr("Settings"));
         if (Settings.wsprompt == yes)
                 settingsBtnTT.SetWidescreen(CFG.widescreen);
 		settingsBtnTT.SetAlpha(THEME.tooltipAlpha);
@@ -339,7 +339,7 @@ static int MenuDiscList()
         GuiImage settingsBtnImgOver(&btnSettingsOver);
         settingsBtnImgOver.SetWidescreen(CFG.widescreen);
         GuiButton settingsBtn(&settingsBtnImg,&settingsBtnImgOver, 0, 3, THEME.setting_x, THEME.setting_y, &trigA, &btnSoundOver, &btnClick,1,&settingsBtnTT,65,-30,0,5);
-        GuiTooltip homeBtnTT(LANGUAGE.BacktoHBCorWiiMenu);
+        GuiTooltip homeBtnTT(tr("Back to HBC or Wii Menu"));
         if (Settings.wsprompt == yes)
                 homeBtnTT.SetWidescreen(CFG.widescreen);
 
@@ -351,7 +351,7 @@ static int MenuDiscList()
         homeBtn.RemoveSoundClick();
         homeBtn.SetTrigger(&trigHome);
 
-        GuiTooltip poweroffBtnTT(LANGUAGE.PowerofftheWii);
+        GuiTooltip poweroffBtnTT(tr("Power off the Wii"));
         if (Settings.wsprompt == yes)
                 poweroffBtnTT.SetWidescreen(CFG.widescreen);
 		poweroffBtnTT.SetAlpha(THEME.tooltipAlpha);
@@ -362,7 +362,7 @@ static int MenuDiscList()
         GuiButton poweroffBtn(&poweroffBtnImg,&poweroffBtnImgOver, 0, 3, THEME.power_x, THEME.power_y, &trigA, &btnSoundOver, &btnClick,1,&poweroffBtnTT,-10,-30,1,5);
 
 
-        GuiTooltip sdcardBtnTT(LANGUAGE.ReloadSD);
+        GuiTooltip sdcardBtnTT(tr("Reload SD"));
         if (Settings.wsprompt == yes)
                 sdcardBtnTT.SetWidescreen(CFG.widescreen);
 		sdcardBtnTT.SetAlpha(THEME.tooltipAlpha);
@@ -502,7 +502,7 @@ static int MenuDiscList()
 
 
         //Downloading Covers
-        GuiTooltip DownloadBtnTT(LANGUAGE.ClicktoDownloadCovers);
+        GuiTooltip DownloadBtnTT(tr("Click to Download Covers"));
         if (Settings.wsprompt == yes)
                 DownloadBtnTT.SetWidescreen(CFG.widescreen);
 		DownloadBtnTT.SetAlpha(THEME.tooltipAlpha);
@@ -634,7 +634,7 @@ static int MenuDiscList()
                 if(poweroffBtn.GetState() == STATE_CLICKED)
                 {
 
-                        choice = WindowPrompt(LANGUAGE.HowtoShutdown,0,LANGUAGE.FullShutdown, LANGUAGE.ShutdowntoIdle, LANGUAGE.Cancel,0);
+                        choice = WindowPrompt(tr("How to Shutdown?"),0,tr("Full Shutdown"), tr("Shutdown to Idle"), tr("Cancel"),0);
                         if(choice == 2)
                         {
                                 Sys_ShutdownToIdel();
@@ -652,7 +652,7 @@ static int MenuDiscList()
                 {
                     s32 thetimeofbg = bgMusic->GetPlayTime();
             bgMusic->Stop();
-                        choice = WindowExitPrompt(LANGUAGE.ExitUSBISOLoader,0, LANGUAGE.BacktoLoader,LANGUAGE.WiiMenu,LANGUAGE.Back,0);
+                        choice = WindowExitPrompt(tr("Exit USB Loader GX?"),0, tr("Back to Loader"),tr("Wii Menu"),tr("Back"),0);
                         if(!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path)) {
                 bgMusic->Play();
             } else {
@@ -685,7 +685,7 @@ static int MenuDiscList()
                 }
                 else if(installBtn.GetState() == STATE_CLICKED)
                 {
-                                choice = WindowPrompt(LANGUAGE.Installagame,0,LANGUAGE.Yes,LANGUAGE.No,0,0);
+                                choice = WindowPrompt(tr("Install a game"),0,tr("Yes"),tr("No"),0,0);
                                 if (choice == 1)
                                 {
                                         menu = MENU_INSTALL;
@@ -727,7 +727,7 @@ static int MenuDiscList()
                 {
                     //if(isSdInserted()) {
 					if(isInserted(bootDevice)) {
-                        choice = WindowPrompt(LANGUAGE.CoverDownload, 0, LANGUAGE.NormalCovers, LANGUAGE.t3Covers, LANGUAGE.DiscImages, LANGUAGE.Back); // ask for download choice
+                        choice = WindowPrompt(tr("Cover Download"), 0, tr("Normal Covers"), tr("3D Covers"), tr("Disc Images"), tr("Back")); // ask for download choice
 
                         if (choice != 0)
                         {
@@ -737,7 +737,7 @@ static int MenuDiscList()
 
                                 if(IsNetworkInit() == false)
                                 {
-                                   WindowPrompt(LANGUAGE.Networkiniterror, 0, LANGUAGE.ok,0,0,0);
+                                   WindowPrompt(tr("Network init error"), 0, tr("OK"),0,0,0);
 
                                 } else {
 
@@ -746,27 +746,27 @@ static int MenuDiscList()
                                         {
                                                 char tempCnt[40];
 
-                                                sprintf(tempCnt,"%i %s",cntMissFiles,LANGUAGE.Missingfiles);
-                                                choice = WindowPrompt(LANGUAGE.DownloadBoxartimage,tempCnt,LANGUAGE.Yes,LANGUAGE.No,0,0);
+                                                sprintf(tempCnt,"%i %s",cntMissFiles,tr("Missing files"));
+                                                choice = WindowPrompt(tr("Download Boxart image?"),tempCnt,tr("Yes"),tr("No"),0,0);
                                                 if (choice == 1)
                                                 {
                                                         ret = ProgressDownloadWindow(choice2);
                                                         if (ret == 0) {
-                                                        WindowPrompt(LANGUAGE.Downloadfinished,0,LANGUAGE.ok,0,0,0);
+                                                        WindowPrompt(tr("Download finished"),0,tr("OK"),0,0,0);
                                                         } else {
-                            sprintf(tempCnt,"%i %s",ret,LANGUAGE.filesnotfoundontheserver);
-                            WindowPrompt(LANGUAGE.Downloadfinished,tempCnt,LANGUAGE.ok,0,0,0);
+                            sprintf(tempCnt,"%i %s",ret,tr("files not found on the server!"));
+                            WindowPrompt(tr("Download finished"),tempCnt,tr("OK"),0,0,0);
                                                         }
                                                 }
                                         }
                                         else
                                         {
-                                                WindowPrompt(LANGUAGE.Nofilemissing,0,LANGUAGE.ok,0,0,0);
+                                                WindowPrompt(tr("No file missing!"),0,tr("OK"),0,0,0);
                                         }
                                 }
                         }
             } else {
-                        WindowPrompt(LANGUAGE.NoSDcardinserted, LANGUAGE.InsertaSDCardtodownloadimages, LANGUAGE.ok, 0,0,0);
+                        WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to download images."), tr("OK"), 0,0,0);
             }
             DownloadBtn.ResetState();
                         if (Settings.gameDisplay==list){gameBrowser->SetFocus(1);}
@@ -1381,22 +1381,22 @@ static int MenuInstall()
 	{
 	    VIDEO_WaitVSync ();
 
-		ret = DiscWait(LANGUAGE.InsertDisk,LANGUAGE.Waiting,LANGUAGE.Cancel,0,0);
+		ret = DiscWait(tr("Insert Disk"),tr("Waiting..."),tr("Cancel"),0,0);
 		if (ret < 0) {
-			WindowPrompt (LANGUAGE.ErrorreadingDisc,0,LANGUAGE.Back,0,0,0);
+			WindowPrompt (tr("Error reading Disc"),0,tr("Back"),0,0,0);
 			menu = MENU_DISCLIST;
 			break;
 		}
 		ret = Disc_Open();
 		if (ret < 0) {
-			WindowPrompt (LANGUAGE.CouldnotopenDisc,0,LANGUAGE.Back,0,0,0);
+			WindowPrompt (tr("Could not open Disc"),0,tr("Back"),0,0,0);
 			menu = MENU_DISCLIST;
 			break;
 		}
 
 		ret = Disc_IsWii();
 		if (ret < 0) {
-			choice = WindowPrompt (LANGUAGE.NotaWiiDisc,LANGUAGE.InsertaWiiDisc,LANGUAGE.ok,LANGUAGE.Back,0,0);
+			choice = WindowPrompt (tr("Not a Wii Disc"),"Insert a Wii Disc!",tr("OK"),tr("Back"),0,0);
 
 			if (choice == 1) {
 				menu = MENU_INSTALL;
@@ -1420,7 +1420,7 @@ static int MenuInstall()
 
 		ret = WBFS_CheckGame(headerdisc.id);
 		if (ret) {
-			WindowPrompt (LANGUAGE.Gameisalreadyinstalled,name,LANGUAGE.Back,0,0,0);
+			WindowPrompt (tr("Game is already installed:"),name,tr("Back"),0,0,0);
 			menu = MENU_DISCLIST;
 			break;
 		}
@@ -1434,27 +1434,27 @@ static int MenuInstall()
 		sprintf(gametxt, "%s : %.2fGB", name, gamesize);
 
         wiilight(1);
-		choice = WindowPrompt(LANGUAGE.Continueinstallgame,gametxt,LANGUAGE.ok,LANGUAGE.Cancel,0,0);
+		choice = WindowPrompt(tr("Continue to install game?"),gametxt,tr("OK"),tr("Cancel"),0,0);
 
 		if(choice == 1) {
 
-		sprintf(gametxt, "%s", LANGUAGE.Installinggame);
+		sprintf(gametxt, "%s", tr("Installing game:"));
 
 		if (gamesize > freespace) {
 			char errortxt[50];
-			sprintf(errortxt, "%s: %.2fGB, %s: %.2fGB",LANGUAGE.GameSize, gamesize, LANGUAGE.FreeSpace, freespace);
-			choice = WindowPrompt(LANGUAGE.Notenoughfreespace,errortxt,LANGUAGE.ok, LANGUAGE.Return,0,0);
+			sprintf(errortxt, "%s: %.2fGB, %s: %.2fGB",tr("Game Size"), gamesize, tr("Free Space"), freespace);
+			choice = WindowPrompt(tr("Not enough free space!"),errortxt,tr("OK"), tr("Return"),0,0);
 			if (choice == 1) {
 				ret = ProgressWindow(gametxt, name);
                 wiilight(0);
 				if (ret != 0) {
-					WindowPrompt (LANGUAGE.Installerror,0,LANGUAGE.Back,0,0,0);
+					WindowPrompt (tr("Install Error!"),0,tr("Back"),0,0,0);
 					menu = MENU_DISCLIST;
 					break;
 				}
 				else {
 					__Menu_GetEntries(); //get the entries again
-					WindowPrompt (LANGUAGE.Successfullyinstalled,name,LANGUAGE.ok,0,0,0);
+					WindowPrompt (tr("Successfully installed:"),name,tr("OK"),0,0,0);
 					menu = MENU_DISCLIST;
 					break;
 				}
@@ -1468,12 +1468,12 @@ static int MenuInstall()
 			ret = ProgressWindow(gametxt, name);
             wiilight(0);
 			if (ret != 0) {
-				WindowPrompt (LANGUAGE.Installerror,0,LANGUAGE.Back,0,0,0);
+				WindowPrompt (tr("Install Error!"),0,tr("Back"),0,0,0);
 				menu = MENU_DISCLIST;
 					break;
 			} else {
 				__Menu_GetEntries(); //get the entries again
-				WindowPrompt (LANGUAGE.Successfullyinstalled,name,LANGUAGE.ok,0,0,0);
+				WindowPrompt (tr("Successfully installed:"),name,tr("OK"),0,0,0);
 				menu = MENU_DISCLIST;
 				break;
 			}
@@ -1532,11 +1532,11 @@ static int MenuFormat()
 		f32 size = entry->size * (sector_size / GB_SIZE);
 
         if (size) {
-            sprintf(options.name[cnt], "%s %d:",LANGUAGE.Partition, cnt+1);
+            sprintf(options.name[cnt], "%s %d:",tr("Partition"), cnt+1);
             sprintf (options.value[cnt],"%.2fGB", size);
         } else {
-            sprintf(options.name[cnt], "%s %d:",LANGUAGE.Partition, cnt+1);
-            sprintf (options.value[cnt],LANGUAGE.Cantbeformated);
+            sprintf(options.name[cnt], "%s %d:",tr("Partition"), cnt+1);
+            sprintf (options.value[cnt],tr("Can't be formated"));
         }
     }
 
@@ -1598,22 +1598,22 @@ static int MenuFormat()
                 if (cnt == selected) {
                     partitionEntry *entry = &partitions[selected];
                         if (entry->size) {
-                        sprintf(text, "%s %d : %.2fGB",LANGUAGE.Partition, selected+1, entry->size * (sector_size / GB_SIZE));
+                        sprintf(text, "%s %d : %.2fGB",tr("Partition"), selected+1, entry->size * (sector_size / GB_SIZE));
                         choice = WindowPrompt(
-                        LANGUAGE.Doyouwanttoformat,
+                        tr("Do you want to format:"),
                         text,
-                        LANGUAGE.Yes,
-                        LANGUAGE.No,0,0);
+                        tr("Yes"),
+                        tr("No"),0,0);
                     if(choice == 1) {
-                    ret = FormatingPartition(LANGUAGE.Formattingpleasewait, entry);
+                    ret = FormatingPartition(tr("Formatting, please wait..."), entry);
                         if (ret < 0) {
-                            WindowPrompt(LANGUAGE.Error,LANGUAGE.Failedformating,LANGUAGE.Return,0,0,0);
+                            WindowPrompt(tr("Error !"),tr("Failed formating"),tr("Return"),0,0,0);
                             menu = MENU_SETTINGS;
 
                         } else {
                             ret = WBFS_Open();
-                            sprintf(text, "%s %s", text,LANGUAGE.formated);
-                            WindowPrompt(LANGUAGE.Success,text,LANGUAGE.ok,0,0,0);
+                            sprintf(text, "%s %s", text,tr("formatted!"));
+                            WindowPrompt(tr("Success:"),text,tr("OK"),0,0,0);
                             menu = MENU_DISCLIST;
                         }
                     }
@@ -1627,7 +1627,7 @@ static int MenuFormat()
 
 	    if(poweroffBtn.GetState() == STATE_CLICKED)
 		{
-		    choice = WindowPrompt (LANGUAGE.ShutdownSystem,LANGUAGE.Areyousure,LANGUAGE.Yes,LANGUAGE.No,0,0);
+		    choice = WindowPrompt (tr("Shutdown System"),tr("Are you sure?"),tr("Yes"),tr("No"),0,0);
 			if(choice == 1)
 			{
 				Sys_Shutdown();
@@ -1635,7 +1635,7 @@ static int MenuFormat()
 
 		} else if(exitBtn.GetState() == STATE_CLICKED)
 		{
-		    choice = WindowPrompt (LANGUAGE.ReturntoWiiMenu,LANGUAGE.Areyousure,LANGUAGE.Yes,LANGUAGE.No,0,0);
+		    choice = WindowPrompt (tr("Return to Wii Menu"),tr("Are you sure?"),tr("Yes"),tr("No"),0,0);
 			if(choice == 1)
 			{
 				Sys_LoadMenu();
@@ -1671,10 +1671,10 @@ static int MenuCheck()
         wbfsinit = WBFS_Init(WBFS_DEVICE_USB);
         if (wbfsinit < 0)
         {
-            ret2 = WindowPrompt(LANGUAGE.NoUSBDevicefound,
-                    LANGUAGE.Doyouwanttoretryfor30secs,
+            ret2 = WindowPrompt(tr("No USB Device found."),
+                    tr("Do you want to retry for 30 secs?"),
                     "cIOS249", "cIOS222",
-                    LANGUAGE.BacktoWiiMenu, 0);
+                    tr("Back to Wii Menu"), 0);
             SDCard_deInit();
             USBDevice_deInit();
             WPAD_Flush(0);
@@ -1687,29 +1687,29 @@ static int MenuCheck()
             } else {
 				Sys_LoadMenu();
             }
-			ret2 = DiscWait(LANGUAGE.NoUSBDevice, LANGUAGE.WaitingforUSBDevice, 0, 0, 1);
+			ret2 = DiscWait(tr("No USB Device"), tr("Waiting for USB Device"), 0, 0, 1);
 			//reinitialize SD and USB
 			Wpad_Init();
             WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
             WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
             if (ret2 < 0) {
-                WindowPrompt (LANGUAGE.Error,LANGUAGE.USBDevicenotfound, LANGUAGE.ok, 0,0,0);
+                WindowPrompt (tr("Error !"),tr("USB Device not found"), tr("OK"), 0,0,0);
                 Sys_LoadMenu();
             }
         }
 
         ret2 = Disc_Init();
         if (ret2 < 0) {
-            WindowPrompt (LANGUAGE.Error,LANGUAGE.CouldnotinitializeDIPmodule,LANGUAGE.ok, 0,0,0);
+            WindowPrompt (tr("Error !"),tr("Could not initialize DIP module!"),tr("OK"), 0,0,0);
             Sys_LoadMenu();
         }
 
         ret2 = WBFS_Open();
         if (ret2 < 0) {
-            choice = WindowPrompt(LANGUAGE.NoWBFSpartitionfound,
-                                    LANGUAGE.Youneedtoformatapartition,
-                                    LANGUAGE.Format,
-                                    LANGUAGE.Return,0,0);
+            choice = WindowPrompt(tr("No WBFS partition found"),
+                                    tr("You need to format a partition"),
+                                    tr("Format"),
+                                    tr("Return"),0,0);
                 if(choice == 0)
                 {
                     Sys_LoadMenu();
@@ -1718,7 +1718,7 @@ static int MenuCheck()
 					u32 sector_size;
                     ret2 = Partition_GetEntries(partitions, &sector_size);
                     if (ret2 < 0) {
-                            WindowPrompt (LANGUAGE.Nopartitionsfound,0, LANGUAGE.Restart, 0,0,0);
+                            WindowPrompt (tr("No partitions found"),0, tr("Restart"), 0,0,0);
                             Sys_LoadMenu();
 
                     }

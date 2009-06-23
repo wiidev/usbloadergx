@@ -1,0 +1,790 @@
+# USB Loader GX language source file.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: USB Loader GX\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-06-22 20:10+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "0 (Everyone)"
+msgstr ""
+
+msgid "1 (Child 7+)"
+msgstr ""
+
+msgid "2 (Teen 12+)"
+msgstr ""
+
+msgid "3 (Mature 16+)"
+msgstr "3 (Adulto)"
+
+msgid "3D Covers"
+msgstr "Capas 3D"
+
+msgid "4 (Adults Only 18+)"
+msgstr ""
+
+msgid "All the features of USB Loader GX are unlocked."
+msgstr "As configurações do USB Loader GX foram desbloqueadas."
+
+msgid "Alternate DOL"
+msgstr ""
+
+msgid "Anti 002 fix"
+msgstr ""
+
+msgid "App Language"
+msgstr "Idioma"
+
+msgid "Apr"
+msgstr "Abr"
+
+msgid "Are you sure?"
+msgstr "Tem certeza?"
+
+msgid "Aug"
+msgstr "Ago"
+
+msgid "AutoPatch"
+msgstr "Mudança Automática"
+
+msgid "Back"
+msgstr "Voltar"
+
+msgid "Back to HBC or Wii Menu"
+msgstr "Voltar ao Loader ou Menu do Wii"
+
+msgid "Back to Loader"
+msgstr "Voltar ao Loader"
+
+msgid "Back to Wii Menu"
+msgstr "Voltar Menu Wii"
+
+msgid "Backgroundmusic"
+msgstr "Música de Fundo"
+
+msgid "Backgroundmusic Path changed."
+msgstr "Local Música de Fundo alterado"
+
+msgid "Big thanks to:"
+msgstr "Um obrigado a:"
+
+msgid "Block IOS Reload"
+msgstr ""
+
+msgid "Boot/Standard"
+msgstr "Início/Padrão"
+
+msgid "Both"
+msgstr "Ambos"
+
+msgid "Can't be formated"
+msgstr "Não pôde ser formatado"
+
+msgid "Can't create directory"
+msgstr "Não foi possível criar o diretório"
+
+msgid "Can't delete:"
+msgstr "Não foi possível apagar:"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Cheatcodes Path"
+msgstr "Local Códigos Trapaça"
+
+msgid "Cheatcodes Path changed"
+msgstr "Local Códigos Trapaça alterado"
+
+msgid "Checking for Updates"
+msgstr "Procurando Atualizações..."
+
+msgid "Click to Download Covers"
+msgstr "Aperte para baixar Capas"
+
+msgid "Clock"
+msgstr "Relógio"
+
+msgid "Close"
+msgstr "Fechar"
+
+msgid "Console"
+msgstr ""
+
+msgid "Console Default"
+msgstr "Padrão do Console"
+
+msgid "Console Locked"
+msgstr "Console Bloqueado"
+
+msgid "Console should be unlocked to modify it."
+msgstr "Você precisa primeiro desbloquear para poder modificar."
+
+msgid "Continue to install game?"
+msgstr "Continuar instalação do jogo?"
+
+msgid "Controllevel"
+msgstr "Nível de Controle"
+
+msgid "Correct Password"
+msgstr "Senha Correta"
+
+msgid "Could not initialize DIP module!"
+msgstr "Não foi possível iniciar o módulo DIP!"
+
+msgid "Could not initialize network!"
+msgstr "Não foi possível inciar a rede!"
+
+msgid "Could not open Disc"
+msgstr "Não foi possível abrir o Disco"
+
+msgid "Cover Download"
+msgstr "Baixar Capas"
+
+msgid "Cover Path"
+msgstr "Local Capas"
+
+msgid "Coverpath Changed"
+msgstr "Local Capas alterado"
+
+msgid "Credits"
+msgstr "Créditos"
+
+msgid "Custom Paths"
+msgstr "Personalizar Locais"
+
+msgid "Dec"
+msgstr "Dez"
+
+msgid "Default"
+msgstr "Padrão"
+
+msgid "Default Gamesettings"
+msgstr "Configurações padrão do jogo"
+
+msgid "Default Settings"
+msgstr "Configurações padrão"
+
+msgid "Developed by"
+msgstr "Desenvolvido por"
+
+msgid "Disc Default"
+msgstr "Padrão do Disco"
+
+msgid "Disc Images"
+msgstr "Imagem Disco"
+
+msgid "Discimage Path"
+msgstr "Local Imagem Disco"
+
+msgid "Discpath Changed"
+msgstr "Local Imagem Disco alterado"
+
+msgid "Discpath change"
+msgstr "Alterar local Imagem Disco"
+
+msgid "DiskFlip"
+msgstr ""
+
+msgid "Display"
+msgstr "Exibir"
+
+msgid "Do you really want to delete:"
+msgstr "Quer realmente apagar:"
+
+msgid "Do you want to change language?"
+msgstr "Você deseja alterar o idioma?"
+
+msgid "Do you want to format:"
+msgstr "Deseja formatar:"
+
+msgid "Do you want to retry for 30 secs?"
+msgstr "Deseja tentar novamente em 30s?"
+
+msgid "Dol Path"
+msgstr ""
+
+msgid "Dolpath Changed"
+msgstr ""
+
+msgid "Dolpath change"
+msgstr ""
+
+msgid "Download Boxart image?"
+msgstr "Baixar imagem da Caixa?"
+
+msgid "Download finished"
+msgstr "Pronto"
+
+msgid "Downloading file"
+msgstr "Baixando arquivo:"
+
+msgid "Dutch"
+msgstr "Holandês"
+
+msgid "English"
+msgstr "Inglês"
+
+msgid "Error !"
+msgstr "Erro!"
+
+msgid "Error 002 fix"
+msgstr ""
+
+msgid "Error reading Disc"
+msgstr "Erro ao ler o Disco"
+
+msgid "Exit USB Loader GX?"
+msgstr "Deseja sair do USB Loader GX?"
+
+msgid "Failed formating"
+msgstr "Falha ao formatar"
+
+msgid "Feb"
+msgstr "Fev"
+
+msgid "File not found."
+msgstr "Arquivo não encontrado."
+
+msgid "Flip-X"
+msgstr "Paginação Horizontal"
+
+msgid "Force"
+msgstr "Forçar"
+
+msgid "Format"
+msgstr "Formatar"
+
+msgid "Formatting, please wait..."
+msgstr "Formatando, por favor aguarde..."
+
+msgid "Free Space"
+msgstr "Espaço Livre"
+
+msgid "French"
+msgstr "Francês"
+
+msgid "Full Shutdown"
+msgstr "Desligar"
+
+msgid "GUI Settings"
+msgstr "Configurações do Menu"
+
+msgid "Game ID"
+msgstr "ID do Jogo"
+
+msgid "Game Language"
+msgstr "Idioma do Jogo"
+
+msgid "Game Load"
+msgstr "Carregar Jogo"
+
+msgid "Game Region"
+msgstr "Região do Jogo"
+
+msgid "Game Size"
+msgstr "Tamanho do Jogo"
+
+msgid "Game is already installed:"
+msgstr "Este jogo já está instalado:"
+
+msgid "Games"
+msgstr "Jogos"
+
+msgid "German"
+msgstr "Alemão"
+
+msgid "HOME Menu"
+msgstr "Menu Inicial"
+
+msgid "Hour"
+msgstr "Horas"
+
+msgid "How do you want to update?"
+msgstr "Como você deseja atualizar?"
+
+msgid "How to Shutdown?"
+msgstr "Como Desligar?"
+
+msgid "Initializing Network"
+msgstr "Iniciando Rede"
+
+msgid "Insert Disk"
+msgstr "Insira o Disco"
+
+msgid "Insert an SD-Card to download images."
+msgstr "Insira um cartão SD para baixar imagens."
+
+msgid "Insert an SD-Card to save."
+msgstr "Insira um cartão SD para guardar."
+
+msgid "Insert an SD-Card to use this option."
+msgstr "Insira um cartão SD para usar esta opção."
+
+msgid "Install Error!"
+msgstr "Erro ao Instalar!"
+
+msgid "Install a game"
+msgstr "Instalar um jogo"
+
+msgid "Installing game:"
+msgstr "Instalando jogo:"
+
+msgid "Italian"
+msgstr "Italiano"
+
+msgid "Jan"
+msgstr "Jan"
+
+msgid "Japanese"
+msgstr "Japonês"
+
+msgid "July"
+msgstr "Jul"
+
+msgid "June"
+msgstr "Jun"
+
+msgid "Keyboard"
+msgstr "Teclado"
+
+msgid "Korean"
+msgstr "Coreano"
+
+msgid "Language change:"
+msgstr ""
+
+msgid "Languagepath changed."
+msgstr "Local Idioma alterado"
+
+msgid "Left"
+msgstr "Esquerda"
+
+msgid "Like SysMenu"
+msgstr "Igual ao Menu do Wii"
+
+msgid "Loading standard language."
+msgstr "Carregado idioma padrão."
+
+msgid "Loading standard music."
+msgstr ""
+
+msgid "Lock Console"
+msgstr "Bloquear console"
+
+msgid "Locked"
+msgstr "Bloqueado"
+
+msgid "Mar"
+msgstr "Mar"
+
+msgid "May"
+msgstr "Mai"
+
+msgid "Missing files"
+msgstr "Arquivos faltando"
+
+msgid "Music Volume"
+msgstr "Volume"
+
+msgid "Neither"
+msgstr "Nenhum"
+
+msgid "Network init error"
+msgstr "Erro ao iniciar a rede"
+
+msgid "Next"
+msgstr "Próximo"
+
+msgid "No"
+msgstr "Não"
+
+msgid "No SD-Card inserted!"
+msgstr "Cartão SD não inserido!"
+
+msgid "No USB Device"
+msgstr "Sem dispositivo USB"
+
+msgid "No USB Device found."
+msgstr "Dispositivo USB não encontrado."
+
+msgid "No WBFS partition found"
+msgstr "Partição WBFS não encontrada"
+
+msgid "No file missing!"
+msgstr "Não há arquivos faltando!"
+
+msgid "No new updates."
+msgstr "Não há novas atualizações."
+
+msgid "No partitions found"
+msgstr "Partições não encontradas"
+
+msgid "Normal"
+msgstr "Normal"
+
+msgid "Normal Covers"
+msgstr "Capas Normais"
+
+msgid "Not a Wii Disc"
+msgstr "Não é um Disco de Wii"
+
+msgid "Not enough free space!"
+msgstr "Não há espaço livre suficiente!"
+
+msgid "Not supported format!"
+msgstr "Formato não suportado!"
+
+msgid "Nov"
+msgstr "Nov"
+
+msgid "OFF"
+msgstr "Desligado"
+
+msgid "OK"
+msgstr ""
+
+msgid "ON"
+msgstr "Ligado"
+
+msgid "Oct"
+msgstr "Out"
+
+msgid "Official Site"
+msgstr "Site Oficial"
+
+msgid "Only for Install"
+msgstr "Só para Instalação"
+
+msgid "Parental Control"
+msgstr "Controle de Pais"
+
+msgid "Parental control"
+msgstr ""
+
+msgid "Partition"
+msgstr "Partição"
+
+msgid "Password"
+msgstr "Senha"
+
+msgid "Password Changed"
+msgstr "Senha alterada"
+
+msgid "Password has been changed"
+msgstr "A Senha foi alterada"
+
+msgid "Patch Country Strings"
+msgstr "Corrigir região de jogos"
+
+msgid "Path of titles.txt change"
+msgstr "Alterar local titles.txt"
+
+msgid "Path of titles.txt changed."
+msgstr "Local titles.txt alterado"
+
+msgid "Play Count"
+msgstr "Jogado"
+
+msgid "Power off the Wii"
+msgstr "Desligar o Wii"
+
+msgid "Prev"
+msgstr "Anterior"
+
+msgid "Prompts Buttons"
+msgstr "Botões"
+
+msgid "Published by"
+msgstr "Publicado por"
+
+msgid "Quick Boot"
+msgstr "Inicio Rápido"
+
+msgid "Released"
+msgstr ""
+
+msgid "Reload SD"
+msgstr "Recarregar cartão SD"
+
+msgid "Rename Game on WBFS"
+msgstr "Renomear jogo na partição WBFS"
+
+msgid "Reset Playcounter"
+msgstr ""
+
+msgid "Restart"
+msgstr "Reiniciar"
+
+msgid "Restarting..."
+msgstr "Reiniciando..."
+
+msgid "Return"
+msgstr "Voltar"
+
+msgid "Return to Wii Menu"
+msgstr "Voltar ao Menu do Wii"
+
+msgid "Right"
+msgstr "Direita"
+
+msgid "Rumble"
+msgstr "Vibração"
+
+msgid "SChinese"
+msgstr "Chinês Simplificado"
+
+msgid "SFX Volume"
+msgstr "Volume de Efeitos"
+
+msgid "Save"
+msgstr "Guardar"
+
+msgid "Save Failed"
+msgstr "Falha ao Guardar"
+
+msgid "Screensaver"
+msgstr ""
+
+msgid "Sept"
+msgstr "Set"
+
+msgid "Set as backgroundmusic?"
+msgstr "Configurar como música de fundo?"
+
+msgid "Settings"
+msgstr "Configurações"
+
+msgid "Shutdown System"
+msgstr "Desligar Sistema"
+
+msgid "Shutdown to Idle"
+msgstr "Em espera"
+
+msgid "Sound"
+msgstr "Som"
+
+msgid "Spanish"
+msgstr "Espanhol"
+
+msgid "Special thanks to:"
+msgstr "Agradecimento em Especial a"
+
+msgid "Standard"
+msgstr "Padrão"
+
+msgid "Success:"
+msgstr "Sucesso:"
+
+msgid "Successfully Saved"
+msgstr "Guardado com Sucesso"
+
+msgid "Successfully Updated"
+msgstr "Atualizado com Sucesso"
+
+msgid "Successfully deleted:"
+msgstr "Desinstalado com Sucesso:"
+
+msgid "Successfully installed:"
+msgstr "Instalado com Sucesso:"
+
+msgid "System Default"
+msgstr "Pradrão do Sistema"
+
+msgid "TChinese"
+msgstr "Chinês Tradicional"
+
+msgid "ThemePath"
+msgstr "Local Temas"
+
+msgid "Themepath Changed"
+msgstr "Local Temas alterado"
+
+msgid "Themepath change"
+msgstr "Alterar local Temas"
+
+msgid "Time left:"
+msgstr "Resta:"
+
+msgid "Titles from XML"
+msgstr ""
+
+msgid "Tooltips"
+msgstr "Dicas"
+
+msgid "USB Device not found"
+msgstr "Dispositivo USB não encontrado"
+
+msgid "USB Loader GX is protected"
+msgstr "USB Loader GX está bloqueado"
+
+msgid "Uninstall"
+msgstr "Desinstalar"
+
+msgid "Unlock console to use this option."
+msgstr "Desbloqueio o Console para usar esta Opção"
+
+msgid "Unlocked"
+msgstr "Desbloqueado"
+
+msgid "Update"
+msgstr "Atualizar"
+
+msgid "Update All"
+msgstr "Atualizar Tudo"
+
+msgid "Update DOL"
+msgstr "Atualizar arquivo .dol"
+
+msgid "Update failed"
+msgstr "Falhar ao atualizar"
+
+msgid "Update to"
+msgstr "Atualizando em"
+
+msgid "Updatepath"
+msgstr "Local Atualizações"
+
+msgid "Updatepath changed."
+msgstr "Local Atualizações alterado."
+
+msgid "Updating"
+msgstr "Atualizando..."
+
+msgid "VIDTV Patch"
+msgstr "Corrigir VIDTV"
+
+msgid "Video Mode"
+msgstr "Modo de Vídeo"
+
+msgid "Waiting for USB Device"
+msgstr "Aguardando o Dispositivo USB"
+
+msgid "Waiting..."
+msgstr "Aguardando..."
+
+msgid "WiFi Features"
+msgstr "Atributos WiFi"
+
+msgid "Widescreen Fix"
+msgstr "Corrigir Widescreen"
+
+msgid "Wii Menu"
+msgstr "Menu do Wii"
+
+msgid "Wiilight"
+msgstr "Luz do Wii"
+
+msgid "Wrong Password"
+msgstr "Senha incorreta"
+
+msgid "Yes"
+msgstr "Sim"
+
+msgid "You need to format a partition"
+msgstr "Você precisa formatar a partição"
+
+msgid "available"
+msgstr "disponível"
+
+msgid "file(s) left"
+msgstr "arquivo(s) restante(s)"
+
+msgid "files not found on the server!"
+msgstr "arquivos não encontrados no servidor!"
+
+msgid "for"
+msgstr "com"
+
+msgid "for diverse patches"
+msgstr "pelas diversas correções"
+
+msgid "for his awesome tool"
+msgstr "por sua incrível ferramenta"
+
+msgid "for hosting the covers/discarts"
+msgstr "por hospedar Capas de Caixas/Disco"
+
+msgid "for hosting the update files"
+msgstr "por hospedar Atualizações"
+
+msgid "for the USB Loader source"
+msgstr "e ter liberado o código fonte"
+
+msgid "formatted!"
+msgstr "Formatado!"
+
+msgid "free"
+msgstr "livres"
+
+msgid "not set"
+msgstr "Sem Senha!"
+
+msgid "of"
+msgstr "de"
+
+msgid "seconds left"
+msgstr "segundos restantes"
+
+msgid "titles.txt Path"
+msgstr "Local Titles.txt"
+
+#~ msgid "Favorite"
+#~ msgstr "Adicionar aos Favoritos"
+
+#~ msgid "Alphabetical"
+#~ msgstr "Alfabética"
+
+#~ msgid "Coverpath change"
+#~ msgstr "Alterar local Capas"
+
+#~ msgid "BOOT ERROR"
+#~ msgstr "Erro ao Iniciar"
+
+#~ msgid "Insert a Wii Disc!"
+#~ msgstr "Insira um Disco de Wii!"
+
+#~ msgid "Failed to boot:"
+#~ msgstr "Falha ao iniciar:"
+
+#~ msgid "Failed to mount front SD-card"
+#~ msgstr "Falha ao montar cartão SD frontal"
+
+#~ msgid "Failed to set USB:"
+#~ msgstr "Falha ao iniciar USB:"
+
+#~ msgid "Favorites"
+#~ msgstr "Favoritos"
+
+#~ msgid "Go Back"
+#~ msgstr "Voltar"
+
+#~ msgid "Loading in cIOS249"
+#~ msgstr "Carregando no cIOS249"
+
+#~ msgid "Sort Game List"
+#~ msgstr "Classificar Lista de Jogos"
+
+#~ msgid "No HDD found!"
+#~ msgstr "Disco Rígido não encontrado!"
+
+#~ msgid "Password change"
+#~ msgstr "Alterar Senha"
+
+#~ msgid "Select the Partition"
+#~ msgstr "Selecione a partição"
+
+#~ msgid "you want to format"
+#~ msgstr "Deseja formatar?"
+
+#~ msgid "Try"
+#~ msgstr "Tentar"
+
+#~ msgid "You don't have cIOS222"
+#~ msgstr "Você não tem o cIOS222"

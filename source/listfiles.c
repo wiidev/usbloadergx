@@ -93,3 +93,14 @@ int GetAllDirFiles(char * filespath)
 	qsort(alldirfiles, countfiles, sizeof(char[70]), filenamescmp);
 	return countfiles;
 }
+
+bool checkfile(char * path)
+{
+    FILE * f;
+    f = fopen(path,"r");
+    if(f) {
+    fclose(f);
+    return true;
+    }
+return false;
+}

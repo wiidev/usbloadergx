@@ -63,7 +63,7 @@ typedef struct ftgxDataOffset_ {
  * @param textureFormat	Optional format (GX_TF_*) of the texture as defined by the libogc gx.h header file. If not specified default value is GX_TF_RGBA8.
  * @param vertexIndex	Optional vertex format index (GX_VTXFMT*) of the glyph textures as defined by the libogc gx.h header file. If not specified default value is GX_VTXFMT1.
  */
-FreeTypeGX::FreeTypeGX(uint8_t textureFormat, uint8_t vertexIndex) {
+FreeTypeGX::FreeTypeGX(uint8_t textureFormat, uint8_t vertexIndex) : ftFace(NULL), ftFace_fromFile(NULL) {
 	FT_Init_FreeType(&this->ftLibrary);
 
 	this->textureFormat = textureFormat;
@@ -75,8 +75,8 @@ FreeTypeGX::FreeTypeGX(uint8_t textureFormat, uint8_t vertexIndex) {
  * Default destructor for the FreeTypeGX class.
  */
 FreeTypeGX::~FreeTypeGX() {
-	FT_Done_FreeType(this->ftLibrary);
 	this->unloadFont();
+	FT_Done_FreeType(this->ftLibrary);
 }
 
 /**
@@ -209,20 +209,25 @@ uint16_t FreeTypeGX::loadFont(char* fontPath, uint8_t* fontBuffer, FT_Long buffe
 	this->ftPointSize = pointSize;
 	struct stat st;
 
-	if(fontPath && (stat(fontPath, &st)==0)) {
+	if(fontPath && (stat(fontPath, &st)==0))
+	{
 		FILE *fontfile = fopen(fontPath, "rb");
 		if (fontfile) {
+			FT_Long ftFace_fromFile_Size;
+		
 			fseek(fontfile, 0, SEEK_END);
-			bufferSize = ftell(fontfile);
+			ftFace_fromFile_Size = ftell(fontfile);
 			fseek(fontfile, 0, SEEK_SET);
-			fontBuffer = (uint8_t*)malloc(bufferSize);
-			if (fontBuffer != NULL) {
-				fread(fontBuffer, 1, bufferSize, fontfile);
+			ftFace_fromFile = (uint8_t*)malloc(ftFace_fromFile_Size);
+			if (ftFace_fromFile != NULL) {
+				fread(ftFace_fromFile, 1, ftFace_fromFile_Size, fontfile);
+				FT_New_Memory_Face(this->ftLibrary, ftFace_fromFile, ftFace_fromFile_Size, 0, &this->ftFace);
 			}
 			fclose(fontfile);
 		}
 	}
-	FT_New_Memory_Face(this->ftLibrary, (FT_Byte *)fontBuffer, bufferSize, 0, &this->ftFace);
+	if (ftFace_fromFile == NULL)
+		FT_New_Memory_Face(this->ftLibrary, (FT_Byte *)fontBuffer, bufferSize, 0, &this->ftFace);
 
 	if(this->ftPointSize > 0)
 		FT_Set_Pixel_Sizes(this->ftFace, 0, this->ftPointSize);
@@ -245,12 +250,27 @@ uint16_t FreeTypeGX::loadFont(const char* fontPath, const uint8_t* fontBuffer, F
 	return this->loadFont((char*)fontPath, (uint8_t *)fontBuffer, bufferSize, pointSize, cacheAll);
 }
 
+void FreeTypeGX::unloadFont() {
+	clearGlyphData();
+	
+	if(this->ftFace)
+	{
+		FT_Done_Face(this->ftFace);
+		this->ftFace = NULL;
+	}
+	if(this->ftFace_fromFile)
+	{
+		free(this->ftFace_fromFile);
+		this->ftFace_fromFile = NULL;
+	}
+}
 /**
  * Clears all loaded font glyph data.
  *
  * This routine clears all members of the font map structure and frees all allocated memory back to the system.
  */
-void FreeTypeGX::unloadFont() {
+void FreeTypeGX::clearGlyphData()
+{
 	if(this->fontData.size() == 0)
 		return;
 
@@ -265,7 +285,7 @@ void FreeTypeGX::unloadFont() {
 }
 
 void FreeTypeGX::changeSize(FT_UInt vPointSize, FT_UInt hPointSize/*=0*/) {
-	this->unloadFont();
+	this->clearGlyphData();
 	this->ftPointSize = vPointSize;
 	FT_Set_Pixel_Sizes(this->ftFace, hPointSize, this->ftPointSize);
 }

@@ -1,0 +1,790 @@
+# USB Loader GX language source file.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: USB Loader GX\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-06-22 20:10+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "0 (Everyone)"
+msgstr ""
+
+msgid "1 (Child 7+)"
+msgstr ""
+
+msgid "2 (Teen 12+)"
+msgstr ""
+
+msgid "3 (Mature 16+)"
+msgstr "3 (Voksen)"
+
+msgid "3D Covers"
+msgstr "3D cover"
+
+msgid "4 (Adults Only 18+)"
+msgstr ""
+
+msgid "All the features of USB Loader GX are unlocked."
+msgstr "Alle funksjonene til USB Loader GX er opplåst."
+
+msgid "Alternate DOL"
+msgstr ""
+
+msgid "Anti 002 fix"
+msgstr ""
+
+msgid "App Language"
+msgstr "Program språk"
+
+msgid "Apr"
+msgstr "Apr"
+
+msgid "Are you sure?"
+msgstr "Er du sikker?"
+
+msgid "Aug"
+msgstr "Aug"
+
+msgid "AutoPatch"
+msgstr "AutoPatch"
+
+msgid "Back"
+msgstr "Tilbake"
+
+msgid "Back to HBC or Wii Menu"
+msgstr "Tilbake til HBC eller Wii meny"
+
+msgid "Back to Loader"
+msgstr "HBC/Loader"
+
+msgid "Back to Wii Menu"
+msgstr "Wii meny"
+
+msgid "Backgroundmusic"
+msgstr "Bakgrunnsmusikk"
+
+msgid "Backgroundmusic Path changed."
+msgstr "Bakgrunnsmusikk sti endret"
+
+msgid "Big thanks to:"
+msgstr "Stor takk til:"
+
+msgid "Block IOS Reload"
+msgstr ""
+
+msgid "Boot/Standard"
+msgstr "Boot/Standard"
+
+msgid "Both"
+msgstr "Begge"
+
+msgid "Can't be formated"
+msgstr "Kan ikke formateres"
+
+msgid "Can't create directory"
+msgstr "Kan ikke opprette mappestruktur"
+
+msgid "Can't delete:"
+msgstr "Kan ikke slette:"
+
+msgid "Cancel"
+msgstr "Avbryt"
+
+msgid "Cheatcodes Path"
+msgstr "Juksekode sti"
+
+msgid "Cheatcodes Path changed"
+msgstr "Juksekode sti endret"
+
+msgid "Checking for Updates"
+msgstr "Søker etter oppdateringer"
+
+msgid "Click to Download Covers"
+msgstr "Klikk for å laste ned cover"
+
+msgid "Clock"
+msgstr "Klokke"
+
+msgid "Close"
+msgstr "Lukk"
+
+msgid "Console"
+msgstr ""
+
+msgid "Console Default"
+msgstr "Konsoll Standard"
+
+msgid "Console Locked"
+msgstr "Konsoll låst"
+
+msgid "Console should be unlocked to modify it."
+msgstr "Konsoll må være opplåst for å modifisere."
+
+msgid "Continue to install game?"
+msgstr "Fortsett å installere spill?"
+
+msgid "Controllevel"
+msgstr "Kontrollnivå"
+
+msgid "Correct Password"
+msgstr "Riktig passord"
+
+msgid "Could not initialize DIP module!"
+msgstr "Kan ikke initialisere DIP modul!"
+
+msgid "Could not initialize network!"
+msgstr "Kan ikke initialisere nettverk!"
+
+msgid "Could not open Disc"
+msgstr "Kan ikke åpne plate"
+
+msgid "Cover Download"
+msgstr "Cover nedlasting"
+
+msgid "Cover Path"
+msgstr "Cover sti"
+
+msgid "Coverpath Changed"
+msgstr "Cover sti endret"
+
+msgid "Credits"
+msgstr "Medvirkende"
+
+msgid "Custom Paths"
+msgstr "Endre stier"
+
+msgid "Dec"
+msgstr "Des"
+
+msgid "Default"
+msgstr "Standard"
+
+msgid "Default Gamesettings"
+msgstr "Standard innstillinger"
+
+msgid "Default Settings"
+msgstr "Standard innstillinger"
+
+msgid "Developed by"
+msgstr "Utviklet av"
+
+msgid "Disc Default"
+msgstr "Spill Standard"
+
+msgid "Disc Images"
+msgstr "Plate bilder"
+
+msgid "Discimage Path"
+msgstr "Plate sti"
+
+msgid "Discpath Changed"
+msgstr "Plate sti endret"
+
+msgid "Discpath change"
+msgstr "Endre plate sti"
+
+msgid "DiskFlip"
+msgstr ""
+
+msgid "Display"
+msgstr "Vis"
+
+msgid "Do you really want to delete:"
+msgstr "Er du sikker på at du vil slette:"
+
+msgid "Do you want to change language?"
+msgstr "Vil du endre språk?"
+
+msgid "Do you want to format:"
+msgstr "Vil du formatere:"
+
+msgid "Do you want to retry for 30 secs?"
+msgstr "Vil du fortsette å prøve i 30 sekunder?"
+
+msgid "Dol Path"
+msgstr ""
+
+msgid "Dolpath Changed"
+msgstr ""
+
+msgid "Dolpath change"
+msgstr ""
+
+msgid "Download Boxart image?"
+msgstr "Last ned cover bilde?"
+
+msgid "Download finished"
+msgstr "Nedlasting ferdig"
+
+msgid "Downloading file"
+msgstr "Laster ned fil:"
+
+msgid "Dutch"
+msgstr "Nederlandsk"
+
+msgid "English"
+msgstr "Engelsk"
+
+msgid "Error !"
+msgstr "Feil !"
+
+msgid "Error 002 fix"
+msgstr ""
+
+msgid "Error reading Disc"
+msgstr "Feil ved lesing av plate"
+
+msgid "Exit USB Loader GX?"
+msgstr "Avslutt USB Loader GX?"
+
+msgid "Failed formating"
+msgstr "Feil ved formatering"
+
+msgid "Feb"
+msgstr "Feb"
+
+msgid "File not found."
+msgstr "Fil ikke funnet."
+
+msgid "Flip-X"
+msgstr "Flip-X"
+
+msgid "Force"
+msgstr "Tving"
+
+msgid "Format"
+msgstr "Formater"
+
+msgid "Formatting, please wait..."
+msgstr "Formaterer, vennligst vent..."
+
+msgid "Free Space"
+msgstr "Ledig plass"
+
+msgid "French"
+msgstr "Fransk"
+
+msgid "Full Shutdown"
+msgstr "Skru helt av"
+
+msgid "GUI Settings"
+msgstr "GUI innstillinger"
+
+msgid "Game ID"
+msgstr "Spill ID"
+
+msgid "Game Language"
+msgstr "Språk"
+
+msgid "Game Load"
+msgstr "Lasting av spill"
+
+msgid "Game Region"
+msgstr "Region"
+
+msgid "Game Size"
+msgstr "Spill størrelse"
+
+msgid "Game is already installed:"
+msgstr "Spillet er allerede installert:"
+
+msgid "Games"
+msgstr "Spill"
+
+msgid "German"
+msgstr "Tysk"
+
+msgid "HOME Menu"
+msgstr "HOME Meny"
+
+msgid "Hour"
+msgstr "Timer"
+
+msgid "How do you want to update?"
+msgstr "Hvordan vil du oppdatere?"
+
+msgid "How to Shutdown?"
+msgstr "Hvordan skru av?"
+
+msgid "Initializing Network"
+msgstr "Initialiserer nettverk"
+
+msgid "Insert Disk"
+msgstr "Sett inn plate"
+
+msgid "Insert an SD-Card to download images."
+msgstr "Sett inn et SD-kort for å laste ned bilder."
+
+msgid "Insert an SD-Card to save."
+msgstr "Sett inn et SD-kort for å lagre."
+
+msgid "Insert an SD-Card to use this option."
+msgstr "Sett inn et SD-kort for å bruke innstillingen."
+
+msgid "Install Error!"
+msgstr "Installasjonsfeil!"
+
+msgid "Install a game"
+msgstr "Installer et spill"
+
+msgid "Installing game:"
+msgstr "Installerer spill:"
+
+msgid "Italian"
+msgstr "Italiensk"
+
+msgid "Jan"
+msgstr "Jan"
+
+msgid "Japanese"
+msgstr "Japansk"
+
+msgid "July"
+msgstr "Jul"
+
+msgid "June"
+msgstr "Jun"
+
+msgid "Keyboard"
+msgstr "Tastatur"
+
+msgid "Korean"
+msgstr "Koreansk"
+
+msgid "Language change:"
+msgstr ""
+
+msgid "Languagepath changed."
+msgstr "Språksti endret."
+
+msgid "Left"
+msgstr "Venstre"
+
+msgid "Like SysMenu"
+msgstr "Lik Systemmeny"
+
+msgid "Loading standard language."
+msgstr "Laster standard språk."
+
+msgid "Loading standard music."
+msgstr "Laster standard musikk."
+
+msgid "Lock Console"
+msgstr "Lås konsoll"
+
+msgid "Locked"
+msgstr "Låst"
+
+msgid "Mar"
+msgstr "Mar"
+
+msgid "May"
+msgstr "Mai"
+
+msgid "Missing files"
+msgstr "Manglende filer"
+
+msgid "Music Volume"
+msgstr "Musikk volum"
+
+msgid "Neither"
+msgstr "Ingen"
+
+msgid "Network init error"
+msgstr "Nettverk init feil"
+
+msgid "Next"
+msgstr "Neste"
+
+msgid "No"
+msgstr "Nei"
+
+msgid "No SD-Card inserted!"
+msgstr "Intet SD-kort satt i!"
+
+msgid "No USB Device"
+msgstr "Ingen USB enhet"
+
+msgid "No USB Device found."
+msgstr "Ingen USB enhet funnet."
+
+msgid "No WBFS partition found"
+msgstr "Ingen WBFS partisjon funnet"
+
+msgid "No file missing!"
+msgstr "Ingen filer mangler!"
+
+msgid "No new updates."
+msgstr "Ingen nye oppdateringer."
+
+msgid "No partitions found"
+msgstr "Ingen partisjoner funnet"
+
+msgid "Normal"
+msgstr "Normal"
+
+msgid "Normal Covers"
+msgstr "Normale cover"
+
+msgid "Not a Wii Disc"
+msgstr "Ikke en Wii plate"
+
+msgid "Not enough free space!"
+msgstr "Ikke nok ledig plass!"
+
+msgid "Not supported format!"
+msgstr "Ikke et støttet format!"
+
+msgid "Nov"
+msgstr "Nov"
+
+msgid "OFF"
+msgstr "AV"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "ON"
+msgstr "PÅ"
+
+msgid "Oct"
+msgstr "Okt"
+
+msgid "Official Site"
+msgstr "Offisiell nettside"
+
+msgid "Only for Install"
+msgstr "Kun for installering"
+
+msgid "Parental Control"
+msgstr "Foreldre kontroll"
+
+msgid "Parental control"
+msgstr ""
+
+msgid "Partition"
+msgstr "Partisjon"
+
+msgid "Password"
+msgstr "Passord"
+
+msgid "Password Changed"
+msgstr "Passord endret"
+
+msgid "Password has been changed"
+msgstr "Passord har blitt endret"
+
+msgid "Patch Country Strings"
+msgstr "Patch land strenger"
+
+msgid "Path of titles.txt change"
+msgstr "Endre titles.txt sti"
+
+msgid "Path of titles.txt changed."
+msgstr "Titles.txt sti endret."
+
+msgid "Play Count"
+msgstr "Ganger spilt"
+
+msgid "Power off the Wii"
+msgstr "Skru av Wii"
+
+msgid "Prev"
+msgstr "Forrige"
+
+msgid "Prompts Buttons"
+msgstr "Dialog knapper"
+
+msgid "Published by"
+msgstr "Publisert av"
+
+msgid "Quick Boot"
+msgstr "Hurtig start"
+
+msgid "Released"
+msgstr ""
+
+msgid "Reload SD"
+msgstr "Les SD på nytt"
+
+msgid "Rename Game on WBFS"
+msgstr "Gi nytt navn til spill på WBFS"
+
+msgid "Reset Playcounter"
+msgstr ""
+
+msgid "Restart"
+msgstr "Start på nytt"
+
+msgid "Restarting..."
+msgstr "Starter på nytt..."
+
+msgid "Return"
+msgstr "Gå tilbake"
+
+msgid "Return to Wii Menu"
+msgstr ""
+
+msgid "Right"
+msgstr "Høyre"
+
+msgid "Rumble"
+msgstr "Vibrasjon"
+
+msgid "SChinese"
+msgstr "S.Kinesisk"
+
+msgid "SFX Volume"
+msgstr "Effekt volum"
+
+msgid "Save"
+msgstr "Lagre"
+
+msgid "Save Failed"
+msgstr "Lagre feilet"
+
+msgid "Screensaver"
+msgstr ""
+
+msgid "Sept"
+msgstr "Sep"
+
+msgid "Set as backgroundmusic?"
+msgstr "Bruk som bakgrunnsmusikk?"
+
+msgid "Settings"
+msgstr "Innstillinger"
+
+msgid "Shutdown System"
+msgstr "Skru helt av"
+
+msgid "Shutdown to Idle"
+msgstr "Skru av"
+
+msgid "Sound"
+msgstr "Lyd"
+
+msgid "Spanish"
+msgstr "Spansk"
+
+msgid "Special thanks to:"
+msgstr "Spesielt takk til:"
+
+msgid "Standard"
+msgstr "Standard"
+
+msgid "Success:"
+msgstr "Suksess:"
+
+msgid "Successfully Saved"
+msgstr "Vellykket lagring"
+
+msgid "Successfully Updated"
+msgstr "Vellykket oppdatering"
+
+msgid "Successfully deleted:"
+msgstr "Vellykket sletting:"
+
+msgid "Successfully installed:"
+msgstr "Vellykket installering:"
+
+msgid "System Default"
+msgstr "System Standard"
+
+msgid "TChinese"
+msgstr "T.Kinesisk"
+
+msgid "ThemePath"
+msgstr "Tema sti"
+
+msgid "Themepath Changed"
+msgstr "Tema sti endret"
+
+msgid "Themepath change"
+msgstr "Endre tema sti"
+
+msgid "Time left:"
+msgstr "Tid igjen:"
+
+msgid "Titles from XML"
+msgstr "Titler fra XML"
+
+msgid "Tooltips"
+msgstr "Verktøystips"
+
+msgid "USB Device not found"
+msgstr "USB enhet ikke funnet"
+
+msgid "USB Loader GX is protected"
+msgstr "USB Loader GX er beskyttet"
+
+msgid "Uninstall"
+msgstr "Avinstaller"
+
+msgid "Unlock console to use this option."
+msgstr "Lås opp konsollen for å bruke denne innstillingen."
+
+msgid "Unlocked"
+msgstr "Opplåst"
+
+msgid "Update"
+msgstr "Oppdater"
+
+msgid "Update All"
+msgstr "Oppdater alt"
+
+msgid "Update DOL"
+msgstr "Oppdater DOL"
+
+msgid "Update failed"
+msgstr "Mislykket oppdatering"
+
+msgid "Update to"
+msgstr "Oppdater til"
+
+msgid "Updatepath"
+msgstr "Oppdatering sti"
+
+msgid "Updatepath changed."
+msgstr "Oppdatering sti endret."
+
+msgid "Updating"
+msgstr "Oppdaterer"
+
+msgid "VIDTV Patch"
+msgstr "VIDTV Patch"
+
+msgid "Video Mode"
+msgstr "Video modus"
+
+msgid "Waiting for USB Device"
+msgstr "Venter på USB enhet"
+
+msgid "Waiting..."
+msgstr "Venter..."
+
+msgid "WiFi Features"
+msgstr "WiFi egenskaper"
+
+msgid "Widescreen Fix"
+msgstr "Fiks for 16/9"
+
+msgid "Wii Menu"
+msgstr "Wii meny"
+
+msgid "Wiilight"
+msgstr "Wii DVD lys"
+
+msgid "Wrong Password"
+msgstr "Feil passord"
+
+msgid "Yes"
+msgstr "Ja"
+
+msgid "You need to format a partition"
+msgstr "Du må formatere en partisjon"
+
+msgid "available"
+msgstr "tilgjengelig"
+
+msgid "file(s) left"
+msgstr "fil(er) gjenstår"
+
+msgid "files not found on the server!"
+msgstr "filer ikke funnet på serveren!"
+
+msgid "for"
+msgstr "for"
+
+msgid "for diverse patches"
+msgstr "for diverse patcher"
+
+msgid "for his awesome tool"
+msgstr "for hans råe verktøy"
+
+msgid "for hosting the covers/discarts"
+msgstr "for hosting av cover/platebilder"
+
+msgid "for hosting the update files"
+msgstr "for hosting av oppdateringsfiler"
+
+msgid "for the USB Loader source"
+msgstr "for kildekoden til USB Loader"
+
+msgid "formatted!"
+msgstr "formatert!"
+
+msgid "free"
+msgstr "ledig"
+
+msgid "not set"
+msgstr "ikke satt"
+
+msgid "of"
+msgstr "av"
+
+msgid "seconds left"
+msgstr "sekunder gjenstår"
+
+msgid "titles.txt Path"
+msgstr "Titles.txt sti"
+
+#~ msgid "Favorite"
+#~ msgstr "Favoritt"
+
+#~ msgid "Alphabetical"
+#~ msgstr "Alfabetisk"
+
+#~ msgid "Coverpath change"
+#~ msgstr "Endre cover sti"
+
+#~ msgid "BOOT ERROR"
+#~ msgstr "BOOT FEIL"
+
+#~ msgid "Insert a Wii Disc!"
+#~ msgstr "Sett inn en Wii plate!"
+
+#~ msgid "Failed to boot:"
+#~ msgstr "Feil ved start:"
+
+#~ msgid "Failed to mount front SD-card"
+#~ msgstr "Feil ved montering av SD-kort i front"
+
+#~ msgid "Failed to set USB:"
+#~ msgstr "Feil ved valgt USB:"
+
+#~ msgid "Favorites"
+#~ msgstr "Favoritter"
+
+#~ msgid "Go Back"
+#~ msgstr "Gå tilbake"
+
+#~ msgid "Loading in cIOS249"
+#~ msgstr "Laster i cIOS249"
+
+#~ msgid "Sort Game List"
+#~ msgstr "Sorter spill liste"
+
+#~ msgid "No HDD found!"
+#~ msgstr "Ingen HDD funnet!"
+
+#~ msgid "Password change"
+#~ msgstr "Endre passord"
+
+#~ msgid "Select the Partition"
+#~ msgstr "Velg partisjonen"
+
+#~ msgid "you want to format"
+#~ msgstr "du vil formatere"
+
+#~ msgid "Try"
+#~ msgstr "Prøv"
+
+#~ msgid "You don't have cIOS222"
+#~ msgstr "Du har ikke cIOS222"

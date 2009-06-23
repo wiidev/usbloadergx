@@ -18,7 +18,8 @@ TARGET		:=	boot
 BUILD		:=	build
 SOURCES		:=	source source/libwiigui source/images source/fonts source/sounds \
 				source/libwbfs source/unzip source/language source/mload source/patches \
-				source/usbloader source/xml source/network source/settings source/prompts
+				source/usbloader source/xml source/network source/settings source/prompts \
+				source/ramdisc
 INCLUDES	:=	source
 SVNDEV		:=	-D'SVN_REV="$(shell svnversion -n ..)"'
 
@@ -45,7 +46,7 @@ LIBDIRS	:= $(DEVKITPPC)/lib $(CURDIR)
 #---------------------------------------------------------------------------------
 ifneq ($(BUILD),$(notdir $(CURDIR)))
 #---------------------------------------------------------------------------------
-
+export PROJECTDIR := $(CURDIR)
 export OUTPUT	:=	$(CURDIR)/$(TARGETDIR)/$(TARGET)
 export VPATH	:=	$(foreach dir,$(SOURCES),$(CURDIR)/$(dir)) \
 					$(foreach dir,$(DATA),$(CURDIR)/$(dir))
@@ -54,8 +55,8 @@ export DEPSDIR	:=	$(CURDIR)/$(BUILD)
 #---------------------------------------------------------------------------------
 # automatically build a list of object files for our project
 #---------------------------------------------------------------------------------
-CFILES		:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.c)))
-CPPFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.cpp)))
+export CFILES		:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.c)))
+export CPPFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.cpp)))
 sFILES		:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.s)))
 SFILES		:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.S)))
 BINFILES	:=	$(foreach dir,$(DATA),$(notdir $(wildcard $(dir)/*.*)))
@@ -127,9 +128,9 @@ DEPENDS	:=	$(OFILES:.o=.d)
 #---------------------------------------------------------------------------------
 # main targets
 #---------------------------------------------------------------------------------
-$(OUTPUT).dol: $(OUTPUT).elf
+$(OUTPUT).dol: $(OUTPUT).elf language
 $(OUTPUT).elf: $(OFILES)
-
+language: $(wildcard $(PROJECTDIR)/Languages/*.lang)
 #---------------------------------------------------------------------------------
 # This rule links in binary data with .ttf, .png, and .mp3 extensions
 #---------------------------------------------------------------------------------
@@ -148,6 +149,19 @@ $(OUTPUT).elf: $(OFILES)
 %.pcm.o : %.pcm
 	@echo $(notdir $<)
 	$(bin2o)
+
+
+export PATH		:=	$(PROJECTDIR)/gettext-bin:$(PATH)
+
+%.pot: $(CFILES) $(CPPFILES)
+	@echo Update Language-Files ...
+	@xgettext -C -cTRANSLATORS --from-code=utf-8 --sort-output --no-wrap --no-location -k -ktr -ktrNOOP -o $@ $^
+
+%.lang: $(PROJECTDIR)/Languages/$(TARGET).pot
+	@msgmerge -U -N --no-wrap --no-location --backup=none -q $@ $<
+	@touch $@
+
+
 
 -include $(DEPENDS)
 
