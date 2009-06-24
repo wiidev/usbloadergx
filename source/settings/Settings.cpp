@@ -8,6 +8,7 @@
 #include "libwiigui/gui_customoptionbrowser.h"
 #include "prompts/PromptWindows.h"
 #include "settings/SettingsPrompts.h"
+#include "cheatmenu.h"
 #include "fatmounter.h"
 #include "menu.h"
 #include "filelist.h"
@@ -1199,7 +1200,8 @@ int MenuSettings()
                     options2.SetName(3, "%s", tr("titles.txt Path"));
                     options2.SetName(4, "%s", tr("Updatepath"));
                     options2.SetName(5, "%s", tr("Cheatcodes Path"));
-                    options2.SetName(6, "%s", tr("Dol Path"));
+					options2.SetName(6, "%s", tr("TXTCheatcodes Path"));
+                    options2.SetName(7, "%s", tr("Dol Path"));
                     for(int i = 0; i <= MAXOPTIONS; i++) options2.SetValue(i, NULL);
                     w.Append(&optionBrowser2);
                     optionBrowser2.SetClickable(true);
@@ -1221,7 +1223,8 @@ int MenuSettings()
                         options2.SetValue(3, "%s", Settings.titlestxt_path);
                         options2.SetValue(4, "%s", Settings.update_path);
                         options2.SetValue(5, "%s", Settings.Cheatcodespath);
-						options2.SetValue(6, "%s", Settings.dolpath);
+						options2.SetValue(6, "%s", Settings.TxtCheatcodespath);
+						options2.SetValue(7, "%s", Settings.dolpath);
 
                         if(backBtn.GetState() == STATE_CLICKED)
                         {
@@ -1449,6 +1452,28 @@ int MenuSettings()
                                     WindowPrompt(0,tr("Console should be unlocked to modify it."),tr("OK"),0,0,0);
                                 break;
 							case 6:
+                                if ( Settings.godmode == 1)
+                                {
+                                    w.Remove(&optionBrowser2);
+                                    w.Remove(&backBtn);
+                                    char entered[43] = "";
+                                    strncpy(entered, Settings.TxtCheatcodespath, sizeof(entered));
+                                    int result = OnScreenKeyboard(entered,43,0);
+                                    w.Append(&optionBrowser2);
+                                    w.Append(&backBtn);
+                                    if ( result == 1 )
+                                    {
+                                        int len = (strlen(entered)-1);
+                                        if(entered[len] !='/')
+                                        strncat (entered, "/", 1);
+                                        strncpy(Settings.TxtCheatcodespath, entered, sizeof(Settings.TxtCheatcodespath));
+                                        WindowPrompt("TxtCheatcodespathchanged",0,tr("OK"),0,0,0);
+                                    }
+                                }
+                                else
+                                    WindowPrompt(0,tr("Console should be unlocked to modify it."),tr("OK"),0,0,0);
+                                break;
+							case 7:
                                 if ( Settings.godmode == 1)
                                 {
                                     w.Remove(&optionBrowser2);
@@ -1738,6 +1763,8 @@ int GameSettings(struct discHdr * header)
 
 	char imgPath[100];
 
+	snprintf(imgPath, sizeof(imgPath), "%socarina.png", CFG.theme_path);
+	GuiImageData btnOcarina(imgPath, ocarina_png);
 	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
 	GuiImageData btnOutline(imgPath, button_dialogue_box_png);
 	snprintf(imgPath, sizeof(imgPath), "%sgamesettings_background.png", CFG.theme_path);
@@ -1792,6 +1819,12 @@ int GameSettings(struct discHdr * header)
 	deleteBtn.SetScale(0.9);
 	deleteBtn.SetLabel(&deleteBtnTxt);
 
+	GuiImage GCTBtnImg(&btnOcarina);
+	if (Settings.wsprompt == yes){
+	GCTBtnImg.SetWidescreen(CFG.widescreen);}
+	GuiButton GCTBtn(&GCTBtnImg,&GCTBtnImg, ALIGN_RIGHT, ALIGN_TOP, 0, 80, &trigA, &btnSoundOver, &btnClick,1);
+	GCTBtn.SetScale(0.5);
+
 	GuiCustomOptionBrowser optionBrowser3(396, 280, &options3, CFG.theme_path, "bg_options_gamesettings.png", bg_options_settings_png, 1, 200);
 	optionBrowser3.SetPosition(0, 90);
 	optionBrowser3.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
@@ -1804,8 +1837,9 @@ int GameSettings(struct discHdr * header)
 	w.Append(&saveBtn);
 	w.Append(&cancelBtn);
     w.Append(&optionBrowser3);
-
-    mainWindow->Append(&w);
+	w.Append(&GCTBtn);
+    
+	mainWindow->Append(&w);
 
 	struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
 
@@ -2051,6 +2085,12 @@ int GameSettings(struct discHdr * header)
 				optionBrowser3.SetFocus(1);
 			}
 
+		}
+		
+		if (GCTBtn.GetState() == STATE_CLICKED) {
+			char ID[7];
+			snprintf (ID,sizeof(ID),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
+			CheatMenu(ID);
 		}
 	}
 

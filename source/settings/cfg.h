@@ -348,6 +348,7 @@ struct SSettings {
 	char	dolpath[150];
 	char	update_path[150];
 	char	Cheatcodespath[100];
+	char	TxtCheatcodespath[100];
 	short   error002;
 	int		titlesOverride; // db_titles
 	char	db_url[200];

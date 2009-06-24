@@ -219,6 +219,7 @@ void CFG_Default(int widescreen) // -1 = non forced Mode
 		snprintf(Settings.oggload_path, sizeof(Settings.oggload_path), "%s/config/backgroundmusic/", bootDevice);
 		snprintf(Settings.update_path, sizeof(Settings.update_path), "%s/apps/usbloader_gx/", bootDevice);
 		snprintf(Settings.Cheatcodespath, sizeof(Settings.Cheatcodespath), "%s/codes/", bootDevice);
+		snprintf(Settings.TxtCheatcodespath, sizeof(Settings.TxtCheatcodespath), "%s/txtcodes/", bootDevice);
 		snprintf(Settings.dolpath, sizeof(Settings.dolpath), "%s/", bootDevice);
 		sprintf(Settings.ogg_path, "notset");
 
@@ -486,6 +487,10 @@ void path_set(char *name, char *val)
 	}
 	if (strcmp(name, "Cheatcodespath") == 0) {
 		strcopy(Settings.Cheatcodespath, val, sizeof(Settings.Cheatcodespath));
+		return;
+	}
+	if (strcmp(name, "TxtCheatcodespath") == 0) {
+		strcopy(Settings.TxtCheatcodespath, val, sizeof(Settings.TxtCheatcodespath));
 		return;
 	}
 	if (strcmp(name, "oggload_path") == 0) {

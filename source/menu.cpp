@@ -27,6 +27,7 @@
 #include "mload/mload.h"
 #include "patches/patchcode.h"
 #include "network/networkops.h"
+#include "cheatmenu.h"
 #include "menu.h"
 #include "audio.h"
 #include "input.h"
