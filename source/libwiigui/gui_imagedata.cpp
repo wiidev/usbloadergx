@@ -13,6 +13,9 @@
 /**
  * Constructor for the GuiImageData class.
  */
+ 
+extern int idiotFlag;
+extern char idiotChar[50];
 GuiImageData::GuiImageData(const u8 * img)
 {
 	data = NULL;
@@ -28,9 +31,10 @@ GuiImageData::GuiImageData(const u8 * img)
 			return;
 
 		int res = PNGU_GetImageProperties(ctx, &imgProp);
+		//if (((4%imgProp.imgWidth)!=0)||((4%imgProp.imgHeight)!=0))idiotFlag=1;
 
 		if(res == PNGU_OK)
-		{
+		{	
 			int len = imgProp.imgWidth * imgProp.imgHeight * 4;
 			if(len%32) len += (32-len%32);
 			data = (u8 *)memalign (32, len);
@@ -49,6 +53,9 @@ GuiImageData::GuiImageData(const u8 * img)
 				{
 					free(data);
 					data = NULL;
+					idiotFlag=1;
+					snprintf(idiotChar, sizeof(idiotChar), "%s", img);
+		
 				}
 			}
 		}
@@ -69,6 +76,7 @@ GuiImageData::GuiImageData(const char * imgPath, const u8 * buffer)
 	{
 		PNGUPROP imgProp;
 		IMGCTX ctx = PNGU_SelectImageFromDevice(imgPath);
+		//if (((4%imgProp.imgWidth)!=0)||((4%imgProp.imgHeight)!=0))idiotFlag=1;
 
 		if(ctx)
 		{
@@ -94,6 +102,8 @@ GuiImageData::GuiImageData(const char * imgPath, const u8 * buffer)
 					{
 						free(data);
 						data = NULL;
+						idiotFlag=1;
+						snprintf(idiotChar, sizeof(idiotChar), "%s", imgPath);
 					}
 				}
 			}

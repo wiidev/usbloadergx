@@ -120,6 +120,7 @@ typedef struct _paddata {
 #define EFFECT_ROCK_VERTICLE        1024
 #define EFFECT_GOROUND              2048
 
+
 //!Sound conversion and playback. A wrapper for other sound libraries - ASND, libmad, ltremor, etc
 class GuiSound
 {

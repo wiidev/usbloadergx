@@ -182,6 +182,7 @@ GuiCustomOptionBrowser::GuiCustomOptionBrowser(int w, int h, customOptionList * 
 		optionTxt[i] = new GuiText(options->GetName(i), 20, (GXColor){THEME.settingsTxt_r, THEME.settingsTxt_g, THEME.settingsTxt_b, 0xff});
 		optionTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 		optionTxt[i]->SetPosition(24,0);
+		optionVal[i]->SetMaxWidth(bgOptionsImg->GetWidth() - (coL2+24), GuiText::DOTTED);
 
 		optionBg[i] = new GuiImage(bgOptionsEntry);
 

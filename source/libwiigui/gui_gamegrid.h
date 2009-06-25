@@ -28,6 +28,8 @@ class GuiGameGrid : public GuiElement
 		int speed;
 		int clickedItem;
 		int rows;
+		int drawTTs;
+		
 
 		struct discHdr * gameList;
 		int gameCnt;

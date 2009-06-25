@@ -47,6 +47,9 @@ GuiImage * bgImg = NULL;
 GuiImageData * background = NULL;
 GuiSound * bgMusic = NULL;
 float gamesize;
+int currentMenu;
+int idiotFlag=-1;
+char idiotChar[50];
 
 /*** Variables used only in menu.cpp ***/
 static GuiImage * coverImg = NULL;
@@ -138,7 +141,8 @@ UpdateGUI (void *arg)
 
 			for(int i=0; i < 4; i++)
 				mainWindow->Update(&userInput[i]);
-
+				
+			
 			} else {
 				for(int a = 5; a < 255; a += 10)
 				{
@@ -202,7 +206,7 @@ void ExitGUIThreads()
  * MenuDiscList
  ***************************************************************************/
 
-static int MenuDiscList()
+int MenuDiscList()
 {
 
     int startat = 0;
@@ -595,6 +599,13 @@ static int MenuDiscList()
         {
 
                 VIDEO_WaitVSync ();
+				
+				if (idiotFlag==1){
+				char idiotBuffer[200];
+				snprintf(idiotBuffer, sizeof(idiotBuffer), "%s (%s). %s",tr("You have attempted to load a bad image"), idiotChar,tr("Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."));
+		
+			WindowPrompt(0,idiotBuffer,tr("Ok"), 0, 0,0);
+			idiotFlag=-1;}
 
                 //CLOCK
                 time_t rawtime = time(0);                                                               //this fixes code dump caused by the clock
@@ -1758,7 +1769,7 @@ static int MenuCheck()
 int MainMenu(int menu)
 {
 
-	int currentMenu = menu;
+	currentMenu = menu;
 	char imgPath[100];
 
 	#ifdef HW_RVL

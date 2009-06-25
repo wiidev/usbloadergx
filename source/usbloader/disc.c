@@ -37,8 +37,15 @@ void __Disc_SetLowMem(void)
 	*(vu32 *)0x800000E4 = 0x80431A80;
 	*(vu32 *)0x800000EC = 0x81800000;       // Dev Debugger Monitor Address
     *(vu32 *)0x800000F0 = 0x01800000;       // Simulated Memory Size
-
-	//*(vu32*)0x80003184	= 0x80000000;	    // Game ID Address
+	
+	//If the game is sam & max: season 1  put this shit in
+	char tempTxt[10];
+	snprintf (tempTxt,sizeof(tempTxt),"%c%c%c%c%c%c", gameid[0], gameid[1], gameid[2], gameid[3], gameid[4], gameid[5]);
+    if ((strcmp(tempTxt,"R3XE6U")==0)||
+		(strcmp(tempTxt,"R3XP6V")==0))/*&&
+		(IOS_GetVersion()==249)&&
+		((IOS_GetRevision()==10)||(IOS_GetRevision()==13))  I left out the ios check to see if works with other ios versions.*/
+		{*(vu32*)0x80003184	= 0x80000000;}	    // Game ID Address
 
 	/* Copy disc ID */
 	memcpy((void *)0x80003180, (void *)0x80000000, 4);

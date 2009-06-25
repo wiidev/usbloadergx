@@ -1236,6 +1236,7 @@ bool cfg_save_global()// save global settings
 	fprintf(f, "language_path = %s\n ", Settings.language_path);
 	fprintf(f, "languagefiles_path = %s\n ", Settings.languagefiles_path);
 	fprintf(f, "oggload_path = %s\n ", Settings.oggload_path);
+	fprintf(f, "TxtCheatcodespath = %s\n ", Settings.TxtCheatcodespath);
 	fprintf(f, "titlestxt_path = %s\n ", Settings.titlestxt_path);
 	if(!strcmp("", Settings.unlockCode)) {
 	fprintf(f, "godmode = %d\n ", Settings.godmode);

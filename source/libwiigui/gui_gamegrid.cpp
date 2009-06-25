@@ -62,6 +62,7 @@ GuiGameGrid::GuiGameGrid(int w, int h, struct discHdr * l, int count, const char
 	speed = SHIFT_SPEED;
 	char imgPath[100];
 	rows =3;
+	drawTTs=0;
 	
 	
 	
@@ -618,7 +619,7 @@ void GuiGameGrid::Draw()
 	btnRowUp->Draw();
 	btnRowDown->Draw();
 	//debugTxt->Draw();
-	if ((wait>75)&&(Settings.tooltips == TooltipsOn))
+	if ((wait>75)&&(Settings.tooltips == TooltipsOn)&&(drawTTs!=0))
 	titleTT->Draw();
 	
 	
@@ -651,6 +652,7 @@ void GuiGameGrid::ChangeRows(int n)
 	
 
 	firstPic=0;
+	drawTTs=0;
 	
 	// create new buttons based on pagesize
 	for(int i=0; i < pagesize; i++) {
@@ -994,6 +996,7 @@ void GuiGameGrid::Update(GuiTrigger * t)
 			speed = SHIFT_SPEED;
 			return;
 		}goLeft=12;
+		wait=0;wait1=0;
 		
 		
 	}
@@ -1327,6 +1330,7 @@ void GuiGameGrid::Update(GuiTrigger * t)
 			return;
 		}
 		goRight=12;
+		wait=0;wait1=0;
 		
 		
 		
@@ -1698,6 +1702,7 @@ void GuiGameGrid::Update(GuiTrigger * t)
 	}	
 	snprintf(titlebuffer, sizeof(titlebuffer), "%s",get_title(&gameList[this->GetSelectedOption()]));
 	if (selected!=selectedOld){
+		drawTTs=1;
 		delete titleTT;
 		titleTT = new GuiTooltip(titlebuffer);
 		titleTT->SetAlpha(THEME.tooltipAlpha);
@@ -1754,6 +1759,7 @@ void GuiGameGrid::Reload(struct discHdr * l, int count)
 	firstPic = 0;
 	clickedItem = -1;
 	gameCnt=count;
+	drawTTs=0;
 	//speed = SHIFT_SPEED;
 	char imgPath[100];
 	

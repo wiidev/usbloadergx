@@ -51,7 +51,7 @@ int CheatMenu(const char * gameID)
 	backBtn.SetLabel(&backBtnTxt);
 	backBtn.SetTrigger(&trigB);
 
-	GuiText createBtnTxt("Create" , 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	GuiText createBtnTxt(tr("Create") , 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	createBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
 	GuiImage createBtnImg(&btnOutline);
 	GuiButton createBtn(&createBtnImg,&createBtnImg, 2, 3, -140, 400, &trigA, &btnSoundOver, &btnClick,1);
@@ -65,9 +65,9 @@ int CheatMenu(const char * gameID)
 	int check = c.openTxtfile(txtfilename);
 	switch(check)
 	{
-	case -1: WindowPrompt("Error","Cheatfile empty",tr("OK"),NULL,NULL,NULL);
+	case -1: WindowPrompt(tr("Error"),tr("Cheatfile is blank"),tr("OK"),NULL,NULL,NULL);
 			 break;
-	case 0: WindowPrompt("Error","No Cheatfile found",tr("OK"),NULL,NULL,NULL);
+	case 0: WindowPrompt(tr("Error"),tr("No Cheatfile found"),tr("OK"),NULL,NULL,NULL);
 			break;
 	case 1:	//WindowPrompt("Opened File","File found for Game","Okay",NULL,NULL,NULL);
 	int cntcheats = c.getCnt()+1;
@@ -139,10 +139,10 @@ int CheatMenu(const char * gameID)
 		string chtpath = Settings.Cheatcodespath;
 		string gctfname = chtpath + c.getGameID() + ".gct";
 		c.createGCT(selectednrs,x,gctfname.c_str());
-		WindowPrompt("GCT File created",NULL,tr("OK"),NULL,NULL,NULL);
+		WindowPrompt(tr("GCT File created"),NULL,tr("OK"),NULL,NULL,NULL);
 		exit = true;
 		break;				
-		} else WindowPrompt("Error","Couldn´t create GCT file",tr("OK"),NULL,NULL,NULL);
+		} else WindowPrompt(tr("Error"),tr("Could not create GCT file"),tr("OK"),NULL,NULL,NULL);
 		
 	}
 
