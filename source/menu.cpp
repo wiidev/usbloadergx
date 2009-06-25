@@ -1045,8 +1045,29 @@ int MenuDiscList()
                         }
 
                         if (Settings.qboot == yes)//quickboot game
-                        {
-
+                        {	//check if alt Dol is on present
+								struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
+								if (game_cfg) {
+									alternatedol = game_cfg->loadalternatedol;
+								} else {
+								alternatedol = off;
+								}
+								if (alternatedol != off){
+								FILE *exeFile = NULL;
+								char nipple[100];
+								/* Open dol File and check exist */
+								snprintf (IDfull,sizeof(IDfull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
+                                sprintf(nipple, "%s%s.dol",Settings.dolpath,IDfull);
+								exeFile = fopen (nipple ,"rb");
+								if (exeFile==NULL)
+								{	
+									sprintf(nipple, "%s %s",nipple,tr("does not exist!  You Messed something up, Idiot."));
+									WindowPrompt(tr("Error"),nipple,tr("OK"),NULL,NULL,NULL);
+									SDCard_Init();
+									menu = MENU_DISCLIST;
+									break;
+									
+								}
                                 wiilight(0);
 								if(isInserted(bootDevice)) {
                                 //////////save game play count////////////////
@@ -1066,6 +1087,7 @@ int MenuDiscList()
 
                             menu = MENU_EXIT;
                             break;
+							}
                         }
                         bool returnHere = true;// prompt to start game
                         while (returnHere)
@@ -1077,10 +1099,35 @@ int MenuDiscList()
 
                                 if(choice == 1)
                                 {
-                                        wiilight(0);
-                                        returnHere = false;
-                                        menu = MENU_EXIT;
-                                }
+								//check if alt Dol is on present
+								struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
+								if (game_cfg) {
+									alternatedol = game_cfg->loadalternatedol;
+								} else {
+								alternatedol = off;
+								}
+								if (alternatedol != off){
+								FILE *exeFile = NULL;
+								char nipple[100];
+								/* Open dol File and check exist */
+								snprintf (IDfull,sizeof(IDfull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
+                                sprintf(nipple, "%s%s.dol",Settings.dolpath,IDfull);
+								exeFile = fopen (nipple ,"rb");
+								if (exeFile==NULL)
+								{	//alt dol is not there, so make them feel bad for wasting our time.  and boot the game anyways, just for spite 
+									sprintf(nipple, "%s %s",nipple,tr("does not exist!  You Messed something up, Idiot."));
+									WindowPrompt(tr("Error"),nipple,tr("OK"),NULL,NULL,NULL);
+									SDCard_Init();
+									menu = MENU_DISCLIST;
+									break;
+									
+								}
+								       wiilight(0);
+                                       returnHere = false;
+                                       menu = MENU_EXIT;
+                                
+								}
+								}
                                 else if (choice == 2)
                                 {
                                         wiilight(0);
