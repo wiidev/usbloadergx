@@ -108,13 +108,13 @@ int CheatMenu(const char * gameID)
 	if (ret)
 	{
 		const char *tt = options2.GetValue(ret);
-		if (strncmp(tt,"ON",2) == 0)
+		if (strcmp(tt,tr("ON")))
 		{
-		options2.SetValue(ret,"%s","OFF");
+		options2.SetValue(ret,"%s",tr("OFF"));
 		}
-		else if (strncmp(tt,"OFF",2) == 0) 
+		else if (strcmp(tt,tr("OFF"))) 
 		{
-		options2.SetValue(ret,"%s","ON");
+		options2.SetValue(ret,"%s",tr("ON"));
 		}
 	}
 
@@ -128,7 +128,7 @@ int CheatMenu(const char * gameID)
 		for(int i = 0; i <= cntcheats; i++) 
 		{
 			const char *tt = options2.GetValue(i+1);
-			if (strncmp(tt,"ON",2) == 0) 
+			if (strcmp(tt,tr("ON"))) 
 			{
 			selectednrs[x] = i;
 			x++;

@@ -309,6 +309,8 @@ int MenuDiscList()
         trigHome.SetButtonOnlyTrigger(-1, WPAD_BUTTON_HOME | WPAD_CLASSIC_BUTTON_HOME, 0);
         GuiTrigger trig2;
         trig2.SetButtonOnlyTrigger(-1, WPAD_BUTTON_2 | WPAD_CLASSIC_BUTTON_X, 0);
+		GuiTrigger trig1;
+        trig1.SetButtonOnlyTrigger(-1, WPAD_BUTTON_1 | WPAD_CLASSIC_BUTTON_Y, 0);
 
 
         char spaceinfo[30];
@@ -511,7 +513,7 @@ int MenuDiscList()
         if (Settings.wsprompt == yes)
                 DownloadBtnTT.SetWidescreen(CFG.widescreen);
 		DownloadBtnTT.SetAlpha(THEME.tooltipAlpha);
-        GuiButton DownloadBtn(160,224);
+        GuiButton DownloadBtn(0,0);
         DownloadBtn.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
         DownloadBtn.SetPosition(THEME.cover_x,THEME.cover_y);
 
@@ -519,6 +521,7 @@ int MenuDiscList()
         {//only make the button have trigger & tooltip if in godmode
                 DownloadBtn.SetSoundOver(&btnSoundOver);
                 DownloadBtn.SetTrigger(&trigA);
+                DownloadBtn.SetTrigger(&trig1);
                 DownloadBtn.SetToolTip(&DownloadBtnTT,205,-30);
     }
         else
@@ -572,9 +575,7 @@ int MenuDiscList()
                 w.Append(&installBtn);
         w.Append(&homeBtn);
         w.Append(&settingsBtn);
-        if (Settings.gameDisplay==list){
-                w.Append(&DownloadBtn);
-        }
+        w.Append(&DownloadBtn);
         w.Append(&favoriteBtn);
         w.Append(&abcBtn);
         w.Append(&countBtn);
@@ -811,20 +812,7 @@ int MenuDiscList()
                         __Menu_GetEntries();
                         menu = MENU_DISCLIST;
                         break;
-                        /*
-                        if (Settings.gameDisplay==list){
-                                gameBrowser.Reload(gameList, gameCnt);}
-                        else if (Settings.gameDisplay==grid){
-                                gameGrid.Reload(gameList, gameCnt);}
-                        else if (Settings.gameDisplay==carousel){
-                                gameCarousel.Reload(gameList, gameCnt);}
-                        gamecntTxt.SetTextf("%s: %i",LANGUAGE.Games, gameCnt);
-                        selectedold = 1;
-                        favoriteBtn.ResetState();
-                        Settings.fave ? (favoriteBtn.SetImage(&favoriteBtnImg),favoriteBtn.SetImageOver(&favoriteBtnImg),
-                                                        favoriteBtn.SetAlpha(255)) : (favoriteBtn.SetImage(&favoriteBtnImg_g),
-                                                        favoriteBtn.SetImageOver(&favoriteBtnImg_g), favoriteBtn.SetAlpha(180));
-                        */
+                        
                 }
 
                 else if(abcBtn.GetState() == STATE_CLICKED)
@@ -836,21 +824,7 @@ int MenuDiscList()
                                         cfg_save_global();
                                 }
                                 __Menu_GetEntries();
-                                /*
-                                if (Settings.gameDisplay==list){
-                                        gameBrowser.Reload(gameList, gameCnt);}
-                                else if (Settings.gameDisplay==grid){
-                                        gameGrid.Reload(gameList, gameCnt);}
-                                else if (Settings.gameDisplay==carousel){
-                                        gameCarousel.Reload(gameList, gameCnt);}
-                                selectedold = 1;
-                                abcBtn.SetImage(&abcBtnImg);
-                                abcBtn.SetImageOver(&abcBtnImg);
-                                abcBtn.SetAlpha(255);
-                                countBtn.SetImage(&countBtnImg_g);
-                                countBtn.SetImageOver(&countBtnImg_g);
-                                countBtn.SetAlpha(180);
-                                */
+                                
                                 menu = MENU_DISCLIST;
                                 break;
                         }
@@ -866,21 +840,7 @@ int MenuDiscList()
                                         cfg_save_global();
                                 }
                                 __Menu_GetEntries();
-                                /*
-                                if (Settings.gameDisplay==list){
-                                gameBrowser.Reload(gameList, gameCnt);}
-                                else if (Settings.gameDisplay==grid){
-                                gameGrid.Reload(gameList, gameCnt);}
-                                else if (Settings.gameDisplay==carousel){
-                                gameCarousel.Reload(gameList, gameCnt);}
-                                selectedold = 1;
-                                abcBtn.SetImage(&abcBtnImg_g);
-                                abcBtn.SetImageOver(&abcBtnImg_g);
-                                abcBtn.SetAlpha(180);
-                                countBtn.SetImage(&countBtnImg);
-                                countBtn.SetImageOver(&countBtnImg);
-                                countBtn.SetAlpha(255);
-                                */
+                                
                                 menu = MENU_DISCLIST;
                                 break;
                         }
@@ -889,22 +849,7 @@ int MenuDiscList()
                 }
 
                 else if(listBtn.GetState() == STATE_CLICKED) {
-                        if (Settings.gameDisplay!=list){/*
-                                if (Settings.gameDisplay==grid) {
-                                        mainWindow->Remove(&gameGrid);
-                                        gridBtn.SetImage(&gridBtnImg_g);
-                                        gridBtn.SetImageOver(&gridBtnImg_g);
-                                        gridBtn.SetAlpha(180);
-                                }
-                                if (Settings.gameDisplay==carousel) {
-                                        mainWindow->Remove(&gameCarousel);
-                                        carouselBtn.SetImage(&carouselBtnImg_g);
-                                        carouselBtn.SetImageOver(&carouselBtnImg_g);
-                                        carouselBtn.SetAlpha(180);
-                                }
-                                HaltGui();
-                                mainWindow->Remove(&w);
-                                */
+                        if (Settings.gameDisplay!=list){
                                 Settings.gameDisplay=list;
                                 menu = MENU_DISCLIST;
                                 if(isInserted(bootDevice)) {
@@ -913,47 +858,7 @@ int MenuDiscList()
                                 listBtn.ResetState();
                                 break;
                 } else {
-                                /*gameBrowser.Reload(gameList, gameCnt); // initialize before append
-                                mainWindow->Append(&gameBrowser);
-                                mainWindow->Append(&w);
-                                ResumeGui();
-                                listBtn.SetImage(&listBtnImg);
-                                listBtn.SetImageOver(&listBtnImg);
-                                listBtn.SetAlpha(255);
-                                if(CFG.widescreen)
-                                {
-                                        favoriteBtn.SetPosition(THEME.favorite_x, THEME.favorite_y);
-                                        abcBtn.SetPosition(THEME.abc_x, THEME.abc_y);
-                                        countBtn.SetPosition(THEME.count_x, THEME.count_y);
-                                        listBtn.SetPosition(THEME.list_x, THEME.list_y);
-                                        gridBtn.SetPosition(THEME.grid_x, THEME.grid_y);
-                                        carouselBtn.SetPosition(THEME.carousel_x, THEME.carousel_y);
-                                } else {
-                                        favoriteBtn.SetPosition(THEME.favorite_x-20, THEME.favorite_y);
-                                        abcBtn.SetPosition(THEME.abc_x-12, THEME.abc_y);
-                                        countBtn.SetPosition(THEME.count_x-4, THEME.count_y);
-                                        listBtn.SetPosition(THEME.list_x+4, THEME.list_y);
-                                        gridBtn.SetPosition(THEME.grid_x+12, THEME.grid_y);
-                                        carouselBtn.SetPosition(THEME.carousel_x+20, THEME.carousel_y);
-                                }
-                                if((Settings.hddinfo == hr12)||(Settings.hddinfo == hr24)) {
-                                        clockTime.SetPosition(THEME.clock_x, THEME.clock_y);
-                                        clockTimeBack.SetPosition(THEME.clock_x, THEME.clock_y);
-                                        w.Append(&clockTime);
-                                        w.Append(&clockTimeBack);
-                                }
-                                w.Append(&favoriteBtn);
-                                w.Append(&abcBtn);
-                                w.Append(&countBtn);
-                                w.Append(&listBtn);
-                                w.Append(&gridBtn);
-                                w.Append(&carouselBtn);
-                                w.Append(&DownloadBtn);
-                                if(isSdInserted()) {
-                                        cfg_save_global();
-                                }
-                        }
-                        */
+                                
                         listBtn.ResetState();
             }
                 }
@@ -961,25 +866,7 @@ int MenuDiscList()
 
                 else if (gridBtn.GetState() == STATE_CLICKED) {
                         if (Settings.gameDisplay!=grid){
-                        /*
-                                if (Settings.gameDisplay==list) {
-                                        mainWindow->Remove(&gameBrowser);
-                                        if (GameIDTxt) w.Remove(GameIDTxt);
-                                        if (GameRegionTxt) w.Remove(GameRegionTxt);
-                                        w.Remove(&DownloadBtn);
-                                        listBtn.SetImage(&listBtnImg_g);
-                                        listBtn.SetImageOver(&listBtnImg_g);
-                                        listBtn.SetAlpha(180);
-                                }
-                                if (Settings.gameDisplay==carousel) {
-                                        mainWindow->Remove(&gameCarousel);
-                                        carouselBtn.SetImage(&carouselBtnImg_g);
-                                        carouselBtn.SetImageOver(&carouselBtnImg_g);
-                                        carouselBtn.SetAlpha(180);
-                                }
-                                HaltGui();
-                                mainWindow->Remove(&w);
-                                */
+                        
                                 Settings.gameDisplay=grid;
                                 menu = MENU_DISCLIST;
                                 if(isInserted(bootDevice)) {
@@ -988,69 +875,14 @@ int MenuDiscList()
                                 gridBtn.ResetState();
                                 break;
                         } else {
-                                /*
-                                gameGrid.Reload(gameList, gameCnt); // initialize before append
-                                mainWindow->Append(&gameGrid);
-                                mainWindow->Append(&w);
-                                ResumeGui();
-                                gridBtn.SetImage(&gridBtnImg);
-                                gridBtn.SetImageOver(&gridBtnImg);
-                                gridBtn.SetAlpha(255);
-                                if(CFG.widescreen)
-                                {
-                                        favoriteBtn.SetPosition(THEME.favorite_x-THEME.sortBarOffset, THEME.favorite_y);
-                                        abcBtn.SetPosition(THEME.abc_x-THEME.sortBarOffset, THEME.abc_y);
-                                        countBtn.SetPosition(THEME.count_x-THEME.sortBarOffset, THEME.count_y);
-                                        listBtn.SetPosition(THEME.list_x-THEME.sortBarOffset, THEME.list_y);
-                                        gridBtn.SetPosition(THEME.grid_x-THEME.sortBarOffset, THEME.grid_y);
-                                        carouselBtn.SetPosition(THEME.carousel_x-THEME.sortBarOffset, THEME.carousel_y);
-                                } else {
-                                        favoriteBtn.SetPosition(THEME.favorite_x-20-THEME.sortBarOffset, THEME.favorite_y);
-                                        abcBtn.SetPosition(THEME.abc_x-12-THEME.sortBarOffset, THEME.abc_y);
-                                        countBtn.SetPosition(THEME.count_x-4-THEME.sortBarOffset, THEME.count_y);
-                                        listBtn.SetPosition(THEME.list_x+4-THEME.sortBarOffset, THEME.list_y);
-                                        gridBtn.SetPosition(THEME.grid_x+12-THEME.sortBarOffset, THEME.grid_y);
-                                        carouselBtn.SetPosition(THEME.carousel_x+20-THEME.sortBarOffset, THEME.carousel_y);
-                                }
-                                if((Settings.hddinfo == hr12)||(Settings.hddinfo == hr24)) {
-                                        clockTime.SetPosition(THEME.clock_x, THEME.clock_y+3);
-                                        clockTimeBack.SetPosition(THEME.clock_x, THEME.clock_y+3);
-                                        w.Append(&clockTime);
-                                        w.Append(&clockTimeBack);
-                                }
-                                w.Append(&favoriteBtn);
-                                w.Append(&abcBtn);
-                                w.Append(&countBtn);
-                                w.Append(&listBtn);
-                                w.Append(&gridBtn);
-                                w.Append(&carouselBtn);
-                                if(isSdInserted()) {
-                                        cfg_save_global();
-                                }
-                        }*/
+                               
                         gridBtn.ResetState();
                         }
                 }
 
                 else if (carouselBtn.GetState() == STATE_CLICKED) {
                         if (Settings.gameDisplay!=carousel) {
-                            /*
-                                if (Settings.gameDisplay==list)
-                                        mainWindow->Remove(&gameBrowser);
-                                        if (GameIDTxt) w.Remove(GameIDTxt);
-                                        if (GameRegionTxt) w.Remove(GameRegionTxt);
-                                        w.Remove(&DownloadBtn);
-                                        listBtn.SetImage(&listBtnImg_g);
-                                        listBtn.SetImageOver(&listBtnImg_g);
-                                        listBtn.SetAlpha(180);
-                                if (Settings.gameDisplay==grid)
-                                        mainWindow->Remove(&gameGrid);
-                                        gridBtn.SetImage(&gridBtnImg_g);
-                                        gridBtn.SetImageOver(&gridBtnImg_g);
-                                        gridBtn.SetAlpha(180);
-                                HaltGui();
-                                mainWindow->Remove(&w);
-                                */
+                           
                                 Settings.gameDisplay=carousel;
                                 menu = MENU_DISCLIST;
                                 if(isInserted(bootDevice)) {
@@ -1059,47 +891,7 @@ int MenuDiscList()
                                 carouselBtn.ResetState();
                                 break;
                 } else {
-                                /*
-                                gameCarousel.Reload(gameList, gameCnt); // initialize before append
-                                mainWindow->Append(&gameCarousel);
-                                mainWindow->Append(&w);
-                                ResumeGui();
-                                carouselBtn.SetImage(&carouselBtnImg);
-                                carouselBtn.SetImageOver(&carouselBtnImg);
-                                carouselBtn.SetAlpha(255);
-                                if(CFG.widescreen)
-                                {
-                                        favoriteBtn.SetPosition(THEME.favorite_x-THEME.sortBarOffset, THEME.favorite_y);
-                                        abcBtn.SetPosition(THEME.abc_x-THEME.sortBarOffset, THEME.abc_y);
-                                        countBtn.SetPosition(THEME.count_x-THEME.sortBarOffset, THEME.count_y);
-                                        listBtn.SetPosition(THEME.list_x-THEME.sortBarOffset, THEME.list_y);
-                                        gridBtn.SetPosition(THEME.grid_x-THEME.sortBarOffset, THEME.grid_y);
-                                        carouselBtn.SetPosition(THEME.carousel_x-THEME.sortBarOffset, THEME.carousel_y);
-                                } else {
-                                        favoriteBtn.SetPosition(THEME.favorite_x-20-THEME.sortBarOffset, THEME.favorite_y);
-                                        abcBtn.SetPosition(THEME.abc_x-12-THEME.sortBarOffset, THEME.abc_y);
-                                        countBtn.SetPosition(THEME.count_x-4-THEME.sortBarOffset, THEME.count_y);
-                                        listBtn.SetPosition(THEME.list_x+4-THEME.sortBarOffset, THEME.list_y);
-                                        gridBtn.SetPosition(THEME.grid_x+12-THEME.sortBarOffset, THEME.grid_y);
-                                        carouselBtn.SetPosition(THEME.carousel_x+20-THEME.sortBarOffset, THEME.carousel_y);
-                                }
-                                if((Settings.hddinfo == hr12)||(Settings.hddinfo == hr24)) {
-                                        clockTime.SetPosition(THEME.clock_x, THEME.clock_y+3);
-                                        clockTimeBack.SetPosition(THEME.clock_x, THEME.clock_y+3);
-                                        w.Append(&clockTime);
-                                        w.Append(&clockTimeBack);
-                                }
-                                w.Append(&favoriteBtn);
-                                w.Append(&abcBtn);
-                                w.Append(&countBtn);
-                                w.Append(&listBtn);
-                                w.Append(&gridBtn);
-                                w.Append(&carouselBtn);
-                                if(isSdInserted()) {
-                                        cfg_save_global();
-                                }
-                        }
-                        */
+                               
                         carouselBtn.ResetState();
             }
                 }
@@ -1114,6 +906,7 @@ int MenuDiscList()
 
                 if (Settings.gameDisplay==grid){
                         int selectimg;
+						DownloadBtn.SetSize(0,0);
                         selectimg = gameGrid->GetSelectedOption();
                         gameSelected = gameGrid->GetClickedOption();
 						selectImg1=selectimg;
@@ -1121,6 +914,7 @@ int MenuDiscList()
 
                 if (Settings.gameDisplay==carousel){
                         int selectimg;
+						DownloadBtn.SetSize(0,0);
                         selectimg = gameCarousel->GetSelectedOption();
                         gameSelected = gameCarousel->GetClickedOption();
                 		selectImg1=selectimg;
@@ -1128,6 +922,7 @@ int MenuDiscList()
                 if (Settings.gameDisplay==list) {
                         //Get selected game under cursor
                         int selectimg;//, promptnumber;
+						DownloadBtn.SetSize(160,224);
 
                         selectimg = gameBrowser->GetSelectedOption();
                         gameSelected = gameBrowser->GetClickedOption();
