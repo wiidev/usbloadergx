@@ -26,7 +26,6 @@ u8 viChoice = 0;
 u8 iosChoice = 0;
 u8 parentalcontrolChoice = 0;
 u8 fix002 = 0;
-u8 fix002anti = 0;
 u8 reloadblock = 0;
 u8 countrystrings = 0;
 u8 alternatedol = 0;
@@ -342,7 +341,6 @@ void Global_Default(void)
 	snprintf(Settings.db_language, sizeof(Settings.db_language), empty);
 	Settings.db_JPtoEN = 0;
 	Settings.screensaver = 3;
-	Settings.anti002fix = 0;
 }
 
 
@@ -982,13 +980,6 @@ void global_cfg_set(char *name, char *val)
 			}
 		return;
 	}
-	else if (strcmp(name, "anti002fix") == 0) {
-		int i;
-		if (sscanf(val, "%d", &i) == 1) {
-            Settings.anti002fix = i;
-			}
-		return;
-	}
 	else if (strcmp(name, "titlesOverride") == 0) {
 		int i;
 		if (sscanf(val, "%d", &i) == 1) {
@@ -1160,7 +1151,6 @@ void cfg_set_game_opt(struct Game_CFG *game, u8 *id)
 	game->ios = iosChoice;
 	game->parentalcontrol = parentalcontrolChoice;
 	game->errorfix002 = fix002;
-	game->errorfix002anti = fix002anti;
 	game->iosreloadblock = reloadblock;
 	game->patchcountrystrings = countrystrings;
 	game->loadalternatedol = alternatedol;
@@ -1258,7 +1248,6 @@ bool cfg_save_global()// save global settings
 	fprintf(f, "patchcountrystrings = %d\n ", Settings.patchcountrystrings);
 	fprintf(f, "screensaver = %d\n ", Settings.screensaver);
 	fprintf(f, "error002 = %d\n ", Settings.error002);
-	fprintf(f, "anti002fix = %d\n ", Settings.anti002fix);
 	fclose(f);
 	return true;
 }
@@ -1324,11 +1313,6 @@ void game_set(char *name, char *val)
 			if (strcmp("errorfix002", opt_name) == 0) {
 				if (sscanf(opt_val, "%hd", &opt_c) == 1) {
 					game->errorfix002 = opt_c;
-				}
-			}
-			if (strcmp("errorfix002anti", opt_name) == 0) {
-				if (sscanf(opt_val, "%hd", &opt_c) == 1) {
-					game->errorfix002anti = opt_c;
 				}
 			}
 			if (strcmp("iosreloadblock", opt_name) == 0) {
@@ -1491,7 +1475,6 @@ bool cfg_save_games()
 		fprintf(f, "ios:%d; ", cfg_game[i].ios);
 		fprintf(f, "pctrl:%d; ", cfg_game[i].parentalcontrol);
 		fprintf(f, "errorfix002:%d; ", cfg_game[i].errorfix002);
-		fprintf(f, "errorfix002anti:%d; ", cfg_game[i].errorfix002anti);
 		fprintf(f, "iosreloadblock:%d; ", cfg_game[i].iosreloadblock);
 		fprintf(f, "patchcountrystrings:%d; ", cfg_game[i].patchcountrystrings);
 		fprintf(f, "loadalternatedol:%d;\n", cfg_game[i].loadalternatedol);

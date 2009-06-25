@@ -718,7 +718,6 @@ int MenuSettings()
                     options2.SetName(5,"%s", tr("Boot/Standard"));
                     options2.SetName(6, "%s",tr("Quick Boot"));
                     options2.SetName(7, "%s",tr("Error 002 fix"));
-                    options2.SetName(8, "%s",tr("Anti 002 fix"));
                     for(int i = 0; i <= MAXOPTIONS; i++) options2.SetValue(i, NULL);
                     w.Append(&optionBrowser2);
                     optionBrowser2.SetClickable(true);
@@ -745,11 +744,9 @@ int MenuSettings()
                             Settings.cios = 0;
                         if ( Settings.language >= settings_language_max)
                             Settings.language = 0;
-                        if(Settings.error002 >= settings_off_on_max)
+                        if(Settings.error002 >= settings_off_on_max+1)
                             Settings.error002 = 0;
-                        if(Settings.anti002fix >= settings_off_on_max)
-                            Settings.anti002fix = 0;
-
+                        
                         if (Settings.video == discdefault) options2.SetValue(0,"%s",tr("Disc Default"));
                         else if (Settings.video == systemdefault) options2.SetValue(0,"%s",tr("System Default"));
                         else if (Settings.video == patch) options2.SetValue(0,"%s",tr("AutoPatch"));
@@ -787,9 +784,7 @@ int MenuSettings()
 
                         if (Settings.error002 == no) options2.SetValue(7,"%s",tr("No"));
                         else if (Settings.error002 == yes) options2.SetValue(7,"%s",tr("Yes"));
-
-                        if (Settings.anti002fix == no) options2.SetValue(8,"%s",tr("No"));
-                        else if (Settings.anti002fix == yes) options2.SetValue(8,"%s",tr("Yes"));
+						else if (Settings.error002 == anti) options2.SetValue(7,"%s",tr("Anti"));
 
                         if(backBtn.GetState() == STATE_CLICKED)
                         {
@@ -857,9 +852,7 @@ int MenuSettings()
                             case 7:
                                 Settings.error002++;
                                 break;
-                            case 8:
-                                Settings.anti002fix++;
-                                break;
+                            
                         }
                     }
                     optionBrowser2.SetEffect(EFFECT_FADE, -20);
@@ -1744,7 +1737,7 @@ int GameSettings(struct discHdr * header)
 		strncat(gameName, "...", 3);
 	}
 
-	customOptionList options3(13);
+	customOptionList options3(12);
 	options3.SetName(0,"%s", tr("Video Mode"));
 	options3.SetName(1,"%s", tr("VIDTV Patch"));
 	options3.SetName(2,"%s", tr("Game Language"));
@@ -1755,9 +1748,8 @@ int GameSettings(struct discHdr * header)
 	options3.SetName(7,"%s", tr("Patch Country Strings"));
 	options3.SetName(8,"%s", tr("Alternate DOL"));
 	options3.SetName(9,"%s", tr("Block IOS Reload"));
-	options3.SetName(10,"%s", tr("Anti Error 002 fix"));
-	options3.SetName(11,"%s", tr("Reset Playcounter"));
-	options3.SetName(12,"%s", tr("Default Gamesettings"));
+	options3.SetName(10,"%s", tr("Reset Playcounter"));
+	options3.SetName(11,"%s", tr("Default Gamesettings"));
 
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
 	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
@@ -1853,7 +1845,6 @@ int GameSettings(struct discHdr * header)
 		iosChoice = game_cfg->ios;
 		parentalcontrolChoice = game_cfg->parentalcontrol;
 		fix002 = game_cfg->errorfix002;
-		fix002anti = game_cfg->errorfix002anti;
 		countrystrings = game_cfg->patchcountrystrings;
 		alternatedol = game_cfg->loadalternatedol;
 		reloadblock = game_cfg->iosreloadblock;
@@ -1871,7 +1862,6 @@ int GameSettings(struct discHdr * header)
 		}
 		parentalcontrolChoice = 0;
 		fix002 = Settings.error002;
-		fix002anti = Settings.anti002fix;
 		countrystrings = Settings.patchcountrystrings;
 		alternatedol = off;
 		reloadblock = off;
@@ -1922,6 +1912,7 @@ int GameSettings(struct discHdr * header)
 
         if (fix002 == on) options3.SetValue(6,tr("ON"));
 		else if (fix002 == off) options3.SetValue(6,tr("OFF"));
+		else if (fix002 == anti) options3.SetValue(6,tr("Anti"));
 
         if (countrystrings == on) options3.SetValue(7,tr("ON"));
 		else if (countrystrings == off) options3.SetValue(7,tr("OFF"));
@@ -1932,9 +1923,7 @@ int GameSettings(struct discHdr * header)
         if (reloadblock == on) options3.SetValue(9,tr("ON"));
 		else if (reloadblock == off) options3.SetValue(9,tr("OFF"));
 		
-		if (fix002anti == on) options3.SetValue(10,tr("ON"));
-		else if (fix002anti == off) options3.SetValue(10,tr("OFF"));
-
+		
         
 
         options3.SetValue(11, NULL);
@@ -1968,7 +1957,7 @@ int GameSettings(struct discHdr * header)
 				parentalcontrolChoice = (parentalcontrolChoice + 1) % 5;
 				break;
             case 6:
-                fix002 = (fix002+1) % 2;
+                fix002 = (fix002+1) % 3;
                 break;
             case 7:
                 countrystrings = (countrystrings+1) % 2;
@@ -1980,9 +1969,6 @@ int GameSettings(struct discHdr * header)
                 reloadblock = (reloadblock+1) % 2;
                 break;
             case 10:
-                fix002anti = (fix002anti+1) % 2;
-                break;
-            case 11:
                 int result;
 				result = WindowPrompt(tr("Are you sure?"),0,tr("Yes"),tr("Cancel"),0,0);
 				if(result == 1) {
@@ -2000,7 +1986,7 @@ int GameSettings(struct discHdr * header)
                 }
 				}
                 break;
-            case 12:
+            case 11:
                 int choice = WindowPrompt(tr("Are you sure?"),0,tr("Yes"),tr("Cancel"),0,0);
                 if(choice == 1) {
                     videoChoice = Settings.video;
@@ -2008,7 +1994,6 @@ int GameSettings(struct discHdr * header)
                     languageChoice = Settings.language;
                     ocarinaChoice = Settings.ocarina;
                     fix002 = Settings.error002;
-                    fix002anti = Settings.anti002fix;
                     countrystrings = Settings.patchcountrystrings;
                     alternatedol = off;
                     reloadblock = off;

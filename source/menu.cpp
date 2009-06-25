@@ -1863,7 +1863,6 @@ int MainMenu(int menu)
         ocarinaChoice = game_cfg->ocarina;
         viChoice = game_cfg->vipatch;
         fix002 = game_cfg->errorfix002;
-        fix002anti = game_cfg->errorfix002anti;
         iosChoice = game_cfg->ios;
         countrystrings = game_cfg->patchcountrystrings;
         alternatedol = game_cfg->loadalternatedol;
@@ -1879,7 +1878,6 @@ int MainMenu(int menu)
 		iosChoice = i249;
 		}
         fix002 = Settings.error002;
-        fix002anti = Settings.anti002fix;
         countrystrings = Settings.patchcountrystrings;
         alternatedol = off;
         reloadblock = off;
@@ -1931,21 +1929,13 @@ int MainMenu(int menu)
             break;
         case off:
             errorfixer002 = 0;
+			break;
+		case anti:
+			errorfixer002 = 2;
             break;
     }
 
-    u8 errorfixer002anti = 0;
-    switch(fix002anti)
-    {
-        case on:
-            errorfixer002anti = 1;
-            break;
-        case off:
-            errorfixer002anti = 0;
-            break;
-    }
-
-    switch(languageChoice)
+   switch(languageChoice)
     {
                         case ConsoleLangDefault:
                                 configbytes[0] = 0xCD;
@@ -2061,7 +2051,7 @@ int MainMenu(int menu)
                         break;
     }
 
-    ret = Disc_WiiBoot(videoselected, cheat, vipatch, countrystrings, errorfixer002, alternatedol, errorfixer002anti);
+    ret = Disc_WiiBoot(videoselected, cheat, vipatch, countrystrings, errorfixer002, alternatedol);
     if (ret < 0) {
         Sys_LoadMenu();
     }

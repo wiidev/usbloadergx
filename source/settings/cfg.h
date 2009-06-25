@@ -152,7 +152,6 @@ extern u8 viChoice;
 extern u8 iosChoice;
 extern u8 parentalcontrolChoice;
 extern u8 fix002;
-extern u8 fix002anti;
 extern u8 reloadblock;
 extern u8 countrystrings;
 extern u8 alternatedol;
@@ -177,7 +176,6 @@ struct Game_CFG
 	u8 ios;
 	u8 parentalcontrol;
 	u8 errorfix002;
-	u8 errorfix002anti;
 	u8 iosreloadblock;
 	u8 loadalternatedol;
 	u8 patchcountrystrings;
@@ -232,6 +230,10 @@ enum {
 	on,
 	settings_off_on_max // always the last entry
 };
+enum {
+	anti=2,
+};
+	
 
 enum {
     GameID,
@@ -356,7 +358,6 @@ struct SSettings {
 	char	db_url[200];
 	char	db_language[100];
 	int		db_JPtoEN;
-	short   anti002fix;
 };
 
 void CFG_LoadGlobal(void);
