@@ -1066,7 +1066,7 @@ int MenuDiscList()
 									SDCard_Init();
 									menu = MENU_DISCLIST;
 									break;
-									
+								}	
 								}
                                 wiilight(0);
 								if(isInserted(bootDevice)) {
@@ -1087,7 +1087,7 @@ int MenuDiscList()
 
                             menu = MENU_EXIT;
                             break;
-							}
+							
                         }
                         bool returnHere = true;// prompt to start game
                         while (returnHere)
@@ -1122,11 +1122,12 @@ int MenuDiscList()
 									break;
 									
 								}
+								}
 								       wiilight(0);
                                        returnHere = false;
                                        menu = MENU_EXIT;
                                 
-								}
+								
 								}
                                 else if (choice == 2)
                                 {
