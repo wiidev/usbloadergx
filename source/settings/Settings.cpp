@@ -1744,7 +1744,7 @@ int GameSettings(struct discHdr * header)
 		strncat(gameName, "...", 3);
 	}
 
-	customOptionList options3(12);
+	customOptionList options3(13);
 	options3.SetName(0,"%s", tr("Video Mode"));
 	options3.SetName(1,"%s", tr("VIDTV Patch"));
 	options3.SetName(2,"%s", tr("Game Language"));
@@ -1755,8 +1755,9 @@ int GameSettings(struct discHdr * header)
 	options3.SetName(7,"%s", tr("Patch Country Strings"));
 	options3.SetName(8,"%s", tr("Alternate DOL"));
 	options3.SetName(9,"%s", tr("Block IOS Reload"));
-	options3.SetName(10,"%s", tr("Reset Playcounter"));
-	options3.SetName(11,"%s", tr("Default Gamesettings"));
+	options3.SetName(10,"%s", tr("Anti Error 002 fix"));
+	options3.SetName(11,"%s", tr("Reset Playcounter"));
+	options3.SetName(12,"%s", tr("Default Gamesettings"));
 
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
 	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
@@ -1852,6 +1853,7 @@ int GameSettings(struct discHdr * header)
 		iosChoice = game_cfg->ios;
 		parentalcontrolChoice = game_cfg->parentalcontrol;
 		fix002 = game_cfg->errorfix002;
+		fix002anti = game_cfg->errorfix002anti;
 		countrystrings = game_cfg->patchcountrystrings;
 		alternatedol = game_cfg->loadalternatedol;
 		reloadblock = game_cfg->iosreloadblock;
@@ -1869,6 +1871,7 @@ int GameSettings(struct discHdr * header)
 		}
 		parentalcontrolChoice = 0;
 		fix002 = Settings.error002;
+		fix002anti = Settings.anti002fix;
 		countrystrings = Settings.patchcountrystrings;
 		alternatedol = off;
 		reloadblock = off;
@@ -1928,9 +1931,14 @@ int GameSettings(struct discHdr * header)
 
         if (reloadblock == on) options3.SetValue(9,tr("ON"));
 		else if (reloadblock == off) options3.SetValue(9,tr("OFF"));
+		
+		if (fix002anti == on) options3.SetValue(10,tr("ON"));
+		else if (fix002anti == off) options3.SetValue(10,tr("OFF"));
 
-        options3.SetValue(10, NULL);
+        
+
         options3.SetValue(11, NULL);
+        options3.SetValue(12, NULL);
 
 		if(shutdown == 1)
 			Sys_Shutdown();
@@ -1972,6 +1980,9 @@ int GameSettings(struct discHdr * header)
                 reloadblock = (reloadblock+1) % 2;
                 break;
             case 10:
+                fix002anti = (fix002anti+1) % 2;
+                break;
+            case 11:
                 int result;
 				result = WindowPrompt(tr("Are you sure?"),0,tr("Yes"),tr("Cancel"),0,0);
 				if(result == 1) {
@@ -1989,7 +2000,7 @@ int GameSettings(struct discHdr * header)
                 }
 				}
                 break;
-            case 11:
+            case 12:
                 int choice = WindowPrompt(tr("Are you sure?"),0,tr("Yes"),tr("Cancel"),0,0);
                 if(choice == 1) {
                     videoChoice = Settings.video;
@@ -1997,6 +2008,7 @@ int GameSettings(struct discHdr * header)
                     languageChoice = Settings.language;
                     ocarinaChoice = Settings.ocarina;
                     fix002 = Settings.error002;
+                    fix002anti = Settings.anti002fix;
                     countrystrings = Settings.patchcountrystrings;
                     alternatedol = off;
                     reloadblock = off;

@@ -287,12 +287,13 @@ void gamepatches(void * dst, int len, u8 videoSelected, u8 patchcountrystring, u
 		if(patchcountrystring == 1)
 		PatchCountryStrings(dst, len);
 
-		if(Settings.anti002fix == on)
+		//if(Settings.anti002fix == on)
+		if(fix002anti == on)
 		Anti_002_fix(dst, len);
 
 }
 
-s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8 patchcountrystring, u8 error002fix, u8 alternatedol)
+s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8 patchcountrystring, u8 error002fix, u8 alternatedol, u8 error002fixanti)
 {
 	app_entry appldr_entry;
 	app_init  appldr_init;
@@ -324,7 +325,7 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
 	/* Initialize apploader */
 	appldr_init(__noprint);
 
-    if((error002fix) || (Settings.anti002fix == on)){
+    if((error002fix) || (error002fixanti)){
 	/* ERROR 002 fix (thanks to WiiPower for sharing this)*/
     *(u32 *)0x80003140 = *(u32 *)0x80003188;
     }
