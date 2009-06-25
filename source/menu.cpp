@@ -1066,7 +1066,7 @@ int MenuDiscList()
 									sprintf(nipple, "%s %s",nipple,tr("does not exist!  You Messed something up, Idiot."));
 									WindowPrompt(tr("Error"),nipple,tr("OK"),NULL,NULL,NULL);
 									
-									menu = MENU_DISCLIST;
+									menu = MENU_CHECK;
 									wiilight(0);
 									break;
 								}	
@@ -1123,7 +1123,7 @@ int MenuDiscList()
 									sprintf(nipple, "%s %s",nipple,tr("does not exist!  You Messed something up, Idiot."));
 									WindowPrompt(tr("Error"),nipple,tr("OK"),NULL,NULL,NULL);
 									
-									menu = MENU_DISCLIST;
+									menu = MENU_CHECK;
 									wiilight(0);
 									break;
 									
