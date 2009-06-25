@@ -1053,6 +1053,8 @@ int MenuDiscList()
 								alternatedol = off;
 								}
 								if (alternatedol != off){
+								SDCard_Init();
+								USBDevice_Init();
 								FILE *exeFile = NULL;
 								char nipple[100];
 								/* Open dol File and check exist */
@@ -1063,8 +1065,9 @@ int MenuDiscList()
 								{	
 									sprintf(nipple, "%s %s",nipple,tr("does not exist!  You Messed something up, Idiot."));
 									WindowPrompt(tr("Error"),nipple,tr("OK"),NULL,NULL,NULL);
-									SDCard_Init();
+									
 									menu = MENU_DISCLIST;
+									wiilight(0);
 									break;
 								}	
 								}
@@ -1107,6 +1110,8 @@ int MenuDiscList()
 								alternatedol = off;
 								}
 								if (alternatedol != off){
+								SDCard_Init();
+								USBDevice_Init();
 								FILE *exeFile = NULL;
 								char nipple[100];
 								/* Open dol File and check exist */
@@ -1117,8 +1122,9 @@ int MenuDiscList()
 								{	//alt dol is not there, so make them feel bad for wasting our time.  and boot the game anyways, just for spite 
 									sprintf(nipple, "%s %s",nipple,tr("does not exist!  You Messed something up, Idiot."));
 									WindowPrompt(tr("Error"),nipple,tr("OK"),NULL,NULL,NULL);
-									SDCard_Init();
+									
 									menu = MENU_DISCLIST;
+									wiilight(0);
 									break;
 									
 								}
@@ -1132,7 +1138,7 @@ int MenuDiscList()
                                 else if (choice == 2)
                                 {
                                         wiilight(0);
-                                        HaltGui();
+                                        HaltGui();									
                                         if (Settings.gameDisplay==list) mainWindow->Remove(gameBrowser);
                                         else if (Settings.gameDisplay==grid) mainWindow->Remove(gameGrid);
                                         else if (Settings.gameDisplay==carousel) mainWindow->Remove(gameCarousel);
