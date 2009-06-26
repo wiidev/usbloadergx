@@ -40,6 +40,97 @@ hash_string (const char *str_param)
   return hval;
 }
 
+/* Expand some escape sequences found in the argument string.  */
+static char *
+expand_escape (const char *str)
+{
+	char *retval, *rp;
+	const char *cp = str;
+
+	retval = (char *) malloc (strlen (str)+1);
+	if(retval==NULL) return NULL;
+	rp = retval;
+
+	while (cp[0] != '\0' && cp[0] != '\\')
+		*rp++ = *cp++;
+	if(cp[0] == '\0')
+		goto terminate;
+	do
+	{
+			
+		/* Here cp[0] == '\\'.  */
+		switch (*++cp)
+		{
+		case '\"':		/* " */
+			*rp++ = '\"';
+			++cp;
+			break;
+		case 'a':		/* alert */
+			*rp++ = '\a';
+			++cp;
+			break;
+		case 'b':		/* backspace */
+			*rp++ = '\b';
+			++cp;
+			break;
+		case 'f':		/* form feed */
+			*rp++ = '\f';
+			++cp;
+			break;
+		case 'n':		/* new line */
+			*rp++ = '\n';
+			++cp;
+			break;
+		case 'r':		/* carriage return */
+			*rp++ = '\r';
+			++cp;
+			break;
+		case 't':		/* horizontal tab */
+			*rp++ = '\t';
+			++cp;
+			break;
+		case 'v':		/* vertical tab */
+			*rp++ = '\v';
+			++cp;
+			break;
+		case '\\':
+			*rp = '\\';
+			++cp;
+			break;
+		case '0': case '1': case '2': case '3':
+		case '4': case '5': case '6': case '7':
+			{
+				int ch = *cp++ - '0';
+
+				if (*cp >= '0' && *cp <= '7')
+				{
+					ch *= 8;
+					ch += *cp++ - '0';
+
+					if (*cp >= '0' && *cp <= '7')
+					{
+						ch *= 8;
+						ch += *cp++ - '0';
+					}
+				}
+				*rp = ch;
+			}
+			break;
+		default:
+			*rp = '\\';
+			break;
+		}
+
+		while (cp[0] != '\0' && cp[0] != '\\')
+			*rp++ = *cp++;
+    }
+	while (cp[0] != '\0');
+
+	/* Terminate string.  */
+terminate:
+	*rp = '\0';
+	return retval;
+}
 
 static MSG *findMSG(u32 id)
 {
@@ -69,7 +160,8 @@ static MSG *setMSG(const char *msgid, const char *msgstr)
 		if(msgstr)
 		{
 			if(msg->msgstr) free(msg->msgstr);
-			msg->msgstr = strdup(msgstr);
+			//msg->msgstr = strdup(msgstr);
+			msg->msgstr = expand_escape(msgstr);
 		}
 		return msg;
 	}
@@ -141,7 +233,7 @@ bool gettextLoadLanguage(const char* langFile)
 const char *gettext(const char *msgid)
 {
 	MSG *msg = findMSG(hash_string(msgid));
-	if(msg) return msg->msgstr;
+	if(msg && msg->msgstr) return msg->msgstr;
 	return msgid;
 }
 
