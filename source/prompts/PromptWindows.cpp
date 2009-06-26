@@ -382,9 +382,10 @@ void WindowScreensaver()
 int
 WindowPrompt(const char *title, const char *msg, const char *btn1Label,
                 const char *btn2Label, const char *btn3Label,
-                const char *btn4Label)
+                const char *btn4Label, int wait)
 {
 	int choice = -1;
+	int count = wait;
 
 	GuiWindow promptWindow(472,320);
 	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
@@ -610,6 +611,8 @@ WindowPrompt(const char *title, const char *msg, const char *btn1Label,
 		else if(btn4.GetState() == STATE_CLICKED) {
 			choice = 0;
 		}
+		if (count>0)count--;
+		if (count==0) choice = 1;
 	}
 
 	promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
@@ -873,7 +876,7 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 			wiimoteImg.SetPosition(50,165);
 		}
 		else if(btn2.GetState() == STATE_CLICKED) {
-            ret = WindowPrompt(tr("Are you sure?"), 0, tr("Yes"), tr("No"), 0, 0);
+            ret = WindowPrompt(tr("Are you sure?"), 0, tr("Yes"), tr("No"), 0, 0,-1);
 			if (ret == 1) {
 			choice = 2;
 			}
@@ -885,7 +888,7 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 			btn2.ResetState();
 		}
 		else if(btn3.GetState() == STATE_CLICKED) {
-			ret = WindowPrompt(tr("Are you sure?"), 0, tr("Yes"), tr("No"), 0, 0);
+			ret = WindowPrompt(tr("Are you sure?"), 0, tr("Yes"), tr("No"), 0, 0,-1);
 			if (ret == 1) {
 			choice = 3;
 			}
@@ -1274,7 +1277,7 @@ int GameWindowPrompt()
 				}
 
 				choice = 1;
-				SDCard_deInit();
+				//SDCard_deInit();// moved this into menu.cpp after checking for gct file and alt dol
 			}
 
 			else if(btn2.GetState() == STATE_CLICKED) { //back
@@ -2032,13 +2035,13 @@ ProgressDownloadWindow(int choice2)
     struct stat st;
     if(stat(Settings.covers_path, &st) != 0) {
         if(subfoldercreate(Settings.covers_path) != 1) {
-        WindowPrompt(tr("Error !"),tr("Can't create directory"),tr("OK"),0,0,0);
+        WindowPrompt(tr("Error !"),tr("Can't create directory"),tr("OK"),0,0,0,-1);
         cntMissFiles = 0;
         }
     }
     if(stat(Settings.disc_path,&st) != 0) {
         if(subfoldercreate(Settings.disc_path) != 1) {
-        WindowPrompt(tr("Error !"),tr("Can't create directory"),tr("OK"),0,0,0);
+        WindowPrompt(tr("Error !"),tr("Can't create directory"),tr("OK"),0,0,0,-1);
         cntMissFiles = 0;
         }
     }
@@ -2257,7 +2260,7 @@ int ProgressUpdateWindow()
     struct stat st;
     if(stat(Settings.update_path, &st) != 0) {
         if(subfoldercreate(Settings.update_path) != 1) {
-        WindowPrompt(tr("Error !"),tr("Can't create directory"),tr("OK"),0,0,0);
+        WindowPrompt(tr("Error !"),tr("Can't create directory"),tr("OK"),0,0,0,-1);
         ret = -1;
         failed = -1;
         }
@@ -2295,7 +2298,7 @@ int ProgressUpdateWindow()
     if(newrev > 0) {
 
         sprintf(msg, "Rev%i %s.", newrev, tr("available"));
-        int choice = WindowPrompt(msg, tr("How do you want to update?"), tr("Update DOL"), tr("Update All"), tr("Cancel"), 0);
+        int choice = WindowPrompt(msg, tr("How do you want to update?"), tr("Update DOL"), tr("Update All"), tr("Cancel"), 0,-1);
         if(choice == 1 || choice == 2) {
             titleTxt.SetTextf("%s USB Loader GX", tr("Updating"));
             msgTxt.SetPosition(0,100);
@@ -2380,7 +2383,7 @@ int ProgressUpdateWindow()
         }
 
     } else {
-        WindowPrompt(tr("No new updates."), 0, tr("OK"), 0, 0, 0);
+        WindowPrompt(tr("No new updates."), 0, tr("OK"), 0, 0, 0,-1);
         ret = -1;
     }
 
@@ -2389,7 +2392,7 @@ int ProgressUpdateWindow()
     CloseConnection();
 
     if(!failed && ret >= 0) {
-        WindowPrompt(tr("Successfully Updated") , tr("Restarting..."), tr("OK"), 0, 0, 0);
+        WindowPrompt(tr("Successfully Updated") , tr("Restarting..."), tr("OK"), 0, 0, 0,-1);
         Sys_BackToLoader();
     }
 

@@ -65,9 +65,9 @@ int CheatMenu(const char * gameID)
 	int check = c.openTxtfile(txtfilename);
 	switch(check)
 	{
-	case -1: WindowPrompt(tr("Error"),tr("Cheatfile is blank"),tr("OK"),NULL,NULL,NULL);
+	case -1: WindowPrompt(tr("Error"),tr("Cheatfile is blank"),tr("OK"),NULL,NULL,NULL,-1);
 			 break;
-	case 0: WindowPrompt(tr("Error"),tr("No Cheatfile found"),tr("OK"),NULL,NULL,NULL);
+	case 0: WindowPrompt(tr("Error"),tr("No Cheatfile found"),tr("OK"),NULL,NULL,NULL,-1);
 			break;
 	case 1:	//WindowPrompt("Opened File","File found for Game","Okay",NULL,NULL,NULL);
 	int cntcheats = c.getCnt()+1;
@@ -139,10 +139,10 @@ int CheatMenu(const char * gameID)
 		string chtpath = Settings.Cheatcodespath;
 		string gctfname = chtpath + c.getGameID() + ".gct";
 		c.createGCT(selectednrs,x,gctfname.c_str());
-		WindowPrompt(tr("GCT File created"),NULL,tr("OK"),NULL,NULL,NULL);
+		WindowPrompt(tr("GCT File created"),NULL,tr("OK"),NULL,NULL,NULL,-1);
 		exit = true;
 		break;				
-		} else WindowPrompt(tr("Error"),tr("Could not create GCT file"),tr("OK"),NULL,NULL,NULL);
+		} else WindowPrompt(tr("Error"),tr("Could not create GCT file"),tr("OK"),NULL,NULL,NULL,-1);
 		
 	}
 

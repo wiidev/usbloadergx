@@ -605,7 +605,7 @@ int MenuDiscList()
 				char idiotBuffer[200];
 				snprintf(idiotBuffer, sizeof(idiotBuffer), "%s (%s). %s",tr("You have attempted to load a bad image"), idiotChar,tr("Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."));
 		
-			WindowPrompt(0,idiotBuffer,tr("Ok"), 0, 0,0);
+			WindowPrompt(0,idiotBuffer,tr("Ok"), 0, 0,0,-1);
 			idiotFlag=-1;}
 
                 //CLOCK
@@ -647,7 +647,7 @@ int MenuDiscList()
                 if(poweroffBtn.GetState() == STATE_CLICKED)
                 {
 
-                        choice = WindowPrompt(tr("How to Shutdown?"),0,tr("Full Shutdown"), tr("Shutdown to Idle"), tr("Cancel"),0);
+                        choice = WindowPrompt(tr("How to Shutdown?"),0,tr("Full Shutdown"), tr("Shutdown to Idle"), tr("Cancel"),0,-1);
                         if(choice == 2)
                         {
                                 Sys_ShutdownToIdel();
@@ -698,7 +698,7 @@ int MenuDiscList()
                 }
                 else if(installBtn.GetState() == STATE_CLICKED)
                 {
-                                choice = WindowPrompt(tr("Install a game"),0,tr("Yes"),tr("No"),0,0);
+                                choice = WindowPrompt(tr("Install a game"),0,tr("Yes"),tr("No"),0,0,-1);
                                 if (choice == 1)
                                 {
                                         menu = MENU_INSTALL;
@@ -740,7 +740,7 @@ int MenuDiscList()
                 {
                     //if(isSdInserted()) {
 					if(isInserted(bootDevice)) {
-                        choice = WindowPrompt(tr("Cover Download"), 0, tr("Normal Covers"), tr("3D Covers"), tr("Disc Images"), tr("Back")); // ask for download choice
+                        choice = WindowPrompt(tr("Cover Download"), 0, tr("Normal Covers"), tr("3D Covers"), tr("Disc Images"), tr("Back"),-1); // ask for download choice
 
                         if (choice != 0)
                         {
@@ -750,7 +750,7 @@ int MenuDiscList()
 
                                 if(IsNetworkInit() == false)
                                 {
-                                   WindowPrompt(tr("Network init error"), 0, tr("OK"),0,0,0);
+                                   WindowPrompt(tr("Network init error"), 0, tr("OK"),0,0,0,-1);
 
                                 } else {
 
@@ -760,26 +760,26 @@ int MenuDiscList()
                                                 char tempCnt[40];
 
                                                 sprintf(tempCnt,"%i %s",cntMissFiles,tr("Missing files"));
-                                                choice = WindowPrompt(tr("Download Boxart image?"),tempCnt,tr("Yes"),tr("No"),0,0);
+                                                choice = WindowPrompt(tr("Download Boxart image?"),tempCnt,tr("Yes"),tr("No"),0,0,-1);
                                                 if (choice == 1)
                                                 {
                                                         ret = ProgressDownloadWindow(choice2);
                                                         if (ret == 0) {
-                                                        WindowPrompt(tr("Download finished"),0,tr("OK"),0,0,0);
+                                                        WindowPrompt(tr("Download finished"),0,tr("OK"),0,0,0,-1);
                                                         } else {
                             sprintf(tempCnt,"%i %s",ret,tr("files not found on the server!"));
-                            WindowPrompt(tr("Download finished"),tempCnt,tr("OK"),0,0,0);
+                            WindowPrompt(tr("Download finished"),tempCnt,tr("OK"),0,0,0,-1);
                                                         }
                                                 }
                                         }
                                         else
                                         {
-                                                WindowPrompt(tr("No file missing!"),0,tr("OK"),0,0,0);
+                                                WindowPrompt(tr("No file missing!"),0,tr("OK"),0,0,0,-1);
                                         }
                                 }
                         }
             } else {
-                        WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to download images."), tr("OK"), 0,0,0);
+                        WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to download images."), tr("OK"), 0,0,0,-1);
             }
             DownloadBtn.ResetState();
                         if (Settings.gameDisplay==list){gameBrowser->SetFocus(1);}
@@ -1043,34 +1043,48 @@ int MenuDiscList()
                                 text[MAX_CHARACTERS] = '\0';
                                 strncat(text, "...", 3);
                         }
+						
+						//check if alt Dol and gct file is present
+						FILE *exeFile = NULL;
+						char nipple[100];
+						header = &gameList[gameSelected]; //reset header
+						snprintf (IDfull,sizeof(IDfull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
+                              struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
+						if (game_cfg) {
+							ocarinaChoice = game_cfg->ocarina;
+							alternatedol = game_cfg->loadalternatedol;
+						} else {
+							alternatedol = off;
+							ocarinaChoice = Settings.ocarina;
+							}
+							
 
                         if (Settings.qboot == yes)//quickboot game
-                        {	//check if alt Dol is on present
-								struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
-								if (game_cfg) {
-									alternatedol = game_cfg->loadalternatedol;
-								} else {
-								alternatedol = off;
-								}
-								if (alternatedol != off){
-								SDCard_Init();
-								USBDevice_Init();
-								FILE *exeFile = NULL;
-								char nipple[100];
+                        {		if (alternatedol != off){
 								/* Open dol File and check exist */
-								snprintf (IDfull,sizeof(IDfull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
-                                sprintf(nipple, "%s%s.dol",Settings.dolpath,IDfull);
+								sprintf(nipple, "%s%s.dol",Settings.dolpath,IDfull);
 								exeFile = fopen (nipple ,"rb");
 								if (exeFile==NULL)
 								{	
 									sprintf(nipple, "%s %s",nipple,tr("does not exist!  You Messed something up, Idiot."));
-									WindowPrompt(tr("Error"),nipple,tr("OK"),NULL,NULL,NULL);
+									WindowPrompt(tr("Error"),nipple,tr("OK"),NULL,NULL,NULL,-1);
 									
 									menu = MENU_CHECK;
 									wiilight(0);
 									break;
 								}	
 								}
+								if (ocarinaChoice != off){
+								/* Open gct File and check exist */
+								sprintf(nipple, "%s%s.gct",Settings.Cheatcodespath,IDfull);
+								exeFile = fopen (nipple ,"rb");
+								if (exeFile==NULL)
+								{	
+									sprintf(nipple, "%s %s",nipple,tr("does not exist!  Loading game without cheats."));
+									WindowPrompt(tr("Error"),nipple,tr("OK"),NULL,NULL,NULL,170);
+								}	
+								}
+								SDCard_deInit();
                                 wiilight(0);
 								if(isInserted(bootDevice)) {
                                 //////////save game play count////////////////
@@ -1098,37 +1112,34 @@ int MenuDiscList()
                                 returnHere = false;
                                 if(Settings.wiilight != 2) wiilight(1);
                                 choice = GameWindowPrompt();
-                                header = &gameList[gameSelected]; //reset header
+                               // header = &gameList[gameSelected]; //reset header
 
                                 if(choice == 1)
                                 {
-								//check if alt Dol is on present
-								struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
-								if (game_cfg) {
-									alternatedol = game_cfg->loadalternatedol;
-								} else {
-								alternatedol = off;
-								}
 								if (alternatedol != off){
-								SDCard_Init();
-								USBDevice_Init();
-								FILE *exeFile = NULL;
-								char nipple[100];
 								/* Open dol File and check exist */
-								snprintf (IDfull,sizeof(IDfull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
-                                sprintf(nipple, "%s%s.dol",Settings.dolpath,IDfull);
+								sprintf(nipple, "%s%s.dol",Settings.dolpath,IDfull);
 								exeFile = fopen (nipple ,"rb");
 								if (exeFile==NULL)
-								{	//alt dol is not there, so make them feel bad for wasting our time.  and boot the game anyways, just for spite 
+								{	
 									sprintf(nipple, "%s %s",nipple,tr("does not exist!  You Messed something up, Idiot."));
-									WindowPrompt(tr("Error"),nipple,tr("OK"),NULL,NULL,NULL);
+									WindowPrompt(tr("Error"),nipple,tr("OK"),NULL,NULL,NULL,-1);
 									
 									menu = MENU_CHECK;
 									wiilight(0);
 									break;
-									
+								}	
 								}
-								}
+								if (ocarinaChoice != off){
+								/* Open gct File and check exist */
+								sprintf(nipple, "%s%s.gct",Settings.Cheatcodespath,IDfull);
+								exeFile = fopen (nipple ,"rb");
+								if (exeFile==NULL)
+								{	
+									sprintf(nipple, "%s %s",nipple,tr("does not exist!  Loading game without cheats."));
+									WindowPrompt(tr("Error"),nipple,NULL,NULL,NULL,NULL,170);
+								}	
+								}		SDCard_deInit();
 								       wiilight(0);
                                        returnHere = false;
                                        menu = MENU_EXIT;
@@ -1244,20 +1255,20 @@ static int MenuInstall()
 
 		ret = DiscWait(tr("Insert Disk"),tr("Waiting..."),tr("Cancel"),0,0);
 		if (ret < 0) {
-			WindowPrompt (tr("Error reading Disc"),0,tr("Back"),0,0,0);
+			WindowPrompt (tr("Error reading Disc"),0,tr("Back"),0,0,0,-1);
 			menu = MENU_DISCLIST;
 			break;
 		}
 		ret = Disc_Open();
 		if (ret < 0) {
-			WindowPrompt (tr("Could not open Disc"),0,tr("Back"),0,0,0);
+			WindowPrompt (tr("Could not open Disc"),0,tr("Back"),0,0,0,-1);
 			menu = MENU_DISCLIST;
 			break;
 		}
 
 		ret = Disc_IsWii();
 		if (ret < 0) {
-			choice = WindowPrompt (tr("Not a Wii Disc"),"Insert a Wii Disc!",tr("OK"),tr("Back"),0,0);
+			choice = WindowPrompt (tr("Not a Wii Disc"),"Insert a Wii Disc!",tr("OK"),tr("Back"),0,0,-1);
 
 			if (choice == 1) {
 				menu = MENU_INSTALL;
@@ -1281,7 +1292,7 @@ static int MenuInstall()
 
 		ret = WBFS_CheckGame(headerdisc.id);
 		if (ret) {
-			WindowPrompt (tr("Game is already installed:"),name,tr("Back"),0,0,0);
+			WindowPrompt (tr("Game is already installed:"),name,tr("Back"),0,0,0,-1);
 			menu = MENU_DISCLIST;
 			break;
 		}
@@ -1295,7 +1306,7 @@ static int MenuInstall()
 		sprintf(gametxt, "%s : %.2fGB", name, gamesize);
 
         wiilight(1);
-		choice = WindowPrompt(tr("Continue to install game?"),gametxt,tr("OK"),tr("Cancel"),0,0);
+		choice = WindowPrompt(tr("Continue to install game?"),gametxt,tr("OK"),tr("Cancel"),0,0,-1);
 
 		if(choice == 1) {
 
@@ -1304,18 +1315,18 @@ static int MenuInstall()
 		if (gamesize > freespace) {
 			char errortxt[50];
 			sprintf(errortxt, "%s: %.2fGB, %s: %.2fGB",tr("Game Size"), gamesize, tr("Free Space"), freespace);
-			choice = WindowPrompt(tr("Not enough free space!"),errortxt,tr("OK"), tr("Return"),0,0);
+			choice = WindowPrompt(tr("Not enough free space!"),errortxt,tr("OK"), tr("Return"),0,0,-1);
 			if (choice == 1) {
 				ret = ProgressWindow(gametxt, name);
                 wiilight(0);
 				if (ret != 0) {
-					WindowPrompt (tr("Install Error!"),0,tr("Back"),0,0,0);
+					WindowPrompt (tr("Install Error!"),0,tr("Back"),0,0,0,-1);
 					menu = MENU_DISCLIST;
 					break;
 				}
 				else {
 					__Menu_GetEntries(); //get the entries again
-					WindowPrompt (tr("Successfully installed:"),name,tr("OK"),0,0,0);
+					WindowPrompt (tr("Successfully installed:"),name,tr("OK"),0,0,0,-1);
 					menu = MENU_DISCLIST;
 					break;
 				}
@@ -1329,12 +1340,12 @@ static int MenuInstall()
 			ret = ProgressWindow(gametxt, name);
             wiilight(0);
 			if (ret != 0) {
-				WindowPrompt (tr("Install Error!"),0,tr("Back"),0,0,0);
+				WindowPrompt (tr("Install Error!"),0,tr("Back"),0,0,0,-1);
 				menu = MENU_DISCLIST;
 					break;
 			} else {
 				__Menu_GetEntries(); //get the entries again
-				WindowPrompt (tr("Successfully installed:"),name,tr("OK"),0,0,0);
+				WindowPrompt (tr("Successfully installed:"),name,tr("OK"),0,0,0,-1);
 				menu = MENU_DISCLIST;
 				break;
 			}
@@ -1464,17 +1475,17 @@ static int MenuFormat()
                         tr("Do you want to format:"),
                         text,
                         tr("Yes"),
-                        tr("No"),0,0);
+                        tr("No"),0,0,-1);
                     if(choice == 1) {
                     ret = FormatingPartition(tr("Formatting, please wait..."), entry);
                         if (ret < 0) {
-                            WindowPrompt(tr("Error !"),tr("Failed formating"),tr("Return"),0,0,0);
+                            WindowPrompt(tr("Error !"),tr("Failed formating"),tr("Return"),0,0,0,-1);
                             menu = MENU_SETTINGS;
 
                         } else {
                             ret = WBFS_Open();
                             sprintf(text, "%s %s", text,tr("formatted!"));
-                            WindowPrompt(tr("Success:"),text,tr("OK"),0,0,0);
+                            WindowPrompt(tr("Success:"),text,tr("OK"),0,0,0,-1);
                             menu = MENU_DISCLIST;
                         }
                     }
@@ -1488,7 +1499,7 @@ static int MenuFormat()
 
 	    if(poweroffBtn.GetState() == STATE_CLICKED)
 		{
-		    choice = WindowPrompt (tr("Shutdown System"),tr("Are you sure?"),tr("Yes"),tr("No"),0,0);
+		    choice = WindowPrompt (tr("Shutdown System"),tr("Are you sure?"),tr("Yes"),tr("No"),0,0,-1);
 			if(choice == 1)
 			{
 				Sys_Shutdown();
@@ -1496,7 +1507,7 @@ static int MenuFormat()
 
 		} else if(exitBtn.GetState() == STATE_CLICKED)
 		{
-		    choice = WindowPrompt (tr("Return to Wii Menu"),tr("Are you sure?"),tr("Yes"),tr("No"),0,0);
+		    choice = WindowPrompt (tr("Return to Wii Menu"),tr("Are you sure?"),tr("Yes"),tr("No"),0,0,-1);
 			if(choice == 1)
 			{
 				Sys_LoadMenu();
@@ -1535,7 +1546,7 @@ static int MenuCheck()
             ret2 = WindowPrompt(tr("No USB Device found."),
                     tr("Do you want to retry for 30 secs?"),
                     "cIOS249", "cIOS222",
-                    tr("Back to Wii Menu"), 0);
+                    tr("Back to Wii Menu"), 0,-1);
             SDCard_deInit();
             USBDevice_deInit();
             WPAD_Flush(0);
@@ -1554,14 +1565,14 @@ static int MenuCheck()
             WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
             WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
             if (ret2 < 0) {
-                WindowPrompt (tr("Error !"),tr("USB Device not found"), tr("OK"), 0,0,0);
+                WindowPrompt (tr("Error !"),tr("USB Device not found"), tr("OK"), 0,0,0,-1);
                 Sys_LoadMenu();
             }
         }
 
         ret2 = Disc_Init();
         if (ret2 < 0) {
-            WindowPrompt (tr("Error !"),tr("Could not initialize DIP module!"),tr("OK"), 0,0,0);
+            WindowPrompt (tr("Error !"),tr("Could not initialize DIP module!"),tr("OK"), 0,0,0,-1);
             Sys_LoadMenu();
         }
 
@@ -1570,7 +1581,7 @@ static int MenuCheck()
             choice = WindowPrompt(tr("No WBFS partition found"),
                                     tr("You need to format a partition"),
                                     tr("Format"),
-                                    tr("Return"),0,0);
+                                    tr("Return"),0,0,-1);
                 if(choice == 0)
                 {
                     Sys_LoadMenu();
@@ -1579,7 +1590,7 @@ static int MenuCheck()
 					u32 sector_size;
                     ret2 = Partition_GetEntries(partitions, &sector_size);
                     if (ret2 < 0) {
-                            WindowPrompt (tr("No partitions found"),0, tr("Restart"), 0,0,0);
+                            WindowPrompt (tr("No partitions found"),0, tr("Restart"), 0,0,0,-1);
                             Sys_LoadMenu();
 
                     }
