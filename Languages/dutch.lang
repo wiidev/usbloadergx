@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-22 20:10+0200\n"
+"POT-Creation-Date: 2009-06-28 17:30-0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -36,7 +36,7 @@ msgstr "Alle functies zijn vrijgegeven."
 msgid "Alternate DOL"
 msgstr "Dol afwisselen"
 
-msgid "Anti 002 fix"
+msgid "Anti"
 msgstr ""
 
 msgid "App Language"
@@ -102,6 +102,9 @@ msgstr "Locatie cheats"
 msgid "Cheatcodes Path changed"
 msgstr "Locatie cheats gewijzigd"
 
+msgid "Cheatfile is blank"
+msgstr ""
+
 msgid "Checking for Updates"
 msgstr "Controleren op updates"
 
@@ -135,6 +138,9 @@ msgstr "Controle level"
 msgid "Correct Password"
 msgstr "Juiste wachtwoord"
 
+msgid "Could not create GCT file"
+msgstr ""
+
 msgid "Could not initialize DIP module!"
 msgstr "Kan de DIP module niet initialiseren!"
 
@@ -152,6 +158,9 @@ msgstr "Locatie hoesjes"
 
 msgid "Coverpath Changed"
 msgstr "Locatie hoesjes gewijzigd"
+
+msgid "Create"
+msgstr ""
 
 msgid "Credits"
 msgstr "Aftiteling"
@@ -231,6 +240,9 @@ msgstr "Nederlands"
 msgid "English"
 msgstr "Engels"
 
+msgid "Error"
+msgstr ""
+
 msgid "Error !"
 msgstr "Fout !"
 
@@ -272,6 +284,9 @@ msgstr "Frans"
 
 msgid "Full Shutdown"
 msgstr "Volledig uitzetten"
+
+msgid "GCT File created"
+msgstr ""
 
 msgid "GUI Settings"
 msgstr "Menu opties"
@@ -390,6 +405,9 @@ msgstr "Mei"
 msgid "Missing files"
 msgstr "Missende bestanden"
 
+msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
+msgstr ""
+
 msgid "Music Volume"
 msgstr "Muziekvolume"
 
@@ -404,6 +422,9 @@ msgstr "Volgende"
 
 msgid "No"
 msgstr "Nee"
+
+msgid "No Cheatfile found"
+msgstr ""
 
 msgid "No SD-Card inserted!"
 msgstr "Geen SD kaart gevonden!"
@@ -458,6 +479,9 @@ msgstr "Okt"
 
 msgid "Official Site"
 msgstr "Officiele site"
+
+msgid "Ok"
+msgstr ""
 
 msgid "Only for Install"
 msgstr "Alleen installeren"
@@ -600,6 +624,9 @@ msgstr "Systeem standaard"
 msgid "TChinese"
 msgstr "TChinees"
 
+msgid "TXTCheatcodes Path"
+msgstr ""
+
 msgid "ThemePath"
 msgstr "Locatie thema"
 
@@ -687,11 +714,20 @@ msgstr "Foute wachtwoord!"
 msgid "Yes"
 msgstr "Ja"
 
+msgid "You have attempted to load a bad image"
+msgstr ""
+
 msgid "You need to format a partition"
 msgstr "Je moet een partitie formatteren"
 
 msgid "available"
 msgstr "beschikbaar"
+
+msgid "does not exist!  Loading game without cheats."
+msgstr ""
+
+msgid "does not exist!  You Messed something up, Idiot."
+msgstr ""
 
 msgid "file(s) left"
 msgstr "Bestanden resterend"
@@ -707,9 +743,6 @@ msgstr "voor vele correcties"
 
 msgid "for his awesome tool"
 msgstr "voor zijn geweldige programma"
-
-msgid "for hosting the covers/discarts"
-msgstr "(upload van afbeeldingen)"
 
 msgid "for hosting the update files"
 msgstr "(upload van  updates)"
@@ -734,6 +767,9 @@ msgstr "seconden over:"
 
 msgid "titles.txt Path"
 msgstr "Locatie titles.txt"
+
+#~ msgid "for hosting the covers/discarts"
+#~ msgstr "(upload van afbeeldingen)"
 
 #~ msgid "Alphabetical"
 #~ msgstr "Alfabetisch"

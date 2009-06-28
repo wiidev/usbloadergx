@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-22 20:10+0200\n"
+"POT-Creation-Date: 2009-06-28 17:30-0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -36,7 +36,7 @@ msgstr "Alle Funktionen des USB Loader GX sind freigeschaltet."
 msgid "Alternate DOL"
 msgstr ""
 
-msgid "Anti 002 fix"
+msgid "Anti"
 msgstr ""
 
 msgid "App Language"
@@ -102,6 +102,9 @@ msgstr "Cheatcode Pfad"
 msgid "Cheatcodes Path changed"
 msgstr "Cheatcode Pfad geändert"
 
+msgid "Cheatfile is blank"
+msgstr ""
+
 msgid "Checking for Updates"
 msgstr "Suche nach Aktualisierung"
 
@@ -135,6 +138,9 @@ msgstr "Kontroll Level"
 msgid "Correct Password"
 msgstr "Richtiges Passwort"
 
+msgid "Could not create GCT file"
+msgstr ""
+
 msgid "Could not initialize DIP module!"
 msgstr "DIP Modul konnte nicht initialisiert werden!"
 
@@ -152,6 +158,9 @@ msgstr "Cover Pfad"
 
 msgid "Coverpath Changed"
 msgstr "Cover Pfad geändert"
+
+msgid "Create"
+msgstr ""
 
 msgid "Credits"
 msgstr "Credits"
@@ -231,6 +240,9 @@ msgstr "Niederländisch"
 msgid "English"
 msgstr "Englisch"
 
+msgid "Error"
+msgstr ""
+
 msgid "Error !"
 msgstr "Fehler !"
 
@@ -272,6 +284,9 @@ msgstr "Französisch"
 
 msgid "Full Shutdown"
 msgstr "Ausschalten"
+
+msgid "GCT File created"
+msgstr ""
 
 msgid "GUI Settings"
 msgstr "GUI Einstellungen"
@@ -390,6 +405,9 @@ msgstr "Mai"
 msgid "Missing files"
 msgstr "Fehlende Datei(en)"
 
+msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
+msgstr ""
+
 msgid "Music Volume"
 msgstr "Lautstärke"
 
@@ -404,6 +422,9 @@ msgstr "Nächste"
 
 msgid "No"
 msgstr "Nein"
+
+msgid "No Cheatfile found"
+msgstr ""
 
 msgid "No SD-Card inserted!"
 msgstr "Keine SD Karte eingelegt!"
@@ -458,6 +479,9 @@ msgstr "Okt"
 
 msgid "Official Site"
 msgstr "Offizielle Seite"
+
+msgid "Ok"
+msgstr ""
 
 msgid "Only for Install"
 msgstr "Beim installieren"
@@ -600,6 +624,9 @@ msgstr "Konsolenstandard"
 msgid "TChinese"
 msgstr "Traditionelles Chinesisch"
 
+msgid "TXTCheatcodes Path"
+msgstr ""
+
 msgid "ThemePath"
 msgstr "Theme Pfad"
 
@@ -687,11 +714,20 @@ msgstr "Falsches Passwort"
 msgid "Yes"
 msgstr "Ja"
 
+msgid "You have attempted to load a bad image"
+msgstr ""
+
 msgid "You need to format a partition"
 msgstr "Sie müssen eine Partition formatieren"
 
 msgid "available"
 msgstr "verfügbar"
+
+msgid "does not exist!  Loading game without cheats."
+msgstr ""
+
+msgid "does not exist!  You Messed something up, Idiot."
+msgstr ""
 
 msgid "file(s) left"
 msgstr "Datei(en) übrig"
@@ -707,9 +743,6 @@ msgstr "für diverse Patch´s"
 
 msgid "for his awesome tool"
 msgstr "für sein großartiges Tool"
-
-msgid "for hosting the covers/discarts"
-msgstr "für das Hosten der Covers/Discarts"
 
 msgid "for hosting the update files"
 msgstr "für das Hosten der Update Dateien"
@@ -734,6 +767,9 @@ msgstr "Sekunden verbleiben"
 
 msgid "titles.txt Path"
 msgstr "Titles.txt Pfad"
+
+#~ msgid "for hosting the covers/discarts"
+#~ msgstr "für das Hosten der Covers/Discarts"
 
 #~ msgid "Favorite"
 #~ msgstr "Favoriten"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-22 20:10+0200\n"
+"POT-Creation-Date: 2009-06-28 17:30-0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -36,7 +36,7 @@ msgstr "USB Loader GX 功能已解锁."
 msgid "Alternate DOL"
 msgstr ""
 
-msgid "Anti 002 fix"
+msgid "Anti"
 msgstr ""
 
 msgid "App Language"
@@ -102,6 +102,9 @@ msgstr ""
 msgid "Cheatcodes Path changed"
 msgstr ""
 
+msgid "Cheatfile is blank"
+msgstr ""
+
 msgid "Checking for Updates"
 msgstr ""
 
@@ -135,6 +138,9 @@ msgstr ""
 msgid "Correct Password"
 msgstr "密码正确"
 
+msgid "Could not create GCT file"
+msgstr ""
+
 msgid "Could not initialize DIP module!"
 msgstr "无法启动 DIP 模块!"
 
@@ -152,6 +158,9 @@ msgstr "封面存放路径"
 
 msgid "Coverpath Changed"
 msgstr "封面路径已变更"
+
+msgid "Create"
+msgstr ""
 
 msgid "Credits"
 msgstr "Credits"
@@ -231,6 +240,9 @@ msgstr "荷文"
 msgid "English"
 msgstr "英文"
 
+msgid "Error"
+msgstr ""
+
 msgid "Error !"
 msgstr "错误 !"
 
@@ -272,6 +284,9 @@ msgstr "法文"
 
 msgid "Full Shutdown"
 msgstr "完全关机"
+
+msgid "GCT File created"
+msgstr ""
 
 msgid "GUI Settings"
 msgstr ""
@@ -390,6 +405,9 @@ msgstr ""
 msgid "Missing files"
 msgstr "缺少的文件"
 
+msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
+msgstr ""
+
 msgid "Music Volume"
 msgstr "音量"
 
@@ -404,6 +422,9 @@ msgstr "往后"
 
 msgid "No"
 msgstr "否"
+
+msgid "No Cheatfile found"
+msgstr ""
 
 msgid "No SD-Card inserted!"
 msgstr "未插入 SD 卡!"
@@ -458,6 +479,9 @@ msgstr ""
 
 msgid "Official Site"
 msgstr "官方网址"
+
+msgid "Ok"
+msgstr ""
 
 msgid "Only for Install"
 msgstr ""
@@ -600,6 +624,9 @@ msgstr "系统默认"
 msgid "TChinese"
 msgstr "繁体中文"
 
+msgid "TXTCheatcodes Path"
+msgstr ""
+
 msgid "ThemePath"
 msgstr "主题存放路径"
 
@@ -687,10 +714,19 @@ msgstr "密码错误"
 msgid "Yes"
 msgstr "是"
 
+msgid "You have attempted to load a bad image"
+msgstr ""
+
 msgid "You need to format a partition"
 msgstr "必须格式化一个分区"
 
 msgid "available"
+msgstr ""
+
+msgid "does not exist!  Loading game without cheats."
+msgstr ""
+
+msgid "does not exist!  You Messed something up, Idiot."
 msgstr ""
 
 msgid "file(s) left"
@@ -706,9 +742,6 @@ msgid "for diverse patches"
 msgstr ""
 
 msgid "for his awesome tool"
-msgstr ""
-
-msgid "for hosting the covers/discarts"
 msgstr ""
 
 msgid "for hosting the update files"

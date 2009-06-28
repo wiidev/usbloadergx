@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-22 20:10+0200\n"
+"POT-Creation-Date: 2009-06-28 17:30-0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -36,7 +36,7 @@ msgstr "Kaikki asetukset on nyt käytettävissä."
 msgid "Alternate DOL"
 msgstr ""
 
-msgid "Anti 002 fix"
+msgid "Anti"
 msgstr ""
 
 msgid "App Language"
@@ -102,6 +102,9 @@ msgstr ""
 msgid "Cheatcodes Path changed"
 msgstr ""
 
+msgid "Cheatfile is blank"
+msgstr ""
+
 msgid "Checking for Updates"
 msgstr ""
 
@@ -135,6 +138,9 @@ msgstr ""
 msgid "Correct Password"
 msgstr "Oikea salasana"
 
+msgid "Could not create GCT file"
+msgstr ""
+
 msgid "Could not initialize DIP module!"
 msgstr "DIP Moduulia ei voitu alustaa!"
 
@@ -152,6 +158,9 @@ msgstr "kansien sijainti"
 
 msgid "Coverpath Changed"
 msgstr "kansien sijainti muutettu"
+
+msgid "Create"
+msgstr ""
 
 msgid "Credits"
 msgstr "Tekijät"
@@ -231,6 +240,9 @@ msgstr "Hollanti"
 msgid "English"
 msgstr "Englanti"
 
+msgid "Error"
+msgstr ""
+
 msgid "Error !"
 msgstr "Virhe !"
 
@@ -272,6 +284,9 @@ msgstr "Ranska"
 
 msgid "Full Shutdown"
 msgstr "Täysi sammutus"
+
+msgid "GCT File created"
+msgstr ""
 
 msgid "GUI Settings"
 msgstr ""
@@ -390,6 +405,9 @@ msgstr ""
 msgid "Missing files"
 msgstr "tiedostoa puuttuu"
 
+msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
+msgstr ""
+
 msgid "Music Volume"
 msgstr "Voimakkuus"
 
@@ -404,6 +422,9 @@ msgstr "Seuraava"
 
 msgid "No"
 msgstr "Ei"
+
+msgid "No Cheatfile found"
+msgstr ""
 
 msgid "No SD-Card inserted!"
 msgstr "SD-korttia ei ole asetettu wiihin!"
@@ -458,6 +479,9 @@ msgstr ""
 
 msgid "Official Site"
 msgstr "Virallinen sivusto"
+
+msgid "Ok"
+msgstr ""
 
 msgid "Only for Install"
 msgstr ""
@@ -600,6 +624,9 @@ msgstr "Wiin oletus"
 msgid "TChinese"
 msgstr "TKiina"
 
+msgid "TXTCheatcodes Path"
+msgstr ""
+
 msgid "ThemePath"
 msgstr "Teeman sijainti"
 
@@ -687,10 +714,19 @@ msgstr "Väärä salasana"
 msgid "Yes"
 msgstr "Kyllä"
 
+msgid "You have attempted to load a bad image"
+msgstr ""
+
 msgid "You need to format a partition"
 msgstr "Sinun täytyy formatoida osio"
 
 msgid "available"
+msgstr ""
+
+msgid "does not exist!  Loading game without cheats."
+msgstr ""
+
+msgid "does not exist!  You Messed something up, Idiot."
 msgstr ""
 
 msgid "file(s) left"
@@ -706,9 +742,6 @@ msgid "for diverse patches"
 msgstr ""
 
 msgid "for his awesome tool"
-msgstr ""
-
-msgid "for hosting the covers/discarts"
 msgstr ""
 
 msgid "for hosting the update files"

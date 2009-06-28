@@ -1196,9 +1196,11 @@ int MenuDiscList()
 			if(IsWpadConnected()){check = 1;}
 
 			// screensaver is called when wiimote shuts down, depending on the wiimotet idletime
-			if(!IsWpadConnected() && check == 1)
-			{
+			if(!IsWpadConnected() && check !=0)
+			{	check++;
+				if(check==100) //to allow time for the wii to turn off and not show teh screensaver 
 				WindowScreensaver();
+				check=0;
 			}
 		}
 

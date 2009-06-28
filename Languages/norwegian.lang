@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-22 20:10+0200\n"
+"POT-Creation-Date: 2009-06-28 17:30-0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -36,7 +36,7 @@ msgstr "Alle funksjonene til USB Loader GX er opplåst."
 msgid "Alternate DOL"
 msgstr ""
 
-msgid "Anti 002 fix"
+msgid "Anti"
 msgstr ""
 
 msgid "App Language"
@@ -102,6 +102,9 @@ msgstr "Juksekode sti"
 msgid "Cheatcodes Path changed"
 msgstr "Juksekode sti endret"
 
+msgid "Cheatfile is blank"
+msgstr ""
+
 msgid "Checking for Updates"
 msgstr "Søker etter oppdateringer"
 
@@ -135,6 +138,9 @@ msgstr "Kontrollnivå"
 msgid "Correct Password"
 msgstr "Riktig passord"
 
+msgid "Could not create GCT file"
+msgstr ""
+
 msgid "Could not initialize DIP module!"
 msgstr "Kan ikke initialisere DIP modul!"
 
@@ -152,6 +158,9 @@ msgstr "Cover sti"
 
 msgid "Coverpath Changed"
 msgstr "Cover sti endret"
+
+msgid "Create"
+msgstr ""
 
 msgid "Credits"
 msgstr "Medvirkende"
@@ -231,6 +240,9 @@ msgstr "Nederlandsk"
 msgid "English"
 msgstr "Engelsk"
 
+msgid "Error"
+msgstr ""
+
 msgid "Error !"
 msgstr "Feil !"
 
@@ -272,6 +284,9 @@ msgstr "Fransk"
 
 msgid "Full Shutdown"
 msgstr "Skru helt av"
+
+msgid "GCT File created"
+msgstr ""
 
 msgid "GUI Settings"
 msgstr "GUI innstillinger"
@@ -390,6 +405,9 @@ msgstr "Mai"
 msgid "Missing files"
 msgstr "Manglende filer"
 
+msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
+msgstr ""
+
 msgid "Music Volume"
 msgstr "Musikk volum"
 
@@ -404,6 +422,9 @@ msgstr "Neste"
 
 msgid "No"
 msgstr "Nei"
+
+msgid "No Cheatfile found"
+msgstr ""
 
 msgid "No SD-Card inserted!"
 msgstr "Intet SD-kort satt i!"
@@ -458,6 +479,9 @@ msgstr "Okt"
 
 msgid "Official Site"
 msgstr "Offisiell nettside"
+
+msgid "Ok"
+msgstr ""
 
 msgid "Only for Install"
 msgstr "Kun for installering"
@@ -600,6 +624,9 @@ msgstr "System Standard"
 msgid "TChinese"
 msgstr "T.Kinesisk"
 
+msgid "TXTCheatcodes Path"
+msgstr ""
+
 msgid "ThemePath"
 msgstr "Tema sti"
 
@@ -687,11 +714,20 @@ msgstr "Feil passord"
 msgid "Yes"
 msgstr "Ja"
 
+msgid "You have attempted to load a bad image"
+msgstr ""
+
 msgid "You need to format a partition"
 msgstr "Du må formatere en partisjon"
 
 msgid "available"
 msgstr "tilgjengelig"
+
+msgid "does not exist!  Loading game without cheats."
+msgstr ""
+
+msgid "does not exist!  You Messed something up, Idiot."
+msgstr ""
 
 msgid "file(s) left"
 msgstr "fil(er) gjenstår"
@@ -707,9 +743,6 @@ msgstr "for diverse patcher"
 
 msgid "for his awesome tool"
 msgstr "for hans råe verktøy"
-
-msgid "for hosting the covers/discarts"
-msgstr "for hosting av cover/platebilder"
 
 msgid "for hosting the update files"
 msgstr "for hosting av oppdateringsfiler"
@@ -734,6 +767,9 @@ msgstr "sekunder gjenstår"
 
 msgid "titles.txt Path"
 msgstr "Titles.txt sti"
+
+#~ msgid "for hosting the covers/discarts"
+#~ msgstr "for hosting av cover/platebilder"
 
 #~ msgid "Favorite"
 #~ msgstr "Favoritt"

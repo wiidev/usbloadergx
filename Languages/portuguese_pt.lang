@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-22 20:10+0200\n"
+"POT-Creation-Date: 2009-06-28 17:30-0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -36,7 +36,7 @@ msgstr "As configurações estão desbloqueadas."
 msgid "Alternate DOL"
 msgstr "DOL alternativo"
 
-msgid "Anti 002 fix"
+msgid "Anti"
 msgstr ""
 
 msgid "App Language"
@@ -102,6 +102,9 @@ msgstr "Pasta Truques"
 msgid "Cheatcodes Path changed"
 msgstr "Pasta de Truques alterada"
 
+msgid "Cheatfile is blank"
+msgstr ""
+
 msgid "Checking for Updates"
 msgstr "Procurando Actualizações"
 
@@ -135,6 +138,9 @@ msgstr "Nível de Controle"
 msgid "Correct Password"
 msgstr "Password Correcta"
 
+msgid "Could not create GCT file"
+msgstr ""
+
 msgid "Could not initialize DIP module!"
 msgstr "Não foi possível inicializar o módulo DIP!"
 
@@ -152,6 +158,9 @@ msgstr "Pasta Capas"
 
 msgid "Coverpath Changed"
 msgstr "Pasta das Capas alterada"
+
+msgid "Create"
+msgstr ""
 
 msgid "Credits"
 msgstr "Créditos"
@@ -231,6 +240,9 @@ msgstr "Holandês"
 msgid "English"
 msgstr "Inglês"
 
+msgid "Error"
+msgstr ""
+
 msgid "Error !"
 msgstr "Erro !"
 
@@ -272,6 +284,9 @@ msgstr "Francês"
 
 msgid "Full Shutdown"
 msgstr "Desligar"
+
+msgid "GCT File created"
+msgstr ""
 
 msgid "GUI Settings"
 msgstr "Definições do Interface"
@@ -390,6 +405,9 @@ msgstr "Mai"
 msgid "Missing files"
 msgstr "Ficheiros em falta"
 
+msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
+msgstr ""
+
 msgid "Music Volume"
 msgstr "Volume Música"
 
@@ -404,6 +422,9 @@ msgstr "Próximo"
 
 msgid "No"
 msgstr "Não"
+
+msgid "No Cheatfile found"
+msgstr ""
 
 msgid "No SD-Card inserted!"
 msgstr "Cartão SD não inserido!"
@@ -458,6 +479,9 @@ msgstr "Out"
 
 msgid "Official Site"
 msgstr "Site Oficial"
+
+msgid "Ok"
+msgstr ""
 
 msgid "Only for Install"
 msgstr "Apenas na instalação"
@@ -600,6 +624,9 @@ msgstr "Predefinição Sistema"
 msgid "TChinese"
 msgstr "Chinês Tradicional"
 
+msgid "TXTCheatcodes Path"
+msgstr ""
+
 msgid "ThemePath"
 msgstr "Pasta Temas"
 
@@ -687,11 +714,20 @@ msgstr "Password Incorrecta"
 msgid "Yes"
 msgstr "Sim"
 
+msgid "You have attempted to load a bad image"
+msgstr ""
+
 msgid "You need to format a partition"
 msgstr "É necessário FORMATAR a partição"
 
 msgid "available"
 msgstr "disponível"
+
+msgid "does not exist!  Loading game without cheats."
+msgstr ""
+
+msgid "does not exist!  You Messed something up, Idiot."
+msgstr ""
 
 msgid "file(s) left"
 msgstr "ficheiros(s) restante(s)"
@@ -707,9 +743,6 @@ msgstr "por diversos patches"
 
 msgid "for his awesome tool"
 msgstr "pela sua espectacular ferramenta"
-
-msgid "for hosting the covers/discarts"
-msgstr "por alojar capas/imagens de disco"
 
 msgid "for hosting the update files"
 msgstr "por alojar actualizações"
@@ -734,6 +767,9 @@ msgstr "segundos restantes"
 
 msgid "titles.txt Path"
 msgstr "Pasta titles.txt"
+
+#~ msgid "for hosting the covers/discarts"
+#~ msgstr "por alojar capas/imagens de disco"
 
 #~ msgid "Favorite"
 #~ msgstr "Adicionar aos favoritos"

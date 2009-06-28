@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-22 20:10+0200\n"
+"POT-Creation-Date: 2009-06-28 17:30-0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -36,7 +36,7 @@ msgstr "全ての機能がｱﾝﾛｯｸされました"
 msgid "Alternate DOL"
 msgstr ""
 
-msgid "Anti 002 fix"
+msgid "Anti"
 msgstr ""
 
 msgid "App Language"
@@ -102,6 +102,9 @@ msgstr ""
 msgid "Cheatcodes Path changed"
 msgstr ""
 
+msgid "Cheatfile is blank"
+msgstr ""
+
 msgid "Checking for Updates"
 msgstr "最新版を確認中"
 
@@ -135,6 +138,9 @@ msgstr "コントロール・レベル"
 msgid "Correct Password"
 msgstr "正しいﾊﾟｽﾜｰﾄﾞ"
 
+msgid "Could not create GCT file"
+msgstr ""
+
 msgid "Could not initialize DIP module!"
 msgstr "DIPﾓｼﾞｭｰﾙの初期化ができません!"
 
@@ -152,6 +158,9 @@ msgstr "ｶﾊﾞｰﾊﾟｽ"
 
 msgid "Coverpath Changed"
 msgstr "ｶﾊﾞｰﾊﾟｽを変更しました"
+
+msgid "Create"
+msgstr ""
 
 msgid "Credits"
 msgstr "協力"
@@ -231,6 +240,9 @@ msgstr "ｵﾗﾝﾀﾞ語"
 msgid "English"
 msgstr "英語"
 
+msgid "Error"
+msgstr ""
+
 msgid "Error !"
 msgstr "Error !"
 
@@ -272,6 +284,9 @@ msgstr "ﾌﾗﾝｽ語"
 
 msgid "Full Shutdown"
 msgstr "完全ｼｬｯﾄﾀﾞｳﾝ"
+
+msgid "GCT File created"
+msgstr ""
 
 msgid "GUI Settings"
 msgstr "GUI設定"
@@ -390,6 +405,9 @@ msgstr "5月"
 msgid "Missing files"
 msgstr "検出できなかったﾌｧｲﾙ"
 
+msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
+msgstr ""
+
 msgid "Music Volume"
 msgstr "ﾎﾞﾘｭｰﾑ"
 
@@ -404,6 +422,9 @@ msgstr "次へ"
 
 msgid "No"
 msgstr "いいえ"
+
+msgid "No Cheatfile found"
+msgstr ""
 
 msgid "No SD-Card inserted!"
 msgstr "SDｶｰﾄﾞを検出できませんでした!"
@@ -458,6 +479,9 @@ msgstr "10月"
 
 msgid "Official Site"
 msgstr "ｵﾌｨｼｬﾙｻｲﾄ"
+
+msgid "Ok"
+msgstr ""
 
 msgid "Only for Install"
 msgstr "ｲﾝｽﾄｰﾙのみ"
@@ -600,6 +624,9 @@ msgstr "ﾃﾞﾌｫﾙﾄｼｽﾃﾑ"
 msgid "TChinese"
 msgstr "中国語(繁体字)"
 
+msgid "TXTCheatcodes Path"
+msgstr ""
+
 msgid "ThemePath"
 msgstr "ﾃｰﾏﾊﾟｽ"
 
@@ -687,11 +714,20 @@ msgstr "間違ったﾊﾟｽﾜｰﾄﾞ"
 msgid "Yes"
 msgstr "はい"
 
+msgid "You have attempted to load a bad image"
+msgstr ""
+
 msgid "You need to format a partition"
 msgstr "ﾊﾟｰﾃｨｼｮﾝをﾌｫｰﾏｯﾄして下さい"
 
 msgid "available"
 msgstr "利用可能"
+
+msgid "does not exist!  Loading game without cheats."
+msgstr ""
+
+msgid "does not exist!  You Messed something up, Idiot."
+msgstr ""
 
 msgid "file(s) left"
 msgstr "file(s) left(残りのﾌｧｲﾙ数)"
@@ -707,9 +743,6 @@ msgstr "1月"
 
 msgid "for his awesome tool"
 msgstr "1月"
-
-msgid "for hosting the covers/discarts"
-msgstr "ｶﾊﾞｰを配布"
 
 msgid "for hosting the update files"
 msgstr "更新ﾌｧｲﾙを配布"
@@ -734,6 +767,9 @@ msgstr "完了までの秒数"
 
 msgid "titles.txt Path"
 msgstr "Titles.txt Path"
+
+#~ msgid "for hosting the covers/discarts"
+#~ msgstr "ｶﾊﾞｰを配布"
 
 #~ msgid "Favorite"
 #~ msgstr "お気に入り"
