@@ -321,7 +321,7 @@ void WindowCredits()
  * WindowScreensaver
  * Display screensaver
  ***************************************************************************/
-void WindowScreensaver()
+int WindowScreensaver()
 {
 	int i = 0;
 	bool exit = false;
@@ -367,6 +367,7 @@ void WindowScreensaver()
 	mainWindow->Remove(&screensaverWindow);
 	mainWindow->SetState(STATE_DEFAULT);
 	ResumeGui();
+	return 1;
 }
 
 /****************************************************************************
@@ -1714,6 +1715,7 @@ void SearchMissingImages(int choice2)
 
 			bool found1 = false;/////add Ids of games that are missing covers to cntMissFiles
 			bool found2 = false;
+			bool found3 = false;
 			for (i = 0; i < gameCnt && cntMissFiles < 500; i++)
 			{
 				struct discHdr* header = &gameList[i];
@@ -1721,10 +1723,14 @@ void SearchMissingImages(int choice2)
 
 					snprintf (filename,sizeof(filename),"%c%c%c.png", header->id[0], header->id[1], header->id[2]);
 					found2 = findfile(filename, Settings.covers_path);
+					
+					snprintf (filename,sizeof(filename),"%c%c%c%c.png", header->id[0], header->id[1], header->id[2], header->id[3]);
+					found3 = findfile(filename, Settings.covers_path);
+					
 					snprintf(filename,sizeof(filename),"%c%c%c%c%c%c.png",header->id[0], header->id[1], header->id[2],
 																		header->id[3], header->id[4], header->id[5]); //full id
 					found1 = findfile(filename, Settings.covers_path);
-					if (!found1 && !found2) //if could not find any image
+					if (!found1 && !found2 && !found3) //if could not find any image
 					{
 						snprintf(missingFiles[cntMissFiles],11,"%s",filename);
 						cntMissFiles++;
@@ -1987,7 +1993,7 @@ ProgressDownloadWindow(int choice2)
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	titleTxt.SetPosition(0,60);
 
-	GuiText msgTxt(NULL, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	GuiText msgTxt(NULL, 20, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	msgTxt.SetPosition(0,130);
 
@@ -2031,6 +2037,28 @@ ProgressDownloadWindow(int choice2)
 	mainWindow->ChangeFocus(&promptWindow);
 	ResumeGui();
 	
+	int serverCnt3d=3,serverCntDisc=2,serverCnt2d=3, offset=0, tries=0, m=0; 
+	
+	char server3d[serverCnt3d][75];
+	char serverDisc[serverCntDisc][75];
+	char server2d[serverCnt2d][75];
+	
+	snprintf(server3d[m], sizeof(server3d[m]), "http://boxart.rowdyruff.net/3d/");m++;
+	snprintf(server3d[m], sizeof(server3d[m]), "http://gxload.joschtex.com/3d/");m++;
+	snprintf(server3d[m], sizeof(server3d[m]), "http://wiicover.gateflorida.com/3d/");m++;
+	
+	m=0;
+	snprintf(serverDisc[m], sizeof(serverDisc[m]), "http://gxload.joschtex.com/disc/");m++;
+	//snprintf(serverDisc[k], sizeof(serverDisc[k]), "http://awiibit.com/BoxArt160x160/");k++;
+	snprintf(serverDisc[m], sizeof(serverDisc[m]), "http://wiicover.gateflorida.com/disc/");m++;
+	
+	m=0;
+	snprintf(server2d[m], sizeof(server2d[m]), "http://wiicover.gateflorida.com/2d/");m++;
+	snprintf(server2d[m], sizeof(server2d[m]), "http://boxart.rowdyruff.net/flat/");m++;
+	snprintf(server2d[m], sizeof(server2d[m]), "http://gxload.joschtex.com/2d/");m++;
+	
+	
+	
 	//check if directory exist and if not create one
     struct stat st;
     if(stat(Settings.covers_path, &st) != 0) {
@@ -2045,10 +2073,10 @@ ProgressDownloadWindow(int choice2)
         cntMissFiles = 0;
         }
     }
-	int server = 1, serverCnt=2;
+	//int server = 1;
 	while (i < cntMissFiles)
 	{
-
+		tries=0;
 		prTxt.SetTextf("%i%%", 100*i/cntMissFiles);
 
 		if ((Settings.wsprompt == yes) && (CFG.widescreen))
@@ -2066,60 +2094,48 @@ ProgressDownloadWindow(int choice2)
 		msg2Txt.SetTextf("%s", missingFiles[i]);
 		
 		
-		
-
-			
-			
-
-
 		//download boxart image
 		char imgPath[100];
 		char URLFile[100];
 		struct block file = downloadfile(URLFile);
 		if (choice2 == 2)
-		{
-			//if (server==1)sprintf(URLFile,"http://boxart.rowdyruff.net/3d/%s",missingFiles[i]); // For 3D Covers
-			sprintf(URLFile,"http://gxload.joschtex.com/3d/%s",missingFiles[i]); // For 3D Covers
+		{	
+			while(tries<serverCnt3d){
+			sprintf(URLFile,"%s%s",server3d[(offset+tries)%serverCnt3d],missingFiles[i]);
 			sprintf(imgPath,"%s%s", Settings.covers_path, missingFiles[i]);
+			file = downloadfile(URLFile);
+			if (!(file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.data == NULL))break;
+			tries++;
+			}
 			
-			/*file = downloadfile(URLFile);//reject known bad images
-
-			if (file.size == 36864 || file.size <= 1024 || file.size == 7386 || file.data == NULL) {
-			if (server==2)sprintf(URLFile,"http://boxart.rowdyruff.net/3d/%s",missingFiles[i]); // For 3D Covers
-			else if (server==1)sprintf(URLFile,"http://gxload.joschtex.com/3d/%s",missingFiles[i]); // For 3D Covers
-			
-			}*/
 		}
 		if(choice2 == 3)
 		{
-			if ((server==1)||(server==1))sprintf(URLFile,"http://gxload.joschtex.com/disc/%s",missingFiles[i]);
+			while(tries<serverCntDisc){
+			sprintf(URLFile,"%s%s",serverDisc[(offset+tries)%serverCntDisc],missingFiles[i]);
 			sprintf(imgPath,"%s%s", Settings.disc_path, missingFiles[i]);
-			
+			file = downloadfile(URLFile);
+			if (!(file.size == 36864 || file.size <= 1024 || file.size == 7386 || file.size <= 1174 || file.data == NULL))break;
+			tries++;
+			}
 		}
 		if(choice2 == 1)
 		{
-			//if (server==1)sprintf(URLFile,"http://boxart.rowdyruff.net/flat/%s",missingFiles[i]);
-			sprintf(URLFile,"http://gxload.joschtex.com/2d/%s",missingFiles[i]);
+			while(tries<serverCnt2d){
+			sprintf(URLFile,"%s%s",server2d[(offset+tries)%serverCnt2d],missingFiles[i]);
 			sprintf(imgPath,"%s%s", Settings.covers_path, missingFiles[i]);
-			
-			/*file = downloadfile(URLFile);//reject known bad images
-
-			if (file.size == 36864 || file.size <= 1024 || file.size == 7386 || file.data == NULL) {
-			if (server==2)sprintf(URLFile,"http://boxart.rowdyruff.net/flat/%s",missingFiles[i]);
-			else if (server==1)sprintf(URLFile,"http://gxload.joschtex.com/2d/%s",missingFiles[i]);
-			
-			}*/
+			file = downloadfile(URLFile);
+			if (!(file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.data == NULL))break;
+			tries++;
+			}
 		}
 		
-		//server++;
 		
+		offset++;
 		msgTxt.SetTextf("%s",URLFile);
 		msg2Txt.SetTextf("%s", missingFiles[i]);
 		
-		//if (server>serverCnt)server=1;
-		file = downloadfile(URLFile);//reject known bad images
-
-		if (file.size == 36864 || file.size <= 1024 || file.size == 7386 || file.data == NULL) {
+		if (file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.data == NULL) {
 			cntNotFound++;
 			i++;
 		}
@@ -2151,42 +2167,37 @@ ProgressDownloadWindow(int choice2)
     char URLFile[100];
 	struct block file = downloadfile(URLFile);
     if (choice2 == 2)
-		{
-			//if (server==1)sprintf(URLFile,"http://boxart.rowdyruff.net/3d/%s",missingFiles[0]); // For 3D Covers
-			sprintf(URLFile,"http://gxload.joschtex.com/3d/%s",missingFiles[0]); // For 3D Covers
-			sprintf(imgPath,"%s%s", Settings.covers_path, missingFiles[i]);
+		{	
+			while(tries<serverCnt3d){
+			sprintf(URLFile,"%s%s",server2d[(offset+tries)%serverCnt3d],missingFiles[0]);
+			sprintf(imgPath,"%s%s", Settings.covers_path, missingFiles[0]);
+			file = downloadfile(URLFile);
+			if (!(file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.data == NULL))break;
+			tries++;
+			}
 			
-			/*file = downloadfile(URLFile);//reject known bad images
-
-			if (file.size == 36864 || file.size <= 1024 || file.size == 7386 || file.data == NULL) {
-			if (server==2)sprintf(URLFile,"http://boxart.rowdyruff.net/3d/%s",missingFiles[0]); // For 3D Covers
-			else if (server==1)sprintf(URLFile,"http://gxload.joschtex.com/3d/%s",missingFiles[0]); // For 3D Covers
-			
-			}*/
 		}
 		if(choice2 == 3)
 		{
-			if ((server==1)||(server==1))sprintf(URLFile,"http://gxload.joschtex.com/disc/%s",missingFiles[0]);
-			sprintf(imgPath,"%s%s", Settings.disc_path, missingFiles[i]);
-			
+			while(tries<serverCntDisc){
+			sprintf(URLFile,"%s%s",serverDisc[(offset+tries)%serverCntDisc],missingFiles[0]);
+			sprintf(imgPath,"%s%s", Settings.disc_path, missingFiles[0]);
+			file = downloadfile(URLFile);
+			if (!(file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.data == NULL))break;
+			tries++;
+			}
 		}
 		if(choice2 == 1)
 		{
-			//if (server==1)sprintf(URLFile,"http://boxart.rowdyruff.net/flat/%s",missingFiles[0]);
-			sprintf(URLFile,"http://gxload.joschtex.com/2d/%s",missingFiles[0]);
-			sprintf(imgPath,"%s%s", Settings.covers_path, missingFiles[i]);
-			
-			/*file = downloadfile(URLFile);//reject known bad images
-
-			if (file.size == 36864 || file.size <= 1024 || file.size == 7386 || file.data == NULL) {
-			if (server==2)sprintf(URLFile,"http://boxart.rowdyruff.net/flat/%s",missingFiles[0]);
-			(server==1)sprintf(URLFile,"http://gxload.joschtex.com/2d/%s",missingFiles[0]);
-			
-			}*/
+			while(tries<serverCnt2d){
+			sprintf(URLFile,"%s%s",server2d[(offset+tries)%serverCnt2d],missingFiles[0]);
+			sprintf(imgPath,"%s%s", Settings.covers_path, missingFiles[0]);
+			file = downloadfile(URLFile);
+			if (!(file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.data == NULL))break;
+			tries++;
+			}
 		}
-    file = downloadfile(URLFile);
-
-    if (file.size == 36864 || file.size <= 1024 || file.size == 7386 || file.data == NULL) {
+    if (file.size == 36864 || file.size <= 1024 || file.size == 7386 || file.size <= 1174 || file.data == NULL) {
     } else {
     if(file.data != NULL)
     {
