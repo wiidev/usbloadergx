@@ -1078,7 +1078,13 @@ int MenuDiscList()
 								/* Open gct File and check exist */
 								sprintf(nipple, "%s%s.gct",Settings.Cheatcodespath,IDfull);
 								exeFile = fopen (nipple ,"rb");
-								if (exeFile==NULL)
+								fseek (exeFile, 0, SEEK_END); 
+								long size=ftell (exeFile);
+								rewind (exeFile);
+								if (size>2056){
+									sprintf(nipple, "%s %s",nipple,tr("contains over 255 lines of code.  It will produce unexpected results."));
+									WindowPrompt(tr("Error"),nipple,NULL,NULL,NULL,NULL,170);
+								}if (exeFile==NULL)
 								{	
 									sprintf(nipple, "%s %s",nipple,tr("does not exist!  Loading game without cheats."));
 									WindowPrompt(tr("Error"),nipple,tr("OK"),NULL,NULL,NULL,170);
@@ -1134,7 +1140,13 @@ int MenuDiscList()
 								/* Open gct File and check exist */
 								sprintf(nipple, "%s%s.gct",Settings.Cheatcodespath,IDfull);
 								exeFile = fopen (nipple ,"rb");
-								if (exeFile==NULL)
+								fseek (exeFile, 0, SEEK_END); 
+								long size=ftell (exeFile);
+								rewind (exeFile);
+								if (size>2056){
+									sprintf(nipple, "%s %s",nipple,tr("contains over 255 lines of code.  It will produce unexpected results."));
+									WindowPrompt(tr("Error"),nipple,NULL,NULL,NULL,NULL,170);
+								}if (exeFile==NULL)
 								{	
 									sprintf(nipple, "%s %s",nipple,tr("does not exist!  Loading game without cheats."));
 									WindowPrompt(tr("Error"),nipple,NULL,NULL,NULL,NULL,170);

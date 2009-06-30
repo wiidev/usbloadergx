@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-28 17:30-0400\n"
+"POT-Creation-Date: 2009-06-30 17:59-0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -721,6 +721,9 @@ msgid "You need to format a partition"
 msgstr "Требуется форматирование раздела"
 
 msgid "available"
+msgstr ""
+
+msgid "contains over 255 lines of code.  It will produce unexpected results."
 msgstr ""
 
 msgid "does not exist!  Loading game without cheats."

@@ -2037,7 +2037,7 @@ ProgressDownloadWindow(int choice2)
 	mainWindow->ChangeFocus(&promptWindow);
 	ResumeGui();
 	
-	int serverCnt3d=3,serverCntDisc=2,serverCnt2d=3, offset=0, tries=0, m=0; 
+	int serverCnt3d=4,serverCntDisc=3,serverCnt2d=4, offset=0, tries=0, m=0; 
 	
 	char server3d[serverCnt3d][75];
 	char serverDisc[serverCntDisc][75];
@@ -2046,16 +2046,18 @@ ProgressDownloadWindow(int choice2)
 	snprintf(server3d[m], sizeof(server3d[m]), "http://boxart.rowdyruff.net/3d/");m++;
 	snprintf(server3d[m], sizeof(server3d[m]), "http://gxload.joschtex.com/3d/");m++;
 	snprintf(server3d[m], sizeof(server3d[m]), "http://wiicover.gateflorida.com/3d/");m++;
+	snprintf(server3d[m], sizeof(server3d[m]), "http://awiibit.com/3dBoxArt176x248/");m++;
 	
 	m=0;
 	snprintf(serverDisc[m], sizeof(serverDisc[m]), "http://gxload.joschtex.com/disc/");m++;
-	//snprintf(serverDisc[k], sizeof(serverDisc[k]), "http://awiibit.com/BoxArt160x160/");k++;
 	snprintf(serverDisc[m], sizeof(serverDisc[m]), "http://wiicover.gateflorida.com/disc/");m++;
+	snprintf(serverDisc[m], sizeof(serverDisc[m]), "http://awiibit.com/WiiDiscArt/");m++;
 	
 	m=0;
 	snprintf(server2d[m], sizeof(server2d[m]), "http://wiicover.gateflorida.com/2d/");m++;
 	snprintf(server2d[m], sizeof(server2d[m]), "http://boxart.rowdyruff.net/flat/");m++;
 	snprintf(server2d[m], sizeof(server2d[m]), "http://gxload.joschtex.com/2d/");m++;
+	snprintf(server2d[m], sizeof(server2d[m]), "http://awiibit.com/BoxArt160x224/");m++;
 	
 	
 	
