@@ -2216,7 +2216,7 @@ ProgressDownloadWindow(int choice2)
     if (choice2 == 2)
 		{	
 			while(tries<serverCnt3d){
-			sprintf(URLFile,"%s%s",server2d[(offset+tries)%serverCnt3d],missingFiles[0]);
+			sprintf(URLFile,"%s%s",server3d[(offset+tries)%serverCnt3d],missingFiles[0]);
 			sprintf(imgPath,"%s%s", Settings.covers_path, missingFiles[0]);
 			file = downloadfile(URLFile);
 			if (!(file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.size == 4446 || file.data == NULL))break;
