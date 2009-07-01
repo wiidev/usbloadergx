@@ -2001,6 +2001,11 @@ ProgressDownloadWindow(int choice2)
 	msg2Txt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	msg2Txt.SetPosition(0,100);
 
+	GuiText msg3Txt(NULL, 20, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	msg3Txt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	msg3Txt.SetPosition(0,160);
+
+
 	prTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	prTxt.SetPosition(0, 40);
 
@@ -2025,6 +2030,7 @@ ProgressDownloadWindow(int choice2)
 	promptWindow.Append(&titleTxt);
 	promptWindow.Append(&msgTxt);
 	promptWindow.Append(&msg2Txt);
+    promptWindow.Append(&msg3Txt);
     promptWindow.Append(&progressbarEmptyImg);
     promptWindow.Append(&progressbarImg);
     promptWindow.Append(&progressbarOutlineImg);
@@ -2043,10 +2049,18 @@ ProgressDownloadWindow(int choice2)
 	char serverDisc[serverCntDisc][75];
 	char server2d[serverCnt2d][75];
 	
-	snprintf(server3d[m], sizeof(server3d[m]), "http://boxart.rowdyruff.net/3d/");m++;
+	//for testing the servers
+	/*char serverTEST[serverCnt2d][75];
+	int * TESTfail;
+	int * TESTbad;
+	TESTfail = new int[serverCnt2d];
+	TESTbad = new int[serverCnt2d];*/
+	
+	
 	snprintf(server3d[m], sizeof(server3d[m]), "http://gxload.joschtex.com/3d/");m++;
 	snprintf(server3d[m], sizeof(server3d[m]), "http://wiicover.gateflorida.com/3d/");m++;
 	snprintf(server3d[m], sizeof(server3d[m]), "http://awiibit.com/3dBoxArt176x248/");m++;
+	snprintf(server3d[m], sizeof(server3d[m]), "http://boxart.rowdyruff.net/3d/");m++;
 	
 	m=0;
 	snprintf(serverDisc[m], sizeof(serverDisc[m]), "http://gxload.joschtex.com/disc/");m++;
@@ -2054,10 +2068,22 @@ ProgressDownloadWindow(int choice2)
 	snprintf(serverDisc[m], sizeof(serverDisc[m]), "http://awiibit.com/WiiDiscArt/");m++;
 	
 	m=0;
-	snprintf(server2d[m], sizeof(server2d[m]), "http://wiicover.gateflorida.com/2d/");m++;
-	snprintf(server2d[m], sizeof(server2d[m]), "http://boxart.rowdyruff.net/flat/");m++;
 	snprintf(server2d[m], sizeof(server2d[m]), "http://gxload.joschtex.com/2d/");m++;
+	snprintf(server2d[m], sizeof(server2d[m]), "http://wiicover.gateflorida.com/2d/");m++;
 	snprintf(server2d[m], sizeof(server2d[m]), "http://awiibit.com/BoxArt160x224/");m++;
+	snprintf(server2d[m], sizeof(server2d[m]), "http://boxart.rowdyruff.net/flat/");m++;
+	
+	//server test shit again
+	/*m=0;
+	snprintf(serverTEST[m], sizeof(serverTEST[m]), "http://gxload.joschtex.com/");m++;
+	snprintf(serverTEST[m], sizeof(serverTEST[m]), "http://wiicover.gateflorida.com/");m++;
+	snprintf(serverTEST[m], sizeof(serverTEST[m]), "http://awiibit.com/");m++;
+	snprintf(serverTEST[m], sizeof(serverTEST[m]), "http://boxart.rowdyruff.net/");m++;
+	
+	for(int b=0;b<serverCnt2d;b++){
+		TESTfail[b]=0;
+		TESTbad[b]=0;
+	}*/
 	
 	
 	
@@ -2092,21 +2118,29 @@ ProgressDownloadWindow(int choice2)
 			progressbarImg.SetTile(100*i/cntMissFiles);
 		}
 
-		msgTxt.SetTextf("%i %s", cntMissFiles - i, tr("file(s) left"));
+		if (cntMissFiles - i>1)msgTxt.SetTextf("%i %s", cntMissFiles - i, tr("files left"));
+		else msgTxt.SetTextf("%i %s", cntMissFiles - i, tr("file left"));
 		msg2Txt.SetTextf("%s", missingFiles[i]);
 		
 		
 		//download boxart image
 		char imgPath[100];
 		char URLFile[100];
+		char tmp[75];
+		sprintf(tmp,"Not Found");
 		struct block file = downloadfile(URLFile);
 		if (choice2 == 2)
 		{	
 			while(tries<serverCnt3d){
+			sprintf(tmp,"%s",server3d[(offset+tries)%serverCnt3d]);
 			sprintf(URLFile,"%s%s",server3d[(offset+tries)%serverCnt3d],missingFiles[i]);
 			sprintf(imgPath,"%s%s", Settings.covers_path, missingFiles[i]);
 			file = downloadfile(URLFile);
-			if (!(file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.data == NULL))break;
+			//these 2 lines are just for testing which servers suck
+			//if (file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.size == 4446)TESTbad[(offset+tries)%serverCnt3d]++;
+			//if (file.data == NULL || file.size == 0)TESTfail[(offset+tries)%serverCnt3d]++;
+			
+			if (!(file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.size == 4446 || file.data == NULL))break;
 			tries++;
 			}
 			
@@ -2114,30 +2148,40 @@ ProgressDownloadWindow(int choice2)
 		if(choice2 == 3)
 		{
 			while(tries<serverCntDisc){
+			sprintf(tmp,"%s",serverDisc[(offset+tries)%serverCnt3d]);
 			sprintf(URLFile,"%s%s",serverDisc[(offset+tries)%serverCntDisc],missingFiles[i]);
 			sprintf(imgPath,"%s%s", Settings.disc_path, missingFiles[i]);
 			file = downloadfile(URLFile);
-			if (!(file.size == 36864 || file.size <= 1024 || file.size == 7386 || file.size <= 1174 || file.data == NULL))break;
+			//these 2 lines are just for testing which servers suck
+			//if (file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.size == 4446)TESTbad[(offset+tries)%serverCnt3d]++;
+			//if (file.data == NULL || file.size == 0)TESTfail[(offset+tries)%serverCnt3d]++;
+			
+			if (!(file.size == 36864 || file.size <= 1024 || file.size == 7386 || file.size <= 1174 || file.size == 4446 || file.data == NULL))break;
 			tries++;
 			}
 		}
 		if(choice2 == 1)
 		{
 			while(tries<serverCnt2d){
+			sprintf(tmp,"%s",server2d[(offset+tries)%serverCnt3d]);
 			sprintf(URLFile,"%s%s",server2d[(offset+tries)%serverCnt2d],missingFiles[i]);
 			sprintf(imgPath,"%s%s", Settings.covers_path, missingFiles[i]);
 			file = downloadfile(URLFile);
-			if (!(file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.data == NULL))break;
+			//these 2 lines are just for testing which servers suck
+			//if (file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.size == 4446)TESTbad[(offset+tries)%serverCnt3d]++;
+			//if (file.data == NULL || file.size == 0)TESTfail[(offset+tries)%serverCnt3d]++;
+			
+			if (!(file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.size == 4446 || file.data == NULL))break;
 			tries++;
 			}
 		}
 		
 		
 		offset++;
-		msgTxt.SetTextf("%s",URLFile);
-		msg2Txt.SetTextf("%s", missingFiles[i]);
+		msg3Txt.SetTextf("%s",tmp);
+		//msg3Txt.SetTextf("%s", missingFiles[i]);
 		
-		if (file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.data == NULL) {
+		if (file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.size == 4446 || file.data == NULL) {
 			cntNotFound++;
 			i++;
 		}
@@ -2155,6 +2199,7 @@ ProgressDownloadWindow(int choice2)
 				free(file.data);
 			}
 			i++;
+			
 		}
 
 		if(btn1.GetState() == STATE_CLICKED)
@@ -2174,7 +2219,7 @@ ProgressDownloadWindow(int choice2)
 			sprintf(URLFile,"%s%s",server2d[(offset+tries)%serverCnt3d],missingFiles[0]);
 			sprintf(imgPath,"%s%s", Settings.covers_path, missingFiles[0]);
 			file = downloadfile(URLFile);
-			if (!(file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.data == NULL))break;
+			if (!(file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.size == 4446 || file.data == NULL))break;
 			tries++;
 			}
 			
@@ -2185,7 +2230,7 @@ ProgressDownloadWindow(int choice2)
 			sprintf(URLFile,"%s%s",serverDisc[(offset+tries)%serverCntDisc],missingFiles[0]);
 			sprintf(imgPath,"%s%s", Settings.disc_path, missingFiles[0]);
 			file = downloadfile(URLFile);
-			if (!(file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.data == NULL))break;
+			if (!(file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.size == 4446 || file.data == NULL))break;
 			tries++;
 			}
 		}
@@ -2195,11 +2240,11 @@ ProgressDownloadWindow(int choice2)
 			sprintf(URLFile,"%s%s",server2d[(offset+tries)%serverCnt2d],missingFiles[0]);
 			sprintf(imgPath,"%s%s", Settings.covers_path, missingFiles[0]);
 			file = downloadfile(URLFile);
-			if (!(file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.data == NULL))break;
+			if (!(file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.size == 4446 || file.data == NULL))break;
 			tries++;
 			}
 		}
-    if (file.size == 36864 || file.size <= 1024 || file.size == 7386 || file.size <= 1174 || file.data == NULL) {
+    if (file.size == 36864 || file.size <= 1024 || file.size == 7386 || file.size <= 1174 || file.size == 4446 || file.data == NULL) {
     } else {
     if(file.data != NULL)
     {
@@ -2211,7 +2256,14 @@ ProgressDownloadWindow(int choice2)
         free(file.data);
     }
     }
-
+	
+	
+	//server test shit
+	/*for(int b=0;b<serverCnt2d;b++){
+		sprintf(imgPath,"tried&failed=%d  BadImages=%d", TESTfail[b], TESTbad[b]);
+			
+		WindowPrompt(serverTEST[b],imgPath,"ok",0,0,0,-1);
+	}*/
 	HaltGui();
 	mainWindow->Remove(&promptWindow);
 	mainWindow->SetState(STATE_DEFAULT);

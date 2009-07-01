@@ -358,6 +358,7 @@ struct SSettings {
 	char	db_url[200];
 	char	db_language[100];
 	int		db_JPtoEN;
+	int		gridRows;
 };
 
 void CFG_LoadGlobal(void);

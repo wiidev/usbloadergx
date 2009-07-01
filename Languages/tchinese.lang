@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-30 17:59-0400\n"
+"POT-Creation-Date: 2009-06-30 20:33-0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -227,6 +227,9 @@ msgstr ""
 
 msgid "Download Boxart image?"
 msgstr "下載外盒封面圖片?"
+
+msgid "Download Discart image?"
+msgstr ""
 
 msgid "Download finished"
 msgstr "下載完成"
@@ -732,8 +735,11 @@ msgstr ""
 msgid "does not exist!  You Messed something up, Idiot."
 msgstr ""
 
-msgid "file(s) left"
-msgstr "剩下的檔案"
+msgid "file left"
+msgstr ""
+
+msgid "files left"
+msgstr ""
 
 msgid "files not found on the server!"
 msgstr "伺服器中無此檔案!"
@@ -770,6 +776,9 @@ msgstr "剩餘秒數"
 
 msgid "titles.txt Path"
 msgstr "Title檔案路徑"
+
+#~ msgid "file(s) left"
+#~ msgstr "剩下的檔案"
 
 #~ msgid "Favorite"
 #~ msgstr "新增至我的最愛"

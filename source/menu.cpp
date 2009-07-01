@@ -760,16 +760,17 @@ int MenuDiscList()
                                                 char tempCnt[40];
 
                                                 sprintf(tempCnt,"%i %s",cntMissFiles,tr("Missing files"));
-                                                choice = WindowPrompt(tr("Download Boxart image?"),tempCnt,tr("Yes"),tr("No"),0,0,-1);
+                                                if (choice!=3)choice = WindowPrompt(tr("Download Boxart image?"),tempCnt,tr("Yes"),tr("No"),0,0,-1);
+                                                else if (choice==3)choice = WindowPrompt(tr("Download Discart image?"),tempCnt,tr("Yes"),tr("No"),0,0,-1);
                                                 if (choice == 1)
                                                 {
                                                         ret = ProgressDownloadWindow(choice2);
                                                         if (ret == 0) {
                                                         WindowPrompt(tr("Download finished"),0,tr("OK"),0,0,0,-1);
                                                         } else {
-                            sprintf(tempCnt,"%i %s",ret,tr("files not found on the server!"));
-                            WindowPrompt(tr("Download finished"),tempCnt,tr("OK"),0,0,0,-1);
-                                                        }
+														sprintf(tempCnt,"%i %s",ret,tr("files not found on the server!"));
+														WindowPrompt(tr("Download finished"),tempCnt,tr("OK"),0,0,0,-1);
+																					}
                                                 }
                                         }
                                         else

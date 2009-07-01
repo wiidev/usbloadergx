@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-30 17:59-0400\n"
+"POT-Creation-Date: 2009-06-30 20:33-0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -227,6 +227,9 @@ msgstr ""
 
 msgid "Download Boxart image?"
 msgstr "下载封面图片?"
+
+msgid "Download Discart image?"
+msgstr ""
 
 msgid "Download finished"
 msgstr "下载完成"
@@ -732,8 +735,11 @@ msgstr ""
 msgid "does not exist!  You Messed something up, Idiot."
 msgstr ""
 
-msgid "file(s) left"
-msgstr "剩余文件"
+msgid "file left"
+msgstr ""
+
+msgid "files left"
+msgstr ""
 
 msgid "files not found on the server!"
 msgstr "服务器中无此文件!"
@@ -770,6 +776,9 @@ msgstr "剩余秒数"
 
 msgid "titles.txt Path"
 msgstr "Titles.txt 存放路径"
+
+#~ msgid "file(s) left"
+#~ msgstr "剩余文件"
 
 #~ msgid "Coverpath change"
 #~ msgstr "变更封面存放路径"

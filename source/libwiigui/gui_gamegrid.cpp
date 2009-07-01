@@ -15,6 +15,7 @@
 #include "../prompts/PromptWindows.h"
 #include "../language/gettext.h"
 #include "../menu.h"
+#include "fatmounter.h"
 
 #include <string.h>
 #include <math.h>
@@ -73,6 +74,7 @@ GuiGameGrid::GuiGameGrid(int w, int h, struct discHdr * l, int count, const char
 	if (rows==1)pagesize = 6;
 	else if (rows==2)pagesize = 16;
 	else if (rows==3)pagesize = 42;
+	
 	
 	//if (realCnt<pagesize)listOffset=5;//pagesize-(pagesize-realCnt)/2+1;
 
@@ -193,8 +195,8 @@ GuiGameGrid::GuiGameGrid(int w, int h, struct discHdr * l, int count, const char
 
 		coverImg[i] = new GuiImage(cover[i]);
 		coverImg[i]->SetWidescreen(CFG.widescreen);
-		if (rows==2)coverImg[i]->SetScale(.6);//these are the numbers for 2 rows
-		else if (rows==3)coverImg[i]->SetScale(.26);//these are the numbers for 3 rows
+		if (Settings.gridRows==2)coverImg[i]->SetScale(.6);//these are the numbers for 2 rows
+		else if (Settings.gridRows==3)coverImg[i]->SetScale(.26);//these are the numbers for 3 rows
 		
 		//titleTxt[i] = new GuiText(get_title(&gameList[i]), 20, (GXColor){0,0,0, 0xff});
 		
@@ -203,20 +205,20 @@ GuiGameGrid::GuiGameGrid(int w, int h, struct discHdr * l, int count, const char
 	
 	for(int i=0; i < pagesize; i++) {
 		game[i] = new GuiButton(160,224);//for 1 row
-		if (rows==2)game[i]->SetSize(75,133);//these are the numbers for 2 rows
-		else if (rows==3)game[i]->SetSize(35,68);//these are the numbers for 3 rows
+		if (Settings.gridRows==2)game[i]->SetSize(75,133);//these are the numbers for 2 rows
+		else if (Settings.gridRows==3)game[i]->SetSize(35,68);//these are the numbers for 3 rows
 		game[i]->SetParent(this);
 		game[i]->SetAlignment(ALIGN_TOP,ALIGN_LEFT);
 		game[i]->SetPosition(-200,740);
 		game[i]->SetImage(coverImg[((listOffset+i) % gameCnt)]);
-		if (rows==3)coverImg[(listOffset+i) % gameCnt]->SetPosition(0,-80);// only for 3 rows
-		if (rows==2)coverImg[(listOffset+i) % gameCnt]->SetPosition(0,-50);// only for 2 rows
+		if (Settings.gridRows==3)coverImg[(listOffset+i) % gameCnt]->SetPosition(0,-80);// only for 3 rows
+		if (Settings.gridRows==2)coverImg[(listOffset+i) % gameCnt]->SetPosition(0,-50);// only for 2 rows
 		game[i]->SetRumble(false);
 		game[i]->SetTrigger(trigA);
 		game[i]->SetSoundClick(btnSoundClick);
 		game[i]->SetClickable(true);
 		game[i]->SetVisible(true);
-		coverImg[i]->SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
+		//coverImg[i]->SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
       
 	}
 	for (int i=gameCnt-1;i<pagesize;i++){ //hide games if gameCnt is less than the number of onscreen boxes 
@@ -225,6 +227,20 @@ GuiGameGrid::GuiGameGrid(int w, int h, struct discHdr * l, int count, const char
 			game[i]->RemoveSoundOver();}
 		
 	//if(CFG.widescreen){
+		
+	rows =Settings.gridRows;
+	if ((count<42)&&(rows==3))rows=2;
+	if ((count<16)&&(rows==2))rows=1;
+	if (gameCnt<6)gameCnt=6;
+	
+	if (rows==1)pagesize = 6;
+	else if (rows==2)pagesize = 16;
+	else if (rows==3)pagesize = 42;
+	
+	Settings.gridRows = rows;
+	if(isInserted(bootDevice)) {
+        cfg_save_global();
+        }
 		
 		if (rows==1)
 		{
@@ -461,6 +477,9 @@ GuiGameGrid::GuiGameGrid(int w, int h, struct discHdr * l, int count, const char
 		game[38]->SetSkew(-38,-70,15,-52,15,100,-38,27);
 		}
 		
+		
+		
+		
 	//	}
 	//	else 
 	//	WindowPrompt("Oops","Your Wii must be in 16:9 mode to see the gamewall.",0, tr("OK"), 0,0);
@@ -638,6 +657,15 @@ void GuiGameGrid::ChangeRows(int n)
 {
 
 	rows=n;
+	Settings.gridRows = rows;
+	if(isInserted(bootDevice)) {
+        cfg_save_global();
+        }
+		
+		for(int i=0; i<gameCnt; i++) {
+		delete coverImg[i];
+//		delete cover[i];
+	}
 	for(int i=0; i < gameCnt; i++) {
 		coverImg[i] = new GuiImage(cover[i]);
 		coverImg[i]->SetWidescreen(CFG.widescreen);
@@ -1765,6 +1793,10 @@ void GuiGameGrid::Reload(struct discHdr * l, int count)
 	
 	if (count<42)rows=2;
 	if (count<16)rows=1;
+		Settings.gridRows = rows;
+	if(isInserted(bootDevice)) {
+        cfg_save_global();
+        }
 	//rows=1;
 	if (rows==1)pagesize = 6;
 	else if (rows==2)pagesize = 16;

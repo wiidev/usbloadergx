@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-30 17:59-0400\n"
+"POT-Creation-Date: 2009-06-30 20:33-0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -227,6 +227,9 @@ msgstr ""
 
 msgid "Download Boxart image?"
 msgstr "박스 이미지를 다운로드 할까요?"
+
+msgid "Download Discart image?"
+msgstr ""
 
 msgid "Download finished"
 msgstr "다운로드 완료"
@@ -732,8 +735,11 @@ msgstr ""
 msgid "does not exist!  You Messed something up, Idiot."
 msgstr ""
 
-msgid "file(s) left"
-msgstr "파일 남음"
+msgid "file left"
+msgstr ""
+
+msgid "files left"
+msgstr ""
 
 msgid "files not found on the server!"
 msgstr "파일이 서버에 없습니다!"
@@ -770,6 +776,9 @@ msgstr "초 남았습니다"
 
 msgid "titles.txt Path"
 msgstr ""
+
+#~ msgid "file(s) left"
+#~ msgstr "파일 남음"
 
 #~ msgid "Coverpath change"
 #~ msgstr "표지 경로 변경"

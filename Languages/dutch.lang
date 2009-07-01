@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-30 17:59-0400\n"
+"POT-Creation-Date: 2009-06-30 20:33-0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -227,6 +227,9 @@ msgstr "Locatie dol wijzigen"
 
 msgid "Download Boxart image?"
 msgstr "Hoesjes downloaden?"
+
+msgid "Download Discart image?"
+msgstr ""
 
 msgid "Download finished"
 msgstr "Downloaden voltooid"
@@ -732,8 +735,11 @@ msgstr ""
 msgid "does not exist!  You Messed something up, Idiot."
 msgstr ""
 
-msgid "file(s) left"
-msgstr "Bestanden resterend"
+msgid "file left"
+msgstr ""
+
+msgid "files left"
+msgstr ""
 
 msgid "files not found on the server!"
 msgstr "Bestanden niet gevonden op server!"
@@ -770,6 +776,9 @@ msgstr "seconden over:"
 
 msgid "titles.txt Path"
 msgstr "Locatie titles.txt"
+
+#~ msgid "file(s) left"
+#~ msgstr "Bestanden resterend"
 
 #~ msgid "for hosting the covers/discarts"
 #~ msgstr "(upload van afbeeldingen)"

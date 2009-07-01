@@ -335,6 +335,7 @@ void Global_Default(void)
 	Settings.qboot = no;
 	Settings.wiilight = 1;
 	Settings.patchcountrystrings = 0;
+	Settings.gridRows = 3;
 	Settings.error002 = 0;
 	Settings.titlesOverride = 0;
 	snprintf(Settings.db_url, sizeof(Settings.db_url), empty);
@@ -938,6 +939,13 @@ void global_cfg_set(char *name, char *val)
 			}
 		return;
 	}
+	else if (strcmp(name, "gridRows") == 0) {
+		int i;
+		if (sscanf(val, "%d", &i) == 1) {
+            Settings.gridRows = i;
+			}
+		return;
+	}
 	else if (strcmp(name, "xflip") == 0) {
 		int i;
 		if (sscanf(val, "%d", &i) == 1) {
@@ -1215,6 +1223,7 @@ bool cfg_save_global()// save global settings
 	fprintf(f, "cios = %d\n ", Settings.cios);
 	fprintf(f, "keyset = %d\n ", Settings.keyset);
 	fprintf(f, "xflip = %d\n ", Settings.xflip);
+	fprintf(f, "gridRows = %d\n ", Settings.gridRows);
 	fprintf(f, "qboot = %d\n ", Settings.qboot);
 	fprintf(f, "wsprompt = %d\n", Settings.wsprompt);
 	fprintf(f, "parentalcontrol = %d\n ", Settings.parentalcontrol);
