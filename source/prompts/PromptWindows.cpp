@@ -205,6 +205,11 @@ void WindowCredits()
 	txt[i] = new GuiText("ardi / DrayX7");
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(220,y);
 	i++;
+	y+=24;
+
+	txt[i] = new GuiText("lustar");
+	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(220,y);
+	i++;
 	y+=34;
 
 	txt[i] = new GuiText("Design:");
@@ -231,6 +236,12 @@ void WindowCredits()
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(220,y);
 	i++;
 	y+=24;*/
+	
+	sprintf(text, " lustar %s", tr("for WiiTDB"));
+	txt[i] = new GuiText(text);
+	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(220,y);
+	i++;
+	y+=24;
 
     sprintf(text, "CorneliousJD %s", tr("for hosting the update files"));
 	txt[i] = new GuiText(text);
@@ -2043,7 +2054,7 @@ ProgressDownloadWindow(int choice2)
 	mainWindow->ChangeFocus(&promptWindow);
 	ResumeGui();
 	
-	int serverCnt3d=4,serverCntDisc=3,serverCnt2d=4, offset=0, tries=0, m=0; 
+	int serverCnt3d=5,serverCntDisc=4,serverCnt2d=5, offset=0, tries=0, m=0; 
 	
 	char server3d[serverCnt3d][75];
 	char serverDisc[serverCntDisc][75];
@@ -2056,22 +2067,24 @@ ProgressDownloadWindow(int choice2)
 	TESTfail = new int[serverCnt2d];
 	TESTbad = new int[serverCnt2d];*/
 	
-	
 	snprintf(server3d[m], sizeof(server3d[m]), "http://gxload.joschtex.com/3d/");m++;
 	snprintf(server3d[m], sizeof(server3d[m]), "http://wiicover.gateflorida.com/3d/");m++;
 	snprintf(server3d[m], sizeof(server3d[m]), "http://awiibit.com/3dBoxArt176x248/");m++;
 	snprintf(server3d[m], sizeof(server3d[m]), "http://boxart.rowdyruff.net/3d/");m++;
+	snprintf(server3d[m], sizeof(server3d[m]), "http://wiitdb.com/wiitdb/artwork/cover3D/");m++;
 	
 	m=0;
 	snprintf(serverDisc[m], sizeof(serverDisc[m]), "http://gxload.joschtex.com/disc/");m++;
 	snprintf(serverDisc[m], sizeof(serverDisc[m]), "http://wiicover.gateflorida.com/disc/");m++;
 	snprintf(serverDisc[m], sizeof(serverDisc[m]), "http://awiibit.com/WiiDiscArt/");m++;
+	snprintf(serverDisc[m], sizeof(serverDisc[m]), "http://wiitdb.com/wiitdb/artwork/disc/");m++;
 	
 	m=0;
 	snprintf(server2d[m], sizeof(server2d[m]), "http://gxload.joschtex.com/2d/");m++;
 	snprintf(server2d[m], sizeof(server2d[m]), "http://wiicover.gateflorida.com/2d/");m++;
 	snprintf(server2d[m], sizeof(server2d[m]), "http://awiibit.com/BoxArt160x224/");m++;
 	snprintf(server2d[m], sizeof(server2d[m]), "http://boxart.rowdyruff.net/flat/");m++;
+	snprintf(server2d[m], sizeof(server2d[m]), "http://wiitdb.com/wiitdb/artwork/cover/");m++;
 	
 	//server test shit again
 	/*m=0;
@@ -2084,7 +2097,6 @@ ProgressDownloadWindow(int choice2)
 		TESTfail[b]=0;
 		TESTbad[b]=0;
 	}*/
-	
 	
 	
 	//check if directory exist and if not create one
@@ -2132,8 +2144,35 @@ ProgressDownloadWindow(int choice2)
 		if (choice2 == 2)
 		{	
 			while(tries<serverCnt3d){
-			sprintf(tmp,"%s",server3d[(offset+tries)%serverCnt3d]);
-			sprintf(URLFile,"%s%s",server3d[(offset+tries)%serverCnt3d],missingFiles[i]);
+			//sprintf(tmp,"%s",server3d[(offset+tries)%serverCnt3d]);
+			sprintf(tmp,"%s",server3d[4]);
+			
+			//Creates URL depending from which Country the game is
+			switch (missingFiles[i][3])
+			{
+				case 'J':
+						sprintf(URLFile,"%sntscj3D/%s",server3d[4],missingFiles[i]);
+					break;
+				case 'K':
+				case 'T':
+				case 'Q':
+						//sprintf(URLFile,"%skorea3D/%s",server3d[4],missingFiles[i]);
+						//break;
+				case 'D':
+				case 'F':
+				case 'P':
+				case 'X':
+				case 'Y':
+						sprintf(URLFile,"%spal3d/%s",server3d[4],missingFiles[i]);
+						break;
+				case 'E':
+						sprintf(URLFile,"%sntsc3d/%s",server3d[4],missingFiles[i]);
+						break;
+				default:
+						sprintf(URLFile,"%sntsc3d/%s",server3d[4],missingFiles[i]);
+			}
+			
+			//sprintf(URLFile,"%s%s",server3d[(offset+tries)%serverCnt3d],missingFiles[i]);
 			sprintf(imgPath,"%s%s", Settings.covers_path, missingFiles[i]);
 			file = downloadfile(URLFile);
 			//these 2 lines are just for testing which servers suck
@@ -2148,8 +2187,40 @@ ProgressDownloadWindow(int choice2)
 		if(choice2 == 3)
 		{
 			while(tries<serverCntDisc){
-			sprintf(tmp,"%s",serverDisc[(offset+tries)%serverCnt3d]);
-			sprintf(URLFile,"%s%s",serverDisc[(offset+tries)%serverCntDisc],missingFiles[i]);
+			//sprintf(tmp,"%s",serverDisc[(offset+tries)%serverCnt3d]);
+			sprintf(tmp,"%s",serverDisc[3]);
+						
+			//Creates URL depending from which Country the game is
+			switch (missingFiles[i][3])
+			{
+				case 'J':
+						sprintf(URLFile,"%sJA/%s",serverDisc[3],missingFiles[i]);
+					break;
+				case 'K':
+				case 'T':
+				case 'Q':
+						sprintf(URLFile,"%sKO/%s",serverDisc[3],missingFiles[i]);
+						break;
+				case 'D':
+						sprintf(URLFile,"%sDE/%s",serverDisc[3],missingFiles[i]);
+						break;
+				case 'F':
+						sprintf(URLFile,"%sFR/%s",serverDisc[3],missingFiles[i]);
+						break;
+				case 'P':
+				case 'X':
+				case 'Y':
+						sprintf(URLFile,"%sEN/%s",serverDisc[3],missingFiles[i]);
+					break;
+
+				case 'E':
+						sprintf(URLFile,"%sUS/%s",serverDisc[3],missingFiles[i]);
+						break;
+				default:
+						sprintf(URLFile,"%sEN/%s",serverDisc[3],missingFiles[i]);
+			}
+			
+			//sprintf(URLFile,"%s%s",serverDisc[(offset+tries)%serverCntDisc],missingFiles[i]);
 			sprintf(imgPath,"%s%s", Settings.disc_path, missingFiles[i]);
 			file = downloadfile(URLFile);
 			//these 2 lines are just for testing which servers suck
@@ -2163,8 +2234,39 @@ ProgressDownloadWindow(int choice2)
 		if(choice2 == 1)
 		{
 			while(tries<serverCnt2d){
-			sprintf(tmp,"%s",server2d[(offset+tries)%serverCnt3d]);
-			sprintf(URLFile,"%s%s",server2d[(offset+tries)%serverCnt2d],missingFiles[i]);
+			//sprintf(tmp,"%s",server2d[(offset+tries)%serverCnt3d]);
+			sprintf(tmp,"%s",server2d[4]);
+			
+			//Creates URL depending from which Country the game is
+			switch (missingFiles[i][3])
+			{
+				case 'J':
+						sprintf(URLFile,"%sJA/%s",server2d[4],missingFiles[i]);
+					break;
+				case 'K':
+				case 'T':
+				case 'Q':
+						sprintf(URLFile,"%sKO/%s",server2d[4],missingFiles[i]);
+						break;
+				case 'D':
+						sprintf(URLFile,"%sDE/%s",server2d[4],missingFiles[i]);
+						break;
+				case 'F':
+						sprintf(URLFile,"%sFR/%s",server2d[4],missingFiles[i]);
+						break;
+				case 'P':
+				case 'X':
+				case 'Y':
+						sprintf(URLFile,"%sEN/%s",server2d[4],missingFiles[i]);
+					break;
+				case 'E':
+						sprintf(URLFile,"%sUS/%s",server2d[4],missingFiles[i]);
+						break;
+				default:
+					sprintf(URLFile,"%sEN/%s",server2d[4],missingFiles[i]);
+			}
+
+			//sprintf(URLFile,"%s%s",server2d[(offset+tries)%serverCnt2d],missingFiles[i]);
 			sprintf(imgPath,"%s%s", Settings.covers_path, missingFiles[i]);
 			file = downloadfile(URLFile);
 			//these 2 lines are just for testing which servers suck
