@@ -59,35 +59,35 @@ int CheatMenu(const char * gameID)
 
 	GCTCheats c;
 
-	char txtfilename[30];
+	char txtfilename[40];
 	snprintf(txtfilename,sizeof(txtfilename),"%s%s.txt",Settings.TxtCheatcodespath,gameID);
 
 	int check = c.openTxtfile(txtfilename);
+	
 	switch(check)
 	{
 	case -1: WindowPrompt(tr("Error"),tr("Cheatfile is blank"),tr("OK"),NULL,NULL,NULL,-1);
 			 break;
 	case 0: WindowPrompt(tr("Error"),tr("No Cheatfile found"),tr("OK"),NULL,NULL,NULL,-1);
 			break;
-	case 1:	//WindowPrompt("Opened File","File found for Game","Okay",NULL,NULL,NULL);
-	int cntcheats = c.getCnt()+1;
-	customOptionList options2(cntcheats);
-	GuiCustomOptionBrowser optionBrowser2(400, 280, &options2, CFG.theme_path, "bg_options_settings.png", bg_options_settings_png, 0, 150);
-	optionBrowser2.SetPosition(0, 90);
-	optionBrowser2.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	optionBrowser2.SetClickable(true);
-	optionBrowser2.SetScrollbar(1);
+	case 1:	
+	//WindowPrompt("Opened File","File found for Game","Okay",NULL,NULL,NULL);
+	int cntcheats = c.getCnt();
+	customOptionList cheatslst(cntcheats);
+	GuiCustomOptionBrowser chtBrowser(400, 280, &cheatslst, CFG.theme_path, "bg_options_settings.png", bg_options_settings_png, 1, 90);
+	chtBrowser.SetPosition(0, 90);
+	chtBrowser.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	chtBrowser.SetClickable(true);
 
 	GuiText titleTxt(c.getGameName().c_str(), 28, (GXColor){0, 0, 0, 255});
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	titleTxt.SetMaxWidth(350, GuiText::SCROLL);
 	titleTxt.SetPosition(12,40);
 	
-	//options2.SetName(0, "%s",c.getCheatComment(0).c_str());
 	for(int i = 0; i <= cntcheats; i++) 
 	{
-	options2.SetName(i+1, "%s",c.getCheatName(i).c_str());
-	options2.SetValue(i+1, "OFF");
+	cheatslst.SetValue(i, "%s",c.getCheatName(i).c_str());
+	cheatslst.SetName(i, "OFF");
 	}
 
 	HaltGui();
@@ -96,7 +96,7 @@ int CheatMenu(const char * gameID)
 	w.Append(&titleTxt);
 	w.Append(&backBtn);
 	w.Append(&createBtn);
-	w.Append(&optionBrowser2);
+	w.Append(&chtBrowser);
 	mainWindow->Append(&w);
 	ResumeGui();
 		
@@ -104,17 +104,17 @@ int CheatMenu(const char * gameID)
 	{
 	VIDEO_WaitVSync ();
 
-	ret = optionBrowser2.GetClickedOption();
-	if (ret)
+	ret = chtBrowser.GetClickedOption();
+	if (ret != -1)
 	{
-		const char *tt = options2.GetValue(ret);
-		if (strncmp(tt,"ON",2) == 0)
+		const char *strCheck = cheatslst.GetName(ret);
+		if (strncmp(strCheck,"ON",2) == 0)
 		{
-		options2.SetValue(ret,"%s","OFF");
+		cheatslst.SetName(ret,"%s","OFF");
 		}
-		else if (strncmp(tt,"OFF",2) == 0) 
+		else if (strncmp(strCheck,"OFF",3) == 0) 
 		{
-		options2.SetValue(ret,"%s","ON");
+		cheatslst.SetName(ret,"%s","ON");
 		}
 	}
 
@@ -127,12 +127,11 @@ int CheatMenu(const char * gameID)
 		int x = 0;
 		for(int i = 0; i <= cntcheats; i++) 
 		{
-			const char *tt = options2.GetValue(i+1);
-			if (strncmp(tt,"ON",2) == 0) 
+			const char *strCheck = cheatslst.GetName(i);
+			if (strncmp(strCheck,"ON",2) == 0) 
 			{
 			selectednrs[x] = i;
 			x++;
-			//WindowPrompt("Selected Cheat",c.getCheatName(i).c_str(),"Okay",NULL,NULL,NULL);
 			}
 		}
 
