@@ -33,6 +33,8 @@
 #include "wpad.h"
 #include "fat.h"
 
+//#define SPECIAL_FOR_ARDI // Fix Problem with Trekstor Classic 250GB
+
 /* Constants */
 #define CONSOLE_XCOORD		260
 #define CONSOLE_YCOORD		115
@@ -46,7 +48,22 @@ int
 main(int argc, char *argv[])
 {
 	s32 ret2;
+	u8 preloaded_ios = 0;
+#ifdef SPECIAL_FOR_ARDI
+	if( (ret2 = IOS_ReloadIOS(249)) >=0 )
+		preloaded_ios = 249;
+	else
+	{
+		if( (ret2 = IOS_ReloadIOS(222)) >=0 )
+		{
+			load_ehc_module();
+			preloaded_ios = 222;
+		}
+	}
+#endif
 
+	SDCard_Init(); // mount SD for loading cfg's
+	USBDevice_Init(); // and mount USB:/
 	bool bootDevice_found=false;
 	if(argc >= 1)
 	{
@@ -66,48 +83,32 @@ main(int argc, char *argv[])
 			strcpy(bootDevice, "USB:");
 	}
 
-    ret2 = IOS_ReloadIOS(249);
-	if(ret2 < 0) {
-		ret2 = IOS_ReloadIOS(222);
-		load_ehc_module();
-	}
-
-	SDCard_Init(); // mount SD for loading cfg's
-	USBDevice_Init(); // and mount USB:/
-
 	gettextCleanUp();
+	//lang_default();
 	CFG_Load();
 
+	SDCard_deInit();// unmount SD for reloading IOS
+	USBDevice_deInit();// unmount USB for reloading IOS
+
     /* Load Custom IOS */
-    if(Settings.cios == ios222 && IOS_GetVersion() != 222) {
-        SDCard_deInit();// unmount SD for reloading IOS
-        USBDevice_deInit();// unmount USB for reloading IOS
+    if(Settings.cios == ios222 && preloaded_ios != 222) {
         ret2 = IOS_ReloadIOS(222);
         load_ehc_module();
         if (ret2 < 0) {
             Settings.cios = ios249;
             ret2 = IOS_ReloadIOS(249);
         }
-        SDCard_Init(); // now mount SD:/
-        USBDevice_Init(); // and mount USB:/
-	} else if(Settings.cios == ios249 && IOS_GetVersion() != 249) {
-        SDCard_deInit();// unmount SD for reloading IOS
-        USBDevice_deInit();// unmount USB for reloading IOS
+	} else if(preloaded_ios != 249) {
 	    ret2 = IOS_ReloadIOS(249);
-	    if(ret2 < 0) {
-            Settings.cios = ios222;
-            ret2 = IOS_ReloadIOS(222);
-            load_ehc_module();
-	    }
-        SDCard_Init(); // now mount SD:/
-        USBDevice_Init(); // and mount USB:/
 	}
 
 	if (ret2 < 0) {
 		printf("ERROR: cIOS could not be loaded!");
-		sleep(5);
 		SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
 	}
+
+    SDCard_Init(); // now mount SD:/
+    USBDevice_Init(); // and mount USB:/
 
 	Sys_Init();
 
@@ -137,5 +138,3 @@ main(int argc, char *argv[])
 	MainMenu(MENU_CHECK);
 	return 0;
 }
-
-

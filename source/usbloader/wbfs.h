@@ -18,7 +18,7 @@ enum {
 #define WBFS_MAX_DEVICE		2
 
 /* Prototypes */
-
+void GetProgressValue(s32 * d, s32 * m);
 s32 WBFS_Init(u32);
 s32 WBFS_Open(void);
 s32 WBFS_Close(void);

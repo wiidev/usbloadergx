@@ -21,7 +21,6 @@ int GameWindowPrompt();
 int DiscWait(const char *title, const char *msg, const char *btn1Label, const char *btn2Label, int IsDeviceWait);
 int FormatingPartition(const char *title, partitionEntry *entry);
 void SearchMissingImages(int choice2);
-int ProgressWindow(const char *title, const char *msg);
 int ProgressDownloadWindow(int choice2);
 int ProgressUpdateWindow();
 char * GetMissingFiles();

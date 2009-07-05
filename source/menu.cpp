@@ -23,6 +23,7 @@
 #include "language/gettext.h"
 #include "settings/Settings.h"
 #include "prompts/PromptWindows.h"
+#include "prompts/ProgressWindow.h"
 #include "prompts/gameinfo.h"
 #include "mload/mload.h"
 #include "patches/patchcode.h"
@@ -38,7 +39,6 @@
 #include "fatmounter.h"
 
 #define MAX_CHARACTERS		38
-#define GB_SIZE		1073741824.0
 
 /*** Variables that are also used extern ***/
 GuiWindow * mainWindow = NULL;
@@ -108,8 +108,7 @@ HaltGui()
  *
  * Primary thread to allow GUI to respond to state changes, and draws GUI
  ***************************************************************************/
-static void *
-UpdateGUI (void *arg)
+static void * UpdateGUI (void *arg)
 {
 	while(1)
 	{
@@ -193,7 +192,9 @@ UpdateGUI (void *arg)
 void InitGUIThreads()
 {
 	LWP_CreateThread(&guithread, UpdateGUI, NULL, NULL, 0, 70);
+	InitProgressThread();
 }
+
 void ExitGUIThreads()
 {
 	ExitRequested = 1;
@@ -1239,8 +1240,7 @@ static int MenuInstall()
     Disc_SetUSB(NULL);
 
     int ret, choice = 0;
-	char *name;
-	static char buffer[MAX_CHARACTERS + 4];
+	char name[200];
 
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
 
@@ -1290,16 +1290,7 @@ static int MenuInstall()
 			}
 
 		Disc_ReadHeader(&headerdisc);
-		name = headerdisc.title;
-		if (strlen(name) < (MAX_CHARACTERS + 3)) {
-			memset(buffer, 0, sizeof(buffer));
-			sprintf(name, "%s", name);
-			} else {
-			strncpy(buffer, name,  MAX_CHARACTERS);
-			buffer[MAX_CHARACTERS] = '\0';
-			strncat(buffer, "...", 3);
-			sprintf(name, "%s", buffer);
-		}
+		snprintf(name, sizeof(name), "%s", headerdisc.title);
 
 		ret = WBFS_CheckGame(headerdisc.id);
 		if (ret) {
@@ -1311,7 +1302,8 @@ static int MenuInstall()
 		f32 freespace, used;
 
 		WBFS_DiskSpace(&used, &freespace);
-		gamesize = WBFS_EstimeGameSize()/GB_SIZE;
+		gamesize = WBFS_EstimeGameSize()/GBSIZE;
+
 		char gametxt[50];
 
 		sprintf(gametxt, "%s : %.2fGB", name, gamesize);
@@ -1328,7 +1320,11 @@ static int MenuInstall()
 			sprintf(errortxt, "%s: %.2fGB, %s: %.2fGB",tr("Game Size"), gamesize, tr("Free Space"), freespace);
 			choice = WindowPrompt(tr("Not enough free space!"),errortxt,tr("OK"), tr("Return"));
 			if (choice == 1) {
-				ret = ProgressWindow(gametxt, name);
+				USBStorage_Watchdog(0);
+				SetupGameInstallProgress(gametxt, name);
+                ret = WBFS_AddGame();
+                ProgressStop();
+                USBStorage_Watchdog(1);
                 wiilight(0);
 				if (ret != 0) {
 					WindowPrompt (tr("Install Error!"),0,tr("Back"));
@@ -1348,10 +1344,14 @@ static int MenuInstall()
 
 		}
 		else {
-			ret = ProgressWindow(gametxt, name);
+            USBStorage_Watchdog(0);
+		    SetupGameInstallProgress(gametxt, name);
+		    ret = WBFS_AddGame();
+		    ProgressStop();
+            USBStorage_Watchdog(1);
             wiilight(0);
 			if (ret != 0) {
-				WindowPrompt (tr("Install Error!"),0,tr("Back"));
+				WindowPrompt(tr("Install Error!"),0,tr("Back"));
 				menu = MENU_DISCLIST;
 					break;
 			} else {
@@ -1383,8 +1383,6 @@ static int MenuInstall()
 
 	mainWindow->Remove(&w);
 	ResumeGui();
-///	SDCard_deInit();
-///	SDCard_Init();
 	return menu;
 }
 /****************************************************************************
@@ -1412,7 +1410,7 @@ static int MenuFormat()
 		partitionEntry *entry = &partitions[cnt];
 
 		/* Calculate size in gigabytes */
-		f32 size = entry->size * (sector_size / GB_SIZE);
+		f32 size = entry->size * (sector_size / GBSIZE);
 
         if (size) {
             sprintf(options.name[cnt], "%s %d:",tr("Partition"), cnt+1);
@@ -1481,7 +1479,7 @@ static int MenuFormat()
                 if (cnt == selected) {
                     partitionEntry *entry = &partitions[selected];
                         if (entry->size) {
-                        sprintf(text, "%s %d : %.2fGB",tr("Partition"), selected+1, entry->size * (sector_size / GB_SIZE));
+                        sprintf(text, "%s %d : %.2fGB",tr("Partition"), selected+1, entry->size * (sector_size / GBSIZE));
                         choice = WindowPrompt(
                         tr("Do you want to format:"),
                         text,

@@ -4,7 +4,6 @@
 
 
 #include "libwbfs.h"
-#include <time.h>
 
 #define likely(x)       __builtin_expect(!!(x), 1)
 #define unlikely(x)     __builtin_expect(!!(x), 0)
@@ -406,8 +405,6 @@ u32 wbfs_add_disc(wbfs_t*p,read_wiidisc_callback_t read_src_wii_disc,
         wbfs_disc_info_t *info = 0;
         u8* copy_buffer = 0;
         used = wbfs_malloc(p->n_wii_sec_per_disc);
-        time_t last_time = 0;
-        time_t time_now = 0;
         if(!used)
                 ERROR("unable to alloc memory");
         if(!copy_1_1)
@@ -464,17 +461,8 @@ u32 wbfs_add_disc(wbfs_t*p,read_wiidisc_callback_t read_src_wii_disc,
                                 p->write_hdsector(p->callback_data,p->part_lba+bl*(p->wbfs_sec_sz/p->hd_sec_sz)+j*(p->wii_sec_sz/p->hd_sec_sz),
                                              p->wii_sec_sz/p->hd_sec_sz,copy_buffer);
                                 cur++;
-                        }
-                        if(spinner) {
-                        if(last_time == 0)
-                        time(&last_time);
-
-                        time(&time_now);
-                        /* Update that crap only every 0.5 secs */
-                        if (difftime(time_now,last_time) > 0.5) {
-                        spinner(cur,tot);
-                        last_time = 0;
-                        }
+                                if(spinner)
+                                    spinner(cur,tot);
                         }
                 }
                 info->wlba_table[i] = wbfs_htons(bl);

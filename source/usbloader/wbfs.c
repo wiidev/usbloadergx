@@ -22,53 +22,20 @@ static wbfs_t *hdd = NULL;
 /* WBFS callbacks */
 static rw_sector_callback_t readCallback  = NULL;
 static rw_sector_callback_t writeCallback = NULL;
-
+static s32 done = -1, total = -1;
 /* Variables */
 
 static u32 nb_sectors, sector_size;
-void __WBFS_Spinner(s32 x, s32 max)
+static void WBFS_Spinner(s32 x, s32 max)
 {
-	static time_t start;
-	static u32 expected;
+	done = x;
+	total = max;
+}
 
-	f32 percent, size;
-	u32 d, h, m, s;
-
-	/* First time */
-	if (!x) {
-		start    = time(0);
-		expected = 300;
-	}
-
-	/* Elapsed time */
-	d = time(0) - start;
-
-	if (x != max) {
-		/* Expected time */
-		if (d)
-			expected = (expected * 3 + d * max / x) / 4;
-
-		/* Remaining time */
-		d = (expected > d) ? (expected - d) : 0;
-	}
-
-	/* Calculate time values */
-	h =  d / 3600;
-	m = (d / 60) % 60;
-	s =  d % 60;
-
-	/* Calculate percentage/size */
-	percent = (x * 100.0) / max;
-	size    = (hdd->wii_sec_sz / GB_SIZE) * max;
-
-    //Con_ClearLine();
-
-	/* Show progress */
-	if (x != max) {
-		printf("    %.2f%% of %.2fGB (%c) ETA: %d:%02d:%02d\r", percent, size, "/|\\-"[(x / 10) % 4], h, m, s);
-		fflush(stdout);
-	} else
-		printf("    %.2fGB copied in %d:%02d:%02d\n", size, h, m, s);
+void GetProgressValue(s32 * d, s32 * m)
+{
+    *d = done;
+    *m = total;
 }
 
 wbfs_t *GetHddInfo(void)
@@ -444,7 +411,7 @@ s32 WBFS_AddGame(void)
 		return -1;
 
 	/* Add game to device */
-	ret = wbfs_add_disc(hdd, __WBFS_ReadDVD, NULL, __WBFS_Spinner, ALL_PARTITIONS, 0);
+	ret = wbfs_add_disc(hdd, __WBFS_ReadDVD, NULL, WBFS_Spinner, ONLY_GAME_PARTITION, 0);
 	if (ret < 0)
 		return ret;
 

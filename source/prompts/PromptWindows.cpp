@@ -30,11 +30,6 @@
 int cntMissFiles = 0;
 
 /*** Variables used only in this file ***/
-static GuiText prTxt(NULL, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
-static GuiText timeTxt(NULL, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
-static GuiText sizeTxt(NULL, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
-static GuiImageData progressbar(progressbar_png);
-static GuiImage progressbarImg(&progressbar);
 static char missingFiles[500][12];
 
 /*** Extern variables ***/
@@ -1774,183 +1769,7 @@ void SearchMissingImages(int choice2)
 }
 
 /****************************************************************************
- * ShowProgress
- *
- * Updates the variables used by the progress window for drawing a progress
- * bar. Also resumes the progress window thread if it is suspended.
- ***************************************************************************/
-void
-ShowProgress (s32 done, s32 total)
-{
-
- 	static time_t start;
-	static u32 expected;
-
-	u32 d, h, m, s;
-
-	//first time
-	if (!done) {
-		start    = time(0);
-		expected = 300;
-	}
-
-	//Elapsed time
-	d = time(0) - start;
-
-	if (done != total) {
-		//Expected time
-		if (d)
-			expected = (expected * 3 + d * total / done) / 4;
-
-		//Remaining time
-		d = (expected > d) ? (expected - d) : 0;
-	}
-
-	//Calculate time values
-	h =  d / 3600;
-	m = (d / 60) % 60;
-	s =  d % 60;
-
-    //Calculate percentage/size
-	f32 percent = (done * 100.0) / total;
-
-    prTxt.SetTextf("%0.2f", percent);
-
-    timeTxt.SetTextf("%s %d:%02d:%02d",tr("Time left:"),h,m,s);
-
-    f32 gamesizedone = gamesize * done/total;
-
-	sizeTxt.SetTextf("%0.2fGB/%0.2fGB", gamesizedone, gamesize);
-
-	if ((Settings.wsprompt == yes) && (CFG.widescreen)){
-	progressbarImg.SetTile((int)(80*done/total));}
-	else {progressbarImg.SetTile((int)(100*done/total));}
-
-}
-
-/****************************************************************************
- * ProgressWindow
- *
- * Opens a window, which displays progress to the user. Can either display a
- * progress bar showing % completion, or a throbber that only shows that an
- * action is in progress.
- ***************************************************************************/
-int
-ProgressWindow(const char *title, const char *msg)
-{
-
-    wbfs_t * hdd = NULL;
-    hdd = GetHddInfo();
-
-	GuiWindow promptWindow(472,320);
-	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-	promptWindow.SetPosition(0, -10);
-	char imgPath[100];
-	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
-	GuiImageData btnOutline(imgPath, button_dialogue_box_png);
-	snprintf(imgPath, sizeof(imgPath), "%sdialogue_box.png", CFG.theme_path);
-	GuiImageData dialogBox(imgPath, dialogue_box_png);
-	GuiTrigger trigA;
-	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
-
-	GuiImage dialogBoxImg(&dialogBox);
-	if (Settings.wsprompt == yes){
-	dialogBoxImg.SetWidescreen(CFG.widescreen);}
-
-	snprintf(imgPath, sizeof(imgPath), "%sprogressbar_outline.png", CFG.theme_path);
-	GuiImageData progressbarOutline(imgPath, progressbar_outline_png);
-
-	GuiImage progressbarOutlineImg(&progressbarOutline);
-	if (Settings.wsprompt == yes){
-	progressbarOutlineImg.SetWidescreen(CFG.widescreen);}
-	progressbarOutlineImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-	progressbarOutlineImg.SetPosition(25, 40);
-
-	snprintf(imgPath, sizeof(imgPath), "%sprogressbar_empty.png", CFG.theme_path);
-	GuiImageData progressbarEmpty(imgPath, progressbar_empty_png);
-	GuiImage progressbarEmptyImg(&progressbarEmpty);
-	progressbarEmptyImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-	progressbarEmptyImg.SetPosition(25, 40);
-	progressbarEmptyImg.SetTile(100);
-
-	snprintf(imgPath, sizeof(imgPath), "%sprogressbar.png", CFG.theme_path);
-	GuiImageData progressbar(imgPath, progressbar_png);
-
-	progressbarImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-	progressbarImg.SetPosition(25, 40);
-
-	GuiText titleTxt(title, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
-	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	titleTxt.SetPosition(0,60);
-	GuiText msgTxt(msg, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
-	msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	msgTxt.SetPosition(0,120);
-
-	GuiText prsTxt("%", 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
-	prsTxt.SetAlignment(ALIGN_RIGHT, ALIGN_MIDDLE);
-	prsTxt.SetPosition(-188,40);
-
-    timeTxt.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-	timeTxt.SetPosition(275,-50);
-
-    sizeTxt.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-	sizeTxt.SetPosition(50, -50);
-
-	prTxt.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-	prTxt.SetPosition(200, 40);
-
-	if ((Settings.wsprompt == yes) && (CFG.widescreen)){/////////////adjust for widescreen
-		progressbarOutlineImg.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-		progressbarOutlineImg.SetPosition(0, 40);
-		progressbarEmptyImg.SetPosition(80,40);
-		progressbarEmptyImg.SetTile(78);
-		progressbarImg.SetPosition(80, 40);
-		msgTxt.SetMaxWidth(380);
-
-		timeTxt.SetPosition(250,-50);
-		timeTxt.SetFontSize(22);
-		sizeTxt.SetPosition(90, -50);
-		sizeTxt.SetFontSize(22);
-	}
-
-	promptWindow.Append(&dialogBoxImg);
-	promptWindow.Append(&titleTxt);
-	promptWindow.Append(&msgTxt);
-    promptWindow.Append(&progressbarEmptyImg);
-    promptWindow.Append(&progressbarImg);
-    promptWindow.Append(&progressbarOutlineImg);
-    promptWindow.Append(&prTxt);
-	promptWindow.Append(&prsTxt);
-    promptWindow.Append(&timeTxt);
-
-	HaltGui();
-	mainWindow->SetState(STATE_DISABLED);
-	mainWindow->Append(&promptWindow);
-	mainWindow->ChangeFocus(&promptWindow);
-	ResumeGui();
-	promptWindow.Append(&prTxt);
-	promptWindow.Append(&sizeTxt);
-
-    s32 ret;
-
-    USBStorage_Watchdog(0);
-
-    ret = wbfs_add_disc(hdd, __WBFS_ReadDVD, NULL, ShowProgress, ONLY_GAME_PARTITION, 0);
-
-    USBStorage_Watchdog(1);
-
-	HaltGui();
-	mainWindow->Remove(&promptWindow);
-	mainWindow->SetState(STATE_DEFAULT);
-	ResumeGui();
-	if (ret < 0) {
-    return ret;
-	}
-	return 0;
-}
-
-/****************************************************************************
- * ProgressWindow
+ * ProgressDownloadWindow
  *
  * Opens a window, which displays progress to the user. Can either display a
  * progress bar showing % completion, or a throbber that only shows that an
@@ -1998,6 +1817,7 @@ ProgressDownloadWindow(int choice2)
 
 	snprintf(imgPath, sizeof(imgPath), "%sprogressbar.png", CFG.theme_path);
 	GuiImageData progressbar(imgPath, progressbar_png);
+	GuiImage progressbarImg(&progressbar);
 	progressbarImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 	progressbarImg.SetPosition(25, 40);
 
@@ -2017,7 +1837,7 @@ ProgressDownloadWindow(int choice2)
 	msg3Txt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	msg3Txt.SetPosition(0,160);
 
-
+	GuiText prTxt(NULL, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	prTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	prTxt.SetPosition(0, 40);
 
@@ -2343,8 +2163,7 @@ ProgressDownloadWindow(int choice2)
  * progress bar showing % completion, or a throbber that only shows that an
  * action is in progress.
  ***************************************************************************/
-#define BLOCKSIZE           1024
-
+ #define BLOCKSIZE    1024
 int ProgressUpdateWindow()
 {
     int ret = 0, failed = 0;
@@ -2385,6 +2204,7 @@ int ProgressUpdateWindow()
 
 	snprintf(imgPath, sizeof(imgPath), "%sprogressbar.png", CFG.theme_path);
 	GuiImageData progressbar(imgPath, progressbar_png);
+	GuiImage progressbarImg(&progressbar);
 	progressbarImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 	progressbarImg.SetPosition(25, 7);
 
@@ -2403,6 +2223,7 @@ int ProgressUpdateWindow()
 	msg2Txt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	msg2Txt.SetPosition(0, 50);
 
+	GuiText prTxt(NULL, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	prTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	prTxt.SetPosition(0, 7);
 
@@ -2491,9 +2312,9 @@ int ProgressUpdateWindow()
             if(filesize > 0) {
                 FILE * pfile;
                 pfile = fopen(dolpath, "wb");
-                u8 blockbuffer[BLOCKSIZE] ATTRIBUTE_ALIGN(32);
+                u8 * blockbuffer = new unsigned char[BLOCKSIZE];
                 for (s32 i = 0; i < filesize; i += BLOCKSIZE) {
-                    VIDEO_WaitVSync();
+                    usleep(100);
                     prTxt.SetTextf("%i%%", 100*i/filesize);
                     if ((Settings.wsprompt == yes) && (CFG.widescreen)) {
                         progressbarImg.SetTile(80*i/filesize);
@@ -2526,6 +2347,7 @@ int ProgressUpdateWindow()
                     fwrite(blockbuffer,1,blksize, pfile);
                 }
                 fclose(pfile);
+                delete blockbuffer;
                 if(!failed) {
                 //remove old
                 if(checkfile(dolpathsuccess)){
