@@ -14,7 +14,7 @@
 #include "menu.h"
 #include "language/gettext.h"
 #include "libwiigui/gui.h"
-#include "prompts/PromptWindows.h"
+#include "prompts/ProgressWindow.h"
 #include "usbloader/wbfs.h"
 
 /*** Variables used only in this file ***/
