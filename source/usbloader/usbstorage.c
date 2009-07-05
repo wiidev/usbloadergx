@@ -116,15 +116,6 @@ err:
 	return -1;
 }
 
-void USBStorage_Deinit(void)
-{
-	/* Close USB device */
-	if (fd > 0) {
-		IOS_Close(fd);
-		fd = -1;
-	}
-}
-
 /** Hermes **/
 s32 USBStorage_Watchdog(u32 on_off)
 {
@@ -137,6 +128,27 @@ s32 USBStorage_Watchdog(u32 on_off)
 	}
 
 	return IPC_ENOENT;
+}
+
+s32 USBStorage_Umount(void)
+{
+	if (fd >= 0) {
+		s32 ret;
+		ret = IOS_IoctlvFormat(hid, fd, USB_IOCTL_UMS_UNMOUNT, ":");
+		return ret;
+	}
+
+	return IPC_ENOENT;
+}
+
+void USBStorage_Deinit(void)
+{
+    USBStorage_Umount();
+	/* Close USB device */
+	if (fd > 0) {
+		IOS_Close(fd);
+		fd = -1;
+	}
 }
 
 s32 USBStorage_ReadSectors(u32 sector, u32 numSectors, void *buffer)
