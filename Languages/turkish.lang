@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-05 08:32+0200\n"
+"POT-Creation-Date: 2009-07-06 00:43+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -650,6 +650,9 @@ msgstr "Yardimlar"
 
 msgid "USB Device not found"
 msgstr "USB Aygiti bulunamadi"
+
+msgid "USB FAT Partition"
+msgstr ""
 
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX koruma altinda"

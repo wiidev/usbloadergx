@@ -13,7 +13,7 @@
 #include "menu.h"
 #include "filelist.h"
 #include "sys.h"
-#define MAXOPTIONS 12
+#define MAXOPTIONS 13
 
 /*** Extern functions ***/
 extern void ResumeGui();
@@ -480,6 +480,7 @@ int MenuSettings()
                     options2.SetName(8, "%s",tr("Rumble"));
                     options2.SetName(10, "%s",tr("Titles from XML"));
                     options2.SetName(11, "%s",tr("Screensaver"));
+                    options2.SetName(12, "%s",tr("USB FAT Partition"));
                     for(int i = 0; i <= MAXOPTIONS; i++) options2.SetValue(i, NULL);
                     optionBrowser2.SetScrollbar(1);
                     w.Append(&optionBrowser2);
@@ -524,6 +525,8 @@ int MenuSettings()
                             options2.SetValue(0, "%s", tr("Default"));
                         else
                             options2.SetValue(0, "%s", languagefile);
+                        if(Settings.usbfatsupport >= settings_off_on_max)
+                            Settings.usbfatsupport = 0; //RUMBLE
 
                         if (Settings.sinfo == GameID) options2.SetValue(1,"%s",tr("Game ID"));
                         else if (Settings.sinfo == GameRegion) options2.SetValue(1,"%s",tr("Game Region"));
@@ -568,6 +571,9 @@ int MenuSettings()
 						else if (Settings.screensaver == 4) options2.SetValue(11,"20 min");
 						else if (Settings.screensaver == 5) options2.SetValue(11,"30 min");
 						else if (Settings.screensaver == 6) options2.SetValue(11,"1 hour");
+
+                        if (Settings.usbfatsupport == on) options2.SetValue(12,"Support ON");
+						else if (Settings.usbfatsupport == off) options2.SetValue(12,"Support OFF");
 
 						if(backBtn.GetState() == STATE_CLICKED)
                         {
@@ -679,7 +685,9 @@ int MenuSettings()
 							case 11:
                                 Settings.screensaver++;
                                 break;
-
+							case 12:
+                                Settings.usbfatsupport++;
+                                break;
                            }
                     }
                     optionBrowser2.SetEffect(EFFECT_FADE, -20);

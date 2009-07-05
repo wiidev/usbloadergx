@@ -7,6 +7,9 @@
 #include <sdcard/wiisd_io.h>
 
 #include "usbloader/usbstorage.h"
+#include "settings/cfg.h"
+
+extern struct SSettings Settings;
 
 //these are the only stable and speed is good
 #define CACHE 8
@@ -14,6 +17,8 @@
 
 int USBDevice_Init()
 {
+    if(!Settings.usbfatsupport)
+        return 1;
 	//closing all open Files write back the cache and then shutdown em!
 	fatUnmount("USB:/");
 	//right now mounts first FAT-partition
@@ -29,6 +34,8 @@ int USBDevice_Init()
 
 void USBDevice_deInit()
 {
+    if(!Settings.usbfatsupport)
+        return;
 	//closing all open Files write back the cache and then shutdown em!
 	fatUnmount("USB:/");
 }

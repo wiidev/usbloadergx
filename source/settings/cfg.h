@@ -233,7 +233,7 @@ enum {
 enum {
 	anti=2,
 };
-	
+
 
 enum {
     GameID,
@@ -354,6 +354,7 @@ struct SSettings {
 	char	Cheatcodespath[100];
 	char	TxtCheatcodespath[100];
 	short   error002;
+	short    usbfatsupport;
 	int		titlesOverride; // db_titles
 	char	db_url[200];
 	char	db_language[100];

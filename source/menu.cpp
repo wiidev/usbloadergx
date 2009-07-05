@@ -1613,8 +1613,6 @@ static int MenuCheck()
 
         if(wbfsinit < 0) {
             sleep(1);
-            USBDevice_Init();
-            SDCard_Init();
         }
 
 		//Spieleliste laden
@@ -1622,6 +1620,13 @@ static int MenuCheck()
 
         if(menu == MENU_NONE)
 		menu = MENU_DISCLIST;
+
+		 //for HDDs with issues
+		if(wbfsinit < 0) {
+		    sleep(1);
+            USBDevice_Init();
+            SDCard_Init();
+		}
 
 	return menu;
 }

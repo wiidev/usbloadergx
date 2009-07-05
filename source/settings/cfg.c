@@ -326,6 +326,7 @@ void Global_Default(void)
 	Settings.volume = 80;
 	Settings.sfxvolume = 80;
 	Settings.tooltips = TooltipsOn;
+	Settings.usbfatsupport = 1;
 	char * empty = "";
 	snprintf(Settings.unlockCode, sizeof(Settings.unlockCode), empty);
 	Settings.godmode = 1;
@@ -988,6 +989,13 @@ void global_cfg_set(char *name, char *val)
 			}
 		return;
 	}
+	else if (strcmp(name, "usbfatsupport") == 0) {
+		int i;
+		if (sscanf(val, "%d", &i) == 1) {
+            Settings.usbfatsupport = i;
+			}
+		return;
+	}
 	else if (strcmp(name, "titlesOverride") == 0) {
 		int i;
 		if (sscanf(val, "%d", &i) == 1) {
@@ -1257,6 +1265,7 @@ bool cfg_save_global()// save global settings
 	fprintf(f, "patchcountrystrings = %d\n ", Settings.patchcountrystrings);
 	fprintf(f, "screensaver = %d\n ", Settings.screensaver);
 	fprintf(f, "error002 = %d\n ", Settings.error002);
+	fprintf(f, "usbfatsupport = %d\n ", Settings.usbfatsupport);
 	fclose(f);
 	return true;
 }
