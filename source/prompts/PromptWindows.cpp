@@ -17,6 +17,7 @@
 #include "libwiigui/gui_diskcover.h"
 #include "network/networkops.h"
 #include "network/http.h"
+#include "prompts/PromptWindows.h"
 #include "mload/mload.h"
 #include "fatmounter.h"
 #include "listfiles.h"
@@ -236,7 +237,7 @@ void WindowCredits()
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(220,y);
 	i++;
 	y+=24;*/
-	
+
 	sprintf(text, " lustar %s", tr("for WiiTDB"));
 	txt[i] = new GuiText(text);
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(220,y);
@@ -888,7 +889,7 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 			wiimoteImg.SetPosition(50,165);
 		}
 		else if(btn2.GetState() == STATE_CLICKED) {
-            ret = WindowPrompt(tr("Are you sure?"), 0, tr("Yes"), tr("No"), 0, 0,-1);
+            ret = WindowPrompt(tr("Are you sure?"), 0, tr("Yes"), tr("No"));
 			if (ret == 1) {
 			choice = 2;
 			}
@@ -900,7 +901,7 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 			btn2.ResetState();
 		}
 		else if(btn3.GetState() == STATE_CLICKED) {
-			ret = WindowPrompt(tr("Are you sure?"), 0, tr("Yes"), tr("No"), 0, 0,-1);
+			ret = WindowPrompt(tr("Are you sure?"), 0, tr("Yes"), tr("No"));
 			if (ret == 1) {
 			choice = 3;
 			}
@@ -1734,10 +1735,10 @@ void SearchMissingImages(int choice2)
 
 					snprintf (filename,sizeof(filename),"%c%c%c.png", header->id[0], header->id[1], header->id[2]);
 					found2 = findfile(filename, Settings.covers_path);
-					
+
 					snprintf (filename,sizeof(filename),"%c%c%c%c.png", header->id[0], header->id[1], header->id[2], header->id[3]);
 					found3 = findfile(filename, Settings.covers_path);
-					
+
 					snprintf(filename,sizeof(filename),"%c%c%c%c%c%c.png",header->id[0], header->id[1], header->id[2],
 																		header->id[3], header->id[4], header->id[5]); //full id
 					found1 = findfile(filename, Settings.covers_path);
@@ -2053,63 +2054,43 @@ ProgressDownloadWindow(int choice2)
 	mainWindow->Append(&promptWindow);
 	mainWindow->ChangeFocus(&promptWindow);
 	ResumeGui();
-	
-	int serverCnt3d=5,serverCntDisc=4,serverCnt2d=5, offset=0, tries=0, m=0; 
-	
+
+	int serverCnt3d=5,serverCntDisc=4,serverCnt2d=5, offset=0, tries=0, m=0;
+
 	char server3d[serverCnt3d][75];
 	char serverDisc[serverCntDisc][75];
 	char server2d[serverCnt2d][75];
-	
-	//for testing the servers
-	/*char serverTEST[serverCnt2d][75];
-	int * TESTfail;
-	int * TESTbad;
-	TESTfail = new int[serverCnt2d];
-	TESTbad = new int[serverCnt2d];*/
-	
+
 	snprintf(server3d[m], sizeof(server3d[m]), "http://gxload.joschtex.com/3d/");m++;
 	snprintf(server3d[m], sizeof(server3d[m]), "http://wiicover.gateflorida.com/3d/");m++;
 	snprintf(server3d[m], sizeof(server3d[m]), "http://awiibit.com/3dBoxArt176x248/");m++;
 	snprintf(server3d[m], sizeof(server3d[m]), "http://boxart.rowdyruff.net/3d/");m++;
 	snprintf(server3d[m], sizeof(server3d[m]), "http://wiitdb.com/wiitdb/artwork/cover3D/");m++;
-	
+
 	m=0;
 	snprintf(serverDisc[m], sizeof(serverDisc[m]), "http://gxload.joschtex.com/disc/");m++;
 	snprintf(serverDisc[m], sizeof(serverDisc[m]), "http://wiicover.gateflorida.com/disc/");m++;
 	snprintf(serverDisc[m], sizeof(serverDisc[m]), "http://awiibit.com/WiiDiscArt/");m++;
 	snprintf(serverDisc[m], sizeof(serverDisc[m]), "http://wiitdb.com/wiitdb/artwork/disc/");m++;
-	
+
 	m=0;
 	snprintf(server2d[m], sizeof(server2d[m]), "http://gxload.joschtex.com/2d/");m++;
 	snprintf(server2d[m], sizeof(server2d[m]), "http://wiicover.gateflorida.com/2d/");m++;
 	snprintf(server2d[m], sizeof(server2d[m]), "http://awiibit.com/BoxArt160x224/");m++;
 	snprintf(server2d[m], sizeof(server2d[m]), "http://boxart.rowdyruff.net/flat/");m++;
 	snprintf(server2d[m], sizeof(server2d[m]), "http://wiitdb.com/wiitdb/artwork/cover/");m++;
-	
-	//server test shit again
-	/*m=0;
-	snprintf(serverTEST[m], sizeof(serverTEST[m]), "http://gxload.joschtex.com/");m++;
-	snprintf(serverTEST[m], sizeof(serverTEST[m]), "http://wiicover.gateflorida.com/");m++;
-	snprintf(serverTEST[m], sizeof(serverTEST[m]), "http://awiibit.com/");m++;
-	snprintf(serverTEST[m], sizeof(serverTEST[m]), "http://boxart.rowdyruff.net/");m++;
-	
-	for(int b=0;b<serverCnt2d;b++){
-		TESTfail[b]=0;
-		TESTbad[b]=0;
-	}*/
-	
-	
+
 	//check if directory exist and if not create one
     struct stat st;
     if(stat(Settings.covers_path, &st) != 0) {
         if(subfoldercreate(Settings.covers_path) != 1) {
-        WindowPrompt(tr("Error !"),tr("Can't create directory"),tr("OK"),0,0,0,-1);
+        WindowPrompt(tr("Error !"),tr("Can't create directory"),tr("OK"));
         cntMissFiles = 0;
         }
     }
     if(stat(Settings.disc_path,&st) != 0) {
         if(subfoldercreate(Settings.disc_path) != 1) {
-        WindowPrompt(tr("Error !"),tr("Can't create directory"),tr("OK"),0,0,0,-1);
+        WindowPrompt(tr("Error !"),tr("Can't create directory"),tr("OK"));
         cntMissFiles = 0;
         }
     }
@@ -2133,8 +2114,8 @@ ProgressDownloadWindow(int choice2)
 		if (cntMissFiles - i>1)msgTxt.SetTextf("%i %s", cntMissFiles - i, tr("files left"));
 		else msgTxt.SetTextf("%i %s", cntMissFiles - i, tr("file left"));
 		msg2Txt.SetTextf("%s", missingFiles[i]);
-		
-		
+
+
 		//download boxart image
 		char imgPath[100];
 		char URLFile[100];
@@ -2142,11 +2123,10 @@ ProgressDownloadWindow(int choice2)
 		sprintf(tmp,"Not Found");
 		struct block file = downloadfile(URLFile);
 		if (choice2 == 2)
-		{	
+		{
 			while(tries<serverCnt3d){
-			//sprintf(tmp,"%s",server3d[(offset+tries)%serverCnt3d]);
 			sprintf(tmp,"%s",server3d[4]);
-			
+
 			//Creates URL depending from which Country the game is
 			switch (missingFiles[i][3])
 			{
@@ -2171,25 +2151,21 @@ ProgressDownloadWindow(int choice2)
 				default:
 						sprintf(URLFile,"%sntsc3d/%s",server3d[4],missingFiles[i]);
 			}
-			
+
 			//sprintf(URLFile,"%s%s",server3d[(offset+tries)%serverCnt3d],missingFiles[i]);
 			sprintf(imgPath,"%s%s", Settings.covers_path, missingFiles[i]);
 			file = downloadfile(URLFile);
-			//these 2 lines are just for testing which servers suck
-			//if (file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.size == 4446)TESTbad[(offset+tries)%serverCnt3d]++;
-			//if (file.data == NULL || file.size == 0)TESTfail[(offset+tries)%serverCnt3d]++;
-			
+
 			if (!(file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.size == 4446 || file.data == NULL))break;
 			tries++;
 			}
-			
+
 		}
 		if(choice2 == 3)
 		{
 			while(tries<serverCntDisc){
-			//sprintf(tmp,"%s",serverDisc[(offset+tries)%serverCnt3d]);
 			sprintf(tmp,"%s",serverDisc[3]);
-						
+
 			//Creates URL depending from which Country the game is
 			switch (missingFiles[i][3])
 			{
@@ -2219,24 +2195,18 @@ ProgressDownloadWindow(int choice2)
 				default:
 						sprintf(URLFile,"%sEN/%s",serverDisc[3],missingFiles[i]);
 			}
-			
-			//sprintf(URLFile,"%s%s",serverDisc[(offset+tries)%serverCntDisc],missingFiles[i]);
+
 			sprintf(imgPath,"%s%s", Settings.disc_path, missingFiles[i]);
 			file = downloadfile(URLFile);
-			//these 2 lines are just for testing which servers suck
-			//if (file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.size == 4446)TESTbad[(offset+tries)%serverCnt3d]++;
-			//if (file.data == NULL || file.size == 0)TESTfail[(offset+tries)%serverCnt3d]++;
-			
-			if (!(file.size == 36864 || file.size <= 1024 || file.size == 7386 || file.size <= 1174 || file.size == 4446 || file.data == NULL))break;
+		if (!(file.size == 36864 || file.size <= 1024 || file.size == 7386 || file.size <= 1174 || file.size == 4446 || file.data == NULL))break;
 			tries++;
 			}
 		}
 		if(choice2 == 1)
 		{
 			while(tries<serverCnt2d){
-			//sprintf(tmp,"%s",server2d[(offset+tries)%serverCnt3d]);
 			sprintf(tmp,"%s",server2d[4]);
-			
+
 			//Creates URL depending from which Country the game is
 			switch (missingFiles[i][3])
 			{
@@ -2266,23 +2236,18 @@ ProgressDownloadWindow(int choice2)
 					sprintf(URLFile,"%sEN/%s",server2d[4],missingFiles[i]);
 			}
 
-			//sprintf(URLFile,"%s%s",server2d[(offset+tries)%serverCnt2d],missingFiles[i]);
 			sprintf(imgPath,"%s%s", Settings.covers_path, missingFiles[i]);
 			file = downloadfile(URLFile);
-			//these 2 lines are just for testing which servers suck
-			//if (file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.size == 4446)TESTbad[(offset+tries)%serverCnt3d]++;
-			//if (file.data == NULL || file.size == 0)TESTfail[(offset+tries)%serverCnt3d]++;
-			
+
 			if (!(file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.size == 4446 || file.data == NULL))break;
 			tries++;
 			}
 		}
-		
-		
+
+
 		offset++;
 		msg3Txt.SetTextf("%s",tmp);
-		//msg3Txt.SetTextf("%s", missingFiles[i]);
-		
+
 		if (file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.size == 4446 || file.data == NULL) {
 			cntNotFound++;
 			i++;
@@ -2301,7 +2266,7 @@ ProgressDownloadWindow(int choice2)
 				free(file.data);
 			}
 			i++;
-			
+
 		}
 
 		if(btn1.GetState() == STATE_CLICKED)
@@ -2316,7 +2281,7 @@ ProgressDownloadWindow(int choice2)
     char URLFile[100];
 	struct block file = downloadfile(URLFile);
     if (choice2 == 2)
-		{	
+		{
 			while(tries<serverCnt3d){
 			sprintf(URLFile,"%s%s",server3d[(offset+tries)%serverCnt3d],missingFiles[0]);
 			sprintf(imgPath,"%s%s", Settings.covers_path, missingFiles[0]);
@@ -2324,7 +2289,7 @@ ProgressDownloadWindow(int choice2)
 			if (!(file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.size == 4446 || file.data == NULL))break;
 			tries++;
 			}
-			
+
 		}
 		if(choice2 == 3)
 		{
@@ -2358,14 +2323,7 @@ ProgressDownloadWindow(int choice2)
         free(file.data);
     }
     }
-	
-	
-	//server test shit
-	/*for(int b=0;b<serverCnt2d;b++){
-		sprintf(imgPath,"tried&failed=%d  BadImages=%d", TESTfail[b], TESTbad[b]);
-			
-		WindowPrompt(serverTEST[b],imgPath,"ok",0,0,0,-1);
-	}*/
+
 	HaltGui();
 	mainWindow->Remove(&promptWindow);
 	mainWindow->SetState(STATE_DEFAULT);
@@ -2482,7 +2440,7 @@ int ProgressUpdateWindow()
     struct stat st;
     if(stat(Settings.update_path, &st) != 0) {
         if(subfoldercreate(Settings.update_path) != 1) {
-        WindowPrompt(tr("Error !"),tr("Can't create directory"),tr("OK"),0,0,0,-1);
+        WindowPrompt(tr("Error !"),tr("Can't create directory"),tr("OK"));
         ret = -1;
         failed = -1;
         }
@@ -2520,7 +2478,7 @@ int ProgressUpdateWindow()
     if(newrev > 0) {
 
         sprintf(msg, "Rev%i %s.", newrev, tr("available"));
-        int choice = WindowPrompt(msg, tr("How do you want to update?"), tr("Update DOL"), tr("Update All"), tr("Cancel"), 0,-1);
+        int choice = WindowPrompt(msg, tr("How do you want to update?"), tr("Update DOL"), tr("Update All"), tr("Cancel"));
         if(choice == 1 || choice == 2) {
             titleTxt.SetTextf("%s USB Loader GX", tr("Updating"));
             msgTxt.SetPosition(0,100);
@@ -2605,7 +2563,7 @@ int ProgressUpdateWindow()
         }
 
     } else {
-        WindowPrompt(tr("No new updates."), 0, tr("OK"), 0, 0, 0,-1);
+        WindowPrompt(tr("No new updates."), 0, tr("OK"));
         ret = -1;
     }
 
@@ -2614,7 +2572,7 @@ int ProgressUpdateWindow()
     CloseConnection();
 
     if(!failed && ret >= 0) {
-        WindowPrompt(tr("Successfully Updated") , tr("Restarting..."), tr("OK"), 0, 0, 0,-1);
+        WindowPrompt(tr("Successfully Updated") , tr("Restarting..."), tr("OK"));
         Sys_BackToLoader();
     }
 

@@ -1,7 +1,5 @@
 #include <fat.h>
 #include <string.h>
-#include <sys/dir.h>
-#include <sys/iosupport.h>
 #include <ogc/lwp_watchdog.h>
 #include <ogc/mutex.h>
 #include <ogc/system.h>
@@ -40,14 +38,12 @@ int isSdInserted()
     return __io_wiisd.isInserted();
 }
 
-DISC_INTERFACE **_FAT_partition_getPartitionFromPath (const char* path);
 int isInserted(const char *path)
 {
 	if(!strncmp(path, "USB:", 4))
 		return 1;
-//	if(!strncmp(path, "SD:", 3))
-		return __io_wiisd.isInserted();
-	return 0;
+
+    return __io_wiisd.isInserted();
 }
 int SDCard_Init()
 {

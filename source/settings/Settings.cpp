@@ -641,10 +641,10 @@ int MenuSettings()
                                     while(w.GetEffect()>0) usleep(50);
                                     }
                                 } else {
-                                    WindowPrompt(tr("Language change:"),tr("Console should be unlocked to modify it."),tr("OK"),0,0,0,-1);
+                                    WindowPrompt(tr("Language change:"),tr("Console should be unlocked to modify it."),tr("OK"));
                                 }
                                 } else {
-                                    WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to use this option."), tr("OK"), 0,0,0,-1);
+                                    WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to use this option."), tr("OK"));
                                 }
                                 break;
                             case 1:
@@ -746,7 +746,7 @@ int MenuSettings()
                             Settings.language = 0;
                         if(Settings.error002 >= settings_off_on_max+1)
                             Settings.error002 = 0;
-                        
+
                         if (Settings.video == discdefault) options2.SetValue(0,"%s",tr("Disc Default"));
                         else if (Settings.video == systemdefault) options2.SetValue(0,"%s",tr("System Default"));
                         else if (Settings.video == patch) options2.SetValue(0,"%s",tr("AutoPatch"));
@@ -852,7 +852,7 @@ int MenuSettings()
                             case 7:
                                 Settings.error002++;
                                 break;
-                            
+
                         }
                     }
                     optionBrowser2.SetEffect(EFFECT_FADE, -20);
@@ -974,19 +974,19 @@ int MenuSettings()
                                         if (!strcmp(entered, Settings.unlockCode)) //if password correct
                                         {
                                             if (Settings.godmode == 0) {
-                                                WindowPrompt(tr("Correct Password"),tr("All the features of USB Loader GX are unlocked."),tr("OK"),0,0,0,-1);
+                                                WindowPrompt(tr("Correct Password"),tr("All the features of USB Loader GX are unlocked."),tr("OK"));
                                                 Settings.godmode = 1;
                                                 //__Menu_GetEntries();
                                                 menu = MENU_DISCLIST;
                                             }
                                         } else {
-                                                WindowPrompt(tr("Wrong Password"),tr("USB Loader GX is protected"),tr("OK"),0,0,0,-1);
+                                                WindowPrompt(tr("Wrong Password"),tr("USB Loader GX is protected"),tr("OK"));
                                         }
                                     }
                                 } else {
-                                    int choice = WindowPrompt (tr("Lock Console"),tr("Are you sure?"),tr("Yes"),tr("No"),0,0,-1);
+                                    int choice = WindowPrompt (tr("Lock Console"),tr("Are you sure?"),tr("Yes"),tr("No"));
                                     if(choice == 1) {
-                                        WindowPrompt(tr("Console Locked"),tr("USB Loader GX is protected"),tr("OK"),0,0,0,-1);
+                                        WindowPrompt(tr("Console Locked"),tr("USB Loader GX is protected"),tr("OK"));
                                         Settings.godmode = 0;
                                         //__Menu_GetEntries();
                                         menu = MENU_DISCLIST;
@@ -1005,10 +1005,10 @@ int MenuSettings()
                                     w.Append(&backBtn);
                                     if ( result == 1 ) {
                                         strncpy(Settings.unlockCode, entered, sizeof(Settings.unlockCode));
-                                        WindowPrompt(tr("Password Changed"),tr("Password has been changed"),tr("OK"),0,0,0,-1);
+                                        WindowPrompt(tr("Password Changed"),tr("Password has been changed"),tr("OK"));
                                     }
                                 } else {
-                                    WindowPrompt(tr("Password Changed"),tr("Console should be unlocked to modify it."),tr("OK"),0,0,0,-1);
+                                    WindowPrompt(tr("Password Changed"),tr("Console should be unlocked to modify it."),tr("OK"));
                                 }
                                 break;
                             case 2:
@@ -1138,7 +1138,7 @@ int MenuSettings()
                                     while(w.GetEffect()>0) usleep(50);
                                 }
                                 else
-                                    WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to use this option."), tr("OK"), 0,0,0,-1);
+                                    WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to use this option."), tr("OK"));
                                 break;
                             case 1:
                                 Settings.volume += 10;
@@ -1276,14 +1276,14 @@ int MenuSettings()
                                         if(entered[len] !='/')
                                         strncat (entered, "/", 1);
                                         strncpy(Settings.covers_path, entered, sizeof(Settings.covers_path));
-                                        WindowPrompt(tr("Coverpath Changed"),0,tr("OK"),0,0,0,-1);
+                                        WindowPrompt(tr("Coverpath Changed"),0,tr("OK"));
 //                                        if(!isSdInserted()) {
 										if(!isInserted(bootDevice)) {
-                                          WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"), 0,0,0,-1);
+                                          WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
                                         }
                                     }
                                 } else {
-                                    WindowPrompt(tr("Coverpath Changed"),tr("Console should be unlocked to modify it."),tr("OK"),0,0,0,-1);
+                                    WindowPrompt(tr("Coverpath Changed"),tr("Console should be unlocked to modify it."),tr("OK"));
                                 }
                                 break;
                             case 1:
@@ -1302,14 +1302,14 @@ int MenuSettings()
                                         if(entered[len] !='/')
                                         strncat (entered, "/", 1);
                                         strncpy(Settings.disc_path, entered, sizeof(Settings.disc_path));
-                                        WindowPrompt(tr("Discpath Changed"),0,tr("OK"),0,0,0,-1);
+                                        WindowPrompt(tr("Discpath Changed"),0,tr("OK"));
 //                                        if(!isSdInserted()) {
 										if(!isInserted(bootDevice)) {
-                                            WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"), 0,0,0,-1);
+                                            WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
                                         }
                                     }
                                 } else {
-                                    WindowPrompt(tr("Discpath change"),tr("Console should be unlocked to modify it."),tr("OK"),0,0,0,-1);
+                                    WindowPrompt(tr("Discpath change"),tr("Console should be unlocked to modify it."),tr("OK"));
                                 }
                                 break;
                             case 2:
@@ -1328,10 +1328,10 @@ int MenuSettings()
                                         if(entered[len] !='/')
                                         strncat (entered, "/", 1);
                                         strncpy(CFG.theme_path, entered, sizeof(CFG.theme_path));
-                                        WindowPrompt(tr("Themepath Changed"),0,tr("OK"),0,0,0,-1);
+                                        WindowPrompt(tr("Themepath Changed"),0,tr("OK"));
 //                                        if(!isSdInserted()) {
 										if(!isInserted(bootDevice)) {
-                                            WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"), 0,0,0,-1);
+                                            WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
                                         } else {
                                             cfg_save_global();
                                         }
@@ -1366,7 +1366,7 @@ int MenuSettings()
                                     w.Append(&optionBrowser2);
                                     ResumeGui();
                                 } else {
-                                    WindowPrompt(tr("Themepath change"),tr("Console should be unlocked to modify it."),tr("OK"),0,0,0,-1);
+                                    WindowPrompt(tr("Themepath change"),tr("Console should be unlocked to modify it."),tr("OK"));
                                 }
                                 break;
                             case 3:
@@ -1385,19 +1385,19 @@ int MenuSettings()
                                         if(entered[len] !='/')
                                         strncat (entered, "/", 1);
                                         strncpy(Settings.titlestxt_path, entered, sizeof(Settings.titlestxt_path));
-                                        WindowPrompt(tr("Path of titles.txt changed."),0,tr("OK"),0,0,0,-1);
+                                        WindowPrompt(tr("Path of titles.txt changed."),0,tr("OK"));
 //                                        if(isSdInserted()) {
 										if(isInserted(bootDevice)) {
                                             cfg_save_global();
                                             CFG_Load();
                                         } else {
-                                            WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"), 0,0,0,-1);
+                                            WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
                                         }
                                     }
                                 }
                                 else
                                 {
-                                    WindowPrompt(tr("Path of titles.txt change"),tr("Console should be unlocked to modify it."),tr("OK"),0,0,0,-1);
+                                    WindowPrompt(tr("Path of titles.txt change"),tr("Console should be unlocked to modify it."),tr("OK"));
                                 }
                                 break;
                             case 4:
@@ -1416,11 +1416,11 @@ int MenuSettings()
                                         if(entered[len] !='/')
                                         strncat (entered, "/", 1);
                                         strncpy(Settings.update_path, entered, sizeof(Settings.update_path));
-                                        WindowPrompt(tr("Updatepath changed."),0,tr("OK"),0,0,0,-1);
+                                        WindowPrompt(tr("Updatepath changed."),0,tr("OK"));
                                     }
                                 }
                                 else
-                                    WindowPrompt(0,tr("Console should be unlocked to modify it."),tr("OK"),0,0,0,-1);
+                                    WindowPrompt(0,tr("Console should be unlocked to modify it."),tr("OK"));
                                 break;
                             case 5:
                                 if ( Settings.godmode == 1)
@@ -1438,11 +1438,11 @@ int MenuSettings()
                                         if(entered[len] !='/')
                                         strncat (entered, "/", 1);
                                         strncpy(Settings.Cheatcodespath, entered, sizeof(Settings.Cheatcodespath));
-                                        WindowPrompt(tr("Cheatcodes Path changed"),0,tr("OK"),0,0,0,-1);
+                                        WindowPrompt(tr("Cheatcodes Path changed"),0,tr("OK"));
                                     }
                                 }
                                 else
-                                    WindowPrompt(0,tr("Console should be unlocked to modify it."),tr("OK"),0,0,0,-1);
+                                    WindowPrompt(0,tr("Console should be unlocked to modify it."),tr("OK"));
                                 break;
 							case 6:
                                 if ( Settings.godmode == 1)
@@ -1460,11 +1460,11 @@ int MenuSettings()
                                         if(entered[len] !='/')
                                         strncat (entered, "/", 1);
                                         strncpy(Settings.TxtCheatcodespath, entered, sizeof(Settings.TxtCheatcodespath));
-                                        WindowPrompt("TxtCheatcodespathchanged",0,tr("OK"),0,0,0,-1);
+                                        WindowPrompt("TxtCheatcodespathchanged",0,tr("OK"));
                                     }
                                 }
                                 else
-                                    WindowPrompt(0,tr("Console should be unlocked to modify it."),tr("OK"),0,0,0,-1);
+                                    WindowPrompt(0,tr("Console should be unlocked to modify it."),tr("OK"));
                                 break;
 							case 7:
                                 if ( Settings.godmode == 1)
@@ -1482,14 +1482,14 @@ int MenuSettings()
                                         if(entered[len] !='/')
                                         strncat (entered, "/", 1);
                                         strncpy(Settings.dolpath, entered, sizeof(Settings.dolpath));
-                                        WindowPrompt(tr("Dolpath Changed"),0,tr("OK"),0,0,0,-1);
+                                        WindowPrompt(tr("Dolpath Changed"),0,tr("OK"));
 //                                        if(!isSdInserted()) {
 										if(!isInserted(bootDevice)) {
-                                          WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"), 0,0,0,-1);
+                                          WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
                                         }
                                     }
                                 } else {
-                                    WindowPrompt(tr("Dolpath change"),tr("Console should be unlocked to modify it."),tr("OK"),0,0,0,-1);
+                                    WindowPrompt(tr("Dolpath change"),tr("Console should be unlocked to modify it."),tr("OK"));
                                 }
                                 break;
 
@@ -1497,7 +1497,7 @@ int MenuSettings()
                     }
                     /** If not godmode don't let him inside **/
                     } else {
-                        WindowPrompt(tr("Console Locked"), tr("Unlock console to use this option."), tr("OK"), 0, 0, 0,-1);
+                        WindowPrompt(tr("Console Locked"), tr("Unlock console to use this option."), tr("OK"));
                     }
                     optionBrowser2.SetEffect(EFFECT_FADE, -20);
                     while(optionBrowser2.GetEffect() > 0) usleep(50);
@@ -1528,12 +1528,12 @@ int MenuSettings()
                     w.Remove(&backBtn);
                     int ret = ProgressUpdateWindow();
                     if(ret < 0) {
-                        WindowPrompt(tr("Update failed"),0,tr("OK"),0,0,0,-1);
+                        WindowPrompt(tr("Update failed"),0,tr("OK"));
                     }
                     w.Append(&optionBrowser2);
                     w.Append(&backBtn);
                     } else {
-                        WindowPrompt(tr("Console Locked"), tr("Unlock console to use this option."), tr("OK"), 0,0,0,-1);
+                        WindowPrompt(tr("Console Locked"), tr("Unlock console to use this option."), tr("OK"));
                     }
                     slidedirection = FADE;
                     pageToDisplay = 2;
@@ -1558,7 +1558,7 @@ int MenuSettings()
                     w.Remove(&backBtn);
                     w.Remove(&optionBrowser2);
                     if(Settings.godmode) {
-                    int choice = WindowPrompt(tr("Are you sure?"), 0, tr("Yes"), tr("Cancel"), 0, 0,-1);
+                    int choice = WindowPrompt(tr("Are you sure?"), 0, tr("Yes"), tr("Cancel"));
                     if(choice == 1) {
 //							if(isSdInserted())
 							if(isInserted(bootDevice))
@@ -1574,7 +1574,7 @@ int MenuSettings()
 							pageToDisplay = 0;
                     }
                     } else {
-                        WindowPrompt(tr("Console Locked"), tr("Unlock console to use this option."), tr("OK"), 0, 0, 0,-1);
+                        WindowPrompt(tr("Console Locked"), tr("Unlock console to use this option."), tr("OK"));
                     }
                     w.Append(&backBtn);
                     w.Append(&optionBrowser2);
@@ -1832,7 +1832,7 @@ int GameSettings(struct discHdr * header)
 	w.Append(&cancelBtn);
     w.Append(&optionBrowser3);
 	w.Append(&GCTBtn);
-    
+
 	mainWindow->Append(&w);
 
 	struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
@@ -1923,9 +1923,9 @@ int GameSettings(struct discHdr * header)
 
         if (reloadblock == on) options3.SetValue(9,tr("ON"));
 		else if (reloadblock == off) options3.SetValue(9,tr("OFF"));
-		
-		
-        
+
+
+
 
         options3.SetValue(11, NULL);
         options3.SetValue(12, NULL);
@@ -1971,7 +1971,7 @@ int GameSettings(struct discHdr * header)
                 break;
             case 10:
                 int result;
-				result = WindowPrompt(tr("Are you sure?"),0,tr("Yes"),tr("Cancel"),0,0,-1);
+				result = WindowPrompt(tr("Are you sure?"),0,tr("Yes"),tr("Cancel"));
 				if(result == 1) {
 					if(isInserted(bootDevice)) {
 					struct Game_NUM* game_num = CFG_get_game_num(header->id);
@@ -1988,7 +1988,7 @@ int GameSettings(struct discHdr * header)
 				}
                 break;
             case 11:
-                int choice = WindowPrompt(tr("Are you sure?"),0,tr("Yes"),tr("Cancel"),0,0,-1);
+                int choice = WindowPrompt(tr("Are you sure?"),0,tr("Yes"),tr("Cancel"));
                 if(choice == 1) {
                     videoChoice = Settings.video;
                     viChoice = Settings.vpatch;
@@ -2028,14 +2028,14 @@ int GameSettings(struct discHdr * header)
 					if (Settings.titlesOverride==1 && opt_lang != opt_langnew)
 						OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, true, false); // open file, reload titles, do not keep in memory
 						// titles are refreshed in menu.cpp as soon as this function returns
-					WindowPrompt(tr("Successfully Saved"), 0, tr("OK"), 0,0,0,-1);
+					WindowPrompt(tr("Successfully Saved"), 0, tr("OK"));
 				}
 				else
 				{
-					WindowPrompt(tr("Save Failed"), 0, tr("OK"), 0,0,0,-1);
+					WindowPrompt(tr("Save Failed"), 0, tr("OK"));
 				}
 		    } else {
-                WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"), 0,0,0,-1);
+                WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
 		    }
 
 			saveBtn.ResetState();
@@ -2053,7 +2053,7 @@ int GameSettings(struct discHdr * header)
 			int choice = WindowPrompt(
 					tr("Do you really want to delete:"),
 					gameName,
-					tr("Yes"),tr("Cancel"),0,0,-1);
+					tr("Yes"),tr("Cancel"));
 
 			if (choice == 1)
 			{
@@ -2065,14 +2065,14 @@ int GameSettings(struct discHdr * header)
 					WindowPrompt(
 					tr("Can't delete:"),
 					gameName,
-					tr("OK"),0,0,0,-1);
+					tr("OK"));
 				}
 				else {
 					//__Menu_GetEntries();
 					WindowPrompt(
 					tr("Successfully deleted:"),
 					gameName,
-					tr("OK"),0,0,0,-1);
+					tr("OK"));
 					retVal = 1;
 				}
 				break;
@@ -2084,7 +2084,7 @@ int GameSettings(struct discHdr * header)
 			}
 
 		}
-		
+
 		if (GCTBtn.GetState() == STATE_CLICKED) {
 			char ID[7];
 			snprintf (ID,sizeof(ID),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);

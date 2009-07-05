@@ -26,7 +26,6 @@ while ((file = readdir(dir)))
 	snprintf(temp,sizeof(temp),"%s",file->d_name);
     if (!strncmpi(temp,filename,11))
 		{
-		//WindowPrompt(path, filename,"go" ,0);
 		closedir(dir);
 		return true;
 		}

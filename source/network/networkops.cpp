@@ -249,7 +249,7 @@ static void * networkinitcallback(void *arg)
         if(CheckUpdate() > 0) {
             /** Here we can enter the update function later **
              **  when network problem is solved             **/
-            WindowPrompt("Update available",0,"OK",0,0,0,-1);
+            WindowPrompt("Update available",0,"OK");
         }
         updatechecked = true;
     }

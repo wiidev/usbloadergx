@@ -10,9 +10,12 @@
 
 #include "usbloader/partition.h"
 
+int WindowPrompt(const char *title, const char *msg = NULL, const char *btn1Label = NULL,
+                const char *btn2Label = NULL, const char *btn3Label = NULL,
+                const char *btn4Label = NULL, int wait = -1);
+
 void WindowCredits();
 int OnScreenKeyboard(char * var, u32 maxlen, int min);
-int WindowPrompt(const char *title, const char *msg, const char *btn1Label, const char *btn2Label, const char *btn3Label, const char *btn4Label, int wait);
 int WindowExitPrompt(const char *title, const char *msg, const char *btn1Label, const char *btn2Label, const char *btn3Label, const char *btn4Label);
 int GameWindowPrompt();
 int DiscWait(const char *title, const char *msg, const char *btn1Label, const char *btn2Label, int IsDeviceWait);

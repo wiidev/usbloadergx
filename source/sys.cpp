@@ -14,9 +14,6 @@
 #include "sys.h"
 #include "wpad.h"
 
-/* Constants */
-#define CERTS_LEN	0x280
-
 //Wiilight stuff
 static vu32 *_wiilight_reg = (u32*)0xCD0000C0;
 void wiilight(int enable) {             // Toggle wiilight (thanks Bool for wiilight source)
@@ -26,7 +23,6 @@ void wiilight(int enable) {             // Toggle wiilight (thanks Bool for wiil
 }
 
 /* Variables */
-static const char certs_fs[] ATTRIBUTE_ALIGN(32) = "/sys/cert.sys";
 u8 shutdown = 0;
 u8 reset = 0;
 
@@ -41,7 +37,6 @@ void __Sys_PowerCallback(void)
 	/* Poweroff console */
 	shutdown = 1;
 }
-
 
 void Sys_Init(void)
 {
@@ -64,7 +59,6 @@ static void _ExitApp()
     mload_set_ES_ioctlv_vector(NULL);
 	mload_close();
 }
-
 
 void Sys_Reboot(void)
 {
@@ -117,8 +111,6 @@ int Sys_IosReload(int IOS)
 
     return ret;
 }
-
-
 
 #define ShutdownToDefault	0
 #define ShutdownToIdle		1
@@ -176,30 +168,4 @@ void Sys_BackToLoader(void)
 	}
 	// Channel Version
 	Sys_LoadMenu();
-}
-
-s32 Sys_GetCerts(signed_blob **certs, u32 *len)
-{
-	static signed_blob certificates[CERTS_LEN] ATTRIBUTE_ALIGN(32);
-
-	s32 fd, ret;
-
-	/* Open certificates file */
-	fd = IOS_Open(certs_fs, 1);
-	if (fd < 0)
-		return fd;
-
-	/* Read certificates */
-	ret = IOS_Read(fd, certificates, sizeof(certificates));
-
-	/* Close file */
-	IOS_Close(fd);
-
-	/* Set values */
-	if (ret > 0) {
-		*certs = certificates;
-		*len   = sizeof(certificates);
-	}
-
-	return ret;
 }

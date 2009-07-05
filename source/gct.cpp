@@ -1,4 +1,8 @@
+#include <iostream>
+#include <fstream>
 #include "gct.h"
+
+#define OUTOFRANGE "Error:Range"
 
 GCTCheats::GCTCheats(void)
 {
@@ -26,7 +30,7 @@ string GCTCheats::getGameID(void)
 
 string GCTCheats::getCheat(int nr)
 {
-	if (nr <= (iCntCheats-1)) 
+	if (nr <= (iCntCheats-1))
 	{
 		return sCheats[nr];
 	}
@@ -38,7 +42,7 @@ string GCTCheats::getCheat(int nr)
 
 string GCTCheats::getCheatName(int nr)
 {
-	if (nr <= (iCntCheats-1)) 
+	if (nr <= (iCntCheats-1))
 	{
 	return sCheatName[nr];
 	}
@@ -50,7 +54,7 @@ string GCTCheats::getCheatName(int nr)
 
 string GCTCheats::getCheatComment(int nr)
 {
-	if (nr <= (iCntCheats-1)) 
+	if (nr <= (iCntCheats-1))
 	{
 	return sCheatComment[nr];
 	}
@@ -67,7 +71,7 @@ int GCTCheats::createGCT(int nr,const char * filename)
 
    if (filestr.fail())
 			return 0;
-	
+
 	//Reversed Header and Footer
    char header[] = { 0x00, 0xd0, 0xc0, 0xde, 0x00, 0xd0, 0xc0, 0xde};
    char footer[] = { 0xF0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
@@ -124,7 +128,7 @@ int GCTCheats::createGCT(const char * chtbuffer,const char * filename)
    filestr.write(footer,sizeof(footer));
 
    filestr.close();
-   
+
 return 1;
 }
 
@@ -136,7 +140,7 @@ int GCTCheats::createGCT(int nr[],int cnt,const char * filename)
 
    if (filestr.fail())
 			return 0;
-			
+
 	//Reversed Header and Footer
    char header[] = { 0x00, 0xd0, 0xc0, 0xde, 0x00, 0xd0, 0xc0, 0xde};
    char footer[] = { 0xF0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
@@ -151,7 +155,7 @@ int GCTCheats::createGCT(int nr[],int cnt,const char * filename)
    long int li;
    int len = buf.size();
    int x = 0;
-  
+
    while (x < len)
    {
        string temp = buf.substr(x,2);
@@ -164,7 +168,7 @@ int GCTCheats::createGCT(int nr[],int cnt,const char * filename)
   }
 
 filestr.write(footer,sizeof(footer));
-filestr.close(); 
+filestr.close();
 return 1;
 }
 
@@ -182,7 +186,7 @@ int GCTCheats::openTxtfile(const char * filename)
 		int size = filestr.tellg();
 		if (size <= 0) return -1;
 		filestr.seekg(0,ios_base::beg);
-		
+
         getline(filestr,sGameID);
         getline(filestr,sGameTitle);
         filestr.ignore();
@@ -211,12 +215,12 @@ int GCTCheats::openTxtfile(const char * filename)
 			printf ("%i",str.size());
 		}
 
-		if (!isComment)	
+		if (!isComment)
 		{
 			cheatdata.append(str);
 	        size_t found=cheatdata.find(' ');
 	        cheatdata.replace(found,1,"");
-		} else 
+		} else
 		{
 		sCheatComment[i] = str;
 		}
@@ -247,7 +251,7 @@ return 1;
 		int size = filestr.tellg();
 		if (size <= 0) return -1;
 		filestr.seekg(0,ios_base::beg);
-		
+
         getline(filestr,sGameID);
         getline(filestr,sGameTitle);
         filestr.ignore();
