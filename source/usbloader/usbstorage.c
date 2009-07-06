@@ -143,7 +143,6 @@ s32 USBStorage_Umount(void)
 
 void USBStorage_Deinit(void)
 {
-    USBStorage_Umount();
 	/* Close USB device */
 	if (fd > 0) {
 		IOS_Close(fd);
