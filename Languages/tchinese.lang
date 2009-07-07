@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-06 01:48+0200\n"
+"POT-Creation-Date: 2009-07-07 07:01-0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -429,6 +429,9 @@ msgstr "否"
 msgid "No Cheatfile found"
 msgstr ""
 
+msgid "No Favorites"
+msgstr ""
+
 msgid "No SD-Card inserted!"
 msgstr "未插入 SD 卡!"
 
@@ -716,6 +719,9 @@ msgstr "密碼錯誤"
 
 msgid "Yes"
 msgstr "是"
+
+msgid "You are choosing to display favorites and you do not have any selected."
+msgstr ""
 
 msgid "You have attempted to load a bad image"
 msgstr ""

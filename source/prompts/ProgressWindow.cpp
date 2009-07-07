@@ -228,17 +228,22 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
 	ResumeGui();
 
 	while(promptWindow.GetEffect() > 0) usleep(100);
-
+	
+	
+	int tmp;
 	while(showProgress)
 	{
 	    usleep(20000);
 
         GameInstallProgress();
+		tmp=static_cast<int>(progressbarImg.GetWidth()*progressDone);
+		
+		
 
         if(CFG.widescreen && Settings.wsprompt == yes)
-            progressbarImg.SetTile(0.8*progressDone);
+            progressbarImg.SetSkew(0,0,static_cast<int>(progressbarImg.GetWidth()*progressDone*0.8)-progressbarImg.GetWidth(),0,static_cast<int>(progressbarImg.GetWidth()*progressDone*0.8)-progressbarImg.GetWidth(),0,0,0);
         else
-            progressbarImg.SetTile(progressDone);
+            progressbarImg.SetSkew(0,0,static_cast<int>(progressbarImg.GetWidth()*progressDone)-progressbarImg.GetWidth(),0,static_cast<int>(progressbarImg.GetWidth()*progressDone)-progressbarImg.GetWidth(),0,0,0);
 
         prTxt.SetTextf("%.2f", progressDone);
 

@@ -608,6 +608,18 @@ int MenuDiscList()
 
 			WindowPrompt(0,idiotBuffer,tr("Ok"));
 			idiotFlag=-1;}
+			
+			// if the idiot is showing favoorites and don't have any
+			if (Settings.fave && !gameCnt){
+				WindowPrompt(tr("No Favorites"),tr("You are choosing to display favorites and you do not have any selected."),tr("Back"));
+				        Settings.fave=!Settings.fave;
+                        if(isInserted(bootDevice)) {
+                                cfg_save_global();
+                        }
+                        __Menu_GetEntries();
+                        menu = MENU_DISCLIST;
+                        break;
+					}
 
                 //CLOCK
                 time_t rawtime = time(0);                                                               //this fixes code dump caused by the clock
