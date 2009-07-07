@@ -38,6 +38,8 @@
 #include "listfiles.h"
 #include "fatmounter.h"
 
+#include "usbloader/wdvd.h"
+
 #define MAX_CHARACTERS		38
 
 /*** Variables that are also used extern ***/
@@ -219,6 +221,12 @@ int MenuDiscList()
 	int selectImg1 = 0;
 	char ID[4];
     char IDfull[7];
+	u32 covert = 0;
+	
+	
+    WDVD_GetCoverStatus(&covert);
+	u32 covertOld=covert;
+
 
 		//SCREENSAVER
 		//WPad_SetIdleTime(300); //needs the time in seconds
@@ -609,6 +617,8 @@ int MenuDiscList()
 			WindowPrompt(0,idiotBuffer,tr("Ok"));
 			idiotFlag=-1;}
 			
+			WDVD_GetCoverStatus(&covert);
+			
 			// if the idiot is showing favoorites and don't have any
 			if (Settings.fave && !gameCnt){
 				WindowPrompt(tr("No Favorites"),tr("You are choosing to display favorites and you do not have any selected."),tr("Back"));
@@ -709,7 +719,7 @@ int MenuDiscList()
                         else if (Settings.gameDisplay==grid){gameGrid->SetFocus(1);}
                         else if (Settings.gameDisplay==carousel){gameCarousel->SetFocus(1);}
                 }
-                else if(installBtn.GetState() == STATE_CLICKED)
+                else if((installBtn.GetState() == STATE_CLICKED)||((covert & 0x2)&&(covert!=covertOld)))
                 {
                                 choice = WindowPrompt(tr("Install a game"),0,tr("Yes"),tr("No"));
                                 if (choice == 1)
@@ -725,7 +735,7 @@ int MenuDiscList()
                                         else if (Settings.gameDisplay==carousel){gameCarousel->SetFocus(1);}
                                 }
                 }
-
+				
 
                 else if(sdcardBtn.GetState() == STATE_CLICKED)
                 {
@@ -1224,6 +1234,7 @@ int MenuDiscList()
 				screensaverIsOn=WindowScreensaver();
 				if (screensaverIsOn==1)check=0;
 			}
+			covertOld=covert;
 		}
 
     HaltGui();
