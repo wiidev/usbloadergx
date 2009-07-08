@@ -155,7 +155,7 @@
 #include <ft2build.h>
 #include FT_FREETYPE_H
 #include FT_BITMAP_H
-#include <Metaphrasis.h>
+#include "Metaphrasis.h"
 
 #include <malloc.h>
 #include <string.h>

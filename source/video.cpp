@@ -262,7 +262,7 @@ void Menu_DrawImg(f32 xpos, f32 ypos, f32 zpos, f32 width, f32 height, u8 data[]
 	height*=.5;
 	guMtxIdentity (m1);
 	guMtxScaleApply(m1,m1,scaleX,scaleY,1.0);
-	Vector axis = (Vector) {0 , 0, 1 };
+	guVector axis = (guVector) {0 , 0, 1 };
 	guMtxRotAxisDeg (m2, &axis, degrees);
 //	guMtxConcat(m2,m1,m);
 	guMtxConcat(m1,m2,m);
@@ -311,7 +311,7 @@ void Menu_DrawRectangle(f32 x, f32 y, f32 width, f32 height, GXColor color, u8 f
 	int i;
 	f32 x2 = x+width;
 	f32 y2 = y+height;
-	Vector v[] = {{x,y,0.0f}, {x2,y,0.0f}, {x2,y2,0.0f}, {x,y2,0.0f}, {x,y,0.0f}};
+	guVector v[] = {{x,y,0.0f}, {x2,y,0.0f}, {x2,y2,0.0f}, {x,y2,0.0f}, {x,y,0.0f}};
 
 	if(!filled)
 	{
@@ -362,9 +362,9 @@ void Menu_DrawDiskCover(f32 xpos, f32 ypos, f32 zpos, u16 width, u16 height, u16
 	
 	guMtxIdentity (m1);
 	guMtxScaleApply(m1,m1,scaleX,scaleY,1.0);
-	Vector axis2 = (Vector) {0 , 1, 0 };
+	guVector axis2 = (guVector) {0 , 1, 0 };
 	guMtxRotAxisDeg (m2, &axis2, deg_beta);
-	Vector axis = (Vector) {0 , 0, 1 };
+	guVector axis = (guVector) {0 , 0, 1 };
 	guMtxRotAxisDeg (m3, &axis, deg_alpha);
 //	guMtxConcat(m2,m1,m);
 	guMtxConcat(m3,m4,m3); // move distance then rotate z-axis 
