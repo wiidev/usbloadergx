@@ -120,7 +120,8 @@ http://usbloadergx.koureio.net/help
 		alternate dol
 		The ocarina button
 [8]Themes
-[9]Troubleshooting
+[9]Cheatmanager
+[10]Troubleshooting
 ###################################################################################
 [1]Prerequisites and setup
 
@@ -367,10 +368,28 @@ ocarina button--  this is that blue thing in the upper right.  If you have a txt
 ###################################################################################
 [8]Themes
 Is it possible to theme this program.  Theme elements may include font, images, sounds, and  GXtheme.cfg.  If anything is not included in the theme path, the default will be used.  For image names, look in the source.  Not every image can be themed, but this is a good place to look for the names of the ones that can be. All images must be sized in multiples of 4 or they will not be displayed.  To move elements of the gui around, you can use GXtheme.cfg.  I template can be found here http://code.google.com/p/usbloader-gui/wiki/ThemeSettings.  For More accurate list of themable elements, look in cfg.c from the source
-		
+###################################################################################
+[9]Cheatmanager
+The Cheatmanager makes it possible to directly convert TXT Cheat Codes files into GCT for Ocarina.
+You can find the Cheatmanager in the Game Settings (click on the Ocarina Icon) select the Cheat you want to use and create the GCT file.
 
+The TXT Files should look like this
 
-[9]Troubleshooting
+GameID
+GameTitle
+
+Cheat1
+*here the hexvalues*
+Comment (actually only one line of comment is supported otherwise the GCT file will be messed up)
+
+Cheat2
+*here the hexvalues*
+Comment
+
+Cheat3
+and so on
+###################################################################################
+[10]Troubleshooting
 I get black screen when loading games.
 check the game compatibility list, unhook extra controllers, turn off ocarina, play with video settings.  If the list says the game works, then try different video settings if the game is not from the same region as your tv/wii.  
 Also try without ocarina.  Unless you made the codes yourself, you don't know that they work.  And you don't know which codes work together.  Using codes from a different region will also fuck shit up.
