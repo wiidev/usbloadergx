@@ -1956,7 +1956,7 @@ ProgressDownloadWindow(int choice2)
 			switch (missingFiles[i][3])
 			{
 				case 'J':
-						sprintf(URLFile,"%sntscj3D/%s",server3d[4],missingFiles[i]);
+						sprintf(URLFile,"%sntscj3d/%s",server3d[4],missingFiles[i]);
 					break;
 				case 'K':
 				case 'T':
@@ -1981,7 +1981,19 @@ ProgressDownloadWindow(int choice2)
 			sprintf(imgPath,"%s%s", Settings.covers_path, missingFiles[i]);
 			file = downloadfile(URLFile);
 
-			if (!(file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.size == 4446 || file.data == NULL))break;
+			if (!(file.size == 36864 || file.size <= 1024 || file.size == 7386 || file.size <= 1174 || file.size == 4446 || file.data == NULL))
+				{
+				break;
+				} 
+			else
+				{
+				sprintf(URLFile,"%sntsc3d/%s",server3d[4],missingFiles[i]);
+				file = downloadfile(URLFile);
+					if (!(file.size == 36864 || file.size <= 1024 || file.size == 7386 || file.size <= 1174 || file.size == 4446 || file.data == NULL))
+					{
+					break;
+					}
+				}
 			tries++;
 			}
 
@@ -2023,7 +2035,19 @@ ProgressDownloadWindow(int choice2)
 
 			sprintf(imgPath,"%s%s", Settings.disc_path, missingFiles[i]);
 			file = downloadfile(URLFile);
-		if (!(file.size == 36864 || file.size <= 1024 || file.size == 7386 || file.size <= 1174 || file.size == 4446 || file.data == NULL))break;
+			if (!(file.size == 36864 || file.size <= 1024 || file.size == 7386 || file.size <= 1174 || file.size == 4446 || file.data == NULL))
+				{
+				break;
+				} 
+			else 
+				{
+				sprintf(URLFile,"%sEN/%s",serverDisc[3],missingFiles[i]);
+				file = downloadfile(URLFile);
+				if (!(file.size == 36864 || file.size <= 1024 || file.size == 7386 || file.size <= 1174 || file.size == 4446 || file.data == NULL))
+				{
+				break;
+				}
+				}
 			tries++;
 			}
 		}
@@ -2064,7 +2088,19 @@ ProgressDownloadWindow(int choice2)
 			sprintf(imgPath,"%s%s", Settings.covers_path, missingFiles[i]);
 			file = downloadfile(URLFile);
 
-			if (!(file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.size == 4446 || file.data == NULL))break;
+			if (!(file.size == 36864 || file.size <= 1024 || file.size == 7386 || file.size <= 1174 || file.size == 4446 || file.data == NULL))
+				{
+				break;
+				} 
+			else 
+				{
+				sprintf(URLFile,"%sEN/%s",server2d[4],missingFiles[i]);
+				file = downloadfile(URLFile);
+				if (!(file.size == 36864 || file.size <= 1024 || file.size == 7386 || file.size <= 1174 || file.size == 4446 || file.data == NULL))
+				{
+				break;
+				}
+				}
 			tries++;
 			}
 		}
