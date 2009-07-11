@@ -25,7 +25,7 @@
 #include "filelist.h"
 #include "sys.h"
 #include "wpad.h"
-#include "wad.h"
+#include "wad/wad.h"
 #include "unzip/unzip.h"
 #include "zlib.h"
 

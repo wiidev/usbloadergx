@@ -31,7 +31,7 @@
 #include "cheatmenu.h"
 #include "menu.h"
 #include "audio.h"
-#include "wad.h"
+#include "wad/wad.h"
 #include "input.h"
 #include "filelist.h"
 #include "sys.h"
