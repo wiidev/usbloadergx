@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-07 07:01-0400\n"
+"POT-Creation-Date: 2009-07-11 01:37-0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -28,6 +28,21 @@ msgid "3D Covers"
 msgstr ""
 
 msgid "4 (Adults Only 18+)"
+msgstr ""
+
+msgid ">> Finishing installation..."
+msgstr ""
+
+msgid ">> Installing content #"
+msgstr ""
+
+msgid ">> Installing ticket..."
+msgstr ""
+
+msgid ">> Installing title..."
+msgstr ""
+
+msgid ">> Reading WAD data..."
 msgstr ""
 
 msgid "All the features of USB Loader GX are unlocked."
@@ -234,6 +249,9 @@ msgstr ""
 msgid "Download finished"
 msgstr "Download færdig"
 
+msgid "Downloading"
+msgstr ""
+
 msgid "Downloading file"
 msgstr "Downloader fil:"
 
@@ -255,6 +273,9 @@ msgstr ""
 msgid "Error reading Disc"
 msgstr "Disken kunne ikke læses"
 
+msgid "Error..."
+msgstr ""
+
 msgid "Exit USB Loader GX?"
 msgstr "Afslut USB Loader GX?"
 
@@ -265,6 +286,9 @@ msgid "Feb"
 msgstr ""
 
 msgid "File not found."
+msgstr ""
+
+msgid "Finishing installation... Ok!"
 msgstr ""
 
 msgid "Flip-X"
@@ -351,8 +375,20 @@ msgstr "Installations fejl!"
 msgid "Install a game"
 msgstr "Installer et spil?"
 
+msgid "Installing content... Ok!"
+msgstr ""
+
 msgid "Installing game:"
 msgstr "Installerer spillet:"
+
+msgid "Installing ticket... Ok!"
+msgstr ""
+
+msgid "Installing title... Ok!"
+msgstr ""
+
+msgid "Installing wad"
+msgstr ""
 
 msgid "Italian"
 msgstr "Italiensk"
@@ -379,6 +415,9 @@ msgid "Language change:"
 msgstr ""
 
 msgid "Languagepath changed."
+msgstr ""
+
+msgid "Leaving so you can restart..."
 msgstr ""
 
 msgid "Left"
@@ -537,6 +576,9 @@ msgstr ""
 msgid "Quick Boot"
 msgstr "Hurtig opstart"
 
+msgid "Reading WAD data... Ok!"
+msgstr ""
+
 msgid "Released"
 msgstr ""
 
@@ -591,6 +633,9 @@ msgstr ""
 msgid "Settings"
 msgstr "Indstillinger"
 
+msgid "Shit"
+msgstr ""
+
 msgid "Shutdown System"
 msgstr "Sluk Totalt(Rødt lys)"
 
@@ -633,6 +678,10 @@ msgstr "Tradionelt Kinesisk"
 msgid "TXTCheatcodes Path"
 msgstr ""
 
+#, c-format
+msgid "The wad installation failed with error %ld"
+msgstr ""
+
 msgid "ThemePath"
 msgstr "Tema Sti"
 
@@ -656,6 +705,10 @@ msgstr ""
 
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX er beskyttet"
+
+#, c-format
+msgid "Unable to open the wad that was just downloaded (%s)."
+msgstr ""
 
 msgid "Uninstall"
 msgstr "Afinstaller"
@@ -782,6 +835,9 @@ msgstr "af"
 
 msgid "seconds left"
 msgstr "Sekunder tilbage"
+
+msgid "there was an error"
+msgstr ""
 
 msgid "titles.txt Path"
 msgstr "Titles.txt Sti"

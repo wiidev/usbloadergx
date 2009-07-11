@@ -1014,8 +1014,8 @@ void GuiGameGrid::Update(GuiTrigger * t)
 			btnLeft->ResetState();
 			speed = SHIFT_SPEED;
 			return;
-		}goLeft=12;
-		wait=0;wait1=0;
+		}if ((Settings.xflip==sysmenu)||(Settings.xflip==yes))goRight=12;
+		else goLeft=12;wait=0;wait1=0;
 
 
 	}
@@ -1348,8 +1348,8 @@ void GuiGameGrid::Update(GuiTrigger * t)
 			speed=SHIFT_SPEED;
 			return;
 		}
-		goRight=12;
-		wait=0;wait1=0;
+		if ((Settings.xflip==sysmenu)||(Settings.xflip==yes))goLeft=12;
+		else goRight=12;wait=0;wait1=0;
 
 
 
@@ -1667,7 +1667,8 @@ void GuiGameGrid::Update(GuiTrigger * t)
 
 		}
 		else {goRight=0;mover=0;
-		listOffset = (listOffset-rows < 0) ? gameCnt-rows : listOffset-rows;
+		int ballsack = listOffset-rows;
+		listOffset = (ballsack < 0) ? gameCnt-ballsack : listOffset-rows;
 		firstPic = (firstPic-rows < 0) ? pagesize-rows : firstPic-rows;
 
 		for(int i=0; i<pagesize; i++) {

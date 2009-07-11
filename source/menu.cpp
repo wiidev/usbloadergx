@@ -31,6 +31,7 @@
 #include "cheatmenu.h"
 #include "menu.h"
 #include "audio.h"
+#include "wad.h"
 #include "input.h"
 #include "filelist.h"
 #include "sys.h"
@@ -605,10 +606,15 @@ int MenuDiscList()
 
         ResumeGui();
 
-        while(menu == MENU_NONE)
+		while(menu == MENU_NONE)
         {
+		  //this may not be needed.  just messing around with the GHWT controller
+			u32 expType = 0; // Stores only the controller/expansion type.
+			u32 buttonsDown = WPAD_ButtonsDown(0);
 
-                VIDEO_WaitVSync ();
+			// Use WPAD_Probe to get the expansion type.
+			WPAD_Probe( WPAD_CHAN_0, &expType );
+								 VIDEO_WaitVSync ();
 
 				if (idiotFlag==1){
 				char idiotBuffer[200];
@@ -617,7 +623,7 @@ int MenuDiscList()
 			WindowPrompt(0,idiotBuffer,tr("Ok"));
 			idiotFlag=-1;}
 			
-			WDVD_GetCoverStatus(&covert);
+			WDVD_GetCoverStatus(&covert);//for detecting if i disc has been inserted
 			
 			// if the idiot is showing favoorites and don't have any
 			if (Settings.fave && !gameCnt){
@@ -737,9 +743,12 @@ int MenuDiscList()
                 }
 				
 
-                else if(sdcardBtn.GetState() == STATE_CLICKED)
+
+
+                else if((sdcardBtn.GetState() == STATE_CLICKED)||
+					 ( ( buttonsDown & GUITAR_HERO_3_BUTTON_ORANGE ) && ( expType == WPAD_EXP_GUITARHERO3 ) ))
                 {
-                        SDCard_deInit();
+								SDCard_deInit();
                         SDCard_Init();
                         if (Settings.gameDisplay==list){
                                 startat = gameBrowser->GetSelectedOption();
@@ -1227,7 +1236,7 @@ int MenuDiscList()
 			if(IsWpadConnected()){check = 1;}
 
 			// screensaver is called when wiimote shuts down, depending on the wiimotet idletime
-			if(!IsWpadConnected() && check !=0)
+			if(!IsWpadConnected() && check !=0 && Settings.screensaver!=0)
 			{	check++;
 				int screensaverIsOn=0;
 				if(check==100) //to allow time for the wii to turn off and not show the screensaver

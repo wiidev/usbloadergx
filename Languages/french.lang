@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-07 07:01-0400\n"
+"POT-Creation-Date: 2009-07-11 01:37-0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -29,6 +29,21 @@ msgstr "Jaquettes 3D"
 
 msgid "4 (Adults Only 18+)"
 msgstr "4 (Adultes 18+)"
+
+msgid ">> Finishing installation..."
+msgstr ""
+
+msgid ">> Installing content #"
+msgstr ""
+
+msgid ">> Installing ticket..."
+msgstr ""
+
+msgid ">> Installing title..."
+msgstr ""
+
+msgid ">> Reading WAD data..."
+msgstr ""
 
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "Toutes les fonctionnalités sont déverrouillées."
@@ -234,6 +249,9 @@ msgstr ""
 msgid "Download finished"
 msgstr "Téléchargement terminé"
 
+msgid "Downloading"
+msgstr ""
+
 msgid "Downloading file"
 msgstr "Téléchargement du fichier"
 
@@ -255,6 +273,9 @@ msgstr "Fix Erreur 002"
 msgid "Error reading Disc"
 msgstr "Erreur à la lecture du disque"
 
+msgid "Error..."
+msgstr ""
+
 msgid "Exit USB Loader GX?"
 msgstr "Quitter USB Loader GX ?"
 
@@ -266,6 +287,9 @@ msgstr "Fév"
 
 msgid "File not found."
 msgstr "Fichier introuvable."
+
+msgid "Finishing installation... Ok!"
+msgstr ""
 
 msgid "Flip-X"
 msgstr "Inversion-X"
@@ -351,8 +375,20 @@ msgstr "Erreur à l'installation !"
 msgid "Install a game"
 msgstr "Installer un jeu"
 
+msgid "Installing content... Ok!"
+msgstr ""
+
 msgid "Installing game:"
 msgstr "Installation du jeu :"
+
+msgid "Installing ticket... Ok!"
+msgstr ""
+
+msgid "Installing title... Ok!"
+msgstr ""
+
+msgid "Installing wad"
+msgstr ""
 
 msgid "Italian"
 msgstr "Italien"
@@ -380,6 +416,9 @@ msgstr ""
 
 msgid "Languagepath changed."
 msgstr "Dossier Langue changé"
+
+msgid "Leaving so you can restart..."
+msgstr ""
 
 msgid "Left"
 msgstr "Gauche"
@@ -537,6 +576,9 @@ msgstr "Publié par"
 msgid "Quick Boot"
 msgstr "Démarrage rapide"
 
+msgid "Reading WAD data... Ok!"
+msgstr ""
+
 msgid "Released"
 msgstr ""
 
@@ -591,6 +633,9 @@ msgstr "Utiliser comme fond sonore ?"
 msgid "Settings"
 msgstr "Paramètres"
 
+msgid "Shit"
+msgstr ""
+
 msgid "Shutdown System"
 msgstr "Arrêt"
 
@@ -633,6 +678,10 @@ msgstr "Chinois traditionnel"
 msgid "TXTCheatcodes Path"
 msgstr ""
 
+#, c-format
+msgid "The wad installation failed with error %ld"
+msgstr ""
+
 msgid "ThemePath"
 msgstr "Dossier Thème"
 
@@ -656,6 +705,10 @@ msgstr "Périphérique USB introuvable"
 
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX est verrouillé"
+
+#, c-format
+msgid "Unable to open the wad that was just downloaded (%s)."
+msgstr ""
 
 msgid "Uninstall"
 msgstr "Désinstaller"
@@ -782,6 +835,9 @@ msgstr "sur"
 
 msgid "seconds left"
 msgstr "secondes restantes"
+
+msgid "there was an error"
+msgstr ""
 
 msgid "titles.txt Path"
 msgstr "Localisation titles.txt"

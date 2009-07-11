@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-07 07:01-0400\n"
+"POT-Creation-Date: 2009-07-11 01:37-0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -28,6 +28,21 @@ msgid "3D Covers"
 msgstr "3D 표지"
 
 msgid "4 (Adults Only 18+)"
+msgstr ""
+
+msgid ">> Finishing installation..."
+msgstr ""
+
+msgid ">> Installing content #"
+msgstr ""
+
+msgid ">> Installing ticket..."
+msgstr ""
+
+msgid ">> Installing title..."
+msgstr ""
+
+msgid ">> Reading WAD data..."
 msgstr ""
 
 msgid "All the features of USB Loader GX are unlocked."
@@ -234,6 +249,9 @@ msgstr ""
 msgid "Download finished"
 msgstr "다운로드 완료"
 
+msgid "Downloading"
+msgstr ""
+
 msgid "Downloading file"
 msgstr "파일 다운로드 중:"
 
@@ -255,6 +273,9 @@ msgstr ""
 msgid "Error reading Disc"
 msgstr "디스크 읽기 오류"
 
+msgid "Error..."
+msgstr ""
+
 msgid "Exit USB Loader GX?"
 msgstr "USB로더 GX를 종료할까요?"
 
@@ -265,6 +286,9 @@ msgid "Feb"
 msgstr ""
 
 msgid "File not found."
+msgstr ""
+
+msgid "Finishing installation... Ok!"
 msgstr ""
 
 msgid "Flip-X"
@@ -351,8 +375,20 @@ msgstr "설치 에러!"
 msgid "Install a game"
 msgstr "게임을 설치할까요"
 
+msgid "Installing content... Ok!"
+msgstr ""
+
 msgid "Installing game:"
 msgstr "게임 설치 중:"
+
+msgid "Installing ticket... Ok!"
+msgstr ""
+
+msgid "Installing title... Ok!"
+msgstr ""
+
+msgid "Installing wad"
+msgstr ""
 
 msgid "Italian"
 msgstr "이태리어"
@@ -379,6 +415,9 @@ msgid "Language change:"
 msgstr ""
 
 msgid "Languagepath changed."
+msgstr ""
+
+msgid "Leaving so you can restart..."
 msgstr ""
 
 msgid "Left"
@@ -537,6 +576,9 @@ msgstr ""
 msgid "Quick Boot"
 msgstr "게임 바로실행"
 
+msgid "Reading WAD data... Ok!"
+msgstr ""
+
 msgid "Released"
 msgstr ""
 
@@ -591,6 +633,9 @@ msgstr ""
 msgid "Settings"
 msgstr "설정"
 
+msgid "Shit"
+msgstr ""
+
 msgid "Shutdown System"
 msgstr "시스템 종료"
 
@@ -633,6 +678,10 @@ msgstr "중국어(번체)"
 msgid "TXTCheatcodes Path"
 msgstr ""
 
+#, c-format
+msgid "The wad installation failed with error %ld"
+msgstr ""
+
 msgid "ThemePath"
 msgstr "테마 경로"
 
@@ -656,6 +705,10 @@ msgstr "USB 장치가 없습니다."
 
 msgid "USB Loader GX is protected"
 msgstr "USB 로더 GX 잠김 상태"
+
+#, c-format
+msgid "Unable to open the wad that was just downloaded (%s)."
+msgstr ""
 
 msgid "Uninstall"
 msgstr "제거"
@@ -782,6 +835,9 @@ msgstr "중"
 
 msgid "seconds left"
 msgstr "초 남았습니다"
+
+msgid "there was an error"
+msgstr ""
 
 msgid "titles.txt Path"
 msgstr ""

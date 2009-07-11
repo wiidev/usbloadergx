@@ -348,11 +348,14 @@ void GuiGameCarousel::Update(GuiTrigger * t)
 	if(!focus || gameCnt <= pagesize || (game[bob[0]]->GetEffect() && game[bob[pagesize-1]]->GetEffect()))
 		return; // skip navigation
 
-	if (t->Left()  || btnLeft->GetState() == STATE_CLICKED) {
+	if (((btnLeft->GetState() == STATE_CLICKED) &&(Settings.xflip!=sysmenu)&&(Settings.xflip!=yes))
+		||((btnRight->GetState() == STATE_CLICKED) &&((Settings.xflip==sysmenu)||(Settings.xflip==yes)))){
 
 		u16 buttons = ButtonsHold();
-		if(!((buttons & WPAD_BUTTON_A) || (buttons & WPAD_BUTTON_MINUS) || t->Left())) {
+		if(!((buttons & WPAD_BUTTON_A) || (buttons & WPAD_BUTTON_MINUS) || t->Left() ||
+				(buttons & WPAD_BUTTON_PLUS) || t->Right())) {
 			btnLeft->ResetState();
+			btnRight->ResetState();
 			speed = SHIFT_SPEED;
 			return;
 		}
@@ -380,12 +383,16 @@ void GuiGameCarousel::Update(GuiTrigger * t)
 		speed+=SPEED_STEP;
 	}
 
-	else if(t->Right()  || btnRight->GetState() == STATE_CLICKED) {
+
+	else if (((btnRight->GetState() == STATE_CLICKED) &&(Settings.xflip!=sysmenu)&&(Settings.xflip!=yes))
+		||((btnLeft->GetState() == STATE_CLICKED) &&((Settings.xflip==sysmenu)||(Settings.xflip==yes)))){
 
 		u16 buttons = ButtonsHold();
-		if(!((buttons & WPAD_BUTTON_A) || (buttons & WPAD_BUTTON_PLUS) || t->Right())) {
+		if(!((buttons & WPAD_BUTTON_A) || (buttons & WPAD_BUTTON_MINUS) || t->Left() ||
+				(buttons & WPAD_BUTTON_PLUS) || t->Right())) {
+			btnLeft->ResetState();
 			btnRight->ResetState();
-			speed=SHIFT_SPEED;
+			speed = SHIFT_SPEED;
 			return;
 		}
 

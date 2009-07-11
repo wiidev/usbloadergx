@@ -25,6 +25,11 @@
 #include "filelist.h"
 #include "sys.h"
 #include "wpad.h"
+#include "wad.h"
+#include "unzip/unzip.h"
+#include "zlib.h"
+
+	
 
 /*** Variables that are also used extern ***/
 int cntMissFiles = 0;
@@ -2164,6 +2169,32 @@ ProgressDownloadWindow(int choice2)
  * action is in progress.
  ***************************************************************************/
  #define BLOCKSIZE    1024
+ /*bool unzipArchive(char * zipfilepath, char * unzipfolderpath)
+{
+	unzFile uf = unzOpen(zipfilepath);
+	if (uf==NULL)
+	{
+	// printf("Cannot open %s, aborting\n",zipfilepath);
+	   return false;
+	}
+	//printf("%s opened\n",zipfilepath);
+	if(chdir(unzipfolderpath)) // can't access dir
+	{
+		makedir(unzipfolderpath); // attempt to make dir
+		if(chdir(unzipfolderpath)) // still can't access dir
+		  {
+		//printf("Error changing into %s, aborting\n", unzipfolderpath);
+		return false;
+		}
+	}
+	extractZip(uf,0,1,0);
+	unzCloseCurrentFile(uf);
+	return true
+}
+*/					 
+
+ #ifdef NOTFULLCHANNEL
+
 int ProgressUpdateWindow()
 {
     int ret = 0, failed = 0;
@@ -2308,8 +2339,8 @@ int ProgressUpdateWindow()
             promptWindow.Append(&progressbarOutlineImg);
             promptWindow.Append(&prTxt);
             msgTxt.SetTextf("%s Rev%i", tr("Update to"), newrev);
-            s32 filesize = download_request("http://www.techjawa.com/usbloadergx/boot.dol");
-            if(filesize > 0) {
+			s32 filesize = download_request("http://www.techjawa.com/usbloadergx/boot.dol");
+			if(filesize > 0) {
                 FILE * pfile;
                 pfile = fopen(dolpath, "wb");
                 u8 * blockbuffer = new unsigned char[BLOCKSIZE];
@@ -2375,9 +2406,17 @@ int ProgressUpdateWindow()
                     fclose(pfile);
                     free(file.data);
                 }
+				file = downloadfile("http://wiitdb.com/wiitdb.zip");
+				if(file.data != NULL){
+				sprintf(xmliconpath, "%swiitdb.zip", Settings.titlestxt_path);
+				pfile = fopen(xmliconpath, "wb");
+				fwrite(file.data,1,file.size,pfile);
+				fclose(pfile);
+				free(file.data);
                 }
+				}
                 }
-            } else {
+            }else {
             failed = -1;
             }
         } else {
@@ -2411,6 +2450,264 @@ int ProgressUpdateWindow()
 
     return 1;
 }
+#else  ///////////////////this is only used if  the dol is being compiled for a full channel
+int ProgressUpdateWindow()
+{
+    int ret = 0, failed = 0;
+
+	GuiWindow promptWindow(472,320);
+	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	promptWindow.SetPosition(0, -10);
+
+    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
+	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
+
+	char imgPath[100];
+	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
+	GuiImageData btnOutline(imgPath, button_dialogue_box_png);
+	snprintf(imgPath, sizeof(imgPath), "%sdialogue_box.png", CFG.theme_path);
+	GuiImageData dialogBox(imgPath, dialogue_box_png);
+	GuiTrigger trigA;
+	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
+
+	GuiImage dialogBoxImg(&dialogBox);
+	if (Settings.wsprompt == yes){
+	dialogBoxImg.SetWidescreen(CFG.widescreen);}
+
+	snprintf(imgPath, sizeof(imgPath), "%sprogressbar_outline.png", CFG.theme_path);
+	GuiImageData progressbarOutline(imgPath, progressbar_outline_png);
+	GuiImage progressbarOutlineImg(&progressbarOutline);
+	if (Settings.wsprompt == yes){
+	progressbarOutlineImg.SetWidescreen(CFG.widescreen);}
+	progressbarOutlineImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
+	progressbarOutlineImg.SetPosition(25, 7);
+
+	snprintf(imgPath, sizeof(imgPath), "%sprogressbar_empty.png", CFG.theme_path);
+	GuiImageData progressbarEmpty(imgPath, progressbar_empty_png);
+	GuiImage progressbarEmptyImg(&progressbarEmpty);
+	progressbarEmptyImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
+	progressbarEmptyImg.SetPosition(25, 7);
+	progressbarEmptyImg.SetTile(100);
+
+	snprintf(imgPath, sizeof(imgPath), "%sprogressbar.png", CFG.theme_path);
+	GuiImageData progressbar(imgPath, progressbar_png);
+	GuiImage progressbarImg(&progressbar);
+	progressbarImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
+	progressbarImg.SetPosition(25, 7);
+
+    char title[50];
+    sprintf(title, "%s", tr("Checking for Updates"));
+	GuiText titleTxt(title, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	titleTxt.SetPosition(0,50);
+    char msg[50];
+    sprintf(msg, "%s", tr("Initializing Network"));
+	GuiText msgTxt(msg, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	msgTxt.SetPosition(0,140);
+	char msg2[50] = " ";
+	GuiText msg2Txt(msg2, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	msg2Txt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	msg2Txt.SetPosition(0, 50);
+
+	GuiText prTxt(NULL, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	prTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	prTxt.SetPosition(0, 7);
+
+   GuiText btn1Txt(tr("Cancel"), 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	GuiImage btn1Img(&btnOutline);
+	if (Settings.wsprompt == yes){
+	btn1Txt.SetWidescreen(CFG.widescreen);
+	btn1Img.SetWidescreen(CFG.widescreen);}
+	GuiButton btn1(&btn1Img,&btn1Img, 2, 4, 0, -40, &trigA, &btnSoundOver, &btnClick,1);
+	btn1.SetLabel(&btn1Txt);
+	btn1.SetState(STATE_SELECTED);
+
+	if ((Settings.wsprompt == yes) && (CFG.widescreen)){/////////////adjust for widescreen
+		progressbarOutlineImg.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+		progressbarOutlineImg.SetPosition(0, 7);
+		progressbarEmptyImg.SetPosition(80,7);
+		progressbarEmptyImg.SetTile(78);
+		progressbarImg.SetPosition(80, 7);
+	}
+
+	promptWindow.Append(&dialogBoxImg);
+	promptWindow.Append(&titleTxt);
+	promptWindow.Append(&msgTxt);
+	promptWindow.Append(&msg2Txt);
+    promptWindow.Append(&btn1);
+
+    promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
+
+	HaltGui();
+	mainWindow->SetState(STATE_DISABLED);
+	mainWindow->Append(&promptWindow);
+	mainWindow->ChangeFocus(&promptWindow);
+	ResumeGui();
+
+    struct stat st;
+    if(stat(Settings.update_path, &st) != 0) {
+        if(subfoldercreate(Settings.covers_path) != 1) {
+        WindowPrompt(tr("Error !"),tr("Can't create directory"),tr("OK"));
+        ret = -1;
+        failed = -1;
+        }
+    }
+
+    char dolpath[150];
+//    char dolpathsuccess[150];//use coverspath as a folder for the update wad so we dont make a new folder and have to delete it
+    snprintf(dolpath, sizeof(dolpath), "%sUNEO.wad", Settings.covers_path);
+    //snprintf(dolpathsuccess, sizeof(dolpathsuccess), "%sUNEO.wad", Settings.covers_path);
+
+	while (!IsNetworkInit()) {
+
+        VIDEO_WaitVSync();
+
+        Initialize_Network();
+
+		if (IsNetworkInit()) {
+		msgTxt.SetText(GetNetworkIP());
+		} else {
+        msgTxt.SetText(tr("Could not initialize network!"));
+		}
+
+        if(btn1.GetState() == STATE_CLICKED) {
+			ret = -1;
+			failed = -1;
+			btn1.ResetState();
+			break;
+		}
+	}
+
+	if(IsNetworkInit() && ret >= 0) {
+
+    int newrev = CheckUpdate();
+
+    if(newrev > 0) {
+
+        sprintf(msg, "Rev%i %s.", newrev, tr("available"));
+        int choice = WindowPrompt(msg, 0, tr("Update"));
+        if(choice == 1 || choice == 2) {
+            titleTxt.SetTextf("%s USB Loader GX", tr("Updating"));
+            msgTxt.SetPosition(0,100);
+            promptWindow.Append(&progressbarEmptyImg);
+            promptWindow.Append(&progressbarImg);
+            promptWindow.Append(&progressbarOutlineImg);
+            promptWindow.Append(&prTxt);
+            msgTxt.SetTextf("%s Rev%i wad.", tr("Downloading"), newrev);//download the wad but it is saved as a txt file.
+			s32 filesize = download_request("http://www.techjawa.com/usbloadergx/UNEO.txt");//for some reason it didn't download completely when saved as a wad.
+			if(filesize > 0) {
+                FILE * pfile;
+                pfile = fopen(dolpath, "wb");//here we save the txt as a wad
+                u8 * blockbuffer = new unsigned char[BLOCKSIZE];
+                for (s32 i = 0; i < filesize; i += BLOCKSIZE) {
+                    usleep(100);
+                    prTxt.SetTextf("%i%%", (100*i/filesize)+1);
+                    if ((Settings.wsprompt == yes) && (CFG.widescreen)) {
+                        progressbarImg.SetTile(80*i/filesize);
+                    } else {
+                        progressbarImg.SetTile(100*i/filesize);
+                    }
+                    msg2Txt.SetTextf("%iKB/%iKB", i/1024, filesize/1024);
+
+                    if(btn1.GetState() == STATE_CLICKED) {
+                        fclose(pfile);
+                        remove(dolpath);
+                        failed = -1;
+                        btn1.ResetState();
+                        break;
+                    }
+
+                    u32 blksize;
+                    blksize = (u32)(filesize - i);
+                    if (blksize > BLOCKSIZE)
+                        blksize = BLOCKSIZE;
+
+                    ret = network_read(blockbuffer, blksize);
+                    if (ret != (s32) blksize) {
+                        failed = -1;
+                        ret = -1;
+                        fclose(pfile);
+                        remove(dolpath);
+                        break;
+                    }
+                    fwrite(blockbuffer,1,blksize, pfile);
+                }
+                fclose(pfile);
+                delete blockbuffer;
+                if(!failed) {
+					// while we're at it grab the xml shit too
+						/*pfile = downloadfile("http://wiitdb.com/wiitdb.zip");
+						if(file.data != NULL){
+								sprintf(dolpath, "%swiitdb.zip", Settings.titlestxt_path);
+								pfile = fopen(xmliconpath, "wb");
+								fwrite(file.data,1,file.size,pfile);
+								fclose(pfile);
+								free(file.data);
+							 }*/
+				
+                }
+            }else {
+            failed = -1;
+            }
+        } else {
+        ret = -1;
+        }
+
+    } else {
+        WindowPrompt(tr("No new updates."), 0, tr("OK"));
+        ret = -1;
+    }
+
+    }
+
+    CloseConnection();
+
+    if(!failed && ret >= 0) {
+	 
+		FILE *wadFile = NULL;
+		s32 shit = 1;
+				char nipple[100];
+				wadFile = fopen (dolpath ,"rb");
+				if (wadFile==NULL)//we can't open the file wad we just downloaded
+				{sprintf(nipple, tr("Unable to open the wad that was just downloaded (%s)."),dolpath);
+				WindowPrompt(tr("Error !"), nipple, tr("Ok"));
+				failed = -1;
+				}
+				else{								
+				//sprintf(nipple, tr("The update wad has been saved as %s.  Now let's try to install it."),dolpath);
+				//WindowPrompt(0,nipple, tr("Ok"));	
+				shit = Wad_Install(wadFile);
+				fclose(wadFile);
+				if (shit==0){
+				//WindowPrompt(tr("Success"),"The wad file was installed","Ok");
+				}else{
+				sprintf(nipple, tr("The wad installation failed with error %ld"),shit);
+				WindowPrompt(tr("Error"),nipple,"Ok");
+				}
+			}
+				
+			if (shit)
+        WindowPrompt(tr("Shit") , tr("there was an error"), tr("OK"));
+		  else
+        WindowPrompt(tr("Successfully Updated") , tr("Leaving so you can restart..."), tr("OK"));
+        Sys_BackToLoader();
+    }
+
+    promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
+	while(promptWindow.GetEffect() > 0) usleep(50);
+
+	HaltGui();
+	mainWindow->Remove(&promptWindow);
+	mainWindow->SetState(STATE_DEFAULT);
+	ResumeGui();
+
+    if(failed != 0)
+    return failed;
+
+    return 1;
+}
+#endif
 
 char * GetMissingFiles()
 {

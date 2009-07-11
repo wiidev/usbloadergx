@@ -199,7 +199,11 @@ int CheckUpdate()
     int revnumber = 0;
     int currentrev = atoi(SVN_REV);
 
-    struct block file = downloadfile("http://www.techjawa.com/usbloadergx/rev.txt");
+	#ifdef NOTFULLCHANNEL
+	struct block file = downloadfile("http://www.techjawa.com/usbloadergx/rev.txt");
+    #else
+	struct block file = downloadfile("http://www.techjawa.com/usbloadergx/wadrev.txt");
+    #endif
     char revtxt[10];
 
 	u8  i;

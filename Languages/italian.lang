@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-07 07:01-0400\n"
+"POT-Creation-Date: 2009-07-11 01:37-0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -29,6 +29,21 @@ msgstr "3D"
 
 msgid "4 (Adults Only 18+)"
 msgstr "solo Adulti"
+
+msgid ">> Finishing installation..."
+msgstr ""
+
+msgid ">> Installing content #"
+msgstr ""
+
+msgid ">> Installing ticket..."
+msgstr ""
+
+msgid ">> Installing title..."
+msgstr ""
+
+msgid ">> Reading WAD data..."
+msgstr ""
 
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "Tutte le funzioni di USB Loader GX sono sbloccate."
@@ -234,6 +249,9 @@ msgstr ""
 msgid "Download finished"
 msgstr "Scaricamento Completato"
 
+msgid "Downloading"
+msgstr ""
+
 msgid "Downloading file"
 msgstr "Scaricamento file:"
 
@@ -255,6 +273,9 @@ msgstr "correzione Error002"
 msgid "Error reading Disc"
 msgstr "Errore Lettura Disco"
 
+msgid "Error..."
+msgstr ""
+
 msgid "Exit USB Loader GX?"
 msgstr "Esci da USB Loader GX?"
 
@@ -266,6 +287,9 @@ msgstr "febbraio"
 
 msgid "File not found."
 msgstr "File non trovato."
+
+msgid "Finishing installation... Ok!"
+msgstr ""
 
 msgid "Flip-X"
 msgstr "Flip-X"
@@ -351,8 +375,20 @@ msgstr "Errore Installazione!"
 msgid "Install a game"
 msgstr "Installa un gioco"
 
+msgid "Installing content... Ok!"
+msgstr ""
+
 msgid "Installing game:"
 msgstr "Sto Installando il gioco:"
+
+msgid "Installing ticket... Ok!"
+msgstr ""
+
+msgid "Installing title... Ok!"
+msgstr ""
+
+msgid "Installing wad"
+msgstr ""
 
 msgid "Italian"
 msgstr "Italiano"
@@ -380,6 +416,9 @@ msgstr ""
 
 msgid "Languagepath changed."
 msgstr "File Lingua modificato"
+
+msgid "Leaving so you can restart..."
+msgstr ""
 
 msgid "Left"
 msgstr "Sinistra"
@@ -537,6 +576,9 @@ msgstr "pubblicato da"
 msgid "Quick Boot"
 msgstr "Avvio Veloce"
 
+msgid "Reading WAD data... Ok!"
+msgstr ""
+
 msgid "Released"
 msgstr ""
 
@@ -591,6 +633,9 @@ msgstr "Scegli come Musica Sottofondo"
 msgid "Settings"
 msgstr "Impostazioni"
 
+msgid "Shit"
+msgstr ""
+
 msgid "Shutdown System"
 msgstr "Spegnimento"
 
@@ -633,6 +678,10 @@ msgstr "Cinese Tradizionale"
 msgid "TXTCheatcodes Path"
 msgstr ""
 
+#, c-format
+msgid "The wad installation failed with error %ld"
+msgstr ""
+
 msgid "ThemePath"
 msgstr "Percorso Tema"
 
@@ -656,6 +705,10 @@ msgstr "Dispositivo USB non Trovato"
 
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX è Protetto"
+
+#, c-format
+msgid "Unable to open the wad that was just downloaded (%s)."
+msgstr ""
 
 msgid "Uninstall"
 msgstr "Disinstalla"
@@ -782,6 +835,9 @@ msgstr "di"
 
 msgid "seconds left"
 msgstr "secondi mancanti"
+
+msgid "there was an error"
+msgstr ""
 
 msgid "titles.txt Path"
 msgstr "Percorso Titles.txt"

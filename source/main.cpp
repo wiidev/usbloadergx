@@ -33,6 +33,8 @@
 #include "wpad.h"
 #include "fat.h"
 
+#include <debug.h>
+
 /* Constants */
 #define CONSOLE_XCOORD		260
 #define CONSOLE_YCOORD		115
@@ -117,6 +119,8 @@ main(int argc, char *argv[])
 
 	InitVideo(); // Initialise video
 	InitAudio(); // Initialize audio
+	
+	DEBUG_Init(GDBSTUB_DEVICE_USB, 1);// for debugging
 
 	WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
 	WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
