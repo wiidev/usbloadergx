@@ -2667,6 +2667,7 @@ int ProgressUpdateWindow()
 	 
 		FILE *wadFile = NULL;
 		s32 shit = 1;
+		int diarhea = 0;
 				char nipple[100];
 				wadFile = fopen (dolpath ,"rb");
 				if (wadFile==NULL)//we can't open the file wad we just downloaded
@@ -2680,7 +2681,9 @@ int ProgressUpdateWindow()
 				shit = Wad_Install(wadFile);
 				fclose(wadFile);
 				if (shit==0){
-				//WindowPrompt(tr("Success"),"The wad file was installed","Ok");
+					diarhea = remove(dolpath);
+					if (diarhea)
+				WindowPrompt(tr("Success"),"The wad file was installed.  But It could not be deleted from the SD card.","Ok");
 				}else{
 				sprintf(nipple, tr("The wad installation failed with error %ld"),shit);
 				WindowPrompt(tr("Error"),nipple,"Ok");

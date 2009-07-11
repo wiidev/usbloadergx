@@ -54,6 +54,13 @@ http://code.google.com/p/usbloader-gui/source/list
 sourcecode checkout
 http://usbloader-gui.googlecode.com/svn/trunk/
 
+game compatibility chart
+http://wiki.gbatemp.net/wiki/index.php/USB_Loader_v1.x_Game_Compatibility
+
+Other crap that you may find useful is here
+http://usbloadergx.koureio.net/help
+
+
 [1]prerequisites 
 	[1a]files & paths
 [2]usage
@@ -111,13 +118,15 @@ http://usbloader-gui.googlecode.com/svn/trunk/
 		patch country strings
 		default settings
 		alternate dol
+		The ocarina button
 [8]Themes
+[9]Troubleshooting
 ###################################################################################
 [1]Prerequisites and setup
 
 	To use this application, you will need a Wii that has been hacked and is able to run homebrew software.  DO NOT ASK US HOW TO HACK YOUR WII.  THERE ARE THOUSANDS OF TUTORIALS FOR THIS.  You will need to have any 1 or more of cIOS 249rev9 or greater, cIOS222, or cIOS 223.  There are advantages and disadvantages for each of the different cIOS.  It is up to you to research and decide which one you want to use.  It is also up to you to know about the bugs which are known bugs of the cIOS.   
 	
-	For the initial setup you will need to use a PC to format a USB drive to either FAT or NTSC.  If you are going to use the USB device to store other data for this application besides games (images, settings, ect)  now will be a good time to create a Secondary partition.  1gb is plenty for the second partition for what we are going to use it for.  The second partition should be FAT (FAT32 /16 should work fine as well).  Mark your partitions primary and active and if you want your PC to be able to interact with this drive, assign it a drive letter.
+	For the initial setup you will need to use a PC to format a USB drive to either FAT or NTFS.  If you are going to use the USB device to store other data for this application besides games (images, settings, ect)  now will be a good time to create a Secondary partition.  1gb is plenty for the second partition for what we are going to use it for.  The second partition should be FAT (FAT32 /16 should work fine as well).  Mark your partitions primary and active and if you want your PC to be able to interact with this drive, assign it a drive letter.
 	
 	Now plug your drive into your wii and use your desired method of booting homebrew to launch our application.  If everything was done right, you will be prompted to format your main partition to WBSF to use with this loader.  Just follow the instructions on screen.
 
@@ -134,7 +143,10 @@ SD:/config/backgroundmusic/  This is the default folder for custom bg music.
 
 SD:/theme/(SD:/wtheme for widescreen wii)  This is the default theme location.
 
-SD:/codes/  This is the folder to put your gct cheat files.  Currently, you will need to use another application to generate a cheat file and name with the 6 character ID of the game it was meant for. 
+SD:/codes/  This is the folder to put your gct cheat files.  These fiiles should be named wich the 6 character ID of the game they are meant for. 
+
+SD:/txtcodes/  This is the folder to put your txt cheat files.  They should be in the standard format for homebrew/ocarina.  Some examples are available in the downloads section at the googlecode URL above.
+
 
 SD:/  This is where replacement dols used to fix certain broken games go.
 ###################################################################################
@@ -281,7 +293,7 @@ boot/standard--  *****Select the cIOS that is used to boot the program into.
 
 quickboot-- Chose if you want to skip the gameprompt when starting games.
 
-error 002fix--  with certain IOS, some games show an error that says "blablabla, 002, blablabla.  Don't be a pirate."  Turn this on to fix it.
+error 002fix--  with certain IOS, some games show an error that says "blablabla, 002, blablabla.  Don't be a pirate."  Turn this on to fix it.  For certain games running under older cIOS versions, you will need to set this to anti for the games to boot.
 
 [6c]Parental control
 Settings for parents to control what content their kids see.  Everything in this file with ***** beside it is hidden when the application is locked.
@@ -316,10 +328,12 @@ update--***** used for updating the dol.  If you are using our forwarder, it loa
 
 cheatcodes-- *****for gct & ocarina use
 
+txtcheat path-*****for txt files holding the codes for your gams.
+
 dolpath—*****for replacement dols for certain broken games.
 
 [6f]Update*****
-Click to get updates from online.  Just because there is a newer revision than what you are using does not mean that it will be on the update server.  Also, you get the choice to update your dol or the entire HBC package.  If you are using a full channel (not a forwarder channel)  The update feature will not do you any good.  It lill 
+Click to get updates from online.  Just because there is a newer revision than what you are using does not mean that it will be on the update server.  Also, you get the choice to update your dol or the entire HBC package.  If you are using a full channel (not a forwarder channel), you won't get the option to update all.  It will just download a wad file and install that on your wii over top of the old version and then kick you out to the system menu so you can restart with the new version.  This is assuming that the person that created the channel took the necessary steps when they made it.  If you are using the full channel and you get the option to update all, then they fucked up and the update will do you no good. 
 
 [6g]default settings*****
 Click here to restore default settings.
@@ -348,7 +362,21 @@ save-- writes the settings that are on the screen right now to the GXGameSetting
 uninstall-- Delete the selected game from the WBFS table.  The data is not erased from the drive, it is just marked as free space.
 
 back-- Lose any unsaved changes and return to the previous screen.
+
+ocarina button--  this is that blue thing in the upper right.  If you have a txt file for the selected game in the txtcheat folder, click this button to go to the code selection page.  You will see a list of the cheats in the txt file and you can turn them on and off.  When you are happy with the codes you have selected, click the button to generate a gct file.  This will make a gct file with only the codes that are turned on and put it in the proper folder.  Then make sure you turn ocarina on or your cheats won't be used. 
 ###################################################################################
 [8]Themes
 Is it possible to theme this program.  Theme elements may include font, images, sounds, and  GXtheme.cfg.  If anything is not included in the theme path, the default will be used.  For image names, look in the source.  Not every image can be themed, but this is a good place to look for the names of the ones that can be. All images must be sized in multiples of 4 or they will not be displayed.  To move elements of the gui around, you can use GXtheme.cfg.  I template can be found here http://code.google.com/p/usbloader-gui/wiki/ThemeSettings.  For More accurate list of themable elements, look in cfg.c from the source
 		
+
+
+[9]Troubleshooting
+I get black screen when loading games.
+check the game compatibility list, unhook extra controllers, turn off ocarina, play with video settings.  If the list says the game works, then try different video settings if the game is not from the same region as your tv/wii.  
+Also try without ocarina.  Unless you made the codes yourself, you don't know that they work.  And you don't know which codes work together.  Using codes from a different region will also fuck shit up.
+Some games don't like it if you have certain controllers plugged in.  Remove GC & CC controllers and try again.
+If all else fails, rip the game again.  It may have gotten messed up in the process.
+
+I get a black screen with a bunch of numbers on it
+This is a code dump.  It is not bad for your wii.  It just means that the program crashed.  This is beta software, it happens.  Different revs can have this happen at certain times.  Just press reset on your wii.  If you find that this happens every time you start the application, rename your config folder and restart it.  This will cause the loader to use default settings.  If it fixes the problem then you can copy the game settings and favorites files back into the config directory.
+

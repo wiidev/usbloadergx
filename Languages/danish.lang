@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-11 01:37-0400\n"
+"POT-Creation-Date: 2009-07-11 09:19-0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -652,6 +652,9 @@ msgid "Special thanks to:"
 msgstr "Speciel tak til"
 
 msgid "Standard"
+msgstr ""
+
+msgid "Success"
 msgstr ""
 
 msgid "Success:"
