@@ -171,9 +171,21 @@ void WindowCredits()
 	txt[i] = new GuiText(tr("Credits"), 26, (GXColor){255, 255, 255, 255});
 	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(0,12); i++;
 
+	
+	#ifdef NOTFULLCHANNEL
 	char SvnRev[30];
 	snprintf(SvnRev,sizeof(SvnRev), "Rev%s   IOS%u (Rev %u)", SVN_REV, IOS_GetVersion(), IOS_GetRevision());
-
+	#else
+	char svnTmp[4];//did this to hide the M after the rev# that is made by altering it 
+						//to be ready to be in a full channel
+	snprintf(svnTmp,sizeof(svnTmp), "%s", SVN_REV);
+	char SvnRev[30];
+	snprintf(SvnRev,sizeof(SvnRev), "Rev%s   IOS%u (Rev %u)", svnTmp, IOS_GetVersion(), IOS_GetRevision());
+	#endif
+	
+	
+	
+	
 	txt[i] = new GuiText(SvnRev, 16, (GXColor){255, 255, 255, 255});
 	txt[i]->SetAlignment(ALIGN_RIGHT, ALIGN_TOP); txt[i]->SetPosition(0,y); i++; y+=34;
 
@@ -2592,7 +2604,7 @@ int ProgressUpdateWindow()
 
     char dolpath[150];
 //    char dolpathsuccess[150];//use coverspath as a folder for the update wad so we dont make a new folder and have to delete it
-    snprintf(dolpath, sizeof(dolpath), "%sUNEO.wad", Settings.covers_path);
+    snprintf(dolpath, sizeof(dolpath), "%sULNR.wad", Settings.covers_path);
     //snprintf(dolpathsuccess, sizeof(dolpathsuccess), "%sUNEO.wad", Settings.covers_path);
 
 	while (!IsNetworkInit()) {
@@ -2630,8 +2642,8 @@ int ProgressUpdateWindow()
             promptWindow.Append(&progressbarImg);
             promptWindow.Append(&progressbarOutlineImg);
             promptWindow.Append(&prTxt);
-            msgTxt.SetTextf("%s Rev%i wad.", tr("Downloading"), newrev);//download the wad but it is saved as a txt file.
-			s32 filesize = download_request("http://www.techjawa.com/usbloadergx/UNEO.txt");//for some reason it didn't download completely when saved as a wad.
+            msgTxt.SetTextf("%s Rev%i wad.", tr("Downloading"), newrev);//download the wad but it is saved as a genaric file.
+			s32 filesize = download_request("http://www.techjawa.com/usbloadergx/ULNR.file");//for some reason it didn't download completely when saved as a wad.
 			if(filesize > 0) {
                 FILE * pfile;
                 pfile = fopen(dolpath, "wb");//here we save the txt as a wad
@@ -2645,7 +2657,7 @@ int ProgressUpdateWindow()
                         progressbarImg.SetTile(100*i/filesize);
                     }
                     msg2Txt.SetTextf("%iKB/%iKB", i/1024, filesize/1024);
-
+							
                     if(btn1.GetState() == STATE_CLICKED) {
                         fclose(pfile);
                         remove(dolpath);
@@ -2696,8 +2708,15 @@ int ProgressUpdateWindow()
     }
 
     }
+    promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
+		while(promptWindow.GetEffect() > 0) usleep(50);
 
+		HaltGui();
+		mainWindow->Remove(&promptWindow);
+		//mainWindow->SetState(STATE_DEFAULT);
+		ResumeGui();
     CloseConnection();
+	 sleep(1);//sleep 1 because it froze without this for some reason
 
     if(!failed && ret >= 0) {
 	 
@@ -2733,11 +2752,11 @@ int ProgressUpdateWindow()
         Sys_BackToLoader();
     }
 
-    promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
-	while(promptWindow.GetEffect() > 0) usleep(50);
+   // promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
+	//while(promptWindow.GetEffect() > 0) usleep(50);
 
 	HaltGui();
-	mainWindow->Remove(&promptWindow);
+	//mainWindow->Remove(&promptWindow);
 	mainWindow->SetState(STATE_DEFAULT);
 	ResumeGui();
 

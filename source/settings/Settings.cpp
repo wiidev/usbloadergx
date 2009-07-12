@@ -1193,7 +1193,7 @@ int MenuSettings()
                     options2.SetName(3, "%s", tr("titles.txt Path"));
                     options2.SetName(4, "%s", tr("Updatepath"));
                     options2.SetName(5, "%s", tr("Cheatcodes Path"));
-					options2.SetName(6, "%s", tr("TXTCheatcodes Path"));
+						  options2.SetName(6, "%s", tr("TXTCheatcodes Path"));
                     options2.SetName(7, "%s", tr("Dol Path"));
                     for(int i = 0; i <= MAXOPTIONS; i++) options2.SetValue(i, NULL);
                     w.Append(&optionBrowser2);
