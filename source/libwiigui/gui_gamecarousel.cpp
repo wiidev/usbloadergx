@@ -280,10 +280,19 @@ void GuiGameCarousel::Update(GuiTrigger * t)
 	btnRight->Update(t);
 	btnLeft->Update(t);
 
-    if(btnRight->GetState() == STATE_CLICKED)
-        NewOffset(listOffset, -1);
-    else if(btnLeft->GetState() == STATE_CLICKED)
-        NewOffset(listOffset, 1);
+    if(btnRight->GetState() == STATE_CLICKED) {
+        if(Settings.xflip==sysmenu ||Settings.xflip==yes) {
+            NewOffset(listOffset, 1);
+        } else {
+            NewOffset(listOffset, -1);
+        }
+    } else if(btnLeft->GetState() == STATE_CLICKED) {
+        if(Settings.xflip==sysmenu ||Settings.xflip==yes) {
+            NewOffset(listOffset, -1);
+        } else {
+            NewOffset(listOffset, 1);
+        }
+    }
 
 	int next = listOffset;
 
