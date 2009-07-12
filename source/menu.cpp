@@ -38,6 +38,7 @@
 #include "wpad.h"
 #include "listfiles.h"
 #include "fatmounter.h"
+#include "buffer.h"
 
 #include "usbloader/wdvd.h"
 
@@ -196,6 +197,7 @@ void InitGUIThreads()
 {
 	LWP_CreateThread(&guithread, UpdateGUI, NULL, NULL, 0, 70);
 	InitProgressThread();
+	InitBufferThread();
 }
 
 void ExitGUIThreads()
@@ -223,8 +225,8 @@ int MenuDiscList()
 	char ID[4];
     char IDfull[7];
 	u32 covert = 0;
-	
-	
+
+
     WDVD_GetCoverStatus(&covert);
 	u32 covertOld=covert;
 
@@ -622,9 +624,9 @@ int MenuDiscList()
 
 			WindowPrompt(0,idiotBuffer,tr("Ok"));
 			idiotFlag=-1;}
-			
+
 			WDVD_GetCoverStatus(&covert);//for detecting if i disc has been inserted
-			
+
 			// if the idiot is showing favoorites and don't have any
 			if (Settings.fave && !gameCnt){
 				WindowPrompt(tr("No Favorites"),tr("You are choosing to display favorites and you do not have any selected."),tr("Back"));
@@ -741,7 +743,7 @@ int MenuDiscList()
                                         else if (Settings.gameDisplay==carousel){gameCarousel->SetFocus(1);}
                                 }
                 }
-				
+
 
 
 

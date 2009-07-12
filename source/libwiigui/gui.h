@@ -84,7 +84,8 @@ enum
 {
 	IMAGE_TEXTURE,
 	IMAGE_COLOR,
-	IMAGE_DATA
+	IMAGE_DATA,
+	IMAGE_COPY
 };
 
 enum
@@ -593,6 +594,11 @@ class GuiImage : public GuiElement
 		//!\param h Image height
 		//!\param c Image color
 		GuiImage(int w, int h, GXColor c);
+		//! Copy Constructor
+		GuiImage(GuiImage &srcimage);
+		GuiImage(GuiImage *srcimage);
+		//! = operator for copying images
+		GuiImage &operator=(GuiImage &srcimage);
 		//!Destructor
 		~GuiImage();
 		//!Sets the image rotation angle for drawing
@@ -637,7 +643,7 @@ class GuiImage : public GuiElement
 		void SetStripe(int s);
 		s32 z;
 		void SetSkew(int XX1, int YY1,int XX2, int YY2,int XX3, int YY3,int XX4, int YY4);
-		
+
 		int xx1;
 		int yy1;
 		int xx2;
@@ -784,12 +790,12 @@ class GuiButton : public GuiElement
 		//!\param vert is verticle alignment of the button
 		//!\param x is xposition of the button
 		//!\param y is yposition of the button
-		//!\param trig is a GuiTrigger to assign to this button 
+		//!\param trig is a GuiTrigger to assign to this button
 		//!\param sndOver is a GuiSound used for soundOnOver for this button
 		//!\param sndClick is a GuiSound used for clickSound of this button
-		//!\param grow sets effect grow for this button.  1 for yes ;0 for no 
+		//!\param grow sets effect grow for this button.  1 for yes ;0 for no
 		GuiButton(GuiImage* img, GuiImage* imgOver, int hor, int vert, int x, int y, GuiTrigger* trig, GuiSound* sndOver, GuiSound* sndClick, u8 grow);
-		//!\param same as all the parameters for the above button plus the following 
+		//!\param same as all the parameters for the above button plus the following
 		//!\param tt is a GuiTooltip assigned to this button
 		//!\param ttx and tty are the xPOS and yPOS for this tooltip in relationship to the button
 		//!\param h_align and v_align are horizontal and verticle alignment for the tooltip in relationship to the button
@@ -854,7 +860,7 @@ class GuiButton : public GuiElement
 		//!Sets the button's Tooltip on over
 		//!\param tt Pointer to GuiElement object, x & y Positioning, h & v Align
 		void SetToolTip(GuiElement* tt, int x, int y, int h=ALIGN_RIGHT, int v=ALIGN_TOP);
-		
+
 		void RemoveToolTip();
 		//!Constantly called to draw the GuiButton
 		void Draw();

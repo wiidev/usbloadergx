@@ -13,7 +13,7 @@
 /**
  * Constructor for the GuiImageData class.
  */
- 
+
 extern int idiotFlag;
 extern char idiotChar[50];
 GuiImageData::GuiImageData(const u8 * img)
@@ -34,7 +34,7 @@ GuiImageData::GuiImageData(const u8 * img)
 		//if (((4%imgProp.imgWidth)!=0)||((4%imgProp.imgHeight)!=0))idiotFlag=1;
 
 		if(res == PNGU_OK)
-		{	
+		{
 			int len = imgProp.imgWidth * imgProp.imgHeight * 4;
 			if(len%32) len += (32-len%32);
 			data = (u8 *)memalign (32, len);
@@ -55,7 +55,7 @@ GuiImageData::GuiImageData(const u8 * img)
 					data = NULL;
 					idiotFlag=1;
 					snprintf(idiotChar, sizeof(idiotChar), "%s", img);
-		
+
 				}
 			}
 		}
@@ -110,7 +110,7 @@ GuiImageData::GuiImageData(const char * imgPath, const u8 * buffer)
 			PNGU_ReleaseImageContext (ctx);
 		}
 	}
-	
+
 	if (!data) //use buffer data instead
 	{
 		width = 0;

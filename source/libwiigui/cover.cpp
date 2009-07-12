@@ -1,20 +1,15 @@
 /****************************************************************************
- * libwiigui
- *
- * Tantric 2009
- *
- * gui_image.cpp
- *
- * GUI class definitions
+ * Cover Class
+ * by dimok
  ***************************************************************************/
 
-#include "gui.h"
+#include "cover.h"
 /**
- * Constructor for the GuiImage class.
+ * Constructor for the CoverImage class.
  */
-GuiImage::GuiImage()
+CoverImage::CoverImage(const char * imgPath, const u8 * buffer)
 {
-	image = NULL;
+    image = NULL;
 	width = 0;
 	height = 0;
 	imageangle = 0;
@@ -29,10 +24,116 @@ GuiImage::GuiImage()
 	yy3 = 0;
 	xx4 = 0;
 	yy4 = 0;
-	imgType = IMAGE_DATA;
+
+	if(imgPath)
+	{
+		PNGUPROP imgProp;
+		IMGCTX ctx = PNGU_SelectImageFromDevice(imgPath);
+
+		if(ctx)
+		{
+			int res = PNGU_GetImageProperties(ctx, &imgProp);
+
+			if(res == PNGU_OK)
+			{
+				int len = imgProp.imgWidth * imgProp.imgHeight * 4;
+				if(len%32) len += (32-len%32);
+				image = (u8 *)memalign (32, len);
+
+				if(image)
+				{
+					res = PNGU_DecodeTo4x4RGBA8 (ctx, imgProp.imgWidth, imgProp.imgHeight, image, 255);
+
+					if(res == PNGU_OK)
+					{
+						width = imgProp.imgWidth;
+						height = imgProp.imgHeight;
+						DCFlushRange(image, len);
+					}
+					else
+					{
+						free(image);
+						image = NULL;
+					}
+				}
+			}
+			PNGU_ReleaseImageContext (ctx);
+		}
+	}
+
+	if (!image) //use buffer data instead
+	{
+		width = 0;
+		height = 0;
+		if(buffer)
+		{
+			PNGUPROP imgProp;
+			IMGCTX ctx = PNGU_SelectImageFromBuffer(buffer);
+
+			if(!ctx)
+				return;
+
+			int res = PNGU_GetImageProperties(ctx, &imgProp);
+
+			if(res == PNGU_OK)
+			{
+				int len = imgProp.imgWidth * imgProp.imgHeight * 4;
+				if(len%32) len += (32-len%32);
+				image = (u8 *)memalign (32, len);
+
+				if(image)
+				{
+					res = PNGU_DecodeTo4x4RGBA8 (ctx, imgProp.imgWidth, imgProp.imgHeight, image, 255);
+
+					if(res == PNGU_OK)
+					{
+						width = imgProp.imgWidth;
+						height = imgProp.imgHeight;
+						DCFlushRange(image, len);
+					}
+					else
+					{
+						free(image);
+						image = NULL;
+					}
+				}
+			}
+			PNGU_ReleaseImageContext (ctx);
+		}
+	}
+	imgType = IMAGE_COPY;
 }
 
-GuiImage::GuiImage(GuiImageData * img)
+CoverImage::CoverImage(u8 * img, int w, int h)
+{
+	if((imgType == IMAGE_COLOR || imgType == IMAGE_COPY) && image) {
+        free(image);
+        image = NULL;
+	}
+
+	width = w;
+	height = h;
+    int len = width * height * 4;
+    if(len%32) len += (32-len%32);
+    image = (u8 *)memalign (32, len);
+	memcpy(image, img, len);
+	DCFlushRange(image, len);
+	imageangle =  0;
+	tile = -1;
+	stripe = 0;
+	widescreen = 0;
+	xx1 = 0;
+	yy1 = 0;
+	xx2 = 0;
+	yy2 = 0;
+	xx3 = 0;
+	yy3 = 0;
+	xx4 = 0;
+	yy4 = 0;
+	imgType = IMAGE_COPY;
+}
+
+CoverImage::CoverImage(GuiImageData * img)
 {
 	image = img->GetImage();
 	width = img->GetWidth();
@@ -52,63 +153,7 @@ GuiImage::GuiImage(GuiImageData * img)
 	imgType = IMAGE_DATA;
 }
 
-GuiImage::GuiImage(u8 * img, int w, int h)
-{
-    image = img;
-	width = w;
-	height = h;
-	imageangle =  0;
-	tile = -1;
-	stripe = 0;
-	widescreen = 0;
-	xx1 = 0;
-	yy1 = 0;
-	xx2 = 0;
-	yy2 = 0;
-	xx3 = 0;
-	yy3 = 0;
-	xx4 = 0;
-	yy4 = 0;
-	imgType = IMAGE_TEXTURE;
-}
-
-GuiImage::GuiImage(int w, int h, GXColor c)
-{
-	image = (u8 *)memalign (32, w * h * 4);
-	width = w;
-	height = h;
-	imageangle = 0;
-	tile = -1;
-	stripe = 0;
-	widescreen = 0;
-	xx1 = 0;
-	yy1 = 0;
-	xx2 = 0;
-	yy2 = 0;
-	xx3 = 0;
-	yy3 = 0;
-	xx4 = 0;
-	yy4 = 0;
-	imgType = IMAGE_COLOR;
-
-	if(!image)
-		return;
-
-	int x, y;
-
-	for(y=0; y < h; y++)
-	{
-		for(x=0; x < w; x++)
-		{
-			this->SetPixel(x, y, c);
-		}
-	}
-	int len = w*h*4;
-	if(len%32) len += (32-len%32);
-	DCFlushRange(image, len);
-}
-
-GuiImage::GuiImage(GuiImage &srcimage)
+CoverImage::CoverImage(CoverImage &srcimage)
 {
 	if((imgType == IMAGE_COLOR || imgType == IMAGE_COPY) && image) {
         free(image);
@@ -137,7 +182,7 @@ GuiImage::GuiImage(GuiImage &srcimage)
 	imgType = IMAGE_COPY;
 }
 
-GuiImage::GuiImage(GuiImage *srcimage)
+CoverImage::CoverImage(CoverImage *srcimage)
 {
 	if((imgType == IMAGE_COLOR || imgType == IMAGE_COPY) && image) {
         free(image);
@@ -166,7 +211,7 @@ GuiImage::GuiImage(GuiImage *srcimage)
 	imgType = IMAGE_COPY;
 }
 
-GuiImage &GuiImage::operator=(GuiImage &srcimage)
+CoverImage &CoverImage::operator=(CoverImage &srcimage)
 {
 	if((imgType == IMAGE_COLOR || imgType == IMAGE_COPY) && image) {
         free(image);
@@ -197,9 +242,9 @@ GuiImage &GuiImage::operator=(GuiImage &srcimage)
 }
 
 /**
- * Destructor for the GuiImage class.
+ * Destructor for the CoverImage class.
  */
-GuiImage::~GuiImage()
+CoverImage::~CoverImage()
 {
 	if((imgType == IMAGE_COLOR || imgType == IMAGE_COPY) && image) {
 		free(image);
@@ -207,61 +252,34 @@ GuiImage::~GuiImage()
 	}
 }
 
-u8 * GuiImage::GetImage()
+u8 * CoverImage::GetImage()
 {
 	return image;
 }
 
-void GuiImage::SetImage(GuiImageData * img)
-{
-	LOCK(this);
-	if((imgType == IMAGE_COLOR || imgType == IMAGE_COPY) && image) {
-		free(image);
-		image = NULL;
-	}
-
-	image = img->GetImage();
-	width = img->GetWidth();
-	height = img->GetHeight();
-	imgType = IMAGE_DATA;
-}
-
-void GuiImage::SetImage(u8 * img, int w, int h)
-{
-	LOCK(this);
-	if((imgType == IMAGE_COLOR || imgType == IMAGE_COPY) && image) {
-		free(image);
-		image = NULL;
-	}
-	image = img;
-	width = w;
-	height = h;
-	imgType = IMAGE_TEXTURE;
-}
-
-void GuiImage::SetAngle(float a)
+void CoverImage::SetAngle(float a)
 {
 	LOCK(this);
 	imageangle = a;
 }
-float GuiImage::GetAngle()
+float CoverImage::GetAngle()
 {
 	return imageangle;
 }
 
-void GuiImage::SetTile(int t)
+void CoverImage::SetTile(int t)
 {
 	LOCK(this);
 	tile = t;
 }
 
-void GuiImage::SetWidescreen(bool w)
+void CoverImage::SetWidescreen(bool w)
 {
 	LOCK(this);
 	widescreen = w;
 }
 
-GXColor GuiImage::GetPixel(int x, int y)
+GXColor CoverImage::GetPixel(int x, int y)
 {
 	if(!image || this->GetWidth() <= 0 || x < 0 || y < 0)
 		return (GXColor){0, 0, 0, 0};
@@ -275,7 +293,7 @@ GXColor GuiImage::GetPixel(int x, int y)
 	return color;
 }
 
-void GuiImage::SetPixel(int x, int y, GXColor color)
+void CoverImage::SetPixel(int x, int y, GXColor color)
 {
 	LOCK(this);
 	if(!image || this->GetWidth() <= 0 || x < 0 || y < 0)
@@ -288,13 +306,8 @@ void GuiImage::SetPixel(int x, int y, GXColor color)
 	*(image+offset+33) = color.b;
 }
 
-void GuiImage::SetStripe(int s)
-{
-	LOCK(this);
-	stripe = s;
-}
 
-void GuiImage::SetSkew(int XX1, int YY1,int XX2, int YY2,int XX3, int YY3,int XX4, int YY4)
+void CoverImage::SetSkew(int XX1, int YY1,int XX2, int YY2,int XX3, int YY3,int XX4, int YY4)
 {
 
 		xx1 = XX1;
@@ -307,68 +320,11 @@ void GuiImage::SetSkew(int XX1, int YY1,int XX2, int YY2,int XX3, int YY3,int XX
 		yy4 = YY4;
 }
 
-
-
-void GuiImage::ColorStripe(int shift)
-{
-	LOCK(this);
-	int x, y;
-	GXColor color;
-	int alt = 0;
-
-	for(y=0; y < this->GetHeight(); y++)
-	{
-		if(y % 3 == 0)
-			alt ^= 1;
-
-		for(x=0; x < this->GetWidth(); x++)
-		{
-			color = GetPixel(x, y);
-
-			if(alt)
-			{
-				if(color.r < 255-shift)
-					color.r += shift;
-				else
-					color.r = 255;
-				if(color.g < 255-shift)
-					color.g += shift;
-				else
-					color.g = 255;
-				if(color.b < 255-shift)
-					color.b += shift;
-				else
-					color.b = 255;
-
-				color.a = 255;
-			}
-			else
-			{
-				if(color.r > shift)
-					color.r -= shift;
-				else
-					color.r = 0;
-				if(color.g > shift)
-					color.g -= shift;
-				else
-					color.g = 0;
-				if(color.b > shift)
-					color.b -= shift;
-				else
-					color.b = 0;
-
-				color.a = 255;
-			}
-			SetPixel(x, y, color);
-		}
-	}
-}
-
 /**
  * Draw the button on screen
  */
 
-void GuiImage::Draw()
+void CoverImage::Draw()
 {
 	LOCK(this);
 	if(!image || !this->IsVisible() || tile == 0)
