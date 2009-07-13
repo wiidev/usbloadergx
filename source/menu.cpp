@@ -932,6 +932,8 @@ int MenuDiscList()
                     snprintf (IDfull,sizeof(IDfull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
 					choice = showGameInfo(IDfull);
                     gameInfo.ResetState();
+						  if (choice==2)
+							homeBtn.SetState(STATE_CLICKED);
                 }
 
                 if (Settings.gameDisplay==grid){

@@ -37,6 +37,9 @@ GuiText::GuiText(const char * t, int s, GXColor c)
 	scrollDelay = 0;
 	font = NULL;
 	widescreen = 0; //added
+	firstLine = 1;
+	numLines = -1;
+	totalLines = 1;
 
 	alignmentHor = ALIGN_CENTRE;
 	alignmentVert = ALIGN_MIDDLE;
@@ -62,6 +65,9 @@ GuiText::GuiText(const char * t)
 	scrollDelay = 0;
 	font = NULL;
 	widescreen = 0; //added
+	firstLine = 1;
+	numLines = -1;
+	totalLines = 1;
 
 	alignmentHor = presetAlignmentHor;
 	alignmentVert = presetAlignmentVert;
@@ -81,6 +87,43 @@ GuiText::~GuiText()
 		text = NULL;
 	}
 }
+
+void GuiText::SetNumLines(int n)
+{	
+	numLines = n;
+}
+
+void GuiText::SetFirstLine(int n)
+{
+	firstLine = n;
+}
+
+int GuiText::GetNumLines()
+{	
+	return numLines;
+}
+
+int GuiText::GetFirstLine()
+{
+	return firstLine;
+}
+
+int GuiText::GetTotalLines()
+{
+	return totalLines;
+}
+
+int GuiText::GetLineHeight(int n)
+{	
+	int newSize = size*this->GetScale();
+	int lineheight = newSize + 6;
+	
+	if (numLines <0)
+	return totalLines*lineheight+newSize;
+	
+	else return numLines*lineheight+newSize;
+}
+
 
 void GuiText::SetText(const char * t)
 {
@@ -289,15 +332,36 @@ void GuiText::Draw()
 				ch++;
 				i++;
 			}
-
+			totalLines = linenum;
+			
 			if(alignmentVert == ALIGN_MIDDLE)
 				voffset = voffset - (lineheight*linenum)/2 + lineheight/2;
 
-			for(i=0; i < linenum; i++)
-			{
-				(font ? font : fontSystem)->drawText(this->GetLeft(), this->GetTop()+voffset+i*lineheight, tmptext[i], c, style);
-				delete tmptext[i];
+			if (numLines <0){
+				for(i=0; i < linenum; i++)
+				{
+					(font ? font : fontSystem)->drawText(this->GetLeft(), this->GetTop()+voffset+i*lineheight, tmptext[i], c, style);
+					delete tmptext[i];
+				}
 			}
+			
+			//put in for txt verticle txt scrolling
+			else {
+				int j;
+				i=0;
+				for(j=firstLine-1; j < numLines+firstLine-1; j++)
+				{
+					if (j<linenum)
+					(font ? font : fontSystem)->drawText(this->GetLeft(), this->GetTop()+voffset+i*lineheight, tmptext[j], c, style);
+					i++;
+				}
+				for(i=0; i < linenum; i++)
+				{
+					delete tmptext[i];
+				}
+			}
+			
+			
 		}
 		else if(wrapMode == GuiText::DOTTED) // text dotted
 		{

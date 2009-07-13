@@ -730,6 +730,12 @@ class GuiText : public GuiElement
 		int GetTextWidth();
 		// not NULL set horizontal scale to 0.75 //added
 		void SetWidescreen(bool w);
+		void SetNumLines(int n);//! these two are used to set the first line and numLine
+		void SetFirstLine(int n);
+		int GetNumLines();//! these return the line variables for this text
+		int GetFirstLine();
+		int GetLineHeight(int n);//! returns the height of the #n of lines  including spacing if wrap mode is on
+		int GetTotalLines();
 		//!Constantly called to draw the text
 		void Draw();
 	protected:
@@ -745,6 +751,10 @@ class GuiText : public GuiElement
 		GXColor color; //!< Font color
 		FreeTypeGX *font;
 		short widescreen; //added
+		//!these are default until the text is drawn
+		int firstLine; //!these are the first line and the number of lines drawn when the text is wrapped
+		int numLines;//! default is -1 and it means that all lines are drawn
+		int totalLines; //!this is the total # of lines when in wrap mode
 };
 
 //!Display, manage, and manipulate tooltips in the GUI.

@@ -34,7 +34,7 @@ LDFLAGS		=	-g $(MACHDEP) -Wl,-Map,$(notdir $@).map,--section-start,.init=0x80a00
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project
 #---------------------------------------------------------------------------------
-LIBS :=	-ldb -lfat -lpngu -lpng -lm -lz -lwiiuse -lbte -lasnd -logc -lfreetype -ltremor -lmxml
+LIBS :=	-lfat -lpngu -lpng -lm -lz -lwiiuse -lbte -lasnd -logc -lfreetype -ltremor -lmxml
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
 # include and lib

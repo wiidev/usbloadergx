@@ -15,6 +15,7 @@
 #include "wpad.h"
 #include "fatmounter.h"
 #include "listfiles.h"
+#include "prompts/PromptWindows.h"
 #include "gameinfo.h"
 
 
@@ -34,6 +35,9 @@ extern void HaltGui();
 ***************************************************************************/
 int showGameInfo(char *ID)
 {
+	HaltGui();//put this first to try to get rid of the code dump caused by loading this window at the same time as loading images from the SD card
+	mainWindow->SetState(STATE_DISABLED);
+	ResumeGui();
     //load the xml shit
 	bool databaseopened = true;
 	OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, false, true); // open file, do not load titles, keep in memory
@@ -125,7 +129,7 @@ int showGameInfo(char *ID)
 
 		GuiWindow txtWindow(350,270);
 		txtWindow.SetAlignment(ALIGN_CENTRE, ALIGN_RIGHT);
-		txtWindow.SetPosition(85, 50);
+		txtWindow.SetPosition(95, 55);
 
 		GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
 		GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
@@ -145,7 +149,14 @@ int showGameInfo(char *ID)
 		trigA.SetButtonOnlyTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 		GuiTrigger trigB;
 		trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
-
+		GuiTrigger trigU;
+		trigU.SetButtonOnlyTrigger(-1, WPAD_BUTTON_UP | WPAD_CLASSIC_BUTTON_UP, PAD_BUTTON_UP);
+		GuiTrigger trigD;
+		trigD.SetButtonOnlyTrigger(-1, WPAD_BUTTON_DOWN | WPAD_CLASSIC_BUTTON_DOWN, PAD_BUTTON_DOWN);
+		GuiTrigger trigH;
+		trigH.SetButtonOnlyTrigger(-1, WPAD_BUTTON_HOME | WPAD_CLASSIC_BUTTON_HOME, 0);
+		
+		//buttons for changing between synopsis and other info
 		GuiButton backBtn(0,0);
 		backBtn.SetPosition(-20,-20);
 		backBtn.SetTrigger(&trigB);
@@ -156,7 +167,20 @@ int showGameInfo(char *ID)
 		nextBtn.SetTrigger(&trigA);
 		gameinfoWindow.Append(&nextBtn);
 		
-		char linebuf[1000] = "";
+		//buttons for scrolling the synopsis
+		GuiButton upBtn(0,0);
+		upBtn.SetPosition(0,0);
+		upBtn.SetTrigger(&trigU);
+
+		GuiButton dnBtn(0,0);
+		dnBtn.SetPosition(0,0);
+		dnBtn.SetTrigger(&trigD);
+
+		GuiButton homeBtn(0,0);
+		homeBtn.SetPosition(0,0);
+		homeBtn.SetTrigger(&trigH);
+
+		char linebuf[3000] = "";
 		char linebuf2[100] = "";
 
 		// enable icons for required accessories
@@ -577,11 +601,15 @@ int showGameInfo(char *ID)
 		}
 		
 		//synopsis
+		int pagesize=12;
 		if (strcmp(gameinfo.synopsis,"") != 0)	{
 			snprintf(linebuf, sizeof(linebuf), "%s", gameinfo.synopsis);
-			synopsisTxt = new GuiText(linebuf, 16, (GXColor){0,0,0, 255});
+			synopsisTxt = new GuiText(linebuf, 16, (GXColor){0,0,0, 255});			
 			synopsisTxt->SetMaxWidth(350,GuiText::WRAP);
 			synopsisTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP); synopsisTxt->SetPosition(0,0);
+			synopsisTxt->SetNumLines(pagesize);
+			//synopsisTxt->SetFirstLine(12);
+			
 			dialogBoxImg11 = new GuiImage(&dialogBox1);
 			dialogBoxImg11->SetAlignment(0,3);
 			dialogBoxImg11->SetPosition(-9,0);
@@ -604,6 +632,8 @@ int showGameInfo(char *ID)
 			gameinfoWindow2.Append(dialogBoxImg44);
 
 			txtWindow.Append(synopsisTxt);
+			txtWindow.Append(&upBtn);
+			txtWindow.Append(&dnBtn);
 			coverImg2 = new GuiImage(cover);
 			coverImg2->SetWidescreen(CFG.widescreen);
 			coverImg2->SetPosition(15,30);
@@ -623,26 +653,43 @@ int showGameInfo(char *ID)
 		
 		gameinfoWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_IN, 100);
 		HaltGui();
-		mainWindow->SetState(STATE_DISABLED);
+		//mainWindow->SetState(STATE_DISABLED);
 		mainWindow->Append(&gameinfoWindow);
 		mainWindow->ChangeFocus(&gameinfoWindow);
 		ResumeGui();
-
+			
 		while(choice == -1)
 		{
+			
 			VIDEO_WaitVSync();
+			
+			//u32 buttonshold = ButtonsHold();
 			if(shutdown == 1)
 			{
 				wiilight(0);
 				Sys_Shutdown();
 			}
-			if(reset == 1)
+			else if(reset == 1)
 				Sys_Reboot();
 
-			if ((backBtn.GetState()==STATE_CLICKED)||(backBtn.GetState()==STATE_HELD)){
-				choice=1;
+			else if ((backBtn.GetState()==STATE_CLICKED)||(backBtn.GetState()==STATE_HELD)){
+				if(page==1)
+				{choice=1;
 				synopsisTxt = NULL;
-				break;
+				break;}
+				else if (page==2)
+				{
+					HaltGui();
+					//backBtn.SetClickable(true);
+					gameinfoWindow2.SetVisible(false);
+					gameinfoWindow.SetVisible(true);
+					//gameinfoWindow.Append(&backBtn);
+					//gameinfoWindow.Append(&nextBtn);
+					//gameinfoWindow.Append(&homeBtn);
+					mainWindow->Remove(&gameinfoWindow2);
+					ResumeGui();
+					page=1;
+				}
 			}
 			else if (((nextBtn.GetState()==STATE_CLICKED)||(nextBtn.GetState()==STATE_HELD))&&
 			(strcmp(gameinfo.synopsis,"") != 0)){
@@ -654,8 +701,10 @@ int showGameInfo(char *ID)
 					gameinfoWindow2.SetVisible(true);
 					coverImg->SetPosition(15,30);
 
-					backBtn.SetClickable(false);
+					//backBtn.SetClickable(false);
 					gameinfoWindow2.Append(&nextBtn);
+					gameinfoWindow2.Append(&backBtn);
+					gameinfoWindow2.Append(&homeBtn);
 					mainWindow->Append(&gameinfoWindow2);
 					ResumeGui();
 					page=2;
@@ -663,16 +712,60 @@ int showGameInfo(char *ID)
 				else {
 					nextBtn.ResetState();
 					HaltGui();
-					backBtn.SetClickable(true);
+					//backBtn.SetClickable(true);
 					gameinfoWindow2.SetVisible(false);
 					gameinfoWindow.SetVisible(true);
 					gameinfoWindow.Append(&backBtn);
 					gameinfoWindow.Append(&nextBtn);
+					gameinfoWindow.Append(&homeBtn);
 					mainWindow->Remove(&gameinfoWindow2);
 					ResumeGui();
 					page=1;
 				}
 				nextBtn.ResetState();
+				
+			}
+			else if ((upBtn.GetState()==STATE_CLICKED||upBtn.GetState()==STATE_HELD) && page==2)
+			{
+				int l=synopsisTxt->GetFirstLine()>1?synopsisTxt->GetFirstLine()-1:1;
+				synopsisTxt->SetFirstLine(l);
+				usleep(60000);
+				if (!((ButtonsHold() & WPAD_BUTTON_UP)||(ButtonsHold() & PAD_BUTTON_UP)))
+					upBtn.ResetState();
+			}
+			else if ((dnBtn.GetState()==STATE_CLICKED||dnBtn.GetState()==STATE_HELD) && page==2)
+			{	
+			int l=0;
+				if(synopsisTxt->GetTotalLines()>pagesize)
+					l=synopsisTxt->GetFirstLine()+1;
+				
+				if (l>synopsisTxt->GetTotalLines()+1-pagesize)
+						l=synopsisTxt->GetTotalLines()+1-pagesize;
+				
+				synopsisTxt->SetFirstLine(l);
+				usleep(60000);
+				if (!((ButtonsHold() & WPAD_BUTTON_DOWN)||(ButtonsHold() & PAD_BUTTON_DOWN)))
+					dnBtn.ResetState();
+			}
+			//took this out cause it doesnt act right when not called from the main window and I don't feel like fixing it right now
+			else if (homeBtn.GetState()==STATE_CLICKED)
+			{
+				if(page==1)
+				{choice=2;
+				synopsisTxt = NULL;
+				break;}
+				else if (page==2)
+				{
+					HaltGui();
+					gameinfoWindow2.SetVisible(false);
+					gameinfoWindow.SetVisible(true);
+					//gameinfoWindow.Append(&backBtn);
+					//gameinfoWindow.Append(&nextBtn);
+					//gameinfoWindow.Append(&homeBtn);
+					mainWindow->Remove(&gameinfoWindow2);
+					ResumeGui();
+					page=1;
+				}
 			}
 		}
 		if (page==1){
