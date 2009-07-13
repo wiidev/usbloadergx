@@ -15,7 +15,6 @@
 #include "language/gettext.h"
 #include "libwiigui/gui.h"
 #include "libwiigui/gui_diskcover.h"
-#include "libwiigui/gui_banner.h"
 #include "network/networkops.h"
 #include "network/http.h"
 #include "prompts/PromptWindows.h"
@@ -150,8 +149,6 @@ void WindowCredits()
 	int i = 0;
 	int y = 20;
 
-	struct mallinfo mymallinfo = mallinfo();
-	
 	GuiWindow creditsWindow(screenwidth,screenheight);
 	GuiWindow creditsWindowBox(580,448);
 	creditsWindowBox.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
