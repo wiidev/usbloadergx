@@ -15,6 +15,7 @@
 #include "language/gettext.h"
 #include "libwiigui/gui.h"
 #include "libwiigui/gui_diskcover.h"
+#include "libwiigui/gui_banner.h"
 #include "network/networkops.h"
 #include "network/http.h"
 #include "prompts/PromptWindows.h"
@@ -28,7 +29,6 @@
 #include "wad/wad.h"
 #include "unzip/unzip.h"
 #include "zlib.h"
-
 	
 
 /*** Variables that are also used extern ***/
@@ -150,6 +150,8 @@ void WindowCredits()
 	int i = 0;
 	int y = 20;
 
+	struct mallinfo mymallinfo = mallinfo();
+	
 	GuiWindow creditsWindow(screenwidth,screenheight);
 	GuiWindow creditsWindowBox(580,448);
 	creditsWindowBox.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
@@ -1850,10 +1852,6 @@ ProgressDownloadWindow(int choice2)
 	msg2Txt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	msg2Txt.SetPosition(0,100);
 
-	GuiText msg3Txt(NULL, 20, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
-	msg3Txt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	msg3Txt.SetPosition(0,160);
-
 	GuiText prTxt(NULL, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	prTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	prTxt.SetPosition(0, 40);
@@ -1879,7 +1877,6 @@ ProgressDownloadWindow(int choice2)
 	promptWindow.Append(&titleTxt);
 	promptWindow.Append(&msgTxt);
 	promptWindow.Append(&msg2Txt);
-    promptWindow.Append(&msg3Txt);
     promptWindow.Append(&progressbarEmptyImg);
     promptWindow.Append(&progressbarImg);
     promptWindow.Append(&progressbarOutlineImg);
@@ -1892,30 +1889,16 @@ ProgressDownloadWindow(int choice2)
 	mainWindow->ChangeFocus(&promptWindow);
 	ResumeGui();
 
-	int serverCnt3d=5,serverCntDisc=4,serverCnt2d=5, offset=0, tries=0, m=0;
+	int offset=0, tries=0;
+	int serverCnt3d = 1,serverCnt2d = 1,serverCntDisc = 1;
 
-	char server3d[serverCnt3d][75];
-	char serverDisc[serverCntDisc][75];
-	char server2d[serverCnt2d][75];
+	char server3d[75];
+	char serverDisc[75];
+	char server2d[75];
 
-	snprintf(server3d[m], sizeof(server3d[m]), "http://gxload.joschtex.com/3d/");m++;
-	snprintf(server3d[m], sizeof(server3d[m]), "http://wiicover.gateflorida.com/3d/");m++;
-	snprintf(server3d[m], sizeof(server3d[m]), "http://awiibit.com/3dBoxArt176x248/");m++;
-	snprintf(server3d[m], sizeof(server3d[m]), "http://boxart.rowdyruff.net/3d/");m++;
-	snprintf(server3d[m], sizeof(server3d[m]), "http://wiitdb.com/wiitdb/artwork/cover3D/");m++;
-
-	m=0;
-	snprintf(serverDisc[m], sizeof(serverDisc[m]), "http://gxload.joschtex.com/disc/");m++;
-	snprintf(serverDisc[m], sizeof(serverDisc[m]), "http://wiicover.gateflorida.com/disc/");m++;
-	snprintf(serverDisc[m], sizeof(serverDisc[m]), "http://awiibit.com/WiiDiscArt/");m++;
-	snprintf(serverDisc[m], sizeof(serverDisc[m]), "http://wiitdb.com/wiitdb/artwork/disc/");m++;
-
-	m=0;
-	snprintf(server2d[m], sizeof(server2d[m]), "http://gxload.joschtex.com/2d/");m++;
-	snprintf(server2d[m], sizeof(server2d[m]), "http://wiicover.gateflorida.com/2d/");m++;
-	snprintf(server2d[m], sizeof(server2d[m]), "http://awiibit.com/BoxArt160x224/");m++;
-	snprintf(server2d[m], sizeof(server2d[m]), "http://boxart.rowdyruff.net/flat/");m++;
-	snprintf(server2d[m], sizeof(server2d[m]), "http://wiitdb.com/wiitdb/artwork/cover/");m++;
+	snprintf(server3d, sizeof(server3d), "http://wiitdb.com/wiitdb/artwork/cover3D/");
+	snprintf(serverDisc, sizeof(serverDisc), "http://wiitdb.com/wiitdb/artwork/disc/");
+	snprintf(server2d, sizeof(server2d), "http://wiitdb.com/wiitdb/artwork/cover/");
 
 	//check if directory exist and if not create one
     struct stat st;
@@ -1931,6 +1914,41 @@ ProgressDownloadWindow(int choice2)
         cntMissFiles = 0;
         }
     }
+	
+	char sysLanguage[3];
+	switch(CONF_GetLanguage()){
+		case CONF_LANG_JAPANESE:
+				sprintf(sysLanguage, "JA");
+				break;
+		case CONF_LANG_ENGLISH:
+				sprintf(sysLanguage, "EN");
+				break;
+		case CONF_LANG_GERMAN:
+				sprintf(sysLanguage, "DE");
+				break;
+		case CONF_LANG_FRENCH:
+				sprintf(sysLanguage, "FR");
+				break;          
+		case CONF_LANG_SPANISH:
+				sprintf(sysLanguage, "ES");
+				break;
+		case CONF_LANG_ITALIAN:
+				sprintf(sysLanguage, "IT");
+				break;
+		case CONF_LANG_DUTCH:
+				sprintf(sysLanguage, "NL");
+				break;
+		case CONF_LANG_SIMP_CHINESE:
+				sprintf(sysLanguage, "EN");   // default to EN for chinese
+				break;
+		case CONF_LANG_TRAD_CHINESE:
+				sprintf(sysLanguage, "EN");   // default to EN for chinese
+				break;
+		case CONF_LANG_KOREAN:
+				sprintf(sysLanguage, "NL");
+				break;
+	}
+
 	//int server = 1;
 	while (i < cntMissFiles)
 	{
@@ -1962,34 +1980,29 @@ ProgressDownloadWindow(int choice2)
 		if (choice2 == 2)
 		{
 			while(tries<serverCnt3d){
-			sprintf(tmp,"%s",server3d[4]);
-
+			
 			//Creates URL depending from which Country the game is
-			switch (missingFiles[i][3])
-			{
+			switch (missingFiles[i][3]){
 				case 'J':
-						sprintf(URLFile,"%sntscj3d/%s",server3d[4],missingFiles[i]);
+						sprintf(URLFile,"%sJA/%s",server3d,missingFiles[i]);
 					break;
 				case 'K':
 				case 'T':
 				case 'Q':
-						//sprintf(URLFile,"%skorea3D/%s",server3d[4],missingFiles[i]);
-						//break;
+						sprintf(URLFile,"%sKO/%s",server3d,missingFiles[i]);
+						break;
 				case 'D':
 				case 'F':
 				case 'P':
 				case 'X':
 				case 'Y':
-						sprintf(URLFile,"%spal3d/%s",server3d[4],missingFiles[i]);
+						sprintf(URLFile,"%s%s/%s",server3d,sysLanguage,missingFiles[i]);
 						break;
 				case 'E':
-						sprintf(URLFile,"%sntsc3d/%s",server3d[4],missingFiles[i]);
+						sprintf(URLFile,"%sUS/%s",server3d,missingFiles[i]);
 						break;
-				default:
-						sprintf(URLFile,"%sntsc3d/%s",server3d[4],missingFiles[i]);
 			}
 
-			//sprintf(URLFile,"%s%s",server3d[(offset+tries)%serverCnt3d],missingFiles[i]);
 			sprintf(imgPath,"%s%s", Settings.covers_path, missingFiles[i]);
 			file = downloadfile(URLFile);
 
@@ -1999,7 +2012,7 @@ ProgressDownloadWindow(int choice2)
 				} 
 			else
 				{
-				sprintf(URLFile,"%sntsc3d/%s",server3d[4],missingFiles[i]);
+				sprintf(URLFile,"%sEN/%s",server3d,missingFiles[i]);
 				file = downloadfile(URLFile);
 					if (!(file.size == 36864 || file.size <= 1024 || file.size == 7386 || file.size <= 1174 || file.size == 4446 || file.data == NULL))
 					{
@@ -2013,36 +2026,28 @@ ProgressDownloadWindow(int choice2)
 		if(choice2 == 3)
 		{
 			while(tries<serverCntDisc){
-			sprintf(tmp,"%s",serverDisc[3]);
-
+			
 			//Creates URL depending from which Country the game is
 			switch (missingFiles[i][3])
 			{
 				case 'J':
-						sprintf(URLFile,"%sJA/%s",serverDisc[3],missingFiles[i]);
+						sprintf(URLFile,"%sJA/%s",serverDisc,missingFiles[i]);
 					break;
 				case 'K':
 				case 'T':
 				case 'Q':
-						sprintf(URLFile,"%sKO/%s",serverDisc[3],missingFiles[i]);
+						sprintf(URLFile,"%sKO/%s",serverDisc,missingFiles[i]);
 						break;
 				case 'D':
-						sprintf(URLFile,"%sDE/%s",serverDisc[3],missingFiles[i]);
-						break;
 				case 'F':
-						sprintf(URLFile,"%sFR/%s",serverDisc[3],missingFiles[i]);
-						break;
 				case 'P':
 				case 'X':
 				case 'Y':
-						sprintf(URLFile,"%sEN/%s",serverDisc[3],missingFiles[i]);
-					break;
-
-				case 'E':
-						sprintf(URLFile,"%sUS/%s",serverDisc[3],missingFiles[i]);
+						sprintf(URLFile,"%s%s/%s",serverDisc,sysLanguage,missingFiles[i]);
 						break;
-				default:
-						sprintf(URLFile,"%sEN/%s",serverDisc[3],missingFiles[i]);
+				case 'E':
+						sprintf(URLFile,"%sUS/%s",serverDisc,missingFiles[i]);
+						break;
 			}
 
 			sprintf(imgPath,"%s%s", Settings.disc_path, missingFiles[i]);
@@ -2053,7 +2058,7 @@ ProgressDownloadWindow(int choice2)
 				} 
 			else 
 				{
-				sprintf(URLFile,"%sEN/%s",serverDisc[3],missingFiles[i]);
+				sprintf(URLFile,"%sEN/%s",serverDisc,missingFiles[i]);
 				file = downloadfile(URLFile);
 				if (!(file.size == 36864 || file.size <= 1024 || file.size == 7386 || file.size <= 1174 || file.size == 4446 || file.data == NULL))
 				{
@@ -2066,35 +2071,28 @@ ProgressDownloadWindow(int choice2)
 		if(choice2 == 1)
 		{
 			while(tries<serverCnt2d){
-			sprintf(tmp,"%s",server2d[4]);
-
+			
 			//Creates URL depending from which Country the game is
 			switch (missingFiles[i][3])
 			{
 				case 'J':
-						sprintf(URLFile,"%sJA/%s",server2d[4],missingFiles[i]);
+						sprintf(URLFile,"%sJA/%s",server2d,missingFiles[i]);
 					break;
 				case 'K':
 				case 'T':
 				case 'Q':
-						sprintf(URLFile,"%sKO/%s",server2d[4],missingFiles[i]);
+						sprintf(URLFile,"%sKO/%s",server2d,missingFiles[i]);
 						break;
 				case 'D':
-						sprintf(URLFile,"%sDE/%s",server2d[4],missingFiles[i]);
-						break;
 				case 'F':
-						sprintf(URLFile,"%sFR/%s",server2d[4],missingFiles[i]);
-						break;
 				case 'P':
 				case 'X':
 				case 'Y':
-						sprintf(URLFile,"%sEN/%s",server2d[4],missingFiles[i]);
-					break;
-				case 'E':
-						sprintf(URLFile,"%sUS/%s",server2d[4],missingFiles[i]);
+						sprintf(URLFile,"%s%s/%s",server2d,sysLanguage,missingFiles[i]);
 						break;
-				default:
-					sprintf(URLFile,"%sEN/%s",server2d[4],missingFiles[i]);
+				case 'E':
+						sprintf(URLFile,"%sUS/%s",server2d,missingFiles[i]);
+						break;
 			}
 
 			sprintf(imgPath,"%s%s", Settings.covers_path, missingFiles[i]);
@@ -2106,7 +2104,7 @@ ProgressDownloadWindow(int choice2)
 				} 
 			else 
 				{
-				sprintf(URLFile,"%sEN/%s",server2d[4],missingFiles[i]);
+				sprintf(URLFile,"%sEN/%s",server2d,missingFiles[i]);
 				file = downloadfile(URLFile);
 				if (!(file.size == 36864 || file.size <= 1024 || file.size == 7386 || file.size <= 1174 || file.size == 4446 || file.data == NULL))
 				{
@@ -2119,7 +2117,6 @@ ProgressDownloadWindow(int choice2)
 
 
 		offset++;
-		msg3Txt.SetTextf("%s",tmp);
 
 		if (file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.size == 4446 || file.data == NULL) {
 			cntNotFound++;
@@ -2156,7 +2153,7 @@ ProgressDownloadWindow(int choice2)
     if (choice2 == 2)
 		{
 			while(tries<serverCnt3d){
-			sprintf(URLFile,"%s%s",server3d[(offset+tries)%serverCnt3d],missingFiles[0]);
+			sprintf(URLFile,"%s%s",server3d,missingFiles[0]);
 			sprintf(imgPath,"%s%s", Settings.covers_path, missingFiles[0]);
 			file = downloadfile(URLFile);
 			if (!(file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.size == 4446 || file.data == NULL))break;
@@ -2167,7 +2164,7 @@ ProgressDownloadWindow(int choice2)
 		if(choice2 == 3)
 		{
 			while(tries<serverCntDisc){
-			sprintf(URLFile,"%s%s",serverDisc[(offset+tries)%serverCntDisc],missingFiles[0]);
+			sprintf(URLFile,"%s%s",serverDisc,missingFiles[0]);
 			sprintf(imgPath,"%s%s", Settings.disc_path, missingFiles[0]);
 			file = downloadfile(URLFile);
 			if (!(file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.size == 4446 || file.data == NULL))break;
@@ -2177,7 +2174,7 @@ ProgressDownloadWindow(int choice2)
 		if(choice2 == 1)
 		{
 			while(tries<serverCnt2d){
-			sprintf(URLFile,"%s%s",server2d[(offset+tries)%serverCnt2d],missingFiles[0]);
+			sprintf(URLFile,"%s%s",server2d,missingFiles[0]);
 			sprintf(imgPath,"%s%s", Settings.covers_path, missingFiles[0]);
 			file = downloadfile(URLFile);
 			if (!(file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.size == 4446 || file.data == NULL))break;
