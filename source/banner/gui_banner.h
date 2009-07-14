@@ -1,7 +1,14 @@
+/****************************************************************************
+ * USB Loader GX Team
+ * gui_banner.h
+ *
+ * Shows TPL Banner images
+ ***************************************************************************/
+
 #ifndef _GUIBANNER_H_
 #define _GUIBANNER_H_
 
-#include "gui.h"
+#include "libwiigui/gui.h"
 
 class GuiBanner  : public GuiImage
 {
@@ -19,4 +26,4 @@ private:
 	bool filecheck;
 };
 
-#endif /* _GUIDISCCOVER_H_ */
+#endif /* _GUIBANNER_H_ */

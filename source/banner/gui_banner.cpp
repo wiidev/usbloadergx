@@ -1,3 +1,9 @@
+/****************************************************************************
+ * USB Loader GX Team
+ * gui_banner.cpp
+ *
+ * Shows TPL Banner images
+ ***************************************************************************/
 #include "gui_banner.h"
 
 GuiBanner::GuiBanner()
