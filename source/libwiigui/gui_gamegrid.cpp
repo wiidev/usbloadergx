@@ -96,24 +96,15 @@ GuiGameGrid::GuiGameGrid(int w, int h, struct discHdr * l, int count, const char
 	btnSoundClick = new GuiSound(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
 	btnSoundOver = new GuiSound(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
 
-	snprintf(imgPath, sizeof(imgPath), "%sstartgame_arrow_left.png", CFG.theme_path);
-	imgLeft = new GuiImageData(imgPath, startgame_arrow_left_png);
-	snprintf(imgPath, sizeof(imgPath), "%sstartgame_arrow_right.png", CFG.theme_path);
-	imgRight = new GuiImageData(imgPath, startgame_arrow_right_png);
-
 	int btnHeight = (int) lround(sqrt(RADIUS*RADIUS - 90000)-RADIUS-50);
 
-	btnLeftImg = new GuiImage(imgLeft);
 	btnLeft = new GuiButton(0,0);
 	btnLeft->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 	btnLeft->SetPosition(20, btnHeight);
 	btnLeft->SetParent(this);
-	//btnLeft->SetImage(btnLeftImg);
 	btnLeft->SetSoundOver(btnSoundOver);
-	btnLeft->SetTrigger(trigA);
 	btnLeft->SetTrigger(trigL);
 	btnLeft->SetTrigger(trigMinus);
-	btnLeft->SetEffectGrow();
 	
 	/*debugTxt = new GuiText("fag", 14, (GXColor){0,0,0, 255});
 	debugTxt->SetParent(this);
@@ -121,17 +112,13 @@ GuiGameGrid::GuiGameGrid(int w, int h, struct discHdr * l, int count, const char
 	debugTxt->SetPosition(0,180);*/  
 	
 
-	btnRightImg = new GuiImage(imgRight);
 	btnRight = new GuiButton(0,0);
 	btnRight->SetParent(this);
 	btnRight->SetAlignment(ALIGN_RIGHT, ALIGN_MIDDLE);
 	btnRight->SetPosition(-20, btnHeight);
-	//btnRight->SetImage(btnRightImg);
 	btnRight->SetSoundOver(btnSoundOver);
-	btnRight->SetTrigger(trigA);
 	btnRight->SetTrigger(trigR);
 	btnRight->SetTrigger(trigPlus);
-	btnRight->SetEffectGrow();
 	
 	btnRowUp = new GuiButton(0,0);
 	btnRowUp->SetParent(this);
@@ -495,10 +482,6 @@ GuiGameGrid::GuiGameGrid(int w, int h, struct discHdr * l, int count, const char
 GuiGameGrid::~GuiGameGrid()
 {
 
-	delete imgRight;
-	delete imgLeft;
-	delete btnLeftImg;
-	delete btnRightImg;
 	delete btnRight;
 	delete btnLeft;
 	delete btnRowUp;
@@ -1014,7 +997,7 @@ void GuiGameGrid::Update(GuiTrigger * t)
 	if(!focus || gameCnt < pagesize || (c==0)||(game[bob[0]]->GetEffect() && game[bob[pagesize-1]]->GetEffect()))
 		return; // skip navigation
 
-	if (t->Left()  || btnLeft->GetState() == STATE_CLICKED) {
+	if (btnLeft->GetState() == STATE_CLICKED) {
 		WPAD_ScanPads();
 		u16 buttons = 0;
 		for(int i=0; i<4; i++)
@@ -1023,7 +1006,12 @@ void GuiGameGrid::Update(GuiTrigger * t)
 			btnLeft->ResetState();
 			speed = SHIFT_SPEED;
 			return;
-		}goLeft=12;
+		}
+		
+		if (Settings.xflip==sysmenu ||Settings.xflip==yes)
+			goRight=12;
+		else
+			goLeft=12;
 		wait=0;wait1=0;
 		
 		
@@ -1347,17 +1335,20 @@ void GuiGameGrid::Update(GuiTrigger * t)
 	}
 	}
 	
-	else if(t->Right()  || btnRight->GetState() == STATE_CLICKED) {
+	else if(btnRight->GetState() == STATE_CLICKED) {
 		WPAD_ScanPads();
 		u16 buttons = 0;
 		for(int i=0; i<4; i++)
 			buttons |= WPAD_ButtonsHeld(i);
-		if(!((buttons & WPAD_BUTTON_A) || (buttons & WPAD_BUTTON_PLUS) || t->Right())) {
+		if(!((buttons & WPAD_BUTTON_A) || (buttons & WPAD_BUTTON_PLUS) || t->Right()|| t->Left()|| (buttons & WPAD_BUTTON_MINUS))) {
 			btnRight->ResetState();
 			speed=SHIFT_SPEED;
 			return;
 		}
-		goRight=12;
+		if (Settings.xflip==sysmenu ||Settings.xflip==yes)
+			goLeft=12;
+		else
+			goRight=12;
 		wait=0;wait1=0;
 		
 		
