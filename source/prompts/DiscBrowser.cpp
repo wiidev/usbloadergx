@@ -40,25 +40,25 @@ int DiscBrowse(struct discHdr * header)
 	    WindowPrompt(tr("ERROR:"), tr("Could not set USB."), tr("OK"));
         return ret;
 	}
-WindowPrompt(tr("ERROR:"), tr("Could not set USB."), tr("OK"));
+
     ret = Disc_Open();
 	if(ret < 0) {
 	    WindowPrompt(tr("ERROR:"), tr("Could not open disc."), tr("OK"));
         return ret;
 	}
-WindowPrompt(tr("ERROR:"), tr("Could not open disc."), tr("OK"));
+
 	ret = __Disc_FindPartition(&offset);
 	if (ret < 0) {
 	    WindowPrompt(tr("ERROR:"), tr("Could not find a WBFS partition."), tr("OK"));
 		return ret;
 	}
-WindowPrompt(tr("ERROR:"), tr("Could not find a WBFS partition."), tr("OK"));
+
     ret = WDVD_OpenPartition(offset);
     if (ret < 0) {
 	    WindowPrompt(tr("ERROR:"), tr("Could not open WBFS partition"), tr("OK"));
 		return ret;
     }
-WindowPrompt(tr("ERROR:"), tr("Could not open WBFS partition"), tr("OK"));
+
     int *buffer = (int*)memalign(32, 0x20);
 
 	if (buffer == NULL)
@@ -66,13 +66,13 @@ WindowPrompt(tr("ERROR:"), tr("Could not open WBFS partition"), tr("OK"));
 		WindowPrompt(tr("ERROR:"), tr("Not enough free memory."), tr("OK"));
 		return -1;
 	}
-WindowPrompt(tr("ERROR:"), tr("Not enough free memory."), tr("OK"));
+
 	ret = WDVD_Read(buffer, 0x20, 0x420);
 	if (ret < 0) {
 		WindowPrompt(tr("ERROR:"), tr("Could not read the disc."), tr("OK"));
 		return ret;
 	}
-WindowPrompt(tr("ERROR:"), tr("Could not read the disc."), tr("OK"));
+
 	void *fstbuffer = memalign(32, buffer[2]*4);
 	FST_ENTRY *fst = (FST_ENTRY *)fstbuffer;
 
@@ -82,7 +82,7 @@ WindowPrompt(tr("ERROR:"), tr("Could not read the disc."), tr("OK"));
 		free(buffer);
 		return -1;
 	}
-WindowPrompt(tr("ERROR:"), tr("Not enough free memory."), tr("OK"));
+
 	ret = WDVD_Read(fstbuffer, buffer[2]*4, buffer[1]*4);
 
 	if (ret < 0) {
@@ -91,7 +91,7 @@ WindowPrompt(tr("ERROR:"), tr("Not enough free memory."), tr("OK"));
 		free(fstbuffer);
 		return ret;
 	}
-WindowPrompt(tr("ERROR:"), tr("Could not read the disc."), tr("OK"));
+
 	free(buffer);
 
 	WDVD_Reset();
@@ -106,8 +106,8 @@ WindowPrompt(tr("ERROR:"), tr("Could not read the disc."), tr("OK"));
 
 	for (u32 i = 0; i < discfilecount; i++) {
 			
+			//don't add files that aren't .dol to the list
 			int len = (strlen(fstfiles(fst, i)));
-			
 			if (fstfiles(fst, i)[len-4] =='.' &&
 				fstfiles(fst, i)[len-3] =='d' &&
 				fstfiles(fst, i)[len-2] =='o' &&
