@@ -294,8 +294,9 @@ void GuiText::Draw()
 			int linenum = 0;
 			int lastSpace = -1;
 			int lastSpaceIndex = -1;
-			wchar_t * tmptext[20];
-
+			wchar_t * tmptext[55];
+			
+			totalLines=0;
 			while(ch < strlen)
 			{
 				if(i == 0)
@@ -351,7 +352,7 @@ void GuiText::Draw()
 				i=0;
 				for(j=firstLine-1; j < numLines+firstLine-1; j++)
 				{
-					if (j<linenum)
+					if (j<linenum-(firstLine-1))
 					(font ? font : fontSystem)->drawText(this->GetLeft(), this->GetTop()+voffset+i*lineheight, tmptext[j], c, style);
 					i++;
 				}

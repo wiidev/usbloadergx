@@ -179,7 +179,7 @@ void WindowCredits()
 						//to be ready to be in a full channel
 	snprintf(svnTmp,sizeof(svnTmp), "%s", SVN_REV);
 	char SvnRev[30];
-	snprintf(SvnRev,sizeof(SvnRev), "Rev%s   IOS%u (Rev %u)", svnTmp, IOS_GetVersion(), IOS_GetRevision());
+	snprintf(SvnRev,sizeof(SvnRev), "Rev%sc   IOS%u (Rev %u)", svnTmp, IOS_GetVersion(), IOS_GetRevision());
 	#endif
 	
 	
@@ -2364,11 +2364,27 @@ int ProgressUpdateWindow()
 			break;
 		}
 	}
+	
 
+	//make the URL to get XML based on our games
+	char XMLurl[2010];
+	char filename[10];
+	strncat (XMLurl, "http://wiitdb.com/wiitdb.zip?ID=", 32);
+	unsigned int i;
+	for (i = 0; i < gameCnt ; i++)
+			{
+				struct discHdr* header = &gameList[i];
+				if (i<393){
+					snprintf (filename,sizeof(filename),"%c%c%c%c", header->id[0], header->id[1], header->id[2], header->id[3]);
+					strncat (XMLurl, filename, 4);
+					if ((i!=gameCnt-1)&&(i<392))
+						strncat (XMLurl, ",",1);
+				}
+	}
+        
 	if(IsNetworkInit() && ret >= 0) {
 
     int newrev = CheckUpdate();
-
     if(newrev > 0) {
 
         sprintf(msg, "Rev%i %s.", newrev, tr("available"));
@@ -2388,7 +2404,7 @@ int ProgressUpdateWindow()
                 u8 * blockbuffer = new unsigned char[BLOCKSIZE];
                 for (s32 i = 0; i < filesize; i += BLOCKSIZE) {
                     usleep(100);
-                    prTxt.SetTextf("%i%%", 100*i/filesize);
+                    prTxt.SetTextf("%i%%", (100*i/filesize)+1); 
                     if ((Settings.wsprompt == yes) && (CFG.widescreen)) {
                         progressbarImg.SetTile(80*i/filesize);
                     } else {
@@ -2448,7 +2464,7 @@ int ProgressUpdateWindow()
                     fclose(pfile);
                     free(file.data);
                 }
-				file = downloadfile("http://wiitdb.com/wiitdb.zip");
+				file = downloadfile(XMLurl);
 				if(file.data != NULL){
 				sprintf(xmliconpath, "%swiitdb.zip", Settings.titlestxt_path);
 				pfile = fopen(xmliconpath, "wb");
@@ -2595,6 +2611,33 @@ int ProgressUpdateWindow()
         failed = -1;
         }
     }
+	 
+    if(stat(Settings.titlestxt_path, &st) != 0) {
+        if(subfoldercreate(Settings.titlestxt_path) != 1) {
+        WindowPrompt(tr("Error !"),tr("Can't create directory"),tr("OK"));
+        ret = -1;
+        failed = -1;
+        }
+    }
+	
+	
+	//make the URL to get XML based on our games
+	char XMLurl[2010];
+	char filename[10];
+	strncat (XMLurl, "http://wiitdb.com/wiitdb.zip?ID=", 32);
+	unsigned int i;
+	for (i = 0; i < gameCnt ; i++)
+			{
+				struct discHdr* header = &gameList[i];
+				if (i<393){
+					snprintf (filename,sizeof(filename),"%c%c%c%c", header->id[0], header->id[1], header->id[2], header->id[3]);
+					strncat (XMLurl, filename, 4);
+					if ((i!=gameCnt-1)&&(i<392))
+						strncat (XMLurl, ",",1);
+				}
+
+	}
+    
 
     char dolpath[150];
 //    char dolpathsuccess[150];//use coverspath as a folder for the update wad so we dont make a new folder and have to delete it
@@ -2626,10 +2669,10 @@ int ProgressUpdateWindow()
     int newrev = CheckUpdate();
 
     if(newrev > 0) {
-
+		FILE * pfile;
         sprintf(msg, "Rev%i %s.", newrev, tr("available"));
         int choice = WindowPrompt(msg, 0, tr("Update"));
-        if(choice == 1 || choice == 2) {
+        if(choice == 1) {
             titleTxt.SetTextf("%s USB Loader GX", tr("Updating"));
             msgTxt.SetPosition(0,100);
             promptWindow.Append(&progressbarEmptyImg);
@@ -2637,9 +2680,19 @@ int ProgressUpdateWindow()
             promptWindow.Append(&progressbarOutlineImg);
             promptWindow.Append(&prTxt);
             msgTxt.SetTextf("%s Rev%i wad.", tr("Downloading"), newrev);//download the wad but it is saved as a genaric file.
+
+				struct block file = downloadfile(XMLurl);
+				char xmliconpath[100];
+				if(file.data != NULL){
+				sprintf(xmliconpath, "%swiitdb.zip", Settings.titlestxt_path);
+				pfile = fopen(xmliconpath, "wb");
+				fwrite(file.data,1,file.size,pfile);
+				fclose(pfile);
+				free(file.data);
+
 			s32 filesize = download_request("http://www.techjawa.com/usbloadergx/ULNR.file");//for some reason it didn't download completely when saved as a wad.
 			if(filesize > 0) {
-                FILE * pfile;
+                
                 pfile = fopen(dolpath, "wb");//here we save the txt as a wad
                 u8 * blockbuffer = new unsigned char[BLOCKSIZE];
                 for (s32 i = 0; i < filesize; i += BLOCKSIZE) {

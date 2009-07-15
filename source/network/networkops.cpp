@@ -216,6 +216,7 @@ int CheckUpdate()
 	}
 
     if(revnumber > currentrev)
+    //if(revnumber > 1)//for testing updates
         return revnumber;
     else
         return -1;
