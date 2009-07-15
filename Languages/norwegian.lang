@@ -4,13 +4,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-14 16:35-0400\n"
+"POT-Creation-Date: 2009-07-15 19:18+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+msgid "(both retired)"
+msgstr ""
 
 msgid "0 (Everyone)"
 msgstr ""
@@ -156,6 +159,9 @@ msgstr "Riktig passord"
 msgid "Could not create GCT file"
 msgstr ""
 
+msgid "Could not find a WBFS partition."
+msgstr ""
+
 msgid "Could not initialize DIP module!"
 msgstr "Kan ikke initialisere DIP modul!"
 
@@ -164,6 +170,18 @@ msgstr "Kan ikke initialisere nettverk!"
 
 msgid "Could not open Disc"
 msgstr "Kan ikke åpne plate"
+
+msgid "Could not open WBFS partition"
+msgstr ""
+
+msgid "Could not open disc."
+msgstr ""
+
+msgid "Could not read the disc."
+msgstr ""
+
+msgid "Could not set USB."
+msgstr ""
 
 msgid "Cover Download"
 msgstr "Cover nedlasting"
@@ -182,6 +200,12 @@ msgstr "Medvirkende"
 
 msgid "Custom Paths"
 msgstr "Endre stier"
+
+msgid "DOL from SD"
+msgstr ""
+
+msgid "DOL from disc"
+msgstr ""
 
 msgid "Dec"
 msgstr "Des"
@@ -257,6 +281,12 @@ msgstr "Laster ned fil:"
 
 msgid "Dutch"
 msgstr "Nederlandsk"
+
+msgid "ERROR"
+msgstr ""
+
+msgid "ERROR:"
+msgstr ""
 
 msgid "English"
 msgstr "Engelsk"
@@ -426,6 +456,9 @@ msgstr "Venstre"
 msgid "Like SysMenu"
 msgstr "Lik Systemmeny"
 
+msgid "Load this dol as alternate dol?"
+msgstr ""
+
 msgid "Loading standard language."
 msgstr "Laster standard språk."
 
@@ -483,6 +516,9 @@ msgstr "Ingen USB enhet funnet."
 msgid "No WBFS partition found"
 msgstr "Ingen WBFS partisjon funnet"
 
+msgid "No dol file found on disc."
+msgstr ""
+
 msgid "No file missing!"
 msgstr "Ingen filer mangler!"
 
@@ -500,6 +536,9 @@ msgstr "Normale cover"
 
 msgid "Not a Wii Disc"
 msgstr "Ikke en Wii plate"
+
+msgid "Not enough free memory."
+msgstr ""
 
 msgid "Not enough free space!"
 msgstr "Ikke nok ledig plass!"
@@ -611,6 +650,9 @@ msgstr "Vibrasjon"
 
 msgid "SChinese"
 msgstr "S.Kinesisk"
+
+msgid "SD selected"
+msgstr ""
 
 msgid "SFX Volume"
 msgstr "Effekt volum"
@@ -791,6 +833,9 @@ msgstr "tilgjengelig"
 msgid "contains over 255 lines of code.  It will produce unexpected results."
 msgstr ""
 
+msgid "does not exist!"
+msgstr ""
+
 msgid "does not exist!  Loading game without cheats."
 msgstr ""
 
@@ -809,7 +854,7 @@ msgstr "filer ikke funnet på serveren!"
 msgid "for"
 msgstr "for"
 
-msgid "for WiiTDB"
+msgid "for WiiTDB and hosting covers / disc images"
 msgstr ""
 
 msgid "for diverse patches"

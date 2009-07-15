@@ -29,6 +29,7 @@ u8 fix002 = 0;
 u8 reloadblock = 0;
 u8 countrystrings = 0;
 u8 alternatedol = 0;
+u8 alternatedoloffset = 0;
 u8 xflip = 0;
 u8 sort = 0;
 u8 fave = 0;
@@ -38,6 +39,7 @@ u8 keyset = 0;
 u8 favoritevar = 0;
 u16 playcount = 0;
 u8 listDisplay = 0;
+char alternatedname[40];
 
 #define TITLE_MAX 65
 
@@ -1162,6 +1164,8 @@ void cfg_set_game_opt(struct Game_CFG *game, u8 *id)
 	game->iosreloadblock = reloadblock;
 	game->patchcountrystrings = countrystrings;
 	game->loadalternatedol = alternatedol;
+	game->alternatedolstart = alternatedoloffset;
+	strcpy(game->alternatedolname, alternatedname);
 }
 
 struct Game_NUM* cfg_get_game_num(u8 *id)
@@ -1339,6 +1343,25 @@ void game_set(char *name, char *val)
 					game->loadalternatedol = opt_c;
 				}
 			}
+			if (strcmp("alternatedolstart", opt_name) == 0) {
+				if (sscanf(opt_val, "%hd", &opt_c) == 1) {
+					game->alternatedolstart = opt_c;
+				}
+			}
+			if (strcmp("alternatedolname", opt_name) == 0) {
+			    char temp3[40];
+			    int i = 0;
+				while(i < 40) {
+
+				    if(opt_val[i] == ';')
+                        break;
+
+                    temp3[i] = opt_val[i];
+                    i++;
+				}
+				temp3[i] = '\0';
+				strncpy(game->alternatedolname, temp3, 39);
+			}
 		}
 		// next opt
 		if (np) p = np + 1; else p = NULL;
@@ -1486,7 +1509,9 @@ bool cfg_save_games()
 		fprintf(f, "errorfix002:%d; ", cfg_game[i].errorfix002);
 		fprintf(f, "iosreloadblock:%d; ", cfg_game[i].iosreloadblock);
 		fprintf(f, "patchcountrystrings:%d; ", cfg_game[i].patchcountrystrings);
-		fprintf(f, "loadalternatedol:%d;\n", cfg_game[i].loadalternatedol);
+		fprintf(f, "loadalternatedol:%d;", cfg_game[i].loadalternatedol);
+		fprintf(f, "alternatedolstart:%d;", cfg_game[i].alternatedolstart);
+		fprintf(f, "alternatedolname:%s;\n", cfg_game[i].alternatedolname);
 	}
 	fprintf(f, "# END\n");
 	fclose(f);

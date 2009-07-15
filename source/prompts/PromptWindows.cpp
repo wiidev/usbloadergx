@@ -28,7 +28,7 @@
 #include "wad/wad.h"
 #include "unzip/unzip.h"
 #include "zlib.h"
-	
+
 
 /*** Variables that are also used extern ***/
 int cntMissFiles = 0;
@@ -170,21 +170,21 @@ void WindowCredits()
 	txt[i] = new GuiText(tr("Credits"), 26, (GXColor){255, 255, 255, 255});
 	txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); txt[i]->SetPosition(0,12); i++;
 
-	
+
 	#ifdef NOTFULLCHANNEL
 	char SvnRev[30];
 	snprintf(SvnRev,sizeof(SvnRev), "Rev%s   IOS%u (Rev %u)", SVN_REV, IOS_GetVersion(), IOS_GetRevision());
 	#else
-	char svnTmp[4];//did this to hide the M after the rev# that is made by altering it 
+	char svnTmp[4];//did this to hide the M after the rev# that is made by altering it
 						//to be ready to be in a full channel
 	snprintf(svnTmp,sizeof(svnTmp), "%s", SVN_REV);
 	char SvnRev[30];
 	snprintf(SvnRev,sizeof(SvnRev), "Rev%sc   IOS%u (Rev %u)", svnTmp, IOS_GetVersion(), IOS_GetRevision());
 	#endif
-	
-	
-	
-	
+
+
+
+
 	txt[i] = new GuiText(SvnRev, 16, (GXColor){255, 255, 255, 255});
 	txt[i]->SetAlignment(ALIGN_RIGHT, ALIGN_TOP); txt[i]->SetPosition(0,y); i++; y+=34;
 
@@ -209,12 +209,15 @@ void WindowCredits()
 	i++;
 	y+=24;
 
-	txt[i] = new GuiText("hungyip84 / giantpune");
+	txt[i] = new GuiText("giantpune / ardi");
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(220,y);
 	i++;
 	y+=24;
 
-	txt[i] = new GuiText("ardi / DrayX7");
+    char text[100];
+
+    sprintf(text, "hungyip84 / DrayX7 %s", tr("(both retired)"));
+	txt[i] = new GuiText(text);
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(220,y);
 	i++;
 	y+=24;
@@ -228,7 +231,7 @@ void WindowCredits()
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(70,y);
 	i++;
 
-	txt[i] = new GuiText("cyrex / NeoRame / WiiShizzza");
+	txt[i] = new GuiText("cyrex / NeoRame");
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(220,y);
 	i++;
 	y+=20;
@@ -242,14 +245,7 @@ void WindowCredits()
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(70,y);
 	i++;
 
-   char text[100];
-   /* sprintf(text, "djtaz %s", tr("for hosting the covers/discarts"));
-	txt[i] = new GuiText(text);
-	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(220,y);
-	i++;
-	y+=24;*/
-
-	sprintf(text, " lustar %s", tr("for WiiTDB"));
+	sprintf(text, "lustar %s", tr("for WiiTDB and hosting covers / disc images"));
 	txt[i] = new GuiText(text);
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(220,y);
 	i++;
@@ -1911,7 +1907,7 @@ ProgressDownloadWindow(int choice2)
         cntMissFiles = 0;
         }
     }
-	
+
 	char sysLanguage[3];
 	switch(CONF_GetLanguage()){
 		case CONF_LANG_JAPANESE:
@@ -1925,7 +1921,7 @@ ProgressDownloadWindow(int choice2)
 				break;
 		case CONF_LANG_FRENCH:
 				sprintf(sysLanguage, "FR");
-				break;          
+				break;
 		case CONF_LANG_SPANISH:
 				sprintf(sysLanguage, "ES");
 				break;
@@ -1977,7 +1973,7 @@ ProgressDownloadWindow(int choice2)
 		if (choice2 == 2)
 		{
 			while(tries<serverCnt3d){
-			
+
 			//Creates URL depending from which Country the game is
 			switch (missingFiles[i][3]){
 				case 'J':
@@ -2006,7 +2002,7 @@ ProgressDownloadWindow(int choice2)
 			if (!(file.size == 36864 || file.size <= 1024 || file.size == 7386 || file.size <= 1174 || file.size == 4446 || file.data == NULL))
 				{
 				break;
-				} 
+				}
 			else
 				{
 				sprintf(URLFile,"%sEN/%s",server3d,missingFiles[i]);
@@ -2023,7 +2019,7 @@ ProgressDownloadWindow(int choice2)
 		if(choice2 == 3)
 		{
 			while(tries<serverCntDisc){
-			
+
 			//Creates URL depending from which Country the game is
 			switch (missingFiles[i][3])
 			{
@@ -2052,8 +2048,8 @@ ProgressDownloadWindow(int choice2)
 			if (!(file.size == 36864 || file.size <= 1024 || file.size == 7386 || file.size <= 1174 || file.size == 4446 || file.data == NULL))
 				{
 				break;
-				} 
-			else 
+				}
+			else
 				{
 				sprintf(URLFile,"%sEN/%s",serverDisc,missingFiles[i]);
 				file = downloadfile(URLFile);
@@ -2068,7 +2064,7 @@ ProgressDownloadWindow(int choice2)
 		if(choice2 == 1)
 		{
 			while(tries<serverCnt2d){
-			
+
 			//Creates URL depending from which Country the game is
 			switch (missingFiles[i][3])
 			{
@@ -2098,8 +2094,8 @@ ProgressDownloadWindow(int choice2)
 			if (!(file.size == 36864 || file.size <= 1024 || file.size == 7386 || file.size <= 1174 || file.size == 4446 || file.data == NULL))
 				{
 				break;
-				} 
-			else 
+				}
+			else
 				{
 				sprintf(URLFile,"%sEN/%s",server2d,missingFiles[i]);
 				file = downloadfile(URLFile);
@@ -2233,7 +2229,7 @@ ProgressDownloadWindow(int choice2)
 	unzCloseCurrentFile(uf);
 	return true
 }
-*/					 
+*/
 
  #ifdef NOTFULLCHANNEL
 
@@ -2364,7 +2360,7 @@ int ProgressUpdateWindow()
 			break;
 		}
 	}
-	
+
 
 	//make the URL to get XML based on our games
 	char XMLurl[2010];
@@ -2381,7 +2377,7 @@ int ProgressUpdateWindow()
 						strncat (XMLurl, ",",1);
 				}
 	}
-        
+
 	if(IsNetworkInit() && ret >= 0) {
 
     int newrev = CheckUpdate();
@@ -2404,7 +2400,7 @@ int ProgressUpdateWindow()
                 u8 * blockbuffer = new unsigned char[BLOCKSIZE];
                 for (s32 i = 0; i < filesize; i += BLOCKSIZE) {
                     usleep(100);
-                    prTxt.SetTextf("%i%%", (100*i/filesize)+1); 
+                    prTxt.SetTextf("%i%%", (100*i/filesize)+1);
                     if ((Settings.wsprompt == yes) && (CFG.widescreen)) {
                         progressbarImg.SetTile(80*i/filesize);
                     } else {
@@ -2611,7 +2607,7 @@ int ProgressUpdateWindow()
         failed = -1;
         }
     }
-	 
+
     if(stat(Settings.titlestxt_path, &st) != 0) {
         if(subfoldercreate(Settings.titlestxt_path) != 1) {
         WindowPrompt(tr("Error !"),tr("Can't create directory"),tr("OK"));
@@ -2619,8 +2615,8 @@ int ProgressUpdateWindow()
         failed = -1;
         }
     }
-	
-	
+
+
 	//make the URL to get XML based on our games
 	char XMLurl[2010];
 	char filename[10];
@@ -2637,7 +2633,7 @@ int ProgressUpdateWindow()
 				}
 
 	}
-    
+
 
     char dolpath[150];
 //    char dolpathsuccess[150];//use coverspath as a folder for the update wad so we dont make a new folder and have to delete it
@@ -2692,7 +2688,7 @@ int ProgressUpdateWindow()
 				}
 			s32 filesize = download_request("http://www.techjawa.com/usbloadergx/ULNR.file");//for some reason it didn't download completely when saved as a wad.
 			if(filesize > 0) {
-                
+
                 pfile = fopen(dolpath, "wb");//here we save the txt as a wad
                 u8 * blockbuffer = new unsigned char[BLOCKSIZE];
                 for (s32 i = 0; i < filesize; i += BLOCKSIZE) {
@@ -2704,7 +2700,7 @@ int ProgressUpdateWindow()
                         progressbarImg.SetTile(100*i/filesize);
                     }
                     msg2Txt.SetTextf("%iKB/%iKB", i/1024, filesize/1024);
-							
+
                     if(btn1.GetState() == STATE_CLICKED) {
                         fclose(pfile);
                         remove(dolpath);
@@ -2756,7 +2752,7 @@ int ProgressUpdateWindow()
 	 sleep(1);//sleep 1 because it froze without this for some reason
 
     if(!failed && ret >= 0) {
-	 
+
 		FILE *wadFile = NULL;
 		s32 shit = 1;
 		int diarhea = 0;
@@ -2767,9 +2763,9 @@ int ProgressUpdateWindow()
 				WindowPrompt(tr("Error !"), nipple, tr("Ok"));
 				failed = -1;
 				}
-				else{								
+				else{
 				//sprintf(nipple, tr("The update wad has been saved as %s.  Now let's try to install it."),dolpath);
-				//WindowPrompt(0,nipple, tr("Ok"));	
+				//WindowPrompt(0,nipple, tr("Ok"));
 				shit = Wad_Install(wadFile);
 				fclose(wadFile);
 				if (shit==0){
@@ -2781,7 +2777,7 @@ int ProgressUpdateWindow()
 				WindowPrompt(tr("Error"),nipple,"Ok");
 				}
 			}
-				
+
 			if (shit)
         WindowPrompt(tr("Shit") , tr("there was an error"), tr("OK"));
 		  else

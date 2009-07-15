@@ -20,21 +20,7 @@
 #include "usbloader/disc.h"
 #include "banner.h"
 #include "patches/fst.h"
-
-
-char *fstfilename(FST_ENTRY *fst, u32 index)
-{
-	u32 count = fst[0].filelen;
-	u32 stringoffset;
-	if (index < count)
-	{
-		stringoffset = *(u32 *)&(fst[index]) % (256*256*256);
-		return (char *)((u32)fst + count*12 + stringoffset);
-	} else
-	{
-		return NULL;
-	}
-}
+#include "usbloader/fstfile.h"
 
 s32 dump_banner(const char * discid,const char * dest)
 {
@@ -95,7 +81,7 @@ s32 dump_banner(const char * discid,const char * dest)
 
 	for (i=1;i<count;i++)
 	{
-		if (strstr(fstfilename(fst, i), "opening.bnr") != NULL)
+		if (strstr(fstfiles(fst, i), "opening.bnr") != NULL)
 		{
 			index = i;
 		}

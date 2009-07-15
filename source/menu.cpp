@@ -28,7 +28,7 @@
 #include "mload/mload.h"
 #include "patches/patchcode.h"
 #include "network/networkops.h"
-#include "cheatmenu.h"
+#include "cheats/cheatmenu.h"
 #include "menu.h"
 #include "audio.h"
 #include "wad/wad.h"
@@ -1092,13 +1092,13 @@ int MenuDiscList()
 
 
                         if (Settings.qboot == yes)//quickboot game
-                        {		if (alternatedol != off){
+                        {		if (alternatedol == on){
 								/* Open dol File and check exist */
 								sprintf(nipple, "%s%s.dol",Settings.dolpath,IDfull);
 								exeFile = fopen (nipple ,"rb");
 								if (exeFile==NULL)
 								{
-									sprintf(nipple, "%s %s",nipple,tr("does not exist!  You Messed something up, Idiot."));
+									sprintf(nipple, "%s %s",nipple,tr("does not exist!"));
 									WindowPrompt(tr("Error"),nipple,tr("OK"));
 
 									menu = MENU_CHECK;
@@ -1160,7 +1160,7 @@ int MenuDiscList()
 
                                 if(choice == 1)
                                 {
-								if (alternatedol != off){
+								if (alternatedol == on){
 								/* Open dol File and check exist */
 								sprintf(nipple, "%s%s.dol",Settings.dolpath,IDfull);
 								exeFile = fopen (nipple ,"rb");
@@ -1783,6 +1783,7 @@ int MainMenu(int menu)
         iosChoice = game_cfg->ios;
         countrystrings = game_cfg->patchcountrystrings;
         alternatedol = game_cfg->loadalternatedol;
+        alternatedoloffset = game_cfg->alternatedolstart;
         reloadblock = game_cfg->iosreloadblock;
     } else {
         videoChoice = Settings.video;
@@ -1797,6 +1798,7 @@ int MainMenu(int menu)
         fix002 = Settings.error002;
         countrystrings = Settings.patchcountrystrings;
         alternatedol = off;
+        alternatedoloffset = 0;
         reloadblock = off;
     }
     int ios2;
@@ -1968,7 +1970,7 @@ int MainMenu(int menu)
                         break;
     }
 
-    ret = Disc_WiiBoot(videoselected, cheat, vipatch, countrystrings, errorfixer002, alternatedol);
+    ret = Disc_WiiBoot(videoselected, cheat, vipatch, countrystrings, errorfixer002, alternatedol, alternatedoloffset+1);
     if (ret < 0) {
         Sys_LoadMenu();
     }

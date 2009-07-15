@@ -7,8 +7,9 @@
 #include "libwiigui/gui.h"
 #include "libwiigui/gui_customoptionbrowser.h"
 #include "prompts/PromptWindows.h"
+#include "prompts/DiscBrowser.h"
 #include "settings/SettingsPrompts.h"
-#include "cheatmenu.h"
+#include "cheats/cheatmenu.h"
 #include "fatmounter.h"
 #include "menu.h"
 #include "filelist.h"
@@ -1737,7 +1738,7 @@ int GameSettings(struct discHdr * header)
 		strncat(gameName, "...", 3);
 	}
 
-	customOptionList options3(12);
+	customOptionList options3(13);
 	options3.SetName(0,"%s", tr("Video Mode"));
 	options3.SetName(1,"%s", tr("VIDTV Patch"));
 	options3.SetName(2,"%s", tr("Game Language"));
@@ -1747,9 +1748,10 @@ int GameSettings(struct discHdr * header)
 	options3.SetName(6,"%s", tr("Error 002 fix"));
 	options3.SetName(7,"%s", tr("Patch Country Strings"));
 	options3.SetName(8,"%s", tr("Alternate DOL"));
-	options3.SetName(9,"%s", tr("Block IOS Reload"));
-	options3.SetName(10,"%s", tr("Reset Playcounter"));
-	options3.SetName(11,"%s", tr("Default Gamesettings"));
+	options3.SetName(9,"%s", tr("DOL from disc"));
+	options3.SetName(10,"%s", tr("Block IOS Reload"));
+	options3.SetName(11,"%s", tr("Reset Playcounter"));
+	options3.SetName(12,"%s", tr("Default Gamesettings"));
 
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
 	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
@@ -1848,7 +1850,9 @@ int GameSettings(struct discHdr * header)
 		fix002 = game_cfg->errorfix002;
 		countrystrings = game_cfg->patchcountrystrings;
 		alternatedol = game_cfg->loadalternatedol;
+		alternatedoloffset = game_cfg->alternatedolstart;
 		reloadblock = game_cfg->iosreloadblock;
+		strncpy(alternatedname, game_cfg->alternatedolname, sizeof(alternatedname));
 	}
 	else
 	{
@@ -1865,7 +1869,9 @@ int GameSettings(struct discHdr * header)
 		fix002 = Settings.error002;
 		countrystrings = Settings.patchcountrystrings;
 		alternatedol = off;
+		alternatedoloffset = 0;
 		reloadblock = off;
+		sprintf(alternatedname, " ");
 	}
 
 	int opt_lang = languageChoice; // backup language setting
@@ -1918,14 +1924,16 @@ int GameSettings(struct discHdr * header)
         if (countrystrings == on) options3.SetValue(7,tr("ON"));
 		else if (countrystrings == off) options3.SetValue(7,tr("OFF"));
 
-        if (alternatedol == on) options3.SetValue(8,tr("ON"));
+        if (alternatedol == on) options3.SetValue(8,tr("DOL from SD"));
+        if (alternatedol == 2) options3.SetValue(8,tr("DOL from disc"));
 		else if (alternatedol == off) options3.SetValue(8,tr("OFF"));
 
-        if (reloadblock == on) options3.SetValue(9,tr("ON"));
-		else if (reloadblock == off) options3.SetValue(9,tr("OFF"));
+        if (alternatedol == on) options3.SetValue(9,tr("SD selected"));
+        else if (alternatedol == off) options3.SetValue(9,tr("OFF"));
+        else options3.SetValue(9, alternatedname);
 
-
-
+        if (reloadblock == on) options3.SetValue(10,tr("ON"));
+		else if (reloadblock == off) options3.SetValue(10,tr("OFF"));
 
         options3.SetValue(11, NULL);
         options3.SetValue(12, NULL);
@@ -1964,12 +1972,19 @@ int GameSettings(struct discHdr * header)
                 countrystrings = (countrystrings+1) % 2;
                 break;
             case 8:
-                alternatedol = (alternatedol+1) % 2;
+                alternatedol = (alternatedol+1) % 3;
                 break;
             case 9:
-                reloadblock = (reloadblock+1) % 2;
+                if(alternatedol == 2) {
+                    int res = DiscBrowse(header);
+                    if(res >= 0)
+                        alternatedoloffset = res;
+                }
                 break;
             case 10:
+                reloadblock = (reloadblock+1) % 2;
+                break;
+            case 11:
                 int result;
 				result = WindowPrompt(tr("Are you sure?"),0,tr("Yes"),tr("Cancel"));
 				if(result == 1) {
@@ -1987,7 +2002,7 @@ int GameSettings(struct discHdr * header)
                 }
 				}
                 break;
-            case 11:
+            case 12:
                 int choice = WindowPrompt(tr("Are you sure?"),0,tr("Yes"),tr("Cancel"));
                 if(choice == 1) {
                     videoChoice = Settings.video;
@@ -1997,6 +2012,7 @@ int GameSettings(struct discHdr * header)
                     fix002 = Settings.error002;
                     countrystrings = Settings.patchcountrystrings;
                     alternatedol = off;
+                    alternatedoloffset = 0;
                     reloadblock = off;
                     if(Settings.cios == ios222) {
                         iosChoice = i222;
@@ -2004,6 +2020,7 @@ int GameSettings(struct discHdr * header)
                         iosChoice = i249;
                     }
                     parentalcontrolChoice = 0;
+                    sprintf(alternatedname, " ");
                     CFG_forget_game_opt(header->id);
 					// if default language is different than language from main settings, reload titles
 					int opt_langnew = 0;

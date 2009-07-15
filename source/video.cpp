@@ -288,7 +288,7 @@ void Menu_DrawImg(f32 xpos, f32 ypos, f32 zpos, f32 width, f32 height, u8 data[]
 	GX_Position3f32(-width+XX4, height+YY4,  0);
 	GX_Color4u8(0xFF,0xFF,0xFF,alpha);
 	GX_TexCoord2f32(0, 1);
-	
+
 //
 
 	GX_End();
@@ -347,8 +347,8 @@ void Menu_DrawDiskCover(f32 xpos, f32 ypos, f32 zpos, u16 width, u16 height, u16
 
 	GX_SetTevOp (GX_TEVSTAGE0, GX_MODULATE);
 	GX_SetVtxDesc (GX_VA_TEX0, GX_DIRECT);
-	
-	
+
+
 	f32 cos_beta = cos(DegToRad(deg_beta));
 	f32 s_offset_y = (zpos + (cos_beta * distance)) * tan(DegToRad(5));
 	f32 s_offset_x = (cos_beta<0?-cos_beta:cos_beta) * s_offset_y;
@@ -359,7 +359,7 @@ void Menu_DrawDiskCover(f32 xpos, f32 ypos, f32 zpos, u16 width, u16 height, u16
 	height*=.5;
 	guMtxIdentity (m4);
 	guMtxTransApply(m4,m4, 0, 0, distance);
-	
+
 	guMtxIdentity (m1);
 	guMtxScaleApply(m1,m1,scaleX,scaleY,1.0);
 	guVector axis2 = (guVector) {0 , 1, 0 };
@@ -367,10 +367,10 @@ void Menu_DrawDiskCover(f32 xpos, f32 ypos, f32 zpos, u16 width, u16 height, u16
 	guVector axis = (guVector) {0 , 0, 1 };
 	guMtxRotAxisDeg (m3, &axis, deg_alpha);
 //	guMtxConcat(m2,m1,m);
-	guMtxConcat(m3,m4,m3); // move distance then rotate z-axis 
-	guMtxConcat(m2,m3,m2); // rotate y-axis 
+	guMtxConcat(m3,m4,m3); // move distance then rotate z-axis
+	guMtxConcat(m2,m3,m2); // rotate y-axis
 	guMtxConcat(m1,m2,m); // scale
-	
+
 	if(shadow)
 		guMtxTransApply(m,m, xpos+width+0.5+s_offset_x,ypos+height+0.5+s_offset_y,zpos-s_offset_z);
 	else
@@ -432,18 +432,18 @@ void Menu_DrawTPL(f32 xpos, f32 ypos, f32 zpos, u16 width, u16 height, u16 dista
 {
 	TPLFile tplfile;
 	GXTexObj texObj;
-	
+
 	TPL_OpenTPLFromFile(&tplfile,filepath);
 	TPL_GetTexture(&tplfile,0,&texObj); //Get
-	
+
 	GX_LoadTexObj(&texObj, GX_TEXMAP0);
 	GX_InvalidateTexAll();
-	
+
 	TPL_CloseTPLFile(&tplfile);
-	
+
 	GX_SetTevOp (GX_TEVSTAGE0, GX_REPLACE);
 	GX_SetVtxDesc (GX_VA_TEX0, GX_DIRECT);
-	
+
 	f32 cos_beta = cos(DegToRad(deg_beta));
 	f32 s_offset_y = (zpos + (cos_beta * distance)) * tan(DegToRad(5));
 	f32 s_offset_x = (cos_beta<0?-cos_beta:cos_beta) * s_offset_y;
@@ -454,7 +454,7 @@ void Menu_DrawTPL(f32 xpos, f32 ypos, f32 zpos, u16 width, u16 height, u16 dista
 	height*=.5;
 	guMtxIdentity (m4);
 	guMtxTransApply(m4,m4, 0, 0, distance);
-	
+
 	guMtxIdentity (m1);
 	guMtxScaleApply(m1,m1,scaleX,scaleY,1.0);
 	guVector axis2 = (guVector) {0 , 1, 0 };
@@ -462,10 +462,10 @@ void Menu_DrawTPL(f32 xpos, f32 ypos, f32 zpos, u16 width, u16 height, u16 dista
 	guVector axis = (guVector) {0 , 0, 1 };
 	guMtxRotAxisDeg (m3, &axis, deg_alpha);
 //	guMtxConcat(m2,m1,m);
-	guMtxConcat(m3,m4,m3); // move distance then rotate z-axis 
-	guMtxConcat(m2,m3,m2); // rotate y-axis 
+	guMtxConcat(m3,m4,m3); // move distance then rotate z-axis
+	guMtxConcat(m2,m3,m2); // rotate y-axis
 	guMtxConcat(m1,m2,m); // scale
-	
+
 	if(shadow)
 		guMtxTransApply(m,m, xpos+width+0.5+s_offset_x,ypos+height+0.5+s_offset_y,zpos-s_offset_z);
 	else
@@ -525,18 +525,18 @@ void Menu_DrawTPLMem(f32 xpos, f32 ypos, f32 zpos, u16 width, u16 height, u16 di
 {
 	TPLFile tplfile;
 	GXTexObj texObj;
-	
+
 	TPL_OpenTPLFromMemory(&tplfile, memory,len);
 	TPL_GetTexture(&tplfile,0,&texObj); //Get
-	
+
 	GX_LoadTexObj(&texObj, GX_TEXMAP0);
 	GX_InvalidateTexAll();
-	
+
 	TPL_CloseTPLFile(&tplfile);
-	
+
 	GX_SetTevOp (GX_TEVSTAGE0, GX_REPLACE);
 	GX_SetVtxDesc (GX_VA_TEX0, GX_DIRECT);
-	
+
 	f32 cos_beta = cos(DegToRad(deg_beta));
 	f32 s_offset_y = (zpos + (cos_beta * distance)) * tan(DegToRad(5));
 	f32 s_offset_x = (cos_beta<0?-cos_beta:cos_beta) * s_offset_y;
@@ -547,7 +547,7 @@ void Menu_DrawTPLMem(f32 xpos, f32 ypos, f32 zpos, u16 width, u16 height, u16 di
 	height*=.5;
 	guMtxIdentity (m4);
 	guMtxTransApply(m4,m4, 0, 0, distance);
-	
+
 	guMtxIdentity (m1);
 	guMtxScaleApply(m1,m1,scaleX,scaleY,1.0);
 	guVector axis2 = (guVector) {0 , 1, 0 };
@@ -555,10 +555,10 @@ void Menu_DrawTPLMem(f32 xpos, f32 ypos, f32 zpos, u16 width, u16 height, u16 di
 	guVector axis = (guVector) {0 , 0, 1 };
 	guMtxRotAxisDeg (m3, &axis, deg_alpha);
 //	guMtxConcat(m2,m1,m);
-	guMtxConcat(m3,m4,m3); // move distance then rotate z-axis 
-	guMtxConcat(m2,m3,m2); // rotate y-axis 
+	guMtxConcat(m3,m4,m3); // move distance then rotate z-axis
+	guMtxConcat(m2,m3,m2); // rotate y-axis
 	guMtxConcat(m1,m2,m); // scale
-	
+
 	if(shadow)
 		guMtxTransApply(m,m, xpos+width+0.5+s_offset_x,ypos+height+0.5+s_offset_y,zpos-s_offset_z);
 	else

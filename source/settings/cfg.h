@@ -155,6 +155,7 @@ extern u8 fix002;
 extern u8 reloadblock;
 extern u8 countrystrings;
 extern u8 alternatedol;
+extern u8 alternatedoloffset;
 extern u8 xflip;
 extern u8 qboot;
 extern u8 sort;
@@ -164,6 +165,7 @@ extern u8 keyset;
 extern u8 gameDisplay;
 extern u16 playcount;
 extern u8 favoritevar;
+extern char alternatedname[40];
 
 
 struct Game_CFG
@@ -178,7 +180,9 @@ struct Game_CFG
 	u8 errorfix002;
 	u8 iosreloadblock;
 	u8 loadalternatedol;
+    u8 alternatedolstart;
 	u8 patchcountrystrings;
+	char alternatedolname[40];
 };
 struct Game_NUM
 {

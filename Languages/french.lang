@@ -4,13 +4,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-14 16:35-0400\n"
+"POT-Creation-Date: 2009-07-15 19:18+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+msgid "(both retired)"
+msgstr ""
 
 msgid "0 (Everyone)"
 msgstr "0 (Tous 3+)"
@@ -156,6 +159,9 @@ msgstr "Mot de passe correct"
 msgid "Could not create GCT file"
 msgstr ""
 
+msgid "Could not find a WBFS partition."
+msgstr ""
+
 msgid "Could not initialize DIP module!"
 msgstr "Initialisation DIP impossible !"
 
@@ -164,6 +170,18 @@ msgstr "Initialisation réseau impossible !"
 
 msgid "Could not open Disc"
 msgstr "Initialisation disque impossible"
+
+msgid "Could not open WBFS partition"
+msgstr ""
+
+msgid "Could not open disc."
+msgstr ""
+
+msgid "Could not read the disc."
+msgstr ""
+
+msgid "Could not set USB."
+msgstr ""
 
 msgid "Cover Download"
 msgstr "Téléchargement Jaquettes"
@@ -182,6 +200,12 @@ msgstr "Crédits"
 
 msgid "Custom Paths"
 msgstr "Localisation Dossiers"
+
+msgid "DOL from SD"
+msgstr ""
+
+msgid "DOL from disc"
+msgstr ""
 
 msgid "Dec"
 msgstr "Déc"
@@ -257,6 +281,12 @@ msgstr "Téléchargement du fichier"
 
 msgid "Dutch"
 msgstr "Néerlandais"
+
+msgid "ERROR"
+msgstr ""
+
+msgid "ERROR:"
+msgstr ""
 
 msgid "English"
 msgstr "Anglais"
@@ -426,6 +456,9 @@ msgstr "Gauche"
 msgid "Like SysMenu"
 msgstr "Menu système"
 
+msgid "Load this dol as alternate dol?"
+msgstr ""
+
 msgid "Loading standard language."
 msgstr "Chargement langue par défaut."
 
@@ -483,6 +516,9 @@ msgstr "Aucun périphérique USB trouvé."
 msgid "No WBFS partition found"
 msgstr "Aucune partition WBFS trouvée"
 
+msgid "No dol file found on disc."
+msgstr ""
+
 msgid "No file missing!"
 msgstr "Aucun fichier manquant !"
 
@@ -500,6 +536,9 @@ msgstr "Normales"
 
 msgid "Not a Wii Disc"
 msgstr "Ce n'est pas un jeu Wii"
+
+msgid "Not enough free memory."
+msgstr ""
 
 msgid "Not enough free space!"
 msgstr "Espace libre insuffisant !"
@@ -611,6 +650,9 @@ msgstr "Vibrations"
 
 msgid "SChinese"
 msgstr "Chinois simplifié"
+
+msgid "SD selected"
+msgstr ""
 
 msgid "SFX Volume"
 msgstr "Volume SFX"
@@ -791,6 +833,9 @@ msgstr "disponible"
 msgid "contains over 255 lines of code.  It will produce unexpected results."
 msgstr ""
 
+msgid "does not exist!"
+msgstr ""
+
 msgid "does not exist!  Loading game without cheats."
 msgstr ""
 
@@ -809,7 +854,7 @@ msgstr "fichiers introuvables sur le serveur !"
 msgid "for"
 msgstr "pour"
 
-msgid "for WiiTDB"
+msgid "for WiiTDB and hosting covers / disc images"
 msgstr ""
 
 msgid "for diverse patches"

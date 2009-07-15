@@ -4,13 +4,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-14 16:35-0400\n"
+"POT-Creation-Date: 2009-07-15 19:18+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+msgid "(both retired)"
+msgstr ""
 
 msgid "0 (Everyone)"
 msgstr ""
@@ -156,6 +159,9 @@ msgstr "正しいﾊﾟｽﾜｰﾄﾞ"
 msgid "Could not create GCT file"
 msgstr ""
 
+msgid "Could not find a WBFS partition."
+msgstr ""
+
 msgid "Could not initialize DIP module!"
 msgstr "DIPﾓｼﾞｭｰﾙの初期化ができません!"
 
@@ -164,6 +170,18 @@ msgstr "ﾈｯﾄﾜｰｸの初期化ができません!"
 
 msgid "Could not open Disc"
 msgstr "ﾃﾞｨｽｸｵｰﾌﾟﾝに失敗しました"
+
+msgid "Could not open WBFS partition"
+msgstr ""
+
+msgid "Could not open disc."
+msgstr ""
+
+msgid "Could not read the disc."
+msgstr ""
+
+msgid "Could not set USB."
+msgstr ""
 
 msgid "Cover Download"
 msgstr "ｶﾊﾞｰ ﾀﾞｳﾝﾛｰﾄﾞ"
@@ -182,6 +200,12 @@ msgstr "協力"
 
 msgid "Custom Paths"
 msgstr "カスタムPath"
+
+msgid "DOL from SD"
+msgstr ""
+
+msgid "DOL from disc"
+msgstr ""
 
 msgid "Dec"
 msgstr "12月"
@@ -257,6 +281,12 @@ msgstr "ﾌｧｲﾙのﾀﾞｳﾝﾛｰﾄﾞ中:"
 
 msgid "Dutch"
 msgstr "ｵﾗﾝﾀﾞ語"
+
+msgid "ERROR"
+msgstr ""
+
+msgid "ERROR:"
+msgstr ""
 
 msgid "English"
 msgstr "英語"
@@ -426,6 +456,9 @@ msgstr "左"
 msgid "Like SysMenu"
 msgstr "Like SysMenu"
 
+msgid "Load this dol as alternate dol?"
+msgstr ""
+
 msgid "Loading standard language."
 msgstr "標準の言語をロード中..."
 
@@ -483,6 +516,9 @@ msgstr "USBﾃﾞﾊﾞｲｽﾞが検出されていません"
 msgid "No WBFS partition found"
 msgstr "WBFSﾊﾟｰﾃｨｼｮﾝを検出できませんでした"
 
+msgid "No dol file found on disc."
+msgstr ""
+
 msgid "No file missing!"
 msgstr "ﾌｧｲﾙを検出できませんでした!"
 
@@ -500,6 +536,9 @@ msgstr "ﾉ-ﾏﾙｶﾊﾞｰ"
 
 msgid "Not a Wii Disc"
 msgstr "Wiiﾃﾞｨｽｸではありません"
+
+msgid "Not enough free memory."
+msgstr ""
 
 msgid "Not enough free space!"
 msgstr "空容量が不足しています!"
@@ -611,6 +650,9 @@ msgstr "振動"
 
 msgid "SChinese"
 msgstr "中国語(簡体字)"
+
+msgid "SD selected"
+msgstr ""
 
 msgid "SFX Volume"
 msgstr "SFX音量"
@@ -791,6 +833,9 @@ msgstr "利用可能"
 msgid "contains over 255 lines of code.  It will produce unexpected results."
 msgstr ""
 
+msgid "does not exist!"
+msgstr ""
+
 msgid "does not exist!  Loading game without cheats."
 msgstr ""
 
@@ -809,7 +854,7 @@ msgstr "ｻｰﾊﾞｰにﾌｧｲﾙがありません!"
 msgid "for"
 msgstr "for"
 
-msgid "for WiiTDB"
+msgid "for WiiTDB and hosting covers / disc images"
 msgstr ""
 
 msgid "for diverse patches"

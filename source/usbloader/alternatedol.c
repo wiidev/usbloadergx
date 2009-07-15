@@ -5,6 +5,9 @@
 #include <malloc.h>
 
 #include "fatmounter.h"
+#include "apploader.h"
+#include "wdvd.h"
+#include "fstfile.h"
 
 /** Alternate dolloader made by WiiPower modified by dimok **/
 
@@ -96,10 +99,12 @@ typedef struct _dolheader {
 	u32 entry_point;
 } dolheader;
 
+static dolheader *dolfile;
+
+
 u32 load_dol_image(void *dolstart) {
 
 	u32 i;
-	dolheader *dolfile;
 
 	if (dolstart) {
 		dolfile = (dolheader *) dolstart;
@@ -123,4 +128,123 @@ u32 load_dol_image(void *dolstart) {
 		return dolfile->entry_point;
 	}
 	return 0;
+}
+
+static int i;
+static int phase;
+
+u32 load_dol_start(void *dolstart)
+{
+	if (dolstart)
+	{
+		dolfile = (dolheader *)dolstart;
+        return dolfile->entry_point;
+	} else
+	{
+		return 0;
+	}
+
+    memset((void *)dolfile->bss_start, 0, dolfile->bss_size);
+    DCFlushRange((void *)dolfile->bss_start, dolfile->bss_size);
+
+	phase = 0;
+	i = 0;
+}
+
+bool load_dol_image_modified(void **offset, u32 *pos, u32 *len)
+{
+	if (phase == 0)
+	{
+		if (i == 7)
+		{
+			phase = 1;
+			i = 0;
+		} else
+		{
+			if ((!dolfile->text_size[i]) || (dolfile->text_start[i] < 0x100))
+			{
+				*offset = 0;
+				*pos = 0;
+				*len = 0;
+			} else
+			{
+				*offset = (void *)dolfile->text_start[i];
+				*pos = dolfile->text_pos[i];
+				*len = dolfile->text_size[i];
+			}
+			i++;
+			return true;
+		}
+	}
+
+	if (phase == 1)
+	{
+		if (i == 11)
+		{
+			phase = 2;
+			return false;
+		}
+
+		if ((!dolfile->data_size[i]) || (dolfile->data_start[i] < 0x100))
+		{
+			*offset = 0;
+			*pos = 0;
+			*len = 0;
+		} else
+		{
+			*offset = (void *)dolfile->data_start[i];
+			*pos = dolfile->data_pos[i];
+			*len = dolfile->data_size[i];
+		}
+		i++;
+		return true;
+	}
+	return false;
+}
+
+u32 Load_Dol_from_disc(u32 doloffset, u8 videoSelected, u8 patchcountrystring, u8 vipatch)
+{
+	int ret;
+	void *dol_header;
+	u32 entrypoint;
+
+	dol_header = memalign(32, sizeof(dolheader));
+	if (dol_header == NULL)
+	{
+		return -1;
+	}
+
+	ret = WDVD_Read(dol_header, sizeof(dolheader), (doloffset<<2));
+
+	entrypoint = load_dol_start(dol_header);
+
+	if (entrypoint == 0)
+	{
+		free(dol_header);
+		return -1;
+	}
+
+	void *offset;
+	u32 pos;
+	u32 len;
+
+	while (load_dol_image_modified(&offset, &pos, &len))
+	{
+		if (len != 0)
+		{
+			ret = WDVD_Read(offset, len, (doloffset<<2) + pos);
+
+            DCFlushRange(offset, len);
+
+			gamepatches(offset, len, videoSelected, patchcountrystring, vipatch);
+
+            DCFlushRange(offset, len);
+
+			Remove_001_Protection(offset, len);
+		}
+	}
+
+	free(dol_header);
+
+	return entrypoint;
 }

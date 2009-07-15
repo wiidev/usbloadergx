@@ -37,7 +37,7 @@ void __Disc_SetLowMem(void)
 	*(vu32 *)0x800000E4 = 0x80431A80;
 	*(vu32 *)0x800000EC = 0x81800000;       // Dev Debugger Monitor Address
     *(vu32 *)0x800000F0 = 0x01800000;       // Simulated Memory Size
-	
+
 	//If the game is sam & max: season 1  put this shit in
 	char tempTxt[10];
 	snprintf (tempTxt,sizeof(tempTxt),"%c%c%c%c%c%c", gameid[0], gameid[1], gameid[2], gameid[3], gameid[4], gameid[5]);
@@ -261,7 +261,7 @@ s32 Disc_IsWii(void)
 	return 0;
 }
 
-s32 Disc_BootPartition(u64 offset, u8 videoselected, u8 cheat, u8 vipatch, u8 patchcountrystring, u8 error002fix, u8 alternatedol)
+s32 Disc_BootPartition(u64 offset, u8 videoselected, u8 cheat, u8 vipatch, u8 patchcountrystring, u8 error002fix, u8 alternatedol, u8 alternatedoloffset)
 {
 	entry_point p_entry;
 
@@ -273,7 +273,7 @@ s32 Disc_BootPartition(u64 offset, u8 videoselected, u8 cheat, u8 vipatch, u8 pa
 		return ret;
 
 	/* Run apploader */
-	ret = Apploader_Run(&p_entry, cheat, videoselected, vipatch, patchcountrystring, error002fix, alternatedol);
+	ret = Apploader_Run(&p_entry, cheat, videoselected, vipatch, patchcountrystring, error002fix, alternatedol, alternatedoloffset);
 	if (ret < 0)
 		return ret;
 
@@ -308,7 +308,7 @@ s32 Disc_BootPartition(u64 offset, u8 videoselected, u8 cheat, u8 vipatch, u8 pa
 	return 0;
 }
 
-s32 Disc_WiiBoot(u8 videoselected, u8 cheat, u8 vipatch, u8 patchcountrystring, u8 error002fix, u8 alternatedol)
+s32 Disc_WiiBoot(u8 videoselected, u8 cheat, u8 vipatch, u8 patchcountrystring, u8 error002fix, u8 alternatedol, u8 alternatedoloffset)
 {
 	u64 offset;
 	s32 ret;
@@ -319,7 +319,7 @@ s32 Disc_WiiBoot(u8 videoselected, u8 cheat, u8 vipatch, u8 patchcountrystring, 
 		return ret;
 
 	/* Boot partition */
-	return Disc_BootPartition(offset, videoselected, cheat, vipatch, patchcountrystring, error002fix, alternatedol);
+	return Disc_BootPartition(offset, videoselected, cheat, vipatch, patchcountrystring, error002fix, alternatedol, alternatedoloffset);
 }
 
 void PatchCountryStrings(void *Address, int Size)

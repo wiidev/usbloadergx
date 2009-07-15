@@ -9,6 +9,7 @@
 #include "wpad.h"
 #include "disc.h"
 #include "alternatedol.h"
+#include "fstfile.h"
 #include "settings/cfg.h"
 
 /*KENOBI! - FISHEARS*/
@@ -293,7 +294,7 @@ void gamepatches(void * dst, int len, u8 videoSelected, u8 patchcountrystring, u
 
 }
 
-s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8 patchcountrystring, u8 error002fix, u8 alternatedol)
+s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8 patchcountrystring, u8 error002fix, u8 alternatedol, u8 alternatedoloffset)
 {
 	app_entry appldr_entry;
 	app_init  appldr_init;
@@ -378,6 +379,14 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
             /* Set entry point from apploader */
             *entry = (entry_point) load_dol_image(dolbuffer);
         }
+    } else if(alternatedol == 2) {
+
+        FST_ENTRY *fst = (FST_ENTRY *)*(u32 *)0x80000038;
+
+        *entry = (entry_point) Load_Dol_from_disc(fst[alternatedoloffset].fileoffset, videoSelected, patchcountrystring, vipatch);
+
+        if(*entry == 0)
+            SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
     }
 
 	return 0;

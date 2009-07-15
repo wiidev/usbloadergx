@@ -5,8 +5,8 @@
  * Loading covers in a background thread
  ***************************************************************************/
 
-#ifndef BUFFER_H
-#define BUFFER_H
+#ifndef _BUFFER_H_
+#define _BUFFER_H_
 
 GuiImage * ImageBuffer(int imagenumber);
 void NewOffset(int off, int d);

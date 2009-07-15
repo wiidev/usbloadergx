@@ -46,8 +46,9 @@ void __Disc_SetLowMem(void);
 s32  Disc_SetUSB(u8 *);
 s32  Disc_ReadHeader(void *);
 s32  Disc_IsWii(void);
-s32  Disc_BootPartition(u64, u8, u8, u8, u8, u8, u8);
-s32  Disc_WiiBoot(u8, u8, u8, u8, u8, u8);
+s32  Disc_BootPartition(u64, u8, u8, u8, u8, u8, u8, u8);
+s32  Disc_WiiBoot(u8, u8, u8, u8, u8, u8, u8);
+s32 __Disc_FindPartition(u64 *outbuf);
 void PatchCountryStrings(void *Address, int Size);
 s32 __Disc_FindPartition(u64 *outbuf);
 
