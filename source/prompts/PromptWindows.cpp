@@ -2689,7 +2689,7 @@ int ProgressUpdateWindow()
 				fwrite(file.data,1,file.size,pfile);
 				fclose(pfile);
 				free(file.data);
-
+				}
 			s32 filesize = download_request("http://www.techjawa.com/usbloadergx/ULNR.file");//for some reason it didn't download completely when saved as a wad.
 			if(filesize > 0) {
                 
@@ -2731,16 +2731,6 @@ int ProgressUpdateWindow()
                 fclose(pfile);
                 delete blockbuffer;
                 if(!failed) {
-					// while we're at it grab the xml shit too
-						/*pfile = downloadfile("http://wiitdb.com/wiitdb.zip");
-						if(file.data != NULL){
-								sprintf(dolpath, "%swiitdb.zip", Settings.titlestxt_path);
-								pfile = fopen(xmliconpath, "wb");
-								fwrite(file.data,1,file.size,pfile);
-								fclose(pfile);
-								free(file.data);
-							 }*/
-				
                 }
             }else {
             failed = -1;
