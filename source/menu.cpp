@@ -1970,7 +1970,7 @@ int MainMenu(int menu)
                         break;
     }
 
-    ret = Disc_WiiBoot(videoselected, cheat, vipatch, countrystrings, errorfixer002, alternatedol, alternatedoloffset+1);
+    ret = Disc_WiiBoot(videoselected, cheat, vipatch, countrystrings, errorfixer002, alternatedol, alternatedoloffset);
     if (ret < 0) {
         Sys_LoadMenu();
     }
