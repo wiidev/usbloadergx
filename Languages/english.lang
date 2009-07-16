@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-15 23:05-0400\n"
+"POT-Creation-Date: 2009-07-16 03:53-0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -136,6 +136,9 @@ msgid "Clock"
 msgstr ""
 
 msgid "Close"
+msgstr ""
+
+msgid "Code Download"
 msgstr ""
 
 msgid "Console"
@@ -274,6 +277,9 @@ msgid "Download Boxart image?"
 msgstr ""
 
 msgid "Download Discart image?"
+msgstr ""
+
+msgid "Download Now"
 msgstr ""
 
 msgid "Download finished"

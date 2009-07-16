@@ -2368,7 +2368,8 @@ int ProgressUpdateWindow()
 	//make the URL to get XML based on our games
 	char XMLurl[2032];
 	char filename[10];
-	strncat (XMLurl, "http://wiitdb.com/wiitdb.zip?ID=", 32);
+	//strncat (XMLurl, "http://wiitdb.com/wiitdb.zip?ID=", 32);
+	strcpy (XMLurl, "http://wiitdb.com/wiitdb.zip?ID=");
 	unsigned int i;
 	for (i = 0; i < gameCnt ; i++)
 			{
@@ -2508,6 +2509,9 @@ int ProgressUpdateWindow()
 
     return 1;
 }
+
+
+
 #else  ///////////////////this is only used if  the dol is being compiled for a full channel
 int ProgressUpdateWindow()
 {
@@ -2624,7 +2628,8 @@ int ProgressUpdateWindow()
 	//make the URL to get XML based on our games
 	char XMLurl[2032];
 	char filename[10];
-	strncat (XMLurl, "http://wiitdb.com/wiitdb.zip?ID=", 32);
+	//strncat (XMLurl, "http://wiitdb.com/wiitdb.zip?ID=", 32);
+	strcpy (XMLurl, "http://wiitdb.com/wiitdb.zip?ID=");
 	unsigned int i;
 	for (i = 0; i < gameCnt ; i++)
 			{
@@ -2803,6 +2808,149 @@ int ProgressUpdateWindow()
     return 1;
 }
 #endif
+
+int CodeDownload(const char *id)
+{
+    int ret = 0;
+
+	GuiWindow promptWindow(472,320);
+	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	promptWindow.SetPosition(0, -10);
+
+   GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
+	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
+
+	char imgPath[100];
+	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
+	GuiImageData btnOutline(imgPath, button_dialogue_box_png);
+	snprintf(imgPath, sizeof(imgPath), "%sdialogue_box.png", CFG.theme_path);
+	GuiImageData dialogBox(imgPath, dialogue_box_png);
+	GuiTrigger trigA;
+	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
+
+	GuiImage dialogBoxImg(&dialogBox);
+	if (Settings.wsprompt == yes){
+	dialogBoxImg.SetWidescreen(CFG.widescreen);}
+
+	
+
+    char title[50];
+   sprintf(title, "%s", tr("Code Download"));
+	GuiText titleTxt(title, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	titleTxt.SetPosition(0,50);
+    char msg[50];
+    sprintf(msg, "%s", tr("Initializing Network"));
+	GuiText msgTxt(msg, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	msgTxt.SetPosition(0,140);
+	char msg2[50] = " ";
+	GuiText msg2Txt(msg2, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	msg2Txt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	msg2Txt.SetPosition(0, 50);
+
+	GuiText btn1Txt(tr("Cancel"), 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	GuiImage btn1Img(&btnOutline);
+	if (Settings.wsprompt == yes){
+	btn1Txt.SetWidescreen(CFG.widescreen);
+	btn1Img.SetWidescreen(CFG.widescreen);}
+	GuiButton btn1(&btn1Img,&btn1Img, 2, 4, 0, -40, &trigA, &btnSoundOver, &btnClick,1);
+	btn1.SetLabel(&btn1Txt);
+	btn1.SetState(STATE_SELECTED);
+
+	promptWindow.Append(&dialogBoxImg);
+	promptWindow.Append(&titleTxt);
+	promptWindow.Append(&msgTxt);
+	promptWindow.Append(&msg2Txt);
+   promptWindow.Append(&btn1);
+
+   promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
+
+	HaltGui();
+	mainWindow->SetState(STATE_DISABLED);
+	mainWindow->Append(&promptWindow);
+	mainWindow->ChangeFocus(&promptWindow);
+	ResumeGui();
+
+    struct stat st;
+    if(stat(Settings.TxtCheatcodespath, &st) != 0) {
+        if(subfoldercreate(Settings.TxtCheatcodespath) != 1) {
+        WindowPrompt(tr("Error !"),tr("Can't create directory"),tr("OK"));
+        ret = -1;
+			goto exit;
+        }
+    }
+
+	while (!IsNetworkInit()) {
+
+        VIDEO_WaitVSync();
+
+        Initialize_Network();
+
+		if (IsNetworkInit()) {
+		msgTxt.SetText(GetNetworkIP());
+		} else {
+        msgTxt.SetText(tr("Could not initialize network!"));
+		}
+       if(btn1.GetState() == STATE_CLICKED) {
+			ret = -1;
+			btn1.ResetState();
+			goto exit;
+		}
+	}
+
+	if(IsNetworkInit() && ret >= 0) {
+		FILE * pfile;
+	
+	 char txtpath[150];
+    snprintf(txtpath, sizeof(txtpath), "%s%s.txt", Settings.TxtCheatcodespath,id);
+   
+    char codeurl[150];
+	 snprintf(codeurl, sizeof(codeurl), "http://usbgecko.com/codes/codes/R/%s.txt",id);
+	 
+	struct block  file = downloadfile(codeurl);
+
+			if (file.size == 333)
+				{
+				strcat(codeurl, " is not on the server.");
+		
+				  WindowPrompt(tr("Error"),codeurl,"Ok");
+				  ret =-1;
+				  goto exit;
+				}
+	 
+    if(file.data != NULL){
+        pfile = fopen(txtpath, "wb");
+        fwrite(file.data,1,file.size,pfile);
+        fclose(pfile);
+        free(file.data);
+		  ret = 1;
+		  strcat(txtpath, " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information.");
+    
+		  WindowPrompt(0,txtpath,"Ok");
+    }
+	 else 
+	 {
+		strcat(codeurl, " could not be downloaded.");
+		
+		  WindowPrompt(tr("Error"),codeurl,"Ok");
+		  ret =-1;
+	 }
+				
+
+    CloseConnection();
+	}
+exit:
+   promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
+	while(promptWindow.GetEffect() > 0) usleep(50);
+
+	HaltGui();
+	mainWindow->Remove(&promptWindow);
+	mainWindow->SetState(STATE_DEFAULT);
+	ResumeGui();
+
+    return ret;
+}
 
 char * GetMissingFiles()
 {

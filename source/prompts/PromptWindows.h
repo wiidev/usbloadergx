@@ -26,5 +26,6 @@ int ProgressDownloadWindow(int choice2);
 int ProgressUpdateWindow();
 char * GetMissingFiles();
 int WindowScreensaver();
+int CodeDownload(const char *id);
 
 #endif

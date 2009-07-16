@@ -62,12 +62,21 @@ int CheatMenu(const char * gameID)
 	
 	GCTCheats c;
 	int check = c.openTxtfile(txtfilename);
-
+	
+	int download =0;
+	//char tmp[10];
+	
+	
 	switch(check)
 	{
 	case -1: WindowPrompt(tr("Error"),tr("Cheatfile is blank"),tr("OK"));
 			 break;
-	case 0: WindowPrompt(tr("Error"),tr("No Cheatfile found"),tr("OK"));
+	case 0: download = WindowPrompt(tr("Error"),tr("No Cheatfile found"),tr("OK"),tr("Download Now"));
+		//snprintf(tmp, sizeof(tmp), "%i",download);
+    
+		//WindowPrompt(0,tmp,tr("OK"),tr("Download Now"));
+		if (download==0)
+		download = CodeDownload(gameID);
 			break;
 	case 1:
 	int cntcheats = c.getCnt();
