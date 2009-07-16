@@ -35,44 +35,48 @@ int DiscBrowse(struct discHdr * header)
 	int ret, choice;
 	u64 offset;
 
+	
 	ret = Disc_SetUSB(header->id);
 	if(ret < 0) {
 	    WindowPrompt(tr("ERROR:"), tr("Could not set USB."), tr("OK"));
         return ret;
 	}
+	
 
-    ret = Disc_Open();
+   ret = Disc_Open();
 	if(ret < 0) {
 	    WindowPrompt(tr("ERROR:"), tr("Could not open disc."), tr("OK"));
         return ret;
 	}
+	
+	
 
 	ret = __Disc_FindPartition(&offset);
 	if (ret < 0) {
 	    WindowPrompt(tr("ERROR:"), tr("Could not find a WBFS partition."), tr("OK"));
 		return ret;
 	}
-
-    ret = WDVD_OpenPartition(offset);
+	
+	ret = WDVD_OpenPartition(offset);
     if (ret < 0) {
 	    WindowPrompt(tr("ERROR:"), tr("Could not open WBFS partition"), tr("OK"));
 		return ret;
     }
-
+	
     int *buffer = (int*)memalign(32, 0x20);
-
+	
 	if (buffer == NULL)
 	{
 		WindowPrompt(tr("ERROR:"), tr("Not enough free memory."), tr("OK"));
 		return -1;
 	}
-
+	
 	ret = WDVD_Read(buffer, 0x20, 0x420);
 	if (ret < 0) {
 		WindowPrompt(tr("ERROR:"), tr("Could not read the disc."), tr("OK"));
 		return ret;
 	}
-
+	
 	void *fstbuffer = memalign(32, buffer[2]*4);
 	FST_ENTRY *fst = (FST_ENTRY *)fstbuffer;
 
@@ -82,7 +86,7 @@ int DiscBrowse(struct discHdr * header)
 		free(buffer);
 		return -1;
 	}
-
+	
 	ret = WDVD_Read(fstbuffer, buffer[2]*4, buffer[1]*4);
 
 	if (ret < 0) {
@@ -91,19 +95,19 @@ int DiscBrowse(struct discHdr * header)
 		free(fstbuffer);
 		return ret;
 	}
-
+	
 	free(buffer);
-
+	
 	WDVD_Reset();
 	//Disc_SetUSB(NULL);
 	WDVD_ClosePartition();
-
+	
 	u32 discfilecount = fst[0].filelen;
 	u32 dolfilecount = 0;
 	//int offsetselect[20];
-
+	
 	customOptionList options3(discfilecount);
-
+	
 	for (u32 i = 0; i < discfilecount; i++) {
 			
 			//don't add files that aren't .dol to the list
@@ -115,10 +119,12 @@ int DiscBrowse(struct discHdr * header)
 				{
 					options3.SetName(i, "%i", i);
 					options3.SetValue(i, fstfiles(fst, i));
+					//options3.SetName(i, fstfiles(fst, i));
+					
+				dolfilecount++;
 				}
-            dolfilecount++;
 	}
-
+	
     if(dolfilecount <= 0) {
         WindowPrompt(tr("ERROR"), tr("No dol file found on disc."), tr("OK"));
         free(fstbuffer);
@@ -169,11 +175,11 @@ int DiscBrowse(struct discHdr * header)
 	if(dolfilecount > 9)
         scrollbaron = 1;
 
-	GuiCustomOptionBrowser optionBrowser3(396, 280, &options3, CFG.theme_path, "bg_options_gamesettings.png", bg_options_settings_png, scrollbaron, 200);
+	GuiCustomOptionBrowser optionBrowser3(396, 280, &options3, CFG.theme_path, "bg_options_gamesettings.png", bg_options_settings_png, dolfilecount>9?1:0, 200);
 	optionBrowser3.SetPosition(0, 90);
 	optionBrowser3.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-
-    HaltGui();
+	
+   HaltGui();
 	GuiWindow w(screenwidth, screenheight);
 	w.Append(&settingsbackgroundbtn);
     w.Append(&titleTxt);
@@ -183,7 +189,7 @@ int DiscBrowse(struct discHdr * header)
 	mainWindow->Append(&w);
 
 	ResumeGui();
-
+	
 	while(!exit)
 	{
 		VIDEO_WaitVSync();
@@ -210,8 +216,8 @@ int DiscBrowse(struct discHdr * header)
 		if (cancelBtn.GetState() == STATE_CLICKED)
 		{
 			exit = true;
-			ret = -1;
-			break;
+			ret = 696969;
+			//break;
 		}
 	}
 
@@ -224,3 +230,21 @@ int DiscBrowse(struct discHdr * header)
 
 	return ret;
 }
+
+
+int autoSelectDol(const char *id)
+{	
+	//these are the game IDs without the 4th character
+	// if it turns out that the offset is different for different regions
+	// the 4th char can be added
+	if (strcmp(id,"RHD8P") == 0) return 149;
+	if (strcmp(id,"RSX69") == 0) return 337;
+	if (strcmp(id,"RED41") == 0) return 1957;
+	if (strcmp(id,"RM269") == 0) return 492;
+	if (strcmp(id,"RKM5D") == 0) return 290;
+	if (strcmp(id,"RJ864") == 0) return 8;
+	//if (strcmp(id,"") == 0) return ; //blank line for more dols
+	
+	return -1;
+}
+

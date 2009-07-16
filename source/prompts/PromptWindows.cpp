@@ -1931,6 +1931,9 @@ ProgressDownloadWindow(int choice2)
 		case CONF_LANG_DUTCH:
 				sprintf(sysLanguage, "NL");
 				break;
+/*		case CONF_LANG_PORTUGUESE:
+				sprintf(sysLanguage, "PO");
+				break;*/
 		case CONF_LANG_SIMP_CHINESE:
 				sprintf(sysLanguage, "EN");   // default to EN for chinese
 				break;
@@ -1938,7 +1941,7 @@ ProgressDownloadWindow(int choice2)
 				sprintf(sysLanguage, "EN");   // default to EN for chinese
 				break;
 		case CONF_LANG_KOREAN:
-				sprintf(sysLanguage, "NL");
+				sprintf(sysLanguage, "KO");
 				break;
 	}
 
@@ -2363,17 +2366,18 @@ int ProgressUpdateWindow()
 
 
 	//make the URL to get XML based on our games
-	char XMLurl[2010];
+	char XMLurl[2032];
 	char filename[10];
 	strncat (XMLurl, "http://wiitdb.com/wiitdb.zip?ID=", 32);
 	unsigned int i;
 	for (i = 0; i < gameCnt ; i++)
 			{
 				struct discHdr* header = &gameList[i];
-				if (i<393){
-					snprintf (filename,sizeof(filename),"%c%c%c%c", header->id[0], header->id[1], header->id[2], header->id[3]);
-					strncat (XMLurl, filename, 4);
-					if ((i!=gameCnt-1)&&(i<392))
+				if (i<500){
+					snprintf (filename,sizeof(filename),"%c%c%c", header->id[1], header->id[2], header->id[3]);
+						strncat (XMLurl, filename,3 );
+					
+					if ((i!=gameCnt-1)&&(i<500))
 						strncat (XMLurl, ",",1);
 				}
 	}
@@ -2618,20 +2622,20 @@ int ProgressUpdateWindow()
 
 
 	//make the URL to get XML based on our games
-	char XMLurl[2010];
+	char XMLurl[2032];
 	char filename[10];
 	strncat (XMLurl, "http://wiitdb.com/wiitdb.zip?ID=", 32);
 	unsigned int i;
 	for (i = 0; i < gameCnt ; i++)
 			{
 				struct discHdr* header = &gameList[i];
-				if (i<393){
-					snprintf (filename,sizeof(filename),"%c%c%c%c", header->id[0], header->id[1], header->id[2], header->id[3]);
-					strncat (XMLurl, filename, 4);
-					if ((i!=gameCnt-1)&&(i<392))
+				if (i<500){
+					snprintf (filename,sizeof(filename),"%c%c%c", header->id[1], header->id[2], header->id[3]);
+						strncat (XMLurl, filename,3 );
+					
+					if ((i!=gameCnt-1)&&(i<500))
 						strncat (XMLurl, ",",1);
 				}
-
 	}
 
 

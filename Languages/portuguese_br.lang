@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-15 19:18+0200\n"
+"POT-Creation-Date: 2009-07-15 23:05-0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -46,6 +46,9 @@ msgid ">> Installing title..."
 msgstr ""
 
 msgid ">> Reading WAD data..."
+msgstr ""
+
+msgid "AUTO"
 msgstr ""
 
 msgid "All the features of USB Loader GX are unlocked."
@@ -254,6 +257,9 @@ msgstr "Deseja formatar:"
 
 msgid "Do you want to retry for 30 secs?"
 msgstr "Deseja tentar novamente em 30s?"
+
+msgid "Do you want to use the alt dol that is known to be correct?"
+msgstr ""
 
 msgid "Dol Path"
 msgstr ""
@@ -596,6 +602,9 @@ msgstr "Alterar local titles.txt"
 
 msgid "Path of titles.txt changed."
 msgstr "Local titles.txt alterado"
+
+msgid "Pick from a list"
+msgstr ""
 
 msgid "Play Count"
 msgstr "Jogado"

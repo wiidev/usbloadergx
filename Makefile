@@ -29,7 +29,7 @@ SVNDEV		:=	-D'SVN_REV="$(shell svnversion -n ..)"'
 
 CFLAGS		=	-g -O2 -save-temps -Wall $(SVNDEV) $(MACHDEP) $(INCLUDE)
 CXXFLAGS	=	-Xassembler -aln=$@.lst $(CFLAGS)
-LDFLAGS		=	-g $(MACHDEP) -Wl,-Map,$(notdir $@).map,--section-start,.init=0x80a00100
+LDFLAGS		=	-g $(MACHDEP) -Wl,-Map,$(notdir $@).map,--section-start,.init=0x80c00000
 
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project
