@@ -104,6 +104,8 @@ int CheatMenu(const char * gameID)
 	w.Append(&backBtn);
 	w.Append(&createBtn);
 	w.Append(&chtBrowser);
+	mainWindow->SetState(STATE_DISABLED);
+	mainWindow->ChangeFocus(&w);
 	mainWindow->Append(&w);
 	ResumeGui();
 
@@ -160,6 +162,7 @@ int CheatMenu(const char * gameID)
         }
     }
     HaltGui();
+	mainWindow->SetState(STATE_DEFAULT);
     mainWindow->Remove(&w);
     ResumeGui();
 

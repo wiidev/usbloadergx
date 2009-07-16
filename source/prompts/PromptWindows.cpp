@@ -2900,34 +2900,34 @@ int CodeDownload(const char *id)
 	}
 
 	if(IsNetworkInit() && ret >= 0) {
-		FILE * pfile;
 	
-	 char txtpath[150];
+	char txtpath[150];
     snprintf(txtpath, sizeof(txtpath), "%s%s.txt", Settings.TxtCheatcodespath,id);
    
     char codeurl[150];
-	 snprintf(codeurl, sizeof(codeurl), "http://usbgecko.com/codes/codes/R/%s.txt",id);
+	snprintf(codeurl, sizeof(codeurl), "http://usbgecko.com/codes/codes/R/%s.txt",id);
 	 
 	struct block  file = downloadfile(codeurl);
 
-			if (file.size == 333)
-				{
-				strcat(codeurl, " is not on the server.");
-		
-				  WindowPrompt(tr("Error"),codeurl,"Ok");
-				  ret =-1;
-				  goto exit;
-				}
-	 
+	if (file.size == 333)
+		{
+		strcat(codeurl, " is not on the server.");
+
+		WindowPrompt(tr("Error"),codeurl,"Ok");
+		ret =-1;
+		goto exit;
+		}
+
     if(file.data != NULL){
+		FILE * pfile;
         pfile = fopen(txtpath, "wb");
         fwrite(file.data,1,file.size,pfile);
         fclose(pfile);
         free(file.data);
-		  ret = 1;
-		  strcat(txtpath, " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information.");
+		ret = 1;
+		strcat(txtpath, " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information.");
     
-		  WindowPrompt(0,txtpath,"Ok");
+		WindowPrompt(0,txtpath,"Ok");
     }
 	 else 
 	 {
@@ -2937,7 +2937,6 @@ int CodeDownload(const char *id)
 		  ret =-1;
 	 }
 				
-
     CloseConnection();
 	}
 exit:
