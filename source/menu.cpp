@@ -622,7 +622,16 @@ int MenuDiscList()
 				char idiotBuffer[200];
 				snprintf(idiotBuffer, sizeof(idiotBuffer), "%s (%s). %s",tr("You have attempted to load a bad image"), idiotChar,tr("Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."));
 
-			WindowPrompt(0,idiotBuffer,tr("Ok"));
+			int deleteImg = WindowPrompt(0,idiotBuffer,tr("Ok"),tr("Delete"));
+				if(deleteImg==0)
+					{
+					snprintf(idiotBuffer, sizeof(idiotBuffer), "%s %s.",tr("You are about to delete "), idiotChar);
+					deleteImg = WindowPrompt(tr("Confirm"),idiotBuffer,tr("Delete"),tr("Cancel"));
+						if(deleteImg==1)
+						{
+							remove(idiotChar);
+						}
+					}
 			idiotFlag=-1;}
 
 			WDVD_GetCoverStatus(&covert);//for detecting if i disc has been inserted
@@ -1367,30 +1376,9 @@ static int MenuInstall()
 		if (gamesize > freespace) {
 			char errortxt[50];
 			sprintf(errortxt, "%s: %.2fGB, %s: %.2fGB",tr("Game Size"), gamesize, tr("Free Space"), freespace);
-			choice = WindowPrompt(tr("Not enough free space!"),errortxt,tr("OK"), tr("Return"));
-			if (choice == 1) {
-				USBStorage_Watchdog(0);
-				SetupGameInstallProgress(gametxt, name);
-                ret = WBFS_AddGame();
-                ProgressStop();
-                USBStorage_Watchdog(1);
-                wiilight(0);
-				if (ret != 0) {
-					WindowPrompt (tr("Install Error!"),0,tr("Back"));
-					menu = MENU_DISCLIST;
-					break;
-				}
-				else {
-					__Menu_GetEntries(); //get the entries again
-					WindowPrompt (tr("Successfully installed:"),name,tr("OK"));
-					menu = MENU_DISCLIST;
-					break;
-				}
-			} else {
+			WindowPrompt(tr("Not enough free space!"),errortxt,tr("OK"));
 				menu = MENU_DISCLIST;
 				break;
-			}
-
 		}
 		else {
             USBStorage_Watchdog(0);

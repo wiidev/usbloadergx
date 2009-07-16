@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-16 03:53-0400\n"
+"POT-Creation-Date: 2009-07-16 05:32-0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -141,6 +141,9 @@ msgstr "Fermer"
 msgid "Code Download"
 msgstr ""
 
+msgid "Confirm"
+msgstr ""
+
 msgid "Console"
 msgstr "Console"
 
@@ -224,6 +227,9 @@ msgstr "Reset Paramètres Jeu"
 
 msgid "Default Settings"
 msgstr "Reset Paramètres"
+
+msgid "Delete"
+msgstr ""
 
 msgid "Developed by"
 msgstr "Développé par"
@@ -832,6 +838,9 @@ msgstr "Mot de passe incorrect"
 
 msgid "Yes"
 msgstr "Oui"
+
+msgid "You are about to delete "
+msgstr ""
 
 msgid "You are choosing to display favorites and you do not have any selected."
 msgstr ""
