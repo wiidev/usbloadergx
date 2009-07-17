@@ -16,22 +16,22 @@ msgid "(both retired)"
 msgstr ""
 
 msgid "0 (Everyone)"
-msgstr "0 (Alle)"
+msgstr ""
 
 msgid "1 (Child 7+)"
-msgstr "1 (Barn 7+)"
+msgstr ""
 
 msgid "2 (Teen 12+)"
-msgstr "2 (Ungdom 12+)"
+msgstr ""
 
 msgid "3 (Mature 16+)"
-msgstr "3 (Ungdom 16+)"
+msgstr "3 (Voksen)"
 
 msgid "3D Covers"
 msgstr "3D cover"
 
 msgid "4 (Adults Only 18+)"
-msgstr "4 (Voksen 18+)"
+msgstr ""
 
 msgid ">> Finishing installation..."
 msgstr ""
@@ -55,10 +55,10 @@ msgid "All the features of USB Loader GX are unlocked."
 msgstr "Alle funksjonene til USB Loader GX er opplåst."
 
 msgid "Alternate DOL"
-msgstr "Alternativ DOL"
+msgstr ""
 
 msgid "Anti"
-msgstr "Anti"
+msgstr ""
 
 msgid "App Language"
 msgstr "Program språk"
@@ -97,7 +97,7 @@ msgid "Big thanks to:"
 msgstr "Stor takk til:"
 
 msgid "Block IOS Reload"
-msgstr "Blokkér IOS Reload"
+msgstr ""
 
 msgid "Boot/Standard"
 msgstr "Boot/Standard"
@@ -124,7 +124,7 @@ msgid "Cheatcodes Path changed"
 msgstr "Juksekode sti endret"
 
 msgid "Cheatfile is blank"
-msgstr "Juksefil er blank"
+msgstr ""
 
 msgid "Checking for Updates"
 msgstr "Søker etter oppdateringer"
@@ -145,7 +145,7 @@ msgid "Confirm"
 msgstr ""
 
 msgid "Console"
-msgstr "Konsoll"
+msgstr ""
 
 msgid "Console Default"
 msgstr "Konsoll Standard"
@@ -166,7 +166,7 @@ msgid "Correct Password"
 msgstr "Riktig passord"
 
 msgid "Could not create GCT file"
-msgstr "Kan ikke opprette GCT fil"
+msgstr ""
 
 msgid "Could not find a WBFS partition."
 msgstr ""
@@ -202,7 +202,7 @@ msgid "Coverpath Changed"
 msgstr "Cover sti endret"
 
 msgid "Create"
-msgstr "Opprett"
+msgstr ""
 
 msgid "Credits"
 msgstr "Medvirkende"
@@ -250,7 +250,7 @@ msgid "Discpath change"
 msgstr "Endre plate sti"
 
 msgid "DiskFlip"
-msgstr "Snu plate"
+msgstr ""
 
 msgid "Display"
 msgstr "Vis"
@@ -271,13 +271,13 @@ msgid "Do you want to use the alt dol that is known to be correct?"
 msgstr ""
 
 msgid "Dol Path"
-msgstr "DOL sti"
+msgstr ""
 
 msgid "Dolpath Changed"
-msgstr "DOL sti endret"
+msgstr ""
 
 msgid "Dolpath change"
-msgstr "Endre DOL sti"
+msgstr ""
 
 msgid "Download Boxart image?"
 msgstr "Last ned cover bilde?"
@@ -310,13 +310,13 @@ msgid "English"
 msgstr "Engelsk"
 
 msgid "Error"
-msgstr "Feil"
+msgstr ""
 
 msgid "Error !"
 msgstr "Feil !"
 
 msgid "Error 002 fix"
-msgstr "Error 002 fiks"
+msgstr ""
 
 msgid "Error reading Disc"
 msgstr "Feil ved lesing av plate"
@@ -346,7 +346,7 @@ msgid "Force"
 msgstr "Tving"
 
 msgid "Format"
-msgstr "Formatér"
+msgstr "Formater"
 
 msgid "Formatting, please wait..."
 msgstr "Formaterer, vennligst vent..."
@@ -361,7 +361,7 @@ msgid "Full Shutdown"
 msgstr "Skru helt av"
 
 msgid "GCT File created"
-msgstr "GCT fil opprettet"
+msgstr ""
 
 msgid "GUI Settings"
 msgstr "GUI innstillinger"
@@ -421,7 +421,7 @@ msgid "Install Error!"
 msgstr "Installasjonsfeil!"
 
 msgid "Install a game"
-msgstr "Installér et spill"
+msgstr "Installer et spill"
 
 msgid "Installing content... Ok!"
 msgstr ""
@@ -460,7 +460,7 @@ msgid "Korean"
 msgstr "Koreansk"
 
 msgid "Language change:"
-msgstr "Endre språk"
+msgstr ""
 
 msgid "Languagepath changed."
 msgstr "Språksti endret."
@@ -499,7 +499,7 @@ msgid "Missing files"
 msgstr "Manglende filer"
 
 msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
-msgstr "Sannsynligvis har bildet dimensjoner som ikke kan deles med 4."
+msgstr ""
 
 msgid "Music Volume"
 msgstr "Musikk volum"
@@ -517,7 +517,7 @@ msgid "No"
 msgstr "Nei"
 
 msgid "No Cheatfile found"
-msgstr "Ingen juksefil funnet"
+msgstr ""
 
 msgid "No Favorites"
 msgstr ""
@@ -583,16 +583,16 @@ msgid "Official Site"
 msgstr "Offisiell nettside"
 
 msgid "Ok"
-msgstr "Ok"
+msgstr ""
 
 msgid "Only for Install"
 msgstr "Kun for installering"
 
 msgid "Parental Control"
-msgstr "Foreldrekontroll"
+msgstr "Foreldre kontroll"
 
 msgid "Parental control"
-msgstr "Foreldrekontroll"
+msgstr ""
 
 msgid "Partition"
 msgstr "Partisjon"
@@ -640,7 +640,7 @@ msgid "Reading WAD data... Ok!"
 msgstr ""
 
 msgid "Released"
-msgstr "Lansert"
+msgstr ""
 
 msgid "Reload SD"
 msgstr "Les SD på nytt"
@@ -649,7 +649,7 @@ msgid "Rename Game on WBFS"
 msgstr "Gi nytt navn til spill på WBFS"
 
 msgid "Reset Playcounter"
-msgstr "Nullstill teller"
+msgstr ""
 
 msgid "Restart"
 msgstr "Start på nytt"
@@ -661,7 +661,7 @@ msgid "Return"
 msgstr "Gå tilbake"
 
 msgid "Return to Wii Menu"
-msgstr "Tilbake til Wii meny"
+msgstr ""
 
 msgid "Right"
 msgstr "Høyre"
@@ -682,10 +682,10 @@ msgid "Save"
 msgstr "Lagre"
 
 msgid "Save Failed"
-msgstr "Lagring feilet"
+msgstr "Lagre feilet"
 
 msgid "Screensaver"
-msgstr "Skjermbeskytter"
+msgstr ""
 
 msgid "Sept"
 msgstr "Sep"
@@ -742,7 +742,7 @@ msgid "TChinese"
 msgstr "T.Kinesisk"
 
 msgid "TXTCheatcodes Path"
-msgstr "TXTjuksekode sti"
+msgstr ""
 
 #, c-format
 msgid "The wad installation failed with error %ld"
@@ -777,7 +777,7 @@ msgid "Unable to open the wad that was just downloaded (%s)."
 msgstr ""
 
 msgid "Uninstall"
-msgstr "Avinstallér"
+msgstr "Avinstaller"
 
 msgid "Unlock console to use this option."
 msgstr "Lås opp konsollen for å bruke denne innstillingen."
@@ -825,7 +825,7 @@ msgid "WiFi Features"
 msgstr "WiFi egenskaper"
 
 msgid "Widescreen Fix"
-msgstr "Widescreen fiks"
+msgstr "Fiks for 16/9"
 
 msgid "Wii Menu"
 msgstr "Wii meny"
@@ -846,7 +846,7 @@ msgid "You are choosing to display favorites and you do not have any selected."
 msgstr ""
 
 msgid "You have attempted to load a bad image"
-msgstr "Du har forsøkt å vise et korrupt bilde"
+msgstr ""
 
 msgid "You need to format a partition"
 msgstr "Du må formatere en partisjon"
@@ -861,13 +861,13 @@ msgid "does not exist!"
 msgstr ""
 
 msgid "does not exist!  Loading game without cheats."
-msgstr "finnes ikke!  Laster spill uten juksekode."
+msgstr ""
 
 msgid "does not exist!  You Messed something up, Idiot."
-msgstr "finnes ikke!  Du har gjort noe galt."
+msgstr ""
 
-msgid "file(s) left"
-msgstr "fil(er) gjenstår"
+msgid "file left"
+msgstr ""
 
 msgid "files left"
 msgstr ""
@@ -888,10 +888,10 @@ msgid "for his awesome tool"
 msgstr "for hans råe verktøy"
 
 msgid "for hosting the update files"
-msgstr "for hosting av oppdateringer"
+msgstr "for hosting av oppdateringsfiler"
 
 msgid "for the USB Loader source"
-msgstr "for kilden til USB Loader"
+msgstr "for kildekoden til USB Loader"
 
 msgid "formatted!"
 msgstr "formatert!"

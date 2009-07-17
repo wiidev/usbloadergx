@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-# File Version 19 - For USB Loader GX 1 rev583
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
-"Report-Msgid-Bugs-To: Sky8000 (sky8000@hotmail.com)\n"
+"Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-07-16 05:32-0400\n"
-"PO-Revision-Date: 2009-07-08 11:32\n"
-"Last-Translator: Sky8000\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -28,7 +28,7 @@ msgid "3 (Mature 16+)"
 msgstr "3 (Adulto 16+)"
 
 msgid "3D Covers"
-msgstr "Capas 3D"
+msgstr ""
 
 msgid "4 (Adults Only 18+)"
 msgstr "4 (Adultos 18+)"
@@ -58,7 +58,7 @@ msgid "Alternate DOL"
 msgstr "DOL alternativo"
 
 msgid "Anti"
-msgstr "Anti"
+msgstr ""
 
 msgid "App Language"
 msgstr "Idioma"
@@ -97,7 +97,7 @@ msgid "Big thanks to:"
 msgstr "Agradecimentos:"
 
 msgid "Block IOS Reload"
-msgstr "Bloquear reload do IOS"
+msgstr ""
 
 msgid "Boot/Standard"
 msgstr "Arranque/Standard"
@@ -124,7 +124,7 @@ msgid "Cheatcodes Path changed"
 msgstr "Pasta de Truques alterada"
 
 msgid "Cheatfile is blank"
-msgstr "Ficheiro de truques vazio"
+msgstr ""
 
 msgid "Checking for Updates"
 msgstr "Procurando Actualizações"
@@ -145,7 +145,7 @@ msgid "Confirm"
 msgstr ""
 
 msgid "Console"
-msgstr "Configuração"
+msgstr ""
 
 msgid "Console Default"
 msgstr "Predefinição Consola"
@@ -166,7 +166,7 @@ msgid "Correct Password"
 msgstr "Password Correcta"
 
 msgid "Could not create GCT file"
-msgstr "Não foi possível criar o ficheiro GCT"
+msgstr ""
 
 msgid "Could not find a WBFS partition."
 msgstr ""
@@ -202,7 +202,7 @@ msgid "Coverpath Changed"
 msgstr "Pasta das Capas alterada"
 
 msgid "Create"
-msgstr "Criar"
+msgstr ""
 
 msgid "Credits"
 msgstr "Créditos"
@@ -250,7 +250,7 @@ msgid "Discpath change"
 msgstr "Alterar da Pasta das Imagens de Disco"
 
 msgid "DiskFlip"
-msgstr "Voltar Disco"
+msgstr ""
 
 msgid "Display"
 msgstr "Mostrar"
@@ -283,7 +283,7 @@ msgid "Download Boxart image?"
 msgstr "Descarregar imagem da Caixa?"
 
 msgid "Download Discart image?"
-msgstr "Descarregar imagem do Disco?"
+msgstr ""
 
 msgid "Download Now"
 msgstr ""
@@ -310,13 +310,13 @@ msgid "English"
 msgstr "Inglês"
 
 msgid "Error"
-msgstr "Erro"
+msgstr ""
 
 msgid "Error !"
 msgstr "Erro !"
 
 msgid "Error 002 fix"
-msgstr "Correcção Erro 002"
+msgstr ""
 
 msgid "Error reading Disc"
 msgstr "Erro ao ler o Disco"
@@ -361,7 +361,7 @@ msgid "Full Shutdown"
 msgstr "Desligar"
 
 msgid "GCT File created"
-msgstr "Ficheiro GCT criado"
+msgstr ""
 
 msgid "GUI Settings"
 msgstr "Definições do Interface"
@@ -460,7 +460,7 @@ msgid "Korean"
 msgstr "Coreano"
 
 msgid "Language change:"
-msgstr "Alteração de idioma:"
+msgstr ""
 
 msgid "Languagepath changed."
 msgstr "Caminho para o ficheiro de Idioma alterado."
@@ -499,7 +499,7 @@ msgid "Missing files"
 msgstr "Ficheiros em falta"
 
 msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
-msgstr "O mais provável é que o tamanho não seja divisível por 4. Que estupidez."
+msgstr ""
 
 msgid "Music Volume"
 msgstr "Volume Música"
@@ -517,10 +517,10 @@ msgid "No"
 msgstr "Não"
 
 msgid "No Cheatfile found"
-msgstr "Ficheiro de truques não encontrado"
+msgstr ""
 
 msgid "No Favorites"
-msgstr "Lista de favoritos vazia"
+msgstr ""
 
 msgid "No SD-Card inserted!"
 msgstr "Cartão SD não inserido!"
@@ -562,7 +562,7 @@ msgid "Not enough free space!"
 msgstr "Não há espaço livre suficiente!"
 
 msgid "Not supported format!"
-msgstr "Formato não suportado!"
+msgstr ""
 
 msgid "Nov"
 msgstr "Nov"
@@ -583,7 +583,7 @@ msgid "Official Site"
 msgstr "Site Oficial"
 
 msgid "Ok"
-msgstr "Ok"
+msgstr ""
 
 msgid "Only for Install"
 msgstr "Apenas na instalação"
@@ -592,7 +592,7 @@ msgid "Parental Control"
 msgstr "Controlo Parental"
 
 msgid "Parental control"
-msgstr "Controlo parental"
+msgstr ""
 
 msgid "Partition"
 msgstr "Partição"
@@ -640,7 +640,7 @@ msgid "Reading WAD data... Ok!"
 msgstr ""
 
 msgid "Released"
-msgstr "Lançado"
+msgstr ""
 
 msgid "Reload SD"
 msgstr "Actualizar do cartão SD"
@@ -649,7 +649,7 @@ msgid "Rename Game on WBFS"
 msgstr "Alterar nome do jogo na partição WBFS"
 
 msgid "Reset Playcounter"
-msgstr "Limpar Contagem"
+msgstr ""
 
 msgid "Restart"
 msgstr "Reiniciar"
@@ -661,7 +661,7 @@ msgid "Return"
 msgstr "Voltar"
 
 msgid "Return to Wii Menu"
-msgstr "Voltar ao Menu da Wii"
+msgstr ""
 
 msgid "Right"
 msgstr "Direita"
@@ -685,13 +685,13 @@ msgid "Save Failed"
 msgstr "Falha ao Gravar"
 
 msgid "Screensaver"
-msgstr "Protecção de ecrã"
+msgstr ""
 
 msgid "Sept"
 msgstr "Set"
 
 msgid "Set as backgroundmusic?"
-msgstr "Definir como música de fundo?"
+msgstr ""
 
 msgid "Settings"
 msgstr "Configurações"
@@ -742,7 +742,7 @@ msgid "TChinese"
 msgstr "Chinês Tradicional"
 
 msgid "TXTCheatcodes Path"
-msgstr "Pasta Dicas"
+msgstr ""
 
 #, c-format
 msgid "The wad installation failed with error %ld"
@@ -843,10 +843,10 @@ msgid "You are about to delete "
 msgstr ""
 
 msgid "You are choosing to display favorites and you do not have any selected."
-msgstr "Está a tentar visualizar os favoritos mas não existe nenhum seleccionado."
+msgstr ""
 
 msgid "You have attempted to load a bad image"
-msgstr "Tentou carregar uma imagem corrompida"
+msgstr ""
 
 msgid "You need to format a partition"
 msgstr "É necessário FORMATAR a partição"
@@ -855,22 +855,22 @@ msgid "available"
 msgstr "disponível"
 
 msgid "contains over 255 lines of code.  It will produce unexpected results."
-msgstr "contém mais de 255 linhas de código. Os resultados podem ser inesperados."
+msgstr ""
 
 msgid "does not exist!"
 msgstr ""
 
 msgid "does not exist!  Loading game without cheats."
-msgstr "não existe!  Carregando jogo sem truques."
+msgstr ""
 
 msgid "does not exist!  You Messed something up, Idiot."
-msgstr "não existe!   Estragaste algo, idiota."
+msgstr ""
 
 msgid "file left"
-msgstr "ficheiro restante"
+msgstr ""
 
 msgid "files left"
-msgstr "ficheiros restantes"
+msgstr ""
 
 msgid "files not found on the server!"
 msgstr "ficheiros não encontrados no servidor!"
@@ -879,7 +879,7 @@ msgid "for"
 msgstr "pelo"
 
 msgid "for WiiTDB and hosting covers / disc images"
-msgstr "pelo WiiTDB"
+msgstr ""
 
 msgid "for diverse patches"
 msgstr "por diversos patches"
@@ -891,7 +891,7 @@ msgid "for hosting the update files"
 msgstr "por alojar actualizações"
 
 msgid "for the USB Loader source"
-msgstr "pelo código do USB Loader"
+msgstr "pelo código fonte do USB Loader"
 
 msgid "formatted!"
 msgstr "formatado!"
