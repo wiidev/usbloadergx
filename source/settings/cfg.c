@@ -41,7 +41,7 @@ u16 playcount = 0;
 u8 listDisplay = 0;
 char alternatedname[40];
 
-#define TITLE_MAX 65
+#define TITLE_MAX 200
 
 struct ID_Title
 {
