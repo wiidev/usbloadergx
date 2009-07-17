@@ -1,11 +1,11 @@
 ﻿# USB Loader GX language source file.
-# French/Français V7.8 (r593)
+# French/Français V8.1 (r611)
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: http://gueux-forum.net/index.php?showtopic=215454 \n"
-"POT-Creation-Date: 2009-07-15 19:18+0200\n"
-"PO-Revision-Date: 2009-07-15 21:30+0200\n"
+"POT-Creation-Date: 2009-07-16 05:32-0400\n"
+"PO-Revision-Date: 2009-07-16 23:15+0200\n"
 "Last-Translator: Kin8\n"
 "Language-Team: Badablek, Amour, ikya, OuahOuah & Kin8\n"
 "MIME-Version: 1.0\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid "(both retired)"
-msgstr "(les 2 retirés)"
+msgstr "(ces 2 se sont retirés)"
 
 msgid "0 (Everyone)"
 msgstr "0 (Tous 3+)"
@@ -47,6 +47,9 @@ msgstr ">> Installation titre..."
 
 msgid ">> Reading WAD data..."
 msgstr ">> Lecture données WAD..."
+
+msgid "AUTO"
+msgstr "AUTO"
 
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "Toutes les fonctionnalités sont déverrouillées."
@@ -135,6 +138,12 @@ msgstr "Horloge"
 msgid "Close"
 msgstr "Fermer"
 
+msgid "Code Download"
+msgstr "Téléchargement Code"
+
+msgid "Confirm"
+msgstr "Confirmer"
+
 msgid "Console"
 msgstr "Console"
 
@@ -219,6 +228,9 @@ msgstr "Reset Paramètres Jeu"
 msgid "Default Settings"
 msgstr "Reset Paramètres"
 
+msgid "Delete"
+msgstr "Supprimer"
+
 msgid "Developed by"
 msgstr "Développé par"
 
@@ -255,6 +267,9 @@ msgstr "Voulez-vous formater ?"
 msgid "Do you want to retry for 30 secs?"
 msgstr "Réessayer pendant 30 sec. ?"
 
+msgid "Do you want to use the alt dol that is known to be correct?"
+msgstr "Voulez-vous utiliser le DOL Alternatif actuellement connu correct ? "
+
 msgid "Dol Path"
 msgstr "Dossier DOL Alternatif"
 
@@ -269,6 +284,9 @@ msgstr "Télécharger les jaquettes ?"
 
 msgid "Download Discart image?"
 msgstr "Télécharger labels DVD ?"
+
+msgid "Download Now"
+msgstr "Télécharger"
 
 msgid "Download finished"
 msgstr "Téléchargement terminé"
@@ -520,7 +538,7 @@ msgid "No WBFS partition found"
 msgstr "Aucune partition WBFS trouvée"
 
 msgid "No dol file found on disc."
-msgstr "Auncun DOL trouvé sur le DVD."
+msgstr "Aucun DOL trouvé sur le DVD."
 
 msgid "No file missing!"
 msgstr "Aucun fichier manquant !"
@@ -599,6 +617,9 @@ msgstr "Localisation de titles.txt"
 
 msgid "Path of titles.txt changed."
 msgstr "Localisation de titles.txt modifié"
+
+msgid "Pick from a list"
+msgstr "Sélection d'une liste"
 
 msgid "Play Count"
 msgstr "Utilisation"
@@ -823,6 +844,9 @@ msgstr "Mot de passe incorrect"
 
 msgid "Yes"
 msgstr "Oui"
+
+msgid "You are about to delete "
+msgstr "Vous êtes sur le point de supprimer "
 
 msgid "You are choosing to display favorites and you do not have any selected."
 msgstr "Vous choisissez d'afficher des favoris alors que vous n'en avez aucun."

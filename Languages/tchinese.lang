@@ -16,22 +16,22 @@ msgid "(both retired)"
 msgstr ""
 
 msgid "0 (Everyone)"
-msgstr ""
+msgstr "0 (所有人)"
 
 msgid "1 (Child 7+)"
-msgstr ""
+msgstr "1 (孩童 7歲以上)"
 
 msgid "2 (Teen 12+)"
-msgstr ""
+msgstr "(青少年 12歲以上)"
 
 msgid "3 (Mature 16+)"
-msgstr ""
+msgstr "(青年 16歲以上)"
 
 msgid "3D Covers"
-msgstr ""
+msgstr "3D 封面"
 
 msgid "4 (Adults Only 18+)"
-msgstr ""
+msgstr "(成人 18歲以上)"
 
 msgid ">> Finishing installation..."
 msgstr ""
@@ -52,10 +52,10 @@ msgid "AUTO"
 msgstr ""
 
 msgid "All the features of USB Loader GX are unlocked."
-msgstr "USB Loader GX 功能已解鎖."
+msgstr "設定功能已解鎖."
 
 msgid "Alternate DOL"
-msgstr ""
+msgstr "替代 Dol"
 
 msgid "Anti"
 msgstr ""
@@ -64,13 +64,13 @@ msgid "App Language"
 msgstr "語言設定"
 
 msgid "Apr"
-msgstr ""
+msgstr "四月"
 
 msgid "Are you sure?"
 msgstr "確定?"
 
 msgid "Aug"
-msgstr ""
+msgstr "八月"
 
 msgid "AutoPatch"
 msgstr "自動修改"
@@ -91,13 +91,13 @@ msgid "Backgroundmusic"
 msgstr "背景音樂"
 
 msgid "Backgroundmusic Path changed."
-msgstr "背景音樂路徑"
+msgstr "背景音樂路徑已變更"
 
 msgid "Big thanks to:"
-msgstr ""
+msgstr "大感謝"
 
 msgid "Block IOS Reload"
-msgstr ""
+msgstr "阻擋 IOS 重新載入"
 
 msgid "Boot/Standard"
 msgstr "啟動/標準"
@@ -118,10 +118,10 @@ msgid "Cancel"
 msgstr "取消"
 
 msgid "Cheatcodes Path"
-msgstr ""
+msgstr "金手指檔案路徑"
 
 msgid "Cheatcodes Path changed"
-msgstr ""
+msgstr "金手指檔案路徑已變更"
 
 msgid "Cheatfile is blank"
 msgstr ""
@@ -145,13 +145,13 @@ msgid "Confirm"
 msgstr ""
 
 msgid "Console"
-msgstr ""
+msgstr "控制台"
 
 msgid "Console Default"
 msgstr "主機預設值"
 
 msgid "Console Locked"
-msgstr "控制台鎖定"
+msgstr "控制台已鎖定"
 
 msgid "Console should be unlocked to modify it."
 msgstr "需解鎖以開啟設定功能."
@@ -160,7 +160,7 @@ msgid "Continue to install game?"
 msgstr "繼續安裝遊戲?"
 
 msgid "Controllevel"
-msgstr ""
+msgstr "遊戲分級"
 
 msgid "Correct Password"
 msgstr "密碼正確"
@@ -208,7 +208,7 @@ msgid "Credits"
 msgstr "Credits"
 
 msgid "Custom Paths"
-msgstr ""
+msgstr "自定路徑"
 
 msgid "DOL from SD"
 msgstr ""
@@ -217,10 +217,10 @@ msgid "DOL from disc"
 msgstr ""
 
 msgid "Dec"
-msgstr ""
+msgstr "十二月"
 
 msgid "Default"
-msgstr ""
+msgstr "預設值"
 
 msgid "Default Gamesettings"
 msgstr "初始化遊戲設定"
@@ -232,7 +232,7 @@ msgid "Delete"
 msgstr ""
 
 msgid "Developed by"
-msgstr ""
+msgstr "開發者"
 
 msgid "Disc Default"
 msgstr "光碟預設"
@@ -259,7 +259,7 @@ msgid "Do you really want to delete:"
 msgstr "確定刪除:"
 
 msgid "Do you want to change language?"
-msgstr ""
+msgstr "變更語言?"
 
 msgid "Do you want to format:"
 msgstr "是否格式化:"
@@ -271,16 +271,16 @@ msgid "Do you want to use the alt dol that is known to be correct?"
 msgstr ""
 
 msgid "Dol Path"
-msgstr ""
+msgstr "Dol 路徑"
 
 msgid "Dolpath Changed"
-msgstr ""
+msgstr "Dol 路徑已變更"
 
 msgid "Dolpath change"
-msgstr ""
+msgstr "變更 Dol 路徑"
 
 msgid "Download Boxart image?"
-msgstr "下載外盒封面圖片?"
+msgstr "下載外盒圖片?"
 
 msgid "Download Discart image?"
 msgstr ""
@@ -316,10 +316,10 @@ msgid "Error !"
 msgstr "錯誤 !"
 
 msgid "Error 002 fix"
-msgstr ""
+msgstr "002 錯誤修正"
 
 msgid "Error reading Disc"
-msgstr "讀取光碟錯誤"
+msgstr "光碟讀取錯誤"
 
 msgid "Error..."
 msgstr ""
@@ -331,7 +331,7 @@ msgid "Failed formating"
 msgstr "格式化失敗"
 
 msgid "Feb"
-msgstr ""
+msgstr "二月"
 
 msgid "File not found."
 msgstr "找不到該檔案"
@@ -364,16 +364,16 @@ msgid "GCT File created"
 msgstr ""
 
 msgid "GUI Settings"
-msgstr ""
+msgstr "介面設定"
 
 msgid "Game ID"
 msgstr "遊戲代碼"
 
 msgid "Game Language"
-msgstr "語言"
+msgstr "遊戲語言"
 
 msgid "Game Load"
-msgstr ""
+msgstr "遊戲載入設定"
 
 msgid "Game Region"
 msgstr "遊戲區碼"
@@ -397,10 +397,10 @@ msgid "Hour"
 msgstr "小時制"
 
 msgid "How do you want to update?"
-msgstr "是否執行更新?"
+msgstr "更新項目?"
 
 msgid "How to Shutdown?"
-msgstr "關機選項�?"
+msgstr "關機選項?"
 
 msgid "Initializing Network"
 msgstr "正在啟動網路"
@@ -442,16 +442,16 @@ msgid "Italian"
 msgstr "義大利文"
 
 msgid "Jan"
-msgstr ""
+msgstr "一月"
 
 msgid "Japanese"
 msgstr "日文"
 
 msgid "July"
-msgstr ""
+msgstr "七月"
 
 msgid "June"
-msgstr ""
+msgstr "六月"
 
 msgid "Keyboard"
 msgstr "鍵盤"
@@ -460,10 +460,10 @@ msgid "Korean"
 msgstr "韓文"
 
 msgid "Language change:"
-msgstr ""
+msgstr "變更語言為:"
 
 msgid "Languagepath changed."
-msgstr ""
+msgstr "語言路徑已變更"
 
 msgid "Leaving so you can restart..."
 msgstr ""
@@ -487,13 +487,13 @@ msgid "Lock Console"
 msgstr "鎖定控制台"
 
 msgid "Locked"
-msgstr ""
+msgstr "已鎖定"
 
 msgid "Mar"
-msgstr ""
+msgstr "三月"
 
 msgid "May"
-msgstr ""
+msgstr "五月"
 
 msgid "Missing files"
 msgstr "缺少的檔案"
@@ -565,7 +565,7 @@ msgid "Not supported format!"
 msgstr "未支援的格式"
 
 msgid "Nov"
-msgstr ""
+msgstr "十一月"
 
 msgid "OFF"
 msgstr "關閉"
@@ -577,7 +577,7 @@ msgid "ON"
 msgstr "開啟"
 
 msgid "Oct"
-msgstr ""
+msgstr "十月"
 
 msgid "Official Site"
 msgstr "官方網址"
@@ -592,7 +592,7 @@ msgid "Parental Control"
 msgstr "親子控制"
 
 msgid "Parental control"
-msgstr ""
+msgstr "親子控制"
 
 msgid "Partition"
 msgstr "磁區"
@@ -607,7 +607,7 @@ msgid "Password has been changed"
 msgstr "密碼已被變更"
 
 msgid "Patch Country Strings"
-msgstr "修改國別設定"
+msgstr "修改遊戲區域設定"
 
 msgid "Path of titles.txt change"
 msgstr "變更 Title 檔案路徑"
@@ -619,7 +619,7 @@ msgid "Pick from a list"
 msgstr ""
 
 msgid "Play Count"
-msgstr ""
+msgstr "執行次數"
 
 msgid "Power off the Wii"
 msgstr "關閉 Wii 主機"
@@ -631,7 +631,7 @@ msgid "Prompts Buttons"
 msgstr "顯示校正"
 
 msgid "Published by"
-msgstr ""
+msgstr "發布者"
 
 msgid "Quick Boot"
 msgstr "快速啟動"
@@ -640,7 +640,7 @@ msgid "Reading WAD data... Ok!"
 msgstr ""
 
 msgid "Released"
-msgstr ""
+msgstr "發表"
 
 msgid "Reload SD"
 msgstr "重新載入SD卡"
@@ -649,7 +649,7 @@ msgid "Rename Game on WBFS"
 msgstr "變更 WBFS 上的遊戲名稱"
 
 msgid "Reset Playcounter"
-msgstr ""
+msgstr "重置執行次數"
 
 msgid "Restart"
 msgstr "重新啟動"
@@ -661,7 +661,7 @@ msgid "Return"
 msgstr "返回"
 
 msgid "Return to Wii Menu"
-msgstr ""
+msgstr "返回 Wii 系統選單"
 
 msgid "Right"
 msgstr "右"
@@ -676,7 +676,7 @@ msgid "SD selected"
 msgstr ""
 
 msgid "SFX Volume"
-msgstr ""
+msgstr "音效音量"
 
 msgid "Save"
 msgstr "儲存"
@@ -685,10 +685,10 @@ msgid "Save Failed"
 msgstr "儲存失敗"
 
 msgid "Screensaver"
-msgstr ""
+msgstr "螢幕保護"
 
 msgid "Sept"
-msgstr ""
+msgstr "九月"
 
 msgid "Set as backgroundmusic?"
 msgstr "設定背景音樂"
@@ -706,7 +706,7 @@ msgid "Shutdown to Idle"
 msgstr "進入待機狀態"
 
 msgid "Sound"
-msgstr ""
+msgstr "音效設定"
 
 msgid "Spanish"
 msgstr "西班牙文"
@@ -761,7 +761,7 @@ msgid "Time left:"
 msgstr "剩餘時間:"
 
 msgid "Titles from XML"
-msgstr ""
+msgstr "XML遊戲名稱"
 
 msgid "Tooltips"
 msgstr "工具提示"
@@ -770,7 +770,7 @@ msgid "USB Device not found"
 msgstr "找不到 USB 裝置"
 
 msgid "USB Loader GX is protected"
-msgstr "USB Loader GX 被鎖定"
+msgstr "USB Loader GX 已鎖定"
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
@@ -780,25 +780,25 @@ msgid "Uninstall"
 msgstr "移除"
 
 msgid "Unlock console to use this option."
-msgstr ""
+msgstr "解鎖以進行設定"
 
 msgid "Unlocked"
-msgstr ""
+msgstr "已解鎖"
 
 msgid "Update"
-msgstr ""
+msgstr "更新"
 
 msgid "Update All"
-msgstr "升級所有檔案"
+msgstr "更新所有檔案"
 
 msgid "Update DOL"
-msgstr "僅升級 dol"
+msgstr "僅更新 dol"
 
 msgid "Update failed"
 msgstr "更新失敗"
 
 msgid "Update to"
-msgstr "升級至"
+msgstr "更新至"
 
 msgid "Updatepath"
 msgstr "更新路徑"
@@ -822,7 +822,7 @@ msgid "Waiting..."
 msgstr "等待中..."
 
 msgid "WiFi Features"
-msgstr ""
+msgstr "WiFi 功能"
 
 msgid "Widescreen Fix"
 msgstr "寬螢幕校正"
@@ -882,13 +882,13 @@ msgid "for WiiTDB and hosting covers / disc images"
 msgstr ""
 
 msgid "for diverse patches"
-msgstr ""
+msgstr "的多種修正"
 
 msgid "for his awesome tool"
-msgstr ""
+msgstr "的優秀工具"
 
 msgid "for hosting the update files"
-msgstr ""
+msgstr "設置更新檔案存放空間"
 
 msgid "for the USB Loader source"
 msgstr "與釋出的原始碼"
@@ -921,7 +921,7 @@ msgstr "Title檔案路徑"
 #~ msgstr "新增至我的最愛"
 
 #~ msgid "Alphabetical"
-#~ msgstr "全部"
+#~ msgstr "依字母排序"
 
 #~ msgid "Coverpath change"
 #~ msgstr "變更封面路徑"

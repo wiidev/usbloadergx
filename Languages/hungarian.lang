@@ -1,0 +1,772 @@
+# USB Loader GX language source file.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: USB Loader GX\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-07-01 00:40-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Tusk\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "0 (Everyone)"
+msgstr "0 (Mindenkinek)"
+
+msgid "1 (Child 7+)"
+msgstr "1 (Gyermekeknek 12+)"
+
+msgid "2 (Teen 12+)"
+msgstr "2 (Tinédzserek 14+)"
+
+msgid "3 (Mature 16+)"
+msgstr "3 (Kamaszok 16+)"
+
+msgid "3D Covers"
+msgstr "3D Borítók"
+
+msgid "4 (Adults Only 18+)"
+msgstr "4 (Felnõtteknek 18+)"
+
+msgid "All the features of USB Loader GX are unlocked."
+msgstr "Az USB Loader GX minden funkciója elérhetõ."
+
+msgid "Alternate DOL"
+msgstr "Alternatív DOL"
+
+msgid "Anti"
+msgstr "Anti"
+
+msgid "App Language"
+msgstr "Program Nyelve"
+
+msgid "Apr"
+msgstr "Ápr"
+
+msgid "Are you sure?"
+msgstr "Biztos vagy benne?"
+
+msgid "Aug"
+msgstr "Aug"
+
+msgid "AutoPatch"
+msgstr "AutoPatch"
+
+msgid "Back"
+msgstr "Vissza"
+
+msgid "Back to HBC or Wii Menu"
+msgstr "Visszatérés a HBC-be vagy Wii Menûbe"
+
+msgid "Back to Loader"
+msgstr "Vissza a Loaderbe"
+
+msgid "Back to Wii Menu"
+msgstr "Visszatérés a Wii Menûbe"
+
+msgid "Backgroundmusic"
+msgstr "Háttérzene"
+
+msgid "Backgroundmusic Path changed."
+msgstr "Háttérzene útvonala megváltozott."
+
+msgid "Big thanks to:"
+msgstr "Köszönet:"
+
+msgid "Block IOS Reload"
+msgstr "IOS Újratöltés blokkolása"
+
+msgid "Boot/Standard"
+msgstr "Boot/Alapértelmezett"
+
+msgid "Both"
+msgstr "Mindkettõ"
+
+msgid "Can't be formated"
+msgstr "Nem Formázható"
+
+msgid "Can't create directory"
+msgstr "Mappa nem hozható létre"
+
+msgid "Can't delete:"
+msgstr "Nem törölhetõ"
+
+msgid "Cancel"
+msgstr "Mégse"
+
+msgid "Cheatcodes Path"
+msgstr "Kódok útvonala"
+
+msgid "Cheatcodes Path changed"
+msgstr "Kódok útvonala megváltozott"
+
+msgid "Cheatfile is blank"
+msgstr "A Kódokat tartalmazó fájl üres"
+
+msgid "Checking for Updates"
+msgstr "Frissitések Keresése"
+
+msgid "Click to Download Covers"
+msgstr "Kattints, hogy letöltsd a borítókat"
+
+msgid "Clock"
+msgstr "Óra"
+
+msgid "Close"
+msgstr "Bezár"
+
+msgid "Console"
+msgstr "Konzol"
+
+msgid "Console Default"
+msgstr "Konzol Alapértelmezett"
+
+msgid "Console Locked"
+msgstr "Konzol Zárolva"
+
+msgid "Console should be unlocked to modify it."
+msgstr "A Konzol zárolva ezért nem változtatható meg."
+
+msgid "Continue to install game?"
+msgstr "Játék telepítésének folytatása?"
+
+msgid "Controllevel"
+msgstr "Kontrolszint"
+
+msgid "Correct Password"
+msgstr "Helyes Jelszó"
+
+msgid "Could not create GCT file"
+msgstr "Nem hozható létre GCT fájl"
+
+msgid "Could not initialize DIP module!"
+msgstr "DIP modul nem tölthetõ be!"
+
+msgid "Could not initialize network!"
+msgstr "Kapcsolat nem hozható létre!"
+
+msgid "Could not open Disc"
+msgstr "Lemez nem betölthetõ"
+
+msgid "Cover Download"
+msgstr "Boritó Letöltés"
+
+msgid "Cover Path"
+msgstr "Boritó Útvonala"
+
+msgid "Coverpath Changed"
+msgstr "Boritó Útvonala megváltozott"
+
+msgid "Create"
+msgstr "Létrehozás"
+
+msgid "Credits"
+msgstr "Készítõk"
+
+msgid "Custom Paths"
+msgstr "Saját Útvonal"
+
+msgid "Dec"
+msgstr "Dec"
+
+msgid "Default"
+msgstr "Alapértelmezett"
+
+msgid "Default Gamesettings"
+msgstr "Alapértelmezett beállítások"
+
+msgid "Default Settings"
+msgstr "Alapértelmezett beállítások"
+
+msgid "Developed by"
+msgstr "Készítette"
+
+msgid "Disc Default"
+msgstr "Lemez Alapértelmezettje"
+
+msgid "Disc Images"
+msgstr "Lemez Képek"
+
+msgid "Discimage Path"
+msgstr "Lemezképek Útvonala"
+
+msgid "Discpath Changed"
+msgstr "Lemezképek Útvonala megváltoztatva"
+
+msgid "Discpath change"
+msgstr "Lemezképek útvonalának megváltoztatása"
+
+msgid "DiskFlip"
+msgstr "Lemezforgatás"
+
+msgid "Display"
+msgstr "Kijelzõ"
+
+msgid "Do you really want to delete:"
+msgstr "Biztosan ki akarod törölni?:"
+
+msgid "Do you want to change language?"
+msgstr "Megakarod változtatni a nyevet?"
+
+msgid "Do you want to format:"
+msgstr "Leakarod formázni?:"
+
+msgid "Do you want to retry for 30 secs?"
+msgstr "30 másodpercig szeretnéd még tovább próbálni?"
+
+msgid "Dol Path"
+msgstr "Dol útvonal"
+
+msgid "Dolpath Changed"
+msgstr "Dol útvonal megváltozott"
+
+msgid "Dolpath change"
+msgstr "Dol útvonal megváltoztatása"
+
+msgid "Download Boxart image?"
+msgstr "Borítóképek letöltése?"
+
+msgid "Download finished"
+msgstr "Letöltés kész"
+
+msgid "Downloading file"
+msgstr "Fájl Letöltése"
+
+msgid "Dutch"
+msgstr "Holland"
+
+msgid "English"
+msgstr "Angol"
+
+msgid "Error"
+msgstr "Hiba"
+
+msgid "Error !"
+msgstr "Hiba !"
+
+msgid "Error 002 fix"
+msgstr "002 Hiba javítása"
+
+msgid "Error reading Disc"
+msgstr "Lemezolvasási hiba"
+
+msgid "Exit USB Loader GX?"
+msgstr "Kilépsz az USB Loader GX-bõl?"
+
+msgid "Failed formating"
+msgstr "Formázás sikertelen"
+
+msgid "Feb"
+msgstr "Feb"
+
+msgid "File not found."
+msgstr "Fájl nem található"
+
+msgid "Flip-X"
+msgstr "Flip-X"
+
+msgid "Force"
+msgstr "Erõltetés"
+
+msgid "Format"
+msgstr "Formázás"
+
+msgid "Formatting, please wait..."
+msgstr "Formatálás folyamatban, kérlek várj..."
+
+msgid "Free Space"
+msgstr "Szabad Hely"
+
+msgid "French"
+msgstr "Francia"
+
+msgid "Full Shutdown"
+msgstr "Teljes Kikapcsolás"
+
+msgid "GCT File created"
+msgstr "GCT Fájl létrehozva"
+
+msgid "GUI Settings"
+msgstr "GUI Beállítások"
+
+msgid "Game ID"
+msgstr "Játék ID"
+
+msgid "Game Language"
+msgstr "Játéknyelv"
+
+msgid "Game Load"
+msgstr "Játék Betöltés"
+
+msgid "Game Region"
+msgstr "Játék Régió"
+
+msgid "Game Size"
+msgstr "Játék Méret"
+
+msgid "Game is already installed:"
+msgstr "A Játék már fel van telepítve:"
+
+msgid "Games"
+msgstr "Játékok"
+
+msgid "German"
+msgstr "Német"
+
+msgid "HOME Menu"
+msgstr "HOME Menû"
+
+msgid "Hour"
+msgstr "Óra"
+
+msgid "How do you want to update?"
+msgstr "Hogyan szeretnél frissíteni"
+
+msgid "How to Shutdown?"
+msgstr "Hogyan kapcsoljon ki?"
+
+msgid "Initializing Network"
+msgstr "Kapcsolat Létrehozása"
+
+msgid "Insert Disk"
+msgstr "Helyezz be egy lemezt"
+
+msgid "Insert an SD-Card to download images."
+msgstr "Helyezz be egy SD Kártyát, hogy letöltsd a képeket."
+
+msgid "Insert an SD-Card to save."
+msgstr "Helyezz be egy SD Kártyát, hogy ments,"
+
+msgid "Insert an SD-Card to use this option."
+msgstr "Helyezz be egy SD Kártyát, hogy használhasd ezt a lehetõséget."
+
+msgid "Install Error!"
+msgstr "Telepítési Hiba!"
+
+msgid "Install a game"
+msgstr "Telepíts egy játékot"
+
+msgid "Installing game:"
+msgstr "Játék telepítése"
+
+msgid "Italian"
+msgstr "Olasz"
+
+msgid "Jan"
+msgstr ""
+
+msgid "Japanese"
+msgstr "Japán"
+
+msgid "July"
+msgstr "Júl"
+
+msgid "June"
+msgstr "Jún"
+
+msgid "Keyboard"
+msgstr "Billenyûzet"
+
+msgid "Korean"
+msgstr "Koreai"
+
+msgid "Language change:"
+msgstr "Nyelv választás:"
+
+msgid "Languagepath changed."
+msgstr "Nyelvek útvonala megváltozott."
+
+msgid "Left"
+msgstr "Balra"
+
+msgid "Like SysMenu"
+msgstr "Mint a Rendszermenû"
+
+msgid "Loading standard language."
+msgstr "Alapnyelv betõltése"
+
+msgid "Loading standard music."
+msgstr "Alapzene betõltése"
+
+msgid "Lock Console"
+msgstr "Konzol Lezárása"
+
+msgid "Locked"
+msgstr "Lezárva"
+
+msgid "Mar"
+msgstr "Már"
+
+msgid "May"
+msgstr "Máj"
+
+msgid "Missing files"
+msgstr "Hiányzó Fájl"
+
+msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
+msgstr "Úgy néz ki a kép felbontása nem osztható 4-el. Mehet a kukába."
+
+msgid "Music Volume"
+msgstr "Zene Hangereje"
+
+msgid "Neither"
+msgstr "Egyik sem"
+
+msgid "Network init error"
+msgstr "Hálozat létrehozásában hiba történt"
+
+msgid "Next"
+msgstr "Következõ"
+
+msgid "No"
+msgstr "Nem"
+
+msgid "No Cheatfile found"
+msgstr "Kód nem található"
+
+msgid "No SD-Card inserted!"
+msgstr "Nincs SD kártya behelyezve!"
+
+msgid "No USB Device"
+msgstr "Nincs USB meghajtó"
+
+msgid "No USB Device found."
+msgstr "Nincs USB meghajtó csatlakoztatva."
+
+msgid "No WBFS partition found"
+msgstr "Nincs WBFS Partició"
+
+msgid "No file missing!"
+msgstr "Egy fájl sem hiányzik!"
+
+msgid "No new updates."
+msgstr "Nem elérhetõ frissítés."
+
+msgid "No partitions found"
+msgstr "Nem találtam particiót"
+
+msgid "Normal"
+msgstr "Normális"
+
+msgid "Normal Covers"
+msgstr "Sima Borítók"
+
+msgid "Not a Wii Disc"
+msgstr "Nem Wii lemez"
+
+msgid "Not enough free space!"
+msgstr "Nincs elég szabad hely"
+
+msgid "Not supported format!"
+msgstr "Nem támogatott formátum"
+
+msgid "Nov"
+msgstr "Nov"
+
+msgid "OFF"
+msgstr "KI"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "ON"
+msgstr "BE"
+
+msgid "Oct"
+msgstr "Ókt"
+
+msgid "Official Site"
+msgstr "Hivatalos Oldal"
+
+msgid "Ok"
+msgstr "Oké"
+
+msgid "Only for Install"
+msgstr "Csak telepítéshez"
+
+msgid "Parental Control"
+msgstr "Szülõi Felügyelet"
+
+msgid "Parental control"
+msgstr "Szülõi felügyelet"
+
+msgid "Partition"
+msgstr "Partició"
+
+msgid "Password"
+msgstr "Jelszó"
+
+msgid "Password Changed"
+msgstr "Jelszó Megváltozott"
+
+msgid "Password has been changed"
+msgstr "A Jelszó megváltozott"
+
+msgid "Patch Country Strings"
+msgstr "Ország Szövegek Patchelése"
+
+msgid "Path of titles.txt change"
+msgstr "titles.txt útvonalának megváltoztatása"
+
+msgid "Path of titles.txt changed."
+msgstr "titles.txt útvonala megváltozott"
+
+msgid "Play Count"
+msgstr "Elindítva"
+
+msgid "Power off the Wii"
+msgstr "Wii kikapcsolása"
+
+msgid "Prev"
+msgstr "Elözõ"
+
+msgid "Prompts Buttons"
+msgstr "Gyors Gombok"
+
+msgid "Published by"
+msgstr "Kiadta"
+
+msgid "Quick Boot"
+msgstr "Gyors Boot"
+
+msgid "Released"
+msgstr "Kiadva"
+
+msgid "Reload SD"
+msgstr "SD Újratöltése"
+
+msgid "Rename Game on WBFS"
+msgstr "WBFS játék átnevezése"
+
+msgid "Reset Playcounter"
+msgstr "Elindítások Nullázása"
+
+msgid "Restart"
+msgstr "Újraindítás"
+
+msgid "Újraindítás..."
+msgstr ""
+
+msgid "Return"
+msgstr "Vissza"
+
+msgid "Return to Wii Menu"
+msgstr "Vissza a Wii Menûbe"
+
+msgid "Right"
+msgstr "Jobb"
+
+msgid "Rumble"
+msgstr "Rezgés"
+
+msgid "SChinese"
+msgstr "SKínai"
+
+msgid "SFX Volume"
+msgstr "SFX Hangerõ"
+
+msgid "Save"
+msgstr "Mentés"
+
+msgid "Save Failed"
+msgstr "Mentési hiba"
+
+msgid "Screensaver"
+msgstr "Képernyõkimélõ"
+
+msgid "Sept"
+msgstr "Szep"
+
+msgid "Set as backgroundmusic?"
+msgstr "Beállítod háttérzenének?"
+
+msgid "Settings"
+msgstr "Beállítások"
+
+msgid "Shutdown System"
+msgstr "Rendszer Leállítása"
+
+msgid "Shutdown to Idle"
+msgstr "Rendszer Leállításának késleltetése"
+
+msgid "Sound"
+msgstr "Hang"
+
+msgid "Spanish"
+msgstr "Spanyol"
+
+msgid "Special thanks to:"
+msgstr "Külön Köszönet"
+
+msgid "Standard"
+msgstr "Alap"
+
+msgid "Success:"
+msgstr "Sikeres:"
+
+msgid "Successfully Saved"
+msgstr "Sikeresen Mentve"
+
+msgid "Successfully Updated"
+msgstr "Sikeresen Frissítve"
+
+msgid "Successfully deleted:"
+msgstr "Sikeresen törölve:"
+
+msgid "Successfully installed:"
+msgstr "Sikeresen telepítve"
+
+msgid "System Default"
+msgstr "Rendszer Alapértelmezett"
+
+msgid "TChinese"
+msgstr "TKínai"
+
+msgid "TXTCheatcodes Path"
+msgstr "TXTKódok Útvonala"
+
+msgid "ThemePath"
+msgstr "Témák Útvonala"
+
+msgid "Themepath Changed"
+msgstr "Témák Útvonala megváltozott"
+
+msgid "Themepath change"
+msgstr "Témák Útvonalának megváltoztatása"
+
+msgid "Time left:"
+msgstr "Hátralévõ Idõ"
+
+msgid "Titles from XML"
+msgstr "Címek XML fájlból"
+
+msgid "Tooltips"
+msgstr "Súgók"
+
+msgid "USB Device not found"
+msgstr "USB Meghajtó nem található"
+
+msgid "USB Loader GX is protected"
+msgstr "USB Loader GX levédve"
+
+msgid "Uninstall"
+msgstr "Törlés"
+
+msgid "Unlock console to use this option."
+msgstr "Zárolva a program, ezt nem használhatod."
+
+msgid "Unlocked"
+msgstr "Feloldva"
+
+msgid "Update"
+msgstr "Frissítés"
+
+msgid "Update All"
+msgstr "Minden Frissítése"
+
+msgid "Update DOL"
+msgstr "DOL Frissítése"
+
+msgid "Update failed"
+msgstr "Frissítési hiba"
+
+msgid "Update to"
+msgstr "Frissítés ebbe: "
+
+msgid "Updatepath"
+msgstr "Frissítés útvonala"
+
+msgid "Updatepath changed."
+msgstr "Frissítés útvonala megváltozott."
+
+msgid "Updating"
+msgstr "Frissítés"
+
+msgid "VIDTV Patch"
+msgstr "VIDTV Patch"
+
+msgid "Video Mode"
+msgstr "Videó Mód"
+
+msgid "Waiting for USB Device"
+msgstr "Várakozás az USB Meghajtóra"
+
+msgid "Waiting..."
+msgstr "Várakozás..."
+
+msgid "WiFi Features"
+msgstr "WiFi Sajátosságok"
+
+msgid "Widescreen Fix"
+msgstr "Szélesképernyõ Fix"
+
+msgid "Wii Menu"
+msgstr "Wii Menû"
+
+msgid "Wiilight"
+msgstr "Wiifény"
+
+msgid "Wrong Password"
+msgstr "Hibás Jelszó"
+
+msgid "Yes"
+msgstr "Igen"
+
+msgid "You have attempted to load a bad image"
+msgstr "Rossz képfájl próbáltál betõlteni"
+
+msgid "You need to format a partition"
+msgstr "Formáznod kell a particiót"
+
+msgid "available"
+msgstr "elérhetõ"
+
+msgid "contains over 255 lines of code.  It will produce unexpected results."
+msgstr "több mint 255 sorból áll a kód. Kiszámíthatatlan eredmények várhatók."
+
+msgid "does not exist!  Loading game without cheats."
+msgstr "nem létezik! Játék betõltése kódok nélkül."
+
+msgid "does not exist!  You Messed something up, Idiot."
+msgstr "nem létezik! Valamit elcsesztél, te idióta."
+
+msgid "file(s) left"
+msgstr "hátralévõ fájl"
+
+msgid "files not found on the server!"
+msgstr "fájlok nem találhatók a szerveren"
+
+msgid "for"
+msgstr " "
+
+msgid "for diverse patches"
+msgstr "többféle patchéért"
+
+msgid "for his awesome tool"
+msgstr "a tökéletes eszközéért"
+
+msgid "for hosting the update files"
+msgstr "hogy tárolja a frissítési fájlokat"
+
+msgid "for the USB Loader source"
+msgstr "az USB Loader forráskódjáért"
+
+msgid "formatted!"
+msgstr "Formázva!"
+
+msgid "free"
+msgstr "szabad"
+
+msgid "not set"
+msgstr "nem beállított"
+
+msgid "of"
+msgstr " "
+
+msgid "seconds left"
+msgstr "hátralévõ másodperc"
+
+msgid "titles.txt Path"
+msgstr "titles.txt Útvonala"

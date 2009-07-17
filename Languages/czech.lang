@@ -1,0 +1,769 @@
+﻿# USB Loader GX language source file.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: USB Loader GX\n"
+"Report-Msgid-Bugs-To: David Jelinek (djelinek@hotmail.com) \n"
+"POT-Creation-Date: 2009-06-29 17:30-0400\n"
+"PO-Revision-Date: 03.07.2009 \n"
+"Last-Translator: David Jelinek (djelinek@hotmail.com) \n"
+"Language-Team: Last version on http://startgolf.tym.cz/czech.lang \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "0 (Everyone)"
+msgstr "0 (Každý)"
+
+msgid "1 (Child 7+)"
+msgstr "1 (Díte 7+)"
+
+msgid "2 (Teen 12+)"
+msgstr "2 (Mladistvý 12+)"
+
+msgid "3 (Dospívající 16+)"
+msgstr ""
+
+msgid "3D Covers"
+msgstr "3D Obaly"
+
+msgid "4 (Adults Only 18+)"
+msgstr "4 (Pouze dospelí 18+)"
+
+msgid "All the features of USB Loader GX are unlocked."
+msgstr "Všechny možnosti USB Loader GX jsou odemceny"
+
+msgid "Alternate DOL"
+msgstr "Náhradní DOL"
+
+msgid "Anti"
+msgstr ""
+
+msgid "App Language"
+msgstr "Jazyk aplikace"
+
+msgid "Apr"
+msgstr "Dub"
+
+msgid "Are you sure?"
+msgstr "Jste si jisti?"
+
+msgid "Aug"
+msgstr "Srp"
+
+msgid "AutoPatch"
+msgstr ""
+
+msgid "Back"
+msgstr "Zpet"
+
+msgid "Back to HBC or Wii Menu"
+msgstr "Zpet do HBC nebo Wii nabídky"
+
+msgid "Back to Loader"
+msgstr "Zpet do spouštece"
+
+msgid "Back to Wii Menu"
+msgstr "Zpet do Wii nabídky"
+
+msgid "Backgroundmusic"
+msgstr "Hudba na pozadí"
+
+msgid "Backgroundmusic Path changed."
+msgstr "Cesta pro hudbu na pozadí zmenena"
+
+msgid "Big thanks to:"
+msgstr "Velké podekování pro:"
+
+msgid "Block IOS Reload"
+msgstr "Blokovat opetovné zavedení IOS"
+
+msgid "Boot/Standard"
+msgstr ""
+
+msgid "Both"
+msgstr "Oboje"
+
+msgid "Can't be formated"
+msgstr "Nelze naformátovat"
+
+msgid "Can't create directory"
+msgstr "Nelze vytvorit adresár"
+
+msgid "Can't delete:"
+msgstr "Nelze smazat:"
+
+msgid "Cancel"
+msgstr "Zrušit"
+
+msgid "Cheatcodes Path"
+msgstr "Cesta pro cheat kódy"
+
+msgid "Cheatcodes Path changed"
+msgstr "Cesta pro cheat kódy zmenena"
+
+msgid "Cheatfile is blank"
+msgstr "Soubor s cheaty je prázdný"
+
+msgid "Checking for Updates"
+msgstr "Zjištuji dostupné aktualiazce"
+
+msgid "Click to Download Covers"
+msgstr "Kliknete pro stažení obalu"
+
+msgid "Clock"
+msgstr "Hodiny"
+
+msgid "Close"
+msgstr "zavrít"
+
+msgid "Console"
+msgstr "Konzole"
+
+msgid "Console Default"
+msgstr "Puvodní nastavení konzole"
+
+msgid "Console Locked"
+msgstr "Konzole uzamcena"
+
+msgid "Console should be unlocked to modify it."
+msgstr "Konzole musí být odemcena pro tuto zmenu"
+
+msgid "Continue to install game?"
+msgstr "Pokracovat pri instalaci hry"
+
+msgid "Controllevel"
+msgstr "Úroven rízení"
+
+msgid "Correct Password"
+msgstr "Správné heslo"
+
+msgid "Could not create GCT file"
+msgstr "Nelze vytvorit GCT soubor"
+
+msgid "Could not initialize DIP module!"
+msgstr "Nelze inicializovat DIP modul!"
+
+msgid "Could not initialize network!"
+msgstr "Nelze inicializovat sítové pripojení"
+
+msgid "Could not open Disc"
+msgstr "Nelze otevrít disk"
+
+msgid "Cover Download"
+msgstr "Stažení obalu"
+
+msgid "Cover Path"
+msgstr "Cesta k obalum"
+
+msgid "Coverpath Changed"
+msgstr "Cesta k obalum zmenena"
+
+msgid "Create"
+msgstr "Vytvorit"
+
+msgid "Credits"
+msgstr "Zásluhy"
+
+msgid "Custom Paths"
+msgstr "Vlastní cesty"
+
+msgid "Dec"
+msgstr "List"
+
+msgid "Default"
+msgstr "Puvodní"
+
+msgid "Default Gamesettings"
+msgstr "Puvodní nastavení her"
+
+msgid "Default Settings"
+msgstr "Puvodní nastavení"
+
+msgid "Developed by"
+msgstr "Vyvinul"
+
+msgid "Disc Default"
+msgstr ""
+
+msgid "Disc Images"
+msgstr "Potisky disku"
+
+msgid "Discimage Path"
+msgstr "Cesta k obrazum disku"
+
+msgid "Discpath Changed"
+msgstr "Cesta k diskum zmenena"
+
+msgid "Discpath change"
+msgstr "Zmena cesty k diskum"
+
+msgid "DiskFlip"
+msgstr ""
+
+msgid "Display"
+msgstr "Zobrazení"
+
+msgid "Do you really want to delete:"
+msgstr "Opravdu smazat:"
+
+msgid "Do you want to change language?"
+msgstr "Prejete si zmenit jazyk?"
+
+msgid "Do you want to format:"
+msgstr "Prejete si naformátovat"
+
+msgid "Do you want to retry for 30 secs?"
+msgstr "Chcete to zkusit znovu za 30 sekund?"
+
+msgid "Dol Path"
+msgstr "Cesta k DOL"
+
+msgid "Dolpath Changed"
+msgstr "Cesta k DOL zmenena"
+
+msgid "Dolpath change"
+msgstr "Zmena cesty k DOL"
+
+msgid "Download Boxart image?"
+msgstr "Stáhnout obal krabicky?"
+
+msgid "Download finished"
+msgstr "Stažení dokoncno"
+
+msgid "Downloading file"
+msgstr "Stahuji soubor"
+
+msgid "Dutch"
+msgstr "Dánsky"
+
+msgid "English"
+msgstr "Anglicky"
+
+msgid "Error"
+msgstr "Chyba"
+
+msgid "Error !"
+msgstr "Chyba !"
+
+msgid "Error 002 fix"
+msgstr "Oprava chyby 002"
+
+msgid "Error reading Disc"
+msgstr "Nelze císt disk"
+
+msgid "Exit USB Loader GX?"
+msgstr "Ukoncit USB Loader GX?"
+
+msgid "Failed formating"
+msgstr "Neúspešné formátování"
+
+msgid "Feb"
+msgstr "Ún"
+
+msgid "File not found."
+msgstr "Soubor nenalezen"
+
+msgid "Flip-X"
+msgstr ""
+
+msgid "Force"
+msgstr "Síla"
+
+msgid "Format"
+msgstr "Formát"
+
+msgid "Formatting, please wait..."
+msgstr "Formátuji, cekejte prosím ..."
+
+msgid "Free Space"
+msgstr "Volné místo"
+
+msgid "French"
+msgstr "Francouzky"
+
+msgid "Full Shutdown"
+msgstr "Úplné vypnutí"
+
+msgid "GCT File created"
+msgstr "Soubor GCT vytvoren"
+
+msgid "GUI Settings"
+msgstr "Nastavení GUI"
+
+msgid "Game ID"
+msgstr "ID hry"
+
+msgid "Game Language"
+msgstr "Jazyk hry"
+
+msgid "Game Load"
+msgstr "Nahrání hry"
+
+msgid "Game Region"
+msgstr "Region hry"
+
+msgid "Game Size"
+msgstr "Velikost hry"
+
+msgid "Game is already installed:"
+msgstr "Hra je již nainstalována:"
+
+msgid "Games"
+msgstr "Hry"
+
+msgid "German"
+msgstr "Nemecky"
+
+msgid "HOME Menu"
+msgstr "Hlavní menu"
+
+msgid "Hour"
+msgstr "Hodina"
+
+msgid "How do you want to update?"
+msgstr "Jak si prejete provést aktualizaci?"
+
+msgid "How to Shutdown?"
+msgstr "Jakým zpusobem ukoncit?"
+
+msgid "Initializing Network"
+msgstr "Inicializuji sítové pripojení"
+
+msgid "Insert Disk"
+msgstr "Vložte disk"
+
+msgid "Insert an SD-Card to download images."
+msgstr "Vložte SD kartu pro stažení obrazu disku."
+
+msgid "Insert an SD-Card to save."
+msgstr "Vložte SD kartu pro uložení."
+
+msgid "Insert an SD-Card to use this option."
+msgstr "Vložte SD kartu pro tuto možnost"
+
+msgid "Install Error!"
+msgstr "Chyba pri instalaci"
+
+msgid "Install a game"
+msgstr "Nainstalovat hru"
+
+msgid "Installing game:"
+msgstr "Instalace hry:"
+
+msgid "Italian"
+msgstr "Italsky"
+
+msgid "Jan"
+msgstr "Led"
+
+msgid "Japanese"
+msgstr "Japonsky"
+
+msgid "July"
+msgstr "Červenec"
+
+msgid "June"
+msgstr "Červen"
+
+msgid "Keyboard"
+msgstr "Klávesnice"
+
+msgid "Korean"
+msgstr "Korejsky"
+
+msgid "Language change:"
+msgstr "Zmena jazyka:"
+
+msgid "Languagepath changed."
+msgstr "Cesta k jazykum zmenena"
+
+msgid "Left"
+msgstr "Vlevo"
+
+msgid "Like SysMenu"
+msgstr "Jako hlavní menu"
+
+msgid "Loading standard language."
+msgstr "Nahrávám puvodní jazyk"
+
+msgid "Loading standard music."
+msgstr "Nahrávám puvodní hudbu"
+
+msgid "Lock Console"
+msgstr "Zamcení konzole"
+
+msgid "Locked"
+msgstr "Zamceno"
+
+msgid "Mar"
+msgstr "Brez"
+
+msgid "May"
+msgstr "Kvet"
+
+msgid "Missing files"
+msgstr "Chybející soubory"
+
+msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
+msgstr "Nejspíše má velikost, která není delitelná 4."
+
+msgid "Music Volume"
+msgstr "Hlasitost hudby"
+
+msgid "Neither"
+msgstr "Žádný"
+
+msgid "Network init error"
+msgstr "Chyba pri inicializaci síte"
+
+msgid "Next"
+msgstr "Další"
+
+msgid "No"
+msgstr "Ne"
+
+msgid "No Cheatfile found"
+msgstr "Nebyl nalezen soubor s cheaty"
+
+msgid "No SD-Card inserted!"
+msgstr "Není vložena SD karta"
+
+msgid "No USB Device"
+msgstr "Žádné zarízení USB"
+
+msgid "No USB Device found."
+msgstr "Nebylo nalezeno zarízení USB"
+
+msgid "No WBFS partition found"
+msgstr "Nebyl nalezen oddíl WBFS"
+
+msgid "No file missing!"
+msgstr "Nechybí žádný soubor!"
+
+msgid "No new updates."
+msgstr "Nejsou dostupné žádné aktualizace."
+
+msgid "No partitions found"
+msgstr "Nebyl nalezen žádný oddíl"
+
+msgid "Normal"
+msgstr "Normální"
+
+msgid "Normal Covers"
+msgstr "Normální obaly"
+
+msgid "Not a Wii Disc"
+msgstr "Toto není Wii disk"
+
+msgid "Not enough free space!"
+msgstr "Není dostatek volného místa!"
+
+msgid "Not supported format!"
+msgstr "Nepodporovaný formát!"
+
+msgid "Nov"
+msgstr "List"
+
+msgid "OFF"
+msgstr "Vypnuto"
+
+msgid "OK"
+msgstr ""
+
+msgid "ON"
+msgstr "Zapnuto"
+
+msgid "Oct"
+msgstr "Říj"
+
+msgid "Official Site"
+msgstr "Oficiální místo"
+
+msgid "Ok"
+msgstr ""
+
+msgid "Only for Install"
+msgstr "Pouze pro instalaci"
+
+msgid "Parental Control"
+msgstr "Rodicovský zámek"
+
+msgid "Parental control"
+msgstr "Rodicovský zámek"
+
+msgid "Partition"
+msgstr "Oddíl"
+
+msgid "Password"
+msgstr "Heslo"
+
+msgid "Password Changed"
+msgstr "Heslo zmeneno"
+
+msgid "Password has been changed"
+msgstr "Heslo bylo zmeneno"
+
+msgid "Patch Country Strings"
+msgstr "Úprava nastvení zeme"
+
+msgid "Path of titles.txt change"
+msgstr "Zmena cesty k titles.txt"
+
+msgid "Path of titles.txt changed."
+msgstr "Cesta k titles.txt zmenena"
+
+msgid "Play Count"
+msgstr "Spušteno"
+
+msgid "Power off the Wii"
+msgstr "Vypnout Wii"
+
+msgid "Prev"
+msgstr "Predchozí"
+
+msgid "Prompts Buttons"
+msgstr "Potvrzovací tlacítka"
+
+msgid "Published by"
+msgstr "Publikoval "
+
+msgid "Quick Boot"
+msgstr "Rychlé zavedení"
+
+msgid "Released"
+msgstr "Uvolnil"
+
+msgid "Reload SD"
+msgstr "Znovunactení SD"
+
+msgid "Rename Game on WBFS"
+msgstr "Prejmenovat hru na WBFS"
+
+msgid "Reset Playcounter"
+msgstr "Vynulovat cítac spuštení"
+
+msgid "Restart"
+msgstr ""
+
+msgid "Restarting..."
+msgstr "Restartuji..."
+
+msgid "Return"
+msgstr "Návrat"
+
+msgid "Return to Wii Menu"
+msgstr "Návrat do Wii nabídky"
+
+msgid "Right"
+msgstr "Vpravo"
+
+msgid "Rumble"
+msgstr "Vibrace"
+
+msgid "SChinese"
+msgstr "Čínsky"
+
+msgid "SFX Volume"
+msgstr "Hlasitost SFX"
+
+msgid "Save"
+msgstr "Uložit"
+
+msgid "Save Failed"
+msgstr "Uložení selhalo"
+
+msgid "Screensaver"
+msgstr "Sporic obrazovky"
+
+msgid "Sept"
+msgstr "Zárí"
+
+msgid "Set as backgroundmusic?"
+msgstr "Nastavit jako hudbu na pozadí?"
+
+msgid "Settings"
+msgstr "Nastavení"
+
+msgid "Shutdown System"
+msgstr "Ukoncit systém"
+
+msgid "Shutdown to Idle"
+msgstr "Pauza"
+
+msgid "Sound"
+msgstr "Zvuk"
+
+msgid "Spanish"
+msgstr "Španelsky"
+
+msgid "Special thanks to:"
+msgstr "Speciální podekování pro"
+
+msgid "Standard"
+msgstr ""
+
+msgid "Success:"
+msgstr "Úspešne"
+
+msgid "Successfully Saved"
+msgstr "Úspešne uloženo"
+
+msgid "Successfully Updated"
+msgstr "Úspešne zaktualizováno"
+
+msgid "Successfully deleted:"
+msgstr "Úspešne smazáno:"
+
+msgid "Successfully installed:"
+msgstr "Úspešne nainstalováno"
+
+msgid "System Default"
+msgstr "Puvodní nastavení systému"
+
+msgid "TChinese"
+msgstr "Čínsky"
+
+msgid "TXTCheatcodes Path"
+msgstr "Cesta k TXT cheatum"
+
+msgid "ThemePath"
+msgstr "Cesta ke skinum"
+
+msgid "Themepath Changed"
+msgstr "Cesta ke skinum zmenena"
+
+msgid "Themepath change"
+msgstr "Zmena cesty ke skinum"
+
+msgid "Time left:"
+msgstr "Zbývající cas:"
+
+msgid "Titles from XML"
+msgstr "Názvy z XML"
+
+msgid "Tooltips"
+msgstr "Popisky"
+
+msgid "USB Device not found"
+msgstr "USB zarízení nenalezeno"
+
+msgid "USB Loader GX is protected"
+msgstr "USB Loader GX je zabezpecen"
+
+msgid "Uninstall"
+msgstr "Odinstalace"
+
+msgid "Unlock console to use this option."
+msgstr "Odemknete kontzoli pro tuto akci."
+
+msgid "Unlocked"
+msgstr "Odemceno"
+
+msgid "Update"
+msgstr "Aktualizace"
+
+msgid "Update All"
+msgstr "Plná aktualizace"
+
+msgid "Update DOL"
+msgstr "Aktualizace DOL"
+
+msgid "Update failed"
+msgstr "Aktualizace selhala"
+
+msgid "Update to"
+msgstr "Aktualizováno na"
+
+msgid "Updatepath"
+msgstr "Cesta pro aktualizaci"
+
+msgid "Updatepath changed."
+msgstr "Cesta pro aktualizaci zmenena"
+
+msgid "Updating"
+msgstr "Aktualizuji"
+
+msgid "VIDTV Patch"
+msgstr "VIDTV korekce"
+
+msgid "Video Mode"
+msgstr "Video mód"
+
+msgid "Waiting for USB Device"
+msgstr "Čekám na zarízení USB"
+
+msgid "Waiting..."
+msgstr "Čekám..."
+
+msgid "WiFi Features"
+msgstr "WiFi možnosti"
+
+msgid "Widescreen Fix"
+msgstr "Korekce širokoúhlé obrazovky"
+
+msgid "Wii Menu"
+msgstr "Wii menu"
+
+msgid "Wiilight"
+msgstr "Wii svetlo"
+
+msgid "Wrong Password"
+msgstr "Špatné heslo"
+
+msgid "Yes"
+msgstr "Ano"
+
+msgid "You have attempted to load a bad image"
+msgstr "Pokusili jste se nahrát špatný obraz"
+
+msgid "You need to format a partition"
+msgstr "Musíte naformátovat oddíl"
+
+msgid "available"
+msgstr "dostupný"
+
+msgid "does not exist!  Loading game without cheats."
+msgstr "neexistuje. Nahrávání hry bez cheatu."
+
+msgid "does not exist!  You Messed something up, Idiot."
+msgstr "neexistuje. Neco jsi zvoral idiote."
+
+msgid "file(s) left"
+msgstr "soubor(u) zbývá"
+
+msgid "files not found on the server!"
+msgstr "souboru neanlezeno na serveru"
+
+msgid "for"
+msgstr "pro"
+
+msgid "for diverse patches"
+msgstr "za ruzné opravy"
+
+msgid "for his awesome tool"
+msgstr "za jeho hrozný nástroj"
+
+msgid "for hosting the update files"
+msgstr "za umístení souboru pro aktualizaci "
+
+msgid "for the USB Loader source"
+msgstr "za zdrojový kód pro USB Loader"
+
+msgid "formatted!"
+msgstr "formátováno!"
+
+msgid "free"
+msgstr "volné"
+
+msgid "not set"
+msgstr "nenastaveno"
+
+msgid "of"
+msgstr "z"
+
+msgid "seconds left"
+msgstr "sekund zbývá"
+
+msgid "titles.txt Path"
+msgstr "Cesta k titles.txt"

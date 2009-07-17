@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-07-16 05:32-0400\n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2009-07-11 20:15\n"
+"Last-Translator: Katsurou\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -16,37 +16,37 @@ msgid "(both retired)"
 msgstr ""
 
 msgid "0 (Everyone)"
-msgstr ""
+msgstr "För alla"
 
 msgid "1 (Child 7+)"
-msgstr ""
+msgstr "Barn 7+"
 
 msgid "2 (Teen 12+)"
-msgstr ""
+msgstr "Tonåringar 12+"
 
 msgid "3 (Mature 16+)"
-msgstr ""
+msgstr "Ungdomar 16+"
 
 msgid "3D Covers"
 msgstr "3D-Omslag"
 
 msgid "4 (Adults Only 18+)"
-msgstr ""
+msgstr "Endast Vuxna 18+"
 
 msgid ">> Finishing installation..."
-msgstr ""
+msgstr ">> Gör klart installation..."
 
 msgid ">> Installing content #"
-msgstr ""
+msgstr ">> Installerar innehåll #"
 
 msgid ">> Installing ticket..."
-msgstr ""
+msgstr ">> Installerar biljett..."
 
 msgid ">> Installing title..."
-msgstr ""
+msgstr ">> Installerar titel..."
 
 msgid ">> Reading WAD data..."
-msgstr ""
+msgstr ">> Läser WAD data..."
 
 msgid "AUTO"
 msgstr ""
@@ -55,7 +55,7 @@ msgid "All the features of USB Loader GX are unlocked."
 msgstr "Alla funktioner i USB Loader GX är upplåsta."
 
 msgid "Alternate DOL"
-msgstr ""
+msgstr "Alternativ DOL"
 
 msgid "Anti"
 msgstr ""
@@ -88,22 +88,22 @@ msgid "Back to Wii Menu"
 msgstr "Tillbaka till Wii-menyn"
 
 msgid "Backgroundmusic"
-msgstr ""
+msgstr "Bakgrundsmusik"
 
 msgid "Backgroundmusic Path changed."
-msgstr ""
+msgstr "Sökväg till bakgrundsmusik ändrad."
 
 msgid "Big thanks to:"
-msgstr ""
+msgstr "Stort tack till:"
 
 msgid "Block IOS Reload"
-msgstr ""
+msgstr "Blocka IOS omläs"
 
 msgid "Boot/Standard"
 msgstr "Boot/Standard"
 
 msgid "Both"
-msgstr ""
+msgstr "Båda"
 
 msgid "Can't be formated"
 msgstr "Kan inte formateras"
@@ -112,22 +112,22 @@ msgid "Can't create directory"
 msgstr "Kan inte skapa mapp"
 
 msgid "Can't delete:"
-msgstr "Kan ej radera:"
+msgstr "Kunde inte radera:"
 
 msgid "Cancel"
-msgstr "Ångra"
+msgstr "Avbryt"
 
 msgid "Cheatcodes Path"
-msgstr ""
+msgstr "Fusk sökväg"
 
 msgid "Cheatcodes Path changed"
-msgstr ""
+msgstr "Sökväg till fusk ändrad"
 
 msgid "Cheatfile is blank"
-msgstr ""
+msgstr "Fusk filen är blank"
 
 msgid "Checking for Updates"
-msgstr ""
+msgstr "Letar efter uppdateringar"
 
 msgid "Click to Download Covers"
 msgstr "Klicka för att ladda ner omslag"
@@ -136,7 +136,7 @@ msgid "Clock"
 msgstr "Klocka"
 
 msgid "Close"
-msgstr ""
+msgstr "Stäng"
 
 msgid "Code Download"
 msgstr ""
@@ -145,7 +145,7 @@ msgid "Confirm"
 msgstr ""
 
 msgid "Console"
-msgstr ""
+msgstr "Konsol"
 
 msgid "Console Default"
 msgstr "Konsolens inställning"
@@ -160,13 +160,13 @@ msgid "Continue to install game?"
 msgstr "Fortsätt installera spel?"
 
 msgid "Controllevel"
-msgstr ""
+msgstr "Kontroll nivå"
 
 msgid "Correct Password"
 msgstr "Rätt lösenord"
 
 msgid "Could not create GCT file"
-msgstr ""
+msgstr "Kunde inte skapa GCT fil"
 
 msgid "Could not find a WBFS partition."
 msgstr ""
@@ -202,13 +202,13 @@ msgid "Coverpath Changed"
 msgstr "Omslagsmapp ändrad"
 
 msgid "Create"
-msgstr ""
+msgstr "Skapa"
 
 msgid "Credits"
-msgstr "Credits"
+msgstr "Medverkande"
 
 msgid "Custom Paths"
-msgstr ""
+msgstr "Anpassade sökvägar"
 
 msgid "DOL from SD"
 msgstr ""
@@ -220,19 +220,19 @@ msgid "Dec"
 msgstr ""
 
 msgid "Default"
-msgstr ""
+msgstr "Standard"
 
 msgid "Default Gamesettings"
-msgstr ""
+msgstr "Ställ till spel Standard"
 
 msgid "Default Settings"
-msgstr ""
+msgstr "Standard inställningar"
 
 msgid "Delete"
 msgstr ""
 
 msgid "Developed by"
-msgstr ""
+msgstr "Utvecklat av"
 
 msgid "Disc Default"
 msgstr "Skivans inställning"
@@ -259,7 +259,7 @@ msgid "Do you really want to delete:"
 msgstr "Vill du verkligen radera:"
 
 msgid "Do you want to change language?"
-msgstr ""
+msgstr "Vill du byta språk?"
 
 msgid "Do you want to format:"
 msgstr "Vill du formatera:"
@@ -271,19 +271,19 @@ msgid "Do you want to use the alt dol that is known to be correct?"
 msgstr ""
 
 msgid "Dol Path"
-msgstr ""
+msgstr "Dol sökväg"
 
 msgid "Dolpath Changed"
-msgstr ""
+msgstr "Dol sökväg ändrad"
 
 msgid "Dolpath change"
-msgstr ""
+msgstr "Ändra Dol sökväg"
 
 msgid "Download Boxart image?"
 msgstr "Ladda ner omslagsbild?"
 
 msgid "Download Discart image?"
-msgstr ""
+msgstr "Ladda ner skiv bild?"
 
 msgid "Download Now"
 msgstr ""
@@ -292,7 +292,7 @@ msgid "Download finished"
 msgstr "Nedladdning klar"
 
 msgid "Downloading"
-msgstr ""
+msgstr "Laddar ned"
 
 msgid "Downloading file"
 msgstr "Laddar ned fil:"
@@ -310,19 +310,19 @@ msgid "English"
 msgstr "Engelska"
 
 msgid "Error"
-msgstr ""
+msgstr "Fel"
 
 msgid "Error !"
 msgstr "Fel!"
 
 msgid "Error 002 fix"
-msgstr ""
+msgstr "002 fel fix"
 
 msgid "Error reading Disc"
 msgstr "Fel vid läsning av skiva"
 
 msgid "Error..."
-msgstr ""
+msgstr "Fel..."
 
 msgid "Exit USB Loader GX?"
 msgstr "Avsluta USB Loader GX?"
@@ -334,10 +334,10 @@ msgid "Feb"
 msgstr ""
 
 msgid "File not found."
-msgstr ""
+msgstr "Kunde inte hitta fil"
 
 msgid "Finishing installation... Ok!"
-msgstr ""
+msgstr "Gör klart installation... Ok!"
 
 msgid "Flip-X"
 msgstr "Vänd-X"
@@ -361,10 +361,10 @@ msgid "Full Shutdown"
 msgstr "Stäng av helt"
 
 msgid "GCT File created"
-msgstr ""
+msgstr "GCT fil skapad"
 
 msgid "GUI Settings"
-msgstr ""
+msgstr "GUI inställningar"
 
 msgid "Game ID"
 msgstr "Spel-ID"
@@ -373,7 +373,7 @@ msgid "Game Language"
 msgstr "Språk"
 
 msgid "Game Load"
-msgstr ""
+msgstr "Spel inställningar"
 
 msgid "Game Region"
 msgstr "Region"
@@ -391,13 +391,13 @@ msgid "German"
 msgstr "Tyska"
 
 msgid "HOME Menu"
-msgstr ""
+msgstr "Hem meny"
 
 msgid "Hour"
-msgstr ""
+msgstr "Timmars"
 
 msgid "How do you want to update?"
-msgstr ""
+msgstr "Hur vill du uppdatera?"
 
 msgid "How to Shutdown?"
 msgstr "Hur vill du stänga av?"
@@ -415,7 +415,7 @@ msgid "Insert an SD-Card to save."
 msgstr "Sätt i ett SD-kort för att spara."
 
 msgid "Insert an SD-Card to use this option."
-msgstr ""
+msgstr "Sätt i ett SD-kort för att använda denna inställning"
 
 msgid "Install Error!"
 msgstr "Fel vid installering!"
@@ -424,19 +424,19 @@ msgid "Install a game"
 msgstr "Installera ett spel"
 
 msgid "Installing content... Ok!"
-msgstr ""
+msgstr "Installerar innehåll... Ok!"
 
 msgid "Installing game:"
 msgstr "Installerar spel:"
 
 msgid "Installing ticket... Ok!"
-msgstr ""
+msgstr "Installerar biljett... Ok!"
 
 msgid "Installing title... Ok!"
-msgstr ""
+msgstr "Installerar titel... Ok!"
 
 msgid "Installing wad"
-msgstr ""
+msgstr "Installerar wad"
 
 msgid "Italian"
 msgstr "Italienska"
@@ -454,19 +454,19 @@ msgid "June"
 msgstr ""
 
 msgid "Keyboard"
-msgstr ""
+msgstr "Tangentbord"
 
 msgid "Korean"
 msgstr "Koreanska"
 
 msgid "Language change:"
-msgstr ""
+msgstr "Språk byte:"
 
 msgid "Languagepath changed."
-msgstr ""
+msgstr "Sökväg till språk ändrad"
 
 msgid "Leaving so you can restart..."
-msgstr ""
+msgstr "Lämnar så du kan starta om..."
 
 msgid "Left"
 msgstr "Vänster"
@@ -478,16 +478,16 @@ msgid "Load this dol as alternate dol?"
 msgstr ""
 
 msgid "Loading standard language."
-msgstr ""
+msgstr "Laddar standard språk."
 
 msgid "Loading standard music."
-msgstr ""
+msgstr "Laddar standard musik."
 
 msgid "Lock Console"
 msgstr "Lås konsol"
 
 msgid "Locked"
-msgstr ""
+msgstr "Låst"
 
 msgid "Mar"
 msgstr ""
@@ -499,7 +499,7 @@ msgid "Missing files"
 msgstr "Filer som saknas"
 
 msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
-msgstr ""
+msgstr "Förmodligen har bilden inte en upplösning jämnt dividerat med 4."
 
 msgid "Music Volume"
 msgstr "Volym"
@@ -517,10 +517,10 @@ msgid "No"
 msgstr "Nej"
 
 msgid "No Cheatfile found"
-msgstr ""
+msgstr "Ingen fusk fil hittades"
 
 msgid "No Favorites"
-msgstr ""
+msgstr "Inga Favoriter"
 
 msgid "No SD-Card inserted!"
 msgstr "Inget SD-kort insatt!"
@@ -541,7 +541,7 @@ msgid "No file missing!"
 msgstr "Inga filer saknas!"
 
 msgid "No new updates."
-msgstr ""
+msgstr "Inga nya uppdateringar"
 
 msgid "No partitions found"
 msgstr "Hittade ingen partition"
@@ -562,7 +562,7 @@ msgid "Not enough free space!"
 msgstr "Ej tillräckligt med ledigt utrymme!"
 
 msgid "Not supported format!"
-msgstr ""
+msgstr "Formatet stöds inte!"
 
 msgid "Nov"
 msgstr ""
@@ -586,13 +586,13 @@ msgid "Ok"
 msgstr ""
 
 msgid "Only for Install"
-msgstr ""
+msgstr "Endast för installering"
 
 msgid "Parental Control"
 msgstr "Föräldrakontroll"
 
 msgid "Parental control"
-msgstr ""
+msgstr "Föräldrakontroll"
 
 msgid "Partition"
 msgstr "Partition"
@@ -607,13 +607,13 @@ msgid "Password has been changed"
 msgstr "Lösenordet har ändrats"
 
 msgid "Patch Country Strings"
-msgstr ""
+msgstr "Still in lands strängar"
 
 msgid "Path of titles.txt change"
-msgstr ""
+msgstr "Ändrad sökväg till titles.txt"
 
 msgid "Path of titles.txt changed."
-msgstr ""
+msgstr "Sökväg till titles.txt ändrad"
 
 msgid "Pick from a list"
 msgstr ""
@@ -631,16 +631,16 @@ msgid "Prompts Buttons"
 msgstr "Dialogknappar"
 
 msgid "Published by"
-msgstr ""
+msgstr "Publicerat av"
 
 msgid "Quick Boot"
 msgstr "Snabb start"
 
 msgid "Reading WAD data... Ok!"
-msgstr ""
+msgstr "Läser WAD data... Ok!"
 
 msgid "Released"
-msgstr ""
+msgstr "Släppt"
 
 msgid "Reload SD"
 msgstr "Ladda om SD"
@@ -655,13 +655,13 @@ msgid "Restart"
 msgstr "Starta om"
 
 msgid "Restarting..."
-msgstr ""
+msgstr "Startar om..."
 
 msgid "Return"
 msgstr "Återvänd"
 
 msgid "Return to Wii Menu"
-msgstr ""
+msgstr "Återvänd till wii menyn"
 
 msgid "Right"
 msgstr "Höger"
@@ -676,7 +676,7 @@ msgid "SD selected"
 msgstr ""
 
 msgid "SFX Volume"
-msgstr ""
+msgstr "SFX Volym"
 
 msgid "Save"
 msgstr "Spara"
@@ -685,28 +685,28 @@ msgid "Save Failed"
 msgstr "Sparning misslyckad"
 
 msgid "Screensaver"
-msgstr ""
+msgstr "Skärmsläckare"
 
 msgid "Sept"
 msgstr ""
 
 msgid "Set as backgroundmusic?"
-msgstr ""
+msgstr "Ställ in som bakgrundsmusik?"
 
 msgid "Settings"
 msgstr "Inställningar"
 
 msgid "Shit"
-msgstr ""
+msgstr "Skit"
 
 msgid "Shutdown System"
 msgstr "Stäng av helt"
 
 msgid "Shutdown to Idle"
-msgstr "Stäng av"
+msgstr "Försätt i viloläge"
 
 msgid "Sound"
-msgstr ""
+msgstr "Ljud"
 
 msgid "Spanish"
 msgstr "Spanska"
@@ -718,7 +718,7 @@ msgid "Standard"
 msgstr ""
 
 msgid "Success"
-msgstr ""
+msgstr "Lyckat"
 
 msgid "Success:"
 msgstr "Lyckat:"
@@ -727,7 +727,7 @@ msgid "Successfully Saved"
 msgstr "Lyckad sparning"
 
 msgid "Successfully Updated"
-msgstr ""
+msgstr "Uppdateringen Lyckades"
 
 msgid "Successfully deleted:"
 msgstr "Lyckad radering av:"
@@ -742,11 +742,11 @@ msgid "TChinese"
 msgstr "TKinesiska"
 
 msgid "TXTCheatcodes Path"
-msgstr ""
+msgstr "Sökväg till txt koder"
 
 #, c-format
 msgid "The wad installation failed with error %ld"
-msgstr ""
+msgstr "Wad installation misslyckades med fel %ld"
 
 msgid "ThemePath"
 msgstr "Tema-mapp"
@@ -761,7 +761,7 @@ msgid "Time left:"
 msgstr "Tid kvar:"
 
 msgid "Titles from XML"
-msgstr ""
+msgstr "Titlar från XML"
 
 msgid "Tooltips"
 msgstr "Verktygstips"
@@ -774,40 +774,40 @@ msgstr "USB Loader GX är skyddad"
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
-msgstr ""
+msgstr "Kunde inte öppna den nedladdade wad filen (%s)."
 
 msgid "Uninstall"
 msgstr "Avinstallera"
 
 msgid "Unlock console to use this option."
-msgstr ""
+msgstr "Lås upp konsolen för denna inställning."
 
 msgid "Unlocked"
-msgstr ""
+msgstr "Upplåst"
 
 msgid "Update"
-msgstr ""
+msgstr "Uppdatera"
 
 msgid "Update All"
-msgstr ""
+msgstr "Uppdatera alla"
 
 msgid "Update DOL"
-msgstr ""
+msgstr "Updatera DOL"
 
 msgid "Update failed"
-msgstr ""
+msgstr "Uppdatering misslyckades"
 
 msgid "Update to"
-msgstr ""
+msgstr "Uppdatera till"
 
 msgid "Updatepath"
-msgstr ""
+msgstr "Sökväg till uppdatering"
 
 msgid "Updatepath changed."
-msgstr ""
+msgstr "Sökväg till uppdatering ändrad."
 
 msgid "Updating"
-msgstr ""
+msgstr "Uppdaterar"
 
 msgid "VIDTV Patch"
 msgstr "VIDTV-Patch"
@@ -822,7 +822,7 @@ msgid "Waiting..."
 msgstr "Väntar..."
 
 msgid "WiFi Features"
-msgstr ""
+msgstr "WiFi funktioner"
 
 msgid "Widescreen Fix"
 msgstr "Bredbild 16/9 Fix"
@@ -831,7 +831,7 @@ msgid "Wii Menu"
 msgstr "Wii-meny"
 
 msgid "Wiilight"
-msgstr ""
+msgstr "Wii ljus"
 
 msgid "Wrong Password"
 msgstr "Fel Lösenord"
@@ -843,34 +843,34 @@ msgid "You are about to delete "
 msgstr ""
 
 msgid "You are choosing to display favorites and you do not have any selected."
-msgstr ""
+msgstr "Du har valt att visa favoriter men du har inga favoriter valda."
 
 msgid "You have attempted to load a bad image"
-msgstr ""
+msgstr "Du har försökt ladda en dålig bild"
 
 msgid "You need to format a partition"
 msgstr "Du behöver formatera en partition"
 
 msgid "available"
-msgstr ""
+msgstr "Tillgänglig"
 
 msgid "contains over 255 lines of code.  It will produce unexpected results."
-msgstr ""
+msgstr "Innehåller över 255 rader kod. Det kommer att skapa oväntade resultat."
 
 msgid "does not exist!"
 msgstr ""
 
 msgid "does not exist!  Loading game without cheats."
-msgstr ""
+msgstr "Existerar inte! Laddar spel utan fusk."
 
 msgid "does not exist!  You Messed something up, Idiot."
-msgstr ""
+msgstr "Existerar inte! Du har gjort något fel."
 
 msgid "file left"
-msgstr ""
+msgstr "fil kvar"
 
 msgid "files left"
-msgstr ""
+msgstr "filer kvar"
 
 msgid "files not found on the server!"
 msgstr "Filerna hittades inte på servern!"
@@ -879,16 +879,16 @@ msgid "for"
 msgstr "för"
 
 msgid "for WiiTDB and hosting covers / disc images"
-msgstr ""
+msgstr "för WiiTDB"
 
 msgid "for diverse patches"
-msgstr ""
+msgstr "för diverse patcher"
 
 msgid "for his awesome tool"
-msgstr ""
+msgstr "för hans underbara verktyg"
 
 msgid "for hosting the update files"
-msgstr ""
+msgstr "för hosting av uppdateringar"
 
 msgid "for the USB Loader source"
 msgstr "och släppet av källkoden"
@@ -909,10 +909,10 @@ msgid "seconds left"
 msgstr "sekunder kvar"
 
 msgid "there was an error"
-msgstr ""
+msgstr "ett fel uppstod"
 
 msgid "titles.txt Path"
-msgstr ""
+msgstr "sökväg till titles.txt"
 
 #~ msgid "file(s) left"
 #~ msgstr "filer kvar"

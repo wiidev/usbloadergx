@@ -1,14 +1,14 @@
-# USB Loader GX language source file.
+﻿# USB Loader GX language source file.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: USB Loader GX\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: USB Loader GX - r582\n"
+"Report-Msgid-Bugs-To:http://www.nextrl.it/forum/index.php?showtopic=39676 \n"
 "POT-Creation-Date: 2009-07-16 05:32-0400\n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"MIME-Version: 1.0\n"
+"PO-Revision-Date: 2009-07-07 09:40+0200\n"
+"Last-Translator: FoxeJoe \n"
+"Language-Team: FoxeJoe & Cambo\n"
+"MIME-Version: italian.lang - v19 - r582\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
@@ -25,13 +25,13 @@ msgid "2 (Teen 12+)"
 msgstr "Ragazzi"
 
 msgid "3 (Mature 16+)"
-msgstr "Adulti"
+msgstr "Sedicenni"
 
 msgid "3D Covers"
-msgstr "3D"
+msgstr "Copertine 3D"
 
 msgid "4 (Adults Only 18+)"
-msgstr "solo Adulti"
+msgstr "Maggiorenni"
 
 msgid ">> Finishing installation..."
 msgstr ""
@@ -73,31 +73,31 @@ msgid "Aug"
 msgstr "agosto"
 
 msgid "AutoPatch"
-msgstr "Automatico"
+msgstr "Automatica"
 
 msgid "Back"
 msgstr "Indietro"
 
 msgid "Back to HBC or Wii Menu"
-msgstr "Torna a HBC/Menù Wii"
+msgstr "Torna a HBC/Menu Wii"
 
 msgid "Back to Loader"
-msgstr "Torna al Loader"
+msgstr "HomeBrew Channel"
 
 msgid "Back to Wii Menu"
-msgstr "Torna al Menù Wii"
+msgstr "Torna al Menu Wii"
 
 msgid "Backgroundmusic"
 msgstr "Musica Sottofondo"
 
 msgid "Backgroundmusic Path changed."
-msgstr "Percorso Musica"
+msgstr "Percorso Musica modificato"
 
 msgid "Big thanks to:"
-msgstr "Grazie a"
+msgstr "Grazie mille a:"
 
 msgid "Block IOS Reload"
-msgstr ""
+msgstr "Ricarica l'IOS"
 
 msgid "Boot/Standard"
 msgstr "Riavvio/Standard"
@@ -106,7 +106,7 @@ msgid "Both"
 msgstr "Entrambi"
 
 msgid "Can't be formated"
-msgstr "Non si puo' formattare"
+msgstr "Non si può formattare"
 
 msgid "Can't create directory"
 msgstr "Non posso creare la cartella"
@@ -121,7 +121,7 @@ msgid "Cheatcodes Path"
 msgstr "Percorso Trucchi"
 
 msgid "Cheatcodes Path changed"
-msgstr "Percorso Trucchi Modificato"
+msgstr "Percorso Trucchi modificato"
 
 msgid "Cheatfile is blank"
 msgstr ""
@@ -136,7 +136,7 @@ msgid "Clock"
 msgstr "Orologio"
 
 msgid "Close"
-msgstr ""
+msgstr "Chiudi"
 
 msgid "Code Download"
 msgstr ""
@@ -148,7 +148,7 @@ msgid "Console"
 msgstr "Console"
 
 msgid "Console Default"
-msgstr "Predefinito Console"
+msgstr "Predefinita Console"
 
 msgid "Console Locked"
 msgstr "Console Bloccata"
@@ -196,10 +196,10 @@ msgid "Cover Download"
 msgstr "Scaricamento Copertina"
 
 msgid "Cover Path"
-msgstr "Percorso Copertina"
+msgstr "Percorso Copertine"
 
 msgid "Coverpath Changed"
-msgstr "Percorso Copertina Modificato"
+msgstr "Percorso Copertine Modificato"
 
 msgid "Create"
 msgstr ""
@@ -223,40 +223,40 @@ msgid "Default"
 msgstr "Default"
 
 msgid "Default Gamesettings"
-msgstr "Impostazione Gioco Predefinita"
+msgstr "Impostazioni predefinite del gioco"
 
 msgid "Default Settings"
-msgstr "Impostazione Predefinita"
+msgstr "Impostazioni Predefinite"
 
 msgid "Delete"
 msgstr ""
 
 msgid "Developed by"
-msgstr "sviluppato da"
+msgstr "Sviluppato da"
 
 msgid "Disc Default"
-msgstr "Predefinito Disco"
+msgstr "Predefinita Disco"
 
 msgid "Disc Images"
-msgstr "Immagine Disco"
+msgstr "Immagini Disco"
 
 msgid "Discimage Path"
 msgstr "Percorso Imm. Disco"
 
 msgid "Discpath Changed"
-msgstr "Percorso Immagine Disco Modificato"
+msgstr "Percorso Immagini Disco Modificato"
 
 msgid "Discpath change"
 msgstr "Modifica Percorso Immagine Disco"
 
 msgid "DiskFlip"
-msgstr ""
+msgstr "Gira i dischi"
 
 msgid "Display"
 msgstr "Display"
 
 msgid "Do you really want to delete:"
-msgstr "Vuoi realmente Eliminare:"
+msgstr "Vuoi veramente Eliminare:"
 
 msgid "Do you want to change language?"
 msgstr "Vuoi cambiare lingua?"
@@ -316,7 +316,7 @@ msgid "Error !"
 msgstr "Errore !"
 
 msgid "Error 002 fix"
-msgstr "correzione Error002"
+msgstr "Correzione Error002"
 
 msgid "Error reading Disc"
 msgstr "Errore Lettura Disco"
@@ -340,7 +340,7 @@ msgid "Finishing installation... Ok!"
 msgstr ""
 
 msgid "Flip-X"
-msgstr "Flip-X"
+msgstr "Scorrimento Dischi"
 
 msgid "Force"
 msgstr "Forza"
@@ -360,9 +360,6 @@ msgstr "Francese"
 msgid "Full Shutdown"
 msgstr "Completo"
 
-msgid "GCT File created"
-msgstr ""
-
 msgid "GUI Settings"
 msgstr "Impostazioni Loader"
 
@@ -370,13 +367,13 @@ msgid "Game ID"
 msgstr "ID Gioco"
 
 msgid "Game Language"
-msgstr "Lingua"
+msgstr "Lingua Gioco"
 
 msgid "Game Load"
 msgstr "Impostazioni Giochi"
 
 msgid "Game Region"
-msgstr "Regione"
+msgstr "Regione Gioco"
 
 msgid "Game Size"
 msgstr "Dimensione Gioco"
@@ -391,7 +388,7 @@ msgid "German"
 msgstr "Tedesco"
 
 msgid "HOME Menu"
-msgstr ""
+msgstr "Menu HOME"
 
 msgid "Hour"
 msgstr "ore"
@@ -460,7 +457,7 @@ msgid "Korean"
 msgstr "Coreano"
 
 msgid "Language change:"
-msgstr ""
+msgstr "Modifica Lingua:"
 
 msgid "Languagepath changed."
 msgstr "File Lingua modificato"
@@ -592,7 +589,7 @@ msgid "Parental Control"
 msgstr "Controllo Genitori"
 
 msgid "Parental control"
-msgstr ""
+msgstr "Controllo genitori"
 
 msgid "Partition"
 msgstr "Partizione"
@@ -640,7 +637,7 @@ msgid "Reading WAD data... Ok!"
 msgstr ""
 
 msgid "Released"
-msgstr ""
+msgstr "Rilasciato"
 
 msgid "Reload SD"
 msgstr "Ricarica SD"
@@ -649,19 +646,19 @@ msgid "Rename Game on WBFS"
 msgstr "Rinomina Gioco su WBFS"
 
 msgid "Reset Playcounter"
-msgstr ""
+msgstr "Azzera contatore"
 
 msgid "Restart"
-msgstr "RiAvvia"
+msgstr "Riavvia"
 
 msgid "Restarting..."
-msgstr "Riavvio"
+msgstr "Sto riavviando..."
 
 msgid "Return"
 msgstr "Ritorna"
 
 msgid "Return to Wii Menu"
-msgstr ""
+msgstr "Torna al Menu Wii"
 
 msgid "Right"
 msgstr "Destra"
@@ -685,13 +682,13 @@ msgid "Save Failed"
 msgstr "Salvataggio Fallito"
 
 msgid "Screensaver"
-msgstr ""
+msgstr "Salvaschermo"
 
 msgid "Sept"
 msgstr "settembre"
 
 msgid "Set as backgroundmusic?"
-msgstr "Scegli come Musica Sottofondo"
+msgstr "Imposto come Musica Sottofondo?"
 
 msgid "Settings"
 msgstr "Impostazioni"
@@ -712,7 +709,7 @@ msgid "Spanish"
 msgstr "Spagnolo"
 
 msgid "Special thanks to:"
-msgstr "Un Ringraziamento Speciale a"
+msgstr "Un ringraziamento speciale a:"
 
 msgid "Standard"
 msgstr "Standard"
@@ -736,7 +733,7 @@ msgid "Successfully installed:"
 msgstr "Installato con successo:"
 
 msgid "System Default"
-msgstr "Predefinito Sistema"
+msgstr "Predefinita Sistema"
 
 msgid "TChinese"
 msgstr "Cinese Tradizionale"
@@ -761,7 +758,7 @@ msgid "Time left:"
 msgstr "Restante:"
 
 msgid "Titles from XML"
-msgstr "Titolo XML"
+msgstr "Titoli in XML"
 
 msgid "Tooltips"
 msgstr "Suggerimenti"
@@ -822,16 +819,16 @@ msgid "Waiting..."
 msgstr "Caricamento..."
 
 msgid "WiFi Features"
-msgstr "caratteristiche Wii"
+msgstr "Caratteristiche WiFi"
 
 msgid "Widescreen Fix"
 msgstr "Widescreen"
 
 msgid "Wii Menu"
-msgstr "Menù Wii"
+msgstr "Menu Wii"
 
 msgid "Wiilight"
-msgstr "Illuminazione Wii."
+msgstr "Illuminazione Wii"
 
 msgid "Wrong Password"
 msgstr "Password Errata"
@@ -882,16 +879,16 @@ msgid "for WiiTDB and hosting covers / disc images"
 msgstr ""
 
 msgid "for diverse patches"
-msgstr "diversepatches"
+msgstr "per le numerose correzioni"
 
 msgid "for his awesome tool"
-msgstr "awesometool"
+msgstr "per la fantastica libreria"
 
 msgid "for hosting the update files"
-msgstr "Forhostingupdatefiles"
+msgstr "per gli aggiornamenti online"
 
 msgid "for the USB Loader source"
-msgstr "e rilascio codice sorgente"
+msgstr "per rilascio codice sorgente"
 
 msgid "formatted!"
 msgstr "formattato!"
@@ -914,11 +911,93 @@ msgstr ""
 msgid "titles.txt Path"
 msgstr "Percorso Titles.txt"
 
-#~ msgid "file(s) left"
-#~ msgstr "file mancante/i"
+msgid "TXTCheatcodes Path"
+msgstr "Percorso Trucchi in Txt"
+
+## r567
+
+msgid "Anti"
+msgstr "Anti"
+
+msgid "Cheatfile is blank"
+msgstr "il file dei trucchi è vuoto"
+
+msgid "Could not create GCT file"
+msgstr "Non posso creare il file GCT"
+
+msgid "Create"
+msgstr "Creare"
+
+msgid "Error"
+msgstr "Errore"
+
+
+msgid "GCT File created"
+msgstr "Creato file GCT"
+
+
+msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
+msgstr "Molto probabilmente le dimensioni non sono divisibili per 4!"
+
+
+msgid "No Cheatfile found"
+
+msgstr "Nessun file trucchi trovato"
+
+msgid "Ok"
+msgstr "OK"
+
+msgid "TXTCheatcodes Path"
+msgstr "Percorso File Trucchi (Cheat)"
+
+msgid "You have attempted to load a bad image"
+msgstr "Hai tentato di caricare un'immagine sbagliata"
+
+msgid "does not exist!  Loading game without cheats."
+msgstr "Non esiste! Caricamento gioco senza trucchi."
+
+msgid "does not exist!  You Messed something up, Idiot."
+msgstr "Non esiste! Hai omesso qualcosa, Idiota."
 
 #~ msgid "for hosting the covers/discarts"
-#~ msgstr "Forhostingcovers"
+#~ msgstr "per le copertine online"
+
+## r569
+
+msgid "contains over 255 lines of code.  It will produce unexpected results."
+msgstr "contiene più di 255 linee di codice. Produrrà un risultato inatteso.."
+
+## r570
+
+msgid "Download Discart image?"
+msgstr "Scarico l'immagine del disco?"
+
+msgid "file left"
+msgstr "file mancante"
+
+msgid "files left"
+msgstr "file mancanti"
+
+## r580
+
+msgid "for WiiTDB"
+msgstr "per l'archivio WiiTDB"
+
+
+## r582
+
+msgid "No Favorites"
+msgstr "Nessun Favorito"
+
+msgid "You are choosing to display favorites and you do not have any selected."
+msgstr "Hai scelto di visualizzare i preferiti e non ne hai selezionato nessuno"
+
+#~ msgid "Missing files"
+#~ msgstr "File Mancante/i"
+
+
+
+## Elimitati/Delated ver 552 or below
 
 #~ msgid "Coverpath change"
 #~ msgstr "Modifico Percorso Copertina"
