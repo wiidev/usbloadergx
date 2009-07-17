@@ -1908,42 +1908,9 @@ ProgressDownloadWindow(int choice2)
         }
     }
 
+	// get Wii's language setting
 	char sysLanguage[3];
-	switch(CONF_GetLanguage()){
-		case CONF_LANG_JAPANESE:
-				sprintf(sysLanguage, "JA");
-				break;
-		case CONF_LANG_ENGLISH:
-				sprintf(sysLanguage, "EN");
-				break;
-		case CONF_LANG_GERMAN:
-				sprintf(sysLanguage, "DE");
-				break;
-		case CONF_LANG_FRENCH:
-				sprintf(sysLanguage, "FR");
-				break;
-		case CONF_LANG_SPANISH:
-				sprintf(sysLanguage, "ES");
-				break;
-		case CONF_LANG_ITALIAN:
-				sprintf(sysLanguage, "IT");
-				break;
-		case CONF_LANG_DUTCH:
-				sprintf(sysLanguage, "NL");
-				break;
-/*		case CONF_LANG_PORTUGUESE:
-				sprintf(sysLanguage, "PO");
-				break;*/
-		case CONF_LANG_SIMP_CHINESE:
-				sprintf(sysLanguage, "EN");   // default to EN for chinese
-				break;
-		case CONF_LANG_TRAD_CHINESE:
-				sprintf(sysLanguage, "EN");   // default to EN for chinese
-				break;
-		case CONF_LANG_KOREAN:
-				sprintf(sysLanguage, "KO");
-				break;
-	}
+	GetLanguageToLangCode(sysLanguage);
 
 	//int server = 1;
 	while (i < cntMissFiles)
@@ -1989,6 +1956,7 @@ ProgressDownloadWindow(int choice2)
 						break;
 				case 'D':
 				case 'F':
+				case 'I':
 				case 'P':
 				case 'X':
 				case 'Y':
@@ -2036,6 +2004,7 @@ ProgressDownloadWindow(int choice2)
 						break;
 				case 'D':
 				case 'F':
+				case 'I':
 				case 'P':
 				case 'X':
 				case 'Y':
@@ -2081,6 +2050,7 @@ ProgressDownloadWindow(int choice2)
 						break;
 				case 'D':
 				case 'F':
+				case 'I':
 				case 'P':
 				case 'X':
 				case 'Y':
@@ -2364,23 +2334,23 @@ int ProgressUpdateWindow()
 		}
 	}
 
-
+	// get Wii's language setting
+	char sysLanguage[3];
+	GetLanguageToLangCode(sysLanguage);
+	
 	//make the URL to get XML based on our games
-	char XMLurl[2032];
+	char XMLurl[2040];
 	char filename[10];
-	//strncat (XMLurl, "http://wiitdb.com/wiitdb.zip?ID=", 32);
-	strcpy (XMLurl, "http://wiitdb.com/wiitdb.zip?ID=");
+	snprintf(XMLurl,sizeof(XMLurl),"http://wiitdb.com/wiitdb.zip?LANG=%s?ID=",sysLanguage);
 	unsigned int i;
-	for (i = 0; i < gameCnt ; i++)
-			{
-				struct discHdr* header = &gameList[i];
-				if (i<500){
-					snprintf (filename,sizeof(filename),"%c%c%c", header->id[1], header->id[2], header->id[3]);
-						strncat (XMLurl, filename,3 );
-					
-					if ((i!=gameCnt-1)&&(i<500))
-						strncat (XMLurl, ",",1);
-				}
+	for (i = 0; i < gameCnt ; i++) {
+		struct discHdr* header = &gameList[i];
+		if (i<500) {
+			snprintf(filename,sizeof(filename),"%c%c%c", header->id[1], header->id[2], header->id[3]);
+			strncat(XMLurl, filename,3 );
+			if ((i!=gameCnt-1)&&(i<500))
+				strncat(XMLurl, ",",1);
+		}
 	}
 
 	if(IsNetworkInit() && ret >= 0) {
@@ -2624,25 +2594,24 @@ int ProgressUpdateWindow()
         }
     }
 
-
+	// get Wii's language setting
+	char sysLanguage[3];
+	GetLanguageToLangCode(sysLanguage);
+	
 	//make the URL to get XML based on our games
-	char XMLurl[2032];
+	char XMLurl[2040];
 	char filename[10];
-	//strncat (XMLurl, "http://wiitdb.com/wiitdb.zip?ID=", 32);
-	strcpy (XMLurl, "http://wiitdb.com/wiitdb.zip?ID=");
+	snprintf(XMLurl,sizeof(XMLurl),"http://wiitdb.com/wiitdb.zip?LANG=%s?ID=",sysLanguage);
 	unsigned int i;
-	for (i = 0; i < gameCnt ; i++)
-			{
-				struct discHdr* header = &gameList[i];
-				if (i<500){
-					snprintf (filename,sizeof(filename),"%c%c%c", header->id[1], header->id[2], header->id[3]);
-						strncat (XMLurl, filename,3 );
-					
-					if ((i!=gameCnt-1)&&(i<500))
-						strncat (XMLurl, ",",1);
-				}
+	for (i = 0; i < gameCnt ; i++) {
+		struct discHdr* header = &gameList[i];
+		if (i<500) {
+			snprintf(filename,sizeof(filename),"%c%c%c", header->id[1], header->id[2], header->id[3]);
+			strncat(XMLurl, filename,3 );
+			if ((i!=gameCnt-1)&&(i<500))
+				strncat(XMLurl, ",",1);
+		}
 	}
-
 
     char dolpath[150];
 //    char dolpathsuccess[150];//use coverspath as a folder for the update wad so we dont make a new folder and have to delete it
@@ -2954,4 +2923,46 @@ exit:
 char * GetMissingFiles()
 {
     return (char *) missingFiles;
+}
+
+
+
+/* get the language setting from the Wii settings and return a language code */
+void GetLanguageToLangCode(char *langcode) {
+
+	switch(CONF_GetLanguage()){
+		case CONF_LANG_JAPANESE:
+				sprintf(langcode, "JA");
+				break;
+		case CONF_LANG_ENGLISH:
+				sprintf(langcode, "EN");
+				break;
+		case CONF_LANG_GERMAN:
+				sprintf(langcode, "DE");
+				break;
+		case CONF_LANG_FRENCH:
+				sprintf(langcode, "FR");
+				break;
+		case CONF_LANG_SPANISH:
+				sprintf(langcode, "ES");
+				break;
+		case CONF_LANG_ITALIAN:
+				sprintf(langcode, "IT");
+				break;
+		case CONF_LANG_DUTCH:
+				sprintf(langcode, "NL");
+				break;
+/*		case CONF_LANG_PORTUGUESE:
+				sprintf(langcode, "PO");
+				break;*/
+		case CONF_LANG_SIMP_CHINESE:
+				sprintf(langcode, "EN");   // default to EN for chinese
+				break;
+		case CONF_LANG_TRAD_CHINESE:
+				sprintf(langcode, "EN");   // default to EN for chinese
+				break;
+		case CONF_LANG_KOREAN:
+				sprintf(langcode, "KO");
+				break;
+	}
 }

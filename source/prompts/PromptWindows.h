@@ -27,5 +27,6 @@ int ProgressUpdateWindow();
 char * GetMissingFiles();
 int WindowScreensaver();
 int CodeDownload(const char *id);
+void GetLanguageToLangCode(char *langcode);
 
 #endif

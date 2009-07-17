@@ -21,9 +21,9 @@ struct gameXMLinfo
 	char id[7];
 	char version[50];
 	char region[7];
-	char title[100];
+	char title[200];
 	char synopsis[3000];
-	char title_EN[100];
+	char title_EN[200];
 	char synopsis_EN[3000];
 	char locales[XML_ELEMMAX+1][3];
 	int localeCnt;

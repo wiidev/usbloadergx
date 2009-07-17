@@ -286,8 +286,8 @@ void LoadTitlesFromXML(char *langtxt, bool forcejptoen)
     nodeid = mxmlIndexReset(nodeindex);
     *element_text = 0;
 	char id_text[10];
-	char title_text[100] = "";
-	char title_text_EN[100] = "";
+	char title_text[200] = "";
+	char title_text_EN[200] = "";
 	
 	/* search index of id elements, load all id/titles text */
     while (nodeid != NULL)
@@ -576,8 +576,7 @@ bool LoadGameInfoFromXML(char* gameid, char* langtxt)
 		if (gameid[3] == 'J') strlcpy(gameinfo.region,"NTSC-J",sizeof(gameinfo.region));
 		if (gameid[3] == 'K') strlcpy(gameinfo.region,"NTSC-K",sizeof(gameinfo.region));
 		if (gameid[3] == 'P') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
-		if (gameid[3] == 'X') strlcpy(gameinfo.region,"PAL-X",sizeof(gameinfo.region)); // does X appear in any original game ID?
-		// the following codes do not exist and should only appear on modified game IDs
+		if (gameid[3] == 'X') strlcpy(gameinfo.region,"PAL-X",sizeof(gameinfo.region));
 		if (gameid[3] == 'D') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
 		if (gameid[3] == 'G') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
 		if (gameid[3] == 'F') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
