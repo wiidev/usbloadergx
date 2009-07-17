@@ -155,7 +155,7 @@ extern u8 fix002;
 extern u8 reloadblock;
 extern u8 countrystrings;
 extern u8 alternatedol;
-extern u8 alternatedoloffset;
+extern u32 alternatedoloffset;
 extern u8 xflip;
 extern u8 qboot;
 extern u8 sort;
@@ -180,7 +180,7 @@ struct Game_CFG
 	u8 errorfix002;
 	u8 iosreloadblock;
 	u8 loadalternatedol;
-    u8 alternatedolstart;
+   u32 alternatedolstart;
 	u8 patchcountrystrings;
 	char alternatedolname[40];
 };

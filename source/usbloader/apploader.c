@@ -294,7 +294,7 @@ void gamepatches(void * dst, int len, u8 videoSelected, u8 patchcountrystring, u
 
 }
 
-s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8 patchcountrystring, u8 error002fix, u8 alternatedol, u8 alternatedoloffset)
+s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8 patchcountrystring, u8 error002fix, u8 alternatedol, u32 alternatedoloffset)
 {
 	app_entry appldr_entry;
 	app_init  appldr_init;
