@@ -243,6 +243,8 @@ int autoSelectDol(const char *id)
 	if (strcmp(id,"RM269") == 0) return 492;
 	if (strcmp(id,"RKM5D") == 0) return 290;
 	if (strcmp(id,"RJ864") == 0) return 8;
+	if (strcmp(id,"RM269") == 0) return 517;
+	if (strcmp(id,"RMLH4") == 0) return 54;
 	//if (strcmp(id,"") == 0) return ; //blank line for more dols
 	
 	return -1;

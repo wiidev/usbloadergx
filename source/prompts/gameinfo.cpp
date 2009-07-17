@@ -662,8 +662,6 @@ int showGameInfo(char *ID)
 		{
 			
 			VIDEO_WaitVSync();
-			
-			//u32 buttonshold = ButtonsHold();
 			if(shutdown == 1)
 			{
 				wiilight(0);
@@ -680,12 +678,8 @@ int showGameInfo(char *ID)
 				else if (page==2)
 				{
 					HaltGui();
-					//backBtn.SetClickable(true);
 					gameinfoWindow2.SetVisible(false);
 					gameinfoWindow.SetVisible(true);
-					//gameinfoWindow.Append(&backBtn);
-					//gameinfoWindow.Append(&nextBtn);
-					//gameinfoWindow.Append(&homeBtn);
 					mainWindow->Remove(&gameinfoWindow2);
 					ResumeGui();
 					page=1;
@@ -733,21 +727,22 @@ int showGameInfo(char *ID)
 				if (!((ButtonsHold() & WPAD_BUTTON_UP)||(ButtonsHold() & PAD_BUTTON_UP)))
 					upBtn.ResetState();
 			}
-			else if ((dnBtn.GetState()==STATE_CLICKED||dnBtn.GetState()==STATE_HELD) && page==2)
+			else if ((dnBtn.GetState()==STATE_CLICKED||dnBtn.GetState()==STATE_HELD) && page==2
+						&&synopsisTxt->GetTotalLines()>pagesize
+						&&synopsisTxt->GetFirstLine()<synopsisTxt->GetTotalLines()-pagesize)
 			{	
 			int l=0;
 				if(synopsisTxt->GetTotalLines()>pagesize)
 					l=synopsisTxt->GetFirstLine()+1;
 				
-				if (l>synopsisTxt->GetTotalLines()+1-pagesize)
-						l=synopsisTxt->GetTotalLines()+1-pagesize;
+				if (l>(synopsisTxt->GetTotalLines()+1)-pagesize)
+						l=(synopsisTxt->GetTotalLines()+1)-pagesize;
 				
 				synopsisTxt->SetFirstLine(l);
 				usleep(60000);
 				if (!((ButtonsHold() & WPAD_BUTTON_DOWN)||(ButtonsHold() & PAD_BUTTON_DOWN)))
 					dnBtn.ResetState();
 			}
-			//took this out cause it doesnt act right when not called from the main window and I don't feel like fixing it right now
 			else if (homeBtn.GetState()==STATE_CLICKED)
 			{
 				if(page==1)

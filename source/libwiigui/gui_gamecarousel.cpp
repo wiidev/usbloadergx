@@ -40,6 +40,7 @@ GuiGameCarousel::GuiGameCarousel(int w, int h, struct discHdr * l, int count, co
 	listOffset = (offset == 0) ? this->FindMenuItem(-1, 1) : offset;
 	selectable = true;
 	selectedItem = selected - offset;
+	if (selectedItem==0)selectedItem=(pagesize+1)/2;
 	focus = 1;					 // allow focus
 	firstPic = 0;
 	clickedItem = -1;
@@ -244,7 +245,7 @@ void GuiGameCarousel::Draw()
 		return;
 
 	int next = listOffset;
-
+	
 	for(int i=0; i<pagesize; i++) {
 		if(next >= 0) {
             game[i]->SetImage(ImageBuffer(i));

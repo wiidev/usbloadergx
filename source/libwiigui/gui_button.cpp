@@ -390,6 +390,20 @@ void GuiButton::Update(GuiTrigger * t)
 			}
 		}
 	}
+	#else
+	
+	if(state == STATE_SELECTED && (stateChan == t->chan || stateChan == -1))
+				this->ResetState();
+
+			if(effectTarget == effectTargetOver && effectAmount == effectAmountOver)
+			{
+				// initiate effects (in reverse)
+				effects = effectsOver;
+				effectAmount = -effectAmountOver;
+				effectTarget = 100;
+			}
+	
+	
 	#endif
 
 	// button triggers
