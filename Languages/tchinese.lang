@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-07-16 05:32-0400\n"
-"PO-Revision-Date: \n"
+"PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -13,64 +13,64 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid "(both retired)"
-msgstr ""
+msgstr "所有退休者"
 
 msgid "0 (Everyone)"
-msgstr ""
+msgstr "0 (所有人)"
 
 msgid "1 (Child 7+)"
-msgstr ""
+msgstr "1 (孩童 7歲以上)"
 
 msgid "2 (Teen 12+)"
-msgstr ""
+msgstr "(青少年 12歲以上)"
 
 msgid "3 (Mature 16+)"
-msgstr ""
+msgstr "(青年 16歲以上)"
 
 msgid "3D Covers"
-msgstr ""
+msgstr "3D 封面"
 
 msgid "4 (Adults Only 18+)"
-msgstr ""
+msgstr "(成人 18歲以上)"
 
 msgid ">> Finishing installation..."
-msgstr ""
+msgstr "正在完成安裝..."
 
 msgid ">> Installing content #"
-msgstr ""
+msgstr "正在安裝內容 #"
 
 msgid ">> Installing ticket..."
-msgstr ""
+msgstr "正在安裝 ticket..."
 
 msgid ">> Installing title..."
-msgstr ""
+msgstr "正在安裝 title..."
 
 msgid ">> Reading WAD data..."
-msgstr ""
+msgstr "正在讀取WAD資料"
 
 msgid "AUTO"
-msgstr ""
+msgstr "自動"
 
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "USB Loader GX 功能已解鎖."
 
 msgid "Alternate DOL"
-msgstr ""
+msgstr "替代 Dol"
 
 msgid "Anti"
-msgstr ""
+msgstr "防止"
 
 msgid "App Language"
 msgstr "語言設定"
 
 msgid "Apr"
-msgstr ""
+msgstr "四月"
 
 msgid "Are you sure?"
 msgstr "確定?"
 
 msgid "Aug"
-msgstr ""
+msgstr "八月"
 
 msgid "AutoPatch"
 msgstr "自動修改"
@@ -94,10 +94,10 @@ msgid "Backgroundmusic Path changed."
 msgstr "背景音樂路徑"
 
 msgid "Big thanks to:"
-msgstr ""
+msgstr "大感謝"
 
 msgid "Block IOS Reload"
-msgstr ""
+msgstr "阻斷IOS重新載入"
 
 msgid "Boot/Standard"
 msgstr "啟動/標準"
@@ -121,10 +121,10 @@ msgid "Cheatcodes Path"
 msgstr ""
 
 msgid "Cheatcodes Path changed"
-msgstr ""
+msgstr "金手指檔案路徑"
 
 msgid "Cheatfile is blank"
-msgstr ""
+msgstr "金手指檔案無內容"
 
 msgid "Checking for Updates"
 msgstr "正在檢查更新"
@@ -139,19 +139,19 @@ msgid "Close"
 msgstr "關閉"
 
 msgid "Code Download"
-msgstr ""
+msgstr "下載金手指"
 
 msgid "Confirm"
-msgstr ""
+msgstr "確定"
 
 msgid "Console"
-msgstr ""
+msgstr "控制台"
 
 msgid "Console Default"
 msgstr "主機預設值"
 
 msgid "Console Locked"
-msgstr "控制台鎖定"
+msgstr "控制台已鎖定"
 
 msgid "Console should be unlocked to modify it."
 msgstr "需解鎖以開啟設定功能."
@@ -160,19 +160,19 @@ msgid "Continue to install game?"
 msgstr "繼續安裝遊戲?"
 
 msgid "Controllevel"
-msgstr ""
+msgstr "遊戲分級"
 
 msgid "Correct Password"
 msgstr "密碼正確"
 
 msgid "Could not create GCT file"
-msgstr ""
+msgstr "無法產生GCT檔案"
 
 msgid "Could not find a WBFS partition."
-msgstr ""
+msgstr "無法找到WBFS磁區"
 
 msgid "Could not initialize DIP module!"
-msgstr "無法啟動 DIP 模組!"
+msgstr "無法啟動DIP模組!"
 
 msgid "Could not initialize network!"
 msgstr "無法啟動網路!"
@@ -181,16 +181,16 @@ msgid "Could not open Disc"
 msgstr "無法開啟光碟"
 
 msgid "Could not open WBFS partition"
-msgstr ""
+msgstr "無法開啟WBFS磁區"
 
 msgid "Could not open disc."
-msgstr ""
+msgstr "無法開啟光碟"
 
 msgid "Could not read the disc."
-msgstr ""
+msgstr "無法讀取光碟"
 
 msgid "Could not set USB."
-msgstr ""
+msgstr "無法設置USB"
 
 msgid "Cover Download"
 msgstr "下載封面"
@@ -202,25 +202,25 @@ msgid "Coverpath Changed"
 msgstr "封面路徑已變更"
 
 msgid "Create"
-msgstr ""
+msgstr "產生"
 
 msgid "Credits"
 msgstr "Credits"
 
 msgid "Custom Paths"
-msgstr ""
+msgstr "自定路徑"
 
 msgid "DOL from SD"
-msgstr ""
+msgstr "從SD卡讀取DOL"
 
 msgid "DOL from disc"
-msgstr ""
+msgstr "從光碟讀取DOL"
 
 msgid "Dec"
-msgstr ""
+msgstr "十二月"
 
 msgid "Default"
-msgstr ""
+msgstr "預設值"
 
 msgid "Default Gamesettings"
 msgstr "初始化遊戲設定"
@@ -229,10 +229,10 @@ msgid "Default Settings"
 msgstr "初始化設定"
 
 msgid "Delete"
-msgstr ""
+msgstr "刪除"
 
 msgid "Developed by"
-msgstr ""
+msgstr "開發者"
 
 msgid "Disc Default"
 msgstr "光碟預設"
@@ -250,7 +250,7 @@ msgid "Discpath change"
 msgstr "變更光碟圖像路徑"
 
 msgid "DiskFlip"
-msgstr ""
+msgstr "光碟滑動"
 
 msgid "Display"
 msgstr "顯示"
@@ -259,7 +259,7 @@ msgid "Do you really want to delete:"
 msgstr "確定刪除:"
 
 msgid "Do you want to change language?"
-msgstr ""
+msgstr "變更語言?"
 
 msgid "Do you want to format:"
 msgstr "是否格式化:"
@@ -268,31 +268,31 @@ msgid "Do you want to retry for 30 secs?"
 msgstr "是否等待30秒重試?"
 
 msgid "Do you want to use the alt dol that is known to be correct?"
-msgstr ""
+msgstr "使用已知為正確的替代DOL?"
 
 msgid "Dol Path"
-msgstr ""
+msgstr "Dol路徑"
 
 msgid "Dolpath Changed"
-msgstr ""
+msgstr "Dol路徑已變更"
 
 msgid "Dolpath change"
-msgstr ""
+msgstr "變更Dol路徑"
 
 msgid "Download Boxart image?"
-msgstr "下載外盒封面圖片?"
+msgstr "下載外盒圖片?"
 
 msgid "Download Discart image?"
-msgstr ""
+msgstr "下載光碟圖片?"
 
 msgid "Download Now"
-msgstr ""
+msgstr "下載"
 
 msgid "Download finished"
 msgstr "下載完成"
 
 msgid "Downloading"
-msgstr ""
+msgstr "正在下載"
 
 msgid "Downloading file"
 msgstr "檔案下載中"
@@ -301,28 +301,28 @@ msgid "Dutch"
 msgstr "荷文"
 
 msgid "ERROR"
-msgstr ""
+msgstr "錯誤"
 
 msgid "ERROR:"
-msgstr ""
+msgstr "錯誤"
 
 msgid "English"
 msgstr "英文"
 
 msgid "Error"
-msgstr ""
+msgstr "錯誤"
 
 msgid "Error !"
 msgstr "錯誤 !"
 
 msgid "Error 002 fix"
-msgstr ""
+msgstr "修正002錯誤"
 
 msgid "Error reading Disc"
 msgstr "讀取光碟錯誤"
 
 msgid "Error..."
-msgstr ""
+msgstr "錯誤..."
 
 msgid "Exit USB Loader GX?"
 msgstr "離開 USB Loader GX?"
@@ -331,13 +331,13 @@ msgid "Failed formating"
 msgstr "格式化失敗"
 
 msgid "Feb"
-msgstr ""
+msgstr "二月"
 
 msgid "File not found."
 msgstr "找不到該檔案"
 
 msgid "Finishing installation... Ok!"
-msgstr ""
+msgstr "正在完成安裝...完成!"
 
 msgid "Flip-X"
 msgstr "按鍵規則"
@@ -361,10 +361,10 @@ msgid "Full Shutdown"
 msgstr "關機"
 
 msgid "GCT File created"
-msgstr ""
+msgstr "GCT檔案已產生"
 
 msgid "GUI Settings"
-msgstr ""
+msgstr "介面設定"
 
 msgid "Game ID"
 msgstr "遊戲代碼"
@@ -373,7 +373,7 @@ msgid "Game Language"
 msgstr "語言"
 
 msgid "Game Load"
-msgstr ""
+msgstr "遊戲載入設定"
 
 msgid "Game Region"
 msgstr "遊戲區碼"
@@ -400,7 +400,7 @@ msgid "How do you want to update?"
 msgstr "是否執行更新?"
 
 msgid "How to Shutdown?"
-msgstr "關機選項�?"
+msgstr "關機選項?"
 
 msgid "Initializing Network"
 msgstr "正在啟動網路"
@@ -409,13 +409,13 @@ msgid "Insert Disk"
 msgstr "插入光碟"
 
 msgid "Insert an SD-Card to download images."
-msgstr "插入 SD 卡下載封面."
+msgstr "插入SD卡下載封面."
 
 msgid "Insert an SD-Card to save."
-msgstr "插入 SD 卡儲存."
+msgstr "插入SD卡儲存."
 
 msgid "Insert an SD-Card to use this option."
-msgstr "插入 SD 卡以使用該功能"
+msgstr "插入SD卡以使用該功能"
 
 msgid "Install Error!"
 msgstr "安裝錯誤!"
@@ -424,34 +424,34 @@ msgid "Install a game"
 msgstr "安裝遊戲"
 
 msgid "Installing content... Ok!"
-msgstr ""
+msgstr "正在安裝內容...完成"
 
 msgid "Installing game:"
 msgstr "正在安裝遊戲:"
 
 msgid "Installing ticket... Ok!"
-msgstr ""
+msgstr "正在安裝ticket...完成"
 
 msgid "Installing title... Ok!"
-msgstr ""
+msgstr "正在安裝 title...完成"
 
 msgid "Installing wad"
-msgstr ""
+msgstr "正在安裝wad"
 
 msgid "Italian"
 msgstr "義大利文"
 
 msgid "Jan"
-msgstr ""
+msgstr "一月"
 
 msgid "Japanese"
 msgstr "日文"
 
 msgid "July"
-msgstr ""
+msgstr "七月"
 
 msgid "June"
-msgstr ""
+msgstr "六月"
 
 msgid "Keyboard"
 msgstr "鍵盤"
@@ -460,13 +460,13 @@ msgid "Korean"
 msgstr "韓文"
 
 msgid "Language change:"
-msgstr ""
+msgstr "變更語言為:"
 
 msgid "Languagepath changed."
-msgstr ""
+msgstr "語言路徑已變更"
 
 msgid "Leaving so you can restart..."
-msgstr ""
+msgstr "正在退出並請重新啟動..."
 
 msgid "Left"
 msgstr "左"
@@ -475,31 +475,31 @@ msgid "Like SysMenu"
 msgstr "同系統選單"
 
 msgid "Load this dol as alternate dol?"
-msgstr ""
+msgstr "載入這個dol做為替代的dol?"
 
 msgid "Loading standard language."
-msgstr "載入預設語言"
+msgstr "正在載入預設語言"
 
 msgid "Loading standard music."
-msgstr "載入預設音樂"
+msgstr "正在載入預設音樂"
 
 msgid "Lock Console"
 msgstr "鎖定控制台"
 
 msgid "Locked"
-msgstr ""
+msgstr "已鎖定"
 
 msgid "Mar"
-msgstr ""
+msgstr "三月"
 
 msgid "May"
-msgstr ""
+msgstr "五月"
 
 msgid "Missing files"
 msgstr "缺少的檔案"
 
 msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
-msgstr ""
+msgstr "該圖檔格式可能不正確"
 
 msgid "Music Volume"
 msgstr "音量"
@@ -517,25 +517,25 @@ msgid "No"
 msgstr "否"
 
 msgid "No Cheatfile found"
-msgstr ""
+msgstr "無法找到金手指檔案"
 
 msgid "No Favorites"
-msgstr ""
+msgstr "無我的最愛列表"
 
 msgid "No SD-Card inserted!"
-msgstr "未插入 SD 卡!"
+msgstr "未插入SD卡!"
 
 msgid "No USB Device"
-msgstr "沒有 USB 裝置"
+msgstr "沒有USB裝置"
 
 msgid "No USB Device found."
-msgstr "找不到 USB 裝置."
+msgstr "找不到USB裝置."
 
 msgid "No WBFS partition found"
-msgstr "找不到 WBFS 磁區"
+msgstr "找不到WBFS磁區"
 
 msgid "No dol file found on disc."
-msgstr ""
+msgstr "光碟中找不到dol檔案"
 
 msgid "No file missing!"
 msgstr "沒有缺少的檔案!"
@@ -553,10 +553,10 @@ msgid "Normal Covers"
 msgstr "一般封面"
 
 msgid "Not a Wii Disc"
-msgstr "不是 Wii 的光碟"
+msgstr "不是Wii的光碟"
 
 msgid "Not enough free memory."
-msgstr ""
+msgstr "剩餘記憶體不足"
 
 msgid "Not enough free space!"
 msgstr "剩餘空間不足!"
@@ -565,7 +565,7 @@ msgid "Not supported format!"
 msgstr "未支援的格式"
 
 msgid "Nov"
-msgstr ""
+msgstr "十一月"
 
 msgid "OFF"
 msgstr "關閉"
@@ -577,13 +577,13 @@ msgid "ON"
 msgstr "開啟"
 
 msgid "Oct"
-msgstr ""
+msgstr "十月"
 
 msgid "Official Site"
 msgstr "官方網址"
 
 msgid "Ok"
-msgstr ""
+msgstr "確定"
 
 msgid "Only for Install"
 msgstr "安裝遊戲時"
@@ -592,7 +592,7 @@ msgid "Parental Control"
 msgstr "親子控制"
 
 msgid "Parental control"
-msgstr ""
+msgstr "親子控制"
 
 msgid "Partition"
 msgstr "磁區"
@@ -610,19 +610,19 @@ msgid "Patch Country Strings"
 msgstr "修改國別設定"
 
 msgid "Path of titles.txt change"
-msgstr "變更 Title 檔案路徑"
+msgstr "變更Title檔案路徑"
 
 msgid "Path of titles.txt changed."
-msgstr "Title 檔案路徑已變更"
+msgstr "Title檔案路徑已變更"
 
 msgid "Pick from a list"
-msgstr ""
+msgstr "從列表中選取"
 
 msgid "Play Count"
-msgstr ""
+msgstr "執行次數"
 
 msgid "Power off the Wii"
-msgstr "關閉 Wii 主機"
+msgstr "關閉Wii主機"
 
 msgid "Prev"
 msgstr "往前"
@@ -631,25 +631,25 @@ msgid "Prompts Buttons"
 msgstr "顯示校正"
 
 msgid "Published by"
-msgstr ""
+msgstr "發布者"
 
 msgid "Quick Boot"
 msgstr "快速啟動"
 
 msgid "Reading WAD data... Ok!"
-msgstr ""
+msgstr "正在讀取wad資料...完成"
 
 msgid "Released"
-msgstr ""
+msgstr "發表"
 
 msgid "Reload SD"
 msgstr "重新載入SD卡"
 
 msgid "Rename Game on WBFS"
-msgstr "變更 WBFS 上的遊戲名稱"
+msgstr "變更WBFS上的遊戲名稱"
 
 msgid "Reset Playcounter"
-msgstr ""
+msgstr "重置執行次數"
 
 msgid "Restart"
 msgstr "重新啟動"
@@ -661,7 +661,7 @@ msgid "Return"
 msgstr "返回"
 
 msgid "Return to Wii Menu"
-msgstr ""
+msgstr "返回系統選單"
 
 msgid "Right"
 msgstr "右"
@@ -673,10 +673,10 @@ msgid "SChinese"
 msgstr "簡體中文"
 
 msgid "SD selected"
-msgstr ""
+msgstr "SD卡已選擇"
 
 msgid "SFX Volume"
-msgstr ""
+msgstr "音效音量"
 
 msgid "Save"
 msgstr "儲存"
@@ -685,10 +685,10 @@ msgid "Save Failed"
 msgstr "儲存失敗"
 
 msgid "Screensaver"
-msgstr ""
+msgstr "螢幕保護"
 
 msgid "Sept"
-msgstr ""
+msgstr "九月"
 
 msgid "Set as backgroundmusic?"
 msgstr "設定背景音樂"
@@ -697,7 +697,7 @@ msgid "Settings"
 msgstr "設定"
 
 msgid "Shit"
-msgstr ""
+msgstr "XX"
 
 msgid "Shutdown System"
 msgstr "關閉系統"
@@ -706,7 +706,7 @@ msgid "Shutdown to Idle"
 msgstr "進入待機狀態"
 
 msgid "Sound"
-msgstr ""
+msgstr "音效設定"
 
 msgid "Spanish"
 msgstr "西班牙文"
@@ -718,7 +718,7 @@ msgid "Standard"
 msgstr "預設"
 
 msgid "Success"
-msgstr ""
+msgstr "成功"
 
 msgid "Success:"
 msgstr "成功:"
@@ -742,11 +742,11 @@ msgid "TChinese"
 msgstr "繁體中文"
 
 msgid "TXTCheatcodes Path"
-msgstr ""
+msgstr "金手指文字檔路徑"
 
 #, c-format
 msgid "The wad installation failed with error %ld"
-msgstr ""
+msgstr "wad安裝失敗,錯誤代碼："
 
 msgid "ThemePath"
 msgstr "背景主題路徑"
@@ -761,7 +761,7 @@ msgid "Time left:"
 msgstr "剩餘時間:"
 
 msgid "Titles from XML"
-msgstr ""
+msgstr "XML遊戲名稱"
 
 msgid "Tooltips"
 msgstr "工具提示"
@@ -774,19 +774,19 @@ msgstr "USB Loader GX 被鎖定"
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
-msgstr ""
+msgstr "無法開啟剛下載的wad檔案(%s)"
 
 msgid "Uninstall"
 msgstr "移除"
 
 msgid "Unlock console to use this option."
-msgstr ""
+msgstr "解鎖以進行設定"
 
 msgid "Unlocked"
-msgstr ""
+msgstr "已解鎖"
 
 msgid "Update"
-msgstr ""
+msgstr "更新"
 
 msgid "Update All"
 msgstr "升級所有檔案"
@@ -822,13 +822,13 @@ msgid "Waiting..."
 msgstr "等待中..."
 
 msgid "WiFi Features"
-msgstr ""
+msgstr "WiFi功能設定"
 
 msgid "Widescreen Fix"
 msgstr "寬螢幕校正"
 
 msgid "Wii Menu"
-msgstr "Wii 系統選單"
+msgstr "Wii系統選單"
 
 msgid "Wiilight"
 msgstr "光碟機藍光"
@@ -840,13 +840,13 @@ msgid "Yes"
 msgstr "是"
 
 msgid "You are about to delete "
-msgstr ""
+msgstr "欲刪除:"
 
 msgid "You are choosing to display favorites and you do not have any selected."
-msgstr ""
+msgstr "選擇展示我的最愛選單,但選單中無已設定遊戲"
 
 msgid "You have attempted to load a bad image"
-msgstr ""
+msgstr "載入的影像有問題"
 
 msgid "You need to format a partition"
 msgstr "必須格式化一個磁區"
@@ -855,22 +855,22 @@ msgid "available"
 msgstr "可取得"
 
 msgid "contains over 255 lines of code.  It will produce unexpected results."
-msgstr ""
+msgstr "超過255行的指令,將導致無法預期的結果"
 
 msgid "does not exist!"
-msgstr ""
+msgstr "不存在"
 
 msgid "does not exist!  Loading game without cheats."
-msgstr ""
+msgstr "不存在!載入遊戲但不啟用金手指"
 
 msgid "does not exist!  You Messed something up, Idiot."
-msgstr ""
+msgstr "不存在!檔案錯誤"
 
 msgid "file left"
-msgstr ""
+msgstr "剩下的檔案"
 
 msgid "files left"
-msgstr ""
+msgstr "剩下的檔案"
 
 msgid "files not found on the server!"
 msgstr "伺服器中無此檔案!"
@@ -879,16 +879,16 @@ msgid "for"
 msgstr "的"
 
 msgid "for WiiTDB and hosting covers / disc images"
-msgstr ""
+msgstr "設置WiiTDB與封面檔案存放空間"
 
 msgid "for diverse patches"
-msgstr ""
+msgstr "的多種修正"
 
 msgid "for his awesome tool"
-msgstr ""
+msgstr "的優秀工具"
 
 msgid "for hosting the update files"
-msgstr ""
+msgstr "設置更新檔案存放空間"
 
 msgid "for the USB Loader source"
 msgstr "與釋出的原始碼"
@@ -909,7 +909,7 @@ msgid "seconds left"
 msgstr "剩餘秒數"
 
 msgid "there was an error"
-msgstr ""
+msgstr "發生錯誤"
 
 msgid "titles.txt Path"
 msgstr "Title檔案路徑"

@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-07-16 05:32-0400\n"
-"PO-Revision-Date: \n"
+"PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -55,7 +55,7 @@ msgid "All the features of USB Loader GX are unlocked."
 msgstr "Alle functies zijn vrijgegeven."
 
 msgid "Alternate DOL"
-msgstr "Dol afwisselen"
+msgstr "Alternatieve DOL"
 
 msgid "Anti"
 msgstr ""
@@ -97,7 +97,7 @@ msgid "Big thanks to:"
 msgstr "Grote dank aan:"
 
 msgid "Block IOS Reload"
-msgstr ""
+msgstr "Stop IOS herladen"
 
 msgid "Boot/Standard"
 msgstr "Start/Standaard"
@@ -124,7 +124,7 @@ msgid "Cheatcodes Path changed"
 msgstr "Locatie cheats gewijzigd"
 
 msgid "Cheatfile is blank"
-msgstr ""
+msgstr "Cheatbestand is leeg"
 
 msgid "Checking for Updates"
 msgstr "Controleren op updates"
@@ -163,10 +163,10 @@ msgid "Controllevel"
 msgstr "Controle level"
 
 msgid "Correct Password"
-msgstr "Juiste wachtwoord"
+msgstr "Juiste Wachtwoord"
 
 msgid "Could not create GCT file"
-msgstr ""
+msgstr "No se pudo crear archivo GCTJuiste wachtwoord"
 
 msgid "Could not find a WBFS partition."
 msgstr ""
@@ -202,7 +202,7 @@ msgid "Coverpath Changed"
 msgstr "Locatie hoesjes gewijzigd"
 
 msgid "Create"
-msgstr ""
+msgstr " "
 
 msgid "Credits"
 msgstr "Aftiteling"
@@ -250,7 +250,7 @@ msgid "Discpath change"
 msgstr "Locatie DVD labels wijzigen"
 
 msgid "DiskFlip"
-msgstr ""
+msgstr "DVDFlip"
 
 msgid "Display"
 msgstr "Tonen"
@@ -283,7 +283,7 @@ msgid "Download Boxart image?"
 msgstr "Hoesjes downloaden?"
 
 msgid "Download Discart image?"
-msgstr ""
+msgstr "DVD label downloaden?"
 
 msgid "Download Now"
 msgstr ""
@@ -310,7 +310,7 @@ msgid "English"
 msgstr "Engels"
 
 msgid "Error"
-msgstr ""
+msgstr "Fout"
 
 msgid "Error !"
 msgstr "Fout !"
@@ -361,7 +361,7 @@ msgid "Full Shutdown"
 msgstr "Volledig uitzetten"
 
 msgid "GCT File created"
-msgstr ""
+msgstr "GCT bestand aangemaakt"
 
 msgid "GUI Settings"
 msgstr "Menu opties"
@@ -460,7 +460,7 @@ msgid "Korean"
 msgstr "Koreaans"
 
 msgid "Language change:"
-msgstr ""
+msgstr "Taal wijzigen:"
 
 msgid "Languagepath changed."
 msgstr "Locatie taal gewijzigd."
@@ -499,7 +499,7 @@ msgid "Missing files"
 msgstr "Missende bestanden"
 
 msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
-msgstr ""
+msgstr "Waarschijnlijk zijn de dimensies niet deelbaar door 4."
 
 msgid "Music Volume"
 msgstr "Muziekvolume"
@@ -517,10 +517,10 @@ msgid "No"
 msgstr "Nee"
 
 msgid "No Cheatfile found"
-msgstr ""
+msgstr "Geen Cheatbestand gevonden"
 
 msgid "No Favorites"
-msgstr ""
+msgstr "geen favorieten"
 
 msgid "No SD-Card inserted!"
 msgstr "Geen SD kaart gevonden!"
@@ -562,7 +562,7 @@ msgid "Not enough free space!"
 msgstr "Niet genoeg vrije ruimte!"
 
 msgid "Not supported format!"
-msgstr "Formatteren niet ondersteund!"
+msgstr "Formaat niet ondersteund!"
 
 msgid "Nov"
 msgstr "Nov"
@@ -583,16 +583,16 @@ msgid "Official Site"
 msgstr "Officiele site"
 
 msgid "Ok"
-msgstr ""
+msgstr "Ok"
 
 msgid "Only for Install"
-msgstr "Alleen installeren"
+msgstr "Alleen bij  installeren"
 
 msgid "Parental Control"
 msgstr "Ouderlijk toezicht"
 
 msgid "Parental control"
-msgstr ""
+msgstr "Ouderlijk toezicht"
 
 msgid "Partition"
 msgstr "Partitie"
@@ -640,7 +640,7 @@ msgid "Reading WAD data... Ok!"
 msgstr ""
 
 msgid "Released"
-msgstr ""
+msgstr "Uitgegeven"
 
 msgid "Reload SD"
 msgstr "SD herladen"
@@ -649,7 +649,7 @@ msgid "Rename Game on WBFS"
 msgstr "Spel hernoemen op WBFS"
 
 msgid "Reset Playcounter"
-msgstr ""
+msgstr "Speeltellers resetten"
 
 msgid "Restart"
 msgstr "Herstarten"
@@ -685,7 +685,7 @@ msgid "Save Failed"
 msgstr "Opslaan mislukt"
 
 msgid "Screensaver"
-msgstr ""
+msgstr "Schermbeveiliging"
 
 msgid "Sept"
 msgstr "Sept"
@@ -739,10 +739,10 @@ msgid "System Default"
 msgstr "Systeem standaard"
 
 msgid "TChinese"
-msgstr "TChinees"
+msgstr "Chinees Trad."
 
 msgid "TXTCheatcodes Path"
-msgstr ""
+msgstr "Locatie TXT Cheats"
 
 #, c-format
 msgid "The wad installation failed with error %ld"
@@ -843,10 +843,10 @@ msgid "You are about to delete "
 msgstr ""
 
 msgid "You are choosing to display favorites and you do not have any selected."
-msgstr ""
+msgstr "Je wilt favorieten tonen, maar je hebt er geen ingesteld"
 
 msgid "You have attempted to load a bad image"
-msgstr ""
+msgstr "Je probeerde een slechte afbeelding te laden"
 
 msgid "You need to format a partition"
 msgstr "Je moet een partitie formatteren"
@@ -861,16 +861,16 @@ msgid "does not exist!"
 msgstr ""
 
 msgid "does not exist!  Loading game without cheats."
-msgstr ""
+msgstr "bestaat niet! Spel laden zonder cheats…"
 
 msgid "does not exist!  You Messed something up, Idiot."
-msgstr ""
+msgstr "bestaat niet! Je hebt waarschijnlijk iets fout gedaan."
 
 msgid "file left"
-msgstr ""
+msgstr "Bestanden resterend"
 
 msgid "files left"
-msgstr ""
+msgstr "Bestanden resterend"
 
 msgid "files not found on the server!"
 msgstr "Bestanden niet gevonden op server!"
@@ -885,13 +885,13 @@ msgid "for diverse patches"
 msgstr "voor vele correcties"
 
 msgid "for his awesome tool"
-msgstr "voor zijn geweldige programma"
+msgstr "voor zijn geweldige code"
 
 msgid "for hosting the update files"
 msgstr "(upload van  updates)"
 
 msgid "for the USB Loader source"
-msgstr ""
+msgstr "(voor de source code)"
 
 msgid "formatted!"
 msgstr "geformatteerd!"
@@ -947,7 +947,7 @@ msgstr "Locatie titles.txt"
 #~ msgid "Insert a Wii Disc!"
 #~ msgstr "Voer een Wii DVD in!!"
 
-#~ msgid "Sort Game List"
+#~ msgid  "Sort Game List"
 #~ msgstr "Spellenlijst sorteren"
 
 #~ msgid "Loading in cIOS249"
@@ -962,11 +962,11 @@ msgstr "Locatie titles.txt"
 #~ msgid "Select the Partition"
 #~ msgstr "Kies een partitie"
 
+#~ msgid "you want to format"
+#~ msgstr "Wil je formatteren "
+
 #~ msgid "Try"
 #~ msgstr "Probeer"
 
 #~ msgid "You don't have cIOS222"
 #~ msgstr "cIOS222 niet gevonden"
-
-#~ msgid "you want to format"
-#~ msgstr "Wil je formatteren?"

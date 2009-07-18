@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-16 05:32-0400\n"
-"PO-Revision-Date: \n"
+"POT-Creation-Date: 2009-07-17 11:30-0400\n"
+"PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid "(both retired)"
-msgstr ""
+msgstr "(ambos retirados)"
 
 msgid "0 (Everyone)"
 msgstr "0 (Todos)"
@@ -34,22 +34,22 @@ msgid "4 (Adults Only 18+)"
 msgstr "4 (Sólo Adultos 18+)"
 
 msgid ">> Finishing installation..."
-msgstr ""
+msgstr ">> Finalizando instalación..."
 
 msgid ">> Installing content #"
-msgstr ""
+msgstr ">> Instalando contenido #"
 
 msgid ">> Installing ticket..."
-msgstr ""
+msgstr ">> Instalando ticket..."
 
 msgid ">> Installing title..."
-msgstr ""
+msgstr ">> Instalando título..."
 
 msgid ">> Reading WAD data..."
-msgstr ""
+msgstr ">> Leyendo datos del WAD..."
 
 msgid "AUTO"
-msgstr ""
+msgstr "AUTO"
 
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "Todas las características del USB Loader GX desbloqueadas."
@@ -58,7 +58,7 @@ msgid "Alternate DOL"
 msgstr "Dol Alternat."
 
 msgid "Anti"
-msgstr ""
+msgstr "Anti"
 
 msgid "App Language"
 msgstr "Idioma Aplic."
@@ -97,7 +97,7 @@ msgid "Big thanks to:"
 msgstr "Muchas gracias a:"
 
 msgid "Block IOS Reload"
-msgstr ""
+msgstr "Bloq. recarga IOS"
 
 msgid "Boot/Standard"
 msgstr "Inicio/Estándar"
@@ -124,7 +124,7 @@ msgid "Cheatcodes Path changed"
 msgstr "Ruta de Códigos de Trampas cambiada"
 
 msgid "Cheatfile is blank"
-msgstr ""
+msgstr "Archivo de trucos vacio"
 
 msgid "Checking for Updates"
 msgstr "Verificando Actualizaciones"
@@ -139,10 +139,10 @@ msgid "Close"
 msgstr "Cerrar"
 
 msgid "Code Download"
-msgstr ""
+msgstr "Descarga de Código"
 
 msgid "Confirm"
-msgstr ""
+msgstr "Confirmar"
 
 msgid "Console"
 msgstr "Consola"
@@ -166,10 +166,10 @@ msgid "Correct Password"
 msgstr "Contraseña Correcta"
 
 msgid "Could not create GCT file"
-msgstr ""
+msgstr "No se pudo crear archivo GCT"
 
 msgid "Could not find a WBFS partition."
-msgstr ""
+msgstr "No se encontró una partición WBFS."
 
 msgid "Could not initialize DIP module!"
 msgstr "¡No se pudo iniciar módulo DIP!"
@@ -181,16 +181,16 @@ msgid "Could not open Disc"
 msgstr "No se puede abrir Disco"
 
 msgid "Could not open WBFS partition"
-msgstr ""
+msgstr "No se pudo abrir partición WBFS"
 
 msgid "Could not open disc."
-msgstr ""
+msgstr "No se pudo abrir disco."
 
 msgid "Could not read the disc."
-msgstr ""
+msgstr "No se pudo leer el disco."
 
 msgid "Could not set USB."
-msgstr ""
+msgstr "No se pudo configurar USB."
 
 msgid "Cover Download"
 msgstr "Descarga de Carátulas"
@@ -202,7 +202,7 @@ msgid "Coverpath Changed"
 msgstr "Ruta de Carátulas cambiada"
 
 msgid "Create"
-msgstr ""
+msgstr "Crear"
 
 msgid "Credits"
 msgstr "Créditos"
@@ -211,10 +211,10 @@ msgid "Custom Paths"
 msgstr "Personalizar Rutas"
 
 msgid "DOL from SD"
-msgstr ""
+msgstr "DOL desde SD"
 
 msgid "DOL from disc"
-msgstr ""
+msgstr "DOL desde disco"
 
 msgid "Dec"
 msgstr "Dic"
@@ -229,7 +229,7 @@ msgid "Default Settings"
 msgstr "Configuración Pred."
 
 msgid "Delete"
-msgstr ""
+msgstr "Borrar"
 
 msgid "Developed by"
 msgstr "Desarrollado por"
@@ -250,7 +250,7 @@ msgid "Discpath change"
 msgstr "Cambio ruta Img. Disco"
 
 msgid "DiskFlip"
-msgstr ""
+msgstr "GiroDisco"
 
 msgid "Display"
 msgstr "Mostrar"
@@ -268,7 +268,7 @@ msgid "Do you want to retry for 30 secs?"
 msgstr "¿Quieres reintentar por 30 segs.?"
 
 msgid "Do you want to use the alt dol that is known to be correct?"
-msgstr ""
+msgstr "¿Quieres usar el dol alternativo que se sabe es correcto?"
 
 msgid "Dol Path"
 msgstr "Ruta Dol"
@@ -283,16 +283,16 @@ msgid "Download Boxart image?"
 msgstr "¿Descargar Imágenes?"
 
 msgid "Download Discart image?"
-msgstr ""
+msgstr "¿Descargar Img. Disco?"
 
 msgid "Download Now"
-msgstr ""
+msgstr "Descargar ahora"
 
 msgid "Download finished"
 msgstr "Descarga completa"
 
 msgid "Downloading"
-msgstr ""
+msgstr "Descargando"
 
 msgid "Downloading file"
 msgstr "Descargando archivo"
@@ -301,16 +301,16 @@ msgid "Dutch"
 msgstr "Holandés"
 
 msgid "ERROR"
-msgstr ""
+msgstr "ERROR"
 
 msgid "ERROR:"
-msgstr ""
+msgstr "ERROR:"
 
 msgid "English"
 msgstr "Inglés"
 
 msgid "Error"
-msgstr ""
+msgstr "Error"
 
 msgid "Error !"
 msgstr "¡Error!"
@@ -322,7 +322,7 @@ msgid "Error reading Disc"
 msgstr "Error leyendo Disco"
 
 msgid "Error..."
-msgstr ""
+msgstr "Error..."
 
 msgid "Exit USB Loader GX?"
 msgstr "¿Salir de USB Loader GX?"
@@ -337,7 +337,7 @@ msgid "File not found."
 msgstr "Archivo no encontrado."
 
 msgid "Finishing installation... Ok!"
-msgstr ""
+msgstr "Finalizando instalación... Ok!"
 
 msgid "Flip-X"
 msgstr "Desplazamiento X"
@@ -361,7 +361,7 @@ msgid "Full Shutdown"
 msgstr "Apagado Total"
 
 msgid "GCT File created"
-msgstr ""
+msgstr "Archivo GCT creado"
 
 msgid "GUI Settings"
 msgstr "Configuración de GUI"
@@ -424,19 +424,19 @@ msgid "Install a game"
 msgstr "Instalar un juego"
 
 msgid "Installing content... Ok!"
-msgstr ""
+msgstr "Instalando contenido... Ok!"
 
 msgid "Installing game:"
 msgstr "Instalando juego:"
 
 msgid "Installing ticket... Ok!"
-msgstr ""
+msgstr "Instalando ticket... Ok!"
 
 msgid "Installing title... Ok!"
-msgstr ""
+msgstr "Instalando título... Ok!"
 
 msgid "Installing wad"
-msgstr ""
+msgstr "Instalando wad"
 
 msgid "Italian"
 msgstr "Italiano"
@@ -460,13 +460,13 @@ msgid "Korean"
 msgstr "Coreano"
 
 msgid "Language change:"
-msgstr ""
+msgstr "Cambio de Idioma:"
 
 msgid "Languagepath changed."
 msgstr "Ruta de idioma cambiada."
 
 msgid "Leaving so you can restart..."
-msgstr ""
+msgstr "Abandonando asi es que puedes reiniciar..."
 
 msgid "Left"
 msgstr "Izquierda"
@@ -475,7 +475,7 @@ msgid "Like SysMenu"
 msgstr "Como Menú Sist."
 
 msgid "Load this dol as alternate dol?"
-msgstr ""
+msgstr "¿Cargar este dol como dol alternativo?"
 
 msgid "Loading standard language."
 msgstr "Cargando idioma estándar."
@@ -499,7 +499,7 @@ msgid "Missing files"
 msgstr "Archivo(s) faltante(s)"
 
 msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
-msgstr ""
+msgstr "Probablemente tiene un tamaño no divisible por 4. Que estupidez."
 
 msgid "Music Volume"
 msgstr "Volumen Música"
@@ -517,10 +517,10 @@ msgid "No"
 msgstr "No"
 
 msgid "No Cheatfile found"
-msgstr ""
+msgstr "Archivo de trucos no encontrado"
 
 msgid "No Favorites"
-msgstr ""
+msgstr "No hay favoritos"
 
 msgid "No SD-Card inserted!"
 msgstr "¡SD no insertada!"
@@ -535,7 +535,7 @@ msgid "No WBFS partition found"
 msgstr "Partición WBFS no encontrada"
 
 msgid "No dol file found on disc."
-msgstr ""
+msgstr "No se encontró archivo dol en el disco"
 
 msgid "No file missing!"
 msgstr "¡No faltan archivos!"
@@ -556,7 +556,7 @@ msgid "Not a Wii Disc"
 msgstr "No es un Disco Wii"
 
 msgid "Not enough free memory."
-msgstr ""
+msgstr "No hay suficiente memoria libre."
 
 msgid "Not enough free space!"
 msgstr "¡No hay suficiente espacio libre!"
@@ -571,7 +571,7 @@ msgid "OFF"
 msgstr "Apagado"
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "ON"
 msgstr "Encendido"
@@ -583,7 +583,7 @@ msgid "Official Site"
 msgstr "Sitio Oficial"
 
 msgid "Ok"
-msgstr ""
+msgstr "Ok"
 
 msgid "Only for Install"
 msgstr "Sólo para instalación"
@@ -592,7 +592,7 @@ msgid "Parental Control"
 msgstr "Control Parental"
 
 msgid "Parental control"
-msgstr ""
+msgstr "Control Parental"
 
 msgid "Partition"
 msgstr "Partición"
@@ -616,7 +616,7 @@ msgid "Path of titles.txt changed."
 msgstr "Ruta a titles.txt cambiada."
 
 msgid "Pick from a list"
-msgstr ""
+msgstr "Elegir de una lista"
 
 msgid "Play Count"
 msgstr "Jugado"
@@ -637,10 +637,10 @@ msgid "Quick Boot"
 msgstr "Inicio Rápido"
 
 msgid "Reading WAD data... Ok!"
-msgstr ""
+msgstr "Leyendo datos del WAD... Ok!"
 
 msgid "Released"
-msgstr ""
+msgstr "Lanzado"
 
 msgid "Reload SD"
 msgstr "Recargar SD"
@@ -649,7 +649,7 @@ msgid "Rename Game on WBFS"
 msgstr "Renombrar juego en WBFS"
 
 msgid "Reset Playcounter"
-msgstr ""
+msgstr "Reiniciar conteo jugados"
 
 msgid "Restart"
 msgstr "Reiniciar"
@@ -661,7 +661,7 @@ msgid "Return"
 msgstr "Volver"
 
 msgid "Return to Wii Menu"
-msgstr ""
+msgstr "Volver a Menú Wii"
 
 msgid "Right"
 msgstr "Derecha"
@@ -673,7 +673,7 @@ msgid "SChinese"
 msgstr "Chino Simplif."
 
 msgid "SD selected"
-msgstr ""
+msgstr "SD seleccionada"
 
 msgid "SFX Volume"
 msgstr "Volumen SFX"
@@ -685,19 +685,19 @@ msgid "Save Failed"
 msgstr "Fallo al guardar"
 
 msgid "Screensaver"
-msgstr ""
+msgstr "Protector de Pantalla"
 
 msgid "Sept"
 msgstr "Sept"
 
 msgid "Set as backgroundmusic?"
-msgstr "¿Poner como música de fondo?"
+msgstr "¿Poner como másica de fondo?"
 
 msgid "Settings"
 msgstr "Configuración"
 
 msgid "Shit"
-msgstr ""
+msgstr "Porquería"
 
 msgid "Shutdown System"
 msgstr "Apagar Sistema"
@@ -718,7 +718,7 @@ msgid "Standard"
 msgstr "Estándar"
 
 msgid "Success"
-msgstr ""
+msgstr "Éxito"
 
 msgid "Success:"
 msgstr "Conseguido:"
@@ -742,11 +742,11 @@ msgid "TChinese"
 msgstr "Chino Tradic."
 
 msgid "TXTCheatcodes Path"
-msgstr ""
+msgstr "Ruta archiv. de trucos"
 
 #, c-format
 msgid "The wad installation failed with error %ld"
-msgstr ""
+msgstr "La instalación del wad falló con error %ld"
 
 msgid "ThemePath"
 msgstr "Ruta del Tema"
@@ -774,7 +774,7 @@ msgstr "USB Loader GX está protegido"
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
-msgstr ""
+msgstr "No es posible abrir el wad recien descargado (%s)."
 
 msgid "Uninstall"
 msgstr "Desinstalar"
@@ -840,13 +840,13 @@ msgid "Yes"
 msgstr "Sí"
 
 msgid "You are about to delete "
-msgstr ""
+msgstr "Estás apunto de borrar "
 
 msgid "You are choosing to display favorites and you do not have any selected."
-msgstr ""
+msgstr "Estás intentando mostrar los favoritos pero no tienes ninguno seleccionado."
 
 msgid "You have attempted to load a bad image"
-msgstr ""
+msgstr "Has intentado cargar una imagen corrupta"
 
 msgid "You need to format a partition"
 msgstr "Necesitas formatear una partición"
@@ -855,22 +855,22 @@ msgid "available"
 msgstr "disponible"
 
 msgid "contains over 255 lines of code.  It will produce unexpected results."
-msgstr ""
+msgstr "contiene sobre 255 lineas de codigo. Puede producir resultados inesperados."
 
 msgid "does not exist!"
-msgstr ""
+msgstr "no existe!"
 
 msgid "does not exist!  Loading game without cheats."
-msgstr ""
+msgstr "no existe! Cargando juego sin trucos."
 
 msgid "does not exist!  You Messed something up, Idiot."
-msgstr ""
+msgstr "no existe! Arruinaste algo, idiota"
 
 msgid "file left"
-msgstr ""
+msgstr "archivo restante"
 
 msgid "files left"
-msgstr ""
+msgstr "archivos restantes"
 
 msgid "files not found on the server!"
 msgstr "archivo(s) no encontrado(s) en el servidor."
@@ -879,7 +879,7 @@ msgid "for"
 msgstr "por"
 
 msgid "for WiiTDB and hosting covers / disc images"
-msgstr ""
+msgstr "por WiiTDB y alojar carátulas / img. de disco"
 
 msgid "for diverse patches"
 msgstr "por diversos parches"
@@ -909,7 +909,7 @@ msgid "seconds left"
 msgstr "segundos restantes"
 
 msgid "there was an error"
-msgstr ""
+msgstr "hubo un error"
 
 msgid "titles.txt Path"
 msgstr "Ruta Titles.txt"
@@ -918,7 +918,7 @@ msgstr "Ruta Titles.txt"
 #~ msgstr "archivo(s) restante(s)"
 
 #~ msgid "for hosting the covers/discarts"
-#~ msgstr "por alojar las caraturas/img.discos"
+#~ msgstr "por alojar las carátulas/img.discos"
 
 #~ msgid "Favorite"
 #~ msgstr "Favoritos"

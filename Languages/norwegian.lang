@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-07-16 05:32-0400\n"
-"PO-Revision-Date: \n"
+"PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -13,52 +13,52 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid "(both retired)"
-msgstr ""
+msgstr "(begge sluttet)"
 
 msgid "0 (Everyone)"
-msgstr ""
+msgstr "0 (Alle)"
 
 msgid "1 (Child 7+)"
-msgstr ""
+msgstr "1 (Barn 7+)"
 
 msgid "2 (Teen 12+)"
-msgstr ""
+msgstr "2 (Ungdom 12+)"
 
 msgid "3 (Mature 16+)"
-msgstr "3 (Voksen)"
+msgstr "3 (Ungdom 16+)"
 
 msgid "3D Covers"
 msgstr "3D cover"
 
 msgid "4 (Adults Only 18+)"
-msgstr ""
+msgstr "4 (Voksen 18+)"
 
 msgid ">> Finishing installation..."
-msgstr ""
+msgstr ">> Sluttfører installasjon..."
 
 msgid ">> Installing content #"
-msgstr ""
+msgstr ">> Installerer innhold #"
 
 msgid ">> Installing ticket..."
-msgstr ""
+msgstr ">> Installerer ticket..."
 
 msgid ">> Installing title..."
-msgstr ""
+msgstr ">> Installerer tittel..."
 
 msgid ">> Reading WAD data..."
-msgstr ""
+msgstr ">> Leser WAD data..."
 
 msgid "AUTO"
-msgstr ""
+msgstr "AUTO"
 
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "Alle funksjonene til USB Loader GX er opplåst."
 
 msgid "Alternate DOL"
-msgstr ""
+msgstr "Alternativ DOL"
 
 msgid "Anti"
-msgstr ""
+msgstr "Anti"
 
 msgid "App Language"
 msgstr "Program språk"
@@ -97,7 +97,7 @@ msgid "Big thanks to:"
 msgstr "Stor takk til:"
 
 msgid "Block IOS Reload"
-msgstr ""
+msgstr "Blokkér IOS Reload"
 
 msgid "Boot/Standard"
 msgstr "Boot/Standard"
@@ -124,7 +124,7 @@ msgid "Cheatcodes Path changed"
 msgstr "Juksekode sti endret"
 
 msgid "Cheatfile is blank"
-msgstr ""
+msgstr "Juksefil er blank"
 
 msgid "Checking for Updates"
 msgstr "Søker etter oppdateringer"
@@ -139,13 +139,13 @@ msgid "Close"
 msgstr "Lukk"
 
 msgid "Code Download"
-msgstr ""
+msgstr "Kode nedlasting"
 
 msgid "Confirm"
-msgstr ""
+msgstr "Bekreft"
 
 msgid "Console"
-msgstr ""
+msgstr "Konsoll"
 
 msgid "Console Default"
 msgstr "Konsoll Standard"
@@ -166,10 +166,10 @@ msgid "Correct Password"
 msgstr "Riktig passord"
 
 msgid "Could not create GCT file"
-msgstr ""
+msgstr "Kan ikke opprette GCT fil"
 
 msgid "Could not find a WBFS partition."
-msgstr ""
+msgstr "Kan ikke finne en WBFS partisjon."
 
 msgid "Could not initialize DIP module!"
 msgstr "Kan ikke initialisere DIP modul!"
@@ -181,16 +181,16 @@ msgid "Could not open Disc"
 msgstr "Kan ikke åpne plate"
 
 msgid "Could not open WBFS partition"
-msgstr ""
+msgstr "Kan ikke åpne WBFS partisjon"
 
 msgid "Could not open disc."
-msgstr ""
+msgstr "Kan ikke åpne plate."
 
 msgid "Could not read the disc."
-msgstr ""
+msgstr "Kan ikke lese plate."
 
 msgid "Could not set USB."
-msgstr ""
+msgstr "Kan ikke velge USB."
 
 msgid "Cover Download"
 msgstr "Cover nedlasting"
@@ -202,7 +202,7 @@ msgid "Coverpath Changed"
 msgstr "Cover sti endret"
 
 msgid "Create"
-msgstr ""
+msgstr "Opprett"
 
 msgid "Credits"
 msgstr "Medvirkende"
@@ -211,10 +211,10 @@ msgid "Custom Paths"
 msgstr "Endre stier"
 
 msgid "DOL from SD"
-msgstr ""
+msgstr "DOL fra SD"
 
 msgid "DOL from disc"
-msgstr ""
+msgstr "DOL fra plate"
 
 msgid "Dec"
 msgstr "Des"
@@ -229,7 +229,7 @@ msgid "Default Settings"
 msgstr "Standard innstillinger"
 
 msgid "Delete"
-msgstr ""
+msgstr "Slett"
 
 msgid "Developed by"
 msgstr "Utviklet av"
@@ -250,7 +250,7 @@ msgid "Discpath change"
 msgstr "Endre plate sti"
 
 msgid "DiskFlip"
-msgstr ""
+msgstr "Snu plate"
 
 msgid "Display"
 msgstr "Vis"
@@ -268,61 +268,61 @@ msgid "Do you want to retry for 30 secs?"
 msgstr "Vil du fortsette å prøve i 30 sekunder?"
 
 msgid "Do you want to use the alt dol that is known to be correct?"
-msgstr ""
+msgstr "Vil du bruke alt DOL filen som er kjent for å være riktig?"
 
 msgid "Dol Path"
-msgstr ""
+msgstr "DOL sti"
 
 msgid "Dolpath Changed"
-msgstr ""
+msgstr "DOL sti endret"
 
 msgid "Dolpath change"
-msgstr ""
+msgstr "Endre DOL sti"
 
 msgid "Download Boxart image?"
 msgstr "Last ned cover bilde?"
 
 msgid "Download Discart image?"
-msgstr ""
+msgstr "Last ned plate bilde?"
 
 msgid "Download Now"
-msgstr ""
+msgstr "Last ned nå"
 
 msgid "Download finished"
 msgstr "Nedlasting ferdig"
 
 msgid "Downloading"
-msgstr ""
+msgstr "Laster ned"
 
 msgid "Downloading file"
-msgstr "Laster ned fil:"
+msgstr "Laster ned fil"
 
 msgid "Dutch"
 msgstr "Nederlandsk"
 
 msgid "ERROR"
-msgstr ""
+msgstr "FEIL"
 
 msgid "ERROR:"
-msgstr ""
+msgstr "FEIL:"
 
 msgid "English"
 msgstr "Engelsk"
 
 msgid "Error"
-msgstr ""
+msgstr "Feil"
 
 msgid "Error !"
 msgstr "Feil !"
 
 msgid "Error 002 fix"
-msgstr ""
+msgstr "Error 002 fiks"
 
 msgid "Error reading Disc"
 msgstr "Feil ved lesing av plate"
 
 msgid "Error..."
-msgstr ""
+msgstr "Feil..."
 
 msgid "Exit USB Loader GX?"
 msgstr "Avslutt USB Loader GX?"
@@ -337,7 +337,7 @@ msgid "File not found."
 msgstr "Fil ikke funnet."
 
 msgid "Finishing installation... Ok!"
-msgstr ""
+msgstr "Sluttfører installasjon... OK!"
 
 msgid "Flip-X"
 msgstr "Flip-X"
@@ -346,7 +346,7 @@ msgid "Force"
 msgstr "Tving"
 
 msgid "Format"
-msgstr "Formater"
+msgstr "Formatér"
 
 msgid "Formatting, please wait..."
 msgstr "Formaterer, vennligst vent..."
@@ -361,7 +361,7 @@ msgid "Full Shutdown"
 msgstr "Skru helt av"
 
 msgid "GCT File created"
-msgstr ""
+msgstr "GCT fil opprettet"
 
 msgid "GUI Settings"
 msgstr "GUI innstillinger"
@@ -421,22 +421,22 @@ msgid "Install Error!"
 msgstr "Installasjonsfeil!"
 
 msgid "Install a game"
-msgstr "Installer et spill"
+msgstr "Installér et spill"
 
 msgid "Installing content... Ok!"
-msgstr ""
+msgstr "Installerer innhold... OK!"
 
 msgid "Installing game:"
 msgstr "Installerer spill:"
 
 msgid "Installing ticket... Ok!"
-msgstr ""
+msgstr "Installerer ticket... OK!"
 
 msgid "Installing title... Ok!"
-msgstr ""
+msgstr "Installerer tittel... OK!"
 
 msgid "Installing wad"
-msgstr ""
+msgstr "Installerer WAD"
 
 msgid "Italian"
 msgstr "Italiensk"
@@ -460,13 +460,13 @@ msgid "Korean"
 msgstr "Koreansk"
 
 msgid "Language change:"
-msgstr ""
+msgstr "Endre språk"
 
 msgid "Languagepath changed."
 msgstr "Språksti endret."
 
 msgid "Leaving so you can restart..."
-msgstr ""
+msgstr "Lukker så du kan restarte..."
 
 msgid "Left"
 msgstr "Venstre"
@@ -475,7 +475,7 @@ msgid "Like SysMenu"
 msgstr "Lik Systemmeny"
 
 msgid "Load this dol as alternate dol?"
-msgstr ""
+msgstr "Last denne DOL som alternativ DOL?"
 
 msgid "Loading standard language."
 msgstr "Laster standard språk."
@@ -499,7 +499,7 @@ msgid "Missing files"
 msgstr "Manglende filer"
 
 msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
-msgstr ""
+msgstr "Sannsynligvis har bildet dimensjoner som ikke kan deles med 4."
 
 msgid "Music Volume"
 msgstr "Musikk volum"
@@ -517,10 +517,10 @@ msgid "No"
 msgstr "Nei"
 
 msgid "No Cheatfile found"
-msgstr ""
+msgstr "Ingen juksefil funnet"
 
 msgid "No Favorites"
-msgstr ""
+msgstr "Ingen favoritter"
 
 msgid "No SD-Card inserted!"
 msgstr "Intet SD-kort satt i!"
@@ -535,7 +535,7 @@ msgid "No WBFS partition found"
 msgstr "Ingen WBFS partisjon funnet"
 
 msgid "No dol file found on disc."
-msgstr ""
+msgstr "Ingen DOL fil funnet på plate."
 
 msgid "No file missing!"
 msgstr "Ingen filer mangler!"
@@ -556,7 +556,7 @@ msgid "Not a Wii Disc"
 msgstr "Ikke en Wii plate"
 
 msgid "Not enough free memory."
-msgstr ""
+msgstr "Ikke nok ledig minne."
 
 msgid "Not enough free space!"
 msgstr "Ikke nok ledig plass!"
@@ -583,16 +583,16 @@ msgid "Official Site"
 msgstr "Offisiell nettside"
 
 msgid "Ok"
-msgstr ""
+msgstr "Ok"
 
 msgid "Only for Install"
 msgstr "Kun for installering"
 
 msgid "Parental Control"
-msgstr "Foreldre kontroll"
+msgstr "Foreldrekontroll"
 
 msgid "Parental control"
-msgstr ""
+msgstr "Foreldrekontroll"
 
 msgid "Partition"
 msgstr "Partisjon"
@@ -616,7 +616,7 @@ msgid "Path of titles.txt changed."
 msgstr "Titles.txt sti endret."
 
 msgid "Pick from a list"
-msgstr ""
+msgstr "Velg fra liste"
 
 msgid "Play Count"
 msgstr "Ganger spilt"
@@ -637,10 +637,10 @@ msgid "Quick Boot"
 msgstr "Hurtig start"
 
 msgid "Reading WAD data... Ok!"
-msgstr ""
+msgstr "Leser WAD data... OK!"
 
 msgid "Released"
-msgstr ""
+msgstr "Utgitt"
 
 msgid "Reload SD"
 msgstr "Les SD på nytt"
@@ -649,7 +649,7 @@ msgid "Rename Game on WBFS"
 msgstr "Gi nytt navn til spill på WBFS"
 
 msgid "Reset Playcounter"
-msgstr ""
+msgstr "Nullstill teller"
 
 msgid "Restart"
 msgstr "Start på nytt"
@@ -661,7 +661,7 @@ msgid "Return"
 msgstr "Gå tilbake"
 
 msgid "Return to Wii Menu"
-msgstr ""
+msgstr "Tilbake til Wii meny"
 
 msgid "Right"
 msgstr "Høyre"
@@ -673,7 +673,7 @@ msgid "SChinese"
 msgstr "S.Kinesisk"
 
 msgid "SD selected"
-msgstr ""
+msgstr "SD valgt"
 
 msgid "SFX Volume"
 msgstr "Effekt volum"
@@ -682,10 +682,10 @@ msgid "Save"
 msgstr "Lagre"
 
 msgid "Save Failed"
-msgstr "Lagre feilet"
+msgstr "Lagring feilet"
 
 msgid "Screensaver"
-msgstr ""
+msgstr "Skjermbeskytter"
 
 msgid "Sept"
 msgstr "Sep"
@@ -697,7 +697,7 @@ msgid "Settings"
 msgstr "Innstillinger"
 
 msgid "Shit"
-msgstr ""
+msgstr "Oops"
 
 msgid "Shutdown System"
 msgstr "Skru helt av"
@@ -718,7 +718,7 @@ msgid "Standard"
 msgstr "Standard"
 
 msgid "Success"
-msgstr ""
+msgstr "Suksess"
 
 msgid "Success:"
 msgstr "Suksess:"
@@ -742,11 +742,11 @@ msgid "TChinese"
 msgstr "T.Kinesisk"
 
 msgid "TXTCheatcodes Path"
-msgstr ""
+msgstr "TXTjuksekode sti"
 
 #, c-format
 msgid "The wad installation failed with error %ld"
-msgstr ""
+msgstr "WAD installasjonen feilet med feilkode %ld"
 
 msgid "ThemePath"
 msgstr "Tema sti"
@@ -774,10 +774,10 @@ msgstr "USB Loader GX er beskyttet"
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
-msgstr ""
+msgstr "Kan ikke åpne nedlastet WAD fil (%s)."
 
 msgid "Uninstall"
-msgstr "Avinstaller"
+msgstr "Avinstallér"
 
 msgid "Unlock console to use this option."
 msgstr "Lås opp konsollen for å bruke denne innstillingen."
@@ -825,7 +825,7 @@ msgid "WiFi Features"
 msgstr "WiFi egenskaper"
 
 msgid "Widescreen Fix"
-msgstr "Fiks for 16/9"
+msgstr "Widescreen fiks"
 
 msgid "Wii Menu"
 msgstr "Wii meny"
@@ -840,13 +840,13 @@ msgid "Yes"
 msgstr "Ja"
 
 msgid "You are about to delete "
-msgstr ""
+msgstr "Du er i ferd med å slette "
 
 msgid "You are choosing to display favorites and you do not have any selected."
-msgstr ""
+msgstr "Du prøver å vise favoritter når du ikke har noen valgt."
 
 msgid "You have attempted to load a bad image"
-msgstr ""
+msgstr "Du har forsøkt å vise et korrupt bilde"
 
 msgid "You need to format a partition"
 msgstr "Du må formatere en partisjon"
@@ -855,22 +855,22 @@ msgid "available"
 msgstr "tilgjengelig"
 
 msgid "contains over 255 lines of code.  It will produce unexpected results."
-msgstr ""
+msgstr "inneholder over 255 linjer med kode.  Den kan føre til uønskede resultater."
 
 msgid "does not exist!"
-msgstr ""
+msgstr "finnes ikke!"
 
 msgid "does not exist!  Loading game without cheats."
-msgstr ""
+msgstr "finnes ikke!  Laster spill uten juksekode."
 
 msgid "does not exist!  You Messed something up, Idiot."
-msgstr ""
+msgstr "finnes ikke!  Du har gjort noe galt."
 
 msgid "file left"
-msgstr ""
+msgstr "fil gjenstår"
 
 msgid "files left"
-msgstr ""
+msgstr "filer gjenstår"
 
 msgid "files not found on the server!"
 msgstr "filer ikke funnet på serveren!"
@@ -879,7 +879,7 @@ msgid "for"
 msgstr "for"
 
 msgid "for WiiTDB and hosting covers / disc images"
-msgstr ""
+msgstr "for WiiTDB og hosting av bilder"
 
 msgid "for diverse patches"
 msgstr "for diverse patcher"
@@ -888,10 +888,10 @@ msgid "for his awesome tool"
 msgstr "for hans råe verktøy"
 
 msgid "for hosting the update files"
-msgstr "for hosting av oppdateringsfiler"
+msgstr "for hosting av oppdateringer"
 
 msgid "for the USB Loader source"
-msgstr "for kildekoden til USB Loader"
+msgstr "for kilden til USB Loader"
 
 msgid "formatted!"
 msgstr "formatert!"
@@ -909,7 +909,7 @@ msgid "seconds left"
 msgstr "sekunder gjenstår"
 
 msgid "there was an error"
-msgstr ""
+msgstr "en feil har oppstått"
 
 msgid "titles.txt Path"
 msgstr "Titles.txt sti"
