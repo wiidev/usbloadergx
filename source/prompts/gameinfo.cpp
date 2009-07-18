@@ -40,11 +40,11 @@ int showGameInfo(char *ID)
 	ResumeGui();
     //load the xml shit
 	bool databaseopened = true;
-	OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, false, true); // open file, do not load titles, keep in memory
+	//OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, false, true); // open file, do not load titles, keep in memory
     if(databaseopened) {
 
 		LoadGameInfoFromXML(ID, Settings.db_language);
-		CloseXMLDatabase();
+		//CloseXMLDatabase();
 
 		bool showmeminfo = false;
 		

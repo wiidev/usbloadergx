@@ -1977,8 +1977,8 @@ int GameSettings(struct discHdr * header)
             case 9:
                 if(alternatedol == 2) {
 						 char filename[10];
-						 snprintf(filename,sizeof(filename),"%c%c%c%c%c",header->id[0], header->id[1], header->id[2],
-																		 header->id[4], header->id[5]); //id without 4th character
+						 snprintf(filename,sizeof(filename),"%c%c%c%c%c%c",header->id[0], header->id[1], header->id[2],
+																		 header->id[3],header->id[4], header->id[5]); 
 						int dolchoice =0;
 							//check to see if we already know the offset of the correct dol
 						 int autodol = autoSelectDol(filename);
@@ -2001,12 +2001,13 @@ int GameSettings(struct discHdr * header)
 							int res = DiscBrowse(header);
 							  if((res >= 0)&&(res !=696969))
 									alternatedoloffset = res;
+									char tmp[170];
+									snprintf(tmp,sizeof(tmp),"It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team. %s - %i" ,filename,alternatedoloffset);
+									WindowPrompt(0,tmp,tr("Ok"));
 							}
-							if (autodol==-2){
-							char tmp[170];
-							snprintf(tmp,sizeof(tmp),"It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team. %s - %i" ,filename,alternatedoloffset);
-							WindowPrompt(0,tmp,tr("Ok"));
-							}
+							
+							
+							
                 }
                 break;
             case 10:

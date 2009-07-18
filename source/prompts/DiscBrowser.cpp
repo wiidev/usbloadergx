@@ -234,14 +234,10 @@ int DiscBrowse(struct discHdr * header)
 
 int autoSelectDol(const char *id)
 {	
-	//these are the game IDs without the 4th character
-	// if it turns out that the offset is different for different regions
-	// the 4th char can be added
-	
-	// if this returns -2 then they are prompted with the offset and a message to give it to us 
-	// so it can be added to this list
-	if (strcmp(id,"RHD8P") == 0) return 149;
-	if (strcmp(id,"RSX69") == 0) return 337;
+
+   //this is the list missing the 4th digit.  im treating it like garbage until i know that it works for all regions
+	// i started teh ID6 list because fifa 08 has different numbers for different regions
+	/*if (strcmp(id,"RSX69") == 0) return 337;
 	if (strcmp(id,"RED41") == 0) return 1957;
 	if (strcmp(id,"RM269") == 0) return 492;
 	if (strcmp(id,"RM213") == 0) return 492;//uncomfirmed.  this is what lustar's site has for the jap version
@@ -251,13 +247,46 @@ int autoSelectDol(const char *id)
 	if (strcmp(id,"RMLH4") == 0) return 54;
 	if (strcmp(id,"R9O69") == 0) return 1973;
 	if (strcmp(id,"RBO69") == 0) return 675;
-	if (strcmp(id,"RF869") == 0) return -2;
+	if (strcmp(id,"RF869") == 0) return 439;
 	if (strcmp(id,"R5T69") == 0) return 1493;
-	if (strcmp(id,"RVU8P") == 0) return -2;
-	if (strcmp(id,"RZT01") == 0) return -2;
-/*	fifa 08 -rf8?69
-	Virtua Tennis -rvu?8p
-	Wii Sports Resort -rzt?01
+	if (strcmp(id,"RVU8P") == 0) return 16405;
+	if (strcmp(id,"RZT01") == 0) return 952;*/
+	//////////ID6/////////////////
+	if (strcmp(id,"RF8E69") == 0) return 439;
+	if (strcmp(id,"RF8P69") == 0) return 463;
+	if (strcmp(id,"RF8X69") == 0) return 464;
+	
+	if (strcmp(id,"RZTP01") == 0) return 952;
+	
+	if (strcmp(id,"RMZX69") == 0) return 492;
+	if (strcmp(id,"RMZP69") == 0) return 492;
+	
+	//if (strcmp(id,"REDP41") == 0) return 1957;
+	
+	if (strcmp(id,"RSXP69") == 0) return 337;
+	
+	if (strcmp(id,"RNBX69") == 0) return 964;
+	
+	if (strcmp(id,"RMLP7U") == 0) return 56;
+	
+	if (strcmp(id,"RKMP5D") == 0) return 290;
+	
+	if (strcmp(id,"RHDP8P") == 0) return 149;
+	
+
+	
+/*	
+ Fifa08 RF8P69 463
+ Fifa08 RF8X69 464
+ Wii Sports Resort RZTP01 952
+ Medal of Honor Heroes RMZX69 492
+ Medal of Honor Heroes RMZP69 492
+ Redsteel REDP41 1957
+ SSX RSXP69 337
+ NBA08 RNBX69 964
+ Metal Slug Anthology RMLP7U 56
+ Mortal Kombat RKMP5D 290
+ House of Dead 2+3 RHDP8P 149
 	Metroid Prime 1 and/or 2? listed on the alt dol list but not on lustar's site
 */	
 
