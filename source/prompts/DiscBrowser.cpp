@@ -237,14 +237,30 @@ int autoSelectDol(const char *id)
 	//these are the game IDs without the 4th character
 	// if it turns out that the offset is different for different regions
 	// the 4th char can be added
+	
+	// if this returns -2 then they are prompted with the offset and a message to give it to us 
+	// so it can be added to this list
 	if (strcmp(id,"RHD8P") == 0) return 149;
 	if (strcmp(id,"RSX69") == 0) return 337;
 	if (strcmp(id,"RED41") == 0) return 1957;
 	if (strcmp(id,"RM269") == 0) return 492;
+	if (strcmp(id,"RM213") == 0) return 492;//uncomfirmed.  this is what lustar's site has for the jap version
 	if (strcmp(id,"RKM5D") == 0) return 290;
 	if (strcmp(id,"RJ864") == 0) return 8;
 	if (strcmp(id,"RM269") == 0) return 517;
 	if (strcmp(id,"RMLH4") == 0) return 54;
+	if (strcmp(id,"R9O69") == 0) return 1973;
+	if (strcmp(id,"RBO69") == 0) return 675;
+	if (strcmp(id,"RF869") == 0) return -2;
+	if (strcmp(id,"R5T69") == 0) return 1493;
+	if (strcmp(id,"RVU8P") == 0) return -2;
+	if (strcmp(id,"RZT01") == 0) return -2;
+/*	fifa 08 -rf8?69
+	Virtua Tennis -rvu?8p
+	Wii Sports Resort -rzt?01
+	Metroid Prime 1 and/or 2? listed on the alt dol list but not on lustar's site
+*/	
+
 	//if (strcmp(id,"") == 0) return ; //blank line for more dols
 	
 	return -1;

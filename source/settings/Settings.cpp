@@ -2002,6 +2002,11 @@ int GameSettings(struct discHdr * header)
 							  if((res >= 0)&&(res !=696969))
 									alternatedoloffset = res;
 							}
+							if (autodol==-2){
+							char tmp[170];
+							snprintf(tmp,sizeof(tmp),"It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team. %s - %i" ,filename,alternatedoloffset);
+							WindowPrompt(0,tmp,tr("Ok"));
+							}
                 }
                 break;
             case 10:
