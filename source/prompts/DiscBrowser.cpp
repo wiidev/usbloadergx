@@ -261,21 +261,27 @@ int autoSelectDol(const char *id)
 	if (strcmp(id,"RMZX69") == 0) return 492;
 	if (strcmp(id,"RMZP69") == 0) return 492;
 	
-	//if (strcmp(id,"REDP41") == 0) return 1957;
+	if (strcmp(id,"REDP41") == 0) return 1957;
 	
 	if (strcmp(id,"RSXP69") == 0) return 337;
 	
 	if (strcmp(id,"RNBX69") == 0) return 964;
 	
+	if (strcmp(id,"RNFP69") == 0) return 1079;
+	
 	if (strcmp(id,"RMLP7U") == 0) return 56;
 	
 	if (strcmp(id,"RKMP5D") == 0) return 290;
+	
+	if (strcmp(id,"R5TP69") == 0) return 1493;
 	
 	if (strcmp(id,"RHDP8P") == 0) return 149;
 	
 
 	
-/*	
+/*	Grand Slam R5TP69 1493
+ Madden NFL08 RNFP69 1079
+
  Fifa08 RF8P69 463
  Fifa08 RF8X69 464
  Wii Sports Resort RZTP01 952

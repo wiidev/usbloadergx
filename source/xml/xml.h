@@ -56,8 +56,7 @@ struct gameXMLinfo
 	char iso_sha1[41];
 } ;
 
-struct gameXMLinfo gameinfo;
-struct gameXMLinfo gameinfo_reset;
+
 
 bool OpenXMLFile(char* filename);
 void LoadTitlesFromXML(char *langcode, bool forcejptoen);

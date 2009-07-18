@@ -39,6 +39,7 @@
 #include "listfiles.h"
 #include "fatmounter.h"
 #include "buffer.h"
+#include "xml/xml.h"
 
 #include "usbloader/wdvd.h"
 
@@ -1740,7 +1741,7 @@ int MainMenu(int menu)
 
 
 	}
-
+	CloseXMLDatabase();
 	ExitGUIThreads();
     bgMusic->Stop();
 	delete bgMusic;

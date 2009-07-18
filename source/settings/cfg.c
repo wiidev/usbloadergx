@@ -1718,8 +1718,8 @@ void CFG_Load(void)
 	Global_Default(); //global default depends on theme information
 	CFG_LoadGlobal();
 
-	if (Settings.titlesOverride==1) OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, true, false); // open file, load titles, do not keep in memory
-
+	//if (Settings.titlesOverride==1) OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, true, false); // open file, load titles, do not keep in memory
+OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true);
 	// loaded after database to override database titles with custom titles
 	snprintf(pathname, sizeof(pathname), "%stitles.txt", Settings.titlestxt_path);
 	cfg_parsefile(pathname, &title_set);

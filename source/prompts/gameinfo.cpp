@@ -24,6 +24,8 @@ extern GuiWindow * mainWindow;
 extern GuiSound * bgMusic;
 extern u8 shutdown;
 extern u8 reset;
+extern struct gameXMLinfo gameinfo;
+extern struct gameXMLinfo gameinfo_reset;
 
 /*** Extern functions ***/
 extern void ResumeGui();

@@ -21,6 +21,9 @@ static char xmlcfg_filename[100] = "wiitdb.zip";
 
 extern struct SSettings Settings; // for loader GX
 
+struct gameXMLinfo gameinfo;
+struct gameXMLinfo gameinfo_reset;
+
 
 
 static char langlist[11][22] =
