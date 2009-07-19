@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-16 05:32-0400\n"
+"POT-Creation-Date: 2009-07-19 01:28+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid "(both retired)"
-msgstr ""
+msgstr "(ex-medewerkers)"
 
 msgid "0 (Everyone)"
 msgstr "0 (Iedereen 0+)"
@@ -34,22 +34,22 @@ msgid "4 (Adults Only 18+)"
 msgstr "4 (Volwassen 18+)"
 
 msgid ">> Finishing installation..."
-msgstr ""
+msgstr ">> Installatie Afronden..."
 
 msgid ">> Installing content #"
-msgstr ""
+msgstr ">> Installeren inhoud #"
 
 msgid ">> Installing ticket..."
-msgstr ""
+msgstr ">> Ticket installeren..."
 
 msgid ">> Installing title..."
-msgstr ""
+msgstr ">> Titel installeren..."
 
 msgid ">> Reading WAD data..."
-msgstr ""
+msgstr ">> Wad data lezen..."
 
 msgid "AUTO"
-msgstr ""
+msgstr "Auto"
 
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "Alle functies zijn vrijgegeven."
@@ -58,7 +58,7 @@ msgid "Alternate DOL"
 msgstr "Alternatieve DOL"
 
 msgid "Anti"
-msgstr ""
+msgstr "Anti"
 
 msgid "App Language"
 msgstr "Taal"
@@ -139,10 +139,10 @@ msgid "Close"
 msgstr "Sluiten"
 
 msgid "Code Download"
-msgstr ""
+msgstr "Code Download"
 
 msgid "Confirm"
-msgstr ""
+msgstr "Bevestigen"
 
 msgid "Console"
 msgstr "Console"
@@ -181,16 +181,16 @@ msgid "Could not open Disc"
 msgstr "Kan DVD niet laden"
 
 msgid "Could not open WBFS partition"
-msgstr ""
+msgstr "Kan WBFS partitie niet openen"
 
 msgid "Could not open disc."
-msgstr ""
+msgstr "Kan DVD niet openen"
 
 msgid "Could not read the disc."
-msgstr ""
+msgstr "Kan DVD niet lezen"
 
 msgid "Could not set USB."
-msgstr ""
+msgstr "Kan USB niet instellen"
 
 msgid "Cover Download"
 msgstr "Download hoesjes"
@@ -202,7 +202,7 @@ msgid "Coverpath Changed"
 msgstr "Locatie hoesjes gewijzigd"
 
 msgid "Create"
-msgstr " "
+msgstr "Maak"
 
 msgid "Credits"
 msgstr "Aftiteling"
@@ -211,10 +211,10 @@ msgid "Custom Paths"
 msgstr "Bestandslocaties"
 
 msgid "DOL from SD"
-msgstr ""
+msgstr "Dol van SD"
 
 msgid "DOL from disc"
-msgstr ""
+msgstr "Dol van DVD"
 
 msgid "Dec"
 msgstr "Dec"
@@ -229,7 +229,7 @@ msgid "Default Settings"
 msgstr "Standaardinstellingen"
 
 msgid "Delete"
-msgstr ""
+msgstr "Verwijderen"
 
 msgid "Developed by"
 msgstr "Ontwikkeld door"
@@ -268,7 +268,7 @@ msgid "Do you want to retry for 30 secs?"
 msgstr "Wil je 30 sec. lang opnieuw proberen?"
 
 msgid "Do you want to use the alt dol that is known to be correct?"
-msgstr ""
+msgstr "Wil je de alt dol gebruiken waarvan is bevestigd dat deze werkt?"
 
 msgid "Dol Path"
 msgstr "Locatie dol"
@@ -286,13 +286,13 @@ msgid "Download Discart image?"
 msgstr "DVD label downloaden?"
 
 msgid "Download Now"
-msgstr ""
+msgstr "Download nu"
 
 msgid "Download finished"
 msgstr "Downloaden voltooid"
 
 msgid "Downloading"
-msgstr ""
+msgstr "Downloaden..."
 
 msgid "Downloading file"
 msgstr "Bestand downloaden"
@@ -301,10 +301,10 @@ msgid "Dutch"
 msgstr "Nederlands"
 
 msgid "ERROR"
-msgstr ""
+msgstr "FOUT"
 
 msgid "ERROR:"
-msgstr ""
+msgstr "FOUT:"
 
 msgid "English"
 msgstr "Engels"
@@ -322,7 +322,7 @@ msgid "Error reading Disc"
 msgstr "Fout bij lezen DVD"
 
 msgid "Error..."
-msgstr ""
+msgstr "Fout..."
 
 msgid "Exit USB Loader GX?"
 msgstr "USB Loader GX Afsluiten?"
@@ -337,7 +337,7 @@ msgid "File not found."
 msgstr "Bestand niet gevonden."
 
 msgid "Finishing installation... Ok!"
-msgstr ""
+msgstr "Installatie Afronden... Ok!"
 
 msgid "Flip-X"
 msgstr "X omwisselen"
@@ -424,19 +424,19 @@ msgid "Install a game"
 msgstr "Spel installeren"
 
 msgid "Installing content... Ok!"
-msgstr ""
+msgstr "Installeren inhoud... Ok!"
 
 msgid "Installing game:"
 msgstr "Bezig met installeren:"
 
 msgid "Installing ticket... Ok!"
-msgstr ""
+msgstr "Ticket installeren... Ok!"
 
 msgid "Installing title... Ok!"
-msgstr ""
+msgstr "Titel installeren... Ok!"
 
 msgid "Installing wad"
-msgstr ""
+msgstr "Wad installeren..."
 
 msgid "Italian"
 msgstr "Italiaans"
@@ -466,7 +466,7 @@ msgid "Languagepath changed."
 msgstr "Locatie taal gewijzigd."
 
 msgid "Leaving so you can restart..."
-msgstr ""
+msgstr "Afsluiten om te herstarten..."
 
 msgid "Left"
 msgstr "Links"
@@ -475,7 +475,7 @@ msgid "Like SysMenu"
 msgstr "Als systeemmenu"
 
 msgid "Load this dol as alternate dol?"
-msgstr ""
+msgstr "Deze dol als alt dol gebruiken?"
 
 msgid "Loading standard language."
 msgstr "Standaardtaal laden."
@@ -535,7 +535,7 @@ msgid "No WBFS partition found"
 msgstr "Geen WBFS partitie gevonden"
 
 msgid "No dol file found on disc."
-msgstr ""
+msgstr "Geen dol bestand gevonden op DVD"
 
 msgid "No file missing!"
 msgstr "Geen missende bestanden!"
@@ -556,7 +556,7 @@ msgid "Not a Wii Disc"
 msgstr "Geen Wii DVD"
 
 msgid "Not enough free memory."
-msgstr ""
+msgstr "Niet genoeg vrije ruimte."
 
 msgid "Not enough free space!"
 msgstr "Niet genoeg vrije ruimte!"
@@ -586,7 +586,7 @@ msgid "Ok"
 msgstr "Ok"
 
 msgid "Only for Install"
-msgstr "Alleen bij  installeren"
+msgstr "Alleen bij installeren"
 
 msgid "Parental Control"
 msgstr "Ouderlijk toezicht"
@@ -616,7 +616,7 @@ msgid "Path of titles.txt changed."
 msgstr "Locatie titles.txt gewijzigd."
 
 msgid "Pick from a list"
-msgstr ""
+msgstr "Kiezen van lijst"
 
 msgid "Play Count"
 msgstr "Gespeeld"
@@ -637,7 +637,7 @@ msgid "Quick Boot"
 msgstr "Snelle start"
 
 msgid "Reading WAD data... Ok!"
-msgstr ""
+msgstr "Wad data lezen... Ok!"
 
 msgid "Released"
 msgstr "Uitgegeven"
@@ -673,7 +673,7 @@ msgid "SChinese"
 msgstr "SChinees"
 
 msgid "SD selected"
-msgstr ""
+msgstr "SD geselecteerd"
 
 msgid "SFX Volume"
 msgstr "Volume effecten"
@@ -697,7 +697,7 @@ msgid "Settings"
 msgstr "Instellingen"
 
 msgid "Shit"
-msgstr ""
+msgstr "Shit"
 
 msgid "Shutdown System"
 msgstr "Systeem uitzetten"
@@ -718,7 +718,7 @@ msgid "Standard"
 msgstr "Standaard"
 
 msgid "Success"
-msgstr ""
+msgstr "Succes"
 
 msgid "Success:"
 msgstr "Succes:"
@@ -744,9 +744,12 @@ msgstr "Chinees Trad."
 msgid "TXTCheatcodes Path"
 msgstr "Locatie TXT Cheats"
 
+msgid "TXTCheatcodes Path changed"
+msgstr ""
+
 #, c-format
 msgid "The wad installation failed with error %ld"
-msgstr ""
+msgstr "De wad installatie is mislukt met error %ld"
 
 msgid "ThemePath"
 msgstr "Locatie thema"
@@ -774,7 +777,7 @@ msgstr "USB Loader GX is vergrendeld"
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
-msgstr ""
+msgstr "Wad is gedownload maar kan niet worden geopend (%s)."
 
 msgid "Uninstall"
 msgstr "Verwijderen"
@@ -840,7 +843,7 @@ msgid "Yes"
 msgstr "Ja"
 
 msgid "You are about to delete "
-msgstr ""
+msgstr "Je wilt nu verwijderen: "
 
 msgid "You are choosing to display favorites and you do not have any selected."
 msgstr "Je wilt favorieten tonen, maar je hebt er geen ingesteld"
@@ -855,10 +858,10 @@ msgid "available"
 msgstr "beschikbaar"
 
 msgid "contains over 255 lines of code.  It will produce unexpected results."
-msgstr ""
+msgstr "bevat meer dan 255 lijnen met code. Dit kan slechte gevolgen hebben."
 
 msgid "does not exist!"
-msgstr ""
+msgstr "bestaat niet!"
 
 msgid "does not exist!  Loading game without cheats."
 msgstr "bestaat niet! Spel laden zonder cheats…"
@@ -879,7 +882,7 @@ msgid "for"
 msgstr "voor"
 
 msgid "for WiiTDB and hosting covers / disc images"
-msgstr ""
+msgstr "voor wiitdb en upload afbeeldingen"
 
 msgid "for diverse patches"
 msgstr "voor vele correcties"
@@ -888,10 +891,10 @@ msgid "for his awesome tool"
 msgstr "voor zijn geweldige code"
 
 msgid "for hosting the update files"
-msgstr "(upload van  updates)"
+msgstr "(upload van updates)"
 
 msgid "for the USB Loader source"
-msgstr "(voor de source code)"
+msgstr "(source code)"
 
 msgid "formatted!"
 msgstr "geformatteerd!"
@@ -947,7 +950,7 @@ msgstr "Locatie titles.txt"
 #~ msgid "Insert a Wii Disc!"
 #~ msgstr "Voer een Wii DVD in!!"
 
-#~ msgid  "Sort Game List"
+#~ msgid "Sort Game List"
 #~ msgstr "Spellenlijst sorteren"
 
 #~ msgid "Loading in cIOS249"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-18 16:51+0200\n"
+"POT-Creation-Date: 2009-07-19 01:28+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: Tusk\n"
 "Language-Team: \n"
@@ -743,6 +743,9 @@ msgstr "TKínai"
 
 msgid "TXTCheatcodes Path"
 msgstr "TXTKódok Útvonala"
+
+msgid "TXTCheatcodes Path changed"
+msgstr ""
 
 #, c-format
 msgid "The wad installation failed with error %ld"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-18 15:18+0200\n"
+"POT-Creation-Date: 2009-07-19 01:28+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: Kin8\n"
 "Language-Team: Badablek, Amour, ikya, OuahOuah & Kin8\n"
@@ -744,6 +744,9 @@ msgstr "Chinois traditionnel"
 msgid "TXTCheatcodes Path"
 msgstr "Dossier TXTCodes Triche"
 
+msgid "TXTCheatcodes Path changed"
+msgstr "Dossier TXTCodes Triche modifié"
+
 #, c-format
 msgid "The wad installation failed with error %ld"
 msgstr "L'installation WAD a échoué avec erreur %ld"
@@ -913,9 +916,6 @@ msgstr "une erreur s'est produite"
 
 msgid "titles.txt Path"
 msgstr "Localisation titles.txt"
-
-#~ msgid "TXTCheatcodes Path changed"
-#~ msgstr "Dossier TXTCodes Triche modifié"
 
 #~ msgid "file(s) left"
 #~ msgstr "fichier(s) restant(s)"

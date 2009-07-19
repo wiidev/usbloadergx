@@ -1461,7 +1461,7 @@ int MenuSettings()
                                         if(entered[len] !='/')
                                         strncat (entered, "/", 1);
                                         strncpy(Settings.TxtCheatcodespath, entered, sizeof(Settings.TxtCheatcodespath));
-                                        WindowPrompt("TxtCheatcodespathchanged",0,tr("OK"));
+                                        WindowPrompt(tr("TXTCheatcodes Path changed"),0,tr("OK"));
                                     }
                                 }
                                 else

@@ -744,6 +744,9 @@ msgstr "Cínsky"
 msgid "TXTCheatcodes Path"
 msgstr "Cesta k TXT cheatum"
 
+msgid "TXTCheatcodes Path changed"
+msgstr ""
+
 #, c-format
 msgid "The wad installation failed with error %ld"
 msgstr ""

@@ -745,6 +745,9 @@ msgstr "Kinesisk (trad.)"
 msgid "TXTCheatcodes Path"
 msgstr "Sti til TXTCheatcodes"
 
+msgid "TXTCheatcodes Path changed"
+msgstr ""
+
 #, c-format
 msgid "The wad installation failed with error %ld"
 msgstr ""
