@@ -352,7 +352,8 @@ void GuiText::Draw()
 				i=0;
 				for(j=firstLine-1; j < numLines+firstLine-1; j++)
 				{
-					if (j<linenum-(firstLine-1))
+					//if (j<linenum-(firstLine-1))
+					if (j < linenum)
 					(font ? font : fontSystem)->drawText(this->GetLeft(), this->GetTop()+voffset+i*lineheight, tmptext[j], c, style);
 					i++;
 				}

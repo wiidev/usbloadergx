@@ -723,22 +723,23 @@ int showGameInfo(char *ID)
 			}
 			else if ((upBtn.GetState()==STATE_CLICKED||upBtn.GetState()==STATE_HELD) && page==2)
 			{
-				int l=synopsisTxt->GetFirstLine()>1?synopsisTxt->GetFirstLine()-1:1;
-				synopsisTxt->SetFirstLine(l);
+				//int l=synopsisTxt->GetFirstLine()-1;
+				if (synopsisTxt->GetFirstLine()>1)
+				synopsisTxt->SetFirstLine(synopsisTxt->GetFirstLine()-1);
 				usleep(60000);
 				if (!((ButtonsHold() & WPAD_BUTTON_UP)||(ButtonsHold() & PAD_BUTTON_UP)))
 					upBtn.ResetState();
 			}
 			else if ((dnBtn.GetState()==STATE_CLICKED||dnBtn.GetState()==STATE_HELD) && page==2
 						&&synopsisTxt->GetTotalLines()>pagesize
-						&&synopsisTxt->GetFirstLine()<synopsisTxt->GetTotalLines()-pagesize)
+						&&synopsisTxt->GetFirstLine()-1<synopsisTxt->GetTotalLines()-pagesize)
 			{	
 			int l=0;
-				if(synopsisTxt->GetTotalLines()>pagesize)
+				//if(synopsisTxt->GetTotalLines()>pagesize)
 					l=synopsisTxt->GetFirstLine()+1;
 				
-				if (l>(synopsisTxt->GetTotalLines()+1)-pagesize)
-						l=(synopsisTxt->GetTotalLines()+1)-pagesize;
+				//if (l>(synopsisTxt->GetTotalLines()+1)-pagesize)
+						//l=(synopsisTxt->GetTotalLines()+1)-pagesize;
 				
 				synopsisTxt->SetFirstLine(l);
 				usleep(60000);

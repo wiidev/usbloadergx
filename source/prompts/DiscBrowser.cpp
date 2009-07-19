@@ -275,12 +275,20 @@ int autoSelectDol(const char *id)
 	
 	if (strcmp(id,"R5TP69") == 0) return 1493;
 	
+	if (strcmp(id,"R9OP69") == 0) return 1991;
+	if (strcmp(id,"R9OE69") == 0) return 1973;
+	
+	if (strcmp(id,"RVUP8P") == 0) return 16426;
+	if (strcmp(id,"RVUE8P") == 0) return 16405;
+	
+	if (strcmp(id,"RJ8P64") == 0) return 8;
+	
 	if (strcmp(id,"RHDP8P") == 0) return 149;
-	
 
-	
 /*	Grand Slam R5TP69 1493
  Madden NFL08 RNFP69 1079
+
+ Atlantis"Indianer Jones" RJ8P64 8
 
  Fifa08 RF8P69 463
  Fifa08 RF8X69 464
