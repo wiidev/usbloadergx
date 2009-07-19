@@ -2966,3 +2966,253 @@ void GetLanguageToLangCode(char *langcode) {
 				break;
 	}
 }
+
+/****************************************************************************
+ * HBCWindowPrompt
+ *
+ * Displays a prompt window to user, with information, an error message, or
+ * presenting a user with a choice of up to 2 Buttons.
+ *
+ ***************************************************************************/
+/* <name>
+ <coder>
+   <version>
+   <release_date>
+   <short_description>
+   <long_description>
+	SD:/APPS/FTPII/ICON.PNG*/
+ 
+int
+HBCWindowPrompt(const char *name, const char *coder, const char *version,
+                const char *release_date, const char *long_description, const char *iconPath, const char *filesize)
+{
+	int choice = -1;
+	
+
+	GuiWindow promptWindow(472,320);
+	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	promptWindow.SetPosition(0, -10);
+
+	GuiTrigger trigA;
+	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
+	GuiTrigger trigB;
+	trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
+	GuiTrigger trigU;
+	trigU.SetButtonOnlyTrigger(-1, WPAD_BUTTON_UP | WPAD_CLASSIC_BUTTON_UP, PAD_BUTTON_UP);
+	GuiTrigger trigD;
+	trigD.SetButtonOnlyTrigger(-1, WPAD_BUTTON_DOWN | WPAD_CLASSIC_BUTTON_DOWN, PAD_BUTTON_DOWN);
+		
+	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
+	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
+	char imgPath[50];
+	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
+	GuiImageData btnOutline(imgPath, button_dialogue_box_png);
+	snprintf(imgPath, sizeof(imgPath), "%sdialogue_box.png", CFG.theme_path);
+	GuiImageData dialogBox(imgPath, dialogue_box_png);
+	snprintf(imgPath, sizeof(imgPath), "%sbg_options.png", CFG.theme_path);
+	GuiImageData whiteBox(imgPath, bg_options_png);
+	
+	snprintf(imgPath, sizeof(imgPath), "%sscrollbar.png", CFG.theme_path);
+	GuiImageData scrollbar(imgPath, scrollbar_png);
+	GuiImage scrollbarImg(&scrollbar);
+	scrollbarImg.SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
+	scrollbarImg.SetPosition(-40, 114);
+	scrollbarImg.SetSkew(0,0,0,0,0,-120,0,-120);
+	
+	snprintf(imgPath, sizeof(imgPath), "%sscrollbar_arrowdown.png", CFG.theme_path);
+	GuiImageData arrowDown(imgPath, scrollbar_arrowdown_png);
+	GuiImage arrowDownImg(&arrowDown);
+	arrowDownImg.SetScale(.8);
+	
+	snprintf(imgPath, sizeof(imgPath), "%sscrollbar_arrowup.png", CFG.theme_path);
+	GuiImageData arrowUp(imgPath, scrollbar_arrowup_png);
+	GuiImage arrowUpImg (&arrowUp);
+	arrowUpImg.SetScale(.8);
+	
+	GuiButton arrowUpBtn(arrowUpImg.GetWidth(), arrowUpImg.GetHeight());
+	arrowUpBtn.SetImage(&arrowUpImg);
+	arrowUpBtn.SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
+	arrowUpBtn.SetPosition(-25,91);
+	arrowUpBtn.SetTrigger(&trigA);
+	arrowUpBtn.SetTrigger(&trigU);
+	arrowUpBtn.SetEffectOnOver(EFFECT_SCALE, 50, 130);
+	arrowUpBtn.SetSoundClick(&btnClick);
+
+	GuiButton arrowDownBtn(arrowDownImg.GetWidth(), arrowDownImg.GetHeight());
+	arrowDownBtn.SetImage(&arrowDownImg);
+	arrowDownBtn.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
+	arrowDownBtn.SetPosition(-25,-27);
+	arrowDownBtn.SetTrigger(&trigA);
+	arrowDownBtn.SetTrigger(&trigD);
+	arrowDownBtn.SetEffectOnOver(EFFECT_SCALE, 50, 130);
+	arrowDownBtn.SetSoundClick(&btnClick);
+
+	GuiImageData *iconData =NULL;
+	GuiImage *iconImg =NULL;
+	snprintf(imgPath, sizeof(imgPath), "%s", iconPath);
+	
+	bool iconExist = checkfile(imgPath);
+	if (iconExist){
+		iconData = new GuiImageData (iconPath, dialogue_box_png);
+		iconImg = new GuiImage (iconData);
+		iconImg->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+		iconImg->SetPosition(45,10);
+	}
+
+	GuiImage dialogBoxImg(&dialogBox);
+	dialogBoxImg.SetSkew(0,-50,0,-50,0,50,0,50);
+	
+	GuiImage whiteBoxImg(&whiteBox);
+	whiteBoxImg.SetPosition(0,110);
+	whiteBoxImg.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	whiteBoxImg.SetSkew(0,0,0,0,0,-120,0,-120);
+	/*if (Settings.wsprompt == yes){
+	dialogBoxImg.SetWidescreen(CFG.widescreen);
+	}*/
+	
+	char tmp[510];
+		
+	GuiText nameTxt(name,30 , (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	nameTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	nameTxt.SetPosition(0,-15);
+	nameTxt.SetMaxWidth(430);
+	
+	
+	if (coder)
+	snprintf(tmp, sizeof(tmp), "Coded by: %s",coder);
+	GuiText coderTxt(tmp, 16, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	coderTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	coderTxt.SetPosition(180,30);
+	coderTxt.SetMaxWidth(280);
+	
+	if (version)
+	snprintf(tmp, sizeof(tmp), "Version: %s",version);
+	GuiText versionTxt(tmp,16 , (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	versionTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	versionTxt.SetPosition(40,65);
+	versionTxt.SetMaxWidth(430);
+	
+	//if (release_date)
+	//snprintf(tmp, sizeof(tmp), "Released: %s",release_date);
+	GuiText release_dateTxt(release_date,16 , (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	release_dateTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	release_dateTxt.SetPosition(40,85);
+	release_dateTxt.SetMaxWidth(430);
+	
+	int pagesize = 6;
+	GuiText long_descriptionTxt(long_description, 20, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	long_descriptionTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	long_descriptionTxt.SetPosition(46,120);
+	long_descriptionTxt.SetMaxWidth(360);
+	long_descriptionTxt.SetNumLines(pagesize);
+	
+
+	GuiText filesizeTxt(filesize, 16, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	filesizeTxt.SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
+	filesizeTxt.SetPosition(-40,12);
+	
+	/*GuiText msgTxt(msg, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	msgTxt.SetPosition(0,-40);
+	msgTxt.SetMaxWidth(430);*/
+
+	GuiText btn1Txt(tr("Load"), 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	GuiImage btn1Img(&btnOutline);
+	if (Settings.wsprompt == yes){
+		btn1Txt.SetWidescreen(CFG.widescreen);
+		btn1Img.SetWidescreen(CFG.widescreen);
+	}
+
+	GuiButton btn1(&btn1Img, &btn1Img, 0,3,0,0,&trigA,&btnSoundOver,&btnClick,1);
+	btn1.SetLabel(&btn1Txt);
+	btn1.SetState(STATE_SELECTED);
+
+	GuiText btn2Txt(tr("Back"), 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	GuiImage btn2Img(&btnOutline);
+	if (Settings.wsprompt == yes){
+	btn2Txt.SetWidescreen(CFG.widescreen);
+	btn2Img.SetWidescreen(CFG.widescreen);
+	}
+	GuiButton btn2(&btn2Img, &btn2Img, 0,3,0,0,&trigA,&btnSoundOver,&btnClick,1);
+	btn2.SetLabel(&btn2Txt);
+	btn2.SetTrigger(&trigB);
+
+   
+   btn1.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+   btn1.SetPosition(40, 2);
+   btn2.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
+   btn2.SetPosition(-40, 2);
+   
+	promptWindow.Append(&dialogBoxImg);
+	if (long_description)promptWindow.Append(&whiteBoxImg);
+	if (long_description)promptWindow.Append(&scrollbarImg);
+	if (long_description)promptWindow.Append(&arrowDownBtn);
+	if (long_description)promptWindow.Append(&arrowUpBtn);
+	
+	if (name)promptWindow.Append(&nameTxt);
+	if (version)promptWindow.Append(&versionTxt);
+	if (coder)promptWindow.Append(&coderTxt);
+	if (release_date)promptWindow.Append(&release_dateTxt);
+	if (long_description)promptWindow.Append(&long_descriptionTxt);
+	if (filesize)promptWindow.Append(&filesizeTxt);
+	if (iconExist)promptWindow.Append(iconImg);
+	promptWindow.Append(&btn1);
+	promptWindow.Append(&btn2);
+
+
+	promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
+	HaltGui();
+	mainWindow->SetState(STATE_DISABLED);
+	mainWindow->Append(&promptWindow);
+	mainWindow->ChangeFocus(&promptWindow);
+	ResumeGui();
+
+	while(choice == -1)
+	{
+		VIDEO_WaitVSync();
+		if(shutdown == 1)
+		{
+			wiilight(0);
+			Sys_Shutdown();
+		}
+		if(reset == 1)
+			Sys_Reboot();
+		if(btn1.GetState() == STATE_CLICKED) {
+			choice = 1;
+		}
+		else if(btn2.GetState() == STATE_CLICKED) {
+			choice = 0;
+		}
+		else if ((arrowUpBtn.GetState()==STATE_CLICKED||arrowUpBtn.GetState()==STATE_HELD) )
+			{
+				if (long_descriptionTxt.GetFirstLine()>1)
+				long_descriptionTxt.SetFirstLine(long_descriptionTxt.GetFirstLine()-1);
+				usleep(60000);
+				if (!((ButtonsHold() & WPAD_BUTTON_UP)||(ButtonsHold() & PAD_BUTTON_UP)))
+					arrowUpBtn.ResetState();
+			}
+			else if ((arrowDownBtn.GetState()==STATE_CLICKED||arrowDownBtn.GetState()==STATE_HELD) 
+						&&long_descriptionTxt.GetTotalLines()>pagesize
+						&&long_descriptionTxt.GetFirstLine()-1<long_descriptionTxt.GetTotalLines()-pagesize)
+			{	
+			int l=0;
+					l=long_descriptionTxt.GetFirstLine()+1;
+				
+				long_descriptionTxt.SetFirstLine(l);
+				usleep(60000);
+				if (!((ButtonsHold() & WPAD_BUTTON_DOWN)||(ButtonsHold() & PAD_BUTTON_DOWN)))
+					arrowDownBtn.ResetState();
+			}
+
+	}
+
+	promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
+	while(promptWindow.GetEffect() > 0) usleep(50);
+	HaltGui();
+	mainWindow->Remove(&promptWindow);
+	mainWindow->SetState(STATE_DEFAULT);
+	ResumeGui();
+	return choice;
+}
+
+

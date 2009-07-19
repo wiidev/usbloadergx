@@ -230,7 +230,28 @@ int MenuDiscList()
     char IDfull[7];
 	u32 covert = 0;
 
+//this is here to test the  HBCwindow prompt.  when its done being tested, this shit can go away.
+/*	char db1[50];
+	char db2[50];
+	char db3[50];
+	char db4[50];
+	char db5[500];
+	char db6[50];
+	char db7[50];
+	snprintf(db1, sizeof(db1), "name of the app");
+	snprintf(db2, sizeof(db2), "coder coder coder coder coder coder coder ");
+	snprintf(db3, sizeof(db3), "0.0.1");
+	snprintf(db4, sizeof(db4), "02/04/1973");
+	snprintf(db5, sizeof(db5), "long description-- htdeantudantd oentadu ahu tuih suntihuntsohntehi uei oui oi oue iueinubnsueto intoe iueti ueti ueioue inuet ouinto io ueintoe ioe uinoe ioeunitoe inu oei nyf .pnf vid uivx qnuitoe duied uientd ueidnuietd i euindt uie uindtuie dda udhoan doent ahuen oadhnt uda ntudhaoen adhoeun oadhnt udan uehaduh odenahuen danuehanuhaenua euntoadh enta uenhoad ut anuehad uhoa uho enhta udoantudhe ahuen ahtud a");
+	snprintf(db6, sizeof(db6), "24TB");
+	snprintf(db7, sizeof(db7), "SD:/APPS/FTPII/ICON.PNG");
+	
 
+HBCWindowPrompt(db1, db2, db3,db4, db5, db7, db6);
+
+		
+
+*/
     WDVD_GetCoverStatus(&covert);
 	u32 covertOld=covert;
 
