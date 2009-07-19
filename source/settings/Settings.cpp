@@ -1196,6 +1196,7 @@ int MenuSettings()
                     options2.SetName(5, "%s", tr("Cheatcodes Path"));
 						  options2.SetName(6, "%s", tr("TXTCheatcodes Path"));
                     options2.SetName(7, "%s", tr("Dol Path"));
+                    options2.SetName(8, "%s", tr("Homebrew Apps Path"));
                     for(int i = 0; i <= MAXOPTIONS; i++) options2.SetValue(i, NULL);
                     w.Append(&optionBrowser2);
                     optionBrowser2.SetClickable(true);
@@ -1219,6 +1220,7 @@ int MenuSettings()
                         options2.SetValue(5, "%s", Settings.Cheatcodespath);
 						options2.SetValue(6, "%s", Settings.TxtCheatcodespath);
 						options2.SetValue(7, "%s", Settings.dolpath);
+						options2.SetValue(8, "%s", Settings.homebrewapps_path);
 
                         if(backBtn.GetState() == STATE_CLICKED)
                         {
@@ -1491,6 +1493,32 @@ int MenuSettings()
                                     }
                                 } else {
                                     WindowPrompt(tr("Dolpath change"),tr("Console should be unlocked to modify it."),tr("OK"));
+                                }
+                                break;
+                            case 8:
+                                if ( Settings.godmode == 1)
+                                {
+                                    w.Remove(&optionBrowser2);
+                                    w.Remove(&backBtn);
+                                    char entered[43] = "";
+                                    strncpy(entered, Settings.homebrewapps_path, sizeof(entered));
+                                    int result = OnScreenKeyboard(entered,43,0);
+                                    w.Append(&optionBrowser2);
+                                    w.Append(&backBtn);
+                                    if ( result == 1 )
+                                    {
+                                        int len = (strlen(entered)-1);
+                                        if(entered[len] !='/')
+                                        strncat (entered, "/", 1);
+                                        strncpy(Settings.homebrewapps_path, entered, sizeof(Settings.homebrewapps_path));
+                                        WindowPrompt(tr("Homebrew Appspath changed"),0,tr("OK"));
+//                                        if(!isSdInserted()) {
+										if(!isInserted(bootDevice)) {
+                                          WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
+                                        }
+                                    }
+                                } else {
+                                    WindowPrompt(tr("Homebrew Appspath change"),tr("Console should be unlocked to modify it."),tr("OK"));
                                 }
                                 break;
 
@@ -1982,7 +2010,7 @@ int GameSettings(struct discHdr * header)
 						int dolchoice =0;
 							//check to see if we already know the offset of the correct dol
 						 int autodol = autoSelectDol(filename);
-						 
+
 						 //if we do know that offset ask if they want to use it
 						 if (autodol>0){
 							dolchoice = WindowPrompt(0,tr("Do you want to use the alt dol that is known to be correct?"),tr("Yes"),tr("Pick from a list"));

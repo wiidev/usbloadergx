@@ -220,6 +220,7 @@ void CFG_Default(int widescreen) // -1 = non forced Mode
 		snprintf(Settings.languagefiles_path, sizeof(Settings.languagefiles_path), "%s/config/language/", bootDevice);
 		snprintf(Settings.oggload_path, sizeof(Settings.oggload_path), "%s/config/backgroundmusic/", bootDevice);
 		snprintf(Settings.update_path, sizeof(Settings.update_path), "%s/apps/usbloader_gx/", bootDevice);
+		snprintf(Settings.homebrewapps_path, sizeof(Settings.homebrewapps_path), "%s/apps/", bootDevice);
 		snprintf(Settings.Cheatcodespath, sizeof(Settings.Cheatcodespath), "%s/codes/", bootDevice);
 		snprintf(Settings.TxtCheatcodespath, sizeof(Settings.TxtCheatcodespath), "%s/txtcodes/", bootDevice);
 		snprintf(Settings.dolpath, sizeof(Settings.dolpath), "%s/", bootDevice);
@@ -485,6 +486,10 @@ void path_set(char *name, char *val)
 	}
 	if (strcmp(name, "update_path") == 0) {
 		strcopy(Settings.update_path, val, sizeof(Settings.update_path));
+		return;
+	}
+	if (strcmp(name, "homebrewapps_path") == 0) {
+		strcopy(Settings.homebrewapps_path, val, sizeof(Settings.homebrewapps_path));
 		return;
 	}
 	if (strcmp(name, "Cheatcodespath") == 0) {
@@ -1253,6 +1258,7 @@ bool cfg_save_global()// save global settings
 	fprintf(f, "wiilight = %d\n ", Settings.wiilight);
 	fprintf(f, "gameDisplay = %d\n ", Settings.gameDisplay);
 	fprintf(f, "update_path = %s\n ", Settings.update_path);
+	fprintf(f, "homebrewapps_path = %s\n ", Settings.homebrewapps_path);
 	fprintf(f, "Cheatcodespath = %s\n ", Settings.Cheatcodespath);
 	fprintf(f, "titlesOverride = %d\n ", Settings.titlesOverride);
 	//fprintf(f, "db_url = %s\n ", Settings.db_url);

@@ -19,7 +19,7 @@ BUILD		:=	build
 SOURCES		:=	source source/libwiigui source/images source/fonts source/sounds \
 				source/libwbfs source/unzip source/language source/mload source/patches \
 				source/usbloader source/xml source/network source/settings source/prompts \
-				source/ramdisc source/wad source/banner source/cheats
+				source/ramdisc source/wad source/banner source/cheats source/homebrewboot
 INCLUDES	:=	source
 SVNDEV		:=	-D'SVN_REV="$(shell svnversion -n ..)"'
 

@@ -22,6 +22,8 @@
 #include "usbloader/getentries.h"
 #include "language/gettext.h"
 #include "settings/Settings.h"
+#include "homebrewboot/HomebrewBrowse.h"
+#include "homebrewboot/BootHomebrew.h"
 #include "prompts/PromptWindows.h"
 #include "prompts/ProgressWindow.h"
 #include "prompts/gameinfo.h"
@@ -75,6 +77,7 @@ extern struct discHdr * gameList;
 extern u32 gameCnt;
 extern s32 gameSelected, gameStart;
 extern const u8 data1;
+extern bool boothomebrew;
 
 /****************************************************************************
  * ResumeGui
@@ -441,6 +444,17 @@ int MenuDiscList()
         GuiButton carouselBtn(&carouselBtnImg_g,&carouselBtnImg_g, 2, 3, THEME.carousel_x, THEME.carousel_y, &trigA, &btnSoundOver, &btnClick,1);
         carouselBtn.SetAlpha(180);
 
+        GuiImage homebrewBtnImg(&imgarrangeList);
+        homebrewBtnImg.SetWidescreen(CFG.widescreen);
+        GuiButton homebrewBtn(homebrewBtnImg.GetWidth(), homebrewBtnImg.GetHeight());
+        homebrewBtn.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+        homebrewBtn.SetPosition(430, 410);
+        homebrewBtn.SetImage(&homebrewBtnImg);
+        homebrewBtn.SetSoundOver(&btnSoundOver);
+        homebrewBtn.SetSoundClick(&btnClick);
+        homebrewBtn.SetEffectGrow();
+        homebrewBtn.SetTrigger(&trigA);
+
         if (Settings.fave)
         {
                 favoriteBtn.SetImage(&favoriteBtnImg);
@@ -595,6 +609,7 @@ int MenuDiscList()
         w.Append(&listBtn);
         w.Append(&gridBtn);
         w.Append(&carouselBtn);
+        w.Append(&homebrewBtn);
 
         if((Settings.hddinfo == hr12)||(Settings.hddinfo == hr24))
         {
@@ -924,18 +939,21 @@ int MenuDiscList()
                 }
 
                 else if (carouselBtn.GetState() == STATE_CLICKED) {
-                        if (Settings.gameDisplay!=carousel) {
-
-                                Settings.gameDisplay=carousel;
-                                menu = MENU_DISCLIST;
-                                if(isInserted(bootDevice)) {
+                    if (Settings.gameDisplay!=carousel) {
+                            Settings.gameDisplay=carousel;
+                            menu = MENU_DISCLIST;
+                            if(isInserted(bootDevice)) {
                                 cfg_save_global();
-                                }
-                                carouselBtn.ResetState();
-                                break;
-                } else {
-                    carouselBtn.ResetState();
+                            }
+                            carouselBtn.ResetState();
+                            break;
+                    } else {
+                        carouselBtn.ResetState();
+                    }
                 }
+                else if (homebrewBtn.GetState() == STATE_CLICKED) {
+                    menu = MENU_HOMEBREWBROWSE;
+                    break;
                 }
 				else if (gameInfo.GetState() == STATE_CLICKED) {
 					struct discHdr *header = &gameList[selectImg1];
@@ -1120,7 +1138,7 @@ int MenuDiscList()
 								/* Open gct File and check exist */
 								sprintf(nipple, "%s%s.gct",Settings.Cheatcodespath,IDfull);
 								exeFile = fopen (nipple ,"rb");
-								
+
 								if (exeFile==NULL)
 								{
 									sprintf(nipple, "%s %s",nipple,tr("does not exist!  Loading game without cheats."));
@@ -1136,7 +1154,7 @@ int MenuDiscList()
 									WindowPrompt(tr("Error"),nipple,NULL,NULL,NULL,NULL,170);
 									}
 								}
-								
+
 								}
 								SDCard_deInit();
                                 wiilight(0);
@@ -1204,7 +1222,7 @@ int MenuDiscList()
 									WindowPrompt(tr("Error"),nipple,NULL,NULL,NULL,NULL,170);
 									}
 								}
-								
+
 								}
 								SDCard_deInit();
 								wiilight(0);
@@ -1273,7 +1291,7 @@ int MenuDiscList()
 			covertOld=covert;
 		}
 
-    HaltGui();
+        HaltGui();
         mainWindow->RemoveAll();
         mainWindow->Append(bgImg);
         delete gameBrowser;
@@ -1731,6 +1749,9 @@ int MainMenu(int menu)
             case MENU_SETTINGS:
 				currentMenu = MenuSettings();
 				break;
+            case MENU_HOMEBREWBROWSE:
+				currentMenu = MenuHomebrewBrowse();
+				break;
             case MENU_DISCLIST:
 				currentMenu = MenuDiscList();
 				break;
@@ -1738,8 +1759,6 @@ int MainMenu(int menu)
 				currentMenu = MenuCheck();
 				break;
 		}
-
-
 	}
 	CloseXMLDatabase();
 	ExitGUIThreads();
@@ -1757,6 +1776,10 @@ int MainMenu(int menu)
 
 	ShutdownAudio();
 	StopGX();
+
+	if(boothomebrew == true) {
+        BootHomebrew(Settings.selected_homebrew);
+    } else {
 
 	int ret = 0;
     struct discHdr *header = &gameList[gameSelected];
@@ -1962,6 +1985,7 @@ int MainMenu(int menu)
     ret = Disc_WiiBoot(videoselected, cheat, vipatch, countrystrings, errorfixer002, alternatedol, alternatedoloffset);
     if (ret < 0) {
         Sys_LoadMenu();
+    }
     }
 
     return 0;

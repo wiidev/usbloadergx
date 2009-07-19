@@ -355,6 +355,8 @@ struct SSettings {
 	char	ogg_path[150];
 	char	dolpath[150];
 	char	update_path[150];
+	char	homebrewapps_path[150];
+	char    selected_homebrew[200];
 	char	Cheatcodespath[100];
 	char	TxtCheatcodespath[100];
 	short   error002;
