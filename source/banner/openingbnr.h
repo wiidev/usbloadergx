@@ -27,7 +27,8 @@ extern "C"
 
 //! Extract opening.bnr from filepath to destpath
 //! Files extracted: banner.bin icon.bin and sound.bin
-int extractbnrfile(char * filepath, char * destpath);
+int extractbnrfile(const char * filepath, const char * destpath);
+int unpackBin(const char * filename,const char * outdir);
 //int unpackBanner(const char * filename,const char * outdir);
 int unpackBanner(const char * gameid, const char * outdir);
 //! Extract the lz77 compressed banner, icon and sound .bin

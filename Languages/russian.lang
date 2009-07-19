@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-19 12:57+0200\n"
+"POT-Creation-Date: 2009-07-19 19:46+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: Kir\n"
 "Language-Team: Kir\n"
@@ -492,6 +492,9 @@ msgstr "Налево"
 
 msgid "Like SysMenu"
 msgstr "как SysMenu"
+
+msgid "Load"
+msgstr ""
 
 msgid "Load this dol as alternate dol?"
 msgstr ""

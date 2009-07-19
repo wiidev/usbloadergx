@@ -427,184 +427,44 @@ void Menu_DrawDiskCover(f32 xpos, f32 ypos, f32 zpos, u16 width, u16 height, u16
 	GX_SetVtxDesc (GX_VA_TEX0, GX_NONE);
 }
 
-void Menu_DrawTPL(f32 xpos, f32 ypos, f32 zpos, u16 width, u16 height, u16 distance,const char *filepath,
-	f32 deg_alpha, f32 deg_beta, f32 scaleX, f32 scaleY, u8 alpha, bool shadow)
+void Menu_DrawTPLImg(f32 xpos, f32 ypos, f32 zpos, f32 width, f32 height, GXTexObj *texObj,
+	f32 degrees, f32 scaleX, f32 scaleY, u8 alpha, int XX1, int YY1,int XX2, int YY2,int XX3, int YY3,int XX4, int YY4)
 {
-	TPLFile tplfile;
-	GXTexObj texObj;
-
-	TPL_OpenTPLFromFile(&tplfile,filepath);
-	TPL_GetTexture(&tplfile,0,&texObj); //Get
-
-	GX_LoadTexObj(&texObj, GX_TEXMAP0);
+	GX_LoadTexObj(texObj, GX_TEXMAP0);
 	GX_InvalidateTexAll();
-
-	TPL_CloseTPLFile(&tplfile);
 
 	GX_SetTevOp (GX_TEVSTAGE0, GX_REPLACE);
 	GX_SetVtxDesc (GX_VA_TEX0, GX_DIRECT);
 
-	f32 cos_beta = cos(DegToRad(deg_beta));
-	f32 s_offset_y = (zpos + (cos_beta * distance)) * tan(DegToRad(5));
-	f32 s_offset_x = (cos_beta<0?-cos_beta:cos_beta) * s_offset_y;
-	f32 s_offset_z = (s_offset_y<0 ? 0 : s_offset_y)*2;
-
-	Mtx m,m1,m2,m3,m4, mv;
+	Mtx m,m1,m2, mv;
 	width *=.5;
 	height*=.5;
-	guMtxIdentity (m4);
-	guMtxTransApply(m4,m4, 0, 0, distance);
-
 	guMtxIdentity (m1);
 	guMtxScaleApply(m1,m1,scaleX,scaleY,1.0);
-	guVector axis2 = (guVector) {0 , 1, 0 };
-	guMtxRotAxisDeg (m2, &axis2, deg_beta);
 	guVector axis = (guVector) {0 , 0, 1 };
-	guMtxRotAxisDeg (m3, &axis, deg_alpha);
-//	guMtxConcat(m2,m1,m);
-	guMtxConcat(m3,m4,m3); // move distance then rotate z-axis
-	guMtxConcat(m2,m3,m2); // rotate y-axis
-	guMtxConcat(m1,m2,m); // scale
+	guMtxRotAxisDeg (m2, &axis, degrees);
+	guMtxConcat(m1,m2,m);
 
-	if(shadow)
-		guMtxTransApply(m,m, xpos+width+0.5+s_offset_x,ypos+height+0.5+s_offset_y,zpos-s_offset_z);
-	else
-		guMtxTransApply(m,m, xpos+width+0.5,ypos+height+0.5,zpos);
-
+	guMtxTransApply(m,m, xpos+width+0.5,ypos+height+0.5,zpos);
 	guMtxConcat (GXmodelView2D, m, mv);
 	GX_LoadPosMtxImm (mv, GX_PNMTX0);
 
-	if(shadow)
-	{
 	GX_Begin(GX_QUADS, GX_VTXFMT0,4);
-	GX_Position3f32(-width, -height,  0);
-	GX_Color4u8(0,0,0,alpha);
-	GX_TexCoord2f32(0, 0);
-
-	GX_Position3f32(width, -height,  0);
-	GX_Color4u8(0,0,0,alpha);
-	GX_TexCoord2f32(1, 0);
-
-	GX_Position3f32(width, height,  0);
-	GX_Color4u8(0,0,0,alpha);
-	GX_TexCoord2f32(1, 1);
-
-	GX_Position3f32(-width, height,  0);
-	GX_Color4u8(0,0,0,alpha);
-	GX_TexCoord2f32(0, 1);
-	}
-	else
-	{
-	GX_Begin(GX_QUADS, GX_VTXFMT0,4);
-	GX_Position3f32(-width, -height,  0);
+	GX_Position3f32(-width+XX1 , -height+YY1,  0);
 	GX_Color4u8(0xFF,0xFF,0xFF,alpha);
 	GX_TexCoord2f32(0, 0);
 
-	GX_Position3f32(width, -height,  0);
+	GX_Position3f32(width+XX2, -height+YY2,  0);
 	GX_Color4u8(0xFF,0xFF,0xFF,alpha);
 	GX_TexCoord2f32(1, 0);
 
-	GX_Position3f32(width, height,  0);
+	GX_Position3f32(width+XX3, height+YY3,  0);
 	GX_Color4u8(0xFF,0xFF,0xFF,alpha);
 	GX_TexCoord2f32(1, 1);
 
-	GX_Position3f32(-width, height,  0);
+	GX_Position3f32(-width+XX4, height+YY4,  0);
 	GX_Color4u8(0xFF,0xFF,0xFF,alpha);
 	GX_TexCoord2f32(0, 1);
-	}
-
-	GX_End();
-	GX_LoadPosMtxImm (GXmodelView2D, GX_PNMTX0);
-
-	GX_SetTevOp (GX_TEVSTAGE0, GX_PASSCLR);
-	GX_SetVtxDesc (GX_VA_TEX0, GX_NONE);
-}
-
-void Menu_DrawTPLMem(f32 xpos, f32 ypos, f32 zpos, u16 width, u16 height, u16 distance,const void *memory,u32 len,
-	f32 deg_alpha, f32 deg_beta, f32 scaleX, f32 scaleY, u8 alpha, bool shadow)
-{
-	TPLFile tplfile;
-	GXTexObj texObj;
-
-	TPL_OpenTPLFromMemory(&tplfile, memory,len);
-	TPL_GetTexture(&tplfile,0,&texObj); //Get
-
-	GX_LoadTexObj(&texObj, GX_TEXMAP0);
-	GX_InvalidateTexAll();
-
-	TPL_CloseTPLFile(&tplfile);
-
-	GX_SetTevOp (GX_TEVSTAGE0, GX_REPLACE);
-	GX_SetVtxDesc (GX_VA_TEX0, GX_DIRECT);
-
-	f32 cos_beta = cos(DegToRad(deg_beta));
-	f32 s_offset_y = (zpos + (cos_beta * distance)) * tan(DegToRad(5));
-	f32 s_offset_x = (cos_beta<0?-cos_beta:cos_beta) * s_offset_y;
-	f32 s_offset_z = (s_offset_y<0 ? 0 : s_offset_y)*2;
-
-	Mtx m,m1,m2,m3,m4, mv;
-	width *=.5;
-	height*=.5;
-	guMtxIdentity (m4);
-	guMtxTransApply(m4,m4, 0, 0, distance);
-
-	guMtxIdentity (m1);
-	guMtxScaleApply(m1,m1,scaleX,scaleY,1.0);
-	guVector axis2 = (guVector) {0 , 1, 0 };
-	guMtxRotAxisDeg (m2, &axis2, deg_beta);
-	guVector axis = (guVector) {0 , 0, 1 };
-	guMtxRotAxisDeg (m3, &axis, deg_alpha);
-//	guMtxConcat(m2,m1,m);
-	guMtxConcat(m3,m4,m3); // move distance then rotate z-axis
-	guMtxConcat(m2,m3,m2); // rotate y-axis
-	guMtxConcat(m1,m2,m); // scale
-
-	if(shadow)
-		guMtxTransApply(m,m, xpos+width+0.5+s_offset_x,ypos+height+0.5+s_offset_y,zpos-s_offset_z);
-	else
-		guMtxTransApply(m,m, xpos+width+0.5,ypos+height+0.5,zpos);
-
-	guMtxConcat (GXmodelView2D, m, mv);
-	GX_LoadPosMtxImm (mv, GX_PNMTX0);
-
-	if(shadow)
-	{
-	GX_Begin(GX_QUADS, GX_VTXFMT0,4);
-	GX_Position3f32(-width, -height,  0);
-	GX_Color4u8(0,0,0,alpha);
-	GX_TexCoord2f32(0, 0);
-
-	GX_Position3f32(width, -height,  0);
-	GX_Color4u8(0,0,0,alpha);
-	GX_TexCoord2f32(1, 0);
-
-	GX_Position3f32(width, height,  0);
-	GX_Color4u8(0,0,0,alpha);
-	GX_TexCoord2f32(1, 1);
-
-	GX_Position3f32(-width, height,  0);
-	GX_Color4u8(0,0,0,alpha);
-	GX_TexCoord2f32(0, 1);
-	}
-	else
-	{
-	GX_Begin(GX_QUADS, GX_VTXFMT0,4);
-	GX_Position3f32(-width, -height,  0);
-	GX_Color4u8(0xFF,0xFF,0xFF,alpha);
-	GX_TexCoord2f32(0, 0);
-
-	GX_Position3f32(width, -height,  0);
-	GX_Color4u8(0xFF,0xFF,0xFF,alpha);
-	GX_TexCoord2f32(1, 0);
-
-	GX_Position3f32(width, height,  0);
-	GX_Color4u8(0xFF,0xFF,0xFF,alpha);
-	GX_TexCoord2f32(1, 1);
-
-	GX_Position3f32(-width, height,  0);
-	GX_Color4u8(0xFF,0xFF,0xFF,alpha);
-	GX_TexCoord2f32(0, 1);
-	}
 
 	GX_End();
 	GX_LoadPosMtxImm (GXmodelView2D, GX_PNMTX0);
