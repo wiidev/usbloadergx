@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-19 01:28+0200\n"
+"POT-Creation-Date: 2009-07-19 12:57+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -258,6 +258,9 @@ msgstr "Görüntü"
 msgid "Do you really want to delete:"
 msgstr "Gerçekten silmek istiyor musunuz:"
 
+msgid "Do you want to boot?"
+msgstr ""
+
 msgid "Do you want to change language?"
 msgstr ""
 
@@ -393,6 +396,18 @@ msgstr "Almanca"
 msgid "HOME Menu"
 msgstr ""
 
+msgid "Homebrew Apps Path"
+msgstr ""
+
+msgid "Homebrew Appspath change"
+msgstr ""
+
+msgid "Homebrew Appspath changed"
+msgstr ""
+
+msgid "Homebrew Launcher"
+msgstr ""
+
 msgid "Hour"
 msgstr ""
 
@@ -436,6 +451,10 @@ msgid "Installing title... Ok!"
 msgstr ""
 
 msgid "Installing wad"
+msgstr ""
+
+#, c-format
+msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team. %s - %i"
 msgstr ""
 
 msgid "Italian"
@@ -515,6 +534,9 @@ msgstr "Ileri"
 
 msgid "No"
 msgstr "Hayir"
+
+msgid "No .dol or .elf files found."
+msgstr ""
 
 msgid "No Cheatfile found"
 msgstr ""
