@@ -5,7 +5,6 @@ Load game information from XML - Lustar
 */
 
 #include <malloc.h>
-#include <mxml.h>
 #include "unzip/unzip.h"
 #include "settings/cfg.h"
 #include "xml/xml.h"
@@ -23,14 +22,6 @@ extern struct SSettings Settings; // for loader GX
 
 struct gameXMLinfo gameinfo;
 struct gameXMLinfo gameinfo_reset;
-
-extern struct homebrewXMLinfo HB0;
-extern struct homebrewXMLinfo HB1;
-extern struct homebrewXMLinfo HB2;
-extern struct homebrewXMLinfo HB3;
-
-
-
 
 static char langlist[11][22] =
 {{"Console Default"},
@@ -89,7 +80,7 @@ bool OpenXMLDatabase(char* xmlfilepath, char* argdblang, bool argJPtoEN, bool op
 			CloseXMLDatabase();
 			return false;
 		}
-		if (loadtitles) LoadTitlesFromXML(argdblang, argJPtoEN); 						
+		if (loadtitles) LoadTitlesFromXML(argdblang, argJPtoEN);
 		if (!keepopen) CloseXMLDatabase();
 	}
 	return true;
@@ -98,15 +89,15 @@ bool OpenXMLDatabase(char* xmlfilepath, char* argdblang, bool argJPtoEN, bool op
 void CloseXMLDatabase()
 {
     /* free memory */
-	if (xml_loaded) {	
+	if (xml_loaded) {
 		mxmlDelete(nodedata);
 		mxmlDelete(nodetree);
 		xml_loaded = false;
 	}
-}	
-	
+}
 
-void GetTextFromNode(mxml_node_t *currentnode, mxml_node_t *topnode, char *nodename, 
+
+void GetTextFromNode(mxml_node_t *currentnode, mxml_node_t *topnode, char *nodename,
 			char *attributename, char *value, int descend, char *dest, int destsize)
 {
 	*element_text = 0;
@@ -121,16 +112,16 @@ void GetTextFromNode(mxml_node_t *currentnode, mxml_node_t *topnode, char *noden
 	} else {
 		strcpy(dest,"");
 	}
-}	
+}
 
 
 bool OpenXMLFile(char *filename)
 {
 	//if (xmldebug) dbg_time1();
-	
-	if (xml_loaded) 
+
+	if (xml_loaded)
 		 return false;
-	
+
 	gameinfo = gameinfo_reset;
 	nodedata=NULL;
 	nodetree=NULL;
@@ -145,7 +136,7 @@ bool OpenXMLFile(char *filename)
 		filexml = fopen(filename, "rb");
 		if (!filexml)
 			return false;
-		
+
 		nodetree = mxmlLoadFile(NULL, filexml, MXML_NO_CALLBACK);
 		fclose(filexml);
 
@@ -155,9 +146,9 @@ bool OpenXMLFile(char *filename)
 		if (unzfile == NULL)
 			return false;
 		unzOpenCurrentFile(unzfile);
-		
+
 		unz_file_info zipfileinfo;
-		unzGetCurrentFileInfo(unzfile, &zipfileinfo, NULL, 0, NULL, 0, NULL, 0);	
+		unzGetCurrentFileInfo(unzfile, &zipfileinfo, NULL, 0, NULL, 0, NULL, 0);
 		int zipfilebuffersize = zipfileinfo.uncompressed_size;
 		char * zipfilebuffer = malloc(zipfilebuffersize);
 		memset(zipfilebuffer, 0, zipfilebuffersize);
@@ -166,18 +157,18 @@ bool OpenXMLFile(char *filename)
 			unzClose(unzfile);
 			return false;
 		}
-		
+
 		unzReadCurrentFile(unzfile, zipfilebuffer, zipfilebuffersize);
 		unzCloseCurrentFile(unzfile);
 		unzClose(unzfile);
-		
+
 		nodetree = mxmlLoadString(NULL, zipfilebuffer, MXML_NO_CALLBACK);
 		free(zipfilebuffer);
 	}
 
 	if (nodetree == NULL)
 		return false;
-			
+
     nodedata = mxmlFindElement(nodetree, nodetree, "datafile", NULL, NULL, MXML_DESCEND);
    	if (nodedata == NULL) {
 	    return false;
@@ -204,7 +195,7 @@ char *GetLangSettingFromGame(char *gameid)
 	char *langtxt = langlist[langcode];
 	return langtxt;
 }
-	
+
 
 /* convert language text into ISO 639 two-letter language code */
 char *ConvertLangTextToCode(char *languagetxt)
@@ -243,7 +234,7 @@ void ConvertRating(char *ratingvalue, char *fromrating, char *torating, char *de
 	desttype = ConvertRatingToIndex(torating);
 	if (type == -1 || desttype == -1)
 		return;
-	
+
 	/* rating conversion table */
 	/* the list is ordered to pick the most likely value first: */
 	/* EC and AO are less likely to be used so they are moved down to only be picked up when converting ESRB to PEGI or CERO */
@@ -263,7 +254,7 @@ void ConvertRating(char *ratingvalue, char *fromrating, char *torating, char *de
 		{{"C"},{"T"},{"15"}},
 		{{"Z"},{"AO"},{"18"}},
 	};
-	
+
 	int i;
 	for (i=0;i<=11;i++)
 	{
@@ -281,34 +272,34 @@ void LoadTitlesFromXML(char *langtxt, bool forcejptoen)
 {
 	if (nodedata == NULL)
 	    return;
-                
+
 	bool forcelang = false;
 	if (strcmp(langtxt,""))
-		forcelang = true;	
+		forcelang = true;
 
 	char langcode[10] = "";
 	if (forcelang)
 		strcpy(langcode,ConvertLangTextToCode(langtxt)); /* convert language text into ISO 639 two-letter language code */
-	
+
 	/* create index of <id> elements */
-    nodeindex = mxmlIndexNew(nodedata,"id", NULL);	
+    nodeindex = mxmlIndexNew(nodedata,"id", NULL);
     nodeid = mxmlIndexReset(nodeindex);
     *element_text = 0;
 	char id_text[10];
 	char title_text[200] = "";
 	char title_text_EN[200] = "";
-	
+
 	/* search index of id elements, load all id/titles text */
     while (nodeid != NULL)
     {
         nodeid = mxmlIndexFind(nodeindex,"id", NULL);
-	    if (nodeid != NULL) {	
+	    if (nodeid != NULL) {
 			strcpy(title_text,"");
 			strcpy(title_text_EN,"");
-			
+
 			get_text(nodeid, element_text, sizeof(element_text));
 			snprintf(id_text, 7, "%s",element_text);
-			
+
 			// if language is not forced, use game language setting from config
 			if (!forcelang) {
 				langtxt = GetLangSettingFromGame(id_text);
@@ -318,7 +309,7 @@ void LoadTitlesFromXML(char *langtxt, bool forcejptoen)
 			/* if enabled, force English title for all games set to Japanese */
 			if (forcejptoen && (!strcmp(langcode,"JA")))
 				strcpy(langcode,"EN");
-	
+
 			/* load title from nodes */
 			nodefound = mxmlFindElement(nodeid, nodedata, "locale", "lang", "EN", MXML_NO_DESCEND);
 			if (nodefound != NULL) {
@@ -333,12 +324,12 @@ void LoadTitlesFromXML(char *langtxt, bool forcejptoen)
 			if (!strcmp(title_text,"")) {
 				strcpy(title_text,title_text_EN);
 			}
-									
+
 			snprintf(id_text, 5, "%s",id_text);
 			title_set(id_text, title_text);
 	    }
     }
-	
+
 	// free memory
 	mxmlIndexDelete(nodeindex);
 
@@ -346,7 +337,7 @@ void LoadTitlesFromXML(char *langtxt, bool forcejptoen)
 }
 
 
-void GetPublisherFromGameid(char *idtxt, char *dest, int destsize) 
+void GetPublisherFromGameid(char *idtxt, char *dest, int destsize)
 {
 	/* guess publisher from company list using last two characters from game id */
 	nodeindextmp = mxmlIndexNew(nodedata,"company", NULL);
@@ -370,7 +361,7 @@ void GetPublisherFromGameid(char *idtxt, char *dest, int destsize)
 	} else {
 		strcpy(dest,"");
 	}
-	
+
 	// free memory
 	mxmlIndexDelete(nodeindextmp);
 }
@@ -380,9 +371,9 @@ void GetPublisherFromGameid(char *idtxt, char *dest, int destsize)
 bool LoadGameInfoFromXML(char* gameid, char* langtxt)
 /* gameid: full game id */
 /* langtxt: "English","French","German" */
-{	
+{
 	bool exist=false;
-	if (!xml_loaded || nodedata == NULL) 		 
+	if (!xml_loaded || nodedata == NULL)
 		return exist;
 
 	// load game info using forced language, or game individual setting, or main language setting
@@ -390,12 +381,12 @@ bool LoadGameInfoFromXML(char* gameid, char* langtxt)
 	if (!strcmp(langtxt,""))
 		langtxt = GetLangSettingFromGame(gameid);
 	strcpy(langcode,ConvertLangTextToCode(langtxt));
-	
+
 	/* reset all game info */
 	gameinfo = gameinfo_reset;
-	
+
     /* index all IDs */
-    nodeindex = mxmlIndexNew(nodedata,"id", NULL);	
+    nodeindex = mxmlIndexNew(nodedata,"id", NULL);
     nodeid = mxmlIndexReset(nodeindex);
 	*element_text = 0;
 	/* search for game matching gameid */
@@ -421,7 +412,7 @@ bool LoadGameInfoFromXML(char* gameid, char* langtxt)
 		GetTextFromNode(nodeid, nodedata, "developer", NULL, NULL, MXML_NO_DESCEND, gameinfo.developer,sizeof(gameinfo.developer));
 		GetTextFromNode(nodeid, nodedata, "publisher", NULL, NULL, MXML_NO_DESCEND, gameinfo.publisher,sizeof(gameinfo.publisher));
 		GetPublisherFromGameid(gameid,gameinfo.publisherfromid,sizeof(gameinfo.publisherfromid));
-		
+
 		/* text from attributes */
 		GetTextFromNode(nodeid, nodedata, "date", "year", NULL, MXML_NO_DESCEND, gameinfo.year,sizeof(gameinfo.year));
 		GetTextFromNode(nodeid, nodedata, "date", "month", NULL,MXML_NO_DESCEND, gameinfo.month,sizeof(gameinfo.month));
@@ -431,7 +422,7 @@ bool LoadGameInfoFromXML(char* gameid, char* langtxt)
 		GetTextFromNode(nodeid, nodedata, "rom", "crc", NULL, MXML_NO_DESCEND, gameinfo.iso_crc,sizeof(gameinfo.iso_crc));
 		GetTextFromNode(nodeid, nodedata, "rom", "md5", NULL, MXML_NO_DESCEND, gameinfo.iso_md5,sizeof(gameinfo.iso_md5));
 		GetTextFromNode(nodeid, nodedata, "rom", "sha1", NULL, MXML_NO_DESCEND, gameinfo.iso_sha1,sizeof(gameinfo.iso_sha1));
-			
+
 		/* text from child elements */
 		nodefound = mxmlFindElement(nodeid, nodedata, "locale", "lang", "EN", MXML_NO_DESCEND);
 		if (nodefound != NULL) {
@@ -563,9 +554,9 @@ bool LoadGameInfoFromXML(char* gameid, char* langtxt)
 					}
 				}
 			}
-			
+
 		}
-		
+
 		exist=true;
     } else {
 	    /*game not found */
@@ -604,7 +595,7 @@ bool LoadGameInfoFromXML(char* gameid, char* langtxt)
 void PrintGameInfo(bool showfullinfo)
 {
 	if (showfullinfo) {
-	
+
 		//Con_Clear();
 
 		//printf("id: %s version: %s region: %s",gameinfo.id, gameinfo.version, gameinfo.region);
@@ -651,11 +642,11 @@ void PrintGameInfo(bool showfullinfo)
 		//printf("iso_crc: %s iso_md5: %s\n",gameinfo.iso_crc,gameinfo.iso_md5);
 		//printf("iso_sha1: %s\n",gameinfo.iso_sha1);
 		//printf("synopsis: %s\n",gameinfo.synopsis);
-		
+
 	} else {
-	
+
 		char linebuf[1000] = "";
-		
+
 		if (xmldebug) {
 			//char xmltime[100];
 			//sprintf(xmltime,"%d",xmlloadtime);
@@ -687,7 +678,7 @@ void PrintGameInfo(bool showfullinfo)
 		}
 		printf("%s\n",linebuf);
 		strcpy(linebuf,"");
-		
+
 		if (strcmp(gameinfo.ratingvalue,"") != 0) {
 			snprintf(linebuf, sizeof(linebuf), "rated %s", gameinfo.ratingvalue);
 			if (!strcmp(gameinfo.ratingtype,"PEGI"))
@@ -729,9 +720,9 @@ char *MemInfo()
 
 /*-------------------------------------------------------------------------------------*/
 /* get_text() - Get the text for a node, taken from mini-mxml example mxmldoc.c */
-static char * get_text(mxml_node_t *node, char *buffer, int buflen) /* O - Text in node, I - Node to get, I - Buffer, I - Size of buffer */	
+static char * get_text(mxml_node_t *node, char *buffer, int buflen) /* O - Text in node, I - Node to get, I - Buffer, I - Size of buffer */
 {
-  char *ptr, *end;	/* Pointer into buffer, End of buffer */	
+  char *ptr, *end;	/* Pointer into buffer, End of buffer */
   int len;	/* Length of node */
   mxml_node_t *current;	/* Current node */
   ptr = buffer;
@@ -758,145 +749,4 @@ static char * get_text(mxml_node_t *node, char *buffer, int buflen) /* O - Text 
   return (buffer);
 }
 
-int LoadHomebrewXMLData(char* filename,int i)
-{
-	int ret;
-	if (i>3){
-		ret= -20;
-		goto noXML;}
-		
-	mxml_node_t *nodedataHB=NULL;
-	mxml_node_t *nodetreeHB=NULL;
-	char tmp1[40];
-	
-		/* Load XML file */
-		FILE *filexml;
-		filexml = fopen(filename, "rb");
-		if (!filexml)
-			{ret= -1;
-			goto noXML;}
-			
-		nodetreeHB = mxmlLoadFile(NULL, filexml, MXML_NO_CALLBACK);
-		fclose(filexml);
-
-	if (nodetreeHB == NULL)
-		{ret= -2;
-		goto noXML;}
-			
-    nodedataHB = mxmlFindElement(nodetreeHB, nodetreeHB, "app", NULL, NULL, MXML_DESCEND);
-   	if (nodedataHB == NULL) {
-	    ret= -5;
-		 goto noXML;
-	} 
-	
-            //int len = (strlen(entered)-1);
-            //if(entered[len] !='/') 
-		/* text from elements */
-	if (i==0){
-		GetTextFromNode(nodedataHB, nodedataHB, "name", NULL, NULL, MXML_DESCEND, HB0.name,sizeof(HB0.name));
-		GetTextFromNode(nodedataHB, nodedataHB, "coder", NULL, NULL, MXML_DESCEND, HB0.coder,sizeof(HB0.coder));
-		GetTextFromNode(nodedataHB, nodedataHB, "version", NULL, NULL, MXML_DESCEND, HB0.version,sizeof(HB0.version));
-		GetTextFromNode(nodedataHB, nodedataHB, "release_date", NULL, NULL, MXML_DESCEND, tmp1,sizeof(tmp1));
-		GetTextFromNode(nodedataHB, nodedataHB, "short_description", NULL, NULL, MXML_DESCEND, HB0.shortdescription,sizeof(HB0.shortdescription));
-		GetTextFromNode(nodedataHB, nodedataHB, "long_description", NULL, NULL, MXML_DESCEND, HB0.longdescription,sizeof(HB0.longdescription));
-		
-		int len = (strlen(tmp1)-6);//length of the date string without the 200000 at the end
-		if (len==8)
-			snprintf(HB0.releasedate, sizeof(HB0.releasedate), "%c%c/%c%c/%c%c%c%c", tmp1[4],tmp1[5],tmp1[6],tmp1[7],tmp1[0],tmp1[1],tmp1[2],tmp1[3]);
-      else if (len==6)       
-			snprintf(HB0.releasedate, sizeof(HB0.releasedate), "%c%c/%c%c%c%c", tmp1[4],tmp1[5],tmp1[0],tmp1[1],tmp1[2],tmp1[3]);
-      else snprintf(HB0.releasedate, sizeof(HB0.releasedate), "%s", tmp1);
-      
-	}
-	else if (i==1){
-		GetTextFromNode(nodedataHB, nodedataHB, "name", NULL, NULL, MXML_DESCEND, HB1.name,sizeof(HB1.name));
-		GetTextFromNode(nodedataHB, nodedataHB, "coder", NULL, NULL, MXML_DESCEND, HB1.coder,sizeof(HB1.coder));
-		GetTextFromNode(nodedataHB, nodedataHB, "version", NULL, NULL, MXML_DESCEND, HB1.version,sizeof(HB1.version));
-		GetTextFromNode(nodedataHB, nodedataHB, "release_date", NULL, NULL, MXML_DESCEND, tmp1,sizeof(tmp1));
-		GetTextFromNode(nodedataHB, nodedataHB, "short_description", NULL, NULL, MXML_DESCEND, HB1.shortdescription,sizeof(HB1.shortdescription));
-		GetTextFromNode(nodedataHB, nodedataHB, "long_description", NULL, NULL, MXML_DESCEND, HB1.longdescription,sizeof(HB1.longdescription));
-			
-			
-		int len = (strlen(tmp1)-6);//length of the date string without the 200000 at the end
-		if (len==8)
-			snprintf(HB1.releasedate, sizeof(HB1.releasedate), "%c%c/%c%c/%c%c%c%c", tmp1[4],tmp1[5],tmp1[6],tmp1[7],tmp1[0],tmp1[1],tmp1[2],tmp1[3]);
-      else if (len==6)       
-			snprintf(HB1.releasedate, sizeof(HB1.releasedate), "%c%c/%c%c%c%c", tmp1[4],tmp1[5],tmp1[0],tmp1[1],tmp1[2],tmp1[3]);
-      else snprintf(HB1.releasedate, sizeof(HB1.releasedate), "%s", tmp1);	
-
-	}
-	else if (i==2){
-		GetTextFromNode(nodedataHB, nodedataHB, "name", NULL, NULL, MXML_DESCEND, HB2.name,sizeof(HB2.name));
-		GetTextFromNode(nodedataHB, nodedataHB, "coder", NULL, NULL, MXML_DESCEND, HB2.coder,sizeof(HB2.coder));
-		GetTextFromNode(nodedataHB, nodedataHB, "version", NULL, NULL, MXML_DESCEND, HB2.version,sizeof(HB2.version));
-		GetTextFromNode(nodedataHB, nodedataHB, "release_date", NULL, NULL, MXML_DESCEND, tmp1,sizeof(tmp1));
-		GetTextFromNode(nodedataHB, nodedataHB, "short_description", NULL, NULL, MXML_DESCEND, HB2.shortdescription,sizeof(HB2.shortdescription));
-		GetTextFromNode(nodedataHB, nodedataHB, "long_description", NULL, NULL, MXML_DESCEND, HB2.longdescription,sizeof(HB2.longdescription));
-		
-		int len = (strlen(tmp1)-6);//length of the date string without the 200000 at the end
-		if (len==8)
-			snprintf(HB2.releasedate, sizeof(HB2.releasedate), "%c%c/%c%c/%c%c%c%c", tmp1[4],tmp1[5],tmp1[6],tmp1[7],tmp1[0],tmp1[1],tmp1[2],tmp1[3]);
-      else if (len==6)       
-			snprintf(HB2.releasedate, sizeof(HB2.releasedate), "%c%c/%c%c%c%c", tmp1[4],tmp1[5],tmp1[0],tmp1[1],tmp1[2],tmp1[3]);
-      else snprintf(HB2.releasedate, sizeof(HB2.releasedate), "%s", tmp1);
-
-	}
-	else if (i==3){
-		GetTextFromNode(nodedataHB, nodedataHB, "name", NULL, NULL, MXML_DESCEND, HB3.name,sizeof(HB3.name));
-		GetTextFromNode(nodedataHB, nodedataHB, "coder", NULL, NULL, MXML_DESCEND, HB3.coder,sizeof(HB3.coder));
-		GetTextFromNode(nodedataHB, nodedataHB, "version", NULL, NULL, MXML_DESCEND, HB3.version,sizeof(HB3.version));
-		GetTextFromNode(nodedataHB, nodedataHB, "release_date", NULL, NULL, MXML_DESCEND, tmp1,sizeof(tmp1));
-		GetTextFromNode(nodedataHB, nodedataHB, "short_description", NULL, NULL, MXML_DESCEND, HB3.shortdescription,sizeof(HB3.shortdescription));
-		GetTextFromNode(nodedataHB, nodedataHB, "long_description", NULL, NULL, MXML_DESCEND, HB3.longdescription,sizeof(HB3.longdescription));
-		
-		int len = (strlen(tmp1)-6);//length of the date string without the 200000 at the end
-		if (len==8)
-			snprintf(HB3.releasedate, sizeof(HB3.releasedate), "%c%c/%c%c/%c%c%c%c", tmp1[4],tmp1[5],tmp1[6],tmp1[7],tmp1[0],tmp1[1],tmp1[2],tmp1[3]);
-      else if (len==6)       
-			snprintf(HB3.releasedate, sizeof(HB3.releasedate), "%c%c/%c%c%c%c", tmp1[4],tmp1[5],tmp1[0],tmp1[1],tmp1[2],tmp1[3]);
-      else snprintf(HB3.releasedate, sizeof(HB3.releasedate), "%s", tmp1);
-
-		}
-	ret =1;
-	free(nodedataHB);
-	free(nodetreeHB);
-	goto end;	
-noXML:
-	if (i==0){
-			strcpy(HB0.name,"");
-			strcpy(HB0.coder,"");
-			strcpy(HB0.version,"");
-			strcpy(HB0.releasedate,"");
-			strcpy(HB0.shortdescription,"");
-			strcpy(HB0.longdescription,"");
-			 
-		}
-		else if (i==1){
-			strcpy(HB1.name,"");
-			strcpy(HB1.coder,"");
-			strcpy(HB1.version,"");
-			strcpy(HB1.releasedate,"");
-			strcpy(HB1.shortdescription,"");
-			strcpy(HB1.longdescription,"");
-		}
-		else if (i==2){
-			strcpy(HB2.name,"");
-			strcpy(HB2.coder,"");
-			strcpy(HB2.version,"");
-			strcpy(HB2.releasedate,"");
-			strcpy(HB2.shortdescription,"");
-			strcpy(HB2.longdescription,"");
-		}
-		else if (i==3){
-			strcpy(HB3.name,"");
-			strcpy(HB3.coder,"");
-			strcpy(HB3.version,"");
-			strcpy(HB3.releasedate,"");
-			strcpy(HB3.shortdescription,"");
-			strcpy(HB3.longdescription,"");
-			}
-end:
-
-	return ret;
-}
 

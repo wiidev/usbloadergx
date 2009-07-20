@@ -2337,7 +2337,7 @@ int ProgressUpdateWindow()
 	// get Wii's language setting
 	char sysLanguage[3];
 	GetLanguageToLangCode(sysLanguage);
-	
+
 	//make the URL to get XML based on our games
 	char XMLurl[2040];
 	char filename[10];
@@ -2597,7 +2597,7 @@ int ProgressUpdateWindow()
 	// get Wii's language setting
 	char sysLanguage[3];
 	GetLanguageToLangCode(sysLanguage);
-	
+
 	//make the URL to get XML based on our games
 	char XMLurl[2040];
 	char filename[10];
@@ -2801,7 +2801,7 @@ int CodeDownload(const char *id)
 	if (Settings.wsprompt == yes){
 	dialogBoxImg.SetWidescreen(CFG.widescreen);}
 
-	
+
 
     char title[50];
    sprintf(title, "%s", tr("Code Download"));
@@ -2869,13 +2869,13 @@ int CodeDownload(const char *id)
 	}
 
 	if(IsNetworkInit() && ret >= 0) {
-	
+
 	char txtpath[150];
     snprintf(txtpath, sizeof(txtpath), "%s%s.txt", Settings.TxtCheatcodespath,id);
-   
+
     char codeurl[150];
 	snprintf(codeurl, sizeof(codeurl), "http://usbgecko.com/codes/codes/R/%s.txt",id);
-	 
+
 	struct block  file = downloadfile(codeurl);
 
 	if (file.size == 333)
@@ -2895,17 +2895,17 @@ int CodeDownload(const char *id)
         free(file.data);
 		ret = 1;
 		strcat(txtpath, " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information.");
-    
+
 		WindowPrompt(0,txtpath,"Ok");
     }
-	 else 
+	 else
 	 {
 		strcat(codeurl, " could not be downloaded.");
-		
+
 		  WindowPrompt(tr("Error"),codeurl,"Ok");
 		  ret =-1;
 	 }
-				
+
     CloseConnection();
 	}
 exit:
@@ -2981,17 +2981,17 @@ void GetLanguageToLangCode(char *langcode) {
    <short_description>
    <long_description>
 	SD:/APPS/FTPII/ICON.PNG*/
- 
+
 int
 HBCWindowPrompt(const char *name, const char *coder, const char *version,
                 const char *release_date, const char *long_description, const char *iconPath, u64 filesize)
 {
 	int choice = -1;
-	
+
 
 	GuiWindow promptWindow(472,320);
 	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-	promptWindow.SetPosition(0, -10);
+	promptWindow.SetPosition(0, 6);
 
 	GuiTrigger trigA;
 	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
@@ -3001,7 +3001,7 @@ HBCWindowPrompt(const char *name, const char *coder, const char *version,
 	trigU.SetButtonOnlyTrigger(-1, WPAD_BUTTON_UP | WPAD_CLASSIC_BUTTON_UP, PAD_BUTTON_UP);
 	GuiTrigger trigD;
 	trigD.SetButtonOnlyTrigger(-1, WPAD_BUTTON_DOWN | WPAD_CLASSIC_BUTTON_DOWN, PAD_BUTTON_DOWN);
-		
+
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
 	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
 	char imgPath[50];
@@ -3011,24 +3011,24 @@ HBCWindowPrompt(const char *name, const char *coder, const char *version,
 	GuiImageData dialogBox(imgPath, dialogue_box_png);
 	snprintf(imgPath, sizeof(imgPath), "%sbg_options.png", CFG.theme_path);
 	GuiImageData whiteBox(imgPath, bg_options_png);
-	
+
 	snprintf(imgPath, sizeof(imgPath), "%sscrollbar.png", CFG.theme_path);
 	GuiImageData scrollbar(imgPath, scrollbar_png);
 	GuiImage scrollbarImg(&scrollbar);
 	scrollbarImg.SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
 	scrollbarImg.SetPosition(-40, 114);
 	scrollbarImg.SetSkew(0,0,0,0,0,-120,0,-120);
-	
+
 	snprintf(imgPath, sizeof(imgPath), "%sscrollbar_arrowdown.png", CFG.theme_path);
 	GuiImageData arrowDown(imgPath, scrollbar_arrowdown_png);
 	GuiImage arrowDownImg(&arrowDown);
 	arrowDownImg.SetScale(.8);
-	
+
 	snprintf(imgPath, sizeof(imgPath), "%sscrollbar_arrowup.png", CFG.theme_path);
 	GuiImageData arrowUp(imgPath, scrollbar_arrowup_png);
 	GuiImage arrowUpImg (&arrowUp);
 	arrowUpImg.SetScale(.8);
-	
+
 	GuiButton arrowUpBtn(arrowUpImg.GetWidth(), arrowUpImg.GetHeight());
 	arrowUpBtn.SetImage(&arrowUpImg);
 	arrowUpBtn.SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
@@ -3050,7 +3050,7 @@ HBCWindowPrompt(const char *name, const char *coder, const char *version,
 	GuiImageData *iconData =NULL;
 	GuiImage *iconImg =NULL;
 	snprintf(imgPath, sizeof(imgPath), "%s", iconPath);
-	
+
 	bool iconExist = checkfile(imgPath);
 	if (iconExist){
 		iconData = new GuiImageData (iconPath, dialogue_box_png);
@@ -3060,8 +3060,8 @@ HBCWindowPrompt(const char *name, const char *coder, const char *version,
 	}
 
 	GuiImage dialogBoxImg(&dialogBox);
-	dialogBoxImg.SetSkew(0,-50,0,-50,0,50,0,50);
-	
+	dialogBoxImg.SetSkew(0,-80,0,-80,0,50,0,50);
+
 	GuiImage whiteBoxImg(&whiteBox);
 	whiteBoxImg.SetPosition(0,110);
 	whiteBoxImg.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
@@ -3069,43 +3069,43 @@ HBCWindowPrompt(const char *name, const char *coder, const char *version,
 	/*if (Settings.wsprompt == yes){
 	dialogBoxImg.SetWidescreen(CFG.widescreen);
 	}*/
-	
+
 	char tmp[510];
-		
+
 	GuiText nameTxt(name,30 , (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	nameTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	nameTxt.SetPosition(0,-15);
 	nameTxt.SetMaxWidth(430, GuiText::SCROLL);
-	
-	
+
+
 	if (strcmp(coder,""))
 	snprintf(tmp, sizeof(tmp), "Coded by: %s",coder);
 	GuiText coderTxt(tmp, 16, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	coderTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	coderTxt.SetPosition(180,30);
 	coderTxt.SetMaxWidth(280);
-	
+
 	if (strcmp(version,""))
 	snprintf(tmp, sizeof(tmp), "Version: %s",version);
 	GuiText versionTxt(tmp,16 , (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	versionTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	versionTxt.SetPosition(40,65);
 	versionTxt.SetMaxWidth(430);
-	
+
 	//if (release_date)
 	//snprintf(tmp, sizeof(tmp), "Released: %s",release_date);
 	GuiText release_dateTxt(release_date,16 , (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	release_dateTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	release_dateTxt.SetPosition(40,85);
 	release_dateTxt.SetMaxWidth(430);
-	
+
 	int pagesize = 6;
 	GuiText long_descriptionTxt(long_description, 20, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	long_descriptionTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	long_descriptionTxt.SetPosition(46,117);
 	long_descriptionTxt.SetMaxWidth(360);
 	long_descriptionTxt.SetNumLines(pagesize);
-	
+
 	//convert filesize from u64 to char and put unit of measurement after it
 	char temp2[7];
 	char filesizeCH[15];
@@ -3113,28 +3113,28 @@ HBCWindowPrompt(const char *name, const char *coder, const char *version,
 	 if(filesize<=1024.0)
 	{
 		sizeAdjusted = filesize;
-		snprintf(temp2, sizeof(temp2), "%f",sizeAdjusted);
+		snprintf(temp2, sizeof(temp2), "%.2f",sizeAdjusted);
 		snprintf(filesizeCH, sizeof(filesizeCH), "%s B",temp2);
-		
-	 }         
+
+	 }
 	 if(filesize>1024.0)
 	{
 		sizeAdjusted = filesize/1024.0;
-		snprintf(temp2, sizeof(temp2), "%f",sizeAdjusted);
+		snprintf(temp2, sizeof(temp2), "%.2f",sizeAdjusted);
 		snprintf(filesizeCH, sizeof(filesizeCH), "%s KB",temp2);
-		
-	 }         
+
+	 }
 	 if(filesize>1048576.0)
 	{
 		sizeAdjusted = filesize/1048576.0;
-		snprintf(temp2, sizeof(temp2), "%f",sizeAdjusted);
+		snprintf(temp2, sizeof(temp2), "%.2f",sizeAdjusted);
 		snprintf(filesizeCH, sizeof(filesizeCH), "%s MB",temp2);
-		
+
 	 }
 	GuiText filesizeTxt(filesizeCH, 16, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	filesizeTxt.SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
 	filesizeTxt.SetPosition(-40,12);
-	
+
 	GuiText btn1Txt(tr("Load"), 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	GuiImage btn1Img(&btnOutline);
 	if (Settings.wsprompt == yes){
@@ -3156,18 +3156,18 @@ HBCWindowPrompt(const char *name, const char *coder, const char *version,
 	btn2.SetLabel(&btn2Txt);
 	btn2.SetTrigger(&trigB);
 
-   
+
    btn1.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
    btn1.SetPosition(40, 2);
    btn2.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
    btn2.SetPosition(-40, 2);
-   
+
 	promptWindow.Append(&dialogBoxImg);
 	if (strcmp(long_description,""))promptWindow.Append(&whiteBoxImg);
 	if (strcmp(long_description,""))promptWindow.Append(&scrollbarImg);
 	if (strcmp(long_description,""))promptWindow.Append(&arrowDownBtn);
 	if (strcmp(long_description,""))promptWindow.Append(&arrowUpBtn);
-	
+
 	if (strcmp(name,""))promptWindow.Append(&nameTxt);
 	if (strcmp(version,""))promptWindow.Append(&versionTxt);
 	if (strcmp(coder,""))promptWindow.Append(&coderTxt);
@@ -3210,13 +3210,13 @@ HBCWindowPrompt(const char *name, const char *coder, const char *version,
 				if (!((ButtonsHold() & WPAD_BUTTON_UP)||(ButtonsHold() & PAD_BUTTON_UP)))
 					arrowUpBtn.ResetState();
 			}
-			else if ((arrowDownBtn.GetState()==STATE_CLICKED||arrowDownBtn.GetState()==STATE_HELD) 
+			else if ((arrowDownBtn.GetState()==STATE_CLICKED||arrowDownBtn.GetState()==STATE_HELD)
 						&&long_descriptionTxt.GetTotalLines()>pagesize
 						&&long_descriptionTxt.GetFirstLine()-1<long_descriptionTxt.GetTotalLines()-pagesize)
-			{	
+			{
 			int l=0;
 					l=long_descriptionTxt.GetFirstLine()+1;
-				
+
 				long_descriptionTxt.SetFirstLine(l);
 				usleep(60000);
 				if (!((ButtonsHold() & WPAD_BUTTON_DOWN)||(ButtonsHold() & PAD_BUTTON_DOWN)))
