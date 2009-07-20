@@ -3078,14 +3078,14 @@ HBCWindowPrompt(const char *name, const char *coder, const char *version,
 	nameTxt.SetMaxWidth(430, GuiText::SCROLL);
 	
 	
-	if (coder)
+	if (strcmp(coder,""))
 	snprintf(tmp, sizeof(tmp), "Coded by: %s",coder);
 	GuiText coderTxt(tmp, 16, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	coderTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	coderTxt.SetPosition(180,30);
 	coderTxt.SetMaxWidth(280);
 	
-	if (version)
+	if (strcmp(version,""))
 	snprintf(tmp, sizeof(tmp), "Version: %s",version);
 	GuiText versionTxt(tmp,16 , (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	versionTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
@@ -3102,7 +3102,7 @@ HBCWindowPrompt(const char *name, const char *coder, const char *version,
 	int pagesize = 6;
 	GuiText long_descriptionTxt(long_description, 20, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	long_descriptionTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	long_descriptionTxt.SetPosition(46,120);
+	long_descriptionTxt.SetPosition(46,117);
 	long_descriptionTxt.SetMaxWidth(360);
 	long_descriptionTxt.SetNumLines(pagesize);
 	
@@ -3135,11 +3135,6 @@ HBCWindowPrompt(const char *name, const char *coder, const char *version,
 	filesizeTxt.SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
 	filesizeTxt.SetPosition(-40,12);
 	
-	/*GuiText msgTxt(msg, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
-	msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-	msgTxt.SetPosition(0,-40);
-	msgTxt.SetMaxWidth(430);*/
-
 	GuiText btn1Txt(tr("Load"), 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	GuiImage btn1Img(&btnOutline);
 	if (Settings.wsprompt == yes){
@@ -3168,17 +3163,17 @@ HBCWindowPrompt(const char *name, const char *coder, const char *version,
    btn2.SetPosition(-40, 2);
    
 	promptWindow.Append(&dialogBoxImg);
-	if (long_description)promptWindow.Append(&whiteBoxImg);
-	if (long_description)promptWindow.Append(&scrollbarImg);
-	if (long_description)promptWindow.Append(&arrowDownBtn);
-	if (long_description)promptWindow.Append(&arrowUpBtn);
+	if (strcmp(long_description,""))promptWindow.Append(&whiteBoxImg);
+	if (strcmp(long_description,""))promptWindow.Append(&scrollbarImg);
+	if (strcmp(long_description,""))promptWindow.Append(&arrowDownBtn);
+	if (strcmp(long_description,""))promptWindow.Append(&arrowUpBtn);
 	
-	if (name)promptWindow.Append(&nameTxt);
-	if (version)promptWindow.Append(&versionTxt);
-	if (coder)promptWindow.Append(&coderTxt);
-	if (release_date)promptWindow.Append(&release_dateTxt);
-	if (long_description)promptWindow.Append(&long_descriptionTxt);
-	if (filesize)promptWindow.Append(&filesizeTxt);
+	if (strcmp(name,""))promptWindow.Append(&nameTxt);
+	if (strcmp(version,""))promptWindow.Append(&versionTxt);
+	if (strcmp(coder,""))promptWindow.Append(&coderTxt);
+	if (strcmp(release_date,""))promptWindow.Append(&release_dateTxt);
+	if (strcmp(long_description,""))promptWindow.Append(&long_descriptionTxt);
+	promptWindow.Append(&filesizeTxt);
 	if (iconExist)promptWindow.Append(iconImg);
 	promptWindow.Append(&btn1);
 	promptWindow.Append(&btn2);

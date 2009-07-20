@@ -24,6 +24,12 @@ extern struct SSettings Settings; // for loader GX
 struct gameXMLinfo gameinfo;
 struct gameXMLinfo gameinfo_reset;
 
+extern struct homebrewXMLinfo HB0;
+extern struct homebrewXMLinfo HB1;
+extern struct homebrewXMLinfo HB2;
+extern struct homebrewXMLinfo HB3;
+
+
 
 
 static char langlist[11][22] =
@@ -750,5 +756,147 @@ static char * get_text(mxml_node_t *node, char *buffer, int buflen) /* O - Text 
   }
   *ptr = '\0';
   return (buffer);
+}
+
+int LoadHomebrewXMLData(char* filename,int i)
+{
+	int ret;
+	if (i>3){
+		ret= -20;
+		goto noXML;}
+		
+	mxml_node_t *nodedataHB=NULL;
+	mxml_node_t *nodetreeHB=NULL;
+	char tmp1[40];
+	
+		/* Load XML file */
+		FILE *filexml;
+		filexml = fopen(filename, "rb");
+		if (!filexml)
+			{ret= -1;
+			goto noXML;}
+			
+		nodetreeHB = mxmlLoadFile(NULL, filexml, MXML_NO_CALLBACK);
+		fclose(filexml);
+
+	if (nodetreeHB == NULL)
+		{ret= -2;
+		goto noXML;}
+			
+    nodedataHB = mxmlFindElement(nodetreeHB, nodetreeHB, "app", NULL, NULL, MXML_DESCEND);
+   	if (nodedataHB == NULL) {
+	    ret= -5;
+		 goto noXML;
+	} 
+	
+            //int len = (strlen(entered)-1);
+            //if(entered[len] !='/') 
+		/* text from elements */
+	if (i==0){
+		GetTextFromNode(nodedataHB, nodedataHB, "name", NULL, NULL, MXML_DESCEND, HB0.name,sizeof(HB0.name));
+		GetTextFromNode(nodedataHB, nodedataHB, "coder", NULL, NULL, MXML_DESCEND, HB0.coder,sizeof(HB0.coder));
+		GetTextFromNode(nodedataHB, nodedataHB, "version", NULL, NULL, MXML_DESCEND, HB0.version,sizeof(HB0.version));
+		GetTextFromNode(nodedataHB, nodedataHB, "release_date", NULL, NULL, MXML_DESCEND, tmp1,sizeof(tmp1));
+		GetTextFromNode(nodedataHB, nodedataHB, "short_description", NULL, NULL, MXML_DESCEND, HB0.shortdescription,sizeof(HB0.shortdescription));
+		GetTextFromNode(nodedataHB, nodedataHB, "long_description", NULL, NULL, MXML_DESCEND, HB0.longdescription,sizeof(HB0.longdescription));
+		
+		int len = (strlen(tmp1)-6);//length of the date string without the 200000 at the end
+		if (len==8)
+			snprintf(HB0.releasedate, sizeof(HB0.releasedate), "%c%c/%c%c/%c%c%c%c", tmp1[4],tmp1[5],tmp1[6],tmp1[7],tmp1[0],tmp1[1],tmp1[2],tmp1[3]);
+      else if (len==6)       
+			snprintf(HB0.releasedate, sizeof(HB0.releasedate), "%c%c/%c%c%c%c", tmp1[4],tmp1[5],tmp1[0],tmp1[1],tmp1[2],tmp1[3]);
+      else snprintf(HB0.releasedate, sizeof(HB0.releasedate), "%s", tmp1);
+      
+	}
+	else if (i==1){
+		GetTextFromNode(nodedataHB, nodedataHB, "name", NULL, NULL, MXML_DESCEND, HB1.name,sizeof(HB1.name));
+		GetTextFromNode(nodedataHB, nodedataHB, "coder", NULL, NULL, MXML_DESCEND, HB1.coder,sizeof(HB1.coder));
+		GetTextFromNode(nodedataHB, nodedataHB, "version", NULL, NULL, MXML_DESCEND, HB1.version,sizeof(HB1.version));
+		GetTextFromNode(nodedataHB, nodedataHB, "release_date", NULL, NULL, MXML_DESCEND, tmp1,sizeof(tmp1));
+		GetTextFromNode(nodedataHB, nodedataHB, "short_description", NULL, NULL, MXML_DESCEND, HB1.shortdescription,sizeof(HB1.shortdescription));
+		GetTextFromNode(nodedataHB, nodedataHB, "long_description", NULL, NULL, MXML_DESCEND, HB1.longdescription,sizeof(HB1.longdescription));
+			
+			
+		int len = (strlen(tmp1)-6);//length of the date string without the 200000 at the end
+		if (len==8)
+			snprintf(HB1.releasedate, sizeof(HB1.releasedate), "%c%c/%c%c/%c%c%c%c", tmp1[4],tmp1[5],tmp1[6],tmp1[7],tmp1[0],tmp1[1],tmp1[2],tmp1[3]);
+      else if (len==6)       
+			snprintf(HB1.releasedate, sizeof(HB1.releasedate), "%c%c/%c%c%c%c", tmp1[4],tmp1[5],tmp1[0],tmp1[1],tmp1[2],tmp1[3]);
+      else snprintf(HB1.releasedate, sizeof(HB1.releasedate), "%s", tmp1);	
+
+	}
+	else if (i==2){
+		GetTextFromNode(nodedataHB, nodedataHB, "name", NULL, NULL, MXML_DESCEND, HB2.name,sizeof(HB2.name));
+		GetTextFromNode(nodedataHB, nodedataHB, "coder", NULL, NULL, MXML_DESCEND, HB2.coder,sizeof(HB2.coder));
+		GetTextFromNode(nodedataHB, nodedataHB, "version", NULL, NULL, MXML_DESCEND, HB2.version,sizeof(HB2.version));
+		GetTextFromNode(nodedataHB, nodedataHB, "release_date", NULL, NULL, MXML_DESCEND, tmp1,sizeof(tmp1));
+		GetTextFromNode(nodedataHB, nodedataHB, "short_description", NULL, NULL, MXML_DESCEND, HB2.shortdescription,sizeof(HB2.shortdescription));
+		GetTextFromNode(nodedataHB, nodedataHB, "long_description", NULL, NULL, MXML_DESCEND, HB2.longdescription,sizeof(HB2.longdescription));
+		
+		int len = (strlen(tmp1)-6);//length of the date string without the 200000 at the end
+		if (len==8)
+			snprintf(HB2.releasedate, sizeof(HB2.releasedate), "%c%c/%c%c/%c%c%c%c", tmp1[4],tmp1[5],tmp1[6],tmp1[7],tmp1[0],tmp1[1],tmp1[2],tmp1[3]);
+      else if (len==6)       
+			snprintf(HB2.releasedate, sizeof(HB2.releasedate), "%c%c/%c%c%c%c", tmp1[4],tmp1[5],tmp1[0],tmp1[1],tmp1[2],tmp1[3]);
+      else snprintf(HB2.releasedate, sizeof(HB2.releasedate), "%s", tmp1);
+
+	}
+	else if (i==3){
+		GetTextFromNode(nodedataHB, nodedataHB, "name", NULL, NULL, MXML_DESCEND, HB3.name,sizeof(HB3.name));
+		GetTextFromNode(nodedataHB, nodedataHB, "coder", NULL, NULL, MXML_DESCEND, HB3.coder,sizeof(HB3.coder));
+		GetTextFromNode(nodedataHB, nodedataHB, "version", NULL, NULL, MXML_DESCEND, HB3.version,sizeof(HB3.version));
+		GetTextFromNode(nodedataHB, nodedataHB, "release_date", NULL, NULL, MXML_DESCEND, tmp1,sizeof(tmp1));
+		GetTextFromNode(nodedataHB, nodedataHB, "short_description", NULL, NULL, MXML_DESCEND, HB3.shortdescription,sizeof(HB3.shortdescription));
+		GetTextFromNode(nodedataHB, nodedataHB, "long_description", NULL, NULL, MXML_DESCEND, HB3.longdescription,sizeof(HB3.longdescription));
+		
+		int len = (strlen(tmp1)-6);//length of the date string without the 200000 at the end
+		if (len==8)
+			snprintf(HB3.releasedate, sizeof(HB3.releasedate), "%c%c/%c%c/%c%c%c%c", tmp1[4],tmp1[5],tmp1[6],tmp1[7],tmp1[0],tmp1[1],tmp1[2],tmp1[3]);
+      else if (len==6)       
+			snprintf(HB3.releasedate, sizeof(HB3.releasedate), "%c%c/%c%c%c%c", tmp1[4],tmp1[5],tmp1[0],tmp1[1],tmp1[2],tmp1[3]);
+      else snprintf(HB3.releasedate, sizeof(HB3.releasedate), "%s", tmp1);
+
+		}
+	ret =1;
+	free(nodedataHB);
+	free(nodetreeHB);
+	goto end;	
+noXML:
+	if (i==0){
+			strcpy(HB0.name,"");
+			strcpy(HB0.coder,"");
+			strcpy(HB0.version,"");
+			strcpy(HB0.releasedate,"");
+			strcpy(HB0.shortdescription,"");
+			strcpy(HB0.longdescription,"");
+			 
+		}
+		else if (i==1){
+			strcpy(HB1.name,"");
+			strcpy(HB1.coder,"");
+			strcpy(HB1.version,"");
+			strcpy(HB1.releasedate,"");
+			strcpy(HB1.shortdescription,"");
+			strcpy(HB1.longdescription,"");
+		}
+		else if (i==2){
+			strcpy(HB2.name,"");
+			strcpy(HB2.coder,"");
+			strcpy(HB2.version,"");
+			strcpy(HB2.releasedate,"");
+			strcpy(HB2.shortdescription,"");
+			strcpy(HB2.longdescription,"");
+		}
+		else if (i==3){
+			strcpy(HB3.name,"");
+			strcpy(HB3.coder,"");
+			strcpy(HB3.version,"");
+			strcpy(HB3.releasedate,"");
+			strcpy(HB3.shortdescription,"");
+			strcpy(HB3.longdescription,"");
+			}
+end:
+
+	return ret;
 }
 

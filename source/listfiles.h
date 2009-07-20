@@ -11,7 +11,6 @@ char * GetFileName(int i);
 int GetAllDirFiles(char * filespath);
 bool subfoldercreate(char * fullpath);
 bool checkfile(char * path);
-u64 FileSize(const char * filepath);
 
 #ifdef __cplusplus
 }

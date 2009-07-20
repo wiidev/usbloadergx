@@ -56,9 +56,19 @@ struct gameXMLinfo
 	char iso_sha1[41];
 } ;
 
+struct homebrewXMLinfo
+{	
+	char name[50];
+	char coder[50];
+	char version[30];
+	char releasedate[30];
+	char shortdescription[150];
+	char longdescription[500];	
+} ;
 
 
 bool OpenXMLFile(char* filename);
+int LoadHomebrewXMLData(char* filename,int i);
 void LoadTitlesFromXML(char *langcode, bool forcejptoen);
 void GetPublisherFromGameid(char *idtxt, char *dest, int destsize);
 char *ConvertLangTextToCode(char *langtext);
