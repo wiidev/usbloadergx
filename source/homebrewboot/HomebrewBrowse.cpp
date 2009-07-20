@@ -16,6 +16,7 @@
 #include "menu.h"
 #include "filelist.h"
 #include "sys.h"
+#include "listfiles.h"
 
 /*** Extern functions ***/
 extern void ResumeGui();
@@ -417,11 +418,22 @@ int MenuHomebrewBrowse()
 
 			if(MainButton1.GetState() == STATE_CLICKED) {
 			    char temp[200];
-			    char * shortpath = NULL;
-			    snprintf(temp, strlen(HomebrewFiles.GetFilepath(fileoffset)), "%s", HomebrewFiles.GetFilepath(fileoffset));
+				 char iconpath[200];
+				 char * shortpath = NULL;
+				 
+				 //write iconpath
+			    snprintf(iconpath, sizeof(iconpath), "%sicon.png", HomebrewFiles.GetFilepath(fileoffset));
+             
+				 //get filesize
+				 snprintf(temp, sizeof(temp), "%s%s", HomebrewFiles.GetFilepath(fileoffset),HomebrewFiles.GetFilename(fileoffset));
+             u64 filesize = FileSize(temp);
+				 
+				 //write short filename
+				 snprintf(temp, strlen(HomebrewFiles.GetFilepath(fileoffset)), "%s", HomebrewFiles.GetFilepath(fileoffset));
                 shortpath = strrchr(temp, '/');
                 snprintf(temp, sizeof(temp), "%s/%s", shortpath, HomebrewFiles.GetFilename(fileoffset));
-                int choice = WindowPrompt(tr("Do you want to boot?"), temp, tr("Yes"), tr("No"));
+					 
+				 int choice = HBCWindowPrompt(temp, 0, 0,0, 0, iconpath, filesize);
 			    if(choice == 1) {
 			        boothomebrew = true;
 			        menu = MENU_EXIT;
@@ -432,11 +444,22 @@ int MenuHomebrewBrowse()
             }
             else if(MainButton2.GetState() == STATE_CLICKED) {
                 char temp[200];
-			    char * shortpath = NULL;
-			    snprintf(temp, strlen(HomebrewFiles.GetFilepath(fileoffset+1)), "%s", HomebrewFiles.GetFilepath(fileoffset+1));
+				 char iconpath[200];
+				 char * shortpath = NULL;
+				 
+				 //write iconpath
+			    snprintf(iconpath, sizeof(iconpath), "%sicon.png", HomebrewFiles.GetFilepath(fileoffset+1));
+             
+				 //get filesize
+				 snprintf(temp, sizeof(temp), "%s%s", HomebrewFiles.GetFilepath(fileoffset+1),HomebrewFiles.GetFilename(fileoffset+1));
+             u64 filesize = FileSize(temp);
+				 
+				 //write short filename
+				 snprintf(temp, strlen(HomebrewFiles.GetFilepath(fileoffset+1)), "%s", HomebrewFiles.GetFilepath(fileoffset+1));
                 shortpath = strrchr(temp, '/');
                 snprintf(temp, sizeof(temp), "%s/%s", shortpath, HomebrewFiles.GetFilename(fileoffset+1));
-                int choice = WindowPrompt(tr("Do you want to boot?"), temp, tr("Yes"), tr("No"));
+					 
+				 int choice = HBCWindowPrompt(temp, 0, 0,0, 0, iconpath, filesize);
 			    if(choice == 1) {
                     boothomebrew = true;
 			        menu = MENU_EXIT;
@@ -446,13 +469,24 @@ int MenuHomebrewBrowse()
                 MainButton2.ResetState();
             }
             else if(MainButton3.GetState() == STATE_CLICKED) {
-                char temp[200];
-			    char * shortpath = NULL;
-			    snprintf(temp, strlen(HomebrewFiles.GetFilepath(fileoffset+2)), "%s", HomebrewFiles.GetFilepath(fileoffset+2));
+              char temp[200];
+				 char iconpath[200];
+				 char * shortpath = NULL;
+				 
+				 //write iconpath
+			    snprintf(iconpath, sizeof(iconpath), "%sicon.png", HomebrewFiles.GetFilepath(fileoffset+2));
+             
+				 //get filesize
+				 snprintf(temp, sizeof(temp), "%s%s", HomebrewFiles.GetFilepath(fileoffset+2),HomebrewFiles.GetFilename(fileoffset+2));
+             u64 filesize = FileSize(temp);
+				 
+				 //write short filename
+				 snprintf(temp, strlen(HomebrewFiles.GetFilepath(fileoffset+2)), "%s", HomebrewFiles.GetFilepath(fileoffset+2));
                 shortpath = strrchr(temp, '/');
                 snprintf(temp, sizeof(temp), "%s/%s", shortpath, HomebrewFiles.GetFilename(fileoffset+2));
-                int choice = WindowPrompt(tr("Do you want to boot?"), temp, tr("Yes"), tr("No"));
-			    if(choice == 1) {
+					 
+				 int choice = HBCWindowPrompt(temp, 0, 0,0, 0, iconpath, filesize);
+			     if(choice == 1) {
                     boothomebrew = true;
 			        menu = MENU_EXIT;
                     snprintf(Settings.selected_homebrew, sizeof(Settings.selected_homebrew), "%s%s",  HomebrewFiles.GetFilepath(fileoffset+2), HomebrewFiles.GetFilename(fileoffset+2));
@@ -461,12 +495,23 @@ int MenuHomebrewBrowse()
                 MainButton3.ResetState();
             }
             else if(MainButton4.GetState() == STATE_CLICKED) {
-                char temp[200];
-			    char * shortpath = NULL;
-			    snprintf(temp, strlen(HomebrewFiles.GetFilepath(fileoffset+3)), "%s", HomebrewFiles.GetFilepath(fileoffset+3));
+              char temp[200];
+				 char iconpath[200];
+				 char * shortpath = NULL;
+				 
+				 //write iconpath
+			    snprintf(iconpath, sizeof(iconpath), "%sicon.png", HomebrewFiles.GetFilepath(fileoffset+3));
+             
+				 //get filesize
+				 snprintf(temp, sizeof(temp), "%s%s", HomebrewFiles.GetFilepath(fileoffset+3),HomebrewFiles.GetFilename(fileoffset+3));
+             u64 filesize = FileSize(temp);
+				 
+				 //write short filename
+				 snprintf(temp, strlen(HomebrewFiles.GetFilepath(fileoffset+3)), "%s", HomebrewFiles.GetFilepath(fileoffset+3));
                 shortpath = strrchr(temp, '/');
                 snprintf(temp, sizeof(temp), "%s/%s", shortpath, HomebrewFiles.GetFilename(fileoffset+3));
-                int choice = WindowPrompt(tr("Do you want to boot?"), temp, tr("Yes"), tr("No"));
+					 
+				 int choice = HBCWindowPrompt(temp, 0, 0,0, 0, iconpath, filesize);
 			    if(choice == 1) {
                     boothomebrew = true;
 			        menu = MENU_EXIT;

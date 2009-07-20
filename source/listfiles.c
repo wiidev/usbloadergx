@@ -103,3 +103,22 @@ bool checkfile(char * path)
     }
 return false;
 }
+
+/****************************************************************************
+ * FileSize
+ *
+ * Get filesize in bytes. u64 for files bigger than 4GB
+ ***************************************************************************/
+u64 FileSize(const char * filepath)
+{
+  struct stat filestat;
+
+  if (stat(filepath, &filestat) != 0)
+   return 0;
+
+  return filestat.st_size;
+}
+
+
+
+

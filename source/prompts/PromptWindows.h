@@ -30,7 +30,7 @@ int CodeDownload(const char *id);
 void GetLanguageToLangCode(char *langcode);
 int HBCWindowPrompt(const char *name, const char *coder, const char *version,
                 const char *release_date, const char *long_description, 
-					 const char *iconPath, const char *filesize);
+					 const char *iconPath, u64 filesize);
 
 
 #endif

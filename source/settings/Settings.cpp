@@ -1286,7 +1286,7 @@ int MenuSettings()
                                         }
                                     }
                                 } else {
-                                    WindowPrompt(tr("Coverpath Changed"),tr("Console should be unlocked to modify it."),tr("OK"));
+                                    WindowPrompt(tr("Coverpath Change"),tr("Console should be unlocked to modify it."),tr("OK"));
                                 }
                                 break;
                             case 1:

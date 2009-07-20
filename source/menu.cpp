@@ -339,6 +339,10 @@ HBCWindowPrompt(db1, db2, db3,db4, db5, db7, db6);
         GuiImageData imgarrangeCarousel(imgPath, arrangeCarousel_png);
         snprintf(imgPath, sizeof(imgPath), "%sarrangeCarousel_gray.png", CFG.theme_path);
         GuiImageData imgarrangeCarousel_gray(imgPath, arrangeCarousel_gray_png);
+		  snprintf(imgPath, sizeof(imgPath), "%sbrowser.png", CFG.theme_path);
+        GuiImageData homebrewImgData(imgPath, browser_png);
+		  
+		  
 
         GuiTrigger trigA;
         trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
@@ -465,11 +469,11 @@ HBCWindowPrompt(db1, db2, db3,db4, db5, db7, db6);
         GuiButton carouselBtn(&carouselBtnImg_g,&carouselBtnImg_g, 2, 3, THEME.carousel_x, THEME.carousel_y, &trigA, &btnSoundOver, &btnClick,1);
         carouselBtn.SetAlpha(180);
 
-        GuiImage homebrewBtnImg(&imgarrangeList);
+        GuiImage homebrewBtnImg(&homebrewImgData);
         homebrewBtnImg.SetWidescreen(CFG.widescreen);
         GuiButton homebrewBtn(homebrewBtnImg.GetWidth(), homebrewBtnImg.GetHeight());
         homebrewBtn.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-        homebrewBtn.SetPosition(430, 410);
+        homebrewBtn.SetPosition(425, 400);
         homebrewBtn.SetImage(&homebrewBtnImg);
         homebrewBtn.SetSoundOver(&btnSoundOver);
         homebrewBtn.SetSoundClick(&btnClick);
@@ -618,7 +622,7 @@ HBCWindowPrompt(db1, db2, db3,db4, db5, db7, db6);
 
         w.Append(&sdcardBtn);
         w.Append(&poweroffBtn);
-		w.Append(&gameInfo);
+			w.Append(&gameInfo);
         if (Settings.godmode)
                 w.Append(&installBtn);
         w.Append(&homeBtn);
@@ -630,7 +634,8 @@ HBCWindowPrompt(db1, db2, db3,db4, db5, db7, db6);
         w.Append(&listBtn);
         w.Append(&gridBtn);
         w.Append(&carouselBtn);
-        w.Append(&homebrewBtn);
+        if (Settings.godmode == 1)
+				w.Append(&homebrewBtn);
 
         if((Settings.hddinfo == hr12)||(Settings.hddinfo == hr24))
         {
@@ -1551,9 +1556,10 @@ static int MenuFormat()
 	    VIDEO_WaitVSync ();
 
 	    selected = optionBrowser.GetClickedOption();
-
-            for (cnt = 0; cnt < MAX_PARTITIONS; cnt++) {
-                if (cnt == selected) {
+		 
+		 for (cnt = 0; cnt < MAX_PARTITIONS; cnt++) {
+                if ((cnt == selected)&&((Settings.godmode == 1)||
+							(!strcmp("", Settings.unlockCode)))){
                     partitionEntry *entry = &partitions[selected];
                         if (entry->size) {
                         sprintf(text, "%s %d : %.2fGB",tr("Partition"), selected+1, entry->size * (sector_size / GBSIZE));
@@ -1577,6 +1583,23 @@ static int MenuFormat()
                     }
                     }
                 }
+					 else if ( (cnt == selected)&&(Settings.godmode == 0) ) {
+                  mainWindow->Remove(&optionBrowser);
+                  char entered[20] = "";
+                  int result = OnScreenKeyboard(entered, 20,0);
+                  mainWindow->Append(&optionBrowser);
+                  if ( result == 1 ) {
+                     if (!strcmp(entered, Settings.unlockCode)) //if password correct
+                      {
+                      if (Settings.godmode == 0) {
+                           WindowPrompt(tr("Correct Password"),tr("All the features of USB Loader GX are unlocked."),tr("OK"));
+                           Settings.godmode = 1;
+                        }
+                     } else {
+                        WindowPrompt(tr("Wrong Password"),tr("USB Loader GX is protected"),tr("OK"));
+                        }
+                     }
+                  }
             }
 		if (shutdown == 1)
 			Sys_Shutdown();

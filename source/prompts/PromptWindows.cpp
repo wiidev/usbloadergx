@@ -2984,7 +2984,7 @@ void GetLanguageToLangCode(char *langcode) {
  
 int
 HBCWindowPrompt(const char *name, const char *coder, const char *version,
-                const char *release_date, const char *long_description, const char *iconPath, const char *filesize)
+                const char *release_date, const char *long_description, const char *iconPath, u64 filesize)
 {
 	int choice = -1;
 	
@@ -3075,7 +3075,7 @@ HBCWindowPrompt(const char *name, const char *coder, const char *version,
 	GuiText nameTxt(name,30 , (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	nameTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	nameTxt.SetPosition(0,-15);
-	nameTxt.SetMaxWidth(430);
+	nameTxt.SetMaxWidth(430, GuiText::SCROLL);
 	
 	
 	if (coder)
@@ -3106,8 +3106,32 @@ HBCWindowPrompt(const char *name, const char *coder, const char *version,
 	long_descriptionTxt.SetMaxWidth(360);
 	long_descriptionTxt.SetNumLines(pagesize);
 	
-
-	GuiText filesizeTxt(filesize, 16, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	//convert filesize from u64 to char and put unit of measurement after it
+	char temp2[7];
+	char filesizeCH[15];
+	f32 sizeAdjusted;
+	 if(filesize<=1024.0)
+	{
+		sizeAdjusted = filesize;
+		snprintf(temp2, sizeof(temp2), "%f",sizeAdjusted);
+		snprintf(filesizeCH, sizeof(filesizeCH), "%s B",temp2);
+		
+	 }         
+	 if(filesize>1024.0)
+	{
+		sizeAdjusted = filesize/1024.0;
+		snprintf(temp2, sizeof(temp2), "%f",sizeAdjusted);
+		snprintf(filesizeCH, sizeof(filesizeCH), "%s KB",temp2);
+		
+	 }         
+	 if(filesize>1048576.0)
+	{
+		sizeAdjusted = filesize/1048576.0;
+		snprintf(temp2, sizeof(temp2), "%f",sizeAdjusted);
+		snprintf(filesizeCH, sizeof(filesizeCH), "%s MB",temp2);
+		
+	 }
+	GuiText filesizeTxt(filesizeCH, 16, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	filesizeTxt.SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
 	filesizeTxt.SetPosition(-40,12);
 	

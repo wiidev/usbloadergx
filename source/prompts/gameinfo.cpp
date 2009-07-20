@@ -493,6 +493,7 @@ int showGameInfo(char *ID)
 		if (strcmp(gameinfo.title,"") != 0) {
 			snprintf(linebuf, sizeof(linebuf), "%s",gameinfo.title);
 			titleTxt = new GuiText(linebuf, titlefontsize, (GXColor){0,0,0, 255});
+			titleTxt->SetMaxWidth(350, GuiText::SCROLL);
 			//while (titleTxt->GetWidth()>250) { titleTxt->SetFontSize(titlefontsize-=2); }
 			titleTxt->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); titleTxt->SetPosition(txtXOffset,12+titley);
 			gameinfoWindow.Append(titleTxt);

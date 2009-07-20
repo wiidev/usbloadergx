@@ -101,6 +101,9 @@ extern const u32    bg_options_settings_png_size;
 extern const u8     settings_background_png[];
 extern const u32    settings_background_png_size;
 
+extern const u8     browser_png[];
+extern const u32    browser_png_size;
+
 extern const u8     nocover_png[];
 extern const u32    nocover_png_size;
 

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-19 19:46+0200\n"
+"POT-Creation-Date: 2009-07-20 03:09-0400\n"
 "PO-Revision-Date: 2009-07-18 23:50+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe & Cambo\n"
@@ -198,6 +198,9 @@ msgstr "Scaricamento Copertina"
 msgid "Cover Path"
 msgstr "Percorso Copertine"
 
+msgid "Coverpath Change"
+msgstr ""
+
 msgid "Coverpath Changed"
 msgstr "Percorso Copertine Modificato"
 
@@ -257,9 +260,6 @@ msgstr "Display"
 
 msgid "Do you really want to delete:"
 msgstr "Vuoi veramente Eliminare:"
-
-msgid "Do you want to boot?"
-msgstr ""
 
 msgid "Do you want to change language?"
 msgstr "Vuoi cambiare lingua?"

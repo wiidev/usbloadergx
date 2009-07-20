@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-19 19:46+0200\n"
+"POT-Creation-Date: 2009-07-20 03:09-0400\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -198,6 +198,9 @@ msgstr "Cover Download"
 msgid "Cover Path"
 msgstr "Cover Pfad"
 
+msgid "Coverpath Change"
+msgstr ""
+
 msgid "Coverpath Changed"
 msgstr "Cover Pfad geändert"
 
@@ -257,9 +260,6 @@ msgstr "Anzeige"
 
 msgid "Do you really want to delete:"
 msgstr "Löschvorgang bestätigen:"
-
-msgid "Do you want to boot?"
-msgstr ""
 
 msgid "Do you want to change language?"
 msgstr "Möchten Sie die Sprache ändern?"
