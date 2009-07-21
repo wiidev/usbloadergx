@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-21 02:52-0400\n"
+"POT-Creation-Date: 2009-07-21 19:56+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -124,7 +124,7 @@ msgid "Cheatcodes Path changed"
 msgstr "Ruta de Códigos de Trampas cambiada"
 
 msgid "Cheatfile is blank"
-msgstr "Archivo de trucos vacio"
+msgstr "Archivo de Trampas vacio"
 
 msgid "Checking for Updates"
 msgstr "Verificando Actualizaciones"
@@ -199,7 +199,7 @@ msgid "Cover Path"
 msgstr "Ruta Carátulas"
 
 msgid "Coverpath Change"
-msgstr ""
+msgstr "Cambio ruta Carátulas"
 
 msgid "Coverpath Changed"
 msgstr "Ruta de Carátulas cambiada"
@@ -235,13 +235,13 @@ msgid "Delete"
 msgstr "Borrar"
 
 msgid "Delete Boxart"
-msgstr ""
+msgstr "Eliminar Carátulas"
 
 msgid "Delete CheatTxt"
-msgstr ""
+msgstr "Eliminar Txt Trampas"
 
 msgid "Delete Discart"
-msgstr ""
+msgstr "Eliminar Img. Disco"
 
 msgid "Developed by"
 msgstr "Desarrollado por"
@@ -406,16 +406,16 @@ msgid "HOME Menu"
 msgstr "Menú HOME"
 
 msgid "Homebrew Apps Path"
-msgstr ""
+msgstr "Ruta aplic. Homebrew"
 
 msgid "Homebrew Appspath change"
-msgstr ""
+msgstr "Cambio Ruta aplic. Homebrew"
 
 msgid "Homebrew Appspath changed"
-msgstr ""
+msgstr "Ruta aplic. Homebrew cambiada"
 
 msgid "Homebrew Launcher"
-msgstr ""
+msgstr "Lanzador Homebrew"
 
 msgid "Hour"
 msgstr "Horas"
@@ -464,7 +464,7 @@ msgstr "Instalando wad"
 
 #, c-format
 msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team. %s - %i"
-msgstr ""
+msgstr "Parece que tienes alguna info. que puede ser útil para nosotros. Por favor envia esta info. al equipo desarrollador. %s - %i"
 
 msgid "Italian"
 msgstr "Italiano"
@@ -503,7 +503,7 @@ msgid "Like SysMenu"
 msgstr "Como Menú Sist."
 
 msgid "Load"
-msgstr ""
+msgstr "Cargar"
 
 msgid "Load this dol as alternate dol?"
 msgstr "¿Cargar este dol como dol alternativo?"
@@ -548,10 +548,10 @@ msgid "No"
 msgstr "No"
 
 msgid "No .dol or .elf files found."
-msgstr ""
+msgstr "No se encontró archivo .dol o .elf"
 
 msgid "No Cheatfile found"
-msgstr "Archivo de trucos no encontrado"
+msgstr "Archivo de trampas no encontrado"
 
 msgid "No Favorites"
 msgstr "No hay favoritos"
@@ -776,10 +776,10 @@ msgid "TChinese"
 msgstr "Chino Tradic."
 
 msgid "TXTCheatcodes Path"
-msgstr "Ruta archiv. de trucos"
+msgstr "Ruta archiv. de trampas"
 
 msgid "TXTCheatcodes Path changed"
-msgstr "Ruta archiv. de trucos cambiada"
+msgstr "Ruta archiv. de trampas cambiada"
 
 #, c-format
 msgid "The wad installation failed with error %ld"
@@ -814,10 +814,10 @@ msgid "Unable to open the wad that was just downloaded (%s)."
 msgstr "No es posible abrir el wad recien descargado (%s)."
 
 msgid "Uninstall Game"
-msgstr ""
+msgstr "Desinstalar juego"
 
 msgid "Uninstall Menu"
-msgstr ""
+msgstr "Menú de Desinstalación"
 
 msgid "Unlock console to use this option."
 msgstr "Desbloquea la consola para usar esta opción."
@@ -901,7 +901,7 @@ msgid "does not exist!"
 msgstr "no existe!"
 
 msgid "does not exist!  Loading game without cheats."
-msgstr "no existe! Cargando juego sin trucos."
+msgstr "no existe! Cargando juego sin trampas."
 
 msgid "does not exist!  You Messed something up, Idiot."
 msgstr "no existe! Arruinaste algo, idiota"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-21 02:52-0400\n"
+"POT-Creation-Date: 2009-07-21 19:56+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid "(both retired)"
-msgstr "所有退休者"
+msgstr "退休者"
 
 msgid "0 (Everyone)"
 msgstr "0 (所有人)"
@@ -52,10 +52,10 @@ msgid "AUTO"
 msgstr "自動"
 
 msgid "All the features of USB Loader GX are unlocked."
-msgstr "USB Loader GX 功能已解鎖."
+msgstr "USB Loader GX功能已解鎖."
 
 msgid "Alternate DOL"
-msgstr "替代 Dol"
+msgstr "替代Dol"
 
 msgid "Anti"
 msgstr "防止"
@@ -79,13 +79,13 @@ msgid "Back"
 msgstr "返回"
 
 msgid "Back to HBC or Wii Menu"
-msgstr "返回 HBC 或 Wii 系統選單"
+msgstr "返回HBC或Wii系統選單"
 
 msgid "Back to Loader"
-msgstr "返回 Loader"
+msgstr "返回Loader"
 
 msgid "Back to Wii Menu"
-msgstr "返回 Wii 系統選單"
+msgstr "返回Wii系統選單"
 
 msgid "Backgroundmusic"
 msgstr "背景音樂"
@@ -118,13 +118,13 @@ msgid "Cancel"
 msgstr "取消"
 
 msgid "Cheatcodes Path"
-msgstr ""
-
-msgid "Cheatcodes Path changed"
 msgstr "金手指檔案路徑"
 
+msgid "Cheatcodes Path changed"
+msgstr "金手指檔案路徑已變更"
+
 msgid "Cheatfile is blank"
-msgstr "金手指檔案無內容"
+msgstr "金手指檔案空白"
 
 msgid "Checking for Updates"
 msgstr "正在檢查更新"
@@ -406,16 +406,16 @@ msgid "HOME Menu"
 msgstr "主選單"
 
 msgid "Homebrew Apps Path"
-msgstr ""
+msgstr "HBC應用程式路徑"
 
 msgid "Homebrew Appspath change"
-msgstr ""
+msgstr "變更HBC應用程式路徑"
 
 msgid "Homebrew Appspath changed"
-msgstr ""
+msgstr "HBC應用程式路徑已變更"
 
 msgid "Homebrew Launcher"
-msgstr ""
+msgstr "HBC載入工具"
 
 msgid "Hour"
 msgstr "小時制"
@@ -464,7 +464,7 @@ msgstr "正在安裝wad"
 
 #, c-format
 msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team. %s - %i"
-msgstr ""
+msgstr "請將這些訊息傳送至開發組以幫助本軟體開發 %s - %i"
 
 msgid "Italian"
 msgstr "義大利文"
@@ -503,7 +503,7 @@ msgid "Like SysMenu"
 msgstr "同系統選單"
 
 msgid "Load"
-msgstr ""
+msgstr "載入"
 
 msgid "Load this dol as alternate dol?"
 msgstr "載入這個dol做為替代的dol?"
@@ -548,10 +548,10 @@ msgid "No"
 msgstr "否"
 
 msgid "No .dol or .elf files found."
-msgstr ""
+msgstr "無.dol或.elf檔案"
 
 msgid "No Cheatfile found"
-msgstr "無法找到金手指檔案"
+msgstr "無金手指檔案"
 
 msgid "No Favorites"
 msgstr "無我的最愛列表"
@@ -779,7 +779,7 @@ msgid "TXTCheatcodes Path"
 msgstr "金手指文字檔路徑"
 
 msgid "TXTCheatcodes Path changed"
-msgstr ""
+msgstr "金手指文字檔路徑已變更"
 
 #, c-format
 msgid "The wad installation failed with error %ld"
@@ -804,10 +804,10 @@ msgid "Tooltips"
 msgstr "工具提示"
 
 msgid "USB Device not found"
-msgstr "找不到 USB 裝置"
+msgstr "找不到USB裝置"
 
 msgid "USB Loader GX is protected"
-msgstr "USB Loader GX 被鎖定"
+msgstr "USB Loader GX被鎖定"
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
@@ -832,7 +832,7 @@ msgid "Update All"
 msgstr "升級所有檔案"
 
 msgid "Update DOL"
-msgstr "僅升級 dol"
+msgstr "僅升級dol"
 
 msgid "Update failed"
 msgstr "更新失敗"
@@ -850,13 +850,13 @@ msgid "Updating"
 msgstr "正在更新"
 
 msgid "VIDTV Patch"
-msgstr "VIDTV 修改"
+msgstr "VIDTV修改"
 
 msgid "Video Mode"
 msgstr "影像格式"
 
 msgid "Waiting for USB Device"
-msgstr "等待 USB 裝置"
+msgstr "等待USB裝置"
 
 msgid "Waiting..."
 msgstr "等待中..."
@@ -953,6 +953,9 @@ msgstr "發生錯誤"
 
 msgid "titles.txt Path"
 msgstr "Title檔案路徑"
+
+#~ msgid "Do you want to boot?"
+#~ msgstr "啟動?"
 
 #~ msgid "Uninstall"
 #~ msgstr "移除"

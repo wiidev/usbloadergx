@@ -6,7 +6,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-07-21 19:56+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
-"Last-Translator: \n"
+"Last-Translator: ziom666 (zadania_prog@vp.pl)\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -16,223 +16,223 @@ msgid "(both retired)"
 msgstr ""
 
 msgid "0 (Everyone)"
-msgstr ""
+msgstr "0 (Dla ka¿dego)"
 
 msgid "1 (Child 7+)"
-msgstr ""
+msgstr "1 (Dziecko 7+)"
 
 msgid "2 (Teen 12+)"
-msgstr ""
+msgstr "2 (M³odzie¿ 12+)"
 
 msgid "3 (Mature 16+)"
-msgstr ""
+msgstr "3 (Doros³y 16+)"
 
 msgid "3D Covers"
-msgstr "3D 표지"
+msgstr "Ok³adki 3D"
 
 msgid "4 (Adults Only 18+)"
-msgstr ""
+msgstr "4 (Tylko dla doros³ych 18+)"
 
 msgid ">> Finishing installation..."
-msgstr ""
+msgstr ">> Koñczenie instalacji..."
 
 msgid ">> Installing content #"
-msgstr ""
+msgstr ">> Instalowanie zawartoœci #"
 
 msgid ">> Installing ticket..."
 msgstr ""
 
 msgid ">> Installing title..."
-msgstr ""
+msgstr ">> Instalowanie tytu³u..."
 
 msgid ">> Reading WAD data..."
-msgstr ""
+msgstr ">> Odczyt danych WAD"
 
 msgid "AUTO"
-msgstr ""
+msgstr "AUTO"
 
 msgid "All the features of USB Loader GX are unlocked."
-msgstr "USB로더 GX 기능 잠금 해제."
+msgstr "Wszystkie funkcje programu USB Loader GX s¹ odblokowane"
 
 msgid "Alternate DOL"
-msgstr ""
+msgstr "Alternatywny plik DOL"
 
 msgid "Anti"
-msgstr ""
+msgstr "Anty"
 
 msgid "App Language"
-msgstr "USB 로더 언어"
+msgstr "Jêzyk"
 
 msgid "Apr"
-msgstr ""
+msgstr "Kwi"
 
 msgid "Are you sure?"
-msgstr "확실합니까?"
+msgstr "Na pewno"
 
 msgid "Aug"
-msgstr ""
+msgstr "Sie"
 
 msgid "AutoPatch"
-msgstr "자동 패치"
+msgstr ""
 
 msgid "Back"
-msgstr "뒤로"
+msgstr "Cofnij"
 
 msgid "Back to HBC or Wii Menu"
-msgstr "홈브류 메뉴 또는 Wii 메뉴로"
+msgstr "Wróciæ do HBC lub Wii Menu"
 
 msgid "Back to Loader"
-msgstr "로더로 돌아감"
+msgstr "Powrót do Loadera"
 
 msgid "Back to Wii Menu"
-msgstr "Wii 메뉴로 놀아가기"
+msgstr "Powrót do Wii Menu"
 
 msgid "Backgroundmusic"
-msgstr ""
+msgstr "Muzyka w tle"
 
 msgid "Backgroundmusic Path changed."
-msgstr ""
+msgstr "Zmieniono œcie¿kê do muzyki w tle"
 
 msgid "Big thanks to:"
-msgstr ""
+msgstr "Podziêkowania dla:"
 
 msgid "Block IOS Reload"
-msgstr ""
+msgstr "Blokuj prze³adowanie IOS"
 
 msgid "Boot/Standard"
-msgstr "기본 부팅설정"
+msgstr ""
 
 msgid "Both"
-msgstr ""
+msgstr "Oba"
 
 msgid "Can't be formated"
-msgstr "포맷할 수 없습니다."
+msgstr "Nie mo¿na sformatowaæ"
 
 msgid "Can't create directory"
-msgstr "디렉토리를 만들 수 없습니다"
+msgstr "Nie mo¿na utworzyæ katalogu"
 
 msgid "Can't delete:"
-msgstr "삭제할 수 없습니다:"
+msgstr "Nie mo¿na usun¹æ"
 
 msgid "Cancel"
-msgstr "취소"
+msgstr "Anuluj"
 
 msgid "Cheatcodes Path"
-msgstr ""
+msgstr "Œcie¿ka do kodów"
 
 msgid "Cheatcodes Path changed"
-msgstr ""
+msgstr "Zmieniono œcie¿kê do kodów"
 
 msgid "Cheatfile is blank"
-msgstr ""
+msgstr "Plik z kodami pusty"
 
 msgid "Checking for Updates"
-msgstr ""
+msgstr "Sprawdzanie aktualizacji"
 
 msgid "Click to Download Covers"
-msgstr "표지를 다운하려면 클릭하세요"
+msgstr "Kliknij aby pobraæ ok³adki"
 
 msgid "Clock"
-msgstr "시계"
+msgstr "Zegar"
 
 msgid "Close"
-msgstr ""
+msgstr "Zamknij"
 
 msgid "Code Download"
 msgstr ""
 
 msgid "Confirm"
-msgstr ""
+msgstr "PotwierdŸ"
 
 msgid "Console"
-msgstr ""
+msgstr "Konsola"
 
 msgid "Console Default"
-msgstr "콘솔 기본값"
+msgstr "Domyœlne ustawienia konsoli"
 
 msgid "Console Locked"
-msgstr "콘솔 잠김"
+msgstr "Konsola zablokowana"
 
 msgid "Console should be unlocked to modify it."
-msgstr "변경하려면 콘솔 잠김을 해제하세요."
+msgstr "Konsola powinna byæ odblokowana aby zmodyfikowaæ"
 
 msgid "Continue to install game?"
-msgstr "계속 설치하겠습니까?"
+msgstr "Kontynuowaæ instalacjê gry?"
 
 msgid "Controllevel"
-msgstr ""
+msgstr "Poziom kontroli"
 
 msgid "Correct Password"
-msgstr "올바른 비밀번호"
+msgstr "Poprawne has³o"
 
 msgid "Could not create GCT file"
-msgstr ""
+msgstr "Nie mo¿na utworzyæ pliku GCT"
 
 msgid "Could not find a WBFS partition."
-msgstr ""
+msgstr "Nie znaleziono partycji typu WBFS"
 
 msgid "Could not initialize DIP module!"
-msgstr "DIP 모듈 초기화 실패!"
+msgstr "Inicjalizacja modu³u DIP nie powiod³a siê"
 
 msgid "Could not initialize network!"
-msgstr "네트워크 초기화 실패!"
+msgstr "Inicjalizacja sieci nie powiod³a siê"
 
 msgid "Could not open Disc"
-msgstr "디스크를 열 수 없습니다."
+msgstr "Nie uda³o siê otworzyæ p³yty"
 
 msgid "Could not open WBFS partition"
-msgstr ""
+msgstr "Nie uda³o siê otworzyæ partycji WBFS"
 
 msgid "Could not open disc."
-msgstr ""
+msgstr "Nie uda³o siê otworzyæ p³yty"
 
 msgid "Could not read the disc."
-msgstr ""
+msgstr "Odczyt p³yty nie powiód³ siê"
 
 msgid "Could not set USB."
-msgstr ""
+msgstr "Nie uda³o siê ustawiæ USB"
 
 msgid "Cover Download"
-msgstr "표지 다운로드"
+msgstr "Pobierz ok³adki"
 
 msgid "Cover Path"
-msgstr "표지 경로"
+msgstr "Œcie¿ka do ok³adek"
 
 msgid "Coverpath Change"
 msgstr ""
 
 msgid "Coverpath Changed"
-msgstr "표지 경로 변경됨"
+msgstr "Zmieniono œcie¿kê do ok³adek"
 
 msgid "Create"
-msgstr ""
+msgstr "Utwórz"
 
 msgid "Credits"
-msgstr "Credits"
+msgstr ""
 
 msgid "Custom Paths"
-msgstr ""
+msgstr "W³asne œcie¿ki"
 
 msgid "DOL from SD"
-msgstr ""
+msgstr "Plik .DOL z karty SD"
 
 msgid "DOL from disc"
-msgstr ""
+msgstr "Plik .DOL z p³yty"
 
 msgid "Dec"
-msgstr ""
+msgstr "Gru"
 
 msgid "Default"
-msgstr ""
+msgstr "Domyœlne"
 
 msgid "Default Gamesettings"
-msgstr ""
+msgstr "Domyœlne ustawienia gry"
 
 msgid "Default Settings"
-msgstr ""
+msgstr "Domyœlne ustawienia"
 
 msgid "Delete"
-msgstr ""
+msgstr "Usuñ"
 
 msgid "Delete Boxart"
 msgstr ""
@@ -244,163 +244,163 @@ msgid "Delete Discart"
 msgstr ""
 
 msgid "Developed by"
-msgstr ""
+msgstr "Rozwijane przez"
 
 msgid "Disc Default"
-msgstr "디스크 기본값"
+msgstr "Domyœlne ustawienia p³yty"
 
 msgid "Disc Images"
-msgstr "디스크 이미지"
+msgstr "Obrazki p³yt"
 
 msgid "Discimage Path"
-msgstr "디스크 이미지 경로"
+msgstr "Œcie¿ka do obrazków p³yt"
 
 msgid "Discpath Changed"
-msgstr "디스크 경로 변경됨"
+msgstr "Œcie¿ka do p³yty zmieniona"
 
 msgid "Discpath change"
-msgstr "디스크 경로 변경"
+msgstr "Zmiana œcie¿ki p³yty"
 
 msgid "DiskFlip"
-msgstr ""
+msgstr "Obrót p³yt"
 
 msgid "Display"
-msgstr "화면 표시"
+msgstr "Wyœwietl"
 
 msgid "Do you really want to delete:"
-msgstr "정말로 삭제하겠습니까:"
+msgstr "Czy na pewno usun¹æ:"
 
 msgid "Do you want to change language?"
-msgstr ""
+msgstr "Zmieniæ jêzyk?"
 
 msgid "Do you want to format:"
-msgstr "포맷하겠습니까:"
+msgstr "Na pewno sformatowaæ:"
 
 msgid "Do you want to retry for 30 secs?"
-msgstr "30초간 재시도 할까요?"
+msgstr "Spróbowaæ za 30 sekund?"
 
 msgid "Do you want to use the alt dol that is known to be correct?"
-msgstr ""
+msgstr "Czy u¿yæ aternatywny plik .DOL?"
 
 msgid "Dol Path"
-msgstr ""
+msgstr "Œcie¿ka plików .DOL"
 
 msgid "Dolpath Changed"
-msgstr ""
+msgstr "Zmieniono œcie¿kê plików .DOL"
 
 msgid "Dolpath change"
-msgstr ""
+msgstr "Zmieñ œcie¿kê plików .DOL"
 
 msgid "Download Boxart image?"
-msgstr "박스 이미지를 다운로드 할까요?"
+msgstr "Pobraæ obrazki box?"
 
 msgid "Download Discart image?"
-msgstr ""
+msgstr "Œci¹gn¹æ obrazki p³yt?"
 
 msgid "Download Now"
-msgstr ""
+msgstr "Pobierz teraz"
 
 msgid "Download finished"
-msgstr "다운로드 완료"
+msgstr "Ukoñczono pobieranie"
 
 msgid "Downloading"
-msgstr ""
+msgstr "Pobieranie"
 
 msgid "Downloading file"
-msgstr "파일 다운로드 중:"
+msgstr "Pobieranie pliku"
 
 msgid "Dutch"
-msgstr "네덜란드어"
+msgstr "Holenderski"
 
 msgid "ERROR"
-msgstr ""
+msgstr "B£¥D"
 
 msgid "ERROR:"
-msgstr ""
+msgstr "B£¥D:"
 
 msgid "English"
-msgstr "영어"
+msgstr "Angielski"
 
 msgid "Error"
-msgstr ""
+msgstr "B³¹d"
 
 msgid "Error !"
-msgstr "에러 !"
+msgstr "B³¹d !"
 
 msgid "Error 002 fix"
-msgstr ""
+msgstr "Poprawka b³êdu 002"
 
 msgid "Error reading Disc"
-msgstr "디스크 읽기 오류"
+msgstr "B³¹d odczytu p³yty"
 
 msgid "Error..."
-msgstr ""
+msgstr "B³¹d..."
 
 msgid "Exit USB Loader GX?"
-msgstr "USB로더 GX를 종료할까요?"
+msgstr "Zamkn¹æ?"
 
 msgid "Failed formating"
-msgstr "포맷 실패"
+msgstr "Nie uda³o siê sformatowaæ"
 
 msgid "Feb"
-msgstr ""
+msgstr "Lut"
 
 msgid "File not found."
-msgstr ""
+msgstr "Nie znaleziono pliku."
 
 msgid "Finishing installation... Ok!"
-msgstr ""
+msgstr "Zakoñoczono instalacjê... OK!"
 
 msgid "Flip-X"
-msgstr "좌/우 설정"
+msgstr "Obróæ-X"
 
 msgid "Force"
-msgstr "강제"
+msgstr "Wymuœ"
 
 msgid "Format"
-msgstr "포맷"
+msgstr "Formatuj"
 
 msgid "Formatting, please wait..."
-msgstr "포맷 중. 기다려 주세요..."
+msgstr "Formatowanie, proszê czekaæ..."
 
 msgid "Free Space"
-msgstr "여유 공간"
+msgstr "Wolne miejsce"
 
 msgid "French"
-msgstr "불어"
+msgstr "Francuski"
 
 msgid "Full Shutdown"
-msgstr "완전히 끄기"
+msgstr "Pe³ne zamkniêcie systemu"
 
 msgid "GCT File created"
-msgstr ""
+msgstr "Utworzono plik GCT"
 
 msgid "GUI Settings"
-msgstr ""
+msgstr "Ustawienia interfejsu graficznego"
 
 msgid "Game ID"
-msgstr "게임 ID"
+msgstr "Identyfikator gry"
 
 msgid "Game Language"
-msgstr "언어"
+msgstr "Jêzyk gry"
 
 msgid "Game Load"
-msgstr ""
+msgstr "Za³aduj grê"
 
 msgid "Game Region"
-msgstr "지역"
+msgstr "Region gry"
 
 msgid "Game Size"
-msgstr "게임 용량"
+msgstr "Rozmiar gry"
 
 msgid "Game is already installed:"
-msgstr "게임이 이미 설치되어 있습니다."
+msgstr "Gra jest ju¿ zainstalowana"
 
 msgid "Games"
-msgstr "게임"
+msgstr "Gry"
 
 msgid "German"
-msgstr "독일어"
+msgstr "Niemiecki"
 
 msgid "HOME Menu"
 msgstr ""
@@ -418,400 +418,400 @@ msgid "Homebrew Launcher"
 msgstr ""
 
 msgid "Hour"
-msgstr ""
+msgstr "Czas"
 
 msgid "How do you want to update?"
-msgstr ""
+msgstr "Wybierz opcjê aktualizacji"
 
 msgid "How to Shutdown?"
-msgstr "어떻게 종료할까요?"
+msgstr "Wybierz opcjê zamkniêcia"
 
 msgid "Initializing Network"
-msgstr "네트워크 초기화"
+msgstr "Inicjalizacja sieci"
 
 msgid "Insert Disk"
-msgstr "디스크를 넣어주세요"
+msgstr "W³ó¿ p³ytê"
 
 msgid "Insert an SD-Card to download images."
-msgstr "다운받은 이미지를 저장할 SD카드를 넣으세요."
+msgstr "W³ó¿ kartê SD, aby pobraæ obrazki"
 
 msgid "Insert an SD-Card to save."
-msgstr "저장할 SD카드를 넣으세요."
+msgstr "W³ó¿ kartê SD, aby zapisaæ"
 
 msgid "Insert an SD-Card to use this option."
-msgstr ""
+msgstr "W³ó¿ kartê SD, aby u¿y tej opcji"
 
 msgid "Install Error!"
-msgstr "설치 에러!"
+msgstr "B³¹d instalacji!"
 
 msgid "Install a game"
-msgstr "게임을 설치할까요"
+msgstr "Zainstaluj grê"
 
 msgid "Installing content... Ok!"
-msgstr ""
+msgstr "Instalowanie zawartoœci... Ok!"
 
 msgid "Installing game:"
-msgstr "게임 설치 중:"
+msgstr "Instalowanie gry:"
 
 msgid "Installing ticket... Ok!"
 msgstr ""
 
 msgid "Installing title... Ok!"
-msgstr ""
+msgstr "Instalowanie tytu³u... Ok!"
 
 msgid "Installing wad"
-msgstr ""
+msgstr "Instalowanie wad"
 
 #, c-format
 msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team. %s - %i"
 msgstr ""
 
 msgid "Italian"
-msgstr "이태리어"
+msgstr "W³oski"
 
 msgid "Jan"
-msgstr ""
+msgstr "Sty"
 
 msgid "Japanese"
-msgstr "일본어"
+msgstr "Japoñski"
 
 msgid "July"
-msgstr ""
+msgstr "Lipiec"
 
 msgid "June"
-msgstr ""
+msgstr "Czerwiec"
 
 msgid "Keyboard"
-msgstr ""
+msgstr "Klawiatura"
 
 msgid "Korean"
-msgstr "한국어"
+msgstr "Koreañski"
 
 msgid "Language change:"
-msgstr ""
+msgstr "Zmieñ jêzyk:"
 
 msgid "Languagepath changed."
-msgstr ""
+msgstr "Zmieniono œcie¿kê do plików jêzykowych"
 
 msgid "Leaving so you can restart..."
-msgstr ""
+msgstr "Opuszczam, aby zrestartowaæ"
 
 msgid "Left"
-msgstr "왼쪽"
+msgstr "Lewo"
 
 msgid "Like SysMenu"
-msgstr "시스템 메뉴처럼"
+msgstr ""
 
 msgid "Load"
 msgstr ""
 
 msgid "Load this dol as alternate dol?"
-msgstr ""
+msgstr "Za³adowaæ ten plik .DOL jako alternatywny?"
 
 msgid "Loading standard language."
-msgstr ""
+msgstr "£adowanie standardowego jêzyku"
 
 msgid "Loading standard music."
-msgstr ""
+msgstr "£adowanie standardowej muzyki"
 
 msgid "Lock Console"
-msgstr "콘솔 잠금"
+msgstr "Zablokuj konsolê"
 
 msgid "Locked"
-msgstr ""
+msgstr "Zablokowana"
 
 msgid "Mar"
-msgstr ""
+msgstr "Mar"
 
 msgid "May"
-msgstr ""
+msgstr "Maj"
 
 msgid "Missing files"
-msgstr "파일 누락"
+msgstr "Brakuje plików"
 
 msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
-msgstr ""
+msgstr "Prawdopodobnie rozdzielczoœæ nie jest podzielna przez 4"
 
 msgid "Music Volume"
-msgstr "음량"
+msgstr "Poziom g³oœnoœci"
 
 msgid "Neither"
-msgstr "표시 없음"
+msgstr "¯adne"
 
 msgid "Network init error"
-msgstr "네트워크 초기화 에러"
+msgstr "B³¹d inicjalizacji sieci"
 
 msgid "Next"
-msgstr "다음"
+msgstr "Nastêpny"
 
 msgid "No"
-msgstr "아니오"
+msgstr "Nie"
 
 msgid "No .dol or .elf files found."
 msgstr ""
 
 msgid "No Cheatfile found"
-msgstr ""
+msgstr "Nie znaleziono pliku z kodami"
 
 msgid "No Favorites"
-msgstr ""
+msgstr "Brak ulubionych"
 
 msgid "No SD-Card inserted!"
-msgstr "SD카드가 없습니다!"
+msgstr "Nie w³o¿ono karty SD"
 
 msgid "No USB Device"
-msgstr "USB 장치가 없습니다."
+msgstr "Nie pod³¹czono urz¹dzenia USB"
 
 msgid "No USB Device found."
-msgstr "USB 장치가 없습니다."
+msgstr "Nie znaleziono urz¹dzenia USB"
 
 msgid "No WBFS partition found"
-msgstr "WBFS 파티션이 없습니다."
+msgstr "Nie znaleziono partycji WBFS"
 
 msgid "No dol file found on disc."
-msgstr ""
+msgstr "Nie znaleziono pliku .dol na dysku"
 
 msgid "No file missing!"
-msgstr "누락 파일 없음!"
+msgstr ""
 
 msgid "No new updates."
-msgstr ""
+msgstr "U¿ywasz aktualnej wersji"
 
 msgid "No partitions found"
-msgstr "파티션이 없습니다."
+msgstr "Nie znaleziono partycji"
 
 msgid "Normal"
-msgstr "일반"
+msgstr "Normalne"
 
 msgid "Normal Covers"
-msgstr "일반 표지"
+msgstr "Normalne ok³adki"
 
 msgid "Not a Wii Disc"
-msgstr "Wii 디스크가 아닙니다"
+msgstr "To nie p³yta Wii"
 
 msgid "Not enough free memory."
-msgstr ""
+msgstr "Za ma³o pamiêci"
 
 msgid "Not enough free space!"
-msgstr "여유 공간이 부족합니다!"
+msgstr "Za ma³o pamiêci!"
 
 msgid "Not supported format!"
-msgstr ""
+msgstr "Nie obs³ugiwany format!"
 
 msgid "Nov"
-msgstr ""
+msgstr "Lis"
 
 msgid "OFF"
-msgstr "꺼짐"
-
-msgid "OK"
-msgstr "확인"
-
-msgid "ON"
-msgstr "켜짐"
-
-msgid "Oct"
 msgstr ""
 
+msgid "OK"
+msgstr ""
+
+msgid "ON"
+msgstr ""
+
+msgid "Oct"
+msgstr "PaŸ"
+
 msgid "Official Site"
-msgstr "공식 사이트"
+msgstr "Strona oficjalna"
 
 msgid "Ok"
 msgstr ""
 
 msgid "Only for Install"
-msgstr ""
+msgstr "Tylko dla instalcji"
 
 msgid "Parental Control"
-msgstr "자녀보호기능"
+msgstr "Kontrola rodzicielska"
 
 msgid "Parental control"
-msgstr ""
+msgstr "Kontrola rodzicielska"
 
 msgid "Partition"
-msgstr "파티션"
+msgstr "Partycja"
 
 msgid "Password"
-msgstr "비밀번호"
+msgstr "Has³o"
 
 msgid "Password Changed"
-msgstr "비밀번호 변경됨"
+msgstr "Zmiana has³a"
 
 msgid "Password has been changed"
-msgstr "비밀번호가 변경되었습니다"
+msgstr "Has³o zosta³o zmienione"
 
 msgid "Patch Country Strings"
-msgstr ""
+msgstr "Spatchuj ci¹g kraju"
 
 msgid "Path of titles.txt change"
-msgstr ""
+msgstr "Zmiana œcie¿ki pliku titles.txt"
 
 msgid "Path of titles.txt changed."
-msgstr ""
+msgstr "Zmieniono œcie¿kê pliku titles.txt"
 
 msgid "Pick from a list"
-msgstr ""
+msgstr "Wybierz z listy"
 
 msgid "Play Count"
-msgstr ""
+msgstr "Licznik"
 
 msgid "Power off the Wii"
-msgstr "Wii 전원 끄기"
+msgstr "Wy³¹cz Wii"
 
 msgid "Prev"
-msgstr "이전"
+msgstr "Poprzedni"
 
 msgid "Prompts Buttons"
-msgstr "프롬프트/버튼"
+msgstr ""
 
 msgid "Published by"
-msgstr ""
+msgstr "Opublikowany przez"
 
 msgid "Quick Boot"
-msgstr "게임 바로실행"
+msgstr "Szybkie ³adowanie"
 
 msgid "Reading WAD data... Ok!"
-msgstr ""
+msgstr "Czytanie danych WAD... Ok!"
 
 msgid "Released"
-msgstr ""
+msgstr "Wersja"
 
 msgid "Reload SD"
-msgstr "SD카드 읽기"
+msgstr "Prze³aduj SD"
 
 msgid "Rename Game on WBFS"
-msgstr "WBFS에서 게임 이름 변경"
+msgstr "Zmiana nazy gry na WBFS"
 
 msgid "Reset Playcounter"
-msgstr ""
+msgstr "Reset licznika"
 
 msgid "Restart"
-msgstr "다시 시작"
+msgstr "Uruchom ponownie"
 
 msgid "Restarting..."
-msgstr ""
+msgstr "Uruchamiam ponownie..."
 
 msgid "Return"
-msgstr "돌아가기"
+msgstr "Powrót"
 
 msgid "Return to Wii Menu"
-msgstr ""
+msgstr "Powrót do Wii Menu"
 
 msgid "Right"
-msgstr "오른쪽"
+msgstr "Prawo"
 
 msgid "Rumble"
-msgstr "진동"
+msgstr "Rumble (wibracje)"
 
 msgid "SChinese"
-msgstr "중국어(간체)"
+msgstr "Uproszczony Chiñski"
 
 msgid "SD selected"
-msgstr ""
+msgstr "Wybrano SD"
 
 msgid "SFX Volume"
-msgstr ""
+msgstr "G³oœnoœæ SFX"
 
 msgid "Save"
-msgstr "저장"
+msgstr "Zapisz"
 
 msgid "Save Failed"
-msgstr "저장 실패"
+msgstr "Nie uda³o siê zapisaæ"
 
 msgid "Screensaver"
-msgstr ""
+msgstr "Wygaszacz ekranu"
 
 msgid "Sept"
-msgstr ""
+msgstr "Wrz"
 
 msgid "Set as backgroundmusic?"
-msgstr ""
+msgstr "Ustawiæ jako muzykê w tle?"
 
 msgid "Settings"
-msgstr "설정"
+msgstr "Ustawienia"
 
 msgid "Shit"
-msgstr ""
+msgstr "Kur*a"
 
 msgid "Shutdown System"
-msgstr "시스템 종료"
+msgstr "Zakmnij system"
 
 msgid "Shutdown to Idle"
-msgstr "대기 상태로"
+msgstr "Prze³¹cz w stan wstrzymania"
 
 msgid "Sound"
-msgstr ""
+msgstr "DŸwiêk"
 
 msgid "Spanish"
-msgstr "스페인어"
+msgstr "Hiszpañski"
 
 msgid "Special thanks to:"
-msgstr "Special thanks to"
+msgstr "Specjalne podziêkowania dla"
 
 msgid "Standard"
-msgstr ""
+msgstr "Standardowo"
 
 msgid "Success"
-msgstr ""
+msgstr "Sukces"
 
 msgid "Success:"
-msgstr "성공:"
+msgstr "Sukces:"
 
 msgid "Successfully Saved"
-msgstr "저장 성공"
+msgstr "Zapisano"
 
 msgid "Successfully Updated"
-msgstr ""
+msgstr "Zaktualizowano"
 
 msgid "Successfully deleted:"
-msgstr "삭제 성공:"
+msgstr "Usuniêto"
 
 msgid "Successfully installed:"
-msgstr "설치 성공:"
+msgstr "Zainstalowano"
 
 msgid "System Default"
-msgstr "시스템 기본값"
+msgstr "DOmyœlne ustawienia systemu"
 
 msgid "TChinese"
-msgstr "중국어(번체)"
+msgstr "Chiñski"
 
 msgid "TXTCheatcodes Path"
-msgstr ""
+msgstr "Œcie¿ka do kodów"
 
 msgid "TXTCheatcodes Path changed"
-msgstr ""
+msgstr "Zmieniono œcie¿kê do kodów"
 
 #, c-format
 msgid "The wad installation failed with error %ld"
-msgstr ""
+msgstr "Nie uda³o siê zainstalowaæ wad- b³¹d %ld"
 
 msgid "ThemePath"
-msgstr "테마 경로"
+msgstr "Œcie¿ka do skórki"
 
 msgid "Themepath Changed"
-msgstr "테마 경로 변경됨"
+msgstr "Zmieniono œcie¿kê do skórki"
 
 msgid "Themepath change"
-msgstr "테마 경로 변경"
+msgstr "Zmieñ œcie¿kê do skórki"
 
 msgid "Time left:"
-msgstr "남은 시간:"
+msgstr "Czas pozosta³y"
 
 msgid "Titles from XML"
-msgstr ""
+msgstr "Tytu³y z pliku XML"
 
 msgid "Tooltips"
-msgstr "Tooltips"
+msgstr "Dymki z podpowiedziami"
 
 msgid "USB Device not found"
-msgstr "USB 장치가 없습니다."
+msgstr "Nie znaleziono urz¹dzenia USB"
 
 msgid "USB Loader GX is protected"
-msgstr "USB 로더 GX 잠김 상태"
+msgstr "USB Loader GX jest chroniony"
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
-msgstr ""
+msgstr "Nie uda³o siê otworzyæ w³aœnie pobranego pliku wad (%s)"
 
 msgid "Uninstall Game"
 msgstr ""
@@ -820,187 +820,139 @@ msgid "Uninstall Menu"
 msgstr ""
 
 msgid "Unlock console to use this option."
-msgstr ""
+msgstr "Odblokuj konsolê aby u¿ywaæ tej opckio"
 
 msgid "Unlocked"
-msgstr ""
+msgstr "Odblokowano"
 
 msgid "Update"
-msgstr ""
+msgstr "Aktualizacja"
 
 msgid "Update All"
-msgstr ""
+msgstr "Aktualizuj wszystko"
 
 msgid "Update DOL"
-msgstr ""
+msgstr "Aktualizuj DOL"
 
 msgid "Update failed"
-msgstr ""
+msgstr "B³¹d aktualizacji"
 
 msgid "Update to"
-msgstr ""
+msgstr "Aktualizacja"
 
 msgid "Updatepath"
-msgstr ""
+msgstr "Œcie¿ka aktualizacji"
 
 msgid "Updatepath changed."
-msgstr ""
+msgstr "Zmieniono œcie¿kê aktualizacji"
 
 msgid "Updating"
-msgstr ""
+msgstr "Trwa aktualizacja"
 
 msgid "VIDTV Patch"
-msgstr "VIDTV 패치"
-
-msgid "Video Mode"
-msgstr "비디오 모드"
-
-msgid "Waiting for USB Device"
-msgstr "USB 장치를 기다리는 중"
-
-msgid "Waiting..."
-msgstr "기다리는 중..."
-
-msgid "WiFi Features"
 msgstr ""
 
+msgid "Video Mode"
+msgstr "Tryb video"
+
+msgid "Waiting for USB Device"
+msgstr "Oczekiwanie na urz¹dzenie USB"
+
+msgid "Waiting..."
+msgstr "Czekaj..."
+
+msgid "WiFi Features"
+msgstr "Opcje WiFi"
+
 msgid "Widescreen Fix"
-msgstr "와이드 스크린에 맞춤"
+msgstr "Poprawka ekranu panoramicznego"
 
 msgid "Wii Menu"
-msgstr "Wii 메뉴로"
+msgstr ""
 
 msgid "Wiilight"
 msgstr ""
 
 msgid "Wrong Password"
-msgstr "잘못된 비밀번호"
+msgstr "B³êdne has³o"
 
 msgid "Yes"
-msgstr "예"
+msgstr "Tak"
 
 msgid "You are about to delete "
-msgstr ""
+msgstr "Zamierzasz usun¹æ"
 
 msgid "You are choosing to display favorites and you do not have any selected."
-msgstr ""
+msgstr "Wybra³eœ wyœwietlenie ulubionych, ale ¿adnych nie zaznaczy³eœ"
 
 msgid "You have attempted to load a bad image"
-msgstr ""
+msgstr "Usi³ujesz za³adowaæ z³y obraz"
 
 msgid "You need to format a partition"
-msgstr "파티션을 포맷해야 합니다"
+msgstr "Musisz sformatowaæ partycjê"
 
 msgid "available"
-msgstr ""
+msgstr "dostêpne"
 
 msgid "contains over 255 lines of code.  It will produce unexpected results."
-msgstr ""
+msgstr "zawiera ponad 255 linii kodu. Mo¿e dzia³aæ nieoczekiwanie"
 
 msgid "does not exist!"
-msgstr ""
+msgstr "nie istnieje!"
 
 msgid "does not exist!  Loading game without cheats."
-msgstr ""
+msgstr "nie istnieje! £adowanie gry bez kodów."
 
 msgid "does not exist!  You Messed something up, Idiot."
-msgstr ""
+msgstr "nie istnieje! Coœ zepsu³eœ, idioto"
 
 msgid "file left"
-msgstr ""
+msgstr "pozosta³o"
 
 msgid "files left"
-msgstr ""
+msgstr "pozosta³o"
 
 msgid "files not found on the server!"
-msgstr "파일이 서버에 없습니다!"
+msgstr "Pliki nie znalezione na serwerze!"
 
 msgid "for"
-msgstr "for"
+msgstr "dla"
 
 msgid "for WiiTDB and hosting covers / disc images"
-msgstr ""
+msgstr "dla WiiTDB i hostowania ok³adek/obrazków"
 
 msgid "for diverse patches"
-msgstr ""
+msgstr "za ró¿ne patche"
 
 msgid "for his awesome tool"
-msgstr ""
+msgstr "za jego zajebiste narzêdzie"
 
 msgid "for hosting the update files"
-msgstr ""
+msgstr "za hostowanie plików aktualizacji"
 
 msgid "for the USB Loader source"
-msgstr "and releasing the source code"
+msgstr "za Ÿród³o USB Loadera"
 
 msgid "formatted!"
-msgstr "포맷 완료!"
+msgstr "Sformatowano"
 
 msgid "free"
-msgstr "남음"
+msgstr "Wolne"
 
 msgid "not set"
-msgstr "설정되지 않음"
+msgstr "Nie ustawiono"
 
 msgid "of"
-msgstr "중"
+msgstr "z"
 
 msgid "seconds left"
-msgstr "초 남았습니다"
+msgstr "sekund pozosta³o"
 
 msgid "there was an error"
-msgstr ""
+msgstr "b³¹d"
 
 msgid "titles.txt Path"
-msgstr ""
+msgstr "Œcie¿ka pliku titles.txt"
 
 #~ msgid "Uninstall"
-#~ msgstr "제거"
-
-#~ msgid "file(s) left"
-#~ msgstr "파일 남음"
-
-#~ msgid "Coverpath change"
-#~ msgstr "표지 경로 변경"
-
-#~ msgid "BOOT ERROR"
-#~ msgstr "부팅 에러"
-
-#~ msgid "Insert a Wii Disc!"
-#~ msgstr "Wii 디스크를 넣으세요!"
-
-#~ msgid "Failed to boot:"
-#~ msgstr "부팅 실패:"
-
-#~ msgid "Failed to mount front SD-card"
-#~ msgstr "SD카드 인식 실패"
-
-#~ msgid "Failed to set USB:"
-#~ msgstr "USB 세팅 실패:"
-
-#~ msgid "Go Back"
-#~ msgstr "뒤로 가기"
-
-#~ msgid "Language change"
-#~ msgstr "언어 변경"
-
-#~ msgid "Loading in cIOS249"
-#~ msgstr "cIOS249로 로딩"
-
-#~ msgid "No HDD found!"
-#~ msgstr "하드 디스크가 없습니다!"
-
-#~ msgid "Password change"
-#~ msgstr "비밀번호 변경"
-
-#~ msgid "Select the Partition"
-#~ msgstr "포맷하려는"
-
-#~ msgid "you want to format"
-#~ msgstr "파티션을 선택하세요"
-
-#~ msgid "Try"
-#~ msgstr "시도"
-
-#~ msgid "You don't have cIOS222"
-#~ msgstr "cIOS222가 없습니다."
+#~ msgstr "Odinstaluj"

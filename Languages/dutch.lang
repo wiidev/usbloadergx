@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-21 02:52-0400\n"
+"POT-Creation-Date: 2009-07-21 20:29+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -169,7 +169,7 @@ msgid "Could not create GCT file"
 msgstr "No se pudo crear archivo GCTJuiste wachtwoord"
 
 msgid "Could not find a WBFS partition."
-msgstr ""
+msgstr "Kan geen WBFS partitie vinden."
 
 msgid "Could not initialize DIP module!"
 msgstr "Kan de DIP module niet initialiseren!"
@@ -199,7 +199,7 @@ msgid "Cover Path"
 msgstr "Locatie hoesjes"
 
 msgid "Coverpath Change"
-msgstr ""
+msgstr "Hoesjesmap wijzigen"
 
 msgid "Coverpath Changed"
 msgstr "Locatie hoesjes gewijzigd"
@@ -406,16 +406,16 @@ msgid "HOME Menu"
 msgstr "HOME Menu"
 
 msgid "Homebrew Apps Path"
-msgstr ""
+msgstr "Locatie Homebrew apps"
 
 msgid "Homebrew Appspath change"
-msgstr ""
+msgstr "Locatie HB apps wijzigen"
 
 msgid "Homebrew Appspath changed"
-msgstr ""
+msgstr "Locatie HB apps gewijzigd"
 
 msgid "Homebrew Launcher"
-msgstr ""
+msgstr "Homebrew Launcher"
 
 msgid "Hour"
 msgstr "Uur"
@@ -464,7 +464,7 @@ msgstr "Wad installeren..."
 
 #, c-format
 msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team. %s - %i"
-msgstr ""
+msgstr "Je hebt informatie gevonden die ons kan helpen. Geeft u alstublieft deze info door aan ons ontwikkelingsteam. %s - %i"
 
 msgid "Italian"
 msgstr "Italiaans"
@@ -503,7 +503,7 @@ msgid "Like SysMenu"
 msgstr "Als systeemmenu"
 
 msgid "Load"
-msgstr ""
+msgstr "Laad"
 
 msgid "Load this dol as alternate dol?"
 msgstr "Deze dol als alt dol gebruiken?"
@@ -548,7 +548,7 @@ msgid "No"
 msgstr "Nee"
 
 msgid "No .dol or .elf files found."
-msgstr ""
+msgstr "Geen .dol of .elf bestanden gevonden"
 
 msgid "No Cheatfile found"
 msgstr "Geen Cheatbestand gevonden"
@@ -779,7 +779,7 @@ msgid "TXTCheatcodes Path"
 msgstr "Locatie TXT Cheats"
 
 msgid "TXTCheatcodes Path changed"
-msgstr ""
+msgstr "Locatie TXTcodes gewijzigd"
 
 #, c-format
 msgid "The wad installation failed with error %ld"
@@ -949,7 +949,7 @@ msgid "seconds left"
 msgstr "seconden over:"
 
 msgid "there was an error"
-msgstr ""
+msgstr "er is een fout opgetreden"
 
 msgid "titles.txt Path"
 msgstr "Locatie titles.txt"

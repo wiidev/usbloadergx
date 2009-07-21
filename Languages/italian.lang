@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# italian.lang - v21 - r620
+# italian.lang - v24 - r632
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-21 02:52-0400\n"
-"PO-Revision-Date: 2009-07-18 23:50+0200\n"
+"POT-Creation-Date: 2009-07-21 20:29+0200\n"
+"PO-Revision-Date: 2009-07-20 20:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe & Cambo\n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,7 @@ msgid "1 (Child 7+)"
 msgstr "1 (Bambini 7+)"
 
 msgid "2 (Teen 12+)"
-msgstr "2 (Ragazzi 12+)"
+msgstr "2 (Ragazzini 12+)"
 
 msgid "3 (Mature 16+)"
 msgstr "3 (Ragazzi 16+)"
@@ -199,7 +199,7 @@ msgid "Cover Path"
 msgstr "Percorso Copertine"
 
 msgid "Coverpath Change"
-msgstr ""
+msgstr "Modifica Percorso Copertine"
 
 msgid "Coverpath Changed"
 msgstr "Percorso Copertine Modificato"
@@ -268,16 +268,16 @@ msgid "Display"
 msgstr "Display"
 
 msgid "Do you really want to delete:"
-msgstr "Vuoi veramente Eliminare:"
+msgstr "Vuoi veramente eliminare:"
 
 msgid "Do you want to change language?"
 msgstr "Vuoi cambiare lingua?"
 
 msgid "Do you want to format:"
-msgstr "Vuoi Formattare:"
+msgstr "Vuoi formattare:"
 
 msgid "Do you want to retry for 30 secs?"
-msgstr "Vuoi Riprovare per 30 sec?"
+msgstr "Vuoi riprovare per 30 sec?"
 
 msgid "Do you want to use the alt dol that is known to be correct?"
 msgstr "Vuoi utilizzare il dol alternativo funzionante?"
@@ -406,22 +406,22 @@ msgid "HOME Menu"
 msgstr "Menu HOME"
 
 msgid "Homebrew Apps Path"
-msgstr ""
+msgstr "Percorso Applic. Homebrew"
 
 msgid "Homebrew Appspath change"
-msgstr ""
+msgstr "Modifica percorso app. Homebrew"
 
 msgid "Homebrew Appspath changed"
-msgstr ""
+msgstr "Percorso app. Homebrew modificato"
 
 msgid "Homebrew Launcher"
-msgstr ""
+msgstr "Applicazioni Homebrew"
 
 msgid "Hour"
 msgstr "ore"
 
 msgid "How do you want to update?"
-msgstr "Vuoi Aggiornare ?"
+msgstr "Come Vuoi Aggiornare ?"
 
 msgid "How to Shutdown?"
 msgstr "Spegnimento Wii?"
@@ -464,7 +464,7 @@ msgstr "Sto installando il WAD"
 
 #, c-format
 msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team. %s - %i"
-msgstr ""
+msgstr "Hai informazioni che potrebbero esserci utili. Per favore, comunicale al team di sviluppo. %s - %i"
 
 msgid "Italian"
 msgstr "Italiano"
@@ -503,7 +503,7 @@ msgid "Like SysMenu"
 msgstr "Come SysMenu"
 
 msgid "Load"
-msgstr ""
+msgstr "Carica"
 
 msgid "Load this dol as alternate dol?"
 msgstr "Vuoi caricare questo dol come dol alternativo?"
@@ -530,7 +530,7 @@ msgid "Missing files"
 msgstr "File Mancante/i"
 
 msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
-msgstr ""
+msgstr "Molto probabilmente le dimensioni non sono divisibili per 4."
 
 msgid "Music Volume"
 msgstr "Volume"
@@ -548,7 +548,7 @@ msgid "No"
 msgstr "No"
 
 msgid "No .dol or .elf files found."
-msgstr ""
+msgstr "Non sono stati trovati file .dol o .elf"
 
 msgid "No Cheatfile found"
 msgstr "Nessun file trucchi trovato"
@@ -895,16 +895,16 @@ msgid "available"
 msgstr "disponibile"
 
 msgid "contains over 255 lines of code.  It will produce unexpected results."
-msgstr ""
+msgstr "contiene più di 255 linee di codice. Produrrà effetti inattesi."
 
 msgid "does not exist!"
 msgstr "non esiste!"
 
 msgid "does not exist!  Loading game without cheats."
-msgstr ""
+msgstr "non esiste! Caricamento gioco senza trucchi."
 
 msgid "does not exist!  You Messed something up, Idiot."
-msgstr ""
+msgstr "non esiste! Hai omesso qualcosa, Idiota."
 
 msgid "file left"
 msgstr "file mancante"
@@ -956,18 +956,6 @@ msgstr "Percorso titles.txt"
 
 #~ msgid "Uninstall"
 #~ msgstr "Disinstalla"
-
-#~ msgid "Most likely it has dimensions that are not evenly divisible by 4. Way to go dipshit."
-#~ msgstr "Molto probabilmente le dimensioni non sono divisibili per 4!"
-
-#~ msgid "contains over 255 lines of code. It will produce unexpected results."
-#~ msgstr "contiene più di 255 linee di codice. Produrrà effetti inattesi."
-
-#~ msgid "does not exist! Loading game without cheats."
-#~ msgstr "non esiste! Caricamento gioco senza trucchi."
-
-#~ msgid "does not exist! You Messed something up, Idiot."
-#~ msgstr "non esiste! Hai omesso qualcosa, Idiota."
 
 #~ msgid "file(s) left"
 #~ msgstr "file mancante/i"
