@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-20 03:09-0400\n"
+"POT-Creation-Date: 2009-07-21 02:52-0400\n"
 "PO-Revision-Date: 2009-07-18 23:50+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe & Cambo\n"
@@ -233,6 +233,15 @@ msgstr "Impostazioni Predefinite"
 
 msgid "Delete"
 msgstr "Cancella"
+
+msgid "Delete Boxart"
+msgstr ""
+
+msgid "Delete CheatTxt"
+msgstr ""
+
+msgid "Delete Discart"
+msgstr ""
 
 msgid "Developed by"
 msgstr "Sviluppato da"
@@ -804,8 +813,11 @@ msgstr "USB Loader GX è Protetto"
 msgid "Unable to open the wad that was just downloaded (%s)."
 msgstr "Non riesco ad aprire il wad da poco scaricato (%s)."
 
-msgid "Uninstall"
-msgstr "Disinstalla"
+msgid "Uninstall Game"
+msgstr ""
+
+msgid "Uninstall Menu"
+msgstr ""
 
 msgid "Unlock console to use this option."
 msgstr "Sblocca la Console per usare questa opzione."
@@ -941,6 +953,9 @@ msgstr "c'è stato un errore"
 
 msgid "titles.txt Path"
 msgstr "Percorso titles.txt"
+
+#~ msgid "Uninstall"
+#~ msgstr "Disinstalla"
 
 #~ msgid "Most likely it has dimensions that are not evenly divisible by 4. Way to go dipshit."
 #~ msgstr "Molto probabilmente le dimensioni non sono divisibili per 4!"

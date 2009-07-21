@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-20 03:09-0400\n"
+"POT-Creation-Date: 2009-07-21 02:52-0400\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: Kin8\n"
 "Language-Team: Badablek, Amour, ikya, OuahOuah & Kin8\n"
@@ -233,6 +233,15 @@ msgstr "Reset Paramètres"
 
 msgid "Delete"
 msgstr "Supprimer"
+
+msgid "Delete Boxart"
+msgstr ""
+
+msgid "Delete CheatTxt"
+msgstr ""
+
+msgid "Delete Discart"
+msgstr ""
 
 msgid "Developed by"
 msgstr "Développé par"
@@ -804,8 +813,11 @@ msgstr "USB Loader GX est verrouillé"
 msgid "Unable to open the wad that was just downloaded (%s)."
 msgstr "Ouverture du WAD impossible (%s)."
 
-msgid "Uninstall"
-msgstr "Désinstaller"
+msgid "Uninstall Game"
+msgstr ""
+
+msgid "Uninstall Menu"
+msgstr ""
 
 msgid "Unlock console to use this option."
 msgstr "Cette option requiert le déverrouillage de l'interface."
@@ -941,6 +953,9 @@ msgstr "une erreur s'est produite"
 
 msgid "titles.txt Path"
 msgstr "Localisation titles.txt"
+
+#~ msgid "Uninstall"
+#~ msgstr "Désinstaller"
 
 #~ msgid "file(s) left"
 #~ msgstr "fichier(s) restant(s)"

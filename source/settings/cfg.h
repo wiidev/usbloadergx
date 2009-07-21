@@ -72,6 +72,8 @@ struct THEME
 	short showID;
 //	short maxcharacters;
 	short batteryUnused;
+	short homebrew_x;
+	short homebrew_y;
 	short id_x;
 	short id_y;
 	short region_x;

@@ -1642,6 +1642,8 @@ static int MenuCheck()
 	partitionEntry partitions[MAX_PARTITIONS];
 
 		VIDEO_WaitVSync ();
+		OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true);
+	
 
         wbfsinit = WBFS_Init(WBFS_DEVICE_USB);
         if (wbfsinit < 0)

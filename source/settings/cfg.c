@@ -248,6 +248,8 @@ void CFG_Default(int widescreen) // -1 = non forced Mode
 		THEME.settingsTxt_b = 0;
 		THEME.cover_x = 26;
 		THEME.cover_y = 58;
+		THEME.homebrew_x = 425;
+		THEME.homebrew_y = 400;
 		THEME.showID = 1;
 	//	THEME.maxcharacters = 36;
 		THEME.id_x = 68;
@@ -591,6 +593,14 @@ void theme_set(char *name, char *val)
 		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
 			THEME.region_x = x - (x % 4);
 			THEME.region_y = y;
+		}
+	}
+
+	else if (strcmp(cfg_name, "homebrew_coords") == 0) {
+		short x,y;
+		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
+			THEME.homebrew_x = x - (x % 4);
+			THEME.homebrew_y = y;
 		}
 	}
 
@@ -1724,8 +1734,8 @@ void CFG_Load(void)
 	Global_Default(); //global default depends on theme information
 	CFG_LoadGlobal();
 
-	//if (Settings.titlesOverride==1) OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, true, false); // open file, load titles, do not keep in memory
-OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true);
+	//moved this to the HDD wait screen to avoid the garbled green screen while it is loading *maybe*
+	//OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true);
 	// loaded after database to override database titles with custom titles
 	snprintf(pathname, sizeof(pathname), "%stitles.txt", Settings.titlestxt_path);
 	cfg_parsefile(pathname, &title_set);

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-20 03:09-0400\n"
+"POT-Creation-Date: 2009-07-21 02:52-0400\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -232,6 +232,15 @@ msgid "Default Settings"
 msgstr "設定(ﾃﾞﾌｫﾙﾄ)"
 
 msgid "Delete"
+msgstr ""
+
+msgid "Delete Boxart"
+msgstr ""
+
+msgid "Delete CheatTxt"
+msgstr ""
+
+msgid "Delete Discart"
 msgstr ""
 
 msgid "Developed by"
@@ -804,8 +813,11 @@ msgstr "USB Loaderは保護されています"
 msgid "Unable to open the wad that was just downloaded (%s)."
 msgstr ""
 
-msgid "Uninstall"
-msgstr "ｱﾝｲﾝｽﾄｰﾙ"
+msgid "Uninstall Game"
+msgstr ""
+
+msgid "Uninstall Menu"
+msgstr ""
 
 msgid "Unlock console to use this option."
 msgstr "このｵﾌﾟｼｮﾝを有効にするのにﾛｯｸを解除します"
@@ -941,6 +953,9 @@ msgstr ""
 
 msgid "titles.txt Path"
 msgstr "Titles.txt Path"
+
+#~ msgid "Uninstall"
+#~ msgstr "ｱﾝｲﾝｽﾄｰﾙ"
 
 #~ msgid "file(s) left"
 #~ msgstr "file(s) left(残りのﾌｧｲﾙ数)"

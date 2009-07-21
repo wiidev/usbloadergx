@@ -13,6 +13,7 @@
 #include "fatmounter.h"
 #include "menu.h"
 #include "filelist.h"
+#include "listfiles.h"
 #include "sys.h"
 #define MAXOPTIONS 12
 
@@ -1754,6 +1755,7 @@ int GameSettings(struct discHdr * header)
 	bool exit = false;
 	int ret;
 	int retVal = 0;
+	int pagetodisplay=1;
 
 	char gameName[31];
 
@@ -1765,21 +1767,6 @@ int GameSettings(struct discHdr * header)
 		gameName[27] = '\0';
 		strncat(gameName, "...", 3);
 	}
-
-	customOptionList options3(13);
-	options3.SetName(0,"%s", tr("Video Mode"));
-	options3.SetName(1,"%s", tr("VIDTV Patch"));
-	options3.SetName(2,"%s", tr("Game Language"));
-	options3.SetName(3, "Ocarina");
-	options3.SetName(4, "IOS");
-	options3.SetName(5,"%s", tr("Parental control"));
-	options3.SetName(6,"%s", tr("Error 002 fix"));
-	options3.SetName(7,"%s", tr("Patch Country Strings"));
-	options3.SetName(8,"%s", tr("Alternate DOL"));
-	options3.SetName(9,"%s", tr("DOL from disc"));
-	options3.SetName(10,"%s", tr("Block IOS Reload"));
-	options3.SetName(11,"%s", tr("Reset Playcounter"));
-	options3.SetName(12,"%s", tr("Default Gamesettings"));
 
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
 	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
@@ -1832,7 +1819,7 @@ int GameSettings(struct discHdr * header)
 	cancelBtn.SetLabel(&cancelBtnTxt);
 	cancelBtn.SetTrigger(&trigB);
 
-	GuiText deleteBtnTxt(tr("Uninstall"), 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	GuiText deleteBtnTxt(tr("Uninstall Menu"), 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	deleteBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
 	GuiImage deleteBtnImg(&btnOutline);
 	if (Settings.wsprompt == yes){
@@ -1849,7 +1836,8 @@ int GameSettings(struct discHdr * header)
 	GCTBtn.SetSize(80,80);
 	GCTBtnImg.SetScale(0.5);
 
-	GuiCustomOptionBrowser optionBrowser3(396, 280, &options3, CFG.theme_path, "bg_options_gamesettings.png", bg_options_settings_png, 1, 200);
+	customOptionList options3(11);
+	GuiCustomOptionBrowser optionBrowser3(396, 280, &options3, CFG.theme_path, "bg_options_gamesettings.png", bg_options_settings_png, 1, 180);
 	optionBrowser3.SetPosition(0, 90);
 	optionBrowser3.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 
@@ -1909,6 +1897,19 @@ int GameSettings(struct discHdr * header)
 	while(!exit)
 	{
 		VIDEO_WaitVSync();
+		
+		if (pagetodisplay==1){
+			options3.SetName(0,"%s", tr("Video Mode"));
+			options3.SetName(1,"%s", tr("VIDTV Patch"));
+			options3.SetName(2,"%s", tr("Game Language"));
+			options3.SetName(3, "Ocarina");
+			options3.SetName(4, "IOS");
+			options3.SetName(5,"%s", tr("Parental control"));
+			options3.SetName(6,"%s", tr("Error 002 fix"));
+			options3.SetName(7,"%s", tr("Patch Country Strings"));
+			options3.SetName(8,"%s", tr("Alternate DOL"));
+			options3.SetName(9,"%s", tr("DOL from disc"));
+			options3.SetName(10,"%s", tr("Block IOS Reload"));
 
 		if (videoChoice == discdefault) options3.SetValue(0,"%s",tr("Disc Default"));
 		else if (videoChoice == systemdefault) options3.SetValue(0,"%s",tr("System Default"));
@@ -1963,10 +1964,7 @@ int GameSettings(struct discHdr * header)
         if (reloadblock == on) options3.SetValue(10,tr("ON"));
 		else if (reloadblock == off) options3.SetValue(10,tr("OFF"));
 
-        options3.SetValue(11, NULL);
-        options3.SetValue(12, NULL);
-
-		if(shutdown == 1)
+        if(shutdown == 1)
 			Sys_Shutdown();
 		if(reset == 1)
 			Sys_Reboot();
@@ -2041,27 +2039,65 @@ int GameSettings(struct discHdr * header)
             case 10:
                 reloadblock = (reloadblock+1) % 2;
                 break;
-            case 11:
-                int result;
-				result = WindowPrompt(tr("Are you sure?"),0,tr("Yes"),tr("Cancel"));
-				if(result == 1) {
-					if(isInserted(bootDevice)) {
-					struct Game_NUM* game_num = CFG_get_game_num(header->id);
-					if (game_num) {
-						favoritevar = game_num->favorite;
-						playcount = game_num->count;
-					} else {
-						favoritevar = 0;
-						playcount = 0;
-					}
-					playcount = 0;
-					CFG_save_game_num(header->id);
-                }
+            
+		}
+	}
+	
+	//the uninstall menu
+	if (pagetodisplay==2){
+			for (int j=0;j<13;j++)
+			{
+				options3.SetName(j,NULL);
+				options3.SetValue(j,NULL);
+			}
+			options3.SetName(0,"%s", tr("Uninstall Game"));
+			options3.SetName(1,"%s", tr("Default Gamesettings"));
+			options3.SetName(2,"%s", tr("Reset Playcounter"));
+			options3.SetName(3,"%s", tr("Delete Boxart"));
+			options3.SetName(4,"%s", tr("Delete Discart"));
+			options3.SetName(5,"%s", tr("Delete CheatTxt"));
+
+
+		
+
+		if(shutdown == 1)
+			Sys_Shutdown();
+		if(reset == 1)
+			Sys_Reboot();
+
+		ret = optionBrowser3.GetClickedOption();
+		
+		int choice1;
+		char tmp[200];
+		switch (ret)
+		{
+			case 0:
+				choice1 = WindowPrompt(tr("Do you really want to delete:"),gameName,tr("Yes"),tr("Cancel"));
+				if (choice1 == 1)
+				{
+				CFG_forget_game_opt(header->id);
+				CFG_forget_game_num(header->id);
+				ret = WBFS_RemoveGame(header->id);
+				if (ret < 0)
+				{
+					WindowPrompt(
+					tr("Can't delete:"),
+					gameName,
+					tr("OK"));
 				}
-                break;
-            case 12:
-                int choice = WindowPrompt(tr("Are you sure?"),0,tr("Yes"),tr("Cancel"));
-                if(choice == 1) {
+				else {
+					WindowPrompt(tr("Successfully deleted:"),gameName,tr("OK"));
+					retVal = 1;
+				}
+				}
+				else if (choice1 == 0)
+				{
+					optionBrowser3.SetFocus(1);
+				}
+				break;
+			case 1:
+				choice1 = WindowPrompt(tr("Are you sure?"),0,tr("Yes"),tr("Cancel"));
+                if(choice1 == 1) {
                     videoChoice = Settings.video;
                     viChoice = Settings.vpatch;
                     languageChoice = Settings.language;
@@ -2086,9 +2122,63 @@ int GameSettings(struct discHdr * header)
 						OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, true, false); // open file, reload titles, do not keep in memory
 						// titles are refreshed in menu.cpp as soon as this function returns
                 }
-                break;
+				break;
+            case 2:
+				int result;
+				result = WindowPrompt(tr("Are you sure?"),0,tr("Yes"),tr("Cancel"));
+				if(result == 1) {
+					if(isInserted(bootDevice)) {
+					struct Game_NUM* game_num = CFG_get_game_num(header->id);
+					if (game_num) {
+						favoritevar = game_num->favorite;
+						playcount = game_num->count;
+					} else {
+						favoritevar = 0;
+						playcount = 0;
+					}
+					playcount = 0;
+					CFG_save_game_num(header->id);
+                }
+				}
+				break;
+            case 3:
+				
+				snprintf(tmp,sizeof(tmp),"%s%c%c%c%c%c%c.png", Settings.covers_path, header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
+			
+				choice1 = WindowPrompt(tr("Delete"),tmp,tr("Yes"),tr("No"));
+				if(choice1==1)
+					{	
+						if(checkfile(tmp))
+						remove(tmp);
+					}
+				break;
+			case 4:
+				
+				snprintf(tmp,sizeof(tmp),"%s%c%c%c%c%c%c.png", Settings.disc_path, header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
+			
+				choice1 = WindowPrompt(tr("Delete"),tmp,tr("Yes"),tr("No"));
+				if(choice1==1)
+					{	
+						if(checkfile(tmp))
+						remove(tmp);
+					}
+				break;
+			case 5:
+				
+				snprintf(tmp,sizeof(tmp),"%s%c%c%c%c%c%c.txt", Settings.TxtCheatcodespath, header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
+			
+				choice1 = WindowPrompt(tr("Delete"),tmp,tr("Yes"),tr("No"));
+				if(choice1==1)
+					{	
+						if(checkfile(tmp))
+						remove(tmp);
+					}
+				break;
+			
 		}
-
+	}
+	
+	
 		if(saveBtn.GetState() == STATE_CLICKED)
 		{
 //			if(isSdInserted()) {
@@ -2124,39 +2214,20 @@ int GameSettings(struct discHdr * header)
 
 		if (deleteBtn.GetState() == STATE_CLICKED)
 		{
-			int choice = WindowPrompt(
-					tr("Do you really want to delete:"),
-					gameName,
-					tr("Yes"),tr("Cancel"));
-
-			if (choice == 1)
-			{
-				CFG_forget_game_opt(header->id);
-				CFG_forget_game_num(header->id);
-				ret = WBFS_RemoveGame(header->id);
-				if (ret < 0)
-				{
-					WindowPrompt(
-					tr("Can't delete:"),
-					gameName,
-					tr("OK"));
-				}
-				else {
-					//__Menu_GetEntries();
-					WindowPrompt(
-					tr("Successfully deleted:"),
-					gameName,
-					tr("OK"));
-					retVal = 1;
-				}
-				break;
-			}
-			else if (choice == 0)
-			{
+		
+				pagetodisplay++;
+				deleteBtnTxt.SetText(tr("Settings"));
+				optionBrowser3.SetScrollbar(0);
+				optionBrowser3.SetOffset(0);
+				if (pagetodisplay>2)
+					{
+					pagetodisplay=1;
+					deleteBtnTxt.SetText(tr("Uninstall Menu"));
+					optionBrowser3.SetScrollbar(1);
+					}
+				
 				deleteBtn.ResetState();
-				optionBrowser3.SetFocus(1);
-			}
-
+				
 		}
 
 		if (GCTBtn.GetState() == STATE_CLICKED) {

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-20 03:09-0400\n"
+"POT-Creation-Date: 2009-07-21 02:52-0400\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -233,6 +233,15 @@ msgstr "Standaardinstellingen"
 
 msgid "Delete"
 msgstr "Verwijderen"
+
+msgid "Delete Boxart"
+msgstr ""
+
+msgid "Delete CheatTxt"
+msgstr ""
+
+msgid "Delete Discart"
+msgstr ""
 
 msgid "Developed by"
 msgstr "Ontwikkeld door"
@@ -804,8 +813,11 @@ msgstr "USB Loader GX is vergrendeld"
 msgid "Unable to open the wad that was just downloaded (%s)."
 msgstr "Wad is gedownload maar kan niet worden geopend (%s)."
 
-msgid "Uninstall"
-msgstr "Verwijderen"
+msgid "Uninstall Game"
+msgstr ""
+
+msgid "Uninstall Menu"
+msgstr ""
 
 msgid "Unlock console to use this option."
 msgstr "Console moet worden vrijgegeven."
@@ -941,6 +953,9 @@ msgstr ""
 
 msgid "titles.txt Path"
 msgstr "Locatie titles.txt"
+
+#~ msgid "Uninstall"
+#~ msgstr "Verwijderen"
 
 #~ msgid "file(s) left"
 #~ msgstr "Bestanden resterend"

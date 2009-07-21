@@ -234,67 +234,61 @@ int DiscBrowse(struct discHdr * header)
 
 int autoSelectDol(const char *id)
 {	
-
-   //this is the list missing the 4th digit.  im treating it like garbage until i know that it works for all regions
-	// i started teh ID6 list because fifa 08 has different numbers for different regions
-	/*if (strcmp(id,"RSX69") == 0) return 337;
-	if (strcmp(id,"RED41") == 0) return 1957;
-	if (strcmp(id,"RM269") == 0) return 492;
-	if (strcmp(id,"RM213") == 0) return 492;//uncomfirmed.  this is what lustar's site has for the jap version
-	if (strcmp(id,"RKM5D") == 0) return 290;
-	if (strcmp(id,"RJ864") == 0) return 8;
-	if (strcmp(id,"RM269") == 0) return 517;
-	if (strcmp(id,"RMLH4") == 0) return 54;
-	if (strcmp(id,"R9O69") == 0) return 1973;
-	if (strcmp(id,"RBO69") == 0) return 675;
-	if (strcmp(id,"RF869") == 0) return 439;
-	if (strcmp(id,"R5T69") == 0) return 1493;
-	if (strcmp(id,"RVU8P") == 0) return 16405;
-	if (strcmp(id,"RZT01") == 0) return 952;*/
+		//still not done\\
 	//////////ID6/////////////////
-	if (strcmp(id,"RF8E69") == 0) return 439;
-	if (strcmp(id,"RF8P69") == 0) return 463;
-	if (strcmp(id,"RF8X69") == 0) return 464;
+	if (strcmp(id,"RF8E69") == 0) return 439;//from isostar
+	if (strcmp(id,"RF8P69") == 0) return 463;//from isostar
+	if (strcmp(id,"RF8X69") == 0) return 464;//from isostar
 	
-	if (strcmp(id,"RZTP01") == 0) return 952;
+	if (strcmp(id,"RZTP01") == 0) return 952;//from isostar
 	
-	if (strcmp(id,"RMZX69") == 0) return 492;
-	if (strcmp(id,"RMZP69") == 0) return 492;
+	if (strcmp(id,"RMZX69") == 0) return 492;//from isostar
+	if (strcmp(id,"RMZP69") == 0) return 492;//from isostar
+	if (strcmp(id,"RMZE69") == 0) return 492;//starstremr
 	
-	if (strcmp(id,"REDP41") == 0) return 1957;
+	if (strcmp(id,"REDP41") == 0) return 1957;//from isostar
+	if (strcmp(id,"REDE41") == 0) return 1957;//starstremr
 	
-	if (strcmp(id,"RSXP69") == 0) return 337;
+	if (strcmp(id,"RSXP69") == 0) return 337;//from isostar
+	if (strcmp(id,"RSXE69") == 0) return 337;//starstremr
 	
-	if (strcmp(id,"RNBX69") == 0) return 964;
+	if (strcmp(id,"RNBX69") == 0) return 964;//from isostar
 	
-	if (strcmp(id,"RNFP69") == 0) return 1079;
+	if (strcmp(id,"RNFP69") == 0) return 1079;//from isostar
 	
-	if (strcmp(id,"RMLP7U") == 0) return 56;
+	if (strcmp(id,"RMLP7U") == 0) return 56;//from isostar
 	
-	if (strcmp(id,"RKMP5D") == 0) return 290;
+	if (strcmp(id,"RKMP5D") == 0) return 290;//from isostar
+	if (strcmp(id,"RKME5D") == 0) return 290;//starstremr
 	
-	if (strcmp(id,"R5TP69") == 0) return 1493;
+	if (strcmp(id,"R5TP69") == 0) return 1493;//from isostar
+	if (strcmp(id,"R5TE69") == 0) return 1493;//starstremr
 	
-	if (strcmp(id,"R9OP69") == 0) return 1991;
-	if (strcmp(id,"R9OE69") == 0) return 1973;
+	if (strcmp(id,"R9OP69") == 0) return 1991;//from isostar
+	if (strcmp(id,"R9OE69") == 0) return 1973;//starstremr
 	
-	if (strcmp(id,"RVUP8P") == 0) return 16426;
-	if (strcmp(id,"RVUE8P") == 0) return 16405;
+	if (strcmp(id,"RVUP8P") == 0) return 16426;//from isostar
+	if (strcmp(id,"RVUE8P") == 0) return 16405;//from isostar
 	
-	if (strcmp(id,"RJ8P64") == 0) return 8;
+	if (strcmp(id,"RJ8P64") == 0) return 8;//from isostar
 	
-	if (strcmp(id,"RHDP8P") == 0) return 149;
+	if (strcmp(id,"RHDP8P") == 0) return 149;//from isostar
+	if (strcmp(id,"RHDE8P") == 0) return 149;//starstremr
 	
-		if (strcmp(id,"RJ8P64") == 0) return 8;
+	if (strcmp(id,"RJ8P64") == 0) return 8;//from isostar
+	if (strcmp(id,"RJ8E64") == 0) return 8;//starstremr
 	
-	if (strcmp(id,"RHDP8P") == 0) return 149;
+	if (strcmp(id,"RHDP8P") == 0) return 149;//from isostar
 	
-	if (strcmp(id,"RMDP69") == 0) return 39;
+	if (strcmp(id,"RMDP69") == 0) return 39;//from isostar
 
-	if (strcmp(id,"RBOP69") == 0) return 657;
+	if (strcmp(id,"RBOP69") == 0) return 657;//from isostar
+	if (strcmp(id,"RBOE69") == 0) return 675;//starstremr
 
-	if (strcmp(id,"RPYP9B") == 0) return 12490;
+	if (strcmp(id,"RPYP9B") == 0) return 12490;//from isostar
 
+
+ 
 /*
 
  Tiger Woods10 R9OP69 1991
@@ -306,7 +300,7 @@ int autoSelectDol(const char *id)
 Grand Slam R5TP69 1493
  Madden NFL08 RNFP69 1079
 
- Atlantis"Indianer Jones" RJ8P64 8
+ rboe69 = boogie ntsc = (675)
 
  Fifa08 RF8P69 463
  Fifa08 RF8X69 464
