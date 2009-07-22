@@ -9,4 +9,5 @@
 #define _GAMEINFO_H_
 
 int showGameInfo(char *ID);
+bool save_XML_URL();
 #endif

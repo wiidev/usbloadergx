@@ -17,6 +17,7 @@
 #include "listfiles.h"
 #include "prompts/PromptWindows.h"
 #include "gameinfo.h"
+#include "usbloader/getentries.h"
 
 
 /*** Extern variables ***/
@@ -26,6 +27,8 @@ extern u8 shutdown;
 extern u8 reset;
 extern struct gameXMLinfo gameinfo;
 extern struct gameXMLinfo gameinfo_reset;
+extern u32 gameCnt;
+extern struct discHdr * gameList;
 
 /*** Extern functions ***/
 extern void ResumeGui();
@@ -147,6 +150,8 @@ int showGameInfo(char *ID)
 		snprintf(imgPath, sizeof(imgPath), "%sgameinfo2a_png.png", CFG.theme_path);
 		GuiImageData dialogBox4(imgPath, gameinfo2a_png);
 
+		GuiTrigger trig1;
+		trig1.SetButtonOnlyTrigger(-1, WPAD_BUTTON_1 | WPAD_CLASSIC_BUTTON_X, 0);
 		GuiTrigger trigA;
 		trigA.SetButtonOnlyTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 		GuiTrigger trigB;
@@ -181,6 +186,12 @@ int showGameInfo(char *ID)
 		GuiButton homeBtn(0,0);
 		homeBtn.SetPosition(0,0);
 		homeBtn.SetTrigger(&trigH);
+
+		// button to save the url for the zip file for poor people without wifi
+		GuiButton urlBtn(0,0);
+		urlBtn.SetPosition(0,0);
+		urlBtn.SetTrigger(&trig1);
+		gameinfoWindow.Append(&urlBtn);
 
 		char linebuf[3000] = "";
 		char linebuf2[100] = "";
@@ -649,7 +660,7 @@ int showGameInfo(char *ID)
 		betaTxt = new GuiText(linebuf, 14, (GXColor){0,0,0, 255});
 		betaTxt->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM); betaTxt->SetPosition(-17,-20);
 		gameinfoWindow.Append(betaTxt);
-		snprintf(linebuf, sizeof(linebuf), "A site will be available in the near nuture to submit changes.");
+		snprintf(linebuf, sizeof(linebuf), "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip");
 		beta1Txt = new GuiText(linebuf, 14, (GXColor){0,0,0, 255});
 		beta1Txt->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM); beta1Txt->SetPosition(-17,-10);
 		gameinfoWindow.Append(beta1Txt);
@@ -766,6 +777,18 @@ int showGameInfo(char *ID)
 					page=1;
 				}
 			}
+			else if (urlBtn.GetState()==STATE_CLICKED)
+			{
+				if (save_XML_URL())
+				{
+				snprintf(linebuf, sizeof(linebuf), "Your URL has been saved in %sWiiTDB_URL.txt.", Settings.update_path);
+				betaTxt->SetText(linebuf);
+				gameinfoWindow.Append(betaTxt);
+				snprintf(linebuf, sizeof(linebuf), "Paste it into your browser to get your WiiTDB.zip.");
+				beta1Txt->SetText(linebuf);
+				gameinfoWindow.Append(beta1Txt);
+				}
+			}
 		}
 		if (page==1){
 			gameinfoWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 100);
@@ -849,5 +872,53 @@ int showGameInfo(char *ID)
     } else {
         return -1;
     }
+}
+
+bool save_XML_URL()// save xml url as as txt file for people without wifi
+{
+	char tmp[200];
+	sprintf(tmp, "%s", Settings.update_path);
+    struct stat st;
+    if(stat(tmp, &st) != 0) {
+        mkdir(tmp, 0777);
+    }
+    FILE *f;
+	sprintf(tmp, "%sWiiTDB_URL.txt", Settings.update_path);
+	f = fopen(tmp, "w");
+	if (!f) {
+		sleep(1);
+		return false;
+	}
+	
+	char XMLurl[2040];
+	char filename[10];
+	// get Wii's language setting
+	char sysLanguage[3];
+	GetLanguageToLangCode(sysLanguage);
+
+	snprintf(XMLurl,sizeof(XMLurl),"http://wiitdb.com/wiitdb.zip?LANG=%s?ID=",sysLanguage);
+	unsigned int i;
+	for (i = 0; i < gameCnt ; i++) {
+		struct discHdr* header = &gameList[i];
+		if (i<500) {
+			snprintf(filename,sizeof(filename),"%c%c%c", header->id[1], header->id[2], header->id[3]);
+			strncat(XMLurl, filename,3 );
+			if ((i!=gameCnt-1)&&(i<500))
+				strncat(XMLurl, ",",1);
+		}
+	}
+	
+	fprintf(f, "# USB Loader Has Saved this file\n");
+	fprintf(f, "# This url was created based on your list of games and language settings\n");
+	fclose(f);
+	/* Closing and reopening because of a write issue we are having right now */
+	f = fopen(tmp, "w");
+	fprintf(f, "# USB Loader Has Saved this file\n");
+	fprintf(f, "# This url was created based on your list of games and language settings.\n");
+	fprintf(f, "# If copy and paste this URL into your web browser and you should get a zip file that will work for you.\n");
+	fprintf(f, "%s\n\n\n ", XMLurl);
+	
+	fclose(f);
+	return true;
 }
 
