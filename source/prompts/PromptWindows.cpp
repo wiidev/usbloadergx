@@ -1950,14 +1950,16 @@ ProgressDownloadWindow(int choice2)
 						sprintf(URLFile,"%sJA/%s",server3d,missingFiles[i]);
 					break;
 				case 'K':
-				case 'T':
-				case 'Q':
+				//case 'T':
+				//case 'Q':
 						sprintf(URLFile,"%sKO/%s",server3d,missingFiles[i]);
 						break;
+				case 'P':
 				case 'D':
 				case 'F':
 				case 'I':
-				case 'P':
+				case 'S':
+				case 'H':
 				case 'X':
 				case 'Y':
 						sprintf(URLFile,"%s%s/%s",server3d,sysLanguage,missingFiles[i]);
@@ -1998,14 +2000,16 @@ ProgressDownloadWindow(int choice2)
 						sprintf(URLFile,"%sJA/%s",serverDisc,missingFiles[i]);
 					break;
 				case 'K':
-				case 'T':
-				case 'Q':
+				//case 'T':
+				//case 'Q':
 						sprintf(URLFile,"%sKO/%s",serverDisc,missingFiles[i]);
 						break;
+				case 'P':
 				case 'D':
 				case 'F':
 				case 'I':
-				case 'P':
+				case 'S':
+				case 'H':
 				case 'X':
 				case 'Y':
 						sprintf(URLFile,"%s%s/%s",serverDisc,sysLanguage,missingFiles[i]);
@@ -2044,14 +2048,16 @@ ProgressDownloadWindow(int choice2)
 						sprintf(URLFile,"%sJA/%s",server2d,missingFiles[i]);
 					break;
 				case 'K':
-				case 'T':
-				case 'Q':
+				//case 'T':
+				//case 'Q':
 						sprintf(URLFile,"%sKO/%s",server2d,missingFiles[i]);
 						break;
+				case 'P':
 				case 'D':
 				case 'F':
 				case 'I':
-				case 'P':
+				case 'S':
+				case 'H':
 				case 'X':
 				case 'Y':
 						sprintf(URLFile,"%s%s/%s",server2d,sysLanguage,missingFiles[i]);
@@ -2952,9 +2958,11 @@ void GetLanguageToLangCode(char *langcode) {
 		case CONF_LANG_DUTCH:
 				sprintf(langcode, "NL");
 				break;
-/*		case CONF_LANG_PORTUGUESE:
+		/*		
+		case CONF_LANG_PORTUGUESE:
 				sprintf(langcode, "PO");
-				break;*/
+				break;
+		*/
 		case CONF_LANG_SIMP_CHINESE:
 				sprintf(langcode, "EN");   // default to EN for chinese
 				break;

@@ -16,7 +16,7 @@ Load game information from XML - Lustar
 /* config */
 static bool xmldebug = false;
 static char xmlcfg_filename[100] = "wiitdb.zip";
-
+static int xmlmaxsize = 1572864;
 
 extern struct SSettings Settings; // for loader GX
 
@@ -150,6 +150,12 @@ bool OpenXMLFile(char *filename)
 		unz_file_info zipfileinfo;
 		unzGetCurrentFileInfo(unzfile, &zipfileinfo, NULL, 0, NULL, 0, NULL, 0);
 		int zipfilebuffersize = zipfileinfo.uncompressed_size;
+		if (zipfilebuffersize >= xmlmaxsize) {
+			unzCloseCurrentFile(unzfile);
+			unzClose(unzfile);
+			return false;
+		}
+		
 		char * zipfilebuffer = malloc(zipfilebuffersize);
 		memset(zipfilebuffer, 0, zipfilebuffersize);
 		if (zipfilebuffer == NULL) {
@@ -576,13 +582,13 @@ bool LoadGameInfoFromXML(char* gameid, char* langtxt)
 		if (gameid[3] == 'J') strlcpy(gameinfo.region,"NTSC-J",sizeof(gameinfo.region));
 		if (gameid[3] == 'K') strlcpy(gameinfo.region,"NTSC-K",sizeof(gameinfo.region));
 		if (gameid[3] == 'P') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
-		if (gameid[3] == 'X') strlcpy(gameinfo.region,"PAL-X",sizeof(gameinfo.region));
+		if (gameid[3] == 'X') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
+		if (gameid[3] == 'Y') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
 		if (gameid[3] == 'D') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
-		if (gameid[3] == 'G') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
 		if (gameid[3] == 'F') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
 		if (gameid[3] == 'S') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
 		if (gameid[3] == 'I') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
-		if (gameid[3] == 'N') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
+		if (gameid[3] == 'H') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
 	}
 
 	// free memory
