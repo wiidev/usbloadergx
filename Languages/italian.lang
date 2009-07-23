@@ -4,13 +4,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-21 20:29+0200\n"
+"POT-Creation-Date: 2009-07-23 01:45+0200\n"
 "PO-Revision-Date: 2009-07-20 20:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe & Cambo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+msgid " could not be downloaded."
+msgstr ""
+
+msgid " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information."
+msgstr ""
+
+msgid " is not on the server."
+msgstr ""
 
 msgid "(both retired)"
 msgstr "(entrambi ritiratisi)"
@@ -21,17 +30,35 @@ msgstr "0 (Tutti)"
 msgid "1 (Child 7+)"
 msgstr "1 (Bambini 7+)"
 
+msgid "1 hour"
+msgstr ""
+
+msgid "10 min"
+msgstr ""
+
 msgid "2 (Teen 12+)"
 msgstr "2 (Ragazzini 12+)"
 
+msgid "20 min"
+msgstr ""
+
 msgid "3 (Mature 16+)"
 msgstr "3 (Ragazzi 16+)"
+
+msgid "3 min"
+msgstr ""
+
+msgid "30 min"
+msgstr ""
 
 msgid "3D Covers"
 msgstr "Copertine 3D"
 
 msgid "4 (Adults Only 18+)"
 msgstr "4 (Maggiorenni 18+)"
+
+msgid "5 min"
+msgstr ""
 
 msgid ">> Finishing installation..."
 msgstr ">> Sto terminando l'installazione..."
@@ -141,6 +168,13 @@ msgstr "Chiudi"
 msgid "Code Download"
 msgstr "Scarico Codice"
 
+#, c-format
+msgid "Coded by: %s"
+msgstr ""
+
+msgid "Coding:"
+msgstr ""
+
 msgid "Confirm"
 msgstr "Confermare"
 
@@ -243,6 +277,9 @@ msgstr ""
 msgid "Delete Discart"
 msgstr ""
 
+msgid "Design:"
+msgstr ""
+
 msgid "Developed by"
 msgstr "Sviluppato da"
 
@@ -290,6 +327,9 @@ msgstr "percorso DOL modificato"
 
 msgid "Dolpath change"
 msgstr "Modifica percorso DOL"
+
+msgid "Don't bother the USB Loader GX Team about errors in this file."
+msgstr ""
 
 msgid "Download Boxart image?"
 msgstr "Scaricamento Immagine Boxart?"
@@ -426,11 +466,17 @@ msgstr "Come Vuoi Aggiornare ?"
 msgid "How to Shutdown?"
 msgstr "Spegnimento Wii?"
 
+msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
+msgstr ""
+
 msgid "Initializing Network"
 msgstr "Inizializzazione rete"
 
 msgid "Insert Disk"
 msgstr "Inserisci Disco"
+
+msgid "Insert a Wii Disc!"
+msgstr "Inserisci un Disco nella Wii!"
 
 msgid "Insert an SD-Card to download images."
 msgstr "Inserisci una scheda SD per scaricare le immagini."
@@ -586,6 +632,9 @@ msgstr "Normale"
 msgid "Normal Covers"
 msgstr "Copert. Normali"
 
+msgid "Not Found"
+msgstr ""
+
 msgid "Not a Wii Disc"
 msgstr "Non è un Disco Wii"
 
@@ -639,6 +688,9 @@ msgstr "Password modificata"
 
 msgid "Password has been changed"
 msgstr "Password è stata modificata"
+
+msgid "Paste it into your browser to get your WiiTDB.zip."
+msgstr ""
 
 msgid "Patch Country Strings"
 msgstr "Patch Regione"
@@ -781,6 +833,9 @@ msgstr "Percorso Trucchi in Txt"
 msgid "TXTCheatcodes Path changed"
 msgstr "Percorso Trucchi in Txt modificato"
 
+msgid "The wad file was installed.  But It could not be deleted from the SD card."
+msgstr ""
+
 #, c-format
 msgid "The wad installation failed with error %ld"
 msgstr "L'installazione del WAD è fallita con errore %ld"
@@ -852,6 +907,10 @@ msgstr "Aggiornamento"
 msgid "VIDTV Patch"
 msgstr "Video Forzato"
 
+#, c-format
+msgid "Version: %s"
+msgstr ""
+
 msgid "Video Mode"
 msgstr "Modalità Video"
 
@@ -890,6 +949,10 @@ msgstr "Hai tentato di caricare un'immagine non valida"
 
 msgid "You need to format a partition"
 msgstr "Devi Formattare una Partizione"
+
+#, c-format
+msgid "Your URL has been saved in %sWiiTDB_URL.txt."
+msgstr ""
 
 msgid "available"
 msgstr "disponibile"
@@ -968,9 +1031,6 @@ msgstr "Percorso titles.txt"
 
 #~ msgid "BOOT ERROR"
 #~ msgstr "Errore Avvio"
-
-#~ msgid "Insert a Wii Disc!"
-#~ msgstr "Inserisci un Disco nella Wii!"
 
 #~ msgid "Failed to boot:"
 #~ msgstr "Erroe Avvio:"

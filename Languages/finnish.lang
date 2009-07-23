@@ -4,13 +4,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-21 19:56+0200\n"
+"POT-Creation-Date: 2009-07-23 01:45+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+msgid " could not be downloaded."
+msgstr ""
+
+msgid " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information."
+msgstr ""
+
+msgid " is not on the server."
+msgstr ""
 
 msgid "(both retired)"
 msgstr ""
@@ -21,16 +30,34 @@ msgstr ""
 msgid "1 (Child 7+)"
 msgstr ""
 
+msgid "1 hour"
+msgstr ""
+
+msgid "10 min"
+msgstr ""
+
 msgid "2 (Teen 12+)"
 msgstr ""
 
+msgid "20 min"
+msgstr ""
+
 msgid "3 (Mature 16+)"
+msgstr ""
+
+msgid "3 min"
+msgstr ""
+
+msgid "30 min"
 msgstr ""
 
 msgid "3D Covers"
 msgstr ""
 
 msgid "4 (Adults Only 18+)"
+msgstr ""
+
+msgid "5 min"
 msgstr ""
 
 msgid ">> Finishing installation..."
@@ -141,6 +168,13 @@ msgstr ""
 msgid "Code Download"
 msgstr ""
 
+#, c-format
+msgid "Coded by: %s"
+msgstr ""
+
+msgid "Coding:"
+msgstr ""
+
 msgid "Confirm"
 msgstr ""
 
@@ -243,6 +277,9 @@ msgstr ""
 msgid "Delete Discart"
 msgstr ""
 
+msgid "Design:"
+msgstr ""
+
 msgid "Developed by"
 msgstr ""
 
@@ -289,6 +326,9 @@ msgid "Dolpath Changed"
 msgstr ""
 
 msgid "Dolpath change"
+msgstr ""
+
+msgid "Don't bother the USB Loader GX Team about errors in this file."
 msgstr ""
 
 msgid "Download Boxart image?"
@@ -426,11 +466,17 @@ msgstr ""
 msgid "How to Shutdown?"
 msgstr "Miten sammutetaan?"
 
+msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
+msgstr ""
+
 msgid "Initializing Network"
 msgstr "Yhdistää verkkoon"
 
 msgid "Insert Disk"
 msgstr "Aseta levy Wiihin"
+
+msgid "Insert a Wii Disc!"
+msgstr "Aseta Wii-levy!"
 
 msgid "Insert an SD-Card to download images."
 msgstr "Aseta SD-kortti ladataksesi kansia."
@@ -586,6 +632,9 @@ msgstr "Normaali"
 msgid "Normal Covers"
 msgstr "Normaalit kannet"
 
+msgid "Not Found"
+msgstr ""
+
 msgid "Not a Wii Disc"
 msgstr "Ei Wii-levy"
 
@@ -639,6 +688,9 @@ msgstr "Salasana muutettu"
 
 msgid "Password has been changed"
 msgstr "Salasana on muutettu"
+
+msgid "Paste it into your browser to get your WiiTDB.zip."
+msgstr ""
 
 msgid "Patch Country Strings"
 msgstr ""
@@ -781,6 +833,9 @@ msgstr ""
 msgid "TXTCheatcodes Path changed"
 msgstr ""
 
+msgid "The wad file was installed.  But It could not be deleted from the SD card."
+msgstr ""
+
 #, c-format
 msgid "The wad installation failed with error %ld"
 msgstr ""
@@ -852,6 +907,10 @@ msgstr ""
 msgid "VIDTV Patch"
 msgstr "VIDTV korjaus"
 
+#, c-format
+msgid "Version: %s"
+msgstr ""
+
 msgid "Video Mode"
 msgstr "Video tila"
 
@@ -890,6 +949,10 @@ msgstr ""
 
 msgid "You need to format a partition"
 msgstr "Sinun täytyy formatoida osio"
+
+#, c-format
+msgid "Your URL has been saved in %sWiiTDB_URL.txt."
+msgstr ""
 
 msgid "available"
 msgstr ""
@@ -965,9 +1028,6 @@ msgstr ""
 
 #~ msgid "BOOT ERROR"
 #~ msgstr "BOOTTAUS VIRHE"
-
-#~ msgid "Insert a Wii Disc!"
-#~ msgstr "Aseta Wii-levy!"
 
 #~ msgid "Failed to boot:"
 #~ msgstr "Käynnistys ei onnistunut:"

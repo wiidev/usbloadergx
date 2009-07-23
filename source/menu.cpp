@@ -1376,7 +1376,7 @@ static int MenuInstall()
 
 		ret = Disc_IsWii();
 		if (ret < 0) {
-			choice = WindowPrompt (tr("Not a Wii Disc"),"Insert a Wii Disc!",tr("OK"),tr("Back"));
+			choice = WindowPrompt (tr("Not a Wii Disc"),tr("Insert a Wii Disc!"),tr("OK"),tr("Back"));
 
 			if (choice == 1) {
 				menu = MENU_INSTALL;

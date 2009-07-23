@@ -656,11 +656,11 @@ int showGameInfo(char *ID)
 		}
 		
 		//don't bother us txt
-		snprintf(linebuf, sizeof(linebuf), "Don't bother the USB Loader GX Team about errors in this file.");
+		snprintf(linebuf, sizeof(linebuf), tr("Don't bother the USB Loader GX Team about errors in this file."));
 		betaTxt = new GuiText(linebuf, 14, (GXColor){0,0,0, 255});
 		betaTxt->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM); betaTxt->SetPosition(-17,-20);
 		gameinfoWindow.Append(betaTxt);
-		snprintf(linebuf, sizeof(linebuf), "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip");
+		snprintf(linebuf, sizeof(linebuf), tr("If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"));
 		beta1Txt = new GuiText(linebuf, 14, (GXColor){0,0,0, 255});
 		beta1Txt->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM); beta1Txt->SetPosition(-17,-10);
 		gameinfoWindow.Append(beta1Txt);
@@ -781,10 +781,10 @@ int showGameInfo(char *ID)
 			{
 				if (save_XML_URL())
 				{
-				snprintf(linebuf, sizeof(linebuf), "Your URL has been saved in %sWiiTDB_URL.txt.", Settings.update_path);
+				snprintf(linebuf, sizeof(linebuf), tr("Your URL has been saved in %sWiiTDB_URL.txt."), Settings.update_path);
 				betaTxt->SetText(linebuf);
 				gameinfoWindow.Append(betaTxt);
-				snprintf(linebuf, sizeof(linebuf), "Paste it into your browser to get your WiiTDB.zip.");
+				snprintf(linebuf, sizeof(linebuf), tr("Paste it into your browser to get your WiiTDB.zip."));
 				beta1Txt->SetText(linebuf);
 				gameinfoWindow.Append(beta1Txt);
 				}

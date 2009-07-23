@@ -4,13 +4,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-21 19:56+0200\n"
+"POT-Creation-Date: 2009-07-23 01:45+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+msgid " could not be downloaded."
+msgstr ""
+
+msgid " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information."
+msgstr ""
+
+msgid " is not on the server."
+msgstr ""
 
 msgid "(both retired)"
 msgstr "退休者"
@@ -21,17 +30,35 @@ msgstr "0 (所有人)"
 msgid "1 (Child 7+)"
 msgstr "1 (孩童 7歲以上)"
 
+msgid "1 hour"
+msgstr ""
+
+msgid "10 min"
+msgstr ""
+
 msgid "2 (Teen 12+)"
 msgstr "(青少年 12歲以上)"
+
+msgid "20 min"
+msgstr ""
 
 msgid "3 (Mature 16+)"
 msgstr "(青年 16歲以上)"
 
+msgid "3 min"
+msgstr ""
+
+msgid "30 min"
+msgstr ""
+
 msgid "3D Covers"
-msgstr "3D 封面"
+msgstr "3D封面"
 
 msgid "4 (Adults Only 18+)"
 msgstr "(成人 18歲以上)"
+
+msgid "5 min"
+msgstr ""
 
 msgid ">> Finishing installation..."
 msgstr "正在完成安裝..."
@@ -40,10 +67,10 @@ msgid ">> Installing content #"
 msgstr "正在安裝內容 #"
 
 msgid ">> Installing ticket..."
-msgstr "正在安裝 ticket..."
+msgstr "正在安裝ticket..."
 
 msgid ">> Installing title..."
-msgstr "正在安裝 title..."
+msgstr "正在安裝title..."
 
 msgid ">> Reading WAD data..."
 msgstr "正在讀取WAD資料"
@@ -141,6 +168,13 @@ msgstr "關閉"
 msgid "Code Download"
 msgstr "下載金手指"
 
+#, c-format
+msgid "Coded by: %s"
+msgstr ""
+
+msgid "Coding:"
+msgstr ""
+
 msgid "Confirm"
 msgstr "確定"
 
@@ -199,7 +233,7 @@ msgid "Cover Path"
 msgstr "封面路徑"
 
 msgid "Coverpath Change"
-msgstr ""
+msgstr "變更封面路徑"
 
 msgid "Coverpath Changed"
 msgstr "封面路徑已變更"
@@ -235,12 +269,15 @@ msgid "Delete"
 msgstr "刪除"
 
 msgid "Delete Boxart"
-msgstr ""
+msgstr "刪除外盒圖形"
 
 msgid "Delete CheatTxt"
-msgstr ""
+msgstr "刪除金手指檔案"
 
 msgid "Delete Discart"
+msgstr "刪除光碟圖像"
+
+msgid "Design:"
 msgstr ""
 
 msgid "Developed by"
@@ -291,6 +328,9 @@ msgstr "Dol路徑已變更"
 msgid "Dolpath change"
 msgstr "變更Dol路徑"
 
+msgid "Don't bother the USB Loader GX Team about errors in this file."
+msgstr ""
+
 msgid "Download Boxart image?"
 msgstr "下載外盒圖片?"
 
@@ -298,7 +338,7 @@ msgid "Download Discart image?"
 msgstr "下載光碟圖片?"
 
 msgid "Download Now"
-msgstr "下載"
+msgstr "立即下載"
 
 msgid "Download finished"
 msgstr "下載完成"
@@ -426,11 +466,17 @@ msgstr "是否執行更新?"
 msgid "How to Shutdown?"
 msgstr "關機選項?"
 
+msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
+msgstr ""
+
 msgid "Initializing Network"
 msgstr "正在啟動網路"
 
 msgid "Insert Disk"
 msgstr "插入光碟"
+
+msgid "Insert a Wii Disc!"
+msgstr "插入 Wii 光碟!"
 
 msgid "Insert an SD-Card to download images."
 msgstr "插入SD卡下載封面."
@@ -464,7 +510,7 @@ msgstr "正在安裝wad"
 
 #, c-format
 msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team. %s - %i"
-msgstr "請將這些訊息傳送至開發組以幫助本軟體開發 %s - %i"
+msgstr "請將這些訊息傳送至開發小組以幫助本軟體開發 %s - %i"
 
 msgid "Italian"
 msgstr "義大利文"
@@ -586,6 +632,9 @@ msgstr "一般"
 msgid "Normal Covers"
 msgstr "一般封面"
 
+msgid "Not Found"
+msgstr ""
+
 msgid "Not a Wii Disc"
 msgstr "不是Wii的光碟"
 
@@ -639,6 +688,9 @@ msgstr "密碼已變更"
 
 msgid "Password has been changed"
 msgstr "密碼已被變更"
+
+msgid "Paste it into your browser to get your WiiTDB.zip."
+msgstr ""
 
 msgid "Patch Country Strings"
 msgstr "修改國別設定"
@@ -781,6 +833,9 @@ msgstr "金手指文字檔路徑"
 msgid "TXTCheatcodes Path changed"
 msgstr "金手指文字檔路徑已變更"
 
+msgid "The wad file was installed.  But It could not be deleted from the SD card."
+msgstr ""
+
 #, c-format
 msgid "The wad installation failed with error %ld"
 msgstr "wad安裝失敗,錯誤代碼："
@@ -814,10 +869,10 @@ msgid "Unable to open the wad that was just downloaded (%s)."
 msgstr "無法開啟剛下載的wad檔案(%s)"
 
 msgid "Uninstall Game"
-msgstr ""
+msgstr "刪除遊戲"
 
 msgid "Uninstall Menu"
-msgstr ""
+msgstr "刪除選單"
 
 msgid "Unlock console to use this option."
 msgstr "解鎖以進行設定"
@@ -851,6 +906,10 @@ msgstr "正在更新"
 
 msgid "VIDTV Patch"
 msgstr "VIDTV修改"
+
+#, c-format
+msgid "Version: %s"
+msgstr ""
 
 msgid "Video Mode"
 msgstr "影像格式"
@@ -890,6 +949,10 @@ msgstr "載入的影像有問題"
 
 msgid "You need to format a partition"
 msgstr "必須格式化一個磁區"
+
+#, c-format
+msgid "Your URL has been saved in %sWiiTDB_URL.txt."
+msgstr ""
 
 msgid "available"
 msgstr "可取得"
@@ -974,9 +1037,6 @@ msgstr "Title檔案路徑"
 
 #~ msgid "BOOT ERROR"
 #~ msgstr "啟動錯誤"
-
-#~ msgid "Insert a Wii Disc!"
-#~ msgstr "插入 Wii 光碟!"
 
 #~ msgid "Failed to boot:"
 #~ msgstr "無法啟動:"

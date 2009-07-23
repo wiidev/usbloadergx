@@ -4,13 +4,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-21 19:56+0200\n"
+"POT-Creation-Date: 2009-07-23 01:45+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: Tusk\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+msgid " could not be downloaded."
+msgstr ""
+
+msgid " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information."
+msgstr ""
+
+msgid " is not on the server."
+msgstr ""
 
 msgid "(both retired)"
 msgstr ""
@@ -21,17 +30,35 @@ msgstr "0 (Mindenkinek)"
 msgid "1 (Child 7+)"
 msgstr "1 (Gyermekeknek 12+)"
 
+msgid "1 hour"
+msgstr ""
+
+msgid "10 min"
+msgstr ""
+
 msgid "2 (Teen 12+)"
 msgstr "2 (Tinédzserek 14+)"
 
+msgid "20 min"
+msgstr ""
+
 msgid "3 (Mature 16+)"
 msgstr "3 (Kamaszok 16+)"
+
+msgid "3 min"
+msgstr ""
+
+msgid "30 min"
+msgstr ""
 
 msgid "3D Covers"
 msgstr "3D Borítók"
 
 msgid "4 (Adults Only 18+)"
 msgstr "4 (Felnõtteknek 18+)"
+
+msgid "5 min"
+msgstr ""
 
 msgid ">> Finishing installation..."
 msgstr ""
@@ -141,6 +168,13 @@ msgstr "Bezár"
 msgid "Code Download"
 msgstr ""
 
+#, c-format
+msgid "Coded by: %s"
+msgstr ""
+
+msgid "Coding:"
+msgstr ""
+
 msgid "Confirm"
 msgstr ""
 
@@ -243,6 +277,9 @@ msgstr ""
 msgid "Delete Discart"
 msgstr ""
 
+msgid "Design:"
+msgstr ""
+
 msgid "Developed by"
 msgstr "Készítette"
 
@@ -290,6 +327,9 @@ msgstr "Dol útvonal megváltozott"
 
 msgid "Dolpath change"
 msgstr "Dol útvonal megváltoztatása"
+
+msgid "Don't bother the USB Loader GX Team about errors in this file."
+msgstr ""
 
 msgid "Download Boxart image?"
 msgstr "Borítóképek letöltése?"
@@ -426,11 +466,17 @@ msgstr "Hogyan szeretnél frissíteni"
 msgid "How to Shutdown?"
 msgstr "Hogyan kapcsoljon ki?"
 
+msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
+msgstr ""
+
 msgid "Initializing Network"
 msgstr "Kapcsolat Létrehozása"
 
 msgid "Insert Disk"
 msgstr "Helyezz be egy lemezt"
+
+msgid "Insert a Wii Disc!"
+msgstr ""
 
 msgid "Insert an SD-Card to download images."
 msgstr "Helyezz be egy SD Kártyát, hogy letöltsd a képeket."
@@ -586,6 +632,9 @@ msgstr "Normális"
 msgid "Normal Covers"
 msgstr "Sima Borítók"
 
+msgid "Not Found"
+msgstr ""
+
 msgid "Not a Wii Disc"
 msgstr "Nem Wii lemez"
 
@@ -639,6 +688,9 @@ msgstr "Jelszó Megváltozott"
 
 msgid "Password has been changed"
 msgstr "A Jelszó megváltozott"
+
+msgid "Paste it into your browser to get your WiiTDB.zip."
+msgstr ""
 
 msgid "Patch Country Strings"
 msgstr "Ország Szövegek Patchelése"
@@ -781,6 +833,9 @@ msgstr "TXTKódok Útvonala"
 msgid "TXTCheatcodes Path changed"
 msgstr ""
 
+msgid "The wad file was installed.  But It could not be deleted from the SD card."
+msgstr ""
+
 #, c-format
 msgid "The wad installation failed with error %ld"
 msgstr ""
@@ -852,6 +907,10 @@ msgstr "Frissítés"
 msgid "VIDTV Patch"
 msgstr "VIDTV Patch"
 
+#, c-format
+msgid "Version: %s"
+msgstr ""
+
 msgid "Video Mode"
 msgstr "Videó Mód"
 
@@ -890,6 +949,10 @@ msgstr "Rossz képfájl próbáltál betõlteni"
 
 msgid "You need to format a partition"
 msgstr "Formáznod kell a particiót"
+
+#, c-format
+msgid "Your URL has been saved in %sWiiTDB_URL.txt."
+msgstr ""
 
 msgid "available"
 msgstr "elérhetõ"

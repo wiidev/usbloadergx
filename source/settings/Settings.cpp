@@ -564,12 +564,12 @@ int MenuSettings()
                         else if (Settings.titlesOverride == 1) options2.SetValue(10,"%s",tr("ON"));
 
 						if (Settings.screensaver == 0) options2.SetValue(11,"%s",tr("OFF"));
-                        else if (Settings.screensaver == 1) options2.SetValue(11,"3 min");
-						else if (Settings.screensaver == 2) options2.SetValue(11,"5 min");
-						else if (Settings.screensaver == 3) options2.SetValue(11,"10 min");
-						else if (Settings.screensaver == 4) options2.SetValue(11,"20 min");
-						else if (Settings.screensaver == 5) options2.SetValue(11,"30 min");
-						else if (Settings.screensaver == 6) options2.SetValue(11,"1 hour");
+                        else if (Settings.screensaver == 1) options2.SetValue(11,tr("3 min"));
+						else if (Settings.screensaver == 2) options2.SetValue(11,tr("5 min"));
+						else if (Settings.screensaver == 3) options2.SetValue(11,tr("10 min"));
+						else if (Settings.screensaver == 4) options2.SetValue(11,tr("20 min"));
+						else if (Settings.screensaver == 5) options2.SetValue(11,tr("30 min"));
+						else if (Settings.screensaver == 6) options2.SetValue(11,tr("1 hour"));
 
 						if(backBtn.GetState() == STATE_CLICKED)
                         {

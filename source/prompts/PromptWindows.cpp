@@ -200,7 +200,7 @@ void WindowCredits()
 	GuiText::SetPresets(22, (GXColor){255, 255, 255,  255}, 0, GuiText::WRAP,
 			FTGX_JUSTIFY_LEFT | FTGX_ALIGN_TOP, ALIGN_LEFT, ALIGN_TOP);
 
-	txt[i] = new GuiText("Coding:");
+	txt[i] = new GuiText(tr("Coding:"));
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(70,y);
 	i++;
 
@@ -227,7 +227,7 @@ void WindowCredits()
 	i++;
 	y+=34;
 
-	txt[i] = new GuiText("Design:");
+	txt[i] = new GuiText(tr("Design:"));
 	txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP); txt[i]->SetPosition(70,y);
 	i++;
 
@@ -1938,7 +1938,7 @@ ProgressDownloadWindow(int choice2)
 		char imgPath[100];
 		char URLFile[100];
 		char tmp[75];
-		sprintf(tmp,"Not Found");
+		sprintf(tmp,tr("Not Found"));
 		struct block file = downloadfile(URLFile);
 		if (choice2 == 2)
 		{
@@ -2755,10 +2755,10 @@ int ProgressUpdateWindow()
 				if (shit==0){
 					diarhea = remove(dolpath);
 					if (diarhea)
-				WindowPrompt(tr("Success"),"The wad file was installed.  But It could not be deleted from the SD card.","Ok");
+				WindowPrompt(tr("Success"),tr("The wad file was installed.  But It could not be deleted from the SD card."),tr("Ok"));
 				}else{
 				sprintf(nipple, tr("The wad installation failed with error %ld"),shit);
-				WindowPrompt(tr("Error"),nipple,"Ok");
+				WindowPrompt(tr("Error"),nipple,tr("Ok"));
 				}
 			}
 
@@ -2886,9 +2886,9 @@ int CodeDownload(const char *id)
 
 	if (file.size == 333)
 		{
-		strcat(codeurl, " is not on the server.");
+		strcat(codeurl, tr(" is not on the server."));
 
-		WindowPrompt(tr("Error"),codeurl,"Ok");
+		WindowPrompt(tr("Error"),codeurl,tr("Ok"));
 		ret =-1;
 		goto exit;
 		}
@@ -2900,15 +2900,15 @@ int CodeDownload(const char *id)
         fclose(pfile);
         free(file.data);
 		ret = 1;
-		strcat(txtpath, " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information.");
+		strcat(txtpath, tr(" has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information."));
 
-		WindowPrompt(0,txtpath,"Ok");
+		WindowPrompt(0,txtpath,tr("Ok"));
     }
 	 else
 	 {
-		strcat(codeurl, " could not be downloaded.");
+		strcat(codeurl, tr(" could not be downloaded."));
 
-		  WindowPrompt(tr("Error"),codeurl,"Ok");
+		  WindowPrompt(tr("Error"),codeurl,tr("Ok"));
 		  ret =-1;
 	 }
 
@@ -3087,21 +3087,21 @@ HBCWindowPrompt(const char *name, const char *coder, const char *version,
 
 
 	if (strcmp(coder,""))
-	snprintf(tmp, sizeof(tmp), "Coded by: %s",coder);
+	snprintf(tmp, sizeof(tmp), tr("Coded by: %s"),coder);
 	GuiText coderTxt(tmp, 16, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	coderTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	coderTxt.SetPosition(180,30);
 	coderTxt.SetMaxWidth(280);
 
 	if (strcmp(version,""))
-	snprintf(tmp, sizeof(tmp), "Version: %s",version);
+	snprintf(tmp, sizeof(tmp), tr("Version: %s"),version);
 	GuiText versionTxt(tmp,16 , (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	versionTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	versionTxt.SetPosition(40,65);
 	versionTxt.SetMaxWidth(430);
 
 	//if (release_date)
-	//snprintf(tmp, sizeof(tmp), "Released: %s",release_date);
+	//snprintf(tmp, sizeof(tmp), tr("Released: %s"),release_date);
 	GuiText release_dateTxt(release_date,16 , (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	release_dateTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	release_dateTxt.SetPosition(40,85);

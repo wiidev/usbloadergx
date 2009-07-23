@@ -1,16 +1,25 @@
 # USB Loader GX language source file.
-# French V8.4 r635
+# French V8.5 r635
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-21 19:56+0200\n"
+"POT-Creation-Date: 2009-07-23 01:45+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: Kin8\n"
-"Language-Team: Badablek, Amour, ikya, OuahOuah & Kin8\n"
+"Language-Team: Badablek, Amour, ikya, OuahOuah, dj_skual & Kin8\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+msgid " could not be downloaded."
+msgstr " ne peut pas être téléchargé."
+
+msgid " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information."
+msgstr " sauvegardé. En cas de mauvais résultats, essayez un éditeur de texte pour obtenir plus d'informations."
+
+msgid " is not on the server."
+msgstr " non disponible sur le serveur."
 
 msgid "(both retired)"
 msgstr "(ces 2 se sont retirés)"
@@ -21,17 +30,35 @@ msgstr "0 (Tous 3+)"
 msgid "1 (Child 7+)"
 msgstr "1 (Enfants 7+)"
 
+msgid "1 hour"
+msgstr "1 heure"
+
+msgid "10 min"
+msgstr "10 min."
+
 msgid "2 (Teen 12+)"
 msgstr "2 (Adolescents 12+)"
 
+msgid "20 min"
+msgstr "20 min."
+
 msgid "3 (Mature 16+)"
 msgstr "3 (Matures 16+)"
+
+msgid "3 min"
+msgstr "3 min."
+
+msgid "30 min"
+msgstr "30 min."
 
 msgid "3D Covers"
 msgstr "Jaquettes 3D"
 
 msgid "4 (Adults Only 18+)"
 msgstr "4 (Adultes 18+)"
+
+msgid "5 min"
+msgstr "5 min."
 
 msgid ">> Finishing installation..."
 msgstr ">> Finalisation de l'installation..."
@@ -97,7 +124,7 @@ msgid "Big thanks to:"
 msgstr "Grand merci à:"
 
 msgid "Block IOS Reload"
-msgstr "Bloquer Recharge IOS"
+msgstr "Bloquer IOS Reload"
 
 msgid "Boot/Standard"
 msgstr "Boot/Standard"
@@ -140,6 +167,13 @@ msgstr "Fermer"
 
 msgid "Code Download"
 msgstr "Téléchargement Code"
+
+#, c-format
+msgid "Coded by: %s"
+msgstr "Développé par: %s"
+
+msgid "Coding:"
+msgstr "Développement:"
 
 msgid "Confirm"
 msgstr "Confirmer"
@@ -217,7 +251,7 @@ msgid "DOL from SD"
 msgstr "DOL sur SD"
 
 msgid "DOL from disc"
-msgstr "DOL sur DVD"
+msgstr "DOL sur ISO"
 
 msgid "Dec"
 msgstr "Déc"
@@ -235,13 +269,16 @@ msgid "Delete"
 msgstr "Supprimer"
 
 msgid "Delete Boxart"
-msgstr "Supprimer le Label DVD"
+msgstr "Supprimer la Jaquette"
 
 msgid "Delete CheatTxt"
 msgstr "Supprimer TXT de Triche"
 
 msgid "Delete Discart"
-msgstr "Supprimer la Jaquette"
+msgstr "Supprimer le Label DVD"
+
+msgid "Design:"
+msgstr "Graphisme:"
 
 msgid "Developed by"
 msgstr "Développé par"
@@ -290,6 +327,9 @@ msgstr "Dossier DOL alternatif modifié"
 
 msgid "Dolpath change"
 msgstr "Dossier du DOL alternatif"
+
+msgid "Don't bother the USB Loader GX Team about errors in this file."
+msgstr "La Team USB Loader GX ne gère pas les erreurs de ce fichier."
 
 msgid "Download Boxart image?"
 msgstr "Télécharger les jaquettes ?"
@@ -426,11 +466,17 @@ msgstr "Comment faire la Mise à Jour ?"
 msgid "How to Shutdown?"
 msgstr "Arrêt de la Wii ?"
 
+msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
+msgstr "Pressez 1 pour obtenir un lien personnalisé pour votre WiiTDB.zip"
+
 msgid "Initializing Network"
 msgstr "Initialisation du réseau"
 
 msgid "Insert Disk"
 msgstr "Insérez un disque"
+
+msgid "Insert a Wii Disc!"
+msgstr "Insérez un disque Wii !"
 
 msgid "Insert an SD-Card to download images."
 msgstr "Insérez une carte SD pour télécharger les jaquettes."
@@ -521,7 +567,7 @@ msgid "Locked"
 msgstr "Clic pour déverrouiller"
 
 msgid "Mar"
-msgstr "Mar"
+msgstr "Mars"
 
 msgid "May"
 msgstr "Mai"
@@ -586,6 +632,9 @@ msgstr "4:3"
 msgid "Normal Covers"
 msgstr "Normales"
 
+msgid "Not Found"
+msgstr "Pas trouvé"
+
 msgid "Not a Wii Disc"
 msgstr "Ce n'est pas un jeu Wii"
 
@@ -639,6 +688,9 @@ msgstr "Mot de passe modifié"
 
 msgid "Password has been changed"
 msgstr "Le mot de passe a été modifié"
+
+msgid "Paste it into your browser to get your WiiTDB.zip."
+msgstr "Collez ce lien dans votre navigateur pour télécharger."
 
 msgid "Patch Country Strings"
 msgstr "Patch Jeux Import"
@@ -781,6 +833,9 @@ msgstr "Dossier TXTCodes Triche"
 msgid "TXTCheatcodes Path changed"
 msgstr "Dossier TXTCodes Triche modifié"
 
+msgid "The wad file was installed.  But It could not be deleted from the SD card."
+msgstr "Le Wad a été installé. Mais ne peut être supprimé de la carte SD."
+
 #, c-format
 msgid "The wad installation failed with error %ld"
 msgstr "L'installation WAD a échoué avec erreur %ld"
@@ -852,6 +907,10 @@ msgstr "Mise à Jour"
 msgid "VIDTV Patch"
 msgstr "Patch VIDTV"
 
+#, c-format
+msgid "Version: %s"
+msgstr "Version: %s"
+
 msgid "Video Mode"
 msgstr "Mode vidéo"
 
@@ -891,6 +950,10 @@ msgstr "Vous avez tenté de charger une image érronée"
 msgid "You need to format a partition"
 msgstr "Vous devez formater une partition"
 
+#, c-format
+msgid "Your URL has been saved in %sWiiTDB_URL.txt."
+msgstr "Sauvegarde de l'URL sous %sWiiTDB_URL.txt."
+
 msgid "available"
 msgstr "disponible"
 
@@ -904,7 +967,7 @@ msgid "does not exist!  Loading game without cheats."
 msgstr "inexistant! Chargement du jeu sans tricheries."
 
 msgid "does not exist!  You Messed something up, Idiot."
-msgstr "inexistant! Vous avez Raté quelque chose, Idiot."
+msgstr "Inexistant! Quelque chose vous a échappé!"
 
 msgid "file left"
 msgstr "fichier restant"
@@ -977,9 +1040,6 @@ msgstr "Localisation titles.txt"
 
 #~ msgid "BOOT ERROR"
 #~ msgstr "ERREUR DE DÉMARRAGE"
-
-#~ msgid "Insert a Wii Disc!"
-#~ msgstr "Insérez un disque Wii !"
 
 #~ msgid "Failed to boot:"
 #~ msgstr "Échec au démarrage de:"
