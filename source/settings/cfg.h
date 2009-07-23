@@ -321,30 +321,30 @@ enum {
 	settings_scrolleffect_max // always the last entry
 };
 struct SSettings {
-	int	    video;
-	int	    language;
-	int     ocarina;
-	int     vpatch;
+	u8      video;
+	u8      language;
+	u8      ocarina;
+	u8      vpatch;
 	int     ios;
-	int	    sinfo;
-	int	    hddinfo;
-	int	    rumble;
-	int	    xflip;
+	u8      sinfo;
+	u8      hddinfo;
+	u8      rumble;
+	u8      xflip;
 	int	    volume;
 	int     sfxvolume;
-	int     tooltips;
+	u8      tooltips;
 	char 	unlockCode[20];
-	int	    parentalcontrol;
-	int     cios;
-	int	    qboot;
-	int	    wsprompt;
-	int	    keyset;
-	int	    sort;
-	int	    fave;
-	int     wiilight;
-	int		gameDisplay;
-	int     patchcountrystrings;
-	int     screensaver;
+	u8	    parentalcontrol;
+	u8      cios;
+	u8	    qboot;
+	u8	    wsprompt;
+	u8	    keyset;
+	u8	    sort;
+	u8	    fave;
+	u8      wiilight;
+	u8		gameDisplay;
+	u8      patchcountrystrings;
+	u8      screensaver;
 	short	godmode;
 	char	covers_path[100];
 	char	theme_path[100];
@@ -362,11 +362,12 @@ struct SSettings {
 	char	Cheatcodespath[100];
 	char	TxtCheatcodespath[100];
 	short   error002;
-	int		titlesOverride; // db_titles
+	u8		titlesOverride; // db_titles
 	char	db_url[200];
 	char	db_language[100];
-	int		db_JPtoEN;
-	int		gridRows;
+	u8		db_JPtoEN;
+	u8		gridRows;
+	u8		autonetwork;
 };
 
 void CFG_LoadGlobal(void);

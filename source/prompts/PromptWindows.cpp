@@ -2366,6 +2366,9 @@ int ProgressUpdateWindow()
 
         sprintf(msg, "Rev%i %s.", newrev, tr("available"));
         int choice = WindowPrompt(msg, tr("How do you want to update?"), tr("Update DOL"), tr("Update All"), tr("Cancel"));
+        mainWindow->SetState(STATE_DISABLED);
+        promptWindow.SetState(STATE_DEFAULT);
+        mainWindow->ChangeFocus(&promptWindow);
         if(choice == 1 || choice == 2) {
             titleTxt.SetTextf("%s USB Loader GX", tr("Updating"));
             msgTxt.SetPosition(0,100);
@@ -2958,7 +2961,7 @@ void GetLanguageToLangCode(char *langcode) {
 		case CONF_LANG_DUTCH:
 				sprintf(langcode, "NL");
 				break;
-		/*		
+		/*
 		case CONF_LANG_PORTUGUESE:
 				sprintf(langcode, "PO");
 				break;

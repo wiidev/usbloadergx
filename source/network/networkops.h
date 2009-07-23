@@ -1,3 +1,10 @@
+/****************************************************************************
+ * Network Operations
+ * for USB Loader GX
+ *
+ * HTTP operations
+ * Written by dhewg/bushing modified by dimok
+ ****************************************************************************/
 #ifndef _NETWORKOPS_H_
 #define _NETWORKOPS_H_
 
@@ -12,6 +19,7 @@ void CloseConnection();
 int CheckUpdate();
 
 void HaltNetworkThread();
+void ResumeNetworkWait();
 void ResumeNetworkThread();
 void InitNetworkThread();
 void ShutdownNetworkThread();

@@ -12,11 +12,16 @@
 #include "language/gettext.h"
 #include "libwiigui/gui.h"
 #include "prompts/PromptWindows.h"
+#include "prompts/ProgressWindow.h"
 #include "homebrewboot/HomebrewFiles.h"
 #include "homebrewboot/HomebrewXML.h"
+#include "homebrewboot/BootHomebrew.h"
+#include "network/networkops.h"
 #include "menu.h"
 #include "filelist.h"
 #include "sys.h"
+
+#define NETWORKBLOCKSIZE       5*1024      //5KB
 
 /*** Extern functions ***/
 extern void ResumeGui();
@@ -26,10 +31,12 @@ extern void HaltGui();
 extern GuiWindow * mainWindow;
 extern GuiSound * bgMusic;
 extern GuiImage * bgImg;
+extern u32 infilesize;
 extern u8 shutdown;
 extern u8 reset;
 
-bool boothomebrew = false;
+/*** Variables used elsewhere ***/
+u8 boothomebrew = 0;
 
 /****************************************************************************
  * roundup Function
@@ -65,6 +72,9 @@ int MenuHomebrewBrowse()
         RIGHT
     };
 
+    if(IsNetworkInit())
+        ResumeNetworkWait();
+
 	int slidedirection = FADE;
 
     /*** Sound Variables ***/
@@ -91,6 +101,9 @@ int MenuHomebrewBrowse()
 
 	snprintf(imgPath, sizeof(imgPath), "%sstartgame_arrow_right.png", CFG.theme_path);
 	GuiImageData arrow_right(imgPath, startgame_arrow_right_png);
+
+	snprintf(imgPath, sizeof(imgPath), "%swifi1.png", CFG.theme_path);
+	GuiImageData wifiImgData(imgPath, wifi1_png);
 
     GuiImage background(&bgData);
 
@@ -272,6 +285,17 @@ int MenuHomebrewBrowse()
 	MainButton4.SetEffectGrow();
 	MainButton4.SetTrigger(&trigA);
 
+	GuiImage wifiImg(&wifiImgData);
+	GuiButton wifiBtn(wifiImg.GetWidth(), wifiImg.GetHeight());
+	wifiBtn.SetImage(&wifiImg);
+	wifiBtn.SetPosition(500, 400);
+	wifiBtn.SetSoundOver(&btnSoundOver);
+	wifiBtn.SetSoundClick(&btnClick1);
+	wifiBtn.SetEffectGrow();
+	wifiBtn.SetAlpha(80);
+	wifiBtn.SetTrigger(&trigA);
+
+
 	GuiWindow w(screenwidth, screenheight);
 
 
@@ -360,6 +384,7 @@ int MenuHomebrewBrowse()
         w.Append(&titleTxt);
         w.Append(&backBtn);
         w.Append(&homo);
+        w.Append(&wifiBtn);
         w.Append(&GoRightBtn);
         w.Append(&GoLeftBtn);
 
@@ -592,7 +617,7 @@ int MenuHomebrewBrowse()
 
                 int choice = HBCWindowPrompt(XMLInfo[0].GetName(), XMLInfo[0].GetCoder(), XMLInfo[0].GetVersion(), XMLInfo[0].GetReleasedate(), XMLInfo[0].GetLongDescription(), iconpath, filesize);
 			    if(choice == 1) {
-			        boothomebrew = true;
+			        boothomebrew = 1;
 			        menu = MENU_EXIT;
                     snprintf(Settings.selected_homebrew, sizeof(Settings.selected_homebrew), "%s%s",  HomebrewFiles.GetFilepath(fileoffset), HomebrewFiles.GetFilename(fileoffset));
                     break;
@@ -620,7 +645,7 @@ int MenuHomebrewBrowse()
 
 				int choice = HBCWindowPrompt(XMLInfo[1].GetName(), XMLInfo[1].GetCoder(), XMLInfo[1].GetVersion(), XMLInfo[1].GetReleasedate(), XMLInfo[1].GetLongDescription(), iconpath, filesize);
 			    if(choice == 1) {
-                    boothomebrew = true;
+                    boothomebrew = 1;
 			        menu = MENU_EXIT;
                     snprintf(Settings.selected_homebrew, sizeof(Settings.selected_homebrew), "%s%s",  HomebrewFiles.GetFilepath(fileoffset+1), HomebrewFiles.GetFilename(fileoffset+1));
                     break;
@@ -648,7 +673,7 @@ int MenuHomebrewBrowse()
 
 				int choice = HBCWindowPrompt(XMLInfo[2].GetName(), XMLInfo[2].GetCoder(), XMLInfo[2].GetVersion(), XMLInfo[2].GetReleasedate(), XMLInfo[2].GetLongDescription(), iconpath, filesize);
 			    if(choice == 1) {
-                    boothomebrew = true;
+                    boothomebrew = 1;
 			        menu = MENU_EXIT;
                     snprintf(Settings.selected_homebrew, sizeof(Settings.selected_homebrew), "%s%s",  HomebrewFiles.GetFilepath(fileoffset+2), HomebrewFiles.GetFilename(fileoffset+2));
                     break;
@@ -676,7 +701,7 @@ int MenuHomebrewBrowse()
 
 				int choice = HBCWindowPrompt(XMLInfo[3].GetName(), XMLInfo[3].GetCoder(), XMLInfo[3].GetVersion(), XMLInfo[3].GetReleasedate(), XMLInfo[3].GetLongDescription(), iconpath, filesize);
 			    if(choice == 1) {
-                    boothomebrew = true;
+                    boothomebrew = 1;
 			        menu = MENU_EXIT;
                     snprintf(Settings.selected_homebrew, sizeof(Settings.selected_homebrew), "%s%s",  HomebrewFiles.GetFilepath(fileoffset+3), HomebrewFiles.GetFilename(fileoffset+3));
                     break;
@@ -714,6 +739,12 @@ int MenuHomebrewBrowse()
                 GoRightBtn.ResetState();
             }
 
+            else if(wifiBtn.GetState() == STATE_CLICKED) {
+
+                ResumeNetworkWait();
+                wifiBtn.ResetState();
+            }
+
             else if(homo.GetState() == STATE_CLICKED) {
                 cfg_save_global();
                 s32 thetimeofbg = bgMusic->GetPlayTime();
@@ -736,6 +767,78 @@ int MenuHomebrewBrowse()
                     homo.ResetState();
                 }
             }
+
+            else if(infilesize > 0) {
+                char filesizetxt[50];
+                char temp[50];
+
+                if(infilesize < MBSIZE)
+                    snprintf(filesizetxt, sizeof(filesizetxt), tr("Incomming file %0.2fKB"), infilesize/KBSIZE);
+                else
+                    snprintf(filesizetxt, sizeof(filesizetxt), tr("Incomming file %0.2fMB"), infilesize/MBSIZE);
+
+                snprintf(temp, sizeof(temp), tr("Load file from: %s ?"), GetNetworkIP());
+
+                int choice = WindowPrompt(filesizetxt, temp, tr("OK"), tr("Cancel"));
+
+                if(choice == 1) {
+
+                    int res = AllocHomebrewMemory(infilesize);
+
+                    if(res < 0) {
+                        CloseConnection();
+                        WindowPrompt(tr("Not enough free memory"), 0, tr("OK"));
+                    } else {
+                        u32 read = 0;
+                        u8 *temp = NULL;
+                        int len = NETWORKBLOCKSIZE;
+                        temp = (u8*) malloc(len);
+
+                        while(read < infilesize) {
+
+                            ShowProgress(tr("Receiving file from:"), GetNetworkIP(), NULL, read, infilesize, true);
+
+                            if(infilesize - read < (u32) len)
+                                len = infilesize-read;
+                            else
+                                len = NETWORKBLOCKSIZE;
+
+                            int result = network_read(temp, len);
+
+                            if(result < 0) {
+                                WindowPrompt(tr("Error while transfering data."), 0, tr("OK"));
+                                FreeHomebrewBuffer();
+                                break;
+                            }
+                            if(!result)
+                                break;
+
+                            CopyHomebrewMemory(read, temp, len);
+
+                            read += result;
+
+                        }
+                        free(temp);
+                        ProgressStop();
+
+                        if(read != infilesize) {
+                            WindowPrompt(tr("Error:"), tr("No data could be read."), tr("OK"));
+                            FreeHomebrewBuffer();
+                        } else {
+                            boothomebrew = 2;
+                            menu = MENU_EXIT;
+                            CloseConnection();
+                            break;
+                        }
+                    }
+                }
+                CloseConnection();
+                ResumeNetworkWait();
+            }
+
+            if(IsNetworkInit()) {
+                wifiBtn.SetAlpha(255);
+            }
         }
 	}
 
@@ -754,6 +857,9 @@ int MenuHomebrewBrowse()
             IconImg[i] = NULL;
         }
     }
+
+    if(IsNetworkInit())
+        HaltNetworkThread();
 
 	mainWindow->RemoveAll();
 	mainWindow->Append(bgImg);

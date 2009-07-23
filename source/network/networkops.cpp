@@ -1,5 +1,6 @@
 /****************************************************************************
- * Updater for USB Loader GX
+ * Network Operations
+ * for USB Loader GX
  *
  * HTTP operations
  * Written by dhewg/bushing modified by dimok
@@ -11,13 +12,23 @@
 #include <ogc/machine/processor.h>
 
 #include "prompts/PromptWindows.h"
+#include "language/gettext.h"
 #include "settings/cfg.h"
 #include "main.h"
 #include "http.h"
 
+#define PORT            4299
+
+/*** Incomming filesize ***/
+u32 infilesize = 0;
+
+bool updateavailable = false;
 static s32 connection;
+static s32 socket;
 static bool updatechecked = false;
 static bool networkinitialized = false;
+static bool checkincomming = false;
+static bool waitforanswer = false;
 static char IP[16];
 
 static lwp_t networkthread = LWP_THREAD_NULL;
@@ -113,7 +124,7 @@ s32 network_request(const char * request)
 	return size;
 }
 
-s32 network_read(u8 * buf, u32 len)
+s32 network_read(u8 *buf, u32 len)
 {
 	u32 read = 0;
 	s32 ret = -1;
@@ -186,6 +197,68 @@ void CloseConnection() {
 
     net_close(connection);
 
+    if(waitforanswer) {
+        net_close(socket);
+        waitforanswer = false;
+    }
+}
+
+/****************************************************************************
+ * NetworkWait
+ ***************************************************************************/
+int NetworkWait() {
+
+    if(!checkincomming)
+        return -3;
+
+	struct sockaddr_in sin;
+	struct sockaddr_in client_address;
+	socklen_t addrlen = sizeof(client_address);
+
+	//Open socket
+	socket = net_socket(AF_INET, SOCK_STREAM, IPPROTO_IP);
+
+	if (socket == INVALID_SOCKET)
+	{
+		return socket;
+	}
+
+	sin.sin_family = AF_INET;
+	sin.sin_port = htons(PORT);
+	sin.sin_addr.s_addr = htonl(INADDR_ANY);
+
+	if (net_bind(socket, (struct sockaddr*)&sin, sizeof(sin)) < 0)
+	{
+		net_close(socket);
+		return -1;
+	}
+
+	if (net_listen(socket, 3) < 0)
+	{
+		net_close(socket);
+		return -1;
+	}
+
+    connection = net_accept(socket, (struct sockaddr*)&client_address, &addrlen);
+
+	if (connection < 0)
+	{
+		net_close(connection);
+		net_close(socket);
+		return -4;
+
+	} else {
+
+        unsigned char haxx[9];
+        //skip haxx
+        net_read(connection, &haxx, 8);
+        net_read(connection, &infilesize, 4);
+        waitforanswer = true;
+        checkincomming = false;
+        networkHalt = true;
+	}
+
+	return 1;
 }
 
 /****************************************************************************
@@ -228,6 +301,10 @@ int CheckUpdate()
 void HaltNetworkThread()
 {
     networkHalt = true;
+    checkincomming = false;
+
+    if(waitforanswer)
+        CloseConnection();
 
 	// wait for thread to finish
 	while(!LWP_ThreadIsSuspended(networkthread))
@@ -243,20 +320,44 @@ void ResumeNetworkThread()
 	LWP_ResumeThread(networkthread);
 }
 
+/****************************************************************************
+ * Resume NetworkWait
+ ***************************************************************************/
+void ResumeNetworkWait()
+{
+	networkHalt = true;
+	checkincomming = true;
+	waitforanswer = true;
+	infilesize = 0;
+	connection = -1;
+	LWP_ResumeThread(networkthread);
+}
+
 /*********************************************************************************
  * Networkthread for background network initialize and update check with idle prio
  *********************************************************************************/
 static void * networkinitcallback(void *arg)
 {
-    Initialize_Network();
+    while(1) {
 
-    if(networkinitialized == true && updatechecked == false) {
-        if(CheckUpdate() > 0) {
-            /** Here we can enter the update function later **
-             **  when network problem is solved             **/
-            WindowPrompt("Update available",0,"OK");
+        if(!checkincomming && networkHalt)
+            LWP_SuspendThread(networkthread);
+
+        Initialize_Network();
+
+        if(networkinitialized == true && updatechecked == false) {
+
+            if(CheckUpdate() > 0)
+                updateavailable = true;
+
+            //suspend thread
+            updatechecked = true;
+            networkHalt = true;
+            checkincomming = false;
         }
-        updatechecked = true;
+
+        if(checkincomming)
+            NetworkWait();
     }
 	return NULL;
 }

@@ -6,7 +6,11 @@ extern "C"
 {
 #endif
 
-void BootHomebrew(char * path);
+int BootHomebrew(char * path);
+int BootHomebrewFromMem();
+void CopyHomebrewMemory(u32 read, u8 *temp, u32 len);
+int AllocHomebrewMemory(u32 filesize);
+void FreeHomebrewBuffer();
 
 #ifdef __cplusplus
 }

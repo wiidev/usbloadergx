@@ -234,7 +234,7 @@ int DiscBrowse(struct discHdr * header)
 
 int autoSelectDol(const char *id)
 {	
-		//still not done\\
+		//still not done//
 	//////////ID6/////////////////
 	if (strcmp(id,"RF8E69") == 0) return 439;//from isostar
 	if (strcmp(id,"RF8P69") == 0) return 463;//from isostar

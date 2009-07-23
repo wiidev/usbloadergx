@@ -77,7 +77,8 @@ extern struct discHdr * gameList;
 extern u32 gameCnt;
 extern s32 gameSelected, gameStart;
 extern const u8 data1;
-extern bool boothomebrew;
+extern u8 boothomebrew;
+extern bool updateavailable;
 
 /****************************************************************************
  * ResumeGui
@@ -202,6 +203,10 @@ void InitGUIThreads()
 	LWP_CreateThread(&guithread, UpdateGUI, NULL, NULL, 0, 70);
 	InitProgressThread();
 	InitBufferThread();
+	InitNetworkThread();
+
+	if(Settings.autonetwork)
+        ResumeNetworkThread();
 }
 
 void ExitGUIThreads()
@@ -233,8 +238,8 @@ int MenuDiscList()
 
     WDVD_GetCoverStatus(&covert);
 	u32 covertOld=covert;
-	
-	
+
+
 	//i put this here to take care of the disappearing cursors
 	//at least untill we know why they go away
 	#ifdef HW_RVL
@@ -335,8 +340,8 @@ int MenuDiscList()
         GuiImageData imgarrangeCarousel_gray(imgPath, arrangeCarousel_gray_png);
 		  snprintf(imgPath, sizeof(imgPath), "%sbrowser.png", CFG.theme_path);
         GuiImageData homebrewImgData(imgPath, browser_png);
-		  
-		  
+
+
 
         GuiTrigger trigA;
         trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
@@ -719,6 +724,11 @@ int MenuDiscList()
                 }
                 if(reset == 1)
                         Sys_Reboot();
+
+                if(updateavailable == true) {
+                    ProgressUpdateWindow();
+                    updateavailable = false;
+                }
 
                 if(poweroffBtn.GetState() == STATE_CLICKED)
                 {
@@ -1550,7 +1560,7 @@ static int MenuFormat()
 	    VIDEO_WaitVSync ();
 
 	    selected = optionBrowser.GetClickedOption();
-		 
+
 		 for (cnt = 0; cnt < MAX_PARTITIONS; cnt++) {
                 if ((cnt == selected)&&((Settings.godmode == 1)||
 							(!strcmp("", Settings.unlockCode)))){
@@ -1643,7 +1653,7 @@ static int MenuCheck()
 
 		VIDEO_WaitVSync ();
 		OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true);
-	
+
 
         wbfsinit = WBFS_Init(WBFS_DEVICE_USB);
         if (wbfsinit < 0)
@@ -1800,6 +1810,7 @@ int MainMenu(int menu)
 				break;
 		}
 	}
+
 	CloseXMLDatabase();
 	ExitGUIThreads();
     bgMusic->Stop();
@@ -1817,8 +1828,10 @@ int MainMenu(int menu)
 	ShutdownAudio();
 	StopGX();
 
-	if(boothomebrew == true) {
+	if(boothomebrew == 1) {
         BootHomebrew(Settings.selected_homebrew);
+	} else if(boothomebrew == 2) {
+        BootHomebrewFromMem();
     } else {
 
 	int ret = 0;

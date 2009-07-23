@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-23 01:45+0200\n"
+"POT-Creation-Date: 2009-07-23 19:22+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -98,6 +98,9 @@ msgstr "実行しますか?"
 
 msgid "Aug"
 msgstr "8月"
+
+msgid "AutoInit Network"
+msgstr ""
 
 msgid "AutoPatch"
 msgstr "自動ﾊﾟｯﾁ"
@@ -373,7 +376,13 @@ msgstr ""
 msgid "Error reading Disc"
 msgstr "ﾃﾞｨｽｸ読込み失敗"
 
+msgid "Error while transfering data."
+msgstr ""
+
 msgid "Error..."
+msgstr ""
+
+msgid "Error:"
 msgstr ""
 
 msgid "Exit USB Loader GX?"
@@ -469,6 +478,14 @@ msgstr "ｼｬｯﾄﾀﾞｳﾝの方法は?"
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
 msgstr ""
 
+#, c-format
+msgid "Incomming file %0.2fKB"
+msgstr ""
+
+#, c-format
+msgid "Incomming file %0.2fMB"
+msgstr ""
+
 msgid "Initializing Network"
 msgstr "ﾈｯﾄﾜｰｸの初期化中..."
 
@@ -551,6 +568,10 @@ msgstr "Like SysMenu"
 msgid "Load"
 msgstr ""
 
+#, c-format
+msgid "Load file from: %s ?"
+msgstr ""
+
 msgid "Load this dol as alternate dol?"
 msgstr ""
 
@@ -614,6 +635,9 @@ msgstr "USBﾃﾞﾊﾞｲｽﾞが検出されていません"
 msgid "No WBFS partition found"
 msgstr "WBFSﾊﾟｰﾃｨｼｮﾝを検出できませんでした"
 
+msgid "No data could be read."
+msgstr ""
+
 msgid "No dol file found on disc."
 msgstr ""
 
@@ -637,6 +661,9 @@ msgstr ""
 
 msgid "Not a Wii Disc"
 msgstr "Wiiﾃﾞｨｽｸではありません"
+
+msgid "Not enough free memory"
+msgstr ""
 
 msgid "Not enough free memory."
 msgstr ""
@@ -723,6 +750,9 @@ msgid "Quick Boot"
 msgstr "ｸｲｯｸ起動"
 
 msgid "Reading WAD data... Ok!"
+msgstr ""
+
+msgid "Receiving file from:"
 msgstr ""
 
 msgid "Released"

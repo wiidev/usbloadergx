@@ -13,7 +13,6 @@
 
 struct SSettings Settings;
 
-
 char bootDevice[10] = "SD:";
 
 struct CFG CFG;
@@ -339,6 +338,7 @@ void Global_Default(void)
 	Settings.xflip = no;
 	Settings.qboot = no;
 	Settings.wiilight = 1;
+	Settings.autonetwork = 0;
 	Settings.patchcountrystrings = 0;
 	Settings.gridRows = 3;
 	Settings.error002 = 0;
@@ -991,6 +991,13 @@ void global_cfg_set(char *name, char *val)
 			}
 		return;
 	}
+	else if (strcmp(name, "autonetwork") == 0) {
+		int i;
+		if (sscanf(val, "%d", &i) == 1) {
+            Settings.autonetwork = i;
+			}
+		return;
+	}
 	else if (strcmp(name, "patchcountrystrings") == 0) {
 		int i;
 		if (sscanf(val, "%d", &i) == 1) {
@@ -1277,6 +1284,7 @@ bool cfg_save_global()// save global settings
 	fprintf(f, "patchcountrystrings = %d\n ", Settings.patchcountrystrings);
 	fprintf(f, "screensaver = %d\n ", Settings.screensaver);
 	fprintf(f, "error002 = %d\n ", Settings.error002);
+	fprintf(f, "autonetwork = %d\n ", Settings.autonetwork);
 	fclose(f);
 	return true;
 }

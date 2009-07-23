@@ -228,17 +228,19 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
 	ResumeGui();
 
 	while(promptWindow.GetEffect() > 0) usleep(100);
-	
-	
+
+
 	int tmp;
 	while(showProgress)
 	{
+
+        VIDEO_WaitVSync ();
 	    usleep(20000);
 
         GameInstallProgress();
 		tmp=static_cast<int>(progressbarImg.GetWidth()*progressDone);
-		
-		
+
+
 
         if(CFG.widescreen && Settings.wsprompt == yes)
             progressbarImg.SetSkew(0,0,static_cast<int>(progressbarImg.GetWidth()*progressDone*0.8)-progressbarImg.GetWidth(),0,static_cast<int>(progressbarImg.GetWidth()*progressDone*0.8)-progressbarImg.GetWidth(),0,0,0);
@@ -351,12 +353,12 @@ void ShowProgress(const char *title, const char *msg1, const char *msg2, f32 don
     }
 
     if(swSize == true) {
-        if(total < MBSIZE*10)
-            snprintf(progressSizeLeft, sizeof(progressSizeLeft), "%0.2fKB/%0.2fKB", 100.0* done/total / KBSIZE, total/KBSIZE);
-        else if(total > MBSIZE*10 && total < GBSIZE)
-            snprintf(progressSizeLeft, sizeof(progressSizeLeft), "%0.2fMB/%0.2fMB", 100.0* done/total / MBSIZE, total/MBSIZE);
+        if(total < MBSIZE)
+            snprintf(progressSizeLeft, sizeof(progressSizeLeft), "%0.2fKB/%0.2fKB", done * done/total / KBSIZE, total/KBSIZE);
+        else if(total > MBSIZE && total < GBSIZE)
+            snprintf(progressSizeLeft, sizeof(progressSizeLeft), "%0.2fMB/%0.2fMB", done * done/total / MBSIZE, total/MBSIZE);
         else
-            snprintf(progressSizeLeft, sizeof(progressSizeLeft), "%0.2fGB/%0.2fGB", 100.0* done/total / GBSIZE, total/GBSIZE);
+            snprintf(progressSizeLeft, sizeof(progressSizeLeft), "%0.2fGB/%0.2fGB", done * done/total / GBSIZE, total/GBSIZE);
     }
 
 	showProgress = 1;

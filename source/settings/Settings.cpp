@@ -480,6 +480,7 @@ int MenuSettings()
                     options2.SetName(6, "%s",tr("Keyboard"));
                     options2.SetName(7, "%s",tr("Wiilight"));
                     options2.SetName(8, "%s",tr("Rumble"));
+                    options2.SetName(9, "%s",tr("AutoInit Network"));
                     options2.SetName(10, "%s",tr("Titles from XML"));
                     options2.SetName(11, "%s",tr("Screensaver"));
                     for(int i = 0; i <= MAXOPTIONS; i++) options2.SetValue(i, NULL);
@@ -559,6 +560,9 @@ int MenuSettings()
 
                         if (Settings.rumble == RumbleOn) options2.SetValue(8,"%s",tr("ON"));
                         else if (Settings.rumble == RumbleOff) options2.SetValue(8,"%s",tr("OFF"));
+
+                        if (Settings.autonetwork == on) options2.SetValue(9,"%s",tr("ON"));
+                        else if (Settings.autonetwork == off) options2.SetValue(9,"%s",tr("OFF"));
 
                         if (Settings.titlesOverride == 0) options2.SetValue(10,"%s",tr("OFF"));
                         else if (Settings.titlesOverride == 1) options2.SetValue(10,"%s",tr("ON"));
@@ -674,6 +678,9 @@ int MenuSettings()
                                 Settings.rumble++;
                                 break;
                             case 9:
+                                Settings.autonetwork++;
+                                if(Settings.autonetwork > 1)
+                                    Settings.autonetwork = 0;
                                 break;
                             case 10:
                                 Settings.titlesOverride++;
@@ -1897,7 +1904,7 @@ int GameSettings(struct discHdr * header)
 	while(!exit)
 	{
 		VIDEO_WaitVSync();
-		
+
 		if (pagetodisplay==1){
 			options3.SetName(0,"%s", tr("Video Mode"));
 			options3.SetName(1,"%s", tr("VIDTV Patch"));
@@ -2004,7 +2011,7 @@ int GameSettings(struct discHdr * header)
                 if(alternatedol == 2) {
 						 char filename[10];
 						 snprintf(filename,sizeof(filename),"%c%c%c%c%c%c",header->id[0], header->id[1], header->id[2],
-																		 header->id[3],header->id[4], header->id[5]); 
+																		 header->id[3],header->id[4], header->id[5]);
 						int dolchoice =0;
 							//check to see if we already know the offset of the correct dol
 						 int autodol = autoSelectDol(filename);
@@ -2031,18 +2038,18 @@ int GameSettings(struct discHdr * header)
 									snprintf(tmp,sizeof(tmp),tr("It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team. %s - %i") ,filename,alternatedoloffset);
 									WindowPrompt(0,tmp,tr("Ok"));
 							}
-							
-							
-							
+
+
+
                 }
                 break;
             case 10:
                 reloadblock = (reloadblock+1) % 2;
                 break;
-            
+
 		}
 	}
-	
+
 	//the uninstall menu
 	if (pagetodisplay==2){
 			for (int j=0;j<13;j++)
@@ -2058,7 +2065,7 @@ int GameSettings(struct discHdr * header)
 			options3.SetName(5,"%s", tr("Delete CheatTxt"));
 
 
-		
+
 
 		if(shutdown == 1)
 			Sys_Shutdown();
@@ -2066,7 +2073,7 @@ int GameSettings(struct discHdr * header)
 			Sys_Reboot();
 
 		ret = optionBrowser3.GetClickedOption();
-		
+
 		int choice1;
 		char tmp[200];
 		switch (ret)
@@ -2142,43 +2149,43 @@ int GameSettings(struct discHdr * header)
 				}
 				break;
             case 3:
-				
+
 				snprintf(tmp,sizeof(tmp),"%s%c%c%c%c%c%c.png", Settings.covers_path, header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
-			
+
 				choice1 = WindowPrompt(tr("Delete"),tmp,tr("Yes"),tr("No"));
 				if(choice1==1)
-					{	
+					{
 						if(checkfile(tmp))
 						remove(tmp);
 					}
 				break;
 			case 4:
-				
+
 				snprintf(tmp,sizeof(tmp),"%s%c%c%c%c%c%c.png", Settings.disc_path, header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
-			
+
 				choice1 = WindowPrompt(tr("Delete"),tmp,tr("Yes"),tr("No"));
 				if(choice1==1)
-					{	
+					{
 						if(checkfile(tmp))
 						remove(tmp);
 					}
 				break;
 			case 5:
-				
+
 				snprintf(tmp,sizeof(tmp),"%s%c%c%c%c%c%c.txt", Settings.TxtCheatcodespath, header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
-			
+
 				choice1 = WindowPrompt(tr("Delete"),tmp,tr("Yes"),tr("No"));
 				if(choice1==1)
-					{	
+					{
 						if(checkfile(tmp))
 						remove(tmp);
 					}
 				break;
-			
+
 		}
 	}
-	
-	
+
+
 		if(saveBtn.GetState() == STATE_CLICKED)
 		{
 //			if(isSdInserted()) {
@@ -2214,7 +2221,7 @@ int GameSettings(struct discHdr * header)
 
 		if (deleteBtn.GetState() == STATE_CLICKED)
 		{
-		
+
 				pagetodisplay++;
 				deleteBtnTxt.SetText(tr("Settings"));
 				optionBrowser3.SetScrollbar(0);
@@ -2225,9 +2232,9 @@ int GameSettings(struct discHdr * header)
 					deleteBtnTxt.SetText(tr("Uninstall Menu"));
 					optionBrowser3.SetScrollbar(1);
 					}
-				
+
 				deleteBtn.ResetState();
-				
+
 		}
 
 		if (GCTBtn.GetState() == STATE_CLICKED) {
