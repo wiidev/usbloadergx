@@ -80,6 +80,11 @@ void GuiElement::SetParent(GuiElement * e)
 	LOCK(this);
 	parentElement = e;
 }
+
+GuiElement * GuiElement::GetParent()
+{
+	return parentElement;
+}
 /**
  * Get the left position of the GuiElement.
  * @see SetLeft()

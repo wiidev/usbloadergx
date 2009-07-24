@@ -16,7 +16,7 @@
 #include "settings/cfg.h"
 #include "main.h"
 #include "http.h"
-#include "svnrev.h"
+#include "getrev.h"
 
 #define PORT            4299
 
@@ -271,7 +271,7 @@ int CheckUpdate()
         return -1;
 
     int revnumber = 0;
-    int currentrev = atoi(SVN_REV);
+    int currentrev = atoi(GetRev());
 
 	#ifdef NOTFULLCHANNEL
 	struct block file = downloadfile("http://www.techjawa.com/usbloadergx/rev.txt");

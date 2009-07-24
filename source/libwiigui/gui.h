@@ -232,6 +232,9 @@ class GuiElement
 		//!Set the element's parent
 		//!\param e Pointer to parent element
 		void SetParent(GuiElement * e);
+		//!Gets the element's parent
+		//!\return Pointer to parent element
+		GuiElement * GetParent();
 		//!Gets the current leftmost coordinate of the element
 		//!Considers horizontal alignment, x offset, width, and parent element's GetLeft() / GetWidth() values
 		//!\return left coordinate
@@ -1029,4 +1032,52 @@ class GuiOptionBrowser : public GuiElement
 		GuiTrigger * trigB;
 		GuiTrigger * trigHeldA;
 };
+
+//!Display a list of files
+class GuiFileBrowser : public GuiElement
+{
+	public:
+		GuiFileBrowser(int w, int h);
+		~GuiFileBrowser();
+		void DisableTriggerUpdate(bool set);
+		void ResetState();
+		void SetFocus(int f);
+		void Draw();
+		void TriggerUpdate();
+		void Update(GuiTrigger * t);
+		GuiButton * fileList[PAGESIZE];
+	protected:
+		int selectedItem;
+		bool listChanged;
+		bool triggerdisabled;
+
+		GuiText * fileListText[PAGESIZE];
+		GuiText * fileListTextOver[PAGESIZE];
+		GuiImage * fileListBg[PAGESIZE];
+		GuiImage * fileListFolder[PAGESIZE];
+
+		GuiButton * arrowUpBtn;
+		GuiButton * arrowDownBtn;
+		GuiButton * scrollbarBoxBtn;
+
+		GuiImage * bgFileSelectionImg;
+		GuiImage * scrollbarImg;
+		GuiImage * arrowDownImg;
+		GuiImage * arrowUpImg;
+		GuiImage * scrollbarBoxImg;
+
+		GuiImageData * bgFileSelection;
+		GuiImageData * bgFileSelectionEntry;
+		GuiImageData * fileFolder;
+		GuiImageData * scrollbar;
+		GuiImageData * arrowDown;
+		GuiImageData * arrowUp;
+		GuiImageData * scrollbarBox;
+
+		GuiSound * btnSoundOver;
+		GuiSound * btnSoundClick;
+		GuiTrigger * trigA;
+		GuiTrigger * trigHeldA;
+};
+
 #endif

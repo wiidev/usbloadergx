@@ -101,6 +101,18 @@ extern const u32    bg_options_settings_png_size;
 extern const u8     settings_background_png[];
 extern const u32    settings_background_png_size;
 
+extern const u8     bg_browser_png[];
+extern const u32    bg_browser_png_size;
+
+extern const u8     folder_png[];
+extern const u32    folder_png_size;
+
+extern const u8     bg_browser_selection_png[];
+extern const u32    bg_browser_selection_png_size;
+
+extern const u8     addressbar_textbox_png[];
+extern const u32    addressbar_textbox_png_size;
+
 extern const u8     browser_png[];
 extern const u32    browser_png_size;
 
@@ -315,7 +327,7 @@ extern const u8		Wiimote1_png[];
 extern const u32	Wiimote1_png_size;
 
 extern const u8		Wiimote2_png[];
-extern const u32	Wiimote2_png_size; 
+extern const u32	Wiimote2_png_size;
 
 extern const u8		wifi1_png[];
 extern const u32	wifi1_png_size;
