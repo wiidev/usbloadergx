@@ -7,7 +7,7 @@ a=$(svnversion -n ..)
 
 b=$(cat ../source/svnrev.h | tr -d '\n' | sed 's/[^0-9]*\([0-9]*\).*/\1/')
 
-if [ $a -ne $b ]; then
+if [ "$a" != "$b" ]; then
 	echo '#ifndef SVNREV_H' > ../source/svnrev.h
 	echo '  #define SVNREV_H' >> ../source/svnrev.h
 	echo '  #define SVN_REV "'$a'"' >> ../source/svnrev.h
