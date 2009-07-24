@@ -21,13 +21,12 @@ SOURCES		:=	source source/libwiigui source/images source/fonts source/sounds \
 				source/usbloader source/xml source/network source/settings source/prompts \
 				source/ramdisc source/wad source/banner source/cheats source/homebrewboot
 INCLUDES	:=	source
-SVNDEV		:=	-D'SVN_REV="$(shell svnversion -n ..)"'
 
 #---------------------------------------------------------------------------------
 # options for code generation
 #---------------------------------------------------------------------------------
 
-CFLAGS		=	-g -O2 -save-temps -Wall $(SVNDEV) $(MACHDEP) $(INCLUDE)
+CFLAGS		=	-g -O2 -save-temps -Wall $(MACHDEP) $(INCLUDE)
 CXXFLAGS	=	-Xassembler -aln=$@.lst $(CFLAGS)
 LDFLAGS		=	-g $(MACHDEP) -Wl,-Map,$(notdir $@).map,--section-start,.init=0x80c00000
 
@@ -124,6 +123,7 @@ release:
 else
 
 DEPENDS	:=	$(OFILES:.o=.d)
+SVNREV	:=	$(shell ../svnrev.sh)
 
 #---------------------------------------------------------------------------------
 # main targets

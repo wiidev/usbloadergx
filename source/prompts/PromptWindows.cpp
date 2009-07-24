@@ -28,6 +28,7 @@
 #include "wad/wad.h"
 #include "unzip/unzip.h"
 #include "zlib.h"
+#include "svnrev.h"
 
 
 /*** Variables that are also used extern ***/
