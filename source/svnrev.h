@@ -5,7 +5,7 @@ extern "C"
 {
 #endif
 
-char *GetRev();
+const char *GetRev();
 
 #ifdef __cplusplus
 }
