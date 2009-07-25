@@ -4,34 +4,34 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-24 23:13-0400\n"
-"PO-Revision-Date: 2009-07-21 20:18+0200\n"
+"POT-Creation-Date: 2009-07-25 17:36+0200\n"
+"PO-Revision-Date: 2009-07-24 16:45+0200\n"
 "Last-Translator: Katsurou\n"
-"Language-Team: \n"
+"Language-Team: Katsurou, pirateX\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid " could not be downloaded."
-msgstr ""
+msgstr "Kunde inte laddas ner."
 
 msgid " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information."
-msgstr ""
+msgstr "har sparats. Texten har inte blivit varifierad. Några av koderna kanske inte fungerar riktigt med varandra. Om du upplever problem, öppna texten i en textredigerare för mer information."
 
 msgid " is not on the server."
-msgstr ""
+msgstr "finns inte på servern."
 
 msgid "(both retired)"
 msgstr "Båda pansionerade"
 
 msgid "0 (Everyone)"
-msgstr "För alla"
+msgstr "0 (Alla)"
 
 msgid "1 (Child 7+)"
-msgstr "Barn 7+"
+msgstr "1 (Barn 7+)"
 
 msgid "1 hour"
-msgstr ""
+msgstr "1 timme"
 
 msgid "10 min"
 msgstr ""
@@ -43,7 +43,7 @@ msgid "20 min"
 msgstr ""
 
 msgid "3 (Mature 16+)"
-msgstr "Ungdomar 16+"
+msgstr "3 (Mogen 16+)"
 
 msgid "3 min"
 msgstr ""
@@ -100,7 +100,7 @@ msgid "Aug"
 msgstr ""
 
 msgid "AutoInit Network"
-msgstr ""
+msgstr "AutoInitiera Nätverk"
 
 msgid "AutoPatch"
 msgstr "AutoPatch"
@@ -148,13 +148,13 @@ msgid "Cancel"
 msgstr "Avbryt"
 
 msgid "Cheatcodes Path"
-msgstr "Fusk sökväg"
+msgstr "Fusksökväg"
 
 msgid "Cheatcodes Path changed"
 msgstr "Sökväg till fusk ändrad"
 
 msgid "Cheatfile is blank"
-msgstr "Fusk filen är blank"
+msgstr "Fuskfilen är blank"
 
 msgid "Checking for Updates"
 msgstr "Letar efter uppdateringar"
@@ -169,14 +169,14 @@ msgid "Close"
 msgstr "Stäng"
 
 msgid "Code Download"
-msgstr "Fusk Nedladdning"
+msgstr "Fusknedladdning"
 
 #, c-format
 msgid "Coded by: %s"
-msgstr ""
+msgstr "Kodad av: %s"
 
 msgid "Coding:"
-msgstr ""
+msgstr "Kodning:"
 
 msgid "Confirm"
 msgstr "Bekräfta"
@@ -185,7 +185,7 @@ msgid "Console"
 msgstr "Konsol"
 
 msgid "Console Default"
-msgstr "Konsolens inställning"
+msgstr "Konsolestandard"
 
 msgid "Console Locked"
 msgstr "Konsol låst"
@@ -197,7 +197,7 @@ msgid "Continue to install game?"
 msgstr "Fortsätt installera spel?"
 
 msgid "Controllevel"
-msgstr "Kontroll nivå"
+msgstr "Kontrollnivå"
 
 msgid "Correct Password"
 msgstr "Rätt lösenord"
@@ -209,7 +209,7 @@ msgid "Could not find a WBFS partition."
 msgstr "Kunde inte hitta WBFS partition."
 
 msgid "Could not initialize DIP module!"
-msgstr "Kunde inte starta \"DIP-module\"!"
+msgstr "Kunde inte starta DIP-modul!"
 
 msgid "Could not initialize network!"
 msgstr "Kunde inte starta nätverket!"
@@ -263,10 +263,10 @@ msgid "Default"
 msgstr "Standard"
 
 msgid "Default Gamesettings"
-msgstr "Ställ till spel Standard"
+msgstr "Ställ till spelstandard"
 
 msgid "Default Settings"
-msgstr "Standard inställningar"
+msgstr "Standardinställningar"
 
 msgid "Delete"
 msgstr "Radera"
@@ -275,7 +275,7 @@ msgid "Delete Boxart"
 msgstr "Radera omslag"
 
 msgid "Delete CheatTxt"
-msgstr "Radera Fusk"
+msgstr "Radera fusk"
 
 msgid "Delete Discart"
 msgstr "Radera skivbilder"
@@ -287,7 +287,7 @@ msgid "Developed by"
 msgstr "Utvecklat av"
 
 msgid "Disc Default"
-msgstr "Skivans inställning"
+msgstr "Skivans standard"
 
 msgid "Disc Images"
 msgstr "Skivbilder"
@@ -332,13 +332,13 @@ msgid "Dolpath change"
 msgstr "Ändra Dol sökväg"
 
 msgid "Don't bother the USB Loader GX Team about errors in this file."
-msgstr ""
+msgstr "Rapportera inte fel i denna fil till USB Loader GX teamet."
 
 msgid "Download Boxart image?"
 msgstr "Ladda ner omslagsbild?"
 
 msgid "Download Discart image?"
-msgstr "Ladda ner skiv bild?"
+msgstr "Ladda ner skivbild?"
 
 msgid "Download Now"
 msgstr "Ladda ner nu"
@@ -356,10 +356,10 @@ msgid "Dutch"
 msgstr "Nederländska"
 
 msgid "ERROR"
-msgstr ""
+msgstr "FEL"
 
 msgid "ERROR:"
-msgstr ""
+msgstr "FEL:"
 
 msgid "English"
 msgstr "Engelska"
@@ -377,13 +377,13 @@ msgid "Error reading Disc"
 msgstr "Fel vid läsning av skiva"
 
 msgid "Error while transfering data."
-msgstr ""
+msgstr "Fel vid överförning av data."
 
 msgid "Error..."
 msgstr "Fel..."
 
 msgid "Error:"
-msgstr ""
+msgstr "Fel:"
 
 msgid "Exit USB Loader GX?"
 msgstr "Avsluta USB Loader GX?"
@@ -452,7 +452,7 @@ msgid "German"
 msgstr "Tyska"
 
 msgid "HOME Menu"
-msgstr "Hem meny"
+msgstr "Hemmeny"
 
 msgid "Homebrew Apps Path"
 msgstr "Homebrew Apps"
@@ -476,14 +476,14 @@ msgid "How to Shutdown?"
 msgstr "Hur vill du stänga av?"
 
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
+msgstr "Om du inte har WiFi, tryck 1 för att få en URL till din WiiTDB.zip"
+
+#, c-format
+msgid "Incoming file %0.2fKB"
 msgstr ""
 
 #, c-format
-msgid "Incomming file %0.2fKB"
-msgstr ""
-
-#, c-format
-msgid "Incomming file %0.2fMB"
+msgid "Incoming file %0.2fMB"
 msgstr ""
 
 msgid "Initializing Network"
@@ -539,10 +539,10 @@ msgid "Japanese"
 msgstr "Japanska"
 
 msgid "July"
-msgstr ""
+msgstr "Juli"
 
 msgid "June"
-msgstr ""
+msgstr "Juni"
 
 msgid "Keyboard"
 msgstr "Tangentbord"
@@ -551,7 +551,7 @@ msgid "Korean"
 msgstr "Koreanska"
 
 msgid "Language change:"
-msgstr "Språk byte:"
+msgstr "Språkbyte:"
 
 msgid "Languagepath changed."
 msgstr "Sökväg till språk ändrad"
@@ -570,7 +570,7 @@ msgstr "Ladda"
 
 #, c-format
 msgid "Load file from: %s ?"
-msgstr ""
+msgstr "Ladda fil från: %s ?"
 
 msgid "Load this dol as alternate dol?"
 msgstr "Ladda denna dol som alternativ dol?"
@@ -591,7 +591,7 @@ msgid "Mar"
 msgstr ""
 
 msgid "May"
-msgstr ""
+msgstr "Maj"
 
 msgid "Missing files"
 msgstr "Filer som saknas"
@@ -618,10 +618,10 @@ msgid "No .dol or .elf files found."
 msgstr "Ingen .dol eller .elf fil hittades."
 
 msgid "No Cheatfile found"
-msgstr "Ingen fusk fil hittades"
+msgstr "Ingen fuskfil hittades"
 
 msgid "No Favorites"
-msgstr "Inga Favoriter"
+msgstr "Inga favoriter"
 
 msgid "No SD-Card inserted!"
 msgstr "Inget SD-kort insatt!"
@@ -636,10 +636,10 @@ msgid "No WBFS partition found"
 msgstr "Ingen WBFS-partition hittad"
 
 msgid "No data could be read."
-msgstr ""
+msgstr "Ingen data kunde läsas."
 
 msgid "No dol file found on disc."
-msgstr "Ingen dol fil hittad på skivan."
+msgstr "Ingen dol fil hittades på skivan."
 
 msgid "No file missing!"
 msgstr "Inga filer saknas!"
@@ -657,16 +657,16 @@ msgid "Normal Covers"
 msgstr "Vanliga omslag"
 
 msgid "Not Found"
-msgstr ""
+msgstr "Hittades inte"
 
 msgid "Not a Wii Disc"
 msgstr "Inte en Wii-skiva"
 
 msgid "Not enough free memory"
-msgstr ""
+msgstr "Inte tillräckligt med ledigt minne"
 
 msgid "Not enough free memory."
-msgstr "Inte tillräckligt med ledigt utrymme."
+msgstr "Inte tillräckligt med ledigt minne."
 
 msgid "Not enough free space!"
 msgstr "Inte tillräckligt med ledigt utrymme!"
@@ -681,13 +681,13 @@ msgid "OFF"
 msgstr "AV"
 
 msgid "OK"
-msgstr "OK"
+msgstr ""
 
 msgid "ON"
 msgstr "PÅ"
 
 msgid "Oct"
-msgstr ""
+msgstr "Okt"
 
 msgid "Official Site"
 msgstr "Officiell Sida"
@@ -717,10 +717,10 @@ msgid "Password has been changed"
 msgstr "Lösenordet har ändrats"
 
 msgid "Paste it into your browser to get your WiiTDB.zip."
-msgstr ""
+msgstr "Klistra in det i din webbläsare för att hämta WiiTDB.zip."
 
 msgid "Patch Country Strings"
-msgstr "Still in lands strängar"
+msgstr "Ställ in landssträngar"
 
 msgid "Path of titles.txt change"
 msgstr "Ändrad sökväg till titles.txt"
@@ -732,7 +732,7 @@ msgid "Pick from a list"
 msgstr "Välj från en lista"
 
 msgid "Play Count"
-msgstr ""
+msgstr "Spelaträknare"
 
 msgid "Power off the Wii"
 msgstr "Stäng av Wii"
@@ -747,13 +747,13 @@ msgid "Published by"
 msgstr "Publicerat av"
 
 msgid "Quick Boot"
-msgstr "Snabb start"
+msgstr "Snabbstart"
 
 msgid "Reading WAD data... Ok!"
 msgstr "Läser WAD data... Ok!"
 
 msgid "Receiving file from:"
-msgstr ""
+msgstr "Tar emot filer från:"
 
 msgid "Released"
 msgstr "Släppt"
@@ -765,7 +765,7 @@ msgid "Rename Game on WBFS"
 msgstr "Döp om spel på WBFS"
 
 msgid "Reset Playcounter"
-msgstr ""
+msgstr "Återställ spelaträknare"
 
 msgid "Restart"
 msgstr "Starta om"
@@ -789,7 +789,7 @@ msgid "SChinese"
 msgstr "SKinesiska"
 
 msgid "SD selected"
-msgstr ""
+msgstr "SD vald"
 
 msgid "SFX Volume"
 msgstr "SFX Volym"
@@ -843,7 +843,7 @@ msgid "Successfully Saved"
 msgstr "Lyckad sparning"
 
 msgid "Successfully Updated"
-msgstr "Uppdateringen Lyckades"
+msgstr "Uppdateringen lyckades"
 
 msgid "Successfully deleted:"
 msgstr "Lyckad radering av:"
@@ -864,7 +864,7 @@ msgid "TXTCheatcodes Path changed"
 msgstr "TXTCheatcodes sökväg ändrad"
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."
-msgstr ""
+msgstr "Wad filen har blivit installerad. Men kunde inte raderas från SD-kortet."
 
 #, c-format
 msgid "The wad installation failed with error %ld"
@@ -902,7 +902,7 @@ msgid "Uninstall Game"
 msgstr "Avinstallera spel"
 
 msgid "Uninstall Menu"
-msgstr "Avinstallera Meny"
+msgstr "Avinstallera meny"
 
 msgid "Unlock console to use this option."
 msgstr "Lås upp konsolen för denna inställning."
@@ -969,7 +969,7 @@ msgid "Yes"
 msgstr "Ja"
 
 msgid "You are about to delete "
-msgstr "Då är påväg att radera"
+msgstr "Då håller på att radera"
 
 msgid "You are choosing to display favorites and you do not have any selected."
 msgstr "Du har valt att visa favoriter men du har inga favoriter valda."
@@ -982,22 +982,22 @@ msgstr "Du behöver formatera en partition"
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
-msgstr ""
+msgstr "Din URL har sparats som %sWiiTDB_URL.txt."
 
 msgid "available"
-msgstr "Tillgänglig"
+msgstr "tillgänglig"
 
 msgid "contains over 255 lines of code.  It will produce unexpected results."
 msgstr "Innehåller över 255 rader kod. Det kommer att skapa oväntade resultat."
 
 msgid "does not exist!"
-msgstr "Existerar inte!"
+msgstr "existerar inte!"
 
 msgid "does not exist!  Loading game without cheats."
-msgstr "Existerar inte! Laddar spel utan fusk."
+msgstr "existerar inte! Laddar spel utan fusk."
 
 msgid "does not exist!  You Messed something up, Idiot."
-msgstr "Existerar inte! Du har gjort något fel."
+msgstr "existerar inte! Du har gjort något fel."
 
 msgid "file left"
 msgstr "fil kvar"
@@ -1047,6 +1047,12 @@ msgstr "ett fel uppstod"
 msgid "titles.txt Path"
 msgstr "sökväg till titles.txt"
 
+#~ msgid "Incomming file %0.2fKB"
+#~ msgstr "Inkommande fil %0.2fKB"
+
+#~ msgid "Incomming file %0.2fMB"
+#~ msgstr "Inkommande fil %0.2fMB"
+
 #~ msgid "Uninstall"
 #~ msgstr "Avinstallera"
 
@@ -1075,7 +1081,7 @@ msgstr "sökväg till titles.txt"
 #~ msgstr "Ändra språk"
 
 #~ msgid "Loading in cIOS249"
-#~ msgstr "Laddar i cIOS249"
+#~ msgstr "Laddar in cIOS249"
 
 #~ msgid "No HDD found!"
 #~ msgstr "Ingen hårddisk hittad!"

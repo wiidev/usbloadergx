@@ -1,10 +1,10 @@
 # USB Loader GX language source file.
-# File Version 20 - For USB Loader GX rev632
+# For USB Loader GX rev640
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-24 23:13-0400\n"
+"POT-Creation-Date: 2009-07-25 17:16+0200\n"
 "PO-Revision-Date: 2009-07-20 16:40\n"
 "Last-Translator: Sky8000\n"
 "Language-Team: \n"
@@ -13,13 +13,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid " could not be downloaded."
-msgstr ""
+msgstr " não foi descarregado."
 
 msgid " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information."
-msgstr ""
+msgstr " foi guardado. O texto não foi verificado. Parte do código pode não funcionar correctamente. Se detectares problemas abre o texto com um editor de texto para obteres mais informação."
 
 msgid " is not on the server."
-msgstr ""
+msgstr " não está no servidor."
 
 msgid "(both retired)"
 msgstr "(ambos retirados)"
@@ -31,25 +31,25 @@ msgid "1 (Child 7+)"
 msgstr "1 (Crianças 7+)"
 
 msgid "1 hour"
-msgstr ""
+msgstr "1 hora"
 
 msgid "10 min"
-msgstr ""
+msgstr "10 minutos"
 
 msgid "2 (Teen 12+)"
 msgstr "2 (Adolescente 12+)"
 
 msgid "20 min"
-msgstr ""
+msgstr "20 minutos"
 
 msgid "3 (Mature 16+)"
 msgstr "3 (Adulto 16+)"
 
 msgid "3 min"
-msgstr ""
+msgstr "3 minutos"
 
 msgid "30 min"
-msgstr ""
+msgstr "30 minutos"
 
 msgid "3D Covers"
 msgstr "Capas 3D"
@@ -58,7 +58,7 @@ msgid "4 (Adults Only 18+)"
 msgstr "4 (Adultos 18+)"
 
 msgid "5 min"
-msgstr ""
+msgstr "5 minutos"
 
 msgid ">> Finishing installation..."
 msgstr ">> Terminando instalação..."
@@ -100,7 +100,7 @@ msgid "Aug"
 msgstr "Ago"
 
 msgid "AutoInit Network"
-msgstr ""
+msgstr "Auto-iniciar Rede"
 
 msgid "AutoPatch"
 msgstr "Patch automático"
@@ -173,10 +173,10 @@ msgstr "Download de Código"
 
 #, c-format
 msgid "Coded by: %s"
-msgstr ""
+msgstr "Programado por: %s"
 
 msgid "Coding:"
-msgstr ""
+msgstr "Desenvolvimento:"
 
 msgid "Confirm"
 msgstr "Confirmar"
@@ -272,16 +272,16 @@ msgid "Delete"
 msgstr "Eliminar"
 
 msgid "Delete Boxart"
-msgstr ""
+msgstr "Eliminar Capas"
 
 msgid "Delete CheatTxt"
-msgstr ""
+msgstr "Eliminar Fich. Truques"
 
 msgid "Delete Discart"
-msgstr ""
+msgstr "Eliminar Img. Disco"
 
 msgid "Design:"
-msgstr ""
+msgstr "Design:"
 
 msgid "Developed by"
 msgstr "Desenvolvido por"
@@ -332,7 +332,7 @@ msgid "Dolpath change"
 msgstr "Alterar Pasta do DOL"
 
 msgid "Don't bother the USB Loader GX Team about errors in this file."
-msgstr ""
+msgstr "Não incomodes a equipa do USB Loader GX por erros neste ficheiro."
 
 msgid "Download Boxart image?"
 msgstr "Descarregar imagem da Caixa?"
@@ -377,13 +377,13 @@ msgid "Error reading Disc"
 msgstr "Erro ao ler o Disco"
 
 msgid "Error while transfering data."
-msgstr ""
+msgstr "Erro na transferência de dados."
 
 msgid "Error..."
 msgstr "Erro..."
 
 msgid "Error:"
-msgstr ""
+msgstr "Erro:"
 
 msgid "Exit USB Loader GX?"
 msgstr "Pretende sair do USB Loader GX?"
@@ -476,14 +476,14 @@ msgid "How to Shutdown?"
 msgstr "Como desligar a consola?"
 
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
+msgstr "Se não tens rede sem fios pressiona 1 para ver o URL de onde podes descarregar o ficheiro WiiTDB.zip"
+
+#, c-format
+msgid "Incoming file %0.2fKB"
 msgstr ""
 
 #, c-format
-msgid "Incomming file %0.2fKB"
-msgstr ""
-
-#, c-format
-msgid "Incomming file %0.2fMB"
+msgid "Incoming file %0.2fMB"
 msgstr ""
 
 msgid "Initializing Network"
@@ -570,7 +570,7 @@ msgstr "Carregar"
 
 #, c-format
 msgid "Load file from: %s ?"
-msgstr ""
+msgstr "Carregar ficheiro de: %s ?"
 
 msgid "Load this dol as alternate dol?"
 msgstr "Carregar este dol como dol alternativo?"
@@ -636,7 +636,7 @@ msgid "No WBFS partition found"
 msgstr "Não foi encontrada nenhuma partição WBFS"
 
 msgid "No data could be read."
-msgstr ""
+msgstr "Não foi possível ler dados."
 
 msgid "No dol file found on disc."
 msgstr "Não foi encontrado nenhum ficheiro dol no disco"
@@ -657,7 +657,7 @@ msgid "Normal Covers"
 msgstr "Capas Normais"
 
 msgid "Not Found"
-msgstr ""
+msgstr "Não encontrado"
 
 msgid "Not a Wii Disc"
 msgstr "Não é um Disco da Wii"
@@ -717,7 +717,7 @@ msgid "Password has been changed"
 msgstr "A Password foi alterada"
 
 msgid "Paste it into your browser to get your WiiTDB.zip."
-msgstr ""
+msgstr "Copia para o teu browser de Internet para descarregares o teu WiiTDB.zip"
 
 msgid "Patch Country Strings"
 msgstr "Patch Jogos Importados"
@@ -753,7 +753,7 @@ msgid "Reading WAD data... Ok!"
 msgstr "Lendo dados do WAD... Ok!"
 
 msgid "Receiving file from:"
-msgstr ""
+msgstr "Recebendo ficheiro de:"
 
 msgid "Released"
 msgstr "Lançamento"
@@ -846,7 +846,7 @@ msgid "Successfully Updated"
 msgstr "Programa actualizado com Sucesso"
 
 msgid "Successfully deleted:"
-msgstr "Removido com Sucesso:"
+msgstr "Eliminado com Sucesso:"
 
 msgid "Successfully installed:"
 msgstr "Instalado com Sucesso:"
@@ -864,7 +864,7 @@ msgid "TXTCheatcodes Path changed"
 msgstr "Pasta de Dicas alterada"
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."
-msgstr ""
+msgstr "O ficheiro wad foi instalado mas não foi possível eliminá-lo do cartão SD."
 
 #, c-format
 msgid "The wad installation failed with error %ld"
@@ -899,10 +899,10 @@ msgid "Unable to open the wad that was just downloaded (%s)."
 msgstr "Não é possível abrir o ficheiro wad descarregado (%s)."
 
 msgid "Uninstall Game"
-msgstr ""
+msgstr "Desinstalar jogo"
 
 msgid "Uninstall Menu"
-msgstr ""
+msgstr "Menu de Desinstalação"
 
 msgid "Unlock console to use this option."
 msgstr "Desbloquear configuração antes de usar esta opção."
@@ -939,7 +939,7 @@ msgstr "Patch VIDTV"
 
 #, c-format
 msgid "Version: %s"
-msgstr ""
+msgstr "Versão: %s"
 
 msgid "Video Mode"
 msgstr "Modo de Vídeo"
@@ -969,7 +969,7 @@ msgid "Yes"
 msgstr "Sim"
 
 msgid "You are about to delete "
-msgstr "Vais remover "
+msgstr "Vais eliminar "
 
 msgid "You are choosing to display favorites and you do not have any selected."
 msgstr "Está a tentar visualizar os favoritos mas não existe nenhum seleccionado."
@@ -982,7 +982,7 @@ msgstr "É necessário FORMATAR a partição"
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
-msgstr ""
+msgstr "O teu URL foi guardado em %sWiiTDB_URL.txt."
 
 msgid "available"
 msgstr "disponível"
@@ -1046,6 +1046,12 @@ msgstr "ocorreu um erro"
 
 msgid "titles.txt Path"
 msgstr "Pasta titles.txt"
+
+#~ msgid "Incomming file %0.2fKB"
+#~ msgstr "A receber ficheiro %0.2fKB"
+
+#~ msgid "Incomming file %0.2fMB"
+#~ msgstr "A receber ficheiro %0.2fMB"
 
 #~ msgid "Uninstall"
 #~ msgstr "Remover"

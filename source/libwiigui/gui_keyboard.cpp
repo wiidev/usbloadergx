@@ -210,65 +210,121 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
 	}
 	};
 	memcpy(keys, thekeys, sizeof(thekeys));}
-
 	//AZERTY//
-        if (mode == 3){
-        Key thekeys[4][11] = {
-        {
-                {'1','&','²','À'},
-                {'2','~','³','é'},
-                {'3','"','#','È'},
-                {'4','`','«','ù'},
-                {'5','(','[','Ì'},
-                {'6','-','|','ì'},
-                {'7','µ','»','è'},
-                {'8','_','\'','ò'},
-                {'9','+','^','ç'},
-                {'0','=','@','à'},
-                {'°',')',']','Ý'}
-        },
-        {
-                {'a','A','Æ','Á'},
-                {'z','Z','Œ','á'},
-                {'e','E','€','É'},
-                {'r','R','®','ë'},
-                {'t','T','†','Í'},
-                {'y','Y','ÿ','í'},
-                {'u','U','Õ','Ó'},
-                {'i','I','õ','Ò'},
-                {'o','O','Ø','Ú'},
-                {'p','P','ø','ú'},
-                {'$','£','¤','ý'}
-        },
-        {
-                {'q','Q','æ','Â'},
-                {'s','S','œ','â'},
-                {'d','D','\0','Ê'},
-                {'f','F','ß','ê'},
-                {'g','G','\0','Î'},
-                {'h','H','\0','î'},
-                {'j','J','\0','Ô'},
-                {'k','K','\0','ô'},
-                {'l','L','\0','Û'},
-                {'m','M','\0','û'},
-                {'*','%','\0','Ù'}
-        },
-        {
-                {'<','>','\0','Ã'},
-                {'w','W','\0','Ä'},
-                {'x','X','\0','Ë'},
-                {'c','C','©','Ç'},
-                {'v','V','“','Ï'},
-                {'b','B','”','ï'},
-                {'n','N','\0','Ñ'},
-                {',','?','\0','ñ'},
-                {';','.','\0','ó'},
-                {':','/','\0','ö'},
-                {'!','§','\0','Ö'}
-        }
-        };
-        memcpy(keys, thekeys, sizeof(thekeys));}
-
+    if (mode == 3){
+	Key thekeys[4][11] = {
+    {
+		{'1','&','²','À'},
+		{'2','~','³','é'},
+		{'3','"','#','È'},
+		{'4','`','«','ù'},
+		{'5','(','[','Ì'},
+		{'6','-','|','ì'},
+		{'7','µ','»','è'},
+		{'8','_','\'','ò'},
+		{'9','+','^','ç'},
+		{'0','=','@','à'},
+		{'°',')',']','Ý'}
+	},
+	{
+		{'a','A','Æ','Á'},
+		{'z','Z','Œ','á'},
+		{'e','E','€','É'},
+		{'r','R','®','ë'},
+		{'t','T','†','Í'},
+		{'y','Y','ÿ','í'},
+		{'u','U','Õ','Ó'},
+		{'i','I','õ','Ò'},
+		{'o','O','Ø','Ú'},
+		{'p','P','ø','ú'},
+		{'$','£','¤','ý'}
+	},
+	{
+		{'q','Q','æ','Â'},
+		{'s','S','œ','â'},
+		{'d','D','\0','Ê'},
+		{'f','F','ß','ê'},
+		{'g','G','\0','Î'},
+		{'h','H','\0','î'},
+		{'j','J','\0','Ô'},
+		{'k','K','\0','ô'},
+		{'l','L','\0','Û'},
+		{'m','M','\0','û'},
+		{'*','%','¬','Ù'}
+	},
+	{
+		{'<','>','\0','Ã'},
+		{'w','W','\0','Ä'},
+		{'x','X','\0','Ë'},
+		{'c','C','©','Ç'},
+		{'v','V','“','Ï'},
+		{'b','B','”','ï'},
+		{'n','N','\0','Ñ'},
+		{'?',',','?','ñ'},
+		{'.',';','.','ó'},
+		{'/',':','/','ö'},
+		{'§','!','!','Ö'}
+	}
+	};
+	memcpy(keys, thekeys, sizeof(thekeys));}
+	//QWERTY 2//
+	if (mode == 4){
+	Key thekeys[4][11] = {
+	{
+		{'1','!','|','Á'},
+		{'2','"','@','á'},
+		{'3','·','#','À'},
+		{'4','$','£','à'},
+		{'5','%','~','É'},
+		{'6','&','¬','é'},
+		{'7','/','\'','È'},
+		{'8','(','[','è'},
+		{'9',')',']','Í'},
+		{'0','=','¤','í'},
+		{'¡','?','¿','Ï'}
+	},
+	{
+		{'q','Q','\0','ï'},
+		{'w','W','\0','Ó'},
+		{'e','E','€','ó'},
+		{'r','R','®','Ò'},
+		{'t','T','†','ò'},
+		{'y','Y','ÿ','Ú'},
+		{'u','U','“','ú'},
+		{'i','I','”','Ü'},
+		{'o','O','Ø','ü'},
+		{'p','P','ø','Ù'},
+		{'+','*','\0','ù'}
+	},
+	{
+		{'a','A','^','Ã'},
+		{'s','S','²','ã'},
+		{'d','D','³','Õ'},
+		{'f','F','«','õ'},
+		{'g','G','»','Ñ'},
+		{'h','H','§','ñ'},
+		{'j','J','µ','Ç'},
+		{'k','K','¤','ç'},
+		{'l','L','„','\0'},
+		{'ñ','Ñ','+','\0'},
+		{'ç','Ç','°','\0'}
+	},
+	{
+		{'<','>','\0','Ä'},
+		{'z','Z','\0','ä'},
+		{'x','X','\0','Â'},
+		{'c','C','©','â'},
+		{'v','V','\0','å'},
+		{'b','B','ß','Ë'},
+		{'n','N','\0','ë'},
+		{'m','M','\0','Ê'},
+		{',',';','\0','ê'},
+		{'.',':','\0','\0'},
+		{'-','_','\0','\0'}
+	}
+	};
+	memcpy(keys, thekeys, sizeof(thekeys));}
+	
 	keyTextbox = new GuiImageData(keyboard_textbox_png);
 	keyTextboxImg = new GuiImage(keyTextbox);
 	keyTextboxImg->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
@@ -301,7 +357,10 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
 
 	keyBackImg = new GuiImage(keyMedium);
 	keyBackOverImg = new GuiImage(keyMediumOver);
-	keyBackText = new GuiText("Back", 20, (GXColor){0, 0, 0, 0xff});
+	if (mode == 3){
+	keyBackText = new GuiText("Retour", 20, (GXColor){0, 0, 0, 0xff});}
+	else {
+	keyBackText = new GuiText("Back", 20, (GXColor){0, 0, 0, 0xff});}
 	//GuiButton(GuiImage* img, GuiImage* imgOver, int hor, int vert, int x, int y, GuiTrigger* trig, GuiSound* sndOver, GuiSound* sndClick, u8 grow);
 
 	//keyBack = new GuiButton(keyMedium->GetWidth(), keyMedium->GetHeight());
@@ -322,7 +381,10 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
 
 	keyClearImg = new GuiImage(keyMedium);
 	keyClearOverImg = new GuiImage(keyMediumOver);
-	keyClearText = new GuiText("clear", 20, (GXColor){0, 0, 0, 0xff});
+	if (mode == 3){
+	keyClearText = new GuiText("Effacer", 20, (GXColor){0, 0, 0, 0xff});}
+	else {
+	keyClearText = new GuiText("clear", 20, (GXColor){0, 0, 0, 0xff});}
 	keyClear = new GuiButton(keyClearImg, keyClearOverImg, 0, 3, (10*42+40)+eurocheck, 4*42+120, trigA, keySoundOver, keySoundClick,1);
 	//keyClear = new GuiButton(keyMedium->GetWidth(), keyMedium->GetHeight());
 	//keyClear->SetImage(keyClearImg);

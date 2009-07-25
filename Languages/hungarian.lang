@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-24 23:13-0400\n"
+"POT-Creation-Date: 2009-07-25 17:16+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: Tusk\n"
 "Language-Team: \n"
@@ -479,11 +479,11 @@ msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
 msgstr ""
 
 #, c-format
-msgid "Incomming file %0.2fKB"
+msgid "Incoming file %0.2fKB"
 msgstr ""
 
 #, c-format
-msgid "Incomming file %0.2fMB"
+msgid "Incoming file %0.2fMB"
 msgstr ""
 
 msgid "Initializing Network"

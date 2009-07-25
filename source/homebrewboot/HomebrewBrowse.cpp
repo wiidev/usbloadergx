@@ -790,9 +790,9 @@ int MenuHomebrewBrowse()
                 char temp[50];
 
                 if(infilesize < MBSIZE)
-                    snprintf(filesizetxt, sizeof(filesizetxt), tr("Incomming file %0.2fKB"), infilesize/KBSIZE);
+                    snprintf(filesizetxt, sizeof(filesizetxt), tr("Incoming file %0.2fKB"), infilesize/KBSIZE);
                 else
-                    snprintf(filesizetxt, sizeof(filesizetxt), tr("Incomming file %0.2fMB"), infilesize/MBSIZE);
+                    snprintf(filesizetxt, sizeof(filesizetxt), tr("Incoming file %0.2fMB"), infilesize/MBSIZE);
 
                 snprintf(temp, sizeof(temp), tr("Load file from: %s ?"), GetNetworkIP());
 

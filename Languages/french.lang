@@ -1,10 +1,10 @@
 # USB Loader GX language source file.
-# French V8.5 r635
+# French V8.6 r640
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-24 23:13-0400\n"
+"POT-Creation-Date: 2009-07-25 17:16+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: Kin8\n"
 "Language-Team: Badablek, Amour, ikya, OuahOuah, dj_skual & Kin8\n"
@@ -100,7 +100,7 @@ msgid "Aug"
 msgstr "Août"
 
 msgid "AutoInit Network"
-msgstr ""
+msgstr "AutoInit Réseau"
 
 msgid "AutoPatch"
 msgstr "AutoPatch"
@@ -377,13 +377,13 @@ msgid "Error reading Disc"
 msgstr "Erreur à la lecture du disque"
 
 msgid "Error while transfering data."
-msgstr ""
+msgstr "Erreur durant le transfert de données."
 
 msgid "Error..."
 msgstr "Erreur..."
 
 msgid "Error:"
-msgstr ""
+msgstr "Erreur:"
 
 msgid "Exit USB Loader GX?"
 msgstr "Quitter USB Loader GX ?"
@@ -479,11 +479,11 @@ msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
 msgstr "Pressez 1 pour obtenir un lien personnalisé pour votre WiiTDB.zip"
 
 #, c-format
-msgid "Incomming file %0.2fKB"
+msgid "Incoming file %0.2fKB"
 msgstr ""
 
 #, c-format
-msgid "Incomming file %0.2fMB"
+msgid "Incoming file %0.2fMB"
 msgstr ""
 
 msgid "Initializing Network"
@@ -570,7 +570,7 @@ msgstr "Charger"
 
 #, c-format
 msgid "Load file from: %s ?"
-msgstr ""
+msgstr "Charger le fichier de: %s ?"
 
 msgid "Load this dol as alternate dol?"
 msgstr "Charger ce DOL comme DOL alternatif ?"
@@ -636,7 +636,7 @@ msgid "No WBFS partition found"
 msgstr "Aucune partition WBFS trouvée"
 
 msgid "No data could be read."
-msgstr ""
+msgstr "Lecture des données impossible."
 
 msgid "No dol file found on disc."
 msgstr "Aucun DOL trouvé sur le DVD."
@@ -663,7 +663,7 @@ msgid "Not a Wii Disc"
 msgstr "Ce n'est pas un jeu Wii"
 
 msgid "Not enough free memory"
-msgstr ""
+msgstr "Mémoire libre insuffisante"
 
 msgid "Not enough free memory."
 msgstr "Mémoire libre insuffisante !"
@@ -753,7 +753,7 @@ msgid "Reading WAD data... Ok!"
 msgstr "Lecture données WAD... OK!"
 
 msgid "Receiving file from:"
-msgstr ""
+msgstr "Réception du fichier de:"
 
 msgid "Released"
 msgstr "Date de sortie"
@@ -1046,6 +1046,12 @@ msgstr "une erreur s'est produite"
 
 msgid "titles.txt Path"
 msgstr "Localisation titles.txt"
+
+#~ msgid "Incomming file %0.2fKB"
+#~ msgstr "Fichier entrant %0.2fKB"
+
+#~ msgid "Incomming file %0.2fMB"
+#~ msgstr "Fichier entrant %0.2fMB"
 
 #~ msgid "Do you want to boot?"
 #~ msgstr "Voulez-vous démarrer ?"

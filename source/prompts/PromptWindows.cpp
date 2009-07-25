@@ -65,6 +65,7 @@ int OnScreenKeyboard(char * var, u32 maxlen, int min)
 	else if (Settings.keyset == dvorak) keyset = 1;
 	else if (Settings.keyset == euro) keyset = 2;
 	else if (Settings.keyset == azerty) keyset = 3;
+	else if (Settings.keyset == qwerty) keyset = 4;
 
 	GuiKeyboard keyboard(var, maxlen, min, keyset);
 

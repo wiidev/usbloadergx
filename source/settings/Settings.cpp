@@ -551,6 +551,7 @@ int MenuSettings()
                         else if (Settings.wsprompt == yes) options2.SetValue(5,"%s",tr("Widescreen Fix"));
 
                         if (Settings.keyset == us) options2.SetValue(6,"QWERTY");
+                        else if (Settings.keyset == qwerty) options2.SetValue(6,"QWERTY 2");
                         else if (Settings.keyset == dvorak) options2.SetValue(6,"DVORAK");
                         else if (Settings.keyset == euro) options2.SetValue(6,"QWERTZ");
                         else if (Settings.keyset == azerty) options2.SetValue(6,"AZERTY");

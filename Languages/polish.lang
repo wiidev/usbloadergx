@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-24 23:13-0400\n"
+"POT-Creation-Date: 2009-07-25 17:16+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: ziom666 (zadania_prog@vp.pl)\n"
 "Language-Team: \n"
@@ -13,37 +13,37 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid " could not be downloaded."
-msgstr ""
+msgstr " nie udalo sie pobrac"
 
 msgid " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information."
-msgstr ""
+msgstr " zapisano. Plik tekstowy nie zostal zweryfikowany. Niektóre z kodów, moga nie dzialac wlaeciwie z innymi. W razie problemów otwórz plik tekstowy w edytorze na komputerze"
 
 msgid " is not on the server."
-msgstr ""
+msgstr " nie istnieje na serwerze"
 
 msgid "(both retired)"
 msgstr ""
 
 msgid "0 (Everyone)"
-msgstr "0 (Dla ka¿dego)"
+msgstr "0 (dla kazdego)"
 
 msgid "1 (Child 7+)"
-msgstr "1 (Dziecko 7+)"
+msgstr "1 (dziecko 7+)"
 
 msgid "1 hour"
-msgstr ""
+msgstr "1 godzina"
 
 msgid "10 min"
 msgstr ""
 
 msgid "2 (Teen 12+)"
-msgstr "2 (M³odzie¿ 12+)"
+msgstr "2 (mlodziez 12+)"
 
 msgid "20 min"
 msgstr ""
 
 msgid "3 (Mature 16+)"
-msgstr "3 (Doros³y 16+)"
+msgstr "3 (dojrzaly 16+)"
 
 msgid "3 min"
 msgstr ""
@@ -52,52 +52,52 @@ msgid "30 min"
 msgstr ""
 
 msgid "3D Covers"
-msgstr "Ok³adki 3D"
+msgstr "Okladki 3D"
 
 msgid "4 (Adults Only 18+)"
-msgstr "4 (Tylko dla doros³ych 18+)"
+msgstr "4 (tylko dla doroslych 18+)"
 
 msgid "5 min"
 msgstr ""
 
 msgid ">> Finishing installation..."
-msgstr ">> Koñczenie instalacji..."
+msgstr ">> Konczenie instalacji"
 
 msgid ">> Installing content #"
-msgstr ">> Instalowanie zawartoœci #"
+msgstr ">> Instalowanie zawartoSci #"
 
 msgid ">> Installing ticket..."
 msgstr ""
 
 msgid ">> Installing title..."
-msgstr ">> Instalowanie tytu³u..."
+msgstr ">> Instalowanie tytulu..."
 
 msgid ">> Reading WAD data..."
-msgstr ">> Odczyt danych WAD"
+msgstr ">> Odczyt danych WAD..."
 
 msgid "AUTO"
-msgstr "AUTO"
+msgstr ""
 
 msgid "All the features of USB Loader GX are unlocked."
-msgstr "Wszystkie funkcje programu USB Loader GX s¹ odblokowane"
+msgstr "USB Loader GX odblokowany"
 
 msgid "Alternate DOL"
-msgstr "Alternatywny plik DOL"
+msgstr "Alternatywny DOL"
 
 msgid "Anti"
 msgstr "Anty"
 
 msgid "App Language"
-msgstr "Jêzyk"
+msgstr "Jezyk"
 
 msgid "Apr"
-msgstr "Kwi"
+msgstr "Kwiecien"
 
 msgid "Are you sure?"
-msgstr "Na pewno"
+msgstr "Na pewno?"
 
 msgid "Aug"
-msgstr "Sie"
+msgstr "Sierpien"
 
 msgid "AutoInit Network"
 msgstr ""
@@ -109,10 +109,10 @@ msgid "Back"
 msgstr "Cofnij"
 
 msgid "Back to HBC or Wii Menu"
-msgstr "Wróciæ do HBC lub Wii Menu"
+msgstr "Powrót do HBC/Wii Menu"
 
 msgid "Back to Loader"
-msgstr "Powrót do Loadera"
+msgstr "Powrót do HBC"
 
 msgid "Back to Wii Menu"
 msgstr "Powrót do Wii Menu"
@@ -121,13 +121,13 @@ msgid "Backgroundmusic"
 msgstr "Muzyka w tle"
 
 msgid "Backgroundmusic Path changed."
-msgstr "Zmieniono œcie¿kê do muzyki w tle"
+msgstr "Sciezka do muzyki w tle zmieniona"
 
 msgid "Big thanks to:"
-msgstr "Podziêkowania dla:"
+msgstr "Podziekowania dla"
 
 msgid "Block IOS Reload"
-msgstr "Blokuj prze³adowanie IOS"
+msgstr "Blokój przeladowanie IOS"
 
 msgid "Boot/Standard"
 msgstr ""
@@ -136,22 +136,22 @@ msgid "Both"
 msgstr "Oba"
 
 msgid "Can't be formated"
-msgstr "Nie mo¿na sformatowaæ"
+msgstr "Nie mozna sformatowac"
 
 msgid "Can't create directory"
-msgstr "Nie mo¿na utworzyæ katalogu"
+msgstr "Nie mozna utworzyc folderu"
 
 msgid "Can't delete:"
-msgstr "Nie mo¿na usun¹æ"
+msgstr "Nie mozna usunac"
 
 msgid "Cancel"
 msgstr "Anuluj"
 
 msgid "Cheatcodes Path"
-msgstr "Œcie¿ka do kodów"
+msgstr "Sciezka do kodów"
 
 msgid "Cheatcodes Path changed"
-msgstr "Zmieniono œcie¿kê do kodów"
+msgstr "Zmieniono Sciezke do kodów"
 
 msgid "Cheatfile is blank"
 msgstr "Plik z kodami pusty"
@@ -160,7 +160,7 @@ msgid "Checking for Updates"
 msgstr "Sprawdzanie aktualizacji"
 
 msgid "Click to Download Covers"
-msgstr "Kliknij aby pobraæ ok³adki"
+msgstr "Kliknij aby pobrac okladki"
 
 msgid "Clock"
 msgstr "Zegar"
@@ -169,7 +169,7 @@ msgid "Close"
 msgstr "Zamknij"
 
 msgid "Code Download"
-msgstr ""
+msgstr "Pobierz kody"
 
 #, c-format
 msgid "Coded by: %s"
@@ -179,67 +179,67 @@ msgid "Coding:"
 msgstr ""
 
 msgid "Confirm"
-msgstr "PotwierdŸ"
+msgstr "Potwierdz"
 
 msgid "Console"
 msgstr "Konsola"
 
 msgid "Console Default"
-msgstr "Domyœlne ustawienia konsoli"
+msgstr "DomySlne ustawienia konsoli"
 
 msgid "Console Locked"
 msgstr "Konsola zablokowana"
 
 msgid "Console should be unlocked to modify it."
-msgstr "Konsola powinna byæ odblokowana aby zmodyfikowaæ"
+msgstr "Aby zmodyfikowac, odblokuj konsole"
 
 msgid "Continue to install game?"
-msgstr "Kontynuowaæ instalacjê gry?"
+msgstr "Kontynuowac instalacje?"
 
 msgid "Controllevel"
 msgstr "Poziom kontroli"
 
 msgid "Correct Password"
-msgstr "Poprawne has³o"
+msgstr "Haslo poprawne"
 
 msgid "Could not create GCT file"
-msgstr "Nie mo¿na utworzyæ pliku GCT"
+msgstr "Nie udalo sie stworzyc pliku GCT"
 
 msgid "Could not find a WBFS partition."
-msgstr "Nie znaleziono partycji typu WBFS"
+msgstr "Nie znaleziono partycji WBFS"
 
 msgid "Could not initialize DIP module!"
-msgstr "Inicjalizacja modu³u DIP nie powiod³a siê"
+msgstr "Nie zainicjalizowano modulu DIP!"
 
 msgid "Could not initialize network!"
-msgstr "Inicjalizacja sieci nie powiod³a siê"
+msgstr "Nie zainicjalizowano sieci!"
 
 msgid "Could not open Disc"
-msgstr "Nie uda³o siê otworzyæ p³yty"
+msgstr "Nie udalo sie otworzyc dysku"
 
 msgid "Could not open WBFS partition"
-msgstr "Nie uda³o siê otworzyæ partycji WBFS"
+msgstr "Nie udalo sie otworzyc partycji WBFS"
 
 msgid "Could not open disc."
-msgstr "Nie uda³o siê otworzyæ p³yty"
+msgstr "Nie mozna otworzyc dysku"
 
 msgid "Could not read the disc."
-msgstr "Odczyt p³yty nie powiód³ siê"
+msgstr "Nie mozna odczytac dysku"
 
 msgid "Could not set USB."
-msgstr "Nie uda³o siê ustawiæ USB"
+msgstr "Nie mozna ustawic USB"
 
 msgid "Cover Download"
-msgstr "Pobierz ok³adki"
+msgstr "Pobierz okladki"
 
 msgid "Cover Path"
-msgstr "Œcie¿ka do ok³adek"
+msgstr "Sciezka okladek"
 
 msgid "Coverpath Change"
-msgstr ""
+msgstr "Zmien Sciezke okladek"
 
 msgid "Coverpath Changed"
-msgstr "Zmieniono œcie¿kê do ok³adek"
+msgstr "Sciezka do okladek zostala zmieniona"
 
 msgid "Create"
 msgstr "Utwórz"
@@ -248,178 +248,178 @@ msgid "Credits"
 msgstr ""
 
 msgid "Custom Paths"
-msgstr "W³asne œcie¿ki"
+msgstr "Sciezki"
 
 msgid "DOL from SD"
-msgstr "Plik .DOL z karty SD"
+msgstr "DOL z karty SD"
 
 msgid "DOL from disc"
-msgstr "Plik .DOL z p³yty"
+msgstr "DOL z dysku"
 
 msgid "Dec"
-msgstr "Gru"
+msgstr "Grudzien"
 
 msgid "Default"
-msgstr "Domyœlne"
+msgstr "Ustawienia domySlne"
 
 msgid "Default Gamesettings"
-msgstr "Domyœlne ustawienia gry"
+msgstr "DomySlne ustawienia gier"
 
 msgid "Default Settings"
-msgstr "Domyœlne ustawienia"
+msgstr "DomySlne ustawienia"
 
 msgid "Delete"
-msgstr "Usuñ"
+msgstr "Usun"
 
 msgid "Delete Boxart"
-msgstr ""
+msgstr "Usun obrazki box"
 
 msgid "Delete CheatTxt"
-msgstr ""
+msgstr "Usun plik z kodami"
 
 msgid "Delete Discart"
-msgstr ""
+msgstr "Usun obrazki plyt"
 
 msgid "Design:"
 msgstr ""
 
 msgid "Developed by"
-msgstr "Rozwijane przez"
-
-msgid "Disc Default"
-msgstr "Domyœlne ustawienia p³yty"
-
-msgid "Disc Images"
-msgstr "Obrazki p³yt"
-
-msgid "Discimage Path"
-msgstr "Œcie¿ka do obrazków p³yt"
-
-msgid "Discpath Changed"
-msgstr "Œcie¿ka do p³yty zmieniona"
-
-msgid "Discpath change"
-msgstr "Zmiana œcie¿ki p³yty"
-
-msgid "DiskFlip"
-msgstr "Obrót p³yt"
-
-msgid "Display"
-msgstr "Wyœwietl"
-
-msgid "Do you really want to delete:"
-msgstr "Czy na pewno usun¹æ:"
-
-msgid "Do you want to change language?"
-msgstr "Zmieniæ jêzyk?"
-
-msgid "Do you want to format:"
-msgstr "Na pewno sformatowaæ:"
-
-msgid "Do you want to retry for 30 secs?"
-msgstr "Spróbowaæ za 30 sekund?"
-
-msgid "Do you want to use the alt dol that is known to be correct?"
-msgstr "Czy u¿yæ aternatywny plik .DOL?"
-
-msgid "Dol Path"
-msgstr "Œcie¿ka plików .DOL"
-
-msgid "Dolpath Changed"
-msgstr "Zmieniono œcie¿kê plików .DOL"
-
-msgid "Dolpath change"
-msgstr "Zmieñ œcie¿kê plików .DOL"
-
-msgid "Don't bother the USB Loader GX Team about errors in this file."
 msgstr ""
 
+msgid "Disc Default"
+msgstr "DomySlny dysk"
+
+msgid "Disc Images"
+msgstr "Obrazki plyt"
+
+msgid "Discimage Path"
+msgstr "Sciezka do obrazków plyt"
+
+msgid "Discpath Changed"
+msgstr "Sciezka do dysku zmieniona"
+
+msgid "Discpath change"
+msgstr "Sciezka do plyt"
+
+msgid "DiskFlip"
+msgstr "Obrót plytami"
+
+msgid "Display"
+msgstr "WySwietl"
+
+msgid "Do you really want to delete:"
+msgstr "Na pewno usunac: "
+
+msgid "Do you want to change language?"
+msgstr "Zmienic jezyk?"
+
+msgid "Do you want to format:"
+msgstr "Sformatowac:"
+
+msgid "Do you want to retry for 30 secs?"
+msgstr "Powtórzyc za 30 sec?"
+
+msgid "Do you want to use the alt dol that is known to be correct?"
+msgstr "Uzyc alternatywny plik DOL?"
+
+msgid "Dol Path"
+msgstr "Sciezka plików .DOL"
+
+msgid "Dolpath Changed"
+msgstr "Zmieniono Sciezke plików .DOL"
+
+msgid "Dolpath change"
+msgstr "Zmien Sciezke plików .DOL"
+
+msgid "Don't bother the USB Loader GX Team about errors in this file."
+msgstr "Nie informuj team USB Loader GX o bledach w tym pliku."
+
 msgid "Download Boxart image?"
-msgstr "Pobraæ obrazki box?"
+msgstr "Pobrac obrazki box?"
 
 msgid "Download Discart image?"
-msgstr "Œci¹gn¹æ obrazki p³yt?"
+msgstr "Pobrac obrazki plyt?"
 
 msgid "Download Now"
 msgstr "Pobierz teraz"
 
 msgid "Download finished"
-msgstr "Ukoñczono pobieranie"
+msgstr "Zakonczono pobieranie"
 
 msgid "Downloading"
-msgstr "Pobieranie"
+msgstr "Trwa pobieranie"
 
 msgid "Downloading file"
 msgstr "Pobieranie pliku"
 
 msgid "Dutch"
-msgstr "Holenderski"
+msgstr "holenderski"
 
 msgid "ERROR"
-msgstr "B£¥D"
+msgstr "Blad"
 
 msgid "ERROR:"
-msgstr "B£¥D:"
+msgstr "Blad:"
 
 msgid "English"
-msgstr "Angielski"
+msgstr "angielski"
 
 msgid "Error"
-msgstr "B³¹d"
+msgstr "Blad"
 
 msgid "Error !"
-msgstr "B³¹d !"
+msgstr "Blad !"
 
 msgid "Error 002 fix"
-msgstr "Poprawka b³êdu 002"
+msgstr "Poprawka bledu 002"
 
 msgid "Error reading Disc"
-msgstr "B³¹d odczytu p³yty"
+msgstr "Blad odczytu plyty"
 
 msgid "Error while transfering data."
 msgstr ""
 
 msgid "Error..."
-msgstr "B³¹d..."
+msgstr "Blad..."
 
 msgid "Error:"
 msgstr ""
 
 msgid "Exit USB Loader GX?"
-msgstr "Zamkn¹æ?"
+msgstr "Zakonczyc prace programu?"
 
 msgid "Failed formating"
-msgstr "Nie uda³o siê sformatowaæ"
+msgstr "Nie udalo sie sformatowac"
 
 msgid "Feb"
-msgstr "Lut"
+msgstr "Luty"
 
 msgid "File not found."
 msgstr "Nie znaleziono pliku."
 
 msgid "Finishing installation... Ok!"
-msgstr "Zakoñoczono instalacjê... OK!"
+msgstr "Konczenie instalacji...Ok!"
 
 msgid "Flip-X"
-msgstr "Obróæ-X"
+msgstr "Obrót na osi X"
 
 msgid "Force"
-msgstr "Wymuœ"
+msgstr "Wymuc"
 
 msgid "Format"
-msgstr "Formatuj"
+msgstr "Sformatuj"
 
 msgid "Formatting, please wait..."
-msgstr "Formatowanie, proszê czekaæ..."
+msgstr "Formatowanie, prosze czekac..."
 
 msgid "Free Space"
-msgstr "Wolne miejsce"
+msgstr "Wolnego miejsca"
 
 msgid "French"
-msgstr "Francuski"
+msgstr "francuski"
 
 msgid "Full Shutdown"
-msgstr "Pe³ne zamkniêcie systemu"
+msgstr "Pelne zamkniecie"
 
 msgid "GCT File created"
 msgstr "Utworzono plik GCT"
@@ -428,99 +428,99 @@ msgid "GUI Settings"
 msgstr "Ustawienia interfejsu graficznego"
 
 msgid "Game ID"
-msgstr "Identyfikator gry"
+msgstr "ID gry"
 
 msgid "Game Language"
-msgstr "Jêzyk gry"
+msgstr "Jezyk gry"
 
 msgid "Game Load"
-msgstr "Za³aduj grê"
+msgstr "Zaladuj gre"
 
 msgid "Game Region"
-msgstr "Region gry"
+msgstr "Region"
 
 msgid "Game Size"
 msgstr "Rozmiar gry"
 
 msgid "Game is already installed:"
-msgstr "Gra jest ju¿ zainstalowana"
+msgstr "Gra jest juz zainstalowana:"
 
 msgid "Games"
-msgstr "Gry"
+msgstr "Liczba gier"
 
 msgid "German"
-msgstr "Niemiecki"
+msgstr "niemiecki"
 
 msgid "HOME Menu"
 msgstr ""
 
 msgid "Homebrew Apps Path"
-msgstr ""
+msgstr "Sciezka plikacji homebrew"
 
 msgid "Homebrew Appspath change"
-msgstr ""
+msgstr "Zmien Sciezke aplikacji homebrew"
 
 msgid "Homebrew Appspath changed"
-msgstr ""
+msgstr "Sciezka aplikacji homebrew zmieniona"
 
 msgid "Homebrew Launcher"
 msgstr ""
 
 msgid "Hour"
-msgstr "Czas"
+msgstr "Godzina"
 
 msgid "How do you want to update?"
-msgstr "Wybierz opcjê aktualizacji"
+msgstr "Wybierz rodzaj aktualizacji"
 
 msgid "How to Shutdown?"
-msgstr "Wybierz opcjê zamkniêcia"
+msgstr "Wybierz rodzaj zamkniecia"
 
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
+msgstr "JeSli nie masz WiFi, wciSnij 1 aby otrzymac adres skad pobrac WiiTDB.zip (obrazki)"
+
+#, c-format
+msgid "Incoming file %0.2fKB"
 msgstr ""
 
 #, c-format
-msgid "Incomming file %0.2fKB"
-msgstr ""
-
-#, c-format
-msgid "Incomming file %0.2fMB"
+msgid "Incoming file %0.2fMB"
 msgstr ""
 
 msgid "Initializing Network"
 msgstr "Inicjalizacja sieci"
 
 msgid "Insert Disk"
-msgstr "W³ó¿ p³ytê"
+msgstr "Wlóz plyte"
 
 msgid "Insert a Wii Disc!"
-msgstr ""
+msgstr "Wlóz plyte Wii!"
 
 msgid "Insert an SD-Card to download images."
-msgstr "W³ó¿ kartê SD, aby pobraæ obrazki"
+msgstr "Wlóz karte SD, aby pobrac obrazki"
 
 msgid "Insert an SD-Card to save."
-msgstr "W³ó¿ kartê SD, aby zapisaæ"
+msgstr "Wlóz karte SD, aby zapisac"
 
 msgid "Insert an SD-Card to use this option."
-msgstr "W³ó¿ kartê SD, aby u¿y tej opcji"
+msgstr "Wlóz karte SD, aby uzyc tej opcji"
 
 msgid "Install Error!"
-msgstr "B³¹d instalacji!"
+msgstr "Blad instalacji"
 
 msgid "Install a game"
-msgstr "Zainstaluj grê"
+msgstr "Zainstaluj gre"
 
 msgid "Installing content... Ok!"
-msgstr "Instalowanie zawartoœci... Ok!"
+msgstr "Instalowanie zawartoSci...Ok!"
 
 msgid "Installing game:"
 msgstr "Instalowanie gry:"
 
 msgid "Installing ticket... Ok!"
-msgstr ""
+msgstr "Instalowanie ticketu... Ok!"
 
 msgid "Installing title... Ok!"
-msgstr "Instalowanie tytu³u... Ok!"
+msgstr "Instalowanie tytulu... Ok!"
 
 msgid "Installing wad"
 msgstr "Instalowanie wad"
@@ -530,65 +530,65 @@ msgid "It seems that you have some information that will we helpfull to us. Plea
 msgstr ""
 
 msgid "Italian"
-msgstr "W³oski"
+msgstr "wloski"
 
 msgid "Jan"
-msgstr "Sty"
+msgstr "Styczen"
 
 msgid "Japanese"
-msgstr "Japoñski"
+msgstr "japonski"
 
 msgid "July"
-msgstr "Lipiec"
+msgstr "lipiec"
 
 msgid "June"
-msgstr "Czerwiec"
+msgstr "czerwiec"
 
 msgid "Keyboard"
 msgstr "Klawiatura"
 
 msgid "Korean"
-msgstr "Koreañski"
+msgstr "koreanski"
 
 msgid "Language change:"
-msgstr "Zmieñ jêzyk:"
+msgstr "Zmien jezyk"
 
 msgid "Languagepath changed."
-msgstr "Zmieniono œcie¿kê do plików jêzykowych"
+msgstr "Sciezka do plików jezykowych zmieniona"
 
 msgid "Leaving so you can restart..."
-msgstr "Opuszczam, aby zrestartowaæ"
+msgstr "Przygotowanie do restartu..."
 
 msgid "Left"
 msgstr "Lewo"
 
 msgid "Like SysMenu"
-msgstr ""
+msgstr "Podobnie do menu systemowego"
 
 msgid "Load"
-msgstr ""
+msgstr "Zaladuj"
 
 #, c-format
 msgid "Load file from: %s ?"
 msgstr ""
 
 msgid "Load this dol as alternate dol?"
-msgstr "Za³adowaæ ten plik .DOL jako alternatywny?"
+msgstr "Zaladowac ten dol jako alternatywnt?"
 
 msgid "Loading standard language."
-msgstr "£adowanie standardowego jêzyku"
+msgstr "ladowanie standardowego jezyka."
 
 msgid "Loading standard music."
-msgstr "£adowanie standardowej muzyki"
+msgstr "ladowanie standardowej muzyki"
 
 msgid "Lock Console"
-msgstr "Zablokuj konsolê"
+msgstr "Zablokuj konsole"
 
 msgid "Locked"
-msgstr "Zablokowana"
+msgstr "Zablokowano"
 
 msgid "Mar"
-msgstr "Mar"
+msgstr "Marzec"
 
 msgid "May"
 msgstr "Maj"
@@ -597,40 +597,40 @@ msgid "Missing files"
 msgstr "Brakuje plików"
 
 msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
-msgstr "Prawdopodobnie rozdzielczoœæ nie jest podzielna przez 4"
+msgstr "Prawdopodobnie rozdzielczoSc nie jest podzielna przez 4."
 
 msgid "Music Volume"
-msgstr "Poziom g³oœnoœci"
+msgstr "Poziom gloSnoSci"
 
 msgid "Neither"
-msgstr "¯adne"
+msgstr "zadne"
 
 msgid "Network init error"
-msgstr "B³¹d inicjalizacji sieci"
+msgstr "Problem inicjalizacji sieci"
 
 msgid "Next"
-msgstr "Nastêpny"
+msgstr "nastepny"
 
 msgid "No"
 msgstr "Nie"
 
 msgid "No .dol or .elf files found."
-msgstr ""
+msgstr "Nie znaleziono plików .dol ani .elf"
 
 msgid "No Cheatfile found"
-msgstr "Nie znaleziono pliku z kodami"
+msgstr "Nie znaleziono plików z kodami"
 
 msgid "No Favorites"
 msgstr "Brak ulubionych"
 
 msgid "No SD-Card inserted!"
-msgstr "Nie w³o¿ono karty SD"
+msgstr "Nie wlozono karty SD!"
 
 msgid "No USB Device"
-msgstr "Nie pod³¹czono urz¹dzenia USB"
+msgstr "Nie wykryto urzadzenia USB"
 
 msgid "No USB Device found."
-msgstr "Nie znaleziono urz¹dzenia USB"
+msgstr "Nie wykryto urzadzenia USB"
 
 msgid "No WBFS partition found"
 msgstr "Nie znaleziono partycji WBFS"
@@ -639,55 +639,55 @@ msgid "No data could be read."
 msgstr ""
 
 msgid "No dol file found on disc."
-msgstr "Nie znaleziono pliku .dol na dysku"
+msgstr "Brak plików dol na dysku"
 
 msgid "No file missing!"
 msgstr ""
 
 msgid "No new updates."
-msgstr "U¿ywasz aktualnej wersji"
+msgstr "Posiadasz aktualna wersje"
 
 msgid "No partitions found"
-msgstr "Nie znaleziono partycji"
+msgstr "Nie wykryto zadnej partycji"
 
 msgid "Normal"
-msgstr "Normalne"
+msgstr "Standardowe"
 
 msgid "Normal Covers"
-msgstr "Normalne ok³adki"
+msgstr "Standardowe okladki"
 
 msgid "Not Found"
-msgstr ""
+msgstr "Nie znaleziono"
 
 msgid "Not a Wii Disc"
-msgstr "To nie p³yta Wii"
+msgstr "To nie jest plyta Wii"
 
 msgid "Not enough free memory"
 msgstr ""
 
 msgid "Not enough free memory."
-msgstr "Za ma³o pamiêci"
+msgstr "Brak wystarczajacej iloSci pamieci"
 
 msgid "Not enough free space!"
-msgstr "Za ma³o pamiêci!"
+msgstr "Brak wystarczajacej iloSci pamieci"
 
 msgid "Not supported format!"
-msgstr "Nie obs³ugiwany format!"
+msgstr "Nieobslugiwany format"
 
 msgid "Nov"
-msgstr "Lis"
+msgstr "Listopad"
 
 msgid "OFF"
-msgstr ""
+msgstr "Wylacz"
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "ON"
-msgstr ""
+msgstr "Wlacz"
 
 msgid "Oct"
-msgstr "PaŸ"
+msgstr "Pazdziernik"
 
 msgid "Official Site"
 msgstr "Strona oficjalna"
@@ -696,7 +696,7 @@ msgid "Ok"
 msgstr ""
 
 msgid "Only for Install"
-msgstr "Tylko dla instalcji"
+msgstr "Tylko dla instalacji"
 
 msgid "Parental Control"
 msgstr "Kontrola rodzicielska"
@@ -708,25 +708,25 @@ msgid "Partition"
 msgstr "Partycja"
 
 msgid "Password"
-msgstr "Has³o"
+msgstr "Haslo"
 
 msgid "Password Changed"
-msgstr "Zmiana has³a"
+msgstr "Haslo zmieniono"
 
 msgid "Password has been changed"
-msgstr "Has³o zosta³o zmienione"
+msgstr "Haslo zostalo zmienione"
 
 msgid "Paste it into your browser to get your WiiTDB.zip."
-msgstr ""
+msgstr "Wklej adres do przegladarki, aby pobrac WiiTDB.zip"
 
 msgid "Patch Country Strings"
-msgstr "Spatchuj ci¹g kraju"
+msgstr ""
 
 msgid "Path of titles.txt change"
-msgstr "Zmiana œcie¿ki pliku titles.txt"
+msgstr "Zmien Sciezke titles.txt"
 
 msgid "Path of titles.txt changed."
-msgstr "Zmieniono œcie¿kê pliku titles.txt"
+msgstr "Sciezka titles.txt zmienona"
 
 msgid "Pick from a list"
 msgstr "Wybierz z listy"
@@ -735,7 +735,7 @@ msgid "Play Count"
 msgstr "Licznik"
 
 msgid "Power off the Wii"
-msgstr "Wy³¹cz Wii"
+msgstr "Wylacz Wii"
 
 msgid "Prev"
 msgstr "Poprzedni"
@@ -744,34 +744,34 @@ msgid "Prompts Buttons"
 msgstr ""
 
 msgid "Published by"
-msgstr "Opublikowany przez"
+msgstr ""
 
 msgid "Quick Boot"
-msgstr "Szybkie ³adowanie"
+msgstr "Szybkie ladowanie"
 
 msgid "Reading WAD data... Ok!"
-msgstr "Czytanie danych WAD... Ok!"
+msgstr "Odczyt danych WAD...Ok!"
 
 msgid "Receiving file from:"
 msgstr ""
 
 msgid "Released"
-msgstr "Wersja"
+msgstr ""
 
 msgid "Reload SD"
-msgstr "Prze³aduj SD"
+msgstr "Przeladuj SD"
 
 msgid "Rename Game on WBFS"
-msgstr "Zmiana nazy gry na WBFS"
+msgstr "Zmien tytul gry na WBFS"
 
 msgid "Reset Playcounter"
-msgstr "Reset licznika"
+msgstr "Zrestartuj licznik"
 
 msgid "Restart"
-msgstr "Uruchom ponownie"
+msgstr ""
 
 msgid "Restarting..."
-msgstr "Uruchamiam ponownie..."
+msgstr "Restartowanie..."
 
 msgid "Return"
 msgstr "Powrót"
@@ -783,55 +783,55 @@ msgid "Right"
 msgstr "Prawo"
 
 msgid "Rumble"
-msgstr "Rumble (wibracje)"
+msgstr "Wibracje"
 
 msgid "SChinese"
-msgstr "Uproszczony Chiñski"
+msgstr "uproszczony chinski"
 
 msgid "SD selected"
 msgstr "Wybrano SD"
 
 msgid "SFX Volume"
-msgstr "G³oœnoœæ SFX"
+msgstr "Poziom gloSnoSci SFX"
 
 msgid "Save"
 msgstr "Zapisz"
 
 msgid "Save Failed"
-msgstr "Nie uda³o siê zapisaæ"
+msgstr "Nie udalo sie zapisac"
 
 msgid "Screensaver"
 msgstr "Wygaszacz ekranu"
 
 msgid "Sept"
-msgstr "Wrz"
+msgstr "Wrzesien"
 
 msgid "Set as backgroundmusic?"
-msgstr "Ustawiæ jako muzykê w tle?"
+msgstr "Ustawic jako muzyke w tle?"
 
 msgid "Settings"
 msgstr "Ustawienia"
 
 msgid "Shit"
-msgstr "Kur*a"
+msgstr ""
 
 msgid "Shutdown System"
-msgstr "Zakmnij system"
+msgstr "Wylacz"
 
 msgid "Shutdown to Idle"
-msgstr "Prze³¹cz w stan wstrzymania"
+msgstr "Przelacz w stan oczekiwania"
 
 msgid "Sound"
-msgstr "DŸwiêk"
+msgstr "Dzwiek"
 
 msgid "Spanish"
-msgstr "Hiszpañski"
+msgstr "hiszpanski"
 
 msgid "Special thanks to:"
-msgstr "Specjalne podziêkowania dla"
+msgstr "Specjalne podziekowania"
 
 msgid "Standard"
-msgstr "Standardowo"
+msgstr "Standardowe"
 
 msgid "Success"
 msgstr "Sukces"
@@ -840,72 +840,72 @@ msgid "Success:"
 msgstr "Sukces:"
 
 msgid "Successfully Saved"
-msgstr "Zapisano"
+msgstr "PomySlnie zapisano"
 
 msgid "Successfully Updated"
-msgstr "Zaktualizowano"
+msgstr "PomySlnie zaktualizowano"
 
 msgid "Successfully deleted:"
-msgstr "Usuniêto"
+msgstr "PomySlnie usunieto"
 
 msgid "Successfully installed:"
-msgstr "Zainstalowano"
+msgstr "PomySlnie zainstalowano:"
 
 msgid "System Default"
-msgstr "DOmyœlne ustawienia systemu"
+msgstr "DomySlne ustawienia systemowe"
 
 msgid "TChinese"
-msgstr "Chiñski"
+msgstr "chinski"
 
 msgid "TXTCheatcodes Path"
-msgstr "Œcie¿ka do kodów"
+msgstr "Sciezka kodów txt"
 
 msgid "TXTCheatcodes Path changed"
-msgstr "Zmieniono œcie¿kê do kodów"
+msgstr "Sciezka kodów txt zmienona"
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."
-msgstr ""
+msgstr "Zainstalowano plik wad, ale nie mozna go usunac z karty SD"
 
 #, c-format
 msgid "The wad installation failed with error %ld"
-msgstr "Nie uda³o siê zainstalowaæ wad- b³¹d %ld"
+msgstr "Instalacja wad zakonczona bledek %ld"
 
 msgid "ThemePath"
-msgstr "Œcie¿ka do skórki"
+msgstr "Sciezka skórek"
 
 msgid "Themepath Changed"
-msgstr "Zmieniono œcie¿kê do skórki"
+msgstr "Zmieniono Sciezke skórek"
 
 msgid "Themepath change"
-msgstr "Zmieñ œcie¿kê do skórki"
+msgstr "Zmien Sciezke skórek"
 
 msgid "Time left:"
-msgstr "Czas pozosta³y"
+msgstr "Czas pozostaly"
 
 msgid "Titles from XML"
-msgstr "Tytu³y z pliku XML"
+msgstr "Tytuly z pliku XML"
 
 msgid "Tooltips"
-msgstr "Dymki z podpowiedziami"
+msgstr "Chmurki z podpowiedziami"
 
 msgid "USB Device not found"
-msgstr "Nie znaleziono urz¹dzenia USB"
+msgstr "Nie znaleziono urzadzenia USB"
 
 msgid "USB Loader GX is protected"
-msgstr "USB Loader GX jest chroniony"
+msgstr "USB Loader GX zabezpieczony"
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
-msgstr "Nie uda³o siê otworzyæ w³aœnie pobranego pliku wad (%s)"
+msgstr "Nie udalo sie zainstalowac dopiero co pobranego pliku (%s)"
 
 msgid "Uninstall Game"
-msgstr ""
+msgstr "Odinstaluj gre"
 
 msgid "Uninstall Menu"
-msgstr ""
+msgstr "Odinstaluj Menu"
 
 msgid "Unlock console to use this option."
-msgstr "Odblokuj konsolê aby u¿ywaæ tej opckio"
+msgstr "Odblokuj konsole, aby uzyc tej opcji"
 
 msgid "Unlocked"
 msgstr "Odblokowano"
@@ -914,138 +914,138 @@ msgid "Update"
 msgstr "Aktualizacja"
 
 msgid "Update All"
-msgstr "Aktualizuj wszystko"
+msgstr "Zaktualizuj wszystko"
 
 msgid "Update DOL"
-msgstr "Aktualizuj DOL"
+msgstr "Zaktualizuj Dol"
 
 msgid "Update failed"
-msgstr "B³¹d aktualizacji"
+msgstr "Nie udalo sie zaktualizowac"
 
 msgid "Update to"
-msgstr "Aktualizacja"
+msgstr "Aktualizuj do"
 
 msgid "Updatepath"
-msgstr "Œcie¿ka aktualizacji"
+msgstr "Sciezka aktualizacji"
 
 msgid "Updatepath changed."
-msgstr "Zmieniono œcie¿kê aktualizacji"
+msgstr "Zmieniono Sciezke aktualizacji"
 
 msgid "Updating"
-msgstr "Trwa aktualizacja"
+msgstr "Aktualizowanie"
 
 msgid "VIDTV Patch"
 msgstr ""
 
 #, c-format
 msgid "Version: %s"
-msgstr ""
+msgstr "Wersja: %s"
 
 msgid "Video Mode"
 msgstr "Tryb video"
 
 msgid "Waiting for USB Device"
-msgstr "Oczekiwanie na urz¹dzenie USB"
+msgstr "Oczekiwanie na urzadzenie USB"
 
 msgid "Waiting..."
-msgstr "Czekaj..."
+msgstr "Oczekiwanie..."
 
 msgid "WiFi Features"
 msgstr "Opcje WiFi"
 
 msgid "Widescreen Fix"
-msgstr "Poprawka ekranu panoramicznego"
+msgstr "Popraw ekran panoramiczny"
 
 msgid "Wii Menu"
 msgstr ""
 
 msgid "Wiilight"
-msgstr ""
+msgstr "Dioda Wii"
 
 msgid "Wrong Password"
-msgstr "B³êdne has³o"
+msgstr "Bledne haslo"
 
 msgid "Yes"
 msgstr "Tak"
 
 msgid "You are about to delete "
-msgstr "Zamierzasz usun¹æ"
+msgstr "Zamierzasz usunac"
 
 msgid "You are choosing to display favorites and you do not have any selected."
-msgstr "Wybra³eœ wyœwietlenie ulubionych, ale ¿adnych nie zaznaczy³eœ"
+msgstr "WybraleS wySwietlenie usubionych, ale zadnych nie wybraleS"
 
 msgid "You have attempted to load a bad image"
-msgstr "Usi³ujesz za³adowaæ z³y obraz"
+msgstr "Próbujesz zaladowac zly obraz"
 
 msgid "You need to format a partition"
-msgstr "Musisz sformatowaæ partycjê"
+msgstr "Musisz sformatowac partycje"
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
-msgstr ""
+msgstr "Adres zostal zapisany w pliku %sWiiTDB_URL.txt."
 
 msgid "available"
-msgstr "dostêpne"
+msgstr "dostepne"
 
 msgid "contains over 255 lines of code.  It will produce unexpected results."
-msgstr "zawiera ponad 255 linii kodu. Mo¿e dzia³aæ nieoczekiwanie"
+msgstr "zawiera ponad 255 linii kodu. Bedzie coS nie tak."
 
 msgid "does not exist!"
 msgstr "nie istnieje!"
 
 msgid "does not exist!  Loading game without cheats."
-msgstr "nie istnieje! £adowanie gry bez kodów."
+msgstr "nie istnieje! ladowanie gry bez kodów."
 
 msgid "does not exist!  You Messed something up, Idiot."
-msgstr "nie istnieje! Coœ zepsu³eœ, idioto"
+msgstr "Nie istnieje! CoS zepsuleS"
 
 msgid "file left"
-msgstr "pozosta³o"
+msgstr "pozostalo"
 
 msgid "files left"
-msgstr "pozosta³o"
+msgstr "pozostalo"
 
 msgid "files not found on the server!"
-msgstr "Pliki nie znalezione na serwerze!"
+msgstr "nie znaleziono na serwerze"
 
 msgid "for"
 msgstr "dla"
 
 msgid "for WiiTDB and hosting covers / disc images"
-msgstr "dla WiiTDB i hostowania ok³adek/obrazków"
+msgstr "za WiiTDB i hostowanie okladek/obrazków plyt"
 
 msgid "for diverse patches"
-msgstr "za ró¿ne patche"
+msgstr "za rózne poprawki"
 
 msgid "for his awesome tool"
-msgstr "za jego zajebiste narzêdzie"
+msgstr "za jego niesamowite narzedzie"
 
 msgid "for hosting the update files"
 msgstr "za hostowanie plików aktualizacji"
 
 msgid "for the USB Loader source"
-msgstr "za Ÿród³o USB Loadera"
+msgstr "za zródla USB Loader"
 
 msgid "formatted!"
-msgstr "Sformatowano"
+msgstr "sformatowano"
 
 msgid "free"
-msgstr "Wolne"
+msgstr "wolnego"
 
 msgid "not set"
-msgstr "Nie ustawiono"
+msgstr "nie ustawiono"
 
 msgid "of"
 msgstr "z"
 
 msgid "seconds left"
-msgstr "sekund pozosta³o"
+msgstr "sekund pozostalo"
 
 msgid "there was an error"
-msgstr "b³¹d"
+msgstr "blad"
 
 msgid "titles.txt Path"
-msgstr "Œcie¿ka pliku titles.txt"
+msgstr "Sciezka titles.txt"
 
 #~ msgid "Uninstall"
 #~ msgstr "Odinstaluj"

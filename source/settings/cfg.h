@@ -304,6 +304,7 @@ enum {
 };
 enum {
 	us=0,
+	qwerty,
 	dvorak,
 	euro,
 	azerty,
