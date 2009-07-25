@@ -1,4 +1,5 @@
 #ifndef SVNREV_H
+#define SVNREV_H
 
 #ifdef __cplusplus
 extern "C"
