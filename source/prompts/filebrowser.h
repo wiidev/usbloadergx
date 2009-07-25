@@ -51,5 +51,6 @@ void ResetBrowser();
 int ParseDirectory();
 int BrowserChangeFolder();
 int BrowseDevice(int device);
+int BrowseDevice(char * var, int force =-1);
 
 #endif

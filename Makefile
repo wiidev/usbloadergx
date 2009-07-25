@@ -28,7 +28,7 @@ INCLUDES	:=	source
 
 CFLAGS		=	-g -O2 -save-temps -Wall $(MACHDEP) $(INCLUDE)
 CXXFLAGS	=	-Xassembler -aln=$@.lst $(CFLAGS)
-LDFLAGS		=	-g $(MACHDEP) -Wl,-Map,$(notdir $@).map,--section-start,.init=0x80c00000
+LDFLAGS		=	-g $(MACHDEP) -Wl,-Map,$(notdir $@).map,--section-start,.init=0x80b00000
 
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project

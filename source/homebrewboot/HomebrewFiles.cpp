@@ -45,8 +45,8 @@ bool HomebrewFiles::LoadPath(const char * folderpath)
                 temp[i] = filename[strlen(filename)-4+i];
             }
 
-            if(strncasecmp(temp, ".dol", 4) == 0 || strncasecmp(temp, ".elf", 4) == 0
-                    && filecount < MAXHOMEBREWS) {
+            if((strncasecmp(temp, ".dol", 4) == 0 || strncasecmp(temp, ".elf", 4) == 0)
+                    && filecount < MAXHOMEBREWS && filename[0]!='.') {
 
                 strncpy(FileInfo[filecount].FilePath, folderpath, sizeof(FileInfo[filecount].FilePath));
                 strncpy(FileInfo[filecount].FileName, filename, sizeof(FileInfo[filecount].FileName));

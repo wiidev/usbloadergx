@@ -9,7 +9,7 @@
  ***************************************************************************/
 
 #include "gui.h"
-#include "filebrowser.h"
+#include "prompts/filebrowser.h"
 
 #define FILEBROWSERSIZE     8
 /**
@@ -46,7 +46,8 @@ GuiFileBrowser::GuiFileBrowser(int w, int h)
 	scrollbarImg = new GuiImage(scrollbar);
 	scrollbarImg->SetParent(this);
 	scrollbarImg->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
-	scrollbarImg->SetPosition(0, 30);
+	scrollbarImg->SetPosition(0, 2);
+	scrollbarImg->SetSkew(0,0,0,0,0,-30,0,-30);
 
 	arrowDown = new GuiImageData(scrollbar_arrowdown_png);
 	arrowDownImg = new GuiImage(arrowDown);
@@ -59,6 +60,7 @@ GuiFileBrowser::GuiFileBrowser(int w, int h)
 	arrowUpBtn->SetParent(this);
 	arrowUpBtn->SetImage(arrowUpImg);
 	arrowUpBtn->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
+	arrowUpBtn->SetPosition(12,-12);
 	arrowUpBtn->SetSelectable(false);
 	arrowUpBtn->SetClickable(false);
 	arrowUpBtn->SetHoldable(true);
@@ -70,6 +72,7 @@ GuiFileBrowser::GuiFileBrowser(int w, int h)
 	arrowDownBtn->SetParent(this);
 	arrowDownBtn->SetImage(arrowDownImg);
 	arrowDownBtn->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
+	arrowDownBtn->SetPosition(12,12);
 	arrowDownBtn->SetSelectable(false);
 	arrowDownBtn->SetClickable(false);
 	arrowDownBtn->SetHoldable(true);
@@ -81,8 +84,8 @@ GuiFileBrowser::GuiFileBrowser(int w, int h)
 	scrollbarBoxBtn->SetParent(this);
 	scrollbarBoxBtn->SetImage(scrollbarBoxImg);
 	scrollbarBoxBtn->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
-	scrollbarBoxBtn->SetMinY(0);
-	scrollbarBoxBtn->SetMaxY(136);
+	scrollbarBoxBtn->SetMinY(-10);
+	scrollbarBoxBtn->SetMaxY(156);
 	scrollbarBoxBtn->SetSelectable(false);
 	scrollbarBoxBtn->SetClickable(false);
 	scrollbarBoxBtn->SetHoldable(true);
@@ -103,7 +106,7 @@ GuiFileBrowser::GuiFileBrowser(int w, int h)
 		fileListBg[i] = new GuiImage(bgFileSelectionEntry);
 		fileListFolder[i] = new GuiImage(fileFolder);
 
-		fileList[i] = new GuiButton(512,30);
+		fileList[i] = new GuiButton(350,30);
 		fileList[i]->SetParent(this);
 		fileList[i]->SetLabel(fileListText[i]);
 		fileList[i]->SetLabelOver(fileListTextOver[i]);
@@ -228,7 +231,7 @@ void GuiFileBrowser::Update(GuiTrigger * t)
 		browser.numEntries > FILEBROWSERSIZE
 		)
 	{
-		scrollbarBoxBtn->SetPosition(0,0);
+		scrollbarBoxBtn->SetPosition(20,-10);
 		positionWiimote = t->wpad.ir.y - 60 - scrollbarBoxBtn->GetTop();
 
 		if(positionWiimote < scrollbarBoxBtn->GetMinY())
@@ -236,7 +239,7 @@ void GuiFileBrowser::Update(GuiTrigger * t)
 		else if(positionWiimote > scrollbarBoxBtn->GetMaxY())
 			positionWiimote = scrollbarBoxBtn->GetMaxY();
 
-		browser.pageIndex = (positionWiimote * browser.numEntries)/136.0 - selectedItem;
+		browser.pageIndex = (positionWiimote * browser.numEntries)/166.0 - selectedItem;
 
 		if(browser.pageIndex <= 0)
 		{
@@ -248,6 +251,8 @@ void GuiFileBrowser::Update(GuiTrigger * t)
 		}
 		listChanged = true;
 		focus = false;
+		
+
 	}
 
 	if(arrowDownBtn->GetState() == STATE_HELD && arrowDownBtn->GetStateChan() == t->chan)
@@ -255,12 +260,14 @@ void GuiFileBrowser::Update(GuiTrigger * t)
 		t->wpad.btns_h |= WPAD_BUTTON_DOWN;
 		if(!this->IsFocused())
 			((GuiWindow *)this->GetParent())->ChangeFocus(this);
+			
 	}
 	else if(arrowUpBtn->GetState() == STATE_HELD && arrowUpBtn->GetStateChan() == t->chan)
 	{
 		t->wpad.btns_h |= WPAD_BUTTON_UP;
 		if(!this->IsFocused())
 			((GuiWindow *)this->GetParent())->ChangeFocus(this);
+			
 	}
 
 	// pad/joystick navigation
@@ -385,15 +392,15 @@ void GuiFileBrowser::Update(GuiTrigger * t)
 	}
 	else
 	{
-		position = 136*(browser.pageIndex + FILEBROWSERSIZE/2.0) / (browser.numEntries*1.0);
+		position = -10+(166*(browser.pageIndex + FILEBROWSERSIZE/2.0) / (browser.numEntries*1.0));
 
 		if(browser.pageIndex/(FILEBROWSERSIZE/2.0) < 1)
-			position = 0;
+			position = -10;
 		else if((browser.pageIndex+FILEBROWSERSIZE)/(FILEBROWSERSIZE*1.0) >= (browser.numEntries)/(FILEBROWSERSIZE*1.0))
-			position = 136;
+			position = 156;
 	}
 
-	scrollbarBoxBtn->SetPosition(0,position+36);
+	scrollbarBoxBtn->SetPosition(12,position+26);
 
 	listChanged = false;
 

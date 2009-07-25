@@ -11,6 +11,7 @@
 
 #include "language/gettext.h"
 #include "libwiigui/gui.h"
+#include "prompts/TitleBrowser.h"
 #include "prompts/PromptWindows.h"
 #include "prompts/ProgressWindow.h"
 #include "homebrewboot/HomebrewFiles.h"
@@ -104,6 +105,10 @@ int MenuHomebrewBrowse()
 
 	snprintf(imgPath, sizeof(imgPath), "%swifi1.png", CFG.theme_path);
 	GuiImageData wifiImgData(imgPath, wifi1_png);
+	
+	snprintf(imgPath, sizeof(imgPath), "%sbrowser.png", CFG.theme_path);
+   GuiImageData channelImgData(imgPath, browser_png);
+
 
     GuiImage background(&bgData);
 
@@ -294,6 +299,17 @@ int MenuHomebrewBrowse()
 	wifiBtn.SetEffectGrow();
 	wifiBtn.SetAlpha(80);
 	wifiBtn.SetTrigger(&trigA);
+	
+	GuiImage channelBtnImg(&channelImgData);
+   channelBtnImg.SetWidescreen(CFG.widescreen);
+   GuiButton channelBtn(channelBtnImg.GetWidth(), channelBtnImg.GetHeight());
+   channelBtn.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+   channelBtn.SetPosition(425, 400);
+   channelBtn.SetImage(&channelBtnImg);
+   channelBtn.SetSoundOver(&btnSoundOver);
+   channelBtn.SetSoundClick(&btnClick);
+   channelBtn.SetEffectGrow();
+   channelBtn.SetTrigger(&trigA);
 
 
 	GuiWindow w(screenwidth, screenheight);
@@ -385,6 +401,7 @@ int MenuHomebrewBrowse()
         w.Append(&backBtn);
         w.Append(&homo);
         w.Append(&wifiBtn);
+        w.Append(&channelBtn);
         w.Append(&GoRightBtn);
         w.Append(&GoLeftBtn);
 
@@ -835,7 +852,19 @@ int MenuHomebrewBrowse()
                 CloseConnection();
                 ResumeNetworkWait();
             }
-
+				
+				else if(channelBtn.GetState() == STATE_CLICKED) {
+				w.SetState(STATE_DISABLED);
+				//10001 are the channels that are installed as channels, not including shop channel/mii channel etc
+				u32 num = 0x00010001;		  
+				TitleBrowser(num);
+				//if they didn't boot a channel reset this window 
+				w.SetState(STATE_DEFAULT);
+				channelBtn.ResetState();
+				
+				
+					}
+					
             if(IsNetworkInit()) {
                 wifiBtn.SetAlpha(255);
             }

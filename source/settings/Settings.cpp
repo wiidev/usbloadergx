@@ -9,6 +9,7 @@
 #include "prompts/PromptWindows.h"
 #include "prompts/DiscBrowser.h"
 #include "settings/SettingsPrompts.h"
+#include "prompts/filebrowser.h"
 #include "cheats/cheatmenu.h"
 #include "fatmounter.h"
 #include "menu.h"
@@ -976,7 +977,7 @@ int MenuSettings()
                                     w.Remove(&optionBrowser2);
                                     w.Remove(&backBtn);
                                     char entered[20] = "";
-                                    int result = OnScreenKeyboard(entered, 20,0);
+												int result = OnScreenKeyboard(entered, 20,0);
                                     w.Append(&optionBrowser2);
                                     w.Append(&backBtn);
                                     if ( result == 1 ) {
@@ -1278,7 +1279,8 @@ int MenuSettings()
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
                                     strncpy(entered, Settings.covers_path, sizeof(entered));
-                                    int result = OnScreenKeyboard(entered,43,0);
+                                    int result = BrowseDevice(entered);
+                                    //int result = OnScreenKeyboard(entered,43,0);
                                     w.Append(&optionBrowser2);
                                     w.Append(&backBtn);
                                     if ( result == 1 )
@@ -1304,7 +1306,8 @@ int MenuSettings()
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
                                     strncpy(entered, Settings.disc_path, sizeof(entered));
-                                    int result = OnScreenKeyboard(entered, 43,0);
+                                    int result = BrowseDevice(entered);
+                                    //int result = OnScreenKeyboard(entered, 43,0);
                                     w.Append(&optionBrowser2);
                                     w.Append(&backBtn);
                                     if ( result == 1 )
@@ -1330,7 +1333,8 @@ int MenuSettings()
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
                                     strncpy(entered, CFG.theme_path, sizeof(entered));
-                                    int result = OnScreenKeyboard(entered, 43,0);
+                                    int result = BrowseDevice(entered);
+                                    //int result = OnScreenKeyboard(entered, 43,0);
                                     HaltGui();
                                     w.RemoveAll();
                                     if ( result == 1 )
@@ -1387,7 +1391,8 @@ int MenuSettings()
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
                                     strncpy(entered, Settings.titlestxt_path, sizeof(entered));
-                                    int result = OnScreenKeyboard(entered,43,0);
+                                    int result = BrowseDevice(entered);
+                                    //int result = OnScreenKeyboard(entered,43,0);
                                     w.Append(&optionBrowser2);
                                     w.Append(&backBtn);
                                     if ( result == 1 )
@@ -1418,7 +1423,8 @@ int MenuSettings()
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
                                     strncpy(entered, Settings.update_path, sizeof(entered));
-                                    int result = OnScreenKeyboard(entered,43,0);
+                                    int result = BrowseDevice(entered);
+                                    //int result = OnScreenKeyboard(entered,43,0);
                                     w.Append(&optionBrowser2);
                                     w.Append(&backBtn);
                                     if ( result == 1 )
@@ -1440,7 +1446,8 @@ int MenuSettings()
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
                                     strncpy(entered, Settings.Cheatcodespath, sizeof(entered));
-                                    int result = OnScreenKeyboard(entered,43,0);
+                                    int result = BrowseDevice(entered);
+                                    //int result = OnScreenKeyboard(entered,43,0);
                                     w.Append(&optionBrowser2);
                                     w.Append(&backBtn);
                                     if ( result == 1 )
@@ -1462,7 +1469,8 @@ int MenuSettings()
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
                                     strncpy(entered, Settings.TxtCheatcodespath, sizeof(entered));
-                                    int result = OnScreenKeyboard(entered,43,0);
+                                    int result = BrowseDevice(entered);
+                                    //int result = OnScreenKeyboard(entered,43,0);
                                     w.Append(&optionBrowser2);
                                     w.Append(&backBtn);
                                     if ( result == 1 )
@@ -1484,7 +1492,8 @@ int MenuSettings()
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
                                     strncpy(entered, Settings.dolpath, sizeof(entered));
-                                    int result = OnScreenKeyboard(entered,43,0);
+                                    int result = BrowseDevice(entered);
+                                    //int result = OnScreenKeyboard(entered,43,0);
                                     w.Append(&optionBrowser2);
                                     w.Append(&backBtn);
                                     if ( result == 1 )
@@ -1510,7 +1519,8 @@ int MenuSettings()
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
                                     strncpy(entered, Settings.homebrewapps_path, sizeof(entered));
-                                    int result = OnScreenKeyboard(entered,43,0);
+                                    int result = BrowseDevice(entered);
+                                    //int result = OnScreenKeyboard(entered,43,0);
                                     w.Append(&optionBrowser2);
                                     w.Append(&backBtn);
                                     if ( result == 1 )

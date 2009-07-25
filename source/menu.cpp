@@ -25,7 +25,9 @@
 #include "homebrewboot/HomebrewBrowse.h"
 #include "homebrewboot/BootHomebrew.h"
 #include "prompts/PromptWindows.h"
+#include "prompts/filebrowser.h"
 #include "prompts/ProgressWindow.h"
+#include "prompts/TitleBrowser.h"
 #include "prompts/gameinfo.h"
 #include "mload/mload.h"
 #include "patches/patchcode.h"
@@ -472,7 +474,7 @@ int MenuDiscList()
         homebrewBtnImg.SetWidescreen(CFG.widescreen);
         GuiButton homebrewBtn(homebrewBtnImg.GetWidth(), homebrewBtnImg.GetHeight());
         homebrewBtn.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-        homebrewBtn.SetPosition(425, 400);
+        homebrewBtn.SetPosition(THEME.homebrew_x,THEME.homebrew_y);
         homebrewBtn.SetImage(&homebrewBtnImg);
         homebrewBtn.SetSoundOver(&btnSoundOver);
         homebrewBtn.SetSoundClick(&btnClick);
@@ -618,7 +620,6 @@ int MenuDiscList()
         {
                 w.Append(&gamecntTxt);
         }
-
         w.Append(&sdcardBtn);
         w.Append(&poweroffBtn);
 			w.Append(&gameInfo);
