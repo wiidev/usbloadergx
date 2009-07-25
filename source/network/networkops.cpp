@@ -16,7 +16,7 @@
 #include "settings/cfg.h"
 #include "main.h"
 #include "http.h"
-#include "getrev.h"
+#include "svnrev.h"
 
 #define PORT            4299
 

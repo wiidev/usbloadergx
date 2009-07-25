@@ -1,4 +1,14 @@
 #ifndef SVNREV_H
-  #define SVNREV_H
-  #define SVN_REV "643M"
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+char *GetRev();
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif /* SVNREV_H */
