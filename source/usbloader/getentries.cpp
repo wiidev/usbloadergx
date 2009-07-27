@@ -58,7 +58,7 @@ s32 __Menu_EntryCmpCount(const void *a, const void *b)
  * Get Gamelist
  ***************************************************************************/
 
-int __Menu_GetEntries(void)
+int __Menu_GetEntries(int t)
 {
 	struct discHdr *buffer = NULL;
 	struct discHdr *buffer2 = NULL;
@@ -91,7 +91,7 @@ int __Menu_GetEntries(void)
 	}
 
 	/* Filters */
-	if (Settings.fave) {
+	if (Settings.fave && t==0) {
 		u32 cnt2 = 0;
 
 		for (u32 i = 0; i < cnt; i++)
@@ -124,7 +124,7 @@ int __Menu_GetEntries(void)
 		cnt = cnt2;
 	}
 
-	if (Settings.parentalcontrol && !Settings.godmode) {
+	if (Settings.parentalcontrol && !Settings.godmode && t==0) {
 		u32 cnt2 = 0;
 
 		for (u32 i = 0; i < cnt; i++)

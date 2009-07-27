@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-26 19:54-0400\n"
+"POT-Creation-Date: 2009-07-27 05:27-0400\n"
 "PO-Revision-Date: 2009-07-24 16:45+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -556,9 +556,6 @@ msgstr "Språkbyte:"
 msgid "Languagepath changed."
 msgstr "Sökväg till språk ändrad"
 
-msgid "Leaving so you can restart..."
-msgstr "Lämnar så du kan starta om..."
-
 msgid "Left"
 msgstr "Vänster"
 
@@ -1046,6 +1043,9 @@ msgstr "ett fel uppstod"
 
 msgid "titles.txt Path"
 msgstr "sökväg till titles.txt"
+
+#~ msgid "Leaving so you can restart..."
+#~ msgstr "Lämnar så du kan starta om..."
 
 #~ msgid "Incomming file %0.2fKB"
 #~ msgstr "Inkommande fil %0.2fKB"

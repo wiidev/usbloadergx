@@ -1275,7 +1275,7 @@ int MenuDiscList()
 													 //re-evaluate header now in case they changed games while on the game prompt
 													 header = &gameList[gameSelected];
                                         int settret = GameSettings(header);
-										menu = MENU_DISCLIST; // refresh titles (needed if the language setting has changed)
+														menu = MENU_DISCLIST; // refresh titles (needed if the language setting has changed)
                                         HaltGui();
                                         if (Settings.gameDisplay==list)  mainWindow->Append(gameBrowser);
                                         else if (Settings.gameDisplay==grid) mainWindow->Append(gameGrid);
@@ -1726,7 +1726,7 @@ static int MenuCheck()
         }
 
 		//Spieleliste laden
-		__Menu_GetEntries();
+		__Menu_GetEntries(0);
 
         if(menu == MENU_NONE)
 		menu = MENU_DISCLIST;

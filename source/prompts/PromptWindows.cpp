@@ -29,6 +29,9 @@
 #include "unzip/unzip.h"
 #include "zlib.h"
 #include "svnrev.h"
+#include "audio.h"
+#include "xml/xml.h"
+#include "../wad/title.h"
 
 
 /*** Variables that are also used extern ***/
@@ -1655,6 +1658,8 @@ FormatingPartition(const char *title, partitionEntry *entry)
  ***************************************************************************/
 void SearchMissingImages(int choice2)
 {
+	//make sure that all games are added to the gamelist
+	__Menu_GetEntries(1);
 	GuiWindow promptWindow(472,320);
 	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	promptWindow.SetPosition(0, -10);
@@ -1727,7 +1732,7 @@ void SearchMissingImages(int choice2)
 			break;
 		}
     }
-
+	
     if (IsNetworkInit()) {
             msgTxt.SetTextf("IP: %s", GetNetworkIP());
 			cntMissFiles = 0;
@@ -1777,6 +1782,8 @@ void SearchMissingImages(int choice2)
 	HaltGui();
 	mainWindow->Remove(&promptWindow);
 	mainWindow->SetState(STATE_DEFAULT);
+	//change the gamelist backto how it was before this function
+	__Menu_GetEntries();
 	ResumeGui();
 
 	return;
@@ -2349,6 +2356,7 @@ int ProgressUpdateWindow()
 	//make the URL to get XML based on our games
 	char XMLurl[2040];
 	char filename[10];
+	__Menu_GetEntries(1);
 	snprintf(XMLurl,sizeof(XMLurl),"http://wiitdb.com/wiitdb.zip?LANG=%s?ID=",sysLanguage);
 	unsigned int i;
 	for (i = 0; i < gameCnt ; i++) {
@@ -2360,7 +2368,7 @@ int ProgressUpdateWindow()
 				strncat(XMLurl, ",",1);
 		}
 	}
-
+	__Menu_GetEntries();
 	if(IsNetworkInit() && ret >= 0) {
 
     int newrev = CheckUpdate();
@@ -2612,6 +2620,7 @@ int ProgressUpdateWindow()
 	//make the URL to get XML based on our games
 	char XMLurl[2040];
 	char filename[10];
+	__Menu_GetEntries(1);
 	snprintf(XMLurl,sizeof(XMLurl),"http://wiitdb.com/wiitdb.zip?LANG=%s?ID=",sysLanguage);
 	unsigned int i;
 	for (i = 0; i < gameCnt ; i++) {
@@ -2623,7 +2632,7 @@ int ProgressUpdateWindow()
 				strncat(XMLurl, ",",1);
 		}
 	}
-
+	__Menu_GetEntries();
     char dolpath[150];
 //    char dolpathsuccess[150];//use coverspath as a folder for the update wad so we dont make a new folder and have to delete it
     snprintf(dolpath, sizeof(dolpath), "%sULNR.wad", Settings.covers_path);
@@ -2770,8 +2779,13 @@ int ProgressUpdateWindow()
 			if (shit)
         WindowPrompt(tr("Shit") , tr("there was an error"), tr("OK"));
 		  else
-        WindowPrompt(tr("Successfully Updated") , tr("Leaving so you can restart..."), tr("OK"));
-        Sys_BackToLoader();
+        WindowPrompt(tr("Successfully Updated") , tr("Restarting..."), 0,0,0,0,150);
+        CloseXMLDatabase();
+			ExitGUIThreads();
+			ShutdownAudio();
+			StopGX();
+			WII_Initialize();
+			WII_LaunchTitle(TITLE_ID(0x00010001,0x554c4e52));
     }
 
    // promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);

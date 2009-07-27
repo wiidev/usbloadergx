@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-26 19:54-0400\n"
+"POT-Creation-Date: 2009-07-27 05:27-0400\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -556,9 +556,6 @@ msgstr "變更語言為:"
 msgid "Languagepath changed."
 msgstr "語言路徑已變更"
 
-msgid "Leaving so you can restart..."
-msgstr "正在退出並請重新啟動..."
-
 msgid "Left"
 msgstr "左"
 
@@ -1046,6 +1043,9 @@ msgstr "發生錯誤"
 
 msgid "titles.txt Path"
 msgstr "Title檔案路徑"
+
+#~ msgid "Leaving so you can restart..."
+#~ msgstr "正在退出並請重新啟動..."
 
 #~ msgid "Do you want to boot?"
 #~ msgstr "啟動?"

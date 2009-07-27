@@ -31,7 +31,7 @@ class HomebrewXML
         void SetName(char * path) { strncpy(name, path, sizeof(name)); }
     protected:
         char name[50];
-        char coder[50];
+        char coder[100];
         char version[30];
         char releasedate[30];
         char shortdescription[150];

@@ -76,7 +76,7 @@ int TitleBrowser(u32 type)
 	
 			while (i < num_titles){
 			//start from the beginning of the file each loop
-			rewind(f);
+			if (f)rewind(f);
 				char name[50];
 				char text[15];
 				strcpy(name,"");//make sure name is empty
@@ -114,14 +114,12 @@ int TitleBrowser(u32 type)
 					}
 				//set the text to the option browser
 				options3.SetName(i, "%s",text);
-				options3.SetValue(i, "%s",name);
-				//options3.SetValue(i, "%s (%08x)",text,titles[i]);
+				//options3.SetValue(i, "%s",name);
+				options3.SetValue(i, " (%08x)",titles[i]);
 				//move on to the next title
 				i++;
 			}
 
-	
-	
 	bool exit = false;
 
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
@@ -198,7 +196,7 @@ int TitleBrowser(u32 type)
 		
 				char name[50];
 				char text[15];
-				rewind(f);
+				if (f)rewind(f);
 				strcpy(name,"");//make sure name is empty
 				
 				

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-26 19:54-0400\n"
+"POT-Creation-Date: 2009-07-27 05:27-0400\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) \n"
 "Language-Team: Last version on http://startgolf.tym.cz/czech.lang \n"
@@ -555,9 +555,6 @@ msgstr "Zmena jazyka:"
 
 msgid "Languagepath changed."
 msgstr "Cesta k jazykum zmenena"
-
-msgid "Leaving so you can restart..."
-msgstr ""
 
 msgid "Left"
 msgstr "Vlevo"

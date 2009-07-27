@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-26 19:54-0400\n"
+"POT-Creation-Date: 2009-07-27 05:27-0400\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -556,9 +556,6 @@ msgstr "Cambio de Idioma:"
 msgid "Languagepath changed."
 msgstr "Ruta de idioma cambiada."
 
-msgid "Leaving so you can restart..."
-msgstr "Abandonando asi es que puedes reiniciar..."
-
 msgid "Left"
 msgstr "Izquierda"
 
@@ -1046,6 +1043,9 @@ msgstr "hubo un error"
 
 msgid "titles.txt Path"
 msgstr "Ruta Titles.txt"
+
+#~ msgid "Leaving so you can restart..."
+#~ msgstr "Abandonando asi es que puedes reiniciar..."
 
 #~ msgid "Incomming file %0.2fKB"
 #~ msgstr "Archivo entrante %0.2fKB"

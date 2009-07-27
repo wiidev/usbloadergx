@@ -889,6 +889,8 @@ bool save_XML_URL()// save xml url as as txt file for people without wifi
 		sleep(1);
 		return false;
 	}
+	//make sure that all games are added to the gamelist
+	__Menu_GetEntries(1);
 	
 	char XMLurl[2040];
 	char filename[10];
@@ -919,6 +921,8 @@ bool save_XML_URL()// save xml url as as txt file for people without wifi
 	fprintf(f, "%s\n\n\n ", XMLurl);
 	
 	fclose(f);
+	
+	__Menu_GetEntries();
 	return true;
 }
 

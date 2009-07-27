@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-26 19:54-0400\n"
+"POT-Creation-Date: 2009-07-27 05:27-0400\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: ziom666 (zadania_prog@vp.pl)\n"
 "Language-Team: \n"
@@ -556,9 +556,6 @@ msgstr "Zmien jezyk"
 msgid "Languagepath changed."
 msgstr "Sciezka do plików jezykowych zmieniona"
 
-msgid "Leaving so you can restart..."
-msgstr "Przygotowanie do restartu..."
-
 msgid "Left"
 msgstr "Lewo"
 
@@ -1046,6 +1043,9 @@ msgstr "blad"
 
 msgid "titles.txt Path"
 msgstr "Sciezka titles.txt"
+
+#~ msgid "Leaving so you can restart..."
+#~ msgstr "Przygotowanie do restartu..."
 
 #~ msgid "Uninstall"
 #~ msgstr "Odinstaluj"
