@@ -1745,8 +1745,10 @@ void CFG_Load(void)
 	//moved this to the HDD wait screen to avoid the garbled green screen while it is loading *maybe*
 	//OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true);
 	// loaded after database to override database titles with custom titles
-	snprintf(pathname, sizeof(pathname), "%stitles.txt", Settings.titlestxt_path);
-	cfg_parsefile(pathname, &title_set);
+	
+	//took out this titles.txt shit because it is useless now.  teh xml has all the titles in it
+	//snprintf(pathname, sizeof(pathname), "%stitles.txt", Settings.titlestxt_path);
+	//cfg_parsefile(pathname, &title_set);
 
 //	cfg_parsearg(argc, argv);
 }

@@ -1770,10 +1770,39 @@ int MenuSettings()
 *********************************************************************************/
 int GameSettings(struct discHdr * header)
 {
-	bool exit = false;
+	int menu = MENU_NONE;
 	int ret;
+	int choice = 0;
+	bool exit = false;
+	
 	int retVal = 0;
-	int pagetodisplay=1;
+
+	
+
+
+	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
+	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
+    GuiSound btnClick1(button_click_pcm, button_click_pcm_size, SOUND_PCM, Settings.sfxvolume);
+
+	char imgPath[100];
+
+	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
+	GuiImageData btnOutline(imgPath, button_dialogue_box_png);
+	snprintf(imgPath, sizeof(imgPath), "%ssettings_background.png", CFG.theme_path);
+	GuiImageData settingsbg(imgPath, settings_background_png);
+
+	snprintf(imgPath, sizeof(imgPath), "%ssettings_title.png", CFG.theme_path);
+	GuiImageData MainButtonImgData(imgPath, settings_title_png);
+
+	snprintf(imgPath, sizeof(imgPath), "%ssettings_title_over.png", CFG.theme_path);
+	GuiImageData MainButtonImgOverData(imgPath, settings_title_over_png);
+
+    GuiTrigger trigA;
+	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
+    GuiTrigger trigHome;
+	trigHome.SetButtonOnlyTrigger(-1, WPAD_BUTTON_HOME | WPAD_CLASSIC_BUTTON_HOME, 0);
+	GuiTrigger trigB;
+	trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 
 	char gameName[31];
 
@@ -1786,478 +1815,753 @@ int GameSettings(struct discHdr * header)
 		strncat(gameName, "...", 3);
 	}
 
-	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
-	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
+	
 
-	char imgPath[100];
 
-	snprintf(imgPath, sizeof(imgPath), "%socarina.png", CFG.theme_path);
-	GuiImageData btnOcarina(imgPath, ocarina_png);
-	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
-	GuiImageData btnOutline(imgPath, button_dialogue_box_png);
-	snprintf(imgPath, sizeof(imgPath), "%sgamesettings_background.png", CFG.theme_path);
-	GuiImageData settingsbg(imgPath, settings_background_png);
-
-    GuiTrigger trigA;
-	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
-    GuiTrigger trigHome;
-	trigHome.SetButtonOnlyTrigger(-1, WPAD_BUTTON_HOME | WPAD_CLASSIC_BUTTON_HOME, 0);
-	GuiTrigger trigB;
-	trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
-
-    GuiText titleTxt(get_title(header), 28, (GXColor){0, 0, 0, 255});
+   GuiText titleTxt(get_title(header), 28, (GXColor){0, 0, 0, 255});
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	titleTxt.SetPosition(12,40);
 	titleTxt.SetMaxWidth(356, GuiText::SCROLL);
 
     GuiImage settingsbackground(&settingsbg);
-	GuiButton settingsbackgroundbtn(settingsbackground.GetWidth(), settingsbackground.GetHeight());
-	settingsbackgroundbtn.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	settingsbackgroundbtn.SetPosition(0, 0);
-	settingsbackgroundbtn.SetImage(&settingsbackground);
 
-    GuiText saveBtnTxt(tr("Save"), 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+    GuiText backBtnTxt(tr("Back") , 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	backBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
+	GuiImage backBtnImg(&btnOutline);
+	if (Settings.wsprompt == yes){
+	backBtnTxt.SetWidescreen(CFG.widescreen);
+	backBtnImg.SetWidescreen(CFG.widescreen);
+	}
+	GuiButton backBtn(&backBtnImg,&backBtnImg, 2, 3, -180, 400, &trigA, &btnSoundOver, &btnClick,1);
+	backBtn.SetLabel(&backBtnTxt);
+	backBtn.SetTrigger(&trigB);
+
+	GuiButton homo(1,1);
+	homo.SetTrigger(&trigHome);
+	
+	GuiText saveBtnTxt(tr("Save"), 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	saveBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
 	GuiImage saveBtnImg(&btnOutline);
 	if (Settings.wsprompt == yes){
 	saveBtnTxt.SetWidescreen(CFG.widescreen);
 	saveBtnImg.SetWidescreen(CFG.widescreen);}
-	GuiButton saveBtn(&saveBtnImg,&saveBtnImg, 2, 3, -180, 400, &trigA, &btnSoundOver, &btnClick,1);
-	saveBtn.SetScale(0.9);
+	GuiButton saveBtn(&saveBtnImg,&saveBtnImg, 2, 3, 180, 400, &trigA, &btnSoundOver, &btnClick,1);
 	saveBtn.SetLabel(&saveBtnTxt);
 
-    GuiText cancelBtnTxt(tr("Back"), 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
-	cancelBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
-	GuiImage cancelBtnImg(&btnOutline);
-	if (Settings.wsprompt == yes){
-	cancelBtnTxt.SetWidescreen(CFG.widescreen);
-	cancelBtnImg.SetWidescreen(CFG.widescreen);}
-	GuiButton cancelBtn(&cancelBtnImg,&cancelBtnImg, 2, 3, 180, 400, &trigA, &btnSoundOver, &btnClick,1);
-	cancelBtn.SetScale(0.9);
-	cancelBtn.SetLabel(&cancelBtnTxt);
-	cancelBtn.SetTrigger(&trigB);
+   
 
-	GuiText deleteBtnTxt(tr("Uninstall Menu"), 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
-	deleteBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
-	GuiImage deleteBtnImg(&btnOutline);
-	if (Settings.wsprompt == yes){
-	deleteBtnTxt.SetWidescreen(CFG.widescreen);
-	deleteBtnImg.SetWidescreen(CFG.widescreen);}
-	GuiButton deleteBtn(&deleteBtnImg,&deleteBtnImg, 2, 3, 0, 400, &trigA, &btnSoundOver, &btnClick,1);
-	deleteBtn.SetScale(0.9);
-	deleteBtn.SetLabel(&deleteBtnTxt);
+    char MainButtonText[50];
+    snprintf(MainButtonText, sizeof(MainButtonText), "%s", " ");
 
-	GuiImage GCTBtnImg(&btnOcarina);
-	if (Settings.wsprompt == yes){
-	GCTBtnImg.SetWidescreen(CFG.widescreen);}
-	GuiButton GCTBtn(&GCTBtnImg,&GCTBtnImg, ALIGN_RIGHT, ALIGN_TOP, -20, 90, &trigA, &btnSoundOver, &btnClick,1);
-	GCTBtn.SetSize(80,80);
-	GCTBtnImg.SetScale(0.5);
+    GuiImage MainButton1Img(&MainButtonImgData);
+    GuiImage MainButton1ImgOver(&MainButtonImgOverData);
+    GuiText MainButton1Txt(MainButtonText, 22, (GXColor){0, 0, 0, 255});
+	MainButton1Txt.SetMaxWidth(MainButton1Img.GetWidth());
+    GuiButton MainButton1(MainButton1Img.GetWidth(), MainButton1Img.GetHeight());
+    MainButton1.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	MainButton1.SetPosition(0, 90);
+	MainButton1.SetImage(&MainButton1Img);
+	MainButton1.SetImageOver(&MainButton1ImgOver);
+	MainButton1.SetLabel(&MainButton1Txt);
+	MainButton1.SetSoundOver(&btnSoundOver);
+	MainButton1.SetSoundClick(&btnClick1);
+	MainButton1.SetEffectGrow();
+	MainButton1.SetTrigger(&trigA);
 
-	customOptionList options3(11);
-	GuiCustomOptionBrowser optionBrowser3(396, 280, &options3, CFG.theme_path, "bg_options_gamesettings.png", bg_options_settings_png, 1, 180);
-	optionBrowser3.SetPosition(0, 90);
-	optionBrowser3.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+    GuiImage MainButton2Img(&MainButtonImgData);
+    GuiImage MainButton2ImgOver(&MainButtonImgOverData);
+    GuiText MainButton2Txt(MainButtonText, 22, (GXColor){0, 0, 0, 255});
+	MainButton2Txt.SetMaxWidth(MainButton2Img.GetWidth());
+    GuiButton MainButton2(MainButton2Img.GetWidth(), MainButton2Img.GetHeight());
+    MainButton2.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	MainButton2.SetPosition(0, 160);
+	MainButton2.SetImage(&MainButton2Img);
+	MainButton2.SetImageOver(&MainButton2ImgOver);
+	MainButton2.SetLabel(&MainButton2Txt);
+	MainButton2.SetSoundOver(&btnSoundOver);
+	MainButton2.SetSoundClick(&btnClick1);
+	MainButton2.SetEffectGrow();
+	MainButton2.SetTrigger(&trigA);
 
-    HaltGui();
+    GuiImage MainButton3Img(&MainButtonImgData);
+    GuiImage MainButton3ImgOver(&MainButtonImgOverData);
+    GuiText MainButton3Txt(MainButtonText, 22, (GXColor){0, 0, 0, 255});
+	MainButton3Txt.SetMaxWidth(MainButton3Img.GetWidth());
+    GuiButton MainButton3(MainButton3Img.GetWidth(), MainButton3Img.GetHeight());
+    MainButton3.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	MainButton3.SetPosition(0, 230);
+	MainButton3.SetImage(&MainButton3Img);
+	MainButton3.SetImageOver(&MainButton3ImgOver);
+	MainButton3.SetLabel(&MainButton3Txt);
+	MainButton3.SetSoundOver(&btnSoundOver);
+	MainButton3.SetSoundClick(&btnClick1);
+	MainButton3.SetEffectGrow();
+	MainButton3.SetTrigger(&trigA);
+
+    GuiImage MainButton4Img(&MainButtonImgData);
+    GuiImage MainButton4ImgOver(&MainButtonImgOverData);
+    GuiText MainButton4Txt(MainButtonText, 22, (GXColor){0, 0, 0, 255});
+	MainButton4Txt.SetMaxWidth(MainButton4Img.GetWidth());
+    GuiButton MainButton4(MainButton4Img.GetWidth(), MainButton4Img.GetHeight());
+    MainButton4.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	MainButton4.SetPosition(0, 300);
+	MainButton4.SetImage(&MainButton4Img);
+	MainButton4.SetImageOver(&MainButton4ImgOver);
+	MainButton4.SetLabel(&MainButton4Txt);
+	MainButton4.SetSoundOver(&btnSoundOver);
+	MainButton4.SetSoundClick(&btnClick1);
+	MainButton4.SetEffectGrow();
+	MainButton4.SetTrigger(&trigA);
+
+	customOptionList options2(MAXOPTIONS-1);
+	GuiCustomOptionBrowser optionBrowser2(396, 280, &options2, CFG.theme_path, "bg_options_settings.png", bg_options_settings_png, 0, 150);
+	optionBrowser2.SetPosition(0, 90);
+	optionBrowser2.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+
 	GuiWindow w(screenwidth, screenheight);
-	w.Append(&settingsbackgroundbtn);
-    w.Append(&titleTxt);
-	w.Append(&deleteBtn);
-	w.Append(&saveBtn);
-	w.Append(&cancelBtn);
-    w.Append(&optionBrowser3);
-	w.Append(&GCTBtn);
-
-	mainWindow->Append(&w);
-
+	int opt_lang = languageChoice; // backup language setting
 	struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
 
-	if (game_cfg)//if there are saved settings for this game use them
+	int pageToDisplay = 1;
+	while ( pageToDisplay > 0) //set pageToDisplay to 0 to quit
 	{
-		videoChoice = game_cfg->video;
-		languageChoice = game_cfg->language;
-		ocarinaChoice = game_cfg->ocarina;
-		viChoice = game_cfg->vipatch;
-		iosChoice = game_cfg->ios;
-		parentalcontrolChoice = game_cfg->parentalcontrol;
-		fix002 = game_cfg->errorfix002;
-		countrystrings = game_cfg->patchcountrystrings;
-		alternatedol = game_cfg->loadalternatedol;
-		alternatedoloffset = game_cfg->alternatedolstart;
-		reloadblock = game_cfg->iosreloadblock;
-		strncpy(alternatedname, game_cfg->alternatedolname, sizeof(alternatedname));
-	}
-	else
-	{
-		videoChoice = Settings.video;
-		languageChoice = Settings.language;
-		ocarinaChoice = Settings.ocarina;
-		viChoice = Settings.vpatch;
-		if(Settings.cios == ios222) {
-        iosChoice = i222;
-		} else {
-		iosChoice = i249;
-		}
-		parentalcontrolChoice = 0;
-		fix002 = Settings.error002;
-		countrystrings = Settings.patchcountrystrings;
-		alternatedol = off;
-		alternatedoloffset = 0;
-		reloadblock = off;
-		sprintf(alternatedname, " ");
-	}
+	    VIDEO_WaitVSync ();
 
-	int opt_lang = languageChoice; // backup language setting
+		menu = MENU_NONE;
 
-	ResumeGui();
+	    /** Standard procedure made in all pages **/
+			MainButton1.StopEffect();
+			MainButton2.StopEffect();
+			MainButton3.StopEffect();
+			MainButton4.StopEffect();
 
-	while(!exit)
-	{
-		VIDEO_WaitVSync();
+			HaltGui();
 
-		if (pagetodisplay==1){
-			options3.SetName(0,"%s", tr("Video Mode"));
-			options3.SetName(1,"%s", tr("VIDTV Patch"));
-			options3.SetName(2,"%s", tr("Game Language"));
-			options3.SetName(3, "Ocarina");
-			options3.SetName(4, "IOS");
-			options3.SetName(5,"%s", tr("Parental control"));
-			options3.SetName(6,"%s", tr("Error 002 fix"));
-			options3.SetName(7,"%s", tr("Patch Country Strings"));
-			options3.SetName(8,"%s", tr("Alternate DOL"));
-			options3.SetName(9,"%s", tr("DOL from disc"));
-			options3.SetName(10,"%s", tr("Block IOS Reload"));
+            snprintf(MainButtonText, sizeof(MainButtonText), "%s", tr("Game Load"));
+            MainButton1Txt.SetText(MainButtonText);
+            snprintf(MainButtonText, sizeof(MainButtonText), "Ocarina");
+            MainButton2Txt.SetText(MainButtonText);
+            snprintf(MainButtonText, sizeof(MainButtonText), "%s", tr("Uninstall Menu"));
+            MainButton3Txt.SetText(MainButtonText);
+            snprintf(MainButtonText, sizeof(MainButtonText), "%s", tr("Default Gamesettings"));
+            MainButton4Txt.SetText(MainButtonText);
 
-		if (videoChoice == discdefault) options3.SetValue(0,"%s",tr("Disc Default"));
-		else if (videoChoice == systemdefault) options3.SetValue(0,"%s",tr("System Default"));
-		else if (videoChoice == patch) options3.SetValue(0,"%s",tr("AutoPatch"));
-		else if (videoChoice == pal50) options3.SetValue(0,"%s PAL50",tr("Force"));
-		else if (videoChoice == pal60) options3.SetValue(0,"%s PAL60",tr("Force"));
-		else if (videoChoice == ntsc) options3.SetValue(0,"%s NTSC",tr("Force"));
+			mainWindow->RemoveAll();
+			mainWindow->Append(&w);
+			w.RemoveAll();
+            w.Append(&settingsbackground);
+			w.Append(&titleTxt);
+			w.Append(&backBtn);
+			w.Append(&homo);
+			//w.Append(&saveBtn);
+			w.Append(&MainButton1);
+			w.Append(&MainButton2);
+			w.Append(&MainButton3);
+			w.Append(&MainButton4);
 
-        if (viChoice == on) options3.SetValue(1,"%s",tr("ON"));
-		else if (viChoice == off) options3.SetValue(1,"%s",tr("OFF"));
+			/** Disable ability to click through MainButtons */
+			optionBrowser2.SetClickable(false);
+			/** Default no scrollbar and reset position **/
+			optionBrowser2.SetScrollbar(0);
+			optionBrowser2.SetOffset(0);
 
-		if (languageChoice == ConsoleLangDefault) options3.SetValue(2,"%s",tr("Console Default"));
-		else if (languageChoice == jap) options3.SetValue(2,"%s",tr("Japanese"));
-		else if (languageChoice == ger) options3.SetValue(2,"%s",tr("German"));
-		else if (languageChoice == eng) options3.SetValue(2,"%s",tr("English"));
-		else if (languageChoice == fren) options3.SetValue(2,"%s",tr("French"));
-		else if (languageChoice == esp) options3.SetValue(2,"%s",tr("Spanish"));
-        else if (languageChoice == it) options3.SetValue(2,"%s",tr("Italian"));
-		else if (languageChoice == dut) options3.SetValue(2,"%s",tr("Dutch"));
-		else if (languageChoice == schin) options3.SetValue(2,"%s",tr("SChinese"));
-		else if (languageChoice == tchin) options3.SetValue(2,"%s",tr("TChinese"));
-		else if (languageChoice == kor) options3.SetValue(2,"%s",tr("Korean"));
+			MainButton1.StopEffect();
+			MainButton2.StopEffect();
+			MainButton3.StopEffect();
+			MainButton4.StopEffect();
 
-        if (ocarinaChoice == on) options3.SetValue(3,"%s",tr("ON"));
-		else if (ocarinaChoice == off) options3.SetValue(3,"%s",tr("OFF"));
+			MainButton1.SetEffectGrow();
+			MainButton2.SetEffectGrow();
+			MainButton3.SetEffectGrow();
+			MainButton4.SetEffectGrow();
 
-		if (iosChoice == i249) options3.SetValue(4,"249");
-		else if (iosChoice == i222) options3.SetValue(4,"222");
-		else if (iosChoice == i223) options3.SetValue(4,"223");
+            
+            MainButton1.SetEffect(EFFECT_FADE, 20);
+			MainButton2.SetEffect(EFFECT_FADE, 20);
+            MainButton3.SetEffect(EFFECT_FADE, 20);
+            MainButton4.SetEffect(EFFECT_FADE, 20);
+            
+			mainWindow->Append(&w);
+			
+			
 
-		if (parentalcontrolChoice == 0) options3.SetValue(5, tr("0 (Everyone)"));
-		else if (parentalcontrolChoice == 1) options3.SetValue(5, tr("1 (Child 7+)"));
-		else if (parentalcontrolChoice == 2) options3.SetValue(5, tr("2 (Teen 12+)"));
-		else if (parentalcontrolChoice == 3) options3.SetValue(5, tr("3 (Mature 16+)"));
-		else if (parentalcontrolChoice == 4) options3.SetValue(5, tr("4 (Adults Only 18+)"));
-
-        if (fix002 == on) options3.SetValue(6,tr("ON"));
-		else if (fix002 == off) options3.SetValue(6,tr("OFF"));
-		else if (fix002 == anti) options3.SetValue(6,tr("Anti"));
-
-        if (countrystrings == on) options3.SetValue(7,tr("ON"));
-		else if (countrystrings == off) options3.SetValue(7,tr("OFF"));
-
-        if (alternatedol == on) options3.SetValue(8,tr("DOL from SD"));
-        if (alternatedol == 2) options3.SetValue(8,tr("DOL from disc"));
-		else if (alternatedol == off) options3.SetValue(8,tr("OFF"));
-
-        if (alternatedol == on) options3.SetValue(9,tr("SD selected"));
-        else if (alternatedol == off) options3.SetValue(9,tr("OFF"));
-        else options3.SetValue(9, alternatedname);
-
-        if (reloadblock == on) options3.SetValue(10,tr("ON"));
-		else if (reloadblock == off) options3.SetValue(10,tr("OFF"));
-
-        if(shutdown == 1)
-			Sys_Shutdown();
-		if(reset == 1)
-			Sys_Reboot();
-
-		ret = optionBrowser3.GetClickedOption();
-
-		switch (ret)
+		if (game_cfg)//if there are saved settings for this game use them
 		{
-			case 0:
-				videoChoice = (videoChoice + 1) % CFG_VIDEO_COUNT;
-				break;
-			case 1:
-				viChoice = (viChoice + 1) % 2;
-				break;
-            case 2:
-				languageChoice = (languageChoice + 1) % CFG_LANG_COUNT;
-				break;
-            case 3:
-				ocarinaChoice = (ocarinaChoice + 1) % 2;
-				break;
-			case 4:
-				iosChoice = (iosChoice + 1) % 3;
-				break;
-			case 5:
-				parentalcontrolChoice = (parentalcontrolChoice + 1) % 5;
-				break;
-            case 6:
-                fix002 = (fix002+1) % 3;
-                break;
-            case 7:
-                countrystrings = (countrystrings+1) % 2;
-                break;
-            case 8:
-                alternatedol = (alternatedol+1) % 3;
-                break;
-            case 9:
-                if(alternatedol == 2) {
-						 char filename[10];
-						 snprintf(filename,sizeof(filename),"%c%c%c%c%c%c",header->id[0], header->id[1], header->id[2],
-																		 header->id[3],header->id[4], header->id[5]);
-						int dolchoice =0;
-							//check to see if we already know the offset of the correct dol
-						 int autodol = autoSelectDol(filename);
-
-						 //if we do know that offset ask if they want to use it
-						 if (autodol>0){
-							dolchoice = WindowPrompt(0,tr("Do you want to use the alt dol that is known to be correct?"),tr("Yes"),tr("Pick from a list"));
-								if (dolchoice==1)
-								{
-									alternatedoloffset = autodol;
-									snprintf(alternatedname, sizeof(alternatedname), "%s <%i>",  tr("AUTO"),autodol);
-								}
-								else {//they want to search for the correct dol themselves
-							  int res = DiscBrowse(header);
-							  if((res >= 0)&&(res !=696969))//if res==6969696 they pressed the back button
-									alternatedoloffset = res;
-								}
-							}
-							else {
-							int res = DiscBrowse(header);
-							  if((res >= 0)&&(res !=696969))
-									alternatedoloffset = res;
-									char tmp[170];
-									snprintf(tmp,sizeof(tmp),tr("It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team. %s - %i") ,filename,alternatedoloffset);
-									WindowPrompt(0,tmp,tr("Ok"));
-							}
-
-
-
-                }
-                break;
-            case 10:
-                reloadblock = (reloadblock+1) % 2;
-                break;
-
+			videoChoice = game_cfg->video;
+			languageChoice = game_cfg->language;
+			ocarinaChoice = game_cfg->ocarina;
+			viChoice = game_cfg->vipatch;
+			iosChoice = game_cfg->ios;
+			parentalcontrolChoice = game_cfg->parentalcontrol;
+			fix002 = game_cfg->errorfix002;
+			countrystrings = game_cfg->patchcountrystrings;
+			alternatedol = game_cfg->loadalternatedol;
+			alternatedoloffset = game_cfg->alternatedolstart;
+			reloadblock = game_cfg->iosreloadblock;
+			strncpy(alternatedname, game_cfg->alternatedolname, sizeof(alternatedname));
 		}
-	}
-
-	//the uninstall menu
-	if (pagetodisplay==2){
-			for (int j=0;j<13;j++)
-			{
-				options3.SetName(j,NULL);
-				options3.SetValue(j,NULL);
+		else
+		{
+			videoChoice = Settings.video;
+			languageChoice = Settings.language;
+			ocarinaChoice = Settings.ocarina;
+			viChoice = Settings.vpatch;
+			if(Settings.cios == ios222) {
+			  iosChoice = i222;
+			} else {
+			iosChoice = i249;
 			}
-			options3.SetName(0,"%s", tr("Uninstall Game"));
-			options3.SetName(1,"%s", tr("Default Gamesettings"));
-			options3.SetName(2,"%s", tr("Reset Playcounter"));
-			options3.SetName(3,"%s", tr("Delete Boxart"));
-			options3.SetName(4,"%s", tr("Delete Discart"));
-			options3.SetName(5,"%s", tr("Delete CheatTxt"));
+			parentalcontrolChoice = 0;
+			fix002 = Settings.error002;
+			countrystrings = Settings.patchcountrystrings;
+			alternatedol = off;
+			alternatedoloffset = 0;
+			reloadblock = off;
+			sprintf(alternatedname, " ");
+		}
 
 
 
+			ResumeGui();
 
-		if(shutdown == 1)
-			Sys_Shutdown();
-		if(reset == 1)
-			Sys_Reboot();
+			while(MainButton1.GetEffect() > 0) usleep(50);
 
-		ret = optionBrowser3.GetClickedOption();
+		
 
-		int choice1;
-		char tmp[200];
-		switch (ret)
+		while(menu == MENU_NONE)
 		{
-			case 0:
-				choice1 = WindowPrompt(tr("Do you really want to delete:"),gameName,tr("Yes"),tr("Cancel"));
-				if (choice1 == 1)
-				{
-				CFG_forget_game_opt(header->id);
-				CFG_forget_game_num(header->id);
-				ret = WBFS_RemoveGame(header->id);
-				if (ret < 0)
-				{
-					WindowPrompt(
-					tr("Can't delete:"),
-					gameName,
-					tr("OK"));
-				}
-				else {
-					WindowPrompt(tr("Successfully deleted:"),gameName,tr("OK"));
-					retVal = 1;
-				}
-				}
-				else if (choice1 == 0)
-				{
-					optionBrowser3.SetFocus(1);
-				}
-				break;
-			case 1:
-				choice1 = WindowPrompt(tr("Are you sure?"),0,tr("Yes"),tr("Cancel"));
-                if(choice1 == 1) {
-                    videoChoice = Settings.video;
-                    viChoice = Settings.vpatch;
-                    languageChoice = Settings.language;
-                    ocarinaChoice = Settings.ocarina;
-                    fix002 = Settings.error002;
-                    countrystrings = Settings.patchcountrystrings;
-                    alternatedol = off;
-                    alternatedoloffset = 0;
-                    reloadblock = off;
-                    if(Settings.cios == ios222) {
-                        iosChoice = i222;
-                    } else {
-                        iosChoice = i249;
+			VIDEO_WaitVSync ();
+
+			    if(MainButton1.GetState() == STATE_CLICKED) {
+						  w.Append(&saveBtn);
+                    MainButton1.SetEffect(EFFECT_FADE, -20);
+                    MainButton2.SetEffect(EFFECT_FADE, -20);
+                    MainButton3.SetEffect(EFFECT_FADE, -20);
+                    MainButton4.SetEffect(EFFECT_FADE, -20);
+                    while(MainButton1.GetEffect() > 0) usleep(50);
+                    HaltGui();
+                    w.Remove(&MainButton1);
+                    w.Remove(&MainButton2);
+                    w.Remove(&MainButton3);
+                    w.Remove(&MainButton4);
+                    exit = false;
+							for(int i = 0; i <= MAXOPTIONS-1; i++) options2.SetName(i, NULL);
+                    options2.SetName(0, "%s",tr("Video Mode"));
+                    options2.SetName(1, "%s",tr("VIDTV Patch"));
+                    options2.SetName(2,"%s", tr("Game Language"));
+                    options2.SetName(3, "Ocarina");
+                    options2.SetName(4, "IOS");
+                    options2.SetName(5,"%s", tr("Parental control"));
+                    options2.SetName(6,"%s", tr("Error 002 fix"));
+                    options2.SetName(7,"%s", tr("Patch Country Strings"));
+                    options2.SetName(8,"%s", tr("Alternate DOL"));
+                    options2.SetName(9,"%s", tr("DOL from disc"));
+                    options2.SetName(10,"%s", tr("Block IOS Reload"));
+                    for(int i = 0; i <= MAXOPTIONS-1; i++) options2.SetValue(i, NULL);
+                    optionBrowser2.SetScrollbar(1);
+                    w.Append(&optionBrowser2);
+						  //w.Append(&saveBtn);
+                    optionBrowser2.SetClickable(true);
+                    ResumeGui();
+
+                    VIDEO_WaitVSync ();
+                    optionBrowser2.SetEffect(EFFECT_FADE, 20);
+			        while(optionBrowser2.GetEffect() > 0) usleep(50);
+
+                    int returnhere = 1;
+                    char * languagefile;
+                    languagefile = strrchr(Settings.language_path, '/')+1;
+
+                    while(!exit)
+                    {
+                        VIDEO_WaitVSync ();
+
+                        returnhere = 1;
+
+                        if(videoChoice  >= 6)
+                            videoChoice = 0;
+                        if(viChoice >= 2)
+                            viChoice = 0; 
+                        if (languageChoice >= 11)
+                            languageChoice = 0;
+                        if ( ocarinaChoice >= 2)
+                            ocarinaChoice = 0;
+                        if ( Settings.wsprompt > 1 )
+                            Settings.wsprompt = 0;
+                        if ( iosChoice >= 3)
+                            iosChoice = 0;
+                        if ( Settings.wiilight > 2 )
+                            Settings.wiilight = 0;
+                        if(parentalcontrolChoice >= 5)
+                            parentalcontrolChoice = 0; 
+                        if(fix002 >= 3)
+                            fix002 = 0; //RUMBLE
+								if(countrystrings >= 2)
+									countrystrings = 0;
+								if(alternatedol >= 3)
+									alternatedol = 0;
+								if(reloadblock >= 2)
+									reloadblock = 0;
+						                        
+								if (videoChoice == discdefault) options2.SetValue(0,"%s",tr("Disc Default"));
+								else if (videoChoice == systemdefault) options2.SetValue(0,"%s",tr("System Default"));
+								else if (videoChoice == patch) options2.SetValue(0,"%s",tr("AutoPatch"));
+								else if (videoChoice == pal50) options2.SetValue(0,"%s PAL50",tr("Force"));
+								else if (videoChoice == pal60) options2.SetValue(0,"%s PAL60",tr("Force"));
+								else if (videoChoice == ntsc) options2.SetValue(0,"%s NTSC",tr("Force"));
+
+								  if (viChoice == on) options2.SetValue(1,"%s",tr("ON"));
+								else if (viChoice == off) options2.SetValue(1,"%s",tr("OFF"));
+
+								if (languageChoice == ConsoleLangDefault) options2.SetValue(2,"%s",tr("Console Default"));
+								else if (languageChoice == jap) options2.SetValue(2,"%s",tr("Japanese"));
+								else if (languageChoice == ger) options2.SetValue(2,"%s",tr("German"));
+								else if (languageChoice == eng) options2.SetValue(2,"%s",tr("English"));
+								else if (languageChoice == fren) options2.SetValue(2,"%s",tr("French"));
+								else if (languageChoice == esp) options2.SetValue(2,"%s",tr("Spanish"));
+								  else if (languageChoice == it) options2.SetValue(2,"%s",tr("Italian"));
+								else if (languageChoice == dut) options2.SetValue(2,"%s",tr("Dutch"));
+								else if (languageChoice == schin) options2.SetValue(2,"%s",tr("SChinese"));
+								else if (languageChoice == tchin) options2.SetValue(2,"%s",tr("TChinese"));
+								else if (languageChoice == kor) options2.SetValue(2,"%s",tr("Korean"));
+
+								  if (ocarinaChoice == on) options2.SetValue(3,"%s",tr("ON"));
+								else if (ocarinaChoice == off) options2.SetValue(3,"%s",tr("OFF"));
+
+								if (iosChoice == i249) options2.SetValue(4,"249");
+								else if (iosChoice == i222) options2.SetValue(4,"222");
+								else if (iosChoice == i223) options2.SetValue(4,"223");
+
+								if (parentalcontrolChoice == 0) options2.SetValue(5, tr("0 (Everyone)"));
+								else if (parentalcontrolChoice == 1) options2.SetValue(5, tr("1 (Child 7+)"));
+								else if (parentalcontrolChoice == 2) options2.SetValue(5, tr("2 (Teen 12+)"));
+								else if (parentalcontrolChoice == 3) options2.SetValue(5, tr("3 (Mature 16+)"));
+								else if (parentalcontrolChoice == 4) options2.SetValue(5, tr("4 (Adults Only 18+)"));
+
+								  if (fix002 == on) options2.SetValue(6,tr("ON"));
+								else if (fix002 == off) options2.SetValue(6,tr("OFF"));
+								else if (fix002 == anti) options2.SetValue(6,tr("Anti"));
+
+								  if (countrystrings == on) options2.SetValue(7,tr("ON"));
+								else if (countrystrings == off) options2.SetValue(7,tr("OFF"));
+
+								  if (alternatedol == on) options2.SetValue(8,tr("DOL from SD"));
+								  if (alternatedol == 2) options2.SetValue(8,tr("DOL from disc"));
+								else if (alternatedol == off) options2.SetValue(8,tr("OFF"));
+
+								  if (alternatedol == on) options2.SetValue(9,tr("SD selected"));
+								  else if (alternatedol == off) options2.SetValue(9,tr("OFF"));
+								  else options2.SetValue(9, alternatedname);
+
+								  if (reloadblock == on) options2.SetValue(10,tr("ON"));
+								else if (reloadblock == off) options2.SetValue(10,tr("OFF"));
+
+						if(backBtn.GetState() == STATE_CLICKED)
+                        {
+                            backBtn.ResetState();
+                            exit = true;
+							break;
+                        }
+
+                        if(shutdown == 1)
+                            Sys_Shutdown();
+                        else if(reset == 1)
+                            Sys_Reboot();
+
+                        else if(menu == MENU_DISCLIST) {
+                            w.Remove(&optionBrowser2);
+                            w.Remove(&backBtn);
+                            WindowCredits();
+                            w.Append(&optionBrowser2);
+                            w.Append(&backBtn);
+                        }
+                        else if(homo.GetState() == STATE_CLICKED)
+                        {
+                            cfg_save_global();
+                            optionBrowser2.SetState(STATE_DISABLED);
+                            s32 thetimeofbg = bgMusic->GetPlayTime();
+                            bgMusic->Stop();
+                            choice = WindowExitPrompt(tr("Exit USB Loader GX?"),0, tr("Back to Loader"),tr("Wii Menu"),tr("Back"),0);
+                            if(!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path))
+                            {
+                                bgMusic->Play();
+                            } else {
+                                bgMusic->PlayOggFile(Settings.ogg_path);
+                            }
+                            bgMusic->SetPlayTime(thetimeofbg);
+                            SetVolumeOgg(255*(Settings.volume/100.0));
+                            if(choice == 3) {
+                                Sys_LoadMenu(); // Back to System Menu
+                            } else if (choice == 2) {
+                                Sys_BackToLoader();
+                            } else {
+                                homo.ResetState();
+                            }
+                            optionBrowser2.SetState(STATE_DEFAULT);
+                        }
+
+                        ret = optionBrowser2.GetClickedOption();
+
+                        switch (ret)
+								{
+									case 0:
+										videoChoice = (videoChoice + 1) % CFG_VIDEO_COUNT;
+										break;
+									case 1:
+										viChoice = (viChoice + 1) % 2;
+										break;
+										case 2:
+										languageChoice = (languageChoice + 1) % CFG_LANG_COUNT;
+										break;
+										case 3:
+										ocarinaChoice = (ocarinaChoice + 1) % 2;
+										break;
+									case 4:
+										iosChoice = (iosChoice + 1) % 3;
+										break;
+									case 5:
+										parentalcontrolChoice = (parentalcontrolChoice + 1) % 5;
+										break;
+										case 6:
+											 fix002 = (fix002+1) % 3;
+											 break;
+										case 7:
+											 countrystrings = (countrystrings+1) % 2;
+											 break;
+										case 8:
+											 alternatedol = (alternatedol+1) % 3;
+											 break;
+										case 9:
+											 if(alternatedol == 2) {
+												 char filename[10];
+												 snprintf(filename,sizeof(filename),"%c%c%c%c%c%c",header->id[0], header->id[1], header->id[2],
+																								 header->id[3],header->id[4], header->id[5]);
+												int dolchoice =0;
+													//check to see if we already know the offset of the correct dol
+												 int autodol = autoSelectDol(filename);
+
+												 //if we do know that offset ask if they want to use it
+												 if (autodol>0){
+													dolchoice = WindowPrompt(0,tr("Do you want to use the alt dol that is known to be correct?"),tr("Yes"),tr("Pick from a list"));
+														if (dolchoice==1)
+														{
+															alternatedoloffset = autodol;
+															snprintf(alternatedname, sizeof(alternatedname), "%s <%i>",  tr("AUTO"),autodol);
+														}
+														else {//they want to search for the correct dol themselves
+													  int res = DiscBrowse(header);
+													  if((res >= 0)&&(res !=696969))//if res==6969696 they pressed the back button
+															alternatedoloffset = res;
+														}
+													}
+													else {
+													int res = DiscBrowse(header);
+													  if((res >= 0)&&(res !=696969))
+															alternatedoloffset = res;
+															char tmp[170];
+															snprintf(tmp,sizeof(tmp),tr("It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team. %s - %i") ,filename,alternatedoloffset);
+															WindowPrompt(0,tmp,tr("Ok"));
+													}
+
+
+
+											 }
+											 break;
+										case 10:
+											 reloadblock = (reloadblock+1) % 2;
+											 break;
+
+                           }
+									
+								if(saveBtn.GetState() == STATE_CLICKED)
+								{
+												
+									if(isInserted(bootDevice)) {
+										if (CFG_save_game_opt(header->id))
+												{
+													// if language has changed, reload titles
+													int opt_langnew = 0;
+													game_cfg = CFG_get_game_opt(header->id);
+													if (game_cfg) opt_langnew = game_cfg->language;
+													if (Settings.titlesOverride==1 && opt_lang != opt_langnew)
+															OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, true, false); // open file, reload titles, do not keep in memory
+														// titles are refreshed in menu.cpp as soon as this function returns
+											WindowPrompt(tr("Successfully Saved"), 0, tr("OK"));
+												}
+												else
+													{
+											WindowPrompt(tr("Save Failed"), 0, tr("OK"));
+													}
+											 } else {
+												 WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
+										 }
+
+									saveBtn.ResetState();
+									optionBrowser2.SetFocus(1);
+								}
+								}
+                    
+                    optionBrowser2.SetEffect(EFFECT_FADE, -20);
+                    while(optionBrowser2.GetEffect() > 0) usleep(50);
+                    MainButton1.ResetState();
+                    break;
+						  w.Remove(&saveBtn);
+						}
+
+                if(MainButton2.GetState() == STATE_CLICKED) {
+                    	char ID[7];
+							snprintf (ID,sizeof(ID),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
+							CheatMenu(ID);
+                    MainButton2.ResetState();
+                    break;
+                }
+
+                if(MainButton3.GetState() == STATE_CLICKED) {
+                    MainButton1.SetEffect(EFFECT_FADE, -20);
+                    MainButton2.SetEffect(EFFECT_FADE, -20);
+                    MainButton3.SetEffect(EFFECT_FADE, -20);
+                    MainButton4.SetEffect(EFFECT_FADE, -20);
+                    while(MainButton3.GetEffect() > 0) usleep(50);
+                    HaltGui();
+                    w.Remove(&MainButton1);
+                    w.Remove(&MainButton2);
+                    w.Remove(&MainButton3);
+                    w.Remove(&MainButton4);
+                    //titleTxt.SetText(tr("Parental Control"));
+                    exit = false;
+						  
+				for(int i = 0; i <= MAXOPTIONS-1; i++) options2.SetName(i, NULL);
+                    			options2.SetName(0,"%s", tr("Uninstall Game"));
+									options2.SetName(1,"%s", tr("Reset Playcounter"));
+									options2.SetName(2,"%s", tr("Delete Boxart"));
+									options2.SetName(3,"%s", tr("Delete Discart"));
+									options2.SetName(4,"%s", tr("Delete CheatTxt"));
+                    for(int i = 0; i <= MAXOPTIONS-1; i++) options2.SetValue(i, NULL);
+                    w.Append(&optionBrowser2);
+                    optionBrowser2.SetClickable(true);
+                    ResumeGui();
+
+                    VIDEO_WaitVSync ();
+                    optionBrowser2.SetEffect(EFFECT_FADE, 20);
+			        while(optionBrowser2.GetEffect() > 0) usleep(50);
+
+                    while(!exit)
+                    {
+                        VIDEO_WaitVSync ();
+
+                        if(backBtn.GetState() == STATE_CLICKED)
+                        {
+                            backBtn.ResetState();
+                            exit = true;
+                            break;
+                        }
+
+                        if(shutdown == 1)
+                            Sys_Shutdown();
+                        else if(reset == 1)
+                            Sys_Reboot();
+
+                        else if(homo.GetState() == STATE_CLICKED)
+                        {
+                            cfg_save_global();
+                            optionBrowser2.SetState(STATE_DISABLED);
+                            s32 thetimeofbg = bgMusic->GetPlayTime();
+                            bgMusic->Stop();
+                            choice = WindowExitPrompt(tr("Exit USB Loader GX?"),0, tr("Back to Loader"),tr("Wii Menu"),tr("Back"),0);
+                            if(!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path))
+                            {
+                                bgMusic->Play();
+                            } else {
+                                bgMusic->PlayOggFile(Settings.ogg_path);
+                            }
+                            bgMusic->SetPlayTime(thetimeofbg);
+                            SetVolumeOgg(255*(Settings.volume/100.0));
+                            if(choice == 3) {
+                                Sys_LoadMenu(); // Back to System Menu
+                            } else if (choice == 2) {
+                                Sys_BackToLoader();
+                            } else {
+                                homo.ResetState();
+                            }
+                            optionBrowser2.SetState(STATE_DEFAULT);
+                        }
+
+                        ret = optionBrowser2.GetClickedOption();
+
+                        int choice1;
+								char tmp[200];
+								switch (ret)
+								{
+									case 0:
+										choice1 = WindowPrompt(tr("Do you really want to delete:"),gameName,tr("Yes"),tr("Cancel"));
+										if (choice1 == 1)
+										{
+										CFG_forget_game_opt(header->id);
+										CFG_forget_game_num(header->id);
+										ret = WBFS_RemoveGame(header->id);
+										if (ret < 0)
+										{
+											WindowPrompt(
+											tr("Can't delete:"),
+											gameName,
+											tr("OK"));
+										}
+										else {
+											WindowPrompt(tr("Successfully deleted:"),gameName,tr("OK"));
+											retVal = 1;
+										}
+										}
+										else if (choice1 == 0)
+										{
+											optionBrowser2.SetFocus(1);
+										}
+										break;
+									case 1:
+										int result;
+										result = WindowPrompt(tr("Are you sure?"),0,tr("Yes"),tr("Cancel"));
+										if(result == 1) {
+											if(isInserted(bootDevice)) {
+											struct Game_NUM* game_num = CFG_get_game_num(header->id);
+											if (game_num) {
+												favoritevar = game_num->favorite;
+												playcount = game_num->count;
+											} else {
+												favoritevar = 0;
+												playcount = 0;
+											}
+											playcount = 0;
+											CFG_save_game_num(header->id);
+											 }
+										}
+										break;
+									case 2:
+
+										snprintf(tmp,sizeof(tmp),"%s%c%c%c%c%c%c.png", Settings.covers_path, header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
+
+										choice1 = WindowPrompt(tr("Delete"),tmp,tr("Yes"),tr("No"));
+										if(choice1==1)
+											{
+												if(checkfile(tmp))
+												remove(tmp);
+											}
+										break;
+									case 3:
+
+										snprintf(tmp,sizeof(tmp),"%s%c%c%c%c%c%c.png", Settings.disc_path, header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
+
+										choice1 = WindowPrompt(tr("Delete"),tmp,tr("Yes"),tr("No"));
+										if(choice1==1)
+											{
+												if(checkfile(tmp))
+												remove(tmp);
+											}
+										break;
+									case 4:
+
+										snprintf(tmp,sizeof(tmp),"%s%c%c%c%c%c%c.txt", Settings.TxtCheatcodespath, header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
+
+										choice1 = WindowPrompt(tr("Delete"),tmp,tr("Yes"),tr("No"));
+										if(choice1==1)
+											{
+												if(checkfile(tmp))
+												remove(tmp);
+											}
+										break;
+
+								}
                     }
-                    parentalcontrolChoice = 0;
-                    sprintf(alternatedname, " ");
-                    CFG_forget_game_opt(header->id);
-					// if default language is different than language from main settings, reload titles
-					int opt_langnew = 0;
-					opt_langnew = Settings.language;
-					if (Settings.titlesOverride==1 && opt_lang != opt_langnew)
-						OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, true, false); // open file, reload titles, do not keep in memory
-						// titles are refreshed in menu.cpp as soon as this function returns
+                    optionBrowser2.SetEffect(EFFECT_FADE, -20);
+                    while(optionBrowser2.GetEffect() > 0) usleep(50);
+                    pageToDisplay = 1;
+                    MainButton3.ResetState();
+                    break;
                 }
-				break;
-            case 2:
-				int result;
-				result = WindowPrompt(tr("Are you sure?"),0,tr("Yes"),tr("Cancel"));
-				if(result == 1) {
-					if(isInserted(bootDevice)) {
-					struct Game_NUM* game_num = CFG_get_game_num(header->id);
-					if (game_num) {
-						favoritevar = game_num->favorite;
-						playcount = game_num->count;
-					} else {
-						favoritevar = 0;
-						playcount = 0;
-					}
-					playcount = 0;
-					CFG_save_game_num(header->id);
+
+                if(MainButton4.GetState() == STATE_CLICKED) {
+
+									int choice1 = WindowPrompt(tr("Are you sure?"),0,tr("Yes"),tr("Cancel"));
+											 if(choice1 == 1) {
+												  videoChoice = Settings.video;
+												  viChoice = Settings.vpatch;
+												  languageChoice = Settings.language;
+												  ocarinaChoice = Settings.ocarina;
+												  fix002 = Settings.error002;
+												  countrystrings = Settings.patchcountrystrings;
+												  alternatedol = off;
+												  alternatedoloffset = 0;
+												  reloadblock = off;
+												  if(Settings.cios == ios222) {
+														iosChoice = i222;
+												  } else {
+														iosChoice = i249;
+												  }
+												  parentalcontrolChoice = 0;
+												  sprintf(alternatedname, " ");
+												  CFG_forget_game_opt(header->id);
+											// if default language is different than language from main settings, reload titles
+											int opt_langnew = 0;
+											opt_langnew = Settings.language;
+											if (Settings.titlesOverride==1 && opt_lang != opt_langnew)
+												OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, true, false); // open file, reload titles, do not keep in memory
+												// titles are refreshed in menu.cpp as soon as this function returns
+											 }
+										
+                    pageToDisplay = 1;
+                    MainButton4.ResetState();
+                    break;
                 }
-				}
+			
+
+			if(shutdown == 1)
+				Sys_Shutdown();
+			if(reset == 1)
+				Sys_Reboot();
+
+			if(backBtn.GetState() == STATE_CLICKED)
+			{
+				menu = MENU_DISCLIST;
+				pageToDisplay = 0;
 				break;
-            case 3:
+			}
 
-				snprintf(tmp,sizeof(tmp),"%s%c%c%c%c%c%c.png", Settings.covers_path, header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
-
-				choice1 = WindowPrompt(tr("Delete"),tmp,tr("Yes"),tr("No"));
-				if(choice1==1)
-					{
-						if(checkfile(tmp))
-						remove(tmp);
-					}
-				break;
-			case 4:
-
-				snprintf(tmp,sizeof(tmp),"%s%c%c%c%c%c%c.png", Settings.disc_path, header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
-
-				choice1 = WindowPrompt(tr("Delete"),tmp,tr("Yes"),tr("No"));
-				if(choice1==1)
-					{
-						if(checkfile(tmp))
-						remove(tmp);
-					}
-				break;
-			case 5:
-
-				snprintf(tmp,sizeof(tmp),"%s%c%c%c%c%c%c.txt", Settings.TxtCheatcodespath, header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
-
-				choice1 = WindowPrompt(tr("Delete"),tmp,tr("Yes"),tr("No"));
-				if(choice1==1)
-					{
-						if(checkfile(tmp))
-						remove(tmp);
-					}
-				break;
-
-		}
-	}
-
-
-		if(saveBtn.GetState() == STATE_CLICKED)
-		{
-//			if(isSdInserted()) {
-			if(isInserted(bootDevice)) {
-                if (CFG_save_game_opt(header->id))
+			if(homo.GetState() == STATE_CLICKED)
+			{
+			    cfg_save_global();
+				optionBrowser2.SetState(STATE_DISABLED);
+				s32 thetimeofbg = bgMusic->GetPlayTime();
+				bgMusic->Stop();
+				choice = WindowExitPrompt(tr("Exit USB Loader GX?"),0, tr("Back to Loader"),tr("Wii Menu"),tr("Back"),0);
+				if(!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path))
 				{
-					// if language has changed, reload titles
-					int opt_langnew = 0;
-					game_cfg = CFG_get_game_opt(header->id);
-					if (game_cfg) opt_langnew = game_cfg->language;
-					if (Settings.titlesOverride==1 && opt_lang != opt_langnew)
-						OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, true, false); // open file, reload titles, do not keep in memory
-						// titles are refreshed in menu.cpp as soon as this function returns
-					WindowPrompt(tr("Successfully Saved"), 0, tr("OK"));
+					bgMusic->Play();
+				} else {
+					bgMusic->PlayOggFile(Settings.ogg_path);
 				}
-				else
+				bgMusic->SetPlayTime(thetimeofbg);
+				SetVolumeOgg(255*(Settings.volume/100.0));
+
+				if(choice == 3)
 				{
-					WindowPrompt(tr("Save Failed"), 0, tr("OK"));
+					Sys_LoadMenu(); // Back to System Menu
+				} else if (choice == 2) {
+					Sys_BackToLoader();
+				} else {
+					homo.ResetState();
 				}
-		    } else {
-                WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
-		    }
-
-			saveBtn.ResetState();
-			optionBrowser3.SetFocus(1);
-		}
-
-		if (cancelBtn.GetState() == STATE_CLICKED)
-		{
-			exit = true;
-			break;
-		}
-
-		if (deleteBtn.GetState() == STATE_CLICKED)
-		{
-
-				pagetodisplay++;
-				deleteBtnTxt.SetText(tr("Settings"));
-				optionBrowser3.SetScrollbar(0);
-				optionBrowser3.SetOffset(0);
-				if (pagetodisplay>2)
-					{
-					pagetodisplay=1;
-					deleteBtnTxt.SetText(tr("Uninstall Menu"));
-					optionBrowser3.SetScrollbar(1);
-					}
-
-				deleteBtn.ResetState();
-
-		}
-
-		if (GCTBtn.GetState() == STATE_CLICKED) {
-			char ID[7];
-			snprintf (ID,sizeof(ID),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
-			CheatMenu(ID);
-		}
+                optionBrowser2.SetState(STATE_DEFAULT);
+			}
+		}		
 	}
+	w.SetEffect(EFFECT_FADE, -20);
+	while(w.GetEffect()>0) usleep(50);
+
+
 
 	HaltGui();
-	mainWindow->Remove(&w);
-	ResumeGui();
 
+	mainWindow->RemoveAll();
+	mainWindow->Append(bgImg);
+
+	ResumeGui();
 	return retVal;
 }

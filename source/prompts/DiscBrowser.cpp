@@ -241,6 +241,7 @@ int autoSelectDol(const char *id)
 	if (strcmp(id,"RF8X69") == 0) return 464;//from isostar
 	
 	if (strcmp(id,"RZTP01") == 0) return 952;//from isostar
+	if (strcmp(id,"RZTE01") == 0) return 674;//from starstremr
 	
 	if (strcmp(id,"RMZX69") == 0) return 492;//from isostar
 	if (strcmp(id,"RMZP69") == 0) return 492;//from isostar
@@ -301,6 +302,8 @@ Grand Slam R5TP69 1493
  Madden NFL08 RNFP69 1079
 
  rboe69 = boogie ntsc = (675)
+ 
+  RZTE01 = WSR = 674
 
  Fifa08 RF8P69 463
  Fifa08 RF8X69 464

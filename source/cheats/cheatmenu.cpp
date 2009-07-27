@@ -47,14 +47,14 @@ int CheatMenu(const char * gameID)
 	GuiText backBtnTxt(tr("Back") , 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	backBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
 	GuiImage backBtnImg(&btnOutline);
-	GuiButton backBtn(&backBtnImg,&backBtnImg, 2, 3, 160, 400, &trigA, &btnSoundOver, &btnClick,1);
+	GuiButton backBtn(&backBtnImg,&backBtnImg, 2, 3, -140, 400, &trigA, &btnSoundOver, &btnClick,1);
 	backBtn.SetLabel(&backBtnTxt);
 	backBtn.SetTrigger(&trigB);
 
 	GuiText createBtnTxt(tr("Create") , 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	createBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
 	GuiImage createBtnImg(&btnOutline);
-	GuiButton createBtn(&createBtnImg,&createBtnImg, 2, 3, -140, 400, &trigA, &btnSoundOver, &btnClick,1);
+	GuiButton createBtn(&createBtnImg,&createBtnImg, 2, 3, 160, 400, &trigA, &btnSoundOver, &btnClick,1);
 	createBtn.SetLabel(&createBtnTxt);
 
 	char txtfilename[55];
