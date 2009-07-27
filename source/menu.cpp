@@ -1219,49 +1219,49 @@ int MenuDiscList()
 
                                 if(choice == 1)
                                 {
-								if (alternatedol == on){
-								/* Open dol File and check exist */
-								sprintf(nipple, "%s%s.dol",Settings.dolpath,IDfull);
-								exeFile = fopen (nipple ,"rb");
-								if (exeFile==NULL)
-								{
-									sprintf(nipple, "%s %s",nipple,tr("does not exist!  You Messed something up, Idiot."));
-									WindowPrompt(tr("Error"),nipple,tr("OK"));
+												if (alternatedol == on){
+												/* Open dol File and check exist */
+												sprintf(nipple, "%s%s.dol",Settings.dolpath,IDfull);
+												exeFile = fopen (nipple ,"rb");
+												if (exeFile==NULL)
+												{
+													sprintf(nipple, "%s %s",nipple,tr("does not exist!  You Messed something up, Idiot."));
+													WindowPrompt(tr("Error"),nipple,tr("OK"));
 
-									menu = MENU_CHECK;
-									wiilight(0);
-									break;
-								}
-								}
-								if (ocarinaChoice != off){
-								/* Open gct File and check exist */
-								sprintf(nipple, "%s%s.gct",Settings.Cheatcodespath,IDfull);
-								exeFile = fopen (nipple ,"rb");
-								if (exeFile==NULL)
-								{
-									sprintf(nipple, "%s %s",nipple,tr("does not exist!  Loading game without cheats."));
-									WindowPrompt(tr("Error"),nipple,NULL,NULL,NULL,NULL,170);
-								}
-								else
-								{
-								fseek (exeFile, 0, SEEK_END);
-								long size=ftell (exeFile);
-								rewind (exeFile);
-								fclose(exeFile);
-								if (size>2056){
-									sprintf(nipple, "%s %s",nipple,tr("contains over 255 lines of code.  It will produce unexpected results."));
-									WindowPrompt(tr("Error"),nipple,NULL,NULL,NULL,NULL,170);
-									}
-								}
+													menu = MENU_CHECK;
+													wiilight(0);
+													break;
+												}
+												}
+												if (ocarinaChoice != off){
+												/* Open gct File and check exist */
+												sprintf(nipple, "%s%s.gct",Settings.Cheatcodespath,IDfull);
+												exeFile = fopen (nipple ,"rb");
+												if (exeFile==NULL)
+												{
+													sprintf(nipple, "%s %s",nipple,tr("does not exist!  Loading game without cheats."));
+													WindowPrompt(tr("Error"),nipple,NULL,NULL,NULL,NULL,170);
+												}
+												else
+												{
+												fseek (exeFile, 0, SEEK_END);
+												long size=ftell (exeFile);
+												rewind (exeFile);
+												fclose(exeFile);
+												if (size>2056){
+													sprintf(nipple, "%s %s",nipple,tr("contains over 255 lines of code.  It will produce unexpected results."));
+													WindowPrompt(tr("Error"),nipple,NULL,NULL,NULL,NULL,170);
+													}
+												}
 
-								}
-								SDCard_deInit();
-								wiilight(0);
-                                returnHere = false;
-                                menu = MENU_EXIT;
+												}
+												SDCard_deInit();
+												wiilight(0);
+														  returnHere = false;
+														  menu = MENU_EXIT;
 
 
-								}
+												}
                                 else if (choice == 2)
                                 {
                                         wiilight(0);
@@ -1271,6 +1271,9 @@ int MenuDiscList()
                                         else if (Settings.gameDisplay==carousel) mainWindow->Remove(gameCarousel);
                                         mainWindow->Remove(&w);
                                         ResumeGui();
+													 
+													 //re-evaluate header now in case they changed games while on the game prompt
+													 header = &gameList[gameSelected];
                                         int settret = GameSettings(header);
 										menu = MENU_DISCLIST; // refresh titles (needed if the language setting has changed)
                                         HaltGui();
