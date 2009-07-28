@@ -108,11 +108,11 @@ int MenuHomebrewBrowse()
 	snprintf(imgPath, sizeof(imgPath), "%sstartgame_arrow_right.png", CFG.theme_path);
 	GuiImageData arrow_right(imgPath, startgame_arrow_right_png);
 
-	snprintf(imgPath, sizeof(imgPath), "%swifi1.png", CFG.theme_path);
-	GuiImageData wifiImgData(imgPath, wifi1_png);
+	snprintf(imgPath, sizeof(imgPath), "%sWifi_btn.png", CFG.theme_path);
+	GuiImageData wifiImgData(imgPath, Wifi_btn_png);
 	
-	snprintf(imgPath, sizeof(imgPath), "%sbrowser.png", CFG.theme_path);
-   GuiImageData channelImgData(imgPath, browser_png);
+	snprintf(imgPath, sizeof(imgPath), "%sChannel_btn.png", CFG.theme_path);
+   GuiImageData channelImgData(imgPath, Channel_btn_png);
 
 
     GuiImage background(&bgData);
@@ -296,6 +296,9 @@ int MenuHomebrewBrowse()
 	MainButton4.SetTrigger(&trigA);
 
 	GuiImage wifiImg(&wifiImgData);
+	if (Settings.wsprompt == yes){
+        wifiImg.SetWidescreen(CFG.widescreen);
+	}
 	GuiButton wifiBtn(wifiImg.GetWidth(), wifiImg.GetHeight());
 	wifiBtn.SetImage(&wifiImg);
 	wifiBtn.SetPosition(500, 400);
@@ -309,12 +312,14 @@ int MenuHomebrewBrowse()
    channelBtnImg.SetWidescreen(CFG.widescreen);
    GuiButton channelBtn(channelBtnImg.GetWidth(), channelBtnImg.GetHeight());
    channelBtn.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-   channelBtn.SetPosition(425, 400);
+   channelBtn.SetPosition(440, 400);
    channelBtn.SetImage(&channelBtnImg);
    channelBtn.SetSoundOver(&btnSoundOver);
    channelBtn.SetSoundClick(&btnClick);
    channelBtn.SetEffectGrow();
    channelBtn.SetTrigger(&trigA);
+	
+	GuiTooltip * titleTT = NULL;
 
 
 	GuiWindow w(screenwidth, screenheight);
@@ -325,6 +330,7 @@ int MenuHomebrewBrowse()
 
 	int pageToDisplay = 1;
 	const int pages = roundup(filecount/4.0f);
+	bool wifi_btn_loaded=false;
 
 	while (menu == MENU_NONE) //set pageToDisplay to 0 to quit
 	{
@@ -920,7 +926,15 @@ int MenuHomebrewBrowse()
 					}
 					
             if(IsNetworkInit()) {
-                wifiBtn.SetAlpha(255);
+					if(!wifi_btn_loaded)
+						{
+						 wifiBtn.SetAlpha(255);
+						
+						titleTT = new GuiTooltip(GetNetworkIP());
+						titleTT->SetAlpha(THEME.tooltipAlpha);
+						wifiBtn.SetToolTip(titleTT,0,-50,0,5);
+						wifi_btn_loaded=true;
+						}
             }
         }
 	}
@@ -940,6 +954,9 @@ int MenuHomebrewBrowse()
             IconImg[i] = NULL;
         }
     }
+	 
+	 delete titleTT;
+	 titleTT = NULL;
 
     if(IsNetworkInit())
         HaltNetworkThread();

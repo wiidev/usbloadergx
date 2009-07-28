@@ -26,6 +26,12 @@ extern const u32	gxlogo_png_size;
 extern const u8		sdcard_png[];
 extern const u32	sdcard_png_size;
 
+extern const u8     Wifi_btn_png[];
+extern const u32    Wifi_btn_png_size;
+
+extern const u8     Channel_btn_png[];
+extern const u32    Channel_btn_png_size;
+
 extern const u8     sdcard_over_png[];
 extern const u32    sdcard_over_png_size;
 
@@ -235,6 +241,18 @@ extern const u32	player3_point_png_size;
 
 extern const u8		player4_point_png[];
 extern const u32	player4_point_png_size;
+
+extern const u8		rplayer1_point_png[];
+extern const u32	rplayer1_point_png_size;
+
+extern const u8		rplayer2_point_png[];
+extern const u32	rplayer2_point_png_size;
+
+extern const u8		rplayer3_point_png[];
+extern const u32	rplayer3_point_png_size;
+
+extern const u8		rplayer4_point_png[];
+extern const u32	rplayer4_point_png_size;
 
 extern const u8		battery_png[];
 extern const u32	battery_png_size;

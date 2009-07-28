@@ -217,7 +217,40 @@ void ExitGUIThreads()
 	LWP_JoinThread(guithread, NULL);
 	guithread = LWP_THREAD_NULL;
 }
+void rockout(int f = 0)
+{
+	char imgPath[100];
+	#ifdef HW_RVL
+	if(!(strcasestr(get_title(&gameList[gameSelected]),"guitar")||
+		strcasestr(get_title(&gameList[gameSelected]),"band")||
+		strcasestr(get_title(&gameList[gameSelected]),"rock"))){
+		for(int i = 0; i < 4; i++)
+			delete pointer[i];
+		snprintf(imgPath, sizeof(imgPath), "%splayer1_point.png", CFG.theme_path);
+		pointer[0] = new GuiImageData(imgPath, player1_point_png);
+		snprintf(imgPath, sizeof(imgPath), "%splayer2_point.png", CFG.theme_path);
+		pointer[1] = new GuiImageData(imgPath, player2_point_png);
+		snprintf(imgPath, sizeof(imgPath), "%splayer3_point.png", CFG.theme_path);
+		pointer[2] = new GuiImageData(imgPath, player3_point_png);
+		snprintf(imgPath, sizeof(imgPath), "%splayer4_point.png", CFG.theme_path);
+		pointer[3] = new GuiImageData(imgPath, player4_point_png);
+	}
+	else{
+		
+		for(int i = 0; i < 4; i++)
+			delete pointer[i];
+		snprintf(imgPath, sizeof(imgPath), "%srplayer1_point.png", CFG.theme_path);
+		pointer[0] = new GuiImageData(imgPath, rplayer1_point_png);
+		snprintf(imgPath, sizeof(imgPath), "%srplayer2_point.png", CFG.theme_path);
+		pointer[1] = new GuiImageData(imgPath, rplayer2_point_png);
+		snprintf(imgPath, sizeof(imgPath), "%srplayer3_point.png", CFG.theme_path);
+		pointer[2] = new GuiImageData(imgPath, rplayer3_point_png);
+		snprintf(imgPath, sizeof(imgPath), "%srplayer4_point.png", CFG.theme_path);
+		pointer[3] = new GuiImageData(imgPath, rplayer4_point_png);
+	}
+	#endif
 
+}
 
 /****************************************************************************
  * MenuDiscList
@@ -656,13 +689,6 @@ int MenuDiscList()
 
 		while(menu == MENU_NONE)
         {
-		  //this may not be needed.  just messing around with the GHWT controller
-			u32 expType = 0; // Stores only the controller/expansion type.
-			u32 buttonsDown = WPAD_ButtonsDown(0);
-
-			// Use WPAD_Probe to get the expansion type.
-			WPAD_Probe( WPAD_CHAN_0, &expType );
-								 VIDEO_WaitVSync ();
 
 				if (idiotFlag==1){
 				char idiotBuffer[200];
@@ -731,8 +757,16 @@ int MenuDiscList()
                         Sys_Reboot();
 
                 if(updateavailable == true) {
+					 HaltGui();
+						GuiWindow ww(640,480);
+						w.SetState(STATE_DISABLED);
+						mainWindow->Append(&ww);
+						ResumeGui();
                     ProgressUpdateWindow();
                     updateavailable = false;
+						  mainWindow->Remove(&ww);
+						  w.SetState(STATE_DEFAULT);
+						  menu = MENU_DISCLIST;
                 }
 
                 if(poweroffBtn.GetState() == STATE_CLICKED)
@@ -807,9 +841,7 @@ int MenuDiscList()
 
 
 
-                else if((sdcardBtn.GetState() == STATE_CLICKED)||
-					 ( ( buttonsDown & GUITAR_HERO_3_BUTTON_ORANGE ) && ( expType == WPAD_EXP_GUITARHERO3 ) ))
-                {
+                else if(sdcardBtn.GetState() == STATE_CLICKED){
 								SDCard_deInit();
                         SDCard_Init();
                         if (Settings.gameDisplay==list){
@@ -875,8 +907,8 @@ int MenuDiscList()
                                 }
                     } else {
                         WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to download images."), tr("OK"));
-                    }
-                    DownloadBtn.ResetState();
+                    }menu = MENU_DISCLIST;
+						  DownloadBtn.ResetState();
                         if (Settings.gameDisplay==list){gameBrowser->SetFocus(1);}
                         else if (Settings.gameDisplay==grid){gameGrid->SetFocus(1);}
                         else if (Settings.gameDisplay==carousel){gameCarousel->SetFocus(1);}
@@ -991,17 +1023,20 @@ int MenuDiscList()
                     break;
                 }
 				else if (gameInfo.GetState() == STATE_CLICKED) {
+				gameSelected = selectImg1;
+				rockout();
 					struct discHdr *header = &gameList[selectImg1];
                     snprintf (IDfull,sizeof(IDfull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
 					choice = showGameInfo(IDfull);
                     gameInfo.ResetState();
+						  rockout(0);
 						  if (choice==2)
 							homeBtn.SetState(STATE_CLICKED);
                 }
 
                 if (Settings.gameDisplay==grid){
                         int selectimg;
-						DownloadBtn.SetSize(0,0);
+								DownloadBtn.SetSize(0,0);
                         selectimg = gameGrid->GetSelectedOption();
                         gameSelected = gameGrid->GetClickedOption();
 						selectImg1=selectimg;
@@ -1009,7 +1044,7 @@ int MenuDiscList()
 
                 if (Settings.gameDisplay==carousel){
                         int selectimg;
-						DownloadBtn.SetSize(0,0);
+								DownloadBtn.SetSize(0,0);
                         selectimg = gameCarousel->GetSelectedOption();
                         gameSelected = gameCarousel->GetClickedOption();
                 		selectImg1=selectimg;
@@ -1025,7 +1060,7 @@ int MenuDiscList()
 
                         if (gameSelected > 0) //if click occured
                                 selectimg = gameSelected;
-
+											
                         if ((selectimg >= 0) && (selectimg < (s32) gameCnt))
                         {
                                 if (selectimg != selectedold)
@@ -1127,7 +1162,8 @@ int MenuDiscList()
                 }
 
 				if ((gameSelected >= 0) && (gameSelected < (s32)gameCnt))
-                {
+                {			
+								rockout();
                         struct discHdr *header = &gameList[gameSelected];
                         WBFS_GameSize(header->id, &size);
                         if (strlen(get_title(header)) < (MAX_CHARACTERS + 3)) {
@@ -1313,6 +1349,8 @@ int MenuDiscList()
                                         else if (Settings.gameDisplay==grid){gameGrid->SetFocus(1);}
                                         else if (Settings.gameDisplay==carousel){gameCarousel->SetFocus(1);}
                                 }
+										  //reset cursor
+										  rockout(0);
                         }
                 }
 			// to skip the first call of windowScreensaver at startup when wiimote is not connected
