@@ -1280,9 +1280,11 @@ int MenuSettings()
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
                                     strncpy(entered, Settings.covers_path, sizeof(entered));
-                                    int result = BrowseDevice(entered);
+                                    titleTxt.SetText(tr("Cover Path"));
+												int result = BrowseDevice(entered);
                                     //int result = OnScreenKeyboard(entered,43,0);
-                                    w.Append(&optionBrowser2);
+                                    titleTxt.SetText(tr("Custom Paths"));
+												w.Append(&optionBrowser2);
                                     w.Append(&backBtn);
                                     if ( result == 1 )
                                     {
@@ -1307,9 +1309,11 @@ int MenuSettings()
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
                                     strncpy(entered, Settings.disc_path, sizeof(entered));
-                                    int result = BrowseDevice(entered);
+                                    titleTxt.SetText(tr("Disc Path"));
+												int result = BrowseDevice(entered);
                                     //int result = OnScreenKeyboard(entered, 43,0);
-                                    w.Append(&optionBrowser2);
+                                    titleTxt.SetText(tr("Custom Paths"));
+												w.Append(&optionBrowser2);
                                     w.Append(&backBtn);
                                     if ( result == 1 )
                                     {
@@ -1333,7 +1337,8 @@ int MenuSettings()
                                     w.Remove(&optionBrowser2);
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
-                                    strncpy(entered, CFG.theme_path, sizeof(entered));
+                                    titleTxt.SetText(tr("Theme Path"));
+												strncpy(entered, CFG.theme_path, sizeof(entered));
                                     int result = BrowseDevice(entered);
                                     //int result = OnScreenKeyboard(entered, 43,0);
                                     HaltGui();
@@ -1378,7 +1383,8 @@ int MenuSettings()
                                     }
                                     w.Append(&settingsbackground);
                                     w.Append(&titleTxt);
-                                    w.Append(&backBtn);
+                                    titleTxt.SetText(tr("Custom Paths"));
+												w.Append(&backBtn);
                                     w.Append(&optionBrowser2);
                                     ResumeGui();
                                 } else {
@@ -1391,11 +1397,13 @@ int MenuSettings()
                                     w.Remove(&optionBrowser2);
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
-                                    strncpy(entered, Settings.titlestxt_path, sizeof(entered));
+                                    titleTxt.SetText(tr("XML Path"));
+												strncpy(entered, Settings.titlestxt_path, sizeof(entered));
                                     int result = BrowseDevice(entered);
                                     //int result = OnScreenKeyboard(entered,43,0);
                                     w.Append(&optionBrowser2);
-                                    w.Append(&backBtn);
+                                    titleTxt.SetText(tr("Custom Paths"));
+												w.Append(&backBtn);
                                     if ( result == 1 )
                                     {
                                         int len = (strlen(entered)-1);
@@ -1424,9 +1432,11 @@ int MenuSettings()
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
                                     strncpy(entered, Settings.update_path, sizeof(entered));
-                                    int result = BrowseDevice(entered);
+                                    titleTxt.SetText(tr("Update Path"));
+												int result = BrowseDevice(entered);
                                     //int result = OnScreenKeyboard(entered,43,0);
-                                    w.Append(&optionBrowser2);
+                                    titleTxt.SetText(tr("Custom Paths"));
+												w.Append(&optionBrowser2);
                                     w.Append(&backBtn);
                                     if ( result == 1 )
                                     {
@@ -1447,9 +1457,11 @@ int MenuSettings()
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
                                     strncpy(entered, Settings.Cheatcodespath, sizeof(entered));
-                                    int result = BrowseDevice(entered);
+                                    titleTxt.SetText(tr("GCT Cheat Path"));
+												int result = BrowseDevice(entered);
                                     //int result = OnScreenKeyboard(entered,43,0);
-                                    w.Append(&optionBrowser2);
+                                    titleTxt.SetText(tr("Custom Paths"));
+												w.Append(&optionBrowser2);
                                     w.Append(&backBtn);
                                     if ( result == 1 )
                                     {
@@ -1470,9 +1482,11 @@ int MenuSettings()
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
                                     strncpy(entered, Settings.TxtCheatcodespath, sizeof(entered));
-                                    int result = BrowseDevice(entered);
+                                    titleTxt.SetText(tr("TXT Cheat Path"));
+												int result = BrowseDevice(entered);
                                     //int result = OnScreenKeyboard(entered,43,0);
-                                    w.Append(&optionBrowser2);
+                                    titleTxt.SetText(tr("Custom Paths"));
+												w.Append(&optionBrowser2);
                                     w.Append(&backBtn);
                                     if ( result == 1 )
                                     {
@@ -1493,9 +1507,11 @@ int MenuSettings()
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
                                     strncpy(entered, Settings.dolpath, sizeof(entered));
-                                    int result = BrowseDevice(entered);
+                                    titleTxt.SetText(tr("Alt Dol Path"));
+												int result = BrowseDevice(entered);
                                     //int result = OnScreenKeyboard(entered,43,0);
-                                    w.Append(&optionBrowser2);
+                                    titleTxt.SetText(tr("Custom Paths"));
+												w.Append(&optionBrowser2);
                                     w.Append(&backBtn);
                                     if ( result == 1 )
                                     {
@@ -1520,9 +1536,11 @@ int MenuSettings()
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
                                     strncpy(entered, Settings.homebrewapps_path, sizeof(entered));
-                                    int result = BrowseDevice(entered);
+                                    titleTxt.SetText(tr("Homebrew Path"));
+												int result = BrowseDevice(entered);
                                     //int result = OnScreenKeyboard(entered,43,0);
-                                    w.Append(&optionBrowser2);
+                                    titleTxt.SetText(tr("Custom Paths"));
+												w.Append(&optionBrowser2);
                                     w.Append(&backBtn);
                                     if ( result == 1 )
                                     {

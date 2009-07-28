@@ -58,6 +58,7 @@ main(int argc, char *argv[])
 		else if(!strncasecmp(argv[0], "sd:/", 4))
 			bootDevice_found = true;
 	}
+	
 	if(!bootDevice_found)
 	{
 		//try USB
@@ -71,9 +72,11 @@ main(int argc, char *argv[])
 		ret2 = IOS_ReloadIOS(222);
 		load_ehc_module();
 	}
-
+	
 	SDCard_Init(); // mount SD for loading cfg's
 	USBDevice_Init(); // and mount USB:/
+
+
 
 	gettextCleanUp();
 	CFG_Load();

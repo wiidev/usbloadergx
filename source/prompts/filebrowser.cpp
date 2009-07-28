@@ -20,6 +20,7 @@
 #include "filebrowser.h"
 #include "menu.h"
 
+#include "listfiles.h"
 #include "language/gettext.h"
 #include "PromptWindows.h"
 #include "libwiigui/gui.h"
@@ -301,7 +302,16 @@ main:
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
 	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
 
-   GuiImageData btnOutline(button_dialogue_box_png);
+   GuiImageData folderImgData(folder_png);
+	GuiImage folderImg(&folderImgData);
+	GuiButton folderBtn(folderImg.GetWidth(), folderImg.GetHeight());
+	folderBtn.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	folderBtn.SetPosition(-210, -145);
+	folderBtn.SetImage(&folderImg);
+	folderBtn.SetTrigger(&trigA);
+	folderBtn.SetEffectGrow();
+
+	GuiImageData btnOutline(button_dialogue_box_png);
 	GuiText ExitBtnTxt("Cancel", 24, (GXColor){0, 0, 0, 255});
 	GuiImage ExitBtnImg(&btnOutline);
 	if (Settings.wsprompt == yes){
@@ -315,6 +325,19 @@ main:
 	ExitBtn.SetTrigger(&trigA);
 	ExitBtn.SetTrigger(&trigB);
 	ExitBtn.SetEffectGrow();
+
+	GuiText usbBtnTxt((curDivice==SD?"USB":"SD"), 24, (GXColor){0, 0, 0, 255});
+	GuiImage usbBtnImg(&btnOutline);
+	if (Settings.wsprompt == yes){
+	usbBtnTxt.SetWidescreen(CFG.widescreen);
+	usbBtnImg.SetWidescreen(CFG.widescreen);
+	}GuiButton usbBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
+	usbBtn.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
+	usbBtn.SetPosition(0, -35);
+	usbBtn.SetLabel(&usbBtnTxt);
+	usbBtn.SetImage(&usbBtnImg);
+	usbBtn.SetTrigger(&trigA);
+	usbBtn.SetEffectGrow();
 
 	GuiText okBtnTxt(tr("Ok"), 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	GuiImage okBtnImg(&btnOutline);
@@ -353,7 +376,8 @@ main:
 	w.Append(&fileBrowser);
 	w.Append(&Adressbar);
 	w.Append(&okBtn);
-//	w.Append(&deviceBtn);//i got codedump when i tried to make an extra button so i took this one out for now till i find the dump
+	w.Append(&folderBtn);
+	w.Append(&usbBtn);
 	mainWindow->Append(&w);
 	ResumeGui();
 
@@ -405,19 +429,41 @@ main:
 			}
 		if(okBtn.GetState() == STATE_CLICKED)
 		{
-			/*int e=0;
-			for(unsigned int d=0;d<strlen(var);d++)
-			{
-				if (d!=3)
-					{
-					currentdir[e]=var[d];
-					e++;
-					}
-			}*/
-			//snprintf(var,sizeof(currentdir),"%s", currentdir);
-			//snprintf(var,sizeof(var),"%s%s", browser.rootdir, browser.dir);
 			result = 1;
 			break;
+		}
+		else if(usbBtn.GetState() == STATE_CLICKED)
+		{
+				HaltGui();
+				mainWindow->Remove(&w);
+				ResumeGui();
+				result = BrowseDevice(var, (curDivice==SD?USB:SD));
+				break;
+		}
+		else if(folderBtn.GetState() == STATE_CLICKED)
+		{
+				HaltGui();
+				mainWindow->Remove(&w);
+				ResumeGui();
+				char newfolder[100];
+				sprintf(newfolder,"%s/",var);
+				
+				int result = OnScreenKeyboard(newfolder,100,0);
+            if ( result == 1 )
+            {
+				   int len = (strlen(newfolder)-1);
+               if(newfolder[len] !='/')
+						strncat (newfolder, "/", 1);
+
+                  struct stat st;
+						 if(stat(newfolder, &st) != 0) {
+							  if(subfoldercreate(newfolder) != 1) {
+							  WindowPrompt(tr("Error !"),tr("Can't create directory"),tr("OK"));
+							  }
+						 }
+            }
+				result = BrowseDevice(var, (curDivice==SD?SD:USB));
+				break;
 		}
 		
 	}
