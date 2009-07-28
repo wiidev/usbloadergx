@@ -27,6 +27,7 @@
 #include "menu.h"
 #include "input.h"
 #include "filelist.h"
+#include "listfiles.h"
 #include "main.h"
 #include "fatmounter.h"
 #include "sys.h"
@@ -58,25 +59,23 @@ main(int argc, char *argv[])
 		else if(!strncasecmp(argv[0], "sd:/", 4))
 			bootDevice_found = true;
 	}
-	
-	if(!bootDevice_found)
-	{
-		//try USB
-		struct stat st;
-        if((stat("USB:/apps/usbloader_gx/boot.dol", &st) == 0) || (stat("USB:/apps/usbloader_gx/boot.elf", &st) == 0))
-			strcpy(bootDevice, "USB:");
-	}
 
     ret2 = IOS_ReloadIOS(249);
 	if(ret2 < 0) {
 		ret2 = IOS_ReloadIOS(222);
 		load_ehc_module();
 	}
-	
+
 	SDCard_Init(); // mount SD for loading cfg's
 	USBDevice_Init(); // and mount USB:/
 
-
+	if(!bootDevice_found)
+	{
+		//try USB
+        if(checkfile((char*) "USB:/apps/usbloader_gx/boot.dol") || (checkfile((char*) "USB:/apps/usbloader_gx/boot.elf"))
+            || checkfile((char*) "USB:/apps/usbloadergx/boot.dol") || (checkfile((char*) "USB:/apps/usbloadergx/boot.elf")))
+			strcpy(bootDevice, "USB:");
+	}
 
 	gettextCleanUp();
 	CFG_Load();
@@ -120,7 +119,7 @@ main(int argc, char *argv[])
 
 	InitVideo(); // Initialise video
 	InitAudio(); // Initialize audio
-	
+
 	WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
 	WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
 
