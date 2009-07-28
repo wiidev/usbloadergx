@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 23:19-0400\n"
+"POT-Creation-Date: 2009-07-28 05:57-0400\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: Kin8\n"
 "Language-Team: Badablek, Amour, ikya, OuahOuah, dj_skual & Kin8\n"
@@ -60,6 +60,33 @@ msgstr "4 (Adultes 18+)"
 msgid "5 min"
 msgstr "5 min."
 
+msgid ">> Deleting tickets..."
+msgstr ""
+
+msgid ">> Deleting tickets...ERROR! "
+msgstr ""
+
+msgid ">> Deleting tickets...Ok! "
+msgstr ""
+
+msgid ">> Deleting title ...ERROR! "
+msgstr ""
+
+msgid ">> Deleting title ...Ok!"
+msgstr ""
+
+msgid ">> Deleting title contents..."
+msgstr ""
+
+msgid ">> Deleting title contents...ERROR! "
+msgstr ""
+
+msgid ">> Deleting title contents...Ok!"
+msgstr ""
+
+msgid ">> Deleting title..."
+msgstr ""
+
 msgid ">> Finishing installation..."
 msgstr ">> Finalisation de l'installation..."
 
@@ -74,6 +101,12 @@ msgstr ">> Installation titre..."
 
 msgid ">> Reading WAD data..."
 msgstr ">> Lecture données WAD..."
+
+msgid ">> Reading WAD data...ERROR! "
+msgstr ""
+
+msgid ">> Reading WAD data...Ok!"
+msgstr ""
 
 msgid "AUTO"
 msgstr "AUTO"
@@ -277,6 +310,9 @@ msgstr "Reset Paramètres"
 msgid "Delete"
 msgstr "Supprimer"
 
+msgid "Delete ?"
+msgstr ""
+
 msgid "Delete Boxart"
 msgstr "Supprimer la Jaquette"
 
@@ -342,6 +378,9 @@ msgstr "Dossier du DOL alternatif"
 
 msgid "Don't bother the USB Loader GX Team about errors in this file."
 msgstr "La Team USB Loader GX ne gère pas les erreurs de ce fichier."
+
+msgid "Done!"
+msgstr ""
 
 msgid "Download Boxart image?"
 msgstr "Télécharger les jaquettes ?"
@@ -519,6 +558,9 @@ msgstr "Insérez une carte SD pour enregistrer."
 msgid "Insert an SD-Card to use this option."
 msgstr "Insérez une carte SD pour utiliser cette option."
 
+msgid "Install"
+msgstr ""
+
 msgid "Install Error!"
 msgstr "Erreur à l'installation !"
 
@@ -558,6 +600,9 @@ msgstr "Juil"
 
 msgid "June"
 msgstr "Juin"
+
+msgid "Keep"
+msgstr ""
 
 msgid "Keyboard"
 msgstr "Clavier"
@@ -764,6 +809,9 @@ msgstr "Démarrage rapide"
 msgid "Reading WAD data... Ok!"
 msgstr "Lecture données WAD... OK!"
 
+msgid "Received:"
+msgstr ""
+
 msgid "Receiving file from:"
 msgstr "Réception du fichier de:"
 
@@ -919,11 +967,17 @@ msgstr "USB Loader GX est verrouillé"
 msgid "Unable to open the wad that was just downloaded (%s)."
 msgstr "Ouverture du WAD impossible (%s)."
 
+msgid "Uninstall"
+msgstr "Désinstaller"
+
 msgid "Uninstall Game"
 msgstr "Désinstaller le Jeu"
 
 msgid "Uninstall Menu"
 msgstr "Menu Suppression"
+
+msgid "Uninstalling wad"
+msgstr ""
 
 msgid "Unlock console to use this option."
 msgstr "Cette option requiert le déverrouillage de l'interface."
@@ -1079,9 +1133,6 @@ msgstr "Localisation titles.txt"
 
 #~ msgid "Do you want to boot?"
 #~ msgstr "Voulez-vous démarrer ?"
-
-#~ msgid "Uninstall"
-#~ msgstr "Désinstaller"
 
 #~ msgid "file(s) left"
 #~ msgstr "fichier(s) restant(s)"

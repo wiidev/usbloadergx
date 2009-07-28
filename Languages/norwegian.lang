@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 23:19-0400\n"
+"POT-Creation-Date: 2009-07-28 05:57-0400\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -60,6 +60,33 @@ msgstr "4 (Voksen 18+)"
 msgid "5 min"
 msgstr ""
 
+msgid ">> Deleting tickets..."
+msgstr ""
+
+msgid ">> Deleting tickets...ERROR! "
+msgstr ""
+
+msgid ">> Deleting tickets...Ok! "
+msgstr ""
+
+msgid ">> Deleting title ...ERROR! "
+msgstr ""
+
+msgid ">> Deleting title ...Ok!"
+msgstr ""
+
+msgid ">> Deleting title contents..."
+msgstr ""
+
+msgid ">> Deleting title contents...ERROR! "
+msgstr ""
+
+msgid ">> Deleting title contents...Ok!"
+msgstr ""
+
+msgid ">> Deleting title..."
+msgstr ""
+
 msgid ">> Finishing installation..."
 msgstr ">> Sluttfører installasjon..."
 
@@ -74,6 +101,12 @@ msgstr ">> Installerer tittel..."
 
 msgid ">> Reading WAD data..."
 msgstr ">> Leser WAD data..."
+
+msgid ">> Reading WAD data...ERROR! "
+msgstr ""
+
+msgid ">> Reading WAD data...Ok!"
+msgstr ""
 
 msgid "AUTO"
 msgstr "AUTO"
@@ -277,6 +310,9 @@ msgstr "Standard innstillinger"
 msgid "Delete"
 msgstr "Slett"
 
+msgid "Delete ?"
+msgstr ""
+
 msgid "Delete Boxart"
 msgstr ""
 
@@ -341,6 +377,9 @@ msgid "Dolpath change"
 msgstr "Endre DOL sti"
 
 msgid "Don't bother the USB Loader GX Team about errors in this file."
+msgstr ""
+
+msgid "Done!"
 msgstr ""
 
 msgid "Download Boxart image?"
@@ -519,6 +558,9 @@ msgstr "Sett inn et SD-kort for å lagre."
 msgid "Insert an SD-Card to use this option."
 msgstr "Sett inn et SD-kort for å bruke innstillingen."
 
+msgid "Install"
+msgstr ""
+
 msgid "Install Error!"
 msgstr "Installasjonsfeil!"
 
@@ -558,6 +600,9 @@ msgstr "Jul"
 
 msgid "June"
 msgstr "Jun"
+
+msgid "Keep"
+msgstr ""
 
 msgid "Keyboard"
 msgstr "Tastatur"
@@ -764,6 +809,9 @@ msgstr "Hurtig start"
 msgid "Reading WAD data... Ok!"
 msgstr "Leser WAD data... OK!"
 
+msgid "Received:"
+msgstr ""
+
 msgid "Receiving file from:"
 msgstr ""
 
@@ -919,10 +967,16 @@ msgstr "USB Loader GX er beskyttet"
 msgid "Unable to open the wad that was just downloaded (%s)."
 msgstr "Kan ikke åpne nedlastet WAD fil (%s)."
 
+msgid "Uninstall"
+msgstr "Avinstallér"
+
 msgid "Uninstall Game"
 msgstr ""
 
 msgid "Uninstall Menu"
+msgstr ""
+
+msgid "Uninstalling wad"
 msgstr ""
 
 msgid "Unlock console to use this option."
@@ -1076,9 +1130,6 @@ msgstr "Titles.txt sti"
 
 #~ msgid "Leaving so you can restart..."
 #~ msgstr "Lukker så du kan restarte..."
-
-#~ msgid "Uninstall"
-#~ msgstr "Avinstallér"
 
 #~ msgid "file(s) left"
 #~ msgstr "fil(er) gjenstår"

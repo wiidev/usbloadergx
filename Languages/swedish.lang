@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 23:19-0400\n"
+"POT-Creation-Date: 2009-07-28 05:57-0400\n"
 "PO-Revision-Date: 2009-07-27 12:20+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -60,6 +60,33 @@ msgstr "4 (Endast Vuxna 18+)"
 msgid "5 min"
 msgstr ""
 
+msgid ">> Deleting tickets..."
+msgstr ""
+
+msgid ">> Deleting tickets...ERROR! "
+msgstr ""
+
+msgid ">> Deleting tickets...Ok! "
+msgstr ""
+
+msgid ">> Deleting title ...ERROR! "
+msgstr ""
+
+msgid ">> Deleting title ...Ok!"
+msgstr ""
+
+msgid ">> Deleting title contents..."
+msgstr ""
+
+msgid ">> Deleting title contents...ERROR! "
+msgstr ""
+
+msgid ">> Deleting title contents...Ok!"
+msgstr ""
+
+msgid ">> Deleting title..."
+msgstr ""
+
 msgid ">> Finishing installation..."
 msgstr ">> Gör klart installation..."
 
@@ -74,6 +101,12 @@ msgstr ">> Installerar titel..."
 
 msgid ">> Reading WAD data..."
 msgstr ">> Läser WAD data..."
+
+msgid ">> Reading WAD data...ERROR! "
+msgstr ""
+
+msgid ">> Reading WAD data...Ok!"
+msgstr ""
 
 msgid "AUTO"
 msgstr ""
@@ -277,6 +310,9 @@ msgstr "Standardinställningar"
 msgid "Delete"
 msgstr "Radera"
 
+msgid "Delete ?"
+msgstr ""
+
 msgid "Delete Boxart"
 msgstr "Radera omslag"
 
@@ -342,6 +378,9 @@ msgstr "Ändra Dol sökväg"
 
 msgid "Don't bother the USB Loader GX Team about errors in this file."
 msgstr "Rapportera inte fel i denna fil till USB Loader GX teamet."
+
+msgid "Done!"
+msgstr ""
 
 msgid "Download Boxart image?"
 msgstr "Ladda ner omslagsbild?"
@@ -519,6 +558,9 @@ msgstr "Sätt i ett SD-kort för att spara."
 msgid "Insert an SD-Card to use this option."
 msgstr "Sätt i ett SD-kort för att använda denna inställning"
 
+msgid "Install"
+msgstr ""
+
 msgid "Install Error!"
 msgstr "Fel vid installering!"
 
@@ -558,6 +600,9 @@ msgstr "Juli"
 
 msgid "June"
 msgstr "Juni"
+
+msgid "Keep"
+msgstr ""
 
 msgid "Keyboard"
 msgstr "Tangentbord"
@@ -764,6 +809,9 @@ msgstr "Snabbstart"
 msgid "Reading WAD data... Ok!"
 msgstr "Läser WAD data... Ok!"
 
+msgid "Received:"
+msgstr ""
+
 msgid "Receiving file from:"
 msgstr "Tar emot filer från:"
 
@@ -919,11 +967,17 @@ msgstr "USB Loader GX är skyddad"
 msgid "Unable to open the wad that was just downloaded (%s)."
 msgstr "Kunde inte öppna den nedladdade wad filen (%s)."
 
+msgid "Uninstall"
+msgstr "Avinstallera"
+
 msgid "Uninstall Game"
 msgstr "Avinstallera spel"
 
 msgid "Uninstall Menu"
 msgstr "Avinstallera meny"
+
+msgid "Uninstalling wad"
+msgstr ""
 
 msgid "Unlock console to use this option."
 msgstr "Lås upp konsolen för denna inställning."
@@ -1076,9 +1130,6 @@ msgstr "sökväg till titles.txt"
 
 #~ msgid "Leaving so you can restart..."
 #~ msgstr "Lämnar så du kan starta om..."
-
-#~ msgid "Uninstall"
-#~ msgstr "Avinstallera"
 
 #~ msgid "file(s) left"
 #~ msgstr "filer kvar"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 23:19-0400\n"
+"POT-Creation-Date: 2009-07-28 05:57-0400\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: ziom666 (zadania_prog@vp.pl)\n"
 "Language-Team: \n"
@@ -60,6 +60,33 @@ msgstr "4 (tylko dla doroslych 18+)"
 msgid "5 min"
 msgstr ""
 
+msgid ">> Deleting tickets..."
+msgstr ""
+
+msgid ">> Deleting tickets...ERROR! "
+msgstr ""
+
+msgid ">> Deleting tickets...Ok! "
+msgstr ""
+
+msgid ">> Deleting title ...ERROR! "
+msgstr ""
+
+msgid ">> Deleting title ...Ok!"
+msgstr ""
+
+msgid ">> Deleting title contents..."
+msgstr ""
+
+msgid ">> Deleting title contents...ERROR! "
+msgstr ""
+
+msgid ">> Deleting title contents...Ok!"
+msgstr ""
+
+msgid ">> Deleting title..."
+msgstr ""
+
 msgid ">> Finishing installation..."
 msgstr ">> Konczenie instalacji"
 
@@ -74,6 +101,12 @@ msgstr ">> Instalowanie tytulu..."
 
 msgid ">> Reading WAD data..."
 msgstr ">> Odczyt danych WAD..."
+
+msgid ">> Reading WAD data...ERROR! "
+msgstr ""
+
+msgid ">> Reading WAD data...Ok!"
+msgstr ""
 
 msgid "AUTO"
 msgstr ""
@@ -277,6 +310,9 @@ msgstr "DomySlne ustawienia"
 msgid "Delete"
 msgstr "Usun"
 
+msgid "Delete ?"
+msgstr ""
+
 msgid "Delete Boxart"
 msgstr "Usun obrazki box"
 
@@ -342,6 +378,9 @@ msgstr "Zmien Sciezke plików .DOL"
 
 msgid "Don't bother the USB Loader GX Team about errors in this file."
 msgstr "Nie informuj team USB Loader GX o bledach w tym pliku."
+
+msgid "Done!"
+msgstr ""
 
 msgid "Download Boxart image?"
 msgstr "Pobrac obrazki box?"
@@ -519,6 +558,9 @@ msgstr "Wlóz karte SD, aby zapisac"
 msgid "Insert an SD-Card to use this option."
 msgstr "Wlóz karte SD, aby uzyc tej opcji"
 
+msgid "Install"
+msgstr ""
+
 msgid "Install Error!"
 msgstr "Blad instalacji"
 
@@ -558,6 +600,9 @@ msgstr "lipiec"
 
 msgid "June"
 msgstr "czerwiec"
+
+msgid "Keep"
+msgstr ""
 
 msgid "Keyboard"
 msgstr "Klawiatura"
@@ -764,6 +809,9 @@ msgstr "Szybkie ladowanie"
 msgid "Reading WAD data... Ok!"
 msgstr "Odczyt danych WAD...Ok!"
 
+msgid "Received:"
+msgstr ""
+
 msgid "Receiving file from:"
 msgstr ""
 
@@ -919,11 +967,17 @@ msgstr "USB Loader GX zabezpieczony"
 msgid "Unable to open the wad that was just downloaded (%s)."
 msgstr "Nie udalo sie zainstalowac dopiero co pobranego pliku (%s)"
 
+msgid "Uninstall"
+msgstr "Odinstaluj"
+
 msgid "Uninstall Game"
 msgstr "Odinstaluj gre"
 
 msgid "Uninstall Menu"
 msgstr "Odinstaluj Menu"
+
+msgid "Uninstalling wad"
+msgstr ""
 
 msgid "Unlock console to use this option."
 msgstr "Odblokuj konsole, aby uzyc tej opcji"
@@ -1076,6 +1130,3 @@ msgstr "Sciezka titles.txt"
 
 #~ msgid "Leaving so you can restart..."
 #~ msgstr "Przygotowanie do restartu..."
-
-#~ msgid "Uninstall"
-#~ msgstr "Odinstaluj"

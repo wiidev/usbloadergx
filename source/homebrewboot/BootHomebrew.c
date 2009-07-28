@@ -11,7 +11,7 @@
 #include "dolloader.h"
 #include "elfloader.h"
 
-static void *innetbuffer = NULL;
+void *innetbuffer = NULL;
 
 int AllocHomebrewMemory(u32 filesize) {
 

@@ -594,8 +594,92 @@ exit:
 	return ret;
 }
 
+
 s32 Wad_Uninstall(FILE *fp)
 {
+	//////start the gui shit
+   //////start the gui shit
+   GuiWindow promptWindow(472,320);
+	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	promptWindow.SetPosition(0, -10);
+
+   GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
+	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
+
+	char imgPath[100];
+	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
+	GuiImageData btnOutline(imgPath, button_dialogue_box_png);
+	snprintf(imgPath, sizeof(imgPath), "%sdialogue_box.png", CFG.theme_path);
+	GuiImageData dialogBox(imgPath, dialogue_box_png);
+	GuiTrigger trigA;
+	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
+
+	GuiImage dialogBoxImg(&dialogBox);
+	if (Settings.wsprompt == yes){
+	dialogBoxImg.SetWidescreen(CFG.widescreen);}
+	
+	GuiText btn1Txt(tr("Ok"), 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	GuiImage btn1Img(&btnOutline);
+	if (Settings.wsprompt == yes){
+	btn1Txt.SetWidescreen(CFG.widescreen);
+	btn1Img.SetWidescreen(CFG.widescreen);}
+	GuiButton btn1(&btn1Img,&btn1Img, 2, 4, 0, -55, &trigA, &btnSoundOver, &btnClick,1);
+	btn1.SetLabel(&btn1Txt);
+	btn1.SetState(STATE_SELECTED);
+
+    char title[50];
+   sprintf(title, "%s", tr("Uninstalling wad"));
+	GuiText titleTxt(title, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	titleTxt.SetPosition(0,40);
+	
+	GuiText msg1Txt(NULL, 18, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	msg1Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	msg1Txt.SetPosition(50,75);
+
+	GuiText msg2Txt(NULL, 18, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	msg2Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	msg2Txt.SetPosition(50, 98);
+
+	GuiText msg3Txt(NULL, 18, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	msg3Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	msg3Txt.SetPosition(50, 121);
+
+	GuiText msg4Txt(NULL, 18, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	msg4Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	msg4Txt.SetPosition(50, 144);
+
+	GuiText msg5Txt(NULL, 18, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	msg5Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+	msg5Txt.SetPosition(50, 167);
+
+
+   
+	if ((Settings.wsprompt == yes) && (CFG.widescreen)){/////////////adjust for widescreen
+		
+		msg1Txt.SetPosition(70,95);
+		msg2Txt.SetPosition(70, 118);
+		msg3Txt.SetPosition(70, 141);
+		msg4Txt.SetPosition(70, 164);
+		msg5Txt.SetPosition(70, 187);
+
+	}
+	promptWindow.Append(&dialogBoxImg);
+	promptWindow.Append(&titleTxt);
+	promptWindow.Append(&msg5Txt);
+	promptWindow.Append(&msg4Txt);
+	promptWindow.Append(&msg3Txt);
+	promptWindow.Append(&msg1Txt);
+	promptWindow.Append(&msg2Txt);
+   
+	HaltGui();
+	mainWindow->SetState(STATE_DISABLED);
+	mainWindow->Append(&promptWindow);
+	mainWindow->ChangeFocus(&promptWindow);
+	ResumeGui();
+	//sleep(3);
+
+	///start the wad shit
 	wadHeader *header   = NULL;
 	tikview   *viewData = NULL;
 
@@ -603,73 +687,112 @@ s32 Wad_Uninstall(FILE *fp)
 	u32 viewCnt;
 	s32 ret;
 	
-	//WindowPrompt(">> Reading WAD data...",0,"Back",0,0);
+
+
 	
-	/* WAD header */
-	//ret = __Wad_ReadAlloc(fp, (void *)&header, 0, sizeof(wadHeader));
+	msg1Txt.SetText(tr(">> Reading WAD data..."));
+		
+	// WAD header 
 	ret = __Wad_ReadAlloc(fp, (void **)&header, 0, sizeof(wadHeader));
 	if (ret < 0) {
-		//WindowPrompt(">> ERROR! (ret = ...",0,"Back",0,0);
+		char errTxt[50];
+		sprintf(errTxt,"%sret = %d",tr(">> Reading WAD data...ERROR! "),ret);
+		msg1Txt.SetText(errTxt);
 		//printf(" ERROR! (ret = %d)\n", ret);
 		goto out;
 	}
-
-	/* Get title ID */
+	
+	// Get title ID 
 	ret =  __Wad_GetTitleID(fp, header, &tid);
 	if (ret < 0) {
 		//printf(" ERROR! (ret = %d)\n", ret);
-		//WindowPrompt(">> ERROR! (ret = ...",0,"Back",0,0);
+		char errTxt[50];
+		sprintf(errTxt,"%sret = %d",tr(">> Reading WAD data...ERROR! "),ret);
+		msg1Txt.SetText(errTxt);
 		goto out;
 	}
 
-	//WindowPrompt(">> Deleting tickets...",0,"Back",0,0);
-
-	/* Get ticket views */
+	msg1Txt.SetText(tr(">> Reading WAD data...Ok!"));
+	msg2Txt.SetText(tr(">> Deleting tickets..."));
+		
+	// Get ticket views 
 	ret = Title_GetTicketViews(tid, &viewData, &viewCnt);
-	if (ret < 0)
-		//WindowPrompt(">> ERROR! (ret = ...",0,"Back",0,0);
+	if (ret < 0){
+		char errTxt[50];
+		sprintf(errTxt,"%sret = %d",tr(">> Deleting tickets...ERROR! "),ret);
+		msg2Txt.SetText(errTxt);
 		//printf(" ERROR! (ret = %d)\n", ret);
-
-	/* Delete tickets */
+		}
+	// Delete tickets 
 	if (ret >= 0) {
 		u32 cnt;
 
-		/* Delete all tickets */
+		// Delete all tickets  
 		for (cnt = 0; cnt < viewCnt; cnt++) {
 			ret = ES_DeleteTicket(&viewData[cnt]);
 			if (ret < 0)
 				break;
 		}
 
-		if (ret < 0){}
+		if (ret < 0){
+			char errTxt[50];
+			sprintf(errTxt,"%sret = %d",tr(">> Deleting tickets...ERROR! "),ret);
+			msg2Txt.SetText(errTxt);}
 			//printf(" ERROR! (ret = %d\n", ret);
-		else{}
+		else
 			//printf(" OK!\n");
+			msg2Txt.SetText(tr(">> Deleting tickets...Ok! "));
+		
 	}
 
+	msg3Txt.SetText(tr(">> Deleting title contents..."));
 	//WindowPrompt(">> Deleting title contents...",0,"Back",0,0);
 
-	/* Delete title contents */
+	// Delete title contents
 	ret = ES_DeleteTitleContent(tid);
-	if (ret < 0){}
+	if (ret < 0){
+		char errTxt[50];
+		sprintf(errTxt,"%sret = %d",tr(">> Deleting title contents...ERROR! "),ret);
+		msg3Txt.SetText(errTxt);}
 		//printf(" ERROR! (ret = %d)\n", ret);
-	else{}
+	else
 		//printf(" OK!\n");
+		msg3Txt.SetText(tr(">> Deleting title contents...Ok!"));
 
-
-	//WindowPrompt(">> Deleting title...",0,"Back",0,0);
-	
-	/* Delete title */
+	msg4Txt.SetText(tr(">> Deleting title..."));
+	// Delete title 
 	ret = ES_DeleteTitle(tid);
-	if (ret < 0){}
+	if (ret < 0){
+		char errTxt[50];
+		sprintf(errTxt,"%sret = %d",tr(">> Deleting title ...ERROR! "),ret);
+		msg4Txt.SetText(errTxt);}
 		//printf(" ERROR! (ret = %d)\n", ret);
-	else{}
+	else
 		//printf(" OK!\n");
+		msg4Txt.SetText(tr(">> Deleting title ...Ok!"));
 
 out:
-	/* Free memory */
+	// Free memory 
 	if (header)
 		free(header);
+
+	goto exit;
+	
+	//WindowPrompt(tr("Success"),"The wad file was installed","Ok");
+	
+exit:	
+	//promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
+	//while(promptWindow.GetEffect() > 0) usleep(50);
+	msg5Txt.SetText(tr("Done!"));
+	promptWindow.Append(&btn1);
+	while(btn1.GetState() != STATE_CLICKED){
+	}
+	
+	
+	HaltGui();
+	mainWindow->Remove(&promptWindow);
+	mainWindow->SetState(STATE_DEFAULT);
+	ResumeGui();
 
 	return ret;
 }

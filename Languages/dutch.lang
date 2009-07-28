@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 23:19-0400\n"
+"POT-Creation-Date: 2009-07-28 05:57-0400\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: tj_cool\n"
 "Language-Team: \n"
@@ -60,6 +60,33 @@ msgstr "4 (Volwassen 18+)"
 msgid "5 min"
 msgstr "5 min"
 
+msgid ">> Deleting tickets..."
+msgstr ""
+
+msgid ">> Deleting tickets...ERROR! "
+msgstr ""
+
+msgid ">> Deleting tickets...Ok! "
+msgstr ""
+
+msgid ">> Deleting title ...ERROR! "
+msgstr ""
+
+msgid ">> Deleting title ...Ok!"
+msgstr ""
+
+msgid ">> Deleting title contents..."
+msgstr ""
+
+msgid ">> Deleting title contents...ERROR! "
+msgstr ""
+
+msgid ">> Deleting title contents...Ok!"
+msgstr ""
+
+msgid ">> Deleting title..."
+msgstr ""
+
 msgid ">> Finishing installation..."
 msgstr ">> Installatie Afronden..."
 
@@ -74,6 +101,12 @@ msgstr ">> Titel installeren..."
 
 msgid ">> Reading WAD data..."
 msgstr ">> Wad data lezen..."
+
+msgid ">> Reading WAD data...ERROR! "
+msgstr ""
+
+msgid ">> Reading WAD data...Ok!"
+msgstr ""
 
 msgid "AUTO"
 msgstr "Auto"
@@ -277,6 +310,9 @@ msgstr "Standaardinstellingen"
 msgid "Delete"
 msgstr "Verwijderen"
 
+msgid "Delete ?"
+msgstr ""
+
 msgid "Delete Boxart"
 msgstr "Hoesjes verwijderen"
 
@@ -342,6 +378,9 @@ msgstr "Locatie dol wijzigen"
 
 msgid "Don't bother the USB Loader GX Team about errors in this file."
 msgstr "Val het USB loader GX team niet lastig over fouten in dit bestand."
+
+msgid "Done!"
+msgstr ""
 
 msgid "Download Boxart image?"
 msgstr "Hoesjes downloaden?"
@@ -519,6 +558,9 @@ msgstr "Voer een SD kaart in om op te slaan."
 msgid "Insert an SD-Card to use this option."
 msgstr "Voer een SD kaart in om deze optie te gebruiken."
 
+msgid "Install"
+msgstr ""
+
 msgid "Install Error!"
 msgstr "Installatiefout!"
 
@@ -558,6 +600,9 @@ msgstr "Jul"
 
 msgid "June"
 msgstr "Jun"
+
+msgid "Keep"
+msgstr ""
 
 msgid "Keyboard"
 msgstr "Toetsenbord"
@@ -764,6 +809,9 @@ msgstr "Snelle start"
 msgid "Reading WAD data... Ok!"
 msgstr "Wad data lezen... Ok!"
 
+msgid "Received:"
+msgstr ""
+
 msgid "Receiving file from:"
 msgstr "Bestand ontvangen van:"
 
@@ -919,11 +967,17 @@ msgstr "USB Loader GX is vergrendeld"
 msgid "Unable to open the wad that was just downloaded (%s)."
 msgstr "Wad is gedownload maar kan niet worden geopend (%s)."
 
+msgid "Uninstall"
+msgstr "Verwijderen"
+
 msgid "Uninstall Game"
 msgstr "Spel verwijderen"
 
 msgid "Uninstall Menu"
 msgstr "Verwijderen"
+
+msgid "Uninstalling wad"
+msgstr ""
 
 msgid "Unlock console to use this option."
 msgstr "Console moet worden vrijgegeven."
@@ -1076,9 +1130,6 @@ msgstr "Locatie titles.txt"
 
 #~ msgid "Leaving so you can restart..."
 #~ msgstr "Afsluiten om te herstarten..."
-
-#~ msgid "Uninstall"
-#~ msgstr "Verwijderen"
 
 #~ msgid "file(s) left"
 #~ msgstr "Bestanden resterend"

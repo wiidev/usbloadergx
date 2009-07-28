@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 23:19-0400\n"
+"POT-Creation-Date: 2009-07-28 05:57-0400\n"
 "PO-Revision-Date: 2009-07-20 16:40\n"
 "Last-Translator: Sky8000\n"
 "Language-Team: \n"
@@ -60,6 +60,33 @@ msgstr "4 (Adultos 18+)"
 msgid "5 min"
 msgstr "5 minutos"
 
+msgid ">> Deleting tickets..."
+msgstr ""
+
+msgid ">> Deleting tickets...ERROR! "
+msgstr ""
+
+msgid ">> Deleting tickets...Ok! "
+msgstr ""
+
+msgid ">> Deleting title ...ERROR! "
+msgstr ""
+
+msgid ">> Deleting title ...Ok!"
+msgstr ""
+
+msgid ">> Deleting title contents..."
+msgstr ""
+
+msgid ">> Deleting title contents...ERROR! "
+msgstr ""
+
+msgid ">> Deleting title contents...Ok!"
+msgstr ""
+
+msgid ">> Deleting title..."
+msgstr ""
+
 msgid ">> Finishing installation..."
 msgstr ">> Terminando instalação..."
 
@@ -74,6 +101,12 @@ msgstr ">> Instalando título..."
 
 msgid ">> Reading WAD data..."
 msgstr ">> Lendo ficheiro WAD..."
+
+msgid ">> Reading WAD data...ERROR! "
+msgstr ""
+
+msgid ">> Reading WAD data...Ok!"
+msgstr ""
 
 msgid "AUTO"
 msgstr "AUTO"
@@ -277,6 +310,9 @@ msgstr "Repor Configurações"
 msgid "Delete"
 msgstr "Eliminar"
 
+msgid "Delete ?"
+msgstr ""
+
 msgid "Delete Boxart"
 msgstr "Eliminar Capas"
 
@@ -342,6 +378,9 @@ msgstr "Alterar Pasta do DOL"
 
 msgid "Don't bother the USB Loader GX Team about errors in this file."
 msgstr "Não incomodes a equipa do USB Loader GX por erros neste ficheiro."
+
+msgid "Done!"
+msgstr ""
 
 msgid "Download Boxart image?"
 msgstr "Descarregar imagem da Caixa?"
@@ -519,6 +558,9 @@ msgstr "Insira um cartão SD para guardar."
 msgid "Insert an SD-Card to use this option."
 msgstr "Insira um cartão SD para usar esta funcionalidade."
 
+msgid "Install"
+msgstr ""
+
 msgid "Install Error!"
 msgstr "Erro de Instalação!"
 
@@ -558,6 +600,9 @@ msgstr "Jul"
 
 msgid "June"
 msgstr "Jun"
+
+msgid "Keep"
+msgstr ""
 
 msgid "Keyboard"
 msgstr "Teclado"
@@ -764,6 +809,9 @@ msgstr "Arranque Rápido"
 msgid "Reading WAD data... Ok!"
 msgstr "Lendo dados do WAD... Ok!"
 
+msgid "Received:"
+msgstr ""
+
 msgid "Receiving file from:"
 msgstr "Recebendo ficheiro de:"
 
@@ -919,11 +967,17 @@ msgstr "O USB Loader GX está bloqueado"
 msgid "Unable to open the wad that was just downloaded (%s)."
 msgstr "Não é possível abrir o ficheiro wad descarregado (%s)."
 
+msgid "Uninstall"
+msgstr "Remover"
+
 msgid "Uninstall Game"
 msgstr "Desinstalar jogo"
 
 msgid "Uninstall Menu"
 msgstr "Menu de Desinstalação"
+
+msgid "Uninstalling wad"
+msgstr ""
 
 msgid "Unlock console to use this option."
 msgstr "Desbloquear configuração antes de usar esta opção."
@@ -1076,9 +1130,6 @@ msgstr "Pasta titles.txt"
 
 #~ msgid "Leaving so you can restart..."
 #~ msgstr "Saindo para que possas reiniciar..."
-
-#~ msgid "Uninstall"
-#~ msgstr "Remover"
 
 #~ msgid "for hosting the covers/discarts"
 #~ msgstr "por alojar capas/imagens de disco"

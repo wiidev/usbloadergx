@@ -21,6 +21,9 @@
 #include "menu.h"
 #include "filelist.h"
 #include "sys.h"
+#include "network/http.h"
+#include "wad/wad.h"
+
 
 #define NETWORKBLOCKSIZE       5*1024      //5KB
 
@@ -35,6 +38,8 @@ extern GuiImage * bgImg;
 extern u32 infilesize;
 extern u8 shutdown;
 extern u8 reset;
+extern s32 connection;
+extern void *innetbuffer;
 
 /*** Variables used elsewhere ***/
 u8 boothomebrew = 0;
@@ -837,16 +842,65 @@ int MenuHomebrewBrowse()
                         }
                         free(temp);
                         ProgressStop();
-
-                        if(read != infilesize) {
+								
+								if(read != infilesize) {
                             WindowPrompt(tr("Error:"), tr("No data could be read."), tr("OK"));
                             FreeHomebrewBuffer();
-                        } else {
-                            boothomebrew = 2;
-                            menu = MENU_EXIT;
-                            CloseConnection();
-                            break;
                         }
+								else
+								{
+								//determine what type of file we just got
+									unsigned char filename[31];
+									char tmptxt[31];
+																	
+									net_read(connection, &filename, 30);
+									sprintf(tmptxt,"%s",filename);
+									//if we got a wad
+									if(strstr(tmptxt,".wad") || strstr(tmptxt,".WAD"))
+									{	
+										//what do we want to do with the wad
+										int pick = WindowPrompt(tr("Received:"), tmptxt, tr("Install"),tr("Uninstall"),tr("Cancel"));
+										//save that biatch to the wad folder	
+										sprintf(tmptxt,"%s/wad/%s",bootDevice,filename);
+										FILE * file = fopen(tmptxt, "w");
+										fwrite (innetbuffer , 1 , infilesize , file );
+										fclose (file);
+										
+										//get it out of the memory
+										FreeHomebrewBuffer();
+										
+										//check and make sure the wad we just saved is the correct size
+										u32 lSize;
+										file = fopen(tmptxt, "rb");
+										  
+										// obtain file size:
+										fseek (file , 0 , SEEK_END);
+										lSize = ftell (file);
+										  	
+										rewind (file);
+										if(lSize==infilesize)
+											{
+											//install or uninstall it
+											if (pick==1)Wad_Install(file);
+											if (pick==2)Wad_Uninstall(file);
+											}
+										//close that beast, we're done with it
+										fclose (file);
+										
+										//do we want to keep the file in the wad folder
+										if (WindowPrompt(tr("Delete ?"), tmptxt, tr("Delete"),tr("Keep"))!=0)
+										remove(tmptxt);
+										
+										
+									}
+									else if(strstr(tmptxt,".dol") || strstr(tmptxt,".DOL") ||
+											strstr(tmptxt,".elf") || strstr(tmptxt,".ELF")){
+										 boothomebrew = 2;
+										 menu = MENU_EXIT;
+										 CloseConnection();
+										 break;
+									}
+								}
                     }
                 }
                 CloseConnection();

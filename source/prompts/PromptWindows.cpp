@@ -2665,7 +2665,7 @@ int ProgressUpdateWindow()
     if(newrev > 0) {
 		FILE * pfile;
         sprintf(msg, "Rev%i %s.", newrev, tr("available"));
-        int choice = WindowPrompt(msg, 0, tr("Update"));
+        int choice = WindowPrompt(msg, 0, tr("Update"),tr("Cancel"));
         if(choice == 1) {
             titleTxt.SetTextf("%s USB Loader GX", tr("Updating"));
             msgTxt.SetPosition(0,100);

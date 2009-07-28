@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 23:19-0400\n"
+"POT-Creation-Date: 2009-07-28 05:57-0400\n"
 "PO-Revision-Date: 2009-07-24 11:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe & Cambo\n"
@@ -60,6 +60,33 @@ msgstr "4 (Maggiorenni 18+)"
 msgid "5 min"
 msgstr "5 minuti"
 
+msgid ">> Deleting tickets..."
+msgstr ""
+
+msgid ">> Deleting tickets...ERROR! "
+msgstr ""
+
+msgid ">> Deleting tickets...Ok! "
+msgstr ""
+
+msgid ">> Deleting title ...ERROR! "
+msgstr ""
+
+msgid ">> Deleting title ...Ok!"
+msgstr ""
+
+msgid ">> Deleting title contents..."
+msgstr ""
+
+msgid ">> Deleting title contents...ERROR! "
+msgstr ""
+
+msgid ">> Deleting title contents...Ok!"
+msgstr ""
+
+msgid ">> Deleting title..."
+msgstr ""
+
 msgid ">> Finishing installation..."
 msgstr ">> Sto terminando l'installazione..."
 
@@ -74,6 +101,12 @@ msgstr ">> Sto installando il titolo..."
 
 msgid ">> Reading WAD data..."
 msgstr ">> Sto leggendo i dati del WAD..."
+
+msgid ">> Reading WAD data...ERROR! "
+msgstr ""
+
+msgid ">> Reading WAD data...Ok!"
+msgstr ""
 
 msgid "AUTO"
 msgstr "Automatico"
@@ -277,6 +310,9 @@ msgstr "Impostazioni Predefinite"
 msgid "Delete"
 msgstr "Cancella"
 
+msgid "Delete ?"
+msgstr ""
+
 msgid "Delete Boxart"
 msgstr "Cancella la copertina"
 
@@ -342,6 +378,9 @@ msgstr "Modifica percorso DOL"
 
 msgid "Don't bother the USB Loader GX Team about errors in this file."
 msgstr "Non infastidire il team di sviluppo dell'USB Loader GX per errori in questo file."
+
+msgid "Done!"
+msgstr ""
 
 msgid "Download Boxart image?"
 msgstr "Scaricamento Immagine Boxart?"
@@ -519,6 +558,9 @@ msgstr "Inserisci una scheda SD per Salvare."
 msgid "Insert an SD-Card to use this option."
 msgstr "Inserire scheda SD per questa opzione"
 
+msgid "Install"
+msgstr ""
+
 msgid "Install Error!"
 msgstr "Errore Installazione!"
 
@@ -558,6 +600,9 @@ msgstr "luglio"
 
 msgid "June"
 msgstr "giugno"
+
+msgid "Keep"
+msgstr ""
 
 msgid "Keyboard"
 msgstr "Tastiera"
@@ -764,6 +809,9 @@ msgstr "Avvio Veloce"
 msgid "Reading WAD data... Ok!"
 msgstr "Sto leggendo i dati del WAD... Ok!"
 
+msgid "Received:"
+msgstr ""
+
 msgid "Receiving file from:"
 msgstr "Sto ricevendo il file da:"
 
@@ -919,11 +967,17 @@ msgstr "USB Loader GX è Protetto"
 msgid "Unable to open the wad that was just downloaded (%s)."
 msgstr "Non riesco ad aprire il wad da poco scaricato (%s)."
 
+msgid "Uninstall"
+msgstr "Disinstalla"
+
 msgid "Uninstall Game"
 msgstr "Disinstalla il gioco"
 
 msgid "Uninstall Menu"
 msgstr "Disinstalla il menu"
+
+msgid "Uninstalling wad"
+msgstr ""
 
 msgid "Unlock console to use this option."
 msgstr "Sblocca la Console per usare questa opzione."
@@ -1076,9 +1130,6 @@ msgstr "Percorso titles.txt"
 
 #~ msgid "Leaving so you can restart..."
 #~ msgstr "Sto uscendo per permettere il riavvio..."
-
-#~ msgid "Uninstall"
-#~ msgstr "Disinstalla"
 
 #~ msgid "file(s) left"
 #~ msgstr "file mancante/i"

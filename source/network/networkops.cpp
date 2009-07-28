@@ -24,7 +24,7 @@
 u32 infilesize = 0;
 
 bool updateavailable = false;
-static s32 connection;
+s32 connection;
 static s32 socket;
 static bool updatechecked = false;
 static bool networkinitialized = false;

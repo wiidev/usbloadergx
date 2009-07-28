@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 23:19-0400\n"
+"POT-Creation-Date: 2009-07-28 05:57-0400\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -60,6 +60,33 @@ msgstr "(成人 18歲以上)"
 msgid "5 min"
 msgstr ""
 
+msgid ">> Deleting tickets..."
+msgstr ""
+
+msgid ">> Deleting tickets...ERROR! "
+msgstr ""
+
+msgid ">> Deleting tickets...Ok! "
+msgstr ""
+
+msgid ">> Deleting title ...ERROR! "
+msgstr ""
+
+msgid ">> Deleting title ...Ok!"
+msgstr ""
+
+msgid ">> Deleting title contents..."
+msgstr ""
+
+msgid ">> Deleting title contents...ERROR! "
+msgstr ""
+
+msgid ">> Deleting title contents...Ok!"
+msgstr ""
+
+msgid ">> Deleting title..."
+msgstr ""
+
 msgid ">> Finishing installation..."
 msgstr "正在完成安裝..."
 
@@ -74,6 +101,12 @@ msgstr "正在安裝title..."
 
 msgid ">> Reading WAD data..."
 msgstr "正在讀取WAD資料"
+
+msgid ">> Reading WAD data...ERROR! "
+msgstr ""
+
+msgid ">> Reading WAD data...Ok!"
+msgstr ""
 
 msgid "AUTO"
 msgstr "自動"
@@ -277,6 +310,9 @@ msgstr "初始化設定"
 msgid "Delete"
 msgstr "刪除"
 
+msgid "Delete ?"
+msgstr ""
+
 msgid "Delete Boxart"
 msgstr "刪除外盒圖形"
 
@@ -341,6 +377,9 @@ msgid "Dolpath change"
 msgstr "變更Dol路徑"
 
 msgid "Don't bother the USB Loader GX Team about errors in this file."
+msgstr ""
+
+msgid "Done!"
 msgstr ""
 
 msgid "Download Boxart image?"
@@ -519,6 +558,9 @@ msgstr "插入SD卡儲存."
 msgid "Insert an SD-Card to use this option."
 msgstr "插入SD卡以使用該功能"
 
+msgid "Install"
+msgstr ""
+
 msgid "Install Error!"
 msgstr "安裝錯誤!"
 
@@ -558,6 +600,9 @@ msgstr "七月"
 
 msgid "June"
 msgstr "六月"
+
+msgid "Keep"
+msgstr ""
 
 msgid "Keyboard"
 msgstr "鍵盤"
@@ -764,6 +809,9 @@ msgstr "快速啟動"
 msgid "Reading WAD data... Ok!"
 msgstr "正在讀取wad資料...完成"
 
+msgid "Received:"
+msgstr ""
+
 msgid "Receiving file from:"
 msgstr ""
 
@@ -919,11 +967,17 @@ msgstr "USB Loader GX被鎖定"
 msgid "Unable to open the wad that was just downloaded (%s)."
 msgstr "無法開啟剛下載的wad檔案(%s)"
 
+msgid "Uninstall"
+msgstr "移除"
+
 msgid "Uninstall Game"
 msgstr "刪除遊戲"
 
 msgid "Uninstall Menu"
 msgstr "刪除選單"
+
+msgid "Uninstalling wad"
+msgstr ""
 
 msgid "Unlock console to use this option."
 msgstr "解鎖以進行設定"
@@ -1079,9 +1133,6 @@ msgstr "Title檔案路徑"
 
 #~ msgid "Do you want to boot?"
 #~ msgstr "啟動?"
-
-#~ msgid "Uninstall"
-#~ msgstr "移除"
 
 #~ msgid "file(s) left"
 #~ msgstr "剩下的檔案"
