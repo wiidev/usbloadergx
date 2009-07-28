@@ -308,6 +308,8 @@ int MenuDiscList()
         GuiImageData btnhomeOver(imgPath, menu_button_over_png);
         snprintf(imgPath, sizeof(imgPath), "%sSDcard.png", CFG.theme_path);
         GuiImageData btnsdcard(imgPath, sdcard_png);
+		snprintf(imgPath, sizeof(imgPath), "%sSDcard_over.png", CFG.theme_path);
+        GuiImageData btnsdcardOver(imgPath, sdcard_over_png);
 
         snprintf(imgPath, sizeof(imgPath), "%sbattery.png", CFG.theme_path);
         GuiImageData battery(imgPath, battery_png);
@@ -340,9 +342,10 @@ int MenuDiscList()
         GuiImageData imgarrangeCarousel(imgPath, arrangeCarousel_png);
         snprintf(imgPath, sizeof(imgPath), "%sarrangeCarousel_gray.png", CFG.theme_path);
         GuiImageData imgarrangeCarousel_gray(imgPath, arrangeCarousel_gray_png);
-		  snprintf(imgPath, sizeof(imgPath), "%sbrowser.png", CFG.theme_path);
+		snprintf(imgPath, sizeof(imgPath), "%sbrowser.png", CFG.theme_path);
         GuiImageData homebrewImgData(imgPath, browser_png);
-
+		snprintf(imgPath, sizeof(imgPath), "%sbrowser_over.png", CFG.theme_path);
+        GuiImageData homebrewImgDataOver(imgPath, browser_over_png);
 
 
         GuiTrigger trigA;
@@ -416,8 +419,10 @@ int MenuDiscList()
                 sdcardBtnTT.SetWidescreen(CFG.widescreen);
 		sdcardBtnTT.SetAlpha(THEME.tooltipAlpha);
         GuiImage sdcardImg(&btnsdcard);
+		GuiImage sdcardImgOver(&btnsdcardOver);
         sdcardImg.SetWidescreen(CFG.widescreen);
-        GuiButton sdcardBtn(&sdcardImg,&sdcardImg, 0, 3, THEME.sdcard_x, THEME.sdcard_y, &trigA, &btnSoundOver, &btnClick,1,&sdcardBtnTT,15,-30,0,5);
+        sdcardImgOver.SetWidescreen(CFG.widescreen);
+        GuiButton sdcardBtn(&sdcardImg,&sdcardImgOver, 0, 3, THEME.sdcard_x, THEME.sdcard_y, &trigA, &btnSoundOver, &btnClick,1,&sdcardBtnTT,15,-30,0,5);
 
         GuiButton gameInfo(0,0);
 		gameInfo.SetTrigger(&trig2);
@@ -470,16 +475,15 @@ int MenuDiscList()
         GuiButton carouselBtn(&carouselBtnImg_g,&carouselBtnImg_g, 2, 3, THEME.carousel_x, THEME.carousel_y, &trigA, &btnSoundOver, &btnClick,1);
         carouselBtn.SetAlpha(180);
 
-        GuiImage homebrewBtnImg(&homebrewImgData);
-        homebrewBtnImg.SetWidescreen(CFG.widescreen);
-        GuiButton homebrewBtn(homebrewBtnImg.GetWidth(), homebrewBtnImg.GetHeight());
-        homebrewBtn.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-        homebrewBtn.SetPosition(THEME.homebrew_x,THEME.homebrew_y);
-        homebrewBtn.SetImage(&homebrewBtnImg);
-        homebrewBtn.SetSoundOver(&btnSoundOver);
-        homebrewBtn.SetSoundClick(&btnClick);
-        homebrewBtn.SetEffectGrow();
-        homebrewBtn.SetTrigger(&trigA);
+        GuiTooltip homebrewBtnTT(tr("Homebrew Launcher"));
+        if (Settings.wsprompt == yes)
+				homebrewBtnTT.SetWidescreen(CFG.widescreen);
+		homebrewBtnTT.SetAlpha(THEME.tooltipAlpha);
+        GuiImage homebrewImg(&homebrewImgData);
+        GuiImage homebrewImgOver(&homebrewImgDataOver);
+        homebrewImg.SetWidescreen(CFG.widescreen);
+		homebrewImgOver.SetWidescreen(CFG.widescreen);
+		GuiButton homebrewBtn(&homebrewImg,&homebrewImgOver, 0, 3, THEME.homebrew_x, THEME.homebrew_y, &trigA, &btnSoundOver, &btnClick,1,&homebrewBtnTT,15,-30,0,5);
 
         if (Settings.fave)
         {

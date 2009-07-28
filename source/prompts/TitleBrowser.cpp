@@ -139,7 +139,7 @@ int TitleBrowser(u32 type)
 	GuiTrigger trigB;
 	trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 
-    GuiText titleTxt("Title Launcher", 28, (GXColor){0, 0, 0, 255});
+    GuiText titleTxt(tr("Title Launcher"), 28, (GXColor){0, 0, 0, 255});
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	titleTxt.SetPosition(12,40);
 	titleTxt.SetMaxWidth(356, GuiText::SCROLL);
@@ -235,7 +235,7 @@ int TitleBrowser(u32 type)
 		    char temp[100];
 			 //prompt to boot selected title
 		    snprintf(temp, sizeof(temp), "%s : %s",text,name);
-          int  choice = WindowPrompt("Boot?", temp, tr("OK"), tr("Cancel"));
+          int  choice = WindowPrompt(tr("Boot?"), temp, tr("OK"), tr("Cancel"));
             if(choice) {//if they say yes
 				
 				

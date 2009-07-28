@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 05:27-0400\n"
+"POT-Creation-Date: 2009-07-28 00:26+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -131,6 +131,9 @@ msgstr ""
 
 msgid "Boot/Standard"
 msgstr "Bootstandard"
+
+msgid "Boot?"
+msgstr ""
 
 msgid "Both"
 msgstr "Beides"
@@ -878,6 +881,9 @@ msgstr "Theme Pfad ändern"
 
 msgid "Time left:"
 msgstr "Zeit verbleibend:"
+
+msgid "Title Launcher"
+msgstr ""
 
 msgid "Titles from XML"
 msgstr ""

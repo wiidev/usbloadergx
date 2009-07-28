@@ -26,6 +26,9 @@ extern const u32	gxlogo_png_size;
 extern const u8		sdcard_png[];
 extern const u32	sdcard_png_size;
 
+extern const u8     sdcard_over_png[];
+extern const u32    sdcard_over_png_size;
+
 extern const u8		wiimote_png[];
 extern const u32	wiimote_png_size;
 
@@ -115,6 +118,9 @@ extern const u32    addressbar_textbox_png_size;
 
 extern const u8     browser_png[];
 extern const u32    browser_png_size;
+
+extern const u8     browser_over_png[];
+extern const u32    browser_over_png_size;
 
 extern const u8     nocover_png[];
 extern const u32    nocover_png_size;

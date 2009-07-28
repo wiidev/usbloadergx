@@ -1,10 +1,10 @@
 # USB Loader GX language source file.
-# French V8.6 r640
+# French V8.8 r656
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 05:27-0400\n"
+"POT-Creation-Date: 2009-07-28 00:26+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: Kin8\n"
 "Language-Team: Badablek, Amour, ikya, OuahOuah, dj_skual & Kin8\n"
@@ -131,6 +131,9 @@ msgstr "Bloquer IOS Reload"
 
 msgid "Boot/Standard"
 msgstr "Boot/Standard"
+
+msgid "Boot?"
+msgstr "Lancer ?"
 
 msgid "Both"
 msgstr "Tous"
@@ -320,7 +323,7 @@ msgid "Do you want to retry for 30 secs?"
 msgstr "Réessayer pendant 30 sec. ?"
 
 msgid "Do you want to use the alt dol that is known to be correct?"
-msgstr "Voulez-vous utiliser le DOL Alternatif actuellement connu correct ? "
+msgstr "Voulez-vous utiliser le DOL Alternatif actuellement connu comme correct ? "
 
 msgid "Dol Path"
 msgstr "Dossier DOL Alternatif"
@@ -480,11 +483,11 @@ msgstr "Pressez 1 pour obtenir un lien personnalisé pour votre WiiTDB.zip"
 
 #, c-format
 msgid "Incoming file %0.2fKB"
-msgstr ""
+msgstr "Fichier entrant %0.2fKB"
 
 #, c-format
 msgid "Incoming file %0.2fMB"
-msgstr ""
+msgstr "Fichier entrant %0.2fMB"
 
 msgid "Initializing Network"
 msgstr "Initialisation du réseau"
@@ -527,7 +530,7 @@ msgstr "Installation WAD"
 
 #, c-format
 msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team. %s - %i"
-msgstr "Il semble que vous ayez quelques renseignements qui nous seraient très utiles. SVP, faites passer cette information à l'équipe DEV. %s - %i"
+msgstr "SVP, faîtes passer cette information qui serait très utile à la Team USB Loader GX. %s - %i"
 
 msgid "Italian"
 msgstr "Italien"
@@ -570,7 +573,7 @@ msgid "Load file from: %s ?"
 msgstr "Charger le fichier de: %s ?"
 
 msgid "Load this dol as alternate dol?"
-msgstr "Charger ce DOL comme DOL alternatif ?"
+msgstr "Charger ce fichier comme DOL alternatif ?"
 
 msgid "Loading standard language."
 msgstr "Chargement langue par défaut."
@@ -726,7 +729,7 @@ msgid "Path of titles.txt changed."
 msgstr "Localisation de titles.txt modifié"
 
 msgid "Pick from a list"
-msgstr "Sélection d'une liste"
+msgstr "Sélectionner"
 
 msgid "Play Count"
 msgstr "Utilisation"
@@ -879,6 +882,9 @@ msgstr "Dossier du thème"
 msgid "Time left:"
 msgstr "Fini dans:"
 
+msgid "Title Launcher"
+msgstr "Lanceur de Chaînes"
+
 msgid "Titles from XML"
 msgstr "Titres de XML"
 
@@ -899,7 +905,7 @@ msgid "Uninstall Game"
 msgstr "Désinstaller le Jeu"
 
 msgid "Uninstall Menu"
-msgstr "Menu Désinstallation"
+msgstr "Menu Suppression"
 
 msgid "Unlock console to use this option."
 msgstr "Cette option requiert le déverrouillage de l'interface."
@@ -1009,7 +1015,7 @@ msgid "for"
 msgstr "pour"
 
 msgid "for WiiTDB and hosting covers / disc images"
-msgstr "pour WiiTDB et l'hébergement des jaquettes"
+msgstr "pour WiiTDB et l'héberg. jaquettes"
 
 msgid "for diverse patches"
 msgstr "pour les divers patchs"
@@ -1046,12 +1052,6 @@ msgstr "Localisation titles.txt"
 
 #~ msgid "Leaving so you can restart..."
 #~ msgstr "Redémarrage nécessaire."
-
-#~ msgid "Incomming file %0.2fKB"
-#~ msgstr "Fichier entrant %0.2fKB"
-
-#~ msgid "Incomming file %0.2fMB"
-#~ msgstr "Fichier entrant %0.2fMB"
 
 #~ msgid "Do you want to boot?"
 #~ msgstr "Voulez-vous démarrer ?"

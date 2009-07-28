@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 05:27-0400\n"
+"POT-Creation-Date: 2009-07-28 00:26+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -13,13 +13,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid " could not be downloaded."
-msgstr ""
+msgstr " kunne ikke downloades."
 
 msgid " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information."
-msgstr ""
+msgstr " er blevet gemt. Koderne er ikke blevet kontrolleret. Nogle af koderne virker måske ikke samtidigt. Hvis der er problemer, åbn da tekstfilen i en editor for at få mere information."
 
 msgid " is not on the server."
-msgstr ""
+msgstr " er ikke på serveren."
 
 msgid "(both retired)"
 msgstr "(begge har trukket sig tilbage)"
@@ -31,25 +31,25 @@ msgid "1 (Child 7+)"
 msgstr "1 (Børn 7+)"
 
 msgid "1 hour"
-msgstr ""
+msgstr "1 time"
 
 msgid "10 min"
-msgstr ""
+msgstr "10 min."
 
 msgid "2 (Teen 12+)"
 msgstr "2 (Unge teenagere 12+)"
 
 msgid "20 min"
-msgstr ""
+msgstr "20 min."
 
 msgid "3 (Mature 16+)"
 msgstr "3 (Modne teenagere 12+)"
 
 msgid "3 min"
-msgstr ""
+msgstr "3 min."
 
 msgid "30 min"
-msgstr ""
+msgstr "30 min."
 
 msgid "3D Covers"
 msgstr "3D-Covers"
@@ -58,7 +58,7 @@ msgid "4 (Adults Only 18+)"
 msgstr "4 (Voksne 18+)"
 
 msgid "5 min"
-msgstr ""
+msgstr "5 min."
 
 msgid ">> Finishing installation..."
 msgstr ">> Færdiggør installationen..."
@@ -100,7 +100,7 @@ msgid "Aug"
 msgstr "Aug"
 
 msgid "AutoInit Network"
-msgstr ""
+msgstr "AutoInit net"
 
 msgid "AutoPatch"
 msgstr "AutoPatch"
@@ -131,6 +131,9 @@ msgstr "Blokér IOS-reload"
 
 msgid "Boot/Standard"
 msgstr "Boot/Standard"
+
+msgid "Boot?"
+msgstr ""
 
 msgid "Both"
 msgstr "Begge"
@@ -173,10 +176,10 @@ msgstr "Download af kode"
 
 #, c-format
 msgid "Coded by: %s"
-msgstr ""
+msgstr "Programmeret af: %s"
 
 msgid "Coding:"
-msgstr ""
+msgstr "Programmering:"
 
 msgid "Confirm"
 msgstr "Bekræft"
@@ -221,10 +224,10 @@ msgid "Could not open WBFS partition"
 msgstr "Kunne ikke åbne WBFS-partition"
 
 msgid "Could not open disc."
-msgstr "Kunne ikke åbne disk."
+msgstr "Kunne ikke åbne DVD."
 
 msgid "Could not read the disc."
-msgstr "Kunne ikke læse disk."
+msgstr "Kunne ikke læse DVD."
 
 msgid "Could not set USB."
 msgstr "Kunne ikke sætte USB."
@@ -254,7 +257,7 @@ msgid "DOL from SD"
 msgstr "DOL fra SD"
 
 msgid "DOL from disc"
-msgstr "DOL fra disk"
+msgstr "DOL fra DVD"
 
 msgid "Dec"
 msgstr "Dec"
@@ -278,10 +281,10 @@ msgid "Delete CheatTxt"
 msgstr "Slet CheatTxt"
 
 msgid "Delete Discart"
-msgstr "Slet disk-billede"
+msgstr "Slet DVD-billede"
 
 msgid "Design:"
-msgstr ""
+msgstr "Design:"
 
 msgid "Developed by"
 msgstr "Udviklet af"
@@ -332,13 +335,13 @@ msgid "Dolpath change"
 msgstr "Ændringer af sti til DOL"
 
 msgid "Don't bother the USB Loader GX Team about errors in this file."
-msgstr ""
+msgstr "Lad være med at fortælle holdet bag USB Loader GX om fejl i denne fil."
 
 msgid "Download Boxart image?"
 msgstr "Download boxart-billede?"
 
 msgid "Download Discart image?"
-msgstr "Download disk-billede?"
+msgstr "Download DVD-billede?"
 
 msgid "Download Now"
 msgstr "Download nu"
@@ -374,16 +377,16 @@ msgid "Error 002 fix"
 msgstr "Error 002 fix"
 
 msgid "Error reading Disc"
-msgstr "Disken kunne ikke læses"
+msgstr "DVDen kunne ikke læses"
 
 msgid "Error while transfering data."
-msgstr ""
+msgstr "Fejl under overførsel af data."
 
 msgid "Error..."
 msgstr "Fejl..."
 
 msgid "Error:"
-msgstr ""
+msgstr "Fejl:"
 
 msgid "Exit USB Loader GX?"
 msgstr "Afslut USB Loader GX?"
@@ -407,7 +410,7 @@ msgid "Force"
 msgstr "Tving"
 
 msgid "Format"
-msgstr "Format"
+msgstr "Formater"
 
 msgid "Formatting, please wait..."
 msgstr "Formaterer, vent venligst..."
@@ -480,11 +483,11 @@ msgstr ""
 
 #, c-format
 msgid "Incoming file %0.2fKB"
-msgstr ""
+msgstr "Henter fil %0.2fKB"
 
 #, c-format
 msgid "Incoming file %0.2fMB"
-msgstr ""
+msgstr "Henter fil %0.2fMB"
 
 msgid "Initializing Network"
 msgstr "Initialiserer netforbindelse"
@@ -493,7 +496,7 @@ msgid "Insert Disk"
 msgstr "Indsæt en DVD"
 
 msgid "Insert a Wii Disc!"
-msgstr "Indsæt en wii disk!"
+msgstr "Indsæt en Wii-DVD!"
 
 msgid "Insert an SD-Card to download images."
 msgstr "Indsæt et SD-kort for at downloade billeder."
@@ -567,7 +570,7 @@ msgstr "Load"
 
 #, c-format
 msgid "Load file from: %s ?"
-msgstr ""
+msgstr "Load fil fra %s ?"
 
 msgid "Load this dol as alternate dol?"
 msgstr "Load denne DOL som alternativ DOL?"
@@ -633,10 +636,10 @@ msgid "No WBFS partition found"
 msgstr "Ingen WBFS-partition fundet"
 
 msgid "No data could be read."
-msgstr ""
+msgstr "Data kunne ikke læses."
 
 msgid "No dol file found on disc."
-msgstr "Der blev ikke fundet nogle DOL-filer på disken."
+msgstr "Der blev ikke fundet nogle DOL-filer på DVDen."
 
 msgid "No file missing!"
 msgstr "Ingen filer mangler!"
@@ -654,13 +657,13 @@ msgid "Normal Covers"
 msgstr "Normale Covers"
 
 msgid "Not Found"
-msgstr ""
+msgstr "Ikke fundet"
 
 msgid "Not a Wii Disc"
-msgstr "Ikke en Wii DVD"
+msgstr "Ikke en Wii-DVD"
 
 msgid "Not enough free memory"
-msgstr ""
+msgstr "Ikke nok fri hukommelse"
 
 msgid "Not enough free memory."
 msgstr "Ikke nok fri hukommelse."
@@ -714,7 +717,7 @@ msgid "Password has been changed"
 msgstr "Passwordet er blevet ændret"
 
 msgid "Paste it into your browser to get your WiiTDB.zip."
-msgstr ""
+msgstr "Brug den i en browser for at hente WiiTDB.zip."
 
 msgid "Patch Country Strings"
 msgstr "Patch landeindstillinger"
@@ -750,7 +753,7 @@ msgid "Reading WAD data... Ok!"
 msgstr "Læser WAD-data... Ok!"
 
 msgid "Receiving file from:"
-msgstr ""
+msgstr "Henter fil fra:"
 
 msgid "Released"
 msgstr "Udkommet"
@@ -861,7 +864,7 @@ msgid "TXTCheatcodes Path changed"
 msgstr "Sti til TXTCheatcodes ændret"
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."
-msgstr ""
+msgstr "WAD-filen blev installeret. Den kunne ikke slettes fra SD-kortet."
 
 #, c-format
 msgid "The wad installation failed with error %ld"
@@ -878,6 +881,9 @@ msgstr "Ændringer af sti til temaer"
 
 msgid "Time left:"
 msgstr "Tid tilb.:"
+
+msgid "Title Launcher"
+msgstr ""
 
 msgid "Titles from XML"
 msgstr "Titler fra XML"
@@ -936,7 +942,7 @@ msgstr "VIDTV-patch"
 
 #, c-format
 msgid "Version: %s"
-msgstr ""
+msgstr "Version: %s"
 
 msgid "Video Mode"
 msgstr "Video-mode"
@@ -979,7 +985,7 @@ msgstr "Du skal formatere en partition"
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
-msgstr ""
+msgstr "URLen er blevet gemt som %sWiiTDB_URL.txt."
 
 msgid "available"
 msgstr "tilgængelig"
@@ -1009,7 +1015,7 @@ msgid "for"
 msgstr "for"
 
 msgid "for WiiTDB and hosting covers / disc images"
-msgstr "for WiiTDB og for at hoste covers/disk-billeder"
+msgstr "for WiiTDB og for at hoste covers/DVD-billeder"
 
 msgid "for diverse patches"
 msgstr "for diverse patches"

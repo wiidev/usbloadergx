@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 05:27-0400\n"
+"POT-Creation-Date: 2009-07-28 00:26+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: Kir\n"
 "Language-Team: Kir\n"
@@ -131,6 +131,9 @@ msgstr "Блокировать перезагрузку IOS"
 
 msgid "Boot/Standard"
 msgstr "Загрузка/Стандарт"
+
+msgid "Boot?"
+msgstr ""
 
 msgid "Both"
 msgstr "Оба"
@@ -878,6 +881,9 @@ msgstr "изменить путь к темам"
 
 msgid "Time left:"
 msgstr "Осталось времени:"
+
+msgid "Title Launcher"
+msgstr ""
 
 msgid "Titles from XML"
 msgstr "Названия из XML"

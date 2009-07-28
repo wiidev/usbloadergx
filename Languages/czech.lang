@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 05:27-0400\n"
+"POT-Creation-Date: 2009-07-28 00:26+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) \n"
 "Language-Team: Last version on http://startgolf.tym.cz/czech.lang \n"
@@ -130,6 +130,9 @@ msgid "Block IOS Reload"
 msgstr "Blokovat opetovné zavedení IOS"
 
 msgid "Boot/Standard"
+msgstr ""
+
+msgid "Boot?"
 msgstr ""
 
 msgid "Both"
@@ -878,6 +881,9 @@ msgstr "Zmena cesty ke skinum"
 
 msgid "Time left:"
 msgstr "Zbývající cas:"
+
+msgid "Title Launcher"
+msgstr ""
 
 msgid "Titles from XML"
 msgstr "Názvy z XML"

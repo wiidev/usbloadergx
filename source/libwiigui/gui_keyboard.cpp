@@ -384,7 +384,7 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
 	if (mode == 3){
 	keyClearText = new GuiText("Effacer", 20, (GXColor){0, 0, 0, 0xff});}
 	else {
-	keyClearText = new GuiText("clear", 20, (GXColor){0, 0, 0, 0xff});}
+	keyClearText = new GuiText("Clear", 20, (GXColor){0, 0, 0, 0xff});}
 	keyClear = new GuiButton(keyClearImg, keyClearOverImg, 0, 3, (10*42+40)+eurocheck, 4*42+120, trigA, keySoundOver, keySoundClick,1);
 	//keyClear = new GuiButton(keyMedium->GetWidth(), keyMedium->GetHeight());
 	//keyClear->SetImage(keyClearImg);

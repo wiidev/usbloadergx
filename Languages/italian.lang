@@ -1,10 +1,10 @@
 # USB Loader GX language source file.
-# italian.lang - v26 - r640
+# italian.lang - v27 - r649
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 05:27-0400\n"
+"POT-Creation-Date: 2009-07-28 00:26+0200\n"
 "PO-Revision-Date: 2009-07-24 11:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe & Cambo\n"
@@ -131,6 +131,9 @@ msgstr "Ricarica l'IOS"
 
 msgid "Boot/Standard"
 msgstr "Riavvio/Standard"
+
+msgid "Boot?"
+msgstr ""
 
 msgid "Both"
 msgstr "Entrambi"
@@ -480,11 +483,11 @@ msgstr "Se non hai una connessione WiFi, premi 1 per ottenere un URL dal quale o
 
 #, c-format
 msgid "Incoming file %0.2fKB"
-msgstr ""
+msgstr "Dimensione file %0.2fKB"
 
 #, c-format
 msgid "Incoming file %0.2fMB"
-msgstr ""
+msgstr "Dimensione file %0.2fMB"
 
 msgid "Initializing Network"
 msgstr "Inizializzazione rete"
@@ -879,6 +882,9 @@ msgstr "Modifica Percorso Tema"
 msgid "Time left:"
 msgstr "Restante:"
 
+msgid "Title Launcher"
+msgstr ""
+
 msgid "Titles from XML"
 msgstr "Titoli in XML"
 
@@ -1046,12 +1052,6 @@ msgstr "Percorso titles.txt"
 
 #~ msgid "Leaving so you can restart..."
 #~ msgstr "Sto uscendo per permettere il riavvio..."
-
-#~ msgid "Incomming file %0.2fKB"
-#~ msgstr "Dimensione file %0.2fKB"
-
-#~ msgid "Incomming file %0.2fMB"
-#~ msgstr "Dimensione file %0.2fMB"
 
 #~ msgid "Uninstall"
 #~ msgstr "Disinstalla"

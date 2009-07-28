@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 05:27-0400\n"
+"POT-Creation-Date: 2009-07-28 00:26+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: tj_cool\n"
 "Language-Team: \n"
@@ -131,6 +131,9 @@ msgstr "Stop IOS herladen"
 
 msgid "Boot/Standard"
 msgstr "Start/Standaard"
+
+msgid "Boot?"
+msgstr ""
 
 msgid "Both"
 msgstr "Beide"
@@ -480,11 +483,11 @@ msgstr "Als je geen wifi hebt, druk dan op 1 om een URL voor je wiitdb.zip te kr
 
 #, c-format
 msgid "Incoming file %0.2fKB"
-msgstr ""
+msgstr "Binnenkomend bestand %0.2fKB"
 
 #, c-format
 msgid "Incoming file %0.2fMB"
-msgstr ""
+msgstr "Binnenkomend bestand %0.2fMB"
 
 msgid "Initializing Network"
 msgstr "Netwerk Initializeren"
@@ -879,6 +882,9 @@ msgstr "Locatie thema wijzigen"
 msgid "Time left:"
 msgstr "Tijd over:"
 
+msgid "Title Launcher"
+msgstr ""
+
 msgid "Titles from XML"
 msgstr "XML titels"
 
@@ -1046,12 +1052,6 @@ msgstr "Locatie titles.txt"
 
 #~ msgid "Leaving so you can restart..."
 #~ msgstr "Afsluiten om te herstarten..."
-
-#~ msgid "Incomming file %0.2fKB"
-#~ msgstr "Binnenkomend bestand %0.2fKB"
-
-#~ msgid "Incomming file %0.2fMB"
-#~ msgstr "Binnenkomend bestand %0.2fMB"
 
 #~ msgid "Uninstall"
 #~ msgstr "Verwijderen"

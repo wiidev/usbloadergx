@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 05:27-0400\n"
-"PO-Revision-Date: 2009-07-24 16:45+0200\n"
+"POT-Creation-Date: 2009-07-28 00:26+0200\n"
+"PO-Revision-Date: 2009-07-27 12:20+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,7 @@ msgid " is not on the server."
 msgstr "finns inte på servern."
 
 msgid "(both retired)"
-msgstr "Båda pansionerade"
+msgstr "(Båda pansionerade)"
 
 msgid "0 (Everyone)"
 msgstr "0 (Alla)"
@@ -37,7 +37,7 @@ msgid "10 min"
 msgstr ""
 
 msgid "2 (Teen 12+)"
-msgstr "Tonåringar 12+"
+msgstr "2 (Tonåringar 12+)"
 
 msgid "20 min"
 msgstr ""
@@ -55,7 +55,7 @@ msgid "3D Covers"
 msgstr "3D-Omslag"
 
 msgid "4 (Adults Only 18+)"
-msgstr "Endast Vuxna 18+"
+msgstr "4 (Endast Vuxna 18+)"
 
 msgid "5 min"
 msgstr ""
@@ -127,10 +127,13 @@ msgid "Big thanks to:"
 msgstr "Stort tack till:"
 
 msgid "Block IOS Reload"
-msgstr "Blocka IOS omläs"
+msgstr "Blockera IOS omladdning"
 
 msgid "Boot/Standard"
 msgstr "Boot/Standard"
+
+msgid "Boot?"
+msgstr ""
 
 msgid "Both"
 msgstr "Båda"
@@ -467,7 +470,7 @@ msgid "Homebrew Launcher"
 msgstr "Homebrew Startare"
 
 msgid "Hour"
-msgstr "Timmars"
+msgstr "Timmar"
 
 msgid "How do you want to update?"
 msgstr "Hur vill du uppdatera?"
@@ -480,11 +483,11 @@ msgstr "Om du inte har WiFi, tryck 1 för att få en URL till din WiiTDB.zip"
 
 #, c-format
 msgid "Incoming file %0.2fKB"
-msgstr ""
+msgstr "Inkommande fil %0.2fKB"
 
 #, c-format
 msgid "Incoming file %0.2fMB"
-msgstr ""
+msgstr "Inkommande fil %0.2fMB"
 
 msgid "Initializing Network"
 msgstr "Startar nätverk"
@@ -714,7 +717,7 @@ msgid "Password has been changed"
 msgstr "Lösenordet har ändrats"
 
 msgid "Paste it into your browser to get your WiiTDB.zip."
-msgstr "Klistra in det i din webbläsare för att hämta WiiTDB.zip."
+msgstr "Klistra in det i din webbläsare för att hämta din WiiTDB.zip."
 
 msgid "Patch Country Strings"
 msgstr "Ställ in landssträngar"
@@ -729,7 +732,7 @@ msgid "Pick from a list"
 msgstr "Välj från en lista"
 
 msgid "Play Count"
-msgstr "Spelaträknare"
+msgstr "Spelat"
 
 msgid "Power off the Wii"
 msgstr "Stäng av Wii"
@@ -762,7 +765,7 @@ msgid "Rename Game on WBFS"
 msgstr "Döp om spel på WBFS"
 
 msgid "Reset Playcounter"
-msgstr "Återställ spelaträknare"
+msgstr "Återställ spelat-räknaren"
 
 msgid "Restart"
 msgstr "Starta om"
@@ -878,6 +881,9 @@ msgstr "Byt Tema-mapp"
 
 msgid "Time left:"
 msgstr "Tid kvar:"
+
+msgid "Title Launcher"
+msgstr ""
 
 msgid "Titles from XML"
 msgstr "Titlar från XML"
@@ -1003,7 +1009,7 @@ msgid "files left"
 msgstr "filer kvar"
 
 msgid "files not found on the server!"
-msgstr "Filerna hittades inte på servern!"
+msgstr "filerna hittades inte på servern!"
 
 msgid "for"
 msgstr "för"
@@ -1046,12 +1052,6 @@ msgstr "sökväg till titles.txt"
 
 #~ msgid "Leaving so you can restart..."
 #~ msgstr "Lämnar så du kan starta om..."
-
-#~ msgid "Incomming file %0.2fKB"
-#~ msgstr "Inkommande fil %0.2fKB"
-
-#~ msgid "Incomming file %0.2fMB"
-#~ msgstr "Inkommande fil %0.2fMB"
 
 #~ msgid "Uninstall"
 #~ msgstr "Avinstallera"

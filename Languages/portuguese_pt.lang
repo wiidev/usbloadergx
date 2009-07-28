@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-27 05:27-0400\n"
+"POT-Creation-Date: 2009-07-28 00:26+0200\n"
 "PO-Revision-Date: 2009-07-20 16:40\n"
 "Last-Translator: Sky8000\n"
 "Language-Team: \n"
@@ -131,6 +131,9 @@ msgstr "Bloquear reload do IOS"
 
 msgid "Boot/Standard"
 msgstr "Arranque/Standard"
+
+msgid "Boot?"
+msgstr ""
 
 msgid "Both"
 msgstr "Ambos"
@@ -480,11 +483,11 @@ msgstr "Se não tens rede sem fios pressiona 1 para ver o URL de onde podes desc
 
 #, c-format
 msgid "Incoming file %0.2fKB"
-msgstr ""
+msgstr "A receber ficheiro %0.2fKB"
 
 #, c-format
 msgid "Incoming file %0.2fMB"
-msgstr ""
+msgstr "A receber ficheiro %0.2fMB"
 
 msgid "Initializing Network"
 msgstr "Inicializando Ligação de Rede"
@@ -879,6 +882,9 @@ msgstr "Alterar pasta dos Temas"
 msgid "Time left:"
 msgstr "Tempo restante:"
 
+msgid "Title Launcher"
+msgstr ""
+
 msgid "Titles from XML"
 msgstr "Títulos do XML"
 
@@ -1046,12 +1052,6 @@ msgstr "Pasta titles.txt"
 
 #~ msgid "Leaving so you can restart..."
 #~ msgstr "Saindo para que possas reiniciar..."
-
-#~ msgid "Incomming file %0.2fKB"
-#~ msgstr "A receber ficheiro %0.2fKB"
-
-#~ msgid "Incomming file %0.2fMB"
-#~ msgstr "A receber ficheiro %0.2fMB"
 
 #~ msgid "Uninstall"
 #~ msgstr "Remover"
