@@ -72,8 +72,10 @@ main(int argc, char *argv[])
 	if(!bootDevice_found)
 	{
 		//try USB
-        if(checkfile((char*) "USB:/apps/usbloader_gx/boot.dol") || (checkfile((char*) "USB:/apps/usbloader_gx/boot.elf"))
-            || checkfile((char*) "USB:/apps/usbloadergx/boot.dol") || (checkfile((char*) "USB:/apps/usbloadergx/boot.elf")))
+		//left in all the dol and elf files in this check in case this is the first time running the app and they dont have the config
+        if(checkfile((char*) "USB:/config/GXglobal.cfg") || (checkfile((char*) "USB:/apps/usbloader_gx/boot.elf"))
+            || checkfile((char*) "USB:/apps/usbloadergx/boot.dol") || (checkfile((char*) "USB:/apps/usbloadergx/boot.elf"))
+				|| checkfile((char*) "USB:/apps/usbloader_gx/boot.dol"))
 			strcpy(bootDevice, "USB:");
 	}
 

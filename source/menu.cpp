@@ -1360,8 +1360,8 @@ int MenuDiscList()
 			if(!IsWpadConnected() && check !=0 && Settings.screensaver!=0)
 			{	check++;
 				int screensaverIsOn=0;
-				if(check==100) //to allow time for the wii to turn off and not show the screensaver
-				screensaverIsOn=WindowScreensaver();
+				if(check==11500) //to allow time for the wii to turn off and not show the screensaver
+				{screensaverIsOn=WindowScreensaver();}
 				if (screensaverIsOn==1)check=0;
 			}
 			covertOld=covert;
