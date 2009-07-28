@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-28 00:26+0200\n"
+"POT-Creation-Date: 2009-07-27 23:19-0400\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: Kin8\n"
 "Language-Team: Badablek, Amour, ikya, OuahOuah, dj_skual & Kin8\n"
@@ -80,6 +80,9 @@ msgstr "AUTO"
 
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "Toutes les fonctionnalités sont déverrouillées."
+
+msgid "Alt Dol Path"
+msgstr ""
 
 msgid "Alternate DOL"
 msgstr "DOL Alternatif"
@@ -295,6 +298,9 @@ msgstr "Disque par défaut"
 msgid "Disc Images"
 msgstr "Labels DVD"
 
+msgid "Disc Path"
+msgstr ""
+
 msgid "Discimage Path"
 msgstr "Dossier Labels DVD"
 
@@ -424,6 +430,9 @@ msgstr "Français"
 msgid "Full Shutdown"
 msgstr "Éteindre"
 
+msgid "GCT Cheat Path"
+msgstr ""
+
 msgid "GCT File created"
 msgstr "Fichier GCT créé"
 
@@ -468,6 +477,9 @@ msgstr "Dossier Homebrew Apps modifié"
 
 msgid "Homebrew Launcher"
 msgstr "Lanceur Homebrew"
+
+msgid "Homebrew Path"
+msgstr ""
 
 msgid "Hour"
 msgstr "heures"
@@ -857,6 +869,9 @@ msgstr "Système par défaut"
 msgid "TChinese"
 msgstr "Chinois traditionnel"
 
+msgid "TXT Cheat Path"
+msgstr ""
+
 msgid "TXTCheatcodes Path"
 msgstr "Dossier TXTCodes Triche"
 
@@ -869,6 +884,9 @@ msgstr "Le Wad a été installé. Mais ne peut être supprimé de la carte SD."
 #, c-format
 msgid "The wad installation failed with error %ld"
 msgstr "L'installation WAD a échoué avec erreur %ld"
+
+msgid "Theme Path"
+msgstr ""
 
 msgid "ThemePath"
 msgstr "Dossier Thème"
@@ -922,6 +940,9 @@ msgstr "Totale"
 msgid "Update DOL"
 msgstr "DOL seul"
 
+msgid "Update Path"
+msgstr ""
+
 msgid "Update failed"
 msgstr "Mise à Jour échouée"
 
@@ -967,6 +988,9 @@ msgstr "Illumination Wii"
 
 msgid "Wrong Password"
 msgstr "Mot de passe incorrect"
+
+msgid "XML Path"
+msgstr ""
 
 msgid "Yes"
 msgstr "Oui"

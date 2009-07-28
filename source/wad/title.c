@@ -680,9 +680,13 @@ s32 getTitles_TypeCount(u32 type, u32 *count) {
 	int i;
 	type_count = 0;
 	for (i=0; i < __num_titles; i++) {
-		u32 upper;
+		u32 upper, lower;
 		upper = __title_list[i] >> 32;
-		if(upper == type)
+		lower = __title_list[i] & 0xFFFFFFFF;
+		if((upper == type)&&
+			((lower !=0x48414741)&&//this filters out haga,haaa, hafa.  dupe foctory channels that don't load
+			(lower !=0x48414141)&&//since we dont care about apps that dont load for what we are doing
+			(lower !=0x48414641)))
 			type_count++;
 	}
 	*count = type_count;
@@ -702,7 +706,10 @@ s32 getTitles_Type(u32 type, u32 *titles, u32 count) {
 		u32 upper, lower;
 		upper = __title_list[i] >> 32;
 		lower = __title_list[i] & 0xFFFFFFFF;
-		if(upper == type) {
+		if((upper == type)&&
+			((lower !=0x48414741)&&
+			(lower !=0x48414141)&&
+			(lower !=0x48414641))) {
 			titles[type_count]=lower;
 			type_count++;
 		}

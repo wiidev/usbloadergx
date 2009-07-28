@@ -37,8 +37,10 @@ int TitleBrowser(u32 type)
 
 	u32 num_titles;
 	u32 titles[100] ATTRIBUTE_ALIGN(32);
+	u32 num_sys_titles;
+	u32 sys_titles[10] ATTRIBUTE_ALIGN(32);
 	s32 ret = -1;
-	
+	int numtitle;//to get rid of a stupid compile wrning
 		//open the database file
 	FILE *f;
 	char path[100];
@@ -66,14 +68,30 @@ int TitleBrowser(u32 type)
 			//exit(1);
 		}
 		
+		// Get count of system titles
+		ret = getTitles_TypeCount(0x00010002, &num_sys_titles);
+		if (ret < 0){
+			//printf("\tError! Can't get count of titles! (ret = %d)\n", ret);
+			//exit(1);
+		}
+		
+		// Get system titles
+		ret = getTitles_Type(0x00010002, sys_titles, num_sys_titles);
+		if (ret < 0){
+			//printf("\tError! Can't get list of titles! (ret = %d)\n", ret);
+			//exit(1);
+		}
+		
+
+		
 	
-	customOptionList options3(num_titles);
+	customOptionList options3(num_titles+num_sys_titles);
 	//write the titles on the option browser
 	u32 i = 0;
 			
 			
 
-	
+			//first add the good stuff
 			while (i < num_titles){
 			//start from the beginning of the file each loop
 			if (f)rewind(f);
@@ -83,7 +101,7 @@ int TitleBrowser(u32 type)
 				
 				//set the title's name, number, ID to text 
 				sprintf(text, "%s", titleText(type, titles[i]));
-				getTitle_Name(name, TITLE_ID(type, titles[i]), text);
+				//getTitle_Name(name, TITLE_ID(type, titles[i]), text);
 				
 				//get name from database cause i dont like the ADT function
 						char line[200];
@@ -119,7 +137,54 @@ int TitleBrowser(u32 type)
 				//move on to the next title
 				i++;
 			}
+			
+			// now add the crappy system titles
+			while (i < num_titles+num_sys_titles){
+			//start from the beginning of the file each loop
+			if (f)rewind(f);
+				char name[50];
+				char text[15];
+				strcpy(name,"");//make sure name is empty
+				
+				//set the title's name, number, ID to text 
+				sprintf(text, "%s", titleText(0x00010002, sys_titles[i-num_titles]));
+				//getTitle_Name(name, TITLE_ID(0x00010002, sys_titles[i-num_titles]), text);
+				
+				//get name from database cause i dont like the ADT function
+						char line[200];
+						char tmp[50];
+						snprintf(tmp,50,tmp," ");
+						snprintf(name,sizeof(name),"Unknown Title");
 
+						if (!f) {
+							sprintf(name,"Unknown--<No DB>");
+						}
+						else
+						{
+						while (fgets(line, sizeof(line), f)) {
+								if (line[0]== text[0]&&
+									line[1]== text[1]&&
+									line[2]== text[2])
+								{	int j=0;
+									for(j=0;(line[j+4]!='\0' || j<51);j++)
+										
+										tmp[j]=line[j+4];
+										snprintf(name,sizeof(name),"%s",tmp);
+										break;
+
+								}
+							
+						}
+					
+					}
+				//set the text to the option browser
+				options3.SetName(i, "%s",text);
+				options3.SetValue(i, "%s",name);
+				//options3.SetValue(i, " (%08x)",titles[i]);
+				//move on to the next title
+				i++;
+			}
+	
 	bool exit = false;
 
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
@@ -180,7 +245,7 @@ int TitleBrowser(u32 type)
 	mainWindow->Append(&w);
 
 	ResumeGui();
-	
+	numtitle=num_titles;
 	while(!exit)
 	{
 		VIDEO_WaitVSync();
@@ -199,7 +264,8 @@ int TitleBrowser(u32 type)
 				if (f)rewind(f);
 				strcpy(name,"");//make sure name is empty
 				
-				
+				if (ret<numtitle)
+				{
 				//set the title's name, number, ID to text 
 				sprintf(text, "%s", titleText(type, titles[ret]));
 				getTitle_Name(name, TITLE_ID(type, titles[ret]), text);
@@ -225,19 +291,15 @@ int TitleBrowser(u32 type)
 										tmp[j]=line[j+4];
 										snprintf(name,sizeof(name),"%s",tmp);
 										break;
-
 								}
-							
 						}
-					
 					}
-				
-		    char temp[100];
-			 //prompt to boot selected title
-		    snprintf(temp, sizeof(temp), "%s : %s",text,name);
-          int  choice = WindowPrompt(tr("Boot?"), temp, tr("OK"), tr("Cancel"));
-            if(choice) {//if they say yes
-				
+					char temp[100];
+					 //prompt to boot selected title
+					 snprintf(temp, sizeof(temp), "%s : %s",text,name);
+					 int  choice = WindowPrompt(tr("Boot?"), temp, tr("OK"), tr("Cancel"));
+						if(choice) {//if they say yes
+						
 				
 				//stop all this stuff before starting the channel
 					fclose(f);
@@ -256,6 +318,64 @@ int TitleBrowser(u32 type)
 					ret = -1;
 					optionBrowser3.ResetState();
 					}
+					
+				}
+				else//if they clicked a system title
+				{
+				//set the title's name, number, ID to text 
+				sprintf(text, "%s", titleText(0x00010002, sys_titles[ret-num_titles]));
+				getTitle_Name(name, TITLE_ID(0x00010002, sys_titles[ret-num_titles]), text);
+				
+				//get name from database cause i dont like the ADT function
+						char line[200];
+						char tmp[50];
+						snprintf(tmp,50,tmp," ");
+						snprintf(name,sizeof(name),"Unknown Title");
+
+						if (!f) {
+							sprintf(name,"Unknown--<No DB>");
+						}
+						else
+						{
+						while (fgets(line, sizeof(line), f)) {
+								if (line[0]== text[0]&&
+									line[1]== text[1]&&
+									line[2]== text[2])
+								{	int j=0;
+									for(j=0;(line[j+4]!='\0' || j<51);j++)
+										
+										tmp[j]=line[j+4];
+										snprintf(name,sizeof(name),"%s",tmp);
+										break;
+								}
+						}
+					}
+					char temp[100];
+					 //prompt to boot selected title
+					 snprintf(temp, sizeof(temp), "%s : %s May not boot correctly if your System Menu is not up to date.",text,name);
+					 int  choice = WindowPrompt(tr("Boot?"), temp, tr("OK"), tr("Cancel"));
+						if(choice) {//if they say yes
+						
+				
+				//stop all this stuff before starting the channel
+					fclose(f);
+					CloseXMLDatabase();
+					ExitGUIThreads();
+					ShutdownAudio();
+					StopGX();
+						WII_Initialize();
+						WII_LaunchTitle(TITLE_ID(0x00010002,sys_titles[ret-num_titles]));
+                //this really shouldn't be needed because the title will be booted
+					 exit = true;
+                break;
+            }
+				else{
+					//if they said no to booting the title
+					ret = -1;
+					optionBrowser3.ResetState();
+					}
+					
+				}
 		}
 
 		if (cancelBtn.GetState() == STATE_CLICKED)
@@ -273,6 +393,5 @@ int TitleBrowser(u32 type)
 	
 	return ret;
 }
-
 
 

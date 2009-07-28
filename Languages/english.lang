@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-28 00:26+0200\n"
+"POT-Creation-Date: 2009-07-27 23:19-0400\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -79,6 +79,9 @@ msgid "AUTO"
 msgstr ""
 
 msgid "All the features of USB Loader GX are unlocked."
+msgstr ""
+
+msgid "Alt Dol Path"
 msgstr ""
 
 msgid "Alternate DOL"
@@ -295,6 +298,9 @@ msgstr ""
 msgid "Disc Images"
 msgstr ""
 
+msgid "Disc Path"
+msgstr ""
+
 msgid "Discimage Path"
 msgstr ""
 
@@ -424,6 +430,9 @@ msgstr ""
 msgid "Full Shutdown"
 msgstr ""
 
+msgid "GCT Cheat Path"
+msgstr ""
+
 msgid "GCT File created"
 msgstr ""
 
@@ -467,6 +476,9 @@ msgid "Homebrew Appspath changed"
 msgstr ""
 
 msgid "Homebrew Launcher"
+msgstr ""
+
+msgid "Homebrew Path"
 msgstr ""
 
 msgid "Hour"
@@ -857,6 +869,9 @@ msgstr ""
 msgid "TChinese"
 msgstr ""
 
+msgid "TXT Cheat Path"
+msgstr ""
+
 msgid "TXTCheatcodes Path"
 msgstr ""
 
@@ -868,6 +883,9 @@ msgstr ""
 
 #, c-format
 msgid "The wad installation failed with error %ld"
+msgstr ""
+
+msgid "Theme Path"
 msgstr ""
 
 msgid "ThemePath"
@@ -922,6 +940,9 @@ msgstr ""
 msgid "Update DOL"
 msgstr ""
 
+msgid "Update Path"
+msgstr ""
+
 msgid "Update failed"
 msgstr ""
 
@@ -966,6 +987,9 @@ msgid "Wiilight"
 msgstr ""
 
 msgid "Wrong Password"
+msgstr ""
+
+msgid "XML Path"
 msgstr ""
 
 msgid "Yes"
