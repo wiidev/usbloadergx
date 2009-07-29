@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-28 22:47-0400\n"
+"POT-Creation-Date: 2009-07-29 12:52-0400\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: ziom666 (zadania_prog@vp.pl)\n"
 "Language-Team: \n"
@@ -119,6 +119,9 @@ msgstr "USB Loader GX odblokowany"
 
 msgid "Alternate DOL"
 msgstr "Alternatywny DOL"
+
+msgid "An Error accured"
+msgstr ""
 
 msgid "Anti"
 msgstr "Anty"
@@ -656,8 +659,8 @@ msgstr "Maj"
 msgid "Missing files"
 msgstr "Brakuje plików"
 
-msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
-msgstr "Prawdopodobnie rozdzielczoSc nie jest podzielna przez 4."
+msgid "Most likely it has dimensions that are not evenly divisible by 4."
+msgstr ""
 
 msgid "Music Volume"
 msgstr "Poziom gloSnoSci"
@@ -869,9 +872,6 @@ msgstr "Ustawic jako muzyke w tle?"
 msgid "Settings"
 msgstr "Ustawienia"
 
-msgid "Shit"
-msgstr ""
-
 msgid "Shutdown System"
 msgstr "Wylacz"
 
@@ -1006,6 +1006,15 @@ msgstr "Zmieniono Sciezke aktualizacji"
 msgid "Updating"
 msgstr "Aktualizowanie"
 
+msgid "Updating Language Files"
+msgstr ""
+
+msgid "Updating Language files"
+msgstr ""
+
+msgid "Updating WiiTDB.zip"
+msgstr ""
+
 msgid "VIDTV Patch"
 msgstr ""
 
@@ -1122,8 +1131,11 @@ msgstr "z"
 msgid "seconds left"
 msgstr "sekund pozostalo"
 
-msgid "there was an error"
-msgstr "blad"
+#~ msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
+#~ msgstr "Prawdopodobnie rozdzielczoSc nie jest podzielna przez 4."
+
+#~ msgid "there was an error"
+#~ msgstr "blad"
 
 #~ msgid "Path of titles.txt change"
 #~ msgstr "Zmien Sciezke titles.txt"

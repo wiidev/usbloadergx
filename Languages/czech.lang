@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-28 22:47-0400\n"
+"POT-Creation-Date: 2009-07-29 12:52-0400\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) \n"
 "Language-Team: r662 - last version on http://startgolf.tym.cz/czech.lang \n"
@@ -119,6 +119,9 @@ msgstr "Všechny možnosti USB Loader GX jsou odemceny"
 
 msgid "Alternate DOL"
 msgstr "Náhradní DOL"
+
+msgid "An Error accured"
+msgstr ""
 
 msgid "Anti"
 msgstr ""
@@ -656,8 +659,8 @@ msgstr "Kvet"
 msgid "Missing files"
 msgstr "Chybející soubory"
 
-msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
-msgstr "Nejspíše má velikost, která není delitelná 4."
+msgid "Most likely it has dimensions that are not evenly divisible by 4."
+msgstr ""
 
 msgid "Music Volume"
 msgstr "Hlasitost hudby"
@@ -869,9 +872,6 @@ msgstr "Nastavit jako hudbu na pozadí?"
 msgid "Settings"
 msgstr "Nastavení"
 
-msgid "Shit"
-msgstr "Kecy"
-
 msgid "Shutdown System"
 msgstr "Ukoncit systém"
 
@@ -1006,6 +1006,15 @@ msgstr "Cesta pro aktualizaci zmenena"
 msgid "Updating"
 msgstr "Aktualizuji"
 
+msgid "Updating Language Files"
+msgstr ""
+
+msgid "Updating Language files"
+msgstr ""
+
+msgid "Updating WiiTDB.zip"
+msgstr ""
+
 msgid "VIDTV Patch"
 msgstr "VIDTV korekce"
 
@@ -1122,8 +1131,14 @@ msgstr "z"
 msgid "seconds left"
 msgstr "sekund zbývá"
 
-msgid "there was an error"
-msgstr "došlo k chybe"
+#~ msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
+#~ msgstr "Nejspíše má velikost, která není delitelná 4."
+
+#~ msgid "Shit"
+#~ msgstr "Kecy"
+
+#~ msgid "there was an error"
+#~ msgstr "došlo k chybe"
 
 #~ msgid "Received:"
 #~ msgstr "Přijato:"

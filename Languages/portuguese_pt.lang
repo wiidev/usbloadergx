@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-28 22:47-0400\n"
+"POT-Creation-Date: 2009-07-29 12:52-0400\n"
 "PO-Revision-Date: 2009-07-20 16:40\n"
 "Last-Translator: Sky8000\n"
 "Language-Team: \n"
@@ -119,6 +119,9 @@ msgstr "As configurações estão desbloqueadas."
 
 msgid "Alternate DOL"
 msgstr "DOL alternativo"
+
+msgid "An Error accured"
+msgstr ""
 
 msgid "Anti"
 msgstr "Anti"
@@ -656,8 +659,8 @@ msgstr "Mai"
 msgid "Missing files"
 msgstr "Ficheiros em falta"
 
-msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
-msgstr "O mais provável é que o tamanho não seja divisível por 4. Que estupidez."
+msgid "Most likely it has dimensions that are not evenly divisible by 4."
+msgstr ""
 
 msgid "Music Volume"
 msgstr "Volume Música"
@@ -869,9 +872,6 @@ msgstr "Definir como música de fundo?"
 msgid "Settings"
 msgstr "Configurações"
 
-msgid "Shit"
-msgstr "Raios"
-
 msgid "Shutdown System"
 msgstr "Desligar"
 
@@ -1006,6 +1006,15 @@ msgstr "A pasta das actualizações foi alterada."
 msgid "Updating"
 msgstr "Actualizando"
 
+msgid "Updating Language Files"
+msgstr ""
+
+msgid "Updating Language files"
+msgstr ""
+
+msgid "Updating WiiTDB.zip"
+msgstr ""
+
 msgid "VIDTV Patch"
 msgstr "Patch VIDTV"
 
@@ -1122,8 +1131,14 @@ msgstr "de"
 msgid "seconds left"
 msgstr "segundos restantes"
 
-msgid "there was an error"
-msgstr "ocorreu um erro"
+#~ msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
+#~ msgstr "O mais provável é que o tamanho não seja divisível por 4. Que estupidez."
+
+#~ msgid "Shit"
+#~ msgstr "Raios"
+
+#~ msgid "there was an error"
+#~ msgstr "ocorreu um erro"
 
 #~ msgid "Path of titles.txt change"
 #~ msgstr "Alterar pasta do titles.txt"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-28 22:47-0400\n"
+"POT-Creation-Date: 2009-07-29 12:52-0400\n"
 "PO-Revision-Date: 2009-07-24 11:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe & Cambo\n"
@@ -119,6 +119,9 @@ msgstr "Tutte le funzioni di USB Loader GX sono sbloccate."
 
 msgid "Alternate DOL"
 msgstr "DOL alternativo"
+
+msgid "An Error accured"
+msgstr ""
 
 msgid "Anti"
 msgstr "Anti"
@@ -656,8 +659,8 @@ msgstr "maggio"
 msgid "Missing files"
 msgstr "File Mancante/i"
 
-msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
-msgstr "Molto probabilmente le dimensioni non sono divisibili per 4."
+msgid "Most likely it has dimensions that are not evenly divisible by 4."
+msgstr ""
 
 msgid "Music Volume"
 msgstr "Volume"
@@ -869,9 +872,6 @@ msgstr "Imposto come Musica Sottofondo?"
 msgid "Settings"
 msgstr "Impostazioni"
 
-msgid "Shit"
-msgstr "Cavoli"
-
 msgid "Shutdown System"
 msgstr "Spegnimento"
 
@@ -1007,6 +1007,15 @@ msgstr "Perc. Aggiornamento Modificato"
 msgid "Updating"
 msgstr "Aggiornamento"
 
+msgid "Updating Language Files"
+msgstr ""
+
+msgid "Updating Language files"
+msgstr ""
+
+msgid "Updating WiiTDB.zip"
+msgstr ""
+
 msgid "VIDTV Patch"
 msgstr "Video Forzato"
 
@@ -1123,8 +1132,14 @@ msgstr "di"
 msgid "seconds left"
 msgstr "secondi mancanti"
 
-msgid "there was an error"
-msgstr "c'è stato un errore"
+#~ msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
+#~ msgstr "Molto probabilmente le dimensioni non sono divisibili per 4."
+
+#~ msgid "Shit"
+#~ msgstr "Cavoli"
+
+#~ msgid "there was an error"
+#~ msgstr "c'è stato un errore"
 
 #~ msgid "Received:"
 #~ msgstr "Ricevuto/i"

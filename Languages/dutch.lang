@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-28 22:47-0400\n"
+"POT-Creation-Date: 2009-07-29 12:52-0400\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: tj_cool\n"
 "Language-Team: \n"
@@ -119,6 +119,9 @@ msgstr "Alle functies zijn vrijgegeven."
 
 msgid "Alternate DOL"
 msgstr "Alternatieve DOL"
+
+msgid "An Error accured"
+msgstr ""
 
 msgid "Anti"
 msgstr "Anti"
@@ -656,8 +659,8 @@ msgstr "Mei"
 msgid "Missing files"
 msgstr "Missende bestanden"
 
-msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
-msgstr "Waarschijnlijk zijn de dimensies niet deelbaar door 4."
+msgid "Most likely it has dimensions that are not evenly divisible by 4."
+msgstr ""
 
 msgid "Music Volume"
 msgstr "Muziekvolume"
@@ -869,9 +872,6 @@ msgstr "Instellen als achtergrondmuziek?"
 msgid "Settings"
 msgstr "Instellingen"
 
-msgid "Shit"
-msgstr "Shit"
-
 msgid "Shutdown System"
 msgstr "Systeem uitzetten"
 
@@ -1006,6 +1006,15 @@ msgstr "Updatelocatie gewijzigd."
 msgid "Updating"
 msgstr "Updaten"
 
+msgid "Updating Language Files"
+msgstr ""
+
+msgid "Updating Language files"
+msgstr ""
+
+msgid "Updating WiiTDB.zip"
+msgstr ""
+
 msgid "VIDTV Patch"
 msgstr "VIDTV patchen"
 
@@ -1122,8 +1131,14 @@ msgstr "van"
 msgid "seconds left"
 msgstr "seconden over:"
 
-msgid "there was an error"
-msgstr "er is een fout opgetreden"
+#~ msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
+#~ msgstr "Waarschijnlijk zijn de dimensies niet deelbaar door 4."
+
+#~ msgid "Shit"
+#~ msgstr "Shit"
+
+#~ msgid "there was an error"
+#~ msgstr "er is een fout opgetreden"
 
 #~ msgid "Received:"
 #~ msgstr "Ontvangen:"

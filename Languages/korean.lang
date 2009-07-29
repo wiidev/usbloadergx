@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-28 22:47-0400\n"
+"POT-Creation-Date: 2009-07-29 12:52-0400\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -118,6 +118,9 @@ msgid "All the features of USB Loader GX are unlocked."
 msgstr "USB로더 GX 기능 잠금 해제."
 
 msgid "Alternate DOL"
+msgstr ""
+
+msgid "An Error accured"
 msgstr ""
 
 msgid "Anti"
@@ -656,7 +659,7 @@ msgstr ""
 msgid "Missing files"
 msgstr "파일 누락"
 
-msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
+msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr ""
 
 msgid "Music Volume"
@@ -869,9 +872,6 @@ msgstr ""
 msgid "Settings"
 msgstr "설정"
 
-msgid "Shit"
-msgstr ""
-
 msgid "Shutdown System"
 msgstr "시스템 종료"
 
@@ -1006,6 +1006,15 @@ msgstr ""
 msgid "Updating"
 msgstr ""
 
+msgid "Updating Language Files"
+msgstr ""
+
+msgid "Updating Language files"
+msgstr ""
+
+msgid "Updating WiiTDB.zip"
+msgstr ""
+
 msgid "VIDTV Patch"
 msgstr "VIDTV 패치"
 
@@ -1121,9 +1130,6 @@ msgstr "중"
 
 msgid "seconds left"
 msgstr "초 남았습니다"
-
-msgid "there was an error"
-msgstr ""
 
 #~ msgid "file(s) left"
 #~ msgstr "파일 남음"

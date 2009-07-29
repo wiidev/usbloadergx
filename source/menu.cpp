@@ -47,6 +47,7 @@
 
 #include "usbloader/wdvd.h"
 
+
 #define MAX_CHARACTERS		38
 
 /*** Variables that are also used extern ***/
@@ -202,7 +203,7 @@ static void * UpdateGUI (void *arg)
  ***************************************************************************/
 void InitGUIThreads()
 {
-	LWP_CreateThread(&guithread, UpdateGUI, NULL, NULL, 0, 70);
+	LWP_CreateThread(&guithread, UpdateGUI, NULL, NULL, 0, 75);
 	InitProgressThread();
 	InitBufferThread();
 	InitNetworkThread();
@@ -716,6 +717,10 @@ int MenuDiscList()
 
         ResumeGui();
 
+
+
+				
+
 		while(menu == MENU_NONE)
         {
 
@@ -801,6 +806,7 @@ int MenuDiscList()
 
                 if(poweroffBtn.GetState() == STATE_CLICKED)
                 {
+					 
 
                         choice = WindowPrompt(tr("How to Shutdown?"),0,tr("Full Shutdown"), tr("Shutdown to Idle"), tr("Cancel"));
                         if(choice == 2)

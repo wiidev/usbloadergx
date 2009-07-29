@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-28 22:47-0400\n"
+"POT-Creation-Date: 2009-07-29 12:52-0400\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: Kin8\n"
 "Language-Team: Badablek, Amour, ikya, OuahOuah, dj_skual & Kin8\n"
@@ -119,6 +119,9 @@ msgstr "Toutes les fonctionnalités sont déverrouillées."
 
 msgid "Alternate DOL"
 msgstr "DOL Alternatif"
+
+msgid "An Error accured"
+msgstr ""
 
 msgid "Anti"
 msgstr "Anti"
@@ -656,8 +659,8 @@ msgstr "Mai"
 msgid "Missing files"
 msgstr "Fichier(s) manquant(s)"
 
-msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
-msgstr "Il est fort probable que les dimensions ne soient pas des multiples de 4."
+msgid "Most likely it has dimensions that are not evenly divisible by 4."
+msgstr ""
 
 msgid "Music Volume"
 msgstr "Volume Musique"
@@ -869,9 +872,6 @@ msgstr "Utiliser comme fond sonore ?"
 msgid "Settings"
 msgstr "Paramètres"
 
-msgid "Shit"
-msgstr "Oops!"
-
 msgid "Shutdown System"
 msgstr "Arrêt"
 
@@ -1006,6 +1006,15 @@ msgstr "Dossier de Mise à Jour changé."
 msgid "Updating"
 msgstr "Mise à Jour"
 
+msgid "Updating Language Files"
+msgstr ""
+
+msgid "Updating Language files"
+msgstr ""
+
+msgid "Updating WiiTDB.zip"
+msgstr ""
+
 msgid "VIDTV Patch"
 msgstr "Patch VIDTV"
 
@@ -1122,8 +1131,14 @@ msgstr "sur"
 msgid "seconds left"
 msgstr "secondes restantes"
 
-msgid "there was an error"
-msgstr "une erreur s'est produite"
+#~ msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
+#~ msgstr "Il est fort probable que les dimensions ne soient pas des multiples de 4."
+
+#~ msgid "Shit"
+#~ msgstr "Oops!"
+
+#~ msgid "there was an error"
+#~ msgstr "une erreur s'est produite"
 
 #~ msgid "Received:"
 #~ msgstr "Reçu:"

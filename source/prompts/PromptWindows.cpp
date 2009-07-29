@@ -32,6 +32,7 @@
 #include "audio.h"
 #include "xml/xml.h"
 #include "../wad/title.h"
+#include "language/UpdateLanguage.h"
 
 
 /*** Variables that are also used extern ***/
@@ -2465,6 +2466,7 @@ int ProgressUpdateWindow()
                     fclose(pfile);
                     free(file.data);
                 }
+				msgTxt.SetTextf("%s", tr("Updating WiiTDB.zip"));
 				file = downloadfile(XMLurl);
 				if(file.data != NULL){
 				sprintf(xmliconpath, "%swiitdb.zip", Settings.titlestxt_path);
@@ -2473,6 +2475,8 @@ int ProgressUpdateWindow()
 				fclose(pfile);
 				free(file.data);
                 }
+				msgTxt.SetTextf("%s", tr("Updating Language files"));
+				updateLanguageFiles();
 				}
                 }
             }else {
@@ -2648,7 +2652,7 @@ int ProgressUpdateWindow()
 //    char dolpathsuccess[150];//use coverspath as a folder for the update wad so we dont make a new folder and have to delete it
     snprintf(dolpath, sizeof(dolpath), "%sULNR.wad", Settings.covers_path);
     //snprintf(dolpathsuccess, sizeof(dolpathsuccess), "%sUNEO.wad", Settings.covers_path);
-
+	Initialize_Network();
 	while (!IsNetworkInit()) {
 
         VIDEO_WaitVSync();
@@ -2680,11 +2684,7 @@ int ProgressUpdateWindow()
         if(choice == 1) {
             titleTxt.SetTextf("%s USB Loader GX", tr("Updating"));
             msgTxt.SetPosition(0,100);
-            promptWindow.Append(&progressbarEmptyImg);
-            promptWindow.Append(&progressbarImg);
-            promptWindow.Append(&progressbarOutlineImg);
-            promptWindow.Append(&prTxt);
-            msgTxt.SetTextf("%s Rev%i wad.", tr("Downloading"), newrev);//download the wad but it is saved as a genaric file.
+            msgTxt.SetTextf("%s", tr("Updating WiiTDB.zip"));//download the wad but it is saved as a genaric file.
 
 				struct block file = downloadfile(XMLurl);
 				char xmliconpath[100];
@@ -2695,6 +2695,13 @@ int ProgressUpdateWindow()
 				fclose(pfile);
 				free(file.data);
 				}
+				msgTxt.SetTextf("%s", tr("Updating Language Files"));
+				updateLanguageFiles();
+				promptWindow.Append(&progressbarEmptyImg);
+            promptWindow.Append(&progressbarImg);
+            promptWindow.Append(&progressbarOutlineImg);
+            promptWindow.Append(&prTxt);
+				msgTxt.SetTextf("%s Rev%i wad.", tr("Downloading"), newrev);
 			s32 filesize = download_request("http://www.techjawa.com/usbloadergx/ULNR.file");//for some reason it didn't download completely when saved as a wad.
 			if(filesize > 0) {
 

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-28 22:47-0400\n"
+"POT-Creation-Date: 2009-07-29 12:52-0400\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -119,6 +119,9 @@ msgstr "Alle funksjonene til USB Loader GX er opplåst."
 
 msgid "Alternate DOL"
 msgstr "Alternativ DOL"
+
+msgid "An Error accured"
+msgstr ""
 
 msgid "Anti"
 msgstr "Anti"
@@ -656,8 +659,8 @@ msgstr "Mai"
 msgid "Missing files"
 msgstr "Manglende filer"
 
-msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
-msgstr "Sannsynligvis har bildet dimensjoner som ikke kan deles med 4."
+msgid "Most likely it has dimensions that are not evenly divisible by 4."
+msgstr ""
 
 msgid "Music Volume"
 msgstr "Musikk volum"
@@ -869,9 +872,6 @@ msgstr "Bruk som bakgrunnsmusikk?"
 msgid "Settings"
 msgstr "Innstillinger"
 
-msgid "Shit"
-msgstr "Oops"
-
 msgid "Shutdown System"
 msgstr "Skru helt av"
 
@@ -1006,6 +1006,15 @@ msgstr "Oppdatering sti endret."
 msgid "Updating"
 msgstr "Oppdaterer"
 
+msgid "Updating Language Files"
+msgstr ""
+
+msgid "Updating Language files"
+msgstr ""
+
+msgid "Updating WiiTDB.zip"
+msgstr ""
+
 msgid "VIDTV Patch"
 msgstr "VIDTV Patch"
 
@@ -1122,8 +1131,14 @@ msgstr "av"
 msgid "seconds left"
 msgstr "sekunder gjenstår"
 
-msgid "there was an error"
-msgstr "en feil har oppstått"
+#~ msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
+#~ msgstr "Sannsynligvis har bildet dimensjoner som ikke kan deles med 4."
+
+#~ msgid "Shit"
+#~ msgstr "Oops"
+
+#~ msgid "there was an error"
+#~ msgstr "en feil har oppstått"
 
 #~ msgid "Received:"
 #~ msgstr "Mottatt:"

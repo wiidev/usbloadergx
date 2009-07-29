@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-28 22:47-0400\n"
+"POT-Creation-Date: 2009-07-29 12:52-0400\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: Tusk\n"
 "Language-Team: \n"
@@ -119,6 +119,9 @@ msgstr "Az USB Loader GX minden funkciója elérhetõ."
 
 msgid "Alternate DOL"
 msgstr "Alternatív DOL"
+
+msgid "An Error accured"
+msgstr ""
 
 msgid "Anti"
 msgstr "Anti"
@@ -656,8 +659,8 @@ msgstr "Máj"
 msgid "Missing files"
 msgstr "Hiányzó Fájl"
 
-msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
-msgstr "Úgy néz ki a kép felbontása nem osztható 4-el. Mehet a kukába."
+msgid "Most likely it has dimensions that are not evenly divisible by 4."
+msgstr ""
 
 msgid "Music Volume"
 msgstr "Zene Hangereje"
@@ -869,9 +872,6 @@ msgstr "Beállítod háttérzenének?"
 msgid "Settings"
 msgstr "Beállítások"
 
-msgid "Shit"
-msgstr ""
-
 msgid "Shutdown System"
 msgstr "Rendszer Leállítása"
 
@@ -1006,6 +1006,15 @@ msgstr "Frissítés útvonala megváltozott."
 msgid "Updating"
 msgstr "Frissítés"
 
+msgid "Updating Language Files"
+msgstr ""
+
+msgid "Updating Language files"
+msgstr ""
+
+msgid "Updating WiiTDB.zip"
+msgstr ""
+
 msgid "VIDTV Patch"
 msgstr "VIDTV Patch"
 
@@ -1122,8 +1131,8 @@ msgstr " "
 msgid "seconds left"
 msgstr "hátralévõ másodperc"
 
-msgid "there was an error"
-msgstr ""
+#~ msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
+#~ msgstr "Úgy néz ki a kép felbontása nem osztható 4-el. Mehet a kukába."
 
 #~ msgid "Path of titles.txt change"
 #~ msgstr "titles.txt útvonalának megváltoztatása"

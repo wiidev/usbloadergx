@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-28 22:47-0400\n"
+"POT-Creation-Date: 2009-07-29 12:52-0400\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -118,6 +118,9 @@ msgid "All the features of USB Loader GX are unlocked."
 msgstr "全ての機能がｱﾝﾛｯｸされました"
 
 msgid "Alternate DOL"
+msgstr ""
+
+msgid "An Error accured"
 msgstr ""
 
 msgid "Anti"
@@ -656,7 +659,7 @@ msgstr "5月"
 msgid "Missing files"
 msgstr "検出できなかったﾌｧｲﾙ"
 
-msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
+msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr ""
 
 msgid "Music Volume"
@@ -869,9 +872,6 @@ msgstr "ｻｳﾝﾄﾞとして設定する"
 msgid "Settings"
 msgstr "設定"
 
-msgid "Shit"
-msgstr ""
-
 msgid "Shutdown System"
 msgstr "ｼｽﾃﾑを終了する"
 
@@ -1006,6 +1006,15 @@ msgstr "更新Pathを変更しました"
 msgid "Updating"
 msgstr "更新中"
 
+msgid "Updating Language Files"
+msgstr ""
+
+msgid "Updating Language files"
+msgstr ""
+
+msgid "Updating WiiTDB.zip"
+msgstr ""
+
 msgid "VIDTV Patch"
 msgstr "VIDTVﾊﾟｯﾁ"
 
@@ -1121,9 +1130,6 @@ msgstr "of"
 
 msgid "seconds left"
 msgstr "完了までの秒数"
-
-msgid "there was an error"
-msgstr ""
 
 #~ msgid "Path of titles.txt change"
 #~ msgstr "titles.txtのPath変更"

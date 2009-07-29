@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-28 22:47-0400\n"
+"POT-Creation-Date: 2009-07-29 12:52-0400\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -119,6 +119,9 @@ msgstr "USB Loader GX功能已解鎖."
 
 msgid "Alternate DOL"
 msgstr "替代Dol"
+
+msgid "An Error accured"
+msgstr ""
 
 msgid "Anti"
 msgstr "防止"
@@ -656,8 +659,8 @@ msgstr "五月"
 msgid "Missing files"
 msgstr "缺少的檔案"
 
-msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
-msgstr "該圖檔格式可能不正確"
+msgid "Most likely it has dimensions that are not evenly divisible by 4."
+msgstr ""
 
 msgid "Music Volume"
 msgstr "音量"
@@ -869,9 +872,6 @@ msgstr "設定背景音樂"
 msgid "Settings"
 msgstr "設定"
 
-msgid "Shit"
-msgstr "XX"
-
 msgid "Shutdown System"
 msgstr "關閉系統"
 
@@ -1006,6 +1006,15 @@ msgstr "更新路徑已變更"
 msgid "Updating"
 msgstr "正在更新"
 
+msgid "Updating Language Files"
+msgstr ""
+
+msgid "Updating Language files"
+msgstr ""
+
+msgid "Updating WiiTDB.zip"
+msgstr ""
+
 msgid "VIDTV Patch"
 msgstr "VIDTV修改"
 
@@ -1122,8 +1131,14 @@ msgstr "剩餘空間 總容量"
 msgid "seconds left"
 msgstr "剩餘秒數"
 
-msgid "there was an error"
-msgstr "發生錯誤"
+#~ msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
+#~ msgstr "該圖檔格式可能不正確"
+
+#~ msgid "Shit"
+#~ msgstr "XX"
+
+#~ msgid "there was an error"
+#~ msgstr "發生錯誤"
 
 #~ msgid "Path of titles.txt change"
 #~ msgstr "變更Title檔案路徑"

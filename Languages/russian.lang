@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-28 22:47-0400\n"
+"POT-Creation-Date: 2009-07-29 12:52-0400\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: Kir\n"
 "Language-Team: Kir\n"
@@ -119,6 +119,9 @@ msgstr "Все функции USB Loader GX разблокированы."
 
 msgid "Alternate DOL"
 msgstr "Альтернативный DOL"
+
+msgid "An Error accured"
+msgstr ""
 
 msgid "Anti"
 msgstr "Анти"
@@ -656,8 +659,8 @@ msgstr "Май"
 msgid "Missing files"
 msgstr "Отсутствующие файлы"
 
-msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
-msgstr "Размеры картинки не делятся на 4. Поздравляю, блин."
+msgid "Most likely it has dimensions that are not evenly divisible by 4."
+msgstr ""
 
 msgid "Music Volume"
 msgstr "Громкость"
@@ -869,9 +872,6 @@ msgstr "установить как фоновую музыку"
 msgid "Settings"
 msgstr "Установки"
 
-msgid "Shit"
-msgstr ""
-
 msgid "Shutdown System"
 msgstr "Выключить систему"
 
@@ -1006,6 +1006,15 @@ msgstr "Путь к обновлениям изменен"
 msgid "Updating"
 msgstr "обновляю"
 
+msgid "Updating Language Files"
+msgstr ""
+
+msgid "Updating Language files"
+msgstr ""
+
+msgid "Updating WiiTDB.zip"
+msgstr ""
+
 msgid "VIDTV Patch"
 msgstr "Патч VIDTV"
 
@@ -1122,8 +1131,8 @@ msgstr "из"
 msgid "seconds left"
 msgstr "секунд осталось"
 
-msgid "there was an error"
-msgstr ""
+#~ msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
+#~ msgstr "Размеры картинки не делятся на 4. Поздравляю, блин."
 
 #~ msgid "Path of titles.txt change"
 #~ msgstr "изменить путь к titles.txt"
