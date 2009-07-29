@@ -1743,7 +1743,7 @@ void SearchMissingImages(int choice2)
 			break;
 		}
     }
-	
+
     if (IsNetworkInit()) {
             msgTxt.SetTextf("IP: %s", GetNetworkIP());
 			cntMissFiles = 0;
@@ -2763,7 +2763,7 @@ int ProgressUpdateWindow()
     if(!failed && ret >= 0) {
 
 		FILE *wadFile = NULL;
-		s32 shit = 1;
+		s32 error = 1;
 		int diarhea = 0;
 				char nipple[100];
 				wadFile = fopen (dolpath ,"rb");
@@ -2775,20 +2775,20 @@ int ProgressUpdateWindow()
 				else{
 				//sprintf(nipple, tr("The update wad has been saved as %s.  Now let's try to install it."),dolpath);
 				//WindowPrompt(0,nipple, tr("Ok"));
-				shit = Wad_Install(wadFile);
+				error = Wad_Install(wadFile);
 				fclose(wadFile);
-				if (shit==0){
+				if (error==0){
 					diarhea = remove(dolpath);
 					if (diarhea)
 				WindowPrompt(tr("Success"),tr("The wad file was installed.  But It could not be deleted from the SD card."),tr("Ok"));
 				}else{
-				sprintf(nipple, tr("The wad installation failed with error %ld"),shit);
+				sprintf(nipple, tr("The wad installation failed with error %ld"),error);
 				WindowPrompt(tr("Error"),nipple,tr("Ok"));
 				}
 			}
 
-			if (shit)
-        WindowPrompt(tr("Shit") , tr("there was an error"), tr("OK"));
+			if (error)
+        WindowPrompt(tr("ERROR") , tr("An Error accured"), tr("OK"));
 		  else
         WindowPrompt(tr("Successfully Updated") , tr("Restarting..."), 0,0,0,0,150);
         CloseXMLDatabase();

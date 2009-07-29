@@ -239,7 +239,7 @@ void rockout(int f = 0)
 		pointer[3] = new GuiImageData(imgPath, player4_point_png);
 	}
 	else{
-		
+
 		for(int i = 0; i < 4; i++)
 			delete pointer[i];
 		snprintf(imgPath, sizeof(imgPath), "%srplayer1_point.png", CFG.theme_path);
@@ -721,7 +721,8 @@ int MenuDiscList()
 
 				if (idiotFlag==1){
 				char idiotBuffer[200];
-				snprintf(idiotBuffer, sizeof(idiotBuffer), "%s (%s). %s",tr("You have attempted to load a bad image"), idiotChar,tr("Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."));
+				snprintf(idiotBuffer, sizeof(idiotBuffer), "%s (%s). %s",tr("You have attempted to load a bad image"),
+                            idiotChar,tr("Most likely it has dimensions that are not evenly divisible by 4."));
 
 			int deleteImg = WindowPrompt(0,idiotBuffer,tr("Ok"),tr("Delete"));
 				if(deleteImg==0)
@@ -1089,7 +1090,7 @@ int MenuDiscList()
 
                         if (gameSelected > 0) //if click occured
                                 selectimg = gameSelected;
-											
+
                         if ((selectimg >= 0) && (selectimg < (s32) gameCnt))
                         {
                                 if (selectimg != selectedold)
@@ -1191,7 +1192,7 @@ int MenuDiscList()
                 }
 
 				if ((gameSelected >= 0) && (gameSelected < (s32)gameCnt))
-                {			
+                {
 								rockout();
                         struct discHdr *header = &gameList[gameSelected];
                         WBFS_GameSize(header->id, &size);
@@ -1340,7 +1341,7 @@ int MenuDiscList()
                                         else if (Settings.gameDisplay==carousel) mainWindow->Remove(gameCarousel);
                                         mainWindow->Remove(&w);
                                         ResumeGui();
-													 
+
 													 //re-evaluate header now in case they changed games while on the game prompt
 													 header = &gameList[gameSelected];
                                         int settret = GameSettings(header);
