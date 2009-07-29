@@ -864,14 +864,47 @@ int MenuHomebrewBrowse()
 									//if we got a wad
 									if(strstr(tmptxt,".wad") || strstr(tmptxt,".WAD"))
 									{	
-										//what do we want to do with the wad
-										int pick = WindowPrompt(tr("Received:"), tmptxt, tr("Install"),tr("Uninstall"),tr("Cancel"));
-										//save that biatch to the wad folder	
+									
+									//make a window come up and say that we are saving this file
+									//because stupid people were clicking buttons while it was saving and tearing stuff up
+										GuiWindow promptWindow(472,320);
+										promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+										promptWindow.SetPosition(0, -10);
+										//char imgPath[100];
+										snprintf(imgPath, sizeof(imgPath), "%sdialogue_box.png", CFG.theme_path);
+										GuiImageData dialogBox(imgPath, dialogue_box_png);
+										GuiImage dialogBoxImg(&dialogBox);
+										if (Settings.wsprompt == yes){
+										dialogBoxImg.SetWidescreen(CFG.widescreen);}
+										GuiText msgTxt(tr("Saving"), 20, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+										msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+										msgTxt.SetPosition(0,100);
 										sprintf(tmptxt,"%s/wad/%s",bootDevice,filename);
+										GuiText msg2Txt(tmptxt, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+										msg2Txt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+										msg2Txt.SetPosition(0,130);
+										promptWindow.Append(&dialogBoxImg);
+										promptWindow.Append(&msgTxt);
+										promptWindow.Append(&msg2Txt);
+										HaltGui();
+										mainWindow->SetState(STATE_DISABLED);
+										mainWindow->Append(&promptWindow);
+										mainWindow->ChangeFocus(&promptWindow);
+										ResumeGui();
+
+									
+									
+										//what do we want to do with the wad
+										//save that biatch to the wad folder	
+										
 										FILE * file = fopen(tmptxt, "w");
 										fwrite (innetbuffer , 1 , infilesize , file );
 										fclose (file);
 										
+										HaltGui();
+										mainWindow->Remove(&promptWindow);
+										mainWindow->SetState(STATE_DEFAULT);
+										ResumeGui();
 										//get it out of the memory
 										FreeHomebrewBuffer();
 										
@@ -886,6 +919,7 @@ int MenuHomebrewBrowse()
 										rewind (file);
 										if(lSize==infilesize)
 											{
+											int pick = WindowPrompt(tr(" Wad Saved as:"), tmptxt, tr("Install"),tr("Uninstall"),tr("Cancel"));
 											//install or uninstall it
 											if (pick==1)Wad_Install(file);
 											if (pick==2)Wad_Uninstall(file);

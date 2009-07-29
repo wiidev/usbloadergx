@@ -4,13 +4,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-29 00:53+0200\n"
+"POT-Creation-Date: 2009-07-28 22:47-0400\n"
 "PO-Revision-Date: 2009-07-20 16:40\n"
 "Last-Translator: Sky8000\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+msgid " Wad Saved as:"
+msgstr ""
 
 msgid " could not be downloaded."
 msgstr " não foi descarregado."
@@ -803,9 +806,6 @@ msgstr "Arranque Rápido"
 msgid "Reading WAD data... Ok!"
 msgstr "Lendo dados do WAD... Ok!"
 
-msgid "Received:"
-msgstr ""
-
 msgid "Receiving file from:"
 msgstr "Recebendo ficheiro de:"
 
@@ -853,6 +853,9 @@ msgstr "Gravar"
 
 msgid "Save Failed"
 msgstr "Falha ao Gravar"
+
+msgid "Saving"
+msgstr ""
 
 msgid "Screensaver"
 msgstr "Protecção de ecrã"

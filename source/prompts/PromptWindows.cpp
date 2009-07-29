@@ -789,7 +789,7 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 	GuiButton btn1(&btn1Img,&btn1OverImg, 0, 3, 0, 0, &trigA, &btnSoundOver, &btnClick,0);
 	btn1.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
 
-	GuiText btn2Txt(btn1Label, 28, (GXColor){0, 0, 0, 255});
+	GuiText btn2Txt((HBC!=1?"Homebrew Channel":btn1Label), 28, (GXColor){0, 0, 0, 255});
 	GuiImage btn2Img(&button);
 	if (Settings.wsprompt == yes){
 	btn2Txt.SetWidescreen(CFG.widescreen);
@@ -811,8 +811,7 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 	btn3.SetLabel(&btn3Txt);
 	btn3.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_IN, 50);
 	btn3.SetRumble(false);
-	if (HBC==1){btn3.SetPosition(150, 0);}
-	else {btn3.SetPosition(0,0);}
+	btn3.SetPosition(150, 0);
 
 	GuiImage btn4Img(&bottom);
 	GuiImage btn4OverImg(&bottomOver);
@@ -827,7 +826,7 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 	wiimoteImg.SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_IN, 50);
 	wiimoteImg.SetPosition(50,210);
 
-	if (HBC==1){promptWindow.Append(&btn2);}
+	promptWindow.Append(&btn2);
     promptWindow.Append(&btn3);
     promptWindow.Append(&btn4);
     promptWindow.Append(&btn1);
@@ -906,7 +905,16 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 		else if(btn2.GetState() == STATE_CLICKED) {
             ret = WindowPrompt(tr("Are you sure?"), 0, tr("Yes"), tr("No"));
 			if (ret == 1) {
-			choice = 2;
+				if (HBC!=1)
+				{
+					CloseXMLDatabase();
+					ExitGUIThreads();
+					ShutdownAudio();
+					StopGX();
+					WII_Initialize();
+					WII_LaunchTitle(TITLE_ID(0x00010001,0x48415858));
+				}
+				choice = 2;
 			}
 			HaltGui();
             mainWindow->SetState(STATE_DISABLED);

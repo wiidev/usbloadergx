@@ -218,12 +218,15 @@ void ExitGUIThreads()
 	guithread = LWP_THREAD_NULL;
 }
 void rockout(int f = 0)
-{
+{	
+
+	if (f==2)gameSelected = -1;
 	char imgPath[100];
 	#ifdef HW_RVL
 	if(!(strcasestr(get_title(&gameList[gameSelected]),"guitar")||
 		strcasestr(get_title(&gameList[gameSelected]),"band")||
-		strcasestr(get_title(&gameList[gameSelected]),"rock"))){
+		strcasestr(get_title(&gameList[gameSelected]),"rock")||
+		f==1)){
 		for(int i = 0; i < 4; i++)
 			delete pointer[i];
 		snprintf(imgPath, sizeof(imgPath), "%splayer1_point.png", CFG.theme_path);
@@ -339,10 +342,11 @@ int MenuDiscList()
         GuiImageData btnhome(imgPath, menu_button_png);
         snprintf(imgPath, sizeof(imgPath), "%smenu_button_over.png", CFG.theme_path);
         GuiImageData btnhomeOver(imgPath, menu_button_over_png);
-        snprintf(imgPath, sizeof(imgPath), "%sSDcard.png", CFG.theme_path);
-        GuiImageData btnsdcard(imgPath, sdcard_png);
-		snprintf(imgPath, sizeof(imgPath), "%sSDcard_over.png", CFG.theme_path);
+        snprintf(imgPath, sizeof(imgPath), "%sSDcard_over.png", CFG.theme_path);
         GuiImageData btnsdcardOver(imgPath, sdcard_over_png);
+		  snprintf(imgPath, sizeof(imgPath), "%sSDcard.png", CFG.theme_path);
+        GuiImageData btnsdcard(imgPath, sdcard_png);
+
 
         snprintf(imgPath, sizeof(imgPath), "%sbattery.png", CFG.theme_path);
         GuiImageData battery(imgPath, battery_png);
@@ -1054,7 +1058,7 @@ int MenuDiscList()
                     snprintf (IDfull,sizeof(IDfull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
 					choice = showGameInfo(IDfull);
                     gameInfo.ResetState();
-						  rockout(0);
+						  rockout(2);
 						  if (choice==2)
 							homeBtn.SetState(STATE_CLICKED);
                 }
@@ -1375,7 +1379,7 @@ int MenuDiscList()
                                         else if (Settings.gameDisplay==carousel){gameCarousel->SetFocus(1);}
                                 }
 										  //reset cursor
-										  rockout(0);
+										  rockout(2);
                         }
                 }
 			// to skip the first call of windowScreensaver at startup when wiimote is not connected

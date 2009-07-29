@@ -133,7 +133,7 @@ int TitleBrowser(u32 type)
 				//set the text to the option browser
 				options3.SetName(i, "%s",text);
 				options3.SetValue(i, "%s",name);
-				//options3.SetValue(i, " (%08x)",titles[i]);
+				//options3.SetValue(i, " (%08x)",titles[i]);//use this line to show the number to call to launch the channel
 				//move on to the next title
 				i++;
 			}

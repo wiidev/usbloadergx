@@ -24,6 +24,7 @@ static char progressMsg1[150];
 static char progressMsg2[150];
 static char progressTime[80];
 static char progressSizeLeft[80];
+static char progressSpeed[15];
 static int showProgress = 0;
 static f32 progressDone = 0.0;
 static bool showTime = false;
@@ -84,7 +85,9 @@ static void GameInstallProgress() {
     progressDone = 100.0*gameinstalldone/gameinstalltotal;
 
     snprintf(progressTime, sizeof(progressTime), "%s %d:%02d:%02d",tr("Time left:"),h,m,s);
-    snprintf(progressSizeLeft, sizeof(progressSizeLeft), "%.2fGB/%.2fGB %.1fMB/s", gamesize * gameinstalldone/gameinstalltotal, gamesize, speed);
+    snprintf(progressSizeLeft, sizeof(progressSizeLeft), "%.2fGB/%.2fGB", gamesize * gameinstalldone/gameinstalltotal, gamesize);
+	 snprintf(progressSpeed, sizeof(progressSpeed), "%.1fMB/s", speed);
+
 }
 
 /****************************************************************************
@@ -155,7 +158,7 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	titleTxt.SetPosition(0,60);
 
-	GuiText msg1Txt(msg1, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	GuiText msg1Txt(msg1, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	msg1Txt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	if(msg2)
         msg1Txt.SetPosition(0,120);
@@ -163,22 +166,26 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
         msg1Txt.SetPosition(0,100);
 	msg1Txt.SetMaxWidth(430, GuiText::DOTTED);
 
-	GuiText msg2Txt(msg2, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	GuiText msg2Txt(msg2, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	msg2Txt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	msg2Txt.SetPosition(0,125);
 	msg2Txt.SetMaxWidth(430, GuiText::DOTTED);
 
-    GuiText prsTxt("%", 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+    GuiText prsTxt("%", 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	prsTxt.SetAlignment(ALIGN_RIGHT, ALIGN_MIDDLE);
 	prsTxt.SetPosition(-188,40);
 
-    GuiText timeTxt(NULL, 24, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+    GuiText timeTxt(NULL, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
     timeTxt.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
 	timeTxt.SetPosition(280,-50);
 
-    GuiText sizeTxt(NULL, 24, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+    GuiText sizeTxt(NULL, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
     sizeTxt.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-	sizeTxt.SetPosition(35, -50);
+	sizeTxt.SetPosition(50, -50);
+
+	 GuiText speedTxt(NULL, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+    speedTxt.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+	speedTxt.SetPosition(50, -74);
 
 	GuiText prTxt(NULL, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	prTxt.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
@@ -195,6 +202,8 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
 
 		timeTxt.SetPosition(250,-50);
 		timeTxt.SetFontSize(20);
+		speedTxt.SetPosition(90,-74);
+		speedTxt.SetFontSize(20);
 		sizeTxt.SetPosition(90, -50);
 		sizeTxt.SetFontSize(20);
 	}
@@ -217,8 +226,10 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
 		promptWindow.Append(&msg2Txt);
 	if(showTime)
         promptWindow.Append(&timeTxt);
-    if(showSize)
+    if(showSize){
         promptWindow.Append(&sizeTxt);
+		  promptWindow.Append(&speedTxt);
+		  }
 
 	HaltGui();
 	promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
@@ -249,8 +260,10 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
 
         prTxt.SetTextf("%.2f", progressDone);
 
-        if(showSize)
+        if(showSize){
             sizeTxt.SetText(progressSizeLeft);
+				speedTxt.SetText(progressSpeed);
+				}
         if(showTime)
             timeTxt.SetText(progressTime);
 	}

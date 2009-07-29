@@ -26,6 +26,9 @@ extern const u32	gxlogo_png_size;
 extern const u8		sdcard_png[];
 extern const u32	sdcard_png_size;
 
+extern const u8		sdcard_over_png[];
+extern const u32	sdcard_over_png_size;
+
 extern const u8     Wifi_btn_png[];
 extern const u32    Wifi_btn_png_size;
 
@@ -471,8 +474,5 @@ extern const u32	pegi_16_png_size;
 
 extern const u8		pegi_18_png[];
 extern const u32	pegi_18_png_size;
-
-extern const u8		ocarina_png[];
-extern const u32	ocarina_png_size;
 
 #endif
