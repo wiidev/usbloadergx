@@ -1,10 +1,10 @@
 # USB Loader GX language source file.
-# italian.lang - v27 - r649
+# italian.lang - v28 - r662
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-28 05:57-0400\n"
+"POT-Creation-Date: 2009-07-29 01:39+0200\n"
 "PO-Revision-Date: 2009-07-24 11:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe & Cambo\n"
@@ -61,31 +61,31 @@ msgid "5 min"
 msgstr "5 minuti"
 
 msgid ">> Deleting tickets..."
-msgstr ""
+msgstr ">> Cancellazione ticket..."
 
 msgid ">> Deleting tickets...ERROR! "
-msgstr ""
+msgstr ">> Cancellazione ticket...ERRORE! "
 
 msgid ">> Deleting tickets...Ok! "
-msgstr ""
+msgstr ">> Cancellazione ticket...OK! "
 
 msgid ">> Deleting title ...ERROR! "
-msgstr ""
+msgstr ">> Cancellazione titolo...ERRORE! "
 
 msgid ">> Deleting title ...Ok!"
-msgstr ""
+msgstr ">> Cancellazione titolo...OK! "
 
 msgid ">> Deleting title contents..."
-msgstr ""
+msgstr ">> Cancellazione contenuti..."
 
 msgid ">> Deleting title contents...ERROR! "
-msgstr ""
+msgstr ">> Cancellazione contenuti...ERRORE! "
 
 msgid ">> Deleting title contents...Ok!"
-msgstr ""
+msgstr ">> Cancellazione contenuti...OK! "
 
 msgid ">> Deleting title..."
-msgstr ""
+msgstr ">> Cancellazione titolo..."
 
 msgid ">> Finishing installation..."
 msgstr ">> Sto terminando l'installazione..."
@@ -100,22 +100,19 @@ msgid ">> Installing title..."
 msgstr ">> Sto installando il titolo..."
 
 msgid ">> Reading WAD data..."
-msgstr ">> Sto leggendo i dati del WAD..."
+msgstr ">> Lettura dati WAD..."
 
 msgid ">> Reading WAD data...ERROR! "
-msgstr ""
+msgstr ">> Lettura dati WAD...ERRORE! "
 
 msgid ">> Reading WAD data...Ok!"
-msgstr ""
+msgstr ">> Lettura dati WAD...OK!"
 
 msgid "AUTO"
 msgstr "Automatico"
 
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "Tutte le funzioni di USB Loader GX sono sbloccate."
-
-msgid "Alt Dol Path"
-msgstr ""
 
 msgid "Alternate DOL"
 msgstr "DOL alternativo"
@@ -169,7 +166,7 @@ msgid "Boot/Standard"
 msgstr "Riavvio/Standard"
 
 msgid "Boot?"
-msgstr ""
+msgstr "Vuoi riavviare?"
 
 msgid "Both"
 msgstr "Entrambi"
@@ -181,7 +178,7 @@ msgid "Can't create directory"
 msgstr "Non posso creare la cartella"
 
 msgid "Can't delete:"
-msgstr "Non Posso Eliminare:"
+msgstr "Non posso eliminare:"
 
 msgid "Cancel"
 msgstr "Cancella"
@@ -311,16 +308,16 @@ msgid "Delete"
 msgstr "Cancella"
 
 msgid "Delete ?"
-msgstr ""
+msgstr "Vuoi eliminare ?"
 
 msgid "Delete Boxart"
-msgstr "Cancella la copertina"
+msgstr "Elimina la copertina"
 
 msgid "Delete CheatTxt"
-msgstr "Cancella il file dei trucchi"
+msgstr "Elimina il file dei trucchi"
 
 msgid "Delete Discart"
-msgstr "Cancella l'immagine disco"
+msgstr "Elimina l'immagine disco"
 
 msgid "Design:"
 msgstr "Grafica:"
@@ -333,9 +330,6 @@ msgstr "Predefinita Disco"
 
 msgid "Disc Images"
 msgstr "Immagini Disco"
-
-msgid "Disc Path"
-msgstr ""
 
 msgid "Discimage Path"
 msgstr "Percorso Imm. Disco"
@@ -351,6 +345,18 @@ msgstr "Gira i dischi"
 
 msgid "Display"
 msgstr "Display"
+
+msgid "Display as a carousel"
+msgstr ""
+
+msgid "Display as a grid"
+msgstr ""
+
+msgid "Display as a list"
+msgstr ""
+
+msgid "Display favorites"
+msgstr ""
 
 msgid "Do you really want to delete:"
 msgstr "Vuoi veramente eliminare:"
@@ -380,7 +386,7 @@ msgid "Don't bother the USB Loader GX Team about errors in this file."
 msgstr "Non infastidire il team di sviluppo dell'USB Loader GX per errori in questo file."
 
 msgid "Done!"
-msgstr ""
+msgstr "Fatto!"
 
 msgid "Download Boxart image?"
 msgstr "Scaricamento Immagine Boxart?"
@@ -467,10 +473,7 @@ msgid "French"
 msgstr "Francese"
 
 msgid "Full Shutdown"
-msgstr "Spegnimento Completo"
-
-msgid "GCT Cheat Path"
-msgstr ""
+msgstr "Completo"
 
 msgid "GCT File created"
 msgstr "File GCT creato"
@@ -517,9 +520,6 @@ msgstr "Percorso app. Homebrew modificato"
 msgid "Homebrew Launcher"
 msgstr "Applicazioni Homebrew"
 
-msgid "Homebrew Path"
-msgstr ""
-
 msgid "Hour"
 msgstr "ore"
 
@@ -559,7 +559,7 @@ msgid "Insert an SD-Card to use this option."
 msgstr "Inserire scheda SD per questa opzione"
 
 msgid "Install"
-msgstr ""
+msgstr "Installa"
 
 msgid "Install Error!"
 msgstr "Errore Installazione!"
@@ -602,7 +602,7 @@ msgid "June"
 msgstr "giugno"
 
 msgid "Keep"
-msgstr ""
+msgstr "Mantieni"
 
 msgid "Keyboard"
 msgstr "Tastiera"
@@ -779,12 +779,6 @@ msgstr "Copialo nel tuo browser per scaricare il file WiiTDB.zip."
 msgid "Patch Country Strings"
 msgstr "Patch Regione"
 
-msgid "Path of titles.txt change"
-msgstr "Modifica percorso per titles.txt"
-
-msgid "Path of titles.txt changed."
-msgstr "Percorso per titles.txt modificato."
-
 msgid "Pick from a list"
 msgstr "Seleziona da un elenco"
 
@@ -810,7 +804,7 @@ msgid "Reading WAD data... Ok!"
 msgstr "Sto leggendo i dati del WAD... Ok!"
 
 msgid "Received:"
-msgstr ""
+msgstr "Ricevuto/i"
 
 msgid "Receiving file from:"
 msgstr "Sto ricevendo il file da:"
@@ -879,7 +873,13 @@ msgid "Shutdown System"
 msgstr "Spegnimento"
 
 msgid "Shutdown to Idle"
-msgstr "StandBy"
+msgstr "Preaccensione"
+
+msgid "Sort alphabetically"
+msgstr ""
+
+msgid "Sort order by most played"
+msgstr ""
 
 msgid "Sound"
 msgstr "Audio"
@@ -917,9 +917,7 @@ msgstr "Predefinita Sistema"
 msgid "TChinese"
 msgstr "Cinese Tradizionale"
 
-msgid "TXT Cheat Path"
-msgstr ""
-
+# ### To be updated   #####
 msgid "TXTCheatcodes Path"
 msgstr "Percorso Trucchi in Txt"
 
@@ -927,14 +925,11 @@ msgid "TXTCheatcodes Path changed"
 msgstr "Percorso Trucchi in Txt modificato"
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."
-msgstr "Il file wad è installato ma non può essere cancellato dalla scheda SD."
+msgstr ""
 
 #, c-format
 msgid "The wad installation failed with error %ld"
 msgstr "L'installazione del WAD è fallita con errore %ld"
-
-msgid "Theme Path"
-msgstr ""
 
 msgid "ThemePath"
 msgstr "Percorso Tema"
@@ -949,7 +944,7 @@ msgid "Time left:"
 msgstr "Restante:"
 
 msgid "Title Launcher"
-msgstr ""
+msgstr "Schermata Titoli"
 
 msgid "Titles from XML"
 msgstr "Titoli in XML"
@@ -974,10 +969,10 @@ msgid "Uninstall Game"
 msgstr "Disinstalla il gioco"
 
 msgid "Uninstall Menu"
-msgstr "Disinstalla il menu"
+msgstr "Disinstalla Menu"
 
 msgid "Uninstalling wad"
-msgstr ""
+msgstr "Disinstalla WAD"
 
 msgid "Unlock console to use this option."
 msgstr "Sblocca la Console per usare questa opzione."
@@ -993,9 +988,6 @@ msgstr "Tutti i files"
 
 msgid "Update DOL"
 msgstr "Solo DOL"
-
-msgid "Update Path"
-msgstr ""
 
 msgid "Update failed"
 msgstr "Aggiornamento Fallito"
@@ -1043,7 +1035,13 @@ msgstr "Illuminazione Wii"
 msgid "Wrong Password"
 msgstr "Password Errata"
 
-msgid "XML Path"
+msgid "XMLPath"
+msgstr ""
+
+msgid "XMLPath change"
+msgstr ""
+
+msgid "XMLPath changed."
 msgstr ""
 
 msgid "Yes"
@@ -1069,16 +1067,16 @@ msgid "available"
 msgstr "disponibile"
 
 msgid "contains over 255 lines of code.  It will produce unexpected results."
-msgstr "contiene più di 255 linee di codice. Produrrà effetti inattesi."
+msgstr ""
 
 msgid "does not exist!"
 msgstr "non esiste!"
 
 msgid "does not exist!  Loading game without cheats."
-msgstr "non esiste! Caricamento gioco senza trucchi."
+msgstr ""
 
 msgid "does not exist!  You Messed something up, Idiot."
-msgstr "non esiste! Hai omesso qualcosa, Idiota."
+msgstr ""
 
 msgid "file left"
 msgstr "file mancante"
@@ -1125,8 +1123,38 @@ msgstr "secondi mancanti"
 msgid "there was an error"
 msgstr "c'è stato un errore"
 
-msgid "titles.txt Path"
-msgstr "Percorso titles.txt"
+#~ msgid "Path of titles.txt change"
+#~ msgstr "Modifica percorso per titles.txt"
+
+#~ msgid "Path of titles.txt changed."
+#~ msgstr "Percorso per titles.txt modificato."
+
+#~ msgid "TXT Cheat Path"
+#~ msgstr "Percorso trucchi TXT"
+
+#~ msgid "The wad file was installed. But It could not be deleted from the SD card."
+#~ msgstr "Il file wad è installato ma non può essere cancellato dalla scheda SD."
+
+#~ msgid "Theme Path"
+#~ msgstr "Percorso Tema"
+
+#~ msgid "Update Path"
+#~ msgstr "Aggiorna Percorso"
+
+#~ msgid "XML Path"
+#~ msgstr "Percorso XML"
+
+#~ msgid "contains over 255 lines of code. It will produce unexpected results."
+#~ msgstr "contiene più di 255 linee di codice. Produrrà effetti inattesi."
+
+#~ msgid "does not exist! Loading game without cheats."
+#~ msgstr "non esiste! Caricamento gioco senza trucchi."
+
+#~ msgid "does not exist! You Messed something up, Idiot."
+#~ msgstr "non esiste! Hai omesso qualcosa, Idiota."
+
+#~ msgid "titles.txt Path"
+#~ msgstr "Percorso titles.txt"
 
 #~ msgid "Leaving so you can restart..."
 #~ msgstr "Sto uscendo per permettere il riavvio..."

@@ -93,7 +93,7 @@ void LoadImages()
                 if (!cover[loading]->GetImage()) {
                     delete cover[loading];
                     cover[loading] = NULL;
-                    snprintf(imgPath, sizeof(imgPath), "%snoimage.png", Settings.covers_path); //Load no image
+                    snprintf(imgPath, sizeof(imgPath), "%snoimage.png", CFG.theme_path); //Load no image
                     cover[loading] = new GuiImageData(imgPath, nocover_png);
                 }
             }

@@ -1201,7 +1201,7 @@ int MenuSettings()
                     options2.SetName(0, "%s", tr("Cover Path"));
                     options2.SetName(1, "%s", tr("Discimage Path"));
                     options2.SetName(2, "%s", tr("ThemePath"));
-                    options2.SetName(3, "%s", tr("titles.txt Path"));
+                    options2.SetName(3, "%s", tr("XMLPath"));
                     options2.SetName(4, "%s", tr("Updatepath"));
                     options2.SetName(5, "%s", tr("Cheatcodes Path"));
 						  options2.SetName(6, "%s", tr("TXTCheatcodes Path"));
@@ -1309,7 +1309,7 @@ int MenuSettings()
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
                                     strncpy(entered, Settings.disc_path, sizeof(entered));
-                                    titleTxt.SetText(tr("Disc Path"));
+                                    titleTxt.SetText(tr("Discimage Path"));
 												int result = BrowseDevice(entered);
                                     //int result = OnScreenKeyboard(entered, 43,0);
                                     titleTxt.SetText(tr("Custom Paths"));
@@ -1337,7 +1337,7 @@ int MenuSettings()
                                     w.Remove(&optionBrowser2);
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
-                                    titleTxt.SetText(tr("Theme Path"));
+                                    titleTxt.SetText(tr("ThemePath"));
 												strncpy(entered, CFG.theme_path, sizeof(entered));
                                     int result = BrowseDevice(entered);
                                     //int result = OnScreenKeyboard(entered, 43,0);
@@ -1397,7 +1397,7 @@ int MenuSettings()
                                     w.Remove(&optionBrowser2);
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
-                                    titleTxt.SetText(tr("XML Path"));
+                                    titleTxt.SetText(tr("XMLPath"));
 												strncpy(entered, Settings.titlestxt_path, sizeof(entered));
                                     int result = BrowseDevice(entered);
                                     //int result = OnScreenKeyboard(entered,43,0);
@@ -1410,7 +1410,7 @@ int MenuSettings()
                                         if(entered[len] !='/')
                                         strncat (entered, "/", 1);
                                         strncpy(Settings.titlestxt_path, entered, sizeof(Settings.titlestxt_path));
-                                        WindowPrompt(tr("Path of titles.txt changed."),0,tr("OK"));
+                                        WindowPrompt(tr("XMLPath changed."),0,tr("OK"));
 //                                        if(isSdInserted()) {
 										if(isInserted(bootDevice)) {
                                             cfg_save_global();
@@ -1422,7 +1422,7 @@ int MenuSettings()
                                 }
                                 else
                                 {
-                                    WindowPrompt(tr("Path of titles.txt change"),tr("Console should be unlocked to modify it."),tr("OK"));
+                                    WindowPrompt(tr("XMLPath change"),tr("Console should be unlocked to modify it."),tr("OK"));
                                 }
                                 break;
                             case 4:
@@ -1432,7 +1432,7 @@ int MenuSettings()
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
                                     strncpy(entered, Settings.update_path, sizeof(entered));
-                                    titleTxt.SetText(tr("Update Path"));
+                                    titleTxt.SetText(tr("Updatepath"));
 												int result = BrowseDevice(entered);
                                     //int result = OnScreenKeyboard(entered,43,0);
                                     titleTxt.SetText(tr("Custom Paths"));
@@ -1457,7 +1457,7 @@ int MenuSettings()
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
                                     strncpy(entered, Settings.Cheatcodespath, sizeof(entered));
-                                    titleTxt.SetText(tr("GCT Cheat Path"));
+                                    titleTxt.SetText(tr("Cheatcodes Path"));
 												int result = BrowseDevice(entered);
                                     //int result = OnScreenKeyboard(entered,43,0);
                                     titleTxt.SetText(tr("Custom Paths"));
@@ -1482,7 +1482,7 @@ int MenuSettings()
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
                                     strncpy(entered, Settings.TxtCheatcodespath, sizeof(entered));
-                                    titleTxt.SetText(tr("TXT Cheat Path"));
+                                    titleTxt.SetText(tr("TXTCheatcodes Path"));
 												int result = BrowseDevice(entered);
                                     //int result = OnScreenKeyboard(entered,43,0);
                                     titleTxt.SetText(tr("Custom Paths"));
@@ -1507,7 +1507,7 @@ int MenuSettings()
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
                                     strncpy(entered, Settings.dolpath, sizeof(entered));
-                                    titleTxt.SetText(tr("Alt Dol Path"));
+                                    titleTxt.SetText(tr("Dol Path"));
 												int result = BrowseDevice(entered);
                                     //int result = OnScreenKeyboard(entered,43,0);
                                     titleTxt.SetText(tr("Custom Paths"));
@@ -1536,7 +1536,7 @@ int MenuSettings()
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
                                     strncpy(entered, Settings.homebrewapps_path, sizeof(entered));
-                                    titleTxt.SetText(tr("Homebrew Path"));
+                                    titleTxt.SetText(tr("Homebrew Apps Path"));
 												int result = BrowseDevice(entered);
                                     //int result = OnScreenKeyboard(entered,43,0);
                                     titleTxt.SetText(tr("Custom Paths"));

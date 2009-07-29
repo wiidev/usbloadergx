@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-28 05:57-0400\n"
+"POT-Creation-Date: 2009-07-29 01:39+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -13,13 +13,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid " could not be downloaded."
-msgstr ""
+msgstr " kan ikke lastes ned."
 
 msgid " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information."
-msgstr ""
+msgstr " har blitt lagret.  Teksten har ikke blitt verifisert.  Noe av koden vil kanskje ikke fungere riktig.  Hvis du får problemer, åpne teksten i et ekte redigeringsprogram for mer informasjon."
 
 msgid " is not on the server."
-msgstr ""
+msgstr " finnes ikke på serveren."
 
 msgid "(both retired)"
 msgstr "(begge sluttet)"
@@ -31,25 +31,25 @@ msgid "1 (Child 7+)"
 msgstr "1 (Barn 7+)"
 
 msgid "1 hour"
-msgstr ""
+msgstr "1 time"
 
 msgid "10 min"
-msgstr ""
+msgstr "10 min"
 
 msgid "2 (Teen 12+)"
 msgstr "2 (Ungdom 12+)"
 
 msgid "20 min"
-msgstr ""
+msgstr "20 min"
 
 msgid "3 (Mature 16+)"
 msgstr "3 (Ungdom 16+)"
 
 msgid "3 min"
-msgstr ""
+msgstr "3 min"
 
 msgid "30 min"
-msgstr ""
+msgstr "30 min"
 
 msgid "3D Covers"
 msgstr "3D cover"
@@ -58,34 +58,34 @@ msgid "4 (Adults Only 18+)"
 msgstr "4 (Voksen 18+)"
 
 msgid "5 min"
-msgstr ""
+msgstr "5 min"
 
 msgid ">> Deleting tickets..."
-msgstr ""
+msgstr ">> Sletter tickets..."
 
 msgid ">> Deleting tickets...ERROR! "
-msgstr ""
+msgstr ">> Sletter tickets...FEIL! "
 
 msgid ">> Deleting tickets...Ok! "
-msgstr ""
+msgstr ">> Sletter tickets...OK! "
 
 msgid ">> Deleting title ...ERROR! "
-msgstr ""
+msgstr ">> Sletter tittel ...FEIL! "
 
 msgid ">> Deleting title ...Ok!"
-msgstr ""
+msgstr ">> Sletter tittel ...OK!"
 
 msgid ">> Deleting title contents..."
-msgstr ""
+msgstr ">> Sletter tittel innhold..."
 
 msgid ">> Deleting title contents...ERROR! "
-msgstr ""
+msgstr ">> Sletter tittel innhold...FEIL! "
 
 msgid ">> Deleting title contents...Ok!"
-msgstr ""
+msgstr ">> Sletter tittel innhold...OK!"
 
 msgid ">> Deleting title..."
-msgstr ""
+msgstr ">> Sletter tittel..."
 
 msgid ">> Finishing installation..."
 msgstr ">> Sluttfører installasjon..."
@@ -103,19 +103,16 @@ msgid ">> Reading WAD data..."
 msgstr ">> Leser WAD data..."
 
 msgid ">> Reading WAD data...ERROR! "
-msgstr ""
+msgstr ">> Leser WAD data...FEIL! "
 
 msgid ">> Reading WAD data...Ok!"
-msgstr ""
+msgstr ">> Leser WAD data...OK!"
 
 msgid "AUTO"
 msgstr "AUTO"
 
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "Alle funksjonene til USB Loader GX er opplåst."
-
-msgid "Alt Dol Path"
-msgstr ""
 
 msgid "Alternate DOL"
 msgstr "Alternativ DOL"
@@ -136,7 +133,7 @@ msgid "Aug"
 msgstr "Aug"
 
 msgid "AutoInit Network"
-msgstr ""
+msgstr "Autostart nettverk"
 
 msgid "AutoPatch"
 msgstr "AutoPatch"
@@ -169,7 +166,7 @@ msgid "Boot/Standard"
 msgstr "Boot/Standard"
 
 msgid "Boot?"
-msgstr ""
+msgstr "Start?"
 
 msgid "Both"
 msgstr "Begge"
@@ -212,10 +209,10 @@ msgstr "Kode nedlasting"
 
 #, c-format
 msgid "Coded by: %s"
-msgstr ""
+msgstr "Kodet av: %s"
 
 msgid "Coding:"
-msgstr ""
+msgstr "Koding:"
 
 msgid "Confirm"
 msgstr "Bekreft"
@@ -275,7 +272,7 @@ msgid "Cover Path"
 msgstr "Cover sti"
 
 msgid "Coverpath Change"
-msgstr ""
+msgstr "Endre cover sti"
 
 msgid "Coverpath Changed"
 msgstr "Cover sti endret"
@@ -311,19 +308,19 @@ msgid "Delete"
 msgstr "Slett"
 
 msgid "Delete ?"
-msgstr ""
+msgstr "Slett ?"
 
 msgid "Delete Boxart"
-msgstr ""
+msgstr "Slett cover"
 
 msgid "Delete CheatTxt"
-msgstr ""
+msgstr "Slett juksefil"
 
 msgid "Delete Discart"
-msgstr ""
+msgstr "Slett platebilde"
 
 msgid "Design:"
-msgstr ""
+msgstr "Design:"
 
 msgid "Developed by"
 msgstr "Utviklet av"
@@ -334,11 +331,8 @@ msgstr "Spill Standard"
 msgid "Disc Images"
 msgstr "Plate bilder"
 
-msgid "Disc Path"
-msgstr ""
-
 msgid "Discimage Path"
-msgstr "Plate sti"
+msgstr "Platebilde sti"
 
 msgid "Discpath Changed"
 msgstr "Plate sti endret"
@@ -351,6 +345,18 @@ msgstr "Snu plate"
 
 msgid "Display"
 msgstr "Vis"
+
+msgid "Display as a carousel"
+msgstr ""
+
+msgid "Display as a grid"
+msgstr ""
+
+msgid "Display as a list"
+msgstr ""
+
+msgid "Display favorites"
+msgstr ""
 
 msgid "Do you really want to delete:"
 msgstr "Er du sikker på at du vil slette:"
@@ -377,10 +383,10 @@ msgid "Dolpath change"
 msgstr "Endre DOL sti"
 
 msgid "Don't bother the USB Loader GX Team about errors in this file."
-msgstr ""
+msgstr "Ikke bry USB Loader GX teamet med feil i denne filen."
 
 msgid "Done!"
-msgstr ""
+msgstr "Ferdig!"
 
 msgid "Download Boxart image?"
 msgstr "Last ned cover bilde?"
@@ -425,13 +431,13 @@ msgid "Error reading Disc"
 msgstr "Feil ved lesing av plate"
 
 msgid "Error while transfering data."
-msgstr ""
+msgstr "Feil ved overføring av data."
 
 msgid "Error..."
 msgstr "Feil..."
 
 msgid "Error:"
-msgstr ""
+msgstr "Feil:"
 
 msgid "Exit USB Loader GX?"
 msgstr "Avslutt USB Loader GX?"
@@ -469,9 +475,6 @@ msgstr "Fransk"
 msgid "Full Shutdown"
 msgstr "Skru helt av"
 
-msgid "GCT Cheat Path"
-msgstr ""
-
 msgid "GCT File created"
 msgstr "GCT fil opprettet"
 
@@ -506,19 +509,16 @@ msgid "HOME Menu"
 msgstr "HOME Meny"
 
 msgid "Homebrew Apps Path"
-msgstr ""
+msgstr "Homebrew Apps sti"
 
 msgid "Homebrew Appspath change"
-msgstr ""
+msgstr "Endre Homebrew Apps sti"
 
 msgid "Homebrew Appspath changed"
-msgstr ""
+msgstr "Homebrew Apps sti endret"
 
 msgid "Homebrew Launcher"
-msgstr ""
-
-msgid "Homebrew Path"
-msgstr ""
+msgstr "Homebrew Laster"
 
 msgid "Hour"
 msgstr "Timer"
@@ -530,15 +530,15 @@ msgid "How to Shutdown?"
 msgstr "Hvordan skru av?"
 
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
-msgstr ""
+msgstr "Hvis du ikke har WiFi, klikk 1 for å få en URL til din WiiTDB.zip"
 
 #, c-format
 msgid "Incoming file %0.2fKB"
-msgstr ""
+msgstr "Laster ned fil %0.2fKB"
 
 #, c-format
 msgid "Incoming file %0.2fMB"
-msgstr ""
+msgstr "Laster ned fil %0.2fMB"
 
 msgid "Initializing Network"
 msgstr "Initialiserer nettverk"
@@ -559,7 +559,7 @@ msgid "Insert an SD-Card to use this option."
 msgstr "Sett inn et SD-kort for å bruke innstillingen."
 
 msgid "Install"
-msgstr ""
+msgstr "Installér"
 
 msgid "Install Error!"
 msgstr "Installasjonsfeil!"
@@ -584,7 +584,7 @@ msgstr "Installerer WAD"
 
 #, c-format
 msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team. %s - %i"
-msgstr ""
+msgstr "Det ser ut til at du har informasjon som kan være nyttig for oss. Vennligst videresend denne informasjonen til utviklerteamet. %s - %i"
 
 msgid "Italian"
 msgstr "Italiensk"
@@ -602,7 +602,7 @@ msgid "June"
 msgstr "Jun"
 
 msgid "Keep"
-msgstr ""
+msgstr "Behold"
 
 msgid "Keyboard"
 msgstr "Tastatur"
@@ -623,11 +623,11 @@ msgid "Like SysMenu"
 msgstr "Lik Systemmeny"
 
 msgid "Load"
-msgstr ""
+msgstr "Start"
 
 #, c-format
 msgid "Load file from: %s ?"
-msgstr ""
+msgstr "Start fil fra: %s ?"
 
 msgid "Load this dol as alternate dol?"
 msgstr "Last denne DOL som alternativ DOL?"
@@ -672,7 +672,7 @@ msgid "No"
 msgstr "Nei"
 
 msgid "No .dol or .elf files found."
-msgstr ""
+msgstr "Ingen .dol eller .elf filer funnet."
 
 msgid "No Cheatfile found"
 msgstr "Ingen juksefil funnet"
@@ -693,7 +693,7 @@ msgid "No WBFS partition found"
 msgstr "Ingen WBFS partisjon funnet"
 
 msgid "No data could be read."
-msgstr ""
+msgstr "Ingen data kan leses."
 
 msgid "No dol file found on disc."
 msgstr "Ingen DOL fil funnet på plate."
@@ -714,13 +714,13 @@ msgid "Normal Covers"
 msgstr "Normale cover"
 
 msgid "Not Found"
-msgstr ""
+msgstr "Ikke funnet"
 
 msgid "Not a Wii Disc"
 msgstr "Ikke en Wii plate"
 
 msgid "Not enough free memory"
-msgstr ""
+msgstr "Ikke nok ledig minne"
 
 msgid "Not enough free memory."
 msgstr "Ikke nok ledig minne."
@@ -774,16 +774,10 @@ msgid "Password has been changed"
 msgstr "Passord har blitt endret"
 
 msgid "Paste it into your browser to get your WiiTDB.zip."
-msgstr ""
+msgstr "Lim den inn i nettleseren din for å få WiiTDB.zip."
 
 msgid "Patch Country Strings"
 msgstr "Patch land strenger"
-
-msgid "Path of titles.txt change"
-msgstr "Endre titles.txt sti"
-
-msgid "Path of titles.txt changed."
-msgstr "Titles.txt sti endret."
 
 msgid "Pick from a list"
 msgstr "Velg fra liste"
@@ -810,10 +804,10 @@ msgid "Reading WAD data... Ok!"
 msgstr "Leser WAD data... OK!"
 
 msgid "Received:"
-msgstr ""
+msgstr "Mottatt:"
 
 msgid "Receiving file from:"
-msgstr ""
+msgstr "Mottar fil fra:"
 
 msgid "Released"
 msgstr "Utgitt"
@@ -881,6 +875,12 @@ msgstr "Skru helt av"
 msgid "Shutdown to Idle"
 msgstr "Skru av"
 
+msgid "Sort alphabetically"
+msgstr ""
+
+msgid "Sort order by most played"
+msgstr ""
+
 msgid "Sound"
 msgstr "Lyd"
 
@@ -917,24 +917,18 @@ msgstr "System Standard"
 msgid "TChinese"
 msgstr "T.Kinesisk"
 
-msgid "TXT Cheat Path"
-msgstr ""
-
 msgid "TXTCheatcodes Path"
 msgstr "TXTjuksekode sti"
 
 msgid "TXTCheatcodes Path changed"
-msgstr ""
+msgstr "TXTjuksekode sti endret"
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."
-msgstr ""
+msgstr "WAD filen ble installert.  Men ble ikke slettet fra SD kort."
 
 #, c-format
 msgid "The wad installation failed with error %ld"
 msgstr "WAD installasjonen feilet med feilkode %ld"
-
-msgid "Theme Path"
-msgstr ""
 
 msgid "ThemePath"
 msgstr "Tema sti"
@@ -949,7 +943,7 @@ msgid "Time left:"
 msgstr "Tid igjen:"
 
 msgid "Title Launcher"
-msgstr ""
+msgstr "Tittel Laster"
 
 msgid "Titles from XML"
 msgstr "Titler fra XML"
@@ -971,13 +965,13 @@ msgid "Uninstall"
 msgstr "Avinstallér"
 
 msgid "Uninstall Game"
-msgstr ""
+msgstr "Avinstallér spill"
 
 msgid "Uninstall Menu"
-msgstr ""
+msgstr "Avinstallér Meny"
 
 msgid "Uninstalling wad"
-msgstr ""
+msgstr "Avinstallerer WAD"
 
 msgid "Unlock console to use this option."
 msgstr "Lås opp konsollen for å bruke denne innstillingen."
@@ -993,9 +987,6 @@ msgstr "Oppdater alt"
 
 msgid "Update DOL"
 msgstr "Oppdater DOL"
-
-msgid "Update Path"
-msgstr ""
 
 msgid "Update failed"
 msgstr "Mislykket oppdatering"
@@ -1017,7 +1008,7 @@ msgstr "VIDTV Patch"
 
 #, c-format
 msgid "Version: %s"
-msgstr ""
+msgstr "Versjon: %s"
 
 msgid "Video Mode"
 msgstr "Video modus"
@@ -1043,7 +1034,13 @@ msgstr "Wii DVD lys"
 msgid "Wrong Password"
 msgstr "Feil passord"
 
-msgid "XML Path"
+msgid "XMLPath"
+msgstr ""
+
+msgid "XMLPath change"
+msgstr ""
+
+msgid "XMLPath changed."
 msgstr ""
 
 msgid "Yes"
@@ -1063,7 +1060,7 @@ msgstr "Du må formatere en partisjon"
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
-msgstr ""
+msgstr "Din URL ble lagret i %sWiiTDB_URL.txt."
 
 msgid "available"
 msgstr "tilgjengelig"
@@ -1125,8 +1122,26 @@ msgstr "sekunder gjenstår"
 msgid "there was an error"
 msgstr "en feil har oppstått"
 
-msgid "titles.txt Path"
-msgstr "Titles.txt sti"
+#~ msgid "Path of titles.txt change"
+#~ msgstr "Endre titles.txt sti"
+
+#~ msgid "Path of titles.txt changed."
+#~ msgstr "Titles.txt sti endret."
+
+#~ msgid "TXT Cheat Path"
+#~ msgstr "TXT jukse sti"
+
+#~ msgid "Theme Path"
+#~ msgstr "Tema sti"
+
+#~ msgid "Update Path"
+#~ msgstr "Oppdatering sti"
+
+#~ msgid "XML Path"
+#~ msgstr "XML sti"
+
+#~ msgid "titles.txt Path"
+#~ msgstr "Titles.txt sti"
 
 #~ msgid "Leaving so you can restart..."
 #~ msgstr "Lukker så du kan restarte..."

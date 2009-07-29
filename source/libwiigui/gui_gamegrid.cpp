@@ -175,7 +175,7 @@ GuiGameGrid::GuiGameGrid(int w, int h, struct discHdr * l, int count, const char
 			cover[i] = new GuiImageData(imgPath, 0);
 			if (!cover[i]->GetImage()) {
 				delete cover[i];
-				snprintf(imgPath, sizeof(imgPath), "%snoimage.png", Settings.covers_path); //Load no image
+				snprintf(imgPath, sizeof(imgPath), "%snoimage.png", CFG.theme_path); //Load no image
 				cover[i] = new GuiImageData(imgPath, nocoverFlat_png);
 			}
 		}

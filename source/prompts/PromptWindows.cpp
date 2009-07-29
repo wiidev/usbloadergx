@@ -349,11 +349,14 @@ int WindowScreensaver()
 {
 	int i = 0;
 	bool exit = false;
+	//char imgPath[100];//uncomment for themable screensaver
 
 	/* initialize random seed: */
 	srand ( time(NULL) );
 
-	GuiImageData GXlogo(gxlogo_png);
+	//snprintf(imgPath, sizeof(imgPath), "%sscreensaver.png", CFG.theme_path);//uncomment for themable screensaver
+    //GuiImageData GXlogo(imgPath, gxlogo_png);//uncomment for themable screensaver
+	GuiImageData GXlogo(gxlogo_png);//comment for themable screensaver
 	GuiImage GXlogoImg(&GXlogo);
 	GXlogoImg.SetPosition(172,152);
 	GXlogoImg.SetAlignment(ALIGN_LEFT,ALIGN_TOP);
@@ -1192,7 +1195,7 @@ int GameWindowPrompt()
 			if (!diskCover->GetImage())
 			{
 				delete diskCover;
-				snprintf(imgPath, sizeof(imgPath), "%snodisc.png", Settings.disc_path); //changed to nodisc.png
+				snprintf(imgPath, sizeof(imgPath), "%snodisc.png", CFG.theme_path); //changed to nodisc.png
 				diskCover = new GuiImageData(imgPath,nodisc_png);
 			}
 		}

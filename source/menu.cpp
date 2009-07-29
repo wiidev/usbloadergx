@@ -424,10 +424,11 @@ int MenuDiscList()
         GuiImage settingsBtnImgOver(&btnSettingsOver);
         settingsBtnImgOver.SetWidescreen(CFG.widescreen);
         GuiButton settingsBtn(&settingsBtnImg,&settingsBtnImgOver, 0, 3, THEME.setting_x, THEME.setting_y, &trigA, &btnSoundOver, &btnClick,1,&settingsBtnTT,65,-30,0,5);
-        GuiTooltip homeBtnTT(tr("Back to HBC or Wii Menu"));
+
+		GuiTooltip homeBtnTT(tr("Back to HBC or Wii Menu"));
         if (Settings.wsprompt == yes)
                 homeBtnTT.SetWidescreen(CFG.widescreen);
-
+		settingsBtnTT.SetAlpha(THEME.tooltipAlpha);
         GuiImage homeBtnImg(&btnhome);
         homeBtnImg.SetWidescreen(CFG.widescreen);
         GuiImage homeBtnImgOver(&btnhomeOver);
@@ -466,46 +467,70 @@ int MenuDiscList()
         wiiBtnImg.SetWidescreen(CFG.widescreen);
         GuiButton wiiBtn(&wiiBtnImg,&wiiBtnImg, 0, 4, 0, -10, &trigA, &btnSoundOver, &btnClick,0);
 
+        GuiTooltip favoriteBtnTT(tr("Display favorites"));
+        if (Settings.wsprompt == yes)
+                favoriteBtnTT.SetWidescreen(CFG.widescreen);
+		favoriteBtnTT.SetAlpha(THEME.tooltipAlpha);
         GuiImage favoriteBtnImg(&imgfavIcon);
         GuiImage favoriteBtnImg_g(&imgfavIcon_gray);
         favoriteBtnImg.SetWidescreen(CFG.widescreen);
         favoriteBtnImg_g.SetWidescreen(CFG.widescreen);
-        GuiButton favoriteBtn(&favoriteBtnImg_g,&favoriteBtnImg_g, 2, 3, THEME.favorite_x, THEME.favorite_y, &trigA, &btnSoundOver, &btnClick,1);
+        GuiButton favoriteBtn(&favoriteBtnImg_g,&favoriteBtnImg_g, 2, 3, THEME.favorite_x, THEME.favorite_y, &trigA, &btnSoundOver, &btnClick,1, &favoriteBtnTT, -15, 52, 0, 3);
         favoriteBtn.SetAlpha(180);
 
+        GuiTooltip abcBtnTT(tr("Sort alphabetically"));
+        if (Settings.wsprompt == yes)
+                abcBtnTT.SetWidescreen(CFG.widescreen);
+		abcBtnTT.SetAlpha(THEME.tooltipAlpha);
         GuiImage abcBtnImg(&imgabcIcon);
         abcBtnImg.SetWidescreen(CFG.widescreen);
         GuiImage abcBtnImg_g(&imgabcIcon_gray);
         abcBtnImg_g.SetWidescreen(CFG.widescreen);
-        GuiButton abcBtn(&abcBtnImg_g,&abcBtnImg_g, 2, 3, THEME.abc_x, THEME.abc_y, &trigA, &btnSoundOver, &btnClick,1);
+        GuiButton abcBtn(&abcBtnImg_g,&abcBtnImg_g, 2, 3, THEME.abc_x, THEME.abc_y, &trigA, &btnSoundOver, &btnClick,1,&abcBtnTT, -15, 52, 0, 3);
         abcBtn.SetAlpha(180);
 
+        GuiTooltip countBtnTT(tr("Sort order by most played"));
+        if (Settings.wsprompt == yes)
+                countBtnTT.SetWidescreen(CFG.widescreen);
+		countBtnTT.SetAlpha(THEME.tooltipAlpha);
         GuiImage countBtnImg(&imgplayCountIcon);
         countBtnImg.SetWidescreen(CFG.widescreen);
         GuiImage countBtnImg_g(&imgplayCountIcon_gray);
         countBtnImg_g.SetWidescreen(CFG.widescreen);
-        GuiButton countBtn(&countBtnImg_g,&countBtnImg_g, 2, 3, THEME.count_x, THEME.count_y, &trigA, &btnSoundOver, &btnClick,1);
+        GuiButton countBtn(&countBtnImg_g,&countBtnImg_g, 2, 3, THEME.count_x, THEME.count_y, &trigA, &btnSoundOver, &btnClick,1, &countBtnTT, -15, 52, 0, 3);
         countBtn.SetAlpha(180);
 
+        GuiTooltip listBtnTT(tr("Display as a list"));
+        if (Settings.wsprompt == yes)
+                listBtnTT.SetWidescreen(CFG.widescreen);
+		listBtnTT.SetAlpha(THEME.tooltipAlpha);
         GuiImage listBtnImg(&imgarrangeList);
         listBtnImg.SetWidescreen(CFG.widescreen);
         GuiImage listBtnImg_g(&imgarrangeList_gray);
         listBtnImg_g.SetWidescreen(CFG.widescreen);
-        GuiButton listBtn(&listBtnImg_g,&listBtnImg_g, 2, 3, THEME.list_x, THEME.list_y, &trigA, &btnSoundOver, &btnClick,1);
+        GuiButton listBtn(&listBtnImg_g,&listBtnImg_g, 2, 3, THEME.list_x, THEME.list_y, &trigA, &btnSoundOver, &btnClick,1, &listBtnTT, 15, 52, 1, 3);
         listBtn.SetAlpha(180);
 
+        GuiTooltip gridBtnTT(tr("Display as a grid"));
+        if (Settings.wsprompt == yes)
+                gridBtnTT.SetWidescreen(CFG.widescreen);
+		gridBtnTT.SetAlpha(THEME.tooltipAlpha);
         GuiImage gridBtnImg(&imgarrangeGrid);
         gridBtnImg.SetWidescreen(CFG.widescreen);
         GuiImage gridBtnImg_g(&imgarrangeGrid_gray);
         gridBtnImg_g.SetWidescreen(CFG.widescreen);
-        GuiButton gridBtn(&gridBtnImg_g,&gridBtnImg_g, 2, 3, THEME.grid_x, THEME.grid_y, &trigA, &btnSoundOver, &btnClick,1);
+        GuiButton gridBtn(&gridBtnImg_g,&gridBtnImg_g, 2, 3, THEME.grid_x, THEME.grid_y, &trigA, &btnSoundOver, &btnClick,1, &gridBtnTT, 15, 52, 1, 3);
         gridBtn.SetAlpha(180);
 
-        GuiImage carouselBtnImg(&imgarrangeCarousel);
+        GuiTooltip carouselBtnTT(tr("Display as a carousel"));
+        if (Settings.wsprompt == yes)
+                carouselBtnTT.SetWidescreen(CFG.widescreen);
+        carouselBtnTT.SetAlpha(THEME.tooltipAlpha);
+		GuiImage carouselBtnImg(&imgarrangeCarousel);
         carouselBtnImg.SetWidescreen(CFG.widescreen);
         GuiImage carouselBtnImg_g(&imgarrangeCarousel_gray);
         carouselBtnImg_g.SetWidescreen(CFG.widescreen);
-        GuiButton carouselBtn(&carouselBtnImg_g,&carouselBtnImg_g, 2, 3, THEME.carousel_x, THEME.carousel_y, &trigA, &btnSoundOver, &btnClick,1);
+        GuiButton carouselBtn(&carouselBtnImg_g,&carouselBtnImg_g, 2, 3, THEME.carousel_x, THEME.carousel_y, &trigA, &btnSoundOver, &btnClick,1, &carouselBtnTT, 15, 52, 1, 3);
         carouselBtn.SetAlpha(180);
 
         GuiTooltip homebrewBtnTT(tr("Homebrew Launcher"));
@@ -516,7 +541,7 @@ int MenuDiscList()
         GuiImage homebrewImgOver(&homebrewImgDataOver);
         homebrewImg.SetWidescreen(CFG.widescreen);
 		homebrewImgOver.SetWidescreen(CFG.widescreen);
-		GuiButton homebrewBtn(&homebrewImg,&homebrewImgOver, 0, 3, THEME.homebrew_x, THEME.homebrew_y, &trigA, &btnSoundOver, &btnClick,1,&homebrewBtnTT,15,-30,0,5);
+		GuiButton homebrewBtn(&homebrewImg,&homebrewImgOver, 0, 3, THEME.homebrew_x, THEME.homebrew_y, &trigA, &btnSoundOver, &btnClick,1,&homebrewBtnTT,15,-30,1,5);
 
         if (Settings.fave)
         {
@@ -1126,7 +1151,7 @@ int MenuDiscList()
                                                 if (!cover->GetImage())
                                                 {
                                                         delete cover;
-                                                        snprintf(imgPath, sizeof(imgPath), "%snoimage.png", Settings.covers_path);
+                                                        snprintf(imgPath, sizeof(imgPath), "%snoimage.png", CFG.theme_path);
                                                         cover = new GuiImageData(imgPath, nocover_png); //load no image
                                                 }
                                         }
