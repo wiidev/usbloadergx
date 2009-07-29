@@ -34,6 +34,8 @@ int unpackBanner(const char * gameid, const char * outdir);
 //! Extract the lz77 compressed banner, icon and sound .bin
 u8* decompress_lz77(u8 *data, size_t data_size, size_t* decompressed_size);
 
+u16 be16(const u8 *p);
+u32 be32(const u8 *p);
 
 #ifdef __cplusplus
 }
