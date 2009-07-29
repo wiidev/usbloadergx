@@ -4,9 +4,11 @@
 
 #include "language/gettext.h"
 #include "prompts/PromptWindows.h"
+#include "prompts/ProgressWindow.h"
 #include "libwiigui/gui.h"
 #include "libwiigui/gui_customoptionbrowser.h"
 #include "settings/cfg.h"
+#include "network/URL_List.h"
 #include "listfiles.h"
 #include "main.h"
 #include "fatmounter.h"
@@ -372,7 +374,7 @@ int MenuLanguageSelect()
 	}
 	GuiButton backBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
 	backBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	backBtn.SetPosition(-180, 400);
+	backBtn.SetPosition(-190, 400);
 	backBtn.SetLabel(&backBtnTxt);
 	backBtn.SetImage(&backBtnImg);
 	backBtn.SetSoundOver(&btnSoundOver);
@@ -390,13 +392,30 @@ int MenuLanguageSelect()
 	}
 	GuiButton defaultBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
 	defaultBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	defaultBtn.SetPosition(180, 400);
+	defaultBtn.SetPosition(190, 400);
 	defaultBtn.SetLabel(&defaultBtnTxt);
 	defaultBtn.SetImage(&defaultBtnImg);
 	defaultBtn.SetSoundOver(&btnSoundOver);
 	defaultBtn.SetSoundClick(&btnClick);
 	defaultBtn.SetTrigger(&trigA);
 	defaultBtn.SetEffectGrow();
+
+	GuiText updateBtnTxt(tr("Update Files") , 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	updateBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
+	GuiImage updateBtnImg(&btnOutline);
+	if (Settings.wsprompt == yes) {
+        updateBtnTxt.SetWidescreen(CFG.widescreen);
+        updateBtnImg.SetWidescreen(CFG.widescreen);
+	}
+	GuiButton updateBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
+	updateBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	updateBtn.SetPosition(0, 400);
+	updateBtn.SetLabel(&updateBtnTxt);
+	updateBtn.SetImage(&updateBtnImg);
+	updateBtn.SetSoundOver(&btnSoundOver);
+	updateBtn.SetSoundClick(&btnClick);
+	updateBtn.SetTrigger(&trigA);
+	updateBtn.SetEffectGrow();
 
     customOptionList options2(countfiles);
 
@@ -426,6 +445,7 @@ int MenuLanguageSelect()
 	w.Append(&pathBtn);
     w.Append(&backBtn);
 	w.Append(&defaultBtn);
+	w.Append(&updateBtn);
     w.Append(&optionBrowser4);
     mainWindow->Append(&w);
 
@@ -439,16 +459,16 @@ int MenuLanguageSelect()
 
     if(shutdown == 1)
 		Sys_Shutdown();
-	if(reset == 1)
+	else if(reset == 1)
         Sys_Reboot();
 
-    if (backBtn.GetState() == STATE_CLICKED) {
+    else if (backBtn.GetState() == STATE_CLICKED) {
 
         backBtn.ResetState();
         break;
     }
 
-    if (defaultBtn.GetState() == STATE_CLICKED) {
+    else if (defaultBtn.GetState() == STATE_CLICKED) {
             choice = WindowPrompt(tr("Loading standard language."),0,tr("OK"), tr("Cancel"));
             if (choice == 1) {
             sprintf(Settings.language_path, "notset");
@@ -462,7 +482,56 @@ int MenuLanguageSelect()
 			optionBrowser4.SetFocus(1);
     }
 
-    if (pathBtn.GetState() == STATE_CLICKED) {
+    else if (updateBtn.GetState() == STATE_CLICKED) {
+            choice = WindowPrompt(tr("Update all Languagefiles"),tr("Do you wish to update/download all language files?"),tr("OK"), tr("Cancel"));
+            if (choice == 1) {
+
+                bool network = true;
+                if(!IsNetworkInit()) {
+                    network = NetworkInitPrompt();
+                }
+
+                if(network) {
+                    const char URL[60] = "http://usbloader-gui.googlecode.com/svn/trunk/Languages/";
+                    char fullURL[300];
+                    FILE *pfile;
+
+                    URL_List LinkList(URL);
+                    int listsize = LinkList.GetURLCount();
+
+                    for(int i = 0; i < listsize; i++) {
+
+                        ShowProgress(tr("Updating Languagefiles:"), 0, LinkList.GetURL(i), i, listsize-1);
+
+                        if(strcasecmp(".lang", strrchr(LinkList.GetURL(i), '.')) == 0) {
+
+                            snprintf(fullURL, sizeof(fullURL), "%s%s", URL, LinkList.GetURL(i));
+
+                            struct block file = downloadfile(fullURL);
+
+                            if(file.data && file.size) {
+                                char filepath[300];
+
+                                snprintf(filepath, sizeof(filepath), "%s%s", Settings.languagefiles_path, LinkList.GetURL(i));
+                                pfile = fopen(filepath, "wb");
+                                fwrite(file.data, 1, file.size, pfile);
+                                fclose(pfile);
+
+                            }
+
+                            free(file.data);
+                        }
+                    }
+                    ProgressStop();
+                    returnhere = 1;
+                    break;
+                }
+            }
+            updateBtn.ResetState();
+			optionBrowser4.SetFocus(1);
+    }
+
+    else if (pathBtn.GetState() == STATE_CLICKED) {
             w.Remove(&optionBrowser4);
             w.Remove(&backBtn);
             w.Remove(&pathBtn);

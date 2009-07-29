@@ -17,7 +17,6 @@
 #include <wiiuse/wpad.h>
 
 #include "usbloader/wbfs.h"
-#include "usbloader/video2.h"
 #include "settings/cfg.h"
 #include "language/gettext.h"
 #include "mload/mload.h"

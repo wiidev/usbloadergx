@@ -12,12 +12,24 @@
 HomebrewFiles::HomebrewFiles(const char * path)
 {
     filecount = 0;
+
+    FileInfo = (FileInfos *) malloc(sizeof(FileInfos));
+    if(!FileInfo) {
+        return;
+    }
+
+    memset(&FileInfo[filecount], 0, sizeof(FileInfos));
+
     this->LoadPath(path);
     this->SortList();
 }
 
 HomebrewFiles::~HomebrewFiles()
 {
+    if(FileInfo) {
+        free(FileInfo);
+        FileInfo = NULL;
+    }
 }
 
 bool HomebrewFiles::LoadPath(const char * folderpath)
@@ -47,6 +59,18 @@ bool HomebrewFiles::LoadPath(const char * folderpath)
 
             if((strncasecmp(temp, ".dol", 4) == 0 || strncasecmp(temp, ".elf", 4) == 0)
                     && filecount < MAXHOMEBREWS && filename[0]!='.') {
+
+                FileInfo = (FileInfos *) realloc(FileInfo, (filecount+1)*sizeof(FileInfos));
+
+                if(!FileInfo) {
+                    free(FileInfo);
+                    FileInfo = NULL;
+                    filecount = 0;
+                    dirclose(dir);
+                    return false;
+                }
+
+                memset(&(FileInfo[filecount]), 0, sizeof(FileInfo));
 
                 strncpy(FileInfo[filecount].FilePath, folderpath, sizeof(FileInfo[filecount].FilePath));
                 strncpy(FileInfo[filecount].FileName, filename, sizeof(FileInfo[filecount].FileName));
@@ -78,7 +102,7 @@ char * HomebrewFiles::GetFilepath(int ind)
 
 unsigned int HomebrewFiles::GetFilesize(int ind)
 {
-    if(ind > filecount)
+    if(ind > filecount || !filecount || !FileInfo)
         return NULL;
     else
         return FileInfo[ind].FileSize;
@@ -89,7 +113,7 @@ int HomebrewFiles::GetFilecount()
     return filecount;
 }
 
-int ListCompare(const void *a, const void *b)
+static int ListCompare(const void *a, const void *b)
 {
     FileInfos *ab = (FileInfos*) a;
     FileInfos *bb = (FileInfos*) b;

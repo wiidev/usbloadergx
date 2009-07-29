@@ -1800,6 +1800,100 @@ void SearchMissingImages(int choice2)
 
 	return;
 }
+/****************************************************************************
+ * NetworkInitPrompt
+ ***************************************************************************/
+bool NetworkInitPrompt()
+{
+    bool success = true;
+
+	GuiWindow promptWindow(472,320);
+	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	promptWindow.SetPosition(0, -10);
+
+    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
+	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
+
+	char imgPath[100];
+	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
+	GuiImageData btnOutline(imgPath, button_dialogue_box_png);
+	snprintf(imgPath, sizeof(imgPath), "%sdialogue_box.png", CFG.theme_path);
+	GuiImageData dialogBox(imgPath, dialogue_box_png);
+	GuiTrigger trigA;
+	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
+
+	GuiImage dialogBoxImg(&dialogBox);
+
+	if (Settings.wsprompt == yes){
+        dialogBoxImg.SetWidescreen(CFG.widescreen);
+	}
+
+	GuiText titleTxt(tr("Initializing Network"), 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+	titleTxt.SetPosition(0,60);
+
+	char msg[20] = " ";
+	GuiText msgTxt(msg, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+	msgTxt.SetPosition(0,-40);
+
+    GuiText btn1Txt(tr("Cancel"), 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	GuiImage btn1Img(&btnOutline);
+	if (Settings.wsprompt == yes){
+        btn1Txt.SetWidescreen(CFG.widescreen);
+        btn1Img.SetWidescreen(CFG.widescreen);
+	}
+	GuiButton btn1(&btn1Img,&btn1Img, 2, 4, 0, -45, &trigA, &btnSoundOver, &btnClick,1);
+	btn1.SetLabel(&btn1Txt);
+	btn1.SetState(STATE_SELECTED);
+
+	if ((Settings.wsprompt == yes) && (CFG.widescreen)){/////////////adjust buttons for widescreen
+		btn1.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
+		btn1.SetPosition(0, -80);
+	}
+
+	promptWindow.Append(&dialogBoxImg);
+	promptWindow.Append(&titleTxt);
+	promptWindow.Append(&msgTxt);
+	promptWindow.Append(&btn1);
+
+	promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
+	HaltGui();
+	mainWindow->SetState(STATE_DISABLED);
+	mainWindow->Append(&promptWindow);
+	mainWindow->ChangeFocus(&promptWindow);
+	ResumeGui();
+
+	while (!IsNetworkInit()) {
+
+        VIDEO_WaitVSync();
+
+        Initialize_Network();
+
+		if (!IsNetworkInit()) {
+            msgTxt.SetText(tr("Could not initialize network!"));
+            sleep(3);
+            success = false;
+            break;
+		}
+
+		if(btn1.GetState() == STATE_CLICKED) {
+			btn1.ResetState();
+			success = false;
+			break;
+		}
+    }
+
+	promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
+	while(promptWindow.GetEffect() > 0) usleep(50);
+
+	HaltGui();
+	mainWindow->Remove(&promptWindow);
+	mainWindow->SetState(STATE_DEFAULT);
+	ResumeGui();
+
+	return success;
+}
 
 /****************************************************************************
  * ProgressDownloadWindow

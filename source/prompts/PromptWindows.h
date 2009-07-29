@@ -24,12 +24,13 @@ int FormatingPartition(const char *title, partitionEntry *entry);
 void SearchMissingImages(int choice2);
 int ProgressDownloadWindow(int choice2);
 int ProgressUpdateWindow();
+bool NetworkInitPrompt();
 char * GetMissingFiles();
 int WindowScreensaver();
 int CodeDownload(const char *id);
 void GetLanguageToLangCode(char *langcode);
 int HBCWindowPrompt(const char *name, const char *coder, const char *version,
-                const char *release_date, const char *long_description, 
+                const char *release_date, const char *long_description,
 					 const char *iconPath, u64 filesize);
 
 

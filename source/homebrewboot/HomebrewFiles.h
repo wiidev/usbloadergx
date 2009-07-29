@@ -5,7 +5,7 @@
 #ifndef ___HOMEBREWFILES_H_
 #define ___HOMEBREWFILES_H_
 
-#define MAXHOMEBREWS     300
+#define MAXHOMEBREWS     500
 
 typedef struct {
     char            FileName[100];
@@ -39,7 +39,7 @@ class HomebrewFiles
         void SortList();
     protected:
         int filecount;
-        FileInfos FileInfo[MAXHOMEBREWS];
+        FileInfos *FileInfo;
 };
 
 #endif

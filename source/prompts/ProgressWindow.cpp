@@ -25,6 +25,7 @@ static char progressMsg2[150];
 static char progressTime[80];
 static char progressSizeLeft[80];
 static char progressSpeed[15];
+static char *dyn_message;
 static int showProgress = 0;
 static f32 progressDone = 0.0;
 static bool showTime = false;
@@ -86,7 +87,7 @@ static void GameInstallProgress() {
 
     snprintf(progressTime, sizeof(progressTime), "%s %d:%02d:%02d",tr("Time left:"),h,m,s);
     snprintf(progressSizeLeft, sizeof(progressSizeLeft), "%.2fGB/%.2fGB", gamesize * gameinstalldone/gameinstalltotal, gamesize);
-	 snprintf(progressSpeed, sizeof(progressSpeed), "%.1fMB/s", speed);
+    snprintf(progressSpeed, sizeof(progressSpeed), "%.1fMB/s", speed);
 
 }
 
@@ -183,7 +184,7 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
     sizeTxt.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
 	sizeTxt.SetPosition(50, -50);
 
-	 GuiText speedTxt(NULL, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+    GuiText speedTxt(NULL, 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
     speedTxt.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
 	speedTxt.SetPosition(50, -74);
 
@@ -228,8 +229,8 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
         promptWindow.Append(&timeTxt);
     if(showSize){
         promptWindow.Append(&sizeTxt);
-		  promptWindow.Append(&speedTxt);
-		  }
+        promptWindow.Append(&speedTxt);
+    }
 
 	HaltGui();
 	promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
@@ -249,9 +250,7 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
 	    usleep(20000);
 
         GameInstallProgress();
-		tmp=static_cast<int>(progressbarImg.GetWidth()*progressDone);
-
-
+		tmp = static_cast<int>(progressbarImg.GetWidth()*progressDone);
 
         if(CFG.widescreen && Settings.wsprompt == yes)
             progressbarImg.SetSkew(0,0,static_cast<int>(progressbarImg.GetWidth()*progressDone*0.8)-progressbarImg.GetWidth(),0,static_cast<int>(progressbarImg.GetWidth()*progressDone*0.8)-progressbarImg.GetWidth(),0,0,0);
@@ -262,10 +261,14 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
 
         if(showSize){
             sizeTxt.SetText(progressSizeLeft);
-				speedTxt.SetText(progressSpeed);
-				}
+            speedTxt.SetText(progressSpeed);
+        }
+
         if(showTime)
             timeTxt.SetText(progressTime);
+
+        if(msg2)
+            msg2Txt.SetText(dyn_message);
 	}
 
 	promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
@@ -313,7 +316,7 @@ void ProgressStop()
  * Callbackfunction for updating the progress values
  * Use this function as standard callback
  ***************************************************************************/
-void ShowProgress(const char *title, const char *msg1, const char *msg2, f32 done, f32 total, bool swSize, bool swTime)
+void ShowProgress(const char *title, const char *msg1, char *dynmsg2, f32 done, f32 total, bool swSize, bool swTime)
 {
 	if(total <= 0)
 		return;
@@ -328,8 +331,8 @@ void ShowProgress(const char *title, const char *msg1, const char *msg2, f32 don
         strncpy(progressTitle, title, sizeof(progressTitle));
     if(msg1)
         strncpy(progressMsg1, msg1, sizeof(progressMsg1));
-    if(msg2)
-        strncpy(progressMsg2, msg2, sizeof(progressMsg2));
+    if(dynmsg2)
+        dyn_message = dynmsg2;
 
     if(swTime == true) {
         static u32 expected;

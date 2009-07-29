@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-29 12:52-0400\n"
+"POT-Creation-Date: 2009-07-29 22:18+0200\n"
 "PO-Revision-Date: 2009-07-27 12:20+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -378,6 +378,9 @@ msgstr "Vill du försöka igen i 30 sekunder?"
 
 msgid "Do you want to use the alt dol that is known to be correct?"
 msgstr "Vill du använda en alternativ dol som är känd att fungera?"
+
+msgid "Do you wish to update/download all language files?"
+msgstr ""
 
 msgid "Dol Path"
 msgstr "Dol sökväg"
@@ -991,6 +994,12 @@ msgstr "Uppdatera alla"
 msgid "Update DOL"
 msgstr "Updatera DOL"
 
+msgid "Update Files"
+msgstr ""
+
+msgid "Update all Languagefiles"
+msgstr ""
+
 msgid "Update failed"
 msgstr "Uppdatering misslyckades"
 
@@ -1006,13 +1015,7 @@ msgstr "Sökväg till uppdatering ändrad."
 msgid "Updating"
 msgstr "Uppdaterar"
 
-msgid "Updating Language Files"
-msgstr ""
-
-msgid "Updating Language files"
-msgstr ""
-
-msgid "Updating WiiTDB.zip"
+msgid "Updating Languagefiles:"
 msgstr ""
 
 msgid "VIDTV Patch"

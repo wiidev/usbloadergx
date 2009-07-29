@@ -15,7 +15,7 @@
 void InitProgressThread();
 void ExitProgressThread();
 void SetupGameInstallProgress(char * titl, char * game);
-void ShowProgress (const char *title, const char *msg1, const char *msg2,
+void ShowProgress (const char *title, const char *msg1, char *dynmsg2,
                     f32 done, f32 total, bool swSize = false, bool swTime = false);
 void ProgressStop();
 
