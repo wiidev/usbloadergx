@@ -221,12 +221,14 @@ void ExitGUIThreads()
 void rockout(int f = 0)
 {	
 
-	if (f==2)gameSelected = -1;
+	HaltGui();
+	int num=(f==2?-1:gameSelected);
+	
 	char imgPath[100];
 	#ifdef HW_RVL
-	if(!(strcasestr(get_title(&gameList[gameSelected]),"guitar")||
-		strcasestr(get_title(&gameList[gameSelected]),"band")||
-		strcasestr(get_title(&gameList[gameSelected]),"rock")||
+	if(!(strcasestr(get_title(&gameList[num]),"guitar")||
+		strcasestr(get_title(&gameList[num]),"band")||
+		strcasestr(get_title(&gameList[num]),"rock")||
 		f==1)){
 		for(int i = 0; i < 4; i++)
 			delete pointer[i];
@@ -253,7 +255,7 @@ void rockout(int f = 0)
 		pointer[3] = new GuiImageData(imgPath, rplayer4_point_png);
 	}
 	#endif
-
+	ResumeGui();
 }
 
 /****************************************************************************
@@ -1364,6 +1366,7 @@ int MenuDiscList()
                                                 break;
                                         }
                                         returnHere = true;
+													 rockout(2);
                                 }
 
                                 else if (choice == 3) //WBFS renaming
@@ -1381,12 +1384,13 @@ int MenuDiscList()
                                         }
                                 }
                                 else if(choice == 0) {
+													rockout(2);
                                         if (Settings.gameDisplay==list){gameBrowser->SetFocus(1);}
                                         else if (Settings.gameDisplay==grid){gameGrid->SetFocus(1);}
                                         else if (Settings.gameDisplay==carousel){gameCarousel->SetFocus(1);}
                                 }
-										  //reset cursor
-										  rockout(2);
+										  
+										 
                         }
                 }
 			// to skip the first call of windowScreensaver at startup when wiimote is not connected

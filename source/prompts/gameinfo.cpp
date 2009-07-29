@@ -509,27 +509,7 @@ int showGameInfo(char *ID)
 			titleTxt->SetAlignment(ALIGN_CENTRE, ALIGN_TOP); titleTxt->SetPosition(txtXOffset,12+titley);
 			gameinfoWindow.Append(titleTxt);
 		}
-
-		//publisher
-		if (strcmp(gameinfo.publisher,"") != 0){
-			snprintf(linebuf, sizeof(linebuf), "%s %s", tr("Published by"), gameinfo.publisher);
-			publisherTxt = new GuiText(linebuf, 16, (GXColor){0,0,0, 255});
-			if (publisherTxt->GetWidth()>250) newline=2;
-			publisherTxt->SetMaxWidth(250,GuiText::WRAP);
-			publisherTxt->SetAlignment(ALIGN_RIGHT, ALIGN_TOP); publisherTxt->SetPosition(-17,12+indexy);  indexy+=(20 * newline);newline=1;
-			gameinfoWindow.Append(publisherTxt);
-		}
 		
-		//developer
-		if (strcmp(gameinfo.developer,"") != 0 && strcasecmp(gameinfo.developer,gameinfo.publisher) != 0)	{
-			snprintf(linebuf, sizeof(linebuf), "%s %s", tr("Developed by"), gameinfo.developer);
-			developerTxt = new GuiText(linebuf, 16, (GXColor){0,0,0, 255});
-			if (developerTxt->GetWidth()>250) newline=2;
-			developerTxt->SetMaxWidth(250,GuiText::WRAP);
-			developerTxt->SetAlignment(ALIGN_RIGHT, ALIGN_TOP); developerTxt->SetPosition(-17,12+indexy); indexy+=(20 * newline);newline=1;
-			gameinfoWindow.Append(developerTxt);
-		}
-
 		//date
 		snprintf(linebuf2, sizeof(linebuf2), " ");
 		if (strcmp(gameinfo.day,"") != 0)
@@ -581,6 +561,26 @@ int showGameInfo(char *ID)
 			if (releasedTxt->GetWidth()>300) newline=2;
 			releasedTxt->SetAlignment(ALIGN_RIGHT, ALIGN_TOP); releasedTxt->SetPosition(-17,12+indexy);  indexy+=(20 * newline);newline=1;
 			gameinfoWindow.Append(releasedTxt);
+		}
+
+		//publisher
+		if (strcmp(gameinfo.publisher,"") != 0){
+			snprintf(linebuf, sizeof(linebuf), "%s %s", tr("Published by"), gameinfo.publisher);
+			publisherTxt = new GuiText(linebuf, 16, (GXColor){0,0,0, 255});
+			if (publisherTxt->GetWidth()>250) newline=2;
+			publisherTxt->SetMaxWidth(250,GuiText::WRAP);
+			publisherTxt->SetAlignment(ALIGN_RIGHT, ALIGN_TOP); publisherTxt->SetPosition(-17,12+indexy);  indexy+=(20 * newline);newline=1;
+			gameinfoWindow.Append(publisherTxt);
+		}
+		
+		//developer
+		if (strcmp(gameinfo.developer,"") != 0 && strcasecmp(gameinfo.developer,gameinfo.publisher) != 0)	{
+			snprintf(linebuf, sizeof(linebuf), "%s %s", tr("Developed by"), gameinfo.developer);
+			developerTxt = new GuiText(linebuf, 16, (GXColor){0,0,0, 255});
+			if (developerTxt->GetWidth()>250) newline=2;
+			developerTxt->SetMaxWidth(250,GuiText::WRAP);
+			developerTxt->SetAlignment(ALIGN_RIGHT, ALIGN_TOP); developerTxt->SetPosition(-17,12+indexy); indexy+=(20 * newline);newline=1;
+			gameinfoWindow.Append(developerTxt);
 		}
 
 		//genre
