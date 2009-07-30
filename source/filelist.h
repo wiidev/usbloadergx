@@ -35,9 +35,6 @@ extern const u32    Wifi_btn_png_size;
 extern const u8     Channel_btn_png[];
 extern const u32    Channel_btn_png_size;
 
-extern const u8     sdcard_over_png[];
-extern const u32    sdcard_over_png_size;
-
 extern const u8		wiimote_png[];
 extern const u32	wiimote_png_size;
 

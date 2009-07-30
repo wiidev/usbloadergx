@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-29 22:18+0200\n"
+"POT-Creation-Date: 2009-07-30 05:39+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: Kir\n"
 "Language-Team: Kir\n"
@@ -997,7 +997,7 @@ msgstr "Обновить DOL"
 msgid "Update Files"
 msgstr ""
 
-msgid "Update all Languagefiles"
+msgid "Update all Language Files"
 msgstr ""
 
 msgid "Update failed"
@@ -1015,7 +1015,10 @@ msgstr "Путь к обновлениям изменен"
 msgid "Updating"
 msgstr "обновляю"
 
-msgid "Updating Languagefiles:"
+msgid "Updating Language Files:"
+msgstr ""
+
+msgid "Updating WiiTDB.zip"
 msgstr ""
 
 msgid "VIDTV Patch"
@@ -1042,6 +1045,9 @@ msgstr "Широкоформатный фикс"
 
 msgid "Wii Menu"
 msgstr "Меню Wii"
+
+msgid "Wii Settings"
+msgstr ""
 
 msgid "Wiilight"
 msgstr "Подсветка Wii"
@@ -1133,66 +1139,3 @@ msgstr "из"
 
 msgid "seconds left"
 msgstr "секунд осталось"
-
-#~ msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
-#~ msgstr "Размеры картинки не делятся на 4. Поздравляю, блин."
-
-#~ msgid "Path of titles.txt change"
-#~ msgstr "изменить путь к titles.txt"
-
-#~ msgid "Path of titles.txt changed."
-#~ msgstr "путь к titles.txt изменён"
-
-#~ msgid "titles.txt Path"
-#~ msgstr "путь к titles.txt"
-
-#~ msgid "file(s) left"
-#~ msgstr "осталось файлов:"
-
-#~ msgid "Favorite"
-#~ msgstr "Добавить в избранное"
-
-#~ msgid "Coverpath change"
-#~ msgstr "Сменить путь к обложкам"
-
-#~ msgid "BOOT ERROR"
-#~ msgstr "ОШИБКА ЗАГРУЗКИ"
-
-#~ msgid "Failed to boot:"
-#~ msgstr "Ошибка загрузки:"
-
-#~ msgid "Failed to mount front SD-card"
-#~ msgstr "Ошибка при монтировании SD карты"
-
-#~ msgid "Failed to set USB:"
-#~ msgstr "Ошибка инициализации USB:"
-
-#~ msgid "Go Back"
-#~ msgstr "Назад"
-
-#~ msgid "Language change"
-#~ msgstr "Сменить язык"
-
-#~ msgid "Sort Game List"
-#~ msgstr "Сортировка списка"
-
-#~ msgid "Loading in cIOS249"
-#~ msgstr "загружаю с cIOS249"
-
-#~ msgid "No HDD found!"
-#~ msgstr "HDD не найден!"
-
-#~ msgid "Password change"
-#~ msgstr "Сменить пароль"
-
-#~ msgid "Select the Partition"
-#~ msgstr "Выберите раздел,"
-
-#~ msgid "you want to format"
-#~ msgstr "который вы хотите отформатировать"
-
-#~ msgid "Try"
-#~ msgstr "Попытка"
-
-#~ msgid "You don't have cIOS222"
-#~ msgstr "У вас не установлен cIOS222"

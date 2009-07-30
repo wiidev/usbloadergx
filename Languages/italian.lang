@@ -1,10 +1,10 @@
 # USB Loader GX language source file.
-# italian.lang - v28 - r662
+# italian.lang - v29 - r668
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-29 22:18+0200\n"
+"POT-Creation-Date: 2009-07-30 05:39+0200\n"
 "PO-Revision-Date: 2009-07-24 11:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe & Cambo\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid " Wad Saved as:"
-msgstr ""
+msgstr " Wad salvato con il nome:"
 
 msgid " could not be downloaded."
 msgstr " non può essere scaricato."
@@ -353,16 +353,16 @@ msgid "Display"
 msgstr "Display"
 
 msgid "Display as a carousel"
-msgstr ""
+msgstr "Visualizzazione a Carosello"
 
 msgid "Display as a grid"
-msgstr ""
+msgstr "Visualizzazione a Griglia"
 
 msgid "Display as a list"
-msgstr ""
+msgstr "Visualizzazione a Elenco"
 
 msgid "Display favorites"
-msgstr ""
+msgstr "Mostra i preferiti"
 
 msgid "Do you really want to delete:"
 msgstr "Vuoi veramente eliminare:"
@@ -663,7 +663,7 @@ msgid "Missing files"
 msgstr "File Mancante/i"
 
 msgid "Most likely it has dimensions that are not evenly divisible by 4."
-msgstr ""
+msgstr "Molto probabilmente le dimensioni non sono divisibili per 4."
 
 msgid "Music Volume"
 msgstr "Volume"
@@ -861,7 +861,7 @@ msgid "Save Failed"
 msgstr "Salvataggio Fallito"
 
 msgid "Saving"
-msgstr ""
+msgstr "Sto salvando"
 
 msgid "Screensaver"
 msgstr "Salvaschermo"
@@ -882,10 +882,10 @@ msgid "Shutdown to Idle"
 msgstr "Preaccensione"
 
 msgid "Sort alphabetically"
-msgstr ""
+msgstr "Ordine alfabetico"
 
 msgid "Sort order by most played"
-msgstr ""
+msgstr "Ordine di preferenza"
 
 msgid "Sound"
 msgstr "Audio"
@@ -923,7 +923,6 @@ msgstr "Predefinita Sistema"
 msgid "TChinese"
 msgstr "Cinese Tradizionale"
 
-# ### To be updated   #####
 msgid "TXTCheatcodes Path"
 msgstr "Percorso Trucchi in Txt"
 
@@ -931,7 +930,7 @@ msgid "TXTCheatcodes Path changed"
 msgstr "Percorso Trucchi in Txt modificato"
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."
-msgstr ""
+msgstr "File Wad installato. Non si può però eliminare dalla scheda SD."
 
 #, c-format
 msgid "The wad installation failed with error %ld"
@@ -998,7 +997,7 @@ msgstr "Solo DOL"
 msgid "Update Files"
 msgstr ""
 
-msgid "Update all Languagefiles"
+msgid "Update all Language Files"
 msgstr ""
 
 msgid "Update failed"
@@ -1016,7 +1015,10 @@ msgstr "Perc. Aggiornamento Modificato"
 msgid "Updating"
 msgstr "Aggiornamento"
 
-msgid "Updating Languagefiles:"
+msgid "Updating Language Files:"
+msgstr ""
+
+msgid "Updating WiiTDB.zip"
 msgstr ""
 
 msgid "VIDTV Patch"
@@ -1044,6 +1046,9 @@ msgstr "Widescreen"
 msgid "Wii Menu"
 msgstr "Menu Wii"
 
+msgid "Wii Settings"
+msgstr ""
+
 msgid "Wiilight"
 msgstr "Illuminazione Wii"
 
@@ -1051,13 +1056,13 @@ msgid "Wrong Password"
 msgstr "Password Errata"
 
 msgid "XMLPath"
-msgstr ""
+msgstr "Percorso XML"
 
 msgid "XMLPath change"
-msgstr ""
+msgstr "Modifica percorso XML"
 
 msgid "XMLPath changed."
-msgstr ""
+msgstr "Percorso XML modificato."
 
 msgid "Yes"
 msgstr "Sì"
@@ -1082,16 +1087,16 @@ msgid "available"
 msgstr "disponibile"
 
 msgid "contains over 255 lines of code.  It will produce unexpected results."
-msgstr ""
+msgstr "contiene più di 255 linee di codice. Possibili effetti inattesi."
 
 msgid "does not exist!"
 msgstr "non esiste!"
 
 msgid "does not exist!  Loading game without cheats."
-msgstr ""
+msgstr "non esiste! Carico il gioco senza i trucchi."
 
 msgid "does not exist!  You Messed something up, Idiot."
-msgstr ""
+msgstr "non esiste! Hai fatto qualche casino."
 
 msgid "file left"
 msgstr "file mancante"
@@ -1134,111 +1139,3 @@ msgstr "di"
 
 msgid "seconds left"
 msgstr "secondi mancanti"
-
-#~ msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
-#~ msgstr "Molto probabilmente le dimensioni non sono divisibili per 4."
-
-#~ msgid "Shit"
-#~ msgstr "Cavoli"
-
-#~ msgid "there was an error"
-#~ msgstr "c'è stato un errore"
-
-#~ msgid "Received:"
-#~ msgstr "Ricevuto/i"
-
-#~ msgid "Path of titles.txt change"
-#~ msgstr "Modifica percorso per titles.txt"
-
-#~ msgid "Path of titles.txt changed."
-#~ msgstr "Percorso per titles.txt modificato."
-
-#~ msgid "TXT Cheat Path"
-#~ msgstr "Percorso trucchi TXT"
-
-#~ msgid "The wad file was installed. But It could not be deleted from the SD card."
-#~ msgstr "Il file wad è installato ma non può essere cancellato dalla scheda SD."
-
-#~ msgid "Theme Path"
-#~ msgstr "Percorso Tema"
-
-#~ msgid "Update Path"
-#~ msgstr "Aggiorna Percorso"
-
-#~ msgid "XML Path"
-#~ msgstr "Percorso XML"
-
-#~ msgid "contains over 255 lines of code. It will produce unexpected results."
-#~ msgstr "contiene più di 255 linee di codice. Produrrà effetti inattesi."
-
-#~ msgid "does not exist! Loading game without cheats."
-#~ msgstr "non esiste! Caricamento gioco senza trucchi."
-
-#~ msgid "does not exist! You Messed something up, Idiot."
-#~ msgstr "non esiste! Hai omesso qualcosa, Idiota."
-
-#~ msgid "titles.txt Path"
-#~ msgstr "Percorso titles.txt"
-
-#~ msgid "Leaving so you can restart..."
-#~ msgstr "Sto uscendo per permettere il riavvio..."
-
-#~ msgid "file(s) left"
-#~ msgstr "file mancante/i"
-
-#~ msgid "for hosting the covers/discarts"
-#~ msgstr "per le copertine online"
-
-#~ msgid "Coverpath change"
-#~ msgstr "Modifico Percorso Copertina"
-
-#~ msgid "BOOT ERROR"
-#~ msgstr "Errore Avvio"
-
-#~ msgid "Failed to boot:"
-#~ msgstr "Erroe Avvio:"
-
-#~ msgid "Failed to mount front SD-card"
-#~ msgstr "Errore lettura scheda SD"
-
-#~ msgid "Failed to set USB:"
-#~ msgstr "Errore a Settare porta USB:"
-
-#~ msgid "Go Back"
-#~ msgstr "Indietro"
-
-#~ msgid "Language change"
-#~ msgstr "Cambio Lingua"
-
-#~ msgid "Loading in cIOS249"
-#~ msgstr "Caricamento in cIOS249"
-
-#~ msgid "No HDD found!"
-#~ msgstr "Nessun HDD trovato!"
-
-#~ msgid "Password change"
-#~ msgstr "Modifica Password"
-
-#~ msgid "Select the Partition"
-#~ msgstr "Seleziona la Partizione"
-
-#~ msgid "you want to format"
-#~ msgstr "vuoi formattare"
-
-#~ msgid "Try"
-#~ msgstr "Prova"
-
-#~ msgid "You don't have cIOS222"
-#~ msgstr "Non Possiedi cIOS222"
-
-#~ msgid "Favorite"
-#~ msgstr "Favoriti"
-
-#~ msgid "Alphabetical"
-#~ msgstr "Alfabetico"
-
-#~ msgid "Favorites"
-#~ msgstr "Favoriti"
-
-#~ msgid "Sort Game List"
-#~ msgstr "Ordine Giochi"

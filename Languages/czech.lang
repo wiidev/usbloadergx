@@ -4,22 +4,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-29 22:18+0200\n"
+"POT-Creation-Date: 2009-07-30 05:39+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) \n"
-"Language-Team: r662 - last version on http://startgolf.tym.cz/czech.lang \n"
+"Language-Team: r668 - last version on http://startgolf.tym.cz/czech.lang \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid " Wad Saved as:"
-msgstr ""
+msgstr " WAD uložen jako:"
 
 msgid " could not be downloaded."
 msgstr " nelze stáhnout."
 
 msgid " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information."
-msgstr " byl uložen. Text nebyl zkontrolován. Nekteré cásti kódu nemusí fungovat s ostaními. Pokud dojde k problémom, otevřte text v normálním editoru pro více informací."
+msgstr " byl uložen. Soubor nebyl zkontrolován. Nekteré cásti kódu nemusí fungovat s ostaními. Pokud dojde k problémum, overte text v editoru."
 
 msgid " is not on the server."
 msgstr " není na serveru"
@@ -163,7 +163,7 @@ msgid "Backgroundmusic Path changed."
 msgstr "Cesta pro hudbu na pozadí zmenena"
 
 msgid "Big thanks to:"
-msgstr "Velké podekování pro:"
+msgstr "Velké díky pro:"
 
 msgid "Block IOS Reload"
 msgstr "Blokovat opetovné zavedení IOS"
@@ -260,10 +260,10 @@ msgid "Could not open Disc"
 msgstr "Nelze otevrít disk"
 
 msgid "Could not open WBFS partition"
-msgstr "Nemohu otevřít WBFS oddíl."
+msgstr "Nemohu otevrít WBFS oddíl."
 
 msgid "Could not open disc."
-msgstr "Nelze otevřít disk"
+msgstr "Nelze otevrít disk"
 
 msgid "Could not read the disc."
 msgstr "Nelze císt disk"
@@ -353,16 +353,16 @@ msgid "Display"
 msgstr "Zobrazení"
 
 msgid "Display as a carousel"
-msgstr ""
+msgstr "Zobrazit jako karusel"
 
 msgid "Display as a grid"
-msgstr ""
+msgstr "Zobrazit do mrížky"
 
 msgid "Display as a list"
-msgstr ""
+msgstr "Zobrait jako seznam"
 
 msgid "Display favorites"
-msgstr ""
+msgstr "Zobrazit oblíbené"
 
 msgid "Do you really want to delete:"
 msgstr "Opravdu smazat:"
@@ -377,7 +377,7 @@ msgid "Do you want to retry for 30 secs?"
 msgstr "Chcete to zkusit znovu za 30 sekund?"
 
 msgid "Do you want to use the alt dol that is known to be correct?"
-msgstr "Přejete si použít jiný DOL, který je správný?"
+msgstr "Prejete si použít jiný DOL, který je správný?"
 
 msgid "Do you wish to update/download all language files?"
 msgstr ""
@@ -392,7 +392,7 @@ msgid "Dolpath change"
 msgstr "Zmena cesty k DOL"
 
 msgid "Don't bother the USB Loader GX Team about errors in this file."
-msgstr "."
+msgstr "  "
 
 msgid "Done!"
 msgstr "Hotovo!"
@@ -440,7 +440,7 @@ msgid "Error reading Disc"
 msgstr "Nelze císt disk"
 
 msgid "Error while transfering data."
-msgstr "Chyba behem přenosu dat."
+msgstr "Chyba behem prenosu dat."
 
 msgid "Error..."
 msgstr "Chyba..."
@@ -539,15 +539,15 @@ msgid "How to Shutdown?"
 msgstr "Jakým zpusobem ukoncit?"
 
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
-msgstr "."
+msgstr "  "
 
 #, c-format
 msgid "Incoming file %0.2fKB"
-msgstr "Příchozí soubor %0.2fKB"
+msgstr "Príchozí soubor %0.2fKB"
 
 #, c-format
 msgid "Incoming file %0.2fMB"
-msgstr "Příchozí soubor %0.2fMB"
+msgstr "Príchozí soubor %0.2fMB"
 
 msgid "Initializing Network"
 msgstr "Inicializuji sítové pripojení"
@@ -593,7 +593,7 @@ msgstr "Instaluji WAD"
 
 #, c-format
 msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team. %s - %i"
-msgstr "Zdá se, že máte informace, které by pro nás mohly být užitecné. Odelete prosím tuto informaci na náš DEV tým. %s - %i"
+msgstr "Zdá se, že máte informace, které by pro nás mohly být užitecné. Odešlete prosím tuto informaci na náš DEV tým. %s - %i"
 
 msgid "Italian"
 msgstr "Italsky"
@@ -813,7 +813,7 @@ msgid "Reading WAD data... Ok!"
 msgstr "Nacítám WAD data... Ok!"
 
 msgid "Receiving file from:"
-msgstr "Přijímám soubor z:"
+msgstr "Prijímám soubor z:"
 
 msgid "Released"
 msgstr "Uvolnil"
@@ -861,7 +861,7 @@ msgid "Save Failed"
 msgstr "Uložení selhalo"
 
 msgid "Saving"
-msgstr ""
+msgstr "Ukládání"
 
 msgid "Screensaver"
 msgstr "Sporic obrazovky"
@@ -882,10 +882,10 @@ msgid "Shutdown to Idle"
 msgstr "Pauza"
 
 msgid "Sort alphabetically"
-msgstr ""
+msgstr "Trídení dle abecedy"
 
 msgid "Sort order by most played"
-msgstr ""
+msgstr "Trídení podle spuštení"
 
 msgid "Sound"
 msgstr "Zvuk"
@@ -927,7 +927,7 @@ msgid "TXTCheatcodes Path"
 msgstr "Cesta k TXT cheatum"
 
 msgid "TXTCheatcodes Path changed"
-msgstr ""
+msgstr "Cesta k TXT cheatum zmenena"
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."
 msgstr "WAD soubor byl nainstalován, ale nelze smazat z SD karty"
@@ -949,7 +949,7 @@ msgid "Time left:"
 msgstr "Zbývající cas:"
 
 msgid "Title Launcher"
-msgstr ""
+msgstr "Spouštec kanálu"
 
 msgid "Titles from XML"
 msgstr "Názvy z XML"
@@ -965,7 +965,7 @@ msgstr "USB Loader GX je zabezpecen"
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
-msgstr "Nelze otevřít WAD, který byl nyní stažen (%s)."
+msgstr "Nelze otevrít WAD, který byl nyní stažen (%s)."
 
 msgid "Uninstall"
 msgstr "Odinstalace"
@@ -974,7 +974,7 @@ msgid "Uninstall Game"
 msgstr "Odinstalace hry"
 
 msgid "Uninstall Menu"
-msgstr "Odinstalace menu"
+msgstr "Menu odinstalací"
 
 msgid "Uninstalling wad"
 msgstr "Odinstalace WAD"
@@ -997,7 +997,7 @@ msgstr "Aktualizace DOL"
 msgid "Update Files"
 msgstr ""
 
-msgid "Update all Languagefiles"
+msgid "Update all Language Files"
 msgstr ""
 
 msgid "Update failed"
@@ -1015,7 +1015,10 @@ msgstr "Cesta pro aktualizaci zmenena"
 msgid "Updating"
 msgstr "Aktualizuji"
 
-msgid "Updating Languagefiles:"
+msgid "Updating Language Files:"
+msgstr ""
+
+msgid "Updating WiiTDB.zip"
 msgstr ""
 
 msgid "VIDTV Patch"
@@ -1043,6 +1046,9 @@ msgstr "Korekce širokoúhlé obrazovky"
 msgid "Wii Menu"
 msgstr "Wii menu"
 
+msgid "Wii Settings"
+msgstr ""
+
 msgid "Wiilight"
 msgstr "Wii svetlo"
 
@@ -1050,13 +1056,13 @@ msgid "Wrong Password"
 msgstr "Špatné heslo"
 
 msgid "XMLPath"
-msgstr ""
+msgstr "Cesta k XML"
 
 msgid "XMLPath change"
-msgstr ""
+msgstr "Zmenit cestu k XML"
 
 msgid "XMLPath changed."
-msgstr ""
+msgstr "Cesta k XML zmenena"
 
 msgid "Yes"
 msgstr "Ano"
@@ -1081,7 +1087,7 @@ msgid "available"
 msgstr "dostupný"
 
 msgid "contains over 255 lines of code.  It will produce unexpected results."
-msgstr "obsahuje více jak 255 řádek kódu. To može vyvolat neocekáváné výsledky."
+msgstr "obsahuje více jak 255 rádek kódů. To muže vyvolat neocekáváné výsledky."
 
 msgid "does not exist!"
 msgstr "neexistuje!"
@@ -1090,7 +1096,7 @@ msgid "does not exist!  Loading game without cheats."
 msgstr "neexistuje. Nahrávání hry bez cheatu."
 
 msgid "does not exist!  You Messed something up, Idiot."
-msgstr "neexistuje. Neco jsi zvoral idiote."
+msgstr "neexistuje. Neco jsi zvoral ty pako."
 
 msgid "file left"
 msgstr "soubor zbývá"
@@ -1105,7 +1111,7 @@ msgid "for"
 msgstr "pro"
 
 msgid "for WiiTDB and hosting covers / disc images"
-msgstr "za WiiTDB a hostování obalo / obrázko disko"
+msgstr "za WiiTDB a hostování obalu / obrázku disku"
 
 msgid "for diverse patches"
 msgstr "za ruzné opravy"
@@ -1129,46 +1135,10 @@ msgid "not set"
 msgstr "nenastaveno"
 
 msgid "of"
-msgstr "z"
+msgstr "z "
 
 msgid "seconds left"
 msgstr "sekund zbývá"
 
 #~ msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
 #~ msgstr "Nejspíše má velikost, která není delitelná 4."
-
-#~ msgid "Shit"
-#~ msgstr "Kecy"
-
-#~ msgid "there was an error"
-#~ msgstr "došlo k chybe"
-
-#~ msgid "Received:"
-#~ msgstr "Přijato:"
-
-#~ msgid "Disc Path"
-#~ msgstr "Cesta disku"
-
-#~ msgid "GCT Cheat Path"
-#~ msgstr "Cesta pro GCT Cheat"
-
-#~ msgid "Homebrew Path"
-#~ msgstr "Cesta k Homebrew"
-
-#~ msgid "Path of titles.txt change"
-#~ msgstr "Zmena cesty k titles.txt"
-
-#~ msgid "Path of titles.txt changed."
-#~ msgstr "Cesta k titles.txt zmenena"
-
-#~ msgid "TXT Cheat Path"
-#~ msgstr "Cesta k TXT Cheat"
-
-#~ msgid "Theme Path"
-#~ msgstr "Cesta ke skinum"
-
-#~ msgid "XML Path"
-#~ msgstr "Cesta XML"
-
-#~ msgid "titles.txt Path"
-#~ msgstr "Cesta k titles.txt"

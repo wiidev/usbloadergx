@@ -2569,7 +2569,7 @@ int ProgressUpdateWindow()
 				fclose(pfile);
 				free(file.data);
                 }
-				msgTxt.SetTextf("%s", tr("Updating Language files"));
+				msgTxt.SetTextf("%s", tr("Updating Language Files:"));
 				updateLanguageFiles();
 				}
                 }
@@ -2789,7 +2789,7 @@ int ProgressUpdateWindow()
 				fclose(pfile);
 				free(file.data);
 				}
-				msgTxt.SetTextf("%s", tr("Updating Language Files"));
+				msgTxt.SetTextf("%s", tr("Updating Language Files:"));
 				updateLanguageFiles();
 				promptWindow.Append(&progressbarEmptyImg);
             promptWindow.Append(&progressbarImg);

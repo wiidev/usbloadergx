@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-29 22:18+0200\n"
+"POT-Creation-Date: 2009-07-30 05:39+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -997,7 +997,7 @@ msgstr "Oppdater DOL"
 msgid "Update Files"
 msgstr ""
 
-msgid "Update all Languagefiles"
+msgid "Update all Language Files"
 msgstr ""
 
 msgid "Update failed"
@@ -1015,7 +1015,10 @@ msgstr "Oppdatering sti endret."
 msgid "Updating"
 msgstr "Oppdaterer"
 
-msgid "Updating Languagefiles:"
+msgid "Updating Language Files:"
+msgstr ""
+
+msgid "Updating WiiTDB.zip"
 msgstr ""
 
 msgid "VIDTV Patch"
@@ -1042,6 +1045,9 @@ msgstr "Widescreen fiks"
 
 msgid "Wii Menu"
 msgstr "Wii meny"
+
+msgid "Wii Settings"
+msgstr ""
 
 msgid "Wiilight"
 msgstr "Wii DVD lys"
@@ -1133,96 +1139,3 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder gjenstår"
-
-#~ msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
-#~ msgstr "Sannsynligvis har bildet dimensjoner som ikke kan deles med 4."
-
-#~ msgid "Shit"
-#~ msgstr "Oops"
-
-#~ msgid "there was an error"
-#~ msgstr "en feil har oppstått"
-
-#~ msgid "Received:"
-#~ msgstr "Mottatt:"
-
-#~ msgid "Path of titles.txt change"
-#~ msgstr "Endre titles.txt sti"
-
-#~ msgid "Path of titles.txt changed."
-#~ msgstr "Titles.txt sti endret."
-
-#~ msgid "TXT Cheat Path"
-#~ msgstr "TXT jukse sti"
-
-#~ msgid "Theme Path"
-#~ msgstr "Tema sti"
-
-#~ msgid "Update Path"
-#~ msgstr "Oppdatering sti"
-
-#~ msgid "XML Path"
-#~ msgstr "XML sti"
-
-#~ msgid "titles.txt Path"
-#~ msgstr "Titles.txt sti"
-
-#~ msgid "Leaving so you can restart..."
-#~ msgstr "Lukker så du kan restarte..."
-
-#~ msgid "file(s) left"
-#~ msgstr "fil(er) gjenstår"
-
-#~ msgid "for hosting the covers/discarts"
-#~ msgstr "for hosting av cover/platebilder"
-
-#~ msgid "Favorite"
-#~ msgstr "Favoritt"
-
-#~ msgid "Alphabetical"
-#~ msgstr "Alfabetisk"
-
-#~ msgid "Coverpath change"
-#~ msgstr "Endre cover sti"
-
-#~ msgid "BOOT ERROR"
-#~ msgstr "BOOT FEIL"
-
-#~ msgid "Failed to boot:"
-#~ msgstr "Feil ved start:"
-
-#~ msgid "Failed to mount front SD-card"
-#~ msgstr "Feil ved montering av SD-kort i front"
-
-#~ msgid "Failed to set USB:"
-#~ msgstr "Feil ved valgt USB:"
-
-#~ msgid "Favorites"
-#~ msgstr "Favoritter"
-
-#~ msgid "Go Back"
-#~ msgstr "Gå tilbake"
-
-#~ msgid "Loading in cIOS249"
-#~ msgstr "Laster i cIOS249"
-
-#~ msgid "Sort Game List"
-#~ msgstr "Sorter spill liste"
-
-#~ msgid "No HDD found!"
-#~ msgstr "Ingen HDD funnet!"
-
-#~ msgid "Password change"
-#~ msgstr "Endre passord"
-
-#~ msgid "Select the Partition"
-#~ msgstr "Velg partisjonen"
-
-#~ msgid "you want to format"
-#~ msgstr "du vil formatere"
-
-#~ msgid "Try"
-#~ msgstr "Prøv"
-
-#~ msgid "You don't have cIOS222"
-#~ msgstr "Du har ikke cIOS222"

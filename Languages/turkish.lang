@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-29 22:18+0200\n"
+"POT-Creation-Date: 2009-07-30 05:39+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -997,7 +997,7 @@ msgstr ""
 msgid "Update Files"
 msgstr ""
 
-msgid "Update all Languagefiles"
+msgid "Update all Language Files"
 msgstr ""
 
 msgid "Update failed"
@@ -1015,7 +1015,10 @@ msgstr ""
 msgid "Updating"
 msgstr ""
 
-msgid "Updating Languagefiles:"
+msgid "Updating Language Files:"
+msgstr ""
+
+msgid "Updating WiiTDB.zip"
 msgstr ""
 
 msgid "VIDTV Patch"
@@ -1042,6 +1045,9 @@ msgstr "Genisekran Çözümü"
 
 msgid "Wii Menu"
 msgstr "Wii Menü"
+
+msgid "Wii Settings"
+msgstr ""
 
 msgid "Wiilight"
 msgstr ""
@@ -1133,48 +1139,3 @@ msgstr "/"
 
 msgid "seconds left"
 msgstr "saniye kaldi"
-
-#~ msgid "file(s) left"
-#~ msgstr "dosya kaldi"
-
-#~ msgid "Coverpath change"
-#~ msgstr "Kapak Yolunu Degistir"
-
-#~ msgid "BOOT ERROR"
-#~ msgstr "AÇILIS HATASI"
-
-#~ msgid "Failed to boot:"
-#~ msgstr "Açilamadi:"
-
-#~ msgid "Failed to mount front SD-card"
-#~ msgstr "SD-card monte edilemedi"
-
-#~ msgid "Failed to set USB:"
-#~ msgstr "USB ayarlamasi basarisiz oldu:"
-
-#~ msgid "Go Back"
-#~ msgstr "Geri Dön"
-
-#~ msgid "Language change"
-#~ msgstr "Lisan degistirme"
-
-#~ msgid "Loading in cIOS249"
-#~ msgstr "cIOS249'dan yükleme"
-
-#~ msgid "No HDD found!"
-#~ msgstr "HDD bulunamadi!"
-
-#~ msgid "Password change"
-#~ msgstr "Password change"
-
-#~ msgid "Select the Partition"
-#~ msgstr "Bölümü Seçin"
-
-#~ msgid "you want to format"
-#~ msgstr "biçimlendirmek istiyorsunuz"
-
-#~ msgid "Try"
-#~ msgstr "Dene"
-
-#~ msgid "You don't have cIOS222"
-#~ msgstr "cIOS222'ye sahip degilsiniz"

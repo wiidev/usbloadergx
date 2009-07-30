@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-29 22:18+0200\n"
+"POT-Creation-Date: 2009-07-30 05:39+0200\n"
 "PO-Revision-Date: 2009-07-27 12:20+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -997,7 +997,7 @@ msgstr "Updatera DOL"
 msgid "Update Files"
 msgstr ""
 
-msgid "Update all Languagefiles"
+msgid "Update all Language Files"
 msgstr ""
 
 msgid "Update failed"
@@ -1015,7 +1015,10 @@ msgstr "Sökväg till uppdatering ändrad."
 msgid "Updating"
 msgstr "Uppdaterar"
 
-msgid "Updating Languagefiles:"
+msgid "Updating Language Files:"
+msgstr ""
+
+msgid "Updating WiiTDB.zip"
 msgstr ""
 
 msgid "VIDTV Patch"
@@ -1042,6 +1045,9 @@ msgstr "Bredbild 16/9 Fix"
 
 msgid "Wii Menu"
 msgstr "Wii-meny"
+
+msgid "Wii Settings"
+msgstr ""
 
 msgid "Wiilight"
 msgstr "Wii ljus"
@@ -1133,69 +1139,3 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder kvar"
-
-#~ msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
-#~ msgstr "Förmodligen har bilden inte en upplösning jämnt dividerat med 4."
-
-#~ msgid "Shit"
-#~ msgstr "Skit"
-
-#~ msgid "there was an error"
-#~ msgstr "ett fel uppstod"
-
-#~ msgid "Path of titles.txt change"
-#~ msgstr "Ändrad sökväg till titles.txt"
-
-#~ msgid "Path of titles.txt changed."
-#~ msgstr "Sökväg till titles.txt ändrad"
-
-#~ msgid "titles.txt Path"
-#~ msgstr "sökväg till titles.txt"
-
-#~ msgid "Leaving so you can restart..."
-#~ msgstr "Lämnar så du kan starta om..."
-
-#~ msgid "file(s) left"
-#~ msgstr "filer kvar"
-
-#~ msgid "Coverpath change"
-#~ msgstr "Ändra Omslagsmapp"
-
-#~ msgid "BOOT ERROR"
-#~ msgstr "STARTFEL!"
-
-#~ msgid "Failed to boot:"
-#~ msgstr "Misslyckades att starta:"
-
-#~ msgid "Failed to mount front SD-card"
-#~ msgstr "Misslyckades att hitta SD-kort"
-
-#~ msgid "Failed to set USB:"
-#~ msgstr "USB-enheten kunde inte registreras:"
-
-#~ msgid "Go Back"
-#~ msgstr "Gå tillbaka"
-
-#~ msgid "Language change"
-#~ msgstr "Ändra språk"
-
-#~ msgid "Loading in cIOS249"
-#~ msgstr "Laddar in cIOS249"
-
-#~ msgid "No HDD found!"
-#~ msgstr "Ingen hårddisk hittad!"
-
-#~ msgid "Password change"
-#~ msgstr "Ändra lösenord"
-
-#~ msgid "Select the Partition"
-#~ msgstr "Bestäm partition"
-
-#~ msgid "you want to format"
-#~ msgstr "du vill formatera"
-
-#~ msgid "Try"
-#~ msgstr "Försök"
-
-#~ msgid "You don't have cIOS222"
-#~ msgstr "Du har inte cIOS222"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-29 22:18+0200\n"
+"POT-Creation-Date: 2009-07-30 05:39+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -13,16 +13,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid " Wad Saved as:"
-msgstr ""
+msgstr "wad以儲存為："
 
 msgid " could not be downloaded."
-msgstr ""
+msgstr "無法下載"
 
 msgid " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information."
-msgstr ""
+msgstr "已儲存.內容尚未驗證.部分金手指碼可能無法作用.若發生錯誤,請使用文字編輯器開啟檔案以獲得更多資訊 "
 
 msgid " is not on the server."
-msgstr ""
+msgstr "不在伺服器中"
 
 msgid "(both retired)"
 msgstr "退休者"
@@ -34,25 +34,25 @@ msgid "1 (Child 7+)"
 msgstr "1 (孩童 7歲以上)"
 
 msgid "1 hour"
-msgstr ""
+msgstr "1小時"
 
 msgid "10 min"
-msgstr ""
+msgstr "10分鐘"
 
 msgid "2 (Teen 12+)"
 msgstr "(青少年 12歲以上)"
 
 msgid "20 min"
-msgstr ""
+msgstr "20分鐘"
 
 msgid "3 (Mature 16+)"
 msgstr "(青年 16歲以上)"
 
 msgid "3 min"
-msgstr ""
+msgstr "3分鐘"
 
 msgid "30 min"
-msgstr ""
+msgstr "30分鐘"
 
 msgid "3D Covers"
 msgstr "3D封面"
@@ -61,34 +61,34 @@ msgid "4 (Adults Only 18+)"
 msgstr "(成人 18歲以上)"
 
 msgid "5 min"
-msgstr ""
+msgstr "5分鐘"
 
 msgid ">> Deleting tickets..."
-msgstr ""
+msgstr "正在刪除tickets..."
 
 msgid ">> Deleting tickets...ERROR! "
-msgstr ""
+msgstr "正在刪除tickets...錯誤!"
 
 msgid ">> Deleting tickets...Ok! "
-msgstr ""
+msgstr "正在刪除tickets...完成!"
 
 msgid ">> Deleting title ...ERROR! "
-msgstr ""
+msgstr "正在刪除title...錯誤!"
 
 msgid ">> Deleting title ...Ok!"
-msgstr ""
+msgstr "正在刪除title...完成!"
 
 msgid ">> Deleting title contents..."
-msgstr ""
+msgstr "正在刪除title內容..."
 
 msgid ">> Deleting title contents...ERROR! "
-msgstr ""
+msgstr "正在刪除title內容...錯誤!"
 
 msgid ">> Deleting title contents...Ok!"
-msgstr ""
+msgstr "正在刪除title內容...完成!"
 
 msgid ">> Deleting title..."
-msgstr ""
+msgstr "正在刪除title..."
 
 msgid ">> Finishing installation..."
 msgstr "正在完成安裝..."
@@ -106,10 +106,10 @@ msgid ">> Reading WAD data..."
 msgstr "正在讀取WAD資料"
 
 msgid ">> Reading WAD data...ERROR! "
-msgstr ""
+msgstr "正在讀取wad資料...錯誤!"
 
 msgid ">> Reading WAD data...Ok!"
-msgstr ""
+msgstr "正在讀取wad資料...完成!"
 
 msgid "AUTO"
 msgstr "自動"
@@ -121,7 +121,7 @@ msgid "Alternate DOL"
 msgstr "替代Dol"
 
 msgid "An Error accured"
-msgstr ""
+msgstr "發生錯誤"
 
 msgid "Anti"
 msgstr "防止"
@@ -139,7 +139,7 @@ msgid "Aug"
 msgstr "八月"
 
 msgid "AutoInit Network"
-msgstr ""
+msgstr "自動啟動網路"
 
 msgid "AutoPatch"
 msgstr "自動修改"
@@ -172,7 +172,7 @@ msgid "Boot/Standard"
 msgstr "啟動/標準"
 
 msgid "Boot?"
-msgstr ""
+msgstr "啟動?"
 
 msgid "Both"
 msgstr "全部顯示"
@@ -215,10 +215,10 @@ msgstr "下載金手指"
 
 #, c-format
 msgid "Coded by: %s"
-msgstr ""
+msgstr "程式設計者: %s"
 
 msgid "Coding:"
-msgstr ""
+msgstr "正在編碼:"
 
 msgid "Confirm"
 msgstr "確定"
@@ -314,7 +314,7 @@ msgid "Delete"
 msgstr "刪除"
 
 msgid "Delete ?"
-msgstr ""
+msgstr "刪除?"
 
 msgid "Delete Boxart"
 msgstr "刪除外盒圖形"
@@ -326,7 +326,7 @@ msgid "Delete Discart"
 msgstr "刪除光碟圖像"
 
 msgid "Design:"
-msgstr ""
+msgstr "設計者:"
 
 msgid "Developed by"
 msgstr "開發者"
@@ -353,16 +353,16 @@ msgid "Display"
 msgstr "顯示"
 
 msgid "Display as a carousel"
-msgstr ""
+msgstr "轉盤模式"
 
 msgid "Display as a grid"
-msgstr ""
+msgstr "封面牆模式"
 
 msgid "Display as a list"
-msgstr ""
+msgstr "表單模式"
 
 msgid "Display favorites"
-msgstr ""
+msgstr "我的最愛模式"
 
 msgid "Do you really want to delete:"
 msgstr "確定刪除:"
@@ -380,7 +380,7 @@ msgid "Do you want to use the alt dol that is known to be correct?"
 msgstr "使用已知為正確的替代DOL?"
 
 msgid "Do you wish to update/download all language files?"
-msgstr ""
+msgstr "更新/下載所有語言檔案?"
 
 msgid "Dol Path"
 msgstr "Dol路徑"
@@ -392,10 +392,10 @@ msgid "Dolpath change"
 msgstr "變更Dol路徑"
 
 msgid "Don't bother the USB Loader GX Team about errors in this file."
-msgstr ""
+msgstr "檔案錯誤"
 
 msgid "Done!"
-msgstr ""
+msgstr "已完成!"
 
 msgid "Download Boxart image?"
 msgstr "下載外盒圖片?"
@@ -440,13 +440,13 @@ msgid "Error reading Disc"
 msgstr "讀取光碟錯誤"
 
 msgid "Error while transfering data."
-msgstr ""
+msgstr "檔案傳輸過程錯誤"
 
 msgid "Error..."
 msgstr "錯誤..."
 
 msgid "Error:"
-msgstr ""
+msgstr "錯誤:"
 
 msgid "Exit USB Loader GX?"
 msgstr "離開 USB Loader GX?"
@@ -539,15 +539,15 @@ msgid "How to Shutdown?"
 msgstr "關機選項?"
 
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
-msgstr ""
+msgstr "若無WiFi連線,按1以取得WiiTDB.zip檔案之網址"
 
 #, c-format
 msgid "Incoming file %0.2fKB"
-msgstr ""
+msgstr "正在下載檔案 %0.2fKB"
 
 #, c-format
 msgid "Incoming file %0.2fMB"
-msgstr ""
+msgstr "正在下載檔案 %0.2fMB"
 
 msgid "Initializing Network"
 msgstr "正在啟動網路"
@@ -568,7 +568,7 @@ msgid "Insert an SD-Card to use this option."
 msgstr "插入SD卡以使用該功能"
 
 msgid "Install"
-msgstr ""
+msgstr "安裝"
 
 msgid "Install Error!"
 msgstr "安裝錯誤!"
@@ -611,7 +611,7 @@ msgid "June"
 msgstr "六月"
 
 msgid "Keep"
-msgstr ""
+msgstr "保留"
 
 msgid "Keyboard"
 msgstr "鍵盤"
@@ -636,7 +636,7 @@ msgstr "載入"
 
 #, c-format
 msgid "Load file from: %s ?"
-msgstr ""
+msgstr "檔案載入位置: %s"
 
 msgid "Load this dol as alternate dol?"
 msgstr "載入這個dol做為替代的dol?"
@@ -663,7 +663,7 @@ msgid "Missing files"
 msgstr "缺少的檔案"
 
 msgid "Most likely it has dimensions that are not evenly divisible by 4."
-msgstr ""
+msgstr "圖片格式不正確,無法被4整除"
 
 msgid "Music Volume"
 msgstr "音量"
@@ -702,7 +702,7 @@ msgid "No WBFS partition found"
 msgstr "找不到WBFS磁區"
 
 msgid "No data could be read."
-msgstr ""
+msgstr "無法讀取資料"
 
 msgid "No dol file found on disc."
 msgstr "光碟中找不到dol檔案"
@@ -723,13 +723,13 @@ msgid "Normal Covers"
 msgstr "一般封面"
 
 msgid "Not Found"
-msgstr ""
+msgstr "無法取得"
 
 msgid "Not a Wii Disc"
 msgstr "不是Wii的光碟"
 
 msgid "Not enough free memory"
-msgstr ""
+msgstr "剩餘記憶體不足"
 
 msgid "Not enough free memory."
 msgstr "剩餘記憶體不足"
@@ -783,7 +783,7 @@ msgid "Password has been changed"
 msgstr "密碼已被變更"
 
 msgid "Paste it into your browser to get your WiiTDB.zip."
-msgstr ""
+msgstr "在瀏覽器中貼上以取得WiiTDB.zip檔案"
 
 msgid "Patch Country Strings"
 msgstr "修改國別設定"
@@ -813,7 +813,7 @@ msgid "Reading WAD data... Ok!"
 msgstr "正在讀取wad資料...完成"
 
 msgid "Receiving file from:"
-msgstr ""
+msgstr "正在接收檔案來源:"
 
 msgid "Released"
 msgstr "發表"
@@ -861,7 +861,7 @@ msgid "Save Failed"
 msgstr "儲存失敗"
 
 msgid "Saving"
-msgstr ""
+msgstr "正在儲存"
 
 msgid "Screensaver"
 msgstr "螢幕保護"
@@ -882,10 +882,10 @@ msgid "Shutdown to Idle"
 msgstr "進入待機狀態"
 
 msgid "Sort alphabetically"
-msgstr ""
+msgstr "以字母順序排列"
 
 msgid "Sort order by most played"
-msgstr ""
+msgstr "以執行次數排列"
 
 msgid "Sound"
 msgstr "音效設定"
@@ -930,7 +930,7 @@ msgid "TXTCheatcodes Path changed"
 msgstr "金手指文字檔路徑已變更"
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."
-msgstr ""
+msgstr "wad檔案已安裝.但無法從SD卡中刪除該檔案."
 
 #, c-format
 msgid "The wad installation failed with error %ld"
@@ -949,7 +949,7 @@ msgid "Time left:"
 msgstr "剩餘時間:"
 
 msgid "Title Launcher"
-msgstr ""
+msgstr "Title啟動器"
 
 msgid "Titles from XML"
 msgstr "XML遊戲名稱"
@@ -977,7 +977,7 @@ msgid "Uninstall Menu"
 msgstr "刪除選單"
 
 msgid "Uninstalling wad"
-msgstr ""
+msgstr "正在刪除wad"
 
 msgid "Unlock console to use this option."
 msgstr "解鎖以進行設定"
@@ -995,9 +995,9 @@ msgid "Update DOL"
 msgstr "僅升級dol"
 
 msgid "Update Files"
-msgstr ""
+msgstr "更新檔案"
 
-msgid "Update all Languagefiles"
+msgid "Update all Language Files"
 msgstr ""
 
 msgid "Update failed"
@@ -1015,7 +1015,10 @@ msgstr "更新路徑已變更"
 msgid "Updating"
 msgstr "正在更新"
 
-msgid "Updating Languagefiles:"
+msgid "Updating Language Files:"
+msgstr ""
+
+msgid "Updating WiiTDB.zip"
 msgstr ""
 
 msgid "VIDTV Patch"
@@ -1023,7 +1026,7 @@ msgstr "VIDTV修改"
 
 #, c-format
 msgid "Version: %s"
-msgstr ""
+msgstr "版本: %s"
 
 msgid "Video Mode"
 msgstr "影像格式"
@@ -1043,6 +1046,9 @@ msgstr "寬螢幕校正"
 msgid "Wii Menu"
 msgstr "Wii系統選單"
 
+msgid "Wii Settings"
+msgstr ""
+
 msgid "Wiilight"
 msgstr "光碟機藍光"
 
@@ -1050,13 +1056,13 @@ msgid "Wrong Password"
 msgstr "密碼錯誤"
 
 msgid "XMLPath"
-msgstr ""
+msgstr "XML路徑"
 
 msgid "XMLPath change"
-msgstr ""
+msgstr "變更XML路徑"
 
 msgid "XMLPath changed."
-msgstr ""
+msgstr "XML路徑已變更"
 
 msgid "Yes"
 msgstr "是"
@@ -1075,7 +1081,7 @@ msgstr "必須格式化一個磁區"
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
-msgstr ""
+msgstr "網址已儲存於%sWiiTDB_URL.txt"
 
 msgid "available"
 msgstr "可取得"
@@ -1134,83 +1140,8 @@ msgstr "剩餘空間 總容量"
 msgid "seconds left"
 msgstr "剩餘秒數"
 
-#~ msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
-#~ msgstr "該圖檔格式可能不正確"
+#~ msgid "Update all Languagefiles"
+#~ msgstr "更新所有語言檔案"
 
-#~ msgid "Shit"
-#~ msgstr "XX"
-
-#~ msgid "there was an error"
-#~ msgstr "發生錯誤"
-
-#~ msgid "Path of titles.txt change"
-#~ msgstr "變更Title檔案路徑"
-
-#~ msgid "Path of titles.txt changed."
-#~ msgstr "Title檔案路徑已變更"
-
-#~ msgid "titles.txt Path"
-#~ msgstr "Title檔案路徑"
-
-#~ msgid "Leaving so you can restart..."
-#~ msgstr "正在退出並請重新啟動..."
-
-#~ msgid "Do you want to boot?"
-#~ msgstr "啟動?"
-
-#~ msgid "file(s) left"
-#~ msgstr "剩下的檔案"
-
-#~ msgid "Favorite"
-#~ msgstr "新增至我的最愛"
-
-#~ msgid "Alphabetical"
-#~ msgstr "全部"
-
-#~ msgid "Coverpath change"
-#~ msgstr "變更封面路徑"
-
-#~ msgid "BOOT ERROR"
-#~ msgstr "啟動錯誤"
-
-#~ msgid "Failed to boot:"
-#~ msgstr "無法啟動:"
-
-#~ msgid "Failed to mount front SD-card"
-#~ msgstr "掛載前端 SD 卡失敗"
-
-#~ msgid "Failed to set USB:"
-#~ msgstr "無法設定 USB:"
-
-#~ msgid "Favorites"
-#~ msgstr "我的最愛"
-
-#~ msgid "Go Back"
-#~ msgstr "返回"
-
-#~ msgid "Language change"
-#~ msgstr "變更語言"
-
-#~ msgid "Sort Game List"
-#~ msgstr "表單排序"
-
-#~ msgid "Loading in cIOS249"
-#~ msgstr "以 cIOS249 載入"
-
-#~ msgid "No HDD found!"
-#~ msgstr "找不到硬碟!"
-
-#~ msgid "Password change"
-#~ msgstr "變更密碼"
-
-#~ msgid "Select the Partition"
-#~ msgstr "選擇磁區"
-
-#~ msgid "you want to format"
-#~ msgstr "是否格式化"
-
-#~ msgid "Try"
-#~ msgstr "嘗試"
-
-#~ msgid "You don't have cIOS222"
-#~ msgstr "未安裝 cIOS222"
+#~ msgid "Updating Languagefiles:"
+#~ msgstr "正在更新語言檔案:"

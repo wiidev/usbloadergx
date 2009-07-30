@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-29 22:18+0200\n"
+"POT-Creation-Date: 2009-07-30 05:39+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: ziom666 (zadania_prog@vp.pl)\n"
 "Language-Team: \n"
@@ -997,7 +997,7 @@ msgstr "Zaktualizuj Dol"
 msgid "Update Files"
 msgstr ""
 
-msgid "Update all Languagefiles"
+msgid "Update all Language Files"
 msgstr ""
 
 msgid "Update failed"
@@ -1015,7 +1015,10 @@ msgstr "Zmieniono Sciezke aktualizacji"
 msgid "Updating"
 msgstr "Aktualizowanie"
 
-msgid "Updating Languagefiles:"
+msgid "Updating Language Files:"
+msgstr ""
+
+msgid "Updating WiiTDB.zip"
 msgstr ""
 
 msgid "VIDTV Patch"
@@ -1041,6 +1044,9 @@ msgid "Widescreen Fix"
 msgstr "Popraw ekran panoramiczny"
 
 msgid "Wii Menu"
+msgstr ""
+
+msgid "Wii Settings"
 msgstr ""
 
 msgid "Wiilight"
@@ -1133,21 +1139,3 @@ msgstr "z"
 
 msgid "seconds left"
 msgstr "sekund pozostalo"
-
-#~ msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
-#~ msgstr "Prawdopodobnie rozdzielczoSc nie jest podzielna przez 4."
-
-#~ msgid "there was an error"
-#~ msgstr "blad"
-
-#~ msgid "Path of titles.txt change"
-#~ msgstr "Zmien Sciezke titles.txt"
-
-#~ msgid "Path of titles.txt changed."
-#~ msgstr "Sciezka titles.txt zmienona"
-
-#~ msgid "titles.txt Path"
-#~ msgstr "Sciezka titles.txt"
-
-#~ msgid "Leaving so you can restart..."
-#~ msgstr "Przygotowanie do restartu..."

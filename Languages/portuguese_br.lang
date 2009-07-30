@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-29 22:18+0200\n"
+"POT-Creation-Date: 2009-07-30 05:39+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -997,7 +997,7 @@ msgstr "Atualizar arquivo .dol"
 msgid "Update Files"
 msgstr ""
 
-msgid "Update all Languagefiles"
+msgid "Update all Language Files"
 msgstr ""
 
 msgid "Update failed"
@@ -1015,7 +1015,10 @@ msgstr "Local Atualizações alterado."
 msgid "Updating"
 msgstr "Atualizando..."
 
-msgid "Updating Languagefiles:"
+msgid "Updating Language Files:"
+msgstr ""
+
+msgid "Updating WiiTDB.zip"
 msgstr ""
 
 msgid "VIDTV Patch"
@@ -1042,6 +1045,9 @@ msgstr "Corrigir Widescreen"
 
 msgid "Wii Menu"
 msgstr "Menu do Wii"
+
+msgid "Wii Settings"
+msgstr ""
 
 msgid "Wiilight"
 msgstr "Luz do Wii"
@@ -1133,69 +1139,3 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
-
-#~ msgid "Path of titles.txt change"
-#~ msgstr "Alterar local titles.txt"
-
-#~ msgid "Path of titles.txt changed."
-#~ msgstr "Local titles.txt alterado"
-
-#~ msgid "titles.txt Path"
-#~ msgstr "Local Titles.txt"
-
-#~ msgid "file(s) left"
-#~ msgstr "arquivo(s) restante(s)"
-
-#~ msgid "for hosting the covers/discarts"
-#~ msgstr "por hospedar Capas de Caixas/Disco"
-
-#~ msgid "Favorite"
-#~ msgstr "Adicionar aos Favoritos"
-
-#~ msgid "Alphabetical"
-#~ msgstr "Alfabética"
-
-#~ msgid "Coverpath change"
-#~ msgstr "Alterar local Capas"
-
-#~ msgid "BOOT ERROR"
-#~ msgstr "Erro ao Iniciar"
-
-#~ msgid "Failed to boot:"
-#~ msgstr "Falha ao iniciar:"
-
-#~ msgid "Failed to mount front SD-card"
-#~ msgstr "Falha ao montar cartão SD frontal"
-
-#~ msgid "Failed to set USB:"
-#~ msgstr "Falha ao iniciar USB:"
-
-#~ msgid "Favorites"
-#~ msgstr "Favoritos"
-
-#~ msgid "Go Back"
-#~ msgstr "Voltar"
-
-#~ msgid "Loading in cIOS249"
-#~ msgstr "Carregando no cIOS249"
-
-#~ msgid "Sort Game List"
-#~ msgstr "Classificar Lista de Jogos"
-
-#~ msgid "No HDD found!"
-#~ msgstr "Disco Rígido não encontrado!"
-
-#~ msgid "Password change"
-#~ msgstr "Alterar Senha"
-
-#~ msgid "Select the Partition"
-#~ msgstr "Selecione a partição"
-
-#~ msgid "you want to format"
-#~ msgstr "Deseja formatar?"
-
-#~ msgid "Try"
-#~ msgstr "Tentar"
-
-#~ msgid "You don't have cIOS222"
-#~ msgstr "Você não tem o cIOS222"

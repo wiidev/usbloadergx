@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-29 22:18+0200\n"
+"POT-Creation-Date: 2009-07-30 05:39+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: Tusk\n"
 "Language-Team: \n"
@@ -997,7 +997,7 @@ msgstr "DOL Frissítése"
 msgid "Update Files"
 msgstr ""
 
-msgid "Update all Languagefiles"
+msgid "Update all Language Files"
 msgstr ""
 
 msgid "Update failed"
@@ -1015,7 +1015,10 @@ msgstr "Frissítés útvonala megváltozott."
 msgid "Updating"
 msgstr "Frissítés"
 
-msgid "Updating Languagefiles:"
+msgid "Updating Language Files:"
+msgstr ""
+
+msgid "Updating WiiTDB.zip"
 msgstr ""
 
 msgid "VIDTV Patch"
@@ -1042,6 +1045,9 @@ msgstr "Szélesképernyõ Fix"
 
 msgid "Wii Menu"
 msgstr "Wii Menû"
+
+msgid "Wii Settings"
+msgstr ""
 
 msgid "Wiilight"
 msgstr "Wiifény"
@@ -1133,15 +1139,3 @@ msgstr " "
 
 msgid "seconds left"
 msgstr "hátralévõ másodperc"
-
-#~ msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
-#~ msgstr "Úgy néz ki a kép felbontása nem osztható 4-el. Mehet a kukába."
-
-#~ msgid "Path of titles.txt change"
-#~ msgstr "titles.txt útvonalának megváltoztatása"
-
-#~ msgid "Path of titles.txt changed."
-#~ msgstr "titles.txt útvonala megváltozott"
-
-#~ msgid "titles.txt Path"
-#~ msgstr "titles.txt Útvonala"

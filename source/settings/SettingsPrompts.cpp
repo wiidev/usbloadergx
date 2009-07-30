@@ -483,7 +483,7 @@ int MenuLanguageSelect()
     }
 
     else if (updateBtn.GetState() == STATE_CLICKED) {
-            choice = WindowPrompt(tr("Update all Languagefiles"),tr("Do you wish to update/download all language files?"),tr("OK"), tr("Cancel"));
+            choice = WindowPrompt(tr("Update all Language Files"),tr("Do you wish to update/download all language files?"),tr("OK"), tr("Cancel"));
             if (choice == 1) {
 
                 bool network = true;
@@ -501,7 +501,7 @@ int MenuLanguageSelect()
 
                     for(int i = 0; i < listsize; i++) {
 
-                        ShowProgress(tr("Updating Languagefiles:"), 0, LinkList.GetURL(i), i, listsize-1);
+                        ShowProgress(tr("Updating Language Files:"), 0, LinkList.GetURL(i), i, listsize-1);
 
                         if(strcasecmp(".lang", strrchr(LinkList.GetURL(i), '.')) == 0) {
 

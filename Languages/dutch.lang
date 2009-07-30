@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-29 22:18+0200\n"
+"POT-Creation-Date: 2009-07-30 05:39+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: tj_cool\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid " Wad Saved as:"
-msgstr ""
+msgstr " Wad opgeslagen als:"
 
 msgid " could not be downloaded."
 msgstr " kon niet worden gedownload"
@@ -296,7 +296,7 @@ msgid "DOL from SD"
 msgstr "Dol van SD"
 
 msgid "DOL from disc"
-msgstr "Dol van DVD"
+msgstr "Dol van disk"
 
 msgid "Dec"
 msgstr "Dec"
@@ -353,16 +353,16 @@ msgid "Display"
 msgstr "Tonen"
 
 msgid "Display as a carousel"
-msgstr ""
+msgstr "Carrouselweergave"
 
 msgid "Display as a grid"
-msgstr ""
+msgstr "Rasterweergave"
 
 msgid "Display as a list"
-msgstr ""
+msgstr "Lijstweergave"
 
 msgid "Display favorites"
-msgstr ""
+msgstr "Favorieten"
 
 msgid "Do you really want to delete:"
 msgstr "Wil je echt verwijderen:"
@@ -663,7 +663,7 @@ msgid "Missing files"
 msgstr "Missende bestanden"
 
 msgid "Most likely it has dimensions that are not evenly divisible by 4."
-msgstr ""
+msgstr "Waarschijnlijk zijn de afmeetingen niet deelbaar door 4."
 
 msgid "Music Volume"
 msgstr "Muziekvolume"
@@ -861,7 +861,7 @@ msgid "Save Failed"
 msgstr "Opslaan mislukt"
 
 msgid "Saving"
-msgstr ""
+msgstr "Bewaren..."
 
 msgid "Screensaver"
 msgstr "Schermbeveiliging"
@@ -882,10 +882,10 @@ msgid "Shutdown to Idle"
 msgstr "Slaapstand"
 
 msgid "Sort alphabetically"
-msgstr ""
+msgstr "Alfabetisch sorteren"
 
 msgid "Sort order by most played"
-msgstr ""
+msgstr "Sorteren op meest gespeeld"
 
 msgid "Sound"
 msgstr "Geluid"
@@ -997,7 +997,7 @@ msgstr "DOL updaten"
 msgid "Update Files"
 msgstr ""
 
-msgid "Update all Languagefiles"
+msgid "Update all Language Files"
 msgstr ""
 
 msgid "Update failed"
@@ -1015,7 +1015,10 @@ msgstr "Updatelocatie gewijzigd."
 msgid "Updating"
 msgstr "Updaten"
 
-msgid "Updating Languagefiles:"
+msgid "Updating Language Files:"
+msgstr ""
+
+msgid "Updating WiiTDB.zip"
 msgstr ""
 
 msgid "VIDTV Patch"
@@ -1043,6 +1046,9 @@ msgstr "Breedbeeld"
 msgid "Wii Menu"
 msgstr "Wii Menu"
 
+msgid "Wii Settings"
+msgstr ""
+
 msgid "Wiilight"
 msgstr "Wii verlichting"
 
@@ -1050,13 +1056,13 @@ msgid "Wrong Password"
 msgstr "Foute wachtwoord!"
 
 msgid "XMLPath"
-msgstr ""
+msgstr "Locatie XML"
 
 msgid "XMLPath change"
-msgstr ""
+msgstr "Locatie XML wijzigen"
 
 msgid "XMLPath changed."
-msgstr ""
+msgstr "Locatie XML gewijzigd"
 
 msgid "Yes"
 msgstr "Ja"
@@ -1134,104 +1140,5 @@ msgstr "van"
 msgid "seconds left"
 msgstr "seconden over:"
 
-#~ msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
-#~ msgstr "Waarschijnlijk zijn de dimensies niet deelbaar door 4."
-
-#~ msgid "Shit"
-#~ msgstr "Shit"
-
-#~ msgid "there was an error"
-#~ msgstr "er is een fout opgetreden"
-
-#~ msgid "Received:"
-#~ msgstr "Ontvangen:"
-
-#~ msgid "Alt Dol Path"
-#~ msgstr "Locatie Alt Dol"
-
-#~ msgid "Disc Path"
-#~ msgstr "Locatie DVD"
-
-#~ msgid "GCT Cheat Path"
-#~ msgstr "Loacatie GCT"
-
-#~ msgid "Homebrew Path"
-#~ msgstr "Locatie Homebrew"
-
-#~ msgid "Path of titles.txt change"
-#~ msgstr "Locatie titles.txt wijzigen"
-
-#~ msgid "Path of titles.txt changed."
-#~ msgstr "Locatie titles.txt gewijzigd."
-
-#~ msgid "TXT Cheat Path"
-#~ msgstr "Locatie TXT cheats"
-
-#~ msgid "Theme Path"
-#~ msgstr "Locatie Thema"
-
-#~ msgid "Update Path"
-#~ msgstr "Locatie Update"
-
-#~ msgid "XML Path"
-#~ msgstr "Locatie XML"
-
-#~ msgid "titles.txt Path"
-#~ msgstr "Locatie titles.txt"
-
-#~ msgid "Leaving so you can restart..."
-#~ msgstr "Afsluiten om te herstarten..."
-
-#~ msgid "file(s) left"
-#~ msgstr "Bestanden resterend"
-
-#~ msgid "for hosting the covers/discarts"
-#~ msgstr "(upload van afbeeldingen)"
-
-#~ msgid "Alphabetical"
-#~ msgstr "Alfabetisch"
-
-#~ msgid "BOOT ERROR"
-#~ msgstr "STARTFOUT"
-
-#~ msgid "Coverpath change"
-#~ msgstr "Locatie hoesjes wijzigen"
-
-#~ msgid "Failed to boot:"
-#~ msgstr "Starten mislukt:"
-
-#~ msgid "Failed to mount front SD-card"
-#~ msgstr "Kan SD kaart niet laden"
-
-#~ msgid "Failed to set USB:"
-#~ msgstr "Kan USB niet initialiseren:"
-
-#~ msgid "Favorites"
-#~ msgstr "Favorieten"
-
-#~ msgid "Go Back"
-#~ msgstr "Terug"
-
-#~ msgid "Sort Game List"
-#~ msgstr "Spellenlijst sorteren"
-
-#~ msgid "Loading in cIOS249"
-#~ msgstr "Laden met cIOS249"
-
-#~ msgid "No HDD found!"
-#~ msgstr "Geen HDD gevonden!"
-
-#~ msgid "Password change"
-#~ msgstr "Wachtwoord wijzigen"
-
-#~ msgid "Select the Partition"
-#~ msgstr "Kies een partitie"
-
-#~ msgid "you want to format"
-#~ msgstr "Wil je formatteren "
-
-#~ msgid "Try"
-#~ msgstr "Probeer"
-
-#~ msgid "You don't have cIOS222"
-#~ msgstr "cIOS222 niet gevonden"
+#~ msgid "An Error occurred"
+#~ msgstr "Er is een fout opgetreden"

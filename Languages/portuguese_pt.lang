@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# For USB Loader GX rev640
+# For USB Loader GX rev668
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-29 22:18+0200\n"
-"PO-Revision-Date: 2009-07-20 16:40\n"
+"POT-Creation-Date: 2009-07-30 05:39+0200\n"
+"PO-Revision-Date: 2009-07-29 12:52\n"
 "Last-Translator: Sky8000\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid " Wad Saved as:"
-msgstr ""
+msgstr " Wad guardado como:"
 
 msgid " could not be downloaded."
 msgstr " não foi descarregado."
@@ -64,31 +64,31 @@ msgid "5 min"
 msgstr "5 minutos"
 
 msgid ">> Deleting tickets..."
-msgstr ""
+msgstr ">> Eliminando tickets..."
 
 msgid ">> Deleting tickets...ERROR! "
-msgstr ""
+msgstr ">> Eliminando tickets... ERRO! "
 
 msgid ">> Deleting tickets...Ok! "
-msgstr ""
+msgstr ">> Eliminando tickets... Ok! "
 
 msgid ">> Deleting title ...ERROR! "
-msgstr ""
+msgstr ">> Eliminando título... ERRO! "
 
 msgid ">> Deleting title ...Ok!"
-msgstr ""
+msgstr ">> Eliminando título... Ok!"
 
 msgid ">> Deleting title contents..."
-msgstr ""
+msgstr ">> Eliminando conteúdos do título..."
 
 msgid ">> Deleting title contents...ERROR! "
-msgstr ""
+msgstr ">> Eliminando conteúdos do título... ERRO! "
 
 msgid ">> Deleting title contents...Ok!"
-msgstr ""
+msgstr ">> Eliminando conteúdos do título... Ok!"
 
 msgid ">> Deleting title..."
-msgstr ""
+msgstr ">> Eliminando título..."
 
 msgid ">> Finishing installation..."
 msgstr ">> Terminando instalação..."
@@ -106,10 +106,10 @@ msgid ">> Reading WAD data..."
 msgstr ">> Lendo ficheiro WAD..."
 
 msgid ">> Reading WAD data...ERROR! "
-msgstr ""
+msgstr ">> Lendo ficheiro WAD... ERRO!"
 
 msgid ">> Reading WAD data...Ok!"
-msgstr ""
+msgstr ">> Lendo ficheiro WAD... Ok!"
 
 msgid "AUTO"
 msgstr "AUTO"
@@ -314,7 +314,7 @@ msgid "Delete"
 msgstr "Eliminar"
 
 msgid "Delete ?"
-msgstr ""
+msgstr "Eliminar ?"
 
 msgid "Delete Boxart"
 msgstr "Eliminar Capas"
@@ -353,19 +353,19 @@ msgid "Display"
 msgstr "Mostrar"
 
 msgid "Display as a carousel"
-msgstr ""
+msgstr "Mostrar como carrossel"
 
 msgid "Display as a grid"
-msgstr ""
+msgstr "Mostrar como grelha"
 
 msgid "Display as a list"
-msgstr ""
+msgstr "Mostrar como lista"
 
 msgid "Display favorites"
-msgstr ""
+msgstr "Mostrar favoritos"
 
 msgid "Do you really want to delete:"
-msgstr "Quer mesmo REMOVER o jogo:"
+msgstr "Tem a certeza que quer eliminar o jogo:"
 
 msgid "Do you want to change language?"
 msgstr "Deseja alterar o idioma?"
@@ -395,7 +395,7 @@ msgid "Don't bother the USB Loader GX Team about errors in this file."
 msgstr "Não incomodes a equipa do USB Loader GX por erros neste ficheiro."
 
 msgid "Done!"
-msgstr ""
+msgstr "Concluído!"
 
 msgid "Download Boxart image?"
 msgstr "Descarregar imagem da Caixa?"
@@ -543,11 +543,11 @@ msgstr "Se não tens rede sem fios pressiona 1 para ver o URL de onde podes desc
 
 #, c-format
 msgid "Incoming file %0.2fKB"
-msgstr "A receber ficheiro %0.2fKB"
+msgstr ""
 
 #, c-format
 msgid "Incoming file %0.2fMB"
-msgstr "A receber ficheiro %0.2fMB"
+msgstr ""
 
 msgid "Initializing Network"
 msgstr "Inicializando Ligação de Rede"
@@ -568,7 +568,7 @@ msgid "Insert an SD-Card to use this option."
 msgstr "Insira um cartão SD para usar esta funcionalidade."
 
 msgid "Install"
-msgstr ""
+msgstr "Instalar"
 
 msgid "Install Error!"
 msgstr "Erro de Instalação!"
@@ -729,7 +729,7 @@ msgid "Not a Wii Disc"
 msgstr "Não é um Disco da Wii"
 
 msgid "Not enough free memory"
-msgstr ""
+msgstr "Não há memória livre suficiente"
 
 msgid "Not enough free memory."
 msgstr "Não há memória livre suficiente."
@@ -861,7 +861,7 @@ msgid "Save Failed"
 msgstr "Falha ao Gravar"
 
 msgid "Saving"
-msgstr ""
+msgstr "Gravando"
 
 msgid "Screensaver"
 msgstr "Protecção de ecrã"
@@ -882,10 +882,10 @@ msgid "Shutdown to Idle"
 msgstr "Standby"
 
 msgid "Sort alphabetically"
-msgstr ""
+msgstr "Ordenar por ordem alfabética"
 
 msgid "Sort order by most played"
-msgstr ""
+msgstr "Ordenar por número de vezes jogadas"
 
 msgid "Sound"
 msgstr "Audio"
@@ -968,7 +968,7 @@ msgid "Unable to open the wad that was just downloaded (%s)."
 msgstr "Não é possível abrir o ficheiro wad descarregado (%s)."
 
 msgid "Uninstall"
-msgstr "Remover"
+msgstr "Desinstalar"
 
 msgid "Uninstall Game"
 msgstr "Desinstalar jogo"
@@ -977,7 +977,7 @@ msgid "Uninstall Menu"
 msgstr "Menu de Desinstalação"
 
 msgid "Uninstalling wad"
-msgstr ""
+msgstr "Desinstalando wad"
 
 msgid "Unlock console to use this option."
 msgstr "Desbloquear configuração antes de usar esta opção."
@@ -997,7 +997,7 @@ msgstr "Actualizar DOL"
 msgid "Update Files"
 msgstr ""
 
-msgid "Update all Languagefiles"
+msgid "Update all Language Files"
 msgstr ""
 
 msgid "Update failed"
@@ -1015,7 +1015,10 @@ msgstr "A pasta das actualizações foi alterada."
 msgid "Updating"
 msgstr "Actualizando"
 
-msgid "Updating Languagefiles:"
+msgid "Updating Language Files:"
+msgstr ""
+
+msgid "Updating WiiTDB.zip"
 msgstr ""
 
 msgid "VIDTV Patch"
@@ -1043,6 +1046,9 @@ msgstr "Correcção 16:9"
 msgid "Wii Menu"
 msgstr "Menu da Wii"
 
+msgid "Wii Settings"
+msgstr ""
+
 msgid "Wiilight"
 msgstr "Iluminação Leitor"
 
@@ -1050,13 +1056,13 @@ msgid "Wrong Password"
 msgstr "Password Incorrecta"
 
 msgid "XMLPath"
-msgstr ""
+msgstr "Pasta XML"
 
 msgid "XMLPath change"
-msgstr ""
+msgstr "Alterar Pasta XML"
 
 msgid "XMLPath changed."
-msgstr ""
+msgstr "Pasta XML alterada."
 
 msgid "Yes"
 msgstr "Sim"
@@ -1105,7 +1111,7 @@ msgid "for"
 msgstr "pelo"
 
 msgid "for WiiTDB and hosting covers / disc images"
-msgstr "por WiiTDB e alojar capas / img. de disco"
+msgstr "por WiiTDB e alojar img. capas / discos"
 
 msgid "for diverse patches"
 msgstr "por diversos patches"
@@ -1133,81 +1139,3 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
-
-#~ msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
-#~ msgstr "O mais provável é que o tamanho não seja divisível por 4. Que estupidez."
-
-#~ msgid "Shit"
-#~ msgstr "Raios"
-
-#~ msgid "there was an error"
-#~ msgstr "ocorreu um erro"
-
-#~ msgid "Path of titles.txt change"
-#~ msgstr "Alterar pasta do titles.txt"
-
-#~ msgid "Path of titles.txt changed."
-#~ msgstr "Pasta do ficheiro titles.txt alterada."
-
-#~ msgid "titles.txt Path"
-#~ msgstr "Pasta titles.txt"
-
-#~ msgid "Leaving so you can restart..."
-#~ msgstr "Saindo para que possas reiniciar..."
-
-#~ msgid "for hosting the covers/discarts"
-#~ msgstr "por alojar capas/imagens de disco"
-
-#~ msgid "Favorite"
-#~ msgstr "Adicionar aos favoritos"
-
-#~ msgid "Alphabetical"
-#~ msgstr "Alfabética"
-
-#~ msgid "Coverpath change"
-#~ msgstr "Alterar Pasta das Capas"
-
-#~ msgid "BOOT ERROR"
-#~ msgstr "ERRO DE ARRANQUE"
-
-#~ msgid "Failed to boot:"
-#~ msgstr "Falha ao arrancar:"
-
-#~ msgid "Failed to mount front SD-card"
-#~ msgstr "Falha ao montar cartão SD"
-
-#~ msgid "Failed to set USB:"
-#~ msgstr "Falha ao iniciar USB:"
-
-#~ msgid "Favorites"
-#~ msgstr "Favoritos"
-
-#~ msgid "Go Back"
-#~ msgstr "Voltar"
-
-#~ msgid "Language change"
-#~ msgstr "Alterar Idioma"
-
-#~ msgid "Sort Game List"
-#~ msgstr "Ordenação Jogos"
-
-#~ msgid "Loading in cIOS249"
-#~ msgstr "Carregando com o cIOS249"
-
-#~ msgid "No HDD found!"
-#~ msgstr "Não foi encontrado nenhum Disco Rígido!"
-
-#~ msgid "Password change"
-#~ msgstr "Alterar Password"
-
-#~ msgid "Select the Partition"
-#~ msgstr "Seleccione a Partição"
-
-#~ msgid "you want to format"
-#~ msgstr "Deseja formatar?"
-
-#~ msgid "Try"
-#~ msgstr "Tentar"
-
-#~ msgid "You don't have cIOS222"
-#~ msgstr "cIOS222 não instalado"

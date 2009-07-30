@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-29 22:18+0200\n"
+"POT-Creation-Date: 2009-07-30 05:39+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -124,10 +124,10 @@ msgid "An Error accured"
 msgstr ""
 
 msgid "Anti"
-msgstr ""
+msgstr "Anti"
 
 msgid "App Language"
-msgstr "Appの表示言語"
+msgstr "GXの表示言語"
 
 msgid "Apr"
 msgstr "4月"
@@ -163,10 +163,10 @@ msgid "Backgroundmusic Path changed."
 msgstr "ｻｳﾝﾄﾞのPath"
 
 msgid "Big thanks to:"
-msgstr "Thanks to"
+msgstr "多謝"
 
 msgid "Block IOS Reload"
-msgstr ""
+msgstr "IOSの一部再ロード"
 
 msgid "Boot/Standard"
 msgstr "ﾌﾞｰﾄ/標準"
@@ -190,13 +190,13 @@ msgid "Cancel"
 msgstr "ｷｬﾝｾﾙ"
 
 msgid "Cheatcodes Path"
-msgstr ""
+msgstr "チートのパス"
 
 msgid "Cheatcodes Path changed"
-msgstr ""
+msgstr "チートのパスが変更されました"
 
 msgid "Cheatfile is blank"
-msgstr ""
+msgstr "チートがありません"
 
 msgid "Checking for Updates"
 msgstr "最新版を確認中"
@@ -224,7 +224,7 @@ msgid "Confirm"
 msgstr ""
 
 msgid "Console"
-msgstr ""
+msgstr "ｺﾝｿｰﾙ"
 
 msgid "Console Default"
 msgstr "ﾃﾞﾌｫﾙﾄｺﾝｿｰﾙ"
@@ -245,7 +245,7 @@ msgid "Correct Password"
 msgstr "正しいﾊﾟｽﾜｰﾄﾞ"
 
 msgid "Could not create GCT file"
-msgstr ""
+msgstr "GCTﾌｧｲﾙを作成できません"
 
 msgid "Could not find a WBFS partition."
 msgstr ""
@@ -284,13 +284,13 @@ msgid "Coverpath Changed"
 msgstr "ｶﾊﾞｰﾊﾟｽを変更しました"
 
 msgid "Create"
-msgstr ""
+msgstr "作成"
 
 msgid "Credits"
 msgstr "協力"
 
 msgid "Custom Paths"
-msgstr "カスタムPath"
+msgstr "カスタムパス"
 
 msgid "DOL from SD"
 msgstr ""
@@ -347,7 +347,7 @@ msgid "Discpath change"
 msgstr "ﾃﾞｨｽｸﾊﾟｽの変更"
 
 msgid "DiskFlip"
-msgstr ""
+msgstr "DiskFlip"
 
 msgid "Display"
 msgstr "ﾃﾞｨｽﾌﾟﾚｲ"
@@ -383,13 +383,13 @@ msgid "Do you wish to update/download all language files?"
 msgstr ""
 
 msgid "Dol Path"
-msgstr ""
+msgstr "DOLのパス"
 
 msgid "Dolpath Changed"
 msgstr ""
 
 msgid "Dolpath change"
-msgstr ""
+msgstr "DOLのパスが変更されました"
 
 msgid "Don't bother the USB Loader GX Team about errors in this file."
 msgstr ""
@@ -398,7 +398,7 @@ msgid "Done!"
 msgstr ""
 
 msgid "Download Boxart image?"
-msgstr "Boxart ｲﾒｰｼﾞをﾀﾞｳﾝﾛｰﾄﾞしますか?"
+msgstr "ﾊﾟｯｹｰｼﾞｲﾒｰｼﾞをﾀﾞｳﾝﾛｰﾄﾞしますか?"
 
 msgid "Download Discart image?"
 msgstr ""
@@ -428,13 +428,13 @@ msgid "English"
 msgstr "英語"
 
 msgid "Error"
-msgstr ""
+msgstr "エラー"
 
 msgid "Error !"
-msgstr "Error !"
+msgstr "エラー !"
 
 msgid "Error 002 fix"
-msgstr ""
+msgstr "エラー002対策"
 
 msgid "Error reading Disc"
 msgstr "ﾃﾞｨｽｸ読込み失敗"
@@ -467,7 +467,7 @@ msgid "Flip-X"
 msgstr "Flip-X"
 
 msgid "Force"
-msgstr "Force"
+msgstr "強制"
 
 msgid "Format"
 msgstr "ﾌｫｰﾏｯﾄ"
@@ -485,7 +485,7 @@ msgid "Full Shutdown"
 msgstr "完全ｼｬｯﾄﾀﾞｳﾝ"
 
 msgid "GCT File created"
-msgstr ""
+msgstr "GCTﾌｧｲﾙを作成しました"
 
 msgid "GUI Settings"
 msgstr "GUI設定"
@@ -494,7 +494,7 @@ msgid "Game ID"
 msgstr "ｹﾞｰﾑID"
 
 msgid "Game Language"
-msgstr "言語"
+msgstr "ｹﾞｰﾑの言語"
 
 msgid "Game Load"
 msgstr "ｹﾞｰﾑ読込み"
@@ -568,10 +568,10 @@ msgid "Insert an SD-Card to use this option."
 msgstr "このｵﾌﾟｼｮﾝを使用するのにSDｶｰﾄﾞを挿入して下さい"
 
 msgid "Install"
-msgstr ""
+msgstr "ｲﾝｽﾄｰﾙ"
 
 msgid "Install Error!"
-msgstr "Install Error!"
+msgstr "ｲﾝｽﾄｰﾙ ｴﾗｰ!"
 
 msgid "Install a game"
 msgstr "ｹﾞｰﾑｲﾝｽﾄｰﾙ"
@@ -614,13 +614,13 @@ msgid "Keep"
 msgstr ""
 
 msgid "Keyboard"
-msgstr ""
+msgstr "ｷｰﾎﾞｰﾄﾞ"
 
 msgid "Korean"
 msgstr "韓国語"
 
 msgid "Language change:"
-msgstr ""
+msgstr "言語の変更"
 
 msgid "Languagepath changed."
 msgstr "言語PATHを変更しました"
@@ -645,7 +645,7 @@ msgid "Loading standard language."
 msgstr "標準の言語をロード中..."
 
 msgid "Loading standard music."
-msgstr "cIOS249ロード"
+msgstr "標準の音楽をロード中..."
 
 msgid "Lock Console"
 msgstr "ｺﾝｿｰﾙをﾛｯｸする"
@@ -660,7 +660,7 @@ msgid "May"
 msgstr "5月"
 
 msgid "Missing files"
-msgstr "検出できなかったﾌｧｲﾙ"
+msgstr "未検出ﾌｧｲﾙ"
 
 msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr ""
@@ -672,7 +672,7 @@ msgid "Neither"
 msgstr "どちらでもない"
 
 msgid "Network init error"
-msgstr "Network initialization error"
+msgstr "ﾈｯﾄﾜｰｸ初期化ｴﾗｰ"
 
 msgid "Next"
 msgstr "次へ"
@@ -684,7 +684,7 @@ msgid "No .dol or .elf files found."
 msgstr ""
 
 msgid "No Cheatfile found"
-msgstr ""
+msgstr "チートが見つかりません"
 
 msgid "No Favorites"
 msgstr ""
@@ -765,10 +765,10 @@ msgid "Only for Install"
 msgstr "ｲﾝｽﾄｰﾙのみ"
 
 msgid "Parental Control"
-msgstr "ﾋﾟｱﾚﾝﾀﾙｺﾝﾄﾛｰﾙ"
+msgstr "ﾍﾟｱﾚﾝﾀﾙｺﾝﾄﾛｰﾙ"
 
 msgid "Parental control"
-msgstr ""
+msgstr "ﾍﾟｱﾚﾝﾀﾙｺﾝﾄﾛｰﾙ"
 
 msgid "Partition"
 msgstr "ﾊﾟｰﾃｨｼｮﾝ"
@@ -786,13 +786,13 @@ msgid "Paste it into your browser to get your WiiTDB.zip."
 msgstr ""
 
 msgid "Patch Country Strings"
-msgstr "MP3ﾒﾆｭｰ"
+msgstr "CountryStrﾊﾟｯﾁ"
 
 msgid "Pick from a list"
 msgstr ""
 
 msgid "Play Count"
-msgstr "ﾌﾟﾚｲ時間"
+msgstr "ﾌﾟﾚｲ回数"
 
 msgid "Power off the Wii"
 msgstr "Wiiの電源を切る"
@@ -816,7 +816,7 @@ msgid "Receiving file from:"
 msgstr ""
 
 msgid "Released"
-msgstr ""
+msgstr "リリース"
 
 msgid "Reload SD"
 msgstr "SDｶｰﾄﾞのﾘﾛｰﾄﾞ"
@@ -825,13 +825,13 @@ msgid "Rename Game on WBFS"
 msgstr "WBFS上のｹﾞｰﾑ名変更"
 
 msgid "Reset Playcounter"
-msgstr ""
+msgstr "ﾌﾟﾚｲ回数のﾘｾｯﾄ"
 
 msgid "Restart"
-msgstr "ﾘｽﾀｰﾄ"
+msgstr "再起動"
 
 msgid "Restarting..."
-msgstr "再起動"
+msgstr "再起動中..."
 
 msgid "Return"
 msgstr "もどる"
@@ -852,7 +852,7 @@ msgid "SD selected"
 msgstr ""
 
 msgid "SFX Volume"
-msgstr "SFX音量"
+msgstr "効果音の音量"
 
 msgid "Save"
 msgstr "ｾｰﾌﾞ"
@@ -864,13 +864,13 @@ msgid "Saving"
 msgstr ""
 
 msgid "Screensaver"
-msgstr ""
+msgstr "ｽｸﾘｰﾝｾｰﾊﾞｰ"
 
 msgid "Sept"
 msgstr "9月"
 
 msgid "Set as backgroundmusic?"
-msgstr "ｻｳﾝﾄﾞとして設定する"
+msgstr "ｻｳﾝﾄﾞ(BGM)に設定しますか"
 
 msgid "Settings"
 msgstr "設定"
@@ -924,7 +924,7 @@ msgid "TChinese"
 msgstr "中国語(繁体字)"
 
 msgid "TXTCheatcodes Path"
-msgstr ""
+msgstr "TXTチートのパス"
 
 msgid "TXTCheatcodes Path changed"
 msgstr ""
@@ -952,7 +952,7 @@ msgid "Title Launcher"
 msgstr ""
 
 msgid "Titles from XML"
-msgstr ""
+msgstr "XMLからﾀｲﾄﾙ読込"
 
 msgid "Tooltips"
 msgstr "ﾂｰﾙﾋﾝﾄ"
@@ -980,7 +980,7 @@ msgid "Uninstalling wad"
 msgstr ""
 
 msgid "Unlock console to use this option."
-msgstr "このｵﾌﾟｼｮﾝを有効にするのにﾛｯｸを解除します"
+msgstr "このｵﾌﾟｼｮﾝの使用のためﾛｯｸを解除します"
 
 msgid "Unlocked"
 msgstr "ｱﾝﾛｯｸ"
@@ -997,7 +997,7 @@ msgstr "DOLファイルを更新"
 msgid "Update Files"
 msgstr ""
 
-msgid "Update all Languagefiles"
+msgid "Update all Language Files"
 msgstr ""
 
 msgid "Update failed"
@@ -1007,15 +1007,18 @@ msgid "Update to"
 msgstr "Update to"
 
 msgid "Updatepath"
-msgstr "更新Path"
+msgstr "更新パス"
 
 msgid "Updatepath changed."
-msgstr "更新Pathを変更しました"
+msgstr "更新パスを変更しました"
 
 msgid "Updating"
 msgstr "更新中"
 
-msgid "Updating Languagefiles:"
+msgid "Updating Language Files:"
+msgstr ""
+
+msgid "Updating WiiTDB.zip"
 msgstr ""
 
 msgid "VIDTV Patch"
@@ -1043,6 +1046,9 @@ msgstr "ﾜｲﾄﾞｽｸﾘｰﾝ(16:9)"
 msgid "Wii Menu"
 msgstr "Wiiﾒﾆｭｰ"
 
+msgid "Wii Settings"
+msgstr ""
+
 msgid "Wiilight"
 msgstr "Wii light"
 
@@ -1068,7 +1074,7 @@ msgid "You are choosing to display favorites and you do not have any selected."
 msgstr ""
 
 msgid "You have attempted to load a bad image"
-msgstr ""
+msgstr "読み込めないイメージです"
 
 msgid "You need to format a partition"
 msgstr "ﾊﾟｰﾃｨｼｮﾝをﾌｫｰﾏｯﾄして下さい"
@@ -1084,19 +1090,19 @@ msgid "contains over 255 lines of code.  It will produce unexpected results."
 msgstr ""
 
 msgid "does not exist!"
-msgstr ""
+msgstr "存在しません!"
 
 msgid "does not exist!  Loading game without cheats."
-msgstr ""
+msgstr "存在しません。ﾁｰﾄなしでｹﾞｰﾑを起動します。"
 
 msgid "does not exist!  You Messed something up, Idiot."
 msgstr ""
 
 msgid "file left"
-msgstr ""
+msgstr "残りのﾌｧｲﾙ数"
 
 msgid "files left"
-msgstr ""
+msgstr "残りのﾌｧｲﾙ数"
 
 msgid "files not found on the server!"
 msgstr "ｻｰﾊﾞｰにﾌｧｲﾙがありません!"
@@ -1108,16 +1114,16 @@ msgid "for WiiTDB and hosting covers / disc images"
 msgstr ""
 
 msgid "for diverse patches"
-msgstr "1月"
+msgstr "種々のﾊﾟｯﾁに"
 
 msgid "for his awesome tool"
-msgstr "1月"
+msgstr "彼のすばらしいﾂｰﾙに"
 
 msgid "for hosting the update files"
-msgstr "更新ﾌｧｲﾙを配布"
+msgstr "更新ﾌｧｲﾙを配布に"
 
 msgid "for the USB Loader source"
-msgstr ""
+msgstr "USB Loaderのｿｰｽに"
 
 msgid "formatted!"
 msgstr "ﾌｫｰﾏｯﾄ完了!"
@@ -1133,72 +1139,3 @@ msgstr "of"
 
 msgid "seconds left"
 msgstr "完了までの秒数"
-
-#~ msgid "Path of titles.txt change"
-#~ msgstr "titles.txtのPath変更"
-
-#~ msgid "Path of titles.txt changed."
-#~ msgstr "titles.txtのPathを変更しました"
-
-#~ msgid "titles.txt Path"
-#~ msgstr "Titles.txt Path"
-
-#~ msgid "file(s) left"
-#~ msgstr "file(s) left(残りのﾌｧｲﾙ数)"
-
-#~ msgid "for hosting the covers/discarts"
-#~ msgstr "ｶﾊﾞｰを配布"
-
-#~ msgid "Favorite"
-#~ msgstr "お気に入り"
-
-#~ msgid "Alphabetical"
-#~ msgstr "全て"
-
-#~ msgid "Coverpath change"
-#~ msgstr "ｶﾊﾞｰﾊﾟｽの変更"
-
-#~ msgid "BOOT ERROR"
-#~ msgstr "BOOT ERROR"
-
-#~ msgid "Failed to boot:"
-#~ msgstr "起動に失敗:"
-
-#~ msgid "Failed to mount front SD-card"
-#~ msgstr "SDｶｰﾄﾞの認識に失敗しました"
-
-#~ msgid "Failed to set USB:"
-#~ msgstr "USB接続に失敗:"
-
-#~ msgid "Favorites"
-#~ msgstr "お気に入り"
-
-#~ msgid "Go Back"
-#~ msgstr "もどる"
-
-#~ msgid "Language change"
-#~ msgstr "言語の変更"
-
-#~ msgid "Sort Game List"
-#~ msgstr "ﾘｽﾄの整理"
-
-#~ msgid "Loading in cIOS249"
-#~ msgstr "cIOS249をロード中..."
-
-#~ msgid "No HDD found!"
-#~ msgstr "HDDを検出できませんでした!"
-
-#~ msgid "Password change"
-#~ msgstr "ﾊﾟｽﾜｰﾄﾞ変更"
-
-#~ msgid "Select the Partition"
-#~ msgstr "ﾊﾟｰﾃｨｼｮﾝ選択"
-
-#~ msgid "you want to format"
-#~ msgstr "ﾌｫｰﾏｯﾄを実行する"
-
-#~ msgid "Try"
-#~ msgstr "試みる"
-
-#~ msgid "You don't have cIOS222"
-#~ msgstr "cIOS222が検出できませんでした"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-29 22:18+0200\n"
+"POT-Creation-Date: 2009-07-30 05:39+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -997,7 +997,7 @@ msgstr ""
 msgid "Update Files"
 msgstr ""
 
-msgid "Update all Languagefiles"
+msgid "Update all Language Files"
 msgstr ""
 
 msgid "Update failed"
@@ -1015,7 +1015,10 @@ msgstr ""
 msgid "Updating"
 msgstr ""
 
-msgid "Updating Languagefiles:"
+msgid "Updating Language Files:"
+msgstr ""
+
+msgid "Updating WiiTDB.zip"
 msgstr ""
 
 msgid "VIDTV Patch"
@@ -1042,6 +1045,9 @@ msgstr "와이드 스크린에 맞춤"
 
 msgid "Wii Menu"
 msgstr "Wii 메뉴로"
+
+msgid "Wii Settings"
+msgstr ""
 
 msgid "Wiilight"
 msgstr ""
@@ -1133,48 +1139,3 @@ msgstr "중"
 
 msgid "seconds left"
 msgstr "초 남았습니다"
-
-#~ msgid "file(s) left"
-#~ msgstr "파일 남음"
-
-#~ msgid "Coverpath change"
-#~ msgstr "표지 경로 변경"
-
-#~ msgid "BOOT ERROR"
-#~ msgstr "부팅 에러"
-
-#~ msgid "Failed to boot:"
-#~ msgstr "부팅 실패:"
-
-#~ msgid "Failed to mount front SD-card"
-#~ msgstr "SD카드 인식 실패"
-
-#~ msgid "Failed to set USB:"
-#~ msgstr "USB 세팅 실패:"
-
-#~ msgid "Go Back"
-#~ msgstr "뒤로 가기"
-
-#~ msgid "Language change"
-#~ msgstr "언어 변경"
-
-#~ msgid "Loading in cIOS249"
-#~ msgstr "cIOS249로 로딩"
-
-#~ msgid "No HDD found!"
-#~ msgstr "하드 디스크가 없습니다!"
-
-#~ msgid "Password change"
-#~ msgstr "비밀번호 변경"
-
-#~ msgid "Select the Partition"
-#~ msgstr "포맷하려는"
-
-#~ msgid "you want to format"
-#~ msgstr "파티션을 선택하세요"
-
-#~ msgid "Try"
-#~ msgstr "시도"
-
-#~ msgid "You don't have cIOS222"
-#~ msgstr "cIOS222가 없습니다."
