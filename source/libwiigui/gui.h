@@ -636,6 +636,8 @@ class GuiImage : public GuiElement
 		//!\param y Y coordinate
 		//!\param color Pixel color
 		void SetPixel(int x, int y, GXColor color);
+		//!Sets the image to grayscale
+		void SetGrayscale(void);
 		//!Directly modifies the image data to create a color-striped effect
 		//!Alters the RGB values by the specified amount
 		//!\param s Amount to increment/decrement the RGB values in the image
