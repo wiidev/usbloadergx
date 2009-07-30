@@ -1,4 +1,4 @@
-#define SVN_REV "673M"
+#define SVN_REV "674M"
 
 const char *GetRev()
 { 

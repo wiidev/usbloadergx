@@ -44,51 +44,51 @@ static u8 tikbuf[STD_SIGNED_TIK_SIZE] ATTRIBUTE_ALIGN(0x20);
 
 
 void zero_sig(signed_blob *sig) {
-  u8 *sig_ptr = (u8 *)sig;
-  memset(sig_ptr + 4, 0, SIGNATURE_SIZE(sig)-4);
+    u8 *sig_ptr = (u8 *)sig;
+    memset(sig_ptr + 4, 0, SIGNATURE_SIZE(sig)-4);
 }
 
 void brute_tmd(tmd *p_tmd) {
-  u16 fill;
-  for(fill=0; fill<65535; fill++) {
-    p_tmd->fill3=fill;
-    sha1 hash;
-    //    debug_printf("SHA1(%p, %x, %p)\n", p_tmd, TMD_SIZE(p_tmd), hash);
-    SHA1((u8 *)p_tmd, TMD_SIZE(p_tmd), hash);;
-  
-    if (hash[0]==0) {
-      //      debug_printf("setting fill3 to %04hx\n", fill);
-      return;
+    u16 fill;
+    for (fill=0; fill<65535; fill++) {
+        p_tmd->fill3=fill;
+        sha1 hash;
+        //    debug_printf("SHA1(%p, %x, %p)\n", p_tmd, TMD_SIZE(p_tmd), hash);
+        SHA1((u8 *)p_tmd, TMD_SIZE(p_tmd), hash);;
+
+        if (hash[0]==0) {
+            //      debug_printf("setting fill3 to %04hx\n", fill);
+            return;
+        }
     }
-  }
-  printf("Unable to fix tmd :(\n");
-  exit(4);
+    printf("Unable to fix tmd :(\n");
+    exit(4);
 }
 
 void brute_tik(tik *p_tik) {
-  u16 fill;
-  for(fill=0; fill<65535; fill++) {
-    p_tik->padding=fill;
-    sha1 hash;
-    //    debug_printf("SHA1(%p, %x, %p)\n", p_tmd, TMD_SIZE(p_tmd), hash);
-    SHA1((u8 *)p_tik, sizeof(tik), hash);
-  
-    if (hash[0]==0) return;
-  }
-  printf("Unable to fix tik :(\n");
-  exit(5);
+    u16 fill;
+    for (fill=0; fill<65535; fill++) {
+        p_tik->padding=fill;
+        sha1 hash;
+        //    debug_printf("SHA1(%p, %x, %p)\n", p_tmd, TMD_SIZE(p_tmd), hash);
+        SHA1((u8 *)p_tik, sizeof(tik), hash);
+
+        if (hash[0]==0) return;
+    }
+    printf("Unable to fix tik :(\n");
+    exit(5);
 }
-    
+
 void forge_tmd(signed_blob *s_tmd) {
 //  debug_printf("forging tmd sig");
-  zero_sig(s_tmd);
-  brute_tmd(SIGNATURE_PAYLOAD(s_tmd));
+    zero_sig(s_tmd);
+    brute_tmd(SIGNATURE_PAYLOAD(s_tmd));
 }
 
 void forge_tik(signed_blob *s_tik) {
 //  debug_printf("forging tik sig");
-  zero_sig(s_tik);
-  brute_tik(SIGNATURE_PAYLOAD(s_tik));
+    zero_sig(s_tik);
+    brute_tik(SIGNATURE_PAYLOAD(s_tik));
 }
 
 

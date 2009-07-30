@@ -9,12 +9,11 @@
 #include <unistd.h> //usleep
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
-u32 getipbyname(char *domain);
-u32 getipbynamecached(char *domain);
+    u32 getipbyname(char *domain);
+    u32 getipbynamecached(char *domain);
 
 #ifdef __cplusplus
 }

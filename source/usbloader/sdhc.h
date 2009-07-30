@@ -5,15 +5,14 @@
 #define SDHC_SECTOR_SIZE	0x200
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
-/* Prototypes */
-bool SDHC_Init(void);
-bool SDHC_Close(void);
-bool SDHC_ReadSectors(u32, u32, void *);
-bool SDHC_WriteSectors(u32, u32, void *);
+    /* Prototypes */
+    bool SDHC_Init(void);
+    bool SDHC_Close(void);
+    bool SDHC_ReadSectors(u32, u32, void *);
+    bool SDHC_WriteSectors(u32, u32, void *);
 
 #ifdef __cplusplus
 }

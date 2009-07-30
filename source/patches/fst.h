@@ -23,12 +23,11 @@
 #define __FST_H__
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
 //u32 do_fst(u32 fstlocation);
-u32 do_sd_code(char *filename);
+    u32 do_sd_code(char *filename);
 
 #ifdef __cplusplus
 }

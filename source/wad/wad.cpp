@@ -117,164 +117,6 @@ out:
 	return ret;
 }
 
-
-/*s32 Wad_Install(FILE *fp)
-{
-	wadHeader   *header  = NULL;
-	signed_blob *p_certs = NULL, *p_crl = NULL, *p_tik = NULL, *p_tmd = NULL;
-
-	tmd *tmd_data  = NULL;
-
-	u32 cnt, offset = 0;
-	s32 ret = 666;
-
-	//WindowPrompt("Here we go...","don't turn off your Wii",0,0,0,0,200);
-	// WAD header 
-	//ret = __Wad_ReadAlloc(fp, (void *)header, offset, sizeof(wadHeader));
-	ret = __Wad_ReadAlloc(fp, (void **)&header, offset, sizeof(wadHeader));
-	
-	if (ret < 0)
-		goto err;
-	else
-		offset += round_up(header->header_len, 64);
-
-	// WAD certificates 
-	//ret = __Wad_ReadAlloc(fp, (void *)&p_certs, offset, header->certs_len);
-	ret = __Wad_ReadAlloc(fp, (void **)&p_certs, offset, header->certs_len);
-	if (ret < 0)
-		goto err;
-	else
-		offset += round_up(header->certs_len, 64);
-
-	// WAD crl 
-	
-	if (header->crl_len) {
-		//ret = __Wad_ReadAlloc(fp, (void *)&p_crl, offset, header->crl_len);
-		ret = __Wad_ReadAlloc(fp, (void **)&p_crl, offset, header->crl_len);
-		if (ret < 0)
-			goto err;
-		else
-			offset += round_up(header->crl_len, 64);
-	}
-
-	// WAD ticket 
-	//ret = __Wad_ReadAlloc(fp, (void *)&p_tik, offset, header->tik_len);
-	ret = __Wad_ReadAlloc(fp, (void **)&p_tik, offset, header->tik_len);
-	if (ret < 0)
-		goto err;
-	else
-		offset += round_up(header->tik_len, 64);
-
-	// WAD TMD 
-	//ret = __Wad_ReadAlloc(fp, (void *)&p_tmd, offset, header->tmd_len);
-	ret = __Wad_ReadAlloc(fp, (void **)&p_tmd, offset, header->tmd_len);
-	if (ret < 0)
-		goto err;
-	else
-		offset += round_up(header->tmd_len, 64);
-
-	//WindowPrompt("Installing ticket...",0,0,0,0,0,200);
-
-	// Install ticket 
-	ret = ES_AddTicket(p_tik, header->tik_len, p_certs, header->certs_len, p_crl, header->crl_len);
-	if (ret < 0)
-		goto err;
-
-	//WindowPrompt(">> Installing title...",0,0,0,0,0,200);
-
-	// Install title 
-	ret = ES_AddTitleStart(p_tmd, header->tmd_len, p_certs, header->certs_len, p_crl, header->crl_len);
-	if (ret < 0)
-		goto err;
-
-	// Get TMD info 
-	tmd_data = (tmd *)SIGNATURE_PAYLOAD(p_tmd);
-
-	// Install contents 
-	for (cnt = 0; cnt < tmd_data->num_contents; cnt++) {
-		tmd_content *content = &tmd_data->contents[cnt];
-
-		u32 idx = 0, len;
-		s32 cfd;
-
-		//printf("\r\t\t>> Installing content #%02d...", content->cid);
-
-		// Encrypted content size 
-		len = round_up(content->size, 64);
-
-		// Install content 
-		cfd = ES_AddContentStart(tmd_data->title_id, content->cid);
-		if (cfd < 0) {
-			ret = cfd;
-			goto err;
-		}
-
-		// Install content data 
-		while (idx < len) {
-			u32 size;
-
-			// Data length 
-			size = (len - idx);
-			if (size > BLOCK_SIZE)
-				size = BLOCK_SIZE;
-
-			// Read data 
-			ret = __Wad_ReadFile(fp, &wadBuffer, offset, size);
-			if (ret < 0)
-				goto err;
-
-			// Install data 
-			ret = ES_AddContentData(cfd, wadBuffer, size);
-			if (ret < 0)
-				goto err;
-
-			// Increase variables 
-			idx    += size;
-			offset += size;
-		}
-
-		// Finish content installation 
-		ret = ES_AddContentFinish(cfd);
-		if (ret < 0)
-			goto err;
-	}
-
-	//WindowPrompt(">> Finishing installation...",0,0,0,0,0,200);
-
-	// Finish title install 
-	ret = ES_AddTitleFinish();
-	if (ret >= 0) {
-//		printf(" OK!\n");
-		goto out;
-	}
-
-err:
-	//char titties[100];
-	//snprintf(titties, sizeof(titties), "%d", ret);
-	//printf(" ERROR! (ret = %d)\n", ret);
-	//WindowPrompt("ERROR!",titties,"Back",0,0);
-	// Cancel install 
-	ES_AddTitleCancel();
-	return ret;
-
-out:
-	// Free memory 
-	if (header)
-		free(header);
-	if (p_certs)
-		free(p_certs);
-	if (p_crl)
-		free(p_crl);
-	if (p_tik)
-		free(p_tik);
-	if (p_tmd)
-		free(p_tmd);
-	
-	//WindowPrompt(tr("Success"),"The wad file was installed","Ok");
-	return ret;
-}*/
-
-
 s32 Wad_Install(FILE *fp)
 {
 	//////start the gui shit
@@ -575,11 +417,8 @@ out:
 		free(p_tmd);
 	goto exit;
 	
-	//WindowPrompt(tr("Success"),"The wad file was installed","Ok");
 	
 exit:	
-	//promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
-	//while(promptWindow.GetEffect() > 0) usleep(50);
 	msg5Txt.SetText(tr("Finishing installation... Ok!"));
 	promptWindow.Append(&btn1);
 	while(btn1.GetState() != STATE_CLICKED){
@@ -598,7 +437,6 @@ exit:
 s32 Wad_Uninstall(FILE *fp)
 {
 	//////start the gui shit
-   //////start the gui shit
    GuiWindow promptWindow(472,320);
 	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	promptWindow.SetPosition(0, -10);
@@ -778,11 +616,8 @@ out:
 
 	goto exit;
 	
-	//WindowPrompt(tr("Success"),"The wad file was installed","Ok");
 	
 exit:	
-	//promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
-	//while(promptWindow.GetEffect() > 0) usleep(50);
 	msg5Txt.SetText(tr("Done!"));
 	promptWindow.Append(&btn1);
 	while(btn1.GetState() != STATE_CLICKED){

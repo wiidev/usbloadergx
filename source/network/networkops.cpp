@@ -40,112 +40,107 @@ static bool networkHalt = true;
  ***************************************************************************/
 void Initialize_Network(void) {
 
-    if(networkinitialized) return;
+    if (networkinitialized) return;
 
-	s32 result;
+    s32 result;
 
     result = if_config(IP, NULL, NULL, true);
 
-   if(result < 0) {
+    if (result < 0) {
         networkinitialized = false;
-		return;
-	} else {
+        return;
+    } else {
         networkinitialized = true;
         return;
-	}
+    }
 }
 
 /****************************************************************************
  * Check if network was initialised
  ***************************************************************************/
-bool IsNetworkInit(void)
-{
+bool IsNetworkInit(void) {
     return networkinitialized;
 }
 
 /****************************************************************************
  * Get network IP
  ***************************************************************************/
-char * GetNetworkIP(void)
-{
+char * GetNetworkIP(void) {
     return IP;
 }
 
 /****************************************************************************
  * Get network IP
  ***************************************************************************/
-bool ShutdownWC24()
-{
+bool ShutdownWC24() {
     bool onlinefix = IsNetworkInit();
-	if(onlinefix) {
-		s32 kd_fd, ret;
-		STACK_ALIGN(u8, kd_buf, 0x20, 32);
+    if (onlinefix) {
+        s32 kd_fd, ret;
+        STACK_ALIGN(u8, kd_buf, 0x20, 32);
 
-		kd_fd = IOS_Open("/dev/net/kd/request", 0);
-		if (kd_fd >= 0) {
-			ret = IOS_Ioctl(kd_fd, 7, NULL, 0, kd_buf, 0x20);
-			if(ret >= 0)
-				onlinefix = false; // fixed no IOS reload needed
-			IOS_Close(kd_fd);
-		}
-	}
-	return onlinefix;
+        kd_fd = IOS_Open("/dev/net/kd/request", 0);
+        if (kd_fd >= 0) {
+            ret = IOS_Ioctl(kd_fd, 7, NULL, 0, kd_buf, 0x20);
+            if (ret >= 0)
+                onlinefix = false; // fixed no IOS reload needed
+            IOS_Close(kd_fd);
+        }
+    }
+    return onlinefix;
 }
 
-s32 network_request(const char * request)
-{
-	char buf[1024];
-	char *ptr = NULL;
+s32 network_request(const char * request) {
+    char buf[1024];
+    char *ptr = NULL;
 
-	u32 cnt, size;
-	s32 ret;
+    u32 cnt, size;
+    s32 ret;
 
-	/* Send request */
-	ret = net_send(connection, request, strlen(request), 0);
-	if (ret < 0)
-		return ret;
+    /* Send request */
+    ret = net_send(connection, request, strlen(request), 0);
+    if (ret < 0)
+        return ret;
 
-	/* Clear buffer */
-	memset(buf, 0, sizeof(buf));
+    /* Clear buffer */
+    memset(buf, 0, sizeof(buf));
 
-	/* Read HTTP header */
-	for (cnt = 0; !strstr(buf, "\r\n\r\n"); cnt++)
-		if (net_recv(connection, buf + cnt, 1, 0) <= 0)
-			return -1;
+    /* Read HTTP header */
+    for (cnt = 0; !strstr(buf, "\r\n\r\n"); cnt++)
+        if (net_recv(connection, buf + cnt, 1, 0) <= 0)
+            return -1;
 
-	/* HTTP request OK? */
-	if (!strstr(buf, "HTTP/1.1 200 OK"))
-		return -1;
-	/* Retrieve content size */
-	ptr = strstr(buf, "Content-Length:");
-	if (!ptr)
-		return -1;
+    /* HTTP request OK? */
+    if (!strstr(buf, "HTTP/1.1 200 OK"))
+        return -1;
+    /* Retrieve content size */
+    ptr = strstr(buf, "Content-Length:");
+    if (!ptr)
+        return -1;
 
-	sscanf(ptr, "Content-Length: %u", &size);
-	return size;
+    sscanf(ptr, "Content-Length: %u", &size);
+    return size;
 }
 
-s32 network_read(u8 *buf, u32 len)
-{
-	u32 read = 0;
-	s32 ret = -1;
+s32 network_read(u8 *buf, u32 len) {
+    u32 read = 0;
+    s32 ret = -1;
 
-	/* Data to be read */
-	while (read < len) {
-		/* Read network data */
-		ret = net_read(connection, buf + read, len - read);
-		if (ret < 0)
-			return ret;
+    /* Data to be read */
+    while (read < len) {
+        /* Read network data */
+        ret = net_read(connection, buf + read, len - read);
+        if (ret < 0)
+            return ret;
 
-		/* Read finished */
-		if (!ret)
-			break;
+        /* Read finished */
+        if (!ret)
+            break;
 
-		/* Increment read variable */
-		read += ret;
-	}
+        /* Increment read variable */
+        read += ret;
+    }
 
-	return read;
+    return read;
 }
 
 /****************************************************************************
@@ -154,42 +149,39 @@ s32 network_read(u8 *buf, u32 len)
 s32 download_request(const char * url) {
 
     //Check if the url starts with "http://", if not it is not considered a valid url
-	if(strncmp(url, "http://", strlen("http://")) != 0)
-	{
-		return -1;
-	}
+    if (strncmp(url, "http://", strlen("http://")) != 0) {
+        return -1;
+    }
 
-	//Locate the path part of the url by searching for '/' past "http://"
-	char *path = strchr(url + strlen("http://"), '/');
+    //Locate the path part of the url by searching for '/' past "http://"
+    char *path = strchr(url + strlen("http://"), '/');
 
-	//At the very least the url has to end with '/', ending with just a domain is invalid
-	if(path == NULL)
-	{
-		return -1;
-	}
+    //At the very least the url has to end with '/', ending with just a domain is invalid
+    if (path == NULL) {
+        return -1;
+    }
 
-	//Extract the domain part out of the url
-	int domainlength = path - url - strlen("http://");
+    //Extract the domain part out of the url
+    int domainlength = path - url - strlen("http://");
 
-	if(domainlength == 0)
-	{
-		return -1;
-	}
+    if (domainlength == 0) {
+        return -1;
+    }
 
-	char domain[domainlength + 1];
-	strncpy(domain, url + strlen("http://"), domainlength);
-	domain[domainlength] = '\0';
+    char domain[domainlength + 1];
+    strncpy(domain, url + strlen("http://"), domainlength);
+    domain[domainlength] = '\0';
 
-	connection = GetConnection(domain);
-    if(connection < 0) {
+    connection = GetConnection(domain);
+    if (connection < 0) {
         return -1;
     }
 
     //Form a nice request header to send to the webserver
-	char header[strlen(path)+strlen(domain)+100];
-	sprintf(header, "GET %s HTTP/1.1\r\nHost: %s\r\nConnection: close\r\n\r\n", path, domain);
+    char header[strlen(path)+strlen(domain)+100];
+    sprintf(header, "GET %s HTTP/1.1\r\nHost: %s\r\nConnection: close\r\n\r\n", path, domain);
 
-	s32 filesize = network_request(header);
+    s32 filesize = network_request(header);
 
     return filesize;
 }
@@ -198,7 +190,7 @@ void CloseConnection() {
 
     net_close(connection);
 
-    if(waitforanswer) {
+    if (waitforanswer) {
         net_close(socket);
         waitforanswer = false;
     }
@@ -209,46 +201,42 @@ void CloseConnection() {
  ***************************************************************************/
 int NetworkWait() {
 
-    if(!checkincomming)
+    if (!checkincomming)
         return -3;
 
-	struct sockaddr_in sin;
-	struct sockaddr_in client_address;
-	socklen_t addrlen = sizeof(client_address);
+    struct sockaddr_in sin;
+    struct sockaddr_in client_address;
+    socklen_t addrlen = sizeof(client_address);
 
-	//Open socket
-	socket = net_socket(AF_INET, SOCK_STREAM, IPPROTO_IP);
+    //Open socket
+    socket = net_socket(AF_INET, SOCK_STREAM, IPPROTO_IP);
 
-	if (socket == INVALID_SOCKET)
-	{
-		return socket;
-	}
+    if (socket == INVALID_SOCKET) {
+        return socket;
+    }
 
-	sin.sin_family = AF_INET;
-	sin.sin_port = htons(PORT);
-	sin.sin_addr.s_addr = htonl(INADDR_ANY);
+    sin.sin_family = AF_INET;
+    sin.sin_port = htons(PORT);
+    sin.sin_addr.s_addr = htonl(INADDR_ANY);
 
-	if (net_bind(socket, (struct sockaddr*)&sin, sizeof(sin)) < 0)
-	{
-		net_close(socket);
-		return -1;
-	}
+    if (net_bind(socket, (struct sockaddr*)&sin, sizeof(sin)) < 0) {
+        net_close(socket);
+        return -1;
+    }
 
-	if (net_listen(socket, 3) < 0)
-	{
-		net_close(socket);
-		return -1;
-	}
+    if (net_listen(socket, 3) < 0) {
+        net_close(socket);
+        return -1;
+    }
 
     connection = net_accept(socket, (struct sockaddr*)&client_address, &addrlen);
 
-	if (connection < 0)
-	{
-		net_close(connection);
-		net_close(socket);
-		return -4;
+    if (connection < 0) {
+        net_close(connection);
+        net_close(socket);
+        return -4;
 
-	} else {
+    } else {
 
         unsigned char haxx[9];
         //skip haxx
@@ -257,40 +245,39 @@ int NetworkWait() {
         waitforanswer = true;
         checkincomming = false;
         networkHalt = true;
-	}
+    }
 
-	return 1;
+    return 1;
 }
 
 /****************************************************************************
  * Update check
  ***************************************************************************/
-int CheckUpdate()
-{
-    if(!networkinitialized)
+int CheckUpdate() {
+    if (!networkinitialized)
         return -1;
 
     int revnumber = 0;
     int currentrev = atoi(GetRev());
 
-	#ifdef NOTFULLCHANNEL
-	struct block file = downloadfile("http://www.techjawa.com/usbloadergx/rev.txt");
-    #else
-	struct block file = downloadfile("http://www.techjawa.com/usbloadergx/wadrev.txt");
-    #endif
+#ifdef NOTFULLCHANNEL
+    struct block file = downloadfile("http://www.techjawa.com/usbloadergx/rev.txt");
+#else
+    struct block file = downloadfile("http://www.techjawa.com/usbloadergx/wadrev.txt");
+#endif
     char revtxt[10];
 
-	u8  i;
-    if(file.data != NULL) {
-        for(i=0; i<9 || i < file.size; i++)
-        revtxt[i] = file.data[i];
+    u8  i;
+    if (file.data != NULL) {
+        for (i=0; i<9 || i < file.size; i++)
+            revtxt[i] = file.data[i];
         revtxt[i] = 0;
         revnumber = atoi(revtxt);
         free(file.data);
-	}
+    }
 
-    if(revnumber > currentrev)
-    //if(revnumber > 1)//for testing updates
+    if (revnumber > currentrev)
+        //if(revnumber > 1)//for testing updates
         return revnumber;
     else
         return -1;
@@ -299,56 +286,52 @@ int CheckUpdate()
 /****************************************************************************
  * HaltNetwork
  ***************************************************************************/
-void HaltNetworkThread()
-{
+void HaltNetworkThread() {
     networkHalt = true;
     checkincomming = false;
 
-    if(waitforanswer)
+    if (waitforanswer)
         CloseConnection();
 
-	// wait for thread to finish
-	while(!LWP_ThreadIsSuspended(networkthread))
-		usleep(100);
+    // wait for thread to finish
+    while (!LWP_ThreadIsSuspended(networkthread))
+        usleep(100);
 }
 
 /****************************************************************************
  * ResumeNetworkThread
  ***************************************************************************/
-void ResumeNetworkThread()
-{
-	networkHalt = false;
-	LWP_ResumeThread(networkthread);
+void ResumeNetworkThread() {
+    networkHalt = false;
+    LWP_ResumeThread(networkthread);
 }
 
 /****************************************************************************
  * Resume NetworkWait
  ***************************************************************************/
-void ResumeNetworkWait()
-{
-	networkHalt = true;
-	checkincomming = true;
-	waitforanswer = true;
-	infilesize = 0;
-	connection = -1;
-	LWP_ResumeThread(networkthread);
+void ResumeNetworkWait() {
+    networkHalt = true;
+    checkincomming = true;
+    waitforanswer = true;
+    infilesize = 0;
+    connection = -1;
+    LWP_ResumeThread(networkthread);
 }
 
 /*********************************************************************************
  * Networkthread for background network initialize and update check with idle prio
  *********************************************************************************/
-static void * networkinitcallback(void *arg)
-{
-    while(1) {
+static void * networkinitcallback(void *arg) {
+    while (1) {
 
-        if(!checkincomming && networkHalt)
+        if (!checkincomming && networkHalt)
             LWP_SuspendThread(networkthread);
 
         Initialize_Network();
 
-        if(networkinitialized == true && updatechecked == false) {
+        if (networkinitialized == true && updatechecked == false) {
 
-            if(CheckUpdate() > 0)
+            if (CheckUpdate() > 0)
                 updateavailable = true;
 
             //suspend thread
@@ -357,25 +340,23 @@ static void * networkinitcallback(void *arg)
             checkincomming = false;
         }
 
-        if(checkincomming)
+        if (checkincomming)
             NetworkWait();
     }
-	return NULL;
+    return NULL;
 }
 
 /****************************************************************************
  * InitNetworkThread with priority 0 (idle)
  ***************************************************************************/
-void InitNetworkThread()
-{
-	LWP_CreateThread (&networkthread, networkinitcallback, NULL, NULL, 0, 0);
+void InitNetworkThread() {
+    LWP_CreateThread (&networkthread, networkinitcallback, NULL, NULL, 0, 0);
 }
 
 /****************************************************************************
  * ShutdownThread
  ***************************************************************************/
-void ShutdownNetworkThread()
-{
-	LWP_JoinThread (networkthread, NULL);
-	networkthread = LWP_THREAD_NULL;
+void ShutdownNetworkThread() {
+    LWP_JoinThread (networkthread, NULL);
+    networkthread = LWP_THREAD_NULL;
 }

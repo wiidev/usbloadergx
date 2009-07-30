@@ -105,21 +105,21 @@ typedef u16	Elf32_Half;	/* Unsigned medium integer */
                       (ehdr).e_ident[EI_MAG3] == ELFMAG3)
 
 /* ELF Header */
-typedef struct elfhdr{
-	unsigned char	e_ident[EI_NIDENT]; /* ELF Identification */
-	Elf32_Half	e_type;		/* object file type */
-	Elf32_Half	e_machine;	/* machine */
-	Elf32_Word	e_version;	/* object file version */
-	Elf32_Addr	e_entry;	/* virtual entry point */
-	Elf32_Off	e_phoff;	/* program header table offset */
-	Elf32_Off	e_shoff;	/* section header table offset */
-	Elf32_Word	e_flags;	/* processor-specific flags */
-	Elf32_Half	e_ehsize;	/* ELF header size */
-	Elf32_Half	e_phentsize;	/* program header entry size */
-	Elf32_Half	e_phnum;	/* number of program header entries */
-	Elf32_Half	e_shentsize;	/* section header entry size */
-	Elf32_Half	e_shnum;	/* number of section header entries */
-	Elf32_Half	e_shstrndx;	/* section header table's "section
+typedef struct elfhdr {
+    unsigned char	e_ident[EI_NIDENT]; /* ELF Identification */
+    Elf32_Half	e_type;		/* object file type */
+    Elf32_Half	e_machine;	/* machine */
+    Elf32_Word	e_version;	/* object file version */
+    Elf32_Addr	e_entry;	/* virtual entry point */
+    Elf32_Off	e_phoff;	/* program header table offset */
+    Elf32_Off	e_shoff;	/* section header table offset */
+    Elf32_Word	e_flags;	/* processor-specific flags */
+    Elf32_Half	e_ehsize;	/* ELF header size */
+    Elf32_Half	e_phentsize;	/* program header entry size */
+    Elf32_Half	e_phnum;	/* number of program header entries */
+    Elf32_Half	e_shentsize;	/* section header entry size */
+    Elf32_Half	e_shnum;	/* number of section header entries */
+    Elf32_Half	e_shstrndx;	/* section header table's "section
 					   header string table" entry offset */
 } Elf32_Ehdr;
 
@@ -151,7 +151,7 @@ typedef struct elfhdr{
 #define EM_MIPS_RS4_BE	10		/* MIPS R4000 Big-Endian */
 #if 0
 #define EM_SPARC64	11		/* RESERVED - was SPARC v9
-					     64-bit unoffical */
+64-bit unoffical */
 #endif
 /* RESERVED 11-14 for future use */
 #define EM_PARISC	15		/* HPPA */
@@ -227,17 +227,17 @@ typedef struct elfhdr{
 
 /* Section Header */
 typedef struct {
-	Elf32_Word	sh_name;	/* name - index into section header
+    Elf32_Word	sh_name;	/* name - index into section header
 					   string table section */
-	Elf32_Word	sh_type;	/* type */
-	Elf32_Word	sh_flags;	/* flags */
-	Elf32_Addr	sh_addr;	/* address */
-	Elf32_Off	sh_offset;	/* file offset */
-	Elf32_Word	sh_size;	/* section size */
-	Elf32_Word	sh_link;	/* section header table index link */
-	Elf32_Word	sh_info;	/* extra information */
-	Elf32_Word	sh_addralign;	/* address alignment */
-	Elf32_Word	sh_entsize;	/* section entry size */
+    Elf32_Word	sh_type;	/* type */
+    Elf32_Word	sh_flags;	/* flags */
+    Elf32_Addr	sh_addr;	/* address */
+    Elf32_Off	sh_offset;	/* file offset */
+    Elf32_Word	sh_size;	/* section size */
+    Elf32_Word	sh_link;	/* section header table index link */
+    Elf32_Word	sh_info;	/* extra information */
+    Elf32_Word	sh_addralign;	/* address alignment */
+    Elf32_Word	sh_entsize;	/* section entry size */
 } Elf32_Shdr;
 
 /* Special Section Indexes */
@@ -328,7 +328,7 @@ typedef struct {
 #define SHF_TLS		0x400		/* Thread local storage */
 #define SHF_MASKOS	0x0ff00000	/* OS specific */
 #define SHF_MASKPROC	0xf0000000	/* reserved bits for processor */
-					/*  specific section attributes */
+/*  specific section attributes */
 
 /* Section Group Flags */
 #define GRP_COMDAT	0x1		/* COMDAT group */
@@ -337,12 +337,12 @@ typedef struct {
 
 /* Symbol Table Entry */
 typedef struct elf32_sym {
-	Elf32_Word	st_name;	/* name - index into string table */
-	Elf32_Addr	st_value;	/* symbol value */
-	Elf32_Word	st_size;	/* symbol size */
-	unsigned char	st_info;	/* type and binding */
-	unsigned char	st_other;	/* 0 - no defined meaning */
-	Elf32_Half	st_shndx;	/* section header index */
+    Elf32_Word	st_name;	/* name - index into string table */
+    Elf32_Addr	st_value;	/* symbol value */
+    Elf32_Word	st_size;	/* symbol size */
+    unsigned char	st_info;	/* type and binding */
+    unsigned char	st_other;	/* 0 - no defined meaning */
+    Elf32_Half	st_shndx;	/* section header index */
 } Elf32_Sym;
 
 /* Symbol table index */
@@ -385,18 +385,16 @@ typedef struct elf32_sym {
 
 
 /* Relocation entry with implicit addend */
-typedef struct
-{
-	Elf32_Addr	r_offset;	/* offset of relocation */
-	Elf32_Word	r_info;		/* symbol table index and type */
+typedef struct {
+    Elf32_Addr	r_offset;	/* offset of relocation */
+    Elf32_Word	r_info;		/* symbol table index and type */
 } Elf32_Rel;
 
 /* Relocation entry with explicit addend */
-typedef struct
-{
-	Elf32_Addr	r_offset;	/* offset of relocation */
-	Elf32_Word	r_info;		/* symbol table index and type */
-	Elf32_Sword	r_addend;
+typedef struct {
+    Elf32_Addr	r_offset;	/* offset of relocation */
+    Elf32_Word	r_info;		/* symbol table index and type */
+    Elf32_Sword	r_addend;
 } Elf32_Rela;
 
 /* Extract relocation info - r_info */
@@ -406,14 +404,14 @@ typedef struct
 
 /* Program Header */
 typedef struct {
-	Elf32_Word	p_type;		/* segment type */
-	Elf32_Off	p_offset;	/* segment offset */
-	Elf32_Addr	p_vaddr;	/* virtual address of segment */
-	Elf32_Addr	p_paddr;	/* physical address - ignored? */
-	Elf32_Word	p_filesz;	/* number of bytes in file for seg. */
-	Elf32_Word	p_memsz;	/* number of bytes in mem. for seg. */
-	Elf32_Word	p_flags;	/* flags */
-	Elf32_Word	p_align;	/* memory alignment */
+    Elf32_Word	p_type;		/* segment type */
+    Elf32_Off	p_offset;	/* segment offset */
+    Elf32_Addr	p_vaddr;	/* virtual address of segment */
+    Elf32_Addr	p_paddr;	/* physical address - ignored? */
+    Elf32_Word	p_filesz;	/* number of bytes in file for seg. */
+    Elf32_Word	p_memsz;	/* number of bytes in mem. for seg. */
+    Elf32_Word	p_flags;	/* flags */
+    Elf32_Word	p_align;	/* memory alignment */
 } Elf32_Phdr;
 
 /* Segment types - p_type */
@@ -437,16 +435,14 @@ typedef struct {
 #define PF_R		0x4		/* Readable */
 #define PF_MASKOS	0x0ff00000	/* OS specific segment flags */
 #define PF_MASKPROC	0xf0000000	/* reserved bits for processor */
-					/*  specific segment flags */
+/*  specific segment flags */
 /* Dynamic structure */
-typedef struct
-{
-	Elf32_Sword	d_tag;		/* controls meaning of d_val */
-	union
-	{
-		Elf32_Word	d_val;	/* Multiple meanings - see d_tag */
-		Elf32_Addr	d_ptr;	/* program virtual address */
-	} d_un;
+typedef struct {
+    Elf32_Sword	d_tag;		/* controls meaning of d_val */
+    union {
+        Elf32_Word	d_val;	/* Multiple meanings - see d_tag */
+        Elf32_Addr	d_ptr;	/* program virtual address */
+    } d_un;
 } Elf32_Dyn;
 
 extern Elf32_Dyn	_DYNAMIC[];
@@ -468,7 +464,7 @@ extern Elf32_Dyn	_DYNAMIC[];
 #define DT_FINI		13		/* address of termination function */
 #define DT_SONAME	14		/* string table offset of shared obj */
 #define DT_RPATH	15		/* string table offset of library
-					   search path */
+search path */
 #define DT_SYMBOLIC	16		/* start sym search in shared obj. */
 #define DT_REL		17		/* address of rel. tbl. w addends */
 #define DT_RELSZ	18		/* size of DT_REL relocation table */
@@ -516,7 +512,7 @@ unsigned long elf_hash(const unsigned char *name);
 /* Cygnus local bits below */
 #define EF_PPC_RELOCATABLE      0x00010000      /* PowerPC -mrelocatable flag*/
 #define EF_PPC_RELOCATABLE_LIB  0x00008000      /* PowerPC -mrelocatable-lib
-                                                   flag */
+flag */
 
 /* PowerPC relocations defined by the ABIs */
 #define R_PPC_NONE              0

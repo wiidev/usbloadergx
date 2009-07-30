@@ -21,16 +21,14 @@ void spinner(void);
 
 // Basic I/O.
 
-static inline u32 read32(u32 addr)
-{
-	u32 x;
-	asm volatile("lwz %0,0(%1) ; sync" : "=r"(x) : "b"(0xc0000000 | addr));
-	return x;
+static inline u32 read32(u32 addr) {
+    u32 x;
+asm volatile("lwz %0,0(%1) ; sync" : "=r"(x) : "b"(0xc0000000 | addr));
+    return x;
 }
 
-static inline void write32(u32 addr, u32 x)
-{
-	asm("stw %0,0(%1) ; eieio" : : "r"(x), "b"(0xc0000000 | addr));
+static inline void write32(u32 addr, u32 x) {
+asm("stw %0,0(%1) ; eieio" : : "r"(x), "b"(0xc0000000 | addr));
 }
 
 // USB Gecko.
@@ -44,9 +42,8 @@ extern const char version[];
 
 // Debug: blink the tray led.
 
-static inline void blink(void)
-{
-	write32(0x0d8000c0, read32(0x0d8000c0) ^ 0x20);
+static inline void blink(void) {
+    write32(0x0d8000c0, read32(0x0d8000c0) ^ 0x20);
 }
 
 void debug_printf(const char *fmt, ...);

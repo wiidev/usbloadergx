@@ -2,14 +2,13 @@
 #define _DOLLOADER_H_
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
-extern void __exception_closeall();
-typedef void (*entrypoint) (void);
+    extern void __exception_closeall();
+    typedef void (*entrypoint) (void);
 
-u32 load_dol(void *dolstart, struct __argv *argv);
+    u32 load_dol(void *dolstart, struct __argv *argv);
 
 
 #ifdef __cplusplus

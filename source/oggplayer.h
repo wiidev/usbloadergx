@@ -32,8 +32,7 @@
 #include "tremor/ivorbisfile.h"
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
 #define OGG_ONE_TIME         0
@@ -44,130 +43,130 @@ extern "C"
 #define OGG_STATUS_PAUSED    2
 #define OGG_STATUS_EOF     255
 
-/*------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/* Player OGG functions                                                                                                                                 */
-/*------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    /* Player OGG functions                                                                                                                                 */
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-/* int PlayOgg(int fd, int time_pos, int mode);
+    /* int PlayOgg(int fd, int time_pos, int mode);
 
- Play an Ogg file. This file can be loaded from memory (mem_open(void *ogg, int size_ogg)) or from device with open("device:file.ogg",O_RDONLY,0);
+     Play an Ogg file. This file can be loaded from memory (mem_open(void *ogg, int size_ogg)) or from device with open("device:file.ogg",O_RDONLY,0);
 
- NOTE: The file is closed by the player when you call PlayOgg(), StopOgg() or if it fail.
+     NOTE: The file is closed by the player when you call PlayOgg(), StopOgg() or if it fail.
 
- -- Params ---
+     -- Params ---
 
- fd: file descriptor from open() or mem_open()
+     fd: file descriptor from open() or mem_open()
 
- time_pos: initial time position in the file (in milliseconds). For example, use 30000 to advance 30 seconds
+     time_pos: initial time position in the file (in milliseconds). For example, use 30000 to advance 30 seconds
 
- mode: Use OGG_ONE_TIME or OGG_INFINITE_TIME. When you use OGG_ONE_TIME the sound stops and StatusOgg() return OGG_STATUS_EOF
+     mode: Use OGG_ONE_TIME or OGG_INFINITE_TIME. When you use OGG_ONE_TIME the sound stops and StatusOgg() return OGG_STATUS_EOF
 
- return: 0- Ok, -1 Error
+     return: 0- Ok, -1 Error
 
- */
+     */
 
-int PlayOgg(int fd, int time_pos, int mode);
+    int PlayOgg(int fd, int time_pos, int mode);
 
-/*------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/* int PlayOgg(char * path, int loop);
-    Just give the function the full device+path to OGG to play it
-    loop = 1 for Loop and 0 for one time playing
-*/
-int PlayOggFromFile(char * path, int loop);
-/*------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    /* int PlayOgg(char * path, int loop);
+        Just give the function the full device+path to OGG to play it
+        loop = 1 for Loop and 0 for one time playing
+    */
+    int PlayOggFromFile(char * path, int loop);
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-/* void StopOgg();
+    /* void StopOgg();
 
- Stop an Ogg file.
+     Stop an Ogg file.
 
- NOTE: The file is closed and the player thread is released
+     NOTE: The file is closed and the player thread is released
 
- -- Params ---
-
-
- */
-
-void StopOgg();
-
-/*------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
-/* void PauseOgg(int pause);
-
- Pause an Ogg file.
-
- -- Params ---
-
- pause: 0 -> continue, 1-> pause
-
- */
-
-void PauseOgg(int pause);
-
-/*------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
-/* int StatusOgg();
-
- Return the Ogg status
-
- -- Params ---
+     -- Params ---
 
 
- return: OGG_STATUS_RUNNING
- OGG_STATUS_ERR    -> not initialized?
- OGG_STATUS_PAUSED
- OGG_STATUS_EOF    -> player stopped by End Of File
+     */
 
- */
+    void StopOgg();
 
-int StatusOgg();
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-/*------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    /* void PauseOgg(int pause);
 
-/* void SetVolumeOgg(int volume);
+     Pause an Ogg file.
 
- Set the Ogg playing volume.
- NOTE: it change the volume of voice 0 (used for the Ogg player)
+     -- Params ---
 
- -- Params ---
+     pause: 0 -> continue, 1-> pause
 
- volume: 0 to 255 (max)
+     */
 
- */
+    void PauseOgg(int pause);
 
-void SetVolumeOgg(int volume);
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-/*------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    /* int StatusOgg();
 
-/* s32 GetTimeOgg();
+     Return the Ogg status
 
- Return the Ogg time from the starts of the file
+     -- Params ---
 
- -- Params ---
 
- return:  0 -> Ok or error condition  (you must ignore this value)
- >0 -> time in milliseconds from the starts
+     return: OGG_STATUS_RUNNING
+     OGG_STATUS_ERR    -> not initialized?
+     OGG_STATUS_PAUSED
+     OGG_STATUS_EOF    -> player stopped by End Of File
 
- */
+     */
 
-s32 GetTimeOgg();
+    int StatusOgg();
 
-/*------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-/* void SetTimeOgg(s32 time_pos);
+    /* void SetVolumeOgg(int volume);
 
- Set the time position
+     Set the Ogg playing volume.
+     NOTE: it change the volume of voice 0 (used for the Ogg player)
 
- NOTE: The file is closed by the player when you call PlayOgg(), StopOgg() or if it fail.
+     -- Params ---
 
- -- Params ---
+     volume: 0 to 255 (max)
 
- time_pos: time position in the file (in milliseconds). For example, use 30000 to advance 30 seconds
+     */
 
- */
+    void SetVolumeOgg(int volume);
 
-void SetTimeOgg(s32 time_pos);
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-/*------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    /* s32 GetTimeOgg();
+
+     Return the Ogg time from the starts of the file
+
+     -- Params ---
+
+     return:  0 -> Ok or error condition  (you must ignore this value)
+     >0 -> time in milliseconds from the starts
+
+     */
+
+    s32 GetTimeOgg();
+
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+    /* void SetTimeOgg(s32 time_pos);
+
+     Set the time position
+
+     NOTE: The file is closed by the player when you call PlayOgg(), StopOgg() or if it fail.
+
+     -- Params ---
+
+     time_pos: time position in the file (in milliseconds). For example, use 30000 to advance 30 seconds
+
+     */
+
+    void SetTimeOgg(s32 time_pos);
+
+    /*------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 #ifdef __cplusplus
 }

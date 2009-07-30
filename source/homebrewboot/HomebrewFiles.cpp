@@ -9,12 +9,11 @@
 
 #include "HomebrewFiles.h"
 
-HomebrewFiles::HomebrewFiles(const char * path)
-{
+HomebrewFiles::HomebrewFiles(const char * path) {
     filecount = 0;
 
     FileInfo = (FileInfos *) malloc(sizeof(FileInfos));
-    if(!FileInfo) {
+    if (!FileInfo) {
         return;
     }
 
@@ -24,45 +23,42 @@ HomebrewFiles::HomebrewFiles(const char * path)
     this->SortList();
 }
 
-HomebrewFiles::~HomebrewFiles()
-{
-    if(FileInfo) {
+HomebrewFiles::~HomebrewFiles() {
+    if (FileInfo) {
         free(FileInfo);
         FileInfo = NULL;
     }
 }
 
-bool HomebrewFiles::LoadPath(const char * folderpath)
-{
+bool HomebrewFiles::LoadPath(const char * folderpath) {
     struct stat st;
     DIR_ITER *dir = NULL;
     char filename[1024];
 
     dir = diropen(folderpath);
-    if(dir == NULL) {
+    if (dir == NULL) {
         return false;
     }
 
-    while (dirnext(dir,filename,&st) == 0)
-	{
-        if((st.st_mode & S_IFDIR) != 0) {
-            if(strcmp(filename,".") != 0 && strcmp(filename,"..") != 0) {
+    while (dirnext(dir,filename,&st) == 0) {
+        if ((st.st_mode & S_IFDIR) != 0) {
+            if (strcmp(filename,".") != 0 && strcmp(filename,"..") != 0) {
                 char currentname[200];
                 snprintf(currentname, sizeof(currentname), "%s%s/", folderpath, filename);
                 this->LoadPath(currentname);
             }
         } else {
             char temp[5];
-            for(int i = 0; i < 5; i++) {
+            for (int i = 0; i < 5; i++) {
                 temp[i] = filename[strlen(filename)-4+i];
             }
 
-            if((strncasecmp(temp, ".dol", 4) == 0 || strncasecmp(temp, ".elf", 4) == 0)
+            if ((strncasecmp(temp, ".dol", 4) == 0 || strncasecmp(temp, ".elf", 4) == 0)
                     && filecount < MAXHOMEBREWS && filename[0]!='.') {
 
                 FileInfo = (FileInfos *) realloc(FileInfo, (filecount+1)*sizeof(FileInfos));
 
-                if(!FileInfo) {
+                if (!FileInfo) {
                     free(FileInfo);
                     FileInfo = NULL;
                     filecount = 0;
@@ -78,49 +74,43 @@ bool HomebrewFiles::LoadPath(const char * folderpath)
                 filecount++;
             }
         }
-	}
-	dirclose(dir);
+    }
+    dirclose(dir);
 
     return true;
 }
 
-char * HomebrewFiles::GetFilename(int ind)
-{
-    if(ind > filecount)
+char * HomebrewFiles::GetFilename(int ind) {
+    if (ind > filecount)
         return NULL;
     else
         return FileInfo[ind].FileName;
 }
 
-char * HomebrewFiles::GetFilepath(int ind)
-{
-    if(ind > filecount)
+char * HomebrewFiles::GetFilepath(int ind) {
+    if (ind > filecount)
         return NULL;
     else
         return FileInfo[ind].FilePath;
 }
 
-unsigned int HomebrewFiles::GetFilesize(int ind)
-{
-    if(ind > filecount || !filecount || !FileInfo)
+unsigned int HomebrewFiles::GetFilesize(int ind) {
+    if (ind > filecount || !filecount || !FileInfo)
         return NULL;
     else
         return FileInfo[ind].FileSize;
 }
 
-int HomebrewFiles::GetFilecount()
-{
+int HomebrewFiles::GetFilecount() {
     return filecount;
 }
 
-static int ListCompare(const void *a, const void *b)
-{
+static int ListCompare(const void *a, const void *b) {
     FileInfos *ab = (FileInfos*) a;
     FileInfos *bb = (FileInfos*) b;
 
-	return stricmp((char *) ab->FilePath, (char *) bb->FilePath);
+    return stricmp((char *) ab->FilePath, (char *) bb->FilePath);
 }
-void HomebrewFiles::SortList()
-{
+void HomebrewFiles::SortList() {
     qsort(FileInfo, filecount, sizeof(FileInfos), ListCompare);
 }

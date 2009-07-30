@@ -30,92 +30,91 @@ extern void HaltGui();
 /****************************************************************************
  * MenuOGG
  ***************************************************************************/
-bool MenuOGG()
-{
+bool MenuOGG() {
     int cnt = 0;
     int ret = 0, choice = 0;
     int scrollon, nothingchanged = 0;
     bool returnhere = false;
 
-	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
-	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
+    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
+    GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
 
-	char imgPath[100];
+    char imgPath[100];
 
-	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
-	GuiImageData btnOutline(imgPath, button_dialogue_box_png);
-	snprintf(imgPath, sizeof(imgPath), "%ssettings_background.png", CFG.theme_path);
-	GuiImageData settingsbg(imgPath, settings_background_png);
+    snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
+    GuiImageData btnOutline(imgPath, button_dialogue_box_png);
+    snprintf(imgPath, sizeof(imgPath), "%ssettings_background.png", CFG.theme_path);
+    GuiImageData settingsbg(imgPath, settings_background_png);
 
     GuiTrigger trigA;
-	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
-	GuiTrigger trigB;
-	trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
+    trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
+    GuiTrigger trigB;
+    trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
     GuiTrigger trigMinus;
-	trigMinus.SetButtonOnlyTrigger(-1, WPAD_BUTTON_MINUS | WPAD_CLASSIC_BUTTON_MINUS, 0);
-	GuiTrigger trigPlus;
-	trigPlus.SetButtonOnlyTrigger(-1, WPAD_BUTTON_PLUS | WPAD_CLASSIC_BUTTON_PLUS, 0);
+    trigMinus.SetButtonOnlyTrigger(-1, WPAD_BUTTON_MINUS | WPAD_CLASSIC_BUTTON_MINUS, 0);
+    GuiTrigger trigPlus;
+    trigPlus.SetButtonOnlyTrigger(-1, WPAD_BUTTON_PLUS | WPAD_CLASSIC_BUTTON_PLUS, 0);
 
     char fullpath[150];
     char shortpath[35];
-	int countoggs = GetAllDirFiles(Settings.oggload_path);
+    int countoggs = GetAllDirFiles(Settings.oggload_path);
 
-    if(!strcmp("", Settings.oggload_path)) {
+    if (!strcmp("", Settings.oggload_path)) {
         sprintf(shortpath, "%s", tr("Standard"));
-	} else {
-		sprintf(shortpath, "%s", Settings.oggload_path);
-	}
+    } else {
+        sprintf(shortpath, "%s", Settings.oggload_path);
+    }
 
-    GuiText titleTxt(shortpath, 24, (GXColor){0, 0, 0, 255});
-	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-	titleTxt.SetPosition(0,0);
-	GuiButton pathBtn(300, 50);
-	pathBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	pathBtn.SetPosition(0,28);
-	pathBtn.SetLabel(&titleTxt);
-	pathBtn.SetSoundOver(&btnSoundOver);
-	pathBtn.SetSoundClick(&btnClick);
-	pathBtn.SetTrigger(&trigA);
-	pathBtn.SetEffectGrow();
+    GuiText titleTxt(shortpath, 24, (GXColor) {0, 0, 0, 255});
+    titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+    titleTxt.SetPosition(0,0);
+    GuiButton pathBtn(300, 50);
+    pathBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+    pathBtn.SetPosition(0,28);
+    pathBtn.SetLabel(&titleTxt);
+    pathBtn.SetSoundOver(&btnSoundOver);
+    pathBtn.SetSoundClick(&btnClick);
+    pathBtn.SetTrigger(&trigA);
+    pathBtn.SetEffectGrow();
 
     GuiImage oggmenubackground(&settingsbg);
-	oggmenubackground.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	oggmenubackground.SetPosition(0, 0);
+    oggmenubackground.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+    oggmenubackground.SetPosition(0, 0);
 
-    GuiText backBtnTxt(tr("Back") , 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
-	backBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
-	GuiImage backBtnImg(&btnOutline);
-	if (Settings.wsprompt == yes){
-	backBtnTxt.SetWidescreen(CFG.widescreen);
-	backBtnImg.SetWidescreen(CFG.widescreen);
-	}
-	GuiButton backBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
-	backBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	backBtn.SetPosition(-180, 400);
-	backBtn.SetLabel(&backBtnTxt);
-	backBtn.SetImage(&backBtnImg);
-	backBtn.SetSoundOver(&btnSoundOver);
-	backBtn.SetSoundClick(&btnClick);
-	backBtn.SetTrigger(&trigA);
-	backBtn.SetTrigger(&trigB);
-	backBtn.SetEffectGrow();
+    GuiText backBtnTxt(tr("Back") , 22, (GXColor) {THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+    backBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
+    GuiImage backBtnImg(&btnOutline);
+    if (Settings.wsprompt == yes) {
+        backBtnTxt.SetWidescreen(CFG.widescreen);
+        backBtnImg.SetWidescreen(CFG.widescreen);
+    }
+    GuiButton backBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
+    backBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+    backBtn.SetPosition(-180, 400);
+    backBtn.SetLabel(&backBtnTxt);
+    backBtn.SetImage(&backBtnImg);
+    backBtn.SetSoundOver(&btnSoundOver);
+    backBtn.SetSoundClick(&btnClick);
+    backBtn.SetTrigger(&trigA);
+    backBtn.SetTrigger(&trigB);
+    backBtn.SetEffectGrow();
 
-	GuiText defaultBtnTxt(tr("Default") , 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
-	defaultBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
-	GuiImage defaultBtnImg(&btnOutline);
-	if (Settings.wsprompt == yes){
-	defaultBtnTxt.SetWidescreen(CFG.widescreen);
-	defaultBtnImg.SetWidescreen(CFG.widescreen);
-	}
-	GuiButton defaultBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
-	defaultBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	defaultBtn.SetPosition(180, 400);
-	defaultBtn.SetLabel(&defaultBtnTxt);
-	defaultBtn.SetImage(&defaultBtnImg);
-	defaultBtn.SetSoundOver(&btnSoundOver);
-	defaultBtn.SetSoundClick(&btnClick);
-	defaultBtn.SetTrigger(&trigA);
-	defaultBtn.SetEffectGrow();
+    GuiText defaultBtnTxt(tr("Default") , 22, (GXColor) { THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+    defaultBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
+    GuiImage defaultBtnImg(&btnOutline);
+    if (Settings.wsprompt == yes) {
+        defaultBtnTxt.SetWidescreen(CFG.widescreen);
+        defaultBtnImg.SetWidescreen(CFG.widescreen);
+    }
+    GuiButton defaultBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
+    defaultBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+    defaultBtn.SetPosition(180, 400);
+    defaultBtn.SetLabel(&defaultBtnTxt);
+    defaultBtn.SetImage(&defaultBtnImg);
+    defaultBtn.SetSoundOver(&btnSoundOver);
+    defaultBtn.SetSoundClick(&btnClick);
+    defaultBtn.SetTrigger(&trigA);
+    defaultBtn.SetEffectGrow();
 
     customOptionList options2(countoggs);
 
@@ -124,100 +123,99 @@ bool MenuOGG()
         options2.SetName(cnt,"%i.", cnt+1);
     }
 
-	if(cnt < 9) {
-    scrollon = 0;
+    if (cnt < 9) {
+        scrollon = 0;
     } else {
-    scrollon = 1;
+        scrollon = 1;
     }
 
-	GuiCustomOptionBrowser optionBrowser4(396, 280, &options2, CFG.theme_path, "bg_options_settings.png", bg_options_settings_png, scrollon, 10);
-	optionBrowser4.SetPosition(0, 90);
-	optionBrowser4.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+    GuiCustomOptionBrowser optionBrowser4(396, 280, &options2, CFG.theme_path, "bg_options_settings.png", bg_options_settings_png, scrollon, 10);
+    optionBrowser4.SetPosition(0, 90);
+    optionBrowser4.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 
-	snprintf(imgPath, sizeof(imgPath), "%smp3_stop.png", CFG.theme_path);
-	GuiImageData stop(imgPath, mp3_stop_png);
-	snprintf(imgPath, sizeof(imgPath), "%sstartgame_arrow_right.png", CFG.theme_path);
-	GuiImageData play(imgPath, startgame_arrow_right_png);
+    snprintf(imgPath, sizeof(imgPath), "%smp3_stop.png", CFG.theme_path);
+    GuiImageData stop(imgPath, mp3_stop_png);
+    snprintf(imgPath, sizeof(imgPath), "%sstartgame_arrow_right.png", CFG.theme_path);
+    GuiImageData play(imgPath, startgame_arrow_right_png);
 
-	GuiImage playBtnImg(&play);
-	playBtnImg.SetWidescreen(CFG.widescreen);
-	GuiButton playBtn(play.GetWidth(), play.GetHeight());
-	playBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	playBtn.SetPosition(50, 400);
-	playBtn.SetImage(&playBtnImg);
-	playBtn.SetSoundOver(&btnSoundOver);
-	playBtn.SetSoundClick(&btnClick);
-	playBtn.SetTrigger(&trigA);
-	playBtn.SetTrigger(&trigPlus);
-	playBtn.SetEffectGrow();
+    GuiImage playBtnImg(&play);
+    playBtnImg.SetWidescreen(CFG.widescreen);
+    GuiButton playBtn(play.GetWidth(), play.GetHeight());
+    playBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+    playBtn.SetPosition(50, 400);
+    playBtn.SetImage(&playBtnImg);
+    playBtn.SetSoundOver(&btnSoundOver);
+    playBtn.SetSoundClick(&btnClick);
+    playBtn.SetTrigger(&trigA);
+    playBtn.SetTrigger(&trigPlus);
+    playBtn.SetEffectGrow();
 
-	GuiImage stopBtnImg(&stop);
-	stopBtnImg.SetWidescreen(CFG.widescreen);
-	GuiButton stopBtn(stop.GetWidth(), stop.GetHeight());
-	stopBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	stopBtn.SetPosition(-15, 400);
-	stopBtn.SetImage(&stopBtnImg);
-	stopBtn.SetSoundOver(&btnSoundOver);
-	stopBtn.SetSoundClick(&btnClick);
-	stopBtn.SetTrigger(&trigA);
-	stopBtn.SetTrigger(&trigMinus);
-	stopBtn.SetEffectGrow();
+    GuiImage stopBtnImg(&stop);
+    stopBtnImg.SetWidescreen(CFG.widescreen);
+    GuiButton stopBtn(stop.GetWidth(), stop.GetHeight());
+    stopBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+    stopBtn.SetPosition(-15, 400);
+    stopBtn.SetImage(&stopBtnImg);
+    stopBtn.SetSoundOver(&btnSoundOver);
+    stopBtn.SetSoundClick(&btnClick);
+    stopBtn.SetTrigger(&trigA);
+    stopBtn.SetTrigger(&trigMinus);
+    stopBtn.SetEffectGrow();
 
     HaltGui();
-	GuiWindow w(screenwidth, screenheight);
-	w.Append(&oggmenubackground);
-	w.Append(&pathBtn);
+    GuiWindow w(screenwidth, screenheight);
+    w.Append(&oggmenubackground);
+    w.Append(&pathBtn);
     w.Append(&backBtn);
     w.Append(&playBtn);
-	w.Append(&stopBtn);
-	w.Append(&defaultBtn);
+    w.Append(&stopBtn);
+    w.Append(&defaultBtn);
     w.Append(&optionBrowser4);
     mainWindow->Append(&w);
 
-	w.SetEffect(EFFECT_FADE, 20);
-	ResumeGui();
+    w.SetEffect(EFFECT_FADE, 20);
+    ResumeGui();
 
-	while(w.GetEffect()>0) usleep(50);
+    while (w.GetEffect()>0) usleep(50);
 
-	while(!returnhere)
-	{
+    while (!returnhere) {
 
-    if(shutdown == 1)
-		Sys_Shutdown();
-	if(reset == 1)
-        Sys_Reboot();
+        if (shutdown == 1)
+            Sys_Shutdown();
+        if (reset == 1)
+            Sys_Reboot();
 
-    if (backBtn.GetState() == STATE_CLICKED) {
-            if(nothingchanged == 1 && countoggs > 0) {
-            if(!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path)) {
-                bgMusic->Play();
-            } else {
-                bgMusic->PlayOggFile(Settings.ogg_path);
-            }
+        if (backBtn.GetState() == STATE_CLICKED) {
+            if (nothingchanged == 1 && countoggs > 0) {
+                if (!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path)) {
+                    bgMusic->Play();
+                } else {
+                    bgMusic->PlayOggFile(Settings.ogg_path);
+                }
             }
             backBtn.ResetState();
-			break;
-    }
+            break;
+        }
 
-    if (defaultBtn.GetState() == STATE_CLICKED) {
+        if (defaultBtn.GetState() == STATE_CLICKED) {
             choice = WindowPrompt(tr("Loading standard music."),0,tr("OK"), tr("Cancel"));
             if (choice == 1) {
-            sprintf(Settings.ogg_path, "notset");
-            bgMusic->Play();
-            SetVolumeOgg(255*(Settings.volume/100.0));
-            cfg_save_global();
+                sprintf(Settings.ogg_path, "notset");
+                bgMusic->Play();
+                SetVolumeOgg(255*(Settings.volume/100.0));
+                cfg_save_global();
             }
             defaultBtn.ResetState();
-			optionBrowser4.SetFocus(1);
-    }
+            optionBrowser4.SetFocus(1);
+        }
 
-    if (pathBtn.GetState() == STATE_CLICKED) {
+        if (pathBtn.GetState() == STATE_CLICKED) {
             w.Remove(&optionBrowser4);
             w.Remove(&backBtn);
             w.Remove(&pathBtn);
             w.Remove(&playBtn);
             w.Remove(&stopBtn);
-			w.Remove(&defaultBtn);
+            w.Remove(&defaultBtn);
             char entered[43] = "";
             strncpy(entered, Settings.oggload_path, sizeof(entered));
             int result = OnScreenKeyboard(entered,43,0);
@@ -226,18 +224,18 @@ bool MenuOGG()
             w.Append(&backBtn);
             w.Append(&playBtn);
             w.Append(&stopBtn);
-			w.Append(&defaultBtn);
+            w.Append(&defaultBtn);
             if ( result == 1 ) {
                 int len = (strlen(entered)-1);
-                if(entered[len] !='/')
-                strncat (entered, "/", 1);
+                if (entered[len] !='/')
+                    strncat (entered, "/", 1);
                 strncpy(Settings.oggload_path, entered, sizeof(Settings.oggload_path));
                 WindowPrompt(tr("Backgroundmusic Path changed."),0,tr("OK"));
 //                if(isSdInserted()) {
-				if(isInserted(bootDevice)) {
-                    if(!strcmp("", Settings.oggload_path)) {
-                    sprintf(Settings.ogg_path, "notset");
-                    bgMusic->Play();
+                if (isInserted(bootDevice)) {
+                    if (!strcmp("", Settings.oggload_path)) {
+                        sprintf(Settings.ogg_path, "notset");
+                        bgMusic->Play();
                     }
                     cfg_save_global();
                     returnhere = true;
@@ -246,71 +244,71 @@ bool MenuOGG()
                     WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
                 }
             }
-        if(countoggs > 0) {
-            optionBrowser4.SetFocus(1);
-        }
-        pathBtn.ResetState();
-    }
-
-    ret = optionBrowser4.GetClickedOption();
-
-    if(ret>=0) {
-        choice = WindowPrompt(tr("Set as backgroundmusic?"),GetFileName(ret),tr("Yes"),tr("No"));
-        if(choice == 1) {
-        StopOgg();
-        snprintf(fullpath,150,"%s%s",Settings.oggload_path,GetFileName(ret));
-        choice = bgMusic->PlayOggFile(fullpath);
-        if(choice < 0) {
-        WindowPrompt(tr("Not supported format!"), tr("Loading standard music."), tr("OK"));
-        sprintf(Settings.ogg_path, "notset");
-        bgMusic->Play();
-        SetVolumeOgg(255*(Settings.volume/100.0));
-        } else {
-        snprintf(Settings.ogg_path, sizeof(Settings.ogg_path), "%s", fullpath);
-        cfg_save_global();
-        SetVolumeOgg(255*(Settings.volume/100.0));
-        nothingchanged = 0;
-        }
-        }
-        optionBrowser4.SetFocus(1);
-    }
-
-    if (playBtn.GetState() == STATE_CLICKED && countoggs > 0) {
-         if(countoggs > 0) {
-            ret = optionBrowser4.GetSelectedOption();
-            snprintf(fullpath, 150,"%s%s", Settings.oggload_path,GetFileName(ret));
-            choice = bgMusic->PlayOggFile(fullpath);
-            if(choice < 0) {
-            WindowPrompt(tr("Not supported format!"), tr("Loading standard music."), tr("OK"));
-            if(!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path)) {
-                bgMusic->Play();
-            } else {
-                bgMusic->PlayOggFile(Settings.ogg_path);
+            if (countoggs > 0) {
+                optionBrowser4.SetFocus(1);
             }
+            pathBtn.ResetState();
+        }
+
+        ret = optionBrowser4.GetClickedOption();
+
+        if (ret>=0) {
+            choice = WindowPrompt(tr("Set as backgroundmusic?"),GetFileName(ret),tr("Yes"),tr("No"));
+            if (choice == 1) {
+                StopOgg();
+                snprintf(fullpath,150,"%s%s",Settings.oggload_path,GetFileName(ret));
+                choice = bgMusic->PlayOggFile(fullpath);
+                if (choice < 0) {
+                    WindowPrompt(tr("Not supported format!"), tr("Loading standard music."), tr("OK"));
+                    sprintf(Settings.ogg_path, "notset");
+                    bgMusic->Play();
+                    SetVolumeOgg(255*(Settings.volume/100.0));
+                } else {
+                    snprintf(Settings.ogg_path, sizeof(Settings.ogg_path), "%s", fullpath);
+                    cfg_save_global();
+                    SetVolumeOgg(255*(Settings.volume/100.0));
+                    nothingchanged = 0;
+                }
             }
-            SetVolumeOgg(255*(Settings.volume/100.0));
-			nothingchanged = 1;
             optionBrowser4.SetFocus(1);
-         }
-    playBtn.ResetState();
+        }
+
+        if (playBtn.GetState() == STATE_CLICKED && countoggs > 0) {
+            if (countoggs > 0) {
+                ret = optionBrowser4.GetSelectedOption();
+                snprintf(fullpath, 150,"%s%s", Settings.oggload_path,GetFileName(ret));
+                choice = bgMusic->PlayOggFile(fullpath);
+                if (choice < 0) {
+                    WindowPrompt(tr("Not supported format!"), tr("Loading standard music."), tr("OK"));
+                    if (!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path)) {
+                        bgMusic->Play();
+                    } else {
+                        bgMusic->PlayOggFile(Settings.ogg_path);
+                    }
+                }
+                SetVolumeOgg(255*(Settings.volume/100.0));
+                nothingchanged = 1;
+                optionBrowser4.SetFocus(1);
+            }
+            playBtn.ResetState();
+        }
+
+        if (stopBtn.GetState() == STATE_CLICKED) {
+            if (countoggs > 0) {
+                StopOgg();
+                nothingchanged = 1;
+                optionBrowser4.SetFocus(1);
+            }
+            stopBtn.ResetState();
+        }
     }
 
-	if(stopBtn.GetState() == STATE_CLICKED) {
-	    if(countoggs > 0) {
-            StopOgg();
-            nothingchanged = 1;
-            optionBrowser4.SetFocus(1);
-	    }
-        stopBtn.ResetState();
-    }
-	}
+    w.SetEffect(EFFECT_FADE, -20);
+    while (w.GetEffect()>0) usleep(50);
 
-	w.SetEffect(EFFECT_FADE, -20);
-	while(w.GetEffect()>0) usleep(50);
-
-	HaltGui();
-	mainWindow->Remove(&w);
-	ResumeGui();
+    HaltGui();
+    mainWindow->Remove(&w);
+    ResumeGui();
 
     return returnhere;
 }
@@ -318,180 +316,178 @@ bool MenuOGG()
 /****************************************************************************
  * MenuLanguageSelect
  ***************************************************************************/
-int MenuLanguageSelect()
-{
+int MenuLanguageSelect() {
     int cnt = 0;
     int ret = 0, choice = 0;
     int scrollon;
     int returnhere = 0;
 
-	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
-	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
+    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
+    GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
 
-	char imgPath[100];
+    char imgPath[100];
 
-	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
-	GuiImageData btnOutline(imgPath, button_dialogue_box_png);
-	snprintf(imgPath, sizeof(imgPath), "%ssettings_background.png", CFG.theme_path);
-	GuiImageData settingsbg(imgPath, settings_background_png);
+    snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
+    GuiImageData btnOutline(imgPath, button_dialogue_box_png);
+    snprintf(imgPath, sizeof(imgPath), "%ssettings_background.png", CFG.theme_path);
+    GuiImageData settingsbg(imgPath, settings_background_png);
 
     GuiTrigger trigA;
-	trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
-	GuiTrigger trigB;
-	trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
+    trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
+    GuiTrigger trigB;
+    trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 
     char fullpath[100];
-	int countfiles = GetAllDirFiles(Settings.languagefiles_path);
+    int countfiles = GetAllDirFiles(Settings.languagefiles_path);
 
-    if(!strcmp("", Settings.languagefiles_path)) {
+    if (!strcmp("", Settings.languagefiles_path)) {
         sprintf(fullpath, "%s", tr("Standard"));
-	} else {
-		sprintf(fullpath, "%s", Settings.languagefiles_path);
-	}
+    } else {
+        sprintf(fullpath, "%s", Settings.languagefiles_path);
+    }
 
-    GuiText titleTxt(fullpath, 24, (GXColor){0, 0, 0, 255});
-	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-	titleTxt.SetPosition(0,0);
-	GuiButton pathBtn(300, 50);
-	pathBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	pathBtn.SetPosition(0,28);
-	pathBtn.SetLabel(&titleTxt);
-	pathBtn.SetSoundOver(&btnSoundOver);
-	pathBtn.SetSoundClick(&btnClick);
-	pathBtn.SetTrigger(&trigA);
-	pathBtn.SetEffectGrow();
+    GuiText titleTxt(fullpath, 24, (GXColor) {0, 0, 0, 255});
+    titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+    titleTxt.SetPosition(0,0);
+    GuiButton pathBtn(300, 50);
+    pathBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+    pathBtn.SetPosition(0,28);
+    pathBtn.SetLabel(&titleTxt);
+    pathBtn.SetSoundOver(&btnSoundOver);
+    pathBtn.SetSoundClick(&btnClick);
+    pathBtn.SetTrigger(&trigA);
+    pathBtn.SetEffectGrow();
 
     GuiImage oggmenubackground(&settingsbg);
-	oggmenubackground.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	oggmenubackground.SetPosition(0, 0);
+    oggmenubackground.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+    oggmenubackground.SetPosition(0, 0);
 
-    GuiText backBtnTxt(tr("Back") , 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
-	backBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
-	GuiImage backBtnImg(&btnOutline);
-	if (Settings.wsprompt == yes){
-	backBtnTxt.SetWidescreen(CFG.widescreen);
-	backBtnImg.SetWidescreen(CFG.widescreen);
-	}
-	GuiButton backBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
-	backBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	backBtn.SetPosition(-190, 400);
-	backBtn.SetLabel(&backBtnTxt);
-	backBtn.SetImage(&backBtnImg);
-	backBtn.SetSoundOver(&btnSoundOver);
-	backBtn.SetSoundClick(&btnClick);
-	backBtn.SetTrigger(&trigA);
-	backBtn.SetTrigger(&trigB);
-	backBtn.SetEffectGrow();
+    GuiText backBtnTxt(tr("Back") , 22, (GXColor) {THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+    backBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
+    GuiImage backBtnImg(&btnOutline);
+    if (Settings.wsprompt == yes) {
+        backBtnTxt.SetWidescreen(CFG.widescreen);
+        backBtnImg.SetWidescreen(CFG.widescreen);
+    }
+    GuiButton backBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
+    backBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+    backBtn.SetPosition(-190, 400);
+    backBtn.SetLabel(&backBtnTxt);
+    backBtn.SetImage(&backBtnImg);
+    backBtn.SetSoundOver(&btnSoundOver);
+    backBtn.SetSoundClick(&btnClick);
+    backBtn.SetTrigger(&trigA);
+    backBtn.SetTrigger(&trigB);
+    backBtn.SetEffectGrow();
 
-	GuiText defaultBtnTxt(tr("Default") , 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
-	defaultBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
-	GuiImage defaultBtnImg(&btnOutline);
-	if (Settings.wsprompt == yes) {
-	defaultBtnTxt.SetWidescreen(CFG.widescreen);
-	defaultBtnImg.SetWidescreen(CFG.widescreen);
-	}
-	GuiButton defaultBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
-	defaultBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	defaultBtn.SetPosition(190, 400);
-	defaultBtn.SetLabel(&defaultBtnTxt);
-	defaultBtn.SetImage(&defaultBtnImg);
-	defaultBtn.SetSoundOver(&btnSoundOver);
-	defaultBtn.SetSoundClick(&btnClick);
-	defaultBtn.SetTrigger(&trigA);
-	defaultBtn.SetEffectGrow();
+    GuiText defaultBtnTxt(tr("Default") , 22, (GXColor) {THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+    defaultBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
+    GuiImage defaultBtnImg(&btnOutline);
+    if (Settings.wsprompt == yes) {
+        defaultBtnTxt.SetWidescreen(CFG.widescreen);
+        defaultBtnImg.SetWidescreen(CFG.widescreen);
+    }
+    GuiButton defaultBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
+    defaultBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+    defaultBtn.SetPosition(190, 400);
+    defaultBtn.SetLabel(&defaultBtnTxt);
+    defaultBtn.SetImage(&defaultBtnImg);
+    defaultBtn.SetSoundOver(&btnSoundOver);
+    defaultBtn.SetSoundClick(&btnClick);
+    defaultBtn.SetTrigger(&trigA);
+    defaultBtn.SetEffectGrow();
 
-	GuiText updateBtnTxt(tr("Update Files") , 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
-	updateBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
-	GuiImage updateBtnImg(&btnOutline);
-	if (Settings.wsprompt == yes) {
+    GuiText updateBtnTxt(tr("Update Files") , 22, (GXColor) {THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+    updateBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
+    GuiImage updateBtnImg(&btnOutline);
+    if (Settings.wsprompt == yes) {
         updateBtnTxt.SetWidescreen(CFG.widescreen);
         updateBtnImg.SetWidescreen(CFG.widescreen);
-	}
-	GuiButton updateBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
-	updateBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-	updateBtn.SetPosition(0, 400);
-	updateBtn.SetLabel(&updateBtnTxt);
-	updateBtn.SetImage(&updateBtnImg);
-	updateBtn.SetSoundOver(&btnSoundOver);
-	updateBtn.SetSoundClick(&btnClick);
-	updateBtn.SetTrigger(&trigA);
-	updateBtn.SetEffectGrow();
+    }
+    GuiButton updateBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
+    updateBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+    updateBtn.SetPosition(0, 400);
+    updateBtn.SetLabel(&updateBtnTxt);
+    updateBtn.SetImage(&updateBtnImg);
+    updateBtn.SetSoundOver(&btnSoundOver);
+    updateBtn.SetSoundClick(&btnClick);
+    updateBtn.SetTrigger(&trigA);
+    updateBtn.SetEffectGrow();
 
     customOptionList options2(countfiles);
 
     for (cnt = 0; cnt < countfiles; cnt++) {
-		char filename[64];
-		strncpy(filename, GetFileName(cnt),63);
-		char *dot = strchr(filename, '.');
-		if(dot) *dot='\0';
+        char filename[64];
+        strncpy(filename, GetFileName(cnt),63);
+        char *dot = strchr(filename, '.');
+        if (dot) *dot='\0';
         options2.SetName(cnt, "%s", filename);
         options2.SetValue(cnt, NULL);
 
     }
 
-	if(cnt < 9) {
-    scrollon = 0;
+    if (cnt < 9) {
+        scrollon = 0;
     } else {
-    scrollon = 1;
+        scrollon = 1;
     }
 
-	GuiCustomOptionBrowser optionBrowser4(396, 280, &options2, CFG.theme_path, "bg_options_settings.png", bg_options_settings_png, scrollon, 10);
-	optionBrowser4.SetPosition(0, 90);
-	optionBrowser4.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+    GuiCustomOptionBrowser optionBrowser4(396, 280, &options2, CFG.theme_path, "bg_options_settings.png", bg_options_settings_png, scrollon, 10);
+    optionBrowser4.SetPosition(0, 90);
+    optionBrowser4.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 
     HaltGui();
-	GuiWindow w(screenwidth, screenheight);
-	w.Append(&oggmenubackground);
-	w.Append(&pathBtn);
+    GuiWindow w(screenwidth, screenheight);
+    w.Append(&oggmenubackground);
+    w.Append(&pathBtn);
     w.Append(&backBtn);
-	w.Append(&defaultBtn);
-	w.Append(&updateBtn);
+    w.Append(&defaultBtn);
+    w.Append(&updateBtn);
     w.Append(&optionBrowser4);
     mainWindow->Append(&w);
 
-	w.SetEffect(EFFECT_FADE, 20);
-	ResumeGui();
+    w.SetEffect(EFFECT_FADE, 20);
+    ResumeGui();
 
-	while(w.GetEffect()>0) usleep(50);
+    while (w.GetEffect()>0) usleep(50);
 
-	while(!returnhere)
-	{
+    while (!returnhere) {
 
-    if(shutdown == 1)
-		Sys_Shutdown();
-	else if(reset == 1)
-        Sys_Reboot();
+        if (shutdown == 1)
+            Sys_Shutdown();
+        else if (reset == 1)
+            Sys_Reboot();
 
-    else if (backBtn.GetState() == STATE_CLICKED) {
+        else if (backBtn.GetState() == STATE_CLICKED) {
 
-        backBtn.ResetState();
-        break;
-    }
+            backBtn.ResetState();
+            break;
+        }
 
-    else if (defaultBtn.GetState() == STATE_CLICKED) {
+        else if (defaultBtn.GetState() == STATE_CLICKED) {
             choice = WindowPrompt(tr("Loading standard language."),0,tr("OK"), tr("Cancel"));
             if (choice == 1) {
-            sprintf(Settings.language_path, "notset");
-            cfg_save_global();
-			gettextCleanUp();
-            //lang_default();
-            CFG_Load();
-            returnhere = 2;
+                sprintf(Settings.language_path, "notset");
+                cfg_save_global();
+                gettextCleanUp();
+                //lang_default();
+                CFG_Load();
+                returnhere = 2;
             }
             defaultBtn.ResetState();
-			optionBrowser4.SetFocus(1);
-    }
+            optionBrowser4.SetFocus(1);
+        }
 
-    else if (updateBtn.GetState() == STATE_CLICKED) {
+        else if (updateBtn.GetState() == STATE_CLICKED) {
             choice = WindowPrompt(tr("Update all Language Files"),tr("Do you wish to update/download all language files?"),tr("OK"), tr("Cancel"));
             if (choice == 1) {
 
                 bool network = true;
-                if(!IsNetworkInit()) {
+                if (!IsNetworkInit()) {
                     network = NetworkInitPrompt();
                 }
 
-                if(network) {
+                if (network) {
                     const char URL[60] = "http://usbloader-gui.googlecode.com/svn/trunk/Languages/";
                     char fullURL[300];
                     FILE *pfile;
@@ -499,17 +495,17 @@ int MenuLanguageSelect()
                     URL_List LinkList(URL);
                     int listsize = LinkList.GetURLCount();
 
-                    for(int i = 0; i < listsize; i++) {
+                    for (int i = 0; i < listsize; i++) {
 
                         ShowProgress(tr("Updating Language Files:"), 0, LinkList.GetURL(i), i, listsize-1);
 
-                        if(strcasecmp(".lang", strrchr(LinkList.GetURL(i), '.')) == 0) {
+                        if (strcasecmp(".lang", strrchr(LinkList.GetURL(i), '.')) == 0) {
 
                             snprintf(fullURL, sizeof(fullURL), "%s%s", URL, LinkList.GetURL(i));
 
                             struct block file = downloadfile(fullURL);
 
-                            if(file.data && file.size) {
+                            if (file.data && file.size) {
                                 char filepath[300];
 
                                 snprintf(filepath, sizeof(filepath), "%s%s", Settings.languagefiles_path, LinkList.GetURL(i));
@@ -528,29 +524,29 @@ int MenuLanguageSelect()
                 }
             }
             updateBtn.ResetState();
-			optionBrowser4.SetFocus(1);
-    }
+            optionBrowser4.SetFocus(1);
+        }
 
-    else if (pathBtn.GetState() == STATE_CLICKED) {
+        else if (pathBtn.GetState() == STATE_CLICKED) {
             w.Remove(&optionBrowser4);
             w.Remove(&backBtn);
             w.Remove(&pathBtn);
-			w.Remove(&defaultBtn);
+            w.Remove(&defaultBtn);
             char entered[43] = "";
             strncpy(entered, Settings.languagefiles_path, sizeof(entered));
             int result = OnScreenKeyboard(entered,43,0);
             w.Append(&optionBrowser4);
             w.Append(&pathBtn);
             w.Append(&backBtn);
-			w.Append(&defaultBtn);
+            w.Append(&defaultBtn);
             if ( result == 1 ) {
                 int len = (strlen(entered)-1);
-                if(entered[len] !='/')
-                strncat (entered, "/", 1);
+                if (entered[len] !='/')
+                    strncat (entered, "/", 1);
                 strncpy(Settings.languagefiles_path, entered, sizeof(Settings.languagefiles_path));
                 WindowPrompt(tr("Languagepath changed."),0,tr("OK"));
 //                if(isSdInserted()) {
-				if(isInserted(bootDevice)) {
+                if (isInserted(bootDevice)) {
                     cfg_save_global();
                     returnhere = 1;
                     break;
@@ -558,45 +554,45 @@ int MenuLanguageSelect()
                     WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
                 }
             }
-        if(countfiles > 0) {
+            if (countfiles > 0) {
+                optionBrowser4.SetFocus(1);
+            }
+            pathBtn.ResetState();
+        }
+
+        ret = optionBrowser4.GetClickedOption();
+
+        if (ret>=0) {
+            choice = WindowPrompt(tr("Do you want to change language?"), 0, tr("Yes"), tr("Cancel"));
+            if (choice == 1) {
+//        if(isSdInserted()) {
+                if (isInserted(bootDevice)) {
+                    snprintf(Settings.language_path, sizeof(Settings.language_path), "%s%s", Settings.languagefiles_path, GetFileName(ret));
+                    cfg_save_global();
+                    if (!checkfile(Settings.language_path)) {
+                        sprintf(Settings.language_path, tr("not set"));
+                        WindowPrompt(tr("File not found."),tr("Loading standard language."),tr("OK"));
+                    }
+                    gettextCleanUp();
+                    //lang_default();
+                    CFG_Load();
+                    returnhere = 2;
+                    break;
+                } else {
+                    WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"), 0,0,0,-1);
+                }
+            }
             optionBrowser4.SetFocus(1);
         }
-        pathBtn.ResetState();
+
     }
 
-    ret = optionBrowser4.GetClickedOption();
+    w.SetEffect(EFFECT_FADE, -20);
+    while (w.GetEffect()>0) usleep(50);
 
-    if(ret>=0) {
-        choice = WindowPrompt(tr("Do you want to change language?"), 0, tr("Yes"), tr("Cancel"));
-        if(choice == 1) {
-//        if(isSdInserted()) {
-		if(isInserted(bootDevice)) {
-            snprintf(Settings.language_path, sizeof(Settings.language_path), "%s%s", Settings.languagefiles_path, GetFileName(ret));
-            cfg_save_global();
-            if(!checkfile(Settings.language_path)) {
-                sprintf(Settings.language_path, tr("not set"));
-                WindowPrompt(tr("File not found."),tr("Loading standard language."),tr("OK"));
-            }
-            gettextCleanUp();
-			//lang_default();
-            CFG_Load();
-            returnhere = 2;
-            break;
-        } else {
-            WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"), 0,0,0,-1);
-        }
-        }
-        optionBrowser4.SetFocus(1);
-    }
-
-	}
-
-	w.SetEffect(EFFECT_FADE, -20);
-	while(w.GetEffect()>0) usleep(50);
-
-	HaltGui();
-	mainWindow->Remove(&w);
-	ResumeGui();
+    HaltGui();
+    mainWindow->Remove(&w);
+    ResumeGui();
 
     return returnhere;
 }

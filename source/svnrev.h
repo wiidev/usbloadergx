@@ -2,11 +2,10 @@
 #define SVNREV_H
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
-const char *GetRev();
+    const char *GetRev();
 
 #ifdef __cplusplus
 }
