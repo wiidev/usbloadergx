@@ -331,7 +331,7 @@ void LoadTitlesFromXML(char *langtxt, bool forcejptoen)
 				strcpy(title_text,title_text_EN);
 			}
 
-			snprintf(id_text, 5, "%s",id_text);
+			snprintf(id_text, 7, "%s",id_text);
 			title_set(id_text, title_text);
 	    }
     }

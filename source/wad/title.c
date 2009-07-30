@@ -8,6 +8,7 @@
 #include "utils.h"
 #include "../settings/cfg.h"
 #include "fatmounter.h"
+#include "id.h"
 
 #define MAX_TITLES 256
 
@@ -260,6 +261,113 @@ out:
 	return ret;
 }
 
+s32 Uninstall_RemoveTicket(u64 tid)
+{
+	static tikview viewdata[0x10] ATTRIBUTE_ALIGN(32);
+
+	u32 cnt, views;
+	s32 ret;
+
+/* Get number of ticket views */
+	ret = ES_GetNumTicketViews(tid, &views);
+	if (ret < 0) {
+
+		return ret;
+	}
+
+	if (!views) {
+		//printf(" No tickets found!\n");
+		return 1;
+	} else if (views > 16) {
+		//printf(" Too many ticket views! (views = %d)\n", views);
+		return -1;
+	}
+	
+	/* Get ticket views */
+	ret = ES_GetTicketViews(tid, viewdata, views);
+	if (ret < 0) {
+		//printf(" \n\tError! ES_GetTicketViews (ret = %d)\n", ret);
+		return ret;
+	}
+
+	/* Remove tickets */
+	for (cnt = 0; cnt < views; cnt++) {
+		ret = ES_DeleteTicket(&viewdata[cnt]);
+		if (ret < 0) {
+			//printf(" Error! (view = %d, ret = %d)\n", cnt, ret);
+			return ret;
+		}
+	}
+	//printf(" OK!\n");
+
+	return ret;
+}
+
+s32 Uninstall_DeleteTitle(u32 title_u, u32 title_l)
+{
+	s32 ret;
+	char filepath[256];
+	sprintf(filepath, "/title/%08x/%08x",  title_u, title_l);
+	
+	/* Remove title */
+	ret = ISFS_Delete(filepath);
+	return ret;
+}
+
+s32 Uninstall_DeleteTicket(u32 title_u, u32 title_l)
+{
+	s32 ret;
+
+	char filepath[256];
+	sprintf(filepath, "/ticket/%08x/%08x.tik", title_u, title_l);
+	
+	/* Delete ticket */
+	ret = ISFS_Delete(filepath);
+
+	return ret;
+}
+
+//carefull when using this function
+//it will force remove stuff even if something fails 
+s32 Uninstall_FromTitle(const u64 tid)
+{
+	s32 contents_ret, tik_ret, title_ret, ret;
+	u32 id = tid & 0xFFFFFFFF, kind = tid >> 32;
+	contents_ret = tik_ret = title_ret = ret = 0;
+	
+	if (kind == 1) 
+	{
+		// Delete title and ticket at FS level.
+		tik_ret		= Uninstall_DeleteTicket(kind, id);
+		title_ret	= Uninstall_DeleteTitle(kind, id);
+		contents_ret = title_ret;
+	}
+	else
+	{
+		// Remove title (contents and ticket)
+		tik_ret		= Uninstall_RemoveTicket(tid);
+		contents_ret	= ES_DeleteTitleContent(tid);
+		title_ret	= ES_DeleteTitle(tid);
+		
+		
+		// Attempt forced uninstall if something fails
+		if (tik_ret < 0 || contents_ret < 0 || title_ret < 0){
+			tik_ret		= Uninstall_DeleteTicket(kind, id);
+			title_ret	= Uninstall_DeleteTitle(kind, id);
+			contents_ret = title_ret;
+			
+		}
+	}
+	if (tik_ret < 0 && contents_ret < 0 && title_ret < 0)
+		ret = -1;
+	else if (tik_ret < 0 || contents_ret < 0 || title_ret < 0)
+		ret =  1;
+	else
+		ret =  0;
+	
+	return ret;
+}
+
 
 /*-------------------------------------------------------------
  taken from anytitledeleter
@@ -268,104 +376,6 @@ out:
  Copyright (C) 2009 MrClick
  
 -------------------------------------------------------------*/
-// Max number of entries in the database
-#define MAX_DB 		1024
-
-// Max name length
-#define MAX_LINE	80
-
-// Contains all title ids (e.g.: "HAC")
-static char **__db_i;
-// Contains all title names (e.g.: "Mii Channel")
-static char **__db;
-// Contains the number of entries in the database
-static u32 __db_cnt = 0;
-
-s32 loadDatabase(){
-	FILE *fdb;
-	
-	char dbfile[100];
-	snprintf(dbfile,sizeof(dbfile),"SD:/database.txt");
-	// Init SD card access, open database file and check if it worked
-	//fatInitDefault();
-	SDCard_Init();
-	fdb = fopen(dbfile, "r");
-	if (fdb == NULL)
-		return -1;
-	
-	// Allocate memory for the database
-	__db_i = calloc(MAX_DB, sizeof(char*));
-	__db = calloc(MAX_DB, sizeof(char*));
-	
-	// Define the line buffer. Each line in the db file will be stored here first
-	char line[MAX_LINE];
-	line[sizeof(line)] = 0;
-	
-	// Generic char buffer and counter variable
-	char byte;
-	u32 i = 0;
-	
-	// Read each character from the file
-	do {
-		byte = fgetc(fdb);
-		// In case a line was longer than MAX_LINE
-		if (i == -1){
-			// Read bytes till a new line is hit
-			if (byte == 0x0A)
-				i = 0;
-		// In case were still good with the line length
-		} else {
-			// Add the new byte to the line buffer
-			line[i] = byte;
-			i++;
-			// When a new line is hit or MAX_LINE is reached
-			if (byte == 0x0A || i == sizeof(line) - 1) {
-				// Terminate finished line to create a string
-				line[i] = 0;
-				// When the line is not a comment or not to short
-				if (line[0] != '#' && i > 5){
-					
-					// Allocate and copy title id to database
-					__db_i[__db_cnt] = calloc(4, sizeof(char*));
-					memcpy(__db_i[__db_cnt], line, 3);
-					__db_i[__db_cnt][3] = 0;
-					// Allocate and copy title name to database
-					__db[__db_cnt] = calloc(i - 4, sizeof(char*));
-					memcpy(__db[__db_cnt], line + 4, i - 4);
-					__db[__db_cnt][i - 5] = 0;
-					
-					// Check that the next line does not overflow the database
-					__db_cnt++;
-					if (__db_cnt == MAX_DB)
-						break;
-				}
-				// Set routine to ignore all bytes in the line when MAX_LINE is reached
-				if (byte == 0x0A) i = 0; else i = -1;
-			}
-		}	
-	} while (!feof(fdb));	
-	
-	// Close database file; we are done with it
-	fclose(fdb);
-	
-	return 0;
-}
-
-
-void freeDatabase(){
-	u32 i = 0;
-	for(; i < __db_cnt; i++){
-		free(__db_i[i]);
-		free(__db[i]);
-	}
-	free(__db_i);
-	free(__db);
-}
-
-
-s32 getDatabaseCount(){
-	return __db_cnt;
-}
 
 s32 __convertWiiString(char *str, u8 *data, u32 cnt){
 	u32 i = 0;
@@ -385,47 +395,6 @@ s32 __convertWiiString(char *str, u8 *data, u32 cnt){
 	return 0;
 }
 
-s32 getNameDB(char* name, char* id){
-	// Return fixed values for special entries
-	if (strncmp(id, "IOS", 3) == 0){
-		sprintf(name, "Operating System %s", id);
-		return 0;
-	}
-	if (strncmp(id, "MIOS", 3) == 0){
-		sprintf(name, "Gamecube Compatibility Layer");
-		return 0;
-	}
-	if (strncmp(id, "SYSMENU", 3) == 0){
-		sprintf(name, "System Menu");
-		return 0;
-	}
-	if (strncmp(id, "BC", 2) == 0){
-		sprintf(name, "BC");
-		return 0;
-	}
-	
-	// Create an ? just in case the function aborts prematurely
-	sprintf(name, "?");
-	
-	u32 i;
-	u8 db_found = 0;
-	// Compare each id in the database to the title id
-	for (i = 0; i < __db_cnt; i++)
-		if (strncmp(id, __db_i[i], 3) == 0){
-			db_found = 1;
-			break;
-		}
-	
-	if (db_found == 0)
-		// Return -1 if no mathcing entry was found
-		return -1;
-	else {
-		// Get name from database once a matching id was found	
-		sprintf(name, __db[i]);
-		return 0;
-	}
-}
-
 
 s32 getNameBN(char* name, u64 id){
 	// Terminate the name string just in case the function exits prematurely
@@ -438,9 +407,9 @@ s32 getNameBN(char* name, u64 id){
 	// Bring the Wii into the title's userspace
 	if (ES_SetUID(id) < 0){
 		// Should that fail repeat after setting permissions to system menu mode
-//		Identify_SysMenu();
-//		if (ES_SetUID(id) < 0)
-//			return -1;
+		Identify_SysMenu();
+		if (ES_SetUID(id) < 0)
+			return -1;
 	}
 	
 	// Try to open file
@@ -452,8 +421,8 @@ s32 getNameBN(char* name, u64 id){
 	
 	// If it fails try to open again after identifying as SU
 	if (fh == -102){
-//		Identify_SU();
-//		fh = ISFS_Open(file, ISFS_OPEN_READ);
+		Identify_SU();
+		fh = ISFS_Open(file, ISFS_OPEN_READ);
 	}
 	// If the file won't open 
 	else if (fh < 0)
@@ -494,11 +463,21 @@ s32 getNameBN(char* name, u64 id){
 }
 
 
-s32 getName00(char* name, u64 id){
+s32 getName00(char* name, u64 id, int lang){
+/*
+languages
+0jap
+2eng
+4german
+6french
+8spanish
+10italian
+12dutch
+*/
 	// Create a string containing the absolute filename
 	char file[256] __attribute__ ((aligned (32)));
 	sprintf(file, "/title/%08x/%08x/content/00000000.app", (u32)(id >> 32), (u32)id);
-	
+	Identify_SU();
 	s32 fh = ISFS_Open(file, ISFS_OPEN_READ);
 	
 	
@@ -510,8 +489,8 @@ s32 getName00(char* name, u64 id){
 	// In case there is some problem with the permission
 	if (fh == -102){
 		// Identify as super user
-//		Identify_SU();
-//		fh = ISFS_Open(file, ISFS_OPEN_READ);
+		Identify_SU();
+		fh = ISFS_Open(file, ISFS_OPEN_READ);
 	}
 	else if (fh < 0)
 		return fh;
@@ -541,12 +520,16 @@ s32 getName00(char* name, u64 id){
 	free(data);
 	
 	// Assemble name
-	// Only the English name is returned
-	// There are 6 other language names in the str array
-	sprintf(name, "%s", str[2]);
-	if (strlen(str[3]) > 1)
-		sprintf(name, "%s (%s)", name, str[3]);
-	
+	if(strlen(str[lang]) > 1){
+		sprintf(name, "%s", str[lang]);
+		if (strlen(str[lang+1]) > 1)
+			sprintf(name, "%s (%s)", name, str[lang+1]);
+		}
+	else{
+		sprintf(name, "%s", str[2]);
+		if (strlen(str[3]) > 1)
+			sprintf(name, "%s (%s)", name, str[3]);
+	}
 	// Job well done
 	return 2;
 }
@@ -574,35 +557,6 @@ s32 printContent(u64 tid){
 	return num;
 }
 
-
-s32 getTitle_Name(char* name, u64 id, char *tid){
-	char buf[256] __attribute__ ((aligned (32)));
-				
-	s32 r = -1;
-	// Determine the title's name database/banner/00000000.app
-	r = getNameDB(buf, tid);
-				if (r < 0)
-					r = getNameBN(buf, id);
-					if (r < 0)
-						r = getName00(buf, id);
-
-	switch (r){
-		// In case a name was found in the database
-		case 0:		sprintf(name, "%s", buf);
-					break;
-		// In case a name was found in the banner.bin
-		case 1:		sprintf(name, "*%s*", buf);
-					break;
-		// In case a name was found in the 00000000.app
-		case 2:		sprintf(name, "+%s+", buf);
-					break;
-		// In case no proper name was found return a ?	
-		default: 	sprintf(name, "Unknown Title");
-					break;
-	}
-
-	return 0;
-}
 
 char *titleText(u32 kind, u32 title){
 	static char text[10];
@@ -684,7 +638,7 @@ s32 getTitles_TypeCount(u32 type, u32 *count) {
 		upper = __title_list[i] >> 32;
 		lower = __title_list[i] & 0xFFFFFFFF;
 		if((upper == type)&&
-			((lower !=0x48414741)&&//this filters out haga,haaa, hafa.  dupe foctory channels that don't load
+			((lower !=0x48414741)&&//this filters out haga,haaa, hafa.  dupe factory channels that don't load
 			(lower !=0x48414141)&&//since we dont care about apps that dont load for what we are doing
 			(lower !=0x48414641)))
 			type_count++;
@@ -719,5 +673,8 @@ s32 getTitles_Type(u32 type, u32 *titles, u32 count) {
 	__titles_init = 0;
 	return 0;
 }
+
+
+
 
 

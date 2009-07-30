@@ -44,6 +44,7 @@
 #include "fatmounter.h"
 #include "buffer.h"
 #include "xml/xml.h"
+#include "wad/title.h"
 
 #include "usbloader/wdvd.h"
 
@@ -706,7 +707,7 @@ int MenuDiscList()
         if (Settings.godmode == 1)
 				w.Append(&homebrewBtn);
 
-        if((Settings.hddinfo == hr12)||(Settings.hddinfo == hr24))
+			if((Settings.hddinfo == hr12)||(Settings.hddinfo == hr24))
         {
                 w.Append(&clockTimeBack);
                 w.Append(&clockTime);

@@ -2,7 +2,7 @@
  * TitleBrowser
  * USB Loader GX 2009
  *
- * TitleBrowser.cpp
+ * TitleBrowser.cpp   *giantpune*
  ***************************************************************************/
 #include "language/gettext.h"
 #include "libwiigui/gui.h"
@@ -45,6 +45,8 @@ int TitleBrowser(u32 type)
 	FILE *f;
 	char path[100];
 	
+	ISFS_Initialize();
+	
 	sprintf(path,"%s/config/database.txt",bootDevice);
 	f = fopen(path, "r");
 		
@@ -52,12 +54,6 @@ int TitleBrowser(u32 type)
 		ret = getTitles_TypeCount(type, &num_titles);
 		if (ret < 0){
 			//printf("\tError! Can't get count of titles! (ret = %d)\n", ret);
-			//exit(1);
-		}
-		
-		// Die if we can't handle this many
-		if (num_titles > 100){
-			//printf("\tError! Too many titles! (%u)\n", num_titles);
 			//exit(1);
 		}
 		
@@ -82,10 +78,11 @@ int TitleBrowser(u32 type)
 			//exit(1);
 		}
 		
-
-		
+			
+	//this array will hold all the names for the titles so we only have to get them one time
+	char name[num_titles+num_sys_titles][50];
 	
-	customOptionList options3(num_titles+num_sys_titles);
+	customOptionList options3(num_titles+num_sys_titles+1);
 	//write the titles on the option browser
 	u32 i = 0;
 			
@@ -95,45 +92,54 @@ int TitleBrowser(u32 type)
 			while (i < num_titles){
 			//start from the beginning of the file each loop
 			if (f)rewind(f);
-				char name[50];
+				//char name[50];
 				char text[15];
-				strcpy(name,"");//make sure name is empty
-				
+				strcpy(name[i],"");//make sure name is empty
+				u8 found=0;
 				//set the title's name, number, ID to text 
 				sprintf(text, "%s", titleText(type, titles[i]));
-				//getTitle_Name(name, TITLE_ID(type, titles[i]), text);
 				
 				//get name from database cause i dont like the ADT function
 						char line[200];
 						char tmp[50];
 						snprintf(tmp,50,tmp," ");
-						snprintf(name,sizeof(name),"Unknown Title");
+						//snprintf(name[i],sizeof(name[i]),"Unknown Title");
 
-						if (!f) {
-							sprintf(name,"Unknown--<No DB>");
-						}
-						else
+						if(f)
 						{
 						while (fgets(line, sizeof(line), f)) {
 								if (line[0]== text[0]&&
 									line[1]== text[1]&&
 									line[2]== text[2])
 								{	int j=0;
+									found=1;
 									for(j=0;(line[j+4]!='\0' || j<51);j++)
 										
 										tmp[j]=line[j+4];
-										snprintf(name,sizeof(name),"%s",tmp);
-										break;
-
+										snprintf(name[i],sizeof(name[i]),"%s",tmp);
+										//break;
 								}
-							
+							}
+						}
+						if(!found)
+						{
+							if (getName00(name[i], TITLE_ID(type, titles[i]),CONF_GetLanguage()*2)>=0)
+							found=2;	
+								
+								if(!found)
+								{
+									if (getNameBN(name[i], TITLE_ID(type, titles[i]))>=0)
+										found=3;
+									
+									if(!found)
+									snprintf(name[i],sizeof(name[i]),"Unknown Title (%08x)",titles[i]);
+								}
 						}
 					
-					}
 				//set the text to the option browser
 				options3.SetName(i, "%s",text);
-				options3.SetValue(i, "%s",name);
-				//options3.SetValue(i, " (%08x)",titles[i]);//use this line to show the number to call to launch the channel
+				options3.SetValue(i, "%s",name[i]);
+				//options3.SetValue(i, " (%08x) %s",titles[i],name[i]);//use this line to show the number to call to launch the channel
 				//move on to the next title
 				i++;
 			}
@@ -142,49 +148,66 @@ int TitleBrowser(u32 type)
 			while (i < num_titles+num_sys_titles){
 			//start from the beginning of the file each loop
 			if (f)rewind(f);
-				char name[50];
+				//char name[50];
 				char text[15];
-				strcpy(name,"");//make sure name is empty
-				
+				strcpy(name[i],"");//make sure name is empty
+				u8 found=0;
 				//set the title's name, number, ID to text 
 				sprintf(text, "%s", titleText(0x00010002, sys_titles[i-num_titles]));
-				//getTitle_Name(name, TITLE_ID(0x00010002, sys_titles[i-num_titles]), text);
 				
 				//get name from database cause i dont like the ADT function
 						char line[200];
 						char tmp[50];
 						snprintf(tmp,50,tmp," ");
-						snprintf(name,sizeof(name),"Unknown Title");
-
-						if (!f) {
-							sprintf(name,"Unknown--<No DB>");
-						}
-						else
+						//snprintf(name[i],sizeof(name[i]),"Unknown Title");
+						if(f)
 						{
 						while (fgets(line, sizeof(line), f)) {
 								if (line[0]== text[0]&&
 									line[1]== text[1]&&
 									line[2]== text[2])
 								{	int j=0;
+									found=1;
 									for(j=0;(line[j+4]!='\0' || j<51);j++)
 										
 										tmp[j]=line[j+4];
-										snprintf(name,sizeof(name),"%s",tmp);
+										snprintf(name[i],sizeof(name[i]),"%s",tmp);
 										break;
-
 								}
-							
+							}
+						}
+						if(!found)
+						{
+							if (getName00(name[i], TITLE_ID(0x00010002, sys_titles[i-num_titles]))>=0)
+							found=2;	
+								
+								if(!found)
+								{
+									if (getNameBN(name[i], TITLE_ID(0x00010002, sys_titles[i-num_titles]))>=0)
+										found=3;
+									
+									if(!found)
+									snprintf(name[i],sizeof(name[i]),"Unknown Title (%08x)",sys_titles[i-num_titles]);
+								}
 						}
 					
-					}
 				//set the text to the option browser
 				options3.SetName(i, "%s",text);
-				options3.SetValue(i, "%s",name);
-				//options3.SetValue(i, " (%08x)",titles[i]);
+				options3.SetValue(i, "%s",name[i]);
+				//options3.SetValue(i, " (%08x) %s",titles[i],name[i]);//use this line to show the number to call to launch the channel
 				//move on to the next title
 				i++;
 			}
+			if(i == num_titles+num_sys_titles)
+			{	options3.SetName(i, " ");
+				options3.SetValue(i, "%s",tr("Wii Settings"));
+			}
+	//we have all the titles we need so close the database and stop poking around in the wii
+	fclose(f);
 	
+	//get rid of our footprints in there
+	Uninstall_FromTitle(TITLE_ID(1, 0));
+	ISFS_Deinitialize();
 	bool exit = false;
 
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
@@ -231,7 +254,7 @@ int TitleBrowser(u32 type)
 	if(num_titles > 9)
         scrollbaron = 1;
 
-	GuiCustomOptionBrowser optionBrowser3(396, 280, &options3, CFG.theme_path, "bg_options_gamesettings.png", bg_options_settings_png, num_titles>9?1:0, 200);
+	GuiCustomOptionBrowser optionBrowser3(396, 280, &options3, CFG.theme_path, "bg_options_gamesettings.png", bg_options_settings_png, num_titles+num_sys_titles>9?1:0, 200);
 	optionBrowser3.SetPosition(0, 90);
 	optionBrowser3.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	
@@ -244,6 +267,8 @@ int TitleBrowser(u32 type)
 
 	mainWindow->Append(&w);
 
+
+	int tmp=num_titles+num_sys_titles;
 	ResumeGui();
 	numtitle=num_titles;
 	while(!exit)
@@ -259,50 +284,25 @@ int TitleBrowser(u32 type)
 
 		if(ret > -1) {//if a click happened
 		
-				char name[50];
+				//char name[50];
 				char text[15];
 				if (f)rewind(f);
-				strcpy(name,"");//make sure name is empty
+				//strcpy(name,"");//make sure name is empty
 				
 				if (ret<numtitle)
 				{
 				//set the title's name, number, ID to text 
 				sprintf(text, "%s", titleText(type, titles[ret]));
-				getTitle_Name(name, TITLE_ID(type, titles[ret]), text);
 				
-				//get name from database cause i dont like the ADT function
-						char line[200];
-						char tmp[50];
-						snprintf(tmp,50,tmp," ");
-						snprintf(name,sizeof(name),"Unknown Title");
-
-						if (!f) {
-							sprintf(name,"Unknown--<No DB>");
-						}
-						else
-						{
-						while (fgets(line, sizeof(line), f)) {
-								if (line[0]== text[0]&&
-									line[1]== text[1]&&
-									line[2]== text[2])
-								{	int j=0;
-									for(j=0;(line[j+4]!='\0' || j<51);j++)
-										
-										tmp[j]=line[j+4];
-										snprintf(name,sizeof(name),"%s",tmp);
-										break;
-								}
-						}
-					}
 					char temp[100];
 					 //prompt to boot selected title
-					 snprintf(temp, sizeof(temp), "%s : %s",text,name);
+					 snprintf(temp, sizeof(temp), "%s : %s",text,name[ret]);
 					 int  choice = WindowPrompt(tr("Boot?"), temp, tr("OK"), tr("Cancel"));
 						if(choice) {//if they say yes
 						
 				
 				//stop all this stuff before starting the channel
-					fclose(f);
+					
 					CloseXMLDatabase();
 					ExitGUIThreads();
 					ShutdownAudio();
@@ -322,59 +322,46 @@ int TitleBrowser(u32 type)
 				}
 				else//if they clicked a system title
 				{
-				//set the title's name, number, ID to text 
-				sprintf(text, "%s", titleText(0x00010002, sys_titles[ret-num_titles]));
-				getTitle_Name(name, TITLE_ID(0x00010002, sys_titles[ret-num_titles]), text);
-				
-				//get name from database cause i dont like the ADT function
-						char line[200];
-						char tmp[50];
-						snprintf(tmp,50,tmp," ");
-						snprintf(name,sizeof(name),"Unknown Title");
-
-						if (!f) {
-							sprintf(name,"Unknown--<No DB>");
-						}
-						else
-						{
-						while (fgets(line, sizeof(line), f)) {
-								if (line[0]== text[0]&&
-									line[1]== text[1]&&
-									line[2]== text[2])
-								{	int j=0;
-									for(j=0;(line[j+4]!='\0' || j<51);j++)
-										
-										tmp[j]=line[j+4];
-										snprintf(name,sizeof(name),"%s",tmp);
-										break;
-								}
-						}
-					}
-					char temp[100];
-					 //prompt to boot selected title
-					 snprintf(temp, sizeof(temp), "%s : %s May not boot correctly if your System Menu is not up to date.",text,name);
-					 int  choice = WindowPrompt(tr("Boot?"), temp, tr("OK"), tr("Cancel"));
-						if(choice) {//if they say yes
-						
-				
-				//stop all this stuff before starting the channel
-					fclose(f);
-					CloseXMLDatabase();
-					ExitGUIThreads();
-					ShutdownAudio();
-					StopGX();
+					if(ret == tmp)
+					{
+						CloseXMLDatabase();
+						ExitGUIThreads();
+						ShutdownAudio();
+						StopGX();
 						WII_Initialize();
-						WII_LaunchTitle(TITLE_ID(0x00010002,sys_titles[ret-num_titles]));
-                //this really shouldn't be needed because the title will be booted
-					 exit = true;
-                break;
-            }
-				else{
-					//if they said no to booting the title
-					ret = -1;
-					optionBrowser3.ResetState();
-					}
+						WII_ReturnToSettings();
 					
+					}
+					else
+					{
+						//set the title's name, number, ID to text 
+						sprintf(text, "%s", titleText(0x00010002, sys_titles[ret-num_titles]));
+						
+							char temp[100];
+							 //prompt to boot selected title
+							 snprintf(temp, sizeof(temp), "%s : %s May not boot correctly if your System Menu is not up to date.",text,name[ret]);
+							 int  choice = WindowPrompt(tr("Boot?"), temp, tr("OK"), tr("Cancel"));
+							if(choice) {//if they say yes
+								
+						
+								//stop all this stuff before starting the channel
+									
+									CloseXMLDatabase();
+									ExitGUIThreads();
+									ShutdownAudio();
+									StopGX();
+										WII_Initialize();
+										WII_LaunchTitle(TITLE_ID(0x00010002,sys_titles[ret-num_titles]));
+									 //this really shouldn't be needed because the title will be booted
+									 exit = true;
+									 break;
+									}
+							else{
+									//if they said no to booting the title
+									ret = -1;
+									optionBrowser3.ResetState();
+									}
+						}
 				}
 		}
 

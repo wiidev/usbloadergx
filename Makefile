@@ -20,6 +20,7 @@ SOURCES		:=	source source/libwiigui source/images source/fonts source/sounds \
 				source/libwbfs source/unzip source/language source/mload source/patches \
 				source/usbloader source/xml source/network source/settings source/prompts \
 				source/ramdisc source/wad source/banner source/cheats source/homebrewboot
+DATA		:=	data
 INCLUDES	:=	source
 
 #---------------------------------------------------------------------------------
@@ -147,6 +148,13 @@ language: $(wildcard $(PROJECTDIR)/Languages/*.lang)
 	$(bin2o)
 	
 %.pcm.o : %.pcm
+	@echo $(notdir $<)
+	$(bin2o)
+
+%.certs.o	:	%.certs
+	@echo $(notdir $<)
+	$(bin2o)
+%.dat.o	:	%.dat
 	@echo $(notdir $<)
 	$(bin2o)
 
