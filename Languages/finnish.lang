@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-30 05:39+0200\n"
+"POT-Creation-Date: 2009-07-30 20:53+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -120,7 +120,7 @@ msgstr "Kaikki asetukset on nyt käytettävissä."
 msgid "Alternate DOL"
 msgstr ""
 
-msgid "An Error accured"
+msgid "An Error occured"
 msgstr ""
 
 msgid "Anti"
@@ -1140,47 +1140,3 @@ msgstr "josta"
 msgid "seconds left"
 msgstr "sekuntia jäljellä"
 
-#~ msgid "file(s) left"
-#~ msgstr "tiedosto(j)a jäljellä"
-
-#~ msgid "Coverpath change"
-#~ msgstr "kansien sijainti"
-
-#~ msgid "BOOT ERROR"
-#~ msgstr "BOOTTAUS VIRHE"
-
-#~ msgid "Failed to boot:"
-#~ msgstr "Käynnistys ei onnistunut:"
-
-#~ msgid "Failed to mount front SD-card"
-#~ msgstr "Ei voinut asentaa SD-korttia"
-
-#~ msgid "Failed to set USB:"
-#~ msgstr "USB:ta ei voitu asentaa:"
-
-#~ msgid "Go Back"
-#~ msgstr "Mene takaisin"
-
-#~ msgid "Language change"
-#~ msgstr "Kielen muuttaminen"
-
-#~ msgid "Loading in cIOS249"
-#~ msgstr "Lataa cIOS249"
-
-#~ msgid "No HDD found!"
-#~ msgstr "Kovalevyä ei löytynyt!"
-
-#~ msgid "Password change"
-#~ msgstr "Salasanan vaihto"
-
-#~ msgid "Select the Partition"
-#~ msgstr "Valitse osio"
-
-#~ msgid "you want to format"
-#~ msgstr "jonka haluat formatoida"
-
-#~ msgid "Try"
-#~ msgstr "Yritä"
-
-#~ msgid "You don't have cIOS222"
-#~ msgstr "Sinulla ei ole  cIOS222:sta"

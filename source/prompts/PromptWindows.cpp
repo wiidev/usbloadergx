@@ -2830,7 +2830,7 @@ int ProgressUpdateWindow() {
         }
 
         if (error)
-            WindowPrompt(tr("ERROR") , tr("An Error accured"), tr("OK"));
+            WindowPrompt(tr("ERROR") , tr("An Error occured"), tr("OK"));
         else
             WindowPrompt(tr("Successfully Updated") , tr("Restarting..."), 0,0,0,0,150);
         CloseXMLDatabase();

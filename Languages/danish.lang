@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-30 05:39+0200\n"
+"POT-Creation-Date: 2009-07-30 20:53+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -120,8 +120,8 @@ msgstr "Alle USB Loader GX's funktioner er låst op."
 msgid "Alternate DOL"
 msgstr "Alternativ DOL"
 
-msgid "An Error accured"
-msgstr ""
+msgid "An Error occured"
+msgstr "der var en fejl"
 
 msgid "Anti"
 msgstr "Anti"
@@ -663,7 +663,7 @@ msgid "Missing files"
 msgstr "Manglende filer"
 
 msgid "Most likely it has dimensions that are not evenly divisible by 4."
-msgstr ""
+msgstr "Sandsynligvis har det dimensioner, der ikke er delelige med fire."
 
 msgid "Music Volume"
 msgstr "Lydstyrke"
@@ -1140,68 +1140,3 @@ msgstr "af"
 msgid "seconds left"
 msgstr "sekunder tilbage"
 
-#~ msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
-#~ msgstr "Sandsynligvis har det dimensioner, der ikke er delelige med fire."
-
-#~ msgid "Shit"
-#~ msgstr "Møg"
-
-#~ msgid "there was an error"
-#~ msgstr "der var en fejl"
-
-#~ msgid "Path of titles.txt change"
-#~ msgstr "Ændringer af sti til titles.txt"
-
-#~ msgid "Path of titles.txt changed."
-#~ msgstr "Sti til titles.txt ændret."
-
-#~ msgid "titles.txt Path"
-#~ msgstr "Sti til titles.txt"
-
-#~ msgid "Leaving so you can restart..."
-#~ msgstr "Afslutter, så du kan genstarte..."
-
-#~ msgid "file(s) left"
-#~ msgstr "Fil(er) tilbage"
-
-#~ msgid "Coverpath change"
-#~ msgstr "CoverSti ændringer"
-
-#~ msgid "BOOT ERROR"
-#~ msgstr "BOOT FEJL"
-
-#~ msgid "Failed to boot:"
-#~ msgstr "Kunne ikke start op:"
-
-#~ msgid "Failed to mount front SD-card"
-#~ msgstr "Kunne ikke montere sd kort"
-
-#~ msgid "Failed to set USB:"
-#~ msgstr "Kunne ikke sætte usb:"
-
-#~ msgid "Go Back"
-#~ msgstr "Gå tilbage"
-
-#~ msgid "Language change"
-#~ msgstr "Sprog skift"
-
-#~ msgid "Loading in cIOS249"
-#~ msgstr "Loader i cIOS249"
-
-#~ msgid "No HDD found!"
-#~ msgstr "Ingen HDD fundet!"
-
-#~ msgid "Password change"
-#~ msgstr "Password skift"
-
-#~ msgid "Select the Partition"
-#~ msgstr "Vælg Partitionen"
-
-#~ msgid "you want to format"
-#~ msgstr "du vil formatter"
-
-#~ msgid "Try"
-#~ msgstr "Prøv"
-
-#~ msgid "You don't have cIOS222"
-#~ msgstr "Du har ikke cIOS222"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-30 05:39+0200\n"
+"POT-Creation-Date: 2009-07-30 20:53+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -120,7 +120,7 @@ msgstr "Alle Funktionen des USB Loader GX sind freigeschaltet."
 msgid "Alternate DOL"
 msgstr "Alternative DOL"
 
-msgid "An Error accured"
+msgid "An Error occured"
 msgstr "Ein Fehler ist aufgetreten"
 
 msgid "Anti"
@@ -1139,3 +1139,4 @@ msgstr "von"
 
 msgid "seconds left"
 msgstr "Sekunden verbleiben"
+
