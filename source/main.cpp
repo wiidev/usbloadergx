@@ -59,7 +59,7 @@ static void BootUpProblems()
     bootimage.SetPosition(320-1.2*bootimage.GetWidth()/2, 240-1.2*bootimage.GetHeight()/2);
     bootimage.SetScale(1.2);
 
-    u8 i = 10;
+    u8 i = 30;
     while (i > 0) {
 
             ret2 = IOS_ReloadIOS(249);
@@ -145,15 +145,23 @@ main(int argc, char *argv[]) {
     if (ret < 0) {
         ret = IOS_ReloadIOS(222);
         load_ehc_module();
-        if(ret <0) {
-            ret = WBFS_Init(WBFS_DEVICE_USB);
-            if(ret < 0) {
-                InitVideo(); // Initialise video
-                Menu_Render();
-                BootUpProblems();
-                startupproblem = true;
-                ret = 1;
-            }
+
+        if(ret < 0) {
+            InitVideo(); // Initialise video
+            Menu_Render();
+            BootUpProblems();
+            startupproblem = true;
+            ret = 1;
+        }
+
+        ret = WBFS_Init(WBFS_DEVICE_USB);
+
+        if(ret < 0) {
+            InitVideo(); // Initialise video
+            Menu_Render();
+            BootUpProblems();
+            startupproblem = true;
+            ret = 1;
         }
     }
 

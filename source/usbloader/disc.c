@@ -19,7 +19,6 @@
 /* Disc pointers */
 static u32 *buffer = (u32 *)0x93000000;
 static u8  *diskid = (u8  *)0x80000000;
-static char gameid[8];
 
 
 void __Disc_SetLowMem(void) {
@@ -38,10 +37,12 @@ void __Disc_SetLowMem(void) {
     *(vu32 *)0x800000F0 = 0x01800000;       // Simulated Memory Size
 
     //If the game is sam & max: season 1  put this shit in
-    char tempTxt[10];
-    snprintf (tempTxt,sizeof(tempTxt),"%c%c%c%c%c%c", gameid[0], gameid[1], gameid[2], gameid[3], gameid[4], gameid[5]);
-    if ((strcmp(tempTxt,"R3XE6U")==0)||
-            (strcmp(tempTxt,"R3XP6V")==0))/*&&
+    char gameid[8];
+    memset(gameid, 0, 8);
+    memcpy(gameid, (char*)0x80000000, 6);
+
+    if ((strcmp(gameid,"R3XE6U")==0)||
+            (strcmp(gameid,"R3XP6V")==0))/*&&
 		(IOS_GetVersion()==249)&&
 		((IOS_GetRevision()==10)||(IOS_GetRevision()==13))  I left out the ios check to see if works with other ios versions.*/
     {
@@ -278,6 +279,7 @@ s32 Disc_BootPartition(u64 offset, u8 videoselected, u8 cheat, u8 vipatch, u8 pa
     __Disc_SetTime();
 
     if (cheat == 1) {
+        char gameid[8];
         /* OCARINA STUFF - FISHEARS*/
         memset(gameid, 0, 8);
         memcpy(gameid, (char*)0x80000000, 6);
