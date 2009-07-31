@@ -39,8 +39,8 @@ int tmd_dirty = 0, tik_dirty = 0, temp_ios_slot = 0;
 
 // yeah, yeah, I know.
 signed_blob *s_tmd = NULL, *s_tik = NULL, *s_certs = NULL;
-static u8 tmdbuf[MAX_SIGNED_TMD_SIZE] ATTRIBUTE_ALIGN(0x20);
-static u8 tikbuf[STD_SIGNED_TIK_SIZE] ATTRIBUTE_ALIGN(0x20);
+//static u8 tmdbuf[MAX_SIGNED_TMD_SIZE] ATTRIBUTE_ALIGN(0x20);
+//static u8 tikbuf[STD_SIGNED_TIK_SIZE] ATTRIBUTE_ALIGN(0x20);
 
 
 void zero_sig(signed_blob *sig) {

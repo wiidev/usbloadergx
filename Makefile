@@ -29,7 +29,7 @@ INCLUDES	:=	source
 
 CFLAGS		=	-g -O2 -save-temps -Wall $(MACHDEP) $(INCLUDE)
 CXXFLAGS	=	-Xassembler -aln=$@.lst $(CFLAGS)
-LDFLAGS		=	-g $(MACHDEP) -Wl,-Map,$(notdir $@).map,--section-start,.init=0x80b00000
+LDFLAGS		=	-g $(MACHDEP) -Wl,-Map,$(notdir $@).map,--section-start,.init=0x8090a000
 
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project
@@ -110,6 +110,10 @@ clean:
 
 #---------------------------------------------------------------------------------
 run:
+	make
+	@echo Done building ...
+	@echo Now Run That Shit ...
+	
 	wiiload $(OUTPUT).dol
 
 #---------------------------------------------------------------------------------
