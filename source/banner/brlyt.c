@@ -15,16 +15,26 @@
 #include "brlyt.h"
 #include "openingbnr.h"
 
+
+brlyt_header brlytheader;
+lyt1_header lyt1header;
+txl1_header txl1header;
+txl1_offset **txl1offsets;
+tpl_files **tplss;
+mat1_header mat1header;
+mat1_offset **mat1offsets;
+mat1_material **mat1materials;
+pic1_header **pic1header;
+pae1_header pae1header;
+grp1_header grp1header;
+
+
 int BRLYT_Initialize(const char *rootpath)
 {
 //fatInitDefault();
 FILE * fp = fopen(rootpath,"rb");
 
 if (fp == NULL) return 0;
-
-brlyt_header brlytheader;
-lyt1_header lyt1header;
-txl1_header txl1header;
 
 fread((void*)&brlytheader,1,sizeof(brlytheader),fp);
 fread((void*)&lyt1header,1,sizeof(lyt1header),fp);
@@ -33,7 +43,7 @@ fread((void*)&txl1header,1,sizeof(txl1header),fp);
 //printf("Filesize: %i\n",be32((u8*)&brlytheader.file_size));
 //printf("Num Textures: %i\n",be16((u8*)&txl1header.num_textures));
 
-txl1_offset **txl1offsets = (txl1_offset**)malloc(sizeof(txl1_offset*)*be16((u8*)&txl1header.num_textures));
+txl1offsets = (txl1_offset**)malloc(sizeof(txl1_offset*)*be16((u8*)&txl1header.num_textures));
 
 if(txl1offsets == NULL)
 	{
@@ -54,7 +64,7 @@ for(i = 0; i < be16((u8*)&txl1header.num_textures); i++)
 	//printf("Offset Filename: %i\n",be32((u8*)&txl1offsets[i]->offset_filename));
 	}
 
-tpl_files **tplss = (tpl_files**)malloc(sizeof(tpl_files*)*be16((u8*)&txl1header.num_textures));
+tplss = (tpl_files**)malloc(sizeof(tpl_files*)*be16((u8*)&txl1header.num_textures));
 if(tplss == NULL)
 	{
 	fprintf(stderr, "out of memory\n");
@@ -101,7 +111,7 @@ for(i = 0; i < be16((u8*)&mat1header.num_materials); i++)
 	//printf("%i. Material Offset: %X\n",i,be32((u8*)&mat1offsets[i]->offset));
 	}
 
-mat1_material **mat1materials = (mat1_material**)malloc(sizeof(mat1_material*)*be16((u8*)&mat1header.num_materials));
+mat1materials = (mat1_material**)malloc(sizeof(mat1_material*)*be16((u8*)&mat1header.num_materials));
 if(mat1materials == NULL)
 	{
 	fprintf(stderr, "out of memory\n");
@@ -152,15 +162,29 @@ for(i = 0; i < be16((u8*)&mat1header.num_materials); i++)
 //	printf("%i. Pic1 Names: %s\n",i,pic1header[i]->name);
 	}
 
-pae1_header pae1header;
 fread((void*)&pae1header,1,sizeof(pae1header),fp);
 
-grp1_header grp1header;
 fread((void*)&grp1header,1,sizeof(grp1header),fp);
 
 //Close File
 fclose(fp);
 
+return 1;
+}
+
+int BRLYT_ReadObjects(BRLYT_object** objs)
+{
+	return 0;
+}
+
+void BRLYT_Finish()
+{
+
+}
+
+void BRLYT_FreeMem()
+{
+int i = 0;
 //free memory
 for(i = 0; i < be16((u8*)&txl1header.num_textures); i++)
 	free(txl1offsets[i]);
@@ -186,16 +210,4 @@ for(i = 0; i < be16((u8*)&mat1header.num_materials); i++)
 	free(pic1header[i]);
 
 free(pic1header);
-
-return 1;
-}
-
-int BRLYT_ReadObjects(BRLYT_object** objs)
-{
-	return 0;
-}
-
-void BRLYT_Finish()
-{
-
 }

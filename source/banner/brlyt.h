@@ -3,7 +3,7 @@
  *  Parses brlyt file
  *
  *  by nIxx
- *  http://wiibrew.org/wiki/Wii_Animations#Textures_and_Material_lists_.28.2A.brlyt.29 
+ *  Infos: http://wiibrew.org/wiki/Wii_Animations#Textures_and_Material_lists_.28.2A.brlyt.29 
  *
  */
 
@@ -40,7 +40,7 @@ typedef struct
 {
   char sig [4]; // "lyt1" in ASCII.
   u32 size_header;
-  u32 unk2;
+  u32 a;
   u32 width;
   u32 height;
 } lyt1_header;
@@ -76,8 +76,8 @@ typedef struct
 typedef struct
 {
    char name[20];
-   s16 tev_color[4];
-   s16 unk_color[4];
+   s16 black_color[4];
+   s16 white_color[4];
    s16 unk_color_2[4];
    u32 tev_kcolor[4];
    u32 flags;
@@ -87,7 +87,8 @@ typedef struct
 {
   char sig [4]; // "pan1" in ASCII.
   u32 size_section; 
-  u32 unk; // Always 01 04 FF 00?
+  u16 flag;
+  u16 alpha;
   char pane_name [0x18]; // Pane name in ASCII.
   float x;
   float y;
@@ -95,7 +96,7 @@ typedef struct
   float xFlip;
   float yFlip;
   float zFlip;  //rotate
-  float xMag;
+  float xMag; //Zoom
   float yMag;
   float width;
   float height;
@@ -107,8 +108,6 @@ typedef struct
   u32 size_section;
 } pas1_header;
 
-
-
 typedef struct
 {
   char sig [4]; // "pic1" in ASCII.
@@ -116,7 +115,16 @@ typedef struct
   u16 flags;
   u16 alpha;
   char name[0x18];
-  float coords[10]; // x, y, unk, unk, unk, angle, xmag, ymag, width, height.
+  float x;
+  float y;
+  float z;
+  float xFlip;
+  float yFlip;
+  float zFlip;  //rotate
+  float xMag;
+  float yMag; //zoom
+  float width;
+  float height;
 } pic1_header;
 
 typedef struct
