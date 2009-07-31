@@ -1,8 +1,7 @@
 /*
  * gct.h
  * Class to handle Ocarina TXT Cheatfiles
- * WIP: Actually it´s needed to call fatInitDefault() or the file will not be found
- * and no Comments supported for now
+ * 
  */
 
 #ifndef _GCT_H
@@ -14,19 +13,9 @@
 
 using namespace std;
 
-struct chtentrie {
-    string sGameID;
-    string sGameTitle;
-    string sCheatName[MAXCHEATS];
-    string sCheats[MAXCHEATS];
-    string sCheatComment[MAXCHEATS];
-    int iCntCheats;
-};
-
 //!Handles Ocarina TXT Cheatfiles
 class GCTCheats {
 private:
-    chtentrie ccc;
     string sGameID;
     string sGameTitle;
     string sCheatName[MAXCHEATS];
@@ -35,15 +24,6 @@ private:
     int iCntCheats;
 
 public:
-
-    struct chtentries {
-        string sGameID;
-        string sGameTitle;
-        string sCheatName[MAXCHEATS];
-        string sCheats[MAXCHEATS];
-        int iCntCheats;
-    };
-
     //!Constructor
     GCTCheats(void);
     //!Destructor
@@ -86,18 +66,6 @@ public:
     //!Gets Cheat Comment
     //!\return Cheat Comment
     string getCheatComment(int nr);
-    //!Gets Cheat List
-    //!\return struct chtentrie
-    //struct chtentrie getCheatList2(void);
-    //!Gets Cheat List
-    //!\return struct chtentries
-    struct chtentries getCheatList(void);
-    //!Gets Cheat List from file
-    //!\param filename name of TXT file
-    //!\return struct chtentries
-    struct chtentries getCheatList(const char * filename);
-
-    int download_txtcheat(int id);
 };
 
 #endif  /* _GCT_H */

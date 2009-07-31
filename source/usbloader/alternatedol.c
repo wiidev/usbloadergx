@@ -10,7 +10,6 @@
 #include "fstfile.h"
 
 /** Alternate dolloader made by WiiPower modified by dimok **/
-
 bool Load_Dol(void **buffer, int* dollen, char * filepath) {
     int ret;
     FILE* file;

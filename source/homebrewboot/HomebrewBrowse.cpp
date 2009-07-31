@@ -322,7 +322,6 @@ int MenuHomebrewBrowse() {
 
     GuiWindow w(screenwidth, screenheight);
 
-
     /*** XML Variables ***/
     HomebrewXML XMLInfo[4];
 

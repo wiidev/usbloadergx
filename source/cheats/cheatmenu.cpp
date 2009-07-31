@@ -27,7 +27,6 @@ int CheatMenu(const char * gameID) {
     bool exit = false;
     int ret = 1;
 
-    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
     GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
 
     char imgPath[100];
@@ -35,25 +34,24 @@ int CheatMenu(const char * gameID) {
     GuiImageData btnOutline(imgPath, button_dialogue_box_png);
     snprintf(imgPath, sizeof(imgPath), "%ssettings_background.png", CFG.theme_path);
     GuiImageData settingsbg(imgPath, settings_background_png);
-
+    GuiImage settingsbackground(&settingsbg);
+	
     GuiTrigger trigA;
     trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
     GuiTrigger trigB;
     trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 
-    GuiImage settingsbackground(&settingsbg);
-
     GuiText backBtnTxt(tr("Back") , 22, (GXColor) {THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
     backBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
     GuiImage backBtnImg(&btnOutline);
-    GuiButton backBtn(&backBtnImg,&backBtnImg, 2, 3, -140, 400, &trigA, &btnSoundOver, &btnClick,1);
+    GuiButton backBtn(&backBtnImg,&backBtnImg, 2, 3, -140, 400, &trigA, NULL, &btnClick,1);
     backBtn.SetLabel(&backBtnTxt);
     backBtn.SetTrigger(&trigB);
 
     GuiText createBtnTxt(tr("Create") , 22, (GXColor) {THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
     createBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
     GuiImage createBtnImg(&btnOutline);
-    GuiButton createBtn(&createBtnImg,&createBtnImg, 2, 3, 160, 400, &trigA, &btnSoundOver, &btnClick,1);
+    GuiButton createBtn(&createBtnImg,&createBtnImg, 2, 3, 160, 400, &trigA, NULL, &btnClick,1);
     createBtn.SetLabel(&createBtnTxt);
 
     char txtfilename[55];
@@ -63,8 +61,6 @@ int CheatMenu(const char * gameID) {
     int check = c.openTxtfile(txtfilename);
 
     int download =0;
-    //char tmp[10];
-
 
     switch (check) {
     case -1:
@@ -72,9 +68,7 @@ int CheatMenu(const char * gameID) {
         break;
     case 0:
         download = WindowPrompt(tr("Error"),tr("No Cheatfile found"),tr("OK"),tr("Download Now"));
-        //snprintf(tmp, sizeof(tmp), "%i",download);
 
-        //WindowPrompt(0,tmp,tr("OK"),tr("Download Now"));
         if (download==0)
             download = CodeDownload(gameID);
         break;
@@ -133,7 +127,6 @@ int CheatMenu(const char * gameID) {
                             x++;
                         }
                     }
-
                     string chtpath = Settings.Cheatcodespath;
                     string gctfname = chtpath + c.getGameID() + ".gct";
                     c.createGCT(selectednrs,x,gctfname.c_str());
@@ -141,7 +134,6 @@ int CheatMenu(const char * gameID) {
                     exit = true;
                     break;
                 } else WindowPrompt(tr("Error"),tr("Could not create GCT file"),tr("OK"));
-
             }
 
             if (backBtn.GetState() == STATE_CLICKED) {
@@ -154,7 +146,6 @@ int CheatMenu(const char * gameID) {
         mainWindow->SetState(STATE_DEFAULT);
         mainWindow->Remove(&w);
         ResumeGui();
-
         break;
     }
 
