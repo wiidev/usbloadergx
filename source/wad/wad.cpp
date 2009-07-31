@@ -87,7 +87,7 @@ s32 __Wad_ReadAlloc(FILE *fp, void **outbuf, u32 offset, u32 len)
 s32 __Wad_GetTitleID(FILE *fp, wadHeader *header, u64 *tid)
 {
 	//signed_blob *p_tik    = NULL;
-	void *p_tik    = NULL;	
+	void *p_tik    = NULL;
 	tik         *tik_data = NULL;
 
 	u32 offset = 0;
@@ -138,7 +138,7 @@ s32 Wad_Install(FILE *fp)
 	GuiImage dialogBoxImg(&dialogBox);
 	if (Settings.wsprompt == yes){
 	dialogBoxImg.SetWidescreen(CFG.widescreen);}
-	
+
 	GuiText btn1Txt(tr("Ok"), 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	GuiImage btn1Img(&btnOutline);
 	if (Settings.wsprompt == yes){
@@ -201,14 +201,14 @@ s32 Wad_Install(FILE *fp)
 	prTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	prTxt.SetPosition(0, 50);
 
-   
+
 	if ((Settings.wsprompt == yes) && (CFG.widescreen)){/////////////adjust for widescreen
 		progressbarOutlineImg.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 		progressbarOutlineImg.SetPosition(0, 50);
 		progressbarEmptyImg.SetPosition(80,50);
 		progressbarEmptyImg.SetTile(78);
 		progressbarImg.SetPosition(80, 50);
-		
+
 		msg1Txt.SetPosition(90,75);
 		msg2Txt.SetPosition(90, 98);
 		msg3Txt.SetPosition(90, 121);
@@ -223,7 +223,7 @@ s32 Wad_Install(FILE *fp)
 	promptWindow.Append(&msg3Txt);
 	promptWindow.Append(&msg1Txt);
 	promptWindow.Append(&msg2Txt);
-   
+
    //promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
 
 	HaltGui();
@@ -231,7 +231,7 @@ s32 Wad_Install(FILE *fp)
 	mainWindow->Append(&promptWindow);
 	mainWindow->ChangeFocus(&promptWindow);
 	//sleep(1);
-	
+
 
 	///start the wad shit
 	wadHeader   *header  = NULL;
@@ -245,17 +245,17 @@ s32 Wad_Install(FILE *fp)
 
 	ResumeGui();
 	msg1Txt.SetText(tr(">> Reading WAD data..."));
-	HaltGui();	
-	// WAD header 
+	HaltGui();
+	// WAD header
 	//ret = __Wad_ReadAlloc(fp, (void *)header, offset, sizeof(wadHeader));
 	ret = __Wad_ReadAlloc(fp, (void **)&header, offset, sizeof(wadHeader));
-	
+
 	if (ret < 0)
 		goto err;
 	else
 		offset += round_up(header->header_len, 64);
 
-	// WAD certificates 
+	// WAD certificates
 	//ret = __Wad_ReadAlloc(fp, (void *)&p_certs, offset, header->certs_len);
 	ret = __Wad_ReadAlloc(fp, (void **)&p_certs, offset, header->certs_len);
 	if (ret < 0)
@@ -263,8 +263,8 @@ s32 Wad_Install(FILE *fp)
 	else
 		offset += round_up(header->certs_len, 64);
 
-	// WAD crl 
-	
+	// WAD crl
+
 	if (header->crl_len) {
 		//ret = __Wad_ReadAlloc(fp, (void *)&p_crl, offset, header->crl_len);
 		ret = __Wad_ReadAlloc(fp, (void **)&p_crl, offset, header->crl_len);
@@ -274,7 +274,7 @@ s32 Wad_Install(FILE *fp)
 			offset += round_up(header->crl_len, 64);
 	}
 
-	// WAD ticket 
+	// WAD ticket
 	//ret = __Wad_ReadAlloc(fp, (void *)&p_tik, offset, header->tik_len);
 	ret = __Wad_ReadAlloc(fp, (void **)&p_tik, offset, header->tik_len);
 	if (ret < 0)
@@ -282,7 +282,7 @@ s32 Wad_Install(FILE *fp)
 	else
 		offset += round_up(header->tik_len, 64);
 
-	// WAD TMD 
+	// WAD TMD
 	//ret = __Wad_ReadAlloc(fp, (void *)&p_tmd, offset, header->tmd_len);
 	ret = __Wad_ReadAlloc(fp, (void **)&p_tmd, offset, header->tmd_len);
 	if (ret < 0)
@@ -293,25 +293,25 @@ s32 Wad_Install(FILE *fp)
 	msg1Txt.SetText(tr("Reading WAD data... Ok!"));
 	msg2Txt.SetText(tr(">> Installing ticket..."));
 	HaltGui();
-	// Install ticket 
+	// Install ticket
 	ret = ES_AddTicket(p_tik, header->tik_len, p_certs, header->certs_len, p_crl, header->crl_len);
 	if (ret < 0)
 		goto err;
-	
+
 	ResumeGui();
 	msg2Txt.SetText(tr("Installing ticket... Ok!"));
 	msg3Txt.SetText(tr(">> Installing title..."));
 	//WindowPrompt(">> Installing title...",0,0,0,0,0,200);
 	HaltGui();
-	// Install title 
+	// Install title
 	ret = ES_AddTitleStart(p_tmd, header->tmd_len, p_certs, header->certs_len, p_crl, header->crl_len);
 	if (ret < 0)
 		goto err;
 
-	// Get TMD info 
+	// Get TMD info
 	tmd_data = (tmd *)SIGNATURE_PAYLOAD(p_tmd);
 
-	// Install contents 
+	// Install contents
 	//ResumeGui();
 	//HaltGui();
 	promptWindow.Append(&progressbarEmptyImg);
@@ -321,60 +321,63 @@ s32 Wad_Install(FILE *fp)
 	ResumeGui();
 	msg3Txt.SetText(tr("Installing title... Ok!"));
 	for (cnt = 0; cnt < tmd_data->num_contents; cnt++) {
-	
+
 		tmd_content *content = &tmd_data->contents[cnt];
 
 		u32 idx = 0, len;
 		s32 cfd;
 		ResumeGui();
-		
+
 		//printf("\r\t\t>> Installing content #%02d...", content->cid);
-		// Encrypted content size 
+		// Encrypted content size
 		len = round_up(content->size, 64);
 
-		// Install content 
+		// Install content
 		cfd = ES_AddContentStart(tmd_data->title_id, content->cid);
 		if (cfd < 0) {
 			ret = cfd;
 			goto err;
 		}
 
-		// Install content data 
+		// Install content data
 		while (idx < len) {
+
+            VIDEO_WaitVSync ();
+
 			u32 size;
 
-			// Data length 
+			// Data length
 			size = (len - idx);
 			if (size > BLOCK_SIZE)
 				size = BLOCK_SIZE;
 
-			// Read data 
+			// Read data
 			ret = __Wad_ReadFile(fp, &wadBuffer, offset, size);
 			if (ret < 0)
 				goto err;
 
-			// Install data 
+			// Install data
 			ret = ES_AddContentData(cfd, wadBuffer, size);
 			if (ret < 0)
 				goto err;
 
-			// Increase variables 
+			// Increase variables
 			idx    += size;
 			offset += size;
 		snprintf(imgPath, sizeof(imgPath), "%s%d (%d)...",tr(">> Installing content #"),content->cid,idx);
-	
+
 		msg4Txt.SetText(imgPath);
-			
+
 		prTxt.SetTextf("%i%%", 100*(cnt*len+idx)/(tmd_data->num_contents*len));
       if ((Settings.wsprompt == yes) && (CFG.widescreen)) {
          progressbarImg.SetTile(78*(cnt*len+idx)/(tmd_data->num_contents*len));
       } else {
          progressbarImg.SetTile(100*(cnt*len+idx)/(tmd_data->num_contents*len));
       }
-		
+
 		}
 
-		// Finish content installation 
+		// Finish content installation
 		ret = ES_AddContentFinish(cfd);
 		if (ret < 0)
 			goto err;
@@ -382,10 +385,10 @@ s32 Wad_Install(FILE *fp)
 
 	msg4Txt.SetText(tr("Installing content... Ok!"));
 	msg5Txt.SetText(tr(">> Finishing installation..."));
-	
-	
 
-	// Finish title install 
+
+
+	// Finish title install
 	ret = ES_AddTitleFinish();
 	if (ret >= 0) {
 //		printf(" OK!\n");
@@ -398,13 +401,13 @@ err:
   	//snprintf(titties, sizeof(titties), "%d", ret);
 	//printf(" ERROR! (ret = %d)\n", ret);
 	//WindowPrompt("ERROR!",titties,"Back",0,0);
-	// Cancel install 
+	// Cancel install
 	ES_AddTitleCancel();
 	goto exit;
 	//return ret;
 
 out:
-	// Free memory 
+	// Free memory
 	if (header)
 		free(header);
 	if (p_certs)
@@ -416,15 +419,15 @@ out:
 	if (p_tmd)
 		free(p_tmd);
 	goto exit;
-	
-	
-exit:	
+
+
+exit:
 	msg5Txt.SetText(tr("Finishing installation... Ok!"));
 	promptWindow.Append(&btn1);
 	while(btn1.GetState() != STATE_CLICKED){
 	}
-	
-	
+
+
 	HaltGui();
 	mainWindow->Remove(&promptWindow);
 	mainWindow->SetState(STATE_DEFAULT);
@@ -455,7 +458,7 @@ s32 Wad_Uninstall(FILE *fp)
 	GuiImage dialogBoxImg(&dialogBox);
 	if (Settings.wsprompt == yes){
 	dialogBoxImg.SetWidescreen(CFG.widescreen);}
-	
+
 	GuiText btn1Txt(tr("Ok"), 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	GuiImage btn1Img(&btnOutline);
 	if (Settings.wsprompt == yes){
@@ -470,7 +473,7 @@ s32 Wad_Uninstall(FILE *fp)
 	GuiText titleTxt(title, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	titleTxt.SetPosition(0,40);
-	
+
 	GuiText msg1Txt(NULL, 18, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
 	msg1Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	msg1Txt.SetPosition(50,75);
@@ -492,9 +495,9 @@ s32 Wad_Uninstall(FILE *fp)
 	msg5Txt.SetPosition(50, 167);
 
 
-   
+
 	if ((Settings.wsprompt == yes) && (CFG.widescreen)){/////////////adjust for widescreen
-		
+
 		msg1Txt.SetPosition(70,95);
 		msg2Txt.SetPosition(70, 118);
 		msg3Txt.SetPosition(70, 141);
@@ -509,7 +512,7 @@ s32 Wad_Uninstall(FILE *fp)
 	promptWindow.Append(&msg3Txt);
 	promptWindow.Append(&msg1Txt);
 	promptWindow.Append(&msg2Txt);
-   
+
 	HaltGui();
 	mainWindow->SetState(STATE_DISABLED);
 	mainWindow->Append(&promptWindow);
@@ -524,13 +527,10 @@ s32 Wad_Uninstall(FILE *fp)
 	u64 tid;
 	u32 viewCnt;
 	s32 ret;
-	
 
-
-	
 	msg1Txt.SetText(tr(">> Reading WAD data..."));
-		
-	// WAD header 
+
+	// WAD header
 	ret = __Wad_ReadAlloc(fp, (void **)&header, 0, sizeof(wadHeader));
 	if (ret < 0) {
 		char errTxt[50];
@@ -539,8 +539,8 @@ s32 Wad_Uninstall(FILE *fp)
 		//printf(" ERROR! (ret = %d)\n", ret);
 		goto out;
 	}
-	
-	// Get title ID 
+
+	// Get title ID
 	ret =  __Wad_GetTitleID(fp, header, &tid);
 	if (ret < 0) {
 		//printf(" ERROR! (ret = %d)\n", ret);
@@ -552,8 +552,8 @@ s32 Wad_Uninstall(FILE *fp)
 
 	msg1Txt.SetText(tr(">> Reading WAD data...Ok!"));
 	msg2Txt.SetText(tr(">> Deleting tickets..."));
-		
-	// Get ticket views 
+
+	// Get ticket views
 	ret = Title_GetTicketViews(tid, &viewData, &viewCnt);
 	if (ret < 0){
 		char errTxt[50];
@@ -561,11 +561,11 @@ s32 Wad_Uninstall(FILE *fp)
 		msg2Txt.SetText(errTxt);
 		//printf(" ERROR! (ret = %d)\n", ret);
 		}
-	// Delete tickets 
+	// Delete tickets
 	if (ret >= 0) {
 		u32 cnt;
 
-		// Delete all tickets  
+		// Delete all tickets
 		for (cnt = 0; cnt < viewCnt; cnt++) {
 			ret = ES_DeleteTicket(&viewData[cnt]);
 			if (ret < 0)
@@ -580,7 +580,7 @@ s32 Wad_Uninstall(FILE *fp)
 		else
 			//printf(" OK!\n");
 			msg2Txt.SetText(tr(">> Deleting tickets...Ok! "));
-		
+
 	}
 
 	msg3Txt.SetText(tr(">> Deleting title contents..."));
@@ -598,7 +598,7 @@ s32 Wad_Uninstall(FILE *fp)
 		msg3Txt.SetText(tr(">> Deleting title contents...Ok!"));
 
 	msg4Txt.SetText(tr(">> Deleting title..."));
-	// Delete title 
+	// Delete title
 	ret = ES_DeleteTitle(tid);
 	if (ret < 0){
 		char errTxt[50];
@@ -610,20 +610,20 @@ s32 Wad_Uninstall(FILE *fp)
 		msg4Txt.SetText(tr(">> Deleting title ...Ok!"));
 
 out:
-	// Free memory 
+	// Free memory
 	if (header)
 		free(header);
 
 	goto exit;
-	
-	
-exit:	
+
+
+exit:
 	msg5Txt.SetText(tr("Done!"));
 	promptWindow.Append(&btn1);
 	while(btn1.GetState() != STATE_CLICKED){
 	}
-	
-	
+
+
 	HaltGui();
 	mainWindow->Remove(&promptWindow);
 	mainWindow->SetState(STATE_DEFAULT);

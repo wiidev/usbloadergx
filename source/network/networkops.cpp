@@ -31,6 +31,7 @@ static bool networkinitialized = false;
 static bool checkincomming = false;
 static bool waitforanswer = false;
 static char IP[16];
+char incommingIP[50];
 
 static lwp_t networkthread = LWP_THREAD_NULL;
 static bool networkHalt = true;
@@ -67,6 +68,13 @@ bool IsNetworkInit(void) {
  ***************************************************************************/
 char * GetNetworkIP(void) {
     return IP;
+}
+
+/****************************************************************************
+ * Get incomming IP
+ ***************************************************************************/
+char * GetIncommingIP(void) {
+    return incommingIP;
 }
 
 /****************************************************************************
@@ -230,6 +238,8 @@ int NetworkWait() {
     }
 
     connection = net_accept(socket, (struct sockaddr*)&client_address, &addrlen);
+
+    sprintf(incommingIP, "%s", inet_ntoa(client_address.sin_addr));
 
     if (connection < 0) {
         net_close(connection);

@@ -8,11 +8,15 @@
 #include "libwiigui/gui.h"
 #include "libwiigui/gui_customoptionbrowser.h"
 #include "prompts/PromptWindows.h"
+#include "prompts/ProgressWindow.h"
+#include "network/networkops.h"
+#include "network/http.h"
 #include "filelist.h"
 #include "settings/cfg.h"
 #include "sys.h"
 #include "menu.h"
 #include "audio.h"
+#include "wad/wad.h"
 
 #include "xml/xml.h"
 
@@ -26,6 +30,7 @@ extern void HaltGui();
 extern GuiWindow * mainWindow;
 extern u8 shutdown;
 extern u8 reset;
+extern u32 infilesize;
 
 
 /********************************************************************************
@@ -203,6 +208,9 @@ int TitleBrowser(u32 type) {
     ISFS_Deinitialize();
     bool exit = false;
 
+    if (IsNetworkInit())
+        ResumeNetworkWait();
+
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
     GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
 
@@ -251,11 +259,25 @@ int TitleBrowser(u32 type) {
     optionBrowser3.SetPosition(0, 90);
     optionBrowser3.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 
+    snprintf(imgPath, sizeof(imgPath), "%sWifi_btn.png", CFG.theme_path);
+    GuiImageData wifiImgData(imgPath, Wifi_btn_png);
+    GuiImage wifiImg(&wifiImgData);
+    if (Settings.wsprompt == yes) {
+        wifiImg.SetWidescreen(CFG.widescreen);
+    }
+    GuiButton wifiBtn(wifiImg.GetWidth(), wifiImg.GetHeight());
+    wifiBtn.SetImage(&wifiImg);
+    wifiBtn.SetPosition(100, 400);
+    wifiBtn.SetEffectGrow();
+    wifiBtn.SetAlpha(80);
+    wifiBtn.SetTrigger(&trigA);
+
     HaltGui();
     GuiWindow w(screenwidth, screenheight);
     w.Append(&settingsbackgroundbtn);
     w.Append(&titleTxt);
     w.Append(&cancelBtn);
+    w.Append(&wifiBtn);
     w.Append(&optionBrowser3);
 
     mainWindow->Append(&w);
@@ -271,6 +293,16 @@ int TitleBrowser(u32 type) {
             Sys_Shutdown();
         if (reset == 1)
             Sys_Reboot();
+
+        else if (wifiBtn.GetState() == STATE_CLICKED) {
+
+                ResumeNetworkWait();
+                wifiBtn.ResetState();
+        }
+
+        if (IsNetworkInit()) {
+                wifiBtn.SetAlpha(255);
+        }
 
         ret = optionBrowser3.GetClickedOption();
 
@@ -349,12 +381,119 @@ int TitleBrowser(u32 type) {
             }
         }
 
+        if(infilesize > 0) {
+
+                char filesizetxt[50];
+                char temp[50];
+                char filepath[100];
+				u32 read = 0;
+
+                snprintf(filepath, sizeof(filepath), "%s/wad/tmp.tmp", bootDevice);
+                FILE *file = fopen(filepath, "wb");
+
+                if (infilesize < MBSIZE)
+                    snprintf(filesizetxt, sizeof(filesizetxt), tr("Incoming file %0.2fKB"), infilesize/KBSIZE);
+                else
+                    snprintf(filesizetxt, sizeof(filesizetxt), tr("Incoming file %0.2fMB"), infilesize/MBSIZE);
+
+                snprintf(temp, sizeof(temp), tr("Load file from: %s ?"), GetIncommingIP());
+
+                int choice = WindowPrompt(filesizetxt, temp, tr("OK"), tr("Cancel"));
+
+                if(choice == 1) {
+
+                        int len = NETWORKBLOCKSIZE;
+                        u8 *buffer = (u8*) malloc(NETWORKBLOCKSIZE);
+
+                        while (read < infilesize) {
+
+                            ShowProgress(tr("Receiving file from:"), GetIncommingIP(), NULL, read, infilesize, true);
+
+                            if (infilesize - read < (u32) len)
+                                len = infilesize-read;
+                            else
+                                len = NETWORKBLOCKSIZE;
+
+                            int result = network_read(buffer, len);
+
+                            if (result < 0) {
+                                WindowPrompt(tr("Error while transfering data."), 0, tr("OK"));
+                                fclose(file);
+                                remove(filepath);
+                                break;
+                            }
+                            if (!result)
+                                break;
+
+                            fwrite(temp, 1, len, file);
+
+                            read += result;
+
+                        }
+                        free(buffer);
+                        fclose(file);
+                        ProgressStop();
+
+                        if (read != infilesize) {
+                            WindowPrompt(tr("Error:"), tr("No data could be read."), tr("OK"));
+                            remove(filepath);
+                        } else {
+
+                        //determine what type of file we just got
+                        char filename[101];
+                        char tmptxt[200];
+
+                        network_read((u8*) &filename, 100);
+                        sprintf(tmptxt,"%s",filename);
+                        //if we got a wad
+                        if (strstr(tmptxt,".wad") || strstr(tmptxt,".WAD")) {
+
+                            sprintf(tmptxt,"%s/wad/%s",bootDevice,filename);
+
+                            rename(filepath, tmptxt);
+
+                            //check and make sure the wad we just saved is the correct size
+                            u32 lSize;
+                            file = fopen(tmptxt, "rb");
+
+                            // obtain file size:
+                            fseek (file , 0 , SEEK_END);
+                            lSize = ftell (file);
+
+                            rewind (file);
+                            if (lSize==infilesize) {
+                                int pick = WindowPrompt(tr(" Wad Saved as:"), tmptxt, tr("Install"),tr("Uninstall"),tr("Cancel"));
+                                //install or uninstall it
+                                if (pick==1)Wad_Install(file);
+                                if (pick==2)Wad_Uninstall(file);
+                            }
+                            //close that beast, we're done with it
+                            fclose (file);
+
+                            //do we want to keep the file in the wad folder
+                            if (WindowPrompt(tr("Delete ?"), tmptxt, tr("Delete"),tr("Keep"))!=0)
+                                remove(tmptxt);
+
+                        } else {
+                            WindowPrompt(tr("ERROR:"),tr("The file is not a .wad"),tr("OK"));
+                            remove(filepath);
+                        }
+                        }
+                }
+                CloseConnection();
+                ResumeNetworkWait();
+        }
+
         if (cancelBtn.GetState() == STATE_CLICKED) {
             //break the loop and end the function
             exit = true;
             ret = -10;
         }
     }
+
+    CloseConnection();
+    if (IsNetworkInit())
+        HaltNetworkThread();
 
     fclose(f);
     HaltGui();

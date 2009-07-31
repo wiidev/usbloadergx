@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <ogcsys.h>
 #include <string.h>
+#include <malloc.h>
 
 #include "patches/patchcode.h"
 #include "patches/kenobiwii.h" /*FISHEARS*/
@@ -361,6 +362,10 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
             /* Set entry point from apploader */
             *entry = (entry_point) load_dol_image(dolbuffer);
         }
+
+        if(dolbuffer)
+            free(dolbuffer);
+
     } else if (alternatedol == 2) {
 
         FST_ENTRY *fst = (FST_ENTRY *)*(u32 *)0x80000038;

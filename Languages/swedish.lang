@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-30 20:53+0200\n"
+"POT-Creation-Date: 2009-07-31 20:03+0200\n"
 "PO-Revision-Date: 2009-07-30 17:20+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -728,6 +728,9 @@ msgstr "Hittades inte"
 msgid "Not a Wii Disc"
 msgstr "Inte en Wii-skiva"
 
+msgid "Not a dol/elf file."
+msgstr ""
+
 msgid "Not enough free memory"
 msgstr "Inte tillräckligt med ledigt minne"
 
@@ -860,9 +863,6 @@ msgstr "Spara"
 msgid "Save Failed"
 msgstr "Sparning misslyckad"
 
-msgid "Saving"
-msgstr "Sparar"
-
 msgid "Screensaver"
 msgstr "Skärmsläckare"
 
@@ -928,6 +928,9 @@ msgstr "Sökväg till txt koder"
 
 msgid "TXTCheatcodes Path changed"
 msgstr "TXTCheatcodes sökväg ändrad"
+
+msgid "The file is not a .wad"
+msgstr ""
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."
 msgstr "Wad filen har blivit installerad. Men kunde inte raderas från SD-kortet."
@@ -1140,3 +1143,5 @@ msgstr "av"
 msgid "seconds left"
 msgstr "sekunder kvar"
 
+#~ msgid "Saving"
+#~ msgstr "Sparar"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-30 20:53+0200\n"
+"POT-Creation-Date: 2009-07-31 20:03+0200\n"
 "PO-Revision-Date: 2009-07-30 12:36\n"
 "Last-Translator: Sky8000\n"
 "Language-Team: \n"
@@ -728,6 +728,9 @@ msgstr "Não encontrado"
 msgid "Not a Wii Disc"
 msgstr "Não é um Disco da Wii"
 
+msgid "Not a dol/elf file."
+msgstr ""
+
 msgid "Not enough free memory"
 msgstr "Não há memória livre suficiente"
 
@@ -860,9 +863,6 @@ msgstr "Gravar"
 msgid "Save Failed"
 msgstr "Falha ao Gravar"
 
-msgid "Saving"
-msgstr "Gravando"
-
 msgid "Screensaver"
 msgstr "Protecção de ecrã"
 
@@ -928,6 +928,9 @@ msgstr "Pasta Dicas"
 
 msgid "TXTCheatcodes Path changed"
 msgstr "Pasta de Dicas alterada"
+
+msgid "The file is not a .wad"
+msgstr ""
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."
 msgstr "O ficheiro wad foi instalado mas não foi possível eliminá-lo do cartão SD."
@@ -1140,3 +1143,5 @@ msgstr "de"
 msgid "seconds left"
 msgstr "segundos restantes"
 
+#~ msgid "Saving"
+#~ msgstr "Gravando"

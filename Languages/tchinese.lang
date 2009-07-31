@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-30 20:53+0200\n"
+"POT-Creation-Date: 2009-07-31 20:03+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -728,6 +728,9 @@ msgstr "無法取得"
 msgid "Not a Wii Disc"
 msgstr "不是Wii的光碟"
 
+msgid "Not a dol/elf file."
+msgstr ""
+
 msgid "Not enough free memory"
 msgstr "剩餘記憶體不足"
 
@@ -860,9 +863,6 @@ msgstr "儲存"
 msgid "Save Failed"
 msgstr "儲存失敗"
 
-msgid "Saving"
-msgstr "正在儲存"
-
 msgid "Screensaver"
 msgstr "螢幕保護"
 
@@ -928,6 +928,9 @@ msgstr "金手指文字檔路徑"
 
 msgid "TXTCheatcodes Path changed"
 msgstr "金手指文字檔路徑已變更"
+
+msgid "The file is not a .wad"
+msgstr ""
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."
 msgstr "wad檔案已安裝.但無法從SD卡中刪除該檔案."
@@ -1140,3 +1143,5 @@ msgstr "剩餘空間 總容量"
 msgid "seconds left"
 msgstr "剩餘秒數"
 
+#~ msgid "Saving"
+#~ msgstr "正在儲存"

@@ -1,5 +1,8 @@
 #include "http.h"
 
+
+extern char incommingIP[50];
+
 /**
  * Emptyblock is a statically defined variable for functions to return if they are unable
  * to complete a request
@@ -43,6 +46,8 @@ static s32 server_connect(u32 ipaddress, u32 socket_port) {
     connect_addr.sin_family = AF_INET;
     connect_addr.sin_port = socket_port;
     connect_addr.sin_addr.s_addr= ipaddress;
+
+    sprintf(incommingIP, "%s", inet_ntoa(connect_addr.sin_addr));
 
     //Attemt to open the socket
     if (net_connect(connection, (struct sockaddr*)&connect_addr, sizeof(connect_addr)) == -1) {

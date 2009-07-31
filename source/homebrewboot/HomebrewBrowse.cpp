@@ -22,10 +22,6 @@
 #include "filelist.h"
 #include "sys.h"
 #include "network/http.h"
-#include "wad/wad.h"
-
-
-#define NETWORKBLOCKSIZE       5*1024      //5KB
 
 /*** Extern functions ***/
 extern void ResumeGui();
@@ -38,8 +34,6 @@ extern GuiImage * bgImg;
 extern u32 infilesize;
 extern u8 shutdown;
 extern u8 reset;
-extern s32 connection;
-extern void *innetbuffer;
 
 /*** Variables used elsewhere ***/
 u8 boothomebrew = 0;
@@ -793,7 +787,7 @@ int MenuHomebrewBrowse() {
                 else
                     snprintf(filesizetxt, sizeof(filesizetxt), tr("Incoming file %0.2fMB"), infilesize/MBSIZE);
 
-                snprintf(temp, sizeof(temp), tr("Load file from: %s ?"), GetNetworkIP());
+                snprintf(temp, sizeof(temp), tr("Load file from: %s ?"), GetIncommingIP());
 
                 int choice = WindowPrompt(filesizetxt, temp, tr("OK"), tr("Cancel"));
 
@@ -812,7 +806,7 @@ int MenuHomebrewBrowse() {
 
                         while (read < infilesize) {
 
-                            ShowProgress(tr("Receiving file from:"), GetNetworkIP(), NULL, read, infilesize, true);
+                            ShowProgress(tr("Receiving file from:"), GetIncommingIP(), NULL, read, infilesize, true);
 
                             if (infilesize - read < (u32) len)
                                 len = infilesize-read;
@@ -841,89 +835,19 @@ int MenuHomebrewBrowse() {
                             WindowPrompt(tr("Error:"), tr("No data could be read."), tr("OK"));
                             FreeHomebrewBuffer();
                         } else {
-                            //determine what type of file we just got
-                            unsigned char filename[31];
-                            char tmptxt[31];
+                            char filename[101];
+							network_read((u8*) &filename, 100);
 
-                            net_read(connection, &filename, 30);
-                            sprintf(tmptxt,"%s",filename);
-                            //if we got a wad
-                            if (strstr(tmptxt,".wad") || strstr(tmptxt,".WAD")) {
-
-                                //make a window come up and say that we are saving this file
-                                //because stupid people were clicking buttons while it was saving and tearing stuff up
-                                GuiWindow promptWindow(472,320);
-                                promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-                                promptWindow.SetPosition(0, -10);
-                                //char imgPath[100];
-                                snprintf(imgPath, sizeof(imgPath), "%sdialogue_box.png", CFG.theme_path);
-                                GuiImageData dialogBox(imgPath, dialogue_box_png);
-                                GuiImage dialogBoxImg(&dialogBox);
-                                if (Settings.wsprompt == yes) {
-                                    dialogBoxImg.SetWidescreen(CFG.widescreen);
-                                }
-                                GuiText msgTxt(tr("Saving"), 20, (GXColor) { THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255 });
-                                msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-                                msgTxt.SetPosition(0,100);
-                                sprintf(tmptxt,"%s/wad/%s",bootDevice,filename);
-                                GuiText msg2Txt(tmptxt, 26, (GXColor) { THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
-                                msg2Txt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-                                msg2Txt.SetPosition(0,130);
-                                promptWindow.Append(&dialogBoxImg);
-                                promptWindow.Append(&msgTxt);
-                                promptWindow.Append(&msg2Txt);
-                                HaltGui();
-                                mainWindow->SetState(STATE_DISABLED);
-                                mainWindow->Append(&promptWindow);
-                                mainWindow->ChangeFocus(&promptWindow);
-                                ResumeGui();
-
-
-
-                                //what do we want to do with the wad
-                                //save that biatch to the wad folder
-
-                                FILE * file = fopen(tmptxt, "w");
-                                fwrite (innetbuffer , 1 , infilesize , file );
-                                fclose (file);
-
-                                HaltGui();
-                                mainWindow->Remove(&promptWindow);
-                                mainWindow->SetState(STATE_DEFAULT);
-                                ResumeGui();
-                                //get it out of the memory
-                                FreeHomebrewBuffer();
-
-                                //check and make sure the wad we just saved is the correct size
-                                u32 lSize;
-                                file = fopen(tmptxt, "rb");
-
-                                // obtain file size:
-                                fseek (file , 0 , SEEK_END);
-                                lSize = ftell (file);
-
-                                rewind (file);
-                                if (lSize==infilesize) {
-                                    int pick = WindowPrompt(tr(" Wad Saved as:"), tmptxt, tr("Install"),tr("Uninstall"),tr("Cancel"));
-                                    //install or uninstall it
-                                    if (pick==1)Wad_Install(file);
-                                    if (pick==2)Wad_Uninstall(file);
-                                }
-                                //close that beast, we're done with it
-                                fclose (file);
-
-                                //do we want to keep the file in the wad folder
-                                if (WindowPrompt(tr("Delete ?"), tmptxt, tr("Delete"),tr("Keep"))!=0)
-                                    remove(tmptxt);
-
-
-                            } else if (strstr(tmptxt,".dol") || strstr(tmptxt,".DOL") ||
-                                       strstr(tmptxt,".elf") || strstr(tmptxt,".ELF")) {
+                            if (strstr(filename,".dol") || strstr(filename,".DOL")
+                                || strstr(filename,".elf") || strstr(filename,".ELF")) {
                                 boothomebrew = 2;
                                 menu = MENU_EXIT;
                                 CloseConnection();
                                 break;
-                            }
+                            } else {
+                                FreeHomebrewBuffer();
+                                WindowPrompt(tr("ERROR:"), tr("Not a dol/elf file."), tr("OK"));
+							}
                         }
                     }
                 }

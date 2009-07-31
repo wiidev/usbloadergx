@@ -8,9 +8,12 @@
 #ifndef _NETWORKOPS_H_
 #define _NETWORKOPS_H_
 
+#define NETWORKBLOCKSIZE       5*1024      //5KB
+
 void Initialize_Network(void);
 bool IsNetworkInit(void);
 char * GetNetworkIP(void);
+char * GetIncommingIP(void);
 bool ShutdownWC24();
 s32 network_request(const char * request);
 s32 network_read(u8 *buf, u32 len);

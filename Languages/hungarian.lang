@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-30 20:53+0200\n"
+"POT-Creation-Date: 2009-07-31 20:03+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: Tusk\n"
 "Language-Team: \n"
@@ -728,6 +728,9 @@ msgstr ""
 msgid "Not a Wii Disc"
 msgstr "Nem Wii lemez"
 
+msgid "Not a dol/elf file."
+msgstr ""
+
 msgid "Not enough free memory"
 msgstr ""
 
@@ -860,9 +863,6 @@ msgstr "Mentés"
 msgid "Save Failed"
 msgstr "Mentési hiba"
 
-msgid "Saving"
-msgstr ""
-
 msgid "Screensaver"
 msgstr "Képernyõkimélõ"
 
@@ -927,6 +927,9 @@ msgid "TXTCheatcodes Path"
 msgstr "TXTKódok Útvonala"
 
 msgid "TXTCheatcodes Path changed"
+msgstr ""
+
+msgid "The file is not a .wad"
 msgstr ""
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."

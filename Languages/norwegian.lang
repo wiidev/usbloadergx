@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-30 20:53+0200\n"
+"POT-Creation-Date: 2009-07-31 20:03+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -728,6 +728,9 @@ msgstr "Ikke funnet"
 msgid "Not a Wii Disc"
 msgstr "Ikke en Wii plate"
 
+msgid "Not a dol/elf file."
+msgstr ""
+
 msgid "Not enough free memory"
 msgstr "Ikke nok ledig minne"
 
@@ -860,9 +863,6 @@ msgstr "Lagre"
 msgid "Save Failed"
 msgstr "Lagring feilet"
 
-msgid "Saving"
-msgstr ""
-
 msgid "Screensaver"
 msgstr "Skjermbeskytter"
 
@@ -928,6 +928,9 @@ msgstr "TXTjuksekode sti"
 
 msgid "TXTCheatcodes Path changed"
 msgstr "TXTjuksekode sti endret"
+
+msgid "The file is not a .wad"
+msgstr ""
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."
 msgstr "WAD filen ble installert.  Men ble ikke slettet fra SD kort."
