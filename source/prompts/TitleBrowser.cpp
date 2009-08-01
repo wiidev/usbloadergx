@@ -401,7 +401,6 @@ int TitleBrowser(u32 type) {
 					}
 				snprintf(filepath, sizeof(filepath), "%s/wad/tmp.tmp", bootDevice);
 				
-                FILE *file = fopen(filepath, "wb");
 
                 if (infilesize < MBSIZE)
                     snprintf(filesizetxt, sizeof(filesizetxt), tr("Incoming file %0.2fKB"), infilesize/KBSIZE);
@@ -413,6 +412,7 @@ int TitleBrowser(u32 type) {
                 int choice = WindowPrompt(filesizetxt, temp, tr("OK"), tr("Cancel"));
 
                 if(choice == 1) {
+                        FILE *file = fopen(filepath, "wb");
 
                         int len = NETWORKBLOCKSIZE;
                         u8 *buffer = (u8*) malloc(NETWORKBLOCKSIZE);

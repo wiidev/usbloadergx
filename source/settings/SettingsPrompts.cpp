@@ -495,6 +495,8 @@ int MenuLanguageSelect() {
                     URL_List LinkList(URL);
                     int listsize = LinkList.GetURLCount();
 
+                    subfoldercreate(Settings.languagefiles_path);
+
                     for (int i = 0; i < listsize; i++) {
 
                         ShowProgress(tr("Updating Language Files:"), 0, LinkList.GetURL(i), i, listsize-1);
