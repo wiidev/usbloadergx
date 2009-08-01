@@ -729,7 +729,7 @@ msgid "Not a Wii Disc"
 msgstr "No es un Disco Wii"
 
 msgid "Not a dol/elf file."
-msgstr ""
+msgstr "No es un archivo dol/elf."
 
 msgid "Not enough free memory"
 msgstr "No hay suficiente memoria libre"
@@ -930,7 +930,7 @@ msgid "TXTCheatcodes Path changed"
 msgstr "Ruta archiv. de trampas cambiada"
 
 msgid "The file is not a .wad"
-msgstr ""
+msgstr "El archivo no es un .wad"
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."
 msgstr "El archivo wad fue instalado. Pero no pudo ser borrado de la tarj. SD."

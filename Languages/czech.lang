@@ -7,7 +7,7 @@ msgstr ""
 "POT-Creation-Date: 2009-07-31 20:03+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) \n"
-"Language-Team: r675 - last version on http://startgolf.tym.cz/czech.lang \n"
+"Language-Team: r686 - last version on http://startgolf.tym.cz/czech.lang \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -296,7 +296,7 @@ msgid "DOL from SD"
 msgstr "DOL z SD"
 
 msgid "DOL from disc"
-msgstr "DOL z disku"
+msgstr "DOL z DVD"
 
 msgid "Dec"
 msgstr "List"
@@ -323,7 +323,7 @@ msgid "Delete CheatTxt"
 msgstr "Smazat CheatTxt"
 
 msgid "Delete Discart"
-msgstr "Smazat obrázek disku"
+msgstr "Smazat potisk DVD"
 
 msgid "Design:"
 msgstr ""
@@ -332,13 +332,13 @@ msgid "Developed by"
 msgstr "Vyvinul"
 
 msgid "Disc Default"
-msgstr "Povodní nastavení disku"
+msgstr "Puvodní nastavení disku"
 
 msgid "Disc Images"
-msgstr "Potisky disku"
+msgstr "Potisky DVD"
 
 msgid "Discimage Path"
-msgstr "Cesta k obrazum disku"
+msgstr "Cesta k potiskum DVD"
 
 msgid "Discpath Changed"
 msgstr "Cesta k diskum zmenena"
@@ -401,7 +401,7 @@ msgid "Download Boxart image?"
 msgstr "Stáhnout obal krabicky?"
 
 msgid "Download Discart image?"
-msgstr "Stáhnout obrázek disku?"
+msgstr "Stáhnout potisk DVD?"
 
 msgid "Download Now"
 msgstr "Stáhnout nyní"
@@ -559,7 +559,7 @@ msgid "Insert a Wii Disc!"
 msgstr "Vložte Wii disk"
 
 msgid "Insert an SD-Card to download images."
-msgstr "Vložte SD kartu pro stažení obrazu disku."
+msgstr "Vložte SD kartu pro stažení potisku DVD."
 
 msgid "Insert an SD-Card to save."
 msgstr "Vložte SD kartu pro uložení."
@@ -711,7 +711,7 @@ msgid "No file missing!"
 msgstr "Nechybí žádný soubor!"
 
 msgid "No new updates."
-msgstr "Nejsou dostupné žádné aktualizace."
+msgstr "Není dostupná žádná aktualizace."
 
 msgid "No partitions found"
 msgstr "Nebyl nalezen žádný oddíl"
@@ -729,7 +729,7 @@ msgid "Not a Wii Disc"
 msgstr "Toto není Wii disk"
 
 msgid "Not a dol/elf file."
-msgstr ""
+msgstr "To není DOL/ELF soubor."
 
 msgid "Not enough free memory"
 msgstr "Není dostatek volné pameti"
@@ -930,7 +930,7 @@ msgid "TXTCheatcodes Path changed"
 msgstr "Cesta k TXT cheatum zmenena"
 
 msgid "The file is not a .wad"
-msgstr ""
+msgstr "Soubor není typu WAD"
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."
 msgstr "WAD soubor byl nainstalován, ale nelze smazat z SD karty"
@@ -1114,7 +1114,7 @@ msgid "for"
 msgstr "pro"
 
 msgid "for WiiTDB and hosting covers / disc images"
-msgstr "za WiiTDB a hostování obalu / obrázku disku"
+msgstr "za WiiTDB a hostování obalu / potisku DVD"
 
 msgid "for diverse patches"
 msgstr "za ruzné opravy"
@@ -1142,6 +1142,3 @@ msgstr "z "
 
 msgid "seconds left"
 msgstr "sekund zbývá"
-
-#~ msgid "Saving"
-#~ msgstr "Ukládání"

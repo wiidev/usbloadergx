@@ -1,5 +1,5 @@
 # USB Loader GX language source file.
-# italian.lang - v31 - r674
+# italian.lang - v32 - r679
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
@@ -118,7 +118,7 @@ msgid "All the features of USB Loader GX are unlocked."
 msgstr "Tutte le funzioni di USB Loader GX sono sbloccate."
 
 msgid "Alternate DOL"
-msgstr "DOL alternativo"
+msgstr "DOL Alternativo"
 
 msgid "An Error occured"
 msgstr "C'è stato un errore"
@@ -139,7 +139,7 @@ msgid "Aug"
 msgstr "agosto"
 
 msgid "AutoInit Network"
-msgstr "Inizializzazione rete automatica"
+msgstr "Inizializz. Rete Automatica"
 
 msgid "AutoPatch"
 msgstr "Correzione automatica"
@@ -272,7 +272,7 @@ msgid "Could not set USB."
 msgstr "Non posso impostare la porta USB."
 
 msgid "Cover Download"
-msgstr "Scaricamento Copertina"
+msgstr "Scaricamento Copertine"
 
 msgid "Cover Path"
 msgstr "Percorso Copertine"
@@ -305,7 +305,7 @@ msgid "Default"
 msgstr "Default"
 
 msgid "Default Gamesettings"
-msgstr "Impostazioni predefinite del gioco"
+msgstr "Impostaz. Predefinite Gioco"
 
 msgid "Default Settings"
 msgstr "Impostazioni Predefinite"
@@ -383,13 +383,13 @@ msgid "Do you wish to update/download all language files?"
 msgstr "Vuoi scaricare/aggiornare tutti i file delle lingue?"
 
 msgid "Dol Path"
-msgstr "Percorso DOL"
+msgstr "Percorso File DOL"
 
 msgid "Dolpath Changed"
-msgstr "Percorso DOL modificato"
+msgstr "Percorso File DOL Modificato"
 
 msgid "Dolpath change"
-msgstr "Modifica percorso DOL"
+msgstr "Modifica percorso file DOL"
 
 msgid "Don't bother the USB Loader GX Team about errors in this file."
 msgstr "Non infastidire il team di sviluppo dell'USB Loader GX per errori in questo file."
@@ -398,22 +398,22 @@ msgid "Done!"
 msgstr "Fatto!"
 
 msgid "Download Boxart image?"
-msgstr "Scaricamento Immagine Boxart?"
+msgstr "Scarico la copertina?"
 
 msgid "Download Discart image?"
-msgstr "Scaricamento Immagine Discart?"
+msgstr "Scarico l'immagine del disco?"
 
 msgid "Download Now"
 msgstr "Scarica Adesso"
 
 msgid "Download finished"
-msgstr "Scaricamento Completato"
+msgstr "Ho finito di scaricare"
 
 msgid "Downloading"
 msgstr "Sto scaricando"
 
 msgid "Downloading file"
-msgstr "Scaricamento file:"
+msgstr "Scarico il file:"
 
 msgid "Dutch"
 msgstr "Olandese"
@@ -550,7 +550,7 @@ msgid "Incoming file %0.2fMB"
 msgstr "Dimensione file %0.2fMB"
 
 msgid "Initializing Network"
-msgstr "Inizializzazione rete"
+msgstr "Inizializzazione Rete"
 
 msgid "Insert Disk"
 msgstr "Inserisci Disco"
@@ -729,7 +729,7 @@ msgid "Not a Wii Disc"
 msgstr "Non è un Disco Wii"
 
 msgid "Not a dol/elf file."
-msgstr ""
+msgstr "Non è un file dol/elf."
 
 msgid "Not enough free memory"
 msgstr "Memoria insufficiente"
@@ -771,7 +771,7 @@ msgid "Parental Control"
 msgstr "Controllo Genitori"
 
 msgid "Parental control"
-msgstr "Controllo genitori"
+msgstr "Controllo Genitori"
 
 msgid "Partition"
 msgstr "Partizione"
@@ -885,7 +885,7 @@ msgid "Sort alphabetically"
 msgstr "Ordine alfabetico"
 
 msgid "Sort order by most played"
-msgstr "Ordine di preferenza"
+msgstr "Mostra i più giocati"
 
 msgid "Sound"
 msgstr "Audio"
@@ -930,7 +930,7 @@ msgid "TXTCheatcodes Path changed"
 msgstr "Percorso Trucchi in Txt modificato"
 
 msgid "The file is not a .wad"
-msgstr ""
+msgstr "Non è un file .wad"
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."
 msgstr "File Wad installato. Non si può però eliminare dalla scheda SD."
@@ -955,7 +955,7 @@ msgid "Title Launcher"
 msgstr "Schermata Titoli"
 
 msgid "Titles from XML"
-msgstr "Titoli in XML"
+msgstr "Titoli dal file XML"
 
 msgid "Tooltips"
 msgstr "Suggerimenti"
@@ -998,10 +998,10 @@ msgid "Update DOL"
 msgstr "Solo DOL"
 
 msgid "Update Files"
-msgstr "Aggiornamento File"
+msgstr "Aggiorna File"
 
 msgid "Update all Language Files"
-msgstr "Aggiornamento di tutti i file delle lingue"
+msgstr "Aggiorna tutti i file delle lingue"
 
 msgid "Update failed"
 msgstr "Aggiornamento Fallito"
@@ -1059,13 +1059,13 @@ msgid "Wrong Password"
 msgstr "Password Errata"
 
 msgid "XMLPath"
-msgstr "Percorso XML"
+msgstr "Percorso Archivio XML"
 
 msgid "XMLPath change"
-msgstr "Modifica percorso XML"
+msgstr "Modifica percorso archivio XML"
 
 msgid "XMLPath changed."
-msgstr "Percorso XML modificato."
+msgstr "Percorso archivio XML modificato."
 
 msgid "Yes"
 msgstr "Sì"

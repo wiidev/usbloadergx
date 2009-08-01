@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-31 20:03+0200\n"
+"POT-Creation-Date: 2009-07-31 23:02+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid " Wad Saved as:"
-msgstr ""
+msgstr " WAD gemt som:"
 
 msgid " could not be downloaded."
 msgstr " kunne ikke downloades."
@@ -64,31 +64,31 @@ msgid "5 min"
 msgstr "5 min."
 
 msgid ">> Deleting tickets..."
-msgstr ""
+msgstr ">> Sletter tickets..."
 
 msgid ">> Deleting tickets...ERROR! "
-msgstr ""
+msgstr ">> Sletter tickets...FEJL!"
 
 msgid ">> Deleting tickets...Ok! "
-msgstr ""
+msgstr ">> Sletter tickets...Ok!"
 
 msgid ">> Deleting title ...ERROR! "
-msgstr ""
+msgstr ">> Sletter titel...FEJL!"
 
 msgid ">> Deleting title ...Ok!"
-msgstr ""
+msgstr ">> Sletter titel...Ok!"
 
 msgid ">> Deleting title contents..."
-msgstr ""
+msgstr ">> Sletter titel-indhold..."
 
 msgid ">> Deleting title contents...ERROR! "
-msgstr ""
+msgstr ">> Sletter titel-indhold...FEJL!"
 
 msgid ">> Deleting title contents...Ok!"
-msgstr ""
+msgstr ">> Sletter titel-indhold...Ok!"
 
 msgid ">> Deleting title..."
-msgstr ""
+msgstr ">> Sletter titel..."
 
 msgid ">> Finishing installation..."
 msgstr ">> Færdiggør installationen..."
@@ -106,10 +106,10 @@ msgid ">> Reading WAD data..."
 msgstr ">> Læser WAD-data"
 
 msgid ">> Reading WAD data...ERROR! "
-msgstr ""
+msgstr ">> Læser WAD-data...FEJL!"
 
 msgid ">> Reading WAD data...Ok!"
-msgstr ""
+msgstr ">> Læser WAD-data...Ok!"
 
 msgid "AUTO"
 msgstr "AUTO"
@@ -121,7 +121,7 @@ msgid "Alternate DOL"
 msgstr "Alternativ DOL"
 
 msgid "An Error occured"
-msgstr "der var en fejl"
+msgstr "Der skete en fejl"
 
 msgid "Anti"
 msgstr "Anti"
@@ -172,7 +172,7 @@ msgid "Boot/Standard"
 msgstr "Boot/Standard"
 
 msgid "Boot?"
-msgstr ""
+msgstr "Genstart?"
 
 msgid "Both"
 msgstr "Begge"
@@ -314,7 +314,7 @@ msgid "Delete"
 msgstr "Slet"
 
 msgid "Delete ?"
-msgstr ""
+msgstr "Slet?"
 
 msgid "Delete Boxart"
 msgstr "Slet boxart"
@@ -353,16 +353,16 @@ msgid "Display"
 msgstr "Spilinfo."
 
 msgid "Display as a carousel"
-msgstr ""
+msgstr "Vis som karusel"
 
 msgid "Display as a grid"
-msgstr ""
+msgstr "Vis som tabel"
 
 msgid "Display as a list"
-msgstr ""
+msgstr "Vis som liste"
 
 msgid "Display favorites"
-msgstr ""
+msgstr "Vis favoritter"
 
 msgid "Do you really want to delete:"
 msgstr "Vil du slette:"
@@ -380,7 +380,7 @@ msgid "Do you want to use the alt dol that is known to be correct?"
 msgstr "Vil du bruge den alternative dol der med sikkerhed er korrekt?"
 
 msgid "Do you wish to update/download all language files?"
-msgstr ""
+msgstr "Vil du opdatere/downloade alle sprogfiler?"
 
 msgid "Dol Path"
 msgstr "Stil til DOL"
@@ -395,7 +395,7 @@ msgid "Don't bother the USB Loader GX Team about errors in this file."
 msgstr "Lad være med at fortælle holdet bag USB Loader GX om fejl i denne fil."
 
 msgid "Done!"
-msgstr ""
+msgstr "Færdig!"
 
 msgid "Download Boxart image?"
 msgstr "Download boxart-billede?"
@@ -539,7 +539,7 @@ msgid "How to Shutdown?"
 msgstr "Hvordan skal der slukkes?"
 
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
-msgstr ""
+msgstr "Hvis der ikke er netforbindelse, tryk da på 1 for at få en URL til WiiTDB.zip"
 
 #, c-format
 msgid "Incoming file %0.2fKB"
@@ -568,7 +568,7 @@ msgid "Insert an SD-Card to use this option."
 msgstr "Indsæt et SD-kort for at bruge denne indstilling."
 
 msgid "Install"
-msgstr ""
+msgstr "Installér"
 
 msgid "Install Error!"
 msgstr "Installationsfejl!"
@@ -611,7 +611,7 @@ msgid "June"
 msgstr "Juni"
 
 msgid "Keep"
-msgstr ""
+msgstr "Behold"
 
 msgid "Keyboard"
 msgstr "Tastatur"
@@ -882,10 +882,10 @@ msgid "Shutdown to Idle"
 msgstr "Standby"
 
 msgid "Sort alphabetically"
-msgstr ""
+msgstr "Sortér alfabetisk"
 
 msgid "Sort order by most played"
-msgstr ""
+msgstr "Sortér efter popularitet"
 
 msgid "Sound"
 msgstr "Lyd"
@@ -952,7 +952,7 @@ msgid "Time left:"
 msgstr "Tid tilb.:"
 
 msgid "Title Launcher"
-msgstr ""
+msgstr "Titel-starter"
 
 msgid "Titles from XML"
 msgstr "Titler fra XML"
@@ -980,7 +980,7 @@ msgid "Uninstall Menu"
 msgstr "Afinstallationsmenu"
 
 msgid "Uninstalling wad"
-msgstr ""
+msgstr "Afinstallerer WAD"
 
 msgid "Unlock console to use this option."
 msgstr "Lås op for konsollen for at benytte denne indstilling."
@@ -998,10 +998,10 @@ msgid "Update DOL"
 msgstr "Opdatér DOL"
 
 msgid "Update Files"
-msgstr ""
+msgstr "Opdatér filer"
 
 msgid "Update all Language Files"
-msgstr ""
+msgstr "Opdatér alle sprogfiler"
 
 msgid "Update failed"
 msgstr "Opdateringen mislykkedes"
@@ -1019,10 +1019,10 @@ msgid "Updating"
 msgstr "Opdaterer..."
 
 msgid "Updating Language Files:"
-msgstr ""
+msgstr "Opdaterer sprogfiler:"
 
 msgid "Updating WiiTDB.zip"
-msgstr ""
+msgstr "Opdaterer WiiTDB.zip"
 
 msgid "VIDTV Patch"
 msgstr "VIDTV-patch"
@@ -1050,7 +1050,7 @@ msgid "Wii Menu"
 msgstr "Wii Menu"
 
 msgid "Wii Settings"
-msgstr ""
+msgstr "Wii-indstillinger"
 
 msgid "Wiilight"
 msgstr "Wiilight"
@@ -1059,13 +1059,13 @@ msgid "Wrong Password"
 msgstr "Forkert password"
 
 msgid "XMLPath"
-msgstr ""
+msgstr "Sti til XML"
 
 msgid "XMLPath change"
-msgstr ""
+msgstr "Ændringer af sti til XML"
 
 msgid "XMLPath changed."
-msgstr ""
+msgstr "Sti til XML ændret"
 
 msgid "Yes"
 msgstr "Ja"
@@ -1142,3 +1142,6 @@ msgstr "af"
 
 msgid "seconds left"
 msgstr "sekunder tilbage"
+
+#~ msgid "Saving"
+#~ msgstr "Gemmer"

@@ -1,5 +1,5 @@
 # USB Loader GX language source file.
-# French V9 r674
+# French V9.1 r685
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
@@ -729,7 +729,7 @@ msgid "Not a Wii Disc"
 msgstr "Ce n'est pas un jeu Wii"
 
 msgid "Not a dol/elf file."
-msgstr ""
+msgstr "Ce n'est pas un fichier DOL/ELF"
 
 msgid "Not enough free memory"
 msgstr "Mémoire libre insuffisante"
@@ -930,7 +930,7 @@ msgid "TXTCheatcodes Path changed"
 msgstr "Dossier TXTCodes Triche modifié"
 
 msgid "The file is not a .wad"
-msgstr ""
+msgstr "Le fichier n'est pas un .wad"
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."
 msgstr "Le Wad a été installé. Mais ne peut être supprimé de la carte SD."

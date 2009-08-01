@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-31 20:03+0200\n"
+"POT-Creation-Date: 2009-07-31 23:13+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid " Wad Saved as:"
-msgstr ""
+msgstr " WAD lagret som:"
 
 msgid " could not be downloaded."
 msgstr " kan ikke lastes ned."
@@ -121,7 +121,7 @@ msgid "Alternate DOL"
 msgstr "Alternativ DOL"
 
 msgid "An Error occured"
-msgstr ""
+msgstr "En feil oppstod"
 
 msgid "Anti"
 msgstr "Anti"
@@ -353,16 +353,16 @@ msgid "Display"
 msgstr "Vis"
 
 msgid "Display as a carousel"
-msgstr ""
+msgstr "Vis som karusell"
 
 msgid "Display as a grid"
-msgstr ""
+msgstr "Vis som rutemønster"
 
 msgid "Display as a list"
-msgstr ""
+msgstr "Vis som liste"
 
 msgid "Display favorites"
-msgstr ""
+msgstr "Vis favoritter"
 
 msgid "Do you really want to delete:"
 msgstr "Er du sikker på at du vil slette:"
@@ -380,7 +380,7 @@ msgid "Do you want to use the alt dol that is known to be correct?"
 msgstr "Vil du bruke alt DOL filen som er kjent for å være riktig?"
 
 msgid "Do you wish to update/download all language files?"
-msgstr ""
+msgstr "Vil du oppdatere/laste ned alle språkfiler?"
 
 msgid "Dol Path"
 msgstr "DOL sti"
@@ -663,7 +663,7 @@ msgid "Missing files"
 msgstr "Manglende filer"
 
 msgid "Most likely it has dimensions that are not evenly divisible by 4."
-msgstr ""
+msgstr "Sannsynligvis har bildet dimensjoner som ikke kan deles med 4."
 
 msgid "Music Volume"
 msgstr "Musikk volum"
@@ -882,10 +882,10 @@ msgid "Shutdown to Idle"
 msgstr "Skru av"
 
 msgid "Sort alphabetically"
-msgstr ""
+msgstr "Sortér alfabetisk"
 
 msgid "Sort order by most played"
-msgstr ""
+msgstr "Sortér etter ganger spilt"
 
 msgid "Sound"
 msgstr "Lyd"
@@ -998,10 +998,10 @@ msgid "Update DOL"
 msgstr "Oppdater DOL"
 
 msgid "Update Files"
-msgstr ""
+msgstr "Oppdater filer"
 
 msgid "Update all Language Files"
-msgstr ""
+msgstr "Oppdater alle språkfiler"
 
 msgid "Update failed"
 msgstr "Mislykket oppdatering"
@@ -1019,10 +1019,10 @@ msgid "Updating"
 msgstr "Oppdaterer"
 
 msgid "Updating Language Files:"
-msgstr ""
+msgstr "Oppdaterer språkfiler:"
 
 msgid "Updating WiiTDB.zip"
-msgstr ""
+msgstr "Oppdaterer WiiTDB.zip"
 
 msgid "VIDTV Patch"
 msgstr "VIDTV Patch"
@@ -1047,10 +1047,10 @@ msgid "Widescreen Fix"
 msgstr "Widescreen fiks"
 
 msgid "Wii Menu"
-msgstr "Wii meny"
+msgstr "Wii Meny"
 
 msgid "Wii Settings"
-msgstr ""
+msgstr "Wii Innstillinger"
 
 msgid "Wiilight"
 msgstr "Wii DVD lys"
@@ -1059,13 +1059,13 @@ msgid "Wrong Password"
 msgstr "Feil passord"
 
 msgid "XMLPath"
-msgstr ""
+msgstr "XML sti"
 
 msgid "XMLPath change"
-msgstr ""
+msgstr "Endre XML sti"
 
 msgid "XMLPath changed."
-msgstr ""
+msgstr "XML sti endret."
 
 msgid "Yes"
 msgstr "Ja"
@@ -1142,3 +1142,6 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder gjenstår"
+
+#~ msgid "Saving"
+#~ msgstr "Lagrer"

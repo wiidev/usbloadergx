@@ -729,7 +729,7 @@ msgid "Not a Wii Disc"
 msgstr "Não é um Disco da Wii"
 
 msgid "Not a dol/elf file."
-msgstr ""
+msgstr "Não é um ficheiro dol/elf."
 
 msgid "Not enough free memory"
 msgstr "Não há memória livre suficiente"
@@ -930,7 +930,7 @@ msgid "TXTCheatcodes Path changed"
 msgstr "Pasta de Dicas alterada"
 
 msgid "The file is not a .wad"
-msgstr ""
+msgstr "O ficheiro não é um .wad"
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."
 msgstr "O ficheiro wad foi instalado mas não foi possível eliminá-lo do cartão SD."
@@ -952,7 +952,7 @@ msgid "Time left:"
 msgstr "Tempo restante:"
 
 msgid "Title Launcher"
-msgstr ""
+msgstr "Menú Canais"
 
 msgid "Titles from XML"
 msgstr "Títulos do XML"
