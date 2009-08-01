@@ -1645,7 +1645,7 @@ void CFG_Load(void) {
 
     snprintf(pathname, sizeof(pathname), "%sGXtheme.cfg", CFG.theme_path);
     cfg_parsefile(pathname, &theme_set); //finally set theme information
-		
+
 	// set GUI language, use Wii's language setting if language is set to default
 	int wiilang;
 	bool langisdefault = false;
@@ -1657,10 +1657,10 @@ void CFG_Load(void) {
 		}
 	    gettextLoadLanguage(Settings.language_path);
 		langisdefault = true;
-	} 
+	}
 	snprintf(pathname, sizeof(pathname), Settings.language_path);
 	gettextLoadLanguage(pathname);
-	
+
 //	cfg_parsefile(pathname, &language_set);
 
     snprintf(pathname, sizeof(pathname), "%s/config/GXGameSettings.cfg", bootDevice);
@@ -1672,26 +1672,30 @@ void CFG_Load(void) {
 
     Global_Default(); //global default depends on theme information
     CFG_LoadGlobal();
-	
+
 	// use GUI language for the database (Settings.db_language is used for game info/titles and covers)
 	char * languagefile;
     languagefile = strrchr(Settings.language_path, '/')+1;
 	int mainlangid = -1;
 	int i;
+	if(strcmp("notset", Settings.language_path)) {
     for (i=0; map_language[i].name != NULL; i++) {
         if (strstr(languagefile, map_language[i].name) != NULL) {
 			mainlangid = i - 1; // - 1 because CONF_LANG starts at 0
 			break;
 		}
     }
+	} else {
+        mainlangid = 2;
+	}
 	GetLanguageToLangCode(&mainlangid, Settings.db_language);
-	
+
 	// set language code for languages that are not available on the Wii
 	if (!strcmp(Settings.db_language,"")) {
-		if (strstr(languagefile, "portuguese") != NULL) 
+		if (strstr(languagefile, "portuguese") != NULL)
 			strcpy(Settings.db_language,"PO");
 	}
-		
+
 	// open database if needed, load titles if needed
 	OpenXMLDatabase(Settings.titlestxt_path,Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true);
 
@@ -1701,7 +1705,6 @@ void CFG_Load(void) {
     //cfg_parsefile(pathname, &title_set);
 
 //	cfg_parsearg(argc, argv);
-
 	// if GUI language is set to default Settings.language_path needs to remain "notset" (if the detected setting was kept detection wouldn't work next time)
 	if (langisdefault)
 		sprintf(Settings.language_path, "notset");
@@ -1726,7 +1729,7 @@ void GetLanguageToLangCode(int *langid, char *langcode) {
 
 	if (langid < 0)
 		*langid = CONF_GetLanguage();
-	
+
     switch (*langid) {
     case CONF_LANG_JAPANESE:
         sprintf(langcode, "JA");
