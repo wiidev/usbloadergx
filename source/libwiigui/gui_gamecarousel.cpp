@@ -37,9 +37,9 @@ GuiGameCarousel::GuiGameCarousel(int w, int h, struct discHdr * l, int count, co
 	gameCnt = count;
 	gameList = l;
 	pagesize = (gameCnt < PAGESIZE) ? gameCnt : PAGESIZE;
-	listOffset = (offset == 0) ? this->FindMenuItem(-1, 1) : offset;
+	listOffset = 0;
 	selectable = true;
-	selectedItem = selected - offset;
+	selectedItem = 0;
 	if (selectedItem==0)selectedItem=(pagesize+1)/2;
 	focus = 1;					 // allow focus
 	firstPic = 0;
@@ -98,6 +98,14 @@ GuiGameCarousel::GuiGameCarousel(int w, int h, struct discHdr * l, int count, co
 
 	ResumeBufferThread(listOffset);
 
+	ttgame = new GuiTooltip(" ");
+
+	gamename = new GuiText(" ", 18, (GXColor) {THEME.info_r, THEME.info_g, THEME.info_b, 255});
+	gamename->SetParent(this);
+    gamename->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+    gamename->SetPosition(0, 330);
+    gamename->SetMaxWidth(280, GuiText::DOTTED);
+
 	gameIndex = new int[pagesize];
 	game = new GuiButton * [pagesize];
 
@@ -138,6 +146,8 @@ GuiGameCarousel::~GuiGameCarousel()
 	delete trigMinus;
 	delete btnSoundClick;
 	delete btnSoundOver;
+    delete ttgame;
+    delete gamename;
 
 	for(int i=0; i<pagesize; i++) {
 		delete game[i];
@@ -151,6 +161,8 @@ GuiGameCarousel::~GuiGameCarousel()
 void GuiGameCarousel::SetFocus(int f)
 {
 	LOCK(this);
+	if(!gameCnt) return;
+
 	focus = f;
 
 	for(int i=0; i<pagesize; i++)
@@ -241,11 +253,11 @@ int GuiGameCarousel::FindMenuItem(int currentItem, int direction)
 void GuiGameCarousel::Draw()
 {
 	LOCK(this);
-	if(!this->IsVisible())
+	if(!this->IsVisible() || !gameCnt)
 		return;
 
 	int next = listOffset;
-	
+
 	for(int i=0; i<pagesize; i++) {
 		if(next >= 0) {
             game[i]->SetImage(ImageBuffer(i));
@@ -253,6 +265,17 @@ void GuiGameCarousel::Draw()
 			next = this->FindMenuItem(next, 1);
 		} else break;
 	}
+
+	//!Draw tooltip after the Images to have it on top
+	for(int i=0; i<pagesize; i++) {
+		if(next >= 0) {
+            if(Settings.tooltips == TooltipsOn)
+                game[i]->DrawTooltip();
+			next = this->FindMenuItem(next, 1);
+		} else break;
+	}
+
+    gamename->Draw();
 
 	if(gameCnt > pagesize) {
 		btnRight->Draw();
@@ -266,7 +289,7 @@ void GuiGameCarousel::Draw()
 void GuiGameCarousel::Update(GuiTrigger * t)
 {
 	LOCK(this);
-	if(state == STATE_DISABLED || !t)
+	if(state == STATE_DISABLED || !t || !gameCnt)
 		return;
 
 	if(!(game[0]->GetEffect() || game[0]->GetEffectOnOver())) {
@@ -302,7 +325,9 @@ void GuiGameCarousel::Update(GuiTrigger * t)
 			if(game[i]->GetState() == STATE_DISABLED) {
 				game[i]->SetVisible(true);
 				game[i]->SetState(STATE_DEFAULT);
+				game[i]->RemoveToolTip();
 			}
+			game[i]->SetEffectOnOver(EFFECT_SCALE, 1, 130);
 			gameIndex[i] = next;
 			next = this->FindMenuItem(next, 1);
 		} else {
@@ -313,7 +338,7 @@ void GuiGameCarousel::Update(GuiTrigger * t)
 		if(focus) {
 			if(i != selectedItem && game[i]->GetState() == STATE_SELECTED)
 				game[i]->ResetState();
-			else if(i == selectedItem && game[i]->GetState() == STATE_DEFAULT);
+			else if(i == selectedItem && game[i]->GetState() == STATE_DEFAULT)
 				game[selectedItem]->SetState(STATE_SELECTED, t->chan);
 		}
 		game[i]->Update(t);
@@ -324,10 +349,22 @@ void GuiGameCarousel::Update(GuiTrigger * t)
 		if(game[i]->GetState() == STATE_CLICKED) {
 			clickedItem = i;
 		}
-
 	}
 
-	// navigation
+    ///Tooltip stuff
+    struct discHdr *header = &gameList[this->GetSelectedOption()];
+    ttgame->SetText(get_title(header));
+    game[selectedItem]->SetToolTip(ttgame, 0, 0);
+    ttgame->SetPosition(0, 20);
+    if(selectedItem < PAGESIZE/2+1)
+        ttgame->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+    else
+        ttgame->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
+
+    ///GameText
+    gamename->SetText(get_title(header));
+
+	/// navigation
 	if(!focus || gameCnt <= pagesize || (game[0]->GetEffect() && game[pagesize-1]->GetEffect()))
 		return; // skip navigation
 

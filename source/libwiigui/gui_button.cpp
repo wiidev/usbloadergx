@@ -232,7 +232,7 @@ void GuiButton::SetSoundClick(GuiSound * snd)
 	soundClick = snd;
 }
 
-void GuiButton::SetToolTip(GuiElement* tt, int x, int y, int h_align, int v_align)
+void GuiButton::SetToolTip(GuiTooltip* tt, int x, int y, int h_align, int v_align)
 {
 	LOCK(this);
 	if(tt)

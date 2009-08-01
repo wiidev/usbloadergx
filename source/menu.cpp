@@ -669,10 +669,6 @@ int MenuDiscList() {
 
     ResumeGui();
 
-
-
-
-
     while (menu == MENU_NONE) {
 
         if (idiotFlag==1) {
@@ -824,9 +820,6 @@ int MenuDiscList() {
                 }
             }
         }
-
-
-
 
         else if (sdcardBtn.GetState() == STATE_CLICKED) {
             SDCard_deInit();

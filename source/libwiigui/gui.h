@@ -378,7 +378,7 @@ class GuiElement
 		//!Sets the element's position
 		//!\param x X coordinate
 		//!\param y Y coordinate
-		void SetPosition(int x, int y);
+		void SetPosition(int x, int y, int z = 0);
 		//!Updates the element's effects (dynamic values)
 		//!Called by Draw(), used for animation purposes
 		void UpdateEffects();
@@ -427,6 +427,7 @@ class GuiElement
 		int height; //!< Element height
 		int xoffset; //!< Element X offset
 		int yoffset; //!< Element Y offset
+		int zoffset; //!< Element Z offset
 		int ymin; //!< Element's min Y offset allowed
 		int ymax; //!< Element's max Y offset allowed
 		int xmin; //!< Element's min X offset allowed
@@ -638,6 +639,8 @@ class GuiImage : public GuiElement
 		void SetPixel(int x, int y, GXColor color);
 		//!Sets the image to grayscale
 		void SetGrayscale(void);
+		//!Set/disable the use of parentelement angle (default true)
+		void SetParentAngle(bool a);
 		//!Directly modifies the image data to create a color-striped effect
 		//!Alters the RGB values by the specified amount
 		//!\param s Amount to increment/decrement the RGB values in the image
@@ -648,7 +651,6 @@ class GuiImage : public GuiElement
 		void SetStripe(int s);
 		s32 z;
 		void SetSkew(int XX1, int YY1,int XX2, int YY2,int XX3, int YY3,int XX4, int YY4);
-
 		int xx1;
 		int yy1;
 		int xx2;
@@ -672,6 +674,7 @@ class GuiImage : public GuiElement
 		int tile; //!< Number of times to draw (tile) the image horizontally
 		int stripe; //!< Alpha value (0-255) to apply a stripe effect to the texture
 		short widescreen; //added
+		bool parentangle;
 };
 
 //!Display, manage, and manipulate text in the GUI
@@ -874,7 +877,7 @@ class GuiButton : public GuiElement
 		//!Constantly called to draw the GuiButtons ToolTip
 		//!Sets the button's Tooltip on over
 		//!\param tt Pointer to GuiElement object, x & y Positioning, h & v Align
-		void SetToolTip(GuiElement* tt, int x, int y, int h=ALIGN_RIGHT, int v=ALIGN_TOP);
+		void SetToolTip(GuiTooltip* tt, int x, int y, int h=ALIGN_RIGHT, int v=ALIGN_TOP);
 
 		void RemoveToolTip();
 		//!Constantly called to draw the GuiButton
@@ -895,7 +898,7 @@ class GuiButton : public GuiElement
 		GuiImage * iconOver; //!< Button icon for STATE_SELECTED
 		GuiImage * iconHold; //!< Button icon for STATE_HELD
 		GuiImage * iconClick; //!< Button icon for STATE_CLICKED
-		GuiElement *toolTip;
+		GuiTooltip *toolTip;
 		time_t time1, time2;//!< Tooltip timeconstants
 		GuiText * label[3]; //!< Label(s) to display (default)
 		GuiText * labelOver[3]; //!< Label(s) to display for STATE_SELECTED

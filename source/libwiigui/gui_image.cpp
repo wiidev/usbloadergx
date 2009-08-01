@@ -41,6 +41,7 @@ GuiImage::GuiImage(GuiImageData * img)
 	tile = -1;
 	stripe = 0;
 	widescreen = 0;
+	parentangle = true;
 	xx1 = 0;
 	yy1 = 0;
 	xx2 = 0;
@@ -61,6 +62,7 @@ GuiImage::GuiImage(u8 * img, int w, int h)
 	tile = -1;
 	stripe = 0;
 	widescreen = 0;
+	parentangle = true;
 	xx1 = 0;
 	yy1 = 0;
 	xx2 = 0;
@@ -81,6 +83,7 @@ GuiImage::GuiImage(int w, int h, GXColor c)
 	tile = -1;
 	stripe = 0;
 	widescreen = 0;
+	parentangle = true;
 	xx1 = 0;
 	yy1 = 0;
 	xx2 = 0;
@@ -126,6 +129,7 @@ GuiImage::GuiImage(GuiImage &srcimage)
 	tile = -1;
 	stripe = 0;
 	widescreen = 0;
+	parentangle = true;
 	xx1 = 0;
 	yy1 = 0;
 	xx2 = 0;
@@ -155,6 +159,7 @@ GuiImage::GuiImage(GuiImage *srcimage)
 	tile = -1;
 	stripe = 0;
 	widescreen = 0;
+	parentangle = true;
 	xx1 = 0;
 	yy1 = 0;
 	xx2 = 0;
@@ -184,6 +189,7 @@ GuiImage &GuiImage::operator=(GuiImage &srcimage)
 	tile = -1;
 	stripe = 0;
 	widescreen = 0;
+	parentangle = true;
 	xx1 = 0;
 	yy1 = 0;
 	xx2 = 0;
@@ -259,6 +265,11 @@ void GuiImage::SetWidescreen(bool w)
 {
 	LOCK(this);
 	widescreen = w;
+}
+void GuiImage::SetParentAngle(bool a)
+{
+	LOCK(this);
+    parentangle = a;
 }
 
 GXColor GuiImage::GetPixel(int x, int y)
@@ -402,15 +413,15 @@ void GuiImage::Draw()
 
     float currAngleDyn = this->GetAngleDyn();
 
-    if(currAngleDyn)
-    imageangle = currAngleDyn;
+    if(currAngleDyn && parentangle)
+        imageangle = currAngleDyn;
 
 
 
 	if(tile > 0)
 	{
 		for(int i=0; i<tile; i++)
-			Menu_DrawImg(currLeft+width*i, this->GetTop(), 0, width, height, image, imageangle, widescreen ? currScale*0.80 : currScale, currScale, this->GetAlpha(), xx1,yy1,xx2,yy2,xx3,yy3,xx4,yy4);
+			Menu_DrawImg(currLeft+width*i, this->GetTop(), zoffset, width, height, image, imageangle, widescreen ? currScale*0.80 : currScale, currScale, this->GetAlpha(), xx1,yy1,xx2,yy2,xx3,yy3,xx4,yy4);
 		}
 	else
 	{
@@ -418,7 +429,7 @@ void GuiImage::Draw()
 		if(scale != 1)
 			currLeft = currLeft - width/2 + (width*scale)/2;
 
-		Menu_DrawImg(currLeft, this->GetTop(), 0, width, height, image, imageangle, widescreen ? currScale*0.80 : currScale, currScale, this->GetAlpha(), xx1,yy1,xx2,yy2,xx3,yy3,xx4,yy4);
+		Menu_DrawImg(currLeft, this->GetTop(), zoffset, width, height, image, imageangle, widescreen ? currScale*0.80 : currScale, currScale, this->GetAlpha(), xx1,yy1,xx2,yy2,xx3,yy3,xx4,yy4);
 		}
 
 	if(stripe > 0)

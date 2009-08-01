@@ -35,6 +35,10 @@ class GuiGameCarousel : public GuiElement
 
 		GuiButton ** game;
 
+		GuiTooltip * ttgame;
+
+		GuiText * gamename;
+
 		GuiButton * btnRight;
 		GuiButton * btnLeft;
 
