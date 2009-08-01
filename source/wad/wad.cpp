@@ -338,11 +338,12 @@ s32 Wad_Install(FILE *fp)
 			ret = cfd;
 			goto err;
 		}
-
+		snprintf(imgPath, sizeof(imgPath), "%s%d...",tr(">> Installing content #"),content->cid);
+		msg4Txt.SetText(imgPath);
 		// Install content data
 		while (idx < len) {
 
-            VIDEO_WaitVSync ();
+            //VIDEO_WaitVSync ();
 
 			u32 size;
 
@@ -364,9 +365,10 @@ s32 Wad_Install(FILE *fp)
 			// Increase variables
 			idx    += size;
 			offset += size;
-		snprintf(imgPath, sizeof(imgPath), "%s%d (%d)...",tr(">> Installing content #"),content->cid,idx);
+		
+		//snprintf(imgPath, sizeof(imgPath), "%s%d (%d)...",tr(">> Installing content #"),content->cid,idx);
 
-		msg4Txt.SetText(imgPath);
+		//msg4Txt.SetText(imgPath);
 
 		prTxt.SetTextf("%i%%", 100*(cnt*len+idx)/(tmd_data->num_contents*len));
       if ((Settings.wsprompt == yes) && (CFG.widescreen)) {

@@ -4,6 +4,10 @@
  *
  * TitleBrowser.cpp   *giantpune*
  ***************************************************************************/
+
+#include <dirent.h>
+
+
 #include "language/gettext.h"
 #include "libwiigui/gui.h"
 #include "libwiigui/gui_customoptionbrowser.h"
@@ -12,14 +16,13 @@
 #include "network/networkops.h"
 #include "network/http.h"
 #include "filelist.h"
+#include "listfiles.h"
 #include "settings/cfg.h"
 #include "sys.h"
 #include "menu.h"
 #include "audio.h"
 #include "wad/wad.h"
-
 #include "xml/xml.h"
-
 #include "../wad/title.h"
 
 /*** Extern functions ***/
@@ -387,8 +390,17 @@ int TitleBrowser(u32 type) {
                 char temp[50];
                 char filepath[100];
 				u32 read = 0;
-
-                snprintf(filepath, sizeof(filepath), "%s/wad/tmp.tmp", bootDevice);
+				
+				//make sure there is a folder for this to be saved in
+				struct stat st;
+                snprintf(filepath, sizeof(filepath), "%s/wad/", bootDevice);
+				if (stat(filepath, &st) != 0) {
+						if (subfoldercreate(filepath) != 1) {
+							WindowPrompt(tr("Error !"),tr("Can't create directory"),tr("OK"));
+						}
+					}
+				snprintf(filepath, sizeof(filepath), "%s/wad/tmp.tmp", bootDevice);
+				
                 FILE *file = fopen(filepath, "wb");
 
                 if (infilesize < MBSIZE)
@@ -464,7 +476,26 @@ int TitleBrowser(u32 type) {
                             if (lSize==infilesize) {
                                 int pick = WindowPrompt(tr(" Wad Saved as:"), tmptxt, tr("Install"),tr("Uninstall"),tr("Cancel"));
                                 //install or uninstall it
-                                if (pick==1)Wad_Install(file);
+                                if (pick==1)
+									{	
+									
+										HaltGui();
+										w.Remove(&titleTxt);
+										w.Remove(&cancelBtn);
+										w.Remove(&wifiBtn);
+										w.Remove(&optionBrowser3);
+										ResumeGui();										
+										
+										Wad_Install(file);
+										
+										HaltGui();
+										w.Append(&titleTxt);
+										w.Append(&cancelBtn);
+										w.Append(&wifiBtn);
+										w.Append(&optionBrowser3);
+										ResumeGui();
+
+									}
                                 if (pick==2)Wad_Uninstall(file);
                             }
                             //close that beast, we're done with it
