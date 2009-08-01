@@ -12,13 +12,16 @@ Load game information from XML - Lustar
 //#include "xml.h"
 
 
-
 /* config */
 static bool xmldebug = false;
 static char xmlcfg_filename[100] = "wiitdb.zip";
 static int xmlmaxsize = 1572864;
 
+
 extern struct SSettings Settings; // for loader GX
+
+extern void title_set(char *id, char *title);
+extern char* trimcopy(char *dest, char *src, int size);
 
 struct gameXMLinfo gameinfo;
 struct gameXMLinfo gameinfo_reset;
@@ -75,13 +78,16 @@ bool OpenXMLDatabase(char* xmlfilepath, char* argdblang, bool argJPtoEN, bool op
             snprintf(pathname, sizeof(pathname), "%swiitdb.zip", pathname);
             if (openfile) opensuccess = OpenXMLFile(pathname);
         }
-        if (!opensuccess) {
+        if (!opensuccess && openfile) {
             CloseXMLDatabase();
             return false;
         }
         if (loadtitles) LoadTitlesFromXML(argdblang, argJPtoEN);
         if (!keepopen) CloseXMLDatabase();
-    }
+    } else {
+	    if (loadtitles) LoadTitlesFromXML(argdblang, argJPtoEN);
+        if (!keepopen) CloseXMLDatabase();
+	}
     return true;
 }
 
@@ -200,6 +206,9 @@ char *GetLangSettingFromGame(char *gameid) {
 
 /* convert language text into ISO 639 two-letter language code */
 char *ConvertLangTextToCode(char *languagetxt) {
+	// do not convert if languagetext seems to be a two-letter language code
+	if (strlen(languagetxt) == 2)
+		return languagetxt;
     int i;
     for (i=0;i<=10;i++) {
         if (!strcasecmp(languagetxt,langlist[i])) // case insensitive comparison
@@ -566,15 +575,16 @@ bool LoadGameInfoFromXML(char* gameid, char* langtxt)
     if (!strcmp(gameinfo.region,"")) {
         if (gameid[3] == 'E') strlcpy(gameinfo.region,"NTSC-U",sizeof(gameinfo.region));
         if (gameid[3] == 'J') strlcpy(gameinfo.region,"NTSC-J",sizeof(gameinfo.region));
+        if (gameid[3] == 'W') strlcpy(gameinfo.region,"NTSC-J",sizeof(gameinfo.region));
         if (gameid[3] == 'K') strlcpy(gameinfo.region,"NTSC-K",sizeof(gameinfo.region));
         if (gameid[3] == 'P') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
-        if (gameid[3] == 'X') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
-        if (gameid[3] == 'Y') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
         if (gameid[3] == 'D') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
         if (gameid[3] == 'F') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
-        if (gameid[3] == 'S') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
         if (gameid[3] == 'I') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
+        if (gameid[3] == 'S') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
         if (gameid[3] == 'H') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
+		if (gameid[3] == 'X') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
+        if (gameid[3] == 'Y') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
     }
 
     // free memory

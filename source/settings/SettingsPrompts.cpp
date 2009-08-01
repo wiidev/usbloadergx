@@ -576,7 +576,6 @@ int MenuLanguageSelect() {
                         WindowPrompt(tr("File not found."),tr("Loading standard language."),tr("OK"));
                     }
                     gettextCleanUp();
-                    //lang_default();
                     CFG_Load();
                     returnhere = 2;
                     break;

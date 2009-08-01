@@ -8,6 +8,7 @@
 #include <mxml.h>
 
 #include "language/gettext.h"
+#include "listfiles.h"
 #include "xml/xml.h" /* XML - Lustar*/
 #include "cfg.h"
 
@@ -1644,9 +1645,22 @@ void CFG_Load(void) {
 
     snprintf(pathname, sizeof(pathname), "%sGXtheme.cfg", CFG.theme_path);
     cfg_parsefile(pathname, &theme_set); //finally set theme information
-
-    snprintf(pathname, sizeof(pathname), Settings.language_path);
-    gettextLoadLanguage(pathname);
+		
+	// set GUI language, use Wii's language setting if language is set to default
+	int wiilang;
+	bool langisdefault = false;
+	wiilang = CONF_GetLanguage();
+	if (!strcmp("notset", Settings.language_path)) {
+		snprintf(Settings.language_path, sizeof(Settings.language_path), "%s%s.lang", Settings.languagefiles_path, map_get_name(map_language, wiilang + 1)); // + 1 because because CONF_LANG starts at 0
+		if (!checkfile(Settings.language_path)) {
+			sprintf(Settings.language_path, "notset");
+		}
+	    gettextLoadLanguage(Settings.language_path);
+		langisdefault = true;
+	} 
+	snprintf(pathname, sizeof(pathname), Settings.language_path);
+	gettextLoadLanguage(pathname);
+	
 //	cfg_parsefile(pathname, &language_set);
 
     snprintf(pathname, sizeof(pathname), "%s/config/GXGameSettings.cfg", bootDevice);
@@ -1658,16 +1672,39 @@ void CFG_Load(void) {
 
     Global_Default(); //global default depends on theme information
     CFG_LoadGlobal();
+	
+	// use GUI language for the database (Settings.db_language is used for game info/titles and covers)
+	char * languagefile;
+    languagefile = strrchr(Settings.language_path, '/')+1;
+	int mainlangid = -1;
+	int i;
+    for (i=0; map_language[i].name != NULL; i++) {
+        if (strstr(languagefile, map_language[i].name) != NULL) {
+			mainlangid = i - 1; // - 1 because CONF_LANG starts at 0
+			break;
+		}
+    }
+	GetLanguageToLangCode(&mainlangid, Settings.db_language);
+	
+	// set language code for languages that are not available on the Wii
+	if (!strcmp(Settings.db_language,"")) {
+		if (strstr(languagefile, "portuguese") != NULL) 
+			strcpy(Settings.db_language,"PO");
+	}
+		
+	// open database if needed, load titles if needed
+	OpenXMLDatabase(Settings.titlestxt_path,Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true);
 
-    //moved this to the HDD wait screen to avoid the garbled green screen while it is loading *maybe*
-    //OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true);
-    // loaded after database to override database titles with custom titles
-
+    // titles.txt loaded after database to override database titles with custom titles
     //took out this titles.txt shit because it is useless now.  teh xml has all the titles in it
     //snprintf(pathname, sizeof(pathname), "%stitles.txt", Settings.titlestxt_path);
     //cfg_parsefile(pathname, &title_set);
 
 //	cfg_parsearg(argc, argv);
+
+	// if GUI language is set to default Settings.language_path needs to remain "notset" (if the detected setting was kept detection wouldn't work next time)
+	if (langisdefault)
+		sprintf(Settings.language_path, "notset");
 }
 
 void CFG_LoadGlobal(void) {
@@ -1680,5 +1717,46 @@ void CFG_Cleanup(void) {
     if (cfg_title) {
         free(cfg_title);
         cfg_title = NULL;
+    }
+}
+
+
+/* map language id (or Wii language settting if langid is set to -1) to language code. CONF_LANG_JAPANESE = 0, not 1 */
+void GetLanguageToLangCode(int *langid, char *langcode) {
+
+	if (langid < 0)
+		*langid = CONF_GetLanguage();
+	
+    switch (*langid) {
+    case CONF_LANG_JAPANESE:
+        sprintf(langcode, "JA");
+        break;
+    case CONF_LANG_ENGLISH:
+        sprintf(langcode, "EN");
+        break;
+    case CONF_LANG_GERMAN:
+        sprintf(langcode, "DE");
+        break;
+    case CONF_LANG_FRENCH:
+        sprintf(langcode, "FR");
+        break;
+    case CONF_LANG_SPANISH:
+        sprintf(langcode, "ES");
+        break;
+    case CONF_LANG_ITALIAN:
+        sprintf(langcode, "IT");
+        break;
+    case CONF_LANG_DUTCH:
+        sprintf(langcode, "NL");
+        break;
+    case CONF_LANG_SIMP_CHINESE:
+        sprintf(langcode, "EN");   // default to EN for chinese
+        break;
+    case CONF_LANG_TRAD_CHINESE:
+        sprintf(langcode, "EN");   // default to EN for chinese
+        break;
+    case CONF_LANG_KOREAN:
+        sprintf(langcode, "KO");
+        break;
     }
 }

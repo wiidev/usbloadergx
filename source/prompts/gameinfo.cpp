@@ -59,15 +59,19 @@ int showGameInfo(char *ID) {
         int wifiY=0;
         int intputX=200, inputY=-30, txtXOffset=90;
         u8 nunchuk=0,
-                   classiccontroller=0,
-                                     balanceboard=0,
-                                                  dancepad=0,
-                                                           guitar=0,
-                                                                  gamecube=0,
-                                                                           wheel=0,
-                                                                                 motionplus=0,
-                                                                                            drums=0,
-                                                                                                  microphone=0;
+			classiccontroller=0,
+            balanceboard=0,
+            dancepad=0,
+            guitar=0,
+            gamecube=0,
+            wheel=0,
+            motionplus=0,
+            drums=0,
+			microphone=0,
+			zapper=0,
+			nintendods=0,
+			wiispeak=0,
+			vitalitysensor=0;
         int newline=1;
         u8 page=1;
 
@@ -87,6 +91,10 @@ int showGameInfo(char *ID) {
         GuiImage * wheelImg = NULL;
         GuiImage * balanceboardImg = NULL;
         GuiImage * microphoneImg = NULL;
+        GuiImage * zapperImg = NULL;
+        GuiImage * nintendodsImg = NULL;
+        GuiImage * wiispeakImg = NULL;
+        GuiImage * vitalitysensorImg = NULL;
         GuiImage * gcImg = NULL;
         GuiImage * dialogBoxImg1 = NULL;
         GuiImage * dialogBoxImg2 = NULL;
@@ -108,6 +116,10 @@ int showGameInfo(char *ID) {
         GuiImageData * balanceboardImgData = NULL;
         GuiImageData * dancepadImgData = NULL;
         GuiImageData * microphoneImgData = NULL;
+        GuiImageData * zapperImgData = NULL;
+        GuiImageData * nintendodsImgData = NULL;
+        GuiImageData * wiispeakImgData = NULL;
+        GuiImageData * vitalitysensorImgData = NULL;
         GuiImageData * gamecubeImgData = NULL;
         GuiImageData * ratingImgData = NULL;
         GuiImageData * cover = NULL;
@@ -213,8 +225,16 @@ int showGameInfo(char *ID) {
                 wheel=1;
             if (strcmp(gameinfo.accessoriesReq[i],"balanceboard")==0)
                 balanceboard=1;
-            if (strcmp(gameinfo.accessoriesReq[i],"microphone")==0)
+			if (strcmp(gameinfo.accessoriesReq[i],"microphone")==0)
                 microphone=1;
+			if (strcmp(gameinfo.accessoriesReq[i],"zapper")==0)
+                zapper=1;
+			if (strcmp(gameinfo.accessoriesReq[i],"nintendods")==0)
+                nintendods=1;
+			if (strcmp(gameinfo.accessoriesReq[i],"wiispeak")==0)
+                wiispeak=1;
+			if (strcmp(gameinfo.accessoriesReq[i],"vitalitysensor")==0)
+                vitalitysensor=1;
             if (strcmp(gameinfo.accessoriesReq[i],"gamecube")==0)
                 gamecube=1;
         }
@@ -244,6 +264,18 @@ int showGameInfo(char *ID) {
         if (microphone) microphoneImgData = new GuiImageData(microphoneR_png);
         else microphoneImgData = new GuiImageData(microphone_png);
 
+        if (zapper) zapperImgData = new GuiImageData(zapperR_png);
+        else zapperImgData = new GuiImageData(zapper_png);
+		
+		if (wiispeak) wiispeakImgData = new GuiImageData(wiispeakR_png);
+        else wiispeakImgData = new GuiImageData(wiispeak_png);
+		
+		if (nintendods) nintendodsImgData = new GuiImageData(nintendodsR_png);
+        else nintendodsImgData = new GuiImageData(nintendods_png);
+		
+		//if (vitalitysensor) vitalitysensorImgData = new GuiImageData(vitalitysensorR_png);
+        //else vitalitysensorImgData = new GuiImageData(vitalitysensor_png);
+
         if (balanceboard) balanceboardImgData = new GuiImageData(balanceboardR_png);
         else balanceboardImgData = new GuiImageData(balanceboard_png);
 
@@ -270,6 +302,14 @@ int showGameInfo(char *ID) {
                 balanceboard=1;
             if (strcmp(gameinfo.accessories[i],"microphone")==0)
                 microphone=1;
+			if (strcmp(gameinfo.accessories[i],"zapper")==0)
+                zapper=1;
+			if (strcmp(gameinfo.accessories[i],"nintendods")==0)
+                nintendods=1;
+			if (strcmp(gameinfo.accessories[i],"wiispeak")==0)
+                wiispeak=1;
+			if (strcmp(gameinfo.accessories[i],"vitalitysensor")==0)
+                vitalitysensor=1;
             if (strcmp(gameinfo.accessories[i],"gamecube")==0)
                 gamecube=1;
         }
@@ -393,6 +433,40 @@ int showGameInfo(char *ID) {
             gameinfoWindow.Append(microphoneImg);
             intputX += (CFG.widescreen ? microphoneImg->GetWidth() * .8 : microphoneImg->GetWidth())+5;
         }
+		if (zapper==1) {
+            zapperImg = new GuiImage( zapperImgData);
+            zapperImg->SetWidescreen(CFG.widescreen);
+            zapperImg->SetPosition(intputX , inputY);
+            zapperImg->SetAlignment(0,4);
+            gameinfoWindow.Append(zapperImg);
+            intputX += (CFG.widescreen ? zapperImg->GetWidth() * .8 : zapperImg->GetWidth())+5;
+        }
+		if (wiispeak==1) {
+            wiispeakImg = new GuiImage(wiispeakImgData);
+            wiispeakImg->SetWidescreen(CFG.widescreen);
+            wiispeakImg->SetPosition(intputX , inputY);
+            wiispeakImg->SetAlignment(0,4);
+            gameinfoWindow.Append(wiispeakImg);
+            intputX += (CFG.widescreen ? wiispeakImg->GetWidth() * .8 : wiispeakImg->GetWidth())+5;
+        }
+		if (nintendods==1) {
+            nintendodsImg = new GuiImage(nintendodsImgData);
+            nintendodsImg->SetWidescreen(CFG.widescreen);
+            nintendodsImg->SetPosition(intputX , inputY);
+            nintendodsImg->SetAlignment(0,4);
+            gameinfoWindow.Append(nintendodsImg);
+            intputX += (CFG.widescreen ? nintendodsImg->GetWidth() * .8 : nintendodsImg->GetWidth())+5;
+        }
+		/*
+		if (vitalitysensor==1) {
+            vitalitysensorImg = new GuiImage(vitalitysensorImgData);
+            vitalitysensorImg->SetWidescreen(CFG.widescreen);
+            vitalitysensorImg->SetPosition(intputX , inputY);
+            vitalitysensorImg->SetAlignment(0,4);
+            gameinfoWindow.Append(vitalitysensorImg);
+            intputX += (CFG.widescreen ? vitalitysensorImg->GetWidth() * .8 : vitalitysensorImg->GetWidth())+5;
+        }
+		*/
         if (dancepad==1) {
             dancepadImg = new GuiImage(dancepadImgData);
             dancepadImg->SetWidescreen(CFG.widescreen);
@@ -420,14 +494,23 @@ int showGameInfo(char *ID) {
                 wifiplayersImgData= new GuiImageData(wifi4_png);
             }
             if (atoi(gameinfo.wifiplayers)>4) {
+                //wifiplayersImgData= new GuiImageData(wifi6_png);
                 wifiplayersImgData= new GuiImageData(wifi8_png);
             }
-            /*if (atoi(gameinfo.wifiplayers)>8){       uncomment this when we actually have these images and it is needed
-            	wifiplayersImgData= new GuiImageData(wifi12_png);}
-            if (atoi(gameinfo.wifiplayers)>12){
-            	wifiplayersImgData= new GuiImageData(wifi16_png);}
-            if (atoi(gameinfo.wifiplayers)>16){
-            	wifiplayersImgData= new GuiImageData(wifi32_png);}*/
+			/*
+			if (atoi(gameinfo.wifiplayers)>6) {
+                wifiplayersImgData= new GuiImageData(wifi8_png);
+            }
+			*/
+            if (atoi(gameinfo.wifiplayers)>8) {
+            	wifiplayersImgData= new GuiImageData(wifi12_png);
+			}
+            if (atoi(gameinfo.wifiplayers)>12) {
+            	wifiplayersImgData= new GuiImageData(wifi16_png);
+			}
+            if (atoi(gameinfo.wifiplayers)>16) {
+            	wifiplayersImgData= new GuiImageData(wifi32_png);
+			}
             wifiplayersImg = new GuiImage(wifiplayersImgData);
             wifiplayersImg->SetWidescreen(CFG.widescreen);
             wifiplayersImg->SetPosition(intputX , inputY);
@@ -821,6 +904,10 @@ int showGameInfo(char *ID) {
             delete wheelImg;
             delete balanceboardImg;
             delete microphoneImg;
+            delete zapperImg;
+            delete wiispeakImg;
+            delete nintendodsImg;
+            delete vitalitysensorImg;
             delete gcImg;
             delete dialogBoxImg1;
             delete dialogBoxImg2;
@@ -842,6 +929,10 @@ int showGameInfo(char *ID) {
             delete balanceboardImgData;
             delete dancepadImgData;
             delete microphoneImgData;
+            delete zapperImgData;
+            delete wiispeakImgData;
+            delete nintendodsImgData;
+            delete vitalitysensorImgData;
             delete gamecubeImgData;
             delete ratingImgData;
             delete cover;
@@ -899,11 +990,8 @@ bool save_XML_URL() { // save xml url as as txt file for people without wifi
 
     char XMLurl[2040];
     char filename[10];
-    // get Wii's language setting
-    char sysLanguage[3];
-    GetLanguageToLangCode(sysLanguage);
 
-    snprintf(XMLurl,sizeof(XMLurl),"http://wiitdb.com/wiitdb.zip?LANG=%s?ID=",sysLanguage);
+    snprintf(XMLurl,sizeof(XMLurl),"http://wiitdb.com/wiitdb.zip?LANG=%s?ID=", Settings.db_language);
     unsigned int i;
     for (i = 0; i < gameCnt ; i++) {
         struct discHdr* header = &gameList[i];

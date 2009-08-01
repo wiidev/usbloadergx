@@ -64,10 +64,6 @@ extern "C" {
     char *MemInfo();
     void GetTextFromNode(mxml_node_t *currentnode, mxml_node_t *topnode, char *nodename,
                          char *attributename, char *value, int descend, char *dest, int destsize);
-
-    void title_set(char *id, char *title);
-    char* trimcopy(char *dest, char *src, int size);
-
 #ifdef __cplusplus
 }
 #endif

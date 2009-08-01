@@ -1991,10 +1991,6 @@ ProgressDownloadWindow(int choice2) {
         }
     }
 
-    // get Wii's language setting
-    char sysLanguage[3];
-    GetLanguageToLangCode(sysLanguage);
-
     //int server = 1;
     while (i < cntMissFiles) {
         tries=0;
@@ -2025,6 +2021,7 @@ ProgressDownloadWindow(int choice2) {
                 //Creates URL depending from which Country the game is
                 switch (missingFiles[i][3]) {
                 case 'J':
+                case 'W':
                     sprintf(URLFile,"%sJA/%s",server3d,missingFiles[i]);
                     break;
                 case 'K':
@@ -2040,7 +2037,7 @@ ProgressDownloadWindow(int choice2) {
                 case 'H':
                 case 'X':
                 case 'Y':
-                    sprintf(URLFile,"%s%s/%s",server3d,sysLanguage,missingFiles[i]);
+                    sprintf(URLFile,"%s%s/%s",server3d,Settings.db_language,missingFiles[i]);
                     break;
                 case 'E':
                     sprintf(URLFile,"%sUS/%s",server3d,missingFiles[i]);
@@ -2069,6 +2066,7 @@ ProgressDownloadWindow(int choice2) {
                 //Creates URL depending from which Country the game is
                 switch (missingFiles[i][3]) {
                 case 'J':
+                case 'W':
                     sprintf(URLFile,"%sJA/%s",serverDisc,missingFiles[i]);
                     break;
                 case 'K':
@@ -2084,7 +2082,7 @@ ProgressDownloadWindow(int choice2) {
                 case 'H':
                 case 'X':
                 case 'Y':
-                    sprintf(URLFile,"%s%s/%s",serverDisc,sysLanguage,missingFiles[i]);
+                    sprintf(URLFile,"%s%s/%s",serverDisc,Settings.db_language,missingFiles[i]);
                     break;
                 case 'E':
                     sprintf(URLFile,"%sUS/%s",serverDisc,missingFiles[i]);
@@ -2111,6 +2109,7 @@ ProgressDownloadWindow(int choice2) {
                 //Creates URL depending from which Country the game is
                 switch (missingFiles[i][3]) {
                 case 'J':
+                case 'W':
                     sprintf(URLFile,"%sJA/%s",server2d,missingFiles[i]);
                     break;
                 case 'K':
@@ -2126,7 +2125,7 @@ ProgressDownloadWindow(int choice2) {
                 case 'H':
                 case 'X':
                 case 'Y':
-                    sprintf(URLFile,"%s%s/%s",server2d,sysLanguage,missingFiles[i]);
+                    sprintf(URLFile,"%s%s/%s",server2d,Settings.db_language,missingFiles[i]);
                     break;
                 case 'E':
                     sprintf(URLFile,"%sUS/%s",server2d,missingFiles[i]);
@@ -2395,15 +2394,11 @@ int ProgressUpdateWindow() {
         }
     }
 
-    // get Wii's language setting
-    char sysLanguage[3];
-    GetLanguageToLangCode(sysLanguage);
-
     //make the URL to get XML based on our games
     char XMLurl[2040];
     char filename[10];
     __Menu_GetEntries(1);
-    snprintf(XMLurl,sizeof(XMLurl),"http://wiitdb.com/wiitdb.zip?LANG=%s?ID=",sysLanguage);
+    snprintf(XMLurl,sizeof(XMLurl),"http://wiitdb.com/wiitdb.zip?LANG=%s?ID=",Settings.db_language);
     unsigned int i;
     for (i = 0; i < gameCnt ; i++) {
         struct discHdr* header = &gameList[i];
@@ -2664,15 +2659,11 @@ int ProgressUpdateWindow() {
         }
     }
 
-    // get Wii's language setting
-    char sysLanguage[3];
-    GetLanguageToLangCode(sysLanguage);
-
     //make the URL to get XML based on our games
     char XMLurl[2040];
     char filename[10];
     __Menu_GetEntries(1);
-    snprintf(XMLurl,sizeof(XMLurl),"http://wiitdb.com/wiitdb.zip?LANG=%s?ID=",sysLanguage);
+    snprintf(XMLurl,sizeof(XMLurl),"http://wiitdb.com/wiitdb.zip?LANG=%s?ID=",Settings.db_language);
     unsigned int i;
     for (i = 0; i < gameCnt ; i++) {
         struct discHdr* header = &gameList[i];
@@ -3002,47 +2993,6 @@ char * GetMissingFiles() {
 
 
 
-/* get the language setting from the Wii settings and return a language code */
-void GetLanguageToLangCode(char *langcode) {
-
-    switch (CONF_GetLanguage()) {
-    case CONF_LANG_JAPANESE:
-        sprintf(langcode, "JA");
-        break;
-    case CONF_LANG_ENGLISH:
-        sprintf(langcode, "EN");
-        break;
-    case CONF_LANG_GERMAN:
-        sprintf(langcode, "DE");
-        break;
-    case CONF_LANG_FRENCH:
-        sprintf(langcode, "FR");
-        break;
-    case CONF_LANG_SPANISH:
-        sprintf(langcode, "ES");
-        break;
-    case CONF_LANG_ITALIAN:
-        sprintf(langcode, "IT");
-        break;
-    case CONF_LANG_DUTCH:
-        sprintf(langcode, "NL");
-        break;
-        /*
-        case CONF_LANG_PORTUGUESE:
-        		sprintf(langcode, "PO");
-        		break;
-        */
-    case CONF_LANG_SIMP_CHINESE:
-        sprintf(langcode, "EN");   // default to EN for chinese
-        break;
-    case CONF_LANG_TRAD_CHINESE:
-        sprintf(langcode, "EN");   // default to EN for chinese
-        break;
-    case CONF_LANG_KOREAN:
-        sprintf(langcode, "KO");
-        break;
-    }
-}
 
 /****************************************************************************
  * HBCWindowPrompt

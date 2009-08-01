@@ -353,6 +353,9 @@ extern const u32	Wiimote1_png_size;
 extern const u8		Wiimote2_png[];
 extern const u32	Wiimote2_png_size;
 
+extern const u8		Wiimote4_png[];
+extern const u32	Wiimote4_png_size;
+
 extern const u8		wifi1_png[];
 extern const u32	wifi1_png_size;
 
@@ -365,11 +368,20 @@ extern const u32	wifi3_png_size;
 extern const u8		wifi4_png[];
 extern const u32	wifi4_png_size;
 
+//extern const u8	wifi6_png[];
+//extern const u32	wifi6_png_size;
+
 extern const u8		wifi8_png[];
 extern const u32	wifi8_png_size;
 
-extern const u8		Wiimote4_png[];
-extern const u32	Wiimote4_png_size;
+extern const u8		wifi12_png[];
+extern const u32	wifi12_png_size;
+
+extern const u8		wifi16_png[];
+extern const u32	wifi16_png_size;
+
+extern const u8		wifi32_png[];
+extern const u32	wifi32_png_size;
 
 extern const u8		norating_png[];
 extern const u32	norating_png_size;
@@ -424,6 +436,26 @@ extern const u32	wheel_png_size;
 extern const u8		wheelR_png[];
 extern const u32	wheelR_png_size;
 
+extern const u8		zapper_png[];
+extern const u32	zapper_png_size;
+extern const u8		zapperR_png[];
+extern const u32	zapperR_png_size;
+
+extern const u8		wiispeak_png[];
+extern const u32	wiispeak_png_size;
+extern const u8		wiispeakR_png[];
+extern const u32	wiispeakR_png_size;
+
+extern const u8		nintendods_png[];
+extern const u32	nintendods_png_size;
+extern const u8		nintendodsR_png[];
+extern const u32	nintendodsR_png_size;
+/*
+extern const u8		vitalitysensor_png[];
+extern const u32	vitalitysensor_png_size;
+extern const u8		vitalitysensor_png[];
+extern const u32	vitalitysensorR_png_size;
+*/
 extern const u8		esrb_ec_png[];
 extern const u32	esrb_ec_png_size;
 

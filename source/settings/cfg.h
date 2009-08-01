@@ -191,7 +191,6 @@ extern "C" {
 
     void CFG_Default(int widescreen); // -1 = non forced mode
     void CFG_Load(void);
-    void lang_defualt();
     struct Game_CFG* CFG_get_game_opt(u8 *id);
     struct Game_NUM* CFG_get_game_num(u8 *id);
     bool CFG_save_game_opt(u8 *id);
@@ -369,9 +368,12 @@ extern "C" {
     void CFG_LoadGlobal(void);
     bool cfg_save_global(void);
 
+	void GetLanguageToLangCode(int *langid, char *langcode);
     bool OpenXMLDatabase(char* xmlfilepath, char* argdblang, bool argJPtoEN, bool openfile, bool loadtitles, bool freemem);
 
     char *get_title(struct discHdr *header);
+	char *cfg_get_title(u8 *id) ;
+	void title_set(char *id, char *title);
     u8 get_block(struct discHdr *header);
 
     void CFG_Cleanup(void);

@@ -1069,6 +1069,7 @@ int MenuDiscList() {
                         break;
 
                     case 'J':
+                    case 'W':
                         sprintf(gameregion,"NTSC J");
                         break;
 
@@ -1076,12 +1077,13 @@ int MenuDiscList() {
                         sprintf(gameregion,"NTSC K");
                         break;
 
-
                     case 'P':
                     case 'D':
                     case 'F':
-                    case 'X':
+                    case 'I':
                     case 'S':
+                    case 'H':
+                    case 'X':
                     case 'Y':
                         sprintf(gameregion,"  PAL ");
                         break;
@@ -1275,7 +1277,9 @@ int MenuDiscList() {
                     //re-evaluate header now in case they changed games while on the game prompt
                     header = &gameList[gameSelected];
                     int settret = GameSettings(header);
-                    menu = MENU_DISCLIST; // refresh titles (needed if the language setting has changed)
+					/* unneeded for now, kept in case database gets a separate language setting
+                    //menu = MENU_DISCLIST; // refresh titles (needed if the language setting has changed)
+					*/
                     HaltGui();
                     if (Settings.gameDisplay==list)  mainWindow->Append(gameBrowser);
                     else if (Settings.gameDisplay==grid) mainWindow->Append(gameGrid);
@@ -1648,8 +1652,6 @@ static int MenuCheck() {
     partitionEntry partitions[MAX_PARTITIONS];
 
     VIDEO_WaitVSync ();
-    OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true);
-
 
     wbfsinit = WBFS_Init(WBFS_DEVICE_USB);
     if (wbfsinit < 0) {

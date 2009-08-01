@@ -16,12 +16,14 @@
 #include "filelist.h"
 #include "listfiles.h"
 #include "sys.h"
+#include "cfg.h"
 #define MAXOPTIONS 12
 
 /*** Extern functions ***/
 extern void ResumeGui();
 extern void HaltGui();
-extern bool OpenXMLDatabase(bool openfile, bool loadtitles, bool freemem);
+extern bool OpenXMLDatabase(char* xmlfilepath, char* argdblang, bool argJPtoEN, bool openfile, bool loadtitles, bool keepopen);
+extern void title_set(char *id, char *title);
 
 /*** Extern variables ***/
 extern GuiWindow * mainWindow;
@@ -31,6 +33,9 @@ extern GuiImageData * pointer[4];
 extern GuiImageData * background;
 extern u8 shutdown;
 extern u8 reset;
+extern struct discHdr * gameList;
+extern u32 gameCnt;
+
 
 /****************************************************************************
  * MenuSettings
@@ -42,8 +47,10 @@ int MenuSettings() {
     bool exit = false;
 
     // backup game language setting
-    int opt_lang = 0;
-    opt_lang = Settings.language;
+    char opt_lang[100];
+    strcpy(opt_lang,Settings.language_path);
+	// backup title override setting
+	int opt_override = Settings.titlesOverride;
 
     enum {
         FADE,
@@ -1563,7 +1570,6 @@ int MenuSettings() {
                                 remove(GXGlobal_cfg);
                             }
                             gettextCleanUp();
-                            //lang_default();
                             CFG_Load();
                             menu = MENU_SETTINGS;
                             pageToDisplay = 0;
@@ -1686,11 +1692,11 @@ int MenuSettings() {
 
 
     // if language has changed, reload titles
-    int opt_langnew = 0;
-    opt_langnew = Settings.language;
-    if (Settings.titlesOverride==1 && opt_lang != opt_langnew) {
-        OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, true, false); // open file, reload titles, do not keep in memory
-        menu = MENU_DISCLIST;
+    char opt_langnew[100];
+    strcpy(opt_langnew,Settings.language_path);
+	int opt_overridenew = Settings.titlesOverride;
+    if (strcmp(opt_lang,opt_langnew) || (opt_override != opt_overridenew && Settings.titlesOverride==1)) {
+	    OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, false, Settings.titlesOverride==1?true:false, true); // open file, reload titles, keep in memory
     }
 
     HaltGui();
@@ -1856,7 +1862,7 @@ int GameSettings(struct discHdr * header) {
     optionBrowser2.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 
     GuiWindow w(screenwidth, screenheight);
-    int opt_lang = languageChoice; // backup language setting
+    //int opt_lang = languageChoice; // backup language setting
     struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
 
     int pageToDisplay = 1;
@@ -2200,13 +2206,15 @@ int GameSettings(struct discHdr * header) {
 
                         if (isInserted(bootDevice)) {
                             if (CFG_save_game_opt(header->id)) {
-                                // if language has changed, reload titles
+								/* commented because the database language now depends on the main language setting, this could be enabled again if there is a separate language setting for the database
+                                // if game language has changed when saving game settings, reload titles
                                 int opt_langnew = 0;
                                 game_cfg = CFG_get_game_opt(header->id);
                                 if (game_cfg) opt_langnew = game_cfg->language;
                                 if (Settings.titlesOverride==1 && opt_lang != opt_langnew)
                                     OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, true, false); // open file, reload titles, do not keep in memory
                                 // titles are refreshed in menu.cpp as soon as this function returns
+								*/
                                 WindowPrompt(tr("Successfully Saved"), 0, tr("OK"));
                             } else {
                                 WindowPrompt(tr("Save Failed"), 0, tr("OK"));
@@ -2404,12 +2412,14 @@ int GameSettings(struct discHdr * header) {
                     parentalcontrolChoice = 0;
                     sprintf(alternatedname, " ");
                     CFG_forget_game_opt(header->id);
+					/* commented because the database language now depends on the main language setting, this could be enabled again if there is a separate language setting for the database
                     // if default language is different than language from main settings, reload titles
                     int opt_langnew = 0;
                     opt_langnew = Settings.language;
                     if (Settings.titlesOverride==1 && opt_lang != opt_langnew)
                         OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, true, false); // open file, reload titles, do not keep in memory
                     // titles are refreshed in menu.cpp as soon as this function returns
+					*/
                 }
 
                 pageToDisplay = 1;
@@ -2435,7 +2445,16 @@ int GameSettings(struct discHdr * header) {
                 s32 thetimeofbg = bgMusic->GetPlayTime();
                 bgMusic->Stop();
                 choice = WindowExitPrompt(tr("Exit USB Loader GX?"),0, tr("Back to Loader"),tr("Wii Menu"),tr("Back"),0);
-                if (!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path)) {
+				/*
+				// if language has changed, reload titles
+				int opt_langnew = 0;
+				game_cfg = CFG_get_game_opt(header->id);
+				if (game_cfg) opt_langnew = game_cfg->language;
+				if (Settings.titlesOverride==1 && opt_lang != opt_langnew)
+					OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, false, Settings.titlesOverride==1?true:false, true); // open file, reload titles, keep in memory
+					// titles are refreshed in menu.cpp as soon as this function returns
+				*/
+ 				if (!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path)) {
                     bgMusic->Play();
                 } else {
                     bgMusic->PlayOggFile(Settings.ogg_path);
