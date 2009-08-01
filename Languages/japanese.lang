@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-31 20:03+0200\n"
+"POT-Creation-Date: 2009-08-02 00:25+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -454,6 +454,9 @@ msgstr "USB Loader GXを終了しますか?"
 msgid "Failed formating"
 msgstr "ﾌｫｰﾏｯﾄに失敗しました"
 
+msgid "Failed to open partition"
+msgstr ""
+
 msgid "Feb"
 msgstr "2月"
 
@@ -713,9 +716,6 @@ msgstr "ﾌｧｲﾙを検出できませんでした!"
 msgid "No new updates."
 msgstr "更新はありません"
 
-msgid "No partitions found"
-msgstr "ﾊﾟｰﾃｨｼｮﾝを検出できませんでした"
-
 msgid "Normal"
 msgstr "Normal(4:3)"
 
@@ -829,9 +829,6 @@ msgstr "WBFS上のｹﾞｰﾑ名変更"
 
 msgid "Reset Playcounter"
 msgstr "ﾌﾟﾚｲ回数のﾘｾｯﾄ"
-
-msgid "Restart"
-msgstr "再起動"
 
 msgid "Restarting..."
 msgstr "再起動中..."
@@ -1142,3 +1139,9 @@ msgstr "of"
 
 msgid "seconds left"
 msgstr "完了までの秒数"
+
+#~ msgid "No partitions found"
+#~ msgstr "ﾊﾟｰﾃｨｼｮﾝを検出できませんでした"
+
+#~ msgid "Restart"
+#~ msgstr "再起動"

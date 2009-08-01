@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-31 23:02+0200\n"
+"POT-Creation-Date: 2009-08-02 00:25+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -454,6 +454,9 @@ msgstr "Afslut USB Loader GX?"
 msgid "Failed formating"
 msgstr "Formateringen mislykkedes"
 
+msgid "Failed to open partition"
+msgstr ""
+
 msgid "Feb"
 msgstr "Feb"
 
@@ -713,9 +716,6 @@ msgstr "Ingen filer mangler!"
 msgid "No new updates."
 msgstr "Ingen nye opdateringer."
 
-msgid "No partitions found"
-msgstr "Ingen partitioner fundet"
-
 msgid "Normal"
 msgstr "Normal"
 
@@ -829,9 +829,6 @@ msgstr "Omdøb spil på WBFS"
 
 msgid "Reset Playcounter"
 msgstr "Nulstil spiltæller"
-
-msgid "Restart"
-msgstr "Genstart"
 
 msgid "Restarting..."
 msgstr "Genstarter..."
@@ -1142,6 +1139,12 @@ msgstr "af"
 
 msgid "seconds left"
 msgstr "sekunder tilbage"
+
+#~ msgid "No partitions found"
+#~ msgstr "Ingen partitioner fundet"
+
+#~ msgid "Restart"
+#~ msgstr "Genstart"
 
 #~ msgid "Saving"
 #~ msgstr "Gemmer"

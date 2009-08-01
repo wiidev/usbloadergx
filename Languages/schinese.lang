@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-31 20:03+0200\n"
+"POT-Creation-Date: 2009-08-02 00:25+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -454,6 +454,9 @@ msgstr "离开 USB Loader GX?"
 msgid "Failed formating"
 msgstr "格式化失败"
 
+msgid "Failed to open partition"
+msgstr ""
+
 msgid "Feb"
 msgstr ""
 
@@ -713,9 +716,6 @@ msgstr "没有缺少的文件!"
 msgid "No new updates."
 msgstr ""
 
-msgid "No partitions found"
-msgstr "找不到分区"
-
 msgid "Normal"
 msgstr "一般"
 
@@ -829,9 +829,6 @@ msgstr "改变WBFS(硬盘)上的游戏名称"
 
 msgid "Reset Playcounter"
 msgstr ""
-
-msgid "Restart"
-msgstr "重新启动"
 
 msgid "Restarting..."
 msgstr ""
@@ -1142,3 +1139,9 @@ msgstr "的"
 
 msgid "seconds left"
 msgstr "剩余秒数"
+
+#~ msgid "No partitions found"
+#~ msgstr "找不到分区"
+
+#~ msgid "Restart"
+#~ msgstr "重新启动"

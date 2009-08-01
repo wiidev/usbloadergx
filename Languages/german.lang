@@ -1,10 +1,10 @@
-# USB Loader GX language source file.
+﻿# USB Loader GX language source file.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-31 23:13+0200\n"
+"POT-Creation-Date: 2009-08-02 00:25+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -454,6 +454,9 @@ msgstr "USB Loader GX beenden?"
 msgid "Failed formating"
 msgstr "Formatieren fehlgeschlagen"
 
+msgid "Failed to open partition"
+msgstr ""
+
 msgid "Feb"
 msgstr "Feb"
 
@@ -713,9 +716,6 @@ msgstr "Alle Dateien vorhanden!"
 msgid "No new updates."
 msgstr "Keine Aktualisierung vorhanden."
 
-msgid "No partitions found"
-msgstr "Keine Partitionen gefunden"
-
 msgid "Normal"
 msgstr "Normal"
 
@@ -829,9 +829,6 @@ msgstr "Spiel umbenennen"
 
 msgid "Reset Playcounter"
 msgstr "Spielzähler zurücksetzen"
-
-msgid "Restart"
-msgstr "Neustart"
 
 msgid "Restarting..."
 msgstr "Starte Neu..."
@@ -949,7 +946,7 @@ msgid "Themepath change"
 msgstr "Theme Pfad ändern"
 
 msgid "Time left:"
-msgstr "Zeit verbleibend:"
+msgstr "Noch:"
 
 msgid "Title Launcher"
 msgstr ""
@@ -1142,6 +1139,12 @@ msgstr "von"
 
 msgid "seconds left"
 msgstr "Sekunden verbleiben"
+
+#~ msgid "No partitions found"
+#~ msgstr "Keine Partitionen gefunden"
+
+#~ msgid "Restart"
+#~ msgstr "Neustart"
 
 #~ msgid "Saving"
 #~ msgstr "Speichere"

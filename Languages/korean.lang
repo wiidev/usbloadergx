@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-31 20:03+0200\n"
+"POT-Creation-Date: 2009-08-02 00:25+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -454,6 +454,9 @@ msgstr "USB로더 GX를 종료할까요?"
 msgid "Failed formating"
 msgstr "포맷 실패"
 
+msgid "Failed to open partition"
+msgstr ""
+
 msgid "Feb"
 msgstr ""
 
@@ -713,9 +716,6 @@ msgstr "누락 파일 없음!"
 msgid "No new updates."
 msgstr ""
 
-msgid "No partitions found"
-msgstr "파티션이 없습니다."
-
 msgid "Normal"
 msgstr "일반"
 
@@ -829,9 +829,6 @@ msgstr "WBFS에서 게임 이름 변경"
 
 msgid "Reset Playcounter"
 msgstr ""
-
-msgid "Restart"
-msgstr "다시 시작"
 
 msgid "Restarting..."
 msgstr ""
@@ -1142,3 +1139,9 @@ msgstr "중"
 
 msgid "seconds left"
 msgstr "초 남았습니다"
+
+#~ msgid "No partitions found"
+#~ msgstr "파티션이 없습니다."
+
+#~ msgid "Restart"
+#~ msgstr "다시 시작"

@@ -16,6 +16,7 @@
 #include "libwiigui/gui_gamegrid.h"
 #include "libwiigui/gui_gamecarousel.h"
 #include "libwiigui/gui_gamebrowser.h"
+#include "libwiigui/gui_customoptionbrowser.h"
 #include "usbloader/usbstorage.h"
 #include "usbloader/wbfs.h"
 #include "usbloader/disc.h"
@@ -1482,14 +1483,19 @@ static int MenuInstall() {
  ***************************************************************************/
 
 static int MenuFormat() {
+
     USBDevice_deInit();
+    sleep(1);
+
+    USBStorage_Init();
+
     int menu = MENU_NONE;
     char imgPath[100];
 
-    OptionList options;
+    customOptionList options(5);
     partitionEntry partitions[MAX_PARTITIONS];
 
-    u32 cnt, sector_size, selected = 2000;
+    u32 cnt, sector_size;
     int choice, ret;
     char text[ISFS_MAXPATH];
 
@@ -1504,15 +1510,13 @@ static int MenuFormat() {
         f32 size = entry->size * (sector_size / GBSIZE);
 
         if (size) {
-            sprintf(options.name[cnt], "%s %d:",tr("Partition"), cnt+1);
-            sprintf (options.value[cnt],"%.2fGB", size);
+            options.SetName(cnt, "%s %d:",tr("Partition"), cnt+1);
+            options.SetValue(cnt,"%.2fGB", size);
         } else {
-            sprintf(options.name[cnt], "%s %d:",tr("Partition"), cnt+1);
-            sprintf (options.value[cnt],tr("Can't be formated"));
+            options.SetName(cnt, "%s %d:",tr("Partition"), cnt+1);
+            options.SetValue(cnt,tr("Can't be formated"));
         }
     }
-
-    options.length = cnt;
 
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
     GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
@@ -1542,13 +1546,12 @@ static int MenuFormat() {
     GuiImage exitBtnImgOver(&btnhomeOver);
     exitBtnImg.SetWidescreen(CFG.widescreen);
     exitBtnImgOver.SetWidescreen(CFG.widescreen);
-    GuiButton exitBtn(&exitBtnImg,&exitBtnImgOver, 0, 3, 0,-10, &trigA, &btnSoundOver, &btnClick,1);
+    GuiButton exitBtn(&exitBtnImg,&exitBtnImgOver, 0, 3, THEME.home_x, THEME.home_y, &trigA, &btnSoundOver, &btnClick,1);
     exitBtn.SetTrigger(&trigHome);
 
-    GuiOptionBrowser optionBrowser(THEME.selection_w, THEME.selection_h, &options, CFG.theme_path, bg_options_png, 1, 0);
-    optionBrowser.SetPosition(THEME.selection_x, THEME.selection_y);
-    optionBrowser.SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
-    optionBrowser.SetCol2Position(200);
+    GuiCustomOptionBrowser optionBrowser(396, 280, &options, CFG.theme_path, "bg_options_settings.png", bg_options_settings_png, 0, 10);
+    optionBrowser.SetPosition(0, 40);
+    optionBrowser.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 
     HaltGui();
     GuiWindow w(screenwidth, screenheight);
@@ -1561,48 +1564,53 @@ static int MenuFormat() {
     ResumeGui();
 
     while (menu == MENU_NONE) {
+
         VIDEO_WaitVSync ();
 
-        selected = optionBrowser.GetClickedOption();
+        ret = optionBrowser.GetClickedOption();
 
-        for (cnt = 0; cnt < MAX_PARTITIONS; cnt++) {
-            if ((cnt == selected)&&((Settings.godmode == 1)||
-                                    (!strcmp("", Settings.unlockCode)))) {
-                partitionEntry *entry = &partitions[selected];
+        if(ret >= 0) {
+            if(Settings.godmode == 1) {
+                partitionEntry *entry = &partitions[ret];
                 if (entry->size) {
-                    sprintf(text, "%s %d : %.2fGB",tr("Partition"), selected+1, entry->size * (sector_size / GBSIZE));
+                    sprintf(text, "%s %d : %.2fGB",tr("Partition"), ret+1, entry->size * (sector_size / GBSIZE));
                     choice = WindowPrompt( tr("Do you want to format:"), text,tr("Yes"),tr("No"));
                     if (choice == 1) {
                         ret = FormatingPartition(tr("Formatting, please wait..."), entry);
                         if (ret < 0) {
                             WindowPrompt(tr("Error !"),tr("Failed formating"),tr("Return"));
                             menu = MENU_SETTINGS;
-
                         } else {
+                            sleep(1);
                             ret = WBFS_Open();
                             sprintf(text, "%s %s", text,tr("formatted!"));
                             WindowPrompt(tr("Success:"),text,tr("OK"));
+                            if(ret < 0) {
+                                WindowPrompt(tr("ERROR"), tr("Failed to open partition"), tr("OK"));
+                                Sys_LoadMenu();
+                            }
                             menu = MENU_DISCLIST;
                         }
                     }
-                }
-            } else if ( (cnt == selected)&&(Settings.godmode == 0) ) {
-                mainWindow->Remove(&optionBrowser);
-                char entered[20] = "";
-                int result = OnScreenKeyboard(entered, 20,0);
-                mainWindow->Append(&optionBrowser);
-                if ( result == 1 ) {
-                    if (!strcmp(entered, Settings.unlockCode)) { //if password correct
-                        if (Settings.godmode == 0) {
-                            WindowPrompt(tr("Correct Password"),tr("All the features of USB Loader GX are unlocked."),tr("OK"));
-                            Settings.godmode = 1;
+                } else if(Settings.godmode == 0) {
+                    mainWindow->Remove(&optionBrowser);
+                    char entered[20] = "";
+                    int result = OnScreenKeyboard(entered, 20,0);
+                    mainWindow->Append(&optionBrowser);
+                    if ( result == 1 ) {
+                        if (!strcmp(entered, Settings.unlockCode)) { //if password correct
+                            if (Settings.godmode == 0) {
+                                WindowPrompt(tr("Correct Password"),tr("All the features of USB Loader GX are unlocked."),tr("OK"));
+                                Settings.godmode = 1;
+                            }
+                        } else {
+                            WindowPrompt(tr("Wrong Password"),tr("USB Loader GX is protected"),tr("OK"));
                         }
-                    } else {
-                        WindowPrompt(tr("Wrong Password"),tr("USB Loader GX is protected"),tr("OK"));
                     }
                 }
             }
         }
+
         if (shutdown == 1)
             Sys_Shutdown();
         if (reset == 1)
@@ -1628,7 +1636,7 @@ static int MenuFormat() {
     mainWindow->Remove(&optionBrowser);
     mainWindow->Remove(&w);
     ResumeGui();
-    USBDevice_Init();
+
     return menu;
 }
 
@@ -1642,7 +1650,6 @@ static int MenuCheck() {
     s32 ret2, wbfsinit;
     OptionList options;
     options.length = i;
-    partitionEntry partitions[MAX_PARTITIONS];
 
     VIDEO_WaitVSync ();
 
@@ -1684,13 +1691,6 @@ static int MenuCheck() {
         if (choice == 0) {
             Sys_LoadMenu();
         } else {
-            /* Get partition entries */
-            u32 sector_size;
-            ret2 = Partition_GetEntries(partitions, &sector_size);
-            if (ret2 < 0) {
-                WindowPrompt (tr("No partitions found"),0, tr("Restart"));
-                Sys_LoadMenu();
-            }
             menu = MENU_FORMAT;
         }
     }

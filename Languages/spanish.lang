@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-31 20:03+0200\n"
+"POT-Creation-Date: 2009-08-02 00:25+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -454,6 +454,9 @@ msgstr "¿Salir de USB Loader GX?"
 msgid "Failed formating"
 msgstr "Fallo al formatear"
 
+msgid "Failed to open partition"
+msgstr ""
+
 msgid "Feb"
 msgstr "Feb"
 
@@ -713,9 +716,6 @@ msgstr "¡No faltan archivos!"
 msgid "No new updates."
 msgstr "No hay actualizaciones."
 
-msgid "No partitions found"
-msgstr "Particiones no encontradas"
-
 msgid "Normal"
 msgstr "Normal"
 
@@ -829,9 +829,6 @@ msgstr "Renombrar juego en WBFS"
 
 msgid "Reset Playcounter"
 msgstr "Reiniciar conteo jugados"
-
-msgid "Restart"
-msgstr "Reiniciar"
 
 msgid "Restarting..."
 msgstr "Reiniciando..."
@@ -1142,6 +1139,12 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
+
+#~ msgid "No partitions found"
+#~ msgstr "Particiones no encontradas"
+
+#~ msgid "Restart"
+#~ msgstr "Reiniciar"
 
 #~ msgid "Saving"
 #~ msgstr "Guardando"

@@ -199,6 +199,9 @@ GuiGameBrowser::~GuiGameBrowser()
 void GuiGameBrowser::SetFocus(int f)
 {
 	LOCK(this);
+    if(!gameCnt)
+        return;
+
 	focus = f;
 
 	for(int i=0; i<pagesize; i++)
@@ -282,7 +285,7 @@ int GuiGameBrowser::FindMenuItem(int currentItem, int direction)
 void GuiGameBrowser::Draw()
 {
 	LOCK(this);
-	if(!this->IsVisible())
+	if(!this->IsVisible() || !gameCnt)
 		return;
 
 	bgGameImg->Draw();
@@ -340,7 +343,7 @@ void GuiGameBrowser::UpdateListEntries()
 void GuiGameBrowser::Update(GuiTrigger * t)
 {
 	LOCK(this);
-	if(state == STATE_DISABLED || !t)
+	if(state == STATE_DISABLED || !t || !gameCnt)
 		return;
 
 	int next, prev;

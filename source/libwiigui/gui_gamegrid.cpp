@@ -54,9 +54,9 @@ GuiGameGrid::GuiGameGrid(int w, int h, struct discHdr * l, int count, const char
 	gameCnt = (count < SAFETY) ? count : SAFETY;
 	gameList = l;
 	c=count;
-	listOffset = (offset == 0) ? this->FindMenuItem(-1, 1) : offset;
+	listOffset = 0;
 	selectable = true;
-	selectedItem = selected - offset;
+	selectedItem = 0;
 	focus = 1;					 // allow focus
 	firstPic = 0;
 	clickedItem = -1;
@@ -142,6 +142,9 @@ GuiGameGrid::GuiGameGrid(int w, int h, struct discHdr * l, int count, const char
 	bob = new int[pagesize];
 	coverImg = new GuiImage * [gameCnt];
 	cover = new GuiImageData * [gameCnt];
+
+	if(!gameCnt)
+        return;
 
 	for(int i=0; i<pagesize; i++) {
 		bob[i]=i;
@@ -506,6 +509,9 @@ GuiGameGrid::~GuiGameGrid()
 void GuiGameGrid::SetFocus(int f)
 {
 	LOCK(this);
+	if(!gameCnt)
+        return;
+
 	focus = f;
 
 	for(int i=0; i<pagesize; i++)
@@ -589,7 +595,7 @@ int GuiGameGrid::FindMenuItem(int currentItem, int direction)
 void GuiGameGrid::Draw()
 {
 	LOCK(this);
-	if(!this->IsVisible())
+	if(!this->IsVisible() || gameCnt > 0)
 		return;
 
 	if(c>0){
@@ -628,6 +634,8 @@ void GuiGameGrid::Draw()
  */
 void GuiGameGrid::ChangeRows(int n)
 {
+    if(!gameCnt)
+        return;
 
 	rows=n;
 	Settings.gridRows = rows;
@@ -915,7 +923,7 @@ void GuiGameGrid::ChangeRows(int n)
 void GuiGameGrid::Update(GuiTrigger * t)
 {
 	LOCK(this);
-	if(state == STATE_DISABLED || !t)
+	if(state == STATE_DISABLED || !t || !gameCnt)
 		return;
 
 	if(!(game[0]->GetEffect() || game[0]->GetEffectOnOver())) {

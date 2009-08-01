@@ -7,6 +7,7 @@
 #include "prompts/PromptWindows.h"
 #include "language/gettext.h"
 #include "fatmounter.h"
+#include "listfiles.h"
 #include "menu.h"
 #include "filelist.h"
 #include "sys.h"
@@ -35,7 +36,7 @@ int CheatMenu(const char * gameID) {
     snprintf(imgPath, sizeof(imgPath), "%ssettings_background.png", CFG.theme_path);
     GuiImageData settingsbg(imgPath, settings_background_png);
     GuiImage settingsbackground(&settingsbg);
-	
+
     GuiTrigger trigA;
     trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
     GuiTrigger trigB;
@@ -127,6 +128,7 @@ int CheatMenu(const char * gameID) {
                             x++;
                         }
                     }
+                    subfoldercreate(Settings.Cheatcodespath);
                     string chtpath = Settings.Cheatcodespath;
                     string gctfname = chtpath + c.getGameID() + ".gct";
                     c.createGCT(selectednrs,x,gctfname.c_str());

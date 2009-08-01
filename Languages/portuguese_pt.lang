@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-31 20:03+0200\n"
+"POT-Creation-Date: 2009-08-02 00:25+0200\n"
 "PO-Revision-Date: 2009-07-30 12:36\n"
 "Last-Translator: Sky8000\n"
 "Language-Team: \n"
@@ -454,6 +454,9 @@ msgstr "Pretende sair do USB Loader GX?"
 msgid "Failed formating"
 msgstr "Falha ao formatar"
 
+msgid "Failed to open partition"
+msgstr ""
+
 msgid "Feb"
 msgstr "Fev"
 
@@ -713,9 +716,6 @@ msgstr "Não há ficheiros em falta!"
 msgid "No new updates."
 msgstr "Não existem novas actualizações."
 
-msgid "No partitions found"
-msgstr "Não foram encontradas partições"
-
 msgid "Normal"
 msgstr "Normal"
 
@@ -829,9 +829,6 @@ msgstr "Alterar nome do jogo na partição WBFS"
 
 msgid "Reset Playcounter"
 msgstr "Limpar Contagem"
-
-msgid "Restart"
-msgstr "Reiniciar"
 
 msgid "Restarting..."
 msgstr "A Wii irá reiniciar"
@@ -1142,6 +1139,12 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
+
+#~ msgid "No partitions found"
+#~ msgstr "Não foram encontradas partições"
+
+#~ msgid "Restart"
+#~ msgstr "Reiniciar"
 
 #~ msgid "Saving"
 #~ msgstr "Gravando"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-31 20:03+0200\n"
+"POT-Creation-Date: 2009-08-02 00:25+0200\n"
 "PO-Revision-Date: 2009-07-24 11:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe & Cambo\n"
@@ -454,6 +454,9 @@ msgstr "Esci da USB Loader GX?"
 msgid "Failed formating"
 msgstr "Errore Formattazione"
 
+msgid "Failed to open partition"
+msgstr ""
+
 msgid "Feb"
 msgstr "febbraio"
 
@@ -713,9 +716,6 @@ msgstr "Nessun file mancante!"
 msgid "No new updates."
 msgstr "Nessun Aggiornamento."
 
-msgid "No partitions found"
-msgstr "Nessuna partizione trovata"
-
 msgid "Normal"
 msgstr "Normale"
 
@@ -829,9 +829,6 @@ msgstr "Rinomina Gioco su WBFS"
 
 msgid "Reset Playcounter"
 msgstr "Azzera contatore"
-
-msgid "Restart"
-msgstr "Riavvia"
 
 msgid "Restarting..."
 msgstr "Sto riavviando..."
@@ -1142,6 +1139,12 @@ msgstr "di"
 
 msgid "seconds left"
 msgstr "secondi mancanti"
+
+#~ msgid "No partitions found"
+#~ msgstr "Nessuna partizione trovata"
+
+#~ msgid "Restart"
+#~ msgstr "Riavvia"
 
 #~ msgid "Saving"
 #~ msgstr "Sto salvando"
