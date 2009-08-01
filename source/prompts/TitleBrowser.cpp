@@ -109,42 +109,47 @@ int TitleBrowser(u32 type) {
         //get name from database cause i dont like the ADT function
         char line[200];
         char tmp[50];
-        snprintf(tmp,50,tmp," ");
-        //snprintf(name[i],sizeof(name[i]),"Unknown Title");
+        snprintf(tmp,50," ");
+        
+		//check if the content.bin is on the SD card for that game
+		//if there is content.bin,then the game is on the SDmenu and not the wii
+		sprintf(line,"SD:/private/wii/title/%s/content.bin",text);
+		if (!checkfile(line))
+			{
+				if (f) {
+					while (fgets(line, sizeof(line), f)) {
+						if (line[0]== text[0]&&
+								line[1]== text[1]&&
+								line[2]== text[2]) {
+							int j=0;
+							found=1;
+							for (j=0;(line[j+4]!='\0' || j<51);j++)
 
-        if (f) {
-            while (fgets(line, sizeof(line), f)) {
-                if (line[0]== text[0]&&
-                        line[1]== text[1]&&
-                        line[2]== text[2]) {
-                    int j=0;
-                    found=1;
-                    for (j=0;(line[j+4]!='\0' || j<51);j++)
+								tmp[j]=line[j+4];
+							snprintf(name[i],sizeof(name[i]),"%s",tmp);
+							//break;
+						}
+					}
+				}
+				if (!found) {
+					if (getName00(name[i], TITLE_ID(type, titles[i]),CONF_GetLanguage()*2)>=0)
+						found=2;
 
-                        tmp[j]=line[j+4];
-                    snprintf(name[i],sizeof(name[i]),"%s",tmp);
-                    //break;
-                }
-            }
-        }
-        if (!found) {
-            if (getName00(name[i], TITLE_ID(type, titles[i]),CONF_GetLanguage()*2)>=0)
-                found=2;
+					if (!found) {
+						if (getNameBN(name[i], TITLE_ID(type, titles[i]))>=0)
+							found=3;
 
-            if (!found) {
-                if (getNameBN(name[i], TITLE_ID(type, titles[i]))>=0)
-                    found=3;
+						if (!found)
+							snprintf(name[i],sizeof(name[i]),"Unknown Title (%08x)",titles[i]);
+					}
+				}
 
-                if (!found)
-                    snprintf(name[i],sizeof(name[i]),"Unknown Title (%08x)",titles[i]);
-            }
-        }
-
-        //set the text to the option browser
-        options3.SetName(i, "%s",text);
-        options3.SetValue(i, "%s",name[i]);
-        //options3.SetValue(i, " (%08x) %s",titles[i],name[i]);//use this line to show the number to call to launch the channel
-        //move on to the next title
+				//set the text to the option browser
+				options3.SetName(i, "%s",text);
+				options3.SetValue(i, "%s",name[i]);
+				//options3.SetValue(i, " (%08x) %s",titles[i],name[i]);//use this line to show the number to call to launch the channel
+				//move on to the next title
+			}
         i++;
     }
 
@@ -162,7 +167,7 @@ int TitleBrowser(u32 type) {
         //get name from database cause i dont like the ADT function
         char line[200];
         char tmp[50];
-        snprintf(tmp,50,tmp," ");
+        snprintf(tmp,50," ");
         //snprintf(name[i],sizeof(name[i]),"Unknown Title");
         if (f) {
             while (fgets(line, sizeof(line), f)) {
