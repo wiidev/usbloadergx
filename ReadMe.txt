@@ -24,3 +24,6 @@ http://nsis.sourceforge.net/Download
 
 Installer created by NeoRame, #gui-usbloader-chat abjects.net
 Wiiload 0.4 coded by dhewg, #wiidev efnet
+SendElf v4 coded by henke37, dasda
+
+SendElf is a graphical client that sends files over TCP from windows computers to Wii consoles. May require the .NET framework and does require the visual studio runtime. 

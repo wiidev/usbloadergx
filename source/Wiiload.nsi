@@ -103,15 +103,20 @@ Section "Components"
 	
         SetOutPath $INSTDIR
 	File /r "Files\*.ico"
+	File /r "Files\*SendElf.exe"
 	CreateDirectory "$SMPROGRAMS\${NAME}"
 	WriteUninstaller $INSTDIR\Uninstall.exe
 	CreateShortCut "$SMPROGRAMS\${NAME}\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
+	CreateShortCut "$SMPROGRAMS\${NAME}\SendElf.lnk" "$INSTDIR\SendElf.exe"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "DisplayName" "${NAME}"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "DisplayVersion" "${VERSION}"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "Publisher" "${TEAM}"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "URLInfoAbout" "${URL}"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "DisplayIcon" "$INSTDIR\${NAME}.ico"
   	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "UninstallString" '"$INSTDIR\Uninstall.exe"'
+        WriteRegStr HKCU "SOFTWARE\TCP Loader" 'Ip' '${TEMP2}.${TEMP3}.${TEMP4}.${TEMP5}'
+        WriteRegStr HKCU "SOFTWARE\TCP Loader" 'Port' '4299'
+        WriteRegStr HKCU "SOFTWARE\TCP Loader" 'File' ''
 
    ;=== WIILOAD TCP Stuff
    ; include for some of the windows messages defines
@@ -134,6 +139,10 @@ Section "Components"
   WriteRegStr HKCR ".wad" "" ""
   WriteRegStr HKCR ".wad\DefaultIcon" "" "$PROGRAMFILES\${NAME}\WAD.ico"
   WriteRegStr HKCR ".wad\shell\Send to Wii\command" "" `c:\windows\system32\wiiload.exe "%1"`
+  ;=== Context Menu (Send to Wii [SendElf])
+  WriteRegStr HKCR ".wad\shell\Send to Wii [SendElf]\command" "" `$PROGRAMFILES\${NAME}\SendElf.exe /send /noshow /file "%1"`
+
+
 
  Delete $exedir\.ini
  Call RefreshShellIcons
@@ -220,6 +229,7 @@ Section "Uninstall"
 
         ; delete App and his stuff
 	Delete "$SMPROGRAMS\${NAME}\Uninstall.lnk"
+	Delete "$SMPROGRAMS\${NAME}\SendElf.lnk"
 	Delete "$INSTDIR\*.*"
 	Delete "$SYSDIR\${NAME}.exe"
 	RMDir "$SMPROGRAMS\${NAME}"
@@ -248,9 +258,12 @@ Section "Uninstall"
   DeleteRegkey HKCR ".elf"
   DeleteRegkey HKCR ".wad\shell\Send to Wii\command"
   DeleteRegkey HKCR ".wad\shell\Send to Wii"
+  DeleteRegkey HKCR ".wad\shell\Send to Wii [SendElf]\command"
+  DeleteRegkey HKCR ".wad\shell\Send to Wii [SendElf]"
   DeleteRegkey HKCR ".wad\DefaultIcon"
   DeleteRegkey HKCR ".wad\shell"
   DeleteRegkey HKCR ".wad"
+  DeleteRegkey HKCU "SOFTWARE\TCP Loader"
   
   ; Icon refresh
   Call Un.RefreshShellIcons
