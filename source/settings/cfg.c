@@ -365,6 +365,15 @@ void title_set(char *id, char *title) {
     }
 }
 
+void titles_default() {
+	int i;	
+	for (i=0; i<num_title; i++) {
+        memcpy(cfg_title[i].id, "", 4);
+        cfg_title[i].id[4] = 0;
+        strcopy(cfg_title[i].title, "", TITLE_MAX);
+    }
+}
+
 u8 cfg_get_block(u8 *id) {
     int i;
     for (i=0; i<num_control; i++) {
@@ -1679,14 +1688,14 @@ void CFG_Load(void) {
 	int mainlangid = -1;
 	int i;
 	if(strcmp("notset", Settings.language_path)) {
-    for (i=0; map_language[i].name != NULL; i++) {
-        if (strstr(languagefile, map_language[i].name) != NULL) {
-			mainlangid = i - 1; // - 1 because CONF_LANG starts at 0
-			break;
+		for (i=0; map_language[i].name != NULL; i++) {
+			if (strstr(languagefile, map_language[i].name) != NULL) {
+				mainlangid = i - 1; // - 1 because CONF_LANG starts at 0
+				break;
+			}
 		}
-    }
 	} else {
-        mainlangid = 2;
+        mainlangid = wiilang;
 	}
 	GetLanguageToLangCode(&mainlangid, Settings.db_language);
 

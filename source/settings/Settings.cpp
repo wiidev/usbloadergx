@@ -22,8 +22,9 @@
 /*** Extern functions ***/
 extern void ResumeGui();
 extern void HaltGui();
-extern bool OpenXMLDatabase(char* xmlfilepath, char* argdblang, bool argJPtoEN, bool openfile, bool loadtitles, bool keepopen);
-extern void title_set(char *id, char *title);
+extern bool 
+Database(char* xmlfilepath, char* argdblang, bool argJPtoEN, bool openfile, bool loadtitles, bool keepopen);
+extern void titles_default();
 
 /*** Extern variables ***/
 extern GuiWindow * mainWindow;
@@ -33,9 +34,6 @@ extern GuiImageData * pointer[4];
 extern GuiImageData * background;
 extern u8 shutdown;
 extern u8 reset;
-extern struct discHdr * gameList;
-extern u32 gameCnt;
-
 
 /****************************************************************************
  * MenuSettings
@@ -1698,7 +1696,11 @@ int MenuSettings() {
     if (strcmp(opt_lang,opt_langnew) || (opt_override != opt_overridenew && Settings.titlesOverride==1)) {
 	    OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, false, Settings.titlesOverride==1?true:false, true); // open file, reload titles, keep in memory
     }
-
+	// disable titles from database
+	if (opt_override != opt_overridenew && Settings.titlesOverride==0) {
+		titles_default();
+	}
+	
     HaltGui();
 
     mainWindow->RemoveAll();
