@@ -1,10 +1,10 @@
-﻿# USB Loader GX language source file.
+# USB Loader GX language source file.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-02 00:25+0200\n"
+"POT-Creation-Date: 2009-08-02 03:26+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -529,6 +529,9 @@ msgstr "Homebrew Programmpfad Änderung"
 msgid "Homebrew Appspath changed"
 msgstr "Homebrew Programmpfad geändert"
 
+msgid "Homebrew Channel"
+msgstr ""
+
 msgid "Homebrew Launcher"
 msgstr "Homebrew Launcher"
 
@@ -946,7 +949,7 @@ msgid "Themepath change"
 msgstr "Theme Pfad ändern"
 
 msgid "Time left:"
-msgstr "Noch:"
+msgstr "Zeit verbleibend:"
 
 msgid "Title Launcher"
 msgstr ""
@@ -1016,7 +1019,7 @@ msgid "Updating"
 msgstr "Aktualisiere"
 
 msgid "Updating Language Files:"
-msgstr ""
+msgstr "Aktualisiere Sprachdateien:"
 
 msgid "Updating WiiTDB.zip"
 msgstr "Aktualisiere WiiTDB.zip"
@@ -1148,6 +1151,3 @@ msgstr "Sekunden verbleiben"
 
 #~ msgid "Saving"
 #~ msgstr "Speichere"
-
-#~ msgid "Updating Language Files"
-#~ msgstr "Aktualisiere Sprachdateien"

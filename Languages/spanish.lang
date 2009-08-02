@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-02 00:25+0200\n"
+"POT-Creation-Date: 2009-08-02 03:26+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -528,6 +528,9 @@ msgstr "Cambio Ruta aplic. Homebrew"
 
 msgid "Homebrew Appspath changed"
 msgstr "Ruta aplic. Homebrew cambiada"
+
+msgid "Homebrew Channel"
+msgstr ""
 
 msgid "Homebrew Launcher"
 msgstr "Lanzador Homebrew"

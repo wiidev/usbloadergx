@@ -800,7 +800,7 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
     GuiButton btn1(&btn1Img,&btn1OverImg, 0, 3, 0, 0, &trigA, &btnSoundOver, &btnClick,0);
     btn1.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
 
-    GuiText btn2Txt((HBC!=1?"Homebrew Channel":btn1Label), 28, (GXColor) {0, 0, 0, 255});
+    GuiText btn2Txt((HBC!=1?tr("Homebrew Channel"):btn1Label), 28, (GXColor) {0, 0, 0, 255});
     GuiImage btn2Img(&button);
     if (Settings.wsprompt == yes) {
         btn2Txt.SetWidescreen(CFG.widescreen);
