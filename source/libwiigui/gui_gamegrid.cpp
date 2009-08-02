@@ -595,7 +595,7 @@ int GuiGameGrid::FindMenuItem(int currentItem, int direction)
 void GuiGameGrid::Draw()
 {
 	LOCK(this);
-	if(!this->IsVisible() || gameCnt > 0)
+	if(!this->IsVisible() || !gameCnt)
 		return;
 
 	if(c>0){
