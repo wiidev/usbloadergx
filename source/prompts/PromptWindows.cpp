@@ -1966,14 +1966,16 @@ ProgressDownloadWindow(int choice2) {
     ResumeGui();
 
     int offset=0, tries=0;
-    int serverCnt3d = 1,serverCnt2d = 1,serverCntDisc = 1;
+    int serverCnt3d = 1,serverCnt2d = 1,serverCntDisc = 2;
 
-    char server3d[75];
-    char serverDisc[75];
-    char server2d[75];
+    char server3d[100];
+    char serverDisc[100];
+    char serverDiscCustom[100];
+    char server2d[100];
 
     snprintf(server3d, sizeof(server3d), "http://wiitdb.com/wiitdb/artwork/cover3D/");
     snprintf(serverDisc, sizeof(serverDisc), "http://wiitdb.com/wiitdb/artwork/disc/");
+    snprintf(serverDiscCustom, sizeof(serverDiscCustom), "http://wiitdb.com/wiitdb/artwork/disccustom/");
     snprintf(server2d, sizeof(server2d), "http://wiitdb.com/wiitdb/artwork/cover/");
 
     //check if directory exist and if not create one
@@ -2067,12 +2069,34 @@ ProgressDownloadWindow(int choice2) {
                 switch (missingFiles[i][3]) {
                 case 'J':
                 case 'W':
-                    sprintf(URLFile,"%sJA/%s",serverDisc,missingFiles[i]);
+                    if(Settings.discart == 0) {
+                        sprintf(URLFile,"%sJA/%s",serverDisc,missingFiles[i]);
+                    } else if(Settings.discart == 1) {
+                        sprintf(URLFile,"%sJA/%s",serverDiscCustom,missingFiles[i]);
+                    } else if(Settings.discart == 2 && tries == 0) {
+                        sprintf(URLFile,"%sJA/%s",serverDisc,missingFiles[i]);
+                    } else if(Settings.discart == 2 && tries == 1) {
+                        sprintf(URLFile,"%sJA/%s",serverDiscCustom,missingFiles[i]);
+                    } else if(Settings.discart == 3 && tries == 0) {
+                        sprintf(URLFile,"%sJA/%s",serverDiscCustom,missingFiles[i]);
+                    } else if(Settings.discart == 3 && tries == 1) {
+                        sprintf(URLFile,"%sJA/%s",serverDisc,missingFiles[i]);
+                    }
                     break;
                 case 'K':
-                    //case 'T':
-                    //case 'Q':
-                    sprintf(URLFile,"%sKO/%s",serverDisc,missingFiles[i]);
+                    if(Settings.discart == 0) {
+                        sprintf(URLFile,"%sKO/%s",serverDisc,missingFiles[i]);
+                    } else if(Settings.discart == 1) {
+                        sprintf(URLFile,"%sKO/%s",serverDiscCustom,missingFiles[i]);
+                    } else if(Settings.discart == 2 && tries == 0) {
+                        sprintf(URLFile,"%sKO/%s",serverDisc,missingFiles[i]);
+                    } else if(Settings.discart == 2 && tries == 1) {
+                        sprintf(URLFile,"%sKO/%s",serverDiscCustom,missingFiles[i]);
+                    } else if(Settings.discart == 3 && tries == 0) {
+                        sprintf(URLFile,"%sKO/%s",serverDiscCustom,missingFiles[i]);
+                    } else if(Settings.discart == 3 && tries == 1) {
+                        sprintf(URLFile,"%sKO/%s",serverDisc,missingFiles[i]);
+                    }
                     break;
                 case 'P':
                 case 'D':
@@ -2082,10 +2106,34 @@ ProgressDownloadWindow(int choice2) {
                 case 'H':
                 case 'X':
                 case 'Y':
-                    sprintf(URLFile,"%s%s/%s",serverDisc,Settings.db_language,missingFiles[i]);
+                    if(Settings.discart == 0) {
+                        sprintf(URLFile,"%s%s/%s",serverDisc,Settings.db_language,missingFiles[i]);
+                    } else if(Settings.discart == 1) {
+                        sprintf(URLFile,"%s%s/%s",serverDiscCustom,Settings.db_language,missingFiles[i]);
+                    } else if(Settings.discart == 2 && tries == 0) {
+                        sprintf(URLFile,"%s%s/%s",serverDisc,Settings.db_language,missingFiles[i]);
+                    } else if(Settings.discart == 2 && tries == 1) {
+                        sprintf(URLFile,"%s%s/%s",serverDiscCustom,Settings.db_language,missingFiles[i]);
+                    } else if(Settings.discart == 3 && tries == 0) {
+                        sprintf(URLFile,"%s%s/%s",serverDiscCustom,Settings.db_language,missingFiles[i]);
+                    } else if(Settings.discart == 3 && tries == 1) {
+                        sprintf(URLFile,"%s%s/%s",serverDisc,Settings.db_language,missingFiles[i]);
+                    }
                     break;
                 case 'E':
-                    sprintf(URLFile,"%sUS/%s",serverDisc,missingFiles[i]);
+                    if(Settings.discart == 0) {
+                        sprintf(URLFile,"%sUS/%s",serverDisc,missingFiles[i]);
+                    } else if(Settings.discart == 1) {
+                        sprintf(URLFile,"%sUS/%s",serverDiscCustom,missingFiles[i]);
+                    } else if(Settings.discart == 2 && tries == 0) {
+                        sprintf(URLFile,"%sUS/%s",serverDisc,missingFiles[i]);
+                    } else if(Settings.discart == 2 && tries == 1) {
+                        sprintf(URLFile,"%sUS/%s",serverDiscCustom,missingFiles[i]);
+                    } else if(Settings.discart == 3 && tries == 0) {
+                        sprintf(URLFile,"%sUS/%s",serverDiscCustom,missingFiles[i]);
+                    } else if(Settings.discart == 3 && tries == 1) {
+                        sprintf(URLFile,"%sUS/%s",serverDisc,missingFiles[i]);
+                    }
                     break;
                 }
 
@@ -2094,7 +2142,19 @@ ProgressDownloadWindow(int choice2) {
                 if (!(file.size == 36864 || file.size <= 1024 || file.size == 7386 || file.size <= 1174 || file.size == 4446 || file.data == NULL)) {
                     break;
                 } else {
-                    sprintf(URLFile,"%sEN/%s",serverDisc,missingFiles[i]);
+                    if(Settings.discart == 0) {
+                        sprintf(URLFile,"%sEN/%s",serverDisc,missingFiles[i]);
+                    } else if(Settings.discart == 1) {
+                        sprintf(URLFile,"%sEN/%s",serverDiscCustom,missingFiles[i]);
+                    } else if(Settings.discart == 2 && tries == 0) {
+                        sprintf(URLFile,"%sEN/%s",serverDisc,missingFiles[i]);
+                    } else if(Settings.discart == 2 && tries == 1) {
+                        sprintf(URLFile,"%sEN/%s",serverDiscCustom,missingFiles[i]);
+                    } else if(Settings.discart == 3 && tries == 0) {
+                        sprintf(URLFile,"%sEN/%s",serverDiscCustom,missingFiles[i]);
+                    } else if(Settings.discart == 3 && tries == 1) {
+                        sprintf(URLFile,"%sEN/%s",serverDisc,missingFiles[i]);
+                    }
                     file = downloadfile(URLFile);
                     if (!(file.size == 36864 || file.size <= 1024 || file.size == 7386 || file.size <= 1174 || file.size == 4446 || file.data == NULL)) {
                         break;
@@ -2171,50 +2231,6 @@ ProgressDownloadWindow(int choice2) {
         if (btn1.GetState() == STATE_CLICKED) {
             cntNotFound = cntMissFiles-i+cntNotFound;
             break;
-        }
-    }
-
-    /**Temporary redownloading 1st image because of a fucking corruption bug **/
-
-    char URLFile[100];
-    struct block file = downloadfile(URLFile);
-    if (choice2 == 2) {
-        while (tries<serverCnt3d) {
-            sprintf(URLFile,"%s%s",server3d,missingFiles[0]);
-            sprintf(imgPath,"%s%s", Settings.covers_path, missingFiles[0]);
-            file = downloadfile(URLFile);
-            if (!(file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.size == 4446 || file.data == NULL))break;
-            tries++;
-        }
-
-    }
-    if (choice2 == 3) {
-        while (tries<serverCntDisc) {
-            sprintf(URLFile,"%s%s",serverDisc,missingFiles[0]);
-            sprintf(imgPath,"%s%s", Settings.disc_path, missingFiles[0]);
-            file = downloadfile(URLFile);
-            if (!(file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.size == 4446 || file.data == NULL))break;
-            tries++;
-        }
-    }
-    if (choice2 == 1) {
-        while (tries<serverCnt2d) {
-            sprintf(URLFile,"%s%s",server2d,missingFiles[0]);
-            sprintf(imgPath,"%s%s", Settings.covers_path, missingFiles[0]);
-            file = downloadfile(URLFile);
-            if (!(file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.size == 4446 || file.data == NULL))break;
-            tries++;
-        }
-    }
-    if (file.size == 36864 || file.size <= 1024 || file.size == 7386 || file.size <= 1174 || file.size == 4446 || file.data == NULL) {
-    } else {
-        if (file.data != NULL) {
-            // save png to sd card
-            FILE *pfile;
-            pfile = fopen(imgPath, "wb");
-            fwrite(file.data,1,file.size,pfile);
-            fclose (pfile);
-            free(file.data);
         }
     }
 

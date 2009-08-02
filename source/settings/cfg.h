@@ -363,6 +363,7 @@ extern "C" {
         u8		db_JPtoEN;
         u8		gridRows;
         u8		autonetwork;
+        u8		discart;
     };
 
     void CFG_LoadGlobal(void);

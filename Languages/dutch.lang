@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-02 03:26+0200\n"
+"POT-Creation-Date: 2009-08-02 17:54+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: tj_cool\n"
 "Language-Team: \n"
@@ -292,6 +292,9 @@ msgstr "Aftiteling"
 msgid "Custom Paths"
 msgstr "Bestandslocaties"
 
+msgid "Customs/Original"
+msgstr ""
+
 msgid "DOL from SD"
 msgstr "Dol van SD"
 
@@ -339,6 +342,9 @@ msgstr "DVD labels"
 
 msgid "Discimage Path"
 msgstr "Locatie DVD labels"
+
+msgid "Discimages Download"
+msgstr ""
 
 msgid "Discpath Changed"
 msgstr "Locatie DVD labels gewijzigd"
@@ -767,8 +773,17 @@ msgstr "Officiele site"
 msgid "Ok"
 msgstr "Ok"
 
+msgid "Only Customs"
+msgstr ""
+
+msgid "Only Original"
+msgstr ""
+
 msgid "Only for Install"
 msgstr "Alleen bij installeren"
+
+msgid "Original/Customs"
+msgstr ""
 
 msgid "Parental Control"
 msgstr "Ouderlijk toezicht"

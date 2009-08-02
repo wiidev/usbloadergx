@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-02 03:26+0200\n"
+"POT-Creation-Date: 2009-08-02 17:54+0200\n"
 "PO-Revision-Date: 2009-07-24 11:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe & Cambo\n"
@@ -292,6 +292,9 @@ msgstr "Credits"
 msgid "Custom Paths"
 msgstr "Impostazione Percorsi (Directory)"
 
+msgid "Customs/Original"
+msgstr ""
+
 msgid "DOL from SD"
 msgstr "DOL dalla scheda SD"
 
@@ -339,6 +342,9 @@ msgstr "Immagini Disco"
 
 msgid "Discimage Path"
 msgstr "Percorso Imm. Disco"
+
+msgid "Discimages Download"
+msgstr ""
 
 msgid "Discpath Changed"
 msgstr "Percorso Immagini Disco Modificato"
@@ -767,8 +773,17 @@ msgstr "Sito Ufficiale"
 msgid "Ok"
 msgstr "OK"
 
+msgid "Only Customs"
+msgstr ""
+
+msgid "Only Original"
+msgstr ""
+
 msgid "Only for Install"
 msgstr "Installa Solamente"
+
+msgid "Original/Customs"
+msgstr ""
 
 msgid "Parental Control"
 msgstr "Controllo Genitori"

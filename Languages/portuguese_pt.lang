@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-02 03:26+0200\n"
+"POT-Creation-Date: 2009-08-02 17:54+0200\n"
 "PO-Revision-Date: 2009-07-30 12:36\n"
 "Last-Translator: Sky8000\n"
 "Language-Team: \n"
@@ -292,6 +292,9 @@ msgstr "Créditos"
 msgid "Custom Paths"
 msgstr "Personalização de Pastas"
 
+msgid "Customs/Original"
+msgstr ""
+
 msgid "DOL from SD"
 msgstr "DOL do cartão SD"
 
@@ -339,6 +342,9 @@ msgstr "Imagens de Disco"
 
 msgid "Discimage Path"
 msgstr "Pasta Imagens Disco"
+
+msgid "Discimages Download"
+msgstr ""
 
 msgid "Discpath Changed"
 msgstr "Pasta das Imagens Disco alterada"
@@ -767,8 +773,17 @@ msgstr "Site Oficial"
 msgid "Ok"
 msgstr "Ok"
 
+msgid "Only Customs"
+msgstr ""
+
+msgid "Only Original"
+msgstr ""
+
 msgid "Only for Install"
 msgstr "Apenas na instalação"
+
+msgid "Original/Customs"
+msgstr ""
 
 msgid "Parental Control"
 msgstr "Controlo Parental"

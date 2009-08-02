@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-02 03:26+0200\n"
+"POT-Creation-Date: 2009-08-02 17:54+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: Tusk\n"
 "Language-Team: \n"
@@ -292,6 +292,9 @@ msgstr "Készítõk"
 msgid "Custom Paths"
 msgstr "Saját Útvonal"
 
+msgid "Customs/Original"
+msgstr ""
+
 msgid "DOL from SD"
 msgstr ""
 
@@ -339,6 +342,9 @@ msgstr "Lemez Képek"
 
 msgid "Discimage Path"
 msgstr "Lemezképek Útvonala"
+
+msgid "Discimages Download"
+msgstr ""
 
 msgid "Discpath Changed"
 msgstr "Lemezképek Útvonala megváltoztatva"
@@ -767,8 +773,17 @@ msgstr "Hivatalos Oldal"
 msgid "Ok"
 msgstr "Oké"
 
+msgid "Only Customs"
+msgstr ""
+
+msgid "Only Original"
+msgstr ""
+
 msgid "Only for Install"
 msgstr "Csak telepítéshez"
+
+msgid "Original/Customs"
+msgstr ""
 
 msgid "Parental Control"
 msgstr "Szülõi Felügyelet"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-02 03:26+0200\n"
+"POT-Creation-Date: 2009-08-02 17:54+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -292,6 +292,9 @@ msgstr "Credits"
 msgid "Custom Paths"
 msgstr ""
 
+msgid "Customs/Original"
+msgstr ""
+
 msgid "DOL from SD"
 msgstr ""
 
@@ -339,6 +342,9 @@ msgstr "디스크 이미지"
 
 msgid "Discimage Path"
 msgstr "디스크 이미지 경로"
+
+msgid "Discimages Download"
+msgstr ""
 
 msgid "Discpath Changed"
 msgstr "디스크 경로 변경됨"
@@ -767,7 +773,16 @@ msgstr "공식 사이트"
 msgid "Ok"
 msgstr ""
 
+msgid "Only Customs"
+msgstr ""
+
+msgid "Only Original"
+msgstr ""
+
 msgid "Only for Install"
+msgstr ""
+
+msgid "Original/Customs"
 msgstr ""
 
 msgid "Parental Control"

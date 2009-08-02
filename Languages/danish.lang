@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-02 03:26+0200\n"
+"POT-Creation-Date: 2009-08-02 17:54+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -292,6 +292,9 @@ msgstr "Lavet af:"
 msgid "Custom Paths"
 msgstr "Sti-indstillinger"
 
+msgid "Customs/Original"
+msgstr ""
+
 msgid "DOL from SD"
 msgstr "DOL fra SD"
 
@@ -339,6 +342,9 @@ msgstr "DVD-covers"
 
 msgid "Discimage Path"
 msgstr "Sti til DVD-covers"
+
+msgid "Discimages Download"
+msgstr ""
 
 msgid "Discpath Changed"
 msgstr "Sti til DVD-covers ændret"
@@ -767,8 +773,17 @@ msgstr "Officiel side"
 msgid "Ok"
 msgstr "Ok"
 
+msgid "Only Customs"
+msgstr ""
+
+msgid "Only Original"
+msgstr ""
+
 msgid "Only for Install"
 msgstr "Kun til installering"
+
+msgid "Original/Customs"
+msgstr ""
 
 msgid "Parental Control"
 msgstr "Børnelås"

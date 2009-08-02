@@ -17,7 +17,8 @@
 #include "listfiles.h"
 #include "sys.h"
 #include "cfg.h"
-#define MAXOPTIONS 12
+
+#define MAXOPTIONS 13
 
 /*** Extern functions ***/
 extern void ResumeGui();
@@ -471,11 +472,12 @@ int MenuSettings() {
                     options2.SetName(4, "%s",tr("Flip-X"));
                     options2.SetName(5, "%s",tr("Prompts Buttons"));
                     options2.SetName(6, "%s",tr("Keyboard"));
-                    options2.SetName(7, "%s",tr("Wiilight"));
-                    options2.SetName(8, "%s",tr("Rumble"));
-                    options2.SetName(9, "%s",tr("AutoInit Network"));
-                    options2.SetName(10, "%s",tr("Titles from XML"));
-                    options2.SetName(11, "%s",tr("Screensaver"));
+                    options2.SetName(7, "%s",tr("Discimages Download"));
+                    options2.SetName(8, "%s",tr("Wiilight"));
+                    options2.SetName(9, "%s",tr("Rumble"));
+                    options2.SetName(10, "%s",tr("AutoInit Network"));
+                    options2.SetName(11, "%s",tr("Titles from XML"));
+                    options2.SetName(12, "%s",tr("Screensaver"));
                     for (int i = 0; i <= MAXOPTIONS; i++) options2.SetValue(i, NULL);
                     optionBrowser2.SetScrollbar(1);
                     w.Append(&optionBrowser2);
@@ -515,6 +517,8 @@ int MenuSettings() {
                             Settings.screensaver = 0; //RUMBLE
                         if (Settings.titlesOverride >= 2)
                             Settings.titlesOverride = 0;
+                        if (Settings.discart >= 4)
+                            Settings.discart = 0;
                         if (!strcmp("notset", Settings.language_path))
                             options2.SetValue(0, "%s", tr("Default"));
                         else
@@ -547,26 +551,31 @@ int MenuSettings() {
                         else if (Settings.keyset == euro) options2.SetValue(6,"QWERTZ");
                         else if (Settings.keyset == azerty) options2.SetValue(6,"AZERTY");
 
-                        if (Settings.wiilight == 0) options2.SetValue(7,"%s",tr("OFF"));
-                        else if (Settings.wiilight == 1) options2.SetValue(7,"%s",tr("ON"));
-                        else if (Settings.wiilight == 2) options2.SetValue(7,"%s",tr("Only for Install"));
+                        if (Settings.discart == 0) options2.SetValue(7,"%s",tr("Only Original"));
+                        else if (Settings.discart == 1) options2.SetValue(7,tr("Only Customs"));
+                        else if (Settings.discart == 2) options2.SetValue(7,tr("Original/Customs"));
+                        else if (Settings.discart == 3) options2.SetValue(7,tr("Customs/Original"));
 
-                        if (Settings.rumble == RumbleOn) options2.SetValue(8,"%s",tr("ON"));
-                        else if (Settings.rumble == RumbleOff) options2.SetValue(8,"%s",tr("OFF"));
+                        if (Settings.wiilight == 0) options2.SetValue(8,"%s",tr("OFF"));
+                        else if (Settings.wiilight == 1) options2.SetValue(8,"%s",tr("ON"));
+                        else if (Settings.wiilight == 2) options2.SetValue(8,"%s",tr("Only for Install"));
 
-                        if (Settings.autonetwork == on) options2.SetValue(9,"%s",tr("ON"));
-                        else if (Settings.autonetwork == off) options2.SetValue(9,"%s",tr("OFF"));
+                        if (Settings.rumble == RumbleOn) options2.SetValue(9,"%s",tr("ON"));
+                        else if (Settings.rumble == RumbleOff) options2.SetValue(9,"%s",tr("OFF"));
 
-                        if (Settings.titlesOverride == 0) options2.SetValue(10,"%s",tr("OFF"));
-                        else if (Settings.titlesOverride == 1) options2.SetValue(10,"%s",tr("ON"));
+                        if (Settings.autonetwork == on) options2.SetValue(10,"%s",tr("ON"));
+                        else if (Settings.autonetwork == off) options2.SetValue(10,"%s",tr("OFF"));
 
-                        if (Settings.screensaver == 0) options2.SetValue(11,"%s",tr("OFF"));
-                        else if (Settings.screensaver == 1) options2.SetValue(11,tr("3 min"));
-                        else if (Settings.screensaver == 2) options2.SetValue(11,tr("5 min"));
-                        else if (Settings.screensaver == 3) options2.SetValue(11,tr("10 min"));
-                        else if (Settings.screensaver == 4) options2.SetValue(11,tr("20 min"));
-                        else if (Settings.screensaver == 5) options2.SetValue(11,tr("30 min"));
-                        else if (Settings.screensaver == 6) options2.SetValue(11,tr("1 hour"));
+                        if (Settings.titlesOverride == 0) options2.SetValue(11,"%s",tr("OFF"));
+                        else if (Settings.titlesOverride == 1) options2.SetValue(11,"%s",tr("ON"));
+
+                        if (Settings.screensaver == 0) options2.SetValue(12,"%s",tr("OFF"));
+                        else if (Settings.screensaver == 1) options2.SetValue(12,tr("3 min"));
+                        else if (Settings.screensaver == 2) options2.SetValue(12,tr("5 min"));
+                        else if (Settings.screensaver == 3) options2.SetValue(12,tr("10 min"));
+                        else if (Settings.screensaver == 4) options2.SetValue(12,tr("20 min"));
+                        else if (Settings.screensaver == 5) options2.SetValue(12,tr("30 min"));
+                        else if (Settings.screensaver == 6) options2.SetValue(12,tr("1 hour"));
 
                         if (backBtn.GetState() == STATE_CLICKED) {
                             backBtn.ResetState();
@@ -659,20 +668,23 @@ int MenuSettings() {
                             Settings.keyset++;
                             break;
                         case 7:
-                            Settings.wiilight++;
+                            Settings.discart++;
                             break;
                         case 8:
-                            Settings.rumble++;
+                            Settings.wiilight++;
                             break;
                         case 9:
+                            Settings.rumble++;
+                            break;
+                        case 10:
                             Settings.autonetwork++;
                             if (Settings.autonetwork > 1)
                                 Settings.autonetwork = 0;
                             break;
-                        case 10:
+                        case 11:
                             Settings.titlesOverride++;
                             break;
-                        case 11:
+                        case 12:
                             Settings.screensaver++;
                             break;
 
