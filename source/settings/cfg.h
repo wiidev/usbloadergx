@@ -359,7 +359,7 @@ extern "C" {
         short   error002;
         u8		titlesOverride; // db_titles
         char	db_url[200];
-        char	db_language[100];
+        char	db_language[20];
         u8		db_JPtoEN;
         u8		gridRows;
         u8		autonetwork;

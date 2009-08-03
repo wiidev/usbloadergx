@@ -1061,16 +1061,15 @@ int MenuDiscList() {
                     case 'E':
                         sprintf(gameregion,"NTSC U");
                         break;
-
                     case 'J':
-                    case 'W':
-                        sprintf(gameregion,"NTSC J");
+					    sprintf(gameregion,"NTSC J");
                         break;
-
+                    case 'W':
+                        sprintf(gameregion,"NTSC T");
+                        break;
                     case 'K':
                         sprintf(gameregion,"NTSC K");
                         break;
-
                     case 'P':
                     case 'D':
                     case 'F':

@@ -39,7 +39,7 @@ static char langlist[11][22] = {{"Console Default"},
     {"Korean"}
 };
 
-static char langcodes[11][3] = {{""},
+static char langcodes[11][5] = {{""},
     {"JA"},
     {"EN"},
     {"DE"},
@@ -47,8 +47,8 @@ static char langcodes[11][3] = {{""},
     {"ES"},
     {"IT"},
     {"NL"},
-    {"ZH"},
-    {"ZH"},
+    {"ZHCN"}, // People's Republic of China
+    {"ZHTW"}, // Taiwan
     {"KO"}
 };
 
@@ -204,10 +204,10 @@ char *GetLangSettingFromGame(char *gameid) {
 }
 
 
-/* convert language text into ISO 639 two-letter language code */
+/* convert language text into ISO 639 two-letter language code (+ZHTW/ZHCN) */
 char *ConvertLangTextToCode(char *languagetxt) {
-	// do not convert if languagetext seems to be a two-letter language code
-	if (strlen(languagetxt) == 2)
+	// do not convert if languagetext seems to be a language code (can be 2 or 4 letters)
+	if (strlen(languagetxt) <= 4)
 		return languagetxt;
     int i;
     for (i=0;i<=10;i++) {

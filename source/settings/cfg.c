@@ -95,8 +95,8 @@ struct TextMap map_language[] = {
     { "spanish",   CFG_LANG_SPANISH },
     { "italian",   CFG_LANG_ITALIAN },
     { "dutch",     CFG_LANG_DUTCH },
-    { "s.chinese", CFG_LANG_S_CHINESE },
-    { "t.chinese", CFG_LANG_T_CHINESE },
+    { "schinese", CFG_LANG_S_CHINESE }, // without a dot between s and chinese to match the language filename "schinese.lang"
+    { "tchinese", CFG_LANG_T_CHINESE },
     { "korean",    CFG_LANG_KOREAN },
     { NULL, -1 }
 };
@@ -1770,10 +1770,10 @@ void GetLanguageToLangCode(int *langid, char *langcode) {
         sprintf(langcode, "NL");
         break;
     case CONF_LANG_SIMP_CHINESE:
-        sprintf(langcode, "EN");   // default to EN for chinese
+        sprintf(langcode, "ZHCN"); // People's Republic of China
         break;
     case CONF_LANG_TRAD_CHINESE:
-        sprintf(langcode, "EN");   // default to EN for chinese
+        sprintf(langcode, "ZHTW"); // Taiwan
         break;
     case CONF_LANG_KOREAN:
         sprintf(langcode, "KO");

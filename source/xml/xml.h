@@ -24,7 +24,7 @@ extern "C" {
         char    synopsis[3000];
         char    title_EN[200];
         char    synopsis_EN[3000];
-        char    locales[XML_ELEMMAX+1][3];
+        char    locales[XML_ELEMMAX+1][5];
         int     localeCnt;
         char    developer[75];
         char    publisher[75];
