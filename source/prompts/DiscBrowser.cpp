@@ -16,6 +16,7 @@
 #include "main.h"
 #include "sys.h"
 #include "settings/cfg.h"
+#include "memory.h"
 
 /*** Extern functions ***/
 extern void ResumeGui();
@@ -62,7 +63,7 @@ int DiscBrowse(struct discHdr * header) {
         return ret;
     }
 
-    int *buffer = (int*)memalign(32, 0x20);
+    int *buffer = (int*)allocate_memory(0x20);
 
     if (buffer == NULL) {
         WindowPrompt(tr("ERROR:"), tr("Not enough free memory."), tr("OK"));
@@ -75,7 +76,7 @@ int DiscBrowse(struct discHdr * header) {
         return ret;
     }
 
-    void *fstbuffer = memalign(32, buffer[2]*4);
+    void *fstbuffer = allocate_memory(buffer[2]*4);
     FST_ENTRY *fst = (FST_ENTRY *)fstbuffer;
 
     if (fst == NULL) {

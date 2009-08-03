@@ -11,6 +11,7 @@
 #include "video.h"
 #include "wdvd.h"
 #include "alternatedol.h"
+#include "memory.h"
 
 /* Constants */
 #define PTABLE_OFFSET	0x40000
@@ -18,42 +19,42 @@
 
 /* Disc pointers */
 static u32 *buffer = (u32 *)0x93000000;
-static u8  *diskid = (u8  *)0x80000000;
+static u8  *diskid = (u8  *)Disc_ID;
 
 
 void __Disc_SetLowMem(void) {
-    *(vu32 *)0x80000020 = 0x0D15EA5E;       // Standard Boot Code
-    *(vu32 *)0x80000024 = 0x00000001;       // Version
 
-    *(vu32 *)0x80000030 = 0x00000000;       // Arena Low
-    *(vu32 *)0x800000F4 = 0x817E5480;       // BI2
-    *(vu32 *)0x800000F8 = 0x0E7BE2C0;       // Console Bus Speed
-    *(vu32 *)0x800000FC = 0x2B73A840;       // Console CPU Speed
+    *Sys_Magic      = 0x0D15EA5E;           // Standard Boot Code
+    *Version        = 0x00000001;           // Version
+    *Arena_L        = 0x00000000;           // Arena Low
+    *BI2            = 0x817E5480;           // BI2
+    *Bus_Speed      = 0x0E7BE2C0;           // Console Bus Speed
+    *CPU_Speed      = 0x2B73A840;           // Console CPU Speed
 
     /* Setup low memory */
-    *(vu32 *)0x80000060 = 0x38A00040;
-    *(vu32 *)0x800000E4 = 0x80431A80;
-    *(vu32 *)0x800000EC = 0x81800000;       // Dev Debugger Monitor Address
-    *(vu32 *)0x800000F0 = 0x01800000;       // Simulated Memory Size
+    *Assembler      = 0x38A00040;           // Assembler
+    *(u32 *)0x800000E4 = 0x80431A80;
+    *Dev_Debugger   = 0x81800000;           // Dev Debugger Monitor Address
+    *Simulated_Mem  = 0x01800000;           // Simulated Memory Size
 
     //If the game is sam & max: season 1  put this shit in
     char gameid[8];
     memset(gameid, 0, 8);
-    memcpy(gameid, (char*)0x80000000, 6);
+    memcpy(gameid, (char*)Disc_ID, 6);
 
     if ((strcmp(gameid,"R3XE6U")==0)||
             (strcmp(gameid,"R3XP6V")==0))/*&&
 		(IOS_GetVersion()==249)&&
 		((IOS_GetRevision()==10)||(IOS_GetRevision()==13))  I left out the ios check to see if works with other ios versions.*/
     {
-        *(vu32*)0x80003184	= 0x80000000;    // Game ID Address
+        *GameID_Address	= Disc_ID;    // Game ID Address
     }
 
     /* Copy disc ID */
-    memcpy((void *)0x80003180, (void *)0x80000000, 4);
+    memcpy((void *)Online_Check, (void *)Disc_ID, 4);
 
     /* Flush cache */
-    DCFlushRange((void *)0x80000000, 0x3F00);
+    DCFlushRange((void *)Disc_ID, 0x3F00);
 }
 
 void __Disc_SetVMode(u8 videoselected) {
@@ -130,7 +131,7 @@ void __Disc_SetVMode(u8 videoselected) {
     }
 
     /* Set video mode register */
-    *(vu32 *)0x800000CC = vmode_reg;
+    *Video_Mode = vmode_reg;
 
     /* Set video mode */
     if (vmode) {
@@ -282,7 +283,7 @@ s32 Disc_BootPartition(u64 offset, u8 videoselected, u8 cheat, u8 vipatch, u8 pa
         char gameid[8];
         /* OCARINA STUFF - FISHEARS*/
         memset(gameid, 0, 8);
-        memcpy(gameid, (char*)0x80000000, 6);
+        memcpy(gameid, (char*)Disc_ID, 6);
         do_sd_code(gameid);
         /* OCARINA STUFF - FISHEARS*/
     }
