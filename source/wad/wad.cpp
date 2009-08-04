@@ -234,6 +234,7 @@ s32 Wad_Install(FILE *fp)
 
 
 	///start the wad shit
+	bool fail = false;
 	wadHeader   *header  = NULL;
 	signed_blob *p_certs = NULL, *p_crl = NULL, *p_tik = NULL, *p_tmd = NULL;
 
@@ -399,7 +400,10 @@ s32 Wad_Install(FILE *fp)
 
 err:
 	//char titties[100];
+	ResumeGui();
 	prTxt.SetTextf("%s%d", tr("Error..."),ret);
+	promptWindow.Append(&prTxt);
+	fail = true;
   	//snprintf(titties, sizeof(titties), "%d", ret);
 	//printf(" ERROR! (ret = %d)\n", ret);
 	//WindowPrompt("ERROR!",titties,"Back",0,0);
@@ -424,7 +428,7 @@ out:
 
 
 exit:
-	msg5Txt.SetText(tr("Finishing installation... Ok!"));
+	if (!fail)msg5Txt.SetText(tr("Finishing installation... Ok!"));
 	promptWindow.Append(&btn1);
 	while(btn1.GetState() != STATE_CLICKED){
 	}

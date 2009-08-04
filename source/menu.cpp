@@ -1190,7 +1190,7 @@ int MenuDiscList() {
                     }
 
                 }
-                SDCard_deInit();
+                
                 wiilight(0);
                 if (isInserted(bootDevice)) {
                     //////////save game play count////////////////
@@ -1207,7 +1207,7 @@ int MenuDiscList() {
 
                     CFG_save_game_num(header->id);
                 }
-
+				SDCard_deInit();
                 menu = MENU_EXIT;
                 break;
 

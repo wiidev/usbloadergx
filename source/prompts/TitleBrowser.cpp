@@ -463,10 +463,10 @@ int TitleBrowser(u32 type) {
                         network_read((u8*) &filename, 100);
                         sprintf(tmptxt,"%s",filename);
                         //if we got a wad
-                        if (strstr(tmptxt,".wad") || strstr(tmptxt,".WAD")) {
+                        if (strcasestr(tmptxt,".wad")) {
 
                             sprintf(tmptxt,"%s/wad/%s",bootDevice,filename);
-
+							if (checkfile(tmptxt))remove(tmptxt);
                             rename(filepath, tmptxt);
 
                             //check and make sure the wad we just saved is the correct size

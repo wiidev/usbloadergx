@@ -301,9 +301,10 @@ void GuiText::Draw()
 			{
 				if(i == 0)
 					tmptext[linenum] = new wchar_t[strlen + 1];
-
+					
 				tmptext[linenum][i] = text[ch];
 				tmptext[linenum][i+1] = 0;
+
 
 				if(text[ch] == ' ' || ch == strlen-1)
 				{
@@ -325,11 +326,15 @@ void GuiText::Draw()
 						linenum++;
 					}
 				}
-				if(text[ch] == ' ' && i >= 0)
+				if((text[ch] == ' ' && i >= 0)||
+					text[ch] == '\r' || text[ch] == '\n'
+					|| text[ch] == 0x0D|| text[ch] == 0x0A)
 				{
 					lastSpace = ch;
 					lastSpaceIndex = i;
 				}
+				
+				
 				ch++;
 				i++;
 			}
