@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-02 17:54+0200\n"
+"POT-Creation-Date: 2009-08-04 03:42-0400\n"
 "PO-Revision-Date: 2009-07-24 11:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe & Cambo\n"
@@ -603,9 +603,8 @@ msgstr "Sto installando il titolo... Ok!"
 msgid "Installing wad"
 msgstr "Sto installando il WAD"
 
-#, c-format
-msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team. %s - %i"
-msgstr "Hai informazioni che potrebbero esserci utili. Per favore, comunicale al team di sviluppo. %s - %i"
+msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team."
+msgstr ""
 
 msgid "Italian"
 msgstr "Italiano"
@@ -1157,6 +1156,9 @@ msgstr "di"
 
 msgid "seconds left"
 msgstr "secondi mancanti"
+
+#~ msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team. %s - %i"
+#~ msgstr "Hai informazioni che potrebbero esserci utili. Per favore, comunicale al team di sviluppo. %s - %i"
 
 #~ msgid "No partitions found"
 #~ msgstr "Nessuna partizione trovata"

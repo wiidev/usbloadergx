@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-02 17:54+0200\n"
+"POT-Creation-Date: 2009-08-04 03:42-0400\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: ziom666 (zadania_prog@vp.pl)\n"
 "Language-Team: \n"
@@ -603,8 +603,7 @@ msgstr "Instalowanie tytulu... Ok!"
 msgid "Installing wad"
 msgstr "Instalowanie wad"
 
-#, c-format
-msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team. %s - %i"
+msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team."
 msgstr ""
 
 msgid "Italian"

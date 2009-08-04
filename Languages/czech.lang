@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-02 17:54+0200\n"
+"POT-Creation-Date: 2009-08-04 03:42-0400\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) \n"
 "Language-Team: r686 - last version on http://startgolf.tym.cz/czech.lang \n"
@@ -603,9 +603,8 @@ msgstr "Instaluji titul... Ok!"
 msgid "Installing wad"
 msgstr "Instaluji WAD"
 
-#, c-format
-msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team. %s - %i"
-msgstr "Zdá se, že máte informace, které by pro nás mohly být užitecné. Odešlete prosím tuto informaci na náš DEV tým. %s - %i"
+msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team."
+msgstr ""
 
 msgid "Italian"
 msgstr "Italsky"
@@ -1157,6 +1156,9 @@ msgstr "z "
 
 msgid "seconds left"
 msgstr "sekund zbývá"
+
+#~ msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team. %s - %i"
+#~ msgstr "Zdá se, že máte informace, které by pro nás mohly být užitecné. Odešlete prosím tuto informaci na náš DEV tým. %s - %i"
 
 #~ msgid "No partitions found"
 #~ msgstr "Nebyl nalezen žádný oddíl"
