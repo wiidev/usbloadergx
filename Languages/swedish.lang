@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-04 03:42-0400\n"
-"PO-Revision-Date: 2009-07-31 12:20+0200\n"
+"POT-Creation-Date: 2009-08-04 14:40+0200\n"
+"PO-Revision-Date: 2009-08-02 12:20+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
 "MIME-Version: 1.0\n"
@@ -293,7 +293,7 @@ msgid "Custom Paths"
 msgstr "Anpassade sökvägar"
 
 msgid "Customs/Original"
-msgstr ""
+msgstr "Anpassade/Original"
 
 msgid "DOL from SD"
 msgstr "DOL från SD"
@@ -344,7 +344,7 @@ msgid "Discimage Path"
 msgstr "Skivbildsmapp"
 
 msgid "Discimages Download"
-msgstr ""
+msgstr "Skivbilds nedladdning"
 
 msgid "Discpath Changed"
 msgstr "Skivbildsmapp ändrad"
@@ -430,6 +430,12 @@ msgstr "FEL"
 msgid "ERROR:"
 msgstr "FEL:"
 
+msgid "ERROR: USB device could not be loaded!"
+msgstr ""
+
+msgid "ERROR: cIOS could not be loaded!"
+msgstr ""
+
 msgid "English"
 msgstr "Engelska"
 
@@ -461,7 +467,7 @@ msgid "Failed formating"
 msgstr "Formatering misslyckad"
 
 msgid "Failed to open partition"
-msgstr ""
+msgstr "Misslyckades att öppna partition"
 
 msgid "Feb"
 msgstr ""
@@ -536,7 +542,7 @@ msgid "Homebrew Appspath changed"
 msgstr "Homebrew Apps ändrad"
 
 msgid "Homebrew Channel"
-msgstr ""
+msgstr "Homebrew Kanalen"
 
 msgid "Homebrew Launcher"
 msgstr "Homebrew Startare"
@@ -604,7 +610,7 @@ msgid "Installing wad"
 msgstr "Installerar wad"
 
 msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team."
-msgstr ""
+msgstr "Det verkar som om du har information som kan vara till nytta för oss. Vänligen skicka informationen vidare till DEV team."
 
 msgid "Italian"
 msgstr "Italienska"
@@ -657,6 +663,9 @@ msgstr "Laddar standard språk."
 
 msgid "Loading standard music."
 msgstr "Laddar standard musik."
+
+msgid "Loading..."
+msgstr ""
 
 msgid "Lock Console"
 msgstr "Lås konsol"
@@ -773,16 +782,16 @@ msgid "Ok"
 msgstr ""
 
 msgid "Only Customs"
-msgstr ""
+msgstr "Endast Anpassade"
 
 msgid "Only Original"
-msgstr ""
+msgstr "Endast Original"
 
 msgid "Only for Install"
 msgstr "Endast för installering"
 
 msgid "Original/Customs"
-msgstr ""
+msgstr "Original/Anpassade"
 
 msgid "Parental Control"
 msgstr "Föräldrakontroll"
@@ -1051,6 +1060,10 @@ msgstr "Video-läge"
 msgid "Waiting for USB Device"
 msgstr "Väntar på USB-enhet"
 
+#, c-format
+msgid "Waiting for your slow USB Device: %i secs..."
+msgstr ""
+
 msgid "Waiting..."
 msgstr "Väntar..."
 
@@ -1156,9 +1169,6 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder kvar"
-
-#~ msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team. %s - %i"
-#~ msgstr "Det verkar som om du har information som kan vara till nytta för oss. Vänligen skicka informationen vidare till DEV team. %s - %i"
 
 #~ msgid "No partitions found"
 #~ msgstr "Hittade ingen partition"

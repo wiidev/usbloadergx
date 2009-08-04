@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-04 03:42-0400\n"
+"POT-Creation-Date: 2009-08-04 14:40+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -121,7 +121,7 @@ msgid "Alternate DOL"
 msgstr ""
 
 msgid "An Error occured"
-msgstr ""
+msgstr "Algum Erro ocorreu"
 
 msgid "Anti"
 msgstr ""
@@ -139,7 +139,7 @@ msgid "Aug"
 msgstr "Ago"
 
 msgid "AutoInit Network"
-msgstr ""
+msgstr "AutoIniciar Rede"
 
 msgid "AutoPatch"
 msgstr "Mudança Automática"
@@ -211,7 +211,7 @@ msgid "Close"
 msgstr "Fechar"
 
 msgid "Code Download"
-msgstr ""
+msgstr "Descargue Código"
 
 #, c-format
 msgid "Coded by: %s"
@@ -221,10 +221,10 @@ msgid "Coding:"
 msgstr ""
 
 msgid "Confirm"
-msgstr ""
+msgstr "Confirmar"
 
 msgid "Console"
-msgstr ""
+msgstr "Configuração"
 
 msgid "Console Default"
 msgstr "Padrão do Console"
@@ -428,6 +428,12 @@ msgid "ERROR"
 msgstr ""
 
 msgid "ERROR:"
+msgstr ""
+
+msgid "ERROR: USB device could not be loaded!"
+msgstr ""
+
+msgid "ERROR: cIOS could not be loaded!"
 msgstr ""
 
 msgid "English"
@@ -656,6 +662,9 @@ msgid "Loading standard language."
 msgstr "Carregado idioma padrão."
 
 msgid "Loading standard music."
+msgstr ""
+
+msgid "Loading..."
 msgstr ""
 
 msgid "Lock Console"
@@ -1050,6 +1059,10 @@ msgstr "Modo de Vídeo"
 
 msgid "Waiting for USB Device"
 msgstr "Aguardando o Dispositivo USB"
+
+#, c-format
+msgid "Waiting for your slow USB Device: %i secs..."
+msgstr ""
 
 msgid "Waiting..."
 msgstr "Aguardando..."

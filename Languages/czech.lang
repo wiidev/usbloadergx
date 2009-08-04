@@ -4,10 +4,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-04 03:42-0400\n"
+"POT-Creation-Date: 2009-08-04 14:40+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) \n"
-"Language-Team: r686 - last version on http://startgolf.tym.cz/czech.lang \n"
+"Language-Team: r700 - last version on http://startgolf.tym.cz/czech.lang \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -293,7 +293,7 @@ msgid "Custom Paths"
 msgstr "Vlastní cesty"
 
 msgid "Customs/Original"
-msgstr ""
+msgstr "Upravené/Originál"
 
 msgid "DOL from SD"
 msgstr "DOL z SD"
@@ -344,7 +344,7 @@ msgid "Discimage Path"
 msgstr "Cesta k potiskum DVD"
 
 msgid "Discimages Download"
-msgstr ""
+msgstr "Stažení potisku DVD"
 
 msgid "Discpath Changed"
 msgstr "Cesta k diskum zmenena"
@@ -430,6 +430,12 @@ msgstr "CHYBA"
 msgid "ERROR:"
 msgstr "CHYBA:"
 
+msgid "ERROR: USB device could not be loaded!"
+msgstr ""
+
+msgid "ERROR: cIOS could not be loaded!"
+msgstr ""
+
 msgid "English"
 msgstr "Anglicky"
 
@@ -461,7 +467,7 @@ msgid "Failed formating"
 msgstr "Neúspešné formátování"
 
 msgid "Failed to open partition"
-msgstr ""
+msgstr "Nelze otevřít diskový oddíl"
 
 msgid "Feb"
 msgstr "Ún"
@@ -536,7 +542,7 @@ msgid "Homebrew Appspath changed"
 msgstr "Cesta pro Homebrew aplikace zmenena"
 
 msgid "Homebrew Channel"
-msgstr ""
+msgstr "Homebrew kanál"
 
 msgid "Homebrew Launcher"
 msgstr "Spouštec Homebrew"
@@ -604,7 +610,7 @@ msgid "Installing wad"
 msgstr "Instaluji WAD"
 
 msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team."
-msgstr ""
+msgstr "Zdá se, že máte informace, které by pro nás mohly být užitecné. Odešlete prosím tuto informaci na náš DEV tým."
 
 msgid "Italian"
 msgstr "Italsky"
@@ -657,6 +663,9 @@ msgstr "Nahrávám puvodní jazyk"
 
 msgid "Loading standard music."
 msgstr "Nahrávám puvodní hudbu"
+
+msgid "Loading..."
+msgstr ""
 
 msgid "Lock Console"
 msgstr "Zamcení konzole"
@@ -773,16 +782,16 @@ msgid "Ok"
 msgstr ""
 
 msgid "Only Customs"
-msgstr ""
+msgstr "Pouze Upravené"
 
 msgid "Only Original"
-msgstr ""
+msgstr "Pouze originál"
 
 msgid "Only for Install"
 msgstr "Pouze pro instalaci"
 
 msgid "Original/Customs"
-msgstr ""
+msgstr "Originál/Upravené"
 
 msgid "Parental Control"
 msgstr "Rodicovský zámek"
@@ -1051,6 +1060,10 @@ msgstr "Video mód"
 msgid "Waiting for USB Device"
 msgstr "Cekám na zarízení USB"
 
+#, c-format
+msgid "Waiting for your slow USB Device: %i secs..."
+msgstr ""
+
 msgid "Waiting..."
 msgstr "Cekám..."
 
@@ -1156,9 +1169,3 @@ msgstr "z "
 
 msgid "seconds left"
 msgstr "sekund zbývá"
-
-#~ msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team. %s - %i"
-#~ msgstr "Zdá se, že máte informace, které by pro nás mohly být užitecné. Odešlete prosím tuto informaci na náš DEV tým. %s - %i"
-
-#~ msgid "No partitions found"
-#~ msgstr "Nebyl nalezen žádný oddíl"

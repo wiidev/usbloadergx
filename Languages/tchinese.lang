@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-04 03:42-0400\n"
+"POT-Creation-Date: 2009-08-04 14:40+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -430,6 +430,12 @@ msgstr "錯誤"
 msgid "ERROR:"
 msgstr "錯誤"
 
+msgid "ERROR: USB device could not be loaded!"
+msgstr ""
+
+msgid "ERROR: cIOS could not be loaded!"
+msgstr ""
+
 msgid "English"
 msgstr "英文"
 
@@ -604,7 +610,7 @@ msgid "Installing wad"
 msgstr "正在安裝wad"
 
 msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team."
-msgstr ""
+msgstr "請將這些訊息傳送至開發小組以幫助本軟體開發"
 
 msgid "Italian"
 msgstr "義大利文"
@@ -657,6 +663,9 @@ msgstr "正在載入預設語言"
 
 msgid "Loading standard music."
 msgstr "正在載入預設音樂"
+
+msgid "Loading..."
+msgstr ""
 
 msgid "Lock Console"
 msgstr "鎖定控制台"
@@ -1051,6 +1060,10 @@ msgstr "影像格式"
 msgid "Waiting for USB Device"
 msgstr "等待USB裝置"
 
+#, c-format
+msgid "Waiting for your slow USB Device: %i secs..."
+msgstr ""
+
 msgid "Waiting..."
 msgstr "等待中..."
 
@@ -1156,9 +1169,6 @@ msgstr "剩餘空間 總容量"
 
 msgid "seconds left"
 msgstr "剩餘秒數"
-
-#~ msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team. %s - %i"
-#~ msgstr "請將這些訊息傳送至開發小組以幫助本軟體開發 %s - %i"
 
 #~ msgid "No partitions found"
 #~ msgstr "找不到磁區"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-04 03:42-0400\n"
+"POT-Creation-Date: 2009-08-04 14:40+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -430,6 +430,12 @@ msgstr "FEHLER"
 msgid "ERROR:"
 msgstr "FEHLER:"
 
+msgid "ERROR: USB device could not be loaded!"
+msgstr ""
+
+msgid "ERROR: cIOS could not be loaded!"
+msgstr ""
+
 msgid "English"
 msgstr "Englisch"
 
@@ -604,7 +610,7 @@ msgid "Installing wad"
 msgstr "Installiere wad"
 
 msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team."
-msgstr ""
+msgstr "Es scheint du hast Informationen die hilfreich für uns sein könnten. Bitte sende diese information zum DEV Team."
 
 msgid "Italian"
 msgstr "Italienisch"
@@ -657,6 +663,9 @@ msgstr "Lade Standardsprache."
 
 msgid "Loading standard music."
 msgstr "Lade Standardmusik."
+
+msgid "Loading..."
+msgstr ""
 
 msgid "Lock Console"
 msgstr "Konsole sperren"
@@ -963,7 +972,7 @@ msgid "Themepath change"
 msgstr "Theme Pfad ändern"
 
 msgid "Time left:"
-msgstr "Zeit verbleibend:"
+msgstr "Noch:"
 
 msgid "Title Launcher"
 msgstr ""
@@ -1050,6 +1059,10 @@ msgstr "Video Modus"
 
 msgid "Waiting for USB Device"
 msgstr "Warte auf USB-Gerät"
+
+#, c-format
+msgid "Waiting for your slow USB Device: %i secs..."
+msgstr ""
 
 msgid "Waiting..."
 msgstr "Warte..."
@@ -1156,9 +1169,6 @@ msgstr "von"
 
 msgid "seconds left"
 msgstr "Sekunden verbleiben"
-
-#~ msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team. %s - %i"
-#~ msgstr "Es scheint du hast Informationen die hilfreich für uns sein könnten. Bitte sende diese information zum DEV Team. %s - %i"
 
 #~ msgid "No partitions found"
 #~ msgstr "Keine Partitionen gefunden"

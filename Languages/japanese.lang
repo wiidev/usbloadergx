@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-04 03:42-0400\n"
+"POT-Creation-Date: 2009-08-04 14:40+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -19,7 +19,7 @@ msgid " could not be downloaded."
 msgstr "ﾀﾞｳﾝﾛｰﾄﾞできませんでした"
 
 msgid " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information."
-msgstr "は保存されました。ﾃｷｽﾄは確かめられていません。いくつかのｺｰﾄﾞが正しく動作しない可能性があります。問題が生じたときは、詳しい情報を得るにはﾃｷｽﾄｴﾃﾞｨﾀでﾃｷｽﾄを確認してください。"
+msgstr "は保存されました。ﾃｷｽﾄは確かめられていません。いくつかのｺｰﾄﾞが正しく動作しない可能性があります。問題が生じて詳しい情報を得たいときは、ｴﾃﾞｨﾀでﾃｷｽﾄを確認してください。"
 
 msgid " is not on the server."
 msgstr "はｻｰﾊﾞｰにありません。"
@@ -103,7 +103,7 @@ msgid ">> Installing title..."
 msgstr "ﾀｲﾄﾙをｲﾝｽﾄｰﾙします"
 
 msgid ">> Reading WAD data..."
-msgstr ">> WADﾃﾞｰﾀを読込します"
+msgstr ">>  WADﾃﾞｰﾀを読込みます"
 
 msgid ">> Reading WAD data...ERROR! "
 msgstr ">> WADﾃﾞｰﾀを読込...失敗!"
@@ -121,7 +121,7 @@ msgid "Alternate DOL"
 msgstr "代理DOL起動"
 
 msgid "An Error occured"
-msgstr ""
+msgstr "エラーが起きました"
 
 msgid "Anti"
 msgstr "Anti"
@@ -248,19 +248,19 @@ msgid "Could not create GCT file"
 msgstr "GCTﾌｧｲﾙを作成できません"
 
 msgid "Could not find a WBFS partition."
-msgstr "WBFS領域が見つかりません"
+msgstr "WBFSﾊﾟｰﾃｨｼｮﾝが見つかりません"
 
 msgid "Could not initialize DIP module!"
-msgstr "DIPﾓｼﾞｭｰﾙの初期化ができません!"
+msgstr "DIPﾓｼﾞｭｰﾙを初期化できません!"
 
 msgid "Could not initialize network!"
-msgstr "ﾈｯﾄﾜｰｸの初期化ができません!"
+msgstr "ﾈｯﾄﾜｰｸを初期化できません!"
 
 msgid "Could not open Disc"
 msgstr "ﾃﾞｨｽｸを開けません"
 
 msgid "Could not open WBFS partition"
-msgstr "WBFS領域を開けません"
+msgstr "WBFSﾊﾟｰﾃｨｼｮﾝを開けません"
 
 msgid "Could not open disc."
 msgstr "ﾃﾞｨｽｸを開けません"
@@ -359,16 +359,16 @@ msgid "Display"
 msgstr "ﾃﾞｨｽﾌﾟﾚｲ"
 
 msgid "Display as a carousel"
-msgstr ""
+msgstr "回転ﾄﾚｲ風に表示"
 
 msgid "Display as a grid"
-msgstr ""
+msgstr "格子風に表示"
 
 msgid "Display as a list"
-msgstr ""
+msgstr "リスト表示"
 
 msgid "Display favorites"
-msgstr ""
+msgstr "お気に入りを表示"
 
 msgid "Do you really want to delete:"
 msgstr "本当に削除しますか:"
@@ -386,7 +386,7 @@ msgid "Do you want to use the alt dol that is known to be correct?"
 msgstr "既知の代替DOLを利用しますか？"
 
 msgid "Do you wish to update/download all language files?"
-msgstr ""
+msgstr "すべての言語ﾌｧｲﾙをｱｯﾌﾟﾃﾞｰﾄ(ﾀﾞｳﾝﾛｰﾄﾞ)しますか?"
 
 msgid "Dol Path"
 msgstr "DOLのパス"
@@ -430,6 +430,12 @@ msgstr "エラー"
 msgid "ERROR:"
 msgstr "エラー："
 
+msgid "ERROR: USB device could not be loaded!"
+msgstr ""
+
+msgid "ERROR: cIOS could not be loaded!"
+msgstr ""
+
 msgid "English"
 msgstr "英語"
 
@@ -461,7 +467,7 @@ msgid "Failed formating"
 msgstr "ﾌｫｰﾏｯﾄに失敗しました"
 
 msgid "Failed to open partition"
-msgstr ""
+msgstr "ﾊﾟｰﾃｨｼｮﾝを開けませんでした"
 
 msgid "Feb"
 msgstr "2月"
@@ -536,7 +542,7 @@ msgid "Homebrew Appspath changed"
 msgstr "HomebrewのAppsﾊﾟｽを変更しました"
 
 msgid "Homebrew Channel"
-msgstr ""
+msgstr "HomebrewChannel"
 
 msgid "Homebrew Launcher"
 msgstr "Homebrewランチャー"
@@ -658,6 +664,9 @@ msgstr "標準の言語をロード中..."
 msgid "Loading standard music."
 msgstr "標準の音楽をロード中..."
 
+msgid "Loading..."
+msgstr ""
+
 msgid "Lock Console"
 msgstr "ｺﾝｿｰﾙをﾛｯｸ"
 
@@ -695,7 +704,7 @@ msgid "No .dol or .elf files found."
 msgstr "DOL(ELF)ﾌｧｲﾙがありません"
 
 msgid "No Cheatfile found"
-msgstr "チートが見つかりません"
+msgstr "ﾁｰﾄﾌｧｲﾙが見つかりません"
 
 msgid "No Favorites"
 msgstr "お気に入りがありません"
@@ -704,7 +713,7 @@ msgid "No SD-Card inserted!"
 msgstr "SDｶｰﾄﾞが挿入されていません!"
 
 msgid "No USB Device"
-msgstr "USBﾃﾞﾊﾞｲｽを検出できませんでした"
+msgstr "USBﾃﾞﾊﾞｲｽがありません"
 
 msgid "No USB Device found."
 msgstr "USBﾃﾞﾊﾞｲｽﾞが検出されていません"
@@ -737,7 +746,7 @@ msgid "Not a Wii Disc"
 msgstr "Wiiﾃﾞｨｽｸではありません"
 
 msgid "Not a dol/elf file."
-msgstr ""
+msgstr "dol(elf)ﾌｧｲﾙではありません"
 
 msgid "Not enough free memory"
 msgstr "空ﾒﾓﾘが不足しています"
@@ -896,10 +905,10 @@ msgid "Shutdown to Idle"
 msgstr "スタンバイ"
 
 msgid "Sort alphabetically"
-msgstr ""
+msgstr "ｱﾙﾌｧﾍﾞｯﾄ順に並替"
 
 msgid "Sort order by most played"
-msgstr ""
+msgstr "ﾌﾟﾚｲ回数が多い順に並替"
 
 msgid "Sound"
 msgstr "ｻｳﾝﾄﾞ"
@@ -944,7 +953,7 @@ msgid "TXTCheatcodes Path changed"
 msgstr "TXTﾁｰﾄｺｰﾄﾞのﾊﾟｽを変更しました"
 
 msgid "The file is not a .wad"
-msgstr ""
+msgstr "wadﾌｧｲﾙではありません"
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."
 msgstr "WADﾌｧｲﾙをｲﾝｽﾄｰﾙしましたが、SDから削除できませんでした"
@@ -997,7 +1006,7 @@ msgid "Uninstalling wad"
 msgstr "WADをｱﾝｲﾝｽﾄｰﾙ"
 
 msgid "Unlock console to use this option."
-msgstr "このｵﾌﾟｼｮﾝの使用のためﾛｯｸを解除します"
+msgstr "このｵﾌﾟｼｮﾝを使用するためﾛｯｸを解除します"
 
 msgid "Unlocked"
 msgstr "ｱﾝﾛｯｸ"
@@ -1012,10 +1021,10 @@ msgid "Update DOL"
 msgstr "DOLを更新"
 
 msgid "Update Files"
-msgstr ""
+msgstr "ﾌｧｲﾙを更新"
 
 msgid "Update all Language Files"
-msgstr ""
+msgstr "全言語ﾌｧｲﾙを更新"
 
 msgid "Update failed"
 msgstr "更新に失敗しました"
@@ -1033,10 +1042,10 @@ msgid "Updating"
 msgstr "更新中"
 
 msgid "Updating Language Files:"
-msgstr ""
+msgstr "言語設定ﾌｧｲﾙを更新中:"
 
 msgid "Updating WiiTDB.zip"
-msgstr ""
+msgstr "WiiTDB.zipを更新中"
 
 msgid "VIDTV Patch"
 msgstr "VIDTVﾊﾟｯﾁ"
@@ -1051,6 +1060,10 @@ msgstr "ﾋﾞﾃﾞｵﾓｰﾄﾞ"
 msgid "Waiting for USB Device"
 msgstr "USBﾃﾞﾊﾞｲｽの応答待ち"
 
+#, c-format
+msgid "Waiting for your slow USB Device: %i secs..."
+msgstr ""
+
 msgid "Waiting..."
 msgstr "お待ちください..."
 
@@ -1064,7 +1077,7 @@ msgid "Wii Menu"
 msgstr "Wiiﾒﾆｭｰ"
 
 msgid "Wii Settings"
-msgstr ""
+msgstr "Wii 設定"
 
 msgid "Wiilight"
 msgstr "Wii light"
@@ -1076,10 +1089,10 @@ msgid "XMLPath"
 msgstr "XMLﾊﾟｽ"
 
 msgid "XMLPath change"
-msgstr ""
+msgstr "XMLﾊﾟｽの変更"
 
 msgid "XMLPath changed."
-msgstr ""
+msgstr "XMLﾊﾟｽを変更しました"
 
 msgid "Yes"
 msgstr "はい"
@@ -1091,7 +1104,7 @@ msgid "You are choosing to display favorites and you do not have any selected."
 msgstr "お気に入りの登録がありません"
 
 msgid "You have attempted to load a bad image"
-msgstr "読み込めないイメージです"
+msgstr "読み込めないｲﾒｰｼﾞです"
 
 msgid "You need to format a partition"
 msgstr "ﾊﾟｰﾃｨｼｮﾝをﾌｫｰﾏｯﾄして下さい"
@@ -1149,7 +1162,7 @@ msgid "free"
 msgstr "空き"
 
 msgid "not set"
-msgstr "ｾｯﾄされてません"
+msgstr "ｾｯﾄされていません"
 
 msgid "of"
 msgstr "of"

@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# For USB Loader GX rev672
+# For USB Loader GX rev700
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-04 03:42-0400\n"
-"PO-Revision-Date: 2009-07-30 12:36\n"
+"POT-Creation-Date: 2009-08-04 14:40+0200\n"
+"PO-Revision-Date: 2009-08-03 16:22\n"
 "Last-Translator: Sky8000\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -172,7 +172,7 @@ msgid "Boot/Standard"
 msgstr "Arranque/Standard"
 
 msgid "Boot?"
-msgstr "Arrancar ?"
+msgstr "Carregar?"
 
 msgid "Both"
 msgstr "Ambos"
@@ -293,7 +293,7 @@ msgid "Custom Paths"
 msgstr "Personalização de Pastas"
 
 msgid "Customs/Original"
-msgstr ""
+msgstr "Personalizadas/Originais"
 
 msgid "DOL from SD"
 msgstr "DOL do cartão SD"
@@ -344,7 +344,7 @@ msgid "Discimage Path"
 msgstr "Pasta Imagens Disco"
 
 msgid "Discimages Download"
-msgstr ""
+msgstr "Descaregar Imagens Disco"
 
 msgid "Discpath Changed"
 msgstr "Pasta das Imagens Disco alterada"
@@ -430,6 +430,12 @@ msgstr "ERRO"
 msgid "ERROR:"
 msgstr "ERRO:"
 
+msgid "ERROR: USB device could not be loaded!"
+msgstr ""
+
+msgid "ERROR: cIOS could not be loaded!"
+msgstr ""
+
 msgid "English"
 msgstr "Inglês"
 
@@ -461,7 +467,7 @@ msgid "Failed formating"
 msgstr "Falha ao formatar"
 
 msgid "Failed to open partition"
-msgstr ""
+msgstr "Falha ao abrir partição"
 
 msgid "Feb"
 msgstr "Fev"
@@ -536,7 +542,7 @@ msgid "Homebrew Appspath changed"
 msgstr "Pasta Apps Homebrew alterada"
 
 msgid "Homebrew Channel"
-msgstr ""
+msgstr "Canal Hombrew"
 
 msgid "Homebrew Launcher"
 msgstr "Launcher Homebrew"
@@ -604,7 +610,7 @@ msgid "Installing wad"
 msgstr "Instalando wad"
 
 msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team."
-msgstr ""
+msgstr "Parece que tens informação que nos pode ser útil. Por favor envia esta informação à equipa de desenvolvimento."
 
 msgid "Italian"
 msgstr "Italiano"
@@ -657,6 +663,9 @@ msgstr "Carregado idioma padrão."
 
 msgid "Loading standard music."
 msgstr "Carregando música padrão."
+
+msgid "Loading..."
+msgstr ""
 
 msgid "Lock Console"
 msgstr "Bloquear Configurações"
@@ -737,7 +746,7 @@ msgid "Not a Wii Disc"
 msgstr "Não é um Disco da Wii"
 
 msgid "Not a dol/elf file."
-msgstr "Não é um ficheiro dol/elf."
+msgstr "Não é um ficheiro dol/elf válido."
 
 msgid "Not enough free memory"
 msgstr "Não há memória livre suficiente"
@@ -773,16 +782,16 @@ msgid "Ok"
 msgstr "Ok"
 
 msgid "Only Customs"
-msgstr ""
+msgstr "Apenas Personalizadas"
 
 msgid "Only Original"
-msgstr ""
+msgstr "Apenas Originais"
 
 msgid "Only for Install"
 msgstr "Apenas na instalação"
 
 msgid "Original/Customs"
-msgstr ""
+msgstr "Originais/Personalizadas"
 
 msgid "Parental Control"
 msgstr "Controlo Parental"
@@ -966,7 +975,7 @@ msgid "Time left:"
 msgstr "Tempo restante:"
 
 msgid "Title Launcher"
-msgstr "Menú Canais"
+msgstr "Laucher de Títulos"
 
 msgid "Titles from XML"
 msgstr "Títulos do XML"
@@ -1051,6 +1060,10 @@ msgstr "Modo de Vídeo"
 msgid "Waiting for USB Device"
 msgstr "Aguardando pelo Dispositivo USB"
 
+#, c-format
+msgid "Waiting for your slow USB Device: %i secs..."
+msgstr ""
+
 msgid "Waiting..."
 msgstr "Aguardando..."
 
@@ -1064,7 +1077,7 @@ msgid "Wii Menu"
 msgstr "Menu da Wii"
 
 msgid "Wii Settings"
-msgstr "Configurações Wii"
+msgstr "Configuração da Wii"
 
 msgid "Wiilight"
 msgstr "Iluminação Leitor"
@@ -1156,15 +1169,3 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
-
-#~ msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team. %s - %i"
-#~ msgstr "Parece que tens informação que nos pode ser útil. Por favor envia esta informação à equipa de desenvolvimento. %s - %i"
-
-#~ msgid "No partitions found"
-#~ msgstr "Não foram encontradas partições"
-
-#~ msgid "Restart"
-#~ msgstr "Reiniciar"
-
-#~ msgid "Saving"
-#~ msgstr "Gravando"

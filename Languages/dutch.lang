@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-04 03:42-0400\n"
+"POT-Creation-Date: 2009-08-04 14:40+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: tj_cool\n"
 "Language-Team: \n"
@@ -430,6 +430,12 @@ msgstr "FOUT"
 msgid "ERROR:"
 msgstr "FOUT:"
 
+msgid "ERROR: USB device could not be loaded!"
+msgstr ""
+
+msgid "ERROR: cIOS could not be loaded!"
+msgstr ""
+
 msgid "English"
 msgstr "Engels"
 
@@ -604,7 +610,7 @@ msgid "Installing wad"
 msgstr "Wad installeren..."
 
 msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team."
-msgstr ""
+msgstr "Je hebt informatie gevonden die ons kan helpen. Geeft u alstublieft deze info door aan ons ontwikkelingsteam."
 
 msgid "Italian"
 msgstr "Italiaans"
@@ -657,6 +663,9 @@ msgstr "Standaardtaal laden."
 
 msgid "Loading standard music."
 msgstr "Standaardmuziek laden."
+
+msgid "Loading..."
+msgstr ""
 
 msgid "Lock Console"
 msgstr "Console vergrendelen"
@@ -1051,6 +1060,10 @@ msgstr "Video mode"
 msgid "Waiting for USB Device"
 msgstr "Wachten op USB apparaat…"
 
+#, c-format
+msgid "Waiting for your slow USB Device: %i secs..."
+msgstr ""
+
 msgid "Waiting..."
 msgstr "Wachten..."
 
@@ -1156,9 +1169,6 @@ msgstr "van"
 
 msgid "seconds left"
 msgstr "seconden over:"
-
-#~ msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team. %s - %i"
-#~ msgstr "Je hebt informatie gevonden die ons kan helpen. Geeft u alstublieft deze info door aan ons ontwikkelingsteam. %s - %i"
 
 #~ msgid "No partitions found"
 #~ msgstr "Geen partities gevonden"

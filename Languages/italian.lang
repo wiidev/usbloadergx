@@ -1,10 +1,10 @@
 # USB Loader GX language source file.
-# italian.lang - v32 - r679
+# italian.lang - v35 - r705
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-04 03:42-0400\n"
+"POT-Creation-Date: 2009-08-04 14:40+0200\n"
 "PO-Revision-Date: 2009-07-24 11:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe & Cambo\n"
@@ -151,7 +151,7 @@ msgid "Back to HBC or Wii Menu"
 msgstr "Torna a HBC/Menu Wii"
 
 msgid "Back to Loader"
-msgstr "HomeBrew Channel"
+msgstr "Canale HomeBrew"
 
 msgid "Back to Wii Menu"
 msgstr "Torna al Menu Wii"
@@ -293,7 +293,7 @@ msgid "Custom Paths"
 msgstr "Impostazione Percorsi (Directory)"
 
 msgid "Customs/Original"
-msgstr ""
+msgstr "Modific./Origin."
 
 msgid "DOL from SD"
 msgstr "DOL dalla scheda SD"
@@ -344,13 +344,13 @@ msgid "Discimage Path"
 msgstr "Percorso Imm. Disco"
 
 msgid "Discimages Download"
-msgstr ""
+msgstr "Scaricamento Imm. Disco"
 
 msgid "Discpath Changed"
 msgstr "Percorso Immagini Disco Modificato"
 
 msgid "Discpath change"
-msgstr "Modifica Percorso Immagine Disco"
+msgstr "Modifica Percorso Immagini Disco"
 
 msgid "DiskFlip"
 msgstr "Gira i dischi"
@@ -430,6 +430,12 @@ msgstr "ERRORE"
 msgid "ERROR:"
 msgstr "ERRORE:"
 
+msgid "ERROR: USB device could not be loaded!"
+msgstr ""
+
+msgid "ERROR: cIOS could not be loaded!"
+msgstr ""
+
 msgid "English"
 msgstr "Inglese"
 
@@ -461,7 +467,7 @@ msgid "Failed formating"
 msgstr "Errore Formattazione"
 
 msgid "Failed to open partition"
-msgstr ""
+msgstr "Non si accede alla partizione"
 
 msgid "Feb"
 msgstr "febbraio"
@@ -536,7 +542,7 @@ msgid "Homebrew Appspath changed"
 msgstr "Percorso app. Homebrew modificato"
 
 msgid "Homebrew Channel"
-msgstr ""
+msgstr "Canale HomeBrew"
 
 msgid "Homebrew Launcher"
 msgstr "Applicazioni Homebrew"
@@ -604,7 +610,7 @@ msgid "Installing wad"
 msgstr "Sto installando il WAD"
 
 msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team."
-msgstr ""
+msgstr "Hai informazioni che potrebbero esserci utili. Per favore, comunicale al team di sviluppo."
 
 msgid "Italian"
 msgstr "Italiano"
@@ -657,6 +663,9 @@ msgstr "Caricamento Lingua Standard."
 
 msgid "Loading standard music."
 msgstr "Caricamento Musica std."
+
+msgid "Loading..."
+msgstr ""
 
 msgid "Lock Console"
 msgstr "Blocco Console"
@@ -773,16 +782,16 @@ msgid "Ok"
 msgstr "OK"
 
 msgid "Only Customs"
-msgstr ""
+msgstr "Modificate"
 
 msgid "Only Original"
-msgstr ""
+msgstr "Originali"
 
 msgid "Only for Install"
 msgstr "Installa Solamente"
 
 msgid "Original/Customs"
-msgstr ""
+msgstr "Origin./Modific."
 
 msgid "Parental Control"
 msgstr "Controllo Genitori"
@@ -1051,6 +1060,10 @@ msgstr "Modalità Video"
 msgid "Waiting for USB Device"
 msgstr "Caricamento Dispositivo USB"
 
+#, c-format
+msgid "Waiting for your slow USB Device: %i secs..."
+msgstr ""
+
 msgid "Waiting..."
 msgstr "Caricamento..."
 
@@ -1156,9 +1169,6 @@ msgstr "di"
 
 msgid "seconds left"
 msgstr "secondi mancanti"
-
-#~ msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team. %s - %i"
-#~ msgstr "Hai informazioni che potrebbero esserci utili. Per favore, comunicale al team di sviluppo. %s - %i"
 
 #~ msgid "No partitions found"
 #~ msgstr "Nessuna partizione trovata"

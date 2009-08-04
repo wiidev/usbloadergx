@@ -1,10 +1,10 @@
 # USB Loader GX language source file.
-# French V9.2 r697
+# French V9.3 r700
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-04 03:42-0400\n"
+"POT-Creation-Date: 2009-08-04 14:40+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: Kin8\n"
 "Language-Team: Badablek, Amour, ikya, OuahOuah, dj_skual & Kin8\n"
@@ -293,7 +293,7 @@ msgid "Custom Paths"
 msgstr "Personnalisation Dossiers"
 
 msgid "Customs/Original"
-msgstr ""
+msgstr "Persos/Originaux"
 
 msgid "DOL from SD"
 msgstr "DOL sur SD"
@@ -344,7 +344,7 @@ msgid "Discimage Path"
 msgstr "Dossier Labels DVD"
 
 msgid "Discimages Download"
-msgstr ""
+msgstr "Téléch. Labels DVD"
 
 msgid "Discpath Changed"
 msgstr "Dossier des labels DVD changé"
@@ -429,6 +429,12 @@ msgstr "ERREUR"
 
 msgid "ERROR:"
 msgstr "ERREUR:"
+
+msgid "ERROR: USB device could not be loaded!"
+msgstr "ERREUR: Impossible de charger le périph. USB!"
+
+msgid "ERROR: cIOS could not be loaded!"
+msgstr "ERREUR: Impossible de charger le cIOS!"
 
 msgid "English"
 msgstr "Anglais"
@@ -604,7 +610,7 @@ msgid "Installing wad"
 msgstr "Installation WAD"
 
 msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team."
-msgstr ""
+msgstr "SVP, faîtes passer cette information qui serait très utile à la Team USB Loader GX."
 
 msgid "Italian"
 msgstr "Italien"
@@ -657,6 +663,9 @@ msgstr "Chargement langue par défaut."
 
 msgid "Loading standard music."
 msgstr "Chargement musique standard."
+
+msgid "Loading..."
+msgstr "Chargement..."
 
 msgid "Lock Console"
 msgstr "Verrouiller la console"
@@ -773,16 +782,16 @@ msgid "Ok"
 msgstr "OK"
 
 msgid "Only Customs"
-msgstr ""
+msgstr "Personnalisés"
 
 msgid "Only Original"
-msgstr ""
+msgstr "Originaux"
 
 msgid "Only for Install"
 msgstr "Jeu installé seulement"
 
 msgid "Original/Customs"
-msgstr ""
+msgstr "Originaux/Persos"
 
 msgid "Parental Control"
 msgstr "Contrôle Parental"
@@ -1051,6 +1060,10 @@ msgstr "Mode vidéo"
 msgid "Waiting for USB Device"
 msgstr "Attente d'un périphérique USB"
 
+#, c-format
+msgid "Waiting for your slow USB Device: %i secs..."
+msgstr "Attente de votre périphérique USB: %i secs..."
+
 msgid "Waiting..."
 msgstr "En attente..."
 
@@ -1156,9 +1169,6 @@ msgstr "sur"
 
 msgid "seconds left"
 msgstr "secondes restantes"
-
-#~ msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team. %s - %i"
-#~ msgstr "SVP, faîtes passer cette information qui serait très utile à la Team USB Loader GX. %s - %i"
 
 #~ msgid "No partitions found"
 #~ msgstr "Aucune partition trouvée"

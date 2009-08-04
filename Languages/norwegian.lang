@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-04 03:42-0400\n"
+"POT-Creation-Date: 2009-08-04 14:40+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -293,7 +293,7 @@ msgid "Custom Paths"
 msgstr "Endre stier"
 
 msgid "Customs/Original"
-msgstr ""
+msgstr "Egendefinert/Original"
 
 msgid "DOL from SD"
 msgstr "DOL fra SD"
@@ -344,7 +344,7 @@ msgid "Discimage Path"
 msgstr "Platebilde sti"
 
 msgid "Discimages Download"
-msgstr ""
+msgstr "Platebilde nedlasting"
 
 msgid "Discpath Changed"
 msgstr "Plate sti endret"
@@ -430,6 +430,12 @@ msgstr "FEIL"
 msgid "ERROR:"
 msgstr "FEIL:"
 
+msgid "ERROR: USB device could not be loaded!"
+msgstr ""
+
+msgid "ERROR: cIOS could not be loaded!"
+msgstr ""
+
 msgid "English"
 msgstr "Engelsk"
 
@@ -461,7 +467,7 @@ msgid "Failed formating"
 msgstr "Feil ved formatering"
 
 msgid "Failed to open partition"
-msgstr ""
+msgstr "Feil ved åpning av partisjon"
 
 msgid "Feb"
 msgstr "Feb"
@@ -536,7 +542,7 @@ msgid "Homebrew Appspath changed"
 msgstr "Homebrew Apps sti endret"
 
 msgid "Homebrew Channel"
-msgstr ""
+msgstr "Homebrew Channel"
 
 msgid "Homebrew Launcher"
 msgstr "Homebrew Laster"
@@ -604,7 +610,7 @@ msgid "Installing wad"
 msgstr "Installerer WAD"
 
 msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team."
-msgstr ""
+msgstr "Det ser ut til at du har informasjon som kan være nyttig for oss. Vennligst videresend denne informasjonen til utviklerteamet."
 
 msgid "Italian"
 msgstr "Italiensk"
@@ -657,6 +663,9 @@ msgstr "Laster standard språk."
 
 msgid "Loading standard music."
 msgstr "Laster standard musikk."
+
+msgid "Loading..."
+msgstr ""
 
 msgid "Lock Console"
 msgstr "Lås konsoll"
@@ -737,7 +746,7 @@ msgid "Not a Wii Disc"
 msgstr "Ikke en Wii plate"
 
 msgid "Not a dol/elf file."
-msgstr ""
+msgstr "Ikke en dol/elf fil."
 
 msgid "Not enough free memory"
 msgstr "Ikke nok ledig minne"
@@ -773,16 +782,16 @@ msgid "Ok"
 msgstr "Ok"
 
 msgid "Only Customs"
-msgstr ""
+msgstr "Kun egendefinert"
 
 msgid "Only Original"
-msgstr ""
+msgstr "Kun original"
 
 msgid "Only for Install"
 msgstr "Kun for installering"
 
 msgid "Original/Customs"
-msgstr ""
+msgstr "Original/Egendefinert"
 
 msgid "Parental Control"
 msgstr "Foreldrekontroll"
@@ -944,7 +953,7 @@ msgid "TXTCheatcodes Path changed"
 msgstr "TXTjuksekode sti endret"
 
 msgid "The file is not a .wad"
-msgstr ""
+msgstr "Denne filen er ikke en .wad"
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."
 msgstr "WAD filen ble installert.  Men ble ikke slettet fra SD kort."
@@ -1051,6 +1060,10 @@ msgstr "Video modus"
 msgid "Waiting for USB Device"
 msgstr "Venter på USB enhet"
 
+#, c-format
+msgid "Waiting for your slow USB Device: %i secs..."
+msgstr ""
+
 msgid "Waiting..."
 msgstr "Venter..."
 
@@ -1156,9 +1169,6 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder gjenstår"
-
-#~ msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team. %s - %i"
-#~ msgstr "Det ser ut til at du har informasjon som kan være nyttig for oss. Vennligst videresend denne informasjonen til utviklerteamet. %s - %i"
 
 #~ msgid "No partitions found"
 #~ msgstr "Ingen partisjoner funnet"
