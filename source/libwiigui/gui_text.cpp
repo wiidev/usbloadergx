@@ -292,22 +292,31 @@ void GuiText::Draw()
 			int i = 0;
 			int ch = 0;
 			int linenum = 0;
+			int linemax = 200;
 			int lastSpace = -1;
 			int lastSpaceIndex = -1;
-			wchar_t * tmptext[55];
+			wchar_t * tmptext[linemax];
 			
 			totalLines=0;
 			while(ch < strlen)
 			{
 				if(i == 0)
-					tmptext[linenum] = new wchar_t[strlen + 1];
+				{
+					if (linenum <= linemax)
+					{
+						tmptext[linenum] = new wchar_t[strlen + 1];
+					} 
+					else 
+					{
+						break;
+					}
+				}
 					
 				tmptext[linenum][i] = text[ch];
 				tmptext[linenum][i+1] = 0;
 
-
-				if(text[ch] == ' ' || ch == strlen-1)
-				{
+				//if(text[ch] == ' ' || ch == strlen-1)
+				//{
 					if((font ? font : fontSystem)->getWidth(tmptext[linenum]) >= maxWidth)
 					//if(fontSystem->getWidth(tmptext[linenum]) >= maxWidth)
 					{
@@ -325,16 +334,17 @@ void GuiText::Draw()
 					{
 						linenum++;
 					}
-				}
-				if((text[ch] == ' ' && i >= 0)||
-					text[ch] == '\r' || text[ch] == '\n'
-					|| text[ch] == 0x0D|| text[ch] == 0x0A)
+				//}
+				if(text[ch] == ' ' && i >= 0)
 				{
 					lastSpace = ch;
 					lastSpaceIndex = i;
 				}
-				
-				
+				if(text[ch] == '\n' && ch != strlen-1 && i >= 0)
+				{
+					linenum++;
+					i = -1;
+				}
 				ch++;
 				i++;
 			}
@@ -351,7 +361,7 @@ void GuiText::Draw()
 				}
 			}
 			
-			//put in for txt verticle txt scrolling
+			//put in for txt vertical txt scrolling
 			else {
 				int j;
 				i=0;

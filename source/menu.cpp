@@ -1076,6 +1076,7 @@ int MenuDiscList() {
                     case 'I':
                     case 'S':
                     case 'H':
+                    case 'U':
                     case 'X':
                     case 'Y':
                         sprintf(gameregion,"  PAL ");

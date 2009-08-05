@@ -33,7 +33,7 @@ int HomebrewXML::LoadHomebrewXMLData(const char* filename) {
         return -1;
     }
 
-    nodetreeHB = mxmlLoadFile(NULL, filexml, MXML_NO_CALLBACK);
+    nodetreeHB = mxmlLoadFile(NULL, filexml, MXML_OPAQUE_CALLBACK);
     fclose(filexml);
 
     if (nodetreeHB == NULL) {

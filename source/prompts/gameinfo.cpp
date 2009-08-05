@@ -70,8 +70,8 @@ int showGameInfo(char *ID) {
 			microphone=0,
 			zapper=0,
 			nintendods=0,
-			wiispeak=0,
-			vitalitysensor=0;
+			//vitalitysensor=0,
+			wiispeak=0;
         int newline=1;
         u8 page=1;
 
@@ -94,7 +94,7 @@ int showGameInfo(char *ID) {
         GuiImage * zapperImg = NULL;
         GuiImage * nintendodsImg = NULL;
         GuiImage * wiispeakImg = NULL;
-        GuiImage * vitalitysensorImg = NULL;
+        //GuiImage * vitalitysensorImg = NULL;
         GuiImage * gcImg = NULL;
         GuiImage * dialogBoxImg1 = NULL;
         GuiImage * dialogBoxImg2 = NULL;
@@ -119,7 +119,7 @@ int showGameInfo(char *ID) {
         GuiImageData * zapperImgData = NULL;
         GuiImageData * nintendodsImgData = NULL;
         GuiImageData * wiispeakImgData = NULL;
-        GuiImageData * vitalitysensorImgData = NULL;
+        //GuiImageData * vitalitysensorImgData = NULL;
         GuiImageData * gamecubeImgData = NULL;
         GuiImageData * ratingImgData = NULL;
         GuiImageData * cover = NULL;
@@ -233,8 +233,8 @@ int showGameInfo(char *ID) {
                 nintendods=1;
 			if (strcmp(gameinfo.accessoriesReq[i],"wiispeak")==0)
                 wiispeak=1;
-			if (strcmp(gameinfo.accessoriesReq[i],"vitalitysensor")==0)
-                vitalitysensor=1;
+			//if (strcmp(gameinfo.accessoriesReq[i],"vitalitysensor")==0)
+            //   vitalitysensor=1;
             if (strcmp(gameinfo.accessoriesReq[i],"gamecube")==0)
                 gamecube=1;
         }
@@ -308,8 +308,8 @@ int showGameInfo(char *ID) {
                 nintendods=1;
 			if (strcmp(gameinfo.accessories[i],"wiispeak")==0)
                 wiispeak=1;
-			if (strcmp(gameinfo.accessories[i],"vitalitysensor")==0)
-                vitalitysensor=1;
+			//if (strcmp(gameinfo.accessories[i],"vitalitysensor")==0)
+            //    vitalitysensor=1;
             if (strcmp(gameinfo.accessories[i],"gamecube")==0)
                 gamecube=1;
         }
@@ -907,7 +907,7 @@ int showGameInfo(char *ID) {
             delete zapperImg;
             delete wiispeakImg;
             delete nintendodsImg;
-            delete vitalitysensorImg;
+            //delete vitalitysensorImg;
             delete gcImg;
             delete dialogBoxImg1;
             delete dialogBoxImg2;
@@ -932,7 +932,7 @@ int showGameInfo(char *ID) {
             delete zapperImgData;
             delete wiispeakImgData;
             delete nintendodsImgData;
-            delete vitalitysensorImgData;
+            //delete vitalitysensorImgData;
             delete gamecubeImgData;
             delete ratingImgData;
             delete cover;

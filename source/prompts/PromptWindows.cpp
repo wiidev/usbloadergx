@@ -22,6 +22,7 @@
 #include "fatmounter.h"
 #include "listfiles.h"
 #include "menu.h"
+#include "menu.h"
 #include "filelist.h"
 #include "sys.h"
 #include "wpad.h"
@@ -2037,6 +2038,7 @@ ProgressDownloadWindow(int choice2) {
                 case 'I':
                 case 'S':
                 case 'H':
+                case 'U':
                 case 'X':
                 case 'Y':
                     sprintf(URLFile,"%s%s/%s",server3d,Settings.db_language,missingFiles[i]);
@@ -2118,6 +2120,7 @@ ProgressDownloadWindow(int choice2) {
                 case 'I':
                 case 'S':
                 case 'H':
+                case 'U':
                 case 'X':
                 case 'Y':
                     if(Settings.discart == 0) {
@@ -2197,6 +2200,7 @@ ProgressDownloadWindow(int choice2) {
                 case 'I':
                 case 'S':
                 case 'H':
+                case 'U':
                 case 'X':
                 case 'Y':
                     sprintf(URLFile,"%s%s/%s",server2d,Settings.db_language,missingFiles[i]);

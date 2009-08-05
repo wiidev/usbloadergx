@@ -139,7 +139,7 @@ bool OpenXMLFile(char *filename) {
         if (!filexml)
             return false;
 
-        nodetree = mxmlLoadFile(NULL, filexml, MXML_NO_CALLBACK);
+        nodetree = mxmlLoadFile(NULL, filexml, MXML_OPAQUE_CALLBACK);
         fclose(filexml);
 
     } else {
@@ -170,7 +170,7 @@ bool OpenXMLFile(char *filename) {
         unzCloseCurrentFile(unzfile);
         unzClose(unzfile);
 
-        nodetree = mxmlLoadString(NULL, zipfilebuffer, MXML_NO_CALLBACK);
+        nodetree = mxmlLoadString(NULL, zipfilebuffer, MXML_OPAQUE_CALLBACK);
         free(zipfilebuffer);
     }
 
@@ -583,6 +583,7 @@ bool LoadGameInfoFromXML(char* gameid, char* langtxt)
         if (gameid[3] == 'I') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
         if (gameid[3] == 'S') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
         if (gameid[3] == 'H') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
+        if (gameid[3] == 'U') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
 		if (gameid[3] == 'X') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
         if (gameid[3] == 'Y') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
     }
