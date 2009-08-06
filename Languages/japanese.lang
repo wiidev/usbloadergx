@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-04 14:40+0200\n"
+"POT-Creation-Date: 2009-08-06 12:50+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -430,12 +430,6 @@ msgstr "エラー"
 msgid "ERROR:"
 msgstr "エラー："
 
-msgid "ERROR: USB device could not be loaded!"
-msgstr ""
-
-msgid "ERROR: cIOS could not be loaded!"
-msgstr ""
-
 msgid "English"
 msgstr "英語"
 
@@ -663,9 +657,6 @@ msgstr "標準の言語をロード中..."
 
 msgid "Loading standard music."
 msgstr "標準の音楽をロード中..."
-
-msgid "Loading..."
-msgstr ""
 
 msgid "Lock Console"
 msgstr "ｺﾝｿｰﾙをﾛｯｸ"
@@ -1059,10 +1050,6 @@ msgstr "ﾋﾞﾃﾞｵﾓｰﾄﾞ"
 
 msgid "Waiting for USB Device"
 msgstr "USBﾃﾞﾊﾞｲｽの応答待ち"
-
-#, c-format
-msgid "Waiting for your slow USB Device: %i secs..."
-msgstr ""
 
 msgid "Waiting..."
 msgstr "お待ちください..."

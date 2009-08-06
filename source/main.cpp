@@ -67,7 +67,7 @@ static void BootUpProblems()
                 ret2 = IOS_ReloadIOS(222);
                 load_ehc_module();
                 if(ret2 <0) {
-                    boottext.SetText(tr("ERROR: cIOS could not be loaded!"));
+                    boottext.SetText("ERROR: cIOS could not be loaded!");
                     bootimage.Draw();
                     boottext.Draw();
                     Menu_Render();
@@ -78,14 +78,14 @@ static void BootUpProblems()
 
             ret2 = WBFS_Init(WBFS_DEVICE_USB);
             if (ret2 >= 0) {
-                boottext.SetText(tr("Loading..."));
+                boottext.SetText("Loading...");
                 bootimage.Draw();
                 boottext.Draw();
                 Menu_Render();
                 break;
             }
 
-            boottext.SetTextf(tr("Waiting for your slow USB Device: %i secs..."), i);
+            boottext.SetTextf("Waiting for your slow USB Device: %i secs...", i);
             boottext.Draw();
             bootimage.Draw();
             Menu_Render();
@@ -95,7 +95,7 @@ static void BootUpProblems()
     }
 
     if(ret2 < 0) {
-        boottext.SetText(tr("ERROR: USB device could not be loaded!"));
+        boottext.SetText("ERROR: USB device could not be loaded!");
         bootimage.Draw();
         boottext.Draw();
         Menu_Render();
@@ -134,9 +134,7 @@ main(int argc, char *argv[]) {
         ret = IOS_ReloadIOS(222);
         load_ehc_module();
         if(ret <0) {
-            printf("\n\t");
-			printf(tr("ERROR: cIOS could not be loaded!"));
-			printf("\n");
+            printf("\n\tERROR: cIOS could not be loaded!\n");
             sleep(5);
             SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
         }
@@ -208,7 +206,7 @@ main(int argc, char *argv[]) {
     }
 
     if (ret < 0) {
-        printf(tr("ERROR: cIOS could not be loaded!"));
+        printf("ERROR: cIOS could not be loaded!");
         sleep(5);
         SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
     }

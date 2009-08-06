@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-04 14:40+0200\n"
+"POT-Creation-Date: 2009-08-06 12:50+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -430,12 +430,6 @@ msgstr "ERROR"
 msgid "ERROR:"
 msgstr "ERROR:"
 
-msgid "ERROR: USB device could not be loaded!"
-msgstr ""
-
-msgid "ERROR: cIOS could not be loaded!"
-msgstr ""
-
 msgid "English"
 msgstr "Inglés"
 
@@ -663,9 +657,6 @@ msgstr "Cargando idioma estándar."
 
 msgid "Loading standard music."
 msgstr "Cargando música estándar."
-
-msgid "Loading..."
-msgstr ""
 
 msgid "Lock Console"
 msgstr "Bloquear consola"
@@ -1060,10 +1051,6 @@ msgstr "Modo Video"
 msgid "Waiting for USB Device"
 msgstr "Esperando al Dispositivo USB"
 
-#, c-format
-msgid "Waiting for your slow USB Device: %i secs..."
-msgstr ""
-
 msgid "Waiting..."
 msgstr "Esperando..."
 
@@ -1169,6 +1156,18 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
+
+#~ msgid "ERROR: USB device could not be loaded!"
+#~ msgstr "ERROR: ¡No se pudo cargar dispositivo USB!"
+
+#~ msgid "ERROR: cIOS could not be loaded!"
+#~ msgstr "ERROR: ¡No se pudo cargar cIOS!"
+
+#~ msgid "Loading..."
+#~ msgstr "Cargando..."
+
+#~ msgid "Waiting for your slow USB Device: %i secs..."
+#~ msgstr "Esperando por tu lento disp. USB: %i segs..."
 
 #~ msgid "No partitions found"
 #~ msgstr "Particiones no encontradas"

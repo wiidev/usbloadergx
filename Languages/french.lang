@@ -1,10 +1,10 @@
 # USB Loader GX language source file.
-# French V9.3 r700
+# French V9.3 r706
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-04 14:40+0200\n"
+"POT-Creation-Date: 2009-08-06 12:50+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: Kin8\n"
 "Language-Team: Badablek, Amour, ikya, OuahOuah, dj_skual & Kin8\n"
@@ -430,12 +430,6 @@ msgstr "ERREUR"
 msgid "ERROR:"
 msgstr "ERREUR:"
 
-msgid "ERROR: USB device could not be loaded!"
-msgstr "ERREUR: Impossible de charger le périph. USB!"
-
-msgid "ERROR: cIOS could not be loaded!"
-msgstr "ERREUR: Impossible de charger le cIOS!"
-
 msgid "English"
 msgstr "Anglais"
 
@@ -663,9 +657,6 @@ msgstr "Chargement langue par défaut."
 
 msgid "Loading standard music."
 msgstr "Chargement musique standard."
-
-msgid "Loading..."
-msgstr "Chargement..."
 
 msgid "Lock Console"
 msgstr "Verrouiller la console"
@@ -1060,10 +1051,6 @@ msgstr "Mode vidéo"
 msgid "Waiting for USB Device"
 msgstr "Attente d'un périphérique USB"
 
-#, c-format
-msgid "Waiting for your slow USB Device: %i secs..."
-msgstr "Attente de votre périphérique USB: %i secs..."
-
 msgid "Waiting..."
 msgstr "En attente..."
 
@@ -1169,6 +1156,18 @@ msgstr "sur"
 
 msgid "seconds left"
 msgstr "secondes restantes"
+
+#~ msgid "ERROR: USB device could not be loaded!"
+#~ msgstr "ERREUR: Impossible de charger le périph. USB!"
+
+#~ msgid "ERROR: cIOS could not be loaded!"
+#~ msgstr "ERREUR: Impossible de charger le cIOS!"
+
+#~ msgid "Loading..."
+#~ msgstr "Chargement..."
+
+#~ msgid "Waiting for your slow USB Device: %i secs..."
+#~ msgstr "Attente de votre périphérique USB: %i secs..."
 
 #~ msgid "No partitions found"
 #~ msgstr "Aucune partition trouvée"

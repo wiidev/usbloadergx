@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-04 14:40+0200\n"
+"POT-Creation-Date: 2009-08-06 12:50+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: tj_cool\n"
 "Language-Team: \n"
@@ -245,7 +245,7 @@ msgid "Correct Password"
 msgstr "Juiste Wachtwoord"
 
 msgid "Could not create GCT file"
-msgstr "No se pudo crear archivo GCTJuiste wachtwoord"
+msgstr "Kan GCT bestand niet aanmaken"
 
 msgid "Could not find a WBFS partition."
 msgstr "Kan geen WBFS partitie vinden."
@@ -293,7 +293,7 @@ msgid "Custom Paths"
 msgstr "Bestandslocaties"
 
 msgid "Customs/Original"
-msgstr ""
+msgstr "Aangepast/Origineel"
 
 msgid "DOL from SD"
 msgstr "Dol van SD"
@@ -344,7 +344,7 @@ msgid "Discimage Path"
 msgstr "Locatie DVD labels"
 
 msgid "Discimages Download"
-msgstr ""
+msgstr "Download DVD labels"
 
 msgid "Discpath Changed"
 msgstr "Locatie DVD labels gewijzigd"
@@ -386,7 +386,7 @@ msgid "Do you want to use the alt dol that is known to be correct?"
 msgstr "Wil je de alt dol gebruiken waarvan is bevestigd dat deze werkt?"
 
 msgid "Do you wish to update/download all language files?"
-msgstr ""
+msgstr "Wil je alle taalbestanden updaten/downloaden?"
 
 msgid "Dol Path"
 msgstr "Locatie dol"
@@ -430,12 +430,6 @@ msgstr "FOUT"
 msgid "ERROR:"
 msgstr "FOUT:"
 
-msgid "ERROR: USB device could not be loaded!"
-msgstr ""
-
-msgid "ERROR: cIOS could not be loaded!"
-msgstr ""
-
 msgid "English"
 msgstr "Engels"
 
@@ -467,7 +461,7 @@ msgid "Failed formating"
 msgstr "Formatteren mislukt"
 
 msgid "Failed to open partition"
-msgstr ""
+msgstr "Partitie openen mislukt"
 
 msgid "Feb"
 msgstr "Feb"
@@ -542,10 +536,10 @@ msgid "Homebrew Appspath changed"
 msgstr "Locatie HB apps gewijzigd"
 
 msgid "Homebrew Channel"
-msgstr ""
+msgstr "Homebrew Kanaal"
 
 msgid "Homebrew Launcher"
-msgstr "Homebrew Launcher"
+msgstr "Homebrew Starter"
 
 msgid "Hour"
 msgstr "Uur"
@@ -664,9 +658,6 @@ msgstr "Standaardtaal laden."
 msgid "Loading standard music."
 msgstr "Standaardmuziek laden."
 
-msgid "Loading..."
-msgstr ""
-
 msgid "Lock Console"
 msgstr "Console vergrendelen"
 
@@ -746,7 +737,7 @@ msgid "Not a Wii Disc"
 msgstr "Geen Wii DVD"
 
 msgid "Not a dol/elf file."
-msgstr ""
+msgstr "Geen dol/elf bestand."
 
 msgid "Not enough free memory"
 msgstr "Niet genoeg vrije ruimte"
@@ -782,16 +773,16 @@ msgid "Ok"
 msgstr "Ok"
 
 msgid "Only Customs"
-msgstr ""
+msgstr "Enkel Aangepast"
 
 msgid "Only Original"
-msgstr ""
+msgstr "Enkel Origineel"
 
 msgid "Only for Install"
 msgstr "Alleen bij installeren"
 
 msgid "Original/Customs"
-msgstr ""
+msgstr "Origineel/Aangepast"
 
 msgid "Parental Control"
 msgstr "Ouderlijk toezicht"
@@ -953,7 +944,7 @@ msgid "TXTCheatcodes Path changed"
 msgstr "Locatie TXTcodes gewijzigd"
 
 msgid "The file is not a .wad"
-msgstr ""
+msgstr "Dit is geen .wad bestand"
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."
 msgstr "Het wad bestand is geinstalleerd, maar kon niet van de SD kaart worden verwijderd "
@@ -1021,10 +1012,10 @@ msgid "Update DOL"
 msgstr "DOL updaten"
 
 msgid "Update Files"
-msgstr ""
+msgstr "Bestanden Updaten"
 
 msgid "Update all Language Files"
-msgstr ""
+msgstr "Alle taalbestanden updaten"
 
 msgid "Update failed"
 msgstr "Update mislukt"
@@ -1042,10 +1033,10 @@ msgid "Updating"
 msgstr "Updaten"
 
 msgid "Updating Language Files:"
-msgstr ""
+msgstr "Taalbestanden updaten..."
 
 msgid "Updating WiiTDB.zip"
-msgstr ""
+msgstr "Wiitdb.zip updaten..."
 
 msgid "VIDTV Patch"
 msgstr "VIDTV patchen"
@@ -1060,10 +1051,6 @@ msgstr "Video mode"
 msgid "Waiting for USB Device"
 msgstr "Wachten op USB apparaat…"
 
-#, c-format
-msgid "Waiting for your slow USB Device: %i secs..."
-msgstr ""
-
 msgid "Waiting..."
 msgstr "Wachten..."
 
@@ -1077,7 +1064,7 @@ msgid "Wii Menu"
 msgstr "Wii Menu"
 
 msgid "Wii Settings"
-msgstr ""
+msgstr "Wii instellingen"
 
 msgid "Wiilight"
 msgstr "Wii verlichting"
@@ -1169,6 +1156,18 @@ msgstr "van"
 
 msgid "seconds left"
 msgstr "seconden over:"
+
+#~ msgid "ERROR: USB device could not be loaded!"
+#~ msgstr "FOUT: USB apparaat kon niet geladen worden!"
+
+#~ msgid "ERROR: cIOS could not be loaded!"
+#~ msgstr "FOUT: cIOS kon niet geladen worden!"
+
+#~ msgid "Loading..."
+#~ msgstr "Laden..."
+
+#~ msgid "Waiting for your slow USB Device: %i secs..."
+#~ msgstr "Wachten op signaal van USB apparaat: %i sec..."
 
 #~ msgid "No partitions found"
 #~ msgstr "Geen partities gevonden"

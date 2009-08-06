@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-04 14:40+0200\n"
+"POT-Creation-Date: 2009-08-06 12:50+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -293,7 +293,7 @@ msgid "Custom Paths"
 msgstr "Endre stier"
 
 msgid "Customs/Original"
-msgstr "Egendefinert/Original"
+msgstr "Custom/Original"
 
 msgid "DOL from SD"
 msgstr "DOL fra SD"
@@ -429,12 +429,6 @@ msgstr "FEIL"
 
 msgid "ERROR:"
 msgstr "FEIL:"
-
-msgid "ERROR: USB device could not be loaded!"
-msgstr ""
-
-msgid "ERROR: cIOS could not be loaded!"
-msgstr ""
 
 msgid "English"
 msgstr "Engelsk"
@@ -664,9 +658,6 @@ msgstr "Laster standard språk."
 msgid "Loading standard music."
 msgstr "Laster standard musikk."
 
-msgid "Loading..."
-msgstr ""
-
 msgid "Lock Console"
 msgstr "Lås konsoll"
 
@@ -782,7 +773,7 @@ msgid "Ok"
 msgstr "Ok"
 
 msgid "Only Customs"
-msgstr "Kun egendefinert"
+msgstr "Kun custom"
 
 msgid "Only Original"
 msgstr "Kun original"
@@ -791,7 +782,7 @@ msgid "Only for Install"
 msgstr "Kun for installering"
 
 msgid "Original/Customs"
-msgstr "Original/Egendefinert"
+msgstr "Original/Custom"
 
 msgid "Parental Control"
 msgstr "Foreldrekontroll"
@@ -1060,10 +1051,6 @@ msgstr "Video modus"
 msgid "Waiting for USB Device"
 msgstr "Venter på USB enhet"
 
-#, c-format
-msgid "Waiting for your slow USB Device: %i secs..."
-msgstr ""
-
 msgid "Waiting..."
 msgstr "Venter..."
 
@@ -1169,6 +1156,18 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder gjenstår"
+
+#~ msgid "ERROR: USB device could not be loaded!"
+#~ msgstr "FEIL: USB enhet kan ikke lastes!"
+
+#~ msgid "ERROR: cIOS could not be loaded!"
+#~ msgstr "FEIL: cIOS kan ikke lastes!"
+
+#~ msgid "Loading..."
+#~ msgstr "Laster..."
+
+#~ msgid "Waiting for your slow USB Device: %i secs..."
+#~ msgstr "Venter på USB enhet: %i sek..."
 
 #~ msgid "No partitions found"
 #~ msgstr "Ingen partisjoner funnet"

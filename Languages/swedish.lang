@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-04 14:40+0200\n"
+"POT-Creation-Date: 2009-08-06 12:50+0200\n"
 "PO-Revision-Date: 2009-08-02 12:20+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -353,7 +353,7 @@ msgid "Discpath change"
 msgstr "Ändra skivbildsmapp"
 
 msgid "DiskFlip"
-msgstr ""
+msgstr "Vänd Skiva"
 
 msgid "Display"
 msgstr "Visning"
@@ -429,12 +429,6 @@ msgstr "FEL"
 
 msgid "ERROR:"
 msgstr "FEL:"
-
-msgid "ERROR: USB device could not be loaded!"
-msgstr ""
-
-msgid "ERROR: cIOS could not be loaded!"
-msgstr ""
 
 msgid "English"
 msgstr "Engelska"
@@ -663,9 +657,6 @@ msgstr "Laddar standard språk."
 
 msgid "Loading standard music."
 msgstr "Laddar standard musik."
-
-msgid "Loading..."
-msgstr ""
 
 msgid "Lock Console"
 msgstr "Lås konsol"
@@ -1060,10 +1051,6 @@ msgstr "Video-läge"
 msgid "Waiting for USB Device"
 msgstr "Väntar på USB-enhet"
 
-#, c-format
-msgid "Waiting for your slow USB Device: %i secs..."
-msgstr ""
-
 msgid "Waiting..."
 msgstr "Väntar..."
 
@@ -1169,6 +1156,18 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder kvar"
+
+#~ msgid "ERROR: USB device could not be loaded!"
+#~ msgstr "FEL: USB-enhet kunde inte laddas!"
+
+#~ msgid "ERROR: cIOS could not be loaded!"
+#~ msgstr "FEL: cIOS kunde inte laddas!"
+
+#~ msgid "Loading..."
+#~ msgstr "Laddar..."
+
+#~ msgid "Waiting for your slow USB Device: %i secs..."
+#~ msgstr "Väntar på din slöa USB-enhet: %i sek..."
 
 #~ msgid "No partitions found"
 #~ msgstr "Hittade ingen partition"
