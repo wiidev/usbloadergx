@@ -62,6 +62,9 @@ extern const u32	menuin_ogg_size;
 extern const u8		menuout_ogg[];
 extern const u32	menuout_ogg_size;
 
+extern const u8		success_ogg[];
+extern const u32	success_ogg_size;
+
 extern const u8		credits_button_png[];
 extern const u32	credits_button_png_size;
 
@@ -268,6 +271,9 @@ extern const u32	battery_bar_white_png_size;
 
 extern const u8		battery_red_png[];
 extern const u32	battery_red_png_size;
+
+extern const u8		battery_bar_red_png[];
+extern const u32	battery_bar_red_png_size;
 
 extern const u8		arrow_next_png[];
 extern const u32	arrow_next_png_size;

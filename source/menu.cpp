@@ -323,10 +323,12 @@ int MenuDiscList() {
 
     snprintf(imgPath, sizeof(imgPath), "%sbattery.png", CFG.theme_path);
     GuiImageData battery(imgPath, battery_png);
-    snprintf(imgPath, sizeof(imgPath), "%sbattery_red.png", CFG.theme_path);
-    GuiImageData batteryRed(imgPath, battery_red_png);
     snprintf(imgPath, sizeof(imgPath), "%sbattery_bar.png", CFG.theme_path);
     GuiImageData batteryBar(imgPath, battery_bar_png);
+	snprintf(imgPath, sizeof(imgPath), "%sbattery_red.png", CFG.theme_path);
+    GuiImageData batteryRed(imgPath, battery_red_png);
+	snprintf(imgPath, sizeof(imgPath), "%sbattery_bar_red.png", CFG.theme_path);
+    GuiImageData batteryBarRed(imgPath, battery_bar_red_png);
 
     snprintf(imgPath, sizeof(imgPath), "%sfavIcon.png", CFG.theme_path);
     GuiImageData imgfavIcon(imgPath, favIcon_png);
@@ -1364,11 +1366,13 @@ static int MenuInstall() {
 
     snprintf(imgPath, sizeof(imgPath), "%sbattery.png", CFG.theme_path);
     GuiImageData battery(imgPath, battery_png);
-    snprintf(imgPath, sizeof(imgPath), "%sbattery_red.png", CFG.theme_path);
-    GuiImageData batteryRed(imgPath, battery_red_png);
-    snprintf(imgPath, sizeof(imgPath), "%sbattery_bar.png", CFG.theme_path);
+	snprintf(imgPath, sizeof(imgPath), "%sbattery_bar.png", CFG.theme_path);
     GuiImageData batteryBar(imgPath, battery_bar_png);
-
+	snprintf(imgPath, sizeof(imgPath), "%sbattery_red.png", CFG.theme_path);
+    GuiImageData batteryRed(imgPath, battery_red_png);
+    snprintf(imgPath, sizeof(imgPath), "%sbattery_bar_red.png", CFG.theme_path);
+    GuiImageData batteryBarRed(imgPath, battery_bar_red_png);
+	
     HaltGui();
     GuiWindow w(screenwidth, screenheight);
 
@@ -1449,7 +1453,14 @@ static int MenuInstall() {
                     break;
                 } else {
                     __Menu_GetEntries(); //get the entries again
+					GuiSound * instsuccess = NULL;
+					instsuccess = new GuiSound(success_ogg, success_ogg_size, SOUND_OGG, Settings.sfxvolume);
+					instsuccess->SetVolume(Settings.sfxvolume);
+					instsuccess->SetLoop(0);
+					instsuccess->Play();
                     WindowPrompt (tr("Successfully installed:"),name,tr("OK"));
+					instsuccess->Stop();
+					delete instsuccess;
                     menu = MENU_DISCLIST;
                     break;
                 }
@@ -1529,8 +1540,10 @@ static int MenuFormat() {
     snprintf(imgPath, sizeof(imgPath), "%smenu_button_over.png", CFG.theme_path);
     GuiImageData btnhomeOver(imgPath, menu_button_over_png);
     GuiImageData battery(battery_png);
-    GuiImageData batteryRed(battery_red_png);
     GuiImageData batteryBar(battery_bar_png);
+	GuiImageData batteryRed(battery_red_png);
+	GuiImageData batteryBarRed(battery_bar_red_png);
+
 
     GuiTrigger trigA;
     trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);

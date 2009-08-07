@@ -206,7 +206,8 @@ bool MenuOGG() {
                 cfg_save_global();
             }
             defaultBtn.ResetState();
-            optionBrowser4.SetFocus(1);
+			if (countoggs > 0)
+				optionBrowser4.SetFocus(1);
         }
 
         if (pathBtn.GetState() == STATE_CLICKED) {

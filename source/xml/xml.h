@@ -15,15 +15,16 @@ extern "C" {
     bool LoadGameInfoFromXML(char* gameid, char* langcode);
 
 #define XML_ELEMMAX 15
+#define XML_SYNOPSISLEN 4000
 
     struct gameXMLinfo {
         char    id[7];
         char    version[50];
         char    region[7];
         char    title[200];
-        char    synopsis[3000];
+        char    synopsis[XML_SYNOPSISLEN];
         char    title_EN[200];
-        char    synopsis_EN[3000];
+        char    synopsis_EN[XML_SYNOPSISLEN];
         char    locales[XML_ELEMMAX+1][5];
         int     localeCnt;
         char    developer[75];

@@ -175,20 +175,34 @@ int GCTCheats::openTxtfile(const char * filename) {
     filestr.seekg(0,ios_base::beg);
 
     getline(filestr,sGameID);
+	if (sGameID[sGameID.length() - 1] == '\r')
+		sGameID.erase(sGameID.length() - 1);
+	
     getline(filestr,sGameTitle);
-    filestr.ignore();
+	if (sGameTitle[sGameTitle.length() - 1] == '\r')
+		sGameTitle.erase(sGameTitle.length() - 1);
+				
+    //filestr.ignore();
+    getline(filestr,sCheatName[i]);  // skip first line if file uses CRLF
+	if (!sGameTitle[sGameTitle.length() - 1] == '\r')
+	   filestr.seekg(0,ios_base::beg);
 
     while (!filestr.eof()) {
-        getline(filestr,sCheatName[i]);
+	
+        getline(filestr,sCheatName[i]); // '\n' delimiter by default
+		if (sCheatName[i][sCheatName[i].length() - 1] == '\r')
+			sCheatName[i].erase(sCheatName[i].length() - 1);
+
         string cheatdata;
         bool emptyline = false;
         bool isComment = false;
 
         do {
-            getline(filestr,str,'\n');
-            //cheatdata.append(str);
-
-            if (str == "") {
+			getline(filestr,str);
+			if (str[str.length() - 1] == '\r')
+				str.erase(str.length() - 1);
+				 
+            if (str == "" || str[0] == '\r' || str[0] == '\n') {
                 emptyline = true;
                 break;
             }

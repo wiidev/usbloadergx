@@ -204,7 +204,7 @@ int showGameInfo(char *ID) {
         urlBtn.SetTrigger(&trig1);
         gameinfoWindow.Append(&urlBtn);
 
-        char linebuf[3000] = "";
+        char linebuf[XML_SYNOPSISLEN] = "";
         char linebuf2[100] = "";
 
         // enable icons for required accessories

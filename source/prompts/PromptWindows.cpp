@@ -710,10 +710,13 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 
     snprintf(imgPath, sizeof(imgPath), "%sbattery_white.png", CFG.theme_path);
     GuiImageData battery(imgPath, battery_white_png);
-    snprintf(imgPath, sizeof(imgPath), "%sbattery_red.png", CFG.theme_path);
-    GuiImageData batteryRed(imgPath, battery_red_png);
-    snprintf(imgPath, sizeof(imgPath), "%sbattery_bar_white.png", CFG.theme_path);
+	snprintf(imgPath, sizeof(imgPath), "%sbattery_bar_white.png", CFG.theme_path);
     GuiImageData batteryBar(imgPath, battery_bar_white_png);
+	snprintf(imgPath, sizeof(imgPath), "%sbattery_red.png", CFG.theme_path);
+    GuiImageData batteryRed(imgPath, battery_red_png);
+    snprintf(imgPath, sizeof(imgPath), "%sbattery_bar_red.png", CFG.theme_path);
+    GuiImageData batteryBarRed(imgPath, battery_bar_red_png);
+
 
 #ifdef HW_RVL
     int i = 0, ret = 0, level;
@@ -871,12 +874,15 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
             if (WPAD_Probe(i, NULL) == WPAD_ERR_NONE) { // controller connected
                 level = (userInput[i].wpad.battery_level / 100.0) * 4;
                 if (level > 4) level = 4;
-                batteryImg[i]->SetTile(level);
-
-                if (level == 0)
-                    batteryBarImg[i]->SetImage(&batteryRed);
-                else
+				
+                if (level <= 1) {
+                    batteryBarImg[i]->SetImage(&batteryBarRed);
+                    batteryImg[i]->SetImage(&batteryRed);
+				} else {
                     batteryBarImg[i]->SetImage(&batteryBar);
+				}
+					
+				batteryImg[i]->SetTile(level);
 
                 batteryBtn[i]->SetAlpha(255);
             } else { // controller not connected
@@ -3022,11 +3028,11 @@ int CodeDownload(const char *id) {
         snprintf(txtpath, sizeof(txtpath), "%s%s.txt", Settings.TxtCheatcodespath,id);
 
         char codeurl[150];
-        snprintf(codeurl, sizeof(codeurl), "http://usbgecko.com/codes/codes/R/%s.txt",id);
+        snprintf(codeurl, sizeof(codeurl), "http://geckocodes.org/codes/R/%s.txt",id);
 
         struct block  file = downloadfile(codeurl);
 
-        if (file.size == 333) {
+        if (file.size == 333 || file.size == 216 || file.size == 284) {
             strcat(codeurl, tr(" is not on the server."));
 
             WindowPrompt(tr("Error"),codeurl,tr("Ok"));
@@ -3034,7 +3040,8 @@ int CodeDownload(const char *id) {
             goto exit;
         }
 
-        if (file.data != NULL) {
+        if (file.data != NULL) {	
+				
             FILE * pfile;
             pfile = fopen(txtpath, "wb");
             fwrite(file.data,1,file.size,pfile);
