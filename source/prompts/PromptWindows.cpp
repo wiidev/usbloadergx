@@ -2508,7 +2508,7 @@ int ProgressUpdateWindow() {
         if (newrev > 0) {
 
             sprintf(msg, "Rev%i %s.", newrev, tr("available"));
-            int choice = WindowPrompt(msg, tr("How do you want to update?"), tr("Update DOL"), tr("Update All"), tr("Update WiiTDB"), tr("Cancel"));
+            int choice = WindowPrompt(msg, tr("How do you want to update?"), tr("Update DOL"), tr("Update All"), tr("Cancel"));
             mainWindow->SetState(STATE_DISABLED);
             promptWindow.SetState(STATE_DEFAULT);
             mainWindow->ChangeFocus(&promptWindow);
@@ -2600,17 +2600,6 @@ int ProgressUpdateWindow() {
                             msgTxt.SetTextf("%s", tr("Updating Language Files:"));
                             updateLanguageFiles();
                         }
-                    }
-                } else if(choice == 3) {
-                    char wiitdbpath[150];
-                    msgTxt.SetTextf("%s", tr("Updating WiiTDB.zip"));
-                    struct block file = downloadfile(XMLurl);
-                    if (file.data != NULL) {
-                        sprintf(wiitdbpath, "%swiitdb.zip", Settings.titlestxt_path);
-                        FILE *pfile = fopen(wiitdbpath, "wb");
-                        fwrite(file.data,1,file.size,pfile);
-                        fclose(pfile);
-                        free(file.data);
                     }
                 } else {
                     failed = -1;
