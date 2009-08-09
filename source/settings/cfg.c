@@ -1647,6 +1647,8 @@ bool CFG_forget_game_num(u8 *id) {
 
 
 void CFG_Load(void) {
+// GUI should be stopped at the time of calling CFG_Load() to prevent default settings from having any effect
+
     char pathname[200];
 //	bool ret = false;
 

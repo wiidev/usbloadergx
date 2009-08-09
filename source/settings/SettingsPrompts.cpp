@@ -471,12 +471,13 @@ int MenuLanguageSelect() {
                 sprintf(Settings.language_path, "notset");
                 cfg_save_global();
                 gettextCleanUp();
-                //lang_default();
+				HaltGui();
                 CFG_Load();
+				ResumeGui();
                 returnhere = 2;
             }
             defaultBtn.ResetState();
-            optionBrowser4.SetFocus(1);
+			//optionBrowser4.SetFocus(1); // commented out to prevent crash
         }
 
         else if (updateBtn.GetState() == STATE_CLICKED) {
@@ -526,8 +527,8 @@ int MenuLanguageSelect() {
                     break;
                 }
             }
-            updateBtn.ResetState();
-            optionBrowser4.SetFocus(1);
+			updateBtn.ResetState();
+			//optionBrowser4.SetFocus(1); // commented out to prevent crash
         }
 
         else if (pathBtn.GetState() == STATE_CLICKED) {
@@ -577,7 +578,9 @@ int MenuLanguageSelect() {
                         WindowPrompt(tr("File not found."),tr("Loading standard language."),tr("OK"));
                     }
                     gettextCleanUp();
-                    CFG_Load();
+					HaltGui();
+					CFG_Load();
+					ResumeGui();
                     returnhere = 2;
                     break;
                 } else {

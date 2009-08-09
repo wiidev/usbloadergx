@@ -286,8 +286,10 @@ main:
     folderBtn.SetImage(&folderImg);
     folderBtn.SetTrigger(&trigA);
     folderBtn.SetEffectGrow();
-
-    GuiImageData btnOutline(button_dialogue_box_png);
+	
+	char imgPath[100];
+    snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
+    GuiImageData btnOutline(imgPath, button_dialogue_box_png);
     GuiText ExitBtnTxt("Cancel", 24, (GXColor) {0, 0, 0, 255});
     GuiImage ExitBtnImg(&btnOutline);
     if (Settings.wsprompt == yes) {
@@ -296,7 +298,7 @@ main:
     }
     GuiButton ExitBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
     ExitBtn.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-    ExitBtn.SetPosition(-55, -35);
+    ExitBtn.SetPosition(-40, -35);
     ExitBtn.SetLabel(&ExitBtnTxt);
     ExitBtn.SetImage(&ExitBtnImg);
     ExitBtn.SetTrigger(&trigA);
@@ -323,7 +325,7 @@ main:
         okBtnTxt.SetWidescreen(CFG.widescreen);
         okBtnImg.SetWidescreen(CFG.widescreen);
     }
-    GuiButton okBtn(&okBtnImg,&okBtnImg, 0, 4, 45, -35, &trigA, &btnSoundOver, &btnClick,1);
+    GuiButton okBtn(&okBtnImg,&okBtnImg, 0, 4, 40, -35, &trigA, &btnSoundOver, &btnClick,1);
     okBtn.SetLabel(&okBtnTxt);
 
     GuiFileBrowser fileBrowser(396, 248);

@@ -1376,7 +1376,9 @@ int MenuSettings() {
 //                                        if(isSdInserted()) {
                                         if (isInserted(bootDevice)) {
                                             cfg_save_global();
+ 											HaltGui();
                                             CFG_Load();
+											ResumeGui();
                                         } else {
                                             WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
                                         }
@@ -1580,7 +1582,9 @@ int MenuSettings() {
                                 remove(GXGlobal_cfg);
                             }
                             gettextCleanUp();
+							HaltGui();
                             CFG_Load();
+							ResumeGui();
                             menu = MENU_SETTINGS;
                             pageToDisplay = 0;
                         }

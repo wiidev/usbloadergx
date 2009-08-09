@@ -839,7 +839,9 @@ int MenuDiscList() {
             }
             //if(isSdInserted()) {
             if (isInserted(bootDevice)) {
-                CFG_Load();
+				HaltGui(); // to fix endless rumble when clicking on the SD icon when rumble is disabled because rumble is set to on in Global_Default()
+				CFG_Load(); 
+				ResumeGui();
             }
             sdcardBtn.ResetState();
             menu = MENU_DISCLIST;
@@ -1454,6 +1456,8 @@ static int MenuInstall() {
                 } else {
                     __Menu_GetEntries(); //get the entries again
 					GuiSound * instsuccess = NULL;
+					s32 thetimeofbg = bgMusic->GetPlayTime();
+					bgMusic->Stop();
 					instsuccess = new GuiSound(success_ogg, success_ogg_size, SOUND_OGG, Settings.sfxvolume);
 					instsuccess->SetVolume(Settings.sfxvolume);
 					instsuccess->SetLoop(0);
@@ -1461,6 +1465,13 @@ static int MenuInstall() {
                     WindowPrompt (tr("Successfully installed:"),name,tr("OK"));
 					instsuccess->Stop();
 					delete instsuccess;
+					if (!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path)) {
+						bgMusic->Play();
+					} else {
+						bgMusic->PlayOggFile(Settings.ogg_path);
+					}
+					bgMusic->SetPlayTime(thetimeofbg);
+					SetVolumeOgg(255*(Settings.volume/100.0));
                     menu = MENU_DISCLIST;
                     break;
                 }

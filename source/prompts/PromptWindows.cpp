@@ -76,7 +76,7 @@ int OnScreenKeyboard(char * var, u32 maxlen, int min) {
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
     GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
 
-    char imgPath[50];
+    char imgPath[100];
     snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
     GuiImageData btnOutline(imgPath, button_dialogue_box_png);
 
@@ -441,7 +441,7 @@ WindowPrompt(const char *title, const char *msg, const char *btn1Label,
 
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
     GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
-    char imgPath[50];
+    char imgPath[100];
     snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
     GuiImageData btnOutline(imgPath, button_dialogue_box_png);
     snprintf(imgPath, sizeof(imgPath), "%sdialogue_box.png", CFG.theme_path);
@@ -3115,7 +3115,7 @@ HBCWindowPrompt(const char *name, const char *coder, const char *version,
 
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
     GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
-    char imgPath[50];
+    char imgPath[100];
     snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
     GuiImageData btnOutline(imgPath, button_dialogue_box_png);
     snprintf(imgPath, sizeof(imgPath), "%sdialogue_box.png", CFG.theme_path);
