@@ -2640,9 +2640,9 @@ int ProgressUpdateWindow() {
 
             msgTxt.SetTextf("%s", tr("Updating Language Files:"));
             updateLanguageFiles();
+            ret = 1;
         } else {
             ret = -1;
-            ret = 1;
         }
     }
 
