@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-06 12:50+0200\n"
+"POT-Creation-Date: 2009-08-09 09:34+0200\n"
 "PO-Revision-Date: 2009-08-05 10:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe & Cambo\n"
@@ -1014,6 +1014,9 @@ msgstr "Solo DOL"
 msgid "Update Files"
 msgstr "Aggiorna File"
 
+msgid "Update WiiTDB"
+msgstr ""
+
 msgid "Update all Language Files"
 msgstr "Aggiorna tutti i file delle lingue"
 
@@ -1053,6 +1056,9 @@ msgstr "Caricamento Dispositivo USB"
 
 msgid "Waiting..."
 msgstr "Caricamento..."
+
+msgid "What do you want to update?"
+msgstr ""
 
 msgid "WiFi Features"
 msgstr "Caratteristiche WiFi"

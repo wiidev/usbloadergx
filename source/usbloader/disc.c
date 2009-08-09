@@ -42,12 +42,9 @@ void __Disc_SetLowMem(void) {
     memset(gameid, 0, 8);
     memcpy(gameid, (char*)Disc_ID, 6);
 
-    if ((strcmp(gameid,"R3XE6U")==0)||
-            (strcmp(gameid,"R3XP6V")==0))/*&&
-		(IOS_GetVersion()==249)&&
-		((IOS_GetRevision()==10)||(IOS_GetRevision()==13))  I left out the ios check to see if works with other ios versions.*/
+    if ((strcmp(gameid,"R3XE6U")==0) || (strcmp(gameid,"R3XP6V")==0))
     {
-        *GameID_Address	= Disc_ID;    // Game ID Address
+        *GameID_Address	= 0x80000000;    // Game ID Address
     }
 
     /* Copy disc ID */

@@ -874,14 +874,14 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
             if (WPAD_Probe(i, NULL) == WPAD_ERR_NONE) { // controller connected
                 level = (userInput[i].wpad.battery_level / 100.0) * 4;
                 if (level > 4) level = 4;
-				
+
                 if (level <= 1) {
                     batteryBarImg[i]->SetImage(&batteryBarRed);
                     batteryImg[i]->SetImage(&batteryRed);
 				} else {
                     batteryBarImg[i]->SetImage(&batteryBar);
 				}
-					
+
 				batteryImg[i]->SetTile(level);
 
                 batteryBtn[i]->SetAlpha(255);
@@ -2349,7 +2349,8 @@ ProgressDownloadWindow(int choice2) {
 #ifdef NOTFULLCHANNEL
 
 int ProgressUpdateWindow() {
-    int ret = 0, failed = 0;
+
+    int ret = 0, failed = 0, updatemode = -1;
 
     GuiWindow promptWindow(472,320);
     promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
@@ -2496,11 +2497,18 @@ int ProgressUpdateWindow() {
     __Menu_GetEntries();
     if (IsNetworkInit() && ret >= 0) {
 
+        updatemode = WindowPrompt(tr("What do you want to update?"), 0, "USBLoader GX", "WiiTDB Files", "Languagefile", "Cancel");
+        mainWindow->SetState(STATE_DISABLED);
+        promptWindow.SetState(STATE_DEFAULT);
+        mainWindow->ChangeFocus(&promptWindow);
+
+        if(updatemode == 1) {
+
         int newrev = CheckUpdate();
         if (newrev > 0) {
 
             sprintf(msg, "Rev%i %s.", newrev, tr("available"));
-            int choice = WindowPrompt(msg, tr("How do you want to update?"), tr("Update DOL"), tr("Update All"), tr("Cancel"));
+            int choice = WindowPrompt(msg, tr("How do you want to update?"), tr("Update DOL"), tr("Update All"), tr("Update WiiTDB"), tr("Cancel"));
             mainWindow->SetState(STATE_DISABLED);
             promptWindow.SetState(STATE_DEFAULT);
             mainWindow->ChangeFocus(&promptWindow);
@@ -2583,6 +2591,7 @@ int ProgressUpdateWindow() {
                             file = downloadfile(XMLurl);
                             if (file.data != NULL) {
                                 sprintf(xmliconpath, "%swiitdb.zip", Settings.titlestxt_path);
+                                subfoldercreate(xmliconpath);
                                 pfile = fopen(xmliconpath, "wb");
                                 fwrite(file.data,1,file.size,pfile);
                                 fclose(pfile);
@@ -2592,25 +2601,58 @@ int ProgressUpdateWindow() {
                             updateLanguageFiles();
                         }
                     }
+                } else if(choice == 3) {
+                    char wiitdbpath[150];
+                    msgTxt.SetTextf("%s", tr("Updating WiiTDB.zip"));
+                    struct block file = downloadfile(XMLurl);
+                    if (file.data != NULL) {
+                        sprintf(wiitdbpath, "%swiitdb.zip", Settings.titlestxt_path);
+                        FILE *pfile = fopen(wiitdbpath, "wb");
+                        fwrite(file.data,1,file.size,pfile);
+                        fclose(pfile);
+                        free(file.data);
+                    }
                 } else {
                     failed = -1;
                 }
             } else {
                 ret = -1;
             }
-
         } else {
             WindowPrompt(tr("No new updates."), 0, tr("OK"));
             ret = -1;
         }
 
+        } else if(updatemode == 2) {
+            char wiitdbpath[200];
+            msgTxt.SetTextf("%s", tr("Updating WiiTDB.zip"));
+            struct block file = downloadfile(XMLurl);
+            if (file.data != NULL) {
+                snprintf(wiitdbpath, sizeof(wiitdbpath), "%swiitdb.zip", Settings.titlestxt_path);
+                subfoldercreate(wiitdbpath);
+                FILE *pfile = fopen(wiitdbpath, "wb");
+                fwrite(file.data,1,file.size,pfile);
+                fclose(pfile);
+                free(file.data);
+            }
+            ret = 1;
+        } else if(updatemode == 3) {
+
+            msgTxt.SetTextf("%s", tr("Updating Language Files:"));
+            updateLanguageFiles();
+        } else {
+            ret = -1;
+            ret = 1;
+        }
     }
 
     CloseConnection();
 
-    if (!failed && ret >= 0) {
+    if (!failed && ret >= 0 && updatemode == 1) {
         WindowPrompt(tr("Successfully Updated") , tr("Restarting..."), tr("OK"));
         Sys_BackToLoader();
+    } else if(updatemode > 0 && ret > 0) {
+        WindowPrompt(tr("Successfully Updated") , 0, tr("OK"));
     }
 
     promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
@@ -3040,8 +3082,8 @@ int CodeDownload(const char *id) {
             goto exit;
         }
 
-        if (file.data != NULL) {	
-				
+        if (file.data != NULL) {
+
             FILE * pfile;
             pfile = fopen(txtpath, "wb");
             fwrite(file.data,1,file.size,pfile);

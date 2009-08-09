@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-06 12:50+0200\n"
+"POT-Creation-Date: 2009-08-09 09:34+0200\n"
 "PO-Revision-Date: 2009-08-02 12:20+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -1014,6 +1014,9 @@ msgstr "Updatera DOL"
 msgid "Update Files"
 msgstr "Uppdatera Filer"
 
+msgid "Update WiiTDB"
+msgstr ""
+
 msgid "Update all Language Files"
 msgstr "Uppdatera alla språk-filer"
 
@@ -1053,6 +1056,9 @@ msgstr "Väntar på USB-enhet"
 
 msgid "Waiting..."
 msgstr "Väntar..."
+
+msgid "What do you want to update?"
+msgstr ""
 
 msgid "WiFi Features"
 msgstr "WiFi funktioner"

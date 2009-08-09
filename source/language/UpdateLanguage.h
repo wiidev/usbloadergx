@@ -5,7 +5,7 @@
 #ifndef ___UPDATELANGUAGE_H_
 #define ___UPDATELANGUAGE_H_
 
-#define MAXLANGUAGEFILES     30
+#define MAXLANGUAGEFILES     50
 
 //! Checks the language path for files ending in .lang and updates them (up to MAXLANGUAGEFILES)
 //! This function expects that the network is already init before it is called

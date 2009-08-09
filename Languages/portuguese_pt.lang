@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-06 12:50+0200\n"
+"POT-Creation-Date: 2009-08-09 09:34+0200\n"
 "PO-Revision-Date: 2009-08-03 16:22\n"
 "Last-Translator: Sky8000\n"
 "Language-Team: \n"
@@ -1014,6 +1014,9 @@ msgstr "Actualizar DOL"
 msgid "Update Files"
 msgstr "Actualizar ficheiros"
 
+msgid "Update WiiTDB"
+msgstr ""
+
 msgid "Update all Language Files"
 msgstr "Actualizar todos os ficheiros de Idioma"
 
@@ -1053,6 +1056,9 @@ msgstr "Aguardando pelo Dispositivo USB"
 
 msgid "Waiting..."
 msgstr "Aguardando..."
+
+msgid "What do you want to update?"
+msgstr ""
 
 msgid "WiFi Features"
 msgstr "Rede sem fios"
