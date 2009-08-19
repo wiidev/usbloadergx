@@ -59,40 +59,39 @@ static void BootUpProblems()
     bootimage.SetPosition(320-1.2*bootimage.GetWidth()/2, 240-1.2*bootimage.GetHeight()/2);
     bootimage.SetScale(1.2);
 
-    u8 i = 30;
-    while (i > 0) {
+    time_t curtime;
+	time_t endtime = time(0) + 30;
+	do {
+		ret2 = IOS_ReloadIOS(249);
+		if (ret2 < 0) {
+			ret2 = IOS_ReloadIOS(222);
+			load_ehc_module();
+			if(ret2 <0) {
+				boottext.SetText("ERROR: cIOS could not be loaded!");
+				bootimage.Draw();
+				boottext.Draw();
+				Menu_Render();
+				sleep(5);
+				SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
+			}
+		}
 
-            ret2 = IOS_ReloadIOS(249);
-            if (ret2 < 0) {
-                ret2 = IOS_ReloadIOS(222);
-                load_ehc_module();
-                if(ret2 <0) {
-                    boottext.SetText("ERROR: cIOS could not be loaded!");
-                    bootimage.Draw();
-                    boottext.Draw();
-                    Menu_Render();
-                    sleep(5);
-                    SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
-                }
-            }
-
-            ret2 = WBFS_Init(WBFS_DEVICE_USB);
-            if (ret2 >= 0) {
-                boottext.SetText("Loading...");
-                bootimage.Draw();
-                boottext.Draw();
-                Menu_Render();
-                break;
-            }
-
-            boottext.SetTextf("Waiting for your slow USB Device: %i secs...", i);
-            boottext.Draw();
-            bootimage.Draw();
-            Menu_Render();
-
-            sleep(1);
-            i--;
-    }
+		ret2 = WBFS_Init(WBFS_DEVICE_USB);
+		if (ret2 >= 0) {
+			boottext.SetText("Loading...");
+			bootimage.Draw();
+			boottext.Draw();
+			Menu_Render();
+			break;
+		}
+		curtime = time(0);
+		boottext.SetTextf("Waiting for your slow USB Device: %i secs...", int(endtime-curtime));
+		while(curtime == time(0)) {
+			boottext.Draw();
+			bootimage.Draw();
+			Menu_Render();
+		}
+    } while((endtime-time(0)) > 0);
 
     if(ret2 < 0) {
         boottext.SetText("ERROR: USB device could not be loaded!");
