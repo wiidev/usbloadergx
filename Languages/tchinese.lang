@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-09 09:34+0200\n"
+"POT-Creation-Date: 2009-08-21 17:05+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid " Wad Saved as:"
-msgstr "wad以儲存為："
+msgstr "wad已儲存為："
 
 msgid " could not be downloaded."
 msgstr "無法下載"
@@ -293,7 +293,7 @@ msgid "Custom Paths"
 msgstr "自定路徑"
 
 msgid "Customs/Original"
-msgstr ""
+msgstr "自製/原始"
 
 msgid "DOL from SD"
 msgstr "從SD卡讀取DOL"
@@ -344,7 +344,7 @@ msgid "Discimage Path"
 msgstr "光碟圖像路徑"
 
 msgid "Discimages Download"
-msgstr ""
+msgstr "下載光碟圖像"
 
 msgid "Discpath Changed"
 msgstr "光碟圖像路徑已變更"
@@ -461,7 +461,7 @@ msgid "Failed formating"
 msgstr "格式化失敗"
 
 msgid "Failed to open partition"
-msgstr ""
+msgstr "磁區開啟失敗"
 
 msgid "Feb"
 msgstr "二月"
@@ -536,7 +536,7 @@ msgid "Homebrew Appspath changed"
 msgstr "HBC應用程式路徑已變更"
 
 msgid "Homebrew Channel"
-msgstr ""
+msgstr "Homebrew Channel"
 
 msgid "Homebrew Launcher"
 msgstr "HBC載入工具"
@@ -568,7 +568,7 @@ msgid "Insert Disk"
 msgstr "插入光碟"
 
 msgid "Insert a Wii Disc!"
-msgstr "插入 Wii 光碟!"
+msgstr "插入Wii光碟!"
 
 msgid "Insert an SD-Card to download images."
 msgstr "插入SD卡下載封面."
@@ -632,6 +632,9 @@ msgstr "韓文"
 
 msgid "Language change:"
 msgstr "變更語言為:"
+
+msgid "Languagefile"
+msgstr ""
 
 msgid "Languagepath changed."
 msgstr "語言路徑已變更"
@@ -737,7 +740,7 @@ msgid "Not a Wii Disc"
 msgstr "不是Wii的光碟"
 
 msgid "Not a dol/elf file."
-msgstr ""
+msgstr "不是dol/elf檔案"
 
 msgid "Not enough free memory"
 msgstr "剩餘記憶體不足"
@@ -773,16 +776,16 @@ msgid "Ok"
 msgstr "確定"
 
 msgid "Only Customs"
-msgstr ""
+msgstr "只顯示自製"
 
 msgid "Only Original"
-msgstr ""
+msgstr "只顯示原始"
 
 msgid "Only for Install"
 msgstr "安裝遊戲時"
 
 msgid "Original/Customs"
-msgstr ""
+msgstr "原始/自製"
 
 msgid "Parental Control"
 msgstr "親子控制"
@@ -944,7 +947,7 @@ msgid "TXTCheatcodes Path changed"
 msgstr "金手指文字檔路徑已變更"
 
 msgid "The file is not a .wad"
-msgstr ""
+msgstr "此檔案非wad檔"
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."
 msgstr "wad檔案已安裝.但無法從SD卡中刪除該檔案."
@@ -1014,11 +1017,8 @@ msgstr "僅升級dol"
 msgid "Update Files"
 msgstr "更新檔案"
 
-msgid "Update WiiTDB"
-msgstr ""
-
 msgid "Update all Language Files"
-msgstr ""
+msgstr "更新所有語言檔案"
 
 msgid "Update failed"
 msgstr "更新失敗"
@@ -1035,11 +1035,14 @@ msgstr "更新路徑已變更"
 msgid "Updating"
 msgstr "正在更新"
 
+msgid "Updating Language Files..."
+msgstr "正在更新語言檔案..."
+
 msgid "Updating Language Files:"
-msgstr ""
+msgstr "正在更新語言檔案:"
 
 msgid "Updating WiiTDB.zip"
-msgstr ""
+msgstr "正在更新WiiTDB.zip"
 
 msgid "VIDTV Patch"
 msgstr "VIDTV修改"
@@ -1058,7 +1061,7 @@ msgid "Waiting..."
 msgstr "等待中..."
 
 msgid "What do you want to update?"
-msgstr ""
+msgstr "更新何者?"
 
 msgid "WiFi Features"
 msgstr "WiFi功能設定"
@@ -1070,6 +1073,9 @@ msgid "Wii Menu"
 msgstr "Wii系統選單"
 
 msgid "Wii Settings"
+msgstr "Wii主機設定"
+
+msgid "WiiTDB Files"
 msgstr ""
 
 msgid "Wiilight"
@@ -1162,6 +1168,9 @@ msgstr "剩餘空間 總容量"
 
 msgid "seconds left"
 msgstr "剩餘秒數"
+
+#~ msgid "Update WiiTDB"
+#~ msgstr "更新WiiTDB"
 
 #~ msgid "No partitions found"
 #~ msgstr "找不到磁區"

@@ -2497,7 +2497,7 @@ int ProgressUpdateWindow() {
     __Menu_GetEntries();
     if (IsNetworkInit() && ret >= 0) {
 
-        updatemode = WindowPrompt(tr("What do you want to update?"), 0, "USBLoader GX", "WiiTDB Files", "Languagefile", "Cancel");
+        updatemode = WindowPrompt(tr("What do you want to update?"), 0, "USBLoader GX", tr("WiiTDB Files"), tr("Languagefile"), tr("Cancel"));
         mainWindow->SetState(STATE_DISABLED);
         promptWindow.SetState(STATE_DEFAULT);
         mainWindow->ChangeFocus(&promptWindow);
@@ -2627,7 +2627,7 @@ int ProgressUpdateWindow() {
             ret = 1;
         } else if(updatemode == 3) {
 
-            msgTxt.SetTextf("%s", tr("Updating Language Files:"));
+            msgTxt.SetTextf("%s", tr("Updating Language Files..."));
             updateLanguageFiles();
             ret = 1;
         } else {

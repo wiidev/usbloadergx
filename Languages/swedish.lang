@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-09 09:34+0200\n"
+"POT-Creation-Date: 2009-08-21 17:05+0200\n"
 "PO-Revision-Date: 2009-08-02 12:20+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -25,7 +25,7 @@ msgid " is not on the server."
 msgstr "finns inte på servern."
 
 msgid "(both retired)"
-msgstr "(Båda pansionerade)"
+msgstr "(Båda pensionerade)"
 
 msgid "0 (Everyone)"
 msgstr "0 (Alla)"
@@ -37,22 +37,22 @@ msgid "1 hour"
 msgstr "1 timme"
 
 msgid "10 min"
-msgstr ""
+msgstr "10 min"
 
 msgid "2 (Teen 12+)"
 msgstr "2 (Tonåringar 12+)"
 
 msgid "20 min"
-msgstr ""
+msgstr "20 min"
 
 msgid "3 (Mature 16+)"
 msgstr "3 (Mogen 16+)"
 
 msgid "3 min"
-msgstr ""
+msgstr "3 min"
 
 msgid "30 min"
-msgstr ""
+msgstr "30 min"
 
 msgid "3D Covers"
 msgstr "3D-Omslag"
@@ -61,7 +61,7 @@ msgid "4 (Adults Only 18+)"
 msgstr "4 (Endast Vuxna 18+)"
 
 msgid "5 min"
-msgstr ""
+msgstr "5 min"
 
 msgid ">> Deleting tickets..."
 msgstr ">> Raderar biljetter..."
@@ -112,7 +112,7 @@ msgid ">> Reading WAD data...Ok!"
 msgstr ">> Läser WAD data...Ok!"
 
 msgid "AUTO"
-msgstr ""
+msgstr "AUTO"
 
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "Alla funktioner i USB Loader GX är upplåsta."
@@ -124,25 +124,25 @@ msgid "An Error occured"
 msgstr "Ett fel har uppstått"
 
 msgid "Anti"
-msgstr ""
+msgstr "Anti"
 
 msgid "App Language"
 msgstr "Programspråk"
 
 msgid "Apr"
-msgstr ""
+msgstr "Apr"
 
 msgid "Are you sure?"
 msgstr "Är du säker?"
 
 msgid "Aug"
-msgstr ""
+msgstr "Aug"
 
 msgid "AutoInit Network"
-msgstr "AutoInitiera Nätverk"
+msgstr "Autoinitiera Nätverk"
 
 msgid "AutoPatch"
-msgstr "AutoPatch"
+msgstr "Autopatch"
 
 msgid "Back"
 msgstr "Tillbaka"
@@ -172,7 +172,7 @@ msgid "Boot/Standard"
 msgstr "Boot/Standard"
 
 msgid "Boot?"
-msgstr ""
+msgstr "Starta?"
 
 msgid "Both"
 msgstr "Båda"
@@ -302,7 +302,7 @@ msgid "DOL from disc"
 msgstr "DOL från skiva"
 
 msgid "Dec"
-msgstr ""
+msgstr "Dec"
 
 msgid "Default"
 msgstr "Standard"
@@ -329,7 +329,7 @@ msgid "Delete Discart"
 msgstr "Radera skivbilder"
 
 msgid "Design:"
-msgstr ""
+msgstr "Design:"
 
 msgid "Developed by"
 msgstr "Utvecklat av"
@@ -344,7 +344,7 @@ msgid "Discimage Path"
 msgstr "Skivbildsmapp"
 
 msgid "Discimages Download"
-msgstr "Skivbilds nedladdning"
+msgstr "Skivbildsnedladdning"
 
 msgid "Discpath Changed"
 msgstr "Skivbildsmapp ändrad"
@@ -359,7 +359,7 @@ msgid "Display"
 msgstr "Visning"
 
 msgid "Display as a carousel"
-msgstr "Visa som en karucell"
+msgstr "Visa som en karusell"
 
 msgid "Display as a grid"
 msgstr "Visa som ett rutnät"
@@ -383,19 +383,19 @@ msgid "Do you want to retry for 30 secs?"
 msgstr "Vill du försöka igen i 30 sekunder?"
 
 msgid "Do you want to use the alt dol that is known to be correct?"
-msgstr "Vill du använda en alternativ dol som är känd att fungera?"
+msgstr "Vill du använda en alternativ DOL som är känd att fungera?"
 
 msgid "Do you wish to update/download all language files?"
-msgstr "Vill du uppdatera/ladda ner alla språk-filer?"
+msgstr "Vill du uppdatera/ladda ner alla språkfiler?"
 
 msgid "Dol Path"
-msgstr "Dol sökväg"
+msgstr "DOL-sökväg"
 
 msgid "Dolpath Changed"
-msgstr "Dol sökväg ändrad"
+msgstr "DOL-sökväg ändrad"
 
 msgid "Dolpath change"
-msgstr "Ändra Dol sökväg"
+msgstr "Ändra DOL-sökväg"
 
 msgid "Don't bother the USB Loader GX Team about errors in this file."
 msgstr "Rapportera inte fel i denna fil till USB Loader GX teamet."
@@ -464,7 +464,7 @@ msgid "Failed to open partition"
 msgstr "Misslyckades att öppna partition"
 
 msgid "Feb"
-msgstr ""
+msgstr "Feb"
 
 msgid "File not found."
 msgstr "Kunde inte hitta fil"
@@ -506,10 +506,10 @@ msgid "Game Language"
 msgstr "Språk"
 
 msgid "Game Load"
-msgstr "Spel inställningar"
+msgstr "Spelinställningar"
 
 msgid "Game Region"
-msgstr "Region"
+msgstr "Spelregion"
 
 msgid "Game Size"
 msgstr "Spelstorlek"
@@ -542,7 +542,7 @@ msgid "Homebrew Launcher"
 msgstr "Homebrew Startare"
 
 msgid "Hour"
-msgstr "Timmar"
+msgstr "Timme"
 
 msgid "How do you want to update?"
 msgstr "Hur vill du uppdatera?"
@@ -610,7 +610,7 @@ msgid "Italian"
 msgstr "Italienska"
 
 msgid "Jan"
-msgstr ""
+msgstr "Jan"
 
 msgid "Japanese"
 msgstr "Japanska"
@@ -633,6 +633,9 @@ msgstr "Koreanska"
 msgid "Language change:"
 msgstr "Språkbyte:"
 
+msgid "Languagefile"
+msgstr ""
+
 msgid "Languagepath changed."
 msgstr "Sökväg till språk ändrad"
 
@@ -647,10 +650,10 @@ msgstr "Ladda"
 
 #, c-format
 msgid "Load file from: %s ?"
-msgstr "Ladda fil från: %s ?"
+msgstr "Ladda fil från: %s?"
 
 msgid "Load this dol as alternate dol?"
-msgstr "Ladda denna dol som alternativ dol?"
+msgstr "Ladda denna DOL som alternativ DOL?"
 
 msgid "Loading standard language."
 msgstr "Laddar standard språk."
@@ -665,7 +668,7 @@ msgid "Locked"
 msgstr "Låst"
 
 msgid "Mar"
-msgstr ""
+msgstr "Mar"
 
 msgid "May"
 msgstr "Maj"
@@ -701,7 +704,7 @@ msgid "No Favorites"
 msgstr "Inga favoriter"
 
 msgid "No SD-Card inserted!"
-msgstr "Inget SD-kort insatt!"
+msgstr "Inget SD-kort isatt!"
 
 msgid "No USB Device"
 msgstr "Ingen USB-enhet"
@@ -716,7 +719,7 @@ msgid "No data could be read."
 msgstr "Ingen data kunde läsas."
 
 msgid "No dol file found on disc."
-msgstr "Ingen dol fil hittades på skivan."
+msgstr "Ingen DOL-fil hittades på skivan."
 
 msgid "No file missing!"
 msgstr "Inga filer saknas!"
@@ -737,7 +740,7 @@ msgid "Not a Wii Disc"
 msgstr "Inte en Wii-skiva"
 
 msgid "Not a dol/elf file."
-msgstr "Inte en dol/elf fil."
+msgstr "Inte en DOL/ELF fil."
 
 msgid "Not enough free memory"
 msgstr "Inte tillräckligt med ledigt minne"
@@ -752,13 +755,13 @@ msgid "Not supported format!"
 msgstr "Formatet stöds inte!"
 
 msgid "Nov"
-msgstr ""
+msgstr "Nov"
 
 msgid "OFF"
 msgstr "AV"
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "ON"
 msgstr "PÅ"
@@ -767,16 +770,16 @@ msgid "Oct"
 msgstr "Okt"
 
 msgid "Official Site"
-msgstr "Officiell Sida"
+msgstr "Officiell sida"
 
 msgid "Ok"
-msgstr ""
+msgstr "Ok"
 
 msgid "Only Customs"
-msgstr "Endast Anpassade"
+msgstr "Endast anpassade"
 
 msgid "Only Original"
-msgstr "Endast Original"
+msgstr "Endast original"
 
 msgid "Only for Install"
 msgstr "Endast för installering"
@@ -854,7 +857,7 @@ msgid "Return"
 msgstr "Återvänd"
 
 msgid "Return to Wii Menu"
-msgstr "Återvänd till wii menyn"
+msgstr "Återvänd till Wii-menyn"
 
 msgid "Right"
 msgstr "Höger"
@@ -875,13 +878,13 @@ msgid "Save"
 msgstr "Spara"
 
 msgid "Save Failed"
-msgstr "Sparning misslyckad"
+msgstr "Sparande misslyckat"
 
 msgid "Screensaver"
 msgstr "Skärmsläckare"
 
 msgid "Sept"
-msgstr ""
+msgstr "Sept"
 
 msgid "Set as backgroundmusic?"
 msgstr "Ställ in som bakgrundsmusik?"
@@ -908,10 +911,10 @@ msgid "Spanish"
 msgstr "Spanska"
 
 msgid "Special thanks to:"
-msgstr "Speciella tack till"
+msgstr "Speciellt tack till:"
 
 msgid "Standard"
-msgstr ""
+msgstr "Standard"
 
 msgid "Success"
 msgstr "Lyckat"
@@ -932,7 +935,7 @@ msgid "Successfully installed:"
 msgstr "Lyckad installation av:"
 
 msgid "System Default"
-msgstr "Systemets Standard"
+msgstr "Systemets standard"
 
 msgid "TChinese"
 msgstr "TKinesiska"
@@ -966,7 +969,7 @@ msgid "Time left:"
 msgstr "Tid kvar:"
 
 msgid "Title Launcher"
-msgstr "Titel Startare"
+msgstr "Titel startare"
 
 msgid "Titles from XML"
 msgstr "Titlar från XML"
@@ -1014,9 +1017,6 @@ msgstr "Updatera DOL"
 msgid "Update Files"
 msgstr "Uppdatera Filer"
 
-msgid "Update WiiTDB"
-msgstr ""
-
 msgid "Update all Language Files"
 msgstr "Uppdatera alla språk-filer"
 
@@ -1035,6 +1035,9 @@ msgstr "Sökväg till uppdatering ändrad."
 msgid "Updating"
 msgstr "Uppdaterar"
 
+msgid "Updating Language Files..."
+msgstr "Uppdatera språk-filer..."
+
 msgid "Updating Language Files:"
 msgstr "Uppdatera språk-filer:"
 
@@ -1046,7 +1049,7 @@ msgstr "VIDTV-Patch"
 
 #, c-format
 msgid "Version: %s"
-msgstr ""
+msgstr "Version: %s"
 
 msgid "Video Mode"
 msgstr "Video-läge"
@@ -1058,7 +1061,7 @@ msgid "Waiting..."
 msgstr "Väntar..."
 
 msgid "What do you want to update?"
-msgstr ""
+msgstr "Vad vill du uppdatera?"
 
 msgid "WiFi Features"
 msgstr "WiFi funktioner"
@@ -1072,26 +1075,29 @@ msgstr "Wii-meny"
 msgid "Wii Settings"
 msgstr "Wii inställningar"
 
+msgid "WiiTDB Files"
+msgstr ""
+
 msgid "Wiilight"
-msgstr "Wii ljus"
+msgstr "Wii-ljus"
 
 msgid "Wrong Password"
 msgstr "Fel Lösenord"
 
 msgid "XMLPath"
-msgstr "XML"
+msgstr "XML-sökväg"
 
 msgid "XMLPath change"
-msgstr "Ändra XML"
+msgstr "Ändra XML-sökväg"
 
 msgid "XMLPath changed."
-msgstr "XML ändrad."
+msgstr "XML-sökväg ändrad."
 
 msgid "Yes"
 msgstr "Ja"
 
 msgid "You are about to delete "
-msgstr "Då håller på att radera"
+msgstr "Då håller på att radera "
 
 msgid "You are choosing to display favorites and you do not have any selected."
 msgstr "Du har valt att visa favoriter men du har inga favoriter valda."
@@ -1134,7 +1140,7 @@ msgid "for"
 msgstr "för"
 
 msgid "for WiiTDB and hosting covers / disc images"
-msgstr "för WiiTDB"
+msgstr "för WiiTDB och lagring av omslag / skivbilder"
 
 msgid "for diverse patches"
 msgstr "för diverse patcher"
@@ -1143,7 +1149,7 @@ msgid "for his awesome tool"
 msgstr "för hans underbara verktyg"
 
 msgid "for hosting the update files"
-msgstr "för hosting av uppdateringar"
+msgstr "för lagring av uppdateringar"
 
 msgid "for the USB Loader source"
 msgstr "och släppet av källkoden"
@@ -1162,6 +1168,9 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder kvar"
+
+#~ msgid "Update WiiTDB"
+#~ msgstr "Uppdatera WiiTDB"
 
 #~ msgid "ERROR: USB device could not be loaded!"
 #~ msgstr "FEL: USB-enhet kunde inte laddas!"

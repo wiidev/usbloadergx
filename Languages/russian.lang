@@ -4,11 +4,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-09 09:34+0200\n"
+"POT-Creation-Date: 2009-08-21 17:05+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: Kir\n"
 "Language-Team: Kir\n"
-"MIME-Version: Russian 2.0 (r570)\n"
+"MIME-Version: Russian 2.1 (r713)\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
@@ -25,7 +25,7 @@ msgid " is not on the server."
 msgstr ""
 
 msgid "(both retired)"
-msgstr ""
+msgstr "(ушли из проекта)"
 
 msgid "0 (Everyone)"
 msgstr "0 (Для всех)"
@@ -91,19 +91,19 @@ msgid ">> Deleting title..."
 msgstr ""
 
 msgid ">> Finishing installation..."
-msgstr ""
+msgstr ">> Заканчиваю установку..."
 
 msgid ">> Installing content #"
-msgstr ""
+msgstr ">>Установка контента №"
 
 msgid ">> Installing ticket..."
-msgstr ""
+msgstr ">>Установка тикета..."
 
 msgid ">> Installing title..."
-msgstr ""
+msgstr ">>Установка тайтла"
 
 msgid ">> Reading WAD data..."
-msgstr ""
+msgstr ">>Чтение данных WAD..."
 
 msgid ">> Reading WAD data...ERROR! "
 msgstr ""
@@ -112,7 +112,7 @@ msgid ">> Reading WAD data...Ok!"
 msgstr ""
 
 msgid "AUTO"
-msgstr ""
+msgstr "АВТО"
 
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "Все функции USB Loader GX разблокированы."
@@ -160,7 +160,7 @@ msgid "Backgroundmusic"
 msgstr "Фоновая музыка"
 
 msgid "Backgroundmusic Path changed."
-msgstr "Путь к фоновой музыке"
+msgstr "Путь к фоновой музыке изменен."
 
 msgid "Big thanks to:"
 msgstr "Большое спасибо:"
@@ -211,7 +211,7 @@ msgid "Close"
 msgstr "Закрыть"
 
 msgid "Code Download"
-msgstr ""
+msgstr "Скачивание кода"
 
 #, c-format
 msgid "Coded by: %s"
@@ -221,7 +221,7 @@ msgid "Coding:"
 msgstr ""
 
 msgid "Confirm"
-msgstr ""
+msgstr "Подтвердить"
 
 msgid "Console"
 msgstr "Консоль"
@@ -260,16 +260,16 @@ msgid "Could not open Disc"
 msgstr "Не могу прочесть диск"
 
 msgid "Could not open WBFS partition"
-msgstr ""
+msgstr "Не могу открыть раздел WBFS"
 
 msgid "Could not open disc."
-msgstr ""
+msgstr "Не могу открыть диск"
 
 msgid "Could not read the disc."
-msgstr ""
+msgstr "Не могу прочесть диск"
 
 msgid "Could not set USB."
-msgstr ""
+msgstr "Не могу настроить USB"
 
 msgid "Cover Download"
 msgstr "Скачать обложку"
@@ -278,7 +278,7 @@ msgid "Cover Path"
 msgstr "Путь к обложкам"
 
 msgid "Coverpath Change"
-msgstr ""
+msgstr "Изменить путь к обложкам"
 
 msgid "Coverpath Changed"
 msgstr "Путь к обложкам был изменен."
@@ -296,10 +296,10 @@ msgid "Customs/Original"
 msgstr ""
 
 msgid "DOL from SD"
-msgstr ""
+msgstr "DOL с SD карты"
 
 msgid "DOL from disc"
-msgstr ""
+msgstr "DOL с диска"
 
 msgid "Dec"
 msgstr "Дек"
@@ -314,7 +314,7 @@ msgid "Default Settings"
 msgstr "Установки по умолчанию"
 
 msgid "Delete"
-msgstr ""
+msgstr "Удалить"
 
 msgid "Delete ?"
 msgstr ""
@@ -353,7 +353,7 @@ msgid "Discpath change"
 msgstr "Изменить путь к изображениям дисков"
 
 msgid "DiskFlip"
-msgstr ""
+msgstr "ДискФлип"
 
 msgid "Display"
 msgstr "Отображать"
@@ -383,7 +383,7 @@ msgid "Do you want to retry for 30 secs?"
 msgstr "Хотите попробовать еще раз на 30 секунд?"
 
 msgid "Do you want to use the alt dol that is known to be correct?"
-msgstr ""
+msgstr "Вы хотите использовать DOL, который считается правильным?"
 
 msgid "Do you wish to update/download all language files?"
 msgstr ""
@@ -410,13 +410,13 @@ msgid "Download Discart image?"
 msgstr "Скачать изображение диска ?"
 
 msgid "Download Now"
-msgstr ""
+msgstr "Скачать сейчас"
 
 msgid "Download finished"
 msgstr "Скачивание завершено"
 
 msgid "Downloading"
-msgstr ""
+msgstr "Скачиваю"
 
 msgid "Downloading file"
 msgstr "Скачиваю файл:"
@@ -425,10 +425,10 @@ msgid "Dutch"
 msgstr "Голландский"
 
 msgid "ERROR"
-msgstr ""
+msgstr "ОШИБКА"
 
 msgid "ERROR:"
-msgstr ""
+msgstr "ОШИБКА:"
 
 msgid "English"
 msgstr "Английский"
@@ -449,7 +449,7 @@ msgid "Error while transfering data."
 msgstr ""
 
 msgid "Error..."
-msgstr ""
+msgstr "Ошибка..."
 
 msgid "Error:"
 msgstr ""
@@ -470,7 +470,7 @@ msgid "File not found."
 msgstr "Файл не найден"
 
 msgid "Finishing installation... Ok!"
-msgstr ""
+msgstr "Завершение установки... ОК!"
 
 msgid "Flip-X"
 msgstr "Flip-X"
@@ -527,19 +527,19 @@ msgid "HOME Menu"
 msgstr "Домашнее Меню"
 
 msgid "Homebrew Apps Path"
-msgstr ""
+msgstr "Путь к хоумбрю-программам"
 
 msgid "Homebrew Appspath change"
-msgstr ""
+msgstr "Изменить путь к хоумбрю-программам"
 
 msgid "Homebrew Appspath changed"
-msgstr ""
+msgstr "Путь к хоумбрю-программам изменен"
 
 msgid "Homebrew Channel"
 msgstr ""
 
 msgid "Homebrew Launcher"
-msgstr ""
+msgstr "Загрузчик хоумбрю"
 
 msgid "Hour"
 msgstr "Час"
@@ -568,7 +568,7 @@ msgid "Insert Disk"
 msgstr "Вставьте диск"
 
 msgid "Insert a Wii Disc!"
-msgstr "Вставьте диск от Wii!"
+msgstr ""
 
 msgid "Insert an SD-Card to download images."
 msgstr "Для скачивания изображений вставьте SD карту."
@@ -589,19 +589,19 @@ msgid "Install a game"
 msgstr "Установить игру"
 
 msgid "Installing content... Ok!"
-msgstr ""
+msgstr "Установка контента... ОК!"
 
 msgid "Installing game:"
 msgstr "Устанавливаю игру:"
 
 msgid "Installing ticket... Ok!"
-msgstr ""
+msgstr "Установка тикета... ОК!"
 
 msgid "Installing title... Ok!"
-msgstr ""
+msgstr "Установка тайтла... ОК!"
 
 msgid "Installing wad"
-msgstr ""
+msgstr "Установка WAD"
 
 msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team."
 msgstr ""
@@ -633,6 +633,9 @@ msgstr "Корейский"
 msgid "Language change:"
 msgstr "Смена языка:"
 
+msgid "Languagefile"
+msgstr ""
+
 msgid "Languagepath changed."
 msgstr "Путь к языкам изменен"
 
@@ -643,14 +646,14 @@ msgid "Like SysMenu"
 msgstr "как SysMenu"
 
 msgid "Load"
-msgstr ""
+msgstr "Загрузить"
 
 #, c-format
 msgid "Load file from: %s ?"
 msgstr ""
 
 msgid "Load this dol as alternate dol?"
-msgstr ""
+msgstr "Загрузить этот DOL в качестве альтернативного ?"
 
 msgid "Loading standard language."
 msgstr "Загрузка языка по умолчанию"
@@ -692,13 +695,13 @@ msgid "No"
 msgstr "Нет"
 
 msgid "No .dol or .elf files found."
-msgstr ""
+msgstr "Не найдены файлы .dol или .elf"
 
 msgid "No Cheatfile found"
 msgstr "Не найден файл с читами"
 
 msgid "No Favorites"
-msgstr ""
+msgstr "Нет избранных"
 
 msgid "No SD-Card inserted!"
 msgstr "SD карта не вставлена!"
@@ -716,7 +719,7 @@ msgid "No data could be read."
 msgstr ""
 
 msgid "No dol file found on disc."
-msgstr ""
+msgstr "DOL-файл не найден на диске."
 
 msgid "No file missing!"
 msgstr "Файл не найден!"
@@ -743,7 +746,7 @@ msgid "Not enough free memory"
 msgstr ""
 
 msgid "Not enough free memory."
-msgstr ""
+msgstr "Недостаточно памяти"
 
 msgid "Not enough free space!"
 msgstr "Не хватает свободного места!"
@@ -809,7 +812,7 @@ msgid "Patch Country Strings"
 msgstr "Патчить строки страны"
 
 msgid "Pick from a list"
-msgstr ""
+msgstr "Выберите из списка"
 
 msgid "Play Count"
 msgstr "Запущено раз"
@@ -830,7 +833,7 @@ msgid "Quick Boot"
 msgstr "Быстрая загрузка"
 
 msgid "Reading WAD data... Ok!"
-msgstr ""
+msgstr "Чтение данных WAD... ОК!"
 
 msgid "Receiving file from:"
 msgstr ""
@@ -866,7 +869,7 @@ msgid "SChinese"
 msgstr "Упрощенный китайский"
 
 msgid "SD selected"
-msgstr ""
+msgstr "Громкость эффектов"
 
 msgid "SFX Volume"
 msgstr "Громкость эффектов"
@@ -914,7 +917,7 @@ msgid "Standard"
 msgstr "Стандартный"
 
 msgid "Success"
-msgstr ""
+msgstr "Успех"
 
 msgid "Success:"
 msgstr "Успех:"
@@ -941,7 +944,7 @@ msgid "TXTCheatcodes Path"
 msgstr "Путь к TXT читкодам"
 
 msgid "TXTCheatcodes Path changed"
-msgstr ""
+msgstr "Путь к TXT читкодам изменен"
 
 msgid "The file is not a .wad"
 msgstr ""
@@ -951,7 +954,7 @@ msgstr ""
 
 #, c-format
 msgid "The wad installation failed with error %ld"
-msgstr ""
+msgstr "Установка WAD не удалась, код ошибки %ld"
 
 msgid "ThemePath"
 msgstr "Путь к темам"
@@ -982,7 +985,7 @@ msgstr "USB Loader GX заблокирован"
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
-msgstr ""
+msgstr "Не могу открыть скачанный WAD (%s)"
 
 msgid "Uninstall"
 msgstr "Деинсталлировать"
@@ -1014,9 +1017,6 @@ msgstr "Обновить DOL"
 msgid "Update Files"
 msgstr ""
 
-msgid "Update WiiTDB"
-msgstr ""
-
 msgid "Update all Language Files"
 msgstr ""
 
@@ -1034,6 +1034,9 @@ msgstr "Путь к обновлениям изменен"
 
 msgid "Updating"
 msgstr "обновляю"
+
+msgid "Updating Language Files..."
+msgstr ""
 
 msgid "Updating Language Files:"
 msgstr ""
@@ -1072,6 +1075,9 @@ msgstr "Меню Wii"
 msgid "Wii Settings"
 msgstr ""
 
+msgid "WiiTDB Files"
+msgstr ""
+
 msgid "Wiilight"
 msgstr "Подсветка Wii"
 
@@ -1091,10 +1097,10 @@ msgid "Yes"
 msgstr "Да"
 
 msgid "You are about to delete "
-msgstr ""
+msgstr "Вы хотите удалить "
 
 msgid "You are choosing to display favorites and you do not have any selected."
-msgstr ""
+msgstr "Нельзя отобразить избранные, если вы их до этого не выбрали."
 
 msgid "You have attempted to load a bad image"
 msgstr "Вы попытались загрузить плохой образ"
@@ -1113,7 +1119,7 @@ msgid "contains over 255 lines of code.  It will produce unexpected results."
 msgstr "содержит более 255 строк кода. Результаты будут непредсказуемы."
 
 msgid "does not exist!"
-msgstr ""
+msgstr "не существует!"
 
 msgid "does not exist!  Loading game without cheats."
 msgstr "не существует! Загружаю игру без читов"
@@ -1134,7 +1140,7 @@ msgid "for"
 msgstr "за"
 
 msgid "for WiiTDB and hosting covers / disc images"
-msgstr ""
+msgstr "за WIITDB и хостинг изображений обложек/дисков"
 
 msgid "for diverse patches"
 msgstr "за различные патчи"
@@ -1163,8 +1169,32 @@ msgstr "из"
 msgid "seconds left"
 msgstr "секунд осталось"
 
+#~ msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team. %s - %i"
+#~ msgstr "Похоже что у вас есть информация, которая может помочь нам. Пожалуйста, передайте ее разработчикам %s - %i"
+
+#~ msgid "Leaving so you can restart..."
+#~ msgstr "Выхожу для перезапуска..."
+
+#~ msgid "Most likely it has dimensions that are not evenly divisible by 4.  Way to go dipshit."
+#~ msgstr "Размеры картинки не делятся на 4. Поздравляю, блин."
+
 #~ msgid "No partitions found"
 #~ msgstr "Разделы не найдены"
 
+#~ msgid "Path of titles.txt change"
+#~ msgstr "изменить путь к titles.txt"
+
+#~ msgid "Path of titles.txt changed."
+#~ msgstr "путь к titles.txt изменён"
+
 #~ msgid "Restart"
 #~ msgstr "Перезапустить"
+
+#~ msgid "Shit"
+#~ msgstr "Чёрт"
+
+#~ msgid "there was an error"
+#~ msgstr "произошла ошибка"
+
+#~ msgid "titles.txt Path"
+#~ msgstr "путь к titles.txt"

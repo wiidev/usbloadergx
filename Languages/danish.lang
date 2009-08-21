@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-09 09:34+0200\n"
+"POT-Creation-Date: 2009-08-21 17:05+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -115,7 +115,7 @@ msgid "AUTO"
 msgstr "AUTO"
 
 msgid "All the features of USB Loader GX are unlocked."
-msgstr "Alle USB Loader GX's funktioner er låst op."
+msgstr "Alle USB Loader GX's funktioner er lÃ¥st op."
 
 msgid "Alternate DOL"
 msgstr "Alternativ DOL"
@@ -248,7 +248,7 @@ msgid "Could not create GCT file"
 msgstr "Kunne ikke oprette GCT-fil"
 
 msgid "Could not find a WBFS partition."
-msgstr "Kunne ikke finde WBFS-partition."
+msgstr "Kunne ikke finde en WBFS-partition."
 
 msgid "Could not initialize DIP module!"
 msgstr "Kunne ikke initialisere DIP-modul!"
@@ -293,7 +293,7 @@ msgid "Custom Paths"
 msgstr "Sti-indstillinger"
 
 msgid "Customs/Original"
-msgstr ""
+msgstr "Tilpassede/Originale"
 
 msgid "DOL from SD"
 msgstr "DOL fra SD"
@@ -344,10 +344,10 @@ msgid "Discimage Path"
 msgstr "Sti til DVD-covers"
 
 msgid "Discimages Download"
-msgstr ""
+msgstr "Download DVD-billeder"
 
 msgid "Discpath Changed"
-msgstr "Sti til DVD-covers ændret"
+msgstr "Sti til DVD ændret"
 
 msgid "Discpath change"
 msgstr "Ændringer til DVD-sti"
@@ -461,7 +461,7 @@ msgid "Failed formating"
 msgstr "Formateringen mislykkedes"
 
 msgid "Failed to open partition"
-msgstr ""
+msgstr "Kunne ikke åbne partition"
 
 msgid "Feb"
 msgstr "Feb"
@@ -536,7 +536,7 @@ msgid "Homebrew Appspath changed"
 msgstr "Sti til homebrew-programmer ændret"
 
 msgid "Homebrew Channel"
-msgstr ""
+msgstr "Homebrew Channel"
 
 msgid "Homebrew Launcher"
 msgstr "Homebrew-starter"
@@ -545,7 +545,7 @@ msgid "Hour"
 msgstr "timer"
 
 msgid "How do you want to update?"
-msgstr "Vil du opdatere USB Loader GX?"
+msgstr "Hvordan skal der opdateres?"
 
 msgid "How to Shutdown?"
 msgstr "Hvordan skal der slukkes?"
@@ -632,6 +632,9 @@ msgstr "Koreansk"
 
 msgid "Language change:"
 msgstr "Skift sprog:"
+
+msgid "Languagefile"
+msgstr ""
 
 msgid "Languagepath changed."
 msgstr "Sti til sprogfiler ændret."
@@ -737,7 +740,7 @@ msgid "Not a Wii Disc"
 msgstr "Ikke en Wii-DVD"
 
 msgid "Not a dol/elf file."
-msgstr ""
+msgstr "Ikke en DOL/ELF-fil."
 
 msgid "Not enough free memory"
 msgstr "Ikke nok fri hukommelse"
@@ -773,16 +776,16 @@ msgid "Ok"
 msgstr "Ok"
 
 msgid "Only Customs"
-msgstr ""
+msgstr "Kun tilpassede"
 
 msgid "Only Original"
-msgstr ""
+msgstr "Kun originaler"
 
 msgid "Only for Install"
 msgstr "Kun til installering"
 
 msgid "Original/Customs"
-msgstr ""
+msgstr "Originale/Tilpassede"
 
 msgid "Parental Control"
 msgstr "Børnelås"
@@ -944,7 +947,7 @@ msgid "TXTCheatcodes Path changed"
 msgstr "Sti til TXTCheatcodes ændret"
 
 msgid "The file is not a .wad"
-msgstr ""
+msgstr "Filen er ikke en .WAD"
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."
 msgstr "WAD-filen blev installeret. Den kunne ikke slettes fra SD-kortet."
@@ -1014,9 +1017,6 @@ msgstr "Opdatér DOL"
 msgid "Update Files"
 msgstr "Opdatér filer"
 
-msgid "Update WiiTDB"
-msgstr ""
-
 msgid "Update all Language Files"
 msgstr "Opdatér alle sprogfiler"
 
@@ -1034,6 +1034,9 @@ msgstr "Sti til opdateringer ændret."
 
 msgid "Updating"
 msgstr "Opdaterer..."
+
+msgid "Updating Language Files..."
+msgstr "Opdaterer sprogfiler..."
 
 msgid "Updating Language Files:"
 msgstr "Opdaterer sprogfiler:"
@@ -1071,6 +1074,9 @@ msgstr "Wii Menu"
 
 msgid "Wii Settings"
 msgstr "Wii-indstillinger"
+
+msgid "WiiTDB Files"
+msgstr ""
 
 msgid "Wiilight"
 msgstr "Wiilight"
@@ -1119,7 +1125,7 @@ msgid "does not exist!  Loading game without cheats."
 msgstr "eksisterer ikke! Indlæser spillet uden cheats."
 
 msgid "does not exist!  You Messed something up, Idiot."
-msgstr "eksisterer ikke."
+msgstr "eksisterer ikke!"
 
 msgid "file left"
 msgstr "fil tilbage"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-09 09:34+0200\n"
+"POT-Creation-Date: 2009-08-21 17:05+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: tj_cool\n"
 "Language-Team: \n"
@@ -633,6 +633,9 @@ msgstr "Koreaans"
 msgid "Language change:"
 msgstr "Taal wijzigen:"
 
+msgid "Languagefile"
+msgstr ""
+
 msgid "Languagepath changed."
 msgstr "Locatie taal gewijzigd."
 
@@ -1014,9 +1017,6 @@ msgstr "DOL updaten"
 msgid "Update Files"
 msgstr "Bestanden Updaten"
 
-msgid "Update WiiTDB"
-msgstr ""
-
 msgid "Update all Language Files"
 msgstr "Alle taalbestanden updaten"
 
@@ -1035,8 +1035,11 @@ msgstr "Updatelocatie gewijzigd."
 msgid "Updating"
 msgstr "Updaten"
 
-msgid "Updating Language Files:"
+msgid "Updating Language Files..."
 msgstr "Taalbestanden updaten..."
+
+msgid "Updating Language Files:"
+msgstr "Taalbestanden updaten:"
 
 msgid "Updating WiiTDB.zip"
 msgstr "Wiitdb.zip updaten..."
@@ -1058,7 +1061,7 @@ msgid "Waiting..."
 msgstr "Wachten..."
 
 msgid "What do you want to update?"
-msgstr ""
+msgstr "Wat wil je updaten?"
 
 msgid "WiFi Features"
 msgstr "WiFi functies"
@@ -1071,6 +1074,9 @@ msgstr "Wii Menu"
 
 msgid "Wii Settings"
 msgstr "Wii instellingen"
+
+msgid "WiiTDB Files"
+msgstr ""
 
 msgid "Wiilight"
 msgstr "Wii verlichting"
@@ -1162,6 +1168,9 @@ msgstr "van"
 
 msgid "seconds left"
 msgstr "seconden over:"
+
+#~ msgid "Update WiiTDB"
+#~ msgstr "WiiTDB updaten"
 
 #~ msgid "ERROR: USB device could not be loaded!"
 #~ msgstr "FOUT: USB apparaat kon niet geladen worden!"
