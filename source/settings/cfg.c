@@ -1712,7 +1712,7 @@ void CFG_Load(void) {
 	// set language code for languages that are not available on the Wii
 	if (!strcmp(Settings.db_language,"")) {
 		if (strstr(languagefile, "portuguese") != NULL)
-			strcpy(Settings.db_language,"PO");
+			strcpy(Settings.db_language,"PT");
 	}
 
 	// open database if needed, load titles if needed

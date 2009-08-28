@@ -586,6 +586,7 @@ bool LoadGameInfoFromXML(char* gameid, char* langtxt)
         if (gameid[3] == 'U') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
 		if (gameid[3] == 'X') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
         if (gameid[3] == 'Y') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
+        if (gameid[3] == 'Z') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
     }
 
     // free memory

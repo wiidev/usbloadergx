@@ -2047,6 +2047,7 @@ ProgressDownloadWindow(int choice2) {
                 case 'U':
                 case 'X':
                 case 'Y':
+                case 'Z':
                     sprintf(URLFile,"%s%s/%s",server3d,Settings.db_language,missingFiles[i]);
                     break;
                 case 'E':
@@ -2129,6 +2130,7 @@ ProgressDownloadWindow(int choice2) {
                 case 'U':
                 case 'X':
                 case 'Y':
+                case 'Z':
                     if(Settings.discart == 0) {
                         sprintf(URLFile,"%s%s/%s",serverDisc,Settings.db_language,missingFiles[i]);
                     } else if(Settings.discart == 1) {
@@ -2209,6 +2211,7 @@ ProgressDownloadWindow(int choice2) {
                 case 'U':
                 case 'X':
                 case 'Y':
+                case 'Z':
                     sprintf(URLFile,"%s%s/%s",server2d,Settings.db_language,missingFiles[i]);
                     break;
                 case 'E':

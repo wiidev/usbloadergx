@@ -1083,6 +1083,7 @@ int MenuDiscList() {
                     case 'U':
                     case 'X':
                     case 'Y':
+                    case 'Z':
                         sprintf(gameregion,"  PAL ");
                         break;
                     }

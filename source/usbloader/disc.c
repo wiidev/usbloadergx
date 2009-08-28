@@ -83,12 +83,16 @@ void __Disc_SetVMode(u8 videoselected) {
 
         /* Select video mode */
         switch (diskid[3]) {
-            /* PAL */
-        case 'D':
-        case 'F':
+        /* PAL */
         case 'P':
+		case 'D':
+        case 'F':
+		case 'I':
+		case 'S':
+		case 'H':
         case 'X':
         case 'Y':
+        case 'Z':
             if (tvmode != CONF_VIDEO_PAL) {
                 vmode_reg = 5;
                 vmode     = (progressive) ? &TVNtsc480Prog : &TVEurgb60Hz480IntDf;
