@@ -149,7 +149,7 @@ int showGameInfo(char *ID) {
 
         GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
         GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
-        char imgPath[50];
+        char imgPath[100];
         snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
         GuiImageData btnOutline(imgPath, button_dialogue_box_png);
         snprintf(imgPath, sizeof(imgPath), "%sgameinfo1_png.png", CFG.theme_path);
