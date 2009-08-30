@@ -1,5 +1,6 @@
 # USB Loader GX language source file.
-# French V9.4 r715
+# French V9.5 r715
+# don't delete this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
@@ -926,7 +927,7 @@ msgid "Successfully Saved"
 msgstr "Enregistré avec succès"
 
 msgid "Successfully Updated"
-msgstr "Mise à Jour réussie"
+msgstr "Mise à Jour terminée"
 
 msgid "Successfully deleted:"
 msgstr "Supprimé avec succès:"
@@ -1085,13 +1086,13 @@ msgid "Wrong Password"
 msgstr "Mot de passe incorrect"
 
 msgid "XMLPath"
-msgstr "Dossier Databases"
+msgstr "Dossier XML"
 
 msgid "XMLPath change"
-msgstr "Dossier des Databases"
+msgstr "Dossier de XML"
 
 msgid "XMLPath changed."
-msgstr "Dossier des Databases modifié"
+msgstr "Dossier de XML modifié"
 
 msgid "Yes"
 msgstr "Oui"

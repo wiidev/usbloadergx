@@ -1,5 +1,6 @@
 # USB Loader GX language source file.
 #
+# don't delete this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
@@ -634,7 +635,7 @@ msgid "Language change:"
 msgstr "Sprachänderung:"
 
 msgid "Languagefile"
-msgstr ""
+msgstr "Sprachen"
 
 msgid "Languagepath changed."
 msgstr "Sprachenpfad geändert."
@@ -740,7 +741,7 @@ msgid "Not a Wii Disc"
 msgstr "Keine Wii Disk"
 
 msgid "Not a dol/elf file."
-msgstr ""
+msgstr "Nicht dol/elf Datei"
 
 msgid "Not enough free memory"
 msgstr "Nicht genügend freier Speicher"
@@ -947,7 +948,7 @@ msgid "TXTCheatcodes Path changed"
 msgstr "TXTCheatcodes Pfad geändert"
 
 msgid "The file is not a .wad"
-msgstr ""
+msgstr "Die Datei ist nicht .wad"
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."
 msgstr "Die wad wurde installiert. Aber Sie konnte nicht von der SD gelöscht werden."

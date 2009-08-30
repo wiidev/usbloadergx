@@ -1,5 +1,6 @@
 # USB Loader GX language source file.
 #
+# don't delete this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
@@ -634,7 +635,7 @@ msgid "Language change:"
 msgstr "Skift sprog:"
 
 msgid "Languagefile"
-msgstr ""
+msgstr "Sprogfil"
 
 msgid "Languagepath changed."
 msgstr "Sti til sprogfiler ændret."
@@ -966,7 +967,7 @@ msgid "Themepath change"
 msgstr "Ændringer af sti til temaer"
 
 msgid "Time left:"
-msgstr "Tid tilb.:"
+msgstr "Tid tilbage:"
 
 msgid "Title Launcher"
 msgstr "Titel-starter"
@@ -985,7 +986,7 @@ msgstr "USB Loader GX er beskyttet"
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
-msgstr "Ikke i stand til at åbne den WAD, der blev downloadet (%s),"
+msgstr "Ikke i stand til at åbne den WAD, der blev downloadet (%s)."
 
 msgid "Uninstall"
 msgstr "Afinstallér"
@@ -1061,7 +1062,7 @@ msgid "Waiting..."
 msgstr "Venter..."
 
 msgid "What do you want to update?"
-msgstr ""
+msgstr "Hvad vil du opdatere?"
 
 msgid "WiFi Features"
 msgstr "WiFi-indstillinger"
@@ -1076,7 +1077,7 @@ msgid "Wii Settings"
 msgstr "Wii-indstillinger"
 
 msgid "WiiTDB Files"
-msgstr ""
+msgstr "WiiTDB-filer"
 
 msgid "Wiilight"
 msgstr "Wiilight"

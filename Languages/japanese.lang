@@ -1,5 +1,6 @@
 # USB Loader GX language source file.
 #
+# don't delete this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
@@ -163,7 +164,7 @@ msgid "Backgroundmusic Path changed."
 msgstr "ｻｳﾝﾄﾞ(BGM)のPath"
 
 msgid "Big thanks to:"
-msgstr "多謝"
+msgstr "多謝:"
 
 msgid "Block IOS Reload"
 msgstr "IOSの一部再ロード"
@@ -218,7 +219,7 @@ msgid "Coded by: %s"
 msgstr ""
 
 msgid "Coding:"
-msgstr ""
+msgstr "開発者:"
 
 msgid "Confirm"
 msgstr "確認"
@@ -287,13 +288,13 @@ msgid "Create"
 msgstr "作成"
 
 msgid "Credits"
-msgstr "協力"
+msgstr "提供・協力"
 
 msgid "Custom Paths"
 msgstr "カスタムパス"
 
 msgid "Customs/Original"
-msgstr ""
+msgstr "ｶｽﾀﾑ/標準"
 
 msgid "DOL from SD"
 msgstr "SDからDOLを実行"
@@ -344,7 +345,7 @@ msgid "Discimage Path"
 msgstr "ﾃﾞｨｽｸｲﾒｰｼﾞﾊﾟｽ"
 
 msgid "Discimages Download"
-msgstr ""
+msgstr "ﾃﾞｨｽｸｲﾒｰｼﾞのﾀﾞｳﾝﾛｰﾄﾞ"
 
 msgid "Discpath Changed"
 msgstr "ﾃﾞｨｽｸﾊﾟｽを変更しました"
@@ -524,7 +525,7 @@ msgid "German"
 msgstr "ﾄﾞｲﾂ語"
 
 msgid "HOME Menu"
-msgstr "ﾎｰﾑﾒﾆｭ-"
+msgstr "ﾎｰﾑﾎﾞﾀﾝﾒﾆｭｰ"
 
 msgid "Homebrew Apps Path"
 msgstr "HomebrewのAppsﾊﾟｽ"
@@ -604,7 +605,7 @@ msgid "Installing wad"
 msgstr "WADをｲﾝｽﾄｰﾙします"
 
 msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team."
-msgstr ""
+msgstr "この情報はGXの開発に役立つものと考えられますので、開発者までお知らせください。"
 
 msgid "Italian"
 msgstr "ｲﾀﾘｱ語"
@@ -634,7 +635,7 @@ msgid "Language change:"
 msgstr "言語の変更"
 
 msgid "Languagefile"
-msgstr ""
+msgstr "言語設定ﾌｧｲﾙ"
 
 msgid "Languagepath changed."
 msgstr "言語ﾊﾟｽを変更しました"
@@ -773,19 +774,19 @@ msgid "Official Site"
 msgstr "ｵﾌｨｼｬﾙｻｲﾄ"
 
 msgid "Ok"
-msgstr ""
+msgstr "はい"
 
 msgid "Only Customs"
-msgstr ""
+msgstr "ｶｽﾀﾑのみ"
 
 msgid "Only Original"
-msgstr ""
+msgstr "標準のみ"
 
 msgid "Only for Install"
 msgstr "ｲﾝｽﾄｰﾙのみ"
 
 msgid "Original/Customs"
-msgstr ""
+msgstr "標準/ｶｽﾀﾑ"
 
 msgid "Parental Control"
 msgstr "ﾍﾟｱﾚﾝﾀﾙｺﾝﾄﾛｰﾙ"
@@ -911,7 +912,7 @@ msgid "Spanish"
 msgstr "ｽﾍﾟｲﾝ語"
 
 msgid "Special thanks to:"
-msgstr "大変感謝します"
+msgstr "大変な感謝:"
 
 msgid "Standard"
 msgstr "標準"
@@ -1061,7 +1062,7 @@ msgid "Waiting..."
 msgstr "お待ちください..."
 
 msgid "What do you want to update?"
-msgstr ""
+msgstr "どのように更新しますか？"
 
 msgid "WiFi Features"
 msgstr "WiFi機能"
@@ -1076,7 +1077,7 @@ msgid "Wii Settings"
 msgstr "Wii 設定"
 
 msgid "WiiTDB Files"
-msgstr ""
+msgstr "WiiTDBﾌｧｲﾙ"
 
 msgid "Wiilight"
 msgstr "Wii light"
