@@ -476,6 +476,19 @@ s32 WBFS_RenameGame(u8 *discid, const void *newname) {
     return 0;
 }
 
+s32 WBFS_ReIDGame(u8 *discid, const void *newID) {
+    s32 ret;
+
+    /* No USB device open */
+    if (!hdd)
+        return -1;
+    ret = wbfs_rID_disc(hdd, discid,(u8*)newID);
+    if (ret < 0)
+        return ret;
+
+    return 0;
+}
+
 f32 WBFS_EstimeGameSize(void) {
 
     return wbfs_estimate_disc(hdd, __WBFS_ReadDVD, NULL, ONLY_GAME_PARTITION);

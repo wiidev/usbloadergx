@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-21 04:07+0200\n"
+"POT-Creation-Date: 2009-09-02 02:36-0400\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -204,6 +204,9 @@ msgstr ""
 
 msgid "Click to Download Covers"
 msgstr "표지를 다운하려면 클릭하세요"
+
+msgid "Click to change game ID"
+msgstr ""
 
 msgid "Clock"
 msgstr "시계"

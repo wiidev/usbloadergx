@@ -525,6 +525,22 @@ u32 wbfs_ren_disc(wbfs_t*p, u8* discid, u8* newname)
 	return 0;
 }
 
+u32 wbfs_rID_disc(wbfs_t*p, u8* discid, u8* newID)
+{
+	wbfs_disc_t *d = wbfs_open_disc(p,discid);
+	int disc_info_sz_lba = p->disc_info_sz>>p->hd_sec_sz_s;
+
+	if(!d)
+		return 1;
+
+	memset(d->header->disc_header_copy, 0, 0x10);
+	strncpy((char *) d->header->disc_header_copy, (char *) newID, 0x9);
+
+	p->write_hdsector(p->callback_data,p->part_lba+1+d->i*disc_info_sz_lba,disc_info_sz_lba,d->header);
+	wbfs_close_disc(d);
+	return 0;
+}
+
 // trim the file-system to its minimum size
 u32 wbfs_trim(wbfs_t*p);
 

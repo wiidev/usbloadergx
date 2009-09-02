@@ -32,6 +32,7 @@ extern "C" {
     s32 WBFS_GameSize(u8 *, f32 *);
     s32 WBFS_DiskSpace(f32 *, f32 *);
     s32 WBFS_RenameGame(u8 *, const void *);
+	s32 WBFS_ReIDGame(u8 *discid, const void *newID);
     f32 WBFS_EstimeGameSize(void);
 
     s32 __WBFS_ReadUSB(void *fp, u32 lba, u32 count, void *iobuf);

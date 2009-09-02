@@ -593,13 +593,30 @@ int MenuDiscList() {
     DownloadBtn.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     DownloadBtn.SetPosition(THEME.cover_x,THEME.cover_y);
 
+	GuiTooltip IDBtnTT(tr("Click to change game ID"));
+    if (Settings.wsprompt == yes)
+        IDBtnTT.SetWidescreen(CFG.widescreen);
+    IDBtnTT.SetAlpha(THEME.tooltipAlpha);
+    GuiButton idBtn(0,0);
+    idBtn.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+    idBtn.SetPosition(THEME.id_x,THEME.id_y);
+
+	
+
     if (Settings.godmode == 1) {//only make the button have trigger & tooltip if in godmode
         DownloadBtn.SetSoundOver(&btnSoundOver);
         DownloadBtn.SetTrigger(&trigA);
         DownloadBtn.SetTrigger(&trig1);
         DownloadBtn.SetToolTip(&DownloadBtnTT,205,-30);
+    
+		idBtn.SetSoundOver(&btnSoundOver);
+        idBtn.SetTrigger(&trigA);
+        idBtn.SetToolTip(&IDBtnTT,205,-30);
     } else
+		{
         DownloadBtn.SetRumble(false);
+		idBtn.SetRumble(false);
+		}
 
     GuiGameBrowser * gameBrowser = NULL;
     GuiGameGrid * gameGrid = NULL;
@@ -645,6 +662,7 @@ int MenuDiscList() {
     w.Append(&homeBtn);
     w.Append(&settingsBtn);
     w.Append(&DownloadBtn);
+    w.Append(&idBtn);
     w.Append(&favoriteBtn);
     w.Append(&abcBtn);
     w.Append(&countBtn);
@@ -1014,7 +1032,6 @@ int MenuDiscList() {
             if (choice==2)
                 homeBtn.SetState(STATE_CLICKED);
         }
-
         if (Settings.gameDisplay==grid) {
             int selectimg;
             DownloadBtn.SetSize(0,0);
@@ -1034,6 +1051,7 @@ int MenuDiscList() {
             //Get selected game under cursor
             int selectimg;
             DownloadBtn.SetSize(160,224);
+			idBtn.SetSize(100,40);
 
             selectimg = gameBrowser->GetSelectedOption();
             gameSelected = gameBrowser->GetClickedOption();
@@ -1051,7 +1069,7 @@ int MenuDiscList() {
                     w.Remove(&DownloadBtn);
 
                     if (GameIDTxt) {
-                        w.Remove(GameIDTxt);
+                        w.Remove(&idBtn);
                         delete GameIDTxt;
                         GameIDTxt = NULL;
                     }
@@ -1120,9 +1138,10 @@ int MenuDiscList() {
                     if ((Settings.sinfo == GameID) || (Settings.sinfo == Both)) {
                         GameIDTxt = new GuiText(IDfull, 22, (GXColor) {THEME.info_r, THEME.info_g, THEME.info_b, 255});
                         GameIDTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-                        GameIDTxt->SetPosition(THEME.id_x,THEME.id_y);
-                        GameIDTxt->SetEffect(EFFECT_FADE, 20);
-                        w.Append(GameIDTxt);
+                        //GameIDTxt->SetPosition(THEME.id_x,THEME.id_y);
+                        idBtn.SetEffect(EFFECT_FADE, 20);
+						idBtn.SetLabel(GameIDTxt);
+                        w.Append(&idBtn);
                     }
 
                     if ((Settings.sinfo == GameRegion) || (Settings.sinfo == Both)) {
@@ -1134,6 +1153,22 @@ int MenuDiscList() {
                     }
                 }
             }
+			
+			if (idBtn.GetState() == STATE_CLICKED) {
+			struct discHdr * header = &gameList[gameBrowser->GetSelectedOption()];
+                    //enter new game ID
+					char entered[10];
+                    snprintf(entered, sizeof(entered), "%s", IDfull);
+                    //entered[9] = '\0';
+                    int result = OnScreenKeyboard(entered, 7,0);
+                    if (result == 1) {
+						WBFS_ReIDGame(header->id, entered);
+                        //__Menu_GetEntries();
+                        menu = MENU_DISCLIST;
+                    }
+					
+					idBtn.ResetState();
+                }
         }
 
         if ((gameSelected >= 0) && (gameSelected < (s32)gameCnt)) {
