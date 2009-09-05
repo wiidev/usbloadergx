@@ -193,6 +193,9 @@ u32 wbfs_rm_disc(wbfs_t*p, u8* discid);
 /*! rename a game */
 u32 wbfs_ren_disc(wbfs_t*p, u8* discid, u8* newname);
 
+/* change ID of a game*/
+u32 wbfs_rID_disc(wbfs_t*p, u8* discid, u8* newID);
+
 /*! trim the file-system to its minimum size
   This allows to use wbfs as a wiidisc container
  */
