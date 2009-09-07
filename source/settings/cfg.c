@@ -1709,12 +1709,14 @@ void CFG_Load(void) {
 	}
 	GetLanguageToLangCode(&mainlangid, Settings.db_language);
 
-	// set language code for languages that are not available on the Wii
+	// set language code for countries that don't have a language setting on the Wii
 	if (!strcmp(Settings.db_language,"")) {
 		if (strstr(languagefile, "portuguese") != NULL)
 			strcpy(Settings.db_language,"PT");
 	}
-
+	if (CONF_GetArea() == CONF_AREA_AUS)
+		strcpy(Settings.db_language,"AU");
+		
 	// open database if needed, load titles if needed
 	OpenXMLDatabase(Settings.titlestxt_path,Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true);
 

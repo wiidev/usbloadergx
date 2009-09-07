@@ -2015,7 +2015,7 @@ ProgressDownloadWindow(int choice2) {
 
         if (cntMissFiles - i>1)msgTxt.SetTextf("%i %s", cntMissFiles - i, tr("files left"));
         else msgTxt.SetTextf("%i %s", cntMissFiles - i, tr("file left"));
-        msg2Txt.SetTextf("%s", missingFiles[i]);
+        msg2Txt.SetTextf("http://wiitdb.com : %s", missingFiles[i]);
 
 
         //download boxart image
@@ -2591,14 +2591,26 @@ int ProgressUpdateWindow() {
                                 free(file.data);
                             }
                             msgTxt.SetTextf("%s", tr("Updating WiiTDB.zip"));
+							char wiitdbpath[200];
+				            char wiitdbpathtmp[200];
                             file = downloadfile(XMLurl);
                             if (file.data != NULL) {
-                                sprintf(xmliconpath, "%swiitdb.zip", Settings.titlestxt_path);
-                                subfoldercreate(xmliconpath);
-                                pfile = fopen(xmliconpath, "wb");
-                                fwrite(file.data,1,file.size,pfile);
-                                fclose(pfile);
-                                free(file.data);
+								subfoldercreate(Settings.titlestxt_path);
+								snprintf(wiitdbpath, sizeof(wiitdbpath), "%swiitdb.zip", Settings.titlestxt_path);
+								snprintf(wiitdbpathtmp, sizeof(wiitdbpathtmp), "%swiitmp.zip", Settings.titlestxt_path);
+								rename(wiitdbpath,wiitdbpathtmp);
+								pfile = fopen(wiitdbpath, "wb");
+								fwrite(file.data,1,file.size,pfile);
+								fclose(pfile);
+								free(file.data);
+								CloseXMLDatabase();
+								if (OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true)) { // open file, reload titles, keep in memory
+									remove(wiitdbpathtmp);
+								} else {
+									remove(wiitdbpath);
+									rename(wiitdbpathtmp,wiitdbpath);
+									OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true); // open file, reload titles, keep in memory
+								}
                             }
                             msgTxt.SetTextf("%s", tr("Updating Language Files:"));
                             updateLanguageFiles();
@@ -2616,16 +2628,27 @@ int ProgressUpdateWindow() {
         }
 
         } else if(updatemode == 2) {
-            char wiitdbpath[200];
             msgTxt.SetTextf("%s", tr("Updating WiiTDB.zip"));
+            char wiitdbpath[200];
+            char wiitdbpathtmp[200];
             struct block file = downloadfile(XMLurl);
             if (file.data != NULL) {
-                snprintf(wiitdbpath, sizeof(wiitdbpath), "%swiitdb.zip", Settings.titlestxt_path);
-                subfoldercreate(wiitdbpath);
-                FILE *pfile = fopen(wiitdbpath, "wb");
-                fwrite(file.data,1,file.size,pfile);
-                fclose(pfile);
-                free(file.data);
+				subfoldercreate(Settings.titlestxt_path);
+				snprintf(wiitdbpath, sizeof(wiitdbpath), "%swiitdb.zip", Settings.titlestxt_path);
+				snprintf(wiitdbpathtmp, sizeof(wiitdbpathtmp), "%swiitmp.zip", Settings.titlestxt_path);
+				rename(wiitdbpath,wiitdbpathtmp);
+				FILE *pfile = fopen(wiitdbpath, "wb");
+				fwrite(file.data,1,file.size,pfile);
+				fclose(pfile);
+				free(file.data);
+				CloseXMLDatabase();
+				if (OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true)) { // open file, reload titles, keep in memory
+					remove(wiitdbpathtmp);
+				} else {
+					remove(wiitdbpath);
+					rename(wiitdbpathtmp,wiitdbpath);
+					OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true); // open file, reload titles, keep in memory
+				}
             }
             ret = 1;
         } else if(updatemode == 3) {

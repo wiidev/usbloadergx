@@ -10,6 +10,8 @@
 
 #include "gui.h"
 #include "prompts/filebrowser.h"
+#include "../settings/cfg.h"
+
 
 #define FILEBROWSERSIZE     8
 /**
@@ -34,26 +36,33 @@ GuiFileBrowser::GuiFileBrowser(int w, int h)
 	btnSoundOver = new GuiSound(button_over_pcm, button_over_pcm_size, SOUND_PCM);
 	btnSoundClick = new GuiSound(button_click_pcm, button_click_pcm_size, SOUND_PCM);
 
-	bgFileSelection = new GuiImageData(bg_browser_png);
+	char imgPath[100];
+	snprintf(imgPath, sizeof(imgPath), "%sbg_browser.png", CFG.theme_path);
+	bgFileSelection = new GuiImageData(imgPath, bg_browser_png);
 	bgFileSelectionImg = new GuiImage(bgFileSelection);
 	bgFileSelectionImg->SetParent(this);
 	bgFileSelectionImg->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 
-	bgFileSelectionEntry = new GuiImageData(bg_browser_selection_png);
+	snprintf(imgPath, sizeof(imgPath), "%sbg_browser_selection.png", CFG.theme_path);
+	bgFileSelectionEntry = new GuiImageData(imgPath, bg_browser_selection_png);
 	fileFolder = new GuiImageData(folder_png);
 
-	scrollbar = new GuiImageData(scrollbar_png);
+	snprintf(imgPath, sizeof(imgPath), "%sscrollbar.png", CFG.theme_path);
+	scrollbar = new GuiImageData(imgPath, scrollbar_png);
 	scrollbarImg = new GuiImage(scrollbar);
 	scrollbarImg->SetParent(this);
 	scrollbarImg->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
 	scrollbarImg->SetPosition(0, 2);
 	scrollbarImg->SetSkew(0,0,0,0,0,-30,0,-30);
 
-	arrowDown = new GuiImageData(scrollbar_arrowdown_png);
+	snprintf(imgPath, sizeof(imgPath), "%sscrollbar_arrowdown.png", CFG.theme_path);
+	arrowDown = new GuiImageData(imgPath, scrollbar_arrowdown_png);
 	arrowDownImg = new GuiImage(arrowDown);
-	arrowUp = new GuiImageData(scrollbar_arrowup_png);
+	snprintf(imgPath, sizeof(imgPath), "%sscrollbar_arrowup.png", CFG.theme_path);
+	arrowUp = new GuiImageData(imgPath, scrollbar_arrowup_png);
 	arrowUpImg = new GuiImage(arrowUp);
-	scrollbarBox = new GuiImageData(scrollbar_box_png);
+	snprintf(imgPath, sizeof(imgPath), "%sscrollbar_box.png", CFG.theme_path);
+	scrollbarBox = new GuiImageData(imgPath, scrollbar_box_png);
 	scrollbarBoxImg = new GuiImage(scrollbarBox);
 
 	arrowUpBtn = new GuiButton(arrowUpImg->GetWidth(), arrowUpImg->GetHeight());

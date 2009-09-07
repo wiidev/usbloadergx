@@ -244,9 +244,9 @@ int autoSelectDol(const char *id) {
     if (strcmp(id,"REDP41") == 0) return 1957;//from isostar
     if (strcmp(id,"REDE41") == 0) return 1957;//starstremr
 
-    if (strcmp(id,"RSXP69") == 0) return 337;//from isostar
-    if (strcmp(id,"RSXE69") == 0) return 337;//starstremr
-
+    if (strcmp(id,"RSXP69") == 0) return 377;//previous value was 337
+    if (strcmp(id,"RSXE69") == 0) return 377;//previous value was 337
+	
     if (strcmp(id,"RNBX69") == 0) return 964;//from isostar
 
     if (strcmp(id,"RNFP69") == 0) return 1079;//from isostar

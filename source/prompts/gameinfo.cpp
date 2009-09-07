@@ -761,15 +761,16 @@ int showGameInfo(char *ID) {
         }
 
         //don't bother us txt
-        snprintf(linebuf, sizeof(linebuf), tr("Don't bother the USB Loader GX Team about errors in this file."));
-        betaTxt = new GuiText(linebuf, 14, (GXColor) {0,0,0, 255});
-        betaTxt->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-        betaTxt->SetPosition(-17,-20);
+        snprintf(linebuf, sizeof(linebuf), "http://wiitdb.com");
+        //snprintf(linebuf, sizeof(linebuf), tr("Don't bother the USB Loader GX Team about errors in this file."));
+        betaTxt = new GuiText(linebuf, 17, (GXColor) {0,0,0, 255});
+        betaTxt->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+        betaTxt->SetPosition(40,-15);
         gameinfoWindow.Append(betaTxt);
         snprintf(linebuf, sizeof(linebuf), tr("If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"));
         beta1Txt = new GuiText(linebuf, 14, (GXColor) {0,0,0, 255});
         beta1Txt->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-        beta1Txt->SetPosition(-17,-10);
+        beta1Txt->SetPosition(-17,-15);
         gameinfoWindow.Append(beta1Txt);
 
         gameinfoWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_IN, 100);
