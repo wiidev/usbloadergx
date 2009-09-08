@@ -2011,7 +2011,7 @@ int GameSettings(struct discHdr * header) {
                 options2.SetName(6,"%s", tr("Error 002 fix"));
                 options2.SetName(7,"%s", tr("Patch Country Strings"));
                 options2.SetName(8,"%s", tr("Alternate DOL"));
-                options2.SetName(9,"%s", tr("DOL from disc"));
+                options2.SetName(9,"%s", tr("Selected DOL"));
                 options2.SetName(10,"%s", tr("Block IOS Reload"));
                 for (int i = 0; i <= MAXOPTIONS-1; i++) options2.SetValue(i, NULL);
                 optionBrowser2.SetScrollbar(1);
@@ -2100,8 +2100,8 @@ int GameSettings(struct discHdr * header) {
                     if (countrystrings == on) options2.SetValue(7,tr("ON"));
                     else if (countrystrings == off) options2.SetValue(7,tr("OFF"));
 
-                    if (alternatedol == on) options2.SetValue(8,tr("DOL from SD"));
-                    if (alternatedol == 2) options2.SetValue(8,tr("DOL from disc"));
+                    if (alternatedol == on) options2.SetValue(8,tr("Load From SD/USB"));
+                    if (alternatedol == 2) options2.SetValue(8,tr("Select a DOL"));
                     else if (alternatedol == off) options2.SetValue(8,tr("OFF"));
 
                     if (alternatedol == on) options2.SetValue(9,tr("SD selected"));
@@ -2179,7 +2179,7 @@ int GameSettings(struct discHdr * header) {
                         countrystrings = (countrystrings+1) % 2;
                         break;
                     case 8:
-                        alternatedol = (alternatedol+1) % 3;
+                        alternatedol = (alternatedol+2) % 3;
                         break;
                     case 9:
                         if (alternatedol == 2) {
