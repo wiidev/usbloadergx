@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-02 02:36-0400\n"
+"POT-Creation-Date: 2009-09-09 04:36+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -299,12 +299,6 @@ msgstr ""
 msgid "Customs/Original"
 msgstr ""
 
-msgid "DOL from SD"
-msgstr ""
-
-msgid "DOL from disc"
-msgstr ""
-
 msgid "Dec"
 msgstr ""
 
@@ -399,9 +393,6 @@ msgid "Dolpath Changed"
 msgstr ""
 
 msgid "Dolpath change"
-msgstr ""
-
-msgid "Don't bother the USB Loader GX Team about errors in this file."
 msgstr ""
 
 msgid "Done!"
@@ -652,6 +643,9 @@ msgstr "同系统选单"
 msgid "Load"
 msgstr ""
 
+msgid "Load From SD/USB"
+msgstr ""
+
 #, c-format
 msgid "Load file from: %s ?"
 msgstr ""
@@ -885,6 +879,12 @@ msgid "Save Failed"
 msgstr "保存失败"
 
 msgid "Screensaver"
+msgstr ""
+
+msgid "Select a DOL"
+msgstr ""
+
+msgid "Selected DOL"
 msgstr ""
 
 msgid "Sept"

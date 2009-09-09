@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-02 02:36-0400\n"
+"POT-Creation-Date: 2009-09-09 04:36+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: tj_cool\n"
 "Language-Team: \n"
@@ -299,12 +299,6 @@ msgstr "Bestandslocaties"
 msgid "Customs/Original"
 msgstr "Aangepast/Origineel"
 
-msgid "DOL from SD"
-msgstr "Dol van SD"
-
-msgid "DOL from disc"
-msgstr "Dol van disk"
-
 msgid "Dec"
 msgstr "Dec"
 
@@ -400,9 +394,6 @@ msgstr "Locatie dol gewijzigd"
 
 msgid "Dolpath change"
 msgstr "Locatie dol wijzigen"
-
-msgid "Don't bother the USB Loader GX Team about errors in this file."
-msgstr "Val het USB loader GX team niet lastig over fouten in dit bestand."
 
 msgid "Done!"
 msgstr "Klaar!"
@@ -652,6 +643,9 @@ msgstr "Als systeemmenu"
 msgid "Load"
 msgstr "Laad"
 
+msgid "Load From SD/USB"
+msgstr ""
+
 #, c-format
 msgid "Load file from: %s ?"
 msgstr "Laad bestand van %s ?"
@@ -886,6 +880,12 @@ msgstr "Opslaan mislukt"
 
 msgid "Screensaver"
 msgstr "Schermbeveiliging"
+
+msgid "Select a DOL"
+msgstr ""
+
+msgid "Selected DOL"
+msgstr ""
 
 msgid "Sept"
 msgstr "Sept"
@@ -1172,6 +1172,15 @@ msgstr "van"
 
 msgid "seconds left"
 msgstr "seconden over:"
+
+#~ msgid "DOL from SD"
+#~ msgstr "Dol van SD"
+
+#~ msgid "DOL from disc"
+#~ msgstr "Dol van disk"
+
+#~ msgid "Don't bother the USB Loader GX Team about errors in this file."
+#~ msgstr "Val het USB loader GX team niet lastig over fouten in dit bestand."
 
 #~ msgid "Update WiiTDB"
 #~ msgstr "WiiTDB updaten"

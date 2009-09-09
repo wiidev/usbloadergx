@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-02 02:36-0400\n"
+"POT-Creation-Date: 2009-09-09 04:36+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: Kin8\n"
 "Language-Team: Badablek, Amour, ikya, OuahOuah, dj_skual & Kin8\n"
@@ -206,7 +206,7 @@ msgid "Click to Download Covers"
 msgstr "Téléchargement des jaquettes"
 
 msgid "Click to change game ID"
-msgstr ""
+msgstr "Changer l'ID du Jeu"
 
 msgid "Clock"
 msgstr "Horloge"
@@ -298,12 +298,6 @@ msgstr "Personnalisation Dossiers"
 
 msgid "Customs/Original"
 msgstr "Persos/Originaux"
-
-msgid "DOL from SD"
-msgstr "DOL sur SD"
-
-msgid "DOL from disc"
-msgstr "DOL sur ISO"
 
 msgid "Dec"
 msgstr "Déc"
@@ -400,9 +394,6 @@ msgstr "Dossier DOL alternatif modifié"
 
 msgid "Dolpath change"
 msgstr "Dossier du DOL alternatif"
-
-msgid "Don't bother the USB Loader GX Team about errors in this file."
-msgstr "La Team USB Loader GX ne gère pas les erreurs de ce fichier."
 
 msgid "Done!"
 msgstr "Terminé!"
@@ -652,6 +643,9 @@ msgstr "Menu système"
 msgid "Load"
 msgstr "Charger"
 
+msgid "Load From SD/USB"
+msgstr "Charger sur SD/USB"
+
 #, c-format
 msgid "Load file from: %s ?"
 msgstr "Charger le fichier de: %s ?"
@@ -886,6 +880,12 @@ msgstr "Échec de sauvegarde"
 
 msgid "Screensaver"
 msgstr "Économiseur d'écran"
+
+msgid "Select a DOL"
+msgstr "Choisir un DOL"
+
+msgid "Selected DOL"
+msgstr "Choix du DOL"
 
 msgid "Sept"
 msgstr "Sept"
@@ -1172,6 +1172,15 @@ msgstr "sur"
 
 msgid "seconds left"
 msgstr "secondes restantes"
+
+#~ msgid "DOL from SD"
+#~ msgstr "DOL sur SD"
+
+#~ msgid "DOL from disc"
+#~ msgstr "DOL sur ISO"
+
+#~ msgid "Don't bother the USB Loader GX Team about errors in this file."
+#~ msgstr "La Team USB Loader GX ne gère pas les erreurs de ce fichier."
 
 #~ msgid "Update WiiTDB"
 #~ msgstr "MàJ WiiTDB"

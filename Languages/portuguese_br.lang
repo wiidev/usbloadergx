@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-02 02:36-0400\n"
+"POT-Creation-Date: 2009-09-09 04:36+0200\n"
 "PO-Revision-Date: 2009-08-11 19:45\n"
 "Last-Translator: boto12\n"
 "Language-Team: \n"
@@ -206,7 +206,7 @@ msgid "Click to Download Covers"
 msgstr "Aperte para baixar capas"
 
 msgid "Click to change game ID"
-msgstr ""
+msgstr "Alterar o ID do jogo"
 
 msgid "Clock"
 msgstr "Relógio"
@@ -298,12 +298,6 @@ msgstr "Personalização de Pastas"
 
 msgid "Customs/Original"
 msgstr "Alternativas/Originais"
-
-msgid "DOL from SD"
-msgstr "DOL do cartão SD"
-
-msgid "DOL from disc"
-msgstr "DOL do disco"
 
 msgid "Dec"
 msgstr "Dez"
@@ -400,9 +394,6 @@ msgstr "Pasta do DOL alterada"
 
 msgid "Dolpath change"
 msgstr "Alterar Pasta do DOL"
-
-msgid "Don't bother the USB Loader GX Team about errors in this file."
-msgstr "Não incomode a equipe do USB Loader GX por erros neste arquivo."
 
 msgid "Done!"
 msgstr "Concluído!"
@@ -652,6 +643,9 @@ msgstr "Igual ao Menu do Wii"
 msgid "Load"
 msgstr "Carregar"
 
+msgid "Load From SD/USB"
+msgstr ""
+
 #, c-format
 msgid "Load file from: %s ?"
 msgstr "Carregar arquivo de: %s ?"
@@ -886,6 +880,12 @@ msgstr "Falha ao Gravar"
 
 msgid "Screensaver"
 msgstr "Proteção de tela"
+
+msgid "Select a DOL"
+msgstr ""
+
+msgid "Selected DOL"
+msgstr ""
 
 msgid "Sept"
 msgstr "Set"
@@ -1172,3 +1172,12 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
+
+#~ msgid "DOL from SD"
+#~ msgstr "DOL do cartão SD"
+
+#~ msgid "DOL from disc"
+#~ msgstr "DOL do disco"
+
+#~ msgid "Don't bother the USB Loader GX Team about errors in this file."
+#~ msgstr "Não incomode a equipe do USB Loader GX por erros neste arquivo."

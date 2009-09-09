@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-02 02:36-0400\n"
+"POT-Creation-Date: 2009-09-09 04:36+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -299,12 +299,6 @@ msgstr "Endre stier"
 msgid "Customs/Original"
 msgstr "Custom/Original"
 
-msgid "DOL from SD"
-msgstr "DOL fra SD"
-
-msgid "DOL from disc"
-msgstr "DOL fra plate"
-
 msgid "Dec"
 msgstr "Des"
 
@@ -400,9 +394,6 @@ msgstr "DOL sti endret"
 
 msgid "Dolpath change"
 msgstr "Endre DOL sti"
-
-msgid "Don't bother the USB Loader GX Team about errors in this file."
-msgstr "Ikke bry USB Loader GX teamet med feil i denne filen."
 
 msgid "Done!"
 msgstr "Ferdig!"
@@ -652,6 +643,9 @@ msgstr "Lik Systemmeny"
 msgid "Load"
 msgstr "Start"
 
+msgid "Load From SD/USB"
+msgstr ""
+
 #, c-format
 msgid "Load file from: %s ?"
 msgstr "Start fil fra: %s ?"
@@ -886,6 +880,12 @@ msgstr "Lagring feilet"
 
 msgid "Screensaver"
 msgstr "Skjermbeskytter"
+
+msgid "Select a DOL"
+msgstr ""
+
+msgid "Selected DOL"
+msgstr ""
 
 msgid "Sept"
 msgstr "Sep"
@@ -1172,6 +1172,15 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder gjenstår"
+
+#~ msgid "DOL from SD"
+#~ msgstr "DOL fra SD"
+
+#~ msgid "DOL from disc"
+#~ msgstr "DOL fra plate"
+
+#~ msgid "Don't bother the USB Loader GX Team about errors in this file."
+#~ msgstr "Ikke bry USB Loader GX teamet med feil i denne filen."
 
 #~ msgid "Update WiiTDB"
 #~ msgstr "Oppdater WiiTDB"
