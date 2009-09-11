@@ -251,10 +251,11 @@ int autoSelectDol(const char *id) {
 	//Medal of Honor Heroes
     if (strcmp(id,"RMZX69") == 0) return 492;//from isostar
     if (strcmp(id,"RMZP69") == 0) return 492;//from isostar
-    if (strcmp(id,"RMZE69") == 0) return 492;//starstremr
+    if (strcmp(id,"RMZE69") == 0) return 492;//starstremr 
 
 	//Medal of Honor: Heroes 2
     if (strcmp(id,"RM2X69") == 0)return 601;//dj_skual
+	if (strcmp(id,"RM2P69") == 0)return 517;//MZottel
 	
 	//Metal Slug Anthology
     if (strcmp(id,"RMLP7U") == 0) return 56;//from isostar
