@@ -131,8 +131,9 @@ int showGameInfo(char *ID) {
         GuiText * synopsisTxt = NULL;
         GuiText ** genreTxt = NULL;
         GuiText ** wifiTxt = NULL;
-        GuiText * betaTxt = NULL;
-        GuiText * beta1Txt = NULL;
+        GuiText * wiitdb1Txt = NULL;
+        GuiText * wiitdb2Txt = NULL;
+        GuiText * wiitdb3Txt = NULL;
         GuiText * memTxt = NULL;
 
         GuiWindow gameinfoWindow(600,308);
@@ -760,18 +761,22 @@ int showGameInfo(char *ID) {
             gameinfoWindow2.Append(&txtWindow);
         }
 
-        //don't bother us txt
         snprintf(linebuf, sizeof(linebuf), "http://wiitdb.com");
         //snprintf(linebuf, sizeof(linebuf), tr("Don't bother the USB Loader GX Team about errors in this file."));
-        betaTxt = new GuiText(linebuf, 17, (GXColor) {0,0,0, 255});
-        betaTxt->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-        betaTxt->SetPosition(40,-15);
-        gameinfoWindow.Append(betaTxt);
+        wiitdb1Txt = new GuiText(linebuf, 16, (GXColor) {0,0,0, 255});
+        wiitdb1Txt->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+        wiitdb1Txt->SetPosition(40,-15);
+        gameinfoWindow.Append(wiitdb1Txt);
         snprintf(linebuf, sizeof(linebuf), tr("If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"));
-        beta1Txt = new GuiText(linebuf, 14, (GXColor) {0,0,0, 255});
-        beta1Txt->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-        beta1Txt->SetPosition(-17,-15);
-        gameinfoWindow.Append(beta1Txt);
+        wiitdb2Txt = new GuiText(linebuf, 14, (GXColor) {0,0,0, 255});
+        wiitdb2Txt->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+        wiitdb2Txt->SetPosition(202,-15);
+        gameinfoWindow.Append(wiitdb2Txt);
+		snprintf(linebuf, sizeof(linebuf), " ");
+        wiitdb3Txt = new GuiText(linebuf, 14, (GXColor) {0,0,0, 255});
+        wiitdb3Txt->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+        wiitdb3Txt->SetPosition(202,-4);
+        gameinfoWindow.Append(wiitdb3Txt);
 
         gameinfoWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_IN, 100);
         HaltGui();
@@ -874,11 +879,11 @@ int showGameInfo(char *ID) {
             } else if (urlBtn.GetState()==STATE_CLICKED) {
                 if (save_XML_URL()) {
                     snprintf(linebuf, sizeof(linebuf), tr("Your URL has been saved in %sWiiTDB_URL.txt."), Settings.update_path);
-                    betaTxt->SetText(linebuf);
-                    gameinfoWindow.Append(betaTxt);
+                    wiitdb2Txt->SetText(linebuf);
+                    gameinfoWindow.Append(wiitdb2Txt);
                     snprintf(linebuf, sizeof(linebuf), tr("Paste it into your browser to get your WiiTDB.zip."));
-                    beta1Txt->SetText(linebuf);
-                    gameinfoWindow.Append(beta1Txt);
+                    wiitdb3Txt->SetText(linebuf);
+                    gameinfoWindow.Append(wiitdb3Txt);
                 }
             }
         }
@@ -942,8 +947,9 @@ int showGameInfo(char *ID) {
             delete developerTxt;
             delete titleTxt;
             delete synopsisTxt;
-            delete betaTxt;
-            delete beta1Txt;
+            delete wiitdb1Txt;
+            delete wiitdb2Txt;
+            delete wiitdb3Txt;
             delete memTxt;
             if (gameinfo.genreCnt>0) {
                 for (int i=1;i<=gameinfo.genreCnt;i++) {
@@ -1005,13 +1011,13 @@ bool save_XML_URL() { // save xml url as as txt file for people without wifi
     }
 
     fprintf(f, "# USB Loader Has Saved this file\n");
-    fprintf(f, "# This url was created based on your list of games and language settings\n");
+    fprintf(f, "# This URL was created based on your list of games and language settings.\n");
     fclose(f);
     /* Closing and reopening because of a write issue we are having right now */
     f = fopen(tmp, "w");
     fprintf(f, "# USB Loader Has Saved this file\n");
-    fprintf(f, "# This url was created based on your list of games and language settings.\n");
-    fprintf(f, "# If copy and paste this URL into your web browser and you should get a zip file that will work for you.\n");
+    fprintf(f, "# This URL was created based on your list of games and language settings.\n");
+    fprintf(f, "# Copy and paste this URL into your web browser and you should get a zip file that will work for you.\n");
     fprintf(f, "%s\n\n\n ", XMLurl);
 
     fclose(f);

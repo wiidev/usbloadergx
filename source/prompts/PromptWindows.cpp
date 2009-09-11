@@ -424,8 +424,8 @@ int WindowScreensaver() {
  * Displays a prompt window to user, with information, an error message, or
  * presenting a user with a choice of up to 4 Buttons.
  *
- * Give him 1 Titel, 1 Subtitel and 4 Buttons
- * If titel/subtitle or one of the buttons is not needed give him a 0 on that
+ * Give him 1 Title, 1 Subtitle and 4 Buttons
+ * If title/subtitle or one of the buttons is not needed give him a 0 on that
  * place.
  ***************************************************************************/
 int
@@ -1282,6 +1282,12 @@ int GameWindowPrompt() {
             diskImg.SetSpin(btn1.GetState() == STATE_SELECTED);
             diskImg2.SetSpin(btn1.GetState() == STATE_SELECTED);
             if (shutdown == 1) { //for power button
+				promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
+                mainWindow->SetState(STATE_DEFAULT);
+				while (promptWindow.GetEffect() > 0) usleep(50);
+				HaltGui();
+				mainWindow->Remove(&promptWindow);
+				ResumeGui();
                 wiilight(0);
                 Sys_Shutdown();
             }
@@ -1370,7 +1376,7 @@ int GameWindowPrompt() {
                 break;
             }
 
-            else if ((btnLeft.GetState() == STATE_CLICKED) && (Settings.xflip == yes)) {//netx game
+            else if ((btnLeft.GetState() == STATE_CLICKED) && (Settings.xflip == yes)) {//next game
                 promptWindow.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 50);
                 changed = 1;
                 btnClick.Play();
@@ -1388,7 +1394,7 @@ int GameWindowPrompt() {
                 break;
             }
 
-            else if ((btnLeft.GetState() == STATE_CLICKED) && (Settings.xflip == sysmenu)) {//netx game
+            else if ((btnLeft.GetState() == STATE_CLICKED) && (Settings.xflip == sysmenu)) {//next game
                 promptWindow.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 50);
                 changed = 1;
                 btnClick.Play();
@@ -1406,7 +1412,7 @@ int GameWindowPrompt() {
                 break;
             }
 
-            else if ((btnLeft.GetState() == STATE_CLICKED) && (Settings.xflip == wtf)) {//netx game
+            else if ((btnLeft.GetState() == STATE_CLICKED) && (Settings.xflip == wtf)) {//next game
                 promptWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 50);
                 changed = 2;
                 btnClick.Play();
@@ -1647,10 +1653,9 @@ FormatingPartition(const char *title, partitionEntry *entry) {
 /****************************************************************************
  * SearchMissingImages
  ***************************************************************************/
-void SearchMissingImages(int choice2) {
-    //make sure that all games are added to the gamelist
-    __Menu_GetEntries(1);
-    GuiWindow promptWindow(472,320);
+bool SearchMissingImages(int choice2) {
+	
+	GuiWindow promptWindow(472,320);
     promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     promptWindow.SetPosition(0, -10);
 
@@ -1666,11 +1671,12 @@ void SearchMissingImages(int choice2) {
     trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 
     GuiImage dialogBoxImg(&dialogBox);
+
     if (Settings.wsprompt == yes) {
         dialogBoxImg.SetWidescreen(CFG.widescreen);
     }
 
-    GuiText titleTxt(tr("Initializing Network"), 26, (GXColor) {THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+    GuiText titleTxt(tr("Checking existing artwork"), 26, (GXColor) {THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
     titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     titleTxt.SetPosition(0,60);
 
@@ -1679,100 +1685,80 @@ void SearchMissingImages(int choice2) {
     msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     msgTxt.SetPosition(0,-40);
 
-    GuiText btn1Txt(tr("Cancel"), 22, (GXColor) {THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
-    GuiImage btn1Img(&btnOutline);
-    if (Settings.wsprompt == yes) {
-        btn1Txt.SetWidescreen(CFG.widescreen);
-        btn1Img.SetWidescreen(CFG.widescreen);
-    }
-    GuiButton btn1(&btn1Img,&btn1Img, 2, 4, 0, -45, &trigA, &btnSoundOver, &btnClick,1);
-    btn1.SetLabel(&btn1Txt);
-    btn1.SetState(STATE_SELECTED);
-
-    if ((Settings.wsprompt == yes) && (CFG.widescreen)) {/////////////adjust buttons for widescreen
-        btn1.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
-        btn1.SetPosition(0, -80);
-    }
-
     promptWindow.Append(&dialogBoxImg);
     promptWindow.Append(&titleTxt);
     promptWindow.Append(&msgTxt);
-    promptWindow.Append(&btn1);
 
     promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
     HaltGui();
     mainWindow->SetState(STATE_DISABLED);
     mainWindow->Append(&promptWindow);
     mainWindow->ChangeFocus(&promptWindow);
-
     ResumeGui();
+	
+    //make sure that all games are added to the gamelist
+    __Menu_GetEntries(1);
 
-    while (!IsNetworkInit()) {
+	cntMissFiles = 0;
+	u32 i = 0;
+	char filename[11];
+	
+	//add IDs of games that are missing covers to cntMissFiles
+	bool found1 = false;
+	bool found2 = false;
+	bool found3 = false;
+	for (i = 0; i < gameCnt && cntMissFiles < 500; i++) {
+		struct discHdr* header = &gameList[i];
+		if (choice2 != 3) {
 
-        VIDEO_WaitVSync();
+			snprintf (filename,sizeof(filename),"%c%c%c.png", header->id[0], header->id[1], header->id[2]);
+			found2 = findfile(filename, Settings.covers_path);
 
-        Initialize_Network();
+			snprintf (filename,sizeof(filename),"%c%c%c%c.png", header->id[0], header->id[1], header->id[2], header->id[3]);
+			found3 = findfile(filename, Settings.covers_path);
 
-        if (!IsNetworkInit()) {
-            msgTxt.SetText(tr("Could not initialize network!"));
-        }
-
-        if (btn1.GetState() == STATE_CLICKED) {
-            btn1.ResetState();
-            break;
-        }
-    }
-
-    if (IsNetworkInit()) {
-        msgTxt.SetTextf("IP: %s", GetNetworkIP());
-        cntMissFiles = 0;
-        u32 i = 0;
-        char filename[11];
-
-        bool found1 = false;/////add Ids of games that are missing covers to cntMissFiles
-        bool found2 = false;
-        bool found3 = false;
-        for (i = 0; i < gameCnt && cntMissFiles < 500; i++) {
-            struct discHdr* header = &gameList[i];
-            if (choice2 != 3) {
-
-                snprintf (filename,sizeof(filename),"%c%c%c.png", header->id[0], header->id[1], header->id[2]);
-                found2 = findfile(filename, Settings.covers_path);
-
-                snprintf (filename,sizeof(filename),"%c%c%c%c.png", header->id[0], header->id[1], header->id[2], header->id[3]);
-                found3 = findfile(filename, Settings.covers_path);
-
-                snprintf(filename,sizeof(filename),"%c%c%c%c%c%c.png",header->id[0], header->id[1], header->id[2],
-                         header->id[3], header->id[4], header->id[5]); //full id
-                found1 = findfile(filename, Settings.covers_path);
-                if (!found1 && !found2 && !found3) { //if could not find any image
-                    snprintf(missingFiles[cntMissFiles],11,"%s",filename);
-                    cntMissFiles++;
-                }
-            } else if (choice2 == 3) {
-                snprintf (filename,sizeof(filename),"%c%c%c.png", header->id[0], header->id[1], header->id[2]);
-                found2 = findfile(filename, Settings.disc_path);
-                snprintf(filename,sizeof(filename),"%c%c%c%c%c%c.png",header->id[0], header->id[1], header->id[2],
-                         header->id[3], header->id[4], header->id[5]); //full id
-                found1 = findfile(filename,Settings.disc_path);
-                if (!found1 && !found2) {
-                    snprintf(missingFiles[cntMissFiles],11,"%s",filename);
-                    cntMissFiles++;
-                }
-            }
-        }
-    }
-
-    promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
+			snprintf(filename,sizeof(filename),"%c%c%c%c%c%c.png",header->id[0], header->id[1], header->id[2],
+					 header->id[3], header->id[4], header->id[5]); //full id
+			found1 = findfile(filename, Settings.covers_path);
+			if (!found1 && !found2 && !found3) { //if could not find any image
+				snprintf(missingFiles[cntMissFiles],11,"%s",filename);
+				cntMissFiles++;
+			}
+		} else if (choice2 == 3) {
+			snprintf (filename,sizeof(filename),"%c%c%c.png", header->id[0], header->id[1], header->id[2]);
+			found2 = findfile(filename, Settings.disc_path);
+			snprintf(filename,sizeof(filename),"%c%c%c%c%c%c.png",header->id[0], header->id[1], header->id[2],
+					 header->id[3], header->id[4], header->id[5]); //full id
+			found1 = findfile(filename,Settings.disc_path);
+			if (!found1 && !found2) {
+				snprintf(missingFiles[cntMissFiles],11,"%s",filename);
+				cntMissFiles++;
+			}
+		}
+	}
+	if (cntMissFiles == 0) {
+		msgTxt.SetText(tr("No file missing!"));
+        sleep(1);
+	}
+	
+	promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
     while (promptWindow.GetEffect() > 0) usleep(50);
+
     HaltGui();
     mainWindow->Remove(&promptWindow);
     mainWindow->SetState(STATE_DEFAULT);
-    //change the gamelist backto how it was before this function
-    __Menu_GetEntries();
+	__Menu_GetEntries();
     ResumeGui();
+	
+	if (cntMissFiles > 0 && !IsNetworkInit()) {
+		NetworkInitPrompt();
+	}
 
-    return;
+	if (cntMissFiles == 0) {
+		return false;
+	} else {
+		return true;
+	}
 }
 /****************************************************************************
  * NetworkInitPrompt
@@ -2018,7 +2004,7 @@ ProgressDownloadWindow(int choice2) {
         msg2Txt.SetTextf("http://wiitdb.com : %s", missingFiles[i]);
 
 
-        //download boxart image
+        //download cover
         char imgPath[100];
         char URLFile[100];
         char tmp[75];
@@ -2852,17 +2838,29 @@ int ProgressUpdateWindow() {
             if (choice == 1) {
                 titleTxt.SetTextf("%s USB Loader GX", tr("Updating"));
                 msgTxt.SetPosition(0,100);
-                msgTxt.SetTextf("%s", tr("Updating WiiTDB.zip"));//download the wad but it is saved as a genaric file.
-
+                msgTxt.SetTextf("%s", tr("Updating WiiTDB.zip"));
+				
+				char wiitdbpath[200];
+				char wiitdbpathtmp[200];
                 struct block file = downloadfile(XMLurl);
-                char xmliconpath[100];
                 if (file.data != NULL) {
-                    sprintf(xmliconpath, "%swiitdb.zip", Settings.titlestxt_path);
-                    pfile = fopen(xmliconpath, "wb");
-                    fwrite(file.data,1,file.size,pfile);
-                    fclose(pfile);
-                    free(file.data);
-                }
+					snprintf(wiitdbpath, sizeof(wiitdbpath), "%swiitdb.zip", Settings.titlestxt_path);
+					snprintf(wiitdbpathtmp, sizeof(wiitdbpathtmp), "%swiitmp.zip", Settings.titlestxt_path);
+					rename(wiitdbpath,wiitdbpathtmp);
+					pfile = fopen(wiitdbpath, "wb");
+					fwrite(file.data,1,file.size,pfile);
+					fclose(pfile);
+					free(file.data);
+					CloseXMLDatabase();
+					if (OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true)) { // open file, reload titles, keep in memory
+						remove(wiitdbpathtmp);
+					} else {
+						remove(wiitdbpath);
+						rename(wiitdbpathtmp,wiitdbpath);
+						OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true); // open file, reload titles, keep in memory
+					}
+				}
+				
                 msgTxt.SetTextf("%s", tr("Updating Language Files:"));
                 updateLanguageFiles();
                 promptWindow.Append(&progressbarEmptyImg);

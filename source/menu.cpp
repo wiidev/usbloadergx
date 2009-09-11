@@ -870,22 +870,15 @@ int MenuDiscList() {
             //if(isSdInserted()) {
             if (isInserted(bootDevice)) {
                 choice = WindowPrompt(tr("Cover Download"), 0, tr("Normal Covers"), tr("3D Covers"), tr("Disc Images"), tr("Back")); // ask for download choice
-
                 if (choice != 0) {
                     int choice2 = choice;
-
-                    SearchMissingImages(choice2);
-
-                    if (IsNetworkInit() == false) {
+					bool missing;
+                    missing = SearchMissingImages(choice2);
+                    if (IsNetworkInit() == false && missing == true) {
                         WindowPrompt(tr("Network init error"), 0, tr("OK"));
-
                     } else {
-
-                        if (GetMissingFiles() != NULL && cntMissFiles > 0)
-
-                        {
+                        if (GetMissingFiles() != NULL && cntMissFiles > 0) {
                             char tempCnt[40];
-
                             sprintf(tempCnt,"%i %s",cntMissFiles,tr("Missing files"));
                             if (choice!=3)choice = WindowPrompt(tr("Download Boxart image?"),tempCnt,tr("Yes"),tr("No"));
                             else if (choice==3)choice = WindowPrompt(tr("Download Discart image?"),tempCnt,tr("Yes"),tr("No"));
@@ -898,8 +891,6 @@ int MenuDiscList() {
                                     WindowPrompt(tr("Download finished"),tempCnt,tr("OK"));
                                 }
                             }
-                        } else {
-                            WindowPrompt(tr("No file missing!"),0,tr("OK"));
                         }
                     }
                 }

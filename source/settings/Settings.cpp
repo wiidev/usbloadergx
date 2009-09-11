@@ -2104,7 +2104,7 @@ int GameSettings(struct discHdr * header) {
                     if (alternatedol == 2) options2.SetValue(8,tr("Select a DOL"));
                     else if (alternatedol == off) options2.SetValue(8,tr("OFF"));
 
-                    if (alternatedol == on) options2.SetValue(9,tr("SD selected"));
+                    if (alternatedol == on) options2.SetValue(9,tr("SD/USB selected"));
                     else if (alternatedol == off) options2.SetValue(9,tr("OFF"));
                     else options2.SetValue(9, alternatedname);
 
@@ -2186,7 +2186,7 @@ int GameSettings(struct discHdr * header) {
                             char filename[10];
                             snprintf(filename,sizeof(filename),"%c%c%c%c%c%c",header->id[0], header->id[1], header->id[2],
                                      header->id[3],header->id[4], header->id[5]);
-                            int dolchoice =0;
+                            int dolchoice = 0;
                             //check to see if we already know the offset of the correct dol
                             int autodol = autoSelectDol(filename);
 
@@ -2195,16 +2195,18 @@ int GameSettings(struct discHdr * header) {
                                 dolchoice = WindowPrompt(0,tr("Do you want to use the alt dol that is known to be correct?"),tr("Yes"),tr("Pick from a list"));
                                 if (dolchoice==1) {
                                     alternatedoloffset = autodol;
-                                    snprintf(alternatedname, sizeof(alternatedname), "%s <%i>",  tr("AUTO"),autodol);
+                                    snprintf(alternatedname, sizeof(alternatedname), "%s <%i>", tr("AUTO"),autodol);
                                 } else {//they want to search for the correct dol themselves
                                     int res = DiscBrowse(header);
-                                    if ((res >= 0)&&(res !=696969))//if res==6969696 they pressed the back button
+                                    if ((res >= 0)&&(res !=696969)) {//if res==696969 they pressed the back button
                                         alternatedoloffset = res;
+									}
                                 }
                             } else {
                                 int res = DiscBrowse(header);
-                                if ((res >= 0)&&(res !=696969))
+                                if ((res >= 0)&&(res !=696969)){
                                     alternatedoloffset = res;
+								}
                                 char tmp[170];
                                 snprintf(tmp,sizeof(tmp),"%s %s - %i",tr("It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team.") ,filename,alternatedoloffset);
                                 WindowPrompt(0,tmp,tr("Ok"));

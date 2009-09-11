@@ -21,7 +21,7 @@ int WindowExitPrompt(const char *title, const char *msg, const char *btn1Label, 
 int GameWindowPrompt();
 int DiscWait(const char *title, const char *msg, const char *btn1Label, const char *btn2Label, int IsDeviceWait);
 int FormatingPartition(const char *title, partitionEntry *entry);
-void SearchMissingImages(int choice2);
+bool SearchMissingImages(int choice2);
 int ProgressDownloadWindow(int choice2);
 int ProgressUpdateWindow();
 bool NetworkInitPrompt();

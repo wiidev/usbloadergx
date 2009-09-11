@@ -35,21 +35,17 @@ int DiscBrowse(struct discHdr * header) {
     int ret, choice;
     u64 offset;
 
-
     ret = Disc_SetUSB(header->id);
     if (ret < 0) {
         WindowPrompt(tr("ERROR:"), tr("Could not set USB."), tr("OK"));
         return ret;
     }
-
-
+	
     ret = Disc_Open();
     if (ret < 0) {
         WindowPrompt(tr("ERROR:"), tr("Could not open disc."), tr("OK"));
         return ret;
     }
-
-
 
     ret = __Disc_FindPartition(&offset);
     if (ret < 0) {
@@ -204,15 +200,13 @@ int DiscBrowse(struct discHdr * header) {
             if (choice) {
                 //ret = offsetselect[ret];
                 snprintf(alternatedname, sizeof(alternatedname), "%s",  temp);
-                exit = true;
-                break;
+				exit = true;
             }
         }
 
         if (cancelBtn.GetState() == STATE_CLICKED) {
-            exit = true;
-            ret = 696969;
-            //break;
+			ret = 696969;
+			exit = true;
         }
     }
 
@@ -230,92 +224,108 @@ int DiscBrowse(struct discHdr * header) {
 int autoSelectDol(const char *id) {
     //still not done//
     //////////ID6/////////////////
+
+	//Boogie 
+    if (strcmp(id,"RBOP69") == 0) return 657;//from isostar
+    if (strcmp(id,"RBOE69") == 0) return 675;//starstremr
+	
+	//Fifa 08
     if (strcmp(id,"RF8E69") == 0) return 439;//from isostar
     if (strcmp(id,"RF8P69") == 0) return 463;//from isostar
     if (strcmp(id,"RF8X69") == 0) return 464;//from isostar
+	
+	//Grand Slam Tennis
+    if (strcmp(id,"R5TP69") == 0) return 1493;//from isostar
+    if (strcmp(id,"R5TE69") == 0) return 1493;//starstremr
+	
+	//Indiana Jones and the Staff of Kings (Fate of Atlantis)
+    if (strcmp(id,"RJ8P64") == 0) return 8;//from isostar
+    if (strcmp(id,"RJ8E64") == 0) return 8;//starstremr
 
-    if (strcmp(id,"RZTP01") == 0) return 952;//from isostar
-    if (strcmp(id,"RZTE01") == 0) return 674;//from starstremr
-
+	//Madden NFL07
+    if (strcmp(id,"RMDP69") == 0) return 39;//from isostar
+	
+	//Madden NFL08
+    if (strcmp(id,"RNFP69") == 0) return 1079;//from isostar
+	
+	//Medal of Honor Heroes
     if (strcmp(id,"RMZX69") == 0) return 492;//from isostar
     if (strcmp(id,"RMZP69") == 0) return 492;//from isostar
     if (strcmp(id,"RMZE69") == 0) return 492;//starstremr
 
-    if (strcmp(id,"REDP41") == 0) return 1957;//from isostar
-    if (strcmp(id,"REDE41") == 0) return 1957;//starstremr
-
-    if (strcmp(id,"RSXP69") == 0) return 377;//previous value was 337
-    if (strcmp(id,"RSXE69") == 0) return 377;//previous value was 337
+	//Medal of Honor: Heroes 2
+    if (strcmp(id,"RM2X69") == 0)return 601;//dj_skual
 	
-    if (strcmp(id,"RNBX69") == 0) return 964;//from isostar
-
-    if (strcmp(id,"RNFP69") == 0) return 1079;//from isostar
-
+	//Metal Slug Anthology
     if (strcmp(id,"RMLP7U") == 0) return 56;//from isostar
 
+	//Metroid Prime Trilogy
+	if (strcmp(id,"R3ME01") == 0) {
+		int choice = WindowPrompt(tr("Select a DOL"), 0, "Metroid Prime", "Metroid Prime 2", "Metroid Prime 3");
+        switch (choice) {
+            case 1:
+				choice = 780;
+                break;
+            case 2:
+				choice = 781;
+                break;
+            default:
+				choice = 782;
+                break;
+		}
+		return choice;
+	}
+	if (strcmp(id,"R3MP01") == 0) {
+		int choice = WindowPrompt(tr("Select a DOL"), 0, "Metroid Prime", "Metroid Prime 2", "Metroid Prime 3");
+        switch (choice) {
+            case 1:
+				choice = 782;
+				break;
+            case 2:
+				choice = 783;
+				break;
+            default:
+				choice = 784;
+				break;
+		}
+		return choice;
+	}
+    //if (strcmp(id,"R3ME01 ") == 0) return 780; mp1: 780, mp2: 781, mp3: 782
+    //if (strcmp(id,"R3MP01 ") == 0) return;
+
+	//Mortal Kombat
     if (strcmp(id,"RKMP5D") == 0) return 290;//from isostar
     if (strcmp(id,"RKME5D") == 0) return 290;//starstremr
 
-    if (strcmp(id,"R5TP69") == 0) return 1493;//from isostar
-    if (strcmp(id,"R5TE69") == 0) return 1493;//starstremr
+	//NBA 08
+    if (strcmp(id,"RNBX69") == 0) return 964;//from isostar
 
-    if (strcmp(id,"R9OP69") == 0) return 1991;//from isostar
-    if (strcmp(id,"R9OE69") == 0) return 1973;//starstremr
+	//Pangya! Golf with Style
+    if (strcmp(id,"RPYP9B") == 0) return 12490;//from isostar
+	
+	//Redsteel
+    if (strcmp(id,"REDP41") == 0) return 1957;//from isostar
+    if (strcmp(id,"REDE41") == 0) return 1957;//starstremr
 
-    if (strcmp(id,"RVUP8P") == 0) return 16426;//from isostar
-    if (strcmp(id,"RVUE8P") == 0) return 16405;//from isostar
-
-    if (strcmp(id,"RJ8P64") == 0) return 8;//from isostar
-
+	//SSX
+    if (strcmp(id,"RSXP69") == 0) return 377;//previous value was 337
+    if (strcmp(id,"RSXE69") == 0) return 377;//previous value was 337
+	
+	//The House Of The Dead 2 & 3 Return
     if (strcmp(id,"RHDP8P") == 0) return 149;//from isostar
     if (strcmp(id,"RHDE8P") == 0) return 149;//starstremr
-
-    if (strcmp(id,"RJ8P64") == 0) return 8;//from isostar
-    if (strcmp(id,"RJ8E64") == 0) return 8;//starstremr
-
-    if (strcmp(id,"RHDP8P") == 0) return 149;//from isostar
-
-    if (strcmp(id,"RMDP69") == 0) return 39;//from isostar
-
-    if (strcmp(id,"RBOP69") == 0) return 657;//from isostar
-    if (strcmp(id,"RBOE69") == 0) return 675;//starstremr
-
-    if (strcmp(id,"RPYP9B") == 0) return 12490;//from isostar
-
-    if (strcmp(id,"RM2X69") == 0)return 601;//dj_skual
-
-
-
-    /*
-
-     Tiger Woods10 R9OP69 1991
-     Virtual Tennis 2009 RVUP8P 16426
-     Fate of Atlantis"Indianer Jones" RJ8P64 8
-     Madden NFL07 RMDP69 39
-     Boogie RBOP69 657
-     Pangya! Golf with Sryle RPYP9B 12490
-    Grand Slam R5TP69 1493
-     Madden NFL08 RNFP69 1079
-
-     rboe69 = boogie ntsc = (675)
-
-     601 rm2x69
-
-      RZTE01 = WSR = 674
-
-     Fifa08 RF8P69 463
-     Fifa08 RF8X69 464
-     Wii Sports Resort RZTP01 952
-     Medal of Honor Heroes RMZX69 492
-     Medal of Honor Heroes RMZP69 492
-     Redsteel REDP41 1957
-     SSX RSXP69 337
-     NBA08 RNBX69 964
-     Metal Slug Anthology RMLP7U 56
-     Mortal Kombat RKMP5D 290
-     House of Dead 2+3 RHDP8P 149
-    	Metroid Prime 1 and/or 2? listed on the alt dol list but not on lustar's site
-    */
+	
+	//Tiger Woods 10
+    if (strcmp(id,"R9OP69") == 0) return 1991;//from isostar
+    if (strcmp(id,"R9OE69") == 0) return 1973;//starstremr
+	
+	//Virtual Tennis 2009
+    if (strcmp(id,"RVUP8P") == 0) return 16426;//from isostar
+    if (strcmp(id,"RVUE8P") == 0) return 16405;//from isostar
+	
+	//Wii Sports Resort
+    if (strcmp(id,"RZTP01") == 0) return 952;//from isostar
+    if (strcmp(id,"RZTE01") == 0) return 674;//from starstremr
 
     //if (strcmp(id,"") == 0) return ; //blank line for more dols
 
