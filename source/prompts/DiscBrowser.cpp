@@ -34,7 +34,7 @@ int DiscBrowse(struct discHdr * header) {
     bool exit = false;
     int ret, choice;
     u64 offset;
-
+HaltGui();
     ret = Disc_SetUSB(header->id);
     if (ret < 0) {
         WindowPrompt(tr("ERROR:"), tr("Could not set USB."), tr("OK"));
@@ -89,7 +89,7 @@ int DiscBrowse(struct discHdr * header) {
         free(fstbuffer);
         return ret;
     }
-
+ResumeGui();
     free(buffer);
 
     WDVD_Reset();
@@ -256,6 +256,7 @@ int autoSelectDol(const char *id) {
 	//Medal of Honor: Heroes 2
     if (strcmp(id,"RM2X69") == 0)return 601;//dj_skual
 	if (strcmp(id,"RM2P69") == 0)return 517;//MZottel
+	if (strcmp(id,"RM2E69") == 0) return 492;//Old8oy
 	
 	//Metal Slug Anthology
     if (strcmp(id,"RMLP7U") == 0) return 56;//from isostar
