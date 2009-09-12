@@ -2200,63 +2200,6 @@ int GameSettings(struct discHdr * header) {
                                     int res = DiscBrowse(header);
                                     if ((res >= 0)&&(res !=696969)) {//if res==696969 they pressed the back button
                                         alternatedoloffset = res;
-									
-									/////////////////
-									//w.Remove(&optionBrowser2);
-                                    //w.Remove(&backBtn);
-                                    //char entered[43] = "";
-                                    //titleTxt.SetText(tr("ThemePath"));
-                                    //strncpy(entered, CFG.theme_path, sizeof(entered));
-                                    //int result = BrowseDevice(entered);
-                                    //int result = OnScreenKeyboard(entered, 43,0);
-                //                    HaltGui();
-                                    //w.RemoveAll();
-                                    //if ( result == 1 ) {
-                                    //    int len = (strlen(entered)-1);
-                                    //    if (entered[len] !='/')
-                                    //        strncat (entered, "/", 1);
-                                    //    strncpy(CFG.theme_path, entered, sizeof(CFG.theme_path));
-                                    //    WindowPrompt(tr("Themepath Changed"),0,tr("OK"));
-//                                        if(!isSdInserted()) {
-                //                        if (!isInserted(bootDevice)) {
-                                    //        WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
-                 //                       } else {
-                //                            cfg_save_global();
-                //                        }
-                                    //    mainWindow->Remove(bgImg);
-                 //                       CFG_Load();
-                //                        CFG_LoadGlobal();
-                                    //    menu = MENU_SETTINGS;
-//#ifdef HW_RVL
-/*                                        snprintf(imgPath, sizeof(imgPath), "%splayer1_point.png", CFG.theme_path);
-                                        pointer[0] = new GuiImageData(imgPath, player1_point_png);
-                                        snprintf(imgPath, sizeof(imgPath), "%splayer2_point.png", CFG.theme_path);
-                                        pointer[1] = new GuiImageData(imgPath, player2_point_png);
-                                        snprintf(imgPath, sizeof(imgPath), "%splayer3_point.png", CFG.theme_path);
-                                        pointer[2] = new GuiImageData(imgPath, player3_point_png);
-                                        snprintf(imgPath, sizeof(imgPath), "%splayer4_point.png", CFG.theme_path);
-                                        pointer[3] = new GuiImageData(imgPath, player4_point_png);
-//#endif
-                                        if (CFG.widescreen)
-                                            snprintf(imgPath, sizeof(imgPath), "%swbackground.png", CFG.theme_path);
-                                        else
-                                            snprintf(imgPath, sizeof(imgPath), "%sbackground.png", CFG.theme_path);
-
-                                        background = new GuiImageData(imgPath, CFG.widescreen? wbackground_png : background_png);
-
-                                        bgImg = new GuiImage(background);
-                                        mainWindow->Append(bgImg);
-                                        mainWindow->Append(&w);
-                                    }
-                                    w.Append(&settingsbackground);
-                                    w.Append(&titleTxt);
-                                    titleTxt.SetText(tr("Custom Paths"));
-                                    w.Append(&backBtn);
-                                    w.Append(&optionBrowser2);*/
-                //                    ResumeGui();
-               
-									////////////////
-									
 									}
                                 }
                             } else {
@@ -2264,14 +2207,11 @@ int GameSettings(struct discHdr * header) {
                                 if ((res >= 0)&&(res !=696969)){
                                     alternatedoloffset = res;
 								
-                                char tmp[170];
-                                snprintf(tmp,sizeof(tmp),"%s %s - %i",tr("It seems that you have some information that will be helpfull to us. Please pass this information along to the DEV team.") ,filename,alternatedoloffset);
-                                WindowPrompt(0,tmp,tr("Ok"));
+									char tmp[170];
+									snprintf(tmp,sizeof(tmp),"%s %s - %i",tr("It seems that you have some information that will be helpfull to us. Please pass this information along to the DEV team.") ,filename,alternatedoloffset);
+									WindowPrompt(0,tmp,tr("Ok"));
+									}
 								}
-                            }
-
-
-
                         }
                         break;
                     case 10:

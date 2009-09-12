@@ -34,27 +34,33 @@ int DiscBrowse(struct discHdr * header) {
     bool exit = false;
     int ret, choice;
     u64 offset;
-HaltGui();
+
+	//Halt Gui seems to fix that pain in the ass code dump.  We'll see.
+	HaltGui();
     ret = Disc_SetUSB(header->id);
     if (ret < 0) {
+		ResumeGui();
         WindowPrompt(tr("ERROR:"), tr("Could not set USB."), tr("OK"));
         return ret;
     }
 	
     ret = Disc_Open();
     if (ret < 0) {
+		ResumeGui();
         WindowPrompt(tr("ERROR:"), tr("Could not open disc."), tr("OK"));
         return ret;
     }
 
     ret = __Disc_FindPartition(&offset);
     if (ret < 0) {
+		ResumeGui();
         WindowPrompt(tr("ERROR:"), tr("Could not find a WBFS partition."), tr("OK"));
         return ret;
     }
 
     ret = WDVD_OpenPartition(offset);
     if (ret < 0) {
+		ResumeGui();
         WindowPrompt(tr("ERROR:"), tr("Could not open WBFS partition"), tr("OK"));
         return ret;
     }
@@ -62,12 +68,14 @@ HaltGui();
     int *buffer = (int*)allocate_memory(0x20);
 
     if (buffer == NULL) {
+		ResumeGui();
         WindowPrompt(tr("ERROR:"), tr("Not enough free memory."), tr("OK"));
         return -1;
     }
 
     ret = WDVD_Read(buffer, 0x20, 0x420);
     if (ret < 0) {
+		ResumeGui();
         WindowPrompt(tr("ERROR:"), tr("Could not read the disc."), tr("OK"));
         return ret;
     }
@@ -76,6 +84,7 @@ HaltGui();
     FST_ENTRY *fst = (FST_ENTRY *)fstbuffer;
 
     if (fst == NULL) {
+		ResumeGui();
         WindowPrompt(tr("ERROR:"), tr("Not enough free memory."), tr("OK"));
         free(buffer);
         return -1;
@@ -84,12 +93,13 @@ HaltGui();
     ret = WDVD_Read(fstbuffer, buffer[2]*4, buffer[1]*4);
 
     if (ret < 0) {
+		ResumeGui();
         WindowPrompt(tr("ERROR:"), tr("Could not read the disc."), tr("OK"));
         free(buffer);
         free(fstbuffer);
         return ret;
     }
-ResumeGui();
+	ResumeGui();
     free(buffer);
 
     WDVD_Reset();
