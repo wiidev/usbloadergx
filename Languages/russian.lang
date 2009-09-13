@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-09 04:36+0200\n"
+"POT-Creation-Date: 2009-09-12 03:30+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: Kir\n"
 "Language-Team: Kir\n"
@@ -198,6 +198,9 @@ msgstr "Путь к читам изменен"
 
 msgid "Cheatfile is blank"
 msgstr "Файл с читами пустой"
+
+msgid "Checking existing artwork"
+msgstr ""
 
 msgid "Checking for Updates"
 msgstr "Проверяю обновления"
@@ -598,7 +601,7 @@ msgstr "Установка тайтла... ОК!"
 msgid "Installing wad"
 msgstr "Установка WAD"
 
-msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team."
+msgid "It seems that you have some information that will be helpfull to us. Please pass this information along to the DEV team."
 msgstr ""
 
 msgid "Italian"
@@ -866,8 +869,8 @@ msgstr "Вибрация"
 msgid "SChinese"
 msgstr "Упрощенный китайский"
 
-msgid "SD selected"
-msgstr "Громкость эффектов"
+msgid "SD/USB selected"
+msgstr ""
 
 msgid "SFX Volume"
 msgstr "Громкость эффектов"
@@ -1172,15 +1175,6 @@ msgstr "из"
 
 msgid "seconds left"
 msgstr "секунд осталось"
-
-#~ msgid "DOL from SD"
-#~ msgstr "DOL с SD карты"
-
-#~ msgid "DOL from disc"
-#~ msgstr "DOL с диска"
-
-#~ msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team. %s - %i"
-#~ msgstr "Похоже что у вас есть информация, которая может помочь нам. Пожалуйста, передайте ее разработчикам %s - %i"
 
 #~ msgid "Leaving so you can restart..."
 #~ msgstr "Выхожу для перезапуска..."

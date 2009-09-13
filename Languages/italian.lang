@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# italian.lang - v38 - r719
+# italian.lang - v39 - r728
 # don't delete this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-09 04:36+0200\n"
+"POT-Creation-Date: 2009-09-12 03:30+0200\n"
 "PO-Revision-Date: 2009-08-05 10:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe & Cambo\n"
@@ -198,6 +198,9 @@ msgstr "Percorso Trucchi modificato"
 
 msgid "Cheatfile is blank"
 msgstr "il file dei trucchi è vuoto"
+
+msgid "Checking existing artwork"
+msgstr ""
 
 msgid "Checking for Updates"
 msgstr "Verifica Aggiornamenti"
@@ -598,7 +601,7 @@ msgstr "Sto installando il titolo... Ok!"
 msgid "Installing wad"
 msgstr "Sto installando il WAD"
 
-msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team."
+msgid "It seems that you have some information that will be helpfull to us. Please pass this information along to the DEV team."
 msgstr "Hai informazioni che potrebbero esserci utili. Per favore, comunicale al team di sviluppo."
 
 msgid "Italian"
@@ -866,8 +869,8 @@ msgstr "Vibrazione"
 msgid "SChinese"
 msgstr "Cinese Moderno"
 
-msgid "SD selected"
-msgstr "Selezionata SD"
+msgid "SD/USB selected"
+msgstr "Selezionata SD/USB"
 
 msgid "SFX Volume"
 msgstr "Volume SFX"
@@ -1172,12 +1175,6 @@ msgstr "di"
 
 msgid "seconds left"
 msgstr "secondi mancanti"
-
-#~ msgid "DOL from SD"
-#~ msgstr "DOL dalla scheda SD"
-
-#~ msgid "DOL from disc"
-#~ msgstr "DOL dal disco"
 
 #~ msgid "Don't bother the USB Loader GX Team about errors in this file."
 #~ msgstr "Non infastidire il team di sviluppo dell'USB Loader GX per errori in questo file."

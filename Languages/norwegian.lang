@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-09 04:36+0200\n"
+"POT-Creation-Date: 2009-09-12 03:30+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -199,6 +199,9 @@ msgstr "Juksekode sti endret"
 msgid "Cheatfile is blank"
 msgstr "Juksefil er blank"
 
+msgid "Checking existing artwork"
+msgstr ""
+
 msgid "Checking for Updates"
 msgstr "Søker etter oppdateringer"
 
@@ -206,7 +209,7 @@ msgid "Click to Download Covers"
 msgstr "Klikk for å laste ned cover"
 
 msgid "Click to change game ID"
-msgstr ""
+msgstr "Klikk for å endre spill ID"
 
 msgid "Clock"
 msgstr "Klokke"
@@ -598,7 +601,7 @@ msgstr "Installerer tittel... OK!"
 msgid "Installing wad"
 msgstr "Installerer WAD"
 
-msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team."
+msgid "It seems that you have some information that will be helpfull to us. Please pass this information along to the DEV team."
 msgstr "Det ser ut til at du har informasjon som kan være nyttig for oss. Vennligst videresend denne informasjonen til utviklerteamet."
 
 msgid "Italian"
@@ -629,7 +632,7 @@ msgid "Language change:"
 msgstr "Endre språk"
 
 msgid "Languagefile"
-msgstr ""
+msgstr "Språkfil"
 
 msgid "Languagepath changed."
 msgstr "Språksti endret."
@@ -644,7 +647,7 @@ msgid "Load"
 msgstr "Start"
 
 msgid "Load From SD/USB"
-msgstr ""
+msgstr "Start fra SD/USB"
 
 #, c-format
 msgid "Load file from: %s ?"
@@ -866,8 +869,8 @@ msgstr "Vibrasjon"
 msgid "SChinese"
 msgstr "S.Kinesisk"
 
-msgid "SD selected"
-msgstr "SD valgt"
+msgid "SD/USB selected"
+msgstr "SD/USB valgt"
 
 msgid "SFX Volume"
 msgstr "Effekt volum"
@@ -882,10 +885,10 @@ msgid "Screensaver"
 msgstr "Skjermbeskytter"
 
 msgid "Select a DOL"
-msgstr ""
+msgstr "Velg en DOL fil"
 
 msgid "Selected DOL"
-msgstr ""
+msgstr "Valgt DOL fil"
 
 msgid "Sept"
 msgstr "Sep"
@@ -1080,7 +1083,7 @@ msgid "Wii Settings"
 msgstr "Wii Innstillinger"
 
 msgid "WiiTDB Files"
-msgstr ""
+msgstr "WiiTDB filer"
 
 msgid "Wiilight"
 msgstr "Wii DVD lys"
@@ -1172,12 +1175,6 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder gjenstår"
-
-#~ msgid "DOL from SD"
-#~ msgstr "DOL fra SD"
-
-#~ msgid "DOL from disc"
-#~ msgstr "DOL fra plate"
 
 #~ msgid "Don't bother the USB Loader GX Team about errors in this file."
 #~ msgstr "Ikke bry USB Loader GX teamet med feil i denne filen."

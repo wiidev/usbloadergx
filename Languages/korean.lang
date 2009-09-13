@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-09 04:36+0200\n"
+"POT-Creation-Date: 2009-09-12 03:30+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: nextos@korea.com\n"
 "Language-Team: \n"
@@ -198,6 +198,9 @@ msgstr "처트코드 경로 변경됨"
 
 msgid "Cheatfile is blank"
 msgstr "치트화일 내용없음"
+
+msgid "Checking existing artwork"
+msgstr ""
 
 msgid "Checking for Updates"
 msgstr "업데이트 확인"
@@ -598,7 +601,7 @@ msgstr "타이틀 설치중... Ok!"
 msgid "Installing wad"
 msgstr "Wad 설치중"
 
-msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team."
+msgid "It seems that you have some information that will be helpfull to us. Please pass this information along to the DEV team."
 msgstr "우리를 도울수 있는 정보를 가지고 있군요. 이정보를 DEV 팀에 전달해주세요."
 
 msgid "Italian"
@@ -866,8 +869,8 @@ msgstr "진동"
 msgid "SChinese"
 msgstr "중국어(간체)"
 
-msgid "SD selected"
-msgstr "SD 선택됨"
+msgid "SD/USB selected"
+msgstr "SD/USB 선택됨"
 
 msgid "SFX Volume"
 msgstr "SFX 볼륨"
@@ -1172,12 +1175,6 @@ msgstr "중"
 
 msgid "seconds left"
 msgstr "초 남았습니다"
-
-#~ msgid "DOL from SD"
-#~ msgstr "DOL 을 SD로 부터"
-
-#~ msgid "DOL from disc"
-#~ msgstr "DOL 을 디스크로 부터"
 
 #~ msgid "Don't bother the USB Loader GX Team about errors in this file."
 #~ msgstr "이화일의 에러로 USB Loader GX 팀에 연락하지 마세요."

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-09 04:36+0200\n"
+"POT-Creation-Date: 2009-09-12 03:30+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -198,6 +198,9 @@ msgstr "金手指檔案路徑已變更"
 
 msgid "Cheatfile is blank"
 msgstr "金手指檔案空白"
+
+msgid "Checking existing artwork"
+msgstr ""
 
 msgid "Checking for Updates"
 msgstr "正在檢查更新"
@@ -598,7 +601,7 @@ msgstr "正在安裝 title...完成"
 msgid "Installing wad"
 msgstr "正在安裝wad"
 
-msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team."
+msgid "It seems that you have some information that will be helpfull to us. Please pass this information along to the DEV team."
 msgstr "請將這些訊息傳送至開發小組以幫助本軟體開發"
 
 msgid "Italian"
@@ -866,8 +869,8 @@ msgstr "震動"
 msgid "SChinese"
 msgstr "簡體中文"
 
-msgid "SD selected"
-msgstr "SD卡已選擇"
+msgid "SD/USB selected"
+msgstr "SD/USB卡已選擇"
 
 msgid "SFX Volume"
 msgstr "音效音量"
@@ -1172,12 +1175,6 @@ msgstr "剩餘空間 總容量"
 
 msgid "seconds left"
 msgstr "剩餘秒數"
-
-#~ msgid "DOL from SD"
-#~ msgstr "從SD卡讀取DOL"
-
-#~ msgid "DOL from disc"
-#~ msgstr "從光碟讀取DOL"
 
 #~ msgid "Don't bother the USB Loader GX Team about errors in this file."
 #~ msgstr "檔案錯誤"

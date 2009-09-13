@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-09 04:36+0200\n"
+"POT-Creation-Date: 2009-09-12 03:30+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -198,6 +198,9 @@ msgstr "Ruta de Códigos de Trampas cambiada"
 
 msgid "Cheatfile is blank"
 msgstr "Archivo de Trampas vacio"
+
+msgid "Checking existing artwork"
+msgstr ""
 
 msgid "Checking for Updates"
 msgstr "Verificando Actualizaciones"
@@ -598,7 +601,7 @@ msgstr "Instalando título... Ok!"
 msgid "Installing wad"
 msgstr "Instalando wad"
 
-msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team."
+msgid "It seems that you have some information that will be helpfull to us. Please pass this information along to the DEV team."
 msgstr "Parece que tienes alguna info. que puede ser útil para nosotros. Por favor envia esta info. al equipo desarrollador."
 
 msgid "Italian"
@@ -866,8 +869,8 @@ msgstr "Vibración"
 msgid "SChinese"
 msgstr "Chino Simplif."
 
-msgid "SD selected"
-msgstr "SD seleccionada"
+msgid "SD/USB selected"
+msgstr "SD/USB seleccionada"
 
 msgid "SFX Volume"
 msgstr "Volumen SFX"
@@ -1172,12 +1175,6 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
-
-#~ msgid "DOL from SD"
-#~ msgstr "DOL desde SD"
-
-#~ msgid "DOL from disc"
-#~ msgstr "DOL desde disco"
 
 #~ msgid "Don't bother the USB Loader GX Team about errors in this file."
 #~ msgstr "No molestes al equipo del USB Loader GX sobre errores en este archivo."

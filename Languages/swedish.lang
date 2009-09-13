@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-09 04:36+0200\n"
+"POT-Creation-Date: 2009-09-12 03:30+0200\n"
 "PO-Revision-Date: 2009-08-02 12:20+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -198,6 +198,9 @@ msgstr "Sökväg till fusk ändrad"
 
 msgid "Cheatfile is blank"
 msgstr "Fuskfilen är blank"
+
+msgid "Checking existing artwork"
+msgstr ""
 
 msgid "Checking for Updates"
 msgstr "Letar efter uppdateringar"
@@ -598,7 +601,7 @@ msgstr "Installerar titel... Ok!"
 msgid "Installing wad"
 msgstr "Installerar wad"
 
-msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team."
+msgid "It seems that you have some information that will be helpfull to us. Please pass this information along to the DEV team."
 msgstr "Det verkar som om du har information som kan vara till nytta för oss. Vänligen skicka informationen vidare till DEV team."
 
 msgid "Italian"
@@ -866,8 +869,8 @@ msgstr "Vibration"
 msgid "SChinese"
 msgstr "SKinesiska"
 
-msgid "SD selected"
-msgstr "SD vald"
+msgid "SD/USB selected"
+msgstr "SD/USB vald"
 
 msgid "SFX Volume"
 msgstr "SFX Volym"
@@ -1172,12 +1175,6 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder kvar"
-
-#~ msgid "DOL from SD"
-#~ msgstr "DOL från SD"
-
-#~ msgid "DOL from disc"
-#~ msgstr "DOL från skiva"
 
 #~ msgid "Don't bother the USB Loader GX Team about errors in this file."
 #~ msgstr "Rapportera inte fel i denna fil till USB Loader GX teamet."

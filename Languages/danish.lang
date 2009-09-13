@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-09 04:36+0200\n"
+"POT-Creation-Date: 2009-09-13 13:53+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: dorf[dk]\n"
 "Language-Team: \n"
@@ -198,6 +198,9 @@ msgstr "Sti til cheatcodes ændret"
 
 msgid "Cheatfile is blank"
 msgstr "Cheatfilen er tom"
+
+msgid "Checking existing artwork"
+msgstr ""
 
 msgid "Checking for Updates"
 msgstr "Leder efter opdateringer"
@@ -598,7 +601,7 @@ msgstr "Installerer titel... Ok!"
 msgid "Installing wad"
 msgstr "Installerer WAD"
 
-msgid "It seems that you have some information that will we helpfull to us. Please pass this information along to the DEV team."
+msgid "It seems that you have some information that will be helpfull to us. Please pass this information along to the DEV team."
 msgstr "Det ser ud til, at du har information, der vil kunne hjælpe os. Vær rar at sende denne information til udviklerne."
 
 msgid "Italian"
@@ -641,23 +644,23 @@ msgid "Like SysMenu"
 msgstr "Ligesom wii-menuen"
 
 msgid "Load"
-msgstr "Load"
+msgstr "Indlæs"
 
 msgid "Load From SD/USB"
-msgstr ""
+msgstr "Indlæs fra SD/USB"
 
 #, c-format
 msgid "Load file from: %s ?"
-msgstr "Load fil fra %s ?"
+msgstr "Indlæs fil fra %s ?"
 
 msgid "Load this dol as alternate dol?"
-msgstr "Load denne DOL som alternativ DOL?"
+msgstr "Indlæs denne DOL som alternativ DOL?"
 
 msgid "Loading standard language."
-msgstr "Loader standardsprog."
+msgstr "Indlæser standardsprog."
 
 msgid "Loading standard music."
-msgstr "Loader standardmusik."
+msgstr "Indlæser standardmusik."
 
 msgid "Lock Console"
 msgstr "Lås konsol"
@@ -866,8 +869,8 @@ msgstr "Vibration"
 msgid "SChinese"
 msgstr "Kinesisk (std.)"
 
-msgid "SD selected"
-msgstr "SD er valgt"
+msgid "SD/USB selected"
+msgstr "SD/USB er valgt"
 
 msgid "SFX Volume"
 msgstr "Lydstyrke for effekter"
@@ -882,10 +885,10 @@ msgid "Screensaver"
 msgstr "Screensaver"
 
 msgid "Select a DOL"
-msgstr ""
+msgstr "Vælg en DOL"
 
 msgid "Selected DOL"
-msgstr ""
+msgstr "Valgt DOL"
 
 msgid "Sept"
 msgstr "Sept"
@@ -1172,12 +1175,6 @@ msgstr "af"
 
 msgid "seconds left"
 msgstr "sekunder tilbage"
-
-#~ msgid "DOL from SD"
-#~ msgstr "DOL fra SD"
-
-#~ msgid "DOL from disc"
-#~ msgstr "DOL fra DVD"
 
 #~ msgid "Don't bother the USB Loader GX Team about errors in this file."
 #~ msgstr "Lad være med at fortælle holdet bag USB Loader GX om fejl i denne fil."
