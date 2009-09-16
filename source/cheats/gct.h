@@ -9,7 +9,7 @@
 
 #include <sstream>
 
-#define MAXCHEATS 40
+#define MAXCHEATS 300
 
 using namespace std;
 
@@ -66,6 +66,9 @@ public:
     //!Gets Cheat Comment
     //!\return Cheat Comment
     string getCheatComment(int nr);
+	//!Check if string is a code
+    //!\return true/false
+	bool IsCode(const std::string& s);
 };
 
 #endif  /* _GCT_H */

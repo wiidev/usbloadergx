@@ -182,20 +182,17 @@ int GCTCheats::openTxtfile(const char * filename) {
 	if (sGameTitle[sGameTitle.length() - 1] == '\r')
 		sGameTitle.erase(sGameTitle.length() - 1);
 				
-    //filestr.ignore();
     getline(filestr,sCheatName[i]);  // skip first line if file uses CRLF
 	if (!sGameTitle[sGameTitle.length() - 1] == '\r')
 	   filestr.seekg(0,ios_base::beg);
 
     while (!filestr.eof()) {
-	
         getline(filestr,sCheatName[i]); // '\n' delimiter by default
 		if (sCheatName[i][sCheatName[i].length() - 1] == '\r')
 			sCheatName[i].erase(sCheatName[i].length() - 1);
 
         string cheatdata;
         bool emptyline = false;
-        bool isComment = false;
 
         do {
 			getline(filestr,str);
@@ -207,26 +204,41 @@ int GCTCheats::openTxtfile(const char * filename) {
                 break;
             }
 
-            if (str.size() <= 16 || str.size() > 17 ) {
-                isComment = true;
-                printf ("%i",str.size());
-            }
-
-            if (!isComment) {
-                cheatdata.append(str);
+            if (IsCode(str)) {
+				// remove any garbage (comment) after code
+				while (str.size() > 17) {
+					str.erase(str.length() - 1);
+				}
+			    cheatdata.append(str);
                 size_t found=cheatdata.find(' ');
                 cheatdata.replace(found,1,"");
-            } else {
+			} else {
+                //printf("%i",str.size());
                 sCheatComment[i] = str;
             }
-
-            if (filestr.eof()) break;
+			if (filestr.eof()) break;
+		   
         } while (!emptyline);
 
         sCheats[i] = cheatdata;
-        i++;
+		i++;
+		if (i == MAXCHEATS) break;
     }
     iCntCheats = i;
     filestr.close();
     return 1;
+}
+
+bool GCTCheats::IsCode(const std::string& str) {
+	if (str[8] == ' ' && str.size() >= 17) {
+	// accept strings longer than 17 in case there is a comment on the same line as the code
+		char part1[9];
+		char part2[9];
+		snprintf(part1,sizeof(part1),"%c%c%c%c%c%c%c%c",str[0],str[1],str[2],str[3],str[4],str[5],str[6],str[7]);
+		snprintf(part1,sizeof(part2),"%c%c%c%c%c%c%c%c",str[9],str[10],str[11],str[12],str[13],str[14],str[15],str[16]);
+		if ((strtok(part1,"0123456789ABCDEFabcdef") == NULL) && (strtok(part2,"0123456789ABCDEFabcdef") == NULL)) {
+			return true;
+		}
+	}
+	return false;
 }

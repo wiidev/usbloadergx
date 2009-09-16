@@ -302,8 +302,6 @@ int autoSelectDol(const char *id) {
 		}
 		return choice;
 	}
-    //if (strcmp(id,"R3ME01 ") == 0) return 780; mp1: 780, mp2: 781, mp3: 782
-    //if (strcmp(id,"R3MP01 ") == 0) return;
 
 	//Mortal Kombat
     if (strcmp(id,"RKMP5D") == 0) return 290;//from isostar
