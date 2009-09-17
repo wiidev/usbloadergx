@@ -1354,6 +1354,9 @@ int MenuDiscList() {
 
                 else if (choice == 3) { //WBFS renaming
                     wiilight(0);
+					//re-evaluate header now in case they changed games while on the game prompt
+                    header = &gameList[gameSelected];
+                    
                     //enter new game title
                     char entered[60];
                     snprintf(entered, sizeof(entered), "%s", get_title(header));
