@@ -798,7 +798,7 @@ int MenuDiscList() {
         } else if (gamecntBtn.GetState() == STATE_CLICKED) {
             
 			char linebuf[150];
-			snprintf(linebuf, sizeof(linebuf), tr("Save Game List to %sGameList ?"), Settings.update_path);
+			snprintf(linebuf, sizeof(linebuf), "%s %sGameList ?",tr("Save Game List to"), Settings.update_path);
             
 			choice = WindowPrompt(0,linebuf, "txt","csv",tr("Back"));
         
