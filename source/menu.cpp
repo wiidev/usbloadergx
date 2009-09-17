@@ -375,12 +375,19 @@ int MenuDiscList() {
     GuiText usedSpaceTxt(spaceinfo, 18, (GXColor) {THEME.info_r, THEME.info_g, THEME.info_b, 255});
     usedSpaceTxt.SetAlignment(THEME.hddInfoAlign, ALIGN_TOP);
     usedSpaceTxt.SetPosition(THEME.hddInfo_x, THEME.hddInfo_y);
-
-    char GamesCnt[15];
+	
+	char GamesCnt[15];
     sprintf(GamesCnt,"%s: %i",tr("Games"), gameCnt);
     GuiText gamecntTxt(GamesCnt, 18, (GXColor) {THEME.info_r, THEME.info_g, THEME.info_b, 255});
-    gamecntTxt.SetAlignment(THEME.gameCntAlign, ALIGN_TOP);
-    gamecntTxt.SetPosition(THEME.gameCnt_x,THEME.gameCnt_y);
+    
+	GuiButton gamecntBtn(100,18);
+	gamecntBtn.SetAlignment(THEME.gameCntAlign, ALIGN_TOP);
+    gamecntBtn.SetPosition(THEME.gameCnt_x,THEME.gameCnt_y);
+	gamecntBtn.SetLabel(&gamecntTxt);
+	gamecntBtn.SetEffectGrow();
+	gamecntBtn.SetTrigger(&trigA);
+	
+	
 
     GuiTooltip installBtnTT(tr("Install a game"));
     if (Settings.wsprompt == yes)
@@ -652,7 +659,7 @@ int MenuDiscList() {
         w.Append(&usedSpaceTxt);
     }
     if (THEME.showGameCnt == -1 || THEME.showGameCnt == 1) { //force show game cnt info
-        w.Append(&gamecntTxt);
+        w.Append(&gamecntBtn);
     }
     w.Append(&sdcardBtn);
     w.Append(&poweroffBtn);
@@ -787,6 +794,32 @@ int MenuDiscList() {
                     gameCarousel->SetFocus(1);
                 }
             }
+
+        } else if (gamecntBtn.GetState() == STATE_CLICKED) {
+            
+			char linebuf[150];
+			snprintf(linebuf, sizeof(linebuf), tr("Save Game List to %sGameList ?"), Settings.update_path);
+            
+			choice = WindowPrompt(0,linebuf, "txt","csv",tr("Back"));
+        
+			if (choice==1)
+			{
+				if (save_gamelist(0))
+					WindowPrompt(0,tr("Saved"), tr("OK"));
+				else
+					WindowPrompt(tr("Error"),tr("Could not save."), tr("OK"));
+			
+			}
+			else if (choice==2)
+			{
+				if (save_gamelist(1))
+					WindowPrompt(0,tr("Saved"), tr("OK"));
+				else
+					WindowPrompt(tr("Error"),tr("Could not save."), tr("OK"));
+			
+			}
+			
+			gamecntBtn.ResetState();
 
         } else if (homeBtn.GetState() == STATE_CLICKED) {
             s32 thetimeofbg = bgMusic->GetPlayTime();

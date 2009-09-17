@@ -10,4 +10,5 @@
 
 int showGameInfo(char *ID);
 bool save_XML_URL();
+bool save_gamelist(int txt);
 #endif

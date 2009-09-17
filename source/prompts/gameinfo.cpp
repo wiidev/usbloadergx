@@ -978,6 +978,82 @@ int showGameInfo(char *ID) {
     }
 }
 
+bool save_gamelist(int txt) { // save gamelist
+	mainWindow->SetState(STATE_DISABLED);
+    char tmp[200];
+    sprintf(tmp, "%s", Settings.update_path);
+    struct stat st;
+    if (stat(tmp, &st) != 0) {
+        mkdir(tmp, 0777);
+    }
+    FILE *f;
+    sprintf(tmp, "%sGameList.txt", Settings.update_path);
+	if (txt==1)
+	sprintf(tmp, "%sGameList.csv", Settings.update_path);
+    f = fopen(tmp, "w");
+    if (!f) {
+        sleep(1);
+		mainWindow->SetState(STATE_DEFAULT);
+        return false;
+    }
+    //make sure that all games are added to the gamelist
+    __Menu_GetEntries(1);
+
+    f32 size = 0.0;
+	f32 freespace, used;
+	unsigned int i;
+	
+	WBFS_DiskSpace(&used, &freespace);
+
+	fprintf(f, "# USB Loader Has Saved this file\n");
+    fprintf(f, "# This file was created based on your list of games and language settings.\n");
+    fclose(f);
+    /* Closing and reopening because of a write issue we are having right now */
+    f = fopen(tmp, "w");
+    
+	if (txt==0)
+	{
+		fprintf(f, "# USB Loader Has Saved this file\n");
+		fprintf(f, "# This file was created based on your list of games and language settings.\n\n");
+    
+		fprintf(f, "%.2fGB %s %.2fGB %s\n\n",freespace,tr("of"),(freespace+used),tr("free"));
+		fprintf(f, "ID     Size(GB)  Name\n");
+		
+		for (i = 0; i < gameCnt ; i++) {
+			struct discHdr* header = &gameList[i];
+			WBFS_GameSize(header->id, &size);
+			if (i<500) {
+				fprintf(f, "%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2], header->id[3], header->id[4], header->id[5]);
+				fprintf(f, " [%.2f]   ", size);
+				fprintf(f, " %s",get_title(header));
+				}
+				fprintf(f, "\n");
+		}
+	}
+	else {
+	
+	fprintf(f, "ID,Size(GB),Name\n");
+		
+		for (i = 0; i < gameCnt ; i++) {
+			struct discHdr* header = &gameList[i];
+			WBFS_GameSize(header->id, &size);
+			if (i<500) {
+				fprintf(f, "%c%c%c%c%c%c,", header->id[0], header->id[1], header->id[2], header->id[3], header->id[4], header->id[5]);
+				fprintf(f, "%.2f,", size);
+				fprintf(f, "\"%s\"",get_title(header));
+				}
+				fprintf(f, "\n");
+		}
+	
+	}
+    fclose(f);
+
+    __Menu_GetEntries();
+	mainWindow->SetState(STATE_DEFAULT);
+    return true;
+}
+
+
 bool save_XML_URL() { // save xml url as as txt file for people without wifi
     char tmp[200];
     sprintf(tmp, "%s", Settings.update_path);
@@ -1013,7 +1089,7 @@ bool save_XML_URL() { // save xml url as as txt file for people without wifi
     fprintf(f, "# USB Loader Has Saved this file\n");
     fprintf(f, "# This URL was created based on your list of games and language settings.\n");
     fclose(f);
-    /* Closing and reopening because of a write issue we are having right now */
+    // Closing and reopening because of a write issue we are having right now 
     f = fopen(tmp, "w");
     fprintf(f, "# USB Loader Has Saved this file\n");
     fprintf(f, "# This URL was created based on your list of games and language settings.\n");
@@ -1025,4 +1101,6 @@ bool save_XML_URL() { // save xml url as as txt file for people without wifi
     __Menu_GetEntries();
     return true;
 }
+
+
 
