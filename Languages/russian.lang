@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-12 03:30+0200\n"
+"POT-Creation-Date: 2009-09-15 05:43+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: Kir\n"
 "Language-Team: Kir\n"
@@ -178,7 +178,7 @@ msgstr ""
 msgid "Both"
 msgstr "Оба"
 
-msgid "Can't be formated"
+msgid "Can't be formatted"
 msgstr "Невозможно отформатировать"
 
 msgid "Can't create directory"
@@ -601,7 +601,7 @@ msgstr "Установка тайтла... ОК!"
 msgid "Installing wad"
 msgstr "Установка WAD"
 
-msgid "It seems that you have some information that will be helpfull to us. Please pass this information along to the DEV team."
+msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
 msgstr ""
 
 msgid "Italian"
@@ -1185,12 +1185,6 @@ msgstr "секунд осталось"
 #~ msgid "No partitions found"
 #~ msgstr "Разделы не найдены"
 
-#~ msgid "Path of titles.txt change"
-#~ msgstr "изменить путь к titles.txt"
-
-#~ msgid "Path of titles.txt changed."
-#~ msgstr "путь к titles.txt изменён"
-
 #~ msgid "Restart"
 #~ msgstr "Перезапустить"
 
@@ -1200,5 +1194,3 @@ msgstr "секунд осталось"
 #~ msgid "there was an error"
 #~ msgstr "произошла ошибка"
 
-#~ msgid "titles.txt Path"
-#~ msgstr "путь к titles.txt"

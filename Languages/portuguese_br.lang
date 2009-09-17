@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-12 03:30+0200\n"
+"POT-Creation-Date: 2009-09-15 05:43+0200\n"
 "PO-Revision-Date: 2009-08-11 19:45\n"
 "Last-Translator: boto12\n"
 "Language-Team: \n"
@@ -178,7 +178,7 @@ msgstr "Carregar?"
 msgid "Both"
 msgstr "Ambos"
 
-msgid "Can't be formated"
+msgid "Can't be formatted"
 msgstr "Não pode pode ser formatado"
 
 msgid "Can't create directory"
@@ -200,7 +200,7 @@ msgid "Cheatfile is blank"
 msgstr "arquivo de truques vazio"
 
 msgid "Checking existing artwork"
-msgstr ""
+msgstr "Procurando artes existentes"
 
 msgid "Checking for Updates"
 msgstr "Procurando Atualizações"
@@ -601,7 +601,7 @@ msgstr "Instalando título... Ok!"
 msgid "Installing wad"
 msgstr "Instalando wad"
 
-msgid "It seems that you have some information that will be helpfull to us. Please pass this information along to the DEV team."
+msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
 msgstr "Parece que tem uma informação que pode ser útil. Por favor envie esta informação a nossa equipe de desenvolvimento."
 
 msgid "Italian"
@@ -870,7 +870,7 @@ msgid "SChinese"
 msgstr "Chinês Simplificado"
 
 msgid "SD/USB selected"
-msgstr "SD/USB seleccionado"
+msgstr "SD/USB selecionado"
 
 msgid "SFX Volume"
 msgstr "Volume dos Efeitos"
@@ -885,10 +885,10 @@ msgid "Screensaver"
 msgstr "Proteção de tela"
 
 msgid "Select a DOL"
-msgstr ""
+msgstr "Selecionar um DOL"
 
 msgid "Selected DOL"
-msgstr ""
+msgstr "DOL selecionado"
 
 msgid "Sept"
 msgstr "Set"

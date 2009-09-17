@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# italian.lang - v39 - r728
+# italian.lang - v39 - r729
 # don't delete this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-12 03:30+0200\n"
+"POT-Creation-Date: 2009-09-15 05:43+0200\n"
 "PO-Revision-Date: 2009-08-05 10:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe & Cambo\n"
@@ -178,7 +178,7 @@ msgstr "Vuoi riavviare?"
 msgid "Both"
 msgstr "Entrambi"
 
-msgid "Can't be formated"
+msgid "Can't be formatted"
 msgstr "Non si può formattare"
 
 msgid "Can't create directory"
@@ -200,7 +200,7 @@ msgid "Cheatfile is blank"
 msgstr "il file dei trucchi è vuoto"
 
 msgid "Checking existing artwork"
-msgstr ""
+msgstr "Verifico le copertine presenti"
 
 msgid "Checking for Updates"
 msgstr "Verifica Aggiornamenti"
@@ -601,7 +601,7 @@ msgstr "Sto installando il titolo... Ok!"
 msgid "Installing wad"
 msgstr "Sto installando il WAD"
 
-msgid "It seems that you have some information that will be helpfull to us. Please pass this information along to the DEV team."
+msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
 msgstr "Hai informazioni che potrebbero esserci utili. Per favore, comunicale al team di sviluppo."
 
 msgid "Italian"

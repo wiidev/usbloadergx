@@ -290,7 +290,7 @@ main:
 	char imgPath[100];
     snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
     GuiImageData btnOutline(imgPath, button_dialogue_box_png);
-    GuiText ExitBtnTxt("Cancel", 24, (GXColor) {0, 0, 0, 255});
+    GuiText ExitBtnTxt(tr("Cancel"), 24, (GXColor) {0, 0, 0, 255});
     GuiImage ExitBtnImg(&btnOutline);
     if (Settings.wsprompt == yes) {
         ExitBtnTxt.SetWidescreen(CFG.widescreen);

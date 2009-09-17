@@ -1563,7 +1563,7 @@ static int MenuFormat() {
             options.SetValue(cnt,"%.2fGB", size);
         } else {
             options.SetName(cnt, "%s %d:",tr("Partition"), cnt+1);
-            options.SetValue(cnt,tr("Can't be formated"));
+            options.SetValue(cnt,tr("Can't be formatted"));
         }
     }
 

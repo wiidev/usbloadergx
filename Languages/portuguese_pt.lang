@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# For USB Loader GX rev713
+# For USB Loader GX rev729
 # don't delete this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-12 03:30+0200\n"
+"POT-Creation-Date: 2009-09-15 05:43+0200\n"
 "PO-Revision-Date: 2009-08-11 12:25\n"
 "Last-Translator: Sky8000\n"
 "Language-Team: \n"
@@ -161,7 +161,7 @@ msgid "Backgroundmusic"
 msgstr "Música de fundo"
 
 msgid "Backgroundmusic Path changed."
-msgstr "Pasta Música Fundo"
+msgstr "Pasta Música Fundo alterada."
 
 msgid "Big thanks to:"
 msgstr "Agradecimentos:"
@@ -178,8 +178,8 @@ msgstr "Carregar?"
 msgid "Both"
 msgstr "Ambos"
 
-msgid "Can't be formated"
-msgstr "Não pode pode ser formatado"
+msgid "Can't be formatted"
+msgstr "Não pode ser formatado"
 
 msgid "Can't create directory"
 msgstr "Não foi possível criar a pasta"
@@ -200,7 +200,7 @@ msgid "Cheatfile is blank"
 msgstr "Ficheiro de truques vazio"
 
 msgid "Checking existing artwork"
-msgstr ""
+msgstr "Verificando imagens existentes"
 
 msgid "Checking for Updates"
 msgstr "Procurando Actualizações"
@@ -209,7 +209,7 @@ msgid "Click to Download Covers"
 msgstr "Carregue para descarregar capas"
 
 msgid "Click to change game ID"
-msgstr "Alterar o ID do jogo"
+msgstr "Carregue para alterar o ID do jogo"
 
 msgid "Clock"
 msgstr "Relógio"
@@ -513,7 +513,7 @@ msgid "Game Size"
 msgstr "Tamanho do Jogo"
 
 msgid "Game is already installed:"
-msgstr "Este jogo já está instalado:"
+msgstr "O jogo já está instalado:"
 
 msgid "Games"
 msgstr "Jogos"
@@ -601,7 +601,7 @@ msgstr "Instalando título... Ok!"
 msgid "Installing wad"
 msgstr "Instalando wad"
 
-msgid "It seems that you have some information that will be helpfull to us. Please pass this information along to the DEV team."
+msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
 msgstr "Parece que tens informação que nos pode ser útil. Por favor envia esta informação à equipa de desenvolvimento."
 
 msgid "Italian"
@@ -647,7 +647,7 @@ msgid "Load"
 msgstr "Carregar"
 
 msgid "Load From SD/USB"
-msgstr ""
+msgstr "Carregar do SD/USB"
 
 #, c-format
 msgid "Load file from: %s ?"
@@ -885,10 +885,10 @@ msgid "Screensaver"
 msgstr "Protecção de ecrã"
 
 msgid "Select a DOL"
-msgstr ""
+msgstr "Seleccionar o DOL"
 
 msgid "Selected DOL"
-msgstr ""
+msgstr "DOL Seleccionado"
 
 msgid "Sept"
 msgstr "Set"
