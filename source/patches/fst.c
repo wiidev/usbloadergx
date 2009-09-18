@@ -37,62 +37,63 @@
 
 extern struct SSettings Settings;
 
-u32 do_sd_code(char *filename) {
-    FILE *fp;
-    u8 *filebuff;
-    u32 filesize;
-    u32 ret;
-    char filepath[150];
+u32 do_sd_code(char *filename)
+{
+	FILE *fp;
+	u8 *filebuff;
+	u32 filesize;
+	u32 ret;
+	char filepath[150];
 
     SDCard_Init();
-    USBDevice_Init();
+	USBDevice_Init();
 
-    sprintf(filepath, "%s%s", Settings.Cheatcodespath, filename);
-    filepath[strlen(Settings.Cheatcodespath)+6] = 0x2E;
-    filepath[strlen(Settings.Cheatcodespath)+7] = 0x67;
-    filepath[strlen(Settings.Cheatcodespath)+8] = 0x63;
-    filepath[strlen(Settings.Cheatcodespath)+9] = 0x74;
-    filepath[strlen(Settings.Cheatcodespath)+10] = 0;
+	sprintf(filepath, "%s%s", Settings.Cheatcodespath, filename);
+	filepath[strlen(Settings.Cheatcodespath)+6] = 0x2E;
+	filepath[strlen(Settings.Cheatcodespath)+7] = 0x67;
+	filepath[strlen(Settings.Cheatcodespath)+8] = 0x63;
+	filepath[strlen(Settings.Cheatcodespath)+9] = 0x74;
+	filepath[strlen(Settings.Cheatcodespath)+10] = 0;
 
-    fp = fopen(filepath, "rb");
-    if (!fp) {
+	fp = fopen(filepath, "rb");
+	if (!fp) {
         USBDevice_deInit();
         SDCard_deInit();
-        return 0;
-    }
+		return 0;
+	}
 
-    fseek(fp, 0, SEEK_END);
-    filesize = ftell(fp);
-    fseek(fp, 0, SEEK_SET);
+	fseek(fp, 0, SEEK_END);
+	filesize = ftell(fp);
+	fseek(fp, 0, SEEK_SET);
 
-    filebuff = (u8*) malloc (filesize);
-    if (filebuff == 0) {
-        fclose(fp);
-        sleep(2);
+	filebuff = (u8*) malloc (filesize);
+	if(filebuff == 0){
+		fclose(fp);
+		sleep(2);
         USBDevice_deInit();
         SDCard_deInit();
-        return 0;
-    }
+		return 0;
+	}
 
-    ret = fread(filebuff, 1, filesize, fp);
-    if (ret != filesize) {
-        free(filebuff);
-        fclose(fp);
+	ret = fread(filebuff, 1, filesize, fp);
+	if(ret != filesize){
+		free(filebuff);
+		fclose(fp);
         USBDevice_deInit();
         SDCard_deInit();
-        return 0;
-    }
+		return 0;
+	}
 
     memcpy((void*)0x800027E8,filebuff,filesize);
     *(vu8*)0x80001807 = 0x01;
 
-    free(filebuff);
-    fclose(fp);
+	free(filebuff);
+	fclose(fp);
 
-    USBDevice_deInit();
+	USBDevice_deInit();
     SDCard_deInit();
 
-    return 1;
+	return 1;
 }
 
 

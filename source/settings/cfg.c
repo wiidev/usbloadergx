@@ -1016,7 +1016,7 @@ bool trimsplit(char *line, char *part1, char *part2, char delim, int size) {
 }
 void cfg_parseline(char *line, void (*set_func)(char*, char*)) {
     // split name = value
-    char tmp[200], name[200], val[200];
+    char tmp[300], name[200], val[200];
     strcopy(tmp, line, sizeof(tmp));
     char *eq = strchr(tmp, '=');
     if (!eq) return;
@@ -1054,7 +1054,7 @@ void cfg_parsetitleline(char *line, void (*set_func)(char*, char*, u8)) {
 
 bool cfg_parsefile(char *fname, void (*set_func)(char*, char*)) {
     FILE *f;
-    char line[200];
+    char line[300];
 
     //printf("opening(%s)\n", fname);
     f = fopen(fname, "r");
@@ -1137,8 +1137,12 @@ void cfg_set_game_opt(struct Game_CFG *game, u8 *id) {
     game->iosreloadblock = reloadblock;
     game->patchcountrystrings = countrystrings;
     game->loadalternatedol = alternatedol;
+	if (game->loadalternatedol == 0) {
+		alternatedoloffset = 0;
+		strcpy(alternatedname, "");
+	}
     game->alternatedolstart = alternatedoloffset;
-    strcpy(game->alternatedolname, alternatedname);
+    strlcpy(game->alternatedolname, alternatedname,sizeof(game->alternatedolname));
 }
 
 struct Game_NUM* cfg_get_game_num(u8 *id) {
@@ -1254,7 +1258,7 @@ void game_set(char *name, char *val) {
 
     // parse val
     // first split options by ;
-    char opt[200], *p, *np;
+    char opt[300], *p, *np;
     p = val;
 
     while (p) {
@@ -1321,18 +1325,7 @@ void game_set(char *name, char *val) {
                 }
             }
             if (strcmp("alternatedolname", opt_name) == 0) {
-                char temp3[40];
-                int i = 0;
-                while (i < 40) {
-
-                    if (opt_val[i] == ';')
-                        break;
-
-                    temp3[i] = opt_val[i];
-                    i++;
-                }
-                temp3[i] = '\0';
-                strncpy(game->alternatedolname, temp3, 39);
+                strlcpy(game->alternatedolname, opt_val, sizeof(game->alternatedolname));
             }
         }
         // next opt

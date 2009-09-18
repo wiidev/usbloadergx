@@ -1957,7 +1957,7 @@ int GameSettings(struct discHdr * header) {
             alternatedol = game_cfg->loadalternatedol;
             alternatedoloffset = game_cfg->alternatedolstart;
             reloadblock = game_cfg->iosreloadblock;
-            strncpy(alternatedname, game_cfg->alternatedolname, sizeof(alternatedname));
+            strlcpy(alternatedname, game_cfg->alternatedolname, sizeof(alternatedname));
         } else {
             videoChoice = Settings.video;
             languageChoice = Settings.language;
@@ -1974,10 +1974,8 @@ int GameSettings(struct discHdr * header) {
             alternatedol = off;
             alternatedoloffset = 0;
             reloadblock = off;
-            sprintf(alternatedname, " ");
+            strcpy(alternatedname, "");
         }
-
-
 
         ResumeGui();
 
@@ -2187,31 +2185,36 @@ int GameSettings(struct discHdr * header) {
                             snprintf(filename,sizeof(filename),"%c%c%c%c%c%c",header->id[0], header->id[1], header->id[2],
                                      header->id[3],header->id[4], header->id[5]);
                             int dolchoice = 0;
-                            //check to see if we already know the offset of the correct dol
-                            int autodol = autoSelectDol(filename);
-
-                            //if we do know that offset ask if they want to use it
-                            if (autodol>0) {
-                                dolchoice = WindowPrompt(0,tr("Do you want to use the alt dol that is known to be correct?"),tr("Yes"),tr("Pick from a list"));
-                                if (dolchoice==1) {
-                                    alternatedoloffset = autodol;
-                                    snprintf(alternatedname, sizeof(alternatedname), "%s <%i>", tr("AUTO"),autodol);
-                                } else {//they want to search for the correct dol themselves
-                                    int res = DiscBrowse(header);
-                                    if ((res >= 0)&&(res !=696969)) {//if res==696969 they pressed the back button
-                                        alternatedoloffset = res;
+							//alt dol menu for games that require more than a single alt dol
+							int autodol = autoSelectDolMenu(filename);
+							if (autodol>0) {
+								alternatedoloffset = autodol;
+								snprintf(alternatedname, sizeof(alternatedname), "%s <%i>", tr("AUTO"),autodol);
+							} else if (autodol!=0) {
+								//check to see if we already know the offset of the correct dol
+								int autodol = autoSelectDol(filename);
+								//if we do know that offset ask if they want to use it
+								if (autodol>0) {
+									dolchoice = WindowPrompt(0,tr("Do you want to use the alt dol that is known to be correct?"),tr("Yes"),tr("Pick from a list"));
+									if (dolchoice==1) {
+										alternatedoloffset = autodol;
+										snprintf(alternatedname, sizeof(alternatedname), "%s <%i>", tr("AUTO"),autodol);
+									} else if (dolchoice!=0){//they want to search for the correct dol themselves
+										int res = DiscBrowse(header);
+										if ((res >= 0)&&(res !=696969)) {//if res==696969 they pressed the back button
+											alternatedoloffset = res;
+										}
 									}
-                                }
-                            } else {
-                                int res = DiscBrowse(header);
-                                if ((res >= 0)&&(res !=696969)){
-                                    alternatedoloffset = res;
-								
-									char tmp[170];
-									snprintf(tmp,sizeof(tmp),"%s %s - %i",tr("It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team.") ,filename,alternatedoloffset);
-									WindowPrompt(0,tmp,tr("Ok"));
+								} else {
+									int res = DiscBrowse(header);
+									if ((res >= 0)&&(res !=696969)){
+										alternatedoloffset = res;
+										char tmp[170];
+										snprintf(tmp,sizeof(tmp),"%s %s - %i",tr("It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team.") ,filename,alternatedoloffset);
+										WindowPrompt(0,tmp,tr("Ok"));
 									}
 								}
+							}
                         }
                         break;
                     case 10:
@@ -2281,6 +2284,7 @@ int GameSettings(struct discHdr * header) {
                 options2.SetName(2,"%s", tr("Delete Boxart"));
                 options2.SetName(3,"%s", tr("Delete Discart"));
                 options2.SetName(4,"%s", tr("Delete CheatTxt"));
+                options2.SetName(5,"%s", tr("Delete Cheat GCT"));
                 for (int i = 0; i <= MAXOPTIONS-1; i++) options2.SetValue(i, NULL);
                 w.Append(&optionBrowser2);
                 optionBrowser2.SetClickable(true);
@@ -2399,7 +2403,16 @@ int GameSettings(struct discHdr * header) {
                                 remove(tmp);
                         }
                         break;
+				    case 5:
 
+                        snprintf(tmp,sizeof(tmp),"%s%c%c%c%c%c%c.gct", Settings.Cheatcodespath, header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
+
+                        choice1 = WindowPrompt(tr("Delete"),tmp,tr("Yes"),tr("No"));
+                        if (choice1==1) {
+                            if (checkfile(tmp))
+                                remove(tmp);
+                        }
+                        break;
                     }
                 }
                 optionBrowser2.SetEffect(EFFECT_FADE, -20);
@@ -2428,7 +2441,7 @@ int GameSettings(struct discHdr * header) {
                         iosChoice = i249;
                     }
                     parentalcontrolChoice = 0;
-                    sprintf(alternatedname, " ");
+                    strcpy(alternatedname, "");
                     CFG_forget_game_opt(header->id);
 					/* commented because the database language now depends on the main language setting, this could be enabled again if there is a separate language setting for the database
                     // if default language is different than language from main settings, reload titles

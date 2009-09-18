@@ -68,9 +68,8 @@ int CheatMenu(const char * gameID) {
         WindowPrompt(tr("Error"),tr("Cheatfile is blank"),tr("OK"));
         break;
     case 0:
-        download = WindowPrompt(tr("Error"),tr("No Cheatfile found"),tr("OK"),tr("Download Now"));
-
-        if (download==0)
+        download = WindowPrompt(tr("Error"),tr("No Cheatfile found"),tr("Download Now"),tr("Cancel"));
+        if (download==1)
             download = CodeDownload(gameID);
         break;
     case 1:
@@ -128,13 +127,17 @@ int CheatMenu(const char * gameID) {
                             x++;
                         }
                     }
-                    subfoldercreate(Settings.Cheatcodespath);
-                    string chtpath = Settings.Cheatcodespath;
-                    string gctfname = chtpath + c.getGameID() + ".gct";
-                    c.createGCT(selectednrs,x,gctfname.c_str());
-                    WindowPrompt(tr("GCT File created"),NULL,tr("OK"));
-                    exit = true;
-                    break;
+					if (x == 0) {
+						WindowPrompt(tr("Error"),tr("No cheats were selected"),tr("OK"));
+					} else {
+						subfoldercreate(Settings.Cheatcodespath);
+						string chtpath = Settings.Cheatcodespath;
+						string gctfname = chtpath + c.getGameID() + ".gct";
+						c.createGCT(selectednrs,x,gctfname.c_str());
+						WindowPrompt(tr("GCT File created"),NULL,tr("OK"));
+						exit = true;
+						break;
+					}
                 } else WindowPrompt(tr("Error"),tr("Could not create GCT file"),tr("OK"));
             }
 

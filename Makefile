@@ -105,12 +105,12 @@ $(BUILD):
 
 #---------------------------------------------------------------------------------
 lang:
-	@[ -d $@ ] || mkdir -p $@
+	@[ -d build ] || mkdir -p build
 	@make --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile language
 
 #---------------------------------------------------------------------------------
 all:
-	@[ -d $@ ] || mkdir -p $@
+	@[ -d build ] || mkdir -p build
 	@make --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
 	@make --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile language
 

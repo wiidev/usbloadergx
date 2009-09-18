@@ -60,6 +60,10 @@ string GCTCheats::getCheatComment(int nr) {
 }
 
 int GCTCheats::createGCT(int nr,const char * filename) {
+
+	if (nr == 0)
+		return 0;
+
     ofstream filestr;
     filestr.open(filename);
 
@@ -91,6 +95,7 @@ int GCTCheats::createGCT(int nr,const char * filename) {
 }
 
 int GCTCheats::createGCT(const char * chtbuffer,const char * filename) {
+
     ofstream filestr;
     filestr.open(filename);
 
@@ -124,6 +129,9 @@ int GCTCheats::createGCT(const char * chtbuffer,const char * filename) {
 }
 
 int GCTCheats::createGCT(int nr[],int cnt,const char * filename) {
+
+	if (cnt == 0)
+		return 0;
 
     ofstream filestr;
     filestr.open(filename);

@@ -30,6 +30,7 @@
 #include "prompts/ProgressWindow.h"
 #include "prompts/TitleBrowser.h"
 #include "prompts/gameinfo.h"
+#include "prompts/DiscBrowser.h"
 #include "mload/mload.h"
 #include "patches/patchcode.h"
 #include "network/networkops.h"
@@ -72,6 +73,7 @@ static lwp_t guithread = LWP_THREAD_NULL;
 static bool guiHalt = true;
 static int ExitRequested = 0;
 static char gameregion[7];
+static bool altdoldefault = true;
 
 /*** Extern variables ***/
 extern FreeTypeGX *fontClock;
@@ -717,7 +719,7 @@ int MenuDiscList() {
 
         WDVD_GetCoverStatus(&covert);//for detecting if i disc has been inserted
 
-        // if the idiot is showing favoorites and don't have any
+        // if the idiot is showing favorites and don't have any
         if (Settings.fave && !gameCnt) {
             WindowPrompt(tr("No Favorites"),tr("You are choosing to display favorites and you do not have any selected."),tr("Back"));
             Settings.fave=!Settings.fave;
@@ -1214,8 +1216,8 @@ int MenuDiscList() {
             snprintf (IDfull,sizeof(IDfull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
             struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
             if (game_cfg) {
-                ocarinaChoice = game_cfg->ocarina;
                 alternatedol = game_cfg->loadalternatedol;
+                ocarinaChoice = game_cfg->ocarina;
             } else {
                 alternatedol = off;
                 ocarinaChoice = Settings.ocarina;
@@ -1230,17 +1232,17 @@ int MenuDiscList() {
                     if (exeFile==NULL) {
                         sprintf(nipple, "%s %s",nipple,tr("does not exist!"));
                         WindowPrompt(tr("Error"),nipple,tr("OK"));
-
                         menu = MENU_CHECK;
                         wiilight(0);
                         break;
-                    }
+                    } else {
+                        fclose(exeFile);
+					}
                 }
                 if (ocarinaChoice != off) {
                     /* Open gct File and check exist */
                     sprintf(nipple, "%s%s.gct",Settings.Cheatcodespath,IDfull);
                     exeFile = fopen (nipple ,"rb");
-
                     if (exeFile==NULL) {
                         sprintf(nipple, "%s %s",nipple,tr("does not exist!  Loading game without cheats."));
                         WindowPrompt(tr("Error"),nipple,NULL,NULL,NULL,NULL,170);
@@ -1248,6 +1250,7 @@ int MenuDiscList() {
                         fseek (exeFile, 0, SEEK_END);
                         long size=ftell (exeFile);
                         rewind (exeFile);
+                        fclose(exeFile);
                         if (size>2056) {
                             sprintf(nipple, "%s %s",nipple,tr("contains over 255 lines of code.  It will produce unexpected results."));
                             WindowPrompt(tr("Error"),nipple,NULL,NULL,NULL,NULL,170);
@@ -1272,7 +1275,6 @@ int MenuDiscList() {
 
                     CFG_save_game_num(header->id);
                 }
-				SDCard_deInit();
                 menu = MENU_EXIT;
                 break;
 
@@ -1292,11 +1294,12 @@ int MenuDiscList() {
                         if (exeFile==NULL) {
                             sprintf(nipple, "%s %s",nipple,tr("does not exist!  You Messed something up, Idiot."));
                             WindowPrompt(tr("Error"),nipple,tr("OK"));
-
                             menu = MENU_CHECK;
                             wiilight(0);
                             break;
-                        }
+                        } else {
+							fclose(exeFile);
+						}
                     }
                     if (ocarinaChoice != off) {
                         /* Open gct File and check exist */
@@ -1317,11 +1320,9 @@ int MenuDiscList() {
                         }
 
                     }
-                    SDCard_deInit();
                     wiilight(0);
                     returnHere = false;
                     menu = MENU_EXIT;
-
 
                 } else if (choice == 2) {
                     wiilight(0);
@@ -1398,18 +1399,52 @@ int MenuDiscList() {
         covertOld=covert;
     }
 
-    HaltGui();
-    mainWindow->RemoveAll();
-    mainWindow->Append(bgImg);
-    delete gameBrowser;
-    gameBrowser = NULL;
-    delete gameGrid;
-    gameGrid = NULL;
-    delete gameCarousel;
-    gameCarousel = NULL;
-    ResumeGui();
+	// set alt dol default
+	if (menu == MENU_EXIT && altdoldefault) {
+		struct discHdr *header = &gameList[gameSelected];
+		struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
+		// use default only if no alt dol was selected manually
+		if (game_cfg) {
+			if (game_cfg->alternatedolstart != 0)
+				altdoldefault = false;
+		} 
+		if (altdoldefault) {
+			int autodol = autoSelectDol((char*)header->id);
+			if (autodol>0) {
+				alternatedol = 2;
+				alternatedoloffset = autodol;
+				char temp[20];
+				sprintf(temp,"%d",autodol);
+			} else {
+				// alt dol menu for games that require more than a single alt dol
+				int autodol = autoSelectDolMenu((char*)header->id);
+				if (autodol>0) {
+					alternatedol = 2;
+					alternatedoloffset = autodol;
+				} else if (autodol == 0) { // if Cancel or B is pressed, don't launch game
+					menu = MENU_DISCLIST;
+				}
+			}
+		}
+	}
+	
+	if (menu == MENU_EXIT) {
+		SDCard_deInit();
+	}
+	
+	HaltGui();
+	mainWindow->RemoveAll();
+	mainWindow->Append(bgImg);
+	delete gameBrowser;
+	gameBrowser = NULL;
+	delete gameGrid;
+	gameGrid = NULL;
+	delete gameCarousel;
+	gameCarousel = NULL;
+	ResumeGui();
     return menu;
 }
+
 
 
 /****************************************************************************
@@ -1877,7 +1912,7 @@ int MainMenu(int menu) {
             break;
         }
     }
-
+		
     CloseXMLDatabase();
     ExitGUIThreads();
     bgMusic->Stop();
@@ -1891,8 +1926,7 @@ int MainMenu(int menu) {
     delete GameIDTxt;
     delete cover;
     delete coverImg;
-
-    ShutdownAudio();
+	ShutdownAudio();
     StopGX();
 
     if (boothomebrew == 1) {
@@ -1914,8 +1948,10 @@ int MainMenu(int menu) {
             fix002 = game_cfg->errorfix002;
             iosChoice = game_cfg->ios;
             countrystrings = game_cfg->patchcountrystrings;
-            alternatedol = game_cfg->loadalternatedol;
-            alternatedoloffset = game_cfg->alternatedolstart;
+			if (!altdoldefault) {
+				alternatedol = game_cfg->loadalternatedol;
+				alternatedoloffset = game_cfg->alternatedolstart;
+			}			
             reloadblock = game_cfg->iosreloadblock;
         } else {
             videoChoice = Settings.video;
@@ -1929,8 +1965,10 @@ int MainMenu(int menu) {
             }
             fix002 = Settings.error002;
             countrystrings = Settings.patchcountrystrings;
-            alternatedol = off;
-            alternatedoloffset = 0;
+			if (!altdoldefault) {
+				alternatedol = off;
+				alternatedoloffset = 0;
+			}
             reloadblock = off;
         }
         int ios2;

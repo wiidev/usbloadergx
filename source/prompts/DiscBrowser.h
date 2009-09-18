@@ -10,5 +10,6 @@
 
 int DiscBrowse(struct discHdr * header);
 int autoSelectDol(const char *id);
+int autoSelectDolMenu(const char *id);
 
 #endif

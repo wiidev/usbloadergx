@@ -205,11 +205,11 @@ int DiscBrowse(struct discHdr * header) {
 
         if (ret > 0) {
             char temp[100];
-            strncpy(temp, fstfiles(fst, ret), sizeof(temp));
+            strlcpy(temp, fstfiles(fst, ret), sizeof(temp));
             choice = WindowPrompt(temp, tr("Load this dol as alternate dol?"), tr("OK"), tr("Cancel"));
             if (choice) {
                 //ret = offsetselect[ret];
-                snprintf(alternatedname, sizeof(alternatedname), "%s",  temp);
+                strlcpy(alternatedname, temp, sizeof(alternatedname));
 				exit = true;
             }
         }
@@ -232,7 +232,6 @@ int DiscBrowse(struct discHdr * header) {
 
 
 int autoSelectDol(const char *id) {
-    //still not done//
     //////////ID6/////////////////
 
 	//Boogie 
@@ -270,38 +269,6 @@ int autoSelectDol(const char *id) {
 	
 	//Metal Slug Anthology
     if (strcmp(id,"RMLP7U") == 0) return 56;//from isostar
-
-	//Metroid Prime Trilogy
-	if (strcmp(id,"R3ME01") == 0) {
-		int choice = WindowPrompt(tr("Select a DOL"), 0, "Metroid Prime", "Metroid Prime 2", "Metroid Prime 3");
-        switch (choice) {
-            case 1:
-				choice = 780;
-                break;
-            case 2:
-				choice = 781;
-                break;
-            default:
-				choice = 782;
-                break;
-		}
-		return choice;
-	}
-	if (strcmp(id,"R3MP01") == 0) {
-		int choice = WindowPrompt(tr("Select a DOL"), 0, "Metroid Prime", "Metroid Prime 2", "Metroid Prime 3");
-        switch (choice) {
-            case 1:
-				choice = 782;
-				break;
-            case 2:
-				choice = 783;
-				break;
-            default:
-				choice = 784;
-				break;
-		}
-		return choice;
-	}
 
 	//Mortal Kombat
     if (strcmp(id,"RKMP5D") == 0) return 290;//from isostar
@@ -342,3 +309,41 @@ int autoSelectDol(const char *id) {
     return -1;
 }
 
+int autoSelectDolMenu(const char *id) {
+
+	//Metroid Prime Trilogy
+	if (strcmp(id,"R3ME01") == 0) {
+		int choice = WindowPrompt(tr("Select a DOL"), 0, "Metroid Prime", "Metroid Prime 2", "Metroid Prime 3", tr("Cancel"));
+        switch (choice) {
+            case 1:
+				choice = 780;
+                break;
+            case 2:
+				choice = 781;
+                break;
+			case 3:
+				choice = 782;
+            default: // 0
+                break;
+		}
+		return choice;
+	}
+	if (strcmp(id,"R3MP01") == 0) {
+		int choice = WindowPrompt(tr("Select a DOL"), 0, "Metroid Prime", "Metroid Prime 2", "Metroid Prime 3", tr("Cancel"));
+        switch (choice) {
+            case 1:
+				choice = 782;
+				break;
+            case 2:
+				choice = 783;
+				break;
+			case 3:
+				choice = 784;
+            default: // 0
+				break;
+		}
+		return choice;
+	}
+	
+    return -1;
+}
