@@ -233,7 +233,7 @@ int DiscBrowse(struct discHdr * header) {
 
 int autoSelectDol(const char *id, bool force) {
 
-// games that always need alt dol, can be forced
+	// games that can be forced (always need alt dol)
 
 	//Boogie 
     if (strcmp(id,"RBOP69") == 0) return 657;//from isostar
@@ -253,6 +253,11 @@ int autoSelectDol(const char *id, bool force) {
 	
 	//Madden NFL08
     if (strcmp(id,"RNFP69") == 0) return 1079;//from isostar
+	
+	//Medal of Honor: Heroes 2
+	if (strcmp(id,"RM2X69") == 0)return 601;//dj_skual
+	if (strcmp(id,"RM2P69") == 0)return 517;//MZottel
+	if (strcmp(id,"RM2E69") == 0) return 492;//Old8oy	
 	
 	//Mortal Kombat
     if (strcmp(id,"RKMP5D") == 0) return 290;//from isostar
@@ -281,7 +286,7 @@ int autoSelectDol(const char *id, bool force) {
     if (strcmp(id,"RVUE8P") == 0) return 16405;//from isostar
 	
 	
-	// for games that can't be forced, when the alt dol is not always needed
+	// games that can't be forced (alt dol is not always needed)
 	if (!force) {
 	
 		//Indiana Jones and the Staff of Kings (Fate of Atlantis)
@@ -292,11 +297,6 @@ int autoSelectDol(const char *id, bool force) {
 		if (strcmp(id,"RMZX69") == 0) return 492;//from isostar
 		if (strcmp(id,"RMZP69") == 0) return 492;//from isostar
 		if (strcmp(id,"RMZE69") == 0) return 492;//starstremr 
-
-		//Medal of Honor: Heroes 2
-		if (strcmp(id,"RM2X69") == 0)return 601;//dj_skual
-		if (strcmp(id,"RM2P69") == 0)return 517;//MZottel
-		if (strcmp(id,"RM2E69") == 0) return 492;//Old8oy	
 		
 		//Metal Slug Anthology
 		if (strcmp(id,"RMLP7U") == 0) return 56;//from isostar
@@ -317,7 +317,7 @@ int autoSelectDolMenu(const char *id) {
 
 	//Metroid Prime Trilogy
 	if (strcmp(id,"R3ME01") == 0) {
-		int choice = WindowPrompt(tr("Select a DOL"), 0, "Metroid Prime", "Metroid Prime 2", "Metroid Prime 3", tr("Cancel"));
+		int choice = WindowPrompt(tr("Select a DOL"), 0, "Metroid Prime", "Metroid Prime 2", "Metroid Prime 3", tr("Default"));
         switch (choice) {
             case 1:
 				choice = 780;
@@ -327,13 +327,14 @@ int autoSelectDolMenu(const char *id) {
                 break;
 			case 3:
 				choice = 782;
-            default: // 0
+            default: // no alt dol
+				choice = -1;
                 break;
 		}
 		return choice;
 	}
 	if (strcmp(id,"R3MP01") == 0) {
-		int choice = WindowPrompt(tr("Select a DOL"), 0, "Metroid Prime", "Metroid Prime 2", "Metroid Prime 3", tr("Cancel"));
+		int choice = WindowPrompt(tr("Select a DOL"), 0, "Metroid Prime", "Metroid Prime 2", "Metroid Prime 3", tr("Default"));
         switch (choice) {
             case 1:
 				choice = 782;
@@ -343,7 +344,8 @@ int autoSelectDolMenu(const char *id) {
 				break;
 			case 3:
 				choice = 784;
-            default: // 0
+            default: // no alt dol
+				choice = -1;
 				break;
 		}
 		return choice;
