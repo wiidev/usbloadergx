@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-15 05:43+0200\n"
+"POT-Creation-Date: 2009-09-18 14:03+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) \n"
 "Language-Team: r719 - last version on http://volny.cz/djelinek/_USBLoderGX/czech.lang \n"
@@ -275,6 +275,9 @@ msgstr "Nelze otevrít disk"
 msgid "Could not read the disc."
 msgstr "Nelze císt disk"
 
+msgid "Could not save."
+msgstr ""
+
 msgid "Could not set USB."
 msgstr "Nelze nastavit USB"
 
@@ -322,6 +325,9 @@ msgstr "Smazat?"
 
 msgid "Delete Boxart"
 msgstr "Smazat obal krabicky"
+
+msgid "Delete Cheat GCT"
+msgstr ""
 
 msgid "Delete CheatTxt"
 msgstr "Smazat CheatTxt"
@@ -716,6 +722,9 @@ msgstr "Nebylo nalezeno zarízení USB"
 msgid "No WBFS partition found"
 msgstr "Nebyl nalezen oddíl WBFS"
 
+msgid "No cheats were selected"
+msgstr ""
+
 msgid "No data could be read."
 msgstr "Nelze císt data?"
 
@@ -880,6 +889,12 @@ msgstr "Uložit"
 
 msgid "Save Failed"
 msgstr "Uložení selhalo"
+
+msgid "Save Game List to"
+msgstr ""
+
+msgid "Saved"
+msgstr ""
 
 msgid "Screensaver"
 msgstr "Sporic obrazovky"
@@ -1175,4 +1190,3 @@ msgstr "z "
 
 msgid "seconds left"
 msgstr "sekund zbývá"
-

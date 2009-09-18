@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-15 05:43+0200\n"
+"POT-Creation-Date: 2009-09-18 17:02+0200\n"
 "PO-Revision-Date: 2009-08-05 10:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe & Cambo\n"
@@ -275,6 +275,9 @@ msgstr "Non posso accedere al disco."
 msgid "Could not read the disc."
 msgstr "Non posso leggere il disco."
 
+msgid "Could not save."
+msgstr ""
+
 msgid "Could not set USB."
 msgstr "Non posso impostare la porta USB."
 
@@ -322,6 +325,9 @@ msgstr "Vuoi eliminare ?"
 
 msgid "Delete Boxart"
 msgstr "Elimina la copertina"
+
+msgid "Delete Cheat GCT"
+msgstr ""
 
 msgid "Delete CheatTxt"
 msgstr "Elimina il file dei trucchi"
@@ -716,6 +722,9 @@ msgstr "Nessun Dispositivo USB trovato."
 msgid "No WBFS partition found"
 msgstr "Nessuna partizione WBFS trovata"
 
+msgid "No cheats were selected"
+msgstr ""
+
 msgid "No data could be read."
 msgstr "Non è stato possibile leggere alcun dato."
 
@@ -880,6 +889,12 @@ msgstr "Salva"
 
 msgid "Save Failed"
 msgstr "Salvataggio Fallito"
+
+msgid "Save Game List to"
+msgstr ""
+
+msgid "Saved"
+msgstr ""
 
 msgid "Screensaver"
 msgstr "Salvaschermo"

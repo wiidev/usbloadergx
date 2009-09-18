@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-15 05:43+0200\n"
+"POT-Creation-Date: 2009-09-18 14:03+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: tj_cool\n"
 "Language-Team: \n"
@@ -275,6 +275,9 @@ msgstr "Kan DVD niet openen"
 msgid "Could not read the disc."
 msgstr "Kan DVD niet lezen"
 
+msgid "Could not save."
+msgstr ""
+
 msgid "Could not set USB."
 msgstr "Kan USB niet instellen"
 
@@ -322,6 +325,9 @@ msgstr "Verwijderen?"
 
 msgid "Delete Boxart"
 msgstr "Hoesjes verwijderen"
+
+msgid "Delete Cheat GCT"
+msgstr ""
 
 msgid "Delete CheatTxt"
 msgstr "Txtcodes verwijderen"
@@ -716,6 +722,9 @@ msgstr "Geen USB apparaat gevonden."
 msgid "No WBFS partition found"
 msgstr "Geen WBFS partitie gevonden"
 
+msgid "No cheats were selected"
+msgstr ""
+
 msgid "No data could be read."
 msgstr "Geen data kon gelezen worden."
 
@@ -880,6 +889,12 @@ msgstr "Opslaan"
 
 msgid "Save Failed"
 msgstr "Opslaan mislukt"
+
+msgid "Save Game List to"
+msgstr ""
+
+msgid "Saved"
+msgstr ""
 
 msgid "Screensaver"
 msgstr "Schermbeveiliging"

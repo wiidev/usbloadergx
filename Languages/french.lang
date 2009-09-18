@@ -1,14 +1,14 @@
 # USB Loader GX language source file.
-# French V9.6 r728
+# French V9.7 r737
 # don't delete this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-15 05:43+0200\n"
+"POT-Creation-Date: 2009-09-18 14:03+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: Kin8\n"
-"Language-Team: Badablek, Amour, ikya, OuahOuah, dj_skual & Kin8\n"
+"Language-Team: Badablek, Amour, ikya, dj_skual & Kin8\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -197,7 +197,7 @@ msgid "Cheatcodes Path changed"
 msgstr "Dossier codes de triche modifié"
 
 msgid "Cheatfile is blank"
-msgstr "Fichier Triche vide"
+msgstr "Fichier de triche vide"
 
 msgid "Checking existing artwork"
 msgstr "Contrôle images existantes"
@@ -275,6 +275,9 @@ msgstr "Accès impossible au DVD."
 msgid "Could not read the disc."
 msgstr "Lecture impossible du DVD."
 
+msgid "Could not save."
+msgstr "Sauvegarde impossible"
+
 msgid "Could not set USB."
 msgstr "Accès USB impossible."
 
@@ -322,6 +325,9 @@ msgstr "Supprimer ?"
 
 msgid "Delete Boxart"
 msgstr "Supprimer la Jaquette"
+
+msgid "Delete Cheat GCT"
+msgstr "Supprimer GCT de Triche"
 
 msgid "Delete CheatTxt"
 msgstr "Supprimer TXT de Triche"
@@ -699,7 +705,7 @@ msgid "No .dol or .elf files found."
 msgstr "Aucun fichier .dol ou .elf trouvé."
 
 msgid "No Cheatfile found"
-msgstr "Aucun Fichier Triche trouvé"
+msgstr "Aucun fichier de triche trouvé"
 
 msgid "No Favorites"
 msgstr "Pas de favoris"
@@ -715,6 +721,9 @@ msgstr "Aucun périphérique USB trouvé."
 
 msgid "No WBFS partition found"
 msgstr "Aucune partition WBFS trouvée"
+
+msgid "No cheats were selected"
+msgstr "Aucune selection de triche"
 
 msgid "No data could be read."
 msgstr "Lecture des données impossible."
@@ -880,6 +889,12 @@ msgstr "Enregistrer"
 
 msgid "Save Failed"
 msgstr "Échec de sauvegarde"
+
+msgid "Save Game List to"
+msgstr "Sauvegarder la liste des jeux sous"
+
+msgid "Saved"
+msgstr "Sauvegardé"
 
 msgid "Screensaver"
 msgstr "Économiseur d'écran"

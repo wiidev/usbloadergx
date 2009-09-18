@@ -5,49 +5,49 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-15 05:43+0200\n"
+"POT-Creation-Date: 2009-09-18 17:02+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
-"Last-Translator: \n"
+"Last-Translator: c64rmx\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid " Wad Saved as:"
-msgstr ""
+msgstr "Wad Tallennettu nimellä:"
 
 msgid " could not be downloaded."
-msgstr ""
+msgstr "Latausta ei voitu suorittaa"
 
 msgid " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information."
 msgstr ""
 
 msgid " is not on the server."
-msgstr ""
+msgstr "Tiedostoa ei löydy serveriltä"
 
 msgid "(both retired)"
 msgstr ""
 
 msgid "0 (Everyone)"
-msgstr ""
+msgstr "0 (Kaikille)"
 
 msgid "1 (Child 7+)"
-msgstr ""
+msgstr "1 (Lapset 7+)"
 
 msgid "1 hour"
-msgstr ""
+msgstr " 1 tunti"
 
 msgid "10 min"
 msgstr ""
 
 msgid "2 (Teen 12+)"
-msgstr ""
+msgstr "2 (Teinit 12+)"
 
 msgid "20 min"
 msgstr ""
 
 msgid "3 (Mature 16+)"
-msgstr ""
+msgstr "3 (Teinit 16+)"
 
 msgid "3 min"
 msgstr ""
@@ -56,10 +56,10 @@ msgid "30 min"
 msgstr ""
 
 msgid "3D Covers"
-msgstr ""
+msgstr "3D Kannet"
 
 msgid "4 (Adults Only 18+)"
-msgstr ""
+msgstr "4 (K18)"
 
 msgid "5 min"
 msgstr ""
@@ -119,10 +119,10 @@ msgid "All the features of USB Loader GX are unlocked."
 msgstr "Kaikki asetukset on nyt käytettävissä."
 
 msgid "Alternate DOL"
-msgstr ""
+msgstr "Vaihtoehto DOL"
 
 msgid "An Error occured"
-msgstr ""
+msgstr "Tapahtui virhe"
 
 msgid "Anti"
 msgstr ""
@@ -131,13 +131,13 @@ msgid "App Language"
 msgstr "Ohjelman kieli"
 
 msgid "Apr"
-msgstr ""
+msgstr "huhti"
 
 msgid "Are you sure?"
 msgstr "Oletko varma?"
 
 msgid "Aug"
-msgstr ""
+msgstr "elo"
 
 msgid "AutoInit Network"
 msgstr ""
@@ -158,25 +158,25 @@ msgid "Back to Wii Menu"
 msgstr "Takaisin Wii Menuun"
 
 msgid "Backgroundmusic"
-msgstr ""
+msgstr "Taustamusiikki"
 
 msgid "Backgroundmusic Path changed."
-msgstr ""
+msgstr "Taustamusiikin polku muutettu"
 
 msgid "Big thanks to:"
-msgstr ""
+msgstr "Isot kiitokset:"
 
 msgid "Block IOS Reload"
-msgstr ""
+msgstr "Blokkaa IOS:in uudelleenlataus"
 
 msgid "Boot/Standard"
 msgstr "Käynnistys/Standardi"
 
 msgid "Boot?"
-msgstr ""
+msgstr "Boottaa?"
 
 msgid "Both"
-msgstr ""
+msgstr "Molemmat"
 
 msgid "Can't be formatted"
 msgstr "Ei voida formatoida"
@@ -191,47 +191,47 @@ msgid "Cancel"
 msgstr "Peruuta"
 
 msgid "Cheatcodes Path"
-msgstr ""
+msgstr "Koodien polku"
 
 msgid "Cheatcodes Path changed"
-msgstr ""
+msgstr "Koodien polku muutettu"
 
 msgid "Cheatfile is blank"
-msgstr ""
+msgstr "Kooditiedosto tyhjä"
 
 msgid "Checking existing artwork"
 msgstr ""
 
 msgid "Checking for Updates"
-msgstr ""
+msgstr "Tarkastetaan päivityksiä"
 
 msgid "Click to Download Covers"
 msgstr "Klikkaa ladataksesi kansia"
 
 msgid "Click to change game ID"
-msgstr ""
+msgstr "Klikkaa vaihtaaksesi pelin ID"
 
 msgid "Clock"
 msgstr "Kello"
 
 msgid "Close"
-msgstr ""
+msgstr "Sulje"
 
 msgid "Code Download"
-msgstr ""
+msgstr "Koodin lataus"
 
 #, c-format
 msgid "Coded by: %s"
-msgstr ""
+msgstr "Koodaus: %s"
 
 msgid "Coding:"
-msgstr ""
+msgstr "Koodaus"
 
 msgid "Confirm"
-msgstr ""
+msgstr "Varmista"
 
 msgid "Console"
-msgstr ""
+msgstr "Konsoli"
 
 msgid "Console Default"
 msgstr "Konsolin oletus"
@@ -246,16 +246,16 @@ msgid "Continue to install game?"
 msgstr "Jatka pelin asennusta?"
 
 msgid "Controllevel"
-msgstr ""
+msgstr "Hallinta-aste"
 
 msgid "Correct Password"
 msgstr "Oikea salasana"
 
 msgid "Could not create GCT file"
-msgstr ""
+msgstr "GCT tiedostoa ei voitu luoda"
 
 msgid "Could not find a WBFS partition."
-msgstr ""
+msgstr "WBFS osiota ei löytynyt."
 
 msgid "Could not initialize DIP module!"
 msgstr "DIP Moduulia ei voitu alustaa!"
@@ -267,31 +267,34 @@ msgid "Could not open Disc"
 msgstr "Levyä ei voitu lukea"
 
 msgid "Could not open WBFS partition"
-msgstr ""
+msgstr "WBFS osiota ei voitu avata"
 
 msgid "Could not open disc."
-msgstr ""
+msgstr "Levyä ei voitu avata"
 
 msgid "Could not read the disc."
+msgstr "Levyä ei voitu lukea"
+
+msgid "Could not save."
 msgstr ""
 
 msgid "Could not set USB."
 msgstr ""
 
 msgid "Cover Download"
-msgstr "kansien lataus"
+msgstr "Kansien lataus"
 
 msgid "Cover Path"
-msgstr "kansien sijainti"
+msgstr "Kansien polku"
 
 msgid "Coverpath Change"
-msgstr ""
+msgstr "Kansipolun vaihto"
 
 msgid "Coverpath Changed"
-msgstr "kansien sijainti muutettu"
+msgstr "Kansien polku muutettu"
 
 msgid "Create"
-msgstr ""
+msgstr "Luo"
 
 msgid "Credits"
 msgstr "Tekijät"
@@ -303,37 +306,40 @@ msgid "Customs/Original"
 msgstr ""
 
 msgid "Dec"
-msgstr ""
+msgstr "joulu"
 
 msgid "Default"
 msgstr ""
 
 msgid "Default Gamesettings"
-msgstr ""
+msgstr "Yleiset peliasetukset"
 
 msgid "Default Settings"
-msgstr ""
+msgstr "Yleiset asetukset"
 
 msgid "Delete"
-msgstr ""
+msgstr "Tuhoa"
 
 msgid "Delete ?"
-msgstr ""
+msgstr "Tuhoa ?"
 
 msgid "Delete Boxart"
+msgstr "Tuhoa kannet"
+
+msgid "Delete Cheat GCT"
 msgstr ""
 
 msgid "Delete CheatTxt"
-msgstr ""
+msgstr "Tuhoa CheatTxt"
 
 msgid "Delete Discart"
-msgstr ""
+msgstr "Tuhoa levykuvat"
 
 msgid "Design:"
-msgstr ""
+msgstr "Suunnittelu"
 
 msgid "Developed by"
-msgstr ""
+msgstr "Kehitys"
 
 msgid "Disc Default"
 msgstr "Levy oletus"
@@ -342,16 +348,16 @@ msgid "Disc Images"
 msgstr "Levykuvat"
 
 msgid "Discimage Path"
-msgstr "Levykuvien sijainti"
+msgstr "Levykuvien polku"
 
 msgid "Discimages Download"
-msgstr ""
+msgstr "Levykuvien"
 
 msgid "Discpath Changed"
-msgstr "Levykuvien sijainti muutettu"
+msgstr "Levykuvien polku muutettu"
 
 msgid "Discpath change"
-msgstr "Levykuvien sijainti"
+msgstr "Levykuvien polku"
 
 msgid "DiskFlip"
 msgstr ""
@@ -360,22 +366,22 @@ msgid "Display"
 msgstr "Näyttö"
 
 msgid "Display as a carousel"
-msgstr ""
+msgstr "Näytä karusellina"
 
 msgid "Display as a grid"
-msgstr ""
+msgstr "Näytä taulukkona"
 
 msgid "Display as a list"
-msgstr ""
+msgstr "Näytä listana"
 
 msgid "Display favorites"
-msgstr ""
+msgstr "Näytä suosikit"
 
 msgid "Do you really want to delete:"
 msgstr "Haluatko varmasti formatoida:"
 
 msgid "Do you want to change language?"
-msgstr ""
+msgstr "Haluatko vaihtaa kielen?"
 
 msgid "Do you want to format:"
 msgstr "Haluatko formatoida:"
@@ -384,37 +390,37 @@ msgid "Do you want to retry for 30 secs?"
 msgstr "Haluatko odottaa 30 sekuntia?"
 
 msgid "Do you want to use the alt dol that is known to be correct?"
-msgstr ""
+msgstr "Haluatko käyttää vaihtoehtoista dol tiedostoa jonka tiedetään toimivan?"
 
 msgid "Do you wish to update/download all language files?"
-msgstr ""
+msgstr "Haluatko päivittää/ladata kaikki kielitiedostot?"
 
 msgid "Dol Path"
-msgstr ""
+msgstr "Dol:in polku"
 
 msgid "Dolpath Changed"
-msgstr ""
+msgstr "Dol:in polku muutettu"
 
 msgid "Dolpath change"
-msgstr ""
+msgstr "Dol:in polun muutto"
 
 msgid "Done!"
-msgstr ""
+msgstr "Valmis!"
 
 msgid "Download Boxart image?"
 msgstr "Lataa kansikuva?"
 
 msgid "Download Discart image?"
-msgstr ""
+msgstr "Lataa levykuva?"
 
 msgid "Download Now"
-msgstr ""
+msgstr "Lataa nyt"
 
 msgid "Download finished"
 msgstr "Lataus valmistunut"
 
 msgid "Downloading"
-msgstr ""
+msgstr "Lataa"
 
 msgid "Downloading file"
 msgstr "Lataa tiedostoa:"
@@ -423,34 +429,34 @@ msgid "Dutch"
 msgstr "Hollanti"
 
 msgid "ERROR"
-msgstr ""
+msgstr "VIRHE"
 
 msgid "ERROR:"
-msgstr ""
+msgstr "VIRHE:"
 
 msgid "English"
 msgstr "Englanti"
 
 msgid "Error"
-msgstr ""
+msgstr "Virhe"
 
 msgid "Error !"
 msgstr "Virhe !"
 
 msgid "Error 002 fix"
-msgstr ""
+msgstr "Virhe 002 fix"
 
 msgid "Error reading Disc"
 msgstr "Virhe luettaessa levyä"
 
 msgid "Error while transfering data."
-msgstr ""
+msgstr "Virhe siirrettäessä dataa."
 
 msgid "Error..."
-msgstr ""
+msgstr "Virhe..."
 
 msgid "Error:"
-msgstr ""
+msgstr "Virhe:"
 
 msgid "Exit USB Loader GX?"
 msgstr "Poistu USB Loader GX:stä?"
@@ -459,16 +465,16 @@ msgid "Failed formating"
 msgstr "Formatointi ei onnistunut"
 
 msgid "Failed to open partition"
-msgstr ""
+msgstr "Osion avaus epäonnistui"
 
 msgid "Feb"
-msgstr ""
+msgstr "helmi"
 
 msgid "File not found."
-msgstr ""
+msgstr "Tiedostoa ei löytynyt"
 
 msgid "Finishing installation... Ok!"
-msgstr ""
+msgstr "Viimeistelee asennusta... Ok!"
 
 msgid "Flip-X"
 msgstr "käännä-X"
@@ -492,10 +498,10 @@ msgid "Full Shutdown"
 msgstr "Täysi sammutus"
 
 msgid "GCT File created"
-msgstr ""
+msgstr "Gct Tiedosto luotu"
 
 msgid "GUI Settings"
-msgstr ""
+msgstr "GUI asetukset"
 
 msgid "Game ID"
 msgstr "Peli ID"
@@ -504,7 +510,7 @@ msgid "Game Language"
 msgstr "Kieli"
 
 msgid "Game Load"
-msgstr ""
+msgstr "Pelin lataus"
 
 msgid "Game Region"
 msgstr "Alue"
@@ -540,7 +546,7 @@ msgid "Homebrew Launcher"
 msgstr ""
 
 msgid "Hour"
-msgstr ""
+msgstr "Tunti"
 
 msgid "How do you want to update?"
 msgstr ""
@@ -549,7 +555,7 @@ msgid "How to Shutdown?"
 msgstr "Miten sammutetaan?"
 
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
-msgstr ""
+msgstr "Jos sinulla ei ole WiFi:ä, paina 1 saadaksesi URL josta voi ladata WiiTDB.zip"
 
 #, c-format
 msgid "Incoming file %0.2fKB"
@@ -575,10 +581,10 @@ msgid "Insert an SD-Card to save."
 msgstr "Aseta SD-kortti tallentaaksesi asetuksia."
 
 msgid "Insert an SD-Card to use this option."
-msgstr ""
+msgstr "Aseta SD-kortti käyttääksesi tätä vaihtoehtoa"
 
 msgid "Install"
-msgstr ""
+msgstr "Asenna"
 
 msgid "Install Error!"
 msgstr "Asennusvirhe!"
@@ -587,7 +593,7 @@ msgid "Install a game"
 msgstr "Asenna peli"
 
 msgid "Installing content... Ok!"
-msgstr ""
+msgstr "Asennetaan sisältöä... Ok!"
 
 msgid "Installing game:"
 msgstr "Asentaa peliä:"
@@ -599,43 +605,43 @@ msgid "Installing title... Ok!"
 msgstr ""
 
 msgid "Installing wad"
-msgstr ""
+msgstr "Asennetaan wadia"
 
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
-msgstr ""
+msgstr "Näyttää että sinulla on tietoa joka on hyödyllistä meille. Ole ystävällinen ja välitä se kehitystiimille."
 
 msgid "Italian"
 msgstr "Italia"
 
 msgid "Jan"
-msgstr ""
+msgstr "tammi"
 
 msgid "Japanese"
 msgstr "Japani"
 
 msgid "July"
-msgstr ""
+msgstr "heinä"
 
 msgid "June"
-msgstr ""
+msgstr "kesä"
 
 msgid "Keep"
-msgstr ""
+msgstr "Pidä"
 
 msgid "Keyboard"
-msgstr ""
+msgstr "Näppäimistö"
 
 msgid "Korean"
 msgstr "Korea"
 
 msgid "Language change:"
-msgstr ""
+msgstr "Kielen vaihto"
 
 msgid "Languagefile"
-msgstr ""
+msgstr "Kielitiedosto"
 
 msgid "Languagepath changed."
-msgstr ""
+msgstr "Kielen polku vaihdettu"
 
 msgid "Left"
 msgstr "Vasen"
@@ -644,23 +650,23 @@ msgid "Like SysMenu"
 msgstr "Kuin wii-menu"
 
 msgid "Load"
-msgstr ""
+msgstr "Lataa"
 
 msgid "Load From SD/USB"
-msgstr ""
+msgstr "Lataa SD:ltä/USB:ltä"
 
 #, c-format
 msgid "Load file from: %s ?"
-msgstr ""
+msgstr "Lataa tiedosto: %s ?"
 
 msgid "Load this dol as alternate dol?"
-msgstr ""
+msgstr "Lataa tämä vaihtoehtoisesti tämä dol?"
 
 msgid "Loading standard language."
-msgstr ""
+msgstr "Ladataan standardia kieltä"
 
 msgid "Loading standard music."
-msgstr ""
+msgstr "Ladataan standardia musiikkia"
 
 msgid "Lock Console"
 msgstr "Lukitse konsoli"
@@ -669,16 +675,16 @@ msgid "Locked"
 msgstr ""
 
 msgid "Mar"
-msgstr ""
+msgstr "maalis"
 
 msgid "May"
-msgstr ""
+msgstr "touko"
 
 msgid "Missing files"
 msgstr "tiedostoa puuttuu"
 
 msgid "Most likely it has dimensions that are not evenly divisible by 4."
-msgstr ""
+msgstr "Todennäköisesti sisältää ulottuvuuksia jotka eivät ole jaollisia neljällä"
 
 msgid "Music Volume"
 msgstr "Voimakkuus"
@@ -696,13 +702,13 @@ msgid "No"
 msgstr "Ei"
 
 msgid "No .dol or .elf files found."
-msgstr ""
+msgstr ".dol tai .elf tiedostoja ei löydy"
 
 msgid "No Cheatfile found"
-msgstr ""
+msgstr "Kooditiedostoa ei löydy"
 
 msgid "No Favorites"
-msgstr ""
+msgstr "Ei suosikkeja"
 
 msgid "No SD-Card inserted!"
 msgstr "SD-korttia ei ole asetettu wiihin!"
@@ -716,17 +722,20 @@ msgstr "USB-laitetta ei löytynyt."
 msgid "No WBFS partition found"
 msgstr "Ei WBFS-osioita löytynyt"
 
-msgid "No data could be read."
+msgid "No cheats were selected"
 msgstr ""
 
+msgid "No data could be read."
+msgstr "Tietoa ei voitu lukea"
+
 msgid "No dol file found on disc."
-msgstr ""
+msgstr "Levyltä ei löydy dol tiedostoa"
 
 msgid "No file missing!"
 msgstr "Ei tiedostoja kadoksissa!"
 
 msgid "No new updates."
-msgstr ""
+msgstr "Ei uusia päivityksiä"
 
 msgid "Normal"
 msgstr "Normaali"
@@ -735,19 +744,19 @@ msgid "Normal Covers"
 msgstr "Normaalit kannet"
 
 msgid "Not Found"
-msgstr ""
+msgstr "Ei löytynyt"
 
 msgid "Not a Wii Disc"
 msgstr "Ei Wii-levy"
 
 msgid "Not a dol/elf file."
-msgstr ""
+msgstr "Tiedosto ei ole dol/elf."
 
 msgid "Not enough free memory"
-msgstr ""
+msgstr "Ei tarpeeksi muistia"
 
 msgid "Not enough free memory."
-msgstr ""
+msgstr "Ei tarpeeksi muistia."
 
 msgid "Not enough free space!"
 msgstr "Ei tarpeeksi tilaa!"
@@ -756,7 +765,7 @@ msgid "Not supported format!"
 msgstr ""
 
 msgid "Nov"
-msgstr ""
+msgstr "marras"
 
 msgid "OFF"
 msgstr "OFF"
@@ -768,31 +777,31 @@ msgid "ON"
 msgstr "ON"
 
 msgid "Oct"
-msgstr ""
+msgstr "loka"
 
 msgid "Official Site"
 msgstr "Virallinen sivusto"
 
 msgid "Ok"
-msgstr ""
+msgstr "Ok"
 
 msgid "Only Customs"
-msgstr ""
+msgstr "Vain Custom"
 
 msgid "Only Original"
-msgstr ""
+msgstr "Ainoastaan alkuperäinen"
 
 msgid "Only for Install"
-msgstr ""
+msgstr "Ainoastaan asennusta varten"
 
 msgid "Original/Customs"
-msgstr ""
+msgstr "Alkuperäinen/Custom"
 
 msgid "Parental Control"
 msgstr "Valvonta"
 
 msgid "Parental control"
-msgstr ""
+msgstr "Valvonta"
 
 msgid "Partition"
 msgstr "Osio"
@@ -807,16 +816,16 @@ msgid "Password has been changed"
 msgstr "Salasana on muutettu"
 
 msgid "Paste it into your browser to get your WiiTDB.zip."
-msgstr ""
+msgstr "Liitä se nettiselaimeesi saadaksesi WiiTDB.zip"
 
 msgid "Patch Country Strings"
 msgstr ""
 
 msgid "Pick from a list"
-msgstr ""
+msgstr "Valitse listasta"
 
 msgid "Play Count"
-msgstr ""
+msgstr "Pelauksen määrä"
 
 msgid "Power off the Wii"
 msgstr "Sammuta Wii"
@@ -828,19 +837,19 @@ msgid "Prompts Buttons"
 msgstr "Napit"
 
 msgid "Published by"
-msgstr ""
+msgstr "Julkaisu:"
 
 msgid "Quick Boot"
 msgstr "Pikakäynnistys"
 
 msgid "Reading WAD data... Ok!"
-msgstr ""
+msgstr "Luetaan WAD:ia... Ok!"
 
 msgid "Receiving file from:"
-msgstr ""
+msgstr "Ladataan tiedostoa:"
 
 msgid "Released"
-msgstr ""
+msgstr "Julkaistu"
 
 msgid "Reload SD"
 msgstr "Uudelleenlataa SD"
@@ -849,16 +858,16 @@ msgid "Rename Game on WBFS"
 msgstr "Uudelleennimeä peli"
 
 msgid "Reset Playcounter"
-msgstr ""
+msgstr "Resetoi pelauksen määrä"
 
 msgid "Restarting..."
-msgstr ""
+msgstr "Boottaa..."
 
 msgid "Return"
 msgstr "Palaa"
 
 msgid "Return to Wii Menu"
-msgstr ""
+msgstr "Palaa Wii menuun"
 
 msgid "Right"
 msgstr "Oikea"
@@ -870,10 +879,10 @@ msgid "SChinese"
 msgstr "SKiina"
 
 msgid "SD/USB selected"
-msgstr ""
+msgstr "SD/USB valittu"
 
 msgid "SFX Volume"
-msgstr ""
+msgstr "Ääniefektien voimakkuus"
 
 msgid "Save"
 msgstr "Tallenna"
@@ -881,20 +890,26 @@ msgstr "Tallenna"
 msgid "Save Failed"
 msgstr "Tallennus ei onnistunut"
 
-msgid "Screensaver"
+msgid "Save Game List to"
 msgstr ""
+
+msgid "Saved"
+msgstr ""
+
+msgid "Screensaver"
+msgstr "Näytönsäästäjä"
 
 msgid "Select a DOL"
-msgstr ""
+msgstr "Valitse DOL"
 
 msgid "Selected DOL"
-msgstr ""
+msgstr "Valittu DOL"
 
 msgid "Sept"
-msgstr ""
+msgstr "syys"
 
 msgid "Set as backgroundmusic?"
-msgstr ""
+msgstr "Aseta taustamusiikiksi?"
 
 msgid "Settings"
 msgstr "Asetukset"
@@ -906,13 +921,13 @@ msgid "Shutdown to Idle"
 msgstr "Valmiustila"
 
 msgid "Sort alphabetically"
-msgstr ""
+msgstr "Järjestä aakkosittain"
 
 msgid "Sort order by most played"
-msgstr ""
+msgstr "Aseta 'pelattu eniten' järjestykseen"
 
 msgid "Sound"
-msgstr ""
+msgstr "Ääni"
 
 msgid "Spanish"
 msgstr "Espanja"
@@ -921,10 +936,10 @@ msgid "Special thanks to:"
 msgstr "Erikoiskiitokset"
 
 msgid "Standard"
-msgstr ""
+msgstr "Standardi"
 
 msgid "Success"
-msgstr ""
+msgstr "Onnistui"
 
 msgid "Success:"
 msgstr "Onnistui:"
@@ -933,7 +948,7 @@ msgid "Successfully Saved"
 msgstr "Tallennettu onnistuneesti"
 
 msgid "Successfully Updated"
-msgstr ""
+msgstr "Päivitetty onnistuneesti"
 
 msgid "Successfully deleted:"
 msgstr "Poistettu onnistuneesti:"
@@ -948,20 +963,20 @@ msgid "TChinese"
 msgstr "TKiina"
 
 msgid "TXTCheatcodes Path"
-msgstr ""
+msgstr "TXTkoodien polku"
 
 msgid "TXTCheatcodes Path changed"
-msgstr ""
+msgstr "TXTkoodien polku muutettu"
 
 msgid "The file is not a .wad"
-msgstr ""
+msgstr "Tiedosto ei ole .wad"
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."
-msgstr ""
+msgstr "Wad tiedostoa ei asennettu mutta sitä ei voitu tuhota SD-kortilta"
 
 #, c-format
 msgid "The wad installation failed with error %ld"
-msgstr ""
+msgstr "Wad asennus epäonnistui: %ld"
 
 msgid "ThemePath"
 msgstr "Teeman sijainti"
@@ -976,10 +991,10 @@ msgid "Time left:"
 msgstr "Aikaa jäljellä:"
 
 msgid "Title Launcher"
-msgstr ""
+msgstr "Nimilaukaisin"
 
 msgid "Titles from XML"
-msgstr ""
+msgstr "Nimet XML:stä"
 
 msgid "Tooltips"
 msgstr "vinkit"
@@ -992,74 +1007,74 @@ msgstr "USB Loader GX on suojattu."
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
-msgstr ""
+msgstr "Wadia (%s) jonka juuri latasit ei voitu avata."
 
 msgid "Uninstall"
 msgstr "Poista"
 
 msgid "Uninstall Game"
-msgstr ""
+msgstr "Poista peli"
 
 msgid "Uninstall Menu"
-msgstr ""
+msgstr "Poistomenu"
 
 msgid "Uninstalling wad"
-msgstr ""
+msgstr "Poistetaan wad:ia"
 
 msgid "Unlock console to use this option."
-msgstr ""
+msgstr "Avaa konsoli käyttääksesi tätä vaihtoehtoa"
 
 msgid "Unlocked"
-msgstr ""
+msgstr "Avattu"
 
 msgid "Update"
-msgstr ""
+msgstr "Päivitä"
 
 msgid "Update All"
-msgstr ""
+msgstr "Päivitä kaikki"
 
 msgid "Update DOL"
-msgstr ""
+msgstr "Päivitä DOL"
 
 msgid "Update Files"
-msgstr ""
+msgstr "Päivitä tiedostot"
 
 msgid "Update all Language Files"
-msgstr ""
+msgstr "Päivitä kaikki kielitiedostot"
 
 msgid "Update failed"
-msgstr ""
+msgstr "Päivitys epäonnistui"
 
 msgid "Update to"
 msgstr ""
 
 msgid "Updatepath"
-msgstr ""
+msgstr "Päivityspolku"
 
 msgid "Updatepath changed."
-msgstr ""
+msgstr "Päivityspolku muutettu"
 
 msgid "Updating"
-msgstr ""
+msgstr "Päivittää"
 
 msgid "Updating Language Files..."
-msgstr ""
+msgstr "Päivittää kielitiedostoja..."
 
 msgid "Updating Language Files:"
-msgstr ""
+msgstr "Päivittää kielitiedostoja:"
 
 msgid "Updating WiiTDB.zip"
-msgstr ""
+msgstr "Päivittää WiiTDB.zip"
 
 msgid "VIDTV Patch"
 msgstr "VIDTV korjaus"
 
 #, c-format
 msgid "Version: %s"
-msgstr ""
+msgstr "Versio: %s"
 
 msgid "Video Mode"
-msgstr "Video tila"
+msgstr "Videotila"
 
 msgid "Waiting for USB Device"
 msgstr "Odottaa USB-laitetta..."
@@ -1068,10 +1083,10 @@ msgid "Waiting..."
 msgstr "Odottaa..."
 
 msgid "What do you want to update?"
-msgstr ""
+msgstr "Mitä haluat päivittää?"
 
 msgid "WiFi Features"
-msgstr ""
+msgstr "WiFi ominaisuudet"
 
 msgid "Widescreen Fix"
 msgstr "Laajakuva korjaus"
@@ -1080,10 +1095,10 @@ msgid "Wii Menu"
 msgstr "Wii Menu"
 
 msgid "Wii Settings"
-msgstr ""
+msgstr "Wii asetukset"
 
 msgid "WiiTDB Files"
-msgstr ""
+msgstr "WiiTDB tiedostot"
 
 msgid "Wiilight"
 msgstr ""
@@ -1092,25 +1107,25 @@ msgid "Wrong Password"
 msgstr "Väärä salasana"
 
 msgid "XMLPath"
-msgstr ""
+msgstr "XML polku"
 
 msgid "XMLPath change"
-msgstr ""
+msgstr "XML polun muutto"
 
 msgid "XMLPath changed."
-msgstr ""
+msgstr "XML polku muutettu"
 
 msgid "Yes"
 msgstr "Kyllä"
 
 msgid "You are about to delete "
-msgstr ""
+msgstr "Olet tuhoamassa "
 
 msgid "You are choosing to display favorites and you do not have any selected."
-msgstr ""
+msgstr "Olet valinnut näyttääksesi suosikit mutta sinulla ei ole valittuna yhtään."
 
 msgid "You have attempted to load a bad image"
-msgstr ""
+msgstr "Yritit ladata huonoa levykuvaa"
 
 msgid "You need to format a partition"
 msgstr "Sinun täytyy formatoida osio"
@@ -1120,19 +1135,19 @@ msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 msgstr ""
 
 msgid "available"
-msgstr ""
+msgstr "Saatavilla"
 
 msgid "contains over 255 lines of code.  It will produce unexpected results."
 msgstr ""
 
 msgid "does not exist!"
-msgstr ""
+msgstr "Ei löydy!"
 
 msgid "does not exist!  Loading game without cheats."
-msgstr ""
+msgstr "Ei löydy! Ladataan peli ilman koodeja."
 
 msgid "does not exist!  You Messed something up, Idiot."
-msgstr ""
+msgstr "Ei löydy! Kusit jotain, Typerys!"
 
 msgid "file left"
 msgstr ""

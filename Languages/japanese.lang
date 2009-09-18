@@ -5,9 +5,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-15 05:43+0200\n"
+"POT-Creation-Date: 2009-09-18 14:03+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
-"Last-Translator: \n"
+"Last-Translator: hosigumayuugi\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -200,7 +200,7 @@ msgid "Cheatfile is blank"
 msgstr "ﾁｰﾄﾌｧｲﾙがありません"
 
 msgid "Checking existing artwork"
-msgstr ""
+msgstr "ｶﾊﾞｰをﾁｪｯｸしています"
 
 msgid "Checking for Updates"
 msgstr "最新版を確認中"
@@ -275,6 +275,9 @@ msgstr "ﾃﾞｨｽｸを開けません"
 msgid "Could not read the disc."
 msgstr "ﾃﾞｨｽｸを読めません"
 
+msgid "Could not save."
+msgstr ""
+
 msgid "Could not set USB."
 msgstr "USBをｾｯﾄできません"
 
@@ -322,6 +325,9 @@ msgstr "削除しますか？"
 
 msgid "Delete Boxart"
 msgstr "ｶﾊﾞｰｲﾒｰｼﾞの削除"
+
+msgid "Delete Cheat GCT"
+msgstr ""
 
 msgid "Delete CheatTxt"
 msgstr "ﾃｷｽﾄｺｰﾄﾞの削除"
@@ -716,6 +722,9 @@ msgstr "USB機器が検出されていません"
 msgid "No WBFS partition found"
 msgstr "WBFSﾊﾟｰﾃｨｼｮﾝを検出できませんでした"
 
+msgid "No cheats were selected"
+msgstr ""
+
 msgid "No data could be read."
 msgstr "ﾃﾞｰﾀ読込に失敗しました"
 
@@ -762,7 +771,7 @@ msgid "OFF"
 msgstr "オフ"
 
 msgid "OK"
-msgstr "OK"
+msgstr ""
 
 msgid "ON"
 msgstr "オン"
@@ -880,6 +889,12 @@ msgstr "保存"
 
 msgid "Save Failed"
 msgstr "保存に失敗しました"
+
+msgid "Save Game List to"
+msgstr ""
+
+msgid "Saved"
+msgstr ""
 
 msgid "Screensaver"
 msgstr "ｽｸﾘｰﾝｾｰﾊﾞｰ"
@@ -1031,7 +1046,7 @@ msgid "Update failed"
 msgstr "更新に失敗しました"
 
 msgid "Update to"
-msgstr "Update to"
+msgstr ""
 
 msgid "Updatepath"
 msgstr "GXのパス"
@@ -1056,7 +1071,7 @@ msgstr "VIDTVﾊﾟｯﾁ"
 
 #, c-format
 msgid "Version: %s"
-msgstr ""
+msgstr "ﾊﾞｰｼﾞｮﾝ: %s"
 
 msgid "Video Mode"
 msgstr "ﾋﾞﾃﾞｵﾓｰﾄﾞ"
@@ -1117,7 +1132,7 @@ msgstr "ﾊﾟｰﾃｨｼｮﾝを初期化して下さい"
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
-msgstr "%sWiiTDB_URL.txtにURLが保存されました"
+msgstr "%sWiiTDB_URL.txtにURLを保存しました"
 
 msgid "available"
 msgstr "利用可能"
@@ -1144,22 +1159,22 @@ msgid "files not found on the server!"
 msgstr "ｻｰﾊﾞｰにﾌｧｲﾙがありません!"
 
 msgid "for"
-msgstr "for"
+msgstr ""
 
 msgid "for WiiTDB and hosting covers / disc images"
 msgstr "WiiTDB…様々な画像を配布"
 
 msgid "for diverse patches"
-msgstr "…様々なﾊﾟｯﾁを製作"
+msgstr "…様々なﾊﾟｯﾁを制作"
 
 msgid "for his awesome tool"
-msgstr "…すばらしいﾂｰﾙを製作　　　　　　　　　　　　"
+msgstr "…すばらしいﾂｰﾙを制作　　　　　　　　　　　　"
 
 msgid "for hosting the update files"
 msgstr "…更新ﾌｧｲﾙを配布"
 
 msgid "for the USB Loader source"
-msgstr "…ｿｰｽを製作"
+msgstr "…ｿｰｽを制作"
 
 msgid "formatted!"
 msgstr "初期化完了!"
@@ -1171,7 +1186,7 @@ msgid "not set"
 msgstr "ｾｯﾄされていません"
 
 msgid "of"
-msgstr "of"
+msgstr ""
 
 msgid "seconds left"
 msgstr "完了までの秒数"

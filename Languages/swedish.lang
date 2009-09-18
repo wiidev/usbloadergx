@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-15 05:43+0200\n"
+"POT-Creation-Date: 2009-09-18 14:05+0200\n"
 "PO-Revision-Date: 2009-08-02 12:20+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -275,6 +275,9 @@ msgstr "Kunde inte öppna skiva."
 msgid "Could not read the disc."
 msgstr "Kunde inte läsa skiva."
 
+msgid "Could not save."
+msgstr ""
+
 msgid "Could not set USB."
 msgstr "Kunde inte ställa in USB."
 
@@ -322,6 +325,9 @@ msgstr "Radera?"
 
 msgid "Delete Boxart"
 msgstr "Radera omslag"
+
+msgid "Delete Cheat GCT"
+msgstr ""
 
 msgid "Delete CheatTxt"
 msgstr "Radera fusk"
@@ -716,6 +722,9 @@ msgstr "Ingen USB-enhet hittad."
 msgid "No WBFS partition found"
 msgstr "Ingen WBFS-partition hittad"
 
+msgid "No cheats were selected"
+msgstr ""
+
 msgid "No data could be read."
 msgstr "Ingen data kunde läsas."
 
@@ -880,6 +889,12 @@ msgstr "Spara"
 
 msgid "Save Failed"
 msgstr "Sparande misslyckat"
+
+msgid "Save Game List to"
+msgstr ""
+
+msgid "Saved"
+msgstr ""
 
 msgid "Screensaver"
 msgstr "Skärmsläckare"
