@@ -9,7 +9,7 @@
 #define _DISCBROWSER_H_
 
 int DiscBrowse(struct discHdr * header);
-int autoSelectDol(const char *id);
+int autoSelectDol(const char *id, bool force);
 int autoSelectDolMenu(const char *id);
 
 #endif

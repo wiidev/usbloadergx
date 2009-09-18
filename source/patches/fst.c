@@ -64,6 +64,13 @@ u32 do_sd_code(char *filename)
 
 	fseek(fp, 0, SEEK_END);
 	filesize = ftell(fp);
+	if(filesize <= 16){
+		fclose(fp);
+		sleep(2);
+        USBDevice_deInit();
+        SDCard_deInit();
+		return 0;
+	}
 	fseek(fp, 0, SEEK_SET);
 
 	filebuff = (u8*) malloc (filesize);

@@ -2192,7 +2192,7 @@ int GameSettings(struct discHdr * header) {
 								snprintf(alternatedname, sizeof(alternatedname), "%s <%i>", tr("AUTO"),autodol);
 							} else if (autodol!=0) {
 								//check to see if we already know the offset of the correct dol
-								int autodol = autoSelectDol(filename);
+								int autodol = autoSelectDol(filename, false);
 								//if we do know that offset ask if they want to use it
 								if (autodol>0) {
 									dolchoice = WindowPrompt(0,tr("Do you want to use the alt dol that is known to be correct?"),tr("Yes"),tr("Pick from a list"));

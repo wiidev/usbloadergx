@@ -231,8 +231,9 @@ int DiscBrowse(struct discHdr * header) {
 }
 
 
-int autoSelectDol(const char *id) {
-    //////////ID6/////////////////
+int autoSelectDol(const char *id, bool force) {
+
+// games that always need alt dol, can be forced
 
 	//Boogie 
     if (strcmp(id,"RBOP69") == 0) return 657;//from isostar
@@ -247,29 +248,12 @@ int autoSelectDol(const char *id) {
     if (strcmp(id,"R5TP69") == 0) return 1493;//from isostar
     if (strcmp(id,"R5TE69") == 0) return 1493;//starstremr
 	
-	//Indiana Jones and the Staff of Kings (Fate of Atlantis)
-    if (strcmp(id,"RJ8P64") == 0) return 8;//from isostar
-    if (strcmp(id,"RJ8E64") == 0) return 8;//starstremr
-
 	//Madden NFL07
     if (strcmp(id,"RMDP69") == 0) return 39;//from isostar
 	
 	//Madden NFL08
     if (strcmp(id,"RNFP69") == 0) return 1079;//from isostar
 	
-	//Medal of Honor Heroes
-    if (strcmp(id,"RMZX69") == 0) return 492;//from isostar
-    if (strcmp(id,"RMZP69") == 0) return 492;//from isostar
-    if (strcmp(id,"RMZE69") == 0) return 492;//starstremr 
-
-	//Medal of Honor: Heroes 2
-    if (strcmp(id,"RM2X69") == 0)return 601;//dj_skual
-	if (strcmp(id,"RM2P69") == 0)return 517;//MZottel
-	if (strcmp(id,"RM2E69") == 0) return 492;//Old8oy
-	
-	//Metal Slug Anthology
-    if (strcmp(id,"RMLP7U") == 0) return 56;//from isostar
-
 	//Mortal Kombat
     if (strcmp(id,"RKMP5D") == 0) return 290;//from isostar
     if (strcmp(id,"RKME5D") == 0) return 290;//starstremr
@@ -288,10 +272,6 @@ int autoSelectDol(const char *id) {
     if (strcmp(id,"RSXP69") == 0) return 377;//previous value was 337
     if (strcmp(id,"RSXE69") == 0) return 377;//previous value was 337
 	
-	//The House Of The Dead 2 & 3 Return
-    if (strcmp(id,"RHDP8P") == 0) return 149;//from isostar
-    if (strcmp(id,"RHDE8P") == 0) return 149;//starstremr
-	
 	//Tiger Woods 10
     if (strcmp(id,"R9OP69") == 0) return 1991;//from isostar
     if (strcmp(id,"R9OE69") == 0) return 1973;//starstremr
@@ -300,12 +280,36 @@ int autoSelectDol(const char *id) {
     if (strcmp(id,"RVUP8P") == 0) return 16426;//from isostar
     if (strcmp(id,"RVUE8P") == 0) return 16405;//from isostar
 	
-	//Wii Sports Resort
-    if (strcmp(id,"RZTP01") == 0) return 952;//from isostar
-    if (strcmp(id,"RZTE01") == 0) return 674;//from starstremr
+	
+	// for games that can't be forced, when the alt dol is not always needed
+	if (!force) {
+	
+		//Indiana Jones and the Staff of Kings (Fate of Atlantis)
+		if (strcmp(id,"RJ8P64") == 0) return 8;//from isostar
+		if (strcmp(id,"RJ8E64") == 0) return 8;//starstremr
+		
+		//Medal of Honor Heroes
+		if (strcmp(id,"RMZX69") == 0) return 492;//from isostar
+		if (strcmp(id,"RMZP69") == 0) return 492;//from isostar
+		if (strcmp(id,"RMZE69") == 0) return 492;//starstremr 
 
-    //if (strcmp(id,"") == 0) return ; //blank line for more dols
-
+		//Medal of Honor: Heroes 2
+		if (strcmp(id,"RM2X69") == 0)return 601;//dj_skual
+		if (strcmp(id,"RM2P69") == 0)return 517;//MZottel
+		if (strcmp(id,"RM2E69") == 0) return 492;//Old8oy	
+		
+		//Metal Slug Anthology
+		if (strcmp(id,"RMLP7U") == 0) return 56;//from isostar
+		
+		//The House Of The Dead 2 & 3 Return
+		if (strcmp(id,"RHDP8P") == 0) return 149;//from isostar
+		if (strcmp(id,"RHDE8P") == 0) return 149;//starstremr
+		
+		//Wii Sports Resort
+		if (strcmp(id,"RZTP01") == 0) return 952;//from isostar
+		if (strcmp(id,"RZTE01") == 0) return 674;//from starstremr
+	}
+	
     return -1;
 }
 

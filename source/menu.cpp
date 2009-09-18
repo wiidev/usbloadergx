@@ -1409,7 +1409,7 @@ int MenuDiscList() {
 				altdoldefault = false;
 		} 
 		if (altdoldefault) {
-			int autodol = autoSelectDol((char*)header->id);
+			int autodol = autoSelectDol((char*)header->id, true);
 			if (autodol>0) {
 				alternatedol = 2;
 				alternatedoloffset = autodol;
