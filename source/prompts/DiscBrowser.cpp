@@ -316,17 +316,17 @@ int autoSelectDol(const char *id, bool force) {
 
 int autoSelectDolMenu(const char *id) {
 
-	//Metroid Prime Trilogy
-	//don't let the game start without a save game in the nand
 	char id4[10];
 	sprintf(id4,"%c%c%c%c",id[0],id[1],id[2],id[3]);
 	
-	if (CheckForSave(id4)==0)
+	//Metroid Prime Trilogy
+	if (strcmp(id,"R3ME01") == 0) {
+		//do not use any alt dol if there is no save game in the nand
+		if (CheckForSave(id4)==0)
 		{
-			WindowPrompt(0,"You need to play the game one time to create a save file.  Then exit and start it again using the dol of the game you want to use.",tr("Ok"));
+			WindowPrompt(0,tr("You need to start this game one time to create a save file, then exit and start it again."),tr("Ok"));
 			return -1;
 		}
-	if (strcmp(id,"R3ME01") == 0) {
 		int choice = WindowPrompt(tr("Select a DOL"), 0, "Metroid Prime", "Metroid Prime 2", "Metroid Prime 3", tr("Default"));
         switch (choice) {
             case 1:
@@ -344,6 +344,11 @@ int autoSelectDolMenu(const char *id) {
 		return choice;
 	}
 	if (strcmp(id,"R3MP01") == 0) {
+		if (CheckForSave(id4)==0)
+		{
+			WindowPrompt(0,tr("You need to start this game one time to create a save file, then exit and start it again."),tr("Ok"));
+			return -1;
+		}
 		int choice = WindowPrompt(tr("Select a DOL"), 0, "Metroid Prime", "Metroid Prime 2", "Metroid Prime 3", tr("Default"));
         switch (choice) {
             case 1:
