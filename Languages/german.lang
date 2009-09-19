@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-18 14:03+0200\n"
+"POT-Creation-Date: 2009-09-19 14:18+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: wishmasterf\n"
 "Language-Team: Snoozer, wishmasterf\n"
@@ -276,7 +276,7 @@ msgid "Could not read the disc."
 msgstr "Konnte Disc nicht lesen."
 
 msgid "Could not save."
-msgstr ""
+msgstr "Konnte nicht speichern."
 
 msgid "Could not set USB."
 msgstr "Konnte USB nicht setzen."
@@ -327,7 +327,7 @@ msgid "Delete Boxart"
 msgstr "Lösche Cover"
 
 msgid "Delete Cheat GCT"
-msgstr ""
+msgstr "Lösche Cheat GCT"
 
 msgid "Delete CheatTxt"
 msgstr "Lösche CheatTxt"
@@ -723,7 +723,7 @@ msgid "No WBFS partition found"
 msgstr "Keine WBFS Partition gefunden"
 
 msgid "No cheats were selected"
-msgstr ""
+msgstr "Es wurden keine Cheats ausgewählt"
 
 msgid "No data could be read."
 msgstr "Daten konnten nicht gelesen werden."
@@ -891,10 +891,10 @@ msgid "Save Failed"
 msgstr "Speichern fehlgeschlagen"
 
 msgid "Save Game List to"
-msgstr ""
+msgstr "Spiele Liste speichern unter"
 
 msgid "Saved"
-msgstr ""
+msgstr "Gespeichert"
 
 msgid "Screensaver"
 msgstr "Bildschirmschoner"
@@ -1129,6 +1129,9 @@ msgstr "Sie haben versucht ein bad image zu laden"
 
 msgid "You need to format a partition"
 msgstr "Sie müssen eine Partition formatieren"
+
+msgid "You need to start this game one time to create a save file, then exit and start it again."
+msgstr ""
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."

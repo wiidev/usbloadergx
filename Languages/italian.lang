@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# italian.lang - v39 - r729
+# italian.lang - v40 - r740
 # don't delete this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-18 17:02+0200\n"
+"POT-Creation-Date: 2009-09-19 14:18+0200\n"
 "PO-Revision-Date: 2009-08-05 10:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe & Cambo\n"
@@ -252,34 +252,34 @@ msgid "Correct Password"
 msgstr "Password Corretta"
 
 msgid "Could not create GCT file"
-msgstr "Non posso creare il file GCT"
+msgstr "Non è stato possibile creare il file GCT"
 
 msgid "Could not find a WBFS partition."
-msgstr "Non trovo alcuna partizione WBFS."
+msgstr "Non è stata trovata alcuna partizione WBFS."
 
 msgid "Could not initialize DIP module!"
-msgstr "Non posso inizializzare il modulo DIP!"
+msgstr "Non è stato possibile inizializzare il modulo DIP!"
 
 msgid "Could not initialize network!"
-msgstr "Non posso Inizializzare la rete!"
+msgstr "Non è stato possibile inizializzare la rete!"
 
 msgid "Could not open Disc"
-msgstr "Non posso caricare il Disco!"
+msgstr "Non è stato possibile accedere al Disco"
 
 msgid "Could not open WBFS partition"
-msgstr "Non posso aprire la partizione WBFS"
+msgstr "Non è stato possibile accedere alla partizione WBFS"
 
 msgid "Could not open disc."
-msgstr "Non posso accedere al disco."
+msgstr "Non è stato possibile accedere al disco."
 
 msgid "Could not read the disc."
-msgstr "Non posso leggere il disco."
+msgstr "Non è stato possibile leggere il disco."
 
 msgid "Could not save."
-msgstr ""
+msgstr "Non è stato possibile salvare."
 
 msgid "Could not set USB."
-msgstr "Non posso impostare la porta USB."
+msgstr "Non è stato possibile impostare la porta USB."
 
 msgid "Cover Download"
 msgstr "Scaricamento Copertine"
@@ -327,7 +327,7 @@ msgid "Delete Boxart"
 msgstr "Elimina la copertina"
 
 msgid "Delete Cheat GCT"
-msgstr ""
+msgstr "Elimina Trucchi GCT"
 
 msgid "Delete CheatTxt"
 msgstr "Elimina il file dei trucchi"
@@ -653,7 +653,7 @@ msgid "Load"
 msgstr "Carica"
 
 msgid "Load From SD/USB"
-msgstr ""
+msgstr "Caricamento da SD/USB"
 
 #, c-format
 msgid "Load file from: %s ?"
@@ -723,7 +723,7 @@ msgid "No WBFS partition found"
 msgstr "Nessuna partizione WBFS trovata"
 
 msgid "No cheats were selected"
-msgstr ""
+msgstr "Non è stato selezionato alcun trucco"
 
 msgid "No data could be read."
 msgstr "Non è stato possibile leggere alcun dato."
@@ -891,19 +891,19 @@ msgid "Save Failed"
 msgstr "Salvataggio Fallito"
 
 msgid "Save Game List to"
-msgstr ""
+msgstr "Salvataggio Elenco Giochi in"
 
 msgid "Saved"
-msgstr ""
+msgstr "Salvataggio Eseguito"
 
 msgid "Screensaver"
 msgstr "Salvaschermo"
 
 msgid "Select a DOL"
-msgstr ""
+msgstr "Seleziona un file DOL"
 
 msgid "Selected DOL"
-msgstr ""
+msgstr "File DOL selezionato"
 
 msgid "Sept"
 msgstr "settembre"
@@ -945,10 +945,10 @@ msgid "Success:"
 msgstr "Successo:"
 
 msgid "Successfully Saved"
-msgstr "Salvato con successo"
+msgstr "Salvataggio Eseguito"
 
 msgid "Successfully Updated"
-msgstr "Aggiornato con successo"
+msgstr "Aggiornamento Eseguito"
 
 msgid "Successfully deleted:"
 msgstr "Eliminato con successo:"
@@ -1130,6 +1130,9 @@ msgstr "Hai tentato di caricare un'immagine non valida"
 msgid "You need to format a partition"
 msgstr "Devi Formattare una Partizione"
 
+msgid "You need to start this game one time to create a save file, then exit and start it again."
+msgstr ""
+
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 msgstr "L'indirizzo (URL) è stato salvato in %sWiiTDB_URL.txt."
@@ -1212,5 +1215,3 @@ msgstr "secondi mancanti"
 #~ msgid "Restart"
 #~ msgstr "Riavvia"
 
-#~ msgid "Saving"
-#~ msgstr "Sto salvando"

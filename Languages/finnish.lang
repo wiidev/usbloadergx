@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-18 17:02+0200\n"
+"POT-Creation-Date: 2009-09-19 15:14+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: c64rmx\n"
 "Language-Team: \n"
@@ -65,52 +65,52 @@ msgid "5 min"
 msgstr ""
 
 msgid ">> Deleting tickets..."
-msgstr ""
+msgstr ">> Tuhotaan lipukkeita..."
 
 msgid ">> Deleting tickets...ERROR! "
-msgstr ""
+msgstr ">> Tuhotaan lipukkeita...VIRHE!"
 
 msgid ">> Deleting tickets...Ok! "
-msgstr ""
+msgstr ">> Tuhotaan lipukkeita...Ok!"
 
 msgid ">> Deleting title ...ERROR! "
-msgstr ""
+msgstr ">> Tuhotaan nimikettä...VIRHE!"
 
 msgid ">> Deleting title ...Ok!"
-msgstr ""
+msgstr ">> Tuhotaan nimikettä...Ok!"
 
 msgid ">> Deleting title contents..."
-msgstr ""
+msgstr ">> Tuhotaan nimikkeen sisältöä..."
 
 msgid ">> Deleting title contents...ERROR! "
-msgstr ""
+msgstr ">> Tuhotaan nimikkeen sisältöä...VIRHE!"
 
 msgid ">> Deleting title contents...Ok!"
-msgstr ""
+msgstr "Tuhotaan nimikkeen sisältöä...Ok!"
 
 msgid ">> Deleting title..."
-msgstr ""
+msgstr ">> Tuhotaan nimikettä..."
 
 msgid ">> Finishing installation..."
-msgstr ""
+msgstr ">> Viimeistellään asennusta..."
 
 msgid ">> Installing content #"
-msgstr ""
+msgstr ">> Asennetaan sisältöä #"
 
 msgid ">> Installing ticket..."
-msgstr ""
+msgstr ">> Asennetaan lipuketta..."
 
 msgid ">> Installing title..."
-msgstr ""
+msgstr ">> Asennetaan nimikettä..."
 
 msgid ">> Reading WAD data..."
-msgstr ""
+msgstr ">> Luetaan WAD:ia..."
 
 msgid ">> Reading WAD data...ERROR! "
-msgstr ""
+msgstr ">> Luetaan WAD:ia...VIRHE!"
 
 msgid ">> Reading WAD data...Ok!"
-msgstr ""
+msgstr ">> Luetaan WAD:ia...Ok!"
 
 msgid "AUTO"
 msgstr ""
@@ -140,7 +140,7 @@ msgid "Aug"
 msgstr "elo"
 
 msgid "AutoInit Network"
-msgstr ""
+msgstr "Autom. verkon käynnistys"
 
 msgid "AutoPatch"
 msgstr "AutoPatch"
@@ -200,7 +200,7 @@ msgid "Cheatfile is blank"
 msgstr "Kooditiedosto tyhjä"
 
 msgid "Checking existing artwork"
-msgstr ""
+msgstr "Tutkitaan olemassa olevia kansia"
 
 msgid "Checking for Updates"
 msgstr "Tarkastetaan päivityksiä"
@@ -279,7 +279,7 @@ msgid "Could not save."
 msgstr ""
 
 msgid "Could not set USB."
-msgstr ""
+msgstr "USB:tä ei voitu asettaa"
 
 msgid "Cover Download"
 msgstr "Kansien lataus"
@@ -300,22 +300,22 @@ msgid "Credits"
 msgstr "Tekijät"
 
 msgid "Custom Paths"
-msgstr ""
+msgstr "Omat polut"
 
 msgid "Customs/Original"
-msgstr ""
+msgstr "Omat/Alkuperäiset"
 
 msgid "Dec"
 msgstr "joulu"
 
 msgid "Default"
-msgstr ""
+msgstr "Oletus"
 
 msgid "Default Gamesettings"
-msgstr "Yleiset peliasetukset"
+msgstr "Oletus peliasetukset"
 
 msgid "Default Settings"
-msgstr "Yleiset asetukset"
+msgstr "Oletusasetukset"
 
 msgid "Delete"
 msgstr "Tuhoa"
@@ -330,7 +330,7 @@ msgid "Delete Cheat GCT"
 msgstr ""
 
 msgid "Delete CheatTxt"
-msgstr "Tuhoa CheatTxt"
+msgstr "Tuhoa KoodiTxt"
 
 msgid "Delete Discart"
 msgstr "Tuhoa levykuvat"
@@ -342,7 +342,7 @@ msgid "Developed by"
 msgstr "Kehitys"
 
 msgid "Disc Default"
-msgstr "Levy oletus"
+msgstr "Pelin oletus"
 
 msgid "Disc Images"
 msgstr "Levykuvat"
@@ -351,7 +351,7 @@ msgid "Discimage Path"
 msgstr "Levykuvien polku"
 
 msgid "Discimages Download"
-msgstr "Levykuvien"
+msgstr "Levykuvien lataus"
 
 msgid "Discpath Changed"
 msgstr "Levykuvien polku muutettu"
@@ -360,7 +360,7 @@ msgid "Discpath change"
 msgstr "Levykuvien polku"
 
 msgid "DiskFlip"
-msgstr ""
+msgstr "Levynvaihto"
 
 msgid "Display"
 msgstr "Näyttö"
@@ -477,7 +477,7 @@ msgid "Finishing installation... Ok!"
 msgstr "Viimeistelee asennusta... Ok!"
 
 msgid "Flip-X"
-msgstr "käännä-X"
+msgstr "Käännä-X"
 
 msgid "Force"
 msgstr "Pakota"
@@ -498,7 +498,7 @@ msgid "Full Shutdown"
 msgstr "Täysi sammutus"
 
 msgid "GCT File created"
-msgstr "Gct Tiedosto luotu"
+msgstr "Gct tiedosto luotu"
 
 msgid "GUI Settings"
 msgstr "GUI asetukset"
@@ -531,13 +531,13 @@ msgid "HOME Menu"
 msgstr ""
 
 msgid "Homebrew Apps Path"
-msgstr ""
+msgstr "Homebrew Apps polku"
 
 msgid "Homebrew Appspath change"
-msgstr ""
+msgstr "Homebrew Apps polunvaihto"
 
 msgid "Homebrew Appspath changed"
-msgstr ""
+msgstr "Homebrew Apps polku vaihdettu"
 
 msgid "Homebrew Channel"
 msgstr ""
@@ -549,7 +549,7 @@ msgid "Hour"
 msgstr "Tunti"
 
 msgid "How do you want to update?"
-msgstr ""
+msgstr "Kuinka haluat päivittää?"
 
 msgid "How to Shutdown?"
 msgstr "Miten sammutetaan?"
@@ -672,7 +672,7 @@ msgid "Lock Console"
 msgstr "Lukitse konsoli"
 
 msgid "Locked"
-msgstr ""
+msgstr "Lukittu"
 
 msgid "Mar"
 msgstr "maalis"
@@ -681,7 +681,7 @@ msgid "May"
 msgstr "touko"
 
 msgid "Missing files"
-msgstr "tiedostoa puuttuu"
+msgstr "tiedostoja puuttuu"
 
 msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr "Todennäköisesti sisältää ulottuvuuksia jotka eivät ole jaollisia neljällä"
@@ -762,19 +762,19 @@ msgid "Not enough free space!"
 msgstr "Ei tarpeeksi tilaa!"
 
 msgid "Not supported format!"
-msgstr ""
+msgstr "Ei tuettu formaatti!"
 
 msgid "Nov"
 msgstr "marras"
 
 msgid "OFF"
-msgstr "OFF"
+msgstr "Pois"
 
 msgid "OK"
 msgstr "OK"
 
 msgid "ON"
-msgstr "ON"
+msgstr "Päälle"
 
 msgid "Oct"
 msgstr "loka"
@@ -786,16 +786,16 @@ msgid "Ok"
 msgstr "Ok"
 
 msgid "Only Customs"
-msgstr "Vain Custom"
+msgstr "Vain omatekoiset"
 
 msgid "Only Original"
-msgstr "Ainoastaan alkuperäinen"
+msgstr "Vain alkuperäinen"
 
 msgid "Only for Install"
 msgstr "Ainoastaan asennusta varten"
 
 msgid "Original/Customs"
-msgstr "Alkuperäinen/Custom"
+msgstr "Alkuperäinen/Omatekoinen"
 
 msgid "Parental Control"
 msgstr "Valvonta"
@@ -819,7 +819,7 @@ msgid "Paste it into your browser to get your WiiTDB.zip."
 msgstr "Liitä se nettiselaimeesi saadaksesi WiiTDB.zip"
 
 msgid "Patch Country Strings"
-msgstr ""
+msgstr "Patchaa maa merkkijonot"
 
 msgid "Pick from a list"
 msgstr "Valitse listasta"
@@ -840,7 +840,7 @@ msgid "Published by"
 msgstr "Julkaisu:"
 
 msgid "Quick Boot"
-msgstr "Pikakäynnistys"
+msgstr ""
 
 msgid "Reading WAD data... Ok!"
 msgstr "Luetaan WAD:ia... Ok!"
@@ -933,7 +933,7 @@ msgid "Spanish"
 msgstr "Espanja"
 
 msgid "Special thanks to:"
-msgstr "Erikoiskiitokset"
+msgstr "Erityiskiitokset"
 
 msgid "Standard"
 msgstr "Standardi"
@@ -997,7 +997,7 @@ msgid "Titles from XML"
 msgstr "Nimet XML:stä"
 
 msgid "Tooltips"
-msgstr "vinkit"
+msgstr "Vinkit"
 
 msgid "USB Device not found"
 msgstr "USB-laitetta ei löytynyt"
@@ -1046,7 +1046,7 @@ msgid "Update failed"
 msgstr "Päivitys epäonnistui"
 
 msgid "Update to"
-msgstr ""
+msgstr "Päivitä:"
 
 msgid "Updatepath"
 msgstr "Päivityspolku"
@@ -1130,15 +1130,18 @@ msgstr "Yritit ladata huonoa levykuvaa"
 msgid "You need to format a partition"
 msgstr "Sinun täytyy formatoida osio"
 
+msgid "You need to start this game one time to create a save file, then exit and start it again."
+msgstr ""
+
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
-msgstr ""
+msgstr "URL:si on tallennettu %WiiTDB_URL.txt."
 
 msgid "available"
 msgstr "Saatavilla"
 
 msgid "contains over 255 lines of code.  It will produce unexpected results."
-msgstr ""
+msgstr "Sisältää yli 255 riviä koodia. Muodostaa odottamattomia virheitä."
 
 msgid "does not exist!"
 msgstr "Ei löydy!"
@@ -1150,10 +1153,10 @@ msgid "does not exist!  You Messed something up, Idiot."
 msgstr "Ei löydy! Kusit jotain, Typerys!"
 
 msgid "file left"
-msgstr ""
+msgstr "Tiedosto jäljellä"
 
 msgid "files left"
-msgstr ""
+msgstr "Tiedostoja jäljellä"
 
 msgid "files not found on the server!"
 msgstr "tiedostoja ei löytynyt serveriltä!"
@@ -1162,25 +1165,25 @@ msgid "for"
 msgstr ""
 
 msgid "for WiiTDB and hosting covers / disc images"
-msgstr ""
+msgstr "WiiTDB:stä ja kansien hostauksesta"
 
 msgid "for diverse patches"
-msgstr ""
+msgstr "Erinäisistä patcheista"
 
 msgid "for his awesome tool"
-msgstr ""
+msgstr "Hänen hienosta ohjelmasta"
 
 msgid "for hosting the update files"
-msgstr ""
+msgstr "Tiedostojen hostauksesta"
 
 msgid "for the USB Loader source"
-msgstr "ja lähdekoodin julkaisemisesta"
+msgstr "lähdekoodin julkaisemisesta"
 
 msgid "formatted!"
 msgstr "formatoitu!"
 
 msgid "free"
-msgstr "vapaa"
+msgstr "vapaana"
 
 msgid "not set"
 msgstr "ei asetettu"

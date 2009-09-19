@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-18 14:03+0200\n"
+"POT-Creation-Date: 2009-09-19 15:07+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: \n"
@@ -140,7 +140,7 @@ msgid "Aug"
 msgstr "8月"
 
 msgid "AutoInit Network"
-msgstr "ﾈｯﾄﾜｰｸ自動初期化"
+msgstr "ﾈｯﾄﾜｰｸの自動初期化"
 
 msgid "AutoPatch"
 msgstr "自動ﾊﾟｯﾁ"
@@ -161,7 +161,7 @@ msgid "Backgroundmusic"
 msgstr "BGM"
 
 msgid "Backgroundmusic Path changed."
-msgstr "BGMのPathを変更しました"
+msgstr "BGMのﾊﾟｽを変更しました"
 
 msgid "Big thanks to:"
 msgstr "多謝:"
@@ -173,7 +173,7 @@ msgid "Boot/Standard"
 msgstr "cIOS選択"
 
 msgid "Boot?"
-msgstr "ﾌﾞｰﾄしますか？"
+msgstr "起動しますか？"
 
 msgid "Both"
 msgstr "IDとﾘｰｼﾞｮﾝを表示"
@@ -215,7 +215,7 @@ msgid "Clock"
 msgstr "時計の表示"
 
 msgid "Close"
-msgstr "閉じる"
+msgstr "とじる"
 
 msgid "Code Download"
 msgstr "ｺｰﾄﾞをﾀﾞｳﾝﾛｰﾄﾞ"
@@ -231,16 +231,16 @@ msgid "Confirm"
 msgstr "確認"
 
 msgid "Console"
-msgstr "ｺﾝｿｰﾙ"
+msgstr "状態"
 
 msgid "Console Default"
 msgstr "ｺﾝｿｰﾙのﾃﾞﾌｫﾙﾄ"
 
 msgid "Console Locked"
-msgstr "ｺﾝｿｰﾙがﾛｯｸされています"
+msgstr "GXはﾛｯｸされています"
 
 msgid "Console should be unlocked to modify it."
-msgstr "変更にはｺﾝｿｰﾙのﾛｯｸ解除が必要です"
+msgstr "変更にはGXのﾛｯｸ解除が必要です"
 
 msgid "Continue to install game?"
 msgstr "ｹﾞｰﾑのｲﾝｽﾄｰﾙを続けますか?"
@@ -249,7 +249,7 @@ msgid "Controllevel"
 msgstr "ｺﾝﾄﾛｰﾙ･ﾚﾍﾞﾙ"
 
 msgid "Correct Password"
-msgstr "正しいﾊﾟｽﾜｰﾄﾞ"
+msgstr "正しいﾊﾟｽﾜｰﾄﾞです"
 
 msgid "Could not create GCT file"
 msgstr "GCTﾌｧｲﾙを作成できません"
@@ -276,7 +276,7 @@ msgid "Could not read the disc."
 msgstr "ﾃﾞｨｽｸを読めません"
 
 msgid "Could not save."
-msgstr ""
+msgstr "保存できませんでした"
 
 msgid "Could not set USB."
 msgstr "USBをｾｯﾄできません"
@@ -327,7 +327,7 @@ msgid "Delete Boxart"
 msgstr "ｶﾊﾞｰｲﾒｰｼﾞの削除"
 
 msgid "Delete Cheat GCT"
-msgstr ""
+msgstr "GCTﾌｧｲﾙを削除"
 
 msgid "Delete CheatTxt"
 msgstr "ﾃｷｽﾄｺｰﾄﾞの削除"
@@ -342,7 +342,7 @@ msgid "Developed by"
 msgstr "開発者："
 
 msgid "Disc Default"
-msgstr "ﾃﾞﾌｫﾙﾄﾃﾞｨｽｸ"
+msgstr "ﾃﾞｨｽｸのﾃﾞﾌｫﾙﾄ"
 
 msgid "Disc Images"
 msgstr "ﾃﾞｨｽｸｲﾒｰｼﾞ"
@@ -381,7 +381,7 @@ msgid "Do you really want to delete:"
 msgstr "本当に削除しますか:"
 
 msgid "Do you want to change language?"
-msgstr "言語設定を変更しますか?"
+msgstr "言語を変更しますか?"
 
 msgid "Do you want to format:"
 msgstr "初期化しますか:"
@@ -528,7 +528,7 @@ msgid "German"
 msgstr "ﾄﾞｲﾂ語"
 
 msgid "HOME Menu"
-msgstr "ﾎｰﾑﾎﾞﾀﾝﾒﾆｭｰ"
+msgstr "HOMEﾎﾞﾀﾝﾒﾆｭｰ"
 
 msgid "Homebrew Apps Path"
 msgstr "Homebrewのﾊﾟｽ"
@@ -629,7 +629,7 @@ msgid "Keep"
 msgstr "保存"
 
 msgid "Keyboard"
-msgstr "ｷｰﾎﾞｰﾄﾞ"
+msgstr "ｷｰﾎﾞｰﾄﾞのﾀｲﾌﾟ"
 
 msgid "Korean"
 msgstr "韓国語"
@@ -669,10 +669,10 @@ msgid "Loading standard music."
 msgstr "標準の音楽をロード中..."
 
 msgid "Lock Console"
-msgstr "ｺﾝｿｰﾙをﾛｯｸ"
+msgstr "GXをﾛｯｸ"
 
 msgid "Locked"
-msgstr "ﾛｯｸ"
+msgstr "ﾛｯｸされています"
 
 msgid "Mar"
 msgstr "3月"
@@ -723,7 +723,7 @@ msgid "No WBFS partition found"
 msgstr "WBFSﾊﾟｰﾃｨｼｮﾝを検出できませんでした"
 
 msgid "No cheats were selected"
-msgstr ""
+msgstr "何も選ばれていません"
 
 msgid "No data could be read."
 msgstr "ﾃﾞｰﾀ読込に失敗しました"
@@ -816,7 +816,7 @@ msgid "Password has been changed"
 msgstr "ﾊﾟｽﾜｰﾄﾞを変更しました"
 
 msgid "Paste it into your browser to get your WiiTDB.zip."
-msgstr "WiiTDB.zipの入手のため、ﾌﾞﾗｳｻﾞに貼付けてね"
+msgstr "WiiTDB.zipの入手のため、ﾌﾞﾗｳｻﾞに貼付けてください"
 
 msgid "Patch Country Strings"
 msgstr "CountryStrﾊﾟｯﾁ"
@@ -834,7 +834,7 @@ msgid "Prev"
 msgstr "前へ"
 
 msgid "Prompts Buttons"
-msgstr "ﾎﾞﾀﾝ入力:"
+msgstr "画面サイズ"
 
 msgid "Published by"
 msgstr "発行者："
@@ -876,7 +876,7 @@ msgid "Rumble"
 msgstr "振動機能"
 
 msgid "SChinese"
-msgstr "中国語(簡体字)"
+msgstr "簡体中国語"
 
 msgid "SD/USB selected"
 msgstr "SD/USBを選択"
@@ -891,13 +891,13 @@ msgid "Save Failed"
 msgstr "保存に失敗しました"
 
 msgid "Save Game List to"
-msgstr ""
+msgstr "ｹﾞｰﾑﾘｽﾄの保存先"
 
 msgid "Saved"
-msgstr ""
+msgstr "保存しました"
 
 msgid "Screensaver"
-msgstr "ｽｸﾘｰﾝｾｰﾊﾞｰ"
+msgstr "スクリーンセーバー"
 
 msgid "Select a DOL"
 msgstr "DOLを選択"
@@ -960,7 +960,7 @@ msgid "System Default"
 msgstr "ｼｽﾃﾑのﾃﾞﾌｫﾙﾄ"
 
 msgid "TChinese"
-msgstr "中国語(繁体字)"
+msgstr "繁体中国語"
 
 msgid "TXTCheatcodes Path"
 msgstr "TXTｺｰﾄﾞのパス"
@@ -997,7 +997,7 @@ msgid "Titles from XML"
 msgstr "XMLからﾀｲﾄﾙ読込"
 
 msgid "Tooltips"
-msgstr "ﾂｰﾙﾋﾝﾄ"
+msgstr "ﾋﾝﾄﾊﾞﾙｰﾝ"
 
 msgid "USB Device not found"
 msgstr "USBﾃﾞﾊﾞｲｽを検出できませんでした"
@@ -1025,7 +1025,7 @@ msgid "Unlock console to use this option."
 msgstr "このｵﾌﾟｼｮﾝを使用するためﾛｯｸを解除してください"
 
 msgid "Unlocked"
-msgstr "ｱﾝﾛｯｸ"
+msgstr "ﾛｯｸされていません"
 
 msgid "Update"
 msgstr "更新"
@@ -1092,7 +1092,7 @@ msgid "Widescreen Fix"
 msgstr "ﾜｲﾄﾞｽｸﾘｰﾝ(16:9)"
 
 msgid "Wii Menu"
-msgstr "Wiiﾒﾆｭｰへ"
+msgstr "Wiiメニューへ"
 
 msgid "Wii Settings"
 msgstr "Wii 設定"
@@ -1107,7 +1107,7 @@ msgid "Wrong Password"
 msgstr "ﾊﾟｽﾜｰﾄﾞを間違えています"
 
 msgid "XMLPath"
-msgstr "XMLﾊﾟｽ"
+msgstr "XMLのﾊﾟｽ"
 
 msgid "XMLPath change"
 msgstr "XMLのﾊﾟｽの変更"
@@ -1129,6 +1129,9 @@ msgstr "読み込めないｲﾒｰｼﾞです"
 
 msgid "You need to format a partition"
 msgstr "ﾊﾟｰﾃｨｼｮﾝを初期化して下さい"
+
+msgid "You need to start this game one time to create a save file, then exit and start it again."
+msgstr ""
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
@@ -1168,7 +1171,7 @@ msgid "for diverse patches"
 msgstr "…様々なﾊﾟｯﾁを制作"
 
 msgid "for his awesome tool"
-msgstr "…すばらしいﾂｰﾙを制作　　　　　　　　　　　　"
+msgstr "…すばらしいﾂｰﾙを制作　　　　　　　　　　　　　　"
 
 msgid "for hosting the update files"
 msgstr "…更新ﾌｧｲﾙを配布"

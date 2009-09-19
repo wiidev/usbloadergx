@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-18 14:03+0200\n"
+"POT-Creation-Date: 2009-09-19 14:18+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1128,6 +1128,9 @@ msgid "You have attempted to load a bad image"
 msgstr ""
 
 msgid "You need to format a partition"
+msgstr ""
+
+msgid "You need to start this game one time to create a save file, then exit and start it again."
 msgstr ""
 
 #, c-format
