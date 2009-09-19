@@ -59,6 +59,12 @@ static void BootUpProblems()
     bootimage.SetPosition(320-1.2*bootimage.GetWidth()/2, 240-1.2*bootimage.GetHeight()/2);
     bootimage.SetScale(1.2);
 
+    GuiImageData usbimageData(usbport_png);
+    GuiImage usbimage(&usbimageData);
+    usbimage.SetPosition(400,300);
+    usbimage.SetScale(.7);
+	usbimage.SetAlpha(200);
+
     time_t curtime;
 	time_t endtime = time(0) + 30;
 	do {
@@ -89,12 +95,14 @@ static void BootUpProblems()
 		while(curtime == time(0)) {
 			boottext.Draw();
 			bootimage.Draw();
+			if (endtime-curtime<15)usbimage.Draw();
 			Menu_Render();
 		}
     } while((endtime-time(0)) > 0);
 
     if(ret2 < 0) {
         boottext.SetText("ERROR: USB device could not be loaded!");
+        usbimage.Draw();
         bootimage.Draw();
         boottext.Draw();
         Menu_Render();
