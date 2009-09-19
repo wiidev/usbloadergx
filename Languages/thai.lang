@@ -1,0 +1,1216 @@
+# USB Loader GX language source file.
+# thai.lang - r723
+# don't delete this line (é).
+msgid ""
+msgstr ""
+"Project-Id-Version: USB Loader GX\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-09-19 15:07+0200\n"
+"PO-Revision-Date: 2009-09-19 14:00+0700\n"
+"Last-Translator: Nitro_subzero \n"
+"Language-Team: Nitro_subzero\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid " Wad Saved as:"
+msgstr " บันทึก Wad เป็น:"
+
+msgid " could not be downloaded."
+msgstr " ไม่สามารถดาวน์โหลดได้"
+
+msgid " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information."
+msgstr " ถูกบันทึกแล้ว ข้อความยังไม่ถูกตรวจสอบ บางส่วนของโค๊ดอาจไม่สามารถทำงานได้ ถ้าคุณพบปัญหา เปิดโปรแกรมแก้ไขข้อความ เพื่อข้อมูลเพิ่มเติม."
+
+msgid " is not on the server."
+msgstr " ไม่อยู่บนแม่ข่าย"
+
+msgid "(both retired)"
+msgstr "(หมดอายุแล้ว)"
+
+msgid "0 (Everyone)"
+msgstr "0 (ทุกคน)"
+
+msgid "1 (Child 7+)"
+msgstr "1 (เด็ก 7+)"
+
+msgid "1 hour"
+msgstr "1 ชม."
+
+msgid "10 min"
+msgstr "10 นาที"
+
+msgid "2 (Teen 12+)"
+msgstr "2 (วัยรุ่น 12+)"
+
+msgid "20 min"
+msgstr "20 นาที"
+
+msgid "3 (Mature 16+)"
+msgstr "3 (เต็มวัย 16+)"
+
+msgid "3 min"
+msgstr "3 นาที"
+
+msgid "30 min"
+msgstr "30 นาที"
+
+msgid "3D Covers"
+msgstr "หน้าปก 3D"
+
+msgid "4 (Adults Only 18+)"
+msgstr "4 (เฉพาะผู้ใหญ่ 18+)"
+
+msgid "5 min"
+msgstr "5 นาที"
+
+msgid ">> Deleting tickets..."
+msgstr ">> ลบ Tickets..."
+
+msgid ">> Deleting tickets...ERROR! "
+msgstr ">> ลบ tickets...ผิดพลาด ! "
+
+msgid ">> Deleting tickets...Ok! "
+msgstr ">> ลบ tickets...สำเร็จ ! "
+
+msgid ">> Deleting title ...ERROR! "
+msgstr ">> ลบ Title...ผิดพลาด ! "
+
+msgid ">> Deleting title ...Ok!"
+msgstr ">> ลบ Title...สำเร็จ ! "
+
+msgid ">> Deleting title contents..."
+msgstr ">> ลบเนื้อหา Title..."
+
+msgid ">> Deleting title contents...ERROR! "
+msgstr ">> ลบเนื้อหา Title...ผิดพลาด ! "
+
+msgid ">> Deleting title contents...Ok!"
+msgstr ">> ลบเนื้อหา Title...สำเร็จ ! "
+
+msgid ">> Deleting title..."
+msgstr ">> ลบ Title..."
+
+msgid ">> Finishing installation..."
+msgstr ">> ติดตั้งเสร็จแล้ว..."
+
+msgid ">> Installing content #"
+msgstr ">> กำลังติดตั้ง เนื้อหา #"
+
+msgid ">> Installing ticket..."
+msgstr ">> กำลังติดตั้ง ticket..."
+
+msgid ">> Installing title..."
+msgstr ">> กำลังติดตั้ง title..."
+
+msgid ">> Reading WAD data..."
+msgstr ">> กำลังอ่านข้อมูล WAD..."
+
+msgid ">> Reading WAD data...ERROR! "
+msgstr ">> กำลังอ่านข้อมูล WAD...ผิดพลาด ! "
+
+msgid ">> Reading WAD data...Ok!"
+msgstr ">> กำลังอ่านข้อมูล WAD...สำเร็จ !"
+
+msgid "AUTO"
+msgstr "อัตโนมัติ"
+
+msgid "All the features of USB Loader GX are unlocked."
+msgstr "ความสามารถทั้งหมดของ USB Loader GX ถูกเปิดให้ใช้."
+
+msgid "Alternate DOL"
+msgstr "เปลี่ยน DOL "
+
+msgid "An Error occured"
+msgstr "พบความผิดพลาด"
+
+msgid "Anti"
+msgstr "ต้าน"
+
+msgid "App Language"
+msgstr "ภาษาของโปรแกรม"
+
+msgid "Apr"
+msgstr "เมษ."
+
+msgid "Are you sure?"
+msgstr "แน่ใจหรือไม่ ?"
+
+msgid "Aug"
+msgstr "สค."
+
+msgid "AutoInit Network"
+msgstr "ทำการเชื่อมต่อเครือข่าย"
+
+msgid "AutoPatch"
+msgstr "แก้ไขอัตโนมัติ"
+
+msgid "Back"
+msgstr "ย้อนกลับ"
+
+msgid "Back to HBC or Wii Menu"
+msgstr "กลับไป HBC หรือ เมนู Wii"
+
+msgid "Back to Loader"
+msgstr "กลับไปที่ Loader"
+
+msgid "Back to Wii Menu"
+msgstr "กลับไป เมนู Wii"
+
+msgid "Backgroundmusic"
+msgstr "ดนตรีเบื้องหลัง"
+
+msgid "Backgroundmusic Path changed."
+msgstr "เปลี่ยนที่เก็บ ดนตรีเบื้องหลัง"
+
+msgid "Big thanks to:"
+msgstr "ขอขอบคุณ:"
+
+msgid "Block IOS Reload"
+msgstr "โหลดบล๊อค IOS อีกครั้ง"
+
+msgid "Boot/Standard"
+msgstr "บูต/มาตราฐาน"
+
+msgid "Boot?"
+msgstr "บูต?"
+
+msgid "Both"
+msgstr "ทั้งคู่"
+
+msgid "Can't be formatted"
+msgstr "ไม่สามารถฟอร์แมตได้"
+
+msgid "Can't create directory"
+msgstr "ไม่สามารถสร้างไดเรคทอรี่ได้"
+
+msgid "Can't delete:"
+msgstr "ไม่สามารถลบได้:"
+
+msgid "Cancel"
+msgstr "ยกเลิก"
+
+msgid "Cheatcodes Path"
+msgstr "ที่เก็บ สูตรโกง"
+
+msgid "Cheatcodes Path changed"
+msgstr "ที่เก็บ สูตรโกง ถูกเปลี่ยนแปลง"
+
+msgid "Cheatfile is blank"
+msgstr "ไฟล์สูตรโกง ว่างเปล่า"
+
+msgid "Checking existing artwork"
+msgstr ""
+
+msgid "Checking for Updates"
+msgstr "ตรวจสอบหาอัพเดท"
+
+msgid "Click to Download Covers"
+msgstr "กดเพื่อดาวน์โหลดหน้าปก"
+
+msgid "Click to change game ID"
+msgstr "กดเพื่อเปลี่ยน ID เกมส์"
+
+msgid "Clock"
+msgstr "นาฬิกา"
+
+msgid "Close"
+msgstr "ปิด"
+
+msgid "Code Download"
+msgstr "ดาวน์โหลดโค๊ด"
+
+#, c-format
+msgid "Coded by: %s"
+msgstr "โค๊ดโดย: %s"
+
+msgid "Coding:"
+msgstr "โค๊ด:"
+
+msgid "Confirm"
+msgstr "ยืนยัน"
+
+msgid "Console"
+msgstr "คอนโซล"
+
+msgid "Console Default"
+msgstr "ค่าตั้งต้นของคอนโซล"
+
+msgid "Console Locked"
+msgstr "คอนโซลถูกล๊อค"
+
+msgid "Console should be unlocked to modify it."
+msgstr "ปลดล๊อคคอนโซลก่อน ถึงจะทำการเปลี่ยนแปลงได้"
+
+msgid "Continue to install game?"
+msgstr "ทำต่อ เพื่อติดตั้งเกมส์?"
+
+msgid "Controllevel"
+msgstr "ระดับการควบคุม"
+
+msgid "Correct Password"
+msgstr "รหัสผ่านถูกต้อง"
+
+msgid "Could not create GCT file"
+msgstr "ไม่สามารถสร้างไฟล์ GCT"
+
+msgid "Could not find a WBFS partition."
+msgstr "ไม่พบ WBFS พาร์ติชั่น"
+
+msgid "Could not initialize DIP module!"
+msgstr "ไม่สามารถเปิดใช้โมดูล DIP ได้ !"
+
+msgid "Could not initialize network!"
+msgstr "ไม่สามารถเชื่อมต่อกับเครือข่ายได้ !"
+
+msgid "Could not open Disc"
+msgstr "เปิดจากแผ่นไม่ได้ !"
+
+msgid "Could not open WBFS partition"
+msgstr "ไม่สามารถเปิด WBFS พาร์ติชั่นได้"
+
+msgid "Could not open disc."
+msgstr "เปิดจากแผ่นไม่ได้ !"
+
+msgid "Could not read the disc."
+msgstr "อ่านแผ่นไม่ได้ !"
+
+msgid "Could not save."
+msgstr ""
+
+msgid "Could not set USB."
+msgstr "ไม่สามารถตั้งค่า USB ได้"
+
+msgid "Cover Download"
+msgstr "ดาวน์โหลดปก"
+
+msgid "Cover Path"
+msgstr "ที่เก็บ ปก"
+
+msgid "Coverpath Change"
+msgstr "ที่เก็บ ปก ถูกเปลี่ยนแปลง"
+
+msgid "Coverpath Changed"
+msgstr "ที่เก็บ ปก ถูกเปลี่ยนแปลง"
+
+msgid "Create"
+msgstr "สร้าง"
+
+msgid "Credits"
+msgstr "เครดิต"
+
+msgid "Custom Paths"
+msgstr "กำหนด ที่เก็บ"
+
+msgid "Customs/Original"
+msgstr "กำหนดเอง/ดั้งเดิม"
+
+msgid "Dec"
+msgstr "ธค."
+
+msgid "Default"
+msgstr "ค่าตั้งต้น"
+
+msgid "Default Gamesettings"
+msgstr "การปรับแต่งเกมส์ แบบตั้งต้น"
+
+msgid "Default Settings"
+msgstr "การปรับแต่ง แบบตั้งต้น"
+
+msgid "Delete"
+msgstr "ลบ"
+
+msgid "Delete ?"
+msgstr "ลบ ?"
+
+msgid "Delete Boxart"
+msgstr "ลบ ภาพกล่อง"
+
+msgid "Delete Cheat GCT"
+msgstr ""
+
+msgid "Delete CheatTxt"
+msgstr "ลบ CheatTxt"
+
+msgid "Delete Discart"
+msgstr "ลบ ภาพแผ่น"
+
+msgid "Design:"
+msgstr "ออกแบบ:"
+
+msgid "Developed by"
+msgstr "พัฒนาโดย "
+
+msgid "Disc Default"
+msgstr "ค่าตั้งต้นแผ่น"
+
+msgid "Disc Images"
+msgstr "ภาพแผ่น"
+
+msgid "Discimage Path"
+msgstr "ที่เก็บ ภาพแผ่น"
+
+msgid "Discimages Download"
+msgstr "ดาวน์โหลดภาพแผ่น"
+
+msgid "Discpath Changed"
+msgstr "ที่เก็บ ภาพแผ่น ถูกเปลี่ยนแปลง"
+
+msgid "Discpath change"
+msgstr "ที่เก็บ ภาพแผ่น ถูกเปลี่ยนแปลง"
+
+msgid "DiskFlip"
+msgstr "สลับด้านแผ่น"
+
+msgid "Display"
+msgstr "การแสดงผล"
+
+msgid "Display as a carousel"
+msgstr "แสดงผลแบบ ม้าหมุน"
+
+msgid "Display as a grid"
+msgstr "แสดงผลแบบ ตาราง"
+
+msgid "Display as a list"
+msgstr "แสดงผลแบบ รายการ"
+
+msgid "Display favorites"
+msgstr "แสดง แบบเกมส์ที่ชอบ"
+
+msgid "Do you really want to delete:"
+msgstr "ต้องการที่จะลบใช่ไหม:"
+
+msgid "Do you want to change language?"
+msgstr "ต้องการจะเปลี่ยนภาษา ?"
+
+msgid "Do you want to format:"
+msgstr "ต้องการฟอร์แมต:"
+
+msgid "Do you want to retry for 30 secs?"
+msgstr "ต้องการลองใหม่ทุก 30 วินาที?"
+
+msgid "Do you want to use the alt dol that is known to be correct?"
+msgstr "ต้องการจะใช้ alt dol เฉพาะที่รู้ว่าถูกต้อง?"
+
+msgid "Do you wish to update/download all language files?"
+msgstr "ต้องการอัพเดทหรือดาวน์โหลด ไฟล์ภาษา ทั้งหมด?"
+
+msgid "Dol Path"
+msgstr "ที่เก็บ DOL"
+
+msgid "Dolpath Changed"
+msgstr "ที่เก็บ DOL ถูกเปลี่ยนแปลง"
+
+msgid "Dolpath change"
+msgstr "ที่เก็บ DOL ถูกเปลี่ยนแปลง"
+
+msgid "Done!"
+msgstr "เสร็จ!"
+
+msgid "Download Boxart image?"
+msgstr "ดาวน์โหลดภาพกล่อง ?"
+
+msgid "Download Discart image?"
+msgstr "ดาวน์โหลดภาพแผ่น ?"
+
+msgid "Download Now"
+msgstr "เริ่มการดาวน์โหลด"
+
+msgid "Download finished"
+msgstr "ดาวน์โหลดเสร็จแล้ว"
+
+msgid "Downloading"
+msgstr "กำลังดาวน์โหลด"
+
+msgid "Downloading file"
+msgstr "กำลังดาวน์โหลดไฟล์:"
+
+msgid "Dutch"
+msgstr "เนเธอร์แลนด์"
+
+msgid "ERROR"
+msgstr "ผิดพลาด"
+
+msgid "ERROR:"
+msgstr "ผิดพลาด:"
+
+msgid "English"
+msgstr "อังกฤษ"
+
+msgid "Error"
+msgstr "ผิดพลาด"
+
+msgid "Error !"
+msgstr "ผิดพลาด !"
+
+msgid "Error 002 fix"
+msgstr "แก้ไข Error002"
+
+msgid "Error reading Disc"
+msgstr "อ่านแผ่นไม่ได้"
+
+msgid "Error while transfering data."
+msgstr "ผิดพลาดขณะรับส่งข้อมูล"
+
+msgid "Error..."
+msgstr "ผิดพลาด..."
+
+msgid "Error:"
+msgstr "ผิดพลาด:"
+
+msgid "Exit USB Loader GX?"
+msgstr "ปิด USB Loader GX?"
+
+msgid "Failed formating"
+msgstr "ฟอร์แมตไม่ได้"
+
+msgid "Failed to open partition"
+msgstr "ไม่สามารถเข้าถึงพาร์ทิชั่นได้"
+
+msgid "Feb"
+msgstr "กพ."
+
+msgid "File not found."
+msgstr "ไม่พบไฟล์"
+
+msgid "Finishing installation... Ok!"
+msgstr "การติดตั้งเสร็จแล้ว !"
+
+msgid "Flip-X"
+msgstr "กลับ-X"
+
+msgid "Force"
+msgstr "บังคับ"
+
+msgid "Format"
+msgstr "ฟอร์แมต"
+
+msgid "Formatting, please wait..."
+msgstr "กำลังฟอร์แมต,รอสักครู่..."
+
+msgid "Free Space"
+msgstr "พื้นที่ว่าง"
+
+msgid "French"
+msgstr "ฝรั่งเศส"
+
+msgid "Full Shutdown"
+msgstr "ปิดอย่างสมบรูณ์"
+
+msgid "GCT File created"
+msgstr "ไฟล์ GCT ถูกสร้าง"
+
+msgid "GUI Settings"
+msgstr "ปรับแต่ง หน้าจอโปรแกรม"
+
+msgid "Game ID"
+msgstr "เกมส์ ID"
+
+msgid "Game Language"
+msgstr "ภาษาเกมส์"
+
+msgid "Game Load"
+msgstr "โหลดเกมส์"
+
+msgid "Game Region"
+msgstr "โซนของเกมส์"
+
+msgid "Game Size"
+msgstr "ขนาดของเกมส์"
+
+msgid "Game is already installed:"
+msgstr "เกมส์นี้ถูกติดตั้งอยู่แล้ว:"
+
+msgid "Games"
+msgstr "เกมส์"
+
+msgid "German"
+msgstr "เยอรมัน"
+
+msgid "HOME Menu"
+msgstr "เมนู HOME"
+
+msgid "Homebrew Apps Path"
+msgstr "ที่เก็บโปรแกรม Homebrew"
+
+msgid "Homebrew Appspath change"
+msgstr "ที่เก็บโปรแกรม Homebrew ถูกเปลี่ยนแปลง"
+
+msgid "Homebrew Appspath changed"
+msgstr "ที่เก็บโปรแกรม Homebrew ถูกเปลี่ยนแปลง"
+
+msgid "Homebrew Channel"
+msgstr "Homebrew Channel"
+
+msgid "Homebrew Launcher"
+msgstr "Homebrew Launcher"
+
+msgid "Hour"
+msgstr "ชั่วโมง"
+
+msgid "How do you want to update?"
+msgstr "ต้องการอัพเดทแบบไหน ?"
+
+msgid "How to Shutdown?"
+msgstr "ต้องการปิดแบบไหน ?"
+
+msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
+msgstr "ถ้าไม่มี Wifi กด 1 เพื่อแสดง URL สำหรับดาวน์โหลด WiiTDB.zip"
+
+#, c-format
+msgid "Incoming file %0.2fKB"
+msgstr "ดาวน์โหลดไฟล์ %0.2fKB"
+
+#, c-format
+msgid "Incoming file %0.2fMB"
+msgstr "ดาวน์โหลดไฟล์ %0.2fMB"
+
+msgid "Initializing Network"
+msgstr "เชื่อมต่อเครือข่าย"
+
+msgid "Insert Disk"
+msgstr "ใส่แผ่น"
+
+msgid "Insert a Wii Disc!"
+msgstr "ใส่แผ่น Wii !"
+
+msgid "Insert an SD-Card to download images."
+msgstr "ใส่ SD card เพื่อดาวน์โหลดภาพ"
+
+msgid "Insert an SD-Card to save."
+msgstr "ใส่ SD card เพื่อบันทึก"
+
+msgid "Insert an SD-Card to use this option."
+msgstr "ใส่ SD card เพื่อใช้ตัวเลือกนี้ "
+
+msgid "Install"
+msgstr "ติดตั้ง"
+
+msgid "Install Error!"
+msgstr "ผิดพลาดขณะติดตั้ง!"
+
+msgid "Install a game"
+msgstr "ติดตั้งเกมส์"
+
+msgid "Installing content... Ok!"
+msgstr "ติดตั้งเนื้อหา... สำเร็จ!"
+
+msgid "Installing game:"
+msgstr "กำลังติดตั้งเกมส์:"
+
+msgid "Installing ticket... Ok!"
+msgstr "ติดตั้ง ticket... สำเร็จ!"
+
+msgid "Installing title... Ok!"
+msgstr "ติดตั้ง Title... สำเร็จ!"
+
+msgid "Installing wad"
+msgstr "ติดตั้ง WAD"
+
+msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
+msgstr "ดูเหมือนว่าคุณมีข้อมูลที่จำเป็นต่อการพัฒนาโปรแกรม กรุณาส่งข้อมูลนั้นให้ทีมพัฒนาด้วย."
+
+msgid "Italian"
+msgstr "อิตาลี"
+
+msgid "Jan"
+msgstr "มค."
+
+msgid "Japanese"
+msgstr "ญี่ปุ่น"
+
+msgid "July"
+msgstr "กค."
+
+msgid "June"
+msgstr "มิย."
+
+msgid "Keep"
+msgstr "เก็บ"
+
+msgid "Keyboard"
+msgstr "แป้นพิมพ์"
+
+msgid "Korean"
+msgstr "เกาหลี"
+
+msgid "Language change:"
+msgstr "เปลี่ยนภาษา:"
+
+msgid "Languagefile"
+msgstr "ไฟล์ภาษา"
+
+msgid "Languagepath changed."
+msgstr "ที่เก็บไฟล์ภาษาถูกเปลี่ยนแปลง"
+
+msgid "Left"
+msgstr "ซ้าย"
+
+msgid "Like SysMenu"
+msgstr "คล้าย SysMenu"
+
+msgid "Load"
+msgstr "โหลด"
+
+msgid "Load From SD/USB"
+msgstr "โหลดจาก SD/USB"
+
+#, c-format
+msgid "Load file from: %s ?"
+msgstr "โหลดไฟล์จาก: %s ?"
+
+msgid "Load this dol as alternate dol?"
+msgstr "โหลด dol นี้เป็น alternate dol?"
+
+msgid "Loading standard language."
+msgstr "โหลดภาษามาตราฐาน."
+
+msgid "Loading standard music."
+msgstr "โหลดเพลงมาตราฐาน"
+
+msgid "Lock Console"
+msgstr "ล๊อค Console"
+
+msgid "Locked"
+msgstr "ล๊อค"
+
+msgid "Mar"
+msgstr "มีค."
+
+msgid "May"
+msgstr "พค."
+
+msgid "Missing files"
+msgstr "ไฟล์ที่หาไม่พบ"
+
+msgid "Most likely it has dimensions that are not evenly divisible by 4."
+msgstr "ดูเหมือนว่าขนาดจะหารด้วย 4 ไม่ลงตัว"
+
+msgid "Music Volume"
+msgstr "ความดังเสียงเพลง"
+
+msgid "Neither"
+msgstr "ไม่ทั้งสอง"
+
+msgid "Network init error"
+msgstr "การเชื่อมต่อเครือข่ายผิดพลาด"
+
+msgid "Next"
+msgstr "ต่อไป"
+
+msgid "No"
+msgstr "ไม่"
+
+msgid "No .dol or .elf files found."
+msgstr "ไม่พบไฟล์ .dol หรือ .elf"
+
+msgid "No Cheatfile found"
+msgstr "ไม่พบไฟล์โกงเกมส์"
+
+msgid "No Favorites"
+msgstr "ไม่พบเกมส์ที่ชื่นชอบ"
+
+msgid "No SD-Card inserted!"
+msgstr "ไม่ได้เสียบ SD card!"
+
+msgid "No USB Device"
+msgstr "ไม่ได้เสียบอุปกรณ์ USB"
+
+msgid "No USB Device found."
+msgstr "ไม่พบอุปกรณ์ USB"
+
+msgid "No WBFS partition found"
+msgstr "ไม่พบพาร์ติชั่นแบบ WBFS "
+
+msgid "No cheats were selected"
+msgstr ""
+
+msgid "No data could be read."
+msgstr "ไม่มีข้อมูลที่อ่านไม่ได้"
+
+msgid "No dol file found on disc."
+msgstr "ไม่มีไฟล์ dol ในแผ่น"
+
+msgid "No file missing!"
+msgstr "ไม่มีไฟล์ที่หายไป"
+
+msgid "No new updates."
+msgstr "ไม่มีไฟล์ Update ตัวใหม่"
+
+msgid "Normal"
+msgstr "ปกติ"
+
+msgid "Normal Covers"
+msgstr "หน้าปกแบบปกติ"
+
+msgid "Not Found"
+msgstr "ไม่พบ"
+
+msgid "Not a Wii Disc"
+msgstr "ไม่ใช่แผ่นเกมส์ Wii"
+
+msgid "Not a dol/elf file."
+msgstr "ไม่ใช่ไฟล์ Dol หรือ Elf"
+
+msgid "Not enough free memory"
+msgstr "มีหน่วยความจำเหลือไม่พอ"
+
+msgid "Not enough free memory."
+msgstr "มีหน่วยความจำเหลือไม่พอ"
+
+msgid "Not enough free space!"
+msgstr "มีที่ว่างเหลือไม่พอ !"
+
+msgid "Not supported format!"
+msgstr "ไม่รองรับรูปแบบไฟล์นี้"
+
+msgid "Nov"
+msgstr "พย."
+
+msgid "OFF"
+msgstr "ปิด"
+
+msgid "OK"
+msgstr "ตกลง"
+
+msgid "ON"
+msgstr "เปิด"
+
+msgid "Oct"
+msgstr "ตค."
+
+msgid "Official Site"
+msgstr "เวบไซต์อย่างเป็นทางการ"
+
+msgid "Ok"
+msgstr "ตกลง"
+
+msgid "Only Customs"
+msgstr "เฉพาะที่ดัดแปลง"
+
+msgid "Only Original"
+msgstr "เฉพาะของแท้"
+
+msgid "Only for Install"
+msgstr "เฉพาะติดตั้งเท่านั้น"
+
+msgid "Original/Customs"
+msgstr "ของแท้/ดัดแปลง"
+
+msgid "Parental Control"
+msgstr "ควบคุมอายุผู้เล่น"
+
+msgid "Parental control"
+msgstr "ควบคุมอายุผู้เล่น"
+
+msgid "Partition"
+msgstr "พาร์ติชั่น"
+
+msgid "Password"
+msgstr "รหัสผ่าน"
+
+msgid "Password Changed"
+msgstr "รหัสผ่านถูกเปลี่ยนแปลง"
+
+msgid "Password has been changed"
+msgstr "รหัสผ่านถูกเปลี่ยนแปลง"
+
+msgid "Paste it into your browser to get your WiiTDB.zip."
+msgstr "วางในเวบบราวเซอร์เพื่อดึงข้อมูล WiiTDB.zip"
+
+msgid "Patch Country Strings"
+msgstr "ปรับแก้ข้อความประเทศ"
+
+msgid "Pick from a list"
+msgstr "เลือกจากรายการ"
+
+msgid "Play Count"
+msgstr "จำนวนที่เล่น"
+
+msgid "Power off the Wii"
+msgstr "ปิดเครื่อง Wii"
+
+msgid "Prev"
+msgstr "ที่ผ่านมา"
+
+msgid "Prompts Buttons"
+msgstr "ปุ่มเตรียมตัว"
+
+msgid "Published by"
+msgstr "เผยแพร่โดย"
+
+msgid "Quick Boot"
+msgstr "บูตแบบเร็ว"
+
+msgid "Reading WAD data... Ok!"
+msgstr "อ่านข้อมูล WAD... สำเร็จ!"
+
+msgid "Receiving file from:"
+msgstr "ได้รับไฟล์จาก:"
+
+msgid "Released"
+msgstr "ปล่อย"
+
+msgid "Reload SD"
+msgstr "โหลด SD ใหม่"
+
+msgid "Rename Game on WBFS"
+msgstr "เปลี่ยนชื่อเกมส์บน WBFS"
+
+msgid "Reset Playcounter"
+msgstr "เคลียร์การนับจำนวนที่เล่น"
+
+msgid "Restarting..."
+msgstr "รีสตารท์..."
+
+msgid "Return"
+msgstr "กลับ"
+
+msgid "Return to Wii Menu"
+msgstr "กลับไปที่เมนู Wii"
+
+msgid "Right"
+msgstr "ขวา"
+
+msgid "Rumble"
+msgstr "สั่น"
+
+msgid "SChinese"
+msgstr "จีน"
+
+msgid "SD/USB selected"
+msgstr "SD/USB ถูกเลือก"
+
+msgid "SFX Volume"
+msgstr "ความดังของ SFX"
+
+msgid "Save"
+msgstr "บันทึก"
+
+msgid "Save Failed"
+msgstr "การบันทึกไม่สำเร็จ"
+
+msgid "Save Game List to"
+msgstr ""
+
+msgid "Saved"
+msgstr ""
+
+msgid "Screensaver"
+msgstr "รักษาหน้าจอ"
+
+msgid "Select a DOL"
+msgstr "เลือก DOL"
+
+msgid "Selected DOL"
+msgstr "DOL ที่เลือก"
+
+msgid "Sept"
+msgstr "กย."
+
+msgid "Set as backgroundmusic?"
+msgstr "เลือกเป็น Background music?"
+
+msgid "Settings"
+msgstr "กำหนดค่า"
+
+msgid "Shutdown System"
+msgstr "ปิดระบบ"
+
+msgid "Shutdown to Idle"
+msgstr "เข้าโหมด Idle"
+
+msgid "Sort alphabetically"
+msgstr "เรียงตามตัวอักษร"
+
+msgid "Sort order by most played"
+msgstr "เรียงตามความถี่ในการเล่น"
+
+msgid "Sound"
+msgstr "เสียง"
+
+msgid "Spanish"
+msgstr "สเปน"
+
+msgid "Special thanks to:"
+msgstr "ขอขอบคุณอย่างสูง:"
+
+msgid "Standard"
+msgstr "มาตราฐาน"
+
+msgid "Success"
+msgstr "สำเร็จ"
+
+msgid "Success:"
+msgstr "สำเร็จ:"
+
+msgid "Successfully Saved"
+msgstr "บันทึกสำเร็จ"
+
+msgid "Successfully Updated"
+msgstr "อัพเดทสำเร็จ"
+
+msgid "Successfully deleted:"
+msgstr "ลบสำเร็จ:"
+
+msgid "Successfully installed:"
+msgstr "ติดตั้งสำเร็จ:"
+
+msgid "System Default"
+msgstr "ค่าเริ่มต้นของระบบ"
+
+msgid "TChinese"
+msgstr "จีนโบราณ"
+
+msgid "TXTCheatcodes Path"
+msgstr "ที่เก็บ TXTCheatcodes"
+
+msgid "TXTCheatcodes Path changed"
+msgstr "ที่เก็บ TXTCheatcodes ถูกเปลี่ยนแปลง"
+
+msgid "The file is not a .wad"
+msgstr "ไม่ใช่ไฟล์ .wad"
+
+msgid "The wad file was installed.  But It could not be deleted from the SD card."
+msgstr "ไฟล์ Wad ถูกติดตั้งแล้ว แต่ไม่สามารถลบจาก SD card ได้"
+
+#, c-format
+msgid "The wad installation failed with error %ld"
+msgstr "การติดตั้งไฟล์ Wad ล้มเหลวด้วยข้อผิดพลาด %ld"
+
+msgid "ThemePath"
+msgstr "ที่อยู่ Theme"
+
+msgid "Themepath Changed"
+msgstr "ที่อยู่ Theme ถูกเปลี่ยนแปลง"
+
+msgid "Themepath change"
+msgstr "ที่อยู่ Theme ถูกเปลี่ยนแปลง"
+
+msgid "Time left:"
+msgstr "เหลือเวลาอีก:"
+
+msgid "Title Launcher"
+msgstr "Title Launcher"
+
+msgid "Titles from XML"
+msgstr "Title จาก XML"
+
+msgid "Tooltips"
+msgstr "คำแนะนำ"
+
+msgid "USB Device not found"
+msgstr "ไม่พบอุปกรณ์ USB"
+
+msgid "USB Loader GX is protected"
+msgstr "USB Loader GX 5 ถูกป้องกัน"
+
+#, c-format
+msgid "Unable to open the wad that was just downloaded (%s)."
+msgstr "ไม่สามารถเปิดไฟล์ Wad ที่เพิ่งดาวน์โหลดมาได้ (%s)."
+
+msgid "Uninstall"
+msgstr "ถอนการติดตั้ง"
+
+msgid "Uninstall Game"
+msgstr "ถอนการติดตั้งเกมส์"
+
+msgid "Uninstall Menu"
+msgstr "เมนูถอนการติดตั้ง"
+
+msgid "Uninstalling wad"
+msgstr "ถอนการติดตั้งไฟล์ WAD"
+
+msgid "Unlock console to use this option."
+msgstr "ปลดล๊อค Console ก่อน เพื่อใช้ตัวเลือกนี้"
+
+msgid "Unlocked"
+msgstr "ปลดล๊อค"
+
+msgid "Update"
+msgstr "อัพเดท"
+
+msgid "Update All"
+msgstr "อัทเดททั้งหมด"
+
+msgid "Update DOL"
+msgstr "อัพเดท DOL"
+
+msgid "Update Files"
+msgstr "อัพเดทไฟล์"
+
+msgid "Update all Language Files"
+msgstr "อัพเดทไฟล์ภาษาทั้งหมด"
+
+msgid "Update failed"
+msgstr "อัพเดทล้มเหลว"
+
+msgid "Update to"
+msgstr "อัพเดทเป็น"
+
+msgid "Updatepath"
+msgstr "ที่อยู่ Update"
+
+msgid "Updatepath changed."
+msgstr "ที่อยู่ Update ถูกเปลี่ยนแปลง"
+
+msgid "Updating"
+msgstr "กำลังอัพเดท"
+
+msgid "Updating Language Files..."
+msgstr "กำลังอัพเดทไฟล์ภาษา..."
+
+msgid "Updating Language Files:"
+msgstr "กำลังอัพเดทไฟล์ภาษา:"
+
+msgid "Updating WiiTDB.zip"
+msgstr "กำลังอัพเดทไฟล์ WiiTDB.zip"
+
+msgid "VIDTV Patch"
+msgstr "ปรับแก้ VIDTV"
+
+#, c-format
+msgid "Version: %s"
+msgstr "เวอร์ชั่น: %s"
+
+msgid "Video Mode"
+msgstr "โหมดการแสดงผลภาพ"
+
+msgid "Waiting for USB Device"
+msgstr "กำลังรออุปกรณ์ USB"
+
+msgid "Waiting..."
+msgstr "กำลังรอ..."
+
+msgid "What do you want to update?"
+msgstr "คุณต้องการอัพเดทอะไร ?"
+
+msgid "WiFi Features"
+msgstr "ความสามารถของ Wi Fi"
+
+msgid "Widescreen Fix"
+msgstr "จอกว้าง"
+
+msgid "Wii Menu"
+msgstr "เมนู Wii"
+
+msgid "Wii Settings"
+msgstr "การปรับแต่ง Wii"
+
+msgid "WiiTDB Files"
+msgstr "ไฟล์ WiiTDB"
+
+msgid "Wiilight"
+msgstr "ความสว่างของ Wii"
+
+msgid "Wrong Password"
+msgstr "รหัสผ่านผิดพลาด"
+
+msgid "XMLPath"
+msgstr "ที่อยู่ XML"
+
+msgid "XMLPath change"
+msgstr "เปลี่ยนที่อยู่ XML"
+
+msgid "XMLPath changed."
+msgstr "ที่อยู่ XML ถูกเปลี่ยนแปลง"
+
+msgid "Yes"
+msgstr "ใช่"
+
+msgid "You are about to delete "
+msgstr "คุณกำลังจะลบ "
+
+msgid "You are choosing to display favorites and you do not have any selected."
+msgstr "คุณเลือกจะแสดงรายการที่ชอบ แต่คุณไม่ได้กำหนดเกมส์ที่ชื่นชอบไว้"
+
+msgid "You have attempted to load a bad image"
+msgstr "คุณพยายามที่จะโหลดรูปภาพที่เสียหาย"
+
+msgid "You need to format a partition"
+msgstr "ต้องทำการฟอร์แมทพาร์ติชั่น"
+
+msgid "You need to start this game one time to create a save file, then exit and start it again."
+msgstr ""
+
+#, c-format
+msgid "Your URL has been saved in %sWiiTDB_URL.txt."
+msgstr "URL ของคุณถูกบันทึกใน %sWiiTDB_URL.txt."
+
+msgid "available"
+msgstr "ว่าง"
+
+msgid "contains over 255 lines of code.  It will produce unexpected results."
+msgstr "มีจำนวนบรรทัดมากกว่า 255 บรรทัด ซึ่งอาจทำให้เกิดผลที่ไม่คาดคิด."
+
+msgid "does not exist!"
+msgstr "ไม่มี!"
+
+msgid "does not exist!  Loading game without cheats."
+msgstr "ไม่มี! โหลดเกมส์โดยไม่ใช้การโกงเกมส์."
+
+msgid "does not exist!  You Messed something up, Idiot."
+msgstr "ไม่มี! คุณทำให้มันเละไปแล้ว ไอ้โง่ อิอิ."
+
+msgid "file left"
+msgstr "ไฟล์ที่ยังเหลือ"
+
+msgid "files left"
+msgstr "ไฟล์ที่ยังเหลือ"
+
+msgid "files not found on the server!"
+msgstr "ไม่พบไฟล์/i บนเซิฟเวอร์!"
+
+msgid "for"
+msgstr "สำหรับ"
+
+msgid "for WiiTDB and hosting covers / disc images"
+msgstr "สำหรับ WiiTDB และ ที่เก็บออนไลน์ของภาพ ปกและแผ่น"
+
+msgid "for diverse patches"
+msgstr "สำหรับปรับแก้ diverse"
+
+msgid "for his awesome tool"
+msgstr "สำหรับเครื่องมืออันน่าทึ่งของเค้า"
+
+msgid "for hosting the update files"
+msgstr "สำหรับที่เก็บไฟล์อัพเดท"
+
+msgid "for the USB Loader source"
+msgstr "สำหรับรหัสโปรแกรม USB Loader"
+
+msgid "formatted!"
+msgstr "ฟอร์แมต!"
+
+msgid "free"
+msgstr "ฟรี"
+
+msgid "not set"
+msgstr "ไม่ได้กำหนด"
+
+msgid "of"
+msgstr "ของ"
+
+msgid "seconds left"
+msgstr "วินาทีที่เหลือ"
+
+#~ msgid "Don't bother the USB Loader GX Team about errors in this file."
+#~ msgstr "อย่ารบกวนผู้พัฒนา USB Loader GX ถ้ามีข้อผิดพลาดกับไฟล์นี้ "
+
+#~ msgid "ERROR: USB device could not be loaded!"
+#~ msgstr "ผิดพลาด! ไม่สามารถโหลดอุปกรณ์ USB ได้"
+
+#~ msgid "ERROR: cIOS could not be loaded!"
+#~ msgstr "ผิดพลาด! ไม่สามารถโหลด cIOS ได้"
+
+#~ msgid "Loading..."
+#~ msgstr "กำลังโหลด..."
+
+#~ msgid "Waiting for your slow USB Device: %i secs..."
+#~ msgstr "กำลังรออุปกรณ์ USB อันเชื่องช้าของคุณ: %i วินาที..."
+
+#~ msgid "No partitions found"
+#~ msgstr "ไม่พบพาร์ติชั่น"
+
+#~ msgid "Restart"
+#~ msgstr "รีสตาร์ท"
