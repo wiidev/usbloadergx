@@ -17,6 +17,7 @@
 #include "sys.h"
 #include "settings/cfg.h"
 #include "memory.h"
+#include "../wad/title.h"
 
 /*** Extern functions ***/
 extern void ResumeGui();
@@ -316,6 +317,15 @@ int autoSelectDol(const char *id, bool force) {
 int autoSelectDolMenu(const char *id) {
 
 	//Metroid Prime Trilogy
+	//don't let the game start without a save game in the nand
+	char id4[10];
+	sprintf(id4,"%c%c%c%c",id[0],id[1],id[2],id[3]);
+	
+	if (CheckForSave(id4)==0)
+		{
+			WindowPrompt(0,"You need to play the game one time to create a save file.  Then exit and start it again using the dol of the game you want to use.",tr("Ok"));
+			return -1;
+		}
 	if (strcmp(id,"R3ME01") == 0) {
 		int choice = WindowPrompt(tr("Select a DOL"), 0, "Metroid Prime", "Metroid Prime 2", "Metroid Prime 3", tr("Default"));
         switch (choice) {

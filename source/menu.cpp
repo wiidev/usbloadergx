@@ -698,7 +698,7 @@ int MenuDiscList() {
     mainWindow->Append(&w);
 
     ResumeGui();
-
+	
     while (menu == MENU_NONE) {
 
         if (idiotFlag==1) {

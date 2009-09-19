@@ -9,6 +9,7 @@
 #include "../settings/cfg.h"
 #include "fatmounter.h"
 #include "id.h"
+#include "isfs.h"
 
 #define MAX_TITLES 256
 
@@ -169,6 +170,8 @@ s32 Title_GetSysVersion(u64 tid, u64 *outbuf) {
     return 0;
 }
 
+
+
 s32 Title_GetSize(u64 tid, u32 *outbuf) {
     signed_blob *p_tmd = NULL;
     tmd      *tmd_data = NULL;
@@ -315,6 +318,127 @@ s32 Uninstall_DeleteTicket(u32 title_u, u32 title_l) {
     ret = ISFS_Delete(filepath);
 
     return ret;
+}
+
+
+//////savegame shit, from waninkoko.  modified for use in this project
+/* Savegame structure */
+struct savegame {
+	/* Title name */
+	char name[65];
+
+	/* Title ID */
+	u64 tid;
+};
+
+s32 Savegame_CheckTitle(const char *path)
+{
+	FILE *fp = NULL;
+
+	char filepath[128];
+
+	/* Generate filepath */
+	sprintf(filepath, "%s/banner.bin", path);
+
+	/* Try to open banner */
+	fp = fopen(filepath, "rb");
+	if (!fp)
+		return -1;
+
+	/* Close file */
+	fclose(fp);
+
+	return 0;
+}
+
+s32 Savegame_GetNandPath(u64 tid, char *outbuf)
+{
+	s32 ret;
+	char buffer[1024] ATTRIBUTE_ALIGN(32);
+
+	/* Get data directory */
+	ret = ES_GetDataDir(tid, buffer);
+	if (ret < 0)
+		return ret;
+
+	/* Generate NAND directory */
+	sprintf(outbuf, "isfs:%s", buffer);
+
+	return 0;
+}
+
+s32 __Menu_GetNandSaves(struct savegame **outbuf, u32 *outlen)
+{
+	struct savegame *buffer = NULL;
+
+	u64 *titleList = NULL;
+	u32  titleCnt;
+
+	u32 cnt, idx;
+	s32 ret;
+
+	/* Get title list */
+	ret = Title_GetList(&titleList, &titleCnt);
+	if (ret < 0)
+		return ret;
+
+	/* Allocate memory */
+	buffer = malloc(sizeof(struct savegame) * titleCnt);
+	if (!buffer) {
+		ret = -1;
+		goto out;
+	}
+
+	/* Copy titles */
+	for (cnt = idx = 0; idx < titleCnt; idx++) {
+		u64  tid = titleList[idx];
+		char savepath[128];
+
+		/* Generate dirpath */
+		Savegame_GetNandPath(tid, savepath);
+
+		/* Check for title savegame */
+		ret = Savegame_CheckTitle(savepath);
+		if (!ret) {
+			struct savegame *save = &buffer[cnt++];
+
+			/* Set title ID */
+			save->tid = tid;
+		}
+	}
+
+	/* Set values */
+	*outbuf = buffer;
+	*outlen = cnt;
+
+	/* Success */
+	ret = 0;
+
+out:
+	/* Free memory */
+	if (titleList)
+		free(titleList);
+
+	return ret;
+}
+
+s32 __Menu_EntryCmp(const void *p1, const void *p2)
+{
+	struct savegame *s1 = (struct savegame *)p1;
+	struct savegame *s2 = (struct savegame *)p2;
+
+	/* Compare entries */
+	return strcmp(s1->name, s2->name);
+}
+
+s32 __Menu_RetrieveList(struct savegame **outbuf, u32 *outlen)
+{
+	s32 ret;
+	ret = __Menu_GetNandSaves(outbuf, outlen);
+	if (ret >= 0)
+		qsort(*outbuf, *outlen, sizeof(struct savegame), __Menu_EntryCmp);
+
+	return ret;
 }
 
 //carefull when using this function
@@ -584,6 +708,35 @@ char *titleText(u32 kind, u32 title) {
         text[4] = 0;
     }
     return text;
+}
+
+//giantpune's magic function to check for game saves
+//give a ID4 of a game and returns 1 if the game has save data, 0 if not, or <0 for errors
+int CheckForSave(const char *gameID)
+{
+
+	if (ISFS_Initialize()<0)
+		return -1;
+	
+	if (!ISFS_Mount())
+		return -2;
+		
+	struct savegame *saveList = NULL;
+	u32 saveCnt;
+	u32 cnt;
+	
+	
+	if (__Menu_RetrieveList(&saveList, &saveCnt)<0)
+		return -3;
+
+	for (cnt=0;cnt<saveCnt;cnt++)
+	{	
+		struct savegame *save = &saveList[cnt];
+		if (strcmp(gameID,titleText((u32)(save->tid >> 32),(u32)(save->tid & 0xFFFFFFFF)))==0)
+			return 1;
+	}
+	return 0;
+
 }
 
 

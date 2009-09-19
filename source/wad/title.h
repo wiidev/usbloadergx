@@ -60,6 +60,9 @@ extern "C" {
     char *__getTitleName(u64 titleid, int language);
 
     s32 Uninstall_FromTitle(const u64 tid);
+	
+//check for a game save present on nand based on game ID
+int CheckForSave(const char *gameID);
 
 #ifdef __cplusplus
 }
