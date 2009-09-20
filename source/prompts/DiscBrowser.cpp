@@ -247,11 +247,7 @@ int autoSelectDol(const char *id, bool force) {
     if (strcmp(id,"RF8E69") == 0) return 439;//from isostar
     if (strcmp(id,"RF8P69") == 0) return 463;//from isostar
     if (strcmp(id,"RF8X69") == 0) return 464;//from isostar
-	
-	//Grand Slam Tennis
-    if (strcmp(id,"R5TP69") == 0) return 1493;//from isostar
-    if (strcmp(id,"R5TE69") == 0) return 1493;//starstremr
-	
+		
 	//Madden NFL07
     if (strcmp(id,"RMDP69") == 0) return 39;//from isostar
 	
@@ -281,21 +277,18 @@ int autoSelectDol(const char *id, bool force) {
     if (strcmp(id,"RSXP69") == 0) return 377;//previous value was 337
     if (strcmp(id,"RSXE69") == 0) return 377;//previous value was 337
 	
-	//Tiger Woods 10
-    if (strcmp(id,"R9OP69") == 0) return 1991;//from isostar
-    if (strcmp(id,"R9OE69") == 0) return 1973;//starstremr
-	
-	//Virtual Tennis 2009
-    if (strcmp(id,"RVUP8P") == 0) return 16426;//from isostar
-    if (strcmp(id,"RVUE8P") == 0) return 16405;//from isostar
-	
 	//Wii Sports Resort, needs alt dol one time only, to show the Motion Plus video
 	//if (strcmp(id,"RZTP01") == 0 && CheckForSave(id4)==0) return 952;//from isostar
 	//if (strcmp(id,"RZTE01") == 0 && CheckForSave(id4)==0) return 674;//from starstremr
+	//as well as Grand Slam Tennis, Tiger Woods 10, Virtual Tennis 2009
 	
 ///// games that can't be forced (alt dol is not always needed)
 	if (!force) {
 	
+		//Grand Slam Tennis
+		if (strcmp(id,"R5TP69") == 0) return 1493;//from isostar
+		if (strcmp(id,"R5TE69") == 0) return 1493;//starstremr
+		
 		//Indiana Jones and the Staff of Kings (Fate of Atlantis)
 		if (strcmp(id,"RJ8P64") == 0) return 8;//from isostar
 		if (strcmp(id,"RJ8E64") == 0) return 8;//starstremr
@@ -311,6 +304,14 @@ int autoSelectDol(const char *id, bool force) {
 		//The House Of The Dead 2 & 3 Return
 		if (strcmp(id,"RHDP8P") == 0) return 149;//from isostar
 		if (strcmp(id,"RHDE8P") == 0) return 149;//starstremr
+		
+		//Tiger Woods 10
+		if (strcmp(id,"R9OP69") == 0) return 1991;//from isostar
+		if (strcmp(id,"R9OE69") == 0) return 1973;//starstremr
+		
+		//Virtual Tennis 2009
+		if (strcmp(id,"RVUP8P") == 0) return 16426;//from isostar
+		if (strcmp(id,"RVUE8P") == 0) return 16405;//from isostar
 		
 		//Wii Sports Resort
 		if (strcmp(id,"RZTP01") == 0) return 952;//from isostar
