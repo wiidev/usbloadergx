@@ -234,7 +234,10 @@ int DiscBrowse(struct discHdr * header) {
 
 int autoSelectDol(const char *id, bool force) {
 
-	// games that can be forced (always need alt dol)
+	char id4[10];
+	sprintf(id4,"%c%c%c%c",id[0],id[1],id[2],id[3]);
+	
+////// games that can be forced (always need alt dol)
 
 	//Boogie 
     if (strcmp(id,"RBOP69") == 0) return 657;//from isostar
@@ -286,8 +289,11 @@ int autoSelectDol(const char *id, bool force) {
     if (strcmp(id,"RVUP8P") == 0) return 16426;//from isostar
     if (strcmp(id,"RVUE8P") == 0) return 16405;//from isostar
 	
+	//Wii Sports Resort, needs alt dol one time only, to show the Motion Plus video
+	//if (strcmp(id,"RZTP01") == 0 && CheckForSave(id4)==0) return 952;//from isostar
+	//if (strcmp(id,"RZTE01") == 0 && CheckForSave(id4)==0) return 674;//from starstremr
 	
-	// games that can't be forced (alt dol is not always needed)
+///// games that can't be forced (alt dol is not always needed)
 	if (!force) {
 	
 		//Indiana Jones and the Staff of Kings (Fate of Atlantis)
@@ -314,19 +320,37 @@ int autoSelectDol(const char *id, bool force) {
     return -1;
 }
 
-int autoSelectDolMenu(const char *id) {
+int autoSelectDolMenu(const char *id, bool force) {
 
 	char id4[10];
 	sprintf(id4,"%c%c%c%c",id[0],id[1],id[2],id[3]);
 	
+	/*
+	switch (CheckForSave(id4)) {
+		case 0:
+			WindowPrompt("NO save",0,tr("Ok"));
+			break;
+		case 1:
+			WindowPrompt("save",0,tr("Ok"));
+			break;
+		default:
+			char test[10];
+			sprintf(test,"%d",CheckForSave(id4));
+			WindowPrompt(test,0,tr("Ok"));
+            break;
+	}
+	return -1;
+	*/
+	
 	//Metroid Prime Trilogy
 	if (strcmp(id,"R3ME01") == 0) {
 		//do not use any alt dol if there is no save game in the nand
-		if (CheckForSave(id4)==0)
-		{
+		/*
+		if (CheckForSave(id4)==0 && force) {
 			WindowPrompt(0,tr("You need to start this game one time to create a save file, then exit and start it again."),tr("Ok"));
 			return -1;
 		}
+		*/
 		int choice = WindowPrompt(tr("Select a DOL"), 0, "Metroid Prime", "Metroid Prime 2", "Metroid Prime 3", tr("Default"));
         switch (choice) {
             case 1:
@@ -337,18 +361,20 @@ int autoSelectDolMenu(const char *id) {
                 break;
 			case 3:
 				choice = 782;
+                break;
             default: // no alt dol
-				choice = -1;
+				choice = 0;
                 break;
 		}
 		return choice;
 	}
 	if (strcmp(id,"R3MP01") == 0) {
-		if (CheckForSave(id4)==0)
-		{
+		/*
+		if (CheckForSave(id4)==0 && force) {
 			WindowPrompt(0,tr("You need to start this game one time to create a save file, then exit and start it again."),tr("Ok"));
 			return -1;
 		}
+		*/
 		int choice = WindowPrompt(tr("Select a DOL"), 0, "Metroid Prime", "Metroid Prime 2", "Metroid Prime 3", tr("Default"));
         switch (choice) {
             case 1:
@@ -359,8 +385,9 @@ int autoSelectDolMenu(const char *id) {
 				break;
 			case 3:
 				choice = 784;
+                break;
             default: // no alt dol
-				choice = -1;
+				choice = 0;
 				break;
 		}
 		return choice;

@@ -11,6 +11,7 @@
 #include "id.h"
 #include "isfs.h"
 
+
 #define MAX_TITLES 256
 
 
@@ -732,9 +733,12 @@ int CheckForSave(const char *gameID)
 	for (cnt=0;cnt<saveCnt;cnt++)
 	{	
 		struct savegame *save = &saveList[cnt];
-		if (strcmp(gameID,titleText((u32)(save->tid >> 32),(u32)(save->tid & 0xFFFFFFFF)))==0)
+		if (strcmp(gameID,titleText((u32)(save->tid >> 32),(u32)(save->tid & 0xFFFFFFFF)))==0) {
+			free(saveList);
 			return 1;
+		}
 	}
+	free(saveList);
 	return 0;
 
 }

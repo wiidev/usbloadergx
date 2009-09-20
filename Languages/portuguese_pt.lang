@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-19 14:18+0200\n"
+"POT-Creation-Date: 2009-09-20 04:59+0200\n"
 "PO-Revision-Date: 2009-08-11 12:25\n"
 "Last-Translator: Sky8000\n"
 "Language-Team: \n"
@@ -827,6 +827,9 @@ msgstr "Escolher da lista"
 msgid "Play Count"
 msgstr "Vezes jogadas"
 
+msgid "Please wait..."
+msgstr ""
+
 msgid "Power off the Wii"
 msgstr "Desligar a Wii"
 
@@ -1129,9 +1132,6 @@ msgstr "Tentou carregar uma imagem corrompida"
 
 msgid "You need to format a partition"
 msgstr "É necessário FORMATAR a partição"
-
-msgid "You need to start this game one time to create a save file, then exit and start it again."
-msgstr ""
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."

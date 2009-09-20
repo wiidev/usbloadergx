@@ -784,6 +784,8 @@ int showGameInfo(char *ID) {
         mainWindow->Append(&gameinfoWindow);
         mainWindow->ChangeFocus(&gameinfoWindow);
         ResumeGui();
+		
+		bool savedURL = false;
 
         while (choice == -1) {
 
@@ -876,7 +878,10 @@ int showGameInfo(char *ID) {
                     ResumeGui();
                     page=1;
                 }
-            } else if (urlBtn.GetState()==STATE_CLICKED) {
+            } else if (urlBtn.GetState()==STATE_CLICKED && !savedURL) {
+			    snprintf(linebuf, sizeof(linebuf), tr("Please wait..."));
+				wiitdb2Txt->SetText(linebuf);
+                gameinfoWindow.Append(wiitdb2Txt);
                 if (save_XML_URL()) {
                     snprintf(linebuf, sizeof(linebuf), tr("Your URL has been saved in %sWiiTDB_URL.txt."), Settings.update_path);
                     wiitdb2Txt->SetText(linebuf);
@@ -884,7 +889,13 @@ int showGameInfo(char *ID) {
                     snprintf(linebuf, sizeof(linebuf), tr("Paste it into your browser to get your WiiTDB.zip."));
                     wiitdb3Txt->SetText(linebuf);
                     gameinfoWindow.Append(wiitdb3Txt);
-                }
+					savedURL = true;
+                } else {
+					snprintf(linebuf, sizeof(linebuf), tr("Could not save."));
+					wiitdb2Txt->SetText(linebuf);
+					gameinfoWindow.Append(wiitdb2Txt);
+				}
+				urlBtn.ResetState();
             }
         }
         if (page==1) {
@@ -970,9 +981,11 @@ int showGameInfo(char *ID) {
             mainWindow->SetState(STATE_DEFAULT);
             ResumeGui();
         }
+		
+		if (savedURL) return 3;
         return choice;
 
-        /* File not found */
+    /* File not found */
     } else {
         return -1;
     }

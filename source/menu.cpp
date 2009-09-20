@@ -1048,15 +1048,19 @@ int MenuDiscList() {
             menu = MENU_HOMEBREWBROWSE;
             break;
         } else if (gameInfo.GetState() == STATE_CLICKED) {
+		    gameInfo.ResetState();
             gameSelected = selectImg1;
             rockout();
             struct discHdr *header = &gameList[selectImg1];
             snprintf (IDfull,sizeof(IDfull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
             choice = showGameInfo(IDfull);
-            gameInfo.ResetState();
             rockout(2);
             if (choice==2)
                 homeBtn.SetState(STATE_CLICKED);
+			if (choice==3) {
+			    menu = MENU_DISCLIST;
+				break;
+			}
         }
         if (Settings.gameDisplay==grid) {
             int selectimg;
@@ -1417,12 +1421,10 @@ int MenuDiscList() {
 				sprintf(temp,"%d",autodol);
 			} else {
 				// alt dol menu for games that require more than a single alt dol
-				int autodol = autoSelectDolMenu((char*)header->id);
+				int autodol = autoSelectDolMenu((char*)header->id, true);
 				if (autodol>0) {
 					alternatedol = 2;
 					alternatedoloffset = autodol;
-				} else if (autodol == 0) { // if Cancel or B is pressed, don't launch game
-					menu = MENU_DISCLIST;
 				}
 			}
 		}
