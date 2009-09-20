@@ -2100,10 +2100,10 @@ int GameSettings(struct discHdr * header) {
 
                     if (alternatedol == on) options2.SetValue(8,tr("Load From SD/USB"));
                     if (alternatedol == 2) options2.SetValue(8,tr("Select a DOL"));
-                    else if (alternatedol == off) options2.SetValue(8,tr("OFF"));
+                    else if (alternatedol == off) options2.SetValue(8,tr("Default"));
 
                     if (alternatedol == on) options2.SetValue(9,tr("SD/USB selected"));
-                    else if (alternatedol == off) options2.SetValue(9,tr("OFF"));
+                    else if (alternatedol == off) options2.SetValue(9,tr("Default"));
                     else options2.SetValue(9, alternatedname);
 
                     if (reloadblock == on) options2.SetValue(10,tr("ON"));
@@ -2187,18 +2187,22 @@ int GameSettings(struct discHdr * header) {
                             int dolchoice = 0;
 							//alt dol menu for games that require more than a single alt dol
 							int autodol = autoSelectDolMenu(filename,false);
-							if (autodol == 0) // default was chosen
-								alternatedol = 0;
+
 							if (autodol>0) {
 								alternatedoloffset = autodol;
 								snprintf(alternatedname, sizeof(alternatedname), "%s <%i>", tr("AUTO"),autodol);
+							} else if (autodol == 0) {
+								// default was chosen
+								alternatedol = 0;
 							} else {
 								//check to see if we already know the offset of the correct dol
 								int autodol = autoSelectDol(filename, false);
 								//if we do know that offset ask if they want to use it
 								if (autodol>0) {
 									dolchoice = WindowPrompt(0,tr("Do you want to use the alt dol that is known to be correct?"),tr("Yes"),tr("Pick from a list"),tr("Cancel"));
-									if (dolchoice==1) {
+									if (dolchoice==0) {
+										alternatedol = 0;
+									} else if (dolchoice==1) {
 										alternatedoloffset = autodol;
 										snprintf(alternatedname, sizeof(alternatedname), "%s <%i>", tr("AUTO"),autodol);
 									} else if (dolchoice==2) {//they want to search for the correct dol themselves
