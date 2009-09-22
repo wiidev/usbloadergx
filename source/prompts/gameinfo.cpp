@@ -1045,17 +1045,17 @@ bool save_gamelist(int txt) { // save gamelist
 	}
 	else {
 	
-	fprintf(f, "ID,Size(GB),Name\n");
+	fprintf(f, "\"ID\",\"Size(GB)\",\"Name\"\n");
 		
 		for (i = 0; i < gameCnt ; i++) {
 			struct discHdr* header = &gameList[i];
 			WBFS_GameSize(header->id, &size);
 			if (i<500) {
-				fprintf(f, "%c%c%c%c%c%c,", header->id[0], header->id[1], header->id[2], header->id[3], header->id[4], header->id[5]);
-				fprintf(f, "%.2f,", size);
-				fprintf(f, "\"%s\"",get_title(header));
+				fprintf(f, "\"%c%c%c%c%c%c\",\"%.2f\",\"%s\"\n", header->id[0], header->id[1], header->id[2], header->id[3], header->id[4], header->id[5], size,get_title(header));
+				//fprintf(f, "\"%.2f\",", size);
+				//fprintf(f, "\"%s\"",get_title(header));
 				}
-				fprintf(f, "\n");
+				//fprintf(f, "\n");
 		}
 	
 	}
