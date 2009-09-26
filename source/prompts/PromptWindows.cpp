@@ -1750,7 +1750,7 @@ bool SearchMissingImages(int choice2) {
 	__Menu_GetEntries();
     ResumeGui();
 	
-	if (cntMissFiles > 0 && !IsNetworkInit()) {
+	if (cntMissFiles > 0) { //&& !IsNetworkInit()) {
 		NetworkInitPrompt();
 	}
 

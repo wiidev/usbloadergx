@@ -1024,8 +1024,7 @@ bool save_gamelist(int txt) { // save gamelist
     /* Closing and reopening because of a write issue we are having right now */
     f = fopen(tmp, "w");
     
-	if (txt==0)
-	{
+	if (txt==0) 	{
 		fprintf(f, "# USB Loader Has Saved this file\n");
 		fprintf(f, "# This file was created based on your list of games and language settings.\n\n");
     
@@ -1039,11 +1038,10 @@ bool save_gamelist(int txt) { // save gamelist
 				fprintf(f, "%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2], header->id[3], header->id[4], header->id[5]);
 				fprintf(f, " [%.2f]   ", size);
 				fprintf(f, " %s",get_title(header));
-				}
-				fprintf(f, "\n");
+			}
+			fprintf(f, "\n");
 		}
-	}
-	else {
+	} else {
 	
 	fprintf(f, "\"ID\",\"Size(GB)\",\"Name\"\n");
 		
@@ -1054,10 +1052,9 @@ bool save_gamelist(int txt) { // save gamelist
 				fprintf(f, "\"%c%c%c%c%c%c\",\"%.2f\",\"%s\"\n", header->id[0], header->id[1], header->id[2], header->id[3], header->id[4], header->id[5], size,get_title(header));
 				//fprintf(f, "\"%.2f\",", size);
 				//fprintf(f, "\"%s\"",get_title(header));
-				}
-				//fprintf(f, "\n");
+			}
+			//fprintf(f, "\n");
 		}
-	
 	}
     fclose(f);
 

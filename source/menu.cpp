@@ -810,7 +810,8 @@ int MenuDiscList() {
 					WindowPrompt(0,tr("Saved"), tr("OK"));
 				else
 					WindowPrompt(tr("Error"),tr("Could not save."), tr("OK"));
-			
+				menu = MENU_DISCLIST;
+				break;
 			}
 			else if (choice==2)
 			{
@@ -818,7 +819,8 @@ int MenuDiscList() {
 					WindowPrompt(0,tr("Saved"), tr("OK"));
 				else
 					WindowPrompt(tr("Error"),tr("Could not save."), tr("OK"));
-			
+				menu = MENU_DISCLIST;
+				break;
 			}
 			
 			gamecntBtn.ResetState();
@@ -1928,6 +1930,8 @@ int MainMenu(int menu) {
     delete GameIDTxt;
     delete cover;
     delete coverImg;
+	delete fontClock;
+	delete fontSystem;
 	ShutdownAudio();
     StopGX();
 

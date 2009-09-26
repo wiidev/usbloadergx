@@ -28,6 +28,7 @@ GuiOptionBrowser::GuiOptionBrowser(int w, int h, OptionList * l, const u8 *image
 	scrollbaron = scrollon;
 	selectable = true;
 	listOffset = this->FindMenuItem(-1, 1);
+	listChanged = true; // trigger an initial list update
 	selectedItem = 0;
 	focus = 1; // allow focus
 
@@ -105,7 +106,7 @@ GuiOptionBrowser::GuiOptionBrowser(int w, int h, OptionList * l, const u8 *image
 //	optionBg = new GuiImage(bgOptionsEntry);
 	for(int i=0; i<PAGESIZE; i++)
 	{
-		optionTxt[i] = new GuiText(options->name[i], 20, (GXColor){0, 0, 0, 0xff});
+		optionTxt[i] = new GuiText(NULL, 20, (GXColor){0, 0, 0, 0xff});
 		optionTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 		optionTxt[i]->SetPosition(24,0);
 
@@ -403,6 +404,12 @@ void GuiOptionBrowser::Draw()
 	this->UpdateEffects();
 }
 
+
+void GuiOptionBrowser::TriggerUpdate()
+{
+	listChanged = true;
+}	
+
 void GuiOptionBrowser::Update(GuiTrigger * t)
 {
 	LOCK(this);
@@ -448,27 +455,32 @@ void GuiOptionBrowser::Update(GuiTrigger * t)
     }
 	next = listOffset;
 
+	if(listChanged)
+	{
+		for(int i=0; i<PAGESIZE; i++)
+		{
+			if(next >= 0)
+			{
+				if(optionBtn[i]->GetState() == STATE_DISABLED)
+				{
+					optionBtn[i]->SetVisible(true);
+					optionBtn[i]->SetState(STATE_DEFAULT);
+				}
+
+				optionTxt[i]->SetText(options->name[next]);
+				optionVal[i]->SetText(options->value[next]);
+				optionIndex[i] = next;
+				next = this->FindMenuItem(next, 1);
+			}
+			else
+			{
+				optionBtn[i]->SetVisible(false);
+				optionBtn[i]->SetState(STATE_DISABLED);
+			}
+		}
+	}
 	for(int i=0; i<PAGESIZE; i++)
 	{
-		if(next >= 0)
-		{
-			if(optionBtn[i]->GetState() == STATE_DISABLED)
-			{
-				optionBtn[i]->SetVisible(true);
-				optionBtn[i]->SetState(STATE_DEFAULT);
-			}
-
-			optionTxt[i]->SetText(options->name[next]);
-			optionVal[i]->SetText(options->value[next]);
-			optionIndex[i] = next;
-			next = this->FindMenuItem(next, 1);
-		}
-		else
-		{
-			optionBtn[i]->SetVisible(false);
-			optionBtn[i]->SetState(STATE_DISABLED);
-		}
-
 		if(focus)
 		{
 			if(i != selectedItem && optionBtn[i]->GetState() == STATE_SELECTED)
@@ -624,6 +636,7 @@ void GuiOptionBrowser::Update(GuiTrigger * t)
 			{
 				// move list down by 1
 				listOffset = this->FindMenuItem(listOffset, 1);
+				listChanged = true;
 			}
 			else if(optionBtn[selectedItem+1]->IsVisible())
 			{
@@ -643,6 +656,7 @@ void GuiOptionBrowser::Update(GuiTrigger * t)
 			{
 				// move list up by 1
 				listOffset = prev;
+				listChanged = true;
 			}
 			else
 			{

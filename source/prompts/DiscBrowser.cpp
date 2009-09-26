@@ -240,7 +240,7 @@ int autoSelectDol(const char *id, bool force) {
 ////// games that can be forced (always need alt dol)
 
 	//Boogie 
-    if (strcmp(id,"RBOP69") == 0) return 657;//from isostar
+    if (strcmp(id,"RBOP69") == 0) return 675;//previous value was 657
     if (strcmp(id,"RBOE69") == 0) return 675;//starstremr
 	
 	//Fifa 08

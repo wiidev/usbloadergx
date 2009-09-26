@@ -103,6 +103,8 @@ void __Disc_SetVMode(u8 videoselected) {
             /* NTSC or unknown */
         case 'E':
         case 'J':
+        case 'K':
+        case 'W':
             if (tvmode != CONF_VIDEO_NTSC) {
                 vmode_reg = 0;
                 vmode     = (progressive) ? &TVNtsc480Prog : &TVNtsc480IntDf;

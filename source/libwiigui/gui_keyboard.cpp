@@ -563,6 +563,8 @@ void GuiKeyboard::Update(GuiTrigger * t)
 		catch (const std::exception& e) { }
 	}
 
+	bool update = false;
+	
 	if(keySpace->GetState() == STATE_CLICKED)
 	{
 		if(strlen(kbtextstr) < kbtextmaxlen)
@@ -615,7 +617,9 @@ void GuiKeyboard::Update(GuiTrigger * t)
 	}
 
 	char txt[2] = { 0, 0 };
-
+	
+	startloop:
+ 
 	for(int i=0; i<4; i++)
 	{
 		for(int j=0; j<11; j++)
@@ -640,23 +644,14 @@ void GuiKeyboard::Update(GuiTrigger * t)
 						if(shift || caps)
 						{
 							kbtextstr[strlen(kbtextstr)] = keys[i][j].chShift;
-							if(shift) shift ^= 1;
-							if(alt) alt ^= 1;
-							if(alt2) alt2 ^= 1;
 						}
 						else if(alt)
 						{
 							kbtextstr[strlen(kbtextstr)] = keys[i][j].chalt;
-							if(shift) shift ^= 1;
-							if(alt) alt ^= 1;
-							if(alt2) alt2 ^= 1;
 						}
 						else if(alt2)
 						{
 							kbtextstr[strlen(kbtextstr)] = keys[i][j].chalt2;
-							if(shift) shift ^= 1;
-							if(alt) alt ^= 1;
-							if(alt2) alt2 ^= 1;
 						}
 						else
 						{
@@ -665,6 +660,16 @@ void GuiKeyboard::Update(GuiTrigger * t)
 					}
 					kbText->SetText(kbtextstr);
 					keyBtn[i][j]->SetState(STATE_SELECTED, t->chan);
+					
+					
+					if(shift || alt || alt2)
+					{
+						if(shift) shift ^= 1;
+						if(alt) alt ^= 1;
+						if(alt2) alt2 ^= 1;
+						update = true;
+						goto startloop;
+					}
 				}
 			}
 		}
