@@ -1113,4 +1113,9 @@ bool save_XML_URL() { // save xml url as as txt file for people without wifi
 }
 
 
-
+void MemInfoPrompt()
+{
+	char meminfotxt[200];
+    strlcpy(meminfotxt,MemInfo(),sizeof(meminfotxt));
+	WindowPrompt(0,meminfotxt, tr("OK"));
+}

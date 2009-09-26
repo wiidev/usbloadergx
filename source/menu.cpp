@@ -1916,7 +1916,9 @@ int MainMenu(int menu) {
             break;
         }
     }
-		
+	
+	//MemInfoPrompt();
+
     CloseXMLDatabase();
     ExitGUIThreads();
     bgMusic->Stop();
@@ -1930,7 +1932,7 @@ int MainMenu(int menu) {
     delete GameIDTxt;
     delete cover;
     delete coverImg;
-	delete fontClock;
+	delete fontClock;	
 	delete fontSystem;
 	ShutdownAudio();
     StopGX();

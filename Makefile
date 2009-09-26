@@ -29,7 +29,7 @@ INCLUDES	:=	source
 
 CFLAGS		=	-g -O2 -save-temps -Wall $(MACHDEP) $(INCLUDE)
 CXXFLAGS	=	-Xassembler -aln=$@.lst $(CFLAGS)
-LDFLAGS		=	-g $(MACHDEP) -Wl,-Map,$(notdir $@).map,--section-start,.init=0x8090a000
+LDFLAGS		=	-g $(MACHDEP) -Wl,-Map,$(notdir $@).map,--section-start,.init=0x80B00000
 
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project
@@ -60,6 +60,7 @@ export CFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.c)))
 export CPPFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.cpp)))
 sFILES		:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.s)))
 SFILES		:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.S)))
+ELFFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.elf)))
 BINFILES	:=	$(foreach dir,$(DATA),$(notdir $(wildcard $(dir)/*.*)))
 TTFFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.ttf)))
 PNGFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.png)))
@@ -79,7 +80,8 @@ export OFILES	:=	$(addsuffix .o,$(BINFILES)) \
 					$(CPPFILES:.cpp=.o) $(CFILES:.c=.o) \
 					$(sFILES:.s=.o) $(SFILES:.S=.o) \
 					$(TTFFILES:.ttf=.ttf.o) $(PNGFILES:.png=.png.o) \
-					$(OGGFILES:.ogg=.ogg.o) $(PCMFILES:.pcm=.pcm.o)
+					$(OGGFILES:.ogg=.ogg.o) $(PCMFILES:.pcm=.pcm.o) \
+					$(addsuffix .o,$(ELFFILES))
 
 #---------------------------------------------------------------------------------
 # build a list of include paths
@@ -151,6 +153,11 @@ language: $(wildcard $(PROJECTDIR)/Languages/*.lang)
 #---------------------------------------------------------------------------------
 # This rule links in binary data with .ttf, .png, and .mp3 extensions
 #---------------------------------------------------------------------------------
+
+%.elf.o : %.elf
+	@echo $(notdir $<)
+	$(bin2o)
+
 %.ttf.o : %.ttf
 	@echo $(notdir $<)
 	$(bin2o)
