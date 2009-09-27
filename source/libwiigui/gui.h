@@ -476,8 +476,6 @@ private:
 	GuiElement *element;
 };
 #define LOCK(e) SimpleLock LOCK(e)
-//disabled because of problems with FW 4.0
-//#define LOCK(e)
 
 //!Allows GuiElements to be grouped together into a "window"
 class GuiWindow : public GuiElement
@@ -571,6 +569,8 @@ class GuiImageData
 		//!Gets the image height
 		//!\return image height
 		int GetHeight();
+		//!Sets the image to grayscale
+		void SetGrayscale(void);
 	protected:
 		u8 * data; //!< Image data
 		int height; //!< Height of image
@@ -651,6 +651,7 @@ class GuiImage : public GuiElement
 		void SetStripe(int s);
 		s32 z;
 		void SetSkew(int XX1, int YY1,int XX2, int YY2,int XX3, int YY3,int XX4, int YY4);
+		void SetSkew(int *skew /* int skew[8] */ );
 		int xx1;
 		int yy1;
 		int xx2;
@@ -696,6 +697,7 @@ class GuiText : public GuiElement
 		//!\param t Text
 		void SetText(const char * t);
 		void SetTextf(const char *format, ...) __attribute__((format(printf,2,3)));
+		void SetText(const wchar_t * t);
 		//!Sets up preset values to be used by GuiText(t)
 		//!Useful when printing multiple text elements, all with the same attributes set
 		//!\param sz Font size
@@ -771,7 +773,7 @@ class GuiTooltip : public GuiElement
 	public:
 		//!Constructor
 		//!\param t Text
-		GuiTooltip(const char *t);
+		GuiTooltip(const char *t, int Alpha=255);
 
 		//!Destructor
 		~ GuiTooltip();
@@ -889,6 +891,7 @@ class GuiButton : public GuiElement
 		//!Deactivate/Activate pointing on Games while B scrolling
 		void ScrollIsOn(int f);
 		void SetSkew(int XX1, int YY1,int XX2, int YY2,int XX3, int YY3,int XX4, int YY4);
+		void SetSkew(int *skew /* int skew[8] */ );
 	protected:
 		GuiImage * image; //!< Button image (default)
 		GuiImage * imageOver; //!< Button image for STATE_SELECTED

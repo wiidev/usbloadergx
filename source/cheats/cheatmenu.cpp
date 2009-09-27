@@ -42,14 +42,14 @@ int CheatMenu(const char * gameID) {
     GuiTrigger trigB;
     trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 
-    GuiText backBtnTxt(tr("Back") , 22, (GXColor) {THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+    GuiText backBtnTxt(tr("Back") , 22, THEME.prompttext);
     backBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
     GuiImage backBtnImg(&btnOutline);
     GuiButton backBtn(&backBtnImg,&backBtnImg, 2, 3, -140, 400, &trigA, NULL, &btnClick,1);
     backBtn.SetLabel(&backBtnTxt);
     backBtn.SetTrigger(&trigB);
 
-    GuiText createBtnTxt(tr("Create") , 22, (GXColor) {THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+    GuiText createBtnTxt(tr("Create") , 22, THEME.prompttext);
     createBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
     GuiImage createBtnImg(&btnOutline);
     GuiButton createBtn(&createBtnImg,&createBtnImg, 2, 3, 160, 400, &trigA, NULL, &btnClick,1);

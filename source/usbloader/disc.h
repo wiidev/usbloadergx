@@ -1,6 +1,8 @@
 #ifndef _DISC_H_
 #define _DISC_H_
 
+#include <gccore.h> /* for define ATTRIBUTE_PACKED */
+
 #ifdef __cplusplus
 extern "C" {
 #endif

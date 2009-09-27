@@ -179,17 +179,17 @@ GuiCustomOptionBrowser::GuiCustomOptionBrowser(int w, int h, customOptionList * 
 
 	for(int i=0; i < size; i++)
 	{
-		optionTxt[i] = new GuiText(options->GetName(i), 20, (GXColor){THEME.settingsTxt_r, THEME.settingsTxt_g, THEME.settingsTxt_b, 0xff});
+		optionTxt[i] = new GuiText(options->GetName(i), 20, THEME.settingstext);
 		optionTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 		optionTxt[i]->SetPosition(24,0);
 		optionTxt[i]->SetMaxWidth(bgOptionsImg->GetWidth() - (coL2+24), GuiText::DOTTED);
 
 		optionBg[i] = new GuiImage(bgOptionsEntry);
 
-		optionVal[i] = new GuiText(NULL, 20, (GXColor){THEME.settingsTxt_r, THEME.settingsTxt_g, THEME.settingsTxt_b, 0xff});
+		optionVal[i] = new GuiText(NULL, 20, THEME.settingstext);
 		optionVal[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 
-		optionValOver[i] = new GuiText(NULL, 20, (GXColor){THEME.settingsTxt_r, THEME.settingsTxt_g, THEME.settingsTxt_b, 0xff});
+		optionValOver[i] = new GuiText(NULL, 20, THEME.settingstext);
 		optionValOver[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 
 		optionBtn[i] = new GuiButton(width-28,GAMESELECTSIZE);

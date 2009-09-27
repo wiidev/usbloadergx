@@ -81,7 +81,7 @@ bool MenuOGG() {
     oggmenubackground.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     oggmenubackground.SetPosition(0, 0);
 
-    GuiText backBtnTxt(tr("Back") , 22, (GXColor) {THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+    GuiText backBtnTxt(tr("Back") , 22, THEME.prompttext);
     backBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
     GuiImage backBtnImg(&btnOutline);
     if (Settings.wsprompt == yes) {
@@ -99,7 +99,7 @@ bool MenuOGG() {
     backBtn.SetTrigger(&trigB);
     backBtn.SetEffectGrow();
 
-    GuiText defaultBtnTxt(tr("Default") , 22, (GXColor) { THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+    GuiText defaultBtnTxt(tr("Default") , 22, THEME.prompttext);
     defaultBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
     GuiImage defaultBtnImg(&btnOutline);
     if (Settings.wsprompt == yes) {
@@ -363,7 +363,7 @@ int MenuLanguageSelect() {
     oggmenubackground.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     oggmenubackground.SetPosition(0, 0);
 
-    GuiText backBtnTxt(tr("Back") , 22, (GXColor) {THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+    GuiText backBtnTxt(tr("Back") , 22, THEME.prompttext);
     backBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
     GuiImage backBtnImg(&btnOutline);
     if (Settings.wsprompt == yes) {
@@ -381,7 +381,7 @@ int MenuLanguageSelect() {
     backBtn.SetTrigger(&trigB);
     backBtn.SetEffectGrow();
 
-    GuiText defaultBtnTxt(tr("Default") , 22, (GXColor) {THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+    GuiText defaultBtnTxt(tr("Default") , 22, THEME.prompttext);
     defaultBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
     GuiImage defaultBtnImg(&btnOutline);
     if (Settings.wsprompt == yes) {
@@ -398,7 +398,7 @@ int MenuLanguageSelect() {
     defaultBtn.SetTrigger(&trigA);
     defaultBtn.SetEffectGrow();
 
-    GuiText updateBtnTxt(tr("Update Files") , 22, (GXColor) {THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+    GuiText updateBtnTxt(tr("Update Files") , 22, THEME.prompttext);
     updateBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
     GuiImage updateBtnImg(&btnOutline);
     if (Settings.wsprompt == yes) {

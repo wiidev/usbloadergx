@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-20 04:59+0200\n"
+"POT-Creation-Date: 2009-09-27 20:15+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: \n"
@@ -46,6 +46,9 @@ msgstr "2 (中学生 12+)"
 msgid "20 min"
 msgstr "20分"
 
+msgid "2D Cover Path"
+msgstr ""
+
 msgid "3 (Mature 16+)"
 msgstr "3 (高校生 16+)"
 
@@ -54,6 +57,9 @@ msgstr "3分"
 
 msgid "30 min"
 msgstr "30分"
+
+msgid "3D Cover Path"
+msgstr ""
 
 msgid "3D Covers"
 msgstr "3D ｶﾊﾞｰ"
@@ -283,9 +289,6 @@ msgstr "USBをｾｯﾄできません"
 
 msgid "Cover Download"
 msgstr "ｶﾊﾞｰ ﾀﾞｳﾝﾛｰﾄﾞ"
-
-msgid "Cover Path"
-msgstr "ｶﾊﾞｰﾊﾟｽ"
 
 msgid "Coverpath Change"
 msgstr "ｶﾊﾞｰﾊﾟｽの変更"
@@ -911,6 +914,9 @@ msgstr "DOLの場所"
 msgid "Sept"
 msgstr "9月"
 
+msgid "Set Search-Filter"
+msgstr ""
+
 msgid "Set as backgroundmusic?"
 msgstr "BGMに設定しますか"
 
@@ -1193,6 +1199,9 @@ msgstr ""
 
 msgid "seconds left"
 msgstr "完了までの秒数"
+
+#~ msgid "Cover Path"
+#~ msgstr "ｶﾊﾞｰﾊﾟｽ"
 
 #~ msgid "Don't bother the USB Loader GX Team about errors in this file."
 #~ msgstr "GXの開発ﾁｰﾑは、このﾌｧｲﾙに関するエラーに対応しません。"

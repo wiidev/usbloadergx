@@ -319,7 +319,7 @@ main:
     usbBtn.SetTrigger(&trigA);
     usbBtn.SetEffectGrow();
 
-    GuiText okBtnTxt(tr("Ok"), 22, (GXColor) {THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+    GuiText okBtnTxt(tr("Ok"), 22, THEME.prompttext);
     GuiImage okBtnImg(&btnOutline);
     if (Settings.wsprompt == yes) {
         okBtnTxt.SetWidescreen(CFG.widescreen);

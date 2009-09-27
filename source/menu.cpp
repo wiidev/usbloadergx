@@ -16,7 +16,9 @@
 #include "libwiigui/gui_gamegrid.h"
 #include "libwiigui/gui_gamecarousel.h"
 #include "libwiigui/gui_gamebrowser.h"
+#include "libwiigui/gui_searchbar.h"
 #include "libwiigui/gui_customoptionbrowser.h"
+#include "libwiigui/gui_image_async.h"
 #include "usbloader/usbstorage.h"
 #include "usbloader/wbfs.h"
 #include "usbloader/disc.h"
@@ -44,7 +46,6 @@
 #include "wpad.h"
 #include "listfiles.h"
 #include "fatmounter.h"
-#include "buffer.h"
 #include "xml/xml.h"
 #include "wad/title.h"
 
@@ -80,8 +81,6 @@ extern FreeTypeGX *fontClock;
 extern u8 shutdown;
 extern u8 reset;
 extern int cntMissFiles;
-extern struct discHdr * gameList;
-extern u32 gameCnt;
 extern s32 gameSelected, gameStart;
 extern const u8 data1;
 extern u8 boothomebrew;
@@ -129,7 +128,7 @@ static void * UpdateGUI (void *arg) {
         } else {
             if (!ExitRequested) {
                 mainWindow->Draw();
-                if (Settings.tooltips == TooltipsOn && THEME.showToolTip != 0 && mainWindow->GetState() != STATE_DISABLED)
+                if (Settings.tooltips == TooltipsOn && THEME.show_tooltip != 0 && mainWindow->GetState() != STATE_DISABLED)
                     mainWindow->DrawTooltip();
 
 #ifdef HW_RVL
@@ -197,7 +196,6 @@ static void * UpdateGUI (void *arg) {
 void InitGUIThreads() {
     LWP_CreateThread(&guithread, UpdateGUI, NULL, NULL, 0, 75);
     InitProgressThread();
-    InitBufferThread();
     InitNetworkThread();
 
     if (Settings.autonetwork)
@@ -248,8 +246,74 @@ void rockout(int f = 0) {
 }
 
 /****************************************************************************
+ * LoadCoverImage
+ ***************************************************************************/
+GuiImageData *LoadCoverImage(struct discHdr *header, bool Prefere3D, bool noCover)
+{
+	if(!header) return NULL;
+	GuiImageData *Cover = NULL;
+	char ID[4];
+	char IDfull[7];
+	char Path[100];
+	bool flag = Prefere3D;
+
+
+	snprintf(ID, sizeof(ID), "%c%c%c", header->id[0], header->id[1], header->id[2]);
+	snprintf(IDfull, sizeof(IDfull), "%s%c%c%c", ID, header->id[3], header->id[4], header->id[5]);
+
+	for(int i=0; i<2; ++i)
+	{
+		char *coverPath = flag ? Settings.covers_path : Settings.covers2d_path; flag = !flag;
+		//Load full id image
+		snprintf(Path, sizeof(Path), "%s%s.png", coverPath, IDfull);	
+		delete Cover; Cover = new(std::nothrow) GuiImageData(Path, NULL);
+		//Load short id image
+		if (!Cover || !Cover->GetImage())
+		{
+			snprintf(Path, sizeof(Path), "%s%s.png", coverPath, ID);
+			delete Cover; Cover = new(std::nothrow) GuiImageData(Path, NULL);
+		}
+		if(Cover && Cover->GetImage())
+			break;
+	}
+	//Load no image
+	if (noCover && (!Cover || !Cover->GetImage()))
+	{
+		flag = Prefere3D;
+		for(int i=0; i<2; ++i)
+		{
+			const char *nocoverPath = (flag ? "%snoimage.png" : "%snoimage2d.png"); flag = !flag;
+			snprintf(Path, sizeof(Path), nocoverPath, CFG.theme_path);
+			delete Cover; Cover = new(std::nothrow) GuiImageData(Path, (Prefere3D ? nocover_png : nocoverFlat_png));
+			if (Cover && Cover->GetImage())
+				break;
+		}
+	}
+	if(Cover && !Cover->GetImage())
+	{
+		delete Cover;
+		Cover = NULL;
+	}
+	return Cover;
+}
+/****************************************************************************
  * MenuDiscList
  ***************************************************************************/
+GuiButton *Toolbar[7];
+void DiscListWinUpdateCallback(void * e)
+{
+	GuiWindow *w = (GuiWindow *)e;
+	for(int i=0; i<7; ++i)
+	{
+		if(Toolbar[i]->GetState() == STATE_SELECTED)
+		{
+			w->Remove(Toolbar[i]);
+			w->Append(Toolbar[i]); // draw the selected Icon allways on top
+			break;
+		}
+	}
+}
+
 
 int MenuDiscList() {
 
@@ -268,7 +332,7 @@ int MenuDiscList() {
     WDVD_GetCoverStatus(&covert);
     u32 covertOld=covert;
 
-
+	wchar_t searchChar;
     //SCREENSAVER
     //WPad_SetIdleTime(300); //needs the time in seconds
     int check = 0; //to skip the first cycle when wiimote isn't completely connected
@@ -334,28 +398,36 @@ int MenuDiscList() {
 
     snprintf(imgPath, sizeof(imgPath), "%sfavIcon.png", CFG.theme_path);
     GuiImageData imgfavIcon(imgPath, favIcon_png);
-    snprintf(imgPath, sizeof(imgPath), "%sfavIcon_gray.png", CFG.theme_path);
-    GuiImageData imgfavIcon_gray(imgPath, favIcon_gray_png);
+//    snprintf(imgPath, sizeof(imgPath), "%sfavIcon_gray.png", CFG.theme_path);
+//    GuiImageData imgfavIcon_gray(imgPath, favIcon_gray_png);
+    snprintf(imgPath, sizeof(imgPath), "%ssearchIcon.png", CFG.theme_path);
+    GuiImageData imgsearchIcon(imgPath, searchIcon_png);
+//    snprintf(imgPath, sizeof(imgPath), "%ssearchIcon_gray.png", CFG.theme_path);
+//    GuiImageData imgsearchIcon_gray(imgPath, searchIcon_gray_png);
     snprintf(imgPath, sizeof(imgPath), "%sabcIcon.png", CFG.theme_path);
     GuiImageData imgabcIcon(imgPath, abcIcon_png);
-    snprintf(imgPath, sizeof(imgPath), "%sabcIcon_gray.png", CFG.theme_path);
-    GuiImageData imgabcIcon_gray(imgPath, abcIcon_gray_png);
+//    snprintf(imgPath, sizeof(imgPath), "%sabcIcon_gray.png", CFG.theme_path);
+//    GuiImageData imgabcIcon_gray(imgPath, abcIcon_gray_png);
     snprintf(imgPath, sizeof(imgPath), "%splayCountIcon.png", CFG.theme_path);
     GuiImageData imgplayCountIcon(imgPath, playCountIcon_png);
-    snprintf(imgPath, sizeof(imgPath), "%splayCountIcon_gray.png", CFG.theme_path);
-    GuiImageData imgplayCountIcon_gray(imgPath, playCountIcon_gray_png);
+//    snprintf(imgPath, sizeof(imgPath), "%splayCountIcon_gray.png", CFG.theme_path);
+//    GuiImageData imgplayCountIcon_gray(imgPath, playCountIcon_gray_png);
     snprintf(imgPath, sizeof(imgPath), "%sarrangeGrid.png", CFG.theme_path);
     GuiImageData imgarrangeGrid(imgPath, arrangeGrid_png);
-    snprintf(imgPath, sizeof(imgPath), "%sarrangeGrid_gray.png", CFG.theme_path);
-    GuiImageData imgarrangeGrid_gray(imgPath, arrangeGrid_gray_png);
+//    snprintf(imgPath, sizeof(imgPath), "%sarrangeGrid_gray.png", CFG.theme_path);
+//    GuiImageData imgarrangeGrid_gray(imgPath, arrangeGrid_gray_png);
     snprintf(imgPath, sizeof(imgPath), "%sarrangeList.png", CFG.theme_path);
     GuiImageData imgarrangeList(imgPath, arrangeList_png);
-    snprintf(imgPath, sizeof(imgPath), "%sarrangeList_gray.png", CFG.theme_path);
-    GuiImageData imgarrangeList_gray(imgPath, arrangeList_gray_png);
+//    snprintf(imgPath, sizeof(imgPath), "%sarrangeList_gray.png", CFG.theme_path);
+//    GuiImageData imgarrangeList_gray(imgPath, arrangeList_gray_png);
     snprintf(imgPath, sizeof(imgPath), "%sarrangeCarousel.png", CFG.theme_path);
     GuiImageData imgarrangeCarousel(imgPath, arrangeCarousel_png);
-    snprintf(imgPath, sizeof(imgPath), "%sarrangeCarousel_gray.png", CFG.theme_path);
-    GuiImageData imgarrangeCarousel_gray(imgPath, arrangeCarousel_gray_png);
+//    snprintf(imgPath, sizeof(imgPath), "%sarrangeCarousel_gray.png", CFG.theme_path);
+//    GuiImageData imgarrangeCarousel_gray(imgPath, arrangeCarousel_gray_png);
+
+    snprintf(imgPath, sizeof(imgPath), "%ssearchBar.png", CFG.theme_path);
+    GuiImageData imgsearchBar(imgPath, searchBar_png);
+
     snprintf(imgPath, sizeof(imgPath), "%sbrowser.png", CFG.theme_path);
     GuiImageData homebrewImgData(imgPath, browser_png);
     snprintf(imgPath, sizeof(imgPath), "%sbrowser_over.png", CFG.theme_path);
@@ -374,17 +446,17 @@ int MenuDiscList() {
 
     char spaceinfo[30];
     sprintf(spaceinfo,"%.2fGB %s %.2fGB %s",freespace,tr("of"),(freespace+used),tr("free"));
-    GuiText usedSpaceTxt(spaceinfo, 18, (GXColor) {THEME.info_r, THEME.info_g, THEME.info_b, 255});
-    usedSpaceTxt.SetAlignment(THEME.hddInfoAlign, ALIGN_TOP);
-    usedSpaceTxt.SetPosition(THEME.hddInfo_x, THEME.hddInfo_y);
+    GuiText usedSpaceTxt(spaceinfo, 18, THEME.info);
+    usedSpaceTxt.SetAlignment(THEME.hddinfo_align, ALIGN_TOP);
+    usedSpaceTxt.SetPosition(THEME.hddinfo_x, THEME.hddinfo_y);
 	
 	char GamesCnt[15];
     sprintf(GamesCnt,"%s: %i",tr("Games"), gameCnt);
-    GuiText gamecntTxt(GamesCnt, 18, (GXColor) {THEME.info_r, THEME.info_g, THEME.info_b, 255});
+    GuiText gamecntTxt(GamesCnt, 18, THEME.info);
     
 	GuiButton gamecntBtn(100,18);
-	gamecntBtn.SetAlignment(THEME.gameCntAlign, ALIGN_TOP);
-    gamecntBtn.SetPosition(THEME.gameCnt_x,THEME.gameCnt_y);
+	gamecntBtn.SetAlignment(THEME.gamecount_align, ALIGN_TOP);
+    gamecntBtn.SetPosition(THEME.gamecount_x,THEME.gamecount_y);
 	gamecntBtn.SetLabel(&gamecntTxt);
 	gamecntBtn.SetEffectGrow();
 	gamecntBtn.SetTrigger(&trigA);
@@ -460,11 +532,24 @@ int MenuDiscList() {
         favoriteBtnTT.SetWidescreen(CFG.widescreen);
     favoriteBtnTT.SetAlpha(THEME.tooltipAlpha);
     GuiImage favoriteBtnImg(&imgfavIcon);
-    GuiImage favoriteBtnImg_g(&imgfavIcon_gray);
     favoriteBtnImg.SetWidescreen(CFG.widescreen);
+    GuiImage favoriteBtnImg_g(favoriteBtnImg);favoriteBtnImg_g.SetGrayscale();
+//    GuiImage favoriteBtnImg_g(&imgfavIcon_gray);
     favoriteBtnImg_g.SetWidescreen(CFG.widescreen);
-    GuiButton favoriteBtn(&favoriteBtnImg_g,&favoriteBtnImg_g, 2, 3, THEME.favorite_x, THEME.favorite_y, &trigA, &btnSoundOver, &btnClick,1, &favoriteBtnTT, -15, 52, 0, 3);
+    GuiButton favoriteBtn(&favoriteBtnImg_g,&favoriteBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_favorite_x, THEME.gamelist_favorite_y, &trigA, &btnSoundOver, &btnClick,1, &favoriteBtnTT, -15, 52, 0, 3);
     favoriteBtn.SetAlpha(180);
+
+    GuiTooltip searchBtnTT(tr("Set Search-Filter"));
+    if (Settings.wsprompt == yes)
+        searchBtnTT.SetWidescreen(CFG.widescreen);
+    searchBtnTT.SetAlpha(THEME.tooltipAlpha);
+    GuiImage searchBtnImg(&imgsearchIcon);
+    searchBtnImg.SetWidescreen(CFG.widescreen);
+    GuiImage searchBtnImg_g(searchBtnImg); searchBtnImg_g.SetGrayscale();
+//    GuiImage searchBtnImg_g(&imgsearchIcon_gray);
+    searchBtnImg_g.SetWidescreen(CFG.widescreen);
+    GuiButton searchBtn(&searchBtnImg_g,&searchBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_search_x, THEME.gamelist_search_y, &trigA, &btnSoundOver, &btnClick,1, &searchBtnTT, -15, 52, 0, 3);
+    searchBtn.SetAlpha(180);
 
     GuiTooltip abcBtnTT(tr("Sort alphabetically"));
     if (Settings.wsprompt == yes)
@@ -472,9 +557,10 @@ int MenuDiscList() {
     abcBtnTT.SetAlpha(THEME.tooltipAlpha);
     GuiImage abcBtnImg(&imgabcIcon);
     abcBtnImg.SetWidescreen(CFG.widescreen);
-    GuiImage abcBtnImg_g(&imgabcIcon_gray);
+    GuiImage abcBtnImg_g(abcBtnImg); abcBtnImg_g.SetGrayscale();
+//    GuiImage abcBtnImg_g(&imgabcIcon_gray);
     abcBtnImg_g.SetWidescreen(CFG.widescreen);
-    GuiButton abcBtn(&abcBtnImg_g,&abcBtnImg_g, 2, 3, THEME.abc_x, THEME.abc_y, &trigA, &btnSoundOver, &btnClick,1,&abcBtnTT, -15, 52, 0, 3);
+    GuiButton abcBtn(&abcBtnImg_g,&abcBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_abc_x, THEME.gamelist_abc_y, &trigA, &btnSoundOver, &btnClick,1,&abcBtnTT, -15, 52, 0, 3);
     abcBtn.SetAlpha(180);
 
     GuiTooltip countBtnTT(tr("Sort order by most played"));
@@ -483,9 +569,10 @@ int MenuDiscList() {
     countBtnTT.SetAlpha(THEME.tooltipAlpha);
     GuiImage countBtnImg(&imgplayCountIcon);
     countBtnImg.SetWidescreen(CFG.widescreen);
-    GuiImage countBtnImg_g(&imgplayCountIcon_gray);
+    GuiImage countBtnImg_g(countBtnImg); countBtnImg_g.SetGrayscale();
+//    GuiImage countBtnImg_g(&imgplayCountIcon_gray);
     countBtnImg_g.SetWidescreen(CFG.widescreen);
-    GuiButton countBtn(&countBtnImg_g,&countBtnImg_g, 2, 3, THEME.count_x, THEME.count_y, &trigA, &btnSoundOver, &btnClick,1, &countBtnTT, -15, 52, 0, 3);
+    GuiButton countBtn(&countBtnImg_g,&countBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_count_x, THEME.gamelist_count_y, &trigA, &btnSoundOver, &btnClick,1, &countBtnTT, -15, 52, 0, 3);
     countBtn.SetAlpha(180);
 
     GuiTooltip listBtnTT(tr("Display as a list"));
@@ -494,9 +581,10 @@ int MenuDiscList() {
     listBtnTT.SetAlpha(THEME.tooltipAlpha);
     GuiImage listBtnImg(&imgarrangeList);
     listBtnImg.SetWidescreen(CFG.widescreen);
-    GuiImage listBtnImg_g(&imgarrangeList_gray);
+    GuiImage listBtnImg_g(listBtnImg); listBtnImg_g.SetGrayscale();
+//    GuiImage listBtnImg_g(&imgarrangeList_gray);
     listBtnImg_g.SetWidescreen(CFG.widescreen);
-    GuiButton listBtn(&listBtnImg_g,&listBtnImg_g, 2, 3, THEME.list_x, THEME.list_y, &trigA, &btnSoundOver, &btnClick,1, &listBtnTT, 15, 52, 1, 3);
+    GuiButton listBtn(&listBtnImg_g,&listBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_list_x, THEME.gamelist_list_y, &trigA, &btnSoundOver, &btnClick,1, &listBtnTT, 15, 52, 1, 3);
     listBtn.SetAlpha(180);
 
     GuiTooltip gridBtnTT(tr("Display as a grid"));
@@ -505,21 +593,23 @@ int MenuDiscList() {
     gridBtnTT.SetAlpha(THEME.tooltipAlpha);
     GuiImage gridBtnImg(&imgarrangeGrid);
     gridBtnImg.SetWidescreen(CFG.widescreen);
-    GuiImage gridBtnImg_g(&imgarrangeGrid_gray);
+    GuiImage gridBtnImg_g(gridBtnImg); gridBtnImg_g.SetGrayscale();
+//    GuiImage gridBtnImg_g(&imgarrangeGrid_gray);
     gridBtnImg_g.SetWidescreen(CFG.widescreen);
-    GuiButton gridBtn(&gridBtnImg_g,&gridBtnImg_g, 2, 3, THEME.grid_x, THEME.grid_y, &trigA, &btnSoundOver, &btnClick,1, &gridBtnTT, 15, 52, 1, 3);
+    GuiButton gridBtn(&gridBtnImg_g,&gridBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_grid_x, THEME.gamelist_grid_y, &trigA, &btnSoundOver, &btnClick,1, &gridBtnTT, 15, 52, 1, 3);
     gridBtn.SetAlpha(180);
 
-    GuiTooltip carouselBtnTT(tr("Display as a carousel"));
-    if (Settings.wsprompt == yes)
-        carouselBtnTT.SetWidescreen(CFG.widescreen);
-    carouselBtnTT.SetAlpha(THEME.tooltipAlpha);
-    GuiImage carouselBtnImg(&imgarrangeCarousel);
-    carouselBtnImg.SetWidescreen(CFG.widescreen);
-    GuiImage carouselBtnImg_g(&imgarrangeCarousel_gray);
-    carouselBtnImg_g.SetWidescreen(CFG.widescreen);
-    GuiButton carouselBtn(&carouselBtnImg_g,&carouselBtnImg_g, 2, 3, THEME.carousel_x, THEME.carousel_y, &trigA, &btnSoundOver, &btnClick,1, &carouselBtnTT, 15, 52, 1, 3);
-    carouselBtn.SetAlpha(180);
+	GuiTooltip carouselBtnTT(tr("Display as a carousel"));
+	if (Settings.wsprompt == yes)
+		carouselBtnTT.SetWidescreen(CFG.widescreen);
+	carouselBtnTT.SetAlpha(THEME.tooltipAlpha);
+	GuiImage carouselBtnImg(&imgarrangeCarousel);
+	carouselBtnImg.SetWidescreen(CFG.widescreen);
+	GuiImage carouselBtnImg_g(carouselBtnImg); carouselBtnImg_g.SetGrayscale();
+//	GuiImage carouselBtnImg_g(&imgarrangeCarousel_gray);
+	carouselBtnImg_g.SetWidescreen(CFG.widescreen);
+	GuiButton carouselBtn(&carouselBtnImg_g,&carouselBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_carousel_x, THEME.gamelist_carousel_y, &trigA, &btnSoundOver, &btnClick,1, &carouselBtnTT, 15, 52, 1, 3);
+	carouselBtn.SetAlpha(180);
 
     GuiTooltip homebrewBtnTT(tr("Homebrew Launcher"));
     if (Settings.wsprompt == yes)
@@ -529,13 +619,24 @@ int MenuDiscList() {
     GuiImage homebrewImgOver(&homebrewImgDataOver);
     homebrewImg.SetWidescreen(CFG.widescreen);
     homebrewImgOver.SetWidescreen(CFG.widescreen);
-    GuiButton homebrewBtn(&homebrewImg,&homebrewImgOver, 0, 3, THEME.homebrew_x, THEME.homebrew_y, &trigA, &btnSoundOver, &btnClick,1,&homebrewBtnTT,15,-30,1,5);
+    GuiButton homebrewBtn(&homebrewImg,&homebrewImgOver, ALIGN_LEFT, ALIGN_TOP, THEME.homebrew_x, THEME.homebrew_y, &trigA, &btnSoundOver, &btnClick,1,&homebrewBtnTT,15,-30,1,5);
 
     if (Settings.fave) {
         favoriteBtn.SetImage(&favoriteBtnImg);
         favoriteBtn.SetImageOver(&favoriteBtnImg);
         favoriteBtn.SetAlpha(255);
     }
+	static bool show_searchwindow = false;
+	if(gameFilter && *gameFilter)
+    {
+		if(show_searchwindow && gameCnt==1)
+			show_searchwindow = false;
+		if(!show_searchwindow)
+			searchBtn.SetEffect(EFFECT_PULSE, 10, 105);
+		searchBtn.SetImage(&searchBtnImg);
+        searchBtn.SetImageOver(&searchBtnImg);
+        searchBtn.SetAlpha(255);
+	}
     if (Settings.sort==all) {
         abcBtn.SetImage(&abcBtnImg);
         abcBtn.SetImageOver(&abcBtnImg);
@@ -559,38 +660,30 @@ int MenuDiscList() {
         carouselBtn.SetAlpha(255);
     }
     if (Settings.gameDisplay==list) {
-        if (CFG.widescreen) {
-            favoriteBtn.SetPosition(THEME.favorite_x, THEME.favorite_y);
-            abcBtn.SetPosition(THEME.abc_x, THEME.abc_y);
-            countBtn.SetPosition(THEME.count_x, THEME.count_y);
-            listBtn.SetPosition(THEME.list_x, THEME.list_y);
-            gridBtn.SetPosition(THEME.grid_x, THEME.grid_y);
-            carouselBtn.SetPosition(THEME.carousel_x, THEME.carousel_y);
-        } else {
-            favoriteBtn.SetPosition(THEME.favorite_x-20, THEME.favorite_y);
-            abcBtn.SetPosition(THEME.abc_x-12, THEME.abc_y);
-            countBtn.SetPosition(THEME.count_x-4, THEME.count_y);
-            listBtn.SetPosition(THEME.list_x+4, THEME.list_y);
-            gridBtn.SetPosition(THEME.grid_x+12, THEME.grid_y);
-            carouselBtn.SetPosition(THEME.carousel_x+20, THEME.carousel_y);
-        }
-    } else {
-        if (CFG.widescreen) {
-            favoriteBtn.SetPosition(THEME.favorite_x-THEME.sortBarOffset, THEME.favorite_y);
-            abcBtn.SetPosition(THEME.abc_x-THEME.sortBarOffset, THEME.abc_y);
-            countBtn.SetPosition(THEME.count_x-THEME.sortBarOffset, THEME.count_y);
-            listBtn.SetPosition(THEME.list_x-THEME.sortBarOffset, THEME.list_y);
-            gridBtn.SetPosition(THEME.grid_x-THEME.sortBarOffset, THEME.grid_y);
-            carouselBtn.SetPosition(THEME.carousel_x-THEME.sortBarOffset, THEME.carousel_y);
-        } else {
-            favoriteBtn.SetPosition(THEME.favorite_x-20-THEME.sortBarOffset, THEME.favorite_y);
-            abcBtn.SetPosition(THEME.abc_x-12-THEME.sortBarOffset, THEME.abc_y);
-            countBtn.SetPosition(THEME.count_x-4-THEME.sortBarOffset, THEME.count_y);
-            listBtn.SetPosition(THEME.list_x+4-THEME.sortBarOffset, THEME.list_y);
-            gridBtn.SetPosition(THEME.grid_x+12-THEME.sortBarOffset, THEME.grid_y);
-            carouselBtn.SetPosition(THEME.carousel_x+20-THEME.sortBarOffset, THEME.carousel_y);
-        }
-    }
+	   favoriteBtn.SetPosition(THEME.gamelist_favorite_x, THEME.gamelist_favorite_y);
+		searchBtn.SetPosition(THEME.gamelist_search_x, THEME.gamelist_search_y);
+		abcBtn.SetPosition(THEME.gamelist_abc_x, THEME.gamelist_abc_y);
+		countBtn.SetPosition(THEME.gamelist_count_x, THEME.gamelist_count_y);
+		listBtn.SetPosition(THEME.gamelist_list_x, THEME.gamelist_list_y);
+		gridBtn.SetPosition(THEME.gamelist_grid_x, THEME.gamelist_grid_y);
+		carouselBtn.SetPosition(THEME.gamelist_carousel_x, THEME.gamelist_carousel_y);
+	} else if(Settings.gameDisplay==grid) {
+		favoriteBtn.SetPosition(THEME.gamegrid_favorite_x, THEME.gamegrid_favorite_y);
+		searchBtn.SetPosition(THEME.gamegrid_search_x, THEME.gamegrid_search_y);
+		abcBtn.SetPosition(THEME.gamegrid_abc_x, THEME.gamegrid_abc_y);
+		countBtn.SetPosition(THEME.gamegrid_count_x, THEME.gamegrid_count_y);
+		listBtn.SetPosition(THEME.gamegrid_list_x, THEME.gamegrid_list_y);
+		gridBtn.SetPosition(THEME.gamegrid_grid_x, THEME.gamegrid_grid_y);
+		carouselBtn.SetPosition(THEME.gamegrid_carousel_x, THEME.gamegrid_carousel_y);
+	} else if(Settings.gameDisplay==carousel) {
+		favoriteBtn.SetPosition(THEME.gamecarousel_favorite_x, THEME.gamecarousel_favorite_y);
+		searchBtn.SetPosition(THEME.gamecarousel_search_x, THEME.gamecarousel_favorite_y);
+		abcBtn.SetPosition(THEME.gamecarousel_abc_x, THEME.gamecarousel_abc_y);
+		countBtn.SetPosition(THEME.gamecarousel_count_x, THEME.gamecarousel_count_y);
+		listBtn.SetPosition(THEME.gamecarousel_list_x, THEME.gamecarousel_list_y);
+		gridBtn.SetPosition(THEME.gamecarousel_grid_x, THEME.gamecarousel_grid_y);
+		carouselBtn.SetPosition(THEME.gamecarousel_carousel_x, THEME.gamecarousel_carousel_y);
+	}
 
 
     //Downloading Covers
@@ -600,7 +693,7 @@ int MenuDiscList() {
     DownloadBtnTT.SetAlpha(THEME.tooltipAlpha);
     GuiButton DownloadBtn(0,0);
     DownloadBtn.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    DownloadBtn.SetPosition(THEME.cover_x,THEME.cover_y);
+    DownloadBtn.SetPosition(THEME.covers_x,THEME.covers_y);
 
 	GuiTooltip IDBtnTT(tr("Click to change game ID"));
     if (Settings.wsprompt == yes)
@@ -631,8 +724,8 @@ int MenuDiscList() {
     GuiGameGrid * gameGrid = NULL;
     GuiGameCarousel * gameCarousel = NULL;
     if (Settings.gameDisplay==list) {
-        gameBrowser = new GuiGameBrowser(THEME.selection_w, THEME.selection_h, gameList, gameCnt, CFG.theme_path, bg_options_png, startat, offset);
-        gameBrowser->SetPosition(THEME.selection_x, THEME.selection_y);
+        gameBrowser = new GuiGameBrowser(THEME.gamelist_w, THEME.gamelist_h, gameList, gameCnt, CFG.theme_path, bg_options_png, startat, offset);
+        gameBrowser->SetPosition(THEME.gamelist_x, THEME.gamelist_y);
         gameBrowser->SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
     } else if (Settings.gameDisplay==grid) {
         gameGrid = new GuiGameGrid(THEME.gamegrid_w,THEME.gamegrid_h, gameList, gameCnt, CFG.theme_path, bg_options_png, 0, 0);
@@ -645,22 +738,22 @@ int MenuDiscList() {
         gameCarousel->SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
     }
 
-    GuiText clockTimeBack("88:88", 40, (GXColor) {THEME.clock_r, THEME.clock_g, THEME.clock_b, 40});
-    clockTimeBack.SetAlignment(THEME.clockAlign, ALIGN_TOP);
+    GuiText clockTimeBack("88:88", 40, (GXColor) {THEME.clock.r, THEME.clock.g, THEME.clock.b, THEME.clock.a/6});
+    clockTimeBack.SetAlignment(THEME.clock_align, ALIGN_TOP);
     clockTimeBack.SetPosition(THEME.clock_x, THEME.clock_y);
     clockTimeBack.SetFont(fontClock);
-    GuiText clockTime(theTime, 40, (GXColor) {THEME.clock_r, THEME.clock_g, THEME.clock_b, 240});
-    clockTime.SetAlignment(THEME.clockAlign, ALIGN_TOP);
+    GuiText clockTime(theTime, 40, THEME.clock);
+    clockTime.SetAlignment(THEME.clock_align, ALIGN_TOP);
     clockTime.SetPosition(THEME.clock_x, THEME.clock_y);
     clockTime.SetFont(fontClock);
 
     HaltGui();
     GuiWindow w(screenwidth, screenheight);
 
-    if (THEME.showHDD == -1 || THEME.showHDD == 1) { //force show hdd info
+    if (THEME.show_hddinfo == -1 || THEME.show_hddinfo == 1) { //force show hdd info
         w.Append(&usedSpaceTxt);
     }
-    if (THEME.showGameCnt == -1 || THEME.showGameCnt == 1) { //force show game cnt info
+    if (THEME.show_gamecount == -1 || THEME.show_gamecount == 1) { //force show game cnt info
         w.Append(&gamecntBtn);
     }
     w.Append(&sdcardBtn);
@@ -672,13 +765,26 @@ int MenuDiscList() {
     w.Append(&settingsBtn);
     w.Append(&DownloadBtn);
     w.Append(&idBtn);
+	
+	// Begin Toolbar
     w.Append(&favoriteBtn);
+	Toolbar[0] = &favoriteBtn;
+    w.Append(&searchBtn);
+	Toolbar[1] = &searchBtn;
     w.Append(&abcBtn);
+	Toolbar[2] = &abcBtn;
     w.Append(&countBtn);
+	Toolbar[3] = &countBtn;
     w.Append(&listBtn);
+	Toolbar[4] = &listBtn;
     w.Append(&gridBtn);
+	Toolbar[5] = &gridBtn;
     w.Append(&carouselBtn);
-    if (Settings.godmode == 1)
+	Toolbar[6] = &carouselBtn;
+	w.SetUpdateCallback(DiscListWinUpdateCallback);
+	// End Toolbar
+    
+	if (Settings.godmode == 1)
         w.Append(&homebrewBtn);
 
     if ((Settings.hddinfo == hr12)||(Settings.hddinfo == hr24)) {
@@ -696,6 +802,13 @@ int MenuDiscList() {
         mainWindow->Append(gameCarousel);
     }
     mainWindow->Append(&w);
+
+	GuiSearchBar *searchBar=NULL;
+	if(show_searchwindow) {
+		searchBar = new GuiSearchBar(gameFilterNextList);
+		if(searchBar)
+			mainWindow->Append(searchBar);
+	}
 
     ResumeGui();
 	
@@ -973,6 +1086,62 @@ int MenuDiscList() {
 
         }
 
+        else if (searchBtn.GetState() == STATE_CLICKED) {
+
+            show_searchwindow=!show_searchwindow;
+			HaltGui();
+			if(searchBar)
+			{
+				mainWindow->Remove(searchBar);
+				delete searchBar;
+				searchBar = NULL;
+			}
+			if(show_searchwindow)
+			{
+				if(gameFilter && *gameFilter)
+				{
+					searchBtn.StopEffect();
+					searchBtn.SetEffectGrow();
+				}
+				searchBar = new GuiSearchBar(gameFilterNextList);
+				if(searchBar)
+					mainWindow->Append(searchBar);
+			}
+			else
+			{
+				if(gameFilter && *gameFilter)
+					searchBtn.SetEffect(EFFECT_PULSE, 10, 105);
+			}
+			searchBtn.ResetState();
+			ResumeGui();
+        }
+
+        else if (searchBar && (searchChar=searchBar->GetClicked())) {
+			if(searchChar > 27)
+			{
+				int len = gameFilter ? wcslen(gameFilter) : 0;
+				wchar_t newFilter[len+2];
+				if(gameFilter)
+					wcscpy(newFilter, gameFilter);
+				newFilter[len] = searchChar;
+				newFilter[len+1] = 0;
+			
+			
+				__Menu_GetEntries(0, newFilter);
+			}
+			else if(searchChar == 7) // Clear
+			{
+				__Menu_GetEntries(0, L"");
+			}
+			else if(searchChar == 8) // Backspace
+			{
+				__Menu_GetEntries(0, gameFilterPrev);
+			}
+
+			menu = MENU_DISCLIST;
+			break;
+		}
+		
         else if (abcBtn.GetState() == STATE_CLICKED) {
             if (Settings.sort != all) {
                 Settings.sort=all;
@@ -1097,7 +1266,7 @@ int MenuDiscList() {
                     selectedold = selectimg;//update displayed cover, game ID, and region if the selected game changes
                     struct discHdr *header = &gameList[selectimg];
                     snprintf (ID,sizeof(ID),"%c%c%c", header->id[0], header->id[1], header->id[2]);
-                    snprintf (IDfull,sizeof(IDfull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
+                    snprintf (IDfull,sizeof(IDfull),"%s%c%c%c", ID, header->id[3], header->id[4], header->id[5]);
                     w.Remove(&DownloadBtn);
 
                     if (GameIDTxt) {
@@ -1144,18 +1313,7 @@ int MenuDiscList() {
                         cover = NULL;
                     }
 
-                    snprintf(imgPath, sizeof(imgPath), "%s%s.png", Settings.covers_path, IDfull);
-                    cover = new GuiImageData(imgPath,0); //load short id
-                    if (!cover->GetImage()) { //if could not load the short id image
-                        delete cover;
-                        snprintf(imgPath, sizeof(imgPath), "%s%s.png", Settings.covers_path, ID);
-                        cover = new GuiImageData(imgPath, 0); //load full id image
-                        if (!cover->GetImage()) {
-                            delete cover;
-                            snprintf(imgPath, sizeof(imgPath), "%snoimage.png", CFG.theme_path);
-                            cover = new GuiImageData(imgPath, nocover_png); //load no image
-                        }
-                    }
+                    cover = LoadCoverImage(header);
 
                     if (coverImg) {
                         delete coverImg;
@@ -1168,7 +1326,7 @@ int MenuDiscList() {
                     w.Append(&DownloadBtn);
 
                     if ((Settings.sinfo == GameID) || (Settings.sinfo == Both)) {
-                        GameIDTxt = new GuiText(IDfull, 22, (GXColor) {THEME.info_r, THEME.info_g, THEME.info_b, 255});
+                        GameIDTxt = new GuiText(IDfull, 22, THEME.info);
                         GameIDTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
                         //GameIDTxt->SetPosition(THEME.id_x,THEME.id_y);
                         idBtn.SetEffect(EFFECT_FADE, 20);
@@ -1177,7 +1335,7 @@ int MenuDiscList() {
                     }
 
                     if ((Settings.sinfo == GameRegion) || (Settings.sinfo == Both)) {
-                        GameRegionTxt = new GuiText(gameregion, 22, (GXColor) {THEME.info_r, THEME.info_g, THEME.info_b, 255});
+                        GameRegionTxt = new GuiText(gameregion, 22, THEME.info);
                         GameRegionTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
                         GameRegionTxt->SetPosition(THEME.region_x, THEME.region_y);
                         GameRegionTxt->SetEffect(EFFECT_FADE, 20);
@@ -1204,7 +1362,13 @@ int MenuDiscList() {
         }
 
         if ((gameSelected >= 0) && (gameSelected < (s32)gameCnt)) {
-            rockout();
+			if(searchBar)
+			{
+				HaltGui();
+				mainWindow->Remove(searchBar);
+				ResumeGui();
+			}
+			rockout();
             struct discHdr *header = &gameList[gameSelected];
             WBFS_GameSize(header->id, &size);
             if (strlen(get_title(header)) < (MAX_CHARACTERS + 3)) {
@@ -1387,6 +1551,12 @@ int MenuDiscList() {
 
 
             }
+			if(searchBar)
+			{
+				HaltGui();
+				mainWindow->Append(searchBar);
+				ResumeGui();
+			}
         }
         // to skip the first call of windowScreensaver at startup when wiimote is not connected
         if (IsWpadConnected()) {
@@ -1439,6 +1609,8 @@ int MenuDiscList() {
 	HaltGui();
 	mainWindow->RemoveAll();
 	mainWindow->Append(bgImg);
+	delete searchBar;
+	searchBar = NULL;
 	delete gameBrowser;
 	gameBrowser = NULL;
 	delete gameGrid;

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-20 04:59+0200\n"
+"POT-Creation-Date: 2009-09-27 20:15+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: Kir\n"
 "Language-Team: Kir\n"
@@ -46,6 +46,9 @@ msgstr "2 (Подростки 12+)"
 msgid "20 min"
 msgstr ""
 
+msgid "2D Cover Path"
+msgstr ""
+
 msgid "3 (Mature 16+)"
 msgstr "3 (Подростки 16+)"
 
@@ -53,6 +56,9 @@ msgid "3 min"
 msgstr ""
 
 msgid "30 min"
+msgstr ""
+
+msgid "3D Cover Path"
 msgstr ""
 
 msgid "3D Covers"
@@ -283,9 +289,6 @@ msgstr "Не могу настроить USB"
 
 msgid "Cover Download"
 msgstr "Скачать обложку"
-
-msgid "Cover Path"
-msgstr "Путь к обложкам"
 
 msgid "Coverpath Change"
 msgstr "Изменить путь к обложкам"
@@ -911,6 +914,9 @@ msgstr ""
 msgid "Sept"
 msgstr "Сен"
 
+msgid "Set Search-Filter"
+msgstr ""
+
 msgid "Set as backgroundmusic?"
 msgstr "установить как фоновую музыку"
 
@@ -1193,6 +1199,9 @@ msgstr "из"
 
 msgid "seconds left"
 msgstr "секунд осталось"
+
+#~ msgid "Cover Path"
+#~ msgstr "Путь к обложкам"
 
 #~ msgid "Leaving so you can restart..."
 #~ msgstr "Выхожу для перезапуска..."

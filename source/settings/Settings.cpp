@@ -115,7 +115,7 @@ int MenuSettings() {
 
     GuiImage settingsbackground(&settingsbg);
 
-    GuiText backBtnTxt(tr("Back") , 22, (GXColor) {THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+    GuiText backBtnTxt(tr("Back") , 22, THEME.prompttext);
     backBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
     GuiImage backBtnImg(&btnOutline);
     if (Settings.wsprompt == yes) {
@@ -1172,16 +1172,17 @@ int MenuSettings() {
                     titleTxt.SetText(tr("Custom Paths"));
                     exit = false;
                     for (int i = 0; i <= MAXOPTIONS; i++) options2.SetName(i, NULL);
-                    if (Settings.godmode)
-                        options2.SetName(0, "%s", tr("Cover Path"));
-                    options2.SetName(1, "%s", tr("Discimage Path"));
-                    options2.SetName(2, "%s", tr("ThemePath"));
-                    options2.SetName(3, "%s", tr("XMLPath"));
-                    options2.SetName(4, "%s", tr("Updatepath"));
-                    options2.SetName(5, "%s", tr("Cheatcodes Path"));
-                    options2.SetName(6, "%s", tr("TXTCheatcodes Path"));
-                    options2.SetName(7, "%s", tr("Dol Path"));
-                    options2.SetName(8, "%s", tr("Homebrew Apps Path"));
+//                    if (Settings.godmode)
+                        options2.SetName(0, "%s", tr("3D Cover Path"));
+					options2.SetName(1, "%s", tr("2D Cover Path"));
+                    options2.SetName(2, "%s", tr("Discimage Path"));
+                    options2.SetName(3, "%s", tr("ThemePath"));
+                    options2.SetName(4, "%s", tr("XMLPath"));
+                    options2.SetName(5, "%s", tr("Updatepath"));
+                    options2.SetName(6, "%s", tr("Cheatcodes Path"));
+                    options2.SetName(7, "%s", tr("TXTCheatcodes Path"));
+                    options2.SetName(8, "%s", tr("Dol Path"));
+                    options2.SetName(9, "%s", tr("Homebrew Apps Path"));
                     for (int i = 0; i <= MAXOPTIONS; i++) options2.SetValue(i, NULL);
                     w.Append(&optionBrowser2);
                     optionBrowser2.SetClickable(true);
@@ -1197,14 +1198,15 @@ int MenuSettings() {
                             VIDEO_WaitVSync ();
 
                             options2.SetValue(0, "%s", Settings.covers_path);
-                            options2.SetValue(1, "%s", Settings.disc_path);
-                            options2.SetValue(2, "%s", CFG.theme_path);
-                            options2.SetValue(3, "%s", Settings.titlestxt_path);
-                            options2.SetValue(4, "%s", Settings.update_path);
-                            options2.SetValue(5, "%s", Settings.Cheatcodespath);
-                            options2.SetValue(6, "%s", Settings.TxtCheatcodespath);
-                            options2.SetValue(7, "%s", Settings.dolpath);
-                            options2.SetValue(8, "%s", Settings.homebrewapps_path);
+                            options2.SetValue(1, "%s", Settings.covers2d_path);
+                            options2.SetValue(2, "%s", Settings.disc_path);
+                            options2.SetValue(3, "%s", CFG.theme_path);
+                            options2.SetValue(4, "%s", Settings.titlestxt_path);
+                            options2.SetValue(5, "%s", Settings.update_path);
+                            options2.SetValue(6, "%s", Settings.Cheatcodespath);
+                            options2.SetValue(7, "%s", Settings.TxtCheatcodespath);
+                            options2.SetValue(8, "%s", Settings.dolpath);
+                            options2.SetValue(9, "%s", Settings.homebrewapps_path);
 
                             if (backBtn.GetState() == STATE_CLICKED) {
                                 backBtn.ResetState();
@@ -1249,7 +1251,7 @@ int MenuSettings() {
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
                                     strncpy(entered, Settings.covers_path, sizeof(entered));
-                                    titleTxt.SetText(tr("Cover Path"));
+                                    titleTxt.SetText(tr("3D Cover Path"));
                                     int result = BrowseDevice(entered);
                                     //int result = OnScreenKeyboard(entered,43,0);
                                     titleTxt.SetText(tr("Custom Paths"));
@@ -1270,7 +1272,34 @@ int MenuSettings() {
                                     WindowPrompt(tr("Coverpath Change"),tr("Console should be unlocked to modify it."),tr("OK"));
                                 }
                                 break;
-                            case 1:
+                           case 1:
+                                if ( Settings.godmode == 1) {
+                                    w.Remove(&optionBrowser2);
+                                    w.Remove(&backBtn);
+                                    char entered[43] = "";
+                                    strncpy(entered, Settings.covers2d_path, sizeof(entered));
+                                    titleTxt.SetText(tr("2D Cover Path"));
+                                    int result = BrowseDevice(entered);
+                                    //int result = OnScreenKeyboard(entered,43,0);
+                                    titleTxt.SetText(tr("Custom Paths"));
+                                    w.Append(&optionBrowser2);
+                                    w.Append(&backBtn);
+                                    if ( result == 1 ) {
+                                        int len = (strlen(entered)-1);
+                                        if (entered[len] !='/')
+                                            strncat (entered, "/", 1);
+                                        strncpy(Settings.covers2d_path, entered, sizeof(Settings.covers2d_path));
+                                        WindowPrompt(tr("Coverpath Changed"),0,tr("OK"));
+//                                        if(!isSdInserted()) {
+                                        if (!isInserted(bootDevice)) {
+                                            WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
+                                        }
+                                    }
+                                } else {
+                                    WindowPrompt(tr("Coverpath Change"),tr("Console should be unlocked to modify it."),tr("OK"));
+                                }
+                                break;
+                            case 2:
                                 if ( Settings.godmode == 1) {
                                     w.Remove(&optionBrowser2);
                                     w.Remove(&backBtn);
@@ -1297,7 +1326,7 @@ int MenuSettings() {
                                     WindowPrompt(tr("Discpath change"),tr("Console should be unlocked to modify it."),tr("OK"));
                                 }
                                 break;
-                            case 2:
+                            case 3:
                                 if ( Settings.godmode == 1) {
                                     w.Remove(&optionBrowser2);
                                     w.Remove(&backBtn);
@@ -1355,7 +1384,7 @@ int MenuSettings() {
                                     WindowPrompt(tr("Themepath change"),tr("Console should be unlocked to modify it."),tr("OK"));
                                 }
                                 break;
-                            case 3:
+                            case 4:
                                 if ( Settings.godmode == 1) {
                                     w.Remove(&optionBrowser2);
                                     w.Remove(&backBtn);
@@ -1387,7 +1416,7 @@ int MenuSettings() {
                                     WindowPrompt(tr("XMLPath change"),tr("Console should be unlocked to modify it."),tr("OK"));
                                 }
                                 break;
-                            case 4:
+                            case 5:
                                 if ( Settings.godmode == 1) {
                                     w.Remove(&optionBrowser2);
                                     w.Remove(&backBtn);
@@ -1409,7 +1438,7 @@ int MenuSettings() {
                                 } else
                                     WindowPrompt(0,tr("Console should be unlocked to modify it."),tr("OK"));
                                 break;
-                            case 5:
+                            case 6:
                                 if ( Settings.godmode == 1) {
                                     w.Remove(&optionBrowser2);
                                     w.Remove(&backBtn);
@@ -1431,7 +1460,7 @@ int MenuSettings() {
                                 } else
                                     WindowPrompt(0,tr("Console should be unlocked to modify it."),tr("OK"));
                                 break;
-                            case 6:
+                            case 7:
                                 if ( Settings.godmode == 1) {
                                     w.Remove(&optionBrowser2);
                                     w.Remove(&backBtn);
@@ -1453,7 +1482,7 @@ int MenuSettings() {
                                 } else
                                     WindowPrompt(0,tr("Console should be unlocked to modify it."),tr("OK"));
                                 break;
-                            case 7:
+                            case 8:
                                 if ( Settings.godmode == 1) {
                                     w.Remove(&optionBrowser2);
                                     w.Remove(&backBtn);
@@ -1480,7 +1509,7 @@ int MenuSettings() {
                                     WindowPrompt(tr("Dolpath change"),tr("Console should be unlocked to modify it."),tr("OK"));
                                 }
                                 break;
-                            case 8:
+                            case 9:
                                 if ( Settings.godmode == 1) {
                                     w.Remove(&optionBrowser2);
                                     w.Remove(&backBtn);
@@ -1785,7 +1814,7 @@ int GameSettings(struct discHdr * header) {
 
     GuiImage settingsbackground(&settingsbg);
 
-    GuiText backBtnTxt(tr("Back") , 22, (GXColor) {THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+    GuiText backBtnTxt(tr("Back") , 22, THEME.prompttext);
     backBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
     GuiImage backBtnImg(&btnOutline);
     if (Settings.wsprompt == yes) {
@@ -1799,7 +1828,7 @@ int GameSettings(struct discHdr * header) {
     GuiButton homo(1,1);
     homo.SetTrigger(&trigHome);
 
-    GuiText saveBtnTxt(tr("Save"), 22, (GXColor) {THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+    GuiText saveBtnTxt(tr("Save"), 22, THEME.prompttext);
     saveBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
     GuiImage saveBtnImg(&btnOutline);
     if (Settings.wsprompt == yes) {

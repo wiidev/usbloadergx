@@ -138,7 +138,7 @@ int MenuHomebrewBrowse() {
     }
     /*** Buttons ***/
 
-    GuiText backBtnTxt(tr("Back") , 22, (GXColor) {THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+    GuiText backBtnTxt(tr("Back") , 22, THEME.prompttext);
     backBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
     GuiImage backBtnImg(&btnOutline);
     if (Settings.wsprompt == yes) {

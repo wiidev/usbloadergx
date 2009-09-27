@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-20 04:59+0200\n"
+"POT-Creation-Date: 2009-09-27 20:15+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -46,6 +46,9 @@ msgstr ""
 msgid "20 min"
 msgstr ""
 
+msgid "2D Cover Path"
+msgstr ""
+
 msgid "3 (Mature 16+)"
 msgstr ""
 
@@ -53,6 +56,9 @@ msgid "3 min"
 msgstr ""
 
 msgid "30 min"
+msgstr ""
+
+msgid "3D Cover Path"
 msgstr ""
 
 msgid "3D Covers"
@@ -282,9 +288,6 @@ msgid "Could not set USB."
 msgstr ""
 
 msgid "Cover Download"
-msgstr ""
-
-msgid "Cover Path"
 msgstr ""
 
 msgid "Coverpath Change"
@@ -909,6 +912,9 @@ msgid "Selected DOL"
 msgstr ""
 
 msgid "Sept"
+msgstr ""
+
+msgid "Set Search-Filter"
 msgstr ""
 
 msgid "Set as backgroundmusic?"

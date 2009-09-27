@@ -139,7 +139,7 @@ s32 Wad_Install(FILE *fp)
 	if (Settings.wsprompt == yes){
 	dialogBoxImg.SetWidescreen(CFG.widescreen);}
 
-	GuiText btn1Txt(tr("Ok"), 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	GuiText btn1Txt(tr("Ok"), 22, THEME.prompttext);
 	GuiImage btn1Img(&btnOutline);
 	if (Settings.wsprompt == yes){
 	btn1Txt.SetWidescreen(CFG.widescreen);
@@ -171,33 +171,33 @@ s32 Wad_Install(FILE *fp)
 
     char title[50];
    sprintf(title, "%s", tr("Installing wad"));
-	GuiText titleTxt(title, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	GuiText titleTxt(title, 26, THEME.prompttext);
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	titleTxt.SetPosition(0,40);
     char msg[50];
     sprintf(msg, " ");
 	// sprintf(msg, "%s", tr("Initializing Network"));
-	GuiText msg1Txt(NULL, 20, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	GuiText msg1Txt(NULL, 20, THEME.prompttext);
 	msg1Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	msg1Txt.SetPosition(50,75);
 //	char msg2[50] = " ";
-	GuiText msg2Txt(NULL, 20, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	GuiText msg2Txt(NULL, 20, THEME.prompttext);
 	msg2Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	msg2Txt.SetPosition(50, 98);
 
-	GuiText msg3Txt(NULL, 20, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	GuiText msg3Txt(NULL, 20, THEME.prompttext);
 	msg3Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	msg3Txt.SetPosition(50, 121);
 
-	GuiText msg4Txt(NULL, 20, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	GuiText msg4Txt(NULL, 20, THEME.prompttext);
 	msg4Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	msg4Txt.SetPosition(50, 144);
 
-	GuiText msg5Txt(NULL, 20, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	GuiText msg5Txt(NULL, 20, THEME.prompttext);
 	msg5Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	msg5Txt.SetPosition(50, 167);
 
-	GuiText prTxt(NULL, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	GuiText prTxt(NULL, 26, THEME.prompttext);
 	prTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	prTxt.SetPosition(0, 50);
 
@@ -236,6 +236,7 @@ s32 Wad_Install(FILE *fp)
 	///start the wad shit
 	bool fail = false;
 	wadHeader   *header  = NULL;
+	void		*pvoid;
 	signed_blob *p_certs = NULL, *p_crl = NULL, *p_tik = NULL, *p_tmd = NULL;
 
 	tmd *tmd_data  = NULL;
@@ -247,49 +248,51 @@ s32 Wad_Install(FILE *fp)
 	ResumeGui();
 	msg1Txt.SetText(tr(">> Reading WAD data..."));
 	HaltGui();
+#define SetPointer(a, p) a=(typeof(a))p
 	// WAD header
 	//ret = __Wad_ReadAlloc(fp, (void *)header, offset, sizeof(wadHeader));
-	ret = __Wad_ReadAlloc(fp, (void **)&header, offset, sizeof(wadHeader));
+	ret = __Wad_ReadAlloc(fp, &pvoid, offset, sizeof(wadHeader));
 
 	if (ret < 0)
 		goto err;
-	else
-		offset += round_up(header->header_len, 64);
+	SetPointer(header, pvoid);
+	offset += round_up(header->header_len, 64);
 
 	// WAD certificates
 	//ret = __Wad_ReadAlloc(fp, (void *)&p_certs, offset, header->certs_len);
-	ret = __Wad_ReadAlloc(fp, (void **)&p_certs, offset, header->certs_len);
+	ret = __Wad_ReadAlloc(fp, &pvoid, offset, header->certs_len);
 	if (ret < 0)
 		goto err;
-	else
-		offset += round_up(header->certs_len, 64);
+	SetPointer(p_certs, pvoid);
+	offset += round_up(header->certs_len, 64);
 
 	// WAD crl
 
 	if (header->crl_len) {
 		//ret = __Wad_ReadAlloc(fp, (void *)&p_crl, offset, header->crl_len);
-		ret = __Wad_ReadAlloc(fp, (void **)&p_crl, offset, header->crl_len);
+		ret = __Wad_ReadAlloc(fp, &pvoid, offset, header->crl_len);
 		if (ret < 0)
 			goto err;
-		else
-			offset += round_up(header->crl_len, 64);
+		SetPointer(p_crl, pvoid);
+		offset += round_up(header->crl_len, 64);
 	}
 
 	// WAD ticket
 	//ret = __Wad_ReadAlloc(fp, (void *)&p_tik, offset, header->tik_len);
-	ret = __Wad_ReadAlloc(fp, (void **)&p_tik, offset, header->tik_len);
+	ret = __Wad_ReadAlloc(fp, &pvoid, offset, header->tik_len);
 	if (ret < 0)
 		goto err;
-	else
-		offset += round_up(header->tik_len, 64);
+	SetPointer(p_tik, pvoid);
+	offset += round_up(header->tik_len, 64);
 
 	// WAD TMD
 	//ret = __Wad_ReadAlloc(fp, (void *)&p_tmd, offset, header->tmd_len);
-	ret = __Wad_ReadAlloc(fp, (void **)&p_tmd, offset, header->tmd_len);
+	ret = __Wad_ReadAlloc(fp, &pvoid, offset, header->tmd_len);
 	if (ret < 0)
 		goto err;
-	else
-		offset += round_up(header->tmd_len, 64);
+	SetPointer(p_tmd, pvoid);
+	offset += round_up(header->tmd_len, 64);
+
 	ResumeGui();
 	msg1Txt.SetText(tr("Reading WAD data... Ok!"));
 	msg2Txt.SetText(tr(">> Installing ticket..."));
@@ -465,7 +468,7 @@ s32 Wad_Uninstall(FILE *fp)
 	if (Settings.wsprompt == yes){
 	dialogBoxImg.SetWidescreen(CFG.widescreen);}
 
-	GuiText btn1Txt(tr("Ok"), 22, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	GuiText btn1Txt(tr("Ok"), 22, THEME.prompttext);
 	GuiImage btn1Img(&btnOutline);
 	if (Settings.wsprompt == yes){
 	btn1Txt.SetWidescreen(CFG.widescreen);
@@ -476,27 +479,27 @@ s32 Wad_Uninstall(FILE *fp)
 
     char title[50];
    sprintf(title, "%s", tr("Uninstalling wad"));
-	GuiText titleTxt(title, 26, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	GuiText titleTxt(title, 26, THEME.prompttext);
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	titleTxt.SetPosition(0,40);
 
-	GuiText msg1Txt(NULL, 18, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	GuiText msg1Txt(NULL, 18, THEME.prompttext);
 	msg1Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	msg1Txt.SetPosition(50,75);
 
-	GuiText msg2Txt(NULL, 18, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	GuiText msg2Txt(NULL, 18, THEME.prompttext);
 	msg2Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	msg2Txt.SetPosition(50, 98);
 
-	GuiText msg3Txt(NULL, 18, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	GuiText msg3Txt(NULL, 18, THEME.prompttext);
 	msg3Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	msg3Txt.SetPosition(50, 121);
 
-	GuiText msg4Txt(NULL, 18, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	GuiText msg4Txt(NULL, 18, THEME.prompttext);
 	msg4Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	msg4Txt.SetPosition(50, 144);
 
-	GuiText msg5Txt(NULL, 18, (GXColor){THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+	GuiText msg5Txt(NULL, 18, THEME.prompttext);
 	msg5Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	msg5Txt.SetPosition(50, 167);
 
@@ -527,7 +530,8 @@ s32 Wad_Uninstall(FILE *fp)
 	//sleep(3);
 
 	///start the wad shit
-	wadHeader *header   = NULL;
+	wadHeader *header	= NULL;
+	void	  *pvoid	= NULL;
 	tikview   *viewData = NULL;
 
 	u64 tid;
@@ -537,7 +541,7 @@ s32 Wad_Uninstall(FILE *fp)
 	msg1Txt.SetText(tr(">> Reading WAD data..."));
 
 	// WAD header
-	ret = __Wad_ReadAlloc(fp, (void **)&header, 0, sizeof(wadHeader));
+	ret = __Wad_ReadAlloc(fp, &pvoid, 0, sizeof(wadHeader));
 	if (ret < 0) {
 		char errTxt[50];
 		sprintf(errTxt,"%sret = %d",tr(">> Reading WAD data...ERROR! "),ret);
@@ -545,6 +549,7 @@ s32 Wad_Uninstall(FILE *fp)
 		//printf(" ERROR! (ret = %d)\n", ret);
 		goto out;
 	}
+	SetPointer(header, pvoid);
 
 	// Get title ID
 	ret =  __Wad_GetTitleID(fp, header, &tid);

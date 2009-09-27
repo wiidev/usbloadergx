@@ -3,7 +3,7 @@
 
 #include "gui.h"
 #include "../usbloader/disc.h"
-
+class GuiImageAsync;
 class GuiGameCarousel : public GuiElement
 {
 	public:
@@ -20,11 +20,11 @@ class GuiGameCarousel : public GuiElement
 		void Reload(struct discHdr * l, int count);
 		//GuiText * optionVal[PAGESIZE];
 	protected:
+		GuiImageData	noCover;
 		int selectedItem;
 		int listOffset;
 		int scrollbaron;
 		int pagesize;
-		int firstPic;
 		int speed;
 		int clickedItem;
 
@@ -32,10 +32,9 @@ class GuiGameCarousel : public GuiElement
 		int gameCnt;
 
 		int * gameIndex;
-
 		GuiButton ** game;
-
-		GuiTooltip * ttgame;
+		GuiTooltip ** titleTT;
+		GuiImageAsync ** coverImg;
 
 		GuiText * gamename;
 

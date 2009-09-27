@@ -179,3 +179,23 @@ int GuiImageData::GetHeight()
 {
 	return height;
 }
+void GuiImageData::SetGrayscale(void)
+{
+    GXColor color;
+    u32 offset, gray;
+
+    for(int x = 0; x < width; x++) {
+        for(int y = 0; y < height; y++) {
+            offset = (((y >> 2)<<4)*width) + ((x >> 2)<<6) + (((y%4 << 2) + x%4 ) << 1);
+            color.r = *(data+offset+1);
+            color.g = *(data+offset+32);
+            color.b = *(data+offset+33);
+
+            gray = (77*color.r + 150*color.g + 28*color.b)/255;
+
+            *(data+offset+1) = gray;
+            *(data+offset+32) = gray;
+            *(data+offset+33) = gray;
+        }
+    }
+}

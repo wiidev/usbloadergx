@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-20 04:59+0200\n"
+"POT-Creation-Date: 2009-09-27 20:15+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: Tusk\n"
 "Language-Team: \n"
@@ -46,6 +46,9 @@ msgstr "2 (Tinédzserek 14+)"
 msgid "20 min"
 msgstr ""
 
+msgid "2D Cover Path"
+msgstr ""
+
 msgid "3 (Mature 16+)"
 msgstr "3 (Kamaszok 16+)"
 
@@ -53,6 +56,9 @@ msgid "3 min"
 msgstr ""
 
 msgid "30 min"
+msgstr ""
+
+msgid "3D Cover Path"
 msgstr ""
 
 msgid "3D Covers"
@@ -283,9 +289,6 @@ msgstr ""
 
 msgid "Cover Download"
 msgstr "Boritó Letöltés"
-
-msgid "Cover Path"
-msgstr "Boritó Útvonala"
 
 msgid "Coverpath Change"
 msgstr ""
@@ -911,6 +914,9 @@ msgstr ""
 msgid "Sept"
 msgstr "Szep"
 
+msgid "Set Search-Filter"
+msgstr ""
+
 msgid "Set as backgroundmusic?"
 msgstr "Beállítod háttérzenének?"
 
@@ -1193,6 +1199,9 @@ msgstr " "
 
 msgid "seconds left"
 msgstr "hátralévõ másodperc"
+
+#~ msgid "Cover Path"
+#~ msgstr "Boritó Útvonala"
 
 #~ msgid "No partitions found"
 #~ msgstr "Nem találtam particiót"

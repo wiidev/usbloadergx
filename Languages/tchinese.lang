@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-20 04:59+0200\n"
+"POT-Creation-Date: 2009-09-27 20:15+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: kyogc\n"
 "Language-Team: \n"
@@ -46,6 +46,9 @@ msgstr "(青少年 12歲以上)"
 msgid "20 min"
 msgstr "20分鐘"
 
+msgid "2D Cover Path"
+msgstr ""
+
 msgid "3 (Mature 16+)"
 msgstr "(青年 16歲以上)"
 
@@ -54,6 +57,9 @@ msgstr "3分鐘"
 
 msgid "30 min"
 msgstr "30分鐘"
+
+msgid "3D Cover Path"
+msgstr ""
 
 msgid "3D Covers"
 msgstr "3D封面"
@@ -283,9 +289,6 @@ msgstr "無法設置USB"
 
 msgid "Cover Download"
 msgstr "下載封面"
-
-msgid "Cover Path"
-msgstr "封面路徑"
 
 msgid "Coverpath Change"
 msgstr "變更封面路徑"
@@ -911,6 +914,9 @@ msgstr ""
 msgid "Sept"
 msgstr "九月"
 
+msgid "Set Search-Filter"
+msgstr ""
+
 msgid "Set as backgroundmusic?"
 msgstr "設定背景音樂"
 
@@ -1193,6 +1199,9 @@ msgstr "剩餘空間 總容量"
 
 msgid "seconds left"
 msgstr "剩餘秒數"
+
+#~ msgid "Cover Path"
+#~ msgstr "封面路徑"
 
 #~ msgid "Don't bother the USB Loader GX Team about errors in this file."
 #~ msgstr "檔案錯誤"

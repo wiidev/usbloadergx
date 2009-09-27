@@ -124,13 +124,13 @@ GuiGameBrowser::GuiGameBrowser(int w, int h, struct discHdr * l, int gameCnt, co
 
 	for(int i=0; i < pagesize; i++)
 	{
-		gameTxt[i] = new GuiText(get_title(&gameList[i]), 20, (GXColor){THEME.gameText_r, THEME.gameText_g, THEME.gameText_b, 0xff});
+		gameTxt[i] = new GuiText(get_title(&gameList[i]), 20, THEME.gametext);
 		gameTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 		gameTxt[i]->SetPosition(24,0);
 		gameTxt[i]->SetMaxWidth(maxTextWidth, GuiText::DOTTED);
 
 
-		gameTxtOver[i] = new GuiText(get_title(&gameList[i]), 20, (GXColor){THEME.gameText_r, THEME.gameText_g, THEME.gameText_b, 0xff});
+		gameTxtOver[i] = new GuiText(get_title(&gameList[i]), 20, THEME.gametext);
 		gameTxtOver[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 		gameTxtOver[i]->SetPosition(24,0);
 		gameTxtOver[i]->SetMaxWidth(maxTextWidth, GuiText::SCROLL);
@@ -413,7 +413,7 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 					game[selectedItem+1]->SetState(STATE_SELECTED, t->chan);
 					selectedItem++;
 				}
-				scrollbarBoxBtn->Draw();
+//				scrollbarBoxBtn->Draw();
 				usleep(10000 * scrolldelay);
 			}
 			if (!(ButtonsHold() & WPAD_BUTTON_A))
@@ -436,7 +436,7 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 					game[selectedItem-1]->SetState(STATE_SELECTED, t->chan);
 					selectedItem--;
 				}
-				scrollbarBoxBtn->Draw();
+//				scrollbarBoxBtn->Draw();
 				usleep(10000 * scrolldelay);
 			}
 			if (!(ButtonsHold() & WPAD_BUTTON_A))
@@ -470,7 +470,7 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 						game[selectedItem-1]->SetState(STATE_SELECTED, t->chan);
 						selectedItem--;
 					}
-					scrollbarBoxBtn->Draw();
+//					scrollbarBoxBtn->Draw();
 					usleep(10000 * scrolldelay);
 				}
 			}
@@ -491,7 +491,7 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 						game[selectedItem+1]->SetState(STATE_SELECTED, t->chan);
 						selectedItem++;
 					}
-					scrollbarBoxBtn->Draw();
+//					scrollbarBoxBtn->Draw();
 					usleep(10000 * scrolldelay);
 				}
 			}

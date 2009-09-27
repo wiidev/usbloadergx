@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-20 04:59+0200\n"
+"POT-Creation-Date: 2009-09-27 20:15+0200\n"
 "PO-Revision-Date: 2009-08-11 19:45\n"
 "Last-Translator: boto12\n"
 "Language-Team: \n"
@@ -46,6 +46,9 @@ msgstr "2 (Adolescente 12+)"
 msgid "20 min"
 msgstr "20 minutos"
 
+msgid "2D Cover Path"
+msgstr ""
+
 msgid "3 (Mature 16+)"
 msgstr "3 (Adulto 16+)"
 
@@ -54,6 +57,9 @@ msgstr "3 minutos"
 
 msgid "30 min"
 msgstr "30 minutos"
+
+msgid "3D Cover Path"
+msgstr ""
 
 msgid "3D Covers"
 msgstr "Capas 3D"
@@ -283,9 +289,6 @@ msgstr "Não foi possível configurar a porta USB."
 
 msgid "Cover Download"
 msgstr "Download de Capas"
-
-msgid "Cover Path"
-msgstr "Pasta Capas"
 
 msgid "Coverpath Change"
 msgstr "Alterar Pasta das Capas"
@@ -911,6 +914,9 @@ msgstr "DOL selecionado"
 msgid "Sept"
 msgstr "Set"
 
+msgid "Set Search-Filter"
+msgstr ""
+
 msgid "Set as backgroundmusic?"
 msgstr "Definir como música de fundo?"
 
@@ -1193,6 +1199,9 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
+
+#~ msgid "Cover Path"
+#~ msgstr "Pasta Capas"
 
 #~ msgid "Don't bother the USB Loader GX Team about errors in this file."
 #~ msgstr "Não incomode a equipe do USB Loader GX por erros neste arquivo."

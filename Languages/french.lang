@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-20 04:59+0200\n"
+"POT-Creation-Date: 2009-09-27 20:15+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: Kin8\n"
 "Language-Team: Badablek, Amour, ikya, dj_skual & Kin8\n"
@@ -46,6 +46,9 @@ msgstr "2 (Adolescents 12+)"
 msgid "20 min"
 msgstr "20 min."
 
+msgid "2D Cover Path"
+msgstr ""
+
 msgid "3 (Mature 16+)"
 msgstr "3 (Matures 16+)"
 
@@ -54,6 +57,9 @@ msgstr "3 min."
 
 msgid "30 min"
 msgstr "30 min."
+
+msgid "3D Cover Path"
+msgstr ""
 
 msgid "3D Covers"
 msgstr "Jaquettes 3D"
@@ -283,9 +289,6 @@ msgstr "Accès USB impossible."
 
 msgid "Cover Download"
 msgstr "Téléchargement Jaquettes"
-
-msgid "Cover Path"
-msgstr "Dossier Jaquettes"
 
 msgid "Coverpath Change"
 msgstr "Dossier des Jaquettes"
@@ -911,6 +914,9 @@ msgstr "Choix du DOL"
 msgid "Sept"
 msgstr "Sept"
 
+msgid "Set Search-Filter"
+msgstr ""
+
 msgid "Set as backgroundmusic?"
 msgstr "Utiliser comme fond sonore ?"
 
@@ -1193,6 +1199,9 @@ msgstr "sur"
 
 msgid "seconds left"
 msgstr "secondes restantes"
+
+#~ msgid "Cover Path"
+#~ msgstr "Dossier Jaquettes"
 
 #~ msgid "You need to start this game one time to create a save file, then exit and start it again."
 #~ msgstr "Vous devez lancer ce jeu une fois pour créer une sauvegarde, puis éteindre et le lancer à nouveau."

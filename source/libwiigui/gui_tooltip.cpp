@@ -18,7 +18,7 @@ static GuiImageData tooltipRight(tooltip_right_png);
 /**
  * Constructor for the GuiTooltip class.
  */
-GuiTooltip::GuiTooltip(const char *t)
+GuiTooltip::GuiTooltip(const char *t, int Alpha/*=255*/)
 :
 leftImage(&tooltipLeft), tileImage(&tooltipTile), rightImage(&tooltipRight)
 {
@@ -31,6 +31,7 @@ leftImage(&tooltipLeft), tileImage(&tooltipTile), rightImage(&tooltipRight)
 	tileImage.SetParentAngle(false);
 	rightImage.SetParentAngle(false);
 	SetText(t);
+	SetAlpha(Alpha);
 }
 
 /*

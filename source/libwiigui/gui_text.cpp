@@ -149,6 +149,23 @@ void GuiText::SetTextf(const char *format, ...)
 	}
 	va_end(va);
 }
+void GuiText::SetText(const wchar_t * t)
+{
+	LOCK(this);
+	if(text)
+		delete [] text;
+	text = NULL;
+
+	if(t)
+	{
+		int len = wcslen(t);
+		text = new wchar_t[len+1];
+		if(text) wcscpy(text, t);
+	}
+	scrollPos2 = 0;
+	scrollDelay = 0;
+}
+
 
 void GuiText::SetPresets(int sz, GXColor c, int w, int wrap, u16 s, int h, int v)
 {

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-20 04:59+0200\n"
+"POT-Creation-Date: 2009-09-27 20:15+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: raschi\n"
 "Language-Team: \n"
@@ -46,6 +46,9 @@ msgstr "2 (Ungdom 12+)"
 msgid "20 min"
 msgstr "20 min"
 
+msgid "2D Cover Path"
+msgstr ""
+
 msgid "3 (Mature 16+)"
 msgstr "3 (Ungdom 16+)"
 
@@ -54,6 +57,9 @@ msgstr "3 min"
 
 msgid "30 min"
 msgstr "30 min"
+
+msgid "3D Cover Path"
+msgstr ""
 
 msgid "3D Covers"
 msgstr "3D cover"
@@ -283,9 +289,6 @@ msgstr "Kan ikke velge USB."
 
 msgid "Cover Download"
 msgstr "Cover nedlasting"
-
-msgid "Cover Path"
-msgstr "Cover sti"
 
 msgid "Coverpath Change"
 msgstr "Endre cover sti"
@@ -911,6 +914,9 @@ msgstr "Valgt DOL fil"
 msgid "Sept"
 msgstr "Sep"
 
+msgid "Set Search-Filter"
+msgstr ""
+
 msgid "Set as backgroundmusic?"
 msgstr "Bruk som bakgrunnsmusikk?"
 
@@ -1193,6 +1199,9 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder gjenstår"
+
+#~ msgid "Cover Path"
+#~ msgstr "Cover sti"
 
 #~ msgid "Don't bother the USB Loader GX Team about errors in this file."
 #~ msgstr "Ikke bry USB Loader GX teamet med feil i denne filen."

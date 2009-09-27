@@ -3,7 +3,7 @@
 
 #include "gui.h"
 #include "../usbloader/disc.h"
-
+class GuiImageAsync;
 class GuiGameGrid : public GuiElement
 {
 	public:
@@ -17,32 +17,26 @@ class GuiGameGrid : public GuiElement
 		void Draw();
 		void Update(GuiTrigger * t);
 		int GetOffset();
-		void Reload(struct discHdr * l, int count);
+		void Reload(struct discHdr * l, int count, int Rows, int ListOffset);
 		void ChangeRows(int n);
 	protected:
+		GuiImageData	noCover;
 		int selectedItem;
 		int listOffset;
-		int scrollbaron;
 		int pagesize;
-		int firstPic;
-		int speed;
 		int clickedItem;
 		int rows;
-		int drawTTs;
-		
+		int goLeft;
+		int goRight;
 
 		struct discHdr * gameList;
 		int gameCnt;
 
 		int * gameIndex;
-		int * bob;
-
 		GuiButton ** game;
-
-		GuiImage ** coverImg;
-		GuiImageData ** cover;
+		GuiTooltip ** titleTT;
+		GuiImageAsync ** coverImg;
 		
-		GuiText * debugTxt;
 		
 		GuiButton * btnRight;
 		GuiButton * btnLeft;
@@ -55,9 +49,6 @@ class GuiGameGrid : public GuiElement
 		GuiImageData * imgLeft;
 		GuiImageData * imgRight;
 		
-		GuiTooltip * titleTT;
-		
-        
 		GuiSound * btnSoundOver;
 		GuiSound * btnSoundClick;
 		GuiTrigger * trigA;

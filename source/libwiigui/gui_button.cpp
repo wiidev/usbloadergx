@@ -44,6 +44,8 @@ GuiButton::GuiButton(int w, int h)
 	selectable = true;
 	holdable = false;
 	clickable = true;
+	
+	time1 = time2 = 0;
 }
 
 GuiButton::GuiButton(GuiImage* img, GuiImage* imgOver, int hor, int vert, int x, int y, GuiTrigger* trig, GuiSound* sndOver, GuiSound* sndClick, u8 grow)
@@ -53,7 +55,7 @@ GuiButton::GuiButton(GuiImage* img, GuiImage* imgOver, int hor, int vert, int x,
 	image = img;
 	image->SetParent(this);
 	imageOver = imgOver;
-	imageOver->SetParent(this);
+	if(imageOver) imageOver->SetParent(this);
 	imageHold = NULL;
 	imageClick = NULL;
 	icon = NULL;
@@ -87,6 +89,7 @@ GuiButton::GuiButton(GuiImage* img, GuiImage* imgOver, int hor, int vert, int x,
 	effectAmountOver = 4;
 	effectTargetOver = 110;
 	}
+	time1 = time2 = 0;
 }
 
 GuiButton::GuiButton(GuiImage* img, GuiImage* imgOver, int hor, int vert, int x, int y, GuiTrigger* trig, GuiSound* sndOver, GuiSound* sndClick, u8 grow, GuiTooltip* tt, int ttx, int tty, int h_align, int v_align)
@@ -96,7 +99,7 @@ GuiButton::GuiButton(GuiImage* img, GuiImage* imgOver, int hor, int vert, int x,
 	image = img;
 	image->SetParent(this);
 	imageOver = imgOver;
-	imageOver->SetParent(this);
+	if(imageOver) imageOver->SetParent(this);
 	imageHold = NULL;
 	imageClick = NULL;
 	icon = NULL;
@@ -135,6 +138,8 @@ GuiButton::GuiButton(GuiImage* img, GuiImage* imgOver, int hor, int vert, int x,
 	toolTip->SetParent(this);
 	toolTip->SetAlignment(h_align, v_align);
 	toolTip->SetPosition(ttx,tty);
+
+	time1 = time2 = 0;
 }
 
 /**
@@ -263,7 +268,8 @@ void GuiButton::RemoveSoundClick()
 }
 void GuiButton::SetSkew(int XX1, int YY1,int XX2, int YY2,int XX3, int YY3,int XX4, int YY4)
 { 
-	
+	if(image)
+	{
 		image->xx1 = XX1;
 		image->yy1 = YY1;
 		image->xx2 = XX2;
@@ -272,6 +278,13 @@ void GuiButton::SetSkew(int XX1, int YY1,int XX2, int YY2,int XX3, int YY3,int X
 		image->yy3 = YY3;
 		image->xx4 = XX4;
 		image->yy4 = YY4;
+	}
+}
+
+void GuiButton::SetSkew(int *skew)
+{ 
+	if(image)
+		image->SetSkew(skew);
 }
 
 
@@ -308,7 +321,7 @@ void GuiButton::Draw()
 void GuiButton::DrawTooltip()
 {
 	LOCK(this);
-	if(state == STATE_SELECTED && toolTip)
+	if(this->IsVisible() && state == STATE_SELECTED && toolTip)
 	{
 	    if (time2 == 0)
 		{
@@ -344,7 +357,7 @@ void GuiButton::ScrollIsOn(int f)
 void GuiButton::Update(GuiTrigger * t)
 {
 	LOCK(this);
-	if(state == STATE_CLICKED || state == STATE_DISABLED || !t)
+	if(!this->IsVisible() || state == STATE_CLICKED || state == STATE_DISABLED || !t)
 		return;
 	else if(parentElement && parentElement->GetState() == STATE_DISABLED)
 		return;

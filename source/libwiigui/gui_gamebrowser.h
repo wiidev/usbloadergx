@@ -7,7 +7,7 @@
 class GuiGameBrowser : public GuiElement
 {
 	public:
-		GuiGameBrowser(int w, int h, struct discHdr * l, int gameCnt, const char *themePath, const u8 *imagebg, int selected = 0, int offset = 0);
+		GuiGameBrowser(int w, int h, struct discHdr *l, int gameCnt, const char *themePath, const u8 *imagebg, int selected = 0, int offset = 0);
 		~GuiGameBrowser();
 		int FindMenuItem(int c, int d);
 		int GetClickedOption();

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-20 04:59+0200\n"
+"POT-Creation-Date: 2009-09-27 20:15+0200\n"
 "PO-Revision-Date: 2009-09-19 14:00+0700\n"
 "Last-Translator: Nitro_subzero \n"
 "Language-Team: Nitro_subzero\n"
@@ -46,6 +46,9 @@ msgstr "2 (วัยรุ่น 12+)"
 msgid "20 min"
 msgstr "20 นาที"
 
+msgid "2D Cover Path"
+msgstr ""
+
 msgid "3 (Mature 16+)"
 msgstr "3 (เต็มวัย 16+)"
 
@@ -54,6 +57,9 @@ msgstr "3 นาที"
 
 msgid "30 min"
 msgstr "30 นาที"
+
+msgid "3D Cover Path"
+msgstr ""
 
 msgid "3D Covers"
 msgstr "หน้าปก 3D"
@@ -283,9 +289,6 @@ msgstr "ไม่สามารถตั้งค่า USB ได้"
 
 msgid "Cover Download"
 msgstr "ดาวน์โหลดปก"
-
-msgid "Cover Path"
-msgstr "ที่เก็บ ปก"
 
 msgid "Coverpath Change"
 msgstr "ที่เก็บ ปก ถูกเปลี่ยนแปลง"
@@ -911,6 +914,9 @@ msgstr "DOL ที่เลือก"
 msgid "Sept"
 msgstr "กย."
 
+msgid "Set Search-Filter"
+msgstr ""
+
 msgid "Set as backgroundmusic?"
 msgstr "เลือกเป็น Background music?"
 
@@ -1193,6 +1199,9 @@ msgstr "ของ"
 
 msgid "seconds left"
 msgstr "วินาทีที่เหลือ"
+
+#~ msgid "Cover Path"
+#~ msgstr "ที่เก็บ ปก"
 
 #~ msgid "Don't bother the USB Loader GX Team about errors in this file."
 #~ msgstr "อย่ารบกวนผู้พัฒนา USB Loader GX ถ้ามีข้อผิดพลาดกับไฟล์นี้ "

@@ -50,96 +50,131 @@ extern "C" {
     };
 
 
-    struct THEME {
-        int selection_x;
-        int selection_y;
-        int selection_w;
-        int selection_h;
-        int gamegrid_x;
-        int gamegrid_y;
-        int gamegrid_w;
-        int gamegrid_h;
-        int tooltipAlpha;
-        int gamecarousel_x;
-        int gamecarousel_y;
-        int gamecarousel_w;
-        int gamecarousel_h;
-        short cover_x;
-        short cover_y;
-        short showID;
-//	short maxcharacters;
-        short batteryUnused;
-        short homebrew_x;
-        short homebrew_y;
-        short id_x;
-        short id_y;
-        short region_x;
-        short region_y;
-        short power_x;
-        short power_y;
-        short home_x;
-        short home_y;
-        short battery1_x;
-        short battery2_x;
-        short battery3_x;
-        short battery4_x;
-        short battery1_y;
-        short battery2_y;
-        short battery3_y;
-        short battery4_y;
-        short favorite_x;
-        short favorite_y;
-        short abc_x;
-        short abc_y;
-        short list_x;
-        short list_y;
-        short grid_x;
-        short grid_y;
-        short carousel_x;
-        short carousel_y;
-        short count_x;
-        short count_y;
-        short sortBarOffset;
-//	short showPower;
-//	short showHome;
-        short setting_x;
-        short setting_y;
-        short install_x;
-        short install_y;
-        short showHDD;
-        short hddInfoAlign;
-        short hddInfo_x;
-        short hddInfo_y;
-        short showGameCnt;
-        short gameCntAlign;
-        short gameCnt_x;
-        short gameCnt_y;
-        short showRegion;
-        short showBattery;
-        short showToolTip;
-        //color
-        short info_r;
-        short info_g;
-        short info_b;
-        short prompttxt_r;
-        short prompttxt_g;
-        short prompttxt_b;
-        short settingsTxt_r;
-        short settingsTxt_g;
-        short settingsTxt_b;
-        short clock_r;
-        short clock_g;
-        short clock_b;
-        short clock_x;
-        short clock_y;
-        short clockAlign;
-        short sdcard_x;
-        short sdcard_y;
-        short gameText_r;
-        short gameText_g;
-        short gameText_b;
-        short pagesize;
-    };
+	struct THEME {
+		short gamelist_x;
+		short gamelist_y;
+		short gamelist_w;
+		short gamelist_h;
+		short gamegrid_x;
+		short gamegrid_y;
+		short gamegrid_w;
+		short gamegrid_h;
+		short gamecarousel_x;
+		short gamecarousel_y;
+		short gamecarousel_w;
+		short gamecarousel_h;
+		
+		short covers_x;
+		short covers_y;
+
+		short show_id;
+		short id_x;
+		short id_y;
+		short show_region;
+		short region_x;
+		short region_y;
+
+		short sdcard_x;
+		short sdcard_y;
+		short homebrew_x;
+		short homebrew_y;
+		short power_x;
+		short power_y;
+		short home_x;
+		short home_y;
+		short setting_x;
+		short setting_y;
+		short install_x;
+		short install_y;
+		GXColor clock;
+		short clock_align;
+		short clock_x;
+		short clock_y;
+
+		GXColor info;
+		short show_hddinfo;
+		short hddinfo_align;
+		short hddinfo_x;
+		short hddinfo_y;
+		
+		short show_gamecount;
+		short gamecount_align;
+		short gamecount_x;
+		short gamecount_y;
+		
+		short show_tooltip;
+		int tooltipAlpha;
+		
+		GXColor prompttext;
+		GXColor settingstext;
+		GXColor gametext;
+		short pagesize;
+
+// Toolbar Icons in GameList
+/*
+		short favorite_x;
+		short favorite_y;
+		short search_x;
+		short search_y;
+		short abc_x;
+		short abc_y;
+		short count_x;
+		short count_y;
+		short list_x;
+		short list_y;
+		short grid_x;
+		short grid_y;
+		short carousel_x;
+		short carousel_y;
+		short sortBarOffset;
+*/
+// Toolbar Icons in GameList
+		short gamelist_favorite_x;
+		short gamelist_favorite_y;
+		short gamelist_search_x;
+		short gamelist_search_y;
+		short gamelist_abc_x;
+		short gamelist_abc_y;
+		short gamelist_count_x;
+		short gamelist_count_y;
+		short gamelist_list_x;
+		short gamelist_list_y;
+		short gamelist_grid_x;
+		short gamelist_grid_y;
+		short gamelist_carousel_x;
+		short gamelist_carousel_y;
+// Toolbar Icons in GameGrid
+		short gamegrid_favorite_x;
+		short gamegrid_favorite_y;
+		short gamegrid_search_x;
+		short gamegrid_search_y;
+		short gamegrid_abc_x;
+		short gamegrid_abc_y;
+		short gamegrid_count_x;
+		short gamegrid_count_y;
+		short gamegrid_list_x;
+		short gamegrid_list_y;
+		short gamegrid_grid_x;
+		short gamegrid_grid_y;
+		short gamegrid_carousel_x;
+		short gamegrid_carousel_y;
+// Toolbar Icons in GameCarousel
+		short gamecarousel_favorite_x;
+		short gamecarousel_favorite_y;
+		short gamecarousel_search_x;
+		short gamecarousel_search_y;
+		short gamecarousel_abc_x;
+		short gamecarousel_abc_y;
+		short gamecarousel_count_x;
+		short gamecarousel_count_y;
+		short gamecarousel_list_x;
+		short gamecarousel_list_y;
+		short gamecarousel_grid_x;
+		short gamecarousel_grid_y;
+		short gamecarousel_carousel_x;
+		short gamecarousel_carousel_y;
+
+	};
 
     extern struct CFG CFG;
     extern struct THEME THEME;
@@ -341,7 +376,8 @@ extern "C" {
         u8      patchcountrystrings;
         u8      screensaver;
         short	godmode;
-        char	covers_path[100];
+		char	covers_path[100];
+        char	covers2d_path[100];
         char	theme_path[100];
         char	wtheme_path[100];
         char	disc_path[100];

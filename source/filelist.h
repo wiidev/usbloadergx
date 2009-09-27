@@ -173,6 +173,12 @@ extern const u32	keyboard_mediumkey_over_png_size;
 extern const u8		keyboard_largekey_over_png[];
 extern const u32	keyboard_largekey_over_png_size;
 
+extern const u8		keyboard_backspace_over_png[];
+extern const u32	keyboard_backspace_over_png_size;
+
+extern const u8		keyboard_clear_over_png[];
+extern const u32	keyboard_clear_over_png_size;
+
 extern const u8		menu_button_png[];
 extern const u32	menu_button_size;
 
@@ -311,6 +317,9 @@ extern const u32	not_favorite_png_size;
 extern const u8		favIcon_png[];
 extern const u32	favIcon_png_size;
 
+extern const u8		searchIcon_png[];
+extern const u32	searchIcon_png_size;
+
 extern const u8		abcIcon_png[];
 extern const u32	abcIcon_png_size;
 
@@ -326,23 +335,8 @@ extern const u32	arrangeGrid_png_size;
 extern const u8		arrangeCarousel_png[];
 extern const u32	arrangeCarousel_png_size;
 
-extern const u8		favIcon_gray_png[];
-extern const u32	favIcon_gray_png_size;
-
-extern const u8		abcIcon_gray_png[];
-extern const u32	abcIcon_gray_png_size;
-
-extern const u8		playCountIcon_gray_png[];
-extern const u32	playCountIcon_gray_png_size;
-
-extern const u8		arrangeGrid_gray_png[];
-extern const u32	arrangeGrid_gray_png_size;
-
-extern const u8		arrangeList_gray_png[];
-extern const u32	arrangeList_gray_png_size;
-
-extern const u8		arrangeCarousel_gray_png[];
-extern const u32	arrangeCarousel_gray_png_size;
+extern const u8		searchBar_png[];
+extern const u32	searchBar_png_png_size;
 
 extern const u8		settings_title_png[];
 extern const u32	settings_title_png_size;

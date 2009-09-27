@@ -34,9 +34,18 @@ GuiImage::GuiImage()
 
 GuiImage::GuiImage(GuiImageData * img)
 {
-	image = img->GetImage();
-	width = img->GetWidth();
-	height = img->GetHeight();
+	if(img)
+	{
+		image = img->GetImage();
+		width = img->GetWidth();
+		height = img->GetHeight();
+	}
+	else
+	{
+		image = NULL;
+		width = 0;
+		height = 0;
+	}
 	imageangle = 0;
 	tile = -1;
 	stripe = 0;
@@ -111,13 +120,8 @@ GuiImage::GuiImage(int w, int h, GXColor c)
 	DCFlushRange(image, len);
 }
 
-GuiImage::GuiImage(GuiImage &srcimage)
+GuiImage::GuiImage(GuiImage &srcimage) : GuiElement()
 {
-	if((imgType == IMAGE_COLOR || imgType == IMAGE_COPY) && image) {
-        free(image);
-        image = NULL;
-	}
-
 	width = srcimage.GetWidth();
 	height = srcimage.GetHeight();
     int len = width * height * 4;
@@ -141,13 +145,8 @@ GuiImage::GuiImage(GuiImage &srcimage)
 	imgType = IMAGE_COPY;
 }
 
-GuiImage::GuiImage(GuiImage *srcimage)
+GuiImage::GuiImage(GuiImage *srcimage) : GuiElement()
 {
-	if((imgType == IMAGE_COLOR || imgType == IMAGE_COPY) && image) {
-        free(image);
-        image = NULL;
-	}
-
 	width = srcimage->GetWidth();
 	height = srcimage->GetHeight();
     int len = width * height * 4;
@@ -307,7 +306,7 @@ void GuiImage::SetGrayscale(void)
 
     for(int x = 0; x < width; x++) {
         for(int y = 0; y < height; y++) {
-            offset = (((y >> 2)<<4)*this->GetWidth()) + ((x >> 2)<<6) + (((y%4 << 2) + x%4 ) << 1);
+            offset = (((y >> 2)<<4)*width) + ((x >> 2)<<6) + (((y%4 << 2) + x%4 ) << 1);
             color.r = *(image+offset+1);
             color.g = *(image+offset+32);
             color.b = *(image+offset+33);
@@ -331,14 +330,26 @@ void GuiImage::SetStripe(int s)
 void GuiImage::SetSkew(int XX1, int YY1,int XX2, int YY2,int XX3, int YY3,int XX4, int YY4)
 {
 
-		xx1 = XX1;
-		yy1 = YY1;
-		xx2 = XX2;
-		yy2 = YY2;
-		xx3 = XX3;
-		yy3 = YY3;
-		xx4 = XX4;
-		yy4 = YY4;
+	xx1 = XX1;
+	yy1 = YY1;
+	xx2 = XX2;
+	yy2 = YY2;
+	xx3 = XX3;
+	yy3 = YY3;
+	xx4 = XX4;
+	yy4 = YY4;
+}
+void GuiImage::SetSkew(int *skew)
+{
+	
+	xx1 = *skew++;
+	yy1 = *skew++;
+	xx2 = *skew++;
+	yy2 = *skew++;
+	xx3 = *skew++;
+	yy3 = *skew++;
+	xx4 = *skew++;
+	yy4 = *skew;
 }
 
 

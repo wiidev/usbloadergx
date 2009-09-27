@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-20 04:59+0200\n"
+"POT-Creation-Date: 2009-09-27 20:15+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: c64rmx\n"
 "Language-Team: \n"
@@ -46,6 +46,9 @@ msgstr "2 (Teinit 12+)"
 msgid "20 min"
 msgstr ""
 
+msgid "2D Cover Path"
+msgstr ""
+
 msgid "3 (Mature 16+)"
 msgstr "3 (Teinit 16+)"
 
@@ -53,6 +56,9 @@ msgid "3 min"
 msgstr ""
 
 msgid "30 min"
+msgstr ""
+
+msgid "3D Cover Path"
 msgstr ""
 
 msgid "3D Covers"
@@ -283,9 +289,6 @@ msgstr "USB:tä ei voitu asettaa"
 
 msgid "Cover Download"
 msgstr "Kansien lataus"
-
-msgid "Cover Path"
-msgstr "Kansien polku"
 
 msgid "Coverpath Change"
 msgstr "Kansipolun vaihto"
@@ -911,6 +914,9 @@ msgstr "Valittu DOL"
 msgid "Sept"
 msgstr "syys"
 
+msgid "Set Search-Filter"
+msgstr ""
+
 msgid "Set as backgroundmusic?"
 msgstr "Aseta taustamusiikiksi?"
 
@@ -1193,6 +1199,9 @@ msgstr "josta"
 
 msgid "seconds left"
 msgstr "sekuntia jäljellä"
+
+#~ msgid "Cover Path"
+#~ msgstr "Kansien polku"
 
 #~ msgid "No partitions found"
 #~ msgstr "Osioita ei löytynyt"

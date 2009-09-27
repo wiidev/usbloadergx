@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-20 04:59+0200\n"
+"POT-Creation-Date: 2009-09-27 20:15+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: nextos@korea.com\n"
 "Language-Team: \n"
@@ -46,6 +46,9 @@ msgstr "2 (12세 이상)"
 msgid "20 min"
 msgstr "20 분"
 
+msgid "2D Cover Path"
+msgstr ""
+
 msgid "3 (Mature 16+)"
 msgstr "3 (16세 이상)"
 
@@ -54,6 +57,9 @@ msgstr "3 분"
 
 msgid "30 min"
 msgstr "30 분"
+
+msgid "3D Cover Path"
+msgstr ""
 
 msgid "3D Covers"
 msgstr "3D 커버"
@@ -283,9 +289,6 @@ msgstr "USB 를 설정할수 없음."
 
 msgid "Cover Download"
 msgstr "표지 다운로드"
-
-msgid "Cover Path"
-msgstr "표지 경로"
 
 msgid "Coverpath Change"
 msgstr "커퍼경로 변경"
@@ -911,6 +914,9 @@ msgstr ""
 msgid "Sept"
 msgstr "9월"
 
+msgid "Set Search-Filter"
+msgstr ""
+
 msgid "Set as backgroundmusic?"
 msgstr "벼경음악 설정?"
 
@@ -1193,6 +1199,9 @@ msgstr "중"
 
 msgid "seconds left"
 msgstr "초 남았습니다"
+
+#~ msgid "Cover Path"
+#~ msgstr "표지 경로"
 
 #~ msgid "Don't bother the USB Loader GX Team about errors in this file."
 #~ msgstr "이화일의 에러로 USB Loader GX 팀에 연락하지 마세요."

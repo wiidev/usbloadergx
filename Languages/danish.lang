@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-20 04:59+0200\n"
+"POT-Creation-Date: 2009-09-27 20:15+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: dorf[dk]\n"
 "Language-Team: \n"
@@ -46,6 +46,9 @@ msgstr "2 (Unge teenagere 12+)"
 msgid "20 min"
 msgstr "20 min."
 
+msgid "2D Cover Path"
+msgstr ""
+
 msgid "3 (Mature 16+)"
 msgstr "3 (Modne teenagere 12+)"
 
@@ -54,6 +57,9 @@ msgstr "3 min."
 
 msgid "30 min"
 msgstr "30 min."
+
+msgid "3D Cover Path"
+msgstr ""
 
 msgid "3D Covers"
 msgstr "3D-Covers"
@@ -283,9 +289,6 @@ msgstr "Kunne ikke sætte USB."
 
 msgid "Cover Download"
 msgstr "Cover-download"
-
-msgid "Cover Path"
-msgstr "Sti til covers"
 
 msgid "Coverpath Change"
 msgstr "Ændringer af sti til covers"
@@ -911,6 +914,9 @@ msgstr "Valgt DOL"
 msgid "Sept"
 msgstr "Sept"
 
+msgid "Set Search-Filter"
+msgstr ""
+
 msgid "Set as backgroundmusic?"
 msgstr "Indstil som baggrundsmusik?"
 
@@ -1193,6 +1199,9 @@ msgstr "af"
 
 msgid "seconds left"
 msgstr "sekunder tilbage"
+
+#~ msgid "Cover Path"
+#~ msgstr "Sti til covers"
 
 #~ msgid "Don't bother the USB Loader GX Team about errors in this file."
 #~ msgstr "Lad være med at fortælle holdet bag USB Loader GX om fejl i denne fil."

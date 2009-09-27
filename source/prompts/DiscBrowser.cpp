@@ -163,7 +163,7 @@ int DiscBrowse(struct discHdr * header) {
     settingsbackgroundbtn.SetPosition(0, 0);
     settingsbackgroundbtn.SetImage(&settingsbackground);
 
-    GuiText cancelBtnTxt(tr("Back"), 22, (GXColor) { THEME.prompttxt_r, THEME.prompttxt_g, THEME.prompttxt_b, 255});
+    GuiText cancelBtnTxt(tr("Back"), 22, THEME.prompttext);
     cancelBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
     GuiImage cancelBtnImg(&btnOutline);
     if (Settings.wsprompt == yes) {

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-20 04:59+0200\n"
+"POT-Creation-Date: 2009-09-27 20:15+0200\n"
 "PO-Revision-Date: 2009-08-02 12:20+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -46,6 +46,9 @@ msgstr "2 (Tonåringar 12+)"
 msgid "20 min"
 msgstr "20 min"
 
+msgid "2D Cover Path"
+msgstr ""
+
 msgid "3 (Mature 16+)"
 msgstr "3 (Mogen 16+)"
 
@@ -54,6 +57,9 @@ msgstr "3 min"
 
 msgid "30 min"
 msgstr "30 min"
+
+msgid "3D Cover Path"
+msgstr ""
 
 msgid "3D Covers"
 msgstr "3D-Omslag"
@@ -283,9 +289,6 @@ msgstr "Kunde inte ställa in USB."
 
 msgid "Cover Download"
 msgstr "Omslagsnedladdning"
-
-msgid "Cover Path"
-msgstr "Omslagsmapp"
 
 msgid "Coverpath Change"
 msgstr "Ändra omslagsmapp"
@@ -911,6 +914,9 @@ msgstr ""
 msgid "Sept"
 msgstr "Sept"
 
+msgid "Set Search-Filter"
+msgstr ""
+
 msgid "Set as backgroundmusic?"
 msgstr "Ställ in som bakgrundsmusik?"
 
@@ -1193,6 +1199,9 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder kvar"
+
+#~ msgid "Cover Path"
+#~ msgstr "Omslagsmapp"
 
 #~ msgid "Don't bother the USB Loader GX Team about errors in this file."
 #~ msgstr "Rapportera inte fel i denna fil till USB Loader GX teamet."
