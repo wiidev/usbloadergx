@@ -1128,18 +1128,44 @@ int MenuDiscList() {
 			
 			
 				__Menu_GetEntries(0, newFilter);
+				menu = MENU_DISCLIST;
+				break;
 			}
-			else if(searchChar == 7) // Clear
+			else if(searchChar == 7) // Close
 			{
-				__Menu_GetEntries(0, L"");
+				show_searchwindow=false;
+				HaltGui();
+				if(searchBar)
+				{
+					mainWindow->Remove(searchBar);
+					delete searchBar;
+					searchBar = NULL;
+				}
+				if(gameFilter && *gameFilter)
+				{
+					searchBtn.SetEffect(EFFECT_PULSE, 10, 105);
+					searchBtn.SetImage(&searchBtnImg);
+					searchBtn.SetImageOver(&searchBtnImg);
+					searchBtn.SetAlpha(255);
+				}
+				else
+				{
+					searchBtn.StopEffect();
+					searchBtn.SetEffectGrow();
+					searchBtn.SetImage(&searchBtnImg_g);
+					searchBtn.SetImageOver(&searchBtnImg_g);
+					searchBtn.SetAlpha(180);
+				}
+				
+				ResumeGui();
 			}
 			else if(searchChar == 8) // Backspace
 			{
 				__Menu_GetEntries(0, gameFilterPrev);
+				menu = MENU_DISCLIST;
+				break;
 			}
 
-			menu = MENU_DISCLIST;
-			break;
 		}
 		
         else if (abcBtn.GetState() == STATE_CLICKED) {
