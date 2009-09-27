@@ -425,9 +425,6 @@ int MenuDiscList() {
 //    snprintf(imgPath, sizeof(imgPath), "%sarrangeCarousel_gray.png", CFG.theme_path);
 //    GuiImageData imgarrangeCarousel_gray(imgPath, arrangeCarousel_gray_png);
 
-    snprintf(imgPath, sizeof(imgPath), "%ssearchBar.png", CFG.theme_path);
-    GuiImageData imgsearchBar(imgPath, searchBar_png);
-
     snprintf(imgPath, sizeof(imgPath), "%sbrowser.png", CFG.theme_path);
     GuiImageData homebrewImgData(imgPath, browser_png);
     snprintf(imgPath, sizeof(imgPath), "%sbrowser_over.png", CFG.theme_path);

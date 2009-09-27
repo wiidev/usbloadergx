@@ -335,9 +335,6 @@ extern const u32	arrangeGrid_png_size;
 extern const u8		arrangeCarousel_png[];
 extern const u32	arrangeCarousel_png_size;
 
-extern const u8		searchBar_png[];
-extern const u32	searchBar_png_png_size;
-
 extern const u8		settings_title_png[];
 extern const u32	settings_title_png_size;
 
