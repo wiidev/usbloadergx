@@ -108,6 +108,8 @@ GuiSearchBar::~GuiSearchBar()
 	delete BacspaceBtnImg;
 	delete BacspaceBtnImg_Over;
 	delete imgBacspaceBtn;
+	if(inSide)
+		mainWindow->SetState(STATE_DEFAULT);
 }
 void GuiSearchBar::Draw()
 {
