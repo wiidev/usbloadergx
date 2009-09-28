@@ -206,7 +206,7 @@ msgid "Cheatfile is blank"
 msgstr "Cheatfilen er tom"
 
 msgid "Checking existing artwork"
-msgstr ""
+msgstr "Kontrollerer eksisterende billeder"
 
 msgid "Checking for Updates"
 msgstr "Leder efter opdateringer"
@@ -282,7 +282,7 @@ msgid "Could not read the disc."
 msgstr "Kunne ikke læse DVD."
 
 msgid "Could not save."
-msgstr ""
+msgstr "Kunne ikke gemme."
 
 msgid "Could not set USB."
 msgstr "Kunne ikke sætte USB."
@@ -330,7 +330,7 @@ msgid "Delete Boxart"
 msgstr "Slet boxart"
 
 msgid "Delete Cheat GCT"
-msgstr ""
+msgstr "Slet cheat GCT"
 
 msgid "Delete CheatTxt"
 msgstr "Slet CheatTxt"
@@ -726,7 +726,7 @@ msgid "No WBFS partition found"
 msgstr "Ingen WBFS-partition fundet"
 
 msgid "No cheats were selected"
-msgstr ""
+msgstr "Der blev ikke valgt nogle cheats"
 
 msgid "No data could be read."
 msgstr "Data kunne ikke læses."
@@ -831,7 +831,7 @@ msgid "Play Count"
 msgstr "Spiltæller"
 
 msgid "Please wait..."
-msgstr ""
+msgstr "Vent venligst..."
 
 msgid "Power off the Wii"
 msgstr "Sluk Wiien"
@@ -897,10 +897,10 @@ msgid "Save Failed"
 msgstr "Gem mislykkedes"
 
 msgid "Save Game List to"
-msgstr ""
+msgstr "Gem spilliste på"
 
 msgid "Saved"
-msgstr ""
+msgstr "Gemt"
 
 msgid "Screensaver"
 msgstr "Screensaver"

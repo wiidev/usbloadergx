@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-# thai.lang - r723
+# thai.lang - r746
 # don't delete this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-27 20:15+0200\n"
-"PO-Revision-Date: 2009-09-19 14:00+0700\n"
+"POT-Creation-Date: 2009-09-27 22:13+0200\n"
+"PO-Revision-Date: 2009-09-22 08:30+0700\n"
 "Last-Translator: Nitro_subzero \n"
 "Language-Team: Nitro_subzero\n"
 "MIME-Version: 1.0\n"
@@ -206,7 +206,7 @@ msgid "Cheatfile is blank"
 msgstr "ไฟล์สูตรโกง ว่างเปล่า"
 
 msgid "Checking existing artwork"
-msgstr ""
+msgstr "ตรวจหาอาร์ตเวิรค์"
 
 msgid "Checking for Updates"
 msgstr "ตรวจสอบหาอัพเดท"
@@ -282,7 +282,7 @@ msgid "Could not read the disc."
 msgstr "อ่านแผ่นไม่ได้ !"
 
 msgid "Could not save."
-msgstr ""
+msgstr "บันทึกไม่ได้"
 
 msgid "Could not set USB."
 msgstr "ไม่สามารถตั้งค่า USB ได้"
@@ -312,13 +312,13 @@ msgid "Dec"
 msgstr "ธค."
 
 msgid "Default"
-msgstr "ค่าตั้งต้น"
+msgstr "ค่าแรกกำหนด"
 
 msgid "Default Gamesettings"
-msgstr "การปรับแต่งเกมส์ แบบตั้งต้น"
+msgstr "ค่าแรกกำหนด"
 
 msgid "Default Settings"
-msgstr "การปรับแต่ง แบบตั้งต้น"
+msgstr "ค่าแรกกำหนด"
 
 msgid "Delete"
 msgstr "ลบ"
@@ -330,7 +330,7 @@ msgid "Delete Boxart"
 msgstr "ลบ ภาพกล่อง"
 
 msgid "Delete Cheat GCT"
-msgstr ""
+msgstr "ลบไฟล์โกงเกมส์"
 
 msgid "Delete CheatTxt"
 msgstr "ลบ CheatTxt"
@@ -504,7 +504,7 @@ msgid "GCT File created"
 msgstr "ไฟล์ GCT ถูกสร้าง"
 
 msgid "GUI Settings"
-msgstr "ปรับแต่ง หน้าจอโปรแกรม"
+msgstr "ปรับแต่งหน้าจอ"
 
 msgid "Game ID"
 msgstr "เกมส์ ID"
@@ -726,7 +726,7 @@ msgid "No WBFS partition found"
 msgstr "ไม่พบพาร์ติชั่นแบบ WBFS "
 
 msgid "No cheats were selected"
-msgstr ""
+msgstr "ไม่ได้เลือกการโกงเกมส์ไว้"
 
 msgid "No data could be read."
 msgstr "ไม่มีข้อมูลที่อ่านไม่ได้"
@@ -801,7 +801,7 @@ msgid "Original/Customs"
 msgstr "ของแท้/ดัดแปลง"
 
 msgid "Parental Control"
-msgstr "ควบคุมอายุผู้เล่น"
+msgstr "กำหนดอายุ"
 
 msgid "Parental control"
 msgstr "ควบคุมอายุผู้เล่น"
@@ -822,7 +822,7 @@ msgid "Paste it into your browser to get your WiiTDB.zip."
 msgstr "วางในเวบบราวเซอร์เพื่อดึงข้อมูล WiiTDB.zip"
 
 msgid "Patch Country Strings"
-msgstr "ปรับแก้ข้อความประเทศ"
+msgstr "แก้อักขระประเทศ"
 
 msgid "Pick from a list"
 msgstr "เลือกจากรายการ"
@@ -831,7 +831,7 @@ msgid "Play Count"
 msgstr "จำนวนที่เล่น"
 
 msgid "Please wait..."
-msgstr ""
+msgstr "รอสักครู่"
 
 msgid "Power off the Wii"
 msgstr "ปิดเครื่อง Wii"
@@ -897,10 +897,10 @@ msgid "Save Failed"
 msgstr "การบันทึกไม่สำเร็จ"
 
 msgid "Save Game List to"
-msgstr ""
+msgstr "บันทึกรายชื่อเกมส์ไปที่"
 
 msgid "Saved"
-msgstr ""
+msgstr "บันทึกแล้ว"
 
 msgid "Screensaver"
 msgstr "รักษาหน้าจอ"
@@ -1022,13 +1022,13 @@ msgid "Uninstall"
 msgstr "ถอนการติดตั้ง"
 
 msgid "Uninstall Game"
-msgstr "ถอนการติดตั้งเกมส์"
+msgstr "ถอนการติดตั้ง"
 
 msgid "Uninstall Menu"
-msgstr "เมนูถอนการติดตั้ง"
+msgstr "ถอนการติดตั้ง"
 
 msgid "Uninstalling wad"
-msgstr "ถอนการติดตั้งไฟล์ WAD"
+msgstr "ถอนการติดตั้ง wad"
 
 msgid "Unlock console to use this option."
 msgstr "ปลดล๊อค Console ก่อน เพื่อใช้ตัวเลือกนี้"
@@ -1049,7 +1049,7 @@ msgid "Update Files"
 msgstr "อัพเดทไฟล์"
 
 msgid "Update all Language Files"
-msgstr "อัพเดทไฟล์ภาษาทั้งหมด"
+msgstr "อัพเดทภาษาทั้งหมด"
 
 msgid "Update failed"
 msgstr "อัพเดทล้มเหลว"
@@ -1131,7 +1131,7 @@ msgid "You are about to delete "
 msgstr "คุณกำลังจะลบ "
 
 msgid "You are choosing to display favorites and you do not have any selected."
-msgstr "คุณเลือกจะแสดงรายการที่ชอบ แต่คุณไม่ได้กำหนดเกมส์ที่ชื่นชอบไว้"
+msgstr "คุณเลือกจะแสดงเกมส์ที่ชอบ แต่คุณไม่ได้กำหนดเกมส์ที่ชื่นชอบไว้"
 
 msgid "You have attempted to load a bad image"
 msgstr "คุณพยายามที่จะโหลดรูปภาพที่เสียหาย"
@@ -1144,7 +1144,7 @@ msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 msgstr "URL ของคุณถูกบันทึกใน %sWiiTDB_URL.txt."
 
 msgid "available"
-msgstr "ว่าง"
+msgstr "ว่างอยู่"
 
 msgid "contains over 255 lines of code.  It will produce unexpected results."
 msgstr "มีจำนวนบรรทัดมากกว่า 255 บรรทัด ซึ่งอาจทำให้เกิดผลที่ไม่คาดคิด."
@@ -1174,7 +1174,7 @@ msgid "for WiiTDB and hosting covers / disc images"
 msgstr "สำหรับ WiiTDB และ ที่เก็บออนไลน์ของภาพ ปกและแผ่น"
 
 msgid "for diverse patches"
-msgstr "สำหรับปรับแก้ diverse"
+msgstr "แก้ diverse"
 
 msgid "for his awesome tool"
 msgstr "สำหรับเครื่องมืออันน่าทึ่งของเค้า"
@@ -1189,19 +1189,22 @@ msgid "formatted!"
 msgstr "ฟอร์แมต!"
 
 msgid "free"
-msgstr "ฟรี"
+msgstr "ว่างอยู่"
 
 msgid "not set"
 msgstr "ไม่ได้กำหนด"
 
 msgid "of"
-msgstr "ของ"
+msgstr "จาก"
 
 msgid "seconds left"
 msgstr "วินาทีที่เหลือ"
 
 #~ msgid "Cover Path"
 #~ msgstr "ที่เก็บ ปก"
+
+#~ msgid "You need to start this game one time to create a save file, then exit and start it again."
+#~ msgstr "คุณต้องเริ่มโหลดเกมส์นี้ใหม่ เพื่อสร้างไฟล์เซฟ ดังนั้นออกจากเกมส์แล้วเริ่มโหลดอีกครั้ง"
 
 #~ msgid "Don't bother the USB Loader GX Team about errors in this file."
 #~ msgstr "อย่ารบกวนผู้พัฒนา USB Loader GX ถ้ามีข้อผิดพลาดกับไฟล์นี้ "

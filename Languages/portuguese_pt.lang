@@ -1,5 +1,5 @@
 # USB Loader GX language source file.
-# For USB Loader GX rev729
+# For USB Loader GX rev743
 # don't delete this line (é).
 msgid ""
 msgstr ""
@@ -119,7 +119,7 @@ msgid ">> Reading WAD data...Ok!"
 msgstr ">> Lendo ficheiro WAD... Ok!"
 
 msgid "AUTO"
-msgstr "AUTO"
+msgstr ""
 
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "As configurações estão desbloqueadas."
@@ -282,7 +282,7 @@ msgid "Could not read the disc."
 msgstr "Não foi possível ler o disco."
 
 msgid "Could not save."
-msgstr ""
+msgstr "Não foi possível gravar."
 
 msgid "Could not set USB."
 msgstr "Não foi possível configurar a porta USB."
@@ -330,16 +330,16 @@ msgid "Delete Boxart"
 msgstr "Eliminar Capas"
 
 msgid "Delete Cheat GCT"
-msgstr ""
+msgstr "Eliminar GCT Truques"
 
 msgid "Delete CheatTxt"
-msgstr "Eliminar Fich. Truques"
+msgstr "Eliminar TXT Truques"
 
 msgid "Delete Discart"
 msgstr "Eliminar Img. Disco"
 
 msgid "Design:"
-msgstr "Design:"
+msgstr ""
 
 msgid "Developed by"
 msgstr "Desenvolvido por"
@@ -543,7 +543,7 @@ msgid "Homebrew Appspath changed"
 msgstr "Pasta Apps Homebrew alterada"
 
 msgid "Homebrew Channel"
-msgstr "Canal Hombrew"
+msgstr "Canal Homebrew"
 
 msgid "Homebrew Launcher"
 msgstr "Launcher Homebrew"
@@ -617,7 +617,7 @@ msgid "Italian"
 msgstr "Italiano"
 
 msgid "Jan"
-msgstr "Jan"
+msgstr ""
 
 msgid "Japanese"
 msgstr "Japonês"
@@ -678,7 +678,7 @@ msgid "Locked"
 msgstr "Bloqueado"
 
 msgid "Mar"
-msgstr "Mar"
+msgstr ""
 
 msgid "May"
 msgstr "Mai"
@@ -726,7 +726,7 @@ msgid "No WBFS partition found"
 msgstr "Não foi encontrada nenhuma partição WBFS"
 
 msgid "No cheats were selected"
-msgstr ""
+msgstr "Nenhuma selecção de truques"
 
 msgid "No data could be read."
 msgstr "Não foi possível ler dados."
@@ -768,13 +768,13 @@ msgid "Not supported format!"
 msgstr "Formato não suportado!"
 
 msgid "Nov"
-msgstr "Nov"
+msgstr ""
 
 msgid "OFF"
 msgstr "Desligado"
 
 msgid "OK"
-msgstr "OK"
+msgstr ""
 
 msgid "ON"
 msgstr "Ligado"
@@ -810,7 +810,7 @@ msgid "Partition"
 msgstr "Partição"
 
 msgid "Password"
-msgstr "Password"
+msgstr ""
 
 msgid "Password Changed"
 msgstr "Password Alterada"
@@ -831,7 +831,7 @@ msgid "Play Count"
 msgstr "Vezes jogadas"
 
 msgid "Please wait..."
-msgstr ""
+msgstr "Por favor aguarde..."
 
 msgid "Power off the Wii"
 msgstr "Desligar a Wii"
@@ -897,10 +897,10 @@ msgid "Save Failed"
 msgstr "Falha ao Gravar"
 
 msgid "Save Game List to"
-msgstr ""
+msgstr "Gravar a lista dos jogos sobre"
 
 msgid "Saved"
-msgstr ""
+msgstr "Gravado"
 
 msgid "Screensaver"
 msgstr "Protecção de ecrã"

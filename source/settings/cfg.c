@@ -660,24 +660,33 @@ void theme_set(char *name, char *val) {
 	else if (strcmp(cfg_name, "favorite_coords") == 0) {
 		short x,y;
 		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
-			if(!CFG.widescreen) x-=20;
+			if(!CFG.widescreen) x-=24;
 			// old themes have no search_coords
 			// set the searchIcon to the Position of the favIcon
-			THEME.gamelist_search_x = x;
-			THEME.gamegrid_search_x = THEME.gamecarousel_search_x = x-WorkAroundBarOffset;
-			THEME.gamelist_search_y = THEME.gamegrid_search_y = THEME.gamecarousel_search_y = y;
+			//THEME.gamelist_search_x = x;
+			//THEME.gamegrid_search_x = THEME.gamecarousel_search_x = x-WorkAroundBarOffset;
+			//THEME.gamelist_search_y = THEME.gamegrid_search_y = THEME.gamecarousel_search_y = y;
 			// place the favIcon to the left side of the searchIcon
-			if(!CFG.widescreen) x-= CFG.widescreen ? 32 : 40;
+			//if(!CFG.widescreen) x-= CFG.widescreen ? 32 : 40;
 			THEME.gamelist_favorite_x = x;
 			THEME.gamegrid_favorite_x = THEME.gamecarousel_favorite_x = x-WorkAroundBarOffset;
 			THEME.gamelist_favorite_y = THEME.gamegrid_favorite_y = THEME.gamecarousel_favorite_y = y;
 			WorkAroundIconSet |= OLD_FAV_ICON;
 		}
 	}
-	else if (strcmp(cfg_name, "abc_coords") == 0) {
+		else if (strcmp(cfg_name, "search_coords") == 0) {
 		short x,y;
 		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
-			if(!CFG.widescreen) x-=12;
+			if(!CFG.widescreen) x-=16;
+			THEME.gamelist_search_x = x;
+			THEME.gamegrid_search_x = THEME.gamecarousel_search_x = x-WorkAroundBarOffset;
+			THEME.gamelist_search_y = THEME.gamegrid_search_y = THEME.gamecarousel_search_y = y;
+		}
+	}
+		else if (strcmp(cfg_name, "abc_coords") == 0) {
+		short x,y;
+		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
+			if(!CFG.widescreen) x-=8;
 			THEME.gamelist_abc_x = x;
 			THEME.gamegrid_abc_x = THEME.gamecarousel_abc_x = x-WorkAroundBarOffset;
 			THEME.gamelist_abc_y = THEME.gamegrid_abc_y = THEME.gamecarousel_abc_y = y;
@@ -687,7 +696,7 @@ void theme_set(char *name, char *val) {
 	else if (strcmp(cfg_name, "count_coords") == 0) {
 		short x,y;
 		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
-			if(!CFG.widescreen) x-=4;
+			if(!CFG.widescreen) x=0;
 			THEME.gamelist_count_x = x;
 			THEME.gamegrid_count_x = THEME.gamecarousel_count_x = x-WorkAroundBarOffset;
 			THEME.gamelist_count_y = THEME.gamegrid_count_y = THEME.gamecarousel_count_y = y;
@@ -697,7 +706,7 @@ void theme_set(char *name, char *val) {
 	else if (strcmp(cfg_name, "list_coords") == 0) {
 		short x,y;
 		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
-			if(!CFG.widescreen) x+=4;
+			if(!CFG.widescreen) x+=8;
 			THEME.gamelist_list_x = x;
 			THEME.gamegrid_list_x = THEME.gamecarousel_list_x = x-WorkAroundBarOffset;
 			THEME.gamelist_list_y = THEME.gamegrid_list_y = THEME.gamecarousel_list_y = y;
@@ -707,7 +716,7 @@ void theme_set(char *name, char *val) {
 	else if (strcmp(cfg_name, "grid_coords") == 0) {
 		short x,y;
 		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
-			if(!CFG.widescreen) x+=12;
+			if(!CFG.widescreen) x+=16;
 			THEME.gamelist_grid_x = x;
 			THEME.gamegrid_grid_x = THEME.gamecarousel_grid_x = x-WorkAroundBarOffset;
 			THEME.gamelist_grid_y = THEME.gamegrid_grid_y = THEME.gamecarousel_grid_y = y;
@@ -717,7 +726,7 @@ void theme_set(char *name, char *val) {
 	else if (strcmp(cfg_name, "carousel_coords") == 0) {
 		short x,y;
 		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
-			if(!CFG.widescreen) x+=20;
+			if(!CFG.widescreen) x+=24;
 			THEME.gamelist_carousel_x = x;
 			THEME.gamegrid_carousel_x = THEME.gamecarousel_carousel_x = x-WorkAroundBarOffset;
 			THEME.gamelist_carousel_y = THEME.gamegrid_carousel_y = THEME.gamecarousel_carousel_y = y;

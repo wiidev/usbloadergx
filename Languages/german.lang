@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-27 20:15+0200\n"
+"POT-Creation-Date: 2009-09-27 22:13+0200\n"
 "PO-Revision-Date: 2009-07-18 15:18+0200\n"
 "Last-Translator: wishmasterf\n"
 "Language-Team: Snoozer, wishmasterf\n"
@@ -1202,6 +1202,9 @@ msgstr "Sekunden verbleiben"
 
 #~ msgid "Cover Path"
 #~ msgstr "Cover Pfad"
+
+#~ msgid "You need to start this game one time to create a save file, then exit and start it again."
+#~ msgstr "Sie müssen dieses Spiel einmal starten um einen Speicherstand zu erstellen, dann verlassen und es neustarten."
 
 #~ msgid "Don't bother the USB Loader GX Team about errors in this file."
 #~ msgstr "Beschweren Sie sich nicht bei uns über hier angezeigte Fehler."

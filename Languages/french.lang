@@ -1,5 +1,5 @@
 # USB Loader GX language source file.
-# French V9.8 r742
+# French V9.9 r753
 # don't delete this line (é).
 msgid ""
 msgstr ""
@@ -47,7 +47,7 @@ msgid "20 min"
 msgstr "20 min."
 
 msgid "2D Cover Path"
-msgstr ""
+msgstr "Dossier Jaquettes 2D"
 
 msgid "3 (Mature 16+)"
 msgstr "3 (Matures 16+)"
@@ -59,7 +59,7 @@ msgid "30 min"
 msgstr "30 min."
 
 msgid "3D Cover Path"
-msgstr ""
+msgstr "Dossier Jaquettes 3D"
 
 msgid "3D Covers"
 msgstr "Jaquettes 3D"
@@ -119,7 +119,7 @@ msgid ">> Reading WAD data...Ok!"
 msgstr ">> Lecture données WAD...OK!"
 
 msgid "AUTO"
-msgstr "AUTO"
+msgstr ""
 
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "Toutes les fonctionnalités sont déverrouillées."
@@ -131,7 +131,7 @@ msgid "An Error occured"
 msgstr "Une Erreur s'est produite"
 
 msgid "Anti"
-msgstr "Anti"
+msgstr ""
 
 msgid "App Language"
 msgstr "Langue d'interface"
@@ -149,7 +149,7 @@ msgid "AutoInit Network"
 msgstr "AutoInit Réseau"
 
 msgid "AutoPatch"
-msgstr "AutoPatch"
+msgstr ""
 
 msgid "Back"
 msgstr "Retour"
@@ -176,7 +176,7 @@ msgid "Block IOS Reload"
 msgstr "Bloquer IOS Reload"
 
 msgid "Boot/Standard"
-msgstr "Boot/Standard"
+msgstr ""
 
 msgid "Boot?"
 msgstr "Lancer ?"
@@ -224,7 +224,7 @@ msgid "Close"
 msgstr "Fermer"
 
 msgid "Code Download"
-msgstr "Téléchargement Code"
+msgstr "Téléchargement Codes"
 
 #, c-format
 msgid "Coded by: %s"
@@ -237,7 +237,7 @@ msgid "Confirm"
 msgstr "Confirmer"
 
 msgid "Console"
-msgstr "Console"
+msgstr ""
 
 msgid "Console Default"
 msgstr "Console par défaut"
@@ -617,7 +617,7 @@ msgid "Italian"
 msgstr "Italien"
 
 msgid "Jan"
-msgstr "Jan"
+msgstr ""
 
 msgid "Japanese"
 msgstr "Japonais"
@@ -768,19 +768,19 @@ msgid "Not supported format!"
 msgstr "Format non supporté !"
 
 msgid "Nov"
-msgstr "Nov"
+msgstr ""
 
 msgid "OFF"
 msgstr "Inactif"
 
 msgid "OK"
-msgstr "OK"
+msgstr ""
 
 msgid "ON"
 msgstr "Actif"
 
 msgid "Oct"
-msgstr "Oct"
+msgstr ""
 
 msgid "Official Site"
 msgstr "Site Officiel"
@@ -807,7 +807,7 @@ msgid "Parental control"
 msgstr "Contrôle Parental"
 
 msgid "Partition"
-msgstr "Partition"
+msgstr ""
 
 msgid "Password"
 msgstr "Mot de passe"
@@ -912,10 +912,10 @@ msgid "Selected DOL"
 msgstr "Choix du DOL"
 
 msgid "Sept"
-msgstr "Sept"
+msgstr ""
 
 msgid "Set Search-Filter"
-msgstr ""
+msgstr "Filtre de Recherche"
 
 msgid "Set as backgroundmusic?"
 msgstr "Utiliser comme fond sonore ?"
@@ -945,7 +945,7 @@ msgid "Special thanks to:"
 msgstr "Remerciements spéciaux à:"
 
 msgid "Standard"
-msgstr "Standard"
+msgstr ""
 
 msgid "Success"
 msgstr "Succès"
@@ -1199,9 +1199,6 @@ msgstr "sur"
 
 msgid "seconds left"
 msgstr "secondes restantes"
-
-#~ msgid "Cover Path"
-#~ msgstr "Dossier Jaquettes"
 
 #~ msgid "You need to start this game one time to create a save file, then exit and start it again."
 #~ msgstr "Vous devez lancer ce jeu une fois pour créer une sauvegarde, puis éteindre et le lancer à nouveau."

@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# italian.lang - v40 - r740
+# italian.lang - v41 - r743
 # don't delete this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-27 20:15+0200\n"
+"POT-Creation-Date: 2009-09-27 22:13+0200\n"
 "PO-Revision-Date: 2009-08-05 10:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe & Cambo\n"
@@ -1202,6 +1202,9 @@ msgstr "secondi mancanti"
 
 #~ msgid "Cover Path"
 #~ msgstr "Percorso Copertine"
+
+#~ msgid "You need to start this game one time to create a save file, then exit and start it again."
+#~ msgstr "Devi caricare questo gioco almeno una volta per creare un file di salvataggio, quindi esci dal gioco e ricaricalo di nuovo."
 
 #~ msgid "Don't bother the USB Loader GX Team about errors in this file."
 #~ msgstr "Non infastidire il team di sviluppo dell'USB Loader GX per errori in questo file."
