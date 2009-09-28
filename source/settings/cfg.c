@@ -111,11 +111,6 @@ struct TextMap map_alignment[] = {
     { "middle",   CFG_ALIGN_MIDDLE },
     { NULL, -1 }
 };
-char* strcopy(char *dest, char *src, int size) {
-    strncpy(dest,src,size);
-    dest[size-1] = 0;
-    return dest;
-}
 
 int map_get_id(struct TextMap *map, char *name) {
     int i;
@@ -371,7 +366,7 @@ void title_set(char *id, char *title) {
     char *idt = cfg_get_title((u8*)id);
     if (idt) {
         // replace
-        strcopy(idt, title, TITLE_MAX);
+        strlcpy(idt, title, TITLE_MAX);
     } else {
         cfg_title = realloc(cfg_title, (num_title+1) * sizeof(struct ID_Title));
         if (!cfg_title) {
@@ -382,7 +377,7 @@ void title_set(char *id, char *title) {
         // add
         memcpy(cfg_title[num_title].id, id, 4);
         cfg_title[num_title].id[4] = 0;
-        strcopy(cfg_title[num_title].title, title, TITLE_MAX);
+        strlcpy(cfg_title[num_title].title, title, TITLE_MAX);
         num_title++;
     }
 }
@@ -392,7 +387,7 @@ void titles_default() {
 	for (i=0; i<num_title; i++) {
         memcpy(cfg_title[i].id, "", 4);
         cfg_title[i].id[4] = 0;
-        strcopy(cfg_title[i].title, "", TITLE_MAX);
+        strlcpy(cfg_title[i].title, "", TITLE_MAX);
     }
 }
 
@@ -424,8 +419,7 @@ char* trim_n_copy(char *dest, char *src, int n, int size) {
     // trim trailing white space
     while (len > 0 && isspace(src[len-1])) len--;
     if (len >= size) len = size-1;
-    strncpy(dest, src, len);
-    dest[len] = 0;
+    strlcpy(dest, src, len+1);
     //printf("trim_copy: '%s' %d\n", dest, len); //sleep(1);
     return dest;
 }
@@ -437,8 +431,7 @@ char* trimcopy(char *dest, char *src, int size) {
     // trim trailing " \r\n"
     while (len > 0 && strchr(" \r\n", src[len-1])) len--;
     if (len >= size) len = size-1;
-    strncpy(dest, src, len);
-    dest[len] = 0;
+    strlcpy(dest, src, len+1);
     return dest;
 }
 
@@ -460,67 +453,67 @@ void path_set(char *name, char *val) {
     // if these are defined in txt file, use them.  otherwise use defaults
 
     if (!CFG.widescreen &&(strcmp(name, "theme_path") == 0)) {// if in 4:3
-        strcopy(CFG.theme_path, val, sizeof(CFG.theme_path));
+        strlcpy(CFG.theme_path, val, sizeof(CFG.theme_path));
         return;
     }
 
     if (CFG.widescreen && strcmp(name, "wtheme_path") == 0) { // if in 16:9
-        strcopy(CFG.theme_path, val, sizeof(CFG.theme_path));
+        strlcpy(CFG.theme_path, val, sizeof(CFG.theme_path));
         return;
     }
 
     if (strcmp(name, "cover_path") == 0) {
-        strcopy(Settings.covers_path, val, sizeof(Settings.covers_path));
+        strlcpy(Settings.covers_path, val, sizeof(Settings.covers_path));
         return;
     }
 
    if (strcmp(name, "cover2d_path") == 0) {
-        strcopy(Settings.covers2d_path, val, sizeof(Settings.covers2d_path));
+        strlcpy(Settings.covers2d_path, val, sizeof(Settings.covers2d_path));
         return;
     }
 
     if (strcmp(name, "disc_path") == 0) {
-        strcopy(Settings.disc_path, val, sizeof(Settings.disc_path));
+        strlcpy(Settings.disc_path, val, sizeof(Settings.disc_path));
         return;
     }
     if (strcmp(name, "titlestxt_path") == 0) {
-        strcopy(Settings.titlestxt_path, val, sizeof(Settings.titlestxt_path));
+        strlcpy(Settings.titlestxt_path, val, sizeof(Settings.titlestxt_path));
         return;
     }
     if (strcmp(name, "language_path") == 0) {
-        strcopy(Settings.language_path, val, sizeof(Settings.language_path));
+        strlcpy(Settings.language_path, val, sizeof(Settings.language_path));
         return;
     }
     if (strcmp(name, "languagefiles_path") == 0) {
-        strcopy(Settings.languagefiles_path, val, sizeof(Settings.languagefiles_path));
+        strlcpy(Settings.languagefiles_path, val, sizeof(Settings.languagefiles_path));
         return;
     }
     if (strcmp(name, "update_path") == 0) {
-        strcopy(Settings.update_path, val, sizeof(Settings.update_path));
+        strlcpy(Settings.update_path, val, sizeof(Settings.update_path));
         return;
     }
     if (strcmp(name, "homebrewapps_path") == 0) {
-        strcopy(Settings.homebrewapps_path, val, sizeof(Settings.homebrewapps_path));
+        strlcpy(Settings.homebrewapps_path, val, sizeof(Settings.homebrewapps_path));
         return;
     }
     if (strcmp(name, "Cheatcodespath") == 0) {
-        strcopy(Settings.Cheatcodespath, val, sizeof(Settings.Cheatcodespath));
+        strlcpy(Settings.Cheatcodespath, val, sizeof(Settings.Cheatcodespath));
         return;
     }
     if (strcmp(name, "TxtCheatcodespath") == 0) {
-        strcopy(Settings.TxtCheatcodespath, val, sizeof(Settings.TxtCheatcodespath));
+        strlcpy(Settings.TxtCheatcodespath, val, sizeof(Settings.TxtCheatcodespath));
         return;
     }
     if (strcmp(name, "oggload_path") == 0) {
-        strcopy(Settings.oggload_path, val, sizeof(Settings.oggload_path));
+        strlcpy(Settings.oggload_path, val, sizeof(Settings.oggload_path));
         return;
     }
     if (strcmp(name, "dolpath") == 0) {
-        strcopy(Settings.dolpath, val, sizeof(Settings.dolpath));
+        strlcpy(Settings.dolpath, val, sizeof(Settings.dolpath));
         return;
     }
     if (strcmp(name, "ogg_path") == 0) {
-        strcopy(Settings.ogg_path, val, sizeof(Settings.ogg_path));
+        strlcpy(Settings.ogg_path, val, sizeof(Settings.ogg_path));
         return;
     }
 
@@ -882,7 +875,7 @@ void global_cfg_set(char *name, char *val) {
         }
         return;
     } else if (strcmp(name, "password") == 0) {
-        strcopy(Settings.unlockCode, val, sizeof(Settings.unlockCode));
+        strlcpy(Settings.unlockCode, val, sizeof(Settings.unlockCode));
         return;
     } else if (strcmp(name, "parentalcontrol") == 0) {
         int i;
@@ -992,7 +985,7 @@ bool trimsplit(char *line, char *part1, char *part2, char delim, int size) {
 void cfg_parseline(char *line, void (*set_func)(char*, char*)) {
     // split name = value
     char tmp[300], name[200], val[200];
-    strcopy(tmp, line, sizeof(tmp));
+    strlcpy(tmp, line, sizeof(tmp));
     char *eq = strchr(tmp, '=');
     if (!eq) return;
     *eq = 0;
@@ -1006,7 +999,7 @@ void cfg_parsetitleline(char *line, void (*set_func)(char*, char*, u8)) {
     // split name = value
     char tmp[200], name[200], val[200];
     int block = 0;
-    strcopy(tmp, line, sizeof(tmp));
+    strlcpy(tmp, line, sizeof(tmp));
     char *eq = strchr(tmp, '=');
     if (!eq) return;
     *eq = 0;

@@ -993,12 +993,12 @@ int MenuSettings() {
                                 w.Remove(&optionBrowser2);
                                 w.Remove(&backBtn);
                                 char entered[20] = "";
-                                strncpy(entered, Settings.unlockCode, sizeof(entered));
+                                strlcpy(entered, Settings.unlockCode, sizeof(entered));
                                 int result = OnScreenKeyboard(entered, 20,0);
                                 w.Append(&optionBrowser2);
                                 w.Append(&backBtn);
                                 if ( result == 1 ) {
-                                    strncpy(Settings.unlockCode, entered, sizeof(Settings.unlockCode));
+                                    strlcpy(Settings.unlockCode, entered, sizeof(Settings.unlockCode));
                                     WindowPrompt(tr("Password Changed"),tr("Password has been changed"),tr("OK"));
                                 }
                             } else {
@@ -1250,7 +1250,7 @@ int MenuSettings() {
                                     w.Remove(&optionBrowser2);
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
-                                    strncpy(entered, Settings.covers_path, sizeof(entered));
+                                    strlcpy(entered, Settings.covers_path, sizeof(entered));
                                     titleTxt.SetText(tr("3D Cover Path"));
                                     int result = BrowseDevice(entered);
                                     //int result = OnScreenKeyboard(entered,43,0);
@@ -1261,7 +1261,7 @@ int MenuSettings() {
                                         int len = (strlen(entered)-1);
                                         if (entered[len] !='/')
                                             strncat (entered, "/", 1);
-                                        strncpy(Settings.covers_path, entered, sizeof(Settings.covers_path));
+                                        strlcpy(Settings.covers_path, entered, sizeof(Settings.covers_path));
                                         WindowPrompt(tr("Coverpath Changed"),0,tr("OK"));
 //                                        if(!isSdInserted()) {
                                         if (!isInserted(bootDevice)) {
@@ -1277,7 +1277,7 @@ int MenuSettings() {
                                     w.Remove(&optionBrowser2);
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
-                                    strncpy(entered, Settings.covers2d_path, sizeof(entered));
+                                    strlcpy(entered, Settings.covers2d_path, sizeof(entered));
                                     titleTxt.SetText(tr("2D Cover Path"));
                                     int result = BrowseDevice(entered);
                                     //int result = OnScreenKeyboard(entered,43,0);
@@ -1288,7 +1288,7 @@ int MenuSettings() {
                                         int len = (strlen(entered)-1);
                                         if (entered[len] !='/')
                                             strncat (entered, "/", 1);
-                                        strncpy(Settings.covers2d_path, entered, sizeof(Settings.covers2d_path));
+                                        strlcpy(Settings.covers2d_path, entered, sizeof(Settings.covers2d_path));
                                         WindowPrompt(tr("Coverpath Changed"),0,tr("OK"));
 //                                        if(!isSdInserted()) {
                                         if (!isInserted(bootDevice)) {
@@ -1304,7 +1304,7 @@ int MenuSettings() {
                                     w.Remove(&optionBrowser2);
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
-                                    strncpy(entered, Settings.disc_path, sizeof(entered));
+                                    strlcpy(entered, Settings.disc_path, sizeof(entered));
                                     titleTxt.SetText(tr("Discimage Path"));
                                     int result = BrowseDevice(entered);
                                     //int result = OnScreenKeyboard(entered, 43,0);
@@ -1315,7 +1315,7 @@ int MenuSettings() {
                                         int len = (strlen(entered)-1);
                                         if (entered[len] !='/')
                                             strncat (entered, "/", 1);
-                                        strncpy(Settings.disc_path, entered, sizeof(Settings.disc_path));
+                                        strlcpy(Settings.disc_path, entered, sizeof(Settings.disc_path));
                                         WindowPrompt(tr("Discpath Changed"),0,tr("OK"));
 //                                        if(!isSdInserted()) {
                                         if (!isInserted(bootDevice)) {
@@ -1332,7 +1332,7 @@ int MenuSettings() {
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
                                     titleTxt.SetText(tr("ThemePath"));
-                                    strncpy(entered, CFG.theme_path, sizeof(entered));
+                                    strlcpy(entered, CFG.theme_path, sizeof(entered));
                                     int result = BrowseDevice(entered);
                                     //int result = OnScreenKeyboard(entered, 43,0);
                                     HaltGui();
@@ -1341,7 +1341,7 @@ int MenuSettings() {
                                         int len = (strlen(entered)-1);
                                         if (entered[len] !='/')
                                             strncat (entered, "/", 1);
-                                        strncpy(CFG.theme_path, entered, sizeof(CFG.theme_path));
+                                        strlcpy(CFG.theme_path, entered, sizeof(CFG.theme_path));
                                         WindowPrompt(tr("Themepath Changed"),0,tr("OK"));
 //                                        if(!isSdInserted()) {
                                         if (!isInserted(bootDevice)) {
@@ -1390,7 +1390,7 @@ int MenuSettings() {
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
                                     titleTxt.SetText(tr("XMLPath"));
-                                    strncpy(entered, Settings.titlestxt_path, sizeof(entered));
+                                    strlcpy(entered, Settings.titlestxt_path, sizeof(entered));
                                     int result = BrowseDevice(entered);
                                     //int result = OnScreenKeyboard(entered,43,0);
                                     w.Append(&optionBrowser2);
@@ -1400,7 +1400,7 @@ int MenuSettings() {
                                         int len = (strlen(entered)-1);
                                         if (entered[len] !='/')
                                             strncat (entered, "/", 1);
-                                        strncpy(Settings.titlestxt_path, entered, sizeof(Settings.titlestxt_path));
+                                        strlcpy(Settings.titlestxt_path, entered, sizeof(Settings.titlestxt_path));
                                         WindowPrompt(tr("XMLPath changed."),0,tr("OK"));
 //                                        if(isSdInserted()) {
                                         if (isInserted(bootDevice)) {
@@ -1421,7 +1421,7 @@ int MenuSettings() {
                                     w.Remove(&optionBrowser2);
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
-                                    strncpy(entered, Settings.update_path, sizeof(entered));
+                                    strlcpy(entered, Settings.update_path, sizeof(entered));
                                     titleTxt.SetText(tr("Updatepath"));
                                     int result = BrowseDevice(entered);
                                     //int result = OnScreenKeyboard(entered,43,0);
@@ -1432,7 +1432,7 @@ int MenuSettings() {
                                         int len = (strlen(entered)-1);
                                         if (entered[len] !='/')
                                             strncat (entered, "/", 1);
-                                        strncpy(Settings.update_path, entered, sizeof(Settings.update_path));
+                                        strlcpy(Settings.update_path, entered, sizeof(Settings.update_path));
                                         WindowPrompt(tr("Updatepath changed."),0,tr("OK"));
                                     }
                                 } else
@@ -1443,7 +1443,7 @@ int MenuSettings() {
                                     w.Remove(&optionBrowser2);
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
-                                    strncpy(entered, Settings.Cheatcodespath, sizeof(entered));
+                                    strlcpy(entered, Settings.Cheatcodespath, sizeof(entered));
                                     titleTxt.SetText(tr("Cheatcodes Path"));
                                     int result = BrowseDevice(entered);
                                     //int result = OnScreenKeyboard(entered,43,0);
@@ -1454,7 +1454,7 @@ int MenuSettings() {
                                         int len = (strlen(entered)-1);
                                         if (entered[len] !='/')
                                             strncat (entered, "/", 1);
-                                        strncpy(Settings.Cheatcodespath, entered, sizeof(Settings.Cheatcodespath));
+                                        strlcpy(Settings.Cheatcodespath, entered, sizeof(Settings.Cheatcodespath));
                                         WindowPrompt(tr("Cheatcodes Path changed"),0,tr("OK"));
                                     }
                                 } else
@@ -1465,7 +1465,7 @@ int MenuSettings() {
                                     w.Remove(&optionBrowser2);
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
-                                    strncpy(entered, Settings.TxtCheatcodespath, sizeof(entered));
+                                    strlcpy(entered, Settings.TxtCheatcodespath, sizeof(entered));
                                     titleTxt.SetText(tr("TXTCheatcodes Path"));
                                     int result = BrowseDevice(entered);
                                     //int result = OnScreenKeyboard(entered,43,0);
@@ -1476,7 +1476,7 @@ int MenuSettings() {
                                         int len = (strlen(entered)-1);
                                         if (entered[len] !='/')
                                             strncat (entered, "/", 1);
-                                        strncpy(Settings.TxtCheatcodespath, entered, sizeof(Settings.TxtCheatcodespath));
+                                        strlcpy(Settings.TxtCheatcodespath, entered, sizeof(Settings.TxtCheatcodespath));
                                         WindowPrompt(tr("TXTCheatcodes Path changed"),0,tr("OK"));
                                     }
                                 } else
@@ -1487,7 +1487,7 @@ int MenuSettings() {
                                     w.Remove(&optionBrowser2);
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
-                                    strncpy(entered, Settings.dolpath, sizeof(entered));
+                                    strlcpy(entered, Settings.dolpath, sizeof(entered));
                                     titleTxt.SetText(tr("Dol Path"));
                                     int result = BrowseDevice(entered);
                                     //int result = OnScreenKeyboard(entered,43,0);
@@ -1498,7 +1498,7 @@ int MenuSettings() {
                                         int len = (strlen(entered)-1);
                                         if (entered[len] !='/')
                                             strncat (entered, "/", 1);
-                                        strncpy(Settings.dolpath, entered, sizeof(Settings.dolpath));
+                                        strlcpy(Settings.dolpath, entered, sizeof(Settings.dolpath));
                                         WindowPrompt(tr("Dolpath Changed"),0,tr("OK"));
 //                                        if(!isSdInserted()) {
                                         if (!isInserted(bootDevice)) {
@@ -1514,7 +1514,7 @@ int MenuSettings() {
                                     w.Remove(&optionBrowser2);
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
-                                    strncpy(entered, Settings.homebrewapps_path, sizeof(entered));
+                                    strlcpy(entered, Settings.homebrewapps_path, sizeof(entered));
                                     titleTxt.SetText(tr("Homebrew Apps Path"));
                                     int result = BrowseDevice(entered);
                                     //int result = OnScreenKeyboard(entered,43,0);
@@ -1525,7 +1525,7 @@ int MenuSettings() {
                                         int len = (strlen(entered)-1);
                                         if (entered[len] !='/')
                                             strncat (entered, "/", 1);
-                                        strncpy(Settings.homebrewapps_path, entered, sizeof(Settings.homebrewapps_path));
+                                        strlcpy(Settings.homebrewapps_path, entered, sizeof(Settings.homebrewapps_path));
                                         WindowPrompt(tr("Homebrew Appspath changed"),0,tr("OK"));
 //                                        if(!isSdInserted()) {
                                         if (!isInserted(bootDevice)) {
@@ -1797,11 +1797,10 @@ int GameSettings(struct discHdr * header) {
     char gameName[31];
 
     if (strlen(get_title(header)) < (27 + 3)) {
-        sprintf(gameName, "%s", get_title(header));
+        strcpy(gameName, get_title(header));
     } else {
-        strncpy(gameName, get_title(header),  27);
-        gameName[27] = '\0';
-        strncat(gameName, "...", 3);
+        strlcpy(gameName, get_title(header),  27+1);
+        strcat(gameName, "...");
     }
 
 

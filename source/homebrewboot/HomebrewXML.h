@@ -40,7 +40,7 @@ public:
     }
     //! Set Name
     void SetName(char * path) {
-        strncpy(name, path, sizeof(name));
+        strlcpy(name, path, sizeof(name));
     }
 protected:
     char name[50];

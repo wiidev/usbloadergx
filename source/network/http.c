@@ -154,9 +154,8 @@ struct block downloadfile(const char *url) {
     }
 
     char domain[domainlength + 1];
-    strncpy(domain, url + strlen("http://"), domainlength);
-    domain[domainlength] = '\0';
-
+    strlcpy(domain, url + strlen("http://"), domainlength+1);
+ 
     //Parsing of the URL is done, start making an actual connection
     u32 ipaddress = getipbynamecached(domain);
 

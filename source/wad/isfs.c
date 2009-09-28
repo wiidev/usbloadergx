@@ -369,7 +369,7 @@ static int _ISFS_dirnext_r(struct _reent *r, DIR_ITER *dirState, char *filename,
         return -1;
     }
     DIR_ENTRY *entry = &state->entry->children[state->index++];
-    strncpy(filename, entry->name, ISFS_MAXPATHLEN - 1);
+    strlcpy(filename, entry->name, ISFS_MAXPATHLEN);
     stat_entry(entry, st);
     return 0;
 }

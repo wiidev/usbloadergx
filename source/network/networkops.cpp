@@ -177,8 +177,7 @@ s32 download_request(const char * url) {
     }
 
     char domain[domainlength + 1];
-    strncpy(domain, url + strlen("http://"), domainlength);
-    domain[domainlength] = '\0';
+    strlcpy(domain, url + strlen("http://"), domainlength+1);
 
     connection = GetConnection(domain);
     if (connection < 0) {

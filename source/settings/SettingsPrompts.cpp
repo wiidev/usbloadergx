@@ -218,7 +218,7 @@ bool MenuOGG() {
             w.Remove(&stopBtn);
             w.Remove(&defaultBtn);
             char entered[43] = "";
-            strncpy(entered, Settings.oggload_path, sizeof(entered));
+            strlcpy(entered, Settings.oggload_path, sizeof(entered));
             int result = OnScreenKeyboard(entered,43,0);
             w.Append(&optionBrowser4);
             w.Append(&pathBtn);
@@ -230,7 +230,7 @@ bool MenuOGG() {
                 int len = (strlen(entered)-1);
                 if (entered[len] !='/')
                     strncat (entered, "/", 1);
-                strncpy(Settings.oggload_path, entered, sizeof(Settings.oggload_path));
+                strlcpy(Settings.oggload_path, entered, sizeof(Settings.oggload_path));
                 WindowPrompt(tr("Backgroundmusic Path changed."),0,tr("OK"));
 //                if(isSdInserted()) {
                 if (isInserted(bootDevice)) {
@@ -419,7 +419,7 @@ int MenuLanguageSelect() {
 
     for (cnt = 0; cnt < countfiles; cnt++) {
         char filename[64];
-        strncpy(filename, GetFileName(cnt),63);
+        strlcpy(filename, GetFileName(cnt), sizeof(filename));
         char *dot = strchr(filename, '.');
         if (dot) *dot='\0';
         options2.SetName(cnt, "%s", filename);
@@ -537,7 +537,7 @@ int MenuLanguageSelect() {
             w.Remove(&pathBtn);
             w.Remove(&defaultBtn);
             char entered[43] = "";
-            strncpy(entered, Settings.languagefiles_path, sizeof(entered));
+            strlcpy(entered, Settings.languagefiles_path, sizeof(entered));
             int result = OnScreenKeyboard(entered,43,0);
             w.Append(&optionBrowser4);
             w.Append(&pathBtn);
@@ -547,7 +547,7 @@ int MenuLanguageSelect() {
                 int len = (strlen(entered)-1);
                 if (entered[len] !='/')
                     strncat (entered, "/", 1);
-                strncpy(Settings.languagefiles_path, entered, sizeof(Settings.languagefiles_path));
+                strlcpy(Settings.languagefiles_path, entered, sizeof(Settings.languagefiles_path));
                 WindowPrompt(tr("Languagepath changed."),0,tr("OK"));
 //                if(isSdInserted()) {
                 if (isInserted(bootDevice)) {

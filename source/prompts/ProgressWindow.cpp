@@ -96,8 +96,8 @@ static void GameInstallProgress() {
 ***************************************************************************/
 void SetupGameInstallProgress(char * title, char * game) {
 
-    strncpy(progressTitle, title, sizeof(progressTitle));
-    strncpy(progressMsg1, game, sizeof(progressMsg1));
+    strlcpy(progressTitle, title, sizeof(progressTitle));
+    strlcpy(progressMsg1, game, sizeof(progressMsg1));
     gameinstalltotal = 1;
     showProgress = 1;
     showSize = true;
@@ -323,9 +323,9 @@ void ShowProgress(const char *title, const char *msg1, char *dynmsg2, f32 done, 
     showTime = swTime;
 
     if (title)
-        strncpy(progressTitle, title, sizeof(progressTitle));
+        strlcpy(progressTitle, title, sizeof(progressTitle));
     if (msg1)
-        strncpy(progressMsg1, msg1, sizeof(progressMsg1));
+        strlcpy(progressMsg1, msg1, sizeof(progressMsg1));
     if (dynmsg2)
         dyn_message = dynmsg2;
 

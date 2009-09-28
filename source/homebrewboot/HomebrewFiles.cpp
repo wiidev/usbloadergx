@@ -68,8 +68,8 @@ bool HomebrewFiles::LoadPath(const char * folderpath) {
 
                 memset(&(FileInfo[filecount]), 0, sizeof(FileInfo));
 
-                strncpy(FileInfo[filecount].FilePath, folderpath, sizeof(FileInfo[filecount].FilePath));
-                strncpy(FileInfo[filecount].FileName, filename, sizeof(FileInfo[filecount].FileName));
+                strlcpy(FileInfo[filecount].FilePath, folderpath, sizeof(FileInfo[filecount].FilePath));
+                strlcpy(FileInfo[filecount].FileName, filename, sizeof(FileInfo[filecount].FileName));
                 FileInfo[filecount].FileSize = st.st_size;
                 filecount++;
             }

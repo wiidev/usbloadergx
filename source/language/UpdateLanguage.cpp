@@ -25,7 +25,7 @@ int updateLanguageFiles() {
     //now from the files we got, get only the .lang files
     for (int cnt = 0; cnt < countfiles; cnt++) {
         char filename[64];
-        strncpy(filename, GetFileName(cnt),63);
+        strlcpy(filename, GetFileName(cnt),sizeof(filename));
         if (strcasestr(filename,".lang")) {
             strcpy(languageFiles[cnt],filename);
         }

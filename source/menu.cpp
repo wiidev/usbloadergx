@@ -1397,9 +1397,9 @@ int MenuDiscList() {
             if (strlen(get_title(header)) < (MAX_CHARACTERS + 3)) {
                 sprintf(text, "%s", get_title(header));
             } else {
-                strncpy(text, get_title(header),  MAX_CHARACTERS);
+                strlcpy(text, get_title(header),  MAX_CHARACTERS+1);
                 text[MAX_CHARACTERS] = '\0';
-                strncat(text, "...", 3);
+                strcat(text, "...");
             }
 
             //check if alt Dol and gct file is present

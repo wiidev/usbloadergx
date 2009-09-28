@@ -670,8 +670,8 @@ void PrintGameInfo(bool showfullinfo) {
             snprintf(linebuf, sizeof(linebuf), "%s / %s", linebuf, gameinfo.developer);
         if (strlen(linebuf) >= 100) {
             char buffer[200] = "";
-            strncpy(buffer, linebuf,  100);
-            strncat(buffer, "...", 3);
+            strlcpy(buffer, linebuf,  100);
+            strcat(buffer, "...");
             snprintf(linebuf, sizeof(linebuf), "%s", buffer);
         }
         printf("%s\n",linebuf);
