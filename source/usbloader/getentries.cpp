@@ -179,6 +179,7 @@ int __Menu_GetGameFilter_NextList(discHdr *gameList, u32 gameCnt, wchar_t **Pgam
 {
 	u32 filter_len = wcslen(*PgameFilter);
 	u32 i, lastChar=0;
+	bool autofill = filter_len > 0; // autofill only when gameFilter is not empty
 	wchar_t *p;
 	u32 *nextList = new u32[gameCnt]; if(nextList==NULL) return -1;
 	for(i=0; i<gameCnt; i++)
@@ -187,8 +188,14 @@ int __Menu_GetGameFilter_NextList(discHdr *gameList, u32 gameCnt, wchar_t **Pgam
 		wchar_t *gameName = FreeTypeGX::charToWideChar(get_title(&gameList[i]));
 		if(gameName == NULL) goto error;
 
-		if(wcslen(gameName) > filter_len && (filter_len == 0 || !wcsnicmp(*PgameFilter, gameName, filter_len)))
-			nextFilterChar = towupper(gameName[filter_len]);
+		if(wcslen(gameName) > filter_len)
+		{
+			if((filter_len == 0 || !wcsnicmp(*PgameFilter, gameName, filter_len)))
+				nextFilterChar = towupper(gameName[filter_len]);
+		}
+		else if(wcslen(gameName) == filter_len)
+			autofill = false; // no autofill when gameNameLen == filterLen
+			
 		nextList[i] = nextFilterChar;
 	}
 	qsort(nextList, gameCnt, sizeof(u32), int_cmp);
@@ -210,7 +217,7 @@ int __Menu_GetGameFilter_NextList(discHdr *gameList, u32 gameCnt, wchar_t **Pgam
 		}
 	}
 	*p = 0;
-	if(wcslen(*PgameFilterNextList) == 1) // only one nextChar
+	if(wcslen(*PgameFilterNextList) == 1 && autofill) // only one nextChar and autofill is true
 	{
 		wchar_t *newFilter = new wchar_t[filter_len + 2];
 		if(newFilter == NULL) goto error;
