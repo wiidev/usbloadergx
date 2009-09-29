@@ -292,6 +292,9 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
 
     u32 appldr_len;
     s32 ret;
+	
+	u32 geckoattached = usb_isgeckoalive(EXI_CHANNEL_1);
+	if (geckoattached)usb_flush(EXI_CHANNEL_1);
 
     /* Read apploader header */
     ret = WDVD_Read(buffer, 0x20, APPLDR_OFFSET);
@@ -337,7 +340,7 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
         *(u32 *)0x80003140 = *(u32 *)0x80003188;
     }
 
-    if (cheat) {
+    if (cheat || geckoattached) {
         /*HOOKS STUFF - FISHEARS*/
         memset((void*)0x80001800,0,kenobiwii_size);
         memcpy((void*)0x80001800,kenobiwii,kenobiwii_size);

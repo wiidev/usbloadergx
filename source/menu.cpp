@@ -336,7 +336,8 @@ int MenuDiscList() {
 	char dvdID[8];
 	if (!dvdheader)
 		dvdheader = new struct discHdr;
-	
+		
+		
 	
     WDVD_GetCoverStatus(&covert);
     u32 covertOld=covert;

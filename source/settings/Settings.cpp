@@ -1809,13 +1809,6 @@ int GameSettings(struct discHdr * header) {
 	}
 	else sprintf(gameName, "%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
 
-	if (strlen(get_title(header)) < (27 + 3)) {
-        strcpy(gameName, get_title(header));
-    } else {
-        strlcpy(gameName, get_title(header),  27+1);
-        strcat(gameName, "...");
-    }
-
 	GuiText titleTxt(!dvdMounted?get_title(header):gameName, 28, (GXColor) {0, 0, 0, 255});
     titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     titleTxt.SetPosition(12,40);
