@@ -504,4 +504,7 @@ extern const u32	pegi_18_png_size;
 extern const u8		usbport_png[];
 extern const u32	usbport_png_size;
 
+extern const u8		dvd_png[];
+extern const u32	dvd_png_size;
+
 #endif

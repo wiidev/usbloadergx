@@ -279,6 +279,8 @@ void CFG_Default(int widescreen) { // -1 = non forced Mode
 	THEME.gamelist_grid_y = 13;
 	THEME.gamelist_carousel_x = CFG.widescreen ? 480 : 500;
 	THEME.gamelist_carousel_y = 13;
+	THEME.gamelist_dvd_x = CFG.widescreen ? 512 : 540;
+	THEME.gamelist_dvd_y = 13;
 
 	THEME.gamegrid_favorite_x = CFG.widescreen ? 208 : 180;
 	THEME.gamegrid_favorite_y = 13;
@@ -294,6 +296,8 @@ void CFG_Default(int widescreen) { // -1 = non forced Mode
 	THEME.gamegrid_grid_y = 13;
 	THEME.gamegrid_carousel_x = CFG.widescreen ? 400 : 420;
 	THEME.gamegrid_carousel_y = 13;
+	THEME.gamegrid_dvd_x = CFG.widescreen ? 432 : 460;
+	THEME.gamegrid_dvd_y = 13;
 
 	THEME.gamecarousel_favorite_x = CFG.widescreen ? 208 : 180;
 	THEME.gamecarousel_favorite_y = 13;
@@ -309,6 +313,8 @@ void CFG_Default(int widescreen) { // -1 = non forced Mode
 	THEME.gamecarousel_grid_y = 13;
 	THEME.gamecarousel_carousel_x = CFG.widescreen ? 400 : 420;
 	THEME.gamecarousel_carousel_y = 13;
+	THEME.gamecarousel_dvd_x = CFG.widescreen ? 432 : 460;
+	THEME.gamecarousel_dvd_y = 13;
 }
 
 void Global_Default(void) {
@@ -571,6 +577,7 @@ void path_set(char *name, char *val) {
 #define OLD_LIST_ICON		 8
 #define OLD_GRID_ICON		16
 #define OLD_CAROUSEL_ICON	32
+#define OLD_DVD_ICON		64
 short WorkAroundIconSet=0;
 short WorkAroundBarOffset=100;
 
@@ -646,6 +653,10 @@ void theme_set(char *name, char *val) {
 	else CFG_COORDS2(gamelist_carousel)
 	else CFG_COORDS2(gamegrid_carousel)
 	else CFG_COORDS2(gamecarousel_carousel)
+
+	else CFG_COORDS2(gamelist_dvd)
+	else CFG_COORDS2(gamegrid_dvd)
+	else CFG_COORDS2(gamecarousel_dvd)
 
 	//**********************************
 	// Workaround for old Themes
@@ -748,6 +759,17 @@ void theme_set(char *name, char *val) {
 		}
 	}
 
+	else if (strcmp(cfg_name, "dvd_coords") == 0) {
+		short x,y;
+		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
+			if(!CFG.widescreen) x+=24;
+			THEME.gamelist_dvd_x = x;
+			THEME.gamegrid_dvd_x = THEME.gamecarousel_dvd_x = x-WorkAroundBarOffset;
+			THEME.gamelist_dvd_y = THEME.gamegrid_dvd_y = THEME.gamecarousel_dvd_y = y;
+			WorkAroundIconSet |= OLD_DVD_ICON;
+		}
+	}
+
 	else if (strcmp(cfg_name, "sortBarOffset") == 0) {
 		short o;
 		if (sscanf(val, "%hd", &o) == 1) {
@@ -782,6 +804,11 @@ void theme_set(char *name, char *val) {
 			{
 				THEME.gamegrid_carousel_x += WorkAroundBarOffset - o;
 				THEME.gamecarousel_carousel_x += WorkAroundBarOffset - o;
+			}
+			if(WorkAroundIconSet & OLD_DVD_ICON)
+			{
+				THEME.gamegrid_dvd_x += WorkAroundBarOffset - o;
+				THEME.gamecarousel_dvd_x += WorkAroundBarOffset - o;
 			}
 			WorkAroundBarOffset = o;
 		}

@@ -18,6 +18,9 @@
 #include "settings/cfg.h"
 #include "memory.h"
 #include "../wad/title.h"
+#include "../patches/dvd_broadway.h"
+
+#define BC 		0x0000000100000100ULL
 
 /*** Extern functions ***/
 extern void ResumeGui();
@@ -27,25 +30,28 @@ extern void HaltGui();
 extern GuiWindow * mainWindow;
 extern u8 shutdown;
 extern u8 reset;
+extern u8 dvdMounted;
 
 /********************************************************************************
-*Game specific settings
+*Disk Browser
 *********************************************************************************/
 int DiscBrowse(struct discHdr * header) {
     bool exit = false;
     int ret, choice;
     u64 offset;
 
-	//Halt Gui seems to fix that pain in the ass code dump.  We'll see.
 	HaltGui();
-    ret = Disc_SetUSB(header->id);
-    if (ret < 0) {
-		ResumeGui();
-        WindowPrompt(tr("ERROR:"), tr("Could not set USB."), tr("OK"));
-        return ret;
-    }
+	if (!dvdMounted)
+	{
+		ret = Disc_SetUSB(header->id);
+		if (ret < 0) {
+			ResumeGui();
+			WindowPrompt(tr("ERROR:"), tr("Could not set USB."), tr("OK"));
+			return ret;
+		}
+	}
 	
-    ret = Disc_Open();
+	ret = Disc_Open();
     if (ret < 0) {
 		ResumeGui();
         WindowPrompt(tr("ERROR:"), tr("Could not open disc."), tr("OK"));
@@ -65,8 +71,8 @@ int DiscBrowse(struct discHdr * header) {
         WindowPrompt(tr("ERROR:"), tr("Could not open WBFS partition"), tr("OK"));
         return ret;
     }
-
-    int *buffer = (int*)allocate_memory(0x20);
+	
+	int *buffer = (int*)allocate_memory(0x20);
 
     if (buffer == NULL) {
 		ResumeGui();
@@ -80,8 +86,8 @@ int DiscBrowse(struct discHdr * header) {
         WindowPrompt(tr("ERROR:"), tr("Could not read the disc."), tr("OK"));
         return ret;
     }
-
-    void *fstbuffer = allocate_memory(buffer[2]*4);
+	
+	void *fstbuffer = allocate_memory(buffer[2]*4);
     FST_ENTRY *fst = (FST_ENTRY *)fstbuffer;
 
     if (fst == NULL) {
@@ -193,7 +199,6 @@ int DiscBrowse(struct discHdr * header) {
     mainWindow->Append(&w);
 
     ResumeGui();
-
     while (!exit) {
         VIDEO_WaitVSync();
 
@@ -395,4 +400,51 @@ int autoSelectDolMenu(const char *id, bool force) {
 	}
 	
     return -1;
+}
+
+
+/********************************************************************************
+* Mount a DVD, get the type and ID.
+*********************************************************************************/
+static vu32 dvddone = 0;
+static dvddiskid *g_diskID = (dvddiskid*)0x80000000;
+void __dvd_readidcb(s32 result)
+{
+	dvddone = result;
+}
+
+u8 DiscMount(char *id) {
+    int ret;
+    char gameidbuffer[8];
+	HaltGui();
+    memset((char*)0x80000000, 0, 6);
+
+	ret = bwDVD_LowInit();
+	dvddone = 0;
+	ret = bwDVD_LowReset(__dvd_readidcb);
+	while(ret>=0 && dvddone==0);
+	
+	dvddone = 0;
+	ret = bwDVD_LowReadID(g_diskID,__dvd_readidcb);
+	while(ret>=0 && dvddone==0);
+
+	memset(gameidbuffer, 0, 8);
+	memcpy(gameidbuffer, (char*)0x80000000, 6);
+	strcpy(id,gameidbuffer);
+	if(gameidbuffer[1] == 0 && 
+		gameidbuffer[2] == 0 && 
+		gameidbuffer[3] == 0 && 
+		gameidbuffer[4] == 0 && 
+		gameidbuffer[5] == 0 && 
+		gameidbuffer[6] == 0)
+		{
+			ResumeGui();
+			return 0;
+	}
+	if(*((u32 *) 0x8000001C) == 0xC2339F3D){
+		ResumeGui();
+		return 2;
+	}
+	ResumeGui();
+	return 1;
 }

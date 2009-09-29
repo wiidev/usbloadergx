@@ -11,5 +11,6 @@
 int DiscBrowse(struct discHdr * header);
 int autoSelectDol(const char *id, bool force);
 int autoSelectDolMenu(const char *id, bool force);
+u8 DiscMount(char *id);
 
 #endif

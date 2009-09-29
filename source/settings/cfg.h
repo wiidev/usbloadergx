@@ -143,6 +143,8 @@ extern "C" {
 		short gamelist_grid_y;
 		short gamelist_carousel_x;
 		short gamelist_carousel_y;
+		short gamelist_dvd_x;
+		short gamelist_dvd_y;
 // Toolbar Icons in GameGrid
 		short gamegrid_favorite_x;
 		short gamegrid_favorite_y;
@@ -158,6 +160,8 @@ extern "C" {
 		short gamegrid_grid_y;
 		short gamegrid_carousel_x;
 		short gamegrid_carousel_y;
+		short gamegrid_dvd_x;
+		short gamegrid_dvd_y;
 // Toolbar Icons in GameCarousel
 		short gamecarousel_favorite_x;
 		short gamecarousel_favorite_y;
@@ -173,6 +177,8 @@ extern "C" {
 		short gamecarousel_grid_y;
 		short gamecarousel_carousel_x;
 		short gamecarousel_carousel_y;
+		short gamecarousel_dvd_x;
+		short gamecarousel_dvd_y;
 
 	};
 

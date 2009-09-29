@@ -318,6 +318,8 @@ s32 Disc_WiiBoot(u8 videoselected, u8 cheat, u8 vipatch, u8 patchcountrystring, 
     return Disc_BootPartition(offset, videoselected, cheat, vipatch, patchcountrystring, error002fix, alternatedol, alternatedoloffset);
 }
 
+
+
 void PatchCountryStrings(void *Address, int Size) {
     u8 SearchPattern[4]    = { 0x00, 0x00, 0x00, 0x00 };
     u8 PatchData[4]        = { 0x00, 0x00, 0x00, 0x00 };

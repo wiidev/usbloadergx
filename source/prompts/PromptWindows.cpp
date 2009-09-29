@@ -51,6 +51,8 @@ extern float gamesize;
 extern struct discHdr * gameList;
 extern u8 shutdown;
 extern u8 reset;
+extern u8 dvdMounted;
+extern struct discHdr *dvdheader;
 
 /*** Extern functions ***/
 extern void ResumeGui();
@@ -1031,7 +1033,7 @@ int GameWindowPrompt() {
     GuiImage dialogBoxImg(&dialogBox);
 
     GuiTooltip nameBtnTT(tr("Rename Game on WBFS"));
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt == yes && !dvdMounted)
         nameBtnTT.SetWidescreen(CFG.widescreen);
     GuiText nameTxt("", 22, THEME.prompttext);
     if (Settings.wsprompt == yes)
@@ -1046,7 +1048,7 @@ int GameWindowPrompt() {
     nameBtn.SetSoundClick(&btnClick);
     nameBtn.SetToolTip(&nameBtnTT,24,-30, ALIGN_LEFT);
 
-    if (Settings.godmode == 1) {
+    if (Settings.godmode == 1 && !dvdMounted) {
         nameBtn.SetTrigger(&trigA);
         nameBtn.SetEffectGrow();
     }
@@ -1088,7 +1090,7 @@ int GameWindowPrompt() {
         btn2Img.SetWidescreen(CFG.widescreen);
     }
     GuiButton btn2(&btn2Img,&btn2Img, 1, 5, 0, 0, &trigA, &btnSoundOver, &btnClick,1);
-    if (Settings.godmode == 1) {
+    if (Settings.godmode == 1 && dvdMounted!=2) {
         btn2.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
         btn2.SetPosition(-50, -40);
     } else {
@@ -1138,15 +1140,18 @@ int GameWindowPrompt() {
 
     promptWindow.Append(&dialogBoxImg);
     promptWindow.Append(&nameBtn);
-    promptWindow.Append(&sizeTxt);
     promptWindow.Append(&playcntTxt);
     promptWindow.Append(&btn2);
-    promptWindow.Append(&btnLeft);
-    promptWindow.Append(&btnRight);
-    promptWindow.Append(&btnFavorite);
+	if (!dvdMounted)//stuff we don't show if it is a DVD mounted
+	{
+		promptWindow.Append(&sizeTxt);
+		promptWindow.Append(&btnLeft);
+		promptWindow.Append(&btnRight);
+		promptWindow.Append(&btnFavorite);
+	}
 
     //check if unlocked
-    if (Settings.godmode == 1) {
+    if (Settings.godmode == 1 && dvdMounted!=2) {
         promptWindow.Append(&btn3);
     }
 
@@ -1174,7 +1179,7 @@ int GameWindowPrompt() {
         }
 
         //load disc image based or what game is seleted
-        struct discHdr * header = &gameList[gameSelected];
+        struct discHdr * header = (dvdMounted?dvdheader:&gameList[gameSelected]);
 
         snprintf (ID,sizeof(ID),"%c%c%c", header->id[0], header->id[1], header->id[2]);
         snprintf (IDFull,sizeof(IDFull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
@@ -1253,10 +1258,14 @@ int GameWindowPrompt() {
             nameTxt.SetEffect(EFFECT_FADE, 17);
         } else
             diskImg.SetImage(diskCover);
-
-        WBFS_GameSize(header->id, &size);
-        sizeTxt.SetTextf("%.2fGB", size); //set size text;
-        nameTxt.SetText(get_title(header));
+		
+		if (!dvdMounted)
+		{
+			WBFS_GameSize(header->id, &size);
+			sizeTxt.SetTextf("%.2fGB", size); //set size text;
+		}
+		
+        nameTxt.SetText(!dvdMounted?get_title(header):IDFull);
 
         struct Game_NUM* game_num = CFG_get_game_num(header->id);
         if (game_num) {
@@ -1312,7 +1321,6 @@ int GameWindowPrompt() {
                 }
 
                 choice = 1;
-                //SDCard_deInit();// moved this into menu.cpp after checking for gct file and alt dol
             }
 
             else if (btn2.GetState() == STATE_CLICKED) { //back

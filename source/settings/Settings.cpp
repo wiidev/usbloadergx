@@ -35,6 +35,8 @@ extern GuiImageData * pointer[4];
 extern GuiImageData * background;
 extern u8 shutdown;
 extern u8 reset;
+extern u8 dvdMounted;
+extern struct discHdr *dvdheader;
 
 /****************************************************************************
  * MenuSettings
@@ -1795,18 +1797,26 @@ int GameSettings(struct discHdr * header) {
     trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 
     char gameName[31];
+	if (!dvdMounted)
+	{
+		if (strlen(get_title(header)) < (27 + 3)) {
+			sprintf(gameName, "%s", get_title(header));
+		} else {
+			strncpy(gameName, get_title(header),  27);
+			gameName[27] = '\0';
+			strncat(gameName, "...", 3);
+		}
+	}
+	else sprintf(gameName, "%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
 
-    if (strlen(get_title(header)) < (27 + 3)) {
+	if (strlen(get_title(header)) < (27 + 3)) {
         strcpy(gameName, get_title(header));
     } else {
         strlcpy(gameName, get_title(header),  27+1);
         strcat(gameName, "...");
     }
 
-
-
-
-    GuiText titleTxt(get_title(header), 28, (GXColor) {0, 0, 0, 255});
+	GuiText titleTxt(!dvdMounted?get_title(header):gameName, 28, (GXColor) {0, 0, 0, 255});
     titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     titleTxt.SetPosition(12,40);
     titleTxt.SetMaxWidth(356, GuiText::SCROLL);
@@ -2373,7 +2383,7 @@ int GameSettings(struct discHdr * header) {
                     switch (ret) {
                     case 0:
                         choice1 = WindowPrompt(tr("Do you really want to delete:"),gameName,tr("Yes"),tr("Cancel"));
-                        if (choice1 == 1) {
+                        if (choice1 == 1 && !dvdMounted) {
                             CFG_forget_game_opt(header->id);
                             CFG_forget_game_num(header->id);
                             ret = WBFS_RemoveGame(header->id);

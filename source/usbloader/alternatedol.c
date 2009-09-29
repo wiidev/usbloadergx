@@ -8,6 +8,9 @@
 #include "apploader.h"
 #include "wdvd.h"
 #include "fstfile.h"
+#include "../patches/dvd_broadway.h"
+
+extern u8 dvdMounted;
 
 /** Alternate dolloader made by WiiPower modified by dimok **/
 bool Load_Dol(void **buffer, int* dollen, char * filepath) {
@@ -180,7 +183,11 @@ bool load_dol_image_modified(void **offset, u32 *pos, u32 *len) {
     }
     return false;
 }
-
+static vu32 dvddone = 0;
+void __dvd_readidcb(s32 result)
+{
+	dvddone = result;
+}
 u32 Load_Dol_from_disc(u32 doloffset, u8 videoSelected, u8 patchcountrystring, u8 vipatch) {
     int ret;
     void *dol_header;
@@ -191,8 +198,14 @@ u32 Load_Dol_from_disc(u32 doloffset, u8 videoSelected, u8 patchcountrystring, u
         return -1;
     }
 
-    ret = WDVD_Read(dol_header, sizeof(dolheader), (doloffset<<2));
-
+    if (!dvdMounted)ret = WDVD_Read(dol_header, sizeof(dolheader), (doloffset<<2));
+	
+	else{
+		dvddone = 0;
+		ret = bwDVD_LowRead(dol_header, sizeof(dolheader), doloffset, __dvd_readidcb);
+		while(ret>=0 && dvddone==0);
+	}
+	
     entrypoint = load_dol_start(dol_header);
 
     if (entrypoint == 0) {
@@ -221,4 +234,5 @@ u32 Load_Dol_from_disc(u32 doloffset, u8 videoSelected, u8 patchcountrystring, u
     free(dol_header);
 
     return entrypoint;
+
 }
