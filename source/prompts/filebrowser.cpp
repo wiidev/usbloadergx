@@ -414,22 +414,32 @@ main:
             mainWindow->Remove(&w);
             ResumeGui();
             char newfolder[100];
+            char oldfolder[100];
             sprintf(newfolder,"%s/",var);
+			strcpy(oldfolder,newfolder);
 
             int result = OnScreenKeyboard(newfolder,100,0);
+			
             if ( result == 1 ) {
                 int len = (strlen(newfolder)-1);
                 if (newfolder[len] !='/')
-                    strncat (newfolder, "/", 1);
-
-                struct stat st;
-                if (stat(newfolder, &st) != 0) {
-                    if (subfoldercreate(newfolder) != 1) {
-                        WindowPrompt(tr("Error !"),tr("Can't create directory"),tr("OK"));
-                    }
-                }
+					strncat (newfolder, "/", 1);
+				char* pos = newfolder;
+				char root[6];
+				sprintf(root,"%s/",browser.rootdir);
+				if (len > 0 && strcmp(oldfolder,newfolder)!=0 && strstr(newfolder,root) == pos && strstr(newfolder,"//") == NULL) {
+					struct stat st;
+					if (stat(newfolder, &st) != 0) {
+						if (subfoldercreate(newfolder) != 1) {
+							WindowPrompt(tr("Error !"),tr("Can't create directory"),tr("OK"));
+							break;
+						}
+					} else {
+						break;
+					}
+				}
             }
-            result = BrowseDevice(var, (curDivice==SD?SD:USB));
+			result = BrowseDevice(var, (curDivice==SD?SD:USB));
             break;
         }
 

@@ -71,7 +71,9 @@ static void BootUpProblems()
 		ret2 = IOS_ReloadIOS(249);
 		if (ret2 < 0) {
 			ret2 = IOS_ReloadIOS(222);
+			SDCard_Init(); 
 			load_ehc_module();
+			SDCard_deInit();
 			if(ret2 <0) {
 				boottext.SetText("ERROR: cIOS could not be loaded!");
 				bootimage.Draw();
@@ -134,12 +136,16 @@ main(int argc, char *argv[]) {
 
     /** PAD_Init has to be before InitVideo don't move that **/
     PAD_Init(); // initialize PAD/WPAD
-
+	
+    USBDevice_deInit();// seems enough to wake up some HDDs if they are in sleep mode when the loader starts (tested with WD MyPassport Essential 2.5")
+	 
     ret = IOS_ReloadIOS(249);
 
     if (ret < 0) {
         ret = IOS_ReloadIOS(222);
+		SDCard_Init(); 
         load_ehc_module();
+		SDCard_deInit();
         if(ret <0) {
             printf("\n\tERROR: cIOS could not be loaded!\n");
             sleep(5);
@@ -151,8 +157,9 @@ main(int argc, char *argv[]) {
 
     if (ret < 0) {
         ret = IOS_ReloadIOS(222);
+		SDCard_Init(); 
         load_ehc_module();
-
+		SDCard_deInit();
         if(ret < 0) {
             InitVideo(); // Initialise video
             Menu_Render();
@@ -192,8 +199,10 @@ main(int argc, char *argv[]) {
         SDCard_deInit();// unmount SD for reloading IOS
         USBDevice_deInit();// unmount USB for reloading IOS
         ret = IOS_ReloadIOS(222);
+		SDCard_Init();
         load_ehc_module();
         if (ret < 0) {
+			SDCard_deInit();
             Settings.cios = ios249;
             ret = IOS_ReloadIOS(249);
         }
@@ -206,11 +215,12 @@ main(int argc, char *argv[]) {
         if (ret < 0) {
             Settings.cios = ios222;
             ret = IOS_ReloadIOS(222);
+			SDCard_Init();
             load_ehc_module();
         }
         SDCard_Init(); // now mount SD:/
         USBDevice_Init(); // and mount USB:/
-    }
+	}
 
     if (ret < 0) {
         printf("ERROR: cIOS could not be loaded!");

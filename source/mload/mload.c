@@ -17,14 +17,18 @@
 
 #include "mload.h"
 #include "ehcmodule.h"
-//#include "ehcmodule_elf.h"
 #include "dip_plugin.h"
+#include <malloc.h>
 
 static const char mload_fs[] ATTRIBUTE_ALIGN(32) = "/dev/mload";
 static u32 patch_datas[8] ATTRIBUTE_ALIGN(32);
 
 static s32 mload_fd = -1;
 static s32 hid = -1;
+static data_elf my_data_elf;
+static int thread_id = -1;
+void *external_ehcmodule= NULL;
+int size_external_ehcmodule=0;
 
 /*--------------------------------------------------------------------------------------------------------------*/
 
@@ -513,14 +517,52 @@ static u32 ios_38[16] ATTRIBUTE_ALIGN(32)=
 int load_ehc_module()
 {
 	int is_ios=0;
-	if (mload_module(ehcmodule, size_ehcmodule)<0) return -1;
-/*
-    if (mload_init() >= 0) {
-        data_elf my_data_elf;
-        mload_elf((void *) ehcmodule_elf, &my_data_elf);
-        mload_run_thread(my_data_elf.start, my_data_elf.stack, my_data_elf.size_stack, 0x47);
-    }
-*/
+	FILE *fp;
+
+	if(!external_ehcmodule)
+		{
+
+		fp=fopen("SD:/apps/usbloader_gx/ehcmodule.elf","rb");
+		if(fp==NULL)
+			fp=fopen("SD:/apps/usbloadergx/ehcmodule.elf","rb");
+
+		if(fp!=NULL)
+			{
+
+			fseek(fp, 0, SEEK_END);
+			size_external_ehcmodule = ftell(fp);
+			external_ehcmodule = memalign(32, size_external_ehcmodule);
+			if(!external_ehcmodule) 
+				{fclose(fp);}
+			else
+				{
+				fseek(fp, 0, SEEK_SET);
+
+				if(fread(external_ehcmodule,1, size_external_ehcmodule ,fp)!=size_external_ehcmodule)
+					{free(external_ehcmodule); external_ehcmodule=NULL;}
+			
+				fclose(fp);
+				}
+			}
+		}
+	
+	if(!external_ehcmodule)
+		{
+		if(mload_init()<0) return -1;
+		mload_elf((void *) ehcmodule, &my_data_elf);
+		thread_id = mload_run_thread(my_data_elf.start, my_data_elf.stack, my_data_elf.size_stack, my_data_elf.prio);
+		if(thread_id < 0) return -1;
+		}
+	else
+		{
+		if(mload_init()<0) return -1;
+		mload_elf((void *) external_ehcmodule, &my_data_elf);
+		thread_id = mload_run_thread(my_data_elf.start, my_data_elf.stack, my_data_elf.size_stack, my_data_elf.prio);
+		if(thread_id<0) return -1;
+		}
+	usleep(350*1000);
+	
+
 	// Test for IOS
 	mload_seek(0x20207c84, SEEK_SET);
 	mload_read(patch_datas, 4);

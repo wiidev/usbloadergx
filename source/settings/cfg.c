@@ -344,7 +344,7 @@ void Global_Default(void) {
     Settings.patchcountrystrings = 0;
     Settings.gridRows = 3;
     Settings.error002 = 0;
-    Settings.titlesOverride = 0;
+    Settings.titlesOverride = 1;
     snprintf(Settings.db_url, sizeof(Settings.db_url), empty);
     snprintf(Settings.db_language, sizeof(Settings.db_language), empty);
     Settings.db_JPtoEN = 0;
@@ -1563,7 +1563,7 @@ bool cfg_load_global() {
     Settings.volume = 80;
     Settings.sfxvolume = 80;
 
-    Settings.titlesOverride = 0;
+    Settings.titlesOverride = 1;
     char * empty = "";
     snprintf(Settings.db_url, sizeof(Settings.db_url), empty);
     snprintf(Settings.db_language, sizeof(Settings.db_language), empty);

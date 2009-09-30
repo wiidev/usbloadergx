@@ -474,11 +474,11 @@ int MenuSettings() {
                     options2.SetName(4, "%s",tr("Flip-X"));
                     options2.SetName(5, "%s",tr("Prompts Buttons"));
                     options2.SetName(6, "%s",tr("Keyboard"));
-                    options2.SetName(7, "%s",tr("Discimages Download"));
+                    options2.SetName(7, "%s",tr("Disc Artwork Download"));
                     options2.SetName(8, "%s",tr("Wiilight"));
                     options2.SetName(9, "%s",tr("Rumble"));
                     options2.SetName(10, "%s",tr("AutoInit Network"));
-                    options2.SetName(11, "%s",tr("Titles from XML"));
+                    options2.SetName(11, "%s",tr("Titles from WiiTDB"));
                     options2.SetName(12, "%s",tr("Screensaver"));
                     for (int i = 0; i <= MAXOPTIONS; i++) options2.SetValue(i, NULL);
                     optionBrowser2.SetScrollbar(1);
@@ -1177,12 +1177,12 @@ int MenuSettings() {
 //                    if (Settings.godmode)
                         options2.SetName(0, "%s", tr("3D Cover Path"));
 					options2.SetName(1, "%s", tr("2D Cover Path"));
-                    options2.SetName(2, "%s", tr("Discimage Path"));
-                    options2.SetName(3, "%s", tr("ThemePath"));
-                    options2.SetName(4, "%s", tr("XMLPath"));
-                    options2.SetName(5, "%s", tr("Updatepath"));
-                    options2.SetName(6, "%s", tr("Cheatcodes Path"));
-                    options2.SetName(7, "%s", tr("TXTCheatcodes Path"));
+                    options2.SetName(2, "%s", tr("Disc Artwork Path"));
+                    options2.SetName(3, "%s", tr("Theme Path"));
+                    options2.SetName(4, "%s", tr("WiiTDB Path"));
+                    options2.SetName(5, "%s", tr("Update Path"));
+                    options2.SetName(6, "%s", tr("GCT Cheatcodes Path"));
+                    options2.SetName(7, "%s", tr("TXT Cheatcodes Path"));
                     options2.SetName(8, "%s", tr("Dol Path"));
                     options2.SetName(9, "%s", tr("Homebrew Apps Path"));
                     for (int i = 0; i <= MAXOPTIONS; i++) options2.SetValue(i, NULL);
@@ -1255,7 +1255,6 @@ int MenuSettings() {
                                     strlcpy(entered, Settings.covers_path, sizeof(entered));
                                     titleTxt.SetText(tr("3D Cover Path"));
                                     int result = BrowseDevice(entered);
-                                    //int result = OnScreenKeyboard(entered,43,0);
                                     titleTxt.SetText(tr("Custom Paths"));
                                     w.Append(&optionBrowser2);
                                     w.Append(&backBtn);
@@ -1264,14 +1263,14 @@ int MenuSettings() {
                                         if (entered[len] !='/')
                                             strncat (entered, "/", 1);
                                         strlcpy(Settings.covers_path, entered, sizeof(Settings.covers_path));
-                                        WindowPrompt(tr("Coverpath Changed"),0,tr("OK"));
+                                        WindowPrompt(tr("Cover Path Changed"),0,tr("OK"));
 //                                        if(!isSdInserted()) {
                                         if (!isInserted(bootDevice)) {
                                             WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
                                         }
                                     }
                                 } else {
-                                    WindowPrompt(tr("Coverpath Change"),tr("Console should be unlocked to modify it."),tr("OK"));
+                                    WindowPrompt(tr("Cover Path Change"),tr("Console should be unlocked to modify it."),tr("OK"));
                                 }
                                 break;
                            case 1:
@@ -1291,14 +1290,14 @@ int MenuSettings() {
                                         if (entered[len] !='/')
                                             strncat (entered, "/", 1);
                                         strlcpy(Settings.covers2d_path, entered, sizeof(Settings.covers2d_path));
-                                        WindowPrompt(tr("Coverpath Changed"),0,tr("OK"));
+                                        WindowPrompt(tr("Cover Path Changed"),0,tr("OK"));
 //                                        if(!isSdInserted()) {
                                         if (!isInserted(bootDevice)) {
                                             WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
                                         }
                                     }
                                 } else {
-                                    WindowPrompt(tr("Coverpath Change"),tr("Console should be unlocked to modify it."),tr("OK"));
+                                    WindowPrompt(tr("Cover Path Change"),tr("Console should be unlocked to modify it."),tr("OK"));
                                 }
                                 break;
                             case 2:
@@ -1307,9 +1306,8 @@ int MenuSettings() {
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
                                     strlcpy(entered, Settings.disc_path, sizeof(entered));
-                                    titleTxt.SetText(tr("Discimage Path"));
+                                    titleTxt.SetText(tr("Disc Artwork Path"));
                                     int result = BrowseDevice(entered);
-                                    //int result = OnScreenKeyboard(entered, 43,0);
                                     titleTxt.SetText(tr("Custom Paths"));
                                     w.Append(&optionBrowser2);
                                     w.Append(&backBtn);
@@ -1318,14 +1316,14 @@ int MenuSettings() {
                                         if (entered[len] !='/')
                                             strncat (entered, "/", 1);
                                         strlcpy(Settings.disc_path, entered, sizeof(Settings.disc_path));
-                                        WindowPrompt(tr("Discpath Changed"),0,tr("OK"));
+                                        WindowPrompt(tr("Disc Path Changed"),0,tr("OK"));
 //                                        if(!isSdInserted()) {
                                         if (!isInserted(bootDevice)) {
                                             WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
                                         }
                                     }
                                 } else {
-                                    WindowPrompt(tr("Discpath change"),tr("Console should be unlocked to modify it."),tr("OK"));
+                                    WindowPrompt(tr("Disc Path change"),tr("Console should be unlocked to modify it."),tr("OK"));
                                 }
                                 break;
                             case 3:
@@ -1333,10 +1331,9 @@ int MenuSettings() {
                                     w.Remove(&optionBrowser2);
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
-                                    titleTxt.SetText(tr("ThemePath"));
+                                    titleTxt.SetText(tr("Theme Path"));
                                     strlcpy(entered, CFG.theme_path, sizeof(entered));
                                     int result = BrowseDevice(entered);
-                                    //int result = OnScreenKeyboard(entered, 43,0);
                                     HaltGui();
                                     w.RemoveAll();
                                     if ( result == 1 ) {
@@ -1344,7 +1341,7 @@ int MenuSettings() {
                                         if (entered[len] !='/')
                                             strncat (entered, "/", 1);
                                         strlcpy(CFG.theme_path, entered, sizeof(CFG.theme_path));
-                                        WindowPrompt(tr("Themepath Changed"),0,tr("OK"));
+                                        WindowPrompt(tr("Theme Path Changed"),0,tr("OK"));
 //                                        if(!isSdInserted()) {
                                         if (!isInserted(bootDevice)) {
                                             WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
@@ -1383,7 +1380,7 @@ int MenuSettings() {
                                     w.Append(&optionBrowser2);
                                     ResumeGui();
                                 } else {
-                                    WindowPrompt(tr("Themepath change"),tr("Console should be unlocked to modify it."),tr("OK"));
+                                    WindowPrompt(tr("Theme Path change"),tr("Console should be unlocked to modify it."),tr("OK"));
                                 }
                                 break;
                             case 4:
@@ -1391,10 +1388,9 @@ int MenuSettings() {
                                     w.Remove(&optionBrowser2);
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
-                                    titleTxt.SetText(tr("XMLPath"));
+                                    titleTxt.SetText(tr("WiiTDB Path"));
                                     strlcpy(entered, Settings.titlestxt_path, sizeof(entered));
                                     int result = BrowseDevice(entered);
-                                    //int result = OnScreenKeyboard(entered,43,0);
                                     w.Append(&optionBrowser2);
                                     titleTxt.SetText(tr("Custom Paths"));
                                     w.Append(&backBtn);
@@ -1403,7 +1399,7 @@ int MenuSettings() {
                                         if (entered[len] !='/')
                                             strncat (entered, "/", 1);
                                         strlcpy(Settings.titlestxt_path, entered, sizeof(Settings.titlestxt_path));
-                                        WindowPrompt(tr("XMLPath changed."),0,tr("OK"));
+                                        WindowPrompt(tr("WiiTDB Path changed."),0,tr("OK"));
 //                                        if(isSdInserted()) {
                                         if (isInserted(bootDevice)) {
                                             cfg_save_global();
@@ -1415,7 +1411,7 @@ int MenuSettings() {
                                         }
                                     }
                                 } else {
-                                    WindowPrompt(tr("XMLPath change"),tr("Console should be unlocked to modify it."),tr("OK"));
+                                    WindowPrompt(tr("WiiTDB Path change"),tr("Console should be unlocked to modify it."),tr("OK"));
                                 }
                                 break;
                             case 5:
@@ -1426,7 +1422,6 @@ int MenuSettings() {
                                     strlcpy(entered, Settings.update_path, sizeof(entered));
                                     titleTxt.SetText(tr("Updatepath"));
                                     int result = BrowseDevice(entered);
-                                    //int result = OnScreenKeyboard(entered,43,0);
                                     titleTxt.SetText(tr("Custom Paths"));
                                     w.Append(&optionBrowser2);
                                     w.Append(&backBtn);
@@ -1446,9 +1441,8 @@ int MenuSettings() {
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
                                     strlcpy(entered, Settings.Cheatcodespath, sizeof(entered));
-                                    titleTxt.SetText(tr("Cheatcodes Path"));
+                                    titleTxt.SetText(tr("GCT Cheatcodes Path"));
                                     int result = BrowseDevice(entered);
-                                    //int result = OnScreenKeyboard(entered,43,0);
                                     titleTxt.SetText(tr("Custom Paths"));
                                     w.Append(&optionBrowser2);
                                     w.Append(&backBtn);
@@ -1457,7 +1451,7 @@ int MenuSettings() {
                                         if (entered[len] !='/')
                                             strncat (entered, "/", 1);
                                         strlcpy(Settings.Cheatcodespath, entered, sizeof(Settings.Cheatcodespath));
-                                        WindowPrompt(tr("Cheatcodes Path changed"),0,tr("OK"));
+                                        WindowPrompt(tr("GCT Cheatcodes Path changed"),0,tr("OK"));
                                     }
                                 } else
                                     WindowPrompt(0,tr("Console should be unlocked to modify it."),tr("OK"));
@@ -1468,9 +1462,8 @@ int MenuSettings() {
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
                                     strlcpy(entered, Settings.TxtCheatcodespath, sizeof(entered));
-                                    titleTxt.SetText(tr("TXTCheatcodes Path"));
+                                    titleTxt.SetText(tr("TXT Cheatcodes Path"));
                                     int result = BrowseDevice(entered);
-                                    //int result = OnScreenKeyboard(entered,43,0);
                                     titleTxt.SetText(tr("Custom Paths"));
                                     w.Append(&optionBrowser2);
                                     w.Append(&backBtn);
@@ -1479,7 +1472,7 @@ int MenuSettings() {
                                         if (entered[len] !='/')
                                             strncat (entered, "/", 1);
                                         strlcpy(Settings.TxtCheatcodespath, entered, sizeof(Settings.TxtCheatcodespath));
-                                        WindowPrompt(tr("TXTCheatcodes Path changed"),0,tr("OK"));
+                                        WindowPrompt(tr("TXT Cheatcodes Path changed"),0,tr("OK"));
                                     }
                                 } else
                                     WindowPrompt(0,tr("Console should be unlocked to modify it."),tr("OK"));
@@ -1492,7 +1485,6 @@ int MenuSettings() {
                                     strlcpy(entered, Settings.dolpath, sizeof(entered));
                                     titleTxt.SetText(tr("Dol Path"));
                                     int result = BrowseDevice(entered);
-                                    //int result = OnScreenKeyboard(entered,43,0);
                                     titleTxt.SetText(tr("Custom Paths"));
                                     w.Append(&optionBrowser2);
                                     w.Append(&backBtn);
@@ -1519,7 +1511,6 @@ int MenuSettings() {
                                     strlcpy(entered, Settings.homebrewapps_path, sizeof(entered));
                                     titleTxt.SetText(tr("Homebrew Apps Path"));
                                     int result = BrowseDevice(entered);
-                                    //int result = OnScreenKeyboard(entered,43,0);
                                     titleTxt.SetText(tr("Custom Paths"));
                                     w.Append(&optionBrowser2);
                                     w.Append(&backBtn);
@@ -2319,9 +2310,9 @@ int GameSettings(struct discHdr * header) {
                 for (int i = 0; i <= MAXOPTIONS-1; i++) options2.SetName(i, NULL);
                 options2.SetName(0,"%s", tr("Uninstall Game"));
                 options2.SetName(1,"%s", tr("Reset Playcounter"));
-                options2.SetName(2,"%s", tr("Delete Boxart"));
-                options2.SetName(3,"%s", tr("Delete Discart"));
-                options2.SetName(4,"%s", tr("Delete CheatTxt"));
+                options2.SetName(2,"%s", tr("Delete Cover Artwork"));
+                options2.SetName(3,"%s", tr("Delete Disc Artwork"));
+                options2.SetName(4,"%s", tr("Delete Cheat TXT"));
                 options2.SetName(5,"%s", tr("Delete Cheat GCT"));
                 for (int i = 0; i <= MAXOPTIONS-1; i++) options2.SetValue(i, NULL);
                 w.Append(&optionBrowser2);
