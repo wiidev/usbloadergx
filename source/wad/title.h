@@ -64,6 +64,9 @@ extern "C" {
 //check for a game save present on nand based on game ID
 int CheckForSave(const char *gameID);
 
+//boot HBC in either HAXX or JODI locations
+s32 WII_BootHBC();
+
 #ifdef __cplusplus
 }
 #endif

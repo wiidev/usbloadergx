@@ -926,7 +926,8 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
                     ShutdownAudio();
                     StopGX();
                     WII_Initialize();
-                    WII_LaunchTitle(TITLE_ID(0x00010001,0x48415858));
+					WII_BootHBC();
+                    
                 }
                 choice = 2;
             }
@@ -3407,5 +3408,4 @@ HBCWindowPrompt(const char *name, const char *coder, const char *version,
     ResumeGui();
     return choice;
 }
-
 

@@ -820,6 +820,48 @@ s32 getTitles_Type(u32 type, u32 *titles, u32 count) {
 }
 
 
+//this function expects initialize be called before it is called
+// if not, it will fail miserably and catch the wii on fire and kick you in the nuts
+#define TITLE_ID(x,y)		(((u64)(x) << 32) | (y))
+s32 WII_BootHBC()
+{
+	u32 tmdsize;
+	u64 tid = 0;
+	u64 *list;
+	u32 titlecount;
+	s32 ret;
+	u32 i;
+
+	ret = ES_GetNumTitles(&titlecount);
+	if(ret < 0)
+		return WII_EINTERNAL;
+
+	list = memalign(32, titlecount * sizeof(u64) + 32);
+
+	ret = ES_GetTitles(list, titlecount);
+	if(ret < 0) {
+		free(list);
+		return WII_EINTERNAL;
+	}
+	
+	for(i=0; i<titlecount; i++) {
+		if (list[i]==TITLE_ID(0x00010001,0x4A4F4449) 
+			|| list[i]==TITLE_ID(0x00010001,0x48415858))
+		{
+			tid = list[i];
+			break;
+		}
+	}
+	free(list);
+
+	if(!tid)
+		return WII_EINSTALL;
+
+	if(ES_GetStoredTMDSize(tid, &tmdsize) < 0)
+		return WII_EINSTALL;
+
+	return WII_LaunchTitle(tid);
+}
 
 
 

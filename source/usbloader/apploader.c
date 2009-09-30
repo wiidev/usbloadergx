@@ -13,15 +13,10 @@
 #include "fstfile.h"
 #include "settings/cfg.h"
 
-#define BC 0x0000000100000100ULL
-#define MIOS 0x0000000100000101ULL
-static tikview view ATTRIBUTE_ALIGN(32);
-
 /*KENOBI! - FISHEARS*/
 extern const unsigned char kenobiwii[];
 extern const int kenobiwii_size;
 /*KENOBI! - FISHEARS*/
-extern u8 dvdMounted;
 
 /* Apploader function pointers */
 typedef int   (*app_main)(void **dst, int *size, int *offset);
@@ -309,24 +304,7 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
     if (ret < 0)
         return ret;
 		
-	if (dvdMounted==2)		
-	{
-		int retval;
-			retval = ES_GetTicketViews(BC, &view, 1);
-		if (retval != 0){
-		//	error.  do something smart here like exit.  anything besides return 0;
-		return 0;
-		}
-		
-		WPAD_Shutdown();
-		*(volatile unsigned int *)0xCC003024 |= 7;
-
-		retval = ES_LaunchTitle(BC, &view);	// bushing's code
-		return 0;
-	}
-	
-
-    /* Set apploader entry function */
+	/* Set apploader entry function */
     appldr_entry = (app_entry)buffer[4];
 
     /* Call apploader entry */
