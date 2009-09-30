@@ -22,6 +22,10 @@
 #include "filelist.h"
 #include "sys.h"
 #include "network/http.h"
+#include <zlib.h>
+#include "Settings/cfg.h"
+#include "unzip/unzip.h"
+#include "unzip/miniunz.h"
 
 /*** Extern functions ***/
 extern void ResumeGui();
@@ -32,8 +36,12 @@ extern GuiWindow * mainWindow;
 extern GuiSound * bgMusic;
 extern GuiImage * bgImg;
 extern u32 infilesize;
+extern u32 uncfilesize;
+extern char wiiloadVersion[2];
 extern u8 shutdown;
 extern u8 reset;
+extern struct SSettings Settings;
+extern void *innetbuffer;
 
 /*** Variables used elsewhere ***/
 u8 boothomebrew = 0;
@@ -802,8 +810,10 @@ int MenuHomebrewBrowse() {
                         u32 read = 0;
                         u8 *temp = NULL;
                         int len = NETWORKBLOCKSIZE;
-                        temp = (u8*) malloc(len);
+                        temp = (u8 *) malloc(infilesize);
 
+						bool error = false;
+						u8 *ptr = temp;
                         while (read < infilesize) {
 
                             ShowProgress(tr("Receiving file from:"), GetIncommingIP(), NULL, read, infilesize, true);
@@ -813,37 +823,87 @@ int MenuHomebrewBrowse() {
                             else
                                 len = NETWORKBLOCKSIZE;
 
-                            int result = network_read(temp, len);
+                            int result = network_read(ptr, len);
 
                             if (result < 0) {
                                 WindowPrompt(tr("Error while transfering data."), 0, tr("OK"));
-                                FreeHomebrewBuffer();
+								error = true;
                                 break;
                             }
-                            if (!result)
+                            if (!result) {
                                 break;
+							}
 
-                            CopyHomebrewMemory(read, temp, len);
+							ptr += result;
 
                             read += result;
-
                         }
-                        free(temp);
+						
+						char filename[101];
+						if (!error) {
+						
+							network_read((u8*) &filename, 100);
+							
+							// Do we need to unzip this thing?
+							if (wiiloadVersion[0] > 0 || wiiloadVersion[1] > 4) {
+
+								// We need to unzip...
+								if (temp[0] == 'P' && temp[1] == 'K' && temp[2] == 0x03 && temp[2] == 0x04) {
+									// It's a zip file, unzip to the apps directory
+									
+									// Zip archive, ask for permission to install the zip
+									char zippath[255];
+									sprintf((char *) &zippath, "%s%s", Settings.homebrewapps_path, filename);
+									
+									FILE *fp = fopen(zippath, "wb");
+									if (fp != NULL)
+									{
+										fwrite(temp, 1, infilesize, fp);
+										fclose(fp);
+										
+										// Now unzip the zip file...
+										unzFile uf = unzOpen(zippath);
+										if (uf==NULL) {
+											error = true;
+										} else {
+											extractZip(uf,0,1,0);
+											unzCloseCurrentFile(uf);
+											
+											remove(zippath);
+										}
+									}
+								} else if (uncfilesize != 0) { // if uncfilesize == 0, it's not compressed
+									// It's compressed, uncompress
+									u8 *unc = (u8 *) malloc(uncfilesize);
+									uLongf f = uncfilesize;
+									error = uncompress(unc, &f, temp, infilesize) != Z_OK;
+									uncfilesize = f;
+									
+									free(temp);
+									temp = unc;
+								}
+							}
+							
+							if (!error && strstr(filename,".zip") == NULL) {
+								innetbuffer = temp;
+							}
+						}
+						
                         ProgressStop();
 
-                        if (read != infilesize) {
+                        if (error || read != infilesize) {
                             WindowPrompt(tr("Error:"), tr("No data could be read."), tr("OK"));
                             FreeHomebrewBuffer();
                         } else {
-                            char filename[101];
-							network_read((u8*) &filename, 100);
-
                             if (strstr(filename,".dol") || strstr(filename,".DOL")
                                 || strstr(filename,".elf") || strstr(filename,".ELF")) {
                                 boothomebrew = 2;
                                 menu = MENU_EXIT;
                                 CloseConnection();
                                 break;
+                            } else if (strstr(filename,".zip")) {
+                                WindowPrompt(tr("SUCCESS:"), tr("Uploaded zip file installed to homebrew directory."), tr("OK"));
+								CloseConnection();
                             } else {
                                 FreeHomebrewBuffer();
                                 WindowPrompt(tr("ERROR:"), tr("Not a dol/elf file."), tr("OK"));

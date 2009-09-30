@@ -22,6 +22,7 @@
 
 /*** Incomming filesize ***/
 u32 infilesize = 0;
+u32 uncfilesize = 0;
 
 bool updateavailable = false;
 s32 connection;
@@ -32,6 +33,7 @@ static bool checkincomming = false;
 static bool waitforanswer = false;
 static char IP[16];
 char incommingIP[50];
+char wiiloadVersion[2];
 
 static lwp_t networkthread = LWP_THREAD_NULL;
 static bool networkHalt = true;
@@ -250,7 +252,14 @@ int NetworkWait() {
         unsigned char haxx[9];
         //skip haxx
         net_read(connection, &haxx, 8);
+		wiiloadVersion[0] = haxx[4];
+		wiiloadVersion[1] = haxx[5];
+		
         net_read(connection, &infilesize, 4);
+
+		if (haxx[4] > 0 || haxx[5] > 4) {
+			net_read(connection, &uncfilesize, 4); // Compressed protocol, read another 4 bytes
+		}
         waitforanswer = true;
         checkincomming = false;
         networkHalt = true;

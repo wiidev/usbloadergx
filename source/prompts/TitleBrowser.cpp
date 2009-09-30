@@ -24,6 +24,7 @@
 #include "wad/wad.h"
 #include "xml/xml.h"
 #include "../wad/title.h"
+#include "unzip/inflate.h"
 
 /*** Extern functions ***/
 extern void ResumeGui();
@@ -34,7 +35,8 @@ extern GuiWindow * mainWindow;
 extern u8 shutdown;
 extern u8 reset;
 extern u32 infilesize;
-
+extern u32 uncfilesize;
+extern char wiiloadVersion[2];
 
 /********************************************************************************
 * TitleBrowser- opens a browser with a list of installed Titles
@@ -417,7 +419,12 @@ int TitleBrowser(u32 type) {
                 int choice = WindowPrompt(filesizetxt, temp, tr("OK"), tr("Cancel"));
 
                 if(choice == 1) {
-                        FILE *file = fopen(filepath, "wb");
+						bool compressed = (wiiloadVersion[0] > 1 || wiiloadVersion[1] > 4) && uncfilesize != 0;
+						
+						char currentPath[100];
+						sprintf(currentPath, compressed ? "%s.z" : "%s", filepath);
+				
+                        FILE *file = fopen(currentPath, "wb");
 
                         int len = NETWORKBLOCKSIZE;
                         u8 *buffer = (u8*) malloc(NETWORKBLOCKSIZE);
@@ -449,12 +456,34 @@ int TitleBrowser(u32 type) {
                         }
                         free(buffer);
                         fclose(file);
+						
+						if (compressed) {
+							FILE *cfile = fopen(currentPath, "rb");
+							FILE *ufile = fopen(filepath, "wb");
+							
+							int r;
+							if (( r = inflateFile(cfile, ufile)) != Z_OK) {
+								char buf[100];
+								sprintf((char *) &buf, "Inflate failed: %d", r);
+								WindowPrompt(tr("Compressed:"), (char *) &buf, tr("OK"));
+							}
+
+							fclose(cfile);
+							fclose(ufile);
+							
+							remove(currentPath);
+						}
+						
                         ProgressStop();
 
                         if (read != infilesize) {
                             WindowPrompt(tr("Error:"), tr("No data could be read."), tr("OK"));
                             remove(filepath);
                         } else {
+
+						if (compressed) {
+							infilesize = uncfilesize;
+						}
 
                         //determine what type of file we just got
                         char filename[101];
