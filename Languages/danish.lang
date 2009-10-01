@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-#
-# don't delete this line (é).
+# danish.lang - r755
+# don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-27 20:15+0200\n"
-"PO-Revision-Date: 2009-07-18 15:18+0200\n"
+"POT-Creation-Date: 2009-10-01 05:48+0200\n"
+"PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: dorf[dk]\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -47,7 +47,7 @@ msgid "20 min"
 msgstr "20 min."
 
 msgid "2D Cover Path"
-msgstr ""
+msgstr "Sti til 2-d covers"
 
 msgid "3 (Mature 16+)"
 msgstr "3 (Modne teenagere 12+)"
@@ -59,7 +59,7 @@ msgid "30 min"
 msgstr "30 min."
 
 msgid "3D Cover Path"
-msgstr ""
+msgstr "Sti til 3-d covers"
 
 msgid "3D Covers"
 msgstr "3D-Covers"
@@ -119,7 +119,7 @@ msgid ">> Reading WAD data...Ok!"
 msgstr ">> Læser WAD-data...Ok!"
 
 msgid "AUTO"
-msgstr "AUTO"
+msgstr ""
 
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "Alle USB Loader GX's funktioner er lÃ¥st op."
@@ -131,25 +131,25 @@ msgid "An Error occured"
 msgstr "Der skete en fejl"
 
 msgid "Anti"
-msgstr "Anti"
+msgstr ""
 
 msgid "App Language"
 msgstr "Programsprog"
 
 msgid "Apr"
-msgstr "Apr"
+msgstr ""
 
 msgid "Are you sure?"
 msgstr "Er du sikker?"
 
 msgid "Aug"
-msgstr "Aug"
+msgstr ""
 
 msgid "AutoInit Network"
 msgstr "AutoInit net"
 
 msgid "AutoPatch"
-msgstr "AutoPatch"
+msgstr ""
 
 msgid "Back"
 msgstr "Tilbage"
@@ -176,7 +176,7 @@ msgid "Block IOS Reload"
 msgstr "Blokér IOS-reload"
 
 msgid "Boot/Standard"
-msgstr "Boot/Standard"
+msgstr ""
 
 msgid "Boot?"
 msgstr "Genstart?"
@@ -195,12 +195,6 @@ msgstr "Kan ikke slettes:"
 
 msgid "Cancel"
 msgstr "Annullér"
-
-msgid "Cheatcodes Path"
-msgstr "Sti til cheatcodes"
-
-msgid "Cheatcodes Path changed"
-msgstr "Sti til cheatcodes ændret"
 
 msgid "Cheatfile is blank"
 msgstr "Cheatfilen er tom"
@@ -232,6 +226,9 @@ msgstr "Programmeret af: %s"
 
 msgid "Coding:"
 msgstr "Programmering:"
+
+msgid "Compressed:"
+msgstr ""
 
 msgid "Confirm"
 msgstr "Bekræft"
@@ -290,10 +287,10 @@ msgstr "Kunne ikke sætte USB."
 msgid "Cover Download"
 msgstr "Cover-download"
 
-msgid "Coverpath Change"
+msgid "Cover Path Change"
 msgstr "Ændringer af sti til covers"
 
-msgid "Coverpath Changed"
+msgid "Cover Path Changed"
 msgstr "Sti til covers ændret"
 
 msgid "Create"
@@ -308,8 +305,17 @@ msgstr "Sti-indstillinger"
 msgid "Customs/Original"
 msgstr "Tilpassede/Originale"
 
+msgid "DOL Path"
+msgstr "Stil til DOL"
+
+msgid "DOL path change"
+msgstr "Ændringer af sti til DOL"
+
+msgid "DOL path changed"
+msgstr "Sti til DOL ændret"
+
 msgid "Dec"
-msgstr "Dec"
+msgstr ""
 
 msgid "Default"
 msgstr "Standard"
@@ -326,44 +332,44 @@ msgstr "Slet"
 msgid "Delete ?"
 msgstr "Slet?"
 
-msgid "Delete Boxart"
-msgstr "Slet boxart"
-
 msgid "Delete Cheat GCT"
 msgstr "Slet cheat GCT"
 
-msgid "Delete CheatTxt"
-msgstr "Slet CheatTxt"
+msgid "Delete Cheat TXT"
+msgstr "Slet Cheat TXT"
 
-msgid "Delete Discart"
+msgid "Delete Cover Artwork"
+msgstr "Slet boxart"
+
+msgid "Delete Disc Artwork"
 msgstr "Slet DVD-billede"
 
 msgid "Design:"
-msgstr "Design:"
+msgstr ""
 
 msgid "Developed by"
 msgstr "Udviklet af"
+
+msgid "Disc Artwork Download"
+msgstr "Download DVD-billeder"
+
+msgid "Disc Artwork Path"
+msgstr "Sti til DVD-billeder"
 
 msgid "Disc Default"
 msgstr "Spillets standard"
 
 msgid "Disc Images"
-msgstr "DVD-covers"
+msgstr "DVD-billeder"
 
-msgid "Discimage Path"
-msgstr "Sti til DVD-covers"
+msgid "Disc Path Changed"
+msgstr "Sti til DVD-billeder"
 
-msgid "Discimages Download"
-msgstr "Download DVD-billeder"
-
-msgid "Discpath Changed"
-msgstr "Sti til DVD ændret"
-
-msgid "Discpath change"
+msgid "Disc Path change"
 msgstr "Ændringer til DVD-sti"
 
 msgid "DiskFlip"
-msgstr "DiskFlip"
+msgstr ""
 
 msgid "Display"
 msgstr "Spilinfo."
@@ -392,20 +398,11 @@ msgstr "Vil du formatere:"
 msgid "Do you want to retry for 30 secs?"
 msgstr "Vil du prøve igen?"
 
-msgid "Do you want to use the alt dol that is known to be correct?"
-msgstr "Vil du bruge den alternative dol der med sikkerhed er korrekt?"
+msgid "Do you want to use the alternate DOL that is known to be correct?"
+msgstr "Vil du bruge den alternative DOL der med sikkerhed er korrekt?"
 
 msgid "Do you wish to update/download all language files?"
 msgstr "Vil du opdatere/downloade alle sprogfiler?"
-
-msgid "Dol Path"
-msgstr "Stil til DOL"
-
-msgid "Dolpath Changed"
-msgstr "Sti til DOL ændret"
-
-msgid "Dolpath change"
-msgstr "Ændringer af sti til DOL"
 
 msgid "Done!"
 msgstr "Færdig!"
@@ -471,7 +468,7 @@ msgid "Failed to open partition"
 msgstr "Kunne ikke åbne partition"
 
 msgid "Feb"
-msgstr "Feb"
+msgstr ""
 
 msgid "File not found."
 msgstr "Fil ikke fundet."
@@ -480,7 +477,7 @@ msgid "Finishing installation... Ok!"
 msgstr "Afslutter installationen... Ok!"
 
 msgid "Flip-X"
-msgstr "Flip-X"
+msgstr ""
 
 msgid "Force"
 msgstr "Tving"
@@ -499,6 +496,12 @@ msgstr "Fransk"
 
 msgid "Full Shutdown"
 msgstr "Sluk helt"
+
+msgid "GCT Cheatcodes Path"
+msgstr "Sti til cheatcodes"
+
+msgid "GCT Cheatcodes Path changed"
+msgstr "Sti til cheatcodes ændret"
 
 msgid "GCT File created"
 msgstr "GCT-fil oprettet"
@@ -531,7 +534,7 @@ msgid "German"
 msgstr "Tysk"
 
 msgid "HOME Menu"
-msgstr "HOME menu"
+msgstr ""
 
 msgid "Homebrew Apps Path"
 msgstr "Sti til homebrew-programmer"
@@ -617,7 +620,7 @@ msgid "Italian"
 msgstr "Italiensk"
 
 msgid "Jan"
-msgstr "Jan"
+msgstr ""
 
 msgid "Japanese"
 msgstr "Japansk"
@@ -662,7 +665,7 @@ msgstr "Indlæs fra SD/USB"
 msgid "Load file from: %s ?"
 msgstr "Indlæs fil fra %s ?"
 
-msgid "Load this dol as alternate dol?"
+msgid "Load this DOL as alternate DOL?"
 msgstr "Indlæs denne DOL som alternativ DOL?"
 
 msgid "Loading standard language."
@@ -678,7 +681,7 @@ msgid "Locked"
 msgstr "Låst"
 
 msgid "Mar"
-msgstr "Mar"
+msgstr ""
 
 msgid "May"
 msgstr "Maj"
@@ -688,6 +691,9 @@ msgstr "Manglende filer"
 
 msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr "Sandsynligvis har det dimensioner, der ikke er delelige med fire."
+
+msgid "Mount DVD drive"
+msgstr ""
 
 msgid "Music Volume"
 msgstr "Lydstyrke"
@@ -710,6 +716,9 @@ msgstr "Der blev ikke fundet nogle .dol- eller .elf-filer."
 msgid "No Cheatfile found"
 msgstr "Cheat-fil ikke fundet"
 
+msgid "No DOL file found on disc."
+msgstr "Der blev ikke fundet nogle DOL-filer på DVDen."
+
 msgid "No Favorites"
 msgstr "Ingen favoritter"
 
@@ -731,9 +740,6 @@ msgstr "Der blev ikke valgt nogle cheats"
 msgid "No data could be read."
 msgstr "Data kunne ikke læses."
 
-msgid "No dol file found on disc."
-msgstr "Der blev ikke fundet nogle DOL-filer på DVDen."
-
 msgid "No file missing!"
 msgstr "Ingen filer mangler!"
 
@@ -749,11 +755,11 @@ msgstr "Normale Covers"
 msgid "Not Found"
 msgstr "Ikke fundet"
 
+msgid "Not a DOL/ELF file."
+msgstr "Ikke en DOL/ELF-fil."
+
 msgid "Not a Wii Disc"
 msgstr "Ikke en Wii-DVD"
-
-msgid "Not a dol/elf file."
-msgstr "Ikke en DOL/ELF-fil."
 
 msgid "Not enough free memory"
 msgstr "Ikke nok fri hukommelse"
@@ -768,13 +774,13 @@ msgid "Not supported format!"
 msgstr "Ikke et understøttet format"
 
 msgid "Nov"
-msgstr "Nov"
+msgstr ""
 
 msgid "OFF"
 msgstr "Fra"
 
 msgid "OK"
-msgstr "OK"
+msgstr ""
 
 msgid "ON"
 msgstr "Til"
@@ -784,9 +790,6 @@ msgstr "Okt"
 
 msgid "Official Site"
 msgstr "Officiel side"
-
-msgid "Ok"
-msgstr "Ok"
 
 msgid "Only Customs"
 msgstr "Kun tilpassede"
@@ -912,10 +915,10 @@ msgid "Selected DOL"
 msgstr "Valgt DOL"
 
 msgid "Sept"
-msgstr "Sept"
+msgstr ""
 
 msgid "Set Search-Filter"
-msgstr ""
+msgstr "Søgefilter"
 
 msgid "Set as backgroundmusic?"
 msgstr "Indstil som baggrundsmusik?"
@@ -945,7 +948,7 @@ msgid "Special thanks to:"
 msgstr "Specielt tak til:"
 
 msgid "Standard"
-msgstr "Standard"
+msgstr ""
 
 msgid "Success"
 msgstr "Succes"
@@ -971,10 +974,10 @@ msgstr "System-standard"
 msgid "TChinese"
 msgstr "Kinesisk (trad.)"
 
-msgid "TXTCheatcodes Path"
+msgid "TXT Cheatcodes Path"
 msgstr "Sti til TXTCheatcodes"
 
-msgid "TXTCheatcodes Path changed"
+msgid "TXT Cheatcodes Path changed"
 msgstr "Sti til TXTCheatcodes ændret"
 
 msgid "The file is not a .wad"
@@ -987,13 +990,13 @@ msgstr "WAD-filen blev installeret. Den kunne ikke slettes fra SD-kortet."
 msgid "The wad installation failed with error %ld"
 msgstr "WAD-installationen mislykkedes med fejl %ld"
 
-msgid "ThemePath"
+msgid "Theme Path"
 msgstr "Sti til temaer"
 
-msgid "Themepath Changed"
+msgid "Theme Path Changed"
 msgstr "Sti til temaer ændret"
 
-msgid "Themepath change"
+msgid "Theme Path change"
 msgstr "Ændringer af sti til temaer"
 
 msgid "Time left:"
@@ -1002,8 +1005,8 @@ msgstr "Tid tilbage:"
 msgid "Title Launcher"
 msgstr "Titel-starter"
 
-msgid "Titles from XML"
-msgstr "Titler fra XML"
+msgid "Titles from WiiTDB"
+msgstr "Titler fra WiiTDB"
 
 msgid "Tooltips"
 msgstr "Værktøjtips"
@@ -1048,6 +1051,12 @@ msgstr "Opdatér DOL"
 msgid "Update Files"
 msgstr "Opdatér filer"
 
+msgid "Update Path"
+msgstr "Sti til opdateringer"
+
+msgid "Update Path changed."
+msgstr "Sti til opdateringer ændret."
+
 msgid "Update all Language Files"
 msgstr "Opdatér alle sprogfiler"
 
@@ -1056,12 +1065,6 @@ msgstr "Opdateringen mislykkedes"
 
 msgid "Update to"
 msgstr "Opdatér til"
-
-msgid "Updatepath"
-msgstr "Sti til opdateringer"
-
-msgid "Updatepath changed."
-msgstr "Sti til opdateringer ændret."
 
 msgid "Updating"
 msgstr "Opdaterer..."
@@ -1075,12 +1078,15 @@ msgstr "Opdaterer sprogfiler:"
 msgid "Updating WiiTDB.zip"
 msgstr "Opdaterer WiiTDB.zip"
 
+msgid "Uploaded ZIP file installed to homebrew directory."
+msgstr ""
+
 msgid "VIDTV Patch"
 msgstr "VIDTV-patch"
 
 #, c-format
 msgid "Version: %s"
-msgstr "Version: %s"
+msgstr ""
 
 msgid "Video Mode"
 msgstr "Video-mode"
@@ -1098,10 +1104,10 @@ msgid "WiFi Features"
 msgstr "WiFi-indstillinger"
 
 msgid "Widescreen Fix"
-msgstr "Widescreen Fix"
+msgstr ""
 
 msgid "Wii Menu"
-msgstr "Wii Menu"
+msgstr ""
 
 msgid "Wii Settings"
 msgstr "Wii-indstillinger"
@@ -1109,20 +1115,20 @@ msgstr "Wii-indstillinger"
 msgid "WiiTDB Files"
 msgstr "WiiTDB-filer"
 
+msgid "WiiTDB Path"
+msgstr "Sti til WiiTDB"
+
+msgid "WiiTDB Path change"
+msgstr "Ændringer af sti til WiiTDB"
+
+msgid "WiiTDB Path changed."
+msgstr "Sti til WiiTDB ændret"
+
 msgid "Wiilight"
-msgstr "Wiilight"
+msgstr ""
 
 msgid "Wrong Password"
 msgstr "Forkert password"
-
-msgid "XMLPath"
-msgstr "Sti til XML"
-
-msgid "XMLPath change"
-msgstr "Ændringer af sti til XML"
-
-msgid "XMLPath changed."
-msgstr "Sti til XML ændret"
 
 msgid "Yes"
 msgstr "Ja"
@@ -1168,7 +1174,7 @@ msgid "files not found on the server!"
 msgstr "filer blev ikke fundet på serveren!"
 
 msgid "for"
-msgstr "for"
+msgstr ""
 
 msgid "for WiiTDB and hosting covers / disc images"
 msgstr "for WiiTDB og for at hoste covers/DVD-billeder"
@@ -1199,18 +1205,3 @@ msgstr "af"
 
 msgid "seconds left"
 msgstr "sekunder tilbage"
-
-#~ msgid "Cover Path"
-#~ msgstr "Sti til covers"
-
-#~ msgid "Don't bother the USB Loader GX Team about errors in this file."
-#~ msgstr "Lad være med at fortælle holdet bag USB Loader GX om fejl i denne fil."
-
-#~ msgid "No partitions found"
-#~ msgstr "Ingen partitioner fundet"
-
-#~ msgid "Restart"
-#~ msgstr "Genstart"
-
-#~ msgid "Saving"
-#~ msgstr "Gemmer"

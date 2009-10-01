@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-#
-# don't delete this line (é).
+# hungarian.lang - r569
+# don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-27 20:15+0200\n"
-"PO-Revision-Date: 2009-07-18 15:18+0200\n"
+"POT-Creation-Date: 2009-10-01 05:48+0200\n"
+"PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Tusk\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -47,7 +47,7 @@ msgid "20 min"
 msgstr ""
 
 msgid "2D Cover Path"
-msgstr ""
+msgstr "2D Boritó Útvonala"
 
 msgid "3 (Mature 16+)"
 msgstr "3 (Kamaszok 16+)"
@@ -59,7 +59,7 @@ msgid "30 min"
 msgstr ""
 
 msgid "3D Cover Path"
-msgstr ""
+msgstr "3D Boritó Útvonala"
 
 msgid "3D Covers"
 msgstr "3D Borítók"
@@ -131,25 +131,25 @@ msgid "An Error occured"
 msgstr ""
 
 msgid "Anti"
-msgstr "Anti"
+msgstr ""
 
 msgid "App Language"
 msgstr "Program Nyelve"
 
 msgid "Apr"
-msgstr "Ápr"
+msgstr ""
 
 msgid "Are you sure?"
 msgstr "Biztos vagy benne?"
 
 msgid "Aug"
-msgstr "Aug"
+msgstr ""
 
 msgid "AutoInit Network"
 msgstr ""
 
 msgid "AutoPatch"
-msgstr "AutoPatch"
+msgstr ""
 
 msgid "Back"
 msgstr "Vissza"
@@ -196,12 +196,6 @@ msgstr "Nem törölhetõ"
 msgid "Cancel"
 msgstr "Mégse"
 
-msgid "Cheatcodes Path"
-msgstr "Kódok útvonala"
-
-msgid "Cheatcodes Path changed"
-msgstr "Kódok útvonala megváltozott"
-
 msgid "Cheatfile is blank"
 msgstr "A Kódokat tartalmazó fájl üres"
 
@@ -231,6 +225,9 @@ msgid "Coded by: %s"
 msgstr ""
 
 msgid "Coding:"
+msgstr ""
+
+msgid "Compressed:"
 msgstr ""
 
 msgid "Confirm"
@@ -290,10 +287,10 @@ msgstr ""
 msgid "Cover Download"
 msgstr "Boritó Letöltés"
 
-msgid "Coverpath Change"
+msgid "Cover Path Change"
 msgstr ""
 
-msgid "Coverpath Changed"
+msgid "Cover Path Changed"
 msgstr "Boritó Útvonala megváltozott"
 
 msgid "Create"
@@ -308,8 +305,17 @@ msgstr "Saját Útvonal"
 msgid "Customs/Original"
 msgstr ""
 
+msgid "DOL Path"
+msgstr "DOL útvonal"
+
+msgid "DOL path change"
+msgstr "DOL útvonal megváltoztatása"
+
+msgid "DOL path changed"
+msgstr "DOL útvonal megváltozott"
+
 msgid "Dec"
-msgstr "Dec"
+msgstr ""
 
 msgid "Default"
 msgstr "Alapértelmezett"
@@ -326,16 +332,16 @@ msgstr ""
 msgid "Delete ?"
 msgstr ""
 
-msgid "Delete Boxart"
-msgstr ""
-
 msgid "Delete Cheat GCT"
 msgstr ""
 
-msgid "Delete CheatTxt"
+msgid "Delete Cheat TXT"
 msgstr ""
 
-msgid "Delete Discart"
+msgid "Delete Cover Artwork"
+msgstr ""
+
+msgid "Delete Disc Artwork"
 msgstr ""
 
 msgid "Design:"
@@ -344,22 +350,22 @@ msgstr ""
 msgid "Developed by"
 msgstr "Készítette"
 
+msgid "Disc Artwork Download"
+msgstr ""
+
+msgid "Disc Artwork Path"
+msgstr "Lemezképek Útvonala"
+
 msgid "Disc Default"
 msgstr "Lemez Alapértelmezettje"
 
 msgid "Disc Images"
 msgstr "Lemez Képek"
 
-msgid "Discimage Path"
-msgstr "Lemezképek Útvonala"
-
-msgid "Discimages Download"
-msgstr ""
-
-msgid "Discpath Changed"
+msgid "Disc Path Changed"
 msgstr "Lemezképek Útvonala megváltoztatva"
 
-msgid "Discpath change"
+msgid "Disc Path change"
 msgstr "Lemezképek útvonalának megváltoztatása"
 
 msgid "DiskFlip"
@@ -392,20 +398,11 @@ msgstr "Leakarod formázni?:"
 msgid "Do you want to retry for 30 secs?"
 msgstr "30 másodpercig szeretnéd még tovább próbálni?"
 
-msgid "Do you want to use the alt dol that is known to be correct?"
+msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr ""
 
 msgid "Do you wish to update/download all language files?"
 msgstr ""
-
-msgid "Dol Path"
-msgstr "Dol útvonal"
-
-msgid "Dolpath Changed"
-msgstr "Dol útvonal megváltozott"
-
-msgid "Dolpath change"
-msgstr "Dol útvonal megváltoztatása"
 
 msgid "Done!"
 msgstr ""
@@ -471,7 +468,7 @@ msgid "Failed to open partition"
 msgstr ""
 
 msgid "Feb"
-msgstr "Feb"
+msgstr ""
 
 msgid "File not found."
 msgstr "Fájl nem található"
@@ -480,7 +477,7 @@ msgid "Finishing installation... Ok!"
 msgstr ""
 
 msgid "Flip-X"
-msgstr "Flip-X"
+msgstr ""
 
 msgid "Force"
 msgstr "Erõltetés"
@@ -499,6 +496,12 @@ msgstr "Francia"
 
 msgid "Full Shutdown"
 msgstr "Teljes Kikapcsolás"
+
+msgid "GCT Cheatcodes Path"
+msgstr "Kódok útvonala"
+
+msgid "GCT Cheatcodes Path changed"
+msgstr "Kódok útvonala megváltozott"
 
 msgid "GCT File created"
 msgstr "GCT Fájl létrehozva"
@@ -662,7 +665,7 @@ msgstr ""
 msgid "Load file from: %s ?"
 msgstr ""
 
-msgid "Load this dol as alternate dol?"
+msgid "Load this DOL as alternate DOL?"
 msgstr ""
 
 msgid "Loading standard language."
@@ -689,6 +692,9 @@ msgstr "Hiányzó Fájl"
 msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr ""
 
+msgid "Mount DVD drive"
+msgstr ""
+
 msgid "Music Volume"
 msgstr "Zene Hangereje"
 
@@ -709,6 +715,9 @@ msgstr ""
 
 msgid "No Cheatfile found"
 msgstr "Kód nem található"
+
+msgid "No DOL file found on disc."
+msgstr ""
 
 msgid "No Favorites"
 msgstr ""
@@ -731,9 +740,6 @@ msgstr ""
 msgid "No data could be read."
 msgstr ""
 
-msgid "No dol file found on disc."
-msgstr ""
-
 msgid "No file missing!"
 msgstr "Egy fájl sem hiányzik!"
 
@@ -749,11 +755,11 @@ msgstr "Sima Borítók"
 msgid "Not Found"
 msgstr ""
 
+msgid "Not a DOL/ELF file."
+msgstr ""
+
 msgid "Not a Wii Disc"
 msgstr "Nem Wii lemez"
-
-msgid "Not a dol/elf file."
-msgstr ""
 
 msgid "Not enough free memory"
 msgstr ""
@@ -768,13 +774,13 @@ msgid "Not supported format!"
 msgstr "Nem támogatott formátum"
 
 msgid "Nov"
-msgstr "Nov"
+msgstr ""
 
 msgid "OFF"
 msgstr "KI"
 
 msgid "OK"
-msgstr "OK"
+msgstr ""
 
 msgid "ON"
 msgstr "BE"
@@ -784,9 +790,6 @@ msgstr "Ókt"
 
 msgid "Official Site"
 msgstr "Hivatalos Oldal"
-
-msgid "Ok"
-msgstr "Oké"
 
 msgid "Only Customs"
 msgstr ""
@@ -971,11 +974,11 @@ msgstr "Rendszer Alapértelmezett"
 msgid "TChinese"
 msgstr "TKínai"
 
-msgid "TXTCheatcodes Path"
+msgid "TXT Cheatcodes Path"
 msgstr "TXTKódok Útvonala"
 
-msgid "TXTCheatcodes Path changed"
-msgstr ""
+msgid "TXT Cheatcodes Path changed"
+msgstr "TXTKódok Útvonala megváltozott"
 
 msgid "The file is not a .wad"
 msgstr ""
@@ -987,13 +990,13 @@ msgstr ""
 msgid "The wad installation failed with error %ld"
 msgstr ""
 
-msgid "ThemePath"
+msgid "Theme Path"
 msgstr "Témák Útvonala"
 
-msgid "Themepath Changed"
+msgid "Theme Path Changed"
 msgstr "Témák Útvonala megváltozott"
 
-msgid "Themepath change"
+msgid "Theme Path change"
 msgstr "Témák Útvonalának megváltoztatása"
 
 msgid "Time left:"
@@ -1002,8 +1005,8 @@ msgstr "Hátralévõ Idõ"
 msgid "Title Launcher"
 msgstr ""
 
-msgid "Titles from XML"
-msgstr "Címek XML fájlból"
+msgid "Titles from WiiTDB"
+msgstr "Címek WiiTDB fájlból"
 
 msgid "Tooltips"
 msgstr "Súgók"
@@ -1048,6 +1051,12 @@ msgstr "DOL Frissítése"
 msgid "Update Files"
 msgstr ""
 
+msgid "Update Path"
+msgstr "Frissítés útvonala"
+
+msgid "Update Path changed."
+msgstr "Frissítés útvonala megváltozott."
+
 msgid "Update all Language Files"
 msgstr ""
 
@@ -1056,12 +1065,6 @@ msgstr "Frissítési hiba"
 
 msgid "Update to"
 msgstr "Frissítés ebbe: "
-
-msgid "Updatepath"
-msgstr "Frissítés útvonala"
-
-msgid "Updatepath changed."
-msgstr "Frissítés útvonala megváltozott."
 
 msgid "Updating"
 msgstr "Frissítés"
@@ -1073,6 +1076,9 @@ msgid "Updating Language Files:"
 msgstr ""
 
 msgid "Updating WiiTDB.zip"
+msgstr ""
+
+msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr ""
 
 msgid "VIDTV Patch"
@@ -1109,20 +1115,20 @@ msgstr ""
 msgid "WiiTDB Files"
 msgstr ""
 
+msgid "WiiTDB Path"
+msgstr ""
+
+msgid "WiiTDB Path change"
+msgstr ""
+
+msgid "WiiTDB Path changed."
+msgstr ""
+
 msgid "Wiilight"
 msgstr "Wiifény"
 
 msgid "Wrong Password"
 msgstr "Hibás Jelszó"
-
-msgid "XMLPath"
-msgstr ""
-
-msgid "XMLPath change"
-msgstr ""
-
-msgid "XMLPath changed."
-msgstr ""
 
 msgid "Yes"
 msgstr "Igen"
@@ -1168,7 +1174,7 @@ msgid "files not found on the server!"
 msgstr "fájlok nem találhatók a szerveren"
 
 msgid "for"
-msgstr " "
+msgstr ""
 
 msgid "for WiiTDB and hosting covers / disc images"
 msgstr ""
@@ -1195,16 +1201,7 @@ msgid "not set"
 msgstr "nem beállított"
 
 msgid "of"
-msgstr " "
+msgstr ""
 
 msgid "seconds left"
 msgstr "hátralévõ másodperc"
-
-#~ msgid "Cover Path"
-#~ msgstr "Boritó Útvonala"
-
-#~ msgid "No partitions found"
-#~ msgstr "Nem találtam particiót"
-
-#~ msgid "Restart"
-#~ msgstr "Újraindítás"

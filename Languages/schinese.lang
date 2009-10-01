@@ -1,14 +1,14 @@
 # USB Loader GX language source file.
-#
-# don't delete this line (é).
+# schinese.lang - r763
+# don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-27 20:15+0200\n"
-"PO-Revision-Date: 2009-07-18 15:18+0200\n"
-"Last-Translator: knife.hu\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2009-10-01 05:48+0200\n"
+"PO-Revision-Date: 2009-10-01 01:00+0200\n"
+"Last-Translator: knife.hu kavid\n"
+"Language-Team: kavid\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -47,7 +47,7 @@ msgid "20 min"
 msgstr "20 分钟"
 
 msgid "2D Cover Path"
-msgstr ""
+msgstr "2D封面路径"
 
 msgid "3 (Mature 16+)"
 msgstr "3 (16岁以上)"
@@ -59,7 +59,7 @@ msgid "30 min"
 msgstr "30 分钟"
 
 msgid "3D Cover Path"
-msgstr ""
+msgstr "3D封面路径"
 
 msgid "3D Covers"
 msgstr "3D 封面"
@@ -125,7 +125,7 @@ msgid "All the features of USB Loader GX are unlocked."
 msgstr "USB Loader GX 功能已解锁."
 
 msgid "Alternate DOL"
-msgstr "Alt DOL"
+msgstr "可选择Alt DOL文件"
 
 msgid "An Error occured"
 msgstr "发生一个错误"
@@ -196,12 +196,6 @@ msgstr "无法删除:"
 msgid "Cancel"
 msgstr "取消"
 
-msgid "Cheatcodes Path"
-msgstr "作弊码路径"
-
-msgid "Cheatcodes Path changed"
-msgstr "作弊码路径已变更"
-
 msgid "Cheatfile is blank"
 msgstr "作弊码文件是空的"
 
@@ -232,6 +226,9 @@ msgstr "编程: %s"
 
 msgid "Coding:"
 msgstr "编程:"
+
+msgid "Compressed:"
+msgstr ""
 
 msgid "Confirm"
 msgstr "确定"
@@ -282,7 +279,7 @@ msgid "Could not read the disc."
 msgstr "无法读取光盘."
 
 msgid "Could not save."
-msgstr ""
+msgstr "无法保存"
 
 msgid "Could not set USB."
 msgstr "无法设置 USB."
@@ -290,10 +287,10 @@ msgstr "无法设置 USB."
 msgid "Cover Download"
 msgstr "下载封面"
 
-msgid "Coverpath Change"
+msgid "Cover Path Change"
 msgstr "变更封面路径"
 
-msgid "Coverpath Changed"
+msgid "Cover Path Changed"
 msgstr "封面路径已变更"
 
 msgid "Create"
@@ -307,6 +304,15 @@ msgstr "自定义路径"
 
 msgid "Customs/Original"
 msgstr "自定义/官方"
+
+msgid "DOL Path"
+msgstr "DOL 路径"
+
+msgid "DOL path change"
+msgstr "变更 DOL 路径"
+
+msgid "DOL path changed"
+msgstr "DOL 路径已变更"
 
 msgid "Dec"
 msgstr "十二月"
@@ -326,16 +332,16 @@ msgstr "删除"
 msgid "Delete ?"
 msgstr "删除?"
 
-msgid "Delete Boxart"
+msgid "Delete Cheat GCT"
+msgstr "删除GCT金手指文件"
+
+msgid "Delete Cheat TXT"
+msgstr "删除TXT金手指文件"
+
+msgid "Delete Cover Artwork"
 msgstr "删除封面"
 
-msgid "Delete Cheat GCT"
-msgstr ""
-
-msgid "Delete CheatTxt"
-msgstr "删除作弊码"
-
-msgid "Delete Discart"
+msgid "Delete Disc Artwork"
 msgstr "删除光盘图片"
 
 msgid "Design:"
@@ -344,22 +350,22 @@ msgstr "设计:"
 msgid "Developed by"
 msgstr "开发"
 
+msgid "Disc Artwork Download"
+msgstr "光盘图片下载"
+
+msgid "Disc Artwork Path"
+msgstr "光盘图片路径"
+
 msgid "Disc Default"
 msgstr "游戏默认"
 
 msgid "Disc Images"
 msgstr "光盘图片"
 
-msgid "Discimage Path"
-msgstr "光盘图片路径"
-
-msgid "Discimages Download"
-msgstr "光盘图片下载"
-
-msgid "Discpath Changed"
+msgid "Disc Path Changed"
 msgstr "光盘图片路径已变更"
 
-msgid "Discpath change"
+msgid "Disc Path change"
 msgstr "变更光盘图片路径"
 
 msgid "DiskFlip"
@@ -392,20 +398,11 @@ msgstr "是否格式化:"
 msgid "Do you want to retry for 30 secs?"
 msgstr "是否等待 30 秒后重试?"
 
-msgid "Do you want to use the alt dol that is known to be correct?"
+msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "使用这个已知是正确的 Alt DOL 文件?"
 
 msgid "Do you wish to update/download all language files?"
 msgstr "升级/下载语言文件?"
-
-msgid "Dol Path"
-msgstr "DOL 路径"
-
-msgid "Dolpath Changed"
-msgstr "DOL 路径已变更"
-
-msgid "Dolpath change"
-msgstr "变更 DOL 路径"
 
 msgid "Done!"
 msgstr "完成"
@@ -499,6 +496,12 @@ msgstr "法文"
 
 msgid "Full Shutdown"
 msgstr "完全关机"
+
+msgid "GCT Cheatcodes Path"
+msgstr "作弊码路径"
+
+msgid "GCT Cheatcodes Path changed"
+msgstr "作弊码路径已变更"
 
 msgid "GCT File created"
 msgstr "GCT 文件已建立"
@@ -662,7 +665,7 @@ msgstr "从 SD/USB 载入"
 msgid "Load file from: %s ?"
 msgstr "从%s 载入文件?"
 
-msgid "Load this dol as alternate dol?"
+msgid "Load this DOL as alternate DOL?"
 msgstr "载入这个 DOL 作为 ALT DOL?"
 
 msgid "Loading standard language."
@@ -689,6 +692,9 @@ msgstr "缺少的文件"
 msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr "图片格式错误,可能它的尺寸不是 4 的倍数."
 
+msgid "Mount DVD drive"
+msgstr ""
+
 msgid "Music Volume"
 msgstr "音量"
 
@@ -710,6 +716,9 @@ msgstr "找不到 .dol 或 .elf 文件"
 msgid "No Cheatfile found"
 msgstr "作弊码文件没找到"
 
+msgid "No DOL file found on disc."
+msgstr "光盘中未找到 DOL 文件."
+
 msgid "No Favorites"
 msgstr "没有收藏记录"
 
@@ -726,13 +735,10 @@ msgid "No WBFS partition found"
 msgstr "找不到 WBFS 分区"
 
 msgid "No cheats were selected"
-msgstr ""
+msgstr "没有选择作弊码"
 
 msgid "No data could be read."
 msgstr "无法读取数据"
-
-msgid "No dol file found on disc."
-msgstr "光盘中未找到 DOL 文件"
 
 msgid "No file missing!"
 msgstr "没有文件缺少!"
@@ -749,11 +755,11 @@ msgstr "普通封面"
 msgid "Not Found"
 msgstr "没找到"
 
+msgid "Not a DOL/ELF file."
+msgstr "不是 DOL/ELF 文件."
+
 msgid "Not a Wii Disc"
 msgstr "不是 Wii 的光盘"
-
-msgid "Not a dol/elf file."
-msgstr "不是 DOL/ELF 文件."
 
 msgid "Not enough free memory"
 msgstr "剩余内存不足"
@@ -784,9 +790,6 @@ msgstr "十月"
 
 msgid "Official Site"
 msgstr "官方网址"
-
-msgid "Ok"
-msgstr "确认"
 
 msgid "Only Customs"
 msgstr "仅自定义"
@@ -831,7 +834,7 @@ msgid "Play Count"
 msgstr "游戏计数"
 
 msgid "Please wait..."
-msgstr ""
+msgstr "请等待..."
 
 msgid "Power off the Wii"
 msgstr "关闭 Wii 主机"
@@ -897,10 +900,10 @@ msgid "Save Failed"
 msgstr "保存失败"
 
 msgid "Save Game List to"
-msgstr ""
+msgstr "保存游戏列表到"
 
 msgid "Saved"
-msgstr ""
+msgstr "已保存"
 
 msgid "Screensaver"
 msgstr "屏幕保护"
@@ -915,7 +918,7 @@ msgid "Sept"
 msgstr "九月"
 
 msgid "Set Search-Filter"
-msgstr ""
+msgstr "设置搜索过滤器"
 
 msgid "Set as backgroundmusic?"
 msgstr "设置成背景音乐?"
@@ -971,10 +974,10 @@ msgstr "系统默认"
 msgid "TChinese"
 msgstr "繁体中文"
 
-msgid "TXTCheatcodes Path"
+msgid "TXT Cheatcodes Path"
 msgstr "TXT 作弊码文件路径"
 
-msgid "TXTCheatcodes Path changed"
+msgid "TXT Cheatcodes Path changed"
 msgstr "TXT 作弊码文件路径已变更"
 
 msgid "The file is not a .wad"
@@ -987,13 +990,13 @@ msgstr "WAD 已安装,但文件无法从 SD 卡中删除."
 msgid "The wad installation failed with error %ld"
 msgstr "WAD 安装失败，错误号 %ld"
 
-msgid "ThemePath"
+msgid "Theme Path"
 msgstr "主题路径"
 
-msgid "Themepath Changed"
+msgid "Theme Path Changed"
 msgstr "主题路径已变更"
 
-msgid "Themepath change"
+msgid "Theme Path change"
 msgstr "变更主题路径"
 
 msgid "Time left:"
@@ -1002,8 +1005,8 @@ msgstr "剩余时间:"
 msgid "Title Launcher"
 msgstr "系统频道"
 
-msgid "Titles from XML"
-msgstr "从 XML 中获取游戏名"
+msgid "Titles from WiiTDB"
+msgstr "从 WiiTDB 中获取游戏名"
 
 msgid "Tooltips"
 msgstr "提示信息"
@@ -1048,6 +1051,12 @@ msgstr "仅升级主程序"
 msgid "Update Files"
 msgstr "升级文件"
 
+msgid "Update Path"
+msgstr "升级文件存放路径"
+
+msgid "Update Path changed."
+msgstr "升级文件存放路径已变更"
+
 msgid "Update all Language Files"
 msgstr "升级全部语言文件"
 
@@ -1057,14 +1066,8 @@ msgstr "升级失败"
 msgid "Update to"
 msgstr "升级到"
 
-msgid "Updatepath"
-msgstr "升级文件存放路径"
-
-msgid "Updatepath changed."
-msgstr "升级文件存放路径已变更"
-
 msgid "Updating"
-msgstr "升级"
+msgstr "升级中"
 
 msgid "Updating Language Files..."
 msgstr "升级语言文件..."
@@ -1074,6 +1077,9 @@ msgstr "正在升级语言文件:"
 
 msgid "Updating WiiTDB.zip"
 msgstr "正在升级 WiiTDB.zip"
+
+msgid "Uploaded ZIP file installed to homebrew directory."
+msgstr ""
 
 msgid "VIDTV Patch"
 msgstr "VIDTV 修改"
@@ -1109,20 +1115,20 @@ msgstr "Wii 设置"
 msgid "WiiTDB Files"
 msgstr "WiiTDB 文件"
 
+msgid "WiiTDB Path"
+msgstr "WiiTDB 文件路径"
+
+msgid "WiiTDB Path change"
+msgstr "变更 WiiTDB 路径"
+
+msgid "WiiTDB Path changed."
+msgstr "WiiTDB 路径已变更"
+
 msgid "Wiilight"
 msgstr "光驱灯"
 
 msgid "Wrong Password"
 msgstr "密码错误"
-
-msgid "XMLPath"
-msgstr "XML 文件路径"
-
-msgid "XMLPath change"
-msgstr "变更 XML 路径"
-
-msgid "XMLPath changed."
-msgstr "XML 路径已变更"
 
 msgid "Yes"
 msgstr "是"
@@ -1199,12 +1205,3 @@ msgstr "的"
 
 msgid "seconds left"
 msgstr "剩余秒数"
-
-#~ msgid "Cover Path"
-#~ msgstr "封面路径"
-
-#~ msgid "No partitions found"
-#~ msgstr "找不到分区"
-
-#~ msgid "Restart"
-#~ msgstr "重新启动"

@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-#
-# don't delete this line (é).
+# polish.lang - r718
+# don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-27 20:15+0200\n"
-"PO-Revision-Date: 2009-07-18 15:18+0200\n"
+"POT-Creation-Date: 2009-10-01 05:48+0200\n"
+"PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: ziom666 (zadania_prog@vp.pl)\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -47,7 +47,7 @@ msgid "20 min"
 msgstr ""
 
 msgid "2D Cover Path"
-msgstr ""
+msgstr "Sciezka okladek 2D"
 
 msgid "3 (Mature 16+)"
 msgstr "3 (dojrzaly 16+)"
@@ -59,7 +59,7 @@ msgid "30 min"
 msgstr ""
 
 msgid "3D Cover Path"
-msgstr ""
+msgstr "Sciezka okladek 3D"
 
 msgid "3D Covers"
 msgstr "Okladki 3D"
@@ -196,12 +196,6 @@ msgstr "Nie mozna usunac"
 msgid "Cancel"
 msgstr "Anuluj"
 
-msgid "Cheatcodes Path"
-msgstr "Sciezka kodow"
-
-msgid "Cheatcodes Path changed"
-msgstr "Zmieniono sciezke kodow"
-
 msgid "Cheatfile is blank"
 msgstr "Plik z kodami pusty"
 
@@ -231,6 +225,9 @@ msgid "Coded by: %s"
 msgstr ""
 
 msgid "Coding:"
+msgstr ""
+
+msgid "Compressed:"
 msgstr ""
 
 msgid "Confirm"
@@ -290,10 +287,10 @@ msgstr "Nie mozna ustawic USB"
 msgid "Cover Download"
 msgstr "Pobierz okladki"
 
-msgid "Coverpath Change"
+msgid "Cover Path Change"
 msgstr "Zmien Sciezke okladek"
 
-msgid "Coverpath Changed"
+msgid "Cover Path Changed"
 msgstr "Sciezka do okladek zostala zmieniona"
 
 msgid "Create"
@@ -307,6 +304,15 @@ msgstr "Sciezki"
 
 msgid "Customs/Original"
 msgstr ""
+
+msgid "DOL Path"
+msgstr "Sciezka plikow .DOL"
+
+msgid "DOL path change"
+msgstr "Zmien sciezke plikow .DOL"
+
+msgid "DOL path changed"
+msgstr "Zmieniono sciezke plikow .DOL"
 
 msgid "Dec"
 msgstr "Grudzien"
@@ -326,16 +332,16 @@ msgstr "Usun"
 msgid "Delete ?"
 msgstr "Usunac ?"
 
-msgid "Delete Boxart"
+msgid "Delete Cheat GCT"
+msgstr "Usun plik z kodami GCT"
+
+msgid "Delete Cheat TXT"
+msgstr "Usun plik z kodami TXT"
+
+msgid "Delete Cover Artwork"
 msgstr "Usun obrazki box"
 
-msgid "Delete Cheat GCT"
-msgstr ""
-
-msgid "Delete CheatTxt"
-msgstr "Usun plik z kodami"
-
-msgid "Delete Discart"
+msgid "Delete Disc Artwork"
 msgstr "Usun obrazki plyt"
 
 msgid "Design:"
@@ -344,22 +350,22 @@ msgstr ""
 msgid "Developed by"
 msgstr ""
 
+msgid "Disc Artwork Download"
+msgstr "Pobierz obrazki"
+
+msgid "Disc Artwork Path"
+msgstr "Sciezka do obrazkow plyt"
+
 msgid "Disc Default"
 msgstr "Domyslny dysk"
 
 msgid "Disc Images"
 msgstr "Obrazki plyt"
 
-msgid "Discimage Path"
-msgstr "Sciezka do obrazkow plyt"
-
-msgid "Discimages Download"
-msgstr "Pobierz obrazki"
-
-msgid "Discpath Changed"
+msgid "Disc Path Changed"
 msgstr "Sciezka do dysku zmieniona"
 
-msgid "Discpath change"
+msgid "Disc Path change"
 msgstr "Sciezka do plyt"
 
 msgid "DiskFlip"
@@ -392,20 +398,11 @@ msgstr "Sformatowac:"
 msgid "Do you want to retry for 30 secs?"
 msgstr "Powtorzyc za 30 sec?"
 
-msgid "Do you want to use the alt dol that is known to be correct?"
+msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "Uzyc alternatywnego pliku DOL?"
 
 msgid "Do you wish to update/download all language files?"
 msgstr "Zaktualizowac wszystkie pliki jezykowe?"
-
-msgid "Dol Path"
-msgstr "Sciezka plikow .DOL"
-
-msgid "Dolpath Changed"
-msgstr "Zmieniono sciezke plikow .DOL"
-
-msgid "Dolpath change"
-msgstr "Zmien sciezke plikow .DOL"
 
 msgid "Done!"
 msgstr "Zakonczono!"
@@ -499,6 +496,12 @@ msgstr "francuski"
 
 msgid "Full Shutdown"
 msgstr "Pelne zamkniecie"
+
+msgid "GCT Cheatcodes Path"
+msgstr "Sciezka kodow GCT"
+
+msgid "GCT Cheatcodes Path changed"
+msgstr "Sciezka kodow GCT zmienona"
 
 msgid "GCT File created"
 msgstr "Utworzono plik GCT"
@@ -662,8 +665,8 @@ msgstr ""
 msgid "Load file from: %s ?"
 msgstr "Zaladowac plik z: %s ?"
 
-msgid "Load this dol as alternate dol?"
-msgstr "Zaladowac ten dol jako alternatywnt?"
+msgid "Load this DOL as alternate DOL?"
+msgstr "Zaladowac ten DOL jako alternatywnt?"
 
 msgid "Loading standard language."
 msgstr "ladowanie standardowego jezyka."
@@ -689,6 +692,9 @@ msgstr "Brakuje plikow"
 msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr "Prawdopodobnie rozdzielczosc nie jest podzielna przez 4"
 
+msgid "Mount DVD drive"
+msgstr ""
+
 msgid "Music Volume"
 msgstr "Poziom glosnosci"
 
@@ -709,6 +715,9 @@ msgstr "Nie znaleziono plikow .dol ani .elf"
 
 msgid "No Cheatfile found"
 msgstr "Nie znaleziono plikow z kodami"
+
+msgid "No DOL file found on disc."
+msgstr "Brak plikow DOL na dysku"
 
 msgid "No Favorites"
 msgstr "Brak ulubionych"
@@ -731,9 +740,6 @@ msgstr ""
 msgid "No data could be read."
 msgstr "Blad odczytu"
 
-msgid "No dol file found on disc."
-msgstr "Brak plikow dol na dysku"
-
 msgid "No file missing!"
 msgstr "Brak plikow do pobrania"
 
@@ -749,11 +755,11 @@ msgstr "Standardowe okladki"
 msgid "Not Found"
 msgstr "Nie znaleziono"
 
+msgid "Not a DOL/ELF file."
+msgstr "To nie jest plik DOL/ELF"
+
 msgid "Not a Wii Disc"
 msgstr "To nie jest plyta Wii"
-
-msgid "Not a dol/elf file."
-msgstr "To nie jest plik dol/elf"
 
 msgid "Not enough free memory"
 msgstr "Brak wystarczajacej wolnej pamieci"
@@ -774,7 +780,7 @@ msgid "OFF"
 msgstr "Wylacz"
 
 msgid "OK"
-msgstr "OK"
+msgstr ""
 
 msgid "ON"
 msgstr "Wlacz"
@@ -784,9 +790,6 @@ msgstr "Pazdziernik"
 
 msgid "Official Site"
 msgstr "Strona oficjalna"
-
-msgid "Ok"
-msgstr ""
 
 msgid "Only Customs"
 msgstr "Tylko nieoryginalne"
@@ -971,11 +974,11 @@ msgstr "Domyslne ustawienia systemowe"
 msgid "TChinese"
 msgstr "chinski"
 
-msgid "TXTCheatcodes Path"
-msgstr "Sciezka kodow txt"
+msgid "TXT Cheatcodes Path"
+msgstr "Sciezka kodow TXT"
 
-msgid "TXTCheatcodes Path changed"
-msgstr "Sciezka kodow txt zmienona"
+msgid "TXT Cheatcodes Path changed"
+msgstr "Sciezka kodow TXT zmienona"
 
 msgid "The file is not a .wad"
 msgstr "To nie plik .wad"
@@ -987,13 +990,13 @@ msgstr "Zainstalowano plik wad, ale nie mozna go usunac z karty SD"
 msgid "The wad installation failed with error %ld"
 msgstr "Instalacja wad zakonczona bledek %ld"
 
-msgid "ThemePath"
+msgid "Theme Path"
 msgstr "Sciezka skorek"
 
-msgid "Themepath Changed"
+msgid "Theme Path Changed"
 msgstr "Zmieniono sciezke skorek"
 
-msgid "Themepath change"
+msgid "Theme Path change"
 msgstr "Zmien sciezke skorek"
 
 msgid "Time left:"
@@ -1002,8 +1005,8 @@ msgstr "Czas pozostaly"
 msgid "Title Launcher"
 msgstr ""
 
-msgid "Titles from XML"
-msgstr "Tytuly z pliku XML"
+msgid "Titles from WiiTDB"
+msgstr "Tytuly z pliku WiiTDB"
 
 msgid "Tooltips"
 msgstr "Chmurki z podpowiedziami"
@@ -1048,6 +1051,12 @@ msgstr "Zaktualizuj Dol"
 msgid "Update Files"
 msgstr "Zaktualizuj pliki"
 
+msgid "Update Path"
+msgstr "Sciezka aktualizacji"
+
+msgid "Update Path changed."
+msgstr "Zmieniono Sciezke aktualizacji"
+
 msgid "Update all Language Files"
 msgstr "Zaktualizuj wszystkie pliki jezykowe"
 
@@ -1056,12 +1065,6 @@ msgstr "Nie udalo sie zaktualizowac"
 
 msgid "Update to"
 msgstr "Aktualizuj do"
-
-msgid "Updatepath"
-msgstr "Sciezka aktualizacji"
-
-msgid "Updatepath changed."
-msgstr "Zmieniono Sciezke aktualizacji"
 
 msgid "Updating"
 msgstr "Aktualizowanie"
@@ -1074,6 +1077,9 @@ msgstr "Aktualizacja plikow jezykowych:"
 
 msgid "Updating WiiTDB.zip"
 msgstr "Aktualizacja WiiTDB.zip"
+
+msgid "Uploaded ZIP file installed to homebrew directory."
+msgstr ""
 
 msgid "VIDTV Patch"
 msgstr ""
@@ -1109,20 +1115,20 @@ msgstr "Opcje Wii"
 msgid "WiiTDB Files"
 msgstr "WiiTDB"
 
+msgid "WiiTDB Path"
+msgstr "Sciezka WiiTDBPath"
+
+msgid "WiiTDB Path change"
+msgstr "Zmiana sciezki WiiTDBPath"
+
+msgid "WiiTDB Path changed."
+msgstr "Sciezka WiiTDBPath zmieniona"
+
 msgid "Wiilight"
 msgstr "Dioda Wii"
 
 msgid "Wrong Password"
 msgstr "Bledne haslo"
-
-msgid "XMLPath"
-msgstr "Sciezka XMLPath"
-
-msgid "XMLPath change"
-msgstr "Zmiana sciezki XMLPath"
-
-msgid "XMLPath changed."
-msgstr "Sciezka XMLPath zmieniona"
 
 msgid "Yes"
 msgstr "Tak"
@@ -1199,12 +1205,3 @@ msgstr "z"
 
 msgid "seconds left"
 msgstr "sekund pozostalo"
-
-#~ msgid "Cover Path"
-#~ msgstr "Sciezka okladek"
-
-#~ msgid "Don't bother the USB Loader GX Team about errors in this file."
-#~ msgstr "Nie informuj team USB Loader GX o bledach w tym pliku."
-
-#~ msgid "No partitions found"
-#~ msgstr "Nie wykryto zadnej partycji"

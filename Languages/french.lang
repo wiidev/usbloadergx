@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-# French V9.9 r753
-# don't delete this line (é).
+# French V10.0 r766
+# don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-27 20:15+0200\n"
-"PO-Revision-Date: 2009-07-18 15:18+0200\n"
+"POT-Creation-Date: 2009-10-01 05:48+0200\n"
+"PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Kin8\n"
 "Language-Team: Badablek, Amour, ikya, dj_skual & Kin8\n"
 "MIME-Version: 1.0\n"
@@ -196,12 +196,6 @@ msgstr "Impossible de supprimer:"
 msgid "Cancel"
 msgstr "Annuler"
 
-msgid "Cheatcodes Path"
-msgstr "Dossier Codes Triche"
-
-msgid "Cheatcodes Path changed"
-msgstr "Dossier codes de triche modifié"
-
 msgid "Cheatfile is blank"
 msgstr "Fichier de triche vide"
 
@@ -232,6 +226,9 @@ msgstr "Développé par: %s"
 
 msgid "Coding:"
 msgstr "Développement:"
+
+msgid "Compressed:"
+msgstr "Compressé:"
 
 msgid "Confirm"
 msgstr "Confirmer"
@@ -290,10 +287,10 @@ msgstr "Accès USB impossible."
 msgid "Cover Download"
 msgstr "Téléchargement Jaquettes"
 
-msgid "Coverpath Change"
-msgstr "Dossier des Jaquettes"
+msgid "Cover Path Change"
+msgstr "Dossier des jaquettes"
 
-msgid "Coverpath Changed"
+msgid "Cover Path Changed"
 msgstr "Dossier des jaquettes modifié"
 
 msgid "Create"
@@ -307,6 +304,15 @@ msgstr "Personnalisation Dossiers"
 
 msgid "Customs/Original"
 msgstr "Persos/Originaux"
+
+msgid "DOL Path"
+msgstr "Dossier DOL Alternatif"
+
+msgid "DOL path change"
+msgstr "Dossier du DOL alternatif"
+
+msgid "DOL path changed"
+msgstr "Dossier DOL alternatif modifié"
 
 msgid "Dec"
 msgstr "Déc"
@@ -326,16 +332,16 @@ msgstr "Supprimer"
 msgid "Delete ?"
 msgstr "Supprimer ?"
 
-msgid "Delete Boxart"
-msgstr "Supprimer la Jaquette"
-
 msgid "Delete Cheat GCT"
 msgstr "Supprimer GCT de Triche"
 
-msgid "Delete CheatTxt"
+msgid "Delete Cheat TXT"
 msgstr "Supprimer TXT de Triche"
 
-msgid "Delete Discart"
+msgid "Delete Cover Artwork"
+msgstr "Supprimer la Jaquette"
+
+msgid "Delete Disc Artwork"
 msgstr "Supprimer le Label DVD"
 
 msgid "Design:"
@@ -344,22 +350,22 @@ msgstr "Graphisme:"
 msgid "Developed by"
 msgstr "Développé par"
 
+msgid "Disc Artwork Download"
+msgstr "Téléch. Labels DVD"
+
+msgid "Disc Artwork Path"
+msgstr "Dossier Labels DVD"
+
 msgid "Disc Default"
 msgstr "Disque par défaut"
 
 msgid "Disc Images"
 msgstr "Labels DVD"
 
-msgid "Discimage Path"
-msgstr "Dossier Labels DVD"
+msgid "Disc Path Changed"
+msgstr "Dossier des labels DVD modifié"
 
-msgid "Discimages Download"
-msgstr "Téléch. Labels DVD"
-
-msgid "Discpath Changed"
-msgstr "Dossier des labels DVD changé"
-
-msgid "Discpath change"
+msgid "Disc Path change"
 msgstr "Dossier des labels DVD"
 
 msgid "DiskFlip"
@@ -392,20 +398,11 @@ msgstr "Voulez-vous formater ?"
 msgid "Do you want to retry for 30 secs?"
 msgstr "Réessayer pendant 30 sec. ?"
 
-msgid "Do you want to use the alt dol that is known to be correct?"
-msgstr "Voulez-vous utiliser le DOL Alternatif actuellement connu comme correct ? "
+msgid "Do you want to use the alternate DOL that is known to be correct?"
+msgstr "Voulez-vous utiliser le DOL Alternatif actuellement connu comme correct ?"
 
 msgid "Do you wish to update/download all language files?"
 msgstr "Voulez-vous actualiser/télécharger tous les fichiers langue ?"
-
-msgid "Dol Path"
-msgstr "Dossier DOL Alternatif"
-
-msgid "Dolpath Changed"
-msgstr "Dossier DOL alternatif modifié"
-
-msgid "Dolpath change"
-msgstr "Dossier du DOL alternatif"
 
 msgid "Done!"
 msgstr "Terminé!"
@@ -499,6 +496,12 @@ msgstr "Français"
 
 msgid "Full Shutdown"
 msgstr "Éteindre"
+
+msgid "GCT Cheatcodes Path"
+msgstr "Dossier GCT de Triche"
+
+msgid "GCT Cheatcodes Path changed"
+msgstr "Dossier GCT de triche modifié"
 
 msgid "GCT File created"
 msgstr "Fichier GCT créé"
@@ -662,8 +665,8 @@ msgstr "Charger sur SD/USB"
 msgid "Load file from: %s ?"
 msgstr "Charger le fichier de: %s ?"
 
-msgid "Load this dol as alternate dol?"
-msgstr "Charger ce fichier comme DOL alternatif ?"
+msgid "Load this DOL as alternate DOL?"
+msgstr "Charger comme DOL alternatif ?"
 
 msgid "Loading standard language."
 msgstr "Chargement langue par défaut."
@@ -689,6 +692,9 @@ msgstr "Fichier(s) manquant(s)"
 msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr "Il est fort probable que les dimensions ne soient pas des multiples de 4."
 
+msgid "Mount DVD drive"
+msgstr "Charger Lecteur DVD"
+
 msgid "Music Volume"
 msgstr "Volume Musique"
 
@@ -709,6 +715,9 @@ msgstr "Aucun fichier .dol ou .elf trouvé."
 
 msgid "No Cheatfile found"
 msgstr "Aucun fichier de triche trouvé"
+
+msgid "No DOL file found on disc."
+msgstr "Aucun DOL trouvé dans ce jeu."
 
 msgid "No Favorites"
 msgstr "Pas de favoris"
@@ -731,9 +740,6 @@ msgstr "Aucune selection de triche"
 msgid "No data could be read."
 msgstr "Lecture des données impossible."
 
-msgid "No dol file found on disc."
-msgstr "Aucun DOL trouvé dans ce jeu."
-
 msgid "No file missing!"
 msgstr "Aucun fichier manquant !"
 
@@ -749,11 +755,11 @@ msgstr "Normales"
 msgid "Not Found"
 msgstr "Pas trouvé"
 
+msgid "Not a DOL/ELF file."
+msgstr "Ce n'est pas un fichier DOL/ELF"
+
 msgid "Not a Wii Disc"
 msgstr "Ce n'est pas un jeu Wii"
-
-msgid "Not a dol/elf file."
-msgstr "Ce n'est pas un fichier DOL/ELF"
 
 msgid "Not enough free memory"
 msgstr "Mémoire libre insuffisante"
@@ -784,9 +790,6 @@ msgstr ""
 
 msgid "Official Site"
 msgstr "Site Officiel"
-
-msgid "Ok"
-msgstr "OK"
 
 msgid "Only Customs"
 msgstr "Personnalisés"
@@ -971,11 +974,11 @@ msgstr "Système par défaut"
 msgid "TChinese"
 msgstr "Chinois traditionnel"
 
-msgid "TXTCheatcodes Path"
-msgstr "Dossier TXTCodes Triche"
+msgid "TXT Cheatcodes Path"
+msgstr "Dossier TXT de Triche"
 
-msgid "TXTCheatcodes Path changed"
-msgstr "Dossier TXTCodes Triche modifié"
+msgid "TXT Cheatcodes Path changed"
+msgstr "Dossier TXT de Triche modifié"
 
 msgid "The file is not a .wad"
 msgstr "Le fichier n'est pas un .wad"
@@ -987,13 +990,13 @@ msgstr "Le Wad a été installé. Mais ne peut être supprimé de la carte SD."
 msgid "The wad installation failed with error %ld"
 msgstr "L'installation WAD a échoué avec erreur %ld"
 
-msgid "ThemePath"
+msgid "Theme Path"
 msgstr "Dossier Thème"
 
-msgid "Themepath Changed"
+msgid "Theme Path Changed"
 msgstr "Dossier du thème modifié"
 
-msgid "Themepath change"
+msgid "Theme Path change"
 msgstr "Dossier du thème"
 
 msgid "Time left:"
@@ -1002,8 +1005,8 @@ msgstr "Fini dans:"
 msgid "Title Launcher"
 msgstr "Menu Chaînes"
 
-msgid "Titles from XML"
-msgstr "Titres de XML"
+msgid "Titles from WiiTDB"
+msgstr "Titres de WiiTDB"
 
 msgid "Tooltips"
 msgstr "Info-bulles"
@@ -1048,6 +1051,12 @@ msgstr "DOL seul"
 msgid "Update Files"
 msgstr "MàJ Fichiers"
 
+msgid "Update Path"
+msgstr "Dossier Mise à Jour"
+
+msgid "Update Path changed."
+msgstr "Dossier de Mise à Jour modifié."
+
 msgid "Update all Language Files"
 msgstr "Mise à Jour tous fichiers Langue"
 
@@ -1056,12 +1065,6 @@ msgstr "Mise à Jour échouée"
 
 msgid "Update to"
 msgstr "vers la"
-
-msgid "Updatepath"
-msgstr "Dossier Mise à Jour"
-
-msgid "Updatepath changed."
-msgstr "Dossier de Mise à Jour changé."
 
 msgid "Updating"
 msgstr "Mise à Jour"
@@ -1074,6 +1077,9 @@ msgstr "Mise à Jour Fichiers Langue:"
 
 msgid "Updating WiiTDB.zip"
 msgstr "Mise à Jour WiiTDB.zip"
+
+msgid "Uploaded ZIP file installed to homebrew directory."
+msgstr "Fichier ZIP envoyé et installé dans le répertoire homebrew."
 
 msgid "VIDTV Patch"
 msgstr "Patch VIDTV"
@@ -1109,20 +1115,20 @@ msgstr "Paramètres Wii"
 msgid "WiiTDB Files"
 msgstr "WiiTDB"
 
+msgid "WiiTDB Path"
+msgstr "Dossier WiiTDB"
+
+msgid "WiiTDB Path change"
+msgstr "Dossier de WiiTDB"
+
+msgid "WiiTDB Path changed."
+msgstr "Dossier de WiiTDB modifié"
+
 msgid "Wiilight"
 msgstr "Illumination Wii"
 
 msgid "Wrong Password"
 msgstr "Mot de passe incorrect"
-
-msgid "XMLPath"
-msgstr "Dossier XML"
-
-msgid "XMLPath change"
-msgstr "Dossier de XML"
-
-msgid "XMLPath changed."
-msgstr "Dossier de XML modifié"
 
 msgid "Yes"
 msgstr "Oui"
@@ -1203,12 +1209,6 @@ msgstr "secondes restantes"
 #~ msgid "You need to start this game one time to create a save file, then exit and start it again."
 #~ msgstr "Vous devez lancer ce jeu une fois pour créer une sauvegarde, puis éteindre et le lancer à nouveau."
 
-#~ msgid "Don't bother the USB Loader GX Team about errors in this file."
-#~ msgstr "La Team USB Loader GX ne gère pas les erreurs de ce fichier."
-
-#~ msgid "Update WiiTDB"
-#~ msgstr "MàJ WiiTDB"
-
 #~ msgid "ERROR: USB device could not be loaded!"
 #~ msgstr "ERREUR: Impossible de charger le périph. USB!"
 
@@ -1220,12 +1220,3 @@ msgstr "secondes restantes"
 
 #~ msgid "Waiting for your slow USB Device: %i secs..."
 #~ msgstr "Attente de votre périphérique USB: %i secs..."
-
-#~ msgid "No partitions found"
-#~ msgstr "Aucune partition trouvée"
-
-#~ msgid "Restart"
-#~ msgstr "Redémarrer"
-
-#~ msgid "Saving"
-#~ msgstr "Sauvegarde"

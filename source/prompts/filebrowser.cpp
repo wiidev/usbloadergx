@@ -258,7 +258,7 @@ int BrowseDevice(char * var, int force) {
         curDivice = SD;
         goto main;
     } else {
-        WindowPrompt(tr("Error"),0,tr("Ok"));
+        WindowPrompt(tr("Error"),0,tr("OK"));
         return -1;
     }
 
@@ -319,7 +319,7 @@ main:
     usbBtn.SetTrigger(&trigA);
     usbBtn.SetEffectGrow();
 
-    GuiText okBtnTxt(tr("Ok"), 22, THEME.prompttext);
+    GuiText okBtnTxt(tr("OK"), 22, THEME.prompttext);
     GuiImage okBtnImg(&btnOutline);
     if (Settings.wsprompt == yes) {
         okBtnTxt.SetWidescreen(CFG.widescreen);

@@ -1183,7 +1183,7 @@ int MenuSettings() {
                     options2.SetName(5, "%s", tr("Update Path"));
                     options2.SetName(6, "%s", tr("GCT Cheatcodes Path"));
                     options2.SetName(7, "%s", tr("TXT Cheatcodes Path"));
-                    options2.SetName(8, "%s", tr("Dol Path"));
+                    options2.SetName(8, "%s", tr("DOL Path"));
                     options2.SetName(9, "%s", tr("Homebrew Apps Path"));
                     for (int i = 0; i <= MAXOPTIONS; i++) options2.SetValue(i, NULL);
                     w.Append(&optionBrowser2);
@@ -1420,7 +1420,7 @@ int MenuSettings() {
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
                                     strlcpy(entered, Settings.update_path, sizeof(entered));
-                                    titleTxt.SetText(tr("Updatepath"));
+                                    titleTxt.SetText(tr("Update Path"));
                                     int result = BrowseDevice(entered);
                                     titleTxt.SetText(tr("Custom Paths"));
                                     w.Append(&optionBrowser2);
@@ -1430,7 +1430,7 @@ int MenuSettings() {
                                         if (entered[len] !='/')
                                             strncat (entered, "/", 1);
                                         strlcpy(Settings.update_path, entered, sizeof(Settings.update_path));
-                                        WindowPrompt(tr("Updatepath changed."),0,tr("OK"));
+                                        WindowPrompt(tr("Update Path changed."),0,tr("OK"));
                                     }
                                 } else
                                     WindowPrompt(0,tr("Console should be unlocked to modify it."),tr("OK"));
@@ -1483,7 +1483,7 @@ int MenuSettings() {
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
                                     strlcpy(entered, Settings.dolpath, sizeof(entered));
-                                    titleTxt.SetText(tr("Dol Path"));
+                                    titleTxt.SetText(tr("DOL Path"));
                                     int result = BrowseDevice(entered);
                                     titleTxt.SetText(tr("Custom Paths"));
                                     w.Append(&optionBrowser2);
@@ -1493,14 +1493,14 @@ int MenuSettings() {
                                         if (entered[len] !='/')
                                             strncat (entered, "/", 1);
                                         strlcpy(Settings.dolpath, entered, sizeof(Settings.dolpath));
-                                        WindowPrompt(tr("Dolpath Changed"),0,tr("OK"));
+                                        WindowPrompt(tr("DOL path changed"),0,tr("OK"));
 //                                        if(!isSdInserted()) {
                                         if (!isInserted(bootDevice)) {
                                             WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
                                         }
                                     }
                                 } else {
-                                    WindowPrompt(tr("Dolpath change"),tr("Console should be unlocked to modify it."),tr("OK"));
+                                    WindowPrompt(tr("DOL path change"),tr("Console should be unlocked to modify it."),tr("OK"));
                                 }
                                 break;
                             case 9:
@@ -2221,7 +2221,7 @@ int GameSettings(struct discHdr * header) {
 								int autodol = autoSelectDol(filename, false);
 								//if we do know that offset ask if they want to use it
 								if (autodol>0) {
-									dolchoice = WindowPrompt(0,tr("Do you want to use the alt dol that is known to be correct?"),tr("Yes"),tr("Pick from a list"),tr("Cancel"));
+									dolchoice = WindowPrompt(0,tr("Do you want to use the alternate DOL that is known to be correct?"),tr("Yes"),tr("Pick from a list"),tr("Cancel"));
 									if (dolchoice==0) {
 										alternatedol = 0;
 									} else if (dolchoice==1) {
@@ -2239,7 +2239,7 @@ int GameSettings(struct discHdr * header) {
 										alternatedoloffset = res;
 										char tmp[170];
 										snprintf(tmp,sizeof(tmp),"%s %s - %i",tr("It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team.") ,filename,alternatedoloffset);
-										WindowPrompt(0,tmp,tr("Ok"));
+										WindowPrompt(0,tmp,tr("OK"));
 									}
 								}
 							}

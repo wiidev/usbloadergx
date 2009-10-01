@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
 # thai.lang - r746
-# don't delete this line (é).
+# don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-27 22:13+0200\n"
-"PO-Revision-Date: 2009-09-22 08:30+0700\n"
+"POT-Creation-Date: 2009-10-01 05:48+0200\n"
+"PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Nitro_subzero \n"
 "Language-Team: Nitro_subzero\n"
 "MIME-Version: 1.0\n"
@@ -47,7 +47,7 @@ msgid "20 min"
 msgstr "20 นาที"
 
 msgid "2D Cover Path"
-msgstr ""
+msgstr "ที่เก็บ ปก 2D"
 
 msgid "3 (Mature 16+)"
 msgstr "3 (เต็มวัย 16+)"
@@ -59,7 +59,7 @@ msgid "30 min"
 msgstr "30 นาที"
 
 msgid "3D Cover Path"
-msgstr ""
+msgstr "ที่เก็บ ปก 3D"
 
 msgid "3D Covers"
 msgstr "หน้าปก 3D"
@@ -196,12 +196,6 @@ msgstr "ไม่สามารถลบได้:"
 msgid "Cancel"
 msgstr "ยกเลิก"
 
-msgid "Cheatcodes Path"
-msgstr "ที่เก็บ สูตรโกง"
-
-msgid "Cheatcodes Path changed"
-msgstr "ที่เก็บ สูตรโกง ถูกเปลี่ยนแปลง"
-
 msgid "Cheatfile is blank"
 msgstr "ไฟล์สูตรโกง ว่างเปล่า"
 
@@ -232,6 +226,9 @@ msgstr "โค๊ดโดย: %s"
 
 msgid "Coding:"
 msgstr "โค๊ด:"
+
+msgid "Compressed:"
+msgstr ""
 
 msgid "Confirm"
 msgstr "ยืนยัน"
@@ -290,10 +287,10 @@ msgstr "ไม่สามารถตั้งค่า USB ได้"
 msgid "Cover Download"
 msgstr "ดาวน์โหลดปก"
 
-msgid "Coverpath Change"
+msgid "Cover Path Change"
 msgstr "ที่เก็บ ปก ถูกเปลี่ยนแปลง"
 
-msgid "Coverpath Changed"
+msgid "Cover Path Changed"
 msgstr "ที่เก็บ ปก ถูกเปลี่ยนแปลง"
 
 msgid "Create"
@@ -307,6 +304,15 @@ msgstr "กำหนด ที่เก็บ"
 
 msgid "Customs/Original"
 msgstr "กำหนดเอง/ดั้งเดิม"
+
+msgid "DOL Path"
+msgstr "ที่เก็บ DOL"
+
+msgid "DOL path change"
+msgstr "ที่เก็บ DOL ถูกเปลี่ยนแปลง"
+
+msgid "DOL path changed"
+msgstr "ที่เก็บ DOL ถูกเปลี่ยนแปลง"
 
 msgid "Dec"
 msgstr "ธค."
@@ -326,16 +332,16 @@ msgstr "ลบ"
 msgid "Delete ?"
 msgstr "ลบ ?"
 
-msgid "Delete Boxart"
-msgstr "ลบ ภาพกล่อง"
-
 msgid "Delete Cheat GCT"
 msgstr "ลบไฟล์โกงเกมส์"
 
-msgid "Delete CheatTxt"
-msgstr "ลบ CheatTxt"
+msgid "Delete Cheat TXT"
+msgstr "ลบ Cheat TXT"
 
-msgid "Delete Discart"
+msgid "Delete Cover Artwork"
+msgstr "ลบ ภาพกล่อง"
+
+msgid "Delete Disc Artwork"
 msgstr "ลบ ภาพแผ่น"
 
 msgid "Design:"
@@ -344,22 +350,22 @@ msgstr "ออกแบบ:"
 msgid "Developed by"
 msgstr "พัฒนาโดย "
 
+msgid "Disc Artwork Download"
+msgstr "ดาวน์โหลดภาพแผ่น"
+
+msgid "Disc Artwork Path"
+msgstr "ที่เก็บ ภาพแผ่น"
+
 msgid "Disc Default"
 msgstr "ค่าตั้งต้นแผ่น"
 
 msgid "Disc Images"
 msgstr "ภาพแผ่น"
 
-msgid "Discimage Path"
-msgstr "ที่เก็บ ภาพแผ่น"
-
-msgid "Discimages Download"
-msgstr "ดาวน์โหลดภาพแผ่น"
-
-msgid "Discpath Changed"
+msgid "Disc Path Changed"
 msgstr "ที่เก็บ ภาพแผ่น ถูกเปลี่ยนแปลง"
 
-msgid "Discpath change"
+msgid "Disc Path change"
 msgstr "ที่เก็บ ภาพแผ่น ถูกเปลี่ยนแปลง"
 
 msgid "DiskFlip"
@@ -392,20 +398,11 @@ msgstr "ต้องการฟอร์แมต:"
 msgid "Do you want to retry for 30 secs?"
 msgstr "ต้องการลองใหม่ทุก 30 วินาที?"
 
-msgid "Do you want to use the alt dol that is known to be correct?"
-msgstr "ต้องการจะใช้ alt dol เฉพาะที่รู้ว่าถูกต้อง?"
+msgid "Do you want to use the alternate DOL that is known to be correct?"
+msgstr "ต้องการจะใช้ alt DOL เฉพาะที่รู้ว่าถูกต้อง?"
 
 msgid "Do you wish to update/download all language files?"
 msgstr "ต้องการอัพเดทหรือดาวน์โหลด ไฟล์ภาษา ทั้งหมด?"
-
-msgid "Dol Path"
-msgstr "ที่เก็บ DOL"
-
-msgid "Dolpath Changed"
-msgstr "ที่เก็บ DOL ถูกเปลี่ยนแปลง"
-
-msgid "Dolpath change"
-msgstr "ที่เก็บ DOL ถูกเปลี่ยนแปลง"
 
 msgid "Done!"
 msgstr "เสร็จ!"
@@ -499,6 +496,12 @@ msgstr "ฝรั่งเศส"
 
 msgid "Full Shutdown"
 msgstr "ปิดอย่างสมบรูณ์"
+
+msgid "GCT Cheatcodes Path"
+msgstr "ที่เก็บ สูตรโกง"
+
+msgid "GCT Cheatcodes Path changed"
+msgstr "ที่เก็บ สูตรโกง ถูกเปลี่ยนแปลง"
 
 msgid "GCT File created"
 msgstr "ไฟล์ GCT ถูกสร้าง"
@@ -662,8 +665,8 @@ msgstr "โหลดจาก SD/USB"
 msgid "Load file from: %s ?"
 msgstr "โหลดไฟล์จาก: %s ?"
 
-msgid "Load this dol as alternate dol?"
-msgstr "โหลด dol นี้เป็น alternate dol?"
+msgid "Load this DOL as alternate DOL?"
+msgstr "โหลด DOL นี้เป็น alternate DOL?"
 
 msgid "Loading standard language."
 msgstr "โหลดภาษามาตราฐาน."
@@ -689,6 +692,9 @@ msgstr "ไฟล์ที่หาไม่พบ"
 msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr "ดูเหมือนว่าขนาดจะหารด้วย 4 ไม่ลงตัว"
 
+msgid "Mount DVD drive"
+msgstr ""
+
 msgid "Music Volume"
 msgstr "ความดังเสียงเพลง"
 
@@ -709,6 +715,9 @@ msgstr "ไม่พบไฟล์ .dol หรือ .elf"
 
 msgid "No Cheatfile found"
 msgstr "ไม่พบไฟล์โกงเกมส์"
+
+msgid "No DOL file found on disc."
+msgstr "ไม่มีไฟล์ DOL ในแผ่น"
 
 msgid "No Favorites"
 msgstr "ไม่พบเกมส์ที่ชื่นชอบ"
@@ -731,9 +740,6 @@ msgstr "ไม่ได้เลือกการโกงเกมส์ไว
 msgid "No data could be read."
 msgstr "ไม่มีข้อมูลที่อ่านไม่ได้"
 
-msgid "No dol file found on disc."
-msgstr "ไม่มีไฟล์ dol ในแผ่น"
-
 msgid "No file missing!"
 msgstr "ไม่มีไฟล์ที่หายไป"
 
@@ -749,11 +755,11 @@ msgstr "หน้าปกแบบปกติ"
 msgid "Not Found"
 msgstr "ไม่พบ"
 
+msgid "Not a DOL/ELF file."
+msgstr "ไม่ใช่ไฟล์ DOL หรือ ELF"
+
 msgid "Not a Wii Disc"
 msgstr "ไม่ใช่แผ่นเกมส์ Wii"
-
-msgid "Not a dol/elf file."
-msgstr "ไม่ใช่ไฟล์ Dol หรือ Elf"
 
 msgid "Not enough free memory"
 msgstr "มีหน่วยความจำเหลือไม่พอ"
@@ -784,9 +790,6 @@ msgstr "ตค."
 
 msgid "Official Site"
 msgstr "เวบไซต์อย่างเป็นทางการ"
-
-msgid "Ok"
-msgstr "ตกลง"
 
 msgid "Only Customs"
 msgstr "เฉพาะที่ดัดแปลง"
@@ -971,10 +974,10 @@ msgstr "ค่าเริ่มต้นของระบบ"
 msgid "TChinese"
 msgstr "จีนโบราณ"
 
-msgid "TXTCheatcodes Path"
+msgid "TXT Cheatcodes Path"
 msgstr "ที่เก็บ TXTCheatcodes"
 
-msgid "TXTCheatcodes Path changed"
+msgid "TXT Cheatcodes Path changed"
 msgstr "ที่เก็บ TXTCheatcodes ถูกเปลี่ยนแปลง"
 
 msgid "The file is not a .wad"
@@ -987,13 +990,13 @@ msgstr "ไฟล์ Wad ถูกติดตั้งแล้ว แต่ไ
 msgid "The wad installation failed with error %ld"
 msgstr "การติดตั้งไฟล์ Wad ล้มเหลวด้วยข้อผิดพลาด %ld"
 
-msgid "ThemePath"
+msgid "Theme Path"
 msgstr "ที่อยู่ Theme"
 
-msgid "Themepath Changed"
+msgid "Theme Path Changed"
 msgstr "ที่อยู่ Theme ถูกเปลี่ยนแปลง"
 
-msgid "Themepath change"
+msgid "Theme Path change"
 msgstr "ที่อยู่ Theme ถูกเปลี่ยนแปลง"
 
 msgid "Time left:"
@@ -1002,8 +1005,8 @@ msgstr "เหลือเวลาอีก:"
 msgid "Title Launcher"
 msgstr "Title Launcher"
 
-msgid "Titles from XML"
-msgstr "Title จาก XML"
+msgid "Titles from WiiTDB"
+msgstr "Title จาก WiiTDB"
 
 msgid "Tooltips"
 msgstr "คำแนะนำ"
@@ -1048,6 +1051,12 @@ msgstr "อัพเดท DOL"
 msgid "Update Files"
 msgstr "อัพเดทไฟล์"
 
+msgid "Update Path"
+msgstr "ที่อยู่ Update"
+
+msgid "Update Path changed."
+msgstr ""
+
 msgid "Update all Language Files"
 msgstr "อัพเดทภาษาทั้งหมด"
 
@@ -1056,12 +1065,6 @@ msgstr "อัพเดทล้มเหลว"
 
 msgid "Update to"
 msgstr "อัพเดทเป็น"
-
-msgid "Updatepath"
-msgstr "ที่อยู่ Update"
-
-msgid "Updatepath changed."
-msgstr "ที่อยู่ Update ถูกเปลี่ยนแปลง"
 
 msgid "Updating"
 msgstr "กำลังอัพเดท"
@@ -1074,6 +1077,9 @@ msgstr "กำลังอัพเดทไฟล์ภาษา:"
 
 msgid "Updating WiiTDB.zip"
 msgstr "กำลังอัพเดทไฟล์ WiiTDB.zip"
+
+msgid "Uploaded ZIP file installed to homebrew directory."
+msgstr ""
 
 msgid "VIDTV Patch"
 msgstr "ปรับแก้ VIDTV"
@@ -1109,20 +1115,20 @@ msgstr "การปรับแต่ง Wii"
 msgid "WiiTDB Files"
 msgstr "ไฟล์ WiiTDB"
 
+msgid "WiiTDB Path"
+msgstr "ที่อยู่ WiiTDB"
+
+msgid "WiiTDB Path change"
+msgstr "เปลี่ยนที่อยู่ WiiTDB"
+
+msgid "WiiTDB Path changed."
+msgstr "ที่อยู่ WiiTDB ถูกเปลี่ยนแปลง"
+
 msgid "Wiilight"
 msgstr "ความสว่างของ Wii"
 
 msgid "Wrong Password"
 msgstr "รหัสผ่านผิดพลาด"
-
-msgid "XMLPath"
-msgstr "ที่อยู่ XML"
-
-msgid "XMLPath change"
-msgstr "เปลี่ยนที่อยู่ XML"
-
-msgid "XMLPath changed."
-msgstr "ที่อยู่ XML ถูกเปลี่ยนแปลง"
 
 msgid "Yes"
 msgstr "ใช่"
@@ -1171,13 +1177,13 @@ msgid "for"
 msgstr "สำหรับ"
 
 msgid "for WiiTDB and hosting covers / disc images"
-msgstr "สำหรับ WiiTDB และ ที่เก็บออนไลน์ของภาพ ปกและแผ่น"
+msgstr ""
 
 msgid "for diverse patches"
 msgstr "แก้ diverse"
 
 msgid "for his awesome tool"
-msgstr "สำหรับเครื่องมืออันน่าทึ่งของเค้า"
+msgstr ""
 
 msgid "for hosting the update files"
 msgstr "สำหรับที่เก็บไฟล์อัพเดท"
@@ -1200,14 +1206,8 @@ msgstr "จาก"
 msgid "seconds left"
 msgstr "วินาทีที่เหลือ"
 
-#~ msgid "Cover Path"
-#~ msgstr "ที่เก็บ ปก"
-
 #~ msgid "You need to start this game one time to create a save file, then exit and start it again."
 #~ msgstr "คุณต้องเริ่มโหลดเกมส์นี้ใหม่ เพื่อสร้างไฟล์เซฟ ดังนั้นออกจากเกมส์แล้วเริ่มโหลดอีกครั้ง"
-
-#~ msgid "Don't bother the USB Loader GX Team about errors in this file."
-#~ msgstr "อย่ารบกวนผู้พัฒนา USB Loader GX ถ้ามีข้อผิดพลาดกับไฟล์นี้ "
 
 #~ msgid "ERROR: USB device could not be loaded!"
 #~ msgstr "ผิดพลาด! ไม่สามารถโหลดอุปกรณ์ USB ได้"
@@ -1220,9 +1220,3 @@ msgstr "วินาทีที่เหลือ"
 
 #~ msgid "Waiting for your slow USB Device: %i secs..."
 #~ msgstr "กำลังรออุปกรณ์ USB อันเชื่องช้าของคุณ: %i วินาที..."
-
-#~ msgid "No partitions found"
-#~ msgstr "ไม่พบพาร์ติชั่น"
-
-#~ msgid "Restart"
-#~ msgstr "รีสตาร์ท"

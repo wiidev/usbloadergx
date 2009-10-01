@@ -2961,20 +2961,20 @@ int ProgressUpdateWindow() {
         wadFile = fopen (dolpath ,"rb");
         if (wadFile==NULL) { //we can't open the file wad we just downloaded
             sprintf(nipple, tr("Unable to open the wad that was just downloaded (%s)."),dolpath);
-            WindowPrompt(tr("Error !"), nipple, tr("Ok"));
+            WindowPrompt(tr("Error !"), nipple, tr("OK"));
             failed = -1;
         } else {
             //sprintf(nipple, tr("The update wad has been saved as %s.  Now let's try to install it."),dolpath);
-            //WindowPrompt(0,nipple, tr("Ok"));
+            //WindowPrompt(0,nipple, tr("OK"));
             error = Wad_Install(wadFile);
             fclose(wadFile);
             if (error==0) {
                 diarhea = remove(dolpath);
                 if (diarhea)
-                    WindowPrompt(tr("Success"),tr("The wad file was installed.  But It could not be deleted from the SD card."),tr("Ok"));
+                    WindowPrompt(tr("Success"),tr("The wad file was installed.  But It could not be deleted from the SD card."),tr("OK"));
             } else {
                 sprintf(nipple, tr("The wad installation failed with error %ld"),error);
-                WindowPrompt(tr("Error"),nipple,tr("Ok"));
+                WindowPrompt(tr("Error"),nipple,tr("OK"));
             }
         }
 
@@ -3109,7 +3109,7 @@ int CodeDownload(const char *id) {
         if (file.size == 333 || file.size == 216 || file.size == 284) {
             strcat(codeurl, tr(" is not on the server."));
 
-            WindowPrompt(tr("Error"),codeurl,tr("Ok"));
+            WindowPrompt(tr("Error"),codeurl,tr("OK"));
             ret =-1;
             goto exit;
         }
@@ -3124,11 +3124,11 @@ int CodeDownload(const char *id) {
             ret = 1;
             strcat(txtpath, tr(" has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information."));
 
-            WindowPrompt(0,txtpath,tr("Ok"));
+            WindowPrompt(0,txtpath,tr("OK"));
         } else {
             strcat(codeurl, tr(" could not be downloaded."));
 
-            WindowPrompt(tr("Error"),codeurl,tr("Ok"));
+            WindowPrompt(tr("Error"),codeurl,tr("OK"));
             ret =-1;
         }
 

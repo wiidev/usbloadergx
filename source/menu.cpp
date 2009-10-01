@@ -845,7 +845,7 @@ int MenuDiscList() {
             snprintf(idiotBuffer, sizeof(idiotBuffer), "%s (%s). %s",tr("You have attempted to load a bad image"),
                      idiotChar,tr("Most likely it has dimensions that are not evenly divisible by 4."));
 
-            int deleteImg = WindowPrompt(0,idiotBuffer,tr("Ok"),tr("Delete"));
+            int deleteImg = WindowPrompt(0,idiotBuffer,tr("OK"),tr("Delete"));
             if (deleteImg==0) {
                 snprintf(idiotBuffer, sizeof(idiotBuffer), "%s %s.",tr("You are about to delete "), idiotChar);
                 deleteImg = WindowPrompt(tr("Confirm"),idiotBuffer,tr("Delete"),tr("Cancel"));

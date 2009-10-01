@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-#
-# don't delete this line (é).
+# swedish.lang - r709
+# don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-27 20:15+0200\n"
-"PO-Revision-Date: 2009-08-02 12:20+0200\n"
+"POT-Creation-Date: 2009-10-01 05:48+0200\n"
+"PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
 "MIME-Version: 1.0\n"
@@ -38,28 +38,28 @@ msgid "1 hour"
 msgstr "1 timme"
 
 msgid "10 min"
-msgstr "10 min"
+msgstr ""
 
 msgid "2 (Teen 12+)"
 msgstr "2 (Tonåringar 12+)"
 
 msgid "20 min"
-msgstr "20 min"
+msgstr ""
 
 msgid "2D Cover Path"
-msgstr ""
+msgstr "2D Omslagsmapp"
 
 msgid "3 (Mature 16+)"
 msgstr "3 (Mogen 16+)"
 
 msgid "3 min"
-msgstr "3 min"
+msgstr ""
 
 msgid "30 min"
-msgstr "30 min"
+msgstr ""
 
 msgid "3D Cover Path"
-msgstr ""
+msgstr "3D Omslagsmapp"
 
 msgid "3D Covers"
 msgstr "3D-Omslag"
@@ -68,7 +68,7 @@ msgid "4 (Adults Only 18+)"
 msgstr "4 (Endast Vuxna 18+)"
 
 msgid "5 min"
-msgstr "5 min"
+msgstr ""
 
 msgid ">> Deleting tickets..."
 msgstr ">> Raderar biljetter..."
@@ -119,7 +119,7 @@ msgid ">> Reading WAD data...Ok!"
 msgstr ">> Läser WAD data...Ok!"
 
 msgid "AUTO"
-msgstr "AUTO"
+msgstr ""
 
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "Alla funktioner i USB Loader GX är upplåsta."
@@ -131,7 +131,7 @@ msgid "An Error occured"
 msgstr "Ett fel har uppstått"
 
 msgid "Anti"
-msgstr "Anti"
+msgstr ""
 
 msgid "App Language"
 msgstr "Programspråk"
@@ -143,7 +143,7 @@ msgid "Are you sure?"
 msgstr "Är du säker?"
 
 msgid "Aug"
-msgstr "Aug"
+msgstr ""
 
 msgid "AutoInit Network"
 msgstr "Autoinitiera Nätverk"
@@ -196,12 +196,6 @@ msgstr "Kunde inte radera:"
 msgid "Cancel"
 msgstr "Avbryt"
 
-msgid "Cheatcodes Path"
-msgstr "Fusksökväg"
-
-msgid "Cheatcodes Path changed"
-msgstr "Sökväg till fusk ändrad"
-
 msgid "Cheatfile is blank"
 msgstr "Fuskfilen är blank"
 
@@ -232,6 +226,9 @@ msgstr "Kodad av: %s"
 
 msgid "Coding:"
 msgstr "Kodning:"
+
+msgid "Compressed:"
+msgstr ""
 
 msgid "Confirm"
 msgstr "Bekräfta"
@@ -290,10 +287,10 @@ msgstr "Kunde inte ställa in USB."
 msgid "Cover Download"
 msgstr "Omslagsnedladdning"
 
-msgid "Coverpath Change"
+msgid "Cover Path Change"
 msgstr "Ändra omslagsmapp"
 
-msgid "Coverpath Changed"
+msgid "Cover Path Changed"
 msgstr "Omslagsmapp ändrad"
 
 msgid "Create"
@@ -308,8 +305,17 @@ msgstr "Anpassade sökvägar"
 msgid "Customs/Original"
 msgstr "Anpassade/Original"
 
+msgid "DOL Path"
+msgstr "DOL-sökväg"
+
+msgid "DOL path change"
+msgstr "Ändra DOL-sökväg"
+
+msgid "DOL path changed"
+msgstr "DOL-sökväg ändrad"
+
 msgid "Dec"
-msgstr "Dec"
+msgstr ""
 
 msgid "Default"
 msgstr "Standard"
@@ -326,23 +332,29 @@ msgstr "Radera"
 msgid "Delete ?"
 msgstr "Radera?"
 
-msgid "Delete Boxart"
+msgid "Delete Cheat GCT"
+msgstr "Radera fusk GCT"
+
+msgid "Delete Cheat TXT"
+msgstr "Radera fusk TXT"
+
+msgid "Delete Cover Artwork"
 msgstr "Radera omslag"
 
-msgid "Delete Cheat GCT"
-msgstr ""
-
-msgid "Delete CheatTxt"
-msgstr "Radera fusk"
-
-msgid "Delete Discart"
+msgid "Delete Disc Artwork"
 msgstr "Radera skivbilder"
 
 msgid "Design:"
-msgstr "Design:"
+msgstr ""
 
 msgid "Developed by"
 msgstr "Utvecklat av"
+
+msgid "Disc Artwork Download"
+msgstr "Skivbildsnedladdning"
+
+msgid "Disc Artwork Path"
+msgstr "Skivbildsmapp"
 
 msgid "Disc Default"
 msgstr "Skivans standard"
@@ -350,16 +362,10 @@ msgstr "Skivans standard"
 msgid "Disc Images"
 msgstr "Skivbilder"
 
-msgid "Discimage Path"
-msgstr "Skivbildsmapp"
-
-msgid "Discimages Download"
-msgstr "Skivbildsnedladdning"
-
-msgid "Discpath Changed"
+msgid "Disc Path Changed"
 msgstr "Skivbildsmapp ändrad"
 
-msgid "Discpath change"
+msgid "Disc Path change"
 msgstr "Ändra skivbildsmapp"
 
 msgid "DiskFlip"
@@ -392,20 +398,11 @@ msgstr "Vill du formatera:"
 msgid "Do you want to retry for 30 secs?"
 msgstr "Vill du försöka igen i 30 sekunder?"
 
-msgid "Do you want to use the alt dol that is known to be correct?"
+msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "Vill du använda en alternativ DOL som är känd att fungera?"
 
 msgid "Do you wish to update/download all language files?"
 msgstr "Vill du uppdatera/ladda ner alla språkfiler?"
-
-msgid "Dol Path"
-msgstr "DOL-sökväg"
-
-msgid "Dolpath Changed"
-msgstr "DOL-sökväg ändrad"
-
-msgid "Dolpath change"
-msgstr "Ändra DOL-sökväg"
 
 msgid "Done!"
 msgstr "Klar!"
@@ -471,7 +468,7 @@ msgid "Failed to open partition"
 msgstr "Misslyckades att öppna partition"
 
 msgid "Feb"
-msgstr "Feb"
+msgstr ""
 
 msgid "File not found."
 msgstr "Kunde inte hitta fil"
@@ -499,6 +496,12 @@ msgstr "Franska"
 
 msgid "Full Shutdown"
 msgstr "Stäng av helt"
+
+msgid "GCT Cheatcodes Path"
+msgstr "Fusksökväg"
+
+msgid "GCT Cheatcodes Path changed"
+msgstr "Sökväg till fusk ändrad"
 
 msgid "GCT File created"
 msgstr "GCT fil skapad"
@@ -617,7 +620,7 @@ msgid "Italian"
 msgstr "Italienska"
 
 msgid "Jan"
-msgstr "Jan"
+msgstr ""
 
 msgid "Japanese"
 msgstr "Japanska"
@@ -662,7 +665,7 @@ msgstr ""
 msgid "Load file from: %s ?"
 msgstr "Ladda fil från: %s?"
 
-msgid "Load this dol as alternate dol?"
+msgid "Load this DOL as alternate DOL?"
 msgstr "Ladda denna DOL som alternativ DOL?"
 
 msgid "Loading standard language."
@@ -678,7 +681,7 @@ msgid "Locked"
 msgstr "Låst"
 
 msgid "Mar"
-msgstr "Mar"
+msgstr ""
 
 msgid "May"
 msgstr "Maj"
@@ -688,6 +691,9 @@ msgstr "Filer som saknas"
 
 msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr "Troligtvis har den mått som inte är jämnt dividerade med 4."
+
+msgid "Mount DVD drive"
+msgstr ""
 
 msgid "Music Volume"
 msgstr "Volym"
@@ -710,6 +716,9 @@ msgstr "Ingen .dol eller .elf fil hittades."
 msgid "No Cheatfile found"
 msgstr "Ingen fuskfil hittades"
 
+msgid "No DOL file found on disc."
+msgstr "Ingen DOL-fil hittades på skivan."
+
 msgid "No Favorites"
 msgstr "Inga favoriter"
 
@@ -731,9 +740,6 @@ msgstr ""
 msgid "No data could be read."
 msgstr "Ingen data kunde läsas."
 
-msgid "No dol file found on disc."
-msgstr "Ingen DOL-fil hittades på skivan."
-
 msgid "No file missing!"
 msgstr "Inga filer saknas!"
 
@@ -749,11 +755,11 @@ msgstr "Vanliga omslag"
 msgid "Not Found"
 msgstr "Hittades inte"
 
+msgid "Not a DOL/ELF file."
+msgstr "Inte en DOL/ELF fil."
+
 msgid "Not a Wii Disc"
 msgstr "Inte en Wii-skiva"
-
-msgid "Not a dol/elf file."
-msgstr "Inte en DOL/ELF fil."
 
 msgid "Not enough free memory"
 msgstr "Inte tillräckligt med ledigt minne"
@@ -768,13 +774,13 @@ msgid "Not supported format!"
 msgstr "Formatet stöds inte!"
 
 msgid "Nov"
-msgstr "Nov"
+msgstr ""
 
 msgid "OFF"
 msgstr "AV"
 
 msgid "OK"
-msgstr "OK"
+msgstr ""
 
 msgid "ON"
 msgstr "PÅ"
@@ -784,9 +790,6 @@ msgstr "Okt"
 
 msgid "Official Site"
 msgstr "Officiell sida"
-
-msgid "Ok"
-msgstr "Ok"
 
 msgid "Only Customs"
 msgstr "Endast anpassade"
@@ -807,7 +810,7 @@ msgid "Parental control"
 msgstr "Föräldrakontroll"
 
 msgid "Partition"
-msgstr "Partition"
+msgstr ""
 
 msgid "Password"
 msgstr "Lösenord"
@@ -912,7 +915,7 @@ msgid "Selected DOL"
 msgstr ""
 
 msgid "Sept"
-msgstr "Sept"
+msgstr ""
 
 msgid "Set Search-Filter"
 msgstr ""
@@ -971,10 +974,10 @@ msgstr "Systemets standard"
 msgid "TChinese"
 msgstr "TKinesiska"
 
-msgid "TXTCheatcodes Path"
+msgid "TXT Cheatcodes Path"
 msgstr "Sökväg till txt koder"
 
-msgid "TXTCheatcodes Path changed"
+msgid "TXT Cheatcodes Path changed"
 msgstr "TXTCheatcodes sökväg ändrad"
 
 msgid "The file is not a .wad"
@@ -987,13 +990,13 @@ msgstr "Wad filen har blivit installerad. Men kunde inte raderas från SD-kortet
 msgid "The wad installation failed with error %ld"
 msgstr "Wad installation misslyckades med fel %ld"
 
-msgid "ThemePath"
+msgid "Theme Path"
 msgstr "Tema-mapp"
 
-msgid "Themepath Changed"
+msgid "Theme Path Changed"
 msgstr "Tema-mapp ändrad"
 
-msgid "Themepath change"
+msgid "Theme Path change"
 msgstr "Byt Tema-mapp"
 
 msgid "Time left:"
@@ -1002,8 +1005,8 @@ msgstr "Tid kvar:"
 msgid "Title Launcher"
 msgstr "Titel startare"
 
-msgid "Titles from XML"
-msgstr "Titlar från XML"
+msgid "Titles from WiiTDB"
+msgstr "Titlar från WiiTDB"
 
 msgid "Tooltips"
 msgstr "Verktygstips"
@@ -1048,6 +1051,12 @@ msgstr "Updatera DOL"
 msgid "Update Files"
 msgstr "Uppdatera Filer"
 
+msgid "Update Path"
+msgstr "Sökväg till uppdatering"
+
+msgid "Update Path changed."
+msgstr "Sökväg till uppdatering ändrad."
+
 msgid "Update all Language Files"
 msgstr "Uppdatera alla språk-filer"
 
@@ -1056,12 +1065,6 @@ msgstr "Uppdatering misslyckades"
 
 msgid "Update to"
 msgstr "Uppdatera till"
-
-msgid "Updatepath"
-msgstr "Sökväg till uppdatering"
-
-msgid "Updatepath changed."
-msgstr "Sökväg till uppdatering ändrad."
 
 msgid "Updating"
 msgstr "Uppdaterar"
@@ -1074,6 +1077,9 @@ msgstr "Uppdatera språk-filer:"
 
 msgid "Updating WiiTDB.zip"
 msgstr "Uppdaterar WiiTDB.zip"
+
+msgid "Uploaded ZIP file installed to homebrew directory."
+msgstr ""
 
 msgid "VIDTV Patch"
 msgstr "VIDTV-Patch"
@@ -1107,22 +1113,22 @@ msgid "Wii Settings"
 msgstr "Wii inställningar"
 
 msgid "WiiTDB Files"
-msgstr ""
+msgstr "WiiTDB"
+
+msgid "WiiTDB Path"
+msgstr "WiiTDB-sökväg"
+
+msgid "WiiTDB Path change"
+msgstr "Ändra WiiTDB-sökväg"
+
+msgid "WiiTDB Path changed."
+msgstr "WiiTDB-sökväg ändrad."
 
 msgid "Wiilight"
 msgstr "Wii-ljus"
 
 msgid "Wrong Password"
 msgstr "Fel Lösenord"
-
-msgid "XMLPath"
-msgstr "XML-sökväg"
-
-msgid "XMLPath change"
-msgstr "Ändra XML-sökväg"
-
-msgid "XMLPath changed."
-msgstr "XML-sökväg ändrad."
 
 msgid "Yes"
 msgstr "Ja"
@@ -1200,15 +1206,6 @@ msgstr "av"
 msgid "seconds left"
 msgstr "sekunder kvar"
 
-#~ msgid "Cover Path"
-#~ msgstr "Omslagsmapp"
-
-#~ msgid "Don't bother the USB Loader GX Team about errors in this file."
-#~ msgstr "Rapportera inte fel i denna fil till USB Loader GX teamet."
-
-#~ msgid "Update WiiTDB"
-#~ msgstr "Uppdatera WiiTDB"
-
 #~ msgid "ERROR: USB device could not be loaded!"
 #~ msgstr "FEL: USB-enhet kunde inte laddas!"
 
@@ -1220,12 +1217,3 @@ msgstr "sekunder kvar"
 
 #~ msgid "Waiting for your slow USB Device: %i secs..."
 #~ msgstr "Väntar på din slöa USB-enhet: %i sek..."
-
-#~ msgid "No partitions found"
-#~ msgstr "Hittade ingen partition"
-
-#~ msgid "Restart"
-#~ msgstr "Starta om"
-
-#~ msgid "Saving"
-#~ msgstr "Sparar"

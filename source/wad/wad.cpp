@@ -139,7 +139,7 @@ s32 Wad_Install(FILE *fp)
 	if (Settings.wsprompt == yes){
 	dialogBoxImg.SetWidescreen(CFG.widescreen);}
 
-	GuiText btn1Txt(tr("Ok"), 22, THEME.prompttext);
+	GuiText btn1Txt(tr("OK"), 22, THEME.prompttext);
 	GuiImage btn1Img(&btnOutline);
 	if (Settings.wsprompt == yes){
 	btn1Txt.SetWidescreen(CFG.widescreen);
@@ -468,7 +468,7 @@ s32 Wad_Uninstall(FILE *fp)
 	if (Settings.wsprompt == yes){
 	dialogBoxImg.SetWidescreen(CFG.widescreen);}
 
-	GuiText btn1Txt(tr("Ok"), 22, THEME.prompttext);
+	GuiText btn1Txt(tr("OK"), 22, THEME.prompttext);
 	GuiImage btn1Img(&btnOutline);
 	if (Settings.wsprompt == yes){
 	btn1Txt.SetWidescreen(CFG.widescreen);

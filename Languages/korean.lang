@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-#
-# don't delete this line (é).
+# korean.lang - r719
+# don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-27 20:15+0200\n"
-"PO-Revision-Date: 2009-07-18 15:18+0200\n"
+"POT-Creation-Date: 2009-10-01 05:48+0200\n"
+"PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: nextos@korea.com\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -47,7 +47,7 @@ msgid "20 min"
 msgstr "20 분"
 
 msgid "2D Cover Path"
-msgstr ""
+msgstr "2D 표지 경로"
 
 msgid "3 (Mature 16+)"
 msgstr "3 (16세 이상)"
@@ -59,7 +59,7 @@ msgid "30 min"
 msgstr "30 분"
 
 msgid "3D Cover Path"
-msgstr ""
+msgstr "3D 표지 경로"
 
 msgid "3D Covers"
 msgstr "3D 커버"
@@ -196,12 +196,6 @@ msgstr "삭제할 수 없습니다:"
 msgid "Cancel"
 msgstr "취소"
 
-msgid "Cheatcodes Path"
-msgstr "치트코드 경로"
-
-msgid "Cheatcodes Path changed"
-msgstr "처트코드 경로 변경됨"
-
 msgid "Cheatfile is blank"
 msgstr "치트화일 내용없음"
 
@@ -232,6 +226,9 @@ msgstr "Coded by: %s"
 
 msgid "Coding:"
 msgstr "코디:"
+
+msgid "Compressed:"
+msgstr ""
 
 msgid "Confirm"
 msgstr "확인"
@@ -290,10 +287,10 @@ msgstr "USB 를 설정할수 없음."
 msgid "Cover Download"
 msgstr "표지 다운로드"
 
-msgid "Coverpath Change"
+msgid "Cover Path Change"
 msgstr "커퍼경로 변경"
 
-msgid "Coverpath Changed"
+msgid "Cover Path Changed"
 msgstr "표지 경로 변경됨"
 
 msgid "Create"
@@ -307,6 +304,15 @@ msgstr "Custom Paths"
 
 msgid "Customs/Original"
 msgstr "커스텀/오리지널"
+
+msgid "DOL Path"
+msgstr "DOL 패치"
+
+msgid "DOL path change"
+msgstr "DOL 경로 변겸"
+
+msgid "DOL path changed"
+msgstr "DOL 경로 변경됨"
 
 msgid "Dec"
 msgstr "12월"
@@ -326,16 +332,16 @@ msgstr "삭제"
 msgid "Delete ?"
 msgstr "삭제 ?"
 
-msgid "Delete Boxart"
-msgstr "박스아트 삭제"
-
 msgid "Delete Cheat GCT"
 msgstr ""
 
-msgid "Delete CheatTxt"
+msgid "Delete Cheat TXT"
 msgstr "치트문서 삭제"
 
-msgid "Delete Discart"
+msgid "Delete Cover Artwork"
+msgstr "박스아트 삭제"
+
+msgid "Delete Disc Artwork"
 msgstr "삭제 Discart"
 
 msgid "Design:"
@@ -344,22 +350,22 @@ msgstr "디자인:"
 msgid "Developed by"
 msgstr "디자인 by"
 
+msgid "Disc Artwork Download"
+msgstr "디스크 이미지 다운로드"
+
+msgid "Disc Artwork Path"
+msgstr "디스크 이미지 경로"
+
 msgid "Disc Default"
 msgstr "디스크 기본값"
 
 msgid "Disc Images"
 msgstr "디스크 이미지"
 
-msgid "Discimage Path"
-msgstr "디스크 이미지 경로"
-
-msgid "Discimages Download"
-msgstr "디스크 이미지 다운로드"
-
-msgid "Discpath Changed"
+msgid "Disc Path Changed"
 msgstr "디스크 경로 변경됨"
 
-msgid "Discpath change"
+msgid "Disc Path change"
 msgstr "디스크 경로 변경"
 
 msgid "DiskFlip"
@@ -392,20 +398,11 @@ msgstr "포맷하겠습니까:"
 msgid "Do you want to retry for 30 secs?"
 msgstr "30초간 재시도 할까요?"
 
-msgid "Do you want to use the alt dol that is known to be correct?"
-msgstr "정말로 Alt. Dol을 사용할까요?"
+msgid "Do you want to use the alternate DOL that is known to be correct?"
+msgstr "정말로 Alt. DOL을 사용할까요?"
 
 msgid "Do you wish to update/download all language files?"
 msgstr "정말로 모든 언어화일을 업데이트하고 다운로드 할까요?"
-
-msgid "Dol Path"
-msgstr "Dol 패치"
-
-msgid "Dolpath Changed"
-msgstr "Dol 경로 변경됨"
-
-msgid "Dolpath change"
-msgstr "Dol 경로 변겸"
 
 msgid "Done!"
 msgstr "완료!"
@@ -499,6 +496,12 @@ msgstr "불어"
 
 msgid "Full Shutdown"
 msgstr "완전히 끄기"
+
+msgid "GCT Cheatcodes Path"
+msgstr "치트코드 경로"
+
+msgid "GCT Cheatcodes Path changed"
+msgstr "처트코드 경로 변경됨"
 
 msgid "GCT File created"
 msgstr "GCT 파일 생성됨"
@@ -662,8 +665,8 @@ msgstr ""
 msgid "Load file from: %s ?"
 msgstr "화일 로드는 %s 에서?"
 
-msgid "Load this dol as alternate dol?"
-msgstr "이 Dol화일을 alternate dol로 로딩할까요?"
+msgid "Load this DOL as alternate DOL?"
+msgstr "이 DOL화일을 alternate DOL로 로딩할까요?"
 
 msgid "Loading standard language."
 msgstr "표준 언어로 로딩."
@@ -689,6 +692,9 @@ msgstr "파일 누락"
 msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr "대부분 이미지는 4로 나누어져야 되요."
 
+msgid "Mount DVD drive"
+msgstr ""
+
 msgid "Music Volume"
 msgstr "음량"
 
@@ -709,6 +715,9 @@ msgstr ".dol 혹은 .elf 파일이 없음."
 
 msgid "No Cheatfile found"
 msgstr "치트화일 없음"
+
+msgid "No DOL file found on disc."
+msgstr "디스크에 DOL화일이 없음."
 
 msgid "No Favorites"
 msgstr "즐겨찾기 없음"
@@ -731,9 +740,6 @@ msgstr ""
 msgid "No data could be read."
 msgstr "데이터를 읽을수가 없음."
 
-msgid "No dol file found on disc."
-msgstr "디스크에 dol화일이 없음."
-
 msgid "No file missing!"
 msgstr "누락 파일 없음!"
 
@@ -749,11 +755,11 @@ msgstr "일반 표지"
 msgid "Not Found"
 msgstr "없음"
 
+msgid "Not a DOL/ELF file."
+msgstr "DOL/ELF 파일이 아님."
+
 msgid "Not a Wii Disc"
 msgstr "Wii 디스크가 아닙니다"
-
-msgid "Not a dol/elf file."
-msgstr "dol/elf 파일이 아님."
 
 msgid "Not enough free memory"
 msgstr "메모리가 부족해요."
@@ -784,9 +790,6 @@ msgstr "10월"
 
 msgid "Official Site"
 msgstr "공식 사이트"
-
-msgid "Ok"
-msgstr "Ok"
 
 msgid "Only Customs"
 msgstr "사용자 설정만"
@@ -971,10 +974,10 @@ msgstr "시스템 기본값"
 msgid "TChinese"
 msgstr "중국어(번체)"
 
-msgid "TXTCheatcodes Path"
+msgid "TXT Cheatcodes Path"
 msgstr "TXT 치트코드 경로"
 
-msgid "TXTCheatcodes Path changed"
+msgid "TXT Cheatcodes Path changed"
 msgstr "TXT 치트코드 경로 변경됨"
 
 msgid "The file is not a .wad"
@@ -987,13 +990,13 @@ msgstr "WAD화일이 인스톨됨. 하지만 SD 카드에서 삭제할수 없음
 msgid "The wad installation failed with error %ld"
 msgstr "WAD 인스톨 실패 에러 %ld"
 
-msgid "ThemePath"
+msgid "Theme Path"
 msgstr "테마 경로"
 
-msgid "Themepath Changed"
+msgid "Theme Path Changed"
 msgstr "테마 경로 변경됨"
 
-msgid "Themepath change"
+msgid "Theme Path change"
 msgstr "테마 경로 변경"
 
 msgid "Time left:"
@@ -1002,8 +1005,8 @@ msgstr "남은 시간:"
 msgid "Title Launcher"
 msgstr "타이틀 런처"
 
-msgid "Titles from XML"
-msgstr "XML에서 타이틀을"
+msgid "Titles from WiiTDB"
+msgstr "WiiTDB에서 타이틀을"
 
 msgid "Tooltips"
 msgstr "Tooltips"
@@ -1048,6 +1051,12 @@ msgstr "DOL 업데이트"
 msgid "Update Files"
 msgstr "화일 업데이트"
 
+msgid "Update Path"
+msgstr "업데이트 경로"
+
+msgid "Update Path changed."
+msgstr "업데이트 경로 변경됨"
+
 msgid "Update all Language Files"
 msgstr "모든 언어화일 업데이트"
 
@@ -1056,12 +1065,6 @@ msgstr "업데이트 실패"
 
 msgid "Update to"
 msgstr "감사"
-
-msgid "Updatepath"
-msgstr "업데이트 경로"
-
-msgid "Updatepath changed."
-msgstr "업데이트 경로 변경됨"
 
 msgid "Updating"
 msgstr "업데이트중"
@@ -1074,6 +1077,9 @@ msgstr "언어화일 업데이트중:"
 
 msgid "Updating WiiTDB.zip"
 msgstr "WiiTDB.zip 업데이트중"
+
+msgid "Uploaded ZIP file installed to homebrew directory."
+msgstr ""
 
 msgid "VIDTV Patch"
 msgstr "VIDTV 패치"
@@ -1109,20 +1115,20 @@ msgstr "위 설정"
 msgid "WiiTDB Files"
 msgstr "WiiTDB 화일"
 
+msgid "WiiTDB Path"
+msgstr "WiiTDB경로"
+
+msgid "WiiTDB Path change"
+msgstr "WiiTDB경로 변경"
+
+msgid "WiiTDB Path changed."
+msgstr "WiiTDB경로 변경됨."
+
 msgid "Wiilight"
 msgstr "Wiilight"
 
 msgid "Wrong Password"
 msgstr "잘못된 비밀번호"
-
-msgid "XMLPath"
-msgstr "XML경로"
-
-msgid "XMLPath change"
-msgstr "XML경로 변경"
-
-msgid "XMLPath changed."
-msgstr "XML경로 변경됨."
 
 msgid "Yes"
 msgstr "예"
@@ -1199,15 +1205,3 @@ msgstr "중"
 
 msgid "seconds left"
 msgstr "초 남았습니다"
-
-#~ msgid "Cover Path"
-#~ msgstr "표지 경로"
-
-#~ msgid "Don't bother the USB Loader GX Team about errors in this file."
-#~ msgstr "이화일의 에러로 USB Loader GX 팀에 연락하지 마세요."
-
-#~ msgid "No partitions found"
-#~ msgstr "파티션이 없습니다."
-
-#~ msgid "Restart"
-#~ msgstr "다시 시작"

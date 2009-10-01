@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-#
-# don't delete this line (é).
+# norwegian.lang - r723
+# don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-27 20:15+0200\n"
-"PO-Revision-Date: 2009-07-18 15:18+0200\n"
+"POT-Creation-Date: 2009-10-01 05:48+0200\n"
+"PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: raschi\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -38,28 +38,28 @@ msgid "1 hour"
 msgstr "1 time"
 
 msgid "10 min"
-msgstr "10 min"
+msgstr ""
 
 msgid "2 (Teen 12+)"
 msgstr "2 (Ungdom 12+)"
 
 msgid "20 min"
-msgstr "20 min"
+msgstr ""
 
 msgid "2D Cover Path"
-msgstr ""
+msgstr "2D Cover sti"
 
 msgid "3 (Mature 16+)"
 msgstr "3 (Ungdom 16+)"
 
 msgid "3 min"
-msgstr "3 min"
+msgstr ""
 
 msgid "30 min"
-msgstr "30 min"
+msgstr ""
 
 msgid "3D Cover Path"
-msgstr ""
+msgstr "3D Cover sti"
 
 msgid "3D Covers"
 msgstr "3D cover"
@@ -68,7 +68,7 @@ msgid "4 (Adults Only 18+)"
 msgstr "4 (Voksen 18+)"
 
 msgid "5 min"
-msgstr "5 min"
+msgstr ""
 
 msgid ">> Deleting tickets..."
 msgstr ">> Sletter tickets..."
@@ -119,7 +119,7 @@ msgid ">> Reading WAD data...Ok!"
 msgstr ">> Leser WAD data...OK!"
 
 msgid "AUTO"
-msgstr "AUTO"
+msgstr ""
 
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "Alle funksjonene til USB Loader GX er opplåst."
@@ -131,25 +131,25 @@ msgid "An Error occured"
 msgstr "En feil oppstod"
 
 msgid "Anti"
-msgstr "Anti"
+msgstr ""
 
 msgid "App Language"
 msgstr "Program språk"
 
 msgid "Apr"
-msgstr "Apr"
+msgstr ""
 
 msgid "Are you sure?"
 msgstr "Er du sikker?"
 
 msgid "Aug"
-msgstr "Aug"
+msgstr ""
 
 msgid "AutoInit Network"
 msgstr "Autostart nettverk"
 
 msgid "AutoPatch"
-msgstr "AutoPatch"
+msgstr ""
 
 msgid "Back"
 msgstr "Tilbake"
@@ -196,12 +196,6 @@ msgstr "Kan ikke slette:"
 msgid "Cancel"
 msgstr "Avbryt"
 
-msgid "Cheatcodes Path"
-msgstr "Juksekode sti"
-
-msgid "Cheatcodes Path changed"
-msgstr "Juksekode sti endret"
-
 msgid "Cheatfile is blank"
 msgstr "Juksefil er blank"
 
@@ -232,6 +226,9 @@ msgstr "Kodet av: %s"
 
 msgid "Coding:"
 msgstr "Koding:"
+
+msgid "Compressed:"
+msgstr ""
 
 msgid "Confirm"
 msgstr "Bekreft"
@@ -290,10 +287,10 @@ msgstr "Kan ikke velge USB."
 msgid "Cover Download"
 msgstr "Cover nedlasting"
 
-msgid "Coverpath Change"
+msgid "Cover Path Change"
 msgstr "Endre cover sti"
 
-msgid "Coverpath Changed"
+msgid "Cover Path Changed"
 msgstr "Cover sti endret"
 
 msgid "Create"
@@ -307,6 +304,15 @@ msgstr "Endre stier"
 
 msgid "Customs/Original"
 msgstr "Custom/Original"
+
+msgid "DOL Path"
+msgstr "DOL sti"
+
+msgid "DOL path change"
+msgstr "Endre DOL sti"
+
+msgid "DOL path changed"
+msgstr "DOL sti endret"
 
 msgid "Dec"
 msgstr "Des"
@@ -326,23 +332,29 @@ msgstr "Slett"
 msgid "Delete ?"
 msgstr "Slett ?"
 
-msgid "Delete Boxart"
+msgid "Delete Cheat GCT"
+msgstr "Slett juksefil GCT"
+
+msgid "Delete Cheat TXT"
+msgstr "Slett juksefil TXT"
+
+msgid "Delete Cover Artwork"
 msgstr "Slett cover"
 
-msgid "Delete Cheat GCT"
-msgstr ""
-
-msgid "Delete CheatTxt"
-msgstr "Slett juksefil"
-
-msgid "Delete Discart"
+msgid "Delete Disc Artwork"
 msgstr "Slett platebilde"
 
 msgid "Design:"
-msgstr "Design:"
+msgstr ""
 
 msgid "Developed by"
 msgstr "Utviklet av"
+
+msgid "Disc Artwork Download"
+msgstr "Platebilde nedlasting"
+
+msgid "Disc Artwork Path"
+msgstr "Platebilde sti"
 
 msgid "Disc Default"
 msgstr "Spill Standard"
@@ -350,16 +362,10 @@ msgstr "Spill Standard"
 msgid "Disc Images"
 msgstr "Plate bilder"
 
-msgid "Discimage Path"
-msgstr "Platebilde sti"
-
-msgid "Discimages Download"
-msgstr "Platebilde nedlasting"
-
-msgid "Discpath Changed"
+msgid "Disc Path Changed"
 msgstr "Plate sti endret"
 
-msgid "Discpath change"
+msgid "Disc Path change"
 msgstr "Endre plate sti"
 
 msgid "DiskFlip"
@@ -392,20 +398,11 @@ msgstr "Vil du formatere:"
 msgid "Do you want to retry for 30 secs?"
 msgstr "Vil du fortsette å prøve i 30 sekunder?"
 
-msgid "Do you want to use the alt dol that is known to be correct?"
+msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "Vil du bruke alt DOL filen som er kjent for å være riktig?"
 
 msgid "Do you wish to update/download all language files?"
 msgstr "Vil du oppdatere/laste ned alle språkfiler?"
-
-msgid "Dol Path"
-msgstr "DOL sti"
-
-msgid "Dolpath Changed"
-msgstr "DOL sti endret"
-
-msgid "Dolpath change"
-msgstr "Endre DOL sti"
 
 msgid "Done!"
 msgstr "Ferdig!"
@@ -471,7 +468,7 @@ msgid "Failed to open partition"
 msgstr "Feil ved åpning av partisjon"
 
 msgid "Feb"
-msgstr "Feb"
+msgstr ""
 
 msgid "File not found."
 msgstr "Fil ikke funnet."
@@ -480,7 +477,7 @@ msgid "Finishing installation... Ok!"
 msgstr "Sluttfører installasjon... OK!"
 
 msgid "Flip-X"
-msgstr "Flip-X"
+msgstr ""
 
 msgid "Force"
 msgstr "Tving"
@@ -499,6 +496,12 @@ msgstr "Fransk"
 
 msgid "Full Shutdown"
 msgstr "Skru helt av"
+
+msgid "GCT Cheatcodes Path"
+msgstr "GCT Juksekode sti"
+
+msgid "GCT Cheatcodes Path changed"
+msgstr "GCT Juksekode sti endret"
 
 msgid "GCT File created"
 msgstr "GCT fil opprettet"
@@ -617,7 +620,7 @@ msgid "Italian"
 msgstr "Italiensk"
 
 msgid "Jan"
-msgstr "Jan"
+msgstr ""
 
 msgid "Japanese"
 msgstr "Japansk"
@@ -662,7 +665,7 @@ msgstr "Start fra SD/USB"
 msgid "Load file from: %s ?"
 msgstr "Start fil fra: %s ?"
 
-msgid "Load this dol as alternate dol?"
+msgid "Load this DOL as alternate DOL?"
 msgstr "Last denne DOL som alternativ DOL?"
 
 msgid "Loading standard language."
@@ -678,7 +681,7 @@ msgid "Locked"
 msgstr "Låst"
 
 msgid "Mar"
-msgstr "Mar"
+msgstr ""
 
 msgid "May"
 msgstr "Mai"
@@ -688,6 +691,9 @@ msgstr "Manglende filer"
 
 msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr "Sannsynligvis har bildet dimensjoner som ikke kan deles med 4."
+
+msgid "Mount DVD drive"
+msgstr ""
 
 msgid "Music Volume"
 msgstr "Musikk volum"
@@ -710,6 +716,9 @@ msgstr "Ingen .dol eller .elf filer funnet."
 msgid "No Cheatfile found"
 msgstr "Ingen juksefil funnet"
 
+msgid "No DOL file found on disc."
+msgstr "Ingen DOL fil funnet på plate."
+
 msgid "No Favorites"
 msgstr "Ingen favoritter"
 
@@ -731,9 +740,6 @@ msgstr ""
 msgid "No data could be read."
 msgstr "Ingen data kan leses."
 
-msgid "No dol file found on disc."
-msgstr "Ingen DOL fil funnet på plate."
-
 msgid "No file missing!"
 msgstr "Ingen filer mangler!"
 
@@ -741,7 +747,7 @@ msgid "No new updates."
 msgstr "Ingen nye oppdateringer."
 
 msgid "Normal"
-msgstr "Normal"
+msgstr ""
 
 msgid "Normal Covers"
 msgstr "Normale cover"
@@ -749,11 +755,11 @@ msgstr "Normale cover"
 msgid "Not Found"
 msgstr "Ikke funnet"
 
+msgid "Not a DOL/ELF file."
+msgstr "Ikke en DOL/ELF fil."
+
 msgid "Not a Wii Disc"
 msgstr "Ikke en Wii plate"
-
-msgid "Not a dol/elf file."
-msgstr "Ikke en dol/elf fil."
 
 msgid "Not enough free memory"
 msgstr "Ikke nok ledig minne"
@@ -768,13 +774,13 @@ msgid "Not supported format!"
 msgstr "Ikke et støttet format!"
 
 msgid "Nov"
-msgstr "Nov"
+msgstr ""
 
 msgid "OFF"
 msgstr "AV"
 
 msgid "OK"
-msgstr "OK"
+msgstr ""
 
 msgid "ON"
 msgstr "PÅ"
@@ -784,9 +790,6 @@ msgstr "Okt"
 
 msgid "Official Site"
 msgstr "Offisiell nettside"
-
-msgid "Ok"
-msgstr "Ok"
 
 msgid "Only Customs"
 msgstr "Kun custom"
@@ -971,10 +974,10 @@ msgstr "System Standard"
 msgid "TChinese"
 msgstr "T.Kinesisk"
 
-msgid "TXTCheatcodes Path"
+msgid "TXT Cheatcodes Path"
 msgstr "TXTjuksekode sti"
 
-msgid "TXTCheatcodes Path changed"
+msgid "TXT Cheatcodes Path changed"
 msgstr "TXTjuksekode sti endret"
 
 msgid "The file is not a .wad"
@@ -987,13 +990,13 @@ msgstr "WAD filen ble installert.  Men ble ikke slettet fra SD kort."
 msgid "The wad installation failed with error %ld"
 msgstr "WAD installasjonen feilet med feilkode %ld"
 
-msgid "ThemePath"
+msgid "Theme Path"
 msgstr "Tema sti"
 
-msgid "Themepath Changed"
+msgid "Theme Path Changed"
 msgstr "Tema sti endret"
 
-msgid "Themepath change"
+msgid "Theme Path change"
 msgstr "Endre tema sti"
 
 msgid "Time left:"
@@ -1002,8 +1005,8 @@ msgstr "Tid igjen:"
 msgid "Title Launcher"
 msgstr "Tittel Laster"
 
-msgid "Titles from XML"
-msgstr "Titler fra XML"
+msgid "Titles from WiiTDB"
+msgstr "Titler fra WiiTDB"
 
 msgid "Tooltips"
 msgstr "Verktøystips"
@@ -1048,6 +1051,12 @@ msgstr "Oppdater DOL"
 msgid "Update Files"
 msgstr "Oppdater filer"
 
+msgid "Update Path"
+msgstr "Oppdatering sti"
+
+msgid "Update Path changed."
+msgstr "Oppdatering sti endret."
+
 msgid "Update all Language Files"
 msgstr "Oppdater alle språkfiler"
 
@@ -1056,12 +1065,6 @@ msgstr "Mislykket oppdatering"
 
 msgid "Update to"
 msgstr "Oppdater til"
-
-msgid "Updatepath"
-msgstr "Oppdatering sti"
-
-msgid "Updatepath changed."
-msgstr "Oppdatering sti endret."
 
 msgid "Updating"
 msgstr "Oppdaterer"
@@ -1074,6 +1077,9 @@ msgstr "Oppdaterer språkfiler:"
 
 msgid "Updating WiiTDB.zip"
 msgstr "Oppdaterer WiiTDB.zip"
+
+msgid "Uploaded ZIP file installed to homebrew directory."
+msgstr ""
 
 msgid "VIDTV Patch"
 msgstr "VIDTV Patch"
@@ -1109,20 +1115,20 @@ msgstr "Wii Innstillinger"
 msgid "WiiTDB Files"
 msgstr "WiiTDB filer"
 
+msgid "WiiTDB Path"
+msgstr "WiiTDB sti"
+
+msgid "WiiTDB Path change"
+msgstr "Endre WiiTDB sti"
+
+msgid "WiiTDB Path changed."
+msgstr "WiiTDB sti endret."
+
 msgid "Wiilight"
 msgstr "Wii DVD lys"
 
 msgid "Wrong Password"
 msgstr "Feil passord"
-
-msgid "XMLPath"
-msgstr "XML sti"
-
-msgid "XMLPath change"
-msgstr "Endre XML sti"
-
-msgid "XMLPath changed."
-msgstr "XML sti endret."
 
 msgid "Yes"
 msgstr "Ja"
@@ -1200,15 +1206,6 @@ msgstr "av"
 msgid "seconds left"
 msgstr "sekunder gjenstår"
 
-#~ msgid "Cover Path"
-#~ msgstr "Cover sti"
-
-#~ msgid "Don't bother the USB Loader GX Team about errors in this file."
-#~ msgstr "Ikke bry USB Loader GX teamet med feil i denne filen."
-
-#~ msgid "Update WiiTDB"
-#~ msgstr "Oppdater WiiTDB"
-
 #~ msgid "ERROR: USB device could not be loaded!"
 #~ msgstr "FEIL: USB enhet kan ikke lastes!"
 
@@ -1220,12 +1217,3 @@ msgstr "sekunder gjenstår"
 
 #~ msgid "Waiting for your slow USB Device: %i secs..."
 #~ msgstr "Venter på USB enhet: %i sek..."
-
-#~ msgid "No partitions found"
-#~ msgstr "Ingen partisjoner funnet"
-
-#~ msgid "Restart"
-#~ msgstr "Start på nytt"
-
-#~ msgid "Saving"
-#~ msgstr "Lagrer"

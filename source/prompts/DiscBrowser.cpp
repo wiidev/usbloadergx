@@ -136,7 +136,7 @@ int DiscBrowse(struct discHdr * header) {
     }
 
     if (dolfilecount <= 0) {
-        WindowPrompt(tr("ERROR"), tr("No dol file found on disc."), tr("OK"));
+        WindowPrompt(tr("ERROR"), tr("No DOL file found on disc."), tr("OK"));
         free(fstbuffer);
         return -1;
     }
@@ -212,7 +212,7 @@ int DiscBrowse(struct discHdr * header) {
         if (ret > 0) {
             char temp[100];
             strlcpy(temp, fstfiles(fst, ret), sizeof(temp));
-            choice = WindowPrompt(temp, tr("Load this dol as alternate dol?"), tr("OK"), tr("Cancel"));
+            choice = WindowPrompt(temp, tr("Load this DOL as alternate DOL?"), tr("OK"), tr("Cancel"));
             if (choice) {
                 //ret = offsetselect[ret];
                 strlcpy(alternatedname, temp, sizeof(alternatedname));
@@ -334,15 +334,15 @@ int autoSelectDolMenu(const char *id, bool force) {
 	/*
 	switch (CheckForSave(id4)) {
 		case 0:
-			WindowPrompt("NO save",0,tr("Ok"));
+			WindowPrompt(tr("NO save"),0,tr("OK"));
 			break;
 		case 1:
-			WindowPrompt("save",0,tr("Ok"));
+			WindowPrompt(tr("save"),0,tr("OK"));
 			break;
 		default:
 			char test[10];
 			sprintf(test,"%d",CheckForSave(id4));
-			WindowPrompt(test,0,tr("Ok"));
+			WindowPrompt(test,0,tr("OK"));
             break;
 	}
 	return -1;
@@ -353,7 +353,7 @@ int autoSelectDolMenu(const char *id, bool force) {
 		//do not use any alt dol if there is no save game in the nand
 		/*
 		if (CheckForSave(id4)==0 && force) {
-			WindowPrompt(0,tr("You need to start this game one time to create a save file, then exit and start it again."),tr("Ok"));
+			WindowPrompt(0,tr("You need to start this game one time to create a save file, then exit and start it again."),tr("OK"));
 			return -1;
 		}
 		*/
@@ -377,7 +377,7 @@ int autoSelectDolMenu(const char *id, bool force) {
 	if (strcmp(id,"R3MP01") == 0) {
 		/*
 		if (CheckForSave(id4)==0 && force) {
-			WindowPrompt(0,tr("You need to start this game one time to create a save file, then exit and start it again."),tr("Ok"));
+			WindowPrompt(0,tr("You need to start this game one time to create a save file, then exit and start it again."),tr("OK"));
 			return -1;
 		}
 		*/

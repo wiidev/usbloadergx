@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-#
-# don't delete this line (é).
+# spanish.lang - r719
+# don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-27 20:15+0200\n"
-"PO-Revision-Date: 2009-07-18 15:18+0200\n"
+"POT-Creation-Date: 2009-10-01 05:48+0200\n"
+"PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Penn\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -38,28 +38,28 @@ msgid "1 hour"
 msgstr "1 hora"
 
 msgid "10 min"
-msgstr "10 min"
+msgstr ""
 
 msgid "2 (Teen 12+)"
 msgstr "2 (Adolescente 12+)"
 
 msgid "20 min"
-msgstr "20 min"
+msgstr ""
 
 msgid "2D Cover Path"
-msgstr ""
+msgstr "Ruta Carátulas 2D"
 
 msgid "3 (Mature 16+)"
 msgstr "3 (Maduro 16+)"
 
 msgid "3 min"
-msgstr "3 min"
+msgstr ""
 
 msgid "30 min"
-msgstr "30 min"
+msgstr ""
 
 msgid "3D Cover Path"
-msgstr ""
+msgstr "Ruta Carátulas 3D"
 
 msgid "3D Covers"
 msgstr "Carátulas 3D"
@@ -68,7 +68,7 @@ msgid "4 (Adults Only 18+)"
 msgstr "4 (Sólo Adultos 18+)"
 
 msgid "5 min"
-msgstr "5 min"
+msgstr ""
 
 msgid ">> Deleting tickets..."
 msgstr ">> Borrando tickets..."
@@ -119,7 +119,7 @@ msgid ">> Reading WAD data...Ok!"
 msgstr ">> Leyendo datos del WAD... ¡Ok!"
 
 msgid "AUTO"
-msgstr "AUTO"
+msgstr ""
 
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "Todas las características del USB Loader GX desbloqueadas."
@@ -131,7 +131,7 @@ msgid "An Error occured"
 msgstr "Ocurrió un Error"
 
 msgid "Anti"
-msgstr "Anti"
+msgstr ""
 
 msgid "App Language"
 msgstr "Idioma Aplic."
@@ -196,12 +196,6 @@ msgstr "No se eliminó:"
 msgid "Cancel"
 msgstr "Cancelar"
 
-msgid "Cheatcodes Path"
-msgstr "Ruta Cód. Trampas"
-
-msgid "Cheatcodes Path changed"
-msgstr "Ruta de Códigos de Trampas cambiada"
-
 msgid "Cheatfile is blank"
 msgstr "Archivo de Trampas vacio"
 
@@ -232,6 +226,9 @@ msgstr "Programado por: %s"
 
 msgid "Coding:"
 msgstr "Programación:"
+
+msgid "Compressed:"
+msgstr ""
 
 msgid "Confirm"
 msgstr "Confirmar"
@@ -282,7 +279,7 @@ msgid "Could not read the disc."
 msgstr "No se pudo leer el disco."
 
 msgid "Could not save."
-msgstr ""
+msgstr "No se pudo guardar."
 
 msgid "Could not set USB."
 msgstr "No se pudo configurar USB."
@@ -290,10 +287,10 @@ msgstr "No se pudo configurar USB."
 msgid "Cover Download"
 msgstr "Descarga de Carátulas"
 
-msgid "Coverpath Change"
+msgid "Cover Path Change"
 msgstr "Cambio ruta Carátulas"
 
-msgid "Coverpath Changed"
+msgid "Cover Path Changed"
 msgstr "Ruta de Carátulas cambiada"
 
 msgid "Create"
@@ -307,6 +304,15 @@ msgstr "Personalizar Rutas"
 
 msgid "Customs/Original"
 msgstr "Alternativas/Originales"
+
+msgid "DOL Path"
+msgstr "Ruta DOL"
+
+msgid "DOL path change"
+msgstr "Cambio ruta DOL"
+
+msgid "DOL path changed"
+msgstr "Ruta de DOL cambiada"
 
 msgid "Dec"
 msgstr "Dic"
@@ -326,16 +332,16 @@ msgstr "Borrar"
 msgid "Delete ?"
 msgstr "¿Borrar?"
 
-msgid "Delete Boxart"
-msgstr "Eliminar Carátulas"
-
 msgid "Delete Cheat GCT"
 msgstr ""
 
-msgid "Delete CheatTxt"
-msgstr "Eliminar Txt Trampas"
+msgid "Delete Cheat TXT"
+msgstr "Eliminar TXT Trampas"
 
-msgid "Delete Discart"
+msgid "Delete Cover Artwork"
+msgstr "Eliminar Carátulas"
+
+msgid "Delete Disc Artwork"
 msgstr "Eliminar Img. Disco"
 
 msgid "Design:"
@@ -344,22 +350,22 @@ msgstr "Diseño:"
 msgid "Developed by"
 msgstr "Desarrollado por"
 
+msgid "Disc Artwork Download"
+msgstr "Descarga Img. Disco"
+
+msgid "Disc Artwork Path"
+msgstr "Ruta Img. Disco"
+
 msgid "Disc Default"
 msgstr "Pred. Disco"
 
 msgid "Disc Images"
 msgstr "Imágen Discos"
 
-msgid "Discimage Path"
-msgstr "Ruta Img. Disco"
-
-msgid "Discimages Download"
-msgstr "Descarga Img. Disco"
-
-msgid "Discpath Changed"
+msgid "Disc Path Changed"
 msgstr "Ruta Img. Disco cambiada"
 
-msgid "Discpath change"
+msgid "Disc Path change"
 msgstr "Cambio ruta Img. Disco"
 
 msgid "DiskFlip"
@@ -392,20 +398,11 @@ msgstr "Quieres formatear:"
 msgid "Do you want to retry for 30 secs?"
 msgstr "¿Quieres reintentar por 30 segs.?"
 
-msgid "Do you want to use the alt dol that is known to be correct?"
-msgstr "¿Quieres usar el dol alternativo que se sabe es correcto?"
+msgid "Do you want to use the alternate DOL that is known to be correct?"
+msgstr "¿Quieres usar el DOL alternativo que se sabe es correcto?"
 
 msgid "Do you wish to update/download all language files?"
 msgstr "¿Quieres actualizar/descargar todos los archivos de lenguaje?"
-
-msgid "Dol Path"
-msgstr "Ruta Dol"
-
-msgid "Dolpath Changed"
-msgstr "Ruta de Dol cambiada"
-
-msgid "Dolpath change"
-msgstr "Cambio ruta Dol"
 
 msgid "Done!"
 msgstr "¡Listo!"
@@ -432,16 +429,16 @@ msgid "Dutch"
 msgstr "Holandés"
 
 msgid "ERROR"
-msgstr "ERROR"
+msgstr ""
 
 msgid "ERROR:"
-msgstr "ERROR:"
+msgstr ""
 
 msgid "English"
 msgstr "Inglés"
 
 msgid "Error"
-msgstr "Error"
+msgstr ""
 
 msgid "Error !"
 msgstr "¡Error!"
@@ -456,10 +453,10 @@ msgid "Error while transfering data."
 msgstr "Error mientras se transferían datos."
 
 msgid "Error..."
-msgstr "Error..."
+msgstr ""
 
 msgid "Error:"
-msgstr "Error:"
+msgstr ""
 
 msgid "Exit USB Loader GX?"
 msgstr "¿Salir de USB Loader GX?"
@@ -471,7 +468,7 @@ msgid "Failed to open partition"
 msgstr "Fallo al abrir partición"
 
 msgid "Feb"
-msgstr "Feb"
+msgstr ""
 
 msgid "File not found."
 msgstr "Archivo no encontrado."
@@ -499,6 +496,12 @@ msgstr "Francés"
 
 msgid "Full Shutdown"
 msgstr "Apagado Total"
+
+msgid "GCT Cheatcodes Path"
+msgstr "Ruta Cód. Trampas"
+
+msgid "GCT Cheatcodes Path changed"
+msgstr "Ruta de Códigos de Trampas cambiada"
 
 msgid "GCT File created"
 msgstr "Archivo GCT creado"
@@ -662,8 +665,8 @@ msgstr ""
 msgid "Load file from: %s ?"
 msgstr "Cargar archivo desde: %s ?"
 
-msgid "Load this dol as alternate dol?"
-msgstr "¿Cargar este dol como dol alternativo?"
+msgid "Load this DOL as alternate DOL?"
+msgstr "¿Cargar este DOL como DOL alternativo?"
 
 msgid "Loading standard language."
 msgstr "Cargando idioma estándar."
@@ -678,16 +681,19 @@ msgid "Locked"
 msgstr "Bloqueada"
 
 msgid "Mar"
-msgstr "Mar"
+msgstr ""
 
 msgid "May"
-msgstr "May"
+msgstr ""
 
 msgid "Missing files"
 msgstr "Archivo(s) faltante(s)"
 
 msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr "Probablemente tiene un tamaño no divisible por 4. Que estupidez."
+
+msgid "Mount DVD drive"
+msgstr ""
 
 msgid "Music Volume"
 msgstr "Volumen Música"
@@ -702,13 +708,16 @@ msgid "Next"
 msgstr "Siguiente"
 
 msgid "No"
-msgstr "No"
+msgstr ""
 
 msgid "No .dol or .elf files found."
 msgstr "No se encontró archivo .dol o .elf"
 
 msgid "No Cheatfile found"
 msgstr "Archivo de trampas no encontrado"
+
+msgid "No DOL file found on disc."
+msgstr "No se encontró archivo DOL en el disco"
 
 msgid "No Favorites"
 msgstr "No hay favoritos"
@@ -731,9 +740,6 @@ msgstr ""
 msgid "No data could be read."
 msgstr "No se pudo leer datos."
 
-msgid "No dol file found on disc."
-msgstr "No se encontró archivo dol en el disco"
-
 msgid "No file missing!"
 msgstr "¡No faltan archivos!"
 
@@ -741,7 +747,7 @@ msgid "No new updates."
 msgstr "No hay actualizaciones."
 
 msgid "Normal"
-msgstr "Normal"
+msgstr ""
 
 msgid "Normal Covers"
 msgstr "Carátulas Norm."
@@ -749,11 +755,11 @@ msgstr "Carátulas Norm."
 msgid "Not Found"
 msgstr "No encontrado"
 
+msgid "Not a DOL/ELF file."
+msgstr "No es un archivo DOL/ELF."
+
 msgid "Not a Wii Disc"
 msgstr "No es un Disco Wii"
-
-msgid "Not a dol/elf file."
-msgstr "No es un archivo dol/elf."
 
 msgid "Not enough free memory"
 msgstr "No hay suficiente memoria libre"
@@ -768,25 +774,22 @@ msgid "Not supported format!"
 msgstr "Formato no soportado."
 
 msgid "Nov"
-msgstr "Nov"
+msgstr ""
 
 msgid "OFF"
 msgstr "Apagado"
 
 msgid "OK"
-msgstr "OK"
+msgstr ""
 
 msgid "ON"
 msgstr "Encendido"
 
 msgid "Oct"
-msgstr "Oct"
+msgstr ""
 
 msgid "Official Site"
 msgstr "Sitio Oficial"
-
-msgid "Ok"
-msgstr "Ok"
 
 msgid "Only Customs"
 msgstr "Sólo Alternat."
@@ -912,7 +915,7 @@ msgid "Selected DOL"
 msgstr ""
 
 msgid "Sept"
-msgstr "Sept"
+msgstr ""
 
 msgid "Set Search-Filter"
 msgstr ""
@@ -971,10 +974,10 @@ msgstr "Pred. Sistema"
 msgid "TChinese"
 msgstr "Chino Tradic."
 
-msgid "TXTCheatcodes Path"
+msgid "TXT Cheatcodes Path"
 msgstr "Ruta archiv. de trampas"
 
-msgid "TXTCheatcodes Path changed"
+msgid "TXT Cheatcodes Path changed"
 msgstr "Ruta archiv. de trampas cambiada"
 
 msgid "The file is not a .wad"
@@ -987,13 +990,13 @@ msgstr "El archivo wad fue instalado. Pero no pudo ser borrado de la tarj. SD."
 msgid "The wad installation failed with error %ld"
 msgstr "La instalación del wad falló con error %ld"
 
-msgid "ThemePath"
+msgid "Theme Path"
 msgstr "Ruta del Tema"
 
-msgid "Themepath Changed"
+msgid "Theme Path Changed"
 msgstr "Ruta de Tema cambiada"
 
-msgid "Themepath change"
+msgid "Theme Path change"
 msgstr "Cambio Ruta de Tema"
 
 msgid "Time left:"
@@ -1002,8 +1005,8 @@ msgstr "T. rest.:"
 msgid "Title Launcher"
 msgstr "Lanzador de Título"
 
-msgid "Titles from XML"
-msgstr "Títulos XML"
+msgid "Titles from WiiTDB"
+msgstr "Títulos WiiTDB"
 
 msgid "Tooltips"
 msgstr "InfoBurbujas"
@@ -1048,6 +1051,12 @@ msgstr "Actualizar DOL"
 msgid "Update Files"
 msgstr "Actual. Archivos"
 
+msgid "Update Path"
+msgstr "Ruta Actualización"
+
+msgid "Update Path changed."
+msgstr "Ruta Actualización cambiada."
+
 msgid "Update all Language Files"
 msgstr "Actualizar todos los Archiv. de Lenguaje"
 
@@ -1056,12 +1065,6 @@ msgstr "Fallo en la Actualización"
 
 msgid "Update to"
 msgstr "Actualizando a"
-
-msgid "Updatepath"
-msgstr "Ruta Actualización"
-
-msgid "Updatepath changed."
-msgstr "Ruta Actualización cambiada."
 
 msgid "Updating"
 msgstr "Actualizando"
@@ -1074,6 +1077,9 @@ msgstr "Actualizando archivos de Lenguaje:"
 
 msgid "Updating WiiTDB.zip"
 msgstr "Actualizando WiiTDB.zip"
+
+msgid "Uploaded ZIP file installed to homebrew directory."
+msgstr ""
 
 msgid "VIDTV Patch"
 msgstr "Parche VIDTV"
@@ -1109,20 +1115,20 @@ msgstr "Config. de Wii"
 msgid "WiiTDB Files"
 msgstr "WiiTDB"
 
+msgid "WiiTDB Path"
+msgstr "Ruta WiiTDB"
+
+msgid "WiiTDB Path change"
+msgstr "Cambio ruta WiiTDB"
+
+msgid "WiiTDB Path changed."
+msgstr "Ruta WiiTDB cambiada."
+
 msgid "Wiilight"
 msgstr "Luz lector"
 
 msgid "Wrong Password"
 msgstr "Contraseña incorrecta"
-
-msgid "XMLPath"
-msgstr "Ruta XML"
-
-msgid "XMLPath change"
-msgstr "Cambio ruta XML"
-
-msgid "XMLPath changed."
-msgstr "Ruta XML cambiada."
 
 msgid "Yes"
 msgstr "Sí"
@@ -1200,15 +1206,6 @@ msgstr "de"
 msgid "seconds left"
 msgstr "segundos restantes"
 
-#~ msgid "Cover Path"
-#~ msgstr "Ruta Carátulas"
-
-#~ msgid "Don't bother the USB Loader GX Team about errors in this file."
-#~ msgstr "No molestes al equipo del USB Loader GX sobre errores en este archivo."
-
-#~ msgid "Update WiiTDB"
-#~ msgstr "Actualizar WiiTDB"
-
 #~ msgid "ERROR: USB device could not be loaded!"
 #~ msgstr "ERROR: ¡No se pudo cargar dispositivo USB!"
 
@@ -1220,12 +1217,3 @@ msgstr "segundos restantes"
 
 #~ msgid "Waiting for your slow USB Device: %i secs..."
 #~ msgstr "Esperando por tu lento disp. USB: %i segs..."
-
-#~ msgid "No partitions found"
-#~ msgstr "Particiones no encontradas"
-
-#~ msgid "Restart"
-#~ msgstr "Reiniciar"
-
-#~ msgid "Saving"
-#~ msgstr "Guardando"

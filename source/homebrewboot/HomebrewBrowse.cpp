@@ -902,11 +902,11 @@ int MenuHomebrewBrowse() {
                                 CloseConnection();
                                 break;
                             } else if (strstr(filename,".zip")) {
-                                WindowPrompt(tr("SUCCESS:"), tr("Uploaded zip file installed to homebrew directory."), tr("OK"));
+                                WindowPrompt(tr("Success:"), tr("Uploaded ZIP file installed to homebrew directory."), tr("OK"));
 								CloseConnection();
                             } else {
                                 FreeHomebrewBuffer();
-                                WindowPrompt(tr("ERROR:"), tr("Not a dol/elf file."), tr("OK"));
+                                WindowPrompt(tr("ERROR:"), tr("Not a DOL/ELF file."), tr("OK"));
 							}
                         }
                     }

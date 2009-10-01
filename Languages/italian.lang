@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-# italian.lang - v41 - r743
-# don't delete this line (é).
+# italian.lang - v42 - r763
+# don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-27 22:13+0200\n"
-"PO-Revision-Date: 2009-08-05 10:00+0200\n"
+"POT-Creation-Date: 2009-10-01 05:48+0200\n"
+"PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe & Cambo\n"
 "MIME-Version: 1.0\n"
@@ -47,7 +47,7 @@ msgid "20 min"
 msgstr "20 minuti"
 
 msgid "2D Cover Path"
-msgstr ""
+msgstr "Percorso Copertine 2D"
 
 msgid "3 (Mature 16+)"
 msgstr "3 (Ragazzi 16+)"
@@ -59,7 +59,7 @@ msgid "30 min"
 msgstr "30 minuti"
 
 msgid "3D Cover Path"
-msgstr ""
+msgstr "Percorso Copertine 3D"
 
 msgid "3D Covers"
 msgstr "Copertine 3D"
@@ -71,31 +71,31 @@ msgid "5 min"
 msgstr "5 minuti"
 
 msgid ">> Deleting tickets..."
-msgstr ">> Cancellazione ticket..."
+msgstr ">> Eliminazione ticket..."
 
 msgid ">> Deleting tickets...ERROR! "
-msgstr ">> Cancellazione ticket...ERRORE! "
+msgstr ">> Eliminazione ticket...ERRORE! "
 
 msgid ">> Deleting tickets...Ok! "
-msgstr ">> Cancellazione ticket...OK! "
+msgstr ">> Eliminazione ticket...OK! "
 
 msgid ">> Deleting title ...ERROR! "
-msgstr ">> Cancellazione titolo...ERRORE! "
+msgstr ">> Eliminazione titolo...ERRORE! "
 
 msgid ">> Deleting title ...Ok!"
-msgstr ">> Cancellazione titolo...OK! "
+msgstr ">> Eliminazione titolo...OK! "
 
 msgid ">> Deleting title contents..."
-msgstr ">> Cancellazione contenuti..."
+msgstr ">> Eliminazione contenuti..."
 
 msgid ">> Deleting title contents...ERROR! "
-msgstr ">> Cancellazione contenuti...ERRORE! "
+msgstr ">> Eliminazione contenuti...ERRORE! "
 
 msgid ">> Deleting title contents...Ok!"
-msgstr ">> Cancellazione contenuti...OK! "
+msgstr ">> Eliminazione contenuti...OK! "
 
 msgid ">> Deleting title..."
-msgstr ">> Cancellazione titolo..."
+msgstr ">> Eliminazione titolo..."
 
 msgid ">> Finishing installation..."
 msgstr ">> Sto terminando l'installazione..."
@@ -131,7 +131,7 @@ msgid "An Error occured"
 msgstr "C'è stato un errore"
 
 msgid "Anti"
-msgstr "Anti"
+msgstr ""
 
 msgid "App Language"
 msgstr "Percorso Lingua"
@@ -196,12 +196,6 @@ msgstr "Non posso eliminare:"
 msgid "Cancel"
 msgstr "Cancella"
 
-msgid "Cheatcodes Path"
-msgstr "Percorso Trucchi"
-
-msgid "Cheatcodes Path changed"
-msgstr "Percorso Trucchi modificato"
-
 msgid "Cheatfile is blank"
 msgstr "il file dei trucchi è vuoto"
 
@@ -233,11 +227,14 @@ msgstr "Sviluppato da: %s"
 msgid "Coding:"
 msgstr "Sviluppo:"
 
+msgid "Compressed:"
+msgstr ""
+
 msgid "Confirm"
 msgstr "Confermare"
 
 msgid "Console"
-msgstr "Console"
+msgstr ""
 
 msgid "Console Default"
 msgstr "Predefinita Console"
@@ -290,23 +287,32 @@ msgstr "Non è stato possibile impostare la porta USB."
 msgid "Cover Download"
 msgstr "Scaricamento Copertine"
 
-msgid "Coverpath Change"
+msgid "Cover Path Change"
 msgstr "Modifica Percorso Copertine"
 
-msgid "Coverpath Changed"
+msgid "Cover Path Changed"
 msgstr "Percorso Copertine Modificato"
 
 msgid "Create"
 msgstr "Crea"
 
 msgid "Credits"
-msgstr "Credits"
+msgstr ""
 
 msgid "Custom Paths"
 msgstr "Impostazione Percorsi (Directory)"
 
 msgid "Customs/Original"
 msgstr "Modific./Origin."
+
+msgid "DOL Path"
+msgstr "Percorso File DOL"
+
+msgid "DOL path change"
+msgstr "Modifica percorso file DOL"
+
+msgid "DOL path changed"
+msgstr "Percorso File DOL Modificato"
 
 msgid "Dec"
 msgstr "dicembre"
@@ -321,21 +327,21 @@ msgid "Default Settings"
 msgstr "Impostazioni Predefinite"
 
 msgid "Delete"
-msgstr "Cancella"
+msgstr "Elimina"
 
 msgid "Delete ?"
 msgstr "Vuoi eliminare ?"
 
-msgid "Delete Boxart"
-msgstr "Elimina la copertina"
-
 msgid "Delete Cheat GCT"
 msgstr "Elimina Trucchi GCT"
 
-msgid "Delete CheatTxt"
+msgid "Delete Cheat TXT"
 msgstr "Elimina il file dei trucchi"
 
-msgid "Delete Discart"
+msgid "Delete Cover Artwork"
+msgstr "Elimina la copertina"
+
+msgid "Delete Disc Artwork"
 msgstr "Elimina l'immagine disco"
 
 msgid "Design:"
@@ -344,29 +350,29 @@ msgstr "Grafica:"
 msgid "Developed by"
 msgstr "Sviluppato da"
 
+msgid "Disc Artwork Download"
+msgstr "Scaricamento Imm. Disco"
+
+msgid "Disc Artwork Path"
+msgstr "Percorso Imm. Disco"
+
 msgid "Disc Default"
 msgstr "Predefinita Disco"
 
 msgid "Disc Images"
 msgstr "Immagini Disco"
 
-msgid "Discimage Path"
-msgstr "Percorso Imm. Disco"
-
-msgid "Discimages Download"
-msgstr "Scaricamento Imm. Disco"
-
-msgid "Discpath Changed"
+msgid "Disc Path Changed"
 msgstr "Percorso Immagini Disco Modificato"
 
-msgid "Discpath change"
+msgid "Disc Path change"
 msgstr "Modifica Percorso Immagini Disco"
 
 msgid "DiskFlip"
 msgstr "Gira i dischi"
 
 msgid "Display"
-msgstr "Display"
+msgstr ""
 
 msgid "Display as a carousel"
 msgstr "Visualizzazione a Carosello"
@@ -392,20 +398,11 @@ msgstr "Vuoi formattare:"
 msgid "Do you want to retry for 30 secs?"
 msgstr "Vuoi riprovare per 30 sec?"
 
-msgid "Do you want to use the alt dol that is known to be correct?"
-msgstr "Vuoi utilizzare il dol alternativo funzionante?"
+msgid "Do you want to use the alternate DOL that is known to be correct?"
+msgstr "Vuoi utilizzare il DOL alternativo funzionante?"
 
 msgid "Do you wish to update/download all language files?"
 msgstr "Vuoi scaricare/aggiornare tutti i file delle lingue?"
-
-msgid "Dol Path"
-msgstr "Percorso File DOL"
-
-msgid "Dolpath Changed"
-msgstr "Percorso File DOL Modificato"
-
-msgid "Dolpath change"
-msgstr "Modifica percorso file DOL"
 
 msgid "Done!"
 msgstr "Fatto!"
@@ -499,6 +496,12 @@ msgstr "Francese"
 
 msgid "Full Shutdown"
 msgstr "Completo"
+
+msgid "GCT Cheatcodes Path"
+msgstr "Percorso Trucchi in GCT"
+
+msgid "GCT Cheatcodes Path changed"
+msgstr "Percorso Trucchi in GCT modificato"
 
 msgid "GCT File created"
 msgstr "File GCT creato"
@@ -662,8 +665,8 @@ msgstr "Caricamento da SD/USB"
 msgid "Load file from: %s ?"
 msgstr "Vuoi caricare il file da: %s ?"
 
-msgid "Load this dol as alternate dol?"
-msgstr "Vuoi caricare questo dol come dol alternativo?"
+msgid "Load this DOL as alternate DOL?"
+msgstr "Vuoi caricare questo DOL come DOL alternativo?"
 
 msgid "Loading standard language."
 msgstr "Caricamento Lingua Standard."
@@ -689,6 +692,9 @@ msgstr "File Mancante/i"
 msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr "Molto probabilmente le dimensioni non sono divisibili per 4."
 
+msgid "Mount DVD drive"
+msgstr "Attiva lettore DVD"
+
 msgid "Music Volume"
 msgstr "Volume"
 
@@ -702,13 +708,16 @@ msgid "Next"
 msgstr "Avanti"
 
 msgid "No"
-msgstr "No"
+msgstr ""
 
 msgid "No .dol or .elf files found."
 msgstr "Non sono stati trovati file .dol o .elf"
 
 msgid "No Cheatfile found"
 msgstr "Nessun file trucchi trovato"
+
+msgid "No DOL file found on disc."
+msgstr "Nessun file DOL trovato sul disco."
 
 msgid "No Favorites"
 msgstr "Nessun Preferito"
@@ -731,9 +740,6 @@ msgstr "Non è stato selezionato alcun trucco"
 msgid "No data could be read."
 msgstr "Non è stato possibile leggere alcun dato."
 
-msgid "No dol file found on disc."
-msgstr "Nessun file dol trovato sul disco."
-
 msgid "No file missing!"
 msgstr "Nessun file mancante!"
 
@@ -749,11 +755,11 @@ msgstr "Copert. Normali"
 msgid "Not Found"
 msgstr "Non Trovato"
 
+msgid "Not a DOL/ELF file."
+msgstr "Non è un file DOL/ELF."
+
 msgid "Not a Wii Disc"
 msgstr "Non è un Disco Wii"
-
-msgid "Not a dol/elf file."
-msgstr "Non è un file dol/elf."
 
 msgid "Not enough free memory"
 msgstr "Memoria insufficiente"
@@ -771,22 +777,19 @@ msgid "Nov"
 msgstr "novembre"
 
 msgid "OFF"
-msgstr "OFF"
+msgstr ""
 
 msgid "OK"
-msgstr "OK"
+msgstr ""
 
 msgid "ON"
-msgstr "ON"
+msgstr ""
 
 msgid "Oct"
 msgstr "ottobre"
 
 msgid "Official Site"
 msgstr "Sito Ufficiale"
-
-msgid "Ok"
-msgstr "OK"
 
 msgid "Only Customs"
 msgstr "Modificate"
@@ -810,7 +813,7 @@ msgid "Partition"
 msgstr "Partizione"
 
 msgid "Password"
-msgstr "Password"
+msgstr ""
 
 msgid "Password Changed"
 msgstr "Password modificata"
@@ -831,7 +834,7 @@ msgid "Play Count"
 msgstr "Giocati"
 
 msgid "Please wait..."
-msgstr ""
+msgstr "Attendere prego..."
 
 msgid "Power off the Wii"
 msgstr "Spegnimento Wii"
@@ -915,7 +918,7 @@ msgid "Sept"
 msgstr "settembre"
 
 msgid "Set Search-Filter"
-msgstr ""
+msgstr "Imposta Filtro"
 
 msgid "Set as backgroundmusic?"
 msgstr "Imposto come Musica Sottofondo?"
@@ -971,11 +974,11 @@ msgstr "Predefinita Sistema"
 msgid "TChinese"
 msgstr "Cinese Tradizionale"
 
-msgid "TXTCheatcodes Path"
-msgstr "Percorso Trucchi in Txt"
+msgid "TXT Cheatcodes Path"
+msgstr "Percorso Trucchi in TXT"
 
-msgid "TXTCheatcodes Path changed"
-msgstr "Percorso Trucchi in Txt modificato"
+msgid "TXT Cheatcodes Path changed"
+msgstr "Percorso Trucchi in TXT modificato"
 
 msgid "The file is not a .wad"
 msgstr "Non è un file .wad"
@@ -987,13 +990,13 @@ msgstr "File Wad installato. Non si può però eliminare dalla scheda SD."
 msgid "The wad installation failed with error %ld"
 msgstr "L'installazione del WAD è fallita con errore %ld"
 
-msgid "ThemePath"
+msgid "Theme Path"
 msgstr "Percorso Tema"
 
-msgid "Themepath Changed"
+msgid "Theme Path Changed"
 msgstr "Percorso Tema modificato"
 
-msgid "Themepath change"
+msgid "Theme Path change"
 msgstr "Modifica Percorso Tema"
 
 msgid "Time left:"
@@ -1002,8 +1005,8 @@ msgstr "Restante:"
 msgid "Title Launcher"
 msgstr "Schermata Titoli"
 
-msgid "Titles from XML"
-msgstr "Titoli dal file XML"
+msgid "Titles from WiiTDB"
+msgstr "Titoli dal file WiiTDB"
 
 msgid "Tooltips"
 msgstr "Suggerimenti"
@@ -1048,6 +1051,12 @@ msgstr "Solo DOL"
 msgid "Update Files"
 msgstr "Aggiorna File"
 
+msgid "Update Path"
+msgstr "Percorso Aggiornamento"
+
+msgid "Update Path changed."
+msgstr "Perc. Aggiornamento Modificato"
+
 msgid "Update all Language Files"
 msgstr "Aggiorna tutti i file delle lingue"
 
@@ -1056,12 +1065,6 @@ msgstr "Aggiornamento Fallito"
 
 msgid "Update to"
 msgstr "Aggiorna alla"
-
-msgid "Updatepath"
-msgstr "Percorso Aggiornamento"
-
-msgid "Updatepath changed."
-msgstr "Perc. Aggiornamento Modificato"
 
 msgid "Updating"
 msgstr "Aggiornamento"
@@ -1074,6 +1077,9 @@ msgstr "Aggiornamento file delle lingue:"
 
 msgid "Updating WiiTDB.zip"
 msgstr "Aggiornamento file WiiTDB.zip"
+
+msgid "Uploaded ZIP file installed to homebrew directory."
+msgstr ""
 
 msgid "VIDTV Patch"
 msgstr "Video Forzato"
@@ -1109,26 +1115,26 @@ msgstr "Impostazioni Wii"
 msgid "WiiTDB Files"
 msgstr "File WiiTDB"
 
+msgid "WiiTDB Path"
+msgstr "Percorso Archivio WiiTDB"
+
+msgid "WiiTDB Path change"
+msgstr "Modifica percorso archivio WiiTDB"
+
+msgid "WiiTDB Path changed."
+msgstr "Percorso archivio WiiTDB modificato."
+
 msgid "Wiilight"
 msgstr "Illuminazione Wii"
 
 msgid "Wrong Password"
 msgstr "Password Errata"
 
-msgid "XMLPath"
-msgstr "Percorso Archivio XML"
-
-msgid "XMLPath change"
-msgstr "Modifica percorso archivio XML"
-
-msgid "XMLPath changed."
-msgstr "Percorso archivio XML modificato."
-
 msgid "Yes"
 msgstr "Sì"
 
 msgid "You are about to delete "
-msgstr "Stai per cancellare "
+msgstr "Stai per eliminare "
 
 msgid "You are choosing to display favorites and you do not have any selected."
 msgstr "Hai scelto di visualizzare i preferiti e non ne hai selezionato nessuno"
@@ -1200,14 +1206,8 @@ msgstr "di"
 msgid "seconds left"
 msgstr "secondi mancanti"
 
-#~ msgid "Cover Path"
-#~ msgstr "Percorso Copertine"
-
 #~ msgid "You need to start this game one time to create a save file, then exit and start it again."
 #~ msgstr "Devi caricare questo gioco almeno una volta per creare un file di salvataggio, quindi esci dal gioco e ricaricalo di nuovo."
-
-#~ msgid "Don't bother the USB Loader GX Team about errors in this file."
-#~ msgstr "Non infastidire il team di sviluppo dell'USB Loader GX per errori in questo file."
 
 #~ msgid "ERROR: USB device could not be loaded!"
 #~ msgstr "ERRORE: non si accede alla periferica USB!"
@@ -1220,9 +1220,3 @@ msgstr "secondi mancanti"
 
 #~ msgid "Waiting for your slow USB Device: %i secs..."
 #~ msgstr "Sto aspettando la tua lenta periferica USB: %i secs..."
-
-#~ msgid "No partitions found"
-#~ msgstr "Nessuna partizione trovata"
-
-#~ msgid "Restart"
-#~ msgstr "Riavvia"

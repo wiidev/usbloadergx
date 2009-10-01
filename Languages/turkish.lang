@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-#
-# don't delete this line (é).
+# turkish.lang - r
+# don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-27 20:15+0200\n"
-"PO-Revision-Date: 2009-07-18 15:18+0200\n"
+"POT-Creation-Date: 2009-10-01 05:48+0200\n"
+"PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -47,7 +47,7 @@ msgid "20 min"
 msgstr ""
 
 msgid "2D Cover Path"
-msgstr ""
+msgstr "2D Kapak Yolu"
 
 msgid "3 (Mature 16+)"
 msgstr ""
@@ -59,7 +59,7 @@ msgid "30 min"
 msgstr ""
 
 msgid "3D Cover Path"
-msgstr ""
+msgstr "3D Kapak Yolu"
 
 msgid "3D Covers"
 msgstr "3B Kapaklar"
@@ -196,12 +196,6 @@ msgstr "Silinemiyor"
 msgid "Cancel"
 msgstr "Iptal"
 
-msgid "Cheatcodes Path"
-msgstr ""
-
-msgid "Cheatcodes Path changed"
-msgstr ""
-
 msgid "Cheatfile is blank"
 msgstr ""
 
@@ -231,6 +225,9 @@ msgid "Coded by: %s"
 msgstr ""
 
 msgid "Coding:"
+msgstr ""
+
+msgid "Compressed:"
 msgstr ""
 
 msgid "Confirm"
@@ -290,10 +287,10 @@ msgstr ""
 msgid "Cover Download"
 msgstr "Kapak Indirme"
 
-msgid "Coverpath Change"
+msgid "Cover Path Change"
 msgstr ""
 
-msgid "Coverpath Changed"
+msgid "Cover Path Changed"
 msgstr "Kapak Yolu Degistir"
 
 msgid "Create"
@@ -306,6 +303,15 @@ msgid "Custom Paths"
 msgstr ""
 
 msgid "Customs/Original"
+msgstr ""
+
+msgid "DOL Path"
+msgstr ""
+
+msgid "DOL path change"
+msgstr ""
+
+msgid "DOL path changed"
 msgstr ""
 
 msgid "Dec"
@@ -326,16 +332,16 @@ msgstr ""
 msgid "Delete ?"
 msgstr ""
 
-msgid "Delete Boxart"
-msgstr ""
-
 msgid "Delete Cheat GCT"
 msgstr ""
 
-msgid "Delete CheatTxt"
+msgid "Delete Cheat TXT"
 msgstr ""
 
-msgid "Delete Discart"
+msgid "Delete Cover Artwork"
+msgstr ""
+
+msgid "Delete Disc Artwork"
 msgstr ""
 
 msgid "Design:"
@@ -344,22 +350,22 @@ msgstr ""
 msgid "Developed by"
 msgstr ""
 
+msgid "Disc Artwork Download"
+msgstr ""
+
+msgid "Disc Artwork Path"
+msgstr "Disk Resimleri Yolu"
+
 msgid "Disc Default"
 msgstr "Disk Ayari"
 
 msgid "Disc Images"
 msgstr "Disk Resimleri"
 
-msgid "Discimage Path"
-msgstr "Disk Resimleri Yolu"
-
-msgid "Discimages Download"
-msgstr ""
-
-msgid "Discpath Changed"
+msgid "Disc Path Changed"
 msgstr "Disk Resimleri Yolu Degistirildi"
 
-msgid "Discpath change"
+msgid "Disc Path change"
 msgstr "Disk Resimleri Yolunu Degistir"
 
 msgid "DiskFlip"
@@ -392,19 +398,10 @@ msgstr "Formatlamak istiyor musunuz:"
 msgid "Do you want to retry for 30 secs?"
 msgstr "30 saniye sonra denemek ister misiniz?"
 
-msgid "Do you want to use the alt dol that is known to be correct?"
+msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr ""
 
 msgid "Do you wish to update/download all language files?"
-msgstr ""
-
-msgid "Dol Path"
-msgstr ""
-
-msgid "Dolpath Changed"
-msgstr ""
-
-msgid "Dolpath change"
 msgstr ""
 
 msgid "Done!"
@@ -499,6 +496,12 @@ msgstr "Fransizca"
 
 msgid "Full Shutdown"
 msgstr "Tam Kapama"
+
+msgid "GCT Cheatcodes Path"
+msgstr ""
+
+msgid "GCT Cheatcodes Path changed"
+msgstr ""
 
 msgid "GCT File created"
 msgstr ""
@@ -662,7 +665,7 @@ msgstr ""
 msgid "Load file from: %s ?"
 msgstr ""
 
-msgid "Load this dol as alternate dol?"
+msgid "Load this DOL as alternate DOL?"
 msgstr ""
 
 msgid "Loading standard language."
@@ -689,6 +692,9 @@ msgstr "Kayip dosyalar"
 msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr ""
 
+msgid "Mount DVD drive"
+msgstr ""
+
 msgid "Music Volume"
 msgstr "Ses"
 
@@ -708,6 +714,9 @@ msgid "No .dol or .elf files found."
 msgstr ""
 
 msgid "No Cheatfile found"
+msgstr ""
+
+msgid "No DOL file found on disc."
 msgstr ""
 
 msgid "No Favorites"
@@ -731,9 +740,6 @@ msgstr ""
 msgid "No data could be read."
 msgstr ""
 
-msgid "No dol file found on disc."
-msgstr ""
-
 msgid "No file missing!"
 msgstr "Kayip dosya yok!"
 
@@ -741,7 +747,7 @@ msgid "No new updates."
 msgstr ""
 
 msgid "Normal"
-msgstr "Normal"
+msgstr ""
 
 msgid "Normal Covers"
 msgstr "Normal Kapaklar"
@@ -749,11 +755,11 @@ msgstr "Normal Kapaklar"
 msgid "Not Found"
 msgstr ""
 
+msgid "Not a DOL/ELF file."
+msgstr ""
+
 msgid "Not a Wii Disc"
 msgstr "Wii Diski Degil"
-
-msgid "Not a dol/elf file."
-msgstr ""
 
 msgid "Not enough free memory"
 msgstr ""
@@ -774,7 +780,7 @@ msgid "OFF"
 msgstr "KAPALI"
 
 msgid "OK"
-msgstr "OK"
+msgstr ""
 
 msgid "ON"
 msgstr "AÇIK"
@@ -784,9 +790,6 @@ msgstr ""
 
 msgid "Official Site"
 msgstr "Resmi Site"
-
-msgid "Ok"
-msgstr ""
 
 msgid "Only Customs"
 msgstr ""
@@ -971,10 +974,10 @@ msgstr "Sistem Ayari"
 msgid "TChinese"
 msgstr "Geleneksel Çince"
 
-msgid "TXTCheatcodes Path"
+msgid "TXT Cheatcodes Path"
 msgstr ""
 
-msgid "TXTCheatcodes Path changed"
+msgid "TXT Cheatcodes Path changed"
 msgstr ""
 
 msgid "The file is not a .wad"
@@ -987,13 +990,13 @@ msgstr ""
 msgid "The wad installation failed with error %ld"
 msgstr ""
 
-msgid "ThemePath"
+msgid "Theme Path"
 msgstr "Tema Yolu"
 
-msgid "Themepath Changed"
+msgid "Theme Path Changed"
 msgstr "Tema Yolu Degisti"
 
-msgid "Themepath change"
+msgid "Theme Path change"
 msgstr "Tema yolunu degistir"
 
 msgid "Time left:"
@@ -1002,7 +1005,7 @@ msgstr "Kalan zaman:"
 msgid "Title Launcher"
 msgstr ""
 
-msgid "Titles from XML"
+msgid "Titles from WiiTDB"
 msgstr ""
 
 msgid "Tooltips"
@@ -1048,6 +1051,12 @@ msgstr ""
 msgid "Update Files"
 msgstr ""
 
+msgid "Update Path"
+msgstr ""
+
+msgid "Update Path changed."
+msgstr ""
+
 msgid "Update all Language Files"
 msgstr ""
 
@@ -1055,12 +1064,6 @@ msgid "Update failed"
 msgstr ""
 
 msgid "Update to"
-msgstr ""
-
-msgid "Updatepath"
-msgstr ""
-
-msgid "Updatepath changed."
 msgstr ""
 
 msgid "Updating"
@@ -1073,6 +1076,9 @@ msgid "Updating Language Files:"
 msgstr ""
 
 msgid "Updating WiiTDB.zip"
+msgstr ""
+
+msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr ""
 
 msgid "VIDTV Patch"
@@ -1109,20 +1115,20 @@ msgstr ""
 msgid "WiiTDB Files"
 msgstr ""
 
+msgid "WiiTDB Path"
+msgstr ""
+
+msgid "WiiTDB Path change"
+msgstr ""
+
+msgid "WiiTDB Path changed."
+msgstr ""
+
 msgid "Wiilight"
 msgstr ""
 
 msgid "Wrong Password"
 msgstr "Yanlis Parola"
-
-msgid "XMLPath"
-msgstr ""
-
-msgid "XMLPath change"
-msgstr ""
-
-msgid "XMLPath changed."
-msgstr ""
 
 msgid "Yes"
 msgstr "Evet"
@@ -1199,12 +1205,3 @@ msgstr "/"
 
 msgid "seconds left"
 msgstr "saniye kaldi"
-
-#~ msgid "Cover Path"
-#~ msgstr "Kapak Yolu"
-
-#~ msgid "No partitions found"
-#~ msgstr "Bölüm bulunamadi"
-
-#~ msgid "Restart"
-#~ msgstr "Yeniden Baslat"

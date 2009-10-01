@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-#
-# don't delete this line (é).
+# japanese.lang - r755
+# don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-27 22:13+0200\n"
-"PO-Revision-Date: 2009-07-18 15:18+0200\n"
+"POT-Creation-Date: 2009-10-01 05:48+0200\n"
+"PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -47,7 +47,7 @@ msgid "20 min"
 msgstr "20分"
 
 msgid "2D Cover Path"
-msgstr ""
+msgstr "2Dカバーのパス"
 
 msgid "3 (Mature 16+)"
 msgstr "3 (高校生 16+)"
@@ -59,7 +59,7 @@ msgid "30 min"
 msgstr "30分"
 
 msgid "3D Cover Path"
-msgstr ""
+msgstr "3Dカバーのパス"
 
 msgid "3D Covers"
 msgstr "3D ｶﾊﾞｰ"
@@ -196,12 +196,6 @@ msgstr "削除できません:"
 msgid "Cancel"
 msgstr "ｷｬﾝｾﾙ"
 
-msgid "Cheatcodes Path"
-msgstr "ﾁｰﾄｺｰﾄﾞのパス"
-
-msgid "Cheatcodes Path changed"
-msgstr "ﾁｰﾄｺｰﾄﾞのパスが変更されました"
-
 msgid "Cheatfile is blank"
 msgstr "ﾁｰﾄﾌｧｲﾙがありません"
 
@@ -232,6 +226,9 @@ msgstr ""
 
 msgid "Coding:"
 msgstr "開発者:"
+
+msgid "Compressed:"
+msgstr ""
 
 msgid "Confirm"
 msgstr "確認"
@@ -290,23 +287,32 @@ msgstr "USBをｾｯﾄできません"
 msgid "Cover Download"
 msgstr "ｶﾊﾞｰ ﾀﾞｳﾝﾛｰﾄﾞ"
 
-msgid "Coverpath Change"
+msgid "Cover Path Change"
 msgstr "カバーのパスの変更"
 
-msgid "Coverpath Changed"
+msgid "Cover Path Changed"
 msgstr "カバーのパスを変更しました"
 
 msgid "Create"
 msgstr "作成"
 
 msgid "Credits"
-msgstr "提供・協力"
+msgstr "提供･協力"
 
 msgid "Custom Paths"
 msgstr "パスを変更"
 
 msgid "Customs/Original"
 msgstr "自作と公式"
+
+msgid "DOL Path"
+msgstr "DOLのパス"
+
+msgid "DOL path change"
+msgstr "DOLのパスの変更"
+
+msgid "DOL path changed"
+msgstr "DOLのパスが変更されました"
 
 msgid "Dec"
 msgstr "12月"
@@ -326,16 +332,16 @@ msgstr "削除しますか"
 msgid "Delete ?"
 msgstr "削除しますか？"
 
-msgid "Delete Boxart"
-msgstr "ｶﾊﾞｰｲﾒｰｼﾞの削除"
-
 msgid "Delete Cheat GCT"
 msgstr "GCTﾌｧｲﾙを削除"
 
-msgid "Delete CheatTxt"
+msgid "Delete Cheat TXT"
 msgstr "ﾃｷｽﾄｺｰﾄﾞの削除"
 
-msgid "Delete Discart"
+msgid "Delete Cover Artwork"
+msgstr "ｶﾊﾞｰｲﾒｰｼﾞの削除"
+
+msgid "Delete Disc Artwork"
 msgstr "ﾃﾞｨｽｸｲﾒｰｼﾞの削除"
 
 msgid "Design:"
@@ -344,22 +350,22 @@ msgstr "ﾃﾞｻﾞｲﾝ:"
 msgid "Developed by"
 msgstr "開発者："
 
+msgid "Disc Artwork Download"
+msgstr "ﾀﾞｳﾝﾛｰﾄﾞするﾃﾞｨｽｸ画像"
+
+msgid "Disc Artwork Path"
+msgstr "ﾃﾞｨｽｸ画像のパス"
+
 msgid "Disc Default"
 msgstr "ﾃﾞｨｽｸのﾃﾞﾌｫﾙﾄ"
 
 msgid "Disc Images"
 msgstr "ﾃﾞｨｽｸｲﾒｰｼﾞ"
 
-msgid "Discimage Path"
-msgstr "ﾃﾞｨｽｸ画像のパス"
-
-msgid "Discimages Download"
-msgstr "ﾀﾞｳﾝﾛｰﾄﾞするﾃﾞｨｽｸ画像"
-
-msgid "Discpath Changed"
+msgid "Disc Path Changed"
 msgstr "ﾃﾞｨｽｸのパスを変更しました"
 
-msgid "Discpath change"
+msgid "Disc Path change"
 msgstr "ﾃﾞｨｽｸのパスの変更"
 
 msgid "DiskFlip"
@@ -392,20 +398,11 @@ msgstr "初期化しますか:"
 msgid "Do you want to retry for 30 secs?"
 msgstr "再試行しますか?"
 
-msgid "Do you want to use the alt dol that is known to be correct?"
+msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "既知の代替DOLを利用しますか？"
 
 msgid "Do you wish to update/download all language files?"
 msgstr "すべての言語ﾌｧｲﾙをｱｯﾌﾟﾃﾞｰﾄ(ﾀﾞｳﾝﾛｰﾄﾞ)しますか?"
-
-msgid "Dol Path"
-msgstr "DOLのパス"
-
-msgid "Dolpath Changed"
-msgstr "DOLのパスが変更されました"
-
-msgid "Dolpath change"
-msgstr "DOLのパスの変更"
 
 msgid "Done!"
 msgstr "完了！"
@@ -456,7 +453,7 @@ msgid "Error while transfering data."
 msgstr "ﾃﾞｰﾀ転送中のエラーが発生しました"
 
 msgid "Error..."
-msgstr "エラー..."
+msgstr "エラー…"
 
 msgid "Error:"
 msgstr "エラー:"
@@ -499,6 +496,12 @@ msgstr "ﾌﾗﾝｽ語"
 
 msgid "Full Shutdown"
 msgstr "電源を切る"
+
+msgid "GCT Cheatcodes Path"
+msgstr "GCTﾁｰﾄｺｰﾄﾞのパス"
+
+msgid "GCT Cheatcodes Path changed"
+msgstr "GCTﾁｰﾄｺｰﾄﾞのパスが変更されました"
 
 msgid "GCT File created"
 msgstr "GCTﾌｧｲﾙを作成しました"
@@ -662,7 +665,7 @@ msgstr "SD/USBからﾛｰﾄﾞ"
 msgid "Load file from: %s ?"
 msgstr "%sからﾌｧｲﾙをﾛｰﾄﾞしますか"
 
-msgid "Load this dol as alternate dol?"
+msgid "Load this DOL as alternate DOL?"
 msgstr "このDOLを代替DOLとしてﾛｰﾄﾞしますか？"
 
 msgid "Loading standard language."
@@ -689,6 +692,9 @@ msgstr "未検出ﾌｧｲﾙ"
 msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr "4で割り切れない寸法があります。"
 
+msgid "Mount DVD drive"
+msgstr ""
+
 msgid "Music Volume"
 msgstr "BGMの音量"
 
@@ -709,6 +715,9 @@ msgstr "DOL(ELF)ﾌｧｲﾙがありません"
 
 msgid "No Cheatfile found"
 msgstr "ﾁｰﾄﾌｧｲﾙが見つかりません"
+
+msgid "No DOL file found on disc."
+msgstr "ﾃﾞｨｽｸ内にDOLﾌｧｲﾙがありません"
 
 msgid "No Favorites"
 msgstr "お気に入りがありません"
@@ -731,9 +740,6 @@ msgstr "何も選ばれていません"
 msgid "No data could be read."
 msgstr "ﾃﾞｰﾀ読込に失敗しました"
 
-msgid "No dol file found on disc."
-msgstr "ﾃﾞｨｽｸ内にdolﾌｧｲﾙがありません"
-
 msgid "No file missing!"
 msgstr "ﾌｧｲﾙを検出できませんでした!"
 
@@ -749,11 +755,11 @@ msgstr "ﾉ-ﾏﾙｶﾊﾞｰ"
 msgid "Not Found"
 msgstr "見つかりません"
 
+msgid "Not a DOL/ELF file."
+msgstr "DOL(ELF)ﾌｧｲﾙではありません"
+
 msgid "Not a Wii Disc"
 msgstr "Wiiﾃﾞｨｽｸではありません"
-
-msgid "Not a dol/elf file."
-msgstr "dol(elf)ﾌｧｲﾙではありません"
 
 msgid "Not enough free memory"
 msgstr "空ﾒﾓﾘが不足しています"
@@ -785,9 +791,6 @@ msgstr "10月"
 msgid "Official Site"
 msgstr "公式ｻｲﾄ"
 
-msgid "Ok"
-msgstr "はい"
-
 msgid "Only Customs"
 msgstr "自作のみ"
 
@@ -801,7 +804,7 @@ msgid "Original/Customs"
 msgstr "公式と自作"
 
 msgid "Parental Control"
-msgstr "ﾍﾟｱﾚﾝﾀﾙｺﾝﾄﾛｰﾙ"
+msgstr "ペアレンタルコントロール"
 
 msgid "Parental control"
 msgstr "ﾍﾟｱﾚﾝﾀﾙｺﾝﾄﾛｰﾙ"
@@ -915,7 +918,7 @@ msgid "Sept"
 msgstr "9月"
 
 msgid "Set Search-Filter"
-msgstr ""
+msgstr "ﾌｨﾙﾀｰをｾｯﾄしました"
 
 msgid "Set as backgroundmusic?"
 msgstr "BGMに設定しますか"
@@ -971,10 +974,10 @@ msgstr "ｼｽﾃﾑのﾃﾞﾌｫﾙﾄ"
 msgid "TChinese"
 msgstr "繁体中国語"
 
-msgid "TXTCheatcodes Path"
+msgid "TXT Cheatcodes Path"
 msgstr "TXTｺｰﾄﾞのパス"
 
-msgid "TXTCheatcodes Path changed"
+msgid "TXT Cheatcodes Path changed"
 msgstr "TXTｺｰﾄﾞのパスを変更しました"
 
 msgid "The file is not a .wad"
@@ -987,13 +990,13 @@ msgstr "WADﾌｧｲﾙをｲﾝｽﾄｰﾙしましたが、SDから削除で�
 msgid "The wad installation failed with error %ld"
 msgstr "wadのｲﾝｽﾄｰﾙはerror %ldで失敗しました"
 
-msgid "ThemePath"
+msgid "Theme Path"
 msgstr "ﾃｰﾏのパス"
 
-msgid "Themepath Changed"
+msgid "Theme Path Changed"
 msgstr "ﾃｰﾏのパスを変更しました"
 
-msgid "Themepath change"
+msgid "Theme Path change"
 msgstr "ﾃｰﾏのパスの変更"
 
 msgid "Time left:"
@@ -1002,8 +1005,8 @@ msgstr "残り時間:"
 msgid "Title Launcher"
 msgstr "ﾀｲﾄﾙ ﾗﾝﾁｬｰ"
 
-msgid "Titles from XML"
-msgstr "XMLからﾀｲﾄﾙ読込"
+msgid "Titles from WiiTDB"
+msgstr "WiiTDBからﾀｲﾄﾙ読込"
 
 msgid "Tooltips"
 msgstr "ﾋﾝﾄﾊﾞﾙｰﾝ"
@@ -1048,6 +1051,12 @@ msgstr "DOLを更新"
 msgid "Update Files"
 msgstr "ﾌｧｲﾙを更新"
 
+msgid "Update Path"
+msgstr "GXのパス"
+
+msgid "Update Path changed."
+msgstr "GXのパスを変更しました"
+
 msgid "Update all Language Files"
 msgstr "全言語ﾌｧｲﾙを更新"
 
@@ -1056,12 +1065,6 @@ msgstr "更新に失敗しました"
 
 msgid "Update to"
 msgstr ""
-
-msgid "Updatepath"
-msgstr "GXのパス"
-
-msgid "Updatepath changed."
-msgstr "GXのパスを変更しました"
 
 msgid "Updating"
 msgstr "更新中"
@@ -1074,6 +1077,9 @@ msgstr "言語設定ﾌｧｲﾙを更新中:"
 
 msgid "Updating WiiTDB.zip"
 msgstr "WiiTDB.zipを更新中"
+
+msgid "Uploaded ZIP file installed to homebrew directory."
+msgstr ""
 
 msgid "VIDTV Patch"
 msgstr "VIDTVﾊﾟｯﾁ"
@@ -1109,20 +1115,20 @@ msgstr "Wii 設定"
 msgid "WiiTDB Files"
 msgstr "WiiTDBﾌｧｲﾙ"
 
+msgid "WiiTDB Path"
+msgstr "WiiTDBのパス"
+
+msgid "WiiTDB Path change"
+msgstr "WiiTDBのパスの変更"
+
+msgid "WiiTDB Path changed."
+msgstr "WiiTDBのパスを変更しました."
+
 msgid "Wiilight"
 msgstr "ｽﾛｯﾄｲﾙﾐﾈｰｼｮﾝ"
 
 msgid "Wrong Password"
 msgstr "パスﾜｰﾄﾞを間違えています"
-
-msgid "XMLPath"
-msgstr "XMLのパス"
-
-msgid "XMLPath change"
-msgstr "XMLのパスの変更"
-
-msgid "XMLPath changed."
-msgstr "XMLのパスを変更しました"
 
 msgid "Yes"
 msgstr "はい"
@@ -1199,15 +1205,3 @@ msgstr ""
 
 msgid "seconds left"
 msgstr "完了までの秒数"
-
-#~ msgid "Cover Path"
-#~ msgstr "ｶﾊﾞｰのパス"
-
-#~ msgid "Don't bother the USB Loader GX Team about errors in this file."
-#~ msgstr "GXの開発ﾁｰﾑは、このﾌｧｲﾙに関するエラーに対応しません。"
-
-#~ msgid "No partitions found"
-#~ msgstr "ﾊﾟｰﾃｨｼｮﾝを検出できませんでした"
-
-#~ msgid "Restart"
-#~ msgstr "再起動"

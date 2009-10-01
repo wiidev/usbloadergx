@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-#
-# don't delete this line (é).
+# czech.lang - r719
+# don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-27 20:15+0200\n"
-"PO-Revision-Date: 2009-07-18 15:18+0200\n"
+"POT-Creation-Date: 2009-10-01 05:48+0200\n"
+"PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) \n"
 "Language-Team: r719 - last version on http://volny.cz/djelinek/_USBLoderGX/czech.lang \n"
 "MIME-Version: 1.0\n"
@@ -47,7 +47,7 @@ msgid "20 min"
 msgstr "20 minut"
 
 msgid "2D Cover Path"
-msgstr ""
+msgstr "Cesta k 2D obalum"
 
 msgid "3 (Mature 16+)"
 msgstr "3 (Zralý 16+)"
@@ -59,7 +59,7 @@ msgid "30 min"
 msgstr "30 minut"
 
 msgid "3D Cover Path"
-msgstr ""
+msgstr "Cesta k 3D obalum"
 
 msgid "3D Covers"
 msgstr "3D Obaly"
@@ -196,12 +196,6 @@ msgstr "Nelze smazat:"
 msgid "Cancel"
 msgstr "Zrušit"
 
-msgid "Cheatcodes Path"
-msgstr "Cesta pro cheat kódy"
-
-msgid "Cheatcodes Path changed"
-msgstr "Cesta pro cheat kódy zmenena"
-
 msgid "Cheatfile is blank"
 msgstr "Soubor s cheaty je prázdný"
 
@@ -232,6 +226,9 @@ msgstr "Naprogramoval: %s"
 
 msgid "Coding:"
 msgstr "Programování:"
+
+msgid "Compressed:"
+msgstr ""
 
 msgid "Confirm"
 msgstr "Potvrdit"
@@ -290,10 +287,10 @@ msgstr "Nelze nastavit USB"
 msgid "Cover Download"
 msgstr "Stažení obalu"
 
-msgid "Coverpath Change"
+msgid "Cover Path Change"
 msgstr "Zmena cesty k obalom"
 
-msgid "Coverpath Changed"
+msgid "Cover Path Changed"
 msgstr "Cesta k obalum zmenena"
 
 msgid "Create"
@@ -307,6 +304,15 @@ msgstr "Vlastní cesty"
 
 msgid "Customs/Original"
 msgstr "Upravené/Originál"
+
+msgid "DOL Path"
+msgstr "Cesta k DOL"
+
+msgid "DOL path change"
+msgstr "Zmena cesty k DOL"
+
+msgid "DOL path changed"
+msgstr "Cesta k DOL zmenena"
 
 msgid "Dec"
 msgstr "List"
@@ -326,16 +332,16 @@ msgstr "Smazat"
 msgid "Delete ?"
 msgstr "Smazat?"
 
-msgid "Delete Boxart"
+msgid "Delete Cheat GCT"
+msgstr "Smazat Cheat GCT"
+
+msgid "Delete Cheat TXT"
+msgstr "Smazat Cheat TXT"
+
+msgid "Delete Cover Artwork"
 msgstr "Smazat obal krabicky"
 
-msgid "Delete Cheat GCT"
-msgstr ""
-
-msgid "Delete CheatTxt"
-msgstr "Smazat CheatTxt"
-
-msgid "Delete Discart"
+msgid "Delete Disc Artwork"
 msgstr "Smazat potisk DVD"
 
 msgid "Design:"
@@ -344,22 +350,22 @@ msgstr ""
 msgid "Developed by"
 msgstr "Vyvinul"
 
+msgid "Disc Artwork Download"
+msgstr "Stažení potisku DVD"
+
+msgid "Disc Artwork Path"
+msgstr "Cesta k potiskum DVD"
+
 msgid "Disc Default"
 msgstr "Puvodní nastavení disku"
 
 msgid "Disc Images"
 msgstr "Potisky DVD"
 
-msgid "Discimage Path"
-msgstr "Cesta k potiskum DVD"
-
-msgid "Discimages Download"
-msgstr "Stažení potisku DVD"
-
-msgid "Discpath Changed"
+msgid "Disc Path Changed"
 msgstr "Cesta k diskum zmenena"
 
-msgid "Discpath change"
+msgid "Disc Path change"
 msgstr "Zmena cesty k diskum"
 
 msgid "DiskFlip"
@@ -392,20 +398,11 @@ msgstr "Prejete si formátovat"
 msgid "Do you want to retry for 30 secs?"
 msgstr "Chcete to zkusit znovu za 30 sekund?"
 
-msgid "Do you want to use the alt dol that is known to be correct?"
+msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "Prejete si použít jiný DOL, který je správný?"
 
 msgid "Do you wish to update/download all language files?"
 msgstr "Prejete si zaktualizovat vsechny jazykové soubory?"
-
-msgid "Dol Path"
-msgstr "Cesta k DOL"
-
-msgid "Dolpath Changed"
-msgstr "Cesta k DOL zmenena"
-
-msgid "Dolpath change"
-msgstr "Zmena cesty k DOL"
 
 msgid "Done!"
 msgstr "Hotovo!"
@@ -500,6 +497,12 @@ msgstr "Francouzky"
 msgid "Full Shutdown"
 msgstr "Úplné vypnutí"
 
+msgid "GCT Cheatcodes Path"
+msgstr "Cesta pro cheat kódy"
+
+msgid "GCT Cheatcodes Path changed"
+msgstr "Cesta pro cheat kódy zmenena"
+
 msgid "GCT File created"
 msgstr "Soubor GCT vytvoren"
 
@@ -558,7 +561,7 @@ msgid "How to Shutdown?"
 msgstr "Jakým zpusobem ukoncit?"
 
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
-msgstr "  "
+msgstr ""
 
 #, c-format
 msgid "Incoming file %0.2fKB"
@@ -662,7 +665,7 @@ msgstr ""
 msgid "Load file from: %s ?"
 msgstr "Nahrát soubor z: %s ?"
 
-msgid "Load this dol as alternate dol?"
+msgid "Load this DOL as alternate DOL?"
 msgstr "Spustit tento DOL jako náhradní DOL?"
 
 msgid "Loading standard language."
@@ -689,6 +692,9 @@ msgstr "Chybející soubory"
 msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr "Nejspíše má velikost, která není delitelná 4."
 
+msgid "Mount DVD drive"
+msgstr ""
+
 msgid "Music Volume"
 msgstr "Hlasitost hudby"
 
@@ -709,6 +715,9 @@ msgstr "Nebyl nalezen .dol ani .elf soubor."
 
 msgid "No Cheatfile found"
 msgstr "Nebyl nalezen soubor s cheaty"
+
+msgid "No DOL file found on disc."
+msgstr "Na disku nebyl nalezen DOL soubor."
 
 msgid "No Favorites"
 msgstr "Žádné oblíbené"
@@ -731,9 +740,6 @@ msgstr ""
 msgid "No data could be read."
 msgstr "Nelze císt data?"
 
-msgid "No dol file found on disc."
-msgstr "Na disku nebyl nalezen DOL soubor."
-
 msgid "No file missing!"
 msgstr "Nechybí žádný soubor!"
 
@@ -749,11 +755,11 @@ msgstr "Normální obaly"
 msgid "Not Found"
 msgstr "Nenalezeno"
 
+msgid "Not a DOL/ELF file."
+msgstr "To není DOL/ELF soubor."
+
 msgid "Not a Wii Disc"
 msgstr "Toto není Wii disk"
-
-msgid "Not a dol/elf file."
-msgstr "To není DOL/ELF soubor."
 
 msgid "Not enough free memory"
 msgstr "Není dostatek volné pameti"
@@ -784,9 +790,6 @@ msgstr "Ríj"
 
 msgid "Official Site"
 msgstr "Oficiální místo"
-
-msgid "Ok"
-msgstr ""
 
 msgid "Only Customs"
 msgstr "Pouze Upravené"
@@ -971,10 +974,10 @@ msgstr "Puvodní nastavení systému"
 msgid "TChinese"
 msgstr "Cínsky"
 
-msgid "TXTCheatcodes Path"
+msgid "TXT Cheatcodes Path"
 msgstr "Cesta k TXT cheatum"
 
-msgid "TXTCheatcodes Path changed"
+msgid "TXT Cheatcodes Path changed"
 msgstr "Cesta k TXT cheatum zmenena"
 
 msgid "The file is not a .wad"
@@ -987,13 +990,13 @@ msgstr "WAD soubor byl nainstalován, ale nelze smazat z SD karty"
 msgid "The wad installation failed with error %ld"
 msgstr "Instalace WAD souboru selhala s chybou %ld"
 
-msgid "ThemePath"
+msgid "Theme Path"
 msgstr "Cesta ke skinum"
 
-msgid "Themepath Changed"
+msgid "Theme Path Changed"
 msgstr "Cesta ke skinum zmenena"
 
-msgid "Themepath change"
+msgid "Theme Path change"
 msgstr "Zmena cesty ke skinum"
 
 msgid "Time left:"
@@ -1002,8 +1005,8 @@ msgstr "Zbývající cas:"
 msgid "Title Launcher"
 msgstr "Spouštec kanálu"
 
-msgid "Titles from XML"
-msgstr "Názvy z XML"
+msgid "Titles from WiiTDB"
+msgstr "Názvy z WiiTDB"
 
 msgid "Tooltips"
 msgstr "Popisky"
@@ -1048,6 +1051,12 @@ msgstr "Aktualizace DOL"
 msgid "Update Files"
 msgstr "Zaktualizuj soubory"
 
+msgid "Update Path"
+msgstr "Cesta pro aktualizaci"
+
+msgid "Update Path changed."
+msgstr "Cesta pro aktualizaci zmenena"
+
 msgid "Update all Language Files"
 msgstr "Zaktualizuj vsechny jazykové soubory"
 
@@ -1056,12 +1065,6 @@ msgstr "Aktualizace selhala"
 
 msgid "Update to"
 msgstr "Aktualizováno na"
-
-msgid "Updatepath"
-msgstr "Cesta pro aktualizaci"
-
-msgid "Updatepath changed."
-msgstr "Cesta pro aktualizaci zmenena"
 
 msgid "Updating"
 msgstr "Aktualizuji"
@@ -1074,6 +1077,9 @@ msgstr "Aktualizuji jazykové soubory:"
 
 msgid "Updating WiiTDB.zip"
 msgstr "Aktualizuji WiiTDB.zip"
+
+msgid "Uploaded ZIP file installed to homebrew directory."
+msgstr ""
 
 msgid "VIDTV Patch"
 msgstr "VIDTV korekce"
@@ -1109,20 +1115,20 @@ msgstr "Nastavení Wii"
 msgid "WiiTDB Files"
 msgstr "WiiTDB Soubory"
 
+msgid "WiiTDB Path"
+msgstr "Cesta k WiiTDB"
+
+msgid "WiiTDB Path change"
+msgstr "Zmenit cestu k WiiTDB"
+
+msgid "WiiTDB Path changed."
+msgstr "Cesta k WiiTDB zmenena"
+
 msgid "Wiilight"
 msgstr "Wii svetlo"
 
 msgid "Wrong Password"
 msgstr "Špatné heslo"
-
-msgid "XMLPath"
-msgstr "Cesta k XML"
-
-msgid "XMLPath change"
-msgstr "Zmenit cestu k XML"
-
-msgid "XMLPath changed."
-msgstr "Cesta k XML zmenena"
 
 msgid "Yes"
 msgstr "Ano"
@@ -1199,6 +1205,3 @@ msgstr "z "
 
 msgid "seconds left"
 msgstr "sekund zbývá"
-
-#~ msgid "Cover Path"
-#~ msgstr "Cesta k obalum"

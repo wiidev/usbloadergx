@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-#
-# don't delete this line (é).
+# german.lang - r743
+# don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-27 22:13+0200\n"
-"PO-Revision-Date: 2009-07-18 15:18+0200\n"
+"POT-Creation-Date: 2009-10-01 05:48+0200\n"
+"PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: wishmasterf\n"
 "Language-Team: Snoozer, wishmasterf\n"
 "MIME-Version: 1.0\n"
@@ -38,28 +38,28 @@ msgid "1 hour"
 msgstr "1 Stunde"
 
 msgid "10 min"
-msgstr "10 min"
+msgstr ""
 
 msgid "2 (Teen 12+)"
 msgstr "2 (Jugendliche 12+)"
 
 msgid "20 min"
-msgstr "20 min"
+msgstr ""
 
 msgid "2D Cover Path"
-msgstr ""
+msgstr "2D Cover Pfad"
 
 msgid "3 (Mature 16+)"
 msgstr "3 (Erwachsene 16+)"
 
 msgid "3 min"
-msgstr "3 min"
+msgstr ""
 
 msgid "30 min"
-msgstr "30 min"
+msgstr ""
 
 msgid "3D Cover Path"
-msgstr ""
+msgstr "3D Cover Pfad"
 
 msgid "3D Covers"
 msgstr "3D Cover"
@@ -68,7 +68,7 @@ msgid "4 (Adults Only 18+)"
 msgstr "4 (nur Erwachsene 18+)"
 
 msgid "5 min"
-msgstr "5 min"
+msgstr ""
 
 msgid ">> Deleting tickets..."
 msgstr ">> Lösche Tickets..."
@@ -119,7 +119,7 @@ msgid ">> Reading WAD data...Ok!"
 msgstr ">> Lese WAD Daten...Ok!"
 
 msgid "AUTO"
-msgstr "AUTO"
+msgstr ""
 
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "Alle Funktionen des USB Loader GX sind freigeschaltet."
@@ -131,19 +131,19 @@ msgid "An Error occured"
 msgstr "Ein Fehler ist aufgetreten"
 
 msgid "Anti"
-msgstr "Anti"
+msgstr ""
 
 msgid "App Language"
 msgstr "Sprache"
 
 msgid "Apr"
-msgstr "Apr"
+msgstr ""
 
 msgid "Are you sure?"
 msgstr "Sind sie sicher?"
 
 msgid "Aug"
-msgstr "Aug"
+msgstr ""
 
 msgid "AutoInit Network"
 msgstr "Netzwerkstart Auto"
@@ -196,12 +196,6 @@ msgstr "Löschen fehlgeschlagen:"
 msgid "Cancel"
 msgstr "Abbrechen"
 
-msgid "Cheatcodes Path"
-msgstr "Cheatcode Pfad"
-
-msgid "Cheatcodes Path changed"
-msgstr "Cheatcode Pfad geändert"
-
 msgid "Cheatfile is blank"
 msgstr "Cheatdatei ist leer"
 
@@ -232,6 +226,9 @@ msgstr "Programmiert von: %s"
 
 msgid "Coding:"
 msgstr "Programmierung:"
+
+msgid "Compressed:"
+msgstr ""
 
 msgid "Confirm"
 msgstr "Bestätigen"
@@ -290,10 +287,10 @@ msgstr "Konnte USB nicht setzen."
 msgid "Cover Download"
 msgstr "Cover Download"
 
-msgid "Coverpath Change"
+msgid "Cover Path Change"
 msgstr "Cover Pfad ändern"
 
-msgid "Coverpath Changed"
+msgid "Cover Path Changed"
 msgstr "Cover Pfad geändert"
 
 msgid "Create"
@@ -307,6 +304,15 @@ msgstr "Benutzerdefinierte Pfade"
 
 msgid "Customs/Original"
 msgstr "Benutzerdefiniert/Original"
+
+msgid "DOL Path"
+msgstr "DOL Pfad"
+
+msgid "DOL path change"
+msgstr "DOL pfad änderung"
+
+msgid "DOL path changed"
+msgstr "DOL pfad geändert"
 
 msgid "Dec"
 msgstr "Dez"
@@ -326,23 +332,29 @@ msgstr "Löschen"
 msgid "Delete ?"
 msgstr "Löschen ?"
 
-msgid "Delete Boxart"
-msgstr "Lösche Cover"
-
 msgid "Delete Cheat GCT"
 msgstr "Lösche Cheat GCT"
 
-msgid "Delete CheatTxt"
+msgid "Delete Cheat TXT"
 msgstr "Lösche CheatTxt"
 
-msgid "Delete Discart"
+msgid "Delete Cover Artwork"
+msgstr "Lösche Cover"
+
+msgid "Delete Disc Artwork"
 msgstr "Lösche Discart"
 
 msgid "Design:"
-msgstr "Design:"
+msgstr ""
 
 msgid "Developed by"
 msgstr "Entwickelt von"
+
+msgid "Disc Artwork Download"
+msgstr "DiskImages Download"
+
+msgid "Disc Artwork Path"
+msgstr "Disk Cover Pfad"
 
 msgid "Disc Default"
 msgstr "Diskstandard"
@@ -350,20 +362,14 @@ msgstr "Diskstandard"
 msgid "Disc Images"
 msgstr "Disk Cover"
 
-msgid "Discimage Path"
-msgstr "Disk Cover Pfad"
-
-msgid "Discimages Download"
-msgstr "DiskImages Download"
-
-msgid "Discpath Changed"
+msgid "Disc Path Changed"
 msgstr "Disk Pfad geändert"
 
-msgid "Discpath change"
+msgid "Disc Path change"
 msgstr "Disk Pfad ändern"
 
 msgid "DiskFlip"
-msgstr "DiskFlip"
+msgstr ""
 
 msgid "Display"
 msgstr "Anzeige"
@@ -392,20 +398,11 @@ msgstr "Möchten sie formatieren:"
 msgid "Do you want to retry for 30 secs?"
 msgstr "In 30 sek erneut versuchen?"
 
-msgid "Do you want to use the alt dol that is known to be correct?"
-msgstr "Möchten Sie eine als richtig bekannte alt dol verwenden? "
+msgid "Do you want to use the alternate DOL that is known to be correct?"
+msgstr "Möchten Sie eine als richtig bekannte alt DOL verwenden?"
 
 msgid "Do you wish to update/download all language files?"
 msgstr "Möchten Sie alle Sprachdateien aktualisieren/herunterladen?"
-
-msgid "Dol Path"
-msgstr "Dolpfad"
-
-msgid "Dolpath Changed"
-msgstr "Dolpfad geändert"
-
-msgid "Dolpath change"
-msgstr "Dolpfadänderung"
 
 msgid "Done!"
 msgstr "Fertig!"
@@ -471,7 +468,7 @@ msgid "Failed to open partition"
 msgstr "Öffnen der Partition fehlgeschlagen"
 
 msgid "Feb"
-msgstr "Feb"
+msgstr ""
 
 msgid "File not found."
 msgstr "Datei nicht gefunden."
@@ -480,7 +477,7 @@ msgid "Finishing installation... Ok!"
 msgstr "Beende Installation... Ok!"
 
 msgid "Flip-X"
-msgstr "Flip-X"
+msgstr ""
 
 msgid "Force"
 msgstr "Erzwinge"
@@ -499,6 +496,12 @@ msgstr "Französisch"
 
 msgid "Full Shutdown"
 msgstr "Ausschalten"
+
+msgid "GCT Cheatcodes Path"
+msgstr "GCT Cheatcode Pfad"
+
+msgid "GCT Cheatcodes Path changed"
+msgstr "GCT Cheatcode Pfad geändert"
 
 msgid "GCT File created"
 msgstr "GCT Datei erstellt"
@@ -546,7 +549,7 @@ msgid "Homebrew Channel"
 msgstr "Homebrew Kanal"
 
 msgid "Homebrew Launcher"
-msgstr "Homebrew Launcher"
+msgstr ""
 
 msgid "Hour"
 msgstr "Stunden"
@@ -617,7 +620,7 @@ msgid "Italian"
 msgstr "Italienisch"
 
 msgid "Jan"
-msgstr "Jan"
+msgstr ""
 
 msgid "Japanese"
 msgstr "Japanisch"
@@ -662,8 +665,8 @@ msgstr "Lade von SD/USB"
 msgid "Load file from: %s ?"
 msgstr "Datei laden aus %s ?"
 
-msgid "Load this dol as alternate dol?"
-msgstr "Diese dol als alternative dol laden?"
+msgid "Load this DOL as alternate DOL?"
+msgstr "Diese DOL als alternative DOL laden?"
 
 msgid "Loading standard language."
 msgstr "Lade Standardsprache."
@@ -689,6 +692,9 @@ msgstr "Fehlende Datei(en)"
 msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr "Höchstwahrscheinlich sind Breite und Höhe keine Vielfachen von 4."
 
+msgid "Mount DVD drive"
+msgstr ""
+
 msgid "Music Volume"
 msgstr "Lautstärke"
 
@@ -709,6 +715,9 @@ msgstr "Keine .dol oder .elf Datei gefunden"
 
 msgid "No Cheatfile found"
 msgstr "Keine Cheatdatei gefunden"
+
+msgid "No DOL file found on disc."
+msgstr "Keine DOL Datei auf der Disc gefunden."
 
 msgid "No Favorites"
 msgstr "Keine Favoriten"
@@ -731,9 +740,6 @@ msgstr "Es wurden keine Cheats ausgewählt"
 msgid "No data could be read."
 msgstr "Daten konnten nicht gelesen werden."
 
-msgid "No dol file found on disc."
-msgstr "Keine dol Datei auf der Disc gefunden."
-
 msgid "No file missing!"
 msgstr "Alle Dateien vorhanden!"
 
@@ -741,7 +747,7 @@ msgid "No new updates."
 msgstr "Keine Aktualisierung vorhanden."
 
 msgid "Normal"
-msgstr "Normal"
+msgstr ""
 
 msgid "Normal Covers"
 msgstr "Normale Cover"
@@ -749,11 +755,11 @@ msgstr "Normale Cover"
 msgid "Not Found"
 msgstr "Nicht gefunden"
 
+msgid "Not a DOL/ELF file."
+msgstr "Nicht DOL/ELF Datei"
+
 msgid "Not a Wii Disc"
 msgstr "Keine Wii Disk"
-
-msgid "Not a dol/elf file."
-msgstr "Nicht dol/elf Datei"
 
 msgid "Not enough free memory"
 msgstr "Nicht genügend freier Speicher"
@@ -768,13 +774,13 @@ msgid "Not supported format!"
 msgstr "Nicht unterstütztes Format!"
 
 msgid "Nov"
-msgstr "Nov"
+msgstr ""
 
 msgid "OFF"
 msgstr "AUS"
 
 msgid "OK"
-msgstr "OK"
+msgstr ""
 
 msgid "ON"
 msgstr "AN"
@@ -784,9 +790,6 @@ msgstr "Okt"
 
 msgid "Official Site"
 msgstr "Offizielle Seite"
-
-msgid "Ok"
-msgstr "Ok"
 
 msgid "Only Customs"
 msgstr "Nur Benutzerdefiniert"
@@ -912,7 +915,7 @@ msgid "Selected DOL"
 msgstr "Ausgewähltes DOL"
 
 msgid "Sept"
-msgstr "Sept"
+msgstr ""
 
 msgid "Set Search-Filter"
 msgstr ""
@@ -971,10 +974,10 @@ msgstr "Konsolenstandard"
 msgid "TChinese"
 msgstr "Traditionelles Chinesisch"
 
-msgid "TXTCheatcodes Path"
+msgid "TXT Cheatcodes Path"
 msgstr "TXTCheatcodes Pfad"
 
-msgid "TXTCheatcodes Path changed"
+msgid "TXT Cheatcodes Path changed"
 msgstr "TXTCheatcodes Pfad geändert"
 
 msgid "The file is not a .wad"
@@ -987,13 +990,13 @@ msgstr "Die wad wurde installiert. Aber Sie konnte nicht von der SD gelöscht we
 msgid "The wad installation failed with error %ld"
 msgstr "Die wad Installation schlug fehl durch Fehler %ld"
 
-msgid "ThemePath"
+msgid "Theme Path"
 msgstr "Theme Pfad"
 
-msgid "Themepath Changed"
+msgid "Theme Path Changed"
 msgstr "Theme Pfad geändert"
 
-msgid "Themepath change"
+msgid "Theme Path change"
 msgstr "Theme Pfad ändern"
 
 msgid "Time left:"
@@ -1002,8 +1005,8 @@ msgstr "Noch:"
 msgid "Title Launcher"
 msgstr "Title Starter"
 
-msgid "Titles from XML"
-msgstr "Titel aus XML"
+msgid "Titles from WiiTDB"
+msgstr "Titel aus WiiTDB"
 
 msgid "Tooltips"
 msgstr "ToolTips"
@@ -1048,6 +1051,12 @@ msgstr "Aktualisiere DOL"
 msgid "Update Files"
 msgstr "Aktualisiere Dateien"
 
+msgid "Update Path"
+msgstr "Update Pfad"
+
+msgid "Update Path changed."
+msgstr "Aktualisierungspfad geändert."
+
 msgid "Update all Language Files"
 msgstr "Aktualisiere alle Sprachdateien"
 
@@ -1056,12 +1065,6 @@ msgstr "Aktualisierung fehgeschlagen"
 
 msgid "Update to"
 msgstr "Aktualisiere zu"
-
-msgid "Updatepath"
-msgstr "Update Pfad"
-
-msgid "Updatepath changed."
-msgstr "Aktualisierungspfad geändert."
 
 msgid "Updating"
 msgstr "Aktualisiere"
@@ -1075,12 +1078,15 @@ msgstr "Aktualisiere Sprachdateien:"
 msgid "Updating WiiTDB.zip"
 msgstr "Aktualisiere WiiTDB.zip"
 
+msgid "Uploaded ZIP file installed to homebrew directory."
+msgstr ""
+
 msgid "VIDTV Patch"
-msgstr "VIDTV Patch"
+msgstr ""
 
 #, c-format
 msgid "Version: %s"
-msgstr "Version: %s"
+msgstr ""
 
 msgid "Video Mode"
 msgstr "Video Modus"
@@ -1109,20 +1115,20 @@ msgstr "Wii Einstellungen"
 msgid "WiiTDB Files"
 msgstr "WiiTDB Dateien"
 
+msgid "WiiTDB Path"
+msgstr "WiiTDB Pfad"
+
+msgid "WiiTDB Path change"
+msgstr "WiiTDB Pfad ändern"
+
+msgid "WiiTDB Path changed."
+msgstr "WiiTDB Pfad geändert."
+
 msgid "Wiilight"
 msgstr "Wiilicht"
 
 msgid "Wrong Password"
 msgstr "Falsches Passwort"
-
-msgid "XMLPath"
-msgstr "XML Pfad"
-
-msgid "XMLPath change"
-msgstr "XML Pfad ändern"
-
-msgid "XMLPath changed."
-msgstr "XML Pfad geändert."
 
 msgid "Yes"
 msgstr "Ja"
@@ -1200,20 +1206,5 @@ msgstr "von"
 msgid "seconds left"
 msgstr "Sekunden verbleiben"
 
-#~ msgid "Cover Path"
-#~ msgstr "Cover Pfad"
-
 #~ msgid "You need to start this game one time to create a save file, then exit and start it again."
 #~ msgstr "Sie müssen dieses Spiel einmal starten um einen Speicherstand zu erstellen, dann verlassen und es neustarten."
-
-#~ msgid "Don't bother the USB Loader GX Team about errors in this file."
-#~ msgstr "Beschweren Sie sich nicht bei uns über hier angezeigte Fehler."
-
-#~ msgid "No partitions found"
-#~ msgstr "Keine Partitionen gefunden"
-
-#~ msgid "Restart"
-#~ msgstr "Neustart"
-
-#~ msgid "Saving"
-#~ msgstr "Speichere"

@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-# For USB Loader GX rev713
-# don't delete this line (é).
+# portuguese_br.lang - r729
+# don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-27 20:15+0200\n"
-"PO-Revision-Date: 2009-08-11 19:45\n"
+"POT-Creation-Date: 2009-10-01 05:48+0200\n"
+"PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: boto12\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -47,7 +47,7 @@ msgid "20 min"
 msgstr "20 minutos"
 
 msgid "2D Cover Path"
-msgstr ""
+msgstr "Pasta Capas 2D"
 
 msgid "3 (Mature 16+)"
 msgstr "3 (Adulto 16+)"
@@ -59,7 +59,7 @@ msgid "30 min"
 msgstr "30 minutos"
 
 msgid "3D Cover Path"
-msgstr ""
+msgstr "Pasta Capas 3D"
 
 msgid "3D Covers"
 msgstr "Capas 3D"
@@ -196,12 +196,6 @@ msgstr "Não foi possível apagar:"
 msgid "Cancel"
 msgstr "Cancelar"
 
-msgid "Cheatcodes Path"
-msgstr "Pasta Truques"
-
-msgid "Cheatcodes Path changed"
-msgstr "Pasta de Truques alterada"
-
 msgid "Cheatfile is blank"
 msgstr "arquivo de truques vazio"
 
@@ -232,6 +226,9 @@ msgstr "Programado por: %s"
 
 msgid "Coding:"
 msgstr "Desenvolvimento:"
+
+msgid "Compressed:"
+msgstr ""
 
 msgid "Confirm"
 msgstr "Confirmar"
@@ -290,10 +287,10 @@ msgstr "Não foi possível configurar a porta USB."
 msgid "Cover Download"
 msgstr "Download de Capas"
 
-msgid "Coverpath Change"
+msgid "Cover Path Change"
 msgstr "Alterar Pasta das Capas"
 
-msgid "Coverpath Changed"
+msgid "Cover Path Changed"
 msgstr "Pasta das Capas alterada"
 
 msgid "Create"
@@ -307,6 +304,15 @@ msgstr "Personalização de Pastas"
 
 msgid "Customs/Original"
 msgstr "Alternativas/Originais"
+
+msgid "DOL Path"
+msgstr "Pasta DOL"
+
+msgid "DOL path change"
+msgstr "Alterar Pasta do DOL"
+
+msgid "DOL path changed"
+msgstr "Pasta do DOL alterada"
 
 msgid "Dec"
 msgstr "Dez"
@@ -326,16 +332,16 @@ msgstr "Eliminar"
 msgid "Delete ?"
 msgstr "Eliminar ?"
 
-msgid "Delete Boxart"
-msgstr "Eliminar Capas"
-
 msgid "Delete Cheat GCT"
 msgstr "Eliminar GCT Truques"
 
-msgid "Delete CheatTxt"
+msgid "Delete Cheat TXT"
 msgstr "Eliminar TXT Truques"
 
-msgid "Delete Discart"
+msgid "Delete Cover Artwork"
+msgstr "Eliminar Capas"
+
+msgid "Delete Disc Artwork"
 msgstr "Eliminar Img. Disco"
 
 msgid "Design:"
@@ -344,22 +350,22 @@ msgstr ""
 msgid "Developed by"
 msgstr "Desenvolvido por"
 
+msgid "Disc Artwork Download"
+msgstr "Baixar Imagens Disco"
+
+msgid "Disc Artwork Path"
+msgstr "Pasta Imagens Disco"
+
 msgid "Disc Default"
 msgstr "Disco Padrão"
 
 msgid "Disc Images"
 msgstr "Imagens de Disco"
 
-msgid "Discimage Path"
-msgstr "Pasta Imagens Disco"
-
-msgid "Discimages Download"
-msgstr "Baixar Imagens Disco"
-
-msgid "Discpath Changed"
+msgid "Disc Path Changed"
 msgstr "Pasta das Imagens Disco alterada"
 
-msgid "Discpath change"
+msgid "Disc Path change"
 msgstr "Alterar a Pasta das Imagens de Disco"
 
 msgid "DiskFlip"
@@ -392,20 +398,11 @@ msgstr "Deseja FORMATAR:"
 msgid "Do you want to retry for 30 secs?"
 msgstr "Deseja tentar novamente dentro de 30 segs?"
 
-msgid "Do you want to use the alt dol that is known to be correct?"
-msgstr "Deseja usar o dol alternativo que pensa ser o correcto?"
+msgid "Do you want to use the alternate DOL that is known to be correct?"
+msgstr "Deseja usar o DOL alternativo que pensa ser o correcto?"
 
 msgid "Do you wish to update/download all language files?"
 msgstr "Deseja atualizar todos os arquivos de idioma?"
-
-msgid "Dol Path"
-msgstr "Pasta DOL"
-
-msgid "Dolpath Changed"
-msgstr "Pasta do DOL alterada"
-
-msgid "Dolpath change"
-msgstr "Alterar Pasta do DOL"
 
 msgid "Done!"
 msgstr "Concluído!"
@@ -499,6 +496,12 @@ msgstr "Francês"
 
 msgid "Full Shutdown"
 msgstr "Desligar"
+
+msgid "GCT Cheatcodes Path"
+msgstr "Pasta Truques"
+
+msgid "GCT Cheatcodes Path changed"
+msgstr "Pasta de Truques alterada"
 
 msgid "GCT File created"
 msgstr "Arquivo GCT criado"
@@ -662,8 +665,8 @@ msgstr "Carregar do SD/USB"
 msgid "Load file from: %s ?"
 msgstr "Carregar arquivo de: %s ?"
 
-msgid "Load this dol as alternate dol?"
-msgstr "Carregar este dol como dol alternativo?"
+msgid "Load this DOL as alternate DOL?"
+msgstr "Carregar este DOL como DOL alternativo?"
 
 msgid "Loading standard language."
 msgstr "Carregado idioma padrão."
@@ -689,6 +692,9 @@ msgstr "Faltando arquivos"
 msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr "Provável que o tamanho não seja divisível por 4."
 
+msgid "Mount DVD drive"
+msgstr "Carregar leitor DVD"
+
 msgid "Music Volume"
 msgstr "Volume da Música"
 
@@ -709,6 +715,9 @@ msgstr "Não foram encontrados nenhuns arquivos .dol ou .elf"
 
 msgid "No Cheatfile found"
 msgstr "Arquivo de truques não encontrado"
+
+msgid "No DOL file found on disc."
+msgstr "Não foi encontrado nenhum arquivo dol no disco"
 
 msgid "No Favorites"
 msgstr "Lista de favoritos vazia"
@@ -731,9 +740,6 @@ msgstr "Nenhuma seleção de truques"
 msgid "No data could be read."
 msgstr "Não foi possível ler dados."
 
-msgid "No dol file found on disc."
-msgstr "Não foi encontrado nenhum arquivo dol no disco"
-
 msgid "No file missing!"
 msgstr "Faltando nenhum arquivo"
 
@@ -749,11 +755,11 @@ msgstr "Capas Normais"
 msgid "Not Found"
 msgstr "Não encontrado"
 
+msgid "Not a DOL/ELF file."
+msgstr "Não é um arquivo DOL/ELF válido."
+
 msgid "Not a Wii Disc"
 msgstr "Não é um Disco do Wii"
-
-msgid "Not a dol/elf file."
-msgstr "Não é um arquivo dol/elf válido."
 
 msgid "Not enough free memory"
 msgstr "Não há memória livre suficiente"
@@ -784,9 +790,6 @@ msgstr "Out"
 
 msgid "Official Site"
 msgstr "Site Oficial"
-
-msgid "Ok"
-msgstr ""
 
 msgid "Only Customs"
 msgstr "Apenas Alternativas"
@@ -971,10 +974,10 @@ msgstr "Padrão do Sistema"
 msgid "TChinese"
 msgstr "Chinês Tradicional"
 
-msgid "TXTCheatcodes Path"
+msgid "TXT Cheatcodes Path"
 msgstr "Pasta Dicas"
 
-msgid "TXTCheatcodes Path changed"
+msgid "TXT Cheatcodes Path changed"
 msgstr "Pasta de Dicas alterada"
 
 msgid "The file is not a .wad"
@@ -987,13 +990,13 @@ msgstr "O arquivo wad foi instalado mas não foi possível eliminá-lo do cartã
 msgid "The wad installation failed with error %ld"
 msgstr "A instalação do wad falhou com o seguinte erro: %ld"
 
-msgid "ThemePath"
+msgid "Theme Path"
 msgstr "Pasta Temas"
 
-msgid "Themepath Changed"
+msgid "Theme Path Changed"
 msgstr "Pasta dos Temas alterada"
 
-msgid "Themepath change"
+msgid "Theme Path change"
 msgstr "Alterar pasta dos Temas"
 
 msgid "Time left:"
@@ -1002,8 +1005,8 @@ msgstr "Tempo restante:"
 msgid "Title Launcher"
 msgstr "Laucher de Títulos"
 
-msgid "Titles from XML"
-msgstr "Títulos do XML"
+msgid "Titles from WiiTDB"
+msgstr "Títulos do WiiTDB"
 
 msgid "Tooltips"
 msgstr "Dicas"
@@ -1048,6 +1051,12 @@ msgstr "Atualizar DOL"
 msgid "Update Files"
 msgstr "Atualizar arquivos"
 
+msgid "Update Path"
+msgstr "Pasta Atualizações"
+
+msgid "Update Path changed."
+msgstr "A pasta das atualizações foi alterada."
+
 msgid "Update all Language Files"
 msgstr "Atualizar todos os arquivos de Idioma"
 
@@ -1056,12 +1065,6 @@ msgstr "Erro ao atualizar"
 
 msgid "Update to"
 msgstr "Atualizando para"
-
-msgid "Updatepath"
-msgstr "Pasta Atualizações"
-
-msgid "Updatepath changed."
-msgstr "A pasta das atualizações foi alterada."
 
 msgid "Updating"
 msgstr "Atualizando"
@@ -1074,6 +1077,9 @@ msgstr "Atualizando arquivos de Idioma:"
 
 msgid "Updating WiiTDB.zip"
 msgstr "Atualizando WiiTDB.zip"
+
+msgid "Uploaded ZIP file installed to homebrew directory."
+msgstr ""
 
 msgid "VIDTV Patch"
 msgstr "Patch VIDTV"
@@ -1109,20 +1115,20 @@ msgstr "Configuração do Wii"
 msgid "WiiTDB Files"
 msgstr "WiiTDB"
 
+msgid "WiiTDB Path"
+msgstr "Pasta WiiTDB"
+
+msgid "WiiTDB Path change"
+msgstr "Alterar Pasta WiiTDB"
+
+msgid "WiiTDB Path changed."
+msgstr "Pasta WiiTDB alterada."
+
 msgid "Wiilight"
 msgstr "Iluminação Leitor"
 
 msgid "Wrong Password"
 msgstr "Password Incorreto"
-
-msgid "XMLPath"
-msgstr "Pasta XML"
-
-msgid "XMLPath change"
-msgstr "Alterar Pasta XML"
-
-msgid "XMLPath changed."
-msgstr "Pasta XML alterada."
 
 msgid "Yes"
 msgstr "Sim"
@@ -1199,9 +1205,3 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
-
-#~ msgid "Cover Path"
-#~ msgstr "Pasta Capas"
-
-#~ msgid "Don't bother the USB Loader GX Team about errors in this file."
-#~ msgstr "Não incomode a equipe do USB Loader GX por erros neste arquivo."

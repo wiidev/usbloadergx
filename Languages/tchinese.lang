@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-#
-# don't delete this line (é).
+# tchinese.lang - r711
+# don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-27 20:15+0200\n"
-"PO-Revision-Date: 2009-07-18 15:18+0200\n"
+"POT-Creation-Date: 2009-10-01 05:48+0200\n"
+"PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: kyogc\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -47,7 +47,7 @@ msgid "20 min"
 msgstr "20分鐘"
 
 msgid "2D Cover Path"
-msgstr ""
+msgstr "2D封面路徑"
 
 msgid "3 (Mature 16+)"
 msgstr "(青年 16歲以上)"
@@ -59,7 +59,7 @@ msgid "30 min"
 msgstr "30分鐘"
 
 msgid "3D Cover Path"
-msgstr ""
+msgstr "3D封面路徑"
 
 msgid "3D Covers"
 msgstr "3D封面"
@@ -196,12 +196,6 @@ msgstr "無法刪除:"
 msgid "Cancel"
 msgstr "取消"
 
-msgid "Cheatcodes Path"
-msgstr "金手指檔案路徑"
-
-msgid "Cheatcodes Path changed"
-msgstr "金手指檔案路徑已變更"
-
 msgid "Cheatfile is blank"
 msgstr "金手指檔案空白"
 
@@ -232,6 +226,9 @@ msgstr "程式設計者: %s"
 
 msgid "Coding:"
 msgstr "正在編碼:"
+
+msgid "Compressed:"
+msgstr ""
 
 msgid "Confirm"
 msgstr "確定"
@@ -290,10 +287,10 @@ msgstr "無法設置USB"
 msgid "Cover Download"
 msgstr "下載封面"
 
-msgid "Coverpath Change"
+msgid "Cover Path Change"
 msgstr "變更封面路徑"
 
-msgid "Coverpath Changed"
+msgid "Cover Path Changed"
 msgstr "封面路徑已變更"
 
 msgid "Create"
@@ -307,6 +304,15 @@ msgstr "自定路徑"
 
 msgid "Customs/Original"
 msgstr "自製/原始"
+
+msgid "DOL Path"
+msgstr "DOL路徑"
+
+msgid "DOL path change"
+msgstr "變更DOL路徑"
+
+msgid "DOL path changed"
+msgstr "DOL路徑已變更"
 
 msgid "Dec"
 msgstr "十二月"
@@ -326,16 +332,16 @@ msgstr "刪除"
 msgid "Delete ?"
 msgstr "刪除?"
 
-msgid "Delete Boxart"
-msgstr "刪除外盒圖形"
-
 msgid "Delete Cheat GCT"
 msgstr ""
 
-msgid "Delete CheatTxt"
+msgid "Delete Cheat TXT"
 msgstr "刪除金手指檔案"
 
-msgid "Delete Discart"
+msgid "Delete Cover Artwork"
+msgstr "刪除外盒圖形"
+
+msgid "Delete Disc Artwork"
 msgstr "刪除光碟圖像"
 
 msgid "Design:"
@@ -344,22 +350,22 @@ msgstr "設計者:"
 msgid "Developed by"
 msgstr "開發者"
 
+msgid "Disc Artwork Download"
+msgstr "下載光碟圖像"
+
+msgid "Disc Artwork Path"
+msgstr "光碟圖像路徑"
+
 msgid "Disc Default"
 msgstr "光碟預設"
 
 msgid "Disc Images"
 msgstr "光碟圖像"
 
-msgid "Discimage Path"
-msgstr "光碟圖像路徑"
-
-msgid "Discimages Download"
-msgstr "下載光碟圖像"
-
-msgid "Discpath Changed"
+msgid "Disc Path Changed"
 msgstr "光碟圖像路徑已變更"
 
-msgid "Discpath change"
+msgid "Disc Path change"
 msgstr "變更光碟圖像路徑"
 
 msgid "DiskFlip"
@@ -392,20 +398,11 @@ msgstr "是否格式化:"
 msgid "Do you want to retry for 30 secs?"
 msgstr "是否等待30秒重試?"
 
-msgid "Do you want to use the alt dol that is known to be correct?"
+msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "使用已知為正確的替代DOL?"
 
 msgid "Do you wish to update/download all language files?"
 msgstr "更新/下載所有語言檔案?"
-
-msgid "Dol Path"
-msgstr "Dol路徑"
-
-msgid "Dolpath Changed"
-msgstr "Dol路徑已變更"
-
-msgid "Dolpath change"
-msgstr "變更Dol路徑"
 
 msgid "Done!"
 msgstr "已完成!"
@@ -499,6 +496,12 @@ msgstr "法文"
 
 msgid "Full Shutdown"
 msgstr "關機"
+
+msgid "GCT Cheatcodes Path"
+msgstr "金手指檔案路徑"
+
+msgid "GCT Cheatcodes Path changed"
+msgstr "金手指檔案路徑已變更"
 
 msgid "GCT File created"
 msgstr "GCT檔案已產生"
@@ -662,8 +665,8 @@ msgstr ""
 msgid "Load file from: %s ?"
 msgstr "檔案載入位置: %s"
 
-msgid "Load this dol as alternate dol?"
-msgstr "載入這個dol做為替代的dol?"
+msgid "Load this DOL as alternate DOL?"
+msgstr "載入這個DOL做為替代的DOL?"
 
 msgid "Loading standard language."
 msgstr "正在載入預設語言"
@@ -689,6 +692,9 @@ msgstr "缺少的檔案"
 msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr "圖片格式不正確,無法被4整除"
 
+msgid "Mount DVD drive"
+msgstr ""
+
 msgid "Music Volume"
 msgstr "音量"
 
@@ -709,6 +715,9 @@ msgstr "無.dol或.elf檔案"
 
 msgid "No Cheatfile found"
 msgstr "無金手指檔案"
+
+msgid "No DOL file found on disc."
+msgstr "光碟中找不到DOL檔案"
 
 msgid "No Favorites"
 msgstr "無我的最愛列表"
@@ -731,9 +740,6 @@ msgstr ""
 msgid "No data could be read."
 msgstr "無法讀取資料"
 
-msgid "No dol file found on disc."
-msgstr "光碟中找不到dol檔案"
-
 msgid "No file missing!"
 msgstr "沒有缺少的檔案!"
 
@@ -749,11 +755,11 @@ msgstr "一般封面"
 msgid "Not Found"
 msgstr "無法取得"
 
+msgid "Not a DOL/ELF file."
+msgstr "不是DOL/ELF檔案"
+
 msgid "Not a Wii Disc"
 msgstr "不是Wii的光碟"
-
-msgid "Not a dol/elf file."
-msgstr "不是dol/elf檔案"
 
 msgid "Not enough free memory"
 msgstr "剩餘記憶體不足"
@@ -784,9 +790,6 @@ msgstr "十月"
 
 msgid "Official Site"
 msgstr "官方網址"
-
-msgid "Ok"
-msgstr "確定"
 
 msgid "Only Customs"
 msgstr "只顯示自製"
@@ -971,10 +974,10 @@ msgstr "系統預設值"
 msgid "TChinese"
 msgstr "繁體中文"
 
-msgid "TXTCheatcodes Path"
+msgid "TXT Cheatcodes Path"
 msgstr "金手指文字檔路徑"
 
-msgid "TXTCheatcodes Path changed"
+msgid "TXT Cheatcodes Path changed"
 msgstr "金手指文字檔路徑已變更"
 
 msgid "The file is not a .wad"
@@ -987,13 +990,13 @@ msgstr "wad檔案已安裝.但無法從SD卡中刪除該檔案."
 msgid "The wad installation failed with error %ld"
 msgstr "wad安裝失敗,錯誤代碼："
 
-msgid "ThemePath"
+msgid "Theme Path"
 msgstr "背景主題路徑"
 
-msgid "Themepath Changed"
+msgid "Theme Path Changed"
 msgstr "背景主題路徑已變更"
 
-msgid "Themepath change"
+msgid "Theme Path change"
 msgstr "變更背景主題路徑"
 
 msgid "Time left:"
@@ -1002,8 +1005,8 @@ msgstr "剩餘時間:"
 msgid "Title Launcher"
 msgstr "Title啟動器"
 
-msgid "Titles from XML"
-msgstr "XML遊戲名稱"
+msgid "Titles from WiiTDB"
+msgstr "WiiTDB遊戲名稱"
 
 msgid "Tooltips"
 msgstr "工具提示"
@@ -1048,6 +1051,12 @@ msgstr "僅升級dol"
 msgid "Update Files"
 msgstr "更新檔案"
 
+msgid "Update Path"
+msgstr "更新路徑"
+
+msgid "Update Path changed."
+msgstr "更新路徑已變更"
+
 msgid "Update all Language Files"
 msgstr "更新所有語言檔案"
 
@@ -1056,12 +1065,6 @@ msgstr "更新失敗"
 
 msgid "Update to"
 msgstr "升級至"
-
-msgid "Updatepath"
-msgstr "更新路徑"
-
-msgid "Updatepath changed."
-msgstr "更新路徑已變更"
 
 msgid "Updating"
 msgstr "正在更新"
@@ -1074,6 +1077,9 @@ msgstr "正在更新語言檔案:"
 
 msgid "Updating WiiTDB.zip"
 msgstr "正在更新WiiTDB.zip"
+
+msgid "Uploaded ZIP file installed to homebrew directory."
+msgstr ""
 
 msgid "VIDTV Patch"
 msgstr "VIDTV修改"
@@ -1109,20 +1115,20 @@ msgstr "Wii主機設定"
 msgid "WiiTDB Files"
 msgstr ""
 
+msgid "WiiTDB Path"
+msgstr "WiiTDB路徑"
+
+msgid "WiiTDB Path change"
+msgstr "變更WiiTDB路徑"
+
+msgid "WiiTDB Path changed."
+msgstr "WiiTDB路徑已變更"
+
 msgid "Wiilight"
 msgstr "光碟機藍光"
 
 msgid "Wrong Password"
 msgstr "密碼錯誤"
-
-msgid "XMLPath"
-msgstr "XML路徑"
-
-msgid "XMLPath change"
-msgstr "變更XML路徑"
-
-msgid "XMLPath changed."
-msgstr "XML路徑已變更"
 
 msgid "Yes"
 msgstr "是"
@@ -1199,21 +1205,3 @@ msgstr "剩餘空間 總容量"
 
 msgid "seconds left"
 msgstr "剩餘秒數"
-
-#~ msgid "Cover Path"
-#~ msgstr "封面路徑"
-
-#~ msgid "Don't bother the USB Loader GX Team about errors in this file."
-#~ msgstr "檔案錯誤"
-
-#~ msgid "Update WiiTDB"
-#~ msgstr "更新WiiTDB"
-
-#~ msgid "No partitions found"
-#~ msgstr "找不到磁區"
-
-#~ msgid "Restart"
-#~ msgstr "重新啟動"
-
-#~ msgid "Saving"
-#~ msgstr "正在儲存"

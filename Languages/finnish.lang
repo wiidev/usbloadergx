@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-#
-# don't delete this line (é).
+# finnish.lang - r740
+# don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-27 20:15+0200\n"
-"PO-Revision-Date: 2009-07-18 15:18+0200\n"
+"POT-Creation-Date: 2009-10-01 05:48+0200\n"
+"PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: c64rmx\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -47,7 +47,7 @@ msgid "20 min"
 msgstr ""
 
 msgid "2D Cover Path"
-msgstr ""
+msgstr "2D Kansien polku"
 
 msgid "3 (Mature 16+)"
 msgstr "3 (Teinit 16+)"
@@ -59,7 +59,7 @@ msgid "30 min"
 msgstr ""
 
 msgid "3D Cover Path"
-msgstr ""
+msgstr "3D Kansien polku"
 
 msgid "3D Covers"
 msgstr "3D Kannet"
@@ -149,7 +149,7 @@ msgid "AutoInit Network"
 msgstr "Autom. verkon käynnistys"
 
 msgid "AutoPatch"
-msgstr "AutoPatch"
+msgstr ""
 
 msgid "Back"
 msgstr "Takaisin"
@@ -196,12 +196,6 @@ msgstr "Ei voida poistaa:"
 msgid "Cancel"
 msgstr "Peruuta"
 
-msgid "Cheatcodes Path"
-msgstr "Koodien polku"
-
-msgid "Cheatcodes Path changed"
-msgstr "Koodien polku muutettu"
-
 msgid "Cheatfile is blank"
 msgstr "Kooditiedosto tyhjä"
 
@@ -232,6 +226,9 @@ msgstr "Koodaus: %s"
 
 msgid "Coding:"
 msgstr "Koodaus"
+
+msgid "Compressed:"
+msgstr ""
 
 msgid "Confirm"
 msgstr "Varmista"
@@ -290,10 +287,10 @@ msgstr "USB:tä ei voitu asettaa"
 msgid "Cover Download"
 msgstr "Kansien lataus"
 
-msgid "Coverpath Change"
+msgid "Cover Path Change"
 msgstr "Kansipolun vaihto"
 
-msgid "Coverpath Changed"
+msgid "Cover Path Changed"
 msgstr "Kansien polku muutettu"
 
 msgid "Create"
@@ -307,6 +304,15 @@ msgstr "Omat polut"
 
 msgid "Customs/Original"
 msgstr "Omat/Alkuperäiset"
+
+msgid "DOL Path"
+msgstr "DOL:in polku"
+
+msgid "DOL path change"
+msgstr "DOL:in polun muutto"
+
+msgid "DOL path changed"
+msgstr "DOL:in polku muutettu"
 
 msgid "Dec"
 msgstr "joulu"
@@ -326,16 +332,16 @@ msgstr "Tuhoa"
 msgid "Delete ?"
 msgstr "Tuhoa ?"
 
-msgid "Delete Boxart"
+msgid "Delete Cheat GCT"
+msgstr "Tuhoa Koodi GCT"
+
+msgid "Delete Cheat TXT"
+msgstr "Tuhoa Koodi TXT"
+
+msgid "Delete Cover Artwork"
 msgstr "Tuhoa kannet"
 
-msgid "Delete Cheat GCT"
-msgstr ""
-
-msgid "Delete CheatTxt"
-msgstr "Tuhoa KoodiTxt"
-
-msgid "Delete Discart"
+msgid "Delete Disc Artwork"
 msgstr "Tuhoa levykuvat"
 
 msgid "Design:"
@@ -344,22 +350,22 @@ msgstr "Suunnittelu"
 msgid "Developed by"
 msgstr "Kehitys"
 
+msgid "Disc Artwork Download"
+msgstr "Levykuvien lataus"
+
+msgid "Disc Artwork Path"
+msgstr "Levykuvien polku"
+
 msgid "Disc Default"
 msgstr "Pelin oletus"
 
 msgid "Disc Images"
 msgstr "Levykuvat"
 
-msgid "Discimage Path"
-msgstr "Levykuvien polku"
-
-msgid "Discimages Download"
-msgstr "Levykuvien lataus"
-
-msgid "Discpath Changed"
+msgid "Disc Path Changed"
 msgstr "Levykuvien polku muutettu"
 
-msgid "Discpath change"
+msgid "Disc Path change"
 msgstr "Levykuvien polku"
 
 msgid "DiskFlip"
@@ -392,20 +398,11 @@ msgstr "Haluatko formatoida:"
 msgid "Do you want to retry for 30 secs?"
 msgstr "Haluatko odottaa 30 sekuntia?"
 
-msgid "Do you want to use the alt dol that is known to be correct?"
-msgstr "Haluatko käyttää vaihtoehtoista dol tiedostoa jonka tiedetään toimivan?"
+msgid "Do you want to use the alternate DOL that is known to be correct?"
+msgstr "Haluatko käyttää vaihtoehtoista DOL tiedostoa jonka tiedetään toimivan?"
 
 msgid "Do you wish to update/download all language files?"
 msgstr "Haluatko päivittää/ladata kaikki kielitiedostot?"
-
-msgid "Dol Path"
-msgstr "Dol:in polku"
-
-msgid "Dolpath Changed"
-msgstr "Dol:in polku muutettu"
-
-msgid "Dolpath change"
-msgstr "Dol:in polun muutto"
 
 msgid "Done!"
 msgstr "Valmis!"
@@ -499,6 +496,12 @@ msgstr "Ranska"
 
 msgid "Full Shutdown"
 msgstr "Täysi sammutus"
+
+msgid "GCT Cheatcodes Path"
+msgstr "GCT Koodien polku"
+
+msgid "GCT Cheatcodes Path changed"
+msgstr "GCT Koodien polku muutettu"
 
 msgid "GCT File created"
 msgstr "Gct tiedosto luotu"
@@ -662,7 +665,7 @@ msgstr "Lataa SD:ltä/USB:ltä"
 msgid "Load file from: %s ?"
 msgstr "Lataa tiedosto: %s ?"
 
-msgid "Load this dol as alternate dol?"
+msgid "Load this DOL as alternate DOL?"
 msgstr "Lataa tämä vaihtoehtoisesti tämä dol?"
 
 msgid "Loading standard language."
@@ -689,6 +692,9 @@ msgstr "tiedostoja puuttuu"
 msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr "Todennäköisesti sisältää ulottuvuuksia jotka eivät ole jaollisia neljällä"
 
+msgid "Mount DVD drive"
+msgstr ""
+
 msgid "Music Volume"
 msgstr "Voimakkuus"
 
@@ -709,6 +715,9 @@ msgstr ".dol tai .elf tiedostoja ei löydy"
 
 msgid "No Cheatfile found"
 msgstr "Kooditiedostoa ei löydy"
+
+msgid "No DOL file found on disc."
+msgstr "Levyltä ei löydy dol tiedostoa"
 
 msgid "No Favorites"
 msgstr "Ei suosikkeja"
@@ -731,9 +740,6 @@ msgstr ""
 msgid "No data could be read."
 msgstr "Tietoa ei voitu lukea"
 
-msgid "No dol file found on disc."
-msgstr "Levyltä ei löydy dol tiedostoa"
-
 msgid "No file missing!"
 msgstr "Ei tiedostoja kadoksissa!"
 
@@ -749,11 +755,11 @@ msgstr "Normaalit kannet"
 msgid "Not Found"
 msgstr "Ei löytynyt"
 
+msgid "Not a DOL/ELF file."
+msgstr "Tiedosto ei ole DOL/ELF."
+
 msgid "Not a Wii Disc"
 msgstr "Ei Wii-levy"
-
-msgid "Not a dol/elf file."
-msgstr "Tiedosto ei ole dol/elf."
 
 msgid "Not enough free memory"
 msgstr "Ei tarpeeksi muistia"
@@ -774,7 +780,7 @@ msgid "OFF"
 msgstr "Pois"
 
 msgid "OK"
-msgstr "OK"
+msgstr ""
 
 msgid "ON"
 msgstr "Päälle"
@@ -784,9 +790,6 @@ msgstr "loka"
 
 msgid "Official Site"
 msgstr "Virallinen sivusto"
-
-msgid "Ok"
-msgstr "Ok"
 
 msgid "Only Customs"
 msgstr "Vain omatekoiset"
@@ -971,11 +974,11 @@ msgstr "Wiin oletus"
 msgid "TChinese"
 msgstr "TKiina"
 
-msgid "TXTCheatcodes Path"
-msgstr "TXTkoodien polku"
+msgid "TXT Cheatcodes Path"
+msgstr "TXT koodien polku"
 
-msgid "TXTCheatcodes Path changed"
-msgstr "TXTkoodien polku muutettu"
+msgid "TXT Cheatcodes Path changed"
+msgstr "TXT koodien polku muutettu"
 
 msgid "The file is not a .wad"
 msgstr "Tiedosto ei ole .wad"
@@ -987,13 +990,13 @@ msgstr "Wad tiedostoa ei asennettu mutta sitä ei voitu tuhota SD-kortilta"
 msgid "The wad installation failed with error %ld"
 msgstr "Wad asennus epäonnistui: %ld"
 
-msgid "ThemePath"
+msgid "Theme Path"
 msgstr "Teeman sijainti"
 
-msgid "Themepath Changed"
+msgid "Theme Path Changed"
 msgstr "Teeman sijainti muutettu"
 
-msgid "Themepath change"
+msgid "Theme Path change"
 msgstr "Teeman sijainti"
 
 msgid "Time left:"
@@ -1002,8 +1005,8 @@ msgstr "Aikaa jäljellä:"
 msgid "Title Launcher"
 msgstr "Nimilaukaisin"
 
-msgid "Titles from XML"
-msgstr "Nimet XML:stä"
+msgid "Titles from WiiTDB"
+msgstr "Nimet WiiTDB:stä"
 
 msgid "Tooltips"
 msgstr "Vinkit"
@@ -1048,6 +1051,12 @@ msgstr "Päivitä DOL"
 msgid "Update Files"
 msgstr "Päivitä tiedostot"
 
+msgid "Update Path"
+msgstr "Päivityspolku"
+
+msgid "Update Path changed."
+msgstr "Päivityspolku muutettu"
+
 msgid "Update all Language Files"
 msgstr "Päivitä kaikki kielitiedostot"
 
@@ -1056,12 +1065,6 @@ msgstr "Päivitys epäonnistui"
 
 msgid "Update to"
 msgstr "Päivitä:"
-
-msgid "Updatepath"
-msgstr "Päivityspolku"
-
-msgid "Updatepath changed."
-msgstr "Päivityspolku muutettu"
 
 msgid "Updating"
 msgstr "Päivittää"
@@ -1074,6 +1077,9 @@ msgstr "Päivittää kielitiedostoja:"
 
 msgid "Updating WiiTDB.zip"
 msgstr "Päivittää WiiTDB.zip"
+
+msgid "Uploaded ZIP file installed to homebrew directory."
+msgstr ""
 
 msgid "VIDTV Patch"
 msgstr "VIDTV korjaus"
@@ -1109,20 +1115,20 @@ msgstr "Wii asetukset"
 msgid "WiiTDB Files"
 msgstr "WiiTDB tiedostot"
 
+msgid "WiiTDB Path"
+msgstr "WiiTDB polku"
+
+msgid "WiiTDB Path change"
+msgstr "WiiTDB polun muutto"
+
+msgid "WiiTDB Path changed."
+msgstr "WiiTDB polku muutettu"
+
 msgid "Wiilight"
 msgstr ""
 
 msgid "Wrong Password"
 msgstr "Väärä salasana"
-
-msgid "XMLPath"
-msgstr "XML polku"
-
-msgid "XMLPath change"
-msgstr "XML polun muutto"
-
-msgid "XMLPath changed."
-msgstr "XML polku muutettu"
 
 msgid "Yes"
 msgstr "Kyllä"
@@ -1199,12 +1205,3 @@ msgstr "josta"
 
 msgid "seconds left"
 msgstr "sekuntia jäljellä"
-
-#~ msgid "Cover Path"
-#~ msgstr "Kansien polku"
-
-#~ msgid "No partitions found"
-#~ msgstr "Osioita ei löytynyt"
-
-#~ msgid "Restart"
-#~ msgstr "Käynnistä uudelleen"

@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-#
-# don't delete this line (é).
+# dutch.lang - r713
+# don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-27 20:15+0200\n"
-"PO-Revision-Date: 2009-07-18 15:18+0200\n"
+"POT-Creation-Date: 2009-10-01 05:48+0200\n"
+"PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: tj_cool\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -38,28 +38,28 @@ msgid "1 hour"
 msgstr "1 uur"
 
 msgid "10 min"
-msgstr "10 min"
+msgstr ""
 
 msgid "2 (Teen 12+)"
 msgstr "2 (Tiener 12+)"
 
 msgid "20 min"
-msgstr "20 min"
+msgstr ""
 
 msgid "2D Cover Path"
-msgstr ""
+msgstr "Locatie 2D hoesjes"
 
 msgid "3 (Mature 16+)"
 msgstr "3 (Adolescenten 16+)"
 
 msgid "3 min"
-msgstr "3 min"
+msgstr ""
 
 msgid "30 min"
-msgstr "30 min"
+msgstr ""
 
 msgid "3D Cover Path"
-msgstr ""
+msgstr "Locatie 3D hoesjes"
 
 msgid "3D Covers"
 msgstr "3D Hoesjes"
@@ -68,7 +68,7 @@ msgid "4 (Adults Only 18+)"
 msgstr "4 (Volwassen 18+)"
 
 msgid "5 min"
-msgstr "5 min"
+msgstr ""
 
 msgid ">> Deleting tickets..."
 msgstr ">> Tickets verwijderen"
@@ -131,19 +131,19 @@ msgid "An Error occured"
 msgstr "Er is een fout opgetreden"
 
 msgid "Anti"
-msgstr "Anti"
+msgstr ""
 
 msgid "App Language"
 msgstr "Taal"
 
 msgid "Apr"
-msgstr "Apr"
+msgstr ""
 
 msgid "Are you sure?"
 msgstr "Zeker weten?"
 
 msgid "Aug"
-msgstr "Aug"
+msgstr ""
 
 msgid "AutoInit Network"
 msgstr "Netwerk Auto init."
@@ -196,12 +196,6 @@ msgstr "Kan niet verwijderen:"
 msgid "Cancel"
 msgstr "Annuleren"
 
-msgid "Cheatcodes Path"
-msgstr "Locatie cheats"
-
-msgid "Cheatcodes Path changed"
-msgstr "Locatie cheats gewijzigd"
-
 msgid "Cheatfile is blank"
 msgstr "Cheatbestand is leeg"
 
@@ -233,11 +227,14 @@ msgstr "Gecodeerd door: %s"
 msgid "Coding:"
 msgstr "Coderen:"
 
+msgid "Compressed:"
+msgstr ""
+
 msgid "Confirm"
 msgstr "Bevestigen"
 
 msgid "Console"
-msgstr "Console"
+msgstr ""
 
 msgid "Console Default"
 msgstr "Console standaard"
@@ -290,10 +287,10 @@ msgstr "Kan USB niet instellen"
 msgid "Cover Download"
 msgstr "Download hoesjes"
 
-msgid "Coverpath Change"
+msgid "Cover Path Change"
 msgstr "Hoesjesmap wijzigen"
 
-msgid "Coverpath Changed"
+msgid "Cover Path Changed"
 msgstr "Locatie hoesjes gewijzigd"
 
 msgid "Create"
@@ -308,8 +305,17 @@ msgstr "Bestandslocaties"
 msgid "Customs/Original"
 msgstr "Aangepast/Origineel"
 
+msgid "DOL Path"
+msgstr "Locatie DOL"
+
+msgid "DOL path change"
+msgstr "Locatie DOL wijzigen"
+
+msgid "DOL path changed"
+msgstr "Locatie DOL gewijzigd"
+
 msgid "Dec"
-msgstr "Dec"
+msgstr ""
 
 msgid "Default"
 msgstr "Standaard"
@@ -326,16 +332,16 @@ msgstr "Verwijderen"
 msgid "Delete ?"
 msgstr "Verwijderen?"
 
-msgid "Delete Boxart"
+msgid "Delete Cheat GCT"
+msgstr "GCT codes verwijderen"
+
+msgid "Delete Cheat TXT"
+msgstr "TXT codes verwijderen"
+
+msgid "Delete Cover Artwork"
 msgstr "Hoesjes verwijderen"
 
-msgid "Delete Cheat GCT"
-msgstr ""
-
-msgid "Delete CheatTxt"
-msgstr "Txtcodes verwijderen"
-
-msgid "Delete Discart"
+msgid "Delete Disc Artwork"
 msgstr "DVD labels verwijderen"
 
 msgid "Design:"
@@ -344,22 +350,22 @@ msgstr "Ontwerp:"
 msgid "Developed by"
 msgstr "Ontwikkeld door"
 
+msgid "Disc Artwork Download"
+msgstr "Download DVD labels"
+
+msgid "Disc Artwork Path"
+msgstr "Locatie DVD labels"
+
 msgid "Disc Default"
 msgstr "DVD standaard"
 
 msgid "Disc Images"
 msgstr "DVD labels"
 
-msgid "Discimage Path"
-msgstr "Locatie DVD labels"
-
-msgid "Discimages Download"
-msgstr "Download DVD labels"
-
-msgid "Discpath Changed"
+msgid "Disc Path Changed"
 msgstr "Locatie DVD labels gewijzigd"
 
-msgid "Discpath change"
+msgid "Disc Path change"
 msgstr "Locatie DVD labels wijzigen"
 
 msgid "DiskFlip"
@@ -392,20 +398,11 @@ msgstr "Wil je formatteren:"
 msgid "Do you want to retry for 30 secs?"
 msgstr "Wil je 30 sec. lang opnieuw proberen?"
 
-msgid "Do you want to use the alt dol that is known to be correct?"
-msgstr "Wil je de alt dol gebruiken waarvan is bevestigd dat deze werkt?"
+msgid "Do you want to use the alternate DOL that is known to be correct?"
+msgstr "Wil je de alt DOL gebruiken waarvan is bevestigd dat deze werkt?"
 
 msgid "Do you wish to update/download all language files?"
 msgstr "Wil je alle taalbestanden updaten/downloaden?"
-
-msgid "Dol Path"
-msgstr "Locatie dol"
-
-msgid "Dolpath Changed"
-msgstr "Locatie dol gewijzigd"
-
-msgid "Dolpath change"
-msgstr "Locatie dol wijzigen"
 
 msgid "Done!"
 msgstr "Klaar!"
@@ -471,7 +468,7 @@ msgid "Failed to open partition"
 msgstr "Partitie openen mislukt"
 
 msgid "Feb"
-msgstr "Feb"
+msgstr ""
 
 msgid "File not found."
 msgstr "Bestand niet gevonden."
@@ -499,6 +496,12 @@ msgstr "Frans"
 
 msgid "Full Shutdown"
 msgstr "Volledig uitzetten"
+
+msgid "GCT Cheatcodes Path"
+msgstr "Locatie cheats"
+
+msgid "GCT Cheatcodes Path changed"
+msgstr "Locatie cheats gewijzigd"
 
 msgid "GCT File created"
 msgstr "GCT bestand aangemaakt"
@@ -531,7 +534,7 @@ msgid "German"
 msgstr "Duits"
 
 msgid "HOME Menu"
-msgstr "HOME Menu"
+msgstr ""
 
 msgid "Homebrew Apps Path"
 msgstr "Locatie Homebrew apps"
@@ -617,7 +620,7 @@ msgid "Italian"
 msgstr "Italiaans"
 
 msgid "Jan"
-msgstr "Jan"
+msgstr ""
 
 msgid "Japanese"
 msgstr "Japans"
@@ -662,7 +665,7 @@ msgstr ""
 msgid "Load file from: %s ?"
 msgstr "Laad bestand van %s ?"
 
-msgid "Load this dol as alternate dol?"
+msgid "Load this DOL as alternate DOL?"
 msgstr "Deze dol als alt dol gebruiken?"
 
 msgid "Loading standard language."
@@ -689,6 +692,9 @@ msgstr "Missende bestanden"
 msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr "Waarschijnlijk zijn de afmeetingen niet deelbaar door 4."
 
+msgid "Mount DVD drive"
+msgstr ""
+
 msgid "Music Volume"
 msgstr "Muziekvolume"
 
@@ -709,6 +715,9 @@ msgstr "Geen .dol of .elf bestanden gevonden"
 
 msgid "No Cheatfile found"
 msgstr "Geen Cheatbestand gevonden"
+
+msgid "No DOL file found on disc."
+msgstr "Geen DOL bestand gevonden op DVD"
 
 msgid "No Favorites"
 msgstr "geen favorieten"
@@ -731,9 +740,6 @@ msgstr ""
 msgid "No data could be read."
 msgstr "Geen data kon gelezen worden."
 
-msgid "No dol file found on disc."
-msgstr "Geen dol bestand gevonden op DVD"
-
 msgid "No file missing!"
 msgstr "Geen missende bestanden!"
 
@@ -749,11 +755,11 @@ msgstr "Gewone hoesjes"
 msgid "Not Found"
 msgstr "Niet gevonden"
 
+msgid "Not a DOL/ELF file."
+msgstr "Geen DOL/ELF bestand."
+
 msgid "Not a Wii Disc"
 msgstr "Geen Wii DVD"
-
-msgid "Not a dol/elf file."
-msgstr "Geen dol/elf bestand."
 
 msgid "Not enough free memory"
 msgstr "Niet genoeg vrije ruimte"
@@ -768,7 +774,7 @@ msgid "Not supported format!"
 msgstr "Formaat niet ondersteund!"
 
 msgid "Nov"
-msgstr "Nov"
+msgstr ""
 
 msgid "OFF"
 msgstr "Uit"
@@ -784,9 +790,6 @@ msgstr "Okt"
 
 msgid "Official Site"
 msgstr "Officiele site"
-
-msgid "Ok"
-msgstr "Ok"
 
 msgid "Only Customs"
 msgstr "Enkel Aangepast"
@@ -912,7 +915,7 @@ msgid "Selected DOL"
 msgstr ""
 
 msgid "Sept"
-msgstr "Sept"
+msgstr ""
 
 msgid "Set Search-Filter"
 msgstr ""
@@ -971,10 +974,10 @@ msgstr "Systeem standaard"
 msgid "TChinese"
 msgstr "Chinees Trad."
 
-msgid "TXTCheatcodes Path"
+msgid "TXT Cheatcodes Path"
 msgstr "Locatie TXT Cheats"
 
-msgid "TXTCheatcodes Path changed"
+msgid "TXT Cheatcodes Path changed"
 msgstr "Locatie TXTcodes gewijzigd"
 
 msgid "The file is not a .wad"
@@ -987,13 +990,13 @@ msgstr "Het wad bestand is geinstalleerd, maar kon niet van de SD kaart worden v
 msgid "The wad installation failed with error %ld"
 msgstr "De wad installatie is mislukt met error %ld"
 
-msgid "ThemePath"
+msgid "Theme Path"
 msgstr "Locatie thema"
 
-msgid "Themepath Changed"
+msgid "Theme Path Changed"
 msgstr "Locatie thema gewijzigd"
 
-msgid "Themepath change"
+msgid "Theme Path change"
 msgstr "Locatie thema wijzigen"
 
 msgid "Time left:"
@@ -1002,8 +1005,8 @@ msgstr "Tijd over:"
 msgid "Title Launcher"
 msgstr "Titel starter"
 
-msgid "Titles from XML"
-msgstr "XML titels"
+msgid "Titles from WiiTDB"
+msgstr "WiiTDB titels"
 
 msgid "Tooltips"
 msgstr "Hulptekstbalonnen"
@@ -1048,6 +1051,12 @@ msgstr "DOL updaten"
 msgid "Update Files"
 msgstr "Bestanden Updaten"
 
+msgid "Update Path"
+msgstr "Locatie update"
+
+msgid "Update Path changed."
+msgstr "Updatelocatie gewijzigd."
+
 msgid "Update all Language Files"
 msgstr "Alle taalbestanden updaten"
 
@@ -1056,12 +1065,6 @@ msgstr "Update mislukt"
 
 msgid "Update to"
 msgstr "Updaten naar"
-
-msgid "Updatepath"
-msgstr "Locatie update"
-
-msgid "Updatepath changed."
-msgstr "Updatelocatie gewijzigd."
 
 msgid "Updating"
 msgstr "Updaten"
@@ -1075,6 +1078,9 @@ msgstr "Taalbestanden updaten:"
 msgid "Updating WiiTDB.zip"
 msgstr "Wiitdb.zip updaten..."
 
+msgid "Uploaded ZIP file installed to homebrew directory."
+msgstr ""
+
 msgid "VIDTV Patch"
 msgstr "VIDTV patchen"
 
@@ -1083,7 +1089,7 @@ msgid "Version: %s"
 msgstr "Versie: %s"
 
 msgid "Video Mode"
-msgstr "Video mode"
+msgstr ""
 
 msgid "Waiting for USB Device"
 msgstr "Wachten op USB apparaat…"
@@ -1107,22 +1113,22 @@ msgid "Wii Settings"
 msgstr "Wii instellingen"
 
 msgid "WiiTDB Files"
-msgstr ""
+msgstr "WiiTDB"
+
+msgid "WiiTDB Path"
+msgstr "Locatie XML"
+
+msgid "WiiTDB Path change"
+msgstr "Locatie WiiTDB wijzigen"
+
+msgid "WiiTDB Path changed."
+msgstr "Locatie WiiTDB gewijzigd"
 
 msgid "Wiilight"
 msgstr "Wii verlichting"
 
 msgid "Wrong Password"
 msgstr "Foute wachtwoord!"
-
-msgid "XMLPath"
-msgstr "Locatie XML"
-
-msgid "XMLPath change"
-msgstr "Locatie XML wijzigen"
-
-msgid "XMLPath changed."
-msgstr "Locatie XML gewijzigd"
 
 msgid "Yes"
 msgstr "Ja"
@@ -1200,12 +1206,6 @@ msgstr "van"
 msgid "seconds left"
 msgstr "seconden over:"
 
-#~ msgid "Cover Path"
-#~ msgstr "Locatie hoesjes"
-
-#~ msgid "Don't bother the USB Loader GX Team about errors in this file."
-#~ msgstr "Val het USB loader GX team niet lastig over fouten in dit bestand."
-
 #~ msgid "ERROR: USB device could not be loaded!"
 #~ msgstr "FOUT: USB apparaat kon niet geladen worden!"
 
@@ -1217,12 +1217,3 @@ msgstr "seconden over:"
 
 #~ msgid "Waiting for your slow USB Device: %i secs..."
 #~ msgstr "Wachten op signaal van USB apparaat: %i sec..."
-
-#~ msgid "No partitions found"
-#~ msgstr "Geen partities gevonden"
-
-#~ msgid "Restart"
-#~ msgstr "Herstarten"
-
-#~ msgid "Saving"
-#~ msgstr "Bewaren..."
