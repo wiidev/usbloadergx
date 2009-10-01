@@ -333,7 +333,6 @@ int MenuDiscList() {
     char IDfull[7];
     u32 covert = 0;
     char imgPath[100];
-	char dvdID[8];
 	if (!dvdheader)
 		dvdheader = new struct discHdr;
 	u8 mountMethodOLD =0;
@@ -1284,18 +1283,9 @@ int MenuDiscList() {
 		else if (dvdBtn.GetState() == STATE_CLICKED) {
 			mountMethodOLD = (mountMethod==3?mountMethod:0);
                 
-				mountMethod=DiscMount(dvdID);
-				dvdheader->id[0]=dvdID[0];
-				dvdheader->id[1]=dvdID[1];
-				dvdheader->id[2]=dvdID[2];
-				dvdheader->id[3]=dvdID[3];
-				dvdheader->id[4]=dvdID[4];
-				dvdheader->id[5]=dvdID[5];
-
+				mountMethod=DiscMount(dvdheader);
 				dvdBtn.ResetState();
-				char ass[20];
-				sprintf(ass,"%i",mountMethod);
-				WindowPrompt(ass,0,"ok");
+
 				rockout();
                 //break;
         }

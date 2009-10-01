@@ -1265,8 +1265,8 @@ int GameWindowPrompt() {
 			WBFS_GameSize(header->id, &size);
 			sizeTxt.SetTextf("%.2fGB", size); //set size text;
 		}
-		
-        nameTxt.SetText(mountMethod!=1&&mountMethod!=2?get_title(header):IDFull);
+	
+		nameTxt.SetText(get_title(header));
 
         struct Game_NUM* game_num = CFG_get_game_num(header->id);
         if (game_num) {

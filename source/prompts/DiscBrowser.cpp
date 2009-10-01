@@ -407,17 +407,18 @@ int autoSelectDolMenu(const char *id, bool force) {
 * Mount a DVD, get the type and ID.
 *********************************************************************************/
 static vu32 dvddone = 0;
-static dvddiskid *g_diskID = (dvddiskid*)0x80000000;
+static dvddiskid *g_diskID = (dvddiskid*)0x80000000; // If you change this address, the read functions will FAIL!
 void __dvd_readidcb(s32 result)
 {
 	dvddone = result;
 }
 
-u8 DiscMount(char *id) {
+u8 DiscMount(discHdr *header) {
     int ret;
-    char gameidbuffer[8];
 	HaltGui();
-    memset((char*)0x80000000, 0, 6);
+	
+	u8 *tmpBuff = (u8 *) malloc(0x60);
+	memcpy(tmpBuff, g_diskID, 0x60); // Make a backup of the first 96 bytes at 0x80000000
 
 	ret = bwDVD_LowInit();
 	dvddone = 0;
@@ -425,26 +426,19 @@ u8 DiscMount(char *id) {
 	while(ret>=0 && dvddone==0);
 	
 	dvddone = 0;
-	ret = bwDVD_LowReadID(g_diskID,__dvd_readidcb);
+	ret = bwDVD_LowReadID(g_diskID, __dvd_readidcb); // Leave this one here, or you'll get an IOCTL error
 	while(ret>=0 && dvddone==0);
 
-	memset(gameidbuffer, 0, 8);
-	memcpy(gameidbuffer, (char*)0x80000000, 6);
-	strcpy(id,gameidbuffer);
-	if(gameidbuffer[1] == 0 && 
-		gameidbuffer[2] == 0 && 
-		gameidbuffer[3] == 0 && 
-		gameidbuffer[4] == 0 && 
-		gameidbuffer[5] == 0 && 
-		gameidbuffer[6] == 0)
-		{
-			ResumeGui();
-			return 0;
-	}
-	if(*((u32 *) 0x8000001C) == 0xC2339F3D){
-		ResumeGui();
-		return 2;
-	}
+	dvddone = 0;
+	ret = bwDVD_LowUnencryptedRead(g_diskID, 0x60, 0x00, __dvd_readidcb); // Overwrite the g_diskID thing
+	while(ret>=0 && dvddone==0);
+	
+	memcpy(header, g_diskID, 0x60);
+	memcpy(g_diskID, tmpBuff, 0x60); // Put the backup back, or games won't load
+
 	ResumeGui();
-	return 1;
+	if (dvddone != 1) {
+		return 0;
+	}
+	return (header->magic == 0x5D1C9EA3) ? 1 : 2; // Don't check gamecube magic (0xC2339F3D)
 }
