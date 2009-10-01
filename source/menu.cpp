@@ -64,7 +64,7 @@ float gamesize;
 int currentMenu;
 int idiotFlag=-1;
 char idiotChar[50];
-u8 dvdMounted=0;
+u8 mountMethod=0;
 struct discHdr *dvdheader = NULL;
 
 
@@ -222,7 +222,7 @@ void rockout(int f = 0) {
     if ((!(strcasestr(get_title(&gameList[num]),"guitar")||
             strcasestr(get_title(&gameList[num]),"band")||
             strcasestr(get_title(&gameList[num]),"rock")||
-            f==1))||dvdMounted) {
+            f==1))||mountMethod) {
         for (int i = 0; i < 4; i++)
             delete pointer[i];
         snprintf(imgPath, sizeof(imgPath), "%splayer1_point.png", CFG.theme_path);
@@ -336,6 +336,13 @@ int MenuDiscList() {
 	char dvdID[8];
 	if (!dvdheader)
 		dvdheader = new struct discHdr;
+	u8 mountMethodOLD =0;
+	
+	
+	
+	///WII_Initialize();
+	///WII_LaunchTitle(TITLE_ID(0x00010001,0xJODI));
+		
 		
 		
 	
@@ -362,6 +369,7 @@ int MenuDiscList() {
     char theTime[80]="";
     time_t lastrawtime=0;
 
+	if (mountMethod!=3)
     WBFS_DiskSpace(&used, &freespace);
 
     if (!gameCnt) { //if there is no list of games to display
@@ -454,13 +462,13 @@ int MenuDiscList() {
 
 
     char spaceinfo[30];
-    sprintf(spaceinfo,"%.2fGB %s %.2fGB %s",freespace,tr("of"),(freespace+used),tr("free"));
+    sprintf(spaceinfo,(mountMethod!=3?"%.2fGB %s %.2fGB %s":" "),freespace,tr("of"),(freespace+used),tr("free"));
     GuiText usedSpaceTxt(spaceinfo, 18, THEME.info);
     usedSpaceTxt.SetAlignment(THEME.hddinfo_align, ALIGN_TOP);
     usedSpaceTxt.SetPosition(THEME.hddinfo_x, THEME.hddinfo_y);
 	
 	char GamesCnt[15];
-    sprintf(GamesCnt,"%s: %i",tr("Games"), gameCnt);
+    sprintf(GamesCnt,"%s: %i",(mountMethod!=3?tr("Games"):tr("Channels")), gameCnt);
     GuiText gamecntTxt(GamesCnt, 18, THEME.info);
     
 	GuiButton gamecntBtn(100,18);
@@ -729,15 +737,16 @@ int MenuDiscList() {
 
 	
 
-    if (Settings.godmode == 1) {//only make the button have trigger & tooltip if in godmode
+    if (Settings.godmode == 1 && mountMethod!=3) {//only make the button have trigger & tooltip if in godmode
         DownloadBtn.SetSoundOver(&btnSoundOver);
         DownloadBtn.SetTrigger(&trigA);
         DownloadBtn.SetTrigger(&trig1);
         DownloadBtn.SetToolTip(&DownloadBtnTT,205,-30);
     
 		idBtn.SetSoundOver(&btnSoundOver);
-        idBtn.SetTrigger(&trigA);
-        idBtn.SetToolTip(&IDBtnTT,205,-30);
+		idBtn.SetTrigger(&trigA);
+		idBtn.SetToolTip(&IDBtnTT,205,-30);
+		
     } else
 		{
         DownloadBtn.SetRumble(false);
@@ -810,6 +819,8 @@ int MenuDiscList() {
 	w.SetUpdateCallback(DiscListWinUpdateCallback);
 	// End Toolbar
     
+	
+	
 	if (Settings.godmode == 1)
         w.Append(&homebrewBtn);
 
@@ -835,8 +846,9 @@ int MenuDiscList() {
 		if(searchBar)
 			mainWindow->Append(searchBar);
 	}
-
-    ResumeGui();
+	
+	ResumeGui();
+	
 	
     while (menu == MENU_NONE) {
 
@@ -936,7 +948,7 @@ int MenuDiscList() {
                 }
             }
 
-        } else if (gamecntBtn.GetState() == STATE_CLICKED) {
+        } else if (gamecntBtn.GetState() == STATE_CLICKED && mountMethod!=3) {
             
 			char linebuf[150];
 			snprintf(linebuf, sizeof(linebuf), "%s %sGameList ?",tr("Save Game List to"), Settings.update_path);
@@ -945,22 +957,14 @@ int MenuDiscList() {
         
 			if (choice==1)
 			{
-				if (save_gamelist(0))
+				if (save_gamelist(choice-1))
 					WindowPrompt(0,tr("Saved"), tr("OK"));
 				else
 					WindowPrompt(tr("Error"),tr("Could not save."), tr("OK"));
 				menu = MENU_DISCLIST;
 				break;
 			}
-			else if (choice==2)
-			{
-				if (save_gamelist(1))
-					WindowPrompt(0,tr("Saved"), tr("OK"));
-				else
-					WindowPrompt(tr("Error"),tr("Could not save."), tr("OK"));
-				menu = MENU_DISCLIST;
-				break;
-			}
+			
 			
 			gamecntBtn.ResetState();
 
@@ -1112,7 +1116,7 @@ int MenuDiscList() {
 
         }
 
-        else if (searchBtn.GetState() == STATE_CLICKED) {
+        else if (searchBtn.GetState() == STATE_CLICKED && mountMethod!=3) {
 
             show_searchwindow=!show_searchwindow;
 			HaltGui();
@@ -1270,7 +1274,7 @@ int MenuDiscList() {
         } else if (homebrewBtn.GetState() == STATE_CLICKED) {
             menu = MENU_HOMEBREWBROWSE;
             break;
-        } else if (gameInfo.GetState() == STATE_CLICKED) {
+        } else if (gameInfo.GetState() == STATE_CLICKED && mountMethod!=3) {
 		    gameInfo.ResetState();
             gameSelected = selectImg1;
             rockout();
@@ -1286,7 +1290,9 @@ int MenuDiscList() {
 			}
         }
 		else if (dvdBtn.GetState() == STATE_CLICKED) {
-				dvdMounted=DiscMount(dvdID);
+			mountMethodOLD = (mountMethod==0||mountMethod==3?mountMethod:0);
+                
+				mountMethod=DiscMount(dvdID);
 				dvdheader->id[0]=dvdID[0];
 				dvdheader->id[1]=dvdID[1];
 				dvdheader->id[2]=dvdID[2];
@@ -1344,7 +1350,7 @@ int MenuDiscList() {
                         delete GameRegionTxt;
                         GameRegionTxt = NULL;
                     }
-
+					
                     switch (header->id[3]) {
                     case 'E':
                         sprintf(gameregion,"NTSC U");
@@ -1398,8 +1404,8 @@ int MenuDiscList() {
 						idBtn.SetLabel(GameIDTxt);
                         w.Append(&idBtn);
                     }
-
-                    if ((Settings.sinfo == GameRegion) || (Settings.sinfo == Both)) {
+						//don't try to show region for channels because all the custom channels wont follow the rules
+                    if (((Settings.sinfo == GameRegion) || (Settings.sinfo == Both))&&mountMethod!=3) {
                         GameRegionTxt = new GuiText(gameregion, 22, THEME.info);
                         GameRegionTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
                         GameRegionTxt->SetPosition(THEME.region_x, THEME.region_y);
@@ -1409,7 +1415,7 @@ int MenuDiscList() {
                 }
             }
 			
-			if (idBtn.GetState() == STATE_CLICKED) {
+			if (idBtn.GetState() == STATE_CLICKED && mountMethod!=3) {
 			struct discHdr * header = &gameList[gameBrowser->GetSelectedOption()];
                     //enter new game ID
 					char entered[10];
@@ -1426,7 +1432,7 @@ int MenuDiscList() {
                 }
         }
 
-        if (((gameSelected >= 0) && (gameSelected < (s32)gameCnt)) || dvdMounted) {
+        if (((gameSelected >= 0) && (gameSelected < (s32)gameCnt)) || mountMethod==1 || mountMethod==2) {
 			if(searchBar)
 			{
 				HaltGui();
@@ -1434,9 +1440,9 @@ int MenuDiscList() {
 				ResumeGui();
 			}
 				rockout();
-				struct discHdr *header = (dvdMounted?dvdheader:&gameList[gameSelected]);
+				struct discHdr *header = (mountMethod==1||mountMethod==2?dvdheader:&gameList[gameSelected]);
 			//	struct discHdr *header = dvdheader:&gameList[gameSelected]);
-			if (!dvdMounted)//only get this stuff it we are booting a game from USB
+			if (!mountMethod)//only get this stuff it we are booting a game from USB
 			{
 				WBFS_GameSize(header->id, &size);
 				if (strlen(get_title(header)) < (MAX_CHARACTERS + 3)) {
@@ -1451,7 +1457,7 @@ int MenuDiscList() {
             //check if alt Dol and gct file is present
             FILE *exeFile = NULL;
             char nipple[100];
-			header = (dvdMounted?dvdheader:&gameList[gameSelected]); //reset header
+			header = (mountMethod==1||mountMethod==2?dvdheader:&gameList[gameSelected]); //reset header
             snprintf (IDfull,sizeof(IDfull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
             struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
             
@@ -1523,7 +1529,7 @@ int MenuDiscList() {
             while (returnHere) {
                 returnHere = false;
                 if (Settings.wiilight != 2) wiilight(1);
-                choice = GameWindowPrompt();
+				choice = GameWindowPrompt();
                 // header = &gameList[gameSelected]; //reset header
 
                 if (choice == 1) {
@@ -1574,7 +1580,7 @@ int MenuDiscList() {
                     ResumeGui();
 
                     //re-evaluate header now in case they changed games while on the game prompt
-                    header = (dvdMounted?dvdheader:&gameList[gameSelected]);
+                    header = (mountMethod==1||mountMethod==2?dvdheader:&gameList[gameSelected]);
                     int settret = GameSettings(header);
 					/* unneeded for now, kept in case database gets a separate language setting
                     //menu = MENU_DISCLIST; // refresh titles (needed if the language setting has changed)
@@ -1593,7 +1599,7 @@ int MenuDiscList() {
                     rockout(2);
                 }
 
-                else if (choice == 3 && !dvdMounted) { //WBFS renaming
+                else if (choice == 3 && !mountMethod) { //WBFS renaming
                     wiilight(0);
 					//re-evaluate header now in case they changed games while on the game prompt
                     header = &gameList[gameSelected];
@@ -1610,7 +1616,7 @@ int MenuDiscList() {
                     }
                 } else if (choice == 0) {
                     rockout(2);
-					dvdMounted =0;
+					if (mountMethod==1||mountMethod==2)mountMethod = mountMethodOLD;
                     if (Settings.gameDisplay==list) {
                         gameBrowser->SetFocus(1);
                     } else if (Settings.gameDisplay==grid) {
@@ -1648,7 +1654,7 @@ int MenuDiscList() {
 
 	// set alt dol default
 	if (menu == MENU_EXIT && altdoldefault) {
-		struct discHdr *header = (dvdMounted?dvdheader:&gameList[gameSelected]);
+		struct discHdr *header = (mountMethod==1||mountMethod==2?dvdheader:&gameList[gameSelected]);
 		struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
 		// use default only if no alt dol was selected manually
 		if (game_cfg) {
@@ -1688,8 +1694,6 @@ int MenuDiscList() {
 	gameGrid = NULL;
 	delete gameCarousel;
 	gameCarousel = NULL;
-	//delete dvdheader;
-	//dvdheader = NULL;
 	ResumeGui();
     return menu;
 }
@@ -2163,12 +2167,14 @@ int MainMenu(int menu) {
     }
 	
 	//MemInfoPrompt();
-	if (dvdMounted)
+	//for testing
+	/*if (mountMethod)
 	{
 		char tmp[30];
-		sprintf(tmp,"boot method -->   %i",dvdMounted);
+		sprintf(tmp,"boot method -->   %i",mountMethod);
 		WindowPrompt(0,tmp,0,0,0,0,100);
 	}
+	*/
     CloseXMLDatabase();
     ExitGUIThreads();
     bgMusic->Stop();
@@ -2186,7 +2192,17 @@ int MainMenu(int menu) {
 	delete fontSystem;
 	ShutdownAudio();
     StopGX();
-	if (dvdMounted==2)
+	if (mountMethod==3)
+	{
+			struct discHdr *header = &gameList[gameSelected];
+			char tmp[20];
+			u32 tid;
+			sprintf(tmp,"%c%c%c%c",header->id[0],header->id[1],header->id[2],header->id[3]);
+			memcpy(&tid, tmp, 4);
+			WII_Initialize();
+			WII_LaunchTitle(TITLE_ID((header->id[5]=='1'?0x00010001:0x00010002),tid));
+	}
+	if (mountMethod==2)
 	{
 		WII_Initialize();
 		WII_LaunchTitle(0x0000000100000100ULL);
@@ -2199,7 +2215,7 @@ int MainMenu(int menu) {
     } else {
 
         int ret = 0;
-        struct discHdr *header = (dvdMounted?dvdheader:&gameList[gameSelected]);
+        struct discHdr *header = (mountMethod?dvdheader:&gameList[gameSelected]);
 
         struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
 
@@ -2234,6 +2250,7 @@ int MainMenu(int menu) {
 			}
             reloadblock = off;
         }
+		
 		int ios2;
         switch (iosChoice) {
         case i249:
@@ -2260,7 +2277,7 @@ int MainMenu(int menu) {
                 Sys_IosReload(249);
             }
         }
-		if (!dvdMounted) 
+		if (!mountMethod) 
 		{		
 			ret = Disc_SetUSB(header->id);
 			if (ret < 0) Sys_BackToLoader();

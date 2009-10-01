@@ -23,7 +23,7 @@
 #include "sys.h"
 #include "network/http.h"
 #include <zlib.h>
-#include "Settings/cfg.h"
+#include "settings/cfg.h"
 #include "unzip/unzip.h"
 #include "unzip/miniunz.h"
 

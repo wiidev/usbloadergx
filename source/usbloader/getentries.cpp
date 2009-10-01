@@ -5,8 +5,18 @@
 #include "main.h"
 #include <wctype.h>
 #include "getentries.h"
+
+#include "../prompts/TitleBrowser.h"
+
+#include "wad/wad.h"
+#include "xml/xml.h"
+#include "../wad/title.h"
 #include <algorithm>
 #include <vector>
+
+
+#include "listfiles.h"
+#define typei 0x00010001
 
 
 struct discHdr * gameList=NULL;
@@ -15,6 +25,8 @@ u32		 gameCnt=0;
 wchar_t *gameFilter=NULL;
 wchar_t *gameFilterNextList=NULL;
 wchar_t *gameFilterPrev=NULL;
+
+extern u8 mountMethod;
 
 /****************************************************************************
  * wcsdup based on new wchar_t [...]
@@ -236,6 +248,171 @@ error:
 	return -1;
 }
 
+int buildTitleList(int t, wchar_t* gameFilter, discHdr ** PgameList, u32 *PgameCnt){
+
+    struct discHdr *buffer = NULL;
+	u32 i = 0;
+    u32 cnt, cnt2=0, len;
+    u32 num_titles;
+    u32 titles[100] ATTRIBUTE_ALIGN(32);
+    u32 num_sys_titles;
+    u32 sys_titles[10] ATTRIBUTE_ALIGN(32);
+    s32 ret = -1;
+    FILE *f;
+    char path[100];
+
+    ISFS_Initialize();
+
+    sprintf(path,"%s/config/database.txt",bootDevice);
+    f = fopen(path, "r");
+
+    ret = getTitles_TypeCount(typei, &num_titles);
+    if (ret < 0) {
+    	return -1; 
+    }
+
+    ret = getTitles_Type(typei, titles, num_titles);
+    if (ret < 0) {
+    	return -2;
+    }
+
+    ret = getTitles_TypeCount(0x00010002, &num_sys_titles);
+    if (ret < 0) {
+    	return -3;
+    }
+
+    ret = getTitles_Type(0x00010002, sys_titles, num_sys_titles);
+    if (ret < 0) {
+    	return -4;
+    }
+
+    cnt = (num_titles+num_sys_titles);
+    len = sizeof(struct discHdr) * cnt;
+	buffer = (struct discHdr *)memalign(32, len);
+    if (!buffer)
+        return -1;
+
+    memset(buffer, 0, len);
+
+    char name[64];
+    while (i < (num_titles+num_sys_titles)) {
+        //start from the beginning of the file each loop
+        if (f)rewind(f);
+        char text[15];
+        strcpy(name,"");//make sure name is empty
+        u8 found=0;
+        
+		sprintf(text, "%s", titleText(i<num_titles?typei:0x00010002, i<num_titles?titles[i]:sys_titles[i-num_titles]));
+
+        
+		char line[200];
+        char tmp[50];
+        snprintf(tmp,50," ");
+        
+		//check if the content.bin is on the SD card for that game
+		//if there is content.bin,then the game is on the SDmenu and not the wii
+		sprintf(line,"SD:/private/wii/title/%s/content.bin",text);
+		if (!checkfile(line))
+			{
+			
+				struct discHdr *header = &buffer[i];
+				if (f) {
+					while (fgets(line, sizeof(line), f)) {
+						if (line[0]== text[0]&&
+								line[1]== text[1]&&
+								line[2]== text[2]) {
+							int j=0;
+							found=1;
+							for (j=0;(line[j+4]!='\0' || j<51);j++)
+
+								tmp[j]=line[j+4];
+							snprintf(header->title,sizeof(header->title),"%s",tmp);
+							//break;
+						}
+					}
+				}
+				if (!found) {
+					if (getName00(header->title, TITLE_ID(i<num_titles?typei:0x00010002, i<num_titles?titles[i]:sys_titles[i-num_titles]),CONF_GetLanguage()*2)>=0)
+						found=2;
+
+					if (!found) {
+						if (getNameBN(header->title, TITLE_ID(i<num_titles?typei:0x00010002, i<num_titles?titles[i]:sys_titles[i-num_titles]))>=0)
+							found=3;
+
+						if (!found)
+							snprintf(header->title,sizeof(header->title),"%s (%08x)",text,i<num_titles?titles[i]:sys_titles[i-num_titles]);
+					}
+				}
+				//put the 4th and 8th digit of the title type as the last 2 characters here
+				//no reason other than it will let us know how we should boot the title later
+				header->id[0]=text[0];
+				header->id[1]=text[1];
+				header->id[2]=text[2];
+				header->id[3]=text[3];
+				header->id[4]='1';
+				header->id[5]=(i<num_titles?'1':'2');
+				//header->
+				
+//not using these filters right now, but i left them in just in case
+		// Filters
+		/*if (Settings.fave) {
+			struct Game_NUM* game_num = CFG_get_game_num(header->id);
+			if (!game_num || game_num->favorite==0)
+				continue;
+		}
+		
+		if (Settings.parentalcontrol && !Settings.godmode ) {
+			if (get_block(header) >= Settings.parentalcontrol)
+				continue;
+		}*/
+		
+		if(gameFilter && *gameFilter) {
+			u32 filter_len = wcslen(gameFilter);
+			wchar_t *gameName = FreeTypeGX::charToWideChar(get_title(header));
+			if (!gameName || wcsnicmp(gameName, gameFilter, filter_len)) {
+				delete [] gameName;
+				continue;
+			}
+		}
+		if(i != cnt2)
+			buffer[cnt2] = buffer[i];
+		cnt2++;
+				}
+        i++;
+    }
+	
+	fclose(f);
+
+    Uninstall_FromTitle(TITLE_ID(1, 0));
+    ISFS_Deinitialize();
+	
+	if(cnt > cnt2)
+	{
+		cnt = cnt2;
+		buffer = (struct discHdr *)realloc(buffer, sizeof(struct discHdr) * cnt);
+	}
+	if (!buffer)
+		return -1;
+	
+	if (Settings.sort==pcount) {
+		qsort(buffer, cnt, sizeof(struct discHdr), __Menu_EntryCmpCount);
+	} else {
+		qsort(buffer, cnt, sizeof(struct discHdr), __Menu_EntryCmp);
+	}
+	/*PgameList = buffer;
+	buffer = NULL;
+	PgameCnt  = cnt;*/
+	
+	if(PgameList) *PgameList = buffer; else free(buffer);
+	if(PgameCnt) *PgameCnt  = cnt;
+ 
+    return 0;
+ 
+    return cnt;
+}
+
+
+
 /****************************************************************************
  * Get Gamelist
  ***************************************************************************/
@@ -317,6 +494,12 @@ int __Menu_GetGameList(int t, wchar_t* gameFilter, discHdr ** PgameList, u32 *Pg
 
 int __Menu_GetEntries(int t, const wchar_t* Filter) {
 
+	/*if (mountMethod==3)
+	{	
+		return buildTitleList();
+	}*/
+	
+	
 	u32				 new_gameCnt			= 0;
 	struct discHdr	*new_gameList			= NULL;
 	wchar_t 		*new_gameFilter			= NULL;
@@ -327,7 +510,8 @@ int __Menu_GetEntries(int t, const wchar_t* Filter) {
 	if(new_gameFilter == NULL) return -1;
 	for(;;)
 	{
-		if(__Menu_GetGameList(t, new_gameFilter, &new_gameList, &new_gameCnt) < 0)
+		if(buildTitleList(t, new_gameFilter, &new_gameList, &new_gameCnt) < 0)
+		//if(__Menu_GetGameList(t, new_gameFilter, &new_gameList, &new_gameCnt) < 0)
 			return -1;
 		if(new_gameCnt > 0 || new_gameFilter[0] == 0)
 			break;

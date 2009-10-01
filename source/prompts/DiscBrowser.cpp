@@ -30,7 +30,7 @@ extern void HaltGui();
 extern GuiWindow * mainWindow;
 extern u8 shutdown;
 extern u8 reset;
-extern u8 dvdMounted;
+extern u8 mountMethod;
 
 /********************************************************************************
 *Disk Browser
@@ -41,7 +41,7 @@ int DiscBrowse(struct discHdr * header) {
     u64 offset;
 
 	HaltGui();
-	if (!dvdMounted)
+	if (!mountMethod)
 	{
 		ret = Disc_SetUSB(header->id);
 		if (ret < 0) {

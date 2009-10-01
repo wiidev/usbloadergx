@@ -24,7 +24,16 @@
 #include "wad/wad.h"
 #include "xml/xml.h"
 #include "../wad/title.h"
-#include "unzip/inflate.h"
+#include "../usbloader/getentries.h"
+
+#define typei 0x00010001
+
+struct discHdr * titleList=NULL;
+//discHdr ** titleList;
+u32 titleCnt;
+
+extern struct discHdr * gameList;
+extern u32 gameCnt;
 
 /*** Extern functions ***/
 extern void ResumeGui();
@@ -35,8 +44,188 @@ extern GuiWindow * mainWindow;
 extern u8 shutdown;
 extern u8 reset;
 extern u32 infilesize;
-extern u32 uncfilesize;
-extern char wiiloadVersion[2];
+extern wchar_t *gameFilter;
+
+inline int wcsnicmp(const wchar_t *s1, const wchar_t *s2, int len)
+{
+	if (len <= 0)
+		return (0);
+	do
+    {
+		int r = towupper(*s1) - towupper(*s2++);
+		if (r) return r;
+		if (*s1++ == 0)
+			break;
+    } while (--len != 0);
+	
+	return (0);
+}
+
+
+/********************************************************************************
+* put istalled titles into a struct so it can be handled by all the other
+* shitloads of functions we have easily
+* 
+*********************************************************************************/
+int buildTitleList1(int t, wchar_t* gameFilter, discHdr ** PgameList, u32 *PgameCnt){
+
+    struct discHdr *buffer = NULL;
+	u32 i = 0;
+    u32 cnt, cnt2=0, len;
+    u32 num_titles;
+    u32 titles[100] ATTRIBUTE_ALIGN(32);
+    u32 num_sys_titles;
+    u32 sys_titles[10] ATTRIBUTE_ALIGN(32);
+    s32 ret = -1;
+    FILE *f;
+    char path[100];
+
+    ISFS_Initialize();
+
+    sprintf(path,"%s/config/database.txt",bootDevice);
+    f = fopen(path, "r");
+
+    ret = getTitles_TypeCount(typei, &num_titles);
+    if (ret < 0) {
+    	return -1; 
+    }
+
+    ret = getTitles_Type(typei, titles, num_titles);
+    if (ret < 0) {
+    	return -2;
+    }
+
+    ret = getTitles_TypeCount(0x00010002, &num_sys_titles);
+    if (ret < 0) {
+    	return -3;
+    }
+
+    ret = getTitles_Type(0x00010002, sys_titles, num_sys_titles);
+    if (ret < 0) {
+    	return -4;
+    }
+
+    cnt = (num_titles+num_sys_titles);
+    len = sizeof(struct discHdr) * cnt;
+	buffer = (struct discHdr *)memalign(32, len);
+    if (!buffer)
+        return -1;
+
+    memset(buffer, 0, len);
+
+    char name[64];
+    while (i < (num_titles+num_sys_titles)) {
+        //start from the beginning of the file each loop
+        if (f)rewind(f);
+        char text[15];
+        strcpy(name,"");//make sure name is empty
+        u8 found=0;
+        
+		sprintf(text, "%s", titleText(i<num_titles?typei:0x00010002, i<num_titles?titles[i]:sys_titles[i-num_titles]));
+
+        
+		char line[200];
+        char tmp[50];
+        snprintf(tmp,50," ");
+        
+		//check if the content.bin is on the SD card for that game
+		//if there is content.bin,then the game is on the SDmenu and not the wii
+		sprintf(line,"SD:/private/wii/title/%s/content.bin",text);
+		if (!checkfile(line))
+			{
+			
+				struct discHdr *header = &buffer[i];
+				if (f) {
+					while (fgets(line, sizeof(line), f)) {
+						if (line[0]== text[0]&&
+								line[1]== text[1]&&
+								line[2]== text[2]) {
+							int j=0;
+							found=1;
+							for (j=0;(line[j+4]!='\0' || j<51);j++)
+
+								tmp[j]=line[j+4];
+							snprintf(header->title,sizeof(header->title),"%s",tmp);
+							//break;
+						}
+					}
+				}
+				if (!found) {
+					if (getName00(header->title, TITLE_ID(i<num_titles?typei:0x00010002, i<num_titles?titles[i]:sys_titles[i-num_titles]),CONF_GetLanguage()*2)>=0)
+						found=2;
+
+					if (!found) {
+						if (getNameBN(header->title, TITLE_ID(i<num_titles?typei:0x00010002, i<num_titles?titles[i]:sys_titles[i-num_titles]))>=0)
+							found=3;
+
+						if (!found)
+							snprintf(header->title,sizeof(header->title),"%s (%08x)",text,i<num_titles?titles[i]:sys_titles[i-num_titles]);
+					}
+				}
+				header->id[0]=text[0];
+				header->id[1]=text[1];
+				header->id[2]=text[2];
+				header->id[3]=text[3];
+				header->id[4]='G';
+				header->id[5]='P';
+				
+//not using these filters right now, but i left them in just in case
+		// Filters
+		/*if (Settings.fave) {
+			struct Game_NUM* game_num = CFG_get_game_num(header->id);
+			if (!game_num || game_num->favorite==0)
+				continue;
+		}
+		
+		if (Settings.parentalcontrol && !Settings.godmode ) {
+			if (get_block(header) >= Settings.parentalcontrol)
+				continue;
+		}*/
+		
+		if(gameFilter && *gameFilter) {
+			u32 filter_len = wcslen(gameFilter);
+			wchar_t *gameName = FreeTypeGX::charToWideChar(get_title(header));
+			if (!gameName || wcsnicmp(gameName, gameFilter, filter_len)) {
+				delete [] gameName;
+				continue;
+			}
+		}
+		if(i != cnt2)
+			buffer[cnt2] = buffer[i];
+		cnt2++;
+				}
+        i++;
+    }
+	
+	fclose(f);
+
+    Uninstall_FromTitle(TITLE_ID(1, 0));
+    ISFS_Deinitialize();
+	
+	if(cnt > cnt2)
+	{
+		cnt = cnt2;
+		buffer = (struct discHdr *)realloc(buffer, sizeof(struct discHdr) * cnt);
+	}
+	if (!buffer)
+		return -1;
+	
+	if (Settings.sort==pcount) {
+		qsort(buffer, cnt, sizeof(struct discHdr), __Menu_EntryCmpCount);
+	} else {
+		qsort(buffer, cnt, sizeof(struct discHdr), __Menu_EntryCmp);
+	}
+	/*PgameList = buffer;
+	buffer = NULL;
+	PgameCnt  = cnt;*/
+	
+	if(PgameList) *PgameList = buffer; else free(buffer);
+	if(PgameCnt) *PgameCnt  = cnt;
+ 
+    return 0;
+ 
+    return cnt;
+}
 
 /********************************************************************************
 * TitleBrowser- opens a browser with a list of installed Titles
@@ -419,12 +608,7 @@ int TitleBrowser(u32 type) {
                 int choice = WindowPrompt(filesizetxt, temp, tr("OK"), tr("Cancel"));
 
                 if(choice == 1) {
-						bool compressed = (wiiloadVersion[0] > 1 || wiiloadVersion[1] > 4) && uncfilesize != 0;
-						
-						char currentPath[100];
-						sprintf(currentPath, compressed ? "%s.z" : "%s", filepath);
-				
-                        FILE *file = fopen(currentPath, "wb");
+                        FILE *file = fopen(filepath, "wb");
 
                         int len = NETWORKBLOCKSIZE;
                         u8 *buffer = (u8*) malloc(NETWORKBLOCKSIZE);
@@ -456,34 +640,12 @@ int TitleBrowser(u32 type) {
                         }
                         free(buffer);
                         fclose(file);
-						
-						if (compressed) {
-							FILE *cfile = fopen(currentPath, "rb");
-							FILE *ufile = fopen(filepath, "wb");
-							
-							int r;
-							if (( r = inflateFile(cfile, ufile)) != Z_OK) {
-								char buf[100];
-								sprintf((char *) &buf, "Inflate failed: %d", r);
-								WindowPrompt(tr("Compressed:"), (char *) &buf, tr("OK"));
-							}
-
-							fclose(cfile);
-							fclose(ufile);
-							
-							remove(currentPath);
-						}
-						
                         ProgressStop();
 
                         if (read != infilesize) {
                             WindowPrompt(tr("Error:"), tr("No data could be read."), tr("OK"));
                             remove(filepath);
                         } else {
-
-						if (compressed) {
-							infilesize = uncfilesize;
-						}
 
                         //determine what type of file we just got
                         char filename[101];
@@ -567,5 +729,6 @@ int TitleBrowser(u32 type) {
 
     return ret;
 }
+
 
 

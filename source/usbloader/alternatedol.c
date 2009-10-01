@@ -10,7 +10,7 @@
 #include "fstfile.h"
 #include "../patches/dvd_broadway.h"
 
-extern u8 dvdMounted;
+extern u8 mountMethod;
 
 /** Alternate dolloader made by WiiPower modified by dimok **/
 bool Load_Dol(void **buffer, int* dollen, char * filepath) {
@@ -198,7 +198,7 @@ u32 Load_Dol_from_disc(u32 doloffset, u8 videoSelected, u8 patchcountrystring, u
         return -1;
     }
 
-    if (!dvdMounted)ret = WDVD_Read(dol_header, sizeof(dolheader), (doloffset<<2));
+    if (!mountMethod)ret = WDVD_Read(dol_header, sizeof(dolheader), (doloffset<<2));
 	
 	else{
 		dvddone = 0;
