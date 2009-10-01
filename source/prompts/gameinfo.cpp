@@ -797,29 +797,36 @@ int showGameInfo(char *ID) {
                 Sys_Reboot();
 
             else if ((backBtn.GetState()==STATE_CLICKED)||(backBtn.GetState()==STATE_HELD)) {
+				backBtn.ResetState();
                 if (page==1) {
                     choice=1;
                     synopsisTxt = NULL;
                     break;
                 } else if (page==2) {
                     HaltGui();
+					gameinfoWindow2.Remove(&nextBtn);
+                    gameinfoWindow2.Remove(&backBtn);
+                    gameinfoWindow2.Remove(&homeBtn);
                     gameinfoWindow2.SetVisible(false);
                     gameinfoWindow.SetVisible(true);
+					gameinfoWindow.Append(&backBtn);
+                    gameinfoWindow.Append(&nextBtn);
+                    gameinfoWindow.Append(&homeBtn);
                     mainWindow->Remove(&gameinfoWindow2);
                     ResumeGui();
                     page=1;
                 }
             } else if (((nextBtn.GetState()==STATE_CLICKED)||(nextBtn.GetState()==STATE_HELD))&&
                        (strcmp(gameinfo.synopsis,"") != 0)) {
-
+                nextBtn.ResetState();
                 if (page==1) {
-                    nextBtn.ResetState();
                     HaltGui();
+					gameinfoWindow.Remove(&nextBtn);
+                    gameinfoWindow.Remove(&backBtn);
+                    gameinfoWindow.Remove(&homeBtn);
                     gameinfoWindow.SetVisible(false);
                     gameinfoWindow2.SetVisible(true);
                     coverImg->SetPosition(15,30);
-
-                    //backBtn.SetClickable(false);
                     gameinfoWindow2.Append(&nextBtn);
                     gameinfoWindow2.Append(&backBtn);
                     gameinfoWindow2.Append(&homeBtn);
@@ -827,9 +834,10 @@ int showGameInfo(char *ID) {
                     ResumeGui();
                     page=2;
                 } else {
-                    nextBtn.ResetState();
                     HaltGui();
-                    //backBtn.SetClickable(true);
+					gameinfoWindow2.Remove(&nextBtn);
+                    gameinfoWindow2.Remove(&backBtn);
+                    gameinfoWindow2.Remove(&homeBtn);
                     gameinfoWindow2.SetVisible(false);
                     gameinfoWindow.SetVisible(true);
                     gameinfoWindow.Append(&backBtn);
@@ -839,7 +847,6 @@ int showGameInfo(char *ID) {
                     ResumeGui();
                     page=1;
                 }
-                nextBtn.ResetState();
 
             } else if ((upBtn.GetState()==STATE_CLICKED||upBtn.GetState()==STATE_HELD) && page==2) {
                 //int l=synopsisTxt->GetFirstLine()-1;
@@ -871,9 +878,6 @@ int showGameInfo(char *ID) {
                     HaltGui();
                     gameinfoWindow2.SetVisible(false);
                     gameinfoWindow.SetVisible(true);
-                    //gameinfoWindow.Append(&backBtn);
-                    //gameinfoWindow.Append(&nextBtn);
-                    //gameinfoWindow.Append(&homeBtn);
                     mainWindow->Remove(&gameinfoWindow2);
                     ResumeGui();
                     page=1;
