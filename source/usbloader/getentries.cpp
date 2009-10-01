@@ -510,9 +510,15 @@ int __Menu_GetEntries(int t, const wchar_t* Filter) {
 	if(new_gameFilter == NULL) return -1;
 	for(;;)
 	{
-		if(buildTitleList(t, new_gameFilter, &new_gameList, &new_gameCnt) < 0)
-		//if(__Menu_GetGameList(t, new_gameFilter, &new_gameList, &new_gameCnt) < 0)
-			return -1;
+		if (mountMethod==3)
+		{if(buildTitleList(t, new_gameFilter, &new_gameList, &new_gameCnt) < 0)
+			return -1;}
+			
+		else 
+		{if(__Menu_GetGameList(t, new_gameFilter, &new_gameList, &new_gameCnt) < 0)
+			return -1;}
+			
+			
 		if(new_gameCnt > 0 || new_gameFilter[0] == 0)
 			break;
 		new_gameFilter[wcslen(new_gameFilter)-1] = 0;

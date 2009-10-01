@@ -338,15 +338,7 @@ int MenuDiscList() {
 		dvdheader = new struct discHdr;
 	u8 mountMethodOLD =0;
 	
-	
-	
-	///WII_Initialize();
-	///WII_LaunchTitle(TITLE_ID(0x00010001,0xJODI));
-		
-		
-		
-	
-    WDVD_GetCoverStatus(&covert);
+	WDVD_GetCoverStatus(&covert);
     u32 covertOld=covert;
 
 	wchar_t searchChar;
@@ -1290,7 +1282,7 @@ int MenuDiscList() {
 			}
         }
 		else if (dvdBtn.GetState() == STATE_CLICKED) {
-			mountMethodOLD = (mountMethod==0||mountMethod==3?mountMethod:0);
+			mountMethodOLD = (mountMethod==3?mountMethod:0);
                 
 				mountMethod=DiscMount(dvdID);
 				dvdheader->id[0]=dvdID[0];
@@ -1301,7 +1293,10 @@ int MenuDiscList() {
 				dvdheader->id[5]=dvdID[5];
 
 				dvdBtn.ResetState();
-				rockout(1);
+				char ass[20];
+				sprintf(ass,"%i",mountMethod);
+				WindowPrompt(ass,0,"ok");
+				rockout();
                 //break;
         }
         if (Settings.gameDisplay==grid) {
@@ -1432,7 +1427,9 @@ int MenuDiscList() {
                 }
         }
 
-        if (((gameSelected >= 0) && (gameSelected < (s32)gameCnt)) || mountMethod==1 || mountMethod==2) {
+        if (((gameSelected >= 0) && (gameSelected < (s32)gameCnt))
+			|| mountMethod==1 
+			|| mountMethod==2) {
 			if(searchBar)
 			{
 				HaltGui();
