@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-01 05:48+0200\n"
+"POT-Creation-Date: 2009-10-01 15:35+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: ziom666 (zadania_prog@vp.pl)\n"
 "Language-Team: \n"
@@ -196,6 +196,9 @@ msgstr "Nie mozna usunac"
 msgid "Cancel"
 msgstr "Anuluj"
 
+msgid "Channels"
+msgstr ""
+
 msgid "Cheatfile is blank"
 msgstr "Plik z kodami pusty"
 
@@ -225,9 +228,6 @@ msgid "Coded by: %s"
 msgstr ""
 
 msgid "Coding:"
-msgstr ""
-
-msgid "Compressed:"
 msgstr ""
 
 msgid "Confirm"
@@ -761,9 +761,6 @@ msgstr "To nie jest plik DOL/ELF"
 msgid "Not a Wii Disc"
 msgstr "To nie jest plyta Wii"
 
-msgid "Not enough free memory"
-msgstr "Brak wystarczajacej wolnej pamieci"
-
 msgid "Not enough free memory."
 msgstr "Brak wystarczajacej wolnej pamieci"
 
@@ -804,9 +801,6 @@ msgid "Original/Customs"
 msgstr "Mieszane"
 
 msgid "Parental Control"
-msgstr "Kontrola rodzicielska"
-
-msgid "Parental control"
 msgstr "Kontrola rodzicielska"
 
 msgid "Partition"

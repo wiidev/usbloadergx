@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-01 05:48+0200\n"
+"POT-Creation-Date: 2009-10-01 15:35+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Penn\n"
 "Language-Team: \n"
@@ -196,6 +196,9 @@ msgstr "No se eliminó:"
 msgid "Cancel"
 msgstr "Cancelar"
 
+msgid "Channels"
+msgstr ""
+
 msgid "Cheatfile is blank"
 msgstr "Archivo de Trampas vacio"
 
@@ -226,9 +229,6 @@ msgstr "Programado por: %s"
 
 msgid "Coding:"
 msgstr "Programación:"
-
-msgid "Compressed:"
-msgstr ""
 
 msgid "Confirm"
 msgstr "Confirmar"
@@ -761,9 +761,6 @@ msgstr "No es un archivo DOL/ELF."
 msgid "Not a Wii Disc"
 msgstr "No es un Disco Wii"
 
-msgid "Not enough free memory"
-msgstr "No hay suficiente memoria libre"
-
 msgid "Not enough free memory."
 msgstr "No hay suficiente memoria libre."
 
@@ -804,9 +801,6 @@ msgid "Original/Customs"
 msgstr "Originales/Alternat."
 
 msgid "Parental Control"
-msgstr "Control Parental"
-
-msgid "Parental control"
 msgstr "Control Parental"
 
 msgid "Partition"

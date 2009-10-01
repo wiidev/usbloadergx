@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-01 05:48+0200\n"
+"POT-Creation-Date: 2009-10-01 15:35+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Nitro_subzero \n"
 "Language-Team: Nitro_subzero\n"
@@ -196,6 +196,9 @@ msgstr "ไม่สามารถลบได้:"
 msgid "Cancel"
 msgstr "ยกเลิก"
 
+msgid "Channels"
+msgstr ""
+
 msgid "Cheatfile is blank"
 msgstr "ไฟล์สูตรโกง ว่างเปล่า"
 
@@ -226,9 +229,6 @@ msgstr "โค๊ดโดย: %s"
 
 msgid "Coding:"
 msgstr "โค๊ด:"
-
-msgid "Compressed:"
-msgstr ""
 
 msgid "Confirm"
 msgstr "ยืนยัน"
@@ -761,9 +761,6 @@ msgstr "ไม่ใช่ไฟล์ DOL หรือ ELF"
 msgid "Not a Wii Disc"
 msgstr "ไม่ใช่แผ่นเกมส์ Wii"
 
-msgid "Not enough free memory"
-msgstr "มีหน่วยความจำเหลือไม่พอ"
-
 msgid "Not enough free memory."
 msgstr "มีหน่วยความจำเหลือไม่พอ"
 
@@ -805,9 +802,6 @@ msgstr "ของแท้/ดัดแปลง"
 
 msgid "Parental Control"
 msgstr "กำหนดอายุ"
-
-msgid "Parental control"
-msgstr "ควบคุมอายุผู้เล่น"
 
 msgid "Partition"
 msgstr "พาร์ติชั่น"

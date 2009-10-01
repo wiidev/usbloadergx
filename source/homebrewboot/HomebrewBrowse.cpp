@@ -805,7 +805,7 @@ int MenuHomebrewBrowse() {
 
                     if (res < 0) {
                         CloseConnection();
-                        WindowPrompt(tr("Not enough free memory"), 0, tr("OK"));
+                        WindowPrompt(tr("Not enough free memory."), 0, tr("OK"));
                     } else {
                         u32 read = 0;
                         u8 *temp = NULL;

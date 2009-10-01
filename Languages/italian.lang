@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# italian.lang - v42 - r763
+# italian.lang - v43 - r771
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-01 05:48+0200\n"
+"POT-Creation-Date: 2009-10-01 15:35+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe & Cambo\n"
@@ -196,6 +196,9 @@ msgstr "Non posso eliminare:"
 msgid "Cancel"
 msgstr "Cancella"
 
+msgid "Channels"
+msgstr "Canales"
+
 msgid "Cheatfile is blank"
 msgstr "il file dei trucchi è vuoto"
 
@@ -227,14 +230,11 @@ msgstr "Sviluppato da: %s"
 msgid "Coding:"
 msgstr "Sviluppo:"
 
-msgid "Compressed:"
-msgstr ""
-
 msgid "Confirm"
 msgstr "Confermare"
 
 msgid "Console"
-msgstr ""
+msgstr "Terminale"
 
 msgid "Console Default"
 msgstr "Predefinita Console"
@@ -372,7 +372,7 @@ msgid "DiskFlip"
 msgstr "Gira i dischi"
 
 msgid "Display"
-msgstr ""
+msgstr "Visualizza"
 
 msgid "Display as a carousel"
 msgstr "Visualizzazione a Carosello"
@@ -546,7 +546,7 @@ msgid "Homebrew Appspath changed"
 msgstr "Percorso app. Homebrew modificato"
 
 msgid "Homebrew Channel"
-msgstr "Canale HomeBrew"
+msgstr "Canale Homebrew"
 
 msgid "Homebrew Launcher"
 msgstr "Applicazioni Homebrew"
@@ -761,9 +761,6 @@ msgstr "Non è un file DOL/ELF."
 msgid "Not a Wii Disc"
 msgstr "Non è un Disco Wii"
 
-msgid "Not enough free memory"
-msgstr "Memoria insufficiente"
-
 msgid "Not enough free memory."
 msgstr "Memoria insufficiente."
 
@@ -777,13 +774,13 @@ msgid "Nov"
 msgstr "novembre"
 
 msgid "OFF"
-msgstr ""
+msgstr "Disattivato"
 
 msgid "OK"
 msgstr ""
 
 msgid "ON"
-msgstr ""
+msgstr "Attivato"
 
 msgid "Oct"
 msgstr "ottobre"
@@ -804,9 +801,6 @@ msgid "Original/Customs"
 msgstr "Origin./Modific."
 
 msgid "Parental Control"
-msgstr "Controllo Genitori"
-
-msgid "Parental control"
 msgstr "Controllo Genitori"
 
 msgid "Partition"
@@ -1079,7 +1073,7 @@ msgid "Updating WiiTDB.zip"
 msgstr "Aggiornamento file WiiTDB.zip"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
-msgstr ""
+msgstr "File ZIP installato nella cartella Homebrew"
 
 msgid "VIDTV Patch"
 msgstr "Video Forzato"

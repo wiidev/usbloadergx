@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-01 05:48+0200\n"
+"POT-Creation-Date: 2009-10-01 15:35+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: kyogc\n"
 "Language-Team: \n"
@@ -196,6 +196,9 @@ msgstr "無法刪除:"
 msgid "Cancel"
 msgstr "取消"
 
+msgid "Channels"
+msgstr ""
+
 msgid "Cheatfile is blank"
 msgstr "金手指檔案空白"
 
@@ -226,9 +229,6 @@ msgstr "程式設計者: %s"
 
 msgid "Coding:"
 msgstr "正在編碼:"
-
-msgid "Compressed:"
-msgstr ""
 
 msgid "Confirm"
 msgstr "確定"
@@ -761,9 +761,6 @@ msgstr "不是DOL/ELF檔案"
 msgid "Not a Wii Disc"
 msgstr "不是Wii的光碟"
 
-msgid "Not enough free memory"
-msgstr "剩餘記憶體不足"
-
 msgid "Not enough free memory."
 msgstr "剩餘記憶體不足"
 
@@ -804,9 +801,6 @@ msgid "Original/Customs"
 msgstr "原始/自製"
 
 msgid "Parental Control"
-msgstr "親子控制"
-
-msgid "Parental control"
 msgstr "親子控制"
 
 msgid "Partition"

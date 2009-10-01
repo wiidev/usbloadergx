@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# japanese.lang - r755
+# japanese.lang - r770
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-01 05:48+0200\n"
+"POT-Creation-Date: 2009-10-01 15:35+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: \n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid " Wad Saved as:"
-msgstr "Wadを保存しました"
+msgstr "Wadを保存しました:"
 
 msgid " could not be downloaded."
 msgstr "ﾀﾞｳﾝﾛｰﾄﾞできませんでした"
@@ -179,7 +179,7 @@ msgid "Boot/Standard"
 msgstr "cIOS選択"
 
 msgid "Boot?"
-msgstr "起動しますか？"
+msgstr "起動しますか？?"
 
 msgid "Both"
 msgstr "IDとﾘｰｼﾞｮﾝを表示"
@@ -195,6 +195,9 @@ msgstr "削除できません:"
 
 msgid "Cancel"
 msgstr "ｷｬﾝｾﾙ"
+
+msgid "Channels"
+msgstr ""
 
 msgid "Cheatfile is blank"
 msgstr "ﾁｰﾄﾌｧｲﾙがありません"
@@ -226,9 +229,6 @@ msgstr ""
 
 msgid "Coding:"
 msgstr "開発者:"
-
-msgid "Compressed:"
-msgstr ""
 
 msgid "Confirm"
 msgstr "確認"
@@ -641,7 +641,7 @@ msgid "Korean"
 msgstr "韓国語"
 
 msgid "Language change:"
-msgstr "言語の変更"
+msgstr "言語の変更:"
 
 msgid "Languagefile"
 msgstr "言語ﾌｧｲﾙ"
@@ -663,10 +663,10 @@ msgstr "SD/USBからﾛｰﾄﾞ"
 
 #, c-format
 msgid "Load file from: %s ?"
-msgstr "%sからﾌｧｲﾙをﾛｰﾄﾞしますか"
+msgstr "%sからﾌｧｲﾙをﾛｰﾄﾞしますか?"
 
 msgid "Load this DOL as alternate DOL?"
-msgstr "このDOLを代替DOLとしてﾛｰﾄﾞしますか？"
+msgstr "このDOLを代替DOLとしてﾛｰﾄﾞしますか？?"
 
 msgid "Loading standard language."
 msgstr "標準の言語に変更しますか"
@@ -693,7 +693,7 @@ msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr "4で割り切れない寸法があります。"
 
 msgid "Mount DVD drive"
-msgstr ""
+msgstr "DVDを起動"
 
 msgid "Music Volume"
 msgstr "BGMの音量"
@@ -761,9 +761,6 @@ msgstr "DOL(ELF)ﾌｧｲﾙではありません"
 msgid "Not a Wii Disc"
 msgstr "Wiiﾃﾞｨｽｸではありません"
 
-msgid "Not enough free memory"
-msgstr "空ﾒﾓﾘが不足しています"
-
 msgid "Not enough free memory."
 msgstr "空ﾒﾓﾘが不足しています"
 
@@ -805,9 +802,6 @@ msgstr "公式と自作"
 
 msgid "Parental Control"
 msgstr "ペアレンタルコントロール"
-
-msgid "Parental control"
-msgstr "ﾍﾟｱﾚﾝﾀﾙｺﾝﾄﾛｰﾙ"
 
 msgid "Partition"
 msgstr "ﾊﾟｰﾃｨｼｮﾝ"
@@ -918,10 +912,10 @@ msgid "Sept"
 msgstr "9月"
 
 msgid "Set Search-Filter"
-msgstr "ﾌｨﾙﾀｰをｾｯﾄしました"
+msgstr "検索"
 
 msgid "Set as backgroundmusic?"
-msgstr "BGMに設定しますか"
+msgstr "BGMに設定しますか?"
 
 msgid "Settings"
 msgstr "設定"
@@ -966,7 +960,7 @@ msgid "Successfully deleted:"
 msgstr "削除に成功しました:"
 
 msgid "Successfully installed:"
-msgstr "このｹﾞｰﾑをｲﾝｽﾄｰﾙしました"
+msgstr "このｹﾞｰﾑをｲﾝｽﾄｰﾙしました:"
 
 msgid "System Default"
 msgstr "ｼｽﾃﾑのﾃﾞﾌｫﾙﾄ"
@@ -1019,7 +1013,7 @@ msgstr "USB Loaderは保護されています"
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
-msgstr ""
+msgstr "ﾀﾞｳﾝﾛｰﾄﾞ中のため、WADを開けません (%s)."
 
 msgid "Uninstall"
 msgstr "ｱﾝｲﾝｽﾄｰﾙ"
@@ -1043,10 +1037,10 @@ msgid "Update"
 msgstr "更新"
 
 msgid "Update All"
-msgstr "全て更新"
+msgstr "全て"
 
 msgid "Update DOL"
-msgstr "DOLを更新"
+msgstr "DOLのみ"
 
 msgid "Update Files"
 msgstr "ﾌｧｲﾙを更新"
@@ -1079,7 +1073,7 @@ msgid "Updating WiiTDB.zip"
 msgstr "WiiTDB.zipを更新中"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
-msgstr ""
+msgstr "ｲﾝｽﾄｰﾙ済みﾃﾞｨﾚｸﾄﾘにZIPを送信しました"
 
 msgid "VIDTV Patch"
 msgstr "VIDTVﾊﾟｯﾁ"
@@ -1134,7 +1128,7 @@ msgid "Yes"
 msgstr "はい"
 
 msgid "You are about to delete "
-msgstr "削除していいですか"
+msgstr "削除していいですか "
 
 msgid "You are choosing to display favorites and you do not have any selected."
 msgstr "お気に入りの登録がありません"

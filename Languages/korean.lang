@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-01 05:48+0200\n"
+"POT-Creation-Date: 2009-10-01 15:35+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: nextos@korea.com\n"
 "Language-Team: \n"
@@ -196,6 +196,9 @@ msgstr "삭제할 수 없습니다:"
 msgid "Cancel"
 msgstr "취소"
 
+msgid "Channels"
+msgstr ""
+
 msgid "Cheatfile is blank"
 msgstr "치트화일 내용없음"
 
@@ -226,9 +229,6 @@ msgstr "Coded by: %s"
 
 msgid "Coding:"
 msgstr "코디:"
-
-msgid "Compressed:"
-msgstr ""
 
 msgid "Confirm"
 msgstr "확인"
@@ -761,9 +761,6 @@ msgstr "DOL/ELF 파일이 아님."
 msgid "Not a Wii Disc"
 msgstr "Wii 디스크가 아닙니다"
 
-msgid "Not enough free memory"
-msgstr "메모리가 부족해요."
-
 msgid "Not enough free memory."
 msgstr "메모리가 부족해요."
 
@@ -804,9 +801,6 @@ msgid "Original/Customs"
 msgstr "원본/사용자설정"
 
 msgid "Parental Control"
-msgstr "자녀보호기능"
-
-msgid "Parental control"
 msgstr "자녀보호기능"
 
 msgid "Partition"

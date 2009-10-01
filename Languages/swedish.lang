@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-01 05:48+0200\n"
+"POT-Creation-Date: 2009-10-01 15:35+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -196,6 +196,9 @@ msgstr "Kunde inte radera:"
 msgid "Cancel"
 msgstr "Avbryt"
 
+msgid "Channels"
+msgstr ""
+
 msgid "Cheatfile is blank"
 msgstr "Fuskfilen är blank"
 
@@ -226,9 +229,6 @@ msgstr "Kodad av: %s"
 
 msgid "Coding:"
 msgstr "Kodning:"
-
-msgid "Compressed:"
-msgstr ""
 
 msgid "Confirm"
 msgstr "Bekräfta"
@@ -761,9 +761,6 @@ msgstr "Inte en DOL/ELF fil."
 msgid "Not a Wii Disc"
 msgstr "Inte en Wii-skiva"
 
-msgid "Not enough free memory"
-msgstr "Inte tillräckligt med ledigt minne"
-
 msgid "Not enough free memory."
 msgstr "Inte tillräckligt med ledigt minne."
 
@@ -804,9 +801,6 @@ msgid "Original/Customs"
 msgstr "Original/Anpassade"
 
 msgid "Parental Control"
-msgstr "Föräldrakontroll"
-
-msgid "Parental control"
 msgstr "Föräldrakontroll"
 
 msgid "Partition"

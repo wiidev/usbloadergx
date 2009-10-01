@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-01 05:48+0200\n"
+"POT-Creation-Date: 2009-10-01 15:35+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Tusk\n"
 "Language-Team: \n"
@@ -196,6 +196,9 @@ msgstr "Nem törölhetõ"
 msgid "Cancel"
 msgstr "Mégse"
 
+msgid "Channels"
+msgstr ""
+
 msgid "Cheatfile is blank"
 msgstr "A Kódokat tartalmazó fájl üres"
 
@@ -225,9 +228,6 @@ msgid "Coded by: %s"
 msgstr ""
 
 msgid "Coding:"
-msgstr ""
-
-msgid "Compressed:"
 msgstr ""
 
 msgid "Confirm"
@@ -761,9 +761,6 @@ msgstr ""
 msgid "Not a Wii Disc"
 msgstr "Nem Wii lemez"
 
-msgid "Not enough free memory"
-msgstr ""
-
 msgid "Not enough free memory."
 msgstr ""
 
@@ -805,9 +802,6 @@ msgstr ""
 
 msgid "Parental Control"
 msgstr "Szülõi Felügyelet"
-
-msgid "Parental control"
-msgstr "Szülõi felügyelet"
 
 msgid "Partition"
 msgstr "Partició"

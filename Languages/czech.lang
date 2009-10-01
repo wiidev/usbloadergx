@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-01 05:48+0200\n"
+"POT-Creation-Date: 2009-10-01 15:35+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) \n"
 "Language-Team: r719 - last version on http://volny.cz/djelinek/_USBLoderGX/czech.lang \n"
@@ -196,6 +196,9 @@ msgstr "Nelze smazat:"
 msgid "Cancel"
 msgstr "Zrušit"
 
+msgid "Channels"
+msgstr ""
+
 msgid "Cheatfile is blank"
 msgstr "Soubor s cheaty je prázdný"
 
@@ -226,9 +229,6 @@ msgstr "Naprogramoval: %s"
 
 msgid "Coding:"
 msgstr "Programování:"
-
-msgid "Compressed:"
-msgstr ""
 
 msgid "Confirm"
 msgstr "Potvrdit"
@@ -761,9 +761,6 @@ msgstr "To není DOL/ELF soubor."
 msgid "Not a Wii Disc"
 msgstr "Toto není Wii disk"
 
-msgid "Not enough free memory"
-msgstr "Není dostatek volné pameti"
-
 msgid "Not enough free memory."
 msgstr "Není dostatek volné pameti."
 
@@ -804,9 +801,6 @@ msgid "Original/Customs"
 msgstr "Originál/Upravené"
 
 msgid "Parental Control"
-msgstr "Rodicovský zámek"
-
-msgid "Parental control"
 msgstr "Rodicovský zámek"
 
 msgid "Partition"

@@ -2027,7 +2027,7 @@ int GameSettings(struct discHdr * header) {
                 options2.SetName(2,"%s", tr("Game Language"));
                 options2.SetName(3, "Ocarina");
                 options2.SetName(4, "IOS");
-                options2.SetName(5,"%s", tr("Parental control"));
+                options2.SetName(5,"%s", tr("Parental Control"));
                 options2.SetName(6,"%s", tr("Error 002 fix"));
                 options2.SetName(7,"%s", tr("Patch Country Strings"));
                 options2.SetName(8,"%s", tr("Alternate DOL"));
