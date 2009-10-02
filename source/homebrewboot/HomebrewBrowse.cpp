@@ -848,7 +848,7 @@ int MenuHomebrewBrowse() {
 							if (wiiloadVersion[0] > 0 || wiiloadVersion[1] > 4) {
 
 								// We need to unzip...
-								if (temp[0] == 'P' && temp[1] == 'K' && temp[2] == 0x03 && temp[2] == 0x04) {
+								if (temp[0] == 'P' && temp[1] == 'K' && temp[2] == 0x03 && temp[3] == 0x04) {
 									// It's a zip file, unzip to the apps directory
 									
 									// Zip archive, ask for permission to install the zip
@@ -866,11 +866,17 @@ int MenuHomebrewBrowse() {
 										if (uf==NULL) {
 											error = true;
 										} else {
-											extractZip(uf,0,1,0);
+											extractZip(uf,0,1,0, Settings.homebrewapps_path);
 											unzCloseCurrentFile(uf);
 											
 											remove(zippath);
+											
+											// Reload this menu here...
+											menu = MENU_HOMEBREWBROWSE;
+											break;
 										}
+									} else {
+										error = true;
 									}
 								} else if (uncfilesize != 0) { // if uncfilesize == 0, it's not compressed
 									// It's compressed, uncompress
