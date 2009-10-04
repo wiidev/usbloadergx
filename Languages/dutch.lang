@@ -1,5 +1,5 @@
 # USB Loader GX language source file.
-# dutch.lang - r713
+# dutch.lang - r774
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
@@ -197,13 +197,13 @@ msgid "Cancel"
 msgstr "Annuleren"
 
 msgid "Channels"
-msgstr ""
+msgstr "Kanalen"
 
 msgid "Cheatfile is blank"
 msgstr "Cheatbestand is leeg"
 
 msgid "Checking existing artwork"
-msgstr ""
+msgstr "Besttande afbeeldingen controleren"
 
 msgid "Checking for Updates"
 msgstr "Controleren op updates"
@@ -212,7 +212,7 @@ msgid "Click to Download Covers"
 msgstr "Klik om hoesjes te downloaden"
 
 msgid "Click to change game ID"
-msgstr ""
+msgstr "Klik om het spelID te wijzigen"
 
 msgid "Clock"
 msgstr "Klok"
@@ -279,7 +279,7 @@ msgid "Could not read the disc."
 msgstr "Kan DVD niet lezen"
 
 msgid "Could not save."
-msgstr ""
+msgstr "Kon niet opslaan."
 
 msgid "Could not set USB."
 msgstr "Kan USB niet instellen"
@@ -644,7 +644,7 @@ msgid "Language change:"
 msgstr "Taal wijzigen:"
 
 msgid "Languagefile"
-msgstr ""
+msgstr "Taalbestand"
 
 msgid "Languagepath changed."
 msgstr "Locatie taal gewijzigd."
@@ -659,7 +659,7 @@ msgid "Load"
 msgstr "Laad"
 
 msgid "Load From SD/USB"
-msgstr ""
+msgstr "Laden van SD/USB"
 
 #, c-format
 msgid "Load file from: %s ?"
@@ -693,7 +693,7 @@ msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr "Waarschijnlijk zijn de afmeetingen niet deelbaar door 4."
 
 msgid "Mount DVD drive"
-msgstr ""
+msgstr "DVD Laden"
 
 msgid "Music Volume"
 msgstr "Muziekvolume"
@@ -735,7 +735,7 @@ msgid "No WBFS partition found"
 msgstr "Geen WBFS partitie gevonden"
 
 msgid "No cheats were selected"
-msgstr ""
+msgstr "Geen cheats geselecteerd"
 
 msgid "No data could be read."
 msgstr "Geen data kon gelezen worden."
@@ -777,7 +777,7 @@ msgid "OFF"
 msgstr "Uit"
 
 msgid "OK"
-msgstr "Ok"
+msgstr ""
 
 msgid "ON"
 msgstr "Aan"
@@ -828,7 +828,7 @@ msgid "Play Count"
 msgstr "Gespeeld"
 
 msgid "Please wait..."
-msgstr ""
+msgstr "Even geduld..."
 
 msgid "Power off the Wii"
 msgstr "Wii uitschakelen"
@@ -894,25 +894,25 @@ msgid "Save Failed"
 msgstr "Opslaan mislukt"
 
 msgid "Save Game List to"
-msgstr ""
+msgstr "Spellenlijst opslaan in"
 
 msgid "Saved"
-msgstr ""
+msgstr "Opgeslagen"
 
 msgid "Screensaver"
 msgstr "Schermbeveiliging"
 
 msgid "Select a DOL"
-msgstr ""
+msgstr "Kies een DOL"
 
 msgid "Selected DOL"
-msgstr ""
+msgstr "Gekozen DOL"
 
 msgid "Sept"
-msgstr ""
+msgstr "Sep"
 
 msgid "Set Search-Filter"
-msgstr ""
+msgstr "Zoekfilter instellen"
 
 msgid "Set as backgroundmusic?"
 msgstr "Instellen als achtergrondmuziek?"
@@ -1073,7 +1073,7 @@ msgid "Updating WiiTDB.zip"
 msgstr "Wiitdb.zip updaten..."
 
 msgid "Uploaded ZIP file installed to homebrew directory."
-msgstr ""
+msgstr "Geuploade ZIP is geinstalleerd in je homebrew locatie."
 
 msgid "VIDTV Patch"
 msgstr "VIDTV patchen"
@@ -1101,7 +1101,7 @@ msgid "Widescreen Fix"
 msgstr "Breedbeeld"
 
 msgid "Wii Menu"
-msgstr "Wii Menu"
+msgstr ""
 
 msgid "Wii Settings"
 msgstr "Wii instellingen"

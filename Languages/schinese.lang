@@ -1,5 +1,5 @@
 # USB Loader GX language source file.
-# schinese.lang - r763
+# schinese.lang - r773
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
@@ -197,7 +197,7 @@ msgid "Cancel"
 msgstr "取消"
 
 msgid "Channels"
-msgstr ""
+msgstr "频道"
 
 msgid "Cheatfile is blank"
 msgstr "作弊码文件是空的"
@@ -537,13 +537,13 @@ msgid "HOME Menu"
 msgstr "主菜单"
 
 msgid "Homebrew Apps Path"
-msgstr "Homebrew 程序路径"
+msgstr "自制程序路径"
 
 msgid "Homebrew Appspath change"
-msgstr "变更 Homebrew 程序路径"
+msgstr "变更自制程序路径"
 
 msgid "Homebrew Appspath changed"
-msgstr "Homebrew 程序路径已变更"
+msgstr "自制程序路径已变更"
 
 msgid "Homebrew Channel"
 msgstr "Homebrew 频道"
@@ -693,7 +693,7 @@ msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr "图片格式错误,可能它的尺寸不是 4 的倍数."
 
 msgid "Mount DVD drive"
-msgstr ""
+msgstr "挂载DVD光驱"
 
 msgid "Music Volume"
 msgstr "音量"
@@ -1073,7 +1073,7 @@ msgid "Updating WiiTDB.zip"
 msgstr "正在升级 WiiTDB.zip"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
-msgstr ""
+msgstr "上传已安装Zip文件到自制程序目录"
 
 msgid "VIDTV Patch"
 msgstr "VIDTV 修改"
@@ -1134,14 +1134,14 @@ msgid "You are choosing to display favorites and you do not have any selected."
 msgstr "你选择显示收藏夹但里面还没有任何收藏"
 
 msgid "You have attempted to load a bad image"
-msgstr "你试图加载一个坏的镜像"
+msgstr "你在加载损坏的镜像"
 
 msgid "You need to format a partition"
 msgstr "必须格式化一个分区"
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
-msgstr "链接已存入 %sWiiTDB_URL.txt 文件."
+msgstr "链接已写入 %sWiiTDB_URL.txt 文件."
 
 msgid "available"
 msgstr "允许"

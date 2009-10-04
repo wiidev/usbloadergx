@@ -1,5 +1,5 @@
 # USB Loader GX language source file.
-# japanese.lang - r770
+# japanese.lang - r774
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
@@ -26,7 +26,7 @@ msgid " is not on the server."
 msgstr "はｻｰﾊﾞｰにありません。"
 
 msgid "(both retired)"
-msgstr "/ papa"
+msgstr "/ papa / K-M"
 
 msgid "0 (Everyone)"
 msgstr "0 (誰でも)"
@@ -122,7 +122,7 @@ msgid "AUTO"
 msgstr "自動"
 
 msgid "All the features of USB Loader GX are unlocked."
-msgstr "制限解除、GXの全機能が利用可能です"
+msgstr "GXの全機能の制限が解除されました"
 
 msgid "Alternate DOL"
 msgstr "代理DOL起動"
@@ -140,7 +140,7 @@ msgid "Apr"
 msgstr "4月"
 
 msgid "Are you sure?"
-msgstr "実行しますか?"
+msgstr "実行しますか？"
 
 msgid "Aug"
 msgstr "8月"
@@ -179,7 +179,7 @@ msgid "Boot/Standard"
 msgstr "cIOS選択"
 
 msgid "Boot?"
-msgstr "起動しますか？?"
+msgstr "起動しますか？"
 
 msgid "Both"
 msgstr "IDとﾘｰｼﾞｮﾝを表示"
@@ -197,7 +197,7 @@ msgid "Cancel"
 msgstr "ｷｬﾝｾﾙ"
 
 msgid "Channels"
-msgstr ""
+msgstr "チャンネル"
 
 msgid "Cheatfile is blank"
 msgstr "ﾁｰﾄﾌｧｲﾙがありません"
@@ -225,7 +225,7 @@ msgstr "ｺｰﾄﾞをﾀﾞｳﾝﾛｰﾄﾞ"
 
 #, c-format
 msgid "Coded by: %s"
-msgstr ""
+msgstr "開発: %s"
 
 msgid "Coding:"
 msgstr "開発者:"
@@ -246,7 +246,7 @@ msgid "Console should be unlocked to modify it."
 msgstr "変更にはGXのﾛｯｸ解除が必要です"
 
 msgid "Continue to install game?"
-msgstr "このｹﾞｰﾑをｲﾝｽﾄｰﾙしますか?"
+msgstr "このｹﾞｰﾑをｲﾝｽﾄｰﾙしますか？"
 
 msgid "Controllevel"
 msgstr "ｺﾝﾄﾛｰﾙ･ﾚﾍﾞﾙ"
@@ -321,10 +321,10 @@ msgid "Default"
 msgstr "ﾃﾞﾌｫﾙﾄ"
 
 msgid "Default Gamesettings"
-msgstr "ﾃﾞﾌｫﾙﾄの設定に戻す"
+msgstr "設定を初期化"
 
 msgid "Default Settings"
-msgstr "ﾃﾞﾌｫﾙﾄの設定に戻す"
+msgstr "設定を初期化"
 
 msgid "Delete"
 msgstr "削除しますか"
@@ -390,28 +390,28 @@ msgid "Do you really want to delete:"
 msgstr "本当に削除しますか:"
 
 msgid "Do you want to change language?"
-msgstr "言語を変更しますか?"
+msgstr "言語を変更しますか？"
 
 msgid "Do you want to format:"
 msgstr "初期化しますか:"
 
 msgid "Do you want to retry for 30 secs?"
-msgstr "再試行しますか?"
+msgstr "再試行しますか？"
 
 msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "既知の代替DOLを利用しますか？"
 
 msgid "Do you wish to update/download all language files?"
-msgstr "すべての言語ﾌｧｲﾙをｱｯﾌﾟﾃﾞｰﾄ(ﾀﾞｳﾝﾛｰﾄﾞ)しますか?"
+msgstr "すべての言語ﾌｧｲﾙをﾀﾞｳﾝﾛｰﾄﾞしますか？"
 
 msgid "Done!"
 msgstr "完了！"
 
 msgid "Download Boxart image?"
-msgstr "ﾊﾟｯｹｰｼﾞ画像をﾀﾞｳﾝﾛｰﾄﾞしますか?"
+msgstr "ﾊﾟｯｹｰｼﾞ画像をﾀﾞｳﾝﾛｰﾄﾞしますか？"
 
 msgid "Download Discart image?"
-msgstr "ﾃﾞｨｽｸ画像をﾀﾞｳﾝﾛｰﾄﾞしますか?"
+msgstr "ﾃﾞｨｽｸ画像をﾀﾞｳﾝﾛｰﾄﾞしますか？"
 
 msgid "Download Now"
 msgstr "今すぐﾀﾞｳﾝﾛｰﾄﾞ"
@@ -459,7 +459,7 @@ msgid "Error:"
 msgstr "エラー:"
 
 msgid "Exit USB Loader GX?"
-msgstr "USB Loader GXを終了しますか?"
+msgstr "USB Loader GXを終了しますか？"
 
 msgid "Failed formating"
 msgstr "初期化に失敗しました"
@@ -555,10 +555,10 @@ msgid "Hour"
 msgstr "時間"
 
 msgid "How do you want to update?"
-msgstr "更新を実行しますか?"
+msgstr "どう更新しますか？"
 
 msgid "How to Shutdown?"
-msgstr "ｼｬｯﾄﾀﾞｳﾝの方法は?"
+msgstr "ｼｬｯﾄﾀﾞｳﾝの方法は？"
 
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
 msgstr "1ﾎﾞﾀﾝを押すと WiiTDB.zip のURLを表示します"
@@ -663,10 +663,10 @@ msgstr "SD/USBからﾛｰﾄﾞ"
 
 #, c-format
 msgid "Load file from: %s ?"
-msgstr "%sからﾌｧｲﾙをﾛｰﾄﾞしますか?"
+msgstr "%sからﾌｧｲﾙをﾛｰﾄﾞしますか？"
 
 msgid "Load this DOL as alternate DOL?"
-msgstr "このDOLを代替DOLとしてﾛｰﾄﾞしますか？?"
+msgstr "このDOLを代替DOLとしてﾛｰﾄﾞしますか？"
 
 msgid "Loading standard language."
 msgstr "標準の言語に変更しますか"
@@ -849,7 +849,7 @@ msgid "Reading WAD data... Ok!"
 msgstr "WADﾃﾞｰﾀを読込...成功！"
 
 msgid "Receiving file from:"
-msgstr "ﾌｧｲﾙを受信:"
+msgstr "ﾌｧｲﾙを受信中:"
 
 msgid "Released"
 msgstr "リリース"
@@ -915,7 +915,7 @@ msgid "Set Search-Filter"
 msgstr "検索"
 
 msgid "Set as backgroundmusic?"
-msgstr "BGMに設定しますか?"
+msgstr "BGMに設定しますか？"
 
 msgid "Settings"
 msgstr "設定"
@@ -1092,7 +1092,7 @@ msgid "Waiting..."
 msgstr "待機中…"
 
 msgid "What do you want to update?"
-msgstr "どれを更新しますか？"
+msgstr "何を更新しますか？"
 
 msgid "WiFi Features"
 msgstr "WiFi機能"

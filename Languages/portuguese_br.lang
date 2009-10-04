@@ -197,7 +197,7 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 msgid "Channels"
-msgstr ""
+msgstr "Canais"
 
 msgid "Cheatfile is blank"
 msgstr "arquivo de truques vazio"
@@ -345,7 +345,7 @@ msgid "Delete Disc Artwork"
 msgstr "Eliminar Img. Disco"
 
 msgid "Design:"
-msgstr ""
+msgstr "Desenho:"
 
 msgid "Developed by"
 msgstr "Desenvolvido por"
@@ -1073,7 +1073,7 @@ msgid "Updating WiiTDB.zip"
 msgstr "Atualizando WiiTDB.zip"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
-msgstr ""
+msgstr "Arquivo ZIP enviado y instalado no diretório homebrew."
 
 msgid "VIDTV Patch"
 msgstr "Patch VIDTV"

@@ -1,5 +1,5 @@
 # USB Loader GX language source file.
-# thai.lang - r746
+# thai.lang - r774
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
@@ -197,7 +197,7 @@ msgid "Cancel"
 msgstr "ยกเลิก"
 
 msgid "Channels"
-msgstr ""
+msgstr "แชนแนล"
 
 msgid "Cheatfile is blank"
 msgstr "ไฟล์สูตรโกง ว่างเปล่า"
@@ -693,7 +693,7 @@ msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr "ดูเหมือนว่าขนาดจะหารด้วย 4 ไม่ลงตัว"
 
 msgid "Mount DVD drive"
-msgstr ""
+msgstr "เชื่อม DVD ไดร์ฟ"
 
 msgid "Music Volume"
 msgstr "ความดังเสียงเพลง"
@@ -912,7 +912,7 @@ msgid "Sept"
 msgstr "กย."
 
 msgid "Set Search-Filter"
-msgstr ""
+msgstr "กำหนดเงื่อนไขการค้นหา"
 
 msgid "Set as backgroundmusic?"
 msgstr "เลือกเป็น Background music?"
@@ -1049,7 +1049,7 @@ msgid "Update Path"
 msgstr "ที่อยู่ Update"
 
 msgid "Update Path changed."
-msgstr ""
+msgstr "ที่อยู่ Update ถูกเปลี่ยน"
 
 msgid "Update all Language Files"
 msgstr "อัพเดทภาษาทั้งหมด"
@@ -1073,7 +1073,7 @@ msgid "Updating WiiTDB.zip"
 msgstr "กำลังอัพเดทไฟล์ WiiTDB.zip"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
-msgstr ""
+msgstr "อัพโหลดไฟล์ zip ไปที่ไดเรคทอรี่ homebrew"
 
 msgid "VIDTV Patch"
 msgstr "ปรับแก้ VIDTV"
@@ -1171,13 +1171,13 @@ msgid "for"
 msgstr "สำหรับ"
 
 msgid "for WiiTDB and hosting covers / disc images"
-msgstr ""
+msgstr "สำหรับ WiiTDB และ ปก/รูปแผ่นดิสก์"
 
 msgid "for diverse patches"
 msgstr "แก้ diverse"
 
 msgid "for his awesome tool"
-msgstr ""
+msgstr "สำหรับสุดยอด tool ของเค้า"
 
 msgid "for hosting the update files"
 msgstr "สำหรับที่เก็บไฟล์อัพเดท"

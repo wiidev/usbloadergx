@@ -197,7 +197,7 @@ msgid "Cancel"
 msgstr "Abbrechen"
 
 msgid "Channels"
-msgstr ""
+msgstr "Kanäle"
 
 msgid "Cheatfile is blank"
 msgstr "Cheatdatei ist leer"
@@ -221,7 +221,7 @@ msgid "Close"
 msgstr "Schließen"
 
 msgid "Code Download"
-msgstr "Code Download"
+msgstr ""
 
 #, c-format
 msgid "Coded by: %s"
@@ -297,7 +297,7 @@ msgid "Create"
 msgstr "Erstelle"
 
 msgid "Credits"
-msgstr "Credits"
+msgstr ""
 
 msgid "Custom Paths"
 msgstr "Benutzerdefinierte Pfade"
@@ -420,7 +420,7 @@ msgid "Download finished"
 msgstr "Download abgeschlossen"
 
 msgid "Downloading"
-msgstr "Downloading"
+msgstr ""
 
 msgid "Downloading file"
 msgstr "Downloade Datei:"
@@ -804,7 +804,7 @@ msgid "Parental Control"
 msgstr "Jugendschutz"
 
 msgid "Partition"
-msgstr "Partition"
+msgstr ""
 
 msgid "Password"
 msgstr "Passwort"
@@ -828,7 +828,7 @@ msgid "Play Count"
 msgstr "Gespielt"
 
 msgid "Please wait..."
-msgstr ""
+msgstr "Warten Sie bitte..."
 
 msgid "Power off the Wii"
 msgstr "Wii ausschalten"
@@ -942,7 +942,7 @@ msgid "Special thanks to:"
 msgstr "Besonderer Dank an"
 
 msgid "Standard"
-msgstr "Standard"
+msgstr ""
 
 msgid "Success"
 msgstr "Erfolg"
@@ -969,10 +969,10 @@ msgid "TChinese"
 msgstr "Traditionelles Chinesisch"
 
 msgid "TXT Cheatcodes Path"
-msgstr "TXTCheatcodes Pfad"
+msgstr "TXT Cheatcodes Pfad"
 
 msgid "TXT Cheatcodes Path changed"
-msgstr "TXTCheatcodes Pfad geändert"
+msgstr "TXT Cheatcodes Pfad geändert"
 
 msgid "The file is not a .wad"
 msgstr "Die Datei ist nicht .wad"

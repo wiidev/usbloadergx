@@ -1,5 +1,5 @@
 # USB Loader GX language source file.
-# tchinese.lang - r711
+# tchinese.lang - r773
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
@@ -197,13 +197,13 @@ msgid "Cancel"
 msgstr "取消"
 
 msgid "Channels"
-msgstr ""
+msgstr "頻道"
 
 msgid "Cheatfile is blank"
 msgstr "金手指檔案空白"
 
 msgid "Checking existing artwork"
-msgstr ""
+msgstr "正在檢查現有的圖形"
 
 msgid "Checking for Updates"
 msgstr "正在檢查更新"
@@ -212,7 +212,7 @@ msgid "Click to Download Covers"
 msgstr "點擊進行封面下載"
 
 msgid "Click to change game ID"
-msgstr ""
+msgstr "點擊變更遊戲ID"
 
 msgid "Clock"
 msgstr "時鐘"
@@ -279,7 +279,7 @@ msgid "Could not read the disc."
 msgstr "無法讀取光碟"
 
 msgid "Could not save."
-msgstr ""
+msgstr "無法儲存"
 
 msgid "Could not set USB."
 msgstr "無法設置USB"
@@ -333,10 +333,10 @@ msgid "Delete ?"
 msgstr "刪除?"
 
 msgid "Delete Cheat GCT"
-msgstr ""
+msgstr "刪除金手指GCT檔"
 
 msgid "Delete Cheat TXT"
-msgstr "刪除金手指檔案"
+msgstr "刪除金手指TXT檔"
 
 msgid "Delete Cover Artwork"
 msgstr "刪除外盒圖形"
@@ -644,7 +644,7 @@ msgid "Language change:"
 msgstr "變更語言為:"
 
 msgid "Languagefile"
-msgstr ""
+msgstr "語言檔案"
 
 msgid "Languagepath changed."
 msgstr "語言路徑已變更"
@@ -659,7 +659,7 @@ msgid "Load"
 msgstr "載入"
 
 msgid "Load From SD/USB"
-msgstr ""
+msgstr "從SD/USB載入"
 
 #, c-format
 msgid "Load file from: %s ?"
@@ -693,7 +693,7 @@ msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr "圖片格式不正確,無法被4整除"
 
 msgid "Mount DVD drive"
-msgstr ""
+msgstr "掛載DVD光碟機"
 
 msgid "Music Volume"
 msgstr "音量"
@@ -735,7 +735,7 @@ msgid "No WBFS partition found"
 msgstr "找不到WBFS磁區"
 
 msgid "No cheats were selected"
-msgstr ""
+msgstr "無已選擇的金手指"
 
 msgid "No data could be read."
 msgstr "無法讀取資料"
@@ -828,7 +828,7 @@ msgid "Play Count"
 msgstr "執行次數"
 
 msgid "Please wait..."
-msgstr ""
+msgstr "請稍候..."
 
 msgid "Power off the Wii"
 msgstr "關閉Wii主機"
@@ -894,25 +894,25 @@ msgid "Save Failed"
 msgstr "儲存失敗"
 
 msgid "Save Game List to"
-msgstr ""
+msgstr "儲存遊戲列表至"
 
 msgid "Saved"
-msgstr ""
+msgstr "已儲存"
 
 msgid "Screensaver"
 msgstr "螢幕保護"
 
 msgid "Select a DOL"
-msgstr ""
+msgstr "選擇DOL"
 
 msgid "Selected DOL"
-msgstr ""
+msgstr "已選擇DOL"
 
 msgid "Sept"
 msgstr "九月"
 
 msgid "Set Search-Filter"
-msgstr ""
+msgstr "設定蒐尋過濾器"
 
 msgid "Set as backgroundmusic?"
 msgstr "設定背景音樂"
@@ -1073,7 +1073,7 @@ msgid "Updating WiiTDB.zip"
 msgstr "正在更新WiiTDB.zip"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
-msgstr ""
+msgstr "已更新安裝在Homebrew目錄的ZIP檔案"
 
 msgid "VIDTV Patch"
 msgstr "VIDTV修改"
@@ -1107,7 +1107,7 @@ msgid "Wii Settings"
 msgstr "Wii主機設定"
 
 msgid "WiiTDB Files"
-msgstr ""
+msgstr "WiiTDB檔案"
 
 msgid "WiiTDB Path"
 msgstr "WiiTDB路徑"

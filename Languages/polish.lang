@@ -71,7 +71,7 @@ msgid "5 min"
 msgstr ""
 
 msgid ">> Deleting tickets..."
-msgstr ">> Usuanie ticketu..."
+msgstr ">> Usuwanie ticketu..."
 
 msgid ">> Deleting tickets...ERROR! "
 msgstr ">> Usuwanie ticketu...ERROR! "
@@ -80,22 +80,22 @@ msgid ">> Deleting tickets...Ok! "
 msgstr ">> Usuwanie ticketu...Ok! "
 
 msgid ">> Deleting title ...ERROR! "
-msgstr ">> Usuwanie title ...ERROR! "
+msgstr ">> Usuwanie tytulu ...ERROR! "
 
 msgid ">> Deleting title ...Ok!"
-msgstr ">> Usuwanie title ...Ok!"
+msgstr ">> Usuwanie tytulu ...Ok!"
 
 msgid ">> Deleting title contents..."
-msgstr ""
+msgstr ">> Usuwanie title contents..."
 
 msgid ">> Deleting title contents...ERROR! "
-msgstr ""
+msgstr ">> Usuwanie title contents...ERROR! "
 
 msgid ">> Deleting title contents...Ok!"
-msgstr ""
+msgstr ">> Usuwanie title contents...Ok!"
 
 msgid ">> Deleting title..."
-msgstr ""
+msgstr ">> Usuwanie tytulu..."
 
 msgid ">> Finishing installation..."
 msgstr ">> Konczenie instalacji"
