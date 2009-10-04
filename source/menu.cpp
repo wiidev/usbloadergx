@@ -951,18 +951,14 @@ int MenuDiscList() {
             
 			choice = WindowPrompt(0,linebuf, "txt","csv",tr("Back"));
         
-			if (choice==1)
-			{
-				if (save_gamelist(choice-1))
-					WindowPrompt(0,tr("Saved"), tr("OK"));
-				else
-					WindowPrompt(tr("Error"),tr("Could not save."), tr("OK"));
-				menu = MENU_DISCLIST;
-				break;
-			}
+			if (save_gamelist(choice-1))
+				WindowPrompt(0,tr("Saved"), tr("OK"));
+			else
+				WindowPrompt(tr("Error"),tr("Could not save."), tr("OK"));
+			menu = MENU_DISCLIST;
+			break;
 			
-			
-			gamecntBtn.ResetState();
+			//gamecntBtn.ResetState();
 
         } else if (homeBtn.GetState() == STATE_CLICKED) {
             s32 thetimeofbg = bgMusic->GetPlayTime();
