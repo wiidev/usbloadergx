@@ -278,7 +278,7 @@ main:
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
     GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
 
-    GuiImageData folderImgData(folder_png);
+    GuiImageData folderImgData(icon_folder_png);
     GuiImage folderImg(&folderImgData);
     GuiButton folderBtn(folderImg.GetWidth(), folderImg.GetHeight());
     folderBtn.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);

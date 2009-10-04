@@ -4,6 +4,7 @@ class customOptionList {
 	public:
 		customOptionList(int size);
 		~customOptionList();
+		void SetLength(int size);
 		void SetName(int i, const char *format, ...) __attribute__((format (printf, 3, 4)));
 		const char *GetName(int i)
 		{

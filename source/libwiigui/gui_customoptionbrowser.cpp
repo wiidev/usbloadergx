@@ -40,6 +40,11 @@ customOptionList::~customOptionList()
 	delete [] name;
 	delete [] value;
 }
+void customOptionList::SetLength(int size) //set number of lines
+{
+	length = size;
+	changed = true;
+}
 void customOptionList::SetName(int i, const char *format, ...)
 {
 	if(i >= 0 && i < length)

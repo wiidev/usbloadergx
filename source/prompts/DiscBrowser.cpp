@@ -293,23 +293,12 @@ int autoSelectDol(const char *id, bool force) {
 		//Grand Slam Tennis
 		if (strcmp(id,"R5TP69") == 0) return 1493;//from isostar
 		if (strcmp(id,"R5TE69") == 0) return 1493;//starstremr
-		
-		//Indiana Jones and the Staff of Kings (Fate of Atlantis)
-		if (strcmp(id,"RJ8P64") == 0) return 8;//from isostar
-		if (strcmp(id,"RJ8E64") == 0) return 8;//starstremr
-		
+				
 		//Medal of Honor Heroes
 		if (strcmp(id,"RMZX69") == 0) return 492;//from isostar
 		if (strcmp(id,"RMZP69") == 0) return 492;//from isostar
 		if (strcmp(id,"RMZE69") == 0) return 492;//starstremr 
-		
-		//Metal Slug Anthology
-		if (strcmp(id,"RMLP7U") == 0) return 56;//from isostar
-		
-		//The House Of The Dead 2 & 3 Return
-		if (strcmp(id,"RHDP8P") == 0) return 149;//from isostar
-		if (strcmp(id,"RHDE8P") == 0) return 149;//starstremr
-		
+								
 		//Tiger Woods 10
 		if (strcmp(id,"R9OP69") == 0) return 1991;//from isostar
 		if (strcmp(id,"R9OE69") == 0) return 1973;//starstremr
@@ -328,10 +317,10 @@ int autoSelectDol(const char *id, bool force) {
 
 int autoSelectDolMenu(const char *id, bool force) {
 
+	/*
 	char id4[10];
 	sprintf(id4,"%c%c%c%c",id[0],id[1],id[2],id[3]);
 	
-	/*
 	switch (CheckForSave(id4)) {
 		case 0:
 			WindowPrompt(tr("NO save"),0,tr("OK"));
@@ -348,6 +337,58 @@ int autoSelectDolMenu(const char *id, bool force) {
 	return -1;
 	*/
 	
+	//Indiana Jones and the Staff of Kings (Fate of Atlantis)
+	if (strcmp(id,"RJ8E64") == 0) {
+		int choice = WindowPrompt(tr("Select a DOL"), 0, "Fate of Atlantis", tr("Default"));
+		switch (choice) {
+			case 1:
+				choice = 8; //from starstremr
+				break;
+			default: // no alt dol
+				choice = 0;
+				break;
+		}
+		return choice;
+	}
+	if (strcmp(id,"RJ8P64") == 0) {
+		int choice = WindowPrompt(tr("Select a DOL"), 0, "Fate of Atlantis", tr("Default"));
+		switch (choice) {
+			case 1:
+				choice = 8; //from isostar
+				break;
+			default: // no alt dol
+				choice = 0;
+				break;
+		}
+		return choice;
+	}
+		
+	//Metal Slug Anthology (Metal Slug 6)
+	if (strcmp(id,"RMLEH4") == 0) {
+		int choice = WindowPrompt(tr("Select a DOL"), 0, "Metal Slug 6", tr("Default"));
+		switch (choice) {
+			case 1:
+				choice = 54; //from lustar
+				break;
+			default: // no alt dol
+				choice = 0;
+				break;
+		}
+		return choice;
+	}
+	if (strcmp(id,"RMLP7U") == 0) {
+		int choice = WindowPrompt(tr("Select a DOL"), 0, "Metal Slug 6", tr("Default"));
+		switch (choice) {
+			case 1:
+				choice = 56; //from isostar
+				break;
+			default: // no alt dol
+				choice = 0;
+				break;
+		}
+		return choice;
+	}
+		
 	//Metroid Prime Trilogy
 	if (strcmp(id,"R3ME01") == 0) {
 		//do not use any alt dol if there is no save game in the nand
@@ -399,6 +440,50 @@ int autoSelectDolMenu(const char *id, bool force) {
 		return choice;
 	}
 	
+	//Rampage: Total Destruction (M1.dol=Rampage, jarvos.dol=Rampage World Tour)
+	if (strcmp(id,"RPGP5D") == 0) {
+		int choice = WindowPrompt(tr("Select a DOL"), 0, "Rampage", "World Tour", tr("Default"));
+        switch (choice) {
+            case 1:
+				choice = 369; //from Ramzee
+				break;
+            case 2:
+				choice = 368; //from Ramzee
+				break;
+            default: // no alt dol
+				choice = 0;
+				break;
+		}
+		return choice;
+	}
+		
+	//The House Of The Dead 2 & 3 Return (only to play 2)
+	if (strcmp(id,"RHDE8P") == 0) {
+		int choice = WindowPrompt(tr("Select a DOL"), 0, "HotD 2", tr("Default"));
+		switch (choice) {
+			case 1:
+				choice = 149; //from starstremr
+				break;
+			default: // no alt dol
+				choice = 0;
+				break;
+		}
+		return choice;
+	}
+	if (strcmp(id,"RHDP8P") == 0) {
+		int choice = WindowPrompt(tr("Select a DOL"), 0, "HotD 2", tr("Default"));
+		switch (choice) {
+			case 1:
+				choice = 149; //from isostar
+				break;
+			default: // no alt dol
+				choice = 0;
+				break;
+		}
+		return choice;
+	}
+
+
     return -1;
 }
 

@@ -453,7 +453,12 @@ int MenuDiscList() {
 
 
     char spaceinfo[30];
-    sprintf(spaceinfo,(mountMethod!=3?"%.2fGB %s %.2fGB %s":" "),freespace,tr("of"),(freespace+used),tr("free"));
+	if (!strcmp(Settings.db_language,"JA")) {
+		// needs to be "total...used" for Japanese
+		sprintf(spaceinfo,(mountMethod!=3?"%.2fGB %s %.2fGB %s":" "),(freespace+used),tr("of"),freespace,tr("free"));
+	} else {
+		sprintf(spaceinfo,(mountMethod!=3?"%.2fGB %s %.2fGB %s":" "),freespace,tr("of"),(freespace+used),tr("free"));
+	}
     GuiText usedSpaceTxt(spaceinfo, 18, THEME.info);
     usedSpaceTxt.SetAlignment(THEME.hddinfo_align, ALIGN_TOP);
     usedSpaceTxt.SetPosition(THEME.hddinfo_x, THEME.hddinfo_y);

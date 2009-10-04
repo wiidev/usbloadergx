@@ -12,8 +12,6 @@
 #include "prompts/filebrowser.h"
 #include "../settings/cfg.h"
 
-
-#define FILEBROWSERSIZE     8
 /**
  * Constructor for the GuiFileBrowser class.
  */
@@ -25,7 +23,7 @@ GuiFileBrowser::GuiFileBrowser(int w, int h)
 	selectable = true;
 	listChanged = true; // trigger an initial list update
 	triggerdisabled = false; // trigger disable
-	focus = 1; // allow focus
+	focus = 0; // allow focus
 
 	trigA = new GuiTrigger;
 	trigA->SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
@@ -45,8 +43,15 @@ GuiFileBrowser::GuiFileBrowser(int w, int h)
 
 	snprintf(imgPath, sizeof(imgPath), "%sbg_browser_selection.png", CFG.theme_path);
 	bgFileSelectionEntry = new GuiImageData(imgPath, bg_browser_selection_png);
-	fileFolder = new GuiImageData(folder_png);
-
+//	fileArchives = new GuiImageData(icon_archives_png);
+//	fileDefault = new GuiImageData(icon_default_png);
+	fileFolder = new GuiImageData(icon_folder_png);
+//	fileGFX = new GuiImageData(icon_gfx_png);
+//	filePLS = new GuiImageData(icon_pls_png);
+//	fileSFX = new GuiImageData(icon_sfx_png);
+//	fileTXT = new GuiImageData(icon_txt_png);
+//	fileXML = new GuiImageData(icon_xml_png);
+	
 	snprintf(imgPath, sizeof(imgPath), "%sscrollbar.png", CFG.theme_path);
 	scrollbar = new GuiImageData(imgPath, scrollbar_png);
 	scrollbarImg = new GuiImage(scrollbar);
@@ -93,6 +98,7 @@ GuiFileBrowser::GuiFileBrowser(int w, int h)
 	scrollbarBoxBtn->SetParent(this);
 	scrollbarBoxBtn->SetImage(scrollbarBoxImg);
 	scrollbarBoxBtn->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
+	scrollbarBoxBtn->SetPosition(-10, 0);
 	scrollbarBoxBtn->SetMinY(-10);
 	scrollbarBoxBtn->SetMaxY(156);
 	scrollbarBoxBtn->SetSelectable(false);
@@ -113,8 +119,14 @@ GuiFileBrowser::GuiFileBrowser(int w, int h)
 		fileListTextOver[i]->SetMaxWidth(bgFileSelectionImg->GetWidth() - (arrowDownImg->GetWidth()+20), GuiText::SCROLL);
 
 		fileListBg[i] = new GuiImage(bgFileSelectionEntry);
+		//fileListArchives[i] = new GuiImage(fileArchives);
+		//fileListDefault[i] = new GuiImage(fileDefault);
 		fileListFolder[i] = new GuiImage(fileFolder);
-
+		//fileListGFX[i] = new GuiImage(fileGFX);
+		//fileListPLS[i] = new GuiImage(filePLS);
+		//fileListSFX[i] = new GuiImage(fileSFX);
+		//fileListTXT[i] = new GuiImage(fileTXT);
+		//fileListXML[i] = new GuiImage(fileXML);
 		fileList[i] = new GuiButton(350,30);
 		fileList[i]->SetParent(this);
 		fileList[i]->SetLabel(fileListText[i]);
@@ -144,7 +156,14 @@ GuiFileBrowser::~GuiFileBrowser()
 
 	delete bgFileSelection;
 	delete bgFileSelectionEntry;
+	//delete fileArchives;
+	//delete fileDefault;
 	delete fileFolder;
+	//delete fileGFX;
+	//delete filePLS;
+	//delete fileSFX;
+	//delete fileTXT;
+	//delete fileXML;
 	delete scrollbar;
 	delete arrowDown;
 	delete arrowUp;
@@ -161,7 +180,14 @@ GuiFileBrowser::~GuiFileBrowser()
 		delete fileListTextOver[i];
 		delete fileList[i];
 		delete fileListBg[i];
+		//delete fileListArchives[i];
+		//delete fileListDefault[i];
 		delete fileListFolder[i];
+		//delete fileListGFX[i];
+		//delete fileListPLS[i];
+		//delete fileListSFX[i];
+		//delete fileListTXT[i];
+		//delete fileListXML[i];
 	}
 }
 
@@ -248,7 +274,7 @@ void GuiFileBrowser::Update(GuiTrigger * t)
 		else if(positionWiimote > scrollbarBoxBtn->GetMaxY())
 			positionWiimote = scrollbarBoxBtn->GetMaxY();
 
-		browser.pageIndex = (positionWiimote * browser.numEntries)/166.0 - selectedItem;
+		browser.pageIndex = (positionWiimote * browser.numEntries)/136.0 - selectedItem;
 
 		if(browser.pageIndex <= 0)
 		{
@@ -279,13 +305,13 @@ void GuiFileBrowser::Update(GuiTrigger * t)
 			
 	}
 
-	// pad/joystick navigation
+/*	// pad/joystick navigation
 	if(!focus)
 	{
 		goto endNavigation; // skip navigation
 		listChanged = false;
 	}
-
+*/
 	if(t->Right())
 	{
 		if(browser.pageIndex < browser.numEntries && browser.numEntries > FILEBROWSERSIZE)
@@ -338,7 +364,7 @@ void GuiFileBrowser::Update(GuiTrigger * t)
 		}
 	}
 
-	endNavigation:
+	//endNavigation:
 
 	for(int i=0; i<FILEBROWSERSIZE; i++)
 	{
@@ -362,6 +388,35 @@ void GuiFileBrowser::Update(GuiTrigger * t)
 				}
 				else
 				{
+					/*
+				    char *fileext = strrchr(browserList[browser.pageIndex+i].displayname, '.');
+					fileListText[i]->SetPosition(32,0);
+					fileListTextOver[i]->SetPosition(32,0);
+				    if(fileext)
+				    {
+                        if(!strcasecmp(fileext, ".png") || !strcasecmp(fileext, ".jpg") || !strcasecmp(fileext, ".jpeg") ||
+						   !strcasecmp(fileext, ".gif") || !strcasecmp(fileext, ".tga") || !strcasecmp(fileext, ".tpl") ||
+						   !strcasecmp(fileext, ".bmp")) {
+                            fileList[i]->SetIcon(fileListGFX[i]);
+                        } else if(!strcasecmp(fileext, ".mp3") || !strcasecmp(fileext, ".ogg") || !strcasecmp(fileext, ".flac") ||
+								  !strcasecmp(fileext, ".mpc") || !strcasecmp(fileext, ".m4a") || !strcasecmp(fileext, ".wav")) {
+                            fileList[i]->SetIcon(fileListSFX[i]);
+                        } else if(!strcasecmp(fileext, ".pls") || !strcasecmp(fileext, ".m3u")) {
+                            fileList[i]->SetIcon(fileListPLS[i]);
+                        } else if(!strcasecmp(fileext, ".txt")) {
+                            fileList[i]->SetIcon(fileListTXT[i]);
+                        } else if(!strcasecmp(fileext, ".xml")) {
+                            fileList[i]->SetIcon(fileListXML[i]);
+                        } else if(!strcasecmp(fileext, ".rar") || !strcasecmp(fileext, ".zip") ||
+								  !strcasecmp(fileext, ".gz") || !strcasecmp(fileext, ".7z")) {
+                            fileList[i]->SetIcon(fileListArchives[i]);
+                        } else {
+                            fileList[i]->SetIcon(fileListDefault[i]);
+                        }
+				    } else {
+                      fileList[i]->SetIcon(fileListDefault[i]);
+				    }
+					*/				
 					fileList[i]->SetIcon(NULL);
 					fileListText[i]->SetPosition(10,0);
 					fileListTextOver[i]->SetPosition(10,0);
@@ -401,7 +456,7 @@ void GuiFileBrowser::Update(GuiTrigger * t)
 	}
 	else
 	{
-		position = -10+(166*(browser.pageIndex + FILEBROWSERSIZE/2.0) / (browser.numEntries*1.0));
+		position = 136*(browser.pageIndex + FILEBROWSERSIZE/2.0) / (browser.numEntries*1.0);
 
 		if(browser.pageIndex/(FILEBROWSERSIZE/2.0) < 1)
 			position = -10;

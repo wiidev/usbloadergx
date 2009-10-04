@@ -137,7 +137,7 @@ main(int argc, char *argv[]) {
     /** PAD_Init has to be before InitVideo don't move that **/
     PAD_Init(); // initialize PAD/WPAD
 	
-    USBDevice_deInit();// seems enough to wake up some HDDs if they are in sleep mode when the loader starts (tested with WD MyPassport Essential 2.5")
+    USBDevice_Init();// seems enough to wake up some HDDs if they are in sleep mode when the loader starts (tested with WD MyPassport Essential 2.5")
 	 
     ret = IOS_ReloadIOS(249);
 

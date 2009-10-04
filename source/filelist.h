@@ -116,9 +116,30 @@ extern const u32    settings_background_png_size;
 extern const u8     bg_browser_png[];
 extern const u32    bg_browser_png_size;
 
-extern const u8     folder_png[];
-extern const u32    folder_png_size;
+extern const u8		icon_archives_png[];
+extern const u32	icon_archives_png_size;
 
+//extern const u8	icon_default_png[];
+//extern const u32	icon_default_png_size;
+
+extern const u8		icon_folder_png[];
+extern const u32	icon_folder_png_size;
+/*
+extern const u8		icon_gfx_png[];
+extern const u32	icon_gfx_png_size;
+
+extern const u8		icon_pls_png[];
+extern const u32	icon_pls_png_size;
+
+extern const u8		icon_sfx_png[];
+extern const u32	icon_sfx_png_size;
+
+extern const u8		icon_txt_png[];
+extern const u32	icon_txt_png_size;
+
+extern const u8		icon_xml_png[];
+extern const u32	icon_xml_png_size;
+*/
 extern const u8     bg_browser_selection_png[];
 extern const u32    bg_browser_selection_png_size;
 

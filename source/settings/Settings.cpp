@@ -466,6 +466,7 @@ int MenuSettings() {
                     w.Remove(&MainButton4);
                     titleTxt.SetText(tr("GUI Settings"));
                     exit = false;
+					options2.SetLength(13);
                     for (int i = 0; i <= MAXOPTIONS; i++) options2.SetName(i, NULL);
                     options2.SetName(0, "%s",tr("App Language"));
                     options2.SetName(1, "%s",tr("Display"));
@@ -720,6 +721,7 @@ int MenuSettings() {
                     titleTxt.SetText(tr("Game Load"));
                     exit = false;
                     for (int i = 0; i <= MAXOPTIONS; i++) options2.SetName(i, NULL);
+					options2.SetLength(8);
                     options2.SetName(0, "%s",tr("Video Mode"));
                     options2.SetName(1, "%s",tr("VIDTV Patch"));
                     options2.SetName(2, "%s",tr("Game Language"));
@@ -886,6 +888,7 @@ int MenuSettings() {
                     w.Remove(&MainButton4);
                     titleTxt.SetText(tr("Parental Control"));
                     exit = false;
+					options2.SetLength(3);
                     for (int i = 0; i <= MAXOPTIONS; i++) options2.SetName(i, NULL);
                     options2.SetName(0, "%s",tr("Console"));
                     options2.SetName(1, "%s",tr("Password"));
@@ -1039,6 +1042,7 @@ int MenuSettings() {
                     w.Remove(&MainButton4);
                     titleTxt.SetText(tr("Sound"));
                     exit = false;
+					options2.SetLength(3);
                     for (int i = 0; i <= MAXOPTIONS; i++) options2.SetName(i, NULL);
                     options2.SetName(0, "%s",tr("Backgroundmusic"));
                     options2.SetName(1, "%s",tr("Music Volume"));
@@ -1173,9 +1177,9 @@ int MenuSettings() {
                     w.Remove(&MainButton4);
                     titleTxt.SetText(tr("Custom Paths"));
                     exit = false;
+					options2.SetLength(10);
                     for (int i = 0; i <= MAXOPTIONS; i++) options2.SetName(i, NULL);
-//                    if (Settings.godmode)
-                        options2.SetName(0, "%s", tr("3D Cover Path"));
+                    options2.SetName(0, "%s", tr("3D Cover Path"));
 					options2.SetName(1, "%s", tr("2D Cover Path"));
                     options2.SetName(2, "%s", tr("Disc Artwork Path"));
                     options2.SetName(3, "%s", tr("Theme Path"));
@@ -1186,6 +1190,7 @@ int MenuSettings() {
                     options2.SetName(8, "%s", tr("DOL Path"));
                     options2.SetName(9, "%s", tr("Homebrew Apps Path"));
                     for (int i = 0; i <= MAXOPTIONS; i++) options2.SetValue(i, NULL);
+	                optionBrowser2.SetScrollbar(1);
                     w.Append(&optionBrowser2);
                     optionBrowser2.SetClickable(true);
                     ResumeGui();
@@ -1281,7 +1286,6 @@ int MenuSettings() {
                                     strlcpy(entered, Settings.covers2d_path, sizeof(entered));
                                     titleTxt.SetText(tr("2D Cover Path"));
                                     int result = BrowseDevice(entered);
-                                    //int result = OnScreenKeyboard(entered,43,0);
                                     titleTxt.SetText(tr("Custom Paths"));
                                     w.Append(&optionBrowser2);
                                     w.Append(&backBtn);
@@ -1896,7 +1900,7 @@ int GameSettings(struct discHdr * header) {
     MainButton4.SetEffectGrow();
     MainButton4.SetTrigger(&trigA);
 
-    customOptionList options2(MAXOPTIONS-1);
+    customOptionList options2(MAXOPTIONS);
     GuiCustomOptionBrowser optionBrowser2(396, 280, &options2, CFG.theme_path, "bg_options_settings.png", bg_options_settings_png, 0, 150);
     optionBrowser2.SetPosition(0, 90);
     optionBrowser2.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
@@ -1935,7 +1939,6 @@ int GameSettings(struct discHdr * header) {
         w.Append(&titleTxt);
         w.Append(&backBtn);
         w.Append(&homo);
-        //w.Append(&saveBtn);
         w.Append(&MainButton1);
         w.Append(&MainButton2);
         w.Append(&MainButton3);
@@ -2021,7 +2024,8 @@ int GameSettings(struct discHdr * header) {
                 w.Remove(&MainButton3);
                 w.Remove(&MainButton4);
                 exit = false;
-                for (int i = 0; i <= MAXOPTIONS-1; i++) options2.SetName(i, NULL);
+				options2.SetLength(11);
+                for (int i = 0; i <= MAXOPTIONS; i++) options2.SetName(i, NULL);
                 options2.SetName(0, "%s",tr("Video Mode"));
                 options2.SetName(1, "%s",tr("VIDTV Patch"));
                 options2.SetName(2,"%s", tr("Game Language"));
@@ -2033,10 +2037,9 @@ int GameSettings(struct discHdr * header) {
                 options2.SetName(8,"%s", tr("Alternate DOL"));
                 options2.SetName(9,"%s", tr("Selected DOL"));
                 options2.SetName(10,"%s", tr("Block IOS Reload"));
-                for (int i = 0; i <= MAXOPTIONS-1; i++) options2.SetValue(i, NULL);
+                for (int i = 0; i <= MAXOPTIONS; i++) options2.SetValue(i, NULL);
                 optionBrowser2.SetScrollbar(1);
                 w.Append(&optionBrowser2);
-                //w.Append(&saveBtn);
                 optionBrowser2.SetClickable(true);
                 ResumeGui();
 
@@ -2304,17 +2307,16 @@ int GameSettings(struct discHdr * header) {
                 w.Remove(&MainButton2);
                 w.Remove(&MainButton3);
                 w.Remove(&MainButton4);
-                //titleTxt.SetText(tr("Parental Control"));
                 exit = false;
-
-                for (int i = 0; i <= MAXOPTIONS-1; i++) options2.SetName(i, NULL);
+				options2.SetLength(6);
+                for (int i = 0; i <= MAXOPTIONS; i++) options2.SetName(i, NULL);
                 options2.SetName(0,"%s", tr("Uninstall Game"));
                 options2.SetName(1,"%s", tr("Reset Playcounter"));
                 options2.SetName(2,"%s", tr("Delete Cover Artwork"));
                 options2.SetName(3,"%s", tr("Delete Disc Artwork"));
                 options2.SetName(4,"%s", tr("Delete Cheat TXT"));
                 options2.SetName(5,"%s", tr("Delete Cheat GCT"));
-                for (int i = 0; i <= MAXOPTIONS-1; i++) options2.SetValue(i, NULL);
+                for (int i = 0; i <= MAXOPTIONS; i++) options2.SetValue(i, NULL);
                 w.Append(&optionBrowser2);
                 optionBrowser2.SetClickable(true);
                 ResumeGui();

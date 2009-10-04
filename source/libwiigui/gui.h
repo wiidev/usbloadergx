@@ -51,6 +51,7 @@ extern FreeTypeGX *fontSystem;
 #define SCROLL_INITIAL_DELAY 	20
 #define SCROLL_LOOP_DELAY 		3
 #define PAGESIZE	 			9
+#define FILEBROWSERSIZE         8
 #define MAX_OPTIONS 			170
 
 typedef void (*UpdateCallback)(void * e);
@@ -1063,7 +1064,14 @@ class GuiFileBrowser : public GuiElement
 		GuiText * fileListText[PAGESIZE];
 		GuiText * fileListTextOver[PAGESIZE];
 		GuiImage * fileListBg[PAGESIZE];
+		//GuiImage * fileListArchives[PAGESIZE];
+		//GuiImage * fileListDefault[PAGESIZE];
 		GuiImage * fileListFolder[PAGESIZE];
+		//GuiImage * fileListGFX[PAGESIZE];
+		//GuiImage * fileListPLS[PAGESIZE];
+		//GuiImage * fileListSFX[PAGESIZE];
+		//GuiImage * fileListTXT[PAGESIZE];
+		//GuiImage * fileListXML[PAGESIZE];
 
 		GuiButton * arrowUpBtn;
 		GuiButton * arrowDownBtn;
@@ -1077,7 +1085,14 @@ class GuiFileBrowser : public GuiElement
 
 		GuiImageData * bgFileSelection;
 		GuiImageData * bgFileSelectionEntry;
+        //GuiImageData * fileArchives;
+		//GuiImageData * fileDefault;
 		GuiImageData * fileFolder;
+        //GuiImageData * fileGFX;
+		//GuiImageData * filePLS;
+		//GuiImageData * fileSFX;
+        //GuiImageData * fileTXT;
+        //GuiImageData * fileXML;
 		GuiImageData * scrollbar;
 		GuiImageData * arrowDown;
 		GuiImageData * arrowUp;
