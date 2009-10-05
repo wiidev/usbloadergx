@@ -31,28 +31,37 @@ bool findfile(const char * filename, const char * path) {
     return false;
 }
 
-bool subfoldercreate(char * fullpath) {
-    //check forsubfolders
-    char dircheck[300];
-    char dirnoslash[300];
-    char * pch = NULL;
-    u32 cnt = 0;
-    struct stat st;
+bool subfoldercreate(const char * fullpath) {
+	//check forsubfolders
+	char dir[300];
+	char * pch = NULL;
+	u32 len;
+	struct stat st;
 
-    snprintf(dirnoslash, strlen(fullpath), "%s", fullpath);
-
-    if (stat(fullpath, &st) != 0) {
-        pch = strrchr(dirnoslash, '/');
-        cnt = pch-dirnoslash;
-        snprintf(dircheck, cnt+2, "%s", dirnoslash);
-        subfoldercreate(dircheck);
-    };
-
-    if (mkdir(dirnoslash, 0777) == -1) {
-        return false;
-    }
-
-    return true;
+	strlcpy(dir, fullpath, sizeof(dir));
+	len = strlen(dir);
+	if(len && len< sizeof(dir)-2 && dir[len-1] != '/');
+	{
+		dir[len++] = '/';
+		dir[len] = '\0';
+	}
+	if (stat(dir, &st) != 0) // fullpath not exist?
+	{
+		while(len && dir[len-1] == '/')
+			dir[--len] = '\0';				// remove all trailing /
+		pch = strrchr(dir, '/');
+		if(pch == NULL) return false;
+		*pch = '\0';
+		if(subfoldercreate(dir))
+		{
+			*pch = '/';
+			if (mkdir(dir, 0777) == -1)
+				return false;
+		}
+		else
+			return false;
+	}
+	return true;
 }
 
 char * GetFileName(int i) {

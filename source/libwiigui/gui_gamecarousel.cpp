@@ -344,10 +344,7 @@ void GuiGameCarousel::Update(GuiTrigger * t)
 		else
 			gamename->SetText((char*)NULL);
 		if(selectedItem_old>=0)
-		{
 			game[selectedItem_old]->SetEffect(EFFECT_SCALE, -1, 100);
-			game[selectedItem_old]->RemoveToolTip();
-		}
 	}
 	// navigation
 	if(focus && gameCnt>6)

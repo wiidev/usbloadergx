@@ -32,10 +32,10 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
 	focus = 0; // allow focus
 	alignmentHor = ALIGN_CENTRE;
 	alignmentVert = ALIGN_MIDDLE;
-	strncpy(kbtextstr, t, max); // do not change from strncpy to strlcpy, it needs to be padded with 0
-	kbtextstr[max] = 0;
-	kbtextmaxlen = max;
-
+	kbtextmaxlen = max>sizeof(kbtextstr) ? sizeof(kbtextstr) : max; // limit max up to sizeof(kbtextstr)
+//	strlcpy(kbtextstr, t, kbtextmaxlen);
+	strncpy(kbtextstr, t, kbtextmaxlen);	// strncpy is needed to fill the rest with \0
+	kbtextstr[sizeof(kbtextstr)-1] = 0;		// terminate with \0
 	//QWERTY//
 	if (mode == 0){
 	Key thekeys[4][11] = {
@@ -471,6 +471,7 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
 	//keySpace->SetEffectGrow();
 	this->Append(keySpace);
 
+	char txt[2] = { 0, 0 };
 	for(int i=0; i<4; i++)
 	{
 		for(int j=0; j<11; j++)
@@ -479,7 +480,8 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
 			{
 				keyImg[i][j] = new GuiImage(key);
 				keyImgOver[i][j] = new GuiImage(keyOver);
-				keyTxt[i][j] = new GuiText(NULL, 20, (GXColor){0, 0, 0, 0xff});
+				txt[0] = keys[i][j].ch;
+				keyTxt[i][j] = new GuiText(txt, 20, (GXColor){0, 0, 0, 0xff});
 				keyTxt[i][j]->SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
 				keyTxt[i][j]->SetPosition(0, -10);
 				keyBtn[i][j] = new GuiButton(keyImg[i][j], keyImgOver[i][j], 0, 3, (j*42+21*i+40)+eurocheck, i*42+120, trigA, keySoundOver, keySoundClick,1);
@@ -563,11 +565,11 @@ void GuiKeyboard::Update(GuiTrigger * t)
 		catch (const std::exception& e) { }
 	}
 
-	bool update = false;
+	bool changedShiftKey = false;
 	
 	if(keySpace->GetState() == STATE_CLICKED)
 	{
-		if(strlen(kbtextstr) < kbtextmaxlen)
+		if(strlen(kbtextstr) < kbtextmaxlen-1) // -1 --> kbtextmaxlen means with terminating '\0'
 		{
 			kbtextstr[strlen(kbtextstr)] = ' ';
 			kbText->SetText(kbtextstr);
@@ -577,20 +579,22 @@ void GuiKeyboard::Update(GuiTrigger * t)
 	else if(keyBack->GetState() == STATE_CLICKED)
 	{
 		if (strlen(kbtextstr) >(m)){
-		kbtextstr[strlen(kbtextstr)-1] = 0;
-		kbText->SetText(kbtextstr);}
+			kbtextstr[strlen(kbtextstr)-1] = 0;
+			kbText->SetText(kbtextstr);
+		}
 		keyBack->SetState(STATE_SELECTED, t->chan);
 	}
 	else if(keyClear->GetState() == STATE_CLICKED)
-	{	clearMore:
-		if (strlen(kbtextstr) >(m)){
-		kbtextstr[strlen(kbtextstr)-1] = 0;
-		kbText->SetText(kbtextstr);
-		goto clearMore;}
+	{	
+		while (strlen(kbtextstr) >(m)){
+			kbtextstr[strlen(kbtextstr)-1] = 0;
+			kbText->SetText(kbtextstr);
+		}
 		keyClear->SetState(STATE_SELECTED, t->chan);
 	}
 	else if(keyShift->GetState() == STATE_CLICKED)
 	{
+		changedShiftKey =true;
 		shift ^= 1;
 		if(alt) alt ^= 1;
 		if(alt2) alt2 ^= 1;
@@ -598,6 +602,7 @@ void GuiKeyboard::Update(GuiTrigger * t)
 	}
 	else if(keyAlt->GetState() == STATE_CLICKED)
 	{
+		changedShiftKey =true;
 		alt ^= 1;
 		if(shift) shift ^= 1;
 		if(alt2) alt2 ^= 1;
@@ -605,6 +610,7 @@ void GuiKeyboard::Update(GuiTrigger * t)
 	}
 	else if(keyAlt2->GetState() == STATE_CLICKED)
 	{
+		changedShiftKey =true;
 		alt2 ^= 1;
 		if(shift) shift ^= 1;
 		if(alt) alt ^= 1;
@@ -612,68 +618,59 @@ void GuiKeyboard::Update(GuiTrigger * t)
 	}
 	else if(keyCaps->GetState() == STATE_CLICKED)
 	{
+		changedShiftKey =true;
 		caps ^= 1;
 		keyCaps->SetState(STATE_SELECTED, t->chan);
 	}
 
+
+	bool update = false;
+
 	char txt[2] = { 0, 0 };
 	
-	startloop:
- 
-	for(int i=0; i<4; i++)
+	do
 	{
-		for(int j=0; j<11; j++)
+		update = false;
+		for(int i=0; i<4; i++)
 		{
-			if(keys[i][j].ch != '\0')
+			for(int j=0; j<11; j++)
 			{
-				if(shift || caps)
-					txt[0] = keys[i][j].chShift;
-				else if(alt)
-					txt[0] = keys[i][j].chalt;
-				else if(alt2)
-					txt[0] = keys[i][j].chalt2;
-				else
-					txt[0] = keys[i][j].ch;
-
-				keyTxt[i][j]->SetText(txt);
-
-				if(keyBtn[i][j]->GetState() == STATE_CLICKED)
+				if(keys[i][j].ch != '\0')
 				{
-					if(strlen(kbtextstr) < kbtextmaxlen)
+					if(shift || caps)
+						txt[0] = keys[i][j].chShift;
+					else if(alt)
+						txt[0] = keys[i][j].chalt;
+					else if(alt2)
+						txt[0] = keys[i][j].chalt2;
+					else
+						txt[0] = keys[i][j].ch;
+
+					if(changedShiftKey) // change text only if needed
+						keyTxt[i][j]->SetText(txt);
+
+					if(keyBtn[i][j]->GetState() == STATE_CLICKED)
 					{
-						if(shift || caps)
+						if(strlen(kbtextstr) < kbtextmaxlen-1) // -1 --> kbtextmaxlen means with term. '\0'
 						{
-							kbtextstr[strlen(kbtextstr)] = keys[i][j].chShift;
+							kbtextstr[strlen(kbtextstr)] = txt[0];
+							kbText->SetText(kbtextstr);
 						}
-						else if(alt)
-						{
-							kbtextstr[strlen(kbtextstr)] = keys[i][j].chalt;
-						}
-						else if(alt2)
-						{
-							kbtextstr[strlen(kbtextstr)] = keys[i][j].chalt2;
-						}
-						else
-						{
-							kbtextstr[strlen(kbtextstr)] = keys[i][j].ch;
-						}
-					}
-					kbText->SetText(kbtextstr);
-					keyBtn[i][j]->SetState(STATE_SELECTED, t->chan);
+						keyBtn[i][j]->SetState(STATE_SELECTED, t->chan);
 					
-					
-					if(shift || alt || alt2)
-					{
-						if(shift) shift ^= 1;
-						if(alt) alt ^= 1;
-						if(alt2) alt2 ^= 1;
-						update = true;
-						goto startloop;
+						if(shift || alt || alt2)
+						{
+							if(shift) shift ^= 1;
+							if(alt) alt ^= 1;
+							if(alt2) alt2 ^= 1;
+							update = true;
+							changedShiftKey = true;
+						}
 					}
 				}
 			}
 		}
-	}
+	} while(update);
 
 	kbText->SetPosition(0, 53);
 

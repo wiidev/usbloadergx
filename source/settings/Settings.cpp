@@ -1259,7 +1259,7 @@ int MenuSettings() {
                                     char entered[43] = "";
                                     strlcpy(entered, Settings.covers_path, sizeof(entered));
                                     titleTxt.SetText(tr("3D Cover Path"));
-                                    int result = BrowseDevice(entered);
+                                    int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
                                     titleTxt.SetText(tr("Custom Paths"));
                                     w.Append(&optionBrowser2);
                                     w.Append(&backBtn);
@@ -1285,7 +1285,7 @@ int MenuSettings() {
                                     char entered[43] = "";
                                     strlcpy(entered, Settings.covers2d_path, sizeof(entered));
                                     titleTxt.SetText(tr("2D Cover Path"));
-                                    int result = BrowseDevice(entered);
+                                    int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
                                     titleTxt.SetText(tr("Custom Paths"));
                                     w.Append(&optionBrowser2);
                                     w.Append(&backBtn);
@@ -1311,7 +1311,7 @@ int MenuSettings() {
                                     char entered[43] = "";
                                     strlcpy(entered, Settings.disc_path, sizeof(entered));
                                     titleTxt.SetText(tr("Disc Artwork Path"));
-                                    int result = BrowseDevice(entered);
+                                    int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
                                     titleTxt.SetText(tr("Custom Paths"));
                                     w.Append(&optionBrowser2);
                                     w.Append(&backBtn);
@@ -1337,7 +1337,7 @@ int MenuSettings() {
                                     char entered[43] = "";
                                     titleTxt.SetText(tr("Theme Path"));
                                     strlcpy(entered, CFG.theme_path, sizeof(entered));
-                                    int result = BrowseDevice(entered);
+                                    int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
                                     HaltGui();
                                     w.RemoveAll();
                                     if ( result == 1 ) {
@@ -1394,7 +1394,7 @@ int MenuSettings() {
                                     char entered[43] = "";
                                     titleTxt.SetText(tr("WiiTDB Path"));
                                     strlcpy(entered, Settings.titlestxt_path, sizeof(entered));
-                                    int result = BrowseDevice(entered);
+                                    int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
                                     w.Append(&optionBrowser2);
                                     titleTxt.SetText(tr("Custom Paths"));
                                     w.Append(&backBtn);
@@ -1425,7 +1425,7 @@ int MenuSettings() {
                                     char entered[43] = "";
                                     strlcpy(entered, Settings.update_path, sizeof(entered));
                                     titleTxt.SetText(tr("Update Path"));
-                                    int result = BrowseDevice(entered);
+                                    int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
                                     titleTxt.SetText(tr("Custom Paths"));
                                     w.Append(&optionBrowser2);
                                     w.Append(&backBtn);
@@ -1446,7 +1446,7 @@ int MenuSettings() {
                                     char entered[43] = "";
                                     strlcpy(entered, Settings.Cheatcodespath, sizeof(entered));
                                     titleTxt.SetText(tr("GCT Cheatcodes Path"));
-                                    int result = BrowseDevice(entered);
+                                    int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
                                     titleTxt.SetText(tr("Custom Paths"));
                                     w.Append(&optionBrowser2);
                                     w.Append(&backBtn);
@@ -1467,7 +1467,7 @@ int MenuSettings() {
                                     char entered[43] = "";
                                     strlcpy(entered, Settings.TxtCheatcodespath, sizeof(entered));
                                     titleTxt.SetText(tr("TXT Cheatcodes Path"));
-                                    int result = BrowseDevice(entered);
+                                    int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
                                     titleTxt.SetText(tr("Custom Paths"));
                                     w.Append(&optionBrowser2);
                                     w.Append(&backBtn);
@@ -1488,7 +1488,7 @@ int MenuSettings() {
                                     char entered[43] = "";
                                     strlcpy(entered, Settings.dolpath, sizeof(entered));
                                     titleTxt.SetText(tr("DOL Path"));
-                                    int result = BrowseDevice(entered);
+                                    int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
                                     titleTxt.SetText(tr("Custom Paths"));
                                     w.Append(&optionBrowser2);
                                     w.Append(&backBtn);
@@ -1514,7 +1514,7 @@ int MenuSettings() {
                                     char entered[43] = "";
                                     strlcpy(entered, Settings.homebrewapps_path, sizeof(entered));
                                     titleTxt.SetText(tr("Homebrew Apps Path"));
-                                    int result = BrowseDevice(entered);
+                                    int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
                                     titleTxt.SetText(tr("Custom Paths"));
                                     w.Append(&optionBrowser2);
                                     w.Append(&backBtn);
