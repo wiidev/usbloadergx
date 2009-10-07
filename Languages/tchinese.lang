@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-01 15:35+0200\n"
+"POT-Creation-Date: 2009-10-05 14:51+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: kyogc\n"
 "Language-Team: \n"
@@ -349,6 +349,9 @@ msgstr "設計者:"
 
 msgid "Developed by"
 msgstr "開發者"
+
+msgid "Directory does not exist!"
+msgstr ""
 
 msgid "Disc Artwork Download"
 msgstr "下載光碟圖像"
@@ -973,6 +976,9 @@ msgstr "金手指文字檔路徑"
 
 msgid "TXT Cheatcodes Path changed"
 msgstr "金手指文字檔路徑已變更"
+
+msgid "The entered directory does not exist. Would you like to create it?"
+msgstr ""
 
 msgid "The file is not a .wad"
 msgstr "此檔案非wad檔"

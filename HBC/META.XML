@@ -1,9 +1,39 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 	<app version="1">
-		<name>USB Loader GX</name>
-		<coder>dimok nIxx cyrex giantpune Hungyip84 NeoRame WiiShizzza ardi</coder>
-		<version>1.0</version>
-		<release_date>20090118030000</release_date>
+		<name> USB Loader GX</name>
+		<coder>USB Loader GX Team</coder>
+		<version>1.0 r779</version>
+		<release_date>200910070000</release_date>
 		<short_description>Loads games from USB-devices</short_description>
-		<long_description>USB Loader GX is a libwiigui based USB iso loader with a wii-like GUI. You can install games to your HDDs and boot them with shorter loading times. The interactive GUI is completely controllable with WiiMote, Classic Controller or GC Controller. Features are automatic widescreen detection, coverdownload, parental control, theme support and many more.</long_description>
+		<long_description>USB Loader GX is a libwiigui based USB iso loader with a wii-like GUI. You can install games to your HDDs and boot them with shorter loading times.
+The interactive GUI is completely controllable with WiiMote, Classic Controller or GC Controller.
+Features are automatic widescreen detection, coverdownload, parental control, theme support and many more.
+
+Credits:
+Coding: Dimok, nIxx, giantpune, ardi, Hungyip84, DrayX7, Lustar, r-win, WiiShizzza
+Artworks: cyrex, Neorame
+WiiTDB / hosting covers: Lustar
+Hosting updates files: CorneliousJD
+Usbloader sources: Waninkoko, Kwiirk, Hermes
+Languages: Kinyo and language files translaters
+
+Libwiigui: Tantric
+Libogc/Devkit: Shagkur and Wintermute
+FreeTypeGX: Armin Tamzarian.
+
+Links:
+USB Loader GX Project Page and Support Site:
+http://code.google.com/p/usbloader-gui/
+WiiTDB Site:
+http://wiitdb.com
+Languages translaters Page:
+http://gbatemp.net/index.php?showtopic=155252
+
+Libwiigui Website:
+http://wiibrew.org/wiki/Libwiigui/
+FreeTypeGX Project Page:
+http://code.google.com/p/freetypegx/
+Gettext Official Page:
+http://www.gnu.org/software/gettext/gettext.html
+		</long_description>
 	</app>

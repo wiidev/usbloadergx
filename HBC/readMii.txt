@@ -1,4 +1,4 @@
- 
+﻿ 
             __,,__, ,__wywyywvyyyyywvywvyam,,_, _,,_                           
          _uWB&#MBM$Wg&MQ$#$K&RMKMA0$&xNH&&MN@2W&#MM&#$KQg                       
         JN&B&MM#MQ$gM#Q$N#R&&#N$M$#&#0E$##V$WKG###B&$&NW#b                      
@@ -14,19 +14,19 @@
        jQ0&NL    ""^   JB&ML    '~^   jQ*A      `     j##KF                     
         K#$##&       _#B#WNKM_      ,vB&#M    _    _wp#&QAF                     
         "&NAQAN&#$&MW#&###B#x$3@&$BA#WWWH$#KMM&K&NK###g&$#                      
-         *WN$&$$8QWNMMM#MM&<&A#&M$K&#WK@QM5#&*A$N&$&WM#@2                       
-           "M*^&N##&$W8$2B#&MB&DWR0#$$0#W>&&M$#QQMN#&""                         
+         *WN$&$$8QWNMMM#MM&«&A#&M$K&#WK@QM5#&*A$N&$&WM#@2                       
+           "M*^&N##&$W8$2B#&MB&DWR0#$$0#W»&&M$#QQMN#&""                         
    \eeee6                                           F**A1                       
   jM0$e4                                           ?**G\!                       
-  imw{Q-           x%%%m         \%z%%e       mxx _%*%@&    -ve/v       mmm\ wvm
-  V3Q%m&        /#0^0E&~/&\   $&E/&%1e^"E   55t7JcVsm0-\  &^#l@&}&-"   $7MAE&&%/
+  imw{Q-           x%%%m         \%z%%e       mxx _%*%@&    -ve/v       mmm\ wvm 
+  V3Q%m&        /#0^0E&~/&\   $&E/&%1e^"E   55t7JcVsm0-\  &^#l@&}&-"   $7MAE&&%/ 
   $%x/z        Wc&&t7-w&E4^  %VVM~1^\&$&&} e$&$$%$zQMxw  w-v-#^ Q\W44  %-/%/\QS 
   et-SC        e^00^  iF&E$-    !%%$$%A*v  5^^4   EEZ/0 )%%0%4fimmEt"  "$S8V    
- (WJ^%i       m&MM#}  /%\%%L 4Q\w   WQ/Q\ &m<wS   \v"v1 \74~1zM%&%/6s wEw//     
- &ssSs?s%wt&&-~~MM#& e1/'m% &5^jW  &mw&\  SmVw^  S1&mw  \^A5FE j7F*5, ~S3m%     
+(WJ^%i       m&MM#}  /%\%%L 4Q\w   WQ/Q\ &m«wS   \v"v1 \74~1zM%&%/6s wEw//     
+&ssSs?s%wt&&-~~MM#& e1/'m% &5^jW  &mw&\  SmVw^  S1&mw  \^A5FE j7F*5, ~S3m%     
 j3Q"/&-&w&M%&  ^^4$w^7QSQ@  t&&&%-"5w&E}   e8"&&&&/%\W   &5%1\%V*\0M  &&7M      
 ~?VW^$ ?&\81?    ?mQ&&&-      00%%^~EE4E    \&00 ^M43^    ^'"#5&$-^  ~wEE}      
-                                                                       __  ,_   
+                                                                       __  ,_  
                                     __ggggggggggggggg&  jggggg#p     gMMMMMMM   
                                    &MMMMMMMMMMMMMMMMMMF  "MMMMMMM& j#MMMMMMP    
                                   #MMMMMMMMMMMMMMMMMMMF    #MMMMM&g#MMMMMMP     
@@ -36,366 +36,1043 @@ j3Q"/&-&w&M%&  ^^4$w^7QSQ@  t&&&%-"5w&E}   e8"&&&&/%\W   &5%1\%V*\0M  &&7M
                                   $MMMMMF        #MMMMF     pMMMMMMMMMMMMp      
                                   4MMMMMMNNN#MMMMMMMMMF   jMMMMMMF  MMMMMM&_    
                                    MMMMMMMMMMMMMMMMMM&   #MMMMM@~   ~MMMMMM&    
-                                    """"""""""""""""     """"""       """"""^   
+                                    """"""""""""""""     """"""       """"""^  
+
+    
+Congratulations!  You are one of the proud Beta Testers for USB Loader GX.  That's right.  Beta tester.  This means that you are using Beta software. This program is still under heavy development.  Not everything works perfectly.  If you are expecting it to, stop and look elsewhere.  Some of the features covered here may be removed in your version of the application.  And likewise, there may be features in your revision that are not covered here.
+
+By using a Beta revision, you are agreeing to not be an idiot.  Most of the features should be self explanatory.  The rest of them can be figured out by clicking around a trying stuff out.  There is no button or combination of buttons that you can click that will brick your wii or make irreparable changes to your wii. So please try out all the features to see which options need to be enabled for your WII + TV + game combination. 
+
+This was written 6/15/2009 regarding revision 529
+Last update on 10/1/09 regarding rev 772, updated/added a few images, updated cover path info, and added MIOS Patcher to download links.
 
 
-	Congratulations.  You are the proud Beta Tester for USB Loader GX.  That's right.  Beta Tester.  That means that you are using Beta software.  This program is still under heavy development.  Not everything works perfectly.  If you are expecting it to, stop and look else where.  Some of the features covered here may be removed in your version of the application.  And likewise, there may be features in your revision that are not covered here.
+Features 
 
-By using a Beta revision, you are agreeing to not be an idiot.  Most of the features should be self explanatory.  The rest of them can be figured out by clicking around a trying stuff out.  There is no button or combination of buttons that you can click that will brick your wii or make irreparable changes to your wii so please try out all the features to see which options need to be enabled for your wii/tv/game combination. 
+* The GUI is completely based on the awesome libwiigui by Tantric 
+* Game information: reads game info from wiitdb.zip in your config folder like publisher, developer, year, rating, genre etc.
+* Widescreen support: Without any special themes for widescreen 
+* Alternative dol loading: Supports special dol files needed to launch some games (e.g. Mortal Kombat) 
+* Loading from USB: Loads files (images, configs etc.) from SD or USB (needs a FAT32 partition on the drive to be primary and active). 
+* Global Settings and "per game" settings 
+* Parental control: Set levels for each game, set a password for install/remove/etc. 
+* View modes: simple List Mode, Game Grid and Game Carousel. 
+* Supports Themes: Create your own theme and use it with the loader 
+* Cover download: Download "normal" covers, 3D covers and disc images for all the games on your HDD (International Covers are downloaded based on your global language setting) 
+* Look and feel like the original Wii Menu: Use rumble feature, button sounds, background music, disc slot lights up etc. (you can also turn it off in the settings) 
+* Loads all the needed files from your SD/USB 
+* Language file support: use your native language for the loader. 
+* Custom sounds: for now only ogg custom sounds possible. 
+* Playstats: shows you how many times you played the game 
+* List sorting, Game Search, & Favorites: you can sort the list by playstats or names, search by name, or display only your favorites! 
+* Update function: update to the latest revision from inside the gui (requires internet connection). 
+* Homebrew & Title Launcher: Launch you favorite homebrew apps and channels from within the loader. 
+* Full Alternate Dol Support: Alternate dols can be loaded from SD/USB or from the game itself.  Most altdols can be automatically chosen by the loader. 
 
-This was written 6/15/2009 regarding revision 525
 
-Official site 
+Useful links & Downloads 
+
+Official site & help site
 http://code.google.com/p/usbloader-gui/
-
-changelog
-http://code.google.com/p/usbloader-gui/source/list
-
-sourcecode checkout
-http://usbloader-gui.googlecode.com/svn/trunk/
-
-game compatibility chart
-http://wiki.gbatemp.net/wiki/index.php/USB_Loader_v1.x_Game_Compatibility
-
-Other crap that you may find useful is here
 http://usbloadergx.koureio.net/help
 
+Changelog
+http://code.google.com/p/usbloader-gui/source/list
 
-[1]prerequisites 
-	[1a]files & paths
-[2]usage
-[3]adding games
-[4]main menu
-	[4a]controls
-	[4b]Buttons & shit
-		[4c]view
-	[4d]game info
-	[4e]game prompt
-[5]exit menu
-[6]settings
-	[6a]gui settings
-		app language
-		display
-		clock
-		tooltips
-		flipx
-		prompts/buttons
-		keyboard
-		wiilight
-		rumble
-		unicode fix
-		titles from xml
-	[6b]game load
-		video mode
-		vidTVpatch
-		language
-		patch country strings
-		ocarina
-		boot/standard
-		quick boot
-		error 002fix
-	[6c]parental control
-		console
-		password
-		control level
-	[6d]sound
-		background music
-		music volume
-		SFX volume
-	[6e]custom paths
-	[6f]update
-	[6g]default settings
-	[6h]credits
-[7]game settings
-		video mode
-		vidTV patch
-		language
-		ocarina
-		ios
-		parental control
-		error002 fix
-		online fix
-		patch country strings
-		default settings
-		alternate dol
-		The ocarina button
-[8]Themes
-[9]Cheatmanager
-[10]Troubleshooting
-###################################################################################
-[1]Prerequisites and setup
+Sourcecode checkout
+http://usbloader-gui.googlecode.com/svn/trunk/
 
-	To use this application, you will need a Wii that has been hacked and is able to run homebrew software.  DO NOT ASK US HOW TO HACK YOUR WII.  THERE ARE THOUSANDS OF TUTORIALS FOR THIS.  You will need to have any 1 or more of cIOS 249rev9 or greater, cIOS222, or cIOS 223.  There are advantages and disadvantages for each of the different cIOS.  It is up to you to research and decide which one you want to use.  It is also up to you to know about the bugs which are known bugs of the cIOS.   
-	
-	For the initial setup you will need to use a PC to format a USB drive to either FAT or NTFS.  If you are going to use the USB device to store other data for this application besides games (images, settings, ect)  now will be a good time to create a Secondary partition.  1gb is plenty for the second partition for what we are going to use it for.  The second partition should be FAT (FAT32 /16 should work fine as well).  Mark your partitions primary and active and if you want your PC to be able to interact with this drive, assign it a drive letter.
-	
-	Now plug your drive into your wii and use your desired method of booting homebrew to launch our application.  If everything was done right, you will be prompted to format your main partition to WBSF to use with this loader.  Just follow the instructions on screen.
+Game compatibility list
+http://wiki.gbatemp.net/wiki/index.php?title=USB_Loader_v1.x_Game_Compatibility
+
+Devices compatibility list
+http://wiki.gbatemp.net/wiki/index.php?title=USB_Devices_Compatibility_List
+
+List of WBFS managers
+http://wiki.gbatemp.net/wiki/index.php?title=WBFS_Managers
+
+More questions?
+http://forum.koureio.net/
+
+cIOS installers
+cIOS38r12: http://gbatemp.net/index.php?download=6093
+cIOS38r13: http://gbatemp.net/index.php?download=6133
+cIOS38r13b: http://gbatemp.net/index.php?download=6127
+cIOS38r14: http://gbatemp.net/index.php?download=6531
+Hermes cIOS222/223 rev3: http://www.4shared.com/file/125087683/2b7948f1/Hermes_cIOS_222_rev3_installer.html 
+Hermes cIOS222/223 rev4: http://www.4shared.com/file/129761844/53c80425/Hermes_cIOS_222_rev4_installer.html 
+
+MIOS Patcher 
+WiiGator's cMIOS http://www.4shared.com/file/136843685/99990ffc/miospatcher.html
+
+Other
+Wad manager 1.5: http://teknoconsolas.tv/wanin/WAD-Manager_v1.5.zip (mirror)
+Forwarder dol for preloader: http://www.mediafire.com/download.php?nykt4zyndzq
+Fat32Format: http://www.ridgecrop.demon.co.uk/download/fat32format.zip
+HJSplit http://www.freebyte.net/download/hjsplit.zip (this joins 001, 002, ... files)
 
 
-[1a]Files & paths
-	There are other files that are not necessary to the core functionality of this loader, but are used for extra features.  The dev team have defined the following paths, most of which are configurable in the settings.
 
-SD:/config/    this is where the application will create files to save settings and statistics.  All the files it makes start with GX to make them easy to find.  GxGlobal.cfg is the main settings and configuration for the loader.  GXGameFavorites.cfg contains individual settings for games.  GXGameCount.cfg stores the game play count and favorites choices.  Also in this folder you can put a file called titles.txt to change the names of the games as seen in the loader if you are too much of a pussy to edit them directly on the WBFS filesystem.  A database of information about each game can be stored in this folder as well.  Get you hands on wiitb.zip (which contains wiitdb.xml) and put it here.
+Contents 
 
-SD:/images/    This is where box art is downloaded to and displayed from.  All images must be sized in multiples of 4 or they won't show up.
+   1. [1] Prerequisites & setup 
+      1. [1a] Installation 
+      2. [1b] Channel & Forwarder 
+      3. [1c] [OPTIONAL]Autobooting and returning to USB loader GX 
+      4. [1d] Files & paths 
+   2. [2] Usage 
+      1. [2a] [OPTIONAL] Compiling the loader 
+      2. [2b] Adding games & changing GameID ***** 
+      3. [2c] Getting Covers & Wiitdb.zip ***** 
+   3. [3] Main menu 
+      1. [3a] Controls 
+      2. [3b] On the screen 
+      3. [3c] View 
+      4. [3d] Game Info 
+      5. [3e] Game Prompt 
+   4. [4] Exit Menu 
+   5. [5] Homebrew&Title Launcher ***** 
+      1. [5a] Homebrew Launcher 
+      2. [5b] Title Launcher 
+      3. [5c] (Un)Installing WADs over wifi 
+   6. [6] Settings 
+      1. [6a] Gui settings 
+      2. [6b] Game load 
+      3. [6c] Parental control 
+      4. [6d] Sound 
+      5. [6e] Custom paths ***** 
+      6. [6f] Update ***** 
+      7. [6g] Default settings ***** 
+      8. [6h] Credits 
+   7. [7] Game settings ***** 
+      1. [7a]Game load 
+      2. [7b]Ocarina 
+      3. [7c] Uninstall Menu 
+      4. [7d]Default settings 
+   8. [8]Cheating 
+      1. [8a] Using a Computer 
+      2. [8b] Using the USB loader 
+   9. [9]Themes 
+   10. [10]Special Games 
+      1. [10a]Wii Sports Resort 
+      2. [10b]Metroid Prime Trilogy 
+   11. [11]FAQ 
 
-SD:/images/disc/  This is where pictures of the actual game discs are downloaded to and displayed from.  All images must be sized in multiples of 4 or they won't show up.
-SD:/config/backgroundmusic/  This is the default folder for custom bg music.
-
-SD:/theme/(SD:/wtheme for widescreen wii)  This is the default theme location.
-
-SD:/codes/  This is the folder to put your gct cheat files.  These fiiles should be named wich the 6 character ID of the game they are meant for. 
-
-SD:/txtcodes/  This is the folder to put your txt cheat files.  They should be in the standard format for homebrew/ocarina.  Some examples are available in the downloads section at the googlecode URL above.
+Everything in this Guide that is marked with ***** can not be used if the loader is locked!
+Text in red is a little harder and for advanced users only! 
+Blue text is Important Info!
 
 
-SD:/  This is where replacement dols used to fix certain broken games go.
-###################################################################################
+________________
+[1] Prerequisites & setup 
+[1a] Installation 
 
-[2]Usage
-Using this application is simple.  Launch it in the same manner that you did in the initial setup, pick a game (if you have any installed), and play the game.  This is open source software.  You are free to modify it, distribute it, and do anything you want with it.  All we demand is that you do not claim our work as yours.  We worked long and hard on this and let you use it for free.  It would be a real bitch move if you put your name on it and said it was your own.  You are also free to distribute the software/source code as you like as long as this file (or a similar one approved by the dev team) companies it.  If you don't follow these guidelines, you are a douche-bag. 
-###################################################################################
+STEP 1 – Installing the HBC (Homebrew Channel) and a cIOS (custom Input/Output System «- ignore that). 
 
-[3]Adding games*****
-To add a game to your drive using this program, click the install(+) button on the main screen and follow the on screen prompts.  Games are automatically scrubbed (shrunk) and brickblocked (update partition removed) when adding them to the drive.  Because of the way WBFS and the application work, you are only allowed to install 1 game for each game ID.  If you do use another application to install 2 games with the same 6 character ID, only the first one one the drive will be loaded by our program.  If the installation freezes ( doesn't move for over 2 minutes) you can simply hold the power button on the Wii to turn it off.  There is no danger of bricking your wii.  The data that was written during the failed install is still present on the drive, but not marked as active so it will be treated as free space. It does not get added into the used space displayed on the screen and it will overwritten next time you install a game.
-###################################################################################
+If you are COMPLETELY new to homebrew, this little guide will tell you how to install the homebrew channel on your wii. The guide can be used for every system menu (up to 4.1, so updating is recommended) and any serial (LU64+). Do not use it on a Korean wii! 
 
-[4]main menu
-This is the main screen, the first one you see when you start the program.  It looks a lot like the Wii system menu.
+First, follow steps 1 and 2 of this guide: http://gbatemp.net/index.php?showtopic=155844  to get the HBC on your wii. The hackmii installer can also install bootmii for you if you need brick protection. Our next step is to get a cIOS installed that is needed for the loader. Try installing a cIOS with a cIOS installer (using IOS36). If this doesn't work (if you get an error while installing), you don't have a patched IOS (needed by the cIOS installer) and you have to use one of the two methods below.
 
-[4a]controls
-User input for the main menu is accepted through WiiMote, nunchuk, gamecube controller, and classic controller.  While input is accepted from all these methods, the fastest and easiest method is with a WiiMote.  Just point to the screen and click on shit.  A is the main action button.  B (for the most part) is back/cancel.  The D-pad is used to highlight different options.  Press 2 to view game info (with the xml file listed above in place).
-	
-[4b]Buttons & shit
-Install--***** The + button in the lower left corner of the screen.  Press to add games to your HDD from the Wii's DVD drive.
 
-Settings--  The gear button to the right of the install button.  Use it to access all the settings and options.
+Online method (Using wifi on the wii) 
+Get the Trucha bug restorer by wiipower and run it with the HBC. You will see a lot of white text on a black screen. This is how many installers/patchers look like. It has no nice banner and stuff to keep the filesize low.
 
-Exit--  The button in the lower right corner that says "wii".  Press this to view the exit menu.
 
-Power--  The button furthest to the right in the lower corner.  I bet you can figure out what it does.
+1) Select IOS36 and press A. Even more text appears, read it if you want. Wait for the text at the bottom to appear and press 1. 
+2) Choose Downgrade IOS15. Then download from NUS (2 times). Follow instructions on the screen. 
+3) Now we can use the downgraded IOS15 to restore the Trucha in IOS36. Run TBR again. This time choose IOS15 and again press A then 1 when the text appears. 
+4) Go into the IOS36 menu. Use these configurations: 36 (this is in what IOS-slot the patched IOS36 will be placed.) YES YES NO (actually you can choose what you want for the last 2 options), then select Install patched IOS36 and press A. Choose Download from NUS once again and follow on screen instructions. 
+5) Now we have the patched IOS36, we can restore our IOS15 again. Load the TBR one last time. Choose IOS36,... .This time choose restore IOS15. Get the IOS from NUS and let the app finish everything. 
 
-Download--*****  When you are in the list view, click a game box to download stuff.
+We are ready to install our cIOS. I will explain here how to get cIOS38r14 by waninkoko. You can also install another rev of this cIOS (don't go lower than r9) or a rev of IOS222/223 by hermes. All IOS have different uses and bugs. Its up to you to find out what these are. 
 
-Reload--  This button looks like an SD card.  Press it to reload your SD contents.
+Get the installer here: http://gbatemp.net/index.php?download=6531 . Follow all the instructions  at the link, but choose IOS36 instead of IOS249 (this is why we have patched IOS36). When you are asked to use wad install or online install, choose online install. You will then have the cIOS needed by the USB loader. 
 
-Sort bar-- 
-Favorites-- the star button.  Press it to hide all games that are not marked as a favorite.
+Offline method (no wifi on the wii) 
+Wad files of IOS are not legal, so we can not give them to you. Here is how to get them anyway:
 
-Abc-- the button that says "ABC".  Press it to sort games alphabetically.
+Get the NUS downloader and Trucha bug restorer.
 
-Count-- the chart button.  Press it to sort games by the number of times you have launched them from this application.
+First open NUS downloader and Click 'Generate certs' if it asks to. First check Pack-»Wad. Click Database and Go to IOS, IOS15, v257. Then click Nus Download. Repeat this proces for IOS15 v266 and IOS36 v3094.
+Now go to the place where NUS downloader is and there will be 3 new folders. Copy the WAD of each folder to the SD card.
 
-Games with the same count are sorted alphabetically.
 
-List--  Press it to see games listed by name and any available box art for 1 game at a time.
+Now follow steps 1 – 5 from the Online guide, but instead of choosing “Download IOS from NUS”, choose “Load IOS from SD card”. 
 
-Grid--  Press this button to see your games arranged in a grid.  The number of rows available depends on how many games are on you drive.  39 games can be seen at the most.
+We are ready to install our cIOS. I will explain here how to get cIOS38r14 by waninkoko. You can also install another rev of this cIOS (don't go lower than r9) or a rev of IOS222/223 by hermes. All IOS have different uses and bugs. Its up to you to find out what these are.
 
-Carousel--  Press this to see you games arranged in a rotating fan array.  7 games can be seen at a time.
 
-clock--  This looks like a clock.  Coincidently, it functions like a clock.
+First we need one more file from the NUS: check Pack-»Wad. Get IOS38 v3610. Place the wad of the new folder at the root of the SD card. Download the cIOS installer: http://gbatemp.net/index.php?download=6531 . Follow the instructions at the link, but choose IOS36 instead of IOS249 (this is why we needed to patch IOS36). You have to choose wad installation. You will then have the cIOS needed by the USB loader. 
 
-Hdd Info-- This shows some information about your connected HDD (only the WBFS partition).  Free & total space in GB as well as the game count.  GB is defined here as 1024MB.  When you bought your drive, the manufacturer probably used 1000MB for GB so the size displayed here will be less than what your drive was advertised as.   The game count will reflect the games you are choosing to display, not the actual amount of games on your drive.  If you are hiding games with parental controls/favorites, they will not be added into this total. 
+NOTES: 
+-You can have cIOS36/38 and cIOS222/223 installed at the same time. Every version has its own (dis)advantages.
 
-[4c]view
-There are 3 different ways to view your games. 
 
-List-- Games are listed by name (up to 9 at a time) box art for the selected game is displayed.  This is currently the only screen you can initiate a download for artwork from.  Also on this screen The B button has a slightly different use.   If there are scrollbars present on your gamelist, holding B and moving the cursor scrolls the list.
+-If your global cIOS is 249 and you set an individual game's cIOS to 222/223, it will not always work. On the other hand, if you set your global boot to 222 and set an individual boot to 249, it should work fine.
 
-grid-- Games are aranged in a grid  (up to 320).  The number of rows available depends on how many games are on you drive.  By default, it is 3X14 (with the last column hidden)if there arent enough games to fill all 42 spots, it changes to 2x8 (2x7 shown on screen).  Again, if there arent enough games to fil it up, the number of rows decreases.  Currently there is no 4/3 support for this view.
+-If you change your global boot cIOS you need to completely exit out of the loader and restart it in order for the change to take effect. If you do not do this you will get a black screen. It is also necessary to delete your GXgamesettings.cfg file from your config folder on your SD/USB to prevent any setting conflicts since anything in GXgamesettings.cfg overrides the GXglobal.cfg file.
 
-carousel-- Games are arranged in a rotating fan array (up to 320).  7 games can be seen at a time.
+-Setting your global boot to 222 rev 3(installed as 37 merge 36) or 222 rev 4(installed as 38 merge 37) and setting your global 002fix to ANTI will result in 99% compatibility with no glitching/stuttering on IN REGION games. For OUT OF REGION games you need to also set the Video Mode to AUTOPATCH. The 1% non-compatibility is from the "please insert disc" games. However, those games are fully playable by simply inserting any dvd into your drive (I just stick a blank one in) OR by loading those specific games with cIOS 249 rev 12 or higher.
 
-[4d]Game Info
-Pressing 2 (or x on GC an CC input) brings a prompt with information about the selected game.  This info is read from the zipped xml file discussed earlier.  Among the displayed information are the following:
+-Make sure you always delete the 00000001 folder from the root of your SD/USB before doing any network installation of cIOS 222/223. 
 
-Accessories-- the supported accessories for the game are shown in the lower left.  The max number of players is shown on the image of the WiiMote.  Any required accessories are shown in light blue. 
+STEP 2 – Preparing your USB device 
 
-Rating system-- the rating for the game is shown in the lower left of the screen.  It is converted internally between PEGI,ESRB, and CERO( though not used for anything yet).
+Optional 
+The USB loader can load images and other info of the same usb device as where the games are stored on. To be able to use this function, you will need to make two partitions on the USB device. The partition for the images should have enough with 2GB. You can also make more partitions for other purposes. Use GOOGLE to find out how to make partitions. (Or go here: http://gbatemp.net/index.php?showtopic=179085). 
+For linux: http://gwht.wikidot.com/gparted 
 
-Wifi Shit-- the number of online players is displayed to the right of the accessories.  Any other wifi features are listed above the accessories.
+Required 
+The partitions have to be formatted to FAT. Mark the partition you want to use for WBFS as Active.
 
-synopsis-- if a synopsis is present in the xml file, it can be viewed by pressing A on the game info screen.
-		
-[4e]Game Prompt
-This is the prompt that comes up when a game is selected (if the quickboot option is not selected).
-settings-- brings up a menu of settings for this game only
+If you make multiple partitions, the First partition must be the one for image,... and the second one for WBFS (for Wii games)
 
-play-- Click the spinning disc to launch this game
 
-rename--***** Click the title of the game in the top of the prompt to rename it directly on the WBFS file system.  If you are using titles.txt or letting the XML rename the games, this will have no (visible) effect.
+STEP 3 – Preparing the SD card 
 
-back--  closes this prompt
+You can also use the USB device for this if you made a second partition in Step 2. 
 
-favorite--  Click the star to add/remove this game from your favorites.
+Using the easy installer
 
-size-- the amount of space that the game ocupies on the WBFS filesystem
+The fastest way of installing the USB loader GX is to download the Easy installer.  Run this tool and click next (be sure to have an internet connection).You will be asked what files to put on the SD card/ USB device (dependant on where you run homebrew from). Recommended is to download everything except following things: 
+-The languages that you won’t use (only one language can be checked), 
+-If you already have images for the loader, don’t check cleanup, as it will remove the images. 
 
-count-- the number of times you have launched this game from this application
+Next, you will be asked where to install the loader to. Advised is to install it to SD:\apps\usbloader_gx or USB:\apps\usbloader_gx (replace SD/USB by the drive letter of the card/device). If you’re done, click install. 
 
-settings--*****Here is where you go to enter settings that will be used for this game only.
+Without the easy installer
 
-###################################################################################
-[5]Exit Menu
+Sometimes its not possible to use the easy installer. You will have to put on the files manually. 
+1) Download the newest dol from http://usbloadergx.koureio.net/downloads/revisions.  
+2) Create a new folder on your SD card (or USB) in the apps folder, called usbloader_gx. Place the dol in this folder and rename it to boot.dol . 
+
+STEP 4 – Running the loader 
+
+When you first boot up the Loader (using the HBC or another method of booting homebrew), you will be asked to format a partition to WBFS. Choose your partition and press A. If your partition is formatted, you are ready to use all functions of this app! 
+
+NOTE: You can also format a partition to WBFS by using a WBFS manager.
+
+
+###################################
+
+[1b] Channel & Forwarder 
+If you don't like going to the HBC to load the loader every time, you have to install the channel or forwarder of this loader.
+Both Channel and forwarder appear in the wii menu as a new channel. But there is a very important difference between them! The channel contains the app and can boot it without the SD card. The forwarder however simply loads the loader from SD:/apps/usbloader_gx/. There are (dis)advantages to both. Go here for more info: http://usbloadergx.koureio.net/downloads/forwarders
+
+To install the forwarder or channel, you need an application called Wad manager. Get it here: http://teknoconsolas.tv/wanin/WAD-Manager_v1.5.zip
+Place it in its own folder in the apps folder of the SD card (or USB).
+
+Download forwarder: http://www.mediafire.com/?jdmiykainlm
+Download channel (R649c): http://www.mediafire.com/download.php?ntuexwmycby
+Create a new folder on the SD card (or USB) called wad. It has to be in the root of the SD card (so not in the apps folder). Place your wad here.
+
+Run the wad manager. Choose IOS249. Then choose SD or USB (depending on where you placed the wads). Select the wad to install and press A to install it. When its done, keep pressing B to go back to the HBC. Then go to the wii menu. You will see your new channel/forwarder on one of the pages. You can move it by holding A and B.
+
+Changing the location the forwarder loads the dol from: To do this, simply change the update path (see [6e])
+
+
+[1c] [Optional]Autobooting and returning to USB Loader GX
+
+It is possible to boot your wii directly into the USB loader GX. The only thing you need for this is a wii app called preloader. First download the newest rev of the loader or even better, the forwarder (dol format, see downloads at the top of the readmii). Place the dol you get in the root of your SD card (no need to rename it to boot.dol). In the preloader menu, choose install file and choose the dol to install. When its done, go to the main menu of preloader (B) and then choose 'settings'. You have to change 2 options here: Autoboot=file and Return to=preloader. Save the settings, then launch the Wii menu in the main menu. It will boot into the USB loader GX!
+
+###################################
+
+[1d] Files & paths 
+
+There are other files that are not necessary to the core functionality of this loader, but are used for extra features.  The dev. team has defined the following paths, most of which are configurable in the settings.
+
+Update Path  -  SD:/config/
+This is where the application will create files to save settings and statistics.  All the files it makes start with GX to make them easy to find.
+GxGlobal.cfg is the main settings and configuration for the loader.
+GXGameSettings.cfg contains individual settings for games.
+GXGameCount.cfg stores the game play count and favorites choices. A database of information about each game can be stored in this folder as well.  Get you hands on wiitdb.zip and put it here.
+
+Covers Path  -  SD:/images/
+This is where box art is downloaded to and displayed from. All images must be sized in multiples of 4 or they won't show up.  Create separate folders for 2D and 3D covers.  When you direct each path to the proper folder the default displays are 3D for the List and Carousel views and 2D for the Grid view.
+Official sizes:
+2D covers = 160x224
+3D covers = 176x248
+
+Disc Image Path  -  SD:/images/disc/
+This is where pictures of the actual game discs are downloaded to and displayed from.  All images must be sized in multiples of 4 or they won't show up.
+Official size:
+Discart = 160x160
+
+Background Music Path  -  SD:/config/backgroundmusic/
+This is the default folder for custom background music.
+
+Theme Path  -  SD:/theme/(SD:/wtheme for widescreen wii)
+This is the default theme location.
+
+Cheatcodes Path  -  SD:/codes/
+This is the folder to put your gct cheat files.
+
+TXT Cheatcodes Path  -  SD:/txtcodes/
+Here is where you can place the txt files needed by the code manager. Files must have the full game ID (6 chars.) as name. The downloaded txt files (with the code manager) will be placed here.
+
+DOL Path -  SD:/
+This is where replacement dols (used to fix certain broken games) go.
+
+Homebrew Apps Path  -  SD:/apps/
+This is where you can place the Homebrew apps for the Homebrew Loader.
+
+
+________________
+[2] Usage 
+
+Using this application is simple.  Launch it in the same way that you did in the initial setup, pick a game (if you have any installed), and play the game.  This is open source software.  You are free to modify it, distribute it, and do anything you want with it.  All we demand is that you do not claim our work as yours.  We worked long and hard on this and let you use it for free.  It would be a real bitch move if you put your name on it and said it was your own. 
+You are also free to distribute the software/source code as you like as long as this file (or a similar one approved by the dev team) companies it.  If you don't follow these guidelines, you are a douche-bag.
+
+###################################
+
+[2a] [Optional] Compiling the loader 
+
+THIS IS COMPLETELY OPTIONAL. IF YOU ARE NOT INTERESTED IN PROGRAMMING OR COMPILING, OR IF YOU DON'T MIND WAITING FOR SOMEONE ELSE TO COMPILE THE NEWEST REV, YOU CAN SKIP TO [2b].
+
+This loader gets updated very frequently. The newest revision will not be available all the time to download. When that happens, you will have to compile the loader yourself. GBAtemp members emupaul and giantpune have made a guide that shows you how to compile the loader.The full guide can be found at http://gbatemp.net/index.php?showtopic=169078
+
+1)Download a svn client. Reccomended is Tortoisesvn. If you want the loader to show the rev# in the settings, you also need sliksvn.
+2)Download and install Devkitpro
+3)Reboot your system
+4)Create a new folder (can be anywhere) and name it USBGX (or any other name, as long as you know what it contains)
+5)Right click your folder and select SVN Checkout (this option is added by Tortoisesvn)
+6)Enter the url http://usbloader-gui.googlecode.com/svn/trunk/. Leave all other options as they are and click OK
+7)Download http://usbloader-gui.googlecode.com/files/...-08-07-2009.zip and extract to the libogc folder
+8)After it has downloaded the source, all folders will show a green OK mark. Open the file gui.pnproj
+9)You are now in the programmers notepad. This utility is used to program wii apps. Press ALT + 1 (the 1 thats not on the Numpad) to compile the source.
+10)Copy the boot.dol (or elf) to the SD card and run it.
+
+[OPTIONAL] Changing the source for the channel: You have to make a small change in the code to let the USB loader know its a channel.
+1)Open Gui.pnproj, it wil open with the Programmers notepad.
+2)Time to make a little change in the code (maybe your first time doing this :) ). You should see the file structure (If not, go to view»windows»projects and enable it, then place it somewhere). Open the prompts folder (if it isn't open already) by clicking the white arrow in front of it. Then open PromptWindows.h (double click)
+3)It will appear in a new window. At the top of the file you should see #define NOTFULLCHANNEL
+4)Put your cursor before the # at this line and type //. The line will become green and will look like: //#define NOTFULLCHANNEL. This line is now a comment. Comments are just extra information and are not compiled.
+5)Compile the source by pressing ALT+1. Now you have the correct boot.dol, which you can inject in the channel.
+
+###################################
+
+[2b] Adding games & changing GameID ***** 
+
+To add a game to your drive using this program, click the install button on the main screen and follow the on screen prompts.  Games are automatically scrubbed (shrunk) and brickblocked (update partition removed) when adding them to the drive.
+
+Because of the way WBFS and the application work, you are only allowed to install 1 game for each game ID.  If you do use another application to install 2 games with the same 6 character ID, only the first one on the drive will be loaded by our program.  If the installation freezes (doesn't move for over 2 minutes) you can simply hold the power button on the Wii to turn it off.  There is no danger of bricking your wii. The data that was written during the failed install is still present on the drive, but not marked as active so it will be treated as free space. It does not get added into the used space displayed on the screen and it will be overwritten next time you install a game.
+
+To install games (ISO or cISO) with your computer, you need a WBFS manager. Most popular are WBFS manager 3.0 and WBFS intelligent GUI v6. Using these programs should be self-explanatory.
+
+  
+***The following feature is for advanced users only!  Do not use this feature unless you know exactly what you are doing!*** 
+As of revision 719, it is now possible to edit GameIDs via the loader which is useful with different games using the same GameID (ie; Guitar Hero mods).  When viewing the GUI in list mode, simply click on the GameID displayed underneath the targeted game's cover (if GameID isn't displayed, see section [6a]) to bring up the ID change prompt.  Keep in mind that this will create a new save file for the targeted game and will no longer load a previous save file unless the GameID is restored to it's original ID. 
+
+###################################
+
+[2c] Getting Covers & Wiitdb.zip ***** 
+
+This loader can show the boxart and discart for every game. The images have to be placed in the correct folder and must have the correct name and size (more info at [1a]). To download covers with this loader, you need to press 1 at the main menu. You can choose what covers you want to download (2D or 3D). Discart can also be downloaded.
+
+It is also possible to show the info for each game. You can show the game info by highlighting a game (don't press A, just point) and pressing 2. The data for the game info is stored in wiitdb.zip. There are two ways to get this file:
+
+-Update with the loader and select update all or update wiitdb, it will also be updated if you update the full channel.
+-If you have no wifi, go to the game info screen of any game. Press 1 and you will see the text at the bottom change. Go to the file it shows and copy the URL. Then open the url with a web browser to download the wiitdb.zip. Once you got wiitdb.zip , place it in the titles.txt path (see Custom paths)
+
+NOTE: All images and wiitdb.zip are downloaded from the site www.wiitdb.com .
+
+________________
+[3] Main menu 
+
+This is the main screen, the first one you see when you start the program. It looks a lot like the Wii system menu. (Default theme)
+
+###################################
+
+[3a] Controls 
+
+User input for the main menu is accepted through WiiMote, Nunchuk, Gamecube controller, and Classic controller.  While input is accepted from all these methods, the fastest and easiest method is with a WiiMote.
+
+Wiimote
+A --- Main action Button
+B --- Back/Cancel/Scroll (list view)
+- Button  --- Left (Grid/Carousel/game prompt/settings)
+Home --- Open Exit menu
++ Button --- Right (Grid/Carousel/game prompt/settings)
+1 --- Download covers
+2 --- Show game info (select a game first)
+D-Pad --- Choose
+Pointer --- Choose
+
+Nunchuck
+Control stick --- Choose
+
+GC Controller
+Control stick --- Choose
+D-Pad --- Choose
+A --- Main Action button
+B --- Back/Cancel/Scroll (list view)
+
+Classic controller
+Left control stick --- Choose
+D-Pad --- Choose
+A --- Main action button
+B --- Back/Cancel/Scroll (list view)
+X --- Game info
+Y --- Download covers
+- Button --- Left (Grid/Carousel/game prompt/settings)
+Home --- Open Exit menu
++ Button --- Right (Grid/Carousel/game prompt/settings)
+
+###################################
+
+
+[3b] On the screen 
+
+1.Install ***** -- (+) button at the left --  Press to add games to your HDD from the Wii's DVD drive.
+
+
+2.Settings -- Button with gear on the left --  Use it to access all the settings and options.
+
+
+3.Exit -- Button with 'wii' on the right --  Press this to view the exit menu.
+
+
+4.Power -- Button with power logo at the right --  I bet you can figure out what it does.
+
+
+5.Download ***** -- Listview: cover -- When you are in the list view, click a game box to download stuff. You can also use the 1 button in any display mode.
+
+
+6.Reload -- SD card button --  Press it to reload your SD contents (images, themes,…).
+
+
+7.Homebrew Loader -- Button right of the HDD info -- Run the Homebrew Loader
+
+
+8.Sort bar -- Bar at the top -- contains 9 - 16 from left to right
+
+
+   9.Favorites --- Press it to hide all games that are not marked as a favorite. 
+
+   10. Game Search --- Use this button to only list games that start with a certain letter. 
+
+   11.Abc --- Your games will be sorted alphabetically. 
+
+   12.Playcount --- Sort games by the number of times you have launched them from this application. Games with the same count are sorted alphabetically. 
+
+   13.List ---  Press it to see games listed by name and any available box art for 1 game at a time. 
+
+   14.Grid ---   Use this button to see your games arranged in a grid. The number of rows available depends on how many games are on you drive.  39 games can be seen at the most. 
+
+   15.Carousel ---  Press this to see you games arranged in a rotating fan array.  7 games can be seen at a time. 
+
+   16. Load from Disc --- Boot the current game disc that is inserted in the Wii disc drive.  cMIOS is required in order to play Gamecube backups. 
+
+17.Clock -- Above the HDD info --  This looks like a digital clock. Coincidently, it functions like a clock.
+
+18.HDD Info -- In the middle, at the bottom -- This shows some information about your connected HDD (only the WBFS partition).  Free & total space in GB as well as the game count.  GB is defined here as 1024MB.  When you bought your drive, the manufacturer probably used 1000MB for GB so the size displayed here will be less than what your drive was advertised as.   The game count will reflect the games you are choosing to display, not the actual amount of games on your drive.  If you are hiding games with parental controls/favorites, they will not be added into this total. 
+
+###################################
+
+[3c] View 
+
+There are 3 different ways to view your games.
+
+List --- Games are listed by name (up to 9 at a time) box art for the selected game is displayed.  This is currently the only screen you can initiate a download for artwork from.  Also on this screen The B button has a slightly different use.   If there are scrollbars present on your gamelist, holding B and moving the cursor scrolls the list.  
+
+Grid --- Games are arranged in a grid  (up to 320).  The number of rows available depends on how many games are on you drive.  By default, it is 3X14 (with the last column hidden)if there aren’t enough games to fill all 42 spots, it changes to 2x8 (2x7 shown on screen).  Again, if there aren’t enough games to fill it up, the number of rows decreases.
+
+Carousel --- Games are arranged in a rotating fan array (up to 320). Up to 7 games can be seen at a time.
+
+###################################
+
+[3d] Game Info 
+
+Pressing 2 (or X on CC input) brings a prompt with information about the selected game.  This info is read from the wiitdb.zip file discussed earlier. Among the displayed information are the following:
+
+Accessories --- The supported accessories for the game are shown in the lower left.  The max number of players is shown on the image of the WiiMote.  Any required accessories are shown in light blue.
+
+Rating system --- The rating for the game is shown in the lower left of the screen.  It is converted internally between PEGI,ESRB, and CERO (though not used for anything yet).
+
+Wifi --- The number of online players is displayed to the right of the accessories.  Any other wifi features are listed above the accessories.
+
+Synopsis --- If a synopsis is present in the file, it can be viewed by pressing A on the game info screen. You need to set the game language to the language of synopsis you want to view!
+
+Wiitdb.zip will get updated when you update all or update the full channel. Only the info for the games and language you have will be downloaded. If you do not have the possibility to update with the loader because you have no Wifi, go to the game info screen and press 1 (Rev637 or higher needed). It will store a link in a file as shown at the bottom. Open the file and copy the link. Then open it with a web browser to download the file. Place the Wiitdb.zip in the titles.txt path.
+
+###################################                  
+
+[3e] Game Prompt 
+
+This is the prompt that comes up when a game is selected (if the quickboot option is disabled).
+
+Play --- Click the spinning disc to launch this game.
+
+Rename ***** --- Click the title of the game in the top of the prompt to rename it directly on the WBFS file system.  If you are using titles.txt or wiitdb.zip, this will have no (visible) effect.
+
+Back ---  Closes this prompt.
+
+Favorite ---  Click the star to add/remove this game from your favorites.
+
+Size --- The amount of space that the game occupies on the WBFS.
+
+Count --- The number of times you have launched this game using this application.
+
+Settings ***** --- Here is where you go to enter settings that will be used for this game only.
+
+
+________________
+[4] Exit Menu 
+
 This is the screen that appears when you press the home button on the WiiMote or the exit button in the main screen.
 
-return to loader-- if you launched USB Loader GX from HBC, LoadMii, or similar chain loading application, you will see this button.  Pressing it will take you back to the application that you came from.
+Return to loader --- if you launched USB Loader GX from HBC, LoadMii, or similar chain loading application, you will see this button.  Pressing it will take you back to the application you came from.
 
-Wii Menu-- exits to the Wii System Menu
+Homebrew Channel --- Brings you to the homebrew channel
 
-batteries--  Status for all connected WiiMotes is displayed here
+Wii Menu --- Exits to the Wii System Menu.
 
-close-- closes this screen and returns you to where you were in the application before this screen was called
+Batteries ---  Status for all connected WiiMotes is displayed here.
 
-###################################################################################	
-[6]settings
+Close --- Closes this screen and returns you to where you were in the application before this screen was called.
+
+
+________________
+[5] Homebrew&Title Launcher ***** 
+[5a] Homebrew Launcher
+
+
+New since rev627 is the Homebrew Launcher. You can activate this function by clicking on the icon right of the HDD info at the main screen (the button looks like the Homebrew channel). Just like the HBC, all apps of the specified folder will be shown in groups of 4. The images of the apps are shown on the left, and the name to the right. When you click an app, the info in the meta.xml will be shown.
+
+Folders of homebrew must contain a .dol or .elf . Unlike the HBC they do not have to be renamed to boot.dol or boot.elf .
+The folder may also contain an icon.png (size 128x48), meta.xml and other data that the app needs to run.
+
+###################################
+
+[5b] Title Launcher 
+
+Since rev648 it is also possible to load channels. To access the title (channel) launcher, go to the Homebrew launcher. There you will see two buttons in the bottom right. The first (left) button leads to the title launcher.
+If you want the correct names of the channels to display, you need a database.txt found here: http://pastebin.com/f6fb1533b. Place it in the config folder.
+You are free to edit this file online, but do not add Homebrew channels. These have title IDs that can be different on other wiis.
+
+###################################
+
+[5c] (Un)Installing WADs over wifi 
+
+FOR ADVANCED USERS ONLY!
+
+EASY METHOD
+
+Guide by GBAtemp member NeoRame
+
+1) Download the wiiload installer found here
+2) Connect the wii to wifi. Go to the Homebrew channel and press Home. You will find your wiis IP here.
+3) Run the Installer and choose next. Enter the wii IP and choose install.
+4) Launch the USB loader GX and go to the Homebrew Launcher, then go to the Title (channel) launcher.
+5) On your PC, double click a .wad .dol or .elf to send it to the Wii (You can also right click and choose Send to wii). If you send a wad, you will be asked to (un)install it or not.
+
+NOTE: If you can't get it to work, reboot your computer and try again.
+
+DIFFICULT METHOD (Use if the easy one doesn't work)
+
+Guide made by GBAtemp member Logan
+What you will need:
+
+
+   * Your Wii's IP address (see below for details) 
+   * WiiLoad 
+   * This guide is for Windows only. I don't use Linux
+
+
+1) Download WiiLoad from the above link and extract the contents.
+2) Copy/Move wiiload.exe to C:\Windows\System32\
+3) Open Notepad and copy the following into it:
+
+Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\.WAD]
+@=""
+
+[HKEY_CLASSES_ROOT\.WAD\shell]
+
+[HKEY_CLASSES_ROOT\.WAD\shell\Send to Wii!]
+
+[HKEY_CLASSES_ROOT\.WAD\shell\Send to Wii!\command]
+@="c:\\windows\\system32\\wiiload.exe \"%1\"" 
+4) Save the file as "wiiload.reg"
+5) Double click the file and accept entering the entries into the registry.
+6) Boot up your Wii and load the USB loader GX. Go to the Homebrew Launcher and hover over the WiFi Wii icon. A tooltip will pop up showing your IP address. Make a note of it.
+7) Set the environment variable by going to your computer's Control Panel -» System -» Advanced -» Environment Variables, then click "new" under either category. The variable name is WIILOAD and the value is tcp:yourIP, where yourIP is the Wii's IP/hostname. Click "OK" here and in System Properties.
+8) Now go to the title (channel) browser on your wii. On your PC, right click on a .WAD file and you should now see a "Send to Wii!" option. Click on this and watch the magic work at the Wii end of business.
+9) [Optional] Double click on a .WAD file and choose c:\windows\system32\wiiload.exe as the application to open it. Now double clicking .WAD files will send them to your Wii.
+10) To uninstall, simply send the same .WAD file to the Wii.
+
+Use your noggin when dealing with WAD's. I won't be held accountable for any misuse! 
+
+
+________________
+[6] Settings 
+
 This is where you customize the behavior of the program.
 
-[6a]Gui settings
+###################################
+
+[6a] Gui settings 
+
 These are the settings that affect the behavior and feel of the GUI.  Your settings are saved when exiting back to the main screen, change custom paths, change views in the main screen, and a few other times.
 
-app language-- *****If you have a language file to translate this program, you can select it here.  You can change the path by clicking it at the top of the screen.  The button in the lower right will restore the defualt (english).
+App language ***** --- If you have a language file to translate this program, you can select it here.  You can change the path by clicking it at the top of the screen.  The button in the lower right will restore the default (English).
+NOTE: Newest revs will automatically load your language if it is found.
 
-display-- In the list view, you can chose to display the selected game's region and ID here.
+Display --- In the list view, you can chose to display the selected game's region and ID here.
 
-clock--  Chose how you want the clock displayed.
+Clock ---  Choose how you want the clock displayed.
 
-tooltips--  enable tooltip help with this.
+Tooltips ---  Enable tooltip help you with the various buttons and options.
 
-flipx-- this changes the behavior of left and right on the gameprompt.  if it feels un-natural, change this setting.
+Flip-X --- This changes the behavior of left and right on the game prompt and Grid/Carrousel.  If it feels un-natural, change this setting.
 
-prompts/buttons-- Select weather or not to apply the widescreen fix to prompt windows and certain buttons in the GUI.  
+Prompts/Buttons --- Select whether or not to apply the widescreen fix to prompt windows and certain buttons in the GUI.
 
-keyboard-- Chose between different layouts for the on screen keyboard used in the GUI.
+Keyboard --- Choose between different layouts for the on-screen keyboard used in the GUI.
 
-wiilight-- Change the behavior of the disc slot light.
+Discimage Download --- Select what discimages have to be downloaded
+Only Original: Always get original discart
+Only Customs: Always get custom discart
+Original/Customs: Get original discart. Get custom discart if original is not available
+Customs/Original: Get custom discart. Get original discart if cutom is not available
 
-rumble-- turn rumble on/off
+Wiilight --- Change the behavior of the disc slot light.
 
-unicodefix--  Use this only if you have compiled the application with a Chinese,Japanese, etc font that does not display correctly. 
+Rumble --- Turn rumble on/off.
 
-titles from xml-- chose if you want to ignore the titles stored on the xml file and use the ones stored in the WBFS.
+Auto init. network --- Turn this ON to automatically initialize the network at boot. If a new update is available, you will be asked if you want to download it.
+IMPORTANT: Turning on this function may cause malfunctioning of the loader and games!
 
-[6b]Gameload
-Change settings that have to do with the way games are booted.  These will be use as default if you don't set any spacific settings for that game. 
+Titles from XML --- Choose if you want to ignore the titles stored on the xml file (in wiitdb.zip) or titles.txt and use the ones stored on the WBFS.
 
-videomode--  select the video mode use for games.  Most games work with disc default.  If this doesn't work, then try console default.  Then if you still need to, try forcing your region.
+Screensaver --- Set how long it will take to activate the screensaver in case of inactivity. The screensaver switches off the Wiimote.
 
-vidTVpatch--  patches the signal after the game has rendered it in the mode selected in videomode.  If none of the video modes work then try this. 
+###################################
 
-language--  the language that is passed to the game when it is booted.  if the language is supported by the game, it will be used in game.
+[6b] Game load 
 
-patch country strings--  use this for Japanese games playing imports.
+Change settings that have to do with the way games are booted.  These will be use as default if you don't set any specific settings for that game.
 
-ocarina-- turn on/off the ocarina cheat engine.  You need gct files in the cheatcode path mentioned earlier.
+Video mode ---  Select the video mode to use for games.  Most games work with disc default.  If this doesn't work, try console default.  Then if you still need to, try forcing your region.
 
-boot/standard--  *****Select the cIOS that is used to boot the program into.
+vidTV patch ---  Patches the signal after the game has rendered it in the mode selected in video mode.  If none of the video modes work, try this.
 
-quickboot-- Chose if you want to skip the gameprompt when starting games.
+Game language ---  The language that is passed to the game when it is booted. If the language is supported by the game, it will be used in game.
 
-error 002fix--  with certain IOS, some games show an error that says "blablabla, 002, blablabla.  Don't be a pirate."  Turn this on to fix it.  For certain games running under older cIOS versions, you will need to set this to anti for the games to boot.
+Patch country strings ---  Use this for Japanese imports.
 
-[6c]Parental control
-Settings for parents to control what content their kids see.  Everything in this file with ***** beside it is hidden when the application is locked.
+Ocarina-- Turn on/off the ocarina cheat engine.  You need gct files in the cheatcode path mentioned earlier.
 
-console--***** click here to lock/unlock advanced features.
+Boot/standard ***** --- Select the cIOS that is used to boot the program into.
 
-password-- *****click here to set a password.
+Quickboot --- Choose if you want to skip the game prompt when starting games.
 
-control level--***** set the level of parental control here.  games will be excluded from the game list based on this and the settings you have for them in the game-specific settings.
+Error 002 fix ---  With certain IOS, some games show an error that says "blablabla, 002, blablabla.  Don't be a pirate."  Turn this on to fix it.
+Anti: Some cIOS have 002fix build-in. Unfortunately, this makes some games unplayable (the reason for this is that there are 2 types of 002 fix, and some games won't play with the one found in some cIOS). Activate the Anti002fx to play these games. Known games that need Anti002fix (they use 002fix on with some cIOS): Burger Island, Diabolik The Original Sin, Ghostbusters, Indiana Jones and the Staff of Kings, MySims Racing, Nutrition Matters, Solitaire And Mahjong, Takt of Magic
 
-[6d]sound
-Settings related to audio are here
+###################################
 
-background music-- You can chose custom BG music to be heard in the application here.  Click the path at the top to change it.  Format is OGG.  Keep in ming that bigger songs will result in decreased memory available for other functions.  It is possible to completely crash the loader with big files.  Try to keep it <3MB to be safe.  If you want to rock out to your music, use a media player.  This is a game loader.   
+[6c] Parental control 
 
-music volume-- pick the volume for the BG music within this application, not in the games that are booted.
+Settings for parents to control what content their kids see.  Everything in this document with ***** beside it is hidden/unusable when the application is locked.
 
-SFX volume-- Pick the volume for the sound effects within this application, not in the games that are booted.
+Console --- Click here to lock/unlock advanced features. Requires password to unlock.
 
-[6e]Custom paths*****
-Some of the paths the program uses are customizable.  All paths should start with "SD:/"  or "USB:/" (without quotes).  USB paths will be on the first available FAT USB partition.   
+Password ***** --- Click here to set a password. When locked it's shown as ********
 
-covers-- *****for boxart
+Control level ***** --- Set the level of parental control here.  Games will be excluded from the game list based on this and the settings you have for them in the game-specific settings. Also shown as ******** when the loader is locked.
 
-discimage--***** for DVD art
+###################################
 
-themepath--*****for theme shit
+[6d] Sound 
 
-titles.txt--*****for title.txt and wiitdb.zip
+Settings related to audio are here.
 
-update--***** used for updating the dol.  If you are using our forwarder, it loads dols from this path.
+Background music --- You can chose custom BG music to be heard in the application here.  Click the path at the top to change it.  Format is OGG.  Keep in mind that bigger songs will result in decreased memory available for other functions.  It is possible to completely crash the loader with big files.  Try to keep it «3MB to be safe.  If you want to rock out to your music, use a media player.  This is a game loader.   
 
-cheatcodes-- *****for gct & ocarina use
+Music volume --- Pick the volume for the BG music within this application, not in the games that are booted.
 
-txtcheat path-*****for txt files holding the codes for your gams.
+SFX volume --- Pick the volume for the sound effects within this application, not in the games that are booted.
 
-dolpath�*****for replacement dols for certain broken games.
+###################################
 
-[6f]Update*****
-Click to get updates from online.  Just because there is a newer revision than what you are using does not mean that it will be on the update server.  Also, you get the choice to update your dol or the entire HBC package.  If you are using a full channel (not a forwarder channel), you won't get the option to update all.  It will just download a wad file and install that on your wii over top of the old version and then kick you out to the system menu so you can restart with the new version.  This is assuming that the person that created the channel took the necessary steps when they made it.  If you are using the full channel and you get the option to update all, then they fucked up and the update will do you no good. 
+[6e] Custom paths ***** 
 
-[6g]default settings*****
-Click here to restore default settings.
+Below paths the program uses are customizable. Click a path to browse for its new destination.
 
-[6h]credits
-Look at the people that made this application possible.  You get to rock out to some cool music, too.  In the upper right corner is displayed your rev# and the cIOS that your are currently running.
-###################################################################################
-[7]gamesettings
-Settings are available on a per-game basis from the prompt window.  These settings have the same effect as the global settings but are only used for the selected game.  After making changes, you must click the save button for them to take effect.  
-videomode
-vidTV patch
-language
-ocarina
-ios
-parental control
-error002 fix
+3D Cover Path --- For 3D boxart.  When properly defined, 3D cover art will display in List and Carousel views by default. 
 
-online fix --if you have attempted to use any online features of this application, the online features of any game you boot will not work.  In order to fix this we can reload the IOS.  Unfortunately, reloading IOS results in random blackscreens with certain IOS versions.  Turn this option on to reload the IOS and risk random black screens. 
-patch country strings
+2D Cover Path --- For 2D boxart.  When properly defined, 2D cover art will display in Grid view by default.
 
-alternate dol-- this is for advanced users only.  There are certain games which do not run because they they reload IOS and this causes the USB to be dropped.  If you extract the proper dol from the ISO and name it with the 6 character game ID and put in the dolpath, you can use enable this option  to play these games.
+Discimage path --- For Discart.
 
-default settings--  delete any saved settings for this game.  After you press this, there is no need to press save. 
-save-- writes the settings that are on the screen right now to the GXGameSettings file with the current game ID
+Theme path --- For themes.
 
-uninstall-- Delete the selected game from the WBFS table.  The data is not erased from the drive, it is just marked as free space.
+XMLpath ---For wiitdb.zip
 
-back-- Lose any unsaved changes and return to the previous screen.
+Update path --- Used for updating the dol.  If you are using our forwarder, it loads dols from this path.
 
-ocarina button--  this is that blue thing in the upper right.  If you have a txt file for the selected game in the txtcheat folder, click this button to go to the code selection page.  You will see a list of the cheats in the txt file and you can turn them on and off.  When you are happy with the codes you have selected, click the button to generate a gct file.  This will make a gct file with only the codes that are turned on and put it in the proper folder.  Then make sure you turn ocarina on or your cheats won't be used. 
-###################################################################################
-[8]Themes
-Is it possible to theme this program.  Theme elements may include font, images, sounds, and  GXtheme.cfg.  If anything is not included in the theme path, the default will be used.  For image names, look in the source.  Not every image can be themed, but this is a good place to look for the names of the ones that can be. All images must be sized in multiples of 4 or they will not be displayed.  To move elements of the gui around, you can use GXtheme.cfg.  I template can be found here http://code.google.com/p/usbloader-gui/wiki/ThemeSettings.  For More accurate list of themable elements, look in cfg.c from the source
-###################################################################################
-[9]Cheatmanager
-The Cheatmanager makes it possible to directly convert TXT Cheat Codes files into GCT for Ocarina.
-You can find the Cheatmanager in the Game Settings (click on the Ocarina Icon) select the Cheat you want to use and create the GCT file.
+Cheatcodes path --- For gct & ocarina use.
 
-The TXT Files should look like this
+Txtcheatcodes path --- For txt files holding the codes for the code manager
 
-GameID
-GameTitle
+Dol path --- Contains replacement dols (Alternate dols) for certain broken games.
 
-Cheat1
-*here the hexvalues*
-Comment (actually only one line of comment is supported otherwise the GCT file will be messed up)
+Homebrew apps path --- Where you place your homebrew apps for the Homebrew Loader.
 
-Cheat2
-*here the hexvalues*
-Comment
+###################################
 
-Cheat3
-and so on
-###################################################################################
-[10]Troubleshooting
-I get black screen when loading games.
-check the game compatibility list, unhook extra controllers, turn off ocarina, play with video settings.  If the list says the game works, then try different video settings if the game is not from the same region as your tv/wii.  
-Also try without ocarina.  Unless you made the codes yourself, you don't know that they work.  And you don't know which codes work together.  Using codes from a different region will also fuck shit up.
-Some games don't like it if you have certain controllers plugged in.  Remove GC & CC controllers and try again.
-If all else fails, rip the game again.  It may have gotten messed up in the process.
+[6f] Update ***** 
 
-I get a black screen with a bunch of numbers on it
-This is a code dump.  It is not bad for your wii.  It just means that the program crashed.  This is beta software, it happens.  Different revs can have this happen at certain times.  Just press reset on your wii.  If you find that this happens every time you start the application, rename your config folder and restart it.  This will cause the loader to use default settings.  If it fixes the problem then you can copy the game settings and favorites files back into the config directory.
+Click to get updates online.  Just because there is a newer revision than what you are using does not mean that it will be on the update server.  Also, you get the choice to update dol or update all. The last option will update the dol, HBC icon.png and meta.xml
 
+It is also possible to update the full channel (This will also download wiitdb.zip). The channel needs a small change in the code before it can be updated. If you have a channel and you see the update all button, you can not update the channel. You have to get another one.
+
+###################################
+
+[6g] Default settings ***** 
+
+Click here to restore default settings. You can also delete GXGlobal.cfg to do this if you get an error at boot.
+
+###################################
+
+[6h] Credits 
+
+Look at the people that made this application possible.  You get to rock out to some cool music, too.  In the upper right corner you can see  your rev# and the cIOS that your are currently running.
+
+
+________________
+[7] Game settings *****
+
+
+Settings are available on a per-game basis from the prompt window.  These settings have the same effect as the global settings, but are only used for the selected game. 
+NOTE: If quickboot is enabled, you cannot change the settings. So make sure you configure them before enabling quickboot.
+
+###################################
+
+[7a]Game load 
+After making changes, you must click the save button for them to take effect!
+
+Videomode --- see [6b] Game load
+vidTV patch --- see [6b] Game load
+Game language --- see [6b] Game load
+Ocarina --- see [6b] Game load
+Ios --- see [6b] Game load
+Parental control --- see [6b] Game load
+Error002 fix --- see [6b] Game load
+Patch country strings --- see [6b] Game load
+
+Alternate dol --- This is for advanced users only.  There are certain games that do not run because they reload IOS and this causes the USB to be dropped.
+Select a dol: Use the next option to browse for an alt dol on the WBFS partition
+Dol from SD/USB: Extract the proper dol from the ISO (using wiiscrubber) and name it with the 6 character game ID and put in the dolpath.
+
+Selected dol --- If you put Alternate dol on 'Select a dol', this function can be used to do so. (Even if the box is empty, you can click it)
+
+Save --- Writes the settings that are on the screen right now to the GXGameSettings file, behind the current game ID.
+
+###################################
+
+[7b]Ocarina 
+
+Opens the cheat manager. For more info, see [8]Cheating
+
+###################################
+
+[7c] Uninstall Menu 
+If you click this button, you will see a new menu. You can uninstall everything here: the game, boxart, discart and TXTcheat file. You can also reset the playcounter here.
+
+###################################
+
+[7d]Default settings 
+
+Restore all default settings for the game. (The default settings can be changed in [6b]Game load)
+
+
+________________
+[8]Cheating 
+
+With the build in application called Ocarina, it is possible to cheat by using the USB loader GX. To enable cheats, you will need a gct file with the gameID of the game in the correct path. (The cheatcodes path, see custom paths)
+
+There are two ways to create a gct file. For both, you will need a txt file that contains all the codes for the game.
+
+###################################
+
+[8a] Using a Computer 
+
+All needed txt files can be found on http://geckocodes.org/. If you cannot find codes for your game, it means there are no codes available for that game.
+To turn the txt files in gct files, you need the codemgr. It is included in the Ocarina download (check wiibrew.org).
+
+Open the txt file with the codemgr. You will see all the codes that are in the txt file. Sometimes the txt file has errors. In that case you need to open it manually with a txt editor. You can select all the cheats you want to enable.
+
+Some codes require that you fill in an amount of XX or other letters to make the code work. The values can usually be found in the comments. Select the letters you want to change and type the correct value over them. Then click ‘store settings’.
+
+If you filled everything in and enabled all cheats you want, click the ‘export to gct’ button. Choose the SD/USB you want to store the file to. It will create a file in the map codes. If you changed the path in the settings of the loader, you have to place the gct file in the right direction.
+
+###################################
+
+[8b] Using the USB loader 
+
+Go to the Game settings. There, choose ocarina. If it doesn’t find a txt file with the gameID of the current game, you will be asked if you want to download it. You can also manually download the txt file, but don’t forget to rename it to the correct title ID (and place it in the txtcodes path, see custom paths). After you downloaded it, use the same Ocarina button to go to the code manager. Select all codes you want to enable, then click 'create' if you’re done. NO LETTERS CAN BE CHANGED USING THIS METHOD. TO MAKE THE CODES WORK THAT CONTAIN THEM, EDIT THE TXT FILE OR USE THE CODEMGR! It will bring you back to the gamesettings screen.
+
+###################################
+
+After you used on of above methods to create your gct file, enable ocarina in the game settings (game load), save and boot the game.
+
+
+________________
+[9]Themes 
+
+It is possible to theme this program. Many of the images can be replaced and moved. Every theme must include a GXTheme.cfg in the same folder as where you put the images. Here is a list of what you can put into the GXtheme.cfg : 
+#################### GXTheme.cfg #####################
+## Copy to a txt file and rename it to GXTheme.cfg. ##
+##        Don't touch lines starting with #         ##
+##         Values between [] are defaults           ##
+######################################################
+
+#### coordinates: x and y are coordinates in pixels, width and height are also in pixels ####
+
+## battery1_coords = x,y -- [245,400] -- For battery indicator 1 (exit menu)
+battery1_coords = 245,400
+
+## battery2_coords = x,y -- [335,400] -- For battery indicator 2 (exit menu)
+battery2_coords = 335,400
+
+## battery3_coords = x,y -- [245,425] -- For battery indicator 3 (exit menu)
+battery3_coords = 245,425
+
+## battery4_coords = x,y -- [335,425] -- For battery indicator 4 (exit menu)
+battery4_coords = 335,425
+
+## clock_coords = x,y -- [0,335] -- For the clock
+clock_coords = 0,335
+
+## covers_coords = x,y -- [26,58] -- For the game covers (list view)
+covers_coords = 26,58
+
+## gamecarousel_coords = x,y,width,height -- [0,-20,640,400] -- For the carousel (carousel view)
+gamecarousel_coords = 0,-20,640,400
+
+## gamecarousel_favorite_coords = x, y -- for the favoriteIcon in game-carousel-mode 
+## gamecarousel_search_coords = x, y -- for the searchIcon in game-carousel-mode 
+## gamecarousel_abc_coords = x, y -- for the abcIcon in game-carousel-mode
+## gamecarousel_count_coords = x, y -- for the countIcon in game-carousel-mode 
+## gamecarousel_list_coords = x, y -- for the listIcon in game-carousel-mode 
+## gamecarousel_grid_coords = x, y -- for the gridIcon in game-carousel-mode
+## gamecarousel_carousel_coords = x, y -- for the carouselIcon game-carousel-mode
+## gamecarousel_dvd_coords = x, y -- for the dvdIcon game-carousel-mode
+
+## gamecount_coords = x,y -- [0,430] -- For the gamecount (below HDD info)
+gamecount_coords = 0,430
+
+## gamegrid_coords = x,y,width,height -- [0,20,640,400] -- For the gamegrid (grid view)
+gamegrid_coords = 0,20,640,400
+
+## gamegrid_favorite_coords = x, y -- for the favoriteIcon in game-grid-mode
+## gamegrid_search_coords = x, y -- for the searchIcon in game-grid-mode 
+## gamegrid_abc_coords = x, y -- for the abcIcon in game-grid-mode 
+## gamegrid_count_coords = x, y -- for the countIcon in game-grid-mode 
+## gamegrid_list_coords = x, y -- for the listIcon in game-grid-mode 
+## gamegrid_grid_coords = x, y -- for the gridIcon in game-grid-mode 
+## gamegrid_carousel_coords = x, y -- for the carouselIcon in game-grid-mode 
+## gamegrid_dvd_coords = x, y -- for the dvdIcon in game-grid-mode
+
+## gamelist_coords = x,y,width,height -- [200,49,396,280] -- For the list of games (list view)
+gamelist_coords = 200,49,396,280
+
+## gamelist_favorite_coords = x, y -- for the favoriteIcon in game-list-mode
+## gamelist_search_coords = x, y -- for the searchIcon in game-list-mode
+## gamelist_abc_coords = x, y -- for the abcIcon in game-list-mode 
+## gamelist_count_coords = x, y -- for the countIcon in game-list-mode 
+## gamelist_list_coords = x, y -- for the listIcon in game-list-mode 
+## gamelist_grid_coords = x, y -- for the gridIcon in game-list-mode 
+## gamelist_carousel_coords = x, y -- for the carouselIcon in game-list-mode 
+## gamelist_dvd_coords = x, y -- for the dvdIcon in game-list-mode
+
+## hddinfo_coords = x,y -- [0,410] -- For the HDD info
+hddinfo_coords = 0,410
+
+## home_coords = x,y -- [485,367] -- For the exit menu button
+home_coords = 485,367
+
+## homebrew_coords = x,y - [425,400] -- For the Homebrew launcher button
+homebrew_coords = 425,400
+
+## id_coords = x,y -- [68,305] -- For the game ID (list view)
+id_coords = 68,305
+
+## install_coords = x,y -- [16,355] -- For the install button
+install_coords = 16,355
+
+## power_coords = x,y -- [576,355] -- For the power button
+power_coords = 576,355
+
+## region_coords = x,y -- [68,30] -- For the region (list view)
+region_coords = 68,30
+
+## sdcard_coords = x,y -- [150,390] -- For the Reload SD button
+sdcard_coords = 150,390
+
+## setting_coords = x,y -- [60,367] -- For the settings button
+setting_coords = 60,367
+
+#### show: 0 = don't show, 1 = show ####
+
+## show_battery = show -- [1] -- Show the battery indicators
+show_battery = 1
+
+## show_gamecount = show -- [1] -- Show the gamecount
+show_gamecount = 1
+
+## show_hddinfo = show -- [1] -- Show the hdd info
+show_hddinfo = 1
+
+## show_id = show -- [1] -- Show the game ID
+show_id = 1
+
+## show_region = show -- [1] -- Show the region
+show_region = 1
+
+## show_tooltip = show -- [1] -- Show tooltips
+show_tooltip = 1
+
+#### colors: red, green and blue go from 0 to 255 ####
+
+## clock_color = red,green,blue(,alpha) -- [138,138,138(,255)] -- Color of the clock
+clock_color = 138,138,138(,255)
+
+## gametext_color = red,green,blue(,alpha) -- [0,0,0(,255)] -- Color of the gametext
+gametext_color = 0,0,0(,255)
+
+## info_color = red,green,blue(,alpha) -- [55,190,237(,255)] -- Color of info (like HDD info)
+info_color = 55,190,237(,255)
+
+## prompttext_color = red,green,blue(,alpha) -- [0,0,0(,255)] -- Color of text in prompts
+prompttext_color = 0,0,0(,255)
+
+## settingstext_color = red,green,blue(,alpha) -- [0,0,0(,255)] -- Color of the text in the settings
+settingstext_color = 0,0,0(,255)
+
+#### transparency: Alpha = from 0 (fully transparent) to 255 (Not transparent)
+
+## batteryUnused = Alpha -- [70] -- Transparancy of Battery indicators that are not used
+batteryUnused = 70
+
+## tooltipAlpha = Alpha -- [255] -- Transparency of tootltips
+tooltipAlpha = 255
+
+#### Allign: Allign = left/centre/right ####
+
+## clock_allign = Allign -- [centre] -- For the clock    
+clock_allign = centre
+
+## gamecount_allign = Allign -- [centre] -- Allign of the gamecount
+gamecount_allign = centre
+
+## hddinfo_allign = Allign -- [centre] -- Align of the HDD info
+hddinfo_allign = centre
+
+#### others ####
+
+## maxcharacters = x -- [36] -- Amount of characters shown before text starts scrolling left. (long text)
+maxcharacters = 36
+
+## pagesize = x -- [9] -- Amount of games in the list (list view)
+pagesize = 9
+
+## sortBarOffset = x -- [1] -- Amount of pixels the sortbar jump right when going to grid/carousel
+sortBarOffset = 100
+
+
+________________
+[10]Special Games 
+
+This section will explain on how to run some games with special boot methods.
+The methods for Alt-dol from SD are explained here. You can also use Alt-dol from disc (use the same dols). If you have to rename the dol, replace the X by E (NTSC-U), P (PAL) or J (NTSC-J)!
+
+
+[10a]Wii Sports Resort 
+
+IMPORTANT: Wii sports resort requires the WII MOTION PLUS. If you do not have it, you can not run this game!
+Booting WSR isn't too difficult. But as its different from usual booting methods, it is listed here.
+
+1) When you boot it for the first time, Alt dol loading must be enabled.
+Alt dol info: Extract the player.dol and rename it to RZTX01.dol
+Depending on your cIOS, 002fix or Anti002fix may be needed.
+2) Watch the WM+ instruction video. After you watched it, the Wii will crash, so reboot.
+3) From now on, load the game with Alt-Dol OFF
+
+
+[10b]Metroid Prime Trilogy 
+Remove the disc before starting MPT!
+
+Select a DOL
+1) First time boot the game without alt-dol (If this doesn't work, enable Dol from disc and use rs5fe_p.dol). Create a save file and exit the game.
+2) From now, always use dol from Disc and choose the dol of the game you want to play:
+rs5mp1_p.dol for Metroid Prime 1
+re5mp2_p.dol for Metroid Prime 2
+rs5mp3_p.dol for Metroid prime 3
+Then save and boot the game.
+You need to do this EVERY time you boot the game
+
+Load From SD/USB
+This is one of the most difficult games to boot from USB. First, you need to extract 3 alt-dols:
+rs5mp1_p.dol for Metroid Prime 1
+re5mp2_p.dol for Metroid Prime 2
+rs5mp3_p.dol for Metroid prime 3
+
+1) First time boot the game without alt-dol (If this doesn't work, extract rs5fe_p.dol, rename it to R3MX01.dol and boot the game with this alt-dol). Create a save file and exit the game.
+2) Now the difficult part: All 3 alt dols have to be named R3MX01.dol . For this to be possible, you have to make a folder for each one. Every time you want to change game, you have to change the alt-dol path. The alt-dol that is used decides which game is play-able in the trilogy.
+
+Method to get MP3 working (NOTE: some versions of MPT can't boot MP3, evn with this method):
+1) Install Hermes cIOS222
+2) In global game load, set Boot/standard to cIOS222 and enable 002fix
+3) In specific game load, use cIOS222
+4) Run the game with the MP3 alt-dol 
+5) If the you get a black screen or an error message (Please Insert Metroid Prime 3 Disc), try inserting ANY DVD into the drive.  Blank DVDs are acceptable.
+
+
+________________
+
+[11]FAQ 
+
+
+Q: Does this loader work on system menu X ? 
+A: Yes, it works on any system menu
+
+
+Q: The Usb loader can’t find my HDD. What do I do now? 
+A: Be sure to have cIOSr9 or above (Or one of Hermes’ cIOS). If you use cIOSr12 or greater you have to try both USB ports! If this doesn’t work, check if your drive is compatible (use the devices compatibility wiki at the top of this readmii) 
+
+Q: How can I use other usb devices (like Wii speak) in my games? 
+A: Install cIOSr12 or above. One port will be for the HDD and the other one for the device you want to use. 
+
+Q:Do I have to rename all my games manually? 
+A:No. You can use wiitdb.zip to rename games automatically. More info in [2c] 
+
+Q: Can I use the titles.txt to rename my games 
+A: No. Support for titles.txt has been dropped. Use wiitdb.zip
+
+
+Q: I saw there is a newer rev available. Why can't update with the loader (it says no update available)? 
+A: The updates for the loader are on a different server. Not every rev will be available for download.  Most revs will be available from http://usbloadergx.koureio.net/downloads/revisions.
+
+
+Q: What does update all do? 
+A: It updates the dol (the loader itself), the icon.png and meta.xml for HBC, the language files and wiitdb.zip 
+
+Q: Can I update the full channel? 
+A: Yes.  If you have the channel version installed, there will be no update all function. If you do see this button, the channel is not correctly modified (see [2a]) so you can’t update it (also check the rev# in the credits, it should end with the letter c). In that case get another channel.
+
+
+Q: Where can I see my rev# ? 
+A: Go to the Credits. The rev# will be at the top right corner. If it ends with c you are using the full channel.
+
+
+Q: Can I use this loader in my own language? 
+A: This loader currently supports: Chinese (simple and trad.), Czech, Danish, Dutch, English, Finnish, French, German, Hungarian, Italian, Japanese, Korean, Norwegian, Polish, Portuguese, Russian, Spanish, Swedish, Thai and Turkish. 
+All languages are frequently updated by the GX language teams (I'm the Dutch translator). You can find us at http://gbatemp.net/index.php?showtopic=155252
+
+
+Q: I have a problem and the answer is not in this readmii. What do I do? 
+A: You can always ask questions at the GX forum: http://forum.koureio.net/ .You can find me (tj_cool) and the GX team there as well.

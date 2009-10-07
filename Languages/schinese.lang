@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# schinese.lang - r773
+# schinese.lang - r778
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-01 15:35+0200\n"
+"POT-Creation-Date: 2009-10-05 14:51+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: knife.hu kavid\n"
 "Language-Team: kavid\n"
@@ -349,6 +349,9 @@ msgstr "设计:"
 
 msgid "Developed by"
 msgstr "开发"
+
+msgid "Directory does not exist!"
+msgstr "目录不存在"
 
 msgid "Disc Artwork Download"
 msgstr "光盘图片下载"
@@ -973,6 +976,9 @@ msgstr "TXT 作弊码文件路径"
 
 msgid "TXT Cheatcodes Path changed"
 msgstr "TXT 作弊码文件路径已变更"
+
+msgid "The entered directory does not exist. Would you like to create it?"
+msgstr "已进入的目录不存在。你想要创建一个目录吗？"
 
 msgid "The file is not a .wad"
 msgstr "这不是一个 WAD 文件"

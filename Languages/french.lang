@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# French V10.1 r771
+# French V10.2 r779
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-01 15:35+0200\n"
+"POT-Creation-Date: 2009-10-05 14:51+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Kin8\n"
 "Language-Team: Badablek, Amour, ikya, dj_skual & Kin8\n"
@@ -349,6 +349,9 @@ msgstr "Graphisme:"
 
 msgid "Developed by"
 msgstr "Développé par"
+
+msgid "Directory does not exist!"
+msgstr "Répertoire inexistant!"
 
 msgid "Disc Artwork Download"
 msgstr "Téléch. Labels DVD"
@@ -750,7 +753,7 @@ msgid "Normal"
 msgstr "4:3"
 
 msgid "Normal Covers"
-msgstr "Normales"
+msgstr "Jaquettes 2D"
 
 msgid "Not Found"
 msgstr "Pas trouvé"
@@ -973,6 +976,9 @@ msgstr "Dossier TXT de Triche"
 
 msgid "TXT Cheatcodes Path changed"
 msgstr "Dossier TXT de Triche modifié"
+
+msgid "The entered directory does not exist. Would you like to create it?"
+msgstr "Répertoire entré inexistant. Voudriez-vous le créer ?"
 
 msgid "The file is not a .wad"
 msgstr "Le fichier n'est pas un .wad"

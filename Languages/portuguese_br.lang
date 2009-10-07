@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-01 15:35+0200\n"
+"POT-Creation-Date: 2009-10-05 14:51+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: boto12\n"
 "Language-Team: \n"
@@ -349,6 +349,9 @@ msgstr "Desenho:"
 
 msgid "Developed by"
 msgstr "Desenvolvido por"
+
+msgid "Directory does not exist!"
+msgstr ""
 
 msgid "Disc Artwork Download"
 msgstr "Baixar Imagens Disco"
@@ -973,6 +976,9 @@ msgstr "Pasta Dicas"
 
 msgid "TXT Cheatcodes Path changed"
 msgstr "Pasta de Dicas alterada"
+
+msgid "The entered directory does not exist. Would you like to create it?"
+msgstr ""
 
 msgid "The file is not a .wad"
 msgstr "O arquivo não é um .wad"

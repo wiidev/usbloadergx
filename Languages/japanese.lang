@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# japanese.lang - r774
+# japanese.lang - r778
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-01 15:35+0200\n"
+"POT-Creation-Date: 2009-10-05 14:51+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: \n"
@@ -264,7 +264,7 @@ msgid "Could not initialize DIP module!"
 msgstr "DIPﾓｼﾞｭｰﾙを初期化できません!"
 
 msgid "Could not initialize network!"
-msgstr "ﾈｯﾄﾜｰｸを初期化できません!"
+msgstr "ﾈｯﾄﾜｰｸを初期化できませんでした!"
 
 msgid "Could not open Disc"
 msgstr "ﾃﾞｨｽｸを開けません"
@@ -285,7 +285,7 @@ msgid "Could not set USB."
 msgstr "USBをｾｯﾄできません"
 
 msgid "Cover Download"
-msgstr "ｶﾊﾞｰ ﾀﾞｳﾝﾛｰﾄﾞ"
+msgstr "どのｶﾊﾞｰをﾀﾞｳﾝﾛｰﾄﾞしますかﾞ"
 
 msgid "Cover Path Change"
 msgstr "カバーのパスの変更"
@@ -303,7 +303,7 @@ msgid "Custom Paths"
 msgstr "パスを変更"
 
 msgid "Customs/Original"
-msgstr "自作と公式"
+msgstr "自作メイン"
 
 msgid "DOL Path"
 msgstr "DOLのパス"
@@ -339,16 +339,19 @@ msgid "Delete Cheat TXT"
 msgstr "ﾃｷｽﾄｺｰﾄﾞの削除"
 
 msgid "Delete Cover Artwork"
-msgstr "ｶﾊﾞｰｲﾒｰｼﾞの削除"
+msgstr "ｶﾊﾞｰ画像の削除"
 
 msgid "Delete Disc Artwork"
-msgstr "ﾃﾞｨｽｸｲﾒｰｼﾞの削除"
+msgstr "ﾃﾞｨｽｸ画像の削除"
 
 msgid "Design:"
 msgstr "ﾃﾞｻﾞｲﾝ:"
 
 msgid "Developed by"
 msgstr "開発者："
+
+msgid "Directory does not exist!"
+msgstr "ﾃﾞｨﾚｸﾄﾘがありません"
 
 msgid "Disc Artwork Download"
 msgstr "ﾀﾞｳﾝﾛｰﾄﾞするﾃﾞｨｽｸ画像"
@@ -360,19 +363,19 @@ msgid "Disc Default"
 msgstr "ﾃﾞｨｽｸのﾃﾞﾌｫﾙﾄ"
 
 msgid "Disc Images"
-msgstr "ﾃﾞｨｽｸｲﾒｰｼﾞ"
+msgstr "ﾃﾞｨｽｸ画像"
 
 msgid "Disc Path Changed"
-msgstr "ﾃﾞｨｽｸのパスを変更しました"
+msgstr "ﾃﾞｨｽｸ画像のパスを変更しました"
 
 msgid "Disc Path change"
-msgstr "ﾃﾞｨｽｸのパスの変更"
+msgstr "ﾃﾞｨｽｸ画像のパスの変更"
 
 msgid "DiskFlip"
 msgstr ""
 
 msgid "Display"
-msgstr "表示方法"
+msgstr "ｹﾞｰﾑ情報"
 
 msgid "Display as a carousel"
 msgstr "回転ﾄﾚｲ風に表示"
@@ -402,22 +405,22 @@ msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "既知の代替DOLを利用しますか？"
 
 msgid "Do you wish to update/download all language files?"
-msgstr "すべての言語ﾌｧｲﾙをﾀﾞｳﾝﾛｰﾄﾞしますか？"
+msgstr "すべての言語をﾀﾞｳﾝﾛｰﾄﾞしますか？"
 
 msgid "Done!"
 msgstr "完了！"
 
 msgid "Download Boxart image?"
-msgstr "ﾊﾟｯｹｰｼﾞ画像をﾀﾞｳﾝﾛｰﾄﾞしますか？"
+msgstr "画像をﾀﾞｳﾝﾛｰﾄﾞしますか？"
 
 msgid "Download Discart image?"
-msgstr "ﾃﾞｨｽｸ画像をﾀﾞｳﾝﾛｰﾄﾞしますか？"
+msgstr "画像をﾀﾞｳﾝﾛｰﾄﾞしますか？"
 
 msgid "Download Now"
 msgstr "今すぐﾀﾞｳﾝﾛｰﾄﾞ"
 
 msgid "Download finished"
-msgstr "ﾀﾞｳﾝﾛｰﾄﾞを終了しました"
+msgstr "ﾀﾞｳﾝﾛｰﾄﾞが終了しました"
 
 msgid "Downloading"
 msgstr "ﾀﾞｳﾝﾛｰﾄﾞします"
@@ -489,7 +492,7 @@ msgid "Formatting, please wait..."
 msgstr "初期化中です、暫くお待ち下さい..."
 
 msgid "Free Space"
-msgstr "空き容量"
+msgstr "空き"
 
 msgid "French"
 msgstr "ﾌﾗﾝｽ語"
@@ -687,7 +690,7 @@ msgid "May"
 msgstr "5月"
 
 msgid "Missing files"
-msgstr "未検出ﾌｧｲﾙ"
+msgstr "つの画像"
 
 msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr "4で割り切れない寸法があります。"
@@ -717,10 +720,10 @@ msgid "No Cheatfile found"
 msgstr "ﾁｰﾄﾌｧｲﾙが見つかりません"
 
 msgid "No DOL file found on disc."
-msgstr "ﾃﾞｨｽｸ内にDOLﾌｧｲﾙがありません"
+msgstr "ﾃﾞｨｽｸ内に.DOLがありません"
 
 msgid "No Favorites"
-msgstr "お気に入りがありません"
+msgstr "お気に入りが選ばれていません"
 
 msgid "No SD-Card inserted!"
 msgstr "SDｶｰﾄﾞが挿入されていません!"
@@ -798,7 +801,7 @@ msgid "Only for Install"
 msgstr "ｲﾝｽﾄｰﾙ時のみ"
 
 msgid "Original/Customs"
-msgstr "公式と自作"
+msgstr "公式メイン"
 
 msgid "Parental Control"
 msgstr "ペアレンタルコントロール"
@@ -819,7 +822,7 @@ msgid "Paste it into your browser to get your WiiTDB.zip."
 msgstr "ﾌﾞﾗｳｻﾞに貼付けるとWiiTDB.zipをﾀﾞｳﾝﾛｰﾄﾞできます。"
 
 msgid "Patch Country Strings"
-msgstr "CountryStrﾊﾟｯﾁ"
+msgstr "国の文字列ﾊﾟｯﾁ"
 
 msgid "Pick from a list"
 msgstr "ﾘｽﾄから選択"
@@ -973,6 +976,9 @@ msgstr "TXTｺｰﾄﾞのパス"
 
 msgid "TXT Cheatcodes Path changed"
 msgstr "TXTｺｰﾄﾞのパスを変更しました"
+
+msgid "The entered directory does not exist. Would you like to create it?"
+msgstr "ﾃﾞｨﾚｸﾄﾘがありません。作りますか？"
 
 msgid "The file is not a .wad"
 msgstr "wadﾌｧｲﾙではありません"
@@ -1159,13 +1165,13 @@ msgid "does not exist!  You Messed something up, Idiot."
 msgstr "存在しません!"
 
 msgid "file left"
-msgstr "残りのﾌｧｲﾙ数"
+msgstr "つ未完了"
 
 msgid "files left"
-msgstr "残りのﾌｧｲﾙ数"
+msgstr "つ未完了"
 
 msgid "files not found on the server!"
-msgstr "ｻｰﾊﾞｰにﾌｧｲﾙがありません!"
+msgstr "つｻｰﾊﾞｰにありませんでした!"
 
 msgid "for"
 msgstr ""
@@ -1186,16 +1192,16 @@ msgid "for the USB Loader source"
 msgstr "…ｿｰｽを制作"
 
 msgid "formatted!"
-msgstr "初期化完了!"
+msgstr "初期化を完了しました!"
 
 msgid "free"
-msgstr "空き容量"
+msgstr "空き"
 
 msgid "not set"
 msgstr "ｾｯﾄされていません"
 
 msgid "of"
-msgstr ""
+msgstr "中"
 
 msgid "seconds left"
 msgstr "完了までの秒数"

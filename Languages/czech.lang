@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-01 15:35+0200\n"
+"POT-Creation-Date: 2009-10-05 14:51+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) \n"
 "Language-Team: r719 - last version on http://volny.cz/djelinek/_USBLoderGX/czech.lang \n"
@@ -349,6 +349,9 @@ msgstr ""
 
 msgid "Developed by"
 msgstr "Vyvinul"
+
+msgid "Directory does not exist!"
+msgstr ""
 
 msgid "Disc Artwork Download"
 msgstr "Stažení potisku DVD"
@@ -973,6 +976,9 @@ msgstr "Cesta k TXT cheatum"
 
 msgid "TXT Cheatcodes Path changed"
 msgstr "Cesta k TXT cheatum zmenena"
+
+msgid "The entered directory does not exist. Would you like to create it?"
+msgstr ""
 
 msgid "The file is not a .wad"
 msgstr "Soubor není typu WAD"
