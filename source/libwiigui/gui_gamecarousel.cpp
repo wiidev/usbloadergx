@@ -479,7 +479,7 @@ void GuiGameCarousel::Update(GuiTrigger * t)
 			int ii = pagesize-1;
 			gameIndex[ii]		= OFFSETLIMIT(listOffset + ii, gameCnt);
 			titleTT[ii]			= tmpTT;
-			titleTT[ii]			->SetText(get_title(&gameList[gameIndex[0]]));
+			titleTT[ii]			->SetText(get_title(&gameList[gameIndex[ii]]));
 			coverImg[ii]		= new GuiImageAsync(GameCarouselLoadCoverImage, &gameList[gameIndex[ii]], sizeof(struct discHdr), &noCover);
 			coverImg[ii]		->SetWidescreen(CFG.widescreen);
 
