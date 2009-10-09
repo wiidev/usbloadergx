@@ -1,5 +1,5 @@
 #include "http.h"
-
+#include "../svnrev.h"
 
 extern char incommingIP[50];
 
@@ -10,7 +10,8 @@ extern char incommingIP[50];
 const struct block emptyblock = {0, NULL};
 
 //The maximum amount of bytes to send per net_write() call
-#define NET_BUFFER_SIZE 1024
+//#define NET_BUFFER_SIZE 1024
+#define NET_BUFFER_SIZE 3600
 
 // Write our message to the server
 static s32 send_message(s32 server, char *msg) {
@@ -173,9 +174,9 @@ struct block downloadfile(const char *url) {
     }
 
     //Form a nice request header to send to the webserver
-    char* headerformat = "GET %s HTTP/1.0\r\nHost: %s\r\nUser-Agent: WiiEarthh 1.0\r\n\r\n";;
+    char* headerformat = "GET %s HTTP/1.0\r\nHost: %s\r\nUser-Agent: USBLoaderGX r%s\r\n\r\n";;
     char header[strlen(headerformat) + strlen(domain) + strlen(path)];
-    sprintf(header, headerformat, path, domain);
+    sprintf(header, headerformat, path, domain, GetRev());
 
     //Do the request and get the response
     send_message(connection, header);

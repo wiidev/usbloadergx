@@ -945,20 +945,18 @@ int MenuDiscList() {
             }
 
         } else if (gamecntBtn.GetState() == STATE_CLICKED && mountMethod!=3) {
-            
+			gamecntBtn.ResetState();
 			char linebuf[150];
 			snprintf(linebuf, sizeof(linebuf), "%s %sGameList ?",tr("Save Game List to"), Settings.update_path);
-            
-			choice = WindowPrompt(0,linebuf, "txt","csv",tr("Back"));
-        
-			if (save_gamelist(choice-1))
-				WindowPrompt(0,tr("Saved"), tr("OK"));
-			else
-				WindowPrompt(tr("Error"),tr("Could not save."), tr("OK"));
+			choice = WindowPrompt(0,linebuf,"TXT","CSV",tr("Back"));
+			if (choice) {
+				if (save_gamelist(choice-1))
+					WindowPrompt(0,tr("Saved"),tr("OK"));
+				else
+					WindowPrompt(tr("Error"),tr("Could not save."),tr("OK"));
+			}
 			menu = MENU_DISCLIST;
 			break;
-			
-			//gamecntBtn.ResetState();
 
         } else if (homeBtn.GetState() == STATE_CLICKED) {
             s32 thetimeofbg = bgMusic->GetPlayTime();

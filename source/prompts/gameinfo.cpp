@@ -1085,16 +1085,18 @@ bool save_XML_URL() { // save xml url as as txt file for people without wifi
     //make sure that all games are added to the gamelist
     __Menu_GetEntries(1);
 
-    char XMLurl[2040];
+    char XMLurl[3540];
     char filename[10];
 
-    snprintf(XMLurl,sizeof(XMLurl),"http://wiitdb.com/wiitdb.zip?LANG=%s?ID=", Settings.db_language);
+    snprintf(XMLurl,sizeof(XMLurl),"http://wiitdb.com/wiitdb.zip?LANG=%s&ID=", Settings.db_language);
     unsigned int i;
     for (i = 0; i < gameCnt ; i++) {
         struct discHdr* header = &gameList[i];
         if (i<500) {
-            snprintf(filename,sizeof(filename),"%c%c%c", header->id[1], header->id[2], header->id[3]);
-            strncat(XMLurl, filename,3 );
+            //snprintf(filename,sizeof(filename),"%c%c%c", header->id[1], header->id[2], header->id[3]);
+            //strncat(XMLurl, filename,3 );
+			snprintf(filename,sizeof(filename),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
+            strncat(XMLurl,filename,6);
             if ((i!=gameCnt-1)&&(i<500))
                 strncat(XMLurl, ",",1);
         }

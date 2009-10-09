@@ -1353,8 +1353,10 @@ int MenuSettings() {
                                             cfg_save_global();
                                         }
                                         mainWindow->Remove(bgImg);
+										HaltGui();
                                         CFG_Load();
                                         CFG_LoadGlobal();
+										ResumeGui();
                                         menu = MENU_SETTINGS;
 #ifdef HW_RVL
                                         snprintf(imgPath, sizeof(imgPath), "%splayer1_point.png", CFG.theme_path);

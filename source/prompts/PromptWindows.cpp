@@ -2488,16 +2488,18 @@ int ProgressUpdateWindow() {
     }
 
     //make the URL to get XML based on our games
-    char XMLurl[2040];
+    char XMLurl[3540]; // NET_BUFFER_SIZE in http.c needs to be set to size of XMLurl + 40
     char filename[10];
     __Menu_GetEntries(1);
-    snprintf(XMLurl,sizeof(XMLurl),"http://wiitdb.com/wiitdb.zip?LANG=%s?ID=",Settings.db_language);
+    snprintf(XMLurl,sizeof(XMLurl),"http://wiitdb.com/wiitdb.zip?LANG=%s&ID=",Settings.db_language);
     unsigned int i;
     for (i = 0; i < gameCnt ; i++) {
         struct discHdr* header = &gameList[i];
         if (i<500) {
-            snprintf(filename,sizeof(filename),"%c%c%c", header->id[1], header->id[2], header->id[3]);
-            strncat(XMLurl, filename,3 );
+            //snprintf(filename,sizeof(filename),"%c%c%c", header->id[1], header->id[2], header->id[3]);
+            //strncat(XMLurl,filename,3);
+            snprintf(filename,sizeof(filename),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
+            strncat(XMLurl,filename,6);
             if ((i!=gameCnt-1)&&(i<500))
                 strncat(XMLurl, ",",1);
         }
