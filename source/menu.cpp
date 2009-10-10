@@ -407,34 +407,36 @@ int MenuDiscList() {
 
     snprintf(imgPath, sizeof(imgPath), "%sfavIcon.png", CFG.theme_path);
     GuiImageData imgfavIcon(imgPath, favIcon_png);
-//    snprintf(imgPath, sizeof(imgPath), "%sfavIcon_gray.png", CFG.theme_path);
-//    GuiImageData imgfavIcon_gray(imgPath, favIcon_gray_png);
+    snprintf(imgPath, sizeof(imgPath), "%sfavIcon_gray.png", CFG.theme_path);
+    GuiImageData imgfavIcon_gray(imgPath, NULL);
     snprintf(imgPath, sizeof(imgPath), "%ssearchIcon.png", CFG.theme_path);
     GuiImageData imgsearchIcon(imgPath, searchIcon_png);
-//    snprintf(imgPath, sizeof(imgPath), "%ssearchIcon_gray.png", CFG.theme_path);
-//    GuiImageData imgsearchIcon_gray(imgPath, searchIcon_gray_png);
+    snprintf(imgPath, sizeof(imgPath), "%ssearchIcon_gray.png", CFG.theme_path);
+    GuiImageData imgsearchIcon_gray(imgPath, NULL);
     snprintf(imgPath, sizeof(imgPath), "%sabcIcon.png", CFG.theme_path);
     GuiImageData imgabcIcon(imgPath, abcIcon_png);
-//    snprintf(imgPath, sizeof(imgPath), "%sabcIcon_gray.png", CFG.theme_path);
-//    GuiImageData imgabcIcon_gray(imgPath, abcIcon_gray_png);
+    snprintf(imgPath, sizeof(imgPath), "%sabcIcon_gray.png", CFG.theme_path);
+    GuiImageData imgabcIcon_gray(imgPath, NULL);
     snprintf(imgPath, sizeof(imgPath), "%splayCountIcon.png", CFG.theme_path);
     GuiImageData imgplayCountIcon(imgPath, playCountIcon_png);
-//    snprintf(imgPath, sizeof(imgPath), "%splayCountIcon_gray.png", CFG.theme_path);
-//    GuiImageData imgplayCountIcon_gray(imgPath, playCountIcon_gray_png);
+    snprintf(imgPath, sizeof(imgPath), "%splayCountIcon_gray.png", CFG.theme_path);
+    GuiImageData imgplayCountIcon_gray(imgPath, NULL);
     snprintf(imgPath, sizeof(imgPath), "%sarrangeGrid.png", CFG.theme_path);
     GuiImageData imgarrangeGrid(imgPath, arrangeGrid_png);
-//    snprintf(imgPath, sizeof(imgPath), "%sarrangeGrid_gray.png", CFG.theme_path);
-//    GuiImageData imgarrangeGrid_gray(imgPath, arrangeGrid_gray_png);
+    snprintf(imgPath, sizeof(imgPath), "%sarrangeGrid_gray.png", CFG.theme_path);
+    GuiImageData imgarrangeGrid_gray(imgPath, NULL);
     snprintf(imgPath, sizeof(imgPath), "%sarrangeList.png", CFG.theme_path);
     GuiImageData imgarrangeList(imgPath, arrangeList_png);
-//    snprintf(imgPath, sizeof(imgPath), "%sarrangeList_gray.png", CFG.theme_path);
-//    GuiImageData imgarrangeList_gray(imgPath, arrangeList_gray_png);
+    snprintf(imgPath, sizeof(imgPath), "%sarrangeList_gray.png", CFG.theme_path);
+    GuiImageData imgarrangeList_gray(imgPath, NULL);
     snprintf(imgPath, sizeof(imgPath), "%sarrangeCarousel.png", CFG.theme_path);
     GuiImageData imgarrangeCarousel(imgPath, arrangeCarousel_png);
-//    snprintf(imgPath, sizeof(imgPath), "%sarrangeCarousel_gray.png", CFG.theme_path);
-//    GuiImageData imgarrangeCarousel_gray(imgPath, arrangeCarousel_gray_png);
+    snprintf(imgPath, sizeof(imgPath), "%sarrangeCarousel_gray.png", CFG.theme_path);
+    GuiImageData imgarrangeCarousel_gray(imgPath, NULL);
     snprintf(imgPath, sizeof(imgPath), "%sdvd.png", CFG.theme_path);
     GuiImageData imgdvd(imgPath, dvd_png);
+    snprintf(imgPath, sizeof(imgPath), "%sdvd_gray.png", CFG.theme_path);
+    GuiImageData imgdvd_gray(imgPath, NULL);
 
     snprintf(imgPath, sizeof(imgPath), "%sbrowser.png", CFG.theme_path);
     GuiImageData homebrewImgData(imgPath, browser_png);
@@ -546,8 +548,9 @@ int MenuDiscList() {
     favoriteBtnTT.SetAlpha(THEME.tooltipAlpha);
     GuiImage favoriteBtnImg(&imgfavIcon);
     favoriteBtnImg.SetWidescreen(CFG.widescreen);
-    GuiImage favoriteBtnImg_g(favoriteBtnImg);favoriteBtnImg_g.SetGrayscale();
-//    GuiImage favoriteBtnImg_g(&imgfavIcon_gray);
+//    GuiImage favoriteBtnImg_g(favoriteBtnImg);favoriteBtnImg_g.SetGrayscale();
+    GuiImage favoriteBtnImg_g(&imgfavIcon_gray);
+	if(favoriteBtnImg_g.GetImage() == NULL) { favoriteBtnImg_g = favoriteBtnImg; favoriteBtnImg_g.SetGrayscale();}
     favoriteBtnImg_g.SetWidescreen(CFG.widescreen);
     GuiButton favoriteBtn(&favoriteBtnImg_g,&favoriteBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_favorite_x, THEME.gamelist_favorite_y, &trigA, &btnSoundOver, &btnClick,1, &favoriteBtnTT, -15, 52, 0, 3);
     favoriteBtn.SetAlpha(180);
@@ -558,8 +561,9 @@ int MenuDiscList() {
     searchBtnTT.SetAlpha(THEME.tooltipAlpha);
     GuiImage searchBtnImg(&imgsearchIcon);
     searchBtnImg.SetWidescreen(CFG.widescreen);
-    GuiImage searchBtnImg_g(searchBtnImg); searchBtnImg_g.SetGrayscale();
-//    GuiImage searchBtnImg_g(&imgsearchIcon_gray);
+//    GuiImage searchBtnImg_g(searchBtnImg); searchBtnImg_g.SetGrayscale();
+    GuiImage searchBtnImg_g(&imgsearchIcon_gray);
+	if(searchBtnImg_g.GetImage() == NULL) { searchBtnImg_g = searchBtnImg; searchBtnImg_g.SetGrayscale();}
     searchBtnImg_g.SetWidescreen(CFG.widescreen);
     GuiButton searchBtn(&searchBtnImg_g,&searchBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_search_x, THEME.gamelist_search_y, &trigA, &btnSoundOver, &btnClick,1, &searchBtnTT, -15, 52, 0, 3);
     searchBtn.SetAlpha(180);
@@ -570,8 +574,9 @@ int MenuDiscList() {
     abcBtnTT.SetAlpha(THEME.tooltipAlpha);
     GuiImage abcBtnImg(&imgabcIcon);
     abcBtnImg.SetWidescreen(CFG.widescreen);
-    GuiImage abcBtnImg_g(abcBtnImg); abcBtnImg_g.SetGrayscale();
-//    GuiImage abcBtnImg_g(&imgabcIcon_gray);
+//    GuiImage abcBtnImg_g(abcBtnImg); abcBtnImg_g.SetGrayscale();
+    GuiImage abcBtnImg_g(&imgabcIcon_gray);
+	if(abcBtnImg_g.GetImage() == NULL) { abcBtnImg_g = abcBtnImg; abcBtnImg_g.SetGrayscale();}
     abcBtnImg_g.SetWidescreen(CFG.widescreen);
     GuiButton abcBtn(&abcBtnImg_g,&abcBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_abc_x, THEME.gamelist_abc_y, &trigA, &btnSoundOver, &btnClick,1,&abcBtnTT, -15, 52, 0, 3);
     abcBtn.SetAlpha(180);
@@ -582,8 +587,9 @@ int MenuDiscList() {
     countBtnTT.SetAlpha(THEME.tooltipAlpha);
     GuiImage countBtnImg(&imgplayCountIcon);
     countBtnImg.SetWidescreen(CFG.widescreen);
-    GuiImage countBtnImg_g(countBtnImg); countBtnImg_g.SetGrayscale();
-//    GuiImage countBtnImg_g(&imgplayCountIcon_gray);
+//    GuiImage countBtnImg_g(countBtnImg); countBtnImg_g.SetGrayscale();
+    GuiImage countBtnImg_g(&imgplayCountIcon_gray);
+	if(countBtnImg_g.GetImage() == NULL) { countBtnImg_g = countBtnImg; countBtnImg_g.SetGrayscale();}
     countBtnImg_g.SetWidescreen(CFG.widescreen);
     GuiButton countBtn(&countBtnImg_g,&countBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_count_x, THEME.gamelist_count_y, &trigA, &btnSoundOver, &btnClick,1, &countBtnTT, -15, 52, 0, 3);
     countBtn.SetAlpha(180);
@@ -594,8 +600,9 @@ int MenuDiscList() {
     listBtnTT.SetAlpha(THEME.tooltipAlpha);
     GuiImage listBtnImg(&imgarrangeList);
     listBtnImg.SetWidescreen(CFG.widescreen);
-    GuiImage listBtnImg_g(listBtnImg); listBtnImg_g.SetGrayscale();
-//    GuiImage listBtnImg_g(&imgarrangeList_gray);
+//    GuiImage listBtnImg_g(listBtnImg); listBtnImg_g.SetGrayscale();
+    GuiImage listBtnImg_g(&imgarrangeList_gray);
+	if(listBtnImg_g.GetImage() == NULL) { listBtnImg_g = listBtnImg; listBtnImg_g.SetGrayscale();}
     listBtnImg_g.SetWidescreen(CFG.widescreen);
     GuiButton listBtn(&listBtnImg_g,&listBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_list_x, THEME.gamelist_list_y, &trigA, &btnSoundOver, &btnClick,1, &listBtnTT, 15, 52, 1, 3);
     listBtn.SetAlpha(180);
@@ -606,8 +613,9 @@ int MenuDiscList() {
     gridBtnTT.SetAlpha(THEME.tooltipAlpha);
     GuiImage gridBtnImg(&imgarrangeGrid);
     gridBtnImg.SetWidescreen(CFG.widescreen);
-    GuiImage gridBtnImg_g(gridBtnImg); gridBtnImg_g.SetGrayscale();
-//    GuiImage gridBtnImg_g(&imgarrangeGrid_gray);
+//    GuiImage gridBtnImg_g(gridBtnImg); gridBtnImg_g.SetGrayscale();
+    GuiImage gridBtnImg_g(&imgarrangeGrid_gray);
+	if(gridBtnImg_g.GetImage() == NULL) { gridBtnImg_g = gridBtnImg; gridBtnImg_g.SetGrayscale();}
     gridBtnImg_g.SetWidescreen(CFG.widescreen);
     GuiButton gridBtn(&gridBtnImg_g,&gridBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_grid_x, THEME.gamelist_grid_y, &trigA, &btnSoundOver, &btnClick,1, &gridBtnTT, 15, 52, 1, 3);
     gridBtn.SetAlpha(180);
@@ -618,8 +626,9 @@ int MenuDiscList() {
 	carouselBtnTT.SetAlpha(THEME.tooltipAlpha);
 	GuiImage carouselBtnImg(&imgarrangeCarousel);
 	carouselBtnImg.SetWidescreen(CFG.widescreen);
-	GuiImage carouselBtnImg_g(carouselBtnImg); carouselBtnImg_g.SetGrayscale();
-//	GuiImage carouselBtnImg_g(&imgarrangeCarousel_gray);
+//	GuiImage carouselBtnImg_g(carouselBtnImg); carouselBtnImg_g.SetGrayscale();
+	GuiImage carouselBtnImg_g(&imgarrangeCarousel_gray);
+	if(carouselBtnImg_g.GetImage() == NULL) { carouselBtnImg_g = carouselBtnImg; carouselBtnImg_g.SetGrayscale();}
 	carouselBtnImg_g.SetWidescreen(CFG.widescreen);
 	GuiButton carouselBtn(&carouselBtnImg_g,&carouselBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_carousel_x, THEME.gamelist_carousel_y, &trigA, &btnSoundOver, &btnClick,1, &carouselBtnTT, 15, 52, 1, 3);
 	carouselBtn.SetAlpha(180);
