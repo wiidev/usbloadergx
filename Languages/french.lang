@@ -1,5 +1,5 @@
 # USB Loader GX language source file.
-# French V10.2 r779
+# French V10.3 r781
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
@@ -978,7 +978,7 @@ msgid "TXT Cheatcodes Path changed"
 msgstr "Dossier TXT de Triche modifié"
 
 msgid "The entered directory does not exist. Would you like to create it?"
-msgstr "Répertoire entré inexistant. Voudriez-vous le créer ?"
+msgstr "Répertoire indiqué inexistant. Souhaitez-vous le créer ?"
 
 msgid "The file is not a .wad"
 msgstr "Le fichier n'est pas un .wad"

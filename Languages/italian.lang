@@ -1,5 +1,5 @@
 # USB Loader GX language source file.
-# italian.lang - v43 - r771
+# italian.lang - v44 - r779
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
@@ -351,7 +351,7 @@ msgid "Developed by"
 msgstr "Sviluppato da"
 
 msgid "Directory does not exist!"
-msgstr ""
+msgstr "La cartella non esiste!"
 
 msgid "Disc Artwork Download"
 msgstr "Scaricamento Imm. Disco"
@@ -978,7 +978,7 @@ msgid "TXT Cheatcodes Path changed"
 msgstr "Percorso Trucchi in TXT modificato"
 
 msgid "The entered directory does not exist. Would you like to create it?"
-msgstr ""
+msgstr "La cartella indicata non esiste. Vuoi crearla?"
 
 msgid "The file is not a .wad"
 msgstr "Non è un file .wad"

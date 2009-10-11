@@ -1,5 +1,5 @@
 # USB Loader GX language source file.
-# thai.lang - r774
+# thai.lang - r779
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
@@ -351,7 +351,7 @@ msgid "Developed by"
 msgstr "พัฒนาโดย "
 
 msgid "Directory does not exist!"
-msgstr ""
+msgstr "ไม่พบไดเรคทอรี่นี้ !"
 
 msgid "Disc Artwork Download"
 msgstr "ดาวน์โหลดภาพแผ่น"
@@ -978,7 +978,7 @@ msgid "TXT Cheatcodes Path changed"
 msgstr "ที่เก็บ TXTCheatcodes ถูกเปลี่ยนแปลง"
 
 msgid "The entered directory does not exist. Would you like to create it?"
-msgstr ""
+msgstr "ไม่พบไดเรคทอรี่นี้ ต้องการสร้างใหม่รึไม่ ?"
 
 msgid "The file is not a .wad"
 msgstr "ไม่ใช่ไฟล์ .wad"
