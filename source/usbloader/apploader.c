@@ -230,8 +230,31 @@ void Anti_002_fix(void *Address, int Size) {
     }
 }
 
+void PretendThereIsADiscInTheDrive(void *buffer, u32 len)
+
+{
+   const u8 oldcode[] = { 0x54, 0x60, 0xF7, 0xFF, 0x40, 0x82, 0x00, 0x0C, 0x54, 0x60, 0x07, 0xFF, 0x41, 0x82, 0x00, 0x0C };
+   const u8 newcode[] = { 0x54, 0x60, 0xF7, 0xFF, 0x40, 0x82, 0x00, 0x0C, 0x54, 0x60, 0x07, 0xFF, 0x48, 0x00, 0x00, 0x0C };
+
+  int n;
+
+     /* Patch cover register */
+
+  for(n=0;n<(len-sizeof(oldcode));n+=4)
+  {
+    if (memcmp(buffer+n, (void *) oldcode, sizeof(oldcode)) == 0) 
+    {
+      memcpy(buffer+n, (void *) newcode, sizeof(newcode));
+    }
+  }
+
+}
+
 void gamepatches(void * dst, int len, u8 videoSelected, u8 patchcountrystring, u8 vipatch) {
-    GXRModeObj** table = NULL;
+    
+	PretendThereIsADiscInTheDrive(dst, len);
+	
+	GXRModeObj** table = NULL;
     if (videoSelected == 5) // patch
 
     {
