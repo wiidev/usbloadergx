@@ -527,23 +527,51 @@ void path_set(char *name, char *val) {
 
 }
 
-#define CFG_COORDS2(name)										\
-	if (strcmp(cfg_name, #name "_coords") == 0) {			\
-		short x,y;											\
-		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {			\
-			THEME.name##_x = x;								\
-			THEME.name##_y = y;								\
-		}													\
+static u32 wCOORDS_FLAGS[2] = {0, 0}; // space for 64 coords - this is enough, also for the future
+#define GET_wCOORD_FLAG(i)	(wCOORDS_FLAGS[i/32] & (1UL << (i%32)))
+#define SET_wCOORD_FLAG(i)	(wCOORDS_FLAGS[i/32] |= (1UL << (i%32)))
+#define CLEAR_wCOORD_FLAGS	(wCOORDS_FLAGS[0] = wCOORDS_FLAGS[1] = 0)
+
+
+#define CFG_COORDS2(name)											\
+	if ((wcoords_idx++, 1) && !GET_wCOORD_FLAG(wcoords_idx) && 		\
+						strcmp(cfg_name, #name "_coords") == 0) {	\
+		short x,y;													\
+		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {					\
+			THEME.name##_x = x;										\
+			THEME.name##_y = y;										\
+		}															\
+	}																\
+	else if (CFG.widescreen && 										\
+				strcmp(cfg_name, "w" #name "_coords") == 0) {		\
+		short x,y;													\
+		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {					\
+			THEME.name##_x = x;										\
+			THEME.name##_y = y;										\
+			SET_wCOORD_FLAG(wcoords_idx);							\
+		}															\
 	}
 #define CFG_COORDS4(name)											\
-	if (strcmp(cfg_name, #name "_coords") == 0) {				\
-	short x,y,w,h;												\
-	if (sscanf(val, "%hd,%hd,%hd,%hd", &x, &y, &w, &h) == 4) {	\
-		THEME.name##_x = x;										\
-		THEME.name##_y = y;										\
-		THEME.name##_w = w;										\
-		THEME.name##_h = h;										\
-		}														\
+	if ((wcoords_idx++, 1) && !GET_wCOORD_FLAG(wcoords_idx) && 		\
+						strcmp(cfg_name, #name "_coords") == 0) {	\
+		short x,y,w,h;												\
+		if (sscanf(val, "%hd,%hd,%hd,%hd", &x, &y, &w, &h) == 4) {	\
+			THEME.name##_x = x;										\
+			THEME.name##_y = y;										\
+			THEME.name##_w = w;										\
+			THEME.name##_h = h;										\
+		}															\
+	}																\
+	else if (CFG.widescreen && 										\
+				strcmp(cfg_name, "w" #name "_coords") == 0) {		\
+	short x,y,w,h;													\
+	if (sscanf(val, "%hd,%hd,%hd,%hd", &x, &y, &w, &h) == 4) {		\
+			THEME.name##_x = x;										\
+			THEME.name##_y = y;										\
+			THEME.name##_w = w;										\
+			THEME.name##_h = h;										\
+			SET_wCOORD_FLAG(wcoords_idx);							\
+		}															\
 	}
 #define CFG_COLOR(name)												\
 	if (strcmp(cfg_name, #name "_color") == 0) {					\
@@ -577,14 +605,14 @@ void path_set(char *name, char *val) {
 #define OLD_LIST_ICON		 8
 #define OLD_GRID_ICON		16
 #define OLD_CAROUSEL_ICON	32
-#define OLD_DVD_ICON		64
-short WorkAroundIconSet=0;
-short WorkAroundBarOffset=100;
+static short WorkAroundIconSet=0;
+static short WorkAroundBarOffset=100;
 
 void theme_set(char *name, char *val) {
 	cfg_name = name;
 	cfg_val = val;
-
+	int wcoords_idx = -1;
+	
 	CFG_COORDS4(gamelist)
 	else CFG_COORDS4(gamegrid)
 	else CFG_COORDS4(gamecarousel)
@@ -756,17 +784,13 @@ void theme_set(char *name, char *val) {
 			THEME.gamegrid_carousel_x = THEME.gamecarousel_carousel_x = x-WorkAroundBarOffset;
 			THEME.gamelist_carousel_y = THEME.gamegrid_carousel_y = THEME.gamecarousel_carousel_y = y;
 			WorkAroundIconSet |= OLD_CAROUSEL_ICON;
-		}
-	}
 
-	else if (strcmp(cfg_name, "dvd_coords") == 0) {
-		short x,y;
-		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
-			if(!CFG.widescreen) x+=24;
+			// old themes have no dvd_coords
+			// place the dvdIcon to the right side of the carouselIcon
+			if(!CFG.widescreen) x+= CFG.widescreen ? 32 : 40;
 			THEME.gamelist_dvd_x = x;
 			THEME.gamegrid_dvd_x = THEME.gamecarousel_dvd_x = x-WorkAroundBarOffset;
 			THEME.gamelist_dvd_y = THEME.gamegrid_dvd_y = THEME.gamecarousel_dvd_y = y;
-			WorkAroundIconSet |= OLD_DVD_ICON;
 		}
 	}
 
@@ -804,9 +828,6 @@ void theme_set(char *name, char *val) {
 			{
 				THEME.gamegrid_carousel_x += WorkAroundBarOffset - o;
 				THEME.gamecarousel_carousel_x += WorkAroundBarOffset - o;
-			}
-			if(WorkAroundIconSet & OLD_DVD_ICON)
-			{
 				THEME.gamegrid_dvd_x += WorkAroundBarOffset - o;
 				THEME.gamecarousel_dvd_x += WorkAroundBarOffset - o;
 			}
@@ -1652,7 +1673,8 @@ void CFG_Load(void) {
     cfg_parsefile(pathname, &path_set); //then set config and layout options
 
 	WorkAroundIconSet=0; WorkAroundBarOffset=100; // set Workaroundstuff to defaults
-   snprintf(pathname, sizeof(pathname), "%sGXtheme.cfg", CFG.theme_path);
+	CLEAR_wCOORD_FLAGS;
+	snprintf(pathname, sizeof(pathname), "%sGXtheme.cfg", CFG.theme_path);
     cfg_parsefile(pathname, &theme_set); //finally set theme information
 
 	// set GUI language, use Wii's language setting if language is set to default

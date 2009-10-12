@@ -154,6 +154,116 @@ GuiImageData::GuiImageData(const char * imgPath, const u8 * buffer)
 }
 
 /**
+ * Constructor for the GuiImageData class.
+ */
+GuiImageData::GuiImageData(const char *path, const char *file, const u8 *buffer, bool force_widescreen/*=false*/, const u8 *wbuffer/*=NULL*/)
+{
+	data = NULL;
+	width = 0;
+	height = 0;
+	char path_4_3[100];
+	char path_16_9[100];
+	char *imgPath;
+
+	snprintf(path_4_3, sizeof(path_4_3), "%s%s", path, file);
+	if(force_widescreen)
+	{
+		snprintf(path_16_9, sizeof(path_16_9), "%sw%s", path, file);
+		imgPath = path_16_9;
+		if(wbuffer)
+			buffer = wbuffer;
+	}
+	else
+		imgPath = path_4_3;
+	
+	for(;;)
+	{
+		if(imgPath)
+		{
+			PNGUPROP imgProp;
+			IMGCTX ctx = PNGU_SelectImageFromDevice(imgPath);
+			//if (((4%imgProp.imgWidth)!=0)||((4%imgProp.imgHeight)!=0))idiotFlag=1;
+
+			if(ctx)
+			{
+				int res = PNGU_GetImageProperties(ctx, &imgProp);
+
+				if(res == PNGU_OK)
+				{
+					int len = imgProp.imgWidth * imgProp.imgHeight * 4;
+					if(len%32) len += (32-len%32);
+					data = (u8 *)memalign (32, len);
+
+					if(data)
+					{
+						res = PNGU_DecodeTo4x4RGBA8 (ctx, imgProp.imgWidth, imgProp.imgHeight, data, 255);
+
+						if(res == PNGU_OK)
+						{
+							width = imgProp.imgWidth;
+							height = imgProp.imgHeight;
+							DCFlushRange(data, len);
+						}
+						else
+						{
+							free(data);
+							data = NULL;
+							idiotFlag=1;
+							snprintf(idiotChar, sizeof(idiotChar), "%s", imgPath);
+						}
+					}
+				}
+				PNGU_ReleaseImageContext (ctx);
+			}
+		}
+		if(data || imgPath == path_4_3)
+			break;
+		imgPath = path_4_3;
+	}
+
+	if (!data) //use buffer data instead
+	{
+		width = 0;
+		height = 0;
+		if(buffer)
+		{
+			PNGUPROP imgProp;
+			IMGCTX ctx = PNGU_SelectImageFromBuffer(buffer);
+
+			if(!ctx)
+				return;
+
+			int res = PNGU_GetImageProperties(ctx, &imgProp);
+
+			if(res == PNGU_OK)
+			{
+				int len = imgProp.imgWidth * imgProp.imgHeight * 4;
+				if(len%32) len += (32-len%32);
+				data = (u8 *)memalign (32, len);
+
+				if(data)
+				{
+					res = PNGU_DecodeTo4x4RGBA8 (ctx, imgProp.imgWidth, imgProp.imgHeight, data, 255);
+
+					if(res == PNGU_OK)
+					{
+						width = imgProp.imgWidth;
+						height = imgProp.imgHeight;
+						DCFlushRange(data, len);
+					}
+					else
+					{
+						free(data);
+						data = NULL;
+					}
+				}
+			}
+			PNGU_ReleaseImageContext (ctx);
+		}
+	}
+}
+
+/**
  * Destructor for the GuiImageData class.
  */
 GuiImageData::~GuiImageData()

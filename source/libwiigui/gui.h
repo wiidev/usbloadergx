@@ -559,6 +559,7 @@ class GuiImageData
 		//!\param i Image data
 		GuiImageData(const u8 * i);
 		GuiImageData(const char * imgPath, const u8 * buffer);
+		GuiImageData(const char *path, const char *file, const u8 * buffer, bool force_widescreen=false, const u8 * wbuffer=NULL);
 		//!Destructor
 		~GuiImageData();
 		//!Gets a pointer to the image data
