@@ -222,28 +222,35 @@ void WindowCredits() {
     txt[i]->SetPosition(70,y);
     i++;
 
-    txt[i] = new GuiText("dimok / nIxx");
+    txt[i] = new GuiText("nIxx / giantpune");
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     txt[i]->SetPosition(220,y);
     i++;
-    y+=24;
+    y+=22;
 
-    txt[i] = new GuiText("giantpune / ardi");
+    txt[i] = new GuiText("ardi / lustar");
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     txt[i]->SetPosition(220,y);
     i++;
-    y+=24;
+    y+=22;
+
+    txt[i] = new GuiText("r-win");
+    txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+    txt[i]->SetPosition(220,y);
+    i++;
+    y+=22;
 
     char text[100];
 
-    sprintf(text, "hungyip84 / DrayX7 %s", tr("(both retired)"));
+    sprintf(text, "hungyip84 / DrayX7 %s", tr("(retired)"));
     txt[i] = new GuiText(text);
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     txt[i]->SetPosition(220,y);
     i++;
-    y+=24;
+    y+=22;
 
-    txt[i] = new GuiText("lustar");
+    sprintf(text, "dimok %s", tr("(retired)"));
+    txt[i] = new GuiText(text);
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     txt[i]->SetPosition(220,y);
     i++;
@@ -276,20 +283,20 @@ void WindowCredits() {
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     txt[i]->SetPosition(220,y);
     i++;
-    y+=24;
+    y+=22;
 
     sprintf(text, "CorneliousJD %s", tr("for hosting the update files"));
     txt[i] = new GuiText(text);
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     txt[i]->SetPosition(220,y);
     i++;
-    y+=30;
+    y+=22;
 
     txt[i] = new GuiText(tr("Special thanks to:"));
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     txt[i]->SetPosition(70,y);
     i++;
-    y+=24;
+    y+=22;
 
     sprintf(text, "Waninkoko, Kwiirk & Hermes %s", tr("for the USB Loader source"));
     txt[i] = new GuiText(text);
@@ -980,6 +987,41 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
     return choice;
 }
 
+void SetupFavoriteButton(GuiButton *btnFavorite, int xPos, GuiImage *img, GuiSound *sndOver, GuiSound *sndClick, GuiTrigger *trig)
+{
+    btnFavorite->SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+    btnFavorite->SetPosition(xPos, -60);
+    btnFavorite->SetImage(img);
+    btnFavorite->SetSoundOver(sndOver);
+    btnFavorite->SetSoundClick(sndClick);
+    btnFavorite->SetTrigger(trig);
+    btnFavorite->SetEffectGrow();
+}
+
+u8 SetFavorite(GuiButton *fav1, GuiButton *fav2, GuiButton *fav3, GuiButton *fav4, GuiButton *fav5, u8* gameId, u8 favorite)
+{
+	struct Game_NUM * game_num = CFG_get_game_num(gameId);
+	if (game_num) {
+		favoritevar = game_num->favorite;
+		playcount = game_num->count;
+	} else {
+		favoritevar = 0;
+		playcount = 0;
+	}
+	favoritevar = (favorite == favoritevar) ? 0 : favorite; // Press the current rank to reset the rank
+	CFG_save_game_num(gameId);
+	return favoritevar;
+}
+
+void SetFavoriteImages(GuiImage *b1, GuiImage *b2, GuiImage *b3, GuiImage *b4, GuiImage *b5, GuiImageData *on, GuiImageData *off)
+{
+	b1->SetImage(favoritevar >= 1 ? on : off);
+	b2->SetImage(favoritevar >= 2 ? on : off);
+	b3->SetImage(favoritevar >= 3 ? on : off);
+	b4->SetImage(favoritevar >= 4 ? on : off);
+	b5->SetImage(favoritevar >= 5 ? on : off);
+}					
+
 /****************************************************************************
  * GameWindowPrompt
  *
@@ -1111,17 +1153,29 @@ int GameWindowPrompt() {
     GuiButton btn3(&btn3Img,&btn3Img, 0, 4, 50, -40, &trigA, &btnSoundOver, &btnClick,1);
     btn3.SetLabel(&btn3Txt);
 
-    GuiImage btnFavoriteImg;
-    btnFavoriteImg.SetWidescreen(CFG.widescreen);
+    GuiImage btnFavoriteImg1;
+    btnFavoriteImg1.SetWidescreen(CFG.widescreen);
+    GuiImage btnFavoriteImg2;
+    btnFavoriteImg2.SetWidescreen(CFG.widescreen);
+    GuiImage btnFavoriteImg3;
+    btnFavoriteImg3.SetWidescreen(CFG.widescreen);
+    GuiImage btnFavoriteImg4;
+    btnFavoriteImg4.SetWidescreen(CFG.widescreen);
+    GuiImage btnFavoriteImg5;
+    btnFavoriteImg5.SetWidescreen(CFG.widescreen);
+
     //GuiButton btnFavorite(&btnFavoriteImg,&btnFavoriteImg, 2, 5, -125, -60, &trigA, &btnSoundOver, &btnClick,1);
-    GuiButton btnFavorite(imgFavorite.GetWidth(), imgFavorite.GetHeight());
-    btnFavorite.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-    btnFavorite.SetPosition(-125, -60);
-    btnFavorite.SetImage(&btnFavoriteImg);
-    btnFavorite.SetSoundOver(&btnSoundOver);
-    btnFavorite.SetSoundClick(&btnClick);
-    btnFavorite.SetTrigger(&trigA);
-    btnFavorite.SetEffectGrow();
+    GuiButton btnFavorite1(imgFavorite.GetWidth(), imgFavorite.GetHeight());
+    GuiButton btnFavorite2(imgFavorite.GetWidth(), imgFavorite.GetHeight());
+    GuiButton btnFavorite3(imgFavorite.GetWidth(), imgFavorite.GetHeight());
+    GuiButton btnFavorite4(imgFavorite.GetWidth(), imgFavorite.GetHeight());
+    GuiButton btnFavorite5(imgFavorite.GetWidth(), imgFavorite.GetHeight());
+
+	SetupFavoriteButton(&btnFavorite1, -198, &btnFavoriteImg1, &btnSoundOver, &btnClick, &trigA);
+	SetupFavoriteButton(&btnFavorite2, -171, &btnFavoriteImg2, &btnSoundOver, &btnClick, &trigA);
+	SetupFavoriteButton(&btnFavorite3, -144, &btnFavoriteImg3, &btnSoundOver, &btnClick, &trigA);
+	SetupFavoriteButton(&btnFavorite4, -117, &btnFavoriteImg4, &btnSoundOver, &btnClick, &trigA);
+	SetupFavoriteButton(&btnFavorite5,  -90, &btnFavoriteImg5, &btnSoundOver, &btnClick, &trigA);
 
     GuiImage btnLeftImg(&imgLeft);
     if (Settings.wsprompt == yes) {
@@ -1148,7 +1202,11 @@ int GameWindowPrompt() {
 		promptWindow.Append(&sizeTxt);
 		promptWindow.Append(&btnLeft);
 		promptWindow.Append(&btnRight);
-		promptWindow.Append(&btnFavorite);
+		promptWindow.Append(&btnFavorite1);
+		promptWindow.Append(&btnFavorite2);
+		promptWindow.Append(&btnFavorite3);
+		promptWindow.Append(&btnFavorite4);
+		promptWindow.Append(&btnFavorite5);
 	}
 
     //check if unlocked
@@ -1277,7 +1335,7 @@ int GameWindowPrompt() {
             favoritevar = 0;
         }
         playcntTxt.SetTextf("%s: %i",tr("Play Count"), playcount);
-        btnFavoriteImg.SetImage(favoritevar ? &imgFavorite : &imgNotFavorite);
+		SetFavoriteImages(&btnFavoriteImg1, &btnFavoriteImg2, &btnFavoriteImg3, &btnFavoriteImg4, &btnFavoriteImg5, &imgFavorite, &imgNotFavorite);
 
         nameTxt.SetPosition(0, 1);
 
@@ -1340,25 +1398,46 @@ int GameWindowPrompt() {
                 choice = 3;
                 promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
             }
-
-            else if (btnFavorite.GetState() == STATE_CLICKED) {//switch favorite
+            else if (btnFavorite1.GetState() == STATE_CLICKED) {//switch favorite
                 //if(isSdInserted()) {
                 if (isInserted(bootDevice)) {
-                    struct Game_NUM * game_num = CFG_get_game_num(header->id);
-                    if (game_num) {
-                        playcount = game_num->count;
-                        favoritevar = game_num->favorite;
-                    } else {
-                        playcount = 0;
-                        favoritevar = 0;
-                    }
-                    favoritevar = (favoritevar + 1) % 2;
-                    CFG_save_game_num(header->id);
-                    btnFavoriteImg.SetImage(favoritevar ? &imgFavorite : &imgNotFavorite);
+					SetFavorite(&btnFavorite1, &btnFavorite2, &btnFavorite3, &btnFavorite4, &btnFavorite5, header->id, 1);
+					SetFavoriteImages(&btnFavoriteImg1, &btnFavoriteImg2, &btnFavoriteImg3, &btnFavoriteImg4, &btnFavoriteImg5, &imgFavorite, &imgNotFavorite);
                 }
-                btnFavorite.ResetState();
+                btnFavorite1.ResetState();
             }
-
+            else if (btnFavorite2.GetState() == STATE_CLICKED) {//switch favorite
+                //if(isSdInserted()) {
+                if (isInserted(bootDevice)) {
+					SetFavorite(&btnFavorite1, &btnFavorite2, &btnFavorite3, &btnFavorite4, &btnFavorite5, header->id, 2);
+					SetFavoriteImages(&btnFavoriteImg1, &btnFavoriteImg2, &btnFavoriteImg3, &btnFavoriteImg4, &btnFavoriteImg5, &imgFavorite, &imgNotFavorite);
+                }
+                btnFavorite2.ResetState();
+            }
+            else if (btnFavorite3.GetState() == STATE_CLICKED) {//switch favorite
+                //if(isSdInserted()) {
+                if (isInserted(bootDevice)) {
+					SetFavorite(&btnFavorite1, &btnFavorite2, &btnFavorite3, &btnFavorite4, &btnFavorite5, header->id, 3);
+					SetFavoriteImages(&btnFavoriteImg1, &btnFavoriteImg2, &btnFavoriteImg3, &btnFavoriteImg4, &btnFavoriteImg5, &imgFavorite, &imgNotFavorite);
+                }
+                btnFavorite3.ResetState();
+            }
+            else if (btnFavorite4.GetState() == STATE_CLICKED) {//switch favorite
+                //if(isSdInserted()) {
+                if (isInserted(bootDevice)) {
+					SetFavorite(&btnFavorite1, &btnFavorite2, &btnFavorite3, &btnFavorite4, &btnFavorite5, header->id, 4);
+					SetFavoriteImages(&btnFavoriteImg1, &btnFavoriteImg2, &btnFavoriteImg3, &btnFavoriteImg4, &btnFavoriteImg5, &imgFavorite, &imgNotFavorite);
+                }
+                btnFavorite4.ResetState();
+            }
+            else if (btnFavorite5.GetState() == STATE_CLICKED) {//switch favorite
+                //if(isSdInserted()) {
+                if (isInserted(bootDevice)) {
+					SetFavorite(&btnFavorite1, &btnFavorite2, &btnFavorite3, &btnFavorite4, &btnFavorite5, header->id, 5);
+					SetFavoriteImages(&btnFavoriteImg1, &btnFavoriteImg2, &btnFavoriteImg3, &btnFavoriteImg4, &btnFavoriteImg5, &imgFavorite, &imgNotFavorite);
+                }
+                btnFavorite5.ResetState();
+            }
             // this next part is long because nobody could agree on what the left/right buttons should do
             else if ((btnRight.GetState() == STATE_CLICKED) && (Settings.xflip == no)) {//next game
                 promptWindow.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 50);

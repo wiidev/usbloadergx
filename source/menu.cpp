@@ -417,6 +417,10 @@ int MenuDiscList() {
     GuiImageData imgabcIcon(imgPath, abcIcon_png);
     snprintf(imgPath, sizeof(imgPath), "%sabcIcon_gray.png", CFG.theme_path);
     GuiImageData imgabcIcon_gray(imgPath, NULL);
+    snprintf(imgPath, sizeof(imgPath), "%srankIcon.png", CFG.theme_path);
+    GuiImageData imgrankIcon(imgPath, rankIcon_png);
+    snprintf(imgPath, sizeof(imgPath), "%srankIcon_gray.png", CFG.theme_path);
+    GuiImageData imgrankIcon_gray(imgPath, NULL);
     snprintf(imgPath, sizeof(imgPath), "%splayCountIcon.png", CFG.theme_path);
     GuiImageData imgplayCountIcon(imgPath, playCountIcon_png);
     snprintf(imgPath, sizeof(imgPath), "%splayCountIcon_gray.png", CFG.theme_path);
@@ -568,14 +572,14 @@ int MenuDiscList() {
     GuiButton searchBtn(&searchBtnImg_g,&searchBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_search_x, THEME.gamelist_search_y, &trigA, &btnSoundOver, &btnClick,1, &searchBtnTT, -15, 52, 0, 3);
     searchBtn.SetAlpha(180);
 
-    GuiTooltip abcBtnTT(tr("Sort alphabetically"));
+    GuiTooltip abcBtnTT(Settings.fave ? tr("Sort by rank") : tr("Sort alphabetically"));
     if (Settings.wsprompt == yes)
         abcBtnTT.SetWidescreen(CFG.widescreen);
     abcBtnTT.SetAlpha(THEME.tooltipAlpha);
-    GuiImage abcBtnImg(&imgabcIcon);
+    GuiImage abcBtnImg(Settings.fave ? &imgrankIcon : &imgabcIcon);
     abcBtnImg.SetWidescreen(CFG.widescreen);
 //    GuiImage abcBtnImg_g(abcBtnImg); abcBtnImg_g.SetGrayscale();
-    GuiImage abcBtnImg_g(&imgabcIcon_gray);
+    GuiImage abcBtnImg_g(Settings.fave ? &imgrankIcon_gray : &imgabcIcon_gray);
 	if(abcBtnImg_g.GetImage() == NULL) { abcBtnImg_g = abcBtnImg; abcBtnImg_g.SetGrayscale();}
     abcBtnImg_g.SetWidescreen(CFG.widescreen);
     GuiButton abcBtn(&abcBtnImg_g,&abcBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_abc_x, THEME.gamelist_abc_y, &trigA, &btnSoundOver, &btnClick,1,&abcBtnTT, -15, 52, 0, 3);

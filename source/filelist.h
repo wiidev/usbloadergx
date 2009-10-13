@@ -344,6 +344,9 @@ extern const u32	searchIcon_png_size;
 extern const u8		abcIcon_png[];
 extern const u32	abcIcon_png_size;
 
+extern const u8		rankIcon_png[];
+extern const u32	rankIcon_png_size;
+
 extern const u8		playCountIcon_png[];
 extern const u32	playCountIcon_png_size;
 

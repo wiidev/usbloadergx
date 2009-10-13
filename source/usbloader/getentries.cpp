@@ -96,6 +96,28 @@ s32 __Menu_EntryCmpCount(const void *a, const void *b) {
 
     return ret;
 }
+
+s32 __Menu_EntryCmpFavorite(const void *a, const void *b) {
+    s32 ret;
+
+    struct discHdr *hdr1 = (struct discHdr *)a;
+
+    struct discHdr *hdr2 = (struct discHdr *)b;
+
+    /* Compare Favorite (rank) */
+    u16 fav1 = 0;
+    u16 fav2 = 0;
+    struct Game_NUM* game_num1 = CFG_get_game_num(hdr1->id);
+    struct Game_NUM* game_num2 = CFG_get_game_num(hdr2->id);
+
+    if (game_num1) fav1 = game_num1->favorite;
+    if (game_num2) fav2 = game_num2->favorite;
+
+    ret = (s32) (fav2-fav1);
+    if (ret == 0) return stricmp(get_title(hdr1), get_title(hdr2));
+
+    return ret;
+}
 /****************************************************************************
  * Get PrevFilter
  ***************************************************************************/
@@ -396,6 +418,8 @@ int buildTitleList(int t, wchar_t* gameFilter, discHdr ** PgameList, u32 *PgameC
 	
 	if (Settings.sort==pcount) {
 		qsort(buffer, cnt, sizeof(struct discHdr), __Menu_EntryCmpCount);
+	} else if (Settings.fave) {
+		qsort(buffer, cnt, sizeof(struct discHdr), __Menu_EntryCmpFavorite);
 	} else {
 		qsort(buffer, cnt, sizeof(struct discHdr), __Menu_EntryCmp);
 	}
@@ -481,6 +505,8 @@ int __Menu_GetGameList(int t, wchar_t* gameFilter, discHdr ** PgameList, u32 *Pg
 	
 	if (Settings.sort==pcount) {
 		qsort(buffer, cnt, sizeof(struct discHdr), __Menu_EntryCmpCount);
+	} else if (Settings.fave) {
+		qsort(buffer, cnt, sizeof(struct discHdr), __Menu_EntryCmpFavorite);
 	} else {
 		qsort(buffer, cnt, sizeof(struct discHdr), __Menu_EntryCmp);
 	}
