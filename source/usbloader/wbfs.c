@@ -313,6 +313,9 @@ s32 WBFS_Open(void) {
     if (!hdd)
         return -1;
 
+	// Save the new sector size, so it will be used in read and write calls
+	sector_size = hdd->head->hd_sec_sz_s;
+
     return 0;
 }
 
