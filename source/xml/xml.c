@@ -475,7 +475,7 @@ bool LoadGameInfoFromXML(char* gameid, char* langtxt)
                     ++gameinfo.wifiCnt;
                     GetTextFromNode(nodeidtmp, nodedata, "feature", NULL, NULL, MXML_DESCEND, gameinfo.wififeatures[gameinfo.wifiCnt],
                                     sizeof(gameinfo.wififeatures[gameinfo.wifiCnt]));
-                    gameinfo.wififeatures[gameinfo.wifiCnt][0] = toupper(gameinfo.wififeatures[gameinfo.wifiCnt][0]);
+                    gameinfo.wififeatures[gameinfo.wifiCnt][0] = toupper((int)gameinfo.wififeatures[gameinfo.wifiCnt][0]);
                     if (gameinfo.wifiCnt == XML_ELEMMAX)
                         break;
                 }
@@ -542,14 +542,14 @@ bool LoadGameInfoFromXML(char* gameid, char* langtxt)
                 ++gameinfo.genreCnt;
                 trimcopy(splitresult,splitresult,strlen(splitresult)+1);
                 strlcpy(gameinfo.genresplit[gameinfo.genreCnt],splitresult,sizeof(gameinfo.genresplit[gameinfo.genreCnt]));
-                gameinfo.genresplit[gameinfo.genreCnt][0] = toupper(gameinfo.genresplit[gameinfo.genreCnt][0]);
+                gameinfo.genresplit[gameinfo.genreCnt][0] = toupper((int)gameinfo.genresplit[gameinfo.genreCnt][0]);
                 while (splitresult != NULL) {
                     splitresult = strtok(NULL, delimgenre);
                     if (splitresult != NULL && strcmp(splitresult,"")!=0) {
                         ++gameinfo.genreCnt;
                         trimcopy(splitresult,splitresult,strlen(splitresult)+1);
                         strlcpy(gameinfo.genresplit[gameinfo.genreCnt],splitresult,sizeof(gameinfo.genresplit[gameinfo.genreCnt]));
-                        gameinfo.genresplit[gameinfo.genreCnt][0] = toupper(gameinfo.genresplit[gameinfo.genreCnt][0]);
+                        gameinfo.genresplit[gameinfo.genreCnt][0] = toupper((int)gameinfo.genresplit[gameinfo.genreCnt][0]);
                         if (gameinfo.genreCnt == XML_ELEMMAX)
                             break;
                     }

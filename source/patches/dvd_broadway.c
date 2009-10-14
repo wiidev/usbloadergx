@@ -359,7 +359,8 @@ s32 bwDVD_LowSeek(u32 offset,dvdcallbacklow cb)
 s32 bwDVD_LowOffset(u64 offset,dvdcallbacklow cb)
 {
 	s32 ret;
-	u32 *off = (u32*)(void*)(&offset);
+	//u32 *off = (u32*)(void*)(&offset);
+	union { u64 off64; u32 off32[2]; } off;off.off64 = offset;
 	struct dicontext *ctx;
 	struct dicommand *cmd;
  
@@ -371,8 +372,8 @@ s32 bwDVD_LowOffset(u64 offset,dvdcallbacklow cb)
 	cmd = ctx->cmd;
 	cmd->diReg[0] = (IOCTL_DI_OFFSET<<24);
 	cmd->diReg[1] = 0;
-	if(off[0]) cmd->diReg[1] = 1;
-	cmd->diReg[2] = off[1];
+	if(off.off32[0]) cmd->diReg[1] = 1;
+	cmd->diReg[2] = off.off32[1];
 	ret = IOS_IoctlAsync(__dvd_fd,IOCTL_DI_OFFSET,cmd->diReg,sizeof(struct dicommand),__di_regvalcache,0x20,__dvd_iostransactionCB,ctx);
  
 	return ret;

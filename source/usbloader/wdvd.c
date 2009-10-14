@@ -116,15 +116,16 @@ s32 WDVD_Seek(u64 offset) {
 }
 
 s32 WDVD_Offset(u64 offset) {
-    u32 *off = (u32 *)((void *)&offset);
+    //u32 *off = (u32 *)((void *)&offset);
+	union { u64 off64; u32 off32[2]; } off;off.off64 = offset;
     s32 ret;
 
     memset(inbuf, 0, sizeof(inbuf));
 
     /* Set offset */
     inbuf[0] = IOCTL_DI_OFFSET << 24;
-    inbuf[1] = (off[0]) ? 1: 0;
-    inbuf[2] = (off[1] >> 2);
+    inbuf[1] = (off.off32[0]) ? 1: 0;
+    inbuf[2] = (off.off32[1] >> 2);
 
     ret = IOS_Ioctl(di_fd, IOCTL_DI_OFFSET, inbuf, sizeof(inbuf), outbuf, sizeof(outbuf));
     if (ret < 0)

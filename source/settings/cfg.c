@@ -11,6 +11,7 @@
 #include "listfiles.h"
 #include "xml/xml.h" /* XML - Lustar*/
 #include "cfg.h"
+#define isspace2(c) (c == ' ' || c == '\f' || c == '\n' || c == '\r' || c == '\t' || c == '\v')
 
 struct SSettings Settings;
 
@@ -416,14 +417,14 @@ u8 get_block(struct discHdr *header) {
 char* trim_n_copy(char *dest, char *src, int n, int size) {
     int len;
     // trim leading white space
-    while (isspace(*src)) {
+    while (isspace2(*src)) {
         src++;
         n--;
     }
     len = strlen(src);
     if (len > n) len = n;
     // trim trailing white space
-    while (len > 0 && isspace(src[len-1])) len--;
+    while (len > 0 && isspace2(src[len-1])) len--;
     if (len >= size) len = size-1;
     strlcpy(dest, src, len+1);
     //printf("trim_copy: '%s' %d\n", dest, len); //sleep(1);
