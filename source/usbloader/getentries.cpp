@@ -13,6 +13,7 @@
 #include "../wad/title.h"
 #include <algorithm>
 #include <vector>
+#include <wchar.h>
 
 
 #include "listfiles.h"
@@ -29,16 +30,16 @@ wchar_t *gameFilterPrev=NULL;
 extern u8 mountMethod;
 
 /****************************************************************************
- * wcsdup based on new wchar_t [...]
+ * wcsdup_new based on new wchar_t [...]
  ***************************************************************************/
-wchar_t *wcsdup(const wchar_t *src)
+static wchar_t *wcsdup_new(const wchar_t *src)
 {
 	int len = wcslen(src)+1;
 	wchar_t *dst = new wchar_t[len];
 	if(dst) wcscpy(dst, src);
 	return dst;
 }
-inline int wcsnicmp(const wchar_t *s1, const wchar_t *s2, int len)
+static inline int wcsnicmp(const wchar_t *s1, const wchar_t *s2, int len)
 {
 	if (len <= 0)
 		return (0);
@@ -131,7 +132,7 @@ int __Menu_GetPrevFilter(int t, wchar_t* gameFilter, u32 gameFiltered, wchar_t *
 	u32 cnt, len, i;
 	s32 ret;
 	
-	wchar_t *new_gameFilterPrev = wcsdup(gameFilter);
+	wchar_t *new_gameFilterPrev = wcsdup_new(gameFilter);
 
 
 	/* Get list length */
@@ -532,7 +533,7 @@ int __Menu_GetEntries(int t, const wchar_t* Filter) {
 	wchar_t			*new_gameFilterNextList	= NULL;
 	wchar_t			*new_gameFilterPrev		= NULL;
 
-	new_gameFilter = wcsdup(Filter ? Filter : (gameFilter ? gameFilter : L"") );
+	new_gameFilter = wcsdup_new(Filter ? Filter : (gameFilter ? gameFilter : L"") );
 	if(new_gameFilter == NULL) return -1;
 	for(;;)
 	{

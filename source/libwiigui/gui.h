@@ -35,6 +35,7 @@
 #include <malloc.h>
 #include <stdlib.h>
 #include <string.h>
+#include <wchar.h>
 #include <vector>
 #include <math.h>
 #include <asndlib.h>
@@ -464,7 +465,7 @@ class GuiElement
 		bool selectable; //!< Whether or not this element selectable (can change to SELECTED state)
 		bool clickable; //!< Whether or not this element is clickable (can change to CLICKED state)
 		bool holdable; //!< Whether or not this element is holdable (can change to HELD state)
-		GuiTrigger * trigger[5]; //!< GuiTriggers (input actions) that this element responds to
+		GuiTrigger * trigger[6]; //!< GuiTriggers (input actions) that this element responds to
 		GuiElement * parentElement; //!< Parent element
 		UpdateCallback updateCB; //!< Callback function to call when this element is updated
 };

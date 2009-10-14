@@ -21,6 +21,7 @@
  */
 
 #include <sys/stat.h>
+#include <wchar.h>
 #include "FreeTypeGX.h"
 #include "settings/cfg.h"
 

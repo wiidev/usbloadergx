@@ -34,7 +34,7 @@ GuiElement::GuiElement()
 	trigger[2] = NULL;
 	trigger[3] = NULL;
 	trigger[4] = NULL;
-	trigger[6] = NULL;
+	trigger[5] = NULL;
 	parentElement = NULL;
 	rumble = true;
 	selectable = false;

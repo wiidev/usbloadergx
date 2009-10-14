@@ -6,6 +6,8 @@
 
 #include <iostream>
 #include <fstream>
+#include <stdlib.h>
+#include <string.h>
 #include "gct.h"
 
 #define ERRORRANGE "Error: CheatNr out of range"
