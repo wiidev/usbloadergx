@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-05 14:51+0200\n"
+"POT-Creation-Date: 2009-10-15 05:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: c64rmx\n"
 "Language-Team: \n"
@@ -24,9 +24,6 @@ msgstr ""
 
 msgid " is not on the server."
 msgstr "Tiedostoa ei löydy serveriltä"
-
-msgid "(both retired)"
-msgstr ""
 
 msgid "0 (Everyone)"
 msgstr "0 (Kaikille)"
@@ -788,8 +785,8 @@ msgstr "Päälle"
 msgid "Oct"
 msgstr "loka"
 
-msgid "Official Site"
-msgstr "Virallinen sivusto"
+msgid "Official Site:"
+msgstr "Virallinen sivusto:"
 
 msgid "Only Customs"
 msgstr "Vain omatekoiset"
@@ -931,6 +928,9 @@ msgstr "Valmiustila"
 
 msgid "Sort alphabetically"
 msgstr "Järjestä aakkosittain"
+
+msgid "Sort by rank"
+msgstr ""
 
 msgid "Sort order by most played"
 msgstr "Aseta 'pelattu eniten' järjestykseen"
@@ -1148,6 +1148,9 @@ msgstr "Sinun täytyy formatoida osio"
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 msgstr "URL:si on tallennettu %WiiTDB_URL.txt."
+
+msgid "and translaters for language files updates"
+msgstr ""
 
 msgid "available"
 msgstr "Saatavilla"

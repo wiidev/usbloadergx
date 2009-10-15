@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-05 14:51+0200\n"
+"POT-Creation-Date: 2009-10-15 05:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: tj_cool\n"
 "Language-Team: \n"
@@ -24,9 +24,6 @@ msgstr " is opgeslagen. De tekst is niet gecontroleerd. Sommige codes kunnen elk
 
 msgid " is not on the server."
 msgstr " staat niet op de server."
-
-msgid "(both retired)"
-msgstr "(ex-medewerkers)"
 
 msgid "0 (Everyone)"
 msgstr "0 (Iedereen 0+)"
@@ -788,8 +785,8 @@ msgstr "Aan"
 msgid "Oct"
 msgstr "Okt"
 
-msgid "Official Site"
-msgstr "Officiele site"
+msgid "Official Site:"
+msgstr "Officiele site:"
 
 msgid "Only Customs"
 msgstr "Enkel Aangepast"
@@ -931,6 +928,9 @@ msgstr "Slaapstand"
 
 msgid "Sort alphabetically"
 msgstr "Alfabetisch sorteren"
+
+msgid "Sort by rank"
+msgstr ""
 
 msgid "Sort order by most played"
 msgstr "Sorteren op meest gespeeld"
@@ -1149,6 +1149,9 @@ msgstr "Je moet een partitie formatteren"
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 msgstr "Je URL is opgeslagen in %sWiiTDB_URL.txt."
 
+msgid "and translaters for language files updates"
+msgstr ""
+
 msgid "available"
 msgstr "beschikbaar"
 
@@ -1205,6 +1208,12 @@ msgstr "van"
 
 msgid "seconds left"
 msgstr "seconden over:"
+
+#~ msgid "Official Site"
+#~ msgstr "Officiele site"
+
+#~ msgid "(both retired)"
+#~ msgstr "(ex-medewerkers)"
 
 #~ msgid "ERROR: USB device could not be loaded!"
 #~ msgstr "FOUT: USB apparaat kon niet geladen worden!"

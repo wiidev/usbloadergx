@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-05 14:51+0200\n"
+"POT-Creation-Date: 2009-10-15 05:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Nitro_subzero \n"
 "Language-Team: Nitro_subzero\n"
@@ -24,9 +24,6 @@ msgstr " ถูกบันทึกแล้ว ข้อความยัง�
 
 msgid " is not on the server."
 msgstr " ไม่อยู่บนแม่ข่าย"
-
-msgid "(both retired)"
-msgstr "(หมดอายุแล้ว)"
 
 msgid "0 (Everyone)"
 msgstr "0 (ทุกคน)"
@@ -788,8 +785,8 @@ msgstr "เปิด"
 msgid "Oct"
 msgstr "ตค."
 
-msgid "Official Site"
-msgstr "เวบไซต์อย่างเป็นทางการ"
+msgid "Official Site:"
+msgstr "เวบไซต์อย่างเป็นทางการ:"
 
 msgid "Only Customs"
 msgstr "เฉพาะที่ดัดแปลง"
@@ -931,6 +928,9 @@ msgstr "เข้าโหมด Idle"
 
 msgid "Sort alphabetically"
 msgstr "เรียงตามตัวอักษร"
+
+msgid "Sort by rank"
+msgstr ""
 
 msgid "Sort order by most played"
 msgstr "เรียงตามความถี่ในการเล่น"
@@ -1148,6 +1148,9 @@ msgstr "ต้องทำการฟอร์แมทพาร์ติชั
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 msgstr "URL ของคุณถูกบันทึกใน %sWiiTDB_URL.txt."
+
+msgid "and translaters for language files updates"
+msgstr ""
 
 msgid "available"
 msgstr "ว่างอยู่"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-05 14:51+0200\n"
+"POT-Creation-Date: 2009-10-15 05:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: knife.hu kavid\n"
 "Language-Team: kavid\n"
@@ -24,9 +24,6 @@ msgstr "已经被保存.内容尚未验证.部分代码可能无法作用.如果
 
 msgid " is not on the server."
 msgstr "不在服务器上"
-
-msgid "(both retired)"
-msgstr "退休者"
 
 msgid "0 (Everyone)"
 msgstr "0 (全年龄)"
@@ -788,8 +785,8 @@ msgstr "开启"
 msgid "Oct"
 msgstr "十月"
 
-msgid "Official Site"
-msgstr "官方网址"
+msgid "Official Site:"
+msgstr "官方网址:"
 
 msgid "Only Customs"
 msgstr "仅自定义"
@@ -931,6 +928,9 @@ msgstr "进入待机状态"
 
 msgid "Sort alphabetically"
 msgstr "按字母排序"
+
+msgid "Sort by rank"
+msgstr ""
 
 msgid "Sort order by most played"
 msgstr "按玩过次数排序"
@@ -1148,6 +1148,9 @@ msgstr "必须格式化一个分区"
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 msgstr "链接已写入 %sWiiTDB_URL.txt 文件."
+
+msgid "and translaters for language files updates"
+msgstr ""
 
 msgid "available"
 msgstr "允许"

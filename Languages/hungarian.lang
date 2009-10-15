@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-05 14:51+0200\n"
+"POT-Creation-Date: 2009-10-15 05:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Tusk\n"
 "Language-Team: \n"
@@ -23,9 +23,6 @@ msgid " has been Saved.  The text has not been verified.  Some of the code may n
 msgstr ""
 
 msgid " is not on the server."
-msgstr ""
-
-msgid "(both retired)"
 msgstr ""
 
 msgid "0 (Everyone)"
@@ -788,8 +785,8 @@ msgstr "BE"
 msgid "Oct"
 msgstr "Ókt"
 
-msgid "Official Site"
-msgstr "Hivatalos Oldal"
+msgid "Official Site:"
+msgstr "Hivatalos Oldal:"
 
 msgid "Only Customs"
 msgstr ""
@@ -930,6 +927,9 @@ msgid "Shutdown to Idle"
 msgstr "Rendszer Leállításának késleltetése"
 
 msgid "Sort alphabetically"
+msgstr ""
+
+msgid "Sort by rank"
 msgstr ""
 
 msgid "Sort order by most played"
@@ -1147,6 +1147,9 @@ msgstr "Formáznod kell a particiót"
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
+msgstr ""
+
+msgid "and translaters for language files updates"
 msgstr ""
 
 msgid "available"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-05 14:51+0200\n"
+"POT-Creation-Date: 2009-10-15 05:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: wishmasterf\n"
 "Language-Team: Snoozer, wishmasterf\n"
@@ -24,9 +24,6 @@ msgstr " wurde gespeichert. Der Text wurde nicht geprüft. Einige von diesen Cod
 
 msgid " is not on the server."
 msgstr " ist nicht auf dem Server."
-
-msgid "(both retired)"
-msgstr "(beide außer Dienst)"
 
 msgid "0 (Everyone)"
 msgstr "0 (Alle)"
@@ -788,8 +785,8 @@ msgstr "AN"
 msgid "Oct"
 msgstr "Okt"
 
-msgid "Official Site"
-msgstr "Offizielle Seite"
+msgid "Official Site:"
+msgstr "Offizielle Seite:"
 
 msgid "Only Customs"
 msgstr "Nur Benutzerdefiniert"
@@ -931,6 +928,9 @@ msgstr "Stand By"
 
 msgid "Sort alphabetically"
 msgstr "alphabetisch sortieren"
+
+msgid "Sort by rank"
+msgstr ""
 
 msgid "Sort order by most played"
 msgstr "nach Spielzähler sortieren"
@@ -1148,6 +1148,9 @@ msgstr "Sie müssen eine Partition formatieren"
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 msgstr "Ihre URL wurde in %sWiiTDB_URL.txt gespeichert."
+
+msgid "and translaters for language files updates"
+msgstr ""
 
 msgid "available"
 msgstr "verfügbar"

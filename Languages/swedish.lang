@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-05 14:51+0200\n"
+"POT-Creation-Date: 2009-10-15 05:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -24,9 +24,6 @@ msgstr "har sparats. Texten har inte blivit varifierad. Några av koderna kanske
 
 msgid " is not on the server."
 msgstr "finns inte på servern."
-
-msgid "(both retired)"
-msgstr "(Båda pensionerade)"
 
 msgid "0 (Everyone)"
 msgstr "0 (Alla)"
@@ -788,8 +785,8 @@ msgstr "PÅ"
 msgid "Oct"
 msgstr "Okt"
 
-msgid "Official Site"
-msgstr "Officiell sida"
+msgid "Official Site:"
+msgstr "Officiell sida:"
 
 msgid "Only Customs"
 msgstr "Endast anpassade"
@@ -931,6 +928,9 @@ msgstr "Försätt i viloläge"
 
 msgid "Sort alphabetically"
 msgstr "Sortera alfabetiskt"
+
+msgid "Sort by rank"
+msgstr ""
 
 msgid "Sort order by most played"
 msgstr "Sortera efter mest spelade"
@@ -1086,7 +1086,7 @@ msgstr "VIDTV-Patch"
 
 #, c-format
 msgid "Version: %s"
-msgstr "Version: %s"
+msgstr ""
 
 msgid "Video Mode"
 msgstr "Video-läge"
@@ -1148,6 +1148,9 @@ msgstr "Du behöver formatera en partition"
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 msgstr "Din URL har sparats som %sWiiTDB_URL.txt."
+
+msgid "and translaters for language files updates"
+msgstr ""
 
 msgid "available"
 msgstr "tillgänglig"

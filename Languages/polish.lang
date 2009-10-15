@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-05 14:51+0200\n"
+"POT-Creation-Date: 2009-10-15 05:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: ziom666 (zadania_prog@vp.pl)\n"
 "Language-Team: \n"
@@ -24,9 +24,6 @@ msgstr " zapisano. Plik tekstowy nie zostal zweryfikowany. Niektore z kodow, mog
 
 msgid " is not on the server."
 msgstr " nie istnieje na serwerze"
-
-msgid "(both retired)"
-msgstr ""
 
 msgid "0 (Everyone)"
 msgstr "0 (dla kazdego)"
@@ -788,8 +785,8 @@ msgstr "Wlacz"
 msgid "Oct"
 msgstr "Pazdziernik"
 
-msgid "Official Site"
-msgstr "Strona oficjalna"
+msgid "Official Site:"
+msgstr "Strona oficjalna:"
 
 msgid "Only Customs"
 msgstr "Tylko nieoryginalne"
@@ -931,6 +928,9 @@ msgstr "Przelacz w stan oczekiwania"
 
 msgid "Sort alphabetically"
 msgstr "Sortuj alfabetycznie"
+
+msgid "Sort by rank"
+msgstr ""
 
 msgid "Sort order by most played"
 msgstr "Sortuj wg. liczby uruchomien"
@@ -1148,6 +1148,9 @@ msgstr "Musisz sformatowac partycje"
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 msgstr "Adres zostal zapisany w pliku %sWiiTDB_URL.txt."
+
+msgid "and translaters for language files updates"
+msgstr ""
 
 msgid "available"
 msgstr "dostepne"

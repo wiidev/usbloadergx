@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-05 14:51+0200\n"
+"POT-Creation-Date: 2009-10-15 05:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: nextos@korea.com\n"
 "Language-Team: \n"
@@ -24,9 +24,6 @@ msgstr " 저장됨. 문자는 검증되지 않았음. 몇몇의 코드는 정상
 
 msgid " is not on the server."
 msgstr " 은 서버에 없어요."
-
-msgid "(both retired)"
-msgstr "(둘다 은퇴)"
 
 msgid "0 (Everyone)"
 msgstr "0 (모두다)"
@@ -788,8 +785,8 @@ msgstr "켜짐"
 msgid "Oct"
 msgstr "10월"
 
-msgid "Official Site"
-msgstr "공식 사이트"
+msgid "Official Site:"
+msgstr "공식 사이트:"
 
 msgid "Only Customs"
 msgstr "사용자 설정만"
@@ -931,6 +928,9 @@ msgstr "대기 상태로"
 
 msgid "Sort alphabetically"
 msgstr "알파벳순으로 정렬"
+
+msgid "Sort by rank"
+msgstr ""
 
 msgid "Sort order by most played"
 msgstr "많이 실행한 횟수로 정렬"
@@ -1148,6 +1148,9 @@ msgstr "파티션을 포맷해야 합니다"
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 msgstr "당신의 URL은 %sWiiTDB_URL.txt 에 저장되었어요."
+
+msgid "and translaters for language files updates"
+msgstr ""
 
 msgid "available"
 msgstr "가능함"

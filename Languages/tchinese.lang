@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-05 14:51+0200\n"
+"POT-Creation-Date: 2009-10-15 05:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: kyogc\n"
 "Language-Team: \n"
@@ -24,9 +24,6 @@ msgstr "已儲存.內容尚未驗證.部分金手指碼可能無法作用.若發
 
 msgid " is not on the server."
 msgstr "不在伺服器中"
-
-msgid "(both retired)"
-msgstr "退休者"
 
 msgid "0 (Everyone)"
 msgstr "0 (所有人)"
@@ -788,8 +785,8 @@ msgstr "開啟"
 msgid "Oct"
 msgstr "十月"
 
-msgid "Official Site"
-msgstr "官方網址"
+msgid "Official Site:"
+msgstr "官方網址:"
 
 msgid "Only Customs"
 msgstr "只顯示自製"
@@ -931,6 +928,9 @@ msgstr "進入待機狀態"
 
 msgid "Sort alphabetically"
 msgstr "以字母順序排列"
+
+msgid "Sort by rank"
+msgstr ""
 
 msgid "Sort order by most played"
 msgstr "以執行次數排列"
@@ -1148,6 +1148,9 @@ msgstr "必須格式化一個磁區"
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 msgstr "網址已儲存於%sWiiTDB_URL.txt"
+
+msgid "and translaters for language files updates"
+msgstr ""
 
 msgid "available"
 msgstr "可取得"

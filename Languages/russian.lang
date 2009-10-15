@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-05 14:51+0200\n"
+"POT-Creation-Date: 2009-10-15 05:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Kir\n"
 "Language-Team: Kir\n"
@@ -24,9 +24,6 @@ msgstr ""
 
 msgid " is not on the server."
 msgstr ""
-
-msgid "(both retired)"
-msgstr "(ушли из проекта)"
 
 msgid "0 (Everyone)"
 msgstr "0 (Для всех)"
@@ -788,8 +785,8 @@ msgstr "ВКЛ"
 msgid "Oct"
 msgstr "Окт"
 
-msgid "Official Site"
-msgstr "Оф. сайт"
+msgid "Official Site:"
+msgstr "Оф. сайт:"
 
 msgid "Only Customs"
 msgstr ""
@@ -930,6 +927,9 @@ msgid "Shutdown to Idle"
 msgstr "Перевести в режим сна"
 
 msgid "Sort alphabetically"
+msgstr ""
+
+msgid "Sort by rank"
 msgstr ""
 
 msgid "Sort order by most played"
@@ -1147,6 +1147,9 @@ msgstr "Требуется форматирование раздела"
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
+msgstr ""
+
+msgid "and translaters for language files updates"
 msgstr ""
 
 msgid "available"

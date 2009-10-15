@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-05 14:51+0200\n"
+"POT-Creation-Date: 2009-10-15 05:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) \n"
 "Language-Team: r719 - last version on http://volny.cz/djelinek/_USBLoderGX/czech.lang \n"
@@ -24,9 +24,6 @@ msgstr " byl uložen. Soubor nebyl zkontrolován. Nekteré cásti kódu nemusí 
 
 msgid " is not on the server."
 msgstr " není na serveru"
-
-msgid "(both retired)"
-msgstr "(oba skryty)"
 
 msgid "0 (Everyone)"
 msgstr "0 (Každý)"
@@ -788,8 +785,8 @@ msgstr "Zapnuto"
 msgid "Oct"
 msgstr "Ríj"
 
-msgid "Official Site"
-msgstr "Oficiální místo"
+msgid "Official Site:"
+msgstr "Oficiální místo:"
 
 msgid "Only Customs"
 msgstr "Pouze Upravené"
@@ -931,6 +928,9 @@ msgstr "Pauza"
 
 msgid "Sort alphabetically"
 msgstr "Trídení dle abecedy"
+
+msgid "Sort by rank"
+msgstr ""
 
 msgid "Sort order by most played"
 msgstr "Trídení podle spuštení"
@@ -1148,6 +1148,9 @@ msgstr "Musíte naformátovat oddíl"
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 msgstr "Vaše URL bylo uloženo v %sWiiTDB_URL.txt."
+
+msgid "and translaters for language files updates"
+msgstr ""
 
 msgid "available"
 msgstr "dostupný"

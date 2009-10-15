@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# French V10.3 r781
+# French V10.4 r788
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-05 14:51+0200\n"
+"POT-Creation-Date: 2009-10-15 05:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Kin8\n"
 "Language-Team: Badablek, Amour, ikya, dj_skual & Kin8\n"
@@ -23,10 +23,7 @@ msgid " has been Saved.  The text has not been verified.  Some of the code may n
 msgstr " sauvegardé. En cas de mauvais résultats, ouvrez-le avec un réel éditeur de texte pour obtenir plus d'informations."
 
 msgid " is not on the server."
-msgstr " non disponible sur le serveur."
-
-msgid "(both retired)"
-msgstr "(ces 2 se sont retirés)"
+msgstr " indisponible sur le serveur."
 
 msgid "0 (Everyone)"
 msgstr "0 (Tous 3+)"
@@ -788,8 +785,8 @@ msgstr "Actif"
 msgid "Oct"
 msgstr ""
 
-msgid "Official Site"
-msgstr "Site Officiel"
+msgid "Official Site:"
+msgstr "Site Officiel:"
 
 msgid "Only Customs"
 msgstr "Personnalisés"
@@ -931,6 +928,9 @@ msgstr "Veille"
 
 msgid "Sort alphabetically"
 msgstr "Ordre Alphabétique"
+
+msgid "Sort by rank"
+msgstr "Classement Favoris"
 
 msgid "Sort order by most played"
 msgstr "Les plus joués"
@@ -1086,7 +1086,7 @@ msgstr "Patch VIDTV"
 
 #, c-format
 msgid "Version: %s"
-msgstr "Version: %s"
+msgstr ""
 
 msgid "Video Mode"
 msgstr "Mode vidéo"
@@ -1149,6 +1149,9 @@ msgstr "Vous devez formater une partition"
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 msgstr "Sauvegarde de l'URL sous %sWiiTDB_URL.txt."
 
+msgid "and translaters for language files updates"
+msgstr "et traducteurs pour les MàJ fichiers langues"
+
 msgid "available"
 msgstr "disponible"
 
@@ -1177,7 +1180,7 @@ msgid "for"
 msgstr "pour"
 
 msgid "for WiiTDB and hosting covers / disc images"
-msgstr "pour WiiTDB et l'héberg. jaquettes"
+msgstr "pour WiiTDB et l'hébergement des jaquettes"
 
 msgid "for diverse patches"
 msgstr "pour les divers patchs"
@@ -1186,7 +1189,7 @@ msgid "for his awesome tool"
 msgstr "pour son outil impressionnant"
 
 msgid "for hosting the update files"
-msgstr "pour l'hébergement des MàJ"
+msgstr "pour l'hébergement des Mises à Jour"
 
 msgid "for the USB Loader source"
 msgstr "pour les sources USBLoader"

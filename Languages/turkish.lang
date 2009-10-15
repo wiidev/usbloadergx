@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-05 14:51+0200\n"
+"POT-Creation-Date: 2009-10-15 05:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: omercigingelini\n"
 "Language-Team: omercigingelini\n"
@@ -24,9 +24,6 @@ msgstr " kaydedildi.  Metin daha doğrulanmadı.  Bazı kodlar birbirleriyle do�
 
 msgid " is not on the server."
 msgstr " sunucuda mevcut değil"
-
-msgid "(both retired)"
-msgstr ""
 
 msgid "0 (Everyone)"
 msgstr "0 (Herkes)"
@@ -179,7 +176,7 @@ msgid "Boot/Standard"
 msgstr "Boot/Standart"
 
 msgid "Boot?"
-msgstr "Boot?"
+msgstr ""
 
 msgid "Both"
 msgstr "İkisi de"
@@ -456,7 +453,7 @@ msgid "Error while transfering data."
 msgstr "Veri iletiminde hata."
 
 msgid "Error..."
-msgstr "Hata.."
+msgstr "Hata..."
 
 msgid "Error:"
 msgstr "Hata:"
@@ -788,8 +785,8 @@ msgstr "AÇIK"
 msgid "Oct"
 msgstr ""
 
-msgid "Official Site"
-msgstr "Resmi Site"
+msgid "Official Site:"
+msgstr "Resmi Site:"
 
 msgid "Only Customs"
 msgstr "Sadece Kişiseller"
@@ -931,6 +928,9 @@ msgstr "Sistemi Beklemeye Al"
 
 msgid "Sort alphabetically"
 msgstr "Alfabetik Diz"
+
+msgid "Sort by rank"
+msgstr ""
 
 msgid "Sort order by most played"
 msgstr "En çok oynanana göre diz"
@@ -1086,7 +1086,7 @@ msgstr "VIDTV Yaması"
 
 #, c-format
 msgid "Version: %s"
-msgstr "Version: %s"
+msgstr ""
 
 msgid "Video Mode"
 msgstr "Video Modu"
@@ -1148,6 +1148,9 @@ msgstr "Bir bölüm biçimlendirmeniz gerekiyor"
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 msgstr "URL %sWiiTDB_URL.txt dosyasına kaydedildi"
+
+msgid "and translaters for language files updates"
+msgstr ""
 
 msgid "available"
 msgstr "mevcut"

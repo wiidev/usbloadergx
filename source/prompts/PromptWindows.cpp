@@ -204,12 +204,12 @@ void WindowCredits() {
     i++;
     y+=26;
 
-    txt[i] = new GuiText(": http://code.google.com/p/usbloader-gui/", 20, (GXColor) {255, 255, 255, 255});
+    txt[i] = new GuiText(" http://code.google.com/p/usbloader-gui/", 20, (GXColor) {255, 255, 255, 255});
     txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     txt[i]->SetPosition(50,y);
     i++; //y+=28;
 
-    txt[i] = new GuiText(tr("Official Site"), 20, (GXColor) {255, 255, 255, 255});
+    txt[i] = new GuiText(tr("Official Site:"), 20, (GXColor) {255, 255, 255, 255});
     txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     txt[i]->SetPosition(-180,y);
     i++;
@@ -219,110 +219,91 @@ void WindowCredits() {
 
     txt[i] = new GuiText(tr("Coding:"));
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    txt[i]->SetPosition(70,y);
+    txt[i]->SetPosition(10,y);
     i++;
 
-    txt[i] = new GuiText("nIxx / giantpune");
+    txt[i] = new GuiText("dimok / nIxx / giantpune / ardi");
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    txt[i]->SetPosition(220,y);
-    i++;
-    y+=22;
-
-    txt[i] = new GuiText("ardi / lustar");
-    txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    txt[i]->SetPosition(220,y);
+    txt[i]->SetPosition(160,y);
     i++;
     y+=22;
 
-    txt[i] = new GuiText("r-win");
+    txt[i] = new GuiText("hungyip84 / DrayX7 / lustar / r-win");
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    txt[i]->SetPosition(220,y);
-    i++;
-    y+=22;
-
-    char text[100];
-
-    sprintf(text, "hungyip84 / DrayX7 %s", tr("(retired)"));
-    txt[i] = new GuiText(text);
-    txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    txt[i]->SetPosition(220,y);
-    i++;
-    y+=22;
-
-    sprintf(text, "dimok %s", tr("(retired)"));
-    txt[i] = new GuiText(text);
-    txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    txt[i]->SetPosition(220,y);
+    txt[i]->SetPosition(160,y);
     i++;
     y+=34;
 
+    char text[100];
+
     txt[i] = new GuiText(tr("Design:"));
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    txt[i]->SetPosition(70,y);
+    txt[i]->SetPosition(10,y);
     i++;
 
     txt[i] = new GuiText("cyrex / NeoRame");
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    txt[i]->SetPosition(220,y);
+    txt[i]->SetPosition(160,y);
     i++;
-    y+=20;
-
-    txt[i] = new GuiText(" ");
-    txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    txt[i]->SetPosition(220,y);
-    i++;
-    y+=22;
+    y+=34;
 
     txt[i] = new GuiText(tr("Big thanks to:"));
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    txt[i]->SetPosition(70,y);
+    txt[i]->SetPosition(10,y);
     i++;
 
     sprintf(text, "lustar %s", tr("for WiiTDB and hosting covers / disc images"));
     txt[i] = new GuiText(text);
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    txt[i]->SetPosition(220,y);
+    txt[i]->SetPosition(160,y);
     i++;
     y+=22;
 
     sprintf(text, "CorneliousJD %s", tr("for hosting the update files"));
     txt[i] = new GuiText(text);
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    txt[i]->SetPosition(220,y);
+    txt[i]->SetPosition(160,y);
+    i++;
+    y+=22;
+
+    sprintf(text, "Kinyo %s", tr("and translaters for language files updates"));
+    txt[i] = new GuiText(text);
+    txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+    txt[i]->SetPosition(160,y);
     i++;
     y+=22;
 
     txt[i] = new GuiText(tr("Special thanks to:"));
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    txt[i]->SetPosition(70,y);
+    txt[i]->SetPosition(10,y);
     i++;
     y+=22;
 
     sprintf(text, "Waninkoko, Kwiirk & Hermes %s", tr("for the USB Loader source"));
     txt[i] = new GuiText(text);
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    txt[i]->SetPosition(100,y);
+    txt[i]->SetPosition(60,y);
     i++;
     y+=22;
 
     sprintf(text, "Tantric %s LibWiiGui", tr("for his awesome tool"));
     txt[i] = new GuiText(text);
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    txt[i]->SetPosition(100,y);
+    txt[i]->SetPosition(60,y);
     i++;
     y+=22;
 
     sprintf(text, "Fishears/Nuke %s Ocarina", tr("for"));
     txt[i] = new GuiText(text);
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    txt[i]->SetPosition(100,y);
+    txt[i]->SetPosition(60,y);
     i++;
     y+=22;
 
     sprintf(text, "WiiPower %s", tr("for diverse patches"));
     txt[i] = new GuiText(text);
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    txt[i]->SetPosition(100,y);
+    txt[i]->SetPosition(60,y);
     i++;
     y+=22;
 

@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# danish.lang - r755
+# danish.lang - r785
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-05 14:51+0200\n"
+"POT-Creation-Date: 2009-10-15 05:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: dorf[dk]\n"
 "Language-Team: \n"
@@ -24,9 +24,6 @@ msgstr " er blevet gemt. Koderne er ikke blevet kontrolleret. Nogle af koderne v
 
 msgid " is not on the server."
 msgstr " er ikke på serveren."
-
-msgid "(both retired)"
-msgstr "(begge har trukket sig tilbage)"
 
 msgid "0 (Everyone)"
 msgstr "0 (Alle)"
@@ -197,7 +194,7 @@ msgid "Cancel"
 msgstr "Annullér"
 
 msgid "Channels"
-msgstr ""
+msgstr "Kanaler"
 
 msgid "Cheatfile is blank"
 msgstr "Cheatfilen er tom"
@@ -351,7 +348,7 @@ msgid "Developed by"
 msgstr "Udviklet af"
 
 msgid "Directory does not exist!"
-msgstr ""
+msgstr "Mappen eksisterer ikke!"
 
 msgid "Disc Artwork Download"
 msgstr "Download DVD-billeder"
@@ -696,7 +693,7 @@ msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr "Sandsynligvis har det dimensioner, der ikke er delelige med fire."
 
 msgid "Mount DVD drive"
-msgstr ""
+msgstr "Mount DVD-drev"
 
 msgid "Music Volume"
 msgstr "Lydstyrke"
@@ -788,8 +785,8 @@ msgstr "Til"
 msgid "Oct"
 msgstr "Okt"
 
-msgid "Official Site"
-msgstr "Officiel side"
+msgid "Official Site:"
+msgstr "Officiel side:"
 
 msgid "Only Customs"
 msgstr "Kun tilpassede"
@@ -932,6 +929,9 @@ msgstr "Standby"
 msgid "Sort alphabetically"
 msgstr "Sortér alfabetisk"
 
+msgid "Sort by rank"
+msgstr ""
+
 msgid "Sort order by most played"
 msgstr "Sortér efter popularitet"
 
@@ -978,7 +978,7 @@ msgid "TXT Cheatcodes Path changed"
 msgstr "Sti til TXTCheatcodes ændret"
 
 msgid "The entered directory does not exist. Would you like to create it?"
-msgstr ""
+msgstr "Den angivne mappe eksisterer ikke. Vil du oprette den?"
 
 msgid "The file is not a .wad"
 msgstr "Filen er ikke en .WAD"
@@ -1079,7 +1079,7 @@ msgid "Updating WiiTDB.zip"
 msgstr "Opdaterer WiiTDB.zip"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
-msgstr ""
+msgstr "Den uploadede ZIP-fil er installeret i homebrew-mappen."
 
 msgid "VIDTV Patch"
 msgstr "VIDTV-patch"
@@ -1148,6 +1148,9 @@ msgstr "Du skal formatere en partition"
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 msgstr "URLen er blevet gemt som %sWiiTDB_URL.txt."
+
+msgid "and translaters for language files updates"
+msgstr ""
 
 msgid "available"
 msgstr "tilgængelig"

@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# japanese.lang - r781
+# japanese.lang - r785
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-05 14:51+0200\n"
+"POT-Creation-Date: 2009-10-15 05:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: \n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid " Wad Saved as:"
-msgstr "Wadを保存しました:"
+msgstr "WADを保存しました:"
 
 msgid " could not be downloaded."
 msgstr "ﾀﾞｳﾝﾛｰﾄﾞできませんでした"
@@ -24,9 +24,6 @@ msgstr "に保存されました。使用は自己責任でお願いします。
 
 msgid " is not on the server."
 msgstr "はｻｰﾊﾞｰにありません。"
-
-msgid "(both retired)"
-msgstr "/ papa / K-M"
 
 msgid "0 (Everyone)"
 msgstr "A(全年齢対象)"
@@ -62,7 +59,7 @@ msgid "3D Cover Path"
 msgstr "3Dカバーのパス"
 
 msgid "3D Covers"
-msgstr "3D ｶﾊﾞｰ"
+msgstr "3Dカバー"
 
 msgid "4 (Adults Only 18+)"
 msgstr "Z(18才以上対象)"
@@ -131,7 +128,7 @@ msgid "An Error occured"
 msgstr "エラーが起きました"
 
 msgid "Anti"
-msgstr ""
+msgstr "アンチ"
 
 msgid "App Language"
 msgstr "使用言語"
@@ -149,7 +146,7 @@ msgid "AutoInit Network"
 msgstr "ﾈｯﾄﾜｰｸの自動初期化"
 
 msgid "AutoPatch"
-msgstr "自動ﾊﾟｯﾁ"
+msgstr "自動パッチ"
 
 msgid "Back"
 msgstr "もどる"
@@ -176,7 +173,7 @@ msgid "Block IOS Reload"
 msgstr "IOSの再ﾛｰﾄﾞ阻止"
 
 msgid "Boot/Standard"
-msgstr "cIOS選択"
+msgstr "使用するcIOS"
 
 msgid "Boot?"
 msgstr "起動しますか？"
@@ -203,7 +200,7 @@ msgid "Cheatfile is blank"
 msgstr "ﾁｰﾄﾌｧｲﾙがありません"
 
 msgid "Checking existing artwork"
-msgstr "ｶﾊﾞｰをﾁｪｯｸしています"
+msgstr "カバーをチェックしています"
 
 msgid "Checking for Updates"
 msgstr "最新版を確認中"
@@ -212,7 +209,7 @@ msgid "Click to Download Covers"
 msgstr "ｸﾘｯｸでｶﾊﾞｰをﾀﾞｳﾝﾛｰﾄﾞ"
 
 msgid "Click to change game ID"
-msgstr "ｸﾘｯｸでｹﾞｰﾑIDを変更"
+msgstr "クリックでゲームIDを変更"
 
 msgid "Clock"
 msgstr "時計の表示"
@@ -243,7 +240,7 @@ msgid "Console Locked"
 msgstr "GXはﾛｯｸされています"
 
 msgid "Console should be unlocked to modify it."
-msgstr "変更にはGXのﾛｯｸ解除が必要です"
+msgstr "変更にはGXのロック解除が必要です"
 
 msgid "Continue to install game?"
 msgstr "このｹﾞｰﾑをｲﾝｽﾄｰﾙしますか？"
@@ -255,10 +252,10 @@ msgid "Correct Password"
 msgstr "正しい暗証番号です"
 
 msgid "Could not create GCT file"
-msgstr "GCTﾌｧｲﾙを作成できません"
+msgstr "GCTﾌｧｲﾙを作成できませんでした"
 
 msgid "Could not find a WBFS partition."
-msgstr "WBFSﾊﾟｰﾃｨｼｮﾝが見つかりません"
+msgstr "WBFSﾊﾟｰﾃｨｼｮﾝが見つかりませんでした"
 
 msgid "Could not initialize DIP module!"
 msgstr "DIPﾓｼﾞｭｰﾙを初期化できません!"
@@ -267,16 +264,16 @@ msgid "Could not initialize network!"
 msgstr "ﾈｯﾄﾜｰｸを初期化できませんでした!"
 
 msgid "Could not open Disc"
-msgstr "ﾃﾞｨｽｸを開けません"
+msgstr "ﾃﾞｨｽｸを開けませんでした"
 
 msgid "Could not open WBFS partition"
-msgstr "WBFSﾊﾟｰﾃｨｼｮﾝを開けません"
+msgstr "WBFSﾊﾟｰﾃｨｼｮﾝを開けませんでした"
 
 msgid "Could not open disc."
-msgstr "ﾃﾞｨｽｸを開けません"
+msgstr "ﾃﾞｨｽｸを開けませんでした"
 
 msgid "Could not read the disc."
-msgstr "ﾃﾞｨｽｸを読めません"
+msgstr "ﾃﾞｨｽｸを読めませんでした"
 
 msgid "Could not save."
 msgstr "保存できませんでした"
@@ -285,7 +282,7 @@ msgid "Could not set USB."
 msgstr "USBをｾｯﾄできません"
 
 msgid "Cover Download"
-msgstr "どのｶﾊﾞｰをﾀﾞｳﾝﾛｰﾄﾞしますかﾞ"
+msgstr "どの画像をﾀﾞｳﾝﾛｰﾄﾞしますか"
 
 msgid "Cover Path Change"
 msgstr "カバーのパスの変更"
@@ -354,7 +351,7 @@ msgid "Directory does not exist!"
 msgstr "ﾃﾞｨﾚｸﾄﾘがありません"
 
 msgid "Disc Artwork Download"
-msgstr "ﾀﾞｳﾝﾛｰﾄﾞするﾃﾞｨｽｸ画像"
+msgstr "ﾃﾞｨｽｸ画像のﾀﾞｳﾝﾛｰﾄﾞ"
 
 msgid "Disc Artwork Path"
 msgstr "ﾃﾞｨｽｸ画像のパス"
@@ -375,7 +372,7 @@ msgid "DiskFlip"
 msgstr ""
 
 msgid "Display"
-msgstr "ｹﾞｰﾑ情報"
+msgstr "ゲーム情報"
 
 msgid "Display as a carousel"
 msgstr "回転ﾄﾚｲ風に表示"
@@ -450,7 +447,7 @@ msgid "Error 002 fix"
 msgstr "Error002対策"
 
 msgid "Error reading Disc"
-msgstr "ﾃﾞｨｽｸ読込み失敗"
+msgstr "ﾃﾞｨｽｸ読込みに失敗しました"
 
 msgid "Error while transfering data."
 msgstr "ﾃﾞｰﾀ転送中のエラーが発生しました"
@@ -516,7 +513,7 @@ msgid "Game ID"
 msgstr "IDのみ"
 
 msgid "Game Language"
-msgstr "ｹﾞｰﾑの言語"
+msgstr "ゲームの言語"
 
 msgid "Game Load"
 msgstr "読み込みの設定"
@@ -531,7 +528,7 @@ msgid "Game is already installed:"
 msgstr "このｹﾞｰﾑは既にｲﾝｽﾄｰﾙされています:"
 
 msgid "Games"
-msgstr "ｹﾞｰﾑ"
+msgstr "ゲーム数"
 
 msgid "German"
 msgstr "ﾄﾞｲﾂ語"
@@ -638,7 +635,7 @@ msgid "Keep"
 msgstr "保存"
 
 msgid "Keyboard"
-msgstr "ｷｰﾎﾞｰﾄﾞのﾀｲﾌﾟ"
+msgstr "キーボードのタイプ"
 
 msgid "Korean"
 msgstr "韓国語"
@@ -705,7 +702,7 @@ msgid "Neither"
 msgstr "非表示"
 
 msgid "Network init error"
-msgstr "ﾈｯﾄﾜｰｸ初期化ｴﾗｰ"
+msgstr "ﾈｯﾄﾜｰｸ初期化エラー"
 
 msgid "Next"
 msgstr "次へ"
@@ -744,7 +741,7 @@ msgid "No data could be read."
 msgstr "ﾃﾞｰﾀ読込に失敗しました"
 
 msgid "No file missing!"
-msgstr "ﾌｧｲﾙを検出できませんでした!"
+msgstr "ﾌｧｲﾙを検出できませんでした…"
 
 msgid "No new updates."
 msgstr "更新はありません"
@@ -788,8 +785,8 @@ msgstr "オン"
 msgid "Oct"
 msgstr "10月"
 
-msgid "Official Site"
-msgstr "公式ｻｲﾄ"
+msgid "Official Site:"
+msgstr "公式ｻｲﾄ:"
 
 msgid "Only Customs"
 msgstr "自作のみ"
@@ -819,16 +816,16 @@ msgid "Password has been changed"
 msgstr "暗証番号を変更しました"
 
 msgid "Paste it into your browser to get your WiiTDB.zip."
-msgstr "ﾌﾞﾗｳｻﾞに貼付けるとWiiTDB.zipをﾀﾞｳﾝﾛｰﾄﾞできます。"
+msgstr "ブラウザに貼付けるとWiiTDB.zipをﾀﾞｳﾝﾛｰﾄﾞできます。"
 
 msgid "Patch Country Strings"
-msgstr "文字列ﾊﾟｯﾁ"
+msgstr "文字列パッチ"
 
 msgid "Pick from a list"
 msgstr "ﾘｽﾄから選択"
 
 msgid "Play Count"
-msgstr "ﾌﾟﾚｲ回数"
+msgstr "プレイ回数"
 
 msgid "Please wait..."
 msgstr "しばらくお待ちください"
@@ -846,7 +843,7 @@ msgid "Published by"
 msgstr "公開者："
 
 msgid "Quick Boot"
-msgstr "ｸｲｯｸ起動"
+msgstr "クイック起動"
 
 msgid "Reading WAD data... Ok!"
 msgstr "WADﾃﾞｰﾀを読込...成功！"
@@ -858,7 +855,7 @@ msgid "Released"
 msgstr "リリース"
 
 msgid "Reload SD"
-msgstr "SDのﾘﾛｰﾄﾞ"
+msgstr "ﾘﾛｰﾄﾞ"
 
 msgid "Rename Game on WBFS"
 msgstr "WBFS内のｹﾞｰﾑ名変更"
@@ -932,6 +929,9 @@ msgstr "スタンバイ"
 msgid "Sort alphabetically"
 msgstr "ｱﾙﾌｧﾍﾞｯﾄ順に並び替え"
 
+msgid "Sort by rank"
+msgstr "ランク順に並び替え"
+
 msgid "Sort order by most played"
 msgstr "ﾌﾟﾚｲ回数が多い順に並び替え"
 
@@ -988,28 +988,28 @@ msgstr "WADﾌｧｲﾙをｲﾝｽﾄｰﾙしましたが、SDから削除で�
 
 #, c-format
 msgid "The wad installation failed with error %ld"
-msgstr "WADのｲﾝｽﾄｰﾙはerror %ldで失敗しました"
+msgstr "WADのｲﾝｽﾄｰﾙはエラー:%ldで失敗しました"
 
 msgid "Theme Path"
-msgstr "ﾃｰﾏのパス"
+msgstr "テーマのパス"
 
 msgid "Theme Path Changed"
-msgstr "ﾃｰﾏのパスを変更しました"
+msgstr "テーマのパスを変更しました"
 
 msgid "Theme Path change"
-msgstr "ﾃｰﾏのパスの変更"
+msgstr "テーマのパスの変更"
 
 msgid "Time left:"
 msgstr "残り時間:"
 
 msgid "Title Launcher"
-msgstr "ﾀｲﾄﾙ ﾗﾝﾁｬｰ"
+msgstr "チャンネルランチャー"
 
 msgid "Titles from WiiTDB"
 msgstr "WiiTDBからﾀｲﾄﾙ読込"
 
 msgid "Tooltips"
-msgstr "ﾋﾝﾄﾊﾞﾙｰﾝ"
+msgstr "ヒントバルーン"
 
 msgid "USB Device not found"
 msgstr "USBﾃﾞﾊﾞｲｽを検出できませんでした"
@@ -1025,7 +1025,7 @@ msgid "Uninstall"
 msgstr "ｱﾝｲﾝｽﾄｰﾙ"
 
 msgid "Uninstall Game"
-msgstr "ｹﾞｰﾑをｱﾝｲﾝｽﾄｰﾙ"
+msgstr "ゲームをｱﾝｲﾝｽﾄｰﾙ"
 
 msgid "Uninstall Menu"
 msgstr "アンインストール"
@@ -1067,7 +1067,7 @@ msgid "Update to"
 msgstr "最新版:"
 
 msgid "Updating"
-msgstr "更新中"
+msgstr "更新中 -"
 
 msgid "Updating Language Files..."
 msgstr "言語設定ﾌｧｲﾙを更新中..."
@@ -1082,7 +1082,7 @@ msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "ｲﾝｽﾄｰﾙ済みﾃﾞｨﾚｸﾄﾘにZIPを送信しました"
 
 msgid "VIDTV Patch"
-msgstr "映像ﾊﾟｯﾁ"
+msgstr "映像パッチ"
 
 #, c-format
 msgid "Version: %s"
@@ -1110,7 +1110,7 @@ msgid "Wii Menu"
 msgstr "Wiiメニューへ"
 
 msgid "Wii Settings"
-msgstr "Wii 設定"
+msgstr "データ管理"
 
 msgid "WiiTDB Files"
 msgstr "WiiTDBﾌｧｲﾙ"
@@ -1149,6 +1149,9 @@ msgstr "ﾊﾟｰﾃｨｼｮﾝを初期化して下さい"
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 msgstr "%sWiiTDB_URL.txtにURLを保存しました"
 
+msgid "and translaters for language files updates"
+msgstr ""
+
 msgid "available"
 msgstr "があります"
 
@@ -1171,7 +1174,7 @@ msgid "files left"
 msgstr "個未完了"
 
 msgid "files not found on the server!"
-msgstr "個ｻｰﾊﾞｰにありませんでした!"
+msgstr "個ｻｰﾊﾞｰにありませんでした…"
 
 msgid "for"
 msgstr ""
