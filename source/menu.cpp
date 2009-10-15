@@ -1279,17 +1279,19 @@ int MenuDiscList() {
             break;
         } else if (gameInfo.GetState() == STATE_CLICKED && mountMethod!=3) {
 		    gameInfo.ResetState();
-            gameSelected = selectImg1;
-            rockout();
-            struct discHdr *header = &gameList[selectImg1];
-            snprintf (IDfull,sizeof(IDfull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
-            choice = showGameInfo(IDfull);
-            rockout(2);
-            if (choice==2)
-                homeBtn.SetState(STATE_CLICKED);
-			if (choice==3) {
-			    menu = MENU_DISCLIST;
-				break;
+			if(selectImg1>=0 && selectImg1<(s32)gameCnt) {
+                gameSelected = selectImg1;
+                rockout();
+                struct discHdr *header = &gameList[selectImg1];
+                snprintf (IDfull,sizeof(IDfull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
+                choice = showGameInfo(IDfull);
+                rockout(2);
+                if (choice==2)
+                    homeBtn.SetState(STATE_CLICKED);
+			    if (choice==3) {
+			       menu = MENU_DISCLIST;
+				   break;
+				}
 			}
         }
 		else if (dvdBtn.GetState() == STATE_CLICKED) {
