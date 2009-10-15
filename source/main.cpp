@@ -14,6 +14,7 @@
 #include <sys/dir.h>
 #include <ogcsys.h>
 #include <unistd.h>
+#include <locale.h>
 #include <wiiuse/wpad.h>
 
 #include "libwiigui/gui.h"
@@ -121,6 +122,8 @@ static void BootUpProblems()
 
 int
 main(int argc, char *argv[]) {
+
+	setlocale(LC_ALL, "en.UTF-8");
 
     s32 ret;
     bool startupproblem = false;
