@@ -1008,13 +1008,31 @@ int MenuDiscList() {
             } else if (Settings.gameDisplay==carousel) {
                 gameCarousel->SetFocus(1);
             }
-        } else if ((installBtn.GetState() == STATE_CLICKED)||((covert & 0x2)&&(covert!=covertOld))) {
+        } else if (installBtn.GetState() == STATE_CLICKED) {
             choice = WindowPrompt(tr("Install a game"),0,tr("Yes"),tr("No"));
             if (choice == 1) {
                 menu = MENU_INSTALL;
                 break;
             } else {
                 installBtn.ResetState();
+                if (Settings.gameDisplay==list) {
+                    gameBrowser->SetFocus(1);
+                } else if (Settings.gameDisplay==grid) {
+                    gameGrid->SetFocus(1);
+                } else if (Settings.gameDisplay==carousel) {
+                    gameCarousel->SetFocus(1);
+                }
+            }
+        }else if ((covert & 0x2)&&(covert!=covertOld)) {
+            choice = WindowPrompt(tr("New Disc Detected"),0,tr("Install"),tr("Mount DVD drive"),tr("Cancel"));
+            if (choice == 1) {
+                menu = MENU_INSTALL;
+                break;
+            }
+			else if (choice ==2)
+			{
+				dvdBtn.SetState(STATE_CLICKED);
+			}else {
                 if (Settings.gameDisplay==list) {
                     gameBrowser->SetFocus(1);
                 } else if (Settings.gameDisplay==grid) {
@@ -2193,6 +2211,7 @@ int MainMenu(int menu) {
 	delete fontSystem;
 	ShutdownAudio();
     StopGX();
+	gettextCleanUp();
 	if (mountMethod==3)
 	{
 			struct discHdr *header = &gameList[gameSelected];
