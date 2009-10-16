@@ -520,7 +520,9 @@ u8 DiscMount(discHdr *header) {
 	
 	memcpy(header, g_diskID, 0x60);
 	memcpy(g_diskID, tmpBuff, 0x60); // Put the backup back, or games won't load
+	free(tmpBuff);
 
+	
 	ResumeGui();
 	if (dvddone != 1) {
 		return 0;

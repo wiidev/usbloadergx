@@ -286,9 +286,6 @@ int buildTitleList(int t, wchar_t* gameFilter, discHdr ** PgameList, u32 *PgameC
 
     ISFS_Initialize();
 
-    sprintf(path,"%s/config/database.txt",bootDevice);
-    f = fopen(path, "r");
-
     ret = getTitles_TypeCount(typei, &num_titles);
     if (ret < 0) {
     	return -1; 
@@ -316,6 +313,9 @@ int buildTitleList(int t, wchar_t* gameFilter, discHdr ** PgameList, u32 *PgameC
         return -1;
 
     memset(buffer, 0, len);
+	
+	sprintf(path,"%s/config/database.txt",bootDevice);
+    f = fopen(path, "r");
 
     char name[64];
     while (i < (num_titles+num_sys_titles)) {
@@ -404,7 +404,7 @@ int buildTitleList(int t, wchar_t* gameFilter, discHdr ** PgameList, u32 *PgameC
         i++;
     }
 	
-	fclose(f);
+	if (f)fclose(f);
 
     Uninstall_FromTitle(TITLE_ID(1, 0));
     ISFS_Deinitialize();

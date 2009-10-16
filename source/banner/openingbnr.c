@@ -288,6 +288,7 @@ static int do_U8_archive(void)
       u8 padding[32];
 
       if (type != 0x0000) {
+		free(string_table);
          return -2;
       }
 
@@ -295,6 +296,7 @@ static int do_U8_archive(void)
         int diff = my_data_offset - current_offset;
 
         if (diff > 32) {
+			free(string_table);
           return -3;
         }
         fread(padding, 1, diff, fp);
@@ -307,7 +309,9 @@ static int do_U8_archive(void)
       int result;
       result = write_imd5_lz77(file_data, size, name);
       if(result < 0)
+		{free(string_table);
         return result;
+		}
       //printf(")\n");
       current_offset += size;
     }
@@ -317,6 +321,7 @@ static int do_U8_archive(void)
       dir_index--;
     }
 	}
+	free(string_table);
 	return 0;
 }
 
@@ -399,6 +404,7 @@ void do_U8_archivebanner(FILE *fp)
       dir_index--;
     }
 	}
+	free(string_table);
 }
 
 int extractbnrfile(const char * filepath, const char * destpath)
