@@ -93,6 +93,7 @@ enum
 
 enum
 {
+    NONE,
 	WRAP,
 	LONGTEXT,
 	DOTTED,

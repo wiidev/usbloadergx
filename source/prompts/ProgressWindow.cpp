@@ -386,6 +386,7 @@ void ShowProgress(const char *title, const char *msg1, char *dynmsg2, f32 done, 
 
     showProgress = 1;
     progressDone = 100.0*done/total;
+    changed = true;
 
     LWP_ResumeThread(progressthread);
 }

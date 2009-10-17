@@ -746,7 +746,6 @@ void FreeTypeGX::copyTextureToFramebuffer(GXTexObj *texObj, f32 texWidth, f32 te
 	GX_Color4u8(color.r, color.g, color.b, color.a);
 	GX_TexCoord2f32(0.0f, 1.0f);
 	GX_End();
-	GX_DrawDone();
 
 	this->setDefaultMode();
 }
@@ -780,7 +779,6 @@ void FreeTypeGX::copyFeatureToFramebuffer(f32 featureWidth, f32 featureHeight, i
 	GX_Position2s16(screenX, featureHeight + screenY);
 	GX_Color4u8(color.r, color.g, color.b, color.a);
 	GX_End();
-	GX_DrawDone();
 
 	this->setDefaultMode();
 }

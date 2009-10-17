@@ -329,6 +329,7 @@ int MenuDiscList() {
     int dataed = -1;
     int cosa=0,sina=0;
     int selectImg1 = 0;
+    bool firstRun = true;
     char ID[4];
     char IDfull[7];
     u32 covert = 0;
@@ -892,8 +893,10 @@ int MenuDiscList() {
         }
 
         //CLOCK update every 10 secs
-        if(frameCount % (60*10))
+        if(frameCount % 600 == 0 || firstRun)
         {
+            firstRun = false;
+
             time_t rawtime = time(0);                                                               //this fixes code dump caused by the clock
             if (((Settings.hddinfo == hr12)||(Settings.hddinfo == hr24)) && rawtime != lastrawtime) {
                 lastrawtime = rawtime;
