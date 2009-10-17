@@ -318,6 +318,10 @@ void GuiImage::SetGrayscale(void)
             *(image+offset+33) = gray;
         }
     }
+
+    int len = w*h*4;
+	if(len%32) len += (32-len%32);
+	DCFlushRange(image, len);
 }
 
 
@@ -341,7 +345,7 @@ void GuiImage::SetSkew(int XX1, int YY1,int XX2, int YY2,int XX3, int YY3,int XX
 }
 void GuiImage::SetSkew(int *skew)
 {
-	
+
 	xx1 = *skew++;
 	yy1 = *skew++;
 	xx2 = *skew++;
@@ -407,6 +411,10 @@ void GuiImage::ColorStripe(int shift)
 			SetPixel(x, y, color);
 		}
 	}
+
+    int len = w*h*4;
+	if(len%32) len += (32-len%32);
+	DCFlushRange(image, len);
 }
 
 /**
