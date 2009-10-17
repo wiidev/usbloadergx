@@ -319,7 +319,7 @@ void GuiImage::SetGrayscale(void)
         }
     }
 
-    int len = w*h*4;
+    int len = width*height*4;
 	if(len%32) len += (32-len%32);
 	DCFlushRange(image, len);
 }
@@ -412,7 +412,7 @@ void GuiImage::ColorStripe(int shift)
 		}
 	}
 
-    int len = w*h*4;
+    int len = width*height*4;
 	if(len%32) len += (32-len%32);
 	DCFlushRange(image, len);
 }
