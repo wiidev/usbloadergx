@@ -47,13 +47,14 @@
 #include "input.h"
 #include "oggplayer.h"
 
-extern FreeTypeGX *fontSystem;
+extern FreeTypeGX *fontSystem[];
 
 #define SCROLL_INITIAL_DELAY 	20
 #define SCROLL_LOOP_DELAY 		3
 #define PAGESIZE	 			9
 #define FILEBROWSERSIZE         8
 #define MAX_OPTIONS 			170
+#define MAX_LINES_TO_DRAW	    30
 
 typedef void (*UpdateCallback)(void * e);
 
@@ -88,6 +89,15 @@ enum
 	IMAGE_COLOR,
 	IMAGE_DATA,
 	IMAGE_COPY
+};
+
+enum
+{
+	WRAP,
+	LONGTEXT,
+	DOTTED,
+	SCROLL_HORIZONTAL,
+	SCROLL_NONE
 };
 
 enum
@@ -699,8 +709,8 @@ class GuiText : public GuiElement
 		//!Sets the text of the GuiText element
 		//!\param t Text
 		void SetText(const char * t);
-		void SetTextf(const char *format, ...) __attribute__((format(printf,2,3)));
 		void SetText(const wchar_t * t);
+		void SetTextf(const char *format, ...) __attribute__((format(printf,2,3)));
 		//!Sets up preset values to be used by GuiText(t)
 		//!Useful when printing multiple text elements, all with the same attributes set
 		//!\param sz Font size
@@ -710,28 +720,30 @@ class GuiText : public GuiElement
 		//!\param s Font style
 		//!\param h Text alignment (horizontal)
 		//!\param v Text alignment (vertical)
-		static void SetPresets(int sz, GXColor c, int w, int wrap, u16 s, int h, int v);
+		void SetPresets(int sz, GXColor c, int w, u16 s, int h, int v);
 		//!Sets the font size
 		//!\param s Font size
 		void SetFontSize(int s);
+		//!Sets the first line to draw (default = 0)
+		//!\param line
+		void SetFirstLine(int line);
+		//!Sets max lines to draw
+		//!\param lines
+		void SetLinesToDraw(int lines);
+		//!Gets the total line number
+		int GetTotalLines();
 		//!Sets the maximum width of the drawn texture image
 		//!If the text exceeds this, it is wrapped to the next line
 		//!\param w Maximum width
 		//!\param m WrapMode
-		enum {
-			WRAP,
-			DOTTED,
-			SCROLL,
-			MARQUEE
-		};
-		void SetMaxWidth(int w, short m=GuiText::WRAP);
+		void SetMaxWidth(int w = 0, int m = WRAP);
 		//!Sets the font color
 		//!\param c Font color
 		void SetColor(GXColor c);
 		//!Sets the FreeTypeGX style attributes
 		//!\param s Style attributes
 		//!\param m Style-Mask attributes
-		void SetStyle(u16 s, u16 m=0xffff);
+		void SetStyle(u16 s);
 		//!Sets the text alignment
 		//!\param hor Horizontal alignment (ALIGN_LEFT, ALIGN_RIGHT, ALIGN_CENTRE)
 		//!\param vert Vertical alignment (ALIGN_TOP, ALIGN_BOTTOM, ALIGN_MIDDLE)
@@ -741,33 +753,35 @@ class GuiText : public GuiElement
 		void SetFont(FreeTypeGX *f);
 		//!Get the Horizontal Size of Text
 		int GetTextWidth();
-		// not NULL set horizontal scale to 0.75 //added
-		void SetWidescreen(bool w);
-		void SetNumLines(int n);//! these two are used to set the first line and numLine
-		void SetFirstLine(int n);
-		int GetNumLines();//! these return the line variables for this text
-		int GetFirstLine();
-		int GetLineHeight(int n);//! returns the height of the #n of lines  including spacing if wrap mode is on
-		int GetTotalLines();
+		//!Get the offset of a linebreak
+		u32 GetLineBreakOffset(int line);
+		//!Change the font
+		//!\param font bufferblock
+		//!\param font filesize
+		bool SetFont(const u8 *font, const u32 filesize);
 		//!Constantly called to draw the text
 		void Draw();
 	protected:
-		wchar_t* text; //!< Unicode text value
+        wchar_t *text;
+		wchar_t *textDyn; //!< Wrapped text value
+		wchar_t *textDynRow[MAX_LINES_TO_DRAW]; //!< Wrapped lines text values
+		char *origText; //!< Original text data
+		int wrapMode; //!< Wrapping toggle
+		int textScrollPos; //!< Current starting index of text string for scrolling
+		int textScrollInitialDelay; //!< Delay to wait before starting to scroll
+		int textScrollDelay; //!< Scrolling speed
 		int size; //!< Font size
 		int maxWidth; //!< Maximum width of the generated text object (for text wrapping)
-		short wrapMode;
-		short scrollPos1;
-		short scrollPos2;
-		short scrollOffset;
-		u32 scrollDelay;
 		u16 style; //!< FreeTypeGX style attributes
 		GXColor color; //!< Font color
 		FreeTypeGX *font;
-		short widescreen; //added
-		//!these are default until the text is drawn
-		int firstLine; //!these are the first line and the number of lines drawn when the text is wrapped
-		int numLines;//! default is -1 and it means that all lines are drawn
-		int totalLines; //!this is the total # of lines when in wrap mode
+		bool widescreen; //added
+		int firstLine;
+		int linestodraw;
+		int totalLines;
+		int textWidth;
+		int currentSize;
+		u32 *LineBreak;
 };
 
 //!Display, manage, and manipulate tooltips in the GUI.
@@ -979,6 +993,7 @@ class GuiKeyboard : public GuiWindow
 		GuiTrigger * trigA;
 		GuiTrigger * trigB;
 };
+
 
 typedef struct _optionlist {
 	int length;

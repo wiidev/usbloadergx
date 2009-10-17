@@ -250,7 +250,7 @@ int TitleBrowser(u32 type) {
     GuiText titleTxt(tr("Title Launcher"), 28, (GXColor) {0, 0, 0, 255});
     titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     titleTxt.SetPosition(12,40);
-    titleTxt.SetMaxWidth(356, GuiText::SCROLL);
+    titleTxt.SetMaxWidth(356, SCROLL_HORIZONTAL);
 
     GuiImage settingsbackground(&settingsbg);
     GuiButton settingsbackgroundbtn(settingsbackground.GetWidth(), settingsbackground.GetHeight());
@@ -262,7 +262,7 @@ int TitleBrowser(u32 type) {
     cancelBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
     GuiImage cancelBtnImg(&btnOutline);
     if (Settings.wsprompt == yes) {
-        cancelBtnTxt.SetWidescreen(CFG.widescreen);
+        //cancelBtnTxt.SetWidescreen(CFG.widescreen);
         cancelBtnImg.SetWidescreen(CFG.widescreen);
     }
     GuiButton cancelBtn(&cancelBtnImg,&cancelBtnImg, 2, 3, 180, 400, &trigA, &btnSoundOver, &btnClick,1);

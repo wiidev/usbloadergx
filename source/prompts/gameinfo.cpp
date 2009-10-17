@@ -267,13 +267,13 @@ int showGameInfo(char *ID) {
 
         if (zapper) zapperImgData = new GuiImageData(zapperR_png);
         else zapperImgData = new GuiImageData(zapper_png);
-		
+
 		if (wiispeak) wiispeakImgData = new GuiImageData(wiispeakR_png);
         else wiispeakImgData = new GuiImageData(wiispeak_png);
-		
+
 		if (nintendods) nintendodsImgData = new GuiImageData(nintendodsR_png);
         else nintendodsImgData = new GuiImageData(nintendods_png);
-		
+
 		//if (vitalitysensor) vitalitysensorImgData = new GuiImageData(vitalitysensorR_png);
         //else vitalitysensorImgData = new GuiImageData(vitalitysensor_png);
 
@@ -596,7 +596,7 @@ int showGameInfo(char *ID) {
         if (strcmp(gameinfo.title,"") != 0) {
             snprintf(linebuf, sizeof(linebuf), "%s",gameinfo.title);
             titleTxt = new GuiText(linebuf, titlefontsize, (GXColor) {0,0,0, 255});
-            titleTxt->SetMaxWidth(350, GuiText::SCROLL);
+            titleTxt->SetMaxWidth(350, SCROLL_HORIZONTAL);
             //while (titleTxt->GetWidth()>250) { titleTxt->SetFontSize(titlefontsize-=2); }
             titleTxt->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
             titleTxt->SetPosition(txtXOffset,12+titley);
@@ -664,7 +664,7 @@ int showGameInfo(char *ID) {
             snprintf(linebuf, sizeof(linebuf), "%s %s", tr("Published by"), gameinfo.publisher);
             publisherTxt = new GuiText(linebuf, 16, (GXColor) {0,0,0, 255});
             if (publisherTxt->GetWidth()>250) newline=2;
-            publisherTxt->SetMaxWidth(250,GuiText::WRAP);
+            publisherTxt->SetMaxWidth(250, WRAP);
             publisherTxt->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
             publisherTxt->SetPosition(-17,12+indexy);
             indexy+=(20 * newline);
@@ -677,7 +677,7 @@ int showGameInfo(char *ID) {
             snprintf(linebuf, sizeof(linebuf), "%s %s", tr("Developed by"), gameinfo.developer);
             developerTxt = new GuiText(linebuf, 16, (GXColor) {0,0,0, 255});
             if (developerTxt->GetWidth()>250) newline=2;
-            developerTxt->SetMaxWidth(250,GuiText::WRAP);
+            developerTxt->SetMaxWidth(250, WRAP);
             developerTxt->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
             developerTxt->SetPosition(-17,12+indexy);
             indexy+=(20 * newline);
@@ -721,14 +721,17 @@ int showGameInfo(char *ID) {
 
         //synopsis
         int pagesize=12;
+		int currentLine = 0;
+		int TotalLines = 0;
         if (strcmp(gameinfo.synopsis,"") != 0)	{
             snprintf(linebuf, sizeof(linebuf), "%s", gameinfo.synopsis);
             synopsisTxt = new GuiText(linebuf, 16, (GXColor) {0,0,0, 255});
-            synopsisTxt->SetMaxWidth(350,GuiText::WRAP);
+            synopsisTxt->SetMaxWidth(350, LONGTEXT);
             synopsisTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
             synopsisTxt->SetPosition(0,0);
-            synopsisTxt->SetNumLines(pagesize);
-            //synopsisTxt->SetFirstLine(12);
+            synopsisTxt->SetLinesToDraw(pagesize);
+            synopsisTxt->SetFirstLine(0);
+			TotalLines = synopsisTxt->GetTotalLines();
 
             dialogBoxImg11 = new GuiImage(&dialogBox1);
             dialogBoxImg11->SetAlignment(0,3);
@@ -784,7 +787,7 @@ int showGameInfo(char *ID) {
         mainWindow->Append(&gameinfoWindow);
         mainWindow->ChangeFocus(&gameinfoWindow);
         ResumeGui();
-		
+
 		bool savedURL = false;
 
         while (choice == -1) {
@@ -849,23 +852,24 @@ int showGameInfo(char *ID) {
                 }
 
             } else if ((upBtn.GetState()==STATE_CLICKED||upBtn.GetState()==STATE_HELD) && page==2) {
-                //int l=synopsisTxt->GetFirstLine()-1;
-                if (synopsisTxt->GetFirstLine()>1)
-                    synopsisTxt->SetFirstLine(synopsisTxt->GetFirstLine()-1);
-                usleep(60000);
+                currentLine--;
+				if(currentLine+pagesize > TotalLines)
+					currentLine = TotalLines-pagesize;
+				if(currentLine < 0)
+					currentLine = 0;
+
+				synopsisTxt->SetFirstLine(currentLine);
+				usleep(60000);
                 if (!((ButtonsHold() & WPAD_BUTTON_UP)||(ButtonsHold() & PAD_BUTTON_UP)))
                     upBtn.ResetState();
-            } else if ((dnBtn.GetState()==STATE_CLICKED||dnBtn.GetState()==STATE_HELD) && page==2
-                       &&synopsisTxt->GetTotalLines()>pagesize
-                       &&synopsisTxt->GetFirstLine()-1<synopsisTxt->GetTotalLines()-pagesize) {
-                int l=0;
-                //if(synopsisTxt->GetTotalLines()>pagesize)
-                l=synopsisTxt->GetFirstLine()+1;
+            } else if ((dnBtn.GetState()==STATE_CLICKED||dnBtn.GetState()==STATE_HELD) && page==2) {
+                currentLine++;
+				if(currentLine+pagesize > TotalLines)
+					currentLine = TotalLines-pagesize;
+				if(currentLine < 0)
+					currentLine = 0;
 
-                //if (l>(synopsisTxt->GetTotalLines()+1)-pagesize)
-                //l=(synopsisTxt->GetTotalLines()+1)-pagesize;
-
-                synopsisTxt->SetFirstLine(l);
+				synopsisTxt->SetFirstLine(currentLine);
                 usleep(60000);
                 if (!((ButtonsHold() & WPAD_BUTTON_DOWN)||(ButtonsHold() & PAD_BUTTON_DOWN)))
                     dnBtn.ResetState();
@@ -985,7 +989,7 @@ int showGameInfo(char *ID) {
             mainWindow->SetState(STATE_DEFAULT);
             ResumeGui();
         }
-		
+
 		if (savedURL) return 3;
         return choice;
 
@@ -1019,7 +1023,7 @@ bool save_gamelist(int txt) { // save gamelist
     f32 size = 0.0;
 	f32 freespace, used;
 	unsigned int i;
-	
+
 	WBFS_DiskSpace(&used, &freespace);
 
 	fprintf(f, "# USB Loader Has Saved this file\n");
@@ -1027,14 +1031,14 @@ bool save_gamelist(int txt) { // save gamelist
     fclose(f);
     /* Closing and reopening because of a write issue we are having right now */
     f = fopen(tmp, "w");
-    
+
 	if (txt==0) 	{
 		fprintf(f, "# USB Loader Has Saved this file\n");
 		fprintf(f, "# This file was created based on your list of games and language settings.\n\n");
-    
+
 		fprintf(f, "%.2fGB %s %.2fGB %s\n\n",freespace,tr("of"),(freespace+used),tr("free"));
 		fprintf(f, "ID     Size(GB)  Name\n");
-		
+
 		for (i = 0; i < gameCnt ; i++) {
 			struct discHdr* header = &gameList[i];
 			WBFS_GameSize(header->id, &size);
@@ -1046,9 +1050,9 @@ bool save_gamelist(int txt) { // save gamelist
 			fprintf(f, "\n");
 		}
 	} else {
-	
+
 	fprintf(f, "\"ID\",\"Size(GB)\",\"Name\"\n");
-		
+
 		for (i = 0; i < gameCnt ; i++) {
 			struct discHdr* header = &gameList[i];
 			WBFS_GameSize(header->id, &size);
@@ -1105,7 +1109,7 @@ bool save_XML_URL() { // save xml url as as txt file for people without wifi
     fprintf(f, "# USB Loader Has Saved this file\n");
     fprintf(f, "# This URL was created based on your list of games and language settings.\n");
     fclose(f);
-    // Closing and reopening because of a write issue we are having right now 
+    // Closing and reopening because of a write issue we are having right now
     f = fopen(tmp, "w");
     fprintf(f, "# USB Loader Has Saved this file\n");
     fprintf(f, "# This URL was created based on your list of games and language settings.\n");

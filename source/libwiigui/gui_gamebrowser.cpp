@@ -127,13 +127,13 @@ GuiGameBrowser::GuiGameBrowser(int w, int h, struct discHdr * l, int gameCnt, co
 		gameTxt[i] = new GuiText(get_title(&gameList[i]), 20, THEME.gametext);
 		gameTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 		gameTxt[i]->SetPosition(24,0);
-		gameTxt[i]->SetMaxWidth(maxTextWidth, GuiText::DOTTED);
+		gameTxt[i]->SetMaxWidth(maxTextWidth, DOTTED);
 
 
 		gameTxtOver[i] = new GuiText(get_title(&gameList[i]), 20, THEME.gametext);
 		gameTxtOver[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 		gameTxtOver[i]->SetPosition(24,0);
-		gameTxtOver[i]->SetMaxWidth(maxTextWidth, GuiText::SCROLL);
+		gameTxtOver[i]->SetMaxWidth(maxTextWidth, SCROLL_HORIZONTAL);
 
 		gameBg[i] = new GuiImage(bgGamesEntry);
 

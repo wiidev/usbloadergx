@@ -69,8 +69,8 @@ sndClick(button_click_pcm, button_click_pcm_size, SOUND_PCM, Settings.sfxvolume)
 	text.SetText(gameFilter);
 	text.SetPosition(10, 15);
 	text.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-	text.SetWidescreen(CFG.widescreen);
-	text.SetMaxWidth(width-(10+2*42+10), GuiText::SCROLL);
+	//text.SetWidescreen(CFG.widescreen);
+	text.SetMaxWidth(width-(10+2*42+10), SCROLL_HORIZONTAL);
 	this->Append(&text);
 
     snprintf(imgPath, sizeof(imgPath), "%skeyboard_backspace_over.png", CFG.theme_path);

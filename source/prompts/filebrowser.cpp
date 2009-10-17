@@ -322,7 +322,7 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
 	GuiText ExitBtnTxt(tr("Cancel"), 24, (GXColor) {0, 0, 0, 255});
 	GuiImage ExitBtnImg(&btnOutline);
 	if (Settings.wsprompt == yes) {
-		ExitBtnTxt.SetWidescreen(CFG.widescreen);
+		//ExitBtnTxt.SetWidescreen(CFG.widescreen);
 		ExitBtnImg.SetWidescreen(CFG.widescreen);
 	}
 	GuiButton ExitBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
@@ -337,7 +337,7 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
 	GuiText usbBtnTxt(browsers[(curDevice+1)%browsers.size()].rootdir, 24, (GXColor) {0, 0, 0, 255});
 	GuiImage usbBtnImg(&btnOutline);
 	if (Settings.wsprompt == yes) {
-		usbBtnTxt.SetWidescreen(CFG.widescreen);
+		//usbBtnTxt.SetWidescreen(CFG.widescreen);
 		usbBtnImg.SetWidescreen(CFG.widescreen);
 	}
 	GuiButton usbBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
@@ -351,7 +351,7 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
 	GuiText okBtnTxt(tr("OK"), 22, THEME.prompttext);
 	GuiImage okBtnImg(&btnOutline);
 	if (Settings.wsprompt == yes) {
-		okBtnTxt.SetWidescreen(CFG.widescreen);
+		//okBtnTxt.SetWidescreen(CFG.widescreen);
 		okBtnImg.SetWidescreen(CFG.widescreen);
 	}
 	GuiButton okBtn(&okBtnImg,&okBtnImg, 0, 4, 40, -35, &trigA, &btnSoundOver, &btnClick,1);
@@ -366,7 +366,7 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
 	AdressText.SetTextf("%s%s", browser->rootdir, browser->dir);
 	AdressText.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 	AdressText.SetPosition(20, 0);
-	AdressText.SetMaxWidth(Address.GetWidth()-40, GuiText::SCROLL);
+	AdressText.SetMaxWidth(Address.GetWidth()-40, SCROLL_HORIZONTAL);
 	GuiImage AdressbarImg(&Address);
 	GuiButton Adressbar(Address.GetWidth(), Address.GetHeight());
 	Adressbar.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);

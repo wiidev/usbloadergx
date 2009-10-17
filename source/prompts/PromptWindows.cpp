@@ -90,7 +90,7 @@ int OnScreenKeyboard(char * var, u32 maxlen, int min) {
     GuiText okBtnTxt(tr("OK"), 22, THEME.prompttext);
     GuiImage okBtnImg(&btnOutline);
     if (Settings.wsprompt == yes) {
-        okBtnTxt.SetWidescreen(CFG.widescreen);
+        //okBtnTxt.SetWidescreen(CFG.widescreen);
         okBtnImg.SetWidescreen(CFG.widescreen);
     }
     GuiButton okBtn(&okBtnImg,&okBtnImg, 0, 4, 5, 15, &trigA, &btnSoundOver, &btnClick,1);
@@ -98,7 +98,7 @@ int OnScreenKeyboard(char * var, u32 maxlen, int min) {
     GuiText cancelBtnTxt(tr("Cancel"), 22, THEME.prompttext);
     GuiImage cancelBtnImg(&btnOutline);
     if (Settings.wsprompt == yes) {
-        cancelBtnTxt.SetWidescreen(CFG.widescreen);
+        //cancelBtnTxt.SetWidescreen(CFG.widescreen);
         cancelBtnImg.SetWidescreen(CFG.widescreen);
     }
     GuiButton cancelBtn(&cancelBtnImg,&cancelBtnImg, 1, 4, -5, 15, &trigA, &btnSoundOver, &btnClick,1);
@@ -215,7 +215,7 @@ void WindowCredits() {
     i++;
     y+=28;
 
-    GuiText::SetPresets(22, (GXColor) {255, 255, 255,  255}, 0, GuiText::WRAP,FTGX_JUSTIFY_LEFT | FTGX_ALIGN_TOP, ALIGN_LEFT, ALIGN_TOP);
+    txt[i]->SetPresets(22, (GXColor) {255, 255, 255,  255}, WRAP, FTGX_JUSTIFY_LEFT | FTGX_ALIGN_TOP, ALIGN_LEFT, ALIGN_TOP);
 
     txt[i] = new GuiText(tr("Coding:"));
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
@@ -459,7 +459,7 @@ WindowPrompt(const char *title, const char *msg, const char *btn1Label,
     GuiText btn1Txt(btn1Label, 22, THEME.prompttext);
     GuiImage btn1Img(&btnOutline);
     if (Settings.wsprompt == yes) {
-        btn1Txt.SetWidescreen(CFG.widescreen);
+        //btn1Txt.SetWidescreen(CFG.widescreen);
         btn1Img.SetWidescreen(CFG.widescreen);
     }
 
@@ -470,7 +470,7 @@ WindowPrompt(const char *title, const char *msg, const char *btn1Label,
     GuiText btn2Txt(btn2Label, 22, THEME.prompttext);
     GuiImage btn2Img(&btnOutline);
     if (Settings.wsprompt == yes) {
-        btn2Txt.SetWidescreen(CFG.widescreen);
+        //btn2Txt.SetWidescreen(CFG.widescreen);
         btn2Img.SetWidescreen(CFG.widescreen);
     }
     GuiButton btn2(&btn2Img, &btn2Img, 0,3,0,0,&trigA,&btnSoundOver,&btnClick,1);
@@ -481,7 +481,7 @@ WindowPrompt(const char *title, const char *msg, const char *btn1Label,
     GuiText btn3Txt(btn3Label, 22, THEME.prompttext);
     GuiImage btn3Img(&btnOutline);
     if (Settings.wsprompt == yes) {
-        btn3Txt.SetWidescreen(CFG.widescreen);
+        //btn3Txt.SetWidescreen(CFG.widescreen);
         btn3Img.SetWidescreen(CFG.widescreen);
     }
     GuiButton btn3(&btn3Img, &btn3Img, 0,3,0,0,&trigA,&btnSoundOver,&btnClick,1);
@@ -492,7 +492,7 @@ WindowPrompt(const char *title, const char *msg, const char *btn1Label,
     GuiText btn4Txt(btn4Label, 22, THEME.prompttext);
     GuiImage btn4Img(&btnOutline);
     if (Settings.wsprompt == yes) {
-        btn4Txt.SetWidescreen(CFG.widescreen);
+        //btn4Txt.SetWidescreen(CFG.widescreen);
         btn4Img.SetWidescreen(CFG.widescreen);
     }
     GuiButton btn4(&btn4Img, &btn4Img, 0,3,0,0,&trigA,&btnSoundOver,&btnClick,1);
@@ -778,7 +778,7 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
     closeTxt.SetPosition(10,3);
     GuiImage closeImg(&close);
     if (Settings.wsprompt == yes) {
-        closeTxt.SetWidescreen(CFG.widescreen);
+        //closeTxt.SetWidescreen(CFG.widescreen);
         closeImg.SetWidescreen(CFG.widescreen);
     }
     GuiButton closeBtn(close.GetWidth(), close.GetHeight());
@@ -797,7 +797,7 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
     GuiText btn2Txt((HBC!=1?tr("Homebrew Channel"):btn1Label), 28, (GXColor) {0, 0, 0, 255});
     GuiImage btn2Img(&button);
     if (Settings.wsprompt == yes) {
-        btn2Txt.SetWidescreen(CFG.widescreen);
+        //btn2Txt.SetWidescreen(CFG.widescreen);
         btn2Img.SetWidescreen(CFG.widescreen);
     }
     GuiButton btn2(&btn2Img,&btn2Img, 2, 5, -150, 0, &trigA, &btnSoundOver, &btnClick,1);
@@ -811,7 +811,7 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
     GuiText btn3Txt(btn2Label, 28, (GXColor) {0, 0, 0, 255});
     GuiImage btn3Img(&button);
     if (Settings.wsprompt == yes) {
-        btn3Txt.SetWidescreen(CFG.widescreen);
+        //btn3Txt.SetWidescreen(CFG.widescreen);
         btn3Img.SetWidescreen(CFG.widescreen);
     }
     GuiButton btn3(&btn3Img,&btn3Img, 2, 5, 150, 0, &trigA, &btnSoundOver, &btnClick,1);
@@ -1060,9 +1060,9 @@ int GameWindowPrompt() {
     if (Settings.wsprompt == yes)
         nameBtnTT.SetWidescreen(CFG.widescreen);
     GuiText nameTxt("", 22, THEME.prompttext);
-    if (Settings.wsprompt == yes)
-        nameTxt.SetWidescreen(CFG.widescreen);
-    nameTxt.SetMaxWidth(350, GuiText::SCROLL);
+    //if (Settings.wsprompt == yes)
+        //nameTxt.SetWidescreen(CFG.widescreen);
+    nameTxt.SetMaxWidth(350, SCROLL_HORIZONTAL);
     GuiButton nameBtn(120,50);
     nameBtn.SetLabel(&nameTxt);
 //	nameBtn.SetLabelOver(&nameTxt);
@@ -1110,7 +1110,7 @@ int GameWindowPrompt() {
     GuiText btn2Txt(tr("Back"), 22, THEME.prompttext);
     GuiImage btn2Img(&btnOutline);
     if (Settings.wsprompt == yes) {
-        btn2Txt.SetWidescreen(CFG.widescreen);
+        //btn2Txt.SetWidescreen(CFG.widescreen);
         btn2Img.SetWidescreen(CFG.widescreen);
     }
     GuiButton btn2(&btn2Img,&btn2Img, 1, 5, 0, 0, &trigA, &btnSoundOver, &btnClick,1);
@@ -1128,7 +1128,7 @@ int GameWindowPrompt() {
     GuiText btn3Txt(tr("Settings"), 22, THEME.prompttext);
     GuiImage btn3Img(&btnOutline);
     if (Settings.wsprompt == yes) {
-        btn3Txt.SetWidescreen(CFG.widescreen);
+        //btn3Txt.SetWidescreen(CFG.widescreen);
         btn3Img.SetWidescreen(CFG.widescreen);
     }
     GuiButton btn3(&btn3Img,&btn3Img, 0, 4, 50, -40, &trigA, &btnSoundOver, &btnClick,1);
@@ -1566,7 +1566,7 @@ DiscWait(const char *title, const char *msg, const char *btn1Label, const char *
     GuiText btn1Txt(btn1Label, 22, THEME.prompttext);
     GuiImage btn1Img(&btnOutline);
     if (Settings.wsprompt == yes) {
-        btn1Txt.SetWidescreen(CFG.widescreen);
+        //btn1Txt.SetWidescreen(CFG.widescreen);
         btn1Img.SetWidescreen(CFG.widescreen);
     }
     GuiButton btn1(&btn1Img,&btn1Img, 1, 5, 0, 0, &trigA, &btnSoundOver, &btnClick,1);
@@ -1586,7 +1586,7 @@ DiscWait(const char *title, const char *msg, const char *btn1Label, const char *
     GuiText btn2Txt(btn2Label, 22, THEME.prompttext);
     GuiImage btn2Img(&btnOutline);
     if (Settings.wsprompt == yes) {
-        btn2Txt.SetWidescreen(CFG.widescreen);
+        //btn2Txt.SetWidescreen(CFG.widescreen);
         btn2Img.SetWidescreen(CFG.widescreen);
     }
     GuiButton btn2(&btn2Img,&btn2Img, 1, 4, -20, -25, &trigA, &btnSoundOver, &btnClick,1);
@@ -1872,7 +1872,7 @@ bool NetworkInitPrompt() {
     GuiText btn1Txt(tr("Cancel"), 22, THEME.prompttext);
     GuiImage btn1Img(&btnOutline);
     if (Settings.wsprompt == yes) {
-        btn1Txt.SetWidescreen(CFG.widescreen);
+        //btn1Txt.SetWidescreen(CFG.widescreen);
         btn1Img.SetWidescreen(CFG.widescreen);
     }
     GuiButton btn1(&btn1Img,&btn1Img, 2, 4, 0, -45, &trigA, &btnSoundOver, &btnClick,1);
@@ -2000,7 +2000,7 @@ ProgressDownloadWindow(int choice2) {
     GuiText btn1Txt(tr("Cancel"), 22, THEME.prompttext);
     GuiImage btn1Img(&btnOutline);
     if (Settings.wsprompt == yes) {
-        btn1Txt.SetWidescreen(CFG.widescreen);
+        //btn1Txt.SetWidescreen(CFG.widescreen);
         btn1Img.SetWidescreen(CFG.widescreen);
     }
     GuiButton btn1(&btn1Img,&btn1Img, 2, 4, 0, -45, &trigA, &btnSoundOver, &btnClick,1);
@@ -2484,7 +2484,7 @@ int ProgressUpdateWindow() {
     GuiText btn1Txt(tr("Cancel"), 22, THEME.prompttext);
     GuiImage btn1Img(&btnOutline);
     if (Settings.wsprompt == yes) {
-        btn1Txt.SetWidescreen(CFG.widescreen);
+        //btn1Txt.SetWidescreen(CFG.widescreen);
         btn1Img.SetWidescreen(CFG.widescreen);
     }
     GuiButton btn1(&btn1Img,&btn1Img, 2, 4, 0, -40, &trigA, &btnSoundOver, &btnClick,1);
@@ -3112,7 +3112,7 @@ int CodeDownload(const char *id) {
     GuiText btn1Txt(tr("Cancel"), 22, THEME.prompttext);
     GuiImage btn1Img(&btnOutline);
     if (Settings.wsprompt == yes) {
-        btn1Txt.SetWidescreen(CFG.widescreen);
+        //btn1Txt.SetWidescreen(CFG.widescreen);
         btn1Img.SetWidescreen(CFG.widescreen);
     }
     GuiButton btn1(&btn1Img,&btn1Img, 2, 4, 0, -40, &trigA, &btnSoundOver, &btnClick,1);
@@ -3324,7 +3324,7 @@ HBCWindowPrompt(const char *name, const char *coder, const char *version,
     GuiText nameTxt(name,30 , THEME.prompttext);
     nameTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     nameTxt.SetPosition(0,-15);
-    nameTxt.SetMaxWidth(430, GuiText::SCROLL);
+    nameTxt.SetMaxWidth(430, SCROLL_HORIZONTAL);
 
 
     if (strcmp(coder,""))
@@ -3349,11 +3349,16 @@ HBCWindowPrompt(const char *name, const char *coder, const char *version,
     release_dateTxt.SetMaxWidth(430);
 
     int pagesize = 6;
+	int currentLine = 0;
+	
     GuiText long_descriptionTxt(long_description, 20, THEME.prompttext);
     long_descriptionTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     long_descriptionTxt.SetPosition(46,117);
-    long_descriptionTxt.SetMaxWidth(360);
-    long_descriptionTxt.SetNumLines(pagesize);
+    long_descriptionTxt.SetMaxWidth(360, LONGTEXT);
+    long_descriptionTxt.SetLinesToDraw(pagesize);
+    long_descriptionTxt.SetFirstLine(currentLine);
+	
+	int TotalLines = long_descriptionTxt.GetTotalLines();
 
     //convert filesize from u64 to char and put unit of measurement after it
     char temp2[7];
@@ -3384,7 +3389,7 @@ HBCWindowPrompt(const char *name, const char *coder, const char *version,
     GuiText btn1Txt(tr("Load"), 22, THEME.prompttext);
     GuiImage btn1Img(&btnOutline);
     if (Settings.wsprompt == yes) {
-        btn1Txt.SetWidescreen(CFG.widescreen);
+        //btn1Txt.SetWidescreen(CFG.widescreen);
         btn1Img.SetWidescreen(CFG.widescreen);
     }
 
@@ -3395,7 +3400,7 @@ HBCWindowPrompt(const char *name, const char *coder, const char *version,
     GuiText btn2Txt(tr("Back"), 22, THEME.prompttext);
     GuiImage btn2Img(&btnOutline);
     if (Settings.wsprompt == yes) {
-        btn2Txt.SetWidescreen(CFG.widescreen);
+        //btn2Txt.SetWidescreen(CFG.widescreen);
         btn2Img.SetWidescreen(CFG.widescreen);
     }
     GuiButton btn2(&btn2Img, &btn2Img, 0,3,0,0,&trigA,&btnSoundOver,&btnClick,1);
@@ -3445,18 +3450,24 @@ HBCWindowPrompt(const char *name, const char *coder, const char *version,
         } else if (btn2.GetState() == STATE_CLICKED) {
             choice = 0;
         } else if ((arrowUpBtn.GetState()==STATE_CLICKED||arrowUpBtn.GetState()==STATE_HELD) ) {
-            if (long_descriptionTxt.GetFirstLine()>1)
-                long_descriptionTxt.SetFirstLine(long_descriptionTxt.GetFirstLine()-1);
+            currentLine--;
+			if(currentLine+pagesize > TotalLines)
+				currentLine = TotalLines-pagesize;
+			if(currentLine < 0)
+				currentLine = 0;
+
+			long_descriptionTxt.SetFirstLine(currentLine);
             usleep(60000);
             if (!((ButtonsHold() & WPAD_BUTTON_UP)||(ButtonsHold() & PAD_BUTTON_UP)))
                 arrowUpBtn.ResetState();
-        } else if ((arrowDownBtn.GetState()==STATE_CLICKED||arrowDownBtn.GetState()==STATE_HELD)
-                   &&long_descriptionTxt.GetTotalLines()>pagesize
-                   &&long_descriptionTxt.GetFirstLine()-1<long_descriptionTxt.GetTotalLines()-pagesize) {
-            int l=0;
-            l=long_descriptionTxt.GetFirstLine()+1;
+        } else if (arrowDownBtn.GetState()==STATE_CLICKED||arrowDownBtn.GetState()==STATE_HELD) {
+            currentLine++;
+			if(currentLine+pagesize > TotalLines)
+				currentLine = TotalLines-pagesize;
+			if(currentLine < 0)
+				currentLine = 0;
 
-            long_descriptionTxt.SetFirstLine(l);
+			long_descriptionTxt.SetFirstLine(currentLine);
             usleep(60000);
             if (!((ButtonsHold() & WPAD_BUTTON_DOWN)||(ButtonsHold() & PAD_BUTTON_DOWN)))
                 arrowDownBtn.ResetState();

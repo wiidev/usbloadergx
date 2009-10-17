@@ -213,7 +213,7 @@ void ExitGUIThreads() {
 }
 void rockout(int f = 0) {
 
-	
+
     HaltGui();
     int num=(f==2?-1:gameSelected);
 
@@ -270,7 +270,7 @@ GuiImageData *LoadCoverImage(struct discHdr *header, bool Prefere3D, bool noCove
 	{
 		char *coverPath = flag ? Settings.covers_path : Settings.covers2d_path; flag = !flag;
 		//Load full id image
-		snprintf(Path, sizeof(Path), "%s%s.png", coverPath, IDfull);	
+		snprintf(Path, sizeof(Path), "%s%s.png", coverPath, IDfull);
 		delete Cover; Cover = new(std::nothrow) GuiImageData(Path, NULL);
 		//Load short id image
 		if (!Cover || !Cover->GetImage())
@@ -336,7 +336,7 @@ int MenuDiscList() {
 	if (!dvdheader)
 		dvdheader = new struct discHdr;
 	u8 mountMethodOLD =0;
-	
+
 	WDVD_GetCoverStatus(&covert);
     u32 covertOld=covert;
 
@@ -468,19 +468,19 @@ int MenuDiscList() {
     GuiText usedSpaceTxt(spaceinfo, 18, THEME.info);
     usedSpaceTxt.SetAlignment(THEME.hddinfo_align, ALIGN_TOP);
     usedSpaceTxt.SetPosition(THEME.hddinfo_x, THEME.hddinfo_y);
-	
+
 	char GamesCnt[15];
     sprintf(GamesCnt,"%s: %i",(mountMethod!=3?tr("Games"):tr("Channels")), gameCnt);
     GuiText gamecntTxt(GamesCnt, 18, THEME.info);
-    
+
 	GuiButton gamecntBtn(100,18);
 	gamecntBtn.SetAlignment(THEME.gamecount_align, ALIGN_TOP);
     gamecntBtn.SetPosition(THEME.gamecount_x,THEME.gamecount_y);
 	gamecntBtn.SetLabel(&gamecntTxt);
 	gamecntBtn.SetEffectGrow();
 	gamecntBtn.SetTrigger(&trigA);
-	
-	
+
+
 
     GuiTooltip installBtnTT(tr("Install a game"));
     if (Settings.wsprompt == yes)
@@ -744,18 +744,18 @@ int MenuDiscList() {
     idBtn.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     idBtn.SetPosition(THEME.id_x,THEME.id_y);
 
-	
+
 
     if (Settings.godmode == 1 && mountMethod!=3) {//only make the button have trigger & tooltip if in godmode
         DownloadBtn.SetSoundOver(&btnSoundOver);
         DownloadBtn.SetTrigger(&trigA);
         DownloadBtn.SetTrigger(&trig1);
         DownloadBtn.SetToolTip(&DownloadBtnTT,205,-30);
-    
+
 		idBtn.SetSoundOver(&btnSoundOver);
 		idBtn.SetTrigger(&trigA);
 		idBtn.SetToolTip(&IDBtnTT,205,-30);
-		
+
     } else
 		{
         DownloadBtn.SetRumble(false);
@@ -783,11 +783,11 @@ int MenuDiscList() {
     GuiText clockTimeBack("88:88", 40, (GXColor) {THEME.clock.r, THEME.clock.g, THEME.clock.b, THEME.clock.a/6});
     clockTimeBack.SetAlignment(THEME.clock_align, ALIGN_TOP);
     clockTimeBack.SetPosition(THEME.clock_x, THEME.clock_y);
-    clockTimeBack.SetFont(fontClock);
+    clockTimeBack.SetFont(clock_ttf, clock_ttf_size);
     GuiText clockTime(theTime, 40, THEME.clock);
     clockTime.SetAlignment(THEME.clock_align, ALIGN_TOP);
     clockTime.SetPosition(THEME.clock_x, THEME.clock_y);
-    clockTime.SetFont(fontClock);
+    clockTime.SetFont(clock_ttf, clock_ttf_size);
 
     HaltGui();
     GuiWindow w(screenwidth, screenheight);
@@ -807,7 +807,7 @@ int MenuDiscList() {
     w.Append(&settingsBtn);
     w.Append(&DownloadBtn);
     w.Append(&idBtn);
-	
+
 	// Begin Toolbar
     w.Append(&favoriteBtn);
 	Toolbar[0] = &favoriteBtn;
@@ -827,9 +827,9 @@ int MenuDiscList() {
 	Toolbar[7] = &dvdBtn;
 	w.SetUpdateCallback(DiscListWinUpdateCallback);
 	// End Toolbar
-    
-	
-	
+
+
+
 	if (Settings.godmode == 1)
         w.Append(&homebrewBtn);
 
@@ -855,10 +855,10 @@ int MenuDiscList() {
 		if(searchBar)
 			mainWindow->Append(searchBar);
 	}
-	
+
 	ResumeGui();
-	
-	
+
+
     while (menu == MENU_NONE) {
 
         if (idiotFlag==1) {
@@ -891,31 +891,34 @@ int MenuDiscList() {
             break;
         }
 
-        //CLOCK
-        time_t rawtime = time(0);                                                               //this fixes code dump caused by the clock
-        if (((Settings.hddinfo == hr12)||(Settings.hddinfo == hr24)) && rawtime != lastrawtime) {
-            lastrawtime = rawtime;
-            timeinfo = localtime (&rawtime);
-            if (dataed < 1) {
-                if (Settings.hddinfo == hr12) {
-                    if (rawtime & 1)
-                        strftime(theTime, sizeof(theTime), "%I:%M", timeinfo);
-                    else
-                        strftime(theTime, sizeof(theTime), "%I %M", timeinfo);
-                }
-                if (Settings.hddinfo == hr24) {
-                    if (rawtime & 1)
-                        strftime(theTime, sizeof(theTime), "%H:%M", timeinfo);
-                    else
-                        strftime(theTime, sizeof(theTime), "%H %M", timeinfo);
-                }
-                clockTime.SetText(theTime);
+        //CLOCK update every 10 secs
+        if(frameCount % (60*10))
+        {
+            time_t rawtime = time(0);                                                               //this fixes code dump caused by the clock
+            if (((Settings.hddinfo == hr12)||(Settings.hddinfo == hr24)) && rawtime != lastrawtime) {
+                lastrawtime = rawtime;
+                timeinfo = localtime (&rawtime);
+                if (dataed < 1) {
+                    if (Settings.hddinfo == hr12) {
+                        if (rawtime & 1)
+                            strftime(theTime, sizeof(theTime), "%I:%M", timeinfo);
+                        else
+                            strftime(theTime, sizeof(theTime), "%I %M", timeinfo);
+                    }
+                    if (Settings.hddinfo == hr24) {
+                        if (rawtime & 1)
+                            strftime(theTime, sizeof(theTime), "%H:%M", timeinfo);
+                        else
+                            strftime(theTime, sizeof(theTime), "%H %M", timeinfo);
+                    }
+                    clockTime.SetText(theTime);
 
-            } else if (dataed > 0) {
+                } else if (dataed > 0) {
 
-                clockTime.SetTextf("%i", (dataed-1));
+                    clockTime.SetTextf("%i", (dataed-1));
+                }
+
             }
-
         }
                                                                                                                                                                                                                                                                                                                                                                                                 if ((datagB<1)&&(Settings.cios==1)&&(Settings.video == ntsc)&&(Settings.hddinfo == hr12)&&(Settings.qboot==1)&&(Settings.wsprompt==0)&&(Settings.language==ger)&&(Settings.tooltips==0)){dataed=1;dataef=1;}if (dataef==1){if (cosa>7){cosa=1;}datag++;if (sina==3){wiiBtn.SetAlignment(ALIGN_LEFT,ALIGN_BOTTOM);wiiBtnImg.SetAngle(0);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((cosa)*70),(-2*(datag)+120));}else if(62<=datag){wiiBtn.SetPosition(((cosa)*70),((datag*2)-130));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==2){wiiBtn.SetAlignment(ALIGN_RIGHT,ALIGN_TOP);wiiBtnImg.SetAngle(270);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((-2*(datag)+130)),((cosa)*50));}else if(62<=datag){wiiBtn.SetPosition((2*(datag)-120),((cosa)*50));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==1){wiiBtn.SetAlignment(ALIGN_TOP,ALIGN_LEFT);wiiBtnImg.SetAngle(180);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((cosa)*70),(2*(datag)-120));}else if(62<=datag){wiiBtn.SetPosition(((cosa)*70),(-2*(datag)+130));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==0){wiiBtn.SetAlignment(ALIGN_TOP,ALIGN_LEFT);wiiBtnImg.SetAngle(90);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((2*(datag)-130)),((cosa)*50));}else if(62<=datag){wiiBtn.SetPosition((-2*(datag)+120),((cosa)*50));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}}
         // respond to button presses
@@ -1059,7 +1062,7 @@ int MenuDiscList() {
             //if(isSdInserted()) {
             if (isInserted(bootDevice)) {
 				HaltGui(); // to fix endless rumble when clicking on the SD icon when rumble is disabled because rumble is set to on in Global_Default()
-				CFG_Load(); 
+				CFG_Load();
 				ResumeGui();
             }
             sdcardBtn.ResetState();
@@ -1176,8 +1179,8 @@ int MenuDiscList() {
 					wcscpy(newFilter, gameFilter);
 				newFilter[len] = searchChar;
 				newFilter[len+1] = 0;
-			
-			
+
+
 				__Menu_GetEntries(0, newFilter);
 				menu = MENU_DISCLIST;
 				break;
@@ -1207,7 +1210,7 @@ int MenuDiscList() {
 					searchBtn.SetImageOver(&searchBtnImg_g);
 					searchBtn.SetAlpha(180);
 				}
-				
+
 				ResumeGui();
 			}
 			else if(searchChar == 8) // Backspace
@@ -1218,7 +1221,7 @@ int MenuDiscList() {
 			}
 
 		}
-		
+
         else if (abcBtn.GetState() == STATE_CLICKED) {
             if (Settings.sort != all) {
                 Settings.sort=all;
@@ -1314,7 +1317,7 @@ int MenuDiscList() {
         }
 		else if (dvdBtn.GetState() == STATE_CLICKED) {
 			mountMethodOLD = (mountMethod==3?mountMethod:0);
-                
+
 				mountMethod=DiscMount(dvdheader);
 				dvdBtn.ResetState();
 
@@ -1367,7 +1370,7 @@ int MenuDiscList() {
                         delete GameRegionTxt;
                         GameRegionTxt = NULL;
                     }
-					
+
                     switch (header->id[3]) {
                     case 'E':
                         sprintf(gameregion,"NTSC U");
@@ -1431,7 +1434,7 @@ int MenuDiscList() {
                     }
                 }
             }
-			
+
 			if (idBtn.GetState() == STATE_CLICKED && mountMethod!=3) {
 			struct discHdr * header = &gameList[gameBrowser->GetSelectedOption()];
                     //enter new game ID
@@ -1444,13 +1447,13 @@ int MenuDiscList() {
                         //__Menu_GetEntries();
                         menu = MENU_DISCLIST;
                     }
-					
+
 					idBtn.ResetState();
                 }
         }
 
         if (((gameSelected >= 0) && (gameSelected < (s32)gameCnt))
-			|| mountMethod==1 
+			|| mountMethod==1
 			|| mountMethod==2) {
 			if(searchBar)
 			{
@@ -1479,7 +1482,7 @@ int MenuDiscList() {
 			header = (mountMethod==1||mountMethod==2?dvdheader:&gameList[gameSelected]); //reset header
             snprintf (IDfull,sizeof(IDfull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
             struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
-            
+
 			if (game_cfg) {
                 alternatedol = game_cfg->loadalternatedol;
                 ocarinaChoice = game_cfg->ocarina;
@@ -1523,7 +1526,7 @@ int MenuDiscList() {
                     }
 
                 }
-                
+
                 wiilight(0);
                 if (isInserted(bootDevice)) {
                     //////////save game play count////////////////
@@ -1622,7 +1625,7 @@ int MenuDiscList() {
                     wiilight(0);
 					//re-evaluate header now in case they changed games while on the game prompt
                     header = &gameList[gameSelected];
-                    
+
                     //enter new game title
                     char entered[60];
                     snprintf(entered, sizeof(entered), "%s", get_title(header));
@@ -1679,7 +1682,7 @@ int MenuDiscList() {
 		if (game_cfg) {
 			if (game_cfg->alternatedolstart != 0)
 				altdoldefault = false;
-		} 
+		}
 		if (altdoldefault) {
 			int autodol = autoSelectDol((char*)header->id, true);
 			if (autodol>0) {
@@ -1697,11 +1700,11 @@ int MenuDiscList() {
 			}
 		}
 	}
-	
+
 	if (menu == MENU_EXIT) {
 		SDCard_deInit();
 	}
-	
+
 	HaltGui();
 	mainWindow->RemoveAll();
 	mainWindow->Append(bgImg);
@@ -1744,7 +1747,7 @@ static int MenuInstall() {
     GuiImageData batteryRed(imgPath, battery_red_png);
     snprintf(imgPath, sizeof(imgPath), "%sbattery_bar_red.png", CFG.theme_path);
     GuiImageData batteryBarRed(imgPath, battery_bar_red_png);
-	
+
     HaltGui();
     GuiWindow w(screenwidth, screenheight);
 
@@ -2184,7 +2187,7 @@ int MainMenu(int menu) {
             break;
         }
     }
-	
+
 	//MemInfoPrompt();
 	//for testing
 	/*if (mountMethod)
@@ -2207,10 +2210,9 @@ int MainMenu(int menu) {
     delete GameIDTxt;
     delete cover;
     delete coverImg;
-	delete fontClock;	
-	delete fontSystem;
 	ShutdownAudio();
     StopGX();
+	ClearFontData();
 	gettextCleanUp();
 	if (mountMethod==3)
 	{
@@ -2250,7 +2252,7 @@ int MainMenu(int menu) {
 			if (!altdoldefault) {
 				alternatedol = game_cfg->loadalternatedol;
 				alternatedoloffset = game_cfg->alternatedolstart;
-			}			
+			}
             reloadblock = game_cfg->iosreloadblock;
         } else {
             videoChoice = Settings.video;
@@ -2270,7 +2272,7 @@ int MainMenu(int menu) {
 			}
             reloadblock = off;
         }
-		
+
 		int ios2;
         switch (iosChoice) {
         case i249:
@@ -2297,8 +2299,8 @@ int MainMenu(int menu) {
                 Sys_IosReload(249);
             }
         }
-		if (!mountMethod) 
-		{		
+		if (!mountMethod)
+		{
 			ret = Disc_SetUSB(header->id);
 			if (ret < 0) Sys_BackToLoader();
 		}
@@ -2313,7 +2315,7 @@ int MainMenu(int menu) {
 		}
 		if(dvdheader)
 			delete dvdheader;
-		
+
 		if (reloadblock == on && (IOS_GetVersion() == 222 || IOS_GetVersion() == 223)) {
             patch_cios_data();
             mload_close();
