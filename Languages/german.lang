@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# german.lang - r743
+# german.lang - r790
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-15 05:27+0200\n"
+"POT-Creation-Date: 2009-10-17 17:31+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: wishmasterf\n"
 "Language-Team: Snoozer, wishmasterf\n"
@@ -348,7 +348,7 @@ msgid "Developed by"
 msgstr "Entwickelt von"
 
 msgid "Directory does not exist!"
-msgstr ""
+msgstr "Verzeichnis existiert nicht!"
 
 msgid "Disc Artwork Download"
 msgstr "DiskImages Download"
@@ -549,7 +549,7 @@ msgid "Homebrew Channel"
 msgstr "Homebrew Kanal"
 
 msgid "Homebrew Launcher"
-msgstr ""
+msgstr "Homebrew Starter"
 
 msgid "Hour"
 msgstr "Stunden"
@@ -693,7 +693,7 @@ msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr "Höchstwahrscheinlich sind Breite und Höhe keine Vielfachen von 4."
 
 msgid "Mount DVD drive"
-msgstr ""
+msgstr "Disc im Laufwerk starten"
 
 msgid "Music Volume"
 msgstr "Lautstärke"
@@ -703,6 +703,9 @@ msgstr "Nichts"
 
 msgid "Network init error"
 msgstr "Netzwerkinitialisierungsfehler"
+
+msgid "New Disc Detected"
+msgstr ""
 
 msgid "Next"
 msgstr "Nächste"
@@ -912,7 +915,7 @@ msgid "Sept"
 msgstr ""
 
 msgid "Set Search-Filter"
-msgstr ""
+msgstr "Such-Filter"
 
 msgid "Set as backgroundmusic?"
 msgstr "Als Hintergrundmusik wählen?"
@@ -930,7 +933,7 @@ msgid "Sort alphabetically"
 msgstr "alphabetisch sortieren"
 
 msgid "Sort by rank"
-msgstr ""
+msgstr "nach Rang sortieren"
 
 msgid "Sort order by most played"
 msgstr "nach Spielzähler sortieren"
@@ -978,7 +981,7 @@ msgid "TXT Cheatcodes Path changed"
 msgstr "TXT Cheatcodes Pfad geändert"
 
 msgid "The entered directory does not exist. Would you like to create it?"
-msgstr ""
+msgstr "Das eingegebene Verzeichnis existiert nicht. Wollen Sie es erstellen?"
 
 msgid "The file is not a .wad"
 msgstr "Die Datei ist nicht .wad"
@@ -1079,7 +1082,7 @@ msgid "Updating WiiTDB.zip"
 msgstr "Aktualisiere WiiTDB.zip"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
-msgstr ""
+msgstr "Hochgeladene ZIP Datei im Homebrew-Verzeichnis installiert."
 
 msgid "VIDTV Patch"
 msgstr ""
@@ -1150,7 +1153,7 @@ msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 msgstr "Ihre URL wurde in %sWiiTDB_URL.txt gespeichert."
 
 msgid "and translaters for language files updates"
-msgstr ""
+msgstr "und den Übersetzern der Sprachdateien"
 
 msgid "available"
 msgstr "verfügbar"
@@ -1176,8 +1179,8 @@ msgstr "Dateien noch"
 msgid "files not found on the server!"
 msgstr "Datei(en) konnte(n) auf dem Server nicht gefunden werden!"
 
-msgid "for"
-msgstr "für"
+msgid "for Ocarina"
+msgstr "für Ocarina"
 
 msgid "for WiiTDB and hosting covers / disc images"
 msgstr "für WiiTDB und hosting covers / disc images"

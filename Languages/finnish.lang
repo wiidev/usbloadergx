@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-15 05:27+0200\n"
+"POT-Creation-Date: 2009-10-17 17:31+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: c64rmx\n"
 "Language-Team: \n"
@@ -704,6 +704,9 @@ msgstr "Ei kumpikaan"
 msgid "Network init error"
 msgstr "Verkon alustusvirhe"
 
+msgid "New Disc Detected"
+msgstr ""
+
 msgid "Next"
 msgstr "Seuraava"
 
@@ -1176,7 +1179,7 @@ msgstr "Tiedostoja jäljellä"
 msgid "files not found on the server!"
 msgstr "tiedostoja ei löytynyt serveriltä!"
 
-msgid "for"
+msgid "for Ocarina"
 msgstr ""
 
 msgid "for WiiTDB and hosting covers / disc images"

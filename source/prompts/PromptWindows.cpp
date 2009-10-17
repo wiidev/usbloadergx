@@ -293,7 +293,7 @@ void WindowCredits() {
     i++;
     y+=22;
 
-    sprintf(text, "Fishears/Nuke %s Ocarina", tr("for"));
+    sprintf(text, "Fishears/Nuke %s", tr("for Ocarina"));
     txt[i] = new GuiText(text);
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     txt[i]->SetPosition(60,y);

@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# French V10.4 r788
+# French V10.5 r799
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-15 05:27+0200\n"
+"POT-Creation-Date: 2009-10-17 17:31+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Kin8\n"
 "Language-Team: Badablek, Amour, ikya, dj_skual & Kin8\n"
@@ -693,7 +693,7 @@ msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr "Il est fort probable que les dimensions ne soient pas des multiples de 4."
 
 msgid "Mount DVD drive"
-msgstr "Charger Lecteur DVD"
+msgstr "Lancer DVD"
 
 msgid "Music Volume"
 msgstr "Volume Musique"
@@ -703,6 +703,9 @@ msgstr "Aucun"
 
 msgid "Network init error"
 msgstr "Erreur d'initialisation réseau"
+
+msgid "New Disc Detected"
+msgstr "Nouveau DVD Détecté"
 
 msgid "Next"
 msgstr "Suivant"
@@ -1176,8 +1179,8 @@ msgstr "fichiers restants"
 msgid "files not found on the server!"
 msgstr "fichiers introuvables sur le serveur !"
 
-msgid "for"
-msgstr "pour"
+msgid "for Ocarina"
+msgstr "pour Ocarina"
 
 msgid "for WiiTDB and hosting covers / disc images"
 msgstr "pour WiiTDB et l'hébergement des jaquettes"

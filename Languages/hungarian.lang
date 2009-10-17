@@ -1,29 +1,29 @@
 # USB Loader GX language source file.
-# hungarian.lang - r569
+# hungarian.lang - r799
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-15 05:27+0200\n"
-"PO-Revision-Date: 2009-10-01 01:00+0200\n"
-"Last-Translator: Tusk\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2009-10-17 17:31+0200\n"
+"PO-Revision-Date: 2009-10-15 14:20+0100\n"
+"Last-Translator: Springdale <springdale@freemail.hu>\n"
+"Language-Team: Tusk, Springdale\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid " Wad Saved as:"
-msgstr ""
+msgstr "Wad elmentve mint:"
 
 msgid " could not be downloaded."
-msgstr ""
+msgstr "nem letölthető."
 
 msgid " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information."
-msgstr ""
+msgstr "elmentve. A fájl nincs ellenőrizve, és egyes kódok nem feltétlenül működnek együtt. Probléma esetén további információért nyisd meg a fájlt szövegszerkesztővel."
 
 msgid " is not on the server."
-msgstr ""
+msgstr "nincs a szerveren."
 
 msgid "0 (Everyone)"
 msgstr "0 (Mindenkinek)"
@@ -32,16 +32,16 @@ msgid "1 (Child 7+)"
 msgstr "1 (Gyermekeknek 12+)"
 
 msgid "1 hour"
-msgstr ""
+msgstr "1 óra"
 
 msgid "10 min"
-msgstr ""
+msgstr "10 perc"
 
 msgid "2 (Teen 12+)"
 msgstr "2 (Tinédzserek 14+)"
 
 msgid "20 min"
-msgstr ""
+msgstr "20 perc"
 
 msgid "2D Cover Path"
 msgstr "2D Boritó Útvonala"
@@ -50,10 +50,10 @@ msgid "3 (Mature 16+)"
 msgstr "3 (Kamaszok 16+)"
 
 msgid "3 min"
-msgstr ""
+msgstr "3 perc"
 
 msgid "30 min"
-msgstr ""
+msgstr "30 perc"
 
 msgid "3D Cover Path"
 msgstr "3D Boritó Útvonala"
@@ -65,55 +65,55 @@ msgid "4 (Adults Only 18+)"
 msgstr "4 (Felnõtteknek 18+)"
 
 msgid "5 min"
-msgstr ""
+msgstr "5 perc"
 
 msgid ">> Deleting tickets..."
-msgstr ""
+msgstr ">> Ticket-ek törlése..."
 
 msgid ">> Deleting tickets...ERROR! "
-msgstr ""
+msgstr ">> Ticket-ek törlése... HIBA!"
 
 msgid ">> Deleting tickets...Ok! "
-msgstr ""
+msgstr ">> Ticket-ek törlése...Ok!"
 
 msgid ">> Deleting title ...ERROR! "
-msgstr ""
+msgstr ">> Title törlése...HIBA!"
 
 msgid ">> Deleting title ...Ok!"
-msgstr ""
+msgstr ">> Title törlése...Ok!"
 
 msgid ">> Deleting title contents..."
-msgstr ""
+msgstr ">> Title tartalom törlése..."
 
 msgid ">> Deleting title contents...ERROR! "
-msgstr ""
+msgstr ">> Title tartalom törlése...HIBA!"
 
 msgid ">> Deleting title contents...Ok!"
-msgstr ""
+msgstr ">> Title tartalom törlése...Ok!"
 
 msgid ">> Deleting title..."
-msgstr ""
+msgstr ">> Title törlése..."
 
 msgid ">> Finishing installation..."
-msgstr ""
+msgstr ">> Telepítés befejezése..."
 
 msgid ">> Installing content #"
-msgstr ""
+msgstr ">> Telepítés: tartalom #"
 
 msgid ">> Installing ticket..."
-msgstr ""
+msgstr ">> Ticket telepítése"
 
 msgid ">> Installing title..."
-msgstr ""
+msgstr ">> Title telepítése..."
 
 msgid ">> Reading WAD data..."
-msgstr ""
+msgstr ">> WAD adatok olvasása..."
 
 msgid ">> Reading WAD data...ERROR! "
-msgstr ""
+msgstr ">> WAD adatok olvasása...HIBA!"
 
 msgid ">> Reading WAD data...Ok!"
-msgstr ""
+msgstr ">> WAD adatok olvasása...Ok!"
 
 msgid "AUTO"
 msgstr ""
@@ -125,7 +125,7 @@ msgid "Alternate DOL"
 msgstr "Alternatív DOL"
 
 msgid "An Error occured"
-msgstr ""
+msgstr "Hiba történt"
 
 msgid "Anti"
 msgstr ""
@@ -143,7 +143,7 @@ msgid "Aug"
 msgstr ""
 
 msgid "AutoInit Network"
-msgstr ""
+msgstr "Hálózat AutoInit"
 
 msgid "AutoPatch"
 msgstr ""
@@ -194,22 +194,22 @@ msgid "Cancel"
 msgstr "Mégse"
 
 msgid "Channels"
-msgstr ""
+msgstr "Csatornák"
 
 msgid "Cheatfile is blank"
-msgstr "A Kódokat tartalmazó fájl üres"
+msgstr "A Cheat-fájl üres"
 
 msgid "Checking existing artwork"
-msgstr ""
+msgstr "Meglévő illusztrációk ellenőrzése"
 
 msgid "Checking for Updates"
 msgstr "Frissitések Keresése"
 
 msgid "Click to Download Covers"
-msgstr "Kattints, hogy letöltsd a borítókat"
+msgstr "Kattints a borítók letöltéséhez"
 
 msgid "Click to change game ID"
-msgstr ""
+msgstr "Kattints a játékID megváltoztatásához"
 
 msgid "Clock"
 msgstr "Óra"
@@ -218,17 +218,17 @@ msgid "Close"
 msgstr "Bezár"
 
 msgid "Code Download"
-msgstr ""
+msgstr "Kód letöltés"
 
 #, c-format
 msgid "Coded by: %s"
-msgstr ""
+msgstr "Kódolás: %s"
 
 msgid "Coding:"
-msgstr ""
+msgstr "Kódolás:"
 
 msgid "Confirm"
-msgstr ""
+msgstr "Megerősítés"
 
 msgid "Console"
 msgstr "Konzol"
@@ -246,7 +246,7 @@ msgid "Continue to install game?"
 msgstr "Játék telepítésének folytatása?"
 
 msgid "Controllevel"
-msgstr "Kontrolszint"
+msgstr "Kontrollszint"
 
 msgid "Correct Password"
 msgstr "Helyes Jelszó"
@@ -255,7 +255,7 @@ msgid "Could not create GCT file"
 msgstr "Nem hozható létre GCT fájl"
 
 msgid "Could not find a WBFS partition."
-msgstr ""
+msgstr "WBFS partíció nem található."
 
 msgid "Could not initialize DIP module!"
 msgstr "DIP modul nem tölthetõ be!"
@@ -267,25 +267,25 @@ msgid "Could not open Disc"
 msgstr "Lemez nem betölthetõ"
 
 msgid "Could not open WBFS partition"
-msgstr ""
+msgstr "WBFS partíció nem nyitható meg."
 
 msgid "Could not open disc."
-msgstr ""
+msgstr "A lemez nem lejátszható."
 
 msgid "Could not read the disc."
-msgstr ""
+msgstr "A lemez nem olvasható."
 
 msgid "Could not save."
-msgstr ""
+msgstr "A mentés nem sikerült."
 
 msgid "Could not set USB."
-msgstr ""
+msgstr "USB beállítási hiba."
 
 msgid "Cover Download"
 msgstr "Boritó Letöltés"
 
 msgid "Cover Path Change"
-msgstr ""
+msgstr "Borító útvonal megváltoztatás"
 
 msgid "Cover Path Changed"
 msgstr "Boritó Útvonala megváltozott"
@@ -300,7 +300,7 @@ msgid "Custom Paths"
 msgstr "Saját Útvonal"
 
 msgid "Customs/Original"
-msgstr ""
+msgstr "Egyéni/Eredeti"
 
 msgid "DOL Path"
 msgstr "DOL útvonal"
@@ -324,34 +324,34 @@ msgid "Default Settings"
 msgstr "Alapértelmezett beállítások"
 
 msgid "Delete"
-msgstr ""
+msgstr "Törlés"
 
 msgid "Delete ?"
-msgstr ""
+msgstr "Törlés?"
 
 msgid "Delete Cheat GCT"
-msgstr ""
+msgstr "Cheat GCT törlés"
 
 msgid "Delete Cheat TXT"
-msgstr ""
+msgstr "Cheat TXT törlés"
 
 msgid "Delete Cover Artwork"
-msgstr ""
+msgstr "Borító törlése"
 
 msgid "Delete Disc Artwork"
-msgstr ""
+msgstr "Lemezfotó törlése"
 
 msgid "Design:"
-msgstr ""
+msgstr "Dizájn:"
 
 msgid "Developed by"
 msgstr "Készítette"
 
 msgid "Directory does not exist!"
-msgstr ""
+msgstr "A könyvtár nem létezik!"
 
 msgid "Disc Artwork Download"
-msgstr ""
+msgstr "Lemezfotó letöltése"
 
 msgid "Disc Artwork Path"
 msgstr "Lemezképek Útvonala"
@@ -375,16 +375,16 @@ msgid "Display"
 msgstr "Kijelzõ"
 
 msgid "Display as a carousel"
-msgstr ""
+msgstr "Körhinta megjelenítés"
 
 msgid "Display as a grid"
-msgstr ""
+msgstr "Rács megjelenítés"
 
 msgid "Display as a list"
-msgstr ""
+msgstr "Lista megjelenítés"
 
 msgid "Display favorites"
-msgstr ""
+msgstr "Kedvencek megjelenítése"
 
 msgid "Do you really want to delete:"
 msgstr "Biztosan ki akarod törölni?:"
@@ -399,28 +399,28 @@ msgid "Do you want to retry for 30 secs?"
 msgstr "30 másodpercig szeretnéd még tovább próbálni?"
 
 msgid "Do you want to use the alternate DOL that is known to be correct?"
-msgstr ""
+msgstr "Köztudottan működő alternatív DOL használata?"
 
 msgid "Do you wish to update/download all language files?"
-msgstr ""
+msgstr "Minden nyelvi fájl letöltése/frissítése?"
 
 msgid "Done!"
-msgstr ""
+msgstr "Kész."
 
 msgid "Download Boxart image?"
 msgstr "Borítóképek letöltése?"
 
 msgid "Download Discart image?"
-msgstr ""
+msgstr "Lemezfotó letöltése?"
 
 msgid "Download Now"
-msgstr ""
+msgstr "Letöltés most"
 
 msgid "Download finished"
 msgstr "Letöltés kész"
 
 msgid "Downloading"
-msgstr ""
+msgstr "Letöltés"
 
 msgid "Downloading file"
 msgstr "Fájl Letöltése"
@@ -429,10 +429,10 @@ msgid "Dutch"
 msgstr "Holland"
 
 msgid "ERROR"
-msgstr ""
+msgstr "HIBA"
 
 msgid "ERROR:"
-msgstr ""
+msgstr "HIBA:"
 
 msgid "English"
 msgstr "Angol"
@@ -450,13 +450,13 @@ msgid "Error reading Disc"
 msgstr "Lemezolvasási hiba"
 
 msgid "Error while transfering data."
-msgstr ""
+msgstr "Adatátviteli hiba."
 
 msgid "Error..."
-msgstr ""
+msgstr "Hiba..."
 
 msgid "Error:"
-msgstr ""
+msgstr "Hiba:"
 
 msgid "Exit USB Loader GX?"
 msgstr "Kilépsz az USB Loader GX-bõl?"
@@ -465,7 +465,7 @@ msgid "Failed formating"
 msgstr "Formázás sikertelen"
 
 msgid "Failed to open partition"
-msgstr ""
+msgstr "Hiba a partíció megnyitásakor"
 
 msgid "Feb"
 msgstr ""
@@ -474,7 +474,7 @@ msgid "File not found."
 msgstr "Fájl nem található"
 
 msgid "Finishing installation... Ok!"
-msgstr ""
+msgstr "Telepítés befejezése...Ok!"
 
 msgid "Flip-X"
 msgstr ""
@@ -537,19 +537,19 @@ msgid "HOME Menu"
 msgstr "HOME Menû"
 
 msgid "Homebrew Apps Path"
-msgstr ""
+msgstr "Homebrew útvonal"
 
 msgid "Homebrew Appspath change"
-msgstr ""
+msgstr "Homebrew útvonal megváltoztatás"
 
 msgid "Homebrew Appspath changed"
-msgstr ""
+msgstr "Homebrew útvonal megváltoztatva"
 
 msgid "Homebrew Channel"
 msgstr ""
 
 msgid "Homebrew Launcher"
-msgstr ""
+msgstr "Homebrew indító"
 
 msgid "Hour"
 msgstr "Óra"
@@ -561,15 +561,15 @@ msgid "How to Shutdown?"
 msgstr "Hogyan kapcsoljon ki?"
 
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
-msgstr ""
+msgstr "WiFi hiánya esetén nyomj 1-es gombot a WiiTDB.zip URL-ért."
 
 #, c-format
 msgid "Incoming file %0.2fKB"
-msgstr ""
+msgstr "Bejövő fájl %0.2fKB"
 
 #, c-format
 msgid "Incoming file %0.2fMB"
-msgstr ""
+msgstr "Bejövő fájl %0.2fMB"
 
 msgid "Initializing Network"
 msgstr "Kapcsolat Létrehozása"
@@ -578,7 +578,7 @@ msgid "Insert Disk"
 msgstr "Helyezz be egy lemezt"
 
 msgid "Insert a Wii Disc!"
-msgstr ""
+msgstr "Helyezz be Wii lemezt!"
 
 msgid "Insert an SD-Card to download images."
 msgstr "Helyezz be egy SD Kártyát, hogy letöltsd a képeket."
@@ -590,7 +590,7 @@ msgid "Insert an SD-Card to use this option."
 msgstr "Helyezz be egy SD Kártyát, hogy használhasd ezt a lehetõséget."
 
 msgid "Install"
-msgstr ""
+msgstr "Telepítés"
 
 msgid "Install Error!"
 msgstr "Telepítési Hiba!"
@@ -599,22 +599,22 @@ msgid "Install a game"
 msgstr "Telepíts egy játékot"
 
 msgid "Installing content... Ok!"
-msgstr ""
+msgstr "Tartalom telepítése... Ok!"
 
 msgid "Installing game:"
 msgstr "Játék telepítése"
 
 msgid "Installing ticket... Ok!"
-msgstr ""
+msgstr "Ticket telepítése... Ok!"
 
 msgid "Installing title... Ok!"
-msgstr ""
+msgstr "Title telepítése... Ok!"
 
 msgid "Installing wad"
-msgstr ""
+msgstr "Wad telepítése"
 
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
-msgstr ""
+msgstr "Számunkra segítő információid lehetnek - kérlek továbbítsd ezeket a fejlesztői csapat felé."
 
 msgid "Italian"
 msgstr "Olasz"
@@ -632,7 +632,7 @@ msgid "June"
 msgstr "Jún"
 
 msgid "Keep"
-msgstr ""
+msgstr "Megtartás"
 
 msgid "Keyboard"
 msgstr "Billenyûzet"
@@ -644,7 +644,7 @@ msgid "Language change:"
 msgstr "Nyelv választás:"
 
 msgid "Languagefile"
-msgstr ""
+msgstr "Nyelvi fájl"
 
 msgid "Languagepath changed."
 msgstr "Nyelvek útvonala megváltozott."
@@ -656,17 +656,17 @@ msgid "Like SysMenu"
 msgstr "Mint a Rendszermenû"
 
 msgid "Load"
-msgstr ""
+msgstr "Betöltés"
 
 msgid "Load From SD/USB"
-msgstr ""
+msgstr "Betöltés SD/USB-ről"
 
 #, c-format
 msgid "Load file from: %s ?"
-msgstr ""
+msgstr "Fájl betöltése innen: %s ?"
 
 msgid "Load this DOL as alternate DOL?"
-msgstr ""
+msgstr "DOL betöltése alternatív DOL-ként?"
 
 msgid "Loading standard language."
 msgstr "Alapnyelv betõltése"
@@ -690,10 +690,10 @@ msgid "Missing files"
 msgstr "Hiányzó Fájl"
 
 msgid "Most likely it has dimensions that are not evenly divisible by 4."
-msgstr ""
+msgstr "Vélhetően méretei nem oszhatók 4-gyel."
 
 msgid "Mount DVD drive"
-msgstr ""
+msgstr "DVD meghajtó felcsatolása"
 
 msgid "Music Volume"
 msgstr "Zene Hangereje"
@@ -704,6 +704,9 @@ msgstr "Egyik sem"
 msgid "Network init error"
 msgstr "Hálozat létrehozásában hiba történt"
 
+msgid "New Disc Detected"
+msgstr "Új lemez észlelve"
+
 msgid "Next"
 msgstr "Következõ"
 
@@ -711,16 +714,16 @@ msgid "No"
 msgstr "Nem"
 
 msgid "No .dol or .elf files found."
-msgstr ""
+msgstr "Nem taláhatóak .dol vagy .elf fájlok."
 
 msgid "No Cheatfile found"
 msgstr "Kód nem található"
 
 msgid "No DOL file found on disc."
-msgstr ""
+msgstr "Nem található DOL fájl a lemezen."
 
 msgid "No Favorites"
-msgstr ""
+msgstr "Nincsenek kedvencek"
 
 msgid "No SD-Card inserted!"
 msgstr "Nincs SD kártya behelyezve!"
@@ -735,10 +738,10 @@ msgid "No WBFS partition found"
 msgstr "Nincs WBFS Partició"
 
 msgid "No cheats were selected"
-msgstr ""
+msgstr "Nincsenek kiválasztott cheat-ek"
 
 msgid "No data could be read."
-msgstr ""
+msgstr "Adat nem olvasható."
 
 msgid "No file missing!"
 msgstr "Egy fájl sem hiányzik!"
@@ -753,16 +756,16 @@ msgid "Normal Covers"
 msgstr "Sima Borítók"
 
 msgid "Not Found"
-msgstr ""
+msgstr "Nem található"
 
 msgid "Not a DOL/ELF file."
-msgstr ""
+msgstr "Nem DOL/ELF fájl."
 
 msgid "Not a Wii Disc"
 msgstr "Nem Wii lemez"
 
 msgid "Not enough free memory."
-msgstr ""
+msgstr "Nincs elég memória."
 
 msgid "Not enough free space!"
 msgstr "Nincs elég szabad hely"
@@ -789,16 +792,16 @@ msgid "Official Site:"
 msgstr "Hivatalos Oldal:"
 
 msgid "Only Customs"
-msgstr ""
+msgstr "Csak egyéni"
 
 msgid "Only Original"
-msgstr ""
+msgstr "Csak eredeti"
 
 msgid "Only for Install"
 msgstr "Csak telepítéshez"
 
 msgid "Original/Customs"
-msgstr ""
+msgstr "Eredeti/Egyéni"
 
 msgid "Parental Control"
 msgstr "Szülõi Felügyelet"
@@ -816,19 +819,19 @@ msgid "Password has been changed"
 msgstr "A Jelszó megváltozott"
 
 msgid "Paste it into your browser to get your WiiTDB.zip."
-msgstr ""
+msgstr "Másold be a böngészőbe a WiiTDB.zip letöltéséhez."
 
 msgid "Patch Country Strings"
 msgstr "Ország Szövegek Patchelése"
 
 msgid "Pick from a list"
-msgstr ""
+msgstr "Válassz a listából"
 
 msgid "Play Count"
 msgstr "Elindítva"
 
 msgid "Please wait..."
-msgstr ""
+msgstr "Kérlek várj..."
 
 msgid "Power off the Wii"
 msgstr "Wii kikapcsolása"
@@ -846,10 +849,10 @@ msgid "Quick Boot"
 msgstr "Gyors Boot"
 
 msgid "Reading WAD data... Ok!"
-msgstr ""
+msgstr "WAD adat olvasás... Ok!"
 
 msgid "Receiving file from:"
-msgstr ""
+msgstr "Fájl fogadása innen:"
 
 msgid "Released"
 msgstr "Kiadva"
@@ -882,10 +885,10 @@ msgid "SChinese"
 msgstr "SKínai"
 
 msgid "SD/USB selected"
-msgstr ""
+msgstr "SD/USB kiválasztva"
 
 msgid "SFX Volume"
-msgstr "SFX Hangerõ"
+msgstr "Effekt Hangerõ"
 
 msgid "Save"
 msgstr "Mentés"
@@ -894,25 +897,25 @@ msgid "Save Failed"
 msgstr "Mentési hiba"
 
 msgid "Save Game List to"
-msgstr ""
+msgstr "Játéklista mentése ide:"
 
 msgid "Saved"
-msgstr ""
+msgstr "Elmentve"
 
 msgid "Screensaver"
 msgstr "Képernyõkimélõ"
 
 msgid "Select a DOL"
-msgstr ""
+msgstr "DOL kiválasztása"
 
 msgid "Selected DOL"
-msgstr ""
+msgstr "Kiválasztott DOL"
 
 msgid "Sept"
 msgstr "Szep"
 
 msgid "Set Search-Filter"
-msgstr ""
+msgstr "Kereső-szűrő beállítása"
 
 msgid "Set as backgroundmusic?"
 msgstr "Beállítod háttérzenének?"
@@ -921,19 +924,19 @@ msgid "Settings"
 msgstr "Beállítások"
 
 msgid "Shutdown System"
-msgstr "Rendszer Leállítása"
+msgstr "Leállítás"
 
 msgid "Shutdown to Idle"
-msgstr "Rendszer Leállításának késleltetése"
+msgstr "Készenlét"
 
 msgid "Sort alphabetically"
-msgstr ""
+msgstr "Rendezés ABC-sorrendben"
 
 msgid "Sort by rank"
-msgstr ""
+msgstr "Rendezés rang szerint"
 
 msgid "Sort order by most played"
-msgstr ""
+msgstr "Rendezés indítások száma szerint"
 
 msgid "Sound"
 msgstr "Hang"
@@ -969,26 +972,26 @@ msgid "System Default"
 msgstr "Rendszer Alapértelmezett"
 
 msgid "TChinese"
-msgstr "TKínai"
+msgstr "Tradicionális Kínai"
 
 msgid "TXT Cheatcodes Path"
-msgstr "TXTKódok Útvonala"
+msgstr "TXT CheatKódok Útvonala"
 
 msgid "TXT Cheatcodes Path changed"
-msgstr "TXTKódok Útvonala megváltozott"
+msgstr "TXT CheatKódok Útvonala megváltozott"
 
 msgid "The entered directory does not exist. Would you like to create it?"
-msgstr ""
+msgstr "A megadott könyvtár nem létezik. Létrehozzuk?"
 
 msgid "The file is not a .wad"
-msgstr ""
+msgstr "A fájl nem .wad"
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."
-msgstr ""
+msgstr "A wad fájl telepítése megtörtént, de nem volt törölhető az SD kártyáról."
 
 #, c-format
 msgid "The wad installation failed with error %ld"
-msgstr ""
+msgstr "A wad telepítés nem sikerült - hiba %ld"
 
 msgid "Theme Path"
 msgstr "Témák Útvonala"
@@ -1003,7 +1006,7 @@ msgid "Time left:"
 msgstr "Hátralévõ Idõ"
 
 msgid "Title Launcher"
-msgstr ""
+msgstr "Programindító"
 
 msgid "Titles from WiiTDB"
 msgstr "Címek WiiTDB fájlból"
@@ -1019,19 +1022,19 @@ msgstr "USB Loader GX levédve"
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
-msgstr ""
+msgstr "Az épp letöltött wad megnyitása nem sikerült (%s)."
 
 msgid "Uninstall"
 msgstr "Törlés"
 
 msgid "Uninstall Game"
-msgstr ""
+msgstr "Játék törlése"
 
 msgid "Uninstall Menu"
-msgstr ""
+msgstr "Adatkezelés"
 
 msgid "Uninstalling wad"
-msgstr ""
+msgstr "Wad törlése"
 
 msgid "Unlock console to use this option."
 msgstr "Zárolva a program, ezt nem használhatod."
@@ -1049,7 +1052,7 @@ msgid "Update DOL"
 msgstr "DOL Frissítése"
 
 msgid "Update Files"
-msgstr ""
+msgstr "Fájlok frissítése"
 
 msgid "Update Path"
 msgstr "Frissítés útvonala"
@@ -1058,35 +1061,35 @@ msgid "Update Path changed."
 msgstr "Frissítés útvonala megváltozott."
 
 msgid "Update all Language Files"
-msgstr ""
+msgstr "Minden nyelvi fájl frissítése"
 
 msgid "Update failed"
 msgstr "Frissítési hiba"
 
 msgid "Update to"
-msgstr "Frissítés ebbe: "
+msgstr "Frissítés ide: "
 
 msgid "Updating"
 msgstr "Frissítés"
 
 msgid "Updating Language Files..."
-msgstr ""
+msgstr "Nyelvi fájlok frissítése..."
 
 msgid "Updating Language Files:"
-msgstr ""
+msgstr "Nyelvi fájlok frissítése:"
 
 msgid "Updating WiiTDB.zip"
-msgstr ""
+msgstr "WiiTDB.zip frissítése"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
-msgstr ""
+msgstr "Feltöltött ZIP fájl telepítve a Homebrew mappába."
 
 msgid "VIDTV Patch"
-msgstr "VIDTV Patch"
+msgstr ""
 
 #, c-format
 msgid "Version: %s"
-msgstr ""
+msgstr "Verzió: %s"
 
 msgid "Video Mode"
 msgstr "Videó Mód"
@@ -1098,31 +1101,31 @@ msgid "Waiting..."
 msgstr "Várakozás..."
 
 msgid "What do you want to update?"
-msgstr ""
+msgstr "Mit szeretnél frissíteni?"
 
 msgid "WiFi Features"
 msgstr "WiFi Sajátosságok"
 
 msgid "Widescreen Fix"
-msgstr "Szélesképernyõ Fix"
+msgstr "Szélesvászon Fix"
 
 msgid "Wii Menu"
 msgstr "Wii Menû"
 
 msgid "Wii Settings"
-msgstr ""
+msgstr "Wii Beállítások"
 
 msgid "WiiTDB Files"
-msgstr ""
+msgstr "WiiTDB fájlok"
 
 msgid "WiiTDB Path"
-msgstr ""
+msgstr "WiiTDB útvonal"
 
 msgid "WiiTDB Path change"
-msgstr ""
+msgstr "WiiTDB útvonal vált."
 
 msgid "WiiTDB Path changed."
-msgstr ""
+msgstr "WiiTDB útvonal megváltozott."
 
 msgid "Wiilight"
 msgstr "Wiifény"
@@ -1134,10 +1137,10 @@ msgid "Yes"
 msgstr "Igen"
 
 msgid "You are about to delete "
-msgstr ""
+msgstr "Törölni készülsz"
 
 msgid "You are choosing to display favorites and you do not have any selected."
-msgstr ""
+msgstr "A Kedvencek megjelenítését választottad, de egy játék sincs így megjelölve."
 
 msgid "You have attempted to load a bad image"
 msgstr "Rossz képfájl próbáltál betõlteni"
@@ -1147,10 +1150,10 @@ msgstr "Formáznod kell a particiót"
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
-msgstr ""
+msgstr "URL elmentve itt: %sWiiTDB_URL.txt"
 
 msgid "and translaters for language files updates"
-msgstr ""
+msgstr "és a fordítóknak"
 
 msgid "available"
 msgstr "elérhetõ"
@@ -1159,7 +1162,7 @@ msgid "contains over 255 lines of code.  It will produce unexpected results."
 msgstr "több mint 255 sorból áll a kód. Kiszámíthatatlan eredmények várhatók."
 
 msgid "does not exist!"
-msgstr ""
+msgstr "nem létezik!"
 
 msgid "does not exist!  Loading game without cheats."
 msgstr "nem létezik! Játék betõltése kódok nélkül."
@@ -1176,23 +1179,23 @@ msgstr "hátralévõ fájl"
 msgid "files not found on the server!"
 msgstr "fájlok nem találhatók a szerveren"
 
-msgid "for"
-msgstr ""
+msgid "for Ocarina"
+msgstr "Ocarina számára"
 
 msgid "for WiiTDB and hosting covers / disc images"
-msgstr ""
+msgstr "(WiiTDB és borítók/lemezfotók)"
 
 msgid "for diverse patches"
 msgstr "többféle patchéért"
 
 msgid "for his awesome tool"
-msgstr "a tökéletes eszközéért"
+msgstr "kiváló eszközéért"
 
 msgid "for hosting the update files"
-msgstr "hogy tárolja a frissítési fájlokat"
+msgstr "(frissítési fájlok tárolása)"
 
 msgid "for the USB Loader source"
-msgstr "az USB Loader forráskódjáért"
+msgstr "(USB Loader forráskór)"
 
 msgid "formatted!"
 msgstr "Formázva!"
@@ -1204,7 +1207,7 @@ msgid "not set"
 msgstr "nem beállított"
 
 msgid "of"
-msgstr ""
+msgstr "./"
 
 msgid "seconds left"
 msgstr "hátralévõ másodperc"

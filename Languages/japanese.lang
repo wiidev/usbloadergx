@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# japanese.lang - r785
+# japanese.lang - r799
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-15 05:27+0200\n"
+"POT-Creation-Date: 2009-10-17 17:31+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: \n"
@@ -369,7 +369,7 @@ msgid "Disc Path change"
 msgstr "ﾃﾞｨｽｸ画像のパスの変更"
 
 msgid "DiskFlip"
-msgstr ""
+msgstr "ﾃﾞｨｽｸの回転のように"
 
 msgid "Display"
 msgstr "ゲーム情報"
@@ -477,7 +477,7 @@ msgid "Finishing installation... Ok!"
 msgstr "ｲﾝｽﾄｰﾙの完了...成功！"
 
 msgid "Flip-X"
-msgstr ""
+msgstr "リストの回転"
 
 msgid "Force"
 msgstr "強制"
@@ -650,7 +650,7 @@ msgid "Languagepath changed."
 msgstr "言語のパスを変更しました"
 
 msgid "Left"
-msgstr "左"
+msgstr "左ボタンで"
 
 msgid "Like SysMenu"
 msgstr "ｼｽﾃﾑﾒﾆｭｰっぽく"
@@ -704,8 +704,11 @@ msgstr "非表示"
 msgid "Network init error"
 msgstr "ﾈｯﾄﾜｰｸ初期化エラー"
 
+msgid "New Disc Detected"
+msgstr "新しいディスクが検出されました"
+
 msgid "Next"
-msgstr "次へ"
+msgstr "左へ"
 
 msgid "No"
 msgstr "いいえ"
@@ -834,7 +837,7 @@ msgid "Power off the Wii"
 msgstr "Wiiの電源を切る"
 
 msgid "Prev"
-msgstr "前へ"
+msgstr "左へ"
 
 msgid "Prompts Buttons"
 msgstr "TV画面サイズ"
@@ -873,7 +876,7 @@ msgid "Return to Wii Menu"
 msgstr "Wiiﾒﾆｭｰへもどる"
 
 msgid "Right"
-msgstr "右"
+msgstr "右ボタンで"
 
 msgid "Rumble"
 msgstr "振動機能"
@@ -1150,7 +1153,7 @@ msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 msgstr "%sWiiTDB_URL.txtにURLを保存しました"
 
 msgid "and translaters for language files updates"
-msgstr ""
+msgstr "翻訳者の方々(日本語:papa / K-M)"
 
 msgid "available"
 msgstr "があります"
@@ -1176,23 +1179,23 @@ msgstr "個未完了"
 msgid "files not found on the server!"
 msgstr "個ｻｰﾊﾞｰにありませんでした…"
 
-msgid "for"
-msgstr ""
+msgid "for Ocarina"
+msgstr "…Ocarinaを制作"
 
 msgid "for WiiTDB and hosting covers / disc images"
 msgstr "WiiTDB…様々な画像を配布"
 
 msgid "for diverse patches"
-msgstr "…様々なﾊﾟｯﾁを制作"
+msgstr "…様々なパッチを制作"
 
 msgid "for his awesome tool"
-msgstr "…すばらしいﾂｰﾙを制作　　　　　　　　　　　　　　"
+msgstr "…すばらしいツールを制作　　　　　　　　　　　　"
 
 msgid "for hosting the update files"
-msgstr "…更新ﾌｧｲﾙを配布"
+msgstr "…更新ファイルを配布"
 
 msgid "for the USB Loader source"
-msgstr "…ｿｰｽを制作"
+msgstr "…ソースを制作"
 
 msgid "formatted!"
 msgstr "初期化を完了しました!"

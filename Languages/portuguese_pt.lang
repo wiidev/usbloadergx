@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# portuguese_pt.lang - r784
+# portuguese_pt.lang - r799
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-15 05:27+0200\n"
+"POT-Creation-Date: 2009-10-17 17:31+0200\n"
 "PO-Revision-Date: 2009-10-12 14:51+0000\n"
 "Last-Translator: Sky8000\n"
 "Language-Team: Sky8000 <sky8000@hotmail.com>\n"
@@ -555,7 +555,7 @@ msgid "Hour"
 msgstr "Horas"
 
 msgid "How do you want to update?"
-msgstr "Como pretende actualizar o programa?"
+msgstr "O que deseja actualizar?"
 
 msgid "How to Shutdown?"
 msgstr "Como desligar a consola?"
@@ -703,6 +703,9 @@ msgstr "Nenhum"
 
 msgid "Network init error"
 msgstr "Erro ao inicializar ligação de rede"
+
+msgid "New Disc Detected"
+msgstr "Novo Disco Detectado"
 
 msgid "Next"
 msgstr "Próximo"
@@ -930,7 +933,7 @@ msgid "Sort alphabetically"
 msgstr "Ordenar por ordem alfabética"
 
 msgid "Sort by rank"
-msgstr ""
+msgstr "Ordenar por classificação"
 
 msgid "Sort order by most played"
 msgstr "Ordenar por número de vezes jogadas"
@@ -957,7 +960,7 @@ msgid "Successfully Saved"
 msgstr "Gravado com Sucesso"
 
 msgid "Successfully Updated"
-msgstr "Programa actualizado com Sucesso"
+msgstr "Actualização Concluída"
 
 msgid "Successfully deleted:"
 msgstr "Eliminado com Sucesso:"
@@ -1098,7 +1101,7 @@ msgid "Waiting..."
 msgstr "Aguardando..."
 
 msgid "What do you want to update?"
-msgstr "Que componente pretende actualizar?"
+msgstr "Que componente deseja actualizar?"
 
 msgid "WiFi Features"
 msgstr "Rede sem fios"
@@ -1150,7 +1153,7 @@ msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 msgstr "O URL foi guardado em %sWiiTDB_URL.txt."
 
 msgid "and translaters for language files updates"
-msgstr ""
+msgstr "e aos tradutores pela actualização dos idiomas"
 
 msgid "available"
 msgstr "disponível"
@@ -1176,8 +1179,8 @@ msgstr "ficheiros restantes"
 msgid "files not found on the server!"
 msgstr "ficheiros não encontrados no servidor!"
 
-msgid "for"
-msgstr "pelo"
+msgid "for Ocarina"
+msgstr "pelo Ocarina"
 
 msgid "for WiiTDB and hosting covers / disc images"
 msgstr "por WiiTDB e alojar img. capas / discos"

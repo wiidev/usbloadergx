@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-15 05:27+0200\n"
+"POT-Creation-Date: 2009-10-17 17:31+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: tj_cool\n"
 "Language-Team: \n"
@@ -561,7 +561,7 @@ msgid "How to Shutdown?"
 msgstr "Hoe uitzetten?"
 
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
-msgstr "Als je geen wifi hebt, druk dan op 1 om een URL voor je wiitdb.zip te krijgen"
+msgstr "Als je geen wifi hebt, druk dan op 1 om een URL voor je WiiTDB.zip te krijgen"
 
 #, c-format
 msgid "Incoming file %0.2fKB"
@@ -704,6 +704,9 @@ msgstr "Geen"
 msgid "Network init error"
 msgstr "Netwerk init. fout"
 
+msgid "New Disc Detected"
+msgstr ""
+
 msgid "Next"
 msgstr "Volgende"
 
@@ -816,7 +819,7 @@ msgid "Password has been changed"
 msgstr "Wachtwoord is gewijzigd"
 
 msgid "Paste it into your browser to get your WiiTDB.zip."
-msgstr "Plak het in je webbrowser om wiitdb.zip te downloaden."
+msgstr "Plak het in je webbrowser om WiiTDB.zip te downloaden."
 
 msgid "Patch Country Strings"
 msgstr "Regios herstellen"
@@ -1076,7 +1079,7 @@ msgid "Updating Language Files:"
 msgstr "Taalbestanden updaten:"
 
 msgid "Updating WiiTDB.zip"
-msgstr "Wiitdb.zip updaten..."
+msgstr "WiiTDB.zip updaten..."
 
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Geuploade ZIP is geinstalleerd in je homebrew locatie."
@@ -1116,7 +1119,7 @@ msgid "WiiTDB Files"
 msgstr "WiiTDB"
 
 msgid "WiiTDB Path"
-msgstr "Locatie XML"
+msgstr "Locatie WiiTDB"
 
 msgid "WiiTDB Path change"
 msgstr "Locatie WiiTDB wijzigen"
@@ -1176,11 +1179,11 @@ msgstr "Bestanden resterend"
 msgid "files not found on the server!"
 msgstr "Bestanden niet gevonden op server!"
 
-msgid "for"
-msgstr "voor"
+msgid "for Ocarina"
+msgstr "voor Ocarina"
 
 msgid "for WiiTDB and hosting covers / disc images"
-msgstr "voor wiitdb en upload afbeeldingen"
+msgstr "voor WiiTDB en upload afbeeldingen"
 
 msgid "for diverse patches"
 msgstr "voor vele correcties"
@@ -1208,12 +1211,6 @@ msgstr "van"
 
 msgid "seconds left"
 msgstr "seconden over:"
-
-#~ msgid "Official Site"
-#~ msgstr "Officiele site"
-
-#~ msgid "(both retired)"
-#~ msgstr "(ex-medewerkers)"
 
 #~ msgid "ERROR: USB device could not be loaded!"
 #~ msgstr "FOUT: USB apparaat kon niet geladen worden!"

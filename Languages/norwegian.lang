@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-15 05:27+0200\n"
+"POT-Creation-Date: 2009-10-17 17:31+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: raschi\n"
 "Language-Team: \n"
@@ -546,7 +546,7 @@ msgid "Homebrew Appspath changed"
 msgstr "Homebrew Apps sti endret"
 
 msgid "Homebrew Channel"
-msgstr "Homebrew Channel"
+msgstr ""
 
 msgid "Homebrew Launcher"
 msgstr "Homebrew Laster"
@@ -703,6 +703,9 @@ msgstr "Ingen"
 
 msgid "Network init error"
 msgstr "Nettverk init feil"
+
+msgid "New Disc Detected"
+msgstr ""
 
 msgid "Next"
 msgstr "Neste"
@@ -1082,7 +1085,7 @@ msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr ""
 
 msgid "VIDTV Patch"
-msgstr "VIDTV Patch"
+msgstr ""
 
 #, c-format
 msgid "Version: %s"
@@ -1176,8 +1179,8 @@ msgstr "filer gjenstår"
 msgid "files not found on the server!"
 msgstr "filer ikke funnet på serveren!"
 
-msgid "for"
-msgstr "for"
+msgid "for Ocarina"
+msgstr ""
 
 msgid "for WiiTDB and hosting covers / disc images"
 msgstr "for WiiTDB og hosting av bilder"

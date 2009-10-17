@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# italian.lang - v44 - r779
+# italian.lang - v45 - r799
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-15 05:27+0200\n"
+"POT-Creation-Date: 2009-10-17 17:31+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe & Cambo\n"
@@ -693,7 +693,7 @@ msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr "Molto probabilmente le dimensioni non sono divisibili per 4."
 
 msgid "Mount DVD drive"
-msgstr "Attiva lettore DVD"
+msgstr "Avvia DVD"
 
 msgid "Music Volume"
 msgstr "Volume"
@@ -703,6 +703,9 @@ msgstr "Nessuno"
 
 msgid "Network init error"
 msgstr "Errore inizializzazione rete"
+
+msgid "New Disc Detected"
+msgstr "Trovato Nuovo Disco"
 
 msgid "Next"
 msgstr "Avanti"
@@ -912,7 +915,7 @@ msgid "Sept"
 msgstr "settembre"
 
 msgid "Set Search-Filter"
-msgstr "Imposta Filtro"
+msgstr "Cerca Gioco"
 
 msgid "Set as backgroundmusic?"
 msgstr "Imposto come Musica Sottofondo?"
@@ -930,7 +933,7 @@ msgid "Sort alphabetically"
 msgstr "Ordine alfabetico"
 
 msgid "Sort by rank"
-msgstr ""
+msgstr "Ordine di preferenza"
 
 msgid "Sort order by most played"
 msgstr "Mostra i più giocati"
@@ -1150,7 +1153,7 @@ msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 msgstr "L'indirizzo (URL) è stato salvato in %sWiiTDB_URL.txt."
 
 msgid "and translaters for language files updates"
-msgstr ""
+msgstr "ed i traduttori per la localizzazione del loader"
 
 msgid "available"
 msgstr "disponibile"
@@ -1176,8 +1179,8 @@ msgstr "file mancanti"
 msgid "files not found on the server!"
 msgstr "file non trovato/i sul server!"
 
-msgid "for"
-msgstr "per"
+msgid "for Ocarina"
+msgstr "per Ocarina"
 
 msgid "for WiiTDB and hosting covers / disc images"
 msgstr "per l'archivio WiiTDB e le copertine online"
