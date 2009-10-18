@@ -551,7 +551,6 @@ int MenuSettings() {
                             switch (ret)
                             {
                                 case 0:
-                                    //if(isSdInserted()) {
                                     if (isInserted(bootDevice)) {
                                         if ( Settings.godmode == 1) {
                                             w.SetEffect(EFFECT_FADE, -20);
@@ -1130,7 +1129,6 @@ int MenuSettings() {
                             switch (ret)
                             {
                                 case 0:
-                                    //if(isSdInserted())
                                     if (isInserted(bootDevice)) {
                                         w.SetEffect(EFFECT_FADE, -20);
                                         while (w.GetEffect()>0) usleep(50);
@@ -1293,7 +1291,6 @@ int MenuSettings() {
                                                 strncat (entered, "/", 1);
                                             strlcpy(Settings.covers_path, entered, sizeof(Settings.covers_path));
                                             WindowPrompt(tr("Cover Path Changed"),0,tr("OK"));
-    //                                        if(!isSdInserted()) {
                                             if (!isInserted(bootDevice)) {
                                                 WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
                                             }
@@ -1319,7 +1316,6 @@ int MenuSettings() {
                                                 strncat (entered, "/", 1);
                                             strlcpy(Settings.covers2d_path, entered, sizeof(Settings.covers2d_path));
                                             WindowPrompt(tr("Cover Path Changed"),0,tr("OK"));
-    //                                        if(!isSdInserted()) {
                                             if (!isInserted(bootDevice)) {
                                                 WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
                                             }
@@ -1345,7 +1341,6 @@ int MenuSettings() {
                                                 strncat (entered, "/", 1);
                                             strlcpy(Settings.disc_path, entered, sizeof(Settings.disc_path));
                                             WindowPrompt(tr("Disc Path Changed"),0,tr("OK"));
-    //                                        if(!isSdInserted()) {
                                             if (!isInserted(bootDevice)) {
                                                 WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
                                             }
@@ -1370,7 +1365,6 @@ int MenuSettings() {
                                                 strncat (entered, "/", 1);
                                             strlcpy(CFG.theme_path, entered, sizeof(CFG.theme_path));
                                             WindowPrompt(tr("Theme Path Changed"),0,tr("OK"));
-    //                                        if(!isSdInserted()) {
                                             if (!isInserted(bootDevice)) {
                                                 WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
                                             } else {
@@ -1430,7 +1424,6 @@ int MenuSettings() {
                                                 strncat (entered, "/", 1);
                                             strlcpy(Settings.titlestxt_path, entered, sizeof(Settings.titlestxt_path));
                                             WindowPrompt(tr("WiiTDB Path changed."),0,tr("OK"));
-    //                                        if(isSdInserted()) {
                                             if (isInserted(bootDevice)) {
                                                 cfg_save_global();
                                                 HaltGui();
@@ -1524,7 +1517,6 @@ int MenuSettings() {
                                                 strncat (entered, "/", 1);
                                             strlcpy(Settings.dolpath, entered, sizeof(Settings.dolpath));
                                             WindowPrompt(tr("DOL path changed"),0,tr("OK"));
-    //                                        if(!isSdInserted()) {
                                             if (!isInserted(bootDevice)) {
                                                 WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
                                             }
@@ -1550,7 +1542,6 @@ int MenuSettings() {
                                                 strncat (entered, "/", 1);
                                             strlcpy(Settings.homebrewapps_path, entered, sizeof(Settings.homebrewapps_path));
                                             WindowPrompt(tr("Homebrew Appspath changed"),0,tr("OK"));
-    //                                        if(!isSdInserted()) {
                                             if (!isInserted(bootDevice)) {
                                                 WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
                                             }
@@ -1601,7 +1592,6 @@ int MenuSettings() {
                     w.Remove(&MainButton2);
                     w.Remove(&MainButton3);
                     w.Remove(&MainButton4);
-//                    if(isSdInserted() && Settings.godmode) {
                     if (isInserted(bootDevice) && Settings.godmode) {
                         w.Remove(&optionBrowser2);
                         w.Remove(&backBtn);
@@ -1639,7 +1629,6 @@ int MenuSettings() {
                     if (Settings.godmode) {
                         int choice = WindowPrompt(tr("Are you sure?"), 0, tr("Yes"), tr("Cancel"));
                         if (choice == 1) {
-//							if(isSdInserted())
                             if (isInserted(bootDevice)) {
                                 char GXGlobal_cfg[26];
                                 sprintf(GXGlobal_cfg, "%s/config/GXGlobal.cfg", bootDevice);
@@ -1692,7 +1681,6 @@ int MenuSettings() {
 
             else if (backBtn.GetState() == STATE_CLICKED) {
                 //Add the procedure call to save the global configuration
-//				if(isSdInserted()) {
                 if (isInserted(bootDevice)) {
                     cfg_save_global();
                 }

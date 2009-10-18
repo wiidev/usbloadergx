@@ -18,6 +18,7 @@
 #include "network/networkops.h"
 #include "network/http.h"
 #include "prompts/PromptWindows.h"
+#include "prompts/gameinfo.h"
 #include "mload/mload.h"
 #include "fatmounter.h"
 #include "listfiles.h"
@@ -1380,7 +1381,6 @@ int GameWindowPrompt() {
                 promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
             }
             else if (btnFavorite1.GetState() == STATE_CLICKED) {//switch favorite
-                //if(isSdInserted()) {
                 if (isInserted(bootDevice)) {
 					SetFavorite(&btnFavorite1, &btnFavorite2, &btnFavorite3, &btnFavorite4, &btnFavorite5, header->id, 1);
 					SetFavoriteImages(&btnFavoriteImg1, &btnFavoriteImg2, &btnFavoriteImg3, &btnFavoriteImg4, &btnFavoriteImg5, &imgFavorite, &imgNotFavorite);
@@ -1388,7 +1388,6 @@ int GameWindowPrompt() {
                 btnFavorite1.ResetState();
             }
             else if (btnFavorite2.GetState() == STATE_CLICKED) {//switch favorite
-                //if(isSdInserted()) {
                 if (isInserted(bootDevice)) {
 					SetFavorite(&btnFavorite1, &btnFavorite2, &btnFavorite3, &btnFavorite4, &btnFavorite5, header->id, 2);
 					SetFavoriteImages(&btnFavoriteImg1, &btnFavoriteImg2, &btnFavoriteImg3, &btnFavoriteImg4, &btnFavoriteImg5, &imgFavorite, &imgNotFavorite);
@@ -1396,7 +1395,6 @@ int GameWindowPrompt() {
                 btnFavorite2.ResetState();
             }
             else if (btnFavorite3.GetState() == STATE_CLICKED) {//switch favorite
-                //if(isSdInserted()) {
                 if (isInserted(bootDevice)) {
 					SetFavorite(&btnFavorite1, &btnFavorite2, &btnFavorite3, &btnFavorite4, &btnFavorite5, header->id, 3);
 					SetFavoriteImages(&btnFavoriteImg1, &btnFavoriteImg2, &btnFavoriteImg3, &btnFavoriteImg4, &btnFavoriteImg5, &imgFavorite, &imgNotFavorite);
@@ -1404,7 +1402,6 @@ int GameWindowPrompt() {
                 btnFavorite3.ResetState();
             }
             else if (btnFavorite4.GetState() == STATE_CLICKED) {//switch favorite
-                //if(isSdInserted()) {
                 if (isInserted(bootDevice)) {
 					SetFavorite(&btnFavorite1, &btnFavorite2, &btnFavorite3, &btnFavorite4, &btnFavorite5, header->id, 4);
 					SetFavoriteImages(&btnFavoriteImg1, &btnFavoriteImg2, &btnFavoriteImg3, &btnFavoriteImg4, &btnFavoriteImg5, &imgFavorite, &imgNotFavorite);
@@ -1412,7 +1409,6 @@ int GameWindowPrompt() {
                 btnFavorite4.ResetState();
             }
             else if (btnFavorite5.GetState() == STATE_CLICKED) {//switch favorite
-                //if(isSdInserted()) {
                 if (isInserted(bootDevice)) {
 					SetFavorite(&btnFavorite1, &btnFavorite2, &btnFavorite3, &btnFavorite4, &btnFavorite5, header->id, 5);
 					SetFavoriteImages(&btnFavoriteImg1, &btnFavoriteImg2, &btnFavoriteImg3, &btnFavoriteImg4, &btnFavoriteImg5, &imgFavorite, &imgNotFavorite);
@@ -1823,7 +1819,7 @@ bool SearchMissingImages(int choice2) {
 	__Menu_GetEntries();
     ResumeGui();
 
-	if (cntMissFiles > 0) { //&& !IsNetworkInit()) {
+	if (cntMissFiles > 0) {
 		NetworkInitPrompt();
 	}
 
@@ -1837,6 +1833,10 @@ bool SearchMissingImages(int choice2) {
  * NetworkInitPrompt
  ***************************************************************************/
 bool NetworkInitPrompt() {
+
+	if (IsNetworkInit())
+		return true;
+
     bool success = true;
 
     GuiWindow promptWindow(472,320);
@@ -2548,23 +2548,9 @@ int ProgressUpdateWindow() {
     }
 
     //make the URL to get XML based on our games
-    char XMLurl[3540]; // NET_BUFFER_SIZE in http.c needs to be set to size of XMLurl + 40
-    char filename[10];
-    __Menu_GetEntries(1);
-    snprintf(XMLurl,sizeof(XMLurl),"http://wiitdb.com/wiitdb.zip?LANG=%s&ID=",Settings.db_language);
-    unsigned int i;
-    for (i = 0; i < gameCnt ; i++) {
-        struct discHdr* header = &gameList[i];
-        if (i<500) {
-            //snprintf(filename,sizeof(filename),"%c%c%c", header->id[1], header->id[2], header->id[3]);
-            //strncat(XMLurl,filename,3);
-            snprintf(filename,sizeof(filename),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
-            strncat(XMLurl,filename,6);
-            if ((i!=gameCnt-1)&&(i<500))
-                strncat(XMLurl, ",",1);
-        }
-    }
-    __Menu_GetEntries();
+	char XMLurl[3540];
+	build_XML_URL(XMLurl,sizeof(XMLurl));
+	
     if (IsNetworkInit() && ret >= 0) {
 
         updatemode = WindowPrompt(tr("What do you want to update?"), 0, "USBLoader GX", tr("WiiTDB Files"), tr("Languagefile"), tr("Cancel"));
@@ -2868,23 +2854,9 @@ int ProgressUpdateWindow() {
     }
 
     //make the URL to get XML based on our games
-    char XMLurl[3540];
-    char filename[10];
-    __Menu_GetEntries(1);
-    snprintf(XMLurl,sizeof(XMLurl),"http://wiitdb.com/wiitdb.zip?LANG=%s&ID=",Settings.db_language);
-    unsigned int i;
-    for (i = 0; i < gameCnt ; i++) {
-        struct discHdr* header = &gameList[i];
-        if (i<500) {
-            //snprintf(filename,sizeof(filename),"%c%c%c", header->id[1], header->id[2], header->id[3]);
-            //strncat(XMLurl, filename,3 );
-			snprintf(filename,sizeof(filename),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
-            strncat(XMLurl,filename,6);
-            if ((i!=gameCnt-1)&&(i<500))
-                strncat(XMLurl, ",",1);
-        }
-    }
-    __Menu_GetEntries();
+	char XMLurl[3540];
+	build_XML_URL(XMLurl,sizeof(XMLurl));
+	
     char dolpath[150];
 //    char dolpathsuccess[150];//use coverspath as a folder for the update wad so we dont make a new folder and have to delete it
     snprintf(dolpath, sizeof(dolpath), "%sULNR.wad", Settings.covers_path);

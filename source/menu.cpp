@@ -1062,7 +1062,6 @@ int MenuDiscList() {
                 startat = gameCarousel->GetSelectedOption();
                 offset = gameCarousel->GetOffset();
             }
-            //if(isSdInserted()) {
             if (isInserted(bootDevice)) {
 				HaltGui(); // to fix endless rumble when clicking on the SD icon when rumble is disabled because rumble is set to on in Global_Default()
 				CFG_Load();
@@ -1074,7 +1073,6 @@ int MenuDiscList() {
         }
 
         else if (DownloadBtn.GetState() == STATE_CLICKED) {
-            //if(isSdInserted()) {
             if (isInserted(bootDevice)) {
                 choice = WindowPrompt(tr("Cover Download"), 0, tr("Normal Covers"), tr("3D Covers"), tr("Disc Images"), tr("Back")); // ask for download choice
                 if (choice != 0) {
@@ -1133,7 +1131,6 @@ int MenuDiscList() {
 
         else if (favoriteBtn.GetState() == STATE_CLICKED) {
             Settings.fave=!Settings.fave;
-            //if(isSdInserted()) {
             if (isInserted(bootDevice)) {
                 cfg_save_global();
             }
@@ -1228,7 +1225,6 @@ int MenuDiscList() {
         else if (abcBtn.GetState() == STATE_CLICKED) {
             if (Settings.sort != all) {
                 Settings.sort=all;
-                //if(isSdInserted()) {
                 if (isInserted(bootDevice)) {
                     cfg_save_global();
                 }
@@ -1243,7 +1239,6 @@ int MenuDiscList() {
         else if (countBtn.GetState() == STATE_CLICKED) {
             if (Settings.sort != pcount) {
                 Settings.sort=pcount;
-                //if(isSdInserted()) {
                 if (isInserted(bootDevice)) {
                     cfg_save_global();
                 }
