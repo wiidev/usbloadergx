@@ -150,9 +150,9 @@ void FreeTypeGX::InitFreeType(uint8_t* fontBuffer, FT_Long bufferSize, bool load
 	ftSlot = ftFace->glyph;
 }
 
-void FreeTypeGX::ChangeFontSize(FT_UInt pixelSize)
+void FreeTypeGX::ChangeFontSize(FT_UInt pixelSize, FT_UInt pixelSizeHorz)
 {
-	FT_Set_Pixel_Sizes(ftFace, 0, pixelSize);
+	FT_Set_Pixel_Sizes(ftFace, pixelSizeHorz, pixelSize);
 }
 
 uint8_t FreeTypeGX::GetMaxCharWidth()

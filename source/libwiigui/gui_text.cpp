@@ -38,7 +38,7 @@ GuiText::GuiText(const char * t, int s, GXColor c)
 	firstLine = 0;
 	linestodraw = 8;
 	totalLines = 0;
-	widescreen = 0; //added
+	widescreen = false; //added
 	LineBreak = NULL;
 	textDyn = NULL;
 	font = NULL;
@@ -85,7 +85,7 @@ GuiText::GuiText(const char * t)
 	firstLine = 0;
 	linestodraw = 8;
 	totalLines = 0;
-	widescreen = 0; //added
+	widescreen = false; //added
 	LineBreak = NULL;
 	textDyn = NULL;
 	font = NULL;
@@ -211,7 +211,11 @@ void GuiText::SetText(const wchar_t * t)
 	{
 		int len = wcslen(t);
 		text = new wchar_t[len+1];
-		if(text) wcscpy(text, t);
+		if(text)
+		{
+		    wcscpy(text, t);
+            textWidth = fontSystem[currentSize]->getWidth(text);
+		}
 	}
 }
 
@@ -465,6 +469,12 @@ bool GuiText::SetFont(const u8 *fontbuffer, const u32 filesize)
 	return true;
 }
 
+void GuiText::SetWidescreen(bool w)
+{
+    LOCK(this);
+    widescreen = w;
+}
+
 /**
  * Draw the text on screen
  */
@@ -497,6 +507,9 @@ void GuiText::Draw()
             textWidth = (font ? font : fontSystem[newSize])->getWidth(text);
 		currentSize = newSize;
 	}
+
+	if(widescreen)
+        (font ? font : fontSystem[currentSize])->ChangeFontSize(currentSize, currentSize*0.8);
 
 	if(maxWidth > 0 && maxWidth <= textWidth)
 	{
@@ -711,4 +724,7 @@ void GuiText::Draw()
 		(font ? font : fontSystem[currentSize])->drawText(this->GetLeft(), this->GetTop(), text, c, style);
 	}
 	this->UpdateEffects();
+
+	if(widescreen)
+        (font ? font : fontSystem[currentSize])->ChangeFontSize(currentSize, 0);
 }

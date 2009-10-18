@@ -760,6 +760,8 @@ class GuiText : public GuiElement
 		//!\param font bufferblock
 		//!\param font filesize
 		bool SetFont(const u8 *font, const u32 filesize);
+		//!SetWidescreen
+		void SetWidescreen(bool w);
 		//!Constantly called to draw the text
 		void Draw();
 	protected:

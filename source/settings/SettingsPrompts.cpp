@@ -85,7 +85,7 @@ bool MenuOGG() {
     backBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
     GuiImage backBtnImg(&btnOutline);
     if (Settings.wsprompt == yes) {
-        //backBtnTxt.SetWidescreen(CFG.widescreen);
+        backBtnTxt.SetWidescreen(CFG.widescreen);
         backBtnImg.SetWidescreen(CFG.widescreen);
     }
     GuiButton backBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
@@ -103,7 +103,7 @@ bool MenuOGG() {
     defaultBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
     GuiImage defaultBtnImg(&btnOutline);
     if (Settings.wsprompt == yes) {
-        //defaultBtnTxt.SetWidescreen(CFG.widescreen);
+        defaultBtnTxt.SetWidescreen(CFG.widescreen);
         defaultBtnImg.SetWidescreen(CFG.widescreen);
     }
     GuiButton defaultBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
@@ -367,7 +367,7 @@ int MenuLanguageSelect() {
     backBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
     GuiImage backBtnImg(&btnOutline);
     if (Settings.wsprompt == yes) {
-        //backBtnTxt.SetWidescreen(CFG.widescreen);
+        backBtnTxt.SetWidescreen(CFG.widescreen);
         backBtnImg.SetWidescreen(CFG.widescreen);
     }
     GuiButton backBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
@@ -385,7 +385,7 @@ int MenuLanguageSelect() {
     defaultBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
     GuiImage defaultBtnImg(&btnOutline);
     if (Settings.wsprompt == yes) {
-        //defaultBtnTxt.SetWidescreen(CFG.widescreen);
+        defaultBtnTxt.SetWidescreen(CFG.widescreen);
         defaultBtnImg.SetWidescreen(CFG.widescreen);
     }
     GuiButton defaultBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
@@ -402,7 +402,7 @@ int MenuLanguageSelect() {
     updateBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
     GuiImage updateBtnImg(&btnOutline);
     if (Settings.wsprompt == yes) {
-        //updateBtnTxt.SetWidescreen(CFG.widescreen);
+        updateBtnTxt.SetWidescreen(CFG.widescreen);
         updateBtnImg.SetWidescreen(CFG.widescreen);
     }
     GuiButton updateBtn(btnOutline.GetWidth(), btnOutline.GetHeight());

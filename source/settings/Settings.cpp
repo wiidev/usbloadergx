@@ -121,7 +121,7 @@ int MenuSettings() {
     backBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
     GuiImage backBtnImg(&btnOutline);
     if (Settings.wsprompt == yes) {
-        //backBtnTxt.SetWidescreen(CFG.widescreen);
+        backBtnTxt.SetWidescreen(CFG.widescreen);
         backBtnImg.SetWidescreen(CFG.widescreen);
     }
     GuiButton backBtn(&backBtnImg,&backBtnImg, 2, 3, -180, 400, &trigA, &btnSoundOver, &btnClick,1);
@@ -1853,7 +1853,7 @@ int GameSettings(struct discHdr * header) {
     backBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
     GuiImage backBtnImg(&btnOutline);
     if (Settings.wsprompt == yes) {
-        //backBtnTxt.SetWidescreen(CFG.widescreen);
+        backBtnTxt.SetWidescreen(CFG.widescreen);
         backBtnImg.SetWidescreen(CFG.widescreen);
     }
     GuiButton backBtn(&backBtnImg,&backBtnImg, 2, 3, -180, 400, &trigA, &btnSoundOver, &btnClick,1);
@@ -1867,7 +1867,7 @@ int GameSettings(struct discHdr * header) {
     saveBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
     GuiImage saveBtnImg(&btnOutline);
     if (Settings.wsprompt == yes) {
-        //saveBtnTxt.SetWidescreen(CFG.widescreen);
+        saveBtnTxt.SetWidescreen(CFG.widescreen);
         saveBtnImg.SetWidescreen(CFG.widescreen);
     }
     GuiButton saveBtn(&saveBtnImg,&saveBtnImg, 2, 3, 180, 400, &trigA, &btnSoundOver, &btnClick,1);

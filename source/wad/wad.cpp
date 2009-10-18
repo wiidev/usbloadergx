@@ -141,9 +141,11 @@ s32 Wad_Install(FILE *fp)
 
 	GuiText btn1Txt(tr("OK"), 22, THEME.prompttext);
 	GuiImage btn1Img(&btnOutline);
-	if (Settings.wsprompt == yes){
-	//btn1Txt.SetWidescreen(CFG.widescreen);
-	btn1Img.SetWidescreen(CFG.widescreen);}
+	if (Settings.wsprompt == yes)
+	{
+        btn1Txt.SetWidescreen(CFG.widescreen);
+        btn1Img.SetWidescreen(CFG.widescreen);
+    }
 	GuiButton btn1(&btn1Img,&btn1Img, 2, 4, 0, -35, &trigA, &btnSoundOver, &btnClick,1);
 	btn1.SetLabel(&btn1Txt);
 	btn1.SetState(STATE_SELECTED);
@@ -369,7 +371,7 @@ s32 Wad_Install(FILE *fp)
 			// Increase variables
 			idx    += size;
 			offset += size;
-		
+
 		//snprintf(imgPath, sizeof(imgPath), "%s%d (%d)...",tr(">> Installing content #"),content->cid,idx);
 
 		//msg4Txt.SetText(imgPath);
@@ -470,9 +472,11 @@ s32 Wad_Uninstall(FILE *fp)
 
 	GuiText btn1Txt(tr("OK"), 22, THEME.prompttext);
 	GuiImage btn1Img(&btnOutline);
-	if (Settings.wsprompt == yes){
-	//btn1Txt.SetWidescreen(CFG.widescreen);
-	btn1Img.SetWidescreen(CFG.widescreen);}
+	if (Settings.wsprompt == yes)
+	{
+        btn1Txt.SetWidescreen(CFG.widescreen);
+        btn1Img.SetWidescreen(CFG.widescreen);
+	}
 	GuiButton btn1(&btn1Img,&btn1Img, 2, 4, 0, -55, &trigA, &btnSoundOver, &btnClick,1);
 	btn1.SetLabel(&btn1Txt);
 	btn1.SetState(STATE_SELECTED);

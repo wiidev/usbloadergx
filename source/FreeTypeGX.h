@@ -286,7 +286,7 @@ class FreeTypeGX {
 		~FreeTypeGX();
 
 		void InitFreeType(uint8_t* fontBuffer, FT_Long bufferSize, bool loadcustomfont);
-        void ChangeFontSize(FT_UInt pixelSize);
+        void ChangeFontSize(FT_UInt pixelSize, FT_UInt pixelSizeHorz = 0);
         uint8_t GetMaxCharWidth();
 
 		void setVertexFormat(uint8_t vertexIndex);

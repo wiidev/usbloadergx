@@ -90,7 +90,7 @@ int OnScreenKeyboard(char * var, u32 maxlen, int min) {
     GuiText okBtnTxt(tr("OK"), 22, THEME.prompttext);
     GuiImage okBtnImg(&btnOutline);
     if (Settings.wsprompt == yes) {
-        //okBtnTxt.SetWidescreen(CFG.widescreen);
+        okBtnTxt.SetWidescreen(CFG.widescreen);
         okBtnImg.SetWidescreen(CFG.widescreen);
     }
     GuiButton okBtn(&okBtnImg,&okBtnImg, 0, 4, 5, 15, &trigA, &btnSoundOver, &btnClick,1);
@@ -98,7 +98,7 @@ int OnScreenKeyboard(char * var, u32 maxlen, int min) {
     GuiText cancelBtnTxt(tr("Cancel"), 22, THEME.prompttext);
     GuiImage cancelBtnImg(&btnOutline);
     if (Settings.wsprompt == yes) {
-        //cancelBtnTxt.SetWidescreen(CFG.widescreen);
+        cancelBtnTxt.SetWidescreen(CFG.widescreen);
         cancelBtnImg.SetWidescreen(CFG.widescreen);
     }
     GuiButton cancelBtn(&cancelBtnImg,&cancelBtnImg, 1, 4, -5, 15, &trigA, &btnSoundOver, &btnClick,1);
@@ -459,7 +459,7 @@ WindowPrompt(const char *title, const char *msg, const char *btn1Label,
     GuiText btn1Txt(btn1Label, 22, THEME.prompttext);
     GuiImage btn1Img(&btnOutline);
     if (Settings.wsprompt == yes) {
-        //btn1Txt.SetWidescreen(CFG.widescreen);
+        btn1Txt.SetWidescreen(CFG.widescreen);
         btn1Img.SetWidescreen(CFG.widescreen);
     }
 
@@ -470,7 +470,7 @@ WindowPrompt(const char *title, const char *msg, const char *btn1Label,
     GuiText btn2Txt(btn2Label, 22, THEME.prompttext);
     GuiImage btn2Img(&btnOutline);
     if (Settings.wsprompt == yes) {
-        //btn2Txt.SetWidescreen(CFG.widescreen);
+        btn2Txt.SetWidescreen(CFG.widescreen);
         btn2Img.SetWidescreen(CFG.widescreen);
     }
     GuiButton btn2(&btn2Img, &btn2Img, 0,3,0,0,&trigA,&btnSoundOver,&btnClick,1);
@@ -481,7 +481,7 @@ WindowPrompt(const char *title, const char *msg, const char *btn1Label,
     GuiText btn3Txt(btn3Label, 22, THEME.prompttext);
     GuiImage btn3Img(&btnOutline);
     if (Settings.wsprompt == yes) {
-        //btn3Txt.SetWidescreen(CFG.widescreen);
+        btn3Txt.SetWidescreen(CFG.widescreen);
         btn3Img.SetWidescreen(CFG.widescreen);
     }
     GuiButton btn3(&btn3Img, &btn3Img, 0,3,0,0,&trigA,&btnSoundOver,&btnClick,1);
@@ -492,7 +492,7 @@ WindowPrompt(const char *title, const char *msg, const char *btn1Label,
     GuiText btn4Txt(btn4Label, 22, THEME.prompttext);
     GuiImage btn4Img(&btnOutline);
     if (Settings.wsprompt == yes) {
-        //btn4Txt.SetWidescreen(CFG.widescreen);
+        btn4Txt.SetWidescreen(CFG.widescreen);
         btn4Img.SetWidescreen(CFG.widescreen);
     }
     GuiButton btn4(&btn4Img, &btn4Img, 0,3,0,0,&trigA,&btnSoundOver,&btnClick,1);
@@ -778,7 +778,7 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
     closeTxt.SetPosition(10,3);
     GuiImage closeImg(&close);
     if (Settings.wsprompt == yes) {
-        //closeTxt.SetWidescreen(CFG.widescreen);
+        closeTxt.SetWidescreen(CFG.widescreen);
         closeImg.SetWidescreen(CFG.widescreen);
     }
     GuiButton closeBtn(close.GetWidth(), close.GetHeight());
@@ -797,7 +797,7 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
     GuiText btn2Txt((HBC!=1?tr("Homebrew Channel"):btn1Label), 28, (GXColor) {0, 0, 0, 255});
     GuiImage btn2Img(&button);
     if (Settings.wsprompt == yes) {
-        //btn2Txt.SetWidescreen(CFG.widescreen);
+        btn2Txt.SetWidescreen(CFG.widescreen);
         btn2Img.SetWidescreen(CFG.widescreen);
     }
     GuiButton btn2(&btn2Img,&btn2Img, 2, 5, -150, 0, &trigA, &btnSoundOver, &btnClick,1);
@@ -811,7 +811,7 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
     GuiText btn3Txt(btn2Label, 28, (GXColor) {0, 0, 0, 255});
     GuiImage btn3Img(&button);
     if (Settings.wsprompt == yes) {
-        //btn3Txt.SetWidescreen(CFG.widescreen);
+        btn3Txt.SetWidescreen(CFG.widescreen);
         btn3Img.SetWidescreen(CFG.widescreen);
     }
     GuiButton btn3(&btn3Img,&btn3Img, 2, 5, 150, 0, &trigA, &btnSoundOver, &btnClick,1);
@@ -915,7 +915,7 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
                     StopGX();
                     WII_Initialize();
 					WII_BootHBC();
-                    
+
                 }
                 choice = 2;
             }
@@ -1001,7 +1001,7 @@ void SetFavoriteImages(GuiImage *b1, GuiImage *b2, GuiImage *b3, GuiImage *b4, G
 	b3->SetImage(favoritevar >= 3 ? on : off);
 	b4->SetImage(favoritevar >= 4 ? on : off);
 	b5->SetImage(favoritevar >= 5 ? on : off);
-}					
+}
 
 /****************************************************************************
  * GameWindowPrompt
@@ -1060,8 +1060,8 @@ int GameWindowPrompt() {
     if (Settings.wsprompt == yes)
         nameBtnTT.SetWidescreen(CFG.widescreen);
     GuiText nameTxt("", 22, THEME.prompttext);
-    //if (Settings.wsprompt == yes)
-        //nameTxt.SetWidescreen(CFG.widescreen);
+    if (Settings.wsprompt == yes)
+        nameTxt.SetWidescreen(CFG.widescreen);
     nameTxt.SetMaxWidth(350, SCROLL_HORIZONTAL);
     GuiButton nameBtn(120,50);
     nameBtn.SetLabel(&nameTxt);
@@ -1110,7 +1110,7 @@ int GameWindowPrompt() {
     GuiText btn2Txt(tr("Back"), 22, THEME.prompttext);
     GuiImage btn2Img(&btnOutline);
     if (Settings.wsprompt == yes) {
-        //btn2Txt.SetWidescreen(CFG.widescreen);
+        btn2Txt.SetWidescreen(CFG.widescreen);
         btn2Img.SetWidescreen(CFG.widescreen);
     }
     GuiButton btn2(&btn2Img,&btn2Img, 1, 5, 0, 0, &trigA, &btnSoundOver, &btnClick,1);
@@ -1128,7 +1128,7 @@ int GameWindowPrompt() {
     GuiText btn3Txt(tr("Settings"), 22, THEME.prompttext);
     GuiImage btn3Img(&btnOutline);
     if (Settings.wsprompt == yes) {
-        //btn3Txt.SetWidescreen(CFG.widescreen);
+        btn3Txt.SetWidescreen(CFG.widescreen);
         btn3Img.SetWidescreen(CFG.widescreen);
     }
     GuiButton btn3(&btn3Img,&btn3Img, 0, 4, 50, -40, &trigA, &btnSoundOver, &btnClick,1);
@@ -1226,8 +1226,8 @@ int GameWindowPrompt() {
 
         if (diskCover)
             delete diskCover;
-			
-		
+
+
 
         snprintf(imgPath,sizeof(imgPath),"%s%s.png", Settings.disc_path, IDFull); //changed to current full id
         diskCover = new GuiImageData(imgPath,0);
@@ -1298,13 +1298,13 @@ int GameWindowPrompt() {
             nameTxt.SetEffect(EFFECT_FADE, 17);
         } else
             diskImg.SetImage(diskCover);
-		
+
 		if (!mountMethod)
 		{
 			WBFS_GameSize(header->id, &size);
 			sizeTxt.SetTextf("%.2fGB", size); //set size text;
 		}
-	
+
 		nameTxt.SetText(get_title(header));
 
         struct Game_NUM* game_num = CFG_get_game_num(header->id);
@@ -1566,7 +1566,7 @@ DiscWait(const char *title, const char *msg, const char *btn1Label, const char *
     GuiText btn1Txt(btn1Label, 22, THEME.prompttext);
     GuiImage btn1Img(&btnOutline);
     if (Settings.wsprompt == yes) {
-        //btn1Txt.SetWidescreen(CFG.widescreen);
+        btn1Txt.SetWidescreen(CFG.widescreen);
         btn1Img.SetWidescreen(CFG.widescreen);
     }
     GuiButton btn1(&btn1Img,&btn1Img, 1, 5, 0, 0, &trigA, &btnSoundOver, &btnClick,1);
@@ -1586,7 +1586,7 @@ DiscWait(const char *title, const char *msg, const char *btn1Label, const char *
     GuiText btn2Txt(btn2Label, 22, THEME.prompttext);
     GuiImage btn2Img(&btnOutline);
     if (Settings.wsprompt == yes) {
-        //btn2Txt.SetWidescreen(CFG.widescreen);
+        btn2Txt.SetWidescreen(CFG.widescreen);
         btn2Img.SetWidescreen(CFG.widescreen);
     }
     GuiButton btn2(&btn2Img,&btn2Img, 1, 4, -20, -25, &trigA, &btnSoundOver, &btnClick,1);
@@ -1725,7 +1725,7 @@ FormatingPartition(const char *title, partitionEntry *entry) {
  * SearchMissingImages
  ***************************************************************************/
 bool SearchMissingImages(int choice2) {
-	
+
 	GuiWindow promptWindow(472,320);
     promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     promptWindow.SetPosition(0, -10);
@@ -1766,14 +1766,14 @@ bool SearchMissingImages(int choice2) {
     mainWindow->Append(&promptWindow);
     mainWindow->ChangeFocus(&promptWindow);
     ResumeGui();
-	
+
     //make sure that all games are added to the gamelist
     __Menu_GetEntries(1);
 
 	cntMissFiles = 0;
 	u32 i = 0;
 	char filename[11];
-	
+
 	//add IDs of games that are missing covers to cntMissFiles
 	bool found1 = false;
 	bool found2 = false;
@@ -1781,7 +1781,7 @@ bool SearchMissingImages(int choice2) {
 	for (i = 0; i < gameCnt && cntMissFiles < 500; i++) {
 		struct discHdr* header = &gameList[i];
 		if (choice2 != 3) {
-			
+
 			char *covers_path = choice2==1 ? Settings.covers2d_path : Settings.covers_path;
 
 			snprintf (filename,sizeof(filename),"%c%c%c.png", header->id[0], header->id[1], header->id[2]);
@@ -1813,7 +1813,7 @@ bool SearchMissingImages(int choice2) {
 		msgTxt.SetText(tr("No file missing!"));
         sleep(1);
 	}
-	
+
 	promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
     while (promptWindow.GetEffect() > 0) usleep(50);
 
@@ -1822,7 +1822,7 @@ bool SearchMissingImages(int choice2) {
     mainWindow->SetState(STATE_DEFAULT);
 	__Menu_GetEntries();
     ResumeGui();
-	
+
 	if (cntMissFiles > 0) { //&& !IsNetworkInit()) {
 		NetworkInitPrompt();
 	}
@@ -1872,7 +1872,7 @@ bool NetworkInitPrompt() {
     GuiText btn1Txt(tr("Cancel"), 22, THEME.prompttext);
     GuiImage btn1Img(&btnOutline);
     if (Settings.wsprompt == yes) {
-        //btn1Txt.SetWidescreen(CFG.widescreen);
+        btn1Txt.SetWidescreen(CFG.widescreen);
         btn1Img.SetWidescreen(CFG.widescreen);
     }
     GuiButton btn1(&btn1Img,&btn1Img, 2, 4, 0, -45, &trigA, &btnSoundOver, &btnClick,1);
@@ -2000,7 +2000,7 @@ ProgressDownloadWindow(int choice2) {
     GuiText btn1Txt(tr("Cancel"), 22, THEME.prompttext);
     GuiImage btn1Img(&btnOutline);
     if (Settings.wsprompt == yes) {
-        //btn1Txt.SetWidescreen(CFG.widescreen);
+        btn1Txt.SetWidescreen(CFG.widescreen);
         btn1Img.SetWidescreen(CFG.widescreen);
     }
     GuiButton btn1(&btn1Img,&btn1Img, 2, 4, 0, -45, &trigA, &btnSoundOver, &btnClick,1);
@@ -2327,7 +2327,7 @@ ProgressDownloadWindow(int choice2) {
     }
 
     /**Temporary redownloading 1st image because of a fucking corruption bug **/
-#if 0 // is no longer necessary, since libfat is fixed 
+#if 0 // is no longer necessary, since libfat is fixed
     char URLFile[100];
     struct block file = downloadfile(URLFile);
     if (choice2 == 2) {
@@ -2484,7 +2484,7 @@ int ProgressUpdateWindow() {
     GuiText btn1Txt(tr("Cancel"), 22, THEME.prompttext);
     GuiImage btn1Img(&btnOutline);
     if (Settings.wsprompt == yes) {
-        //btn1Txt.SetWidescreen(CFG.widescreen);
+        btn1Txt.SetWidescreen(CFG.widescreen);
         btn1Img.SetWidescreen(CFG.widescreen);
     }
     GuiButton btn1(&btn1Img,&btn1Img, 2, 4, 0, -40, &trigA, &btnSoundOver, &btnClick,1);
@@ -2922,7 +2922,7 @@ int ProgressUpdateWindow() {
                 titleTxt.SetTextf("%s USB Loader GX", tr("Updating"));
                 msgTxt.SetPosition(0,100);
                 msgTxt.SetTextf("%s", tr("Updating WiiTDB.zip"));
-				
+
 				char wiitdbpath[200];
 				char wiitdbpathtmp[200];
                 struct block file = downloadfile(XMLurl);
@@ -2943,7 +2943,7 @@ int ProgressUpdateWindow() {
 						OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true); // open file, reload titles, keep in memory
 					}
 				}
-				
+
                 msgTxt.SetTextf("%s", tr("Updating Language Files:"));
                 updateLanguageFiles();
                 promptWindow.Append(&progressbarEmptyImg);
@@ -3112,7 +3112,7 @@ int CodeDownload(const char *id) {
     GuiText btn1Txt(tr("Cancel"), 22, THEME.prompttext);
     GuiImage btn1Img(&btnOutline);
     if (Settings.wsprompt == yes) {
-        //btn1Txt.SetWidescreen(CFG.widescreen);
+        btn1Txt.SetWidescreen(CFG.widescreen);
         btn1Img.SetWidescreen(CFG.widescreen);
     }
     GuiButton btn1(&btn1Img,&btn1Img, 2, 4, 0, -40, &trigA, &btnSoundOver, &btnClick,1);
@@ -3350,14 +3350,14 @@ HBCWindowPrompt(const char *name, const char *coder, const char *version,
 
     int pagesize = 6;
 	int currentLine = 0;
-	
+
     GuiText long_descriptionTxt(long_description, 20, THEME.prompttext);
     long_descriptionTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     long_descriptionTxt.SetPosition(46,117);
     long_descriptionTxt.SetMaxWidth(360, LONGTEXT);
     long_descriptionTxt.SetLinesToDraw(pagesize);
     long_descriptionTxt.SetFirstLine(currentLine);
-	
+
 	int TotalLines = long_descriptionTxt.GetTotalLines();
 
     //convert filesize from u64 to char and put unit of measurement after it
@@ -3389,7 +3389,7 @@ HBCWindowPrompt(const char *name, const char *coder, const char *version,
     GuiText btn1Txt(tr("Load"), 22, THEME.prompttext);
     GuiImage btn1Img(&btnOutline);
     if (Settings.wsprompt == yes) {
-        //btn1Txt.SetWidescreen(CFG.widescreen);
+        btn1Txt.SetWidescreen(CFG.widescreen);
         btn1Img.SetWidescreen(CFG.widescreen);
     }
 
@@ -3400,7 +3400,7 @@ HBCWindowPrompt(const char *name, const char *coder, const char *version,
     GuiText btn2Txt(tr("Back"), 22, THEME.prompttext);
     GuiImage btn2Img(&btnOutline);
     if (Settings.wsprompt == yes) {
-        //btn2Txt.SetWidescreen(CFG.widescreen);
+        btn2Txt.SetWidescreen(CFG.widescreen);
         btn2Img.SetWidescreen(CFG.widescreen);
     }
     GuiButton btn2(&btn2Img, &btn2Img, 0,3,0,0,&trigA,&btnSoundOver,&btnClick,1);

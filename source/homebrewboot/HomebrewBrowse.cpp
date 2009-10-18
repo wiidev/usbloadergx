@@ -150,7 +150,7 @@ int MenuHomebrewBrowse() {
     backBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
     GuiImage backBtnImg(&btnOutline);
     if (Settings.wsprompt == yes) {
-        //backBtnTxt.SetWidescreen(CFG.widescreen);
+        backBtnTxt.SetWidescreen(CFG.widescreen);
         backBtnImg.SetWidescreen(CFG.widescreen);
     }
     GuiButton backBtn(&backBtnImg,&backBtnImg, 2, 3, -180, 400, &trigA, &btnSoundOver, &btnClick,1);
@@ -838,29 +838,29 @@ int MenuHomebrewBrowse() {
 
                             read += result;
                         }
-						
+
 						char filename[101];
 						if (!error) {
-						
+
 							network_read((u8*) &filename, 100);
-							
+
 							// Do we need to unzip this thing?
 							if (wiiloadVersion[0] > 0 || wiiloadVersion[1] > 4) {
 
 								// We need to unzip...
 								if (temp[0] == 'P' && temp[1] == 'K' && temp[2] == 0x03 && temp[3] == 0x04) {
 									// It's a zip file, unzip to the apps directory
-									
+
 									// Zip archive, ask for permission to install the zip
 									char zippath[255];
 									sprintf((char *) &zippath, "%s%s", Settings.homebrewapps_path, filename);
-									
+
 									FILE *fp = fopen(zippath, "wb");
 									if (fp != NULL)
 									{
 										fwrite(temp, 1, infilesize, fp);
 										fclose(fp);
-										
+
 										// Now unzip the zip file...
 										unzFile uf = unzOpen(zippath);
 										if (uf==NULL) {
@@ -868,9 +868,9 @@ int MenuHomebrewBrowse() {
 										} else {
 											extractZip(uf,0,1,0, Settings.homebrewapps_path);
 											unzCloseCurrentFile(uf);
-											
+
 											remove(zippath);
-											
+
 											// Reload this menu here...
 											menu = MENU_HOMEBREWBROWSE;
 											break;
@@ -884,17 +884,17 @@ int MenuHomebrewBrowse() {
 									uLongf f = uncfilesize;
 									error = uncompress(unc, &f, temp, infilesize) != Z_OK;
 									uncfilesize = f;
-									
+
 									free(temp);
 									temp = unc;
 								}
 							}
-							
+
 							if (!error && strstr(filename,".zip") == NULL) {
 								innetbuffer = temp;
 							}
 						}
-						
+
                         ProgressStop();
 
                         if (error || read != infilesize) {

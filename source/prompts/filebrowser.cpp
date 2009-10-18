@@ -77,7 +77,7 @@ int InitBrowsers() {
 	char rootdir[ROOTDIRLEN];
 	for(int i=3; i<STD_MAX; i++)
 	{
-		if(strcmp(devoptab_list[i]->name, "stdnull")) 
+		if(strcmp(devoptab_list[i]->name, "stdnull"))
 		{
 			snprintf(rootdir, sizeof(rootdir) , "%s:/", devoptab_list[i]->name);
 			if(DIR_ITER *dir = diropen(rootdir))
@@ -195,7 +195,7 @@ int ParseDirectory(const char* Path, int Flags, FILTERCASCADE *Filter) {
 							return -1;
 				}
 				if(getcwd(fulldir, sizeof(fulldir))) return -1;	// gets the concatenated current working dir
-				chdir(filename);											// restore the saved cwd 
+				chdir(filename);											// restore the saved cwd
 			}
 		}
 		for(i=0; i<browsers.size(); i++) 						// searchs the browser who match the path
@@ -206,15 +206,15 @@ int ParseDirectory(const char* Path, int Flags, FILTERCASCADE *Filter) {
 				break;
 			}
 		}
-		if(i != browsers.size())									// found browser 
+		if(i != browsers.size())									// found browser
 		{
 			curDevice = i;
 			browser = &browsers[curDevice];
 			strcpy(browser->dir, &fulldir[strlen(browser->rootdir)]);
 		}
 		else if(Flags & FB_TRYSTDDEV)
-		{																		
-			curDevice = 0;													
+		{
+			curDevice = 0;
 			browser = &browsers[curDevice]; 								// when no browser was found and
 			browser->dir[0] = 0;												// we alowed try StdDevice and try RootDir
 			strlcpy(fulldir, browser->rootdir, sizeof(fulldir)); // set the first browser with root-dir
@@ -315,14 +315,14 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
 	folderBtn.SetImage(&folderImg);
 	folderBtn.SetTrigger(&trigA);
 	folderBtn.SetEffectGrow();
-	
+
 	char imgPath[100];
 	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
 	GuiImageData btnOutline(imgPath, button_dialogue_box_png);
 	GuiText ExitBtnTxt(tr("Cancel"), 24, (GXColor) {0, 0, 0, 255});
 	GuiImage ExitBtnImg(&btnOutline);
 	if (Settings.wsprompt == yes) {
-		//ExitBtnTxt.SetWidescreen(CFG.widescreen);
+		ExitBtnTxt.SetWidescreen(CFG.widescreen);
 		ExitBtnImg.SetWidescreen(CFG.widescreen);
 	}
 	GuiButton ExitBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
@@ -337,7 +337,7 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
 	GuiText usbBtnTxt(browsers[(curDevice+1)%browsers.size()].rootdir, 24, (GXColor) {0, 0, 0, 255});
 	GuiImage usbBtnImg(&btnOutline);
 	if (Settings.wsprompt == yes) {
-		//usbBtnTxt.SetWidescreen(CFG.widescreen);
+		usbBtnTxt.SetWidescreen(CFG.widescreen);
 		usbBtnImg.SetWidescreen(CFG.widescreen);
 	}
 	GuiButton usbBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
@@ -351,7 +351,7 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
 	GuiText okBtnTxt(tr("OK"), 22, THEME.prompttext);
 	GuiImage okBtnImg(&btnOutline);
 	if (Settings.wsprompt == yes) {
-		//okBtnTxt.SetWidescreen(CFG.widescreen);
+		okBtnTxt.SetWidescreen(CFG.widescreen);
 		okBtnImg.SetWidescreen(CFG.widescreen);
 	}
 	GuiButton okBtn(&okBtnImg,&okBtnImg, 0, 4, 40, -35, &trigA, &btnSoundOver, &btnClick,1);
@@ -422,11 +422,11 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
 					else if (strcmp(browser->browserList[clickedIndex].filename,"."))
 					{
 						/* test new directory namelength */
-						if ((strlen(browser->dir) + strlen(browser->browserList[clickedIndex].filename) 
+						if ((strlen(browser->dir) + strlen(browser->browserList[clickedIndex].filename)
 																+ 1/*'/'*/) < MAXPATHLEN)
 						{
 							/* update current directory name */
-							sprintf(browser->dir, "%s%s/",browser->dir, 
+							sprintf(browser->dir, "%s%s/",browser->dir,
 														browser->browserList[clickedIndex].filename);
 							pathCanged = true;
 						}
@@ -484,7 +484,7 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
 			char oldfolder[100];
 			snprintf(newfolder, sizeof(newfolder), "%s%s", browser->rootdir, browser->dir);
 			strcpy(oldfolder,newfolder);
-			
+
 			int result = OnScreenKeyboard(newfolder, sizeof(newfolder), strlen(browser->rootdir));
 			if ( result == 1 ) {
 				unsigned int len = strlen(newfolder);
