@@ -493,14 +493,13 @@ int TitleBrowser(u32 type) {
                                 int pick = WindowPrompt(tr(" Wad Saved as:"), tmptxt, tr("Install"),tr("Uninstall"),tr("Cancel"));
                                 //install or uninstall it
                                 if (pick==1)
-									{	
-									
+									{
 										HaltGui();
 										w.Remove(&titleTxt);
 										w.Remove(&cancelBtn);
 										w.Remove(&wifiBtn);
 										w.Remove(&optionBrowser3);
-										ResumeGui();										
+										ResumeGui();
 										
 										Wad_Install(file);
 										

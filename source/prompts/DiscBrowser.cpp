@@ -293,12 +293,12 @@ int autoSelectDol(const char *id, bool force) {
 		//Grand Slam Tennis
 		if (strcmp(id,"R5TP69") == 0) return 1493;//from isostar
 		if (strcmp(id,"R5TE69") == 0) return 1493;//starstremr
-				
+		
 		//Medal of Honor Heroes
 		if (strcmp(id,"RMZX69") == 0) return 492;//from isostar
 		if (strcmp(id,"RMZP69") == 0) return 492;//from isostar
 		if (strcmp(id,"RMZE69") == 0) return 492;//starstremr 
-								
+		
 		//Tiger Woods 10
 		if (strcmp(id,"R9OP69") == 0) return 1991;//from isostar
 		if (strcmp(id,"R9OE69") == 0) return 1973;//starstremr
@@ -362,7 +362,7 @@ int autoSelectDolMenu(const char *id, bool force) {
 		}
 		return choice;
 	}
-		
+	
 	//Metal Slug Anthology (Metal Slug 6)
 	if (strcmp(id,"RMLEH4") == 0) {
 		int choice = WindowPrompt(tr("Select a DOL"), 0, "Metal Slug 6", tr("Default"));
@@ -388,7 +388,7 @@ int autoSelectDolMenu(const char *id, bool force) {
 		}
 		return choice;
 	}
-		
+	
 	//Metroid Prime Trilogy
 	if (strcmp(id,"R3ME01") == 0) {
 		//do not use any alt dol if there is no save game in the nand
@@ -456,7 +456,7 @@ int autoSelectDolMenu(const char *id, bool force) {
 		}
 		return choice;
 	}
-		
+	
 	//The House Of The Dead 2 & 3 Return (only to play 2)
 	if (strcmp(id,"RHDE8P") == 0) {
 		int choice = WindowPrompt(tr("Select a DOL"), 0, "HotD 2", tr("Default"));

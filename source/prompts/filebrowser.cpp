@@ -77,7 +77,7 @@ int InitBrowsers() {
 	char rootdir[ROOTDIRLEN];
 	for(int i=3; i<STD_MAX; i++)
 	{
-		if(strcmp(devoptab_list[i]->name, "stdnull")) 
+		if(strcmp(devoptab_list[i]->name, "stdnull"))
 		{
 			snprintf(rootdir, sizeof(rootdir) , "%s:/", devoptab_list[i]->name);
 			if(DIR_ITER *dir = diropen(rootdir))
@@ -195,7 +195,7 @@ int ParseDirectory(const char* Path, int Flags, FILTERCASCADE *Filter) {
 							return -1;
 				}
 				if(getcwd(fulldir, sizeof(fulldir))) return -1;	// gets the concatenated current working dir
-				chdir(filename);											// restore the saved cwd 
+				chdir(filename);											// restore the saved cwd
 			}
 		}
 		for(i=0; i<browsers.size(); i++) 						// searchs the browser who match the path
@@ -206,15 +206,15 @@ int ParseDirectory(const char* Path, int Flags, FILTERCASCADE *Filter) {
 				break;
 			}
 		}
-		if(i != browsers.size())									// found browser 
+		if(i != browsers.size())									// found browser
 		{
 			curDevice = i;
 			browser = &browsers[curDevice];
 			strcpy(browser->dir, &fulldir[strlen(browser->rootdir)]);
 		}
 		else if(Flags & FB_TRYSTDDEV)
-		{																		
-			curDevice = 0;													
+		{
+			curDevice = 0;
 			browser = &browsers[curDevice]; 								// when no browser was found and
 			browser->dir[0] = 0;												// we alowed try StdDevice and try RootDir
 			strlcpy(fulldir, browser->rootdir, sizeof(fulldir)); // set the first browser with root-dir
@@ -422,11 +422,11 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
 					else if (strcmp(browser->browserList[clickedIndex].filename,"."))
 					{
 						/* test new directory namelength */
-						if ((strlen(browser->dir) + strlen(browser->browserList[clickedIndex].filename) 
+						if ((strlen(browser->dir) + strlen(browser->browserList[clickedIndex].filename)
 																+ 1/*'/'*/) < MAXPATHLEN)
 						{
 							/* update current directory name */
-							sprintf(browser->dir, "%s%s/",browser->dir, 
+							sprintf(browser->dir, "%s%s/",browser->dir,
 														browser->browserList[clickedIndex].filename);
 							pathCanged = true;
 						}

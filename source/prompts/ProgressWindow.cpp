@@ -30,6 +30,7 @@ static int showProgress = 0;
 static f32 progressDone = 0.0;
 static bool showTime = false;
 static bool showSize = false;
+static bool changed = true;
 static s32 gameinstalldone = 0;
 static s32 gameinstalltotal = -1;
 static time_t start;
@@ -52,7 +53,12 @@ static void GameInstallProgress() {
     if (gameinstalltotal <= 0)
         return;
 
+    int oldinstalldone = gameinstalldone;
+
     GetProgressValue(&gameinstalldone, &gameinstalltotal);
+
+    if((oldinstalldone == gameinstalldone) && (gameinstalldone > 0))
+        return;
 
     if (gameinstalldone > gameinstalltotal)
         gameinstalldone = gameinstalltotal;
@@ -89,6 +95,7 @@ static void GameInstallProgress() {
     snprintf(progressSizeLeft, sizeof(progressSizeLeft), "%.2fGB/%.2fGB", gamesize * gameinstalldone/gameinstalltotal, gamesize);
     snprintf(progressSpeed, sizeof(progressSpeed), "%.1fMB/s", speed);
 
+    changed = true;
 }
 
 /****************************************************************************
@@ -246,28 +253,33 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
     while (showProgress) {
 
         VIDEO_WaitVSync ();
-        usleep(20000);
 
         GameInstallProgress();
-        tmp = static_cast<int>(progressbarImg.GetWidth()*progressDone);
 
-        if (CFG.widescreen && Settings.wsprompt == yes)
-            progressbarImg.SetSkew(0,0,static_cast<int>(progressbarImg.GetWidth()*progressDone*0.8)-progressbarImg.GetWidth(),0,static_cast<int>(progressbarImg.GetWidth()*progressDone*0.8)-progressbarImg.GetWidth(),0,0,0);
-        else
-            progressbarImg.SetSkew(0,0,static_cast<int>(progressbarImg.GetWidth()*progressDone)-progressbarImg.GetWidth(),0,static_cast<int>(progressbarImg.GetWidth()*progressDone)-progressbarImg.GetWidth(),0,0,0);
+        if(changed)
+        {
+            changed = false;
 
-        prTxt.SetTextf("%.2f", progressDone);
+            tmp = static_cast<int>(progressbarImg.GetWidth()*progressDone);
 
-        if (showSize) {
-            sizeTxt.SetText(progressSizeLeft);
-            speedTxt.SetText(progressSpeed);
+            if (CFG.widescreen && Settings.wsprompt == yes)
+                progressbarImg.SetSkew(0,0,static_cast<int>(progressbarImg.GetWidth()*progressDone*0.8)-progressbarImg.GetWidth(),0,static_cast<int>(progressbarImg.GetWidth()*progressDone*0.8)-progressbarImg.GetWidth(),0,0,0);
+            else
+                progressbarImg.SetSkew(0,0,static_cast<int>(progressbarImg.GetWidth()*progressDone)-progressbarImg.GetWidth(),0,static_cast<int>(progressbarImg.GetWidth()*progressDone)-progressbarImg.GetWidth(),0,0,0);
+
+            prTxt.SetTextf("%.2f", progressDone);
+
+            if (showSize) {
+                sizeTxt.SetText(progressSizeLeft);
+                speedTxt.SetText(progressSpeed);
+            }
+
+            if (showTime)
+                timeTxt.SetText(progressTime);
+
+            if (msg2)
+                msg2Txt.SetText(dyn_message);
         }
-
-        if (showTime)
-            timeTxt.SetText(progressTime);
-
-        if (msg2)
-            msg2Txt.SetText(dyn_message);
     }
 
     promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
@@ -374,6 +386,7 @@ void ShowProgress(const char *title, const char *msg1, char *dynmsg2, f32 done, 
 
     showProgress = 1;
     progressDone = 100.0*done/total;
+    changed = true;
 
     LWP_ResumeThread(progressthread);
 }
@@ -384,7 +397,7 @@ void ShowProgress(const char *title, const char *msg1, char *dynmsg2, f32 done, 
  * Startup Progressthread in idle prio
  ***************************************************************************/
 void InitProgressThread() {
-    LWP_CreateThread(&progressthread, ProgressThread, NULL, NULL, 0, 0);
+    LWP_CreateThread(&progressthread, ProgressThread, NULL, NULL, 0, 80);
 }
 
 /****************************************************************************

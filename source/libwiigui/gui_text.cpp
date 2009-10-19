@@ -10,8 +10,6 @@
 
 #include "gui.h"
 
-static int currentSize = 0;
-static int currentWidescreen = 0;
 static int presetSize = 0;
 static GXColor presetColor = (GXColor){255, 255, 255, 255};
 static int presetMaxWidth = 0;
@@ -255,13 +253,7 @@ int GuiText::GetTextWidth()
 	
 	int newSize = size*this->GetScale();
 
-	if(newSize != currentSize || currentWidescreen != widescreen)
-	{
-		//fontSystem->changeSize(newSize);
-		(font ? font : fontSystem)->changeSize(newSize, widescreen ? newSize*0.8 : 0);
-		currentSize = newSize;
-		currentWidescreen = widescreen;
-	}
+	(font ? font : fontSystem)->changeSize(newSize, widescreen ? newSize*0.8 : 0);
 	return (font ? font : fontSystem)->getWidth(text);
 }
 
@@ -287,14 +279,7 @@ void GuiText::Draw()
 
 	int newSize = size*this->GetScale();
 
-	if(newSize != currentSize || currentWidescreen != widescreen)
-	{
-		//fontSystem->changeSize(newSize);
-		(font ? font : fontSystem)->changeSize(newSize, widescreen ? newSize*0.8 : 0);
-		currentSize = newSize;
-		currentWidescreen = widescreen;
-	}
-
+	(font ? font : fontSystem)->changeSize(newSize, widescreen ? newSize*0.8 : 0);
 	int voffset = 0;
 
 //	if(alignmentVert == ALIGN_MIDDLE)
