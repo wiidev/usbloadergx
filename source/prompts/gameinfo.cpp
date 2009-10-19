@@ -596,7 +596,7 @@ int showGameInfo(char *ID) {
         if (strcmp(gameinfo.title,"") != 0) {
             snprintf(linebuf, sizeof(linebuf), "%s",gameinfo.title);
             titleTxt = new GuiText(linebuf, titlefontsize, (GXColor) {0,0,0, 255});
-            titleTxt->SetMaxWidth(350, SCROLL_HORIZONTAL);
+            titleTxt->SetMaxWidth(350, GuiText::SCROLL);
             //while (titleTxt->GetWidth()>250) { titleTxt->SetFontSize(titlefontsize-=2); }
             titleTxt->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
             titleTxt->SetPosition(txtXOffset,12+titley);
@@ -664,7 +664,7 @@ int showGameInfo(char *ID) {
             snprintf(linebuf, sizeof(linebuf), "%s %s", tr("Published by"), gameinfo.publisher);
             publisherTxt = new GuiText(linebuf, 16, (GXColor) {0,0,0, 255});
             if (publisherTxt->GetWidth()>250) newline=2;
-            publisherTxt->SetMaxWidth(250, WRAP);
+            publisherTxt->SetMaxWidth(250,GuiText::WRAP);
             publisherTxt->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
             publisherTxt->SetPosition(-17,12+indexy);
             indexy+=(20 * newline);
@@ -677,7 +677,7 @@ int showGameInfo(char *ID) {
             snprintf(linebuf, sizeof(linebuf), "%s %s", tr("Developed by"), gameinfo.developer);
             developerTxt = new GuiText(linebuf, 16, (GXColor) {0,0,0, 255});
             if (developerTxt->GetWidth()>250) newline=2;
-            developerTxt->SetMaxWidth(250, WRAP);
+            developerTxt->SetMaxWidth(250,GuiText::WRAP);
             developerTxt->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
             developerTxt->SetPosition(-17,12+indexy);
             indexy+=(20 * newline);
@@ -721,17 +721,14 @@ int showGameInfo(char *ID) {
 
         //synopsis
         int pagesize=12;
-		int currentLine = 0;
-		int TotalLines = 0;
         if (strcmp(gameinfo.synopsis,"") != 0)	{
             snprintf(linebuf, sizeof(linebuf), "%s", gameinfo.synopsis);
             synopsisTxt = new GuiText(linebuf, 16, (GXColor) {0,0,0, 255});
-            synopsisTxt->SetMaxWidth(350, LONGTEXT);
+            synopsisTxt->SetMaxWidth(350,GuiText::WRAP);
             synopsisTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
             synopsisTxt->SetPosition(0,0);
-            synopsisTxt->SetLinesToDraw(pagesize);
-            synopsisTxt->SetFirstLine(0);
-			TotalLines = synopsisTxt->GetTotalLines();
+            synopsisTxt->SetNumLines(pagesize);
+            //synopsisTxt->SetFirstLine(12);
 
             dialogBoxImg11 = new GuiImage(&dialogBox1);
             dialogBoxImg11->SetAlignment(0,3);
@@ -852,24 +849,23 @@ int showGameInfo(char *ID) {
                 }
 
             } else if ((upBtn.GetState()==STATE_CLICKED||upBtn.GetState()==STATE_HELD) && page==2) {
-                currentLine--;
-				if(currentLine+pagesize > TotalLines)
-					currentLine = TotalLines-pagesize;
-				if(currentLine < 0)
-					currentLine = 0;
-
-				synopsisTxt->SetFirstLine(currentLine);
-				usleep(60000);
+                //int l=synopsisTxt->GetFirstLine()-1;
+                if (synopsisTxt->GetFirstLine()>1)
+                    synopsisTxt->SetFirstLine(synopsisTxt->GetFirstLine()-1);
+                usleep(60000);
                 if (!((ButtonsHold() & WPAD_BUTTON_UP)||(ButtonsHold() & PAD_BUTTON_UP)))
                     upBtn.ResetState();
-            } else if ((dnBtn.GetState()==STATE_CLICKED||dnBtn.GetState()==STATE_HELD) && page==2) {
-                currentLine++;
-				if(currentLine+pagesize > TotalLines)
-					currentLine = TotalLines-pagesize;
-				if(currentLine < 0)
-					currentLine = 0;
+            } else if ((dnBtn.GetState()==STATE_CLICKED||dnBtn.GetState()==STATE_HELD) && page==2
+                       &&synopsisTxt->GetTotalLines()>pagesize
+                       &&synopsisTxt->GetFirstLine()-1<synopsisTxt->GetTotalLines()-pagesize) {
+                int l=0;
+                //if(synopsisTxt->GetTotalLines()>pagesize)
+                l=synopsisTxt->GetFirstLine()+1;
 
-				synopsisTxt->SetFirstLine(currentLine);
+                //if (l>(synopsisTxt->GetTotalLines()+1)-pagesize)
+                //l=(synopsisTxt->GetTotalLines()+1)-pagesize;
+
+                synopsisTxt->SetFirstLine(l);
                 usleep(60000);
                 if (!((ButtonsHold() & WPAD_BUTTON_DOWN)||(ButtonsHold() & PAD_BUTTON_DOWN)))
                     dnBtn.ResetState();

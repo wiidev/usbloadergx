@@ -82,7 +82,7 @@ int CheatMenu(const char * gameID) {
 
         GuiText titleTxt(c.getGameName().c_str(), 28, (GXColor) {0, 0, 0, 255});
         titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-        titleTxt.SetMaxWidth(350, SCROLL_HORIZONTAL);
+        titleTxt.SetMaxWidth(350, GuiText::SCROLL);
         titleTxt.SetPosition(12,40);
 
         for (int i = 0; i <= cntcheats; i++) {

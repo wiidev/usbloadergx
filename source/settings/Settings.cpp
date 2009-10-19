@@ -23,7 +23,7 @@
 /*** Extern functions ***/
 extern void ResumeGui();
 extern void HaltGui();
-extern bool
+extern bool 
 Database(char* xmlfilepath, char* argdblang, bool argJPtoEN, bool openfile, bool loadtitles, bool keepopen);
 extern void titles_default();
 
@@ -251,7 +251,6 @@ int MenuSettings() {
 
     int pageToDisplay = 1;
     while ( pageToDisplay > 0) { //set pageToDisplay to 0 to quit
-
         VIDEO_WaitVSync ();
 
         menu = MENU_NONE;
@@ -493,7 +492,6 @@ int MenuSettings() {
                     while (optionBrowser2.GetEffect() > 0) usleep(50);
 
                     int returnhere = 1;
-                    bool firstRun = true;
                     char * languagefile;
                     languagefile = strrchr(Settings.language_path, '/')+1;
 
@@ -502,13 +500,93 @@ int MenuSettings() {
 
                         returnhere = 1;
 
+                        if (Settings.sinfo  >= settings_sinfo_max)
+                            Settings.sinfo = 0;
+                        if (Settings.hddinfo >= settings_clock_max)
+                            Settings.hddinfo = 0; //CLOCK
+                        if (Settings.tooltips >= settings_tooltips_max)
+                            Settings.tooltips = 0;
+                        if ( Settings.xflip >= settings_xflip_max)
+                            Settings.xflip = 0;
+                        if ( Settings.wsprompt > 1 )
+                            Settings.wsprompt = 0;
+                        if ( Settings.keyset >= settings_keyset_max)
+                            Settings.keyset = 0;
+                        if ( Settings.wiilight > 2 )
+                            Settings.wiilight = 0;
+                        if (Settings.rumble >= settings_rumble_max)
+                            Settings.rumble = 0; //RUMBLE
+                        if (Settings.screensaver >= settings_screensaver_max)
+                            Settings.screensaver = 0; //RUMBLE
+                        if (Settings.titlesOverride >= 2)
+                            Settings.titlesOverride = 0;
+                        if (Settings.discart >= 4)
+                            Settings.discart = 0;
+                        if (!strcmp("notset", Settings.language_path))
+                            options2.SetValue(0, "%s", tr("Default"));
+                        else
+                            options2.SetValue(0, "%s", languagefile);
+
+                        if (Settings.sinfo == GameID) options2.SetValue(1,"%s",tr("Game ID"));
+                        else if (Settings.sinfo == GameRegion) options2.SetValue(1,"%s",tr("Game Region"));
+                        else if (Settings.sinfo == Both) options2.SetValue(1,"%s",tr("Both"));
+                        else if (Settings.sinfo == Neither) options2.SetValue(1,"%s",tr("Neither"));
+
+                        if (Settings.hddinfo == hr12) options2.SetValue(2,"12 %s",tr("Hour"));
+                        else if (Settings.hddinfo == hr24) options2.SetValue(2,"24 %s",tr("Hour"));
+                        else if (Settings.hddinfo == Off) options2.SetValue(2,"%s",tr("OFF"));
+
+                        if (Settings.tooltips == TooltipsOn) options2.SetValue(3,"%s",tr("ON"));
+                        else if (Settings.tooltips == TooltipsOff) options2.SetValue(3,"%s",tr("OFF"));
+
+                        if (Settings.xflip == no) options2.SetValue(4,"%s/%s",tr("Right"),tr("Next"));
+                        else if (Settings.xflip == yes) options2.SetValue(4,"%s/%s",tr("Left"),tr("Prev"));
+                        else if (Settings.xflip == sysmenu) options2.SetValue(4,"%s", tr("Like SysMenu"));
+                        else if (Settings.xflip == wtf) options2.SetValue(4,"%s/%s",tr("Right"),tr("Prev"));
+                        else if (Settings.xflip == disk3d) options2.SetValue(4,tr("DiskFlip"));
+
+                        if (Settings.wsprompt == no) options2.SetValue(5,"%s",tr("Normal"));
+                        else if (Settings.wsprompt == yes) options2.SetValue(5,"%s",tr("Widescreen Fix"));
+
+                        if (Settings.keyset == us) options2.SetValue(6,"QWERTY");
+                        else if (Settings.keyset == qwerty) options2.SetValue(6,"QWERTY 2");
+                        else if (Settings.keyset == dvorak) options2.SetValue(6,"DVORAK");
+                        else if (Settings.keyset == euro) options2.SetValue(6,"QWERTZ");
+                        else if (Settings.keyset == azerty) options2.SetValue(6,"AZERTY");
+
+                        if (Settings.discart == 0) options2.SetValue(7,"%s",tr("Only Original"));
+                        else if (Settings.discart == 1) options2.SetValue(7,tr("Only Customs"));
+                        else if (Settings.discart == 2) options2.SetValue(7,tr("Original/Customs"));
+                        else if (Settings.discart == 3) options2.SetValue(7,tr("Customs/Original"));
+
+                        if (Settings.wiilight == 0) options2.SetValue(8,"%s",tr("OFF"));
+                        else if (Settings.wiilight == 1) options2.SetValue(8,"%s",tr("ON"));
+                        else if (Settings.wiilight == 2) options2.SetValue(8,"%s",tr("Only for Install"));
+
+                        if (Settings.rumble == RumbleOn) options2.SetValue(9,"%s",tr("ON"));
+                        else if (Settings.rumble == RumbleOff) options2.SetValue(9,"%s",tr("OFF"));
+
+                        if (Settings.autonetwork == on) options2.SetValue(10,"%s",tr("ON"));
+                        else if (Settings.autonetwork == off) options2.SetValue(10,"%s",tr("OFF"));
+
+                        if (Settings.titlesOverride == 0) options2.SetValue(11,"%s",tr("OFF"));
+                        else if (Settings.titlesOverride == 1) options2.SetValue(11,"%s",tr("ON"));
+
+                        if (Settings.screensaver == 0) options2.SetValue(12,"%s",tr("OFF"));
+                        else if (Settings.screensaver == 1) options2.SetValue(12,tr("3 min"));
+                        else if (Settings.screensaver == 2) options2.SetValue(12,tr("5 min"));
+                        else if (Settings.screensaver == 3) options2.SetValue(12,tr("10 min"));
+                        else if (Settings.screensaver == 4) options2.SetValue(12,tr("20 min"));
+                        else if (Settings.screensaver == 5) options2.SetValue(12,tr("30 min"));
+                        else if (Settings.screensaver == 6) options2.SetValue(12,tr("1 hour"));
+
                         if (backBtn.GetState() == STATE_CLICKED) {
                             backBtn.ResetState();
                             exit = true;
                             break;
                         }
 
-                        else if (shutdown == 1)
+                        if (shutdown == 1)
                             Sys_Shutdown();
                         else if (reset == 1)
                             Sys_Reboot();
@@ -544,159 +622,74 @@ int MenuSettings() {
 
                         ret = optionBrowser2.GetClickedOption();
 
-                        if(firstRun || ret >= 0)
-                        {
-                            firstRun = false;
-
-                            switch (ret)
-                            {
-                                case 0:
-                                    if (isInserted(bootDevice)) {
-                                        if ( Settings.godmode == 1) {
-                                            w.SetEffect(EFFECT_FADE, -20);
-                                            while (w.GetEffect()>0) usleep(50);
-                                            mainWindow->Remove(&w);
-                                            while (returnhere == 1)
-                                                returnhere = MenuLanguageSelect();
-                                            if (returnhere == 2) {
-                                                menu = MENU_SETTINGS;
-                                                pageToDisplay = 0;
-                                                exit = true;
-                                                mainWindow->Append(&w);
-                                                break;
-                                            } else {
-                                                HaltGui();
-                                                mainWindow->Append(&w);
-                                                w.SetEffect(EFFECT_FADE, 20);
-                                                ResumeGui();
-                                                while (w.GetEffect()>0) usleep(50);
-                                            }
-                                        } else {
-                                            WindowPrompt(tr("Language change:"),tr("Console should be unlocked to modify it."),tr("OK"));
-                                        }
+                        switch (ret) {
+                        case 0:
+                            if (isInserted(bootDevice)) {
+                                if ( Settings.godmode == 1) {
+                                    w.SetEffect(EFFECT_FADE, -20);
+                                    while (w.GetEffect()>0) usleep(50);
+                                    mainWindow->Remove(&w);
+                                    while (returnhere == 1)
+                                        returnhere = MenuLanguageSelect();
+                                    if (returnhere == 2) {
+                                        menu = MENU_SETTINGS;
+                                        pageToDisplay = 0;
+                                        exit = true;
+                                        mainWindow->Append(&w);
+                                        break;
                                     } else {
-                                        WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to use this option."), tr("OK"));
+                                        HaltGui();
+                                        mainWindow->Append(&w);
+                                        w.SetEffect(EFFECT_FADE, 20);
+                                        ResumeGui();
+                                        while (w.GetEffect()>0) usleep(50);
                                     }
-                                    break;
-                                case 1:
-                                    Settings.sinfo++;
-                                    if (Settings.sinfo  >= settings_sinfo_max)
-                                        Settings.sinfo = 0;
-                                    break;
-                                case 2:
-                                    Settings.hddinfo++;
-                                    if (Settings.hddinfo >= settings_clock_max)
-                                        Settings.hddinfo = 0; //CLOCK
-                                    break;
-                                case 3:
-                                    Settings.tooltips++;
-                                    if (Settings.tooltips >= settings_tooltips_max)
-                                        Settings.tooltips = 0;
-                                    break;
-                                case 4:
-                                    Settings.xflip++;
-                                    if ( Settings.xflip >= settings_xflip_max)
-                                        Settings.xflip = 0;
-                                    break;
-                                case 5:
-                                    Settings.wsprompt++;
-                                    if ( Settings.wsprompt > 1 )
-                                        Settings.wsprompt = 0;
-                                    break;
-                                case 6:
-                                    Settings.keyset++;
-                                    if ( Settings.keyset >= settings_keyset_max)
-                                        Settings.keyset = 0;
-                                    break;
-                                case 7:
-                                    Settings.discart++;
-                                    if (Settings.discart >= 4)
-                                        Settings.discart = 0;
-                                    break;
-                                case 8:
-                                    Settings.wiilight++;
-                                    if ( Settings.wiilight > 2 )
-                                        Settings.wiilight = 0;
-                                    break;
-                                case 9:
-                                    Settings.rumble++;
-                                    if (Settings.rumble >= settings_rumble_max)
-                                        Settings.rumble = 0; //RUMBLE
-                                    break;
-                                case 10:
-                                    Settings.autonetwork++;
-                                    if (Settings.autonetwork > 1)
-                                        Settings.autonetwork = 0;
-                                    break;
-                                case 11:
-                                    Settings.titlesOverride++;
-                                    if (Settings.titlesOverride >= 2)
-                                        Settings.titlesOverride = 0;
-                                    break;
-                                case 12:
-                                    Settings.screensaver++;
-                                    if (Settings.screensaver >= settings_screensaver_max)
-                                        Settings.screensaver = 0; //RUMBLE
-                                    break;
+                                } else {
+                                    WindowPrompt(tr("Language change:"),tr("Console should be unlocked to modify it."),tr("OK"));
+                                }
+                            } else {
+                                WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to use this option."), tr("OK"));
                             }
+                            break;
+                        case 1:
+                            Settings.sinfo++;
+                            break;
+                        case 2:
+                            Settings.hddinfo++;
+                            break;
+                        case 3:
+                            Settings.tooltips++;
+                            break;
+                        case 4:
+                            Settings.xflip++;
+                            break;
+                        case 5:
+                            Settings.wsprompt++;
+                            break;
+                        case 6:
+                            Settings.keyset++;
+                            break;
+                        case 7:
+                            Settings.discart++;
+                            break;
+                        case 8:
+                            Settings.wiilight++;
+                            break;
+                        case 9:
+                            Settings.rumble++;
+                            break;
+                        case 10:
+                            Settings.autonetwork++;
+                            if (Settings.autonetwork > 1)
+                                Settings.autonetwork = 0;
+                            break;
+                        case 11:
+                            Settings.titlesOverride++;
+                            break;
+                        case 12:
+                            Settings.screensaver++;
+                            break;
 
-                            if (!strcmp("notset", Settings.language_path))
-                                options2.SetValue(0, "%s", tr("Default"));
-                            else
-                                options2.SetValue(0, "%s", languagefile);
-
-                            if (Settings.sinfo == GameID) options2.SetValue(1,"%s",tr("Game ID"));
-                            else if (Settings.sinfo == GameRegion) options2.SetValue(1,"%s",tr("Game Region"));
-                            else if (Settings.sinfo == Both) options2.SetValue(1,"%s",tr("Both"));
-                            else if (Settings.sinfo == Neither) options2.SetValue(1,"%s",tr("Neither"));
-
-                            if (Settings.hddinfo == hr12) options2.SetValue(2,"12 %s",tr("Hour"));
-                            else if (Settings.hddinfo == hr24) options2.SetValue(2,"24 %s",tr("Hour"));
-                            else if (Settings.hddinfo == Off) options2.SetValue(2,"%s",tr("OFF"));
-
-                            if (Settings.tooltips == TooltipsOn) options2.SetValue(3,"%s",tr("ON"));
-                            else if (Settings.tooltips == TooltipsOff) options2.SetValue(3,"%s",tr("OFF"));
-
-                            if (Settings.xflip == no) options2.SetValue(4,"%s/%s",tr("Right"),tr("Next"));
-                            else if (Settings.xflip == yes) options2.SetValue(4,"%s/%s",tr("Left"),tr("Prev"));
-                            else if (Settings.xflip == sysmenu) options2.SetValue(4,"%s", tr("Like SysMenu"));
-                            else if (Settings.xflip == wtf) options2.SetValue(4,"%s/%s",tr("Right"),tr("Prev"));
-                            else if (Settings.xflip == disk3d) options2.SetValue(4,tr("DiskFlip"));
-
-                            if (Settings.wsprompt == no) options2.SetValue(5,"%s",tr("Normal"));
-                            else if (Settings.wsprompt == yes) options2.SetValue(5,"%s",tr("Widescreen Fix"));
-
-                            if (Settings.keyset == us) options2.SetValue(6,"QWERTY");
-                            else if (Settings.keyset == qwerty) options2.SetValue(6,"QWERTY 2");
-                            else if (Settings.keyset == dvorak) options2.SetValue(6,"DVORAK");
-                            else if (Settings.keyset == euro) options2.SetValue(6,"QWERTZ");
-                            else if (Settings.keyset == azerty) options2.SetValue(6,"AZERTY");
-
-                            if (Settings.discart == 0) options2.SetValue(7,"%s",tr("Only Original"));
-                            else if (Settings.discart == 1) options2.SetValue(7,tr("Only Customs"));
-                            else if (Settings.discart == 2) options2.SetValue(7,tr("Original/Customs"));
-                            else if (Settings.discart == 3) options2.SetValue(7,tr("Customs/Original"));
-
-                            if (Settings.wiilight == 0) options2.SetValue(8,"%s",tr("OFF"));
-                            else if (Settings.wiilight == 1) options2.SetValue(8,"%s",tr("ON"));
-                            else if (Settings.wiilight == 2) options2.SetValue(8,"%s",tr("Only for Install"));
-
-                            if (Settings.rumble == RumbleOn) options2.SetValue(9,"%s",tr("ON"));
-                            else if (Settings.rumble == RumbleOff) options2.SetValue(9,"%s",tr("OFF"));
-
-                            if (Settings.autonetwork == on) options2.SetValue(10,"%s",tr("ON"));
-                            else if (Settings.autonetwork == off) options2.SetValue(10,"%s",tr("OFF"));
-
-                            if (Settings.titlesOverride == 0) options2.SetValue(11,"%s",tr("OFF"));
-                            else if (Settings.titlesOverride == 1) options2.SetValue(11,"%s",tr("ON"));
-
-                            if (Settings.screensaver == 0) options2.SetValue(12,"%s",tr("OFF"));
-                            else if (Settings.screensaver == 1) options2.SetValue(12,tr("3 min"));
-                            else if (Settings.screensaver == 2) options2.SetValue(12,tr("5 min"));
-                            else if (Settings.screensaver == 3) options2.SetValue(12,tr("10 min"));
-                            else if (Settings.screensaver == 4) options2.SetValue(12,tr("20 min"));
-                            else if (Settings.screensaver == 5) options2.SetValue(12,tr("30 min"));
-                            else if (Settings.screensaver == 6) options2.SetValue(12,tr("1 hour"));
                         }
                     }
                     optionBrowser2.SetEffect(EFFECT_FADE, -20);
@@ -741,15 +734,67 @@ int MenuSettings() {
                     optionBrowser2.SetClickable(true);
                     ResumeGui();
 
-                    bool firstRun = true;
-
                     VIDEO_WaitVSync ();
                     optionBrowser2.SetEffect(EFFECT_FADE, 20);
                     while (optionBrowser2.GetEffect() > 0) usleep(50);
 
-                    while (!exit)
-                    {
+                    while (!exit) {
                         VIDEO_WaitVSync ();
+                        if (Settings.video >= settings_video_max)
+                            Settings.video = 0;
+                        if (Settings.vpatch >= settings_off_on_max)
+                            Settings.vpatch = 0;
+                        if ( Settings.patchcountrystrings > 1)
+                            Settings.patchcountrystrings = 0;
+                        if (Settings.ocarina >= settings_off_on_max)
+                            Settings.ocarina = 0;
+                        if ( Settings.qboot > 1 )
+                            Settings.qboot = 0;
+                        if ( Settings.cios >= settings_cios_max)
+                            Settings.cios = 0;
+                        if ( Settings.language >= settings_language_max)
+                            Settings.language = 0;
+                        if (Settings.error002 >= settings_off_on_max+1)
+                            Settings.error002 = 0;
+
+                        if (Settings.video == discdefault) options2.SetValue(0,"%s",tr("Disc Default"));
+                        else if (Settings.video == systemdefault) options2.SetValue(0,"%s",tr("System Default"));
+                        else if (Settings.video == patch) options2.SetValue(0,"%s",tr("AutoPatch"));
+                        else if (Settings.video == pal50) options2.SetValue(0,"%s PAL50",tr("Force"));
+                        else if (Settings.video == pal60) options2.SetValue(0,"%s PAL60",tr("Force"));
+                        else if (Settings.video == ntsc) options2.SetValue(0,"%s NTSC",tr("Force"));
+
+                        if (Settings.vpatch == on) options2.SetValue(1,"%s",tr("ON"));
+                        else if (Settings.vpatch == off) options2.SetValue(1,"%s",tr("OFF"));
+
+                        if (Settings.language == ConsoleLangDefault) options2.SetValue(2,"%s",tr("Console Default"));
+                        else if (Settings.language == jap) options2.SetValue(2,"%s",tr("Japanese"));
+                        else if (Settings.language == ger) options2.SetValue(2,"%s",tr("German"));
+                        else if (Settings.language == eng) options2.SetValue(2,"%s",tr("English"));
+                        else if (Settings.language == fren) options2.SetValue(2,"%s",tr("French"));
+                        else if (Settings.language == esp) options2.SetValue(2,"%s",tr("Spanish"));
+                        else if (Settings.language == it) options2.SetValue(2,"%s",tr("Italian"));
+                        else if (Settings.language == dut) options2.SetValue(2,"%s",tr("Dutch"));
+                        else if (Settings.language == schin) options2.SetValue(2,"%s",tr("SChinese"));
+                        else if (Settings.language == tchin) options2.SetValue(2,"%s",tr("TChinese"));
+                        else if (Settings.language == kor) options2.SetValue(2,"%s",tr("Korean"));
+
+                        if (Settings.patchcountrystrings == 0) options2.SetValue(3,"%s",tr("OFF"));
+                        else if (Settings.patchcountrystrings == 1) options2.SetValue(3,"%s",tr("ON"));
+
+                        if (Settings.ocarina == on) options2.SetValue(4,"%s",tr("ON"));
+                        else if (Settings.ocarina == off) options2.SetValue(4,"%s",tr("OFF"));
+
+                        if (Settings.godmode != 1) options2.SetValue(5, "********");
+                        else if (Settings.cios == ios249) options2.SetValue(5,"cIOS 249");
+                        else if (Settings.cios == ios222) options2.SetValue(5,"cIOS 222");
+
+                        if (Settings.qboot == no) options2.SetValue(6,"%s",tr("No"));
+                        else if (Settings.qboot == yes) options2.SetValue(6,"%s",tr("Yes"));
+
+                        if (Settings.error002 == no) options2.SetValue(7,"%s",tr("No"));
+                        else if (Settings.error002 == yes) options2.SetValue(7,"%s",tr("Yes"));
+                        else if (Settings.error002 == anti) options2.SetValue(7,"%s",tr("Anti"));
 
                         if (backBtn.GetState() == STATE_CLICKED) {
                             backBtn.ResetState();
@@ -757,7 +802,7 @@ int MenuSettings() {
                             break;
                         }
 
-                        else if (shutdown == 1)
+                        if (shutdown == 1)
                             Sys_Shutdown();
                         else if (reset == 1)
                             Sys_Reboot();
@@ -787,91 +832,33 @@ int MenuSettings() {
 
                         ret = optionBrowser2.GetClickedOption();
 
-                        if(firstRun || ret >= 0)
-                        {
-                            firstRun = false;
+                        switch (ret) {
+                        case 0:
+                            Settings.video++;
+                            break;
+                        case 1:
+                            Settings.vpatch++;
+                            break;
+                        case 2:
+                            Settings.language++;
+                            break;
+                        case 3:
+                            Settings.patchcountrystrings++;
+                            break;
+                        case 4:
+                            Settings.ocarina++;
+                            break;
+                        case 5:
+                            if (Settings.godmode)
+                                Settings.cios++;
+                            break;
+                        case 6:
+                            Settings.qboot++;
+                            break;
+                        case 7:
+                            Settings.error002++;
+                            break;
 
-                            switch (ret) {
-                            case 0:
-                                Settings.video++;
-                                if (Settings.video >= settings_video_max)
-                                    Settings.video = 0;
-                                break;
-                            case 1:
-                                Settings.vpatch++;
-                                if (Settings.vpatch >= settings_off_on_max)
-                                    Settings.vpatch = 0;
-                                break;
-                            case 2:
-                                Settings.language++;
-                                if ( Settings.language >= settings_language_max)
-                                    Settings.language = 0;
-                                break;
-                            case 3:
-                                Settings.patchcountrystrings++;
-                                if ( Settings.patchcountrystrings > 1)
-                                    Settings.patchcountrystrings = 0;
-                                break;
-                            case 4:
-                                Settings.ocarina++;
-                                if (Settings.ocarina >= settings_off_on_max)
-                                    Settings.ocarina = 0;
-                                break;
-                            case 5:
-                                if (Settings.godmode)
-                                    Settings.cios++;
-                                break;
-                            case 6:
-                                Settings.qboot++;
-                                if ( Settings.qboot > 1 )
-                                    Settings.qboot = 0;
-                                break;
-                            case 7:
-                                Settings.error002++;
-                                if (Settings.error002 >= settings_off_on_max+1)
-                                    Settings.error002 = 0;
-                                break;
-
-                            }
-
-                            if (Settings.video == discdefault) options2.SetValue(0,"%s",tr("Disc Default"));
-                            else if (Settings.video == systemdefault) options2.SetValue(0,"%s",tr("System Default"));
-                            else if (Settings.video == patch) options2.SetValue(0,"%s",tr("AutoPatch"));
-                            else if (Settings.video == pal50) options2.SetValue(0,"%s PAL50",tr("Force"));
-                            else if (Settings.video == pal60) options2.SetValue(0,"%s PAL60",tr("Force"));
-                            else if (Settings.video == ntsc) options2.SetValue(0,"%s NTSC",tr("Force"));
-
-                            if (Settings.vpatch == on) options2.SetValue(1,"%s",tr("ON"));
-                            else if (Settings.vpatch == off) options2.SetValue(1,"%s",tr("OFF"));
-
-                            if (Settings.language == ConsoleLangDefault) options2.SetValue(2,"%s",tr("Console Default"));
-                            else if (Settings.language == jap) options2.SetValue(2,"%s",tr("Japanese"));
-                            else if (Settings.language == ger) options2.SetValue(2,"%s",tr("German"));
-                            else if (Settings.language == eng) options2.SetValue(2,"%s",tr("English"));
-                            else if (Settings.language == fren) options2.SetValue(2,"%s",tr("French"));
-                            else if (Settings.language == esp) options2.SetValue(2,"%s",tr("Spanish"));
-                            else if (Settings.language == it) options2.SetValue(2,"%s",tr("Italian"));
-                            else if (Settings.language == dut) options2.SetValue(2,"%s",tr("Dutch"));
-                            else if (Settings.language == schin) options2.SetValue(2,"%s",tr("SChinese"));
-                            else if (Settings.language == tchin) options2.SetValue(2,"%s",tr("TChinese"));
-                            else if (Settings.language == kor) options2.SetValue(2,"%s",tr("Korean"));
-
-                            if (Settings.patchcountrystrings == 0) options2.SetValue(3,"%s",tr("OFF"));
-                            else if (Settings.patchcountrystrings == 1) options2.SetValue(3,"%s",tr("ON"));
-
-                            if (Settings.ocarina == on) options2.SetValue(4,"%s",tr("ON"));
-                            else if (Settings.ocarina == off) options2.SetValue(4,"%s",tr("OFF"));
-
-                            if (Settings.godmode != 1) options2.SetValue(5, "********");
-                            else if (Settings.cios == ios249) options2.SetValue(5,"cIOS 249");
-                            else if (Settings.cios == ios222) options2.SetValue(5,"cIOS 222");
-
-                            if (Settings.qboot == no) options2.SetValue(6,"%s",tr("No"));
-                            else if (Settings.qboot == yes) options2.SetValue(6,"%s",tr("Yes"));
-
-                            if (Settings.error002 == no) options2.SetValue(7,"%s",tr("No"));
-                            else if (Settings.error002 == yes) options2.SetValue(7,"%s",tr("Yes"));
-                            else if (Settings.error002 == anti) options2.SetValue(7,"%s",tr("Anti"));
                         }
                     }
                     optionBrowser2.SetEffect(EFFECT_FADE, -20);
@@ -910,15 +897,29 @@ int MenuSettings() {
                     optionBrowser2.SetClickable(true);
                     ResumeGui();
 
-                    bool firstRun = true;
-
                     VIDEO_WaitVSync ();
                     optionBrowser2.SetEffect(EFFECT_FADE, 20);
                     while (optionBrowser2.GetEffect() > 0) usleep(50);
 
-                    while (!exit)
-                    {
+                    while (!exit) {
                         VIDEO_WaitVSync ();
+
+                        if (Settings.parentalcontrol > 4 )
+                            Settings.parentalcontrol = 0;
+
+                        if ( Settings.godmode == 1 ) options2.SetValue(0, tr("Unlocked"));
+                        else if ( Settings.godmode == 0 ) options2.SetValue(0, tr("Locked"));
+
+                        if ( Settings.godmode != 1) options2.SetValue(1, "********");
+                        else if (!strcmp("", Settings.unlockCode)) options2.SetValue(1, "%s",tr("not set"));
+                        else options2.SetValue(1, Settings.unlockCode);
+
+                        if (Settings.godmode != 1) options2.SetValue(2, "********");
+                        else if (Settings.parentalcontrol == 0) options2.SetValue(2, tr("OFF"));
+                        else if (Settings.parentalcontrol == 1) options2.SetValue(2, tr("1 (Child 7+)"));
+                        else if (Settings.parentalcontrol == 2) options2.SetValue(2, tr("2 (Teen 12+)"));
+                        else if (Settings.parentalcontrol == 3) options2.SetValue(2, tr("3 (Mature 16+)"));
+                        else if (Settings.parentalcontrol == 4) options2.SetValue(2, tr("4 (Adults Only 18+)"));
 
                         if (backBtn.GetState() == STATE_CLICKED) {
                             backBtn.ResetState();
@@ -926,7 +927,7 @@ int MenuSettings() {
                             break;
                         }
 
-                        else if (shutdown == 1)
+                        if (shutdown == 1)
                             Sys_Shutdown();
                         else if (reset == 1)
                             Sys_Reboot();
@@ -956,84 +957,62 @@ int MenuSettings() {
 
                         ret = optionBrowser2.GetClickedOption();
 
-                        if(firstRun || ret >= 0)
-                        {
-                            firstRun = false;
-
-                            switch (ret) {
-                            case 0:
-                                if (!strcmp("", Settings.unlockCode)) {
-                                    Settings.godmode = !Settings.godmode;
-                                    break;
-                                } else if ( Settings.godmode == 0 ) {
-                                    //password check to unlock Install,Delete and Format
-                                    w.Remove(&optionBrowser2);
-                                    w.Remove(&backBtn);
-                                    char entered[20] = "";
-                                    int result = OnScreenKeyboard(entered, 20,0);
-                                    w.Append(&optionBrowser2);
-                                    w.Append(&backBtn);
-                                    if ( result == 1 ) {
-                                        if (!strcmp(entered, Settings.unlockCode)) { //if password correct
-                                            if (Settings.godmode == 0) {
-                                                WindowPrompt(tr("Correct Password"),tr("All the features of USB Loader GX are unlocked."),tr("OK"));
-                                                Settings.godmode = 1;
-                                                //__Menu_GetEntries();
-                                                menu = MENU_DISCLIST;
-                                            }
-                                        } else {
-                                            WindowPrompt(tr("Wrong Password"),tr("USB Loader GX is protected"),tr("OK"));
+                        switch (ret) {
+                        case 0:
+                            if (!strcmp("", Settings.unlockCode)) {
+                                Settings.godmode = !Settings.godmode;
+                                break;
+                            } else if ( Settings.godmode == 0 ) {
+                                //password check to unlock Install,Delete and Format
+                                w.Remove(&optionBrowser2);
+                                w.Remove(&backBtn);
+                                char entered[20] = "";
+                                int result = OnScreenKeyboard(entered, 20,0);
+                                w.Append(&optionBrowser2);
+                                w.Append(&backBtn);
+                                if ( result == 1 ) {
+                                    if (!strcmp(entered, Settings.unlockCode)) { //if password correct
+                                        if (Settings.godmode == 0) {
+                                            WindowPrompt(tr("Correct Password"),tr("All the features of USB Loader GX are unlocked."),tr("OK"));
+                                            Settings.godmode = 1;
+                                            //__Menu_GetEntries();
+                                            menu = MENU_DISCLIST;
                                         }
-                                    }
-                                } else {
-                                    int choice = WindowPrompt (tr("Lock Console"),tr("Are you sure?"),tr("Yes"),tr("No"));
-                                    if (choice == 1) {
-                                        WindowPrompt(tr("Console Locked"),tr("USB Loader GX is protected"),tr("OK"));
-                                        Settings.godmode = 0;
-                                        //__Menu_GetEntries();
-                                        menu = MENU_DISCLIST;
+                                    } else {
+                                        WindowPrompt(tr("Wrong Password"),tr("USB Loader GX is protected"),tr("OK"));
                                     }
                                 }
-                                break;
-                            case 1:// Modify Password
-                                if ( Settings.godmode == 1) {
-                                    w.Remove(&optionBrowser2);
-                                    w.Remove(&backBtn);
-                                    char entered[20] = "";
-                                    strlcpy(entered, Settings.unlockCode, sizeof(entered));
-                                    int result = OnScreenKeyboard(entered, 20,0);
-                                    w.Append(&optionBrowser2);
-                                    w.Append(&backBtn);
-                                    if ( result == 1 ) {
-                                        strlcpy(Settings.unlockCode, entered, sizeof(Settings.unlockCode));
-                                        WindowPrompt(tr("Password Changed"),tr("Password has been changed"),tr("OK"));
-                                    }
-                                } else {
-                                    WindowPrompt(tr("Password Changed"),tr("Console should be unlocked to modify it."),tr("OK"));
+                            } else {
+                                int choice = WindowPrompt (tr("Lock Console"),tr("Are you sure?"),tr("Yes"),tr("No"));
+                                if (choice == 1) {
+                                    WindowPrompt(tr("Console Locked"),tr("USB Loader GX is protected"),tr("OK"));
+                                    Settings.godmode = 0;
+                                    //__Menu_GetEntries();
+                                    menu = MENU_DISCLIST;
                                 }
-                                break;
-                            case 2:
-                                if (Settings.godmode)
-                                    Settings.parentalcontrol++;
-                                if (Settings.parentalcontrol > 4 )
-                                    Settings.parentalcontrol = 0;
-                                break;
                             }
-
-
-                            if ( Settings.godmode == 1 ) options2.SetValue(0, tr("Unlocked"));
-                            else if ( Settings.godmode == 0 ) options2.SetValue(0, tr("Locked"));
-
-                            if ( Settings.godmode != 1) options2.SetValue(1, "********");
-                            else if (!strcmp("", Settings.unlockCode)) options2.SetValue(1, "%s",tr("not set"));
-                            else options2.SetValue(1, Settings.unlockCode);
-
-                            if (Settings.godmode != 1) options2.SetValue(2, "********");
-                            else if (Settings.parentalcontrol == 0) options2.SetValue(2, tr("OFF"));
-                            else if (Settings.parentalcontrol == 1) options2.SetValue(2, tr("1 (Child 7+)"));
-                            else if (Settings.parentalcontrol == 2) options2.SetValue(2, tr("2 (Teen 12+)"));
-                            else if (Settings.parentalcontrol == 3) options2.SetValue(2, tr("3 (Mature 16+)"));
-                            else if (Settings.parentalcontrol == 4) options2.SetValue(2, tr("4 (Adults Only 18+)"));
+                            break;
+                        case 1:// Modify Password
+                            if ( Settings.godmode == 1) {
+                                w.Remove(&optionBrowser2);
+                                w.Remove(&backBtn);
+                                char entered[20] = "";
+                                strlcpy(entered, Settings.unlockCode, sizeof(entered));
+                                int result = OnScreenKeyboard(entered, 20,0);
+                                w.Append(&optionBrowser2);
+                                w.Append(&backBtn);
+                                if ( result == 1 ) {
+                                    strlcpy(Settings.unlockCode, entered, sizeof(Settings.unlockCode));
+                                    WindowPrompt(tr("Password Changed"),tr("Password has been changed"),tr("OK"));
+                                }
+                            } else {
+                                WindowPrompt(tr("Password Changed"),tr("Console should be unlocked to modify it."),tr("OK"));
+                            }
+                            break;
+                        case 2:
+                            if (Settings.godmode)
+                                Settings.parentalcontrol++;
+                            break;
                         }
                     }
                     optionBrowser2.SetEffect(EFFECT_FADE, -20);
@@ -1072,8 +1051,6 @@ int MenuSettings() {
                     optionBrowser2.SetClickable(true);
                     ResumeGui();
 
-                    bool firstRun = true;
-
                     VIDEO_WaitVSync ();
                     optionBrowser2.SetEffect(EFFECT_FADE, 20);
                     while (optionBrowser2.GetEffect() > 0) usleep(50);
@@ -1086,13 +1063,29 @@ int MenuSettings() {
 
                         bool returnhere = true;
 
+                        if (!strcmp("notset", Settings.ogg_path))
+                            options2.SetValue(0, "%s", tr("Standard"));
+                        else {
+                            oggfile = strrchr(Settings.ogg_path, '/')+1;
+                            options2.SetValue(0, "%s", oggfile);
+                        }
+
+                        if (Settings.volume > 0)
+                            options2.SetValue(1,"%i", Settings.volume);
+                        else
+                            options2.SetValue(1,"%s", tr("OFF"));
+                        if (Settings.sfxvolume > 0)
+                            options2.SetValue(2,"%i", Settings.sfxvolume);
+                        else
+                            options2.SetValue(2,"%s", tr("OFF"));
+
                         if (backBtn.GetState() == STATE_CLICKED) {
                             backBtn.ResetState();
                             exit = true;
                             break;
                         }
 
-                        else if (shutdown == 1)
+                        if (shutdown == 1)
                             Sys_Shutdown();
                         else if (reset == 1)
                             Sys_Reboot();
@@ -1122,58 +1115,36 @@ int MenuSettings() {
 
                         ret = optionBrowser2.GetClickedOption();
 
-                        if(firstRun || ret >= 0)
-                        {
-                            firstRun = false;
-
-                            switch (ret)
-                            {
-                                case 0:
-                                    if (isInserted(bootDevice)) {
-                                        w.SetEffect(EFFECT_FADE, -20);
-                                        while (w.GetEffect()>0) usleep(50);
-                                        mainWindow->Remove(&w);
-                                        while (returnhere)
-                                            returnhere = MenuOGG();
-                                        HaltGui();
-                                        mainWindow->Append(&w);
-                                        w.SetEffect(EFFECT_FADE, 20);
-                                        ResumeGui();
-                                        while (w.GetEffect()>0) usleep(50);
-                                    } else
-                                        WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to use this option."), tr("OK"));
-                                    break;
-                                case 1:
-                                    Settings.volume += 10;
-                                    if (Settings.volume > 100)
-                                        Settings.volume = 0;
-                                    SetVolumeOgg(255*(Settings.volume/100.0));
-                                    break;
-                                case 2:
-                                    Settings.sfxvolume += 10;
-                                    if (Settings.sfxvolume > 100)
-                                        Settings.sfxvolume = 0;
-                                    btnSoundOver.SetVolume(Settings.sfxvolume);
-                                    btnClick.SetVolume(Settings.sfxvolume);
-                                    btnClick1.SetVolume(Settings.sfxvolume);
-                                    break;
-                            }
-
-                            if (!strcmp("notset", Settings.ogg_path))
-                                options2.SetValue(0, "%s", tr("Standard"));
-                            else {
-                                oggfile = strrchr(Settings.ogg_path, '/')+1;
-                                options2.SetValue(0, "%s", oggfile);
-                            }
-
-                            if (Settings.volume > 0)
-                                options2.SetValue(1,"%i", Settings.volume);
-                            else
-                                options2.SetValue(1,"%s", tr("OFF"));
-                            if (Settings.sfxvolume > 0)
-                                options2.SetValue(2,"%i", Settings.sfxvolume);
-                            else
-                                options2.SetValue(2,"%s", tr("OFF"));
+                        switch (ret) {
+                        case 0:
+                            if (isInserted(bootDevice)) {
+                                w.SetEffect(EFFECT_FADE, -20);
+                                while (w.GetEffect()>0) usleep(50);
+                                mainWindow->Remove(&w);
+                                while (returnhere)
+                                    returnhere = MenuOGG();
+                                HaltGui();
+                                mainWindow->Append(&w);
+                                w.SetEffect(EFFECT_FADE, 20);
+                                ResumeGui();
+                                while (w.GetEffect()>0) usleep(50);
+                            } else
+                                WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to use this option."), tr("OK"));
+                            break;
+                        case 1:
+                            Settings.volume += 10;
+                            if (Settings.volume > 100)
+                                Settings.volume = 0;
+                            SetVolumeOgg(255*(Settings.volume/100.0));
+                            break;
+                        case 2:
+                            Settings.sfxvolume += 10;
+                            if (Settings.sfxvolume > 100)
+                                Settings.sfxvolume = 0;
+                            btnSoundOver.SetVolume(Settings.sfxvolume);
+                            btnClick.SetVolume(Settings.sfxvolume);
+                            btnClick1.SetVolume(Settings.sfxvolume);
+                            break;
                         }
                     }
                     optionBrowser2.SetEffect(EFFECT_FADE, -20);
@@ -1222,8 +1193,6 @@ int MenuSettings() {
                     optionBrowser2.SetClickable(true);
                     ResumeGui();
 
-                    bool firstRun = true;
-
                     VIDEO_WaitVSync ();
                     optionBrowser2.SetEffect(EFFECT_FADE, 20);
                     while (optionBrowser2.GetEffect() > 0) usleep(50);
@@ -1233,13 +1202,24 @@ int MenuSettings() {
                         while (!exit) {
                             VIDEO_WaitVSync ();
 
+                            options2.SetValue(0, "%s", Settings.covers_path);
+                            options2.SetValue(1, "%s", Settings.covers2d_path);
+                            options2.SetValue(2, "%s", Settings.disc_path);
+                            options2.SetValue(3, "%s", CFG.theme_path);
+                            options2.SetValue(4, "%s", Settings.titlestxt_path);
+                            options2.SetValue(5, "%s", Settings.update_path);
+                            options2.SetValue(6, "%s", Settings.Cheatcodespath);
+                            options2.SetValue(7, "%s", Settings.TxtCheatcodespath);
+                            options2.SetValue(8, "%s", Settings.dolpath);
+                            options2.SetValue(9, "%s", Settings.homebrewapps_path);
+
                             if (backBtn.GetState() == STATE_CLICKED) {
                                 backBtn.ResetState();
                                 exit = true;
                                 break;
                             }
 
-                            else if (shutdown == 1)
+                            if (shutdown == 1)
                                 Sys_Shutdown();
                             else if (reset == 1)
                                 Sys_Reboot();
@@ -1269,300 +1249,284 @@ int MenuSettings() {
 
                             ret = optionBrowser2.GetClickedOption();
 
-                            if(firstRun || ret >= 0)
-                            {
-                                firstRun = false;
-
-                                switch (ret) {
-                                case 0:
-                                    if ( Settings.godmode == 1) {
-                                        w.Remove(&optionBrowser2);
-                                        w.Remove(&backBtn);
-                                        char entered[43] = "";
-                                        strlcpy(entered, Settings.covers_path, sizeof(entered));
-                                        titleTxt.SetText(tr("3D Cover Path"));
-                                        int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
-                                        titleTxt.SetText(tr("Custom Paths"));
-                                        w.Append(&optionBrowser2);
-                                        w.Append(&backBtn);
-                                        if ( result == 1 ) {
-                                            int len = (strlen(entered)-1);
-                                            if (entered[len] !='/')
-                                                strncat (entered, "/", 1);
-                                            strlcpy(Settings.covers_path, entered, sizeof(Settings.covers_path));
-                                            WindowPrompt(tr("Cover Path Changed"),0,tr("OK"));
-                                            if (!isInserted(bootDevice)) {
-                                                WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
-                                            }
+                            switch (ret) {
+                            case 0:
+                                if ( Settings.godmode == 1) {
+                                    w.Remove(&optionBrowser2);
+                                    w.Remove(&backBtn);
+                                    char entered[43] = "";
+                                    strlcpy(entered, Settings.covers_path, sizeof(entered));
+                                    titleTxt.SetText(tr("3D Cover Path"));
+                                    int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
+                                    titleTxt.SetText(tr("Custom Paths"));
+                                    w.Append(&optionBrowser2);
+                                    w.Append(&backBtn);
+                                    if ( result == 1 ) {
+                                        int len = (strlen(entered)-1);
+                                        if (entered[len] !='/')
+                                            strncat (entered, "/", 1);
+                                        strlcpy(Settings.covers_path, entered, sizeof(Settings.covers_path));
+                                        WindowPrompt(tr("Cover Path Changed"),0,tr("OK"));
+                                        if (!isInserted(bootDevice)) {
+                                            WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
                                         }
-                                    } else {
-                                        WindowPrompt(tr("Cover Path Change"),tr("Console should be unlocked to modify it."),tr("OK"));
                                     }
-                                    break;
-                               case 1:
-                                    if ( Settings.godmode == 1) {
-                                        w.Remove(&optionBrowser2);
-                                        w.Remove(&backBtn);
-                                        char entered[43] = "";
-                                        strlcpy(entered, Settings.covers2d_path, sizeof(entered));
-                                        titleTxt.SetText(tr("2D Cover Path"));
-                                        int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
-                                        titleTxt.SetText(tr("Custom Paths"));
-                                        w.Append(&optionBrowser2);
-                                        w.Append(&backBtn);
-                                        if ( result == 1 ) {
-                                            int len = (strlen(entered)-1);
-                                            if (entered[len] !='/')
-                                                strncat (entered, "/", 1);
-                                            strlcpy(Settings.covers2d_path, entered, sizeof(Settings.covers2d_path));
-                                            WindowPrompt(tr("Cover Path Changed"),0,tr("OK"));
-                                            if (!isInserted(bootDevice)) {
-                                                WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
-                                            }
-                                        }
-                                    } else {
-                                        WindowPrompt(tr("Cover Path Change"),tr("Console should be unlocked to modify it."),tr("OK"));
-                                    }
-                                    break;
-                                case 2:
-                                    if ( Settings.godmode == 1) {
-                                        w.Remove(&optionBrowser2);
-                                        w.Remove(&backBtn);
-                                        char entered[43] = "";
-                                        strlcpy(entered, Settings.disc_path, sizeof(entered));
-                                        titleTxt.SetText(tr("Disc Artwork Path"));
-                                        int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
-                                        titleTxt.SetText(tr("Custom Paths"));
-                                        w.Append(&optionBrowser2);
-                                        w.Append(&backBtn);
-                                        if ( result == 1 ) {
-                                            int len = (strlen(entered)-1);
-                                            if (entered[len] !='/')
-                                                strncat (entered, "/", 1);
-                                            strlcpy(Settings.disc_path, entered, sizeof(Settings.disc_path));
-                                            WindowPrompt(tr("Disc Path Changed"),0,tr("OK"));
-                                            if (!isInserted(bootDevice)) {
-                                                WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
-                                            }
-                                        }
-                                    } else {
-                                        WindowPrompt(tr("Disc Path change"),tr("Console should be unlocked to modify it."),tr("OK"));
-                                    }
-                                    break;
-                                case 3:
-                                    if ( Settings.godmode == 1) {
-                                        w.Remove(&optionBrowser2);
-                                        w.Remove(&backBtn);
-                                        char entered[43] = "";
-                                        titleTxt.SetText(tr("Theme Path"));
-                                        strlcpy(entered, CFG.theme_path, sizeof(entered));
-                                        int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
-                                        HaltGui();
-                                        w.RemoveAll();
-                                        if ( result == 1 ) {
-                                            int len = (strlen(entered)-1);
-                                            if (entered[len] !='/')
-                                                strncat (entered, "/", 1);
-                                            strlcpy(CFG.theme_path, entered, sizeof(CFG.theme_path));
-                                            WindowPrompt(tr("Theme Path Changed"),0,tr("OK"));
-                                            if (!isInserted(bootDevice)) {
-                                                WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
-                                            } else {
-                                                cfg_save_global();
-                                            }
-                                            mainWindow->Remove(bgImg);
-                                            HaltGui();
-                                            CFG_Load();
-                                            CFG_LoadGlobal();
-                                            ResumeGui();
-                                            menu = MENU_SETTINGS;
-#ifdef HW_RVL
-                                            snprintf(imgPath, sizeof(imgPath), "%splayer1_point.png", CFG.theme_path);
-                                            pointer[0] = new GuiImageData(imgPath, player1_point_png);
-                                            snprintf(imgPath, sizeof(imgPath), "%splayer2_point.png", CFG.theme_path);
-                                            pointer[1] = new GuiImageData(imgPath, player2_point_png);
-                                            snprintf(imgPath, sizeof(imgPath), "%splayer3_point.png", CFG.theme_path);
-                                            pointer[2] = new GuiImageData(imgPath, player3_point_png);
-                                            snprintf(imgPath, sizeof(imgPath), "%splayer4_point.png", CFG.theme_path);
-                                            pointer[3] = new GuiImageData(imgPath, player4_point_png);
-#endif
-                                            if (CFG.widescreen)
-                                                snprintf(imgPath, sizeof(imgPath), "%swbackground.png", CFG.theme_path);
-                                            else
-                                                snprintf(imgPath, sizeof(imgPath), "%sbackground.png", CFG.theme_path);
-
-                                            background = new GuiImageData(imgPath, CFG.widescreen? wbackground_png : background_png);
-
-                                            bgImg = new GuiImage(background);
-                                            mainWindow->Append(bgImg);
-                                            mainWindow->Append(&w);
-                                        }
-                                        w.Append(&settingsbackground);
-                                        w.Append(&titleTxt);
-                                        titleTxt.SetText(tr("Custom Paths"));
-                                        w.Append(&backBtn);
-                                        w.Append(&optionBrowser2);
-                                        ResumeGui();
-                                    } else {
-                                        WindowPrompt(tr("Theme Path change"),tr("Console should be unlocked to modify it."),tr("OK"));
-                                    }
-                                    break;
-                                case 4:
-                                    if ( Settings.godmode == 1) {
-                                        w.Remove(&optionBrowser2);
-                                        w.Remove(&backBtn);
-                                        char entered[43] = "";
-                                        titleTxt.SetText(tr("WiiTDB Path"));
-                                        strlcpy(entered, Settings.titlestxt_path, sizeof(entered));
-                                        int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
-                                        w.Append(&optionBrowser2);
-                                        titleTxt.SetText(tr("Custom Paths"));
-                                        w.Append(&backBtn);
-                                        if ( result == 1 ) {
-                                            int len = (strlen(entered)-1);
-                                            if (entered[len] !='/')
-                                                strncat (entered, "/", 1);
-                                            strlcpy(Settings.titlestxt_path, entered, sizeof(Settings.titlestxt_path));
-                                            WindowPrompt(tr("WiiTDB Path changed."),0,tr("OK"));
-                                            if (isInserted(bootDevice)) {
-                                                cfg_save_global();
-                                                HaltGui();
-                                                CFG_Load();
-                                                ResumeGui();
-                                            } else {
-                                                WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
-                                            }
-                                        }
-                                    } else {
-                                        WindowPrompt(tr("WiiTDB Path change"),tr("Console should be unlocked to modify it."),tr("OK"));
-                                    }
-                                    break;
-                                case 5:
-                                    if ( Settings.godmode == 1) {
-                                        w.Remove(&optionBrowser2);
-                                        w.Remove(&backBtn);
-                                        char entered[43] = "";
-                                        strlcpy(entered, Settings.update_path, sizeof(entered));
-                                        titleTxt.SetText(tr("Update Path"));
-                                        int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
-                                        titleTxt.SetText(tr("Custom Paths"));
-                                        w.Append(&optionBrowser2);
-                                        w.Append(&backBtn);
-                                        if ( result == 1 ) {
-                                            int len = (strlen(entered)-1);
-                                            if (entered[len] !='/')
-                                                strncat (entered, "/", 1);
-                                            strlcpy(Settings.update_path, entered, sizeof(Settings.update_path));
-                                            WindowPrompt(tr("Update Path changed."),0,tr("OK"));
-                                        }
-                                    } else
-                                        WindowPrompt(0,tr("Console should be unlocked to modify it."),tr("OK"));
-                                    break;
-                                case 6:
-                                    if ( Settings.godmode == 1) {
-                                        w.Remove(&optionBrowser2);
-                                        w.Remove(&backBtn);
-                                        char entered[43] = "";
-                                        strlcpy(entered, Settings.Cheatcodespath, sizeof(entered));
-                                        titleTxt.SetText(tr("GCT Cheatcodes Path"));
-                                        int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
-                                        titleTxt.SetText(tr("Custom Paths"));
-                                        w.Append(&optionBrowser2);
-                                        w.Append(&backBtn);
-                                        if ( result == 1 ) {
-                                            int len = (strlen(entered)-1);
-                                            if (entered[len] !='/')
-                                                strncat (entered, "/", 1);
-                                            strlcpy(Settings.Cheatcodespath, entered, sizeof(Settings.Cheatcodespath));
-                                            WindowPrompt(tr("GCT Cheatcodes Path changed"),0,tr("OK"));
-                                        }
-                                    } else
-                                        WindowPrompt(0,tr("Console should be unlocked to modify it."),tr("OK"));
-                                    break;
-                                case 7:
-                                    if ( Settings.godmode == 1) {
-                                        w.Remove(&optionBrowser2);
-                                        w.Remove(&backBtn);
-                                        char entered[43] = "";
-                                        strlcpy(entered, Settings.TxtCheatcodespath, sizeof(entered));
-                                        titleTxt.SetText(tr("TXT Cheatcodes Path"));
-                                        int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
-                                        titleTxt.SetText(tr("Custom Paths"));
-                                        w.Append(&optionBrowser2);
-                                        w.Append(&backBtn);
-                                        if ( result == 1 ) {
-                                            int len = (strlen(entered)-1);
-                                            if (entered[len] !='/')
-                                                strncat (entered, "/", 1);
-                                            strlcpy(Settings.TxtCheatcodespath, entered, sizeof(Settings.TxtCheatcodespath));
-                                            WindowPrompt(tr("TXT Cheatcodes Path changed"),0,tr("OK"));
-                                        }
-                                    } else
-                                        WindowPrompt(0,tr("Console should be unlocked to modify it."),tr("OK"));
-                                    break;
-                                case 8:
-                                    if ( Settings.godmode == 1) {
-                                        w.Remove(&optionBrowser2);
-                                        w.Remove(&backBtn);
-                                        char entered[43] = "";
-                                        strlcpy(entered, Settings.dolpath, sizeof(entered));
-                                        titleTxt.SetText(tr("DOL Path"));
-                                        int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
-                                        titleTxt.SetText(tr("Custom Paths"));
-                                        w.Append(&optionBrowser2);
-                                        w.Append(&backBtn);
-                                        if ( result == 1 ) {
-                                            int len = (strlen(entered)-1);
-                                            if (entered[len] !='/')
-                                                strncat (entered, "/", 1);
-                                            strlcpy(Settings.dolpath, entered, sizeof(Settings.dolpath));
-                                            WindowPrompt(tr("DOL path changed"),0,tr("OK"));
-                                            if (!isInserted(bootDevice)) {
-                                                WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
-                                            }
-                                        }
-                                    } else {
-                                        WindowPrompt(tr("DOL path change"),tr("Console should be unlocked to modify it."),tr("OK"));
-                                    }
-                                    break;
-                                case 9:
-                                    if ( Settings.godmode == 1) {
-                                        w.Remove(&optionBrowser2);
-                                        w.Remove(&backBtn);
-                                        char entered[43] = "";
-                                        strlcpy(entered, Settings.homebrewapps_path, sizeof(entered));
-                                        titleTxt.SetText(tr("Homebrew Apps Path"));
-                                        int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
-                                        titleTxt.SetText(tr("Custom Paths"));
-                                        w.Append(&optionBrowser2);
-                                        w.Append(&backBtn);
-                                        if ( result == 1 ) {
-                                            int len = (strlen(entered)-1);
-                                            if (entered[len] !='/')
-                                                strncat (entered, "/", 1);
-                                            strlcpy(Settings.homebrewapps_path, entered, sizeof(Settings.homebrewapps_path));
-                                            WindowPrompt(tr("Homebrew Appspath changed"),0,tr("OK"));
-                                            if (!isInserted(bootDevice)) {
-                                                WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
-                                            }
-                                        }
-                                    } else {
-                                        WindowPrompt(tr("Homebrew Appspath change"),tr("Console should be unlocked to modify it."),tr("OK"));
-                                    }
-                                    break;
-
+                                } else {
+                                    WindowPrompt(tr("Cover Path Change"),tr("Console should be unlocked to modify it."),tr("OK"));
                                 }
+                                break;
+                           case 1:
+                                if ( Settings.godmode == 1) {
+                                    w.Remove(&optionBrowser2);
+                                    w.Remove(&backBtn);
+                                    char entered[43] = "";
+                                    strlcpy(entered, Settings.covers2d_path, sizeof(entered));
+                                    titleTxt.SetText(tr("2D Cover Path"));
+                                    int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
+                                    titleTxt.SetText(tr("Custom Paths"));
+                                    w.Append(&optionBrowser2);
+                                    w.Append(&backBtn);
+                                    if ( result == 1 ) {
+                                        int len = (strlen(entered)-1);
+                                        if (entered[len] !='/')
+                                            strncat (entered, "/", 1);
+                                        strlcpy(Settings.covers2d_path, entered, sizeof(Settings.covers2d_path));
+                                        WindowPrompt(tr("Cover Path Changed"),0,tr("OK"));
+                                        if (!isInserted(bootDevice)) {
+                                            WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
+                                        }
+                                    }
+                                } else {
+                                    WindowPrompt(tr("Cover Path Change"),tr("Console should be unlocked to modify it."),tr("OK"));
+                                }
+                                break;
+                            case 2:
+                                if ( Settings.godmode == 1) {
+                                    w.Remove(&optionBrowser2);
+                                    w.Remove(&backBtn);
+                                    char entered[43] = "";
+                                    strlcpy(entered, Settings.disc_path, sizeof(entered));
+                                    titleTxt.SetText(tr("Disc Artwork Path"));
+                                    int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
+                                    titleTxt.SetText(tr("Custom Paths"));
+                                    w.Append(&optionBrowser2);
+                                    w.Append(&backBtn);
+                                    if ( result == 1 ) {
+                                        int len = (strlen(entered)-1);
+                                        if (entered[len] !='/')
+                                            strncat (entered, "/", 1);
+                                        strlcpy(Settings.disc_path, entered, sizeof(Settings.disc_path));
+                                        WindowPrompt(tr("Disc Path Changed"),0,tr("OK"));
+                                        if (!isInserted(bootDevice)) {
+                                            WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
+                                        }
+                                    }
+                                } else {
+                                    WindowPrompt(tr("Disc Path change"),tr("Console should be unlocked to modify it."),tr("OK"));
+                                }
+                                break;
+                            case 3:
+                                if ( Settings.godmode == 1) {
+                                    w.Remove(&optionBrowser2);
+                                    w.Remove(&backBtn);
+                                    char entered[43] = "";
+                                    titleTxt.SetText(tr("Theme Path"));
+                                    strlcpy(entered, CFG.theme_path, sizeof(entered));
+                                    int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
+                                    HaltGui();
+                                    w.RemoveAll();
+                                    if ( result == 1 ) {
+                                        int len = (strlen(entered)-1);
+                                        if (entered[len] !='/')
+                                            strncat (entered, "/", 1);
+                                        strlcpy(CFG.theme_path, entered, sizeof(CFG.theme_path));
+                                        WindowPrompt(tr("Theme Path Changed"),0,tr("OK"));
+                                        if (!isInserted(bootDevice)) {
+                                            WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
+                                        } else {
+                                            cfg_save_global();
+                                        }
+                                        mainWindow->Remove(bgImg);
+										HaltGui();
+                                        CFG_Load();
+                                        CFG_LoadGlobal();
+										ResumeGui();
+                                        menu = MENU_SETTINGS;
+#ifdef HW_RVL
+                                        snprintf(imgPath, sizeof(imgPath), "%splayer1_point.png", CFG.theme_path);
+                                        pointer[0] = new GuiImageData(imgPath, player1_point_png);
+                                        snprintf(imgPath, sizeof(imgPath), "%splayer2_point.png", CFG.theme_path);
+                                        pointer[1] = new GuiImageData(imgPath, player2_point_png);
+                                        snprintf(imgPath, sizeof(imgPath), "%splayer3_point.png", CFG.theme_path);
+                                        pointer[2] = new GuiImageData(imgPath, player3_point_png);
+                                        snprintf(imgPath, sizeof(imgPath), "%splayer4_point.png", CFG.theme_path);
+                                        pointer[3] = new GuiImageData(imgPath, player4_point_png);
+#endif
+                                        if (CFG.widescreen)
+                                            snprintf(imgPath, sizeof(imgPath), "%swbackground.png", CFG.theme_path);
+                                        else
+                                            snprintf(imgPath, sizeof(imgPath), "%sbackground.png", CFG.theme_path);
 
-                                options2.SetValue(0, "%s", Settings.covers_path);
-                                options2.SetValue(1, "%s", Settings.covers2d_path);
-                                options2.SetValue(2, "%s", Settings.disc_path);
-                                options2.SetValue(3, "%s", CFG.theme_path);
-                                options2.SetValue(4, "%s", Settings.titlestxt_path);
-                                options2.SetValue(5, "%s", Settings.update_path);
-                                options2.SetValue(6, "%s", Settings.Cheatcodespath);
-                                options2.SetValue(7, "%s", Settings.TxtCheatcodespath);
-                                options2.SetValue(8, "%s", Settings.dolpath);
-                                options2.SetValue(9, "%s", Settings.homebrewapps_path);
+                                        background = new GuiImageData(imgPath, CFG.widescreen? wbackground_png : background_png);
+
+                                        bgImg = new GuiImage(background);
+                                        mainWindow->Append(bgImg);
+                                        mainWindow->Append(&w);
+                                    }
+                                    w.Append(&settingsbackground);
+                                    w.Append(&titleTxt);
+                                    titleTxt.SetText(tr("Custom Paths"));
+                                    w.Append(&backBtn);
+                                    w.Append(&optionBrowser2);
+                                    ResumeGui();
+                                } else {
+                                    WindowPrompt(tr("Theme Path change"),tr("Console should be unlocked to modify it."),tr("OK"));
+                                }
+                                break;
+                            case 4:
+                                if ( Settings.godmode == 1) {
+                                    w.Remove(&optionBrowser2);
+                                    w.Remove(&backBtn);
+                                    char entered[43] = "";
+                                    titleTxt.SetText(tr("WiiTDB Path"));
+                                    strlcpy(entered, Settings.titlestxt_path, sizeof(entered));
+                                    int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
+                                    w.Append(&optionBrowser2);
+                                    titleTxt.SetText(tr("Custom Paths"));
+                                    w.Append(&backBtn);
+                                    if ( result == 1 ) {
+                                        int len = (strlen(entered)-1);
+                                        if (entered[len] !='/')
+                                            strncat (entered, "/", 1);
+                                        strlcpy(Settings.titlestxt_path, entered, sizeof(Settings.titlestxt_path));
+                                        WindowPrompt(tr("WiiTDB Path changed."),0,tr("OK"));
+                                        if (isInserted(bootDevice)) {
+                                            cfg_save_global();
+ 											HaltGui();
+                                            CFG_Load();
+											ResumeGui();
+                                        } else {
+                                            WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
+                                        }
+                                    }
+                                } else {
+                                    WindowPrompt(tr("WiiTDB Path change"),tr("Console should be unlocked to modify it."),tr("OK"));
+                                }
+                                break;
+                            case 5:
+                                if ( Settings.godmode == 1) {
+                                    w.Remove(&optionBrowser2);
+                                    w.Remove(&backBtn);
+                                    char entered[43] = "";
+                                    strlcpy(entered, Settings.update_path, sizeof(entered));
+                                    titleTxt.SetText(tr("Update Path"));
+                                    int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
+                                    titleTxt.SetText(tr("Custom Paths"));
+                                    w.Append(&optionBrowser2);
+                                    w.Append(&backBtn);
+                                    if ( result == 1 ) {
+                                        int len = (strlen(entered)-1);
+                                        if (entered[len] !='/')
+                                            strncat (entered, "/", 1);
+                                        strlcpy(Settings.update_path, entered, sizeof(Settings.update_path));
+                                        WindowPrompt(tr("Update Path changed."),0,tr("OK"));
+                                    }
+                                } else
+                                    WindowPrompt(0,tr("Console should be unlocked to modify it."),tr("OK"));
+                                break;
+                            case 6:
+                                if ( Settings.godmode == 1) {
+                                    w.Remove(&optionBrowser2);
+                                    w.Remove(&backBtn);
+                                    char entered[43] = "";
+                                    strlcpy(entered, Settings.Cheatcodespath, sizeof(entered));
+                                    titleTxt.SetText(tr("GCT Cheatcodes Path"));
+                                    int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
+                                    titleTxt.SetText(tr("Custom Paths"));
+                                    w.Append(&optionBrowser2);
+                                    w.Append(&backBtn);
+                                    if ( result == 1 ) {
+                                        int len = (strlen(entered)-1);
+                                        if (entered[len] !='/')
+                                            strncat (entered, "/", 1);
+                                        strlcpy(Settings.Cheatcodespath, entered, sizeof(Settings.Cheatcodespath));
+                                        WindowPrompt(tr("GCT Cheatcodes Path changed"),0,tr("OK"));
+                                    }
+                                } else
+                                    WindowPrompt(0,tr("Console should be unlocked to modify it."),tr("OK"));
+                                break;
+                            case 7:
+                                if ( Settings.godmode == 1) {
+                                    w.Remove(&optionBrowser2);
+                                    w.Remove(&backBtn);
+                                    char entered[43] = "";
+                                    strlcpy(entered, Settings.TxtCheatcodespath, sizeof(entered));
+                                    titleTxt.SetText(tr("TXT Cheatcodes Path"));
+                                    int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
+                                    titleTxt.SetText(tr("Custom Paths"));
+                                    w.Append(&optionBrowser2);
+                                    w.Append(&backBtn);
+                                    if ( result == 1 ) {
+                                        int len = (strlen(entered)-1);
+                                        if (entered[len] !='/')
+                                            strncat (entered, "/", 1);
+                                        strlcpy(Settings.TxtCheatcodespath, entered, sizeof(Settings.TxtCheatcodespath));
+                                        WindowPrompt(tr("TXT Cheatcodes Path changed"),0,tr("OK"));
+                                    }
+                                } else
+                                    WindowPrompt(0,tr("Console should be unlocked to modify it."),tr("OK"));
+                                break;
+                            case 8:
+                                if ( Settings.godmode == 1) {
+                                    w.Remove(&optionBrowser2);
+                                    w.Remove(&backBtn);
+                                    char entered[43] = "";
+                                    strlcpy(entered, Settings.dolpath, sizeof(entered));
+                                    titleTxt.SetText(tr("DOL Path"));
+                                    int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
+                                    titleTxt.SetText(tr("Custom Paths"));
+                                    w.Append(&optionBrowser2);
+                                    w.Append(&backBtn);
+                                    if ( result == 1 ) {
+                                        int len = (strlen(entered)-1);
+                                        if (entered[len] !='/')
+                                            strncat (entered, "/", 1);
+                                        strlcpy(Settings.dolpath, entered, sizeof(Settings.dolpath));
+                                        WindowPrompt(tr("DOL path changed"),0,tr("OK"));
+                                        if (!isInserted(bootDevice)) {
+                                            WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
+                                        }
+                                    }
+                                } else {
+                                    WindowPrompt(tr("DOL path change"),tr("Console should be unlocked to modify it."),tr("OK"));
+                                }
+                                break;
+                            case 9:
+                                if ( Settings.godmode == 1) {
+                                    w.Remove(&optionBrowser2);
+                                    w.Remove(&backBtn);
+                                    char entered[43] = "";
+                                    strlcpy(entered, Settings.homebrewapps_path, sizeof(entered));
+                                    titleTxt.SetText(tr("Homebrew Apps Path"));
+                                    int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
+                                    titleTxt.SetText(tr("Custom Paths"));
+                                    w.Append(&optionBrowser2);
+                                    w.Append(&backBtn);
+                                    if ( result == 1 ) {
+                                        int len = (strlen(entered)-1);
+                                        if (entered[len] !='/')
+                                            strncat (entered, "/", 1);
+                                        strlcpy(Settings.homebrewapps_path, entered, sizeof(Settings.homebrewapps_path));
+                                        WindowPrompt(tr("Homebrew Appspath changed"),0,tr("OK"));
+                                        if (!isInserted(bootDevice)) {
+                                            WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
+                                        }
+                                    }
+                                } else {
+                                    WindowPrompt(tr("Homebrew Appspath change"),tr("Console should be unlocked to modify it."),tr("OK"));
+                                }
+                                break;
+
                             }
                         }
                         /** If not godmode don't let him inside **/
@@ -1676,10 +1640,10 @@ int MenuSettings() {
 
             if (shutdown == 1)
                 Sys_Shutdown();
-            else if (reset == 1)
+            if (reset == 1)
                 Sys_Reboot();
 
-            else if (backBtn.GetState() == STATE_CLICKED) {
+            if (backBtn.GetState() == STATE_CLICKED) {
                 //Add the procedure call to save the global configuration
                 if (isInserted(bootDevice)) {
                     cfg_save_global();
@@ -1689,7 +1653,7 @@ int MenuSettings() {
                 break;
             }
 
-            else if (GoLeftBtn.GetState() == STATE_CLICKED) {
+            if (GoLeftBtn.GetState() == STATE_CLICKED) {
                 pageToDisplay--;
                 /** Change direction of the flying buttons **/
                 if (pageToDisplay < 1)
@@ -1699,7 +1663,7 @@ int MenuSettings() {
                 break;
             }
 
-            else if (GoRightBtn.GetState() == STATE_CLICKED) {
+            if (GoRightBtn.GetState() == STATE_CLICKED) {
                 pageToDisplay++;
                 /** Change direction of the flying buttons **/
                 if (pageToDisplay > 2)
@@ -1709,7 +1673,7 @@ int MenuSettings() {
                 break;
             }
 
-            else if (PageIndicatorBtn1.GetState() == STATE_CLICKED) {
+            if (PageIndicatorBtn1.GetState() == STATE_CLICKED) {
                 if (pageToDisplay == 2) {
                     slidedirection = LEFT;
                     pageToDisplay = 1;
@@ -1727,7 +1691,7 @@ int MenuSettings() {
                     PageIndicatorBtn2.ResetState();
             }
 
-            else if (homo.GetState() == STATE_CLICKED) {
+            if (homo.GetState() == STATE_CLICKED) {
                 cfg_save_global();
                 optionBrowser2.SetState(STATE_DISABLED);
                 s32 thetimeofbg = bgMusic->GetPlayTime();
@@ -1768,7 +1732,7 @@ int MenuSettings() {
 	if (opt_override != opt_overridenew && Settings.titlesOverride==0) {
 		titles_default();
 	}
-
+	
     HaltGui();
 
     mainWindow->RemoveAll();
@@ -1833,7 +1797,7 @@ int GameSettings(struct discHdr * header) {
 	GuiText titleTxt(!mountMethod?get_title(header):gameName, 28, (GXColor) {0, 0, 0, 255});
     titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     titleTxt.SetPosition(12,40);
-    titleTxt.SetMaxWidth(356, SCROLL_HORIZONTAL);
+    titleTxt.SetMaxWidth(356, GuiText::SCROLL);
 
     GuiImage settingsbackground(&settingsbg);
 
@@ -2074,7 +2038,6 @@ int GameSettings(struct discHdr * header) {
                 while (optionBrowser2.GetEffect() > 0) usleep(50);
 
                 int returnhere = 1;
-                bool firstRun = true;
                 char * languagefile;
                 languagefile = strrchr(Settings.language_path, '/')+1;
 
@@ -2083,13 +2046,91 @@ int GameSettings(struct discHdr * header) {
 
                     returnhere = 1;
 
+                    if (videoChoice  >= 6)
+                        videoChoice = 0;
+                    if (viChoice >= 2)
+                        viChoice = 0;
+                    if (languageChoice >= 11)
+                        languageChoice = 0;
+                    if ( ocarinaChoice >= 2)
+                        ocarinaChoice = 0;
+                    if ( Settings.wsprompt > 1 )
+                        Settings.wsprompt = 0;
+                    if ( iosChoice >= 3)
+                        iosChoice = 0;
+                    if ( Settings.wiilight > 2 )
+                        Settings.wiilight = 0;
+                    if (parentalcontrolChoice >= 5)
+                        parentalcontrolChoice = 0;
+                    if (fix002 >= 3)
+                        fix002 = 0; //RUMBLE
+                    if (countrystrings >= 2)
+                        countrystrings = 0;
+                    if (alternatedol >= 3)
+                        alternatedol = 0;
+                    if (reloadblock >= 2)
+                        reloadblock = 0;
+
+                    if (videoChoice == discdefault) options2.SetValue(0,"%s",tr("Disc Default"));
+                    else if (videoChoice == systemdefault) options2.SetValue(0,"%s",tr("System Default"));
+                    else if (videoChoice == patch) options2.SetValue(0,"%s",tr("AutoPatch"));
+                    else if (videoChoice == pal50) options2.SetValue(0,"%s PAL50",tr("Force"));
+                    else if (videoChoice == pal60) options2.SetValue(0,"%s PAL60",tr("Force"));
+                    else if (videoChoice == ntsc) options2.SetValue(0,"%s NTSC",tr("Force"));
+
+                    if (viChoice == on) options2.SetValue(1,"%s",tr("ON"));
+                    else if (viChoice == off) options2.SetValue(1,"%s",tr("OFF"));
+
+                    if (languageChoice == ConsoleLangDefault) options2.SetValue(2,"%s",tr("Console Default"));
+                    else if (languageChoice == jap) options2.SetValue(2,"%s",tr("Japanese"));
+                    else if (languageChoice == ger) options2.SetValue(2,"%s",tr("German"));
+                    else if (languageChoice == eng) options2.SetValue(2,"%s",tr("English"));
+                    else if (languageChoice == fren) options2.SetValue(2,"%s",tr("French"));
+                    else if (languageChoice == esp) options2.SetValue(2,"%s",tr("Spanish"));
+                    else if (languageChoice == it) options2.SetValue(2,"%s",tr("Italian"));
+                    else if (languageChoice == dut) options2.SetValue(2,"%s",tr("Dutch"));
+                    else if (languageChoice == schin) options2.SetValue(2,"%s",tr("SChinese"));
+                    else if (languageChoice == tchin) options2.SetValue(2,"%s",tr("TChinese"));
+                    else if (languageChoice == kor) options2.SetValue(2,"%s",tr("Korean"));
+
+                    if (ocarinaChoice == on) options2.SetValue(3,"%s",tr("ON"));
+                    else if (ocarinaChoice == off) options2.SetValue(3,"%s",tr("OFF"));
+
+                    if (iosChoice == i249) options2.SetValue(4,"249");
+                    else if (iosChoice == i222) options2.SetValue(4,"222");
+                    else if (iosChoice == i223) options2.SetValue(4,"223");
+
+                    if (parentalcontrolChoice == 0) options2.SetValue(5, tr("0 (Everyone)"));
+                    else if (parentalcontrolChoice == 1) options2.SetValue(5, tr("1 (Child 7+)"));
+                    else if (parentalcontrolChoice == 2) options2.SetValue(5, tr("2 (Teen 12+)"));
+                    else if (parentalcontrolChoice == 3) options2.SetValue(5, tr("3 (Mature 16+)"));
+                    else if (parentalcontrolChoice == 4) options2.SetValue(5, tr("4 (Adults Only 18+)"));
+
+                    if (fix002 == on) options2.SetValue(6,tr("ON"));
+                    else if (fix002 == off) options2.SetValue(6,tr("OFF"));
+                    else if (fix002 == anti) options2.SetValue(6,tr("Anti"));
+
+                    if (countrystrings == on) options2.SetValue(7,tr("ON"));
+                    else if (countrystrings == off) options2.SetValue(7,tr("OFF"));
+
+                    if (alternatedol == on) options2.SetValue(8,tr("Load From SD/USB"));
+                    if (alternatedol == 2) options2.SetValue(8,tr("Select a DOL"));
+                    else if (alternatedol == off) options2.SetValue(8,tr("Default"));
+
+                    if (alternatedol == on) options2.SetValue(9,tr("SD/USB selected"));
+                    else if (alternatedol == off) options2.SetValue(9,tr("Default"));
+                    else options2.SetValue(9, alternatedname);
+
+                    if (reloadblock == on) options2.SetValue(10,tr("ON"));
+                    else if (reloadblock == off) options2.SetValue(10,tr("OFF"));
+
                     if (backBtn.GetState() == STATE_CLICKED) {
                         backBtn.ResetState();
                         exit = true;
                         break;
                     }
 
-                    else if (shutdown == 1)
+                    if (shutdown == 1)
                         Sys_Shutdown();
                     else if (reset == 1)
                         Sys_Reboot();
@@ -2123,7 +2164,87 @@ int GameSettings(struct discHdr * header) {
                         optionBrowser2.SetState(STATE_DEFAULT);
                     }
 
-                    else if (saveBtn.GetState() == STATE_CLICKED) {
+                    ret = optionBrowser2.GetClickedOption();
+
+                    switch (ret) {
+                    case 0:
+                        videoChoice = (videoChoice + 1) % CFG_VIDEO_COUNT;
+                        break;
+                    case 1:
+                        viChoice = (viChoice + 1) % 2;
+                        break;
+                    case 2:
+                        languageChoice = (languageChoice + 1) % CFG_LANG_COUNT;
+                        break;
+                    case 3:
+                        ocarinaChoice = (ocarinaChoice + 1) % 2;
+                        break;
+                    case 4:
+                        iosChoice = (iosChoice + 1) % 3;
+                        break;
+                    case 5:
+                        parentalcontrolChoice = (parentalcontrolChoice + 1) % 5;
+                        break;
+                    case 6:
+                        fix002 = (fix002+1) % 3;
+                        break;
+                    case 7:
+                        countrystrings = (countrystrings+1) % 2;
+                        break;
+                    case 8:
+                        alternatedol = (alternatedol+2) % 3;
+                        break;
+                    case 9:
+                        if (alternatedol == 2) {
+                            char filename[10];
+                            snprintf(filename,sizeof(filename),"%c%c%c%c%c%c",header->id[0], header->id[1], header->id[2],
+                                     header->id[3],header->id[4], header->id[5]);
+                            int dolchoice = 0;
+							//alt dol menu for games that require more than a single alt dol
+							int autodol = autoSelectDolMenu(filename,false);
+
+							if (autodol>0) {
+								alternatedoloffset = autodol;
+								snprintf(alternatedname, sizeof(alternatedname), "%s <%i>", tr("AUTO"),autodol);
+							} else if (autodol == 0) {
+								// default was chosen
+								alternatedol = 0;
+							} else {
+								//check to see if we already know the offset of the correct dol
+								int autodol = autoSelectDol(filename, false);
+								//if we do know that offset ask if they want to use it
+								if (autodol>0) {
+									dolchoice = WindowPrompt(0,tr("Do you want to use the alternate DOL that is known to be correct?"),tr("Yes"),tr("Pick from a list"),tr("Cancel"));
+									if (dolchoice==0) {
+										alternatedol = 0;
+									} else if (dolchoice==1) {
+										alternatedoloffset = autodol;
+										snprintf(alternatedname, sizeof(alternatedname), "%s <%i>", tr("AUTO"),autodol);
+									} else if (dolchoice==2) {//they want to search for the correct dol themselves
+										int res = DiscBrowse(header);
+										if ((res >= 0)&&(res !=696969)) {//if res==696969 they pressed the back button
+											alternatedoloffset = res;
+										}
+									}
+								} else {
+									int res = DiscBrowse(header);
+									if ((res >= 0)&&(res !=696969)){
+										alternatedoloffset = res;
+										char tmp[170];
+										snprintf(tmp,sizeof(tmp),"%s %s - %i",tr("It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team.") ,filename,alternatedoloffset);
+										WindowPrompt(0,tmp,tr("OK"));
+									}
+								}
+							}
+                        }
+                        break;
+                    case 10:
+                        reloadblock = (reloadblock+1) % 2;
+                        break;
+
+                    }
+
+                    if (saveBtn.GetState() == STATE_CLICKED) {
 
                         if (isInserted(bootDevice)) {
                             if (CFG_save_game_opt(header->id)) {
@@ -2147,163 +2268,6 @@ int GameSettings(struct discHdr * header) {
 
                         saveBtn.ResetState();
                         optionBrowser2.SetFocus(1);
-                    }
-
-                    ret = optionBrowser2.GetClickedOption();
-
-                    if(ret >= 0 || firstRun == true)
-                    {
-                        firstRun = false;
-
-                        if (videoChoice == discdefault) options2.SetValue(0,"%s",tr("Disc Default"));
-                        else if (videoChoice == systemdefault) options2.SetValue(0,"%s",tr("System Default"));
-                        else if (videoChoice == patch) options2.SetValue(0,"%s",tr("AutoPatch"));
-                        else if (videoChoice == pal50) options2.SetValue(0,"%s PAL50",tr("Force"));
-                        else if (videoChoice == pal60) options2.SetValue(0,"%s PAL60",tr("Force"));
-                        else if (videoChoice == ntsc) options2.SetValue(0,"%s NTSC",tr("Force"));
-
-                        if (viChoice == on) options2.SetValue(1,"%s",tr("ON"));
-                        else if (viChoice == off) options2.SetValue(1,"%s",tr("OFF"));
-
-                        if (languageChoice == ConsoleLangDefault) options2.SetValue(2,"%s",tr("Console Default"));
-                        else if (languageChoice == jap) options2.SetValue(2,"%s",tr("Japanese"));
-                        else if (languageChoice == ger) options2.SetValue(2,"%s",tr("German"));
-                        else if (languageChoice == eng) options2.SetValue(2,"%s",tr("English"));
-                        else if (languageChoice == fren) options2.SetValue(2,"%s",tr("French"));
-                        else if (languageChoice == esp) options2.SetValue(2,"%s",tr("Spanish"));
-                        else if (languageChoice == it) options2.SetValue(2,"%s",tr("Italian"));
-                        else if (languageChoice == dut) options2.SetValue(2,"%s",tr("Dutch"));
-                        else if (languageChoice == schin) options2.SetValue(2,"%s",tr("SChinese"));
-                        else if (languageChoice == tchin) options2.SetValue(2,"%s",tr("TChinese"));
-                        else if (languageChoice == kor) options2.SetValue(2,"%s",tr("Korean"));
-
-                        if (ocarinaChoice == on) options2.SetValue(3,"%s",tr("ON"));
-                        else if (ocarinaChoice == off) options2.SetValue(3,"%s",tr("OFF"));
-
-                        if (iosChoice == i249) options2.SetValue(4,"249");
-                        else if (iosChoice == i222) options2.SetValue(4,"222");
-                        else if (iosChoice == i223) options2.SetValue(4,"223");
-
-                        if (parentalcontrolChoice == 0) options2.SetValue(5, tr("0 (Everyone)"));
-                        else if (parentalcontrolChoice == 1) options2.SetValue(5, tr("1 (Child 7+)"));
-                        else if (parentalcontrolChoice == 2) options2.SetValue(5, tr("2 (Teen 12+)"));
-                        else if (parentalcontrolChoice == 3) options2.SetValue(5, tr("3 (Mature 16+)"));
-                        else if (parentalcontrolChoice == 4) options2.SetValue(5, tr("4 (Adults Only 18+)"));
-
-                        if (fix002 == on) options2.SetValue(6,tr("ON"));
-                        else if (fix002 == off) options2.SetValue(6,tr("OFF"));
-                        else if (fix002 == anti) options2.SetValue(6,tr("Anti"));
-
-                        if (countrystrings == on) options2.SetValue(7,tr("ON"));
-                        else if (countrystrings == off) options2.SetValue(7,tr("OFF"));
-
-                        if (alternatedol == on) options2.SetValue(8,tr("Load From SD/USB"));
-                        if (alternatedol == 2) options2.SetValue(8,tr("Select a DOL"));
-                        else if (alternatedol == off) options2.SetValue(8,tr("Default"));
-
-                        if (alternatedol == on) options2.SetValue(9,tr("SD/USB selected"));
-                        else if (alternatedol == off) options2.SetValue(9,tr("Default"));
-                        else options2.SetValue(9, alternatedname);
-
-                        if (reloadblock == on) options2.SetValue(10,tr("ON"));
-                        else if (reloadblock == off) options2.SetValue(10,tr("OFF"));
-
-                        switch (ret) {
-                        case 0:
-                            videoChoice = (videoChoice + 1) % CFG_VIDEO_COUNT;
-                            if (videoChoice  >= 6)
-                                videoChoice = 0;
-                            break;
-                        case 1:
-                            viChoice = (viChoice + 1) % 2;
-                            if (viChoice >= 2)
-                                viChoice = 0;
-                            break;
-                        case 2:
-                            languageChoice = (languageChoice + 1) % CFG_LANG_COUNT;
-                            if (languageChoice >= 11)
-                                languageChoice = 0;
-                            break;
-                        case 3:
-                            ocarinaChoice = (ocarinaChoice + 1) % 2;
-                            if ( ocarinaChoice >= 2)
-                                ocarinaChoice = 0;
-                            break;
-                        case 4:
-                            iosChoice = (iosChoice + 1) % 3;
-                            if ( iosChoice >= 3)
-                                iosChoice = 0;
-                            break;
-                        case 5:
-                            parentalcontrolChoice = (parentalcontrolChoice + 1) % 5;
-                            if (parentalcontrolChoice >= 5)
-                                parentalcontrolChoice = 0;
-                            break;
-                        case 6:
-                            fix002 = (fix002+1) % 3;
-                            if (fix002 >= 3)
-                                fix002 = 0; //RUMBLE
-                            break;
-                        case 7:
-                            countrystrings = (countrystrings+1) % 2;
-                            if (countrystrings >= 2)
-                                countrystrings = 0;
-                            break;
-                        case 8:
-                            alternatedol = (alternatedol+2) % 3;
-                            if (alternatedol >= 3)
-                                alternatedol = 0;
-                            break;
-                        case 9:
-                            if (alternatedol == 2) {
-                                char filename[10];
-                                snprintf(filename,sizeof(filename),"%c%c%c%c%c%c",header->id[0], header->id[1], header->id[2],
-                                         header->id[3],header->id[4], header->id[5]);
-                                int dolchoice = 0;
-                                //alt dol menu for games that require more than a single alt dol
-                                int autodol = autoSelectDolMenu(filename,false);
-
-                                if (autodol>0) {
-                                    alternatedoloffset = autodol;
-                                    snprintf(alternatedname, sizeof(alternatedname), "%s <%i>", tr("AUTO"),autodol);
-                                } else if (autodol == 0) {
-                                    // default was chosen
-                                    alternatedol = 0;
-                                } else {
-                                    //check to see if we already know the offset of the correct dol
-                                    int autodol = autoSelectDol(filename, false);
-                                    //if we do know that offset ask if they want to use it
-                                    if (autodol>0) {
-                                        dolchoice = WindowPrompt(0,tr("Do you want to use the alternate DOL that is known to be correct?"),tr("Yes"),tr("Pick from a list"),tr("Cancel"));
-                                        if (dolchoice==0) {
-                                            alternatedol = 0;
-                                        } else if (dolchoice==1) {
-                                            alternatedoloffset = autodol;
-                                            snprintf(alternatedname, sizeof(alternatedname), "%s <%i>", tr("AUTO"),autodol);
-                                        } else if (dolchoice==2) {//they want to search for the correct dol themselves
-                                            int res = DiscBrowse(header);
-                                            if ((res >= 0)&&(res !=696969)) {//if res==696969 they pressed the back button
-                                                alternatedoloffset = res;
-                                            }
-                                        }
-                                    } else {
-                                        int res = DiscBrowse(header);
-                                        if ((res >= 0)&&(res !=696969)){
-                                            alternatedoloffset = res;
-                                            char tmp[170];
-                                            snprintf(tmp,sizeof(tmp),"%s %s - %i",tr("It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team.") ,filename,alternatedoloffset);
-                                            WindowPrompt(0,tmp,tr("OK"));
-                                        }
-                                    }
-                                }
-                            }
-                            break;
-                        case 10:
-                            reloadblock = (reloadblock+1) % 2;
-                            if (reloadblock >= 2)
-                                reloadblock = 0;
-                            break;
-                        }
                     }
                 }
 
@@ -2347,8 +2311,7 @@ int GameSettings(struct discHdr * header) {
                 optionBrowser2.SetClickable(true);
                 ResumeGui();
 
-                bool firstRun = true;
-
+                VIDEO_WaitVSync ();
                 optionBrowser2.SetEffect(EFFECT_FADE, 20);
                 while (optionBrowser2.GetEffect() > 0) usleep(50);
 
@@ -2361,7 +2324,7 @@ int GameSettings(struct discHdr * header) {
                         break;
                     }
 
-                    else if (shutdown == 1)
+                    if (shutdown == 1)
                         Sys_Shutdown();
                     else if (reset == 1)
                         Sys_Reboot();
@@ -2391,91 +2354,86 @@ int GameSettings(struct discHdr * header) {
 
                     ret = optionBrowser2.GetClickedOption();
 
-                    if(firstRun || ret >= 0)
-                    {
-                        firstRun = false;
-
-                        int choice1;
-                        char tmp[200];
-                        switch (ret) {
-                        case 0:
-                            choice1 = WindowPrompt(tr("Do you really want to delete:"),gameName,tr("Yes"),tr("Cancel"));
-                            if (choice1 == 1 && !mountMethod) {
-                                CFG_forget_game_opt(header->id);
-                                CFG_forget_game_num(header->id);
-                                ret = WBFS_RemoveGame(header->id);
-                                if (ret < 0) {
-                                    WindowPrompt(
-                                        tr("Can't delete:"),
-                                        gameName,
-                                        tr("OK"));
-                                } else {
-                                    WindowPrompt(tr("Successfully deleted:"),gameName,tr("OK"));
-                                    retVal = 1;
-                                }
-                            } else if (choice1 == 0) {
-                                optionBrowser2.SetFocus(1);
+                    int choice1;
+                    char tmp[200];
+                    switch (ret) {
+                    case 0:
+                        choice1 = WindowPrompt(tr("Do you really want to delete:"),gameName,tr("Yes"),tr("Cancel"));
+                        if (choice1 == 1 && !mountMethod) {
+                            CFG_forget_game_opt(header->id);
+                            CFG_forget_game_num(header->id);
+                            ret = WBFS_RemoveGame(header->id);
+                            if (ret < 0) {
+                                WindowPrompt(
+                                    tr("Can't delete:"),
+                                    gameName,
+                                    tr("OK"));
+                            } else {
+                                WindowPrompt(tr("Successfully deleted:"),gameName,tr("OK"));
+                                retVal = 1;
                             }
-                            break;
-                        case 1:
-                            int result;
-                            result = WindowPrompt(tr("Are you sure?"),0,tr("Yes"),tr("Cancel"));
-                            if (result == 1) {
-                                if (isInserted(bootDevice)) {
-                                    struct Game_NUM* game_num = CFG_get_game_num(header->id);
-                                    if (game_num) {
-                                        favoritevar = game_num->favorite;
-                                        playcount = game_num->count;
-                                    } else {
-                                        favoritevar = 0;
-                                        playcount = 0;
-                                    }
-                                    playcount = 0;
-                                    CFG_save_game_num(header->id);
-                                }
-                            }
-                            break;
-                        case 2:
-
-                            snprintf(tmp,sizeof(tmp),"%s%c%c%c%c%c%c.png", Settings.covers_path, header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
-
-                            choice1 = WindowPrompt(tr("Delete"),tmp,tr("Yes"),tr("No"));
-                            if (choice1==1) {
-                                if (checkfile(tmp))
-                                    remove(tmp);
-                            }
-                            break;
-                        case 3:
-
-                            snprintf(tmp,sizeof(tmp),"%s%c%c%c%c%c%c.png", Settings.disc_path, header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
-
-                            choice1 = WindowPrompt(tr("Delete"),tmp,tr("Yes"),tr("No"));
-                            if (choice1==1) {
-                                if (checkfile(tmp))
-                                    remove(tmp);
-                            }
-                            break;
-                        case 4:
-
-                            snprintf(tmp,sizeof(tmp),"%s%c%c%c%c%c%c.txt", Settings.TxtCheatcodespath, header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
-
-                            choice1 = WindowPrompt(tr("Delete"),tmp,tr("Yes"),tr("No"));
-                            if (choice1==1) {
-                                if (checkfile(tmp))
-                                    remove(tmp);
-                            }
-                            break;
-                        case 5:
-
-                            snprintf(tmp,sizeof(tmp),"%s%c%c%c%c%c%c.gct", Settings.Cheatcodespath, header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
-
-                            choice1 = WindowPrompt(tr("Delete"),tmp,tr("Yes"),tr("No"));
-                            if (choice1==1) {
-                                if (checkfile(tmp))
-                                    remove(tmp);
-                            }
-                            break;
+                        } else if (choice1 == 0) {
+                            optionBrowser2.SetFocus(1);
                         }
+                        break;
+                    case 1:
+                        int result;
+                        result = WindowPrompt(tr("Are you sure?"),0,tr("Yes"),tr("Cancel"));
+                        if (result == 1) {
+                            if (isInserted(bootDevice)) {
+                                struct Game_NUM* game_num = CFG_get_game_num(header->id);
+                                if (game_num) {
+                                    favoritevar = game_num->favorite;
+                                    playcount = game_num->count;
+                                } else {
+                                    favoritevar = 0;
+                                    playcount = 0;
+                                }
+                                playcount = 0;
+                                CFG_save_game_num(header->id);
+                            }
+                        }
+                        break;
+                    case 2:
+
+                        snprintf(tmp,sizeof(tmp),"%s%c%c%c%c%c%c.png", Settings.covers_path, header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
+
+                        choice1 = WindowPrompt(tr("Delete"),tmp,tr("Yes"),tr("No"));
+                        if (choice1==1) {
+                            if (checkfile(tmp))
+                                remove(tmp);
+                        }
+                        break;
+                    case 3:
+
+                        snprintf(tmp,sizeof(tmp),"%s%c%c%c%c%c%c.png", Settings.disc_path, header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
+
+                        choice1 = WindowPrompt(tr("Delete"),tmp,tr("Yes"),tr("No"));
+                        if (choice1==1) {
+                            if (checkfile(tmp))
+                                remove(tmp);
+                        }
+                        break;
+                    case 4:
+
+                        snprintf(tmp,sizeof(tmp),"%s%c%c%c%c%c%c.txt", Settings.TxtCheatcodespath, header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
+
+                        choice1 = WindowPrompt(tr("Delete"),tmp,tr("Yes"),tr("No"));
+                        if (choice1==1) {
+                            if (checkfile(tmp))
+                                remove(tmp);
+                        }
+                        break;
+				    case 5:
+
+                        snprintf(tmp,sizeof(tmp),"%s%c%c%c%c%c%c.gct", Settings.Cheatcodespath, header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
+
+                        choice1 = WindowPrompt(tr("Delete"),tmp,tr("Yes"),tr("No"));
+                        if (choice1==1) {
+                            if (checkfile(tmp))
+                                remove(tmp);
+                        }
+                        break;
                     }
                 }
                 optionBrowser2.SetEffect(EFFECT_FADE, -20);

@@ -41,9 +41,17 @@
 #define CONSOLE_WIDTH		340
 #define CONSOLE_HEIGHT		218
 
+FreeTypeGX *fontSystem=0;
+FreeTypeGX *fontClock=0;
+
 static void BootUpProblems()
 {
     s32 ret2;
+
+    // load main font from file, or default to built-in font
+    fontSystem = new FreeTypeGX();
+    fontSystem->loadFont(NULL, font_ttf, font_ttf_size, 0);
+    fontSystem->setCompatibilityMode(FTGX_COMPATIBILITY_DEFAULT_TEVOP_GX_PASSCLR | FTGX_COMPATIBILITY_DEFAULT_VTXDESC_GX_NONE);
 
     GuiImageData bootimageData(gxlogo_png);
     GuiImage bootimage(&bootimageData);
@@ -64,7 +72,7 @@ static void BootUpProblems()
 		ret2 = IOS_ReloadIOS(249);
 		if (ret2 < 0) {
 			ret2 = IOS_ReloadIOS(222);
-			SDCard_Init();
+			SDCard_Init(); 
 			load_ehc_module();
 			SDCard_deInit();
 			if(ret2 <0) {
@@ -103,6 +111,12 @@ static void BootUpProblems()
         Menu_Render();
         SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
     }
+
+    ///delete font to load up custom if set
+    if(fontSystem) {
+        delete fontSystem;
+        fontSystem = NULL;
+    }
 }
 
 
@@ -110,9 +124,6 @@ int
 main(int argc, char *argv[]) {
 
 	setlocale(LC_ALL, "en.UTF-8");
-
-    for(int i = 0; i < MAX_FONT_SIZE+1; i++)
-        fontSystem[i] = NULL;
 
     s32 ret;
     bool startupproblem = false;
@@ -128,14 +139,14 @@ main(int argc, char *argv[]) {
 
     /** PAD_Init has to be before InitVideo don't move that **/
     PAD_Init(); // initialize PAD/WPAD
-
+	
     USBDevice_Init();// seems enough to wake up some HDDs if they are in sleep mode when the loader starts (tested with WD MyPassport Essential 2.5")
-
+	 
     ret = IOS_ReloadIOS(249);
 
     if (ret < 0) {
         ret = IOS_ReloadIOS(222);
-		SDCard_Init();
+		SDCard_Init(); 
         load_ehc_module();
 		SDCard_deInit();
         if(ret <0) {
@@ -149,7 +160,7 @@ main(int argc, char *argv[]) {
 
     if (ret < 0) {
         ret = IOS_ReloadIOS(222);
-		SDCard_Init();
+		SDCard_Init(); 
         load_ehc_module();
 		SDCard_deInit();
         if(ret < 0) {
@@ -230,10 +241,17 @@ main(int argc, char *argv[]) {
     WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
     WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
 
+    // load main font from file, or default to built-in font
+    fontSystem = new FreeTypeGX();
     char *fontPath = NULL;
     asprintf(&fontPath, "%sfont.ttf", CFG.theme_path);
-    LoadCustomFont(fontPath);
+    fontSystem->loadFont(fontPath, font_ttf, font_ttf_size, 0);
+    fontSystem->setCompatibilityMode(FTGX_COMPATIBILITY_DEFAULT_TEVOP_GX_PASSCLR | FTGX_COMPATIBILITY_DEFAULT_VTXDESC_GX_NONE);
     free(fontPath);
+
+    fontClock = new FreeTypeGX();
+    fontClock->loadFont(NULL, clock_ttf, clock_ttf_size, 0);
+    fontClock->setCompatibilityMode(FTGX_COMPATIBILITY_DEFAULT_TEVOP_GX_PASSCLR | FTGX_COMPATIBILITY_DEFAULT_VTXDESC_GX_NONE);
 
     InitGUIThreads();
     MainMenu(MENU_CHECK);

@@ -121,7 +121,7 @@ int TitleBrowser(u32 type) {
         char line[200];
         char tmp[50];
         snprintf(tmp,50," ");
-
+        
 		//check if the content.bin is on the SD card for that game
 		//if there is content.bin,then the game is on the SDmenu and not the wii
 		sprintf(line,"SD:/private/wii/title/%s/content.bin",text);
@@ -250,7 +250,7 @@ int TitleBrowser(u32 type) {
     GuiText titleTxt(tr("Title Launcher"), 28, (GXColor) {0, 0, 0, 255});
     titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     titleTxt.SetPosition(12,40);
-    titleTxt.SetMaxWidth(356, SCROLL_HORIZONTAL);
+    titleTxt.SetMaxWidth(356, GuiText::SCROLL);
 
     GuiImage settingsbackground(&settingsbg);
     GuiButton settingsbackgroundbtn(settingsbackground.GetWidth(), settingsbackground.GetHeight());
@@ -406,7 +406,7 @@ int TitleBrowser(u32 type) {
                 char temp[50];
                 char filepath[100];
 				u32 read = 0;
-
+				
 				//make sure there is a folder for this to be saved in
 				struct stat st;
                 snprintf(filepath, sizeof(filepath), "%s/wad/", bootDevice);
@@ -416,7 +416,7 @@ int TitleBrowser(u32 type) {
 						}
 					}
 				snprintf(filepath, sizeof(filepath), "%s/wad/tmp.tmp", bootDevice);
-
+				
 
                 if (infilesize < MBSIZE)
                     snprintf(filesizetxt, sizeof(filesizetxt), tr("Incoming file %0.2fKB"), infilesize/KBSIZE);
@@ -493,17 +493,17 @@ int TitleBrowser(u32 type) {
                                 int pick = WindowPrompt(tr(" Wad Saved as:"), tmptxt, tr("Install"),tr("Uninstall"),tr("Cancel"));
                                 //install or uninstall it
                                 if (pick==1)
-									{
-
+									{	
+									
 										HaltGui();
 										w.Remove(&titleTxt);
 										w.Remove(&cancelBtn);
 										w.Remove(&wifiBtn);
 										w.Remove(&optionBrowser3);
-										ResumeGui();
-
+										ResumeGui();										
+										
 										Wad_Install(file);
-
+										
 										HaltGui();
 										w.Append(&titleTxt);
 										w.Append(&cancelBtn);

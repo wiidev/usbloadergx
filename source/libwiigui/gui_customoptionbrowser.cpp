@@ -187,7 +187,7 @@ GuiCustomOptionBrowser::GuiCustomOptionBrowser(int w, int h, customOptionList * 
 		optionTxt[i] = new GuiText(options->GetName(i), 20, THEME.settingstext);
 		optionTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 		optionTxt[i]->SetPosition(24,0);
-		optionTxt[i]->SetMaxWidth(bgOptionsImg->GetWidth() - (coL2+24), DOTTED);
+		optionTxt[i]->SetMaxWidth(bgOptionsImg->GetWidth() - (coL2+24), GuiText::DOTTED);
 
 		optionBg[i] = new GuiImage(bgOptionsEntry);
 
@@ -424,10 +424,10 @@ void GuiCustomOptionBrowser::UpdateListEntries()
 		if(optionBtn[i]->GetState() != STATE_DISABLED)
 		{
 			optionVal[i]->SetPosition(coL2,0);
-			optionVal[i]->SetMaxWidth(bgOptionsImg->GetWidth() - (coL2+24), DOTTED);
+			optionVal[i]->SetMaxWidth(bgOptionsImg->GetWidth() - (coL2+24), GuiText::DOTTED);
 
 			optionValOver[i]->SetPosition(coL2,0);
-			optionValOver[i]->SetMaxWidth(bgOptionsImg->GetWidth() - (coL2+24), SCROLL_HORIZONTAL);
+			optionValOver[i]->SetMaxWidth(bgOptionsImg->GetWidth() - (coL2+24), GuiText::SCROLL);
 		}
 	}
 }

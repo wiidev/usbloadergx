@@ -216,7 +216,7 @@ void WindowCredits() {
     i++;
     y+=28;
 
-    txt[i]->SetPresets(22, (GXColor) {255, 255, 255,  255}, WRAP, FTGX_JUSTIFY_LEFT | FTGX_ALIGN_TOP, ALIGN_LEFT, ALIGN_TOP);
+    GuiText::SetPresets(22, (GXColor) {255, 255, 255,  255}, 0, GuiText::WRAP,FTGX_JUSTIFY_LEFT | FTGX_ALIGN_TOP, ALIGN_LEFT, ALIGN_TOP);
 
     txt[i] = new GuiText(tr("Coding:"));
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
@@ -916,7 +916,7 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
                     StopGX();
                     WII_Initialize();
 					WII_BootHBC();
-
+                    
                 }
                 choice = 2;
             }
@@ -1002,7 +1002,7 @@ void SetFavoriteImages(GuiImage *b1, GuiImage *b2, GuiImage *b3, GuiImage *b4, G
 	b3->SetImage(favoritevar >= 3 ? on : off);
 	b4->SetImage(favoritevar >= 4 ? on : off);
 	b5->SetImage(favoritevar >= 5 ? on : off);
-}
+}					
 
 /****************************************************************************
  * GameWindowPrompt
@@ -1063,7 +1063,7 @@ int GameWindowPrompt() {
     GuiText nameTxt("", 22, THEME.prompttext);
     if (Settings.wsprompt == yes)
         nameTxt.SetWidescreen(CFG.widescreen);
-    nameTxt.SetMaxWidth(350, SCROLL_HORIZONTAL);
+    nameTxt.SetMaxWidth(350, GuiText::SCROLL);
     GuiButton nameBtn(120,50);
     nameBtn.SetLabel(&nameTxt);
 //	nameBtn.SetLabelOver(&nameTxt);
@@ -1227,8 +1227,8 @@ int GameWindowPrompt() {
 
         if (diskCover)
             delete diskCover;
-
-
+			
+		
 
         snprintf(imgPath,sizeof(imgPath),"%s%s.png", Settings.disc_path, IDFull); //changed to current full id
         diskCover = new GuiImageData(imgPath,0);
@@ -1299,13 +1299,13 @@ int GameWindowPrompt() {
             nameTxt.SetEffect(EFFECT_FADE, 17);
         } else
             diskImg.SetImage(diskCover);
-
+		
 		if (!mountMethod)
 		{
 			WBFS_GameSize(header->id, &size);
 			sizeTxt.SetTextf("%.2fGB", size); //set size text;
 		}
-
+	
 		nameTxt.SetText(get_title(header));
 
         struct Game_NUM* game_num = CFG_get_game_num(header->id);
@@ -1721,7 +1721,7 @@ FormatingPartition(const char *title, partitionEntry *entry) {
  * SearchMissingImages
  ***************************************************************************/
 bool SearchMissingImages(int choice2) {
-
+	
 	GuiWindow promptWindow(472,320);
     promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     promptWindow.SetPosition(0, -10);
@@ -1762,14 +1762,14 @@ bool SearchMissingImages(int choice2) {
     mainWindow->Append(&promptWindow);
     mainWindow->ChangeFocus(&promptWindow);
     ResumeGui();
-
+	
     //make sure that all games are added to the gamelist
     __Menu_GetEntries(1);
 
 	cntMissFiles = 0;
 	u32 i = 0;
 	char filename[11];
-
+	
 	//add IDs of games that are missing covers to cntMissFiles
 	bool found1 = false;
 	bool found2 = false;
@@ -1777,7 +1777,7 @@ bool SearchMissingImages(int choice2) {
 	for (i = 0; i < gameCnt && cntMissFiles < 500; i++) {
 		struct discHdr* header = &gameList[i];
 		if (choice2 != 3) {
-
+			
 			char *covers_path = choice2==1 ? Settings.covers2d_path : Settings.covers_path;
 
 			snprintf (filename,sizeof(filename),"%c%c%c.png", header->id[0], header->id[1], header->id[2]);
@@ -1809,7 +1809,7 @@ bool SearchMissingImages(int choice2) {
 		msgTxt.SetText(tr("No file missing!"));
         sleep(1);
 	}
-
+	
 	promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
     while (promptWindow.GetEffect() > 0) usleep(50);
 
@@ -1818,8 +1818,8 @@ bool SearchMissingImages(int choice2) {
     mainWindow->SetState(STATE_DEFAULT);
 	__Menu_GetEntries();
     ResumeGui();
-
-	if (cntMissFiles > 0) {
+	
+	if (cntMissFiles > 0) { //&& !IsNetworkInit()) {
 		NetworkInitPrompt();
 	}
 
@@ -2327,7 +2327,7 @@ ProgressDownloadWindow(int choice2) {
     }
 
     /**Temporary redownloading 1st image because of a fucking corruption bug **/
-#if 0 // is no longer necessary, since libfat is fixed
+#if 0 // is no longer necessary, since libfat is fixed 
     char URLFile[100];
     struct block file = downloadfile(URLFile);
     if (choice2 == 2) {
@@ -2894,7 +2894,7 @@ int ProgressUpdateWindow() {
                 titleTxt.SetTextf("%s USB Loader GX", tr("Updating"));
                 msgTxt.SetPosition(0,100);
                 msgTxt.SetTextf("%s", tr("Updating WiiTDB.zip"));
-
+				
 				char wiitdbpath[200];
 				char wiitdbpathtmp[200];
                 struct block file = downloadfile(XMLurl);
@@ -2915,7 +2915,7 @@ int ProgressUpdateWindow() {
 						OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true); // open file, reload titles, keep in memory
 					}
 				}
-
+				
                 msgTxt.SetTextf("%s", tr("Updating Language Files:"));
                 updateLanguageFiles();
                 promptWindow.Append(&progressbarEmptyImg);
@@ -3296,7 +3296,7 @@ HBCWindowPrompt(const char *name, const char *coder, const char *version,
     GuiText nameTxt(name,30 , THEME.prompttext);
     nameTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     nameTxt.SetPosition(0,-15);
-    nameTxt.SetMaxWidth(430, SCROLL_HORIZONTAL);
+    nameTxt.SetMaxWidth(430, GuiText::SCROLL);
 
 
     if (strcmp(coder,""))
@@ -3321,16 +3321,11 @@ HBCWindowPrompt(const char *name, const char *coder, const char *version,
     release_dateTxt.SetMaxWidth(430);
 
     int pagesize = 6;
-	int currentLine = 0;
-
     GuiText long_descriptionTxt(long_description, 20, THEME.prompttext);
     long_descriptionTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     long_descriptionTxt.SetPosition(46,117);
-    long_descriptionTxt.SetMaxWidth(360, LONGTEXT);
-    long_descriptionTxt.SetLinesToDraw(pagesize);
-    long_descriptionTxt.SetFirstLine(currentLine);
-
-	int TotalLines = long_descriptionTxt.GetTotalLines();
+    long_descriptionTxt.SetMaxWidth(360);
+    long_descriptionTxt.SetNumLines(pagesize);
 
     //convert filesize from u64 to char and put unit of measurement after it
     char temp2[7];
@@ -3422,24 +3417,18 @@ HBCWindowPrompt(const char *name, const char *coder, const char *version,
         } else if (btn2.GetState() == STATE_CLICKED) {
             choice = 0;
         } else if ((arrowUpBtn.GetState()==STATE_CLICKED||arrowUpBtn.GetState()==STATE_HELD) ) {
-            currentLine--;
-			if(currentLine+pagesize > TotalLines)
-				currentLine = TotalLines-pagesize;
-			if(currentLine < 0)
-				currentLine = 0;
-
-			long_descriptionTxt.SetFirstLine(currentLine);
+            if (long_descriptionTxt.GetFirstLine()>1)
+                long_descriptionTxt.SetFirstLine(long_descriptionTxt.GetFirstLine()-1);
             usleep(60000);
             if (!((ButtonsHold() & WPAD_BUTTON_UP)||(ButtonsHold() & PAD_BUTTON_UP)))
                 arrowUpBtn.ResetState();
-        } else if (arrowDownBtn.GetState()==STATE_CLICKED||arrowDownBtn.GetState()==STATE_HELD) {
-            currentLine++;
-			if(currentLine+pagesize > TotalLines)
-				currentLine = TotalLines-pagesize;
-			if(currentLine < 0)
-				currentLine = 0;
+        } else if ((arrowDownBtn.GetState()==STATE_CLICKED||arrowDownBtn.GetState()==STATE_HELD)
+                   &&long_descriptionTxt.GetTotalLines()>pagesize
+                   &&long_descriptionTxt.GetFirstLine()-1<long_descriptionTxt.GetTotalLines()-pagesize) {
+            int l=0;
+            l=long_descriptionTxt.GetFirstLine()+1;
 
-			long_descriptionTxt.SetFirstLine(currentLine);
+            long_descriptionTxt.SetFirstLine(l);
             usleep(60000);
             if (!((ButtonsHold() & WPAD_BUTTON_DOWN)||(ButtonsHold() & PAD_BUTTON_DOWN)))
                 arrowDownBtn.ResetState();

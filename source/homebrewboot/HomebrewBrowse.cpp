@@ -190,15 +190,15 @@ int MenuHomebrewBrowse() {
     GuiImage MainButton1Img(&MainButtonImgData);
     GuiImage MainButton1ImgOver(&MainButtonImgOverData);
     GuiText MainButton1Txt(MainButtonText, 18, (GXColor) {0, 0, 0, 255});
-    MainButton1Txt.SetMaxWidth(MainButton1Img.GetWidth()-150, DOTTED);
+    MainButton1Txt.SetMaxWidth(MainButton1Img.GetWidth()-150, GuiText::DOTTED);
     MainButton1Txt.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     MainButton1Txt.SetPosition(148, -12);
     GuiText MainButton1DescTxt(MainButtonText, 18, (GXColor) {0, 0, 0, 255});
-    MainButton1DescTxt.SetMaxWidth(MainButton1Img.GetWidth()-150, DOTTED);
+    MainButton1DescTxt.SetMaxWidth(MainButton1Img.GetWidth()-150, GuiText::DOTTED);
     MainButton1DescTxt.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     MainButton1DescTxt.SetPosition(148, 15);
     GuiText MainButton1DescOverTxt(MainButtonText, 18, (GXColor) { 0, 0, 0, 255});
-    MainButton1DescOverTxt.SetMaxWidth(MainButton1Img.GetWidth()-150, SCROLL_HORIZONTAL);
+    MainButton1DescOverTxt.SetMaxWidth(MainButton1Img.GetWidth()-150, GuiText::SCROLL);
     MainButton1DescOverTxt.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     MainButton1DescOverTxt.SetPosition(148, 15);
     GuiButton MainButton1(MainButton1Img.GetWidth(), MainButton1Img.GetHeight());
@@ -219,15 +219,15 @@ int MenuHomebrewBrowse() {
     GuiText MainButton2Txt(MainButtonText, 18, (GXColor) {0, 0, 0, 255 });
     MainButton2Txt.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     MainButton2Txt.SetPosition(148, -12);
-    MainButton2Txt.SetMaxWidth(MainButton2Img.GetWidth()-150, DOTTED);
+    MainButton2Txt.SetMaxWidth(MainButton2Img.GetWidth()-150, GuiText::DOTTED);
     GuiText MainButton2DescTxt(MainButtonText, 18, (GXColor) { 0, 0, 0, 255});
     MainButton2DescTxt.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     MainButton2DescTxt.SetPosition(148, 15);
-    MainButton2DescTxt.SetMaxWidth(MainButton2Img.GetWidth()-150, DOTTED);
+    MainButton2DescTxt.SetMaxWidth(MainButton2Img.GetWidth()-150, GuiText::DOTTED);
     GuiText MainButton2DescOverTxt(MainButtonText, 18, (GXColor) {0, 0, 0, 255});
     MainButton2DescOverTxt.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     MainButton2DescOverTxt.SetPosition(148, 15);
-    MainButton2DescOverTxt.SetMaxWidth(MainButton2Img.GetWidth()-150, SCROLL_HORIZONTAL);
+    MainButton2DescOverTxt.SetMaxWidth(MainButton2Img.GetWidth()-150, GuiText::SCROLL);
     GuiButton MainButton2(MainButton2Img.GetWidth(), MainButton2Img.GetHeight());
     MainButton2.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     MainButton2.SetPosition(0, 160);
@@ -246,15 +246,15 @@ int MenuHomebrewBrowse() {
     GuiText MainButton3Txt(MainButtonText, 18, (GXColor) {0, 0, 0, 255});
     MainButton3Txt.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     MainButton3Txt.SetPosition(148, -12);
-    MainButton3Txt.SetMaxWidth(MainButton3Img.GetWidth()-150, DOTTED);
+    MainButton3Txt.SetMaxWidth(MainButton3Img.GetWidth()-150, GuiText::DOTTED);
     GuiText MainButton3DescTxt(MainButtonText, 18, (GXColor) { 0, 0, 0, 255});
     MainButton3DescTxt.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     MainButton3DescTxt.SetPosition(148, 15);
-    MainButton3DescTxt.SetMaxWidth(MainButton3Img.GetWidth()-150, DOTTED);
+    MainButton3DescTxt.SetMaxWidth(MainButton3Img.GetWidth()-150, GuiText::DOTTED);
     GuiText MainButton3DescOverTxt(MainButtonText, 18, (GXColor) {0, 0, 0, 255 });
     MainButton3DescOverTxt.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     MainButton3DescOverTxt.SetPosition(148, 15);
-    MainButton3DescOverTxt.SetMaxWidth(MainButton3Img.GetWidth()-150, SCROLL_HORIZONTAL);
+    MainButton3DescOverTxt.SetMaxWidth(MainButton3Img.GetWidth()-150, GuiText::SCROLL);
     GuiButton MainButton3(MainButton3Img.GetWidth(), MainButton3Img.GetHeight());
     MainButton3.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     MainButton3.SetPosition(0, 230);
@@ -273,15 +273,15 @@ int MenuHomebrewBrowse() {
     GuiText MainButton4Txt(MainButtonText, 18, (GXColor) {0, 0, 0, 255} );
     MainButton4Txt.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     MainButton4Txt.SetPosition(148, -12);
-    MainButton4Txt.SetMaxWidth(MainButton4Img.GetWidth()-150, DOTTED);
+    MainButton4Txt.SetMaxWidth(MainButton4Img.GetWidth()-150, GuiText::DOTTED);
     GuiText MainButton4DescTxt(MainButtonText, 18, (GXColor) {0, 0, 0, 255});
     MainButton4DescTxt.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     MainButton4DescTxt.SetPosition(148, 15);
-    MainButton4DescTxt.SetMaxWidth(MainButton4Img.GetWidth()-150, DOTTED);
+    MainButton4DescTxt.SetMaxWidth(MainButton4Img.GetWidth()-150, GuiText::DOTTED);
     GuiText MainButton4DescOverTxt(MainButtonText, 18, (GXColor) { 0, 0, 0, 255});
     MainButton4DescOverTxt.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     MainButton4DescOverTxt.SetPosition(148, 15);
-    MainButton4DescOverTxt.SetMaxWidth(MainButton4Img.GetWidth()-150, SCROLL_HORIZONTAL );
+    MainButton4DescOverTxt.SetMaxWidth(MainButton4Img.GetWidth()-150, GuiText::SCROLL);
     GuiButton MainButton4(MainButton4Img.GetWidth(), MainButton4Img.GetHeight());
     MainButton4.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     MainButton4.SetPosition(0, 300);
@@ -838,29 +838,29 @@ int MenuHomebrewBrowse() {
 
                             read += result;
                         }
-
+						
 						char filename[101];
 						if (!error) {
-
+						
 							network_read((u8*) &filename, 100);
-
+							
 							// Do we need to unzip this thing?
 							if (wiiloadVersion[0] > 0 || wiiloadVersion[1] > 4) {
 
 								// We need to unzip...
 								if (temp[0] == 'P' && temp[1] == 'K' && temp[2] == 0x03 && temp[3] == 0x04) {
 									// It's a zip file, unzip to the apps directory
-
+									
 									// Zip archive, ask for permission to install the zip
 									char zippath[255];
 									sprintf((char *) &zippath, "%s%s", Settings.homebrewapps_path, filename);
-
+									
 									FILE *fp = fopen(zippath, "wb");
 									if (fp != NULL)
 									{
 										fwrite(temp, 1, infilesize, fp);
 										fclose(fp);
-
+										
 										// Now unzip the zip file...
 										unzFile uf = unzOpen(zippath);
 										if (uf==NULL) {
@@ -868,9 +868,9 @@ int MenuHomebrewBrowse() {
 										} else {
 											extractZip(uf,0,1,0, Settings.homebrewapps_path);
 											unzCloseCurrentFile(uf);
-
+											
 											remove(zippath);
-
+											
 											// Reload this menu here...
 											menu = MENU_HOMEBREWBROWSE;
 											break;
@@ -884,17 +884,17 @@ int MenuHomebrewBrowse() {
 									uLongf f = uncfilesize;
 									error = uncompress(unc, &f, temp, infilesize) != Z_OK;
 									uncfilesize = f;
-
+									
 									free(temp);
 									temp = unc;
 								}
 							}
-
+							
 							if (!error && strstr(filename,".zip") == NULL) {
 								innetbuffer = temp;
 							}
 						}
-
+						
                         ProgressStop();
 
                         if (error || read != infilesize) {
