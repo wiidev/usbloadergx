@@ -488,8 +488,8 @@ void GuiGameGrid::Draw()
 
 		for(int i=0; i<pagesize-rows; i++)
 		{
-			game[i]->SetPosition(	Pos[i][wsi][0]*f1 + Pos[i+rows][wsi][0]*f2,
-									Pos[i][wsi][1]*f1 + Pos[i+rows][wsi][1]*f2);
+			game[i]->SetPosition(	Pos[i][wsi][0]*f1 + Pos[i+rows][wsi][0]*f2+THEME.gamegrid_x,
+									Pos[i][wsi][1]*f1 + Pos[i+rows][wsi][1]*f2+THEME.gamegrid_y);
 			
 			game[i]->SetSkew(		Skew[i][0]*f1 + Skew[i+rows][0]*f2,
 									Skew[i][1]*f1 + Skew[i+rows][1]*f2,
@@ -511,8 +511,8 @@ void GuiGameGrid::Draw()
 		int (*Skew)[8]		= VALUE4ROWS(rows, Skew1, Skew2, Skew3);
 		for(int i=rows; i<pagesize; i++)
 		{
-			game[i]->SetPosition(	Pos[i][wsi][0]*f1 + Pos[i-rows][wsi][0]*f2,
-									Pos[i][wsi][1]*f1 + Pos[i-rows][wsi][1]*f2);
+			game[i]->SetPosition(	Pos[i][wsi][0]*f1 + Pos[i-rows][wsi][0]*f2+THEME.gamegrid_x,
+									Pos[i][wsi][1]*f1 + Pos[i-rows][wsi][1]*f2+THEME.gamegrid_y);
 			
 			game[i]->SetSkew(		Skew[i][0]*f1 + Skew[i-rows][0]*f2,
 									Skew[i][1]*f1 + Skew[i-rows][1]*f2,
@@ -926,7 +926,7 @@ void GuiGameGrid::Reload(struct discHdr * l, int count, int Rows, int ListOffset
 		game[i]->SetParent(this);
 		game[i]->SetImage(coverImg[i]);
 		game[i]->SetAlignment(ALIGN_TOP,ALIGN_LEFT);
-		game[i]->SetPosition(Pos[i][wsi][0], Pos[i][wsi][1]);
+		game[i]->SetPosition(Pos[i][wsi][0]+THEME.gamegrid_x, Pos[i][wsi][1]+THEME.gamegrid_y);
 		game[i]->SetSkew(&Skew[i][0]);
 		game[i]->SetTrigger(trigA);
 		game[i]->SetSoundOver(btnSoundOver);
