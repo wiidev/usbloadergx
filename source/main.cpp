@@ -34,6 +34,9 @@
 #include "sys.h"
 #include "wpad.h"
 #include "fat.h"
+#include "gecko.h"
+
+extern bool geckoinit;
 
 /* Constants */
 #define CONSOLE_XCOORD		260
@@ -124,6 +127,8 @@ int
 main(int argc, char *argv[]) {
 
 	setlocale(LC_ALL, "en.UTF-8");
+	geckoinit = InitGecko();
+	gprintf("\nmain(int argc, char *argv[])");
 
     s32 ret;
     bool startupproblem = false;

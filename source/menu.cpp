@@ -48,6 +48,7 @@
 #include "fatmounter.h"
 #include "xml/xml.h"
 #include "wad/title.h"
+#include "gecko.h"
 
 #include "usbloader/wdvd.h"
 
@@ -322,6 +323,7 @@ void DiscListWinUpdateCallback(void * e)
 
 int MenuDiscList() {
 
+	gprintf("\nMenuDiscList()");//testing out the gecko stuff.  this shouldn't break anything, but we'll see
     int startat = 0;
     int offset = 0;
     int datag = 0;

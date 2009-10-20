@@ -12,11 +12,14 @@
 #include "alternatedol.h"
 #include "fstfile.h"
 #include "settings/cfg.h"
+#include "../gecko.h"
 
 /*KENOBI! - FISHEARS*/
 extern const unsigned char kenobiwii[];
 extern const int kenobiwii_size;
 /*KENOBI! - FISHEARS*/
+
+extern bool geckoinit;
 
 /* Apploader function pointers */
 typedef int   (*app_main)(void **dst, int *size, int *offset);
@@ -311,8 +314,8 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
     u32 appldr_len;
     s32 ret;
 	
-	u32 geckoattached = usb_isgeckoalive(EXI_CHANNEL_1);
-	if (geckoattached)usb_flush(EXI_CHANNEL_1);
+	//u32 geckoattached = usb_isgeckoalive(EXI_CHANNEL_1);
+	//if (geckoattached)usb_flush(EXI_CHANNEL_1);
 
     /* Read apploader header */
     ret = WDVD_Read(buffer, 0x20, APPLDR_OFFSET);
@@ -341,7 +344,7 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
         *(u32 *)0x80003140 = *(u32 *)0x80003188;
     }
 
-    if (cheat || geckoattached) {
+    if (cheat || geckoinit) {
         /*HOOKS STUFF - FISHEARS*/
         memset((void*)0x80001800,0,kenobiwii_size);
         memcpy((void*)0x80001800,kenobiwii,kenobiwii_size);
