@@ -106,7 +106,7 @@ static char * number(char * str, long num, int base, int size, int precision
 	return str;
 }
 
-int kvsprintf(char *buf, const char *fmt, va_list args)
+int kvsprintf1(char *buf, const char *fmt, va_list args)
 {
 	int len;
 	unsigned long num;
@@ -298,9 +298,8 @@ void gprintf(const char *str, ...)
 	va_list args;
 
 	va_start(args, str);
-	len=kvsprintf(__outstr,str,args);
+	len=kvsprintf1(__outstr,str,args);
 	va_end(args);
 
-	write(2, __outstr, len);
 	usb_sendbuffer_safe(1,__outstr,len);
 }

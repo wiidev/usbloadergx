@@ -105,6 +105,8 @@ export OUTPUT	:=	$(CURDIR)/$(TARGET)
 $(BUILD):
 	@[ -d $@ ] || mkdir -p $@
 	@make --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
+#	@echo debug...
+#	start geckoreader.exe
 
 #---------------------------------------------------------------------------------
 lang:
@@ -179,6 +181,9 @@ language: $(wildcard $(PROJECTDIR)/Languages/*.lang)
 	@echo $(notdir $<)
 	$(bin2o)
 %.dat.o	:	%.dat
+	@echo $(notdir $<)
+	$(bin2o)
+%.bin.o	:	%.bin
 	@echo $(notdir $<)
 	$(bin2o)
 

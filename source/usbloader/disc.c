@@ -12,7 +12,8 @@
 #include "wdvd.h"
 #include "alternatedol.h"
 #include "memory.h"
-
+#include "../gecko.h"
+    
 /* Constants */
 #define PTABLE_OFFSET	0x40000
 #define WII_MAGIC	0x5D1C9EA3
@@ -149,6 +150,8 @@ void __Disc_SetVMode(u8 videoselected) {
         if (vmode->viTVMode & VI_NON_INTERLACE)
             VIDEO_WaitVSync();
     }
+	gprintf("\nVideo mode - %s",((progressive)?"progressive":"interlaced"));
+    
 }
 
 void __Disc_SetTime(void) {

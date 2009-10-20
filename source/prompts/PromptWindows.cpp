@@ -35,6 +35,10 @@
 #include "xml/xml.h"
 #include "../wad/title.h"
 #include "language/UpdateLanguage.h"
+#include "gecko.h"
+#include "../lstub.h"
+
+
 
 
 /*** Variables that are also used extern ***/
@@ -66,6 +70,7 @@ extern void HaltGui();
  * into the specified variable.
  ***************************************************************************/
 int OnScreenKeyboard(char * var, u32 maxlen, int min) {
+	
     int save = -1;
     int keyset = 0;
     if (Settings.keyset == us) keyset = 0;
@@ -73,6 +78,8 @@ int OnScreenKeyboard(char * var, u32 maxlen, int min) {
     else if (Settings.keyset == euro) keyset = 2;
     else if (Settings.keyset == azerty) keyset = 3;
     else if (Settings.keyset == qwerty) keyset = 4;
+	
+	gprintf("\nOnScreenKeyboard(%s, %i, %i) \n\tkeyset = %i",var,maxlen,min,keyset);
 
     GuiKeyboard keyboard(var, maxlen, min, keyset);
 
@@ -132,6 +139,7 @@ int OnScreenKeyboard(char * var, u32 maxlen, int min) {
     mainWindow->Remove(&keyboard);
     mainWindow->SetState(STATE_DEFAULT);
     ResumeGui();
+	gprintf("\t%s",(save?"saved":"discarded"));
     return save;
 }
 
@@ -140,6 +148,8 @@ int OnScreenKeyboard(char * var, u32 maxlen, int min) {
  * Display credits
  ***************************************************************************/
 void WindowCredits() {
+	gprintf("\nWindowCredits()");
+    
     int angle = 0;
     GuiSound * creditsMusic = NULL;
 
@@ -362,6 +372,7 @@ void WindowCredits() {
  * Display screensaver
  ***************************************************************************/
 int WindowScreensaver() {
+    gprintf("\nWindowScreenSaver()");
     int i = 0;
     bool exit = false;
     //char imgPath[100];//uncomment for themable screensaver
@@ -419,12 +430,13 @@ int WindowScreensaver() {
  * If title/subtitle or one of the buttons is not needed give him a 0 on that
  * place.
  ***************************************************************************/
-int
-WindowPrompt(const char *title, const char *msg, const char *btn1Label,
+int WindowPrompt(const char *title, const char *msg, const char *btn1Label,
              const char *btn2Label, const char *btn3Label,
              const char *btn4Label, int wait) {
     int choice = -1;
     int count = wait;
+	gprintf("\nWindowPrompt(%s, %s, %s, %s, %s, %s, %i)",title,msg,btn1Label,btn2Label, btn3Label,btn4Label,wait);
+    
 
     GuiWindow promptWindow(472,320);
     promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
@@ -654,6 +666,8 @@ WindowPrompt(const char *title, const char *msg, const char *btn1Label,
     mainWindow->Remove(&promptWindow);
     mainWindow->SetState(STATE_DEFAULT);
     ResumeGui();
+	gprintf(" = %i",choice);
+    
     return choice;
 }
 
@@ -671,6 +685,8 @@ int
 WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
                  const char *btn2Label, const char *btn3Label,
                  const char *btn4Label) {
+	gprintf("\nWindowExitPrompt()");
+    
     GuiSound * homein = NULL;
     homein = new GuiSound(menuin_ogg, menuin_ogg_size, SOUND_OGG, Settings.sfxvolume);
     homein->SetVolume(Settings.sfxvolume);
@@ -684,8 +700,13 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 
     int choice = -1;
     char imgPath[100];
-    u8 HBC=0;
-    GuiWindow promptWindow(640,480);
+	
+	u64 oldstub = getStubDest();
+	loadStub();
+	if (oldstub != 0x00010001554c4e52ll && oldstub != 0x00010001554e454fll)
+		Set_Stub(oldstub);
+    
+	GuiWindow promptWindow(640,480);
     promptWindow.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     promptWindow.SetPosition(0, 0);
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
@@ -750,20 +771,9 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
     batteryBtn[3]->SetPosition(494, 150);
 
 
-    char * sig = (char *)0x80001804;
-    if (
-        sig[0] == 'S' &&
-        sig[1] == 'T' &&
-        sig[2] == 'U' &&
-        sig[3] == 'B' &&
-        sig[4] == 'H' &&
-        sig[5] == 'A' &&
-        sig[6] == 'X' &&
-        sig[7] == 'X')
-        HBC=1; // Exit to HBC
+    
 #endif
-
-    GuiTrigger trigA;
+	GuiTrigger trigA;
     trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
     GuiTrigger trigB;
     trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
@@ -795,7 +805,7 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
     GuiButton btn1(&btn1Img,&btn1OverImg, 0, 3, 0, 0, &trigA, &btnSoundOver, &btnClick,0);
     btn1.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
 
-    GuiText btn2Txt((HBC!=1?tr("Homebrew Channel"):btn1Label), 28, (GXColor) {0, 0, 0, 255});
+    GuiText btn2Txt(btn1Label, 28, (GXColor) {0, 0, 0, 255});
     GuiImage btn2Img(&button);
     if (Settings.wsprompt == yes) {
         btn2Txt.SetWidescreen(CFG.widescreen);
@@ -805,9 +815,8 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
     btn2.SetLabel(&btn2Txt);
     btn2.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_IN, 50);
     btn2.SetRumble(false);
-    if (HBC==1) {
-        btn2.SetPosition(-150, 0);
-    }
+    btn2.SetPosition(-150, 0);
+    
 
     GuiText btn3Txt(btn2Label, 28, (GXColor) {0, 0, 0, 255});
     GuiImage btn3Img(&button);
@@ -909,15 +918,7 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
         } else if (btn2.GetState() == STATE_CLICKED) {
             ret = WindowPrompt(tr("Are you sure?"), 0, tr("Yes"), tr("No"));
             if (ret == 1) {
-                if (HBC!=1) {
-                    CloseXMLDatabase();
-                    ExitGUIThreads();
-                    ShutdownAudio();
-                    StopGX();
-                    WII_Initialize();
-					WII_BootHBC();
-                    
-                }
+
                 choice = 2;
             }
             HaltGui();
@@ -1016,6 +1017,7 @@ int GameWindowPrompt() {
     char ID[5];
     char IDFull[7];
 
+    gprintf("\nGameWindowPrompt()");
     GuiWindow promptWindow(472,320);
     promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     promptWindow.SetPosition(0, -10);
@@ -1225,7 +1227,8 @@ int GameWindowPrompt() {
         snprintf (ID,sizeof(ID),"%c%c%c", header->id[0], header->id[1], header->id[2]);
         snprintf (IDFull,sizeof(IDFull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
 
-        if (diskCover)
+        gprintf("\n\t%s",IDFull);
+		if (diskCover)
             delete diskCover;
 			
 		
@@ -1519,6 +1522,7 @@ int GameWindowPrompt() {
     delete diskCover;
     delete diskCover2;
 
+    gprintf("\n\treturn %i",choice);
     return choice;
 }
 
@@ -1722,7 +1726,8 @@ FormatingPartition(const char *title, partitionEntry *entry) {
  ***************************************************************************/
 bool SearchMissingImages(int choice2) {
 	
-	GuiWindow promptWindow(472,320);
+	gprintf("\nSearchMissingImages(%i)",choice2);
+    GuiWindow promptWindow(472,320);
     promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     promptWindow.SetPosition(0, -10);
 
@@ -1819,7 +1824,8 @@ bool SearchMissingImages(int choice2) {
 	__Menu_GetEntries();
     ResumeGui();
 	
-	if (cntMissFiles > 0) { //&& !IsNetworkInit()) {
+	gprintf(" = %i",cntMissFiles);
+    if (cntMissFiles > 0) { //&& !IsNetworkInit()) {
 		NetworkInitPrompt();
 	}
 
@@ -1834,7 +1840,8 @@ bool SearchMissingImages(int choice2) {
  ***************************************************************************/
 bool NetworkInitPrompt() {
 
-	if (IsNetworkInit())
+	gprintf("\nNetworkinitPrompt()");
+    if (IsNetworkInit())
 		return true;
 
     bool success = true;
@@ -2418,6 +2425,7 @@ ProgressDownloadWindow(int choice2) {
 
 int ProgressUpdateWindow() {
 
+    gprintf("\nProgressUpdateWindow(not full channel)");
     int ret = 0, failed = 0, updatemode = -1;
 
     GuiWindow promptWindow(472,320);
@@ -2718,6 +2726,9 @@ int ProgressUpdateWindow() {
 
     if (!failed && ret >= 0 && updatemode == 1) {
         WindowPrompt(tr("Successfully Updated") , tr("Restarting..."), tr("OK"));
+		
+		loadStub();
+		Set_Stub_Split(0x00010001,"UNEO");
         Sys_BackToLoader();
     } else if(updatemode > 0 && ret > 0) {
         WindowPrompt(tr("Successfully Updated") , 0, tr("OK"));
@@ -2743,6 +2754,7 @@ int ProgressUpdateWindow() {
 int ProgressUpdateWindow() {
     int ret = 0, failed = 0;
 
+    gprintf("\nProgressUpdateWindow(full channel)");
     GuiWindow promptWindow(472,320);
     promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     promptWindow.SetPosition(0, -10);
@@ -3002,14 +3014,16 @@ int ProgressUpdateWindow() {
         } else {
             //sprintf(nipple, tr("The update wad has been saved as %s.  Now let's try to install it."),dolpath);
             //WindowPrompt(0,nipple, tr("OK"));
-            error = Wad_Install(wadFile);
+            gprintf("\n\tinstall wad");
+			error = Wad_Install(wadFile);
             fclose(wadFile);
             if (error==0) {
                 diarhea = remove(dolpath);
                 if (diarhea)
                     WindowPrompt(tr("Success"),tr("The wad file was installed.  But It could not be deleted from the SD card."),tr("OK"));
             } else {
-                sprintf(nipple, tr("The wad installation failed with error %ld"),error);
+                gprintf(" -> failed");
+				sprintf(nipple, tr("The wad installation failed with error %ld"),error);
                 WindowPrompt(tr("Error"),nipple,tr("OK"));
             }
         }
@@ -3022,7 +3036,8 @@ int ProgressUpdateWindow() {
         ExitGUIThreads();
         ShutdownAudio();
         StopGX();
-        WII_Initialize();
+        gprintf("\nRebooting");
+		WII_Initialize();
         WII_LaunchTitle(TITLE_ID(0x00010001,0x554c4e52));
     }
 

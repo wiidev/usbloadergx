@@ -12,7 +12,7 @@
 #include "alternatedol.h"
 #include "fstfile.h"
 #include "settings/cfg.h"
-#include "../gecko.h"
+#include "gecko.h"
 
 /*KENOBI! - FISHEARS*/
 extern const unsigned char kenobiwii[];
@@ -313,6 +313,7 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
 
     u32 appldr_len;
     s32 ret;
+	gprintf("\nApploader_Run() started");
 	
 	//u32 geckoattached = usb_isgeckoalive(EXI_CHANNEL_1);
 	//if (geckoattached)usb_flush(EXI_CHANNEL_1);
@@ -345,6 +346,7 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
     }
 
     if (cheat || geckoinit) {
+//		gprintf("\n\tkenobiwii loaded");
         /*HOOKS STUFF - FISHEARS*/
         memset((void*)0x80001800,0,kenobiwii_size);
         memcpy((void*)0x80001800,kenobiwii,kenobiwii_size);
@@ -375,6 +377,7 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
 
     /** Load alternate dol if set **/
     if (alternatedol == 1) {
+//		gprintf("\n\talt dol from FAT");
         void *dolbuffer;
         int dollen;
 
@@ -396,6 +399,7 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
             free(dolbuffer);
 
     } else if (alternatedol == 2) {
+//		gprintf("\n\talt dol from WBFS");
 
         FST_ENTRY *fst = (FST_ENTRY *)*(u32 *)0x80000038;
 

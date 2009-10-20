@@ -18,9 +18,8 @@
 #include "settings/cfg.h"
 #include "memory.h"
 #include "../wad/title.h"
+#include "../gecko.h"
 #include "../patches/dvd_broadway.h"
-
-#define BC 		0x0000000100000100ULL
 
 /*** Extern functions ***/
 extern void ResumeGui();
@@ -36,6 +35,7 @@ extern u8 mountMethod;
 *Disk Browser
 *********************************************************************************/
 int DiscBrowse(struct discHdr * header) {
+	gprintf("\nDiscBrowser() started");
     bool exit = false;
     int ret, choice;
     u64 offset;
@@ -134,7 +134,7 @@ int DiscBrowse(struct discHdr * header) {
             dolfilecount++;
         }
     }
-
+	gprintf("\n%i alt dols found",dolfilecount);
     if (dolfilecount <= 0) {
         WindowPrompt(tr("ERROR"), tr("No DOL file found on disc."), tr("OK"));
         free(fstbuffer);
@@ -238,6 +238,7 @@ int DiscBrowse(struct discHdr * header) {
 
 
 int autoSelectDol(const char *id, bool force) {
+	gprintf("\nautoSelectDol() started");
 
 	char id4[10];
 	sprintf(id4,"%c%c%c%c",id[0],id[1],id[2],id[3]);
@@ -499,6 +500,7 @@ void __dvd_readidcb(s32 result)
 }
 
 u8 DiscMount(discHdr *header) {
+	gprintf("\nDiscMount() ");
     int ret;
 	HaltGui();
 	

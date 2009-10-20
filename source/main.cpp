@@ -35,6 +35,7 @@
 #include "wpad.h"
 #include "fat.h"
 #include "gecko.h"
+#include "svnrev.h"
 
 extern bool geckoinit;
 
@@ -128,7 +129,11 @@ main(int argc, char *argv[]) {
 
 	setlocale(LC_ALL, "en.UTF-8");
 	geckoinit = InitGecko();
+	gprintf("\x1b[2J");
+	gprintf("------------------");
+	gprintf("\nUSB Loader GX rev%s",GetRev());
 	gprintf("\nmain(int argc, char *argv[])");
+	
 
     s32 ret;
     bool startupproblem = false;
@@ -141,7 +146,7 @@ main(int argc, char *argv[]) {
         } else if (!strncasecmp(argv[0], "sd:/", 4))
             bootDevice_found = true;
     }
-
+	
     /** PAD_Init has to be before InitVideo don't move that **/
     PAD_Init(); // initialize PAD/WPAD
 	
@@ -160,7 +165,7 @@ main(int argc, char *argv[]) {
             SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
         }
     }
-
+	
     ret = WBFS_Init(WBFS_DEVICE_USB);
 
     if (ret < 0) {
@@ -189,6 +194,7 @@ main(int argc, char *argv[]) {
 
     SDCard_Init(); // mount SD for loading cfg's
     USBDevice_Init(); // and mount USB:/
+	gprintf("\n\tSD and USB Init OK");
 
     if (!bootDevice_found) {
         //try USB
@@ -201,6 +207,7 @@ main(int argc, char *argv[]) {
 
     gettextCleanUp();
     CFG_Load();
+	gprintf("\n\tbootDevice = %s",bootDevice);
 
     /* Load Custom IOS */
     if (Settings.cios == ios222 && IOS_GetVersion() != 222) {
@@ -235,6 +242,7 @@ main(int argc, char *argv[]) {
         sleep(5);
         SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
     }
+	gprintf("\n\tcIOS = %u (Rev %u)",IOS_GetVersion(), IOS_GetRevision());
 
     //! Init the rest of the System
     Sys_Init();

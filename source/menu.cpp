@@ -398,15 +398,6 @@ int MenuDiscList() {
     GuiImageData btnsdcard(imgPath, sdcard_png);
 
 
-    snprintf(imgPath, sizeof(imgPath), "%sbattery.png", CFG.theme_path);
-    GuiImageData battery(imgPath, battery_png);
-    snprintf(imgPath, sizeof(imgPath), "%sbattery_bar.png", CFG.theme_path);
-    GuiImageData batteryBar(imgPath, battery_bar_png);
-	snprintf(imgPath, sizeof(imgPath), "%sbattery_red.png", CFG.theme_path);
-    GuiImageData batteryRed(imgPath, battery_red_png);
-	snprintf(imgPath, sizeof(imgPath), "%sbattery_bar_red.png", CFG.theme_path);
-    GuiImageData batteryBarRed(imgPath, battery_bar_red_png);
-
     snprintf(imgPath, sizeof(imgPath), "%sfavIcon.png", CFG.theme_path);
     GuiImageData imgfavIcon(imgPath, favIcon_png);
     snprintf(imgPath, sizeof(imgPath), "%sfavIcon_gray.png", CFG.theme_path);
@@ -864,6 +855,7 @@ int MenuDiscList() {
     while (menu == MENU_NONE) {
 
         if (idiotFlag==1) {
+			gprintf("\n\tIdiot flag");
             char idiotBuffer[200];
             snprintf(idiotBuffer, sizeof(idiotBuffer), "%s (%s). %s",tr("You have attempted to load a bad image"),
                      idiotChar,tr("Most likely it has dimensions that are not evenly divisible by 4."));
@@ -922,12 +914,14 @@ int MenuDiscList() {
                                                                                                                                                                                                                                                                                                                                                                                                 if ((datagB<1)&&(Settings.cios==1)&&(Settings.video == ntsc)&&(Settings.hddinfo == hr12)&&(Settings.qboot==1)&&(Settings.wsprompt==0)&&(Settings.language==ger)&&(Settings.tooltips==0)){dataed=1;dataef=1;}if (dataef==1){if (cosa>7){cosa=1;}datag++;if (sina==3){wiiBtn.SetAlignment(ALIGN_LEFT,ALIGN_BOTTOM);wiiBtnImg.SetAngle(0);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((cosa)*70),(-2*(datag)+120));}else if(62<=datag){wiiBtn.SetPosition(((cosa)*70),((datag*2)-130));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==2){wiiBtn.SetAlignment(ALIGN_RIGHT,ALIGN_TOP);wiiBtnImg.SetAngle(270);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((-2*(datag)+130)),((cosa)*50));}else if(62<=datag){wiiBtn.SetPosition((2*(datag)-120),((cosa)*50));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==1){wiiBtn.SetAlignment(ALIGN_TOP,ALIGN_LEFT);wiiBtnImg.SetAngle(180);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((cosa)*70),(2*(datag)-120));}else if(62<=datag){wiiBtn.SetPosition(((cosa)*70),(-2*(datag)+130));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==0){wiiBtn.SetAlignment(ALIGN_TOP,ALIGN_LEFT);wiiBtnImg.SetAngle(90);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((2*(datag)-130)),((cosa)*50));}else if(62<=datag){wiiBtn.SetPosition((-2*(datag)+120),((cosa)*50));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}}
         // respond to button presses
         if (shutdown == 1) {
+            gprintf("\n\tshutdown");
             Sys_Shutdown();
         }
         if (reset == 1)
             Sys_Reboot();
 
         if (updateavailable == true) {
+            gprintf("\n\tUpdate Available");
             HaltGui();
             GuiWindow ww(640,480);
             w.SetState(STATE_DISABLED);
@@ -943,6 +937,7 @@ int MenuDiscList() {
         if (poweroffBtn.GetState() == STATE_CLICKED) {
 
 
+            gprintf("\n\tpoweroffBtn clicked");
             choice = WindowPrompt(tr("How to Shutdown?"),0,tr("Full Shutdown"), tr("Shutdown to Idle"), tr("Cancel"));
             if (choice == 2) {
                 Sys_ShutdownToIdel();
@@ -960,7 +955,8 @@ int MenuDiscList() {
             }
 
         } else if (gamecntBtn.GetState() == STATE_CLICKED && mountMethod!=3) {
-			gamecntBtn.ResetState();
+			gprintf("\n\tgameCntBtn clicked");
+            gamecntBtn.ResetState();
 			char linebuf[150];
 			snprintf(linebuf, sizeof(linebuf), "%s %sGameList ?",tr("Save Game List to"), Settings.update_path);
 			choice = WindowPrompt(0,linebuf,"TXT","CSV",tr("Back"));
@@ -974,6 +970,7 @@ int MenuDiscList() {
 			break;
 
         } else if (homeBtn.GetState() == STATE_CLICKED) {
+            gprintf("\n\thomeBtn clicked");
             s32 thetimeofbg = bgMusic->GetPlayTime();
             bgMusic->Stop();
             choice = WindowExitPrompt(tr("Exit USB Loader GX?"),0, tr("Back to Loader"),tr("Wii Menu"),tr("Back"),0);
@@ -1001,6 +998,8 @@ int MenuDiscList() {
             }
 
         } else if (wiiBtn.GetState() == STATE_CLICKED) {
+			gprintf("\n\twiiBtn clicked");
+            
             dataed++;
             wiiBtn.ResetState();
             if (Settings.gameDisplay==list) {
@@ -1011,6 +1010,7 @@ int MenuDiscList() {
                 gameCarousel->SetFocus(1);
             }
         } else if (installBtn.GetState() == STATE_CLICKED) {
+            gprintf("\n\tinstallBtn clicked");
             choice = WindowPrompt(tr("Install a game"),0,tr("Yes"),tr("No"));
             if (choice == 1) {
                 menu = MENU_INSTALL;
@@ -1026,6 +1026,7 @@ int MenuDiscList() {
                 }
             }
         }else if ((covert & 0x2)&&(covert!=covertOld)) {
+            gprintf("\n\tNew Disc Detected");
             choice = WindowPrompt(tr("New Disc Detected"),0,tr("Install"),tr("Mount DVD drive"),tr("Cancel"));
             if (choice == 1) {
                 menu = MENU_INSTALL;
@@ -1046,6 +1047,7 @@ int MenuDiscList() {
         }
 
         else if (sdcardBtn.GetState() == STATE_CLICKED) {
+            gprintf("\n\tsdCardBtn Clicked");
             SDCard_deInit();
             SDCard_Init();
             if (Settings.gameDisplay==list) {
@@ -1069,6 +1071,7 @@ int MenuDiscList() {
         }
 
         else if (DownloadBtn.GetState() == STATE_CLICKED) {
+            gprintf("\n\tDownloadBtn Clicked");
             if (isInserted(bootDevice)) {
                 choice = WindowPrompt(tr("Cover Download"), 0, tr("Normal Covers"), tr("3D Covers"), tr("Disc Images"), tr("Back")); // ask for download choice
                 if (choice != 0) {
@@ -1110,6 +1113,7 @@ int MenuDiscList() {
         }//end download
 
         else if (settingsBtn.GetState() == STATE_CLICKED) {
+            gprintf("\n\tsettingsBtn Clicked");
             if (Settings.gameDisplay==list) {
                 startat = gameBrowser->GetSelectedOption();
                 offset = gameBrowser->GetOffset();
@@ -1126,6 +1130,7 @@ int MenuDiscList() {
         }
 
         else if (favoriteBtn.GetState() == STATE_CLICKED) {
+            gprintf("\n\tfavoriteBtn Clicked");
             Settings.fave=!Settings.fave;
             if (isInserted(bootDevice)) {
                 cfg_save_global();
@@ -1138,6 +1143,7 @@ int MenuDiscList() {
 
         else if (searchBtn.GetState() == STATE_CLICKED && mountMethod!=3) {
 
+            gprintf("\n\tsearchBtn Clicked");
             show_searchwindow=!show_searchwindow;
 			HaltGui();
 			if(searchBar)
@@ -1219,6 +1225,7 @@ int MenuDiscList() {
 		}
 		
         else if (abcBtn.GetState() == STATE_CLICKED) {
+            gprintf("\n\tabcBtn clicked");
             if (Settings.sort != all) {
                 Settings.sort=all;
                 if (isInserted(bootDevice)) {
@@ -1233,6 +1240,7 @@ int MenuDiscList() {
         }
 
         else if (countBtn.GetState() == STATE_CLICKED) {
+            gprintf("\n\tcountBtn Clicked");
             if (Settings.sort != pcount) {
                 Settings.sort=pcount;
                 //if(isSdInserted()) {
@@ -1249,6 +1257,7 @@ int MenuDiscList() {
         }
 
         else if (listBtn.GetState() == STATE_CLICKED) {
+            gprintf("\n\tlistBtn Clicked");
             if (Settings.gameDisplay!=list) {
                 Settings.gameDisplay=list;
                 menu = MENU_DISCLIST;
@@ -1264,6 +1273,7 @@ int MenuDiscList() {
 
 
         else if (gridBtn.GetState() == STATE_CLICKED) {
+            gprintf("\n\tgridBtn Clicked");
             if (Settings.gameDisplay!=grid) {
 
                 Settings.gameDisplay=grid;
@@ -1279,6 +1289,7 @@ int MenuDiscList() {
         }
 
         else if (carouselBtn.GetState() == STATE_CLICKED) {
+            gprintf("\n\tcarouselBtn Clicked");
             if (Settings.gameDisplay!=carousel) {
                 Settings.gameDisplay=carousel;
                 menu = MENU_DISCLIST;
@@ -1291,10 +1302,12 @@ int MenuDiscList() {
                 carouselBtn.ResetState();
             }
         } else if (homebrewBtn.GetState() == STATE_CLICKED) {
+            gprintf("\n\thomebrewBtn Clicked");
             menu = MENU_HOMEBREWBROWSE;
             break;
         } else if (gameInfo.GetState() == STATE_CLICKED && mountMethod!=3) {
-		    gameInfo.ResetState();
+		    gprintf("\n\tgameinfo Clicked");
+            gameInfo.ResetState();
 			if(selectImg1>=0 && selectImg1<(s32)gameCnt) {
                 gameSelected = selectImg1;
                 rockout();
@@ -1311,7 +1324,8 @@ int MenuDiscList() {
 			}
         }
 		else if (dvdBtn.GetState() == STATE_CLICKED) {
-			mountMethodOLD = (mountMethod==3?mountMethod:0);
+			gprintf("\n\tdvdBtn Clicked");
+            mountMethodOLD = (mountMethod==3?mountMethod:0);
                 
 				mountMethod=DiscMount(dvdheader);
 				dvdBtn.ResetState();
@@ -1431,7 +1445,8 @@ int MenuDiscList() {
             }
 			
 			if (idBtn.GetState() == STATE_CLICKED && mountMethod!=3) {
-			struct discHdr * header = &gameList[gameBrowser->GetSelectedOption()];
+			gprintf("\n\tidBtn Clicked");
+            struct discHdr * header = &gameList[gameBrowser->GetSelectedOption()];
                     //enter new game ID
 					char entered[10];
                     snprintf(entered, sizeof(entered), "%s", IDfull);
@@ -1507,7 +1522,8 @@ int MenuDiscList() {
                     sprintf(nipple, "%s%s.gct",Settings.Cheatcodespath,IDfull);
                     exeFile = fopen (nipple ,"rb");
                     if (exeFile==NULL) {
-                        sprintf(nipple, "%s %s",nipple,tr("does not exist!  Loading game without cheats."));
+                        gprintf("\n\ttried to load missing gct.");
+						sprintf(nipple, "%s %s",nipple,tr("does not exist!  Loading game without cheats."));
                         WindowPrompt(tr("Error"),nipple,NULL,NULL,NULL,NULL,170);
                     } else {
                         fseek (exeFile, 0, SEEK_END);
@@ -1515,7 +1531,8 @@ int MenuDiscList() {
                         rewind (exeFile);
                         fclose(exeFile);
                         if (size>2056) {
-                            sprintf(nipple, "%s %s",nipple,tr("contains over 255 lines of code.  It will produce unexpected results."));
+                            gprintf("\n\tgct is too big");
+							sprintf(nipple, "%s %s",nipple,tr("contains over 255 lines of code.  It will produce unexpected results."));
                             WindowPrompt(tr("Error"),nipple,NULL,NULL,NULL,NULL,170);
                         }
                     }
@@ -1537,6 +1554,8 @@ int MenuDiscList() {
                     playcount += 1;
 
                     CFG_save_game_num(header->id);
+					gprintf("\n\tplaycount for %c%c%c%c%c%c raised to %i",header->id[0],header->id[1],header->id[2],header->id[3],header->id[4],header->id[5],playcount);
+					
                 }
                 menu = MENU_EXIT;
                 break;
@@ -1555,7 +1574,8 @@ int MenuDiscList() {
                         sprintf(nipple, "%s%s.dol",Settings.dolpath,IDfull);
                         exeFile = fopen (nipple ,"rb");
                         if (exeFile==NULL) {
-                            sprintf(nipple, "%s %s",nipple,tr("does not exist!  You Messed something up, Idiot."));
+                            gprintf("\n\tTried to load alt dol that isn't there");
+							sprintf(nipple, "%s %s",nipple,tr("does not exist!  You Messed something up, Idiot."));
                             WindowPrompt(tr("Error"),nipple,tr("OK"));
                             menu = MENU_CHECK;
                             wiilight(0);
@@ -1569,7 +1589,8 @@ int MenuDiscList() {
                         sprintf(nipple, "%s%s.gct",Settings.Cheatcodespath,IDfull);
                         exeFile = fopen (nipple ,"rb");
                         if (exeFile==NULL) {
-                            sprintf(nipple, "%s %s",nipple,tr("does not exist!  Loading game without cheats."));
+                            gprintf("\n\ttried to load gct file that isn't there");
+							sprintf(nipple, "%s %s",nipple,tr("does not exist!  Loading game without cheats."));
                             WindowPrompt(tr("Error"),nipple,NULL,NULL,NULL,NULL,170);
                         } else {
                             fseek (exeFile, 0, SEEK_END);
@@ -1577,7 +1598,8 @@ int MenuDiscList() {
                             rewind (exeFile);
                             fclose(exeFile);
                             if (size>2056) {
-                                sprintf(nipple, "%s %s",nipple,tr("contains over 255 lines of code.  It will produce unexpected results."));
+                                gprintf("\n\tgct file is too big");
+								sprintf(nipple, "%s %s",nipple,tr("contains over 255 lines of code.  It will produce unexpected results."));
                                 WindowPrompt(tr("Error"),nipple,NULL,NULL,NULL,NULL,170);
                             }
                         }
@@ -1722,6 +1744,8 @@ int MenuDiscList() {
  ***************************************************************************/
 
 static int MenuInstall() {
+	gprintf("\nMenuInstall()");
+    
     int menu = MENU_NONE;
     static struct discHdr headerdisc ATTRIBUTE_ALIGN(32);
 
@@ -2036,6 +2060,7 @@ static int MenuFormat() {
  * MenuCheck
  ***************************************************************************/
 static int MenuCheck() {
+	gprintf("\nMenuCheck()");
     int menu = MENU_NONE;
     int i = 0;
     int choice;
@@ -2192,6 +2217,7 @@ int MainMenu(int menu) {
 		WindowPrompt(0,tmp,0,0,0,0,100);
 	}
 	*/
+	gprintf("\nExiting main GUI");
     CloseXMLDatabase();
     ExitGUIThreads();
     bgMusic->Stop();
@@ -2217,18 +2243,22 @@ int MainMenu(int menu) {
 			u32 tid;
 			sprintf(tmp,"%c%c%c%c",header->id[0],header->id[1],header->id[2],header->id[3]);
 			memcpy(&tid, tmp, 4);
+			gprintf("\nBooting title %016llx",TITLE_ID((header->id[5]=='1'?0x00010001:0x00010002),tid));
 			WII_Initialize();
 			WII_LaunchTitle(TITLE_ID((header->id[5]=='1'?0x00010001:0x00010002),tid));
 	}
 	if (mountMethod==2)
 	{
+		gprintf("\nLoading BC for GameCube");
 		WII_Initialize();
 		WII_LaunchTitle(0x0000000100000100ULL);
 	}
 
     if (boothomebrew == 1) {
+		gprintf("\nBootHomebrew");
         BootHomebrew(Settings.selected_homebrew);
     } else if (boothomebrew == 2) {
+		gprintf("\nBootHomebrewFromMenu");
         BootHomebrewFromMem();
     } else {
 
@@ -2299,12 +2329,16 @@ int MainMenu(int menu) {
 		{		
 			ret = Disc_SetUSB(header->id);
 			if (ret < 0) Sys_BackToLoader();
+			gprintf("\n\tUSB set to game");
+					
 		}
+		else gprintf("\n\tUSB not set, loading DVD");
         ret = Disc_Open();
         if (ret < 0) Sys_BackToLoader();
 
         SDCard_deInit();
         USBDevice_deInit();
+		gprintf("\n\tSD and USB DeInit");
 
         if (gameList){
 			free(gameList);
@@ -2441,7 +2475,7 @@ int MainMenu(int menu) {
             vipatch = 0;
             break;
         }
-
+		gprintf("\n\tDisc_wiiBoot");
         ret = Disc_WiiBoot(videoselected, cheat, vipatch, countrystrings, errorfixer002, alternatedol, alternatedoloffset);
         if (ret < 0) {
             Sys_LoadMenu();
