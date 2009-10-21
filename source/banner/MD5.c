@@ -10,7 +10,7 @@
  * $Id: MD5.c,v 0.6 2005/06/08 18:35:59 crh Exp $
  *
  *
- * Modified by dimok
+ * Modifications and additions by dimok
  *
  * -------------------------------------------------------------------------- **
  *
@@ -82,7 +82,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <malloc.h>
-#include <ogcsys.h>
+#include <ctype.h>
 
 #include "MD5.h"
 
@@ -169,6 +169,8 @@ static const uint32_t T[4][16] =
 #define md5I( X, Y, Z ) ( (Y) ^ ((X) | (~(Z))) )
 
 #define GetLongByte( L, idx ) ((unsigned char)(( L >> (((idx) & 0x03) << 3) ) & 0xFF))
+
+#define STR2HEX(x) ((x >= 0x30) && (x <= 0x39)) ? x - 0x30 : toupper((int)x)-0x37
 
 
 /* -------------------------------------------------------------------------- **
@@ -545,8 +547,8 @@ unsigned char * MD5fromFile(unsigned char *dst, const char *src)
   auth_md5Ctx ctx[1];
 
     FILE * file;
-    u32 blksize = 0;
-    u32 read = 0;
+    unsigned int blksize = 0;
+    unsigned int read = 0;
 
     file = fopen(src, "rb");
 
@@ -557,7 +559,7 @@ unsigned char * MD5fromFile(unsigned char *dst, const char *src)
     (void)auth_md5InitCtx( ctx );             /* Open a context.      */
 
     fseek (file , 0 , SEEK_END);
-    u64 filesize = ftell(file);
+    unsigned long long filesize = ftell(file);
     rewind (file);
 
     if(filesize < 1048576)                  //1MB cache for files bigger than 1 MB
@@ -587,6 +589,43 @@ unsigned char * MD5fromFile(unsigned char *dst, const char *src)
 
     return( dst );                            /* Makes life easy.     */
   } /* auth_md5Sum */
+
+
+const char * MD5ToString(const unsigned char * hash, char * dst)
+{
+    char hexchar[3];
+    short i = 0, n = 0;
+
+    for (i = 0; i < 16; i++)
+    {
+        sprintf(hexchar, "%02X", hash[i]);
+
+        dst[n++] = hexchar[0];
+        dst[n++] = hexchar[1];
+    }
+
+    dst[n] = 0x00;
+
+    return dst;
+}
+
+unsigned char * StringToMD5(const char * hash, unsigned char * dst)
+{
+    char hexchar[2];
+    short i = 0, n = 0;
+
+    for (i = 0; i < 16; i++)
+    {
+        hexchar[0] = hash[n++];
+        hexchar[1] = hash[n++];
+
+        dst[i] = STR2HEX(hexchar[0]);
+        dst[i] <<= 4;
+        dst[i] += STR2HEX(hexchar[1]);
+    }
+
+    return dst;
+}
 
 
 /* ========================================================================== */

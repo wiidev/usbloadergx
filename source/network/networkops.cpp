@@ -187,8 +187,8 @@ s32 download_request(const char * url) {
     }
 
     //Form a nice request header to send to the webserver
-    char header[strlen(path)+strlen(domain)+100];
-    sprintf(header, "GET %s HTTP/1.1\r\nHost: %s\r\nConnection: close\r\n\r\n", path, domain);
+    char header[strlen(path)+strlen(domain)+strlen(url)+100];
+    sprintf(header, "GET %s HTTP/1.1\r\nHost: %s\r\nReferer: %s\r\nConnection: close\r\n\r\n", path, domain, url);
 
     s32 filesize = network_request(header);
 
@@ -254,7 +254,7 @@ int NetworkWait() {
         net_read(connection, &haxx, 8);
 		wiiloadVersion[0] = haxx[4];
 		wiiloadVersion[1] = haxx[5];
-		
+
         net_read(connection, &infilesize, 4);
 
 		if (haxx[4] > 0 || haxx[5] > 4) {

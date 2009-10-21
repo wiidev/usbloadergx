@@ -16,6 +16,8 @@ extern "C"
  *
  * $Id: MD5.h,v 0.6 2005/06/08 18:35:59 crh Exp $
  *
+ * Modifications and additions by dimok
+ *
  * -------------------------------------------------------------------------- **
  *
  * Description:
@@ -85,8 +87,8 @@ extern "C"
 
 typedef struct
   {
-  uint32_t len;
-  uint32_t ABCD[4];
+  unsigned int len;
+  unsigned int ABCD[4];
   int      b_used;
   unsigned char    block[64];
   } auth_md5Ctx;
@@ -233,6 +235,8 @@ unsigned char * MD5fromFile(unsigned char *dst, const char *src);
    * ------------------------------------------------------------------------ **
    */
 
+const char * MD5ToString(const unsigned char *hash, char *dst);
+unsigned char * StringToMD5(const char * hash, unsigned char * dst);
 
 /* ========================================================================== */
 

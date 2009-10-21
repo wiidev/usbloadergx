@@ -23,7 +23,7 @@
 /*** Extern functions ***/
 extern void ResumeGui();
 extern void HaltGui();
-extern bool 
+extern bool
 Database(char* xmlfilepath, char* argdblang, bool argJPtoEN, bool openfile, bool loadtitles, bool keepopen);
 extern void titles_default();
 
@@ -135,7 +135,7 @@ int MenuSettings() {
     GuiText PageindicatorTxt1("1", 22, (GXColor) { 0, 0, 0, 255});
     GuiButton PageIndicatorBtn1(PageindicatorImg1.GetWidth(), PageindicatorImg1.GetHeight());
     PageIndicatorBtn1.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-    PageIndicatorBtn1.SetPosition(200, 400);
+    PageIndicatorBtn1.SetPosition(165, 400);
     PageIndicatorBtn1.SetImage(&PageindicatorImg1);
     PageIndicatorBtn1.SetLabel(&PageindicatorTxt1);
     PageIndicatorBtn1.SetSoundOver(&btnSoundOver);
@@ -147,13 +147,25 @@ int MenuSettings() {
     GuiText PageindicatorTxt2("2", 22, (GXColor) {0, 0, 0, 255});
     GuiButton PageIndicatorBtn2(PageindicatorImg2.GetWidth(), PageindicatorImg2.GetHeight());
     PageIndicatorBtn2.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-    PageIndicatorBtn2.SetPosition(235, 400);
+    PageIndicatorBtn2.SetPosition(200, 400);
     PageIndicatorBtn2.SetImage(&PageindicatorImg2);
     PageIndicatorBtn2.SetLabel(&PageindicatorTxt2);
     PageIndicatorBtn2.SetSoundOver(&btnSoundOver);
     PageIndicatorBtn2.SetSoundClick(&btnClick1);
     PageIndicatorBtn2.SetTrigger(&trigA);
     PageIndicatorBtn2.SetEffectGrow();
+
+    GuiImage PageindicatorImg3(&PageindicatorImgData);
+    GuiText PageindicatorTxt3("3", 22, (GXColor) {0, 0, 0, 255});
+    GuiButton PageIndicatorBtn3(PageindicatorImg3.GetWidth(), PageindicatorImg3.GetHeight());
+    PageIndicatorBtn3.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+    PageIndicatorBtn3.SetPosition(235, 400);
+    PageIndicatorBtn3.SetImage(&PageindicatorImg3);
+    PageIndicatorBtn3.SetLabel(&PageindicatorTxt3);
+    PageIndicatorBtn3.SetSoundOver(&btnSoundOver);
+    PageIndicatorBtn3.SetSoundClick(&btnClick1);
+    PageIndicatorBtn3.SetTrigger(&trigA);
+    PageIndicatorBtn3.SetEffectGrow();
 
     GuiImage GoLeftImg(&arrow_left);
     GuiButton GoLeftBtn(GoLeftImg.GetWidth(), GoLeftImg.GetHeight());
@@ -293,6 +305,7 @@ int MenuSettings() {
             w.Append(&settingsbackground);
             w.Append(&PageIndicatorBtn1);
             w.Append(&PageIndicatorBtn2);
+            w.Append(&PageIndicatorBtn3);
             w.Append(&titleTxt);
             w.Append(&backBtn);
             w.Append(&homo);
@@ -305,6 +318,7 @@ int MenuSettings() {
 
             PageIndicatorBtn1.SetAlpha(255);
             PageIndicatorBtn2.SetAlpha(50);
+            PageIndicatorBtn3.SetAlpha(50);
 
             /** Creditsbutton change **/
             MainButton4.SetImage(&MainButton4Img);
@@ -387,6 +401,7 @@ int MenuSettings() {
             w.Append(&settingsbackground);
             w.Append(&PageIndicatorBtn1);
             w.Append(&PageIndicatorBtn2);
+            w.Append(&PageIndicatorBtn3);
             w.Append(&titleTxt);
             w.Append(&backBtn);
             w.Append(&homo);
@@ -399,6 +414,7 @@ int MenuSettings() {
 
             PageIndicatorBtn1.SetAlpha(50);
             PageIndicatorBtn2.SetAlpha(255);
+            PageIndicatorBtn3.SetAlpha(50);
 
             /** Creditsbutton change **/
             MainButton4.SetImage(&creditsImg);
@@ -444,6 +460,95 @@ int MenuSettings() {
             while (MainButton1.GetEffect() > 0) usleep(50);
 
         }
+        else if ( pageToDisplay == 3 ) {
+            /** Standard procedure made in all pages **/
+            MainButton1.StopEffect();
+            MainButton2.StopEffect();
+            MainButton3.StopEffect();
+            MainButton4.StopEffect();
+
+            if (slidedirection == RIGHT) {
+                MainButton1.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 35);
+                MainButton2.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 35);
+                MainButton3.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 35);
+                MainButton4.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 35);
+                while (MainButton1.GetEffect()>0) usleep(50);
+            } else if (slidedirection == LEFT) {
+                MainButton1.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 35);
+                MainButton2.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 35);
+                MainButton3.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 35);
+                MainButton4.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 35);
+                while (MainButton1.GetEffect()>0) usleep(50);
+            }
+
+            HaltGui();
+
+            snprintf(MainButtonText, sizeof(MainButtonText), "%s", tr("Theme Downloader"));
+            MainButton1Txt.SetText(MainButtonText);
+            snprintf(MainButtonText, sizeof(MainButtonText), "%s", tr(" "));
+            MainButton2Txt.SetText(MainButtonText);
+            snprintf(MainButtonText, sizeof(MainButtonText), "%s", tr(" "));
+            MainButton3Txt.SetText(MainButtonText);
+            snprintf(MainButtonText, sizeof(MainButtonText), "%s", tr(" "));
+            MainButton4Txt.SetText(MainButtonText);
+
+            mainWindow->RemoveAll();
+            mainWindow->Append(&w);
+            w.RemoveAll();
+            w.Append(&settingsbackground);
+            w.Append(&PageIndicatorBtn1);
+            w.Append(&PageIndicatorBtn2);
+            w.Append(&PageIndicatorBtn3);
+            w.Append(&titleTxt);
+            w.Append(&backBtn);
+            w.Append(&homo);
+            w.Append(&GoRightBtn);
+            w.Append(&GoLeftBtn);
+            w.Append(&MainButton1);
+
+            PageIndicatorBtn1.SetAlpha(50);
+            PageIndicatorBtn2.SetAlpha(50);
+            PageIndicatorBtn3.SetAlpha(255);
+
+            /** Disable ability to click through MainButtons */
+            optionBrowser2.SetClickable(false);
+            /** Default no scrollbar and reset position **/
+            optionBrowser2.SetScrollbar(0);
+            optionBrowser2.SetOffset(0);
+
+            MainButton1.StopEffect();
+            MainButton2.StopEffect();
+            MainButton3.StopEffect();
+            MainButton4.StopEffect();
+
+            MainButton1.SetEffectGrow();
+            MainButton2.SetEffectGrow();
+            MainButton3.SetEffectGrow();
+            MainButton4.SetEffectGrow();
+
+            if (slidedirection == FADE) {
+                MainButton1.SetEffect(EFFECT_FADE, 20);
+                MainButton2.SetEffect(EFFECT_FADE, 20);
+                MainButton3.SetEffect(EFFECT_FADE, 20);
+                MainButton4.SetEffect(EFFECT_FADE, 20);
+            } else if (slidedirection == LEFT) {
+                MainButton1.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_IN, 35);
+                MainButton2.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_IN, 35);
+                MainButton3.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_IN, 35);
+                MainButton4.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_IN, 35);
+            } else if (slidedirection == RIGHT) {
+                MainButton1.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_IN, 35);
+                MainButton2.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_IN, 35);
+                MainButton3.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_IN, 35);
+                MainButton4.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_IN, 35);
+            }
+
+            mainWindow->Append(&w);
+
+            ResumeGui();
+
+            while (MainButton1.GetEffect() > 0) usleep(50);
+        }
 
         while (menu == MENU_NONE) {
             VIDEO_WaitVSync ();
@@ -458,6 +563,7 @@ int MenuSettings() {
                     HaltGui();
                     w.Remove(&PageIndicatorBtn1);
                     w.Remove(&PageIndicatorBtn2);
+                    w.Remove(&PageIndicatorBtn3);
                     w.Remove(&GoRightBtn);
                     w.Remove(&GoLeftBtn);
                     w.Remove(&MainButton1);
@@ -711,6 +817,7 @@ int MenuSettings() {
                     HaltGui();
                     w.Remove(&PageIndicatorBtn1);
                     w.Remove(&PageIndicatorBtn2);
+                    w.Remove(&PageIndicatorBtn3);
                     w.Remove(&GoRightBtn);
                     w.Remove(&GoLeftBtn);
                     w.Remove(&MainButton1);
@@ -879,6 +986,7 @@ int MenuSettings() {
                     HaltGui();
                     w.Remove(&PageIndicatorBtn1);
                     w.Remove(&PageIndicatorBtn2);
+                    w.Remove(&PageIndicatorBtn3);
                     w.Remove(&GoRightBtn);
                     w.Remove(&GoLeftBtn);
                     w.Remove(&MainButton1);
@@ -1033,6 +1141,7 @@ int MenuSettings() {
                     HaltGui();
                     w.Remove(&PageIndicatorBtn1);
                     w.Remove(&PageIndicatorBtn2);
+                    w.Remove(&PageIndicatorBtn3);
                     w.Remove(&GoRightBtn);
                     w.Remove(&GoLeftBtn);
                     w.Remove(&MainButton1);
@@ -1167,6 +1276,7 @@ int MenuSettings() {
                     HaltGui();
                     w.Remove(&PageIndicatorBtn1);
                     w.Remove(&PageIndicatorBtn2);
+                    w.Remove(&PageIndicatorBtn3);
                     w.Remove(&GoRightBtn);
                     w.Remove(&GoLeftBtn);
                     w.Remove(&MainButton1);
@@ -1175,7 +1285,7 @@ int MenuSettings() {
                     w.Remove(&MainButton4);
                     titleTxt.SetText(tr("Custom Paths"));
                     exit = false;
-					options2.SetLength(10);
+					options2.SetLength(11);
                     for (int i = 0; i <= MAXOPTIONS; i++) options2.SetName(i, NULL);
                     options2.SetName(0, "%s", tr("3D Cover Path"));
 					options2.SetName(1, "%s", tr("2D Cover Path"));
@@ -1187,6 +1297,7 @@ int MenuSettings() {
                     options2.SetName(7, "%s", tr("TXT Cheatcodes Path"));
                     options2.SetName(8, "%s", tr("DOL Path"));
                     options2.SetName(9, "%s", tr("Homebrew Apps Path"));
+                    options2.SetName(10, "%s", tr("Theme Downloadpath"));
                     for (int i = 0; i <= MAXOPTIONS; i++) options2.SetValue(i, NULL);
 	                optionBrowser2.SetScrollbar(1);
                     w.Append(&optionBrowser2);
@@ -1212,6 +1323,7 @@ int MenuSettings() {
                             options2.SetValue(7, "%s", Settings.TxtCheatcodespath);
                             options2.SetValue(8, "%s", Settings.dolpath);
                             options2.SetValue(9, "%s", Settings.homebrewapps_path);
+                            options2.SetValue(10, "%s", Settings.theme_downloadpath);
 
                             if (backBtn.GetState() == STATE_CLICKED) {
                                 backBtn.ResetState();
@@ -1526,6 +1638,31 @@ int MenuSettings() {
                                     WindowPrompt(tr("Homebrew Appspath change"),tr("Console should be unlocked to modify it."),tr("OK"));
                                 }
                                 break;
+                            case 10:
+                                if ( Settings.godmode == 1) {
+                                    w.Remove(&optionBrowser2);
+                                    w.Remove(&backBtn);
+                                    char entered[43] = "";
+                                    strlcpy(entered, Settings.theme_downloadpath, sizeof(entered));
+                                    titleTxt.SetText(tr("Theme Downloadpath"));
+                                    int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
+                                    titleTxt.SetText(tr("Custom Paths"));
+                                    w.Append(&optionBrowser2);
+                                    w.Append(&backBtn);
+                                    if ( result == 1 ) {
+                                        int len = (strlen(entered)-1);
+                                        if (entered[len] !='/')
+                                            strncat (entered, "/", 1);
+                                        strlcpy(Settings.theme_downloadpath, entered, sizeof(Settings.theme_downloadpath));
+                                        WindowPrompt(tr("Theme Downloadpath changed."),0,tr("OK"));
+                                        if (!isInserted(bootDevice)) {
+                                            WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
+                                        }
+                                    }
+                                } else {
+                                    WindowPrompt(tr("Theme Downloadpath change"),tr("Console should be unlocked to modify it."),tr("OK"));
+                                }
+                                break;
 
                             }
                         }
@@ -1550,6 +1687,7 @@ int MenuSettings() {
                     while (MainButton2.GetEffect() > 0) usleep(50);
                     w.Remove(&PageIndicatorBtn1);
                     w.Remove(&PageIndicatorBtn2);
+                    w.Remove(&PageIndicatorBtn3);
                     w.Remove(&GoRightBtn);
                     w.Remove(&GoLeftBtn);
                     w.Remove(&MainButton1);
@@ -1582,6 +1720,7 @@ int MenuSettings() {
                     while (MainButton3.GetEffect() > 0) usleep(50);
                     w.Remove(&PageIndicatorBtn1);
                     w.Remove(&PageIndicatorBtn2);
+                    w.Remove(&PageIndicatorBtn3);
                     w.Remove(&GoRightBtn);
                     w.Remove(&GoLeftBtn);
                     w.Remove(&MainButton1);
@@ -1624,6 +1763,7 @@ int MenuSettings() {
                     while (MainButton4.GetEffect() > 0) usleep(50);
                     w.Remove(&PageIndicatorBtn1);
                     w.Remove(&PageIndicatorBtn2);
+                    w.Remove(&PageIndicatorBtn3);
                     w.Remove(&GoRightBtn);
                     w.Remove(&GoLeftBtn);
                     w.Remove(&MainButton1);
@@ -1634,6 +1774,17 @@ int MenuSettings() {
                     slidedirection = FADE;
                     pageToDisplay = 2;
                     MainButton4.ResetState();
+                    break;
+                }
+            }
+
+            if(pageToDisplay == 3) {
+                if (MainButton1.GetState() == STATE_CLICKED) {
+                    if (isInserted(bootDevice)) {
+                        cfg_save_global();
+                    }
+                    menu = MENU_THEMEDOWNLOADER;
+                    pageToDisplay = 0;
                     break;
                 }
             }
@@ -1657,7 +1808,7 @@ int MenuSettings() {
                 pageToDisplay--;
                 /** Change direction of the flying buttons **/
                 if (pageToDisplay < 1)
-                    pageToDisplay = 2;
+                    pageToDisplay = 3;
                 slidedirection = LEFT;
                 GoLeftBtn.ResetState();
                 break;
@@ -1666,7 +1817,7 @@ int MenuSettings() {
             if (GoRightBtn.GetState() == STATE_CLICKED) {
                 pageToDisplay++;
                 /** Change direction of the flying buttons **/
-                if (pageToDisplay > 2)
+                if (pageToDisplay > 3)
                     pageToDisplay = 1;
                 slidedirection = RIGHT;
                 GoRightBtn.ResetState();
@@ -1674,7 +1825,7 @@ int MenuSettings() {
             }
 
             if (PageIndicatorBtn1.GetState() == STATE_CLICKED) {
-                if (pageToDisplay == 2) {
+                if (pageToDisplay > 1) {
                     slidedirection = LEFT;
                     pageToDisplay = 1;
                     PageIndicatorBtn1.ResetState();
@@ -1682,13 +1833,27 @@ int MenuSettings() {
                 }
                 PageIndicatorBtn1.ResetState();
             } else if (PageIndicatorBtn2.GetState() == STATE_CLICKED) {
-                if (pageToDisplay == 1) {
+                if (pageToDisplay < 2) {
                     slidedirection = RIGHT;
                     pageToDisplay = 2;
                     PageIndicatorBtn2.ResetState();
                     break;
-                } else
+                } else if (pageToDisplay > 2) {
+                    slidedirection = LEFT;
+                    pageToDisplay = 2;
                     PageIndicatorBtn2.ResetState();
+                    break;
+                }
+                else
+                    PageIndicatorBtn2.ResetState();
+            } else if (PageIndicatorBtn3.GetState() == STATE_CLICKED) {
+                if (pageToDisplay < 3) {
+                    slidedirection = RIGHT;
+                    pageToDisplay = 3;
+                    PageIndicatorBtn3.ResetState();
+                    break;
+                } else
+                    PageIndicatorBtn3.ResetState();
             }
 
             if (homo.GetState() == STATE_CLICKED) {
@@ -1732,7 +1897,7 @@ int MenuSettings() {
 	if (opt_override != opt_overridenew && Settings.titlesOverride==0) {
 		titles_default();
 	}
-	
+
     HaltGui();
 
     mainWindow->RemoveAll();

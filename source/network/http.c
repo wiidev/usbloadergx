@@ -156,7 +156,7 @@ struct block downloadfile(const char *url) {
 
     char domain[domainlength + 1];
     strlcpy(domain, url + strlen("http://"), domainlength+1);
- 
+
     //Parsing of the URL is done, start making an actual connection
     u32 ipaddress = getipbynamecached(domain);
 
@@ -174,9 +174,9 @@ struct block downloadfile(const char *url) {
     }
 
     //Form a nice request header to send to the webserver
-    char* headerformat = "GET %s HTTP/1.0\r\nHost: %s\r\nUser-Agent: USBLoaderGX r%s\r\n\r\n";;
-    char header[strlen(headerformat) + strlen(domain) + strlen(path)];
-    sprintf(header, headerformat, path, domain, GetRev());
+    char* headerformat = "GET %s HTTP/1.1\r\nHost: %s\r\nReferer: %s\r\nUser-Agent: USBLoaderGX r%s\r\n\r\n";;
+    char header[strlen(headerformat) + strlen(domain) + strlen(path)+strlen(url)];
+    sprintf(header, headerformat, path, domain, url, GetRev());
 
     //Do the request and get the response
     send_message(connection, header);

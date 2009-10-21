@@ -52,6 +52,7 @@
 
 #include "usbloader/wdvd.h"
 
+#include "themes/Theme_Downloader.h"
 
 #define MAX_CHARACTERS		38
 
@@ -214,7 +215,7 @@ void ExitGUIThreads() {
 }
 void rockout(int f = 0) {
 
-	
+
     HaltGui();
     int num=(f==2?-1:gameSelected);
 
@@ -271,7 +272,7 @@ GuiImageData *LoadCoverImage(struct discHdr *header, bool Prefere3D, bool noCove
 	{
 		char *coverPath = flag ? Settings.covers_path : Settings.covers2d_path; flag = !flag;
 		//Load full id image
-		snprintf(Path, sizeof(Path), "%s%s.png", coverPath, IDfull);	
+		snprintf(Path, sizeof(Path), "%s%s.png", coverPath, IDfull);
 		delete Cover; Cover = new(std::nothrow) GuiImageData(Path, NULL);
 		//Load short id image
 		if (!Cover || !Cover->GetImage())
@@ -338,7 +339,7 @@ int MenuDiscList() {
 	if (!dvdheader)
 		dvdheader = new struct discHdr;
 	u8 mountMethodOLD =0;
-	
+
 	WDVD_GetCoverStatus(&covert);
     u32 covertOld=covert;
 
@@ -461,19 +462,19 @@ int MenuDiscList() {
     GuiText usedSpaceTxt(spaceinfo, 18, THEME.info);
     usedSpaceTxt.SetAlignment(THEME.hddinfo_align, ALIGN_TOP);
     usedSpaceTxt.SetPosition(THEME.hddinfo_x, THEME.hddinfo_y);
-	
+
 	char GamesCnt[15];
     sprintf(GamesCnt,"%s: %i",(mountMethod!=3?tr("Games"):tr("Channels")), gameCnt);
     GuiText gamecntTxt(GamesCnt, 18, THEME.info);
-    
+
 	GuiButton gamecntBtn(100,18);
 	gamecntBtn.SetAlignment(THEME.gamecount_align, ALIGN_TOP);
     gamecntBtn.SetPosition(THEME.gamecount_x,THEME.gamecount_y);
 	gamecntBtn.SetLabel(&gamecntTxt);
 	gamecntBtn.SetEffectGrow();
 	gamecntBtn.SetTrigger(&trigA);
-	
-	
+
+
 
     GuiTooltip installBtnTT(tr("Install a game"));
     if (Settings.wsprompt == yes)
@@ -737,18 +738,18 @@ int MenuDiscList() {
     idBtn.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     idBtn.SetPosition(THEME.id_x,THEME.id_y);
 
-	
+
 
     if (Settings.godmode == 1 && mountMethod!=3) {//only make the button have trigger & tooltip if in godmode
         DownloadBtn.SetSoundOver(&btnSoundOver);
         DownloadBtn.SetTrigger(&trigA);
         DownloadBtn.SetTrigger(&trig1);
         DownloadBtn.SetToolTip(&DownloadBtnTT,205,-30);
-    
+
 		idBtn.SetSoundOver(&btnSoundOver);
 		idBtn.SetTrigger(&trigA);
 		idBtn.SetToolTip(&IDBtnTT,205,-30);
-		
+
     } else
 		{
         DownloadBtn.SetRumble(false);
@@ -800,7 +801,7 @@ int MenuDiscList() {
     w.Append(&settingsBtn);
     w.Append(&DownloadBtn);
     w.Append(&idBtn);
-	
+
 	// Begin Toolbar
     w.Append(&favoriteBtn);
 	Toolbar[0] = &favoriteBtn;
@@ -820,9 +821,9 @@ int MenuDiscList() {
 	Toolbar[7] = &dvdBtn;
 	w.SetUpdateCallback(DiscListWinUpdateCallback);
 	// End Toolbar
-    
-	
-	
+
+
+
 	if (Settings.godmode == 1)
         w.Append(&homebrewBtn);
 
@@ -848,10 +849,10 @@ int MenuDiscList() {
 		if(searchBar)
 			mainWindow->Append(searchBar);
 	}
-	
+
 	ResumeGui();
-	
-	
+
+
     while (menu == MENU_NONE) {
 
         if (idiotFlag==1) {
@@ -1062,7 +1063,7 @@ int MenuDiscList() {
             }
             if (isInserted(bootDevice)) {
 				HaltGui(); // to fix endless rumble when clicking on the SD icon when rumble is disabled because rumble is set to on in Global_Default()
-				CFG_Load(); 
+				CFG_Load();
 				ResumeGui();
             }
             sdcardBtn.ResetState();
@@ -1181,8 +1182,8 @@ int MenuDiscList() {
 					wcscpy(newFilter, gameFilter);
 				newFilter[len] = searchChar;
 				newFilter[len+1] = 0;
-			
-			
+
+
 				__Menu_GetEntries(0, newFilter);
 				menu = MENU_DISCLIST;
 				break;
@@ -1212,7 +1213,7 @@ int MenuDiscList() {
 					searchBtn.SetImageOver(&searchBtnImg_g);
 					searchBtn.SetAlpha(180);
 				}
-				
+
 				ResumeGui();
 			}
 			else if(searchChar == 8) // Backspace
@@ -1223,7 +1224,7 @@ int MenuDiscList() {
 			}
 
 		}
-		
+
         else if (abcBtn.GetState() == STATE_CLICKED) {
             gprintf("\n\tabcBtn clicked");
             if (Settings.sort != all) {
@@ -1326,7 +1327,7 @@ int MenuDiscList() {
 		else if (dvdBtn.GetState() == STATE_CLICKED) {
 			gprintf("\n\tdvdBtn Clicked");
             mountMethodOLD = (mountMethod==3?mountMethod:0);
-                
+
 				mountMethod=DiscMount(dvdheader);
 				dvdBtn.ResetState();
 
@@ -1379,7 +1380,7 @@ int MenuDiscList() {
                         delete GameRegionTxt;
                         GameRegionTxt = NULL;
                     }
-					
+
                     switch (header->id[3]) {
                     case 'E':
                         sprintf(gameregion,"NTSC U");
@@ -1443,7 +1444,7 @@ int MenuDiscList() {
                     }
                 }
             }
-			
+
 			if (idBtn.GetState() == STATE_CLICKED && mountMethod!=3) {
 			gprintf("\n\tidBtn Clicked");
             struct discHdr * header = &gameList[gameBrowser->GetSelectedOption()];
@@ -1457,13 +1458,13 @@ int MenuDiscList() {
                         //__Menu_GetEntries();
                         menu = MENU_DISCLIST;
                     }
-					
+
 					idBtn.ResetState();
                 }
         }
 
         if (((gameSelected >= 0) && (gameSelected < (s32)gameCnt))
-			|| mountMethod==1 
+			|| mountMethod==1
 			|| mountMethod==2) {
 			if(searchBar)
 			{
@@ -1492,7 +1493,7 @@ int MenuDiscList() {
 			header = (mountMethod==1||mountMethod==2?dvdheader:&gameList[gameSelected]); //reset header
             snprintf (IDfull,sizeof(IDfull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
             struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
-            
+
 			if (game_cfg) {
                 alternatedol = game_cfg->loadalternatedol;
                 ocarinaChoice = game_cfg->ocarina;
@@ -1538,7 +1539,7 @@ int MenuDiscList() {
                     }
 
                 }
-                
+
                 wiilight(0);
                 if (isInserted(bootDevice)) {
                     //////////save game play count////////////////
@@ -1642,7 +1643,7 @@ int MenuDiscList() {
                     wiilight(0);
 					//re-evaluate header now in case they changed games while on the game prompt
                     header = &gameList[gameSelected];
-                    
+
                     //enter new game title
                     char entered[60];
                     snprintf(entered, sizeof(entered), "%s", get_title(header));
@@ -1699,7 +1700,7 @@ int MenuDiscList() {
 		if (game_cfg) {
 			if (game_cfg->alternatedolstart != 0)
 				altdoldefault = false;
-		} 
+		}
 		if (altdoldefault) {
 			int autodol = autoSelectDol((char*)header->id, true);
 			if (autodol>0) {
@@ -1717,11 +1718,11 @@ int MenuDiscList() {
 			}
 		}
 	}
-	
+
 	if (menu == MENU_EXIT) {
 		SDCard_deInit();
 	}
-	
+
 	HaltGui();
 	mainWindow->RemoveAll();
 	mainWindow->Append(bgImg);
@@ -1766,7 +1767,7 @@ static int MenuInstall() {
     GuiImageData batteryRed(imgPath, battery_red_png);
     snprintf(imgPath, sizeof(imgPath), "%sbattery_bar_red.png", CFG.theme_path);
     GuiImageData batteryBarRed(imgPath, battery_bar_red_png);
-	
+
     HaltGui();
     GuiWindow w(screenwidth, screenheight);
 
@@ -2196,6 +2197,9 @@ int MainMenu(int menu) {
         case MENU_SETTINGS:
             currentMenu = MenuSettings();
             break;
+        case MENU_THEMEDOWNLOADER:
+            currentMenu = Theme_Downloader();
+            break;
         case MENU_HOMEBREWBROWSE:
             currentMenu = MenuHomebrewBrowse();
             break;
@@ -2207,7 +2211,7 @@ int MainMenu(int menu) {
             break;
         }
     }
-	
+
 	//MemInfoPrompt();
 	//for testing
 	/*if (mountMethod)
@@ -2231,7 +2235,7 @@ int MainMenu(int menu) {
     delete GameIDTxt;
     delete cover;
     delete coverImg;
-	delete fontClock;	
+	delete fontClock;
 	delete fontSystem;
 	ShutdownAudio();
     StopGX();
@@ -2278,7 +2282,7 @@ int MainMenu(int menu) {
 			if (!altdoldefault) {
 				alternatedol = game_cfg->loadalternatedol;
 				alternatedoloffset = game_cfg->alternatedolstart;
-			}			
+			}
             reloadblock = game_cfg->iosreloadblock;
         } else {
             videoChoice = Settings.video;
@@ -2298,7 +2302,7 @@ int MainMenu(int menu) {
 			}
             reloadblock = off;
         }
-		
+
 		int ios2;
         switch (iosChoice) {
         case i249:
@@ -2325,8 +2329,8 @@ int MainMenu(int menu) {
                 Sys_IosReload(249);
             }
         }
-		if (!mountMethod) 
-		{		
+		if (!mountMethod)
+		{
 			ret = Disc_SetUSB(header->id);
 			if (ret < 0) Sys_BackToLoader();
 			gprintf("\n\tUSB set to game");
@@ -2345,7 +2349,7 @@ int MainMenu(int menu) {
 		}
 		if(dvdheader)
 			delete dvdheader;
-		
+
 		if (reloadblock == on && (IOS_GetVersion() == 222 || IOS_GetVersion() == 223)) {
             patch_cios_data();
             mload_close();

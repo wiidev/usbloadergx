@@ -161,6 +161,9 @@ extern const u32    nocoverFlat_png_size;
 extern const u8     nodisc_png[];
 extern const u32    nodisc_png_size;
 
+extern const u8     theme_dialogue_box_png[];
+extern const u32    theme_dialogue_box_png_size;
+
 extern const u8     button_install_png[];
 extern const u32    button_install_png_size;
 
@@ -220,6 +223,9 @@ extern const u32	wiimote_poweroff_png_size;
 
 extern const u8		dialogue_box_png[];
 extern const u32	dialogue_box_png_size;
+
+extern const u8		theme_box_png[];
+extern const u32	theme_box_png_size;
 
 extern const u8		wiimote_poweroff_over_png[];
 extern const u32	wiimote_poweroff_over_png_size;

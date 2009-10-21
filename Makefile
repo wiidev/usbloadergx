@@ -20,7 +20,7 @@ SOURCES		:=	source source/libwiigui source/images source/fonts source/sounds \
 				source/libwbfs source/unzip source/language source/mload source/patches \
 				source/usbloader source/xml source/network source/settings source/prompts \
 				source/ramdisc source/wad source/banner source/cheats source/homebrewboot \
-				source/themefs
+				source/themes
 DATA		:=	data
 INCLUDES	:=	source
 
@@ -35,7 +35,7 @@ LDFLAGS		=	-g $(MACHDEP) -Wl,-Map,$(notdir $@).map,--section-start,.init=0x80B00
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project
 #---------------------------------------------------------------------------------
-LIBS :=	-lfat -lpngu -lpng -lm -lz -lwiiuse -lbte -lasnd -logc -lfreetype -ltremor -lmxml
+LIBS :=	-lfat -lpngu -lpng -lm -lz -lwiiuse -lbte -lasnd -logc -lfreetype -ltremor -lmxml -ljpeg
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
 # include and lib

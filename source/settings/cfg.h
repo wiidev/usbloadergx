@@ -63,7 +63,7 @@ extern "C" {
 		short gamecarousel_y;
 		short gamecarousel_w;
 		short gamecarousel_h;
-		
+
 		short covers_x;
 		short covers_y;
 
@@ -96,15 +96,15 @@ extern "C" {
 		short hddinfo_align;
 		short hddinfo_x;
 		short hddinfo_y;
-		
+
 		short show_gamecount;
 		short gamecount_align;
 		short gamecount_x;
 		short gamecount_y;
-		
+
 		short show_tooltip;
 		int tooltipAlpha;
-		
+
 		GXColor prompttext;
 		GXColor settingstext;
 		GXColor gametext;
@@ -386,6 +386,7 @@ extern "C" {
         char	covers2d_path[100];
         char	theme_path[100];
         char	wtheme_path[100];
+        char	theme_downloadpath[100];
         char	disc_path[100];
         char	titlestxt_path[100];
         char	language_path[100];

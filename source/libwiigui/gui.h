@@ -560,6 +560,7 @@ class GuiImageData
 		//!\param i Image data
 		GuiImageData(const u8 * i);
 		GuiImageData(const char * imgPath, const u8 * buffer);
+		GuiImageData(const u8 * img, int imgSize);
 		GuiImageData(const char *path, const char *file, const u8 * buffer, bool force_widescreen=false, const u8 * wbuffer=NULL);
 		//!Destructor
 		~GuiImageData();
@@ -572,6 +573,10 @@ class GuiImageData
 		//!Gets the image height
 		//!\return image height
 		int GetHeight();
+		//!LoadJpeg file
+		void LoadJpeg(const u8 *img, int imgSize);
+		//!RawTo4x4RGBA
+		void RawTo4x4RGBA(const unsigned char *src, void *dst, const unsigned int width, const unsigned int height);
 		//!Sets the image to grayscale
 		void SetGrayscale(void);
 	protected:

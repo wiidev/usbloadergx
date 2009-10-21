@@ -197,6 +197,7 @@ void CFG_Default(int widescreen) { // -1 = non forced Mode
         snprintf(Settings.languagefiles_path, sizeof(Settings.languagefiles_path), "%s/config/language/", bootDevice);
         snprintf(Settings.oggload_path, sizeof(Settings.oggload_path), "%s/config/backgroundmusic/", bootDevice);
         snprintf(Settings.update_path, sizeof(Settings.update_path), "%s/apps/usbloader_gx/", bootDevice);
+        snprintf(Settings.theme_downloadpath, sizeof(Settings.theme_downloadpath), "%s/config/themes/", bootDevice);
         snprintf(Settings.homebrewapps_path, sizeof(Settings.homebrewapps_path), "%s/apps/", bootDevice);
         snprintf(Settings.Cheatcodespath, sizeof(Settings.Cheatcodespath), "%s/codes/", bootDevice);
         snprintf(Settings.TxtCheatcodespath, sizeof(Settings.TxtCheatcodespath), "%s/txtcodes/", bootDevice);
@@ -217,10 +218,10 @@ void CFG_Default(int widescreen) { // -1 = non forced Mode
 	THEME.gamecarousel_h = 400;
 	THEME.gamecarousel_x = 0;
 	THEME.gamecarousel_y = -20;
-	
+
 	THEME.covers_x = 26;
 	THEME.covers_y = 58;
-	
+
 	THEME.show_id = 1;
 	THEME.id_x = 68;
 	THEME.id_y = 305;
@@ -240,7 +241,7 @@ void CFG_Default(int widescreen) { // -1 = non forced Mode
 	THEME.setting_y = 371;
 	THEME.install_x = 16;//-280
 	THEME.install_y = 355;
-	
+
 	THEME.clock = (GXColor) {138, 138, 138, 240};
 	THEME.clock_align = CFG_ALIGN_CENTRE;
 	THEME.clock_x = 0;
@@ -390,7 +391,7 @@ void title_set(char *id, char *title) {
 }
 
 void titles_default() {
-	int i;	
+	int i;
 	for (i=0; i<num_title; i++) {
         memcpy(cfg_title[i].id, "", 4);
         cfg_title[i].id[4] = 0;
@@ -497,6 +498,10 @@ void path_set(char *name, char *val) {
     }
     if (strcmp(name, "update_path") == 0) {
         strlcpy(Settings.update_path, val, sizeof(Settings.update_path));
+        return;
+    }
+    if (strcmp(name, "theme_downloadpath") == 0) {
+        strlcpy(Settings.theme_downloadpath, val, sizeof(Settings.theme_downloadpath));
         return;
     }
     if (strcmp(name, "homebrewapps_path") == 0) {
@@ -613,11 +618,11 @@ void theme_set(char *name, char *val) {
 	cfg_name = name;
 	cfg_val = val;
 	int wcoords_idx = -1;
-	
+
 	CFG_COORDS4(gamelist)
 	else CFG_COORDS4(gamegrid)
 	else CFG_COORDS4(gamecarousel)
-	
+
 	else CFG_COORDS2(covers)
 
 	else CFG_BOOL(show_id)
@@ -632,7 +637,7 @@ void theme_set(char *name, char *val) {
 	else CFG_COORDS2(home)
 	else CFG_COORDS2(setting)
 	else CFG_COORDS2(install)
-	
+
 	else CFG_COORDS2(clock)
 	else CFG_ALIGN(clock)
 	else CFG_COLOR(clock)
@@ -662,7 +667,7 @@ void theme_set(char *name, char *val) {
 	else CFG_COORDS2(gamelist_search)
 	else CFG_COORDS2(gamegrid_search)
 	else CFG_COORDS2(gamecarousel_search)
-	
+
 	else CFG_COORDS2(gamelist_abc)
 	else CFG_COORDS2(gamegrid_abc)
 	else CFG_COORDS2(gamecarousel_abc)
@@ -697,7 +702,7 @@ void theme_set(char *name, char *val) {
 			// we must add 320 and sub the half image width to get the correct position.
 			x += 300;
 			// the old stuff is optimized for widescreen.
-			// if no widescreen, we must reposition the pos			
+			// if no widescreen, we must reposition the pos
 			if(!CFG.widescreen) x-=20;
 			// old themes have no search_coords
 			// set the searchIcon to the Position of the favIcon
@@ -719,7 +724,7 @@ void theme_set(char *name, char *val) {
 			// we must add 320 and sub the half image width to get the correct position.
 			x += 300;
 			// the old stuff is optimized for widescreen.
-			// if no widescreen, we must reposition the pos			
+			// if no widescreen, we must reposition the pos
 			if(!CFG.widescreen) x-=12;
 			THEME.gamelist_abc_x = x;
 			THEME.gamegrid_abc_x = THEME.gamecarousel_abc_x = x-WorkAroundBarOffset;
@@ -734,7 +739,7 @@ void theme_set(char *name, char *val) {
 			// we must add 320 and sub the half image width to get the correct position.
 			x += 300;
 			// the old stuff is optimized for widescreen.
-			// if no widescreen, we must reposition the pos			
+			// if no widescreen, we must reposition the pos
 			if(!CFG.widescreen) x-=4;
 			THEME.gamelist_count_x = x;
 			THEME.gamegrid_count_x = THEME.gamecarousel_count_x = x-WorkAroundBarOffset;
@@ -749,7 +754,7 @@ void theme_set(char *name, char *val) {
 			// we must add 320 and sub the half image width to get the correct position.
 			x += 300;
 			// the old stuff is optimized for widescreen.
-			// if no widescreen, we must reposition the pos			
+			// if no widescreen, we must reposition the pos
 			if(!CFG.widescreen) x+=4;
 			THEME.gamelist_list_x = x;
 			THEME.gamegrid_list_x = THEME.gamecarousel_list_x = x-WorkAroundBarOffset;
@@ -764,7 +769,7 @@ void theme_set(char *name, char *val) {
 			// we must add 320 and sub the half image width to get the correct position.
 			x += 300;
 			// the old stuff is optimized for widescreen.
-			// if no widescreen, we must reposition the pos			
+			// if no widescreen, we must reposition the pos
 			if(!CFG.widescreen) x+=12;
 			THEME.gamelist_grid_x = x;
 			THEME.gamegrid_grid_x = THEME.gamecarousel_grid_x = x-WorkAroundBarOffset;
@@ -779,7 +784,7 @@ void theme_set(char *name, char *val) {
 			// we must add 320 and sub the half image width to get the correct position.
 			x += 300;
 			// the old stuff is optimized for widescreen.
-			// if no widescreen, we must reposition the pos			
+			// if no widescreen, we must reposition the pos
 			if(!CFG.widescreen) x+=20;
 			THEME.gamelist_carousel_x = x;
 			THEME.gamegrid_carousel_x = THEME.gamecarousel_carousel_x = x-WorkAroundBarOffset;
@@ -1245,6 +1250,7 @@ bool cfg_save_global() { // save global settings
     fprintf(f, "wiilight = %d\n ", Settings.wiilight);
     fprintf(f, "gameDisplay = %d\n ", Settings.gameDisplay);
     fprintf(f, "update_path = %s\n ", Settings.update_path);
+    fprintf(f, "theme_downloadpath = %s\n ", Settings.theme_downloadpath);
     fprintf(f, "homebrewapps_path = %s\n ", Settings.homebrewapps_path);
     fprintf(f, "Cheatcodespath = %s\n ", Settings.Cheatcodespath);
     fprintf(f, "titlesOverride = %d\n ", Settings.titlesOverride);
@@ -1729,7 +1735,7 @@ void CFG_Load(void) {
 	}
 	if (CONF_GetArea() == CONF_AREA_AUS)
 		strcpy(Settings.db_language,"AU");
-		
+
 	// open database if needed, load titles if needed
 	OpenXMLDatabase(Settings.titlestxt_path,Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true);
 

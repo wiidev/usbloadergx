@@ -28,7 +28,8 @@ enum {
     MENU_CHECK,
     MENU_GAME_SETTINGS,
     MENU_HOMEBREWBROWSE,
-    BOOTHOMEBREW
+    BOOTHOMEBREW,
+    MENU_THEMEDOWNLOADER
 };
 class GuiImageData;
 GuiImageData *LoadCoverImage(struct discHdr *header, bool Prefere3D=true, bool noCover=true);
