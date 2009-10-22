@@ -53,75 +53,75 @@ extern wchar_t *gameFilter;
 *********************************************************************************/
 int TitleBrowser(u32 type) {
 
-    u32 num_titles;
-    u32 titles[100] ATTRIBUTE_ALIGN(32);
-    u32 num_sys_titles;
-    u32 sys_titles[10] ATTRIBUTE_ALIGN(32);
-    s32 ret = -1;
-    int numtitle;//to get rid of a stupid compile wrning
-    //open the database file
-    FILE *f;
-    char path[100];
+	u32 num_titles;
+	u32 titles[100] ATTRIBUTE_ALIGN(32);
+	u32 num_sys_titles;
+	u32 sys_titles[10] ATTRIBUTE_ALIGN(32);
+	s32 ret = -1;
+	int numtitle;//to get rid of a stupid compile wrning
+	//open the database file
+	FILE *f;
+	char path[100];
 
-    ISFS_Initialize();
+	ISFS_Initialize();
 
-    sprintf(path,"%s/config/database.txt",bootDevice);
-    f = fopen(path, "r");
+	sprintf(path,"%s/config/database.txt",bootDevice);
+	f = fopen(path, "r");
 
-    // Get count of titles of our requested type
-    ret = getTitles_TypeCount(type, &num_titles);
-    if (ret < 0) {
-        //printf("\tError! Can't get count of titles! (ret = %d)\n", ret);
-        //exit(1);
-    }
+	// Get count of titles of our requested type
+	ret = getTitles_TypeCount(type, &num_titles);
+	if (ret < 0) {
+		//printf("\tError! Can't get count of titles! (ret = %d)\n", ret);
+		//exit(1);
+	}
 
-    // Get titles of our requested type
-    ret = getTitles_Type(type, titles, num_titles);
-    if (ret < 0) {
-        //printf("\tError! Can't get list of titles! (ret = %d)\n", ret);
-        //exit(1);
-    }
+	// Get titles of our requested type
+	ret = getTitles_Type(type, titles, num_titles);
+	if (ret < 0) {
+		//printf("\tError! Can't get list of titles! (ret = %d)\n", ret);
+		//exit(1);
+	}
 
-    // Get count of system titles
-    ret = getTitles_TypeCount(0x00010002, &num_sys_titles);
-    if (ret < 0) {
-        //printf("\tError! Can't get count of titles! (ret = %d)\n", ret);
-        //exit(1);
-    }
+	// Get count of system titles
+	ret = getTitles_TypeCount(0x00010002, &num_sys_titles);
+	if (ret < 0) {
+		//printf("\tError! Can't get count of titles! (ret = %d)\n", ret);
+		//exit(1);
+	}
 
-    // Get system titles
-    ret = getTitles_Type(0x00010002, sys_titles, num_sys_titles);
-    if (ret < 0) {
-        //printf("\tError! Can't get list of titles! (ret = %d)\n", ret);
-        //exit(1);
-    }
-
-
-    //this array will hold all the names for the titles so we only have to get them one time
-    char name[num_titles+num_sys_titles][50];
-
-    customOptionList options3(num_titles+num_sys_titles+1);
-    //write the titles on the option browser
-    u32 i = 0;
+	// Get system titles
+	ret = getTitles_Type(0x00010002, sys_titles, num_sys_titles);
+	if (ret < 0) {
+		//printf("\tError! Can't get list of titles! (ret = %d)\n", ret);
+		//exit(1);
+	}
 
 
+	//this array will hold all the names for the titles so we only have to get them one time
+	char name[num_titles+num_sys_titles][50];
 
-    //first add the good stuff
-    while (i < num_titles) {
-        //start from the beginning of the file each loop
-        if (f)rewind(f);
-        //char name[50];
-        char text[15];
-        strcpy(name[i],"");//make sure name is empty
-        u8 found=0;
-        //set the title's name, number, ID to text
-        sprintf(text, "%s", titleText(type, titles[i]));
+	customOptionList options3(num_titles+num_sys_titles+1);
+	//write the titles on the option browser
+	u32 i = 0;
 
-        //get name from database cause i dont like the ADT function
-        char line[200];
-        char tmp[50];
-        snprintf(tmp,50," ");
-        
+
+
+	//first add the good stuff
+	while (i < num_titles) {
+		//start from the beginning of the file each loop
+		if (f)rewind(f);
+		//char name[50];
+		char text[15];
+		strcpy(name[i],"");//make sure name is empty
+		u8 found=0;
+		//set the title's name, number, ID to text
+		sprintf(text, "%s", titleText(type, titles[i]));
+
+		//get name from database cause i dont like the ADT function
+		char line[200];
+		char tmp[50];
+		snprintf(tmp,50," ");
+		
 		//check if the content.bin is on the SD card for that game
 		//if there is content.bin,then the game is on the SDmenu and not the wii
 		sprintf(line,"SD:/private/wii/title/%s/content.bin",text);
@@ -373,9 +373,9 @@ int TitleBrowser(u32 type) {
                     //set the title's name, number, ID to text
                     sprintf(text, "%s", titleText(0x00010002, sys_titles[ret-num_titles]));
 
-                    char temp[100];
+                    char temp[112];
                     //prompt to boot selected title
-                    snprintf(temp, sizeof(temp), "%s : %s May not boot correctly if your System Menu is not up to date.",text,name[ret]);
+					snprintf(temp, sizeof(temp), tr("%s : %s May not boot correctly if your System Menu is not up to date."),text,name[ret]);
                     int  choice = WindowPrompt(tr("Boot?"), temp, tr("OK"), tr("Cancel"));
                     if (choice) {//if they say yes
 

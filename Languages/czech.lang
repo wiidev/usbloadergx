@@ -5,13 +5,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-17 17:31+0200\n"
+"POT-Creation-Date: 2009-10-22 15:33+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) \n"
 "Language-Team: r719 - last version on http://volny.cz/djelinek/_USBLoderGX/czech.lang \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+msgid " "
+msgstr ""
 
 msgid " Wad Saved as:"
 msgstr " WAD uložen jako:"
@@ -24,6 +27,10 @@ msgstr " byl uložen. Soubor nebyl zkontrolován. Nekteré cásti kódu nemusí 
 
 msgid " is not on the server."
 msgstr " není na serveru"
+
+#, c-format
+msgid "%s : %s May not boot correctly if your System Menu is not up to date."
+msgstr ""
 
 msgid "0 (Everyone)"
 msgstr "0 (Každý)"
@@ -142,6 +149,9 @@ msgstr "Jste si jisti?"
 msgid "Aug"
 msgstr "Srp"
 
+msgid "Author:"
+msgstr ""
+
 msgid "AutoInit Network"
 msgstr "Automatický start síte"
 
@@ -186,6 +196,9 @@ msgstr "Nelze naformátovat"
 
 msgid "Can't create directory"
 msgstr "Nelze vytvorit adresár"
+
+msgid "Can't create file"
+msgstr ""
 
 msgid "Can't delete:"
 msgstr "Nelze smazat:"
@@ -392,6 +405,9 @@ msgstr "Opravdu smazat:"
 msgid "Do you want to change language?"
 msgstr "Prejete si zmenit jazyk?"
 
+msgid "Do you want to download this theme?"
+msgstr ""
+
 msgid "Do you want to format:"
 msgstr "Prejete si formátovat"
 
@@ -407,6 +423,9 @@ msgstr "Prejete si zaktualizovat vsechny jazykové soubory?"
 msgid "Done!"
 msgstr "Hotovo!"
 
+msgid "Download"
+msgstr ""
+
 msgid "Download Boxart image?"
 msgstr "Stáhnout obal krabicky?"
 
@@ -416,14 +435,26 @@ msgstr "Stáhnout potisk DVD?"
 msgid "Download Now"
 msgstr "Stáhnout nyní"
 
+msgid "Download failed."
+msgstr ""
+
 msgid "Download finished"
 msgstr "Stažení dokonceno"
+
+msgid "Download request failed."
+msgstr ""
 
 msgid "Downloading"
 msgstr "Stahování"
 
+msgid "Downloading Page List:"
+msgstr ""
+
 msgid "Downloading file"
 msgstr "Stahuji soubor"
+
+msgid "Downloading image:"
+msgstr ""
 
 msgid "Dutch"
 msgstr "Dánsky"
@@ -461,8 +492,14 @@ msgstr "Chyba:"
 msgid "Exit USB Loader GX?"
 msgstr "Ukoncit USB Loader GX?"
 
+msgid "Extracting files..."
+msgstr ""
+
 msgid "Failed formating"
 msgstr "Neúspešné formátování"
+
+msgid "Failed to extract."
+msgstr ""
 
 msgid "Failed to open partition"
 msgstr "Nelze otevřít diskový oddíl"
@@ -544,9 +581,6 @@ msgstr "Zmenit cestu pro Homebrew aplikace"
 
 msgid "Homebrew Appspath changed"
 msgstr "Cesta pro Homebrew aplikace zmenena"
-
-msgid "Homebrew Channel"
-msgstr "Homebrew kanál"
 
 msgid "Homebrew Launcher"
 msgstr "Spouštec Homebrew"
@@ -640,11 +674,11 @@ msgstr "Klávesnice"
 msgid "Korean"
 msgstr "Korejsky"
 
+msgid "Language File"
+msgstr "Jazykový soubor"
+
 msgid "Language change:"
 msgstr "Zmena jazyka:"
-
-msgid "Languagefile"
-msgstr "Jazykový soubor"
 
 msgid "Languagepath changed."
 msgstr "Cesta k jazykum zmenena"
@@ -748,6 +782,9 @@ msgstr "Nechybí žádný soubor!"
 
 msgid "No new updates."
 msgstr "Není dostupná žádná aktualizace."
+
+msgid "No themes found on the site."
+msgstr ""
 
 msgid "Normal"
 msgstr "Normální"
@@ -965,6 +1002,9 @@ msgstr "Úspešne zaktualizováno"
 msgid "Successfully deleted:"
 msgstr "Úspešne smazáno:"
 
+msgid "Successfully extracted theme"
+msgstr ""
+
 msgid "Successfully installed:"
 msgstr "Úspešne nainstalováno"
 
@@ -993,6 +1033,18 @@ msgstr "WAD soubor byl nainstalován, ale nelze smazat z SD karty"
 msgid "The wad installation failed with error %ld"
 msgstr "Instalace WAD souboru selhala s chybou %ld"
 
+msgid "Theme Download Path"
+msgstr ""
+
+msgid "Theme Download Path change"
+msgstr ""
+
+msgid "Theme Download Path changed"
+msgstr ""
+
+msgid "Theme Downloader"
+msgstr ""
+
 msgid "Theme Path"
 msgstr "Cesta ke skinum"
 
@@ -1001,6 +1053,9 @@ msgstr "Cesta ke skinum zmenena"
 
 msgid "Theme Path change"
 msgstr "Zmena cesty ke skinum"
+
+msgid "Theme Title:"
+msgstr ""
 
 msgid "Time left:"
 msgstr "Zbývající cas:"
@@ -1013,6 +1068,9 @@ msgstr "Názvy z WiiTDB"
 
 msgid "Tooltips"
 msgstr "Popisky"
+
+msgid "Transfer failed."
+msgstr ""
 
 msgid "USB Device not found"
 msgstr "USB zarízení nenalezeno"
@@ -1041,6 +1099,9 @@ msgstr "Odemknete konzoli pro tuto akci."
 
 msgid "Unlocked"
 msgstr "Odemceno"
+
+msgid "Unsupported format, try to extract manually."
+msgstr ""
 
 msgid "Update"
 msgstr "Aktualizace"
@@ -1191,6 +1252,9 @@ msgstr "za ruzné opravy"
 msgid "for his awesome tool"
 msgstr "za jeho hrozný nástroj"
 
+msgid "for hosting the themes"
+msgstr ""
+
 msgid "for hosting the update files"
 msgstr "za umístení souboru pro aktualizaci "
 
@@ -1211,3 +1275,6 @@ msgstr "z "
 
 msgid "seconds left"
 msgstr "sekund zbývá"
+
+#~ msgid "Homebrew Channel"
+#~ msgstr "Homebrew kanál"

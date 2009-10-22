@@ -5,13 +5,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-17 17:31+0200\n"
+"POT-Creation-Date: 2009-10-22 15:33+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: omercigingelini\n"
 "Language-Team: omercigingelini\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+msgid " "
+msgstr ""
 
 msgid " Wad Saved as:"
 msgstr " Kaydedilen Wad:"
@@ -20,10 +23,14 @@ msgid " could not be downloaded."
 msgstr " indirilemedi."
 
 msgid " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information."
-msgstr " kaydedildi.  Metin daha doğrulanmadı.  Bazı kodlar birbirleriyle doğru şekilde çalışmayabilir.  Herhangi bir problem yaşarsanız, daha fazla bilgi için metin dosyasını gerçek bir metin editörüyle açın"
+msgstr " kaydedildi. Bazı kodlar birbirleriyle doğru şekilde çalışmayabilir. Herhangi bir problem yaşarsanız, daha fazla bilgi için metin dosyasını gerçek bir metin editörüyle açın"
 
 msgid " is not on the server."
 msgstr " sunucuda mevcut değil"
+
+#, c-format
+msgid "%s : %s May not boot correctly if your System Menu is not up to date."
+msgstr ""
 
 msgid "0 (Everyone)"
 msgstr "0 (Herkes)"
@@ -142,6 +149,9 @@ msgstr "Emin misiniz?"
 msgid "Aug"
 msgstr "Ağu"
 
+msgid "Author:"
+msgstr ""
+
 msgid "AutoInit Network"
 msgstr "Ağı ototanımla"
 
@@ -186,6 +196,9 @@ msgstr "Biçimlendirilemiyor"
 
 msgid "Can't create directory"
 msgstr "Klasör olusturulamiyor"
+
+msgid "Can't create file"
+msgstr ""
 
 msgid "Can't delete:"
 msgstr "Silinemiyor"
@@ -392,6 +405,9 @@ msgstr "Gerçekten silmek istiyor musunuz:"
 msgid "Do you want to change language?"
 msgstr "Dili değiştirmek istiyor musunuz?"
 
+msgid "Do you want to download this theme?"
+msgstr ""
+
 msgid "Do you want to format:"
 msgstr "Formatlamak istiyor musunuz:"
 
@@ -407,6 +423,9 @@ msgstr "Tüm dil dosyalarını indirmek/güncellemek istiyor musunuz?"
 msgid "Done!"
 msgstr "Tamam!"
 
+msgid "Download"
+msgstr ""
+
 msgid "Download Boxart image?"
 msgstr "Kutu resmi indirilsin mi?"
 
@@ -416,14 +435,26 @@ msgstr "Disk resmi indirilsin mi?"
 msgid "Download Now"
 msgstr "Şimdi indir"
 
+msgid "Download failed."
+msgstr ""
+
 msgid "Download finished"
 msgstr "Indirme tamamlandı"
+
+msgid "Download request failed."
+msgstr ""
 
 msgid "Downloading"
 msgstr "Indiriliyor"
 
+msgid "Downloading Page List:"
+msgstr ""
+
 msgid "Downloading file"
 msgstr "Indirilen dosya"
+
+msgid "Downloading image:"
+msgstr ""
 
 msgid "Dutch"
 msgstr "Flaman"
@@ -461,8 +492,14 @@ msgstr "Hata:"
 msgid "Exit USB Loader GX?"
 msgstr "USB Loader GX'den çık?"
 
+msgid "Extracting files..."
+msgstr ""
+
 msgid "Failed formating"
 msgstr "Biçimlendirme başarısız"
+
+msgid "Failed to extract."
+msgstr ""
 
 msgid "Failed to open partition"
 msgstr "Bölüm açılamadı"
@@ -544,9 +581,6 @@ msgstr "Homebrew Yazılım Yolu değiştir"
 
 msgid "Homebrew Appspath changed"
 msgstr "Homebrew Yazılım Yolu değişti"
-
-msgid "Homebrew Channel"
-msgstr "Homebrew Kanalı"
 
 msgid "Homebrew Launcher"
 msgstr "Homebrew Başlatıcı"
@@ -640,11 +674,11 @@ msgstr "Klavye"
 msgid "Korean"
 msgstr "Korece"
 
+msgid "Language File"
+msgstr "Dil dosyası"
+
 msgid "Language change:"
 msgstr "Dil değişimi:"
-
-msgid "Languagefile"
-msgstr "Dil dosyası"
 
 msgid "Languagepath changed."
 msgstr "Dil dosya yolu değişti."
@@ -748,6 +782,9 @@ msgstr "Kayıp dosya yok!"
 
 msgid "No new updates."
 msgstr "Güncelleme yok"
+
+msgid "No themes found on the site."
+msgstr ""
 
 msgid "Normal"
 msgstr "Normal"
@@ -965,6 +1002,9 @@ msgstr "Başarıyla Güncellendi"
 msgid "Successfully deleted:"
 msgstr "Başarıyla silindi:"
 
+msgid "Successfully extracted theme"
+msgstr ""
+
 msgid "Successfully installed:"
 msgstr "Başarıyla kuruldu:"
 
@@ -993,6 +1033,18 @@ msgstr "Wad dosyası kuruldu. Fakat SD den silinemedi"
 msgid "The wad installation failed with error %ld"
 msgstr "Wad kurulumu %ld hatasıyla başarısız oldu"
 
+msgid "Theme Download Path"
+msgstr ""
+
+msgid "Theme Download Path change"
+msgstr ""
+
+msgid "Theme Download Path changed"
+msgstr ""
+
+msgid "Theme Downloader"
+msgstr ""
+
 msgid "Theme Path"
 msgstr "Tema Yolu"
 
@@ -1001,6 +1053,9 @@ msgstr "Tema Yolu Değişti"
 
 msgid "Theme Path change"
 msgstr "Tema yolunu değiştir"
+
+msgid "Theme Title:"
+msgstr ""
 
 msgid "Time left:"
 msgstr "Kalan zaman:"
@@ -1013,6 +1068,9 @@ msgstr "WiiTDB deki Başlıklar"
 
 msgid "Tooltips"
 msgstr "Yardımlar"
+
+msgid "Transfer failed."
+msgstr ""
 
 msgid "USB Device not found"
 msgstr "USB Aygıtı bulunamadı"
@@ -1041,6 +1099,9 @@ msgstr "Bu seçeneği kullanmak için konsol kilidini açın"
 
 msgid "Unlocked"
 msgstr "Kilit açıldı"
+
+msgid "Unsupported format, try to extract manually."
+msgstr ""
 
 msgid "Update"
 msgstr "Güncelleme"
@@ -1191,6 +1252,9 @@ msgstr "çeşitli yamalar için"
 msgid "for his awesome tool"
 msgstr "awesome tool için"
 
+msgid "for hosting the themes"
+msgstr ""
+
 msgid "for hosting the update files"
 msgstr "güncelleme dosyalarını sunduğu için"
 
@@ -1211,3 +1275,6 @@ msgstr "./"
 
 msgid "seconds left"
 msgstr "saniye kaldı"
+
+#~ msgid "Homebrew Channel"
+#~ msgstr "Homebrew Kanalı"

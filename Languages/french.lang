@@ -1,17 +1,20 @@
 # USB Loader GX language source file.
-# French V10.5 r799
+# French V10.6 r811
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-17 17:31+0200\n"
+"POT-Creation-Date: 2009-10-22 15:33+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Kin8\n"
 "Language-Team: Badablek, Amour, ikya, dj_skual & Kin8\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+msgid " "
+msgstr ""
 
 msgid " Wad Saved as:"
 msgstr "WAD Sauvegardé sous:"
@@ -20,10 +23,14 @@ msgid " could not be downloaded."
 msgstr " ne peut pas être téléchargé."
 
 msgid " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information."
-msgstr " sauvegardé. En cas de mauvais résultats, ouvrez-le avec un réel éditeur de texte pour obtenir plus d'informations."
+msgstr " sauvegardé. Certains codes ne peuvent fonctionner conjointement. En cas de mauvais résultats, ouvrez-le avec un réel éditeur de texte pour obtenir plus d'informations."
 
 msgid " is not on the server."
 msgstr " indisponible sur le serveur."
+
+#, c-format
+msgid "%s : %s May not boot correctly if your System Menu is not up to date."
+msgstr "%s : %s Peut ne pas démarrer correctement si votre Menu Système n'est pas à jour."
 
 msgid "0 (Everyone)"
 msgstr "0 (Tous 3+)"
@@ -142,6 +149,9 @@ msgstr "Êtes-vous sûr ?"
 msgid "Aug"
 msgstr "Août"
 
+msgid "Author:"
+msgstr "Auteur:"
+
 msgid "AutoInit Network"
 msgstr "AutoInit Réseau"
 
@@ -186,6 +196,9 @@ msgstr "Formatage impossible"
 
 msgid "Can't create directory"
 msgstr "Création du répertoire impossible"
+
+msgid "Can't create file"
+msgstr "Création du fichier impossible"
 
 msgid "Can't delete:"
 msgstr "Impossible de supprimer:"
@@ -392,6 +405,9 @@ msgstr "Voulez-vous vraiment supprimer ?"
 msgid "Do you want to change language?"
 msgstr "Changer de langue ?"
 
+msgid "Do you want to download this theme?"
+msgstr "Voulez-vous télécharger ce thème ?"
+
 msgid "Do you want to format:"
 msgstr "Voulez-vous formater ?"
 
@@ -407,6 +423,9 @@ msgstr "Voulez-vous actualiser/télécharger tous les fichiers langue ?"
 msgid "Done!"
 msgstr "Terminé!"
 
+msgid "Download"
+msgstr "Télécharger"
+
 msgid "Download Boxart image?"
 msgstr "Télécharger les jaquettes ?"
 
@@ -416,14 +435,26 @@ msgstr "Télécharger labels DVD ?"
 msgid "Download Now"
 msgstr "Télécharger"
 
+msgid "Download failed."
+msgstr "Téléchargement échoué."
+
 msgid "Download finished"
 msgstr "Téléchargement terminé"
+
+msgid "Download request failed."
+msgstr "Demande de téléchargement échouée"
 
 msgid "Downloading"
 msgstr "Téléchargement"
 
+msgid "Downloading Page List:"
+msgstr "Chargement Prévisualisations:"
+
 msgid "Downloading file"
 msgstr "Téléchargement du fichier"
+
+msgid "Downloading image:"
+msgstr "Téléchargement de l'image:"
 
 msgid "Dutch"
 msgstr "Néerlandais"
@@ -461,8 +492,14 @@ msgstr "Erreur:"
 msgid "Exit USB Loader GX?"
 msgstr "Quitter USB Loader GX ?"
 
+msgid "Extracting files..."
+msgstr "Extraction des fichiers..."
+
 msgid "Failed formating"
 msgstr "Échec du formatage"
+
+msgid "Failed to extract."
+msgstr "Extraction échouée."
 
 msgid "Failed to open partition"
 msgstr "Échec accès partition"
@@ -544,9 +581,6 @@ msgstr "Dossier Homebrew Apps"
 
 msgid "Homebrew Appspath changed"
 msgstr "Dossier Homebrew Apps modifié"
-
-msgid "Homebrew Channel"
-msgstr "Chaîne Homebrew"
 
 msgid "Homebrew Launcher"
 msgstr "Menu Homebrew"
@@ -640,11 +674,11 @@ msgstr "Clavier"
 msgid "Korean"
 msgstr "Coréen"
 
+msgid "Language File"
+msgstr "Langues"
+
 msgid "Language change:"
 msgstr "Changement Langue:"
-
-msgid "Languagefile"
-msgstr "Langues"
 
 msgid "Languagepath changed."
 msgstr "Dossier Langue changé"
@@ -748,6 +782,9 @@ msgstr "Aucun fichier manquant !"
 
 msgid "No new updates."
 msgstr "Pas de nouvelle Mise à Jour."
+
+msgid "No themes found on the site."
+msgstr "Aucun thème trouvé sur le site."
 
 msgid "Normal"
 msgstr "4:3"
@@ -965,6 +1002,9 @@ msgstr "Mise à Jour terminée"
 msgid "Successfully deleted:"
 msgstr "Supprimé avec succès:"
 
+msgid "Successfully extracted theme"
+msgstr "Succès de l'extraction du thème"
+
 msgid "Successfully installed:"
 msgstr "Installé avec succès:"
 
@@ -993,6 +1033,18 @@ msgstr "Le Wad a été installé. Mais ne peut être supprimé de la carte SD."
 msgid "The wad installation failed with error %ld"
 msgstr "L'installation WAD a échoué avec erreur %ld"
 
+msgid "Theme Download Path"
+msgstr "Dossier Thèmes Téléch."
+
+msgid "Theme Download Path change"
+msgstr "Dossier des Thèmes Téléchargés"
+
+msgid "Theme Download Path changed"
+msgstr "Dossier Thèmes Téléch. modifié"
+
+msgid "Theme Downloader"
+msgstr "Téléchargements Thèmes"
+
 msgid "Theme Path"
 msgstr "Dossier Thème"
 
@@ -1001,6 +1053,9 @@ msgstr "Dossier du thème modifié"
 
 msgid "Theme Path change"
 msgstr "Dossier du thème"
+
+msgid "Theme Title:"
+msgstr "Titre du Thème:"
 
 msgid "Time left:"
 msgstr "Fini dans:"
@@ -1013,6 +1068,9 @@ msgstr "Titres de WiiTDB"
 
 msgid "Tooltips"
 msgstr "Info-bulles"
+
+msgid "Transfer failed."
+msgstr "Echec Transfert"
 
 msgid "USB Device not found"
 msgstr "Périphérique USB introuvable"
@@ -1041,6 +1099,9 @@ msgstr "Cette option requiert le déverrouillage de l'interface."
 
 msgid "Unlocked"
 msgstr "Clic pour verrouiller"
+
+msgid "Unsupported format, try to extract manually."
+msgstr "Format non supporté, essayez d'extraire manuellement."
 
 msgid "Update"
 msgstr "Mise à Jour"
@@ -1190,6 +1251,9 @@ msgstr "pour les divers patchs"
 
 msgid "for his awesome tool"
 msgstr "pour son outil impressionnant"
+
+msgid "for hosting the themes"
+msgstr "pour l'hébergement des thèmes"
 
 msgid "for hosting the update files"
 msgstr "pour l'hébergement des Mises à Jour"

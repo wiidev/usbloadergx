@@ -5,13 +5,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-17 17:31+0200\n"
+"POT-Creation-Date: 2009-10-22 15:33+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: nextos@korea.com\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+msgid " "
+msgstr ""
 
 msgid " Wad Saved as:"
 msgstr " Wad 저장은:"
@@ -24,6 +27,10 @@ msgstr " 저장됨. 문자는 검증되지 않았음. 몇몇의 코드는 정상
 
 msgid " is not on the server."
 msgstr " 은 서버에 없어요."
+
+#, c-format
+msgid "%s : %s May not boot correctly if your System Menu is not up to date."
+msgstr ""
 
 msgid "0 (Everyone)"
 msgstr "0 (모두다)"
@@ -142,6 +149,9 @@ msgstr "확실합니까?"
 msgid "Aug"
 msgstr "8월"
 
+msgid "Author:"
+msgstr ""
+
 msgid "AutoInit Network"
 msgstr "자동네트웍설정"
 
@@ -186,6 +196,9 @@ msgstr "포맷할 수 없습니다."
 
 msgid "Can't create directory"
 msgstr "디렉토리를 만들 수 없습니다"
+
+msgid "Can't create file"
+msgstr ""
 
 msgid "Can't delete:"
 msgstr "삭제할 수 없습니다:"
@@ -392,6 +405,9 @@ msgstr "정말로 삭제하겠습니까:"
 msgid "Do you want to change language?"
 msgstr "정말로 언어를 변경할까요?"
 
+msgid "Do you want to download this theme?"
+msgstr ""
+
 msgid "Do you want to format:"
 msgstr "포맷하겠습니까:"
 
@@ -407,6 +423,9 @@ msgstr "정말로 모든 언어화일을 업데이트하고 다운로드 할까�
 msgid "Done!"
 msgstr "완료!"
 
+msgid "Download"
+msgstr ""
+
 msgid "Download Boxart image?"
 msgstr "박스 이미지를 다운로드 할까요?"
 
@@ -416,14 +435,26 @@ msgstr "디스크이미지를 다운로드 할까요?"
 msgid "Download Now"
 msgstr "다운로드 시작"
 
+msgid "Download failed."
+msgstr ""
+
 msgid "Download finished"
 msgstr "다운로드 완료"
+
+msgid "Download request failed."
+msgstr ""
 
 msgid "Downloading"
 msgstr "다운로딩중"
 
+msgid "Downloading Page List:"
+msgstr ""
+
 msgid "Downloading file"
 msgstr "파일 다운로드 중:"
+
+msgid "Downloading image:"
+msgstr ""
 
 msgid "Dutch"
 msgstr "네덜란드어"
@@ -461,8 +492,14 @@ msgstr "에러:"
 msgid "Exit USB Loader GX?"
 msgstr "USB로더 GX를 종료할까요?"
 
+msgid "Extracting files..."
+msgstr ""
+
 msgid "Failed formating"
 msgstr "포맷 실패"
+
+msgid "Failed to extract."
+msgstr ""
 
 msgid "Failed to open partition"
 msgstr "파티션 열기 실패"
@@ -544,9 +581,6 @@ msgstr "홈브류 경로 변경"
 
 msgid "Homebrew Appspath changed"
 msgstr "홈브류 경로 변경됨"
-
-msgid "Homebrew Channel"
-msgstr "홈브류 채널"
 
 msgid "Homebrew Launcher"
 msgstr "홈브류 런처"
@@ -640,11 +674,11 @@ msgstr "키보드"
 msgid "Korean"
 msgstr "한국어"
 
+msgid "Language File"
+msgstr "언어화일"
+
 msgid "Language change:"
 msgstr "언어 변경:"
-
-msgid "Languagefile"
-msgstr "언어화일"
 
 msgid "Languagepath changed."
 msgstr "언어경로 변경됨."
@@ -748,6 +782,9 @@ msgstr "누락 파일 없음!"
 
 msgid "No new updates."
 msgstr "새로운 업데이트 없음."
+
+msgid "No themes found on the site."
+msgstr ""
 
 msgid "Normal"
 msgstr "일반"
@@ -965,6 +1002,9 @@ msgstr "업데이트 성공"
 msgid "Successfully deleted:"
 msgstr "삭제 성공:"
 
+msgid "Successfully extracted theme"
+msgstr ""
+
 msgid "Successfully installed:"
 msgstr "설치 성공:"
 
@@ -993,6 +1033,18 @@ msgstr "WAD화일이 인스톨됨. 하지만 SD 카드에서 삭제할수 없음
 msgid "The wad installation failed with error %ld"
 msgstr "WAD 인스톨 실패 에러 %ld"
 
+msgid "Theme Download Path"
+msgstr ""
+
+msgid "Theme Download Path change"
+msgstr ""
+
+msgid "Theme Download Path changed"
+msgstr ""
+
+msgid "Theme Downloader"
+msgstr ""
+
 msgid "Theme Path"
 msgstr "테마 경로"
 
@@ -1001,6 +1053,9 @@ msgstr "테마 경로 변경됨"
 
 msgid "Theme Path change"
 msgstr "테마 경로 변경"
+
+msgid "Theme Title:"
+msgstr ""
 
 msgid "Time left:"
 msgstr "남은 시간:"
@@ -1013,6 +1068,9 @@ msgstr "WiiTDB에서 타이틀을"
 
 msgid "Tooltips"
 msgstr "Tooltips"
+
+msgid "Transfer failed."
+msgstr ""
 
 msgid "USB Device not found"
 msgstr "USB 장치가 없습니다."
@@ -1041,6 +1099,9 @@ msgstr "이 옵션을 사용하기 위해 콘솔을 잠금해제"
 
 msgid "Unlocked"
 msgstr "잠금해제"
+
+msgid "Unsupported format, try to extract manually."
+msgstr ""
 
 msgid "Update"
 msgstr "업데이트"
@@ -1191,6 +1252,9 @@ msgstr "디버스 패치를 위하여"
 msgid "for his awesome tool"
 msgstr "훌륭한 툴를 위하여"
 
+msgid "for hosting the themes"
+msgstr ""
+
 msgid "for hosting the update files"
 msgstr "업데이트 화일 호스팅을 위하여"
 
@@ -1211,3 +1275,6 @@ msgstr "중"
 
 msgid "seconds left"
 msgstr "초 남았습니다"
+
+#~ msgid "Homebrew Channel"
+#~ msgstr "홈브류 채널"

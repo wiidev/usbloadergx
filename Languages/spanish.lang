@@ -5,13 +5,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-17 17:31+0200\n"
+"POT-Creation-Date: 2009-10-22 15:33+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Penn\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+msgid " "
+msgstr ""
 
 msgid " Wad Saved as:"
 msgstr " Wad guardado como:"
@@ -20,10 +23,14 @@ msgid " could not be downloaded."
 msgstr " no se pudo descargar."
 
 msgid " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information."
-msgstr " ha sido guardado. El texto no ha sido verificado. Algo del código puede no funcionar bien con algún otro. Si experimentas problemas, abre el texto en un editor de texto real para más información."
+msgstr " ha sido guardado. Algo del código puede no funcionar bien con algún otro. Si experimentas problemas, abre el texto en un editor de texto real para más información."
 
 msgid " is not on the server."
 msgstr " no está en el servidor."
+
+#, c-format
+msgid "%s : %s May not boot correctly if your System Menu is not up to date."
+msgstr ""
 
 msgid "0 (Everyone)"
 msgstr "0 (Todos)"
@@ -142,6 +149,9 @@ msgstr "¿Estás seguro?"
 msgid "Aug"
 msgstr "Ago"
 
+msgid "Author:"
+msgstr ""
+
 msgid "AutoInit Network"
 msgstr "AutoIniciar Conexión"
 
@@ -186,6 +196,9 @@ msgstr "No se pudo formatear"
 
 msgid "Can't create directory"
 msgstr "No se creó directorio"
+
+msgid "Can't create file"
+msgstr ""
 
 msgid "Can't delete:"
 msgstr "No se eliminó:"
@@ -330,7 +343,7 @@ msgid "Delete ?"
 msgstr "¿Borrar?"
 
 msgid "Delete Cheat GCT"
-msgstr ""
+msgstr "Eliminar GCT Trampas"
 
 msgid "Delete Cheat TXT"
 msgstr "Eliminar TXT Trampas"
@@ -392,6 +405,9 @@ msgstr "¿Realmente quieres borrar?:"
 msgid "Do you want to change language?"
 msgstr "¿Quieres cambiar idioma?"
 
+msgid "Do you want to download this theme?"
+msgstr ""
+
 msgid "Do you want to format:"
 msgstr "Quieres formatear:"
 
@@ -407,6 +423,9 @@ msgstr "¿Quieres actualizar/descargar todos los archivos de lenguaje?"
 msgid "Done!"
 msgstr "¡Listo!"
 
+msgid "Download"
+msgstr ""
+
 msgid "Download Boxart image?"
 msgstr "¿Descargar Imágenes?"
 
@@ -416,14 +435,26 @@ msgstr "¿Descargar Img. Disco?"
 msgid "Download Now"
 msgstr "Descargar ahora"
 
+msgid "Download failed."
+msgstr ""
+
 msgid "Download finished"
 msgstr "Descarga completa"
+
+msgid "Download request failed."
+msgstr ""
 
 msgid "Downloading"
 msgstr "Descargando"
 
+msgid "Downloading Page List:"
+msgstr ""
+
 msgid "Downloading file"
 msgstr "Descargando archivo"
+
+msgid "Downloading image:"
+msgstr ""
 
 msgid "Dutch"
 msgstr "Holandés"
@@ -461,8 +492,14 @@ msgstr ""
 msgid "Exit USB Loader GX?"
 msgstr "¿Salir de USB Loader GX?"
 
+msgid "Extracting files..."
+msgstr ""
+
 msgid "Failed formating"
 msgstr "Fallo al formatear"
+
+msgid "Failed to extract."
+msgstr ""
 
 msgid "Failed to open partition"
 msgstr "Fallo al abrir partición"
@@ -544,9 +581,6 @@ msgstr "Cambio Ruta aplic. Homebrew"
 
 msgid "Homebrew Appspath changed"
 msgstr "Ruta aplic. Homebrew cambiada"
-
-msgid "Homebrew Channel"
-msgstr "Canal Homebrew"
 
 msgid "Homebrew Launcher"
 msgstr "Lanzador Homebrew"
@@ -640,11 +674,11 @@ msgstr "Teclado"
 msgid "Korean"
 msgstr "Coreano"
 
+msgid "Language File"
+msgstr "Idioma"
+
 msgid "Language change:"
 msgstr "Cambio de Idioma:"
-
-msgid "Languagefile"
-msgstr "Idioma"
 
 msgid "Languagepath changed."
 msgstr "Ruta de idioma cambiada."
@@ -748,6 +782,9 @@ msgstr "¡No faltan archivos!"
 
 msgid "No new updates."
 msgstr "No hay actualizaciones."
+
+msgid "No themes found on the site."
+msgstr ""
 
 msgid "Normal"
 msgstr ""
@@ -965,6 +1002,9 @@ msgstr "Actualización correcta"
 msgid "Successfully deleted:"
 msgstr "Borrado correctamente:"
 
+msgid "Successfully extracted theme"
+msgstr ""
+
 msgid "Successfully installed:"
 msgstr "Instalado correctamente:"
 
@@ -993,6 +1033,18 @@ msgstr "El archivo wad fue instalado. Pero no pudo ser borrado de la tarj. SD."
 msgid "The wad installation failed with error %ld"
 msgstr "La instalación del wad falló con error %ld"
 
+msgid "Theme Download Path"
+msgstr ""
+
+msgid "Theme Download Path change"
+msgstr ""
+
+msgid "Theme Download Path changed"
+msgstr ""
+
+msgid "Theme Downloader"
+msgstr ""
+
 msgid "Theme Path"
 msgstr "Ruta del Tema"
 
@@ -1001,6 +1053,9 @@ msgstr "Ruta de Tema cambiada"
 
 msgid "Theme Path change"
 msgstr "Cambio Ruta de Tema"
+
+msgid "Theme Title:"
+msgstr ""
 
 msgid "Time left:"
 msgstr "T. rest.:"
@@ -1013,6 +1068,9 @@ msgstr "Títulos WiiTDB"
 
 msgid "Tooltips"
 msgstr "InfoBurbujas"
+
+msgid "Transfer failed."
+msgstr ""
 
 msgid "USB Device not found"
 msgstr "USB no encontrado"
@@ -1041,6 +1099,9 @@ msgstr "Desbloquea la consola para usar esta opción."
 
 msgid "Unlocked"
 msgstr "Desbloqueada"
+
+msgid "Unsupported format, try to extract manually."
+msgstr ""
 
 msgid "Update"
 msgstr "Actualizar"
@@ -1191,6 +1252,9 @@ msgstr "por diversos parches"
 msgid "for his awesome tool"
 msgstr "por su increible app"
 
+msgid "for hosting the themes"
+msgstr ""
+
 msgid "for hosting the update files"
 msgstr "por alojar las actualizaciones"
 
@@ -1211,6 +1275,9 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
+
+#~ msgid "Homebrew Channel"
+#~ msgstr "Canal Homebrew"
 
 #~ msgid "ERROR: USB device could not be loaded!"
 #~ msgstr "ERROR: ¡No se pudo cargar dispositivo USB!"

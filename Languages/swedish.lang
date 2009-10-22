@@ -5,13 +5,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-17 17:31+0200\n"
+"POT-Creation-Date: 2009-10-22 15:33+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+msgid " "
+msgstr ""
 
 msgid " Wad Saved as:"
 msgstr "Wad sparad som:"
@@ -24,6 +27,10 @@ msgstr "har sparats. Texten har inte blivit varifierad. Några av koderna kanske
 
 msgid " is not on the server."
 msgstr "finns inte på servern."
+
+#, c-format
+msgid "%s : %s May not boot correctly if your System Menu is not up to date."
+msgstr ""
 
 msgid "0 (Everyone)"
 msgstr "0 (Alla)"
@@ -142,6 +149,9 @@ msgstr "Är du säker?"
 msgid "Aug"
 msgstr ""
 
+msgid "Author:"
+msgstr ""
+
 msgid "AutoInit Network"
 msgstr "Autoinitiera Nätverk"
 
@@ -186,6 +196,9 @@ msgstr "Kan inte formateras"
 
 msgid "Can't create directory"
 msgstr "Kan inte skapa mapp"
+
+msgid "Can't create file"
+msgstr ""
 
 msgid "Can't delete:"
 msgstr "Kunde inte radera:"
@@ -392,6 +405,9 @@ msgstr "Vill du verkligen radera:"
 msgid "Do you want to change language?"
 msgstr "Vill du byta språk?"
 
+msgid "Do you want to download this theme?"
+msgstr ""
+
 msgid "Do you want to format:"
 msgstr "Vill du formatera:"
 
@@ -407,6 +423,9 @@ msgstr "Vill du uppdatera/ladda ner alla språkfiler?"
 msgid "Done!"
 msgstr "Klar!"
 
+msgid "Download"
+msgstr ""
+
 msgid "Download Boxart image?"
 msgstr "Ladda ner omslagsbild?"
 
@@ -416,14 +435,26 @@ msgstr "Ladda ner skivbild?"
 msgid "Download Now"
 msgstr "Ladda ner nu"
 
+msgid "Download failed."
+msgstr ""
+
 msgid "Download finished"
 msgstr "Nedladdning klar"
+
+msgid "Download request failed."
+msgstr ""
 
 msgid "Downloading"
 msgstr "Laddar ner"
 
+msgid "Downloading Page List:"
+msgstr ""
+
 msgid "Downloading file"
 msgstr "Laddar ner fil:"
+
+msgid "Downloading image:"
+msgstr ""
 
 msgid "Dutch"
 msgstr "Nederländska"
@@ -461,8 +492,14 @@ msgstr "Fel:"
 msgid "Exit USB Loader GX?"
 msgstr "Avsluta USB Loader GX?"
 
+msgid "Extracting files..."
+msgstr ""
+
 msgid "Failed formating"
 msgstr "Formatering misslyckad"
+
+msgid "Failed to extract."
+msgstr ""
 
 msgid "Failed to open partition"
 msgstr "Misslyckades att öppna partition"
@@ -544,9 +581,6 @@ msgstr "Ändra Homebrew Apps"
 
 msgid "Homebrew Appspath changed"
 msgstr "Homebrew Apps ändrad"
-
-msgid "Homebrew Channel"
-msgstr "Homebrew Kanalen"
 
 msgid "Homebrew Launcher"
 msgstr "Homebrew Startare"
@@ -640,11 +674,11 @@ msgstr "Tangentbord"
 msgid "Korean"
 msgstr "Koreanska"
 
+msgid "Language File"
+msgstr ""
+
 msgid "Language change:"
 msgstr "Språkbyte:"
-
-msgid "Languagefile"
-msgstr ""
 
 msgid "Languagepath changed."
 msgstr "Sökväg till språk ändrad"
@@ -748,6 +782,9 @@ msgstr "Inga filer saknas!"
 
 msgid "No new updates."
 msgstr "Inga nya uppdateringar"
+
+msgid "No themes found on the site."
+msgstr ""
 
 msgid "Normal"
 msgstr "Vanlig"
@@ -965,6 +1002,9 @@ msgstr "Uppdateringen lyckades"
 msgid "Successfully deleted:"
 msgstr "Lyckad radering av:"
 
+msgid "Successfully extracted theme"
+msgstr ""
+
 msgid "Successfully installed:"
 msgstr "Lyckad installation av:"
 
@@ -993,6 +1033,18 @@ msgstr "Wad filen har blivit installerad. Men kunde inte raderas från SD-kortet
 msgid "The wad installation failed with error %ld"
 msgstr "Wad installation misslyckades med fel %ld"
 
+msgid "Theme Download Path"
+msgstr ""
+
+msgid "Theme Download Path change"
+msgstr ""
+
+msgid "Theme Download Path changed"
+msgstr ""
+
+msgid "Theme Downloader"
+msgstr ""
+
 msgid "Theme Path"
 msgstr "Tema-mapp"
 
@@ -1001,6 +1053,9 @@ msgstr "Tema-mapp ändrad"
 
 msgid "Theme Path change"
 msgstr "Byt Tema-mapp"
+
+msgid "Theme Title:"
+msgstr ""
 
 msgid "Time left:"
 msgstr "Tid kvar:"
@@ -1013,6 +1068,9 @@ msgstr "Titlar från WiiTDB"
 
 msgid "Tooltips"
 msgstr "Verktygstips"
+
+msgid "Transfer failed."
+msgstr ""
 
 msgid "USB Device not found"
 msgstr "USB-enhet ej hittad"
@@ -1041,6 +1099,9 @@ msgstr "Lås upp konsolen för denna inställning."
 
 msgid "Unlocked"
 msgstr "Upplåst"
+
+msgid "Unsupported format, try to extract manually."
+msgstr ""
 
 msgid "Update"
 msgstr "Uppdatera"
@@ -1191,6 +1252,9 @@ msgstr "för diverse patcher"
 msgid "for his awesome tool"
 msgstr "för hans underbara verktyg"
 
+msgid "for hosting the themes"
+msgstr ""
+
 msgid "for hosting the update files"
 msgstr "för lagring av uppdateringar"
 
@@ -1211,6 +1275,9 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder kvar"
+
+#~ msgid "Homebrew Channel"
+#~ msgstr "Homebrew Kanalen"
 
 #~ msgid "ERROR: USB device could not be loaded!"
 #~ msgstr "FEL: USB-enhet kunde inte laddas!"

@@ -1297,7 +1297,7 @@ int MenuSettings() {
                     options2.SetName(7, "%s", tr("TXT Cheatcodes Path"));
                     options2.SetName(8, "%s", tr("DOL Path"));
                     options2.SetName(9, "%s", tr("Homebrew Apps Path"));
-                    options2.SetName(10, "%s", tr("Theme Downloadpath"));
+                    options2.SetName(10, "%s", tr("Theme Download Path"));
                     for (int i = 0; i <= MAXOPTIONS; i++) options2.SetValue(i, NULL);
 	                optionBrowser2.SetScrollbar(1);
                     w.Append(&optionBrowser2);
@@ -1644,7 +1644,7 @@ int MenuSettings() {
                                     w.Remove(&backBtn);
                                     char entered[43] = "";
                                     strlcpy(entered, Settings.theme_downloadpath, sizeof(entered));
-                                    titleTxt.SetText(tr("Theme Downloadpath"));
+                                    titleTxt.SetText(tr("Theme Download Path"));
                                     int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
                                     titleTxt.SetText(tr("Custom Paths"));
                                     w.Append(&optionBrowser2);
@@ -1654,13 +1654,13 @@ int MenuSettings() {
                                         if (entered[len] !='/')
                                             strncat (entered, "/", 1);
                                         strlcpy(Settings.theme_downloadpath, entered, sizeof(Settings.theme_downloadpath));
-                                        WindowPrompt(tr("Theme Downloadpath changed."),0,tr("OK"));
+                                        WindowPrompt(tr("Theme Download Path changed"),0,tr("OK"));
                                         if (!isInserted(bootDevice)) {
                                             WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
                                         }
                                     }
                                 } else {
-                                    WindowPrompt(tr("Theme Downloadpath change"),tr("Console should be unlocked to modify it."),tr("OK"));
+                                    WindowPrompt(tr("Theme Download Path change"),tr("Console should be unlocked to modify it."),tr("OK"));
                                 }
                                 break;
 

@@ -74,7 +74,7 @@ bool DownloadTheme(const char *url, const char *title)
         if((u32) blocksize > filesize-done)
             blocksize = filesize-done;
 
-        ShowProgress(tr("Downloading file:"), 0, (char*) title, done, filesize, true);
+        ShowProgress(tr("Downloading file"), 0, (char*) title, done, filesize, true);
 
         int ret = network_read(buffer, blocksize);
         if(ret < 0)
@@ -103,7 +103,7 @@ bool DownloadTheme(const char *url, const char *title)
     if(result)
     {
         remove(filepath);
-        WindowPrompt(tr("Successfully extracted theme."), title, tr("OK"));
+        WindowPrompt(tr("Successfully extracted theme"), title, tr("OK"));
     }
     else
         WindowPrompt(tr("Failed to extract."), tr("Unsupported format, try to extract manually."), tr("OK"));
@@ -136,7 +136,7 @@ static void Theme_Prompt(const char *title, const char *author, GuiImageData *th
     GuiTrigger trigB;
     trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 
-    GuiText titleTxt(tr("Themetitle:"), 18, THEME.prompttext);
+    GuiText titleTxt(tr("Theme Title:"), 18, THEME.prompttext);
     titleTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     titleTxt.SetPosition(230, 30);
 
@@ -436,7 +436,7 @@ int Theme_Downloader()
         w.Append(&HomeBtn);
         ResumeGui();
 
-        ShowProgress(tr("Downloading pagelist:"), 0, (char *) "please wait...", 0, pagesize);
+        ShowProgress(tr("Downloading Page List:"), 0, (char *) tr("Please wait..."), 0, pagesize);
 
         snprintf(url, sizeof(url), "%sthemes.php?creator=&sort=1&page=%i", THEME_LINK, currentpage);
 

@@ -284,6 +284,13 @@ void WindowCredits() {
     i++;
     y+=22;
 
+    sprintf(text, "Deak Phreak %s", tr("for hosting the themes"));
+    txt[i] = new GuiText(text);
+    txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+    txt[i]->SetPosition(160,y);
+    i++;
+    y+=22;
+
     txt[i] = new GuiText(tr("Special thanks to:"));
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     txt[i]->SetPosition(10,y);
@@ -372,33 +379,33 @@ void WindowCredits() {
  * Display screensaver
  ***************************************************************************/
 int WindowScreensaver() {
-    gprintf("\nWindowScreenSaver()");
-    int i = 0;
-    bool exit = false;
-    //char imgPath[100];//uncomment for themable screensaver
+	gprintf("\nWindowScreenSaver()");
+	int i = 0;
+	bool exit = false;
+	char imgPath[100];//uncomment for themable screensaver
 
-    /* initialize random seed: */
-    srand ( time(NULL) );
+	/* initialize random seed: */
+	srand ( time(NULL) );
 
-    //snprintf(imgPath, sizeof(imgPath), "%sscreensaver.png", CFG.theme_path);//uncomment for themable screensaver
-    //GuiImageData GXlogo(imgPath, gxlogo_png);//uncomment for themable screensaver
-    GuiImageData GXlogo(gxlogo_png);//comment for themable screensaver
-    GuiImage GXlogoImg(&GXlogo);
-    GXlogoImg.SetPosition(172,152);
-    GXlogoImg.SetAlignment(ALIGN_LEFT,ALIGN_TOP);
+	snprintf(imgPath, sizeof(imgPath), "%sscreensaver.png", CFG.theme_path);//uncomment for themable screensaver
+	GuiImageData GXlogo(imgPath, gxlogo_png);//uncomment for themable screensaver
+	//GuiImageData GXlogo(gxlogo_png);//comment for themable screensaver
+	GuiImage GXlogoImg(&GXlogo);
+	GXlogoImg.SetPosition(172,152);
+	GXlogoImg.SetAlignment(ALIGN_LEFT,ALIGN_TOP);
 
-    GuiImage BackgroundImg(640,480,(GXColor) {0, 0, 0, 255});
-    BackgroundImg.SetPosition(0,0);
-    BackgroundImg.SetAlignment(ALIGN_LEFT,ALIGN_TOP);
+	GuiImage BackgroundImg(640,480,(GXColor) {0, 0, 0, 255});
+	BackgroundImg.SetPosition(0,0);
+	BackgroundImg.SetAlignment(ALIGN_LEFT,ALIGN_TOP);
 
-    GuiWindow screensaverWindow(screenwidth,screenheight);
-    screensaverWindow.Append(&BackgroundImg);
-    screensaverWindow.Append(&GXlogoImg);
+	GuiWindow screensaverWindow(screenwidth,screenheight);
+	screensaverWindow.Append(&BackgroundImg);
+	screensaverWindow.Append(&GXlogoImg);
 
-    HaltGui();
-    mainWindow->SetState(STATE_DISABLED);
-    mainWindow->Append(&screensaverWindow);
-    ResumeGui();
+	HaltGui();
+	mainWindow->SetState(STATE_DISABLED);
+	mainWindow->Append(&screensaverWindow);
+	ResumeGui();
 
     while (!exit) {
         i++;
@@ -2102,7 +2109,7 @@ ProgressDownloadWindow(int choice2) {
                 //Creates URL depending from which Country the game is
                 switch (missingFiles[i][3]) {
                 case 'J':
-				    sprintf(URLFile,"%sJA/%s",server3d,missingFiles[i]);
+					sprintf(URLFile,"%sJA/%s",server3d,missingFiles[i]);
                     break;
                 case 'W':
                     sprintf(URLFile,"%sZH/%s",server3d,missingFiles[i]);
@@ -2555,16 +2562,16 @@ int ProgressUpdateWindow() {
         }
     }
 
-    //make the URL to get XML based on our games
+	//make the URL to get XML based on our games
 	char XMLurl[3540];
 	build_XML_URL(XMLurl,sizeof(XMLurl));
 	
-    if (IsNetworkInit() && ret >= 0) {
+	if (IsNetworkInit() && ret >= 0) {
 
-        updatemode = WindowPrompt(tr("What do you want to update?"), 0, "USBLoader GX", tr("WiiTDB Files"), tr("Languagefile"), tr("Cancel"));
-        mainWindow->SetState(STATE_DISABLED);
-        promptWindow.SetState(STATE_DEFAULT);
-        mainWindow->ChangeFocus(&promptWindow);
+		updatemode = WindowPrompt(tr("What do you want to update?"), 0, "USB Loader GX", tr("WiiTDB Files"), tr("Language File"), tr("Cancel"));
+		mainWindow->SetState(STATE_DISABLED);
+		promptWindow.SetState(STATE_DEFAULT);
+		mainWindow->ChangeFocus(&promptWindow);
 
         if(updatemode == 1) {
 

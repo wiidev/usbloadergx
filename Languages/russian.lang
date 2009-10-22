@@ -5,13 +5,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-17 17:31+0200\n"
+"POT-Creation-Date: 2009-10-22 15:33+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Kir\n"
 "Language-Team: Kir\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+msgid " "
+msgstr ""
 
 msgid " Wad Saved as:"
 msgstr ""
@@ -23,6 +26,10 @@ msgid " has been Saved.  The text has not been verified.  Some of the code may n
 msgstr ""
 
 msgid " is not on the server."
+msgstr ""
+
+#, c-format
+msgid "%s : %s May not boot correctly if your System Menu is not up to date."
 msgstr ""
 
 msgid "0 (Everyone)"
@@ -142,6 +149,9 @@ msgstr "Вы уверены ?"
 msgid "Aug"
 msgstr "Авг"
 
+msgid "Author:"
+msgstr ""
+
 msgid "AutoInit Network"
 msgstr ""
 
@@ -186,6 +196,9 @@ msgstr "Невозможно отформатировать"
 
 msgid "Can't create directory"
 msgstr "Не могу создать папку"
+
+msgid "Can't create file"
+msgstr ""
 
 msgid "Can't delete:"
 msgstr "Невозможно удалить:"
@@ -392,6 +405,9 @@ msgstr "Вы хотите удалить:"
 msgid "Do you want to change language?"
 msgstr "Вы хотите сменить язык ?"
 
+msgid "Do you want to download this theme?"
+msgstr ""
+
 msgid "Do you want to format:"
 msgstr "Вы хотите отформатировать:"
 
@@ -407,6 +423,9 @@ msgstr ""
 msgid "Done!"
 msgstr ""
 
+msgid "Download"
+msgstr ""
+
 msgid "Download Boxart image?"
 msgstr "Скачать обложку диска?"
 
@@ -416,14 +435,26 @@ msgstr "Скачать изображение диска ?"
 msgid "Download Now"
 msgstr "Скачать сейчас"
 
+msgid "Download failed."
+msgstr ""
+
 msgid "Download finished"
 msgstr "Скачивание завершено"
+
+msgid "Download request failed."
+msgstr ""
 
 msgid "Downloading"
 msgstr "Скачиваю"
 
+msgid "Downloading Page List:"
+msgstr ""
+
 msgid "Downloading file"
 msgstr "Скачиваю файл:"
+
+msgid "Downloading image:"
+msgstr ""
 
 msgid "Dutch"
 msgstr "Голландский"
@@ -461,8 +492,14 @@ msgstr ""
 msgid "Exit USB Loader GX?"
 msgstr "Выйти из USB Loader GX?"
 
+msgid "Extracting files..."
+msgstr ""
+
 msgid "Failed formating"
 msgstr "Форматирование не удалось"
+
+msgid "Failed to extract."
+msgstr ""
 
 msgid "Failed to open partition"
 msgstr ""
@@ -544,9 +581,6 @@ msgstr "Изменить путь к хоумбрю-программам"
 
 msgid "Homebrew Appspath changed"
 msgstr "Путь к хоумбрю-программам изменен"
-
-msgid "Homebrew Channel"
-msgstr ""
 
 msgid "Homebrew Launcher"
 msgstr "Загрузчик хоумбрю"
@@ -640,11 +674,11 @@ msgstr "Клавиатура"
 msgid "Korean"
 msgstr "Корейский"
 
+msgid "Language File"
+msgstr ""
+
 msgid "Language change:"
 msgstr "Смена языка:"
-
-msgid "Languagefile"
-msgstr ""
 
 msgid "Languagepath changed."
 msgstr "Путь к языкам изменен"
@@ -748,6 +782,9 @@ msgstr "Файл не найден!"
 
 msgid "No new updates."
 msgstr "Нет обновлений"
+
+msgid "No themes found on the site."
+msgstr ""
 
 msgid "Normal"
 msgstr "Обычный"
@@ -965,6 +1002,9 @@ msgstr "Успешно обновлено"
 msgid "Successfully deleted:"
 msgstr "Успешно удалено:"
 
+msgid "Successfully extracted theme"
+msgstr ""
+
 msgid "Successfully installed:"
 msgstr "Успешно установлено:"
 
@@ -993,6 +1033,18 @@ msgstr ""
 msgid "The wad installation failed with error %ld"
 msgstr "Установка WAD не удалась, код ошибки %ld"
 
+msgid "Theme Download Path"
+msgstr ""
+
+msgid "Theme Download Path change"
+msgstr ""
+
+msgid "Theme Download Path changed"
+msgstr ""
+
+msgid "Theme Downloader"
+msgstr ""
+
 msgid "Theme Path"
 msgstr "Путь к темам"
 
@@ -1001,6 +1053,9 @@ msgstr "путь к темам изменён"
 
 msgid "Theme Path change"
 msgstr "изменить путь к темам"
+
+msgid "Theme Title:"
+msgstr ""
 
 msgid "Time left:"
 msgstr "Осталось времени:"
@@ -1013,6 +1068,9 @@ msgstr "Названия из WiiTDB"
 
 msgid "Tooltips"
 msgstr "Подсказки"
+
+msgid "Transfer failed."
+msgstr ""
 
 msgid "USB Device not found"
 msgstr "USB устройство не найдено"
@@ -1041,6 +1099,9 @@ msgstr "Для изменения параметра разблокируйте 
 
 msgid "Unlocked"
 msgstr "Разблокировано"
+
+msgid "Unsupported format, try to extract manually."
+msgstr ""
 
 msgid "Update"
 msgstr "Обновление"
@@ -1190,6 +1251,9 @@ msgstr "за различные патчи"
 
 msgid "for his awesome tool"
 msgstr "за отличную утилиту"
+
+msgid "for hosting the themes"
+msgstr ""
 
 msgid "for hosting the update files"
 msgstr "за хостинг обновлений"

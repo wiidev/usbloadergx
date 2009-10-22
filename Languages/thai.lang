@@ -1,17 +1,20 @@
 # USB Loader GX language source file.
-# thai.lang - r779
+# thai.lang - r799
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-17 17:31+0200\n"
+"POT-Creation-Date: 2009-10-22 15:33+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Nitro_subzero \n"
 "Language-Team: Nitro_subzero\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+msgid " "
+msgstr ""
 
 msgid " Wad Saved as:"
 msgstr " บันทึก Wad เป็น:"
@@ -24,6 +27,10 @@ msgstr " ถูกบันทึกแล้ว ข้อความยัง�
 
 msgid " is not on the server."
 msgstr " ไม่อยู่บนแม่ข่าย"
+
+#, c-format
+msgid "%s : %s May not boot correctly if your System Menu is not up to date."
+msgstr ""
 
 msgid "0 (Everyone)"
 msgstr "0 (ทุกคน)"
@@ -142,6 +149,9 @@ msgstr "แน่ใจหรือไม่ ?"
 msgid "Aug"
 msgstr "สค."
 
+msgid "Author:"
+msgstr ""
+
 msgid "AutoInit Network"
 msgstr "ทำการเชื่อมต่อเครือข่าย"
 
@@ -186,6 +196,9 @@ msgstr "ไม่สามารถฟอร์แมตได้"
 
 msgid "Can't create directory"
 msgstr "ไม่สามารถสร้างไดเรคทอรี่ได้"
+
+msgid "Can't create file"
+msgstr ""
 
 msgid "Can't delete:"
 msgstr "ไม่สามารถลบได้:"
@@ -392,6 +405,9 @@ msgstr "ต้องการที่จะลบใช่ไหม:"
 msgid "Do you want to change language?"
 msgstr "ต้องการจะเปลี่ยนภาษา ?"
 
+msgid "Do you want to download this theme?"
+msgstr ""
+
 msgid "Do you want to format:"
 msgstr "ต้องการฟอร์แมต:"
 
@@ -407,6 +423,9 @@ msgstr "ต้องการอัพเดทหรือดาวน์โห
 msgid "Done!"
 msgstr "เสร็จ!"
 
+msgid "Download"
+msgstr ""
+
 msgid "Download Boxart image?"
 msgstr "ดาวน์โหลดภาพกล่อง ?"
 
@@ -416,14 +435,26 @@ msgstr "ดาวน์โหลดภาพแผ่น ?"
 msgid "Download Now"
 msgstr "เริ่มการดาวน์โหลด"
 
+msgid "Download failed."
+msgstr ""
+
 msgid "Download finished"
 msgstr "ดาวน์โหลดเสร็จแล้ว"
+
+msgid "Download request failed."
+msgstr ""
 
 msgid "Downloading"
 msgstr "กำลังดาวน์โหลด"
 
+msgid "Downloading Page List:"
+msgstr ""
+
 msgid "Downloading file"
 msgstr "กำลังดาวน์โหลดไฟล์:"
+
+msgid "Downloading image:"
+msgstr ""
 
 msgid "Dutch"
 msgstr "เนเธอร์แลนด์"
@@ -461,8 +492,14 @@ msgstr "ผิดพลาด:"
 msgid "Exit USB Loader GX?"
 msgstr "ปิด USB Loader GX?"
 
+msgid "Extracting files..."
+msgstr ""
+
 msgid "Failed formating"
 msgstr "ฟอร์แมตไม่ได้"
+
+msgid "Failed to extract."
+msgstr ""
 
 msgid "Failed to open partition"
 msgstr "ไม่สามารถเข้าถึงพาร์ทิชั่นได้"
@@ -544,9 +581,6 @@ msgstr "ที่เก็บโปรแกรม Homebrew ถูกเปล�
 
 msgid "Homebrew Appspath changed"
 msgstr "ที่เก็บโปรแกรม Homebrew ถูกเปลี่ยนแปลง"
-
-msgid "Homebrew Channel"
-msgstr "Homebrew Channel"
 
 msgid "Homebrew Launcher"
 msgstr "Homebrew Launcher"
@@ -640,11 +674,11 @@ msgstr "แป้นพิมพ์"
 msgid "Korean"
 msgstr "เกาหลี"
 
+msgid "Language File"
+msgstr "ไฟล์ภาษา"
+
 msgid "Language change:"
 msgstr "เปลี่ยนภาษา:"
-
-msgid "Languagefile"
-msgstr "ไฟล์ภาษา"
 
 msgid "Languagepath changed."
 msgstr "ที่เก็บไฟล์ภาษาถูกเปลี่ยนแปลง"
@@ -705,7 +739,7 @@ msgid "Network init error"
 msgstr "การเชื่อมต่อเครือข่ายผิดพลาด"
 
 msgid "New Disc Detected"
-msgstr ""
+msgstr "พบแผ่นเกมส์ใหม่"
 
 msgid "Next"
 msgstr "ต่อไป"
@@ -748,6 +782,9 @@ msgstr "ไม่มีไฟล์ที่หายไป"
 
 msgid "No new updates."
 msgstr "ไม่มีไฟล์ Update ตัวใหม่"
+
+msgid "No themes found on the site."
+msgstr ""
 
 msgid "Normal"
 msgstr "ปกติ"
@@ -933,7 +970,7 @@ msgid "Sort alphabetically"
 msgstr "เรียงตามตัวอักษร"
 
 msgid "Sort by rank"
-msgstr ""
+msgstr "เรียงตามอันดับ"
 
 msgid "Sort order by most played"
 msgstr "เรียงตามความถี่ในการเล่น"
@@ -965,6 +1002,9 @@ msgstr "อัพเดทสำเร็จ"
 msgid "Successfully deleted:"
 msgstr "ลบสำเร็จ:"
 
+msgid "Successfully extracted theme"
+msgstr ""
+
 msgid "Successfully installed:"
 msgstr "ติดตั้งสำเร็จ:"
 
@@ -993,6 +1033,18 @@ msgstr "ไฟล์ Wad ถูกติดตั้งแล้ว แต่ไ
 msgid "The wad installation failed with error %ld"
 msgstr "การติดตั้งไฟล์ Wad ล้มเหลวด้วยข้อผิดพลาด %ld"
 
+msgid "Theme Download Path"
+msgstr ""
+
+msgid "Theme Download Path change"
+msgstr ""
+
+msgid "Theme Download Path changed"
+msgstr ""
+
+msgid "Theme Downloader"
+msgstr ""
+
 msgid "Theme Path"
 msgstr "ที่อยู่ Theme"
 
@@ -1001,6 +1053,9 @@ msgstr "ที่อยู่ Theme ถูกเปลี่ยนแปลง"
 
 msgid "Theme Path change"
 msgstr "ที่อยู่ Theme ถูกเปลี่ยนแปลง"
+
+msgid "Theme Title:"
+msgstr ""
 
 msgid "Time left:"
 msgstr "เหลือเวลาอีก:"
@@ -1013,6 +1068,9 @@ msgstr "Title จาก WiiTDB"
 
 msgid "Tooltips"
 msgstr "คำแนะนำ"
+
+msgid "Transfer failed."
+msgstr ""
 
 msgid "USB Device not found"
 msgstr "ไม่พบอุปกรณ์ USB"
@@ -1041,6 +1099,9 @@ msgstr "ปลดล๊อค Console ก่อน เพื่อใช้ต�
 
 msgid "Unlocked"
 msgstr "ปลดล๊อค"
+
+msgid "Unsupported format, try to extract manually."
+msgstr ""
 
 msgid "Update"
 msgstr "อัพเดท"
@@ -1153,7 +1214,7 @@ msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 msgstr "URL ของคุณถูกบันทึกใน %sWiiTDB_URL.txt."
 
 msgid "and translaters for language files updates"
-msgstr ""
+msgstr "และผู้แปลภาษาสำหรับการอัพเดท"
 
 msgid "available"
 msgstr "ว่างอยู่"
@@ -1190,6 +1251,9 @@ msgstr "แก้ diverse"
 
 msgid "for his awesome tool"
 msgstr "สำหรับสุดยอด tool ของเค้า"
+
+msgid "for hosting the themes"
+msgstr ""
 
 msgid "for hosting the update files"
 msgstr "สำหรับที่เก็บไฟล์อัพเดท"

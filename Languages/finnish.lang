@@ -5,13 +5,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-17 17:31+0200\n"
+"POT-Creation-Date: 2009-10-22 15:33+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: c64rmx\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+msgid " "
+msgstr ""
 
 msgid " Wad Saved as:"
 msgstr "Wad Tallennettu nimellä:"
@@ -24,6 +27,10 @@ msgstr ""
 
 msgid " is not on the server."
 msgstr "Tiedostoa ei löydy serveriltä"
+
+#, c-format
+msgid "%s : %s May not boot correctly if your System Menu is not up to date."
+msgstr ""
 
 msgid "0 (Everyone)"
 msgstr "0 (Kaikille)"
@@ -142,6 +149,9 @@ msgstr "Oletko varma?"
 msgid "Aug"
 msgstr "elo"
 
+msgid "Author:"
+msgstr ""
+
 msgid "AutoInit Network"
 msgstr "Autom. verkon käynnistys"
 
@@ -186,6 +196,9 @@ msgstr "Ei voida formatoida"
 
 msgid "Can't create directory"
 msgstr "Ei voi luoda kansiota"
+
+msgid "Can't create file"
+msgstr ""
 
 msgid "Can't delete:"
 msgstr "Ei voida poistaa:"
@@ -392,6 +405,9 @@ msgstr "Haluatko varmasti formatoida:"
 msgid "Do you want to change language?"
 msgstr "Haluatko vaihtaa kielen?"
 
+msgid "Do you want to download this theme?"
+msgstr ""
+
 msgid "Do you want to format:"
 msgstr "Haluatko formatoida:"
 
@@ -407,6 +423,9 @@ msgstr "Haluatko päivittää/ladata kaikki kielitiedostot?"
 msgid "Done!"
 msgstr "Valmis!"
 
+msgid "Download"
+msgstr ""
+
 msgid "Download Boxart image?"
 msgstr "Lataa kansikuva?"
 
@@ -416,14 +435,26 @@ msgstr "Lataa levykuva?"
 msgid "Download Now"
 msgstr "Lataa nyt"
 
+msgid "Download failed."
+msgstr ""
+
 msgid "Download finished"
 msgstr "Lataus valmistunut"
+
+msgid "Download request failed."
+msgstr ""
 
 msgid "Downloading"
 msgstr "Lataa"
 
+msgid "Downloading Page List:"
+msgstr ""
+
 msgid "Downloading file"
 msgstr "Lataa tiedostoa:"
+
+msgid "Downloading image:"
+msgstr ""
 
 msgid "Dutch"
 msgstr "Hollanti"
@@ -461,8 +492,14 @@ msgstr "Virhe:"
 msgid "Exit USB Loader GX?"
 msgstr "Poistu USB Loader GX:stä?"
 
+msgid "Extracting files..."
+msgstr ""
+
 msgid "Failed formating"
 msgstr "Formatointi ei onnistunut"
+
+msgid "Failed to extract."
+msgstr ""
 
 msgid "Failed to open partition"
 msgstr "Osion avaus epäonnistui"
@@ -544,9 +581,6 @@ msgstr "Homebrew Apps polunvaihto"
 
 msgid "Homebrew Appspath changed"
 msgstr "Homebrew Apps polku vaihdettu"
-
-msgid "Homebrew Channel"
-msgstr ""
 
 msgid "Homebrew Launcher"
 msgstr ""
@@ -640,11 +674,11 @@ msgstr "Näppäimistö"
 msgid "Korean"
 msgstr "Korea"
 
+msgid "Language File"
+msgstr "KieliTiedosto"
+
 msgid "Language change:"
 msgstr "Kielen vaihto"
-
-msgid "Languagefile"
-msgstr "Kielitiedosto"
 
 msgid "Languagepath changed."
 msgstr "Kielen polku vaihdettu"
@@ -748,6 +782,9 @@ msgstr "Ei tiedostoja kadoksissa!"
 
 msgid "No new updates."
 msgstr "Ei uusia päivityksiä"
+
+msgid "No themes found on the site."
+msgstr ""
 
 msgid "Normal"
 msgstr "Normaali"
@@ -965,6 +1002,9 @@ msgstr "Päivitetty onnistuneesti"
 msgid "Successfully deleted:"
 msgstr "Poistettu onnistuneesti:"
 
+msgid "Successfully extracted theme"
+msgstr ""
+
 msgid "Successfully installed:"
 msgstr "Asennettu onnistuneesti:"
 
@@ -993,6 +1033,18 @@ msgstr "Wad tiedostoa ei asennettu mutta sitä ei voitu tuhota SD-kortilta"
 msgid "The wad installation failed with error %ld"
 msgstr "Wad asennus epäonnistui: %ld"
 
+msgid "Theme Download Path"
+msgstr ""
+
+msgid "Theme Download Path change"
+msgstr ""
+
+msgid "Theme Download Path changed"
+msgstr ""
+
+msgid "Theme Downloader"
+msgstr ""
+
 msgid "Theme Path"
 msgstr "Teeman sijainti"
 
@@ -1001,6 +1053,9 @@ msgstr "Teeman sijainti muutettu"
 
 msgid "Theme Path change"
 msgstr "Teeman sijainti"
+
+msgid "Theme Title:"
+msgstr ""
 
 msgid "Time left:"
 msgstr "Aikaa jäljellä:"
@@ -1013,6 +1068,9 @@ msgstr "Nimet WiiTDB:stä"
 
 msgid "Tooltips"
 msgstr "Vinkit"
+
+msgid "Transfer failed."
+msgstr ""
 
 msgid "USB Device not found"
 msgstr "USB-laitetta ei löytynyt"
@@ -1041,6 +1099,9 @@ msgstr "Avaa konsoli käyttääksesi tätä vaihtoehtoa"
 
 msgid "Unlocked"
 msgstr "Avattu"
+
+msgid "Unsupported format, try to extract manually."
+msgstr ""
 
 msgid "Update"
 msgstr "Päivitä"
@@ -1190,6 +1251,9 @@ msgstr "Erinäisistä patcheista"
 
 msgid "for his awesome tool"
 msgstr "Hänen hienosta ohjelmasta"
+
+msgid "for hosting the themes"
+msgstr ""
 
 msgid "for hosting the update files"
 msgstr "Tiedostojen hostauksesta"

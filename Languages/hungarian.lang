@@ -5,13 +5,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-17 17:31+0200\n"
+"POT-Creation-Date: 2009-10-22 15:33+0200\n"
 "PO-Revision-Date: 2009-10-15 14:20+0100\n"
 "Last-Translator: Springdale <springdale@freemail.hu>\n"
 "Language-Team: Tusk, Springdale\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+msgid " "
+msgstr ""
 
 msgid " Wad Saved as:"
 msgstr "Wad elmentve mint:"
@@ -24,6 +27,10 @@ msgstr "elmentve. A fájl nincs ellenőrizve, és egyes kódok nem feltétlenül
 
 msgid " is not on the server."
 msgstr "nincs a szerveren."
+
+#, c-format
+msgid "%s : %s May not boot correctly if your System Menu is not up to date."
+msgstr ""
 
 msgid "0 (Everyone)"
 msgstr "0 (Mindenkinek)"
@@ -142,6 +149,9 @@ msgstr "Biztos vagy benne?"
 msgid "Aug"
 msgstr ""
 
+msgid "Author:"
+msgstr ""
+
 msgid "AutoInit Network"
 msgstr "Hálózat AutoInit"
 
@@ -186,6 +196,9 @@ msgstr "Nem Formázható"
 
 msgid "Can't create directory"
 msgstr "Mappa nem hozható létre"
+
+msgid "Can't create file"
+msgstr ""
 
 msgid "Can't delete:"
 msgstr "Nem törölhetõ"
@@ -392,6 +405,9 @@ msgstr "Biztosan ki akarod törölni?:"
 msgid "Do you want to change language?"
 msgstr "Megakarod változtatni a nyevet?"
 
+msgid "Do you want to download this theme?"
+msgstr ""
+
 msgid "Do you want to format:"
 msgstr "Leakarod formázni?:"
 
@@ -407,6 +423,9 @@ msgstr "Minden nyelvi fájl letöltése/frissítése?"
 msgid "Done!"
 msgstr "Kész."
 
+msgid "Download"
+msgstr ""
+
 msgid "Download Boxart image?"
 msgstr "Borítóképek letöltése?"
 
@@ -416,14 +435,26 @@ msgstr "Lemezfotó letöltése?"
 msgid "Download Now"
 msgstr "Letöltés most"
 
+msgid "Download failed."
+msgstr ""
+
 msgid "Download finished"
 msgstr "Letöltés kész"
+
+msgid "Download request failed."
+msgstr ""
 
 msgid "Downloading"
 msgstr "Letöltés"
 
+msgid "Downloading Page List:"
+msgstr ""
+
 msgid "Downloading file"
 msgstr "Fájl Letöltése"
+
+msgid "Downloading image:"
+msgstr ""
 
 msgid "Dutch"
 msgstr "Holland"
@@ -461,8 +492,14 @@ msgstr "Hiba:"
 msgid "Exit USB Loader GX?"
 msgstr "Kilépsz az USB Loader GX-bõl?"
 
+msgid "Extracting files..."
+msgstr ""
+
 msgid "Failed formating"
 msgstr "Formázás sikertelen"
+
+msgid "Failed to extract."
+msgstr ""
 
 msgid "Failed to open partition"
 msgstr "Hiba a partíció megnyitásakor"
@@ -544,9 +581,6 @@ msgstr "Homebrew útvonal megváltoztatás"
 
 msgid "Homebrew Appspath changed"
 msgstr "Homebrew útvonal megváltoztatva"
-
-msgid "Homebrew Channel"
-msgstr ""
 
 msgid "Homebrew Launcher"
 msgstr "Homebrew indító"
@@ -640,11 +674,11 @@ msgstr "Billenyûzet"
 msgid "Korean"
 msgstr "Koreai"
 
+msgid "Language File"
+msgstr "Nyelvi fájl"
+
 msgid "Language change:"
 msgstr "Nyelv választás:"
-
-msgid "Languagefile"
-msgstr "Nyelvi fájl"
 
 msgid "Languagepath changed."
 msgstr "Nyelvek útvonala megváltozott."
@@ -748,6 +782,9 @@ msgstr "Egy fájl sem hiányzik!"
 
 msgid "No new updates."
 msgstr "Nem elérhetõ frissítés."
+
+msgid "No themes found on the site."
+msgstr ""
 
 msgid "Normal"
 msgstr "Normális"
@@ -965,6 +1002,9 @@ msgstr "Sikeresen Frissítve"
 msgid "Successfully deleted:"
 msgstr "Sikeresen törölve:"
 
+msgid "Successfully extracted theme"
+msgstr ""
+
 msgid "Successfully installed:"
 msgstr "Sikeresen telepítve"
 
@@ -993,6 +1033,18 @@ msgstr "A wad fájl telepítése megtörtént, de nem volt törölhető az SD k�
 msgid "The wad installation failed with error %ld"
 msgstr "A wad telepítés nem sikerült - hiba %ld"
 
+msgid "Theme Download Path"
+msgstr ""
+
+msgid "Theme Download Path change"
+msgstr ""
+
+msgid "Theme Download Path changed"
+msgstr ""
+
+msgid "Theme Downloader"
+msgstr ""
+
 msgid "Theme Path"
 msgstr "Témák Útvonala"
 
@@ -1001,6 +1053,9 @@ msgstr "Témák Útvonala megváltozott"
 
 msgid "Theme Path change"
 msgstr "Témák Útvonalának megváltoztatása"
+
+msgid "Theme Title:"
+msgstr ""
 
 msgid "Time left:"
 msgstr "Hátralévõ Idõ"
@@ -1013,6 +1068,9 @@ msgstr "Címek WiiTDB fájlból"
 
 msgid "Tooltips"
 msgstr "Súgók"
+
+msgid "Transfer failed."
+msgstr ""
 
 msgid "USB Device not found"
 msgstr "USB Meghajtó nem található"
@@ -1041,6 +1099,9 @@ msgstr "Zárolva a program, ezt nem használhatod."
 
 msgid "Unlocked"
 msgstr "Feloldva"
+
+msgid "Unsupported format, try to extract manually."
+msgstr ""
 
 msgid "Update"
 msgstr "Frissítés"
@@ -1190,6 +1251,9 @@ msgstr "többféle patchéért"
 
 msgid "for his awesome tool"
 msgstr "kiváló eszközéért"
+
+msgid "for hosting the themes"
+msgstr ""
 
 msgid "for hosting the update files"
 msgstr "(frissítési fájlok tárolása)"
