@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-22 15:33+0200\n"
+"POT-Creation-Date: 2009-10-24 23:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe, Cambo\n"
@@ -297,9 +297,6 @@ msgstr "Non è stato possibile impostare la porta USB."
 msgid "Cover Download"
 msgstr "Scaricamento Copertine"
 
-msgid "Cover Path Change"
-msgstr "Modifica Percorso Copertine"
-
 msgid "Cover Path Changed"
 msgstr "Percorso Copertine Modificato"
 
@@ -317,9 +314,6 @@ msgstr "Modific./Origin."
 
 msgid "DOL Path"
 msgstr "Percorso File DOL"
-
-msgid "DOL path change"
-msgstr "Modifica percorso file DOL"
 
 msgid "DOL path changed"
 msgstr "Percorso File DOL Modificato"
@@ -377,9 +371,6 @@ msgstr "Immagini Disco"
 
 msgid "Disc Path Changed"
 msgstr "Percorso Immagini Disco Modificato"
-
-msgid "Disc Path change"
-msgstr "Modifica Percorso Immagini Disco"
 
 msgid "DiskFlip"
 msgstr "Gira i dischi"
@@ -575,9 +566,6 @@ msgstr "Menu HOME"
 
 msgid "Homebrew Apps Path"
 msgstr "Percorso Applic. Homebrew"
-
-msgid "Homebrew Appspath change"
-msgstr "Modifica percorso app. Homebrew"
 
 msgid "Homebrew Appspath changed"
 msgstr "Percorso app. Homebrew modificato"
@@ -921,9 +909,6 @@ msgstr "Vibrazione"
 msgid "SChinese"
 msgstr "Cinese Moderno"
 
-msgid "SD/USB selected"
-msgstr "Selezionata SD/USB"
-
 msgid "SFX Volume"
 msgstr "Volume SFX"
 
@@ -1036,9 +1021,6 @@ msgstr "L'installazione del WAD è fallita con errore %ld"
 msgid "Theme Download Path"
 msgstr ""
 
-msgid "Theme Download Path change"
-msgstr ""
-
 msgid "Theme Download Path changed"
 msgstr ""
 
@@ -1050,9 +1032,6 @@ msgstr "Percorso Tema"
 
 msgid "Theme Path Changed"
 msgstr "Percorso Tema modificato"
-
-msgid "Theme Path change"
-msgstr "Modifica Percorso Tema"
 
 msgid "Theme Title:"
 msgstr ""
@@ -1182,9 +1161,6 @@ msgstr "File WiiTDB"
 msgid "WiiTDB Path"
 msgstr "Percorso Archivio WiiTDB"
 
-msgid "WiiTDB Path change"
-msgstr "Modifica percorso archivio WiiTDB"
-
 msgid "WiiTDB Path changed."
 msgstr "Percorso archivio WiiTDB modificato."
 
@@ -1275,6 +1251,27 @@ msgstr "di"
 
 msgid "seconds left"
 msgstr "secondi mancanti"
+
+#~ msgid "SD/USB selected"
+#~ msgstr "Selezionata SD/USB"
+
+#~ msgid "Cover Path Change"
+#~ msgstr "Modifica Percorso Copertine"
+
+#~ msgid "DOL path change"
+#~ msgstr "Modifica percorso file DOL"
+
+#~ msgid "Disc Path change"
+#~ msgstr "Modifica Percorso Immagini Disco"
+
+#~ msgid "Homebrew Appspath change"
+#~ msgstr "Modifica percorso app. Homebrew"
+
+#~ msgid "Theme Path change"
+#~ msgstr "Modifica Percorso Tema"
+
+#~ msgid "WiiTDB Path change"
+#~ msgstr "Modifica percorso archivio WiiTDB"
 
 #~ msgid "Homebrew Channel"
 #~ msgstr "Canale Homebrew"

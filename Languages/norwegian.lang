@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-22 15:33+0200\n"
+"POT-Creation-Date: 2009-10-24 23:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: raschi\n"
 "Language-Team: \n"
@@ -297,9 +297,6 @@ msgstr "Kan ikke velge USB."
 msgid "Cover Download"
 msgstr "Cover nedlasting"
 
-msgid "Cover Path Change"
-msgstr "Endre cover sti"
-
 msgid "Cover Path Changed"
 msgstr "Cover sti endret"
 
@@ -317,9 +314,6 @@ msgstr "Custom/Original"
 
 msgid "DOL Path"
 msgstr "DOL sti"
-
-msgid "DOL path change"
-msgstr "Endre DOL sti"
 
 msgid "DOL path changed"
 msgstr "DOL sti endret"
@@ -377,9 +371,6 @@ msgstr "Plate bilder"
 
 msgid "Disc Path Changed"
 msgstr "Plate sti endret"
-
-msgid "Disc Path change"
-msgstr "Endre plate sti"
 
 msgid "DiskFlip"
 msgstr "Snu plate"
@@ -575,9 +566,6 @@ msgstr "HOME Meny"
 
 msgid "Homebrew Apps Path"
 msgstr "Homebrew Apps sti"
-
-msgid "Homebrew Appspath change"
-msgstr "Endre Homebrew Apps sti"
 
 msgid "Homebrew Appspath changed"
 msgstr "Homebrew Apps sti endret"
@@ -921,9 +909,6 @@ msgstr "Vibrasjon"
 msgid "SChinese"
 msgstr "S.Kinesisk"
 
-msgid "SD/USB selected"
-msgstr "SD/USB valgt"
-
 msgid "SFX Volume"
 msgstr "Effekt volum"
 
@@ -1036,9 +1021,6 @@ msgstr "WAD installasjonen feilet med feilkode %ld"
 msgid "Theme Download Path"
 msgstr ""
 
-msgid "Theme Download Path change"
-msgstr ""
-
 msgid "Theme Download Path changed"
 msgstr ""
 
@@ -1050,9 +1032,6 @@ msgstr "Tema sti"
 
 msgid "Theme Path Changed"
 msgstr "Tema sti endret"
-
-msgid "Theme Path change"
-msgstr "Endre tema sti"
 
 msgid "Theme Title:"
 msgstr ""
@@ -1182,9 +1161,6 @@ msgstr "WiiTDB filer"
 msgid "WiiTDB Path"
 msgstr "WiiTDB sti"
 
-msgid "WiiTDB Path change"
-msgstr "Endre WiiTDB sti"
-
 msgid "WiiTDB Path changed."
 msgstr "WiiTDB sti endret."
 
@@ -1275,6 +1251,27 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder gjenstår"
+
+#~ msgid "SD/USB selected"
+#~ msgstr "SD/USB valgt"
+
+#~ msgid "Cover Path Change"
+#~ msgstr "Endre cover sti"
+
+#~ msgid "DOL path change"
+#~ msgstr "Endre DOL sti"
+
+#~ msgid "Disc Path change"
+#~ msgstr "Endre plate sti"
+
+#~ msgid "Homebrew Appspath change"
+#~ msgstr "Endre Homebrew Apps sti"
+
+#~ msgid "Theme Path change"
+#~ msgstr "Endre tema sti"
+
+#~ msgid "WiiTDB Path change"
+#~ msgstr "Endre WiiTDB sti"
 
 #~ msgid "ERROR: USB device could not be loaded!"
 #~ msgstr "FEIL: USB enhet kan ikke lastes!"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-22 15:33+0200\n"
+"POT-Creation-Date: 2009-10-24 23:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Kin8\n"
 "Language-Team: Badablek, Amour, ikya, dj_skual & Kin8\n"
@@ -297,9 +297,6 @@ msgstr "Accès USB impossible."
 msgid "Cover Download"
 msgstr "Téléchargement Jaquettes"
 
-msgid "Cover Path Change"
-msgstr "Dossier des jaquettes"
-
 msgid "Cover Path Changed"
 msgstr "Dossier des jaquettes modifié"
 
@@ -317,9 +314,6 @@ msgstr "Persos/Originaux"
 
 msgid "DOL Path"
 msgstr "Dossier DOL Alternatif"
-
-msgid "DOL path change"
-msgstr "Dossier du DOL alternatif"
 
 msgid "DOL path changed"
 msgstr "Dossier DOL alternatif modifié"
@@ -377,9 +371,6 @@ msgstr "Labels DVD"
 
 msgid "Disc Path Changed"
 msgstr "Dossier des labels DVD modifié"
-
-msgid "Disc Path change"
-msgstr "Dossier des labels DVD"
 
 msgid "DiskFlip"
 msgstr "Inversion Disque"
@@ -574,9 +565,6 @@ msgid "HOME Menu"
 msgstr "Menu HOME"
 
 msgid "Homebrew Apps Path"
-msgstr "Dossier Homebrew Apps"
-
-msgid "Homebrew Appspath change"
 msgstr "Dossier Homebrew Apps"
 
 msgid "Homebrew Appspath changed"
@@ -921,9 +909,6 @@ msgstr "Vibrations"
 msgid "SChinese"
 msgstr "Chinois simplifié"
 
-msgid "SD/USB selected"
-msgstr "SD/USB Sélectionné"
-
 msgid "SFX Volume"
 msgstr "Volume SFX"
 
@@ -1036,9 +1021,6 @@ msgstr "L'installation WAD a échoué avec erreur %ld"
 msgid "Theme Download Path"
 msgstr "Dossier Thèmes Téléch."
 
-msgid "Theme Download Path change"
-msgstr "Dossier des Thèmes Téléchargés"
-
 msgid "Theme Download Path changed"
 msgstr "Dossier Thèmes Téléch. modifié"
 
@@ -1050,9 +1032,6 @@ msgstr "Dossier Thème"
 
 msgid "Theme Path Changed"
 msgstr "Dossier du thème modifié"
-
-msgid "Theme Path change"
-msgstr "Dossier du thème"
 
 msgid "Theme Title:"
 msgstr "Titre du Thème:"
@@ -1182,9 +1161,6 @@ msgstr "WiiTDB"
 msgid "WiiTDB Path"
 msgstr "Dossier WiiTDB"
 
-msgid "WiiTDB Path change"
-msgstr "Dossier de WiiTDB"
-
 msgid "WiiTDB Path changed."
 msgstr "Dossier de WiiTDB modifié"
 
@@ -1275,6 +1251,30 @@ msgstr "sur"
 
 msgid "seconds left"
 msgstr "secondes restantes"
+
+#~ msgid "SD/USB selected"
+#~ msgstr "SD/USB Sélectionné"
+
+#~ msgid "Cover Path Change"
+#~ msgstr "Dossier des jaquettes"
+
+#~ msgid "DOL path change"
+#~ msgstr "Dossier du DOL alternatif"
+
+#~ msgid "Disc Path change"
+#~ msgstr "Dossier des labels DVD"
+
+#~ msgid "Homebrew Appspath change"
+#~ msgstr "Dossier Homebrew Apps"
+
+#~ msgid "Theme Download Path change"
+#~ msgstr "Dossier des Thèmes Téléchargés"
+
+#~ msgid "Theme Path change"
+#~ msgstr "Dossier du thème"
+
+#~ msgid "WiiTDB Path change"
+#~ msgstr "Dossier de WiiTDB"
 
 #~ msgid "You need to start this game one time to create a save file, then exit and start it again."
 #~ msgstr "Vous devez lancer ce jeu une fois pour créer une sauvegarde, puis éteindre et le lancer à nouveau."

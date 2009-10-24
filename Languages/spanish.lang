@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-22 15:33+0200\n"
+"POT-Creation-Date: 2009-10-24 23:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Penn\n"
 "Language-Team: \n"
@@ -297,9 +297,6 @@ msgstr "No se pudo configurar USB."
 msgid "Cover Download"
 msgstr "Descarga de Carátulas"
 
-msgid "Cover Path Change"
-msgstr "Cambio ruta Carátulas"
-
 msgid "Cover Path Changed"
 msgstr "Ruta de Carátulas cambiada"
 
@@ -317,9 +314,6 @@ msgstr "Alternativas/Originales"
 
 msgid "DOL Path"
 msgstr "Ruta DOL"
-
-msgid "DOL path change"
-msgstr "Cambio ruta DOL"
 
 msgid "DOL path changed"
 msgstr "Ruta de DOL cambiada"
@@ -377,9 +371,6 @@ msgstr "Imágen Discos"
 
 msgid "Disc Path Changed"
 msgstr "Ruta Img. Disco cambiada"
-
-msgid "Disc Path change"
-msgstr "Cambio ruta Img. Disco"
 
 msgid "DiskFlip"
 msgstr "GiroDisco"
@@ -575,9 +566,6 @@ msgstr "Menú HOME"
 
 msgid "Homebrew Apps Path"
 msgstr "Ruta aplic. Homebrew"
-
-msgid "Homebrew Appspath change"
-msgstr "Cambio Ruta aplic. Homebrew"
 
 msgid "Homebrew Appspath changed"
 msgstr "Ruta aplic. Homebrew cambiada"
@@ -921,9 +909,6 @@ msgstr "Vibración"
 msgid "SChinese"
 msgstr "Chino Simplif."
 
-msgid "SD/USB selected"
-msgstr "SD/USB seleccionada"
-
 msgid "SFX Volume"
 msgstr "Volumen SFX"
 
@@ -1036,9 +1021,6 @@ msgstr "La instalación del wad falló con error %ld"
 msgid "Theme Download Path"
 msgstr ""
 
-msgid "Theme Download Path change"
-msgstr ""
-
 msgid "Theme Download Path changed"
 msgstr ""
 
@@ -1050,9 +1032,6 @@ msgstr "Ruta del Tema"
 
 msgid "Theme Path Changed"
 msgstr "Ruta de Tema cambiada"
-
-msgid "Theme Path change"
-msgstr "Cambio Ruta de Tema"
 
 msgid "Theme Title:"
 msgstr ""
@@ -1182,9 +1161,6 @@ msgstr "WiiTDB"
 msgid "WiiTDB Path"
 msgstr "Ruta WiiTDB"
 
-msgid "WiiTDB Path change"
-msgstr "Cambio ruta WiiTDB"
-
 msgid "WiiTDB Path changed."
 msgstr "Ruta WiiTDB cambiada."
 
@@ -1275,6 +1251,27 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
+
+#~ msgid "SD/USB selected"
+#~ msgstr "SD/USB seleccionada"
+
+#~ msgid "Cover Path Change"
+#~ msgstr "Cambio ruta Carátulas"
+
+#~ msgid "DOL path change"
+#~ msgstr "Cambio ruta DOL"
+
+#~ msgid "Disc Path change"
+#~ msgstr "Cambio ruta Img. Disco"
+
+#~ msgid "Homebrew Appspath change"
+#~ msgstr "Cambio Ruta aplic. Homebrew"
+
+#~ msgid "Theme Path change"
+#~ msgstr "Cambio Ruta de Tema"
+
+#~ msgid "WiiTDB Path change"
+#~ msgstr "Cambio ruta WiiTDB"
 
 #~ msgid "Homebrew Channel"
 #~ msgstr "Canal Homebrew"

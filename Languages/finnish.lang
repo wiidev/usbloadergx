@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-22 15:33+0200\n"
+"POT-Creation-Date: 2009-10-24 23:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: c64rmx\n"
 "Language-Team: \n"
@@ -297,9 +297,6 @@ msgstr "USB:tä ei voitu asettaa"
 msgid "Cover Download"
 msgstr "Kansien lataus"
 
-msgid "Cover Path Change"
-msgstr "Kansipolun vaihto"
-
 msgid "Cover Path Changed"
 msgstr "Kansien polku muutettu"
 
@@ -317,9 +314,6 @@ msgstr "Omat/Alkuperäiset"
 
 msgid "DOL Path"
 msgstr "DOL:in polku"
-
-msgid "DOL path change"
-msgstr "DOL:in polun muutto"
 
 msgid "DOL path changed"
 msgstr "DOL:in polku muutettu"
@@ -377,9 +371,6 @@ msgstr "Levykuvat"
 
 msgid "Disc Path Changed"
 msgstr "Levykuvien polku muutettu"
-
-msgid "Disc Path change"
-msgstr "Levykuvien polku"
 
 msgid "DiskFlip"
 msgstr "Levynvaihto"
@@ -575,9 +566,6 @@ msgstr ""
 
 msgid "Homebrew Apps Path"
 msgstr "Homebrew Apps polku"
-
-msgid "Homebrew Appspath change"
-msgstr "Homebrew Apps polunvaihto"
 
 msgid "Homebrew Appspath changed"
 msgstr "Homebrew Apps polku vaihdettu"
@@ -921,9 +909,6 @@ msgstr "Värinä"
 msgid "SChinese"
 msgstr "SKiina"
 
-msgid "SD/USB selected"
-msgstr "SD/USB valittu"
-
 msgid "SFX Volume"
 msgstr "Ääniefektien voimakkuus"
 
@@ -1036,9 +1021,6 @@ msgstr "Wad asennus epäonnistui: %ld"
 msgid "Theme Download Path"
 msgstr ""
 
-msgid "Theme Download Path change"
-msgstr ""
-
 msgid "Theme Download Path changed"
 msgstr ""
 
@@ -1050,9 +1032,6 @@ msgstr "Teeman sijainti"
 
 msgid "Theme Path Changed"
 msgstr "Teeman sijainti muutettu"
-
-msgid "Theme Path change"
-msgstr "Teeman sijainti"
 
 msgid "Theme Title:"
 msgstr ""
@@ -1182,9 +1161,6 @@ msgstr "WiiTDB tiedostot"
 msgid "WiiTDB Path"
 msgstr "WiiTDB polku"
 
-msgid "WiiTDB Path change"
-msgstr "WiiTDB polun muutto"
-
 msgid "WiiTDB Path changed."
 msgstr "WiiTDB polku muutettu"
 
@@ -1275,3 +1251,24 @@ msgstr "josta"
 
 msgid "seconds left"
 msgstr "sekuntia jäljellä"
+
+#~ msgid "SD/USB selected"
+#~ msgstr "SD/USB valittu"
+
+#~ msgid "Cover Path Change"
+#~ msgstr "Kansipolun vaihto"
+
+#~ msgid "DOL path change"
+#~ msgstr "DOL:in polun muutto"
+
+#~ msgid "Disc Path change"
+#~ msgstr "Levykuvien polku"
+
+#~ msgid "Homebrew Appspath change"
+#~ msgstr "Homebrew Apps polunvaihto"
+
+#~ msgid "Theme Path change"
+#~ msgstr "Teeman sijainti"
+
+#~ msgid "WiiTDB Path change"
+#~ msgstr "WiiTDB polun muutto"

@@ -265,8 +265,7 @@ public:
     uint16_t loadFont(const char* fontPath, const uint8_t* fontBuffer, FT_Long bufferSize, FT_UInt pointSize, bool cacheAll = false);
     void changeSize(FT_UInt vPointSize, FT_UInt hPointSize=0);
 
-    uint16_t drawText(int16_t x, int16_t y, wchar_t *text, GXColor color = ftgxWhite, uint16_t textStyling = FTGX_NULL);
-    uint16_t drawText(int16_t x, int16_t y, wchar_t const *text, GXColor color = ftgxWhite, uint16_t textStyling = FTGX_NULL);
+    uint16_t drawText(int16_t x, int16_t y, const wchar_t *text, GXColor color = ftgxWhite, uint16_t textStyling = FTGX_NULL);
 
     uint16_t getWidth(const wchar_t *text);
     uint16_t getHeight(const wchar_t *text);

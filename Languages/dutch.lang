@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-22 15:33+0200\n"
+"POT-Creation-Date: 2009-10-24 23:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: tj_cool\n"
 "Language-Team: \n"
@@ -297,9 +297,6 @@ msgstr "Kan USB niet instellen"
 msgid "Cover Download"
 msgstr "Download hoesjes"
 
-msgid "Cover Path Change"
-msgstr "Hoesjesmap wijzigen"
-
 msgid "Cover Path Changed"
 msgstr "Locatie hoesjes gewijzigd"
 
@@ -317,9 +314,6 @@ msgstr "Aangepast/Origineel"
 
 msgid "DOL Path"
 msgstr "Locatie DOL"
-
-msgid "DOL path change"
-msgstr "Locatie DOL wijzigen"
 
 msgid "DOL path changed"
 msgstr "Locatie DOL gewijzigd"
@@ -377,9 +371,6 @@ msgstr "DVD labels"
 
 msgid "Disc Path Changed"
 msgstr "Locatie DVD labels gewijzigd"
-
-msgid "Disc Path change"
-msgstr "Locatie DVD labels wijzigen"
 
 msgid "DiskFlip"
 msgstr "DVDFlip"
@@ -575,9 +566,6 @@ msgstr ""
 
 msgid "Homebrew Apps Path"
 msgstr "Locatie Homebrew apps"
-
-msgid "Homebrew Appspath change"
-msgstr "Locatie HB apps wijzigen"
 
 msgid "Homebrew Appspath changed"
 msgstr "Locatie HB apps gewijzigd"
@@ -921,9 +909,6 @@ msgstr "Trilfunctie"
 msgid "SChinese"
 msgstr "SChinees"
 
-msgid "SD/USB selected"
-msgstr "SD/USB geselecteerd"
-
 msgid "SFX Volume"
 msgstr "Volume effecten"
 
@@ -1036,9 +1021,6 @@ msgstr "De wad installatie is mislukt met error %ld"
 msgid "Theme Download Path"
 msgstr ""
 
-msgid "Theme Download Path change"
-msgstr ""
-
 msgid "Theme Download Path changed"
 msgstr ""
 
@@ -1050,9 +1032,6 @@ msgstr "Locatie thema"
 
 msgid "Theme Path Changed"
 msgstr "Locatie thema gewijzigd"
-
-msgid "Theme Path change"
-msgstr "Locatie thema wijzigen"
 
 msgid "Theme Title:"
 msgstr ""
@@ -1182,9 +1161,6 @@ msgstr "WiiTDB"
 msgid "WiiTDB Path"
 msgstr "Locatie WiiTDB"
 
-msgid "WiiTDB Path change"
-msgstr "Locatie WiiTDB wijzigen"
-
 msgid "WiiTDB Path changed."
 msgstr "Locatie WiiTDB gewijzigd"
 
@@ -1275,6 +1251,27 @@ msgstr "van"
 
 msgid "seconds left"
 msgstr "seconden over:"
+
+#~ msgid "SD/USB selected"
+#~ msgstr "SD/USB geselecteerd"
+
+#~ msgid "Cover Path Change"
+#~ msgstr "Hoesjesmap wijzigen"
+
+#~ msgid "DOL path change"
+#~ msgstr "Locatie DOL wijzigen"
+
+#~ msgid "Disc Path change"
+#~ msgstr "Locatie DVD labels wijzigen"
+
+#~ msgid "Homebrew Appspath change"
+#~ msgstr "Locatie HB apps wijzigen"
+
+#~ msgid "Theme Path change"
+#~ msgstr "Locatie thema wijzigen"
+
+#~ msgid "WiiTDB Path change"
+#~ msgstr "Locatie WiiTDB wijzigen"
 
 #~ msgid "Homebrew Channel"
 #~ msgstr "Homebrew Kanaal"

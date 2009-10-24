@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-22 15:33+0200\n"
+"POT-Creation-Date: 2009-10-24 23:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: boto12\n"
 "Language-Team: \n"
@@ -297,9 +297,6 @@ msgstr "Não foi possível configurar a porta USB."
 msgid "Cover Download"
 msgstr "Download de Capas"
 
-msgid "Cover Path Change"
-msgstr "Alterar Pasta das Capas"
-
 msgid "Cover Path Changed"
 msgstr "Pasta das Capas alterada"
 
@@ -317,9 +314,6 @@ msgstr "Alternativas/Originais"
 
 msgid "DOL Path"
 msgstr "Pasta DOL"
-
-msgid "DOL path change"
-msgstr "Alterar Pasta do DOL"
 
 msgid "DOL path changed"
 msgstr "Pasta do DOL alterada"
@@ -377,9 +371,6 @@ msgstr "Imagens de Disco"
 
 msgid "Disc Path Changed"
 msgstr "Pasta das Imagens Disco alterada"
-
-msgid "Disc Path change"
-msgstr "Alterar a Pasta das Imagens de Disco"
 
 msgid "DiskFlip"
 msgstr "Voltar Disco"
@@ -575,9 +566,6 @@ msgstr "Menu Inicial"
 
 msgid "Homebrew Apps Path"
 msgstr "Pasta Apps Homebrew"
-
-msgid "Homebrew Appspath change"
-msgstr "Alterar Pasta Apps Homebrew"
 
 msgid "Homebrew Appspath changed"
 msgstr "Pasta Apps Homebrew alterada"
@@ -921,9 +909,6 @@ msgstr "Vibração"
 msgid "SChinese"
 msgstr "Chinês Simplificado"
 
-msgid "SD/USB selected"
-msgstr "SD/USB selecionado"
-
 msgid "SFX Volume"
 msgstr "Volume dos Efeitos"
 
@@ -1036,9 +1021,6 @@ msgstr "A instalação do wad falhou com o seguinte erro: %ld"
 msgid "Theme Download Path"
 msgstr ""
 
-msgid "Theme Download Path change"
-msgstr ""
-
 msgid "Theme Download Path changed"
 msgstr ""
 
@@ -1050,9 +1032,6 @@ msgstr "Pasta Temas"
 
 msgid "Theme Path Changed"
 msgstr "Pasta dos Temas alterada"
-
-msgid "Theme Path change"
-msgstr "Alterar pasta dos Temas"
 
 msgid "Theme Title:"
 msgstr ""
@@ -1182,9 +1161,6 @@ msgstr "WiiTDB"
 msgid "WiiTDB Path"
 msgstr "Pasta WiiTDB"
 
-msgid "WiiTDB Path change"
-msgstr "Alterar Pasta WiiTDB"
-
 msgid "WiiTDB Path changed."
 msgstr "Pasta WiiTDB alterada."
 
@@ -1275,6 +1251,27 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
+
+#~ msgid "SD/USB selected"
+#~ msgstr "SD/USB selecionado"
+
+#~ msgid "Cover Path Change"
+#~ msgstr "Alterar Pasta das Capas"
+
+#~ msgid "DOL path change"
+#~ msgstr "Alterar Pasta do DOL"
+
+#~ msgid "Disc Path change"
+#~ msgstr "Alterar a Pasta das Imagens de Disco"
+
+#~ msgid "Homebrew Appspath change"
+#~ msgstr "Alterar Pasta Apps Homebrew"
+
+#~ msgid "Theme Path change"
+#~ msgstr "Alterar pasta dos Temas"
+
+#~ msgid "WiiTDB Path change"
+#~ msgstr "Alterar Pasta WiiTDB"
 
 #~ msgid "Homebrew Channel"
 #~ msgstr "Canal Homebrew"

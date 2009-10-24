@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-22 15:33+0200\n"
+"POT-Creation-Date: 2009-10-24 23:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Kir\n"
 "Language-Team: Kir\n"
@@ -297,9 +297,6 @@ msgstr "Не могу настроить USB"
 msgid "Cover Download"
 msgstr "Скачать обложку"
 
-msgid "Cover Path Change"
-msgstr "Изменить путь к обложкам"
-
 msgid "Cover Path Changed"
 msgstr "Путь к обложкам был изменен."
 
@@ -317,9 +314,6 @@ msgstr ""
 
 msgid "DOL Path"
 msgstr "Путь к DOL"
-
-msgid "DOL path change"
-msgstr "Изменить путь к DOL"
 
 msgid "DOL path changed"
 msgstr "Путь к DOL изменен"
@@ -377,9 +371,6 @@ msgstr "Изображения дисков"
 
 msgid "Disc Path Changed"
 msgstr "Путь к изображениям дисков изменен"
-
-msgid "Disc Path change"
-msgstr "Изменить путь к изображениям дисков"
 
 msgid "DiskFlip"
 msgstr "ДискФлип"
@@ -575,9 +566,6 @@ msgstr "Домашнее Меню"
 
 msgid "Homebrew Apps Path"
 msgstr "Путь к хоумбрю-программам"
-
-msgid "Homebrew Appspath change"
-msgstr "Изменить путь к хоумбрю-программам"
 
 msgid "Homebrew Appspath changed"
 msgstr "Путь к хоумбрю-программам изменен"
@@ -921,9 +909,6 @@ msgstr "Вибрация"
 msgid "SChinese"
 msgstr "Упрощенный китайский"
 
-msgid "SD/USB selected"
-msgstr ""
-
 msgid "SFX Volume"
 msgstr "Громкость эффектов"
 
@@ -1036,9 +1021,6 @@ msgstr "Установка WAD не удалась, код ошибки %ld"
 msgid "Theme Download Path"
 msgstr ""
 
-msgid "Theme Download Path change"
-msgstr ""
-
 msgid "Theme Download Path changed"
 msgstr ""
 
@@ -1050,9 +1032,6 @@ msgstr "Путь к темам"
 
 msgid "Theme Path Changed"
 msgstr "путь к темам изменён"
-
-msgid "Theme Path change"
-msgstr "изменить путь к темам"
 
 msgid "Theme Title:"
 msgstr ""
@@ -1182,9 +1161,6 @@ msgstr ""
 msgid "WiiTDB Path"
 msgstr ""
 
-msgid "WiiTDB Path change"
-msgstr ""
-
 msgid "WiiTDB Path changed."
 msgstr ""
 
@@ -1275,3 +1251,18 @@ msgstr "из"
 
 msgid "seconds left"
 msgstr "секунд осталось"
+
+#~ msgid "Cover Path Change"
+#~ msgstr "Изменить путь к обложкам"
+
+#~ msgid "DOL path change"
+#~ msgstr "Изменить путь к DOL"
+
+#~ msgid "Disc Path change"
+#~ msgstr "Изменить путь к изображениям дисков"
+
+#~ msgid "Homebrew Appspath change"
+#~ msgstr "Изменить путь к хоумбрю-программам"
+
+#~ msgid "Theme Path change"
+#~ msgstr "изменить путь к темам"

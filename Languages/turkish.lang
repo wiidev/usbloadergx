@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-22 15:33+0200\n"
+"POT-Creation-Date: 2009-10-24 23:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: omercigingelini\n"
 "Language-Team: omercigingelini\n"
@@ -297,9 +297,6 @@ msgstr "USB ayarlanamadı"
 msgid "Cover Download"
 msgstr "Kapak Indirme"
 
-msgid "Cover Path Change"
-msgstr "Kapak Yolu Değiştirme"
-
 msgid "Cover Path Changed"
 msgstr "Kapak Yolu Değiştir"
 
@@ -317,9 +314,6 @@ msgstr "Kişisel/Orjinal"
 
 msgid "DOL Path"
 msgstr "DOL Yolu"
-
-msgid "DOL path change"
-msgstr "DOL Yolu değiştirme"
 
 msgid "DOL path changed"
 msgstr "DOL yolu değiştirildi"
@@ -377,9 +371,6 @@ msgstr "Disk Resimleri"
 
 msgid "Disc Path Changed"
 msgstr "Disk Yolu Değiştirildi"
-
-msgid "Disc Path change"
-msgstr "Disk Yolunu Değiştir"
 
 msgid "DiskFlip"
 msgstr ""
@@ -575,9 +566,6 @@ msgstr "HOME Menü"
 
 msgid "Homebrew Apps Path"
 msgstr "Homebrew Yazılımlarının Yolu"
-
-msgid "Homebrew Appspath change"
-msgstr "Homebrew Yazılım Yolu değiştir"
 
 msgid "Homebrew Appspath changed"
 msgstr "Homebrew Yazılım Yolu değişti"
@@ -921,9 +909,6 @@ msgstr "Titreşim"
 msgid "SChinese"
 msgstr "Basitleştirilmis Çince"
 
-msgid "SD/USB selected"
-msgstr "SD/USB seçildi"
-
 msgid "SFX Volume"
 msgstr "Efekt Seviyesi"
 
@@ -1036,9 +1021,6 @@ msgstr "Wad kurulumu %ld hatasıyla başarısız oldu"
 msgid "Theme Download Path"
 msgstr ""
 
-msgid "Theme Download Path change"
-msgstr ""
-
 msgid "Theme Download Path changed"
 msgstr ""
 
@@ -1050,9 +1032,6 @@ msgstr "Tema Yolu"
 
 msgid "Theme Path Changed"
 msgstr "Tema Yolu Değişti"
-
-msgid "Theme Path change"
-msgstr "Tema yolunu değiştir"
 
 msgid "Theme Title:"
 msgstr ""
@@ -1182,9 +1161,6 @@ msgstr "WiiTDB Dosyaları"
 msgid "WiiTDB Path"
 msgstr "WiiTDB Yaması"
 
-msgid "WiiTDB Path change"
-msgstr "WiiTDB Yolunu değiştir"
-
 msgid "WiiTDB Path changed."
 msgstr "WiiTDB Yolu değişti"
 
@@ -1275,6 +1251,27 @@ msgstr "./"
 
 msgid "seconds left"
 msgstr "saniye kaldı"
+
+#~ msgid "SD/USB selected"
+#~ msgstr "SD/USB seçildi"
+
+#~ msgid "Cover Path Change"
+#~ msgstr "Kapak Yolu Değiştirme"
+
+#~ msgid "DOL path change"
+#~ msgstr "DOL Yolu değiştirme"
+
+#~ msgid "Disc Path change"
+#~ msgstr "Disk Yolunu Değiştir"
+
+#~ msgid "Homebrew Appspath change"
+#~ msgstr "Homebrew Yazılım Yolu değiştir"
+
+#~ msgid "Theme Path change"
+#~ msgstr "Tema yolunu değiştir"
+
+#~ msgid "WiiTDB Path change"
+#~ msgstr "WiiTDB Yolunu değiştir"
 
 #~ msgid "Homebrew Channel"
 #~ msgstr "Homebrew Kanalı"

@@ -1565,7 +1565,7 @@ int MenuDiscList() {
             bool returnHere = true;// prompt to start game
             while (returnHere) {
                 returnHere = false;
-                if (Settings.wiilight != 2) wiilight(1);
+                if (Settings.wiilight != wiilight_forInstall) wiilight(1);
 				choice = GameWindowPrompt();
                 // header = &gameList[gameSelected]; //reset header
 
@@ -1907,7 +1907,7 @@ static int MenuFormat() {
     int menu = MENU_NONE;
     char imgPath[100];
 
-    customOptionList options(5);
+    customOptionList options(MAX_PARTITIONS);
     partitionEntry partitions[MAX_PARTITIONS];
 
     u32 cnt, sector_size;

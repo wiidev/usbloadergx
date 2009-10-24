@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-22 15:33+0200\n"
+"POT-Creation-Date: 2009-10-24 23:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: nextos@korea.com\n"
 "Language-Team: \n"
@@ -297,9 +297,6 @@ msgstr "USB 를 설정할수 없음."
 msgid "Cover Download"
 msgstr "표지 다운로드"
 
-msgid "Cover Path Change"
-msgstr "커퍼경로 변경"
-
 msgid "Cover Path Changed"
 msgstr "표지 경로 변경됨"
 
@@ -317,9 +314,6 @@ msgstr "커스텀/오리지널"
 
 msgid "DOL Path"
 msgstr "DOL 패치"
-
-msgid "DOL path change"
-msgstr "DOL 경로 변겸"
 
 msgid "DOL path changed"
 msgstr "DOL 경로 변경됨"
@@ -377,9 +371,6 @@ msgstr "디스크 이미지"
 
 msgid "Disc Path Changed"
 msgstr "디스크 경로 변경됨"
-
-msgid "Disc Path change"
-msgstr "디스크 경로 변경"
 
 msgid "DiskFlip"
 msgstr "디스크 플립"
@@ -575,9 +566,6 @@ msgstr "HOME 메뉴"
 
 msgid "Homebrew Apps Path"
 msgstr "홈브류 경로"
-
-msgid "Homebrew Appspath change"
-msgstr "홈브류 경로 변경"
 
 msgid "Homebrew Appspath changed"
 msgstr "홈브류 경로 변경됨"
@@ -921,9 +909,6 @@ msgstr "진동"
 msgid "SChinese"
 msgstr "중국어(간체)"
 
-msgid "SD/USB selected"
-msgstr "SD/USB 선택됨"
-
 msgid "SFX Volume"
 msgstr "SFX 볼륨"
 
@@ -1036,9 +1021,6 @@ msgstr "WAD 인스톨 실패 에러 %ld"
 msgid "Theme Download Path"
 msgstr ""
 
-msgid "Theme Download Path change"
-msgstr ""
-
 msgid "Theme Download Path changed"
 msgstr ""
 
@@ -1050,9 +1032,6 @@ msgstr "테마 경로"
 
 msgid "Theme Path Changed"
 msgstr "테마 경로 변경됨"
-
-msgid "Theme Path change"
-msgstr "테마 경로 변경"
 
 msgid "Theme Title:"
 msgstr ""
@@ -1182,9 +1161,6 @@ msgstr "WiiTDB 화일"
 msgid "WiiTDB Path"
 msgstr "WiiTDB경로"
 
-msgid "WiiTDB Path change"
-msgstr "WiiTDB경로 변경"
-
 msgid "WiiTDB Path changed."
 msgstr "WiiTDB경로 변경됨."
 
@@ -1275,6 +1251,27 @@ msgstr "중"
 
 msgid "seconds left"
 msgstr "초 남았습니다"
+
+#~ msgid "SD/USB selected"
+#~ msgstr "SD/USB 선택됨"
+
+#~ msgid "Cover Path Change"
+#~ msgstr "커퍼경로 변경"
+
+#~ msgid "DOL path change"
+#~ msgstr "DOL 경로 변겸"
+
+#~ msgid "Disc Path change"
+#~ msgstr "디스크 경로 변경"
+
+#~ msgid "Homebrew Appspath change"
+#~ msgstr "홈브류 경로 변경"
+
+#~ msgid "Theme Path change"
+#~ msgstr "테마 경로 변경"
+
+#~ msgid "WiiTDB Path change"
+#~ msgstr "WiiTDB경로 변경"
 
 #~ msgid "Homebrew Channel"
 #~ msgstr "홈브류 채널"

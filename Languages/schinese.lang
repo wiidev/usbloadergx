@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-22 15:33+0200\n"
+"POT-Creation-Date: 2009-10-24 23:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: knife.hu kavid\n"
 "Language-Team: kavid\n"
@@ -297,9 +297,6 @@ msgstr "无法设置 USB."
 msgid "Cover Download"
 msgstr "下载封面"
 
-msgid "Cover Path Change"
-msgstr "变更封面路径"
-
 msgid "Cover Path Changed"
 msgstr "封面路径已变更"
 
@@ -317,9 +314,6 @@ msgstr "自定义/官方"
 
 msgid "DOL Path"
 msgstr "DOL 路径"
-
-msgid "DOL path change"
-msgstr "变更 DOL 路径"
 
 msgid "DOL path changed"
 msgstr "DOL 路径已变更"
@@ -377,9 +371,6 @@ msgstr "光盘图片"
 
 msgid "Disc Path Changed"
 msgstr "光盘图片路径已变更"
-
-msgid "Disc Path change"
-msgstr "变更光盘图片路径"
 
 msgid "DiskFlip"
 msgstr "光盘滑动"
@@ -575,9 +566,6 @@ msgstr "主菜单"
 
 msgid "Homebrew Apps Path"
 msgstr "自制程序路径"
-
-msgid "Homebrew Appspath change"
-msgstr "变更自制程序路径"
 
 msgid "Homebrew Appspath changed"
 msgstr "自制程序路径已变更"
@@ -921,9 +909,6 @@ msgstr "震动"
 msgid "SChinese"
 msgstr "简体中文"
 
-msgid "SD/USB selected"
-msgstr "SD/USB 已选择"
-
 msgid "SFX Volume"
 msgstr "SFX 音量"
 
@@ -1036,9 +1021,6 @@ msgstr "WAD 安装失败，错误号 %ld"
 msgid "Theme Download Path"
 msgstr ""
 
-msgid "Theme Download Path change"
-msgstr ""
-
 msgid "Theme Download Path changed"
 msgstr ""
 
@@ -1050,9 +1032,6 @@ msgstr "主题路径"
 
 msgid "Theme Path Changed"
 msgstr "主题路径已变更"
-
-msgid "Theme Path change"
-msgstr "变更主题路径"
 
 msgid "Theme Title:"
 msgstr ""
@@ -1182,9 +1161,6 @@ msgstr "WiiTDB 文件"
 msgid "WiiTDB Path"
 msgstr "WiiTDB 文件路径"
 
-msgid "WiiTDB Path change"
-msgstr "变更 WiiTDB 路径"
-
 msgid "WiiTDB Path changed."
 msgstr "WiiTDB 路径已变更"
 
@@ -1275,6 +1251,27 @@ msgstr "的"
 
 msgid "seconds left"
 msgstr "剩余秒数"
+
+#~ msgid "SD/USB selected"
+#~ msgstr "SD/USB 已选择"
+
+#~ msgid "Cover Path Change"
+#~ msgstr "变更封面路径"
+
+#~ msgid "DOL path change"
+#~ msgstr "变更 DOL 路径"
+
+#~ msgid "Disc Path change"
+#~ msgstr "变更光盘图片路径"
+
+#~ msgid "Homebrew Appspath change"
+#~ msgstr "变更自制程序路径"
+
+#~ msgid "Theme Path change"
+#~ msgstr "变更主题路径"
+
+#~ msgid "WiiTDB Path change"
+#~ msgstr "变更 WiiTDB 路径"
 
 #~ msgid "Homebrew Channel"
 #~ msgstr "Homebrew 频道"

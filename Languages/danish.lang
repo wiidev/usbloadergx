@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-22 15:33+0200\n"
+"POT-Creation-Date: 2009-10-24 23:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: dorf[dk]\n"
 "Language-Team: \n"
@@ -297,9 +297,6 @@ msgstr "Kunne ikke sætte USB."
 msgid "Cover Download"
 msgstr "Cover-download"
 
-msgid "Cover Path Change"
-msgstr "Ændringer af sti til covers"
-
 msgid "Cover Path Changed"
 msgstr "Sti til covers ændret"
 
@@ -317,9 +314,6 @@ msgstr "Tilpassede/Originale"
 
 msgid "DOL Path"
 msgstr "Stil til DOL"
-
-msgid "DOL path change"
-msgstr "Ændringer af sti til DOL"
 
 msgid "DOL path changed"
 msgstr "Sti til DOL ændret"
@@ -377,9 +371,6 @@ msgstr "DVD-billeder"
 
 msgid "Disc Path Changed"
 msgstr "Sti til DVD-billeder"
-
-msgid "Disc Path change"
-msgstr "Ændringer til DVD-sti"
 
 msgid "DiskFlip"
 msgstr ""
@@ -575,9 +566,6 @@ msgstr ""
 
 msgid "Homebrew Apps Path"
 msgstr "Sti til homebrew-programmer"
-
-msgid "Homebrew Appspath change"
-msgstr "Ændringer af sti til homebrew-programmer"
 
 msgid "Homebrew Appspath changed"
 msgstr "Sti til homebrew-programmer ændret"
@@ -921,9 +909,6 @@ msgstr "Vibration"
 msgid "SChinese"
 msgstr "Kinesisk (std.)"
 
-msgid "SD/USB selected"
-msgstr "SD/USB er valgt"
-
 msgid "SFX Volume"
 msgstr "Lydstyrke for effekter"
 
@@ -1036,9 +1021,6 @@ msgstr "WAD-installationen mislykkedes med fejl %ld"
 msgid "Theme Download Path"
 msgstr ""
 
-msgid "Theme Download Path change"
-msgstr ""
-
 msgid "Theme Download Path changed"
 msgstr ""
 
@@ -1050,9 +1032,6 @@ msgstr "Sti til temaer"
 
 msgid "Theme Path Changed"
 msgstr "Sti til temaer ændret"
-
-msgid "Theme Path change"
-msgstr "Ændringer af sti til temaer"
 
 msgid "Theme Title:"
 msgstr ""
@@ -1182,9 +1161,6 @@ msgstr "WiiTDB-filer"
 msgid "WiiTDB Path"
 msgstr "Sti til WiiTDB"
 
-msgid "WiiTDB Path change"
-msgstr "Ændringer af sti til WiiTDB"
-
 msgid "WiiTDB Path changed."
 msgstr "Sti til WiiTDB ændret"
 
@@ -1275,3 +1251,24 @@ msgstr "af"
 
 msgid "seconds left"
 msgstr "sekunder tilbage"
+
+#~ msgid "SD/USB selected"
+#~ msgstr "SD/USB er valgt"
+
+#~ msgid "Cover Path Change"
+#~ msgstr "Ændringer af sti til covers"
+
+#~ msgid "DOL path change"
+#~ msgstr "Ændringer af sti til DOL"
+
+#~ msgid "Disc Path change"
+#~ msgstr "Ændringer til DVD-sti"
+
+#~ msgid "Homebrew Appspath change"
+#~ msgstr "Ændringer af sti til homebrew-programmer"
+
+#~ msgid "Theme Path change"
+#~ msgstr "Ændringer af sti til temaer"
+
+#~ msgid "WiiTDB Path change"
+#~ msgstr "Ændringer af sti til WiiTDB"

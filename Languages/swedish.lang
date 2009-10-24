@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-22 15:33+0200\n"
+"POT-Creation-Date: 2009-10-24 23:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -297,9 +297,6 @@ msgstr "Kunde inte ställa in USB."
 msgid "Cover Download"
 msgstr "Omslagsnedladdning"
 
-msgid "Cover Path Change"
-msgstr "Ändra omslagsmapp"
-
 msgid "Cover Path Changed"
 msgstr "Omslagsmapp ändrad"
 
@@ -317,9 +314,6 @@ msgstr "Anpassade/Original"
 
 msgid "DOL Path"
 msgstr "DOL-sökväg"
-
-msgid "DOL path change"
-msgstr "Ändra DOL-sökväg"
 
 msgid "DOL path changed"
 msgstr "DOL-sökväg ändrad"
@@ -377,9 +371,6 @@ msgstr "Skivbilder"
 
 msgid "Disc Path Changed"
 msgstr "Skivbildsmapp ändrad"
-
-msgid "Disc Path change"
-msgstr "Ändra skivbildsmapp"
 
 msgid "DiskFlip"
 msgstr "Vänd Skiva"
@@ -575,9 +566,6 @@ msgstr "Hemmeny"
 
 msgid "Homebrew Apps Path"
 msgstr "Homebrew Apps"
-
-msgid "Homebrew Appspath change"
-msgstr "Ändra Homebrew Apps"
 
 msgid "Homebrew Appspath changed"
 msgstr "Homebrew Apps ändrad"
@@ -921,9 +909,6 @@ msgstr "Vibration"
 msgid "SChinese"
 msgstr "SKinesiska"
 
-msgid "SD/USB selected"
-msgstr "SD/USB vald"
-
 msgid "SFX Volume"
 msgstr "SFX Volym"
 
@@ -1036,9 +1021,6 @@ msgstr "Wad installation misslyckades med fel %ld"
 msgid "Theme Download Path"
 msgstr ""
 
-msgid "Theme Download Path change"
-msgstr ""
-
 msgid "Theme Download Path changed"
 msgstr ""
 
@@ -1050,9 +1032,6 @@ msgstr "Tema-mapp"
 
 msgid "Theme Path Changed"
 msgstr "Tema-mapp ändrad"
-
-msgid "Theme Path change"
-msgstr "Byt Tema-mapp"
 
 msgid "Theme Title:"
 msgstr ""
@@ -1182,9 +1161,6 @@ msgstr "WiiTDB"
 msgid "WiiTDB Path"
 msgstr "WiiTDB-sökväg"
 
-msgid "WiiTDB Path change"
-msgstr "Ändra WiiTDB-sökväg"
-
 msgid "WiiTDB Path changed."
 msgstr "WiiTDB-sökväg ändrad."
 
@@ -1275,6 +1251,27 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder kvar"
+
+#~ msgid "SD/USB selected"
+#~ msgstr "SD/USB vald"
+
+#~ msgid "Cover Path Change"
+#~ msgstr "Ändra omslagsmapp"
+
+#~ msgid "DOL path change"
+#~ msgstr "Ändra DOL-sökväg"
+
+#~ msgid "Disc Path change"
+#~ msgstr "Ändra skivbildsmapp"
+
+#~ msgid "Homebrew Appspath change"
+#~ msgstr "Ändra Homebrew Apps"
+
+#~ msgid "Theme Path change"
+#~ msgstr "Byt Tema-mapp"
+
+#~ msgid "WiiTDB Path change"
+#~ msgstr "Ändra WiiTDB-sökväg"
 
 #~ msgid "Homebrew Channel"
 #~ msgstr "Homebrew Kanalen"

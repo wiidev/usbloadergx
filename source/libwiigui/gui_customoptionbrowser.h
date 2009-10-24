@@ -2,9 +2,9 @@
 
 class customOptionList {
 	public:
-		customOptionList(int size);
+		customOptionList(int Size);
 		~customOptionList();
-		void SetLength(int size);
+		void SetLength(int Length);
 		void SetName(int i, const char *format, ...) __attribute__((format (printf, 3, 4)));
 		const char *GetName(int i)
 		{
@@ -21,12 +21,15 @@ class customOptionList {
 			else
 				return "";
 		}
+		void Clear(bool OnlyValue=false);
 		int GetLength()	{ return length; }
 		bool IsChanged() { bool ret = changed; changed = false; return ret;}
 	private:
-		int length;
+		void SetSize(int Size);
+		int size;
 		char ** name;
 		char ** value;
+		int length;
 		bool changed;
 };
 

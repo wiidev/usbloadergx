@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-22 15:33+0200\n"
+"POT-Creation-Date: 2009-10-24 23:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
@@ -297,9 +297,6 @@ msgstr "USBをｾｯﾄできません"
 msgid "Cover Download"
 msgstr "どの画像をﾀﾞｳﾝﾛｰﾄﾞしますか"
 
-msgid "Cover Path Change"
-msgstr "カバーのパスの変更"
-
 msgid "Cover Path Changed"
 msgstr "カバーのパスを変更しました"
 
@@ -317,9 +314,6 @@ msgstr "自作メイン"
 
 msgid "DOL Path"
 msgstr "DOLのパス"
-
-msgid "DOL path change"
-msgstr "DOLのパスの変更"
 
 msgid "DOL path changed"
 msgstr "DOLのパスが変更されました"
@@ -377,9 +371,6 @@ msgstr "ﾃﾞｨｽｸ画像"
 
 msgid "Disc Path Changed"
 msgstr "ﾃﾞｨｽｸ画像のパスを変更しました"
-
-msgid "Disc Path change"
-msgstr "ﾃﾞｨｽｸ画像のパスの変更"
 
 msgid "DiskFlip"
 msgstr "ﾃﾞｨｽｸの回転のように"
@@ -575,9 +566,6 @@ msgstr "HOMEﾎﾞﾀﾝﾒﾆｭｰ"
 
 msgid "Homebrew Apps Path"
 msgstr "Homebrewのパス"
-
-msgid "Homebrew Appspath change"
-msgstr "Homebrewのパスの変更"
 
 msgid "Homebrew Appspath changed"
 msgstr "Homebrewのパスを変更しました"
@@ -921,9 +909,6 @@ msgstr "振動機能"
 msgid "SChinese"
 msgstr "簡体中国語"
 
-msgid "SD/USB selected"
-msgstr "SD/USBを選択"
-
 msgid "SFX Volume"
 msgstr "効果音の音量"
 
@@ -1036,9 +1021,6 @@ msgstr "WADのｲﾝｽﾄｰﾙはエラー:%ldで失敗しました"
 msgid "Theme Download Path"
 msgstr ""
 
-msgid "Theme Download Path change"
-msgstr ""
-
 msgid "Theme Download Path changed"
 msgstr ""
 
@@ -1050,9 +1032,6 @@ msgstr "テーマのパス"
 
 msgid "Theme Path Changed"
 msgstr "テーマのパスを変更しました"
-
-msgid "Theme Path change"
-msgstr "テーマのパスの変更"
 
 msgid "Theme Title:"
 msgstr ""
@@ -1182,9 +1161,6 @@ msgstr "WiiTDBﾌｧｲﾙ"
 msgid "WiiTDB Path"
 msgstr "WiiTDBのパス"
 
-msgid "WiiTDB Path change"
-msgstr "WiiTDBのパスの変更"
-
 msgid "WiiTDB Path changed."
 msgstr "WiiTDBのパスを変更しました."
 
@@ -1275,6 +1251,27 @@ msgstr "中"
 
 msgid "seconds left"
 msgstr "完了までの秒数"
+
+#~ msgid "SD/USB selected"
+#~ msgstr "SD/USBを選択"
+
+#~ msgid "Cover Path Change"
+#~ msgstr "カバーのパスの変更"
+
+#~ msgid "DOL path change"
+#~ msgstr "DOLのパスの変更"
+
+#~ msgid "Disc Path change"
+#~ msgstr "ﾃﾞｨｽｸ画像のパスの変更"
+
+#~ msgid "Homebrew Appspath change"
+#~ msgstr "Homebrewのパスの変更"
+
+#~ msgid "Theme Path change"
+#~ msgstr "テーマのパスの変更"
+
+#~ msgid "WiiTDB Path change"
+#~ msgstr "WiiTDBのパスの変更"
 
 #~ msgid "Homebrew Channel"
 #~ msgstr "HBCへ"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-22 15:33+0200\n"
+"POT-Creation-Date: 2009-10-24 23:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -297,9 +297,6 @@ msgstr ""
 msgid "Cover Download"
 msgstr ""
 
-msgid "Cover Path Change"
-msgstr ""
-
 msgid "Cover Path Changed"
 msgstr ""
 
@@ -316,9 +313,6 @@ msgid "Customs/Original"
 msgstr ""
 
 msgid "DOL Path"
-msgstr ""
-
-msgid "DOL path change"
 msgstr ""
 
 msgid "DOL path changed"
@@ -376,9 +370,6 @@ msgid "Disc Images"
 msgstr ""
 
 msgid "Disc Path Changed"
-msgstr ""
-
-msgid "Disc Path change"
 msgstr ""
 
 msgid "DiskFlip"
@@ -574,9 +565,6 @@ msgid "HOME Menu"
 msgstr ""
 
 msgid "Homebrew Apps Path"
-msgstr ""
-
-msgid "Homebrew Appspath change"
 msgstr ""
 
 msgid "Homebrew Appspath changed"
@@ -921,9 +909,6 @@ msgstr ""
 msgid "SChinese"
 msgstr ""
 
-msgid "SD/USB selected"
-msgstr ""
-
 msgid "SFX Volume"
 msgstr ""
 
@@ -1036,9 +1021,6 @@ msgstr ""
 msgid "Theme Download Path"
 msgstr ""
 
-msgid "Theme Download Path change"
-msgstr ""
-
 msgid "Theme Download Path changed"
 msgstr ""
 
@@ -1049,9 +1031,6 @@ msgid "Theme Path"
 msgstr ""
 
 msgid "Theme Path Changed"
-msgstr ""
-
-msgid "Theme Path change"
 msgstr ""
 
 msgid "Theme Title:"
@@ -1180,9 +1159,6 @@ msgid "WiiTDB Files"
 msgstr ""
 
 msgid "WiiTDB Path"
-msgstr ""
-
-msgid "WiiTDB Path change"
 msgstr ""
 
 msgid "WiiTDB Path changed."

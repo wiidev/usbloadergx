@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-22 15:33+0200\n"
+"POT-Creation-Date: 2009-10-24 23:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Nitro_subzero \n"
 "Language-Team: Nitro_subzero\n"
@@ -297,9 +297,6 @@ msgstr "ไม่สามารถตั้งค่า USB ได้"
 msgid "Cover Download"
 msgstr "ดาวน์โหลดปก"
 
-msgid "Cover Path Change"
-msgstr "ที่เก็บ ปก ถูกเปลี่ยนแปลง"
-
 msgid "Cover Path Changed"
 msgstr "ที่เก็บ ปก ถูกเปลี่ยนแปลง"
 
@@ -317,9 +314,6 @@ msgstr "กำหนดเอง/ดั้งเดิม"
 
 msgid "DOL Path"
 msgstr "ที่เก็บ DOL"
-
-msgid "DOL path change"
-msgstr "ที่เก็บ DOL ถูกเปลี่ยนแปลง"
 
 msgid "DOL path changed"
 msgstr "ที่เก็บ DOL ถูกเปลี่ยนแปลง"
@@ -376,9 +370,6 @@ msgid "Disc Images"
 msgstr "ภาพแผ่น"
 
 msgid "Disc Path Changed"
-msgstr "ที่เก็บ ภาพแผ่น ถูกเปลี่ยนแปลง"
-
-msgid "Disc Path change"
 msgstr "ที่เก็บ ภาพแผ่น ถูกเปลี่ยนแปลง"
 
 msgid "DiskFlip"
@@ -575,9 +566,6 @@ msgstr "เมนู HOME"
 
 msgid "Homebrew Apps Path"
 msgstr "ที่เก็บโปรแกรม Homebrew"
-
-msgid "Homebrew Appspath change"
-msgstr "ที่เก็บโปรแกรม Homebrew ถูกเปลี่ยนแปลง"
 
 msgid "Homebrew Appspath changed"
 msgstr "ที่เก็บโปรแกรม Homebrew ถูกเปลี่ยนแปลง"
@@ -921,9 +909,6 @@ msgstr "สั่น"
 msgid "SChinese"
 msgstr "จีน"
 
-msgid "SD/USB selected"
-msgstr "SD/USB ถูกเลือก"
-
 msgid "SFX Volume"
 msgstr "ความดังของ SFX"
 
@@ -1036,9 +1021,6 @@ msgstr "การติดตั้งไฟล์ Wad ล้มเหลวด�
 msgid "Theme Download Path"
 msgstr ""
 
-msgid "Theme Download Path change"
-msgstr ""
-
 msgid "Theme Download Path changed"
 msgstr ""
 
@@ -1049,9 +1031,6 @@ msgid "Theme Path"
 msgstr "ที่อยู่ Theme"
 
 msgid "Theme Path Changed"
-msgstr "ที่อยู่ Theme ถูกเปลี่ยนแปลง"
-
-msgid "Theme Path change"
 msgstr "ที่อยู่ Theme ถูกเปลี่ยนแปลง"
 
 msgid "Theme Title:"
@@ -1182,9 +1161,6 @@ msgstr "ไฟล์ WiiTDB"
 msgid "WiiTDB Path"
 msgstr "ที่อยู่ WiiTDB"
 
-msgid "WiiTDB Path change"
-msgstr "เปลี่ยนที่อยู่ WiiTDB"
-
 msgid "WiiTDB Path changed."
 msgstr "ที่อยู่ WiiTDB ถูกเปลี่ยนแปลง"
 
@@ -1275,6 +1251,27 @@ msgstr "จาก"
 
 msgid "seconds left"
 msgstr "วินาทีที่เหลือ"
+
+#~ msgid "SD/USB selected"
+#~ msgstr "SD/USB ถูกเลือก"
+
+#~ msgid "Cover Path Change"
+#~ msgstr "ที่เก็บ ปก ถูกเปลี่ยนแปลง"
+
+#~ msgid "DOL path change"
+#~ msgstr "ที่เก็บ DOL ถูกเปลี่ยนแปลง"
+
+#~ msgid "Disc Path change"
+#~ msgstr "ที่เก็บ ภาพแผ่น ถูกเปลี่ยนแปลง"
+
+#~ msgid "Homebrew Appspath change"
+#~ msgstr "ที่เก็บโปรแกรม Homebrew ถูกเปลี่ยนแปลง"
+
+#~ msgid "Theme Path change"
+#~ msgstr "ที่อยู่ Theme ถูกเปลี่ยนแปลง"
+
+#~ msgid "WiiTDB Path change"
+#~ msgstr "เปลี่ยนที่อยู่ WiiTDB"
 
 #~ msgid "You need to start this game one time to create a save file, then exit and start it again."
 #~ msgstr "คุณต้องเริ่มโหลดเกมส์นี้ใหม่ เพื่อสร้างไฟล์เซฟ ดังนั้นออกจากเกมส์แล้วเริ่มโหลดอีกครั้ง"

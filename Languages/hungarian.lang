@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-22 15:33+0200\n"
+"POT-Creation-Date: 2009-10-24 23:27+0200\n"
 "PO-Revision-Date: 2009-10-15 14:20+0100\n"
 "Last-Translator: Springdale <springdale@freemail.hu>\n"
 "Language-Team: Tusk, Springdale\n"
@@ -297,9 +297,6 @@ msgstr "USB beállítási hiba."
 msgid "Cover Download"
 msgstr "Boritó Letöltés"
 
-msgid "Cover Path Change"
-msgstr "Borító útvonal megváltoztatás"
-
 msgid "Cover Path Changed"
 msgstr "Boritó Útvonala megváltozott"
 
@@ -317,9 +314,6 @@ msgstr "Egyéni/Eredeti"
 
 msgid "DOL Path"
 msgstr "DOL útvonal"
-
-msgid "DOL path change"
-msgstr "DOL útvonal megváltoztatása"
 
 msgid "DOL path changed"
 msgstr "DOL útvonal megváltozott"
@@ -377,9 +371,6 @@ msgstr "Lemez Képek"
 
 msgid "Disc Path Changed"
 msgstr "Lemezképek Útvonala megváltoztatva"
-
-msgid "Disc Path change"
-msgstr "Lemezképek útvonalának megváltoztatása"
 
 msgid "DiskFlip"
 msgstr "Lemezforgatás"
@@ -575,9 +566,6 @@ msgstr "HOME Menû"
 
 msgid "Homebrew Apps Path"
 msgstr "Homebrew útvonal"
-
-msgid "Homebrew Appspath change"
-msgstr "Homebrew útvonal megváltoztatás"
 
 msgid "Homebrew Appspath changed"
 msgstr "Homebrew útvonal megváltoztatva"
@@ -921,9 +909,6 @@ msgstr "Rezgés"
 msgid "SChinese"
 msgstr "SKínai"
 
-msgid "SD/USB selected"
-msgstr "SD/USB kiválasztva"
-
 msgid "SFX Volume"
 msgstr "Effekt Hangerõ"
 
@@ -1036,9 +1021,6 @@ msgstr "A wad telepítés nem sikerült - hiba %ld"
 msgid "Theme Download Path"
 msgstr ""
 
-msgid "Theme Download Path change"
-msgstr ""
-
 msgid "Theme Download Path changed"
 msgstr ""
 
@@ -1050,9 +1032,6 @@ msgstr "Témák Útvonala"
 
 msgid "Theme Path Changed"
 msgstr "Témák Útvonala megváltozott"
-
-msgid "Theme Path change"
-msgstr "Témák Útvonalának megváltoztatása"
 
 msgid "Theme Title:"
 msgstr ""
@@ -1182,9 +1161,6 @@ msgstr "WiiTDB fájlok"
 msgid "WiiTDB Path"
 msgstr "WiiTDB útvonal"
 
-msgid "WiiTDB Path change"
-msgstr "WiiTDB útvonal vált."
-
 msgid "WiiTDB Path changed."
 msgstr "WiiTDB útvonal megváltozott."
 
@@ -1275,3 +1251,24 @@ msgstr "./"
 
 msgid "seconds left"
 msgstr "hátralévõ másodperc"
+
+#~ msgid "SD/USB selected"
+#~ msgstr "SD/USB kiválasztva"
+
+#~ msgid "Cover Path Change"
+#~ msgstr "Borító útvonal megváltoztatás"
+
+#~ msgid "DOL path change"
+#~ msgstr "DOL útvonal megváltoztatása"
+
+#~ msgid "Disc Path change"
+#~ msgstr "Lemezképek útvonalának megváltoztatása"
+
+#~ msgid "Homebrew Appspath change"
+#~ msgstr "Homebrew útvonal megváltoztatás"
+
+#~ msgid "Theme Path change"
+#~ msgstr "Témák Útvonalának megváltoztatása"
+
+#~ msgid "WiiTDB Path change"
+#~ msgstr "WiiTDB útvonal vált."

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-22 15:33+0200\n"
+"POT-Creation-Date: 2009-10-24 23:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: ziom666 (zadania_prog@vp.pl)\n"
 "Language-Team: \n"
@@ -297,9 +297,6 @@ msgstr "Nie mozna ustawic USB"
 msgid "Cover Download"
 msgstr "Pobierz okladki"
 
-msgid "Cover Path Change"
-msgstr "Zmien Sciezke okladek"
-
 msgid "Cover Path Changed"
 msgstr "Sciezka do okladek zostala zmieniona"
 
@@ -317,9 +314,6 @@ msgstr ""
 
 msgid "DOL Path"
 msgstr "Sciezka plikow .DOL"
-
-msgid "DOL path change"
-msgstr "Zmien sciezke plikow .DOL"
 
 msgid "DOL path changed"
 msgstr "Zmieniono sciezke plikow .DOL"
@@ -377,9 +371,6 @@ msgstr "Obrazki plyt"
 
 msgid "Disc Path Changed"
 msgstr "Sciezka do dysku zmieniona"
-
-msgid "Disc Path change"
-msgstr "Sciezka do plyt"
 
 msgid "DiskFlip"
 msgstr "Obrot plytami"
@@ -575,9 +566,6 @@ msgstr "Menu"
 
 msgid "Homebrew Apps Path"
 msgstr "Sciezka plikacji homebrew"
-
-msgid "Homebrew Appspath change"
-msgstr "Zmien Sciezke aplikacji homebrew"
 
 msgid "Homebrew Appspath changed"
 msgstr "Sciezka aplikacji homebrew zmieniona"
@@ -921,9 +909,6 @@ msgstr "Wibracje"
 msgid "SChinese"
 msgstr "uproszczony chinski"
 
-msgid "SD/USB selected"
-msgstr "Wybrano SD/USB"
-
 msgid "SFX Volume"
 msgstr "Poziom glosnosci SFX"
 
@@ -1036,9 +1021,6 @@ msgstr "Instalacja wad zakonczona bledek %ld"
 msgid "Theme Download Path"
 msgstr ""
 
-msgid "Theme Download Path change"
-msgstr ""
-
 msgid "Theme Download Path changed"
 msgstr ""
 
@@ -1050,9 +1032,6 @@ msgstr "Sciezka skorek"
 
 msgid "Theme Path Changed"
 msgstr "Zmieniono sciezke skorek"
-
-msgid "Theme Path change"
-msgstr "Zmien sciezke skorek"
 
 msgid "Theme Title:"
 msgstr ""
@@ -1182,9 +1161,6 @@ msgstr "WiiTDB"
 msgid "WiiTDB Path"
 msgstr "Sciezka WiiTDBPath"
 
-msgid "WiiTDB Path change"
-msgstr "Zmiana sciezki WiiTDBPath"
-
 msgid "WiiTDB Path changed."
 msgstr "Sciezka WiiTDBPath zmieniona"
 
@@ -1275,3 +1251,24 @@ msgstr "z"
 
 msgid "seconds left"
 msgstr "sekund pozostalo"
+
+#~ msgid "SD/USB selected"
+#~ msgstr "Wybrano SD/USB"
+
+#~ msgid "Cover Path Change"
+#~ msgstr "Zmien Sciezke okladek"
+
+#~ msgid "DOL path change"
+#~ msgstr "Zmien sciezke plikow .DOL"
+
+#~ msgid "Disc Path change"
+#~ msgstr "Sciezka do plyt"
+
+#~ msgid "Homebrew Appspath change"
+#~ msgstr "Zmien Sciezke aplikacji homebrew"
+
+#~ msgid "Theme Path change"
+#~ msgstr "Zmien sciezke skorek"
+
+#~ msgid "WiiTDB Path change"
+#~ msgstr "Zmiana sciezki WiiTDBPath"

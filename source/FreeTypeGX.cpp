@@ -545,7 +545,7 @@ int16_t FreeTypeGX::getStyleOffsetHeight(ftgxDataOffset *offset, uint16_t format
  * @param textStyle	Flags which specify any styling which should be applied to the rendered string.
  * @return The number of characters printed.
  */
-uint16_t FreeTypeGX::drawText(int16_t x, int16_t y, wchar_t *text, GXColor color, uint16_t textStyle) {
+uint16_t FreeTypeGX::drawText(int16_t x, int16_t y, const wchar_t *text, GXColor color, uint16_t textStyle) {
     uint16_t strLength = wcslen(text);
     uint16_t x_pos = x, printed = 0;
     uint16_t x_offset = 0, y_offset = 0;
@@ -592,12 +592,6 @@ uint16_t FreeTypeGX::drawText(int16_t x, int16_t y, wchar_t *text, GXColor color
     return printed;
 }
 
-/**
- * \overload
- */
-uint16_t FreeTypeGX::drawText(int16_t x, int16_t y, wchar_t const *text, GXColor color, uint16_t textStyle) {
-    return this->drawText(x, y, (wchar_t *)text, color, textStyle);
-}
 
 void FreeTypeGX::drawTextFeature(int16_t x, int16_t y, uint16_t width, ftgxDataOffset *offsetData, uint16_t format, GXColor color) {
     uint16_t featureHeight = this->ftPointSize_v >> 4 > 0 ? this->ftPointSize_v >> 4 : 1;
@@ -663,7 +657,7 @@ uint16_t FreeTypeGX::getWidth(const wchar_t *text) {
         if ( fontData.find(text[i]) != fontData.end() ) {
             glyphData = &fontData[text[i]];
         } else {
-            glyphData = this->cacheGlyphData(text[i]);
+            glyphData = this->cacheGlyphData(text[i], fontData);
         }
 
         if (glyphData != NULL) {
@@ -717,7 +711,7 @@ ftgxDataOffset* FreeTypeGX::getOffset(const wchar_t *text, ftgxDataOffset* offse
         if ( fontData.find(text[i]) != fontData.end() ) {
             glyphData = &fontData[text[i]];
         } else {
-            glyphData = this->cacheGlyphData(text[i]);
+            glyphData = this->cacheGlyphData(text[i], fontData);
         }
 
         if (glyphData != NULL) {
