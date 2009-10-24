@@ -510,7 +510,7 @@ int Theme_Downloader()
                         sprintf(url, "%s", Theme->GetImageLink(i));
 
                     char filepath[300];
-                    snprintf(filepath, sizeof(filepath), "%s/tmp/%s.png", Settings.theme_downloadpath, Theme->GetThemeTitle(i));
+                    snprintf(filepath, sizeof(filepath), "%s/tmp/%s.jpg", Settings.theme_downloadpath, Theme->GetThemeTitle(i));
 
                     FILE * storefile = fopen(filepath, "rb");
 
