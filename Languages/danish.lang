@@ -1,5 +1,5 @@
 # USB Loader GX language source file.
-# danish.lang - r790
+# danish.lang - r813
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
@@ -8,7 +8,7 @@ msgstr ""
 "POT-Creation-Date: 2009-10-24 23:27+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: dorf[dk]\n"
-"Language-Team: \n"
+"Language-Team: dorf[dk]\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -30,7 +30,7 @@ msgstr " er ikke på serveren."
 
 #, c-format
 msgid "%s : %s May not boot correctly if your System Menu is not up to date."
-msgstr ""
+msgstr "%s : %s booter måske ikke korrekt, hvis system menuen ikke er opdateret."
 
 msgid "0 (Everyone)"
 msgstr "0 (Alle)"
@@ -54,7 +54,7 @@ msgid "2D Cover Path"
 msgstr "Sti til 2-d covers"
 
 msgid "3 (Mature 16+)"
-msgstr "3 (Modne teenagere 12+)"
+msgstr "3 (Modne teenagere 16+)"
 
 msgid "3 min"
 msgstr "3 min."
@@ -90,13 +90,13 @@ msgid ">> Deleting title ...Ok!"
 msgstr ">> Sletter titel...Ok!"
 
 msgid ">> Deleting title contents..."
-msgstr ">> Sletter titel-indhold..."
+msgstr ">> Sletter titelindhold..."
 
 msgid ">> Deleting title contents...ERROR! "
-msgstr ">> Sletter titel-indhold...FEJL!"
+msgstr ">> Sletter titelindhold...FEJL!"
 
 msgid ">> Deleting title contents...Ok!"
-msgstr ">> Sletter titel-indhold...Ok!"
+msgstr ">> Sletter titelindhold...Ok!"
 
 msgid ">> Deleting title..."
 msgstr ">> Sletter titel..."
@@ -126,7 +126,7 @@ msgid "AUTO"
 msgstr ""
 
 msgid "All the features of USB Loader GX are unlocked."
-msgstr "Alle USB Loader GX's funktioner er lÃ¥st op."
+msgstr "Alle USB Loader GX's funktioner er låst op."
 
 msgid "Alternate DOL"
 msgstr "Alternativ DOL"
@@ -150,7 +150,7 @@ msgid "Aug"
 msgstr ""
 
 msgid "Author:"
-msgstr ""
+msgstr "Forfatter:"
 
 msgid "AutoInit Network"
 msgstr "AutoInit net"
@@ -198,7 +198,7 @@ msgid "Can't create directory"
 msgstr "Kan ikke lave ny mappe"
 
 msgid "Can't create file"
-msgstr ""
+msgstr "Kan ikke oprette fil"
 
 msgid "Can't delete:"
 msgstr "Kan ikke slettes:"
@@ -231,7 +231,7 @@ msgid "Close"
 msgstr "Luk"
 
 msgid "Code Download"
-msgstr "Download af kode"
+msgstr "Download af koder"
 
 #, c-format
 msgid "Coded by: %s"
@@ -397,7 +397,7 @@ msgid "Do you want to change language?"
 msgstr "Vil du ændre sprog?"
 
 msgid "Do you want to download this theme?"
-msgstr ""
+msgstr "Vil du downloade dette tema?"
 
 msgid "Do you want to format:"
 msgstr "Vil du formatere:"
@@ -427,25 +427,25 @@ msgid "Download Now"
 msgstr "Download nu"
 
 msgid "Download failed."
-msgstr ""
+msgstr "Download mislykkedes."
 
 msgid "Download finished"
 msgstr "Download færdig"
 
 msgid "Download request failed."
-msgstr ""
+msgstr "Anmodning om download mislykkedes."
 
 msgid "Downloading"
 msgstr "Downloader"
 
 msgid "Downloading Page List:"
-msgstr ""
+msgstr "Downloader side liste:"
 
 msgid "Downloading file"
 msgstr "Downloader fil"
 
 msgid "Downloading image:"
-msgstr ""
+msgstr "Downloader billede:"
 
 msgid "Dutch"
 msgstr "Hollandsk"
@@ -484,13 +484,13 @@ msgid "Exit USB Loader GX?"
 msgstr "Afslut USB Loader GX?"
 
 msgid "Extracting files..."
-msgstr ""
+msgstr "Pakker filer ud..."
 
 msgid "Failed formating"
 msgstr "Formateringen mislykkedes"
 
 msgid "Failed to extract."
-msgstr ""
+msgstr "Udpakningen mislykkedes."
 
 msgid "Failed to open partition"
 msgstr "Kunne ikke åbne partition"
@@ -727,7 +727,7 @@ msgid "Network init error"
 msgstr "Netforbindelsen kunne ikke intialiseres"
 
 msgid "New Disc Detected"
-msgstr ""
+msgstr "Har opdaget ny DVD"
 
 msgid "Next"
 msgstr "Næste"
@@ -772,7 +772,7 @@ msgid "No new updates."
 msgstr "Ingen nye opdateringer."
 
 msgid "No themes found on the site."
-msgstr ""
+msgstr "Der blev ikke fundet nogle temaer på denne site."
 
 msgid "Normal"
 msgstr "Normal"
@@ -988,7 +988,7 @@ msgid "Successfully deleted:"
 msgstr "Sletningen lykkedes:"
 
 msgid "Successfully extracted theme"
-msgstr ""
+msgstr "Udpakning af tema lykkedes"
 
 msgid "Successfully installed:"
 msgstr "Installationen lykkedes:"
@@ -1019,13 +1019,13 @@ msgid "The wad installation failed with error %ld"
 msgstr "WAD-installationen mislykkedes med fejl %ld"
 
 msgid "Theme Download Path"
-msgstr ""
+msgstr "Sti til download af temaer"
 
 msgid "Theme Download Path changed"
-msgstr ""
+msgstr "Sti til download af temaer ændret"
 
 msgid "Theme Downloader"
-msgstr ""
+msgstr "Tema-downloader"
 
 msgid "Theme Path"
 msgstr "Sti til temaer"
@@ -1034,7 +1034,7 @@ msgid "Theme Path Changed"
 msgstr "Sti til temaer ændret"
 
 msgid "Theme Title:"
-msgstr ""
+msgstr "Tematitel:"
 
 msgid "Time left:"
 msgstr "Tid tilbage:"
@@ -1049,7 +1049,7 @@ msgid "Tooltips"
 msgstr "Værktøjtips"
 
 msgid "Transfer failed."
-msgstr ""
+msgstr "Overførslen mislykkedes"
 
 msgid "USB Device not found"
 msgstr "USB-enhed ikke fundet"
@@ -1080,7 +1080,7 @@ msgid "Unlocked"
 msgstr "Låst op"
 
 msgid "Unsupported format, try to extract manually."
-msgstr ""
+msgstr "Formatet er ikke understøttet - prøv at udpakke manuelt."
 
 msgid "Update"
 msgstr "Opdatér"
@@ -1229,7 +1229,7 @@ msgid "for his awesome tool"
 msgstr "for hans seje værktøj"
 
 msgid "for hosting the themes"
-msgstr ""
+msgstr "for at hoste temaerne"
 
 msgid "for hosting the update files"
 msgstr "for at hoste opdateringer"
@@ -1251,24 +1251,3 @@ msgstr "af"
 
 msgid "seconds left"
 msgstr "sekunder tilbage"
-
-#~ msgid "SD/USB selected"
-#~ msgstr "SD/USB er valgt"
-
-#~ msgid "Cover Path Change"
-#~ msgstr "Ændringer af sti til covers"
-
-#~ msgid "DOL path change"
-#~ msgstr "Ændringer af sti til DOL"
-
-#~ msgid "Disc Path change"
-#~ msgstr "Ændringer til DVD-sti"
-
-#~ msgid "Homebrew Appspath change"
-#~ msgstr "Ændringer af sti til homebrew-programmer"
-
-#~ msgid "Theme Path change"
-#~ msgstr "Ændringer af sti til temaer"
-
-#~ msgid "WiiTDB Path change"
-#~ msgstr "Ændringer af sti til WiiTDB"

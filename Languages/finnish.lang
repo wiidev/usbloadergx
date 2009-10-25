@@ -1251,24 +1251,3 @@ msgstr "josta"
 
 msgid "seconds left"
 msgstr "sekuntia jäljellä"
-
-#~ msgid "SD/USB selected"
-#~ msgstr "SD/USB valittu"
-
-#~ msgid "Cover Path Change"
-#~ msgstr "Kansipolun vaihto"
-
-#~ msgid "DOL path change"
-#~ msgstr "DOL:in polun muutto"
-
-#~ msgid "Disc Path change"
-#~ msgstr "Levykuvien polku"
-
-#~ msgid "Homebrew Appspath change"
-#~ msgstr "Homebrew Apps polunvaihto"
-
-#~ msgid "Theme Path change"
-#~ msgstr "Teeman sijainti"
-
-#~ msgid "WiiTDB Path change"
-#~ msgstr "WiiTDB polun muutto"

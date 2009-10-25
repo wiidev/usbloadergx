@@ -1251,24 +1251,3 @@ msgstr "z"
 
 msgid "seconds left"
 msgstr "sekund pozostalo"
-
-#~ msgid "SD/USB selected"
-#~ msgstr "Wybrano SD/USB"
-
-#~ msgid "Cover Path Change"
-#~ msgstr "Zmien Sciezke okladek"
-
-#~ msgid "DOL path change"
-#~ msgstr "Zmien sciezke plikow .DOL"
-
-#~ msgid "Disc Path change"
-#~ msgstr "Sciezka do plyt"
-
-#~ msgid "Homebrew Appspath change"
-#~ msgstr "Zmien Sciezke aplikacji homebrew"
-
-#~ msgid "Theme Path change"
-#~ msgstr "Zmien sciezke skorek"
-
-#~ msgid "WiiTDB Path change"
-#~ msgstr "Zmiana sciezki WiiTDBPath"

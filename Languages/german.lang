@@ -1252,27 +1252,6 @@ msgstr "von"
 msgid "seconds left"
 msgstr "Sekunden verbleiben"
 
-#~ msgid "SD/USB selected"
-#~ msgstr "SD/USB gewählt"
-
-#~ msgid "Cover Path Change"
-#~ msgstr "Cover Pfad ändern"
-
-#~ msgid "DOL path change"
-#~ msgstr "DOL pfad änderung"
-
-#~ msgid "Disc Path change"
-#~ msgstr "Disk Pfad ändern"
-
-#~ msgid "Homebrew Appspath change"
-#~ msgstr "Homebrew Programmpfad Änderung"
-
-#~ msgid "Theme Path change"
-#~ msgstr "Theme Pfad ändern"
-
-#~ msgid "WiiTDB Path change"
-#~ msgstr "WiiTDB Pfad ändern"
-
 #~ msgid "Homebrew Channel"
 #~ msgstr "Homebrew Kanal"
 

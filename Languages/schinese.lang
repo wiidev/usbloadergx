@@ -1252,26 +1252,5 @@ msgstr "的"
 msgid "seconds left"
 msgstr "剩余秒数"
 
-#~ msgid "SD/USB selected"
-#~ msgstr "SD/USB 已选择"
-
-#~ msgid "Cover Path Change"
-#~ msgstr "变更封面路径"
-
-#~ msgid "DOL path change"
-#~ msgstr "变更 DOL 路径"
-
-#~ msgid "Disc Path change"
-#~ msgstr "变更光盘图片路径"
-
-#~ msgid "Homebrew Appspath change"
-#~ msgstr "变更自制程序路径"
-
-#~ msgid "Theme Path change"
-#~ msgstr "变更主题路径"
-
-#~ msgid "WiiTDB Path change"
-#~ msgstr "变更 WiiTDB 路径"
-
 #~ msgid "Homebrew Channel"
 #~ msgstr "Homebrew 频道"

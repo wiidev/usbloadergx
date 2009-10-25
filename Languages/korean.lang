@@ -1252,26 +1252,5 @@ msgstr "중"
 msgid "seconds left"
 msgstr "초 남았습니다"
 
-#~ msgid "SD/USB selected"
-#~ msgstr "SD/USB 선택됨"
-
-#~ msgid "Cover Path Change"
-#~ msgstr "커퍼경로 변경"
-
-#~ msgid "DOL path change"
-#~ msgstr "DOL 경로 변겸"
-
-#~ msgid "Disc Path change"
-#~ msgstr "디스크 경로 변경"
-
-#~ msgid "Homebrew Appspath change"
-#~ msgstr "홈브류 경로 변경"
-
-#~ msgid "Theme Path change"
-#~ msgstr "테마 경로 변경"
-
-#~ msgid "WiiTDB Path change"
-#~ msgstr "WiiTDB경로 변경"
-
 #~ msgid "Homebrew Channel"
 #~ msgstr "홈브류 채널"

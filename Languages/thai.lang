@@ -1252,27 +1252,6 @@ msgstr "จาก"
 msgid "seconds left"
 msgstr "วินาทีที่เหลือ"
 
-#~ msgid "SD/USB selected"
-#~ msgstr "SD/USB ถูกเลือก"
-
-#~ msgid "Cover Path Change"
-#~ msgstr "ที่เก็บ ปก ถูกเปลี่ยนแปลง"
-
-#~ msgid "DOL path change"
-#~ msgstr "ที่เก็บ DOL ถูกเปลี่ยนแปลง"
-
-#~ msgid "Disc Path change"
-#~ msgstr "ที่เก็บ ภาพแผ่น ถูกเปลี่ยนแปลง"
-
-#~ msgid "Homebrew Appspath change"
-#~ msgstr "ที่เก็บโปรแกรม Homebrew ถูกเปลี่ยนแปลง"
-
-#~ msgid "Theme Path change"
-#~ msgstr "ที่อยู่ Theme ถูกเปลี่ยนแปลง"
-
-#~ msgid "WiiTDB Path change"
-#~ msgstr "เปลี่ยนที่อยู่ WiiTDB"
-
 #~ msgid "You need to start this game one time to create a save file, then exit and start it again."
 #~ msgstr "คุณต้องเริ่มโหลดเกมส์นี้ใหม่ เพื่อสร้างไฟล์เซฟ ดังนั้นออกจากเกมส์แล้วเริ่มโหลดอีกครั้ง"
 

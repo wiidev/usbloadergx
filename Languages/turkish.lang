@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# turkish.lang - r790
+# turkish.lang - r813
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-24 23:27+0200\n"
+"POT-Creation-Date: 2009-10-25 03:55+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: omercigingelini\n"
 "Language-Team: omercigingelini\n"
@@ -23,7 +23,7 @@ msgid " could not be downloaded."
 msgstr " indirilemedi."
 
 msgid " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information."
-msgstr " kaydedildi. Bazı kodlar birbirleriyle doğru şekilde çalışmayabilir. Herhangi bir problem yaşarsanız, daha fazla bilgi için metin dosyasını gerçek bir metin editörüyle açın"
+msgstr " kaydedildi. Metin doğrulanmadı. Bazı kodlar birlikteyken doğru çalışmayabilir. Herhangi bir problem yaşarsanız, daha fazla bilgi için metin dosyasını gerçek bir metin editörüyle açın"
 
 msgid " is not on the server."
 msgstr " sunucuda mevcut değil"
@@ -150,7 +150,7 @@ msgid "Aug"
 msgstr "Ağu"
 
 msgid "Author:"
-msgstr ""
+msgstr "Yazar:"
 
 msgid "AutoInit Network"
 msgstr "Ağı ototanımla"
@@ -186,7 +186,7 @@ msgid "Boot/Standard"
 msgstr "Boot/Standart"
 
 msgid "Boot?"
-msgstr ""
+msgstr "Başlat?"
 
 msgid "Both"
 msgstr "İkisi de"
@@ -198,7 +198,7 @@ msgid "Can't create directory"
 msgstr "Klasör olusturulamiyor"
 
 msgid "Can't create file"
-msgstr ""
+msgstr "Dosya oluşturulamıyor"
 
 msgid "Can't delete:"
 msgstr "Silinemiyor"
@@ -397,7 +397,7 @@ msgid "Do you want to change language?"
 msgstr "Dili değiştirmek istiyor musunuz?"
 
 msgid "Do you want to download this theme?"
-msgstr ""
+msgstr "Bu temayı indirmek istiyor musunuz?"
 
 msgid "Do you want to format:"
 msgstr "Formatlamak istiyor musunuz:"
@@ -415,7 +415,7 @@ msgid "Done!"
 msgstr "Tamam!"
 
 msgid "Download"
-msgstr ""
+msgstr "İndir"
 
 msgid "Download Boxart image?"
 msgstr "Kutu resmi indirilsin mi?"
@@ -427,13 +427,13 @@ msgid "Download Now"
 msgstr "Şimdi indir"
 
 msgid "Download failed."
-msgstr ""
+msgstr "İndirme başarısız"
 
 msgid "Download finished"
 msgstr "Indirme tamamlandı"
 
 msgid "Download request failed."
-msgstr ""
+msgstr "İndirme isteği başarısız"
 
 msgid "Downloading"
 msgstr "Indiriliyor"
@@ -445,7 +445,7 @@ msgid "Downloading file"
 msgstr "Indirilen dosya"
 
 msgid "Downloading image:"
-msgstr ""
+msgstr "İndirilen resim:"
 
 msgid "Dutch"
 msgstr "Flaman"
@@ -484,7 +484,7 @@ msgid "Exit USB Loader GX?"
 msgstr "USB Loader GX'den çık?"
 
 msgid "Extracting files..."
-msgstr ""
+msgstr "Dosyalar çıkarılıyor..."
 
 msgid "Failed formating"
 msgstr "Biçimlendirme başarısız"
@@ -505,7 +505,7 @@ msgid "Finishing installation... Ok!"
 msgstr "Kurulum bitiriliyor.. OK!"
 
 msgid "Flip-X"
-msgstr ""
+msgstr "Çevir-X"
 
 msgid "Force"
 msgstr "Zorla"
@@ -727,7 +727,7 @@ msgid "Network init error"
 msgstr "Ag baslatma hatasi"
 
 msgid "New Disc Detected"
-msgstr ""
+msgstr "Yeni Disk Bulundu"
 
 msgid "Next"
 msgstr "Ileri"
@@ -772,7 +772,7 @@ msgid "No new updates."
 msgstr "Güncelleme yok"
 
 msgid "No themes found on the site."
-msgstr ""
+msgstr "Bu sitede tema bulunamadı"
 
 msgid "Normal"
 msgstr "Normal"
@@ -811,7 +811,7 @@ msgid "ON"
 msgstr "AÇIK"
 
 msgid "Oct"
-msgstr ""
+msgstr "Eki"
 
 msgid "Official Site:"
 msgstr "Resmi Site:"
@@ -988,7 +988,7 @@ msgid "Successfully deleted:"
 msgstr "Başarıyla silindi:"
 
 msgid "Successfully extracted theme"
-msgstr ""
+msgstr "Tema başarıyla çıkarıldı"
 
 msgid "Successfully installed:"
 msgstr "Başarıyla kuruldu:"
@@ -1019,13 +1019,13 @@ msgid "The wad installation failed with error %ld"
 msgstr "Wad kurulumu %ld hatasıyla başarısız oldu"
 
 msgid "Theme Download Path"
-msgstr ""
+msgstr "Tema İndirme Yolu"
 
 msgid "Theme Download Path changed"
-msgstr ""
+msgstr "Tema İndirme Yolu değişti"
 
 msgid "Theme Downloader"
-msgstr ""
+msgstr "Tema İndirici"
 
 msgid "Theme Path"
 msgstr "Tema Yolu"
@@ -1034,7 +1034,7 @@ msgid "Theme Path Changed"
 msgstr "Tema Yolu Değişti"
 
 msgid "Theme Title:"
-msgstr ""
+msgstr "Tema Başlığı:"
 
 msgid "Time left:"
 msgstr "Kalan zaman:"
@@ -1049,7 +1049,7 @@ msgid "Tooltips"
 msgstr "Yardımlar"
 
 msgid "Transfer failed."
-msgstr ""
+msgstr "Transfer başarısız"
 
 msgid "USB Device not found"
 msgstr "USB Aygıtı bulunamadı"
@@ -1080,7 +1080,7 @@ msgid "Unlocked"
 msgstr "Kilit açıldı"
 
 msgid "Unsupported format, try to extract manually."
-msgstr ""
+msgstr "Desteklenmeyen format,elle çıkartmayı deneyin"
 
 msgid "Update"
 msgstr "Güncelleme"
@@ -1129,7 +1129,7 @@ msgstr "VIDTV Yaması"
 
 #, c-format
 msgid "Version: %s"
-msgstr ""
+msgstr "Vesiyon: %s"
 
 msgid "Video Mode"
 msgstr "Video Modu"
@@ -1229,7 +1229,7 @@ msgid "for his awesome tool"
 msgstr "awesome tool için"
 
 msgid "for hosting the themes"
-msgstr ""
+msgstr "tema sunucusu icin"
 
 msgid "for hosting the update files"
 msgstr "güncelleme dosyalarını sunduğu için"
@@ -1251,27 +1251,3 @@ msgstr "./"
 
 msgid "seconds left"
 msgstr "saniye kaldı"
-
-#~ msgid "SD/USB selected"
-#~ msgstr "SD/USB seçildi"
-
-#~ msgid "Cover Path Change"
-#~ msgstr "Kapak Yolu Değiştirme"
-
-#~ msgid "DOL path change"
-#~ msgstr "DOL Yolu değiştirme"
-
-#~ msgid "Disc Path change"
-#~ msgstr "Disk Yolunu Değiştir"
-
-#~ msgid "Homebrew Appspath change"
-#~ msgstr "Homebrew Yazılım Yolu değiştir"
-
-#~ msgid "Theme Path change"
-#~ msgstr "Tema yolunu değiştir"
-
-#~ msgid "WiiTDB Path change"
-#~ msgstr "WiiTDB Yolunu değiştir"
-
-#~ msgid "Homebrew Channel"
-#~ msgstr "Homebrew Kanalı"

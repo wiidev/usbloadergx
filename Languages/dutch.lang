@@ -1252,27 +1252,6 @@ msgstr "van"
 msgid "seconds left"
 msgstr "seconden over:"
 
-#~ msgid "SD/USB selected"
-#~ msgstr "SD/USB geselecteerd"
-
-#~ msgid "Cover Path Change"
-#~ msgstr "Hoesjesmap wijzigen"
-
-#~ msgid "DOL path change"
-#~ msgstr "Locatie DOL wijzigen"
-
-#~ msgid "Disc Path change"
-#~ msgstr "Locatie DVD labels wijzigen"
-
-#~ msgid "Homebrew Appspath change"
-#~ msgstr "Locatie HB apps wijzigen"
-
-#~ msgid "Theme Path change"
-#~ msgstr "Locatie thema wijzigen"
-
-#~ msgid "WiiTDB Path change"
-#~ msgstr "Locatie WiiTDB wijzigen"
-
 #~ msgid "Homebrew Channel"
 #~ msgstr "Homebrew Kanaal"
 

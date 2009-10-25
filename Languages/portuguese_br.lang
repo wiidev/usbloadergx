@@ -1,14 +1,14 @@
 # USB Loader GX language source file.
-# portuguese_br.lang - r729
+# portuguese_br.lang - r813
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-24 23:27+0200\n"
-"PO-Revision-Date: 2009-10-01 01:00+0200\n"
+"POT-Creation-Date: 2009-10-25 03:55+0100\n"
+"PO-Revision-Date: 2009-10-23 18:52+0200\n"
 "Last-Translator: boto12\n"
-"Language-Team: \n"
+"Language-Team: boto12\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -30,7 +30,7 @@ msgstr " não está no servidor."
 
 #, c-format
 msgid "%s : %s May not boot correctly if your System Menu is not up to date."
-msgstr ""
+msgstr "%s : %s Pode não carregar corretamente se seu sistema não estiver atualizado."
 
 msgid "0 (Everyone)"
 msgstr "0 (Todos)"
@@ -150,7 +150,7 @@ msgid "Aug"
 msgstr "Ago"
 
 msgid "Author:"
-msgstr ""
+msgstr "Autor:"
 
 msgid "AutoInit Network"
 msgstr "Auto-iniciar Rede"
@@ -198,7 +198,7 @@ msgid "Can't create directory"
 msgstr "Não foi possível criar a pasta"
 
 msgid "Can't create file"
-msgstr ""
+msgstr "Não foi possivel criar o arquivo"
 
 msgid "Can't delete:"
 msgstr "Não foi possível apagar:"
@@ -355,7 +355,7 @@ msgid "Developed by"
 msgstr "Desenvolvido por"
 
 msgid "Directory does not exist!"
-msgstr ""
+msgstr "Diretorio não existe!"
 
 msgid "Disc Artwork Download"
 msgstr "Baixar Imagens Disco"
@@ -397,7 +397,7 @@ msgid "Do you want to change language?"
 msgstr "Deseja alterar o idioma?"
 
 msgid "Do you want to download this theme?"
-msgstr ""
+msgstr "Deseja baixar este tema?"
 
 msgid "Do you want to format:"
 msgstr "Deseja FORMATAR:"
@@ -415,7 +415,7 @@ msgid "Done!"
 msgstr "Concluído!"
 
 msgid "Download"
-msgstr ""
+msgstr "Baixar"
 
 msgid "Download Boxart image?"
 msgstr "Baixar imagem da Caixa?"
@@ -427,25 +427,25 @@ msgid "Download Now"
 msgstr "Baixar agora"
 
 msgid "Download failed."
-msgstr ""
+msgstr "Download falhou"
 
 msgid "Download finished"
 msgstr "Download Terminado"
 
 msgid "Download request failed."
-msgstr ""
+msgstr "Download requerido falhou"
 
 msgid "Downloading"
 msgstr "Baixando"
 
 msgid "Downloading Page List:"
-msgstr ""
+msgstr "Baixando lista de paginas:"
 
 msgid "Downloading file"
-msgstr "Baixando arquivo:"
+msgstr "Baixando arquivo"
 
 msgid "Downloading image:"
-msgstr ""
+msgstr "Baixando imagem:"
 
 msgid "Dutch"
 msgstr "Holandês"
@@ -484,13 +484,13 @@ msgid "Exit USB Loader GX?"
 msgstr "Deseja sair do USB Loader GX?"
 
 msgid "Extracting files..."
-msgstr ""
+msgstr "Extraindo arquivos..."
 
 msgid "Failed formating"
 msgstr "Falha ao formatar"
 
 msgid "Failed to extract."
-msgstr ""
+msgstr "Falha ao extrair"
 
 msgid "Failed to open partition"
 msgstr "Falha ao abrir partição"
@@ -594,7 +594,7 @@ msgid "Incoming file %0.2fMB"
 msgstr "Recebendo arquivo %0.2fMB"
 
 msgid "Initializing Network"
-msgstr "Inicializando Ligação de Rede"
+msgstr "Inicializando a Rede"
 
 msgid "Insert Disk"
 msgstr "Insira o Disco"
@@ -727,7 +727,7 @@ msgid "Network init error"
 msgstr "Erro ao inicializar ligação de rede"
 
 msgid "New Disc Detected"
-msgstr ""
+msgstr "Detectado Novo Disco"
 
 msgid "Next"
 msgstr "Próximo"
@@ -772,7 +772,7 @@ msgid "No new updates."
 msgstr "Não existem novas atualizações."
 
 msgid "No themes found on the site."
-msgstr ""
+msgstr "Nenhum tema encontrado no site"
 
 msgid "Normal"
 msgstr ""
@@ -835,13 +835,13 @@ msgid "Partition"
 msgstr "Partição"
 
 msgid "Password"
-msgstr ""
+msgstr "Senha"
 
 msgid "Password Changed"
-msgstr "Password Alterada"
+msgstr "Senha Alterada"
 
 msgid "Password has been changed"
-msgstr "O Password foi alterado"
+msgstr "A Senha foi alterada"
 
 msgid "Paste it into your browser to get your WiiTDB.zip."
 msgstr "Copie para o seu browser de Internet para baixar o WiiTDB.zip"
@@ -937,7 +937,7 @@ msgid "Sept"
 msgstr "Set"
 
 msgid "Set Search-Filter"
-msgstr ""
+msgstr "Usar filtro de busca"
 
 msgid "Set as backgroundmusic?"
 msgstr "Definir como música de fundo?"
@@ -955,7 +955,7 @@ msgid "Sort alphabetically"
 msgstr "Ordenar por ordem alfabética"
 
 msgid "Sort by rank"
-msgstr ""
+msgstr "Ordenar por ranking"
 
 msgid "Sort order by most played"
 msgstr "Ordenar por número de vezes jogadas"
@@ -988,7 +988,7 @@ msgid "Successfully deleted:"
 msgstr "Eliminado com Sucesso:"
 
 msgid "Successfully extracted theme"
-msgstr ""
+msgstr "Tema extraido com sucesso"
 
 msgid "Successfully installed:"
 msgstr "Instalado com Sucesso:"
@@ -1006,7 +1006,7 @@ msgid "TXT Cheatcodes Path changed"
 msgstr "Pasta de Dicas alterada"
 
 msgid "The entered directory does not exist. Would you like to create it?"
-msgstr ""
+msgstr "O diretorio não existe. Gostaria de cria-lo?"
 
 msgid "The file is not a .wad"
 msgstr "O arquivo não é um .wad"
@@ -1019,13 +1019,13 @@ msgid "The wad installation failed with error %ld"
 msgstr "A instalação do wad falhou com o seguinte erro: %ld"
 
 msgid "Theme Download Path"
-msgstr ""
+msgstr "Pasta de Temas Baixados"
 
 msgid "Theme Download Path changed"
-msgstr ""
+msgstr "Pasta de Temas Baixados Alterado"
 
 msgid "Theme Downloader"
-msgstr ""
+msgstr "Baixador de Temas"
 
 msgid "Theme Path"
 msgstr "Pasta Temas"
@@ -1034,7 +1034,7 @@ msgid "Theme Path Changed"
 msgstr "Pasta dos Temas alterada"
 
 msgid "Theme Title:"
-msgstr ""
+msgstr "Titulo do Tema:"
 
 msgid "Time left:"
 msgstr "Tempo restante:"
@@ -1049,7 +1049,7 @@ msgid "Tooltips"
 msgstr "Dicas"
 
 msgid "Transfer failed."
-msgstr ""
+msgstr "Falhou a transferencia"
 
 msgid "USB Device not found"
 msgstr "Dispositivo USB não encontrado"
@@ -1080,7 +1080,7 @@ msgid "Unlocked"
 msgstr "Desbloqueado"
 
 msgid "Unsupported format, try to extract manually."
-msgstr ""
+msgstr "Formato não suportado, tente extrair manualmente."
 
 msgid "Update"
 msgstr "Verificar Atualizações"
@@ -1190,7 +1190,7 @@ msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 msgstr "Sua URL foi salva em %sWiiTDB_URL.txt."
 
 msgid "and translaters for language files updates"
-msgstr ""
+msgstr "e tradutores para atualizações de linguas"
 
 msgid "available"
 msgstr "disponível"
@@ -1202,10 +1202,10 @@ msgid "does not exist!"
 msgstr "não existe!"
 
 msgid "does not exist!  Loading game without cheats."
-msgstr "não existe!  Carregando jogo sem truques."
+msgstr "não existe! Carregando jogo sem truques."
 
 msgid "does not exist!  You Messed something up, Idiot."
-msgstr "não existe!   Estragou algo, idiota."
+msgstr "não existe! Estragou algo, idiota."
 
 msgid "file left"
 msgstr "arquivo restante"
@@ -1229,7 +1229,7 @@ msgid "for his awesome tool"
 msgstr "pela sua espetacular ferramenta"
 
 msgid "for hosting the themes"
-msgstr ""
+msgstr "por hospedar os temas"
 
 msgid "for hosting the update files"
 msgstr "por hospedar atualizações"
@@ -1251,27 +1251,3 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
-
-#~ msgid "SD/USB selected"
-#~ msgstr "SD/USB selecionado"
-
-#~ msgid "Cover Path Change"
-#~ msgstr "Alterar Pasta das Capas"
-
-#~ msgid "DOL path change"
-#~ msgstr "Alterar Pasta do DOL"
-
-#~ msgid "Disc Path change"
-#~ msgstr "Alterar a Pasta das Imagens de Disco"
-
-#~ msgid "Homebrew Appspath change"
-#~ msgstr "Alterar Pasta Apps Homebrew"
-
-#~ msgid "Theme Path change"
-#~ msgstr "Alterar pasta dos Temas"
-
-#~ msgid "WiiTDB Path change"
-#~ msgstr "Alterar Pasta WiiTDB"
-
-#~ msgid "Homebrew Channel"
-#~ msgstr "Canal Homebrew"

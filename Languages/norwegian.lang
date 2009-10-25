@@ -1,14 +1,14 @@
 # USB Loader GX language source file.
-# norwegian.lang - r723
+# norwegian.lang - r813
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-24 23:27+0200\n"
+"POT-Creation-Date: 2009-10-25 03:55+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: raschi\n"
-"Language-Team: \n"
+"Language-Team: raschi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -30,7 +30,7 @@ msgstr " finnes ikke på serveren."
 
 #, c-format
 msgid "%s : %s May not boot correctly if your System Menu is not up to date."
-msgstr ""
+msgstr "%s : %s vil kanskje ikke starte riktig hvis System Menyen ikke er oppdatert."
 
 msgid "0 (Everyone)"
 msgstr "0 (Alle)"
@@ -150,7 +150,7 @@ msgid "Aug"
 msgstr ""
 
 msgid "Author:"
-msgstr ""
+msgstr "Forfatter:"
 
 msgid "AutoInit Network"
 msgstr "Autostart nettverk"
@@ -195,10 +195,10 @@ msgid "Can't be formatted"
 msgstr "Kan ikke formateres"
 
 msgid "Can't create directory"
-msgstr "Kan ikke opprette mappestruktur"
+msgstr "Kan ikke opprette mappe"
 
 msgid "Can't create file"
-msgstr ""
+msgstr "Kan ikke opprette fil"
 
 msgid "Can't delete:"
 msgstr "Kan ikke slette:"
@@ -207,13 +207,13 @@ msgid "Cancel"
 msgstr "Avbryt"
 
 msgid "Channels"
-msgstr ""
+msgstr "Kanaler"
 
 msgid "Cheatfile is blank"
 msgstr "Juksefil er blank"
 
 msgid "Checking existing artwork"
-msgstr ""
+msgstr "Sjekker eksisterende bilder"
 
 msgid "Checking for Updates"
 msgstr "Søker etter oppdateringer"
@@ -289,7 +289,7 @@ msgid "Could not read the disc."
 msgstr "Kan ikke lese plate."
 
 msgid "Could not save."
-msgstr ""
+msgstr "Kan ikke lagre."
 
 msgid "Could not set USB."
 msgstr "Kan ikke velge USB."
@@ -355,7 +355,7 @@ msgid "Developed by"
 msgstr "Utviklet av"
 
 msgid "Directory does not exist!"
-msgstr ""
+msgstr "Mappestruktur finnes ikke!"
 
 msgid "Disc Artwork Download"
 msgstr "Platebilde nedlasting"
@@ -397,7 +397,7 @@ msgid "Do you want to change language?"
 msgstr "Vil du endre språk?"
 
 msgid "Do you want to download this theme?"
-msgstr ""
+msgstr "Vil du laste ned dette temaet?"
 
 msgid "Do you want to format:"
 msgstr "Vil du formatere:"
@@ -415,7 +415,7 @@ msgid "Done!"
 msgstr "Ferdig!"
 
 msgid "Download"
-msgstr ""
+msgstr "Last ned"
 
 msgid "Download Boxart image?"
 msgstr "Last ned cover bilde?"
@@ -427,25 +427,25 @@ msgid "Download Now"
 msgstr "Last ned nå"
 
 msgid "Download failed."
-msgstr ""
+msgstr "Nedlasting feilet."
 
 msgid "Download finished"
 msgstr "Nedlasting ferdig"
 
 msgid "Download request failed."
-msgstr ""
+msgstr "Nedlast spørring feilet."
 
 msgid "Downloading"
 msgstr "Laster ned"
 
 msgid "Downloading Page List:"
-msgstr ""
+msgstr "Laster ned side liste:"
 
 msgid "Downloading file"
 msgstr "Laster ned fil"
 
 msgid "Downloading image:"
-msgstr ""
+msgstr "Laster ned bilde:"
 
 msgid "Dutch"
 msgstr "Nederlandsk"
@@ -484,13 +484,13 @@ msgid "Exit USB Loader GX?"
 msgstr "Avslutt USB Loader GX?"
 
 msgid "Extracting files..."
-msgstr ""
+msgstr "Pakker ut filer..."
 
 msgid "Failed formating"
 msgstr "Feil ved formatering"
 
 msgid "Failed to extract."
-msgstr ""
+msgstr "Utpakking feilet."
 
 msgid "Failed to open partition"
 msgstr "Feil ved åpning av partisjon"
@@ -715,7 +715,7 @@ msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr "Sannsynligvis har bildet dimensjoner som ikke kan deles med 4."
 
 msgid "Mount DVD drive"
-msgstr ""
+msgstr "Last DVD stasjon"
 
 msgid "Music Volume"
 msgstr "Musikk volum"
@@ -727,7 +727,7 @@ msgid "Network init error"
 msgstr "Nettverk init feil"
 
 msgid "New Disc Detected"
-msgstr ""
+msgstr "Ny plate oppdaget"
 
 msgid "Next"
 msgstr "Neste"
@@ -760,7 +760,7 @@ msgid "No WBFS partition found"
 msgstr "Ingen WBFS partisjon funnet"
 
 msgid "No cheats were selected"
-msgstr ""
+msgstr "Ingen juksefiler valgt"
 
 msgid "No data could be read."
 msgstr "Ingen data kan leses."
@@ -772,7 +772,7 @@ msgid "No new updates."
 msgstr "Ingen nye oppdateringer."
 
 msgid "No themes found on the site."
-msgstr ""
+msgstr "Ingen temaer funnet på websiden."
 
 msgid "Normal"
 msgstr ""
@@ -856,7 +856,7 @@ msgid "Play Count"
 msgstr "Ganger spilt"
 
 msgid "Please wait..."
-msgstr ""
+msgstr "Vennligst vent..."
 
 msgid "Power off the Wii"
 msgstr "Skru av Wii"
@@ -919,10 +919,10 @@ msgid "Save Failed"
 msgstr "Lagring feilet"
 
 msgid "Save Game List to"
-msgstr ""
+msgstr "Lagre spilliste som"
 
 msgid "Saved"
-msgstr ""
+msgstr "Lagret"
 
 msgid "Screensaver"
 msgstr "Skjermbeskytter"
@@ -937,7 +937,7 @@ msgid "Sept"
 msgstr "Sep"
 
 msgid "Set Search-Filter"
-msgstr ""
+msgstr "Angi søkefilter"
 
 msgid "Set as backgroundmusic?"
 msgstr "Bruk som bakgrunnsmusikk?"
@@ -955,7 +955,7 @@ msgid "Sort alphabetically"
 msgstr "Sortér alfabetisk"
 
 msgid "Sort by rank"
-msgstr ""
+msgstr "Sortér etter rangering"
 
 msgid "Sort order by most played"
 msgstr "Sortér etter ganger spilt"
@@ -988,7 +988,7 @@ msgid "Successfully deleted:"
 msgstr "Vellykket sletting:"
 
 msgid "Successfully extracted theme"
-msgstr ""
+msgstr "Vellykket utpakking av tema"
 
 msgid "Successfully installed:"
 msgstr "Vellykket installering:"
@@ -1006,7 +1006,7 @@ msgid "TXT Cheatcodes Path changed"
 msgstr "TXTjuksekode sti endret"
 
 msgid "The entered directory does not exist. Would you like to create it?"
-msgstr ""
+msgstr "Valgt mappe finnes ikke. Vil du opprette den?"
 
 msgid "The file is not a .wad"
 msgstr "Denne filen er ikke en .wad"
@@ -1019,13 +1019,13 @@ msgid "The wad installation failed with error %ld"
 msgstr "WAD installasjonen feilet med feilkode %ld"
 
 msgid "Theme Download Path"
-msgstr ""
+msgstr "Tema nedlasting sti"
 
 msgid "Theme Download Path changed"
-msgstr ""
+msgstr "Tema nedlasting sti endret"
 
 msgid "Theme Downloader"
-msgstr ""
+msgstr "Tema Nedlaster"
 
 msgid "Theme Path"
 msgstr "Tema sti"
@@ -1034,7 +1034,7 @@ msgid "Theme Path Changed"
 msgstr "Tema sti endret"
 
 msgid "Theme Title:"
-msgstr ""
+msgstr "Tema tittel:"
 
 msgid "Time left:"
 msgstr "Tid igjen:"
@@ -1049,7 +1049,7 @@ msgid "Tooltips"
 msgstr "Verktøystips"
 
 msgid "Transfer failed."
-msgstr ""
+msgstr "Overføring feilet."
 
 msgid "USB Device not found"
 msgstr "USB enhet ikke funnet"
@@ -1080,7 +1080,7 @@ msgid "Unlocked"
 msgstr "Opplåst"
 
 msgid "Unsupported format, try to extract manually."
-msgstr ""
+msgstr "Format ikke støttet, prøv å pakk ut manuelt."
 
 msgid "Update"
 msgstr "Oppdater"
@@ -1122,7 +1122,7 @@ msgid "Updating WiiTDB.zip"
 msgstr "Oppdaterer WiiTDB.zip"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
-msgstr ""
+msgstr "Opplastet ZIP fil installert i homebrew mappen."
 
 msgid "VIDTV Patch"
 msgstr ""
@@ -1190,7 +1190,7 @@ msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 msgstr "Din URL ble lagret i %sWiiTDB_URL.txt."
 
 msgid "and translaters for language files updates"
-msgstr ""
+msgstr "og oversettere for språkfiler"
 
 msgid "available"
 msgstr "tilgjengelig"
@@ -1229,7 +1229,7 @@ msgid "for his awesome tool"
 msgstr "for hans råe verktøy"
 
 msgid "for hosting the themes"
-msgstr ""
+msgstr "for hosting av tema"
 
 msgid "for hosting the update files"
 msgstr "for hosting av oppdateringer"
@@ -1251,27 +1251,6 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder gjenstår"
-
-#~ msgid "SD/USB selected"
-#~ msgstr "SD/USB valgt"
-
-#~ msgid "Cover Path Change"
-#~ msgstr "Endre cover sti"
-
-#~ msgid "DOL path change"
-#~ msgstr "Endre DOL sti"
-
-#~ msgid "Disc Path change"
-#~ msgstr "Endre plate sti"
-
-#~ msgid "Homebrew Appspath change"
-#~ msgstr "Endre Homebrew Apps sti"
-
-#~ msgid "Theme Path change"
-#~ msgstr "Endre tema sti"
-
-#~ msgid "WiiTDB Path change"
-#~ msgstr "Endre WiiTDB sti"
 
 #~ msgid "ERROR: USB device could not be loaded!"
 #~ msgstr "FEIL: USB enhet kan ikke lastes!"

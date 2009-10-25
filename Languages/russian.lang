@@ -1251,18 +1251,3 @@ msgstr "из"
 
 msgid "seconds left"
 msgstr "секунд осталось"
-
-#~ msgid "Cover Path Change"
-#~ msgstr "Изменить путь к обложкам"
-
-#~ msgid "DOL path change"
-#~ msgstr "Изменить путь к DOL"
-
-#~ msgid "Disc Path change"
-#~ msgstr "Изменить путь к изображениям дисков"
-
-#~ msgid "Homebrew Appspath change"
-#~ msgstr "Изменить путь к хоумбрю-программам"
-
-#~ msgid "Theme Path change"
-#~ msgstr "изменить путь к темам"

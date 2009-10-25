@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# italian.lang - v46 - r799
+# italian.lang - v47 - r813
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-24 23:27+0200\n"
+"POT-Creation-Date: 2009-10-25 03:55+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe, Cambo\n"
@@ -30,7 +30,7 @@ msgstr " non è disponibile sul server."
 
 #, c-format
 msgid "%s : %s May not boot correctly if your System Menu is not up to date."
-msgstr ""
+msgstr "%s : %s Potrebbe non essere caricato correttamente se il tuo System Menu non è aggiornato."
 
 msgid "0 (Everyone)"
 msgstr "0 (Tutti)"
@@ -150,7 +150,7 @@ msgid "Aug"
 msgstr "agosto"
 
 msgid "Author:"
-msgstr ""
+msgstr "Autore:"
 
 msgid "AutoInit Network"
 msgstr "Inizializz. Rete Automatica"
@@ -195,13 +195,13 @@ msgid "Can't be formatted"
 msgstr "Non si può formattare"
 
 msgid "Can't create directory"
-msgstr "Non posso creare la cartella"
+msgstr "Impossibile creare la cartella"
 
 msgid "Can't create file"
-msgstr ""
+msgstr "Impossibile creare il file"
 
 msgid "Can't delete:"
-msgstr "Non posso eliminare:"
+msgstr "Impossibile eliminare:"
 
 msgid "Cancel"
 msgstr "Cancella"
@@ -397,7 +397,7 @@ msgid "Do you want to change language?"
 msgstr "Vuoi cambiare lingua?"
 
 msgid "Do you want to download this theme?"
-msgstr ""
+msgstr "Vuoi scaricare questo tema?"
 
 msgid "Do you want to format:"
 msgstr "Vuoi formattare:"
@@ -427,25 +427,25 @@ msgid "Download Now"
 msgstr "Scarica Adesso"
 
 msgid "Download failed."
-msgstr ""
+msgstr "Download fallito."
 
 msgid "Download finished"
 msgstr "Ho finito di scaricare"
 
 msgid "Download request failed."
-msgstr ""
+msgstr "Richiesta di download fallita."
 
 msgid "Downloading"
 msgstr "Sto scaricando"
 
 msgid "Downloading Page List:"
-msgstr ""
+msgstr "Sto scaricando l'elenco:"
 
 msgid "Downloading file"
-msgstr "Scarico il file:"
+msgstr "Sto scaricando il file"
 
 msgid "Downloading image:"
-msgstr ""
+msgstr "Sto scaricando l'immagine:"
 
 msgid "Dutch"
 msgstr "Olandese"
@@ -484,13 +484,13 @@ msgid "Exit USB Loader GX?"
 msgstr "Esci da USB Loader GX?"
 
 msgid "Extracting files..."
-msgstr ""
+msgstr "Sto scompattando i file..."
 
 msgid "Failed formating"
 msgstr "Errore Formattazione"
 
 msgid "Failed to extract."
-msgstr ""
+msgstr "Scompattamento fallito."
 
 msgid "Failed to open partition"
 msgstr "Non si accede alla partizione"
@@ -772,7 +772,7 @@ msgid "No new updates."
 msgstr "Nessun Aggiornamento."
 
 msgid "No themes found on the site."
-msgstr ""
+msgstr "Nessun tema trovato sul sito."
 
 msgid "Normal"
 msgstr "Normale"
@@ -988,7 +988,7 @@ msgid "Successfully deleted:"
 msgstr "Eliminato con successo:"
 
 msgid "Successfully extracted theme"
-msgstr ""
+msgstr "Tema scompattato con successo"
 
 msgid "Successfully installed:"
 msgstr "Installato con successo:"
@@ -1019,13 +1019,13 @@ msgid "The wad installation failed with error %ld"
 msgstr "L'installazione del WAD è fallita con errore %ld"
 
 msgid "Theme Download Path"
-msgstr ""
+msgstr "Percorso Download Temi"
 
 msgid "Theme Download Path changed"
-msgstr ""
+msgstr "Percorso Download Temi modificato"
 
 msgid "Theme Downloader"
-msgstr ""
+msgstr "Scaricamento Temi"
 
 msgid "Theme Path"
 msgstr "Percorso Tema"
@@ -1034,7 +1034,7 @@ msgid "Theme Path Changed"
 msgstr "Percorso Tema modificato"
 
 msgid "Theme Title:"
-msgstr ""
+msgstr "Titolo del tema:"
 
 msgid "Time left:"
 msgstr "Restante:"
@@ -1049,7 +1049,7 @@ msgid "Tooltips"
 msgstr "Suggerimenti"
 
 msgid "Transfer failed."
-msgstr ""
+msgstr "Trasferimento fallito."
 
 msgid "USB Device not found"
 msgstr "Dispositivo USB non Trovato"
@@ -1080,7 +1080,7 @@ msgid "Unlocked"
 msgstr "Sbloccato"
 
 msgid "Unsupported format, try to extract manually."
-msgstr ""
+msgstr "Formato non supportato, provare a scompattare manualmente."
 
 msgid "Update"
 msgstr "Aggiornamento"
@@ -1229,7 +1229,7 @@ msgid "for his awesome tool"
 msgstr "per la fantastica libreria"
 
 msgid "for hosting the themes"
-msgstr ""
+msgstr "per i temi online"
 
 msgid "for hosting the update files"
 msgstr "per gli aggiornamenti online"
@@ -1251,30 +1251,6 @@ msgstr "di"
 
 msgid "seconds left"
 msgstr "secondi mancanti"
-
-#~ msgid "SD/USB selected"
-#~ msgstr "Selezionata SD/USB"
-
-#~ msgid "Cover Path Change"
-#~ msgstr "Modifica Percorso Copertine"
-
-#~ msgid "DOL path change"
-#~ msgstr "Modifica percorso file DOL"
-
-#~ msgid "Disc Path change"
-#~ msgstr "Modifica Percorso Immagini Disco"
-
-#~ msgid "Homebrew Appspath change"
-#~ msgstr "Modifica percorso app. Homebrew"
-
-#~ msgid "Theme Path change"
-#~ msgstr "Modifica Percorso Tema"
-
-#~ msgid "WiiTDB Path change"
-#~ msgstr "Modifica percorso archivio WiiTDB"
-
-#~ msgid "Homebrew Channel"
-#~ msgstr "Canale Homebrew"
 
 #~ msgid "You need to start this game one time to create a save file, then exit and start it again."
 #~ msgstr "Devi caricare questo gioco almeno una volta per creare un file di salvataggio, quindi esci dal gioco e ricaricalo di nuovo."

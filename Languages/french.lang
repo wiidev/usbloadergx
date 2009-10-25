@@ -1,5 +1,5 @@
 # USB Loader GX language source file.
-# French V10.6 r811
+# French V10.7 r813
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
@@ -1251,30 +1251,6 @@ msgstr "sur"
 
 msgid "seconds left"
 msgstr "secondes restantes"
-
-#~ msgid "SD/USB selected"
-#~ msgstr "SD/USB Sélectionné"
-
-#~ msgid "Cover Path Change"
-#~ msgstr "Dossier des jaquettes"
-
-#~ msgid "DOL path change"
-#~ msgstr "Dossier du DOL alternatif"
-
-#~ msgid "Disc Path change"
-#~ msgstr "Dossier des labels DVD"
-
-#~ msgid "Homebrew Appspath change"
-#~ msgstr "Dossier Homebrew Apps"
-
-#~ msgid "Theme Download Path change"
-#~ msgstr "Dossier des Thèmes Téléchargés"
-
-#~ msgid "Theme Path change"
-#~ msgstr "Dossier du thème"
-
-#~ msgid "WiiTDB Path change"
-#~ msgstr "Dossier de WiiTDB"
 
 #~ msgid "You need to start this game one time to create a save file, then exit and start it again."
 #~ msgstr "Vous devez lancer ce jeu une fois pour créer une sauvegarde, puis éteindre et le lancer à nouveau."

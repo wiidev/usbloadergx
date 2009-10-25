@@ -1252,27 +1252,6 @@ msgstr "av"
 msgid "seconds left"
 msgstr "sekunder kvar"
 
-#~ msgid "SD/USB selected"
-#~ msgstr "SD/USB vald"
-
-#~ msgid "Cover Path Change"
-#~ msgstr "Ändra omslagsmapp"
-
-#~ msgid "DOL path change"
-#~ msgstr "Ändra DOL-sökväg"
-
-#~ msgid "Disc Path change"
-#~ msgstr "Ändra skivbildsmapp"
-
-#~ msgid "Homebrew Appspath change"
-#~ msgstr "Ändra Homebrew Apps"
-
-#~ msgid "Theme Path change"
-#~ msgstr "Byt Tema-mapp"
-
-#~ msgid "WiiTDB Path change"
-#~ msgstr "Ändra WiiTDB-sökväg"
-
 #~ msgid "Homebrew Channel"
 #~ msgstr "Homebrew Kanalen"
 

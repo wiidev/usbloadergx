@@ -1252,26 +1252,5 @@ msgstr "剩餘空間 總容量"
 msgid "seconds left"
 msgstr "剩餘秒數"
 
-#~ msgid "SD/USB selected"
-#~ msgstr "SD/USB卡已選擇"
-
-#~ msgid "Cover Path Change"
-#~ msgstr "變更封面路徑"
-
-#~ msgid "DOL path change"
-#~ msgstr "變更DOL路徑"
-
-#~ msgid "Disc Path change"
-#~ msgstr "變更光碟圖像路徑"
-
-#~ msgid "Homebrew Appspath change"
-#~ msgstr "變更HBC應用程式路徑"
-
-#~ msgid "Theme Path change"
-#~ msgstr "變更背景主題路徑"
-
-#~ msgid "WiiTDB Path change"
-#~ msgstr "變更WiiTDB路徑"
-
 #~ msgid "Homebrew Channel"
 #~ msgstr "Homebrew Channel"

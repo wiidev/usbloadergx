@@ -1252,27 +1252,6 @@ msgstr "de"
 msgid "seconds left"
 msgstr "segundos restantes"
 
-#~ msgid "SD/USB selected"
-#~ msgstr "SD/USB seleccionada"
-
-#~ msgid "Cover Path Change"
-#~ msgstr "Cambio ruta Carátulas"
-
-#~ msgid "DOL path change"
-#~ msgstr "Cambio ruta DOL"
-
-#~ msgid "Disc Path change"
-#~ msgstr "Cambio ruta Img. Disco"
-
-#~ msgid "Homebrew Appspath change"
-#~ msgstr "Cambio Ruta aplic. Homebrew"
-
-#~ msgid "Theme Path change"
-#~ msgstr "Cambio Ruta de Tema"
-
-#~ msgid "WiiTDB Path change"
-#~ msgstr "Cambio ruta WiiTDB"
-
 #~ msgid "Homebrew Channel"
 #~ msgstr "Canal Homebrew"
 

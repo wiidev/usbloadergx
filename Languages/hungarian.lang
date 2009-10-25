@@ -1251,24 +1251,3 @@ msgstr "./"
 
 msgid "seconds left"
 msgstr "hátralévõ másodperc"
-
-#~ msgid "SD/USB selected"
-#~ msgstr "SD/USB kiválasztva"
-
-#~ msgid "Cover Path Change"
-#~ msgstr "Borító útvonal megváltoztatás"
-
-#~ msgid "DOL path change"
-#~ msgstr "DOL útvonal megváltoztatása"
-
-#~ msgid "Disc Path change"
-#~ msgstr "Lemezképek útvonalának megváltoztatása"
-
-#~ msgid "Homebrew Appspath change"
-#~ msgstr "Homebrew útvonal megváltoztatás"
-
-#~ msgid "Theme Path change"
-#~ msgstr "Témák Útvonalának megváltoztatása"
-
-#~ msgid "WiiTDB Path change"
-#~ msgstr "WiiTDB útvonal vált."
