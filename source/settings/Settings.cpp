@@ -1422,7 +1422,7 @@ int MenuSettings()
 									{
 										w.Remove(&optionBrowser2);
 										w.Remove(&backBtn);
-										char entered[43] = "";
+										char entered[100] = "";
 										strlcpy(entered, Settings.covers_path, sizeof(entered));
 										titleTxt.SetText(tr("3D Cover Path"));
 										int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
@@ -1451,7 +1451,7 @@ int MenuSettings()
 									{
 										w.Remove(&optionBrowser2);
 										w.Remove(&backBtn);
-										char entered[43] = "";
+										char entered[100] = "";
 										strlcpy(entered, Settings.covers2d_path, sizeof(entered));
 										titleTxt.SetText(tr("2D Cover Path"));
 										int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
@@ -1479,7 +1479,7 @@ int MenuSettings()
 									{
 										w.Remove(&optionBrowser2);
 										w.Remove(&backBtn);
-										char entered[43] = "";
+										char entered[100] = "";
 										strlcpy(entered, Settings.disc_path, sizeof(entered));
 										titleTxt.SetText(tr("Disc Artwork Path"));
 										int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
@@ -1508,7 +1508,7 @@ int MenuSettings()
 									{
 										w.Remove(&optionBrowser2);
 										w.Remove(&backBtn);
-										char entered[43] = "";
+										char entered[100] = "";
 										titleTxt.SetText(tr("Theme Path"));
 										strlcpy(entered, CFG.theme_path, sizeof(entered));
 										int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
@@ -1570,7 +1570,7 @@ int MenuSettings()
 									{
 										w.Remove(&optionBrowser2);
 										w.Remove(&backBtn);
-										char entered[43] = "";
+										char entered[100] = "";
 										titleTxt.SetText(tr("WiiTDB Path"));
 										strlcpy(entered, Settings.titlestxt_path, sizeof(entered));
 										int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
@@ -1606,7 +1606,7 @@ int MenuSettings()
 									{
 										w.Remove(&optionBrowser2);
 										w.Remove(&backBtn);
-										char entered[43] = "";
+										char entered[100] = "";
 										strlcpy(entered, Settings.update_path, sizeof(entered));
 										titleTxt.SetText(tr("Update Path"));
 										int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
@@ -1633,7 +1633,7 @@ int MenuSettings()
 									{
 										w.Remove(&optionBrowser2);
 										w.Remove(&backBtn);
-										char entered[43] = "";
+										char entered[100] = "";
 										strlcpy(entered, Settings.Cheatcodespath, sizeof(entered));
 										titleTxt.SetText(tr("GCT Cheatcodes Path"));
 										int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
@@ -1660,7 +1660,7 @@ int MenuSettings()
 									{
 										w.Remove(&optionBrowser2);
 										w.Remove(&backBtn);
-										char entered[43] = "";
+										char entered[100] = "";
 										strlcpy(entered, Settings.TxtCheatcodespath, sizeof(entered));
 										titleTxt.SetText(tr("TXT Cheatcodes Path"));
 										int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
@@ -1687,7 +1687,7 @@ int MenuSettings()
 									{
 										w.Remove(&optionBrowser2);
 										w.Remove(&backBtn);
-										char entered[43] = "";
+										char entered[100] = "";
 										strlcpy(entered, Settings.dolpath, sizeof(entered));
 										titleTxt.SetText(tr("DOL Path"));
 										int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
@@ -1718,7 +1718,7 @@ int MenuSettings()
 									{
 										w.Remove(&optionBrowser2);
 										w.Remove(&backBtn);
-										char entered[43] = "";
+										char entered[100] = "";
 										strlcpy(entered, Settings.homebrewapps_path, sizeof(entered));
 										titleTxt.SetText(tr("Homebrew Apps Path"));
 										int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
@@ -1749,7 +1749,7 @@ int MenuSettings()
 									{
 										w.Remove(&optionBrowser2);
 										w.Remove(&backBtn);
-										char entered[43] = "";
+										char entered[100] = "";
 										strlcpy(entered, Settings.theme_downloadpath, sizeof(entered));
 										titleTxt.SetText(tr("Theme Download Path"));
 										int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);

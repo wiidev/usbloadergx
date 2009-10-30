@@ -1,5 +1,5 @@
 # USB Loader GX language source file.
-# japanese.lang - r813
+# japanese.lang - r814
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
@@ -367,7 +367,7 @@ msgid "Disc Default"
 msgstr "ディスクのデフォルト"
 
 msgid "Disc Images"
-msgstr "ﾃﾞｨｽｸ画像"
+msgstr "ディスク画像"
 
 msgid "Disc Path Changed"
 msgstr "ﾃﾞｨｽｸ画像のパスを変更しました"
@@ -424,7 +424,7 @@ msgid "Download Discart image?"
 msgstr "画像をﾀﾞｳﾝﾛｰﾄﾞしますか？"
 
 msgid "Download Now"
-msgstr "今すぐﾀﾞｳﾝﾛｰﾄﾞ"
+msgstr "ダウンロード"
 
 msgid "Download failed."
 msgstr "ﾀﾞｳﾝﾛｰﾄﾞに失敗しました"
@@ -448,7 +448,7 @@ msgid "Downloading image:"
 msgstr "画像をﾀﾞｳﾝﾛｰﾄﾞ中:"
 
 msgid "Dutch"
-msgstr "ｵﾗﾝﾀﾞ語"
+msgstr "オランダ語"
 
 msgid "ERROR"
 msgstr "エラー"
@@ -778,7 +778,7 @@ msgid "Normal"
 msgstr "4:3"
 
 msgid "Normal Covers"
-msgstr "ﾉ-ﾏﾙｶﾊﾞｰ"
+msgstr "2Dカバー"
 
 msgid "Not Found"
 msgstr "見つかりません"
@@ -877,13 +877,13 @@ msgid "Reading WAD data... Ok!"
 msgstr "WADﾃﾞｰﾀの読み込み...成功！"
 
 msgid "Receiving file from:"
-msgstr "ﾌｧｲﾙを受信中:"
+msgstr "ファイルを受信中:"
 
 msgid "Released"
 msgstr "リリース"
 
 msgid "Reload SD"
-msgstr "ﾘﾛｰﾄﾞ"
+msgstr "リロード"
 
 msgid "Rename Game on WBFS"
 msgstr "WBFS内のゲーム名変更"
@@ -1190,7 +1190,7 @@ msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 msgstr "%sWiiTDB_URL.txtにURLを保存しました"
 
 msgid "and translaters for language files updates"
-msgstr "翻訳者の方々(日本語: K-M)"
+msgstr "翻訳者の方々(日本語:K-M)"
 
 msgid "available"
 msgstr "があります"
@@ -1251,3 +1251,6 @@ msgstr "中"
 
 msgid "seconds left"
 msgstr "完了まで"
+
+#~ msgid "Homebrew Channel"
+#~ msgstr "HBCへ"

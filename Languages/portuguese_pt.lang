@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-# portuguese_pt.lang - r799
+# portuguese_pt.lang - r814
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-10-24 23:27+0200\n"
-"PO-Revision-Date: 2009-10-12 14:51+0000\n"
+"PO-Revision-Date: 2009-10-26 19:13-0000\n"
 "Last-Translator: Sky8000\n"
 "Language-Team: Sky8000 <sky8000@hotmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -30,7 +30,7 @@ msgstr " não está no servidor."
 
 #, c-format
 msgid "%s : %s May not boot correctly if your System Menu is not up to date."
-msgstr ""
+msgstr "%s : %s Pode não carregar correctamente se o System Menu estiver desactualizado."
 
 msgid "0 (Everyone)"
 msgstr "0 (Todos)"
@@ -150,7 +150,7 @@ msgid "Aug"
 msgstr "Ago"
 
 msgid "Author:"
-msgstr ""
+msgstr "Autor:"
 
 msgid "AutoInit Network"
 msgstr "Auto-iniciar Rede"
@@ -198,7 +198,7 @@ msgid "Can't create directory"
 msgstr "Não foi possível criar a pasta"
 
 msgid "Can't create file"
-msgstr ""
+msgstr "Não é possível criar o ficheiro"
 
 msgid "Can't delete:"
 msgstr "Não foi possível apagar:"
@@ -397,7 +397,7 @@ msgid "Do you want to change language?"
 msgstr "Deseja alterar o idioma?"
 
 msgid "Do you want to download this theme?"
-msgstr ""
+msgstr "Deseja descarregar este tema?"
 
 msgid "Do you want to format:"
 msgstr "Deseja FORMATAR:"
@@ -415,7 +415,7 @@ msgid "Done!"
 msgstr "Concluído!"
 
 msgid "Download"
-msgstr ""
+msgstr "Descarregar"
 
 msgid "Download Boxart image?"
 msgstr "Descarregar imagem da Caixa?"
@@ -427,25 +427,25 @@ msgid "Download Now"
 msgstr "Descarregar Agora"
 
 msgid "Download failed."
-msgstr ""
+msgstr "O download falhou."
 
 msgid "Download finished"
 msgstr "Download Terminado"
 
 msgid "Download request failed."
-msgstr ""
+msgstr "O pedido de download falhou."
 
 msgid "Downloading"
 msgstr "Descarregando"
 
 msgid "Downloading Page List:"
-msgstr ""
+msgstr "Descarregando Lista de Páginas:"
 
 msgid "Downloading file"
 msgstr "Descarregando ficheiro:"
 
 msgid "Downloading image:"
-msgstr ""
+msgstr "Descarregando imagem:"
 
 msgid "Dutch"
 msgstr "Holandês"
@@ -484,13 +484,13 @@ msgid "Exit USB Loader GX?"
 msgstr "Pretende sair do USB Loader GX?"
 
 msgid "Extracting files..."
-msgstr ""
+msgstr "Extraindo ficheiros..."
 
 msgid "Failed formating"
 msgstr "Falha ao formatar"
 
 msgid "Failed to extract."
-msgstr ""
+msgstr "Falha ao extrair ficheiros."
 
 msgid "Failed to open partition"
 msgstr "Falha ao abrir partição"
@@ -772,7 +772,7 @@ msgid "No new updates."
 msgstr "Não existem novas actualizações."
 
 msgid "No themes found on the site."
-msgstr ""
+msgstr "Nenhum tema encontrado no site."
 
 msgid "Normal"
 msgstr "Normal"
@@ -988,7 +988,7 @@ msgid "Successfully deleted:"
 msgstr "Eliminado com Sucesso:"
 
 msgid "Successfully extracted theme"
-msgstr ""
+msgstr "Tema extraído com sucesso"
 
 msgid "Successfully installed:"
 msgstr "Instalado com Sucesso:"
@@ -1019,13 +1019,13 @@ msgid "The wad installation failed with error %ld"
 msgstr "A instalação do wad falhou com o seguinte erro: %ld"
 
 msgid "Theme Download Path"
-msgstr ""
+msgstr "Pasta Download Temas"
 
 msgid "Theme Download Path changed"
-msgstr ""
+msgstr "Pasta para Download de Temas Alterada"
 
 msgid "Theme Downloader"
-msgstr ""
+msgstr "Descarregar de Temas"
 
 msgid "Theme Path"
 msgstr "Pasta Temas"
@@ -1034,7 +1034,7 @@ msgid "Theme Path Changed"
 msgstr "Pasta dos Temas alterada"
 
 msgid "Theme Title:"
-msgstr ""
+msgstr "Título do Tema:"
 
 msgid "Time left:"
 msgstr "Tempo restante:"
@@ -1049,7 +1049,7 @@ msgid "Tooltips"
 msgstr "Dicas"
 
 msgid "Transfer failed."
-msgstr ""
+msgstr "A transferência falhou."
 
 msgid "USB Device not found"
 msgstr "Dispositivo USB não encontrado"
@@ -1080,7 +1080,7 @@ msgid "Unlocked"
 msgstr "Desbloqueado"
 
 msgid "Unsupported format, try to extract manually."
-msgstr ""
+msgstr "Formato não suportado, tente extrair manualmente."
 
 msgid "Update"
 msgstr "Verificar Actualizações"
@@ -1229,7 +1229,7 @@ msgid "for his awesome tool"
 msgstr "pela sua espectacular ferramenta"
 
 msgid "for hosting the themes"
-msgstr ""
+msgstr "por alojar os temas"
 
 msgid "for hosting the update files"
 msgstr "por alojar actualizações"

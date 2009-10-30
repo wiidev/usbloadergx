@@ -1,5 +1,5 @@
 # USB Loader GX language source file.
-# danish.lang - r813
+# danish.lang - r814
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
@@ -439,7 +439,7 @@ msgid "Downloading"
 msgstr "Downloader"
 
 msgid "Downloading Page List:"
-msgstr "Downloader side liste:"
+msgstr "Downloader side:"
 
 msgid "Downloading file"
 msgstr "Downloader fil"
@@ -1046,7 +1046,7 @@ msgid "Titles from WiiTDB"
 msgstr "Titler fra WiiTDB"
 
 msgid "Tooltips"
-msgstr "Værktøjtips"
+msgstr "Værktøjstips"
 
 msgid "Transfer failed."
 msgstr "Overførslen mislykkedes"
@@ -1147,7 +1147,7 @@ msgid "WiFi Features"
 msgstr "WiFi-indstillinger"
 
 msgid "Widescreen Fix"
-msgstr ""
+msgstr "Bredformat-fix"
 
 msgid "Wii Menu"
 msgstr ""

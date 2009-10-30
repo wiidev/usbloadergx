@@ -1252,6 +1252,9 @@ msgstr "di"
 msgid "seconds left"
 msgstr "secondi mancanti"
 
+#~ msgid "Homebrew Channel"
+#~ msgstr "Canale Homebrew"
+
 #~ msgid "You need to start this game one time to create a save file, then exit and start it again."
 #~ msgstr "Devi caricare questo gioco almeno una volta per creare un file di salvataggio, quindi esci dal gioco e ricaricalo di nuovo."
 
