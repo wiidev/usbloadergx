@@ -9,9 +9,19 @@
  * Wirzenius wrote this portably, Torvalds fucked it up :-)
  */
 
+
+
+
 #include <stdarg.h>
 #include <string.h>
 #include <unistd.h>
+#include <gccore.h>
+
+/* init-globals */
+bool geckoinit = false;
+
+#ifndef NO_DEBUG
+
 
 /* we use this so that we can do without the ctype library */
 #define is_digit(c)	((c) >= '0' && (c) <= '9')
@@ -271,9 +281,6 @@ int kvsprintf1(char *buf, const char *fmt, va_list args)
 }
 
  
-#include <gccore.h>
-
-bool geckoinit = false;
 
 bool InitGecko()
 {
@@ -303,3 +310,4 @@ void gprintf(const char *str, ...)
 
 	usb_sendbuffer_safe(1,__outstr,len);
 }
+#endif /* NO_DEBUG */

@@ -113,7 +113,6 @@ u64 getStubDest()
 	ret[5] = stub[5];
 	ret[6] = stub[12];
 	ret[7] = stub[13];
-	ret[8] = 0x00;
 	
 	memcpy(&retu, ret, 8);
 	

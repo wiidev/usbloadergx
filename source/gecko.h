@@ -8,9 +8,16 @@ extern "C" {
 #endif
 //giantpune's functions for USB gecko
 
-//use this just like printf();
-void gprintf(const char *str, ...);
-bool InitGecko();
+#ifndef NO_DEBUG
+	//use this just like printf();
+	void gprintf(const char *str, ...);
+	bool InitGecko();
+#else
+	#define gprintf(...)
+	#define InitGecko()      false
+#endif /* NO_DEBUG */
+
+
 
 #ifdef __cplusplus
 }
