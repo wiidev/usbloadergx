@@ -99,7 +99,7 @@ bool ShutdownWC24() {
     return onlinefix;
 }
 
-s32 network_request(const char * request) {
+s32 network_request(const char * request, char * filename) {
     char buf[1024];
     char *ptr = NULL;
 
@@ -122,6 +122,24 @@ s32 network_request(const char * request) {
     /* HTTP request OK? */
     if (!strstr(buf, "HTTP/1.1 200 OK"))
         return -1;
+
+    if(filename)
+    {
+        /* Get filename */
+        ptr = strstr(buf, "filename=\"");
+
+        if(ptr)
+        {
+            ptr += sizeof("filename=\"")-1;
+
+            for(cnt = 0; ptr[cnt] != '\r' && ptr[cnt] != '\n' && ptr[cnt] != '"'; cnt++)
+            {
+                filename[cnt] = ptr[cnt];
+                filename[cnt+1] = '\0';
+            }
+        }
+    }
+
     /* Retrieve content size */
     ptr = strstr(buf, "Content-Length:");
     if (!ptr)
@@ -156,7 +174,7 @@ s32 network_read(u8 *buf, u32 len) {
 /****************************************************************************
  * Download request
  ***************************************************************************/
-s32 download_request(const char * url) {
+s32 download_request(const char * url, char * filename) {
 
     //Check if the url starts with "http://", if not it is not considered a valid url
     if (strncmp(url, "http://", strlen("http://")) != 0) {
@@ -190,7 +208,7 @@ s32 download_request(const char * url) {
     char header[strlen(path)+strlen(domain)+strlen(url)+100];
     sprintf(header, "GET %s HTTP/1.1\r\nHost: %s\r\nReferer: %s\r\nConnection: close\r\n\r\n", path, domain, url);
 
-    s32 filesize = network_request(header);
+    s32 filesize = network_request(header, filename);
 
     return filesize;
 }

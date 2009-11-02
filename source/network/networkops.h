@@ -15,9 +15,9 @@ bool IsNetworkInit(void);
 char * GetNetworkIP(void);
 char * GetIncommingIP(void);
 bool ShutdownWC24();
-s32 network_request(const char * request);
+s32 network_request(const char * request, char * filename);
 s32 network_read(u8 *buf, u32 len);
-s32 download_request(const char * url);
+s32 download_request(const char * url, char * filename = NULL);
 void CloseConnection();
 int CheckUpdate();
 

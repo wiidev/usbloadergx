@@ -39,7 +39,10 @@ bool DownloadTheme(const char *url, const char *title)
     if(!url)
         return false;
 
-    int filesize = download_request(url);
+    char filename[255];
+    memset(filename, 0, sizeof(filename));
+
+    int filesize = download_request(url, (char *) &filename);
 
     if(filesize <= 0)
     {
@@ -54,7 +57,7 @@ bool DownloadTheme(const char *url, const char *title)
 
     subfoldercreate(path);
 
-    snprintf(filepath, sizeof(filepath), "%s/%s.zip", path, title);
+    snprintf(filepath, sizeof(filepath), "%s/%s", path, filename);
 
     FILE *file = fopen(filepath, "wb");
     if(!file)
@@ -74,7 +77,7 @@ bool DownloadTheme(const char *url, const char *title)
         if((u32) blocksize > filesize-done)
             blocksize = filesize-done;
 
-        ShowProgress(tr("Downloading file"), 0, (char*) title, done, filesize, true);
+        ShowProgress(tr("Downloading file"), 0, (char*) filename, done, filesize, true);
 
         int ret = network_read(buffer, blocksize);
         if(ret < 0)
@@ -436,7 +439,7 @@ int Theme_Downloader()
         w.Append(&HomeBtn);
         ResumeGui();
 
-        ShowProgress(tr("Downloading Page List:"), 0, (char *) tr("Please wait..."), 0, pagesize);
+        ShowProgress(tr("Downloading Page List:"), "", (char *) tr("Please wait..."), 0, pagesize);
 
         snprintf(url, sizeof(url), "%sthemes.php?creator=&sort=1&page=%i", THEME_LINK, currentpage);
 
