@@ -379,6 +379,7 @@ extern "C" {
 		u8      xflip;
 		int	    volume;
 		int     sfxvolume;
+		int     gamesoundvolume;
 		u8      tooltips;
 		char 	unlockCode[20];
 		u8	    parentalcontrol;
@@ -418,6 +419,7 @@ extern "C" {
 		u8		gridRows;
 		u8		autonetwork;
 		u8		discart;
+		short   gamesound;
 	};
 
 	void CFG_LoadGlobal(void);

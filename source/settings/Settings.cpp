@@ -361,7 +361,7 @@ int MenuSettings()
 				MainButton2.SetEffect(EFFECT_FADE, 20);
 				MainButton3.SetEffect(EFFECT_FADE, 20);
 				MainButton4.SetEffect(EFFECT_FADE, 20);
-			} 
+			}
 			else if (slidedirection == LEFT)
 			{
 				MainButton1.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_IN, 35);
@@ -688,7 +688,7 @@ int MenuSettings()
 						if(firstRun || ret >= 0)
 						{
 							int Idx = -1;
-							
+
 							if(ret == ++Idx || firstRun)
 							{
 								if(firstRun) options2.SetName(Idx, "%s",tr("App Language"));
@@ -745,7 +745,7 @@ int MenuSettings()
 								static const char *opts[settings_sinfo_max] = {trNOOP("Game ID"),trNOOP("Game Region"),trNOOP("Both"),trNOOP("Neither")};
 								options2.SetValue(Idx,"%s",tr(opts[Settings.sinfo]));
 							}
-	
+
 							if(ret == ++Idx || firstRun)
 							{
 								if(firstRun) options2.SetName(Idx, "%s",tr("Clock"));
@@ -755,7 +755,7 @@ int MenuSettings()
 								else if (Settings.hddinfo == hr24) options2.SetValue(Idx,"24 %s",tr("Hour"));
 								else if (Settings.hddinfo == Off) options2.SetValue(Idx,"%s",tr("OFF"));
 							}
-	
+
 							if(ret == ++Idx || firstRun)
 							{
 								if(firstRun) options2.SetName(Idx, "%s",tr("Tooltips"));
@@ -763,7 +763,7 @@ int MenuSettings()
 									Settings.tooltips = 0;
 								options2.SetValue(Idx,"%s",tr(opts_off_on[Settings.tooltips]));
 							}
-	
+
 							if(ret == ++Idx || firstRun)
 							{
 								if(firstRun) options2.SetName(Idx, "%s",tr("Flip-X"));
@@ -776,7 +776,7 @@ int MenuSettings()
 																						{trNOOP("DiskFlip"),"",""}};
 								options2.SetValue(Idx,"%s%s%s",tr(opts[Settings.keyset][0]),opts[Settings.keyset][1],tr(opts[Settings.keyset][2]));
 							}
-	
+
 							if(ret == ++Idx || firstRun)
 							{
 								if(firstRun) options2.SetName(Idx, "%s",tr("Prompts Buttons"));
@@ -785,7 +785,7 @@ int MenuSettings()
 								static const char *opts[settings_off_on_max] = {trNOOP("Normal"),trNOOP("Widescreen Fix")};
 								options2.SetValue(Idx,"%s",tr(opts[Settings.wsprompt]));
 							}
-	
+
 							if(ret == ++Idx || firstRun)
 							{
 								if(firstRun) options2.SetName(Idx, "%s",tr("Keyboard"));
@@ -794,7 +794,7 @@ int MenuSettings()
 								static const char *opts[settings_keyset_max] = {"QWERTY","QWERTY 2","DVORAK","QWERTZ","AZERTY"};
 								options2.SetValue(Idx,"%s", opts[Settings.keyset]);
 							}
-	
+
 							if(ret == ++Idx || firstRun)
 							{
 								if(firstRun) options2.SetName(Idx, "%s",tr("Disc Artwork Download"));
@@ -803,7 +803,7 @@ int MenuSettings()
 								static const char *opts[4] = {trNOOP("Only Original"),trNOOP("Only Customs"),trNOOP("Original/Customs"),trNOOP("Customs/Original")};
 								options2.SetValue(Idx,"%s",tr(opts[Settings.discart]));
 							}
-	
+
 							if(ret == ++Idx || firstRun)
 							{
 								if(firstRun) options2.SetName(Idx, "%s",tr("Wiilight"));
@@ -812,7 +812,7 @@ int MenuSettings()
 								static const char *opts[settings_wiilight_max] = {trNOOP("OFF"),trNOOP("ON"),trNOOP("Only for Install")};
 								options2.SetValue(Idx,"%s",tr(opts[Settings.wiilight]));
 							}
-	
+
 							if(ret == ++Idx || firstRun)
 							{
 								if(firstRun) options2.SetName(Idx, "%s",tr("Rumble"));
@@ -820,7 +820,7 @@ int MenuSettings()
 									Settings.rumble = 0; //RUMBLE
 								options2.SetValue(Idx,"%s",tr(opts_off_on[Settings.rumble]));
 							}
-	
+
 							if(ret == ++Idx || firstRun)
 							{
 								if(firstRun) options2.SetName(Idx, "%s",tr("AutoInit Network"));
@@ -836,7 +836,7 @@ int MenuSettings()
 									Settings.titlesOverride = 0;
 								options2.SetValue(Idx,"%s",tr(opts_off_on[Settings.titlesOverride]));
 							}
-	
+
 							if(ret == ++Idx || firstRun)
 							{
 								if(firstRun) options2.SetName(Idx, "%s",tr("Screensaver"));
@@ -845,7 +845,7 @@ int MenuSettings()
 								static const char *opts[settings_screensaver_max] = {trNOOP("OFF"),trNOOP("3 min"),trNOOP("5 min"),trNOOP("10 min"),trNOOP("20 min"),trNOOP("30 min"),trNOOP("1 hour")};
 								options2.SetValue(Idx,"%s",tr(opts[Settings.screensaver]));
 							}
-							
+
 							firstRun = false;
 						}
 					}
@@ -931,7 +931,7 @@ int MenuSettings()
 						if(firstRun || ret >= 0)
 						{
 							int Idx = -1;
-							
+
 							if(ret == ++Idx || firstRun)
 							{
 								if(firstRun) options2.SetName(Idx, "%s",tr("Video Mode"));
@@ -939,7 +939,7 @@ int MenuSettings()
 									Settings.video = 0;
 								options2.SetValue(Idx,"%s%s",opts_videomode[Settings.video][0], tr(opts_videomode[Settings.video][1]));
 							}
-							
+
 							if(ret == ++Idx || firstRun)
 							{
 								if(firstRun) options2.SetName(Idx, "%s",tr("VIDTV Patch"));
@@ -1048,7 +1048,7 @@ int MenuSettings()
 							Sys_Shutdown();
 						if (reset == 1)
 							Sys_Reboot();
-						
+
 						else if (backBtn.GetState() == STATE_CLICKED)
 						{
 							backBtn.ResetState();
@@ -1323,7 +1323,36 @@ int MenuSettings()
 								else
 									options2.SetValue(Idx,"%s", tr("OFF"));
 							}
-							
+
+							if(ret == ++Idx || firstRun)
+							{
+								if(firstRun) options2.SetName(Idx, "%s",tr("Game (Banner) Sounds"));
+								if(ret == Idx)
+								{
+									Settings.gamesound++;
+									if (Settings.gamesound > 1)
+										Settings.gamesound = 0;
+								}
+
+                                if(Settings.gamesound == 1)
+                                    options2.SetValue(Idx,"%s", tr("ON"));
+                                else
+                                    options2.SetValue(Idx,"%s", tr("OFF"));
+							}
+
+							if(ret == ++Idx || firstRun)
+							{
+								if(firstRun) options2.SetName(Idx, "%s",tr("GameSound Volume"));
+								if(ret == Idx)
+								{
+									Settings.gamesoundvolume += 10;
+									if (Settings.gamesoundvolume > 100)
+										Settings.gamesoundvolume = 0;
+								}
+
+								options2.SetValue(Idx,"%i", Settings.gamesoundvolume);
+							}
+
 							firstRun = false;
 						}
 					}
@@ -1443,7 +1472,7 @@ int MenuSettings()
 									options2.SetValue(Idx, "%s", Settings.covers_path);
 								}
 
-								
+
 								if(ret == ++Idx || firstRun)
 								{
 									if(firstRun) options2.SetName(Idx, "%s", tr("2D Cover Path"));
@@ -1500,7 +1529,7 @@ int MenuSettings()
 									options2.SetValue(Idx, "%s", Settings.disc_path);
 								}
 
-								
+
 								if(ret == ++Idx || firstRun)
 								{
 									if(firstRun) options2.SetName(Idx, "%s", tr("Theme Path"));
@@ -1562,7 +1591,7 @@ int MenuSettings()
 									options2.SetValue(Idx, "%s", CFG.theme_path);
 								}
 
-								
+
 								if(ret == ++Idx || firstRun)
 								{
 									if(firstRun) options2.SetName(Idx, "%s", tr("WiiTDB Path"));
@@ -1598,7 +1627,7 @@ int MenuSettings()
 									options2.SetValue(Idx, "%s", Settings.titlestxt_path);
 								}
 
-								
+
 								if(ret == ++Idx || firstRun)
 								{
 									if(firstRun) options2.SetName(Idx, "%s", tr("Update Path"));
@@ -1625,7 +1654,7 @@ int MenuSettings()
 									options2.SetValue(Idx, "%s", Settings.update_path);
 								}
 
-								
+
 								if(ret == ++Idx || firstRun)
 								{
 									if(firstRun) options2.SetName(Idx, "%s", tr("GCT Cheatcodes Path"));
@@ -1652,7 +1681,7 @@ int MenuSettings()
 									options2.SetValue(Idx, "%s", Settings.Cheatcodespath);
 								}
 
-								
+
 								if(ret == ++Idx || firstRun)
 								{
 									if(firstRun) options2.SetName(Idx, "%s", tr("TXT Cheatcodes Path"));
@@ -1679,7 +1708,7 @@ int MenuSettings()
 									options2.SetValue(Idx, "%s", Settings.TxtCheatcodespath);
 								}
 
-								
+
 								if(ret == ++Idx || firstRun)
 								{
 									if(firstRun) options2.SetName(Idx, "%s", tr("DOL Path"));
@@ -1710,7 +1739,7 @@ int MenuSettings()
 									options2.SetValue(Idx, "%s", Settings.dolpath);
 								}
 
-								
+
 								if(ret == ++Idx || firstRun)
 								{
 									if(firstRun) options2.SetName(Idx, "%s", tr("Homebrew Apps Path"));
@@ -1741,7 +1770,7 @@ int MenuSettings()
 									options2.SetValue(Idx, "%s", Settings.homebrewapps_path);
 								}
 
-								
+
 								if(ret == ++Idx || firstRun)
 								{
 									if(firstRun) options2.SetName(Idx, "%s", tr("Theme Download Path"));
@@ -1769,7 +1798,7 @@ int MenuSettings()
 									}
 									options2.SetValue(Idx, "%s", Settings.theme_downloadpath);
 								}
-								
+
 								firstRun = false;
 							}
 						}
@@ -1945,7 +1974,7 @@ int MenuSettings()
 					break;
 				}
 					PageIndicatorBtn1.ResetState();
-			} 
+			}
 			else if (PageIndicatorBtn2.GetState() == STATE_CLICKED)
 			{
 				if (pageToDisplay < 2)
@@ -2077,7 +2106,7 @@ int GameSettings(struct discHdr * header)
 			strncat(gameName, "...", 3);
 		}
 	}
-	else 
+	else
 		sprintf(gameName, "%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
 
 	GuiText titleTxt(!mountMethod?get_title(header):gameName, 28, (GXColor) {0, 0, 0, 255});
@@ -2406,7 +2435,7 @@ int GameSettings(struct discHdr * header)
 					if(ret >= 0 || firstRun == true)
 					{
 						int Idx = -1;
-						
+
 						if(ret == ++Idx || firstRun)
 						{
 							if(firstRun) options2.SetName(Idx, "%s",tr("Video Mode"));
@@ -2414,7 +2443,7 @@ int GameSettings(struct discHdr * header)
 								videoChoice = 0;
 							options2.SetValue(Idx,"%s%s",opts_videomode[videoChoice][0], tr(opts_videomode[videoChoice][1]));
 						}
-						
+
 						if(ret == ++Idx || firstRun)
 						{
 							if(firstRun) options2.SetName(Idx, "%s",tr("VIDTV Patch"));

@@ -52,7 +52,7 @@ wbfs_t*wbfs_open_hd(rw_sector_callback_t read_hdsector,
                 {
 						// Override the sector size by the sector size in the wbfs header...
 						hd_sector_size = 1 << head->hd_sec_sz_s;
-				
+
                         wbfs_t*p = wbfs_open_partition(read_hdsector,write_hdsector,
                                                 callback_data,hd_sector_size,0,part_lba,reset);
                         return p;
@@ -215,7 +215,7 @@ void wbfs_close_disc(wbfs_disc_t*d)
         wbfs_free(d);
 }
 // offset is pointing 32bit words to address the whole dvd, although len is in bytes
-int wbfs_disc_read(wbfs_disc_t*d,u32 offset, u8 *data, u32 len)
+int wbfs_disc_read(wbfs_disc_t*d,u32 offset, u32 len, u8 *data)
 {
 
         wbfs_t *p = d->p;

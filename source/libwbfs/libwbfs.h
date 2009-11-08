@@ -157,7 +157,7 @@ u32 wbfs_sector_used(wbfs_t *p,wbfs_disc_info_t *di);
   @param len: The length of the data to fetch, in *bytes*
  */
 // offset is pointing 32bit words to address the whole dvd, although len is in bytes
-int wbfs_disc_read(wbfs_disc_t*d,u32 offset, u8 *data, u32 len);
+int wbfs_disc_read(wbfs_disc_t*d,u32 offset, u32 len, u8 *data);
 
 /*! @return the number of discs inside the paritition */
 u32 wbfs_count_discs(wbfs_t*p);

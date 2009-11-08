@@ -35,7 +35,7 @@ typedef struct wiidisc_s
         u32 partition_data_offset;
         u32 partition_data_size;
         u32 partition_block;
-        
+
         u8 *tmp_buffer;
         u8 *tmp_buffer2;
         u8 disc_key[16];
@@ -45,12 +45,13 @@ typedef struct wiidisc_s
 
         char *extract_pathname;
         u8  *extracted_buffer;
+        u32 extracted_buffer_size;
 }wiidisc_t;
 
 wiidisc_t *wd_open_disc(read_wiidisc_callback_t read,void*fp);
 void wd_close_disc(wiidisc_t *);
 // returns a buffer allocated with wbfs_ioalloc() or NULL if not found of alloc error
-u8 * wd_extract_file(wiidisc_t *d, partition_selector_t partition_type, char *pathname);
+u8 * wd_extract_file(wiidisc_t *d, u32 *size, partition_selector_t partition_type, char *pathname);
 
 void wd_build_disc_usage(wiidisc_t *d, partition_selector_t selector, u8* usage_table);
 

@@ -332,10 +332,12 @@ void Global_Default(void) {
     }
     Settings.volume = 80;
     Settings.sfxvolume = 80;
+    Settings.gamesoundvolume = 80;
     Settings.tooltips = TooltipsOn;
     char * empty = "";
     snprintf(Settings.unlockCode, sizeof(Settings.unlockCode), empty);
     Settings.godmode = 1;
+    Settings.gamesound = 1;
     Settings.parentalcontrol = 0;
     Settings.cios = ios249;
     Settings.xflip = no;
@@ -922,6 +924,12 @@ void global_cfg_set(char *name, char *val) {
             Settings.sfxvolume = i;
         }
         return;
+    } else if (strcmp(name, "gamesoundvolume") == 0) {
+        int i;
+        if (sscanf(val, "%d", &i) == 1) {
+            Settings.gamesoundvolume = i;
+        }
+        return;
     } else if (strcmp(name, "tooltips") == 0) {
         int i;
         if (sscanf(val, "%d", &i) == 1) {
@@ -995,6 +1003,12 @@ void global_cfg_set(char *name, char *val) {
         int i;
         if (sscanf(val, "%d", &i) == 1) {
             Settings.error002 = i;
+        }
+        return;
+    } else if (strcmp(name, "gamesound") == 0) {
+        int i;
+        if (sscanf(val, "%d", &i) == 1) {
+            Settings.gamesound = i;
         }
         return;
     } else if (strcmp(name, "titlesOverride") == 0) {
@@ -1216,6 +1230,7 @@ bool cfg_save_global() { // save global settings
     fprintf(f, "rumble = %d\n ", Settings.rumble);
     fprintf(f, "volume = %d\n ", Settings.volume);
     fprintf(f, "sfxvolume = %d\n ", Settings.sfxvolume);
+    fprintf(f, "gamesoundvolume = %d\n ", Settings.gamesoundvolume);
     fprintf(f, "tooltips = %d\n ", Settings.tooltips);
     fprintf(f, "password = %s\n ", Settings.unlockCode);
     fprintf(f, "sort = %d\n ", Settings.sort);
@@ -1245,6 +1260,7 @@ bool cfg_save_global() { // save global settings
     } else {
         fprintf(f, "godmode = %d\n ", 0);
     }
+    fprintf(f, "gamesound = %d\n ", Settings.gamesound);
     fprintf(f, "dolpath = %s\n ", Settings.dolpath);
     fprintf(f, "ogg_path = %s\n ", Settings.ogg_path);
     fprintf(f, "wiilight = %d\n ", Settings.wiilight);
@@ -1590,6 +1606,7 @@ bool cfg_load_global() {
     }
     Settings.volume = 80;
     Settings.sfxvolume = 80;
+    Settings.gamesoundvolume = 80;
 
     Settings.titlesOverride = 1;
     char * empty = "";

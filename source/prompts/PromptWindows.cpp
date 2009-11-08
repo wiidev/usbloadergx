@@ -37,6 +37,7 @@
 #include "language/UpdateLanguage.h"
 #include "gecko.h"
 #include "../lstub.h"
+#include "Game_Sound.h"
 
 
 
@@ -70,7 +71,7 @@ extern void HaltGui();
  * into the specified variable.
  ***************************************************************************/
 int OnScreenKeyboard(char * var, u32 maxlen, int min) {
-	
+
     int save = -1;
     int keyset = 0;
     if (Settings.keyset == us) keyset = 0;
@@ -78,7 +79,7 @@ int OnScreenKeyboard(char * var, u32 maxlen, int min) {
     else if (Settings.keyset == euro) keyset = 2;
     else if (Settings.keyset == azerty) keyset = 3;
     else if (Settings.keyset == qwerty) keyset = 4;
-	
+
 	gprintf("\nOnScreenKeyboard(%s, %i, %i) \n\tkeyset = %i",var,maxlen,min,keyset);
 
     GuiKeyboard keyboard(var, maxlen, min, keyset);
@@ -149,7 +150,7 @@ int OnScreenKeyboard(char * var, u32 maxlen, int min) {
  ***************************************************************************/
 void WindowCredits() {
 	gprintf("\nWindowCredits()");
-    
+
     int angle = 0;
     GuiSound * creditsMusic = NULL;
 
@@ -443,7 +444,7 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label,
     int choice = -1;
     int count = wait;
 	gprintf("\nWindowPrompt(%s, %s, %s, %s, %s, %s, %i)",title,msg,btn1Label,btn2Label, btn3Label,btn4Label,wait);
-    
+
 
     GuiWindow promptWindow(472,320);
     promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
@@ -674,7 +675,7 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label,
     mainWindow->SetState(STATE_DEFAULT);
     ResumeGui();
 	gprintf(" = %i",choice);
-    
+
     return choice;
 }
 
@@ -693,7 +694,7 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
                  const char *btn2Label, const char *btn3Label,
                  const char *btn4Label) {
 	gprintf("\nWindowExitPrompt()");
-    
+
     GuiSound * homein = NULL;
     homein = new GuiSound(menuin_ogg, menuin_ogg_size, SOUND_OGG, Settings.sfxvolume);
     homein->SetVolume(Settings.sfxvolume);
@@ -707,12 +708,12 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 
     int choice = -1;
     char imgPath[100];
-	
+
 	u64 oldstub = getStubDest();
 	loadStub();
 	if (oldstub != 0x00010001554c4e52ll && oldstub != 0x00010001554e454fll)
 		Set_Stub(oldstub);
-    
+
 	GuiWindow promptWindow(640,480);
     promptWindow.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     promptWindow.SetPosition(0, 0);
@@ -778,7 +779,7 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
     batteryBtn[3]->SetPosition(494, 150);
 
 
-    
+
 #endif
 	GuiTrigger trigA;
     trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
@@ -823,7 +824,7 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
     btn2.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_IN, 50);
     btn2.SetRumble(false);
     btn2.SetPosition(-150, 0);
-    
+
 
     GuiText btn3Txt(btn2Label, 28, (GXColor) {0, 0, 0, 255});
     GuiImage btn3Img(&button);
@@ -1010,7 +1011,7 @@ void SetFavoriteImages(GuiImage *b1, GuiImage *b2, GuiImage *b3, GuiImage *b4, G
 	b3->SetImage(favoritevar >= 3 ? on : off);
 	b4->SetImage(favoritevar >= 4 ? on : off);
 	b5->SetImage(favoritevar >= 5 ? on : off);
-}					
+}
 
 /****************************************************************************
  * GameWindowPrompt
@@ -1023,6 +1024,8 @@ int GameWindowPrompt() {
     f32 size = 0.0;
     char ID[5];
     char IDFull[7];
+
+    GameSound * gameSound = NULL;
 
     gprintf("\nGameWindowPrompt()");
     GuiWindow promptWindow(472,320);
@@ -1231,14 +1234,27 @@ int GameWindowPrompt() {
         //load disc image based or what game is seleted
         struct discHdr * header = (mountMethod==1||mountMethod==2?dvdheader:&gameList[gameSelected]);
 
+        if(Settings.gamesound)
+        {
+            if(gameSound)
+            {
+                delete gameSound;
+                gameSound = NULL;
+            }
+
+            gameSound = new GameSound(header->id);
+            bgMusic->SetVolume(0);
+            gameSound->SetVolume(Settings.gamesoundvolume);
+            gameSound->Play();
+        }
         snprintf (ID,sizeof(ID),"%c%c%c", header->id[0], header->id[1], header->id[2]);
         snprintf (IDFull,sizeof(IDFull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
 
         gprintf("\n\t%s",IDFull);
 		if (diskCover)
             delete diskCover;
-			
-		
+
+
 
         snprintf(imgPath,sizeof(imgPath),"%s%s.png", Settings.disc_path, IDFull); //changed to current full id
         diskCover = new GuiImageData(imgPath,0);
@@ -1309,13 +1325,13 @@ int GameWindowPrompt() {
             nameTxt.SetEffect(EFFECT_FADE, 17);
         } else
             diskImg.SetImage(diskCover);
-		
+
 		if (!mountMethod)
 		{
 			WBFS_GameSize(header->id, &size);
 			sizeTxt.SetTextf("%.2fGB", size); //set size text;
 		}
-	
+
 		nameTxt.SetText(get_title(header));
 
         struct Game_NUM* game_num = CFG_get_game_num(header->id);
@@ -1340,7 +1356,10 @@ int GameWindowPrompt() {
         ResumeGui();
 
         changed = 0;
-        while (choice == -1) {
+        while (choice == -1)
+        {
+            VIDEO_WaitVSync ();
+
             diskImg.SetSpin(btn1.GetState() == STATE_SELECTED);
             diskImg2.SetSpin(btn1.GetState() == STATE_SELECTED);
             if (shutdown == 1) { //for power button
@@ -1353,8 +1372,15 @@ int GameWindowPrompt() {
                 wiilight(0);
                 Sys_Shutdown();
             }
+
             if (reset == 1) //for reset button
                 Sys_Reboot();
+
+            if(gameSound)
+            {
+                if(!gameSound->IsPlaying())
+                    bgMusic->SetVolume(Settings.volume);
+            }
 
             if (btn1.GetState() == STATE_CLICKED) {
                 //playcounter
@@ -1528,6 +1554,13 @@ int GameWindowPrompt() {
     }
     delete diskCover;
     delete diskCover2;
+
+    if(gameSound)
+    {
+        delete gameSound;
+        gameSound = NULL;
+    }
+    bgMusic->SetVolume(Settings.volume);
 
     gprintf("\n\treturn %i",choice);
     return choice;
@@ -1732,7 +1765,7 @@ FormatingPartition(const char *title, partitionEntry *entry) {
  * SearchMissingImages
  ***************************************************************************/
 bool SearchMissingImages(int choice2) {
-	
+
 	gprintf("\nSearchMissingImages(%i)",choice2);
     GuiWindow promptWindow(472,320);
     promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
@@ -1774,14 +1807,14 @@ bool SearchMissingImages(int choice2) {
     mainWindow->Append(&promptWindow);
     mainWindow->ChangeFocus(&promptWindow);
     ResumeGui();
-	
+
     //make sure that all games are added to the gamelist
     __Menu_GetEntries(1);
 
 	cntMissFiles = 0;
 	u32 i = 0;
 	char filename[11];
-	
+
 	//add IDs of games that are missing covers to cntMissFiles
 	bool found1 = false;
 	bool found2 = false;
@@ -1789,7 +1822,7 @@ bool SearchMissingImages(int choice2) {
 	for (i = 0; i < gameCnt && cntMissFiles < 500; i++) {
 		struct discHdr* header = &gameList[i];
 		if (choice2 != 3) {
-			
+
 			char *covers_path = choice2==1 ? Settings.covers2d_path : Settings.covers_path;
 
 			snprintf (filename,sizeof(filename),"%c%c%c.png", header->id[0], header->id[1], header->id[2]);
@@ -1821,7 +1854,7 @@ bool SearchMissingImages(int choice2) {
 		msgTxt.SetText(tr("No file missing!"));
         sleep(1);
 	}
-	
+
 	promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
     while (promptWindow.GetEffect() > 0) usleep(50);
 
@@ -1830,7 +1863,7 @@ bool SearchMissingImages(int choice2) {
     mainWindow->SetState(STATE_DEFAULT);
 	__Menu_GetEntries();
     ResumeGui();
-	
+
 	gprintf(" = %i",cntMissFiles);
     if (cntMissFiles > 0) { //&& !IsNetworkInit()) {
 		NetworkInitPrompt();
@@ -2341,7 +2374,7 @@ ProgressDownloadWindow(int choice2) {
     }
 
     /**Temporary redownloading 1st image because of a fucking corruption bug **/
-#if 0 // is no longer necessary, since libfat is fixed 
+#if 0 // is no longer necessary, since libfat is fixed
     char URLFile[100];
     struct block file = downloadfile(URLFile);
     if (choice2 == 2) {
@@ -2565,7 +2598,7 @@ int ProgressUpdateWindow() {
 	//make the URL to get XML based on our games
 	char XMLurl[3540];
 	build_XML_URL(XMLurl,sizeof(XMLurl));
-	
+
 	if (IsNetworkInit() && ret >= 0) {
 
 		updatemode = WindowPrompt(tr("What do you want to update?"), 0, "USB Loader GX", tr("WiiTDB Files"), tr("Language File"), tr("Cancel"));
@@ -2733,7 +2766,7 @@ int ProgressUpdateWindow() {
 
     if (!failed && ret >= 0 && updatemode == 1) {
         WindowPrompt(tr("Successfully Updated") , tr("Restarting..."), tr("OK"));
-		
+
 		loadStub();
 		Set_Stub_Split(0x00010001,"UNEO");
         Sys_BackToLoader();
@@ -2875,7 +2908,7 @@ int ProgressUpdateWindow() {
     //make the URL to get XML based on our games
 	char XMLurl[3540];
 	build_XML_URL(XMLurl,sizeof(XMLurl));
-	
+
     char dolpath[150];
 //    char dolpathsuccess[150];//use coverspath as a folder for the update wad so we dont make a new folder and have to delete it
     snprintf(dolpath, sizeof(dolpath), "%sULNR.wad", Settings.covers_path);
@@ -2913,7 +2946,7 @@ int ProgressUpdateWindow() {
                 titleTxt.SetTextf("%s USB Loader GX", tr("Updating"));
                 msgTxt.SetPosition(0,100);
                 msgTxt.SetTextf("%s", tr("Updating WiiTDB.zip"));
-				
+
 				char wiitdbpath[200];
 				char wiitdbpathtmp[200];
                 struct block file = downloadfile(XMLurl);
@@ -2934,7 +2967,7 @@ int ProgressUpdateWindow() {
 						OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true); // open file, reload titles, keep in memory
 					}
 				}
-				
+
                 msgTxt.SetTextf("%s", tr("Updating Language Files:"));
                 updateLanguageFiles();
                 promptWindow.Append(&progressbarEmptyImg);
