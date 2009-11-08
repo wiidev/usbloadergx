@@ -1,5 +1,5 @@
 # USB Loader GX language source file.
-# turkish.lang - r813
+# turkish.lang - r815
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
@@ -30,7 +30,7 @@ msgstr " sunucuda mevcut değil"
 
 #, c-format
 msgid "%s : %s May not boot correctly if your System Menu is not up to date."
-msgstr ""
+msgstr "%s: Sisteminiz güncel değil %s doğru şekilde başlatılamayabilir"
 
 msgid "0 (Everyone)"
 msgstr "0 (Herkes)"
@@ -373,7 +373,7 @@ msgid "Disc Path Changed"
 msgstr "Disk Yolu Değiştirildi"
 
 msgid "DiskFlip"
-msgstr ""
+msgstr "DiskÇevir"
 
 msgid "Display"
 msgstr "Görüntü"
@@ -439,7 +439,7 @@ msgid "Downloading"
 msgstr "Indiriliyor"
 
 msgid "Downloading Page List:"
-msgstr ""
+msgstr "İndirilen Sayfa Listesi:"
 
 msgid "Downloading file"
 msgstr "Indirilen dosya"
@@ -490,7 +490,7 @@ msgid "Failed formating"
 msgstr "Biçimlendirme başarısız"
 
 msgid "Failed to extract."
-msgstr ""
+msgstr "Çıkartma başarısız"
 
 msgid "Failed to open partition"
 msgstr "Bölüm açılamadı"
@@ -841,7 +841,7 @@ msgid "Password Changed"
 msgstr "Parola degistirildi"
 
 msgid "Password has been changed"
-msgstr "Password has been changed"
+msgstr ""
 
 msgid "Paste it into your browser to get your WiiTDB.zip."
 msgstr "WiiTDP.zip için bu adresi tarayıcıya yapıştırın"

@@ -1,5 +1,5 @@
 # USB Loader GX language source file.
-# thai.lang - r799
+# thai.lang - r815
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
@@ -30,7 +30,7 @@ msgstr " ไม่อยู่บนแม่ข่าย"
 
 #, c-format
 msgid "%s : %s May not boot correctly if your System Menu is not up to date."
-msgstr ""
+msgstr "%s : %s อาจทำงานผิดปกติ ถ้าระบบของคุณไม่ทันสมัย"
 
 msgid "0 (Everyone)"
 msgstr "0 (ทุกคน)"
@@ -150,7 +150,7 @@ msgid "Aug"
 msgstr "สค."
 
 msgid "Author:"
-msgstr ""
+msgstr "ผู้แต่ง:"
 
 msgid "AutoInit Network"
 msgstr "ทำการเชื่อมต่อเครือข่าย"
@@ -198,7 +198,7 @@ msgid "Can't create directory"
 msgstr "ไม่สามารถสร้างไดเรคทอรี่ได้"
 
 msgid "Can't create file"
-msgstr ""
+msgstr "สร้างไฟล์ไม่ได้"
 
 msgid "Can't delete:"
 msgstr "ไม่สามารถลบได้:"
@@ -397,7 +397,7 @@ msgid "Do you want to change language?"
 msgstr "ต้องการจะเปลี่ยนภาษา ?"
 
 msgid "Do you want to download this theme?"
-msgstr ""
+msgstr "ต้องการดาวน์โหลดธีมนี้ ?"
 
 msgid "Do you want to format:"
 msgstr "ต้องการฟอร์แมต:"
@@ -415,7 +415,7 @@ msgid "Done!"
 msgstr "เสร็จ!"
 
 msgid "Download"
-msgstr ""
+msgstr "ดาวน์โหลด"
 
 msgid "Download Boxart image?"
 msgstr "ดาวน์โหลดภาพกล่อง ?"
@@ -427,25 +427,25 @@ msgid "Download Now"
 msgstr "เริ่มการดาวน์โหลด"
 
 msgid "Download failed."
-msgstr ""
+msgstr "ดาวน์โหลดไม่ได้"
 
 msgid "Download finished"
 msgstr "ดาวน์โหลดเสร็จแล้ว"
 
 msgid "Download request failed."
-msgstr ""
+msgstr "ดาวน์โหลดไม่ได้"
 
 msgid "Downloading"
 msgstr "กำลังดาวน์โหลด"
 
 msgid "Downloading Page List:"
-msgstr ""
+msgstr "รายการที่กำลังดาวน์โหลด:"
 
 msgid "Downloading file"
 msgstr "กำลังดาวน์โหลดไฟล์:"
 
 msgid "Downloading image:"
-msgstr ""
+msgstr "ภาพที่กำลังดาวน์โหลด:"
 
 msgid "Dutch"
 msgstr "เนเธอร์แลนด์"
@@ -484,13 +484,13 @@ msgid "Exit USB Loader GX?"
 msgstr "ปิด USB Loader GX?"
 
 msgid "Extracting files..."
-msgstr ""
+msgstr "กำลังขยายไฟล์..."
 
 msgid "Failed formating"
 msgstr "ฟอร์แมตไม่ได้"
 
 msgid "Failed to extract."
-msgstr ""
+msgstr "ขยายไฟล์ไม่ได้"
 
 msgid "Failed to open partition"
 msgstr "ไม่สามารถเข้าถึงพาร์ทิชั่นได้"
@@ -772,7 +772,7 @@ msgid "No new updates."
 msgstr "ไม่มีไฟล์ Update ตัวใหม่"
 
 msgid "No themes found on the site."
-msgstr ""
+msgstr "ไม่พบธีมบนเวบไซต์"
 
 msgid "Normal"
 msgstr "ปกติ"
@@ -988,7 +988,7 @@ msgid "Successfully deleted:"
 msgstr "ลบสำเร็จ:"
 
 msgid "Successfully extracted theme"
-msgstr ""
+msgstr "ขยายไฟล์ธีมสำเร็จ"
 
 msgid "Successfully installed:"
 msgstr "ติดตั้งสำเร็จ:"
@@ -1019,13 +1019,13 @@ msgid "The wad installation failed with error %ld"
 msgstr "การติดตั้งไฟล์ Wad ล้มเหลวด้วยข้อผิดพลาด %ld"
 
 msgid "Theme Download Path"
-msgstr ""
+msgstr "ตำแหน่งที่ดาวน์โหลดธีม"
 
 msgid "Theme Download Path changed"
-msgstr ""
+msgstr "ตำแหน่งที่ดาวน์โหลดธีมเปลี่ยนแปลง"
 
 msgid "Theme Downloader"
-msgstr ""
+msgstr "ตัวช่วยดาวน์โหลดธีม"
 
 msgid "Theme Path"
 msgstr "ที่อยู่ Theme"
@@ -1034,7 +1034,7 @@ msgid "Theme Path Changed"
 msgstr "ที่อยู่ Theme ถูกเปลี่ยนแปลง"
 
 msgid "Theme Title:"
-msgstr ""
+msgstr "ชื่อธีม:"
 
 msgid "Time left:"
 msgstr "เหลือเวลาอีก:"
@@ -1049,7 +1049,7 @@ msgid "Tooltips"
 msgstr "คำแนะนำ"
 
 msgid "Transfer failed."
-msgstr ""
+msgstr "ถ่ายโอนไม่ได้"
 
 msgid "USB Device not found"
 msgstr "ไม่พบอุปกรณ์ USB"
@@ -1080,7 +1080,7 @@ msgid "Unlocked"
 msgstr "ปลดล๊อค"
 
 msgid "Unsupported format, try to extract manually."
-msgstr ""
+msgstr "ไม่สนับสนุนไฟล์นี้ ลองขยายไฟล์เอง"
 
 msgid "Update"
 msgstr "อัพเดท"
@@ -1229,7 +1229,7 @@ msgid "for his awesome tool"
 msgstr "สำหรับสุดยอด tool ของเค้า"
 
 msgid "for hosting the themes"
-msgstr ""
+msgstr "สำหรับให้ฝากธีม"
 
 msgid "for hosting the update files"
 msgstr "สำหรับที่เก็บไฟล์อัพเดท"
