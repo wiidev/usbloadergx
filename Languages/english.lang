@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-24 23:27+0200\n"
+"POT-Creation-Date: 2009-11-09 02:01+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -200,7 +200,13 @@ msgstr ""
 msgid "Can't create file"
 msgstr ""
 
+msgid "Can't decompress LZ77"
+msgstr ""
+
 msgid "Can't delete:"
+msgstr ""
+
+msgid "Can't find disc"
 msgstr ""
 
 msgid "Cancel"
@@ -280,9 +286,6 @@ msgid "Could not open Disc"
 msgstr ""
 
 msgid "Could not open WBFS partition"
-msgstr ""
-
-msgid "Could not open disc."
 msgstr ""
 
 msgid "Could not read the disc."
@@ -489,6 +492,9 @@ msgstr ""
 msgid "Failed formating"
 msgstr ""
 
+msgid "Failed to extract opening.bnr"
+msgstr ""
+
 msgid "Failed to extract."
 msgstr ""
 
@@ -537,6 +543,9 @@ msgstr ""
 msgid "GUI Settings"
 msgstr ""
 
+msgid "Game (Banner) Sounds"
+msgstr ""
+
 msgid "Game ID"
 msgstr ""
 
@@ -550,6 +559,9 @@ msgid "Game Region"
 msgstr ""
 
 msgid "Game Size"
+msgstr ""
+
+msgid "Game Sound Volume"
 msgstr ""
 
 msgid "Game is already installed:"
@@ -580,6 +592,12 @@ msgid "How do you want to update?"
 msgstr ""
 
 msgid "How to Shutdown?"
+msgstr ""
+
+msgid "IMD5 Header not right."
+msgstr ""
+
+msgid "IMET Header wrong."
 msgstr ""
 
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"

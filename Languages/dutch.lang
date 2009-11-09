@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-24 23:27+0200\n"
+"POT-Creation-Date: 2009-11-09 02:01+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: tj_cool\n"
 "Language-Team: \n"
@@ -200,8 +200,14 @@ msgstr "Kan map niet aanmaken"
 msgid "Can't create file"
 msgstr ""
 
+msgid "Can't decompress LZ77"
+msgstr ""
+
 msgid "Can't delete:"
 msgstr "Kan niet verwijderen:"
+
+msgid "Can't find disc"
+msgstr ""
 
 msgid "Cancel"
 msgstr "Annuleren"
@@ -277,13 +283,10 @@ msgid "Could not initialize network!"
 msgstr "Kan netwerk niet initialiseren!"
 
 msgid "Could not open Disc"
-msgstr "Kan DVD niet laden"
+msgstr "Kan DVD niet openen"
 
 msgid "Could not open WBFS partition"
 msgstr "Kan WBFS partitie niet openen"
-
-msgid "Could not open disc."
-msgstr "Kan DVD niet openen"
 
 msgid "Could not read the disc."
 msgstr "Kan DVD niet lezen"
@@ -489,6 +492,9 @@ msgstr ""
 msgid "Failed formating"
 msgstr "Formatteren mislukt"
 
+msgid "Failed to extract opening.bnr"
+msgstr ""
+
 msgid "Failed to extract."
 msgstr ""
 
@@ -537,6 +543,9 @@ msgstr "GCT bestand aangemaakt"
 msgid "GUI Settings"
 msgstr "Menu opties"
 
+msgid "Game (Banner) Sounds"
+msgstr ""
+
 msgid "Game ID"
 msgstr "Spel ID"
 
@@ -551,6 +560,9 @@ msgstr "Spel Regio"
 
 msgid "Game Size"
 msgstr "Spel grootte"
+
+msgid "Game Sound Volume"
+msgstr ""
 
 msgid "Game is already installed:"
 msgstr "Spel is al geïnstalleerd:"
@@ -581,6 +593,12 @@ msgstr "Hoe wil je updaten?"
 
 msgid "How to Shutdown?"
 msgstr "Hoe uitzetten?"
+
+msgid "IMD5 Header not right."
+msgstr ""
+
+msgid "IMET Header wrong."
+msgstr ""
 
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
 msgstr "Als je geen wifi hebt, druk dan op 1 om een URL voor je WiiTDB.zip te krijgen"

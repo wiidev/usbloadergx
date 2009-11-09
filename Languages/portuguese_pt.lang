@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-24 23:27+0200\n"
+"POT-Creation-Date: 2009-11-09 02:01+0100\n"
 "PO-Revision-Date: 2009-10-26 19:13-0000\n"
 "Last-Translator: Sky8000\n"
 "Language-Team: Sky8000 <sky8000@hotmail.com>\n"
@@ -200,8 +200,14 @@ msgstr "Não foi possível criar a pasta"
 msgid "Can't create file"
 msgstr "Não é possível criar o ficheiro"
 
+msgid "Can't decompress LZ77"
+msgstr ""
+
 msgid "Can't delete:"
 msgstr "Não foi possível apagar:"
+
+msgid "Can't find disc"
+msgstr ""
 
 msgid "Cancel"
 msgstr "Cancelar"
@@ -281,9 +287,6 @@ msgstr "Não foi possível abrir o Disco"
 
 msgid "Could not open WBFS partition"
 msgstr "Não foi possível abrir a partição WBFS"
-
-msgid "Could not open disc."
-msgstr "Não foi possível abrir o disco."
 
 msgid "Could not read the disc."
 msgstr "Não foi possível ler o disco."
@@ -489,6 +492,9 @@ msgstr "Extraindo ficheiros..."
 msgid "Failed formating"
 msgstr "Falha ao formatar"
 
+msgid "Failed to extract opening.bnr"
+msgstr ""
+
 msgid "Failed to extract."
 msgstr "Falha ao extrair ficheiros."
 
@@ -537,6 +543,9 @@ msgstr "Ficheiro GCT criado"
 msgid "GUI Settings"
 msgstr "Definições do Interface"
 
+msgid "Game (Banner) Sounds"
+msgstr ""
+
 msgid "Game ID"
 msgstr "ID do Jogo"
 
@@ -551,6 +560,9 @@ msgstr "Região"
 
 msgid "Game Size"
 msgstr "Tamanho do Jogo"
+
+msgid "Game Sound Volume"
+msgstr ""
 
 msgid "Game is already installed:"
 msgstr "O jogo já está instalado:"
@@ -581,6 +593,12 @@ msgstr "O que deseja actualizar?"
 
 msgid "How to Shutdown?"
 msgstr "Como desligar a consola?"
+
+msgid "IMD5 Header not right."
+msgstr ""
+
+msgid "IMET Header wrong."
+msgstr ""
 
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
 msgstr "Pressione 1 para ver o URL de onde pode descarregar o ficheiro WiiTDB.zip"

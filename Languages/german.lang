@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-24 23:27+0200\n"
+"POT-Creation-Date: 2009-11-09 02:01+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Snoozer\n"
 "Language-Team: Snoozer, wishmasterf\n"
@@ -200,8 +200,14 @@ msgstr "Verzeichnis kann nicht erstellt werden"
 msgid "Can't create file"
 msgstr ""
 
+msgid "Can't decompress LZ77"
+msgstr ""
+
 msgid "Can't delete:"
 msgstr "Löschen fehlgeschlagen:"
+
+msgid "Can't find disc"
+msgstr ""
 
 msgid "Cancel"
 msgstr "Abbrechen"
@@ -281,9 +287,6 @@ msgstr "Disk konnte nicht geöffnet werden"
 
 msgid "Could not open WBFS partition"
 msgstr "Konnte WBFS Partition nicht öffnen."
-
-msgid "Could not open disc."
-msgstr "Konnte Disc nicht öffnen."
 
 msgid "Could not read the disc."
 msgstr "Konnte Disc nicht lesen."
@@ -489,6 +492,9 @@ msgstr ""
 msgid "Failed formating"
 msgstr "Formatieren fehlgeschlagen"
 
+msgid "Failed to extract opening.bnr"
+msgstr ""
+
 msgid "Failed to extract."
 msgstr ""
 
@@ -537,6 +543,9 @@ msgstr "GCT Datei erstellt"
 msgid "GUI Settings"
 msgstr "GUI Einstellungen"
 
+msgid "Game (Banner) Sounds"
+msgstr ""
+
 msgid "Game ID"
 msgstr "Spiel ID"
 
@@ -551,6 +560,9 @@ msgstr "Region"
 
 msgid "Game Size"
 msgstr "Größe"
+
+msgid "Game Sound Volume"
+msgstr ""
 
 msgid "Game is already installed:"
 msgstr "Spiel bereits vorhanden:"
@@ -581,6 +593,12 @@ msgstr "USB Loader GX aktualisieren?"
 
 msgid "How to Shutdown?"
 msgstr "Wie soll beendet werden?"
+
+msgid "IMD5 Header not right."
+msgstr ""
+
+msgid "IMET Header wrong."
+msgstr ""
 
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
 msgstr "Wenn Sie kein WiFi haben, drücken Sie 1 um eine URL zu generieren."

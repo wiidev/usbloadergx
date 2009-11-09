@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-25 03:55+0100\n"
+"POT-Creation-Date: 2009-11-09 02:01+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: raschi\n"
 "Language-Team: raschi\n"
@@ -200,8 +200,14 @@ msgstr "Kan ikke opprette mappe"
 msgid "Can't create file"
 msgstr "Kan ikke opprette fil"
 
+msgid "Can't decompress LZ77"
+msgstr ""
+
 msgid "Can't delete:"
 msgstr "Kan ikke slette:"
+
+msgid "Can't find disc"
+msgstr ""
 
 msgid "Cancel"
 msgstr "Avbryt"
@@ -281,9 +287,6 @@ msgstr "Kan ikke åpne plate"
 
 msgid "Could not open WBFS partition"
 msgstr "Kan ikke åpne WBFS partisjon"
-
-msgid "Could not open disc."
-msgstr "Kan ikke åpne plate."
 
 msgid "Could not read the disc."
 msgstr "Kan ikke lese plate."
@@ -489,6 +492,9 @@ msgstr "Pakker ut filer..."
 msgid "Failed formating"
 msgstr "Feil ved formatering"
 
+msgid "Failed to extract opening.bnr"
+msgstr ""
+
 msgid "Failed to extract."
 msgstr "Utpakking feilet."
 
@@ -537,6 +543,9 @@ msgstr "GCT fil opprettet"
 msgid "GUI Settings"
 msgstr "GUI innstillinger"
 
+msgid "Game (Banner) Sounds"
+msgstr ""
+
 msgid "Game ID"
 msgstr "Spill ID"
 
@@ -551,6 +560,9 @@ msgstr "Region"
 
 msgid "Game Size"
 msgstr "Spill størrelse"
+
+msgid "Game Sound Volume"
+msgstr ""
 
 msgid "Game is already installed:"
 msgstr "Spillet er allerede installert:"
@@ -581,6 +593,12 @@ msgstr "Hvordan vil du oppdatere?"
 
 msgid "How to Shutdown?"
 msgstr "Hvordan skru av?"
+
+msgid "IMD5 Header not right."
+msgstr ""
+
+msgid "IMET Header wrong."
+msgstr ""
 
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
 msgstr "Hvis du ikke har WiFi, klikk 1 for å få en URL til din WiiTDB.zip"

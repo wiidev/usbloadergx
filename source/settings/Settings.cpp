@@ -1342,7 +1342,7 @@ int MenuSettings()
 
 							if(ret == ++Idx || firstRun)
 							{
-								if(firstRun) options2.SetName(Idx, "%s",tr("GameSound Volume"));
+								if(firstRun) options2.SetName(Idx, "%s",tr("Game Sound Volume"));
 								if(ret == Idx)
 								{
 									Settings.gamesoundvolume += 10;

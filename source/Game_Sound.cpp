@@ -250,7 +250,7 @@ void GameSound::LoadSound(const u8 *discid)
 	wiidisc_t *wdisc = wd_open_disc((int (*)(void *, u32, u32, void *))wbfs_disc_read, disc);
 	if(!wdisc)
 	{
-        WindowPrompt(tr("Can't open disc"), 0, tr("OK"));
+        WindowPrompt(tr("Could not open Disc"), 0, tr("OK"));
         return;
 	}
 	u32 size = 0;

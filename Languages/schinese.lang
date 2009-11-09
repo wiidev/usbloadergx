@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-24 23:27+0200\n"
+"POT-Creation-Date: 2009-11-09 02:01+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: knife.hu kavid\n"
 "Language-Team: kavid\n"
@@ -200,8 +200,14 @@ msgstr "无法建立目录"
 msgid "Can't create file"
 msgstr ""
 
+msgid "Can't decompress LZ77"
+msgstr ""
+
 msgid "Can't delete:"
 msgstr "无法删除:"
+
+msgid "Can't find disc"
+msgstr ""
 
 msgid "Cancel"
 msgstr "取消"
@@ -281,9 +287,6 @@ msgstr "无法开启光盘"
 
 msgid "Could not open WBFS partition"
 msgstr "无法打开 WBFS 分区"
-
-msgid "Could not open disc."
-msgstr "无法打开光盘."
 
 msgid "Could not read the disc."
 msgstr "无法读取光盘."
@@ -489,6 +492,9 @@ msgstr ""
 msgid "Failed formating"
 msgstr "格式化失败"
 
+msgid "Failed to extract opening.bnr"
+msgstr ""
+
 msgid "Failed to extract."
 msgstr ""
 
@@ -537,6 +543,9 @@ msgstr "GCT 文件已建立"
 msgid "GUI Settings"
 msgstr "界面设置"
 
+msgid "Game (Banner) Sounds"
+msgstr ""
+
 msgid "Game ID"
 msgstr "游戏 ID"
 
@@ -551,6 +560,9 @@ msgstr "游戏区域"
 
 msgid "Game Size"
 msgstr "游戏容量"
+
+msgid "Game Sound Volume"
+msgstr ""
 
 msgid "Game is already installed:"
 msgstr "已安装的游戏:"
@@ -581,6 +593,12 @@ msgstr "你要升级哪些文件?"
 
 msgid "How to Shutdown?"
 msgstr "如何关机?"
+
+msgid "IMD5 Header not right."
+msgstr ""
+
+msgid "IMET Header wrong."
+msgstr ""
 
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
 msgstr "如果你没有联网，请按 1 键以获取一个WiiTDB.zip的下载链接."

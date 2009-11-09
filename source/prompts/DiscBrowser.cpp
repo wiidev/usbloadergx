@@ -54,7 +54,7 @@ int DiscBrowse(struct discHdr * header) {
 	ret = Disc_Open();
     if (ret < 0) {
 		ResumeGui();
-        WindowPrompt(tr("ERROR:"), tr("Could not open disc."), tr("OK"));
+        WindowPrompt(tr("ERROR:"), tr("Could not open Disc"), tr("OK"));
         return ret;
     }
 
