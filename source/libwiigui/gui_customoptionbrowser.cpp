@@ -157,7 +157,7 @@ GuiCustomOptionBrowser::GuiCustomOptionBrowser(int w, int h, customOptionList * 
 	trigA->SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 	trigHeldA = new GuiTrigger;
 	trigHeldA->SetHeldTrigger(-1, WPAD_BUTTON_A, PAD_BUTTON_A);
-	btnSoundClick = new GuiSound(button_click_pcm, button_click_pcm_size, SOUND_PCM, Settings.sfxvolume);
+	btnSoundClick = new GuiSound(button_click_pcm, button_click_pcm_size, Settings.sfxvolume);
 
 	snprintf(imgPath, sizeof(imgPath), "%s%s", themePath, custombg);
 	bgOptions = new GuiImageData(imgPath, imagebg);

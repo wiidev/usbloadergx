@@ -43,7 +43,7 @@ extern "C" {
     s32  Disc_Open(void);
     s32  Disc_Wait(void);
     void __Disc_SetLowMem(void);
-    s32  Disc_SetUSB(u8 *);
+    s32  Disc_SetUSB(const u8 *);
     s32  Disc_ReadHeader(void *);
     s32  Disc_IsWii(void);
     s32  Disc_BootPartition(u64, u8, u8, u8, u8, u8, u8, u32);

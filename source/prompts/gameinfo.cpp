@@ -148,8 +148,8 @@ int showGameInfo(char *ID) {
         txtWindow.SetAlignment(ALIGN_CENTRE, ALIGN_RIGHT);
         txtWindow.SetPosition(95, 55);
 
-        GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
-        GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
+        GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
+        GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
         char imgPath[100];
         snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
         GuiImageData btnOutline(imgPath, button_dialogue_box_png);

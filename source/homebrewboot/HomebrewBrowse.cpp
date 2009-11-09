@@ -84,9 +84,11 @@ int MenuHomebrewBrowse() {
     int slidedirection = FADE;
 
     /*** Sound Variables ***/
-    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
-    GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
-    GuiSound btnClick1(button_click_pcm, button_click_pcm_size, SOUND_PCM, Settings.sfxvolume);
+    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
+	// because destroy GuiSound must wait while sound playing is finished, we use a global sound
+	if(!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	//	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+    GuiSound btnClick1(button_click_pcm, button_click_pcm_size, Settings.sfxvolume);
 
     /*** Image Variables ***/
     char imgPath[150];
@@ -153,7 +155,7 @@ int MenuHomebrewBrowse() {
         backBtnTxt.SetWidescreen(CFG.widescreen);
         backBtnImg.SetWidescreen(CFG.widescreen);
     }
-    GuiButton backBtn(&backBtnImg,&backBtnImg, 2, 3, -180, 400, &trigA, &btnSoundOver, &btnClick,1);
+    GuiButton backBtn(&backBtnImg,&backBtnImg, 2, 3, -180, 400, &trigA, &btnSoundOver, btnClick2,1);
     backBtn.SetLabel(&backBtnTxt);
     backBtn.SetTrigger(&trigB);
 
@@ -166,7 +168,7 @@ int MenuHomebrewBrowse() {
     GoLeftBtn.SetPosition(25, -25);
     GoLeftBtn.SetImage(&GoLeftImg);
     GoLeftBtn.SetSoundOver(&btnSoundOver);
-    GoLeftBtn.SetSoundClick(&btnClick);
+    GoLeftBtn.SetSoundClick(btnClick2);
     GoLeftBtn.SetEffectGrow();
     GoLeftBtn.SetTrigger(&trigA);
     GoLeftBtn.SetTrigger(&trigL);
@@ -178,7 +180,7 @@ int MenuHomebrewBrowse() {
     GoRightBtn.SetPosition(-25, -25);
     GoRightBtn.SetImage(&GoRightImg);
     GoRightBtn.SetSoundOver(&btnSoundOver);
-    GoRightBtn.SetSoundClick(&btnClick);
+    GoRightBtn.SetSoundClick(btnClick2);
     GoRightBtn.SetEffectGrow();
     GoRightBtn.SetTrigger(&trigA);
     GoRightBtn.SetTrigger(&trigR);
@@ -315,7 +317,7 @@ int MenuHomebrewBrowse() {
     channelBtn.SetPosition(440, 400);
     channelBtn.SetImage(&channelBtnImg);
     channelBtn.SetSoundOver(&btnSoundOver);
-    channelBtn.SetSoundClick(&btnClick);
+    channelBtn.SetSoundClick(btnClick2);
     channelBtn.SetEffectGrow();
     channelBtn.SetTrigger(&trigA);
 
@@ -766,16 +768,9 @@ int MenuHomebrewBrowse() {
 
             else if (homo.GetState() == STATE_CLICKED) {
                 cfg_save_global();
-                s32 thetimeofbg = bgMusic->GetPlayTime();
-                bgMusic->Stop();
+                bgMusic->Pause();
                 choice = WindowExitPrompt(tr("Exit USB Loader GX?"),0, tr("Back to Loader"),tr("Wii Menu"),tr("Back"),0);
-                if (!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path)) {
-                    bgMusic->Play();
-                } else {
-                    bgMusic->PlayOggFile(Settings.ogg_path);
-                }
-                bgMusic->SetPlayTime(thetimeofbg);
-                SetVolumeOgg(255*(Settings.volume/100.0));
+                bgMusic->Resume();
 
                 if (choice == 3) {
                     Sys_LoadMenu(); // Back to System Menu

@@ -317,8 +317,8 @@ noCover(nocoverFlat_png)
 	trigMinus = new GuiTrigger;
 	trigMinus->SetButtonOnlyTrigger(-1, WPAD_BUTTON_MINUS | WPAD_CLASSIC_BUTTON_MINUS, 0);
 
-	btnSoundClick = new GuiSound(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
-	btnSoundOver = new GuiSound(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
+	btnSoundClick = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	btnSoundOver = new GuiSound(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
 
 	int btnHeight = (int) lround(sqrt(RADIUS*RADIUS - 90000)-RADIUS-50);
 

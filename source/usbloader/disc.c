@@ -234,7 +234,7 @@ s32 Disc_Wait(void) {
     return 0;
 }
 
-s32 Disc_SetUSB(u8 *id) {
+s32 Disc_SetUSB(const u8 *id) {
     /* Set USB mode */
     return WDVD_SetUSBMode(id);
 }

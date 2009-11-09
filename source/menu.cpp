@@ -62,6 +62,8 @@ GuiImageData * pointer[4];
 GuiImage * bgImg = NULL;
 GuiImageData * background = NULL;
 GuiSound * bgMusic = NULL;
+GuiSound *btnClick2 = NULL;
+
 float gamesize;
 int currentMenu;
 int idiotFlag=-1;
@@ -371,8 +373,10 @@ int MenuDiscList() {
     }
 
 
-    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
-    GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
+    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
+	// because destroy GuiSound must wait while sound playing is finished, we use a global sound
+	if(!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	//	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
     snprintf(imgPath, sizeof(imgPath), "%sbutton_install.png", CFG.theme_path);
     GuiImageData btnInstall(imgPath, button_install_png);
@@ -485,7 +489,7 @@ int MenuDiscList() {
     installBtnImg.SetWidescreen(CFG.widescreen);
     installBtnImgOver.SetWidescreen(CFG.widescreen);
 
-    GuiButton installBtn(&installBtnImg, &installBtnImgOver, ALIGN_LEFT, ALIGN_TOP, THEME.install_x, THEME.install_y, &trigA, &btnSoundOver, &btnClick, 1, &installBtnTT,24,-30, 0,5);
+    GuiButton installBtn(&installBtnImg, &installBtnImgOver, ALIGN_LEFT, ALIGN_TOP, THEME.install_x, THEME.install_y, &trigA, &btnSoundOver, btnClick2, 1, &installBtnTT,24,-30, 0,5);
 
 
     GuiTooltip settingsBtnTT(tr("Settings"));
@@ -496,7 +500,7 @@ int MenuDiscList() {
     settingsBtnImg.SetWidescreen(CFG.widescreen);
     GuiImage settingsBtnImgOver(&btnSettingsOver);
     settingsBtnImgOver.SetWidescreen(CFG.widescreen);
-    GuiButton settingsBtn(&settingsBtnImg,&settingsBtnImgOver, 0, 3, THEME.setting_x, THEME.setting_y, &trigA, &btnSoundOver, &btnClick,1,&settingsBtnTT,65,-30,0,5);
+    GuiButton settingsBtn(&settingsBtnImg,&settingsBtnImgOver, 0, 3, THEME.setting_x, THEME.setting_y, &trigA, &btnSoundOver, btnClick2,1,&settingsBtnTT,65,-30,0,5);
 
     GuiTooltip homeBtnTT(tr("Back to HBC or Wii Menu"));
     if (Settings.wsprompt == yes)
@@ -506,7 +510,7 @@ int MenuDiscList() {
     homeBtnImg.SetWidescreen(CFG.widescreen);
     GuiImage homeBtnImgOver(&btnhomeOver);
     homeBtnImgOver.SetWidescreen(CFG.widescreen);
-    GuiButton homeBtn(&homeBtnImg,&homeBtnImgOver, 0, 3, THEME.home_x, THEME.home_y, &trigA, &btnSoundOver, &btnClick,1,&homeBtnTT,15,-30,1,5);
+    GuiButton homeBtn(&homeBtnImg,&homeBtnImgOver, 0, 3, THEME.home_x, THEME.home_y, &trigA, &btnSoundOver, btnClick2,1,&homeBtnTT,15,-30,1,5);
     homeBtn.RemoveSoundClick();
     homeBtn.SetTrigger(&trigHome);
 
@@ -518,7 +522,7 @@ int MenuDiscList() {
     GuiImage poweroffBtnImgOver(&btnpwroffOver);
     poweroffBtnImg.SetWidescreen(CFG.widescreen);
     poweroffBtnImgOver.SetWidescreen(CFG.widescreen);
-    GuiButton poweroffBtn(&poweroffBtnImg,&poweroffBtnImgOver, 0, 3, THEME.power_x, THEME.power_y, &trigA, &btnSoundOver, &btnClick,1,&poweroffBtnTT,-10,-30,1,5);
+    GuiButton poweroffBtn(&poweroffBtnImg,&poweroffBtnImgOver, 0, 3, THEME.power_x, THEME.power_y, &trigA, &btnSoundOver, btnClick2,1,&poweroffBtnTT,-10,-30,1,5);
 
 
     GuiTooltip sdcardBtnTT(tr("Reload SD"));
@@ -529,16 +533,16 @@ int MenuDiscList() {
     GuiImage sdcardImgOver(&btnsdcardOver);
     sdcardImg.SetWidescreen(CFG.widescreen);
     sdcardImgOver.SetWidescreen(CFG.widescreen);
-    GuiButton sdcardBtn(&sdcardImg,&sdcardImgOver, 0, 3, THEME.sdcard_x, THEME.sdcard_y, &trigA, &btnSoundOver, &btnClick,1,&sdcardBtnTT,15,-30,0,5);
+    GuiButton sdcardBtn(&sdcardImg,&sdcardImgOver, 0, 3, THEME.sdcard_x, THEME.sdcard_y, &trigA, &btnSoundOver, btnClick2,1,&sdcardBtnTT,15,-30,0,5);
 
     GuiButton gameInfo(0,0);
     gameInfo.SetTrigger(&trig2);
-    gameInfo.SetSoundClick(&btnClick);
+    gameInfo.SetSoundClick(btnClick2);
 
 
     GuiImage wiiBtnImg(&dataID);
     wiiBtnImg.SetWidescreen(CFG.widescreen);
-    GuiButton wiiBtn(&wiiBtnImg,&wiiBtnImg, 0, 4, 0, -10, &trigA, &btnSoundOver, &btnClick,0);
+    GuiButton wiiBtn(&wiiBtnImg,&wiiBtnImg, 0, 4, 0, -10, &trigA, &btnSoundOver, btnClick2,0);
 
     GuiTooltip favoriteBtnTT(tr("Display favorites"));
     if (Settings.wsprompt == yes)
@@ -550,7 +554,7 @@ int MenuDiscList() {
     GuiImage favoriteBtnImg_g(&imgfavIcon_gray);
 	if(favoriteBtnImg_g.GetImage() == NULL) { favoriteBtnImg_g = favoriteBtnImg; favoriteBtnImg_g.SetGrayscale();}
     favoriteBtnImg_g.SetWidescreen(CFG.widescreen);
-    GuiButton favoriteBtn(&favoriteBtnImg_g,&favoriteBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_favorite_x, THEME.gamelist_favorite_y, &trigA, &btnSoundOver, &btnClick,1, &favoriteBtnTT, -15, 52, 0, 3);
+    GuiButton favoriteBtn(&favoriteBtnImg_g,&favoriteBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_favorite_x, THEME.gamelist_favorite_y, &trigA, &btnSoundOver, btnClick2,1, &favoriteBtnTT, -15, 52, 0, 3);
     favoriteBtn.SetAlpha(180);
 
     GuiTooltip searchBtnTT(tr("Set Search-Filter"));
@@ -563,7 +567,7 @@ int MenuDiscList() {
     GuiImage searchBtnImg_g(&imgsearchIcon_gray);
 	if(searchBtnImg_g.GetImage() == NULL) { searchBtnImg_g = searchBtnImg; searchBtnImg_g.SetGrayscale();}
     searchBtnImg_g.SetWidescreen(CFG.widescreen);
-    GuiButton searchBtn(&searchBtnImg_g,&searchBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_search_x, THEME.gamelist_search_y, &trigA, &btnSoundOver, &btnClick,1, &searchBtnTT, -15, 52, 0, 3);
+    GuiButton searchBtn(&searchBtnImg_g,&searchBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_search_x, THEME.gamelist_search_y, &trigA, &btnSoundOver, btnClick2,1, &searchBtnTT, -15, 52, 0, 3);
     searchBtn.SetAlpha(180);
 
     GuiTooltip abcBtnTT(Settings.fave ? tr("Sort by rank") : tr("Sort alphabetically"));
@@ -576,7 +580,7 @@ int MenuDiscList() {
     GuiImage abcBtnImg_g(Settings.fave ? &imgrankIcon_gray : &imgabcIcon_gray);
 	if(abcBtnImg_g.GetImage() == NULL) { abcBtnImg_g = abcBtnImg; abcBtnImg_g.SetGrayscale();}
     abcBtnImg_g.SetWidescreen(CFG.widescreen);
-    GuiButton abcBtn(&abcBtnImg_g,&abcBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_abc_x, THEME.gamelist_abc_y, &trigA, &btnSoundOver, &btnClick,1,&abcBtnTT, -15, 52, 0, 3);
+    GuiButton abcBtn(&abcBtnImg_g,&abcBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_abc_x, THEME.gamelist_abc_y, &trigA, &btnSoundOver, btnClick2,1,&abcBtnTT, -15, 52, 0, 3);
     abcBtn.SetAlpha(180);
 
     GuiTooltip countBtnTT(tr("Sort order by most played"));
@@ -589,7 +593,7 @@ int MenuDiscList() {
     GuiImage countBtnImg_g(&imgplayCountIcon_gray);
 	if(countBtnImg_g.GetImage() == NULL) { countBtnImg_g = countBtnImg; countBtnImg_g.SetGrayscale();}
     countBtnImg_g.SetWidescreen(CFG.widescreen);
-    GuiButton countBtn(&countBtnImg_g,&countBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_count_x, THEME.gamelist_count_y, &trigA, &btnSoundOver, &btnClick,1, &countBtnTT, -15, 52, 0, 3);
+    GuiButton countBtn(&countBtnImg_g,&countBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_count_x, THEME.gamelist_count_y, &trigA, &btnSoundOver, btnClick2,1, &countBtnTT, -15, 52, 0, 3);
     countBtn.SetAlpha(180);
 
     GuiTooltip listBtnTT(tr("Display as a list"));
@@ -602,7 +606,7 @@ int MenuDiscList() {
     GuiImage listBtnImg_g(&imgarrangeList_gray);
 	if(listBtnImg_g.GetImage() == NULL) { listBtnImg_g = listBtnImg; listBtnImg_g.SetGrayscale();}
     listBtnImg_g.SetWidescreen(CFG.widescreen);
-    GuiButton listBtn(&listBtnImg_g,&listBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_list_x, THEME.gamelist_list_y, &trigA, &btnSoundOver, &btnClick,1, &listBtnTT, 15, 52, 1, 3);
+    GuiButton listBtn(&listBtnImg_g,&listBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_list_x, THEME.gamelist_list_y, &trigA, &btnSoundOver, btnClick2,1, &listBtnTT, 15, 52, 1, 3);
     listBtn.SetAlpha(180);
 
     GuiTooltip gridBtnTT(tr("Display as a grid"));
@@ -615,7 +619,7 @@ int MenuDiscList() {
     GuiImage gridBtnImg_g(&imgarrangeGrid_gray);
 	if(gridBtnImg_g.GetImage() == NULL) { gridBtnImg_g = gridBtnImg; gridBtnImg_g.SetGrayscale();}
     gridBtnImg_g.SetWidescreen(CFG.widescreen);
-    GuiButton gridBtn(&gridBtnImg_g,&gridBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_grid_x, THEME.gamelist_grid_y, &trigA, &btnSoundOver, &btnClick,1, &gridBtnTT, 15, 52, 1, 3);
+    GuiButton gridBtn(&gridBtnImg_g,&gridBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_grid_x, THEME.gamelist_grid_y, &trigA, &btnSoundOver, btnClick2,1, &gridBtnTT, 15, 52, 1, 3);
     gridBtn.SetAlpha(180);
 
 	GuiTooltip carouselBtnTT(tr("Display as a carousel"));
@@ -628,7 +632,7 @@ int MenuDiscList() {
 	GuiImage carouselBtnImg_g(&imgarrangeCarousel_gray);
 	if(carouselBtnImg_g.GetImage() == NULL) { carouselBtnImg_g = carouselBtnImg; carouselBtnImg_g.SetGrayscale();}
 	carouselBtnImg_g.SetWidescreen(CFG.widescreen);
-	GuiButton carouselBtn(&carouselBtnImg_g,&carouselBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_carousel_x, THEME.gamelist_carousel_y, &trigA, &btnSoundOver, &btnClick,1, &carouselBtnTT, 15, 52, 1, 3);
+	GuiButton carouselBtn(&carouselBtnImg_g,&carouselBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_carousel_x, THEME.gamelist_carousel_y, &trigA, &btnSoundOver, btnClick2,1, &carouselBtnTT, 15, 52, 1, 3);
 	carouselBtn.SetAlpha(180);
 
     GuiTooltip dvdBtnTT(tr("Mount DVD drive"));
@@ -640,7 +644,7 @@ int MenuDiscList() {
 	GuiImage dvdBtnImg_g(dvdBtnImg); //dvdBtnImg_g.SetGrayscale();
 //	GuiImage carouselBtnImg_g(&imgarrangeCarousel_gray);
 	dvdBtnImg_g.SetWidescreen(CFG.widescreen);
-	GuiButton dvdBtn(&dvdBtnImg_g,&dvdBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_dvd_x, THEME.gamelist_dvd_y, &trigA, &btnSoundOver, &btnClick,1, &dvdBtnTT, 15, 52, 1, 3);
+	GuiButton dvdBtn(&dvdBtnImg_g,&dvdBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_dvd_x, THEME.gamelist_dvd_y, &trigA, &btnSoundOver, btnClick2,1, &dvdBtnTT, 15, 52, 1, 3);
 	dvdBtn.SetAlpha(180);
 
     GuiTooltip homebrewBtnTT(tr("Homebrew Launcher"));
@@ -651,7 +655,7 @@ int MenuDiscList() {
     GuiImage homebrewImgOver(&homebrewImgDataOver);
     homebrewImg.SetWidescreen(CFG.widescreen);
     homebrewImgOver.SetWidescreen(CFG.widescreen);
-    GuiButton homebrewBtn(&homebrewImg,&homebrewImgOver, ALIGN_LEFT, ALIGN_TOP, THEME.homebrew_x, THEME.homebrew_y, &trigA, &btnSoundOver, &btnClick,1,&homebrewBtnTT,15,-30,1,5);
+    GuiButton homebrewBtn(&homebrewImg,&homebrewImgOver, ALIGN_LEFT, ALIGN_TOP, THEME.homebrew_x, THEME.homebrew_y, &trigA, &btnSoundOver, btnClick2,1,&homebrewBtnTT,15,-30,1,5);
 
     if (Settings.fave) {
         favoriteBtn.SetImage(&favoriteBtnImg);
@@ -972,16 +976,9 @@ int MenuDiscList() {
 
         } else if (homeBtn.GetState() == STATE_CLICKED) {
             gprintf("\n\thomeBtn clicked");
-            s32 thetimeofbg = bgMusic->GetPlayTime();
-            bgMusic->Stop();
+            bgMusic->Pause();
             choice = WindowExitPrompt(tr("Exit USB Loader GX?"),0, tr("Back to Loader"),tr("Wii Menu"),tr("Back"),0);
-            if (!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path)) {
-                bgMusic->Play();
-            } else {
-                bgMusic->PlayOggFile(Settings.ogg_path);
-            }
-            bgMusic->SetPlayTime(thetimeofbg);
-            SetVolumeOgg(255*(Settings.volume/100.0));
+            bgMusic->Resume();
 
             if (choice == 3) {
                 Sys_LoadMenu(); // Back to System Menu
@@ -1755,7 +1752,7 @@ static int MenuInstall() {
     int ret, choice = 0;
     char name[200];
 
-    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
+    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
 
     char imgPath[100];
 
@@ -1849,22 +1846,15 @@ static int MenuInstall() {
                 } else {
                     __Menu_GetEntries(); //get the entries again
 					GuiSound * instsuccess = NULL;
-					s32 thetimeofbg = bgMusic->GetPlayTime();
-					bgMusic->Stop();
-					instsuccess = new GuiSound(success_ogg, success_ogg_size, SOUND_OGG, Settings.sfxvolume);
+					bgMusic->Pause();
+					instsuccess = new GuiSound(success_ogg, success_ogg_size, Settings.sfxvolume);
 					instsuccess->SetVolume(Settings.sfxvolume);
 					instsuccess->SetLoop(0);
 					instsuccess->Play();
                     WindowPrompt (tr("Successfully installed:"),name,tr("OK"));
 					instsuccess->Stop();
 					delete instsuccess;
-					if (!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path)) {
-						bgMusic->Play();
-					} else {
-						bgMusic->PlayOggFile(Settings.ogg_path);
-					}
-					bgMusic->SetPlayTime(thetimeofbg);
-					SetVolumeOgg(255*(Settings.volume/100.0));
+					bgMusic->Resume();
                     menu = MENU_DISCLIST;
                     break;
                 }
@@ -1933,8 +1923,10 @@ static int MenuFormat() {
         }
     }
 
-    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
-    GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
+    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
+	// because destroy GuiSound must wait while sound playing is finished, we use a global sound
+	if(!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	//	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
     snprintf(imgPath, sizeof(imgPath), "%swiimote_poweroff.png", CFG.theme_path);
     GuiImageData btnpwroff(imgPath, wiimote_poweroff_png);
     snprintf(imgPath, sizeof(imgPath), "%swiimote_poweroff_over.png", CFG.theme_path);
@@ -1958,12 +1950,12 @@ static int MenuFormat() {
     GuiImage poweroffBtnImgOver(&btnpwroffOver);
     poweroffBtnImg.SetWidescreen(CFG.widescreen);
     poweroffBtnImgOver.SetWidescreen(CFG.widescreen);
-    GuiButton poweroffBtn(&poweroffBtnImg,&poweroffBtnImgOver, 0, 3, THEME.power_x, THEME.power_y, &trigA, &btnSoundOver, &btnClick,1);
+    GuiButton poweroffBtn(&poweroffBtnImg,&poweroffBtnImgOver, 0, 3, THEME.power_x, THEME.power_y, &trigA, &btnSoundOver, btnClick2,1);
     GuiImage exitBtnImg(&btnhome);
     GuiImage exitBtnImgOver(&btnhomeOver);
     exitBtnImg.SetWidescreen(CFG.widescreen);
     exitBtnImgOver.SetWidescreen(CFG.widescreen);
-    GuiButton exitBtn(&exitBtnImg,&exitBtnImgOver, 0, 3, THEME.home_x, THEME.home_y, &trigA, &btnSoundOver, &btnClick,1);
+    GuiButton exitBtn(&exitBtnImg,&exitBtnImgOver, 0, 3, THEME.home_x, THEME.home_y, &trigA, &btnSoundOver, btnClick2,1);
     exitBtn.SetTrigger(&trigHome);
 
     GuiCustomOptionBrowser optionBrowser(396, 280, &options, CFG.theme_path, "bg_options_settings.png", bg_options_settings_png, 0, 10);
@@ -2171,18 +2163,16 @@ int MainMenu(int menu) {
 
     ResumeGui();
 
-    bgMusic = new GuiSound(bg_music_ogg, bg_music_ogg_size, SOUND_OGG, Settings.volume);
-    bgMusic->SetVolume(Settings.volume);
+    bgMusic = new GuiSound(bg_music_ogg, bg_music_ogg_size, Settings.volume);
     bgMusic->SetLoop(1); //loop music
     // startup music
-    if (!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path)) {
-        bgMusic->Play();
-    } else {
-        bgMusic->PlayOggFile(Settings.ogg_path);
+    if (strcmp("", Settings.oggload_path) && strcmp("notset", Settings.ogg_path)) {
+        bgMusic->Load(Settings.ogg_path);
     }
+	bgMusic->Play();
 
     while (currentMenu != MENU_EXIT) {
-        SetVolumeOgg(255*(Settings.volume/100.0));
+        bgMusic->SetVolume(Settings.volume);
 
         switch (currentMenu) {
         case MENU_CHECK:

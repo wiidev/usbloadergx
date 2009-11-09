@@ -306,7 +306,7 @@ s32 WDVD_DisableReset(u8 val) {
 }
 
 /** Hermes **/
-s32 WDVD_SetUSBMode(u8 *id) {
+s32 WDVD_SetUSBMode(const u8 *id) {
     s32 ret;
 
     memset(inbuf, 0, sizeof(inbuf));

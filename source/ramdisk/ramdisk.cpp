@@ -11,7 +11,6 @@
 #define NAMELENMAX	0x80
 #define MAXPATHLEN	0x100
 
-#define FPRINTF(f, ...) {FILE*_fp=fopen("SD:/log.log", "a"); if(_fp) { fprintf(_fp, "%s(%i):" f "\n", __FILE__, __LINE__, ##__VA_ARGS__); fclose(_fp);}}
 
 
 
@@ -533,7 +532,6 @@ static inline RAMDISK_PARTITION* ramdiskFS_getPartitionFromPath(const char* path
 //---------------------------------------------------------------------------------
 static int ramdiskFS_open_r(struct _reent *r, void *file_Struct, const char *path, int flags, int mode) {
 //---------------------------------------------------------------------------------
-FPRINTF("ramdiskFS_open_r(%s)", path); 
 	FILE_STRUCT *fileStruct = (FILE_STRUCT*)file_Struct;
 
 
@@ -543,7 +541,6 @@ FPRINTF("ramdiskFS_open_r(%s)", path);
 		r->_errno = ENODEV;
 		return -1;
 	}
-FPRINTF("ramdiskFS_open_r Partition found"); 
 
 	if ((flags & 0x03) == O_RDONLY) {
 		// Open the file for read-only access
@@ -569,14 +566,12 @@ FPRINTF("ramdiskFS_open_r Partition found");
 		r->_errno = EEXIST;
 		return -1;
 	}
-FPRINTF("ok"); 
 	// It should not be a directory if we're openning a file,
 	if (entry && entry->IsDir())
 	{
 		r->_errno = EISDIR;
 		return -1;
 	}
-FPRINTF("ok"); 
 
 	fileStruct->isLink = entry ? entry->IsLink() : false;
 	fileStruct->file = entry ? entry->IsFile() : NULL;
@@ -600,7 +595,6 @@ FPRINTF("ok");
 			return -1;
 		}
 	}
-FPRINTF("ok"); 
 	if(fileStruct->file)
 	{
 		fileStruct->current_pos = 0;
@@ -610,7 +604,6 @@ FPRINTF("ok");
 		if (flags & O_APPEND)
 			fileStruct->current_pos = fileStruct->file->file_len;
 		return 0;
-FPRINTF("ramdiskFS_open_r ok"); 
 	}
 	r->_errno = ENOENT;
 	return(-1);
@@ -641,7 +634,6 @@ static off_t ramdiskFS_seek_r(struct _reent *r, int fd, off_t pos, int dir) {
 //---------------------------------------------------------------------------------
 	//need check for eof here...
 	FILE_STRUCT *fileStruct = (FILE_STRUCT*)fd;
-FPRINTF("ramdiskFS_seek_r(%s)", fileStruct->file->name); 
 	
 	switch(dir)
 	{
@@ -663,7 +655,6 @@ FPRINTF("ramdiskFS_seek_r(%s)", fileStruct->file->name);
 //---------------------------------------------------------------------------------
 static int ramdiskFS_fstat_r(struct _reent *r, int fd, struct stat *st) {
 //---------------------------------------------------------------------------------
-FPRINTF("ramdiskFS_fstat_r"); 
 	FILE_STRUCT *fileStruct = (FILE_STRUCT*)fd;
 
 	st->st_mode = fileStruct->isLink ? S_IFLNK : S_IFREG;
@@ -674,7 +665,6 @@ FPRINTF("ramdiskFS_fstat_r");
 //---------------------------------------------------------------------------------
 static int ramdiskFS_stat_r(struct _reent *r, const char *file, struct stat *st) {
 //---------------------------------------------------------------------------------
-FPRINTF("ramdiskFS_stat_r(%s)", file); 
 	FILE_STRUCT fileStruct;
 	DIR_STRUCT dirStruct;
 	DIR_ITER dirState;
@@ -700,7 +690,6 @@ FPRINTF("ramdiskFS_stat_r(%s)", file);
 //---------------------------------------------------------------------------------
 static int ramdiskFS_unlink_r(struct _reent *r, const char *name) {
 //---------------------------------------------------------------------------------
-FPRINTF("ramdiskFS_unlink_r(%s)", name); 
 	RAMDISK_PARTITION *partition = ramdiskFS_getPartitionFromPath(name);
 	if ( partition == NULL )
 	{
@@ -744,7 +733,6 @@ FPRINTF("ramdiskFS_unlink_r(%s)", name);
 //---------------------------------------------------------------------------------
 static int ramdiskFS_chdir_r(struct _reent *r, const char *name) {
 //---------------------------------------------------------------------------------
-FPRINTF("ramdiskFS_chdir_r(%s)", name); 
 	DIR_STRUCT dirStruct;
 	DIR_ITER dirState;
 	dirState.dirStruct=&dirStruct;
@@ -765,14 +753,12 @@ FPRINTF("ramdiskFS_chdir_r(%s)", name);
 	}
 	partition->cwd = dirStruct.dir;
 	ramdiskFS_dirclose_r(r, &dirState);
-FPRINTF("ok"); 
 	return 0;
 }
 
 //---------------------------------------------------------------------------------
 static int ramdiskFS_mkdir_r(struct _reent *r, const char *path, int mode) {
 //---------------------------------------------------------------------------------
-FPRINTF("ramdiskFS_mkdir_r(%s)", path); 
 	RAMDISK_PARTITION *partition = ramdiskFS_getPartitionFromPath(path);
 	if ( partition == NULL )
 	{
@@ -802,12 +788,10 @@ FPRINTF("ramdiskFS_mkdir_r(%s)", path);
 static DIR_ITER* ramdiskFS_diropen_r(struct _reent *r, DIR_ITER *dirState, const char *path) {
 //---------------------------------------------------------------------------------
 
-	FPRINTF("DirOpen %s", path);
 	DIR_STRUCT *dirStruct = (DIR_STRUCT*)dirState->dirStruct;
 	char *cptr;
 
 	RAMDISK_PARTITION *partition = ramdiskFS_getPartitionFromPath(path);
-	FPRINTF("partition %p", partition);
 	if ( partition == NULL )
 	{
 		r->_errno = ENODEV;
@@ -828,7 +812,6 @@ static DIR_ITER* ramdiskFS_diropen_r(struct _reent *r, DIR_ITER *dirState, const
 		dirStruct->dir = partition->cwd;	//else use current working dir
 
 	RAMDISK_BASE_ENTRY *entry = dirStruct->dir->FindEntry(path);
-	FPRINTF("entry %p", entry);
 	if(entry==NULL)
 	{
 		r->_errno = ENOENT;
@@ -860,20 +843,15 @@ static int ramdiskFS_dirnext_r(struct _reent *r, DIR_ITER *dirState, char *filen
 	DIR_STRUCT *dirStruct = (DIR_STRUCT*)dirState->dirStruct;
 //	RAMDISK_BASE_ENTRY **dirStruct = (RAMDISK_BASE_ENTRY**)dirState->dirStruct;
 
-	FPRINTF("DirNext");
-	
 	if(dirStruct->current_entry) 
 	{
-	FPRINTF("current_entry = %s",dirStruct->current_entry->name);
 		strcpy(filename, dirStruct->current_entry->name);
 		if(dirStruct->current_entry->IsDir())
 		{
-	FPRINTF("IsDir");
 			if(st) st->st_mode=S_IFDIR;
 		}
 		else
 		{
-	FPRINTF("IsFile");
 			if(st) st->st_mode=0;
 		}
 		dirStruct->current_entry = dirStruct->current_entry->next;
@@ -947,7 +925,6 @@ extern "C" void ramdiskUnmount(const char *mountpoint) {
 //---------------------------------------------------------------------------------
 int ramdiskFS_Mount(const char *mountpoint, void *handle) {
 //---------------------------------------------------------------------------------
-	FPRINTF("Mount %s", mountpoint);
 	devoptab_t* devops;
 	char* nameCopy;
 	RAMDISK_PARTITION** partition;
@@ -989,14 +966,12 @@ int ramdiskFS_Mount(const char *mountpoint, void *handle) {
 	else
 		*partition = new RAMDISK_PARTITION(Mountpoint, true);
 	devops->deviceData			= partition; 
-	FPRINTF("devops=%p nameCopy=%p(%s) partition=%p", devops, nameCopy, nameCopy, partition);
 
 	if(AddDevice(devops)<0)
 	{
 		free(devops);
 		return false;
 	}
-	FPRINTF("mounted");
 
 	return true;
 

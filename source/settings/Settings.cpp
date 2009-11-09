@@ -71,9 +71,11 @@ int MenuSettings()
 
 	int slidedirection = FADE;
 
-	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
-	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
-	GuiSound btnClick1(button_click_pcm, button_click_pcm_size, SOUND_PCM, Settings.sfxvolume);
+	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
+	// because destroy GuiSound must wait while sound playing is finished, we use a global sound
+	if(!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	//	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	GuiSound btnClick1(button_click_pcm, button_click_pcm_size, Settings.sfxvolume);
 
 	char imgPath[100];
 
@@ -135,7 +137,7 @@ int MenuSettings()
 		backBtnTxt.SetWidescreen(CFG.widescreen);
 		backBtnImg.SetWidescreen(CFG.widescreen);
 	}
-	GuiButton backBtn(&backBtnImg,&backBtnImg, 2, 3, -180, 400, &trigA, &btnSoundOver, &btnClick,1);
+	GuiButton backBtn(&backBtnImg,&backBtnImg, 2, 3, -180, 400, &trigA, &btnSoundOver, btnClick2,1);
 	backBtn.SetLabel(&backBtnTxt);
 	backBtn.SetTrigger(&trigB);
 
@@ -184,7 +186,7 @@ int MenuSettings()
 	GoLeftBtn.SetPosition(25, -25);
 	GoLeftBtn.SetImage(&GoLeftImg);
 	GoLeftBtn.SetSoundOver(&btnSoundOver);
-	GoLeftBtn.SetSoundClick(&btnClick);
+	GoLeftBtn.SetSoundClick(btnClick2);
 	GoLeftBtn.SetEffectGrow();
 	GoLeftBtn.SetTrigger(&trigA);
 	GoLeftBtn.SetTrigger(&trigL);
@@ -196,7 +198,7 @@ int MenuSettings()
 	GoRightBtn.SetPosition(-25, -25);
 	GoRightBtn.SetImage(&GoRightImg);
 	GoRightBtn.SetSoundOver(&btnSoundOver);
-	GoRightBtn.SetSoundClick(&btnClick);
+	GoRightBtn.SetSoundClick(btnClick2);
 	GoRightBtn.SetEffectGrow();
 	GoRightBtn.SetTrigger(&trigA);
 	GoRightBtn.SetTrigger(&trigR);
@@ -665,15 +667,9 @@ int MenuSettings()
 						{
 							cfg_save_global();
 							optionBrowser2.SetState(STATE_DISABLED);
-							s32 thetimeofbg = bgMusic->GetPlayTime();
-							bgMusic->Stop();
+							bgMusic->Pause();
 							choice = WindowExitPrompt(tr("Exit USB Loader GX?"),0, tr("Back to Loader"),tr("Wii Menu"),tr("Back"),0);
-							if (!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path))
-								bgMusic->Play();
-							else
-								bgMusic->PlayOggFile(Settings.ogg_path);
-							bgMusic->SetPlayTime(thetimeofbg);
-							SetVolumeOgg(255*(Settings.volume/100.0));
+							bgMusic->Resume();
 							if (choice == 3)
 								Sys_LoadMenu(); // Back to System Menu
 							else if (choice == 2)
@@ -908,15 +904,9 @@ int MenuSettings()
 						{
 							cfg_save_global();
 							optionBrowser2.SetState(STATE_DISABLED);
-							s32 thetimeofbg = bgMusic->GetPlayTime();
-							bgMusic->Stop();
+							bgMusic->Pause();
 							choice = WindowExitPrompt(tr("Exit USB Loader GX?"),0, tr("Back to Loader"),tr("Wii Menu"),tr("Back"),0);
-							if (!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path))
-								bgMusic->Play();
-							else
-								bgMusic->PlayOggFile(Settings.ogg_path);
-							bgMusic->SetPlayTime(thetimeofbg);
-							SetVolumeOgg(255*(Settings.volume/100.0));
+							bgMusic->Resume();
 							if (choice == 3)
 								Sys_LoadMenu(); // Back to System Menu
 							if (choice == 2)
@@ -1060,15 +1050,9 @@ int MenuSettings()
 						{
 							cfg_save_global();
 							optionBrowser2.SetState(STATE_DISABLED);
-							s32 thetimeofbg = bgMusic->GetPlayTime();
-							bgMusic->Stop();
+							bgMusic->Pause();
 							choice = WindowExitPrompt(tr("Exit USB Loader GX?"),0, tr("Back to Loader"),tr("Wii Menu"),tr("Back"),0);
-							if (!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path))
-								bgMusic->Play();
-							else
-								bgMusic->PlayOggFile(Settings.ogg_path);
-							bgMusic->SetPlayTime(thetimeofbg);
-							SetVolumeOgg(255*(Settings.volume/100.0));
+							bgMusic->Resume();
 							if (choice == 3)
 								Sys_LoadMenu(); // Back to System Menu
 							else if (choice == 2)
@@ -1238,15 +1222,9 @@ int MenuSettings()
 						{
 							cfg_save_global();
 							optionBrowser2.SetState(STATE_DISABLED);
-							s32 thetimeofbg = bgMusic->GetPlayTime();
-							bgMusic->Stop();
+							bgMusic->Pause();
 							choice = WindowExitPrompt(tr("Exit USB Loader GX?"),0, tr("Back to Loader"),tr("Wii Menu"),tr("Back"),0);
-							if (!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path))
-								bgMusic->Play();
-							else
-								bgMusic->PlayOggFile(Settings.ogg_path);
-							bgMusic->SetPlayTime(thetimeofbg);
-							SetVolumeOgg(255*(Settings.volume/100.0));
+							bgMusic->Resume();
 							if (choice == 3)
 								Sys_LoadMenu(); // Back to System Menu
 							else if (choice == 2)
@@ -1298,7 +1276,7 @@ int MenuSettings()
 									Settings.volume += 10;
 									if (Settings.volume > 100)
 										Settings.volume = 0;
-									SetVolumeOgg(255*(Settings.volume/100.0));
+									bgMusic->SetVolume(Settings.volume);
 								}
 								if (Settings.volume > 0)
 									options2.SetValue(Idx,"%i", Settings.volume);
@@ -1315,7 +1293,7 @@ int MenuSettings()
 									if (Settings.sfxvolume > 100)
 										Settings.sfxvolume = 0;
 									btnSoundOver.SetVolume(Settings.sfxvolume);
-									btnClick.SetVolume(Settings.sfxvolume);
+									btnClick2->SetVolume(Settings.sfxvolume);
 									btnClick1.SetVolume(Settings.sfxvolume);
 								}
 								if (Settings.sfxvolume > 0)
@@ -1420,15 +1398,9 @@ int MenuSettings()
 							{
 								cfg_save_global();
 								optionBrowser2.SetState(STATE_DISABLED);
-								s32 thetimeofbg = bgMusic->GetPlayTime();
-								bgMusic->Stop();
+								bgMusic->Pause();
 								choice = WindowExitPrompt(tr("Exit USB Loader GX?"),0, tr("Back to Loader"),tr("Wii Menu"),tr("Back"),0);
-								if (!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path))
-									bgMusic->Play();
-								else
-									bgMusic->PlayOggFile(Settings.ogg_path);
-								bgMusic->SetPlayTime(thetimeofbg);
-								SetVolumeOgg(255*(Settings.volume/100.0));
+								bgMusic->Resume();
 								if (choice == 3)
 									Sys_LoadMenu(); // Back to System Menu
 								else if (choice == 2)
@@ -2010,15 +1982,9 @@ int MenuSettings()
 			{
 				cfg_save_global();
 				optionBrowser2.SetState(STATE_DISABLED);
-				s32 thetimeofbg = bgMusic->GetPlayTime();
-				bgMusic->Stop();
+				bgMusic->Pause();
 				choice = WindowExitPrompt(tr("Exit USB Loader GX?"),0, tr("Back to Loader"),tr("Wii Menu"),tr("Back"),0);
-				if (!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path))
-					bgMusic->Play();
-				else
-					bgMusic->PlayOggFile(Settings.ogg_path);
-				bgMusic->SetPlayTime(thetimeofbg);
-				SetVolumeOgg(255*(Settings.volume/100.0));
+				bgMusic->Resume();
 
 				if (choice == 3)
 					Sys_LoadMenu(); // Back to System Menu
@@ -2070,9 +2036,11 @@ int GameSettings(struct discHdr * header)
 
 
 
-	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
-	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
-	GuiSound btnClick1(button_click_pcm, button_click_pcm_size, SOUND_PCM, Settings.sfxvolume);
+	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
+	// because destroy GuiSound must wait while sound playing is finished, we use a global sound
+	if(!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	//	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	GuiSound btnClick1(button_click_pcm, button_click_pcm_size, Settings.sfxvolume);
 
 	char imgPath[100];
 
@@ -2124,7 +2092,7 @@ int GameSettings(struct discHdr * header)
 		backBtnTxt.SetWidescreen(CFG.widescreen);
 		backBtnImg.SetWidescreen(CFG.widescreen);
 	}
-	GuiButton backBtn(&backBtnImg,&backBtnImg, 2, 3, -180, 400, &trigA, &btnSoundOver, &btnClick,1);
+	GuiButton backBtn(&backBtnImg,&backBtnImg, 2, 3, -180, 400, &trigA, &btnSoundOver, btnClick2,1);
 	backBtn.SetLabel(&backBtnTxt);
 	backBtn.SetTrigger(&trigB);
 
@@ -2139,7 +2107,7 @@ int GameSettings(struct discHdr * header)
 		saveBtnTxt.SetWidescreen(CFG.widescreen);
 		saveBtnImg.SetWidescreen(CFG.widescreen);
 	}
-	GuiButton saveBtn(&saveBtnImg,&saveBtnImg, 2, 3, 180, 400, &trigA, &btnSoundOver, &btnClick,1);
+	GuiButton saveBtn(&saveBtnImg,&saveBtnImg, 2, 3, 180, 400, &trigA, &btnSoundOver, btnClick2,1);
 	saveBtn.SetLabel(&saveBtnTxt);
 
 
@@ -2384,15 +2352,9 @@ int GameSettings(struct discHdr * header)
 					{
 						cfg_save_global();
 						optionBrowser2.SetState(STATE_DISABLED);
-						s32 thetimeofbg = bgMusic->GetPlayTime();
-						bgMusic->Stop();
+						bgMusic->Pause();
 						choice = WindowExitPrompt(tr("Exit USB Loader GX?"),0, tr("Back to Loader"),tr("Wii Menu"),tr("Back"),0);
-						if (!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path))
-							bgMusic->Play();
-						else
-							bgMusic->PlayOggFile(Settings.ogg_path);
-						bgMusic->SetPlayTime(thetimeofbg);
-						SetVolumeOgg(255*(Settings.volume/100.0));
+						bgMusic->Resume();
 						if (choice == 3)
 							Sys_LoadMenu(); // Back to System Menu
 						else if (choice == 2)
@@ -2654,15 +2616,9 @@ int GameSettings(struct discHdr * header)
 					{
 						cfg_save_global();
 						optionBrowser2.SetState(STATE_DISABLED);
-						s32 thetimeofbg = bgMusic->GetPlayTime();
-						bgMusic->Stop();
+						bgMusic->Pause();
 						choice = WindowExitPrompt(tr("Exit USB Loader GX?"),0, tr("Back to Loader"),tr("Wii Menu"),tr("Back"),0);
-						if (!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path))
-							bgMusic->Play();
-						else
-							bgMusic->PlayOggFile(Settings.ogg_path);
-						bgMusic->SetPlayTime(thetimeofbg);
-						SetVolumeOgg(255*(Settings.volume/100.0));
+						bgMusic->Resume();
 						if (choice == 3)
 							Sys_LoadMenu(); // Back to System Menu
 						else if (choice == 2)
@@ -2860,24 +2816,9 @@ int GameSettings(struct discHdr * header)
 			{
 				cfg_save_global();
 				optionBrowser2.SetState(STATE_DISABLED);
-				s32 thetimeofbg = bgMusic->GetPlayTime();
-				bgMusic->Stop();
+				bgMusic->Pause();
 				choice = WindowExitPrompt(tr("Exit USB Loader GX?"),0, tr("Back to Loader"),tr("Wii Menu"),tr("Back"),0);
-				/*
-				// if language has changed, reload titles
-				int opt_langnew = 0;
-				game_cfg = CFG_get_game_opt(header->id);
-				if (game_cfg) opt_langnew = game_cfg->language;
-				if (Settings.titlesOverride==1 && opt_lang != opt_langnew)
-					OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, false, Settings.titlesOverride==1?true:false, true); // open file, reload titles, keep in memory
-					// titles are refreshed in menu.cpp as soon as this function returns
-				*/
-				if (!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path))
-					bgMusic->Play();
-				else
-					bgMusic->PlayOggFile(Settings.ogg_path);
-				bgMusic->SetPlayTime(thetimeofbg);
-				SetVolumeOgg(255*(Settings.volume/100.0));
+				bgMusic->Resume();
 
 				if (choice == 3)
 					Sys_LoadMenu(); // Back to System Menu

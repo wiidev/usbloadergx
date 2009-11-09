@@ -770,3 +770,82 @@ SimpleLock::~SimpleLock()
 {
 	element->Unlock();
 }
+#if 0
+
+	
+GuiElement
+
+
+protected: 
+	void Lock(); 
+	void Unlock(); 
+	friend class SimpleLock; 
+private:
+//	static mutex_t mutex; 
+	static mutex_t _lock_mutex; 
+	lwp_t		_lock_thread;
+	u16		_lock_count;
+	lwpq_t	_lock_queue;
+	u16		_lock_queue_count;
+
+
+
+
+
+void GuiElement::Lock()
+{
+	LWP_MutexLock(_lock_mutex);
+
+	if(_lock_thread = LWP_GetSelf())	// i am self
+	{
+		_lock_count++;						// inc count of locks;
+		LWP_MutexUnlock(_lock_mutex);
+		return;
+	}
+
+	if(_lock_thread == THREAD_NULL) // element is not locked
+	{
+		_lock_thread = LWP_GetSelf();
+		_lock_count = 1;
+		LWP_MutexUnlock(_lock_mutex);
+		return;
+	}
+
+	// element is locked
+	if(_lock_queue == LWP_TQUEUE_NULL) // no queue 
+	{
+		LWP_InitQueue(&_lock_queue);	// init queue
+		_lock_queue_count = 0;			// clear count of threads in queue;
+	}
+	_lock_queue_count++;					// inc count of threads in queue;
+	LWP_MutexUnlock(_lock_mutex);	// unlock
+	LWP_ThreadSleep(_lock_queue);		// and sleep
+	LWP_MutexLock(_lock_mutex);		// waked up , will lock
+	if(--_lock_queue_count == 0)		// dec count of threads in queue;
+	{
+												// is the last thread in queue
+		LWP_CloseQueue(_lock_queue);	// close the queue
+		_lock_queue = LWP_TQUEUE_NULL;
+		lock();								// try lock again;
+	}
+	LWP_MutexUnlock(_lock_mutex)
+	return;
+}
+void GuiElement::Unlock()
+{
+	LWP_MutexLock(_lock_mutex);
+	// only the thread was locked this element, can call unlock
+	if(_lock_thread == LWP_GetSelf())				// but we check it here – safe is safe
+	{
+		if(--_lock_queue_count == 0)				// dec count of locks;
+		{
+			_lock_thread = THREAD_NULL;				// is the last thread in queue
+			if(_lock_queue != LWP_TQUEUE_NULL)	// has a queue
+				LWP_ThreadSignal(_lock_queue);		// wake the next thread in queue
+		}
+	}
+	LWP_MutexUnlock(_lock_mutex)
+}
+
+
+#endif

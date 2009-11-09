@@ -421,6 +421,7 @@ extern "C" {
 		u8		discart;
 		short   gamesound;
 	};
+	extern struct SSettings Settings;
 
 	void CFG_LoadGlobal(void);
 	bool cfg_save_global(void);

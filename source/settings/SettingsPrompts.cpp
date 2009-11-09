@@ -14,6 +14,7 @@
 #include "fatmounter.h"
 #include "filelist.h"
 #include "sys.h"
+#include "menu.h"
 
 
 /*** Extern variables ***/
@@ -36,8 +37,10 @@ bool MenuOGG() {
     int scrollon, nothingchanged = 0;
     bool returnhere = false;
 
-    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
-    GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
+    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
+	// because destroy GuiSound must wait while sound playing is finished, we use a global sound
+	if(!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	//	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
     char imgPath[100];
 
@@ -73,7 +76,7 @@ bool MenuOGG() {
     pathBtn.SetPosition(0,28);
     pathBtn.SetLabel(&titleTxt);
     pathBtn.SetSoundOver(&btnSoundOver);
-    pathBtn.SetSoundClick(&btnClick);
+    pathBtn.SetSoundClick(btnClick2);
     pathBtn.SetTrigger(&trigA);
     pathBtn.SetEffectGrow();
 
@@ -94,7 +97,7 @@ bool MenuOGG() {
     backBtn.SetLabel(&backBtnTxt);
     backBtn.SetImage(&backBtnImg);
     backBtn.SetSoundOver(&btnSoundOver);
-    backBtn.SetSoundClick(&btnClick);
+    backBtn.SetSoundClick(btnClick2);
     backBtn.SetTrigger(&trigA);
     backBtn.SetTrigger(&trigB);
     backBtn.SetEffectGrow();
@@ -112,7 +115,7 @@ bool MenuOGG() {
     defaultBtn.SetLabel(&defaultBtnTxt);
     defaultBtn.SetImage(&defaultBtnImg);
     defaultBtn.SetSoundOver(&btnSoundOver);
-    defaultBtn.SetSoundClick(&btnClick);
+    defaultBtn.SetSoundClick(btnClick2);
     defaultBtn.SetTrigger(&trigA);
     defaultBtn.SetEffectGrow();
 
@@ -145,7 +148,7 @@ bool MenuOGG() {
     playBtn.SetPosition(50, 400);
     playBtn.SetImage(&playBtnImg);
     playBtn.SetSoundOver(&btnSoundOver);
-    playBtn.SetSoundClick(&btnClick);
+    playBtn.SetSoundClick(btnClick2);
     playBtn.SetTrigger(&trigA);
     playBtn.SetTrigger(&trigPlus);
     playBtn.SetEffectGrow();
@@ -157,7 +160,7 @@ bool MenuOGG() {
     stopBtn.SetPosition(-15, 400);
     stopBtn.SetImage(&stopBtnImg);
     stopBtn.SetSoundOver(&btnSoundOver);
-    stopBtn.SetSoundClick(&btnClick);
+    stopBtn.SetSoundClick(btnClick2);
     stopBtn.SetTrigger(&trigA);
     stopBtn.SetTrigger(&trigMinus);
     stopBtn.SetEffectGrow();
@@ -187,11 +190,12 @@ bool MenuOGG() {
 
         if (backBtn.GetState() == STATE_CLICKED) {
             if (nothingchanged == 1 && countoggs > 0) {
-                if (!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path)) {
-                    bgMusic->Play();
+                if (strcmp("", Settings.oggload_path) && strcmp("notset", Settings.ogg_path)) {
+                    bgMusic->Load(Settings.ogg_path);
                 } else {
-                    bgMusic->PlayOggFile(Settings.ogg_path);
-                }
+					bgMusic->Load(bg_music_ogg, bg_music_ogg_size, true);
+				}
+                bgMusic->Play();
             }
             backBtn.ResetState();
             break;
@@ -201,8 +205,9 @@ bool MenuOGG() {
             choice = WindowPrompt(tr("Loading standard music."),0,tr("OK"), tr("Cancel"));
             if (choice == 1) {
                 sprintf(Settings.ogg_path, "notset");
+				bgMusic->Load(bg_music_ogg, bg_music_ogg_size, true);
                 bgMusic->Play();
-                SetVolumeOgg(255*(Settings.volume/100.0));
+                bgMusic->SetVolume(Settings.volume);
                 cfg_save_global();
             }
             defaultBtn.ResetState();
@@ -255,20 +260,18 @@ bool MenuOGG() {
         if (ret>=0) {
             choice = WindowPrompt(tr("Set as backgroundmusic?"),GetFileName(ret),tr("Yes"),tr("No"));
             if (choice == 1) {
-                StopOgg();
                 snprintf(fullpath,150,"%s%s",Settings.oggload_path,GetFileName(ret));
-                choice = bgMusic->PlayOggFile(fullpath);
-                if (choice < 0) {
+                if (!bgMusic->Load(fullpath)) {
                     WindowPrompt(tr("Not supported format!"), tr("Loading standard music."), tr("OK"));
                     sprintf(Settings.ogg_path, "notset");
-                    bgMusic->Play();
-                    SetVolumeOgg(255*(Settings.volume/100.0));
                 } else {
                     snprintf(Settings.ogg_path, sizeof(Settings.ogg_path), "%s", fullpath);
                     cfg_save_global();
-                    SetVolumeOgg(255*(Settings.volume/100.0));
+                    bgMusic->SetVolume(Settings.volume);
                     nothingchanged = 0;
                 }
+                bgMusic->Play();
+                bgMusic->SetVolume(Settings.volume);
             }
             optionBrowser4.SetFocus(1);
         }
@@ -277,16 +280,11 @@ bool MenuOGG() {
             if (countoggs > 0) {
                 ret = optionBrowser4.GetSelectedOption();
                 snprintf(fullpath, 150,"%s%s", Settings.oggload_path,GetFileName(ret));
-                choice = bgMusic->PlayOggFile(fullpath);
-                if (choice < 0) {
+                if (!bgMusic->Load(fullpath)) {
                     WindowPrompt(tr("Not supported format!"), tr("Loading standard music."), tr("OK"));
-                    if (!strcmp("", Settings.oggload_path) || !strcmp("notset", Settings.ogg_path)) {
-                        bgMusic->Play();
-                    } else {
-                        bgMusic->PlayOggFile(Settings.ogg_path);
-                    }
                 }
-                SetVolumeOgg(255*(Settings.volume/100.0));
+                bgMusic->Play();
+                bgMusic->SetVolume(Settings.volume);
                 nothingchanged = 1;
                 optionBrowser4.SetFocus(1);
             }
@@ -295,7 +293,7 @@ bool MenuOGG() {
 
         if (stopBtn.GetState() == STATE_CLICKED) {
             if (countoggs > 0) {
-                StopOgg();
+                bgMusic->Stop();
                 nothingchanged = 1;
                 optionBrowser4.SetFocus(1);
             }
@@ -322,8 +320,10 @@ int MenuLanguageSelect() {
     int scrollon;
     int returnhere = 0;
 
-    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
-    GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
+    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
+	// because destroy GuiSound must wait while sound playing is finished, we use a global sound
+	if(!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	//	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
     char imgPath[100];
 
@@ -354,7 +354,7 @@ int MenuLanguageSelect() {
     pathBtn.SetPosition(0,28);
     pathBtn.SetLabel(&titleTxt);
     pathBtn.SetSoundOver(&btnSoundOver);
-    pathBtn.SetSoundClick(&btnClick);
+    pathBtn.SetSoundClick(btnClick2);
     pathBtn.SetTrigger(&trigA);
     pathBtn.SetEffectGrow();
 
@@ -375,7 +375,7 @@ int MenuLanguageSelect() {
     backBtn.SetLabel(&backBtnTxt);
     backBtn.SetImage(&backBtnImg);
     backBtn.SetSoundOver(&btnSoundOver);
-    backBtn.SetSoundClick(&btnClick);
+    backBtn.SetSoundClick(btnClick2);
     backBtn.SetTrigger(&trigA);
     backBtn.SetTrigger(&trigB);
     backBtn.SetEffectGrow();
@@ -393,7 +393,7 @@ int MenuLanguageSelect() {
     defaultBtn.SetLabel(&defaultBtnTxt);
     defaultBtn.SetImage(&defaultBtnImg);
     defaultBtn.SetSoundOver(&btnSoundOver);
-    defaultBtn.SetSoundClick(&btnClick);
+    defaultBtn.SetSoundClick(btnClick2);
     defaultBtn.SetTrigger(&trigA);
     defaultBtn.SetEffectGrow();
 
@@ -410,7 +410,7 @@ int MenuLanguageSelect() {
     updateBtn.SetLabel(&updateBtnTxt);
     updateBtn.SetImage(&updateBtnImg);
     updateBtn.SetSoundOver(&btnSoundOver);
-    updateBtn.SetSoundClick(&btnClick);
+    updateBtn.SetSoundClick(btnClick2);
     updateBtn.SetTrigger(&trigA);
     updateBtn.SetEffectGrow();
 

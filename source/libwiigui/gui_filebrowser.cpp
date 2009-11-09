@@ -10,7 +10,7 @@
 
 #include "gui.h"
 #include "prompts/filebrowser.h"
-#include "../settings/cfg.h"
+#include "settings/cfg.h"
 
 /**
  * Constructor for the GuiFileBrowser class.
@@ -31,8 +31,8 @@ GuiFileBrowser::GuiFileBrowser(int w, int h)
 	trigHeldA = new GuiTrigger;
 	trigHeldA->SetHeldTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 
-	btnSoundOver = new GuiSound(button_over_pcm, button_over_pcm_size, SOUND_PCM);
-	btnSoundClick = new GuiSound(button_click_pcm, button_click_pcm_size, SOUND_PCM);
+	btnSoundOver = new GuiSound(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
+	btnSoundClick = new GuiSound(button_click_pcm, button_click_pcm_size, Settings.sfxvolume);
 
 	char imgPath[100];
 	snprintf(imgPath, sizeof(imgPath), "%sbg_browser.png", CFG.theme_path);

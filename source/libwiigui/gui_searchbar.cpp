@@ -39,8 +39,8 @@ text(NULL, 22, (GXColor) {0, 0, 0, 255}),
 buttons(0),
 keyImageData(keyboard_key_png),
 keyOverImageData(keyboard_key_over_png),
-sndOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume),
-sndClick(button_click_pcm, button_click_pcm_size, SOUND_PCM, Settings.sfxvolume)
+sndOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume),
+sndClick(button_click_pcm, button_click_pcm_size, Settings.sfxvolume)
 {
 	char imgPath[100];
 	trig.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);

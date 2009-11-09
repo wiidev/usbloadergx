@@ -119,8 +119,10 @@ static void Theme_Prompt(const char *title, const char *author, GuiImageData *th
 {
     bool leave = false;
 
-    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
-    GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
+    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
+	// because destroy GuiSound must wait while sound playing is finished, we use a global sound
+	if(!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	//	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
     char imgPath[100];
     snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
@@ -165,7 +167,7 @@ static void Theme_Prompt(const char *title, const char *author, GuiImageData *th
         downloadBtnTxt.SetWidescreen(CFG.widescreen);
         downloadBtnImg.SetWidescreen(CFG.widescreen);
     }
-    GuiButton downloadBtn(&downloadBtnImg,&downloadBtnImg, ALIGN_RIGHT, ALIGN_TOP, -5, 170, &trigA, &btnSoundOver, &btnClick,1);
+    GuiButton downloadBtn(&downloadBtnImg,&downloadBtnImg, ALIGN_RIGHT, ALIGN_TOP, -5, 170, &trigA, &btnSoundOver, btnClick2,1);
     downloadBtn.SetLabel(&downloadBtnTxt);
     downloadBtn.SetScale(0.9);
 
@@ -177,7 +179,7 @@ static void Theme_Prompt(const char *title, const char *author, GuiImageData *th
         backBtnTxt.SetWidescreen(CFG.widescreen);
         backBtnImg.SetWidescreen(CFG.widescreen);
     }
-    GuiButton backBtn(&backBtnImg,&backBtnImg, ALIGN_RIGHT, ALIGN_TOP, -5, 220, &trigA, &btnSoundOver, &btnClick,1);
+    GuiButton backBtn(&backBtnImg,&backBtnImg, ALIGN_RIGHT, ALIGN_TOP, -5, 220, &trigA, &btnSoundOver, btnClick2,1);
     backBtn.SetLabel(&backBtnTxt);
     backBtn.SetTrigger(&trigB);
     backBtn.SetScale(0.9);
@@ -253,9 +255,11 @@ int Theme_Downloader()
     char THEME_LINK[30] = "http://wii.spiffy360.com/";
 
     /*** Sound Variables ***/
-    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
-    GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
-    GuiSound btnClick1(button_click_pcm, button_click_pcm_size, SOUND_PCM, Settings.sfxvolume);
+    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
+	// because destroy GuiSound must wait while sound playing is finished, we use a global sound
+	if(!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	//	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+    GuiSound btnClick1(button_click_pcm, button_click_pcm_size, Settings.sfxvolume);
 
     /*** Image Variables ***/
     char imgPath[150];
@@ -341,7 +345,7 @@ int Theme_Downloader()
         backBtnTxt.SetWidescreen(CFG.widescreen);
         backBtnImg.SetWidescreen(CFG.widescreen);
     }
-    GuiButton backBtn(&backBtnImg,&backBtnImg, 2, 3, -180, 400, &trigA, &btnSoundOver, &btnClick,1);
+    GuiButton backBtn(&backBtnImg,&backBtnImg, 2, 3, -180, 400, &trigA, &btnSoundOver, btnClick2,1);
     backBtn.SetLabel(&backBtnTxt);
     backBtn.SetTrigger(&trigB);
 
@@ -354,7 +358,7 @@ int Theme_Downloader()
     GoLeftBtn.SetPosition(25, -25);
     GoLeftBtn.SetImage(&GoLeftImg);
     GoLeftBtn.SetSoundOver(&btnSoundOver);
-    GoLeftBtn.SetSoundClick(&btnClick);
+    GoLeftBtn.SetSoundClick(btnClick2);
     GoLeftBtn.SetEffectGrow();
     GoLeftBtn.SetTrigger(&trigA);
     GoLeftBtn.SetTrigger(&trigL);
@@ -366,7 +370,7 @@ int Theme_Downloader()
     GoRightBtn.SetPosition(-25, -25);
     GoRightBtn.SetImage(&GoRightImg);
     GoRightBtn.SetSoundOver(&btnSoundOver);
-    GoRightBtn.SetSoundClick(&btnClick);
+    GoRightBtn.SetSoundClick(btnClick2);
     GoRightBtn.SetEffectGrow();
     GoRightBtn.SetTrigger(&trigA);
     GoRightBtn.SetTrigger(&trigR);

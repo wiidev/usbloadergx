@@ -33,5 +33,6 @@ enum {
 };
 class GuiImageData;
 GuiImageData *LoadCoverImage(struct discHdr *header, bool Prefere3D=true, bool noCover=true);
-
+class GuiSound;
+extern GuiSound *btnClick2;
 #endif

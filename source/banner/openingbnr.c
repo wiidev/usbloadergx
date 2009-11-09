@@ -24,6 +24,9 @@
 
 #include "MD5.h"
 #include "banner.h"
+#include "openingbnr.h"
+#include "../ramdisk/ramdisk.h"
+#include "../listfiles.h"
 
 u16 be16(const u8 *p)
 {
@@ -68,7 +71,6 @@ void md5(u8 *data, u32 len, u8 *hash)
 	MD5(hash, data, len);
 }
 
-static FILE *fp;
 
 typedef struct {
     u8 zeroes[0x40];
@@ -113,13 +115,18 @@ typedef struct
   u8 zeroes[16];
 } U8_archive_header;
 
-static void write_file(void* data, size_t size, char* name)
+static int write_file(void* data, size_t size, char* name) 
 {
+	size_t written=0;
 	FILE *out;
 	out = fopen(name, "wb");
-	fwrite(data, 1, size, out);
-	fclose(out);
-}
+	if(out)
+	{
+		written = fwrite(data, 1, size, out);
+		fclose(out);
+	}
+	return (written == size) ? 1 : -1;
+} 
 
 u8* decompress_lz77(u8 *data, size_t data_size, size_t* decompressed_size)
 {
@@ -233,7 +240,7 @@ static int write_imd5_lz77(u8* data, size_t size, char* outname)
 	return 0;
 }
 
-static int do_U8_archive(void)
+static int do_U8_archive(FILE *fp)
 {
   U8_archive_header header;
   U8_node root_node;
@@ -325,19 +332,19 @@ static int do_U8_archive(void)
 	return 0;
 }
 
-static void do_imet_header(void)
+static void do_imet_header(FILE *fp)
 {
-  imet_data_t header;
+	imet_data_t header;
 
 	fread(&header, 1, sizeof header, fp);
 
-  write_file(&header, sizeof(header), "header.imet");
+	write_file(&header, sizeof(header), "header.imet");
 }
 
 void do_U8_archivebanner(FILE *fp)
 {
-  U8_archive_header header;
-  U8_node root_node;
+	U8_archive_header header;
+	U8_node root_node;
 	u32 tag;
 	u32 num_nodes;
 	U8_node* nodes;
@@ -347,119 +354,176 @@ void do_U8_archivebanner(FILE *fp)
 	u32 data_offset;
 	u16 dir_stack[16];
 	int dir_index = 0;
- 
+
 	fread(&header, 1, sizeof header, fp);
 	tag = be32((u8*) &header.tag);
 	if (tag != 0x55AA382D) {
 	  //printf("No U8 tag");
 	  exit(0);
 	}
- 
+
 	fread(&root_node, 1, sizeof(root_node), fp);
 	num_nodes = be32((u8*) &root_node.size) - 1;
 	printf("Number of files: %d\n", num_nodes);
- 
+
 	nodes = malloc(sizeof(U8_node) * (num_nodes));
 	fread(nodes, 1, num_nodes * sizeof(U8_node), fp);
- 
+
 	data_offset = be32((u8*) &header.data_offset);
 	rest_size = data_offset - sizeof(header) - (num_nodes+1)*sizeof(U8_node);
- 
+
 	string_table = malloc(rest_size);
 	fread(string_table, 1, rest_size, fp);
- 
+
 	for (i = 0; i < num_nodes; i++) {
-    U8_node* node = &nodes[i];   
-    u16 type = be16((u8*)&node->type);
-    u16 name_offset = be16((u8*)&node->name_offset);
-    u32 my_data_offset = be32((u8*)&node->data_offset);
-    u32 size = be32((u8*)&node->size);
-    char* name = (char*) &string_table[name_offset];
-    u8* file_data;
- 
-    if (type == 0x0100) {
-      // Directory
-      mkdir(name, 0777);
-      chdir(name);
-      dir_stack[++dir_index] = size;
-      //printf("%*s%s/\n", dir_index, "", name);
-    } else {
-      // Normal file
- 
-      if (type != 0x0000) {
-         printf("Unknown type");
-		 exit(0);
-      }
- 
-      fseek(fp, my_data_offset, SEEK_SET);
-      file_data = malloc(size);
-      fread(file_data, 1, size, fp);
-      write_file(file_data, size, name);
-      free(file_data);
-      //printf("%*s %s (%d bytes)\n", dir_index, "", name, size);
-    }
- 
-    while (dir_stack[dir_index] == i+2 && dir_index > 0) {
-      chdir("..");
-      dir_index--;
-    }
+		U8_node* node = &nodes[i];   
+		u16 type = be16((u8*)&node->type);
+		u16 name_offset = be16((u8*)&node->name_offset);
+		u32 my_data_offset = be32((u8*)&node->data_offset);
+		u32 size = be32((u8*)&node->size);
+		char* name = (char*) &string_table[name_offset];
+		u8* file_data;
+
+		if (type == 0x0100) {
+			// Directory
+			mkdir(name, 0777);
+			chdir(name);
+			dir_stack[++dir_index] = size;
+			//printf("%*s%s/\n", dir_index, "", name);
+		} else {
+		  // Normal file
+
+			if (type != 0x0000) {
+				printf("Unknown type");
+				exit(0);
+			}
+
+			fseek(fp, my_data_offset, SEEK_SET);
+			file_data = malloc(size);
+			fread(file_data, 1, size, fp);
+			write_file(file_data, size, name);
+			free(file_data);
+			//printf("%*s %s (%d bytes)\n", dir_index, "", name, size);
+		}
+
+		while (dir_stack[dir_index] == i+2 && dir_index > 0) {
+			chdir("..");
+			dir_index--;
+		}
 	}
 	free(string_table);
 }
 
 int extractbnrfile(const char * filepath, const char * destpath)
 {
-    int ret;
+    int ret = -1;
+	FILE *fp = fopen(filepath, "rb");
+	if(fp)
+	{
+		subfoldercreate(destpath);
+		chdir(destpath);
 
-	fp = fopen(filepath, "rb");
+		do_imet_header(fp);
+		ret = do_U8_archive(fp);
 
-    mkdir(destpath, 0777);
-    chdir(destpath);
-
-    do_imet_header();
-    ret = do_U8_archive();
-
-	fclose(fp);
-
+		fclose(fp);
+	}
 	return ret;
 }
 
 int unpackBin(const char * filename,const char * outdir)
 {
-FILE *fp;
-fp = fopen(filename,"rb");
+	FILE *fp = fopen(filename,"rb");;
+	if(fp)
+	{
+		subfoldercreate(outdir);
+		chdir(outdir);
 
-if(fp!=NULL)
-{
-mkdir(outdir, 0777);
-chdir(outdir);
-
-do_U8_archivebanner(fp);
-fclose(fp);
-return 1;
-}
-return 0;
+		do_U8_archivebanner(fp);
+		fclose(fp);
+		return 1;
+	}
+	return 0;
 }
 
-int unpackBanner(char * gameid, char * outdir)
+#define TMP_PATH(s) "BANNER:/dump"s
+//#define TMP_PATH(s) "SD:/dump"s
+
+int unpackBanner(const u8 *gameid, int what, const char *outdir)
 {
-s32 ret = dump_banner(gameid,"SD:/opening.bnr");
-if (ret != 1) return -1;
 
-ret = extractbnrfile("SD:/opening.bnr","SD:/neu");
-if (ret != 0) return -1;
-remove("SD:/opening.bnr");
-char iconpath[60];
-snprintf(iconpath,sizeof(iconpath),"%s/meta/icon.bin",outdir);
-ret = unpackBin(iconpath,"SD:/icon");
-if (ret != 1) return -1;
+	char path[256];
+	if(!ramdiskMount("BANNER", NULL)) return -1;
 
-if (unlink("/neu/meta/banner.bin") == -1) return -1;
-if (unlink("/neu/meta/icon.bin") == -1) return -1;
-if (unlink("/neu/meta/sound.bin") == -1) return -1;
-if (unlink("/neu/header.imet") == -1) return -1;
-if (unlink("/neu/meta") == -1) return -1;
-if (unlink("/neu") == -1) return -1;
+	subfoldercreate(TMP_PATH("/"));
+	s32 ret = dump_banner(gameid, TMP_PATH("/opening.bnr"));
+	if (ret != 1)
+	{
+		ret = -1;
+		goto error2;
+	}
 
-return 1;
+	ret = extractbnrfile(TMP_PATH("/opening.bnr"), TMP_PATH("/"));
+	if (ret != 0)
+	{
+		ret = -1;
+		goto error2;
+	}
+
+	if(what & UNPACK_BANNER_BIN)
+	{
+		snprintf(path, sizeof(path),"%sbanner/", outdir);
+		ret = unpackBin(TMP_PATH("/meta/banner.bin"), path);
+		if (ret != 1)
+		{
+			ret = -1;
+			goto error2;
+		}
+	}
+	if(what & UNPACK_ICON_BIN)
+	{
+		snprintf(path, sizeof(path),"%sicon/", outdir);
+		ret = unpackBin(TMP_PATH("/meta/icon.bin"), path);
+		if (ret != 1)
+		{
+			ret = -1;
+			goto error2;
+		}
+	}
+	if(what & UNPACK_SOUND_BIN)
+	{
+		snprintf(path, sizeof(path),"%ssound.bin", outdir);
+		FILE *fp = fopen(TMP_PATH("/meta/sound.bin"), "rb");
+		if(fp)
+		{
+			size_t size;
+			u8 *data;
+			fseek(fp, 0, SEEK_END);
+			size = ftell(fp); 
+			if(!size)
+			{
+				ret = -1;
+				goto error;
+			}
+			fseek(fp, 0, SEEK_SET);
+			data = (u8 *)malloc(size);
+			if(!data)
+			{
+				ret = -1;
+				goto error;
+			}
+			if(fread(data, 1, size, fp) != size) 
+			{
+				ret = -1;
+				goto error;
+			}
+			ret = write_file(data, size, path);
+		}
+error:	fclose(fp); 
+	}
+	ramdiskUnmount("BANNER");
+error2:
+	if(ret < 0)
+		return ret;
+	return 1;
 }

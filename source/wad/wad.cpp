@@ -120,12 +120,14 @@ out:
 s32 Wad_Install(FILE *fp)
 {
 	//////start the gui shit
-   GuiWindow promptWindow(472,320);
+	GuiWindow promptWindow(472,320);
 	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	promptWindow.SetPosition(0, -10);
 
-   GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
-	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
+	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
+	// because destroy GuiSound must wait while sound playing is finished, we use a global sound
+	if(!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	//	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
 	char imgPath[100];
 	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
@@ -144,7 +146,7 @@ s32 Wad_Install(FILE *fp)
 	if (Settings.wsprompt == yes){
 	btn1Txt.SetWidescreen(CFG.widescreen);
 	btn1Img.SetWidescreen(CFG.widescreen);}
-	GuiButton btn1(&btn1Img,&btn1Img, 2, 4, 0, -35, &trigA, &btnSoundOver, &btnClick,1);
+	GuiButton btn1(&btn1Img,&btn1Img, 2, 4, 0, -35, &trigA, &btnSoundOver, btnClick2,1);
 	btn1.SetLabel(&btn1Txt);
 	btn1.SetState(STATE_SELECTED);
 
@@ -453,8 +455,10 @@ s32 Wad_Uninstall(FILE *fp)
 	promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	promptWindow.SetPosition(0, -10);
 
-   GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
-	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
+	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
+	// because destroy GuiSound must wait while sound playing is finished, we use a global sound
+	if(!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	//	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
 	char imgPath[100];
 	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
@@ -473,7 +477,7 @@ s32 Wad_Uninstall(FILE *fp)
 	if (Settings.wsprompt == yes){
 	btn1Txt.SetWidescreen(CFG.widescreen);
 	btn1Img.SetWidescreen(CFG.widescreen);}
-	GuiButton btn1(&btn1Img,&btn1Img, 2, 4, 0, -55, &trigA, &btnSoundOver, &btnClick,1);
+	GuiButton btn1(&btn1Img,&btn1Img, 2, 4, 0, -55, &trigA, &btnSoundOver, btnClick2,1);
 	btn1.SetLabel(&btn1Txt);
 	btn1.SetState(STATE_SELECTED);
 

@@ -102,7 +102,7 @@ u64 getStubDest()
 
 
 	char *stub = (char *)0x800024C6;
-	char ret[8];
+	char ret[9];
 	u64 retu =0;
 	
 	ret[0] = stub[0];

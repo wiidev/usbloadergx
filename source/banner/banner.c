@@ -22,11 +22,11 @@
 #include "patches/fst.h"
 #include "usbloader/fstfile.h"
 
-s32 dump_banner(const char * discid,const char * dest)
+s32 dump_banner(const u8* discid,const char * dest)
 {
 	// Mount the disc
 	//Disc_SetWBFS(1, (u8*)discid);
-	Disc_SetUSB((u8*)discid);
+	Disc_SetUSB(discid);
 
 	Disc_Open();
 
@@ -108,16 +108,17 @@ s32 dump_banner(const char * discid,const char * dest)
 	if (ret < 0)
 		return ret;
 
+    WDVD_Reset();
+    WDVD_ClosePartition();
 	//fatInitDefault();
 	//SDCard_Init();
-	
-	FILE *fp = NULL;
-	fp = fopen(dest, "wb");
-
-	fwrite(banner, 1, fst[index].filelen, fp);
-
-	fclose(fp);
-
+	WDVD_SetUSBMode(NULL);
+	FILE *fp = fopen(dest, "wb");
+	if(fp)
+	{
+		fwrite(banner, 1, fst[index].filelen, fp);
+		fclose(fp);
+	}
 	free(fstbuffer);
 	free(banner);
 

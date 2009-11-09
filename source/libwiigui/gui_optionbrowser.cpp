@@ -10,6 +10,7 @@
 
 #include "gui.h"
 #include "../wpad.h"
+#include "Settings/cfg.h"
 
 #include <unistd.h>
 
@@ -37,7 +38,7 @@ GuiOptionBrowser::GuiOptionBrowser(int w, int h, OptionList * l, const u8 *image
     trigHeldA = new GuiTrigger;
 	trigHeldA->SetHeldTrigger(-1, WPAD_BUTTON_A, PAD_BUTTON_A);
 
-	btnSoundClick = new GuiSound(button_click_pcm, button_click_pcm_size, SOUND_PCM);
+	btnSoundClick = new GuiSound(button_click_pcm, button_click_pcm_size, Settings.sfxvolume);
 
 	bgOptions = new GuiImageData(imagebg);
 	bgOptionsImg = new GuiImage(bgOptions);
@@ -149,7 +150,7 @@ GuiOptionBrowser::GuiOptionBrowser(int w, int h, OptionList * l, const char *the
 	trigA->SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
     trigHeldA = new GuiTrigger;
 	trigHeldA->SetHeldTrigger(-1, WPAD_BUTTON_A, PAD_BUTTON_A);
-	btnSoundClick = new GuiSound(button_click_pcm, button_click_pcm_size, SOUND_PCM);
+	btnSoundClick = new GuiSound(button_click_pcm, button_click_pcm_size, Settings.sfxvolume);
 
 	snprintf(imgPath, sizeof(imgPath), "%sbg_options.png", themePath);
 	bgOptions = new GuiImageData(imgPath, imagebg);

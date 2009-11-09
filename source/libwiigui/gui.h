@@ -45,7 +45,6 @@
 #include "video.h"
 #include "filelist.h"
 #include "input.h"
-#include "oggplayer.h"
 
 extern FreeTypeGX *fontSystem;
 
@@ -74,12 +73,6 @@ enum
 	STATE_CLICKED,
 	STATE_HELD,
 	STATE_DISABLED
-};
-
-enum
-{
-	SOUND_PCM,
-	SOUND_OGG
 };
 
 enum
@@ -123,23 +116,39 @@ typedef struct _paddata {
 #define EFFECT_ROCK_VERTICLE        1024
 #define EFFECT_GOROUND              2048
 
+#define MAX_SND_VOICES			16
+#define newGuiSound
+#define verynewGuiSound
 
-//!Sound conversion and playback. A wrapper for other sound libraries - ASND, libmad, ltremor, etc
+class GuiSoundDecoder;
 class GuiSound
 {
 	public:
 		//!Constructor
 		//!\param s Pointer to the sound data
 		//!\param l Length of sound data
-		//!\param t Sound format type (SOUND_PCM or SOUND_OGG)
-		GuiSound(const u8 * s, int l, int t);
-		GuiSound(const u8 * s, int l, int t, int v);
+		//!\param v Sound volume (0-100)
+		//!\param r RAW PCM Sound, when no decoder is found then try to play as raw-pcm
+		//!\param a true--> Pointer to the sound data is allocated with new u8[...]
+		//!\                GuiSound will be destroy the buffer if it no more needed
+		//!\        false-> sound data buffer has to live just as long as GuiSound
+		GuiSound(const u8 *s, int l, int v=100, bool r=true, bool a=false);
+		//!Constructor
+		//!\param p Path to the sound data
+		//!\param v Sound volume (0-100)
+		GuiSound(const char *p, int v=100);
+		//!Load - stop playing and load the new sound data
+		//!       if load not failed replace the current with new sound data
+		//!       otherwise the current date will not changed
+		//!\params same as by Constructors
+		//!\return true ok / false = failed
+		bool Load(const u8 *s, int l, bool r=false, bool a=false);
+		bool Load(const char *p);
 		//!Destructor
 		~GuiSound();
+		
 		//!Start sound playback
 		void Play();
-		//!Start sound playback from ogg file
-		int PlayOggFile(char * path);
 		//!Stop sound playback
 		void Stop();
 		//!Pause sound playback
@@ -156,17 +165,21 @@ class GuiSound
 		//!\param l Loop (true to loop)
 		void SetLoop(bool l);
 		//!Get the playing time in ms for that moment (only applies to OGG)
-		s32 GetPlayTime();
-		//!Set the starting point or playtime for skipping (only applies to OGG)
-		//!\param time in ms
-		void SetPlayTime(s32 time);
 	protected:
-		const u8 * sound; //!< Pointer to the sound data
-		int type; //!< Sound format type (SOUND_PCM or SOUND_OGG)
-		s32 length; //!< Length of sound data
-		s32 voice; //!< Currently assigned ASND voice channel
-		s32 volume; //!< Sound volume (0-100)
-		bool loop; //!< Loop sound playback
+		s32		 voice;				// used asnd-voice
+		u8		*play_buffer[3];	// trpple-playbuffer
+		int		 buffer_nr;			// current playbuffer
+		int		 buffer_pos;		// current idx to write in buffer
+		bool	 buffer_ready;		// buffer is filled and ready
+		bool	 buffer_eof;		// no mor datas - will stop playing
+		bool	 loop;				// play looped
+		s32		 volume;			// volume
+		GuiSoundDecoder *decoder;
+
+		void DecoderCallback();
+		void PlayerCallback();
+		friend void *GuiSoundDecoderThread(void *args);
+		friend void GuiSoundPlayerCallback(s32 Voice);
 };
 
 //!Menu input trigger management. Determine if action is neccessary based on input data by comparing controller input data to a specific trigger element.

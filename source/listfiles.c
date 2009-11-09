@@ -40,7 +40,7 @@ bool subfoldercreate(const char * fullpath) {
 
 	strlcpy(dir, fullpath, sizeof(dir));
 	len = strlen(dir);
-	if(len && len< sizeof(dir)-2 && dir[len-1] != '/');
+	if(len && len< sizeof(dir)-2 && dir[len-1] != '/')
 	{
 		dir[len++] = '/';
 		dir[len] = '\0';
@@ -63,7 +63,42 @@ bool subfoldercreate(const char * fullpath) {
 	}
 	return true;
 }
-
+bool subfolderremove(const char * fullpath, const char*fp) {
+	struct stat st;
+	if (stat(fullpath, &st) != 0) // fullpath not exist?
+		return false;
+	if(S_ISDIR(st.st_mode))
+	{
+		DIR_ITER *dir = NULL;
+		char filename[256];
+		bool cont = true;
+		while(cont)
+		{
+			cont = false;
+			dir = diropen(fullpath);
+			if(dir)
+			{
+				char* bind = fullpath[strlen(fullpath)-1] == '/' ? "":"/";
+				while (dirnext(dir,filename,&st) == 0)
+				{
+					if (strcmp(filename,".") != 0 && strcmp(filename,"..") != 0)
+					{
+						char currentname[256];
+						if(S_ISDIR(st.st_mode))
+							snprintf(currentname, sizeof(currentname), "%s%s%s/", fullpath, bind, filename);
+						else
+							snprintf(currentname, sizeof(currentname), "%s%s%s", fullpath, bind, filename);
+						subfolderremove(currentname, fp);
+						cont = true;
+						break;
+					}
+				}
+				dirclose(dir);
+			}
+		}
+	}
+	return unlink(fullpath) == 0;
+}
 char * GetFileName(int i) {
     return alldirfiles[i];
 }

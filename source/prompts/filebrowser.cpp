@@ -304,8 +304,10 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
 	GuiTrigger trigB;
 	trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 
-	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
-	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
+	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
+	// because destroy GuiSound must wait while sound playing is finished, we use a global sound
+	if(!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	//	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
 	GuiImageData folderImgData(icon_folder_png);
 	GuiImage folderImg(&folderImgData);
@@ -354,7 +356,7 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
 		okBtnTxt.SetWidescreen(CFG.widescreen);
 		okBtnImg.SetWidescreen(CFG.widescreen);
 	}
-	GuiButton okBtn(&okBtnImg,&okBtnImg, 0, 4, 40, -35, &trigA, &btnSoundOver, &btnClick,1);
+	GuiButton okBtn(&okBtnImg,&okBtnImg, 0, 4, 40, -35, &trigA, &btnSoundOver, btnClick2,1);
 	okBtn.SetLabel(&okBtnTxt);
 
 	GuiFileBrowser fileBrowser(396, 248);

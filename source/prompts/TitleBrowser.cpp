@@ -230,8 +230,10 @@ int TitleBrowser(u32 type) {
     if (IsNetworkInit())
         ResumeNetworkWait();
 
-    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
-    GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
+    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
+	// because destroy GuiSound must wait while sound playing is finished, we use a global sound
+	if(!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	//	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
     char imgPath[100];
 
@@ -265,7 +267,7 @@ int TitleBrowser(u32 type) {
         cancelBtnTxt.SetWidescreen(CFG.widescreen);
         cancelBtnImg.SetWidescreen(CFG.widescreen);
     }
-    GuiButton cancelBtn(&cancelBtnImg,&cancelBtnImg, 2, 3, 180, 400, &trigA, &btnSoundOver, &btnClick,1);
+    GuiButton cancelBtn(&cancelBtnImg,&cancelBtnImg, 2, 3, 180, 400, &trigA, &btnSoundOver, btnClick2,1);
     cancelBtn.SetScale(0.9);
     cancelBtn.SetLabel(&cancelBtnTxt);
     cancelBtn.SetTrigger(&trigB);

@@ -35,7 +35,7 @@ LDFLAGS		=	-g $(MACHDEP) -Wl,-Map,$(notdir $@).map,--section-start,.init=0x80B00
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project
 #---------------------------------------------------------------------------------
-LIBS :=	-lfat -lpngu -lpng -lm -lz -lwiiuse -lbte -lasnd -logc -lfreetype -ltremor -lmxml -ljpeg
+LIBS :=	-lfat -lpngu -lpng -lm -lz -lwiiuse -lbte -lasnd -logc -lfreetype -ltremor -lmad -lmxml -ljpeg
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
 # include and lib
@@ -67,6 +67,7 @@ TTFFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.ttf)))
 PNGFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.png)))
 OGGFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.ogg)))
 PCMFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.pcm)))
+MP3FILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.mp3)))
 	
 #---------------------------------------------------------------------------------
 # use CXX for linking C++ projects, CC for standard C
@@ -81,7 +82,7 @@ export OFILES	:=	$(addsuffix .o,$(BINFILES)) \
 					$(CPPFILES:.cpp=.o) $(CFILES:.c=.o) \
 					$(sFILES:.s=.o) $(SFILES:.S=.o) \
 					$(TTFFILES:.ttf=.ttf.o) $(PNGFILES:.png=.png.o) \
-					$(OGGFILES:.ogg=.ogg.o) $(PCMFILES:.pcm=.pcm.o) \
+					$(OGGFILES:.ogg=.ogg.o) $(PCMFILES:.pcm=.pcm.o) $(MP3FILES:.mp3=.mp3.o) \
 					$(addsuffix .o,$(ELFFILES))
 
 #---------------------------------------------------------------------------------
@@ -144,7 +145,7 @@ release:
 #---------------------------------------------------------------------------------
 else
 
-DEPENDS	:=	$(OFILES:.o=.d)
+DEPENDS	:=	$(OFILES:.o=.d) 
 
 #---------------------------------------------------------------------------------
 # main targets
@@ -177,6 +178,10 @@ language: $(wildcard $(PROJECTDIR)/Languages/*.lang)
 	@echo $(notdir $<)
 	$(bin2o)
 
+%.mp3.o : %.mp3
+	@echo $(notdir $<)
+	$(bin2o)
+	
 %.certs.o	:	%.certs
 	@echo $(notdir $<)
 	$(bin2o)
