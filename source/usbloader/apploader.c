@@ -217,7 +217,7 @@ bool Search_and_patch_Video_Modes(void *Address, u32 Size, GXRModeObj* Table[]) 
     return found;
 }
 
-/** Anti 002 fix for IOS 249 rev < 12 thanks to WiiPower **/
+/** Anti 002 fix for IOS 249 rev > 12 thanks to WiiPower **/
 void Anti_002_fix(void *Address, int Size) {
     u8 SearchPattern[12] = 	{ 0x2C, 0x00, 0x00, 0x00, 0x48, 0x00, 0x02, 0x14, 0x3C, 0x60, 0x80, 0x00 };
     u8 PatchData[12] = 		{ 0x2C, 0x00, 0x00, 0x00, 0x40, 0x82, 0x02, 0x14, 0x3C, 0x60, 0x80, 0x00 };
@@ -245,7 +245,7 @@ void PretendThereIsADiscInTheDrive(void *buffer, u32 len)
 
   for(n=0;n<(len-sizeof(oldcode));n+=4)
   {
-    if (memcmp(buffer+n, (void *) oldcode, sizeof(oldcode)) == 0) 
+    if (memcmp(buffer+n, (void *) oldcode, sizeof(oldcode)) == 0)
     {
       memcpy(buffer+n, (void *) newcode, sizeof(newcode));
     }
@@ -253,10 +253,34 @@ void PretendThereIsADiscInTheDrive(void *buffer, u32 len)
 
 }
 
+/** Thanks to WiiPower **/
+bool NewSuperMarioBrosPatch(void *Address, int Size)
+{
+	if (memcmp("SMN", (char *)0x80000000, 3) == 0)
+	{
+		u8 SearchPattern[32] = 	{ 0x94, 0x21, 0xFF, 0xD0, 0x7C, 0x08, 0x02, 0xA6, 0x90, 0x01, 0x00, 0x34, 0x39, 0x61, 0x00, 0x30, 0x48, 0x12, 0xD9, 0x39, 0x7C, 0x7B, 0x1B, 0x78, 0x7C, 0x9C, 0x23, 0x78, 0x7C, 0xBD, 0x2B, 0x78 };
+		u8 PatchData[32] = 		{ 0x4E, 0x80, 0x00, 0x20, 0x7C, 0x08, 0x02, 0xA6, 0x90, 0x01, 0x00, 0x34, 0x39, 0x61, 0x00, 0x30, 0x48, 0x12, 0xD9, 0x39, 0x7C, 0x7B, 0x1B, 0x78, 0x7C, 0x9C, 0x23, 0x78, 0x7C, 0xBD, 0x2B, 0x78 };
+
+		void *Addr = Address;
+		void *Addr_end = Address+Size;
+
+		while(Addr <= Addr_end-sizeof(SearchPattern))
+		{
+			if(memcmp(Addr, SearchPattern, sizeof(SearchPattern))==0)
+			{
+				memcpy(Addr,PatchData,sizeof(PatchData));
+				return true;
+			}
+			Addr += 4;
+		}
+	}
+	return false;
+}
+
 void gamepatches(void * dst, int len, u8 videoSelected, u8 patchcountrystring, u8 vipatch) {
-    
+
 	PretendThereIsADiscInTheDrive(dst, len);
-	
+
 	GXRModeObj** table = NULL;
     if (videoSelected == 5) // patch
 
@@ -299,6 +323,8 @@ void gamepatches(void * dst, int len, u8 videoSelected, u8 patchcountrystring, u
     if (patchcountrystring == 1)
         PatchCountryStrings(dst, len);
 
+    NewSuperMarioBrosPatch(dst, len);
+
     //if(Settings.anti002fix == on)
     if (fix002 == 2)
         Anti_002_fix(dst, len);
@@ -314,7 +340,7 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
     u32 appldr_len;
     s32 ret;
 	gprintf("\nApploader_Run() started");
-	
+
 	//u32 geckoattached = usb_isgeckoalive(EXI_CHANNEL_1);
 	//if (geckoattached)usb_flush(EXI_CHANNEL_1);
 
@@ -330,7 +356,7 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
     ret = WDVD_Read(appldr, appldr_len, APPLDR_OFFSET + 0x20);
     if (ret < 0)
         return ret;
-		
+
 	/* Set apploader entry function */
     appldr_entry = (app_entry)buffer[4];
 
@@ -339,7 +365,7 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
 
     /* Initialize apploader */
     appldr_init(__noprint);
-	
+
     if (error002fix!=0) {
         /* ERROR 002 fix (thanks to WiiPower for sharing this)*/
         *(u32 *)0x80003140 = *(u32 *)0x80003188;
