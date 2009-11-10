@@ -10,7 +10,7 @@
 
 #include "gui.h"
 #include "../wpad.h"
-#include "Settings/cfg.h"
+#include "settings/cfg.h"
 
 #include <unistd.h>
 
