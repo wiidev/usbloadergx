@@ -70,12 +70,12 @@ static char *u8Filename(const U8Entry *fst, int i)
 
 inline u32 le32(u32 i)
 {
-	return ((i & 0xFF) << 24) | ((i & 0xFF00) << 8) | ((i & 0xFF0000) >> 8) | ((i & 0xFF000000) >> 24); 
+	return ((i & 0xFF) << 24) | ((i & 0xFF00) << 8) | ((i & 0xFF0000) >> 8) | ((i & 0xFF000000) >> 24);
 }
 
-inline u16 le16(u16 i) 
+inline u16 le16(u16 i)
 {
-	return ((i & 0xFF) << 8) | ((i & 0xFF00) >> 8); 
+	return ((i & 0xFF) << 8) | ((i & 0xFF00) >> 8);
 }
 
 static u8 *uncompressLZ77(const u8 *inBuf, u32 inLength, u32 &size)
@@ -90,10 +90,10 @@ static u8 *uncompressLZ77(const u8 *inBuf, u32 inLength, u32 &size)
 	buffer = new(std::nothrow) u8[uncSize];
 	if (!buffer)
 		return buffer;
-	
+
 	u8 *bufCur = buffer;
 	u8 *bufEnd = buffer + uncSize;
-	
+
 	while (bufCur < bufEnd && inBuf < inBufEnd)
 	{
 		u8 flags = *inBuf;
@@ -170,7 +170,8 @@ const u8 *LoadBannerSound(const u8 *discid, u32 *size)
 			break;
 	if (i >= fst[0].numEntries)
 	{
-		WindowPrompt(tr("sound.bin not found."), 0, tr("OK"));
+	    /* Not all games have a sound.bin and this message is annoying **/
+		//WindowPrompt(tr("sound.bin not found."), 0, tr("OK"));
 		free(opening_bnr);
         return NULL;
 	}

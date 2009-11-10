@@ -122,7 +122,7 @@ static u32 do_fst(wiidisc_t *d,u8 *fst, const char *names, u32 i)
 		return size;
 	} else {
 		offset = _be32(fst + 12*i + 4);
-                if(d->extract_pathname && strcmp(name, d->extract_pathname)==0)
+                if(d->extract_pathname && stricmp(name, d->extract_pathname)==0)
                 {
                         d->extracted_buffer = wbfs_ioalloc(size);
                         partition_read(d,offset, d->extracted_buffer, size,0);

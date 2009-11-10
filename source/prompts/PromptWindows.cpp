@@ -1234,7 +1234,7 @@ int GameWindowPrompt() {
 
         //load disc image based or what game is seleted
         struct discHdr * header = (mountMethod==1||mountMethod==2?dvdheader:&gameList[gameSelected]);
-        if(Settings.gamesound)
+        if(Settings.gamesoundvolume > 0)
         {
             if(gameSound)
 			{
@@ -1248,6 +1248,8 @@ int GameWindowPrompt() {
 			{
 				gameSound = new GuiSound(gameSoundData, gameSoundDataLen, Settings.gamesoundvolume, false, true);
 				bgMusic->SetVolume(0);
+                if(Settings.gamesound == 2)
+                    gameSound->SetLoop(1);
 				gameSound->Play();
 			}
         }
@@ -1383,7 +1385,10 @@ int GameWindowPrompt() {
             if(gameSound)
             {
                 if(!gameSound->IsPlaying())
-                    bgMusic->SetVolume(Settings.volume);
+                {
+                    if(Settings.gamesound == 1)
+                        bgMusic->SetVolume(Settings.volume);
+                }
             }
 
             if (btn1.GetState() == STATE_CLICKED) {

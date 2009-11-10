@@ -1304,18 +1304,20 @@ int MenuSettings()
 
 							if(ret == ++Idx || firstRun)
 							{
-								if(firstRun) options2.SetName(Idx, "%s",tr("Game (Banner) Sounds"));
+								if(firstRun) options2.SetName(Idx, "%s",tr("Game Sound Mode"));
 								if(ret == Idx)
 								{
 									Settings.gamesound++;
-									if (Settings.gamesound > 1)
+									if (Settings.gamesound > 2)
 										Settings.gamesound = 0;
 								}
 
                                 if(Settings.gamesound == 1)
-                                    options2.SetValue(Idx,"%s", tr("ON"));
+                                    options2.SetValue(Idx,"%s", tr("Sound+BGM"));
+                                else if(Settings.gamesound == 2)
+                                    options2.SetValue(Idx,"%s", tr("Loop Sound"));
                                 else
-                                    options2.SetValue(Idx,"%s", tr("OFF"));
+                                    options2.SetValue(Idx,"%s", tr("Sound+Quiet"));
 							}
 
 							if(ret == ++Idx || firstRun)
@@ -1328,7 +1330,10 @@ int MenuSettings()
 										Settings.gamesoundvolume = 0;
 								}
 
-								options2.SetValue(Idx,"%i", Settings.gamesoundvolume);
+								if (Settings.gamesoundvolume > 0)
+									options2.SetValue(Idx,"%i", Settings.gamesoundvolume);
+								else
+									options2.SetValue(Idx,"%s", tr("OFF"));
 							}
 
 							firstRun = false;
