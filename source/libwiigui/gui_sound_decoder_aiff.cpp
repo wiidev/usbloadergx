@@ -98,7 +98,7 @@ protected:
 			}
 			in_ptr = chunk_start+chunk_size; 
 		}
-		currentPos = sound;
+		currentPos = pcm_start;
 	}
 public:
 	~GuiSoundDecoderAIFF()

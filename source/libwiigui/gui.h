@@ -117,8 +117,6 @@ typedef struct _paddata {
 #define EFFECT_GOROUND              2048
 
 #define MAX_SND_VOICES			16
-#define newGuiSound
-#define verynewGuiSound
 
 class GuiSoundDecoder;
 class GuiSound
@@ -431,7 +429,11 @@ class GuiElement
 	protected:
 		void Lock();
 		void Unlock();
-		static mutex_t mutex;
+//		static mutex_t mutex;
+		static mutex_t	_lock_mutex; 
+		lwp_t	_lock_thread;
+		u16		_lock_count;
+		lwpq_t	_lock_queue;
 		friend class SimpleLock;
 
         //int position2; //! B Scrollbariable

@@ -31,6 +31,7 @@ typedef struct
 	const u8	*end;
 	u32			loops;
 }playlist_t;
+
 class GuiSoundDecoderWAV : public GuiSoundDecoder
 {
 protected:
