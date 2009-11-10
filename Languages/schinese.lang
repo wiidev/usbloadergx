@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-09 02:01+0100\n"
+"POT-Creation-Date: 2009-11-10 20:23+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: knife.hu kavid\n"
 "Language-Team: kavid\n"
@@ -543,9 +543,6 @@ msgstr "GCT 文件已建立"
 msgid "GUI Settings"
 msgstr "界面设置"
 
-msgid "Game (Banner) Sounds"
-msgstr ""
-
 msgid "Game ID"
 msgstr "游戏 ID"
 
@@ -560,6 +557,9 @@ msgstr "游戏区域"
 
 msgid "Game Size"
 msgstr "游戏容量"
+
+msgid "Game Sound Mode"
+msgstr ""
 
 msgid "Game Sound Volume"
 msgstr ""
@@ -719,6 +719,9 @@ msgstr "锁定控制台"
 
 msgid "Locked"
 msgstr "已锁定"
+
+msgid "Loop Sound"
+msgstr ""
 
 msgid "Mar"
 msgstr "三月"
@@ -980,6 +983,12 @@ msgstr "按玩过次数排序"
 
 msgid "Sound"
 msgstr "声音"
+
+msgid "Sound+BGM"
+msgstr ""
+
+msgid "Sound+Quiet"
+msgstr ""
 
 msgid "Spanish"
 msgstr "西班牙文"
@@ -1243,8 +1252,8 @@ msgstr "的 WiiTDB 和封面下载"
 msgid "for diverse patches"
 msgstr "的多种修正"
 
-msgid "for his awesome tool"
-msgstr "的优秀工具"
+msgid "for his awesome tool LibWiiGui"
+msgstr "的优秀工具 LibWiiGui"
 
 msgid "for hosting the themes"
 msgstr ""

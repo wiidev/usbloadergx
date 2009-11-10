@@ -1,14 +1,14 @@
 # USB Loader GX language source file.
-# czech.lang - r719
+# czech.lang - r823
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-09 02:01+0100\n"
+"POT-Creation-Date: 2009-11-10 20:23+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) \n"
-"Language-Team: r719 - last version on http://volny.cz/djelinek/_USBLoderGX/czech.lang \n"
+"Language-Team: r823 - last version on http://djelinek.sweb.cz/_USBLoderGX/czech.lang \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -150,7 +150,7 @@ msgid "Aug"
 msgstr "Srp"
 
 msgid "Author:"
-msgstr ""
+msgstr "Autor:"
 
 msgid "AutoInit Network"
 msgstr "Automatický start síte"
@@ -198,28 +198,28 @@ msgid "Can't create directory"
 msgstr "Nelze vytvorit adresár"
 
 msgid "Can't create file"
-msgstr ""
+msgstr "Nelze vytvořit soubor"
 
 msgid "Can't decompress LZ77"
-msgstr ""
+msgstr "Nelze dekomprimovat LZ77"
 
 msgid "Can't delete:"
 msgstr "Nelze smazat:"
 
 msgid "Can't find disc"
-msgstr ""
+msgstr "Nelze nalézt disc"
 
 msgid "Cancel"
 msgstr "Zrušit"
 
 msgid "Channels"
-msgstr ""
+msgstr "Kanály"
 
 msgid "Cheatfile is blank"
 msgstr "Soubor s cheaty je prázdný"
 
 msgid "Checking existing artwork"
-msgstr ""
+msgstr "Kontroluji existující kresby"
 
 msgid "Checking for Updates"
 msgstr "Zjištuji dostupné aktualiazce"
@@ -292,7 +292,7 @@ msgid "Could not read the disc."
 msgstr "Nelze císt disk"
 
 msgid "Could not save."
-msgstr ""
+msgstr "Nelze uložit."
 
 msgid "Could not set USB."
 msgstr "Nelze nastavit USB"
@@ -358,7 +358,7 @@ msgid "Developed by"
 msgstr "Vyvinul"
 
 msgid "Directory does not exist!"
-msgstr ""
+msgstr "Adresář neexistuje!"
 
 msgid "Disc Artwork Download"
 msgstr "Stažení potisku DVD"
@@ -400,7 +400,7 @@ msgid "Do you want to change language?"
 msgstr "Prejete si zmenit jazyk?"
 
 msgid "Do you want to download this theme?"
-msgstr ""
+msgstr "Přejete si stáhnout toto téma?"
 
 msgid "Do you want to format:"
 msgstr "Prejete si formátovat"
@@ -418,7 +418,7 @@ msgid "Done!"
 msgstr "Hotovo!"
 
 msgid "Download"
-msgstr ""
+msgstr "Stažení"
 
 msgid "Download Boxart image?"
 msgstr "Stáhnout obal krabicky?"
@@ -430,25 +430,25 @@ msgid "Download Now"
 msgstr "Stáhnout nyní"
 
 msgid "Download failed."
-msgstr ""
+msgstr "Stažení selhalo."
 
 msgid "Download finished"
 msgstr "Stažení dokonceno"
 
 msgid "Download request failed."
-msgstr ""
+msgstr "Požadavek na stažení selhal."
 
 msgid "Downloading"
 msgstr "Stahování"
 
 msgid "Downloading Page List:"
-msgstr ""
+msgstr "Stahuji stránku seznamu:"
 
 msgid "Downloading file"
 msgstr "Stahuji soubor"
 
 msgid "Downloading image:"
-msgstr ""
+msgstr "Stahuji obrázek:"
 
 msgid "Dutch"
 msgstr "Dánsky"
@@ -487,16 +487,16 @@ msgid "Exit USB Loader GX?"
 msgstr "Ukoncit USB Loader GX?"
 
 msgid "Extracting files..."
-msgstr ""
+msgstr "Rozbaluji soubory..."
 
 msgid "Failed formating"
 msgstr "Neúspešné formátování"
 
 msgid "Failed to extract opening.bnr"
-msgstr ""
+msgstr "Nemohu rozbalit opening.bnr"
 
 msgid "Failed to extract."
-msgstr ""
+msgstr "Nemohu rozbalit."
 
 msgid "Failed to open partition"
 msgstr "Nelze otevřít diskový oddíl"
@@ -543,9 +543,6 @@ msgstr "Soubor GCT vytvoren"
 msgid "GUI Settings"
 msgstr "Nastavení GUI"
 
-msgid "Game (Banner) Sounds"
-msgstr ""
-
 msgid "Game ID"
 msgstr "ID hry"
 
@@ -561,8 +558,11 @@ msgstr "Region hry"
 msgid "Game Size"
 msgstr "Velikost hry"
 
-msgid "Game Sound Volume"
+msgid "Game Sound Mode"
 msgstr ""
+
+msgid "Game Sound Volume"
+msgstr "Nastavení hlasitosti hry"
 
 msgid "Game is already installed:"
 msgstr "Hra je již nainstalována:"
@@ -595,10 +595,10 @@ msgid "How to Shutdown?"
 msgstr "Jakým zpusobem ukoncit?"
 
 msgid "IMD5 Header not right."
-msgstr ""
+msgstr "Hlavička IMD5 není správná."
 
 msgid "IMET Header wrong."
-msgstr ""
+msgstr "Hlavička IMET není správná."
 
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
 msgstr ""
@@ -699,7 +699,7 @@ msgid "Load"
 msgstr "Spustit"
 
 msgid "Load From SD/USB"
-msgstr ""
+msgstr "Nahrát z SD/USB"
 
 #, c-format
 msgid "Load file from: %s ?"
@@ -720,6 +720,9 @@ msgstr "Zamcení konzole"
 msgid "Locked"
 msgstr "Zamceno"
 
+msgid "Loop Sound"
+msgstr ""
+
 msgid "Mar"
 msgstr "Brez"
 
@@ -733,7 +736,7 @@ msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr "Nejspíše má velikost, která není delitelná 4."
 
 msgid "Mount DVD drive"
-msgstr ""
+msgstr "Připojit DVD mechaniku"
 
 msgid "Music Volume"
 msgstr "Hlasitost hudby"
@@ -745,7 +748,7 @@ msgid "Network init error"
 msgstr "Chyba pri inicializaci síte"
 
 msgid "New Disc Detected"
-msgstr ""
+msgstr "Detekován nový disk"
 
 msgid "Next"
 msgstr "Další"
@@ -778,7 +781,7 @@ msgid "No WBFS partition found"
 msgstr "Nebyl nalezen oddíl WBFS"
 
 msgid "No cheats were selected"
-msgstr ""
+msgstr "Nebyly vybrány žádné cheaty"
 
 msgid "No data could be read."
 msgstr "Nelze císt data?"
@@ -790,7 +793,7 @@ msgid "No new updates."
 msgstr "Není dostupná žádná aktualizace."
 
 msgid "No themes found on the site."
-msgstr ""
+msgstr "Žádné téma nebylo nalezeno na serveru."
 
 msgid "Normal"
 msgstr "Normální"
@@ -874,7 +877,7 @@ msgid "Play Count"
 msgstr "Spušteno"
 
 msgid "Please wait..."
-msgstr ""
+msgstr "Cekejte prosím..."
 
 msgid "Power off the Wii"
 msgstr "Vypnout Wii"
@@ -937,25 +940,25 @@ msgid "Save Failed"
 msgstr "Uložení selhalo"
 
 msgid "Save Game List to"
-msgstr ""
+msgstr "Uložit seznam her do"
 
 msgid "Saved"
-msgstr ""
+msgstr "Uloženo"
 
 msgid "Screensaver"
 msgstr "Sporic obrazovky"
 
 msgid "Select a DOL"
-msgstr ""
+msgstr "Vyberte DOL"
 
 msgid "Selected DOL"
-msgstr ""
+msgstr "Vybraný DOL"
 
 msgid "Sept"
 msgstr "Zárí"
 
 msgid "Set Search-Filter"
-msgstr ""
+msgstr "Nastavit vyhledávací filtr"
 
 msgid "Set as backgroundmusic?"
 msgstr "Nastavit jako hudbu na pozadí?"
@@ -973,13 +976,19 @@ msgid "Sort alphabetically"
 msgstr "Trídení dle abecedy"
 
 msgid "Sort by rank"
-msgstr ""
+msgstr "Třídit podle hodnocení"
 
 msgid "Sort order by most played"
 msgstr "Trídení podle spuštení"
 
 msgid "Sound"
 msgstr "Zvuk"
+
+msgid "Sound+BGM"
+msgstr ""
+
+msgid "Sound+Quiet"
+msgstr ""
 
 msgid "Spanish"
 msgstr "Španelsky"
@@ -1006,7 +1015,7 @@ msgid "Successfully deleted:"
 msgstr "Úspešne smazáno:"
 
 msgid "Successfully extracted theme"
-msgstr ""
+msgstr "Úspešne rozbalené téma"
 
 msgid "Successfully installed:"
 msgstr "Úspešne nainstalováno"
@@ -1024,7 +1033,7 @@ msgid "TXT Cheatcodes Path changed"
 msgstr "Cesta k TXT cheatum zmenena"
 
 msgid "The entered directory does not exist. Would you like to create it?"
-msgstr ""
+msgstr "Zadaný adresář neexistuje. Chcete ho vytvořit?"
 
 msgid "The file is not a .wad"
 msgstr "Soubor není typu WAD"
@@ -1037,22 +1046,22 @@ msgid "The wad installation failed with error %ld"
 msgstr "Instalace WAD souboru selhala s chybou %ld"
 
 msgid "Theme Download Path"
-msgstr ""
+msgstr "Cesta pro uložení témat"
 
 msgid "Theme Download Path changed"
-msgstr ""
+msgstr "Cesta pro uložení témat zmenena"
 
 msgid "Theme Downloader"
-msgstr ""
+msgstr "Stahování témat"
 
 msgid "Theme Path"
-msgstr "Cesta ke skinum"
+msgstr "Cesta k tématum"
 
 msgid "Theme Path Changed"
-msgstr "Cesta ke skinum zmenena"
+msgstr "Cesta k tématum zmenena"
 
 msgid "Theme Title:"
-msgstr ""
+msgstr "Název tématu"
 
 msgid "Time left:"
 msgstr "Zbývající cas:"
@@ -1067,7 +1076,7 @@ msgid "Tooltips"
 msgstr "Popisky"
 
 msgid "Transfer failed."
-msgstr ""
+msgstr "Přenos selhal"
 
 msgid "USB Device not found"
 msgstr "USB zarízení nenalezeno"
@@ -1098,7 +1107,7 @@ msgid "Unlocked"
 msgstr "Odemceno"
 
 msgid "Unsupported format, try to extract manually."
-msgstr ""
+msgstr "Nepodporovaný formát"
 
 msgid "Update"
 msgstr "Aktualizace"
@@ -1140,7 +1149,7 @@ msgid "Updating WiiTDB.zip"
 msgstr "Aktualizuji WiiTDB.zip"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
-msgstr ""
+msgstr "Odeslaný ZIP soubor nainstalován do adresáře homebrew"
 
 msgid "VIDTV Patch"
 msgstr "VIDTV korekce"
@@ -1208,13 +1217,13 @@ msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 msgstr "Vaše URL bylo uloženo v %sWiiTDB_URL.txt."
 
 msgid "and translaters for language files updates"
-msgstr ""
+msgstr "a překladatele pro aktualizaci jazykových souborů"
 
 msgid "available"
 msgstr "dostupný"
 
 msgid "contains over 255 lines of code.  It will produce unexpected results."
-msgstr "obsahuje více jak 255 rádek kódů. To muže vyvolat neocekáváné výsledky."
+msgstr "obsahuje více jak 255 rádek kódu. To muže vyvolat neocekáváné výsledky."
 
 msgid "does not exist!"
 msgstr "neexistuje!"
@@ -1243,11 +1252,11 @@ msgstr "za WiiTDB a hostování obalu / potisku DVD"
 msgid "for diverse patches"
 msgstr "za ruzné opravy"
 
-msgid "for his awesome tool"
-msgstr "za jeho hrozný nástroj"
+msgid "for his awesome tool LibWiiGui"
+msgstr "za jeho hrozný nástroj LibWiiGui"
 
 msgid "for hosting the themes"
-msgstr ""
+msgstr "pro hostování témat"
 
 msgid "for hosting the update files"
 msgstr "za umístení souboru pro aktualizaci "

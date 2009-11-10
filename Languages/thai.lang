@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-09 02:01+0100\n"
+"POT-Creation-Date: 2009-11-10 20:23+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Nitro_subzero \n"
 "Language-Team: Nitro_subzero\n"
@@ -543,9 +543,6 @@ msgstr "ไฟล์ GCT ถูกสร้าง"
 msgid "GUI Settings"
 msgstr "ปรับแต่งหน้าจอ"
 
-msgid "Game (Banner) Sounds"
-msgstr ""
-
 msgid "Game ID"
 msgstr "เกมส์ ID"
 
@@ -560,6 +557,9 @@ msgstr "โซนของเกมส์"
 
 msgid "Game Size"
 msgstr "ขนาดของเกมส์"
+
+msgid "Game Sound Mode"
+msgstr ""
 
 msgid "Game Sound Volume"
 msgstr ""
@@ -719,6 +719,9 @@ msgstr "ล๊อค Console"
 
 msgid "Locked"
 msgstr "ล๊อค"
+
+msgid "Loop Sound"
+msgstr ""
 
 msgid "Mar"
 msgstr "มีค."
@@ -980,6 +983,12 @@ msgstr "เรียงตามความถี่ในการเล่น
 
 msgid "Sound"
 msgstr "เสียง"
+
+msgid "Sound+BGM"
+msgstr ""
+
+msgid "Sound+Quiet"
+msgstr ""
 
 msgid "Spanish"
 msgstr "สเปน"
@@ -1243,8 +1252,8 @@ msgstr "สำหรับ WiiTDB และ ปก/รูปแผ่นดิ�
 msgid "for diverse patches"
 msgstr "แก้ diverse"
 
-msgid "for his awesome tool"
-msgstr "สำหรับสุดยอด tool ของเค้า"
+msgid "for his awesome tool LibWiiGui"
+msgstr "สำหรับสุดยอด tool ของเค้า LibWiiGui"
 
 msgid "for hosting the themes"
 msgstr "สำหรับให้ฝากธีม"

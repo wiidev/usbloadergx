@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-09 02:01+0100\n"
+"POT-Creation-Date: 2009-11-10 20:23+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -543,9 +543,6 @@ msgstr ""
 msgid "GUI Settings"
 msgstr ""
 
-msgid "Game (Banner) Sounds"
-msgstr ""
-
 msgid "Game ID"
 msgstr ""
 
@@ -559,6 +556,9 @@ msgid "Game Region"
 msgstr ""
 
 msgid "Game Size"
+msgstr ""
+
+msgid "Game Sound Mode"
 msgstr ""
 
 msgid "Game Sound Volume"
@@ -718,6 +718,9 @@ msgid "Lock Console"
 msgstr ""
 
 msgid "Locked"
+msgstr ""
+
+msgid "Loop Sound"
 msgstr ""
 
 msgid "Mar"
@@ -979,6 +982,12 @@ msgid "Sort order by most played"
 msgstr ""
 
 msgid "Sound"
+msgstr ""
+
+msgid "Sound+BGM"
+msgstr ""
+
+msgid "Sound+Quiet"
 msgstr ""
 
 msgid "Spanish"
@@ -1243,7 +1252,7 @@ msgstr ""
 msgid "for diverse patches"
 msgstr ""
 
-msgid "for his awesome tool"
+msgid "for his awesome tool LibWiiGui"
 msgstr ""
 
 msgid "for hosting the themes"

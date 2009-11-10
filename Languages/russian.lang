@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-09 02:01+0100\n"
+"POT-Creation-Date: 2009-11-10 20:23+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Kir\n"
 "Language-Team: Kir\n"
@@ -543,9 +543,6 @@ msgstr "Файл GCT создан"
 msgid "GUI Settings"
 msgstr "Настройки интерфейса"
 
-msgid "Game (Banner) Sounds"
-msgstr ""
-
 msgid "Game ID"
 msgstr "ID игры"
 
@@ -560,6 +557,9 @@ msgstr "Регион игры"
 
 msgid "Game Size"
 msgstr "Размер игры"
+
+msgid "Game Sound Mode"
+msgstr ""
 
 msgid "Game Sound Volume"
 msgstr ""
@@ -719,6 +719,9 @@ msgstr "Заблокировать консоль"
 
 msgid "Locked"
 msgstr "Заблокировано"
+
+msgid "Loop Sound"
+msgstr ""
 
 msgid "Mar"
 msgstr "Мар"
@@ -980,6 +983,12 @@ msgstr ""
 
 msgid "Sound"
 msgstr "Звук"
+
+msgid "Sound+BGM"
+msgstr ""
+
+msgid "Sound+Quiet"
+msgstr ""
 
 msgid "Spanish"
 msgstr "Испанский"
@@ -1243,8 +1252,8 @@ msgstr "за WIITDB и хостинг изображений обложек/ди
 msgid "for diverse patches"
 msgstr "за различные патчи"
 
-msgid "for his awesome tool"
-msgstr "за отличную утилиту"
+msgid "for his awesome tool LibWiiGui"
+msgstr "за отличную утилиту LibWiiGui"
 
 msgid "for hosting the themes"
 msgstr ""

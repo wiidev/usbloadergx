@@ -1,14 +1,14 @@
 # USB Loader GX language source file.
-# spanish.lang - r719
+# spanish.lang - r821
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-09 02:01+0100\n"
+"POT-Creation-Date: 2009-11-10 20:23+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Penn\n"
-"Language-Team: \n"
+"Language-Team: Penn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -30,7 +30,7 @@ msgstr " no está en el servidor."
 
 #, c-format
 msgid "%s : %s May not boot correctly if your System Menu is not up to date."
-msgstr ""
+msgstr "%s : %s puede no iniciar correctamente si tu Menu de Sistema no está actualizado"
 
 msgid "0 (Everyone)"
 msgstr "0 (Todos)"
@@ -42,13 +42,13 @@ msgid "1 hour"
 msgstr "1 hora"
 
 msgid "10 min"
-msgstr ""
+msgstr "10 min."
 
 msgid "2 (Teen 12+)"
 msgstr "2 (Adolescente 12+)"
 
 msgid "20 min"
-msgstr ""
+msgstr "20 min."
 
 msgid "2D Cover Path"
 msgstr "Ruta Carátulas 2D"
@@ -57,10 +57,10 @@ msgid "3 (Mature 16+)"
 msgstr "3 (Maduro 16+)"
 
 msgid "3 min"
-msgstr ""
+msgstr "3 min."
 
 msgid "30 min"
-msgstr ""
+msgstr "30 min."
 
 msgid "3D Cover Path"
 msgstr "Ruta Carátulas 3D"
@@ -72,7 +72,7 @@ msgid "4 (Adults Only 18+)"
 msgstr "4 (Sólo Adultos 18+)"
 
 msgid "5 min"
-msgstr ""
+msgstr "5 min."
 
 msgid ">> Deleting tickets..."
 msgstr ">> Borrando tickets..."
@@ -150,7 +150,7 @@ msgid "Aug"
 msgstr "Ago"
 
 msgid "Author:"
-msgstr ""
+msgstr "Autor:"
 
 msgid "AutoInit Network"
 msgstr "AutoIniciar Conexión"
@@ -198,16 +198,16 @@ msgid "Can't create directory"
 msgstr "No se creó directorio"
 
 msgid "Can't create file"
-msgstr ""
+msgstr "No se pudo crear archivo"
 
 msgid "Can't decompress LZ77"
-msgstr ""
+msgstr "No se pudo descomprimir LZ77"
 
 msgid "Can't delete:"
 msgstr "No se eliminó:"
 
 msgid "Can't find disc"
-msgstr ""
+msgstr "No se encontró disco"
 
 msgid "Cancel"
 msgstr "Cancelar"
@@ -219,7 +219,7 @@ msgid "Cheatfile is blank"
 msgstr "Archivo de Trampas vacio"
 
 msgid "Checking existing artwork"
-msgstr ""
+msgstr "Verificando caratulas existentes"
 
 msgid "Checking for Updates"
 msgstr "Verificando Actualizaciones"
@@ -358,7 +358,7 @@ msgid "Developed by"
 msgstr "Desarrollado por"
 
 msgid "Directory does not exist!"
-msgstr ""
+msgstr "¡Directorio no existe!"
 
 msgid "Disc Artwork Download"
 msgstr "Descarga Img. Disco"
@@ -400,7 +400,7 @@ msgid "Do you want to change language?"
 msgstr "¿Quieres cambiar idioma?"
 
 msgid "Do you want to download this theme?"
-msgstr ""
+msgstr "¿Quieres descargar este tema?"
 
 msgid "Do you want to format:"
 msgstr "Quieres formatear:"
@@ -418,7 +418,7 @@ msgid "Done!"
 msgstr "¡Listo!"
 
 msgid "Download"
-msgstr ""
+msgstr "Descarga"
 
 msgid "Download Boxart image?"
 msgstr "¿Descargar Imágenes?"
@@ -430,25 +430,25 @@ msgid "Download Now"
 msgstr "Descargar ahora"
 
 msgid "Download failed."
-msgstr ""
+msgstr "Descarga fallida."
 
 msgid "Download finished"
 msgstr "Descarga completa"
 
 msgid "Download request failed."
-msgstr ""
+msgstr "Petición de descarga fallida."
 
 msgid "Downloading"
 msgstr "Descargando"
 
 msgid "Downloading Page List:"
-msgstr ""
+msgstr "Descargando lista-página:"
 
 msgid "Downloading file"
 msgstr "Descargando archivo"
 
 msgid "Downloading image:"
-msgstr ""
+msgstr "Descargando imágen:"
 
 msgid "Dutch"
 msgstr "Holandés"
@@ -487,16 +487,16 @@ msgid "Exit USB Loader GX?"
 msgstr "¿Salir de USB Loader GX?"
 
 msgid "Extracting files..."
-msgstr ""
+msgstr "Extrayendo archivos..."
 
 msgid "Failed formating"
 msgstr "Fallo al formatear"
 
 msgid "Failed to extract opening.bnr"
-msgstr ""
+msgstr "Fallo al extraer opening.bnr"
 
 msgid "Failed to extract."
-msgstr ""
+msgstr "Fallo al extraer."
 
 msgid "Failed to open partition"
 msgstr "Fallo al abrir partición"
@@ -543,9 +543,6 @@ msgstr "Archivo GCT creado"
 msgid "GUI Settings"
 msgstr "Configuración de GUI"
 
-msgid "Game (Banner) Sounds"
-msgstr ""
-
 msgid "Game ID"
 msgstr "ID de Juego"
 
@@ -561,8 +558,11 @@ msgstr "Región"
 msgid "Game Size"
 msgstr "Tamaño del Juego"
 
-msgid "Game Sound Volume"
+msgid "Game Sound Mode"
 msgstr ""
+
+msgid "Game Sound Volume"
+msgstr "Volumen del juego"
 
 msgid "Game is already installed:"
 msgstr "El juego ya estaba instalado:"
@@ -595,10 +595,10 @@ msgid "How to Shutdown?"
 msgstr "¿Cómo Apagar?"
 
 msgid "IMD5 Header not right."
-msgstr ""
+msgstr "Mal encabezado IMD5."
 
 msgid "IMET Header wrong."
-msgstr ""
+msgstr "Mal encabezado IMET."
 
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
 msgstr "Si no tienes WiFi, presiona 1 para ver la URL desde donde obtener tu WiiTDB.zip"
@@ -699,7 +699,7 @@ msgid "Load"
 msgstr "Cargar"
 
 msgid "Load From SD/USB"
-msgstr ""
+msgstr "Cargar desde SD/USB"
 
 #, c-format
 msgid "Load file from: %s ?"
@@ -720,6 +720,9 @@ msgstr "Bloquear consola"
 msgid "Locked"
 msgstr "Bloqueada"
 
+msgid "Loop Sound"
+msgstr ""
+
 msgid "Mar"
 msgstr ""
 
@@ -733,7 +736,7 @@ msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr "Probablemente tiene un tamaño no divisible por 4. Que estupidez."
 
 msgid "Mount DVD drive"
-msgstr ""
+msgstr "Montar lector DVD"
 
 msgid "Music Volume"
 msgstr "Volumen Música"
@@ -745,7 +748,7 @@ msgid "Network init error"
 msgstr "Error inicio conexión"
 
 msgid "New Disc Detected"
-msgstr ""
+msgstr "Nuevo disco Detectado"
 
 msgid "Next"
 msgstr "Siguiente"
@@ -778,7 +781,7 @@ msgid "No WBFS partition found"
 msgstr "Partición WBFS no encontrada"
 
 msgid "No cheats were selected"
-msgstr ""
+msgstr "Trampas no seleccionadas"
 
 msgid "No data could be read."
 msgstr "No se pudo leer datos."
@@ -790,7 +793,7 @@ msgid "No new updates."
 msgstr "No hay actualizaciones."
 
 msgid "No themes found on the site."
-msgstr ""
+msgstr "No se encontraron temas en el sitio."
 
 msgid "Normal"
 msgstr ""
@@ -874,7 +877,7 @@ msgid "Play Count"
 msgstr "Jugado"
 
 msgid "Please wait..."
-msgstr ""
+msgstr "Por favor espera..."
 
 msgid "Power off the Wii"
 msgstr "Apagar la Wii"
@@ -937,28 +940,28 @@ msgid "Save Failed"
 msgstr "Fallo al guardar"
 
 msgid "Save Game List to"
-msgstr ""
+msgstr "Guardar lista de juegos a"
 
 msgid "Saved"
-msgstr ""
+msgstr "Guardado"
 
 msgid "Screensaver"
 msgstr "Protector de Pantalla"
 
 msgid "Select a DOL"
-msgstr ""
+msgstr "Selecciona un DOL"
 
 msgid "Selected DOL"
-msgstr ""
+msgstr "DOL seleccionado"
 
 msgid "Sept"
 msgstr ""
 
 msgid "Set Search-Filter"
-msgstr ""
+msgstr "Poner filtro-busqueda"
 
 msgid "Set as backgroundmusic?"
-msgstr "¿Poner como másica de fondo?"
+msgstr "¿Poner como música de fondo?"
 
 msgid "Settings"
 msgstr "Configuración"
@@ -973,13 +976,19 @@ msgid "Sort alphabetically"
 msgstr "Ordenar alfabéticamente"
 
 msgid "Sort by rank"
-msgstr ""
+msgstr "Ordenar por ranking"
 
 msgid "Sort order by most played"
 msgstr "Ordenar por el más jugado"
 
 msgid "Sound"
 msgstr "Sonido"
+
+msgid "Sound+BGM"
+msgstr ""
+
+msgid "Sound+Quiet"
+msgstr ""
 
 msgid "Spanish"
 msgstr "Español"
@@ -1006,7 +1015,7 @@ msgid "Successfully deleted:"
 msgstr "Borrado correctamente:"
 
 msgid "Successfully extracted theme"
-msgstr ""
+msgstr "Tema extraido correctamente"
 
 msgid "Successfully installed:"
 msgstr "Instalado correctamente:"
@@ -1024,7 +1033,7 @@ msgid "TXT Cheatcodes Path changed"
 msgstr "Ruta archiv. de trampas cambiada"
 
 msgid "The entered directory does not exist. Would you like to create it?"
-msgstr ""
+msgstr "El directorio especificado no existe. ¿Quieres crearlo?"
 
 msgid "The file is not a .wad"
 msgstr "El archivo no es un .wad"
@@ -1037,13 +1046,13 @@ msgid "The wad installation failed with error %ld"
 msgstr "La instalación del wad falló con error %ld"
 
 msgid "Theme Download Path"
-msgstr ""
+msgstr "Ruta descarga de temas"
 
 msgid "Theme Download Path changed"
-msgstr ""
+msgstr "Ruta descarga de temas cambiada"
 
 msgid "Theme Downloader"
-msgstr ""
+msgstr "Descargador de Temas"
 
 msgid "Theme Path"
 msgstr "Ruta del Tema"
@@ -1052,7 +1061,7 @@ msgid "Theme Path Changed"
 msgstr "Ruta de Tema cambiada"
 
 msgid "Theme Title:"
-msgstr ""
+msgstr "Título del Tema"
 
 msgid "Time left:"
 msgstr "T. rest.:"
@@ -1067,7 +1076,7 @@ msgid "Tooltips"
 msgstr "InfoBurbujas"
 
 msgid "Transfer failed."
-msgstr ""
+msgstr "Transferencia fallida."
 
 msgid "USB Device not found"
 msgstr "USB no encontrado"
@@ -1098,7 +1107,7 @@ msgid "Unlocked"
 msgstr "Desbloqueada"
 
 msgid "Unsupported format, try to extract manually."
-msgstr ""
+msgstr "Formato no soportado, intenta extraerlo manualmente."
 
 msgid "Update"
 msgstr "Actualizar"
@@ -1140,7 +1149,7 @@ msgid "Updating WiiTDB.zip"
 msgstr "Actualizando WiiTDB.zip"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
-msgstr ""
+msgstr "Subido archivo ZIP instalado en ruta de Homebrew."
 
 msgid "VIDTV Patch"
 msgstr "Parche VIDTV"
@@ -1208,7 +1217,7 @@ msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 msgstr "Tu URL ha sido guardada en %sWiiTDB_URL.txt."
 
 msgid "and translaters for language files updates"
-msgstr ""
+msgstr "y los traductores por las actualizaciones de lenguaje"
 
 msgid "available"
 msgstr "disponible"
@@ -1243,11 +1252,11 @@ msgstr "por WiiTDB y alojar carátulas / img. de disco"
 msgid "for diverse patches"
 msgstr "por diversos parches"
 
-msgid "for his awesome tool"
-msgstr "por su increible app"
+msgid "for his awesome tool LibWiiGui"
+msgstr "por su increible app LibWiiGui"
 
 msgid "for hosting the themes"
-msgstr ""
+msgstr "por alojar los temas"
 
 msgid "for hosting the update files"
 msgstr "por alojar las actualizaciones"

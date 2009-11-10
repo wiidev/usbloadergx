@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-09 02:01+0100\n"
+"POT-Creation-Date: 2009-11-10 20:23+0100\n"
 "PO-Revision-Date: 2009-10-30 16:28+0100\n"
 "Last-Translator: Springdale\n"
 "Language-Team: Tusk, Springdale\n"
@@ -543,9 +543,6 @@ msgstr "GCT Fájl létrehozva"
 msgid "GUI Settings"
 msgstr "Kezelõfelület"
 
-msgid "Game (Banner) Sounds"
-msgstr ""
-
 msgid "Game ID"
 msgstr "Játék ID"
 
@@ -560,6 +557,9 @@ msgstr "Játék Régió"
 
 msgid "Game Size"
 msgstr "Játék Méret"
+
+msgid "Game Sound Mode"
+msgstr ""
 
 msgid "Game Sound Volume"
 msgstr ""
@@ -719,6 +719,9 @@ msgstr "Konzol Lezárása"
 
 msgid "Locked"
 msgstr "Lezárva"
+
+msgid "Loop Sound"
+msgstr ""
 
 msgid "Mar"
 msgstr "Már"
@@ -980,6 +983,12 @@ msgstr "Rendezés indítások száma szerint"
 
 msgid "Sound"
 msgstr "Hang"
+
+msgid "Sound+BGM"
+msgstr ""
+
+msgid "Sound+Quiet"
+msgstr ""
 
 msgid "Spanish"
 msgstr "Spanyol"
@@ -1243,8 +1252,8 @@ msgstr ": WiiTDB és borítók/lemezfotók"
 msgid "for diverse patches"
 msgstr ": többféle patch"
 
-msgid "for his awesome tool"
-msgstr "-nak kiváló eszközéért:"
+msgid "for his awesome tool LibWiiGui"
+msgstr "-nak kiváló eszközéért: LibWiiGui"
 
 msgid "for hosting the themes"
 msgstr ": témák tárhelye"

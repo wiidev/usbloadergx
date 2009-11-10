@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-09 02:01+0100\n"
+"POT-Creation-Date: 2009-11-10 20:23+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: ziom666 (zadania_prog@vp.pl)\n"
 "Language-Team: \n"
@@ -543,9 +543,6 @@ msgstr "Utworzono plik GCT"
 msgid "GUI Settings"
 msgstr "Ustawienia interfejsu graficznego"
 
-msgid "Game (Banner) Sounds"
-msgstr ""
-
 msgid "Game ID"
 msgstr "ID gry"
 
@@ -560,6 +557,9 @@ msgstr "Region"
 
 msgid "Game Size"
 msgstr "Rozmiar gry"
+
+msgid "Game Sound Mode"
+msgstr ""
 
 msgid "Game Sound Volume"
 msgstr ""
@@ -719,6 +719,9 @@ msgstr "Zablokuj konsole"
 
 msgid "Locked"
 msgstr "Zablokowano"
+
+msgid "Loop Sound"
+msgstr ""
 
 msgid "Mar"
 msgstr "Marzec"
@@ -980,6 +983,12 @@ msgstr "Sortuj wg. liczby uruchomien"
 
 msgid "Sound"
 msgstr "Dzwiek"
+
+msgid "Sound+BGM"
+msgstr ""
+
+msgid "Sound+Quiet"
+msgstr ""
 
 msgid "Spanish"
 msgstr "hiszpanski"
@@ -1243,8 +1252,8 @@ msgstr "za WiiTDB i hostowanie okladek/obrazkow plyt"
 msgid "for diverse patches"
 msgstr "za rozne poprawki"
 
-msgid "for his awesome tool"
-msgstr "za jego niesamowite narzedzie"
+msgid "for his awesome tool LibWiiGui"
+msgstr "za jego niesamowite narzedzie LibWiiGui"
 
 msgid "for hosting the themes"
 msgstr ""

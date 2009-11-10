@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# italian.lang - v47 - r813
+# italian.lang - v48 - r823
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-09 02:01+0100\n"
+"POT-Creation-Date: 2009-11-10 20:23+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe, Cambo\n"
@@ -201,13 +201,13 @@ msgid "Can't create file"
 msgstr "Impossibile creare il file"
 
 msgid "Can't decompress LZ77"
-msgstr ""
+msgstr "Impossibile decomprimere LZ77"
 
 msgid "Can't delete:"
 msgstr "Impossibile eliminare:"
 
 msgid "Can't find disc"
-msgstr ""
+msgstr "Impossibile trovare il disco"
 
 msgid "Cancel"
 msgstr "Cancella"
@@ -493,7 +493,7 @@ msgid "Failed formating"
 msgstr "Errore Formattazione"
 
 msgid "Failed to extract opening.bnr"
-msgstr ""
+msgstr "Estrazione opening.bnr fallita"
 
 msgid "Failed to extract."
 msgstr "Scompattamento fallito."
@@ -543,9 +543,6 @@ msgstr "File GCT creato"
 msgid "GUI Settings"
 msgstr "Impostazioni Loader"
 
-msgid "Game (Banner) Sounds"
-msgstr ""
-
 msgid "Game ID"
 msgstr "ID Gioco"
 
@@ -561,8 +558,11 @@ msgstr "Regione Gioco"
 msgid "Game Size"
 msgstr "Dimensione Gioco"
 
-msgid "Game Sound Volume"
+msgid "Game Sound Mode"
 msgstr ""
+
+msgid "Game Sound Volume"
+msgstr "Volume Suono Giochi"
 
 msgid "Game is already installed:"
 msgstr "Gioco già installato:"
@@ -595,10 +595,10 @@ msgid "How to Shutdown?"
 msgstr "Spegnimento Wii?"
 
 msgid "IMD5 Header not right."
-msgstr ""
+msgstr "Header IMD5 non corretto."
 
 msgid "IMET Header wrong."
-msgstr ""
+msgstr "Header IMET errato."
 
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
 msgstr "Se non hai una connessione WiFi, premi 1 per ottenere un URL dal quale ottenere il file WiiTDB.zip"
@@ -719,6 +719,9 @@ msgstr "Blocco Console"
 
 msgid "Locked"
 msgstr "Bloccato"
+
+msgid "Loop Sound"
+msgstr ""
 
 msgid "Mar"
 msgstr "marzo"
@@ -980,6 +983,12 @@ msgstr "Mostra i più giocati"
 
 msgid "Sound"
 msgstr "Audio"
+
+msgid "Sound+BGM"
+msgstr ""
+
+msgid "Sound+Quiet"
+msgstr ""
 
 msgid "Spanish"
 msgstr "Spagnolo"
@@ -1243,8 +1252,8 @@ msgstr "per l'archivio WiiTDB e le copertine online"
 msgid "for diverse patches"
 msgstr "per le numerose correzioni"
 
-msgid "for his awesome tool"
-msgstr "per la fantastica libreria"
+msgid "for his awesome tool LibWiiGui"
+msgstr "per la fantastica libreria LibWiiGui"
 
 msgid "for hosting the themes"
 msgstr "per i temi online"
@@ -1253,7 +1262,7 @@ msgid "for hosting the update files"
 msgstr "per gli aggiornamenti online"
 
 msgid "for the USB Loader source"
-msgstr "per rilascio codice sorgente"
+msgstr "per il rilascio del codice sorgente"
 
 msgid "formatted!"
 msgstr "formattato!"

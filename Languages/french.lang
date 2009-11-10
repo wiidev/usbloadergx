@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# French V10.8 r821
+# French V10.9 r826
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-09 02:01+0100\n"
+"POT-Creation-Date: 2009-11-10 20:23+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Kin8\n"
 "Language-Team: Badablek, Amour, ikya, dj_skual & Kin8\n"
@@ -543,9 +543,6 @@ msgstr "Fichier GCT créé"
 msgid "GUI Settings"
 msgstr "Configuration GUI"
 
-msgid "Game (Banner) Sounds"
-msgstr "Sons Jeux (Bannière)"
-
 msgid "Game ID"
 msgstr "ID du jeu"
 
@@ -561,8 +558,11 @@ msgstr "Région"
 msgid "Game Size"
 msgstr "Taille du jeu"
 
+msgid "Game Sound Mode"
+msgstr "Mode Son des Jeux"
+
 msgid "Game Sound Volume"
-msgstr "Volume Sons Jeux"
+msgstr "Volume Son des Jeux"
 
 msgid "Game is already installed:"
 msgstr "Le jeu est déjà installé:"
@@ -719,6 +719,9 @@ msgstr "Verrouiller la console"
 
 msgid "Locked"
 msgstr "Clic pour déverrouiller"
+
+msgid "Loop Sound"
+msgstr "Son en boucle"
 
 msgid "Mar"
 msgstr "Mars"
@@ -980,6 +983,12 @@ msgstr "Les plus joués"
 
 msgid "Sound"
 msgstr "Sons"
+
+msgid "Sound+BGM"
+msgstr "Son + Fond sonore"
+
+msgid "Sound+Quiet"
+msgstr "Son + Silence"
 
 msgid "Spanish"
 msgstr "Espagnol"
@@ -1243,8 +1252,8 @@ msgstr "pour WiiTDB et l'hébergement des jaquettes"
 msgid "for diverse patches"
 msgstr "pour les divers patchs"
 
-msgid "for his awesome tool"
-msgstr "pour son outil impressionnant"
+msgid "for his awesome tool LibWiiGui"
+msgstr "pour son outil impressionnant LibWiiGui"
 
 msgid "for hosting the themes"
 msgstr "pour l'hébergement des thèmes"

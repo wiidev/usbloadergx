@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# portuguese_pt.lang - r814
+# portuguese_pt.lang - r823
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-09 02:01+0100\n"
+"POT-Creation-Date: 2009-11-10 20:23+0100\n"
 "PO-Revision-Date: 2009-10-26 19:13-0000\n"
 "Last-Translator: Sky8000\n"
 "Language-Team: Sky8000 <sky8000@hotmail.com>\n"
@@ -201,13 +201,13 @@ msgid "Can't create file"
 msgstr "Não é possível criar o ficheiro"
 
 msgid "Can't decompress LZ77"
-msgstr ""
+msgstr "Não é possível descomprimir LZ77"
 
 msgid "Can't delete:"
 msgstr "Não foi possível apagar:"
 
 msgid "Can't find disc"
-msgstr ""
+msgstr "Disco não encontrado"
 
 msgid "Cancel"
 msgstr "Cancelar"
@@ -493,7 +493,7 @@ msgid "Failed formating"
 msgstr "Falha ao formatar"
 
 msgid "Failed to extract opening.bnr"
-msgstr ""
+msgstr "Falha ao extrair o opening.bnr"
 
 msgid "Failed to extract."
 msgstr "Falha ao extrair ficheiros."
@@ -543,9 +543,6 @@ msgstr "Ficheiro GCT criado"
 msgid "GUI Settings"
 msgstr "Definições do Interface"
 
-msgid "Game (Banner) Sounds"
-msgstr ""
-
 msgid "Game ID"
 msgstr "ID do Jogo"
 
@@ -561,8 +558,11 @@ msgstr "Região"
 msgid "Game Size"
 msgstr "Tamanho do Jogo"
 
-msgid "Game Sound Volume"
+msgid "Game Sound Mode"
 msgstr ""
+
+msgid "Game Sound Volume"
+msgstr "Volume de Som do Jogo"
 
 msgid "Game is already installed:"
 msgstr "O jogo já está instalado:"
@@ -595,10 +595,10 @@ msgid "How to Shutdown?"
 msgstr "Como desligar a consola?"
 
 msgid "IMD5 Header not right."
-msgstr ""
+msgstr "O cabeçalho IMD5 não está correcto."
 
 msgid "IMET Header wrong."
-msgstr ""
+msgstr "Cabeçalho IMET errado."
 
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
 msgstr "Pressione 1 para ver o URL de onde pode descarregar o ficheiro WiiTDB.zip"
@@ -719,6 +719,9 @@ msgstr "Bloquear Configurações"
 
 msgid "Locked"
 msgstr "Bloqueado"
+
+msgid "Loop Sound"
+msgstr ""
 
 msgid "Mar"
 msgstr ""
@@ -980,6 +983,12 @@ msgstr "Ordenar por número de vezes jogadas"
 
 msgid "Sound"
 msgstr "Audio"
+
+msgid "Sound+BGM"
+msgstr ""
+
+msgid "Sound+Quiet"
+msgstr ""
 
 msgid "Spanish"
 msgstr "Espanhol"
@@ -1243,8 +1252,8 @@ msgstr "por WiiTDB e alojar img. capas / discos"
 msgid "for diverse patches"
 msgstr "por diversos patches"
 
-msgid "for his awesome tool"
-msgstr "pela sua espectacular ferramenta"
+msgid "for his awesome tool LibWiiGui"
+msgstr "pela sua espectacular ferramenta LibWiiGui"
 
 msgid "for hosting the themes"
 msgstr "por alojar os temas"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-09 02:01+0100\n"
+"POT-Creation-Date: 2009-11-10 20:23+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: nextos@korea.com\n"
 "Language-Team: \n"
@@ -543,9 +543,6 @@ msgstr "GCT 파일 생성됨"
 msgid "GUI Settings"
 msgstr "GUI 설정"
 
-msgid "Game (Banner) Sounds"
-msgstr ""
-
 msgid "Game ID"
 msgstr "게임 ID"
 
@@ -560,6 +557,9 @@ msgstr "지역"
 
 msgid "Game Size"
 msgstr "게임 용량"
+
+msgid "Game Sound Mode"
+msgstr ""
 
 msgid "Game Sound Volume"
 msgstr ""
@@ -719,6 +719,9 @@ msgstr "콘솔 잠금"
 
 msgid "Locked"
 msgstr "잠김"
+
+msgid "Loop Sound"
+msgstr ""
 
 msgid "Mar"
 msgstr "4월"
@@ -980,6 +983,12 @@ msgstr "많이 실행한 횟수로 정렬"
 
 msgid "Sound"
 msgstr "소리"
+
+msgid "Sound+BGM"
+msgstr ""
+
+msgid "Sound+Quiet"
+msgstr ""
 
 msgid "Spanish"
 msgstr "스페인어"
@@ -1243,8 +1252,8 @@ msgstr "WiiTDB, 커버, 디스크이미지를 위하여"
 msgid "for diverse patches"
 msgstr "디버스 패치를 위하여"
 
-msgid "for his awesome tool"
-msgstr "훌륭한 툴를 위하여"
+msgid "for his awesome tool LibWiiGui"
+msgstr "LibWiiGui 훌륭한 툴를 위하여"
 
 msgid "for hosting the themes"
 msgstr ""

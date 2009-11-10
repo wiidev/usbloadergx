@@ -306,7 +306,7 @@ void WindowCredits() {
     i++;
     y+=22;
 
-    sprintf(text, "Tantric %s LibWiiGui", tr("for his awesome tool"));
+    sprintf(text, "Tantric %s", tr("for his awesome tool LibWiiGui"));
     txt[i] = new GuiText(text);
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     txt[i]->SetPosition(60,y);

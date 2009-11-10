@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-09 02:01+0100\n"
+"POT-Creation-Date: 2009-11-10 20:23+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: dorf[dk]\n"
 "Language-Team: dorf[dk]\n"
@@ -543,9 +543,6 @@ msgstr "GCT-fil oprettet"
 msgid "GUI Settings"
 msgstr "Konfigurér GUI"
 
-msgid "Game (Banner) Sounds"
-msgstr ""
-
 msgid "Game ID"
 msgstr "Spil-ID"
 
@@ -560,6 +557,9 @@ msgstr "Region"
 
 msgid "Game Size"
 msgstr "Spilstørrelse"
+
+msgid "Game Sound Mode"
+msgstr ""
 
 msgid "Game Sound Volume"
 msgstr ""
@@ -719,6 +719,9 @@ msgstr "Lås konsol"
 
 msgid "Locked"
 msgstr "Låst"
+
+msgid "Loop Sound"
+msgstr ""
 
 msgid "Mar"
 msgstr ""
@@ -980,6 +983,12 @@ msgstr "Sortér efter popularitet"
 
 msgid "Sound"
 msgstr "Lyd"
+
+msgid "Sound+BGM"
+msgstr ""
+
+msgid "Sound+Quiet"
+msgstr ""
 
 msgid "Spanish"
 msgstr "Spansk"
@@ -1243,8 +1252,8 @@ msgstr "for WiiTDB og for at hoste covers/DVD-billeder"
 msgid "for diverse patches"
 msgstr "for diverse patches"
 
-msgid "for his awesome tool"
-msgstr "for hans seje værktøj"
+msgid "for his awesome tool LibWiiGui"
+msgstr "for hans seje værktøj LibWiiGui"
 
 msgid "for hosting the themes"
 msgstr "for at hoste temaerne"

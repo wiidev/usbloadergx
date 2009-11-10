@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# japanese.lang - r814
+# japanese.lang - r823
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-09 02:01+0100\n"
+"POT-Creation-Date: 2009-11-10 20:23+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
@@ -201,13 +201,13 @@ msgid "Can't create file"
 msgstr "ファイルを作れませんでした"
 
 msgid "Can't decompress LZ77"
-msgstr ""
+msgstr "LZ77を解凍できませんでした"
 
 msgid "Can't delete:"
 msgstr "削除できません:"
 
 msgid "Can't find disc"
-msgstr ""
+msgstr "ディスクが見つかりません"
 
 msgid "Cancel"
 msgstr "キャンセル"
@@ -493,7 +493,7 @@ msgid "Failed formating"
 msgstr "初期化に失敗しました"
 
 msgid "Failed to extract opening.bnr"
-msgstr ""
+msgstr "opening.bnrの抽出は失敗しました"
 
 msgid "Failed to extract."
 msgstr "解凍に失敗しました"
@@ -543,9 +543,6 @@ msgstr "GCTファイルを作成しました"
 msgid "GUI Settings"
 msgstr "基本設定"
 
-msgid "Game (Banner) Sounds"
-msgstr ""
-
 msgid "Game ID"
 msgstr "IDのみ"
 
@@ -561,8 +558,11 @@ msgstr "リージョンのみ"
 msgid "Game Size"
 msgstr "サイズ"
 
-msgid "Game Sound Volume"
+msgid "Game Sound Mode"
 msgstr ""
+
+msgid "Game Sound Volume"
+msgstr "サウンドの音量"
 
 msgid "Game is already installed:"
 msgstr "このｹﾞｰﾑは既にｲﾝｽﾄｰﾙされています:"
@@ -595,10 +595,10 @@ msgid "How to Shutdown?"
 msgstr "どう終了しますか？"
 
 msgid "IMD5 Header not right."
-msgstr ""
+msgstr "IMD5ヘッダが正しくありません"
 
 msgid "IMET Header wrong."
-msgstr ""
+msgstr "IMETヘッダが間違っています"
 
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
 msgstr "1ボタンを押すと WiiTDB.zip のURLを保存します"
@@ -719,6 +719,9 @@ msgstr "GXをロック"
 
 msgid "Locked"
 msgstr "ﾛｯｸされています"
+
+msgid "Loop Sound"
+msgstr ""
 
 msgid "Mar"
 msgstr "3月"
@@ -980,6 +983,12 @@ msgstr "ﾌﾟﾚｲ回数が多い順に並び替え"
 
 msgid "Sound"
 msgstr "サウンド"
+
+msgid "Sound+BGM"
+msgstr ""
+
+msgid "Sound+Quiet"
+msgstr ""
 
 msgid "Spanish"
 msgstr "スペイン語"
@@ -1243,8 +1252,8 @@ msgstr "WiiTDB…様々な画像を配布"
 msgid "for diverse patches"
 msgstr "…様々なパッチを制作"
 
-msgid "for his awesome tool"
-msgstr "…すばらしいツールを制作　　　　　　　　　　　　　"
+msgid "for his awesome tool LibWiiGui"
+msgstr "…LibWiiGuiを制作"
 
 msgid "for hosting the themes"
 msgstr "…テーマを配布"
