@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# French V10.9 r826
+# French V11.0 r828
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-10 20:23+0100\n"
+"POT-Creation-Date: 2009-11-12 01:27+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Kin8\n"
 "Language-Team: Badablek, Amour, ikya, dj_skual & Kin8\n"
@@ -491,9 +491,6 @@ msgstr "Extraction des fichiers..."
 
 msgid "Failed formating"
 msgstr "Échec du formatage"
-
-msgid "Failed to extract opening.bnr"
-msgstr "Extraction opening.bnr échouée"
 
 msgid "Failed to extract."
 msgstr "Extraction échouée."
@@ -1278,6 +1275,9 @@ msgstr "sur"
 
 msgid "seconds left"
 msgstr "secondes restantes"
+
+#~ msgid "Failed to extract opening.bnr"
+#~ msgstr "Extraction opening.bnr échouée"
 
 #~ msgid "You need to start this game one time to create a save file, then exit and start it again."
 #~ msgstr "Vous devez lancer ce jeu une fois pour créer une sauvegarde, puis éteindre et le lancer à nouveau."

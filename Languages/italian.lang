@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# italian.lang - v48 - r823
+# italian.lang - v49 - r826
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-10 20:23+0100\n"
+"POT-Creation-Date: 2009-11-12 01:27+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe, Cambo\n"
@@ -492,9 +492,6 @@ msgstr "Sto scompattando i file..."
 msgid "Failed formating"
 msgstr "Errore Formattazione"
 
-msgid "Failed to extract opening.bnr"
-msgstr "Estrazione opening.bnr fallita"
-
 msgid "Failed to extract."
 msgstr "Scompattamento fallito."
 
@@ -559,7 +556,7 @@ msgid "Game Size"
 msgstr "Dimensione Gioco"
 
 msgid "Game Sound Mode"
-msgstr ""
+msgstr "Modalità Suono Giochi"
 
 msgid "Game Sound Volume"
 msgstr "Volume Suono Giochi"
@@ -721,7 +718,7 @@ msgid "Locked"
 msgstr "Bloccato"
 
 msgid "Loop Sound"
-msgstr ""
+msgstr "Suono Ripetuto"
 
 msgid "Mar"
 msgstr "marzo"
@@ -985,10 +982,10 @@ msgid "Sound"
 msgstr "Audio"
 
 msgid "Sound+BGM"
-msgstr ""
+msgstr "Suono+BGM"
 
 msgid "Sound+Quiet"
-msgstr ""
+msgstr "Suono+Silenzio"
 
 msgid "Spanish"
 msgstr "Spagnolo"
@@ -1278,6 +1275,9 @@ msgstr "di"
 
 msgid "seconds left"
 msgstr "secondi mancanti"
+
+#~ msgid "Failed to extract opening.bnr"
+#~ msgstr "Estrazione opening.bnr fallita"
 
 #~ msgid "Homebrew Channel"
 #~ msgstr "Canale Homebrew"

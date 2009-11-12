@@ -145,7 +145,7 @@ const u8 *LoadBannerSound(const u8 *discid, u32 *size)
 	u8 * opening_bnr = wd_extract_file(wdisc, &opening_bnr_size, ALL_PARTITIONS, (char *) "opening.bnr");
 	if(!opening_bnr)
 	{
-		WindowPrompt(tr("ERROR"), tr("Failed to extract opening.bnr"), tr("OK"));
+		//WindowPrompt(tr("ERROR"), tr("Failed to extract opening.bnr"), tr("OK"));
         return NULL;
 	}
 

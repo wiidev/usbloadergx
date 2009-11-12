@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# japanese.lang - r823
+# japanese.lang - r826
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-10 20:23+0100\n"
+"POT-Creation-Date: 2009-11-12 01:27+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
@@ -492,9 +492,6 @@ msgstr "解凍中です…"
 msgid "Failed formating"
 msgstr "初期化に失敗しました"
 
-msgid "Failed to extract opening.bnr"
-msgstr "opening.bnrの抽出は失敗しました"
-
 msgid "Failed to extract."
 msgstr "解凍に失敗しました"
 
@@ -559,7 +556,7 @@ msgid "Game Size"
 msgstr "サイズ"
 
 msgid "Game Sound Mode"
-msgstr ""
+msgstr "サウンドモード"
 
 msgid "Game Sound Volume"
 msgstr "サウンドの音量"
@@ -721,7 +718,7 @@ msgid "Locked"
 msgstr "ﾛｯｸされています"
 
 msgid "Loop Sound"
-msgstr ""
+msgstr "ループ"
 
 msgid "Mar"
 msgstr "3月"
@@ -985,10 +982,10 @@ msgid "Sound"
 msgstr "サウンド"
 
 msgid "Sound+BGM"
-msgstr ""
+msgstr "サウンドとBGM"
 
 msgid "Sound+Quiet"
-msgstr ""
+msgstr "サウンドのみ"
 
 msgid "Spanish"
 msgstr "スペイン語"
@@ -1278,6 +1275,9 @@ msgstr "中"
 
 msgid "seconds left"
 msgstr "完了まで"
+
+#~ msgid "Failed to extract opening.bnr"
+#~ msgstr "opening.bnrの抽出に失敗しました"
 
 #~ msgid "Homebrew Channel"
 #~ msgstr "HBCへ"

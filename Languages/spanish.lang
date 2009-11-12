@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# spanish.lang - r821
+# spanish.lang - r827
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-10 20:23+0100\n"
+"POT-Creation-Date: 2009-11-12 01:27+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Penn\n"
 "Language-Team: Penn\n"
@@ -123,7 +123,7 @@ msgid ">> Reading WAD data...Ok!"
 msgstr ">> Leyendo datos del WAD... ¡Ok!"
 
 msgid "AUTO"
-msgstr ""
+msgstr "Auto"
 
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "Todas las características del USB Loader GX desbloqueadas."
@@ -442,7 +442,7 @@ msgid "Downloading"
 msgstr "Descargando"
 
 msgid "Downloading Page List:"
-msgstr "Descargando lista-página:"
+msgstr "Descargando lista de páginas:"
 
 msgid "Downloading file"
 msgstr "Descargando archivo"
@@ -491,9 +491,6 @@ msgstr "Extrayendo archivos..."
 
 msgid "Failed formating"
 msgstr "Fallo al formatear"
-
-msgid "Failed to extract opening.bnr"
-msgstr "Fallo al extraer opening.bnr"
 
 msgid "Failed to extract."
 msgstr "Fallo al extraer."
@@ -559,7 +556,7 @@ msgid "Game Size"
 msgstr "Tamaño del Juego"
 
 msgid "Game Sound Mode"
-msgstr ""
+msgstr "Modo volumen del juego"
 
 msgid "Game Sound Volume"
 msgstr "Volumen del juego"
@@ -721,7 +718,7 @@ msgid "Locked"
 msgstr "Bloqueada"
 
 msgid "Loop Sound"
-msgstr ""
+msgstr "Sonido de loop"
 
 msgid "Mar"
 msgstr ""
@@ -985,10 +982,10 @@ msgid "Sound"
 msgstr "Sonido"
 
 msgid "Sound+BGM"
-msgstr ""
+msgstr "Sonido+Musica Fondo"
 
 msgid "Sound+Quiet"
-msgstr ""
+msgstr "Sonido+Silencio"
 
 msgid "Spanish"
 msgstr "Español"
@@ -1278,6 +1275,9 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
+
+#~ msgid "Failed to extract opening.bnr"
+#~ msgstr "Fallo al extraer opening.bnr"
 
 #~ msgid "Homebrew Channel"
 #~ msgstr "Canal Homebrew"

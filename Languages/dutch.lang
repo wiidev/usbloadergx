@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# dutch.lang - r823
+# dutch.lang - r826
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-10 20:23+0100\n"
+"POT-Creation-Date: 2009-11-12 01:27+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: glowy\n"
 "Language-Team: tj_cool, glowy\n"
@@ -20,7 +20,7 @@ msgid " Wad Saved as:"
 msgstr " Wad opgeslagen als:"
 
 msgid " could not be downloaded."
-msgstr " kon niet worden gedownload"
+msgstr " kon niet worden gedownload."
 
 msgid " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information."
 msgstr " is opgeslagen. De tekst is niet gecontroleerd. Sommige codes kunnen elkaar tegenwerken. Als je moeilijkheden ondervind, open het bestand in een echte tekstverwerker voor meer informatie."
@@ -84,19 +84,19 @@ msgid ">> Deleting tickets...Ok! "
 msgstr ">> Tickets verwijderen...Ok!"
 
 msgid ">> Deleting title ...ERROR! "
-msgstr ">> Titel verwijderen...FOUT! "
+msgstr ">> Titel verwijderen ...FOUT! "
 
 msgid ">> Deleting title ...Ok!"
-msgstr ">> Titel verwijderen...Ok!"
+msgstr ">> Titel verwijderen ...Ok!"
 
 msgid ">> Deleting title contents..."
-msgstr ">> Inhoud verwijderen..."
+msgstr ">> Titel Inhoud verwijderen..."
 
 msgid ">> Deleting title contents...ERROR! "
-msgstr ">> Inhoud verwijderen...FOUT! "
+msgstr ">> Titel Inhoud verwijderen...FOUT! "
 
 msgid ">> Deleting title contents...Ok!"
-msgstr " >> Inhoud verwijderen...Ok!"
+msgstr ">> Titel Inhoud verwijderen...Ok!"
 
 msgid ">> Deleting title..."
 msgstr ">> Titel verwijderen..."
@@ -117,7 +117,7 @@ msgid ">> Reading WAD data..."
 msgstr ">> Wad data lezen..."
 
 msgid ">> Reading WAD data...ERROR! "
-msgstr ">> Wad data lezezn...FOUT! "
+msgstr ">> Wad data lezen...FOUT! "
 
 msgid ">> Reading WAD data...Ok!"
 msgstr ">> Wad data lezen...Ok!"
@@ -201,7 +201,7 @@ msgid "Can't create file"
 msgstr "Kan bestand niet aanmaken"
 
 msgid "Can't decompress LZ77"
-msgstr "Kan niet uitpakken LZ77"
+msgstr "Kan LZ77 niet uitpakken"
 
 msgid "Can't delete:"
 msgstr "Kan niet verwijderen:"
@@ -241,10 +241,10 @@ msgstr "Code Download"
 
 #, c-format
 msgid "Coded by: %s"
-msgstr "Gecodeerd door: %s"
+msgstr "Geprogrammeerd door: %s"
 
 msgid "Coding:"
-msgstr "Coderen:"
+msgstr "Codering:"
 
 msgid "Confirm"
 msgstr "Bevestigen"
@@ -328,7 +328,7 @@ msgid "Default"
 msgstr "Standaard"
 
 msgid "Default Gamesettings"
-msgstr "Standaardinstelling"
+msgstr "Standaard spel instellingen"
 
 msgid "Default Settings"
 msgstr "Standaardinstellingen"
@@ -349,7 +349,7 @@ msgid "Delete Cover Artwork"
 msgstr "Hoesjes verwijderen"
 
 msgid "Delete Disc Artwork"
-msgstr "DVD labels verwijderen"
+msgstr "Disk labels verwijderen"
 
 msgid "Design:"
 msgstr "Ontwerp:"
@@ -433,13 +433,13 @@ msgid "Download failed."
 msgstr "Download mislukt."
 
 msgid "Download finished"
-msgstr "Downloaden voltooid"
+msgstr "Download voltooid"
 
 msgid "Download request failed."
 msgstr "Download aanvraag mislukt."
 
 msgid "Downloading"
-msgstr "Downloaden..."
+msgstr "Downloaden"
 
 msgid "Downloading Page List:"
 msgstr "Download pagina lijst:"
@@ -491,9 +491,6 @@ msgstr "Bestanden uitpakken..."
 
 msgid "Failed formating"
 msgstr "Formatteren mislukt"
-
-msgid "Failed to extract opening.bnr"
-msgstr "Uitpakken opening.bnr mislukt"
 
 msgid "Failed to extract."
 msgstr "Uitpakken mislukt."
@@ -547,7 +544,7 @@ msgid "Game ID"
 msgstr "Spel ID"
 
 msgid "Game Language"
-msgstr "Taal spel"
+msgstr "Spel Taal"
 
 msgid "Game Load"
 msgstr "Spel opties"
@@ -559,13 +556,13 @@ msgid "Game Size"
 msgstr "Spel grootte"
 
 msgid "Game Sound Mode"
-msgstr ""
+msgstr "Spel Geluid Mode"
 
 msgid "Game Sound Volume"
 msgstr "Spel Geluid Volume"
 
 msgid "Game is already installed:"
-msgstr "Spel is al genstalleerd:"
+msgstr "Spel is al geïnstalleerd:"
 
 msgid "Games"
 msgstr "Spellen"
@@ -651,7 +648,7 @@ msgid "Installing title... Ok!"
 msgstr "Titel installeren... Ok!"
 
 msgid "Installing wad"
-msgstr "Wad installeren..."
+msgstr "Wad installeren"
 
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
 msgstr "Je hebt informatie gevonden die ons kan helpen. Geeft u alstublieft deze info door aan ons ontwikkelingsteam."
@@ -721,7 +718,7 @@ msgid "Locked"
 msgstr "Vergrendeld"
 
 msgid "Loop Sound"
-msgstr ""
+msgstr "Geluid herhalen"
 
 msgid "Mar"
 msgstr "Mrt"
@@ -766,7 +763,7 @@ msgid "No DOL file found on disc."
 msgstr "Geen DOL bestand gevonden op disk."
 
 msgid "No Favorites"
-msgstr "geen favorieten"
+msgstr "Geen favorieten"
 
 msgid "No SD-Card inserted!"
 msgstr "Geen SD kaart gevonden!"
@@ -784,7 +781,7 @@ msgid "No cheats were selected"
 msgstr "Geen cheats geselecteerd"
 
 msgid "No data could be read."
-msgstr "Geen data kon gelezen worden."
+msgstr "Data kon niet gelezen worden."
 
 msgid "No file missing!"
 msgstr "Geen missende bestanden!"
@@ -835,7 +832,7 @@ msgid "Oct"
 msgstr "Okt"
 
 msgid "Official Site:"
-msgstr "Officile site:"
+msgstr "Officiële site:"
 
 msgid "Only Customs"
 msgstr "Enkel Aangepast"
@@ -868,7 +865,7 @@ msgid "Paste it into your browser to get your WiiTDB.zip."
 msgstr "Plak het in je webbrowser om WiiTDB.zip te downloaden."
 
 msgid "Patch Country Strings"
-msgstr "Regios herstellen"
+msgstr "Regio's herstellen"
 
 msgid "Pick from a list"
 msgstr "Kiezen van lijst"
@@ -931,7 +928,7 @@ msgid "SChinese"
 msgstr "SChinees"
 
 msgid "SFX Volume"
-msgstr "Volume effecten"
+msgstr "Volume geluidseffecten"
 
 msgid "Save"
 msgstr "Opslaan"
@@ -985,10 +982,10 @@ msgid "Sound"
 msgstr "Geluid"
 
 msgid "Sound+BGM"
-msgstr ""
+msgstr "Geluid+Achtergrondmuziek"
 
 msgid "Sound+Quiet"
-msgstr ""
+msgstr "Geluid+Stilte"
 
 msgid "Spanish"
 msgstr "Spaans"
@@ -1006,19 +1003,19 @@ msgid "Success:"
 msgstr "Succes:"
 
 msgid "Successfully Saved"
-msgstr "met succes opgeslagen!"
+msgstr "Met succes opgeslagen!"
 
 msgid "Successfully Updated"
-msgstr "met succes geupdate!"
+msgstr "Met succes geupdate!"
 
 msgid "Successfully deleted:"
-msgstr "met succes verwijderd:"
+msgstr "Met succes verwijderd:"
 
 msgid "Successfully extracted theme"
 msgstr "Thema succesvol uitgepakt"
 
 msgid "Successfully installed:"
-msgstr "Met succes genstalleerd:"
+msgstr "Met succes geïnstalleerd:"
 
 msgid "System Default"
 msgstr "Systeem standaard"
@@ -1030,7 +1027,7 @@ msgid "TXT Cheatcodes Path"
 msgstr "Locatie TXT Cheats"
 
 msgid "TXT Cheatcodes Path changed"
-msgstr "Locatie TXTcodes gewijzigd"
+msgstr "Locatie TXT codes gewijzigd"
 
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "De opgegeven map bestaat niet. Wil je deze aanmaken?"
@@ -1043,7 +1040,7 @@ msgstr "Het wad bestand is geinstalleerd, maar kon niet van de SD kaart worden v
 
 #, c-format
 msgid "The wad installation failed with error %ld"
-msgstr "De wad installatie is mislukt met error %ld"
+msgstr "De wad installatie is mislukt met fout %ld"
 
 msgid "Theme Download Path"
 msgstr "Thema download locatie"
@@ -1146,7 +1143,7 @@ msgid "Updating Language Files:"
 msgstr "Taalbestanden updaten:"
 
 msgid "Updating WiiTDB.zip"
-msgstr "WiiTDB.zip updaten..."
+msgstr "WiiTDB.zip updaten"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Geuploade ZIP is geinstalleerd in je homebrew locatie."
@@ -1162,7 +1159,7 @@ msgid "Video Mode"
 msgstr ""
 
 msgid "Waiting for USB Device"
-msgstr "Wachten op USB apparaat…"
+msgstr "Wachten op USB apparaat"
 
 msgid "Waiting..."
 msgstr "Wachten..."
@@ -1277,7 +1274,10 @@ msgid "of"
 msgstr "van"
 
 msgid "seconds left"
-msgstr "seconden over:"
+msgstr "seconden over"
+
+#~ msgid "Failed to extract opening.bnr"
+#~ msgstr "Uitpakken opening.bnr mislukt"
 
 #~ msgid "Homebrew Channel"
 #~ msgstr "Homebrew Kanaal"
@@ -1292,4 +1292,4 @@ msgstr "seconden over:"
 #~ msgstr "Laden..."
 
 #~ msgid "Waiting for your slow USB Device: %i secs..."
-#~ msgstr "Wachten op signaal van USB apparaat: %i sec..."
+#~ msgstr "Wachten op traag USB apparaat: %i sec..."

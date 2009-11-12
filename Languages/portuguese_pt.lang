@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-10 20:23+0100\n"
+"POT-Creation-Date: 2009-11-12 01:27+0100\n"
 "PO-Revision-Date: 2009-10-26 19:13-0000\n"
 "Last-Translator: Sky8000\n"
 "Language-Team: Sky8000 <sky8000@hotmail.com>\n"
@@ -491,9 +491,6 @@ msgstr "Extraindo ficheiros..."
 
 msgid "Failed formating"
 msgstr "Falha ao formatar"
-
-msgid "Failed to extract opening.bnr"
-msgstr "Falha ao extrair o opening.bnr"
 
 msgid "Failed to extract."
 msgstr "Falha ao extrair ficheiros."
@@ -1278,6 +1275,9 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
+
+#~ msgid "Failed to extract opening.bnr"
+#~ msgstr "Falha ao extrair o opening.bnr"
 
 #~ msgid "Homebrew Channel"
 #~ msgstr "Canal Homebrew"

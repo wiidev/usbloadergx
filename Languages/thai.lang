@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# thai.lang - r815
+# thai.lang - r826
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-10 20:23+0100\n"
+"POT-Creation-Date: 2009-11-12 01:27+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Nitro_subzero \n"
 "Language-Team: Nitro_subzero\n"
@@ -201,13 +201,13 @@ msgid "Can't create file"
 msgstr "สร้างไฟล์ไม่ได้"
 
 msgid "Can't decompress LZ77"
-msgstr ""
+msgstr "คลายไฟล์ LZ777 ไม่ได้"
 
 msgid "Can't delete:"
 msgstr "ไม่สามารถลบได้:"
 
 msgid "Can't find disc"
-msgstr ""
+msgstr "หาแผ่นไม่เจอ"
 
 msgid "Cancel"
 msgstr "ยกเลิก"
@@ -492,9 +492,6 @@ msgstr "กำลังขยายไฟล์..."
 msgid "Failed formating"
 msgstr "ฟอร์แมตไม่ได้"
 
-msgid "Failed to extract opening.bnr"
-msgstr ""
-
 msgid "Failed to extract."
 msgstr "ขยายไฟล์ไม่ได้"
 
@@ -559,10 +556,10 @@ msgid "Game Size"
 msgstr "ขนาดของเกมส์"
 
 msgid "Game Sound Mode"
-msgstr ""
+msgstr "โหมดเสียงในเกมส์"
 
 msgid "Game Sound Volume"
-msgstr ""
+msgstr "ระดับเสียงในเกมส์"
 
 msgid "Game is already installed:"
 msgstr "เกมส์นี้ถูกติดตั้งอยู่แล้ว:"
@@ -595,10 +592,10 @@ msgid "How to Shutdown?"
 msgstr "ต้องการปิดแบบไหน ?"
 
 msgid "IMD5 Header not right."
-msgstr ""
+msgstr "ส่วนขยายไฟล์ผิดพลาด"
 
 msgid "IMET Header wrong."
-msgstr ""
+msgstr "ส่วนขยายไฟล์ผิดพลาด"
 
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
 msgstr "ถ้าไม่มี Wifi กด 1 เพื่อแสดง URL สำหรับดาวน์โหลด WiiTDB.zip"
@@ -721,7 +718,7 @@ msgid "Locked"
 msgstr "ล๊อค"
 
 msgid "Loop Sound"
-msgstr ""
+msgstr "เล่นเสียงซ้ำ"
 
 msgid "Mar"
 msgstr "มีค."
@@ -985,10 +982,10 @@ msgid "Sound"
 msgstr "เสียง"
 
 msgid "Sound+BGM"
-msgstr ""
+msgstr "เสียง+BGM"
 
 msgid "Sound+Quiet"
-msgstr ""
+msgstr "เสียง+เงียบ"
 
 msgid "Spanish"
 msgstr "สเปน"
@@ -1278,6 +1275,9 @@ msgstr "จาก"
 
 msgid "seconds left"
 msgstr "วินาทีที่เหลือ"
+
+#~ msgid "Failed to extract opening.bnr"
+#~ msgstr "แตกไฟล์ opening.bnr ไม่ได้"
 
 #~ msgid "You need to start this game one time to create a save file, then exit and start it again."
 #~ msgstr "คุณต้องเริ่มโหลดเกมส์นี้ใหม่ เพื่อสร้างไฟล์เซฟ ดังนั้นออกจากเกมส์แล้วเริ่มโหลดอีกครั้ง"

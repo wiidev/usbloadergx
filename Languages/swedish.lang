@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-10 20:23+0100\n"
+"POT-Creation-Date: 2009-11-12 01:27+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -491,9 +491,6 @@ msgstr ""
 
 msgid "Failed formating"
 msgstr "Formatering misslyckad"
-
-msgid "Failed to extract opening.bnr"
-msgstr ""
 
 msgid "Failed to extract."
 msgstr ""

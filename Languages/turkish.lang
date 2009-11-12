@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# turkish.lang - r823
+# turkish.lang - r826
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-10 20:23+0100\n"
+"POT-Creation-Date: 2009-11-12 01:27+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: omercigingelini\n"
 "Language-Team: omercigingelini\n"
@@ -492,9 +492,6 @@ msgstr "Dosyalar çıkarılıyor..."
 msgid "Failed formating"
 msgstr "Biçimlendirme başarısız"
 
-msgid "Failed to extract opening.bnr"
-msgstr "opening.bnr çıkartılamadı"
-
 msgid "Failed to extract."
 msgstr "Çıkartma başarısız"
 
@@ -559,7 +556,7 @@ msgid "Game Size"
 msgstr "Oyun Boyutu"
 
 msgid "Game Sound Mode"
-msgstr ""
+msgstr "Oyun Ses Modu"
 
 msgid "Game Sound Volume"
 msgstr "Oyun Ses Düzeyi"
@@ -721,7 +718,7 @@ msgid "Locked"
 msgstr "Kilitlendi"
 
 msgid "Loop Sound"
-msgstr ""
+msgstr "Döngüdeki Ses"
 
 msgid "Mar"
 msgstr ""
@@ -985,10 +982,10 @@ msgid "Sound"
 msgstr "Ses"
 
 msgid "Sound+BGM"
-msgstr ""
+msgstr "Ses+BGM"
 
 msgid "Sound+Quiet"
-msgstr ""
+msgstr "Ses+Quiet"
 
 msgid "Spanish"
 msgstr "Ispanyolca"
@@ -1278,6 +1275,9 @@ msgstr "./"
 
 msgid "seconds left"
 msgstr "saniye kaldı"
+
+#~ msgid "Failed to extract opening.bnr"
+#~ msgstr "opening.bnr çıkartılamadı"
 
 #~ msgid "Homebrew Channel"
 #~ msgstr "Homebrew Kanalı"
