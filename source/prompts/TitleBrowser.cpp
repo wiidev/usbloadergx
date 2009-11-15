@@ -25,6 +25,7 @@
 #include "xml/xml.h"
 #include "../wad/title.h"
 #include "../usbloader/getentries.h"
+#include "../usbloader/utils.h"
 
 #define typei 0x00010001
 
@@ -420,10 +421,10 @@ int TitleBrowser(u32 type) {
 				snprintf(filepath, sizeof(filepath), "%s/wad/tmp.tmp", bootDevice);
 				
 
-                if (infilesize < MBSIZE)
-                    snprintf(filesizetxt, sizeof(filesizetxt), tr("Incoming file %0.2fKB"), infilesize/KBSIZE);
+                if (infilesize < MB_SIZE)
+                    snprintf(filesizetxt, sizeof(filesizetxt), tr("Incoming file %0.2fKB"), infilesize/KB_SIZE);
                 else
-                    snprintf(filesizetxt, sizeof(filesizetxt), tr("Incoming file %0.2fMB"), infilesize/MBSIZE);
+                    snprintf(filesizetxt, sizeof(filesizetxt), tr("Incoming file %0.2fMB"), infilesize/MB_SIZE);
 
                 snprintf(temp, sizeof(temp), tr("Load file from: %s ?"), GetIncommingIP());
 

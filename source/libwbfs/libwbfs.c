@@ -637,3 +637,57 @@ error:
 
 	return tot * (((p->wbfs_sec_sz*1.0) / p->hd_sec_sz) * 512);
 }
+
+u32 wbfs_size_disc(wbfs_t*p,read_wiidisc_callback_t read_src_wii_disc,
+                  void *callback_data,partition_selector_t sel,
+				  u32 *comp_size, u32 *real_size)
+{
+        int i;
+        u32 tot = 0, last = 0;
+        u32 wii_sec_per_wbfs_sect = 1<<(p->wbfs_sec_sz_s-p->wii_sec_sz_s);
+        wiidisc_t *d = 0;
+        u8 *used = 0;
+        used = wbfs_malloc(p->n_wii_sec_per_disc);
+        if(!used)
+                ERROR("unable to alloc memory");
+		d = wd_open_disc(read_src_wii_disc,callback_data);
+		if(!d)
+				ERROR("unable to open wii disc");
+		wd_build_disc_usage(d,sel,used);
+		wd_close_disc(d);
+		d = 0;
+
+		// count total number to write for spinner
+		for(i=0; i<p->n_wbfs_sec_per_disc;i++) {
+			if(block_used(used,i,wii_sec_per_wbfs_sect)) {
+				tot += wii_sec_per_wbfs_sect;
+				last = i * wii_sec_per_wbfs_sect;
+			}
+		}
+
+error:
+        if(d)
+                wd_close_disc(d);
+        if(used)
+                wbfs_free(used);
+
+		*comp_size = tot;
+		*real_size = last;
+        
+        return 0;
+}
+
+// trim the file-system to its minimum size
+u32 wbfs_trim(wbfs_t*p)
+{
+        u32 maxbl;
+        load_freeblocks(p);
+        maxbl = alloc_block(p);
+        p->n_hd_sec = maxbl<<(p->wbfs_sec_sz_s-p->hd_sec_sz_s);
+        p->head->n_hd_sec = wbfs_htonl(p->n_hd_sec);
+        // make all block full
+        memset(p->freeblks,0,p->n_wbfs_sec/8);
+        wbfs_sync(p);
+        // os layer will truncate the file.
+        return maxbl;
+}

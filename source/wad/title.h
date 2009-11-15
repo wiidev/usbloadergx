@@ -8,8 +8,8 @@ Copyright (C) 2008 tona and/or waninkoko
 #include <ogcsys.h>
 #include <string.h>
 #include <stdio.h>
-#include <fat.h>
 #include <malloc.h>
+#include <fat.h>
 
 // Turn upper and lower into a full title ID
 #define TITLE_ID(x,y)		(((u64)(x) << 32) | (y))

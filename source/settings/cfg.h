@@ -393,6 +393,7 @@ extern "C" {
 		u8		gameDisplay;
 		u8      patchcountrystrings;
 		u8      screensaver;
+		u8		partition;
 		short	godmode;
 		char	covers_path[100];
 		char	covers2d_path[100];

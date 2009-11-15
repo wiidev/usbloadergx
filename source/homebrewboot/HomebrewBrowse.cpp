@@ -26,6 +26,7 @@
 #include "settings/cfg.h"
 #include "unzip/unzip.h"
 #include "unzip/miniunz.h"
+#include "usbloader/utils.h"
 
 /*** Extern functions ***/
 extern void ResumeGui();
@@ -785,10 +786,10 @@ int MenuHomebrewBrowse() {
                 char filesizetxt[50];
                 char temp[50];
 
-                if (infilesize < MBSIZE)
-                    snprintf(filesizetxt, sizeof(filesizetxt), tr("Incoming file %0.2fKB"), infilesize/KBSIZE);
+                if (infilesize < MB_SIZE)
+                    snprintf(filesizetxt, sizeof(filesizetxt), tr("Incoming file %0.2fKB"), infilesize/KB_SIZE);
                 else
-                    snprintf(filesizetxt, sizeof(filesizetxt), tr("Incoming file %0.2fMB"), infilesize/MBSIZE);
+                    snprintf(filesizetxt, sizeof(filesizetxt), tr("Incoming file %0.2fMB"), infilesize/MB_SIZE);
 
                 snprintf(temp, sizeof(temp), tr("Load file from: %s ?"), GetIncommingIP());
 

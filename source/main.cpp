@@ -36,6 +36,8 @@
 #include "fat.h"
 #include "gecko.h"
 #include "svnrev.h"
+#include "usbloader/partition.h"
+#include "usbloader/usbstorage.h"
 
 extern bool geckoinit;
 
@@ -47,6 +49,7 @@ extern bool geckoinit;
 
 FreeTypeGX *fontSystem=0;
 FreeTypeGX *fontClock=0;
+PartList partitions;
 
 static void BootUpProblems()
 {
@@ -152,27 +155,24 @@ main(int argc, char *argv[]) {
 	
     USBDevice_Init();// seems enough to wake up some HDDs if they are in sleep mode when the loader starts (tested with WD MyPassport Essential 2.5")
 	 
-    ret = IOS_ReloadIOS(249);
-
+    ret = IOS_ReloadIOS(222);
+	
     if (ret < 0) {
-        ret = IOS_ReloadIOS(222);
-		SDCard_Init(); 
-        load_ehc_module();
-		SDCard_deInit();
-        if(ret <0) {
+        ret = IOS_ReloadIOS(249);
+        if(ret < 0) {
             printf("\n\tERROR: cIOS could not be loaded!\n");
             sleep(5);
             SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
         }
     }
+	SDCard_Init(); 
+	load_ehc_module();
+	SDCard_deInit();
 	
     ret = WBFS_Init(WBFS_DEVICE_USB);
 
     if (ret < 0) {
-        ret = IOS_ReloadIOS(222);
-		SDCard_Init(); 
-        load_ehc_module();
-		SDCard_deInit();
+        ret = IOS_ReloadIOS(249);
         if(ret < 0) {
             InitVideo(); // Initialise video
             Menu_Render();
@@ -209,10 +209,11 @@ main(int argc, char *argv[]) {
     CFG_Load();
 	gprintf("\n\tbootDevice = %s",bootDevice);
 
-    /* Load Custom IOS */
+    /* Load Custom IOS */	
     if (Settings.cios == ios222 && IOS_GetVersion() != 222) {
         SDCard_deInit();// unmount SD for reloading IOS
         USBDevice_deInit();// unmount USB for reloading IOS
+		USBStorage_Deinit();
         ret = IOS_ReloadIOS(222);
 		SDCard_Init();
         load_ehc_module();
@@ -223,9 +224,11 @@ main(int argc, char *argv[]) {
         }
         SDCard_Init(); // now mount SD:/
         USBDevice_Init(); // and mount USB:/
+		WBFS_Init(WBFS_DEVICE_USB);
     } else if (Settings.cios == ios249 && IOS_GetVersion() != 249) {
         SDCard_deInit();// unmount SD for reloading IOS
         USBDevice_deInit();// unmount USB for reloading IOS
+		USBStorage_Deinit();
         ret = IOS_ReloadIOS(249);
         if (ret < 0) {
             Settings.cios = ios222;
@@ -235,7 +238,10 @@ main(int argc, char *argv[]) {
         }
         SDCard_Init(); // now mount SD:/
         USBDevice_Init(); // and mount USB:/
+		WBFS_Init(WBFS_DEVICE_USB);
 	}
+
+//	Partition_GetList(&partitions);
 
     if (ret < 0) {
         printf("ERROR: cIOS could not be loaded!");

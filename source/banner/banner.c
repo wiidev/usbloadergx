@@ -112,7 +112,7 @@ s32 dump_banner(const u8* discid,const char * dest)
     WDVD_ClosePartition();
 	//fatInitDefault();
 	//SDCard_Init();
-	WDVD_SetUSBMode(NULL);
+	WDVD_SetUSBMode(NULL, 0);
 	FILE *fp = fopen(dest, "wb");
 	if(fp)
 	{

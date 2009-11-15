@@ -306,7 +306,7 @@ s32 WDVD_DisableReset(u8 val) {
 }
 
 /** Hermes **/
-s32 WDVD_SetUSBMode(const u8 *id) {
+s32 WDVD_SetUSBMode(const u8 *id, s32 partition) {
     s32 ret;
 
     memset(inbuf, 0, sizeof(inbuf));
@@ -315,10 +315,12 @@ s32 WDVD_SetUSBMode(const u8 *id) {
     inbuf[0] = IOCTL_DI_SETUSBMODE << 24;
     inbuf[1] = (id) ? 1 : 0;
 
-
     /* Copy ID */
     if (id) {
         memcpy(&inbuf[2], id, 6);
+		if (IOS_GetVersion() != 249) {
+			inbuf[5] = partition;
+		}
     }
 
     ret = IOS_Ioctl(di_fd, IOCTL_DI_SETUSBMODE, inbuf, sizeof(inbuf), outbuf, sizeof(outbuf));

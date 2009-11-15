@@ -33,7 +33,6 @@ class GuiGameCarousel : public GuiElement
 
 		int * gameIndex;
 		GuiButton ** game;
-		GuiTooltip ** titleTT;
 		GuiImageAsync ** coverImg;
 
 		GuiText * gamename;

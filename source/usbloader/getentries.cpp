@@ -469,6 +469,7 @@ int __Menu_GetGameList(int t, wchar_t* gameFilter, discHdr ** PgameList, u32 *Pg
         if (buffer) free(buffer);
         return ret;
     }
+	
     for (u32 i = 0; i < cnt; i++) {
 		struct discHdr *header = &buffer[i];
 

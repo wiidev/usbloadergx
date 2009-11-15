@@ -216,7 +216,7 @@ u32 Load_Dol_from_disc(u32 doloffset, u8 videoSelected, u8 patchcountrystring, u
     void *offset;
     u32 pos;
     u32 len;
-
+	
     while (load_dol_image_modified(&offset, &pos, &len)) {
         if (len != 0) {
             ret = WDVD_Read(offset, len, (doloffset<<2) + pos);

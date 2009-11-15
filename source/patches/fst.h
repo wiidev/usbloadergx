@@ -27,6 +27,8 @@ extern "C"
 {
 #endif
 
+#define MAX_GCT_SIZE 2056
+
 //u32 do_fst(u32 fstlocation);
 u32 do_sd_code(char *filename);
 

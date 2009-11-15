@@ -22,6 +22,9 @@
 static u32 *buffer = (u32 *)0x93000000;
 static u8  *diskid = (u8  *)Disc_ID;
 
+extern int wbfs_part_fat;
+extern u32 wbfs_part_idx;
+extern u32 wbfs_part_lba;
 
 void __Disc_SetLowMem(void) {
 
@@ -235,8 +238,15 @@ s32 Disc_Wait(void) {
 }
 
 s32 Disc_SetUSB(const u8 *id) {
+	u32 part = 0;
+	if (wbfs_part_fat) {
+		part = wbfs_part_lba;
+	} else {
+		part = wbfs_part_idx ? wbfs_part_idx - 1 : 0;
+	}
+
     /* Set USB mode */
-    return WDVD_SetUSBMode(id);
+    return WDVD_SetUSBMode(id, part);
 }
 
 s32 Disc_ReadHeader(void *outbuf) {

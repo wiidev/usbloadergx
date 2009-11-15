@@ -219,6 +219,16 @@ float wbfs_estimate_disc(
 		void *callback_data,
 		partition_selector_t sel);
 
+// compressed and real size
+u32 wbfs_size_disc(wbfs_t*p,read_wiidisc_callback_t read_src_wii_disc,
+                  void *callback_data,partition_selector_t sel,
+				  u32 *comp_size, u32 *real_size);
+
+/*! trim the file-system to its minimum size
+  This allows to use wbfs as a wiidisc container
+ */
+u32 wbfs_trim(wbfs_t*p);
+
 #ifdef __cplusplus
    }
 #endif /* __cplusplus */

@@ -16,7 +16,7 @@
 */
 
 #include "mload.h"
-#include "ehcmodule.h"
+#include "ehcmodule_fat_bin.h"
 #include "dip_plugin.h"
 #include <malloc.h>
 
@@ -549,7 +549,7 @@ int load_ehc_module()
 	if(!external_ehcmodule)
 		{
 		if(mload_init()<0) return -1;
-		mload_elf((void *) ehcmodule, &my_data_elf);
+		mload_elf((void *) ehcmodule_fat_bin, &my_data_elf);
 		thread_id = mload_run_thread(my_data_elf.start, my_data_elf.stack, my_data_elf.size_stack, my_data_elf.prio);
 		if(thread_id < 0) return -1;
 		}

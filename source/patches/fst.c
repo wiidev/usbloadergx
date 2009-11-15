@@ -37,6 +37,9 @@
 
 extern struct SSettings Settings;
 
+// Pre-allocate the buffer size for ocarina codes
+u8 filebuff[MAX_GCT_SIZE];
+
 u32 do_sd_code(char *filename)
 {
 	FILE *fp;
@@ -73,28 +76,17 @@ u32 do_sd_code(char *filename)
 	}
 	fseek(fp, 0, SEEK_SET);
 
-	filebuff = (u8*) malloc (filesize);
-	if(filebuff == 0){
-		fclose(fp);
-		sleep(2);
-        USBDevice_deInit();
-        SDCard_deInit();
-		return 0;
-	}
-
-	ret = fread(filebuff, 1, filesize, fp);
+	ret = fread(&filebuff, 1, filesize, fp);
 	if(ret != filesize){
-		free(filebuff);
 		fclose(fp);
         USBDevice_deInit();
         SDCard_deInit();
 		return 0;
 	}
 
-    memcpy((void*)0x800027E8,filebuff,filesize);
+    memcpy((void*)0x800027E8, &filebuff,filesize);
     *(vu8*)0x80001807 = 0x01;
 
-	free(filebuff);
 	fclose(fp);
 
 	USBDevice_deInit();

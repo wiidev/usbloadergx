@@ -14,6 +14,9 @@
 #include "sys.h"
 #include "wpad.h"
 
+extern char game_partition[6];
+extern bool load_from_fat;
+
 //Wiilight stuff
 static vu32 *_wiilight_reg = (u32*)0xCD0000C0;
 void wiilight(int enable) {             // Toggle wiilight (thanks Bool for wiilight source)
@@ -60,6 +63,49 @@ void Sys_Reboot(void) {
     /* Restart console */
     _ExitApp();
     STM_RebootSystem();
+}
+
+int Sys_ChangeIos(int ios) {
+	s32 prevIos = IOS_GetVersion();
+	
+	SDCard_deInit();
+	USBDevice_deInit();
+	
+	WPAD_Flush(0);
+	WPAD_Disconnect(0);
+	WPAD_Shutdown();
+	
+	WDVD_Close();
+	
+	USBStorage_Deinit();
+	
+	s32 ret = IOS_ReloadIOS(ios);
+	if (ret < 0) {
+		ios = prevIos;
+	}
+	
+	SDCard_Init();
+
+	if (ios == 222 || ios == 223) {
+		load_ehc_module();
+	}
+	USBDevice_Init();
+
+    PAD_Init();
+    Wpad_Init();
+    WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
+    WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
+
+	WBFS_Init(WBFS_DEVICE_USB);
+	Disc_Init();
+	
+	if (load_from_fat && (ios == 222 || ios == 223)) {
+		WBFS_OpenNamed((char *) &game_partition);
+	} else { 
+		WBFS_Open();
+	}
+	
+	return ret;
 }
 
 int Sys_IosReload(int IOS) {
@@ -155,4 +201,8 @@ void Sys_BackToLoader(void) {
     }
     // Channel Version
     Sys_LoadMenu();
+}
+
+bool Sys_IsHermes() {
+	return IOS_GetVersion() == 222 || IOS_GetVersion() == 223;
 }

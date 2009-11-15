@@ -129,7 +129,7 @@ const u8 *LoadBannerSound(const u8 *discid, u32 *size)
         return NULL;
 
  	Disc_SetUSB(NULL);
-	wbfs_disc_t *disc = wbfs_open_disc(GetHddInfo(), (u8 *) discid);
+	wbfs_disc_t *disc = WBFS_OpenDisc((u8 *) discid);
 	if(!disc)
 	{
         WindowPrompt(tr("Can't find disc"), 0, tr("OK"));
@@ -150,7 +150,7 @@ const u8 *LoadBannerSound(const u8 *discid, u32 *size)
 	}
 
 	wd_close_disc(wdisc);
-	wbfs_close_disc(disc);
+	WBFS_CloseDisc(disc);
 
 	const U8Entry *fst;
 

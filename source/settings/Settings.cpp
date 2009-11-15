@@ -17,6 +17,8 @@
 #include "listfiles.h"
 #include "sys.h"
 #include "cfg.h"
+#include "usbloader/partition.h"
+#include "usbloader/utils.h"
 
 #define MAXOPTIONS 13
 
@@ -36,7 +38,9 @@ extern u8 shutdown;
 extern u8 reset;
 extern u8 mountMethod;
 extern struct discHdr *dvdheader;
-
+extern PartList partitions;
+extern char game_partition[6];
+extern bool load_from_fat;
 
 static const char *opts_no_yes[settings_off_on_max] = {trNOOP("No"),trNOOP("Yes") };
 static const char *opts_off_on[settings_off_on_max] = {trNOOP("OFF"),trNOOP("ON") };
@@ -45,6 +49,14 @@ static const char *opts_language[settings_language_max] = {trNOOP("Console Defau
 static const char *opts_cios[settings_ios_max] = {"IOS 249","IOS 222", "IOS 223"};
 static const char *opts_parentalcontrol[5] = {trNOOP("0 (Everyone)"),trNOOP("1 (Child 7+)"),trNOOP("2 (Teen 12+)"),trNOOP("3 (Mature 16+)"),trNOOP("4 (Adults Only 18+)")};
 static const char *opts_error002[settings_error002_max] = {trNOOP("No"),trNOOP("Yes"),trNOOP("Anti")};
+
+bool IsValidPartition(int fs_type, int cios) {
+	if (cios == 249) {
+		return fs_type == FS_TYPE_WBFS;
+	} else {
+		return fs_type == FS_TYPE_WBFS || fs_type == FS_TYPE_FAT32;
+	}
+}
 
 /****************************************************************************
  * MenuSettings
@@ -968,9 +980,30 @@ int MenuSettings()
 								if(ret == Idx && Settings.godmode == 1 && ++Settings.cios >= settings_cios_max)
 									Settings.cios = 0;
 								if (Settings.godmode == 1)
-									options2.SetValue(Idx,"%s", opts_cios[Settings.cios]);
+									options2.SetValue(Idx, "%s", opts_cios[Settings.cios]);
 								else
 									options2.SetValue(Idx, "********");
+							}
+							
+							if (ret == ++Idx || firstRun)
+							{
+								if (firstRun) options2.SetName(Idx, "%s", tr("Partition"));
+								if (ret == Idx) {
+									// Select the next valid partition, even if that's the same one
+									do
+									{
+										Settings.partition = Settings.partition + 1 == partitions.num ? 0 : Settings.partition + 1;
+									}
+									while (!IsValidPartition(partitions.pinfo[Settings.partition].fs_type, Settings.cios));
+								}
+								
+								PartInfo pInfo = partitions.pinfo[Settings.partition];
+								f32 partition_size = partitions.pentry[Settings.partition].size * (partitions.sector_size / GB_SIZE);
+								
+								// Get the partition name and it's size in GB's
+								options2.SetValue(Idx,"%s%d (%.2fGB)",	pInfo.fs_type == FS_TYPE_FAT32 ? "FAT" : "WBFS", 
+															            pInfo.fs_type == FS_TYPE_FAT32 ? pInfo.fat_i : pInfo.wbfs_i,
+																		partition_size);
 							}
 
 							if(ret == ++Idx || firstRun)
@@ -2016,6 +2049,12 @@ int MenuSettings()
 	if (opt_override != opt_overridenew && Settings.titlesOverride==0)
 		titles_default();
 
+	// Reinitialize WBFS partition, it might have changed
+	PartInfo pinfo = partitions.pinfo[Settings.partition];
+	load_from_fat = pinfo.fs_type == FS_TYPE_FAT32;
+	WBFS_Close();
+	WBFS_OpenPart(load_from_fat, Settings.partition, partitions.pentry[Settings.partition].sector, partitions.pentry[Settings.partition].size, (char *) &game_partition);
+
 	HaltGui();
 
 	mainWindow->RemoveAll();
@@ -2037,9 +2076,6 @@ int GameSettings(struct discHdr * header)
 	bool exit = false;
 
 	int retVal = 0;
-
-
-
 
 	GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
 	// because destroy GuiSound must wait while sound playing is finished, we use a global sound

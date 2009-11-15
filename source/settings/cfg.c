@@ -24,7 +24,7 @@ u8 videoChoice = 0;
 u8 faveChoice = no;
 u8 languageChoice = 0;
 u8 viChoice = 0;
-u8 iosChoice = 0;
+u8 iosChoice = 1; // Default IOS is 222 from now on
 u8 parentalcontrolChoice = 0;
 u8 fix002 = 0;
 u8 reloadblock = 0;
@@ -40,6 +40,7 @@ u8 keyset = 0;
 u8 favoritevar = 0;
 u16 playcount = 0;
 u8 listDisplay = 0;
+u8 partition = -1;
 char alternatedname[40];
 
 #define TITLE_MAX 200
@@ -339,7 +340,7 @@ void Global_Default(void) {
     Settings.godmode = 1;
     Settings.gamesound = 1;
     Settings.parentalcontrol = 0;
-    Settings.cios = ios249;
+    Settings.cios = ios222;
     Settings.xflip = no;
     Settings.qboot = no;
     Settings.wiilight = 1;
@@ -353,6 +354,7 @@ void Global_Default(void) {
     snprintf(Settings.db_language, sizeof(Settings.db_language), empty);
     Settings.db_JPtoEN = 0;
     Settings.screensaver = 3;
+	Settings.partition = -1;
 }
 
 
@@ -1035,7 +1037,13 @@ void global_cfg_set(char *name, char *val) {
             Settings.screensaver = i;
         }
         return;
-    }
+    } else if (strcmp(name, "partition") == 0) {
+		int i;
+		if (sscanf(val, "%d", &i) == 1) {
+			Settings.partition = i;
+		}
+		return;
+	}
 
     cfg_bool("godmode", &Settings.godmode);
 
@@ -1278,6 +1286,7 @@ bool cfg_save_global() { // save global settings
     fprintf(f, "error002 = %d\n ", Settings.error002);
     fprintf(f, "autonetwork = %d\n ", Settings.autonetwork);
     fprintf(f, "discart = %d\n ", Settings.discart);
+	fprintf(f, "partition = %d\n", Settings.partition);
     fclose(f);
     return true;
 }
@@ -1609,6 +1618,7 @@ bool cfg_load_global() {
     Settings.gamesoundvolume = 80;
 
     Settings.titlesOverride = 1;
+	Settings.partition = -1;
     char * empty = "";
     snprintf(Settings.db_url, sizeof(Settings.db_url), empty);
     snprintf(Settings.db_language, sizeof(Settings.db_language), empty);

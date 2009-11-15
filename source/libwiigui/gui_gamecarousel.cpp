@@ -115,7 +115,6 @@ noCover(nocover_png)
 
 	gameIndex	= new int[pagesize];
 	game		= new GuiButton * [pagesize];
-	titleTT		= new GuiTooltip * [pagesize];
 	coverImg	= new GuiImageAsync * [pagesize];
 
 	for(int i=0; i < pagesize; i++)
@@ -124,11 +123,6 @@ noCover(nocover_png)
 		// Index
 		//------------------------
 		gameIndex[i] = GetGameIndex(i, listOffset, gameCnt);
-
-		//------------------------
-		// Tooltip
-		//------------------------
-		titleTT[i] = new GuiTooltip(get_title(&gameList[gameIndex[i]]), THEME.tooltipAlpha);
 
 		//------------------------
 		// Image
@@ -152,20 +146,6 @@ noCover(nocover_png)
 		game[i]->SetSoundClick(btnSoundClick);
 		game[i]->SetClickable(true);
 		game[i]->SetEffect(EFFECT_GOROUND, IN_SPEED,  90-(pagesize-2*i-1)*DEG_OFFSET/2, RADIUS, 180, 1, 0, RADIUS);
-		switch((i*3)/pagesize)
-		{
-			case 0:
-				game[i]->SetToolTip(titleTT[i], 122/2, -244/4, ALIGN_LEFT, ALIGN_MIDDLE);
-				break;
-			case 1:
-				game[i]->SetToolTip(titleTT[i], 0, -244/4, ALIGN_CENTRE, ALIGN_MIDDLE);
-				break;
-			case 2:
-				game[i]->SetToolTip(titleTT[i], -122/2, -244/4, ALIGN_RIGHT, ALIGN_MIDDLE);
-				break;
-			default:
-				break;
-		}		
 	}
 }
 
@@ -193,7 +173,6 @@ GuiGameCarousel::~GuiGameCarousel()
 
 	for(int i=0; i<pagesize; i++) {
 		delete coverImg[i];
-		delete titleTT[i];
 		delete game[i];
 	}
 	delete [] gameIndex;
@@ -407,25 +386,20 @@ void GuiGameCarousel::Update(GuiTrigger * t)
 		if(speed > 0) // rotate right
 		{
 			GuiButton *tmpButton;
-			GuiTooltip *tmpTT;
 			listOffset = OFFSETLIMIT(listOffset - 1, gameCnt); // set the new listOffset
 			// Save right Button + TollTip and destroy right Image + Image-Data 
 			delete coverImg[pagesize-1]; coverImg[pagesize-1] = NULL;game[pagesize-1]->SetImage(NULL);
 			tmpButton	= game[pagesize-1];
-			tmpTT		= titleTT[pagesize-1];
 			
 			// Move all Page-Entries one step right
 			for (int i=pagesize-1; i>=1; i--)
 			{
-				titleTT[i]		= titleTT[i-1];
 				coverImg[i]		= coverImg[i-1];
 				game[i]			= game[i-1];
 				gameIndex[i]	= gameIndex[i-1];
 			}
 			// set saved Button & gameIndex to right
 			gameIndex[0]		= listOffset;
-			titleTT[0]			= tmpTT;
-			titleTT[0]			->SetText(get_title(&gameList[gameIndex[0]]));
 			coverImg[0]			= new GuiImageAsync(GameCarouselLoadCoverImage, &gameList[gameIndex[0]], sizeof(struct discHdr), &noCover);
 			coverImg[0]			->SetWidescreen(CFG.widescreen);
 
@@ -439,38 +413,19 @@ void GuiGameCarousel::Update(GuiTrigger * t)
 				game[i]->ResetState();
 				game[i]->SetEffect(EFFECT_GOROUND, speed, DEG_OFFSET, RADIUS, 270-(pagesize-2*i+1)*DEG_OFFSET/2, 1, 0, RADIUS);
 				game[i]->UpdateEffects(); // rotate one step for liquid scrolling
-
-				// Set Tooltip-Position
-				switch((i*3)/pagesize)
-				{
-					case 0:
-						game[i]->SetToolTip(titleTT[i], 122/4, -244/4, ALIGN_LEFT, ALIGN_MIDDLE);
-						break;
-					case 1:
-						game[i]->SetToolTip(titleTT[i], 0, -244/4, ALIGN_CENTRE, ALIGN_MIDDLE);
-						break;
-					case 2:
-						game[i]->SetToolTip(titleTT[i], -122/4, -244/4, ALIGN_RIGHT, ALIGN_MIDDLE);
-						break;
-					default:
-						break;
-				}		
 			}
 		}
 		else if(speed < 0) // rotate left
 		{
 			GuiButton *tmpButton;
-			GuiTooltip *tmpTT;
 			listOffset = OFFSETLIMIT(listOffset + 1, gameCnt); // set the new listOffset
 			// Save left Button + TollTip and destroy left Image + Image-Data 
 			delete coverImg[0]; coverImg[0] = NULL;game[0]->SetImage(NULL);
 			tmpButton	= game[0];
-			tmpTT		= titleTT[0];
 			
 			// Move all Page-Entries one step left
 			for (int i=0; i<(pagesize-1); i++)
 			{
-				titleTT[i]		= titleTT[i+1];
 				coverImg[i]		= coverImg[i+1];
 				game[i]			= game[i+1];
 				gameIndex[i]	= gameIndex[i+1];
@@ -478,8 +433,6 @@ void GuiGameCarousel::Update(GuiTrigger * t)
 			// set saved Button & gameIndex to right
 			int ii = pagesize-1;
 			gameIndex[ii]		= OFFSETLIMIT(listOffset + ii, gameCnt);
-			titleTT[ii]			= tmpTT;
-			titleTT[ii]			->SetText(get_title(&gameList[gameIndex[ii]]));
 			coverImg[ii]		= new GuiImageAsync(GameCarouselLoadCoverImage, &gameList[gameIndex[ii]], sizeof(struct discHdr), &noCover);
 			coverImg[ii]		->SetWidescreen(CFG.widescreen);
 
@@ -493,22 +446,6 @@ void GuiGameCarousel::Update(GuiTrigger * t)
 				game[i]->ResetState();
 				game[i]->SetEffect(EFFECT_GOROUND, speed, DEG_OFFSET, RADIUS, 270-(pagesize-2*i-3)*DEG_OFFSET/2, 1, 0, RADIUS);
 				game[i]->UpdateEffects(); // rotate one step for liquid scrolling
-
-				// Set Tooltip-Position
-				switch((i*3)/pagesize)
-				{
-					case 0:
-						game[i]->SetToolTip(titleTT[i], 122/4, -244/4, ALIGN_LEFT, ALIGN_MIDDLE);
-						break;
-					case 1:
-						game[i]->SetToolTip(titleTT[i], 0, -244/4, ALIGN_CENTRE, ALIGN_MIDDLE);
-						break;
-					case 2:
-						game[i]->SetToolTip(titleTT[i], -122/4, -244/4, ALIGN_RIGHT, ALIGN_MIDDLE);
-						break;
-					default:
-						break;
-				}		
 			}
 		}
 

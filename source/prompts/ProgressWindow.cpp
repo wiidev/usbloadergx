@@ -16,6 +16,7 @@
 #include "libwiigui/gui.h"
 #include "prompts/ProgressWindow.h"
 #include "usbloader/wbfs.h"
+#include "usbloader/utils.h"
 
 /*** Variables used only in this file ***/
 static lwp_t progressthread = LWP_THREAD_NULL;
@@ -73,7 +74,7 @@ static void GameInstallProgress() {
 
     //Calculate speed in MB/s
     if (elapsed > 0)
-        speed = KBSIZE * gamesize * gameinstalldone/(gameinstalltotal*elapsed);
+        speed = KB_SIZE * gamesize * gameinstalldone/(gameinstalltotal*elapsed);
 
     if (gameinstalldone != gameinstalltotal) {
         //Expected time
@@ -356,7 +357,7 @@ void ShowProgress(const char *title, const char *msg1, char *dynmsg2, f32 done, 
 
         //Calculate speed in KB/s
         if (elapsed > 0)
-            speed = done/(elapsed*KBSIZE);
+            speed = done/(elapsed*KB_SIZE);
 
         if (done != total) {
             //Expected time
@@ -376,12 +377,12 @@ void ShowProgress(const char *title, const char *msg1, char *dynmsg2, f32 done, 
     }
 
     if (swSize == true) {
-        if (total < MBSIZE)
-            snprintf(progressSizeLeft, sizeof(progressSizeLeft), "%0.2fKB/%0.2fKB", done * done/total / KBSIZE, total/KBSIZE);
-        else if (total > MBSIZE && total < GBSIZE)
-            snprintf(progressSizeLeft, sizeof(progressSizeLeft), "%0.2fMB/%0.2fMB", done * done/total / MBSIZE, total/MBSIZE);
+        if (total < MB_SIZE)
+            snprintf(progressSizeLeft, sizeof(progressSizeLeft), "%0.2fKB/%0.2fKB", done * done/total / KB_SIZE, total/KB_SIZE);
+        else if (total > MB_SIZE && total < GB_SIZE)
+            snprintf(progressSizeLeft, sizeof(progressSizeLeft), "%0.2fMB/%0.2fMB", done * done/total / MB_SIZE, total/MB_SIZE);
         else
-            snprintf(progressSizeLeft, sizeof(progressSizeLeft), "%0.2fGB/%0.2fGB", done * done/total / GBSIZE, total/GBSIZE);
+            snprintf(progressSizeLeft, sizeof(progressSizeLeft), "%0.2fGB/%0.2fGB", done * done/total / GB_SIZE, total/GB_SIZE);
     }
 
     showProgress = 1;

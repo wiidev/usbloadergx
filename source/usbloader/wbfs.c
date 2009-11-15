@@ -10,14 +10,25 @@
 #include "video.h"
 #include "wdvd.h"
 #include "wbfs.h"
+#include "wbfs_fat.h"
+#include "fatmounter.h"
+#include "partition.h"
 
 #include "libwbfs/libwbfs.h"
 
 /* Constants */
 #define MAX_NB_SECTORS	32
 
+/* WBFS device */
+s32 wbfsDev = WBFS_MIN_DEVICE;
+
+// partition
+int wbfs_part_fat = 0;
+u32 wbfs_part_idx = 0;
+u32 wbfs_part_lba = 0;
+
 /* WBFS HDD */
-static wbfs_t *hdd = NULL;
+wbfs_t *hdd = NULL;
 
 /* WBFS callbacks */
 static rw_sector_callback_t readCallback  = NULL;
@@ -26,9 +37,37 @@ static s32 done = -1, total = -1;
 /* Variables */
 
 static u32 nb_sectors, sector_size;
-static void WBFS_Spinner(s32 x, s32 max) {
+
+void WBFS_Spinner(s32 x, s32 max) {
     done = x;
     total = max;
+}
+
+wbfs_disc_t* WBFS_OpenDisc(u8 *discid)
+{
+	if (wbfs_part_fat) return WBFS_FAT_OpenDisc(discid);
+
+	/* No device open */
+	if (!hdd)
+		return NULL;
+
+	/* Open disc */
+	return wbfs_open_disc(hdd, discid);
+}
+
+void WBFS_CloseDisc(wbfs_disc_t *disc)
+{
+	if (wbfs_part_fat) {
+		WBFS_FAT_CloseDisc(disc);
+		return;
+	}
+
+	/* No device open */
+	if (!hdd || !disc)
+		return;
+
+	/* Close disc */
+	wbfs_close_disc(disc);
 }
 
 void GetProgressValue(s32 * d, s32 * m) {
@@ -226,82 +265,6 @@ s32 WBFS_Init(u32 device) {
 
     return 0;
 }
-//s32 WBFS_Init(void)
-//{
-//	s32 ret;
-//
-//	/* Initialize USB storage */
-//	ret = USBStorage_Init();
-//	if (ret < 0)
-//		return ret;
-//
-//	/* Get USB capacity */
-//	nb_sectors = USBStorage_GetCapacity(&sector_size);
-//	if (!nb_sectors)
-//		return -1;
-//
-//	return 0;
-//}
-
-/*
-s32 WBFS_Init(u32 device, u32 timeout)
-{
-	u32 cnt;
-	s32 ret;
-
-	// Wrong timeout
-	if (!timeout)
-		return -1;
-
-	// Try to mount device
-	for (cnt = 0; cnt < timeout; cnt++) {
-		switch (device) {
-		case WBFS_DEVICE_USB: {
-			// Initialize USB storage
-			ret = USBStorage_Init();
-
-			if (ret >= 0) {
-				// Setup callbacks
-				readCallback  = __WBFS_ReadUSB;
-				writeCallback = __WBFS_WriteUSB;
-
-				// Device info
-				nb_sectors = USBStorage_GetCapacity(&sector_size);
-
-				goto out;
-			}
-		}
-
-		case WBFS_DEVICE_SDHC: {
-			// Initialize SDHC
-			ret = SDHC_Init();
-
-			if (ret) {
-				// Setup callbacks
-				readCallback  = __WBFS_ReadSDHC;
-				writeCallback = __WBFS_WriteSDHC;
-
-				// Device info
-				nb_sectors  = 0;
-				sector_size = SDHC_SECTOR_SIZE;
-
-				goto out;
-			} else
-				ret = -1;
-		}
-
-		default:
-			return -1;
-		}
-
-		// Sleep 1 second
-		sleep(1);
-	}
-
-out:
-	return ret;
-}
-*/
 
 s32 WBFS_Open(void) {
     /* Close hard disk */
@@ -309,6 +272,7 @@ s32 WBFS_Open(void) {
         wbfs_close(hdd);
 
     /* Open hard disk */
+	wbfs_part_fat = wbfs_part_idx = wbfs_part_lba = 0;
     hdd = wbfs_open_hd(readCallback, writeCallback, NULL, sector_size, nb_sectors, 0);
     if (!hdd)
         return -1;
@@ -316,17 +280,132 @@ s32 WBFS_Open(void) {
 	// Save the new sector size, so it will be used in read and write calls
 	sector_size = 1 << hdd->head->hd_sec_sz_s;
 
+	wbfs_part_idx = 1;
     return 0;
 }
 
-s32 WBFS_Close(void)
+s32 WBFS_OpenPart(u32 part_fat, u32 part_idx, u32 part_lba, u32 part_size, char *partition)
+{
+	// close
+	WBFS_Close();
 
+	if (part_fat) {
+		if (wbfsDev != WBFS_DEVICE_USB) return -1;
+		if (part_lba == fat_usb_sec) {
+			strcpy(wbfs_fat_drive, "USB:");
+		} else {
+			if (WBFSDevice_Init(part_lba)) return -1;
+			strcpy(wbfs_fat_drive, "WBFS:");
+		}
+	} else {
+		if (WBFS_OpenLBA(part_lba, part_size)) return -3;
+	}
+
+	// success
+	wbfs_part_fat = part_fat;
+	wbfs_part_idx = part_idx;
+	wbfs_part_lba = part_lba;
+	
+	sprintf(partition, "%s%d", wbfs_part_fat ? "FAT" : "WBFS", wbfs_part_idx);
+	return 0;
+}
+
+s32 WBFS_OpenNamed(char *partition)
+{
+	int i;
+	u32 part_idx = 0;
+	u32 part_fat = 0;
+	u32 part_lba = 0;
+	s32 ret = 0;
+	PartList plist;
+
+	// close
+	WBFS_Close();
+
+	// parse partition option
+	if (strncasecmp(partition, "WBFS", 4) == 0) {
+		i = atoi(partition+4);
+		if (i < 1 || i > 4) goto err;
+		part_idx = i;
+	} else if (strncasecmp(partition, "FAT", 3) == 0) {
+		if (wbfsDev != WBFS_DEVICE_USB) goto err;
+		i = atoi(partition+3);
+		if (i < 1 || i > 9) goto err;
+		part_idx = i;
+		part_fat = 1;
+	} else {
+		goto err;
+	}
+
+	// Get partition entries
+	ret = Partition_GetList(&plist);
+	if (ret || plist.num == 0) return -1;
+
+	if (part_fat) {
+		if (part_idx > plist.fat_n) goto err;
+		for (i=0; i<plist.num; i++) {
+			if (plist.pinfo[i].fat_i == part_idx) break;
+		}
+	} else {
+		if (part_idx > plist.wbfs_n) goto err;
+		for (i=0; i<plist.num; i++) {
+			if (plist.pinfo[i].wbfs_i == part_idx) break;
+		}
+	}
+	if (i >= plist.num) goto err;
+	// set partition lba sector
+	part_lba = plist.pentry[i].sector;
+
+	if (WBFS_OpenPart(part_fat, part_idx, part_lba, plist.pentry[i].size, partition)) {
+		goto err;
+	}
+	// success
+	return 0;
+err:
+	return -1;
+}
+
+s32 WBFS_OpenLBA(u32 lba, u32 size)
+{
+	wbfs_t *part = NULL;
+
+	/* Open partition */
+	part = wbfs_open_partition(readCallback, writeCallback, NULL, sector_size, size, lba, 0);
+	if (!part) return -1;
+
+	/* Close current hard disk */
+	if (hdd) wbfs_close(hdd);
+	hdd = part;
+
+	return 0;
+}
+
+bool WBFS_Close(void)
 {
     /* Close hard disk */
-    if (hdd)
+    if (hdd) {
         wbfs_close(hdd);
+		hdd = NULL;
+	}
+
+	WBFSDevice_deInit();
+	wbfs_part_fat = 0;
+	wbfs_part_idx = 0;
+	wbfs_part_lba = 0;
+	wbfs_fat_drive[0] = '\0';
 
     return 0;
+}
+
+bool WBFS_Mounted()
+{
+	return (hdd != NULL);
+}
+
+bool WBFS_Selected()
+{
+	if (wbfs_part_fat && wbfs_part_lba && *wbfs_fat_drive) return true;
+	return WBFS_Mounted();
 }
 
 s32 WBFS_Format(u32 lba, u32 size) {
@@ -344,6 +423,8 @@ s32 WBFS_Format(u32 lba, u32 size) {
 }
 
 s32 WBFS_GetCount(u32 *count) {
+	if (wbfs_part_fat) return WBFS_FAT_GetCount(count);
+
     /* No device open */
     if (!hdd)
         return -1;
@@ -355,6 +436,8 @@ s32 WBFS_GetCount(u32 *count) {
 }
 
 s32 WBFS_GetHeaders(void *outbuf, u32 cnt, u32 len) {
+	if (wbfs_part_fat) return WBFS_FAT_GetHeaders(outbuf, cnt, len);
+
     u32 idx, size;
     s32 ret;
 
@@ -378,10 +461,10 @@ s32 WBFS_CheckGame(u8 *discid) {
     wbfs_disc_t *disc = NULL;
 
     /* Try to open game disc */
-    disc = wbfs_open_disc(hdd, discid);
+    disc = WBFS_OpenDisc(discid);
     if (disc) {
         /* Close disc */
-        wbfs_close_disc(disc);
+        WBFS_CloseDisc(disc);
 
         return 1;
     }
@@ -390,6 +473,8 @@ s32 WBFS_CheckGame(u8 *discid) {
 }
 
 s32 WBFS_AddGame(void) {
+	if (wbfs_part_fat) return WBFS_FAT_AddGame();
+
     s32 ret;
 
     /* No device open */
@@ -405,6 +490,8 @@ s32 WBFS_AddGame(void) {
 }
 
 s32 WBFS_RemoveGame(u8 *discid) {
+	if (wbfs_part_fat) return WBFS_FAT_RemoveGame(discid);
+
     s32 ret;
 
     /* No device open */
@@ -424,28 +511,26 @@ s32 WBFS_GameSize(u8 *discid, f32 *size) {
 
     u32 sectors;
 
-    /* No device open */
-    if (!hdd)
-        return -1;
-
     /* Open disc */
-    disc = wbfs_open_disc(hdd, discid);
+	disc = WBFS_OpenDisc(discid);
     if (!disc)
         return -2;
 
     /* Get game size in sectors */
-    sectors = wbfs_sector_used(hdd, disc->header);
-
-    /* Close disc */
-    wbfs_close_disc(disc);
+	sectors = wbfs_sector_used(disc->p, disc->header);
 
     /* Copy value */
-    *size = (hdd->wbfs_sec_sz / GB_SIZE) * sectors;
+	*size = (disc->p->wbfs_sec_sz / GB_SIZE) * sectors;
+
+    /* Close disc */
+	WBFS_CloseDisc(disc);
 
     return 0;
 }
 
 s32 WBFS_DiskSpace(f32 *used, f32 *free) {
+	if (wbfs_part_fat) return WBFS_FAT_DiskSpace(used, free);
+
     f32 ssize;
     u32 cnt;
 
@@ -467,6 +552,8 @@ s32 WBFS_DiskSpace(f32 *used, f32 *free) {
 }
 
 s32 WBFS_RenameGame(u8 *discid, const void *newname) {
+	if (wbfs_part_fat) return -1;
+
     s32 ret;
 
     /* No USB device open */
@@ -480,6 +567,8 @@ s32 WBFS_RenameGame(u8 *discid, const void *newname) {
 }
 
 s32 WBFS_ReIDGame(u8 *discid, const void *newID) {
+	if (wbfs_part_fat) return -1;
+
     s32 ret;
 
     /* No USB device open */
@@ -493,7 +582,11 @@ s32 WBFS_ReIDGame(u8 *discid, const void *newID) {
 }
 
 f32 WBFS_EstimeGameSize(void) {
+	if (wbfs_part_fat) {
+		u64 comp;
+		WBFS_FAT_DVD_Size(&comp, NULL);
+		return comp;
+	}
 
     return wbfs_estimate_disc(hdd, __WBFS_ReadDVD, NULL, ONLY_GAME_PARTITION);
-
 }
