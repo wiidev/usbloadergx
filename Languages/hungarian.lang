@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-12 01:27+0100\n"
+"POT-Creation-Date: 2009-11-16 00:18+0100\n"
 "PO-Revision-Date: 2009-10-30 16:28+0100\n"
 "Last-Translator: Springdale\n"
 "Language-Team: Tusk, Springdale\n"
@@ -774,8 +774,8 @@ msgstr "Nincs USB meghajtó"
 msgid "No USB Device found."
 msgstr "Nincs USB meghajtó csatlakoztatva."
 
-msgid "No WBFS partition found"
-msgstr "Nincs WBFS Partició"
+msgid "No WBFS or FAT game partition found"
+msgstr ""
 
 msgid "No cheats were selected"
 msgstr "Nincsenek kiválasztott cheat-ek"
@@ -944,6 +944,9 @@ msgstr "Elmentve"
 
 msgid "Screensaver"
 msgstr "Képernyõkimélõ"
+
+msgid "Select"
+msgstr ""
 
 msgid "Select a DOL"
 msgstr "DOL kiválasztása"
@@ -1206,8 +1209,8 @@ msgstr "A Kedvencek megjelenítését választottad, de egy játék sincs így m
 msgid "You have attempted to load a bad image"
 msgstr "Rossz képfájl próbáltál betõlteni"
 
-msgid "You need to format a partition"
-msgstr "Formáznod kell a particiót"
+msgid "You need to select or format a partition"
+msgstr ""
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
@@ -1275,3 +1278,9 @@ msgstr "./"
 
 msgid "seconds left"
 msgstr "hátralévõ másodperc"
+
+#~ msgid "No WBFS partition found"
+#~ msgstr "Nincs WBFS Partició"
+
+#~ msgid "You need to format a partition"
+#~ msgstr "Formáznod kell a particiót"

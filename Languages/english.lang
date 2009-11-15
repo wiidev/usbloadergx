@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-12 01:27+0100\n"
+"POT-Creation-Date: 2009-11-16 00:18+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -774,7 +774,7 @@ msgstr ""
 msgid "No USB Device found."
 msgstr ""
 
-msgid "No WBFS partition found"
+msgid "No WBFS or FAT game partition found"
 msgstr ""
 
 msgid "No cheats were selected"
@@ -943,6 +943,9 @@ msgid "Saved"
 msgstr ""
 
 msgid "Screensaver"
+msgstr ""
+
+msgid "Select"
 msgstr ""
 
 msgid "Select a DOL"
@@ -1206,7 +1209,7 @@ msgstr ""
 msgid "You have attempted to load a bad image"
 msgstr ""
 
-msgid "You need to format a partition"
+msgid "You need to select or format a partition"
 msgstr ""
 
 #, c-format

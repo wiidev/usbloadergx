@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-12 01:27+0100\n"
+"POT-Creation-Date: 2009-11-16 00:18+0100\n"
 "PO-Revision-Date: 2009-10-26 19:13-0000\n"
 "Last-Translator: Sky8000\n"
 "Language-Team: Sky8000 <sky8000@hotmail.com>\n"
@@ -774,8 +774,8 @@ msgstr "Nenhum dispositivo USB encontrado"
 msgid "No USB Device found."
 msgstr "Nenhum dispositivo USB encontrado."
 
-msgid "No WBFS partition found"
-msgstr "Não foi encontrada nenhuma partição WBFS"
+msgid "No WBFS or FAT game partition found"
+msgstr ""
 
 msgid "No cheats were selected"
 msgstr "Não foram seleccionados truques"
@@ -944,6 +944,9 @@ msgstr "Gravado"
 
 msgid "Screensaver"
 msgstr "Protecção de ecrã"
+
+msgid "Select"
+msgstr ""
 
 msgid "Select a DOL"
 msgstr "Seleccionar o DOL"
@@ -1206,8 +1209,8 @@ msgstr "Está a tentar visualizar os favoritos mas não existe nenhum selecciona
 msgid "You have attempted to load a bad image"
 msgstr "Tentou carregar uma imagem corrompida"
 
-msgid "You need to format a partition"
-msgstr "É necessário FORMATAR a partição"
+msgid "You need to select or format a partition"
+msgstr ""
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
@@ -1275,6 +1278,12 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
+
+#~ msgid "No WBFS partition found"
+#~ msgstr "Não foi encontrada nenhuma partição WBFS"
+
+#~ msgid "You need to format a partition"
+#~ msgstr "É necessário FORMATAR a partição"
 
 #~ msgid "Failed to extract opening.bnr"
 #~ msgstr "Falha ao extrair o opening.bnr"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-12 01:27+0100\n"
+"POT-Creation-Date: 2009-11-16 00:18+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Snoozer\n"
 "Language-Team: Snoozer, wishmasterf\n"
@@ -774,8 +774,8 @@ msgstr "Kein USB Gerät"
 msgid "No USB Device found."
 msgstr "Kein USB Gerät gefunden."
 
-msgid "No WBFS partition found"
-msgstr "Keine WBFS Partition gefunden"
+msgid "No WBFS or FAT game partition found"
+msgstr ""
 
 msgid "No cheats were selected"
 msgstr "Es wurden keine Cheats ausgewählt"
@@ -944,6 +944,9 @@ msgstr "Gespeichert"
 
 msgid "Screensaver"
 msgstr "Bildschirmschoner"
+
+msgid "Select"
+msgstr ""
 
 msgid "Select a DOL"
 msgstr "Wähle ein DOL"
@@ -1206,8 +1209,8 @@ msgstr "Sie wollen Favoriten anzeigen aber haben keine gewählt."
 msgid "You have attempted to load a bad image"
 msgstr "Sie haben versucht ein bad image zu laden"
 
-msgid "You need to format a partition"
-msgstr "Sie müssen eine Partition formatieren"
+msgid "You need to select or format a partition"
+msgstr ""
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
@@ -1275,6 +1278,12 @@ msgstr "von"
 
 msgid "seconds left"
 msgstr "Sekunden verbleiben"
+
+#~ msgid "No WBFS partition found"
+#~ msgstr "Keine WBFS Partition gefunden"
+
+#~ msgid "You need to format a partition"
+#~ msgstr "Sie müssen eine Partition formatieren"
 
 #~ msgid "Homebrew Channel"
 #~ msgstr "Homebrew Kanal"

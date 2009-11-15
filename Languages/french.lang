@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# French V11.0 r828
+# French V11.1 r831
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-12 01:27+0100\n"
+"POT-Creation-Date: 2009-11-16 00:18+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Kin8\n"
 "Language-Team: Badablek, Amour, ikya, dj_skual & Kin8\n"
@@ -774,8 +774,8 @@ msgstr "Aucun périphérique USB"
 msgid "No USB Device found."
 msgstr "Aucun périphérique USB trouvé."
 
-msgid "No WBFS partition found"
-msgstr "Aucune partition WBFS trouvée"
+msgid "No WBFS or FAT game partition found"
+msgstr "Aucune partition WBFS ou FAT trouvée"
 
 msgid "No cheats were selected"
 msgstr "Aucune selection de triche"
@@ -944,6 +944,9 @@ msgstr "Sauvegardé"
 
 msgid "Screensaver"
 msgstr "Économiseur d'écran"
+
+msgid "Select"
+msgstr "Choisir"
 
 msgid "Select a DOL"
 msgstr "Choisir un DOL"
@@ -1206,8 +1209,8 @@ msgstr "Vous choisissez d'afficher des favoris alors que vous n'en avez aucun."
 msgid "You have attempted to load a bad image"
 msgstr "Vous avez tenté de charger une image érronée"
 
-msgid "You need to format a partition"
-msgstr "Vous devez formater une partition"
+msgid "You need to select or format a partition"
+msgstr "Vous devez choisir ou formater une partition"
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."

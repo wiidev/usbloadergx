@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-12 01:27+0100\n"
+"POT-Creation-Date: 2009-11-16 00:18+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: c64rmx\n"
 "Language-Team: \n"
@@ -774,8 +774,8 @@ msgstr "Ei USB-laitetta"
 msgid "No USB Device found."
 msgstr "USB-laitetta ei löytynyt."
 
-msgid "No WBFS partition found"
-msgstr "Ei WBFS-osioita löytynyt"
+msgid "No WBFS or FAT game partition found"
+msgstr ""
 
 msgid "No cheats were selected"
 msgstr ""
@@ -944,6 +944,9 @@ msgstr ""
 
 msgid "Screensaver"
 msgstr "Näytönsäästäjä"
+
+msgid "Select"
+msgstr ""
 
 msgid "Select a DOL"
 msgstr "Valitse DOL"
@@ -1206,8 +1209,8 @@ msgstr "Olet valinnut näyttääksesi suosikit mutta sinulla ei ole valittuna yh
 msgid "You have attempted to load a bad image"
 msgstr "Yritit ladata huonoa levykuvaa"
 
-msgid "You need to format a partition"
-msgstr "Sinun täytyy formatoida osio"
+msgid "You need to select or format a partition"
+msgstr ""
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
@@ -1275,3 +1278,9 @@ msgstr "josta"
 
 msgid "seconds left"
 msgstr "sekuntia jäljellä"
+
+#~ msgid "No WBFS partition found"
+#~ msgstr "Ei WBFS-osioita löytynyt"
+
+#~ msgid "You need to format a partition"
+#~ msgstr "Sinun täytyy formatoida osio"

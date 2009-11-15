@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# czech.lang - r823
+# czech.lang - r828
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-12 01:27+0100\n"
+"POT-Creation-Date: 2009-11-16 00:18+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) \n"
 "Language-Team: r823 - last version on http://djelinek.sweb.cz/_USBLoderGX/czech.lang \n"
@@ -358,7 +358,7 @@ msgid "Developed by"
 msgstr "Vyvinul"
 
 msgid "Directory does not exist!"
-msgstr "Adresář neexistuje!"
+msgstr "Adresár neexistuje!"
 
 msgid "Disc Artwork Download"
 msgstr "Stažení potisku DVD"
@@ -400,7 +400,7 @@ msgid "Do you want to change language?"
 msgstr "Prejete si zmenit jazyk?"
 
 msgid "Do you want to download this theme?"
-msgstr "Přejete si stáhnout toto téma?"
+msgstr "Prejete si stáhnout toto téma?"
 
 msgid "Do you want to format:"
 msgstr "Prejete si formátovat"
@@ -496,7 +496,7 @@ msgid "Failed to extract."
 msgstr "Nemohu rozbalit."
 
 msgid "Failed to open partition"
-msgstr "Nelze otevřít diskový oddíl"
+msgstr "Nelze otevrít diskový oddíl"
 
 msgid "Feb"
 msgstr "Ún"
@@ -556,7 +556,7 @@ msgid "Game Size"
 msgstr "Velikost hry"
 
 msgid "Game Sound Mode"
-msgstr ""
+msgstr "Zvukový mód hry"
 
 msgid "Game Sound Volume"
 msgstr "Nastavení hlasitosti hry"
@@ -718,7 +718,7 @@ msgid "Locked"
 msgstr "Zamceno"
 
 msgid "Loop Sound"
-msgstr ""
+msgstr "Zvuková smyčka"
 
 msgid "Mar"
 msgstr "Brez"
@@ -733,7 +733,7 @@ msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr "Nejspíše má velikost, která není delitelná 4."
 
 msgid "Mount DVD drive"
-msgstr "Připojit DVD mechaniku"
+msgstr "Pripojit DVD mechaniku"
 
 msgid "Music Volume"
 msgstr "Hlasitost hudby"
@@ -774,8 +774,8 @@ msgstr "Žádné zarízení USB"
 msgid "No USB Device found."
 msgstr "Nebylo nalezeno zarízení USB"
 
-msgid "No WBFS partition found"
-msgstr "Nebyl nalezen oddíl WBFS"
+msgid "No WBFS or FAT game partition found"
+msgstr ""
 
 msgid "No cheats were selected"
 msgstr "Nebyly vybrány žádné cheaty"
@@ -945,6 +945,9 @@ msgstr "Uloženo"
 msgid "Screensaver"
 msgstr "Sporic obrazovky"
 
+msgid "Select"
+msgstr ""
+
 msgid "Select a DOL"
 msgstr "Vyberte DOL"
 
@@ -973,7 +976,7 @@ msgid "Sort alphabetically"
 msgstr "Trídení dle abecedy"
 
 msgid "Sort by rank"
-msgstr "Třídit podle hodnocení"
+msgstr "Trídit podle hodnocení"
 
 msgid "Sort order by most played"
 msgstr "Trídení podle spuštení"
@@ -982,10 +985,10 @@ msgid "Sound"
 msgstr "Zvuk"
 
 msgid "Sound+BGM"
-msgstr ""
+msgstr "Zvuk+BGM"
 
 msgid "Sound+Quiet"
-msgstr ""
+msgstr "Zvuk+ticho"
 
 msgid "Spanish"
 msgstr "Španelsky"
@@ -1030,7 +1033,7 @@ msgid "TXT Cheatcodes Path changed"
 msgstr "Cesta k TXT cheatum zmenena"
 
 msgid "The entered directory does not exist. Would you like to create it?"
-msgstr "Zadaný adresář neexistuje. Chcete ho vytvořit?"
+msgstr "Zadaný adresár neexistuje. Chcete ho vytvorit?"
 
 msgid "The file is not a .wad"
 msgstr "Soubor není typu WAD"
@@ -1073,7 +1076,7 @@ msgid "Tooltips"
 msgstr "Popisky"
 
 msgid "Transfer failed."
-msgstr "Přenos selhal"
+msgstr "Prenos selhal"
 
 msgid "USB Device not found"
 msgstr "USB zarízení nenalezeno"
@@ -1146,7 +1149,7 @@ msgid "Updating WiiTDB.zip"
 msgstr "Aktualizuji WiiTDB.zip"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
-msgstr "Odeslaný ZIP soubor nainstalován do adresáře homebrew"
+msgstr "Odeslaný ZIP soubor nainstalován do adresáre homebrew"
 
 msgid "VIDTV Patch"
 msgstr "VIDTV korekce"
@@ -1165,7 +1168,7 @@ msgid "Waiting..."
 msgstr "Cekám..."
 
 msgid "What do you want to update?"
-msgstr "Co si přejete zaktualizovat?"
+msgstr "Co si prejete zaktualizovat?"
 
 msgid "WiFi Features"
 msgstr "WiFi možnosti"
@@ -1206,15 +1209,15 @@ msgstr "Vybíráte zobrazení oblíbených, ale žádné jste dosud nevybral"
 msgid "You have attempted to load a bad image"
 msgstr "Pokusili jste se nahrát špatný obraz"
 
-msgid "You need to format a partition"
-msgstr "Musíte naformátovat oddíl"
+msgid "You need to select or format a partition"
+msgstr ""
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 msgstr "Vaše URL bylo uloženo v %sWiiTDB_URL.txt."
 
 msgid "and translaters for language files updates"
-msgstr "a překladatele pro aktualizaci jazykových souborů"
+msgstr "a prekladatele pro aktualizaci jazykových souborů"
 
 msgid "available"
 msgstr "dostupný"
@@ -1276,8 +1279,8 @@ msgstr "z "
 msgid "seconds left"
 msgstr "sekund zbývá"
 
-#~ msgid "Failed to extract opening.bnr"
-#~ msgstr "Nemohu rozbalit opening.bnr"
+#~ msgid "No WBFS partition found"
+#~ msgstr "Nebyl nalezen oddíl WBFS"
 
-#~ msgid "Homebrew Channel"
-#~ msgstr "Homebrew kanál"
+#~ msgid "You need to format a partition"
+#~ msgstr "Musíte naformátovat oddíl"

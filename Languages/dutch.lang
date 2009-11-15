@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-12 01:27+0100\n"
+"POT-Creation-Date: 2009-11-16 00:18+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: glowy\n"
 "Language-Team: tj_cool, glowy\n"
@@ -774,8 +774,8 @@ msgstr "Geen USB apparaat"
 msgid "No USB Device found."
 msgstr "Geen USB apparaat gevonden."
 
-msgid "No WBFS partition found"
-msgstr "Geen WBFS partitie gevonden"
+msgid "No WBFS or FAT game partition found"
+msgstr ""
 
 msgid "No cheats were selected"
 msgstr "Geen cheats geselecteerd"
@@ -944,6 +944,9 @@ msgstr "Opgeslagen"
 
 msgid "Screensaver"
 msgstr "Schermbeveiliging"
+
+msgid "Select"
+msgstr ""
 
 msgid "Select a DOL"
 msgstr "Kies een DOL"
@@ -1206,8 +1209,8 @@ msgstr "Je wilt favorieten tonen, maar je hebt er geen ingesteld"
 msgid "You have attempted to load a bad image"
 msgstr "Je probeerde een slechte afbeelding te laden"
 
-msgid "You need to format a partition"
-msgstr "Je moet een partitie formatteren"
+msgid "You need to select or format a partition"
+msgstr ""
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
@@ -1275,6 +1278,12 @@ msgstr "van"
 
 msgid "seconds left"
 msgstr "seconden over"
+
+#~ msgid "No WBFS partition found"
+#~ msgstr "Geen WBFS partitie gevonden"
+
+#~ msgid "You need to format a partition"
+#~ msgstr "Je moet een partitie formatteren"
 
 #~ msgid "Failed to extract opening.bnr"
 #~ msgstr "Uitpakken opening.bnr mislukt"

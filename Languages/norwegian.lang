@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-12 01:27+0100\n"
+"POT-Creation-Date: 2009-11-16 00:18+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: raschi\n"
 "Language-Team: raschi\n"
@@ -774,8 +774,8 @@ msgstr "Ingen USB enhet"
 msgid "No USB Device found."
 msgstr "Ingen USB enhet funnet."
 
-msgid "No WBFS partition found"
-msgstr "Ingen WBFS partisjon funnet"
+msgid "No WBFS or FAT game partition found"
+msgstr ""
 
 msgid "No cheats were selected"
 msgstr "Ingen juksefiler valgt"
@@ -944,6 +944,9 @@ msgstr "Lagret"
 
 msgid "Screensaver"
 msgstr "Skjermbeskytter"
+
+msgid "Select"
+msgstr ""
 
 msgid "Select a DOL"
 msgstr "Velg en DOL fil"
@@ -1206,8 +1209,8 @@ msgstr "Du prøver å vise favoritter når du ikke har noen valgt."
 msgid "You have attempted to load a bad image"
 msgstr "Du har forsøkt å vise et korrupt bilde"
 
-msgid "You need to format a partition"
-msgstr "Du må formatere en partisjon"
+msgid "You need to select or format a partition"
+msgstr ""
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
@@ -1275,6 +1278,12 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder gjenstår"
+
+#~ msgid "No WBFS partition found"
+#~ msgstr "Ingen WBFS partisjon funnet"
+
+#~ msgid "You need to format a partition"
+#~ msgstr "Du må formatere en partisjon"
 
 #~ msgid "ERROR: USB device could not be loaded!"
 #~ msgstr "FEIL: USB enhet kan ikke lastes!"

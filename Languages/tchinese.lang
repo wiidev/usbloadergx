@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-12 01:27+0100\n"
+"POT-Creation-Date: 2009-11-16 00:18+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: kyogc\n"
 "Language-Team: \n"
@@ -774,8 +774,8 @@ msgstr "沒有USB裝置"
 msgid "No USB Device found."
 msgstr "找不到USB裝置."
 
-msgid "No WBFS partition found"
-msgstr "找不到WBFS磁區"
+msgid "No WBFS or FAT game partition found"
+msgstr ""
 
 msgid "No cheats were selected"
 msgstr "無已選擇的金手指"
@@ -944,6 +944,9 @@ msgstr "已儲存"
 
 msgid "Screensaver"
 msgstr "螢幕保護"
+
+msgid "Select"
+msgstr ""
 
 msgid "Select a DOL"
 msgstr "選擇DOL"
@@ -1206,8 +1209,8 @@ msgstr "選擇展示我的最愛選單,但選單中無已設定遊戲"
 msgid "You have attempted to load a bad image"
 msgstr "載入的影像有問題"
 
-msgid "You need to format a partition"
-msgstr "必須格式化一個磁區"
+msgid "You need to select or format a partition"
+msgstr ""
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
@@ -1275,3 +1278,9 @@ msgstr "剩餘空間 總容量"
 
 msgid "seconds left"
 msgstr "剩餘秒數"
+
+#~ msgid "No WBFS partition found"
+#~ msgstr "找不到WBFS磁區"
+
+#~ msgid "You need to format a partition"
+#~ msgstr "必須格式化一個磁區"

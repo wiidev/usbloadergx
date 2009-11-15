@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-12 01:27+0100\n"
+"POT-Creation-Date: 2009-11-16 00:18+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
@@ -774,8 +774,8 @@ msgstr "USB機器がありません"
 msgid "No USB Device found."
 msgstr "USB機器が検出されていません"
 
-msgid "No WBFS partition found"
-msgstr "WBFSﾊﾟｰﾃｨｼｮﾝを検出できませんでした"
+msgid "No WBFS or FAT game partition found"
+msgstr ""
 
 msgid "No cheats were selected"
 msgstr "何も選ばれていません"
@@ -944,6 +944,9 @@ msgstr "保存しました"
 
 msgid "Screensaver"
 msgstr "スクリーンセーバー"
+
+msgid "Select"
+msgstr ""
 
 msgid "Select a DOL"
 msgstr "DOLを選択"
@@ -1206,8 +1209,8 @@ msgstr "お気に入りの登録がありません"
 msgid "You have attempted to load a bad image"
 msgstr "読み込めない画像があります"
 
-msgid "You need to format a partition"
-msgstr "ﾊﾟｰﾃｨｼｮﾝを初期化して下さい"
+msgid "You need to select or format a partition"
+msgstr ""
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
@@ -1275,6 +1278,12 @@ msgstr "中"
 
 msgid "seconds left"
 msgstr "完了まで"
+
+#~ msgid "No WBFS partition found"
+#~ msgstr "WBFSﾊﾟｰﾃｨｼｮﾝを検出できませんでした"
+
+#~ msgid "You need to format a partition"
+#~ msgstr "ﾊﾟｰﾃｨｼｮﾝを初期化して下さい"
 
 #~ msgid "Failed to extract opening.bnr"
 #~ msgstr "opening.bnrの抽出に失敗しました"

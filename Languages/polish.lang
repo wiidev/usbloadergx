@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-12 01:27+0100\n"
+"POT-Creation-Date: 2009-11-16 00:18+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: ziom666 (zadania_prog@vp.pl)\n"
 "Language-Team: \n"
@@ -774,8 +774,8 @@ msgstr "Nie wykryto urzadzenia USB"
 msgid "No USB Device found."
 msgstr "Nie wykryto urzadzenia USB"
 
-msgid "No WBFS partition found"
-msgstr "Nie znaleziono partycji WBFS"
+msgid "No WBFS or FAT game partition found"
+msgstr ""
 
 msgid "No cheats were selected"
 msgstr ""
@@ -944,6 +944,9 @@ msgstr ""
 
 msgid "Screensaver"
 msgstr "Wygaszacz ekranu"
+
+msgid "Select"
+msgstr ""
 
 msgid "Select a DOL"
 msgstr ""
@@ -1206,8 +1209,8 @@ msgstr "WybraleS wySwietlenie usubionych, ale zadnych nie wybraleS"
 msgid "You have attempted to load a bad image"
 msgstr "Probujesz zaladowac zly obraz"
 
-msgid "You need to format a partition"
-msgstr "Musisz sformatowac partycje"
+msgid "You need to select or format a partition"
+msgstr ""
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
@@ -1275,3 +1278,9 @@ msgstr "z"
 
 msgid "seconds left"
 msgstr "sekund pozostalo"
+
+#~ msgid "No WBFS partition found"
+#~ msgstr "Nie znaleziono partycji WBFS"
+
+#~ msgid "You need to format a partition"
+#~ msgstr "Musisz sformatowac partycje"

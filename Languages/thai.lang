@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-12 01:27+0100\n"
+"POT-Creation-Date: 2009-11-16 00:18+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Nitro_subzero \n"
 "Language-Team: Nitro_subzero\n"
@@ -774,8 +774,8 @@ msgstr "ไม่ได้เสียบอุปกรณ์ USB"
 msgid "No USB Device found."
 msgstr "ไม่พบอุปกรณ์ USB"
 
-msgid "No WBFS partition found"
-msgstr "ไม่พบพาร์ติชั่นแบบ WBFS "
+msgid "No WBFS or FAT game partition found"
+msgstr ""
 
 msgid "No cheats were selected"
 msgstr "ไม่ได้เลือกการโกงเกมส์ไว้"
@@ -944,6 +944,9 @@ msgstr "บันทึกแล้ว"
 
 msgid "Screensaver"
 msgstr "รักษาหน้าจอ"
+
+msgid "Select"
+msgstr ""
 
 msgid "Select a DOL"
 msgstr "เลือก DOL"
@@ -1206,8 +1209,8 @@ msgstr "คุณเลือกจะแสดงเกมส์ที่ชอ
 msgid "You have attempted to load a bad image"
 msgstr "คุณพยายามที่จะโหลดรูปภาพที่เสียหาย"
 
-msgid "You need to format a partition"
-msgstr "ต้องทำการฟอร์แมทพาร์ติชั่น"
+msgid "You need to select or format a partition"
+msgstr ""
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
@@ -1275,6 +1278,12 @@ msgstr "จาก"
 
 msgid "seconds left"
 msgstr "วินาทีที่เหลือ"
+
+#~ msgid "No WBFS partition found"
+#~ msgstr "ไม่พบพาร์ติชั่นแบบ WBFS "
+
+#~ msgid "You need to format a partition"
+#~ msgstr "ต้องทำการฟอร์แมทพาร์ติชั่น"
 
 #~ msgid "Failed to extract opening.bnr"
 #~ msgstr "แตกไฟล์ opening.bnr ไม่ได้"

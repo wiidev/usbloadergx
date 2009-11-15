@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-12 01:27+0100\n"
+"POT-Creation-Date: 2009-11-16 00:18+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: dorf[dk]\n"
 "Language-Team: dorf[dk]\n"
@@ -774,8 +774,8 @@ msgstr "Ingen USB-enhed tilsluttet"
 msgid "No USB Device found."
 msgstr "Ingen USB-enhed fundet."
 
-msgid "No WBFS partition found"
-msgstr "Ingen WBFS-partition fundet"
+msgid "No WBFS or FAT game partition found"
+msgstr ""
 
 msgid "No cheats were selected"
 msgstr "Der blev ikke valgt nogle cheats"
@@ -944,6 +944,9 @@ msgstr "Gemt"
 
 msgid "Screensaver"
 msgstr "Screensaver"
+
+msgid "Select"
+msgstr ""
 
 msgid "Select a DOL"
 msgstr "Vælg en DOL"
@@ -1206,8 +1209,8 @@ msgstr "Du har valgt at vise favoritter, men ingen spil er markerede som favorit
 msgid "You have attempted to load a bad image"
 msgstr "Du har forsøgt at indlæse et dårligt billede"
 
-msgid "You need to format a partition"
-msgstr "Du skal formatere en partition"
+msgid "You need to select or format a partition"
+msgstr ""
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
@@ -1275,3 +1278,9 @@ msgstr "af"
 
 msgid "seconds left"
 msgstr "sekunder tilbage"
+
+#~ msgid "No WBFS partition found"
+#~ msgstr "Ingen WBFS-partition fundet"
+
+#~ msgid "You need to format a partition"
+#~ msgstr "Du skal formatere en partition"

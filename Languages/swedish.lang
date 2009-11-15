@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-12 01:27+0100\n"
+"POT-Creation-Date: 2009-11-16 00:18+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -774,8 +774,8 @@ msgstr "Ingen USB-enhet"
 msgid "No USB Device found."
 msgstr "Ingen USB-enhet hittad."
 
-msgid "No WBFS partition found"
-msgstr "Ingen WBFS-partition hittad"
+msgid "No WBFS or FAT game partition found"
+msgstr ""
 
 msgid "No cheats were selected"
 msgstr ""
@@ -944,6 +944,9 @@ msgstr ""
 
 msgid "Screensaver"
 msgstr "Skärmsläckare"
+
+msgid "Select"
+msgstr ""
 
 msgid "Select a DOL"
 msgstr ""
@@ -1206,8 +1209,8 @@ msgstr "Du har valt att visa favoriter men du har inga favoriter valda."
 msgid "You have attempted to load a bad image"
 msgstr "Du har försökt ladda en dålig bild"
 
-msgid "You need to format a partition"
-msgstr "Du behöver formatera en partition"
+msgid "You need to select or format a partition"
+msgstr ""
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
@@ -1275,6 +1278,12 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder kvar"
+
+#~ msgid "No WBFS partition found"
+#~ msgstr "Ingen WBFS-partition hittad"
+
+#~ msgid "You need to format a partition"
+#~ msgstr "Du behöver formatera en partition"
 
 #~ msgid "Homebrew Channel"
 #~ msgstr "Homebrew Kanalen"

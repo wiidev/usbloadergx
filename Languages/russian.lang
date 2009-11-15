@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-12 01:27+0100\n"
+"POT-Creation-Date: 2009-11-16 00:18+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Kir\n"
 "Language-Team: Kir\n"
@@ -774,8 +774,8 @@ msgstr "Нет USB устройств"
 msgid "No USB Device found."
 msgstr "USB устройств не обнаружено"
 
-msgid "No WBFS partition found"
-msgstr "Не найден раздел WBFS"
+msgid "No WBFS or FAT game partition found"
+msgstr ""
 
 msgid "No cheats were selected"
 msgstr ""
@@ -944,6 +944,9 @@ msgstr ""
 
 msgid "Screensaver"
 msgstr "Скринсейвер"
+
+msgid "Select"
+msgstr ""
 
 msgid "Select a DOL"
 msgstr ""
@@ -1206,8 +1209,8 @@ msgstr "Нельзя отобразить избранные, если вы их
 msgid "You have attempted to load a bad image"
 msgstr "Вы попытались загрузить плохой образ"
 
-msgid "You need to format a partition"
-msgstr "Требуется форматирование раздела"
+msgid "You need to select or format a partition"
+msgstr ""
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
@@ -1275,3 +1278,9 @@ msgstr "из"
 
 msgid "seconds left"
 msgstr "секунд осталось"
+
+#~ msgid "No WBFS partition found"
+#~ msgstr "Не найден раздел WBFS"
+
+#~ msgid "You need to format a partition"
+#~ msgstr "Требуется форматирование раздела"

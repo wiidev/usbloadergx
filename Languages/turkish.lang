@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-12 01:27+0100\n"
+"POT-Creation-Date: 2009-11-16 00:18+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: omercigingelini\n"
 "Language-Team: omercigingelini\n"
@@ -774,8 +774,8 @@ msgstr "USB Aygıtı yok"
 msgid "No USB Device found."
 msgstr "USB Aygıtı bulunamadı"
 
-msgid "No WBFS partition found"
-msgstr "WBFS bölümü bulunamadı"
+msgid "No WBFS or FAT game partition found"
+msgstr ""
 
 msgid "No cheats were selected"
 msgstr "Hile seçilmedi"
@@ -944,6 +944,9 @@ msgstr "Kaydedildi"
 
 msgid "Screensaver"
 msgstr "Ekran Koruyucu"
+
+msgid "Select"
+msgstr ""
 
 msgid "Select a DOL"
 msgstr "Bir DOL seç"
@@ -1206,8 +1209,8 @@ msgstr "Favorileri göstermeyi seçtiniz ama hiç seçili yok"
 msgid "You have attempted to load a bad image"
 msgstr "Bozuk bir resim yüklemeye çalıştın"
 
-msgid "You need to format a partition"
-msgstr "Bir bölüm biçimlendirmeniz gerekiyor"
+msgid "You need to select or format a partition"
+msgstr ""
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
@@ -1275,6 +1278,12 @@ msgstr "./"
 
 msgid "seconds left"
 msgstr "saniye kaldı"
+
+#~ msgid "No WBFS partition found"
+#~ msgstr "WBFS bölümü bulunamadı"
+
+#~ msgid "You need to format a partition"
+#~ msgstr "Bir bölüm biçimlendirmeniz gerekiyor"
 
 #~ msgid "Failed to extract opening.bnr"
 #~ msgstr "opening.bnr çıkartılamadı"
