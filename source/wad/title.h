@@ -9,7 +9,7 @@ Copyright (C) 2008 tona and/or waninkoko
 #include <string.h>
 #include <stdio.h>
 #include <malloc.h>
-#include <fat.h>
+#include "libfat/fat.h"
 
 // Turn upper and lower into a full title ID
 #define TITLE_ID(x,y)		(((u64)(x) << 32) | (y))
@@ -60,7 +60,7 @@ extern "C" {
     char *__getTitleName(u64 titleid, int language);
 
     s32 Uninstall_FromTitle(const u64 tid);
-	
+
 //check for a game save present on nand based on game ID
 int CheckForSave(const char *gameID);
 

@@ -17,7 +17,7 @@
 #include "listfiles.h"
 #include "sys.h"
 #include "cfg.h"
-#include "usbloader/partition.h"
+#include "usbloader/partition_usbloader.h"
 #include "usbloader/utils.h"
 
 #define MAXOPTIONS 13

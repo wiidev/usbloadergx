@@ -1,7 +1,7 @@
 /****************************************************************************
  * USB Loader GX Team
  * banner.c
- * 
+ *
  * Dump opening.bnr thanks to Wiipower
  ***************************************************************************/
 
@@ -13,8 +13,8 @@
 #include <string.h>
 #include <unistd.h>
 #include <malloc.h>
-#include <fat.h>
 
+#include "libfat/fat.h"
 #include "fatmounter.h"
 #include "usbloader/wdvd.h"
 #include "usbloader/disc.h"

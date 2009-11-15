@@ -18,7 +18,7 @@
 #include "wdvd.h"
 #include "splits.h"
 #include "fat.h"
-#include "partition.h"
+#include "partition_usbloader.h"
 #include "wpad.h"
 #include "wbfs_fat.h"
 #include "disc.h"

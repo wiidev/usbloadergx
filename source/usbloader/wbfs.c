@@ -12,7 +12,7 @@
 #include "wbfs.h"
 #include "wbfs_fat.h"
 #include "fatmounter.h"
-#include "partition.h"
+#include "partition_usbloader.h"
 
 #include "libwbfs/libwbfs.h"
 

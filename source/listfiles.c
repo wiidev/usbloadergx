@@ -2,12 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include <gccore.h>
-#include <fat.h>
 #include <sys/dir.h>
 #include <dirent.h>
 #include <unistd.h>
 
 #include "listfiles.h"
+#include "libfat/fat.h"
 
 
 static char alldirfiles[300][70];

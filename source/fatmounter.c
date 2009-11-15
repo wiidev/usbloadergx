@@ -1,4 +1,3 @@
-#include <fat.h>
 #include <string.h>
 #include <ogc/lwp_watchdog.h>
 #include <ogc/mutex.h>
@@ -8,6 +7,7 @@
 
 #include "usbloader/sdhc.h"
 #include "usbloader/usbstorage.h"
+#include "libfat/fat.h"
 
 //these are the only stable and speed is good
 #define CACHE 32
@@ -41,7 +41,7 @@ int USBDevice_Init() {
 			return -1;
 		}
     }
-    
+
 	fat_usb_mount = 1;
 	fat_usb_sec = _FAT_startSector;
 	return 0;
@@ -67,7 +67,7 @@ int WBFSDevice_Init(u32 sector) {
 			return -1;
 		}
     }
-    
+
 	fat_wbfs_mount = 1;
 	fat_wbfs_sec = _FAT_startSector;
 	if (sector && fat_wbfs_sec != sector) {
@@ -112,7 +112,7 @@ int SDCard_Init() {
 void SDCard_deInit() {
     //closing all open Files write back the cache and then shutdown em!
     fatUnmount("SD:/");
-	
+
 	fat_sd_mount = MOUNT_NONE;
 	fat_sd_sec = 0;
 }

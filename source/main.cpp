@@ -36,7 +36,7 @@
 #include "fat.h"
 #include "gecko.h"
 #include "svnrev.h"
-#include "usbloader/partition.h"
+#include "usbloader/partition_usbloader.h"
 #include "usbloader/usbstorage.h"
 
 extern bool geckoinit;

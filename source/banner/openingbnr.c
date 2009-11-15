@@ -20,7 +20,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <fat.h>
+#include "libfat/fat.h"
 
 #include "MD5.h"
 #include "banner.h"
@@ -115,7 +115,7 @@ typedef struct
   u8 zeroes[16];
 } U8_archive_header;
 
-static int write_file(void* data, size_t size, char* name) 
+static int write_file(void* data, size_t size, char* name)
 {
 	size_t written=0;
 	FILE *out;
@@ -126,7 +126,7 @@ static int write_file(void* data, size_t size, char* name)
 		fclose(out);
 	}
 	return (written == size) ? 1 : -1;
-} 
+}
 
 u8* decompress_lz77(u8 *data, size_t data_size, size_t* decompressed_size)
 {
@@ -376,7 +376,7 @@ void do_U8_archivebanner(FILE *fp)
 	fread(string_table, 1, rest_size, fp);
 
 	for (i = 0; i < num_nodes; i++) {
-		U8_node* node = &nodes[i];   
+		U8_node* node = &nodes[i];
 		u16 type = be16((u8*)&node->type);
 		u16 name_offset = be16((u8*)&node->name_offset);
 		u32 my_data_offset = be32((u8*)&node->data_offset);
@@ -499,7 +499,7 @@ int unpackBanner(const u8 *gameid, int what, const char *outdir)
 			size_t size;
 			u8 *data;
 			fseek(fp, 0, SEEK_END);
-			size = ftell(fp); 
+			size = ftell(fp);
 			if(!size)
 			{
 				ret = -1;
@@ -512,14 +512,14 @@ int unpackBanner(const u8 *gameid, int what, const char *outdir)
 				ret = -1;
 				goto error;
 			}
-			if(fread(data, 1, size, fp) != size) 
+			if(fread(data, 1, size, fp) != size)
 			{
 				ret = -1;
 				goto error;
 			}
 			ret = write_file(data, size, path);
 		}
-error:	fclose(fp); 
+error:	fclose(fp);
 	}
 	ramdiskUnmount("BANNER");
 error2:

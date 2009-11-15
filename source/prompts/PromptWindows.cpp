@@ -9,7 +9,7 @@
 
 #include "usbloader/wbfs.h"
 #include "usbloader/wdvd.h"
-#include "usbloader/partition.h"
+#include "usbloader/partition_usbloader.h"
 #include "usbloader/usbstorage.h"
 #include "usbloader/getentries.h"
 #include "language/gettext.h"
