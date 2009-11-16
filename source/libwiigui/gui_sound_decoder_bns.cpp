@@ -37,7 +37,7 @@ public:
 			loop_hist1 = hist1;
 			loop_hist2 = hist2;
 		}
-		if(loopStart > startPos && currentPos >= endPos)
+		if(loop && currentPos >= endPos)
 		{
 			currentPos = loopStart;
 			hist1	= loop_hist1;
@@ -84,6 +84,7 @@ public:
 	s16			pcm[14];
 	s16			hist1;
 	s16			hist2;
+	bool		loop;
 	const u8*	loopStart;
 	u16			loopOffset;
 	s16			loop_hist1;
@@ -126,7 +127,7 @@ protected:
 		
 		in_ptr++;						// skip u8 codeType		= *in_ptr++;
 
-		in_ptr++;						// u8 loopFlag		= *in_ptr++;
+		channel[0].loop = channel[1].loop = be16inc(in_ptr); // u8 loopFlag;
 		
 		channelCount 	= *in_ptr++;
 
