@@ -127,7 +127,7 @@ protected:
 		
 		in_ptr++;						// skip u8 codeType		= *in_ptr++;
 
-		channel[0].loop = channel[1].loop = be16inc(in_ptr); // u8 loopFlag;
+		channel[0].loop = channel[1].loop = *in_ptr++; // u8 loopFlag;
 		
 		channelCount 	= *in_ptr++;
 
