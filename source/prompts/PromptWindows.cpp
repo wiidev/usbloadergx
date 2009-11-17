@@ -2819,9 +2819,9 @@ int ProgressUpdateWindow() {
     promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     promptWindow.SetPosition(0, -10);
 
-    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, SOUND_PCM, Settings.sfxvolume);
+    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
 	// because destroy GuiSound must wait while sound playing is finished, we use a global sound
-	if(!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
+	if(!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 	//	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
 
     char imgPath[100];
@@ -2884,7 +2884,7 @@ int ProgressUpdateWindow() {
         btn1Txt.SetWidescreen(CFG.widescreen);
         btn1Img.SetWidescreen(CFG.widescreen);
     }
-    GuiButton btn1(&btn1Img,&btn1Img, 2, 4, 0, -40, &trigA, &btnSoundOver, &btnClick,1);
+    GuiButton btn1(&btn1Img,&btn1Img, 2, 4, 0, -40, &trigA, &btnSoundOver, btnClick2,1);
     btn1.SetLabel(&btn1Txt);
     btn1.SetState(STATE_SELECTED);
 

@@ -34,5 +34,53 @@ EOF
 		echo "svnrev.c created" >&2
 	fi
 	echo >&2
+	
+	cat <<EOF > ./HBC/META.XML
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+	<app version="1">
+		<name> USB Loader GX</name>
+		<coder>USB Loader GX Team</coder>
+		<version>1.0 r$rev_new</version>
+		<release_date>200910150000</release_date>
+		<short_description>Loads games from USB-devices</short_description>
+		<long_description>USB Loader GX is a libwiigui based USB iso loader with a wii-like GUI. You can install games to your HDDs and boot them with shorter loading times.
+The interactive GUI is completely controllable with WiiMote, Classic Controller or GC Controller.
+Features are automatic widescreen detection, coverdownload, parental control, theme support and many more.
+
+Credits:
+Coding: Dimok, nIxx, giantpune, ardi, Hungyip84, DrayX7, Lustar, r-win, WiiShizzza
+Artworks: cyrex, NeoRame
+WiiTDB / Hosting covers: Lustar
+Hosting updates files: CorneliousJD
+USBLoader sources: Waninkoko, Kwiirk, Hermes
+Languages files updates: Kinyo and translaters
+Hosting themes: Deak Phreak
+
+Libwiigui: Tantric
+Libogc/Devkit: Shagkur and Wintermute
+FreeTypeGX: Armin Tamzarian.
+
+Links:
+USB Loader GX Project Page and Support Site:
+http://code.google.com/p/usbloader-gui/
+Help Website:
+http://usbloadergx.koureio.net/
+WiiTDB Site:
+http://wiitdb.com
+Themes Site:
+http://wii.spiffy360.com
+Languages Translaters Page:
+http://gbatemp.net/index.php?showtopic=155252
+
+Libwiigui Website:
+http://wiibrew.org/wiki/Libwiigui/
+FreeTypeGX Project Page:
+http://code.google.com/p/freetypegx/
+Gettext Official Page:
+http://www.gnu.org/software/gettext/gettext.html
+		</long_description>
+	</app>
+EOF
+
 fi
 echo $a

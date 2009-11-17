@@ -126,9 +126,36 @@ static void BootUpProblems()
     }
 }
 
+unsigned int *xfb = NULL;
+
+void InitTextVideo () {
+    VIDEO_Init();
+	GXRModeObj *vmode = VIDEO_GetPreferredMode(NULL); // get default video mode
+
+    // widescreen fix
+    VIDEO_Configure (vmode);
+
+    // Allocate the video buffers
+    xfb = (u32 *) MEM_K0_TO_K1 (SYS_AllocateFramebuffer (vmode));
+
+    // A console is always useful while debugging
+    console_init (xfb, 20, 64, vmode->fbWidth, vmode->xfbHeight, vmode->fbWidth * 2);
+
+    // Clear framebuffers etc.
+    VIDEO_ClearFrameBuffer (vmode, xfb, COLOR_BLACK);
+    VIDEO_SetNextFramebuffer (xfb);
+
+    VIDEO_SetBlack (FALSE);
+    VIDEO_Flush ();
+    VIDEO_WaitVSync ();
+    if (vmode->viTVMode & VI_NON_INTERLACE)
+        VIDEO_WaitVSync ();
+}
+
 
 int
 main(int argc, char *argv[]) {
+//	InitTextVideo();
 
 	setlocale(LC_ALL, "en.UTF-8");
 	geckoinit = InitGecko();
@@ -137,6 +164,7 @@ main(int argc, char *argv[]) {
 	gprintf("\nUSB Loader GX rev%s",GetRev());
 	gprintf("\nmain(int argc, char *argv[])");
 	
+	printf("Starting up\n");
 
     s32 ret;
     bool startupproblem = false;
@@ -150,40 +178,70 @@ main(int argc, char *argv[]) {
             bootDevice_found = true;
     }
 	
+	printf("Initializing controllers\n");
+	
     /** PAD_Init has to be before InitVideo don't move that **/
     PAD_Init(); // initialize PAD/WPAD
 	
+	printf("Initialize USB (wake up)\n");
+	
     USBDevice_Init();// seems enough to wake up some HDDs if they are in sleep mode when the loader starts (tested with WD MyPassport Essential 2.5")
 	 
-    ret = IOS_ReloadIOS(222);
+	printf("Reloading ios 249...");
+
+    ret = IOS_ReloadIOS(249);
+	
+	printf("%d\n", ret);
 	
     if (ret < 0) {
-        ret = IOS_ReloadIOS(249);
+		printf("IOS 249 failed, reloading ios 222...");
+        ret = IOS_ReloadIOS(222);
+		printf("%d\n", ret);
         if(ret < 0) {
             printf("\n\tERROR: cIOS could not be loaded!\n");
             sleep(5);
             SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
         }
+		printf("Initialize sd card\n");
+		SDCard_Init(); 
+		printf("Load ehc module\n");
+		load_ehc_module();
+		printf("deinit sd card\n");
+		SDCard_deInit();
     }
-	SDCard_Init(); 
-	load_ehc_module();
-	SDCard_deInit();
 	
+	printf("Init wbfs...");
     ret = WBFS_Init(WBFS_DEVICE_USB);
+	printf("%d\n", ret);
 
     if (ret < 0) {
-        ret = IOS_ReloadIOS(249);
+		printf("You have issues with a slow disc, or a difficult disc\nReloading 222...");
+        ret = IOS_ReloadIOS(222);
+		printf("%d\n", ret);
         if(ret < 0) {
+			printf("Sleeping for 4 seconds\n");
+//			sleep(4);
+
             InitVideo(); // Initialise video
             Menu_Render();
             BootUpProblems();
             startupproblem = true;
             ret = 1;
         }
+		printf("Initialize sd card\n");
+		SDCard_Init(); 
+		printf("Load ehc module\n");
+		load_ehc_module();
+		printf("deinit sd card\n");
+		SDCard_deInit();
 
+		printf("Initialize wbfs...");
         ret = WBFS_Init(WBFS_DEVICE_USB);
+		printf("%d\n", ret);
 
         if(ret < 0) {
+			printf("Sleeping for 4 seconds\n");
+//			sleep(4);
             InitVideo(); // Initialise video
             Menu_Render();
             BootUpProblems();
@@ -192,29 +250,39 @@ main(int argc, char *argv[]) {
         }
     }
 
+	printf("Initialize sd card\n");
     SDCard_Init(); // mount SD for loading cfg's
+	printf("Initialize usb device\n");
     USBDevice_Init(); // and mount USB:/
 	gprintf("\n\tSD and USB Init OK");
 
     if (!bootDevice_found) {
+		printf("Search for configuration file\n");
+
         //try USB
         //left in all the dol and elf files in this check in case this is the first time running the app and they dont have the config
         if (checkfile((char*) "USB:/config/GXglobal.cfg") || (checkfile((char*) "USB:/apps/usbloader_gx/boot.elf"))
                 || checkfile((char*) "USB:/apps/usbloadergx/boot.dol") || (checkfile((char*) "USB:/apps/usbloadergx/boot.elf"))
                 || checkfile((char*) "USB:/apps/usbloader_gx/boot.dol"))
             strcpy(bootDevice, "USB:");
+
+		printf("Configuration file is on %s\n", bootDevice);
     }
 
     gettextCleanUp();
+	printf("Loading configuration...");
     CFG_Load();
+	printf("done\n");
 	gprintf("\n\tbootDevice = %s",bootDevice);
 
     /* Load Custom IOS */	
     if (Settings.cios == ios222 && IOS_GetVersion() != 222) {
+		printf("Reloading IOS to config setting (222)...");
         SDCard_deInit();// unmount SD for reloading IOS
         USBDevice_deInit();// unmount USB for reloading IOS
 		USBStorage_Deinit();
         ret = IOS_ReloadIOS(222);
+		printf("%d\n", ret);
 		SDCard_Init();
         load_ehc_module();
         if (ret < 0) {
@@ -226,10 +294,12 @@ main(int argc, char *argv[]) {
         USBDevice_Init(); // and mount USB:/
 		WBFS_Init(WBFS_DEVICE_USB);
     } else if (Settings.cios == ios249 && IOS_GetVersion() != 249) {
+		printf("Reloading IOS to config setting (249)...");
         SDCard_deInit();// unmount SD for reloading IOS
         USBDevice_deInit();// unmount USB for reloading IOS
 		USBStorage_Deinit();
         ret = IOS_ReloadIOS(249);
+		printf("%d\n", ret);
         if (ret < 0) {
             Settings.cios = ios222;
             ret = IOS_ReloadIOS(222);
@@ -249,6 +319,10 @@ main(int argc, char *argv[]) {
         SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
     }
 	gprintf("\n\tcIOS = %u (Rev %u)",IOS_GetVersion(), IOS_GetRevision());
+	printf("cIOS = %u (Rev %u)\n",IOS_GetVersion(), IOS_GetRevision());
+
+//	printf("Sleeping for 5 seconds\n");
+//	sleep(5);
 
     //! Init the rest of the System
     Sys_Init();

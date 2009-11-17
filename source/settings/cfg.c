@@ -24,7 +24,7 @@ u8 videoChoice = 0;
 u8 faveChoice = no;
 u8 languageChoice = 0;
 u8 viChoice = 0;
-u8 iosChoice = 1; // Default IOS is 222 from now on
+u8 iosChoice = 0;
 u8 parentalcontrolChoice = 0;
 u8 fix002 = 0;
 u8 reloadblock = 0;
@@ -340,7 +340,7 @@ void Global_Default(void) {
     Settings.godmode = 1;
     Settings.gamesound = 1;
     Settings.parentalcontrol = 0;
-    Settings.cios = ios222;
+    Settings.cios = ios249;
     Settings.xflip = no;
     Settings.qboot = no;
     Settings.wiilight = 1;
@@ -348,7 +348,7 @@ void Global_Default(void) {
     Settings.discart = 0;
     Settings.patchcountrystrings = 0;
     Settings.gridRows = 3;
-    Settings.error002 = 0;
+    Settings.error002 = 2;
     Settings.titlesOverride = 1;
     snprintf(Settings.db_url, sizeof(Settings.db_url), empty);
     snprintf(Settings.db_language, sizeof(Settings.db_language), empty);

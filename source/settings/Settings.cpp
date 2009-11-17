@@ -977,8 +977,14 @@ int MenuSettings()
 							if(ret == ++Idx || firstRun)
 							{
 								if(firstRun) options2.SetName(Idx,"%s", tr("Boot/Standard"));
-								if(ret == Idx && Settings.godmode == 1 && ++Settings.cios >= settings_cios_max)
-									Settings.cios = 0;
+								if(ret == Idx && Settings.godmode == 1) {
+									if (++Settings.cios >= settings_cios_max) {
+										Settings.cios = 0;
+									}
+									if (Settings.cios != 0) {
+										WindowPrompt(tr("Hermes CIOS"), tr("USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"), tr("OK"));
+									}
+								}
 								if (Settings.godmode == 1)
 									options2.SetValue(Idx, "%s", opts_cios[Settings.cios]);
 								else
