@@ -105,9 +105,15 @@ export OUTPUT	:=	$(CURDIR)/$(TARGET)
 #---------------------------------------------------------------------------------
 $(BUILD):
 	@[ -d $@ ] || mkdir -p $@
+	@[[ -f source/buildtype.h && ! -s source/buildtype.h ]] || cp /dev/null source/buildtype.h
 	@make --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
 #	@echo debug...
 #	start geckoreader.exe
+
+channel:
+	@[ -d build ] || mkdir -p build
+	@[ -s source/buildtype.h ] || echo '#define FULLCHANNEL' > source/buildtype.h
+	@make --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
 
 #---------------------------------------------------------------------------------
 lang:
@@ -117,6 +123,7 @@ lang:
 #---------------------------------------------------------------------------------
 all:
 	@[ -d build ] || mkdir -p build
+	@[[ -f source/buildtype.h && ! -s source/buildtype.h ]] || cp /dev/null source/buildtype.h
 	@make --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
 	@make --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile language
 

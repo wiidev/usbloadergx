@@ -9,7 +9,6 @@
 #define _PROMPTWINDOWS_H_
 
 #include "usbloader/partition_usbloader.h"
-#define NOTFULLCHANNEL
 
 int WindowPrompt(const char *title, const char *msg = NULL, const char *btn1Label = NULL,
                  const char *btn2Label = NULL, const char *btn3Label = NULL,
