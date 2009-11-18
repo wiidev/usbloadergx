@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-16 00:18+0100\n"
+"POT-Creation-Date: 2009-11-18 01:08+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -573,6 +573,9 @@ msgstr ""
 msgid "HOME Menu"
 msgstr ""
 
+msgid "Hermes CIOS"
+msgstr ""
+
 msgid "Homebrew Apps Path"
 msgstr ""
 
@@ -1082,6 +1085,9 @@ msgid "USB Device not found"
 msgstr ""
 
 msgid "USB Loader GX is protected"
+msgstr ""
+
+msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
 msgstr ""
 
 #, c-format

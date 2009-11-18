@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# French V11.1 r831
+# French V11.2 r835
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-16 00:18+0100\n"
+"POT-Creation-Date: 2009-11-18 01:08+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Kin8\n"
 "Language-Team: Badablek, Amour, ikya, dj_skual & Kin8\n"
@@ -573,6 +573,9 @@ msgstr "Allemand"
 msgid "HOME Menu"
 msgstr "Menu HOME"
 
+msgid "Hermes CIOS"
+msgstr "CIOS d'Hermès"
+
 msgid "Homebrew Apps Path"
 msgstr "Dossier Homebrew Apps"
 
@@ -1083,6 +1086,9 @@ msgstr "Périphérique USB introuvable"
 
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX est verrouillé"
+
+msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
+msgstr "USB Loader GX fonctionne avec le CIOS d'Hermès rev4 seulement! Assurez-vous qu'il soit installé!"
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."

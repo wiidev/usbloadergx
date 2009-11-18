@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# turkish.lang - r826
+# turkish.lang - r831
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-16 00:18+0100\n"
+"POT-Creation-Date: 2009-11-18 01:08+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: omercigingelini\n"
 "Language-Team: omercigingelini\n"
@@ -573,6 +573,9 @@ msgstr "Almanca"
 msgid "HOME Menu"
 msgstr "HOME Menü"
 
+msgid "Hermes CIOS"
+msgstr ""
+
 msgid "Homebrew Apps Path"
 msgstr "Homebrew Yazılımlarının Yolu"
 
@@ -775,7 +778,7 @@ msgid "No USB Device found."
 msgstr "USB Aygıtı bulunamadı"
 
 msgid "No WBFS or FAT game partition found"
-msgstr ""
+msgstr "WBFS veya FAT oyun bölümü bulunamadı"
 
 msgid "No cheats were selected"
 msgstr "Hile seçilmedi"
@@ -946,7 +949,7 @@ msgid "Screensaver"
 msgstr "Ekran Koruyucu"
 
 msgid "Select"
-msgstr ""
+msgstr "Seç"
 
 msgid "Select a DOL"
 msgstr "Bir DOL seç"
@@ -1084,6 +1087,9 @@ msgstr "USB Aygıtı bulunamadı"
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX koruma altında"
 
+msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
+msgstr ""
+
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
 msgstr "Az önce indirilen wad açılamıyor(%s)"
@@ -1210,7 +1216,7 @@ msgid "You have attempted to load a bad image"
 msgstr "Bozuk bir resim yüklemeye çalıştın"
 
 msgid "You need to select or format a partition"
-msgstr ""
+msgstr "Bir bölüm seçmeniz ya da formatlamanız gerekiyor"
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
@@ -1278,12 +1284,6 @@ msgstr "./"
 
 msgid "seconds left"
 msgstr "saniye kaldı"
-
-#~ msgid "No WBFS partition found"
-#~ msgstr "WBFS bölümü bulunamadı"
-
-#~ msgid "You need to format a partition"
-#~ msgstr "Bir bölüm biçimlendirmeniz gerekiyor"
 
 #~ msgid "Failed to extract opening.bnr"
 #~ msgstr "opening.bnr çıkartılamadı"

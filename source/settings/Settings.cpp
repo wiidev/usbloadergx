@@ -735,7 +735,7 @@ int MenuSettings()
 									}
 									else
 									{
-										WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to use this option."), tr("OK"));
+										WindowPrompt(tr("No SD-Card inserted!"),tr("Insert an SD-Card to use this option."),tr("OK"));
 									}
 								}
 
@@ -982,7 +982,7 @@ int MenuSettings()
 										Settings.cios = 0;
 									}
 									if (Settings.cios != 0) {
-										WindowPrompt(tr("Hermes CIOS"), tr("USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"), tr("OK"));
+										WindowPrompt(tr("Hermes CIOS"),tr("USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"),tr("OK"));
 									}
 								}
 								if (Settings.godmode == 1)
@@ -1296,7 +1296,7 @@ int MenuSettings()
 										ResumeGui();
 										while (w.GetEffect()>0) usleep(50);
 									} else
-										WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to use this option."), tr("OK"));
+										WindowPrompt(tr("No SD-Card inserted!"),tr("Insert an SD-Card to use this option."),tr("OK"));
 								}
 								if (!strcmp("notset", Settings.ogg_path))
 									options2.SetValue(Idx, "%s", tr("Standard"));
@@ -1482,7 +1482,7 @@ int MenuSettings()
 											strlcpy(Settings.covers_path, entered, sizeof(Settings.covers_path));
 											WindowPrompt(tr("Cover Path Changed"),0,tr("OK"));
 											if (!isInserted(bootDevice))
-												WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
+												WindowPrompt(tr("No SD-Card inserted!"),tr("Insert an SD-Card to save."),tr("OK"));
 										}
 									}
 									options2.SetValue(Idx, "%s", Settings.covers_path);
@@ -1511,7 +1511,7 @@ int MenuSettings()
 											strlcpy(Settings.covers2d_path, entered, sizeof(Settings.covers2d_path));
 											WindowPrompt(tr("Cover Path Changed"),0,tr("OK"));
 											if (!isInserted(bootDevice))
-												WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
+												WindowPrompt(tr("No SD-Card inserted!"),tr("Insert an SD-Card to save."),tr("OK"));
 										}
 									}
 									options2.SetValue(Idx, "%s", Settings.covers2d_path);
@@ -1539,7 +1539,7 @@ int MenuSettings()
 											strlcpy(Settings.disc_path, entered, sizeof(Settings.disc_path));
 											WindowPrompt(tr("Disc Path Changed"),0,tr("OK"));
 											if (!isInserted(bootDevice))
-												WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
+												WindowPrompt(tr("No SD-Card inserted!"),tr("Insert an SD-Card to save."),tr("OK"));
 										}
 									}
 									options2.SetValue(Idx, "%s", Settings.disc_path);
@@ -1567,7 +1567,7 @@ int MenuSettings()
 											strlcpy(CFG.theme_path, entered, sizeof(CFG.theme_path));
 											WindowPrompt(tr("Theme Path Changed"),0,tr("OK"));
 											if (!isInserted(bootDevice))
-												WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
+												WindowPrompt(tr("No SD-Card inserted!"),tr("Insert an SD-Card to save."),tr("OK"));
 											else
 												cfg_save_global();
 											mainWindow->Remove(bgImg);
@@ -1637,7 +1637,7 @@ int MenuSettings()
 												ResumeGui();
 											}
 											else
-												WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
+												WindowPrompt(tr("No SD-Card inserted!"),tr("Insert an SD-Card to save."),tr("OK"));
 										}
 									}
 									options2.SetValue(Idx, "%s", Settings.titlestxt_path);
@@ -1748,7 +1748,7 @@ int MenuSettings()
 											WindowPrompt(tr("DOL path changed"),0,tr("OK"));
 											if (!isInserted(bootDevice))
 											{
-												WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
+												WindowPrompt(tr("No SD-Card inserted!"),tr("Insert an SD-Card to save."),tr("OK"));
 											}
 										}
 									}
@@ -1779,7 +1779,7 @@ int MenuSettings()
 											WindowPrompt(tr("Homebrew Appspath changed"),0,tr("OK"));
 											if (!isInserted(bootDevice))
 											{
-												WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
+												WindowPrompt(tr("No SD-Card inserted!"),tr("Insert an SD-Card to save."),tr("OK"));
 											}
 										}
 									}
@@ -1809,7 +1809,7 @@ int MenuSettings()
 											strlcpy(Settings.theme_downloadpath, entered, sizeof(Settings.theme_downloadpath));
 											WindowPrompt(tr("Theme Download Path changed"),0,tr("OK"));
 											if (!isInserted(bootDevice))
-												WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
+												WindowPrompt(tr("No SD-Card inserted!"),tr("Insert an SD-Card to save."),tr("OK"));
 										}
 									}
 									options2.SetValue(Idx, "%s", Settings.theme_downloadpath);
@@ -1821,7 +1821,7 @@ int MenuSettings()
 						/** If not godmode don't let him inside **/
 					}
 					else
-						WindowPrompt(tr("Console Locked"), tr("Unlock console to use this option."), tr("OK"));
+						WindowPrompt(tr("Console Locked"),tr("Unlock console to use this option."),tr("OK"));
 					optionBrowser2.SetEffect(EFFECT_FADE, -20);
 					while (optionBrowser2.GetEffect() > 0) usleep(50);
 					titleTxt.SetText(tr("Settings"));
@@ -1858,7 +1858,7 @@ int MenuSettings()
 						w.Append(&backBtn);
 					}
 					else
-						WindowPrompt(tr("Console Locked"), tr("Unlock console to use this option."), tr("OK"));
+						WindowPrompt(tr("Console Locked"),tr("Unlock console to use this option."),tr("OK"));
 					slidedirection = FADE;
 					pageToDisplay = 2;
 					MainButton2.ResetState();
@@ -1903,7 +1903,7 @@ int MenuSettings()
 						}
 					}
 					else
-						WindowPrompt(tr("Console Locked"), tr("Unlock console to use this option."), tr("OK"));
+						WindowPrompt(tr("Console Locked"),tr("Unlock console to use this option."),tr("OK"));
 					w.Append(&backBtn);
 					w.Append(&optionBrowser2);
 					slidedirection = FADE;
@@ -2427,13 +2427,13 @@ int GameSettings(struct discHdr * header)
 								// titles are refreshed in menu.cpp as soon as this function returns
 								*/
 								game_cfg = CFG_get_game_opt(header->id); // needed here for "if (game_cfg)" earlier in case it's the first time settings are saved for a game
-								WindowPrompt(tr("Successfully Saved"), 0, tr("OK"));
+								WindowPrompt(tr("Successfully Saved"),0,tr("OK"));
 							}
 							else
-								WindowPrompt(tr("Save Failed"), 0, tr("OK"));
+								WindowPrompt(tr("Save Failed"),0,tr("OK"));
 						}
 						else
-							WindowPrompt(tr("No SD-Card inserted!"), tr("Insert an SD-Card to save."), tr("OK"));
+							WindowPrompt(tr("No SD-Card inserted!"),tr("Insert an SD-Card to save."),tr("OK"));
 
 						saveBtn.ResetState();
 						optionBrowser2.SetFocus(1);

@@ -182,7 +182,7 @@ void WindowCredits() {
     starImg.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     starImg.SetPosition(505,350);
 
-    int numEntries = 19;
+    int numEntries = 20;
     GuiText * txt[numEntries];
 
     txt[i] = new GuiText(tr("Credits"), 26, (GXColor) {255, 255, 255, 255});

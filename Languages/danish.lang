@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# danish.lang - r814
+# danish.lang - r831
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-16 00:18+0100\n"
+"POT-Creation-Date: 2009-11-18 01:08+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: dorf[dk]\n"
 "Language-Team: dorf[dk]\n"
@@ -201,13 +201,13 @@ msgid "Can't create file"
 msgstr "Kan ikke oprette fil"
 
 msgid "Can't decompress LZ77"
-msgstr ""
+msgstr "Kan ikke udpakke LZ77"
 
 msgid "Can't delete:"
 msgstr "Kan ikke slettes:"
 
 msgid "Can't find disc"
-msgstr ""
+msgstr "Kan ikke finde disk"
 
 msgid "Cancel"
 msgstr "Annullér"
@@ -556,10 +556,10 @@ msgid "Game Size"
 msgstr "Spilstørrelse"
 
 msgid "Game Sound Mode"
-msgstr ""
+msgstr "Spillyd"
 
 msgid "Game Sound Volume"
-msgstr ""
+msgstr "Spillyd lydstyrke"
 
 msgid "Game is already installed:"
 msgstr "Dette spil er allerede installeret:"
@@ -571,6 +571,9 @@ msgid "German"
 msgstr "Tysk"
 
 msgid "HOME Menu"
+msgstr ""
+
+msgid "Hermes CIOS"
 msgstr ""
 
 msgid "Homebrew Apps Path"
@@ -592,10 +595,10 @@ msgid "How to Shutdown?"
 msgstr "Hvordan skal der slukkes?"
 
 msgid "IMD5 Header not right."
-msgstr ""
+msgstr "Fejl i IMD5 header."
 
 msgid "IMET Header wrong."
-msgstr ""
+msgstr "Fejl i IMET header."
 
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
 msgstr "Hvis der ikke er netforbindelse, tryk da på 1 for at få en URL til WiiTDB.zip"
@@ -718,7 +721,7 @@ msgid "Locked"
 msgstr "Låst"
 
 msgid "Loop Sound"
-msgstr ""
+msgstr "Afspil lyd i løkke"
 
 msgid "Mar"
 msgstr ""
@@ -775,7 +778,7 @@ msgid "No USB Device found."
 msgstr "Ingen USB-enhed fundet."
 
 msgid "No WBFS or FAT game partition found"
-msgstr ""
+msgstr "Der blev ikke fundet en WBFS- eller FAT-partition med spil"
 
 msgid "No cheats were selected"
 msgstr "Der blev ikke valgt nogle cheats"
@@ -946,7 +949,7 @@ msgid "Screensaver"
 msgstr "Screensaver"
 
 msgid "Select"
-msgstr ""
+msgstr "Vælg"
 
 msgid "Select a DOL"
 msgstr "Vælg en DOL"
@@ -985,10 +988,10 @@ msgid "Sound"
 msgstr "Lyd"
 
 msgid "Sound+BGM"
-msgstr ""
+msgstr "Lyd+BGM"
 
 msgid "Sound+Quiet"
-msgstr ""
+msgstr "Lyd+Stille"
 
 msgid "Spanish"
 msgstr "Spansk"
@@ -1083,6 +1086,9 @@ msgstr "USB-enhed ikke fundet"
 
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX er beskyttet"
+
+msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
+msgstr ""
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
@@ -1210,7 +1216,7 @@ msgid "You have attempted to load a bad image"
 msgstr "Du har forsøgt at indlæse et dårligt billede"
 
 msgid "You need to select or format a partition"
-msgstr ""
+msgstr "Du skal vælge eller formattere en partition"
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."

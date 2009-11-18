@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# dutch.lang - r826
+# dutch.lang - r831
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-16 00:18+0100\n"
+"POT-Creation-Date: 2009-11-18 01:08+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: glowy\n"
 "Language-Team: tj_cool, glowy\n"
@@ -33,7 +33,7 @@ msgid "%s : %s May not boot correctly if your System Menu is not up to date."
 msgstr "%s : %s Kan mogelijk niet goed opstarten als je Systeem Menu niet up to date is."
 
 msgid "0 (Everyone)"
-msgstr "0 (Iedereen 0+)"
+msgstr "0 (Iedereen 3+)"
 
 msgid "1 (Child 7+)"
 msgstr "1 (Kinderen 7+)"
@@ -81,7 +81,7 @@ msgid ">> Deleting tickets...ERROR! "
 msgstr ">> Tickets verwijderen...FOUT! "
 
 msgid ">> Deleting tickets...Ok! "
-msgstr ">> Tickets verwijderen...Ok!"
+msgstr ">> Tickets verwijderen...Ok! "
 
 msgid ">> Deleting title ...ERROR! "
 msgstr ">> Titel verwijderen ...FOUT! "
@@ -90,19 +90,19 @@ msgid ">> Deleting title ...Ok!"
 msgstr ">> Titel verwijderen ...Ok!"
 
 msgid ">> Deleting title contents..."
-msgstr ">> Titel Inhoud verwijderen..."
+msgstr ">> Titel inhoud verwijderen..."
 
 msgid ">> Deleting title contents...ERROR! "
-msgstr ">> Titel Inhoud verwijderen...FOUT! "
+msgstr ">> Titel inhoud verwijderen...FOUT! "
 
 msgid ">> Deleting title contents...Ok!"
-msgstr ">> Titel Inhoud verwijderen...Ok!"
+msgstr ">> Titel inhoud verwijderen...Ok!"
 
 msgid ">> Deleting title..."
 msgstr ">> Titel verwijderen..."
 
 msgid ">> Finishing installation..."
-msgstr ">> Installatie Afronden..."
+msgstr ">> Installatie afronden..."
 
 msgid ">> Installing content #"
 msgstr ">> Installeren inhoud #"
@@ -114,13 +114,13 @@ msgid ">> Installing title..."
 msgstr ">> Titel installeren..."
 
 msgid ">> Reading WAD data..."
-msgstr ">> Wad data lezen..."
+msgstr ">> WAD data lezen..."
 
 msgid ">> Reading WAD data...ERROR! "
-msgstr ">> Wad data lezen...FOUT! "
+msgstr ">> WAD data lezen...FOUT! "
 
 msgid ">> Reading WAD data...Ok!"
-msgstr ">> Wad data lezen...Ok!"
+msgstr ">> WAD data lezen...Ok!"
 
 msgid "AUTO"
 msgstr ""
@@ -192,7 +192,7 @@ msgid "Both"
 msgstr "Beide"
 
 msgid "Can't be formatted"
-msgstr "Kan niet worden geformatteerd"
+msgstr "Kan niet geformatteerd worden"
 
 msgid "Can't create directory"
 msgstr "Kan map niet aanmaken"
@@ -283,13 +283,13 @@ msgid "Could not initialize network!"
 msgstr "Kan netwerk niet initialiseren!"
 
 msgid "Could not open Disc"
-msgstr "Kan Disk niet openen"
+msgstr "Kan disk niet openen"
 
 msgid "Could not open WBFS partition"
 msgstr "Kan WBFS partitie niet openen"
 
 msgid "Could not read the disc."
-msgstr "Kan Disk niet lezen."
+msgstr "Kan disk niet lezen."
 
 msgid "Could not save."
 msgstr "Kan niet opslaan."
@@ -361,10 +361,10 @@ msgid "Directory does not exist!"
 msgstr "Map bestaat niet!"
 
 msgid "Disc Artwork Download"
-msgstr "Download Disk labels"
+msgstr "Download disk labels"
 
 msgid "Disc Artwork Path"
-msgstr "Locatie Disk labels"
+msgstr "Locatie disk labels"
 
 msgid "Disc Default"
 msgstr "Disk standaard"
@@ -373,7 +373,7 @@ msgid "Disc Images"
 msgstr "Disk labels"
 
 msgid "Disc Path Changed"
-msgstr "Locatie Disk labels gewijzigd"
+msgstr "Locatie disk labels gewijzigd"
 
 msgid "DiskFlip"
 msgstr ""
@@ -472,7 +472,7 @@ msgid "Error 002 fix"
 msgstr "Herstel fout 002"
 
 msgid "Error reading Disc"
-msgstr "Fout bij lezen Disk"
+msgstr "Fout bij lezen disk"
 
 msgid "Error while transfering data."
 msgstr "Fout bij overplaatsen van data."
@@ -505,7 +505,7 @@ msgid "File not found."
 msgstr "Bestand niet gevonden."
 
 msgid "Finishing installation... Ok!"
-msgstr "Installatie Afronden... Ok!"
+msgstr "Installatie afronden... Ok!"
 
 msgid "Flip-X"
 msgstr "X omwisselen"
@@ -529,10 +529,10 @@ msgid "Full Shutdown"
 msgstr "Volledig uitzetten"
 
 msgid "GCT Cheatcodes Path"
-msgstr "Locatie GCT Cheatcodes"
+msgstr "Locatie GCT cheatcodes"
 
 msgid "GCT Cheatcodes Path changed"
-msgstr "Locatie GCT Cheatcodes gewijzigd"
+msgstr "Locatie GCT cheatcodes gewijzigd"
 
 msgid "GCT File created"
 msgstr "GCT bestand aangemaakt"
@@ -573,14 +573,17 @@ msgstr "Duits"
 msgid "HOME Menu"
 msgstr ""
 
+msgid "Hermes CIOS"
+msgstr ""
+
 msgid "Homebrew Apps Path"
-msgstr "Locatie Homebrew apps"
+msgstr "Locatie homebrew apps"
 
 msgid "Homebrew Appspath changed"
 msgstr "Locatie HB apps gewijzigd"
 
 msgid "Homebrew Launcher"
-msgstr "Homebrew Starter"
+msgstr "Homebrew starter"
 
 msgid "Hour"
 msgstr "Uur"
@@ -598,7 +601,7 @@ msgid "IMET Header wrong."
 msgstr "IMET Header niet correct."
 
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
-msgstr "Als je geen wifi hebt, druk dan op 1 om een URL voor je WiiTDB.zip te krijgen"
+msgstr "Als je geen WiFi hebt, druk dan op 1 om een URL voor je WiiTDB.zip te krijgen"
 
 #, c-format
 msgid "Incoming file %0.2fKB"
@@ -609,13 +612,13 @@ msgid "Incoming file %0.2fMB"
 msgstr "Binnenkomend bestand %0.2fMB"
 
 msgid "Initializing Network"
-msgstr "Netwerk Initialiseren"
+msgstr "Netwerk initialiseren"
 
 msgid "Insert Disk"
-msgstr "Voer een Disk in"
+msgstr "Voer een disk in"
 
 msgid "Insert a Wii Disc!"
-msgstr "Voer een Wii Disk in!"
+msgstr "Voer een Wii disk in!"
 
 msgid "Insert an SD-Card to download images."
 msgstr "Voer een SD kaart in om afbeeldingen te downloaden."
@@ -703,7 +706,7 @@ msgid "Load file from: %s ?"
 msgstr "Laad bestand van %s ?"
 
 msgid "Load this DOL as alternate DOL?"
-msgstr "Deze dol als alt dol gebruiken?"
+msgstr "Deze DOL als alt DOL gebruiken?"
 
 msgid "Loading standard language."
 msgstr "Standaardtaal laden."
@@ -745,7 +748,7 @@ msgid "Network init error"
 msgstr "Netwerk init. fout"
 
 msgid "New Disc Detected"
-msgstr "Nieuwe Disk gevonden"
+msgstr "Nieuwe disk gevonden"
 
 msgid "Next"
 msgstr "Volgende"
@@ -757,7 +760,7 @@ msgid "No .dol or .elf files found."
 msgstr "Geen .dol of .elf bestanden gevonden"
 
 msgid "No Cheatfile found"
-msgstr "Geen Cheatbestand gevonden"
+msgstr "Geen cheatbestand gevonden"
 
 msgid "No DOL file found on disc."
 msgstr "Geen DOL bestand gevonden op disk."
@@ -775,7 +778,7 @@ msgid "No USB Device found."
 msgstr "Geen USB apparaat gevonden."
 
 msgid "No WBFS or FAT game partition found"
-msgstr ""
+msgstr "Geen WBFS of FAT spel partitie gevonden"
 
 msgid "No cheats were selected"
 msgstr "Geen cheats geselecteerd"
@@ -805,7 +808,7 @@ msgid "Not a DOL/ELF file."
 msgstr "Geen DOL/ELF bestand."
 
 msgid "Not a Wii Disc"
-msgstr "Geen Wii Disk"
+msgstr "Geen Wii disk"
 
 msgid "Not enough free memory."
 msgstr "Niet genoeg vrije ruimte."
@@ -835,10 +838,10 @@ msgid "Official Site:"
 msgstr "Officiële site:"
 
 msgid "Only Customs"
-msgstr "Enkel Aangepast"
+msgstr "Enkel aangepast"
 
 msgid "Only Original"
-msgstr "Enkel Origineel"
+msgstr "Enkel origineel"
 
 msgid "Only for Install"
 msgstr "Alleen bij installeren"
@@ -892,7 +895,7 @@ msgid "Quick Boot"
 msgstr "Snelle start"
 
 msgid "Reading WAD data... Ok!"
-msgstr "Wad data lezen... Ok!"
+msgstr "WAD data lezen... Ok!"
 
 msgid "Receiving file from:"
 msgstr "Bestand ontvangen van:"
@@ -946,7 +949,7 @@ msgid "Screensaver"
 msgstr "Schermbeveiliging"
 
 msgid "Select"
-msgstr ""
+msgstr "Selecteer"
 
 msgid "Select a DOL"
 msgstr "Kies een DOL"
@@ -1009,7 +1012,7 @@ msgid "Successfully Saved"
 msgstr "Met succes opgeslagen!"
 
 msgid "Successfully Updated"
-msgstr "Met succes geupdate!"
+msgstr "Met succes geüpdate!"
 
 msgid "Successfully deleted:"
 msgstr "Met succes verwijderd:"
@@ -1027,10 +1030,10 @@ msgid "TChinese"
 msgstr "Chinees Trad."
 
 msgid "TXT Cheatcodes Path"
-msgstr "Locatie TXT Cheats"
+msgstr "Locatie TXT cheats"
 
 msgid "TXT Cheatcodes Path changed"
-msgstr "Locatie TXT codes gewijzigd"
+msgstr "Locatie TXT cheatcodes gewijzigd"
 
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "De opgegeven map bestaat niet. Wil je deze aanmaken?"
@@ -1039,7 +1042,7 @@ msgid "The file is not a .wad"
 msgstr "Dit is geen .wad bestand"
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."
-msgstr "Het wad bestand is geinstalleerd, maar kon niet van de SD kaart worden verwijderd "
+msgstr "Het wad bestand is geïnstalleerd. Maar kon niet van de SD kaart verwijderd worden."
 
 #, c-format
 msgid "The wad installation failed with error %ld"
@@ -1073,16 +1076,19 @@ msgid "Titles from WiiTDB"
 msgstr "WiiTDB titels"
 
 msgid "Tooltips"
-msgstr "Hulptekstbalonnen"
+msgstr "Knopinfo"
 
 msgid "Transfer failed."
 msgstr "Overdracht mislukt."
 
 msgid "USB Device not found"
-msgstr "USB Apparaat niet gevonden!"
+msgstr "USB Apparaat niet gevonden"
 
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX is vergrendeld"
+
+msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
+msgstr ""
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
@@ -1119,7 +1125,7 @@ msgid "Update DOL"
 msgstr "DOL updaten"
 
 msgid "Update Files"
-msgstr "Bestanden Updaten"
+msgstr "Bestanden updaten"
 
 msgid "Update Path"
 msgstr "Locatie update"
@@ -1149,7 +1155,7 @@ msgid "Updating WiiTDB.zip"
 msgstr "WiiTDB.zip updaten"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
-msgstr "Geuploade ZIP is geinstalleerd in je homebrew locatie."
+msgstr "Geuploade ZIP is geïnstalleerd in je homebrew locatie."
 
 msgid "VIDTV Patch"
 msgstr "VIDTV patchen"
@@ -1183,7 +1189,7 @@ msgid "Wii Settings"
 msgstr "Wii instellingen"
 
 msgid "WiiTDB Files"
-msgstr "WiiTDB Bestanden"
+msgstr "WiiTDB bestanden"
 
 msgid "WiiTDB Path"
 msgstr "Locatie WiiTDB"
@@ -1195,7 +1201,7 @@ msgid "Wiilight"
 msgstr "Wii verlichting"
 
 msgid "Wrong Password"
-msgstr "Fout wachtwoord!"
+msgstr "Fout wachtwoord"
 
 msgid "Yes"
 msgstr "Ja"
@@ -1204,13 +1210,13 @@ msgid "You are about to delete "
 msgstr "Je wilt nu verwijderen: "
 
 msgid "You are choosing to display favorites and you do not have any selected."
-msgstr "Je wilt favorieten tonen, maar je hebt er geen ingesteld"
+msgstr "Je wilt favorieten tonen, maar je hebt er geen ingesteld."
 
 msgid "You have attempted to load a bad image"
 msgstr "Je probeerde een slechte afbeelding te laden"
 
 msgid "You need to select or format a partition"
-msgstr ""
+msgstr "Je moet een partitie selecteren of formatteren"
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
@@ -1278,12 +1284,6 @@ msgstr "van"
 
 msgid "seconds left"
 msgstr "seconden over"
-
-#~ msgid "No WBFS partition found"
-#~ msgstr "Geen WBFS partitie gevonden"
-
-#~ msgid "You need to format a partition"
-#~ msgstr "Je moet een partitie formatteren"
 
 #~ msgid "Failed to extract opening.bnr"
 #~ msgstr "Uitpakken opening.bnr mislukt"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-16 00:18+0100\n"
+"POT-Creation-Date: 2009-11-18 01:08+0100\n"
 "PO-Revision-Date: 2009-10-30 16:28+0100\n"
 "Last-Translator: Springdale\n"
 "Language-Team: Tusk, Springdale\n"
@@ -573,6 +573,9 @@ msgstr "Német"
 msgid "HOME Menu"
 msgstr "HOME Menü"
 
+msgid "Hermes CIOS"
+msgstr ""
+
 msgid "Homebrew Apps Path"
 msgstr "Homebrew Útvonal"
 
@@ -1083,6 +1086,9 @@ msgstr "USB Meghajtó nem található"
 
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX levédve"
+
+msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
+msgstr ""
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."

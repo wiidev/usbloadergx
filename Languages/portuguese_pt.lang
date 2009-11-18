@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-# portuguese_pt.lang - r823
+# portuguese_pt.lang - r831
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-16 00:18+0100\n"
-"PO-Revision-Date: 2009-10-26 19:13-0000\n"
+"POT-Creation-Date: 2009-11-18 01:08+0100\n"
+"PO-Revision-Date: 2009-11-16 17:09-0000\n"
 "Last-Translator: Sky8000\n"
 "Language-Team: Sky8000 <sky8000@hotmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -556,7 +556,7 @@ msgid "Game Size"
 msgstr "Tamanho do Jogo"
 
 msgid "Game Sound Mode"
-msgstr ""
+msgstr "Definições de Audio Jogo"
 
 msgid "Game Sound Volume"
 msgstr "Volume de Som do Jogo"
@@ -572,6 +572,9 @@ msgstr "Alemão"
 
 msgid "HOME Menu"
 msgstr "Menú Inicial"
+
+msgid "Hermes CIOS"
+msgstr ""
 
 msgid "Homebrew Apps Path"
 msgstr "Pasta Apps Homebrew"
@@ -718,7 +721,7 @@ msgid "Locked"
 msgstr "Bloqueado"
 
 msgid "Loop Sound"
-msgstr ""
+msgstr "Repetir Sons"
 
 msgid "Mar"
 msgstr ""
@@ -775,7 +778,7 @@ msgid "No USB Device found."
 msgstr "Nenhum dispositivo USB encontrado."
 
 msgid "No WBFS or FAT game partition found"
-msgstr ""
+msgstr "Nenhuma partição com jogos encontrada (WBFS ou FAT)"
 
 msgid "No cheats were selected"
 msgstr "Não foram seleccionados truques"
@@ -946,7 +949,7 @@ msgid "Screensaver"
 msgstr "Protecção de ecrã"
 
 msgid "Select"
-msgstr ""
+msgstr "Seleccionar"
 
 msgid "Select a DOL"
 msgstr "Seleccionar o DOL"
@@ -985,10 +988,10 @@ msgid "Sound"
 msgstr "Audio"
 
 msgid "Sound+BGM"
-msgstr ""
+msgstr "Efeitos+Musica"
 
 msgid "Sound+Quiet"
-msgstr ""
+msgstr "Efeitos+Silêncio"
 
 msgid "Spanish"
 msgstr "Espanhol"
@@ -1083,6 +1086,9 @@ msgstr "Dispositivo USB não encontrado"
 
 msgid "USB Loader GX is protected"
 msgstr "O USB Loader GX está bloqueado"
+
+msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
+msgstr ""
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
@@ -1210,7 +1216,7 @@ msgid "You have attempted to load a bad image"
 msgstr "Tentou carregar uma imagem corrompida"
 
 msgid "You need to select or format a partition"
-msgstr ""
+msgstr "Necessita seleccionar ou formatar uma partição"
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
@@ -1278,12 +1284,6 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
-
-#~ msgid "No WBFS partition found"
-#~ msgstr "Não foi encontrada nenhuma partição WBFS"
-
-#~ msgid "You need to format a partition"
-#~ msgstr "É necessário FORMATAR a partição"
 
 #~ msgid "Failed to extract opening.bnr"
 #~ msgstr "Falha ao extrair o opening.bnr"

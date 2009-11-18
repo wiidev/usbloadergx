@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# japanese.lang - r826
+# japanese.lang - r831
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-16 00:18+0100\n"
+"POT-Creation-Date: 2009-11-18 01:08+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
@@ -573,6 +573,9 @@ msgstr "ドイツ語"
 msgid "HOME Menu"
 msgstr "HOMEﾎﾞﾀﾝﾒﾆｭｰ"
 
+msgid "Hermes CIOS"
+msgstr ""
+
 msgid "Homebrew Apps Path"
 msgstr "Homebrewのパス"
 
@@ -690,7 +693,7 @@ msgid "Left"
 msgstr "左ボタンで"
 
 msgid "Like SysMenu"
-msgstr "システムメニューのように"
+msgstr "システムメニュー風"
 
 msgid "Load"
 msgstr "ロード"
@@ -775,7 +778,7 @@ msgid "No USB Device found."
 msgstr "USB機器が検出されていません"
 
 msgid "No WBFS or FAT game partition found"
-msgstr ""
+msgstr "WBFS･FAT領域が見つかりません"
 
 msgid "No cheats were selected"
 msgstr "何も選ばれていません"
@@ -850,7 +853,7 @@ msgid "Parental Control"
 msgstr "ﾍﾟｱﾚﾝﾀﾙｺﾝﾄﾛｰﾙ"
 
 msgid "Partition"
-msgstr "ﾊﾟｰﾃｨｼｮﾝ"
+msgstr "使用する領域"
 
 msgid "Password"
 msgstr "暗証番号"
@@ -946,7 +949,7 @@ msgid "Screensaver"
 msgstr "スクリーンセーバー"
 
 msgid "Select"
-msgstr ""
+msgstr "選択"
 
 msgid "Select a DOL"
 msgstr "DOLを選択"
@@ -994,7 +997,7 @@ msgid "Spanish"
 msgstr "スペイン語"
 
 msgid "Special thanks to:"
-msgstr "ｽﾍﾟｼｬﾙｻﾝｸｽ:"
+msgstr "スペシャルサンクス:"
 
 msgid "Standard"
 msgstr "標準"
@@ -1084,6 +1087,9 @@ msgstr "USBﾃﾞﾊﾞｲｽを検出できませんでした"
 msgid "USB Loader GX is protected"
 msgstr "USB Loaderは保護されています"
 
+msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
+msgstr ""
+
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
 msgstr "ﾀﾞｳﾝﾛｰﾄﾞ中のため、WADを開けません (%s)."
@@ -1101,13 +1107,13 @@ msgid "Uninstalling wad"
 msgstr "WADをｱﾝｲﾝｽﾄｰﾙ"
 
 msgid "Unlock console to use this option."
-msgstr "このｵﾌﾟｼｮﾝを使用するためﾛｯｸを解除してください"
+msgstr "この設定を使用する場合はﾛｯｸを解除してください"
 
 msgid "Unlocked"
 msgstr "ﾛｯｸされていません"
 
 msgid "Unsupported format, try to extract manually."
-msgstr "特殊なフォーマットなので自分で解凍してください"
+msgstr "対応していない形式なので自分で解凍してください"
 
 msgid "Update"
 msgstr "更新"
@@ -1140,10 +1146,10 @@ msgid "Updating"
 msgstr "更新中 -"
 
 msgid "Updating Language Files..."
-msgstr "言語設定ﾌｧｲﾙを更新中..."
+msgstr "言語ファイルを更新中..."
 
 msgid "Updating Language Files:"
-msgstr "言語設定ﾌｧｲﾙを更新中:"
+msgstr "言語ファイルを更新中:"
 
 msgid "Updating WiiTDB.zip"
 msgstr "WiiTDB.zipを更新中"
@@ -1210,14 +1216,14 @@ msgid "You have attempted to load a bad image"
 msgstr "読み込めない画像があります"
 
 msgid "You need to select or format a partition"
-msgstr ""
+msgstr "ﾊﾟｰﾃｨｼｮﾝを選択するか初期化してください"
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 msgstr "%sWiiTDB_URL.txtにURLを保存しました"
 
 msgid "and translaters for language files updates"
-msgstr "翻訳者の方々(日本語:K-M)"
+msgstr "翻訳者の方々(日本語:K-M & papa)"
 
 msgid "available"
 msgstr "があります"
@@ -1229,7 +1235,7 @@ msgid "does not exist!"
 msgstr "存在しません!"
 
 msgid "does not exist!  Loading game without cheats."
-msgstr "存在しないのでﾁｰﾄなしでｹﾞｰﾑを起動します。"
+msgstr "存在しないのでﾁｰﾄなしで起動します"
 
 msgid "does not exist!  You Messed something up, Idiot."
 msgstr "存在しません!"
@@ -1277,13 +1283,7 @@ msgid "of"
 msgstr "中"
 
 msgid "seconds left"
-msgstr "完了まで"
-
-#~ msgid "No WBFS partition found"
-#~ msgstr "WBFSﾊﾟｰﾃｨｼｮﾝを検出できませんでした"
-
-#~ msgid "You need to format a partition"
-#~ msgstr "ﾊﾟｰﾃｨｼｮﾝを初期化して下さい"
+msgstr "秒で完了"
 
 #~ msgid "Failed to extract opening.bnr"
 #~ msgstr "opening.bnrの抽出に失敗しました"
