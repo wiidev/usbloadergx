@@ -17,9 +17,9 @@
 #define split_error(x)		do { /* gprintf("\nsplit error: %s\n\n",x); */ } while(0)
 
 // 1 sector less than 4gb
-//u64 OPT_split_size = (u64)4LL * 1024 * 1024 * 1024 - 512;
+u64 OPT_split_size = (u64)4LL * 1024 * 1024 * 1024 - (32 * 1024);
 // 1 sector less than 2gb
-u64 OPT_split_size = (u64)2LL * 1024 * 1024 * 1024 - 512;
+// u64 OPT_split_size = (u64)2LL * 1024 * 1024 * 1024 - 512;
 
 //split_info_t split;
 
