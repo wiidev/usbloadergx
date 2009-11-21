@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-18 01:08+0100\n"
+"POT-Creation-Date: 2009-11-22 00:34+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: dorf[dk]\n"
 "Language-Team: dorf[dk]\n"
@@ -724,6 +724,9 @@ msgid "Loop Sound"
 msgstr "Afspil lyd i løkke"
 
 msgid "Mar"
+msgstr ""
+
+msgid "Mark new games"
 msgstr ""
 
 msgid "May"

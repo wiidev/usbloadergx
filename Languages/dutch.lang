@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# dutch.lang - r831
+# dutch.lang - r837
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-18 01:08+0100\n"
+"POT-Creation-Date: 2009-11-22 00:34+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: glowy\n"
 "Language-Team: tj_cool, glowy\n"
@@ -237,7 +237,7 @@ msgid "Close"
 msgstr "Sluiten"
 
 msgid "Code Download"
-msgstr "Code Download"
+msgstr ""
 
 #, c-format
 msgid "Coded by: %s"
@@ -340,10 +340,10 @@ msgid "Delete ?"
 msgstr "Verwijderen ?"
 
 msgid "Delete Cheat GCT"
-msgstr "GCT codes verwijderen"
+msgstr "Cheat GCT verwijderen"
 
 msgid "Delete Cheat TXT"
-msgstr "TXT codes verwijderen"
+msgstr "Cheat TXT verwijderen"
 
 msgid "Delete Cover Artwork"
 msgstr "Hoesjes verwijderen"
@@ -544,7 +544,7 @@ msgid "Game ID"
 msgstr "Spel ID"
 
 msgid "Game Language"
-msgstr "Spel Taal"
+msgstr "Spel taal"
 
 msgid "Game Load"
 msgstr "Spel opties"
@@ -556,10 +556,10 @@ msgid "Game Size"
 msgstr "Spel grootte"
 
 msgid "Game Sound Mode"
-msgstr "Spel Geluid Mode"
+msgstr "Spel geluid mode"
 
 msgid "Game Sound Volume"
-msgstr "Spel Geluid Volume"
+msgstr "Spel geluid volume"
 
 msgid "Game is already installed:"
 msgstr "Spel is al geïnstalleerd:"
@@ -693,7 +693,7 @@ msgid "Left"
 msgstr "Links"
 
 msgid "Like SysMenu"
-msgstr "Als systeemmenu"
+msgstr "Als SysteemMenu"
 
 msgid "Load"
 msgstr "Laad"
@@ -725,6 +725,9 @@ msgstr "Geluid herhalen"
 
 msgid "Mar"
 msgstr "Mrt"
+
+msgid "Mark new games"
+msgstr ""
 
 msgid "May"
 msgstr "Mei"
@@ -1088,7 +1091,7 @@ msgid "USB Loader GX is protected"
 msgstr "USB Loader GX is vergrendeld"
 
 msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
-msgstr ""
+msgstr "USB Loader GX werkt alleen met Hermes cIOS rev 4! Zorg dat je revisie 4 hebt geïnstalleerd!"
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
@@ -1125,10 +1128,10 @@ msgid "Update DOL"
 msgstr "DOL updaten"
 
 msgid "Update Files"
-msgstr "Bestanden updaten"
+msgstr "Updaten"
 
 msgid "Update Path"
-msgstr "Locatie update"
+msgstr "Updatelocatie"
 
 msgid "Update Path changed."
 msgstr "Updatelocatie gewijzigd."
@@ -1262,13 +1265,13 @@ msgid "for his awesome tool LibWiiGui"
 msgstr "voor zijn geweldige tool LibWiiGui"
 
 msgid "for hosting the themes"
-msgstr "(hosten van de thema's)"
+msgstr "voor het hosten van de thema's"
 
 msgid "for hosting the update files"
-msgstr "(upload van updates)"
+msgstr "voor het hosten van update bestanden"
 
 msgid "for the USB Loader source"
-msgstr "(source code)"
+msgstr "voor USB Loader source"
 
 msgid "formatted!"
 msgstr "geformatteerd!"

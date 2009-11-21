@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# French V11.2 r835
+# French V11.3 r839
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-18 01:08+0100\n"
+"POT-Creation-Date: 2009-11-22 00:34+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Kin8\n"
 "Language-Team: Badablek, Amour, ikya, dj_skual & Kin8\n"
@@ -725,6 +725,9 @@ msgstr "Son en boucle"
 
 msgid "Mar"
 msgstr "Mars"
+
+msgid "Mark new games"
+msgstr "Marque nouveaux jeux"
 
 msgid "May"
 msgstr "Mai"
