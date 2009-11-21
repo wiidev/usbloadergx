@@ -35,6 +35,7 @@ class GuiGameBrowser : public GuiElement
 		GuiText ** gameTxt;
 		GuiText ** gameTxtOver;
 		GuiImage ** gameBg;
+		GuiImage ** newImg;
 
 		GuiButton * arrowUpBtn;
 		GuiButton * arrowDownBtn;
@@ -51,6 +52,7 @@ class GuiGameBrowser : public GuiElement
 
 		GuiImageData * bgGames;
 		GuiImageData * bgGamesEntry;
+		GuiImageData * newGames;
 		GuiImageData * scrollbar;
 		GuiImageData * arrowDown;
 		GuiImageData * arrowDownOver;

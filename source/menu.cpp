@@ -28,6 +28,7 @@
 #include "menu.h"
 #include "sys.h"
 #include "wpad.h"
+#include "settings/newtitles.h"
 
 /*** Variables that are also used extern ***/
 GuiWindow * mainWindow = NULL;
@@ -323,6 +324,7 @@ int MainMenu(int menu) {
 	gprintf("\nExiting main GUI");
 
 	CloseXMLDatabase();
+	NewTitles::DestroyInstance();
     ExitGUIThreads();
     bgMusic->Stop();
     delete bgMusic;

@@ -45,10 +45,13 @@ GuiGameBrowser::GuiGameBrowser(int w, int h, struct discHdr * l, int gameCnt, co
 	snprintf(imgPath, sizeof(imgPath), "%sbg_options.png", themePath);
 	bgGames = new GuiImageData(imgPath, imagebg);
 
+	snprintf(imgPath, sizeof(imgPath), "%snew.png", themePath);
+	newGames = new GuiImageData(imgPath, new_png);
+
 	bgGameImg = new GuiImage(bgGames);
 	bgGameImg->SetParent(this);
 	bgGameImg->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-
+	
 	maxTextWidth = bgGameImg->GetWidth() - 24 - 4;
 
 	snprintf(imgPath, sizeof(imgPath), "%sbg_options_entry.png", themePath);
@@ -121,6 +124,7 @@ GuiGameBrowser::GuiGameBrowser(int w, int h, struct discHdr * l, int gameCnt, co
 	gameTxt = new GuiText * [pagesize];
 	gameTxtOver = new GuiText * [pagesize];
 	gameBg = new GuiImage * [pagesize];
+	newImg = new GuiImage * [pagesize];
 
 	for(int i=0; i < pagesize; i++)
 	{
@@ -137,10 +141,15 @@ GuiGameBrowser::GuiGameBrowser(int w, int h, struct discHdr * l, int gameCnt, co
 
 		gameBg[i] = new GuiImage(bgGamesEntry);
 
+		newImg[i] = new GuiImage(newGames);
+		newImg[i]->SetAlignment(ALIGN_RIGHT, ALIGN_MIDDLE);
+		newImg[i]->SetVisible(false);
+
 		game[i] = new GuiButton(width-28,GAMESELECTSIZE);
 		game[i]->SetParent(this);
 		game[i]->SetLabel(gameTxt[i]);
 		game[i]->SetLabelOver(gameTxtOver[i]);
+		game[i]->SetIcon(newImg[i]);
 		game[i]->SetImageOver(gameBg[i]);
 		game[i]->SetPosition(5,GAMESELECTSIZE*i+4);
 		game[i]->SetRumble(false);
@@ -177,6 +186,7 @@ GuiGameBrowser::~GuiGameBrowser()
 	delete bgGameImg;
 	delete bgGames;
 	delete bgGamesEntry;
+	delete newGames;
 
 	delete trigA;
 	delete trigHeldA;
@@ -188,6 +198,7 @@ GuiGameBrowser::~GuiGameBrowser()
 		delete gameTxtOver[i];
 		delete gameBg[i];
 		delete game[i];
+		delete newImg[i];
 	}
 	delete [] gameIndex;
 	delete [] game;
@@ -328,6 +339,17 @@ void GuiGameBrowser::UpdateListEntries()
 			gameTxt[i]->SetPosition(24, 0);
 			gameTxtOver[i]->SetText(get_title(&gameList[next]));
 			gameTxtOver[i]->SetPosition(24, 0);
+
+			if (Settings.marknewtitles) {
+				if (gameList[next].isNew) {
+					gameTxt[i]->SetMaxWidth(maxTextWidth - (newGames->GetWidth() + 1), GuiText::DOTTED);
+					gameTxtOver[i]->SetMaxWidth(maxTextWidth - (newGames->GetWidth() + 1), GuiText::SCROLL);
+				} else {
+					gameTxt[i]->SetMaxWidth(maxTextWidth, GuiText::DOTTED);
+					gameTxtOver[i]->SetMaxWidth(maxTextWidth, GuiText::SCROLL);
+				}
+				newImg[i]->SetVisible(gameList[next].isNew != 0);
+			}
 
 			gameIndex[i] = next;
 			next = this->FindMenuItem(next, 1);

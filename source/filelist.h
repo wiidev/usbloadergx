@@ -537,4 +537,7 @@ extern const u32	usbport_png_size;
 extern const u8		dvd_png[];
 extern const u32	dvd_png_size;
 
+extern const u8     new_png[];
+extern const u32	new_png_size;
+
 #endif

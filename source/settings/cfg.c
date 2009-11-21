@@ -355,6 +355,7 @@ void Global_Default(void) {
     Settings.db_JPtoEN = 0;
     Settings.screensaver = 3;
 	Settings.partition = -1;
+	Settings.marknewtitles = 1;
 }
 
 
@@ -1043,6 +1044,12 @@ void global_cfg_set(char *name, char *val) {
 			Settings.partition = i;
 		}
 		return;
+	} else if (strcmp(name, "marknewtitles") == 0) {
+		int i;
+		if (sscanf(val, "%d", &i) == 1) {
+			Settings.marknewtitles = i;
+		}
+		return;
 	}
 
     cfg_bool("godmode", &Settings.godmode);
@@ -1287,6 +1294,7 @@ bool cfg_save_global() { // save global settings
     fprintf(f, "autonetwork = %d\n ", Settings.autonetwork);
     fprintf(f, "discart = %d\n ", Settings.discart);
 	fprintf(f, "partition = %d\n", Settings.partition);
+	fprintf(f, "marknewtitles = %d\n", Settings.marknewtitles);
     fclose(f);
     return true;
 }

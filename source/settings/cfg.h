@@ -421,6 +421,7 @@ extern "C" {
 		u8		autonetwork;
 		u8		discart;
 		short   gamesound;
+		u8		marknewtitles;
 	};
 	extern struct SSettings Settings;
 

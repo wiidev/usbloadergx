@@ -853,6 +853,14 @@ int MenuSettings()
 								static const char *opts[settings_screensaver_max] = {trNOOP("OFF"),trNOOP("3 min"),trNOOP("5 min"),trNOOP("10 min"),trNOOP("20 min"),trNOOP("30 min"),trNOOP("1 hour")};
 								options2.SetValue(Idx,"%s",tr(opts[Settings.screensaver]));
 							}
+							
+							if(ret == ++Idx || firstRun)
+							{
+								if(firstRun) options2.SetName(Idx, "%s",tr("Mark new games"));
+								if(ret == Idx && ++Settings.marknewtitles >= settings_off_on_max)
+									Settings.marknewtitles = 0;
+								options2.SetValue(Idx,"%s",tr(opts_off_on[Settings.marknewtitles]));
+							}
 
 							firstRun = false;
 						}

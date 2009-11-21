@@ -34,6 +34,9 @@ EOF
 		echo "svnrev.c created" >&2
 	fi
 	echo >&2
+
+	rev_new=`expr $rev_new + 1`
+	rev_date=`date +%Y%m%d%k%M`
 	
 	cat <<EOF > ./HBC/META.XML
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -41,7 +44,7 @@ EOF
 		<name> USB Loader GX</name>
 		<coder>USB Loader GX Team</coder>
 		<version>1.0 r$rev_new</version>
-		<release_date>200910150000</release_date>
+		<release_date>$rev_date</release_date>
 		<short_description>Loads games from USB-devices</short_description>
 		<long_description>USB Loader GX is a libwiigui based USB iso loader with a wii-like GUI. You can install games to your HDDs and boot them with shorter loading times.
 The interactive GUI is completely controllable with WiiMote, Classic Controller or GC Controller.

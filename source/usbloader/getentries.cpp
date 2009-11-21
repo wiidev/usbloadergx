@@ -5,6 +5,7 @@
 #include "main.h"
 #include <wctype.h>
 #include "getentries.h"
+#include "settings/newtitles.h"
 
 #include "../prompts/TitleBrowser.h"
 
@@ -162,6 +163,9 @@ int __Menu_GetPrevFilter(int t, wchar_t* gameFilter, u32 gameFiltered, wchar_t *
 	{
 		struct discHdr *header = &buffer[i];
 
+		/* Is new? */
+		header->isNew = NewTitles::Instance()->IsNew(header->id);
+
 		/* Filter Favorite */
 		if (Settings.fave && t==0)
 		{
@@ -177,6 +181,8 @@ int __Menu_GetPrevFilter(int t, wchar_t* gameFilter, u32 gameFiltered, wchar_t *
 		wchar_t *wname = FreeTypeGX::charToWideChar(get_title(header));
 		if(wname) nameList.push_back(wname);
 	}
+	
+	NewTitles::Instance()->Save();
 
 	/* delete buffer */
 	if(buffer) free(buffer);
@@ -473,6 +479,9 @@ int __Menu_GetGameList(int t, wchar_t* gameFilter, discHdr ** PgameList, u32 *Pg
     for (u32 i = 0; i < cnt; i++) {
 		struct discHdr *header = &buffer[i];
 
+		/* Is new? */
+		header->isNew = NewTitles::Instance()->IsNew(header->id);
+
 		/* Filters */
 		if (Settings.fave && t==0) {
 			struct Game_NUM* game_num = CFG_get_game_num(header->id);
@@ -497,6 +506,8 @@ int __Menu_GetGameList(int t, wchar_t* gameFilter, discHdr ** PgameList, u32 *Pg
 			buffer[cnt2] = buffer[i];
 		cnt2++;
 	}
+	NewTitles::Instance()->Save();
+	
 	if(cnt > cnt2)
 	{
 		cnt = cnt2;
