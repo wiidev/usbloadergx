@@ -19,13 +19,13 @@
 #include "cfg.h"
 #include "usbloader/partition_usbloader.h"
 #include "usbloader/utils.h"
+#include "xml/xml.h"
 
 #define MAXOPTIONS 13
 
 /*** Extern functions ***/
 extern void ResumeGui();
 extern void HaltGui();
-extern bool Database(char* xmlfilepath, char* argdblang, bool argJPtoEN, bool openfile, bool loadtitles, bool keepopen);
 extern void titles_default();
 
 /*** Extern variables ***/
@@ -73,6 +73,9 @@ int MenuSettings()
 	strcpy(opt_lang,Settings.language_path);
 	// backup title override setting
 	int opt_override = Settings.titlesOverride;
+	// backup partition index
+	u8 settingspartitionold = Settings.partition;
+	
 
 	enum
 	{
@@ -2052,22 +2055,29 @@ int MenuSettings()
 	w.SetEffect(EFFECT_FADE, -20);
 	while (w.GetEffect()>0) usleep(50);
 
-
+	// if partition has changed, Reinitialize it 
+	PartInfo pinfo = partitions.pinfo[Settings.partition];
+	load_from_fat = pinfo.fs_type == FS_TYPE_FAT32;
+	if (Settings.partition != settingspartitionold) {
+		WBFS_Close();
+		WBFS_OpenPart(load_from_fat, Settings.partition, partitions.pentry[Settings.partition].sector, partitions.pentry[Settings.partition].size, (char *) &game_partition);
+	}
+		
 	// if language has changed, reload titles
 	char opt_langnew[100];
 	strcpy(opt_langnew,Settings.language_path);
 	int opt_overridenew = Settings.titlesOverride;
-	if (strcmp(opt_lang,opt_langnew) || (opt_override != opt_overridenew && Settings.titlesOverride==1))
-		OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, false, Settings.titlesOverride==1?true:false, true); // open file, reload titles, keep in memory
-	// disable titles from database
+	bool reloaddatabasefile = false;
+	if (strcmp(opt_lang,opt_langnew) || (opt_override != opt_overridenew && Settings.titlesOverride==1) || (Settings.partition != settingspartitionold)) {
+		if (Settings.partition != settingspartitionold) {
+			reloaddatabasefile = true;
+			CloseXMLDatabase();
+		}
+		OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, reloaddatabasefile, Settings.titlesOverride==1?true:false, true); // open file, reload titles, keep in memory
+	}
+	// disable titles from database if setting has changed
 	if (opt_override != opt_overridenew && Settings.titlesOverride==0)
 		titles_default();
-
-	// Reinitialize WBFS partition, it might have changed
-	PartInfo pinfo = partitions.pinfo[Settings.partition];
-	load_from_fat = pinfo.fs_type == FS_TYPE_FAT32;
-	WBFS_Close();
-	WBFS_OpenPart(load_from_fat, Settings.partition, partitions.pentry[Settings.partition].sector, partitions.pentry[Settings.partition].size, (char *) &game_partition);
 
 	HaltGui();
 

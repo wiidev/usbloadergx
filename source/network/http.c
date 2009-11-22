@@ -175,8 +175,8 @@ struct block downloadfile(const char *url) {
 
     //Form a nice request header to send to the webserver
     char* headerformat = "GET %s HTTP/1.0\r\nHost: %s\r\nReferer: %s\r\nUser-Agent: USBLoaderGX r%s\r\n\r\n";;
-    char header[strlen(headerformat) + strlen(domain) + strlen(path)+strlen(url)];
-    sprintf(header, headerformat, path, domain, url, GetRev());
+    char header[strlen(headerformat) + strlen(path) + strlen(domain) + strlen(domain)];
+    sprintf(header, headerformat, path, domain, domain, GetRev());
 
     //Do the request and get the response
     send_message(connection, header);

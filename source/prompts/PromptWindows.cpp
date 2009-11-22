@@ -57,6 +57,7 @@ extern u8 shutdown;
 extern u8 reset;
 extern u8 mountMethod;
 extern struct discHdr *dvdheader;
+extern char game_partition[6];
 
 /*** Extern functions ***/
 extern void ResumeGui();
@@ -2640,8 +2641,8 @@ int ProgressUpdateWindow() {
 				char wiitdbpathtmp[200];
                 struct block file = downloadfile(XMLurl);
                 if (file.data != NULL) {
-					snprintf(wiitdbpath, sizeof(wiitdbpath), "%swiitdb.zip", Settings.titlestxt_path);
-					snprintf(wiitdbpathtmp, sizeof(wiitdbpathtmp), "%swiitmp.zip", Settings.titlestxt_path);
+					snprintf(wiitdbpath, sizeof(wiitdbpath), "%swiitdb_%s.zip", Settings.titlestxt_path,game_partition);
+					snprintf(wiitdbpathtmp, sizeof(wiitdbpathtmp), "%swiitmp_%s.zip", Settings.titlestxt_path,game_partition);
 					rename(wiitdbpath,wiitdbpathtmp);
 					pfile = fopen(wiitdbpath, "wb");
 					fwrite(file.data,1,file.size,pfile);
@@ -3020,8 +3021,8 @@ int ProgressUpdateWindow() {
                             file = downloadfile(XMLurl);
                             if (file.data != NULL) {
 								subfoldercreate(Settings.titlestxt_path);
-								snprintf(wiitdbpath, sizeof(wiitdbpath), "%swiitdb.zip", Settings.titlestxt_path);
-								snprintf(wiitdbpathtmp, sizeof(wiitdbpathtmp), "%swiitmp.zip", Settings.titlestxt_path);
+								snprintf(wiitdbpath, sizeof(wiitdbpath), "%swiitdb_%s.zip", Settings.titlestxt_path,game_partition);
+								snprintf(wiitdbpathtmp, sizeof(wiitdbpathtmp), "%swiitmp_%s.zip", Settings.titlestxt_path,game_partition);
 								rename(wiitdbpath,wiitdbpathtmp);
 								pfile = fopen(wiitdbpath, "wb");
 								fwrite(file.data,1,file.size,pfile);
@@ -3058,8 +3059,8 @@ int ProgressUpdateWindow() {
             struct block file = downloadfile(XMLurl);
             if (file.data != NULL) {
 				subfoldercreate(Settings.titlestxt_path);
-				snprintf(wiitdbpath, sizeof(wiitdbpath), "%swiitdb.zip", Settings.titlestxt_path);
-				snprintf(wiitdbpathtmp, sizeof(wiitdbpathtmp), "%swiitmp.zip", Settings.titlestxt_path);
+				snprintf(wiitdbpath, sizeof(wiitdbpath), "%swiitdb_%s.zip", Settings.titlestxt_path,game_partition);
+				snprintf(wiitdbpathtmp, sizeof(wiitdbpathtmp), "%swiitmp_%s.zip", Settings.titlestxt_path,game_partition);
 				rename(wiitdbpath,wiitdbpathtmp);
 				FILE *pfile = fopen(wiitdbpath, "wb");
 				fwrite(file.data,1,file.size,pfile);

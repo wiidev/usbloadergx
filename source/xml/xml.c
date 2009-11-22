@@ -11,17 +11,17 @@ Load game information from XML - Lustar
 //#include "cfg.h"
 //#include "xml.h"
 
+extern struct SSettings Settings; // for loader GX
+extern void title_set(char *id, char *title);
+extern char* trimcopy(char *dest, char *src, int size);
+extern char game_partition[6];
+
 
 /* config */
 static bool xmldebug = false;
-static char xmlcfg_filename[100] = "wiitdb.zip";
+static char xmlcfg_filename[100] = "wiitdb";
 static int xmlmaxsize = 1572864;
 
-
-extern struct SSettings Settings; // for loader GX
-
-extern void title_set(char *id, char *title);
-extern char* trimcopy(char *dest, char *src, int size);
 
 struct gameXMLinfo gameinfo;
 struct gameXMLinfo gameinfo_reset;
@@ -72,9 +72,11 @@ bool OpenXMLDatabase(char* xmlfilepath, char* argdblang, bool argJPtoEN, bool op
         char pathname[200];
         snprintf(pathname, sizeof(pathname), "%s", xmlfilepath);
         if (xmlfilepath[strlen(xmlfilepath) - 1] != '/') snprintf(pathname, sizeof(pathname), "%s/",pathname);
-        snprintf(pathname, sizeof(pathname), "%s%s", pathname, xmlcfg_filename);
+        snprintf(pathname, sizeof(pathname), "%s%s_%s.zip", pathname, xmlcfg_filename, game_partition);
         if (openfile) opensuccess = OpenXMLFile(pathname);
         if (!opensuccess) {
+		    snprintf(pathname, sizeof(pathname), "%s", xmlfilepath);
+			if (xmlfilepath[strlen(xmlfilepath) - 1] != '/') snprintf(pathname, sizeof(pathname), "%s/",pathname);
             snprintf(pathname, sizeof(pathname), "%swiitdb.zip", pathname);
             if (openfile) opensuccess = OpenXMLFile(pathname);
         }
@@ -387,7 +389,7 @@ bool LoadGameInfoFromXML(char* gameid, char* langtxt)
     char langcode[100] = "";
     if (!strcmp(langtxt,""))
         langtxt = GetLangSettingFromGame(gameid);
-    strcpy(langcode,ConvertLangTextToCode(langtxt));
+    strlcpy(langcode,ConvertLangTextToCode(langtxt),sizeof(langcode));
 
     /* reset all game info */
     gameinfo = gameinfo_reset;

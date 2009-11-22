@@ -42,13 +42,11 @@ int showGameInfo(char *ID) {
     HaltGui();//put this first to try to get rid of the code dump caused by loading this window at the same time as loading images from the SD card
     mainWindow->SetState(STATE_DISABLED);
     ResumeGui();
-    //load the xml shit
+
     bool databaseopened = true;
-    //OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, false, true); // open file, do not load titles, keep in memory
     if (databaseopened) {
 
         LoadGameInfoFromXML(ID, Settings.db_language);
-        //CloseXMLDatabase();
 
         bool showmeminfo = false;
 
@@ -711,17 +709,19 @@ int showGameInfo(char *ID) {
             wifiY-=20;
             gameinfoWindow.Append(wifiTxt[i]);
         }
-        if (strcmp(gameinfo.wififeatures[1],"") != 0) {
+        if (strcmp(gameinfo.wififeatures[1],"") !=0) {
             snprintf(linebuf, sizeof(linebuf), "%s:",tr("WiFi Features"));
-            wifiTxt[0] = new GuiText(linebuf, 16, (GXColor) {0,0,0, 255});
-            wifiTxt[0]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-            wifiTxt[0]->SetPosition(205,200+wifiY);
-            gameinfoWindow.Append(wifiTxt[0]);
-        }
+		} else {
+            strcpy(linebuf,"");
+        }		
+		wifiTxt[0] = new GuiText(linebuf, 16, (GXColor) {0,0,0, 255});
+        wifiTxt[0]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+        wifiTxt[0]->SetPosition(205,200+wifiY);
+        gameinfoWindow.Append(wifiTxt[0]);
 
         //synopsis
         int pagesize=12;
-        if (strcmp(gameinfo.synopsis,"") != 0)	{
+        if (strcmp(gameinfo.synopsis,"") !=0)	{
             snprintf(linebuf, sizeof(linebuf), "%s", gameinfo.synopsis);
             synopsisTxt = new GuiText(linebuf, 16, (GXColor) {0,0,0, 255});
             synopsisTxt->SetMaxWidth(350,GuiText::WRAP);
@@ -1112,7 +1112,7 @@ void MemInfoPrompt()
 
 void build_XML_URL(char *XMLurl, int XMLurlsize) {
     __Menu_GetEntries(1);
-	// NET_BUFFER_SIZE in http.c needs to be set to size of XMLurl + 40
+	// NET_BUFFER_SIZE in http.c needs to be set to size of XMLurl + headerformat
     char url[3540];
     char filename[10];
     snprintf(url,sizeof(url),"http://wiitdb.com/wiitdb.zip?LANG=%s&ID=", Settings.db_language);

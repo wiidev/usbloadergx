@@ -36,7 +36,7 @@ EOF
 	echo >&2
 
 	rev_new=`expr $rev_new + 1`
-	rev_date=`date +%Y%m%d%k%M`
+	rev_date=`date +%Y%m%d%H%M -u`
 	
 	cat <<EOF > ./HBC/META.XML
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>

@@ -146,6 +146,13 @@ int MenuCheck() {
         USBDevice_Init();
         SDCard_Init();
     }
+	
+	// open database if needed, load titles if needed
+	OpenXMLDatabase(Settings.titlestxt_path,Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true);
+
+    // titles.txt loaded after database to override database titles with custom titles
+    //snprintf(pathname, sizeof(pathname), "%stitles.txt", Settings.titlestxt_path);
+    //cfg_parsefile(pathname, &title_set);
 
     return menu;
 }

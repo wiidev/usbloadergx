@@ -5,7 +5,6 @@
 #include <sys/stat.h>
 #include <ctype.h>
 #include <ogcsys.h>
-#include <mxml.h>
 
 #include "language/gettext.h"
 #include "listfiles.h"
@@ -1771,15 +1770,6 @@ void CFG_Load(void) {
 	if (CONF_GetArea() == CONF_AREA_AUS)
 		strcpy(Settings.db_language,"AU");
 
-	// open database if needed, load titles if needed
-	OpenXMLDatabase(Settings.titlestxt_path,Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true);
-
-    // titles.txt loaded after database to override database titles with custom titles
-    //took out this titles.txt shit because it is useless now.  teh xml has all the titles in it
-    //snprintf(pathname, sizeof(pathname), "%stitles.txt", Settings.titlestxt_path);
-    //cfg_parsefile(pathname, &title_set);
-
-//	cfg_parsearg(argc, argv);
 	// if GUI language is set to default Settings.language_path needs to remain "notset" (if the detected setting was kept detection wouldn't work next time)
 	if (langisdefault)
 		sprintf(Settings.language_path, "notset");
