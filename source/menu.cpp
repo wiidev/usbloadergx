@@ -39,7 +39,6 @@ GuiSound * bgMusic = NULL;
 GuiSound *btnClick2 = NULL;
 
 struct discHdr *dvdheader = NULL;
-float gamesize;
 int currentMenu;
 u8 mountMethod=0;
 
@@ -372,7 +371,7 @@ int MainMenu(int menu) {
         struct discHdr *header = (mountMethod?dvdheader:&gameList[gameSelected]);
 
         struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
-		
+
         if (game_cfg) {
             videoChoice = game_cfg->video;
             languageChoice = game_cfg->language;
@@ -593,7 +592,7 @@ int MainMenu(int menu) {
         if (ret < 0) {
             Sys_LoadMenu();
         }
-		
+
 		printf("Returning entry point: 0x%0x\n", ret);
     }
 

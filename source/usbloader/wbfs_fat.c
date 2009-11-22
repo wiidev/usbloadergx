@@ -100,21 +100,21 @@ s32 _WBFS_FAT_GetHeadersCount(void *outbuf, u32 *count, u32 len)
 			cnt++;
 			continue;
 		}
-		
+
 		// no title found, read it from wbfs file directly
  		FILE *fp = fopen(path, "rb");
 		if (fp != NULL) {
 			fseek(fp, 512, SEEK_SET);
 			fread(&tmpHdr, sizeof(struct discHdr), 1, fp);
 			fclose(fp);
-			
+
 			if (tmpHdr.magic == 0x5D1C9EA3 && (memcmp(tmpHdr.id, id, 6) == 0)) {
 				memcpy(ptr, &tmpHdr, hdrsize);
 				cnt++;
 				continue;
 			}
 		}
-		
+
 		// no title found, read it from wbfs file
 		// but this is a little bit slower
 		// open 'partition' file
@@ -217,7 +217,7 @@ wbfs_t* WBFS_FAT_OpenPart(u8 *id)
 	if (ret) return NULL;
 	part = wbfs_open_partition(
 			split_read_sector,
-			nop_write_sector, //readonly //split_write_sector,
+			split_write_sector, //readonly //split_write_sector,
 			&split, fat_sector_size, split.total_sec, 0, 0);
 	if (!part) {
 		split_close(&split);
@@ -272,7 +272,7 @@ s32 WBFS_FAT_RemoveGame(u8 *discid)
 	WBFS_FAT_fname(discid, fname, sizeof(fname));
 	split_create(&split, fname, 0, 0, true);
 	split_close(&split);
-	
+
 	// Reset FAT stats
 	wbfs_fat_vfs_have = 0;
 	return 0;
@@ -315,7 +315,7 @@ s32 WBFS_FAT_DVD_Size(u64 *comp_size, u64 *real_size)
 	wbfs_t *part = NULL;
 	u64 size = (u64)143432*2*0x8000ULL;
 	u32 n_sector = size / fat_sector_size;
-	u32 wii_sec_sz; 
+	u32 wii_sec_sz;
 
 	// init a temporary dummy part
 	// as a placeholder for wbfs_size_disc
@@ -335,5 +335,52 @@ s32 WBFS_FAT_DVD_Size(u64 *comp_size, u64 *real_size)
 	if (real_size != NULL) *real_size = (u64)wii_sec_sz * last_sec;
 
 	return 0;
+}
+
+s32 WBFS_FAT_RenameGame(u8 *discid, const void *newname)
+{
+	wbfs_t *part = WBFS_FAT_OpenPart(discid);
+	if (!part)
+        return -1;
+
+    s32 ret = wbfs_ren_disc(part, discid,(u8*)newname);
+
+	WBFS_FAT_ClosePart(part);
+
+	return ret;
+}
+
+s32 WBFS_FAT_ReIDGame(u8 *discid, const void *newID)
+{
+	wbfs_t *part = WBFS_FAT_OpenPart(discid);
+	if (!part)
+        return -1;
+
+    s32 ret = wbfs_rID_disc(part, discid,(u8*)newID);
+
+	WBFS_FAT_ClosePart(part);
+
+	if(ret == 0)
+	{
+	    char fname[100];
+	    char fnamenew[100];
+	    s32 cnt = 0x31;
+
+        WBFS_FAT_fname(discid, fname, sizeof(fname));
+        WBFS_FAT_fname((u8*) newID, fnamenew, sizeof(fnamenew));
+
+        int stringlength = strlen(fname);
+
+        while(rename(fname, fnamenew) == 0)
+        {
+            fname[stringlength] = cnt;
+            fname[stringlength+1] = 0;
+            fnamenew[stringlength] = cnt;
+            fnamenew[stringlength+1] = 0;
+            cnt++;
+        }
+	}
+
+	return ret;
 }
 

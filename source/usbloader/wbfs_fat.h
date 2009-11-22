@@ -11,5 +11,7 @@ s32  WBFS_FAT_DiskSpace(f32 *used, f32 *free);
 s32  WBFS_FAT_RemoveGame(u8 *discid);
 s32  WBFS_FAT_AddGame(void);
 s32  WBFS_FAT_DVD_Size(u64 *comp_size, u64 *real_size);
+s32 WBFS_FAT_RenameGame(u8 *discid, const void *newname);
+s32 WBFS_FAT_ReIDGame(u8 *discid, const void *newID);
 
 #endif

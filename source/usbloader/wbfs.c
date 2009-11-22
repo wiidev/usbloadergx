@@ -305,7 +305,7 @@ s32 WBFS_OpenPart(u32 part_fat, u32 part_idx, u32 part_lba, u32 part_size, char 
 	wbfs_part_fat = part_fat;
 	wbfs_part_idx = part_idx;
 	wbfs_part_lba = part_lba;
-	
+
 	sprintf(partition, "%s%d", wbfs_part_fat ? "FAT" : "WBFS", wbfs_part_idx);
 	return 0;
 }
@@ -551,8 +551,12 @@ s32 WBFS_DiskSpace(f32 *used, f32 *free) {
     return 0;
 }
 
-s32 WBFS_RenameGame(u8 *discid, const void *newname) {
-	if (wbfs_part_fat) return -1;
+s32 WBFS_RenameGame(u8 *discid, const void *newname)
+{
+	if (wbfs_part_fat)
+    {
+        return WBFS_FAT_RenameGame(discid, newname);
+    }
 
     s32 ret;
 
@@ -566,8 +570,12 @@ s32 WBFS_RenameGame(u8 *discid, const void *newname) {
     return 0;
 }
 
-s32 WBFS_ReIDGame(u8 *discid, const void *newID) {
-	if (wbfs_part_fat) return -1;
+s32 WBFS_ReIDGame(u8 *discid, const void *newID)
+{
+	if (wbfs_part_fat)
+	{
+	    return WBFS_FAT_ReIDGame(discid, newID);
+	}
 
     s32 ret;
 

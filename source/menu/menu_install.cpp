@@ -6,13 +6,15 @@
 #include "usbloader/getentries.h"
 #include "prompts/ProgressWindow.h"
 
+float gamesize;
+
 /****************************************************************************
  * MenuInstall
  ***************************************************************************/
 
 int MenuInstall() {
 	gprintf("\nMenuInstall()");
-    
+
     int menu = MENU_NONE;
     static struct discHdr headerdisc ATTRIBUTE_ALIGN(32);
 
@@ -82,7 +84,7 @@ int MenuInstall() {
         f32 freespace, used;
 
         WBFS_DiskSpace(&used, &freespace);
-        float gamesize = WBFS_EstimeGameSize()/GB_SIZE;
+        gamesize = WBFS_EstimeGameSize()/GB_SIZE;
 
         char gametxt[50];
 
