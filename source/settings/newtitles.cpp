@@ -88,7 +88,8 @@ bool NewTitles::IsNew(u8 *titleid)
 			// This title is less than 24 hours old
 			if ((time(NULL) - t->timestamp) < NEW_SECONDS) {
 				// Only count the game as new when it's never been played through GX
-				return CFG_get_game_num(titleid)->count == 0;
+				Game_NUM *gnum = CFG_get_game_num(titleid);
+				return gnum == NULL || gnum->count == 0;
 			}
 			return false;
 		}	
