@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-# portuguese_pt.lang - r831
+# portuguese_pt.lang - r840
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-22 00:34+0100\n"
-"PO-Revision-Date: 2009-11-16 17:09-0000\n"
+"PO-Revision-Date: 2009-11-23 16:23-0000\n"
 "Last-Translator: Sky8000\n"
 "Language-Team: Sky8000 <sky8000@hotmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -574,7 +574,7 @@ msgid "HOME Menu"
 msgstr "Menú Inicial"
 
 msgid "Hermes CIOS"
-msgstr ""
+msgstr "CIOS Hermes"
 
 msgid "Homebrew Apps Path"
 msgstr "Pasta Apps Homebrew"
@@ -727,7 +727,7 @@ msgid "Mar"
 msgstr ""
 
 msgid "Mark new games"
-msgstr ""
+msgstr "Marcar jogos novos"
 
 msgid "May"
 msgstr "Mai"
@@ -1091,7 +1091,7 @@ msgid "USB Loader GX is protected"
 msgstr "O USB Loader GX está bloqueado"
 
 msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
-msgstr ""
+msgstr "O USB Loader GX só suporta o CIOS Hermes revisão 4! Verifique se esta é a revisão que tem instalada!"
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."

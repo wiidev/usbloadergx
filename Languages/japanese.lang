@@ -1,5 +1,5 @@
 # USB Loader GX language source file.
-# japanese.lang - r831
+# japanese.lang - r839
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
@@ -23,7 +23,7 @@ msgid " could not be downloaded."
 msgstr "ﾀﾞｳﾝﾛｰﾄﾞできませんでした"
 
 msgid " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information."
-msgstr "に保存されました。使用は自己責任でお願いします。"
+msgstr "に保存されました。使用は 自己責任でお願いします。"
 
 msgid " is not on the server."
 msgstr "はｻｰﾊﾞｰにありません"
@@ -574,7 +574,7 @@ msgid "HOME Menu"
 msgstr "HOMEﾎﾞﾀﾝﾒﾆｭｰ"
 
 msgid "Hermes CIOS"
-msgstr ""
+msgstr "注意事項"
 
 msgid "Homebrew Apps Path"
 msgstr "Homebrewのパス"
@@ -636,7 +636,7 @@ msgid "Install Error!"
 msgstr "ｲﾝｽﾄｰﾙ ｴﾗｰ!"
 
 msgid "Install a game"
-msgstr "ｹﾞｰﾑをｲﾝｽﾄｰﾙ"
+msgstr "ゲームをインストール"
 
 msgid "Installing content... Ok!"
 msgstr "ｺﾝﾃﾝﾂをｲﾝｽﾄｰﾙ...成功！"
@@ -727,7 +727,7 @@ msgid "Mar"
 msgstr "3月"
 
 msgid "Mark new games"
-msgstr ""
+msgstr "新しいゲームをマーク"
 
 msgid "May"
 msgstr "5月"
@@ -736,7 +736,7 @@ msgid "Missing files"
 msgstr "個の画像"
 
 msgid "Most likely it has dimensions that are not evenly divisible by 4."
-msgstr "4で割り切れない寸法があります。"
+msgstr "4で割り切れない寸法があります"
 
 msgid "Mount DVD drive"
 msgstr "DVDを起動"
@@ -985,7 +985,7 @@ msgid "Sort by rank"
 msgstr "ランク順に並び替え"
 
 msgid "Sort order by most played"
-msgstr "ﾌﾟﾚｲ回数が多い順に並び替え"
+msgstr "プレイ回数が多い順に並び替え"
 
 msgid "Sound"
 msgstr "サウンド"
@@ -1049,7 +1049,7 @@ msgstr "WADﾌｧｲﾙをｲﾝｽﾄｰﾙしましたが、SDから削除で�
 
 #, c-format
 msgid "The wad installation failed with error %ld"
-msgstr "WADのｲﾝｽﾄｰﾙはエラー:%ldで失敗しました"
+msgstr "WADのｲﾝｽﾄｰﾙはｴﾗｰ:%ldで失敗しました"
 
 msgid "Theme Download Path"
 msgstr "テーマをﾀﾞｳﾝﾛｰﾄﾞするパス"
@@ -1091,11 +1091,11 @@ msgid "USB Loader GX is protected"
 msgstr "USB Loaderは保護されています"
 
 msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
-msgstr ""
+msgstr "HermesCIOSはrev4の場合のみ 使用できます"
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
-msgstr "ﾀﾞｳﾝﾛｰﾄﾞ中のため、WADを開けません (%s)."
+msgstr "ﾀﾞｳﾝﾛｰﾄﾞ中のためWADを開けません (%s)."
 
 msgid "Uninstall"
 msgstr "ｱﾝｲﾝｽﾄｰﾙ"
@@ -1232,13 +1232,13 @@ msgid "available"
 msgstr "があります"
 
 msgid "contains over 255 lines of code.  It will produce unexpected results."
-msgstr "ｺｰﾄﾞが255行を超えているため、正しく実行できません"
+msgstr "ｺｰﾄﾞが255行を超えていて 正しく実行できません"
 
 msgid "does not exist!"
 msgstr "存在しません!"
 
 msgid "does not exist!  Loading game without cheats."
-msgstr "存在しないのでﾁｰﾄなしで起動します"
+msgstr "存在しないので チートなしで起動します"
 
 msgid "does not exist!  You Messed something up, Idiot."
 msgstr "存在しません!"

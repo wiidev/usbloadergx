@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-# swedish.lang - r709
+# swedish.lang - r839
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-11-22 00:34+0100\n"
-"PO-Revision-Date: 2009-10-01 01:00+0200\n"
+"PO-Revision-Date: 2009-11-24 22:11+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
 "MIME-Version: 1.0\n"
@@ -30,7 +30,7 @@ msgstr "finns inte på servern."
 
 #, c-format
 msgid "%s : %s May not boot correctly if your System Menu is not up to date."
-msgstr ""
+msgstr "%s : %s Kanske inte kan starta korrekt om ditt system inte är nyaste versionen."
 
 msgid "0 (Everyone)"
 msgstr "0 (Alla)"
@@ -150,7 +150,7 @@ msgid "Aug"
 msgstr ""
 
 msgid "Author:"
-msgstr ""
+msgstr "Utgivare:"
 
 msgid "AutoInit Network"
 msgstr "Autoinitiera Nätverk"
@@ -198,16 +198,16 @@ msgid "Can't create directory"
 msgstr "Kan inte skapa mapp"
 
 msgid "Can't create file"
-msgstr ""
+msgstr "Kunde inte skapa fil"
 
 msgid "Can't decompress LZ77"
-msgstr ""
+msgstr "Kunde inte dekomprimera LZ77"
 
 msgid "Can't delete:"
 msgstr "Kunde inte radera:"
 
 msgid "Can't find disc"
-msgstr ""
+msgstr "Kunde inte hitta skiva"
 
 msgid "Cancel"
 msgstr "Avbryt"
@@ -219,7 +219,7 @@ msgid "Cheatfile is blank"
 msgstr "Fuskfilen är blank"
 
 msgid "Checking existing artwork"
-msgstr ""
+msgstr "Kontrollera befintliga konstverk"
 
 msgid "Checking for Updates"
 msgstr "Letar efter uppdateringar"
@@ -228,7 +228,7 @@ msgid "Click to Download Covers"
 msgstr "Klicka för att ladda ner omslag"
 
 msgid "Click to change game ID"
-msgstr ""
+msgstr "Klicka för att byta spel ID"
 
 msgid "Clock"
 msgstr "Klocka"
@@ -292,7 +292,7 @@ msgid "Could not read the disc."
 msgstr "Kunde inte läsa skiva."
 
 msgid "Could not save."
-msgstr ""
+msgstr "Kunde inte spara."
 
 msgid "Could not set USB."
 msgstr "Kunde inte ställa in USB."
@@ -358,7 +358,7 @@ msgid "Developed by"
 msgstr "Utvecklat av"
 
 msgid "Directory does not exist!"
-msgstr ""
+msgstr "Katalog existerar inte!"
 
 msgid "Disc Artwork Download"
 msgstr "Skivbildsnedladdning"
@@ -400,7 +400,7 @@ msgid "Do you want to change language?"
 msgstr "Vill du byta språk?"
 
 msgid "Do you want to download this theme?"
-msgstr ""
+msgstr "Vill du ladda ner detta tema?"
 
 msgid "Do you want to format:"
 msgstr "Vill du formatera:"
@@ -418,7 +418,7 @@ msgid "Done!"
 msgstr "Klar!"
 
 msgid "Download"
-msgstr ""
+msgstr "Ladda ner"
 
 msgid "Download Boxart image?"
 msgstr "Ladda ner omslagsbild?"
@@ -430,25 +430,25 @@ msgid "Download Now"
 msgstr "Ladda ner nu"
 
 msgid "Download failed."
-msgstr ""
+msgstr "Nedladdning misslyckades."
 
 msgid "Download finished"
 msgstr "Nedladdning klar"
 
 msgid "Download request failed."
-msgstr ""
+msgstr "Nedladdnings begäran misslyckades."
 
 msgid "Downloading"
 msgstr "Laddar ner"
 
 msgid "Downloading Page List:"
-msgstr ""
+msgstr "Laddar ner lista:"
 
 msgid "Downloading file"
 msgstr "Laddar ner fil:"
 
 msgid "Downloading image:"
-msgstr ""
+msgstr "Laddar ner bild:"
 
 msgid "Dutch"
 msgstr "Nederländska"
@@ -487,13 +487,13 @@ msgid "Exit USB Loader GX?"
 msgstr "Avsluta USB Loader GX?"
 
 msgid "Extracting files..."
-msgstr ""
+msgstr "Extraherar filer..."
 
 msgid "Failed formating"
 msgstr "Formatering misslyckad"
 
 msgid "Failed to extract."
-msgstr ""
+msgstr "Extrahering misslyckades."
 
 msgid "Failed to open partition"
 msgstr "Misslyckades att öppna partition"
@@ -556,10 +556,10 @@ msgid "Game Size"
 msgstr "Spelstorlek"
 
 msgid "Game Sound Mode"
-msgstr ""
+msgstr "Spel ljuds läge"
 
 msgid "Game Sound Volume"
-msgstr ""
+msgstr "Spel ljuds volym"
 
 msgid "Game is already installed:"
 msgstr "Spelet är redan installerat:"
@@ -586,7 +586,7 @@ msgid "Homebrew Launcher"
 msgstr "Homebrew Startare"
 
 msgid "Hour"
-msgstr "Timme"
+msgstr "Timmars"
 
 msgid "How do you want to update?"
 msgstr "Hur vill du uppdatera?"
@@ -595,10 +595,10 @@ msgid "How to Shutdown?"
 msgstr "Hur vill du stänga av?"
 
 msgid "IMD5 Header not right."
-msgstr ""
+msgstr "IMD5 Rubrik stämmer inte."
 
 msgid "IMET Header wrong."
-msgstr ""
+msgstr "IMET Rubriken är fel."
 
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
 msgstr "Om du inte har WiFi, tryck 1 för att få en URL till din WiiTDB.zip"
@@ -681,7 +681,7 @@ msgid "Korean"
 msgstr "Koreanska"
 
 msgid "Language File"
-msgstr ""
+msgstr "Språk fil"
 
 msgid "Language change:"
 msgstr "Språkbyte:"
@@ -699,7 +699,7 @@ msgid "Load"
 msgstr "Ladda"
 
 msgid "Load From SD/USB"
-msgstr ""
+msgstr "Ladda från SD/USB"
 
 #, c-format
 msgid "Load file from: %s ?"
@@ -721,13 +721,13 @@ msgid "Locked"
 msgstr "Låst"
 
 msgid "Loop Sound"
-msgstr ""
+msgstr "Loopa ljudet"
 
 msgid "Mar"
 msgstr ""
 
 msgid "Mark new games"
-msgstr ""
+msgstr "Markera nya spel"
 
 msgid "May"
 msgstr "Maj"
@@ -739,7 +739,7 @@ msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr "Troligtvis har den mått som inte är jämnt dividerade med 4."
 
 msgid "Mount DVD drive"
-msgstr ""
+msgstr "Montera DVD läsare"
 
 msgid "Music Volume"
 msgstr "Volym"
@@ -781,10 +781,10 @@ msgid "No USB Device found."
 msgstr "Ingen USB-enhet hittad."
 
 msgid "No WBFS or FAT game partition found"
-msgstr ""
+msgstr "Ingen WBFS eller FAT spel partition hittad"
 
 msgid "No cheats were selected"
-msgstr ""
+msgstr "Inga fusk har valda"
 
 msgid "No data could be read."
 msgstr "Ingen data kunde läsas."
@@ -796,7 +796,7 @@ msgid "No new updates."
 msgstr "Inga nya uppdateringar"
 
 msgid "No themes found on the site."
-msgstr ""
+msgstr "Inga teman hittades på sidan."
 
 msgid "Normal"
 msgstr "Vanlig"
@@ -880,7 +880,7 @@ msgid "Play Count"
 msgstr "Spelat"
 
 msgid "Please wait..."
-msgstr ""
+msgstr "Vänligen vänta..."
 
 msgid "Power off the Wii"
 msgstr "Stäng av Wii"
@@ -943,28 +943,28 @@ msgid "Save Failed"
 msgstr "Sparande misslyckat"
 
 msgid "Save Game List to"
-msgstr ""
+msgstr "Spara spel lista till"
 
 msgid "Saved"
-msgstr ""
+msgstr "Sparat"
 
 msgid "Screensaver"
 msgstr "Skärmsläckare"
 
 msgid "Select"
-msgstr ""
+msgstr "Välj"
 
 msgid "Select a DOL"
-msgstr ""
+msgstr "Välj en DOL"
 
 msgid "Selected DOL"
-msgstr ""
+msgstr "Vald DOL"
 
 msgid "Sept"
 msgstr ""
 
 msgid "Set Search-Filter"
-msgstr ""
+msgstr "Ställ in sök-filter"
 
 msgid "Set as backgroundmusic?"
 msgstr "Ställ in som bakgrundsmusik?"
@@ -982,7 +982,7 @@ msgid "Sort alphabetically"
 msgstr "Sortera alfabetiskt"
 
 msgid "Sort by rank"
-msgstr ""
+msgstr "Sortera efter rank"
 
 msgid "Sort order by most played"
 msgstr "Sortera efter mest spelade"
@@ -991,10 +991,10 @@ msgid "Sound"
 msgstr "Ljud"
 
 msgid "Sound+BGM"
-msgstr ""
+msgstr "Ljud+BGM"
 
 msgid "Sound+Quiet"
-msgstr ""
+msgstr "Ljud+Tyst"
 
 msgid "Spanish"
 msgstr "Spanska"
@@ -1021,7 +1021,7 @@ msgid "Successfully deleted:"
 msgstr "Lyckad radering av:"
 
 msgid "Successfully extracted theme"
-msgstr ""
+msgstr "Extrahering av tema lyckades"
 
 msgid "Successfully installed:"
 msgstr "Lyckad installation av:"
@@ -1039,7 +1039,7 @@ msgid "TXT Cheatcodes Path changed"
 msgstr "TXTCheatcodes sökväg ändrad"
 
 msgid "The entered directory does not exist. Would you like to create it?"
-msgstr ""
+msgstr "Den angivna katalogen existerar inte. Vill du skapa den?"
 
 msgid "The file is not a .wad"
 msgstr "Filen är inte en .wad"
@@ -1052,13 +1052,13 @@ msgid "The wad installation failed with error %ld"
 msgstr "Wad installation misslyckades med fel %ld"
 
 msgid "Theme Download Path"
-msgstr ""
+msgstr "Tema-mapp nedladdade"
 
 msgid "Theme Download Path changed"
-msgstr ""
+msgstr "Tema-mapp nedladdade ändrad"
 
 msgid "Theme Downloader"
-msgstr ""
+msgstr "Tema Nedladdare"
 
 msgid "Theme Path"
 msgstr "Tema-mapp"
@@ -1067,7 +1067,7 @@ msgid "Theme Path Changed"
 msgstr "Tema-mapp ändrad"
 
 msgid "Theme Title:"
-msgstr ""
+msgstr "Tema titel:"
 
 msgid "Time left:"
 msgstr "Tid kvar:"
@@ -1082,7 +1082,7 @@ msgid "Tooltips"
 msgstr "Verktygstips"
 
 msgid "Transfer failed."
-msgstr ""
+msgstr "Flytt misslyckades."
 
 msgid "USB Device not found"
 msgstr "USB-enhet ej hittad"
@@ -1091,7 +1091,7 @@ msgid "USB Loader GX is protected"
 msgstr "USB Loader GX är skyddad"
 
 msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
-msgstr ""
+msgstr "USB Loader GX kommer ändast köra med Hermes CIOS ver 4! Vänligen kontrollera att du har ver 4 installerad!"
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
@@ -1116,7 +1116,7 @@ msgid "Unlocked"
 msgstr "Upplåst"
 
 msgid "Unsupported format, try to extract manually."
-msgstr ""
+msgstr "Format stöds inte, försök extrahera manuelt."
 
 msgid "Update"
 msgstr "Uppdatera"
@@ -1158,7 +1158,7 @@ msgid "Updating WiiTDB.zip"
 msgstr "Uppdaterar WiiTDB.zip"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
-msgstr ""
+msgstr "Uppladdad ZIP fil installerad till homebrew-mappen"
 
 msgid "VIDTV Patch"
 msgstr "VIDTV-Patch"
@@ -1219,14 +1219,14 @@ msgid "You have attempted to load a bad image"
 msgstr "Du har försökt ladda en dålig bild"
 
 msgid "You need to select or format a partition"
-msgstr ""
+msgstr "Du måste välja eller formatera en partition"
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 msgstr "Din URL har sparats som %sWiiTDB_URL.txt."
 
 msgid "and translaters for language files updates"
-msgstr ""
+msgstr "och översättarna för språk fils uppdateringar"
 
 msgid "available"
 msgstr "tillgänglig"
@@ -1265,7 +1265,7 @@ msgid "for his awesome tool LibWiiGui"
 msgstr "för hans underbara verktyg LibWiiGui"
 
 msgid "for hosting the themes"
-msgstr ""
+msgstr "för hostning av teman"
 
 msgid "for hosting the update files"
 msgstr "för lagring av uppdateringar"
@@ -1287,12 +1287,6 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder kvar"
-
-#~ msgid "No WBFS partition found"
-#~ msgstr "Ingen WBFS-partition hittad"
-
-#~ msgid "You need to format a partition"
-#~ msgstr "Du behöver formatera en partition"
 
 #~ msgid "Homebrew Channel"
 #~ msgstr "Homebrew Kanalen"

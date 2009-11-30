@@ -1,5 +1,5 @@
 # USB Loader GX language source file.
-# danish.lang - r831
+# danish.lang - r843
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
@@ -727,7 +727,7 @@ msgid "Mar"
 msgstr ""
 
 msgid "Mark new games"
-msgstr ""
+msgstr "Makér nye spil"
 
 msgid "May"
 msgstr "Maj"
@@ -1091,7 +1091,7 @@ msgid "USB Loader GX is protected"
 msgstr "USB Loader GX er beskyttet"
 
 msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
-msgstr ""
+msgstr "USB Loader GX fungerer kun med Hermes CIOS rev 4! Kontrollér, at revision 4 er installeret!"
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."

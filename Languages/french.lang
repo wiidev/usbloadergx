@@ -1,5 +1,5 @@
 # USB Loader GX language source file.
-# French V11.3 r839
+# French V11.4 r839
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
@@ -727,7 +727,7 @@ msgid "Mar"
 msgstr "Mars"
 
 msgid "Mark new games"
-msgstr "Marque nouveaux jeux"
+msgstr "Marqueur nouveau jeu"
 
 msgid "May"
 msgstr "Mai"

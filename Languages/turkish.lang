@@ -1,5 +1,5 @@
 # USB Loader GX language source file.
-# turkish.lang - r831
+# turkish.lang - r839
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
@@ -727,7 +727,7 @@ msgid "Mar"
 msgstr ""
 
 msgid "Mark new games"
-msgstr ""
+msgstr "Yeni oyunlari imle"
 
 msgid "May"
 msgstr ""
@@ -1091,7 +1091,7 @@ msgid "USB Loader GX is protected"
 msgstr "USB Loader GX koruma altında"
 
 msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
-msgstr ""
+msgstr "USB Loader GX sadece Hermes CIOS rev4 ile çalışır! Lütfen rev4 ün yüklü olduğundan emin olun!"
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
