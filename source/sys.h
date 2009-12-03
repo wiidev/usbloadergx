@@ -14,5 +14,9 @@ void Sys_BackToLoader(void);
 int Sys_ChangeIos(int ios);
 int Sys_IosReload(int IOS);
 bool Sys_IsHermes();
+s32 IOS_ReloadIOSsafe(int ios);
+
+extern s32 ios222rev;
+extern s32 ios249rev;
 
 #endif

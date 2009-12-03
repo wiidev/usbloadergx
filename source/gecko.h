@@ -6,7 +6,6 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-//giantpune's functions for USB gecko
 
 #ifndef NO_DEBUG
 	//use this just like printf();

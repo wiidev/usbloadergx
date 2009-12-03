@@ -695,7 +695,7 @@ int MenuDiscList() {
         } else if (homeBtn.GetState() == STATE_CLICKED) {
             gprintf("\n\thomeBtn clicked");
             bgMusic->Pause();
-            choice = WindowExitPrompt(tr("Exit USB Loader GX?"),0, tr("Back to Loader"),tr("Wii Menu"),tr("Back"),0);
+            choice = WindowExitPrompt();
             bgMusic->Resume();
 
             if (choice == 3) {
@@ -1475,7 +1475,6 @@ void rockout(int f) {
     int num=(f==2?-1:gameSelected);
 
     char imgPath[100];
-#ifdef HW_RVL
     if ((!(strcasestr(get_title(&gameList[num]),"guitar")||
             strcasestr(get_title(&gameList[num]),"band")||
             strcasestr(get_title(&gameList[num]),"rock")||
@@ -1503,6 +1502,5 @@ void rockout(int f) {
         snprintf(imgPath, sizeof(imgPath), "%srplayer4_point.png", CFG.theme_path);
         pointer[3] = new GuiImageData(imgPath, rplayer4_point_png);
     }
-#endif
     ResumeGui();
 }

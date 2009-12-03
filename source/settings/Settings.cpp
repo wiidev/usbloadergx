@@ -683,7 +683,7 @@ int MenuSettings()
 							cfg_save_global();
 							optionBrowser2.SetState(STATE_DISABLED);
 							bgMusic->Pause();
-							choice = WindowExitPrompt(tr("Exit USB Loader GX?"),0, tr("Back to Loader"),tr("Wii Menu"),tr("Back"),0);
+							choice = WindowExitPrompt();
 							bgMusic->Resume();
 							if (choice == 3)
 								Sys_LoadMenu(); // Back to System Menu
@@ -928,7 +928,7 @@ int MenuSettings()
 							cfg_save_global();
 							optionBrowser2.SetState(STATE_DISABLED);
 							bgMusic->Pause();
-							choice = WindowExitPrompt(tr("Exit USB Loader GX?"),0, tr("Back to Loader"),tr("Wii Menu"),tr("Back"),0);
+							choice = WindowExitPrompt();
 							bgMusic->Resume();
 							if (choice == 3)
 								Sys_LoadMenu(); // Back to System Menu
@@ -992,7 +992,7 @@ int MenuSettings()
 									if (++Settings.cios >= settings_cios_max) {
 										Settings.cios = 0;
 									}
-									if (Settings.cios != 0) {
+									if (Settings.cios != 0 && ios222rev!=4) {
 										WindowPrompt(tr("Hermes CIOS"),tr("USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"),tr("OK"));
 									}
 								}
@@ -1101,7 +1101,7 @@ int MenuSettings()
 							cfg_save_global();
 							optionBrowser2.SetState(STATE_DISABLED);
 							bgMusic->Pause();
-							choice = WindowExitPrompt(tr("Exit USB Loader GX?"),0, tr("Back to Loader"),tr("Wii Menu"),tr("Back"),0);
+							choice = WindowExitPrompt();
 							bgMusic->Resume();
 							if (choice == 3)
 								Sys_LoadMenu(); // Back to System Menu
@@ -1273,7 +1273,7 @@ int MenuSettings()
 							cfg_save_global();
 							optionBrowser2.SetState(STATE_DISABLED);
 							bgMusic->Pause();
-							choice = WindowExitPrompt(tr("Exit USB Loader GX?"),0, tr("Back to Loader"),tr("Wii Menu"),tr("Back"),0);
+							choice = WindowExitPrompt();
 							bgMusic->Resume();
 							if (choice == 3)
 								Sys_LoadMenu(); // Back to System Menu
@@ -1454,7 +1454,7 @@ int MenuSettings()
 								cfg_save_global();
 								optionBrowser2.SetState(STATE_DISABLED);
 								bgMusic->Pause();
-								choice = WindowExitPrompt(tr("Exit USB Loader GX?"),0, tr("Back to Loader"),tr("Wii Menu"),tr("Back"),0);
+								choice = WindowExitPrompt();
 								bgMusic->Resume();
 								if (choice == 3)
 									Sys_LoadMenu(); // Back to System Menu
@@ -1587,7 +1587,6 @@ int MenuSettings()
 											CFG_LoadGlobal();
 											ResumeGui();
 											menu = MENU_SETTINGS;
-	#ifdef HW_RVL
 											snprintf(imgPath, sizeof(imgPath), "%splayer1_point.png", CFG.theme_path);
 											pointer[0] = new GuiImageData(imgPath, player1_point_png);
 											snprintf(imgPath, sizeof(imgPath), "%splayer2_point.png", CFG.theme_path);
@@ -1596,7 +1595,6 @@ int MenuSettings()
 											pointer[2] = new GuiImageData(imgPath, player3_point_png);
 											snprintf(imgPath, sizeof(imgPath), "%splayer4_point.png", CFG.theme_path);
 											pointer[3] = new GuiImageData(imgPath, player4_point_png);
-	#endif
 											if (CFG.widescreen)
 												snprintf(imgPath, sizeof(imgPath), "%swbackground.png", CFG.theme_path);
 											else
@@ -2038,7 +2036,7 @@ int MenuSettings()
 				cfg_save_global();
 				optionBrowser2.SetState(STATE_DISABLED);
 				bgMusic->Pause();
-				choice = WindowExitPrompt(tr("Exit USB Loader GX?"),0, tr("Back to Loader"),tr("Wii Menu"),tr("Back"),0);
+				choice = WindowExitPrompt();
 				bgMusic->Resume();
 
 				if (choice == 3)
@@ -2418,7 +2416,7 @@ int GameSettings(struct discHdr * header)
 						cfg_save_global();
 						optionBrowser2.SetState(STATE_DISABLED);
 						bgMusic->Pause();
-						choice = WindowExitPrompt(tr("Exit USB Loader GX?"),0, tr("Back to Loader"),tr("Wii Menu"),tr("Back"),0);
+						choice = WindowExitPrompt();
 						bgMusic->Resume();
 						if (choice == 3)
 							Sys_LoadMenu(); // Back to System Menu
@@ -2682,7 +2680,7 @@ int GameSettings(struct discHdr * header)
 						cfg_save_global();
 						optionBrowser2.SetState(STATE_DISABLED);
 						bgMusic->Pause();
-						choice = WindowExitPrompt(tr("Exit USB Loader GX?"),0, tr("Back to Loader"),tr("Wii Menu"),tr("Back"),0);
+						choice = WindowExitPrompt();
 						bgMusic->Resume();
 						if (choice == 3)
 							Sys_LoadMenu(); // Back to System Menu
@@ -2882,7 +2880,7 @@ int GameSettings(struct discHdr * header)
 				cfg_save_global();
 				optionBrowser2.SetState(STATE_DISABLED);
 				bgMusic->Pause();
-				choice = WindowExitPrompt(tr("Exit USB Loader GX?"),0, tr("Back to Loader"),tr("Wii Menu"),tr("Back"),0);
+				choice = WindowExitPrompt();
 				bgMusic->Resume();
 
 				if (choice == 3)

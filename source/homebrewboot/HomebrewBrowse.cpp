@@ -770,7 +770,7 @@ int MenuHomebrewBrowse() {
             else if (homo.GetState() == STATE_CLICKED) {
                 cfg_save_global();
                 bgMusic->Pause();
-                choice = WindowExitPrompt(tr("Exit USB Loader GX?"),0, tr("Back to Loader"),tr("Wii Menu"),tr("Back"),0);
+                choice = WindowExitPrompt();
                 bgMusic->Resume();
 
                 if (choice == 3) {

@@ -361,6 +361,7 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
 
 	//u32 geckoattached = usb_isgeckoalive(EXI_CHANNEL_1);
 	//if (geckoattached)usb_flush(EXI_CHANNEL_1);
+	geckoinit = InitGecko();
 
     /* Read apploader header */
     ret = WDVD_Read(buffer, 0x20, APPLDR_OFFSET);

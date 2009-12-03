@@ -79,7 +79,7 @@ int Sys_ChangeIos(int ios) {
 	
 	USBStorage_Deinit();
 	
-	s32 ret = IOS_ReloadIOS(ios);
+	s32 ret = IOS_ReloadIOSsafe(ios);
 	if (ret < 0) {
 		ios = prevIos;
 	}
@@ -125,7 +125,7 @@ int Sys_IosReload(int IOS) {
 
     if (IOS == 249 || IOS == 222 || IOS == 223) {
         for (int i = 0; i < 10; i++) {
-            ret = IOS_ReloadIOS(IOS);
+            ret = IOS_ReloadIOSsafe(IOS);
             if (ret < 0) return ret;
             if (IOS == 222 || IOS == 223) load_ehc_module();
             ret = WBFS_Init(WBFS_DEVICE_USB);
@@ -205,4 +205,34 @@ void Sys_BackToLoader(void) {
 
 bool Sys_IsHermes() {
 	return IOS_GetVersion() == 222 || IOS_GetVersion() == 223;
+}
+
+
+#include "wad/title.h"
+
+s32 ios222rev = -69;
+s32 ios249rev = -69;
+
+s32 IOS_ReloadIOSsafe(int ios)
+{
+	if (ios==222)
+	{	
+		if (ios222rev == -69)
+			ios222rev = getIOSrev(0x00000001000000dell);
+			
+		
+		if (ios222rev != 4)return -2;
+	}
+		
+	else if (ios==249)
+	{	
+		if (ios249rev == -69)
+			ios249rev = getIOSrev(0x00000001000000f9ll);
+			
+		
+		if (!(ios249rev>=9 && ios249rev<65535))return -2;
+	}
+		
+	return IOS_ReloadIOS(ios);
+
 }

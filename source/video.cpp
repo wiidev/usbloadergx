@@ -37,15 +37,11 @@ u32 frameCount = 0;
 static void
 UpdatePadsCB () {
     frameCount++;
-#ifdef HW_RVL
     WPAD_ScanPads();
-#endif
     PAD_ScanPads();
 
     for (int i=3; i >= 0; i--) {
-#ifdef HW_RVL
         memcpy(&userInput[i].wpad, WPAD_Data(i), sizeof(WPADData));
-#endif
 
         userInput[i].chan = i;
         userInput[i].pad.btns_d = PAD_ButtonsDown(i);

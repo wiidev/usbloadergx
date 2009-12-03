@@ -10,6 +10,7 @@
 #include "fatmounter.h"
 #include "id.h"
 #include "isfs.h"
+#include "../gecko.h"
 
 
 #define MAX_TITLES 256
@@ -863,5 +864,87 @@ s32 WII_BootHBC()
 	return WII_LaunchTitle(tid);
 }
 
+tmd* getTMD(u64 tid){
+	static char filepath[256] ATTRIBUTE_ALIGN(32);	
+	static u8 tmd_buf[MAX_SIGNED_TMD_SIZE] ATTRIBUTE_ALIGN(32);
+	signed_blob *s_tmd = (signed_blob *)tmd_buf;
+	u32 tmd_size;
+	
+	if (ES_GetDataDir(tid, filepath) < 0 )
+		return NULL;
+	
+	if (ES_GetStoredTMDSize(tid, &tmd_size) < 0)
+		return NULL;
+	
+	
+	if (ES_GetStoredTMD(tid, s_tmd, tmd_size) < 0)
+		return NULL;
+
+	tmd *t = SIGNATURE_PAYLOAD(s_tmd);
+
+	return t;
+	
+}
+
+//some pune magic to make sure we don't try to load a stubbed IOS for those idiots that don't know what theyre doing
+s32 getIOSrev(u64 req)
+{
+	gprintf("\n\tgetIOSrev(%016llx)",req);
+	u32 tmdsize;
+	u64 tid = 0;
+	u64 *list;
+	u32 titlecount;
+	s32 ret;
+	u32 i;
+
+	ret = ES_GetNumTitles(&titlecount);
+	if(ret < 0)
+	{
+		ret = WII_EINTERNAL;
+		goto out;
+	}
+
+	list = memalign(32, titlecount * sizeof(u64) + 32);
+
+	ret = ES_GetTitles(list, titlecount);
+	if(ret < 0) {
+		free(list);
+		ret = WII_EINTERNAL;
+		goto out;
+	}
+	
+	for(i=0; i<titlecount; i++) {
+		if (list[i]==req)
+		{
+			tid = list[i];
+			break;
+		}
+	}
+	free(list);
+
+	if(!tid)
+	{
+		ret = WII_EINSTALL;
+		goto out;
+	}
+
+	if(ES_GetStoredTMDSize(tid, &tmdsize) < 0)
+	{
+		ret = WII_EINSTALL;
+		goto out;
+	}
+		
+	tmd *tmd = getTMD(tid);
+	
+	if(tmd->title_version<255)
+	{
+		ret = tmd->title_version;
+	}
+	
+out:
+	gprintf(" = %d",ret);
+	return ret;
+//	TITLE_ID(0x00000001,0x000000de)
+}
 
 

@@ -9,12 +9,14 @@
 
 extern bool load_from_fat;
 extern char game_partition[6];
+extern char headlessID[8];
 
 /****************************************************************************
  * MenuCheck
  ***************************************************************************/
 int MenuCheck() {
 	gprintf("\nMenuCheck()");
+	//WindowPrompt("test",0,"ok");
     int menu = MENU_NONE;
     int i = 0;
     int choice;
@@ -136,6 +138,9 @@ int MenuCheck() {
 
     //Spieleliste laden
     __Menu_GetEntries(0);
+	
+	if (strcmp(headlessID,"")!=0)
+		menu = MENU_EXIT;
 
     if (menu == MENU_NONE)
         menu = MENU_DISCLIST;

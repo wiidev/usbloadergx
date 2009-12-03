@@ -67,6 +67,9 @@ int CheckForSave(const char *gameID);
 //boot HBC in either HAXX or JODI locations
 s32 WII_BootHBC();
 
+//get the rev of a ISO and such without having to load it
+s32 getIOSrev(u64 req);
+
 #ifdef __cplusplus
 }
 #endif

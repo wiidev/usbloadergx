@@ -122,7 +122,6 @@ void GuiSearchBar::Update(GuiTrigger * t)
 	LOCK(this);
 	if(_elements.size() == 0 || (state == STATE_DISABLED && parentElement))
 		return;
-	#ifdef HW_RVL
 	// cursor
 	if(t->wpad.ir.valid && state != STATE_DISABLED)
 	{
@@ -142,7 +141,6 @@ void GuiSearchBar::Update(GuiTrigger * t)
 				mainWindow->SetState(STATE_DEFAULT);
 		}
 	}
-	#endif
 	GuiWindow::Update(t);
 }
 wchar_t GuiSearchBar::GetClicked()

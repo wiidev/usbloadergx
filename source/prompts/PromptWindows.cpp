@@ -685,10 +685,8 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label,
  * If titel/subtitle or one of the buttons is not needed give him a 0 on that
  * place.
  ***************************************************************************/
-int
-WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
-                 const char *btn2Label, const char *btn3Label,
-                 const char *btn4Label) {
+int WindowExitPrompt()
+{
 	gprintf("\nWindowExitPrompt()");
 
     GuiSound * homein = NULL;
@@ -735,8 +733,6 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
     snprintf(imgPath, sizeof(imgPath), "%sbattery_bar_red.png", CFG.theme_path);
     GuiImageData batteryBarRed(imgPath, battery_bar_red_png);
 
-
-#ifdef HW_RVL
     int i = 0, ret = 0, level;
     char txt[3];
     GuiText * batteryTxt[4];
@@ -746,10 +742,7 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
 
     for (i=0; i < 4; i++) {
 
-        if (i == 0)
-            sprintf(txt, "P%d", i+1);
-        else
-            sprintf(txt, "P%d", i+1);
+        sprintf(txt, "P%d", i+1);
 
         batteryTxt[i] = new GuiText(txt, 22, (GXColor) {255,255,255, 255});
         batteryTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
@@ -776,9 +769,6 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
     batteryBtn[2]->SetPosition(388, 150);
     batteryBtn[3]->SetPosition(494, 150);
 
-
-
-#endif
 	GuiTrigger trigA;
     trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
     GuiTrigger trigB;
@@ -811,7 +801,7 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
     GuiButton btn1(&btn1Img,&btn1OverImg, 0, 3, 0, 0, &trigA, &btnSoundOver, btnClick2,0);
     btn1.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
 
-    GuiText btn2Txt(btn1Label, 28, (GXColor) {0, 0, 0, 255});
+    GuiText btn2Txt(tr("Back to Loader"), 28, (GXColor) {0, 0, 0, 255});
     GuiImage btn2Img(&button);
     if (Settings.wsprompt == yes) {
         btn2Txt.SetWidescreen(CFG.widescreen);
@@ -824,7 +814,7 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
     btn2.SetPosition(-150, 0);
 
 
-    GuiText btn3Txt(btn2Label, 28, (GXColor) {0, 0, 0, 255});
+    GuiText btn3Txt(tr("Wii Menu"), 28, (GXColor) {0, 0, 0, 255});
     GuiImage btn3Img(&button);
     if (Settings.wsprompt == yes) {
         btn3Txt.SetWidescreen(CFG.widescreen);
@@ -859,12 +849,10 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
     promptWindow.Append(&titleTxt);
     promptWindow.Append(&wiimoteImg);
 
-#ifdef HW_RVL
     promptWindow.Append(batteryBtn[0]);
     promptWindow.Append(batteryBtn[1]);
     promptWindow.Append(batteryBtn[2]);
     promptWindow.Append(batteryBtn[3]);
-#endif
 
     HaltGui();
     mainWindow->SetState(STATE_DISABLED);
@@ -875,7 +863,6 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
     while (choice == -1) {
         VIDEO_WaitVSync();
 
-#ifdef HW_RVL
         for (i=0; i < 4; i++) {
             if (WPAD_Probe(i, NULL) == WPAD_ERR_NONE) { // controller connected
                 level = (userInput[i].wpad.battery_level / 100.0) * 4;
@@ -897,7 +884,6 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
                 batteryBtn[i]->SetAlpha(70);
             }
         }
-#endif
 
 
         if (shutdown == 1) {
@@ -915,10 +901,10 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
             btn3.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 50);
             titleTxt.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
             wiimoteImg.SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_OUT, 50);
-#ifdef HW_RVL
+
             for (int i = 0; i < 4; i++)
                 batteryBtn[i]->SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_OUT, 50);
-#endif
+
         } else if (btn4.GetState() == STATE_SELECTED) {
             wiimoteImg.SetPosition(50,165);
         } else if (btn2.GetState() == STATE_CLICKED) {
@@ -952,10 +938,10 @@ WindowExitPrompt(const char *title, const char *msg, const char *btn1Label,
             btn3.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 50);
             titleTxt.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
             wiimoteImg.SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_OUT, 50);
-#ifdef HW_RVL
+
             for (int i = 0; i < 4; i++)
                 batteryBtn[i]->SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_OUT, 50);
-#endif
+
             choice = 0;
         } else if (btn4.GetState() != STATE_SELECTED) {
             wiimoteImg.SetPosition(50,210);

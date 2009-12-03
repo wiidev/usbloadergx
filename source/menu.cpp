@@ -21,6 +21,7 @@
 #include "settings/cfg.h"
 #include "themes/Theme_Downloader.h"
 #include "usbloader/disc.h"
+#include "usbloader/getentries.h"
 #include "wad/title.h"
 #include "xml/xml.h"
 #include "audio.h"
@@ -51,6 +52,7 @@ GuiText * GameRegionTxt = NULL;
 GuiImage * coverImg = NULL;
 GuiImageData * cover = NULL;
 bool altdoldefault = true;
+char headlessID[8] = {0};
 
 static lwp_t guithread = LWP_THREAD_NULL;
 static bool guiHalt = true;
@@ -72,8 +74,7 @@ extern u8 boothomebrew;
  * after finishing the removal/insertion of new elements, and after initial
  * GUI setup.
  ***************************************************************************/
-void
-ResumeGui() {
+void ResumeGui() {
     guiHalt = false;
     LWP_ResumeThread (guithread);
 }
@@ -86,8 +87,8 @@ ResumeGui() {
  * This eliminates the possibility that the GUI is in the middle of accessing
  * an element that is being changed.
  ***************************************************************************/
-void
-HaltGui() {
+void HaltGui() {
+	if (guiHalt)return;
     guiHalt = true;
 
     // wait for thread to finish
@@ -104,13 +105,13 @@ static void * UpdateGUI (void *arg) {
     while (1) {
         if (guiHalt) {
             LWP_SuspendThread(guithread);
-        } else {
+        } 
+		else {
             if (!ExitRequested) {
                 mainWindow->Draw();
                 if (Settings.tooltips == TooltipsOn && THEME.show_tooltip != 0 && mainWindow->GetState() != STATE_DISABLED)
                     mainWindow->DrawTooltip();
 
-#ifdef HW_RVL
                 for (int i=3; i >= 0; i--) { // so that player 1's cursor appears on top!
                     if (userInput[i].wpad.ir.valid)
                         Menu_DrawImg(userInput[i].wpad.ir.x-48, userInput[i].wpad.ir.y-48, 200.0,
@@ -119,7 +120,6 @@ static void * UpdateGUI (void *arg) {
                         DoRumble(i);
                     }
                 }
-#endif
 
                 Menu_Render();
 
@@ -129,7 +129,8 @@ static void * UpdateGUI (void *arg) {
 
             } else {
                 for (int a = 5; a < 255; a += 10) {
-                    mainWindow->Draw();
+                    if (strcmp(headlessID,"")==0)
+						mainWindow->Draw();
                     Menu_DrawRectangle(0,0,screenwidth,screenheight,(GXColor) {0, 0, 0, a},1);
                     Menu_Render();
                 }
@@ -246,8 +247,10 @@ int MainMenu(int menu) {
 
     currentMenu = menu;
     char imgPath[100];
+	
+	//if (strcmp(headlessID,"")!=0)HaltGui();
+	//WindowPrompt("Can you see me now",0,"ok");
 
-#ifdef HW_RVL
     snprintf(imgPath, sizeof(imgPath), "%splayer1_point.png", CFG.theme_path);
     pointer[0] = new GuiImageData(imgPath, player1_point_png);
     snprintf(imgPath, sizeof(imgPath), "%splayer2_point.png", CFG.theme_path);
@@ -256,7 +259,6 @@ int MainMenu(int menu) {
     pointer[2] = new GuiImageData(imgPath, player3_point_png);
     snprintf(imgPath, sizeof(imgPath), "%splayer4_point.png", CFG.theme_path);
     pointer[3] = new GuiImageData(imgPath, player4_point_png);
-#endif
 
     mainWindow = new GuiWindow(screenwidth, screenheight);
 
@@ -270,7 +272,8 @@ int MainMenu(int menu) {
     bgImg = new GuiImage(background);
     mainWindow->Append(bgImg);
 
-    ResumeGui();
+    if (strcmp(headlessID,"")==0)
+		ResumeGui();
 
     bgMusic = new GuiSound(bg_music_ogg, bg_music_ogg_size, Settings.volume);
     bgMusic->SetLoop(1); //loop music
@@ -311,20 +314,16 @@ int MainMenu(int menu) {
         }
     }
 
+
 	// MemInfoPrompt();
-	//for testing
-	/*if (mountMethod)
-	{
-		char tmp[30];
-		sprintf(tmp,"boot method -->   %i",mountMethod);
-		WindowPrompt(0,tmp,0,0,0,0,100);
-	}
-	*/
-	gprintf("\nExiting main GUI");
+	gprintf("\nExiting main GUI.  mountMethod = %d",mountMethod);
 
 	CloseXMLDatabase();
-	NewTitles::DestroyInstance();
-    ExitGUIThreads();
+    NewTitles::DestroyInstance();
+    if (strcmp(headlessID,"")!=0)//the GUIthread was never started, so it cant be ended and joined properly if headless mode was used.  so we resume it and close it.
+		ResumeGui();
+	ExitGUIThreads();
+
     bgMusic->Stop();
     delete bgMusic;
     delete background;
@@ -360,15 +359,45 @@ int MainMenu(int menu) {
 		WII_LaunchTitle(0x0000000100000100ULL);
 	}
 
-    if (boothomebrew == 1) {
+    else if (boothomebrew == 1) {
 		gprintf("\nBootHomebrew");
         BootHomebrew(Settings.selected_homebrew);
-    } else if (boothomebrew == 2) {
+    } 
+	else if (boothomebrew == 2) {
 		gprintf("\nBootHomebrewFromMenu");
         BootHomebrewFromMem();
-    } else {
+    } 
+	else {
+		struct discHdr *header = NULL;
+		//if the GUI was "skipped" to boot a game from main(argv[1])
+		if (strcmp(headlessID,"")!=0)
+		{
+			gprintf("\n\tHeadless mode (%s)",headlessID);
+			__Menu_GetEntries(1);
+			//gprintf("\n\tgameCnt:%d",gameCnt);
+			for(u32 i=0;i<gameCnt;i++)
+			{
+				header = &gameList[i];
+				char tmp[8];
+				sprintf(tmp,"%c%c%c%c%c%c",header->id[0],header->id[1],header->id[2],header->id[3],header->id[4],header->id[5]);
+				if (strcmp(tmp,headlessID)==0)
+				{
+					gameSelected = i;
+					gprintf("  found (%d)",i);
+					break;
+				}
+				//if the game was not found
+				if (i==gameCnt-1)
+				{
+					gprintf("  not found (%d IDs checked)",i);
+					exit(0);
+				}
+			}
+		}
+		
+		
         int ret = 0;
-        struct discHdr *header = (mountMethod?dvdheader:&gameList[gameSelected]);
+        header = (mountMethod?dvdheader:&gameList[gameSelected]);
 
         struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
 
@@ -595,6 +624,5 @@ int MainMenu(int menu) {
 
 		printf("Returning entry point: 0x%0x\n", ret);
     }
-
-    return 0;
+	return 0;
 }
