@@ -368,12 +368,18 @@ int MainMenu(int menu) {
         BootHomebrewFromMem();
     } 
 	else {
+		gprintf("\n\tSettings.partition:%d",Settings.partition);
 		struct discHdr *header = NULL;
 		//if the GUI was "skipped" to boot a game from main(argv[1])
 		if (strcmp(headlessID,"")!=0)
 		{
 			gprintf("\n\tHeadless mode (%s)",headlessID);
 			__Menu_GetEntries(1);
+			if (!gameCnt)
+			{
+				gprintf("  ERROR : !gameCnt");
+				exit(0);
+			}
 			//gprintf("\n\tgameCnt:%d",gameCnt);
 			for(u32 i=0;i<gameCnt;i++)
 			{

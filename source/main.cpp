@@ -17,7 +17,7 @@
 #include <locale.h>
 #include <wiiuse/wpad.h>
 //#include <debug.h>
-//extern "C" { //not sure if this is in teh libogc that the buildbot is using so it isnt used yet
+//extern "C" { //not sure if this is in the libogc that the buildbot is using so it isnt used yet
 //extern void __exception_setreload(int t);
 //}
 
@@ -191,7 +191,7 @@ main(int argc, char *argv[]) {
 	gprintf("------------------");
 	gprintf("\nUSB Loader GX rev%s",GetRev());
 	gprintf("\nmain(%d", argc);
-	for (int i=1;i<argc;i++)
+	for (int i=0;i<argc;i++)
 		gprintf(", %s",argv[i]?argv[i]:"<NULL>");
 	gprintf(")");
 	
