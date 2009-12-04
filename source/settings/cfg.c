@@ -201,6 +201,7 @@ void CFG_Default(int widescreen) { // -1 = non forced Mode
         snprintf(Settings.homebrewapps_path, sizeof(Settings.homebrewapps_path), "%s/apps/", bootDevice);
         snprintf(Settings.Cheatcodespath, sizeof(Settings.Cheatcodespath), "%s/codes/", bootDevice);
         snprintf(Settings.TxtCheatcodespath, sizeof(Settings.TxtCheatcodespath), "%s/txtcodes/", bootDevice);
+		snprintf(Settings.BcaCodepath, sizeof(Settings.BcaCodepath), "%s/bca/", bootDevice);
         snprintf(Settings.dolpath, sizeof(Settings.dolpath), "%s/", bootDevice);
         sprintf(Settings.ogg_path, "notset");
 	}
@@ -355,6 +356,7 @@ void Global_Default(void) {
     Settings.screensaver = 3;
 	Settings.partition = -1;
 	Settings.marknewtitles = 1;
+	Settings.FatInstallToDir = 0;
 }
 
 
@@ -530,6 +532,10 @@ void path_set(char *name, char *val) {
     }
     if (strcmp(name, "ogg_path") == 0) {
         strlcpy(Settings.ogg_path, val, sizeof(Settings.ogg_path));
+        return;
+    }
+    if (strcmp(name, "BcaCodepath") == 0) {
+        strlcpy(Settings.BcaCodepath, val, sizeof(Settings.BcaCodepath));
         return;
     }
 
@@ -1049,6 +1055,11 @@ void global_cfg_set(char *name, char *val) {
 			Settings.marknewtitles = i;
 		}
 		return;
+	} else if (strcmp(name, "fatInstallToDir") == 0) {
+		int i;
+		if (sscanf(val, "%d", &i) == 1) {
+			Settings.FatInstallToDir = i;
+		}
 	}
 
     cfg_bool("godmode", &Settings.godmode);
@@ -1283,6 +1294,7 @@ bool cfg_save_global() { // save global settings
     fprintf(f, "theme_downloadpath = %s\n ", Settings.theme_downloadpath);
     fprintf(f, "homebrewapps_path = %s\n ", Settings.homebrewapps_path);
     fprintf(f, "Cheatcodespath = %s\n ", Settings.Cheatcodespath);
+	fprintf(f, "BcaCodepath = %s\n", Settings.BcaCodepath);
     fprintf(f, "titlesOverride = %d\n ", Settings.titlesOverride);
     //fprintf(f, "db_url = %s\n ", Settings.db_url);
     //fprintf(f, "db_JPtoEN = %d\n ", Settings.db_JPtoEN);
@@ -1294,6 +1306,7 @@ bool cfg_save_global() { // save global settings
     fprintf(f, "discart = %d\n ", Settings.discart);
 	fprintf(f, "partition = %d\n", Settings.partition);
 	fprintf(f, "marknewtitles = %d\n", Settings.marknewtitles);
+	fprintf(f, "fatInstallToDir = %d\n", Settings.FatInstallToDir);
     fclose(f);
     return true;
 }

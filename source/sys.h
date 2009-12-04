@@ -16,7 +16,11 @@ int Sys_IosReload(int IOS);
 bool Sys_IsHermes();
 s32 IOS_ReloadIOSsafe(int ios);
 
+void ShowMemInfo();
 extern s32 ios222rev;
+extern s32 ios223rev;
 extern s32 ios249rev;
+extern s32 ios250rev;
 
 #endif
+

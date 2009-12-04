@@ -30,6 +30,7 @@
 #include "sys.h"
 #include "wpad.h"
 #include "settings/newtitles.h"
+#include "patches/fst.h"
 
 /*** Variables that are also used extern ***/
 GuiWindow * mainWindow = NULL;
@@ -275,14 +276,14 @@ int MainMenu(int menu) {
     if (strcmp(headlessID,"")==0)
 		ResumeGui();
 
-    bgMusic = new GuiSound(bg_music_ogg, bg_music_ogg_size, Settings.volume);
+	bgMusic = new GuiSound(bg_music_ogg, bg_music_ogg_size, Settings.volume);
     bgMusic->SetLoop(1); //loop music
     // startup music
     if (strcmp("", Settings.oggload_path) && strcmp("notset", Settings.ogg_path)) {
         bgMusic->Load(Settings.ogg_path);
     }
 	bgMusic->Play();
-
+	
     while (currentMenu != MENU_EXIT) {
         bgMusic->SetVolume(Settings.volume);
 
@@ -490,13 +491,17 @@ int MainMenu(int menu) {
 		if(dvdheader)
 			delete dvdheader;
 
+		gprintf("Loading BCA data...");
+		ret = do_bca_code(header->id);
+		gprintf("%d\n", ret);
+
 		if (reloadblock == on && Sys_IsHermes()) {
             patch_cios_data();
 			if (!load_from_fat) {
 				mload_close();
 			}
         }
-
+		
         u8 errorfixer002 = 0;
         switch (fix002) {
         case on:

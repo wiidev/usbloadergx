@@ -338,7 +338,7 @@ s32 WBFS_OpenNamed(char *partition)
 	}
 
 	// Get partition entries
-	ret = Partition_GetList(&plist);
+	ret = Partition_GetList(wbfsDev, &plist);
 	if (ret || plist.num == 0) return -1;
 
 	if (part_fat) {

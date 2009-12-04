@@ -31,6 +31,7 @@ extern "C"
 
 //u32 do_fst(u32 fstlocation);
 u32 do_sd_code(char *filename);
+u32 do_bca_code(u8 *gameid);
 
 #ifdef __cplusplus
 }

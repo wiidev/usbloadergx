@@ -181,7 +181,7 @@ void WindowCredits() {
     starImg.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     starImg.SetPosition(505,350);
 
-    int numEntries = 20;
+    int numEntries = 21;
     GuiText * txt[numEntries];
 
     txt[i] = new GuiText(tr("Credits"), 26, (GXColor) {255, 255, 255, 255});
@@ -216,16 +216,16 @@ void WindowCredits() {
     i++;
     y+=26;
 
-    txt[i] = new GuiText(" http://code.google.com/p/usbloader-gui/", 20, (GXColor) {255, 255, 255, 255});
-    txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-    txt[i]->SetPosition(50,y);
-    i++; //y+=28;
-
     txt[i] = new GuiText(tr("Official Site:"), 20, (GXColor) {255, 255, 255, 255});
-    txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-    txt[i]->SetPosition(-180,y);
+    txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+    txt[i]->SetPosition(10,y);
     i++;
-    y+=28;
+
+    txt[i] = new GuiText("http://code.google.com/p/usbloader-gui/", 20, (GXColor) {255, 255, 255, 255});
+    txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+    txt[i]->SetPosition(160,y);
+    i++;
+    y+=26;
 
     GuiText::SetPresets(22, (GXColor) {255, 255, 255,  255}, 0, GuiText::WRAP,FTGX_JUSTIFY_LEFT | FTGX_ALIGN_TOP, ALIGN_LEFT, ALIGN_TOP);
 
@@ -244,7 +244,7 @@ void WindowCredits() {
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     txt[i]->SetPosition(160,y);
     i++;
-    y+=34;
+    y+=26;
 
     char text[100];
 
@@ -257,7 +257,7 @@ void WindowCredits() {
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     txt[i]->SetPosition(160,y);
     i++;
-    y+=34;
+    y+=26;
 
     txt[i] = new GuiText(tr("Big thanks to:"));
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
@@ -290,7 +290,7 @@ void WindowCredits() {
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     txt[i]->SetPosition(160,y);
     i++;
-    y+=22;
+    y+=26;
 
     txt[i] = new GuiText(tr("Special thanks to:"));
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
@@ -320,6 +320,13 @@ void WindowCredits() {
     y+=22;
 
     sprintf(text, "WiiPower %s", tr("for diverse patches"));
+    txt[i] = new GuiText(text);
+    txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+    txt[i]->SetPosition(60,y);
+    i++;
+    y+=22;
+
+    sprintf(text, "Oggzee %s", tr("for FAT support"));
     txt[i] = new GuiText(text);
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     txt[i]->SetPosition(60,y);

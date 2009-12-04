@@ -9,6 +9,7 @@
 #include "prompts/DiscBrowser.h"
 #include "settings/Settings.h"
 #include "wpad.h"
+#include "sys.h"
 
 #include "libwiigui/gui_gamebrowser.h"
 #include "libwiigui/gui_gamegrid.h"
@@ -574,6 +575,8 @@ int MenuDiscList() {
 	}
 
 	ResumeGui();
+	
+//	ShowMemInfo();
 
 	while (menu == MENU_NONE) {
 

@@ -50,6 +50,7 @@
 #include "wad/title.h"
 #include "usbloader/partition_usbloader.h"
 #include "usbloader/usbstorage.h"
+#include "memory/mem2.h"
 
 extern bool geckoinit;
 extern bool textVideoInit;
@@ -177,7 +178,7 @@ void InitTextVideo () {
 
 int
 main(int argc, char *argv[]) {
-//	InitTextVideo();
+	InitTextVideo();
 	
 //DEBUG_Init(GDBSTUB_DEVICE_USB, 1);
 //_break();
@@ -195,8 +196,17 @@ main(int argc, char *argv[]) {
 		gprintf(", %s",argv[i]?argv[i]:"<NULL>");
 	gprintf(")");
 	
+	// This part is added, because we need a identify patched ios
+	printf("\n\tReloading into ios 236");
+	if (IOS_ReloadIOSsafe(236) < 0) {
+		printf("\n\tIOS 236 not found, reloading into 36");
+		IOS_ReloadIOSsafe(36);
+	}
 	
 	printf("\n\tStarting up");
+	
+	MEM2_init(36); // Initialize 36 MB
+	MEM2_takeBigOnes(true);
 
     s32 ret;
     bool startupproblem = false;
@@ -228,15 +238,25 @@ main(int argc, char *argv[]) {
 	{
 		InitTextVideo();
 		printf("\x1b[2J");
-		printf("\n\n\n\tERROR!");
-		printf("\n\tUSB Loader GX needs unstubbed cIOS 222 v4 or 249 v9+");
-		printf("\n\n\tI found \n\t\t222 = %d%s",ios222rev,ios222rev==65535?" (Stubbed by 4.2 update)":"");
-		printf("\n\t\t249 = %d%s",ios249rev,ios249rev==65535?" (Stubbed by 4.2 update)":"");
-		printf("\n\n\tGo figure out how to get some cIOS action going on\n\tin your Wii and come back and see me.");
-		
-		sleep(15);
-		printf("\n\n\tBye");
-		exit(0);
+		if ((ios222rev < 0 && ios222rev != WII_EINSTALL) || (ios249rev < 0 && ios249rev != WII_EINSTALL)) {
+			printf("\n\n\n\tWARNING!");
+			printf("\n\tUSB Loader GX needs unstubbed cIOS 222 v4 or 249 v9+");
+			printf("\n\n\tWe cannot determine the versions on your system,\n\tsince you have no patched ios 36 or 236 installed.");
+			printf("\n\tTherefor, if loading of USB Loader GX fails, you\n\tprobably have installed the 4.2 update,");
+			printf("\n\tand you should go figure out how to get some cios action going on\n\tin your Wii.");
+			printf("\n\n\tThis message will show every time.");
+			sleep(5);
+		} else {
+			printf("\n\n\n\tERROR!");
+			printf("\n\tUSB Loader GX needs unstubbed cIOS 222 v4 or 249 v9+");
+			printf("\n\n\tI found \n\t\t222 = %d%s",ios222rev,ios222rev==65535?" (Stubbed by 4.2 update)":"");
+			printf("\n\t\t249 = %d%s",ios249rev,ios249rev==65535?" (Stubbed by 4.2 update)":"");
+			printf("\n\n\tGo figure out how to get some cIOS action going on\n\tin your Wii and come back and see me.");
+			
+			sleep(15);
+			printf("\n\n\tBye");
+			exit(0);
+		}
 	}
 
 	printf("\n\tReloading ios 249...");
@@ -248,11 +268,24 @@ main(int argc, char *argv[]) {
 		printf("\n\tIOS 249 failed, reloading ios 222...");
         ret = IOS_ReloadIOSsafe(222);
 		printf("%d", ret);
-        if(ret < 0) {
-            printf("\n\tERROR: cIOS could not be loaded!\n");
-            sleep(5);
-            SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
-        }
+		
+		if (ret < 0) {
+			printf("\n\tIOS 222 failed, reloading ios 250...");
+			ret = IOS_ReloadIOSsafe(250);
+			printf("%d", ret);
+		
+			if(ret < 0) {
+				printf("\n\tIOS 250 failed, reloading ios 223...");
+				ret = IOS_ReloadIOSsafe(223);
+				printf("%d", ret);
+				
+				if (ret < 0) {
+					printf("\n\tERROR: cIOS could not be loaded!\n");
+					sleep(5);
+					SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
+				}
+			}
+		}
 		printf("\n\tInitialize sd card");
 		SDCard_Init(); 
 		printf("\n\tLoad ehc module");
@@ -327,12 +360,13 @@ main(int argc, char *argv[]) {
 //	gprintf("\n\tbootDevice = %s",bootDevice);
 
     /* Load Custom IOS */	
-    if (Settings.cios == ios222 && IOS_GetVersion() != 222) {
-		printf("\n\tReloading IOS to config setting (222)...");
+    if ((Settings.cios == ios222 && IOS_GetVersion() != 222) ||
+        (Settings.cios == ios223 && IOS_GetVersion() != 223)) {
+		printf("\n\tReloading IOS to config setting (%d)...", ios222 ? 222 : 223);
         SDCard_deInit();// unmount SD for reloading IOS
         USBDevice_deInit();// unmount USB for reloading IOS
 		USBStorage_Deinit();
-        ret = IOS_ReloadIOSsafe(222);
+        ret = IOS_ReloadIOSsafe(ios222 ? 222 : 223);
 		printf("%d", ret);
 		SDCard_Init();
         load_ehc_module();
@@ -344,12 +378,14 @@ main(int argc, char *argv[]) {
         SDCard_Init(); // now mount SD:/
         USBDevice_Init(); // and mount USB:/
 		WBFS_Init(WBFS_DEVICE_USB);
-    } else if (Settings.cios == ios249 && IOS_GetVersion() != 249) {
-		printf("\n\tReloading IOS to config setting (249)...");
+    } else if ((Settings.cios == ios249 && IOS_GetVersion() != 249) ||
+				(Settings.cios == ios250 && IOS_GetVersion() != 250)) {
+
+		printf("\n\tReloading IOS to config setting (%d)...", ios249 ? 249 : 250);
         SDCard_deInit();// unmount SD for reloading IOS
         USBDevice_deInit();// unmount USB for reloading IOS
 		USBStorage_Deinit();
-        ret = IOS_ReloadIOSsafe(249);
+        ret = IOS_ReloadIOSsafe(ios249 ? 249 : 250);
 		printf("%d", ret);
         if (ret < 0) {
             Settings.cios = ios222;
@@ -377,9 +413,9 @@ main(int argc, char *argv[]) {
 
 	//if a ID was passed via args copy it and try to boot it after the partition is mounted
 	//its not really a headless mode.  more like hairless.
-	if (argc>0&&argv[1])
+	if (argc > 1 && argv[1])
 	{
-		strcpy(headlessID,argv[1]);
+		strncpy(headlessID, argv[1], sizeof(headlessID));
 	}
 
     //! Init the rest of the System

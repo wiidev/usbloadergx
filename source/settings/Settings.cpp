@@ -46,12 +46,12 @@ static const char *opts_no_yes[settings_off_on_max] = {trNOOP("No"),trNOOP("Yes"
 static const char *opts_off_on[settings_off_on_max] = {trNOOP("OFF"),trNOOP("ON") };
 static const char *opts_videomode[settings_language_max][2] = {{"",trNOOP("Disc Default")},{trNOOP("System Default"),""},{trNOOP("AutoPatch"),""},{trNOOP("Force"), " PAL50"},{trNOOP("Force")," PAL60"},{trNOOP("Force")," NTSC"}};
 static const char *opts_language[settings_language_max] = {trNOOP("Console Default"),trNOOP("Japanese"),trNOOP("English"),trNOOP("German"),trNOOP("French"),trNOOP("Spanish"),trNOOP("Italian"),trNOOP("Dutch"),trNOOP("SChinese"),trNOOP("TChinese"),trNOOP("Korean")};
-static const char *opts_cios[settings_ios_max] = {"IOS 249","IOS 222", "IOS 223"};
+static const char *opts_cios[settings_ios_max] = {"IOS 249","IOS 222", "IOS 223", "IOS 250"};
 static const char *opts_parentalcontrol[5] = {trNOOP("0 (Everyone)"),trNOOP("1 (Child 7+)"),trNOOP("2 (Teen 12+)"),trNOOP("3 (Mature 16+)"),trNOOP("4 (Adults Only 18+)")};
 static const char *opts_error002[settings_error002_max] = {trNOOP("No"),trNOOP("Yes"),trNOOP("Anti")};
 
 bool IsValidPartition(int fs_type, int cios) {
-	if (cios == 249) {
+	if (cios == 249 || cios == 250) {
 		return fs_type == FS_TYPE_WBFS;
 	} else {
 		return fs_type == FS_TYPE_WBFS || fs_type == FS_TYPE_FAT32;
@@ -992,7 +992,7 @@ int MenuSettings()
 									if (++Settings.cios >= settings_cios_max) {
 										Settings.cios = 0;
 									}
-									if (Settings.cios != 0 && ios222rev!=4) {
+									if ((Settings.cios == 1 && ios222rev!=4) || (Settings.cios == 2 && ios223rev != 4)) {
 										WindowPrompt(tr("Hermes CIOS"),tr("USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"),tr("OK"));
 									}
 								}
@@ -1021,6 +1021,15 @@ int MenuSettings()
 								options2.SetValue(Idx,"%s%d (%.2fGB)",	pInfo.fs_type == FS_TYPE_FAT32 ? "FAT" : "WBFS", 
 															            pInfo.fs_type == FS_TYPE_FAT32 ? pInfo.fat_i : pInfo.wbfs_i,
 																		partition_size);
+							}
+							
+							if (ret == ++Idx || firstRun)
+							{
+								if (firstRun) options2.SetName(Idx, "%s", tr("FAT: Use directories"));
+								if (ret == Idx) {
+									Settings.FatInstallToDir = Settings.FatInstallToDir == 0 ? 1 : 0;
+								}
+								options2.SetValue(Idx, "%s", tr(opts_no_yes[Settings.FatInstallToDir]));								
 							}
 
 							if(ret == ++Idx || firstRun)
@@ -1824,6 +1833,34 @@ int MenuSettings()
 									options2.SetValue(Idx, "%s", Settings.theme_downloadpath);
 								}
 
+								if(ret == ++Idx || firstRun)
+								{
+									if(firstRun) options2.SetName(Idx, "%s", tr("BCA Codes Path"));
+									if(ret == Idx)
+									{
+										w.Remove(&optionBrowser2);
+										w.Remove(&backBtn);
+										char entered[100] = "";
+										strlcpy(entered, Settings.BcaCodepath, sizeof(entered));
+										titleTxt.SetText(tr("BCA Codes Path"));
+										int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
+										titleTxt.SetText(tr("Custom Paths"));
+										w.Append(&optionBrowser2);
+										w.Append(&backBtn);
+										if ( result == 1 )
+										{
+											int len = (strlen(entered)-1);
+											if (entered[len] !='/')
+												strncat (entered, "/", 1);
+											strlcpy(Settings.BcaCodepath, entered, sizeof(Settings.BcaCodepath));
+											WindowPrompt(tr("BCA Codes Path changed"),0,tr("OK"));
+											if (!isInserted(bootDevice))
+												WindowPrompt(tr("No SD-Card inserted!"),tr("Insert an SD-Card to save."),tr("OK"));
+										}
+									}
+									options2.SetValue(Idx, "%s", Settings.BcaCodepath);
+								}
+
 								firstRun = false;
 							}
 						}
@@ -2330,8 +2367,12 @@ int GameSettings(struct discHdr * header)
 			viChoice = Settings.vpatch;
 			if (Settings.cios == ios222)
 				iosChoice = i222;
-			else
-				iosChoice = i249;
+			else if (Settings.cios == 250)
+				iosChoice = i250;
+			else if (Settings.cios == ios223)
+				iosChoice = i223;
+			else 
+				iosChoice = 249;
 			parentalcontrolChoice = 0;
 			fix002 = Settings.error002;
 			countrystrings = Settings.patchcountrystrings;
@@ -2847,6 +2888,10 @@ int GameSettings(struct discHdr * header)
 					reloadblock = off;
 					if (Settings.cios == ios222)
 						iosChoice = i222;
+					else if (Settings.cios == ios250)
+						iosChoice = i250;
+					else if (Settings.cios == ios223)
+						iosChoice = i223;
 					else
 						iosChoice = i249;
 					parentalcontrolChoice = 0;

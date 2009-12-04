@@ -612,7 +612,6 @@ return 0;
 
 
 int patch_cios_data() {
-
     patch_datas[0]=*((u32 *) (dip_plugin+16*4));
     mload_set_ES_ioctlv_vector((void *) patch_datas[0]);
     return 1;

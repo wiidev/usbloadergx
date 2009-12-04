@@ -78,6 +78,35 @@ NewTitles::~NewTitles()
 	firstTitle = lastTitle = NULL;
 }
 
+void NewTitles::CheckGame(u8 *titleid)
+{
+	Title *t = firstTitle;
+	while (t != NULL) {
+		// Loop all titles, search for the correct titleid
+		if (strcmp((const char *) titleid, (const char *) t->titleId) == 0) {
+			return; // Game found, which is excellent
+		}	
+		t = (Title *) t->next;
+	}
+
+	// Not found, add it
+	t = new Title();
+	strncpy((char *) t->titleId, (char *) titleid, 6);
+	t->timestamp = time(NULL);
+	if (isNewFile) {
+		t->timestamp -= (NEW_SECONDS + 1); // Mark all games as not new if this is a new file
+	}
+
+	if (firstTitle == NULL) {
+		firstTitle = t;
+		lastTitle = t;
+	} else {
+		lastTitle -> next = t;
+		lastTitle = t;
+	}
+	isDirty = true;
+}
+
 bool NewTitles::IsNew(u8 *titleid)
 {
 	Title *t = firstTitle;
@@ -95,23 +124,8 @@ bool NewTitles::IsNew(u8 *titleid)
 		}	
 		t = (Title *) t->next;
 	}
-	
-	// Not found, add it
-	t = new Title();
-	strncpy((char *) t->titleId, (char *) titleid, 6);
-	t->timestamp = time(NULL);
-	if (isNewFile) {
-		t->timestamp -= (NEW_SECONDS + 1); // Mark all games as not new if this is a new file
-	}
-	
-	if (firstTitle == NULL) {
-		firstTitle = t;
-		lastTitle = t;
-	} else {
-		lastTitle -> next = t;
-		lastTitle = t;
-	}
-	isDirty = true;
+	// We should never get here, since all files should be added by now!
+	CheckGame(titleid);
 	
 	return !isNewFile; // If this is a new file, return false
 }

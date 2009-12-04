@@ -207,11 +207,22 @@ bool Sys_IsHermes() {
 	return IOS_GetVersion() == 222 || IOS_GetVersion() == 223;
 }
 
+#include "Prompts/PromptWindows.h"
+
+void ShowMemInfo() {
+	char buf[255];
+    struct mallinfo mymallinfo = mallinfo();
+    sprintf((char *) &buf,"Total: %d, Used: %d, Can be freed: %d", mymallinfo.arena/1024, mymallinfo.uordblks/1024, mymallinfo.keepcost/1024);
+	WindowPrompt("Mem info", (char *) &buf, "OK");
+}
+
 
 #include "wad/title.h"
 
 s32 ios222rev = -69;
+s32 ios223rev = -69;
 s32 ios249rev = -69;
+s32 ios250rev = -69;
 
 s32 IOS_ReloadIOSsafe(int ios)
 {
@@ -219,20 +230,31 @@ s32 IOS_ReloadIOSsafe(int ios)
 	{	
 		if (ios222rev == -69)
 			ios222rev = getIOSrev(0x00000001000000dell);
-			
 		
-		if (ios222rev != 4)return -2;
+		if (ios222rev >= 0 && ios222rev != 4)return -2;
 	}
+	else if (ios==223)
+	{	
+		if (ios223rev == -69)
+			ios223rev = getIOSrev(0x00000001000000dfll);
 		
+		if (ios223rev >= 0 && ios223rev != 4)return -2;
+	}
 	else if (ios==249)
 	{	
 		if (ios249rev == -69)
-			ios249rev = getIOSrev(0x00000001000000f9ll);
-			
+			ios249rev = getIOSrev(0x00000001000000f9ll);	
 		
-		if (!(ios249rev>=9 && ios249rev<65535))return -2;
+		if (ios249rev >= 0 && !(ios249rev>=9 && ios249rev<65280))return -2;
+	}
+	else if (ios==250)
+	{	
+		if (ios250rev == -69)
+			ios250rev = getIOSrev(0x00000001000000fall);
+			
+		if (ios250rev >= 0 && !(ios250rev>=9 && ios250rev<65280))return -2;
 	}
 		
 	return IOS_ReloadIOS(ios);
-
 }
+

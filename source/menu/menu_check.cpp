@@ -16,7 +16,6 @@ extern char headlessID[8];
  ***************************************************************************/
 int MenuCheck() {
 	gprintf("\nMenuCheck()");
-	//WindowPrompt("test",0,"ok");
     int menu = MENU_NONE;
     int i = 0;
     int choice;
@@ -59,12 +58,12 @@ int MenuCheck() {
 	extern PartList partitions;
 	// Added for slow HDD
 	for (int runs = 0; runs < 10; runs++) {
-		if (Partition_GetList(&partitions) != 0) {
+		if (Partition_GetList(WBFS_DEVICE_USB, &partitions) != 0) {
 			sleep(1);
 			continue;
 		}
 
-	if (Settings.partition != -1 && partitions.num > Settings.partition) {
+		if (Settings.partition != -1 && partitions.num > Settings.partition) {
 			PartInfo pinfo = partitions.pinfo[Settings.partition];
 			ret2 = WBFS_OpenPart(pinfo.fs_type == FS_TYPE_FAT32, pinfo.fat_i, partitions.pentry[Settings.partition].sector, partitions.pentry[Settings.partition].size, (char *) &game_partition);
 
@@ -103,14 +102,14 @@ int MenuCheck() {
 				}
 			}
 		}
-		
+
 		if (ret2 >= 0 || load_from_fat) {
 			cfg_save_global();
 			break;
 		}
 		sleep(1);
 	}
-	
+
     if (ret2 < 0 && !load_from_fat) {
         choice = WindowPrompt(tr("No WBFS or FAT game partition found"),tr("You need to select or format a partition"), tr("Select"), tr("Format"), tr("Return"));
         if (choice == 0) {
@@ -120,7 +119,7 @@ int MenuCheck() {
             menu = MENU_FORMAT;
         }
     }
-	
+
     ret2 = Disc_Init();
     if (ret2 < 0) {
         WindowPrompt (tr("Error !"),tr("Could not initialize DIP module!"),tr("OK"));
@@ -135,6 +134,13 @@ int MenuCheck() {
     if (wbfsinit < 0) {
         sleep(1);
     }
+
+	// open database if needed, load titles if needed
+	OpenXMLDatabase(Settings.titlestxt_path,Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true);
+
+    // titles.txt loaded after database to override database titles with custom titles
+    //snprintf(pathname, sizeof(pathname), "%stitles.txt", Settings.titlestxt_path);
+    //cfg_parsefile(pathname, &title_set);
 
     //Spieleliste laden
     __Menu_GetEntries(0);
@@ -151,13 +157,6 @@ int MenuCheck() {
         USBDevice_Init();
         SDCard_Init();
     }
-	
-	// open database if needed, load titles if needed
-	OpenXMLDatabase(Settings.titlestxt_path,Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true);
-
-    // titles.txt loaded after database to override database titles with custom titles
-    //snprintf(pathname, sizeof(pathname), "%stitles.txt", Settings.titlestxt_path);
-    //cfg_parsefile(pathname, &title_set);
-
+		
     return menu;
 }

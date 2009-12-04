@@ -15,6 +15,7 @@
 #define IOCTL_DI_SEEK		0xAB
 #define IOCTL_DI_STOPLASER	0xD2
 #define IOCTL_DI_OFFSET		0xD9
+#define IOCTL_DI_DISC_BCA	0xDA
 #define IOCTL_DI_STOPMOTOR	0xE3
 #define IOCTL_DI_SETUSBMODE	0xF4
 #define IOCTL_DI_DISABLERESET	0xF6
@@ -335,4 +336,21 @@ s32 WDVD_SetUSBMode(const u8 *id, s32 partition) {
         return ret;
 
     return (ret == 1) ? 0 : -ret;
+}
+
+s32 WDVD_Read_Disc_BCA(void *buf)
+{
+	s32 ret;
+
+	memset(inbuf, 0, sizeof(inbuf));
+
+	/* Disc read */
+	inbuf[0] = IOCTL_DI_DISC_BCA << 24;
+	//inbuf[1] = 64;
+
+	ret = IOS_Ioctl(di_fd, IOCTL_DI_DISC_BCA, inbuf, sizeof(inbuf), buf, 64);
+	if (ret < 0)
+		return ret;
+
+	return (ret == 1) ? 0 : -ret;
 }

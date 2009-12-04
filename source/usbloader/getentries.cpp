@@ -16,7 +16,6 @@
 #include <vector>
 #include <wchar.h>
 
-
 #include "listfiles.h"
 #define typei 0x00010001
 
@@ -163,8 +162,8 @@ int __Menu_GetPrevFilter(int t, wchar_t* gameFilter, u32 gameFiltered, wchar_t *
 	{
 		struct discHdr *header = &buffer[i];
 
-		/* Is new? */
-		header->isNew = NewTitles::Instance()->IsNew(header->id);
+		/* Register game */
+		NewTitles::Instance()->CheckGame(header->id);
 
 		/* Filter Favorite */
 		if (Settings.fave && t==0)
@@ -479,8 +478,8 @@ int __Menu_GetGameList(int t, wchar_t* gameFilter, discHdr ** PgameList, u32 *Pg
     for (u32 i = 0; i < cnt; i++) {
 		struct discHdr *header = &buffer[i];
 
-		/* Is new? */
-		header->isNew = NewTitles::Instance()->IsNew(header->id);
+		/* Register game */
+		NewTitles::Instance()->CheckGame(header->id);
 
 		/* Filters */
 		if (Settings.fave && t==0) {
@@ -515,7 +514,7 @@ int __Menu_GetGameList(int t, wchar_t* gameFilter, discHdr ** PgameList, u32 *Pg
 	}
 	if (!buffer)
 		return -1;
-	
+			
 	if (Settings.sort==pcount) {
 		qsort(buffer, cnt, sizeof(struct discHdr), __Menu_EntryCmpCount);
 	} else if (Settings.fave) {
@@ -547,6 +546,7 @@ int __Menu_GetEntries(int t, const wchar_t* Filter) {
 
 	new_gameFilter = wcsdup_new(Filter ? Filter : (gameFilter ? gameFilter : L"") );
 	if(new_gameFilter == NULL) return -1;
+	
 	for(;;)
 	{
 		if (mountMethod==3)
@@ -562,6 +562,7 @@ int __Menu_GetEntries(int t, const wchar_t* Filter) {
 			break;
 		new_gameFilter[wcslen(new_gameFilter)-1] = 0;
 	}
+
 	/* init GameFilterNextList */
 	if(__Menu_GetGameFilter_NextList(new_gameList, new_gameCnt, &new_gameFilter, &new_gameFilterNextList) < 0)
 		goto error;

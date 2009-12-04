@@ -256,6 +256,8 @@ void PretendThereIsADiscInTheDrive(void *buffer, u32 len)
 /** Thanks to WiiPower **/
 bool NewSuperMarioBrosPatch(void *Address, int Size)
 {
+	if (IOS_GetVersion() == 222 || IOS_GetVersion() == 223) return false; // Don't use this when using Hermes, it'll use the BCA fix instead...
+
 	if (memcmp("SMNE", (char *)0x80000000, 4) == 0)
 	{
 		u8 SearchPattern[32] = 	{ 0x94, 0x21, 0xFF, 0xD0, 0x7C, 0x08, 0x02, 0xA6, 0x90, 0x01, 0x00, 0x34, 0x39, 0x61, 0x00, 0x30, 0x48, 0x12, 0xD7, 0x89, 0x7C, 0x7B, 0x1B, 0x78, 0x7C, 0x9C, 0x23, 0x78, 0x7C, 0xBD, 0x2B, 0x78 };
@@ -387,7 +389,8 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
 
     if (error002fix!=0) {
         /* ERROR 002 fix (thanks to WiiPower for sharing this)*/
-        *(u32 *)0x80003140 = *(u32 *)0x80003188;
+		*(u32 *)0x80003188 = *(u32 *)0x80003140;
+//        *(u32 *)0x80003140 = *(u32 *)0x80003188;
     }
 
     if (cheat || geckoinit) {

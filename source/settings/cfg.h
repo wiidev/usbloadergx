@@ -298,12 +298,15 @@ extern "C" {
 		i249=0,
 		i222,
 		i223,
+		i250,
 		settings_ios_max // always the last entry
 	};
 
 	enum {
 		ios249=0,
 		ios222,
+		ios223,
+		ios250,
 		settings_cios_max // always the last entry
 	};
 
@@ -422,6 +425,8 @@ extern "C" {
 		u8		discart;
 		short   gamesound;
 		u8		marknewtitles;
+		char	BcaCodepath[100];
+		u8		FatInstallToDir;
 	};
 	extern struct SSettings Settings;
 

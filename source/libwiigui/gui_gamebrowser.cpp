@@ -13,6 +13,7 @@
 #include "gui_gamebrowser.h"
 #include "../settings/cfg.h"
 #include "../main.h"
+#include "settings/newtitles.h"
 
 #include <string.h>
 #include <sstream>
@@ -341,14 +342,15 @@ void GuiGameBrowser::UpdateListEntries()
 			gameTxtOver[i]->SetPosition(24, 0);
 
 			if (Settings.marknewtitles) {
-				if (gameList[next].isNew) {
+				bool isNew = NewTitles::Instance()->IsNew(gameList[next].id);
+				if (isNew) {
 					gameTxt[i]->SetMaxWidth(maxTextWidth - (newGames->GetWidth() + 1), GuiText::DOTTED);
 					gameTxtOver[i]->SetMaxWidth(maxTextWidth - (newGames->GetWidth() + 1), GuiText::SCROLL);
 				} else {
 					gameTxt[i]->SetMaxWidth(maxTextWidth, GuiText::DOTTED);
 					gameTxtOver[i]->SetMaxWidth(maxTextWidth, GuiText::SCROLL);
 				}
-				newImg[i]->SetVisible(gameList[next].isNew != 0);
+				newImg[i]->SetVisible(isNew);
 			}
 
 			gameIndex[i] = next;

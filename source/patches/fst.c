@@ -34,6 +34,9 @@
 #include "dvd_broadway.h"
 #include "wpad.h"
 #include "fatmounter.h"
+#include "sys.h"
+#include "mload/mload.h"
+#include "mload/dip_plugin.h"
 
 extern struct SSettings Settings;
 
@@ -95,4 +98,61 @@ u32 do_sd_code(char *filename)
 	return 1;
 }
 
+u32 do_bca_code(u8 *gameid)
+{
+	if (IOS_GetVersion() == 222 || IOS_GetVersion() == 223)
+	{
+		FILE *fp;
+		u32 filesize;
+		char filepath[150];
+		memset(filepath, 0, 150);
+		u8 bcaCode[64] ATTRIBUTE_ALIGN(32);
 
+		sprintf(filepath, "%s%6s", Settings.BcaCodepath, gameid);
+		filepath[strlen(Settings.BcaCodepath)+6] = '.';
+		filepath[strlen(Settings.BcaCodepath)+7] = 'b';
+		filepath[strlen(Settings.BcaCodepath)+8] = 'c';
+		filepath[strlen(Settings.BcaCodepath)+9] = 'a';
+
+		fp = fopen(filepath, "rb");
+		if (!fp) {
+			memset(filepath, 0, 150);
+			sprintf(filepath, "%s%3s", Settings.BcaCodepath, gameid + 1);
+			filepath[strlen(Settings.BcaCodepath)+3] = '.';
+			filepath[strlen(Settings.BcaCodepath)+4] = 'b';
+			filepath[strlen(Settings.BcaCodepath)+5] = 'c';
+			filepath[strlen(Settings.BcaCodepath)+6] = 'a';
+			fp = fopen(filepath, "rb");
+			
+			if (!fp) {
+				// Set default bcaCode
+				memset(bcaCode, 0, 64);
+				bcaCode[0x33] = 1;
+			}
+		}
+
+		if (fp) {
+			u32 ret = 0;
+
+			fseek(fp, 0, SEEK_END);
+			filesize = ftell(fp);
+			
+			if (filesize == 64) {			
+				fseek(fp, 0, SEEK_SET);
+				ret = fread(bcaCode, 1, 64, fp);
+			}
+			fclose(fp);
+
+			if (ret != 64) {
+				// Set default bcaCode
+				memset(bcaCode, 0, 64);
+				bcaCode[0x33] = 1;
+			}
+		}
+		
+		mload_seek(*((u32 *) (dip_plugin+15*4)), SEEK_SET);	// offset 15 (bca_data area)
+		mload_write(bcaCode, 64);
+		mload_close();
+	}
+	return 0;
+}

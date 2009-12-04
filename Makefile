@@ -20,7 +20,7 @@ SOURCES		:=	source source/libwiigui source/images source/fonts source/sounds \
 				source/libwbfs source/unzip source/language source/mload source/patches \
 				source/usbloader source/xml source/network source/settings source/prompts \
 				source/ramdisk source/wad source/banner source/cheats source/homebrewboot \
-				source/themes source/menu source/libfat
+				source/themes source/menu source/libfat source/memory
 DATA		:=	data
 INCLUDES	:=	source
 
@@ -30,8 +30,9 @@ INCLUDES	:=	source
 
 CFLAGS		=	-g -O2 -save-temps -Wall $(MACHDEP) $(INCLUDE)
 CXXFLAGS	=	-Xassembler -aln=$@.lst $(CFLAGS)
-LDFLAGS		=	-g $(MACHDEP) -Wl,-Map,$(notdir $@).map,--section-start,.init=0x80B00000
+LDFLAGS		=	-g $(MACHDEP) -Wl,-Map,$(notdir $@).map,--section-start,.init=0x80B00000,-wrap,malloc,-wrap,free,-wrap,memalign,-wrap,calloc,-wrap,realloc,-wrap,malloc_usable_size
 -include $(PROJECTDIR)/Make.config
+
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project
 #---------------------------------------------------------------------------------

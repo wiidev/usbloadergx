@@ -172,32 +172,6 @@ void dogamehooks(void *addr, u32 len)
 				}
 			break;
 
-/*
-			case 2:
-				if(memcmp(addr_start, kpadhooks, sizeof(kpadhooks))==0){
-					patchhook((u32)addr_start, len);
-					patched = 1;
-				}
-
-				if(memcmp(addr_start, kpadoldhooks, sizeof(kpadoldhooks))==0){
-					patchhook((u32)addr_start, len);
-					patched = 1;
-				}
-			break;
-		
-			case 3:
-				if(memcmp(addr_start, joypadhooks, sizeof(joypadhooks))==0){
-					patchhook((u32)addr_start, len);
-					patched = 1;
-				}
-			break;
-
-			case 4:
-				if(memcmp(addr_start, recoveryhooks, sizeof(recoveryhooks))==0){
-						patchhook3((u32)addr_start, len);
-					}
-			break;
-*/
 			case 2:
 
 				if(memcmp(addr_start, viwiihooks, sizeof(viwiihooks))==0){
@@ -206,69 +180,6 @@ void dogamehooks(void *addr, u32 len)
 				
 			break;
 
-/*
-			case 6:
-				// jap region free	
-				if(memcmp(addr_start, regionfreehooks, sizeof(regionfreehooks))==0){
-						regionfreejap((u32)addr_start, len);
-					}
-
-				// usa region free
-				if(memcmp(addr_start, regionfreehooks, sizeof(regionfreehooks))==0){
-					regionfreeusa((u32)addr_start, len);
-				}
-
-				// pal region free
-				if(memcmp(addr_start, regionfreehooks, sizeof(regionfreehooks))==0){
-					regionfreepal((u32)addr_start, len);
-				}
-
-				// skip disc update
-				if(memcmp(addr_start, updatecheckhook, sizeof(updatecheckhook))==0){
-					patchupdatecheck((u32)addr_start, len);
-				}
-			break;
-
-
-			case 7:
-				if(memcmp(addr_start, healthcheckhook, sizeof(healthcheckhook))==0){
-					removehealthcheck((u32)addr_start, len);
-				}
-			break;
-
-			// no copy flags
-			case 8:
-					// Remove the actual flag so can copy back
-				if(memcmp(addr_start, nocopyflag5, sizeof(nocopyflag5))==0){
-					copyflagcheck5((u32)addr_start, len);
-				}
-			
-			
-				if(memcmp(addr_start, nocopyflag1, sizeof(nocopyflag1))==0){
-					copyflagcheck1((u32)addr_start, len);
-				}
-
-				if(memcmp(addr_start, nocopyflag2, sizeof(nocopyflag2))==0){
-					copyflagcheck2((u32)addr_start, len);
-				}
-				
-				// no VC and GH3 save
-				if(memcmp(addr_start, nocopyflag3, sizeof(nocopyflag2))==0){
-					copyflagcheck3((u32)addr_start, len);
-				}
-				// no VC and GH3 save display remove
-				if(memcmp(addr_start, nocopyflag4, sizeof(nocopyflag4))==0){
-					copyflagcheck4((u32)addr_start, len);
-				}
-				
-			break;
-
-			case 9:
-				if(memcmp(addr_start, movedvdpatch, sizeof(movedvdpatch))==0){
-					movedvdhooks((u32)addr_start, len);
-				}
-			break;
-*/
 			// multidol
 			case 3:
 
@@ -355,5 +266,3 @@ void vidolpatcher(void *addr, u32 len)
 		addr_start += 4;
 	}
 }
-
-
