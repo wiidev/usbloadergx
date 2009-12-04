@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-22 00:34+0100\n"
+"POT-Creation-Date: 2009-12-04 16:19+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: omercigingelini\n"
 "Language-Team: omercigingelini\n"
@@ -157,6 +157,12 @@ msgstr "Ağı ototanımla"
 
 msgid "AutoPatch"
 msgstr "OtoYama"
+
+msgid "BCA Codes Path"
+msgstr ""
+
+msgid "BCA Codes Path changed"
+msgstr ""
 
 msgid "Back"
 msgstr "Geri"
@@ -483,11 +489,11 @@ msgstr "Hata..."
 msgid "Error:"
 msgstr "Hata:"
 
-msgid "Exit USB Loader GX?"
-msgstr "USB Loader GX'den çık?"
-
 msgid "Extracting files..."
 msgstr "Dosyalar çıkarılıyor..."
+
+msgid "FAT: Use directories"
+msgstr ""
 
 msgid "Failed formating"
 msgstr "Biçimlendirme başarısız"
@@ -1252,6 +1258,9 @@ msgstr "dosyalar kaldı"
 msgid "files not found on the server!"
 msgstr "dosyalar sunucuda bulunamadı!"
 
+msgid "for FAT support"
+msgstr ""
+
 msgid "for Ocarina"
 msgstr "Ocarina için"
 
@@ -1287,6 +1296,9 @@ msgstr "./"
 
 msgid "seconds left"
 msgstr "saniye kaldı"
+
+#~ msgid "Exit USB Loader GX?"
+#~ msgstr "USB Loader GX'den çık?"
 
 #~ msgid "Failed to extract opening.bnr"
 #~ msgstr "opening.bnr çıkartılamadı"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-22 00:34+0100\n"
+"POT-Creation-Date: 2009-12-04 16:19+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: raschi\n"
 "Language-Team: raschi\n"
@@ -156,6 +156,12 @@ msgid "AutoInit Network"
 msgstr "Autostart nettverk"
 
 msgid "AutoPatch"
+msgstr ""
+
+msgid "BCA Codes Path"
+msgstr ""
+
+msgid "BCA Codes Path changed"
 msgstr ""
 
 msgid "Back"
@@ -483,11 +489,11 @@ msgstr "Feil..."
 msgid "Error:"
 msgstr "Feil:"
 
-msgid "Exit USB Loader GX?"
-msgstr "Avslutt USB Loader GX?"
-
 msgid "Extracting files..."
 msgstr "Pakker ut filer..."
+
+msgid "FAT: Use directories"
+msgstr ""
 
 msgid "Failed formating"
 msgstr "Feil ved formatering"
@@ -1252,6 +1258,9 @@ msgstr "filer gjenstår"
 msgid "files not found on the server!"
 msgstr "filer ikke funnet på serveren!"
 
+msgid "for FAT support"
+msgstr ""
+
 msgid "for Ocarina"
 msgstr ""
 
@@ -1287,6 +1296,9 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder gjenstår"
+
+#~ msgid "Exit USB Loader GX?"
+#~ msgstr "Avslutt USB Loader GX?"
 
 #~ msgid "No WBFS partition found"
 #~ msgstr "Ingen WBFS partisjon funnet"

@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-# hungarian.lang - r815
+# hungarian.lang - r839
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-22 00:34+0100\n"
-"PO-Revision-Date: 2009-10-30 16:28+0100\n"
+"POT-Creation-Date: 2009-12-04 16:19+0100\n"
+"PO-Revision-Date: 2009-12-01 13:23+0100\n"
 "Last-Translator: Springdale\n"
 "Language-Team: Tusk, Springdale\n"
 "MIME-Version: 1.0\n"
@@ -158,6 +158,12 @@ msgstr "Hálózat AutoInit"
 msgid "AutoPatch"
 msgstr ""
 
+msgid "BCA Codes Path"
+msgstr ""
+
+msgid "BCA Codes Path changed"
+msgstr ""
+
 msgid "Back"
 msgstr "Vissza"
 
@@ -180,7 +186,7 @@ msgid "Big thanks to:"
 msgstr "Köszönet:"
 
 msgid "Block IOS Reload"
-msgstr "IOS Újratöltés blokkolása"
+msgstr "IOS újratöltés blokkolása"
 
 msgid "Boot/Standard"
 msgstr "Boot/Alapértelmezett"
@@ -201,13 +207,13 @@ msgid "Can't create file"
 msgstr "A fájl nem hozható létre."
 
 msgid "Can't decompress LZ77"
-msgstr ""
+msgstr "LZ77 nem kitömöríthetõ"
 
 msgid "Can't delete:"
 msgstr "Nem törölhetõ"
 
 msgid "Can't find disc"
-msgstr ""
+msgstr "Lemez nem található"
 
 msgid "Cancel"
 msgstr "Mégse"
@@ -216,10 +222,10 @@ msgid "Channels"
 msgstr "Csatornák"
 
 msgid "Cheatfile is blank"
-msgstr "A Cheat-fájl üres"
+msgstr "A cheat-fájl üres"
 
 msgid "Checking existing artwork"
-msgstr "Már letöltött képek ellenõrzése"
+msgstr "Meglévõ képek ellenõrzése"
 
 msgid "Checking for Updates"
 msgstr "Frissitések keresése..."
@@ -259,7 +265,7 @@ msgid "Console Locked"
 msgstr "Konzol Zárolva"
 
 msgid "Console should be unlocked to modify it."
-msgstr "A Konzol zárolva, ezért nem változtatható meg."
+msgstr "A konzol zárolva, ezért nem változtatható meg."
 
 msgid "Continue to install game?"
 msgstr "Játék telepítésének folytatása?"
@@ -483,11 +489,11 @@ msgstr "Hiba..."
 msgid "Error:"
 msgstr "Hiba:"
 
-msgid "Exit USB Loader GX?"
-msgstr "Kilépés az USB Loader GX-bõl?"
-
 msgid "Extracting files..."
 msgstr "Fájlok kicsomagolása..."
+
+msgid "FAT: Use directories"
+msgstr ""
 
 msgid "Failed formating"
 msgstr "Formázás sikertelen"
@@ -556,10 +562,10 @@ msgid "Game Size"
 msgstr "Játék Méret"
 
 msgid "Game Sound Mode"
-msgstr ""
+msgstr "Játék Banner hang"
 
 msgid "Game Sound Volume"
-msgstr ""
+msgstr "Játék Banner hangerő"
 
 msgid "Game is already installed:"
 msgstr "A játék már fel van telepítve:"
@@ -595,10 +601,10 @@ msgid "How to Shutdown?"
 msgstr "Hogyan kapcsoljon ki?"
 
 msgid "IMD5 Header not right."
-msgstr ""
+msgstr "IMD5 Fejléc nem megfelelõ."
 
 msgid "IMET Header wrong."
-msgstr ""
+msgstr "IMET fejléc nem megfelelõ."
 
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
 msgstr "WiFi hiánya esetén nyomj 1-es gombot a WiiTDB.zip URL-ért."
@@ -612,7 +618,7 @@ msgid "Incoming file %0.2fMB"
 msgstr "Bejövõ fájl %0.2fMB"
 
 msgid "Initializing Network"
-msgstr "Kapcsolat Létrehozása"
+msgstr "Hálózat inicializálása..."
 
 msgid "Insert Disk"
 msgstr "Helyezz be egy lemezt"
@@ -721,13 +727,13 @@ msgid "Locked"
 msgstr "Lezárva"
 
 msgid "Loop Sound"
-msgstr ""
+msgstr "Folyamatos hang"
 
 msgid "Mar"
 msgstr "Már"
 
 msgid "Mark new games"
-msgstr ""
+msgstr "Új játékok megjelölése"
 
 msgid "May"
 msgstr "Máj"
@@ -781,7 +787,7 @@ msgid "No USB Device found."
 msgstr "Nincs USB meghajtó csatlakoztatva."
 
 msgid "No WBFS or FAT game partition found"
-msgstr ""
+msgstr "Nem található WBFS vagy FAT partíció"
 
 msgid "No cheats were selected"
 msgstr "Nincsenek kiválasztott cheat-ek"
@@ -952,7 +958,7 @@ msgid "Screensaver"
 msgstr "Képernyõkimélõ"
 
 msgid "Select"
-msgstr ""
+msgstr "Válassz"
 
 msgid "Select a DOL"
 msgstr "DOL kiválasztása"
@@ -991,10 +997,10 @@ msgid "Sound"
 msgstr "Hang"
 
 msgid "Sound+BGM"
-msgstr ""
+msgstr "Hang+háttérzene"
 
 msgid "Sound+Quiet"
-msgstr ""
+msgstr "Csak hang"
 
 msgid "Spanish"
 msgstr "Spanyol"
@@ -1091,7 +1097,7 @@ msgid "USB Loader GX is protected"
 msgstr "USB Loader GX levédve"
 
 msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
-msgstr ""
+msgstr "Az USB Loader GX csak Hermes CIOS rev 4 mellett működik! Gyõződj meg róla, hogy telepítetted!"
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
@@ -1219,7 +1225,7 @@ msgid "You have attempted to load a bad image"
 msgstr "Rossz képfájl próbáltál betõlteni"
 
 msgid "You need to select or format a partition"
-msgstr ""
+msgstr "Választanod vagy formáznod kell egy partíciót"
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
@@ -1251,6 +1257,9 @@ msgstr "hátralévõ fájl"
 
 msgid "files not found on the server!"
 msgstr "fájl nem található a szerveren"
+
+msgid "for FAT support"
+msgstr ""
 
 msgid "for Ocarina"
 msgstr ": Ocarina"
@@ -1287,6 +1296,9 @@ msgstr "./"
 
 msgid "seconds left"
 msgstr "hátralévõ másodperc"
+
+#~ msgid "Exit USB Loader GX?"
+#~ msgstr "Kilépés az USB Loader GX-bõl?"
 
 #~ msgid "No WBFS partition found"
 #~ msgstr "Nincs WBFS Partició"

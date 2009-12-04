@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-22 00:34+0100\n"
+"POT-Creation-Date: 2009-12-04 16:19+0100\n"
 "PO-Revision-Date: 2009-11-23 16:23-0000\n"
 "Last-Translator: Sky8000\n"
 "Language-Team: Sky8000 <sky8000@hotmail.com>\n"
@@ -157,6 +157,12 @@ msgstr "Auto-iniciar Rede"
 
 msgid "AutoPatch"
 msgstr "Patch automático"
+
+msgid "BCA Codes Path"
+msgstr ""
+
+msgid "BCA Codes Path changed"
+msgstr ""
 
 msgid "Back"
 msgstr "Voltar"
@@ -483,11 +489,11 @@ msgstr "Erro..."
 msgid "Error:"
 msgstr "Erro:"
 
-msgid "Exit USB Loader GX?"
-msgstr "Pretende sair do USB Loader GX?"
-
 msgid "Extracting files..."
 msgstr "Extraindo ficheiros..."
+
+msgid "FAT: Use directories"
+msgstr ""
 
 msgid "Failed formating"
 msgstr "Falha ao formatar"
@@ -1252,6 +1258,9 @@ msgstr "ficheiros restantes"
 msgid "files not found on the server!"
 msgstr "ficheiros não encontrados no servidor!"
 
+msgid "for FAT support"
+msgstr ""
+
 msgid "for Ocarina"
 msgstr "pelo Ocarina"
 
@@ -1287,6 +1296,9 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
+
+#~ msgid "Exit USB Loader GX?"
+#~ msgstr "Pretende sair do USB Loader GX?"
 
 #~ msgid "Failed to extract opening.bnr"
 #~ msgstr "Falha ao extrair o opening.bnr"

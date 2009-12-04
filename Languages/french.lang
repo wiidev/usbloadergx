@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# French V11.4 r839
+# French V11.5 r848
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-22 00:34+0100\n"
+"POT-Creation-Date: 2009-12-04 16:19+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Kin8\n"
 "Language-Team: Badablek, Amour, ikya, dj_skual & Kin8\n"
@@ -157,6 +157,12 @@ msgstr "AutoInit Réseau"
 
 msgid "AutoPatch"
 msgstr ""
+
+msgid "BCA Codes Path"
+msgstr "Dossier Codes BCA"
+
+msgid "BCA Codes Path changed"
+msgstr "Dossier Codes BCA modifié"
 
 msgid "Back"
 msgstr "Retour"
@@ -483,11 +489,11 @@ msgstr "Erreur..."
 msgid "Error:"
 msgstr "Erreur:"
 
-msgid "Exit USB Loader GX?"
-msgstr "Quitter USB Loader GX ?"
-
 msgid "Extracting files..."
 msgstr "Extraction des fichiers..."
+
+msgid "FAT: Use directories"
+msgstr "FAT: Utilisez des dossiers"
 
 msgid "Failed formating"
 msgstr "Échec du formatage"
@@ -1251,6 +1257,9 @@ msgstr "fichiers restants"
 
 msgid "files not found on the server!"
 msgstr "fichiers introuvables sur le serveur !"
+
+msgid "for FAT support"
+msgstr "pour le support FAT"
 
 msgid "for Ocarina"
 msgstr "pour Ocarina"

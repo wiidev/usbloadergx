@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-22 00:34+0100\n"
+"POT-Creation-Date: 2009-12-04 16:19+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
@@ -157,6 +157,12 @@ msgstr "ﾈｯﾄﾜｰｸの自動初期化"
 
 msgid "AutoPatch"
 msgstr "自動パッチ"
+
+msgid "BCA Codes Path"
+msgstr ""
+
+msgid "BCA Codes Path changed"
+msgstr ""
 
 msgid "Back"
 msgstr "もどる"
@@ -483,11 +489,11 @@ msgstr "エラー…"
 msgid "Error:"
 msgstr "エラー:"
 
-msgid "Exit USB Loader GX?"
-msgstr "USBLoaderGXを終了しますか？"
-
 msgid "Extracting files..."
 msgstr "解凍中です…"
+
+msgid "FAT: Use directories"
+msgstr ""
 
 msgid "Failed formating"
 msgstr "初期化に失敗しました"
@@ -1252,6 +1258,9 @@ msgstr "個未完了"
 msgid "files not found on the server!"
 msgstr "個ｻｰﾊﾞｰにありませんでした…"
 
+msgid "for FAT support"
+msgstr ""
+
 msgid "for Ocarina"
 msgstr "…Ocarinaを制作"
 
@@ -1287,6 +1296,9 @@ msgstr "中"
 
 msgid "seconds left"
 msgstr "秒で完了"
+
+#~ msgid "Exit USB Loader GX?"
+#~ msgstr "USBLoaderGXを終了しますか？"
 
 #~ msgid "Failed to extract opening.bnr"
 #~ msgstr "opening.bnrの抽出に失敗しました"

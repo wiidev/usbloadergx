@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-22 00:34+0100\n"
+"POT-Creation-Date: 2009-12-04 16:19+0100\n"
 "PO-Revision-Date: 2009-11-24 22:11+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -157,6 +157,12 @@ msgstr "Autoinitiera Nätverk"
 
 msgid "AutoPatch"
 msgstr "Autopatch"
+
+msgid "BCA Codes Path"
+msgstr ""
+
+msgid "BCA Codes Path changed"
+msgstr ""
 
 msgid "Back"
 msgstr "Tillbaka"
@@ -483,11 +489,11 @@ msgstr "Fel..."
 msgid "Error:"
 msgstr "Fel:"
 
-msgid "Exit USB Loader GX?"
-msgstr "Avsluta USB Loader GX?"
-
 msgid "Extracting files..."
 msgstr "Extraherar filer..."
+
+msgid "FAT: Use directories"
+msgstr ""
 
 msgid "Failed formating"
 msgstr "Formatering misslyckad"
@@ -1252,6 +1258,9 @@ msgstr "filer kvar"
 msgid "files not found on the server!"
 msgstr "filerna hittades inte på servern!"
 
+msgid "for FAT support"
+msgstr ""
+
 msgid "for Ocarina"
 msgstr "för Ocarina"
 
@@ -1287,6 +1296,9 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder kvar"
+
+#~ msgid "Exit USB Loader GX?"
+#~ msgstr "Avsluta USB Loader GX?"
 
 #~ msgid "Homebrew Channel"
 #~ msgstr "Homebrew Kanalen"

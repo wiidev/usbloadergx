@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-22 00:34+0100\n"
+"POT-Creation-Date: 2009-12-04 16:19+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: glowy\n"
 "Language-Team: tj_cool, glowy\n"
@@ -157,6 +157,12 @@ msgstr "Netwerk Auto init."
 
 msgid "AutoPatch"
 msgstr "Automatisch patchen"
+
+msgid "BCA Codes Path"
+msgstr ""
+
+msgid "BCA Codes Path changed"
+msgstr ""
 
 msgid "Back"
 msgstr "Terug"
@@ -483,11 +489,11 @@ msgstr "Fout..."
 msgid "Error:"
 msgstr "Fout:"
 
-msgid "Exit USB Loader GX?"
-msgstr "USB Loader GX Afsluiten?"
-
 msgid "Extracting files..."
 msgstr "Bestanden uitpakken..."
+
+msgid "FAT: Use directories"
+msgstr ""
 
 msgid "Failed formating"
 msgstr "Formatteren mislukt"
@@ -1252,6 +1258,9 @@ msgstr "Bestanden resterend"
 msgid "files not found on the server!"
 msgstr "Bestanden niet gevonden op server!"
 
+msgid "for FAT support"
+msgstr ""
+
 msgid "for Ocarina"
 msgstr "voor Ocarina"
 
@@ -1287,6 +1296,9 @@ msgstr "van"
 
 msgid "seconds left"
 msgstr "seconden over"
+
+#~ msgid "Exit USB Loader GX?"
+#~ msgstr "USB Loader GX Afsluiten?"
 
 #~ msgid "Failed to extract opening.bnr"
 #~ msgstr "Uitpakken opening.bnr mislukt"
