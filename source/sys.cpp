@@ -207,7 +207,7 @@ bool Sys_IsHermes() {
 	return IOS_GetVersion() == 222 || IOS_GetVersion() == 223;
 }
 
-#include "Prompts/PromptWindows.h"
+#include "prompts/PromptWindows.h"
 
 void ShowMemInfo() {
 	char buf[255];
