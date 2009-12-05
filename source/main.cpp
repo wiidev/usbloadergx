@@ -234,7 +234,7 @@ main(int argc, char *argv[]) {
 	ios249rev = getIOSrev(0x00000001000000f9ll);
 	
 	//if we don't like either of the cIOS then scram
-	if (!(ios222rev==4 && (ios249rev>=9 && ios249rev<65535)))
+	if (!(ios222rev==4 || (ios249rev>=9 && ios249rev<65280)))
 	{
 		InitTextVideo();
 		printf("\x1b[2J");
@@ -249,12 +249,14 @@ main(int argc, char *argv[]) {
 		} else {
 			printf("\n\n\n\tERROR!");
 			printf("\n\tUSB Loader GX needs unstubbed cIOS 222 v4 or 249 v9+");
-			printf("\n\n\tI found \n\t\t222 = %d%s",ios222rev,ios222rev==65535?" (Stubbed by 4.2 update)":"");
-			printf("\n\t\t249 = %d%s",ios249rev,ios249rev==65535?" (Stubbed by 4.2 update)":"");
+			printf("\n\n\tI found \n\t\t222 = %d%s",ios222rev,ios222rev==65280?" (Stubbed by 4.2 update)":"");
+			printf("\n\t\t249 = %d%s",ios249rev,ios249rev==65280?" (Stubbed by 4.2 update)":"");
 			printf("\n\n\tGo figure out how to get some cIOS action going on\n\tin your Wii and come back and see me.");
 			
 			sleep(15);
 			printf("\n\n\tBye");
+			
+			USBDevice_deInit();
 			exit(0);
 		}
 	}

@@ -1,7 +1,6 @@
 
 #include "mem2.h"
 #include "mem2alloc.h"
-#include "gecko.h"
 
 #include <malloc.h>
 #include <string.h>
@@ -72,18 +71,14 @@ void *__wrap_malloc(size_t size)
 	{
 		p = MEM2_alloc(size);
 		if (p != 0) {
-			gprintf("Malloc of size %d returns address in MEM2\n", size);
 			return p;
 		}
-		gprintf("Malloc of size %d returns address in MEM1\n", size);
 		return __real_malloc(size);
 	}
 	p = __real_malloc(size);
 	if (p != 0) {
-		gprintf("Malloc of size %d returns address in MEM1\n", size);
 		return p;
 	}
-	gprintf("Malloc of size %d returns address in MEM2\n", size);
 	return MEM2_alloc(size);
 }
 
@@ -95,24 +90,18 @@ void *__wrap_calloc(size_t n, size_t size)
 		p = MEM2_alloc(n * size);
 		if (p != 0)
 		{
-			gprintf("Calloc of amount %d, size %d returns address in MEM2\n", n, size);
 			memset(p, 0, n * size);
 			return p;
 		}
-		gprintf("Calloc of amount %d, size %d returns address in MEM1\n", n, size);
 		return __real_calloc(n, size);
 	}
 	p = __real_calloc(n, size);
 	if (p != 0) {
-		gprintf("Calloc of amount %d, size %d returns address in MEM1\n", n, size);
 		return p;
 	}
 	p = MEM2_alloc(n * size);
 	if (p != 0) {
-		gprintf("Calloc of amount %d, size %d returns address in MEM2\n", n, size);
 		memset(p, 0, n * size);
-	} else {
-		gprintf("Calloc of amount %d, size %d returns NULL\n", n, size);
 	}
 	return p;
 }
@@ -126,35 +115,24 @@ void *__wrap_memalign(size_t a, size_t size)
 		{
 			p = MEM2_alloc(size);
 			if (p != 0) {
-				gprintf("Memalign in blocks of %d, size %d returns address in MEM2\n", a, size);
 				return p;
 			}
 		}
-		gprintf("Memalign in blocks of %d, size %d returns address in MEM1\n", a, size);
 		return __real_memalign(a, size);
 	}
 	p = __real_memalign(a, size);
 	if (p != 0 || a > 32 || 32 % a != 0) {
-		gprintf("Memalign in blocks of %d, size %d returns address in MEM1\n", a, size);
 		return p;
 	}
 
-	p = MEM2_alloc(size);
-	if (p != 0) {
-		gprintf("Memalign in blocks of %d, size %d returns address in MEM2\n", a, size);
-	} else {
-		gprintf("Memalign in blocks of %d, size %d returns NULL\n", a, size);
-	}
-	return p;
+	return MEM2_alloc(size);
 }
 
 void __wrap_free(void *p)
 {
 	if (((u32)p & 0x10000000) != 0) {
-		gprintf("Free pointer in address in MEM2\n");
 		MEM2_free(p);
 	} else {
-		gprintf("Free pointer in address in MEM1\n");
 		__real_free(p);
 	}
 }
@@ -167,12 +145,10 @@ void *__wrap_realloc(void *p, size_t size)
 	{
 		n = MEM2_realloc(p, size);
 		if (n != 0) {
-			gprintf("Realloc of size %d returns memory in MEM2\n", size);
 			return n;
 		}
 		n = __real_malloc(size);
 		if (n == 0) {
-			gprintf("Realloc of size %d returns NULL\n", size);
 			return 0;
 		}
 		if (p != 0)
@@ -180,18 +156,15 @@ void *__wrap_realloc(void *p, size_t size)
 			memcpy(n, p, MEM2_usableSize(p) < size ? MEM2_usableSize(p) : size);
 			MEM2_free(p);
 		}
-		gprintf("Realloc of size %d returns memory in MEM1\n", size);
 		return n;
 	}
 	// ptr from malloc
 	n = __real_realloc(p, size);
 	if (n != 0) {
-		gprintf("Realloc of size %d returns memory in MEM1\n", size);
 		return n;
 	}
 	n = MEM2_alloc(size);
 	if (n == 0) {
-		gprintf("Realloc of size %d returns memory in MEM2\n", size);
 		return 0;
 	}
 	if (p != 0)
@@ -199,7 +172,6 @@ void *__wrap_realloc(void *p, size_t size)
 		memcpy(n, p, __real_malloc_usable_size(p) < size ? __real_malloc_usable_size(p) : size);
 		__real_free(p);
 	}
-	gprintf("Realloc of size %d returns memory in MEM2\n", size);
 	return n;
 }
 

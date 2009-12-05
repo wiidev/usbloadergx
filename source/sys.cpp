@@ -255,6 +255,10 @@ s32 IOS_ReloadIOSsafe(int ios)
 		if (ios250rev >= 0 && !(ios250rev>=9 && ios250rev<65280))return -2;
 	}
 		
-	return IOS_ReloadIOS(ios);
+	s32 r = IOS_ReloadIOS(ios);
+	if (r >= 0) {
+		WII_Initialize();
+	}
+	return r;
 }
 
