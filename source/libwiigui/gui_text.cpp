@@ -38,6 +38,7 @@ GuiText::GuiText(const char * t, int s, GXColor c)
 	firstLine = 1;
 	numLines = -1;
 	totalLines = 1;
+	passChar = 0;
 
 	alignmentHor = ALIGN_CENTRE;
 	alignmentVert = ALIGN_MIDDLE;
@@ -130,8 +131,15 @@ void GuiText::SetText(const char * t)
 		delete [] text;
 	text = NULL;
 
-	if(t)
+	if(t) {
 		text = FreeTypeGX::charToWideChar((char *)t);
+		
+		if (passChar != 0) {
+			for (u8 i = 0; i < wcslen(text); i++) {
+				text[i] = passChar;
+			}
+		}
+	}
 	scrollPos2 = 0;
 	scrollDelay = 0;
 }
@@ -158,7 +166,15 @@ void GuiText::SetText(const wchar_t * t)
 	{
 		int len = wcslen(t);
 		text = new wchar_t[len+1];
-		if(text) wcscpy(text, t);
+		if(text) {
+			wcscpy(text, t);
+		}
+		
+		if (passChar != 0) {
+			for (u8 i = 0; i < wcslen(text); i++) {
+				text[i] = passChar;
+			}
+		}
 	}
 	scrollPos2 = 0;
 	scrollDelay = 0;
@@ -236,6 +252,15 @@ void GuiText::SetAlignment(int hor, int vert)
 	alignmentHor = hor;
 	alignmentVert = vert;
 }
+/**
+ * Set a password character
+ */
+void GuiText::SetPassChar(wchar_t p)
+{
+	LOCK(this);
+	passChar = p;
+}
+
 /**
  * Set the Font
  */

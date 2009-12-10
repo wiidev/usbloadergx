@@ -16,6 +16,7 @@ int WindowPrompt(const char *title, const char *msg = NULL, const char *btn1Labe
 
 void WindowCredits();
 int OnScreenKeyboard(char * var, u32 maxlen, int min);
+int OnScreenNumpad(char * var, u32 maxlen);
 int WindowExitPrompt();
 int GameWindowPrompt();
 int DiscWait(const char *title, const char *msg, const char *btn1Label, const char *btn2Label, int IsDeviceWait);

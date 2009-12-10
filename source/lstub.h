@@ -27,7 +27,8 @@ void loadStub();
 //!otherwise returns the ID set to return to 
 u64 getStubDest();
 
-
+//returns 0 or 1 depending on wether the stub is available
+u8 hbcStubAvailable();
 
 
 #ifdef __cplusplus

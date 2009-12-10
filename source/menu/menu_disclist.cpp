@@ -34,7 +34,7 @@ extern GuiImageData * pointer[4];
 extern bool altdoldefault;
 extern GuiImage * bgImg;
 
-GuiButton *Toolbar[8];
+GuiButton *Toolbar[9];
 int idiotFlag=-1;
 char idiotChar[50];
 
@@ -155,6 +155,16 @@ int MenuDiscList() {
     GuiImageData imgarrangeCarousel(imgPath, arrangeCarousel_png);
     snprintf(imgPath, sizeof(imgPath), "%sarrangeCarousel_gray.png", CFG.theme_path);
     GuiImageData imgarrangeCarousel_gray(imgPath, NULL);
+	
+	snprintf(imgPath, sizeof(imgPath), "%slock.png", CFG.theme_path);
+	GuiImageData imgLock(imgPath, lock_png);
+	snprintf(imgPath, sizeof(imgPath), "%slock_gray.png", CFG.theme_path);
+	GuiImageData imgLock_gray(imgPath, NULL);
+	snprintf(imgPath, sizeof(imgPath), "%sunlock.png", CFG.theme_path);
+	GuiImageData imgUnlock(imgPath, unlock_png);
+	snprintf(imgPath, sizeof(imgPath), "%sunlock_gray.png", CFG.theme_path);
+	GuiImageData imgUnlock_gray(imgPath, NULL);
+	
     snprintf(imgPath, sizeof(imgPath), "%sdvd.png", CFG.theme_path);
     GuiImageData imgdvd(imgPath, dvd_png);
     snprintf(imgPath, sizeof(imgPath), "%sdvd_gray.png", CFG.theme_path);
@@ -355,6 +365,42 @@ int MenuDiscList() {
 	GuiButton carouselBtn(&carouselBtnImg_g,&carouselBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_carousel_x, THEME.gamelist_carousel_y, &trigA, &btnSoundOver, btnClick2,1, &carouselBtnTT, 15, 52, 1, 3);
 	carouselBtn.SetAlpha(180);
 
+	bool canUnlock = (Settings.parentalcontrol == 0 && Settings.parental.enabled == 1);
+	
+	GuiTooltip lockBtnTT(canUnlock ? tr("Unlock Parental Control") : tr("Parental Control disabled"));
+	if (Settings.wsprompt == yes)
+		lockBtnTT.SetWidescreen(CFG.widescreen);
+	lockBtnTT.SetAlpha(THEME.tooltipAlpha);
+	GuiImage lockBtnImg(&imgLock);
+	lockBtnImg.SetWidescreen(CFG.widescreen);
+	GuiImage lockBtnImg_g(&imgLock_gray);
+	if(lockBtnImg_g.GetImage() == NULL) { lockBtnImg_g = lockBtnImg; lockBtnImg_g.SetGrayscale(); }
+	lockBtnImg_g.SetWidescreen(CFG.widescreen);
+	GuiButton lockBtn(&lockBtnImg_g, &lockBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_lock_x, THEME.gamelist_lock_y, &trigA, &btnSoundOver, btnClick2,1, &lockBtnTT, 15, 52, 1, 3);
+	lockBtn.SetAlpha(180);
+
+	GuiTooltip unlockBtnTT(tr("Enable Parental Control"));
+	if (Settings.wsprompt == yes)
+		unlockBtnTT.SetWidescreen(CFG.widescreen);
+	unlockBtnTT.SetAlpha(THEME.tooltipAlpha);
+	GuiImage unlockBtnImg(&imgUnlock);
+	unlockBtnImg.SetWidescreen(CFG.widescreen);
+	GuiImage unlockBtnImg_g(&imgUnlock_gray);
+	if(unlockBtnImg_g.GetImage() == NULL) { unlockBtnImg_g = unlockBtnImg; unlockBtnImg_g.SetGrayscale(); }
+	unlockBtnImg_g.SetWidescreen(CFG.widescreen);
+
+	if (canUnlock && Settings.parental.is_unlocked)
+	{
+		lockBtn.SetImage(&unlockBtnImg_g);
+		lockBtn.SetImageOver(&unlockBtnImg_g);
+		lockBtn.SetToolTip(&unlockBtnTT, 15, 52, 1, 3);
+	}
+	
+/*
+	GuiButton unlockBtn(&unlockBtnImg_g, &unlockBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_lock_x, THEME.gamelist_lock_y, &trigA, &btnSoundOver, btnClick2,1, &lockBtnTT, 15, 52, 1, 3);
+	unlockBtn.SetAlpha(180);
+*/
+
     GuiTooltip dvdBtnTT(tr("Mount DVD drive"));
 	if (Settings.wsprompt == yes)
 		dvdBtnTT.SetWidescreen(CFG.widescreen);
@@ -415,14 +461,16 @@ int MenuDiscList() {
         carouselBtn.SetImageOver(&carouselBtnImg);
         carouselBtn.SetAlpha(255);
     }
+	
     if (Settings.gameDisplay==list) {
-	   favoriteBtn.SetPosition(THEME.gamelist_favorite_x, THEME.gamelist_favorite_y);
+		favoriteBtn.SetPosition(THEME.gamelist_favorite_x, THEME.gamelist_favorite_y);
 		searchBtn.SetPosition(THEME.gamelist_search_x, THEME.gamelist_search_y);
 		abcBtn.SetPosition(THEME.gamelist_abc_x, THEME.gamelist_abc_y);
 		countBtn.SetPosition(THEME.gamelist_count_x, THEME.gamelist_count_y);
 		listBtn.SetPosition(THEME.gamelist_list_x, THEME.gamelist_list_y);
 		gridBtn.SetPosition(THEME.gamelist_grid_x, THEME.gamelist_grid_y);
 		carouselBtn.SetPosition(THEME.gamelist_carousel_x, THEME.gamelist_carousel_y);
+		lockBtn.SetPosition(THEME.gamelist_lock_x, THEME.gamelist_lock_y);
 		dvdBtn.SetPosition(THEME.gamelist_dvd_x, THEME.gamelist_dvd_y);
 	} else if(Settings.gameDisplay==grid) {
 		favoriteBtn.SetPosition(THEME.gamegrid_favorite_x, THEME.gamegrid_favorite_y);
@@ -432,6 +480,7 @@ int MenuDiscList() {
 		listBtn.SetPosition(THEME.gamegrid_list_x, THEME.gamegrid_list_y);
 		gridBtn.SetPosition(THEME.gamegrid_grid_x, THEME.gamegrid_grid_y);
 		carouselBtn.SetPosition(THEME.gamegrid_carousel_x, THEME.gamegrid_carousel_y);
+		lockBtn.SetPosition(THEME.gamegrid_lock_x, THEME.gamegrid_lock_y);
 		dvdBtn.SetPosition(THEME.gamegrid_dvd_x, THEME.gamegrid_dvd_y);
 	} else if(Settings.gameDisplay==carousel) {
 		favoriteBtn.SetPosition(THEME.gamecarousel_favorite_x, THEME.gamecarousel_favorite_y);
@@ -441,6 +490,7 @@ int MenuDiscList() {
 		listBtn.SetPosition(THEME.gamecarousel_list_x, THEME.gamecarousel_list_y);
 		gridBtn.SetPosition(THEME.gamecarousel_grid_x, THEME.gamecarousel_grid_y);
 		carouselBtn.SetPosition(THEME.gamecarousel_carousel_x, THEME.gamecarousel_carousel_y);
+		lockBtn.SetPosition(THEME.gamecarousel_lock_x, THEME.gamecarousel_lock_y);
 		dvdBtn.SetPosition(THEME.gamecarousel_dvd_x, THEME.gamecarousel_dvd_y);
 	}
 
@@ -461,8 +511,6 @@ int MenuDiscList() {
     GuiButton idBtn(0,0);
     idBtn.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     idBtn.SetPosition(THEME.id_x,THEME.id_y);
-
-
 
     if (Settings.godmode == 1 && mountMethod!=3) {//only make the button have trigger & tooltip if in godmode
         DownloadBtn.SetSoundOver(&btnSoundOver);
@@ -541,8 +589,10 @@ int MenuDiscList() {
 	Toolbar[5] = &gridBtn;
     w.Append(&carouselBtn);
 	Toolbar[6] = &carouselBtn;
+	w.Append(&lockBtn);
+	Toolbar[7] = &lockBtn;
 	w.Append(&dvdBtn);
-	Toolbar[7] = &dvdBtn;
+	Toolbar[8] = &dvdBtn;
 	w.SetUpdateCallback(DiscListWinUpdateCallback);
 	// End Toolbar
 
@@ -1042,6 +1092,46 @@ int MenuDiscList() {
 				}
 			}
         }
+		else if (lockBtn.GetState() == STATE_CLICKED) {
+			gprintf("\n\tlockBtn clicked");
+			lockBtn.ResetState();
+			if (!canUnlock) {
+				WindowPrompt(tr("Parental Control"), tr("You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."), tr("OK"));
+			} else {
+				if (Settings.parental.is_unlocked) {
+					if (WindowPrompt(tr("Parental Control"), tr("Are you sure you want to enable Parent Control?"), tr("Yes"), tr("No")) == 1) {
+						Settings.parental.is_unlocked = 0;
+						lockBtn.SetImage(&lockBtnImg_g);
+						lockBtn.SetImageOver(&lockBtnImg_g);
+						lockBtn.SetToolTip(&lockBtnTT, 15, 52, 1, 3);
+						
+						// Retrieve the gamelist again
+						menu = MENU_DISCLIST;
+						break;
+					}
+				} else {
+					// Require the user to enter the PIN code
+					char pin[5];
+					memset(&pin, 0, 5);
+					int ret = OnScreenNumpad((char *) &pin, 5);
+					
+					if (ret == 1) {
+						if (memcmp(pin, Settings.parental.pin, 4) == 0) {
+							Settings.parental.is_unlocked = 1;
+							lockBtn.SetImage(&unlockBtnImg_g);
+							lockBtn.SetImageOver(&unlockBtnImg_g);
+							lockBtn.SetToolTip(&unlockBtnTT, 15, 52, 1, 3);
+							
+							// Retrieve the gamelist again
+							menu = MENU_DISCLIST;
+							break;
+						} else {
+							WindowPrompt(tr("Parental Control"), tr("Invalid PIN code"), tr("OK"));
+						}
+					}
+				}
+			}			
+		}
 		else if (dvdBtn.GetState() == STATE_CLICKED) {
 			gprintf("\n\tdvdBtn Clicked");
             mountMethodOLD = (mountMethod==3?mountMethod:0);

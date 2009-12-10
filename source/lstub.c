@@ -88,16 +88,7 @@ void loadStub()
 
 u64 getStubDest()
 {
-	char * sig = (char *)0x80001804;
-    if (!(
-        sig[0] == 'S' &&
-        sig[1] == 'T' &&
-        sig[2] == 'U' &&
-        sig[3] == 'B' &&
-        sig[4] == 'H' &&
-        sig[5] == 'A' &&
-        sig[6] == 'X' &&
-        sig[7] == 'X'))
+    if (!hbcStubAvailable())
 		return 0;
 
 
@@ -117,5 +108,19 @@ u64 getStubDest()
 	memcpy(&retu, ret, 8);
 	
 	return retu;
+}
+
+u8 hbcStubAvailable()
+{
+	char * sig = (char *)0x80001804;
+	return (
+        sig[0] == 'S' &&
+        sig[1] == 'T' &&
+        sig[2] == 'U' &&
+        sig[3] == 'B' &&
+        sig[4] == 'H' &&
+        sig[5] == 'A' &&
+        sig[6] == 'X' &&
+        sig[7] == 'X') ? 1 : 0;
 }
 

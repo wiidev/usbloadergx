@@ -80,6 +80,10 @@ NewTitles::~NewTitles()
 
 void NewTitles::CheckGame(u8 *titleid)
 {
+	if (titleid == NULL || strlen((char *) titleid) == 0) {
+		return;
+	}
+
 	Title *t = firstTitle;
 	while (t != NULL) {
 		// Loop all titles, search for the correct titleid
@@ -109,6 +113,10 @@ void NewTitles::CheckGame(u8 *titleid)
 
 bool NewTitles::IsNew(u8 *titleid)
 {
+	if (titleid == NULL || strlen((char *) titleid) == 0) {
+		return false;
+	}
+
 	Title *t = firstTitle;
 	
 	while (t != NULL) {
@@ -162,7 +170,7 @@ void NewTitles::Save()
 	FILE *fp = fopen(path, "w");
 	if (fp != NULL) {	
 		Title *t = firstTitle;
-		while (t != NULL) {
+		while (t != NULL && strlen((char *) t->titleId) > 0) {
 			fprintf(fp, "%s:%ld\n", t->titleId, t->timestamp);
 			t = (Title *) t->next;
 		}

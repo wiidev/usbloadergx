@@ -746,4 +746,37 @@ static char * get_text(mxml_node_t *node, char *buffer, int buflen) { /* O - Tex
     return (buffer);
 }
 
+int GetRatingForGame(char *gameid)
+{
+    int retval=-1;
+    if (!xml_loaded || nodedata == NULL)
+        return -1;
 
+    /* index all IDs */
+    nodeindex = mxmlIndexNew(nodedata,"id", NULL);
+    nodeid = mxmlIndexReset(nodeindex);
+    *element_text = 0;
+    /* search for game matching gameid */
+    while (1) {
+        nodeid = mxmlIndexFind(nodeindex,"id", NULL);
+        if (nodeid != NULL) {
+            get_text(nodeid, element_text, sizeof(element_text));
+            if (!strcmp(element_text,gameid)) {
+                break;
+            }
+        } else {
+            break;
+        }
+    }
+
+    if (!strcmp(element_text,gameid)) {
+		char type[5], value[5], dest[5];
+
+        GetTextFromNode(nodeid, nodedata, "rating", "type", NULL, MXML_NO_DESCEND, type, sizeof(type));
+        GetTextFromNode(nodeid, nodedata, "rating", "value", NULL, MXML_NO_DESCEND, value, sizeof(value));
+        ConvertRating(value, type, "PEGI", dest, sizeof(dest));
+
+		retval = atoi(dest);
+	}
+	return retval;
+}

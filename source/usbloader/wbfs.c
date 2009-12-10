@@ -13,6 +13,7 @@
 #include "wbfs_fat.h"
 #include "fatmounter.h"
 #include "partition_usbloader.h"
+#include "settings/cfg.h"
 
 #include "libwbfs/libwbfs.h"
 
@@ -482,7 +483,17 @@ s32 WBFS_AddGame(void) {
         return -1;
 
     /* Add game to device */
-    ret = wbfs_add_disc(hdd, __WBFS_ReadDVD, NULL, WBFS_Spinner, ONLY_GAME_PARTITION, 0);
+	partition_selector_t part_sel;
+	int copy_1_1 = 0;
+	
+	if (Settings.fullcopy) {
+		part_sel = ALL_PARTITIONS;
+		copy_1_1 = 1;
+	} else {
+		part_sel = Settings.partitions_to_install == install_game_only ? ONLY_GAME_PARTITION : ALL_PARTITIONS;
+	}
+
+    ret = wbfs_add_disc(hdd, __WBFS_ReadDVD, NULL, WBFS_Spinner, part_sel, copy_1_1);
     if (ret < 0)
         return ret;
 
@@ -596,5 +607,11 @@ f32 WBFS_EstimeGameSize(void) {
 		return comp;
 	}
 
-    return wbfs_estimate_disc(hdd, __WBFS_ReadDVD, NULL, ONLY_GAME_PARTITION);
+	partition_selector_t part_sel;
+	if (Settings.fullcopy) {
+		part_sel = ALL_PARTITIONS;
+	} else {
+		part_sel = Settings.partitions_to_install == install_game_only ? ONLY_GAME_PARTITION : ALL_PARTITIONS;
+	}
+    return wbfs_estimate_disc(hdd, __WBFS_ReadDVD, NULL, part_sel);
 }

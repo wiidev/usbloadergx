@@ -1,3 +1,5 @@
+// WBFS FAT by oggzee
+
 #include <stdio.h>
 #include <unistd.h>
 #include <malloc.h>
@@ -19,15 +21,10 @@
 #include "splits.h"
 #include "fat.h"
 #include "partition_usbloader.h"
+#include "settings/cfg.h"
 #include "wpad.h"
 #include "wbfs_fat.h"
-#include "disc.h"
-#include "settings/cfg.h"
 
-
-// WBFS FAT by oggzee
-
-// max fat fname = 256
 #define MAX_FAT_PATH 1024
 #define D_S(A) A, sizeof(A)
 
@@ -42,104 +39,103 @@ split_info_t split;
 
 static u32 fat_sector_size = 512;
 
+static struct discHdr *fat_hdr_list = NULL;
+static int fat_hdr_count = 0;
+
 void WBFS_Spinner(s32 x, s32 max);
 s32 __WBFS_ReadDVD(void *fp, u32 lba, u32 len, void *iobuf);
 
-
-s32 _WBFS_FAT_GetHeadersCount(void *outbuf, u32 *count, u32 len)
+bool is_gameid(char *id)
 {
-	DIR *dir;
-	struct dirent *dent;
-	char *p;
-	int ret, cnt = 0;
+	int i;
+	for (i=0; i<6; i++) {
+		if (!isalnum(id[i])) return false;
+	}
+	return true;
+}
+
+s32 _WBFS_FAT_GetHeadersCount()
+{
+	DIR_ITER *dir_iter;
 	char path[MAX_FAT_PATH];
-	wbfs_t *part = NULL;
-	u32 size;
-	u8 *ptr;
+	char fname[MAX_FAT_PATH];
+	char fpath[MAX_FAT_PATH];
 	struct discHdr tmpHdr;
-	int hdrsize;
 	struct stat st;
+	wbfs_t *part = NULL;
 	u8 id[8];
+	int ret;
+	char *p;
+	u32 size;
 	int is_dir;
+
 	//dbg_time1();
+
+	if(fat_hdr_list){
+		free(fat_hdr_list);
+		fat_hdr_list=NULL;
+	}
+
+	fat_hdr_count = 0;
 
 	strcpy(path, wbfs_fat_drive);
 	strcat(path, wbfs_fat_dir);
-	dir = opendir(path);
-	//printf("opendir: %s %p\n", path, dir); Wpad_WaitButtons();
-	if (!dir) {
-		*count = 0;
-		return 0;
-	}
-	while ((dent = readdir(dir)) != NULL) {
-		//printf("found: %s\n", dent->d_name);
-		if (outbuf && cnt >= *count) break;
-		if ((char)dent->d_name[0] == '.') continue;
-		if (strlen(dent->d_name) < 8) continue; // "GAMEID_x"
+	dir_iter = diropen(path);
+	if (!dir_iter) return 0;
+	
+	while (dirnext(dir_iter, fname, &st) == 0) {
+		if ((char)fname[0] == '.') continue;
+		if (strlen(fname) < 8) continue; // "GAMEID_x"
 
-		memcpy(id, dent->d_name, 6);
+		memcpy(id, fname, 6);
 		id[6] = 0;
 
-		strcpy(path, wbfs_fat_drive);
-		strcat(path, wbfs_fat_dir);
-		strcat(path, "/");
-		strcat(path, dent->d_name);
-		stat(path, &st);
-
 		is_dir = S_ISDIR(st.st_mode);
-		//printf("path: %s %d\n", path, is_dir);
 		if (is_dir) {
 			// usb:/wbfs/GAMEID_TITLE/GAMEID.wbfs
-			if (dent->d_name[6] != '_') continue;
-			strcat(path, "/");
-			strcat(path, (char*)id);
-			strcat(path, ".wbfs");
-			//printf("path2: %s\n", path);
-			if (stat(path, &st) == -1) continue;
+			if (fname[6] != '_') continue;
+			snprintf(fpath, sizeof(fpath), "%s/%s/%s.wbfs", path, fname, id);
+			// if more than 50 games, skip second stat to improve speed
+			if (fat_hdr_count < 50) {
+				do_stat2:
+				if (stat(fpath, &st) == -1) continue;
+			} else {
+				// just check if gameid is valid (alphanum)
+				if (!is_gameid((char*)id)) goto do_stat2;
+				st.st_size = 1024*1024;
+			}
 		} else {
 			// usb:/wbfs/GAMEID.wbfs
-			p = strrchr(dent->d_name, '.');
+			p = strrchr(fname, '.');
 			if (!p) continue;
 			if (strcasecmp(p, ".wbfs") != 0) continue;
-			if (strlen(dent->d_name) != 11) continue; // GAMEID.wbfs
+			if (strlen(fname) != 11) continue; // GAMEID.wbfs
 		}
 
-		//printf("found: %s %d MB\n", path, (int)(st.st_size/1024/1024));
 		// size must be at least 1MB to be considered a valid wbfs file
 		if (st.st_size < 1024*1024) continue;
-		if (!outbuf) {
-			// just counting
-			cnt++;
-			continue;
-		}
-		ptr = ((u8 *)outbuf) + (cnt * len);
-		hdrsize = len;
 		// if we have titles.txt entry use that
 		char *title = cfg_get_title(id);
 		// if directory, and no titles.txt get title from dir name
 		if (!title && is_dir) {
-			title = &dent->d_name[7];
+			title = &fname[7];
 		}
 		if (title) {
 			memset(&tmpHdr, 0, sizeof(tmpHdr));
 			memcpy(tmpHdr.id, id, 6);
 			strncpy(tmpHdr.title, title, sizeof(tmpHdr.title)-1);
 			tmpHdr.magic = 0x5D1C9EA3;
-			memcpy(ptr, &tmpHdr, hdrsize);
-			cnt++;
-			continue;
+			goto add_hdr;
 		}
 
 		// else read it from wbfs file directly
- 		FILE *fp = fopen(path, "rb");
+ 		FILE *fp = fopen(fpath, "rb");
 		if (fp != NULL) {
 			fseek(fp, 512, SEEK_SET);
 			fread(&tmpHdr, sizeof(struct discHdr), 1, fp);
 			fclose(fp);
 			if ((tmpHdr.magic == 0x5D1C9EA3) && (memcmp(tmpHdr.id, id, 6) == 0)) {
-				memcpy(ptr, &tmpHdr, hdrsize);
-				cnt++;
-				continue;
+				goto add_hdr;
 			}
 		}
 		// no title found, read it from wbfs file
@@ -147,19 +143,19 @@ s32 _WBFS_FAT_GetHeadersCount(void *outbuf, u32 *count, u32 len)
 		// open 'partition' file
 		part = WBFS_FAT_OpenPart(id);
 		if (!part) {
-			printf("bad wbfs file: %s\n", dent->d_name);
-			sleep(2);
 			continue;
 		}
 		/* Get header */
-		ret = wbfs_get_disc_info(part, 0, ptr, hdrsize, &size);
-		if (ret == 0) cnt++;
+		ret = wbfs_get_disc_info(part, 0, (u8*)&tmpHdr, sizeof(struct discHdr), &size);
 		WBFS_FAT_ClosePart(part);
+		if (ret) continue;
+		// add tmpHdr to list:
+		add_hdr:
+		fat_hdr_count++;
+		fat_hdr_list = realloc(fat_hdr_list, fat_hdr_count * sizeof(struct discHdr));
+		memcpy(&fat_hdr_list[fat_hdr_count-1], &tmpHdr, sizeof(struct discHdr));
 	}
-	*count = cnt;
-	closedir(dir);
-	//dbg_time2("\nFAT HDRS");
-	//Wpad_WaitButtonsCommon();
+	dirclose(dir_iter);
 	return 0;
 }
 
@@ -167,13 +163,38 @@ s32 _WBFS_FAT_GetHeadersCount(void *outbuf, u32 *count, u32 len)
 s32 WBFS_FAT_GetCount(u32 *count)
 {
 	*count = 0;
-	_WBFS_FAT_GetHeadersCount(NULL, count, 0);
+	_WBFS_FAT_GetHeadersCount();
+	if (fat_hdr_count && fat_hdr_list) {
+		// for compacter mem - move up as it will be freed later
+		int size = fat_hdr_count * sizeof(struct discHdr);
+		struct discHdr *buf = malloc(size);
+		if (buf) {
+			memcpy(buf, fat_hdr_list, size);
+			if (fat_hdr_list) {
+				free(fat_hdr_list);
+			}
+			fat_hdr_list = buf;
+		}
+	}
+	*count = fat_hdr_count;
 	return 0;
 }
 
 s32 WBFS_FAT_GetHeaders(void *outbuf, u32 cnt, u32 len)
 {
-	_WBFS_FAT_GetHeadersCount(outbuf, &cnt, len);
+	int i;
+	int slen = len;
+	if (slen > sizeof(struct discHdr)) {
+		slen = sizeof(struct discHdr);
+	}
+	for (i=0; i<cnt && i<fat_hdr_count; i++) {
+		memcpy(outbuf + i * len, &fat_hdr_list[i], slen);
+	}
+	if (fat_hdr_list) {
+		free(fat_hdr_list);
+		fat_hdr_list = NULL;
+	}
+	fat_hdr_count = 0;
 	return 0;
 }
 
@@ -219,13 +240,11 @@ s32 WBFS_FAT_DiskSpace(f32 *used, f32 *free)
 
 static int nop_read_sector(void *_fp,u32 lba,u32 count,void*buf)
 {
-	//printf("read %d %d\n", lba, count); //Wpad_WaitButtons();
 	return 0;
 }
 
 static int nop_write_sector(void *_fp,u32 lba,u32 count,void*buf)
 {
-	//printf("write %d %d\n", lba, count); //Wpad_WaitButtons();
 	return 0;
 }
 
@@ -269,53 +288,33 @@ void WBFS_FAT_get_dir(struct discHdr *header, char *path)
 	}
 }
 
-void mk_title_txt(struct discHdr *header, char *path)
-{
-	char fname[MAX_FAT_PATH];
-	FILE *f;
-
-	strcpy(fname, path);
-	strcat(fname, "/");
-	mk_gameid_title(header, fname+strlen(fname), 1);
-	strcat(fname, ".txt");
-
-	f = fopen(fname, "wb");
-	if (!f) return;
-	fprintf(f, "%.6s = %.64s\n", header->id, get_title(header));
-	fclose(f);
-	printf("Info file: %s\n", fname);
-}
-
-
 int WBFS_FAT_find_fname(u8 *id, char *fname, int len)
 {
 	struct stat st;
 	WBFS_FAT_fname(id, fname, len, NULL);
 	if (stat(fname, &st) == 0) return 1;
 	// direct file not found, check subdirs
-	DIR *dir;
-	struct dirent *dent;
+	DIR_ITER *dir_iter;
 	char path[MAX_FAT_PATH];
+	char name[MAX_FAT_PATH];
 	strcpy(path, wbfs_fat_drive);
 	strcat(path, wbfs_fat_dir);
-	dir = opendir(path);
-	//printf("opendir: %s %p\n", path, dir); Wpad_WaitButtons();
-	if (!dir) {
+	dir_iter = diropen(path);
+	if (!dir_iter) {
 		goto err;
 	}
-	while ((dent = readdir(dir)) != NULL) {
-		char *name = (char*)dent->d_name;
+	while (dirnext(dir_iter, name, &st) == 0) {
 		if (name[0] == '.') continue;
 		if (name[6] != '_') continue;
 		if (strncmp(name, (char*)id, 6) != 0) continue;
 		if (strlen(name) < 8) continue;
 		snprintf(fname, len, "%s/%s/%.6s.wbfs",	path, name, id);
 		if (stat(fname, &st) == 0) {
-			closedir(dir);
+			dirclose(dir_iter);
 			return 2;
 		}
 	}
-	closedir(dir);
+	dirclose(dir_iter);
 	// not found
 	err:
 	*fname = 0;
@@ -350,12 +349,10 @@ wbfs_t* WBFS_FAT_CreatePart(u8 *id, char *path)
 	u32 n_sector = size / 512;
 	int ret;
 
-	//printf("CREATE PART %s %lld %d\n", id, size, n_sector);
 	snprintf(D_S(fname), "%s%s", wbfs_fat_drive, wbfs_fat_dir);
 	mkdir(fname, 0777); // base usb:/wbfs
 	mkdir(path, 0777); // game subdir
 	WBFS_FAT_fname(id, fname, sizeof(fname), path);
-	printf("Writing to %s\n", fname);
 	ret = split_create(&split, fname, OPT_split_size, size, true);
 	if (ret) return NULL;
 
@@ -363,8 +360,6 @@ wbfs_t* WBFS_FAT_CreatePart(u8 *id, char *path)
 	u32 scnt = 0;
 	int fd = split_get_file(&split, 0, &scnt, 0);
 	if (fd<0) {
-		printf("ERROR creating file\n");
-		sleep(2);
 		split_close(&split);
 		return NULL;
 	}
@@ -400,16 +395,16 @@ s32 WBFS_FAT_RemoveGame(u8 *discid)
 
 	// game is in subdir
 	// remove optional .txt file
-	DIR *dir;
-	struct dirent *dent;
+	DIR_ITER *dir_iter;
+	struct stat st;
 	char path[MAX_FAT_PATH];
+	char name[MAX_FAT_PATH];
 	strncpy(path, fname, sizeof(path));
-	char *p= strrchr(path, '/');
+	char *p = strrchr(path, '/');
 	if (p) *p = 0;
-	dir = opendir(path);
-	if (!dir) return 0;
-	while ((dent = readdir(dir)) != NULL) {
-		char *name = (char*)dent->d_name;
+	dir_iter = diropen(path);
+	if (!dir_iter) return 0;
+	while (dirnext(dir_iter, name, &st) == 0) {
 		if (name[0] == '.') continue;
 		if (name[6] != '_') continue;
 		if (strncmp(name, (char*)discid, 6) != 0) continue;
@@ -420,10 +415,11 @@ s32 WBFS_FAT_RemoveGame(u8 *discid)
 		remove(fname);
 		break;
 	}
-	closedir(dir);
+	dirclose(dir_iter);
 	// remove game subdir
 	//rmdir(path);
 	if (unlink(path) == -1) {
+		return -1;
 	}
 
 	return 0;
@@ -445,22 +441,16 @@ s32 WBFS_FAT_AddGame(void)
 	part = WBFS_FAT_CreatePart(header.id, path);
 	if (!part) return -1;
 	/* Add game to device */
-	partition_selector_t part_sel = ONLY_GAME_PARTITION;
+	partition_selector_t part_sel;
 	int copy_1_1 = 0;
-/*	
-	switch (CFG.install_partitions) {
-		case CFG_INSTALL_GAME:
-			part_sel = ONLY_GAME_PARTITION;
-			break;
-		case CFG_INSTALL_ALL:
-			part_sel = ALL_PARTITIONS;
-			break;
-		case CFG_INSTALL_1_1:
-			part_sel = ALL_PARTITIONS;
-			copy_1_1 = 1;
-			break;
+	
+	if (Settings.fullcopy) {
+		part_sel = ALL_PARTITIONS;
+		copy_1_1 = 1;
+	} else {
+		part_sel = Settings.partitions_to_install == install_game_only ? ONLY_GAME_PARTITION : ALL_PARTITIONS;
 	}
-*/	
+
 	extern wbfs_t *hdd;
 	wbfs_t *old_hdd = hdd;
 	hdd = part; // used by spinner
@@ -468,8 +458,10 @@ s32 WBFS_FAT_AddGame(void)
 	hdd = old_hdd;
 	wbfs_trim(part);
 	WBFS_FAT_ClosePart(part);
+	if (ret) {
+		return -1;
+	}
 	if (ret < 0) return ret;
-	mk_title_txt(&header, path);
 
 	return 0;
 }
@@ -493,14 +485,13 @@ s32 WBFS_FAT_DVD_Size(u64 *comp_size, u64 *real_size)
 	wii_sec_sz = part->wii_sec_sz;
 
 	/* Add game to device */
-	partition_selector_t part_sel = ONLY_GAME_PARTITION;
-/*	
-	if (CFG.install_partitions) {
+	partition_selector_t part_sel;
+	if (Settings.fullcopy) {
 		part_sel = ALL_PARTITIONS;
 	} else {
-		part_sel = ONLY_GAME_PARTITION;
+		part_sel = Settings.partitions_to_install == install_game_only ? ONLY_GAME_PARTITION : ALL_PARTITIONS;
 	}
-*/	
+
 	ret = wbfs_size_disc(part, __WBFS_ReadDVD, NULL, part_sel, &comp_sec, &last_sec);
 	wbfs_close(part);
 	if (ret < 0)
@@ -558,4 +549,3 @@ s32 WBFS_FAT_ReIDGame(u8 *discid, const void *newID)
 
 	return ret;
 }
-

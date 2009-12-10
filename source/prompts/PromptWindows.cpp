@@ -64,6 +64,79 @@ extern void ResumeGui();
 extern void HaltGui();
 
 /****************************************************************************
+ * OnScreenNumpad
+ *
+ * Opens an on-screen numpad window, with the data entered being stored
+ * into the specified variable.
+ ***************************************************************************/
+int OnScreenNumpad(char * var, u32 maxlen) {
+	int save = -1;
+	
+	GuiNumpad numpad(var, maxlen);
+	
+    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
+	// because destroy GuiSound must wait while sound playing is finished, we use a global sound
+	if(!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size,Settings.sfxvolume);
+	//	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+
+    char imgPath[100];
+    snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
+    GuiImageData btnOutline(imgPath, button_dialogue_box_png);
+
+    GuiTrigger trigA;
+    trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
+    GuiTrigger trigB;
+    trigB.SetSimpleTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
+
+    GuiText okBtnTxt(tr("OK"), 22, THEME.prompttext);
+    GuiImage okBtnImg(&btnOutline);
+    if (Settings.wsprompt == yes) {
+        okBtnTxt.SetWidescreen(CFG.widescreen);
+        okBtnImg.SetWidescreen(CFG.widescreen);
+    }
+    GuiButton okBtn(&okBtnImg,&okBtnImg, 0, 4, 5, 15, &trigA, &btnSoundOver, btnClick2,1);
+    okBtn.SetLabel(&okBtnTxt);
+    GuiText cancelBtnTxt(tr("Cancel"), 22, THEME.prompttext);
+    GuiImage cancelBtnImg(&btnOutline);
+    if (Settings.wsprompt == yes) {
+        cancelBtnTxt.SetWidescreen(CFG.widescreen);
+        cancelBtnImg.SetWidescreen(CFG.widescreen);
+    }
+    GuiButton cancelBtn(&cancelBtnImg,&cancelBtnImg, 1, 4, -5, 15, &trigA, &btnSoundOver, btnClick2,1);
+    cancelBtn.SetLabel(&cancelBtnTxt);
+    cancelBtn.SetTrigger(&trigB);
+    
+    numpad.Append(&okBtn);
+    numpad.Append(&cancelBtn);
+
+    HaltGui();
+    mainWindow->SetState(STATE_DISABLED);
+    mainWindow->Append(&numpad);
+    mainWindow->ChangeFocus(&numpad);
+    ResumeGui();
+
+    while (save == -1) {
+        VIDEO_WaitVSync();
+
+        if (okBtn.GetState() == STATE_CLICKED)
+            save = 1;
+        else if (cancelBtn.GetState() == STATE_CLICKED)
+            save = 0;
+    }
+
+    if (save == 1) {
+        snprintf(var, maxlen, "%s", numpad.kbtextstr);
+    }
+
+    HaltGui();
+    mainWindow->Remove(&numpad);
+    mainWindow->SetState(STATE_DEFAULT);
+    ResumeGui();
+	gprintf("\t%s",(save == 1?"saved":"discarded"));
+    return save;	
+}
+
+/****************************************************************************
  * OnScreenKeyboard
  *
  * Opens an on-screen keyboard window, with the data entered being stored
@@ -1203,7 +1276,7 @@ int GameWindowPrompt() {
 
     promptWindow.Append(&diskImg2);
     promptWindow.Append(&btn1);
-
+	
     short changed = -1;
     GuiImageData * diskCover = NULL;
     GuiImageData * diskCover2 = NULL;
@@ -2658,7 +2731,16 @@ int ProgressUpdateWindow() {
                 promptWindow.Append(&progressbarOutlineImg);
                 promptWindow.Append(&prTxt);
                 msgTxt.SetTextf("%s Rev%i wad.", tr("Downloading"), newrev);
-                s32 filesize = download_request("http://www.techjawa.com/usbloadergx/ULNR.file");//for some reason it didn't download completely when saved as a wad.
+                s32 filesize;
+				if (Settings.beta_upgrades) {
+					char url[255];
+					memset(&url, 0, 255);
+					sprintf((char *) &url, "http://usbloader-gui.googlecode.com/files/r%d.wad", newrev);
+					filesize = download_request((char *) &url);
+				} else {
+					filesize = download_request("http://www.techjawa.com/usbloadergx/ULNR.file");//for some reason it didn't download completely when saved as a wad.
+				}
+				
                 if (filesize > 0) {
 
                     pfile = fopen(dolpath, "wb");//here we save the txt as a wad
@@ -2941,7 +3023,16 @@ int ProgressUpdateWindow() {
                 promptWindow.Append(&progressbarOutlineImg);
                 promptWindow.Append(&prTxt);
                 msgTxt.SetTextf("%s Rev%i", tr("Update to"), newrev);
-                s32 filesize = download_request("http://www.techjawa.com/usbloadergx/boot.dol");
+				
+				s32 filesize;
+				if (Settings.beta_upgrades) {
+					char url[255];
+					memset(&url, 0, 255);
+					sprintf((char *) &url, "http://usbloader-gui.googlecode.com/files/r%d.dol", newrev);
+					filesize = download_request((char *) &url);
+				} else {
+					filesize = download_request("http://www.techjawa.com/usbloadergx/boot.dol");
+				}
                 if (filesize > 0) {
                     FILE * pfile;
                     pfile = fopen(dolpath, "wb");

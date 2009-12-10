@@ -759,6 +759,9 @@ class GuiText : public GuiElement
 		//!Sets the font
 		//!\param f Font
 		void SetFont(FreeTypeGX *f);
+		//!Sets a password character
+		//!\param p char
+		void SetPassChar(wchar_t p);
 		//!Get the Horizontal Size of Text
 		int GetTextWidth();
 		// not NULL set horizontal scale to 0.75 //added
@@ -788,6 +791,7 @@ class GuiText : public GuiElement
 		int firstLine; //!these are the first line and the number of lines drawn when the text is wrapped
 		int numLines;//! default is -1 and it means that all lines are drawn
 		int totalLines; //!this is the total # of lines when in wrap mode
+		wchar_t passChar; //!this is the password character
 };
 
 //!Display, manage, and manipulate tooltips in the GUI.
@@ -994,6 +998,41 @@ class GuiKeyboard : public GuiWindow
 		GuiImageData * keyMediumOver;
 		GuiImageData * keyLarge;
 		GuiImageData * keyLargeOver;
+		GuiSound * keySoundOver;
+		GuiSound * keySoundClick;
+		GuiTrigger * trigA;
+		GuiTrigger * trigB;
+};
+
+//!On-screen keyboard
+class GuiNumpad : public GuiWindow
+{
+	public:
+		GuiNumpad(char * t, u32 max);
+		~GuiNumpad();
+		void Update(GuiTrigger * t);
+		char kbtextstr[256];
+	protected:
+		u32 kbtextmaxlen;
+		char keys[10];
+		GuiText * kbText;
+		GuiImage * keyTextboxImg;
+
+		GuiText * keyBackText;
+		GuiImage * keyBackImg;
+		GuiImage * keyBackOverImg;
+		GuiButton * keyBack;
+		GuiText * keyClearText;
+		GuiImage * keyClearImg;
+		GuiImage * keyClearOverImg;
+		GuiButton * keyClear;
+		GuiButton * keyBtn[10];
+		GuiImage * keyImg[10];
+		GuiImage * keyImgOver[10];
+		GuiText * keyTxt[10];
+		GuiImageData * keyTextbox;
+		GuiImageData * keyMedium;
+		GuiImageData * keyMediumOver;
 		GuiSound * keySoundOver;
 		GuiSound * keySoundClick;
 		GuiTrigger * trigA;

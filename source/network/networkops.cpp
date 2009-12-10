@@ -18,6 +18,7 @@
 #include "http.h"
 #include "svnrev.h"
 #include "buildtype.h"
+#include "update.h"
 
 #define PORT            4299
 
@@ -297,24 +298,27 @@ int CheckUpdate() {
     int revnumber = 0;
     int currentrev = atoi(GetRev());
 
+	if (Settings.beta_upgrades) {
+		revnumber = CheckForBetaUpdate();
+	} else {
 #ifdef FULLCHANNEL
-    struct block file = downloadfile("http://www.techjawa.com/usbloadergx/wadrev.txt");
+		struct block file = downloadfile("http://www.techjawa.com/usbloadergx/wadrev.txt");
 #else
-    struct block file = downloadfile("http://www.techjawa.com/usbloadergx/rev.txt");
+		struct block file = downloadfile("http://www.techjawa.com/usbloadergx/rev.txt");
 #endif
-    char revtxt[10];
+		char revtxt[10];
 
-    u8  i;
-    if (file.data != NULL) {
-        for (i=0; i<9 || i < file.size; i++)
-            revtxt[i] = file.data[i];
-        revtxt[i] = 0;
-        revnumber = atoi(revtxt);
-        free(file.data);
-    }
+		u8  i;
+		if (file.data != NULL) {
+			for (i=0; i<9 || i < file.size; i++)
+				revtxt[i] = file.data[i];
+			revtxt[i] = 0;
+			revnumber = atoi(revtxt);
+			free(file.data);
+		}
+	}
 
     if (revnumber > currentrev)
-        //if(revnumber > 1)//for testing updates
         return revnumber;
     else
         return -1;

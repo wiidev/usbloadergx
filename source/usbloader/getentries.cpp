@@ -177,6 +177,19 @@ int __Menu_GetPrevFilter(int t, wchar_t* gameFilter, u32 gameFiltered, wchar_t *
 			if(get_block(header) >= Settings.parentalcontrol)
 				continue;
 
+		/* Other parental control method */
+		if (Settings.parentalcontrol == 0 && Settings.parental.is_unlocked == 0 && Settings.parental.enabled == 1)
+		{
+			// Check game rating in WiiTDB, since the default Wii parental control setting is enabled
+			s32 rating = GetRatingForGame((char *) header->id);
+		
+			if ((rating != -1 && rating > Settings.parental.rating) || 
+			    (rating == -1 && get_pegi_block(header) > Settings.parental.rating))
+			{
+				continue;
+			}
+		}
+
 		wchar_t *wname = FreeTypeGX::charToWideChar(get_title(header));
 		if(wname) nameList.push_back(wname);
 	}
@@ -491,6 +504,18 @@ int __Menu_GetGameList(int t, wchar_t* gameFilter, discHdr ** PgameList, u32 *Pg
 		if (Settings.parentalcontrol && !Settings.godmode && t==0) {
 			if (get_block(header) >= Settings.parentalcontrol)
 				continue;
+		}
+
+		/* Other parental control method */
+		if (Settings.parentalcontrol == 0 && Settings.parental.is_unlocked == 0 && Settings.parental.enabled == 1)
+		{
+			// Check game rating in WiiTDB, since the default Wii parental control setting is enabled
+			s32 rating = GetRatingForGame((char *) header->id);
+			if ((rating != -1 && rating > Settings.parental.rating) || 
+			    (rating == -1 && get_pegi_block(header) > Settings.parental.rating))
+			{
+				continue;
+			}
 		}
 		
 		if(gameFilter && *gameFilter && t==0) {

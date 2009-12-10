@@ -268,55 +268,61 @@ void CFG_Default(int widescreen) { // -1 = non forced Mode
 
 	THEME.pagesize = 9;
 
-	THEME.gamelist_favorite_x = CFG.widescreen ? 288 : 260;
+	THEME.gamelist_favorite_x = CFG.widescreen ? 256 : 220;
 	THEME.gamelist_favorite_y = 13;
-	THEME.gamelist_search_x = CFG.widescreen ? 320 : 300;
+	THEME.gamelist_search_x = CFG.widescreen ? 288 : 260;
 	THEME.gamelist_search_y = 13;
-	THEME.gamelist_abc_x = CFG.widescreen ? 352 : 340;
+	THEME.gamelist_abc_x = CFG.widescreen ? 320 : 300;
 	THEME.gamelist_abc_y = 13;
-	THEME.gamelist_count_x = CFG.widescreen ? 384 : 380;
+	THEME.gamelist_count_x = CFG.widescreen ? 352 : 340;
 	THEME.gamelist_count_y = 13;
-	THEME.gamelist_list_x = CFG.widescreen ? 416 : 420;
+	THEME.gamelist_list_x = CFG.widescreen ? 384 : 380;
 	THEME.gamelist_list_y = 13;
-	THEME.gamelist_grid_x = CFG.widescreen ? 448 : 460;
+	THEME.gamelist_grid_x = CFG.widescreen ? 416 : 420;
 	THEME.gamelist_grid_y = 13;
-	THEME.gamelist_carousel_x = CFG.widescreen ? 480 : 500;
+	THEME.gamelist_carousel_x = CFG.widescreen ? 448 : 460;
 	THEME.gamelist_carousel_y = 13;
+	THEME.gamelist_lock_x = CFG.widescreen ? 480 : 500;
+	THEME.gamelist_lock_y = 13;
 	THEME.gamelist_dvd_x = CFG.widescreen ? 512 : 540;
 	THEME.gamelist_dvd_y = 13;
 
-	THEME.gamegrid_favorite_x = CFG.widescreen ? 208 : 180;
+	THEME.gamegrid_favorite_x = CFG.widescreen ? 192 : 160;
 	THEME.gamegrid_favorite_y = 13;
-	THEME.gamegrid_search_x = CFG.widescreen ? 240 : 220;
+	THEME.gamegrid_search_x = CFG.widescreen ? 224 : 200;
 	THEME.gamegrid_search_y = 13;
-	THEME.gamegrid_abc_x = CFG.widescreen ? 272 : 260;
+	THEME.gamegrid_abc_x = CFG.widescreen ? 256 : 240;
 	THEME.gamegrid_abc_y = 13;
-	THEME.gamegrid_count_x = CFG.widescreen ? 304 : 300;
+	THEME.gamegrid_count_x = CFG.widescreen ? 288 : 280;
 	THEME.gamegrid_count_y = 13;
-	THEME.gamegrid_list_x = CFG.widescreen ? 336 : 340;
+	THEME.gamegrid_list_x = CFG.widescreen ? 320 : 320;
 	THEME.gamegrid_list_y = 13;
-	THEME.gamegrid_grid_x = CFG.widescreen ? 368 : 380;
+	THEME.gamegrid_grid_x = CFG.widescreen ? 352 : 360;
 	THEME.gamegrid_grid_y = 13;
-	THEME.gamegrid_carousel_x = CFG.widescreen ? 400 : 420;
+	THEME.gamegrid_carousel_x = CFG.widescreen ? 384 : 400;
 	THEME.gamegrid_carousel_y = 13;
-	THEME.gamegrid_dvd_x = CFG.widescreen ? 432 : 460;
+	THEME.gamegrid_lock_x = CFG.widescreen ? 416 : 440;
+	THEME.gamegrid_lock_y = 13;
+	THEME.gamegrid_dvd_x = CFG.widescreen ? 448 : 480;
 	THEME.gamegrid_dvd_y = 13;
 
-	THEME.gamecarousel_favorite_x = CFG.widescreen ? 208 : 180;
+	THEME.gamecarousel_favorite_x = CFG.widescreen ? 192 : 160;
 	THEME.gamecarousel_favorite_y = 13;
-	THEME.gamecarousel_search_x = CFG.widescreen ? 240 : 220;
+	THEME.gamecarousel_search_x = CFG.widescreen ? 224 : 200;
 	THEME.gamecarousel_search_y = 13;
-	THEME.gamecarousel_abc_x = CFG.widescreen ? 272 : 260;
+	THEME.gamecarousel_abc_x = CFG.widescreen ? 256 : 240;
 	THEME.gamecarousel_abc_y = 13;
-	THEME.gamecarousel_count_x = CFG.widescreen ? 304 : 300;
+	THEME.gamecarousel_count_x = CFG.widescreen ? 288 : 280;
 	THEME.gamecarousel_count_y = 13;
-	THEME.gamecarousel_list_x = CFG.widescreen ? 336 : 340;
+	THEME.gamecarousel_list_x = CFG.widescreen ? 320 : 320;
 	THEME.gamecarousel_list_y = 13;
-	THEME.gamecarousel_grid_x = CFG.widescreen ? 368 : 380;
+	THEME.gamecarousel_grid_x = CFG.widescreen ? 352 : 360;
 	THEME.gamecarousel_grid_y = 13;
-	THEME.gamecarousel_carousel_x = CFG.widescreen ? 400 : 420;
+	THEME.gamecarousel_carousel_x = CFG.widescreen ? 384 : 400;
 	THEME.gamecarousel_carousel_y = 13;
-	THEME.gamecarousel_dvd_x = CFG.widescreen ? 432 : 460;
+	THEME.gamecarousel_lock_x = CFG.widescreen ? 416 : 440;
+	THEME.gamecarousel_lock_y = 13;
+	THEME.gamecarousel_dvd_x = CFG.widescreen ? 448 : 480;
 	THEME.gamecarousel_dvd_y = 13;
 }
 
@@ -357,6 +363,27 @@ void Global_Default(void) {
 	Settings.partition = -1;
 	Settings.marknewtitles = 1;
 	Settings.FatInstallToDir = 0;
+	Settings.partitions_to_install = install_game_only;
+	Settings.fullcopy = 0;
+	Settings.beta_upgrades = 0;
+	
+	memset(&Settings.parental, 0, sizeof(struct SParental));
+
+	char buf[0x4a];
+	CONF_Init();
+	s32 res = CONF_Get("IPL.PC", buf, 0x4A);
+	if (res > 0) {
+		if (buf[2] != 0x14) {
+			Settings.parental.enabled = 1;
+			Settings.parental.rating = buf[2];
+		}
+		Settings.parental.question = buf[7];
+		memcpy(Settings.parental.pin, buf + 3, 4);
+		memcpy(Settings.parental.answer, buf + 8, 32);
+	}
+	if (Settings.parental.enabled == 0) {
+		Settings.parental.is_unlocked = 1;
+	}
 }
 
 
@@ -417,6 +444,16 @@ u8 cfg_get_block(u8 *id) {
 
 u8 get_block(struct discHdr *header) {
     return cfg_get_block(header->id);
+}
+
+s8 get_pegi_block(struct discHdr *header) {
+	switch(get_block(header)) {
+		case 1: return 7;
+		case 2: return 12;
+		case 3: return 16;
+		case 4: return 18;
+		default: return -1;
+	}
 }
 
 // trim leading and trailing whitespace
@@ -698,6 +735,10 @@ void theme_set(char *name, char *val) {
 	else CFG_COORDS2(gamegrid_carousel)
 	else CFG_COORDS2(gamecarousel_carousel)
 
+	else CFG_COORDS2(gamelist_lock)
+	else CFG_COORDS2(gamegrid_lock)
+	else CFG_COORDS2(gamecarousel_lock)
+
 	else CFG_COORDS2(gamelist_dvd)
 	else CFG_COORDS2(gamegrid_dvd)
 	else CFG_COORDS2(gamecarousel_dvd)
@@ -804,6 +845,11 @@ void theme_set(char *name, char *val) {
 			// old themes have no dvd_coords
 			// place the dvdIcon to the right side of the carouselIcon
 			if(!CFG.widescreen) x+= CFG.widescreen ? 32 : 40;
+			THEME.gamelist_lock_x = x;
+			THEME.gamegrid_lock_x = THEME.gamecarousel_lock_x = x-WorkAroundBarOffset;
+			THEME.gamelist_lock_y = THEME.gamegrid_lock_y = THEME.gamecarousel_lock_y = y;
+
+			x+= CFG.widescreen ? 32 : 40;
 			THEME.gamelist_dvd_x = x;
 			THEME.gamegrid_dvd_x = THEME.gamecarousel_dvd_x = x-WorkAroundBarOffset;
 			THEME.gamelist_dvd_y = THEME.gamegrid_dvd_y = THEME.gamecarousel_dvd_y = y;
@@ -844,6 +890,8 @@ void theme_set(char *name, char *val) {
 			{
 				THEME.gamegrid_carousel_x += WorkAroundBarOffset - o;
 				THEME.gamecarousel_carousel_x += WorkAroundBarOffset - o;
+				THEME.gamegrid_lock_x += WorkAroundBarOffset - o;
+				THEME.gamecarousel_lock_x += WorkAroundBarOffset - o;
 				THEME.gamegrid_dvd_x += WorkAroundBarOffset - o;
 				THEME.gamecarousel_dvd_x += WorkAroundBarOffset - o;
 			}
@@ -1059,6 +1107,21 @@ void global_cfg_set(char *name, char *val) {
 		int i;
 		if (sscanf(val, "%d", &i) == 1) {
 			Settings.FatInstallToDir = i;
+		}
+	} else if (strcmp(name, "partitions") == 0) {
+		int i;
+		if (sscanf(val, "%d", &i) == 1) {
+			Settings.partitions_to_install = i;
+		}
+	} else if (strcmp(name, "fullcopy") == 0) {
+		int i;
+		if (sscanf(val, "%d", &i) == 1) {
+			Settings.fullcopy = i;
+		}
+	} else if (strcmp(name, "beta_upgrades") == 0) {
+		int i;
+		if (sscanf(val, "%d", &i) == 1) {
+			Settings.beta_upgrades = i;
 		}
 	}
 
@@ -1307,6 +1370,9 @@ bool cfg_save_global() { // save global settings
 	fprintf(f, "partition = %d\n", Settings.partition);
 	fprintf(f, "marknewtitles = %d\n", Settings.marknewtitles);
 	fprintf(f, "fatInstallToDir = %d\n", Settings.FatInstallToDir);
+	fprintf(f, "partitions = %d\n", Settings.partitions_to_install);
+	fprintf(f, "fullcopy = %d\n", Settings.fullcopy);
+	fprintf(f, "beta_upgrades = %d\n", Settings.beta_upgrades);
     fclose(f);
     return true;
 }

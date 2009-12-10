@@ -16,10 +16,11 @@
 #include <unistd.h>
 #include <locale.h>
 #include <wiiuse/wpad.h>
-//#include <debug.h>
-//extern "C" { //not sure if this is in the libogc that the buildbot is using so it isnt used yet
-//extern void __exception_setreload(int t);
-//}
+
+#include <debug.h>
+extern "C" { //not sure if this is in the libogc that the buildbot is using so it isnt used yet
+extern void __exception_setreload(int t);
+}
 
 #include <gccore.h>
 #include <stdio.h>
@@ -51,6 +52,7 @@
 #include "usbloader/partition_usbloader.h"
 #include "usbloader/usbstorage.h"
 #include "memory/mem2.h"
+#include "lstub.h"
 
 extern bool geckoinit;
 extern bool textVideoInit;
@@ -175,16 +177,16 @@ void InitTextVideo () {
 	
 }
 
-
 int
 main(int argc, char *argv[]) {
-	InitTextVideo();
+	if (hbcStubAvailable()) {
+		InitTextVideo();
+	}
 	
-//DEBUG_Init(GDBSTUB_DEVICE_USB, 1);
+//	DEBUG_Init(GDBSTUB_DEVICE_USB, 1);
 //_break();
 	
-	
-	//see note above __exception_setreload(5);//auto reset is code dump nobody gives us codedump info anyways.
+//	__exception_setreload(5);//auto reset is code dump nobody gives us codedump info anyways.
 	setlocale(LC_ALL, "en.UTF-8");
 	geckoinit = InitGecko();
 	if (geckoinit)InitTextVideo();

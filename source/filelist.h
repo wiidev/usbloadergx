@@ -540,4 +540,10 @@ extern const u32	dvd_png_size;
 extern const u8     new_png[];
 extern const u32	new_png_size;
 
+extern const u8		lock_png[];
+extern const u32	lock_png_size;
+
+extern const u8		unlock_png[];
+extern const u32	unlock_png_size;
+
 #endif

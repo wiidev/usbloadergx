@@ -49,6 +49,7 @@ static const char *opts_language[settings_language_max] = {trNOOP("Console Defau
 static const char *opts_cios[settings_ios_max] = {"IOS 249","IOS 222", "IOS 223", "IOS 250"};
 static const char *opts_parentalcontrol[5] = {trNOOP("0 (Everyone)"),trNOOP("1 (Child 7+)"),trNOOP("2 (Teen 12+)"),trNOOP("3 (Mature 16+)"),trNOOP("4 (Adults Only 18+)")};
 static const char *opts_error002[settings_error002_max] = {trNOOP("No"),trNOOP("Yes"),trNOOP("Anti")};
+static const char *opts_partitions[settings_partitions_max] = {trNOOP("Game partition"),trNOOP("All partitions")};
 
 bool IsValidPartition(int fs_type, int cios) {
 	if (cios == 249 || cios == 250) {
@@ -842,6 +843,14 @@ int MenuSettings()
 
 							if(ret == ++Idx || firstRun)
 							{
+								if(firstRun) options2.SetName(Idx, "%s", tr("BETA revisions"));
+								if(ret == Idx && ++Settings.beta_upgrades >= settings_off_on_max)
+									Settings.beta_upgrades = 0;
+								options2.SetValue(Idx,"%s",tr(opts_off_on[Settings.beta_upgrades]));
+							}
+
+							if(ret == ++Idx || firstRun)
+							{
 								if(firstRun) options2.SetName(Idx, "%s",tr("Titles from WiiTDB"));
 								if(ret == Idx && ++Settings.titlesOverride >= settings_off_on_max)
 									Settings.titlesOverride = 0;
@@ -1046,6 +1055,23 @@ int MenuSettings()
 								if(ret == Idx && ++Settings.error002 >= settings_error002_max)
 									Settings.error002 = 0;
 								options2.SetValue(Idx,"%s",tr(opts_error002[Settings.error002]));
+							}
+
+							if(ret == ++Idx || firstRun)
+							{
+								if(firstRun) options2.SetName(Idx, "%s",tr("Install partitions"));
+								if(ret == Idx && ++Settings.partitions_to_install >= settings_partitions_max)
+									Settings.partitions_to_install = 0;
+								options2.SetValue(Idx,"%s",tr(opts_partitions[Settings.partitions_to_install]));
+							}
+
+							if(ret == ++Idx || firstRun)
+							{
+								if(firstRun) options2.SetName(Idx, "%s",tr("Install 1:1 Copy"));
+								if(ret == Idx) {
+									Settings.fullcopy = Settings.fullcopy == 0 ? 1 : 0;
+								}
+								options2.SetValue(Idx,"%s",tr(opts_no_yes[Settings.fullcopy]));
 							}
 
 							firstRun = false;

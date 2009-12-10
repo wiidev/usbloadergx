@@ -145,6 +145,8 @@ extern "C" {
 		short gamelist_carousel_y;
 		short gamelist_dvd_x;
 		short gamelist_dvd_y;
+		short gamelist_lock_x;
+		short gamelist_lock_y;
 	// Toolbar Icons in GameGrid
 		short gamegrid_favorite_x;
 		short gamegrid_favorite_y;
@@ -162,6 +164,8 @@ extern "C" {
 		short gamegrid_carousel_y;
 		short gamegrid_dvd_x;
 		short gamegrid_dvd_y;
+		short gamegrid_lock_x;
+		short gamegrid_lock_y;
 	// Toolbar Icons in GameCarousel
 		short gamecarousel_favorite_x;
 		short gamecarousel_favorite_y;
@@ -179,7 +183,8 @@ extern "C" {
 		short gamecarousel_carousel_y;
 		short gamecarousel_dvd_x;
 		short gamecarousel_dvd_y;
-
+		short gamecarousel_lock_x;
+		short gamecarousel_lock_y;
 	};
 
 	extern struct CFG CFG;
@@ -370,6 +375,19 @@ extern "C" {
 		scrollMarquee,
 		settings_scrolleffect_max // always the last entry
 	};
+	enum {
+		install_game_only,
+		install_all,
+		settings_partitions_max // always the last entry
+	};
+	struct SParental {
+		u8 enabled;
+		u8 rating;
+		u8 pin[4];
+		u8 question;
+		wchar_t answer[32]; // IS WCHAR!
+		u8 is_unlocked;
+	};
 	struct SSettings {
 		u8      video;
 		u8      language;
@@ -427,6 +445,10 @@ extern "C" {
 		u8		marknewtitles;
 		char	BcaCodepath[100];
 		u8		FatInstallToDir;
+		u8		partitions_to_install;
+		u8		fullcopy;
+		u8		beta_upgrades;
+		struct SParental parental;		
 	};
 	extern struct SSettings Settings;
 
@@ -441,6 +463,7 @@ extern "C" {
 	void title_set(char *id, char *title);
 	void titles_default();
 	u8 get_block(struct discHdr *header);
+	s8 get_pegi_block(struct discHdr *header);
 
 	void CFG_Cleanup(void);
 
