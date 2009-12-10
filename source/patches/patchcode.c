@@ -146,7 +146,7 @@ static const u32 wpadlibogc[5] = {
 	0x90A402E0,0x806502E4,0x908502E4,0x2C030000,0x906402E4
 };
 
-void dogamehooks(void *addr, u32 len)
+void dogamehooks(void *addr, u32 len, bool vpatch)
 {
 	void *addr_start = addr;
 	void *addr_end = addr+len;
@@ -190,9 +190,23 @@ void dogamehooks(void *addr, u32 len)
 						multidolpatchtwo((u32)addr_start, len);
 				}
                         break;
-                }
-		addr_start += 4;
         }
+		
+		if (vpatch){
+			if(memcmp(addr_start, vipatchcode, sizeof(vipatchcode))==0) {
+				vipatch((u32)addr_start, len);
+			}
+		}
+		
+		if(memcmp(addr_start, langpatch, sizeof(langpatch))==0) {
+			if(configbytes[0] != 0xCD){
+				langvipatch((u32)addr_start, len, configbytes[0]);
+			}	
+		}
+		
+		
+		addr_start += 4;
+    }
 }
 
 // Not used yet, for patching DOL once loaded into memory and befor execution

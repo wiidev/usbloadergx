@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-04 16:19+0100\n"
+"POT-Creation-Date: 2009-12-10 17:48-0500\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
@@ -125,6 +125,9 @@ msgstr ">> WADﾃﾞｰﾀの読み込み...成功!"
 msgid "AUTO"
 msgstr "自動"
 
+msgid "All partitions"
+msgstr ""
+
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "GXの使用者制限が解除されました"
 
@@ -142,6 +145,9 @@ msgstr "使用言語"
 
 msgid "Apr"
 msgstr "4月"
+
+msgid "Are you sure you want to enable Parent Control?"
+msgstr ""
 
 msgid "Are you sure?"
 msgstr "実行しますか？"
@@ -162,6 +168,9 @@ msgid "BCA Codes Path"
 msgstr ""
 
 msgid "BCA Codes Path changed"
+msgstr ""
+
+msgid "BETA revisions"
 msgstr ""
 
 msgid "Back"
@@ -465,6 +474,9 @@ msgstr "エラー"
 msgid "ERROR:"
 msgstr "エラー："
 
+msgid "Enable Parental Control"
+msgstr ""
+
 msgid "English"
 msgstr "英語"
 
@@ -570,6 +582,9 @@ msgstr "サウンドの音量"
 msgid "Game is already installed:"
 msgstr "このｹﾞｰﾑは既にｲﾝｽﾄｰﾙされています:"
 
+msgid "Game partition"
+msgstr ""
+
 msgid "Games"
 msgstr "ゲーム数"
 
@@ -638,11 +653,17 @@ msgstr "このｵﾌﾟｼｮﾝを使用するためSDｶｰﾄﾞを挿入し�
 msgid "Install"
 msgstr "ｲﾝｽﾄｰﾙ"
 
+msgid "Install 1:1 Copy"
+msgstr ""
+
 msgid "Install Error!"
 msgstr "ｲﾝｽﾄｰﾙ ｴﾗｰ!"
 
 msgid "Install a game"
 msgstr "ゲームをインストール"
+
+msgid "Install partitions"
+msgstr ""
 
 msgid "Installing content... Ok!"
 msgstr "ｺﾝﾃﾝﾂをｲﾝｽﾄｰﾙ...成功！"
@@ -658,6 +679,9 @@ msgstr "ﾀｲﾄﾙをｲﾝｽﾄｰﾙ...成功！"
 
 msgid "Installing wad"
 msgstr "WADをｲﾝｽﾄｰﾙします"
+
+msgid "Invalid PIN code"
+msgstr ""
 
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
 msgstr "この情報は開発者までお知らせください。"
@@ -860,6 +884,9 @@ msgstr "公式メイン"
 
 msgid "Parental Control"
 msgstr "ﾍﾟｱﾚﾝﾀﾙｺﾝﾄﾛｰﾙ"
+
+msgid "Parental Control disabled"
+msgstr ""
 
 msgid "Partition"
 msgstr "使用する領域"
@@ -1115,6 +1142,9 @@ msgstr "アンインストール"
 msgid "Uninstalling wad"
 msgstr "WADをｱﾝｲﾝｽﾄｰﾙ"
 
+msgid "Unlock Parental Control"
+msgstr ""
+
 msgid "Unlock console to use this option."
 msgstr "この設定を使用する場合はﾛｯｸを解除してください"
 
@@ -1220,6 +1250,9 @@ msgstr "削除していいですか "
 
 msgid "You are choosing to display favorites and you do not have any selected."
 msgstr "お気に入りの登録がありません"
+
+msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
+msgstr ""
 
 msgid "You have attempted to load a bad image"
 msgstr "読み込めない画像があります"

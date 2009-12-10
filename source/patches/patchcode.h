@@ -32,7 +32,7 @@ u8 configbytes[2];
 u32 regionfree;
 
 // Function prototypes
-void dogamehooks(void *addr, u32 len);
+void dogamehooks(void *addr, u32 len, bool vpatch);
 void langpatcher(void *addr, u32 len);
 void vidolpatcher(void *addr, u32 len);
 void patchdebug(void *addr, u32 len);

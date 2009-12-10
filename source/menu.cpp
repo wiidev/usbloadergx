@@ -491,7 +491,7 @@ int MainMenu(int menu) {
 		if(dvdheader)
 			delete dvdheader;
 
-		gprintf("Loading BCA data...");
+		gprintf("\nLoading BCA data...");
 		ret = do_bca_code(header->id);
 		gprintf("%d\n", ret);
 

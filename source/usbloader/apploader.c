@@ -330,14 +330,14 @@ void gamepatches(void * dst, int len, u8 videoSelected, u8 patchcountrystring, u
     }
 
     /*GAME HOOK - FISHEARS*/
-    dogamehooks(dst,len);
+    dogamehooks(dst,len,vipatch);
 
-    if (vipatch)
-        vidolpatcher(dst,len);
+    //if (vipatch)//moved to degamehooks()
+    //    vidolpatcher(dst,len);
 
 
     /*LANGUAGE PATCH - FISHEARS*/
-    langpatcher(dst,len);
+    //langpatcher(dst,len);//moved to degamehooks()
 
     /*Thanks to WiiPower*/
     if (patchcountrystring == 1)
@@ -348,6 +348,8 @@ void gamepatches(void * dst, int len, u8 videoSelected, u8 patchcountrystring, u
     //if(Settings.anti002fix == on)
     if (fix002 == 2)
         Anti_002_fix(dst, len);
+		
+	//patchdebug(dst, len);
 
 }
 

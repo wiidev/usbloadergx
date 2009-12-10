@@ -13,6 +13,7 @@
 #include "alternatedol.h"
 #include "memory.h"
 #include "../gecko.h"
+#include "../fatmounter.h"
     
 /* Constants */
 #define PTABLE_OFFSET	0x40000
@@ -303,11 +304,18 @@ s32 Disc_BootPartition(u64 offset, u8 videoselected, u8 cheat, u8 vipatch, u8 pa
         do_sd_code(gameid);
         /* OCARINA STUFF - FISHEARS*/
     }
+	
+	//kill the USB and SD
+	USBDevice_deInit();
+    SDCard_deInit();
+
+    //gprintf("\n\tDe-init SD & USB");
 
     /* Disconnect Wiimote */
     WPAD_Flush(0);
     WPAD_Disconnect(0);
     WPAD_Shutdown();
+	gprintf("\n\nUSB Loader GX is done.\n\n");
 
     /* Shutdown IOS subsystems */
     SYS_ResetSystem(SYS_SHUTDOWN, 0, 0);

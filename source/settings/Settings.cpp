@@ -779,14 +779,14 @@ int MenuSettings()
 							if(ret == ++Idx || firstRun)
 							{
 								if(firstRun) options2.SetName(Idx, "%s",tr("Flip-X"));
-								if(ret == Idx && ++Settings.keyset >= settings_keyset_max)
-									Settings.keyset = 0;
-								static const char *opts[settings_keyset_max][3] = {	{trNOOP("Right"),"/",trNOOP("Next")},
+								if(ret == Idx && ++Settings.xflip >= settings_xflip_max)
+									Settings.xflip = 0;
+								static const char *opts[settings_xflip_max][3] = {	{trNOOP("Right"),"/",trNOOP("Next")},
 																						{trNOOP("Left"),"/",trNOOP("Prev")},
 																						{trNOOP("Like SysMenu"),"",""},
 																						{trNOOP("Right"),"/",trNOOP("Prev")},
 																						{trNOOP("DiskFlip"),"",""}};
-								options2.SetValue(Idx,"%s%s%s",tr(opts[Settings.keyset][0]),opts[Settings.keyset][1],tr(opts[Settings.keyset][2]));
+								options2.SetValue(Idx,"%s%s%s",tr(opts[Settings.xflip][0]),opts[Settings.xflip][1],tr(opts[Settings.xflip][2]));
 							}
 
 							if(ret == ++Idx || firstRun)

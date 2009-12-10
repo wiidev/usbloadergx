@@ -8,6 +8,7 @@
 #include "usbloader/sdhc.h"
 #include "usbloader/usbstorage.h"
 #include "libfat/fat.h"
+#include "gecko.h"
 
 //these are the only stable and speed is good
 #define CACHE 32
@@ -30,6 +31,9 @@ int   fat_wbfs_mount = 0;
 sec_t fat_wbfs_sec = 0;
 
 int USBDevice_Init() {
+gprintf("\nUSBDevice_Init()");
+
+
     //closing all open Files write back the cache and then shutdown em!
     fatUnmount("USB:/");
     //right now mounts first FAT-partition
@@ -38,16 +42,19 @@ int USBDevice_Init() {
     if (!fatMount("USB", &__io_wiiums, 0, CACHE, SECTORS)) {
         //try now mount with libogc
 		if (!fatMount("USB", &__io_usbstorage, 0, CACHE, SECTORS)) {
+		gprintf(":-1");
 			return -1;
 		}
     }
 
 	fat_usb_mount = 1;
 	fat_usb_sec = _FAT_startSector;
+	gprintf(":0");
 	return 0;
 }
 
 void USBDevice_deInit() {
+gprintf("\nUSBDevice_deInit()");
     //closing all open Files write back the cache and then shutdown em!
     fatUnmount("USB:/");
 
@@ -93,23 +100,29 @@ int isInserted(const char *path) {
 }
 
 int SDCard_Init() {
+gprintf("\nSDCard_Init()");
+
     //closing all open Files write back the cache and then shutdown em!
     fatUnmount("SD:/");
     //right now mounts first FAT-partition
 	if (fatMount("SD", &__io_wiisd, 0, CACHE, SECTORS)) {
 		fat_sd_mount = MOUNT_SD;
 		fat_sd_sec = _FAT_startSector;
+		gprintf(":1");
 		return 1;
 	}
 	else if (fatMount("SD", &__io_sdhc, 0, CACHE, SDHC_SECTOR_SIZE)) {
 		fat_sd_mount = MOUNT_SDHC;
 		fat_sd_sec = _FAT_startSector;
+		gprintf(":1");
 		return 1;
 	}
+	gprintf(":-1");
     return -1;
 }
 
 void SDCard_deInit() {
+gprintf("\nSDCard_deInit()");
     //closing all open Files write back the cache and then shutdown em!
     fatUnmount("SD:/");
 

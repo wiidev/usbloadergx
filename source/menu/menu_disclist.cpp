@@ -1527,10 +1527,10 @@ int MenuDiscList() {
 			}
 		}
 	}
-
-	if (menu == MENU_EXIT) {
+//no need to close sd here.  we still need to get settings and codes  and shit
+	/*if (menu == MENU_EXIT) {
 		SDCard_deInit();
-	}
+	}*/
 
 	HaltGui();
 	mainWindow->RemoveAll();

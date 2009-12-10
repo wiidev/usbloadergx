@@ -35,6 +35,7 @@
 #include "wpad.h"
 #include "fatmounter.h"
 #include "sys.h"
+#include "../gecko.h"
 #include "mload/mload.h"
 #include "mload/dip_plugin.h"
 
@@ -45,14 +46,16 @@ u8 filebuff[MAX_GCT_SIZE];
 
 u32 do_sd_code(char *filename)
 {
+gprintf("\ndo_sd_code(%s)",filename);
+
 	FILE *fp;
 	u8 *filebuff;
 	u32 filesize;
 	u32 ret;
 	char filepath[150];
 
-    SDCard_Init();
-	USBDevice_Init();
+    //SDCard_Init();
+	//USBDevice_Init();
 
 	sprintf(filepath, "%s%s", Settings.Cheatcodespath, filename);
 	filepath[strlen(Settings.Cheatcodespath)+6] = 0x2E;
@@ -65,6 +68,7 @@ u32 do_sd_code(char *filename)
 	if (!fp) {
         USBDevice_deInit();
         SDCard_deInit();
+		gprintf("\n\tcan't open %s",filepath);
 		return 0;
 	}
 
@@ -75,25 +79,31 @@ u32 do_sd_code(char *filename)
 		sleep(2);
         USBDevice_deInit();
         SDCard_deInit();
+		gprintf("\n\tError.  size = %d",filesize);
 		return 0;
 	}
 	fseek(fp, 0, SEEK_SET);
+	
 
 	ret = fread(&filebuff, 1, filesize, fp);
 	if(ret != filesize){
 		fclose(fp);
         USBDevice_deInit();
         SDCard_deInit();
+		gprintf("\n\tError. ret != size");
 		return 0;
 	}
+	fclose(fp);
+	//USBDevice_deInit();
+    //SDCard_deInit();
 
     memcpy((void*)0x800027E8, &filebuff,filesize);
     *(vu8*)0x80001807 = 0x01;
+	//gprintf("\n\tDe-init SD & USB");
+	
 
-	fclose(fp);
-
-	USBDevice_deInit();
-    SDCard_deInit();
+	
+	gprintf("\n\tDone");
 
 	return 1;
 }

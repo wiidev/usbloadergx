@@ -12,7 +12,7 @@ u32 MALLOC_MEM2 = 0;
 
 static CMEM2Alloc g_mem2gp;
 
-void MEM2_init(unsigned int mem2Size)
+void MEM2_init(unsigned int mem2Size) 
 {
 	g_mem2gp.init(mem2Size);
 }

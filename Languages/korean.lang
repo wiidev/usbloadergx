@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-04 16:19+0100\n"
+"POT-Creation-Date: 2009-12-10 17:48-0500\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: nextos@korea.com\n"
 "Language-Team: \n"
@@ -125,6 +125,9 @@ msgstr ">> WAD 데이터 읽기...성공!"
 msgid "AUTO"
 msgstr "자동"
 
+msgid "All partitions"
+msgstr ""
+
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "모든 USB로더 GX 기능 잠금 해제."
 
@@ -142,6 +145,9 @@ msgstr "USB 로더 언어"
 
 msgid "Apr"
 msgstr "4월"
+
+msgid "Are you sure you want to enable Parent Control?"
+msgstr ""
 
 msgid "Are you sure?"
 msgstr "확실합니까?"
@@ -162,6 +168,9 @@ msgid "BCA Codes Path"
 msgstr ""
 
 msgid "BCA Codes Path changed"
+msgstr ""
+
+msgid "BETA revisions"
 msgstr ""
 
 msgid "Back"
@@ -465,6 +474,9 @@ msgstr "에러"
 msgid "ERROR:"
 msgstr "에러:"
 
+msgid "Enable Parental Control"
+msgstr ""
+
 msgid "English"
 msgstr "영어"
 
@@ -570,6 +582,9 @@ msgstr ""
 msgid "Game is already installed:"
 msgstr "게임이 이미 설치되어 있습니다."
 
+msgid "Game partition"
+msgstr ""
+
 msgid "Games"
 msgstr "게임"
 
@@ -638,11 +653,17 @@ msgstr "이 옵션을 사용할 SD카드를 넣으세요."
 msgid "Install"
 msgstr "설치"
 
+msgid "Install 1:1 Copy"
+msgstr ""
+
 msgid "Install Error!"
 msgstr "설치 에러!"
 
 msgid "Install a game"
 msgstr "게임을 설치할까요"
+
+msgid "Install partitions"
+msgstr ""
 
 msgid "Installing content... Ok!"
 msgstr "컨텐츠 인스톨중...성공!"
@@ -658,6 +679,9 @@ msgstr "타이틀 설치중... Ok!"
 
 msgid "Installing wad"
 msgstr "Wad 설치중"
+
+msgid "Invalid PIN code"
+msgstr ""
 
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
 msgstr "우리를 도울수 있는 정보를 가지고 있군요. 이정보를 DEV 팀에 전달해주세요."
@@ -860,6 +884,9 @@ msgstr "원본/사용자설정"
 
 msgid "Parental Control"
 msgstr "자녀보호기능"
+
+msgid "Parental Control disabled"
+msgstr ""
 
 msgid "Partition"
 msgstr "파티션"
@@ -1115,6 +1142,9 @@ msgstr "메뉴 언인스톨"
 msgid "Uninstalling wad"
 msgstr "WAD 언인스톨"
 
+msgid "Unlock Parental Control"
+msgstr ""
+
 msgid "Unlock console to use this option."
 msgstr "이 옵션을 사용하기 위해 콘솔을 잠금해제"
 
@@ -1220,6 +1250,9 @@ msgstr "삭제 하려고 합니다."
 
 msgid "You are choosing to display favorites and you do not have any selected."
 msgstr "즐겨찾기를 선택했으나 선택된 즐겨찾기가 없네요."
+
+msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
+msgstr ""
 
 msgid "You have attempted to load a bad image"
 msgstr "잘못된 이미지를 로딩하여 하군요."

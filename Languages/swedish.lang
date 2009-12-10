@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-04 16:19+0100\n"
+"POT-Creation-Date: 2009-12-10 17:48-0500\n"
 "PO-Revision-Date: 2009-11-24 22:11+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -125,6 +125,9 @@ msgstr ">> Läser WAD data...Ok!"
 msgid "AUTO"
 msgstr ""
 
+msgid "All partitions"
+msgstr ""
+
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "Alla funktioner i USB Loader GX är upplåsta."
 
@@ -142,6 +145,9 @@ msgstr "Programspråk"
 
 msgid "Apr"
 msgstr "Apr"
+
+msgid "Are you sure you want to enable Parent Control?"
+msgstr ""
 
 msgid "Are you sure?"
 msgstr "Är du säker?"
@@ -162,6 +168,9 @@ msgid "BCA Codes Path"
 msgstr ""
 
 msgid "BCA Codes Path changed"
+msgstr ""
+
+msgid "BETA revisions"
 msgstr ""
 
 msgid "Back"
@@ -465,6 +474,9 @@ msgstr "FEL"
 msgid "ERROR:"
 msgstr "FEL:"
 
+msgid "Enable Parental Control"
+msgstr ""
+
 msgid "English"
 msgstr "Engelska"
 
@@ -570,6 +582,9 @@ msgstr "Spel ljuds volym"
 msgid "Game is already installed:"
 msgstr "Spelet är redan installerat:"
 
+msgid "Game partition"
+msgstr ""
+
 msgid "Games"
 msgstr "Spel"
 
@@ -638,11 +653,17 @@ msgstr "Sätt i ett SD-kort för att använda denna inställning"
 msgid "Install"
 msgstr "Installera"
 
+msgid "Install 1:1 Copy"
+msgstr ""
+
 msgid "Install Error!"
 msgstr "Fel vid installering!"
 
 msgid "Install a game"
 msgstr "Installera ett spel"
+
+msgid "Install partitions"
+msgstr ""
 
 msgid "Installing content... Ok!"
 msgstr "Installerar innehåll... Ok!"
@@ -658,6 +679,9 @@ msgstr "Installerar titel... Ok!"
 
 msgid "Installing wad"
 msgstr "Installerar wad"
+
+msgid "Invalid PIN code"
+msgstr ""
 
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
 msgstr "Det verkar som om du har information som kan vara till nytta för oss. Vänligen skicka informationen vidare till DEV team."
@@ -860,6 +884,9 @@ msgstr "Original/Anpassade"
 
 msgid "Parental Control"
 msgstr "Föräldrakontroll"
+
+msgid "Parental Control disabled"
+msgstr ""
 
 msgid "Partition"
 msgstr ""
@@ -1115,6 +1142,9 @@ msgstr "Avinstallera meny"
 msgid "Uninstalling wad"
 msgstr "Avinstallerar wad"
 
+msgid "Unlock Parental Control"
+msgstr ""
+
 msgid "Unlock console to use this option."
 msgstr "Lås upp konsolen för denna inställning."
 
@@ -1220,6 +1250,9 @@ msgstr "Då håller på att radera "
 
 msgid "You are choosing to display favorites and you do not have any selected."
 msgstr "Du har valt att visa favoriter men du har inga favoriter valda."
+
+msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
+msgstr ""
 
 msgid "You have attempted to load a bad image"
 msgstr "Du har försökt ladda en dålig bild"

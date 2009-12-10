@@ -179,9 +179,11 @@ void InitTextVideo () {
 
 int
 main(int argc, char *argv[]) {
+
 	if (hbcStubAvailable()) {
 		InitTextVideo();
 	}
+
 	
 //	DEBUG_Init(GDBSTUB_DEVICE_USB, 1);
 //_break();
@@ -240,7 +242,7 @@ main(int argc, char *argv[]) {
 	{
 		InitTextVideo();
 		printf("\x1b[2J");
-		if ((ios222rev < 0 && ios222rev != WII_EINSTALL) || (ios249rev < 0 && ios249rev != WII_EINSTALL)) {
+		if ((ios222rev < 0 && ios222rev != WII_EINSTALL) && (ios249rev < 0 && ios249rev != WII_EINSTALL)) {
 			printf("\n\n\n\tWARNING!");
 			printf("\n\tUSB Loader GX needs unstubbed cIOS 222 v4 or 249 v9+");
 			printf("\n\n\tWe cannot determine the versions on your system,\n\tsince you have no patched ios 36 or 236 installed.");
@@ -342,7 +344,7 @@ main(int argc, char *argv[]) {
     SDCard_Init(); // mount SD for loading cfg's
 	printf("\n\tInitialize usb device");
     USBDevice_Init(); // and mount USB:/
-	gprintf("\n\tSD and USB Init OK");
+	//gprintf("\n\tSD and USB Init OK");
 
     if (!bootDevice_found) {
 		printf("\n\tSearch for configuration file");
@@ -378,8 +380,10 @@ main(int argc, char *argv[]) {
 			SDCard_deInit();
             Settings.cios = ios249;
             ret = IOS_ReloadIOSsafe(249);
+			// now mount SD:/  //no need to keep mindlessly mounting and unmounting SD card
+			SDCard_Init();
         }
-        SDCard_Init(); // now mount SD:/
+         
         USBDevice_Init(); // and mount USB:/
 		WBFS_Init(WBFS_DEVICE_USB);
     } else if ((Settings.cios == ios249 && IOS_GetVersion() != 249) ||
@@ -397,7 +401,8 @@ main(int argc, char *argv[]) {
 			SDCard_Init();
             load_ehc_module();
         }
-        SDCard_Init(); // now mount SD:/
+		
+        else SDCard_Init(); // now mount SD:/  //no need to keep mindlessly mounting and unmounting SD card
         USBDevice_Init(); // and mount USB:/
 		WBFS_Init(WBFS_DEVICE_USB);
 	}
@@ -444,6 +449,7 @@ main(int argc, char *argv[]) {
     fontClock->loadFont(NULL, clock_ttf, clock_ttf_size, 0);
     fontClock->setCompatibilityMode(FTGX_COMPATIBILITY_DEFAULT_TEVOP_GX_PASSCLR | FTGX_COMPATIBILITY_DEFAULT_VTXDESC_GX_NONE);
 
+	gprintf("\n\tEnd of Main()");
     InitGUIThreads();
     MainMenu(MENU_CHECK);
     return 0;
