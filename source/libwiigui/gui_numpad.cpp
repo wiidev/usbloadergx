@@ -89,8 +89,7 @@ GuiNumpad::GuiNumpad(char * t, u32 max)
 			keyTxt[i]->SetPosition(0, -10);
 			keyBtn[i]= new GuiButton(keyImg[i], keyImgOver[i], ALIGN_CENTRE, ALIGN_MIDDLE, -90 + 90 * col, -70 + 50 * row, trigA, keySoundOver, keySoundClick, 1);
 			keyBtn[i]->SetLabel(keyTxt[i]);
-			keyBtn[i]->SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-			
+
 			this->Append(keyBtn[i]);
 		}
 	}
