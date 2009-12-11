@@ -1,14 +1,14 @@
 # USB Loader GX language source file.
-# german.lang - r790
+# german.lang - r848
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-10 17:48-0500\n"
+"POT-Creation-Date: 2009-12-11 01:02+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
-"Last-Translator: Snoozer\n"
-"Language-Team: Snoozer, wishmasterf\n"
+"Last-Translator: Bertilax\n"
+"Language-Team: Snoozer, wishmasterf, Bertilax\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -30,7 +30,7 @@ msgstr " ist nicht auf dem Server."
 
 #, c-format
 msgid "%s : %s May not boot correctly if your System Menu is not up to date."
-msgstr ""
+msgstr "%s : %s  wird nicht korrekt gebootet falls Ihr Systemmenü nicht aktuell ist."
 
 msgid "0 (Everyone)"
 msgstr "0 (Alle)"
@@ -156,19 +156,19 @@ msgid "Aug"
 msgstr ""
 
 msgid "Author:"
-msgstr ""
+msgstr "Autor:"
 
 msgid "AutoInit Network"
-msgstr "Netzwerkstart Auto"
+msgstr "Auto-Netzwerkstart"
 
 msgid "AutoPatch"
 msgstr "Auto Patch"
 
 msgid "BCA Codes Path"
-msgstr ""
+msgstr "BCA Codes Pfad"
 
 msgid "BCA Codes Path changed"
-msgstr ""
+msgstr "BCA Codes Pfad geändert"
 
 msgid "BETA revisions"
 msgstr ""
@@ -213,16 +213,16 @@ msgid "Can't create directory"
 msgstr "Verzeichnis kann nicht erstellt werden"
 
 msgid "Can't create file"
-msgstr ""
+msgstr "Kann Datei nicht erstellen"
 
 msgid "Can't decompress LZ77"
-msgstr ""
+msgstr "Kann LZ77 nicht entpacken"
 
 msgid "Can't delete:"
 msgstr "Löschen fehlgeschlagen:"
 
 msgid "Can't find disc"
-msgstr ""
+msgstr "Keine Disc gefunden"
 
 msgid "Cancel"
 msgstr "Abbrechen"
@@ -243,7 +243,7 @@ msgid "Click to Download Covers"
 msgstr "Klicken zum Coverdownloaden"
 
 msgid "Click to change game ID"
-msgstr "Klicken um Spiele ID zu ändern"
+msgstr "Klicken um die Spiel ID zu ändern"
 
 msgid "Clock"
 msgstr "Uhr"
@@ -334,7 +334,7 @@ msgid "DOL Path"
 msgstr "DOL Pfad"
 
 msgid "DOL path changed"
-msgstr "DOL pfad geändert"
+msgstr "DOL Pfad geändert"
 
 msgid "Dec"
 msgstr "Dez"
@@ -415,7 +415,7 @@ msgid "Do you want to change language?"
 msgstr "Möchten Sie die Sprache ändern?"
 
 msgid "Do you want to download this theme?"
-msgstr ""
+msgstr "Wollen Sie das Theme downloaden?"
 
 msgid "Do you want to format:"
 msgstr "Möchten sie formatieren:"
@@ -445,25 +445,25 @@ msgid "Download Now"
 msgstr "Jetzt herunterladen"
 
 msgid "Download failed."
-msgstr ""
+msgstr "Download fehlgeschlagen."
 
 msgid "Download finished"
 msgstr "Download abgeschlossen"
 
 msgid "Download request failed."
-msgstr ""
+msgstr "Download Anfrage fehlgeschlagen."
 
 msgid "Downloading"
-msgstr ""
+msgstr "Downloade"
 
 msgid "Downloading Page List:"
-msgstr ""
+msgstr "Downloade Seiten Liste:"
 
 msgid "Downloading file"
 msgstr "Downloade Datei:"
 
 msgid "Downloading image:"
-msgstr ""
+msgstr "Downloade Bild:"
 
 msgid "Dutch"
 msgstr "Niederländisch"
@@ -502,16 +502,16 @@ msgid "Error:"
 msgstr "Fehler:"
 
 msgid "Extracting files..."
-msgstr ""
+msgstr "Entpacke Dateien..."
 
 msgid "FAT: Use directories"
-msgstr ""
+msgstr "FAT: Verzeichnisse"
 
 msgid "Failed formating"
 msgstr "Formatieren fehlgeschlagen"
 
 msgid "Failed to extract."
-msgstr ""
+msgstr "Fehler beim Entpacken."
 
 msgid "Failed to open partition"
 msgstr "Öffnen der Partition fehlgeschlagen"
@@ -574,10 +574,10 @@ msgid "Game Size"
 msgstr "Größe"
 
 msgid "Game Sound Mode"
-msgstr ""
+msgstr "Spiel Sound Modus"
 
 msgid "Game Sound Volume"
-msgstr ""
+msgstr "Spiel Soundlautstärke"
 
 msgid "Game is already installed:"
 msgstr "Spiel bereits vorhanden:"
@@ -616,10 +616,10 @@ msgid "How to Shutdown?"
 msgstr "Wie soll beendet werden?"
 
 msgid "IMD5 Header not right."
-msgstr ""
+msgstr "IMD5 Header falsch."
 
 msgid "IMET Header wrong."
-msgstr ""
+msgstr "IMET Header falsch."
 
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
 msgstr "Wenn Sie kein WiFi haben, drücken Sie 1 um eine URL zu generieren."
@@ -751,13 +751,13 @@ msgid "Locked"
 msgstr "Gesperrt"
 
 msgid "Loop Sound"
-msgstr ""
+msgstr "Sound wiederhohlen"
 
 msgid "Mar"
 msgstr "Mär"
 
 msgid "Mark new games"
-msgstr ""
+msgstr "Markiere neue Spiele"
 
 msgid "May"
 msgstr "Mai"
@@ -781,7 +781,7 @@ msgid "Network init error"
 msgstr "Netzwerkinitialisierungsfehler"
 
 msgid "New Disc Detected"
-msgstr ""
+msgstr "Neue Disc endeckt"
 
 msgid "Next"
 msgstr "Nächste"
@@ -811,7 +811,7 @@ msgid "No USB Device found."
 msgstr "Kein USB Gerät gefunden."
 
 msgid "No WBFS or FAT game partition found"
-msgstr ""
+msgstr "Keine WBFS oder FAT Partition gefunden"
 
 msgid "No cheats were selected"
 msgstr "Es wurden keine Cheats ausgewählt"
@@ -826,7 +826,7 @@ msgid "No new updates."
 msgstr "Keine Aktualisierung vorhanden."
 
 msgid "No themes found on the site."
-msgstr ""
+msgstr "Keine Themes auf der Seite gefunden"
 
 msgid "Normal"
 msgstr ""
@@ -985,7 +985,7 @@ msgid "Screensaver"
 msgstr "Bildschirmschoner"
 
 msgid "Select"
-msgstr ""
+msgstr "Auswählen"
 
 msgid "Select a DOL"
 msgstr "Wähle ein DOL"
@@ -1054,7 +1054,7 @@ msgid "Successfully deleted:"
 msgstr "Erfolgreich gelöscht:"
 
 msgid "Successfully extracted theme"
-msgstr ""
+msgstr "Theme erfolgreich entpackt"
 
 msgid "Successfully installed:"
 msgstr "Erfolgreich installiert:"
@@ -1078,17 +1078,17 @@ msgid "The file is not a .wad"
 msgstr "Die Datei ist nicht .wad"
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."
-msgstr "Die wad wurde installiert. Aber Sie konnte nicht von der SD gelöscht werden."
+msgstr "Die wad wurde installiert. Sie konnte aber nicht von der SD gelöscht werden."
 
 #, c-format
 msgid "The wad installation failed with error %ld"
-msgstr "Die wad Installation schlug fehl durch Fehler %ld"
+msgstr "Die wad Installation schlug fehl mit Fehler %ld"
 
 msgid "Theme Download Path"
-msgstr ""
+msgstr "Theme Download Pfad"
 
 msgid "Theme Download Path changed"
-msgstr ""
+msgstr "Theme Download Pfad geändert"
 
 msgid "Theme Downloader"
 msgstr ""
@@ -1100,7 +1100,7 @@ msgid "Theme Path Changed"
 msgstr "Theme Pfad geändert"
 
 msgid "Theme Title:"
-msgstr ""
+msgstr "Theme Titel:"
 
 msgid "Time left:"
 msgstr "Noch:"
@@ -1115,7 +1115,7 @@ msgid "Tooltips"
 msgstr "ToolTips"
 
 msgid "Transfer failed."
-msgstr ""
+msgstr "Übertragung fehlgeschlagen"
 
 msgid "USB Device not found"
 msgstr "USB Gerät nicht gefunden"
@@ -1124,11 +1124,11 @@ msgid "USB Loader GX is protected"
 msgstr "USB Loader GX ist geschützt"
 
 msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
-msgstr ""
+msgstr "USB Loader GX funktioniert nur mit Hermes CIOS rev 4! Bitte prüfen Sie die Instalation auf Hermes rev 4!"
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
-msgstr "Nicht fähig die wad zu öffnen die Sie gerade heruntergeladen haben (%s)."
+msgstr "Kann die wad Datei nicht öffnen die Sie gerade heruntergeladen haben (%s)."
 
 msgid "Uninstall"
 msgstr "Deinstallieren"
@@ -1152,7 +1152,7 @@ msgid "Unlocked"
 msgstr "Entsperrt"
 
 msgid "Unsupported format, try to extract manually."
-msgstr ""
+msgstr "Nicht unterstütztes Format, probieren sie manuelles Entpacken."
 
 msgid "Update"
 msgstr "Aktualisieren"
@@ -1258,7 +1258,7 @@ msgid "You have attempted to load a bad image"
 msgstr "Sie haben versucht ein bad image zu laden"
 
 msgid "You need to select or format a partition"
-msgstr ""
+msgstr "Sie müssen eine Partition wählen oder formatieren"
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
@@ -1292,7 +1292,7 @@ msgid "files not found on the server!"
 msgstr "Datei(en) konnte(n) auf dem Server nicht gefunden werden!"
 
 msgid "for FAT support"
-msgstr ""
+msgstr "für FAT Unterstützung"
 
 msgid "for Ocarina"
 msgstr "für Ocarina"
@@ -1307,7 +1307,7 @@ msgid "for his awesome tool LibWiiGui"
 msgstr "für sein großartiges Tool LibWiiGui"
 
 msgid "for hosting the themes"
-msgstr ""
+msgstr "für das Hosten der Themes"
 
 msgid "for hosting the update files"
 msgstr "für das Hosten der Update Dateien"
@@ -1329,9 +1329,6 @@ msgstr "von"
 
 msgid "seconds left"
 msgstr "Sekunden verbleiben"
-
-#~ msgid "Exit USB Loader GX?"
-#~ msgstr "USB Loader GX beenden?"
 
 #~ msgid "No WBFS partition found"
 #~ msgstr "Keine WBFS Partition gefunden"

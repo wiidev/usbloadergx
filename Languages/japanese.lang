@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# japanese.lang - r839
+# japanese.lang - r848
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-10 17:48-0500\n"
+"POT-Creation-Date: 2009-12-11 01:02+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
@@ -150,7 +150,7 @@ msgid "Are you sure you want to enable Parent Control?"
 msgstr ""
 
 msgid "Are you sure?"
-msgstr "実行しますか？"
+msgstr "よろしいですか？"
 
 msgid "Aug"
 msgstr "8月"
@@ -165,10 +165,10 @@ msgid "AutoPatch"
 msgstr "自動パッチ"
 
 msgid "BCA Codes Path"
-msgstr ""
+msgstr "BCAコードのパス"
 
 msgid "BCA Codes Path changed"
-msgstr ""
+msgstr "BCAコードのパスを変更しました"
 
 msgid "BETA revisions"
 msgstr ""
@@ -195,7 +195,7 @@ msgid "Big thanks to:"
 msgstr "協力:"
 
 msgid "Block IOS Reload"
-msgstr "IOSの再ﾛｰﾄﾞ阻止"
+msgstr "IOSの再ﾛｰﾄﾞ禁止"
 
 msgid "Boot/Standard"
 msgstr "使用するcIOS"
@@ -219,7 +219,7 @@ msgid "Can't decompress LZ77"
 msgstr "LZ77を解凍できませんでした"
 
 msgid "Can't delete:"
-msgstr "削除できません:"
+msgstr "削除できません"
 
 msgid "Can't find disc"
 msgstr "ディスクが見つかりません"
@@ -328,7 +328,7 @@ msgid "Custom Paths"
 msgstr "パスを変更"
 
 msgid "Customs/Original"
-msgstr "自作メイン"
+msgstr "カスタムメイン"
 
 msgid "DOL Path"
 msgstr "DOLのパス"
@@ -391,7 +391,7 @@ msgid "Disc Path Changed"
 msgstr "ﾃﾞｨｽｸ画像のパスを変更しました"
 
 msgid "DiskFlip"
-msgstr "ディスクの回転のように"
+msgstr "ディスクの回転風"
 
 msgid "Display"
 msgstr "ゲーム情報"
@@ -409,7 +409,7 @@ msgid "Display favorites"
 msgstr "お気に入りのみ表示"
 
 msgid "Do you really want to delete:"
-msgstr "本当に削除しますか:"
+msgstr "本当に削除しますか?"
 
 msgid "Do you want to change language?"
 msgstr "言語を変更しますか？"
@@ -418,7 +418,7 @@ msgid "Do you want to download this theme?"
 msgstr "ダウンロードしますか?"
 
 msgid "Do you want to format:"
-msgstr "初期化しますか:"
+msgstr "初期化しますか?"
 
 msgid "Do you want to retry for 30 secs?"
 msgstr "再試行しますか？"
@@ -457,13 +457,13 @@ msgid "Downloading"
 msgstr "ﾀﾞｳﾝﾛｰﾄﾞします"
 
 msgid "Downloading Page List:"
-msgstr "リストをダウンロード中:"
+msgstr "リストをダウンロード中"
 
 msgid "Downloading file"
-msgstr "ﾌｧｲﾙをﾀﾞｳﾝﾛｰﾄﾞ中:"
+msgstr "ファイルをダウンロード中"
 
 msgid "Downloading image:"
-msgstr "画像をﾀﾞｳﾝﾛｰﾄﾞ中:"
+msgstr "画像をダウンロード中"
 
 msgid "Dutch"
 msgstr "オランダ語"
@@ -505,7 +505,7 @@ msgid "Extracting files..."
 msgstr "解凍中です…"
 
 msgid "FAT: Use directories"
-msgstr ""
+msgstr "FATで階層を使用"
 
 msgid "Failed formating"
 msgstr "初期化に失敗しました"
@@ -657,7 +657,7 @@ msgid "Install 1:1 Copy"
 msgstr ""
 
 msgid "Install Error!"
-msgstr "ｲﾝｽﾄｰﾙ ｴﾗｰ!"
+msgstr "インストールエラー!"
 
 msgid "Install a game"
 msgstr "ゲームをインストール"
@@ -856,22 +856,22 @@ msgid "Nov"
 msgstr "11月"
 
 msgid "OFF"
-msgstr "オフ"
+msgstr "使わない"
 
 msgid "OK"
 msgstr ""
 
 msgid "ON"
-msgstr "オン"
+msgstr "使う"
 
 msgid "Oct"
 msgstr "10月"
 
 msgid "Official Site:"
-msgstr "公式ｻｲﾄ:"
+msgstr "公式サイト:"
 
 msgid "Only Customs"
-msgstr "自作のみ"
+msgstr "カスタムのみ"
 
 msgid "Only Original"
 msgstr "公式のみ"
@@ -940,7 +940,7 @@ msgid "Released"
 msgstr "リリース"
 
 msgid "Reload SD"
-msgstr "リロード"
+msgstr "SDを再読み込み"
 
 msgid "Rename Game on WBFS"
 msgstr "WBFS内のゲーム名変更"
@@ -1045,19 +1045,19 @@ msgid "Success:"
 msgstr "成功:"
 
 msgid "Successfully Saved"
-msgstr "保存に成功しました:"
+msgstr "保存に成功しました"
 
 msgid "Successfully Updated"
 msgstr "更新しました"
 
 msgid "Successfully deleted:"
-msgstr "削除に成功しました:"
+msgstr "削除に成功しました"
 
 msgid "Successfully extracted theme"
 msgstr "テーマの解凍を完了しました"
 
 msgid "Successfully installed:"
-msgstr "このｹﾞｰﾑをｲﾝｽﾄｰﾙしました:"
+msgstr "このｹﾞｰﾑをｲﾝｽﾄｰﾙしました"
 
 msgid "System Default"
 msgstr "Wiiのデフォルト"
@@ -1265,7 +1265,7 @@ msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 msgstr "%sWiiTDB_URL.txtにURLを保存しました"
 
 msgid "and translaters for language files updates"
-msgstr "翻訳者の方々(日本語:K-M & papa)"
+msgstr "/ K-M & papa …日本語翻訳者"
 
 msgid "available"
 msgstr "があります"
@@ -1292,7 +1292,7 @@ msgid "files not found on the server!"
 msgstr "個ｻｰﾊﾞｰにありませんでした…"
 
 msgid "for FAT support"
-msgstr ""
+msgstr "…FATの対応"
 
 msgid "for Ocarina"
 msgstr "…Ocarinaを制作"
@@ -1322,7 +1322,7 @@ msgid "free"
 msgstr "空き"
 
 msgid "not set"
-msgstr "ｾｯﾄされていません"
+msgstr "セットされていません"
 
 msgid "of"
 msgstr "中"

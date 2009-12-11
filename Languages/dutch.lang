@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# dutch.lang - r837
+# dutch.lang - r848
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-10 17:48-0500\n"
+"POT-Creation-Date: 2009-12-11 01:02+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: glowy\n"
 "Language-Team: tj_cool, glowy\n"
@@ -23,7 +23,7 @@ msgid " could not be downloaded."
 msgstr " kon niet worden gedownload."
 
 msgid " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information."
-msgstr " is opgeslagen. De tekst is niet gecontroleerd. Sommige codes kunnen elkaar tegenwerken. Als je moeilijkheden ondervind, open het bestand in een echte tekstverwerker voor meer informatie."
+msgstr " is opgeslagen. De tekst is niet gecontroleerd. Delen van de code kunnen elkaar tegenwerken. Als je moeilijkheden ondervind, open het bestand in een echte tekstverwerker voor meer informatie."
 
 msgid " is not on the server."
 msgstr " staat niet op de server."
@@ -165,10 +165,10 @@ msgid "AutoPatch"
 msgstr "Automatisch patchen"
 
 msgid "BCA Codes Path"
-msgstr ""
+msgstr "Locatie BCA codes"
 
 msgid "BCA Codes Path changed"
-msgstr ""
+msgstr "Locatie BCA codes gewijzigd"
 
 msgid "BETA revisions"
 msgstr ""
@@ -505,7 +505,7 @@ msgid "Extracting files..."
 msgstr "Bestanden uitpakken..."
 
 msgid "FAT: Use directories"
-msgstr ""
+msgstr "FAT: gebruik directories"
 
 msgid "Failed formating"
 msgstr "Formatteren mislukt"
@@ -757,7 +757,7 @@ msgid "Mar"
 msgstr "Mrt"
 
 msgid "Mark new games"
-msgstr ""
+msgstr "Markeer nieuwe spellen"
 
 msgid "May"
 msgstr "Mei"
@@ -1292,7 +1292,7 @@ msgid "files not found on the server!"
 msgstr "Bestanden niet gevonden op server!"
 
 msgid "for FAT support"
-msgstr ""
+msgstr "voor FAT ondersteuning"
 
 msgid "for Ocarina"
 msgstr "voor Ocarina"
@@ -1329,9 +1329,6 @@ msgstr "van"
 
 msgid "seconds left"
 msgstr "seconden over"
-
-#~ msgid "Exit USB Loader GX?"
-#~ msgstr "USB Loader GX Afsluiten?"
 
 #~ msgid "Failed to extract opening.bnr"
 #~ msgstr "Uitpakken opening.bnr mislukt"

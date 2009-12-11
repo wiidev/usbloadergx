@@ -1,5 +1,5 @@
 # USB Loader GX language source file.
-# French V11.5 r848
+# French V11.6 r853
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
@@ -126,7 +126,7 @@ msgid "AUTO"
 msgstr ""
 
 msgid "All partitions"
-msgstr ""
+msgstr "Toutes partitions"
 
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "Toutes les fonctionnalités sont déverrouillées."
@@ -147,7 +147,7 @@ msgid "Apr"
 msgstr "Avr"
 
 msgid "Are you sure you want to enable Parent Control?"
-msgstr ""
+msgstr "Confirmation activation du Contrôle Parental ?"
 
 msgid "Are you sure?"
 msgstr "Êtes-vous sûr ?"
@@ -171,7 +171,7 @@ msgid "BCA Codes Path changed"
 msgstr "Dossier Codes BCA modifié"
 
 msgid "BETA revisions"
-msgstr ""
+msgstr "Révisions BETA"
 
 msgid "Back"
 msgstr "Retour"
@@ -475,7 +475,7 @@ msgid "ERROR:"
 msgstr "ERREUR:"
 
 msgid "Enable Parental Control"
-msgstr ""
+msgstr "Contrôle Parental activé"
 
 msgid "English"
 msgstr "Anglais"
@@ -505,7 +505,7 @@ msgid "Extracting files..."
 msgstr "Extraction des fichiers..."
 
 msgid "FAT: Use directories"
-msgstr "FAT: Utilisez des dossiers"
+msgstr "FAT: Utiliser dossiers"
 
 msgid "Failed formating"
 msgstr "Échec du formatage"
@@ -583,7 +583,7 @@ msgid "Game is already installed:"
 msgstr "Le jeu est déjà installé:"
 
 msgid "Game partition"
-msgstr ""
+msgstr "Partition Jeu"
 
 msgid "Games"
 msgstr "Jeux"
@@ -654,7 +654,7 @@ msgid "Install"
 msgstr "Installer"
 
 msgid "Install 1:1 Copy"
-msgstr ""
+msgstr "Installer Copie 1:1"
 
 msgid "Install Error!"
 msgstr "Erreur à l'installation !"
@@ -663,7 +663,7 @@ msgid "Install a game"
 msgstr "Installer un jeu"
 
 msgid "Install partitions"
-msgstr ""
+msgstr "Installation"
 
 msgid "Installing content... Ok!"
 msgstr "Installation contenu... OK!"
@@ -681,7 +681,7 @@ msgid "Installing wad"
 msgstr "Installation WAD"
 
 msgid "Invalid PIN code"
-msgstr ""
+msgstr "Code PIN invalide"
 
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
 msgstr "SVP, faîtes passer cette information qui serait très utile à la Team USB Loader GX."
@@ -886,7 +886,7 @@ msgid "Parental Control"
 msgstr "Contrôle Parental"
 
 msgid "Parental Control disabled"
-msgstr ""
+msgstr "Contrôle Parental désactivé"
 
 msgid "Partition"
 msgstr ""
@@ -1143,7 +1143,7 @@ msgid "Uninstalling wad"
 msgstr "Désinstallation wad"
 
 msgid "Unlock Parental Control"
-msgstr ""
+msgstr "Déverrouiller Contrôle Parental"
 
 msgid "Unlock console to use this option."
 msgstr "Cette option requiert le déverrouillage de l'interface."
@@ -1252,7 +1252,7 @@ msgid "You are choosing to display favorites and you do not have any selected."
 msgstr "Vous choisissez d'afficher des favoris alors que vous n'en avez aucun."
 
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
-msgstr ""
+msgstr "Contrôle Parental désactivé. Si vous voulez l'utiliser, activez-le dans les Paramètres de votre Wii."
 
 msgid "You have attempted to load a bad image"
 msgstr "Vous avez tenté de charger une image érronée"

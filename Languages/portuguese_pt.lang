@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-# portuguese_pt.lang - r840
+# portuguese_pt.lang - r848
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-10 17:48-0500\n"
-"PO-Revision-Date: 2009-11-23 16:23-0000\n"
+"POT-Creation-Date: 2009-12-11 01:02+0100\n"
+"PO-Revision-Date: 2009-12-04 16:16-0000\n"
 "Last-Translator: Sky8000\n"
 "Language-Team: Sky8000 <sky8000@hotmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -165,10 +165,10 @@ msgid "AutoPatch"
 msgstr "Patch automático"
 
 msgid "BCA Codes Path"
-msgstr ""
+msgstr "Pasta Códigos BCA"
 
 msgid "BCA Codes Path changed"
-msgstr ""
+msgstr "Pasta de Códigos BCA alterada"
 
 msgid "BETA revisions"
 msgstr ""
@@ -505,7 +505,7 @@ msgid "Extracting files..."
 msgstr "Extraindo ficheiros..."
 
 msgid "FAT: Use directories"
-msgstr ""
+msgstr "FAT: Utilizar pastas"
 
 msgid "Failed formating"
 msgstr "Falha ao formatar"
@@ -1292,7 +1292,7 @@ msgid "files not found on the server!"
 msgstr "ficheiros não encontrados no servidor!"
 
 msgid "for FAT support"
-msgstr ""
+msgstr "pelo suporte FAT"
 
 msgid "for Ocarina"
 msgstr "pelo Ocarina"
@@ -1329,9 +1329,6 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
-
-#~ msgid "Exit USB Loader GX?"
-#~ msgstr "Pretende sair do USB Loader GX?"
 
 #~ msgid "Failed to extract opening.bnr"
 #~ msgstr "Falha ao extrair o opening.bnr"
