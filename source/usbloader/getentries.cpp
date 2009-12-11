@@ -507,7 +507,7 @@ int __Menu_GetGameList(int t, wchar_t* gameFilter, discHdr ** PgameList, u32 *Pg
 		}
 
 		/* Other parental control method */
-		if (Settings.parentalcontrol == 0 && Settings.parental.is_unlocked == 0 && Settings.parental.enabled == 1)
+		if (Settings.parentalcontrol == 0 && Settings.parental.is_unlocked == 0 && Settings.parental.enabled == 1&& t==0)
 		{
 			// Check game rating in WiiTDB, since the default Wii parental control setting is enabled
 			s32 rating = GetRatingForGame((char *) header->id);

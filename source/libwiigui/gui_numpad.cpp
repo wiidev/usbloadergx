@@ -21,8 +21,8 @@
  
 GuiNumpad::GuiNumpad(char * t, u32 max)
 {
-	width = 540;
-	height = 400;
+	width = 400;
+	height = 370;
 	selectable = true;
 	focus = 0; // allow focus
 	alignmentHor = ALIGN_CENTRE;
@@ -61,20 +61,16 @@ GuiNumpad::GuiNumpad(char * t, u32 max)
 	keyBackOverImg = new GuiImage(keyMediumOver);
 	keyBackText = new GuiText("Back", 20, (GXColor){0, 0, 0, 0xff});
 
-	keyBack = new GuiButton(keyBackImg, keyBackOverImg, 0, 3, 11*42+40, 0*42+120, trigA, keySoundOver, keySoundClick,1);
+	keyBack = new GuiButton(keyBackImg, keyBackOverImg, ALIGN_CENTRE, ALIGN_MIDDLE, 90, 80, trigA, keySoundOver, keySoundClick,1);
 	keyBack->SetLabel(keyBackText);
 	keyBack->SetTrigger(trigB);
-	keyBack->SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-	keyBack->SetPosition(50, 80);
 	this->Append(keyBack);
 
 	keyClearImg = new GuiImage(keyMedium);
 	keyClearOverImg = new GuiImage(keyMediumOver);
 	keyClearText = new GuiText("Clear", 20, (GXColor){0, 0, 0, 0xff});
-	keyClear = new GuiButton(keyClearImg, keyClearOverImg, 0, 3, (10*42+40), 4*42+120, trigA, keySoundOver, keySoundClick,1);
+	keyClear = new GuiButton(keyClearImg, keyClearOverImg, ALIGN_CENTRE, ALIGN_MIDDLE, -90, 80, trigA, keySoundOver, keySoundClick,1);
 	keyClear->SetLabel(keyClearText);
-	keyClear->SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-	keyClear->SetPosition(-130, 80);
 	this->Append(keyClear);
 
 	char txt[2] = { 0, 0 };
@@ -82,20 +78,19 @@ GuiNumpad::GuiNumpad(char * t, u32 max)
 	{
 		if (keys[i] != '\0')
 		{
+			int col = i % 3;
+			int row = i / 3;
+			
 			keyImg[i] = new GuiImage(keyMedium);
 			keyImgOver[i] = new GuiImage(keyMediumOver);
 			txt[0] = keys[i];
 			keyTxt[i] = new GuiText(txt, 20, (GXColor){0, 0, 0, 0xff});
 			keyTxt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
 			keyTxt[i]->SetPosition(0, -10);
-			keyBtn[i]= new GuiButton(keyImg[i], keyImgOver[i], 0, 3, (42+21*i+40), i*42+120, trigA, keySoundOver, keySoundClick, 1);
+			keyBtn[i]= new GuiButton(keyImg[i], keyImgOver[i], ALIGN_CENTRE, ALIGN_MIDDLE, -90 + 90 * col, -70 + 50 * row, trigA, keySoundOver, keySoundClick, 1);
 			keyBtn[i]->SetLabel(keyTxt[i]);
 			keyBtn[i]->SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 			
-			int col = i % 3;
-			int row = i / 3;
-			
-			keyBtn[i]->SetPosition(-130 + 90 * col, -70 + 50 * row);			
 			this->Append(keyBtn[i]);
 		}
 	}

@@ -77,7 +77,6 @@ int OnScreenNumpad(char * var, u32 maxlen) {
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
 	// because destroy GuiSound must wait while sound playing is finished, we use a global sound
 	if(!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size,Settings.sfxvolume);
-	//	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
     char imgPath[100];
     snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
@@ -94,7 +93,7 @@ int OnScreenNumpad(char * var, u32 maxlen) {
         okBtnTxt.SetWidescreen(CFG.widescreen);
         okBtnImg.SetWidescreen(CFG.widescreen);
     }
-    GuiButton okBtn(&okBtnImg,&okBtnImg, 0, 4, 5, 15, &trigA, &btnSoundOver, btnClick2,1);
+    GuiButton okBtn(&okBtnImg,&okBtnImg, 0, 4, 5, -15, &trigA, &btnSoundOver, btnClick2,1);
     okBtn.SetLabel(&okBtnTxt);
     GuiText cancelBtnTxt(tr("Cancel"), 22, THEME.prompttext);
     GuiImage cancelBtnImg(&btnOutline);
@@ -102,7 +101,7 @@ int OnScreenNumpad(char * var, u32 maxlen) {
         cancelBtnTxt.SetWidescreen(CFG.widescreen);
         cancelBtnImg.SetWidescreen(CFG.widescreen);
     }
-    GuiButton cancelBtn(&cancelBtnImg,&cancelBtnImg, 1, 4, -5, 15, &trigA, &btnSoundOver, btnClick2,1);
+    GuiButton cancelBtn(&cancelBtnImg,&cancelBtnImg, 1, 4, -5, -15, &trigA, &btnSoundOver, btnClick2,1);
     cancelBtn.SetLabel(&cancelBtnTxt);
     cancelBtn.SetTrigger(&trigB);
     

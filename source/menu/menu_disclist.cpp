@@ -46,7 +46,7 @@ void rockout(int f = 0);
  ***************************************************************************/
 int MenuDiscList() {
 
-	gprintf("\nMenuDiscList()");//testing out the gecko stuff.  this shouldn't break anything, but we'll see
+	gprintf("\nMenuDiscList()");
     int startat = 0;
     int offset = 0;
     int datag = 0;
@@ -68,7 +68,6 @@ int MenuDiscList() {
 	f32 freespace, used, size = 0.0;
 	wchar_t searchChar;
     //SCREENSAVER
-    //WPad_SetIdleTime(300); //needs the time in seconds
     int check = 0; //to skip the first cycle when wiimote isn't completely connected
 
     datagB=0;

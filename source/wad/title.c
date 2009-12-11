@@ -944,7 +944,6 @@ s32 getIOSrev(u64 req)
 out:
 	gprintf(" = %d",ret);
 	return ret;
-//	TITLE_ID(0x00000001,0x000000de)
 }
 
 

@@ -18,7 +18,7 @@
 #include <wiiuse/wpad.h>
 
 #include <debug.h>
-extern "C" { //not sure if this is in the libogc that the buildbot is using so it isnt used yet
+extern "C" {
 extern void __exception_setreload(int t);
 }
 
@@ -179,21 +179,20 @@ void InitTextVideo () {
 
 int
 main(int argc, char *argv[]) {
+	setlocale(LC_ALL, "en.UTF-8");
+	geckoinit = InitGecko();
 
-	if (hbcStubAvailable()) {
+	if (hbcStubAvailable() || geckoinit) {
 		InitTextVideo();
 	}
-
 	
 //	DEBUG_Init(GDBSTUB_DEVICE_USB, 1);
 //_break();
 	
-//	__exception_setreload(5);//auto reset is code dump nobody gives us codedump info anyways.
-	setlocale(LC_ALL, "en.UTF-8");
-	geckoinit = InitGecko();
-	if (geckoinit)InitTextVideo();
-	gprintf("\x1b[2J");
-	gprintf("------------------");
+	__exception_setreload(5);//auto reset code dump nobody gives us codedump info anyways.
+
+
+	gprintf("\n\n------------------");
 	gprintf("\nUSB Loader GX rev%s",GetRev());
 	gprintf("\nmain(%d", argc);
 	for (int i=0;i<argc;i++)
