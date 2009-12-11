@@ -49,7 +49,7 @@ u32 do_sd_code(char *filename)
 gprintf("\ndo_sd_code(%s)",filename);
 
 	FILE *fp;
-	u8 *filebuff;
+	//u8 *filebuff;
 	u32 filesize;
 	u32 ret;
 	char filepath[150];

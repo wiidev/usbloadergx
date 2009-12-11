@@ -124,7 +124,7 @@ lang:
 #---------------------------------------------------------------------------------
 all:
 	@[ -d build ] || mkdir -p build
-	@shell bash ./buildtype.sh
+	@./buildtype.sh
 	@make --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
 	@make --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile language
 
