@@ -41,14 +41,18 @@ char idiotChar[50];
 void DiscListWinUpdateCallback(void * e);
 void rockout(int f = 0);
 
+static u32 startat = 0;
+
 /****************************************************************************
  * MenuDiscList
  ***************************************************************************/
 int MenuDiscList() {
 
-	gprintf("\nMenuDiscList()");
-    int startat = 0;
-    int offset = 0;
+    gprintf("\nMenuDiscList()");
+    __Menu_GetEntries();
+    int offset = MIN(startat,gameCnt-1);
+    startat = offset;
+    gprintf("\n\tstartat:%d offset:%d",startat,offset);
     int datag = 0;
     int datagB =0;
     int dataed = -1;
@@ -72,7 +76,7 @@ int MenuDiscList() {
 
     datagB=0;
     int menu = MENU_NONE, dataef=0;
-    __Menu_GetEntries();
+
 	
     u32 nolist;
     char text[MAX_CHARACTERS + 4];
@@ -1069,11 +1073,13 @@ int MenuDiscList() {
             } else {
                 carouselBtn.ResetState();
             }
-        } else if (homebrewBtn.GetState() == STATE_CLICKED) {
+	}
+	else if (homebrewBtn.GetState() == STATE_CLICKED) {
             gprintf("\n\thomebrewBtn Clicked");
             menu = MENU_HOMEBREWBROWSE;
             break;
-        } else if (gameInfo.GetState() == STATE_CLICKED && mountMethod!=3) {
+	}
+	else if (gameInfo.GetState() == STATE_CLICKED && mountMethod!=3) {
 		    gprintf("\n\tgameinfo Clicked");
             gameInfo.ResetState();
 			if(selectImg1>=0 && selectImg1<(s32)gameCnt) {
@@ -1530,7 +1536,8 @@ int MenuDiscList() {
 	/*if (menu == MENU_EXIT) {
 		SDCard_deInit();
 	}*/
-
+	startat=selectImg1, offset=selectImg1;//save the variables in case we are refreshing the list
+	gprintf("\n\tstartat:%d offset:%d",startat,offset);
 	HaltGui();
 	mainWindow->RemoveAll();
 	mainWindow->Append(bgImg);
