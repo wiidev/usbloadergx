@@ -253,7 +253,7 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
     int tmp;
     while (showProgress) {
 
-        VIDEO_WaitVSync ();
+        usleep(20000);
 
         GameInstallProgress();
 
@@ -325,7 +325,8 @@ void ProgressStop() {
  * Callbackfunction for updating the progress values
  * Use this function as standard callback
  ***************************************************************************/
-void ShowProgress(const char *title, const char *msg1, char *dynmsg2, f32 done, f32 total, bool swSize, bool swTime) {
+void ShowProgress(const char *title, const char *msg1, char *dynmsg2, f32 done, f32 total, bool swSize, bool swTime)
+{
     if (total <= 0)
         return;
 
@@ -342,37 +343,38 @@ void ShowProgress(const char *title, const char *msg1, char *dynmsg2, f32 done, 
     if (dynmsg2)
         dyn_message = dynmsg2;
 
+    static u32 expected;
+
+    u32 elapsed, h, m, s, speed = 0;
+
+    if (!done) {
+        start    = time(0);
+        expected = 300;
+        LWP_ResumeThread(progressthread);
+    }
+
+    //Elapsed time
+    elapsed = time(0) - start;
+
+    //Calculate speed in KB/s
+    if (elapsed > 0)
+        speed = done/(elapsed*KB_SIZE);
+
+    if (done != total) {
+        //Expected time
+        if (elapsed)
+            expected = (expected * 3 + elapsed * total / done) / 4;
+
+        //Remaining time
+        elapsed = (expected > elapsed) ? (expected - elapsed) : 0;
+    }
+
+    //Calculate time values
+    h =  elapsed / 3600;
+    m = (elapsed / 60) % 60;
+    s =  elapsed % 60;
+
     if (swTime == true) {
-        static u32 expected;
-
-        u32 elapsed, h, m, s, speed = 0;
-
-        if (!done) {
-            start    = time(0);
-            expected = 300;
-        }
-
-        //Elapsed time
-        elapsed = time(0) - start;
-
-        //Calculate speed in KB/s
-        if (elapsed > 0)
-            speed = done/(elapsed*KB_SIZE);
-
-        if (done != total) {
-            //Expected time
-            if (elapsed)
-                expected = (expected * 3 + elapsed * total / done) / 4;
-
-            //Remaining time
-            elapsed = (expected > elapsed) ? (expected - elapsed) : 0;
-        }
-
-        //Calculate time values
-        h =  elapsed / 3600;
-        m = (elapsed / 60) % 60;
-        s =  elapsed % 60;
-
         snprintf(progressTime, sizeof(progressTime), "%s %d:%02d:%02d",tr("Time left:"),h,m,s);
     }
 
@@ -383,13 +385,13 @@ void ShowProgress(const char *title, const char *msg1, char *dynmsg2, f32 done, 
             snprintf(progressSizeLeft, sizeof(progressSizeLeft), "%0.2fMB/%0.2fMB", done * done/total / MB_SIZE, total/MB_SIZE);
         else
             snprintf(progressSizeLeft, sizeof(progressSizeLeft), "%0.2fGB/%0.2fGB", done * done/total / GB_SIZE, total/GB_SIZE);
+
+        snprintf(progressSpeed, sizeof(progressSpeed), "%dKB/s", speed);
     }
 
     showProgress = 1;
     progressDone = 100.0*done/total;
     changed = true;
-
-    LWP_ResumeThread(progressthread);
 }
 
 /****************************************************************************

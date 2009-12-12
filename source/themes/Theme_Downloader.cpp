@@ -13,6 +13,7 @@
 #include "libwiigui/gui.h"
 #include "prompts/PromptWindows.h"
 #include "prompts/ProgressWindow.h"
+#include "homebrewboot/HomebrewBrowse.h"
 #include "network/networkops.h"
 #include "themes/Theme_List.h"
 #include "menu.h"
@@ -68,9 +69,9 @@ bool DownloadTheme(const char *url, const char *title)
 
     u32 done = 0;
 
-    int blocksize = 1024;
+    int blocksize = 1024*5;
 
-    u8 *buffer = (u8*) malloc(blocksize);
+    u8 *buffer = new u8[blocksize];
 
     while(done < (u32) filesize)
     {
@@ -89,16 +90,25 @@ bool DownloadTheme(const char *url, const char *title)
             WindowPrompt(tr("Download failed."), tr("Transfer failed."), tr("OK"));
             return false;
         }
+        else if (ret == 0)
+            break;
 
         fwrite(buffer, 1, blocksize, file);
 
         done += ret;
     }
 
-    free(buffer);
+    delete [] buffer;
     fclose(file);
 
     ProgressStop();
+
+    if(done != (u32) filesize)
+    {
+        remove(filepath);
+        WindowPrompt(tr("Download failed."), tr("Connection lost..."), tr("OK"));
+        return false;
+    }
 
     ZipFile zipfile(filepath);
 
@@ -249,10 +259,10 @@ int Theme_Downloader()
 {
     int pagesize = 4;
     int menu = MENU_NONE;
-    bool pagechanged = false;
     bool listchanged = false;
 
-    char THEME_LINK[30] = "http://wii.spiffy360.com/";
+    const char THEME_LINK[70] = "http://wii.spiffy360.com/themes.php?xml=1&category=1&adult=0";
+    //const char THEME_LINK_ADULT[70] = "http://wii.spiffy360.com/themes.php?xml=1&category=1&adult=1";
 
     /*** Sound Variables ***/
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
@@ -388,18 +398,6 @@ int Theme_Downloader()
     PageIndicatorBtn.SetTrigger(&trigA);
     PageIndicatorBtn.SetEffectGrow();
 
-    GuiImage Pageindicator2Img(&PageindicatorImgData);
-    GuiText Pageindicator2Txt(NULL, 22, (GXColor) { 0, 0, 0, 255});
-    GuiButton PageIndicator2Btn(Pageindicator2Img.GetWidth(), Pageindicator2Img.GetHeight());
-    PageIndicator2Btn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-    PageIndicator2Btn.SetPosition(150, 400);
-    PageIndicator2Btn.SetImage(&Pageindicator2Img);
-    PageIndicator2Btn.SetLabel(&Pageindicator2Txt);
-    PageIndicator2Btn.SetSoundOver(&btnSoundOver);
-    PageIndicator2Btn.SetSoundClick(&btnClick1);
-    PageIndicator2Btn.SetTrigger(&trigA);
-    PageIndicator2Btn.SetEffectGrow();
-
     GuiImage wifiImg(&wifiImgData);
     if (Settings.wsprompt == yes)
     {
@@ -426,7 +424,30 @@ int Theme_Downloader()
     char url[300];
     int currentpage = 1;
     int currenttheme = 0;
-    int currentloaderpage = 1;
+
+    HaltGui();
+    w.RemoveAll();
+    w.Append(&background);
+    w.Append(&titleTxt);
+    w.Append(&backBtn);
+    w.Append(&GoLeftBtn);
+    w.Append(&GoRightBtn);
+    w.Append(&PageIndicatorBtn);
+    w.Append(&wifiBtn);
+    w.Append(&HomeBtn);
+    ResumeGui();
+
+    ShowProgress(tr("Downloading Page List:"), "", (char *) tr("Please wait..."), 0, pagesize);
+
+    Theme = new Theme_List(THEME_LINK);
+
+    int ThemesOnPage = Theme->GetThemeCount();
+
+    if(!ThemesOnPage)
+    {
+        WindowPrompt(tr("No themes found on the site."), 0, "OK");
+        menu = MENU_SETTINGS;
+    }
 
     while(menu == MENU_NONE)
     {
@@ -438,202 +459,145 @@ int Theme_Downloader()
         w.Append(&GoLeftBtn);
         w.Append(&GoRightBtn);
         w.Append(&PageIndicatorBtn);
-        w.Append(&PageIndicator2Btn);
         w.Append(&wifiBtn);
         w.Append(&HomeBtn);
         ResumeGui();
 
-        ShowProgress(tr("Downloading Page List:"), "", (char *) tr("Please wait..."), 0, pagesize);
-
-        snprintf(url, sizeof(url), "%sthemes.php?creator=&sort=1&page=%i", THEME_LINK, currentpage);
-
-        if(Theme)
-        {
-            delete Theme;
-            Theme = NULL;
-        }
-        Theme = new Theme_List(url);
-
         sprintf(url, "%i", currentpage);
         PageindicatorTxt.SetText(url);
 
-        int SitePageCount = Theme->GetSitepageCount();
-        int ThemesOnPage = Theme->GetThemeCount();
+        int n = 0;
 
-        pagechanged = false;
-
-        if(!ThemesOnPage)
+        for(int i = currenttheme; (i < (currenttheme+pagesize)); i++)
         {
-            WindowPrompt(tr("No themes found on the site."), 0, "OK");
-            pagechanged = true;
-            menu = MENU_SETTINGS;
+            ShowProgress(tr("Downloading image:"), 0, (char *) Theme->GetThemeTitle(i), n, pagesize);
+
+            if(MainButtonTxt[n])
+                delete MainButtonTxt[n];
+            if(ImageData[n])
+                delete ImageData[n];
+            if(Image[n])
+                delete Image[n];
+
+            MainButtonTxt[n] = NULL;
+            ImageData[n] = NULL;
+            Image[n] = NULL;
+
+            if(i < ThemesOnPage)
+            {
+                MainButtonTxt[n] = new GuiText(Theme->GetThemeTitle(i), 18, (GXColor) { 0, 0, 0, 255});
+                MainButtonTxt[n]->SetAlignment(ALIGN_CENTER, ALIGN_TOP);
+                MainButtonTxt[n]->SetPosition(0, 10);
+                MainButtonTxt[n]->SetMaxWidth(theme_box_Data.GetWidth()-10, GuiText::DOTTED);
+
+                sprintf(url, "%s", Theme->GetImageLink(i));
+
+                char filepath[300];
+                snprintf(filepath, sizeof(filepath), "%s/tmp/%s.jpg", Settings.theme_downloadpath, Theme->GetThemeTitle(i));
+
+                FILE * storefile = fopen(filepath, "rb");
+
+                if(!storefile)
+                {
+                    struct block file = downloadfile(url);
+                    char storepath[300];
+                    snprintf(storepath, sizeof(storepath), "%s/tmp/", Settings.theme_downloadpath);
+                    subfoldercreate(storepath);
+                    if(file.data)
+                    {
+                        storefile = fopen(filepath, "wb");
+                        fwrite(file.data, 1, file.size, storefile);
+                        fclose(storefile);
+                    }
+                    ImageData[n] = new GuiImageData(file.data, file.size);
+                    free(file.data);
+                }
+                else
+                {
+                    fseek(storefile, 0, SEEK_END);
+                    u32 filesize = ftell(storefile);
+                    u8 *buffer = (u8*) malloc(filesize);
+                    rewind(storefile);
+                    fread(buffer, 1, filesize, storefile);
+                    fclose(storefile);
+                    ImageData[n] = new GuiImageData(buffer, filesize);
+                    free(buffer);
+                    buffer = NULL;
+                }
+                Image[n] = new GuiImage(ImageData[n]);
+                Image[n]->SetScale(0.4);
+                Image[n]->SetPosition(50, -45);
+                MainButton[n]->SetIcon(Image[n]);
+                MainButton[n]->SetLabel(MainButtonTxt[n]);
+            }
+            n++;
         }
 
-        while(!pagechanged)
+        ProgressStop();
+
+        HaltGui();
+        for(int i = 0; i < pagesize; i++)
         {
-            HaltGui();
-            w.RemoveAll();
-            w.Append(&background);
-            w.Append(&titleTxt);
-            w.Append(&backBtn);
-            w.Append(&GoLeftBtn);
-            w.Append(&GoRightBtn);
-            w.Append(&PageIndicatorBtn);
-            w.Append(&PageIndicator2Btn);
-            w.Append(&wifiBtn);
-            w.Append(&HomeBtn);
-            ResumeGui();
+            if(MainButtonTxt[i])
+                w.Append(MainButton[i]);
+        }
+        ResumeGui();
 
-            sprintf(url, "%i", currentloaderpage);
-            Pageindicator2Txt.SetText(url);
+        listchanged = false;
 
-            int n = 0;
+        while(!listchanged)
+        {
+            VIDEO_WaitVSync ();
 
-            for(int i = currenttheme; (i < (currenttheme+pagesize)); i++)
+            if (shutdown == 1)
+                Sys_Shutdown();
+            else if (reset == 1)
+                Sys_Reboot();
+
+            else if (wifiBtn.GetState() == STATE_CLICKED)
             {
-                ShowProgress(tr("Downloading image:"), 0, (char *) Theme->GetThemeTitle(i), n, pagesize);
-
-                if(MainButtonTxt[n])
-                    delete MainButtonTxt[n];
-                if(ImageData[n])
-                    delete ImageData[n];
-                if(Image[n])
-                    delete Image[n];
-
-                MainButtonTxt[n] = NULL;
-                ImageData[n] = NULL;
-                Image[n] = NULL;
-
-                if(i < ThemesOnPage)
+                Initialize_Network();
+                wifiBtn.ResetState();
+            }
+            else if (backBtn.GetState() == STATE_CLICKED)
+            {
+                listchanged = true;
+                menu = MENU_SETTINGS;
+                backBtn.ResetState();
+                break;
+            }
+            else if (GoRightBtn.GetState() == STATE_CLICKED)
+            {
+                listchanged = true;
+                currenttheme += pagesize;
+                currentpage++;
+                if(currenttheme >= ThemesOnPage)
                 {
-                    MainButtonTxt[n] = new GuiText(Theme->GetThemeTitle(i), 18, (GXColor) { 0, 0, 0, 255});
-                    MainButtonTxt[n]->SetAlignment(ALIGN_CENTER, ALIGN_TOP);
-                    MainButtonTxt[n]->SetPosition(0, 10);
-                    MainButtonTxt[n]->SetMaxWidth(theme_box_Data.GetWidth()-10, GuiText::DOTTED);
-
-                    if(!Theme->IsDirectImageLink(i))
-                        sprintf(url, "%s%s", THEME_LINK, Theme->GetImageLink(i));
-                    else
-                        sprintf(url, "%s", Theme->GetImageLink(i));
-
-                    char filepath[300];
-                    snprintf(filepath, sizeof(filepath), "%s/tmp/%s.jpg", Settings.theme_downloadpath, Theme->GetThemeTitle(i));
-
-                    FILE * storefile = fopen(filepath, "rb");
-
-                    if(!storefile)
-                    {
-                        struct block file = downloadfile(url);
-                        char storepath[300];
-                        snprintf(storepath, sizeof(storepath), "%s/tmp/", Settings.theme_downloadpath);
-                        subfoldercreate(storepath);
-                        if(file.data)
-                        {
-                            storefile = fopen(filepath, "wb");
-                            fwrite(file.data, 1, file.size, storefile);
-                            fclose(storefile);
-                        }
-                        ImageData[n] = new GuiImageData(file.data, file.size);
-                        free(file.data);
-                    }
-                    else
-                    {
-                        fseek(storefile, 0, SEEK_END);
-                        u32 filesize = ftell(storefile);
-                        u8 *buffer = (u8*) malloc(filesize);
-                        rewind(storefile);
-                        fread(buffer, 1, filesize, storefile);
-                        fclose(storefile);
-                        ImageData[n] = new GuiImageData(buffer, filesize);
-                        free(buffer);
-                        buffer = NULL;
-                    }
-                    Image[n] = new GuiImage(ImageData[n]);
-                    Image[n]->SetScale(0.4);
-                    Image[n]->SetPosition(50, -45);
-                    MainButton[n]->SetIcon(Image[n]);
-                    MainButton[n]->SetLabel(MainButtonTxt[n]);
+                    currentpage = 1;
+                    currenttheme = 0;
                 }
-                n++;
+                GoRightBtn.ResetState();
+            }
+            else if (GoLeftBtn.GetState() == STATE_CLICKED)
+            {
+                listchanged = true;
+                currenttheme -= pagesize;
+                currentpage--;
+                if(currenttheme < 0)
+                {
+                    currentpage = roundup((ThemesOnPage+1.0f)/pagesize);
+                    currenttheme = currentpage*pagesize-pagesize;
+                }
+                GoLeftBtn.ResetState();
             }
 
-            ProgressStop();
-
-            HaltGui();
             for(int i = 0; i < pagesize; i++)
             {
-                if(MainButtonTxt[i])
-                    w.Append(MainButton[i]);
-            }
-            ResumeGui();
-
-            listchanged = false;
-
-            while(!listchanged)
-            {
-                VIDEO_WaitVSync ();
-
-                if (shutdown == 1)
-                    Sys_Shutdown();
-                else if (reset == 1)
-                    Sys_Reboot();
-
-                else if (wifiBtn.GetState() == STATE_CLICKED)
+                if(MainButton[i]->GetState() == STATE_CLICKED)
                 {
-                    Initialize_Network();
-                    wifiBtn.ResetState();
-                }
-                else if (backBtn.GetState() == STATE_CLICKED)
-                {
-                    listchanged = true;
-                    pagechanged = true;
-                    menu = MENU_SETTINGS;
-                    backBtn.ResetState();
-                    break;
-                }
-                else if (GoRightBtn.GetState() == STATE_CLICKED)
-                {
-                    listchanged = true;
-                    currenttheme += pagesize;
-                    currentloaderpage++;
-                    if(currenttheme >= ThemesOnPage)
-                    {
-                        pagechanged = true;
-                        currentpage++;
-                        if(currentpage > SitePageCount)
-                            currentpage = 1;
-
-                        currenttheme = 0;
-                        currentloaderpage = 1;
-                    }
-                    GoRightBtn.ResetState();
-                }
-                else if (GoLeftBtn.GetState() == STATE_CLICKED)
-                {
-                    listchanged = true;
-                    currenttheme -= pagesize;
-                    currentloaderpage--;
-                    if(currenttheme < 0)
-                    {
-                        pagechanged = true;
-                        currentpage--;
-                        if(currentpage < 1)
-                            currentpage = SitePageCount;
-
-                        currenttheme = 0;
-                        currentloaderpage = 1;
-                    }
-                    GoLeftBtn.ResetState();
-                }
-
-                for(int i = 0; i < pagesize; i++)
-                {
-                    if(MainButton[i]->GetState() == STATE_CLICKED)
-                    {
-                        snprintf(url, sizeof(url), "%s%s", THEME_LINK, Theme->GetDownloadLink(currenttheme+i));
-                        Theme_Prompt(Theme->GetThemeTitle(currenttheme+i), Theme->GetThemeAuthor(currenttheme+i), ImageData[i], url);
-                        MainButton[i]->ResetState();
-                    }
+                    snprintf(url, sizeof(url), "%s", Theme->GetDownloadLink(currenttheme+i));
+                    Theme_Prompt(Theme->GetThemeTitle(currenttheme+i), Theme->GetThemeAuthor(currenttheme+i), ImageData[i], url);
+                    MainButton[i]->ResetState();
                 }
             }
         }

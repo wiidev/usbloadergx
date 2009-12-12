@@ -73,7 +73,7 @@ int MenuCheck() {
 				break;
 			}
 		}
-		
+
 		if (partitions.wbfs_n != 0) {
 			ret2 = WBFS_Open();
 			for (int p = 0; p < partitions.num; p++) {
@@ -90,7 +90,7 @@ int MenuCheck() {
 					if (!WBFS_OpenPart(1, partitions.pinfo[i].fat_i, partitions.pentry[i].sector, partitions.pentry[i].size, (char *) &game_partition)) {
 						// Get the game count...
 						WBFS_GetCount(&count);
-						
+
 						if (count > 0) {
 							load_from_fat = true;
 							Settings.partition = i;
@@ -144,9 +144,11 @@ int MenuCheck() {
 
     //Spieleliste laden
     __Menu_GetEntries(0);
-	
-	if (strcmp(headlessID,"")!=0)
-		menu = MENU_EXIT;
+
+    //THIS SHIT MAKES THE LOADER NOT RUN FROM SENDELF
+    //Think of something else pune.
+	//if (strcmp(headlessID,"")!=0)
+		//menu = MENU_EXIT;
 
     if (menu == MENU_NONE)
         menu = MENU_DISCLIST;
@@ -157,6 +159,6 @@ int MenuCheck() {
         USBDevice_Init();
         SDCard_Init();
     }
-		
+
     return menu;
 }

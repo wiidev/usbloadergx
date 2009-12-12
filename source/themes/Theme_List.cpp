@@ -30,6 +30,8 @@
 #include <gctypes.h>
 
 #include "Theme_List.h"
+#include "xml/xml.h"
+#include "prompts/PromptWindows.h"
 
 #define stringcompare(text, cmp, pos) strncasecmp((const char*) &text[pos-strlen(cmp)], (const char*) cmp, strlen((const char*) cmp))
 
@@ -52,7 +54,6 @@ Theme_List::Theme_List(const char * url)
 {
     Theme = NULL;
     themescount = 0;
-    sitepages = 0;
 
     if (!IsNetworkInit())
     {
@@ -68,97 +69,14 @@ Theme_List::Theme_List(const char * url)
         return;
     }
 
-    u32 cnt = 0;
-    char temp[1024];
-
-    Theme = (Theme_Info *) malloc(sizeof(Theme_Info));
-    if (!Theme) {
+	themescount = CountThemes(file.data);
+	if (themescount <= 0)
+	{
         free(file.data);
-        themescount = -3;
         return;
-    }
+	}
 
-    memset(&Theme[themescount], 0, sizeof(Theme_Info));
-
-    while (cnt < file.size) {
-
-        if(stringcompare(file.data, "\"themetitle\">", cnt) == 0)
-        {
-            Theme = (Theme_Info *) realloc(Theme, (themescount+1)*sizeof(Theme_Info));
-
-            if (!Theme)
-            {
-                for (int i = 0; i < themescount; i++)
-                {
-                    if(Theme[i].imagelink)
-                        delete [] Theme[i].imagelink;
-                    if(Theme[i].imagelink)
-                        delete [] Theme[i].downloadlink;
-                    Theme[i].imagelink = NULL;
-                    Theme[i].downloadlink = NULL;
-                }
-                free(Theme);
-                Theme = NULL;
-                free(file.data);
-                themescount = -4;
-                break;
-            }
-
-            memset(&(Theme[themescount]), 0, sizeof(Theme_Info));
-
-            copyhtmlsting((const char *) file.data, temp, "</", cnt);
-
-            snprintf(Theme[themescount].themetitle, sizeof(Theme[themescount].themetitle), "%s", temp);
-
-            while (cnt < file.size && stringcompare(file.data, "\"themecreated\">By: ", cnt) != 0)
-                cnt++;
-
-            copyhtmlsting((const char *) file.data, temp, " - <", cnt);
-
-            snprintf(Theme[themescount].author, sizeof(Theme[themescount].author), "%s", temp);
-
-            while(cnt < file.size && stringcompare(file.data, "class=\"image\" src=\"", cnt) != 0)
-                cnt++;
-
-            copyhtmlsting((const char *) file.data, temp, "\" ", cnt);
-
-            Theme[themescount].imagelink = new char[strlen(temp)+1];
-
-            snprintf(Theme[themescount].imagelink, strlen(temp)+1, "%s", temp);
-
-            if (strncmp(Theme[themescount].imagelink, "http://", strlen("http://")) != 0)
-                Theme[themescount].direct[0] = false;
-            else
-                Theme[themescount].direct[0] = true;
-
-            while(cnt < file.size && stringcompare(file.data, "href=\"getfile.php", cnt+strlen("getfile.php")) != 0)
-                cnt++;
-
-            copyhtmlsting((const char *) file.data, temp, "\">", cnt);
-
-            Theme[themescount].downloadlink = new char[strlen(temp)+1];
-
-            snprintf(Theme[themescount].downloadlink, strlen(temp)+1, "%s", temp);
-
-            if (strncmp(Theme[themescount].downloadlink, "http://", strlen("http://")) != 0)
-                Theme[themescount].direct[1] = false;
-            else
-                Theme[themescount].direct[1] = true;
-
-            themescount++;
-        }
-
-        if(stringcompare(file.data, "/themes.php?creator=&sort=1&page=", cnt) == 0)
-        {
-            copyhtmlsting((const char *) file.data, temp, "class", cnt);
-            int currentvalue = atoi(temp);
-
-            if(currentvalue > sitepages);
-                sitepages = currentvalue;
-        }
-
-        cnt++;
-    }
+	ParseXML(file.data);
 
     free(file.data);
 }
@@ -167,17 +85,111 @@ Theme_List::~Theme_List()
 {
     for (int i = 0; i < themescount; i++)
     {
+        if(Theme[i].themetitle)
+            delete [] Theme[i].themetitle;
+        if(Theme[i].author)
+            delete [] Theme[i].author;
         if(Theme[i].imagelink)
             delete [] Theme[i].imagelink;
-        if(Theme[i].imagelink)
+        if(Theme[i].downloadlink)
             delete [] Theme[i].downloadlink;
+        Theme[i].themetitle = NULL;
+        Theme[i].author = NULL;
         Theme[i].imagelink = NULL;
         Theme[i].downloadlink = NULL;
     }
 
     if(Theme)
-        free(Theme);
+        delete [] Theme;
     Theme = NULL;
+}
+
+
+int Theme_List::CountThemes(const u8 * xmlfile)
+{
+	char tmp[200];
+	u32 cnt = 0;
+	u32 stringlength = strlen((const char *) xmlfile);
+	memset(tmp, 0, sizeof(tmp));
+
+	while (cnt < stringlength)
+	{
+		if (stringcompare(xmlfile, "<totalthemes>", cnt) == 0)
+		{
+			copyhtmlsting((const char *) xmlfile, tmp, ">", cnt);
+			break;
+		}
+		cnt++;
+	}
+	tmp[cnt+1] = 0;
+
+	return atoi(tmp);
+}
+
+bool Theme_List::ParseXML(const u8 * xmlfile)
+{
+	char element_text[1024];
+	memset(element_text, 0, sizeof(element_text));
+	mxml_node_t *nodetree=NULL;
+	mxml_node_t *nodedata=NULL;
+	mxml_node_t *nodeid=NULL;
+	mxml_index_t *nodeindex=NULL;
+
+	nodetree = mxmlLoadString(NULL, (const char *) xmlfile, MXML_OPAQUE_CALLBACK);
+
+    if (nodetree == NULL)
+	{
+        return false;
+	}
+
+    nodedata = mxmlFindElement(nodetree, nodetree, "themes", NULL, NULL, MXML_DESCEND);
+    if (nodedata == NULL)
+	{
+        return false;
+    }
+
+    nodeindex = mxmlIndexNew(nodedata,"name", NULL);
+    nodeid = mxmlIndexReset(nodeindex);
+
+	Theme = new Theme_Info[themescount];
+	memset(Theme, 0, sizeof(Theme));
+
+	for (int i = 0; i < themescount; i++)
+	{
+		nodeid = mxmlIndexFind(nodeindex,"name", NULL);
+        if (nodeid != NULL)
+        {
+			get_nodetext(nodeid, element_text, sizeof(element_text));
+            Theme[i].themetitle = new char[strlen(element_text)+2];
+            snprintf(Theme[i].themetitle,strlen(element_text)+1, "%s", element_text);
+
+			GetTextFromNode(nodeid, nodedata, (char *) "creator", NULL, NULL, MXML_NO_DESCEND, element_text,sizeof(element_text));
+            Theme[i].author = new char[strlen(element_text)+2];
+            snprintf(Theme[i].author,strlen(element_text)+1, "%s", element_text);
+
+			GetTextFromNode(nodeid, nodedata, (char *) "thumbpath", NULL, NULL, MXML_NO_DESCEND, element_text,sizeof(element_text));
+            Theme[i].imagelink = new char[strlen(element_text)+2];
+            snprintf(Theme[i].imagelink,strlen(element_text)+1, "%s", element_text);
+
+			GetTextFromNode(nodeid, nodedata, (char *) "downloadpath", NULL, NULL, MXML_NO_DESCEND, element_text,sizeof(element_text));
+            Theme[i].downloadlink = new char[strlen(element_text)+2];
+            snprintf(Theme[i].downloadlink,strlen(element_text)+1, "%s", element_text);
+
+			GetTextFromNode(nodeid, nodedata, (char *) "averagerating", NULL, NULL, MXML_NO_DESCEND, element_text,sizeof(element_text));
+            Theme[i].rating = atoi(element_text);
+		}
+	}
+
+	nodetree=NULL;
+	nodedata=NULL;
+	nodeid=NULL;
+	nodeindex=NULL;
+    mxmlIndexDelete(nodeindex);
+	free(nodetree);
+	free(nodedata);
+	free(nodeid);
+
+    return true;
 }
 
 const char * Theme_List::GetThemeTitle(int ind)
@@ -215,27 +227,6 @@ const char * Theme_List::GetDownloadLink(int ind)
 int Theme_List::GetThemeCount()
 {
     return themescount;
-}
-
-int Theme_List::GetSitepageCount()
-{
-    return sitepages;
-}
-
-bool Theme_List::IsDirectImageLink(int ind)
-{
-    if (ind > themescount || ind < 0 || !Theme || themescount <= 0)
-        return false;
-    else
-        return Theme[ind].direct[0];
-}
-
-bool Theme_List::IsDirectDownloadLink(int ind)
-{
-    if (ind > themescount || ind < 0 || !Theme || themescount <= 0)
-        return false;
-    else
-        return Theme[ind].direct[1];
 }
 
 static int ListCompare(const void *a, const void *b)

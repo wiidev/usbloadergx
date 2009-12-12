@@ -61,7 +61,7 @@ static mxml_node_t *nodefound=NULL;
 static mxml_index_t *nodeindex=NULL;
 static mxml_index_t *nodeindextmp=NULL;
 int xmlloadtime = 0;
-static char * get_text(mxml_node_t *node, char *buffer, int buflen);
+char * get_nodetext(mxml_node_t *node, char *buffer, int buflen);
 bool xml_loaded = false;
 
 
@@ -111,7 +111,7 @@ void GetTextFromNode(mxml_node_t *currentnode, mxml_node_t *topnode, char *noden
         if (attributename != NULL) {
             strlcpy(dest,mxmlElementGetAttr(nodefound, attributename),destsize);
         } else {
-            get_text(nodefound, element_text, sizeof(element_text));
+            get_nodetext(nodefound, element_text, sizeof(element_text));
             strlcpy(dest,element_text,destsize);
         }
     } else {
@@ -308,7 +308,7 @@ void LoadTitlesFromXML(char *langtxt, bool forcejptoen)
             strcpy(title_text,"");
             strcpy(title_text_EN,"");
 
-            get_text(nodeid, element_text, sizeof(element_text));
+            get_nodetext(nodeid, element_text, sizeof(element_text));
             snprintf(id_text, 7, "%s",element_text);
 
             // if language is not forced, use game language setting from config
@@ -402,7 +402,7 @@ bool LoadGameInfoFromXML(char* gameid, char* langtxt)
     while (1) {
         nodeid = mxmlIndexFind(nodeindex,"id", NULL);
         if (nodeid != NULL) {
-            get_text(nodeid, element_text, sizeof(element_text));
+            get_nodetext(nodeid, element_text, sizeof(element_text));
             if (!strcmp(element_text,gameid)) {
                 break;
             }
@@ -718,8 +718,8 @@ char *MemInfo() {
 
 
 /*-------------------------------------------------------------------------------------*/
-/* get_text() - Get the text for a node, taken from mini-mxml example mxmldoc.c */
-static char * get_text(mxml_node_t *node, char *buffer, int buflen) { /* O - Text in node, I - Node to get, I - Buffer, I - Size of buffer */
+/* get_nodetext() - Get the text for a node, taken from mini-mxml example mxmldoc.c */
+char * get_nodetext(mxml_node_t *node, char *buffer, int buflen) { /* O - Text in node, I - Node to get, I - Buffer, I - Size of buffer */
     char *ptr, *end;	/* Pointer into buffer, End of buffer */
     int len;	/* Length of node */
     mxml_node_t *current;	/* Current node */
@@ -760,7 +760,7 @@ int GetRatingForGame(char *gameid)
     while (1) {
         nodeid = mxmlIndexFind(nodeindex,"id", NULL);
         if (nodeid != NULL) {
-            get_text(nodeid, element_text, sizeof(element_text));
+            get_nodetext(nodeid, element_text, sizeof(element_text));
             if (!strcmp(element_text,gameid)) {
                 break;
             }

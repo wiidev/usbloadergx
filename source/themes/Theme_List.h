@@ -11,11 +11,11 @@
 
 typedef struct _theme_info
 {
-    char    themetitle[100];
-    char    author[50];
+    char    *themetitle;
+    char    *author;
     char    *imagelink;
     char    *downloadlink;
-    bool    direct[2];
+    u8      rating;
 } Theme_Info;
 
 
@@ -27,6 +27,10 @@ class Theme_List
         Theme_List(const char *url);
         //!Destructor
         ~Theme_List();
+        //!Get Themes into a struct from the XML file amount
+        bool ParseXML(const u8 * xmlfile);
+        //!Get Theme amount
+        int CountThemes(const u8 * xmlfile);
         //! Get the a theme title
         //!\param list index
         const char * GetThemeTitle(int index);
@@ -39,19 +43,12 @@ class Theme_List
         //! Get the download link of the theme
         //!\param list index
         const char * GetDownloadLink(int index);
-        //! Is it a direct URL or just a file or path under the main url
-        bool IsDirectImageLink(int index);
-        //! Is it a direct URL or just a file or path under the main url
-        bool IsDirectDownloadLink(int index);
         //! Get the number of links counted
         int GetThemeCount();
-        //! Get the number of pages counted on which there are Themes
-        int GetSitepageCount();
         //! Sort list
         void SortList();
     protected:
         int themescount;
-        int sitepages;
         Theme_Info *Theme;
 };
 

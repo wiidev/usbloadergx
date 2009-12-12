@@ -66,7 +66,8 @@ extern "C" {
     void GetTextFromNode(mxml_node_t *currentnode, mxml_node_t *topnode, char *nodename,
                          char *attributename, char *value, int descend, char *dest, int destsize);
 	int GetRatingForGame(char *gameid);
-	
+	char * get_nodetext(mxml_node_t *node, char *buffer, int buflen);
+
 #ifdef __cplusplus
 }
 #endif
