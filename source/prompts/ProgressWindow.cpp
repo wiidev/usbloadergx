@@ -253,7 +253,7 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
     int tmp;
     while (showProgress) {
 
-        usleep(20000);
+        VIDEO_WaitVSync();
 
         GameInstallProgress();
 

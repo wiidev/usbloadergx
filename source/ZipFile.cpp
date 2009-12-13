@@ -64,7 +64,7 @@ bool ZipFile::ExtractAll(const char *dest)
     bool Stop = false;
 
     u32 blocksize = 1024*50;
-    void *buffer = malloc(blocksize);
+    u8 *buffer = new u8[blocksize];
 
     if(!buffer)
         return false;
@@ -131,7 +131,7 @@ bool ZipFile::ExtractAll(const char *dest)
             Stop = true;
     }
 
-    free(buffer);
+    delete [] buffer;
     buffer = NULL;
 
     ProgressStop();

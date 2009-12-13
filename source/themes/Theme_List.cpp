@@ -180,14 +180,14 @@ bool Theme_List::ParseXML(const u8 * xmlfile)
 		}
 	}
 
-	nodetree=NULL;
-	nodedata=NULL;
-	nodeid=NULL;
-	nodeindex=NULL;
     mxmlIndexDelete(nodeindex);
 	free(nodetree);
 	free(nodedata);
 	free(nodeid);
+	nodetree=NULL;
+	nodedata=NULL;
+	nodeid=NULL;
+	nodeindex=NULL;
 
     return true;
 }
