@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# italian.lang - v52 - r848
+# italian.lang - v53 - r859
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-11 01:02+0100\n"
+"POT-Creation-Date: 2009-12-12 20:22+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe, Cambo\n"
@@ -126,7 +126,7 @@ msgid "AUTO"
 msgstr "Automatico"
 
 msgid "All partitions"
-msgstr ""
+msgstr "Tutte le partizioni"
 
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "Tutte le funzioni di USB Loader GX sono sbloccate."
@@ -147,7 +147,7 @@ msgid "Apr"
 msgstr "aprile"
 
 msgid "Are you sure you want to enable Parent Control?"
-msgstr ""
+msgstr "Sei sicuro di voler attivare il Controllo Genitori?"
 
 msgid "Are you sure?"
 msgstr "Sei sicuro?"
@@ -171,7 +171,7 @@ msgid "BCA Codes Path changed"
 msgstr "Percorso Codici BCA modificato"
 
 msgid "BETA revisions"
-msgstr ""
+msgstr "Versioni BETA"
 
 msgid "Back"
 msgstr "Indietro"
@@ -225,7 +225,7 @@ msgid "Can't find disc"
 msgstr "Impossibile trovare il disco"
 
 msgid "Cancel"
-msgstr "Cancella"
+msgstr "Annulla"
 
 msgid "Channels"
 msgstr "Canali"
@@ -263,6 +263,9 @@ msgstr "Sviluppo:"
 
 msgid "Confirm"
 msgstr "Confermare"
+
+msgid "Connection lost..."
+msgstr ""
 
 msgid "Console"
 msgstr "Terminale"
@@ -475,7 +478,7 @@ msgid "ERROR:"
 msgstr "ERRORE:"
 
 msgid "Enable Parental Control"
-msgstr ""
+msgstr "Attiva Controllo Genitori"
 
 msgid "English"
 msgstr "Inglese"
@@ -583,7 +586,7 @@ msgid "Game is already installed:"
 msgstr "Gioco già installato:"
 
 msgid "Game partition"
-msgstr ""
+msgstr "Partizione gioco"
 
 msgid "Games"
 msgstr "Giochi"
@@ -654,7 +657,7 @@ msgid "Install"
 msgstr "Installa"
 
 msgid "Install 1:1 Copy"
-msgstr ""
+msgstr "Installa copia 1:1"
 
 msgid "Install Error!"
 msgstr "Errore Installazione!"
@@ -663,7 +666,7 @@ msgid "Install a game"
 msgstr "Installa un gioco"
 
 msgid "Install partitions"
-msgstr ""
+msgstr "Installa partizioni"
 
 msgid "Installing content... Ok!"
 msgstr "Sto installando il contenuto... Ok!"
@@ -681,7 +684,7 @@ msgid "Installing wad"
 msgstr "Sto installando il WAD"
 
 msgid "Invalid PIN code"
-msgstr ""
+msgstr "Codice PIN non valido"
 
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
 msgstr "Hai informazioni che potrebbero esserci utili. Per favore, comunicale al team di sviluppo."
@@ -886,7 +889,7 @@ msgid "Parental Control"
 msgstr "Controllo Genitori"
 
 msgid "Parental Control disabled"
-msgstr ""
+msgstr "Controllo Genitori disabilitato"
 
 msgid "Partition"
 msgstr "Partizione"
@@ -1143,7 +1146,7 @@ msgid "Uninstalling wad"
 msgstr "Disinstalla WAD"
 
 msgid "Unlock Parental Control"
-msgstr ""
+msgstr "Sblocca Controllo Genitori"
 
 msgid "Unlock console to use this option."
 msgstr "Sblocca la Console per usare questa opzione."
@@ -1252,7 +1255,7 @@ msgid "You are choosing to display favorites and you do not have any selected."
 msgstr "Hai scelto di visualizzare i preferiti e non ne hai selezionato nessuno"
 
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
-msgstr ""
+msgstr "Il Controllo Genitori non è attivo. Se vuoi utilizzare il Controllo Genitori abilitalo nelle Impostazioni della Wii."
 
 msgid "You have attempted to load a bad image"
 msgstr "Hai tentato di caricare un'immagine non valida"

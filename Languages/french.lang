@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# French V11.6 r853
+# French V11.7 r863
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-10 17:48-0500\n"
+"POT-Creation-Date: 2009-12-12 20:22+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Kin8\n"
 "Language-Team: Badablek, Amour, ikya, dj_skual & Kin8\n"
@@ -263,6 +263,9 @@ msgstr "Développement:"
 
 msgid "Confirm"
 msgstr "Confirmer"
+
+msgid "Connection lost..."
+msgstr "Connexion perdue..."
 
 msgid "Console"
 msgstr ""

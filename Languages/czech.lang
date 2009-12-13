@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-10 17:48-0500\n"
+"POT-Creation-Date: 2009-12-12 20:22+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) \n"
 "Language-Team: r823 - last version on http://djelinek.sweb.cz/_USBLoderGX/czech.lang \n"
@@ -263,6 +263,9 @@ msgstr "Programování:"
 
 msgid "Confirm"
 msgstr "Potvrdit"
+
+msgid "Connection lost..."
+msgstr ""
 
 msgid "Console"
 msgstr "Konzole"
