@@ -423,7 +423,8 @@ main(int argc, char *argv[]) {
 	//its not really a headless mode.  more like hairless.
 	if (argc > 1 && argv[1])
 	{
-		strncpy(headlessID, argv[1], sizeof(headlessID));
+		if (strlen(argv[1])==6)
+			strncpy(headlessID, argv[1], sizeof(headlessID));
 	}
 
     //! Init the rest of the System

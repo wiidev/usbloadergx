@@ -145,10 +145,8 @@ int MenuCheck() {
     //Spieleliste laden
     __Menu_GetEntries(0);
 
-    //THIS SHIT MAKES THE LOADER NOT RUN FROM SENDELF
-    //Think of something else pune.
-	//if (strcmp(headlessID,"")!=0)
-		//menu = MENU_EXIT;
+    if (strcmp(headlessID,"")!=0)
+		menu = MENU_EXIT;
 
     if (menu == MENU_NONE)
         menu = MENU_DISCLIST;

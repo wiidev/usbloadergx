@@ -22,6 +22,7 @@
 #include "sys.h"
 #include "network/http.h"
 #include "ZipFile.h"
+#include "gecko.h"
 
 /*** Extern functions ***/
 extern void ResumeGui();
@@ -127,6 +128,7 @@ bool DownloadTheme(const char *url, const char *title)
 
 static void Theme_Prompt(const char *title, const char *author, GuiImageData *thumbimageData, const char *downloadlink)
 {
+    gprintf("\nTheme_Prompt(%s ,%s, <DATA>, %s)",title,author,downloadlink);
     bool leave = false;
 
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
@@ -261,7 +263,9 @@ int Theme_Downloader()
     int menu = MENU_NONE;
     bool listchanged = false;
 
-    const char THEME_LINK[70] = "http://wii.spiffy360.com/themes.php?xml=1&category=1&adult=0";
+    char THEME_LINK[70];
+    sprintf(THEME_LINK, "http://wii.spiffy360.com/themes.php?xml=1&category=1&adult=%d", Settings.godmode);
+    //gprintf("\nTHEME_LINK: %s", THEME_LINK);
     //const char THEME_LINK_ADULT[70] = "http://wii.spiffy360.com/themes.php?xml=1&category=1&adult=1";
 
     /*** Sound Variables ***/
