@@ -392,7 +392,7 @@ int MenuDiscList() {
 	if(unlockBtnImg_g.GetImage() == NULL) { unlockBtnImg_g = unlockBtnImg; unlockBtnImg_g.SetGrayscale(); }
 	unlockBtnImg_g.SetWidescreen(CFG.widescreen);
 
-	if (canUnlock && Settings.parental.is_unlocked)
+	if (canUnlock && Settings.godmode)
 	{
 		lockBtn.SetImage(&unlockBtnImg_g);
 		lockBtn.SetImageOver(&unlockBtnImg_g);
@@ -1103,9 +1103,9 @@ int MenuDiscList() {
 			if (!canUnlock) {
 				WindowPrompt(tr("Parental Control"), tr("You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."), tr("OK"));
 			} else {
-				if (Settings.parental.is_unlocked) {
+				if (Settings.godmode) {
 					if (WindowPrompt(tr("Parental Control"), tr("Are you sure you want to enable Parent Control?"), tr("Yes"), tr("No")) == 1) {
-						Settings.parental.is_unlocked = 0;
+						Settings.godmode = 0;
 						lockBtn.SetImage(&lockBtnImg_g);
 						lockBtn.SetImageOver(&lockBtnImg_g);
 						lockBtn.SetToolTip(&lockBtnTT, 15, 52, 1, 3);
@@ -1122,7 +1122,7 @@ int MenuDiscList() {
 					
 					if (ret == 1) {
 						if (memcmp(pin, Settings.parental.pin, 4) == 0) {
-							Settings.parental.is_unlocked = 1;
+							Settings.godmode = 1;
 							lockBtn.SetImage(&unlockBtnImg_g);
 							lockBtn.SetImageOver(&unlockBtnImg_g);
 							lockBtn.SetToolTip(&unlockBtnTT, 15, 52, 1, 3);

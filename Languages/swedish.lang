@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-12 20:22+0100\n"
+"POT-Creation-Date: 2009-12-13 17:09+0100\n"
 "PO-Revision-Date: 2009-11-24 22:11+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -1208,6 +1208,12 @@ msgstr ""
 
 msgid "Video Mode"
 msgstr "Video-läge"
+
+msgid "WIP Patches Path"
+msgstr ""
+
+msgid "WIP Patches Path changed"
+msgstr ""
 
 msgid "Waiting for USB Device"
 msgstr "Väntar på USB-enhet"

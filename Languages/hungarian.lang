@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-12 20:22+0100\n"
+"POT-Creation-Date: 2009-12-13 17:09+0100\n"
 "PO-Revision-Date: 2009-12-01 13:23+0100\n"
 "Last-Translator: Springdale\n"
 "Language-Team: Tusk, Springdale\n"
@@ -1208,6 +1208,12 @@ msgstr "Verzió: %s"
 
 msgid "Video Mode"
 msgstr "Videó Mód"
+
+msgid "WIP Patches Path"
+msgstr ""
+
+msgid "WIP Patches Path changed"
+msgstr ""
 
 msgid "Waiting for USB Device"
 msgstr "Várakozás az USB Meghajtóra"

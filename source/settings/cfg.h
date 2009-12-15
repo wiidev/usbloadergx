@@ -386,7 +386,6 @@ extern "C" {
 		u8 pin[4];
 		u8 question;
 		wchar_t answer[32]; // IS WCHAR!
-		u8 is_unlocked;
 	};
 	struct SSettings {
 		u8      video;
@@ -433,6 +432,8 @@ extern "C" {
 		char    selected_homebrew[200];
 		char	Cheatcodespath[100];
 		char	TxtCheatcodespath[100];
+		char	BcaCodepath[100];
+		char	WipCodepath[100];
 		short   error002;
 		u8		titlesOverride; // db_titles
 		char	db_url[200];
@@ -443,7 +444,6 @@ extern "C" {
 		u8		discart;
 		short   gamesound;
 		u8		marknewtitles;
-		char	BcaCodepath[100];
 		u8		FatInstallToDir;
 		u8		partitions_to_install;
 		u8		fullcopy;

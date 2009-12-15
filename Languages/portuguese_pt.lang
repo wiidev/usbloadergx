@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-12 20:22+0100\n"
+"POT-Creation-Date: 2009-12-13 17:09+0100\n"
 "PO-Revision-Date: 2009-12-04 16:16-0000\n"
 "Last-Translator: Sky8000\n"
 "Language-Team: Sky8000 <sky8000@hotmail.com>\n"
@@ -1208,6 +1208,12 @@ msgstr "Versão: %s"
 
 msgid "Video Mode"
 msgstr "Modo de Vídeo"
+
+msgid "WIP Patches Path"
+msgstr ""
+
+msgid "WIP Patches Path changed"
+msgstr ""
 
 msgid "Waiting for USB Device"
 msgstr "Aguardando pelo Dispositivo USB"

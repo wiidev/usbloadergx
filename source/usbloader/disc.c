@@ -282,13 +282,26 @@ s32 Disc_BootPartition(u64 offset, u8 videoselected, u8 cheat, u8 vipatch, u8 pa
     if (ret < 0)
         return ret;
 
+	char gameid[8];
+	memset(gameid, 0, 8);
+	memcpy(gameid, (char*)Disc_ID, 6);
+
+    if (cheat == 1) {
+        /* OCARINA STUFF - FISHEARS*/
+        do_sd_code(gameid);
+    }
+
+    /* Setup low memory */
+    __Disc_SetLowMem();
+
     /* Run apploader */
     ret = Apploader_Run(&p_entry, cheat, videoselected, vipatch, patchcountrystring, error002fix, alternatedol, alternatedoloffset);
     if (ret < 0)
         return ret;
 
-    /* Setup low memory */
-    __Disc_SetLowMem();
+	//kill the USB and SD
+	USBDevice_deInit();
+    SDCard_deInit();
 
     /* Set an appropiate video mode */
     __Disc_SetVMode(videoselected);
@@ -296,29 +309,25 @@ s32 Disc_BootPartition(u64 offset, u8 videoselected, u8 cheat, u8 vipatch, u8 pa
     /* Set time */
     __Disc_SetTime();
 
-    if (cheat == 1) {
-        char gameid[8];
-        /* OCARINA STUFF - FISHEARS*/
-        memset(gameid, 0, 8);
-        memcpy(gameid, (char*)Disc_ID, 6);
-        do_sd_code(gameid);
-        /* OCARINA STUFF - FISHEARS*/
-    }
-	
-	//kill the USB and SD
-	USBDevice_deInit();
-    SDCard_deInit();
-
     //gprintf("\n\tDe-init SD & USB");
 
     /* Disconnect Wiimote */
     WPAD_Flush(0);
     WPAD_Disconnect(0);
     WPAD_Shutdown();
+
+	// Anti-green screen fix
+	VIDEO_SetBlack(TRUE);
+	VIDEO_Flush();
+	VIDEO_WaitVSync();
 	gprintf("\n\nUSB Loader GX is done.\n\n");
 
     /* Shutdown IOS subsystems */
-    SYS_ResetSystem(SYS_SHUTDOWN, 0, 0);
+	// fix for PeppaPig (from NeoGamma)
+	extern void __exception_closeall();
+	IRQ_Disable();
+	__IOS_ShutdownSubsystems();
+	__exception_closeall();
 
     /* Jump to entry point */
     p_entry();

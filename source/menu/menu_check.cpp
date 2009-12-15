@@ -65,7 +65,8 @@ int MenuCheck() {
 
 		if (Settings.partition != -1 && partitions.num > Settings.partition) {
 			PartInfo pinfo = partitions.pinfo[Settings.partition];
-			ret2 = WBFS_OpenPart(pinfo.fs_type == FS_TYPE_FAT32, pinfo.fat_i, partitions.pentry[Settings.partition].sector, partitions.pentry[Settings.partition].size, (char *) &game_partition);
+			int index = pinfo.fs_type == FS_TYPE_FAT32 ? pinfo.fat_i : pinfo.wbfs_i;
+			ret2 = WBFS_OpenPart(pinfo.fs_type == FS_TYPE_FAT32, index, partitions.pentry[Settings.partition].sector, partitions.pentry[Settings.partition].size, (char *) &game_partition);
 
 			if (ret2 == 0)
 			{
@@ -85,6 +86,7 @@ int MenuCheck() {
 		} else if (Sys_IsHermes() && partitions.fat_n != 0) {
 			// Loop through FAT partitions, and find the first partition with games on it (if there is one)
 			u32 count;
+			
 			for (int i = 0; i < partitions.num; i++) {
 				if (partitions.pinfo[i].fs_type == FS_TYPE_FAT32) {
 					if (!WBFS_OpenPart(1, partitions.pinfo[i].fat_i, partitions.pentry[i].sector, partitions.pentry[i].size, (char *) &game_partition)) {

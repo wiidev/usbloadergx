@@ -1159,22 +1159,24 @@ int MenuSettings()
 								if(firstRun) options2.SetName(Idx, "%s",tr("Console"));
 								if(ret == Idx)
 								{
-									if (!strcmp("", Settings.unlockCode))
+									if (!strcmp("", Settings.unlockCode) && Settings.parental.enabled == 0)
 									{
 										Settings.godmode = !Settings.godmode;
 									}
 									else if ( Settings.godmode == 0 )
 									{
+										char entered[20];
+										memset(entered, 0, 20);
+										
 										//password check to unlock Install,Delete and Format
 										w.Remove(&optionBrowser2);
 										w.Remove(&backBtn);
-										char entered[20] = "";
-										int result = OnScreenKeyboard(entered, 20,0);
+										int result = Settings.parental.enabled == 0 ? OnScreenKeyboard(entered, 20,0) : OnScreenNumpad(entered, 5);
 										w.Append(&optionBrowser2);
 										w.Append(&backBtn);
 										if ( result == 1 )
 										{
-											if (!strcmp(entered, Settings.unlockCode)) { //if password correct
+											if (!strcmp(entered, Settings.unlockCode) || !memcmp(entered, Settings.parental.pin, 4)) { //if password correct
 												if (Settings.godmode == 0)
 												{
 													WindowPrompt(tr("Correct Password"),tr("All the features of USB Loader GX are unlocked."),tr("OK"));
@@ -1885,6 +1887,34 @@ int MenuSettings()
 										}
 									}
 									options2.SetValue(Idx, "%s", Settings.BcaCodepath);
+								}
+								
+								if(ret == ++Idx || firstRun)
+								{
+									if(firstRun) options2.SetName(Idx, "%s", tr("WIP Patches Path"));
+									if(ret == Idx)
+									{
+										w.Remove(&optionBrowser2);
+										w.Remove(&backBtn);
+										char entered[100] = "";
+										strlcpy(entered, Settings.WipCodepath, sizeof(entered));
+										titleTxt.SetText(tr("WIP Patches Path"));
+										int result = BrowseDevice(entered, sizeof(entered), FB_DEFAULT, noFILES);
+										titleTxt.SetText(tr("Custom Paths"));
+										w.Append(&optionBrowser2);
+										w.Append(&backBtn);
+										if ( result == 1 )
+										{
+											int len = (strlen(entered)-1);
+											if (entered[len] !='/')
+												strncat (entered, "/", 1);
+											strlcpy(Settings.WipCodepath, entered, sizeof(Settings.WipCodepath));
+											WindowPrompt(tr("WIP Patches Path changed"),0,tr("OK"));
+											if (!isInserted(bootDevice))
+												WindowPrompt(tr("No SD-Card inserted!"),tr("Insert an SD-Card to save."),tr("OK"));
+										}
+									}
+									options2.SetValue(Idx, "%s", Settings.WipCodepath);
 								}
 
 								firstRun = false;

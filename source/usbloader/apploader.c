@@ -13,6 +13,7 @@
 #include "fstfile.h"
 #include "settings/cfg.h"
 #include "gecko.h"
+#include "patches/wip.h"
 
 /*KENOBI! - FISHEARS*/
 extern const unsigned char kenobiwii[];
@@ -344,6 +345,11 @@ void gamepatches(void * dst, int len, u8 videoSelected, u8 patchcountrystring, u
         PatchCountryStrings(dst, len);
 
     NewSuperMarioBrosPatch(dst, len);
+	
+	gprintf("\nLoading WIP Patch...");
+	u32 ret = do_wip_code((u8 *)0x80000000);
+	gprintf("done\n", ret);
+
 
     //if(Settings.anti002fix == on)
     if (fix002 == 2)

@@ -38,6 +38,7 @@
 #include "../gecko.h"
 #include "mload/mload.h"
 #include "mload/dip_plugin.h"
+#include "patches/wip.h"
 
 extern struct SSettings Settings;
 

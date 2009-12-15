@@ -202,6 +202,7 @@ void CFG_Default(int widescreen) { // -1 = non forced Mode
         snprintf(Settings.Cheatcodespath, sizeof(Settings.Cheatcodespath), "%s/codes/", bootDevice);
         snprintf(Settings.TxtCheatcodespath, sizeof(Settings.TxtCheatcodespath), "%s/txtcodes/", bootDevice);
 		snprintf(Settings.BcaCodepath, sizeof(Settings.BcaCodepath), "%s/bca/", bootDevice);
+		snprintf(Settings.WipCodepath, sizeof(Settings.WipCodepath), "%s/wip/", bootDevice);
         snprintf(Settings.dolpath, sizeof(Settings.dolpath), "%s/", bootDevice);
         sprintf(Settings.ogg_path, "notset");
 	}
@@ -247,7 +248,6 @@ void CFG_Default(int widescreen) { // -1 = non forced Mode
 	THEME.clock_align = CFG_ALIGN_CENTRE;
 	THEME.clock_x = 0;
 	THEME.clock_y = 335;//330;
-
 
 	THEME.info = (GXColor) {55, 190, 237, 255};
 	THEME.show_hddinfo = 1; //default
@@ -343,7 +343,7 @@ void Global_Default(void) {
     Settings.tooltips = TooltipsOn;
     char * empty = "";
     snprintf(Settings.unlockCode, sizeof(Settings.unlockCode), empty);
-    Settings.godmode = 1;
+//    Settings.godmode = 1;
     Settings.gamesound = 1;
     Settings.parentalcontrol = 0;
     Settings.cios = ios249;
@@ -381,9 +381,7 @@ void Global_Default(void) {
 		memcpy(Settings.parental.pin, buf + 3, 4);
 		memcpy(Settings.parental.answer, buf + 8, 32);
 	}
-	if (Settings.parental.enabled == 0) {
-		Settings.parental.is_unlocked = 1;
-	}
+	Settings.godmode = (Settings.parental.enabled == 0) ? 1 : 0;
 }
 
 
@@ -573,6 +571,10 @@ void path_set(char *name, char *val) {
     }
     if (strcmp(name, "BcaCodepath") == 0) {
         strlcpy(Settings.BcaCodepath, val, sizeof(Settings.BcaCodepath));
+        return;
+    }
+    if (strcmp(name, "WipCodepath") == 0) {
+        strlcpy(Settings.WipCodepath, val, sizeof(Settings.WipCodepath));
         return;
     }
 
@@ -1343,11 +1345,6 @@ bool cfg_save_global() { // save global settings
     fprintf(f, "oggload_path = %s\n ", Settings.oggload_path);
     fprintf(f, "TxtCheatcodespath = %s\n ", Settings.TxtCheatcodespath);
     fprintf(f, "titlestxt_path = %s\n ", Settings.titlestxt_path);
-    if (!strcmp("", Settings.unlockCode)) {
-        fprintf(f, "godmode = %d\n ", Settings.godmode);
-    } else {
-        fprintf(f, "godmode = %d\n ", 0);
-    }
     fprintf(f, "gamesound = %d\n ", Settings.gamesound);
     fprintf(f, "dolpath = %s\n ", Settings.dolpath);
     fprintf(f, "ogg_path = %s\n ", Settings.ogg_path);
@@ -1358,6 +1355,7 @@ bool cfg_save_global() { // save global settings
     fprintf(f, "homebrewapps_path = %s\n ", Settings.homebrewapps_path);
     fprintf(f, "Cheatcodespath = %s\n ", Settings.Cheatcodespath);
 	fprintf(f, "BcaCodepath = %s\n", Settings.BcaCodepath);
+	fprintf(f, "WipCodepath = %s\n", Settings.WipCodepath);
     fprintf(f, "titlesOverride = %d\n ", Settings.titlesOverride);
     //fprintf(f, "db_url = %s\n ", Settings.db_url);
     //fprintf(f, "db_JPtoEN = %d\n ", Settings.db_JPtoEN);
