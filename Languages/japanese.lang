@@ -1,5 +1,5 @@
 # USB Loader GX language source file.
-# japanese.lang - r853
+# japanese.lang - r865
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
@@ -265,7 +265,7 @@ msgid "Confirm"
 msgstr "確認"
 
 msgid "Connection lost..."
-msgstr ""
+msgstr "接続失敗･･･"
 
 msgid "Console"
 msgstr "状態"
@@ -1210,10 +1210,10 @@ msgid "Video Mode"
 msgstr "映像の出力方法"
 
 msgid "WIP Patches Path"
-msgstr ""
+msgstr "WIPパッチのパス"
 
 msgid "WIP Patches Path changed"
-msgstr ""
+msgstr "WIPパッチのパスを変更しました"
 
 msgid "Waiting for USB Device"
 msgstr "USBﾃﾞﾊﾞｲｽの応答待ち"
@@ -1274,7 +1274,7 @@ msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 msgstr "%sWiiTDB_URL.txtにURLを保存しました"
 
 msgid "and translaters for language files updates"
-msgstr "/ K-M & papa …日本語翻訳者"
+msgstr "/ K-M & papa …日本語への翻訳"
 
 msgid "available"
 msgstr "があります"

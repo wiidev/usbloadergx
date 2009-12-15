@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# german.lang - r855
+# german.lang - r863
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-13 17:09+0100\n"
+"POT-Creation-Date: 2009-12-15 12:58+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: ZEN.13\n"
 "Language-Team: Snoozer, wishmasterf, Bertilax, ZEN.13\n"
@@ -129,9 +129,7 @@ msgid "All partitions"
 msgstr "alle Partitionen"
 
 msgid "All the features of USB Loader GX are unlocked."
-msgstr ""
-"Alle Funktionen des USB Loader GX\n"
-"sind jetzt freigeschaltet."
+msgstr "Alle Funktionen des USB Loader GX sind jetzt freigeschaltet."
 
 msgid "Alternate DOL"
 msgstr "Alternative DOL"
@@ -251,7 +249,7 @@ msgid "Clock"
 msgstr "Uhr"
 
 msgid "Close"
-msgstr "Schließen"
+msgstr "   Schließen"
 
 msgid "Code Download"
 msgstr "Cheatcodes werden heruntergeladen"
@@ -267,7 +265,7 @@ msgid "Confirm"
 msgstr "Bestätigen"
 
 msgid "Connection lost..."
-msgstr ""
+msgstr "Verbindung abgebrochen..."
 
 msgid "Console"
 msgstr "Status"
@@ -432,9 +430,7 @@ msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "Möchtest du die als richtig bekannte Alternative DOL verwenden?"
 
 msgid "Do you wish to update/download all language files?"
-msgstr ""
-"Möchtest du alle Sprachdateien\n"
-"aktualisieren/herunterladen?"
+msgstr "Möchtest du alle Sprachdateien aktualisieren/herunterladen?"
 
 msgid "Done!"
 msgstr "Fertig!"
@@ -691,10 +687,7 @@ msgid "Invalid PIN code"
 msgstr "Ungültiger PIN-Code"
 
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
-msgstr ""
-"Es scheint als ob du Informationen hast,\n"
-"die hilfreich für uns sein könnten. \n"
-" Bitte sende diese Information ans DEV Team."
+msgstr "Es scheint als ob du Informationen hast, die hilfreich für uns sein könnten. Bitte sende diese Information ans DEV Team."
 
 msgid "Italian"
 msgstr "Italienisch"
@@ -776,9 +769,7 @@ msgid "Missing files"
 msgstr "Fehlende Datei(en)"
 
 msgid "Most likely it has dimensions that are not evenly divisible by 4."
-msgstr ""
-"Höchstwahrscheinlich sind Breite und Höhe\n"
-"keine Vielfachen von 4."
+msgstr "Höchstwahrscheinlich sind Breite und Höhe keine Vielfachen von 4."
 
 msgid "Mount DVD drive"
 msgstr "Spiel im Laufwerk starten"
@@ -961,9 +952,7 @@ msgid "Reset Playcounter"
 msgstr "Spielzähler zurücksetzen"
 
 msgid "Restarting..."
-msgstr ""
-"Damit die neue Version benutzt werden kann,\n"
-"muss der Loader neu gestartet werden."
+msgstr "Damit die neue Version benutzt werden kann, muss der Loader neu gestartet werden."
 
 msgid "Return"
 msgstr "Zurück"
@@ -1092,9 +1081,7 @@ msgid "The file is not a .wad"
 msgstr "Die Datei ist keine .wad"
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."
-msgstr ""
-"Die WAD wurde installiert.\n"
-"Sie konnte aber nicht von der SD gelöscht werden."
+msgstr "Die WAD Datei wurde installiert.  Aber sie konnte nicht von der SD Karte gelöscht werden."
 
 #, c-format
 msgid "The wad installation failed with error %ld"
@@ -1140,15 +1127,11 @@ msgid "USB Loader GX is protected"
 msgstr "USB Loader GX ist jetzt geschützt"
 
 msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
-msgstr ""
-"USB Loader GX funktioniert nur mit rev4!\n"
-"Bitte versichere dich das du rev4 installiert hast!"
+msgstr "USB Loader GX funktioniert nur mit rev4! Bitte versichere dich das du rev4 installiert hast!"
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
-msgstr ""
-"Kann die WAD Datei, die gerade heruntergeladen wurde\n"
-"(%s), nicht öffnen."
+msgstr "Kann die WAD Datei, die gerade heruntergeladen wurde (%s), nicht öffnen."
 
 msgid "Uninstall"
 msgstr "Deinstallieren"
@@ -1166,9 +1149,7 @@ msgid "Unlock Parental Control"
 msgstr "Altersbeschränkung deaktivieren"
 
 msgid "Unlock console to use this option."
-msgstr ""
-"Entsperre den Loader,\n"
-"um diese Option zu nutzen."
+msgstr "Entsperre den Loader, um diese Option zu nutzen."
 
 msgid "Unlocked"
 msgstr "entsperrt"
@@ -1180,7 +1161,7 @@ msgid "Update"
 msgstr "Aktualisieren"
 
 msgid "Update All"
-msgstr "alles"
+msgstr "Alles"
 
 msgid "Update DOL"
 msgstr "Nur DOL"
@@ -1216,9 +1197,7 @@ msgid "Updating WiiTDB.zip"
 msgstr "Aktualisiere WiiTDB"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
-msgstr ""
-"Die hochgeladene ZIP Datei wurde ins\n"
-"Homebrew-Verzeichnis installiert."
+msgstr "Die hochgeladene ZIP Datei wurde ins Homebrew-Verzeichnis installiert."
 
 msgid "VIDTV Patch"
 msgstr ""
@@ -1279,12 +1258,10 @@ msgid "You are about to delete "
 msgstr "Du bist dabei zu löschen "
 
 msgid "You are choosing to display favorites and you do not have any selected."
-msgstr ""
-"Du willst Favoriten anzeigen,\n"
-"hast aber keine ausgewählt."
+msgstr "Du willst Favoriten anzeigen, hast aber keine ausgewählt."
 
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
-msgstr "Du hast die Altersbeschränkung nicht aktiviert. Wenn du sie nutzen möchstest, aktiviere sie in den Wii-Systemeinstellungen."
+msgstr "Du hast die Altersbeschränkung nicht aktiviert. Wenn du sie nutzen möchtest, aktiviere sie in den Wii-Systemeinstellungen."
 
 msgid "You have attempted to load a bad image"
 msgstr "Du hast versucht ein 'schlechtes Bild' zu laden."
@@ -1303,22 +1280,16 @@ msgid "available"
 msgstr "verfügbar"
 
 msgid "contains over 255 lines of code.  It will produce unexpected results."
-msgstr ""
-"enthält mehr als 255 Zeilen Code.\n"
-"Es wird unerwartete Ergebnisse geben."
+msgstr "enthält mehr als 255 Zeilen Code.  Es wird unerwartete Ergebnisse geben."
 
 msgid "does not exist!"
 msgstr "existiert nicht!"
 
 msgid "does not exist!  Loading game without cheats."
-msgstr ""
-"existiert nicht!\n"
-"Spiel wird ohne Cheats gestartet."
+msgstr "existiert nicht!  Spiel wird ohne Cheats gestartet."
 
 msgid "does not exist!  You Messed something up, Idiot."
-msgstr ""
-"existiert nicht!\n"
-"Du hast was falsch gemacht, Idiot."
+msgstr "existiert nicht!  Du hast was falsch gemacht, Idiot."
 
 msgid "file left"
 msgstr "Datei fehlt"

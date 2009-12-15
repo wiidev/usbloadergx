@@ -1,5 +1,5 @@
 # USB Loader GX language source file.
-# French V11.7 r863
+# French V11.8 r865
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
@@ -1210,10 +1210,10 @@ msgid "Video Mode"
 msgstr "Mode vidéo"
 
 msgid "WIP Patches Path"
-msgstr ""
+msgstr "Dossier Patchs WIP"
 
 msgid "WIP Patches Path changed"
-msgstr ""
+msgstr "Dossier Patchs WIP modifié"
 
 msgid "Waiting for USB Device"
 msgstr "Attente d'un périphérique USB"
