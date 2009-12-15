@@ -17,15 +17,11 @@
 #include <locale.h>
 #include <wiiuse/wpad.h>
 
-#include <debug.h>
+//#include <debug.h>
 extern "C" {
 extern void __exception_setreload(int t);
 }
 
-#include <gccore.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include <di/di.h>
 #include <sys/iosupport.h>
 

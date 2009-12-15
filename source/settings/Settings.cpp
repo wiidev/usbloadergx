@@ -2423,12 +2423,12 @@ int GameSettings(struct discHdr * header)
 			viChoice = Settings.vpatch;
 			if (Settings.cios == ios222)
 				iosChoice = i222;
-			else if (Settings.cios == 250)
+                        else if (Settings.cios == ios250)
 				iosChoice = i250;
 			else if (Settings.cios == ios223)
 				iosChoice = i223;
 			else 
-				iosChoice = 249;
+                                iosChoice = i249;
 			parentalcontrolChoice = 0;
 			fix002 = Settings.error002;
 			countrystrings = Settings.patchcountrystrings;
