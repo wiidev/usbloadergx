@@ -7,7 +7,7 @@
 #include "usbloader/getentries.h"
 #include "usbloader/wbfs.h"
 
-extern bool load_from_fat;
+extern int load_from_fs;
 extern char game_partition[6];
 extern char headlessID[8];
 
@@ -53,7 +53,7 @@ int MenuCheck() {
 
 	ret2 = -1;
 	memset(game_partition, 0, 6);
-	load_from_fat = false;
+	load_from_fs = -1;
 
 	extern PartList partitions;
 	// Added for slow HDD
@@ -62,15 +62,13 @@ int MenuCheck() {
 			sleep(1);
 			continue;
 		}
-
+		
 		if (Settings.partition != -1 && partitions.num > Settings.partition) {
 			PartInfo pinfo = partitions.pinfo[Settings.partition];
-			int index = pinfo.fs_type == FS_TYPE_FAT32 ? pinfo.fat_i : pinfo.wbfs_i;
-			ret2 = WBFS_OpenPart(pinfo.fs_type == FS_TYPE_FAT32, index, partitions.pentry[Settings.partition].sector, partitions.pentry[Settings.partition].size, (char *) &game_partition);
-
-			if (ret2 == 0)
+			if (WBFS_OpenPart(pinfo.part_fs, pinfo.index, partitions.pentry[Settings.partition].sector, partitions.pentry[Settings.partition].size, (char *) &game_partition) == 0)
 			{
-				load_from_fat = pinfo.fs_type == FS_TYPE_FAT32;
+				ret2 = 0;
+				load_from_fs = pinfo.part_fs;
 				break;
 			}
 		}
@@ -80,21 +78,23 @@ int MenuCheck() {
 			for (int p = 0; p < partitions.num; p++) {
 				if (partitions.pinfo[p].fs_type == FS_TYPE_WBFS) {
 					Settings.partition = p;
+					load_from_fs = PART_FS_WBFS;
 					break;
 				}
 			}
-		} else if (Sys_IsHermes() && partitions.fat_n != 0) {
-			// Loop through FAT partitions, and find the first partition with games on it (if there is one)
+		} else if (Sys_IsHermes() && (partitions.fat_n != 0 || partitions.ntfs_n != 0)) {
+			// Loop through FAT/NTFS partitions, and find the first partition with games on it (if there is one)
 			u32 count;
 			
 			for (int i = 0; i < partitions.num; i++) {
-				if (partitions.pinfo[i].fs_type == FS_TYPE_FAT32) {
-					if (!WBFS_OpenPart(1, partitions.pinfo[i].fat_i, partitions.pentry[i].sector, partitions.pentry[i].size, (char *) &game_partition)) {
+				if (partitions.pinfo[i].fs_type == FS_TYPE_FAT32 || partitions.pinfo[i].fs_type == FS_TYPE_NTFS) {
+
+					if (!WBFS_OpenPart(partitions.pinfo[i].part_fs, partitions.pinfo[i].index, partitions.pentry[i].sector, partitions.pentry[i].size, (char *) &game_partition)) {
 						// Get the game count...
 						WBFS_GetCount(&count);
 
 						if (count > 0) {
-							load_from_fat = true;
+							load_from_fs = partitions.pinfo[i].part_fs;
 							Settings.partition = i;
 							break;
 						} else {
@@ -105,19 +105,19 @@ int MenuCheck() {
 			}
 		}
 
-		if (ret2 >= 0 || load_from_fat) {
+		if (ret2 >= 0 || load_from_fs != PART_FS_WBFS) {
 			cfg_save_global();
 			break;
 		}
 		sleep(1);
 	}
-
-    if (ret2 < 0 && !load_from_fat) {
-        choice = WindowPrompt(tr("No WBFS or FAT game partition found"),tr("You need to select or format a partition"), tr("Select"), tr("Format"), tr("Return"));
+	
+    if (ret2 < 0 && load_from_fs != PART_FS_WBFS) {
+        choice = WindowPrompt(tr("No WBFS or FAT/NTFS partition found"),tr("You need to select or format a partition"), tr("Select"), tr("Format"), tr("Return"));
         if (choice == 0) {
             Sys_LoadMenu();
         } else {
-			load_from_fat = choice == 1;
+			load_from_fs = choice == 1 ? PART_FS_FAT : PART_FS_WBFS;
             menu = MENU_FORMAT;
         }
     }
@@ -136,7 +136,7 @@ int MenuCheck() {
     if (wbfsinit < 0) {
         sleep(1);
     }
-
+	
 	// open database if needed, load titles if needed
 	OpenXMLDatabase(Settings.titlestxt_path,Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true);
 

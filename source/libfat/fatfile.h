@@ -1,11 +1,11 @@
 /*
  fatfile.h
-
- Functions used by the newlib disc stubs to interface with
+ 
+ Functions used by the newlib disc stubs to interface with 
  this library
 
  Copyright (c) 2006 Michael "Chishm" Chisholm
-
+	
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
 
@@ -29,8 +29,8 @@
 */
 
 
-#ifndef __FATFILE_H
-#define __FATFILE_H
+#ifndef _FATFILE_H
+#define _FATFILE_H
 
 #include <sys/reent.h>
 #include <sys/stat.h>

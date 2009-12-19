@@ -7,7 +7,7 @@
 #include "usbloader/wbfs.h"
 #include "libwiigui/gui_customoptionbrowser.h"
 
-extern bool load_from_fat;
+extern int load_from_fs;
 extern char game_partition[6];
 
 /****************************************************************************
@@ -33,9 +33,6 @@ int MenuFormat() {
     //create the partitionlist
     for (cnt = 0; cnt < (u32) partitions.num; cnt++) {
         partitionEntry *entry = &partitions.pentry[cnt];
-		if (load_from_fat && partitions.pinfo[cnt].fs_type != FS_TYPE_FAT32) {
-			continue; // Skip non FAT partitions when fat loading is enabled.
-		}
 
         /* Calculate size in gigabytes */
         f32 size = entry->size * (partitions.sector_size / GB_SIZE);
@@ -109,10 +106,10 @@ int MenuFormat() {
             if(Settings.godmode == 1) {
                 partitionEntry *entry = &partitions.pentry[ret];
                 if (entry->size) {
-					if (load_from_fat) {
-						WBFS_OpenPart(1, partitions.pinfo[ret].fat_i, entry->sector,
+					if (load_from_fs == PART_FS_FAT) {
+						WBFS_OpenPart(partitions.pinfo[ret].part_fs, partitions.pinfo[ret].index, entry->sector,
 									  entry->size, (char *) &game_partition);
-						load_from_fat = true;
+						load_from_fs = partitions.pinfo[ret].part_fs;
 						menu = MENU_DISCLIST;
 						
 						Settings.partition = ret;

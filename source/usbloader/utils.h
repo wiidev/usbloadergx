@@ -13,6 +13,8 @@ extern "C" {
 /* Macros */
 #define round_up(x,n)	(-(-(x) & -(n)))
 
+#define SAFE_FREE(P) if(P){free(P);P=NULL;}
+
 /* Prototypes */
 u32 swap32(u32);
 

@@ -31,6 +31,8 @@
 #include "wpad.h"
 #include "settings/newtitles.h"
 #include "patches/fst.h"
+#include "usbloader/frag.h"
+#include "usbloader/wbfs.h"
 
 /*** Variables that are also used extern ***/
 GuiWindow * mainWindow = NULL;
@@ -45,7 +47,7 @@ int currentMenu;
 u8 mountMethod=0;
 
 char game_partition[6];
-bool load_from_fat;
+int load_from_fs;
 
 /*** Variables used only in the menus ***/
 GuiText * GameIDTxt = NULL;
@@ -460,10 +462,10 @@ int MainMenu(int menu) {
 		}
 
 		// When the selected ios is 249, and you're loading from FAT, reset ios to 222
-		if (load_from_fat && ios2 == 249) {
+		if (load_from_fs != PART_FS_WBFS && ios2 == 249) {
 			ios2 = 222;
 		}
-        bool onlinefix = !load_from_fat && ShutdownWC24();
+        bool onlinefix = load_from_fs != PART_FS_WBFS && ShutdownWC24();
 
 		// You cannot reload ios when loading from fat
         if (IOS_GetVersion() != ios2 || onlinefix) {
@@ -474,6 +476,14 @@ int MainMenu(int menu) {
         }
 		if (!mountMethod)
 		{
+			gprintf("\nLoading fragment list...");
+			ret = get_frag_list(header->id);
+			gprintf("%d\n", ret);
+
+			gprintf("\nSetting fragment list...");
+			ret = set_frag_list(header->id);
+			gprintf("%d\n", ret);
+		
 			ret = Disc_SetUSB(header->id);
 			if (ret < 0) Sys_BackToLoader();
 			gprintf("\n\tUSB set to game");
@@ -497,7 +507,7 @@ int MainMenu(int menu) {
 
 		if (reloadblock == on && Sys_IsHermes()) {
             patch_cios_data();
-			if (!load_from_fat) {
+			if (load_from_fs == PART_FS_WBFS) {
 				mload_close();
 			}
         }

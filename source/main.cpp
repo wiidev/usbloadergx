@@ -354,6 +354,15 @@ main(int argc, char *argv[]) {
 		printf("\n\tConfiguration file is on %s", bootDevice);
     }
 
+	// Try opening and closing the configuration file here
+	// to prevent a crash dump later on - giantpune
+	char GXGlobal_cfg[26];
+	sprintf(GXGlobal_cfg, "%s/config/GXGlobal.cfg", bootDevice);
+	FILE *fp = fopen(GXGlobal_cfg, "r");
+	if (fp) {
+		fclose(fp);
+	}
+
     gettextCleanUp();
 	printf("\n\tLoading configuration...");
     CFG_Load();

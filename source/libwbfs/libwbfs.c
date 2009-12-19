@@ -10,6 +10,9 @@
 
 #define ERROR(x) do {wbfs_error(x);goto error;}while(0)
 #define ALIGN_LBA(x) (((x)+p->hd_sec_sz-1)&(~(p->hd_sec_sz-1)))
+
+wbfs_t wbfs_iso_file;
+
 static int force_mode=0;
 void wbfs_set_force_mode(int force)
 {
@@ -217,6 +220,9 @@ void wbfs_close_disc(wbfs_disc_t*d)
 // offset is pointing 32bit words to address the whole dvd, although len is in bytes
 int wbfs_disc_read(wbfs_disc_t*d,u32 offset, u32 len, u8 *data)
 {
+	if (d->p == &wbfs_iso_file) {
+		return wbfs_iso_file_read(d, offset, data, len);
+	}
 
         wbfs_t *p = d->p;
         u16 wlba = offset>>(p->wbfs_sec_sz_s-2);
@@ -690,4 +696,71 @@ u32 wbfs_trim(wbfs_t*p)
         wbfs_sync(p);
         // os layer will truncate the file.
         return maxbl;
+}
+
+int wbfs_get_fragments(wbfs_disc_t *d, _frag_append_t append_fragment, void *callback_data)
+{
+	if (!d) return -1;
+	wbfs_t *p = d->p;
+	int src_wbs_nlb = p->wbfs_sec_sz / p->hd_sec_sz;
+	int i, ret, last = 0;
+	for( i=0; i< p->n_wbfs_sec_per_disc; i++)
+	{
+		u32 iwlba = wbfs_ntohs(d->header->wlba_table[i]);
+		if (iwlba)
+		{
+			ret = append_fragment(callback_data,
+					i * src_wbs_nlb, // offset
+					p->part_lba + iwlba * src_wbs_nlb, // sector
+					src_wbs_nlb); // count
+			if (ret) return ret; // error
+			last = i;
+		}
+	}
+	if (last < p->n_wbfs_sec_per_disc / 2) {
+		last = p->n_wbfs_sec_per_disc / 2;
+	}
+	u32 size = last * src_wbs_nlb;
+	append_fragment(callback_data, size, 0, 0); // set size
+	return 0;
+}
+
+// wrapper for reading .iso files using wbfs apis
+
+#include <unistd.h>
+#include <sys/stat.h>
+
+// offset is pointing 32bit words to address the whole dvd, although len is in bytes
+int wbfs_iso_file_read(wbfs_disc_t*d,u32 offset, u8 *data, u32 len)
+{
+	if (!d || d->p != &wbfs_iso_file) return -1;
+	int fd = (int)d->header;
+	off_t off = ((u64)offset) << 2;
+	off_t ret_off;
+	int ret;
+	ret_off = lseek(fd, off, SEEK_SET);
+	if (ret_off != off) return -1;
+	ret = read(fd, data, len);
+	if (ret != len) return -2;
+	return 0;
+}
+
+u32 wbfs_disc_sector_used(wbfs_disc_t *d, u32 *num_blk)
+{
+	if (d->p == &wbfs_iso_file) {
+		int fd = (int)d->header;
+		struct stat st;
+		if (fstat(fd, &st) == -1) return 0;
+		if (num_blk) {
+			*num_blk = (st.st_size >> 9); // in 512 units
+		}
+		return st.st_blocks; // in 512 units (can be sparse)
+	}
+	u32 last_blk;
+	u32 ret;
+	ret = wbfs_sector_used2(d->p, d->header, &last_blk);
+	if (num_blk) {
+		*num_blk = last_blk + 1;
+	}
+	return ret;
 }

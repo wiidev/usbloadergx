@@ -77,7 +77,7 @@ int InitBrowsers() {
 	char rootdir[ROOTDIRLEN];
 	for(int i=3; i<STD_MAX; i++)
 	{
-		if(strcmp(devoptab_list[i]->name, "stdnull"))
+		if(strcmp(devoptab_list[i]->name, "stdnull") && devoptab_list[i]->write_r != NULL)
 		{
 			snprintf(rootdir, sizeof(rootdir) , "%s:/", devoptab_list[i]->name);
 			if(DIR_ITER *dir = diropen(rootdir))

@@ -39,8 +39,11 @@ typedef struct {
 typedef struct
 {
 	int fs_type;
+	int part_fs;
 	int wbfs_i;  // seq wbfs part index
 	int fat_i;   // seq fat part index
+	int ntfs_i;  // seq ntfs part index
+	int index;
 } PartInfo;
 
 typedef struct
@@ -50,6 +53,7 @@ typedef struct
 	partitionEntry pentry[MAX_PARTITIONS_EX];
 	int wbfs_n;
 	int fat_n;
+	int ntfs_n;
 	PartInfo pinfo[MAX_PARTITIONS_EX];
 } PartList;
 

@@ -398,7 +398,7 @@ void WindowCredits() {
     i++;
     y+=22;
 
-    sprintf(text, "Oggzee %s", tr("for FAT support"));
+    sprintf(text, "Oggzee %s", tr("for FAT/NTFS support"));
     txt[i] = new GuiText(text);
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     txt[i]->SetPosition(60,y);

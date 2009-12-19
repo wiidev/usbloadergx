@@ -16,11 +16,15 @@ extern "C" {
 	#define WBFS_MIN_DEVICE		1
 	#define WBFS_MAX_DEVICE		2
 
+	#define PART_FS_WBFS 0
+	#define PART_FS_FAT  1
+	#define PART_FS_NTFS 2
+
 	extern s32 wbfsDev;
-	extern int wbfs_part_fat;
+	extern int wbfs_part_fs;
 	extern u32 wbfs_part_idx;
 	extern u32 wbfs_part_lba;
-	extern char wbfs_fat_drive[16];
+	extern char wbfs_fs_drive[16];
 
     /* Prototypes */
     void GetProgressValue(s32 * d, s32 * m);

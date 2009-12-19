@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-13 17:09+0100\n"
+"POT-Creation-Date: 2009-12-17 00:06+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Nitro_subzero \n"
 "Language-Team: Nitro_subzero\n"
@@ -665,6 +665,9 @@ msgstr "ผิดพลาดขณะติดตั้ง!"
 msgid "Install a game"
 msgstr "ติดตั้งเกมส์"
 
+msgid "Install not possible"
+msgstr ""
+
 msgid "Install partitions"
 msgstr ""
 
@@ -813,7 +816,7 @@ msgstr "ไม่ได้เสียบอุปกรณ์ USB"
 msgid "No USB Device found."
 msgstr "ไม่พบอุปกรณ์ USB"
 
-msgid "No WBFS or FAT game partition found"
+msgid "No WBFS or FAT/NTFS partition found"
 msgstr ""
 
 msgid "No cheats were selected"
@@ -1260,6 +1263,9 @@ msgstr "คุณกำลังจะลบ "
 msgid "You are choosing to display favorites and you do not have any selected."
 msgstr "คุณเลือกจะแสดงเกมส์ที่ชอบ แต่คุณไม่ได้กำหนดเกมส์ที่ชื่นชอบไว้"
 
+msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
+msgstr ""
+
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr ""
 
@@ -1300,7 +1306,7 @@ msgstr "ไฟล์ที่ยังเหลือ"
 msgid "files not found on the server!"
 msgstr "ไม่พบไฟล์/i บนเซิฟเวอร์!"
 
-msgid "for FAT support"
+msgid "for FAT/NTFS support"
 msgstr ""
 
 msgid "for Ocarina"

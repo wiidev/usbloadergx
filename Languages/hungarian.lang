@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-13 17:09+0100\n"
+"POT-Creation-Date: 2009-12-17 00:06+0100\n"
 "PO-Revision-Date: 2009-12-01 13:23+0100\n"
 "Last-Translator: Springdale\n"
 "Language-Team: Tusk, Springdale\n"
@@ -665,6 +665,9 @@ msgstr "Telepítési Hiba!"
 msgid "Install a game"
 msgstr "Játék telepítése"
 
+msgid "Install not possible"
+msgstr ""
+
 msgid "Install partitions"
 msgstr ""
 
@@ -813,8 +816,8 @@ msgstr "Nincs USB meghajtó"
 msgid "No USB Device found."
 msgstr "Nincs USB meghajtó csatlakoztatva."
 
-msgid "No WBFS or FAT game partition found"
-msgstr "Nem található WBFS vagy FAT partíció"
+msgid "No WBFS or FAT/NTFS partition found"
+msgstr ""
 
 msgid "No cheats were selected"
 msgstr "Nincsenek kiválasztott cheat-ek"
@@ -1260,6 +1263,9 @@ msgstr "Törölni készülsz: "
 msgid "You are choosing to display favorites and you do not have any selected."
 msgstr "A Kedvencek megjelenítését választottad, de egy játék sincs így megjelölve."
 
+msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
+msgstr ""
+
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr ""
 
@@ -1300,7 +1306,7 @@ msgstr "hátralévõ fájl"
 msgid "files not found on the server!"
 msgstr "fájl nem található a szerveren"
 
-msgid "for FAT support"
+msgid "for FAT/NTFS support"
 msgstr ""
 
 msgid "for Ocarina"
@@ -1338,6 +1344,9 @@ msgstr "./"
 
 msgid "seconds left"
 msgstr "hátralévõ másodperc"
+
+#~ msgid "No WBFS or FAT game partition found"
+#~ msgstr "Nem található WBFS vagy FAT partíció"
 
 #~ msgid "Exit USB Loader GX?"
 #~ msgstr "Kilépés az USB Loader GX-bõl?"

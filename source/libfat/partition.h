@@ -31,7 +31,7 @@
 #define __PARTITION_H
 
 #include "common.h"
-#include "cache.h"
+#include "fat_cache.h"
 #include "lock.h"
 
 // Device name

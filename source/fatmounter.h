@@ -19,6 +19,16 @@ extern "C" {
     int isInserted(const char *path);
     int SDCard_Init();
     void SDCard_deInit();
+	
+	s32 MountNTFS(u32 sector);
+	s32 UnmountNTFS(void);
+
+	extern int   fat_usb_mount;
+	extern sec_t fat_usb_sec;
+	extern int   fat_wbfs_mount;
+	extern sec_t fat_wbfs_sec;
+	extern int   fs_ntfs_mount;
+	extern sec_t fs_ntfs_sec;
 
 #ifdef __cplusplus
 }

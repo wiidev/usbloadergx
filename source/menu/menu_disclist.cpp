@@ -20,7 +20,7 @@
 
 extern struct discHdr *dvdheader;
 extern u8 mountMethod;
-extern bool load_from_fat;
+extern int load_from_fs;
 extern s32 gameSelected;
 extern GuiText * GameIDTxt;
 extern GuiText * GameRegionTxt;
@@ -88,7 +88,7 @@ int MenuDiscList() {
     char theTime[80]="";
     time_t lastrawtime=0;
 
-	if (mountMethod != 3 && !load_from_fat) {
+	if (mountMethod != 3 && load_from_fs == PART_FS_WBFS) {
 		WBFS_DiskSpace(&used, &freespace);
 	}
 
@@ -189,7 +189,7 @@ int MenuDiscList() {
     trig1.SetButtonOnlyTrigger(-1, WPAD_BUTTON_1 | WPAD_CLASSIC_BUTTON_Y, 0);
 
     char spaceinfo[30];
-	if (load_from_fat) {
+	if (load_from_fs != PART_FS_WBFS) {
 		memset(spaceinfo, 0, 30);
 	} else {
 		if (!strcmp(Settings.db_language,"JA")) {
@@ -224,7 +224,7 @@ int MenuDiscList() {
     installBtnImgOver.SetWidescreen(CFG.widescreen);
 
     GuiButton installBtn(&installBtnImg, &installBtnImgOver, ALIGN_LEFT, ALIGN_TOP, THEME.install_x, THEME.install_y, &trigA, &btnSoundOver, btnClick2, 1, &installBtnTT,24,-30, 0,5);
-
+	
 
     GuiTooltip settingsBtnTT(tr("Settings"));
     if (Settings.wsprompt == yes)
@@ -570,7 +570,7 @@ int MenuDiscList() {
     w.Append(&sdcardBtn);
     w.Append(&poweroffBtn);
     w.Append(&gameInfo);
-    if (Settings.godmode)
+    if (Settings.godmode && load_from_fs != PART_FS_NTFS)
         w.Append(&installBtn);
     w.Append(&homeBtn);
     w.Append(&settingsBtn);
@@ -801,8 +801,12 @@ int MenuDiscList() {
             gprintf("\n\tNew Disc Detected");
             choice = WindowPrompt(tr("New Disc Detected"),0,tr("Install"),tr("Mount DVD drive"),tr("Cancel"));
             if (choice == 1) {
-                menu = MENU_INSTALL;
-                break;
+				if (load_from_fs == PART_FS_NTFS) {
+					WindowPrompt(tr("Install not possible"), tr("You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."), tr("OK"));
+				} else {
+					menu = MENU_INSTALL;
+					break;
+				}
             }
 			else if (choice ==2)
 			{

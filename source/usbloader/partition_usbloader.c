@@ -273,6 +273,16 @@ int get_fs_type(void *buff)
 	return FS_TYPE_UNK;
 }
 
+int get_part_fs(int fs_type)
+{
+	switch(fs_type) {
+		case FS_TYPE_FAT32: return PART_FS_FAT;
+		case FS_TYPE_NTFS: return PART_FS_NTFS;
+		case FS_TYPE_WBFS: return PART_FS_WBFS;
+		default: return -1;
+	}
+}
+
 bool is_type_fat(int type)
 {
 	return (type == FS_TYPE_FAT16 || type == FS_TYPE_FAT32);
@@ -309,7 +319,7 @@ s32 Partition_GetList(u32 device, PartList *plist)
 		pinfo = &plist->pinfo[0];
 		entry = &plist->pentry[0];
 		plist->wbfs_n = 1;
-		pinfo->wbfs_i = 1;
+		pinfo->wbfs_i = pinfo->index = 1;
 		return 0;
 	}
 
@@ -330,11 +340,15 @@ s32 Partition_GetList(u32 device, PartList *plist)
 			// multiple wbfs on sdhc not supported
 			if (device == WBFS_DEVICE_SDHC && (plist->wbfs_n > 1 || i > 4)) continue;
 			plist->wbfs_n++;
-			pinfo->wbfs_i = plist->wbfs_n;
+			pinfo->wbfs_i = pinfo->index = plist->wbfs_n;
 		} else if (is_type_fat(pinfo->fs_type)) {
 			plist->fat_n++;
-			pinfo->fat_i = plist->fat_n;
+			pinfo->fat_i = pinfo->index = plist->fat_n;
+		} else if (pinfo->fs_type == FS_TYPE_NTFS) {
+			plist->ntfs_n++;
+			pinfo->ntfs_i = pinfo->index = plist->ntfs_n;
 		}
+		pinfo->part_fs = get_part_fs(pinfo->fs_type);
 	}
 	return 0;
 }
@@ -357,5 +371,3 @@ int Partition_FixEXT(u32 device, int part)
 	}
 	return -1;
 }
-
-

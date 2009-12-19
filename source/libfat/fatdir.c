@@ -36,7 +36,7 @@
 
 #include "fatdir.h"
 
-#include "cache.h"
+#include "fat_cache.h"
 #include "file_allocation_table.h"
 #include "partition.h"
 #include "directory.h"

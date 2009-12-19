@@ -1,3 +1,6 @@
+
+// by oggzee
+
 #include <ogcsys.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,12 +17,12 @@
 #define FMT_llu "%llu"
 #define FMT_lld "%lld"
 
-#define split_error(x)		do { /* gprintf("\nsplit error: %s\n\n",x); */ } while(0)
+#define split_error(x)		do { printf("\nsplit error: %s\n\n",x); } while(0)
 
-// 1 sector less than 4gb
-u64 OPT_split_size = (u64)4LL * 1024 * 1024 * 1024 - (32 * 1024);
-// 1 sector less than 2gb
-// u64 OPT_split_size = (u64)2LL * 1024 * 1024 * 1024 - 512;
+// 1 cluster less than 4gb
+u64 OPT_split_size = (u64)4LL * 1024 * 1024 * 1024 - 32 * 1024;
+// 1 cluster less than 2gb
+//u64 OPT_split_size = (u64)2LL * 1024 * 1024 * 1024 - 32 * 1024;
 
 //split_info_t split;
 

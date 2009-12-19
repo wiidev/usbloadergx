@@ -6,6 +6,7 @@
 #include "usbloader/usbstorage.h"
 #include "usbloader/disc.h"
 #include "usbloader/wbfs.h"
+#include "usbloader/partition_usbloader.h"
 #include "mload/mload.h"
 #include "video.h"
 #include "audio.h"
@@ -15,7 +16,7 @@
 #include "wpad.h"
 
 extern char game_partition[6];
-extern bool load_from_fat;
+extern u8 load_from_fs;
 
 //Wiilight stuff
 static vu32 *_wiilight_reg = (u32*)0xCD0000C0;
@@ -99,7 +100,7 @@ int Sys_ChangeIos(int ios) {
 	WBFS_Init(WBFS_DEVICE_USB);
 	Disc_Init();
 	
-	if (load_from_fat && (ios == 222 || ios == 223)) {
+	if (Sys_IsHermes()) {
 		WBFS_OpenNamed((char *) &game_partition);
 	} else { 
 		WBFS_Open();

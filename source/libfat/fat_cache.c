@@ -37,7 +37,7 @@
 #include <limits.h>
 
 #include "common.h"
-#include "cache.h"
+#include "fat_cache.h"
 #include "disc_fat.h"
 
 #include "mem_allocate.h"

@@ -40,7 +40,7 @@ extern u8 mountMethod;
 extern struct discHdr *dvdheader;
 extern PartList partitions;
 extern char game_partition[6];
-extern bool load_from_fat;
+extern u8 load_from_fs;
 
 static const char *opts_no_yes[settings_off_on_max] = {trNOOP("No"),trNOOP("Yes") };
 static const char *opts_off_on[settings_off_on_max] = {trNOOP("OFF"),trNOOP("ON") };
@@ -55,7 +55,7 @@ bool IsValidPartition(int fs_type, int cios) {
 	if (cios == 249 || cios == 250) {
 		return fs_type == FS_TYPE_WBFS;
 	} else {
-		return fs_type == FS_TYPE_WBFS || fs_type == FS_TYPE_FAT32;
+		return fs_type == FS_TYPE_WBFS || fs_type == FS_TYPE_FAT32 || fs_type == FS_TYPE_NTFS;
 	}
 }
 
@@ -1027,8 +1027,8 @@ int MenuSettings()
 								f32 partition_size = partitions.pentry[Settings.partition].size * (partitions.sector_size / GB_SIZE);
 								
 								// Get the partition name and it's size in GB's
-								options2.SetValue(Idx,"%s%d (%.2fGB)",	pInfo.fs_type == FS_TYPE_FAT32 ? "FAT" : "WBFS", 
-															            pInfo.fs_type == FS_TYPE_FAT32 ? pInfo.fat_i : pInfo.wbfs_i,
+								options2.SetValue(Idx,"%s%d (%.2fGB)",	pInfo.fs_type == FS_TYPE_FAT32 ? "FAT" : pInfo.fs_type == FS_TYPE_NTFS ? "NTFS" : "WBFS",
+															            pInfo.index,
 																		partition_size);
 							}
 							
@@ -2148,10 +2148,11 @@ int MenuSettings()
 
 	// if partition has changed, Reinitialize it 
 	PartInfo pinfo = partitions.pinfo[Settings.partition];
-	load_from_fat = pinfo.fs_type == FS_TYPE_FAT32;
+	partitionEntry pentry = partitions.pentry[Settings.partition];
+	load_from_fs = pinfo.part_fs;
 	if (Settings.partition != settingspartitionold) {
 		WBFS_Close();
-		WBFS_OpenPart(load_from_fat, Settings.partition, partitions.pentry[Settings.partition].sector, partitions.pentry[Settings.partition].size, (char *) &game_partition);
+		WBFS_OpenPart(load_from_fs, pinfo.index, pentry.sector, pentry.size, (char *) &game_partition);
 	}
 		
 	// if language has changed, reload titles
