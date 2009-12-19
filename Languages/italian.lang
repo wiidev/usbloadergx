@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# italian.lang - v53 - r859
+# italian.lang - v54 - r866
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-17 00:06+0100\n"
+"POT-Creation-Date: 2009-12-19 21:50+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe, Cambo\n"
@@ -265,7 +265,7 @@ msgid "Confirm"
 msgstr "Confermare"
 
 msgid "Connection lost..."
-msgstr ""
+msgstr "Connessione persa..."
 
 msgid "Console"
 msgstr "Terminale"
@@ -1213,10 +1213,10 @@ msgid "Video Mode"
 msgstr "Modalità Video"
 
 msgid "WIP Patches Path"
-msgstr ""
+msgstr "Percorso Patch WIP"
 
 msgid "WIP Patches Path changed"
-msgstr ""
+msgstr "Percorso Patch WIP modificato"
 
 msgid "Waiting for USB Device"
 msgstr "Caricamento Dispositivo USB"

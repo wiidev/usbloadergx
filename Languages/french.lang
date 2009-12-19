@@ -1,5 +1,5 @@
 # USB Loader GX language source file.
-# French V11.8 r865
+# French V11.9 r870
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
@@ -666,7 +666,7 @@ msgid "Install a game"
 msgstr "Installer un jeu"
 
 msgid "Install not possible"
-msgstr ""
+msgstr "Installation impossible"
 
 msgid "Install partitions"
 msgstr "Installation"
@@ -817,7 +817,7 @@ msgid "No USB Device found."
 msgstr "Aucun périphérique USB trouvé."
 
 msgid "No WBFS or FAT/NTFS partition found"
-msgstr ""
+msgstr "Aucune partition WBFS ou FAT/NTFS trouvée"
 
 msgid "No cheats were selected"
 msgstr "Aucune selection de triche"
@@ -1264,7 +1264,7 @@ msgid "You are choosing to display favorites and you do not have any selected."
 msgstr "Vous choisissez d'afficher des favoris alors que vous n'en avez aucun."
 
 msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
-msgstr ""
+msgstr "Le système de fichier NTFS est utilisé. En raison à de possibles erreurs d'écriture sur une partition de NTFS, l'installation d'un jeu est impossible."
 
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr "Contrôle Parental désactivé. Si vous voulez l'utiliser, activez-le dans les Paramètres de votre Wii."
@@ -1307,7 +1307,7 @@ msgid "files not found on the server!"
 msgstr "fichiers introuvables sur le serveur !"
 
 msgid "for FAT/NTFS support"
-msgstr ""
+msgstr "pour le support FAT/NTFS"
 
 msgid "for Ocarina"
 msgstr "pour Ocarina"
@@ -1344,12 +1344,6 @@ msgstr "sur"
 
 msgid "seconds left"
 msgstr "secondes restantes"
-
-#~ msgid "No WBFS or FAT game partition found"
-#~ msgstr "Aucune partition WBFS ou FAT trouvée"
-
-#~ msgid "for FAT support"
-#~ msgstr "pour le support FAT"
 
 #~ msgid "Failed to extract opening.bnr"
 #~ msgstr "Extraction opening.bnr échouée"

@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# german.lang - r863
+# german.lang - r866
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-17 00:06+0100\n"
+"POT-Creation-Date: 2009-12-19 21:50+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: ZEN.13\n"
 "Language-Team: Snoozer, wishmasterf, Bertilax, ZEN.13\n"
@@ -1213,10 +1213,10 @@ msgid "Video Mode"
 msgstr "Video Modus"
 
 msgid "WIP Patches Path"
-msgstr ""
+msgstr "WIP Patches"
 
 msgid "WIP Patches Path changed"
-msgstr ""
+msgstr "Pfad geändert"
 
 msgid "Waiting for USB Device"
 msgstr "Warte auf USB Gerät"
