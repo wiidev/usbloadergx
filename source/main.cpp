@@ -185,8 +185,7 @@ main(int argc, char *argv[]) {
 //	DEBUG_Init(GDBSTUB_DEVICE_USB, 1);
 //_break();
 	
-	__exception_setreload(5);//auto reset code dump nobody gives us codedump info anyways.
-
+//	__exception_setreload(5);//auto reset code dump nobody gives us codedump info anyways.
 
 	gprintf("\n\n------------------");
 	gprintf("\nUSB Loader GX rev%s",GetRev());
