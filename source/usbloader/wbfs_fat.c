@@ -53,7 +53,7 @@ bool is_gameid(char *id)
 {
 	int i;
 	for (i=0; i<6; i++) {
-		if (!isalnum(id[i])) return false;
+		if (!isalnum((u32) id[i])) return false;
 	}
 	return true;
 }
@@ -339,7 +339,7 @@ void mk_gameid_title(struct discHdr *header, char *name, int re_space)
 	// replace silly chars with '_'
 	len = strlen(name);
 	for (i = 0; i < len; i++) {
-		if(strchr("\\/:<>|\"", name[i]) || iscntrl(name[i])) {
+		if(strchr("\\/:<>|\"", name[i]) || iscntrl((u32) name[i])) {
 			name[i] = '_';
 		}
 		if(re_space && name[i]==' ') {

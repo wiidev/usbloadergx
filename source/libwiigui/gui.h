@@ -1014,7 +1014,7 @@ class GuiNumpad : public GuiWindow
 		char kbtextstr[256];
 	protected:
 		u32 kbtextmaxlen;
-		char keys[10];
+		char keys[11];
 		GuiText * kbText;
 		GuiImage * keyTextboxImg;
 
@@ -1026,10 +1026,10 @@ class GuiNumpad : public GuiWindow
 		GuiImage * keyClearImg;
 		GuiImage * keyClearOverImg;
 		GuiButton * keyClear;
-		GuiButton * keyBtn[10];
-		GuiImage * keyImg[10];
-		GuiImage * keyImgOver[10];
-		GuiText * keyTxt[10];
+		GuiButton * keyBtn[11];
+		GuiImage * keyImg[11];
+		GuiImage * keyImgOver[11];
+		GuiText * keyTxt[11];
 		GuiImageData * keyTextbox;
 		GuiImageData * keyMedium;
 		GuiImageData * keyMediumOver;

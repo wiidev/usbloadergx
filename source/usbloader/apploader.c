@@ -346,9 +346,7 @@ void gamepatches(void * dst, int len, u8 videoSelected, u8 patchcountrystring, u
 
     NewSuperMarioBrosPatch(dst, len);
 	
-	//gprintf("\nLoading WIP Patch...");
-	u32 ret = do_wip_code((u8 *)0x80000000);
-	//gprintf("done\n", ret);
+	do_wip_code((u8 *)0x80000000);
 
 
     //if(Settings.anti002fix == on)

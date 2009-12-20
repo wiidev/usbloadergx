@@ -466,7 +466,7 @@ int MainMenu(int menu) {
 		if (load_from_fs != PART_FS_WBFS && ios2 == 249) {
 			ios2 = 222;
 		}
-        bool onlinefix = load_from_fs != PART_FS_WBFS && ShutdownWC24();
+        bool onlinefix = ShutdownWC24();
 
 		// You cannot reload ios when loading from fat
         if (IOS_GetVersion() != ios2 || onlinefix) {
