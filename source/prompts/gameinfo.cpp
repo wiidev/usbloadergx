@@ -18,6 +18,7 @@
 #include "prompts/PromptWindows.h"
 #include "gameinfo.h"
 #include "usbloader/getentries.h"
+#include "../gecko.h"
 
 
 /*** Extern variables ***/
@@ -779,6 +780,14 @@ int showGameInfo(char *ID) {
         gameinfoWindow.Append(wiitdb3Txt);
 
         gameinfoWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_IN, 100);
+
+	GuiTrigger trigZ;
+	trigZ.SetButtonOnlyTrigger(-1, WPAD_NUNCHUK_BUTTON_Z | WPAD_CLASSIC_BUTTON_ZL, PAD_TRIGGER_Z);
+
+	GuiButton screenShotBtn(0,0);
+	screenShotBtn.SetPosition(0,0);
+	screenShotBtn.SetTrigger(&trigZ);
+	gameinfoWindow.Append(&screenShotBtn);
         HaltGui();
         //mainWindow->SetState(STATE_DISABLED);
         mainWindow->Append(&gameinfoWindow);
@@ -806,13 +815,15 @@ int showGameInfo(char *ID) {
                     HaltGui();
 					gameinfoWindow2.Remove(&nextBtn);
                     gameinfoWindow2.Remove(&backBtn);
-                    gameinfoWindow2.Remove(&homeBtn);
-                    gameinfoWindow2.SetVisible(false);
+		    gameinfoWindow2.Remove(&homeBtn);
+		    gameinfoWindow2.Remove(&screenShotBtn);
+		    gameinfoWindow2.SetVisible(false);
                     gameinfoWindow.SetVisible(true);
 					gameinfoWindow.Append(&backBtn);
                     gameinfoWindow.Append(&nextBtn);
-                    gameinfoWindow.Append(&homeBtn);
-                    mainWindow->Remove(&gameinfoWindow2);
+		    gameinfoWindow.Append(&homeBtn);
+		    gameinfoWindow.Append(&screenShotBtn);
+		    mainWindow->Remove(&gameinfoWindow2);
                     ResumeGui();
                     page=1;
                 }
@@ -823,27 +834,31 @@ int showGameInfo(char *ID) {
                     HaltGui();
 					gameinfoWindow.Remove(&nextBtn);
                     gameinfoWindow.Remove(&backBtn);
-                    gameinfoWindow.Remove(&homeBtn);
-                    gameinfoWindow.SetVisible(false);
+		    gameinfoWindow.Remove(&homeBtn);
+		    gameinfoWindow.Remove(&screenShotBtn);
+		    gameinfoWindow.SetVisible(false);
                     gameinfoWindow2.SetVisible(true);
                     coverImg->SetPosition(15,30);
                     gameinfoWindow2.Append(&nextBtn);
                     gameinfoWindow2.Append(&backBtn);
-                    gameinfoWindow2.Append(&homeBtn);
-                    mainWindow->Append(&gameinfoWindow2);
+		    gameinfoWindow2.Append(&homeBtn);
+		    gameinfoWindow2.Append(&screenShotBtn);
+		    mainWindow->Append(&gameinfoWindow2);
                     ResumeGui();
                     page=2;
                 } else {
                     HaltGui();
 					gameinfoWindow2.Remove(&nextBtn);
                     gameinfoWindow2.Remove(&backBtn);
-                    gameinfoWindow2.Remove(&homeBtn);
-                    gameinfoWindow2.SetVisible(false);
+		    gameinfoWindow2.Remove(&homeBtn);
+		    gameinfoWindow2.Remove(&screenShotBtn);
+		    gameinfoWindow2.SetVisible(false);
                     gameinfoWindow.SetVisible(true);
                     gameinfoWindow.Append(&backBtn);
                     gameinfoWindow.Append(&nextBtn);
-                    gameinfoWindow.Append(&homeBtn);
-                    mainWindow->Remove(&gameinfoWindow2);
+		    gameinfoWindow.Append(&homeBtn);
+		    gameinfoWindow.Append(&screenShotBtn);
+		    mainWindow->Remove(&gameinfoWindow2);
                     ResumeGui();
                     page=1;
                 }
@@ -901,6 +916,12 @@ int showGameInfo(char *ID) {
 				}
 				urlBtn.ResetState();
             }
+	    else if (screenShotBtn.GetState() == STATE_CLICKED) {
+			gprintf("\n\tscreenShotBtn clicked");
+			screenShotBtn.ResetState();
+			ScreenShot();
+			gprintf("...It's easy, mmmmmmKay");
+		    }
         }
         if (page==1) {
             gameinfoWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 100);

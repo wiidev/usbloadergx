@@ -113,7 +113,7 @@ int MenuFormat() {
 						menu = MENU_DISCLIST;
 						
 						Settings.partition = ret;
-						cfg_save_global();
+						if(isInserted(bootDevice))cfg_save_global();
 					} else {
 						sprintf(text, "%s %d : %.2fGB",tr("Partition"), ret+1, entry->size * (partitions.sector_size / GB_SIZE));
 						choice = WindowPrompt( tr("Do you want to format:"), text,tr("Yes"),tr("No"));

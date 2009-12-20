@@ -1227,6 +1227,7 @@ int MenuDiscList() {
                     case 'W':
                         sprintf(gameregion,"NTSC T");
                         break;
+		    default:
                     case 'K':
                         sprintf(gameregion,"NTSC K");
                         break;

@@ -105,7 +105,7 @@ int MenuCheck() {
 			}
 		}
 
-		if (ret2 >= 0 || load_from_fs != PART_FS_WBFS) {
+		if ((ret2 >= 0 || load_from_fs != PART_FS_WBFS) && isInserted(bootDevice)) {
 			cfg_save_global();
 			break;
 		}
@@ -138,7 +138,7 @@ int MenuCheck() {
     }
 	
 	// open database if needed, load titles if needed
-	OpenXMLDatabase(Settings.titlestxt_path,Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true);
+    if(isInserted(bootDevice))OpenXMLDatabase(Settings.titlestxt_path,Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true);
 
     // titles.txt loaded after database to override database titles with custom titles
     //snprintf(pathname, sizeof(pathname), "%stitles.txt", Settings.titlestxt_path);
