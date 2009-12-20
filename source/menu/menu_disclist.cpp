@@ -17,7 +17,7 @@
 #include "libwiigui/gui_searchbar.h"
 
 #define MAX_CHARACTERS		38
-
+extern u8 * gameScreenTex;
 extern struct discHdr *dvdheader;
 extern u8 mountMethod;
 extern int load_from_fs;
@@ -49,10 +49,11 @@ static u32 startat = 0;
 int MenuDiscList() {
 
     gprintf("\nMenuDiscList()");
+    //TakeScreenshot("SD:/screenshot1.png");
     __Menu_GetEntries();
     int offset = MIN(startat,gameCnt-1);
     startat = offset;
-    gprintf("\n\tstartat:%d offset:%d",startat,offset);
+    //gprintf("\n\tstartat:%d offset:%d",startat,offset);
     int datag = 0;
     int datagB =0;
     int dataed = -1;
@@ -182,11 +183,17 @@ int MenuDiscList() {
     GuiTrigger trigA;
     trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
     GuiTrigger trigHome;
-    trigHome.SetButtonOnlyTrigger(-1, WPAD_BUTTON_HOME | WPAD_CLASSIC_BUTTON_HOME, 0);
+    trigHome.SetButtonOnlyTrigger(-1, WPAD_BUTTON_HOME | WPAD_CLASSIC_BUTTON_HOME, PAD_BUTTON_START);
     GuiTrigger trig2;
     trig2.SetButtonOnlyTrigger(-1, WPAD_BUTTON_2 | WPAD_CLASSIC_BUTTON_X, 0);
     GuiTrigger trig1;
     trig1.SetButtonOnlyTrigger(-1, WPAD_BUTTON_1 | WPAD_CLASSIC_BUTTON_Y, 0);
+    GuiTrigger trigZ;
+    trigZ.SetButtonOnlyTrigger(-1, WPAD_NUNCHUK_BUTTON_Z | WPAD_CLASSIC_BUTTON_ZL, PAD_TRIGGER_Z);
+
+    GuiButton screenShotBtn(0,0);
+    screenShotBtn.SetPosition(0,0);
+    screenShotBtn.SetTrigger(&trigZ);
 
     char spaceinfo[30];
 	if (load_from_fs != PART_FS_WBFS) {
@@ -576,6 +583,8 @@ int MenuDiscList() {
     w.Append(&settingsBtn);
     w.Append(&DownloadBtn);
     w.Append(&idBtn);
+    w.Append(&screenShotBtn);
+
 
 	// Begin Toolbar
     w.Append(&favoriteBtn);
@@ -690,7 +699,8 @@ int MenuDiscList() {
             }
 
         }
-                                                                                                                                                                                                                                                                                                                                                                                                if ((datagB<1)&&(Settings.cios==1)&&(Settings.video == ntsc)&&(Settings.hddinfo == hr12)&&(Settings.qboot==1)&&(Settings.wsprompt==0)&&(Settings.language==ger)&&(Settings.tooltips==0)){dataed=1;dataef=1;}if (dataef==1){if (cosa>7){cosa=1;}datag++;if (sina==3){wiiBtn.SetAlignment(ALIGN_LEFT,ALIGN_BOTTOM);wiiBtnImg.SetAngle(0);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((cosa)*70),(-2*(datag)+120));}else if(62<=datag){wiiBtn.SetPosition(((cosa)*70),((datag*2)-130));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==2){wiiBtn.SetAlignment(ALIGN_RIGHT,ALIGN_TOP);wiiBtnImg.SetAngle(270);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((-2*(datag)+130)),((cosa)*50));}else if(62<=datag){wiiBtn.SetPosition((2*(datag)-120),((cosa)*50));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==1){wiiBtn.SetAlignment(ALIGN_TOP,ALIGN_LEFT);wiiBtnImg.SetAngle(180);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((cosa)*70),(2*(datag)-120));}else if(62<=datag){wiiBtn.SetPosition(((cosa)*70),(-2*(datag)+130));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==0){wiiBtn.SetAlignment(ALIGN_TOP,ALIGN_LEFT);wiiBtnImg.SetAngle(90);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((2*(datag)-130)),((cosa)*50));}else if(62<=datag){wiiBtn.SetPosition((-2*(datag)+120),((cosa)*50));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}}
+
+	if ((datagB<1)&&(Settings.cios==1)&&(Settings.video == ntsc)&&(Settings.hddinfo == hr12)&&(Settings.qboot==1)&&(Settings.wsprompt==0)&&(Settings.language==ger)&&(Settings.tooltips==0)){dataed=1;dataef=1;}if (dataef==1){if (cosa>7){cosa=1;}datag++;if (sina==3){wiiBtn.SetAlignment(ALIGN_LEFT,ALIGN_BOTTOM);wiiBtnImg.SetAngle(0);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((cosa)*70),(-2*(datag)+120));}else if(62<=datag){wiiBtn.SetPosition(((cosa)*70),((datag*2)-130));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==2){wiiBtn.SetAlignment(ALIGN_RIGHT,ALIGN_TOP);wiiBtnImg.SetAngle(270);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((-2*(datag)+130)),((cosa)*50));}else if(62<=datag){wiiBtn.SetPosition((2*(datag)-120),((cosa)*50));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==1){wiiBtn.SetAlignment(ALIGN_TOP,ALIGN_LEFT);wiiBtnImg.SetAngle(180);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((cosa)*70),(2*(datag)-120));}else if(62<=datag){wiiBtn.SetPosition(((cosa)*70),(-2*(datag)+130));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}if (sina==0){wiiBtn.SetAlignment(ALIGN_TOP,ALIGN_LEFT);wiiBtnImg.SetAngle(90);if(datag>163){datag=1;}else if (datag<62){wiiBtn.SetPosition(((2*(datag)-130)),((cosa)*50));}else if(62<=datag){wiiBtn.SetPosition((-2*(datag)+120),((cosa)*50));}if (datag>162){wiiBtn.SetPosition(700,700);w.Remove(&wiiBtn);datagB=2;cosa++;sina=lastrawtime%4;}w.Append(&wiiBtn);}}
         // respond to button presses
         if (shutdown == 1) {
             gprintf("\n\tshutdown");
@@ -733,9 +743,9 @@ int MenuDiscList() {
                 }
             }
 
-        } else if (gamecntBtn.GetState() == STATE_CLICKED && mountMethod!=3) {
+	} else if (gamecntBtn.GetState() == STATE_CLICKED && mountMethod!=3) {
 			gprintf("\n\tgameCntBtn clicked");
-            gamecntBtn.ResetState();
+	    gamecntBtn.ResetState();
 			char linebuf[150];
 			snprintf(linebuf, sizeof(linebuf), "%s %sGameList ?",tr("Save Game List to"), Settings.update_path);
 			choice = WindowPrompt(0,linebuf,"TXT","CSV",tr("Back"));
@@ -748,7 +758,15 @@ int MenuDiscList() {
 			menu = MENU_DISCLIST;
 			break;
 
-        } else if (homeBtn.GetState() == STATE_CLICKED) {
+	}
+	else if (screenShotBtn.GetState() == STATE_CLICKED) {
+			gprintf("\n\tscreenShotBtn clicked");
+			screenShotBtn.ResetState();
+			ScreenShot();
+			gprintf("...It's easy, mmmmmmKay");
+
+
+	}else if (homeBtn.GetState() == STATE_CLICKED) {
             gprintf("\n\thomeBtn clicked");
             bgMusic->Pause();
             choice = WindowExitPrompt();
@@ -1279,6 +1297,7 @@ int MenuDiscList() {
 
 					idBtn.ResetState();
                 }
+		startat=gameBrowser->GetOffset(), offset=startat;
         }
 
         if (((gameSelected >= 0) && (gameSelected < (s32)gameCnt))
@@ -1540,8 +1559,8 @@ int MenuDiscList() {
 	/*if (menu == MENU_EXIT) {
 		SDCard_deInit();
 	}*/
-	startat=selectImg1, offset=selectImg1;//save the variables in case we are refreshing the list
-	gprintf("\n\tstartat:%d offset:%d",startat,offset);
+	//if (Settings.gameDisplay==list) {startat=gameBrowser->GetOffset(), offset=startat;}//save the variables in case we are refreshing the list
+	//gprintf("\n\tstartat:%d offset:%d",startat,offset);
 	HaltGui();
 	mainWindow->RemoveAll();
 	mainWindow->Append(bgImg);

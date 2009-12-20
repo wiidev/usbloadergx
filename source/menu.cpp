@@ -291,6 +291,7 @@ int MainMenu(int menu) {
 
         switch (currentMenu) {
         case MENU_CHECK:
+
             currentMenu = MenuCheck();
             break;
         case MENU_FORMAT:

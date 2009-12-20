@@ -32,7 +32,7 @@ GuiGameBrowser::GuiGameBrowser(int w, int h, struct discHdr * l, int gameCnt, co
 	pagesize = THEME.pagesize;
 	scrollbaron = (gameCnt > pagesize) ? 1 : 0;
 	selectable = true;
-	listOffset = (offset == 0) ? this->FindMenuItem(-1, 1) : offset;
+	listOffset = MAX(0,MIN(offset,(gameCnt-pagesize)));
 	selectedItem = selected - offset;
 	focus = 1; // allow focus
 	char imgPath[100];

@@ -26,6 +26,7 @@
 #include "../wad/title.h"
 #include "../usbloader/getentries.h"
 #include "../usbloader/utils.h"
+#include "../gecko.h"
 
 #define typei 0x00010001
 
@@ -294,8 +295,16 @@ int TitleBrowser(u32 type) {
     wifiBtn.SetAlpha(80);
     wifiBtn.SetTrigger(&trigA);
 
+    GuiTrigger trigZ;
+    trigZ.SetButtonOnlyTrigger(-1, WPAD_NUNCHUK_BUTTON_Z | WPAD_CLASSIC_BUTTON_ZL, PAD_TRIGGER_Z);
+
+    GuiButton screenShotBtn(0,0);
+    screenShotBtn.SetPosition(0,0);
+    screenShotBtn.SetTrigger(&trigZ);
+
     HaltGui();
     GuiWindow w(screenwidth, screenheight);
+    w.Append(&screenShotBtn);
     w.Append(&settingsbackgroundbtn);
     w.Append(&titleTxt);
     w.Append(&cancelBtn);
@@ -538,6 +547,12 @@ int TitleBrowser(u32 type) {
             exit = true;
             ret = -10;
         }
+	else if (screenShotBtn.GetState() == STATE_CLICKED) {
+			gprintf("\n\tscreenShotBtn clicked");
+			screenShotBtn.ResetState();
+			ScreenShot();
+			gprintf("...It's easy, mmmmmmKay");
+		    }
     }
 
     CloseConnection();

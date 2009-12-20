@@ -15,6 +15,7 @@ int Sys_ChangeIos(int ios);
 int Sys_IosReload(int IOS);
 bool Sys_IsHermes();
 s32 IOS_ReloadIOSsafe(int ios);
+void ScreenShot();
 
 void ShowMemInfo();
 extern s32 ios222rev;

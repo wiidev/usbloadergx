@@ -75,7 +75,7 @@ gprintf("\ndo_sd_code(%s)",filename);
 
 	fseek(fp, 0, SEEK_END);
 	filesize = ftell(fp);
-	if(filesize <= 16){
+        if(filesize <= 16 || filesize>MAX_GCT_SIZE){
 		fclose(fp);
 		sleep(2);
         USBDevice_deInit();

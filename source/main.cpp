@@ -16,7 +16,6 @@
 #include <unistd.h>
 #include <locale.h>
 #include <wiiuse/wpad.h>
-
 //#include <debug.h>
 extern "C" {
 extern void __exception_setreload(int t);
@@ -185,16 +184,16 @@ main(int argc, char *argv[]) {
 //	DEBUG_Init(GDBSTUB_DEVICE_USB, 1);
 //_break();
 	
-//	__exception_setreload(5);//auto reset code dump nobody gives us codedump info anyways.
+	__exception_setreload(5);//auto reset code dump nobody gives us codedump info anyways.
 
 	gprintf("\n\n------------------");
 	gprintf("\nUSB Loader GX rev%s",GetRev());
 	gprintf("\nmain(%d", argc);
 	for (int i=0;i<argc;i++)
 		gprintf(", %s",argv[i]?argv[i]:"<NULL>");
-	gprintf(")");
-	
-	// This part is added, because we need a identify patched ios
+        gprintf(")");
+
+       // This part is added, because we need a identify patched ios
 	printf("\n\tReloading into ios 236");
 	if (IOS_ReloadIOSsafe(236) < 0) {
 		printf("\n\tIOS 236 not found, reloading into 36");

@@ -132,13 +132,13 @@ const u8 *LoadBannerSound(const u8 *discid, u32 *size)
 	wbfs_disc_t *disc = WBFS_OpenDisc((u8 *) discid);
 	if(!disc)
 	{
-        WindowPrompt(tr("Can't find disc"), 0, tr("OK"));
+       // WindowPrompt(tr("Can't find disc"), 0, tr("OK"));
         return NULL;
 	}
 	wiidisc_t *wdisc = wd_open_disc((int (*)(void *, u32, u32, void *))wbfs_disc_read, disc);
 	if(!wdisc)
 	{
-        WindowPrompt(tr("Could not open Disc"), 0, tr("OK"));
+	//WindowPrompt(tr("Could not open Disc"), 0, tr("OK"));
         return NULL;
 	}
 	u8 * opening_bnr = wd_extract_file(wdisc, ALL_PARTITIONS, (char *) "opening.bnr");
@@ -156,7 +156,7 @@ const u8 *LoadBannerSound(const u8 *discid, u32 *size)
 	const IMETHeader *imetHdr = (IMETHeader *)opening_bnr;
 	if ( imetHdr->fcc != 0x494D4554 /*"IMET"*/ )
 	{
-		WindowPrompt(tr("IMET Header wrong."), 0, tr("OK"));
+	//	WindowPrompt(tr("IMET Header wrong."), 0, tr("OK"));
 		free(opening_bnr);
         return NULL;
 	}
@@ -177,7 +177,7 @@ const u8 *LoadBannerSound(const u8 *discid, u32 *size)
 	const u8 *sound_bin = ((const u8 *)bnrArcHdr) + fst[i].fileOffset;
 	if ( ((IMD5Header *)sound_bin)->fcc != 0x494D4435 /*"IMD5"*/ )
 	{
-		WindowPrompt(tr("IMD5 Header not right."), 0, tr("OK"));
+	//	WindowPrompt(tr("IMD5 Header not right."), 0, tr("OK"));
 		free(opening_bnr);
         return NULL;
 	}
@@ -190,7 +190,7 @@ const u8 *LoadBannerSound(const u8 *discid, u32 *size)
 		u8 * uncompressed_data = uncompressLZ77(soundChunk, soundChunkSize, uncSize);
 		if (!uncompressed_data)
 		{
-			WindowPrompt(tr("Can't decompress LZ77"), 0, tr("OK"));
+		//	WindowPrompt(tr("Can't decompress LZ77"), 0, tr("OK"));
 			free(opening_bnr);
 			return NULL;
 		}

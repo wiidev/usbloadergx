@@ -696,9 +696,17 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label,
 
     }
 
+    GuiTrigger trigZ;
+    trigZ.SetButtonOnlyTrigger(-1, WPAD_NUNCHUK_BUTTON_Z | WPAD_CLASSIC_BUTTON_ZL, PAD_TRIGGER_Z);
+
+    GuiButton screenShotBtn(0,0);
+    screenShotBtn.SetPosition(0,0);
+    screenShotBtn.SetTrigger(&trigZ);
+
     promptWindow.Append(&dialogBoxImg);
     promptWindow.Append(&titleTxt);
     promptWindow.Append(&msgTxt);
+    promptWindow.Append(&screenShotBtn);
 
     if (btn1Label)
         promptWindow.Append(&btn1);
@@ -738,7 +746,12 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label,
                 choice = 3;
         } else if (btn4.GetState() == STATE_CLICKED) {
             choice = 0;
-        }
+	} else if (screenShotBtn.GetState() == STATE_CLICKED) {
+			gprintf("\n\tscreenShotBtn clicked");
+			screenShotBtn.ResetState();
+			ScreenShot();
+			gprintf("...It's easy, mmmmmmKay");
+		    }
         if (count>0)count--;
         if (count==0) choice = 1;
     }
@@ -1125,6 +1138,12 @@ int GameWindowPrompt() {
     trigPlus.SetButtonOnlyTrigger(-1, WPAD_BUTTON_PLUS | WPAD_CLASSIC_BUTTON_PLUS, 0);
     GuiTrigger trigMinus;
     trigMinus.SetButtonOnlyTrigger(-1, WPAD_BUTTON_MINUS | WPAD_CLASSIC_BUTTON_MINUS, 0);
+    GuiTrigger trigZ;
+    trigZ.SetButtonOnlyTrigger(-1, WPAD_NUNCHUK_BUTTON_Z | WPAD_CLASSIC_BUTTON_ZL, PAD_TRIGGER_Z);
+
+    GuiButton screenShotBtn(0,0);
+    screenShotBtn.SetPosition(0,0);
+    screenShotBtn.SetTrigger(&trigZ);
 
     if (CFG.widescreen)
         snprintf(imgPath, sizeof(imgPath), "%swdialogue_box_startgame.png", CFG.theme_path);
@@ -1255,6 +1274,7 @@ int GameWindowPrompt() {
     promptWindow.Append(&dialogBoxImg);
     promptWindow.Append(&nameBtn);
     promptWindow.Append(&playcntTxt);
+    promptWindow.Append(&screenShotBtn);
     promptWindow.Append(&btn2);
 	if (!mountMethod)//stuff we don't show if it is a DVD mounted
 	{
@@ -1524,6 +1544,12 @@ int GameWindowPrompt() {
                 }
                 btnFavorite5.ResetState();
             }
+	    else if (screenShotBtn.GetState() == STATE_CLICKED) {
+			gprintf("\n\tscreenShotBtn clicked");
+			screenShotBtn.ResetState();
+			ScreenShot();
+			gprintf("...It's easy, mmmmmmKay");
+		    }
             // this next part is long because nobody could agree on what the left/right buttons should do
             else if ((btnRight.GetState() == STATE_CLICKED) && (Settings.xflip == no)) {//next game
                 promptWindow.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 50);
@@ -3540,6 +3566,14 @@ HBCWindowPrompt(const char *name, const char *coder, const char *version,
     btn2.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
     btn2.SetPosition(-40, 2);
 
+    GuiTrigger trigZ;
+    trigZ.SetButtonOnlyTrigger(-1, WPAD_NUNCHUK_BUTTON_Z | WPAD_CLASSIC_BUTTON_ZL, PAD_TRIGGER_Z);
+
+    GuiButton screenShotBtn(0,0);
+    screenShotBtn.SetPosition(0,0);
+    screenShotBtn.SetTrigger(&trigZ);
+    promptWindow.Append(&screenShotBtn);
+
     promptWindow.Append(&dialogBoxImg);
     if (strcmp(long_description,""))promptWindow.Append(&whiteBoxImg);
     if (strcmp(long_description,""))promptWindow.Append(&scrollbarImg);
@@ -3576,7 +3610,14 @@ HBCWindowPrompt(const char *name, const char *coder, const char *version,
             choice = 1;
         } else if (btn2.GetState() == STATE_CLICKED) {
             choice = 0;
-        } else if ((arrowUpBtn.GetState()==STATE_CLICKED||arrowUpBtn.GetState()==STATE_HELD) ) {
+	}
+	else if (screenShotBtn.GetState() == STATE_CLICKED) {
+			gprintf("\n\tscreenShotBtn clicked");
+			screenShotBtn.ResetState();
+			ScreenShot();
+			gprintf("...It's easy, mmmmmmKay");
+		    }
+	else if ((arrowUpBtn.GetState()==STATE_CLICKED||arrowUpBtn.GetState()==STATE_HELD) ) {
             if (long_descriptionTxt.GetFirstLine()>1)
                 long_descriptionTxt.SetFirstLine(long_descriptionTxt.GetFirstLine()-1);
             usleep(60000);

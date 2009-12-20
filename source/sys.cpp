@@ -263,3 +263,20 @@ s32 IOS_ReloadIOSsafe(int ios)
 	return r;
 }
 
+#include <time.h>
+
+void ScreenShot()
+{
+  time_t rawtime;
+  struct tm * timeinfo;
+  char buffer [80];
+   char buffer2 [80];
+
+  time ( &rawtime );
+  timeinfo = localtime ( &rawtime );
+  //USBLoader_GX_ScreenShot-Month_Day_Hour_Minute_Second_Year.png
+  strftime (buffer,80,"USBLoader_GX_ScreenShot-%b%d%H%M%S%y.png",timeinfo);
+   sprintf(buffer2, "%s/config/%s", bootDevice, buffer);
+
+  TakeScreenshot(buffer2);
+}

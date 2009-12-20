@@ -15,6 +15,7 @@
 #include <wiiuse/wpad.h>
 
 #include "input.h"
+#include "gecko.h"
 #include "libwiigui/gui.h"
 
 #include "settings/cfg.h"
@@ -28,6 +29,9 @@ static Mtx GXmodelView2D;
 int screenheight;
 int screenwidth;
 u32 frameCount = 0;
+
+u8 * gameScreenTex = NULL; // a GX texture screen capture of the game
+u8 * gameScreenTex2 = NULL; // a GX texture screen capture of the game (copy)
 
 /****************************************************************************
  * UpdatePadsCB
@@ -457,3 +461,18 @@ void Menu_DrawTPLImg(f32 xpos, f32 ypos, f32 zpos, f32 width, f32 height, GXTexO
     GX_SetTevOp (GX_TEVSTAGE0, GX_PASSCLR);
     GX_SetVtxDesc (GX_VA_TEX0, GX_NONE);
 }
+/****************************************************************************
+ * TakeScreenshot
+ *
+ * Copies the current screen into a file "path"
+ ***************************************************************************/
+s32 TakeScreenshot(const char *path)
+{
+    gprintf("\nTakeScreenshot(%s)", path);
+    IMGCTX ctx = PNGU_SelectImageFromDevice (path);
+    s32 ret = PNGU_EncodeFromYCbYCr(ctx,vmode->fbWidth, vmode->efbHeight,xfb[whichfb],0);
+    PNGU_ReleaseImageContext (ctx);
+    gprintf(":%d", ret);
+	return 1;
+}
+
