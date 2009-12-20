@@ -283,11 +283,6 @@ s32 Disc_BootPartition(u64 offset, u8 videoselected, u8 cheat, u8 vipatch, u8 pa
 	memset(gameid, 0, 8);
 	memcpy(gameid, (char*)Disc_ID, 6);
 
-    if (cheat == 1) {
-        /* OCARINA STUFF - FISHEARS*/
-        do_sd_code(gameid);
-    }
-
     /* Setup low memory */
     __Disc_SetLowMem();
 
@@ -295,6 +290,11 @@ s32 Disc_BootPartition(u64 offset, u8 videoselected, u8 cheat, u8 vipatch, u8 pa
     ret = Apploader_Run(&p_entry, cheat, videoselected, vipatch, patchcountrystring, error002fix, alternatedol, alternatedoloffset);
     if (ret < 0)
         return ret;
+
+    if (cheat == 1) {
+        /* OCARINA STUFF - FISHEARS*/
+        do_sd_code(gameid);
+    }
 
 	//kill the USB and SD
 	USBDevice_deInit();
