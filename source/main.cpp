@@ -63,6 +63,8 @@ FreeTypeGX *fontSystem=0;
 FreeTypeGX *fontClock=0;
 PartList partitions;
 
+u8 dbvideo =0;
+
 static void BootUpProblems()
 {
     s32 ret2;
@@ -88,7 +90,7 @@ static void BootUpProblems()
     time_t curtime;
 	time_t endtime = time(0) + 30;
 	do {
-		ret2 = IOS_ReloadIOSsafe(249);
+		/*ret2 = IOS_ReloadIOSsafe(249);
 		if (ret2 < 0) {
 			ret2 = IOS_ReloadIOSsafe(222);
 			SDCard_Init(); 
@@ -102,7 +104,7 @@ static void BootUpProblems()
 				sleep(5);
 				SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
 			}
-		}
+		}*/
 
 		ret2 = WBFS_Init(WBFS_DEVICE_USB);
 		if (ret2 >= 0) {
@@ -141,9 +143,12 @@ static void BootUpProblems()
 unsigned int *xfb = NULL;
 
 void InitTextVideo () {
-
-	if (textVideoInit)return;
-	
+gprintf("\nInitTextVideo ()");
+    if (textVideoInit){
+	gprintf("...0");
+	return;
+    }
+    dbvideo=1;
     VIDEO_Init();
 	GXRModeObj *vmode = VIDEO_GetPreferredMode(NULL); // get default video mode
 
@@ -169,6 +174,7 @@ void InitTextVideo () {
 	//send console output to the gecko
 	if (geckoinit)CON_EnableGecko(1, true);
 	textVideoInit = true;
+	gprintf("...1");
 	
 }
 

@@ -408,6 +408,7 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
         hooktype = 1;
         memcpy((void*)0x80001800, (char*)0x80000000, 6);	// For WiiRD
         /*HOOKS STUFF - FISHEARS*/
+	printf("\n\tcode handler loaded");
     }
 
     for (;;) {

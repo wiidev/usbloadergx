@@ -69,6 +69,8 @@ extern u8 shutdown;
 extern u8 reset;
 extern s32 gameSelected, gameStart;
 extern u8 boothomebrew;
+extern u8 dbvideo;
+
 
 /****************************************************************************
  * ResumeGui
@@ -345,6 +347,11 @@ int MainMenu(int menu) {
     StopGX();
 	gettextCleanUp();
 
+    if(dbvideo)
+	{
+	InitVideodebug ();
+	printf("\n\n\n\n\n");
+    }
 	if (mountMethod==3)
 	{
 			struct discHdr *header = &gameList[gameSelected];

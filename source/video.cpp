@@ -198,7 +198,31 @@ InitVideo () {
     ResetVideo_Menu();
     // Finally, the video is up and ready for use :)
 }
+static unsigned int *xfbDB = NULL;
 
+void InitVideodebug () {
+    VIDEO_Init();
+  GXRModeObj *vmode = VIDEO_GetPreferredMode(NULL); // get default video mode
+
+    // widescreen fix
+    VIDEO_Configure (vmode);
+
+    // Allocate the video buffers
+    xfbDB = (u32 *) MEM_K0_TO_K1 (SYS_AllocateFramebuffer (vmode));
+
+    // A console is always useful while debugging
+    console_init (xfbDB, 20, 64, vmode->fbWidth, vmode->xfbHeight, vmode->fbWidth * 2);
+
+    // Clear framebuffers etc.
+    VIDEO_ClearFrameBuffer (vmode, xfbDB, COLOR_BLACK);
+    VIDEO_SetNextFramebuffer (xfbDB);
+
+    VIDEO_SetBlack (FALSE);
+    VIDEO_Flush ();
+    VIDEO_WaitVSync ();
+    if (vmode->viTVMode & VI_NON_INTERLACE)
+	VIDEO_WaitVSync ();
+}
 /****************************************************************************
  * StopGX
  *

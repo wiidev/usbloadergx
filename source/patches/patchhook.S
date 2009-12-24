@@ -1,7 +1,11 @@
-
-	# (c) Nuke www.usbgecko.com. Licensed under GPL V2
 .text
-#include "ppc.h"
+.set r0,0;   .set sp,1;   .set r2,2; .set r3,3;   .set r4,4
+.set r5,5;   .set r6,6;   .set r7,7;   .set r8,8;   .set r9,9
+.set r10,10; .set r11,11; .set r12,12; .set r13,13; .set r14,14
+.set r15,15; .set r16,16; .set r17,17; .set r18,18; .set r19,19
+.set r20,20; .set r21,21; .set r22,22; .set r23,23; .set r24,24
+.set r25,25; .set r26,26; .set r27,27; .set r28,28; .set r29,29
+.set r30,30; .set r31,31
 
 
 .globl patchhook		# r3 address
@@ -31,8 +35,8 @@ writebranch:
 	icbi    r0, r3
 exit:
 	blr                     # return
-
-.globl patchhook2		# r3 address
+	
+	.globl patchhook2		# r3 address
 patchhook2:
 	mtctr	r4
 	lis	r6, 0x4E80
@@ -80,28 +84,6 @@ writebl:
 	dcbf    r0, r3		# data cache block flush
 	icbi    r0, r3
 exit3:
-	blr                     # return
-
-.globl patchhook4		# r3 address
-patchhook4:
-	mtctr	r4
-	lis	r6, 0x4082
-	ori	r6, r6, 0x001C	# blr
-findregion:
-	lwz	r5, 0(r3)
-	cmpw	r6, r5
-	beq	writebr
-	addi	r3, r3, 4	# next word
-	bdnz	findregion	# loop length
-	b	exit4		# stop unhooked game hanging
-
-writebr:
-	lis     r4, 0x4800	
-	ori     r4, r4, 0x001C
-	stw     r4, 0(r3)	# result in r3
-	dcbf    r0, r3		# data cache block flush
-	icbi    r0, r3
-exit4:
 	blr                     # return
 
 .globl multidolpatchone		# r3 address
@@ -163,6 +145,22 @@ writemulti2:
 	isync
 exit6:
 	blr                     # return
+	
+.globl multidolhook		# r3 address
+multidolhook:
+	lis     r4, 0x8000	# 80001000 hook location (source)
+	ori     r4, r4, 0x1000
+	subf    r4, r3, r4	# subtract r3 from r4 and place in r4
+	lis     r5, 0x3FF	
+	ori     r5, r5, 0xFFFF	# 0x3FFFFFF
+	and     r4, r4, r5
+	lis     r5, 0x4800	# 0x48000000
+	or      r4, r4, r5
+	stw     r4, 0(r3)	# result in r3
+	dcbf    r0, r3		# data cache block flush
+	icbi    r0, r3
+	blr                     # return
+
 
 .globl langvipatch		# r3 address, r4 len, r5 lang byte
 langvipatch:
@@ -187,7 +185,7 @@ gofinal:
 	icbi    r0, r3
 exitlang:
 	blr                     # return
-
+	
 .globl vipatch		# r3 address
 vipatch:
 	mtctr	r4
@@ -505,4 +503,3 @@ writemd1:
 	icbi    r0, r3
 exitmd1:
 	blr                     # return
-

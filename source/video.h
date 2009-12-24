@@ -12,6 +12,7 @@
 #include <ogcsys.h>
 
 void InitVideo ();
+void InitVideodebug();
 void StopGX();
 void ResetVideo_Menu();
 void Menu_Render();

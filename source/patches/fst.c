@@ -48,6 +48,7 @@ u8 filebuff[MAX_GCT_SIZE];
 u32 do_sd_code(char *filename)
 {
 gprintf("\ndo_sd_code(%s)",filename);
+printf("\ndo_sd_code(%s)",filename);
 
 	FILE *fp;
 	//u8 *filebuff;
@@ -70,6 +71,8 @@ gprintf("\ndo_sd_code(%s)",filename);
         USBDevice_deInit();
         SDCard_deInit();
 		gprintf("\n\tcan't open %s",filepath);
+		printf("\n\tcan't open %s",filepath);
+		sleep(10);
 		return 0;
 	}
 
@@ -81,6 +84,8 @@ gprintf("\ndo_sd_code(%s)",filename);
         USBDevice_deInit();
         SDCard_deInit();
 		gprintf("\n\tError.  size = %d",filesize);
+		printf("\n\tError.  size = %d",filesize);
+		sleep(10);
 		return 0;
 	}
 	fseek(fp, 0, SEEK_SET);
@@ -92,6 +97,8 @@ gprintf("\ndo_sd_code(%s)",filename);
         USBDevice_deInit();
         SDCard_deInit();
 		gprintf("\n\tError. ret != size");
+		printf("\n\tError. ret != size");
+		sleep(10);
 		return 0;
 	}
 	fclose(fp);
@@ -105,6 +112,7 @@ gprintf("\ndo_sd_code(%s)",filename);
 
 	
 	gprintf("\n\tDone");
+	printf("...Done");
 
 	return 1;
 }
