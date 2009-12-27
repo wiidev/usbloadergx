@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# italian.lang - v54 - r866
+# italian.lang - v55 - r874
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-19 21:50+0100\n"
+"POT-Creation-Date: 2009-12-20 13:38+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe, Cambo\n"
@@ -215,14 +215,8 @@ msgstr "Impossibile creare la cartella"
 msgid "Can't create file"
 msgstr "Impossibile creare il file"
 
-msgid "Can't decompress LZ77"
-msgstr "Impossibile decomprimere LZ77"
-
 msgid "Can't delete:"
 msgstr "Impossibile eliminare:"
-
-msgid "Can't find disc"
-msgstr "Impossibile trovare il disco"
 
 msgid "Cancel"
 msgstr "Annulla"
@@ -618,12 +612,6 @@ msgstr "Come Vuoi Aggiornare ?"
 msgid "How to Shutdown?"
 msgstr "Spegnimento Wii?"
 
-msgid "IMD5 Header not right."
-msgstr "Header IMD5 non corretto."
-
-msgid "IMET Header wrong."
-msgstr "Header IMET errato."
-
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
 msgstr "Se non hai una connessione WiFi, premi 1 per ottenere un URL dal quale ottenere il file WiiTDB.zip"
 
@@ -666,7 +654,7 @@ msgid "Install a game"
 msgstr "Installa un gioco"
 
 msgid "Install not possible"
-msgstr ""
+msgstr "Impossibile installare"
 
 msgid "Install partitions"
 msgstr "Installa partizioni"
@@ -817,7 +805,7 @@ msgid "No USB Device found."
 msgstr "Nessun Dispositivo USB trovato."
 
 msgid "No WBFS or FAT/NTFS partition found"
-msgstr ""
+msgstr "Non è stata trovata alcuna partizione WBFS o FAT/NTFS"
 
 msgid "No cheats were selected"
 msgstr "Non è stato selezionato alcun trucco"
@@ -1264,7 +1252,7 @@ msgid "You are choosing to display favorites and you do not have any selected."
 msgstr "Hai scelto di visualizzare i preferiti e non ne hai selezionato nessuno"
 
 msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
-msgstr ""
+msgstr "E' in uso una partizione NTFS. Poiché sono possibili errori in scrittura nelle partizioni NTFS, non è possibile installare alcun gioco."
 
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr "Il Controllo Genitori non è attivo. Se vuoi utilizzare il Controllo Genitori abilitalo nelle Impostazioni della Wii."
@@ -1307,7 +1295,7 @@ msgid "files not found on the server!"
 msgstr "file non trovato/i sul server!"
 
 msgid "for FAT/NTFS support"
-msgstr ""
+msgstr "per il supporto FAT/NTFS"
 
 msgid "for Ocarina"
 msgstr "per Ocarina"
@@ -1345,11 +1333,17 @@ msgstr "di"
 msgid "seconds left"
 msgstr "secondi mancanti"
 
-#~ msgid "No WBFS or FAT game partition found"
-#~ msgstr "Nessuna partizione WBFS o FAT trovata"
+#~ msgid "Can't decompress LZ77"
+#~ msgstr "Impossibile decomprimere LZ77"
 
-#~ msgid "for FAT support"
-#~ msgstr "per il supporto delle partizioni FAT"
+#~ msgid "Can't find disc"
+#~ msgstr "Impossibile trovare il disco"
+
+#~ msgid "IMD5 Header not right."
+#~ msgstr "Header IMD5 non corretto."
+
+#~ msgid "IMET Header wrong."
+#~ msgstr "Header IMET errato."
 
 #~ msgid "Failed to extract opening.bnr"
 #~ msgstr "Estrazione opening.bnr fallita"

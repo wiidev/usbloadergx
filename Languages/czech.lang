@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-17 00:06+0100\n"
+"POT-Creation-Date: 2009-12-20 13:38+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) \n"
 "Language-Team: r823 - last version on http://djelinek.sweb.cz/_USBLoderGX/czech.lang \n"
@@ -215,14 +215,8 @@ msgstr "Nelze vytvorit adresár"
 msgid "Can't create file"
 msgstr "Nelze vytvořit soubor"
 
-msgid "Can't decompress LZ77"
-msgstr "Nelze dekomprimovat LZ77"
-
 msgid "Can't delete:"
 msgstr "Nelze smazat:"
-
-msgid "Can't find disc"
-msgstr "Nelze nalézt disc"
 
 msgid "Cancel"
 msgstr "Zrušit"
@@ -617,12 +611,6 @@ msgstr "Jak si prejete provést aktualizaci?"
 
 msgid "How to Shutdown?"
 msgstr "Jakým zpusobem ukoncit?"
-
-msgid "IMD5 Header not right."
-msgstr "Hlavička IMD5 není správná."
-
-msgid "IMET Header wrong."
-msgstr "Hlavička IMET není správná."
 
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
 msgstr ""
@@ -1344,6 +1332,18 @@ msgstr "z "
 
 msgid "seconds left"
 msgstr "sekund zbývá"
+
+#~ msgid "Can't decompress LZ77"
+#~ msgstr "Nelze dekomprimovat LZ77"
+
+#~ msgid "Can't find disc"
+#~ msgstr "Nelze nalézt disc"
+
+#~ msgid "IMD5 Header not right."
+#~ msgstr "Hlavička IMD5 není správná."
+
+#~ msgid "IMET Header wrong."
+#~ msgstr "Hlavička IMET není správná."
 
 #~ msgid "Exit USB Loader GX?"
 #~ msgstr "Ukoncit USB Loader GX?"

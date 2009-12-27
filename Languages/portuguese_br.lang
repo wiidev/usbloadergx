@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-17 00:06+0100\n"
+"POT-Creation-Date: 2009-12-20 13:38+0100\n"
 "PO-Revision-Date: 2009-10-23 18:52+0200\n"
 "Last-Translator: boto12\n"
 "Language-Team: boto12\n"
@@ -215,14 +215,8 @@ msgstr "Não foi possível criar a pasta"
 msgid "Can't create file"
 msgstr "Não foi possivel criar o arquivo"
 
-msgid "Can't decompress LZ77"
-msgstr "Não foi possivel descomprimir LZ77"
-
 msgid "Can't delete:"
 msgstr "Não foi possível apagar:"
-
-msgid "Can't find disc"
-msgstr "Disco não encontrado"
 
 msgid "Cancel"
 msgstr "Cancelar"
@@ -617,12 +611,6 @@ msgstr "Como pretende atualizar o programa?"
 
 msgid "How to Shutdown?"
 msgstr "Como desligar?"
-
-msgid "IMD5 Header not right."
-msgstr "Cabeçalho IMD5 não esta correto"
-
-msgid "IMET Header wrong."
-msgstr "Cabeçalho IMET errado"
 
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
 msgstr "Se não tem conexão sem fios, pressione 1 para ver a URL onde se pode baixar o arquivo WiiTDB.zip"
@@ -1344,6 +1332,18 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
+
+#~ msgid "Can't decompress LZ77"
+#~ msgstr "Não foi possivel descomprimir LZ77"
+
+#~ msgid "Can't find disc"
+#~ msgstr "Disco não encontrado"
+
+#~ msgid "IMD5 Header not right."
+#~ msgstr "Cabeçalho IMD5 não esta correto"
+
+#~ msgid "IMET Header wrong."
+#~ msgstr "Cabeçalho IMET errado"
 
 #~ msgid "Exit USB Loader GX?"
 #~ msgstr "Deseja sair do USB Loader GX?"

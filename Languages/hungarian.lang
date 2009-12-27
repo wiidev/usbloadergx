@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-17 00:06+0100\n"
+"POT-Creation-Date: 2009-12-20 13:38+0100\n"
 "PO-Revision-Date: 2009-12-01 13:23+0100\n"
 "Last-Translator: Springdale\n"
 "Language-Team: Tusk, Springdale\n"
@@ -215,14 +215,8 @@ msgstr "Mappa nem hozható létre"
 msgid "Can't create file"
 msgstr "A fájl nem hozható létre."
 
-msgid "Can't decompress LZ77"
-msgstr "LZ77 nem kitömöríthetõ"
-
 msgid "Can't delete:"
 msgstr "Nem törölhetõ"
-
-msgid "Can't find disc"
-msgstr "Lemez nem található"
 
 msgid "Cancel"
 msgstr "Mégse"
@@ -617,12 +611,6 @@ msgstr "Hogyan szeretnél frissíteni?"
 
 msgid "How to Shutdown?"
 msgstr "Hogyan kapcsoljon ki?"
-
-msgid "IMD5 Header not right."
-msgstr "IMD5 Fejléc nem megfelelõ."
-
-msgid "IMET Header wrong."
-msgstr "IMET fejléc nem megfelelõ."
 
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
 msgstr "WiFi hiánya esetén nyomj 1-es gombot a WiiTDB.zip URL-ért."
@@ -1344,6 +1332,18 @@ msgstr "./"
 
 msgid "seconds left"
 msgstr "hátralévõ másodperc"
+
+#~ msgid "Can't decompress LZ77"
+#~ msgstr "LZ77 nem kitömöríthetõ"
+
+#~ msgid "Can't find disc"
+#~ msgstr "Lemez nem található"
+
+#~ msgid "IMD5 Header not right."
+#~ msgstr "IMD5 Fejléc nem megfelelõ."
+
+#~ msgid "IMET Header wrong."
+#~ msgstr "IMET fejléc nem megfelelõ."
 
 #~ msgid "No WBFS or FAT game partition found"
 #~ msgstr "Nem található WBFS vagy FAT partíció"

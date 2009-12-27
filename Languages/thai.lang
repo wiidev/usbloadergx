@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-17 00:06+0100\n"
+"POT-Creation-Date: 2009-12-20 13:38+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Nitro_subzero \n"
 "Language-Team: Nitro_subzero\n"
@@ -215,14 +215,8 @@ msgstr "ไม่สามารถสร้างไดเรคทอรี่
 msgid "Can't create file"
 msgstr "สร้างไฟล์ไม่ได้"
 
-msgid "Can't decompress LZ77"
-msgstr "คลายไฟล์ LZ777 ไม่ได้"
-
 msgid "Can't delete:"
 msgstr "ไม่สามารถลบได้:"
-
-msgid "Can't find disc"
-msgstr "หาแผ่นไม่เจอ"
 
 msgid "Cancel"
 msgstr "ยกเลิก"
@@ -617,12 +611,6 @@ msgstr "ต้องการอัพเดทแบบไหน ?"
 
 msgid "How to Shutdown?"
 msgstr "ต้องการปิดแบบไหน ?"
-
-msgid "IMD5 Header not right."
-msgstr "ส่วนขยายไฟล์ผิดพลาด"
-
-msgid "IMET Header wrong."
-msgstr "ส่วนขยายไฟล์ผิดพลาด"
 
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
 msgstr "ถ้าไม่มี Wifi กด 1 เพื่อแสดง URL สำหรับดาวน์โหลด WiiTDB.zip"
@@ -1344,6 +1332,18 @@ msgstr "จาก"
 
 msgid "seconds left"
 msgstr "วินาทีที่เหลือ"
+
+#~ msgid "Can't decompress LZ77"
+#~ msgstr "คลายไฟล์ LZ777 ไม่ได้"
+
+#~ msgid "Can't find disc"
+#~ msgstr "หาแผ่นไม่เจอ"
+
+#~ msgid "IMD5 Header not right."
+#~ msgstr "ส่วนขยายไฟล์ผิดพลาด"
+
+#~ msgid "IMET Header wrong."
+#~ msgstr "ส่วนขยายไฟล์ผิดพลาด"
 
 #~ msgid "Exit USB Loader GX?"
 #~ msgstr "ปิด USB Loader GX?"

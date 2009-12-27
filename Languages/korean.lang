@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-17 00:06+0100\n"
+"POT-Creation-Date: 2009-12-20 13:38+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: nextos@korea.com\n"
 "Language-Team: \n"
@@ -215,14 +215,8 @@ msgstr "디렉토리를 만들 수 없습니다"
 msgid "Can't create file"
 msgstr ""
 
-msgid "Can't decompress LZ77"
-msgstr ""
-
 msgid "Can't delete:"
 msgstr "삭제할 수 없습니다:"
-
-msgid "Can't find disc"
-msgstr ""
 
 msgid "Cancel"
 msgstr "취소"
@@ -617,12 +611,6 @@ msgstr "업데이트 할까요?"
 
 msgid "How to Shutdown?"
 msgstr "어떻게 종료할까요?"
-
-msgid "IMD5 Header not right."
-msgstr ""
-
-msgid "IMET Header wrong."
-msgstr ""
 
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
 msgstr "WiFi가 없다면 WiiTDB.zip을 없기위한 URL을 위하여 1을 누르세요"

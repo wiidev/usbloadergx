@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-17 00:06+0100\n"
+"POT-Creation-Date: 2009-12-20 13:38+0100\n"
 "PO-Revision-Date: 2009-11-24 22:11+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -215,14 +215,8 @@ msgstr "Kan inte skapa mapp"
 msgid "Can't create file"
 msgstr "Kunde inte skapa fil"
 
-msgid "Can't decompress LZ77"
-msgstr "Kunde inte dekomprimera LZ77"
-
 msgid "Can't delete:"
 msgstr "Kunde inte radera:"
-
-msgid "Can't find disc"
-msgstr "Kunde inte hitta skiva"
 
 msgid "Cancel"
 msgstr "Avbryt"
@@ -617,12 +611,6 @@ msgstr "Hur vill du uppdatera?"
 
 msgid "How to Shutdown?"
 msgstr "Hur vill du stänga av?"
-
-msgid "IMD5 Header not right."
-msgstr "IMD5 Rubrik stämmer inte."
-
-msgid "IMET Header wrong."
-msgstr "IMET Rubriken är fel."
 
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
 msgstr "Om du inte har WiFi, tryck 1 för att få en URL till din WiiTDB.zip"
@@ -1344,6 +1332,18 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder kvar"
+
+#~ msgid "Can't decompress LZ77"
+#~ msgstr "Kunde inte dekomprimera LZ77"
+
+#~ msgid "Can't find disc"
+#~ msgstr "Kunde inte hitta skiva"
+
+#~ msgid "IMD5 Header not right."
+#~ msgstr "IMD5 Rubrik stämmer inte."
+
+#~ msgid "IMET Header wrong."
+#~ msgstr "IMET Rubriken är fel."
 
 #~ msgid "No WBFS or FAT game partition found"
 #~ msgstr "Ingen WBFS eller FAT spel partition hittad"

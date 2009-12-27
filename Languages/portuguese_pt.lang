@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-# portuguese_pt.lang - r863
+# portuguese_pt.lang - r867
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-17 00:06+0100\n"
-"PO-Revision-Date: 2009-12-14 16:11-0000\n"
+"POT-Creation-Date: 2009-12-25 05:37+0100\n"
+"PO-Revision-Date: 2009-12-21 14:45-0000\n"
 "Last-Translator: Sky8000\n"
 "Language-Team: Sky8000 <sky8000@hotmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -215,14 +215,8 @@ msgstr "Não foi possível criar a pasta"
 msgid "Can't create file"
 msgstr "Não é possível criar o ficheiro"
 
-msgid "Can't decompress LZ77"
-msgstr "Não é possível descomprimir LZ77"
-
 msgid "Can't delete:"
 msgstr "Não foi possível apagar:"
-
-msgid "Can't find disc"
-msgstr "Disco não encontrado"
 
 msgid "Cancel"
 msgstr "Cancelar"
@@ -618,12 +612,6 @@ msgstr "O que deseja actualizar?"
 msgid "How to Shutdown?"
 msgstr "Como desligar a consola?"
 
-msgid "IMD5 Header not right."
-msgstr "O cabeçalho IMD5 não está correcto."
-
-msgid "IMET Header wrong."
-msgstr "Cabeçalho IMET errado."
-
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
 msgstr "Pressione 1 para ver o URL de onde pode descarregar o ficheiro WiiTDB.zip"
 
@@ -666,7 +654,7 @@ msgid "Install a game"
 msgstr "Instalar um jogo"
 
 msgid "Install not possible"
-msgstr ""
+msgstr "Não é possível instalar"
 
 msgid "Install partitions"
 msgstr "Instalar partições"
@@ -817,7 +805,7 @@ msgid "No USB Device found."
 msgstr "Nenhum dispositivo USB encontrado."
 
 msgid "No WBFS or FAT/NTFS partition found"
-msgstr ""
+msgstr "Nenhuma partição WBFS ou FAT/NTFS encontrada"
 
 msgid "No cheats were selected"
 msgstr "Não foram seleccionados truques"
@@ -1213,10 +1201,10 @@ msgid "Video Mode"
 msgstr "Modo de Vídeo"
 
 msgid "WIP Patches Path"
-msgstr ""
+msgstr "Pasta Patches WIP"
 
 msgid "WIP Patches Path changed"
-msgstr ""
+msgstr "Pasta dos Patches WIP alterada"
 
 msgid "Waiting for USB Device"
 msgstr "Aguardando pelo Dispositivo USB"
@@ -1264,7 +1252,7 @@ msgid "You are choosing to display favorites and you do not have any selected."
 msgstr "Está a tentar visualizar os favoritos mas não existe nenhum seleccionado."
 
 msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
-msgstr ""
+msgstr "Está a utilizar um sistema de ficheiros NTFS. Devido à possibilidade de ocorrerem erros na gravação não será possível instalar jogos."
 
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr "O Controlo Parental não está activo. Se deseja utilizar o Controlo Parental active-o na configuração da Wii (Wii Settings)."
@@ -1307,7 +1295,7 @@ msgid "files not found on the server!"
 msgstr "ficheiros não encontrados no servidor!"
 
 msgid "for FAT/NTFS support"
-msgstr ""
+msgstr "pelo suporte FAT/NTFS"
 
 msgid "for Ocarina"
 msgstr "pelo Ocarina"
@@ -1345,11 +1333,17 @@ msgstr "de"
 msgid "seconds left"
 msgstr "segundos restantes"
 
-#~ msgid "No WBFS or FAT game partition found"
-#~ msgstr "Nenhuma partição com jogos encontrada (WBFS ou FAT)"
+#~ msgid "Can't decompress LZ77"
+#~ msgstr "Não é possível descomprimir LZ77"
 
-#~ msgid "for FAT support"
-#~ msgstr "pelo suporte FAT"
+#~ msgid "Can't find disc"
+#~ msgstr "Disco não encontrado"
+
+#~ msgid "IMD5 Header not right."
+#~ msgstr "O cabeçalho IMD5 não está correcto."
+
+#~ msgid "IMET Header wrong."
+#~ msgstr "Cabeçalho IMET errado."
 
 #~ msgid "Failed to extract opening.bnr"
 #~ msgstr "Falha ao extrair o opening.bnr"

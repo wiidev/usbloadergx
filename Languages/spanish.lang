@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-17 00:06+0100\n"
+"POT-Creation-Date: 2009-12-20 13:38+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Penn\n"
 "Language-Team: Penn\n"
@@ -215,14 +215,8 @@ msgstr "No se creó directorio"
 msgid "Can't create file"
 msgstr "No se pudo crear archivo"
 
-msgid "Can't decompress LZ77"
-msgstr "No se pudo descomprimir LZ77"
-
 msgid "Can't delete:"
 msgstr "No se eliminó:"
-
-msgid "Can't find disc"
-msgstr "No se encontró disco"
 
 msgid "Cancel"
 msgstr "Cancelar"
@@ -617,12 +611,6 @@ msgstr "¿Cómo quieres actualizar?"
 
 msgid "How to Shutdown?"
 msgstr "¿Cómo Apagar?"
-
-msgid "IMD5 Header not right."
-msgstr "Mal encabezado IMD5."
-
-msgid "IMET Header wrong."
-msgstr "Mal encabezado IMET."
 
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
 msgstr "Si no tienes WiFi, presiona 1 para ver la URL desde donde obtener tu WiiTDB.zip"
@@ -1344,6 +1332,18 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
+
+#~ msgid "Can't decompress LZ77"
+#~ msgstr "No se pudo descomprimir LZ77"
+
+#~ msgid "Can't find disc"
+#~ msgstr "No se encontró disco"
+
+#~ msgid "IMD5 Header not right."
+#~ msgstr "Mal encabezado IMD5."
+
+#~ msgid "IMET Header wrong."
+#~ msgstr "Mal encabezado IMET."
 
 #~ msgid "Exit USB Loader GX?"
 #~ msgstr "¿Salir de USB Loader GX?"

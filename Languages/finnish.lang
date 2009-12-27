@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-17 00:06+0100\n"
+"POT-Creation-Date: 2009-12-20 13:38+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: c64rmx\n"
 "Language-Team: \n"
@@ -215,14 +215,8 @@ msgstr "Ei voi luoda kansiota"
 msgid "Can't create file"
 msgstr ""
 
-msgid "Can't decompress LZ77"
-msgstr ""
-
 msgid "Can't delete:"
 msgstr "Ei voida poistaa:"
-
-msgid "Can't find disc"
-msgstr ""
 
 msgid "Cancel"
 msgstr "Peruuta"
@@ -617,12 +611,6 @@ msgstr "Kuinka haluat päivittää?"
 
 msgid "How to Shutdown?"
 msgstr "Miten sammutetaan?"
-
-msgid "IMD5 Header not right."
-msgstr ""
-
-msgid "IMET Header wrong."
-msgstr ""
 
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
 msgstr "Jos sinulla ei ole WiFi:ä, paina 1 saadaksesi URL josta voi ladata WiiTDB.zip"
