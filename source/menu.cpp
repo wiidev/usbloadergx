@@ -110,7 +110,7 @@ static void * UpdateGUI (void *arg) {
     while (1) {
         if (guiHalt) {
             LWP_SuspendThread(guithread);
-        } 
+        }
 		else {
             if (!ExitRequested) {
                 mainWindow->Draw();
@@ -179,7 +179,7 @@ static void * UpdateGUI (void *arg) {
  * Startup GUI threads
  ***************************************************************************/
 void InitGUIThreads() {
-    LWP_CreateThread(&guithread, UpdateGUI, NULL, NULL, 0, 75);
+    LWP_CreateThread(&guithread, UpdateGUI, NULL, NULL, 0, LWP_PRIO_HIGHEST);
     InitProgressThread();
     InitNetworkThread();
 
@@ -252,7 +252,7 @@ int MainMenu(int menu) {
 
     currentMenu = menu;
     char imgPath[100];
-	
+
 	//if (strcmp(headlessID,"")!=0)HaltGui();
 	//WindowPrompt("Can you see me now",0,"ok");
 
@@ -287,7 +287,7 @@ int MainMenu(int menu) {
         bgMusic->Load(Settings.ogg_path);
     }
 	bgMusic->Play();
-	
+
     while (currentMenu != MENU_EXIT) {
         bgMusic->SetVolume(Settings.volume);
 
@@ -373,11 +373,11 @@ int MainMenu(int menu) {
     else if (boothomebrew == 1) {
 		gprintf("\nBootHomebrew");
         BootHomebrew(Settings.selected_homebrew);
-    } 
+    }
 	else if (boothomebrew == 2) {
 		gprintf("\nBootHomebrewFromMenu");
         BootHomebrewFromMem();
-    } 
+    }
 	else {
 		gprintf("\n\tSettings.partition:%d",Settings.partition);
 		struct discHdr *header = NULL;
@@ -411,8 +411,8 @@ int MainMenu(int menu) {
 				}
 			}
 		}
-		
-		
+
+
         int ret = 0;
         header = (mountMethod?dvdheader:&gameList[gameSelected]);
 
@@ -491,7 +491,7 @@ int MainMenu(int menu) {
 			gprintf("\nSetting fragment list...");
 			ret = set_frag_list(header->id);
 			gprintf("%d\n", ret);
-		
+
 			ret = Disc_SetUSB(header->id);
 			if (ret < 0) Sys_BackToLoader();
 			gprintf("\n\tUSB set to game");
@@ -519,7 +519,7 @@ int MainMenu(int menu) {
 				mload_close();
 			}
         }
-		
+
         u8 errorfixer002 = 0;
         switch (fix002) {
         case on:

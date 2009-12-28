@@ -139,8 +139,46 @@ bool checkfile(char * path) {
     return false;
 }
 
+bool SearchFile(const char * searchpath, const char * searched_filename, char * outfilepath)
+{
+    struct stat st;
+    DIR_ITER *dir = NULL;
+    bool result = false;
 
+    char filename[1024];
+    char pathptr[strlen(searchpath)+1];
+    snprintf(pathptr, sizeof(pathptr), "%s", searchpath);
 
+    if(pathptr[strlen(pathptr)-1] == '/')
+    {
+        pathptr[strlen(pathptr)-1] = '\0';
+    }
 
+    dir = diropen(pathptr);
+    if(!dir)
+        return false;
 
+    while (dirnext(dir,filename,&st) == 0 && result == false)
+	{
+	    if(strcasecmp(filename, searched_filename) == 0)
+	    {
+	        if(outfilepath)
+	        {
+	            sprintf(outfilepath, "%s/%s", pathptr, filename);
+	        }
+	        result = true;
+	    }
+        else if((st.st_mode & S_IFDIR) != 0)
+        {
+            if(strcmp(filename, ".") != 0 && strcmp(filename, "..") != 0)
+            {
+                char newpath[1024];
+                snprintf(newpath, sizeof(newpath), "%s/%s", pathptr, filename);
+                result = SearchFile(newpath, searched_filename, outfilepath);
+            }
+        }
+	}
+    dirclose(dir);
 
+    return result;
+}

@@ -36,10 +36,10 @@ extern u8 shutdown;
 extern u8 reset;
 
 
-bool DownloadTheme(const char *url, const char *title)
+int DownloadTheme(const char *url, const char *title)
 {
     if(!url)
-        return false;
+        return 0;
 
     char filename[255];
     memset(filename, 0, sizeof(filename));
@@ -49,7 +49,7 @@ bool DownloadTheme(const char *url, const char *title)
     if(filesize <= 0)
     {
         WindowPrompt(tr("Download request failed."), 0, tr("OK"));
-        return false;
+        return 0;
     }
 
     char path[300];
@@ -65,7 +65,7 @@ bool DownloadTheme(const char *url, const char *title)
     if(!file)
     {
         WindowPrompt(tr("Download failed."), tr("Can't create file"), tr("OK"));
-        return false;
+        return 0;
     }
 
     u32 done = 0;
@@ -89,7 +89,7 @@ bool DownloadTheme(const char *url, const char *title)
             remove(path);
             ProgressStop();
             WindowPrompt(tr("Download failed."), tr("Transfer failed."), tr("OK"));
-            return false;
+            return 0;
         }
         else if (ret == 0)
             break;
@@ -108,16 +108,37 @@ bool DownloadTheme(const char *url, const char *title)
     {
         remove(filepath);
         WindowPrompt(tr("Download failed."), tr("Connection lost..."), tr("OK"));
-        return false;
+        return 0;
     }
 
     ZipFile zipfile(filepath);
 
-    bool result = zipfile.ExtractAll(path);
+    int result = zipfile.ExtractAll(path);
     if(result)
     {
         remove(filepath);
-        WindowPrompt(tr("Successfully extracted theme"), title, tr("OK"));
+        int choice = WindowPrompt(tr("Successfully extracted theme."), tr("Do you want to apply it now?"), tr("Yes"), tr("No"));
+        if(choice)
+        {
+            char real_themepath[1024];
+            sprintf(real_themepath, "%s", CFG.theme_path);
+            if(SearchFile(path, "GXtheme.cfg", real_themepath) == true)
+            {
+                char *ptr = strrchr(real_themepath, '/');
+                if(ptr)
+                {
+                    ptr++;
+                    ptr[0] = '\0';
+                }
+                snprintf(CFG.theme_path, sizeof(CFG.theme_path), "%s", real_themepath);
+                cfg_save_global();
+                CFG_Load();
+                CFG_LoadGlobal();
+                result = 2;
+            }
+            else
+                WindowPrompt(tr("ERROR: Can't set up theme."), tr("GXtheme.cfg not found in any subfolder."), tr("OK"));
+        }
     }
     else
         WindowPrompt(tr("Failed to extract."), tr("Unsupported format, try to extract manually."), tr("OK"));
@@ -126,10 +147,11 @@ bool DownloadTheme(const char *url, const char *title)
 }
 
 
-static void Theme_Prompt(const char *title, const char *author, GuiImageData *thumbimageData, const char *downloadlink)
+static int Theme_Prompt(const char *title, const char *author, GuiImageData *thumbimageData, const char *downloadlink)
 {
     gprintf("\nTheme_Prompt(%s ,%s, <DATA>, %s)",title,author,downloadlink);
     bool leave = false;
+    int result = 0;
 
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
 	// because destroy GuiSound must wait while sound playing is finished, we use a global sound
@@ -233,7 +255,9 @@ static void Theme_Prompt(const char *title, const char *author, GuiImageData *th
             int choice = WindowPrompt(tr("Do you want to download this theme?"), title, tr("Yes"), tr("Cancel"));
             if(choice)
             {
-                DownloadTheme(downloadlink, title);
+                result = DownloadTheme(downloadlink, title);
+                if(result == 2)
+                    leave = true;
             }
             mainWindow->SetState(STATE_DISABLED);
             promptWindow.SetState(STATE_DEFAULT);
@@ -254,6 +278,8 @@ static void Theme_Prompt(const char *title, const char *author, GuiImageData *th
     mainWindow->Remove(&promptWindow);
     mainWindow->SetState(STATE_DEFAULT);
     ResumeGui();
+
+    return result;
 }
 
 
@@ -600,8 +626,13 @@ int Theme_Downloader()
                 if(MainButton[i]->GetState() == STATE_CLICKED)
                 {
                     snprintf(url, sizeof(url), "%s", Theme->GetDownloadLink(currenttheme+i));
-                    Theme_Prompt(Theme->GetThemeTitle(currenttheme+i), Theme->GetThemeAuthor(currenttheme+i), ImageData[i], url);
+                    int ret = Theme_Prompt(Theme->GetThemeTitle(currenttheme+i), Theme->GetThemeAuthor(currenttheme+i), ImageData[i], url);
                     MainButton[i]->ResetState();
+                    if(ret == 2)
+                    {
+                        listchanged = true;
+                        menu = MENU_THEMEDOWNLOADER;
+                    }
                 }
             }
         }
