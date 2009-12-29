@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-20 13:38+0100\n"
+"POT-Creation-Date: 2009-12-29 03:43+0100\n"
 "PO-Revision-Date: 2009-11-24 22:11+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -408,6 +408,9 @@ msgstr "Visa favoriter"
 msgid "Do you really want to delete:"
 msgstr "Vill du verkligen radera:"
 
+msgid "Do you want to apply it now?"
+msgstr ""
+
 msgid "Do you want to change language?"
 msgstr "Vill du byta språk?"
 
@@ -470,6 +473,9 @@ msgstr "FEL"
 
 msgid "ERROR:"
 msgstr "FEL:"
+
+msgid "ERROR: Can't set up theme."
+msgstr ""
 
 msgid "Enable Parental Control"
 msgstr ""
@@ -554,6 +560,9 @@ msgstr "GCT fil skapad"
 
 msgid "GUI Settings"
 msgstr "GUI inställningar"
+
+msgid "GXtheme.cfg not found in any subfolder."
+msgstr ""
 
 msgid "Game ID"
 msgstr "Spel-ID"
@@ -1047,8 +1056,8 @@ msgstr "Uppdateringen lyckades"
 msgid "Successfully deleted:"
 msgstr "Lyckad radering av:"
 
-msgid "Successfully extracted theme"
-msgstr "Extrahering av tema lyckades"
+msgid "Successfully extracted theme."
+msgstr "Extrahering av tema lyckades."
 
 msgid "Successfully installed:"
 msgstr "Lyckad installation av:"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-20 13:38+0100\n"
+"POT-Creation-Date: 2009-12-29 03:43+0100\n"
 "PO-Revision-Date: 2009-12-01 13:23+0100\n"
 "Last-Translator: Springdale\n"
 "Language-Team: Tusk, Springdale\n"
@@ -408,6 +408,9 @@ msgstr "Kedvencek megjelenítése"
 msgid "Do you really want to delete:"
 msgstr "Biztosan törlöd?"
 
+msgid "Do you want to apply it now?"
+msgstr ""
+
 msgid "Do you want to change language?"
 msgstr "Nyelv megváltoztatása?"
 
@@ -470,6 +473,9 @@ msgstr "HIBA"
 
 msgid "ERROR:"
 msgstr "HIBA:"
+
+msgid "ERROR: Can't set up theme."
+msgstr ""
 
 msgid "Enable Parental Control"
 msgstr ""
@@ -554,6 +560,9 @@ msgstr "GCT Fájl létrehozva"
 
 msgid "GUI Settings"
 msgstr "Kezelõfelület"
+
+msgid "GXtheme.cfg not found in any subfolder."
+msgstr ""
 
 msgid "Game ID"
 msgstr "Játék ID"
@@ -1047,8 +1056,8 @@ msgstr "Sikeres frissítés"
 msgid "Successfully deleted:"
 msgstr "Sikeresen törölve:"
 
-msgid "Successfully extracted theme"
-msgstr "Téma kicsomagolva:"
+msgid "Successfully extracted theme."
+msgstr "Téma kicsomagolva."
 
 msgid "Successfully installed:"
 msgstr "Sikeresen telepítve:"

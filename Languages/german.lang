@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# german.lang - r872
+# german.lang - r876
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-20 14:30+0100\n"
+"POT-Creation-Date: 2009-12-29 03:43+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: ZEN.13\n"
 "Language-Team: Snoozer, wishmasterf, Bertilax, ZEN.13\n"
@@ -408,6 +408,9 @@ msgstr "Favoriten anzeigen"
 msgid "Do you really want to delete:"
 msgstr "Löschvorgang bestätigen:"
 
+msgid "Do you want to apply it now?"
+msgstr ""
+
 msgid "Do you want to change language?"
 msgstr "Möchtest du die Sprache ändern?"
 
@@ -470,6 +473,9 @@ msgstr "FEHLER"
 
 msgid "ERROR:"
 msgstr "FEHLER:"
+
+msgid "ERROR: Can't set up theme."
+msgstr ""
 
 msgid "Enable Parental Control"
 msgstr "Altersbeschränkung aktivieren"
@@ -554,6 +560,9 @@ msgstr "GCT Datei erstellt"
 
 msgid "GUI Settings"
 msgstr "GUI Einstellungen"
+
+msgid "GXtheme.cfg not found in any subfolder."
+msgstr ""
 
 msgid "Game ID"
 msgstr "Spiel ID"
@@ -1047,8 +1056,8 @@ msgstr "Erfolgreich aktualisiert"
 msgid "Successfully deleted:"
 msgstr "Erfolgreich gelöscht:"
 
-msgid "Successfully extracted theme"
-msgstr "Theme erfolgreich entpackt"
+msgid "Successfully extracted theme."
+msgstr "Theme erfolgreich entpackt."
 
 msgid "Successfully installed:"
 msgstr "Erfolgreich installiert:"

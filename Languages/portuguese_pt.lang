@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-25 05:37+0100\n"
+"POT-Creation-Date: 2009-12-29 03:43+0100\n"
 "PO-Revision-Date: 2009-12-21 14:45-0000\n"
 "Last-Translator: Sky8000\n"
 "Language-Team: Sky8000 <sky8000@hotmail.com>\n"
@@ -408,6 +408,9 @@ msgstr "Mostrar favoritos"
 msgid "Do you really want to delete:"
 msgstr "Tem a certeza que quer eliminar o jogo:"
 
+msgid "Do you want to apply it now?"
+msgstr ""
+
 msgid "Do you want to change language?"
 msgstr "Deseja alterar o idioma?"
 
@@ -470,6 +473,9 @@ msgstr "ERRO"
 
 msgid "ERROR:"
 msgstr "ERRO:"
+
+msgid "ERROR: Can't set up theme."
+msgstr ""
 
 msgid "Enable Parental Control"
 msgstr "Activar Controlo Parental"
@@ -554,6 +560,9 @@ msgstr "Ficheiro GCT criado"
 
 msgid "GUI Settings"
 msgstr "Definições do Interface"
+
+msgid "GXtheme.cfg not found in any subfolder."
+msgstr ""
 
 msgid "Game ID"
 msgstr "ID do Jogo"
@@ -1047,8 +1056,8 @@ msgstr "Actualização Concluída"
 msgid "Successfully deleted:"
 msgstr "Eliminado com Sucesso:"
 
-msgid "Successfully extracted theme"
-msgstr "Tema extraído com sucesso"
+msgid "Successfully extracted theme."
+msgstr "Tema extraído com sucesso."
 
 msgid "Successfully installed:"
 msgstr "Instalado com Sucesso:"

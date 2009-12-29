@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-20 13:38+0100\n"
+"POT-Creation-Date: 2009-12-29 03:43+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) \n"
 "Language-Team: r823 - last version on http://djelinek.sweb.cz/_USBLoderGX/czech.lang \n"
@@ -408,6 +408,9 @@ msgstr "Zobrazit oblíbené"
 msgid "Do you really want to delete:"
 msgstr "Opravdu smazat:"
 
+msgid "Do you want to apply it now?"
+msgstr ""
+
 msgid "Do you want to change language?"
 msgstr "Prejete si zmenit jazyk?"
 
@@ -470,6 +473,9 @@ msgstr "CHYBA"
 
 msgid "ERROR:"
 msgstr "CHYBA:"
+
+msgid "ERROR: Can't set up theme."
+msgstr ""
 
 msgid "Enable Parental Control"
 msgstr ""
@@ -554,6 +560,9 @@ msgstr "Soubor GCT vytvoren"
 
 msgid "GUI Settings"
 msgstr "Nastavení GUI"
+
+msgid "GXtheme.cfg not found in any subfolder."
+msgstr ""
 
 msgid "Game ID"
 msgstr "ID hry"
@@ -1047,8 +1056,8 @@ msgstr "Úspešne zaktualizováno"
 msgid "Successfully deleted:"
 msgstr "Úspešne smazáno:"
 
-msgid "Successfully extracted theme"
-msgstr "Úspešne rozbalené téma"
+msgid "Successfully extracted theme."
+msgstr "Úspešne rozbalené téma."
 
 msgid "Successfully installed:"
 msgstr "Úspešne nainstalováno"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-25 05:37+0100\n"
+"POT-Creation-Date: 2009-12-29 03:43+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Miller Liang\n"
 "Language-Team: kyogc, Miller\n"
@@ -408,6 +408,9 @@ msgstr "我的最愛模式"
 msgid "Do you really want to delete:"
 msgstr "確定刪除:"
 
+msgid "Do you want to apply it now?"
+msgstr ""
+
 msgid "Do you want to change language?"
 msgstr "要變更語言嗎?"
 
@@ -470,6 +473,9 @@ msgstr "錯誤"
 
 msgid "ERROR:"
 msgstr "錯誤:"
+
+msgid "ERROR: Can't set up theme."
+msgstr ""
 
 msgid "Enable Parental Control"
 msgstr "啟用親子控制"
@@ -554,6 +560,9 @@ msgstr "GCT 檔案已產生"
 
 msgid "GUI Settings"
 msgstr "介面設定"
+
+msgid "GXtheme.cfg not found in any subfolder."
+msgstr ""
 
 msgid "Game ID"
 msgstr "遊戲 ID"
@@ -1047,8 +1056,8 @@ msgstr "更新已完成"
 msgid "Successfully deleted:"
 msgstr "成功的刪除:"
 
-msgid "Successfully extracted theme"
-msgstr "成功獲取主題"
+msgid "Successfully extracted theme."
+msgstr "成功獲取主題."
 
 msgid "Successfully installed:"
 msgstr "成功安裝:"
@@ -1322,13 +1331,13 @@ msgid "formatted!"
 msgstr "完成格式化!"
 
 msgid "free"
-msgstr "容量"
+msgstr "剩餘"
 
 msgid "not set"
 msgstr "未設定"
 
 msgid "of"
-msgstr "可用空間"
+msgstr "的"
 
 msgid "seconds left"
 msgstr "剩餘秒數"

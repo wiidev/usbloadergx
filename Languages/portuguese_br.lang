@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-20 13:38+0100\n"
+"POT-Creation-Date: 2009-12-29 03:43+0100\n"
 "PO-Revision-Date: 2009-10-23 18:52+0200\n"
 "Last-Translator: boto12\n"
 "Language-Team: boto12\n"
@@ -408,6 +408,9 @@ msgstr "Mostrar favoritos"
 msgid "Do you really want to delete:"
 msgstr "Tem a certeza que quer eliminar o jogo:"
 
+msgid "Do you want to apply it now?"
+msgstr ""
+
 msgid "Do you want to change language?"
 msgstr "Deseja alterar o idioma?"
 
@@ -470,6 +473,9 @@ msgstr "ERRO"
 
 msgid "ERROR:"
 msgstr "ERRO:"
+
+msgid "ERROR: Can't set up theme."
+msgstr ""
 
 msgid "Enable Parental Control"
 msgstr ""
@@ -554,6 +560,9 @@ msgstr "Arquivo GCT criado"
 
 msgid "GUI Settings"
 msgstr "Definições de Interface"
+
+msgid "GXtheme.cfg not found in any subfolder."
+msgstr ""
 
 msgid "Game ID"
 msgstr "ID do Jogo"
@@ -805,7 +814,7 @@ msgid "No USB Device found."
 msgstr "Nenhum dispositivo USB encontrado."
 
 msgid "No WBFS or FAT/NTFS partition found"
-msgstr ""
+msgstr "Nenhuma partição WBFS o FAT/NTFS encontrada"
 
 msgid "No cheats were selected"
 msgstr "Nenhuma seleção de truques"
@@ -1047,8 +1056,8 @@ msgstr "Programa atualizado com Sucesso"
 msgid "Successfully deleted:"
 msgstr "Eliminado com Sucesso:"
 
-msgid "Successfully extracted theme"
-msgstr "Tema extraido com sucesso"
+msgid "Successfully extracted theme."
+msgstr "Tema extraido com sucesso."
 
 msgid "Successfully installed:"
 msgstr "Instalado com Sucesso:"
@@ -1347,9 +1356,6 @@ msgstr "segundos restantes"
 
 #~ msgid "Exit USB Loader GX?"
 #~ msgstr "Deseja sair do USB Loader GX?"
-
-#~ msgid "No WBFS partition found"
-#~ msgstr "Não foi encontrada nenhuma partição WBFS"
 
 #~ msgid "You need to format a partition"
 #~ msgstr "É necessário FORMATAR a partição"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-20 13:38+0100\n"
+"POT-Creation-Date: 2009-12-29 03:43+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Penn\n"
 "Language-Team: Penn\n"
@@ -408,6 +408,9 @@ msgstr "Mostrar favoritos"
 msgid "Do you really want to delete:"
 msgstr "¿Realmente quieres borrar?:"
 
+msgid "Do you want to apply it now?"
+msgstr ""
+
 msgid "Do you want to change language?"
 msgstr "¿Quieres cambiar idioma?"
 
@@ -469,6 +472,9 @@ msgid "ERROR"
 msgstr ""
 
 msgid "ERROR:"
+msgstr ""
+
+msgid "ERROR: Can't set up theme."
 msgstr ""
 
 msgid "Enable Parental Control"
@@ -554,6 +560,9 @@ msgstr "Archivo GCT creado"
 
 msgid "GUI Settings"
 msgstr "Configuración de GUI"
+
+msgid "GXtheme.cfg not found in any subfolder."
+msgstr ""
 
 msgid "Game ID"
 msgstr "ID de Juego"
@@ -1047,8 +1056,8 @@ msgstr "Actualización correcta"
 msgid "Successfully deleted:"
 msgstr "Borrado correctamente:"
 
-msgid "Successfully extracted theme"
-msgstr "Tema extraido correctamente"
+msgid "Successfully extracted theme."
+msgstr "Tema extraido correctamente."
 
 msgid "Successfully installed:"
 msgstr "Instalado correctamente:"

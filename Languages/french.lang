@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# French V12 r875
+# French V12.1 r878
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-20 13:38+0100\n"
+"POT-Creation-Date: 2009-12-29 03:43+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Kin8\n"
 "Language-Team: Badablek, Amour, ikya & Kin8\n"
@@ -408,6 +408,9 @@ msgstr "Favoris"
 msgid "Do you really want to delete:"
 msgstr "Voulez-vous vraiment supprimer ?"
 
+msgid "Do you want to apply it now?"
+msgstr "L'appliquer maintenant ?"
+
 msgid "Do you want to change language?"
 msgstr "Changer de langue ?"
 
@@ -470,6 +473,9 @@ msgstr "ERREUR"
 
 msgid "ERROR:"
 msgstr "ERREUR:"
+
+msgid "ERROR: Can't set up theme."
+msgstr "ERREUR: Configuration thème impossible."
 
 msgid "Enable Parental Control"
 msgstr "Contrôle Parental activé"
@@ -554,6 +560,9 @@ msgstr "Fichier GCT créé"
 
 msgid "GUI Settings"
 msgstr "Configuration GUI"
+
+msgid "GXtheme.cfg not found in any subfolder."
+msgstr "GXtheme.cfg non trouvé dans aucun sous-dossier."
 
 msgid "Game ID"
 msgstr "ID du jeu"
@@ -1047,8 +1056,8 @@ msgstr "Mise à Jour terminée"
 msgid "Successfully deleted:"
 msgstr "Supprimé avec succès:"
 
-msgid "Successfully extracted theme"
-msgstr "Succès de l'extraction du thème"
+msgid "Successfully extracted theme."
+msgstr "Succès de l'extraction du thème."
 
 msgid "Successfully installed:"
 msgstr "Installé avec succès:"

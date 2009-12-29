@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-20 13:38+0100\n"
+"POT-Creation-Date: 2009-12-29 03:43+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Nitro_subzero \n"
 "Language-Team: Nitro_subzero\n"
@@ -408,6 +408,9 @@ msgstr "แสดง แบบเกมส์ที่ชอบ"
 msgid "Do you really want to delete:"
 msgstr "ต้องการที่จะลบใช่ไหม:"
 
+msgid "Do you want to apply it now?"
+msgstr ""
+
 msgid "Do you want to change language?"
 msgstr "ต้องการจะเปลี่ยนภาษา ?"
 
@@ -470,6 +473,9 @@ msgstr "ผิดพลาด"
 
 msgid "ERROR:"
 msgstr "ผิดพลาด:"
+
+msgid "ERROR: Can't set up theme."
+msgstr ""
 
 msgid "Enable Parental Control"
 msgstr ""
@@ -554,6 +560,9 @@ msgstr "ไฟล์ GCT ถูกสร้าง"
 
 msgid "GUI Settings"
 msgstr "ปรับแต่งหน้าจอ"
+
+msgid "GXtheme.cfg not found in any subfolder."
+msgstr ""
 
 msgid "Game ID"
 msgstr "เกมส์ ID"
@@ -1047,8 +1056,8 @@ msgstr "อัพเดทสำเร็จ"
 msgid "Successfully deleted:"
 msgstr "ลบสำเร็จ:"
 
-msgid "Successfully extracted theme"
-msgstr "ขยายไฟล์ธีมสำเร็จ"
+msgid "Successfully extracted theme."
+msgstr "ขยายไฟล์ธีมสำเร็จ."
 
 msgid "Successfully installed:"
 msgstr "ติดตั้งสำเร็จ:"

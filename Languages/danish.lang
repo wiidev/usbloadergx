@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-27 20:59+0100\n"
+"POT-Creation-Date: 2009-12-29 03:43+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: dorf[dk]\n"
 "Language-Team: dorf[dk]\n"
@@ -408,6 +408,9 @@ msgstr "Vis favoritter"
 msgid "Do you really want to delete:"
 msgstr "Vil du slette:"
 
+msgid "Do you want to apply it now?"
+msgstr ""
+
 msgid "Do you want to change language?"
 msgstr "Skal sproget ændres?"
 
@@ -470,6 +473,9 @@ msgstr "FEJL"
 
 msgid "ERROR:"
 msgstr "FEJL:"
+
+msgid "ERROR: Can't set up theme."
+msgstr ""
 
 msgid "Enable Parental Control"
 msgstr "Slå børnelåsen til"
@@ -554,6 +560,9 @@ msgstr "GCT-fil oprettet"
 
 msgid "GUI Settings"
 msgstr "Konfigurér GUI"
+
+msgid "GXtheme.cfg not found in any subfolder."
+msgstr ""
 
 msgid "Game ID"
 msgstr "Spil-ID"
@@ -1047,8 +1056,8 @@ msgstr "Opdateringen lykkedes"
 msgid "Successfully deleted:"
 msgstr "Sletningen lykkedes:"
 
-msgid "Successfully extracted theme"
-msgstr "Udpakning af tema lykkedes"
+msgid "Successfully extracted theme."
+msgstr "Udpakning af tema lykkedes."
 
 msgid "Successfully installed:"
 msgstr "Installationen lykkedes:"
