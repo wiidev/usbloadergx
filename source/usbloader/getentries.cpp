@@ -500,6 +500,12 @@ int __Menu_GetGameList(int t, wchar_t* gameFilter, discHdr ** PgameList, u32 *Pg
 			if (!game_num || game_num->favorite==0)
 				continue;
 		}
+
+                //ignore uLoader cfg "iso".  i was told it is "__CFG_"  but not confirmed
+                if (header->id[0]=='_'&&header->id[1]=='_'&&
+                    header->id[2]=='C'&&header->id[3]=='F'&&
+                    header->id[4]=='G'&&header->id[5]=='_')
+                    continue;
 		
 		if (Settings.parentalcontrol && !Settings.godmode && t==0) {
 			if (get_block(header) >= Settings.parentalcontrol)
