@@ -215,10 +215,10 @@ main(int argc, char *argv[])
     gprintf(")");
 
     // This part is added, because we need a identify patched ios
-    printf("\n\tReloading into ios 236");
+//    printf("\n\tReloading into ios 236");
     if (IOS_ReloadIOSsafe(236) < 0)
     {
-        printf("\n\tIOS 236 not found, reloading into 36");
+//        printf("\n\tIOS 236 not found, reloading into 36");
         IOS_ReloadIOSsafe(36);
     }
 
