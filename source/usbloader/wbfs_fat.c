@@ -648,3 +648,26 @@ s32 WBFS_FAT_ReIDGame(u8 *discid, const void *newID)
 
 	return ret;
 }
+
+s32 WBFS_FAT_EstimateGameSize(void) {
+	wbfs_t *part = NULL;
+	u64 size = (u64)143432*2*0x8000ULL;
+	u32 n_sector = size / fat_sector_size;
+	u32 wii_sec_sz; 
+
+	// init a temporary dummy part
+	// as a placeholder for wbfs_size_disc
+	part = wbfs_open_partition(
+			nop_read_sector, nop_write_sector,
+			NULL, fat_sector_size, n_sector, 0, 1);
+	if (!part) return -1;
+	wii_sec_sz = part->wii_sec_sz;
+	
+	partition_selector_t part_sel;
+	if (Settings.fullcopy) {
+		part_sel = ALL_PARTITIONS;
+	} else {
+		part_sel = Settings.partitions_to_install == install_game_only ? ONLY_GAME_PARTITION : ALL_PARTITIONS;
+	}
+    return wbfs_estimate_disc(part, __WBFS_ReadDVD, NULL, part_sel);
+}

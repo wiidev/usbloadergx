@@ -621,9 +621,7 @@ s32 WBFS_ReIDGame(u8 *discid, const void *newID)
 
 f32 WBFS_EstimeGameSize(void) {
 	if (wbfs_part_fs) {
-		u64 comp;
-		WBFS_FAT_DVD_Size(&comp, NULL);
-		return comp;
+		return WBFS_FAT_EstimateGameSize();
 	}
 
 	partition_selector_t part_sel;
