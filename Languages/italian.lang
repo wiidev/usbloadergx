@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# italian.lang - v55 - r874
+# italian.lang - v56 - r878
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-29 03:43+0100\n"
+"POT-Creation-Date: 2010-01-07 00:14+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe, Cambo\n"
@@ -182,9 +182,6 @@ msgstr "Torna a HBC/Menu Wii"
 msgid "Back to Loader"
 msgstr "Canale HomeBrew"
 
-msgid "Back to Wii Menu"
-msgstr "Torna al Menu Wii"
-
 msgid "Backgroundmusic"
 msgstr "Musica Sottofondo"
 
@@ -287,9 +284,6 @@ msgstr "Non è stato possibile creare il file GCT"
 
 msgid "Could not find a WBFS partition."
 msgstr "Non è stata trovata alcuna partizione WBFS."
-
-msgid "Could not initialize DIP module!"
-msgstr "Non è stato possibile inizializzare il modulo DIP!"
 
 msgid "Could not initialize network!"
 msgstr "Non è stato possibile inizializzare la rete!"
@@ -409,7 +403,7 @@ msgid "Do you really want to delete:"
 msgstr "Vuoi veramente eliminare:"
 
 msgid "Do you want to apply it now?"
-msgstr ""
+msgstr "Applicare immediatamente?"
 
 msgid "Do you want to change language?"
 msgstr "Vuoi cambiare lingua?"
@@ -419,9 +413,6 @@ msgstr "Vuoi scaricare questo tema?"
 
 msgid "Do you want to format:"
 msgstr "Vuoi formattare:"
-
-msgid "Do you want to retry for 30 secs?"
-msgstr "Vuoi riprovare per 30 sec?"
 
 msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "Vuoi utilizzare il DOL alternativo funzionante?"
@@ -475,7 +466,7 @@ msgid "ERROR:"
 msgstr "ERRORE:"
 
 msgid "ERROR: Can't set up theme."
-msgstr ""
+msgstr "ERRORE: Impossibile configurare il tema."
 
 msgid "Enable Parental Control"
 msgstr "Attiva Controllo Genitori"
@@ -534,9 +525,6 @@ msgstr "Scorrimento Dischi"
 msgid "Force"
 msgstr "Forza"
 
-msgid "Format"
-msgstr "Formatta"
-
 msgid "Formatting, please wait..."
 msgstr "Sto Formattando, prego attendere..."
 
@@ -562,7 +550,7 @@ msgid "GUI Settings"
 msgstr "Impostazioni Loader"
 
 msgid "GXtheme.cfg not found in any subfolder."
-msgstr ""
+msgstr "Nessuna sottocartella contiene il file GXtheme.cfg."
 
 msgid "Game ID"
 msgstr "ID Gioco"
@@ -807,15 +795,6 @@ msgstr "Nessun Preferito"
 msgid "No SD-Card inserted!"
 msgstr "Nessuna scheda SD inserita!"
 
-msgid "No USB Device"
-msgstr "Nessun Dispositivo USB"
-
-msgid "No USB Device found."
-msgstr "Nessun Dispositivo USB trovato."
-
-msgid "No WBFS or FAT/NTFS partition found"
-msgstr "Non è stata trovata alcuna partizione WBFS o FAT/NTFS"
-
 msgid "No cheats were selected"
 msgstr "Non è stato selezionato alcun trucco"
 
@@ -893,6 +872,9 @@ msgstr "Controllo Genitori disabilitato"
 
 msgid "Partition"
 msgstr "Partizione"
+
+msgid "Partition Format Menu"
+msgstr ""
 
 msgid "Password"
 msgstr ""
@@ -986,9 +968,6 @@ msgstr "Salvataggio Eseguito"
 
 msgid "Screensaver"
 msgstr "Salvaschermo"
-
-msgid "Select"
-msgstr "Seleziona"
 
 msgid "Select a DOL"
 msgstr "Seleziona un file DOL"
@@ -1120,9 +1099,6 @@ msgstr "Suggerimenti"
 msgid "Transfer failed."
 msgstr "Trasferimento fallito."
 
-msgid "USB Device not found"
-msgstr "Dispositivo USB non Trovato"
-
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX è Protetto"
 
@@ -1150,6 +1126,9 @@ msgstr "Sblocca Controllo Genitori"
 
 msgid "Unlock console to use this option."
 msgstr "Sblocca la Console per usare questa opzione."
+
+msgid "Unlock the app first."
+msgstr ""
 
 msgid "Unlocked"
 msgstr "Sbloccato"
@@ -1215,9 +1194,6 @@ msgstr "Percorso Patch WIP"
 msgid "WIP Patches Path changed"
 msgstr "Percorso Patch WIP modificato"
 
-msgid "Waiting for USB Device"
-msgstr "Caricamento Dispositivo USB"
-
 msgid "Waiting..."
 msgstr "Caricamento..."
 
@@ -1263,14 +1239,14 @@ msgstr "Hai scelto di visualizzare i preferiti e non ne hai selezionato nessuno"
 msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
 msgstr "E' in uso una partizione NTFS. Poiché sono possibili errori in scrittura nelle partizioni NTFS, non è possibile installare alcun gioco."
 
+msgid "You can't access this menu!"
+msgstr ""
+
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr "Il Controllo Genitori non è attivo. Se vuoi utilizzare il Controllo Genitori abilitalo nelle Impostazioni della Wii."
 
 msgid "You have attempted to load a bad image"
 msgstr "Hai tentato di caricare un'immagine non valida"
-
-msgid "You need to select or format a partition"
-msgstr "Occorre selezionare o formattare una partizione"
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
@@ -1341,6 +1317,39 @@ msgstr "di"
 
 msgid "seconds left"
 msgstr "secondi mancanti"
+
+#~ msgid "Back to Wii Menu"
+#~ msgstr "Torna al Menu Wii"
+
+#~ msgid "Could not initialize DIP module!"
+#~ msgstr "Non è stato possibile inizializzare il modulo DIP!"
+
+#~ msgid "Do you want to retry for 30 secs?"
+#~ msgstr "Vuoi riprovare per 30 sec?"
+
+#~ msgid "Format"
+#~ msgstr "Formatta"
+
+#~ msgid "No USB Device"
+#~ msgstr "Nessun Dispositivo USB"
+
+#~ msgid "No USB Device found."
+#~ msgstr "Nessun Dispositivo USB trovato."
+
+#~ msgid "No WBFS or FAT/NTFS partition found"
+#~ msgstr "Non è stata trovata alcuna partizione WBFS o FAT/NTFS"
+
+#~ msgid "Select"
+#~ msgstr "Seleziona"
+
+#~ msgid "USB Device not found"
+#~ msgstr "Dispositivo USB non Trovato"
+
+#~ msgid "Waiting for USB Device"
+#~ msgstr "Caricamento Dispositivo USB"
+
+#~ msgid "You need to select or format a partition"
+#~ msgstr "Occorre selezionare o formattare una partizione"
 
 #~ msgid "Can't decompress LZ77"
 #~ msgstr "Impossibile decomprimere LZ77"

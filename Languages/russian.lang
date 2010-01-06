@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-29 03:43+0100\n"
+"POT-Creation-Date: 2010-01-07 00:14+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Kir\n"
 "Language-Team: Kir\n"
@@ -182,9 +182,6 @@ msgstr "Вернуться в HBC или меню Wii"
 msgid "Back to Loader"
 msgstr "Вернуться в загрузчик"
 
-msgid "Back to Wii Menu"
-msgstr "Вернуться в меню Wii"
-
 msgid "Backgroundmusic"
 msgstr "Фоновая музыка"
 
@@ -287,9 +284,6 @@ msgstr "Не могу создать GCT файл"
 
 msgid "Could not find a WBFS partition."
 msgstr ""
-
-msgid "Could not initialize DIP module!"
-msgstr "Не могу запустить модуль DIP!"
 
 msgid "Could not initialize network!"
 msgstr "Не могу инициализировать сеть!"
@@ -420,9 +414,6 @@ msgstr ""
 msgid "Do you want to format:"
 msgstr "Вы хотите отформатировать:"
 
-msgid "Do you want to retry for 30 secs?"
-msgstr "Хотите попробовать еще раз на 30 секунд?"
-
 msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "Вы хотите использовать DOL, который считается правильным?"
 
@@ -533,9 +524,6 @@ msgstr ""
 
 msgid "Force"
 msgstr "Принудительно"
-
-msgid "Format"
-msgstr "Форматировать"
 
 msgid "Formatting, please wait..."
 msgstr "Форматирую, пожалуйста подождите..."
@@ -807,15 +795,6 @@ msgstr "Нет избранных"
 msgid "No SD-Card inserted!"
 msgstr "SD карта не вставлена!"
 
-msgid "No USB Device"
-msgstr "Нет USB устройств"
-
-msgid "No USB Device found."
-msgstr "USB устройств не обнаружено"
-
-msgid "No WBFS or FAT/NTFS partition found"
-msgstr ""
-
 msgid "No cheats were selected"
 msgstr ""
 
@@ -893,6 +872,9 @@ msgstr ""
 
 msgid "Partition"
 msgstr "Раздел"
+
+msgid "Partition Format Menu"
+msgstr ""
 
 msgid "Password"
 msgstr "Пароль"
@@ -986,9 +968,6 @@ msgstr ""
 
 msgid "Screensaver"
 msgstr "Скринсейвер"
-
-msgid "Select"
-msgstr ""
 
 msgid "Select a DOL"
 msgstr ""
@@ -1120,9 +1099,6 @@ msgstr "Подсказки"
 msgid "Transfer failed."
 msgstr ""
 
-msgid "USB Device not found"
-msgstr "USB устройство не найдено"
-
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX заблокирован"
 
@@ -1150,6 +1126,9 @@ msgstr ""
 
 msgid "Unlock console to use this option."
 msgstr "Для изменения параметра разблокируйте консоль."
+
+msgid "Unlock the app first."
+msgstr ""
 
 msgid "Unlocked"
 msgstr "Разблокировано"
@@ -1215,9 +1194,6 @@ msgstr ""
 msgid "WIP Patches Path changed"
 msgstr ""
 
-msgid "Waiting for USB Device"
-msgstr "Ожидание USB устройства"
-
 msgid "Waiting..."
 msgstr "Ожидание..."
 
@@ -1263,14 +1239,14 @@ msgstr "Нельзя отобразить избранные, если вы их
 msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
 msgstr ""
 
+msgid "You can't access this menu!"
+msgstr ""
+
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr ""
 
 msgid "You have attempted to load a bad image"
 msgstr "Вы попытались загрузить плохой образ"
-
-msgid "You need to select or format a partition"
-msgstr ""
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
@@ -1341,6 +1317,30 @@ msgstr "из"
 
 msgid "seconds left"
 msgstr "секунд осталось"
+
+#~ msgid "Back to Wii Menu"
+#~ msgstr "Вернуться в меню Wii"
+
+#~ msgid "Could not initialize DIP module!"
+#~ msgstr "Не могу запустить модуль DIP!"
+
+#~ msgid "Do you want to retry for 30 secs?"
+#~ msgstr "Хотите попробовать еще раз на 30 секунд?"
+
+#~ msgid "Format"
+#~ msgstr "Форматировать"
+
+#~ msgid "No USB Device"
+#~ msgstr "Нет USB устройств"
+
+#~ msgid "No USB Device found."
+#~ msgstr "USB устройств не обнаружено"
+
+#~ msgid "USB Device not found"
+#~ msgstr "USB устройство не найдено"
+
+#~ msgid "Waiting for USB Device"
+#~ msgstr "Ожидание USB устройства"
 
 #~ msgid "Exit USB Loader GX?"
 #~ msgstr "Выйти из USB Loader GX?"

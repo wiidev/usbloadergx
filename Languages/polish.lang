@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-29 03:43+0100\n"
+"POT-Creation-Date: 2010-01-07 00:14+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: ziom666 (zadania_prog@vp.pl)\n"
 "Language-Team: \n"
@@ -182,9 +182,6 @@ msgstr "Powrot do HBC/Wii Menu"
 msgid "Back to Loader"
 msgstr "Powrot do HBC"
 
-msgid "Back to Wii Menu"
-msgstr "Powrit do Wii Menu"
-
 msgid "Backgroundmusic"
 msgstr "Muzyka w tle"
 
@@ -287,9 +284,6 @@ msgstr "Nie udalo sie stworzyc pliku GCT"
 
 msgid "Could not find a WBFS partition."
 msgstr "Nie znaleziono partycji WBFS"
-
-msgid "Could not initialize DIP module!"
-msgstr "Nie zainicjalizowano modulu DIP!"
 
 msgid "Could not initialize network!"
 msgstr "Nie zainicjalizowano sieci!"
@@ -420,9 +414,6 @@ msgstr ""
 msgid "Do you want to format:"
 msgstr "Sformatowac:"
 
-msgid "Do you want to retry for 30 secs?"
-msgstr "Powtorzyc za 30 sec?"
-
 msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "Uzyc alternatywnego pliku DOL?"
 
@@ -533,9 +524,6 @@ msgstr "Obrot na osi X"
 
 msgid "Force"
 msgstr "Wymuc"
-
-msgid "Format"
-msgstr "Sformatuj"
 
 msgid "Formatting, please wait..."
 msgstr "Formatowanie, prosze czekac..."
@@ -807,15 +795,6 @@ msgstr "Brak ulubionych"
 msgid "No SD-Card inserted!"
 msgstr "Nie wlozono karty SD!"
 
-msgid "No USB Device"
-msgstr "Nie wykryto urzadzenia USB"
-
-msgid "No USB Device found."
-msgstr "Nie wykryto urzadzenia USB"
-
-msgid "No WBFS or FAT/NTFS partition found"
-msgstr ""
-
 msgid "No cheats were selected"
 msgstr ""
 
@@ -893,6 +872,9 @@ msgstr ""
 
 msgid "Partition"
 msgstr "Partycja"
+
+msgid "Partition Format Menu"
+msgstr ""
 
 msgid "Password"
 msgstr "Haslo"
@@ -986,9 +968,6 @@ msgstr ""
 
 msgid "Screensaver"
 msgstr "Wygaszacz ekranu"
-
-msgid "Select"
-msgstr ""
 
 msgid "Select a DOL"
 msgstr ""
@@ -1120,9 +1099,6 @@ msgstr "Chmurki z podpowiedziami"
 msgid "Transfer failed."
 msgstr ""
 
-msgid "USB Device not found"
-msgstr "Nie znaleziono urzadzenia USB"
-
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX zabezpieczony"
 
@@ -1150,6 +1126,9 @@ msgstr ""
 
 msgid "Unlock console to use this option."
 msgstr "Odblokuj konsole, aby uzyc tej opcji"
+
+msgid "Unlock the app first."
+msgstr ""
 
 msgid "Unlocked"
 msgstr "Odblokowano"
@@ -1215,9 +1194,6 @@ msgstr ""
 msgid "WIP Patches Path changed"
 msgstr ""
 
-msgid "Waiting for USB Device"
-msgstr "Oczekiwanie na urzadzenie USB"
-
 msgid "Waiting..."
 msgstr "Oczekiwanie..."
 
@@ -1263,14 +1239,14 @@ msgstr "WybraleS wySwietlenie usubionych, ale zadnych nie wybraleS"
 msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
 msgstr ""
 
+msgid "You can't access this menu!"
+msgstr ""
+
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr ""
 
 msgid "You have attempted to load a bad image"
 msgstr "Probujesz zaladowac zly obraz"
-
-msgid "You need to select or format a partition"
-msgstr ""
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
@@ -1341,6 +1317,30 @@ msgstr "z"
 
 msgid "seconds left"
 msgstr "sekund pozostalo"
+
+#~ msgid "Back to Wii Menu"
+#~ msgstr "Powrit do Wii Menu"
+
+#~ msgid "Could not initialize DIP module!"
+#~ msgstr "Nie zainicjalizowano modulu DIP!"
+
+#~ msgid "Do you want to retry for 30 secs?"
+#~ msgstr "Powtorzyc za 30 sec?"
+
+#~ msgid "Format"
+#~ msgstr "Sformatuj"
+
+#~ msgid "No USB Device"
+#~ msgstr "Nie wykryto urzadzenia USB"
+
+#~ msgid "No USB Device found."
+#~ msgstr "Nie wykryto urzadzenia USB"
+
+#~ msgid "USB Device not found"
+#~ msgstr "Nie znaleziono urzadzenia USB"
+
+#~ msgid "Waiting for USB Device"
+#~ msgstr "Oczekiwanie na urzadzenie USB"
 
 #~ msgid "Exit USB Loader GX?"
 #~ msgstr "Zakonczyc prace programu?"

@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# german.lang - r876
+# german.lang - r878
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-29 03:43+0100\n"
+"POT-Creation-Date: 2010-01-07 00:14+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: ZEN.13\n"
 "Language-Team: Snoozer, wishmasterf, Bertilax, ZEN.13\n"
@@ -182,9 +182,6 @@ msgstr "zum Homebrew Kanal oder Wii Menü"
 msgid "Back to Loader"
 msgstr "Homebrew Kanal"
 
-msgid "Back to Wii Menu"
-msgstr "Wii Menü"
-
 msgid "Backgroundmusic"
 msgstr "Hintergrundmusik"
 
@@ -287,9 +284,6 @@ msgstr "Die GCT Datei konnte nicht erstellt werden."
 
 msgid "Could not find a WBFS partition."
 msgstr "Es keine WBFS Partition gefunden."
-
-msgid "Could not initialize DIP module!"
-msgstr "DIP Modul konnte nicht initialisiert werden!"
 
 msgid "Could not initialize network!"
 msgstr "Netzwerk konnte nicht initialisiert werden!"
@@ -409,7 +403,7 @@ msgid "Do you really want to delete:"
 msgstr "Löschvorgang bestätigen:"
 
 msgid "Do you want to apply it now?"
-msgstr ""
+msgstr "Möchtest du es jetzt übernehmen?"
 
 msgid "Do you want to change language?"
 msgstr "Möchtest du die Sprache ändern?"
@@ -419,9 +413,6 @@ msgstr "Dieses Theme herunterladen?"
 
 msgid "Do you want to format:"
 msgstr "Möchtest du formatieren:"
-
-msgid "Do you want to retry for 30 secs?"
-msgstr "30 Sekunden lang erneut versuchen?"
 
 msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "Möchtest du die als richtig bekannte Alternative DOL verwenden?"
@@ -475,7 +466,7 @@ msgid "ERROR:"
 msgstr "FEHLER:"
 
 msgid "ERROR: Can't set up theme."
-msgstr ""
+msgstr "FEHLER: Theme kann nicht konfiguriert werden."
 
 msgid "Enable Parental Control"
 msgstr "Altersbeschränkung aktivieren"
@@ -534,9 +525,6 @@ msgstr ""
 msgid "Force"
 msgstr "Erzwinge"
 
-msgid "Format"
-msgstr "Formatieren"
-
 msgid "Formatting, please wait..."
 msgstr "Formatiere, bitte warten..."
 
@@ -562,7 +550,7 @@ msgid "GUI Settings"
 msgstr "GUI Einstellungen"
 
 msgid "GXtheme.cfg not found in any subfolder."
-msgstr ""
+msgstr "GXtheme.cfg in keinem Unterordner gefunden."
 
 msgid "Game ID"
 msgstr "Spiel ID"
@@ -807,15 +795,6 @@ msgstr "keine Favoriten"
 msgid "No SD-Card inserted!"
 msgstr "Keine SD Karte eingelegt!"
 
-msgid "No USB Device"
-msgstr "Kein USB Gerät"
-
-msgid "No USB Device found."
-msgstr "Kein USB Gerät gefunden."
-
-msgid "No WBFS or FAT/NTFS partition found"
-msgstr "Keine WBFS oder FAT/NTFS Partition gefunden"
-
 msgid "No cheats were selected"
 msgstr "Es wurden keine Cheats ausgewählt"
 
@@ -892,6 +871,9 @@ msgid "Parental Control disabled"
 msgstr "Altersbeschränkung ausgeschaltet"
 
 msgid "Partition"
+msgstr ""
+
+msgid "Partition Format Menu"
 msgstr ""
 
 msgid "Password"
@@ -986,9 +968,6 @@ msgstr "Gespeichert"
 
 msgid "Screensaver"
 msgstr "Bildschirmschoner"
-
-msgid "Select"
-msgstr "Auswählen"
 
 msgid "Select a DOL"
 msgstr "wähle eine DOL"
@@ -1120,9 +1099,6 @@ msgstr "ToolTips"
 msgid "Transfer failed."
 msgstr "Übertragung fehlgeschlagen."
 
-msgid "USB Device not found"
-msgstr "USB Gerät nicht gefunden"
-
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX ist jetzt geschützt"
 
@@ -1150,6 +1126,9 @@ msgstr "Altersbeschränkung deaktivieren"
 
 msgid "Unlock console to use this option."
 msgstr "Entsperre den Loader, um diese Option zu nutzen."
+
+msgid "Unlock the app first."
+msgstr ""
 
 msgid "Unlocked"
 msgstr "entsperrt"
@@ -1215,9 +1194,6 @@ msgstr "WIP Patches"
 msgid "WIP Patches Path changed"
 msgstr "Pfad geändert"
 
-msgid "Waiting for USB Device"
-msgstr "Warte auf USB Gerät"
-
 msgid "Waiting..."
 msgstr "Warte..."
 
@@ -1263,14 +1239,14 @@ msgstr "Du willst Favoriten anzeigen, hast aber keine ausgewählt."
 msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
 msgstr "Du benutzt das NTFS Dateisystem. Wegen möglicher Schreibfehler auf einer NTFS Partition, ist das Installieren eines Spiels nicht möglich."
 
+msgid "You can't access this menu!"
+msgstr ""
+
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr "Du hast die Altersbeschränkung nicht aktiviert. Wenn du sie nutzen möchtest, aktiviere sie in den Wii-Systemeinstellungen."
 
 msgid "You have attempted to load a bad image"
 msgstr "Du hast versucht ein 'schlechtes Bild' zu laden."
-
-msgid "You need to select or format a partition"
-msgstr "Du must eine Partition auswählen oder formatieren"
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
@@ -1341,6 +1317,39 @@ msgstr "von"
 
 msgid "seconds left"
 msgstr "Sekunden verbleiben"
+
+#~ msgid "Back to Wii Menu"
+#~ msgstr "Wii Menü"
+
+#~ msgid "Could not initialize DIP module!"
+#~ msgstr "DIP Modul konnte nicht initialisiert werden!"
+
+#~ msgid "Do you want to retry for 30 secs?"
+#~ msgstr "30 Sekunden lang erneut versuchen?"
+
+#~ msgid "Format"
+#~ msgstr "Formatieren"
+
+#~ msgid "No USB Device"
+#~ msgstr "Kein USB Gerät"
+
+#~ msgid "No USB Device found."
+#~ msgstr "Kein USB Gerät gefunden."
+
+#~ msgid "No WBFS or FAT/NTFS partition found"
+#~ msgstr "Keine WBFS oder FAT/NTFS Partition gefunden"
+
+#~ msgid "Select"
+#~ msgstr "Auswählen"
+
+#~ msgid "USB Device not found"
+#~ msgstr "USB Gerät nicht gefunden"
+
+#~ msgid "Waiting for USB Device"
+#~ msgstr "Warte auf USB Gerät"
+
+#~ msgid "You need to select or format a partition"
+#~ msgstr "Du must eine Partition auswählen oder formatieren"
 
 #~ msgid "Can't decompress LZ77"
 #~ msgstr "LZ77 konnte nicht entpackt werden"

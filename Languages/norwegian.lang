@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-29 03:43+0100\n"
+"POT-Creation-Date: 2010-01-07 00:14+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: raschi\n"
 "Language-Team: raschi\n"
@@ -182,9 +182,6 @@ msgstr "Tilbake til HBC eller Wii meny"
 msgid "Back to Loader"
 msgstr "HBC/Loader"
 
-msgid "Back to Wii Menu"
-msgstr "Wii meny"
-
 msgid "Backgroundmusic"
 msgstr "Bakgrunnsmusikk"
 
@@ -287,9 +284,6 @@ msgstr "Kan ikke opprette GCT fil"
 
 msgid "Could not find a WBFS partition."
 msgstr "Kan ikke finne en WBFS partisjon."
-
-msgid "Could not initialize DIP module!"
-msgstr "Kan ikke initialisere DIP modul!"
 
 msgid "Could not initialize network!"
 msgstr "Kan ikke initialisere nettverk!"
@@ -420,9 +414,6 @@ msgstr "Vil du laste ned dette temaet?"
 msgid "Do you want to format:"
 msgstr "Vil du formatere:"
 
-msgid "Do you want to retry for 30 secs?"
-msgstr "Vil du fortsette å prøve i 30 sekunder?"
-
 msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "Vil du bruke alt DOL filen som er kjent for å være riktig?"
 
@@ -533,9 +524,6 @@ msgstr ""
 
 msgid "Force"
 msgstr "Tving"
-
-msgid "Format"
-msgstr "Formatér"
 
 msgid "Formatting, please wait..."
 msgstr "Formaterer, vennligst vent..."
@@ -807,15 +795,6 @@ msgstr "Ingen favoritter"
 msgid "No SD-Card inserted!"
 msgstr "Intet SD-kort satt i!"
 
-msgid "No USB Device"
-msgstr "Ingen USB enhet"
-
-msgid "No USB Device found."
-msgstr "Ingen USB enhet funnet."
-
-msgid "No WBFS or FAT/NTFS partition found"
-msgstr ""
-
 msgid "No cheats were selected"
 msgstr "Ingen juksefiler valgt"
 
@@ -893,6 +872,9 @@ msgstr ""
 
 msgid "Partition"
 msgstr "Partisjon"
+
+msgid "Partition Format Menu"
+msgstr ""
 
 msgid "Password"
 msgstr "Passord"
@@ -986,9 +968,6 @@ msgstr "Lagret"
 
 msgid "Screensaver"
 msgstr "Skjermbeskytter"
-
-msgid "Select"
-msgstr ""
 
 msgid "Select a DOL"
 msgstr "Velg en DOL fil"
@@ -1120,9 +1099,6 @@ msgstr "Verktøystips"
 msgid "Transfer failed."
 msgstr "Overføring feilet."
 
-msgid "USB Device not found"
-msgstr "USB enhet ikke funnet"
-
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX er beskyttet"
 
@@ -1150,6 +1126,9 @@ msgstr ""
 
 msgid "Unlock console to use this option."
 msgstr "Lås opp konsollen for å bruke denne innstillingen."
+
+msgid "Unlock the app first."
+msgstr ""
 
 msgid "Unlocked"
 msgstr "Opplåst"
@@ -1215,9 +1194,6 @@ msgstr ""
 msgid "WIP Patches Path changed"
 msgstr ""
 
-msgid "Waiting for USB Device"
-msgstr "Venter på USB enhet"
-
 msgid "Waiting..."
 msgstr "Venter..."
 
@@ -1263,14 +1239,14 @@ msgstr "Du prøver å vise favoritter når du ikke har noen valgt."
 msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
 msgstr ""
 
+msgid "You can't access this menu!"
+msgstr ""
+
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr ""
 
 msgid "You have attempted to load a bad image"
 msgstr "Du har forsøkt å vise et korrupt bilde"
-
-msgid "You need to select or format a partition"
-msgstr ""
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
@@ -1341,6 +1317,30 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder gjenstår"
+
+#~ msgid "Back to Wii Menu"
+#~ msgstr "Wii meny"
+
+#~ msgid "Could not initialize DIP module!"
+#~ msgstr "Kan ikke initialisere DIP modul!"
+
+#~ msgid "Do you want to retry for 30 secs?"
+#~ msgstr "Vil du fortsette å prøve i 30 sekunder?"
+
+#~ msgid "Format"
+#~ msgstr "Formatér"
+
+#~ msgid "No USB Device"
+#~ msgstr "Ingen USB enhet"
+
+#~ msgid "No USB Device found."
+#~ msgstr "Ingen USB enhet funnet."
+
+#~ msgid "USB Device not found"
+#~ msgstr "USB enhet ikke funnet"
+
+#~ msgid "Waiting for USB Device"
+#~ msgstr "Venter på USB enhet"
 
 #~ msgid "Exit USB Loader GX?"
 #~ msgstr "Avslutt USB Loader GX?"

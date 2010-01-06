@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-29 03:43+0100\n"
+"POT-Creation-Date: 2010-01-07 00:14+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: knife.hu kavid\n"
 "Language-Team: kavid\n"
@@ -182,9 +182,6 @@ msgstr "返回 HBC 或 Wii 系统菜单"
 msgid "Back to Loader"
 msgstr "返回 Loader"
 
-msgid "Back to Wii Menu"
-msgstr "返回 Wii 系统菜单"
-
 msgid "Backgroundmusic"
 msgstr "背景音乐"
 
@@ -287,9 +284,6 @@ msgstr "无法建立 GCT 文件"
 
 msgid "Could not find a WBFS partition."
 msgstr "找不到 WBFS 分区."
-
-msgid "Could not initialize DIP module!"
-msgstr "无法启动 DIP 模块!"
 
 msgid "Could not initialize network!"
 msgstr "无法启动网络!"
@@ -420,9 +414,6 @@ msgstr ""
 msgid "Do you want to format:"
 msgstr "是否格式化:"
 
-msgid "Do you want to retry for 30 secs?"
-msgstr "是否等待 30 秒后重试?"
-
 msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "使用这个已知是正确的 Alt DOL 文件?"
 
@@ -533,9 +524,6 @@ msgstr "按键规则"
 
 msgid "Force"
 msgstr "强制"
-
-msgid "Format"
-msgstr "格式化"
 
 msgid "Formatting, please wait..."
 msgstr "格式化中, 请稍候..."
@@ -807,15 +795,6 @@ msgstr "没有收藏记录"
 msgid "No SD-Card inserted!"
 msgstr "未插入 SD 卡!"
 
-msgid "No USB Device"
-msgstr "没有 USB 设备"
-
-msgid "No USB Device found."
-msgstr "找不到 USB 设备."
-
-msgid "No WBFS or FAT/NTFS partition found"
-msgstr ""
-
 msgid "No cheats were selected"
 msgstr "没有选择作弊码"
 
@@ -893,6 +872,9 @@ msgstr ""
 
 msgid "Partition"
 msgstr "分区"
+
+msgid "Partition Format Menu"
+msgstr ""
 
 msgid "Password"
 msgstr "密码"
@@ -986,9 +968,6 @@ msgstr "已保存"
 
 msgid "Screensaver"
 msgstr "屏幕保护"
-
-msgid "Select"
-msgstr ""
 
 msgid "Select a DOL"
 msgstr "选择一个 DOL"
@@ -1120,9 +1099,6 @@ msgstr "提示信息"
 msgid "Transfer failed."
 msgstr ""
 
-msgid "USB Device not found"
-msgstr "找不到 USB 设备"
-
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX 被锁定"
 
@@ -1150,6 +1126,9 @@ msgstr ""
 
 msgid "Unlock console to use this option."
 msgstr "请解锁后使用此功能"
+
+msgid "Unlock the app first."
+msgstr ""
 
 msgid "Unlocked"
 msgstr "已解锁"
@@ -1215,9 +1194,6 @@ msgstr ""
 msgid "WIP Patches Path changed"
 msgstr ""
 
-msgid "Waiting for USB Device"
-msgstr "等待 USB 设备"
-
 msgid "Waiting..."
 msgstr "等待中..."
 
@@ -1263,14 +1239,14 @@ msgstr "你选择显示收藏夹但里面还没有任何收藏"
 msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
 msgstr ""
 
+msgid "You can't access this menu!"
+msgstr ""
+
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr ""
 
 msgid "You have attempted to load a bad image"
 msgstr "你在加载损坏的镜像"
-
-msgid "You need to select or format a partition"
-msgstr ""
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
@@ -1341,6 +1317,30 @@ msgstr "的"
 
 msgid "seconds left"
 msgstr "剩余秒数"
+
+#~ msgid "Back to Wii Menu"
+#~ msgstr "返回 Wii 系统菜单"
+
+#~ msgid "Could not initialize DIP module!"
+#~ msgstr "无法启动 DIP 模块!"
+
+#~ msgid "Do you want to retry for 30 secs?"
+#~ msgstr "是否等待 30 秒后重试?"
+
+#~ msgid "Format"
+#~ msgstr "格式化"
+
+#~ msgid "No USB Device"
+#~ msgstr "没有 USB 设备"
+
+#~ msgid "No USB Device found."
+#~ msgstr "找不到 USB 设备."
+
+#~ msgid "USB Device not found"
+#~ msgstr "找不到 USB 设备"
+
+#~ msgid "Waiting for USB Device"
+#~ msgstr "等待 USB 设备"
 
 #~ msgid "Exit USB Loader GX?"
 #~ msgstr "退出 USB Loader GX?"
