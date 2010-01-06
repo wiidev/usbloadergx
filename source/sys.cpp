@@ -14,9 +14,12 @@
 #include "fatmounter.h"
 #include "sys.h"
 #include "wpad.h"
+#include "menu/menus.h"
 
 extern char game_partition[6];
 extern u8 load_from_fs;
+
+extern u8 hddState;
 
 //Wiilight stuff
 static vu32 *_wiilight_reg = (u32*)0xCD0000C0;
@@ -68,44 +71,51 @@ void Sys_Reboot(void) {
 
 int Sys_ChangeIos(int ios) {
 	s32 prevIos = IOS_GetVersion();
-	
+
 	SDCard_deInit();
-	USBDevice_deInit();
-	
+    if (hddState)
+		USBDevice_deInit();
+
 	WPAD_Flush(0);
 	WPAD_Disconnect(0);
 	WPAD_Shutdown();
-	
-	WDVD_Close();
-	
-	USBStorage_Deinit();
-	
+    if (hddState)
+	{
+		WDVD_Close();
+		USBStorage_Deinit();
+	}
+
 	s32 ret = IOS_ReloadIOSsafe(ios);
 	if (ret < 0) {
 		ios = prevIos;
 	}
-	
+
 	SDCard_Init();
 
 	if (ios == 222 || ios == 223) {
 		load_ehc_module();
 	}
-	USBDevice_Init();
+
+	if (hddState)
+		USBDevice_Init();
 
     PAD_Init();
     Wpad_Init();
     WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
     WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
 
-	WBFS_Init(WBFS_DEVICE_USB);
-	Disc_Init();
-	
-	if (Sys_IsHermes()) {
-		WBFS_OpenNamed((char *) &game_partition);
-	} else { 
-		WBFS_Open();
-	}
-	
+    if (hddState)
+    {
+		WBFS_Init(WBFS_DEVICE_USB);
+		Disc_Init();
+
+		if (Sys_IsHermes()) {
+			WBFS_OpenNamed((char *) &game_partition);
+		} else {
+			WBFS_Open();
+		}
+    }
+
 	return ret;
 }
 
@@ -114,17 +124,22 @@ int Sys_IosReload(int IOS) {
 
     //shutdown SD and USB before IOS Reload in DiscWait
     SDCard_deInit();
-    USBDevice_deInit();
+    if (hddState)
+		USBDevice_deInit();
 
     WPAD_Flush(0);
     WPAD_Disconnect(0);
     WPAD_Shutdown();
 
-    WDVD_Close();
+    if (hddState)
+    {
+        WDVD_Close();
+        USBStorage_Deinit();
+    }
 
-    USBStorage_Deinit();
-
-    if (IOS == 249 || IOS == 222 || IOS == 223) {
+    ret = IOS_ReloadIOSsafe(IOS);
+    if (ret < 0) return ret;
+    if ((IOS == 249 || IOS == 222 || IOS == 223) && hddState) {
         for (int i = 0; i < 10; i++) {
             ret = IOS_ReloadIOSsafe(IOS);
             if (ret < 0) return ret;
@@ -148,7 +163,8 @@ int Sys_IosReload(int IOS) {
     WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
     //reinitialize SD and USB
     SDCard_Init();
-    USBDevice_Init();
+    if (hddState)
+        USBDevice_Init();
 
     return ret;
 }
@@ -228,39 +244,153 @@ s32 ios250rev = -69;
 s32 IOS_ReloadIOSsafe(int ios)
 {
 	if (ios==222)
-	{	
+	{
 		if (ios222rev == -69)
 			ios222rev = getIOSrev(0x00000001000000dell);
-		
+
 		if (ios222rev >= 0 && (ios222rev != 4 && ios222rev != 5))return -2;
 	}
 	else if (ios==223)
-	{	
+	{
 		if (ios223rev == -69)
 			ios223rev = getIOSrev(0x00000001000000dfll);
-		
+
 		if (ios223rev >= 0 && (ios223rev != 4 && ios223rev != 5))return -2;
 	}
 	else if (ios==249)
-	{	
+	{
 		if (ios249rev == -69)
-			ios249rev = getIOSrev(0x00000001000000f9ll);	
-		
+			ios249rev = getIOSrev(0x00000001000000f9ll);
+
 		if (ios249rev >= 0 && !(ios249rev>=9 && ios249rev<65280))return -2;
 	}
 	else if (ios==250)
-	{	
+	{
 		if (ios250rev == -69)
 			ios250rev = getIOSrev(0x00000001000000fall);
-			
+
 		if (ios250rev >= 0 && !(ios250rev>=9 && ios250rev<65280))return -2;
 	}
-		
+
 	s32 r = IOS_ReloadIOS(ios);
 	if (r >= 0) {
 		WII_Initialize();
 	}
 	return r;
+}
+
+
+
+s32 CheckForCIOS()
+{
+    gprintf("\n\tChecking for stub IOS");
+    s32 ret = -1;
+	s32 ios222rev = getIOSrev(0x00000001000000dell);
+	s32 ios249rev = getIOSrev(0x00000001000000f9ll);
+
+	//if we don't like either of the cIOS then scram
+	if (!(ios222rev==4 || ios222rev==5 || (ios249rev>=9 && ios249rev<65280)))
+	{
+		InitTextVideo();
+		printf("\x1b[2J");
+		if ((ios222rev < 0 && ios222rev != WII_EINSTALL) && (ios249rev < 0 && ios249rev != WII_EINSTALL)) {
+			printf("\n\n\n\tWARNING!");
+			printf("\n\tUSB Loader GX needs unstubbed cIOS 222 v4 or 249 v9+");
+			printf("\n\n\tWe cannot determine the versions on your system,\n\tsince you have no patched ios 36 or 236 installed.");
+			printf("\n\tTherefor, if loading of USB Loader GX fails, you\n\tprobably have installed the 4.2 update,");
+			printf("\n\tand you should go figure out how to get some cios action going on\n\tin your Wii.");
+			printf("\n\n\tThis message will show every time.");
+			sleep(5);
+		} else {
+			printf("\n\n\n\tERROR!");
+			printf("\n\tUSB Loader GX needs unstubbed cIOS 222 v4 or 249 v9+");
+			printf("\n\n\tI found \n\t\t222 = %d%s",ios222rev,ios222rev==65280?" (Stubbed by 4.2 update)":"");
+			printf("\n\t\t249 = %d%s",ios249rev,ios249rev==65280?" (Stubbed by 4.2 update)":"");
+			printf("\n\n\tGo figure out how to get some cIOS action going on\n\tin your Wii and come back and see me.");
+
+			sleep(15);
+			printf("\n\n\tBye");
+
+			USBDevice_deInit();
+			exit(0);
+		}
+	}
+
+	printf("\n\tReloading ios 249...");
+    ret = IOS_ReloadIOSsafe(249);
+
+	printf("%d", ret);
+
+    if (ret < 0)
+    {
+		printf("\n\tIOS 249 failed, reloading ios 222...");
+        ret = IOS_ReloadIOSsafe(222);
+		printf("%d", ret);
+		if (ret < 0) {
+			printf("\n\tIOS 222 failed, reloading ios 250...");
+			ret = IOS_ReloadIOSsafe(250);
+			printf("%d", ret);
+            if (ret < 0) {
+                printf("\n\tERROR: cIOS could not be loaded!\n");
+                sleep(5);
+                SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
+            }
+		}
+		else
+		{
+		    //only for 222 loading ehc modules
+            printf("\n\tLoad ehc module");
+            load_ehc_module();
+		}
+    }
+
+    return ret;
+}
+
+int LoadAppCIOS()
+{
+    s32 ret = 1;
+    /* Load Custom IOS */
+    if (Settings.cios == ios222 && IOS_GetVersion() != 222)
+    {
+		printf("\n\tReloading IOS to config setting (%d)...", ios222 ? 222 : 223);
+        SDCard_deInit();// unmount SD for reloading IOS
+        USBDevice_deInit();// unmount USB for reloading IOS
+		USBStorage_Deinit();
+        ret = IOS_ReloadIOSsafe(ios222 ? 222 : 223);
+		printf("%d", ret);
+        if (ret < 0)
+        {
+            Settings.cios = ios249;
+            IOS_ReloadIOSsafe(249);
+        }
+
+        SDCard_Init();
+        USBDevice_Init(); // and mount USB:/
+        if(ret >= 0)
+            load_ehc_module();
+    }
+    else if ((Settings.cios == ios249 && IOS_GetVersion() != 249) ||
+            (Settings.cios == ios250 && IOS_GetVersion() != 250))
+    {
+		printf("\n\tReloading IOS to config setting (%d)...", ios249 ? 249 : 250);
+        SDCard_deInit();// unmount SD for reloading IOS
+        USBDevice_deInit();// unmount USB for reloading IOS
+		USBStorage_Deinit();
+        ret = IOS_ReloadIOSsafe(ios249 ? 249 : 250);
+		printf("%d", ret);
+        if (ret < 0) {
+            Settings.cios = ios222;
+            ret = IOS_ReloadIOSsafe(222);
+			SDCard_Init();
+            load_ehc_module();
+        }
+
+        else SDCard_Init(); // now mount SD:/  //no need to keep mindlessly mounting and unmounting SD card
+        USBDevice_Init(); // and mount USB:/
+	}
+
+	return ret;
 }
 
 #include <time.h>

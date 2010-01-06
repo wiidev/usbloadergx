@@ -52,7 +52,7 @@ GuiGameBrowser::GuiGameBrowser(int w, int h, struct discHdr * l, int gameCnt, co
 	bgGameImg = new GuiImage(bgGames);
 	bgGameImg->SetParent(this);
 	bgGameImg->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-	
+
 	maxTextWidth = bgGameImg->GetWidth() - 24 - 4;
 
 	snprintf(imgPath, sizeof(imgPath), "%sbg_options_entry.png", themePath);
@@ -129,13 +129,13 @@ GuiGameBrowser::GuiGameBrowser(int w, int h, struct discHdr * l, int gameCnt, co
 
 	for(int i=0; i < pagesize; i++)
 	{
-		gameTxt[i] = new GuiText(get_title(&gameList[i]), 20, THEME.gametext);
+		gameTxt[i] = new GuiText(NULL, 20, THEME.gametext);
 		gameTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 		gameTxt[i]->SetPosition(24,0);
 		gameTxt[i]->SetMaxWidth(maxTextWidth, GuiText::DOTTED);
 
 
-		gameTxtOver[i] = new GuiText(get_title(&gameList[i]), 20, THEME.gametext);
+		gameTxtOver[i] = new GuiText(NULL, 20, THEME.gametext);
 		gameTxtOver[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 		gameTxtOver[i]->SetPosition(24,0);
 		gameTxtOver[i]->SetMaxWidth(maxTextWidth, GuiText::SCROLL);
@@ -326,6 +326,9 @@ void GuiGameBrowser::Draw()
 
 void GuiGameBrowser::UpdateListEntries()
 {
+    if(!gameList)
+        return;
+
 	int next = listOffset;
 	for(int i=0; i<pagesize; i++)
 	{

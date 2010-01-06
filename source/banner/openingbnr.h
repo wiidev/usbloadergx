@@ -13,6 +13,8 @@ extern "C"
 {
 #endif
 
+#include <gccore.h>
+
 /***********************************************************
 *    Error description:
 *     0      Successfully extracted

@@ -1,6 +1,7 @@
 #include <unistd.h>
 
 #include "menus.h"
+#include "menus.h"
 #include "fatmounter.h"
 #include "usbloader/usbstorage.h"
 #include "usbloader/utils.h"
@@ -69,6 +70,11 @@ int MenuFormat() {
     trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
     GuiTrigger trigHome;
     trigHome.SetButtonOnlyTrigger(-1, WPAD_BUTTON_HOME | WPAD_CLASSIC_BUTTON_HOME, 0);
+    GuiTrigger trigB;
+    trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
+
+    GuiButton backBtn(0,0);
+    backBtn.SetTrigger(&trigB);
 
     GuiImage poweroffBtnImg(&btnpwroff);
     GuiImage poweroffBtnImgOver(&btnpwroffOver);
@@ -89,6 +95,7 @@ int MenuFormat() {
     HaltGui();
     GuiWindow w(screenwidth, screenheight);
     w.Append(&poweroffBtn);
+    w.Append(&backBtn);
     w.Append(&exitBtn);
 
     mainWindow->Append(&w);
@@ -110,7 +117,7 @@ int MenuFormat() {
 						WBFS_OpenPart(partitions.pinfo[ret].part_fs, partitions.pinfo[ret].index, entry->sector,
 									  entry->size, (char *) &game_partition);
 						load_from_fs = partitions.pinfo[ret].part_fs;
-						menu = MENU_DISCLIST;
+						menu = MENU_SETTINGS;
 						
 						Settings.partition = ret;
 						if(isInserted(bootDevice))cfg_save_global();
@@ -131,7 +138,7 @@ int MenuFormat() {
 									WindowPrompt(tr("ERROR"), tr("Failed to open partition"), tr("OK"));
 									Sys_LoadMenu();
 								}
-								menu = MENU_DISCLIST;
+								menu = MENU_SETTINGS;
 							}
 						}
 					}
@@ -154,10 +161,10 @@ int MenuFormat() {
             }
         }
 
-        if (shutdown == 1)
+       /* if (shutdown == 1)
             Sys_Shutdown();
         if (reset == 1)
-            Sys_Reboot();
+	    Sys_Reboot();*/
 
         if (poweroffBtn.GetState() == STATE_CLICKED) {
             choice = WindowPrompt (tr("Shutdown System"),tr("Are you sure?"),tr("Yes"),tr("No"));
@@ -165,12 +172,16 @@ int MenuFormat() {
                 Sys_Shutdown();
             }
 
-        } else if (exitBtn.GetState() == STATE_CLICKED) {
-            choice = WindowPrompt (tr("Return to Wii Menu"),tr("Are you sure?"),tr("Yes"),tr("No"));
-            if (choice == 1) {
-                Sys_LoadMenu();
-            }
-        }
+	} else if (exitBtn.GetState() == STATE_CLICKED) {
+	    choice = WindowPrompt (tr("Return to Wii Menu"),tr("Are you sure?"),tr("Yes"),tr("No"));
+	    if (choice == 1) {
+		Sys_LoadMenu();
+	    }
+	}
+	else if (backBtn.GetState() == STATE_CLICKED) {
+	    menu = MENU_SETTINGS;
+	    break;
+	}
     }
 
 

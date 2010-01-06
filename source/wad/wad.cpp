@@ -8,21 +8,14 @@
 #include "utils.h"
 #include "video.h"
 #include "wad.h"
-
-
-
 #include "prompts/PromptWindows.h"
 #include "libwiigui/gui.h"
 #include "language/gettext.h"
 #include "menu.h"
 #include "filelist.h"
-/*** Extern functions ***/
-extern void ResumeGui();
-extern void HaltGui();
+
 /*** Extern variables ***/
 extern GuiWindow * mainWindow;
-
-
 
 /* 'WAD Header' structure */
 typedef struct {
@@ -371,7 +364,7 @@ s32 Wad_Install(FILE *fp)
 			// Increase variables
 			idx    += size;
 			offset += size;
-		
+
 		//snprintf(imgPath, sizeof(imgPath), "%s%d (%d)...",tr(">> Installing content #"),content->cid,idx);
 
 		//msg4Txt.SetText(imgPath);

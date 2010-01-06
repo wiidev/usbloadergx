@@ -10,6 +10,7 @@
 #include "prompts/PromptWindows.h"
 #include "filelist.h"
 #include "menu.h"
+#include "../menu/menus.h"
 #include "usbloader/disc.h"
 #include "usbloader/fstfile.h"
 #include "usbloader/wdvd.h"
@@ -21,14 +22,8 @@
 #include "../gecko.h"
 #include "../patches/dvd_broadway.h"
 
-/*** Extern functions ***/
-extern void ResumeGui();
-extern void HaltGui();
-
 /*** Extern variables ***/
 extern GuiWindow * mainWindow;
-extern u8 shutdown;
-extern u8 reset;
 extern u8 mountMethod;
 
 /********************************************************************************
@@ -50,7 +45,7 @@ int DiscBrowse(struct discHdr * header) {
 			return ret;
 		}
 	}
-	
+
 	ret = Disc_Open();
     if (ret < 0) {
 		ResumeGui();
@@ -71,7 +66,7 @@ int DiscBrowse(struct discHdr * header) {
         WindowPrompt(tr("ERROR:"), tr("Could not open WBFS partition"), tr("OK"));
         return ret;
     }
-	
+
 	int *buffer = (int*)allocate_memory(0x20);
 
     if (buffer == NULL) {
@@ -86,7 +81,7 @@ int DiscBrowse(struct discHdr * header) {
         WindowPrompt(tr("ERROR:"), tr("Could not read the disc."), tr("OK"));
         return ret;
     }
-	
+
 	void *fstbuffer = allocate_memory(buffer[2]*4);
     FST_ENTRY *fst = (FST_ENTRY *)fstbuffer;
 
@@ -204,11 +199,6 @@ int DiscBrowse(struct discHdr * header) {
     while (!exit) {
         VIDEO_WaitVSync();
 
-        if (shutdown == 1)
-            Sys_Shutdown();
-        if (reset == 1)
-            Sys_Reboot();
-
         ret = optionBrowser3.GetClickedOption();
 
         if (ret > 0) {
@@ -244,29 +234,29 @@ int autoSelectDol(const char *id, bool force) {
 
 	char id4[10];
 	sprintf(id4,"%c%c%c%c",id[0],id[1],id[2],id[3]);
-	
+
 ////// games that can be forced (always need alt dol)
 
-	//Boogie 
+	//Boogie
     if (strcmp(id,"RBOP69") == 0) return 675;//previous value was 657
     if (strcmp(id,"RBOE69") == 0) return 675;//starstremr
-	
+
 	//Fifa 08
     if (strcmp(id,"RF8E69") == 0) return 439;//from isostar
     if (strcmp(id,"RF8P69") == 0) return 463;//from isostar
     if (strcmp(id,"RF8X69") == 0) return 464;//from isostar
-		
+
 	//Madden NFL07
     if (strcmp(id,"RMDP69") == 0) return 39;//from isostar
-	
+
 	//Madden NFL08
     if (strcmp(id,"RNFP69") == 0) return 1079;//from isostar
-	
+
 	//Medal of Honor: Heroes 2
 	if (strcmp(id,"RM2X69") == 0)return 601;//dj_skual
 	if (strcmp(id,"RM2P69") == 0)return 517;//MZottel
-	if (strcmp(id,"RM2E69") == 0) return 492;//Old8oy	
-	
+	if (strcmp(id,"RM2E69") == 0) return 492;//Old8oy
+
 	//Mortal Kombat
     if (strcmp(id,"RKMP5D") == 0) return 290;//from isostar
     if (strcmp(id,"RKME5D") == 0) return 290;//starstremr
@@ -276,7 +266,7 @@ int autoSelectDol(const char *id, bool force) {
 
 	//Pangya! Golf with Style
     if (strcmp(id,"RPYP9B") == 0) return 12490;//from isostar
-	
+
 	//Redsteel
     if (strcmp(id,"REDP41") == 0) return 1957;//from isostar
     if (strcmp(id,"REDE41") == 0) return 1957;//starstremr
@@ -284,37 +274,37 @@ int autoSelectDol(const char *id, bool force) {
 	//SSX
     if (strcmp(id,"RSXP69") == 0) return 377;//previous value was 337
     if (strcmp(id,"RSXE69") == 0) return 377;//previous value was 337
-	
+
 	//Wii Sports Resort, needs alt dol one time only, to show the Motion Plus video
 	//if (strcmp(id,"RZTP01") == 0 && CheckForSave(id4)==0) return 952;//from isostar
 	//if (strcmp(id,"RZTE01") == 0 && CheckForSave(id4)==0) return 674;//from starstremr
 	//as well as Grand Slam Tennis, Tiger Woods 10, Virtual Tennis 2009
-	
+
 ///// games that can't be forced (alt dol is not always needed)
 	if (!force) {
-	
+
 		//Grand Slam Tennis
 		if (strcmp(id,"R5TP69") == 0) return 1493;//from isostar
 		if (strcmp(id,"R5TE69") == 0) return 1493;//starstremr
-		
+
 		//Medal of Honor Heroes
 		if (strcmp(id,"RMZX69") == 0) return 492;//from isostar
 		if (strcmp(id,"RMZP69") == 0) return 492;//from isostar
-		if (strcmp(id,"RMZE69") == 0) return 492;//starstremr 
-		
+		if (strcmp(id,"RMZE69") == 0) return 492;//starstremr
+
 		//Tiger Woods 10
 		if (strcmp(id,"R9OP69") == 0) return 1991;//from isostar
 		if (strcmp(id,"R9OE69") == 0) return 1973;//starstremr
-		
+
 		//Virtual Tennis 2009
 		if (strcmp(id,"RVUP8P") == 0) return 16426;//from isostar
 		if (strcmp(id,"RVUE8P") == 0) return 16405;//from isostar
-		
+
 		//Wii Sports Resort
 		if (strcmp(id,"RZTP01") == 0) return 952;//from isostar
 		if (strcmp(id,"RZTE01") == 0) return 674;//from starstremr
 	}
-	
+
     return -1;
 }
 
@@ -323,7 +313,7 @@ int autoSelectDolMenu(const char *id, bool force) {
 	/*
 	char id4[10];
 	sprintf(id4,"%c%c%c%c",id[0],id[1],id[2],id[3]);
-	
+
 	switch (CheckForSave(id4)) {
 		case 0:
 			WindowPrompt(tr("NO save"),0,tr("OK"));
@@ -339,7 +329,7 @@ int autoSelectDolMenu(const char *id, bool force) {
 	}
 	return -1;
 	*/
-	
+
 	//Indiana Jones and the Staff of Kings (Fate of Atlantis)
 	if (strcmp(id,"RJ8E64") == 0) {
 		int choice = WindowPrompt(tr("Select a DOL"), 0, "Fate of Atlantis", tr("Default"));
@@ -365,7 +355,7 @@ int autoSelectDolMenu(const char *id, bool force) {
 		}
 		return choice;
 	}
-	
+
 	//Metal Slug Anthology (Metal Slug 6)
 	if (strcmp(id,"RMLEH4") == 0) {
 		int choice = WindowPrompt(tr("Select a DOL"), 0, "Metal Slug 6", tr("Default"));
@@ -391,7 +381,7 @@ int autoSelectDolMenu(const char *id, bool force) {
 		}
 		return choice;
 	}
-	
+
 	//Metroid Prime Trilogy
 	if (strcmp(id,"R3ME01") == 0) {
 		//do not use any alt dol if there is no save game in the nand
@@ -442,7 +432,7 @@ int autoSelectDolMenu(const char *id, bool force) {
 		}
 		return choice;
 	}
-	
+
 	//Rampage: Total Destruction (M1.dol=Rampage, jarvos.dol=Rampage World Tour)
 	if (strcmp(id,"RPGP5D") == 0) {
 		int choice = WindowPrompt(tr("Select a DOL"), 0, "Rampage", "World Tour", tr("Default"));
@@ -459,7 +449,7 @@ int autoSelectDolMenu(const char *id, bool force) {
 		}
 		return choice;
 	}
-	
+
 	//The House Of The Dead 2 & 3 Return (only to play 2)
 	if (strcmp(id,"RHDE8P") == 0) {
 		int choice = WindowPrompt(tr("Select a DOL"), 0, "HotD 2", tr("Default"));
@@ -501,11 +491,11 @@ void __dvd_readidcb(s32 result)
 	dvddone = result;
 }
 
-u8 DiscMount(discHdr *header) {
+u8 DiscMount1(discHdr *header) {
 	gprintf("\nDiscMount() ");
     int ret;
 	HaltGui();
-	
+
 	u8 *tmpBuff = (u8 *) malloc(0x60);
 	memcpy(tmpBuff, g_diskID, 0x60); // Make a backup of the first 96 bytes at 0x80000000
 
@@ -513,7 +503,7 @@ u8 DiscMount(discHdr *header) {
 	dvddone = 0;
 	ret = bwDVD_LowReset(__dvd_readidcb);
 	while(ret>=0 && dvddone==0);
-	
+
 	dvddone = 0;
 	ret = bwDVD_LowReadID(g_diskID, __dvd_readidcb); // Leave this one here, or you'll get an IOCTL error
 	while(ret>=0 && dvddone==0);
@@ -521,15 +511,65 @@ u8 DiscMount(discHdr *header) {
 	dvddone = 0;
 	ret = bwDVD_LowUnencryptedRead(g_diskID, 0x60, 0x00, __dvd_readidcb); // Overwrite the g_diskID thing
 	while(ret>=0 && dvddone==0);
-	
+
 	memcpy(header, g_diskID, 0x60);
 	memcpy(g_diskID, tmpBuff, 0x60); // Put the backup back, or games won't load
 	free(tmpBuff);
 
-	
+
 	ResumeGui();
 	if (dvddone != 1) {
 		return 0;
 	}
 	return (header->magic == 0x5D1C9EA3) ? 1 : 2; // Don't check gamecube magic (0xC2339F3D)
+}
+
+u8 DiscMount(discHdr *header) {
+        gprintf("\nDiscMount() ");
+
+	HaltGui();
+    GuiWindow w(screenwidth, screenheight);
+
+    mainWindow->Append(&w);
+
+    ResumeGui();
+
+//HaltCheck();
+    int ret = Disc_SetUSB(NULL);
+	    ret = WDVD_Close();
+	    ret = Disc_Init();
+
+
+
+
+    ret = DiscWait(tr("Insert Disk"),tr("Waiting..."),tr("Cancel"),0,0);
+        if (ret < 0) {
+            WindowPrompt (tr("Error reading Disc"),0,tr("Back"));
+            goto OUT;
+        }
+        mainWindow->SetState(STATE_DISABLED);
+        //gprintf("..1");
+        ret = Disc_Open();
+        if (ret < 0) {
+            WindowPrompt (tr("Could not open Disc"),0,tr("Back"));
+            goto OUT;
+        }
+        //gprintf("..2");
+        Disc_ReadHeader(header);
+        //gprintf("..3");
+        ret = Disc_IsWii();
+        //gprintf("..4");
+	//ResumeCheck();
+        if (ret < 0) {
+            ret = 2;
+        }
+        ret = 1;
+
+
+ OUT:
+    HaltGui();
+    mainWindow->Remove(&w);
+    mainWindow->SetState(STATE_DEFAULT);
+    ResumeGui();
+    return ret;
 }

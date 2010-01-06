@@ -366,7 +366,7 @@ void Global_Default(void) {
 	Settings.partitions_to_install = install_game_only;
 	Settings.fullcopy = 0;
 	Settings.beta_upgrades = 0;
-	
+
 	memset(&Settings.parental, 0, sizeof(struct SParental));
 
 	char buf[0x4a];
@@ -385,7 +385,11 @@ void Global_Default(void) {
 }
 
 
-char *cfg_get_title(u8 *id) {
+char *cfg_get_title(u8 *id)
+{
+    if(!id)
+        return NULL;
+
     int i;
     for (i=0; i<num_title; i++) {
         if (memcmp(id, cfg_title[i].id, 4) == 0) {
@@ -1850,7 +1854,7 @@ void CFG_Load(void) {
 	// if GUI language is set to default Settings.language_path needs to remain "notset" (if the detected setting was kept detection wouldn't work next time)
 	if (langisdefault)
 		sprintf(Settings.language_path, "notset");
-		
+
 	Settings.godmode = (Settings.parental.enabled == 0 && (Settings.parentalcontrol == 0 || strlen(Settings.unlockCode) == 0)) ? 1 : 0;
 }
 

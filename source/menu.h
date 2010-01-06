@@ -15,8 +15,11 @@
 
 void InitGUIThreads(void);
 void ExitGUIThreads(void);
+void ResumeGui();
+void HaltGui();
+void menuBootgame(const char *headless);
 
-int MainMenu (int menuitem);
+int MainMenu (int menu);
 
 enum {
     MENU_EXIT = -1,

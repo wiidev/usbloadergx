@@ -10,6 +10,7 @@
 #include "settings/cfg.h"
 #include "network/URL_List.h"
 #include "listfiles.h"
+#include "menu/menus.h"
 #include "main.h"
 #include "fatmounter.h"
 #include "filelist.h"
@@ -20,13 +21,6 @@
 /*** Extern variables ***/
 extern GuiWindow * mainWindow;
 extern GuiSound * bgMusic;
-extern u8 shutdown;
-extern u8 reset;
-
-/*** Extern functions ***/
-extern void ResumeGui();
-extern void HaltGui();
-
 
 /****************************************************************************
  * MenuOGG
@@ -182,11 +176,6 @@ bool MenuOGG() {
     while (w.GetEffect()>0) usleep(50);
 
     while (!returnhere) {
-
-        if (shutdown == 1)
-            Sys_Shutdown();
-        if (reset == 1)
-            Sys_Reboot();
 
         if (backBtn.GetState() == STATE_CLICKED) {
             if (nothingchanged == 1 && countoggs > 0) {
@@ -453,12 +442,7 @@ int MenuLanguageSelect() {
 
     while (!returnhere) {
 
-        if (shutdown == 1)
-            Sys_Shutdown();
-        else if (reset == 1)
-            Sys_Reboot();
-
-        else if (backBtn.GetState() == STATE_CLICKED) {
+        if (backBtn.GetState() == STATE_CLICKED) {
 
             backBtn.ResetState();
             break;

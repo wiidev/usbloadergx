@@ -13,6 +13,7 @@
 
 void InitVideo ();
 void InitVideodebug();
+void InitTextVideo();
 void StopGX();
 void ResetVideo_Menu();
 void Menu_Render();

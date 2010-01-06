@@ -13,6 +13,7 @@
 #include "cheats/cheatmenu.h"
 #include "fatmounter.h"
 #include "menu.h"
+#include "menu/menus.h"
 #include "filelist.h"
 #include "listfiles.h"
 #include "sys.h"
@@ -23,9 +24,6 @@
 
 #define MAXOPTIONS 13
 
-/*** Extern functions ***/
-extern void ResumeGui();
-extern void HaltGui();
 extern void titles_default();
 
 /*** Extern variables ***/
@@ -34,8 +32,6 @@ extern GuiSound * bgMusic;
 extern GuiImage * bgImg;
 extern GuiImageData * pointer[4];
 extern GuiImageData * background;
-extern u8 shutdown;
-extern u8 reset;
 extern u8 mountMethod;
 extern struct discHdr *dvdheader;
 extern PartList partitions;
@@ -76,7 +72,7 @@ int MenuSettings()
 	int opt_override = Settings.titlesOverride;
 	// backup partition index
 	u8 settingspartitionold = Settings.partition;
-	
+
 
 	enum
 	{
@@ -537,7 +533,7 @@ int MenuSettings()
 
 			snprintf(MainButtonText, sizeof(MainButtonText), "%s", tr("Theme Downloader"));
 			MainButton1Txt.SetText(MainButtonText);
-			snprintf(MainButtonText, sizeof(MainButtonText), "%s", tr(" "));
+			snprintf(MainButtonText, sizeof(MainButtonText), "%s", tr("Partition Format Menu"));
 			MainButton2Txt.SetText(MainButtonText);
 			snprintf(MainButtonText, sizeof(MainButtonText), "%s", tr(" "));
 			MainButton3Txt.SetText(MainButtonText);
@@ -557,6 +553,7 @@ int MenuSettings()
 			w.Append(&GoRightBtn);
 			w.Append(&GoLeftBtn);
 			w.Append(&MainButton1);
+            w.Append(&MainButton2);
 
 			PageIndicatorBtn1.SetAlpha(50);
 			PageIndicatorBtn2.SetAlpha(50);
@@ -611,10 +608,6 @@ int MenuSettings()
 		{
 			VIDEO_WaitVSync ();
 
-			if (shutdown == 1)
-				Sys_Shutdown();
-			if (reset == 1)
-				Sys_Reboot();
 
 			if ( pageToDisplay == 1 )
 			{
@@ -658,12 +651,7 @@ int MenuSettings()
 
 						returnhere = 1;
 
-						if (shutdown == 1)
-							Sys_Shutdown();
-						if (reset == 1)
-							Sys_Reboot();
-
-						else if (backBtn.GetState() == STATE_CLICKED)
+						if (backBtn.GetState() == STATE_CLICKED)
 						{
 							backBtn.ResetState();
 							exit = true;
@@ -865,7 +853,7 @@ int MenuSettings()
 								static const char *opts[settings_screensaver_max] = {trNOOP("OFF"),trNOOP("3 min"),trNOOP("5 min"),trNOOP("10 min"),trNOOP("20 min"),trNOOP("30 min"),trNOOP("1 hour")};
 								options2.SetValue(Idx,"%s",tr(opts[Settings.screensaver]));
 							}
-							
+
 							if(ret == ++Idx || firstRun)
 							{
 								if(firstRun) options2.SetName(Idx, "%s",tr("Mark new games"));
@@ -920,12 +908,7 @@ int MenuSettings()
 					{
 						VIDEO_WaitVSync ();
 
-						if (shutdown == 1)
-							Sys_Shutdown();
-						if (reset == 1)
-							Sys_Reboot();
-
-						else if (backBtn.GetState() == STATE_CLICKED)
+						if (backBtn.GetState() == STATE_CLICKED)
 						{
 							backBtn.ResetState();
 							exit = true;
@@ -1010,7 +993,7 @@ int MenuSettings()
 								else
 									options2.SetValue(Idx, "********");
 							}
-							
+
 							if (ret == ++Idx || firstRun)
 							{
 								if (firstRun) options2.SetName(Idx, "%s", tr("Partition"));
@@ -1022,23 +1005,23 @@ int MenuSettings()
 									}
 									while (!IsValidPartition(partitions.pinfo[Settings.partition].fs_type, Settings.cios));
 								}
-								
+
 								PartInfo pInfo = partitions.pinfo[Settings.partition];
 								f32 partition_size = partitions.pentry[Settings.partition].size * (partitions.sector_size / GB_SIZE);
-								
+
 								// Get the partition name and it's size in GB's
 								options2.SetValue(Idx,"%s%d (%.2fGB)",	pInfo.fs_type == FS_TYPE_FAT32 ? "FAT" : pInfo.fs_type == FS_TYPE_NTFS ? "NTFS" : "WBFS",
 															            pInfo.index,
 																		partition_size);
 							}
-							
+
 							if (ret == ++Idx || firstRun)
 							{
 								if (firstRun) options2.SetName(Idx, "%s", tr("FAT: Use directories"));
 								if (ret == Idx) {
 									Settings.FatInstallToDir = Settings.FatInstallToDir == 0 ? 1 : 0;
 								}
-								options2.SetValue(Idx, "%s", tr(opts_no_yes[Settings.FatInstallToDir]));								
+								options2.SetValue(Idx, "%s", tr(opts_no_yes[Settings.FatInstallToDir]));
 							}
 
 							if(ret == ++Idx || firstRun)
@@ -1119,12 +1102,7 @@ int MenuSettings()
 					{
 						VIDEO_WaitVSync ();
 
-						if (shutdown == 1)
-							Sys_Shutdown();
-						if (reset == 1)
-							Sys_Reboot();
-
-						else if (backBtn.GetState() == STATE_CLICKED)
+						if (backBtn.GetState() == STATE_CLICKED)
 						{
 							backBtn.ResetState();
 							exit = true;
@@ -1167,7 +1145,7 @@ int MenuSettings()
 									{
 										char entered[20];
 										memset(entered, 0, 20);
-										
+
 										//password check to unlock Install,Delete and Format
 										w.Remove(&optionBrowser2);
 										w.Remove(&backBtn);
@@ -1294,11 +1272,7 @@ int MenuSettings()
 
 						bool returnhere = true;
 
-						if (shutdown == 1)
-							Sys_Shutdown();
-						if (reset == 1)
-							Sys_Reboot();
-						else if (backBtn.GetState() == STATE_CLICKED)
+						if (backBtn.GetState() == STATE_CLICKED)
 						{
 							backBtn.ResetState();
 							exit = true;
@@ -1474,12 +1448,8 @@ int MenuSettings()
 						{
 							VIDEO_WaitVSync ();
 
-							if (shutdown == 1)
-								Sys_Shutdown();
-							if (reset == 1)
-								Sys_Reboot();
 
-							else if (backBtn.GetState() == STATE_CLICKED)
+							if (backBtn.GetState() == STATE_CLICKED)
 							{
 								backBtn.ResetState();
 								exit = true;
@@ -1888,7 +1858,7 @@ int MenuSettings()
 									}
 									options2.SetValue(Idx, "%s", Settings.BcaCodepath);
 								}
-								
+
 								if(ret == ++Idx || firstRun)
 								{
 									if(firstRun) options2.SetName(Idx, "%s", tr("WIP Patches Path"));
@@ -2048,6 +2018,20 @@ int MenuSettings()
 					pageToDisplay = 0;
 					break;
 				}
+				if (MainButton2.GetState() == STATE_CLICKED)
+				{
+				    if(Settings.godmode == 1)
+				    {
+                        if (isInserted(bootDevice))
+                            cfg_save_global();
+                        menu = MENU_FORMAT;
+                        pageToDisplay = 0;
+                        break;
+                    }
+                    else
+                        WindowPrompt(tr("You can't access this menu!"), tr("Unlock the app first."), tr("OK"));
+                    MainButton2.ResetState();
+				}
 			}
 
 
@@ -2146,7 +2130,7 @@ int MenuSettings()
 	w.SetEffect(EFFECT_FADE, -20);
 	while (w.GetEffect()>0) usleep(50);
 
-	// if partition has changed, Reinitialize it 
+	// if partition has changed, Reinitialize it
 	PartInfo pinfo = partitions.pinfo[Settings.partition];
 	partitionEntry pentry = partitions.pentry[Settings.partition];
 	load_from_fs = pinfo.part_fs;
@@ -2154,7 +2138,7 @@ int MenuSettings()
 		WBFS_Close();
 		WBFS_OpenPart(load_from_fs, pinfo.index, pentry.sector, pentry.size, (char *) &game_partition);
 	}
-		
+
 	// if language has changed, reload titles
 	char opt_langnew[100];
 	strcpy(opt_langnew,Settings.language_path);
@@ -2428,7 +2412,7 @@ int GameSettings(struct discHdr * header)
 				iosChoice = i250;
 			else if (Settings.cios == ios223)
 				iosChoice = i223;
-			else 
+			else
                                 iosChoice = i249;
 			parentalcontrolChoice = 0;
 			fix002 = Settings.error002;
@@ -2448,11 +2432,6 @@ int GameSettings(struct discHdr * header)
 		while (menu == MENU_NONE)
 		{
 			VIDEO_WaitVSync ();
-
-			if (shutdown == 1)
-				Sys_Shutdown();
-			if (reset == 1)
-				Sys_Reboot();
 
 			if (MainButton1.GetState() == STATE_CLICKED)
 			{
@@ -2489,10 +2468,6 @@ int GameSettings(struct discHdr * header)
 
 					returnhere = 1;
 
-					if (shutdown == 1)
-						Sys_Shutdown();
-					if (reset == 1)
-						Sys_Reboot();
 					if (backBtn.GetState() == STATE_CLICKED)
 					{
 						backBtn.ResetState();
@@ -2762,10 +2737,6 @@ int GameSettings(struct discHdr * header)
 				{
 					VIDEO_WaitVSync ();
 
-					if (shutdown == 1)
-						Sys_Shutdown();
-					if (reset == 1)
-						Sys_Reboot();
 					if (backBtn.GetState() == STATE_CLICKED)
 					{
 						backBtn.ResetState();

@@ -13,6 +13,8 @@ void Sys_LoadMenu(void);
 void Sys_BackToLoader(void);
 int Sys_ChangeIos(int ios);
 int Sys_IosReload(int IOS);
+s32 CheckForCIOS();
+int LoadAppCIOS();
 bool Sys_IsHermes();
 s32 IOS_ReloadIOSsafe(int ios);
 void ScreenShot();

@@ -134,15 +134,6 @@ int MenuInstall() {
             menu = MENU_DISCLIST;
             break;
         }
-
-        if (shutdown == 1) {
-            wiilight(0);
-            Sys_Shutdown();
-        }
-        if (reset == 1) {
-            wiilight(0);
-            Sys_Reboot();
-        }
     }
 
     //Turn off the WiiLight
