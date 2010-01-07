@@ -173,7 +173,6 @@ static void * CheckDevices (void *arg)
         {
             sdState = sdNow;
             checkthreadState = 2;
-                WindowPrompt("2",0,"OK");
         }
 
         if(ScreenshotTriggered)
