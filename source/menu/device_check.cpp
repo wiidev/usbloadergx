@@ -118,12 +118,6 @@ int CheckPartition()
     if (ret2 < 0)
         return ret2;
 
-    // open database if needed, load titles if needed
-    if(isInserted(bootDevice))
-        OpenXMLDatabase(Settings.titlestxt_path,Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true);
-
-    __Menu_GetEntries(0);
-
     hddState = 1;
 
     return hddState;
@@ -163,6 +157,10 @@ static void * CheckDevices (void *arg)
         {
             if(CheckHDD() >= 0)
             {
+                // open database if needed, load titles if needed
+                if(isInserted(bootDevice))
+                    OpenXMLDatabase(Settings.titlestxt_path,Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride == 1 ? true: false, true);
+
                 checkthreadState = 1;
             }
         }

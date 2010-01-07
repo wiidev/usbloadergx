@@ -45,12 +45,12 @@ char alternatedname[40];
 #define TITLE_MAX 200
 
 struct ID_Title {
-    u8 id[5];
+    char id[6];
     char title[TITLE_MAX];
 };
 
 struct ID_Control {
-    u8 id[5];
+    char id[6];
     u8 block;
 };
 // renamed titles
@@ -158,7 +158,7 @@ bool cfg_bool(char *name, short *var) {
 }
 
 void cfg_int(char *name, short *var, int count) {
-    char tmp[5];
+    char tmp[6];
     short i;
 
     if (count > 10) //avoid overflow
@@ -392,20 +392,25 @@ char *cfg_get_title(u8 *id)
 
     int i;
     for (i=0; i<num_title; i++) {
-        if (memcmp(id, cfg_title[i].id, 4) == 0) {
+        if (memcmp(id, cfg_title[i].id, 6) == 0) {
             return cfg_title[i].title;
         }
     }
     return NULL;
 }
 
-char *get_title(struct discHdr *header) {
+char *get_title(struct discHdr *header)
+{
+    if(!header)
+        return NULL;
+
     char *title = cfg_get_title(header->id);
     if (title) return title;
     return header->title;
 }
 
-void title_set(char *id, char *title) {
+void title_set(char *id, char *title)
+{
     char *idt = cfg_get_title((u8*)id);
     if (idt) {
         // replace
@@ -418,8 +423,7 @@ void title_set(char *id, char *title) {
             return;
         }
         // add
-        memcpy(cfg_title[num_title].id, id, 4);
-        cfg_title[num_title].id[4] = 0;
+        strcpy(cfg_title[num_title].id, id);
         strlcpy(cfg_title[num_title].title, title, TITLE_MAX);
         num_title++;
     }
@@ -428,8 +432,7 @@ void title_set(char *id, char *title) {
 void titles_default() {
 	int i;
 	for (i=0; i<num_title; i++) {
-        memcpy(cfg_title[i].id, "", 4);
-        cfg_title[i].id[4] = 0;
+        memset(cfg_title[i].id, 0, 6);
         strlcpy(cfg_title[i].title, "", TITLE_MAX);
     }
 }
@@ -437,7 +440,7 @@ void titles_default() {
 u8 cfg_get_block(u8 *id) {
     int i;
     for (i=0; i<num_control; i++) {
-        if (memcmp(id, cfg_control[i].id, 4) == 0) {
+        if (memcmp(id, cfg_control[i].id, 6) == 0) {
             return cfg_control[i].block;
         }
     }
@@ -1506,8 +1509,7 @@ void parental_set(char *name, char *val) {
                         return;
                     }
                     // add
-                    memcpy(cfg_control[num_control].id, id, 4);
-                    cfg_control[num_control].id[4] = 0;
+                    strcpy(cfg_control[num_control].id, (char*) id);
                     cfg_control[num_control].block = opt_c;
                     num_control++;
                 }
