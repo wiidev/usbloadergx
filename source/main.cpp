@@ -144,7 +144,7 @@ int main(int argc, char *argv[])
 	printf("\n\tInitialize USB (wake up)");
 
     USBDevice_Init();// seems enough to wake up some HDDs if they are in sleep mode when the loader starts (tested with WD MyPassport Essential 2.5")
-	USBDevice_deInit();
+    USBDevice_deInit();// seems enough to wake up some HDDs if they are in sleep mode when the loader starts (tested with WD MyPassport Essential 2.5")
 
     ret = CheckForCIOS();
 
@@ -164,6 +164,18 @@ int main(int argc, char *argv[])
             strcpy(bootDevice, "USB:");
 
 		printf("\n\tConfiguration file is on %s", bootDevice);
+    }
+
+    // Try opening and closing the configuration file here
+    // to prevent a crash dump later on - giantpune
+    // how the fuck is this supposed to help? - dimok
+    char GXGlobal_cfg[26];
+    sprintf(GXGlobal_cfg, "%s/config/GXGlobal.cfg", bootDevice);
+    FILE *fp = fopen(GXGlobal_cfg, "r");
+    if (fp)
+    {
+         fclose(fp);
+         printf("\n\tConfiguration file is on %s", bootDevice);
     }
 
     gettextCleanUp();

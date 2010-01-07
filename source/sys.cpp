@@ -338,9 +338,11 @@ s32 CheckForCIOS()
 		}
 		else
 		{
+		    SDCard_Init();
 		    //only for 222 loading ehc modules
             printf("\n\tLoad ehc module");
             load_ehc_module();
+		    SDCard_deInit();
 		}
     }
 

@@ -408,14 +408,14 @@ int buildTitleList(int t, wchar_t* gameFilter, discHdr ** PgameList, u32 *PgameC
 				continue;
 		}*/
 
-                /*if(gameFilter && *gameFilter) {
+        if(gameFilter && *gameFilter) {
 			u32 filter_len = wcslen(gameFilter);
 			wchar_t *gameName = FreeTypeGX::charToWideChar(get_title(header));
 			if (!gameName || wcsnicmp(gameName, gameFilter, filter_len)) {
 				delete [] gameName;
 				continue;
-			}
-                }*/
+            }
+        }
 		if(i != cnt2)
 			buffer[cnt2] = buffer[i];
 		cnt2++;
@@ -586,13 +586,14 @@ int __Menu_GetEntries(int t, const wchar_t* Filter) {
 	for(;;)
 	{
 		if (mountMethod==3)
-                {int butt =buildTitleList(t, new_gameFilter, &new_gameList, &new_gameCnt);
-                           if (butt < 0)
-                            {
-                               gprintf("\nbutt:%d", butt);
-                               return -1;
-                            }
-                       }
+        {
+            int butt =buildTitleList(t, new_gameFilter, &new_gameList, &new_gameCnt);
+            if (butt < 0)
+            {
+                gprintf("\nbutt:%d", butt);
+                return -1;
+            }
+        }
 
 		else
                 {

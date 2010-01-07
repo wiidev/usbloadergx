@@ -111,7 +111,7 @@ int CheckPartition()
     }
 
     if (ret2 < 0 && load_from_fs != PART_FS_WBFS)
-        return ret2;
+        return -1;
 
     ret2 = Disc_Init();
     if (ret2 < 0)
@@ -120,6 +120,8 @@ int CheckPartition()
     // open database if needed, load titles if needed
     if(isInserted(bootDevice))
         OpenXMLDatabase(Settings.titlestxt_path,Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true);
+
+    __Menu_GetEntries(0);
 
     hddState = 1;
 
