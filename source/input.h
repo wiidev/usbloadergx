@@ -17,6 +17,7 @@
 
 extern int rumbleRequest[4];
 
+void UpdatePadsCB ();
 void ShutoffRumble();
 void DoRumble(int i);
 

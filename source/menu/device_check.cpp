@@ -17,6 +17,7 @@ static bool ExitRequested = false;
 static u8 sdState =0;
 u8 hddState = 0;
 u8 checkthreadState = 0;
+bool ScreenshotTriggered = false;
 
 extern u8 shutdown;
 extern u8 reset;
@@ -146,8 +147,6 @@ static void * CheckDevices (void *arg)
     sdState = isInserted(bootDevice);
     while (!ExitRequested)
     {
-        usleep(100);
-
         if (checkHalt && !ExitRequested)
         {
             LWP_SuspendThread(checkthread);
@@ -177,14 +176,15 @@ static void * CheckDevices (void *arg)
                 WindowPrompt("2",0,"OK");
         }
 
-        u32 buttons = ButtonsPressed();
-        if((buttons & WPAD_NUNCHUK_BUTTON_Z) || (buttons & WPAD_CLASSIC_BUTTON_ZL) ||
-           (buttons & PAD_TRIGGER_Z))
+        if(ScreenshotTriggered)
         {
-			gprintf("\n\tscreenShotBtn clicked");
-			ScreenShot();
-			gprintf("...It's easy, mmmmmmKay");
+            gprintf("\n\tscreenShotBtn clicked");
+            ScreenShot();
+            ScreenshotTriggered = false;
+            gprintf("...It's easy, mmmmmmKay");
         }
+
+        usleep(20000);
     }
 
     return NULL;

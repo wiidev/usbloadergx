@@ -121,13 +121,13 @@ static void * UpdateGUI (void *arg) {
                 if (Settings.tooltips == TooltipsOn && THEME.show_tooltip != 0 && mainWindow->GetState() != STATE_DISABLED)
                     mainWindow->DrawTooltip();
 
-                for (int i=3; i >= 0; i--) { // so that player 1's cursor appears on top!
+                for (int i=3; i >= 0; i--)
+                { // so that player 1's cursor appears on top!
                     if (userInput[i].wpad.ir.valid)
                         Menu_DrawImg(userInput[i].wpad.ir.x-48, userInput[i].wpad.ir.y-48, 200.0,
                                      96, 96, pointer[i]->GetImage(), userInput[i].wpad.ir.angle, CFG.widescreen? 0.8 : 1, 1, 255,0,0,0,0,0,0,0,0);
-                    if (Settings.rumble == RumbleOn) {
+                    if (Settings.rumble == RumbleOn)
                         DoRumble(i);
-                    }
                 }
 
                 Menu_Render();
@@ -187,6 +187,7 @@ void InitGUIThreads() {
     InitProgressThread();
     InitNetworkThread();
     InitCheckThread();
+    ResumeCheck();
 
     if (Settings.autonetwork)
         ResumeNetworkThread();

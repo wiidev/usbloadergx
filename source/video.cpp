@@ -22,46 +22,19 @@
 
 #define DEFAULT_FIFO_SIZE 256 * 1024
 static unsigned int *xfb[2] = { NULL, NULL }; // Double buffered
+static unsigned int *xfbTxt = NULL;
 static int whichfb = 0; // Switch
 static GXRModeObj *vmode; // Menu video mode
 static unsigned char gp_fifo[DEFAULT_FIFO_SIZE] ATTRIBUTE_ALIGN (32);
 static Mtx GXmodelView2D;
 int screenheight;
 int screenwidth;
-u32 frameCount = 0;
 
 extern bool textVideoInit;
 extern bool geckoinit;
 
 u8 * gameScreenTex = NULL; // a GX texture screen capture of the game
 u8 * gameScreenTex2 = NULL; // a GX texture screen capture of the game (copy)
-
-/****************************************************************************
- * UpdatePadsCB
- *
- * called by postRetraceCallback in InitGCVideo - scans gcpad and wpad
- ***************************************************************************/
-static void
-UpdatePadsCB () {
-    frameCount++;
-    WPAD_ScanPads();
-    PAD_ScanPads();
-
-    for (int i=3; i >= 0; i--) {
-        memcpy(&userInput[i].wpad, WPAD_Data(i), sizeof(WPADData));
-
-        userInput[i].chan = i;
-        userInput[i].pad.btns_d = PAD_ButtonsDown(i);
-        userInput[i].pad.btns_u = PAD_ButtonsUp(i);
-        userInput[i].pad.btns_h = PAD_ButtonsHeld(i);
-        userInput[i].pad.stickX = PAD_StickX(i);
-        userInput[i].pad.stickY = PAD_StickY(i);
-        userInput[i].pad.substickX = PAD_SubStickX(i);
-        userInput[i].pad.substickY = PAD_SubStickY(i);
-        userInput[i].pad.triggerL = PAD_TriggerL(i);
-        userInput[i].pad.triggerR = PAD_TriggerR(i);
-    }
-}
 
 /****************************************************************************
  * StartGX
@@ -204,7 +177,6 @@ InitVideo () {
 
 void InitTextVideo ()
 {
-    unsigned int *xfb = NULL;
     gprintf("\nInitTextVideo ()");
     if (textVideoInit)
     {
@@ -219,14 +191,14 @@ void InitTextVideo ()
     VIDEO_Configure (vmode);
 
     // Allocate the video buffers
-    xfb = (u32 *) MEM_K0_TO_K1 (SYS_AllocateFramebuffer (vmode));
+    xfbTxt = (u32 *) MEM_K0_TO_K1 (SYS_AllocateFramebuffer (vmode));
 
     // A console is always useful while debugging
-    console_init (xfb, 20, 64, vmode->fbWidth, vmode->xfbHeight, vmode->fbWidth * 2);
+    console_init (xfbTxt, 20, 64, vmode->fbWidth, vmode->xfbHeight, vmode->fbWidth * 2);
 
     // Clear framebuffers etc.
-    VIDEO_ClearFrameBuffer (vmode, xfb, COLOR_BLACK);
-    VIDEO_SetNextFramebuffer (xfb);
+    VIDEO_ClearFrameBuffer (vmode, xfbTxt, COLOR_BLACK);
+    VIDEO_SetNextFramebuffer (xfbTxt);
 
     VIDEO_SetBlack (FALSE);
     VIDEO_Flush ();
