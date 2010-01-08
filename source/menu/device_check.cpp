@@ -164,6 +164,12 @@ static void * CheckDevices (void *arg)
                 checkthreadState = 1;
 
                 LWP_SetThreadPriority(LWP_GetSelf(), 0);
+
+                if(strstr(Settings.ogg_path, "USB:/") != 0)
+                {
+                    bgMusic->Load(Settings.ogg_path);
+                    bgMusic->Play();
+                }
             }
         }
 

@@ -18,7 +18,7 @@ GuiBGM::GuiBGM(const u8 *s, int l, int v)
 
     //shouldn't be needed but
     //fixes some kind of weird bug in ogg system
-    GuiSound::Load(bg_music_ogg, bg_music_ogg_size, true);
+    GuiSound::Load(s, l, v);
 }
 
 GuiBGM::~GuiBGM()

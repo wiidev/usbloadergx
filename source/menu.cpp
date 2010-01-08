@@ -172,9 +172,6 @@ static void * UpdateGUI (void *arg) {
             break;
 
         }
-
-
-
     }
     return NULL;
 }
@@ -284,15 +281,17 @@ int MainMenu(int menu) {
     bgImg = new GuiImage(background);
     mainWindow->Append(bgImg);
 
+    bgMusic = new GuiBGM(bg_music_ogg, bg_music_ogg_size, Settings.volume);
+    bgMusic->SetLoop(Settings.musicloopmode); //loop music
+    if(strstr(Settings.ogg_path, "USB:/") == 0) //usb is not detected at this point yet
+    {
+        bgMusic->Load(Settings.ogg_path);
+        bgMusic->Play();
+    }
     ResumeGui();
 
-	bgMusic = new GuiBGM(bg_music_ogg, bg_music_ogg_size, Settings.volume);
-    bgMusic->SetLoop(Settings.musicloopmode); //loop music
-    bgMusic->Load(Settings.ogg_path);
-	bgMusic->Play();
 
     while (currentMenu != MENU_EXIT) {
-        bgMusic->SetVolume(Settings.volume);
 
         switch (currentMenu)
 		{
