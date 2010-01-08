@@ -41,7 +41,7 @@ GuiWindow * mainWindow = NULL;
 GuiImageData * pointer[4];
 GuiImage * bgImg = NULL;
 GuiImageData * background = NULL;
-GuiSound * bgMusic = NULL;
+GuiBGM * bgMusic = NULL;
 GuiSound *btnClick2 = NULL;
 
 struct discHdr *dvdheader = NULL;
@@ -135,6 +135,8 @@ static void * UpdateGUI (void *arg) {
                 for (int i=0; i < 4; i++)
                     mainWindow->Update(&userInput[i]);
 
+                if(bgMusic)
+                    bgMusic->UpdateState();
 
             } else {
                 for (int a = 5; a < 255; a += 10) {
@@ -284,12 +286,9 @@ int MainMenu(int menu) {
 
     ResumeGui();
 
-	bgMusic = new GuiSound(bg_music_ogg, bg_music_ogg_size, Settings.volume);
-    bgMusic->SetLoop(1); //loop music
-    // startup music
-    if (strcmp("", Settings.oggload_path) && strcmp("notset", Settings.ogg_path)) {
-        bgMusic->Load(Settings.ogg_path);
-    }
+	bgMusic = new GuiBGM(bg_music_ogg, bg_music_ogg_size, Settings.volume);
+    bgMusic->SetLoop(Settings.musicloopmode); //loop music
+    bgMusic->Load(Settings.ogg_path);
 	bgMusic->Play();
 
     while (currentMenu != MENU_EXIT) {

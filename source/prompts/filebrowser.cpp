@@ -441,6 +441,7 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
 		}
 
 		if (ExitBtn.GetState() == STATE_CLICKED) {
+		    result = 0;
 			break;
 		}
 		else if (okBtn.GetState() == STATE_CLICKED) {

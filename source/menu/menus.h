@@ -4,6 +4,7 @@
 #include <unistd.h>
 
 #include "libwiigui/gui.h"
+#include "libwiigui/GuiBGM.h"
 #include "language/gettext.h"
 #include "prompts/PromptWindows.h"
 #include "menu.h"
@@ -12,7 +13,7 @@
 #include "sys.h"
 
 extern GuiWindow * mainWindow;
-extern GuiSound * bgMusic;
+extern GuiBGM * bgMusic;
 extern u8 checkthreadState;
 extern u8 needToReloadGamelist;
 extern u8 hddOK;

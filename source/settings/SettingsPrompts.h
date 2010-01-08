@@ -8,7 +8,7 @@
 #ifndef _SETTINGSPROMPTS_H_
 #define _SETTINGSPROMPTS_H_
 
-bool MenuOGG();
+bool MenuBackgroundMusic();
 int MenuLanguageSelect();
 
 #endif

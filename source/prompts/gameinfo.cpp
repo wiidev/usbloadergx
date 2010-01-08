@@ -24,8 +24,6 @@
 
 
 /*** Extern variables ***/
-extern GuiWindow * mainWindow;
-extern GuiSound * bgMusic;
 extern struct gameXMLinfo gameinfo;
 extern struct gameXMLinfo gameinfo_reset;
 extern u32 gameCnt;

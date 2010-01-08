@@ -144,7 +144,7 @@ class GuiSound
 		bool Load(const char *p);
 		//!Destructor
 		~GuiSound();
-		
+
 		//!Start sound playback
 		void Play();
 		//!Stop sound playback
@@ -430,7 +430,7 @@ class GuiElement
 		void Lock();
 		void Unlock();
 //		static mutex_t mutex;
-		static mutex_t	_lock_mutex; 
+		static mutex_t	_lock_mutex;
 		lwp_t	_lock_thread;
 		u16		_lock_count;
 		lwpq_t	_lock_queue;

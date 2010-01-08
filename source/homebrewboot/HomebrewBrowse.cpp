@@ -19,6 +19,7 @@
 #include "homebrewboot/BootHomebrew.h"
 #include "network/networkops.h"
 #include "menu.h"
+#include "menu/menus.h"
 #include "filelist.h"
 #include "sys.h"
 #include "network/http.h"
@@ -31,8 +32,6 @@
 #include "../menu/menus.h"
 
 /*** Extern variables ***/
-extern GuiWindow * mainWindow;
-extern GuiSound * bgMusic;
 extern GuiImage * bgImg;
 extern u32 infilesize;
 extern u32 uncfilesize;

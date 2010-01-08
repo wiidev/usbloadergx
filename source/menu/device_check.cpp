@@ -162,6 +162,8 @@ static void * CheckDevices (void *arg)
                     OpenXMLDatabase(Settings.titlestxt_path,Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride == 1 ? true: false, true);
 
                 checkthreadState = 1;
+
+                LWP_SetThreadPriority(LWP_GetSelf(), 0);
             }
         }
 
@@ -189,7 +191,7 @@ static void * CheckDevices (void *arg)
 
 void InitCheckThread()
 {
-    LWP_CreateThread(&checkthread, CheckDevices, NULL, NULL, 0, 0);
+    LWP_CreateThread(&checkthread, CheckDevices, NULL, NULL, 0, 30);
 }
 
 void ExitCheckThread()
