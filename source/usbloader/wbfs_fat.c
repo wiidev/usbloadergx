@@ -73,6 +73,9 @@ s32 _WBFS_FAT_GetHeadersCount()
 	char *p;
 	u32 size;
 	int is_dir;
+	int len;
+	char dir_title[65];
+	char *title;
 
 	//dbg_time1();
 
@@ -87,7 +90,8 @@ s32 _WBFS_FAT_GetHeadersCount()
 	while (dirnext(dir_iter, fname, &st) == 0) {
 		//printf("found: %s\n", fname); Wpad_WaitButtonsCommon();
 		if ((char)fname[0] == '.') continue;
-		if (strlen(fname) < 8) continue; // "GAMEID_x"
+		len = strlen(fname);
+		if (len < 8) continue; // "GAMEID_x"
 
 		memcpy(id, fname, 6);
 		id[6] = 0;
@@ -95,8 +99,24 @@ s32 _WBFS_FAT_GetHeadersCount()
 		is_dir = S_ISDIR(st.st_mode);
 		//printf("mode: %d %d %x\n", is_dir, st.st_mode, st.st_mode);
 		if (is_dir) {
-			// usb:/wbfs/GAMEID_TITLE/GAMEID.wbfs
-			if (fname[6] != '_') continue;
+			if (fname[6] == '_' && is_gameid((char*)id)) {
+				// usb:/wbfs/GAMEID_TITLE/GAMEID.wbfs
+				strncpy(dir_title, &fname[7], sizeof(dir_title));
+			} else {
+				// usb:/wbfs/TITLE[GAMEID]/GAMEID.wbfs
+				if (fname[len-8] != '[' || fname[len-1] != ']') continue;
+				memcpy(id, &fname[len-7], 6);
+				id[6] = 0;
+				if (!is_gameid((char*)id)) continue;
+				strncpy(dir_title, fname, sizeof(dir_title));
+				dir_title[len-8] = 0; // cut at '['
+				int n = strlen(dir_title);
+				if (n == 0) continue;
+				// cut trailing _ or ' '
+				if (dir_title[n - 1] == ' ' || dir_title[n - 1] == '_' ) {
+					dir_title[n - 1] = 0;
+				}
+			}
 			snprintf(fpath, sizeof(fpath), "%s/%s/%s.wbfs", path, fname, id);
 			//printf("path2: %s\n", fpath);
 			// if more than 50 games, skip second stat to improve speed
@@ -131,10 +151,10 @@ s32 _WBFS_FAT_GetHeadersCount()
 		// size must be at least 1MB to be considered a valid wbfs file
 		if (st.st_size < 1024*1024) continue;
 		// if we have titles.txt entry use that
-		char *title = cfg_get_title(id);
+		title = cfg_get_title(id);
 		// if directory, and no titles.txt get title from dir name
 		if (!title && is_dir) {
-			title = &fname[7];
+			title = dir_title;
 		}
 		if (title) {
 			memset(&tmpHdr, 0, sizeof(tmpHdr));
@@ -386,6 +406,7 @@ int WBFS_FAT_find_fname(u8 *id, char *fname, int len)
 	strcpy(strrchr(fname, '.'), ".iso"); // replace .wbfs with .iso
 	if (stat(fname, &st) == 0) return 1;
 	// direct file not found, check subdirs
+	*fname = 0;
 	DIR_ITER *dir_iter;
 	char path[MAX_FAT_PATH];
 	char name[MAX_FAT_PATH];
@@ -394,30 +415,40 @@ int WBFS_FAT_find_fname(u8 *id, char *fname, int len)
 	dir_iter = diropen(path);
 	//printf("dir: %s %p\n", path, dir); Wpad_WaitButtons();
 	if (!dir_iter) {
-		goto err;
+		return 0;
 	}
 	while (dirnext(dir_iter, name, &st) == 0) {
 		if (name[0] == '.') continue;
-		if (name[6] != '_') continue;
-		if (strncmp(name, (char*)id, 6) != 0) continue;
-		if (strlen(name) < 8) continue;
+		int n = strlen(name);
+		if (n < 8) continue;
+		if (name[6] == '_') {
+			// GAMEID_TITLE
+			if (strncmp(name, (char*)id, 6) != 0) goto try_alter;
+		} else {
+			try_alter:
+			// TITLE [GAMEID]
+			if (name[n-8] != '[' || name[n-1] != ']') continue;
+			if (strncmp(&name[n-7], (char*)id, 6) != 0) continue;
+		}
 		// look for .wbfs file
 		snprintf(fname, len, "%s/%s/%.6s.wbfs", path, name, id);
 		if (stat(fname, &st) == 0) {
-			dirclose(dir_iter);
-			return 2;
+			break;
 		}
 		// look for .iso file
 		snprintf(fname, len, "%s/%s/%.6s.iso", path, name, id);
 		if (stat(fname, &st) == 0) {
-			dirclose(dir_iter);
-			return 2;
+			break;
 		}
+		*fname = 0;
 	}
 	dirclose(dir_iter);
+	if (*fname) {
+		// found
+		//printf("found:%s\n", fname);
+		return 2;
+	}
 	// not found
-	err:
-	*fname = 0;
 	return 0;
 }
 
