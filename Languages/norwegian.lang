@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-07 00:14+0100\n"
+"POT-Creation-Date: 2010-01-08 10:44+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: raschi\n"
 "Language-Team: raschi\n"
@@ -185,9 +185,6 @@ msgstr "HBC/Loader"
 msgid "Backgroundmusic"
 msgstr "Bakgrunnsmusikk"
 
-msgid "Backgroundmusic Path changed."
-msgstr "Bakgrunnsmusikk sti endret"
-
 msgid "Big thanks to:"
 msgstr "Stor takk til:"
 
@@ -217,6 +214,9 @@ msgstr "Kan ikke slette:"
 
 msgid "Cancel"
 msgstr "Avbryt"
+
+msgid "Change Play Path"
+msgstr ""
 
 msgid "Channels"
 msgstr "Kanaler"
@@ -762,6 +762,9 @@ msgstr "Sannsynligvis har bildet dimensjoner som ikke kan deles med 4."
 msgid "Mount DVD drive"
 msgstr "Last DVD stasjon"
 
+msgid "Music Loop Mode"
+msgstr ""
+
 msgid "Music Volume"
 msgstr "Musikk volum"
 
@@ -897,6 +900,15 @@ msgstr "Velg fra liste"
 msgid "Play Count"
 msgstr "Ganger spilt"
 
+msgid "Play Next"
+msgstr ""
+
+msgid "Play Previous"
+msgstr ""
+
+msgid "Playing Music:"
+msgstr ""
+
 msgid "Please wait..."
 msgstr "Vennligst vent..."
 
@@ -930,8 +942,14 @@ msgstr "Les SD på nytt"
 msgid "Rename Game on WBFS"
 msgstr "Gi nytt navn til spill på WBFS"
 
+msgid "Reset BG Music"
+msgstr ""
+
 msgid "Reset Playcounter"
 msgstr "Nullstill teller"
+
+msgid "Reset to standard BGM?"
+msgstr ""
 
 msgid "Restarting..."
 msgstr "Starter på nytt..."
@@ -980,9 +998,6 @@ msgstr "Sep"
 
 msgid "Set Search-Filter"
 msgstr "Angi søkefilter"
-
-msgid "Set as backgroundmusic?"
-msgstr "Bruk som bakgrunnsmusikk?"
 
 msgid "Settings"
 msgstr "Innstillinger"
@@ -1318,47 +1333,53 @@ msgstr "av"
 msgid "seconds left"
 msgstr "sekunder gjenstår"
 
-#~ msgid "Back to Wii Menu"
-#~ msgstr "Wii meny"
+msgid "Backgroundmusic Path changed."
+msgstr "Bakgrunnsmusikk sti endret"
 
-#~ msgid "Could not initialize DIP module!"
-#~ msgstr "Kan ikke initialisere DIP modul!"
+msgid "Set as backgroundmusic?"
+msgstr "Bruk som bakgrunnsmusikk?"
 
-#~ msgid "Do you want to retry for 30 secs?"
-#~ msgstr "Vil du fortsette å prøve i 30 sekunder?"
+msgid "Back to Wii Menu"
+msgstr "Wii meny"
 
-#~ msgid "Format"
-#~ msgstr "Formatér"
+msgid "Could not initialize DIP module!"
+msgstr "Kan ikke initialisere DIP modul!"
 
-#~ msgid "No USB Device"
-#~ msgstr "Ingen USB enhet"
+msgid "Do you want to retry for 30 secs?"
+msgstr "Vil du fortsette å prøve i 30 sekunder?"
 
-#~ msgid "No USB Device found."
-#~ msgstr "Ingen USB enhet funnet."
+msgid "Format"
+msgstr "Formatér"
 
-#~ msgid "USB Device not found"
-#~ msgstr "USB enhet ikke funnet"
+msgid "No USB Device"
+msgstr "Ingen USB enhet"
 
-#~ msgid "Waiting for USB Device"
-#~ msgstr "Venter på USB enhet"
+msgid "No USB Device found."
+msgstr "Ingen USB enhet funnet."
 
-#~ msgid "Exit USB Loader GX?"
-#~ msgstr "Avslutt USB Loader GX?"
+msgid "USB Device not found"
+msgstr "USB enhet ikke funnet"
 
-#~ msgid "No WBFS partition found"
-#~ msgstr "Ingen WBFS partisjon funnet"
+msgid "Waiting for USB Device"
+msgstr "Venter på USB enhet"
 
-#~ msgid "You need to format a partition"
-#~ msgstr "Du må formatere en partisjon"
+msgid "Exit USB Loader GX?"
+msgstr "Avslutt USB Loader GX?"
 
-#~ msgid "ERROR: USB device could not be loaded!"
-#~ msgstr "FEIL: USB enhet kan ikke lastes!"
+msgid "No WBFS partition found"
+msgstr "Ingen WBFS partisjon funnet"
 
-#~ msgid "ERROR: cIOS could not be loaded!"
-#~ msgstr "FEIL: cIOS kan ikke lastes!"
+msgid "You need to format a partition"
+msgstr "Du må formatere en partisjon"
 
-#~ msgid "Loading..."
-#~ msgstr "Laster..."
+msgid "ERROR: USB device could not be loaded!"
+msgstr "FEIL: USB enhet kan ikke lastes!"
 
-#~ msgid "Waiting for your slow USB Device: %i secs..."
-#~ msgstr "Venter på USB enhet: %i sek..."
+msgid "ERROR: cIOS could not be loaded!"
+msgstr "FEIL: cIOS kan ikke lastes!"
+
+msgid "Loading..."
+msgstr "Laster..."
+
+msgid "Waiting for your slow USB Device: %i secs..."
+msgstr "Venter på USB enhet: %i sek..."

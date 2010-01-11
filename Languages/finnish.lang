@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-07 00:14+0100\n"
+"POT-Creation-Date: 2010-01-08 10:44+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: c64rmx\n"
 "Language-Team: \n"
@@ -185,9 +185,6 @@ msgstr "HBC"
 msgid "Backgroundmusic"
 msgstr "Taustamusiikki"
 
-msgid "Backgroundmusic Path changed."
-msgstr "Taustamusiikin polku muutettu"
-
 msgid "Big thanks to:"
 msgstr "Isot kiitokset:"
 
@@ -217,6 +214,9 @@ msgstr "Ei voida poistaa:"
 
 msgid "Cancel"
 msgstr "Peruuta"
+
+msgid "Change Play Path"
+msgstr ""
 
 msgid "Channels"
 msgstr ""
@@ -762,6 +762,9 @@ msgstr "Todennäköisesti sisältää ulottuvuuksia jotka eivät ole jaollisia n
 msgid "Mount DVD drive"
 msgstr ""
 
+msgid "Music Loop Mode"
+msgstr ""
+
 msgid "Music Volume"
 msgstr "Voimakkuus"
 
@@ -897,6 +900,15 @@ msgstr "Valitse listasta"
 msgid "Play Count"
 msgstr "Pelauksen määrä"
 
+msgid "Play Next"
+msgstr ""
+
+msgid "Play Previous"
+msgstr ""
+
+msgid "Playing Music:"
+msgstr ""
+
 msgid "Please wait..."
 msgstr ""
 
@@ -930,8 +942,14 @@ msgstr "Uudelleenlataa SD"
 msgid "Rename Game on WBFS"
 msgstr "Uudelleennimeä peli"
 
+msgid "Reset BG Music"
+msgstr ""
+
 msgid "Reset Playcounter"
 msgstr "Resetoi pelauksen määrä"
+
+msgid "Reset to standard BGM?"
+msgstr ""
 
 msgid "Restarting..."
 msgstr "Boottaa..."
@@ -980,9 +998,6 @@ msgstr "syys"
 
 msgid "Set Search-Filter"
 msgstr ""
-
-msgid "Set as backgroundmusic?"
-msgstr "Aseta taustamusiikiksi?"
 
 msgid "Settings"
 msgstr "Asetukset"
@@ -1318,35 +1333,41 @@ msgstr "josta"
 msgid "seconds left"
 msgstr "sekuntia jäljellä"
 
-#~ msgid "Back to Wii Menu"
-#~ msgstr "Takaisin Wii Menuun"
+msgid "Backgroundmusic Path changed."
+msgstr "Taustamusiikin polku muutettu"
 
-#~ msgid "Could not initialize DIP module!"
-#~ msgstr "DIP Moduulia ei voitu alustaa!"
+msgid "Set as backgroundmusic?"
+msgstr "Aseta taustamusiikiksi?"
 
-#~ msgid "Do you want to retry for 30 secs?"
-#~ msgstr "Haluatko odottaa 30 sekuntia?"
+msgid "Back to Wii Menu"
+msgstr "Takaisin Wii Menuun"
 
-#~ msgid "Format"
-#~ msgstr "Formatoi"
+msgid "Could not initialize DIP module!"
+msgstr "DIP Moduulia ei voitu alustaa!"
 
-#~ msgid "No USB Device"
-#~ msgstr "Ei USB-laitetta"
+msgid "Do you want to retry for 30 secs?"
+msgstr "Haluatko odottaa 30 sekuntia?"
 
-#~ msgid "No USB Device found."
-#~ msgstr "USB-laitetta ei löytynyt."
+msgid "Format"
+msgstr "Formatoi"
 
-#~ msgid "USB Device not found"
-#~ msgstr "USB-laitetta ei löytynyt"
+msgid "No USB Device"
+msgstr "Ei USB-laitetta"
 
-#~ msgid "Waiting for USB Device"
-#~ msgstr "Odottaa USB-laitetta..."
+msgid "No USB Device found."
+msgstr "USB-laitetta ei löytynyt."
 
-#~ msgid "Exit USB Loader GX?"
-#~ msgstr "Poistu USB Loader GX:stä?"
+msgid "USB Device not found"
+msgstr "USB-laitetta ei löytynyt"
 
-#~ msgid "No WBFS partition found"
-#~ msgstr "Ei WBFS-osioita löytynyt"
+msgid "Waiting for USB Device"
+msgstr "Odottaa USB-laitetta..."
 
-#~ msgid "You need to format a partition"
-#~ msgstr "Sinun täytyy formatoida osio"
+msgid "Exit USB Loader GX?"
+msgstr "Poistu USB Loader GX:stä?"
+
+msgid "No WBFS partition found"
+msgstr "Ei WBFS-osioita löytynyt"
+
+msgid "You need to format a partition"
+msgstr "Sinun täytyy formatoida osio"

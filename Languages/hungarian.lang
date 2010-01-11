@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-07 00:14+0100\n"
+"POT-Creation-Date: 2010-01-08 10:44+0100\n"
 "PO-Revision-Date: 2009-12-29 11:05+0100\n"
 "Last-Translator: Springdale\n"
 "Language-Team: Tusk, Springdale\n"
@@ -185,9 +185,6 @@ msgstr "HBC"
 msgid "Backgroundmusic"
 msgstr "Háttérzene"
 
-msgid "Backgroundmusic Path changed."
-msgstr "Háttérzene útvonala megváltozott."
-
 msgid "Big thanks to:"
 msgstr "Köszönet:"
 
@@ -217,6 +214,9 @@ msgstr "Nem törölhetõ"
 
 msgid "Cancel"
 msgstr "Mégse"
+
+msgid "Change Play Path"
+msgstr ""
 
 msgid "Channels"
 msgstr "Csatornák"
@@ -762,6 +762,9 @@ msgstr "Vélhetõen méretei nem oszhatók 4-gyel."
 msgid "Mount DVD drive"
 msgstr "DVD meghajtó felcsatolása"
 
+msgid "Music Loop Mode"
+msgstr ""
+
 msgid "Music Volume"
 msgstr "Zene Hangerõ"
 
@@ -897,6 +900,15 @@ msgstr "Válassz a listából"
 msgid "Play Count"
 msgstr "Indítások"
 
+msgid "Play Next"
+msgstr ""
+
+msgid "Play Previous"
+msgstr ""
+
+msgid "Playing Music:"
+msgstr ""
+
 msgid "Please wait..."
 msgstr "Kérlek várj..."
 
@@ -930,8 +942,14 @@ msgstr "SD Újratöltése"
 msgid "Rename Game on WBFS"
 msgstr "WBFS játék átnevezése"
 
+msgid "Reset BG Music"
+msgstr ""
+
 msgid "Reset Playcounter"
 msgstr "Elindítások nullázása"
+
+msgid "Reset to standard BGM?"
+msgstr ""
 
 msgid "Restarting..."
 msgstr "Újraindítás..."
@@ -980,9 +998,6 @@ msgstr "Szep"
 
 msgid "Set Search-Filter"
 msgstr "Keresés"
-
-msgid "Set as backgroundmusic?"
-msgstr "Beállítod háttérzenének?"
 
 msgid "Settings"
 msgstr "Beállítások"
@@ -1318,50 +1333,56 @@ msgstr "./"
 msgid "seconds left"
 msgstr "hátralévõ másodperc"
 
-#~ msgid "Back to Wii Menu"
-#~ msgstr "Visszatérés a Wii Menübe"
+msgid "Backgroundmusic Path changed."
+msgstr "Háttérzene útvonala megváltozott."
 
-#~ msgid "Could not initialize DIP module!"
-#~ msgstr "DIP modul nem tölthetõ be!"
+msgid "Set as backgroundmusic?"
+msgstr "Beállítod háttérzenének?"
 
-#~ msgid "Do you want to retry for 30 secs?"
-#~ msgstr "30 másodpercig szeretnéd még tovább próbálni?"
+msgid "Back to Wii Menu"
+msgstr "Visszatérés a Wii Menübe"
 
-#~ msgid "Format"
-#~ msgstr "Formázás"
+msgid "Could not initialize DIP module!"
+msgstr "DIP modul nem tölthetõ be!"
 
-#~ msgid "No USB Device"
-#~ msgstr "Nincs USB meghajtó"
+msgid "Do you want to retry for 30 secs?"
+msgstr "30 másodpercig szeretnéd még tovább próbálni?"
 
-#~ msgid "No USB Device found."
-#~ msgstr "Nincs USB meghajtó csatlakoztatva."
+msgid "Format"
+msgstr "Formázás"
 
-#~ msgid "No WBFS or FAT/NTFS partition found"
-#~ msgstr "Nem található WBFS vagy FAT/NTFS partíció"
+msgid "No USB Device"
+msgstr "Nincs USB meghajtó"
 
-#~ msgid "Select"
-#~ msgstr "Válassz"
+msgid "No USB Device found."
+msgstr "Nincs USB meghajtó csatlakoztatva."
 
-#~ msgid "USB Device not found"
-#~ msgstr "USB Meghajtó nem található"
+msgid "No WBFS or FAT/NTFS partition found"
+msgstr "Nem található WBFS vagy FAT/NTFS partíció"
 
-#~ msgid "Waiting for USB Device"
-#~ msgstr "Várakozás az USB Meghajtóra"
+msgid "Select"
+msgstr "Válassz"
 
-#~ msgid "You need to select or format a partition"
-#~ msgstr "Választanod vagy formáznod kell egy partíciót"
+msgid "USB Device not found"
+msgstr "USB Meghajtó nem található"
 
-#~ msgid "Can't decompress LZ77"
-#~ msgstr "LZ77 nem kitömöríthetõ"
+msgid "Waiting for USB Device"
+msgstr "Várakozás az USB Meghajtóra"
 
-#~ msgid "Can't find disc"
-#~ msgstr "Lemez nem található"
+msgid "You need to select or format a partition"
+msgstr "Választanod vagy formáznod kell egy partíciót"
 
-#~ msgid "IMD5 Header not right."
-#~ msgstr "IMD5 Fejléc nem megfelelõ."
+msgid "Can't decompress LZ77"
+msgstr "LZ77 nem kitömöríthetõ"
 
-#~ msgid "IMET Header wrong."
-#~ msgstr "IMET fejléc nem megfelelõ."
+msgid "Can't find disc"
+msgstr "Lemez nem található"
 
-#~ msgid "Exit USB Loader GX?"
-#~ msgstr "Kilépés az USB Loader GX-bõl?"
+msgid "IMD5 Header not right."
+msgstr "IMD5 Fejléc nem megfelelõ."
+
+msgid "IMET Header wrong."
+msgstr "IMET fejléc nem megfelelõ."
+
+msgid "Exit USB Loader GX?"
+msgstr "Kilépés az USB Loader GX-bõl?"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-07 00:14+0100\n"
+"POT-Creation-Date: 2010-01-08 10:44+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Nitro_subzero \n"
 "Language-Team: Nitro_subzero\n"
@@ -185,9 +185,6 @@ msgstr "กลับไปที่ Loader"
 msgid "Backgroundmusic"
 msgstr "ดนตรีเบื้องหลัง"
 
-msgid "Backgroundmusic Path changed."
-msgstr "เปลี่ยนที่เก็บ ดนตรีเบื้องหลัง"
-
 msgid "Big thanks to:"
 msgstr "ขอขอบคุณ:"
 
@@ -217,6 +214,9 @@ msgstr "ไม่สามารถลบได้:"
 
 msgid "Cancel"
 msgstr "ยกเลิก"
+
+msgid "Change Play Path"
+msgstr ""
 
 msgid "Channels"
 msgstr "แชนแนล"
@@ -762,6 +762,9 @@ msgstr "ดูเหมือนว่าขนาดจะหารด้วย
 msgid "Mount DVD drive"
 msgstr "เชื่อม DVD ไดร์ฟ"
 
+msgid "Music Loop Mode"
+msgstr ""
+
 msgid "Music Volume"
 msgstr "ความดังเสียงเพลง"
 
@@ -897,6 +900,15 @@ msgstr "เลือกจากรายการ"
 msgid "Play Count"
 msgstr "จำนวนที่เล่น"
 
+msgid "Play Next"
+msgstr ""
+
+msgid "Play Previous"
+msgstr ""
+
+msgid "Playing Music:"
+msgstr ""
+
 msgid "Please wait..."
 msgstr "รอสักครู่"
 
@@ -930,8 +942,14 @@ msgstr "โหลด SD ใหม่"
 msgid "Rename Game on WBFS"
 msgstr "เปลี่ยนชื่อเกมส์บน WBFS"
 
+msgid "Reset BG Music"
+msgstr ""
+
 msgid "Reset Playcounter"
 msgstr "เคลียร์การนับจำนวนที่เล่น"
+
+msgid "Reset to standard BGM?"
+msgstr ""
 
 msgid "Restarting..."
 msgstr "รีสตารท์..."
@@ -980,9 +998,6 @@ msgstr "กย."
 
 msgid "Set Search-Filter"
 msgstr "กำหนดเงื่อนไขการค้นหา"
-
-msgid "Set as backgroundmusic?"
-msgstr "เลือกเป็น Background music?"
 
 msgid "Settings"
 msgstr "กำหนดค่า"
@@ -1318,65 +1333,71 @@ msgstr "จาก"
 msgid "seconds left"
 msgstr "วินาทีที่เหลือ"
 
-#~ msgid "Back to Wii Menu"
-#~ msgstr "กลับไป เมนู Wii"
+msgid "Backgroundmusic Path changed."
+msgstr "เปลี่ยนที่เก็บ ดนตรีเบื้องหลัง"
 
-#~ msgid "Could not initialize DIP module!"
-#~ msgstr "ไม่สามารถเปิดใช้โมดูล DIP ได้ !"
+msgid "Set as backgroundmusic?"
+msgstr "เลือกเป็น Background music?"
 
-#~ msgid "Do you want to retry for 30 secs?"
-#~ msgstr "ต้องการลองใหม่ทุก 30 วินาที?"
+msgid "Back to Wii Menu"
+msgstr "กลับไป เมนู Wii"
 
-#~ msgid "Format"
-#~ msgstr "ฟอร์แมต"
+msgid "Could not initialize DIP module!"
+msgstr "ไม่สามารถเปิดใช้โมดูล DIP ได้ !"
 
-#~ msgid "No USB Device"
-#~ msgstr "ไม่ได้เสียบอุปกรณ์ USB"
+msgid "Do you want to retry for 30 secs?"
+msgstr "ต้องการลองใหม่ทุก 30 วินาที?"
 
-#~ msgid "No USB Device found."
-#~ msgstr "ไม่พบอุปกรณ์ USB"
+msgid "Format"
+msgstr "ฟอร์แมต"
 
-#~ msgid "USB Device not found"
-#~ msgstr "ไม่พบอุปกรณ์ USB"
+msgid "No USB Device"
+msgstr "ไม่ได้เสียบอุปกรณ์ USB"
 
-#~ msgid "Waiting for USB Device"
-#~ msgstr "กำลังรออุปกรณ์ USB"
+msgid "No USB Device found."
+msgstr "ไม่พบอุปกรณ์ USB"
 
-#~ msgid "Can't decompress LZ77"
-#~ msgstr "คลายไฟล์ LZ777 ไม่ได้"
+msgid "USB Device not found"
+msgstr "ไม่พบอุปกรณ์ USB"
 
-#~ msgid "Can't find disc"
-#~ msgstr "หาแผ่นไม่เจอ"
+msgid "Waiting for USB Device"
+msgstr "กำลังรออุปกรณ์ USB"
 
-#~ msgid "IMD5 Header not right."
-#~ msgstr "ส่วนขยายไฟล์ผิดพลาด"
+msgid "Can't decompress LZ77"
+msgstr "คลายไฟล์ LZ777 ไม่ได้"
 
-#~ msgid "IMET Header wrong."
-#~ msgstr "ส่วนขยายไฟล์ผิดพลาด"
+msgid "Can't find disc"
+msgstr "หาแผ่นไม่เจอ"
 
-#~ msgid "Exit USB Loader GX?"
-#~ msgstr "ปิด USB Loader GX?"
+msgid "IMD5 Header not right."
+msgstr "ส่วนขยายไฟล์ผิดพลาด"
 
-#~ msgid "No WBFS partition found"
-#~ msgstr "ไม่พบพาร์ติชั่นแบบ WBFS "
+msgid "IMET Header wrong."
+msgstr "ส่วนขยายไฟล์ผิดพลาด"
 
-#~ msgid "You need to format a partition"
-#~ msgstr "ต้องทำการฟอร์แมทพาร์ติชั่น"
+msgid "Exit USB Loader GX?"
+msgstr "ปิด USB Loader GX?"
 
-#~ msgid "Failed to extract opening.bnr"
-#~ msgstr "แตกไฟล์ opening.bnr ไม่ได้"
+msgid "No WBFS partition found"
+msgstr "ไม่พบพาร์ติชั่นแบบ WBFS "
 
-#~ msgid "You need to start this game one time to create a save file, then exit and start it again."
-#~ msgstr "คุณต้องเริ่มโหลดเกมส์นี้ใหม่ เพื่อสร้างไฟล์เซฟ ดังนั้นออกจากเกมส์แล้วเริ่มโหลดอีกครั้ง"
+msgid "You need to format a partition"
+msgstr "ต้องทำการฟอร์แมทพาร์ติชั่น"
 
-#~ msgid "ERROR: USB device could not be loaded!"
-#~ msgstr "ผิดพลาด! ไม่สามารถโหลดอุปกรณ์ USB ได้"
+msgid "Failed to extract opening.bnr"
+msgstr "แตกไฟล์ opening.bnr ไม่ได้"
 
-#~ msgid "ERROR: cIOS could not be loaded!"
-#~ msgstr "ผิดพลาด! ไม่สามารถโหลด cIOS ได้"
+msgid "You need to start this game one time to create a save file, then exit and start it again."
+msgstr "คุณต้องเริ่มโหลดเกมส์นี้ใหม่ เพื่อสร้างไฟล์เซฟ ดังนั้นออกจากเกมส์แล้วเริ่มโหลดอีกครั้ง"
 
-#~ msgid "Loading..."
-#~ msgstr "กำลังโหลด..."
+msgid "ERROR: USB device could not be loaded!"
+msgstr "ผิดพลาด! ไม่สามารถโหลดอุปกรณ์ USB ได้"
 
-#~ msgid "Waiting for your slow USB Device: %i secs..."
-#~ msgstr "กำลังรออุปกรณ์ USB อันเชื่องช้าของคุณ: %i วินาที..."
+msgid "ERROR: cIOS could not be loaded!"
+msgstr "ผิดพลาด! ไม่สามารถโหลด cIOS ได้"
+
+msgid "Loading..."
+msgstr "กำลังโหลด..."
+
+msgid "Waiting for your slow USB Device: %i secs..."
+msgstr "กำลังรออุปกรณ์ USB อันเชื่องช้าของคุณ: %i วินาที..."

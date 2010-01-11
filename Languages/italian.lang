@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# italian.lang - v56 - r878
+# italian.lang - v57 - r885
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-07 00:14+0100\n"
+"POT-Creation-Date: 2010-01-08 10:44+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe, Cambo\n"
@@ -185,9 +185,6 @@ msgstr "Canale HomeBrew"
 msgid "Backgroundmusic"
 msgstr "Musica Sottofondo"
 
-msgid "Backgroundmusic Path changed."
-msgstr "Percorso Musica modificato"
-
 msgid "Big thanks to:"
 msgstr "Grazie mille a:"
 
@@ -217,6 +214,9 @@ msgstr "Impossibile eliminare:"
 
 msgid "Cancel"
 msgstr "Annulla"
+
+msgid "Change Play Path"
+msgstr ""
 
 msgid "Channels"
 msgstr "Canali"
@@ -762,6 +762,9 @@ msgstr "Molto probabilmente le dimensioni non sono divisibili per 4."
 msgid "Mount DVD drive"
 msgstr "Avvia DVD"
 
+msgid "Music Loop Mode"
+msgstr ""
+
 msgid "Music Volume"
 msgstr "Volume"
 
@@ -874,7 +877,7 @@ msgid "Partition"
 msgstr "Partizione"
 
 msgid "Partition Format Menu"
-msgstr ""
+msgstr "Menu Formattazione Partizioni"
 
 msgid "Password"
 msgstr ""
@@ -896,6 +899,15 @@ msgstr "Seleziona da un elenco"
 
 msgid "Play Count"
 msgstr "Giocati"
+
+msgid "Play Next"
+msgstr ""
+
+msgid "Play Previous"
+msgstr ""
+
+msgid "Playing Music:"
+msgstr ""
 
 msgid "Please wait..."
 msgstr "Attendere prego..."
@@ -930,8 +942,14 @@ msgstr "Ricarica SD"
 msgid "Rename Game on WBFS"
 msgstr "Rinomina Gioco su WBFS"
 
+msgid "Reset BG Music"
+msgstr ""
+
 msgid "Reset Playcounter"
 msgstr "Azzera contatore"
+
+msgid "Reset to standard BGM?"
+msgstr ""
 
 msgid "Restarting..."
 msgstr "Premere OK per riavviare..."
@@ -980,9 +998,6 @@ msgstr "settembre"
 
 msgid "Set Search-Filter"
 msgstr "Cerca Gioco"
-
-msgid "Set as backgroundmusic?"
-msgstr "Imposto come Musica Sottofondo?"
 
 msgid "Settings"
 msgstr "Impostazioni"
@@ -1128,7 +1143,7 @@ msgid "Unlock console to use this option."
 msgstr "Sblocca la Console per usare questa opzione."
 
 msgid "Unlock the app first."
-msgstr ""
+msgstr "L'applicazione deve essere sbloccata."
 
 msgid "Unlocked"
 msgstr "Sbloccato"
@@ -1240,7 +1255,7 @@ msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS par
 msgstr "E' in uso una partizione NTFS. Poiché sono possibili errori in scrittura nelle partizioni NTFS, non è possibile installare alcun gioco."
 
 msgid "You can't access this menu!"
-msgstr ""
+msgstr "Non puoi accedere a questo menu!"
 
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr "Il Controllo Genitori non è attivo. Se vuoi utilizzare il Controllo Genitori abilitalo nelle Impostazioni della Wii."
@@ -1318,68 +1333,74 @@ msgstr "di"
 msgid "seconds left"
 msgstr "secondi mancanti"
 
-#~ msgid "Back to Wii Menu"
-#~ msgstr "Torna al Menu Wii"
+msgid "Backgroundmusic Path changed."
+msgstr "Percorso Musica modificato"
 
-#~ msgid "Could not initialize DIP module!"
-#~ msgstr "Non è stato possibile inizializzare il modulo DIP!"
+msgid "Set as backgroundmusic?"
+msgstr "Imposto come Musica Sottofondo?"
 
-#~ msgid "Do you want to retry for 30 secs?"
-#~ msgstr "Vuoi riprovare per 30 sec?"
+msgid "Back to Wii Menu"
+msgstr "Torna al Menu Wii"
 
-#~ msgid "Format"
-#~ msgstr "Formatta"
+msgid "Could not initialize DIP module!"
+msgstr "Non è stato possibile inizializzare il modulo DIP!"
 
-#~ msgid "No USB Device"
-#~ msgstr "Nessun Dispositivo USB"
+msgid "Do you want to retry for 30 secs?"
+msgstr "Vuoi riprovare per 30 sec?"
 
-#~ msgid "No USB Device found."
-#~ msgstr "Nessun Dispositivo USB trovato."
+msgid "Format"
+msgstr "Formatta"
 
-#~ msgid "No WBFS or FAT/NTFS partition found"
-#~ msgstr "Non è stata trovata alcuna partizione WBFS o FAT/NTFS"
+msgid "No USB Device"
+msgstr "Nessun Dispositivo USB"
 
-#~ msgid "Select"
-#~ msgstr "Seleziona"
+msgid "No USB Device found."
+msgstr "Nessun Dispositivo USB trovato."
 
-#~ msgid "USB Device not found"
-#~ msgstr "Dispositivo USB non Trovato"
+msgid "No WBFS or FAT/NTFS partition found"
+msgstr "Non è stata trovata alcuna partizione WBFS o FAT/NTFS"
 
-#~ msgid "Waiting for USB Device"
-#~ msgstr "Caricamento Dispositivo USB"
+msgid "Select"
+msgstr "Seleziona"
 
-#~ msgid "You need to select or format a partition"
-#~ msgstr "Occorre selezionare o formattare una partizione"
+msgid "USB Device not found"
+msgstr "Dispositivo USB non Trovato"
 
-#~ msgid "Can't decompress LZ77"
-#~ msgstr "Impossibile decomprimere LZ77"
+msgid "Waiting for USB Device"
+msgstr "Caricamento Dispositivo USB"
 
-#~ msgid "Can't find disc"
-#~ msgstr "Impossibile trovare il disco"
+msgid "You need to select or format a partition"
+msgstr "Occorre selezionare o formattare una partizione"
 
-#~ msgid "IMD5 Header not right."
-#~ msgstr "Header IMD5 non corretto."
+msgid "Can't decompress LZ77"
+msgstr "Impossibile decomprimere LZ77"
 
-#~ msgid "IMET Header wrong."
-#~ msgstr "Header IMET errato."
+msgid "Can't find disc"
+msgstr "Impossibile trovare il disco"
 
-#~ msgid "Failed to extract opening.bnr"
-#~ msgstr "Estrazione opening.bnr fallita"
+msgid "IMD5 Header not right."
+msgstr "Header IMD5 non corretto."
 
-#~ msgid "Homebrew Channel"
-#~ msgstr "Canale Homebrew"
+msgid "IMET Header wrong."
+msgstr "Header IMET errato."
 
-#~ msgid "You need to start this game one time to create a save file, then exit and start it again."
-#~ msgstr "Devi caricare questo gioco almeno una volta per creare un file di salvataggio, quindi esci dal gioco e ricaricalo di nuovo."
+msgid "Failed to extract opening.bnr"
+msgstr "Estrazione opening.bnr fallita"
 
-#~ msgid "ERROR: USB device could not be loaded!"
-#~ msgstr "ERRORE: non si accede alla periferica USB!"
+msgid "Homebrew Channel"
+msgstr "Canale Homebrew"
 
-#~ msgid "ERROR: cIOS could not be loaded!"
-#~ msgstr "ERRORE: non si carica il cIOS!"
+msgid "You need to start this game one time to create a save file, then exit and start it again."
+msgstr "Devi caricare questo gioco almeno una volta per creare un file di salvataggio, quindi esci dal gioco e ricaricalo di nuovo."
 
-#~ msgid "Loading..."
-#~ msgstr "Sto caricando..."
+msgid "ERROR: USB device could not be loaded!"
+msgstr "ERRORE: non si accede alla periferica USB!"
 
-#~ msgid "Waiting for your slow USB Device: %i secs..."
-#~ msgstr "Sto aspettando la tua lenta periferica USB: %i secs..."
+msgid "ERROR: cIOS could not be loaded!"
+msgstr "ERRORE: non si carica il cIOS!"
+
+msgid "Loading..."
+msgstr "Sto caricando..."
+
+msgid "Waiting for your slow USB Device: %i secs..."
+msgstr "Sto aspettando la tua lenta periferica USB: %i secs..."

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-07 00:14+0100\n"
+"POT-Creation-Date: 2010-01-08 10:44+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: nextos@korea.com\n"
 "Language-Team: \n"
@@ -185,9 +185,6 @@ msgstr "로더로 돌아감"
 msgid "Backgroundmusic"
 msgstr "배경음악"
 
-msgid "Backgroundmusic Path changed."
-msgstr "배경음악 경로 변경됨."
-
 msgid "Big thanks to:"
 msgstr "감사 :"
 
@@ -217,6 +214,9 @@ msgstr "삭제할 수 없습니다:"
 
 msgid "Cancel"
 msgstr "취소"
+
+msgid "Change Play Path"
+msgstr ""
 
 msgid "Channels"
 msgstr ""
@@ -762,6 +762,9 @@ msgstr "대부분 이미지는 4로 나누어져야 되요."
 msgid "Mount DVD drive"
 msgstr ""
 
+msgid "Music Loop Mode"
+msgstr ""
+
 msgid "Music Volume"
 msgstr "음량"
 
@@ -897,6 +900,15 @@ msgstr "리스트로 부터 고르기"
 msgid "Play Count"
 msgstr "실행 횟수"
 
+msgid "Play Next"
+msgstr ""
+
+msgid "Play Previous"
+msgstr ""
+
+msgid "Playing Music:"
+msgstr ""
+
 msgid "Please wait..."
 msgstr ""
 
@@ -930,8 +942,14 @@ msgstr "SD카드 읽기"
 msgid "Rename Game on WBFS"
 msgstr "WBFS에서 게임 이름 변경"
 
+msgid "Reset BG Music"
+msgstr ""
+
 msgid "Reset Playcounter"
 msgstr "실행횟수 리셋"
+
+msgid "Reset to standard BGM?"
+msgstr ""
 
 msgid "Restarting..."
 msgstr "재시작..."
@@ -980,9 +998,6 @@ msgstr "9월"
 
 msgid "Set Search-Filter"
 msgstr ""
-
-msgid "Set as backgroundmusic?"
-msgstr "벼경음악 설정?"
 
 msgid "Settings"
 msgstr "설정"
@@ -1318,38 +1333,44 @@ msgstr "중"
 msgid "seconds left"
 msgstr "초 남았습니다"
 
-#~ msgid "Back to Wii Menu"
-#~ msgstr "Wii 메뉴로 놀아가기"
+msgid "Backgroundmusic Path changed."
+msgstr "배경음악 경로 변경됨."
 
-#~ msgid "Could not initialize DIP module!"
-#~ msgstr "DIP 모듈 초기화 실패!"
+msgid "Set as backgroundmusic?"
+msgstr "벼경음악 설정?"
 
-#~ msgid "Do you want to retry for 30 secs?"
-#~ msgstr "30초간 재시도 할까요?"
+msgid "Back to Wii Menu"
+msgstr "Wii 메뉴로 놀아가기"
 
-#~ msgid "Format"
-#~ msgstr "포맷"
+msgid "Could not initialize DIP module!"
+msgstr "DIP 모듈 초기화 실패!"
 
-#~ msgid "No USB Device"
-#~ msgstr "USB 장치가 없습니다."
+msgid "Do you want to retry for 30 secs?"
+msgstr "30초간 재시도 할까요?"
 
-#~ msgid "No USB Device found."
-#~ msgstr "USB 장치가 없습니다."
+msgid "Format"
+msgstr "포맷"
 
-#~ msgid "USB Device not found"
-#~ msgstr "USB 장치가 없습니다."
+msgid "No USB Device"
+msgstr "USB 장치가 없습니다."
 
-#~ msgid "Waiting for USB Device"
-#~ msgstr "USB 장치를 기다리는 중"
+msgid "No USB Device found."
+msgstr "USB 장치가 없습니다."
 
-#~ msgid "Exit USB Loader GX?"
-#~ msgstr "USB로더 GX를 종료할까요?"
+msgid "USB Device not found"
+msgstr "USB 장치가 없습니다."
 
-#~ msgid "No WBFS partition found"
-#~ msgstr "WBFS 파티션이 없습니다."
+msgid "Waiting for USB Device"
+msgstr "USB 장치를 기다리는 중"
 
-#~ msgid "You need to format a partition"
-#~ msgstr "파티션을 포맷해야 합니다"
+msgid "Exit USB Loader GX?"
+msgstr "USB로더 GX를 종료할까요?"
 
-#~ msgid "Homebrew Channel"
-#~ msgstr "홈브류 채널"
+msgid "No WBFS partition found"
+msgstr "WBFS 파티션이 없습니다."
+
+msgid "You need to format a partition"
+msgstr "파티션을 포맷해야 합니다"
+
+msgid "Homebrew Channel"
+msgstr "홈브류 채널"

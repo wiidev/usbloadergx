@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-07 00:14+0100\n"
+"POT-Creation-Date: 2010-01-08 10:44+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: dorf[dk]\n"
 "Language-Team: dorf[dk]\n"
@@ -185,9 +185,6 @@ msgstr "Tilbage til Loaderen"
 msgid "Backgroundmusic"
 msgstr "Baggrundsmusik"
 
-msgid "Backgroundmusic Path changed."
-msgstr "Sti til baggrundsmusik ændret"
-
 msgid "Big thanks to:"
 msgstr "En stor tak til:"
 
@@ -217,6 +214,9 @@ msgstr "Kan ikke slettes:"
 
 msgid "Cancel"
 msgstr "Annullér"
+
+msgid "Change Play Path"
+msgstr ""
 
 msgid "Channels"
 msgstr "Kanaler"
@@ -762,6 +762,9 @@ msgstr "Sandsynligvis har det dimensioner, der ikke er delelige med fire."
 msgid "Mount DVD drive"
 msgstr "Mount DVD-drev"
 
+msgid "Music Loop Mode"
+msgstr ""
+
 msgid "Music Volume"
 msgstr "Lydstyrke"
 
@@ -897,6 +900,15 @@ msgstr "Vælg fra en liste"
 msgid "Play Count"
 msgstr "Spiltæller"
 
+msgid "Play Next"
+msgstr ""
+
+msgid "Play Previous"
+msgstr ""
+
+msgid "Playing Music:"
+msgstr ""
+
 msgid "Please wait..."
 msgstr "Vent venligst..."
 
@@ -930,8 +942,14 @@ msgstr "Genindlæs SD"
 msgid "Rename Game on WBFS"
 msgstr "Omdøb spil på WBFS"
 
+msgid "Reset BG Music"
+msgstr ""
+
 msgid "Reset Playcounter"
 msgstr "Nulstil spiltæller"
+
+msgid "Reset to standard BGM?"
+msgstr ""
 
 msgid "Restarting..."
 msgstr "Genstarter..."
@@ -980,9 +998,6 @@ msgstr ""
 
 msgid "Set Search-Filter"
 msgstr "Søgefilter"
-
-msgid "Set as backgroundmusic?"
-msgstr "Indstil som baggrundsmusik?"
 
 msgid "Settings"
 msgstr "Indstillinger"
@@ -1318,50 +1333,56 @@ msgstr "af"
 msgid "seconds left"
 msgstr "sekunder tilbage"
 
-#~ msgid "Back to Wii Menu"
-#~ msgstr "Tilbage til HBC"
+msgid "Backgroundmusic Path changed."
+msgstr "Sti til baggrundsmusik ændret"
 
-#~ msgid "Could not initialize DIP module!"
-#~ msgstr "Kunne ikke initialisere DIP-modul!"
+msgid "Set as backgroundmusic?"
+msgstr "Indstil som baggrundsmusik?"
 
-#~ msgid "Do you want to retry for 30 secs?"
-#~ msgstr "Forsøg igen (i 30 sek.)?"
+msgid "Back to Wii Menu"
+msgstr "Tilbage til HBC"
 
-#~ msgid "Format"
-#~ msgstr "Formater"
+msgid "Could not initialize DIP module!"
+msgstr "Kunne ikke initialisere DIP-modul!"
 
-#~ msgid "No USB Device"
-#~ msgstr "Ingen USB-enhed tilsluttet"
+msgid "Do you want to retry for 30 secs?"
+msgstr "Forsøg igen (i 30 sek.)?"
 
-#~ msgid "No USB Device found."
-#~ msgstr "Ingen USB-enhed fundet."
+msgid "Format"
+msgstr "Formater"
 
-#~ msgid "No WBFS or FAT/NTFS partition found"
-#~ msgstr "Der blev ikke fundet en WBFS- eller FAT/NTFS-partition"
+msgid "No USB Device"
+msgstr "Ingen USB-enhed tilsluttet"
 
-#~ msgid "Select"
-#~ msgstr "Vælg"
+msgid "No USB Device found."
+msgstr "Ingen USB-enhed fundet."
 
-#~ msgid "USB Device not found"
-#~ msgstr "USB-enhed ikke fundet"
+msgid "No WBFS or FAT/NTFS partition found"
+msgstr "Der blev ikke fundet en WBFS- eller FAT/NTFS-partition"
 
-#~ msgid "Waiting for USB Device"
-#~ msgstr "Venter på USB-enhed"
+msgid "Select"
+msgstr "Vælg"
 
-#~ msgid "You need to select or format a partition"
-#~ msgstr "Du skal vælge eller formattere en partition"
+msgid "USB Device not found"
+msgstr "USB-enhed ikke fundet"
 
-#~ msgid "Can't decompress LZ77"
-#~ msgstr "Kan ikke udpakke LZ77"
+msgid "Waiting for USB Device"
+msgstr "Venter på USB-enhed"
 
-#~ msgid "Can't find disc"
-#~ msgstr "Kan ikke finde disk"
+msgid "You need to select or format a partition"
+msgstr "Du skal vælge eller formattere en partition"
 
-#~ msgid "IMD5 Header not right."
-#~ msgstr "Fejl i IMD5 header."
+msgid "Can't decompress LZ77"
+msgstr "Kan ikke udpakke LZ77"
 
-#~ msgid "IMET Header wrong."
-#~ msgstr "Fejl i IMET header."
+msgid "Can't find disc"
+msgstr "Kan ikke finde disk"
 
-#~ msgid "Exit USB Loader GX?"
-#~ msgstr "Afslut USB Loader GX?"
+msgid "IMD5 Header not right."
+msgstr "Fejl i IMD5 header."
+
+msgid "IMET Header wrong."
+msgstr "Fejl i IMET header."
+
+msgid "Exit USB Loader GX?"
+msgstr "Afslut USB Loader GX?"

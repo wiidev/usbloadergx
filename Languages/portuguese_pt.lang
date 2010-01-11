@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-07 00:14+0100\n"
+"POT-Creation-Date: 2010-01-08 10:44+0100\n"
 "PO-Revision-Date: 2009-12-30 12:06-0000\n"
 "Last-Translator: Sky8000\n"
 "Language-Team: Sky8000 <sky8000@hotmail.com>\n"
@@ -185,9 +185,6 @@ msgstr "Loader"
 msgid "Backgroundmusic"
 msgstr "Música de fundo"
 
-msgid "Backgroundmusic Path changed."
-msgstr "Pasta Música Fundo alterada"
-
 msgid "Big thanks to:"
 msgstr "Agradecimentos:"
 
@@ -217,6 +214,9 @@ msgstr "Não foi possível apagar:"
 
 msgid "Cancel"
 msgstr "Cancelar"
+
+msgid "Change Play Path"
+msgstr ""
 
 msgid "Channels"
 msgstr "Canais"
@@ -762,6 +762,9 @@ msgstr "O mais provável é que o tamanho não seja divisível por 4."
 msgid "Mount DVD drive"
 msgstr "Montar Unidade de DVD"
 
+msgid "Music Loop Mode"
+msgstr ""
+
 msgid "Music Volume"
 msgstr "Volume Música"
 
@@ -897,6 +900,15 @@ msgstr "Escolher da lista"
 msgid "Play Count"
 msgstr "Vezes jogadas"
 
+msgid "Play Next"
+msgstr ""
+
+msgid "Play Previous"
+msgstr ""
+
+msgid "Playing Music:"
+msgstr ""
+
 msgid "Please wait..."
 msgstr "Por favor aguarde..."
 
@@ -930,8 +942,14 @@ msgstr "Actualizar do cartão SD"
 msgid "Rename Game on WBFS"
 msgstr "Alterar nome do jogo (WBFS)"
 
+msgid "Reset BG Music"
+msgstr ""
+
 msgid "Reset Playcounter"
 msgstr "Limpar Contagem"
+
+msgid "Reset to standard BGM?"
+msgstr ""
 
 msgid "Restarting..."
 msgstr "A Wii irá reiniciar"
@@ -980,9 +998,6 @@ msgstr "Set"
 
 msgid "Set Search-Filter"
 msgstr "Filtro de pesquisa"
-
-msgid "Set as backgroundmusic?"
-msgstr "Definir como música de fundo?"
 
 msgid "Settings"
 msgstr "Configurações"
@@ -1318,53 +1333,59 @@ msgstr "de"
 msgid "seconds left"
 msgstr "segundos restantes"
 
-#~ msgid "Back to Wii Menu"
-#~ msgstr "Menu da Wii"
+msgid "Backgroundmusic Path changed."
+msgstr "Pasta Música Fundo alterada"
 
-#~ msgid "Could not initialize DIP module!"
-#~ msgstr "Não foi possível inicializar o módulo DIP!"
+msgid "Set as backgroundmusic?"
+msgstr "Definir como música de fundo?"
 
-#~ msgid "Do you want to retry for 30 secs?"
-#~ msgstr "Deseja tentar novamente dentro de 30 segs?"
+msgid "Back to Wii Menu"
+msgstr "Menu da Wii"
 
-#~ msgid "Format"
-#~ msgstr "Formatar"
+msgid "Could not initialize DIP module!"
+msgstr "Não foi possível inicializar o módulo DIP!"
 
-#~ msgid "No USB Device"
-#~ msgstr "Nenhum dispositivo USB encontrado"
+msgid "Do you want to retry for 30 secs?"
+msgstr "Deseja tentar novamente dentro de 30 segs?"
 
-#~ msgid "No USB Device found."
-#~ msgstr "Nenhum dispositivo USB encontrado."
+msgid "Format"
+msgstr "Formatar"
 
-#~ msgid "No WBFS or FAT/NTFS partition found"
-#~ msgstr "Nenhuma partição WBFS ou FAT/NTFS encontrada"
+msgid "No USB Device"
+msgstr "Nenhum dispositivo USB encontrado"
 
-#~ msgid "Select"
-#~ msgstr "Seleccionar"
+msgid "No USB Device found."
+msgstr "Nenhum dispositivo USB encontrado."
 
-#~ msgid "USB Device not found"
-#~ msgstr "Dispositivo USB não encontrado"
+msgid "No WBFS or FAT/NTFS partition found"
+msgstr "Nenhuma partição WBFS ou FAT/NTFS encontrada"
 
-#~ msgid "Waiting for USB Device"
-#~ msgstr "Aguardando pelo Dispositivo USB"
+msgid "Select"
+msgstr "Seleccionar"
 
-#~ msgid "You need to select or format a partition"
-#~ msgstr "Necessita seleccionar ou formatar uma partição"
+msgid "USB Device not found"
+msgstr "Dispositivo USB não encontrado"
 
-#~ msgid "Can't decompress LZ77"
-#~ msgstr "Não é possível descomprimir LZ77"
+msgid "Waiting for USB Device"
+msgstr "Aguardando pelo Dispositivo USB"
 
-#~ msgid "Can't find disc"
-#~ msgstr "Disco não encontrado"
+msgid "You need to select or format a partition"
+msgstr "Necessita seleccionar ou formatar uma partição"
 
-#~ msgid "IMD5 Header not right."
-#~ msgstr "O cabeçalho IMD5 não está correcto."
+msgid "Can't decompress LZ77"
+msgstr "Não é possível descomprimir LZ77"
 
-#~ msgid "IMET Header wrong."
-#~ msgstr "Cabeçalho IMET errado."
+msgid "Can't find disc"
+msgstr "Disco não encontrado"
 
-#~ msgid "Failed to extract opening.bnr"
-#~ msgstr "Falha ao extrair o opening.bnr"
+msgid "IMD5 Header not right."
+msgstr "O cabeçalho IMD5 não está correcto."
 
-#~ msgid "Homebrew Channel"
-#~ msgstr "Canal Homebrew"
+msgid "IMET Header wrong."
+msgstr "Cabeçalho IMET errado."
+
+msgid "Failed to extract opening.bnr"
+msgstr "Falha ao extrair o opening.bnr"
+
+msgid "Homebrew Channel"
+msgstr "Canal Homebrew"

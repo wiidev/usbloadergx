@@ -39,7 +39,7 @@ bool MenuBackgroundMusic()
         if(pathptr)
         {
             pathptr++;
-            int choice = WindowPrompt(tr("Playing Music:"), pathptr, tr("Play Previous"), tr("Play Next"), tr("Change Playpath"), tr("Cancel"));
+            int choice = WindowPrompt(tr("Playing Music:"), pathptr, tr("Play Previous"), tr("Play Next"), tr("Change Play Path"), tr("Cancel"));
             if(choice == 1)
             {
                 return bgMusic->PlayPrevious();

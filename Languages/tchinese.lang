@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-07 00:14+0100\n"
+"POT-Creation-Date: 2010-01-08 10:44+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Miller Liang\n"
 "Language-Team: kyogc, Miller\n"
@@ -185,9 +185,6 @@ msgstr "返回 Loader"
 msgid "Backgroundmusic"
 msgstr "背景音樂"
 
-msgid "Backgroundmusic Path changed."
-msgstr "背景音樂路徑"
-
 msgid "Big thanks to:"
 msgstr "非常感謝:"
 
@@ -217,6 +214,9 @@ msgstr "無法刪除:"
 
 msgid "Cancel"
 msgstr "取消"
+
+msgid "Change Play Path"
+msgstr ""
 
 msgid "Channels"
 msgstr "頻道"
@@ -762,6 +762,9 @@ msgstr "圖片格式錯誤，可能它的尺寸不是 4 的倍數."
 msgid "Mount DVD drive"
 msgstr "掛載DVD光碟"
 
+msgid "Music Loop Mode"
+msgstr ""
+
 msgid "Music Volume"
 msgstr "音量"
 
@@ -897,6 +900,15 @@ msgstr "從列表中選取"
 msgid "Play Count"
 msgstr "執行次數"
 
+msgid "Play Next"
+msgstr ""
+
+msgid "Play Previous"
+msgstr ""
+
+msgid "Playing Music:"
+msgstr ""
+
 msgid "Please wait..."
 msgstr "請稍候..."
 
@@ -930,8 +942,14 @@ msgstr "重新載入 SD 卡"
 msgid "Rename Game on WBFS"
 msgstr "變更WBFS上的遊戲名稱"
 
+msgid "Reset BG Music"
+msgstr ""
+
 msgid "Reset Playcounter"
 msgstr "重置執行次數"
+
+msgid "Reset to standard BGM?"
+msgstr ""
 
 msgid "Restarting..."
 msgstr "正在重新啟動"
@@ -980,9 +998,6 @@ msgstr "九月"
 
 msgid "Set Search-Filter"
 msgstr "關鍵字篩選"
-
-msgid "Set as backgroundmusic?"
-msgstr "設定背景音樂"
 
 msgid "Settings"
 msgstr "設定"
@@ -1318,53 +1333,59 @@ msgstr "的"
 msgid "seconds left"
 msgstr "剩餘秒數"
 
-#~ msgid "Back to Wii Menu"
-#~ msgstr "返回 Wii 系統目錄"
+msgid "Backgroundmusic Path changed."
+msgstr "背景音樂路徑"
 
-#~ msgid "Could not initialize DIP module!"
-#~ msgstr "無法啟動 DIP 模塊!"
+msgid "Set as backgroundmusic?"
+msgstr "設定背景音樂"
 
-#~ msgid "Do you want to retry for 30 secs?"
-#~ msgstr "是否等待 30 秒後重試?"
+msgid "Back to Wii Menu"
+msgstr "返回 Wii 系統目錄"
 
-#~ msgid "Format"
-#~ msgstr "格式化"
+msgid "Could not initialize DIP module!"
+msgstr "無法啟動 DIP 模塊!"
 
-#~ msgid "No USB Device"
-#~ msgstr "沒有 USB 設備"
+msgid "Do you want to retry for 30 secs?"
+msgstr "是否等待 30 秒後重試?"
 
-#~ msgid "No USB Device found."
-#~ msgstr "找不到 USB 設備."
+msgid "Format"
+msgstr "格式化"
 
-#~ msgid "No WBFS or FAT/NTFS partition found"
-#~ msgstr "找不到 WBFS 和 FAT/NTFS 磁區中的遊戲"
+msgid "No USB Device"
+msgstr "沒有 USB 設備"
 
-#~ msgid "Select"
-#~ msgstr "選取"
+msgid "No USB Device found."
+msgstr "找不到 USB 設備."
 
-#~ msgid "USB Device not found"
-#~ msgstr "找不到 USB 設備"
+msgid "No WBFS or FAT/NTFS partition found"
+msgstr "找不到 WBFS 和 FAT/NTFS 磁區中的遊戲"
 
-#~ msgid "Waiting for USB Device"
-#~ msgstr "等待 USB 設備"
+msgid "Select"
+msgstr "選取"
 
-#~ msgid "You need to select or format a partition"
-#~ msgstr "選擇你要格式化的磁區"
+msgid "USB Device not found"
+msgstr "找不到 USB 設備"
 
-#~ msgid "Can't decompress LZ77"
-#~ msgstr "無法解壓縮的LZ77"
+msgid "Waiting for USB Device"
+msgstr "等待 USB 設備"
 
-#~ msgid "Can't find disc"
-#~ msgstr "找不到磁碟"
+msgid "You need to select or format a partition"
+msgstr "選擇你要格式化的磁區"
 
-#~ msgid "IMD5 Header not right."
-#~ msgstr "IMD5 標題不正確"
+msgid "Can't decompress LZ77"
+msgstr "無法解壓縮的LZ77"
 
-#~ msgid "IMET Header wrong."
-#~ msgstr "沒有開頭音樂"
+msgid "Can't find disc"
+msgstr "找不到磁碟"
 
-#~ msgid "Exit USB Loader GX?"
-#~ msgstr "離開 USB Loader GX?"
+msgid "IMD5 Header not right."
+msgstr "IMD5 標題不正確"
 
-#~ msgid "Homebrew Channel"
-#~ msgstr "Homebrew 頻道"
+msgid "IMET Header wrong."
+msgstr "沒有開頭音樂"
+
+msgid "Exit USB Loader GX?"
+msgstr "離開 USB Loader GX?"
+
+msgid "Homebrew Channel"
+msgstr "Homebrew 頻道"

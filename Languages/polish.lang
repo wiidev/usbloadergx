@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-07 00:14+0100\n"
+"POT-Creation-Date: 2010-01-08 10:44+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: ziom666 (zadania_prog@vp.pl)\n"
 "Language-Team: \n"
@@ -185,9 +185,6 @@ msgstr "Powrot do HBC"
 msgid "Backgroundmusic"
 msgstr "Muzyka w tle"
 
-msgid "Backgroundmusic Path changed."
-msgstr "Sciezka do muzyki w tle zmieniona"
-
 msgid "Big thanks to:"
 msgstr "Podziekowania dla"
 
@@ -217,6 +214,9 @@ msgstr "Nie mozna usunac"
 
 msgid "Cancel"
 msgstr "Anuluj"
+
+msgid "Change Play Path"
+msgstr ""
 
 msgid "Channels"
 msgstr ""
@@ -762,6 +762,9 @@ msgstr "Prawdopodobnie rozdzielczosc nie jest podzielna przez 4"
 msgid "Mount DVD drive"
 msgstr ""
 
+msgid "Music Loop Mode"
+msgstr ""
+
 msgid "Music Volume"
 msgstr "Poziom glosnosci"
 
@@ -897,6 +900,15 @@ msgstr "Wybierz z listy"
 msgid "Play Count"
 msgstr "Licznik"
 
+msgid "Play Next"
+msgstr ""
+
+msgid "Play Previous"
+msgstr ""
+
+msgid "Playing Music:"
+msgstr ""
+
 msgid "Please wait..."
 msgstr ""
 
@@ -930,8 +942,14 @@ msgstr "Przeladuj SD"
 msgid "Rename Game on WBFS"
 msgstr "Zmien tytul gry na WBFS"
 
+msgid "Reset BG Music"
+msgstr ""
+
 msgid "Reset Playcounter"
 msgstr "Zrestartuj licznik"
+
+msgid "Reset to standard BGM?"
+msgstr ""
 
 msgid "Restarting..."
 msgstr "Restartowanie..."
@@ -980,9 +998,6 @@ msgstr "Wrzesien"
 
 msgid "Set Search-Filter"
 msgstr ""
-
-msgid "Set as backgroundmusic?"
-msgstr "Ustawic jako muzyke w tle?"
 
 msgid "Settings"
 msgstr "Ustawienia"
@@ -1318,35 +1333,41 @@ msgstr "z"
 msgid "seconds left"
 msgstr "sekund pozostalo"
 
-#~ msgid "Back to Wii Menu"
-#~ msgstr "Powrit do Wii Menu"
+msgid "Backgroundmusic Path changed."
+msgstr "Sciezka do muzyki w tle zmieniona"
 
-#~ msgid "Could not initialize DIP module!"
-#~ msgstr "Nie zainicjalizowano modulu DIP!"
+msgid "Set as backgroundmusic?"
+msgstr "Ustawic jako muzyke w tle?"
 
-#~ msgid "Do you want to retry for 30 secs?"
-#~ msgstr "Powtorzyc za 30 sec?"
+msgid "Back to Wii Menu"
+msgstr "Powrit do Wii Menu"
 
-#~ msgid "Format"
-#~ msgstr "Sformatuj"
+msgid "Could not initialize DIP module!"
+msgstr "Nie zainicjalizowano modulu DIP!"
 
-#~ msgid "No USB Device"
-#~ msgstr "Nie wykryto urzadzenia USB"
+msgid "Do you want to retry for 30 secs?"
+msgstr "Powtorzyc za 30 sec?"
 
-#~ msgid "No USB Device found."
-#~ msgstr "Nie wykryto urzadzenia USB"
+msgid "Format"
+msgstr "Sformatuj"
 
-#~ msgid "USB Device not found"
-#~ msgstr "Nie znaleziono urzadzenia USB"
+msgid "No USB Device"
+msgstr "Nie wykryto urzadzenia USB"
 
-#~ msgid "Waiting for USB Device"
-#~ msgstr "Oczekiwanie na urzadzenie USB"
+msgid "No USB Device found."
+msgstr "Nie wykryto urzadzenia USB"
 
-#~ msgid "Exit USB Loader GX?"
-#~ msgstr "Zakonczyc prace programu?"
+msgid "USB Device not found"
+msgstr "Nie znaleziono urzadzenia USB"
 
-#~ msgid "No WBFS partition found"
-#~ msgstr "Nie znaleziono partycji WBFS"
+msgid "Waiting for USB Device"
+msgstr "Oczekiwanie na urzadzenie USB"
 
-#~ msgid "You need to format a partition"
-#~ msgstr "Musisz sformatowac partycje"
+msgid "Exit USB Loader GX?"
+msgstr "Zakonczyc prace programu?"
+
+msgid "No WBFS partition found"
+msgstr "Nie znaleziono partycji WBFS"
+
+msgid "You need to format a partition"
+msgstr "Musisz sformatowac partycje"

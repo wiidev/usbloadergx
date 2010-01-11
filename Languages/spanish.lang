@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-07 00:14+0100\n"
+"POT-Creation-Date: 2010-01-08 10:44+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Penn\n"
 "Language-Team: Penn\n"
@@ -185,9 +185,6 @@ msgstr "Volver al HBC"
 msgid "Backgroundmusic"
 msgstr "Música de fondo"
 
-msgid "Backgroundmusic Path changed."
-msgstr "Ruta a Música cambiada"
-
 msgid "Big thanks to:"
 msgstr "Muchas gracias a:"
 
@@ -217,6 +214,9 @@ msgstr "No se eliminó:"
 
 msgid "Cancel"
 msgstr "Cancelar"
+
+msgid "Change Play Path"
+msgstr ""
 
 msgid "Channels"
 msgstr "Canales"
@@ -762,6 +762,9 @@ msgstr "Probablemente tiene un tamaño no divisible por 4. Que estupidez."
 msgid "Mount DVD drive"
 msgstr "Montar lector DVD"
 
+msgid "Music Loop Mode"
+msgstr ""
+
 msgid "Music Volume"
 msgstr "Volumen Música"
 
@@ -897,6 +900,15 @@ msgstr "Elegir de una lista"
 msgid "Play Count"
 msgstr "Jugado"
 
+msgid "Play Next"
+msgstr ""
+
+msgid "Play Previous"
+msgstr ""
+
+msgid "Playing Music:"
+msgstr ""
+
 msgid "Please wait..."
 msgstr "Por favor espera..."
 
@@ -930,8 +942,14 @@ msgstr "Recargar SD"
 msgid "Rename Game on WBFS"
 msgstr "Renombrar juego en WBFS"
 
+msgid "Reset BG Music"
+msgstr ""
+
 msgid "Reset Playcounter"
 msgstr "Reiniciar conteo jugados"
+
+msgid "Reset to standard BGM?"
+msgstr ""
 
 msgid "Restarting..."
 msgstr "Reiniciando..."
@@ -980,9 +998,6 @@ msgstr ""
 
 msgid "Set Search-Filter"
 msgstr "Poner filtro-busqueda"
-
-msgid "Set as backgroundmusic?"
-msgstr "¿Poner como música de fondo?"
 
 msgid "Settings"
 msgstr "Configuración"
@@ -1318,65 +1333,71 @@ msgstr "de"
 msgid "seconds left"
 msgstr "segundos restantes"
 
-#~ msgid "Back to Wii Menu"
-#~ msgstr "Volver a Menú Wii"
+msgid "Backgroundmusic Path changed."
+msgstr "Ruta a Música cambiada"
 
-#~ msgid "Could not initialize DIP module!"
-#~ msgstr "¡No se pudo iniciar módulo DIP!"
+msgid "Set as backgroundmusic?"
+msgstr "¿Poner como música de fondo?"
 
-#~ msgid "Do you want to retry for 30 secs?"
-#~ msgstr "¿Quieres reintentar por 30 segs.?"
+msgid "Back to Wii Menu"
+msgstr "Volver a Menú Wii"
 
-#~ msgid "Format"
-#~ msgstr "Formateo"
+msgid "Could not initialize DIP module!"
+msgstr "¡No se pudo iniciar módulo DIP!"
 
-#~ msgid "No USB Device"
-#~ msgstr "USB no encontrado"
+msgid "Do you want to retry for 30 secs?"
+msgstr "¿Quieres reintentar por 30 segs.?"
 
-#~ msgid "No USB Device found."
-#~ msgstr "USB no encontrado."
+msgid "Format"
+msgstr "Formateo"
 
-#~ msgid "USB Device not found"
-#~ msgstr "USB no encontrado"
+msgid "No USB Device"
+msgstr "USB no encontrado"
 
-#~ msgid "Waiting for USB Device"
-#~ msgstr "Esperando al Dispositivo USB"
+msgid "No USB Device found."
+msgstr "USB no encontrado."
 
-#~ msgid "Can't decompress LZ77"
-#~ msgstr "No se pudo descomprimir LZ77"
+msgid "USB Device not found"
+msgstr "USB no encontrado"
 
-#~ msgid "Can't find disc"
-#~ msgstr "No se encontró disco"
+msgid "Waiting for USB Device"
+msgstr "Esperando al Dispositivo USB"
 
-#~ msgid "IMD5 Header not right."
-#~ msgstr "Mal encabezado IMD5."
+msgid "Can't decompress LZ77"
+msgstr "No se pudo descomprimir LZ77"
 
-#~ msgid "IMET Header wrong."
-#~ msgstr "Mal encabezado IMET."
+msgid "Can't find disc"
+msgstr "No se encontró disco"
 
-#~ msgid "Exit USB Loader GX?"
-#~ msgstr "¿Salir de USB Loader GX?"
+msgid "IMD5 Header not right."
+msgstr "Mal encabezado IMD5."
 
-#~ msgid "No WBFS partition found"
-#~ msgstr "Partición WBFS no encontrada"
+msgid "IMET Header wrong."
+msgstr "Mal encabezado IMET."
 
-#~ msgid "You need to format a partition"
-#~ msgstr "Necesitas formatear una partición"
+msgid "Exit USB Loader GX?"
+msgstr "¿Salir de USB Loader GX?"
 
-#~ msgid "Failed to extract opening.bnr"
-#~ msgstr "Fallo al extraer opening.bnr"
+msgid "No WBFS partition found"
+msgstr "Partición WBFS no encontrada"
 
-#~ msgid "Homebrew Channel"
-#~ msgstr "Canal Homebrew"
+msgid "You need to format a partition"
+msgstr "Necesitas formatear una partición"
 
-#~ msgid "ERROR: USB device could not be loaded!"
-#~ msgstr "ERROR: ¡No se pudo cargar dispositivo USB!"
+msgid "Failed to extract opening.bnr"
+msgstr "Fallo al extraer opening.bnr"
 
-#~ msgid "ERROR: cIOS could not be loaded!"
-#~ msgstr "ERROR: ¡No se pudo cargar cIOS!"
+msgid "Homebrew Channel"
+msgstr "Canal Homebrew"
 
-#~ msgid "Loading..."
-#~ msgstr "Cargando..."
+msgid "ERROR: USB device could not be loaded!"
+msgstr "ERROR: ¡No se pudo cargar dispositivo USB!"
 
-#~ msgid "Waiting for your slow USB Device: %i secs..."
-#~ msgstr "Esperando por tu lento disp. USB: %i segs..."
+msgid "ERROR: cIOS could not be loaded!"
+msgstr "ERROR: ¡No se pudo cargar cIOS!"
+
+msgid "Loading..."
+msgstr "Cargando..."
+
+msgid "Waiting for your slow USB Device: %i secs..."
+msgstr "Esperando por tu lento disp. USB: %i segs..."

@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# French V12.2 r885
+# French V12.3 r886
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-07 00:14+0100\n"
+"POT-Creation-Date: 2010-01-08 10:44+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Kin8\n"
 "Language-Team: Badablek, Amour, ikya & Kin8\n"
@@ -185,9 +185,6 @@ msgstr "Chaîne Homebrew"
 msgid "Backgroundmusic"
 msgstr "Fond sonore"
 
-msgid "Backgroundmusic Path changed."
-msgstr "Dossier fond sonore modifié."
-
 msgid "Big thanks to:"
 msgstr "Grand merci à:"
 
@@ -217,6 +214,9 @@ msgstr "Impossible de supprimer:"
 
 msgid "Cancel"
 msgstr "Annuler"
+
+msgid "Change Play Path"
+msgstr "Changer Dossier"
 
 msgid "Channels"
 msgstr "Chaînes"
@@ -762,6 +762,9 @@ msgstr "Il est fort probable que les dimensions ne soient pas des multiples de 4
 msgid "Mount DVD drive"
 msgstr "Lancer DVD"
 
+msgid "Music Loop Mode"
+msgstr "Mode Boucle Musique"
+
 msgid "Music Volume"
 msgstr "Volume Musique"
 
@@ -897,6 +900,15 @@ msgstr "Sélectionner"
 msgid "Play Count"
 msgstr "Utilisation"
 
+msgid "Play Next"
+msgstr "Jouer Suiv."
+
+msgid "Play Previous"
+msgstr "Jouer Précéd."
+
+msgid "Playing Music:"
+msgstr "Musique Actuelle:"
+
 msgid "Please wait..."
 msgstr "Veuillez patienter..."
 
@@ -930,8 +942,14 @@ msgstr "Recharger la SD"
 msgid "Rename Game on WBFS"
 msgstr "Renommer un jeu"
 
+msgid "Reset BG Music"
+msgstr "Reset"
+
 msgid "Reset Playcounter"
 msgstr "Reset Utilisation du Jeu"
+
+msgid "Reset to standard BGM?"
+msgstr "Restaurer fond sonore standard ?"
 
 msgid "Restarting..."
 msgstr "Redémarrage..."
@@ -980,9 +998,6 @@ msgstr ""
 
 msgid "Set Search-Filter"
 msgstr "Filtre de Recherche"
-
-msgid "Set as backgroundmusic?"
-msgstr "Utiliser comme fond sonore ?"
 
 msgid "Settings"
 msgstr "Paramètres"
@@ -1318,65 +1333,65 @@ msgstr "sur"
 msgid "seconds left"
 msgstr "secondes restantes"
 
-#~ msgid "Back to Wii Menu"
-#~ msgstr "Retour Menu Wii"
+msgid "Back to Wii Menu"
+msgstr "Retour Menu Wii"
 
-#~ msgid "Could not initialize DIP module!"
-#~ msgstr "Initialisation module DIP impossible !"
+msgid "Could not initialize DIP module!"
+msgstr "Initialisation module DIP impossible !"
 
-#~ msgid "Do you want to retry for 30 secs?"
-#~ msgstr "Réessayer pendant 30 sec. ?"
+msgid "Do you want to retry for 30 secs?"
+msgstr "Réessayer pendant 30 sec. ?"
 
-#~ msgid "Format"
-#~ msgstr "Formater"
+msgid "Format"
+msgstr "Formater"
 
-#~ msgid "No USB Device"
-#~ msgstr "Aucun périphérique USB"
+msgid "No USB Device"
+msgstr "Aucun périphérique USB"
 
-#~ msgid "No USB Device found."
-#~ msgstr "Aucun périphérique USB trouvé."
+msgid "No USB Device found."
+msgstr "Aucun périphérique USB trouvé."
 
-#~ msgid "No WBFS or FAT/NTFS partition found"
-#~ msgstr "Aucune partition WBFS ou FAT/NTFS trouvée"
+msgid "No WBFS or FAT/NTFS partition found"
+msgstr "Aucune partition WBFS ou FAT/NTFS trouvée"
 
-#~ msgid "Select"
-#~ msgstr "Choisir"
+msgid "Select"
+msgstr "Choisir"
 
-#~ msgid "USB Device not found"
-#~ msgstr "Périphérique USB introuvable"
+msgid "USB Device not found"
+msgstr "Périphérique USB introuvable"
 
-#~ msgid "Waiting for USB Device"
-#~ msgstr "Attente d'un périphérique USB"
+msgid "Waiting for USB Device"
+msgstr "Attente d'un périphérique USB"
 
-#~ msgid "You need to select or format a partition"
-#~ msgstr "Vous devez choisir ou formater une partition"
+msgid "You need to select or format a partition"
+msgstr "Vous devez choisir ou formater une partition"
 
-#~ msgid "Can't decompress LZ77"
-#~ msgstr "Décompression LZ77 Impossible"
+msgid "Can't decompress LZ77"
+msgstr "Décompression LZ77 Impossible"
 
-#~ msgid "Can't find disc"
-#~ msgstr "Disque non trouvé"
+msgid "Can't find disc"
+msgstr "Disque non trouvé"
 
-#~ msgid "IMD5 Header not right."
-#~ msgstr "En-tête IMD5 erronée"
+msgid "IMD5 Header not right."
+msgstr "En-tête IMD5 erronée"
 
-#~ msgid "IMET Header wrong."
-#~ msgstr "En-tête IMET erronée"
+msgid "IMET Header wrong."
+msgstr "En-tête IMET erronée"
 
-#~ msgid "Failed to extract opening.bnr"
-#~ msgstr "Extraction opening.bnr échouée"
+msgid "Failed to extract opening.bnr"
+msgstr "Extraction opening.bnr échouée"
 
-#~ msgid "You need to start this game one time to create a save file, then exit and start it again."
-#~ msgstr "Vous devez lancer ce jeu une fois pour créer une sauvegarde, puis éteindre et le lancer à nouveau."
+msgid "You need to start this game one time to create a save file, then exit and start it again."
+msgstr "Vous devez lancer ce jeu une fois pour créer une sauvegarde, puis éteindre et le lancer à nouveau."
 
-#~ msgid "ERROR: USB device could not be loaded!"
-#~ msgstr "ERREUR: Impossible de charger le périph. USB!"
+msgid "ERROR: USB device could not be loaded!"
+msgstr "ERREUR: Impossible de charger le périph. USB!"
 
-#~ msgid "ERROR: cIOS could not be loaded!"
-#~ msgstr "ERREUR: Impossible de charger le cIOS!"
+msgid "ERROR: cIOS could not be loaded!"
+msgstr "ERREUR: Impossible de charger le cIOS!"
 
-#~ msgid "Loading..."
-#~ msgstr "Chargement..."
+msgid "Loading..."
+msgstr "Chargement..."
 
-#~ msgid "Waiting for your slow USB Device: %i secs..."
-#~ msgstr "Attente de votre périphérique USB: %i secs..."
+msgid "Waiting for your slow USB Device: %i secs..."
+msgstr "Attente de votre périphérique USB: %i secs..."

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-07 00:14+0100\n"
+"POT-Creation-Date: 2010-01-08 10:44+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) \n"
 "Language-Team: r823 - last version on http://djelinek.sweb.cz/_USBLoderGX/czech.lang \n"
@@ -185,9 +185,6 @@ msgstr "Zpet do spouštece"
 msgid "Backgroundmusic"
 msgstr "Hudba na pozadí"
 
-msgid "Backgroundmusic Path changed."
-msgstr "Cesta pro hudbu na pozadí zmenena"
-
 msgid "Big thanks to:"
 msgstr "Velké díky pro:"
 
@@ -217,6 +214,9 @@ msgstr "Nelze smazat:"
 
 msgid "Cancel"
 msgstr "Zrušit"
+
+msgid "Change Play Path"
+msgstr ""
 
 msgid "Channels"
 msgstr "Kanály"
@@ -762,6 +762,9 @@ msgstr "Nejspíše má velikost, která není delitelná 4."
 msgid "Mount DVD drive"
 msgstr "Pripojit DVD mechaniku"
 
+msgid "Music Loop Mode"
+msgstr ""
+
 msgid "Music Volume"
 msgstr "Hlasitost hudby"
 
@@ -897,6 +900,15 @@ msgstr "Vyberte ze seznamu"
 msgid "Play Count"
 msgstr "Spušteno"
 
+msgid "Play Next"
+msgstr ""
+
+msgid "Play Previous"
+msgstr ""
+
+msgid "Playing Music:"
+msgstr ""
+
 msgid "Please wait..."
 msgstr "Cekejte prosím..."
 
@@ -930,8 +942,14 @@ msgstr "Znovunactení SD"
 msgid "Rename Game on WBFS"
 msgstr "Prejmenovat hru na WBFS"
 
+msgid "Reset BG Music"
+msgstr ""
+
 msgid "Reset Playcounter"
 msgstr "Vynulovat cítac spuštení"
+
+msgid "Reset to standard BGM?"
+msgstr ""
 
 msgid "Restarting..."
 msgstr "Restartuji..."
@@ -980,9 +998,6 @@ msgstr "Zárí"
 
 msgid "Set Search-Filter"
 msgstr "Nastavit vyhledávací filtr"
-
-msgid "Set as backgroundmusic?"
-msgstr "Nastavit jako hudbu na pozadí?"
 
 msgid "Settings"
 msgstr "Nastavení"
@@ -1318,47 +1333,53 @@ msgstr "z "
 msgid "seconds left"
 msgstr "sekund zbývá"
 
-#~ msgid "Back to Wii Menu"
-#~ msgstr "Zpet do Wii nabídky"
+msgid "Backgroundmusic Path changed."
+msgstr "Cesta pro hudbu na pozadí zmenena"
 
-#~ msgid "Could not initialize DIP module!"
-#~ msgstr "Nelze inicializovat DIP modul!"
+msgid "Set as backgroundmusic?"
+msgstr "Nastavit jako hudbu na pozadí?"
 
-#~ msgid "Do you want to retry for 30 secs?"
-#~ msgstr "Chcete to zkusit znovu za 30 sekund?"
+msgid "Back to Wii Menu"
+msgstr "Zpet do Wii nabídky"
 
-#~ msgid "Format"
-#~ msgstr "Formát"
+msgid "Could not initialize DIP module!"
+msgstr "Nelze inicializovat DIP modul!"
 
-#~ msgid "No USB Device"
-#~ msgstr "Žádné zarízení USB"
+msgid "Do you want to retry for 30 secs?"
+msgstr "Chcete to zkusit znovu za 30 sekund?"
 
-#~ msgid "No USB Device found."
-#~ msgstr "Nebylo nalezeno zarízení USB"
+msgid "Format"
+msgstr "Formát"
 
-#~ msgid "USB Device not found"
-#~ msgstr "USB zarízení nenalezeno"
+msgid "No USB Device"
+msgstr "Žádné zarízení USB"
 
-#~ msgid "Waiting for USB Device"
-#~ msgstr "Cekám na zarízení USB"
+msgid "No USB Device found."
+msgstr "Nebylo nalezeno zarízení USB"
 
-#~ msgid "Can't decompress LZ77"
-#~ msgstr "Nelze dekomprimovat LZ77"
+msgid "USB Device not found"
+msgstr "USB zarízení nenalezeno"
 
-#~ msgid "Can't find disc"
-#~ msgstr "Nelze nalézt disc"
+msgid "Waiting for USB Device"
+msgstr "Cekám na zarízení USB"
 
-#~ msgid "IMD5 Header not right."
-#~ msgstr "Hlavička IMD5 není správná."
+msgid "Can't decompress LZ77"
+msgstr "Nelze dekomprimovat LZ77"
 
-#~ msgid "IMET Header wrong."
-#~ msgstr "Hlavička IMET není správná."
+msgid "Can't find disc"
+msgstr "Nelze nalézt disc"
 
-#~ msgid "Exit USB Loader GX?"
-#~ msgstr "Ukoncit USB Loader GX?"
+msgid "IMD5 Header not right."
+msgstr "Hlavička IMD5 není správná."
 
-#~ msgid "No WBFS partition found"
-#~ msgstr "Nebyl nalezen oddíl WBFS"
+msgid "IMET Header wrong."
+msgstr "Hlavička IMET není správná."
 
-#~ msgid "You need to format a partition"
-#~ msgstr "Musíte naformátovat oddíl"
+msgid "Exit USB Loader GX?"
+msgstr "Ukoncit USB Loader GX?"
+
+msgid "No WBFS partition found"
+msgstr "Nebyl nalezen oddíl WBFS"
+
+msgid "You need to format a partition"
+msgstr "Musíte naformátovat oddíl"

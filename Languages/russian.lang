@@ -1,14 +1,14 @@
 # USB Loader GX language source file.
-# russian.lang - V2.1 r713
+# russian.lang - r885
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-07 00:14+0100\n"
+"POT-Creation-Date: 2010-01-10 20:08+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
-"Last-Translator: Kir\n"
-"Language-Team: Kir\n"
+"Last-Translator: nikolai_ca\n"
+"Language-Team: Kir, alendit, nikolai_ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -17,20 +17,20 @@ msgid " "
 msgstr ""
 
 msgid " Wad Saved as:"
-msgstr ""
+msgstr " Wad сохранен как:"
 
 msgid " could not be downloaded."
-msgstr ""
+msgstr " не мог быть загружен"
 
 msgid " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information."
-msgstr ""
+msgstr " был сохранен. Текст не был проверен. Некоторые части кода могут не работать успешно друг с другом. При обнаружении проблемы, загрузить текст в текстовый редактор чтобы получить дополнительную информацию."
 
 msgid " is not on the server."
-msgstr ""
+msgstr " не найден на сервере"
 
 #, c-format
 msgid "%s : %s May not boot correctly if your System Menu is not up to date."
-msgstr ""
+msgstr "%s : %s может не загрузиться правильно если ваше Системное Меню не последней версии"
 
 msgid "0 (Everyone)"
 msgstr "0 (Для всех)"
@@ -39,16 +39,16 @@ msgid "1 (Child 7+)"
 msgstr "1 (Дети 7+)"
 
 msgid "1 hour"
-msgstr ""
+msgstr "1 час"
 
 msgid "10 min"
-msgstr ""
+msgstr "10 мин."
 
 msgid "2 (Teen 12+)"
 msgstr "2 (Подростки 12+)"
 
 msgid "20 min"
-msgstr ""
+msgstr "20 мин."
 
 msgid "2D Cover Path"
 msgstr "Путь к 2D обложкам"
@@ -57,10 +57,10 @@ msgid "3 (Mature 16+)"
 msgstr "3 (Подростки 16+)"
 
 msgid "3 min"
-msgstr ""
+msgstr "3 мин."
 
 msgid "30 min"
-msgstr ""
+msgstr "30 мин."
 
 msgid "3D Cover Path"
 msgstr "Путь к 3D обложкам"
@@ -72,34 +72,34 @@ msgid "4 (Adults Only 18+)"
 msgstr "4 (Взрослые 18+)"
 
 msgid "5 min"
-msgstr ""
+msgstr "5 мин."
 
 msgid ">> Deleting tickets..."
-msgstr ""
+msgstr ">> Удаление тикетов...."
 
 msgid ">> Deleting tickets...ERROR! "
-msgstr ""
+msgstr ">> Удаление тикетов...ОШИБКА! "
 
 msgid ">> Deleting tickets...Ok! "
-msgstr ""
+msgstr ">> Удаление тикетов...Успешно! "
 
 msgid ">> Deleting title ...ERROR! "
-msgstr ""
+msgstr ">> Удаление тайтла ...ОШИБКА! "
 
 msgid ">> Deleting title ...Ok!"
-msgstr ""
+msgstr ">> Удаление тайтла ...Успешно!"
 
 msgid ">> Deleting title contents..."
-msgstr ""
+msgstr ">> Удаление содержимого тайтла..."
 
 msgid ">> Deleting title contents...ERROR! "
-msgstr ""
+msgstr ">> Удаление содержимого тайтла...ОШИБКА!"
 
 msgid ">> Deleting title contents...Ok!"
-msgstr ""
+msgstr ">> Удаление содержимого тайтла...Успешно!"
 
 msgid ">> Deleting title..."
-msgstr ""
+msgstr ">> Удаление тайтла..."
 
 msgid ">> Finishing installation..."
 msgstr ">> Заканчиваю установку..."
@@ -114,19 +114,19 @@ msgid ">> Installing title..."
 msgstr ">>Установка тайтла"
 
 msgid ">> Reading WAD data..."
-msgstr ">>Чтение данных WAD..."
+msgstr ">> Чтение данных WAD..."
 
 msgid ">> Reading WAD data...ERROR! "
-msgstr ""
+msgstr ">> Чтение данных WAD...ОШИБКА!"
 
 msgid ">> Reading WAD data...Ok!"
-msgstr ""
+msgstr ">> Чтение данных WAD...Успешно!"
 
 msgid "AUTO"
 msgstr "АВТО"
 
 msgid "All partitions"
-msgstr ""
+msgstr "Все разделы"
 
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "Все функции USB Loader GX разблокированы."
@@ -135,7 +135,7 @@ msgid "Alternate DOL"
 msgstr "Альтернативный DOL"
 
 msgid "An Error occured"
-msgstr ""
+msgstr "Произошла ошибка"
 
 msgid "Anti"
 msgstr "Анти"
@@ -147,7 +147,7 @@ msgid "Apr"
 msgstr "Апр"
 
 msgid "Are you sure you want to enable Parent Control?"
-msgstr ""
+msgstr "Вы действительно хотите включить Родительский Контроль?"
 
 msgid "Are you sure?"
 msgstr "Вы уверены ?"
@@ -156,22 +156,22 @@ msgid "Aug"
 msgstr "Авг"
 
 msgid "Author:"
-msgstr ""
+msgstr "Автор:"
 
 msgid "AutoInit Network"
-msgstr ""
+msgstr "АвтоИнициализация Сети"
 
 msgid "AutoPatch"
 msgstr "Авто Патч"
 
 msgid "BCA Codes Path"
-msgstr ""
+msgstr "Путь к кодам BCA"
 
 msgid "BCA Codes Path changed"
-msgstr ""
+msgstr "Путь к кодам BCA изменен"
 
 msgid "BETA revisions"
-msgstr ""
+msgstr "BETA-версии"
 
 msgid "Back"
 msgstr "Назад"
@@ -185,9 +185,6 @@ msgstr "Вернуться в загрузчик"
 msgid "Backgroundmusic"
 msgstr "Фоновая музыка"
 
-msgid "Backgroundmusic Path changed."
-msgstr "Путь к фоновой музыке изменен."
-
 msgid "Big thanks to:"
 msgstr "Большое спасибо:"
 
@@ -198,7 +195,7 @@ msgid "Boot/Standard"
 msgstr "Загрузка/Стандарт"
 
 msgid "Boot?"
-msgstr ""
+msgstr "Загрузить?"
 
 msgid "Both"
 msgstr "Оба"
@@ -210,7 +207,7 @@ msgid "Can't create directory"
 msgstr "Не могу создать папку"
 
 msgid "Can't create file"
-msgstr ""
+msgstr "Не могу создать файл"
 
 msgid "Can't delete:"
 msgstr "Невозможно удалить:"
@@ -218,14 +215,17 @@ msgstr "Невозможно удалить:"
 msgid "Cancel"
 msgstr "Отмена"
 
-msgid "Channels"
+msgid "Change Play Path"
 msgstr ""
+
+msgid "Channels"
+msgstr "Каналы"
 
 msgid "Cheatfile is blank"
 msgstr "Файл с читами пустой"
 
 msgid "Checking existing artwork"
-msgstr ""
+msgstr "Проверка существующей графики"
 
 msgid "Checking for Updates"
 msgstr "Проверяю обновления"
@@ -234,7 +234,7 @@ msgid "Click to Download Covers"
 msgstr "Нажми, чтобы скачать обложки"
 
 msgid "Click to change game ID"
-msgstr ""
+msgstr "Нажмите чтобы изменить ID игры"
 
 msgid "Clock"
 msgstr "Часы"
@@ -247,16 +247,16 @@ msgstr "Скачивание кода"
 
 #, c-format
 msgid "Coded by: %s"
-msgstr ""
+msgstr "Создано: %s"
 
 msgid "Coding:"
-msgstr ""
+msgstr "Создание:"
 
 msgid "Confirm"
 msgstr "Подтвердить"
 
 msgid "Connection lost..."
-msgstr ""
+msgstr "Связь потеряна..."
 
 msgid "Console"
 msgstr "Консоль"
@@ -283,7 +283,7 @@ msgid "Could not create GCT file"
 msgstr "Не могу создать GCT файл"
 
 msgid "Could not find a WBFS partition."
-msgstr ""
+msgstr "Не удалось найти раздел WBFS"
 
 msgid "Could not initialize network!"
 msgstr "Не могу инициализировать сеть!"
@@ -298,7 +298,7 @@ msgid "Could not read the disc."
 msgstr "Не могу прочесть диск"
 
 msgid "Could not save."
-msgstr ""
+msgstr "Не могу сохранить."
 
 msgid "Could not set USB."
 msgstr "Не могу настроить USB"
@@ -319,7 +319,7 @@ msgid "Custom Paths"
 msgstr "Изменение путей"
 
 msgid "Customs/Original"
-msgstr ""
+msgstr "Измененный/Оригинальные"
 
 msgid "DOL Path"
 msgstr "Путь к DOL"
@@ -343,31 +343,31 @@ msgid "Delete"
 msgstr "Удалить"
 
 msgid "Delete ?"
-msgstr ""
+msgstr "Удалить ?"
 
 msgid "Delete Cheat GCT"
-msgstr ""
+msgstr "Удалить чит-код GCT"
 
 msgid "Delete Cheat TXT"
-msgstr ""
+msgstr "Удалить чит-код TXT"
 
 msgid "Delete Cover Artwork"
-msgstr ""
+msgstr "Удалить обложку"
 
 msgid "Delete Disc Artwork"
-msgstr ""
+msgstr "Удалить картинку диска"
 
 msgid "Design:"
-msgstr ""
+msgstr "Дизайн:"
 
 msgid "Developed by"
 msgstr "Создано "
 
 msgid "Directory does not exist!"
-msgstr ""
+msgstr "Каталог не существует!"
 
 msgid "Disc Artwork Download"
-msgstr ""
+msgstr "Загрузка изображений диска"
 
 msgid "Disc Artwork Path"
 msgstr "Путь к изображениям дисков"
@@ -388,28 +388,28 @@ msgid "Display"
 msgstr "Отображать"
 
 msgid "Display as a carousel"
-msgstr ""
+msgstr "Покаказть в виде карусели"
 
 msgid "Display as a grid"
-msgstr ""
+msgstr "Показать в виде сетки"
 
 msgid "Display as a list"
-msgstr ""
+msgstr "Показать в виде списка"
 
 msgid "Display favorites"
-msgstr ""
+msgstr "Показать закладки"
 
 msgid "Do you really want to delete:"
 msgstr "Вы хотите удалить:"
 
 msgid "Do you want to apply it now?"
-msgstr ""
+msgstr "Вы действительно хотите использовать это?"
 
 msgid "Do you want to change language?"
 msgstr "Вы хотите сменить язык ?"
 
 msgid "Do you want to download this theme?"
-msgstr ""
+msgstr "Вы действительно хотите загрузить эту тему?"
 
 msgid "Do you want to format:"
 msgstr "Вы хотите отформатировать:"
@@ -418,13 +418,13 @@ msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "Вы хотите использовать DOL, который считается правильным?"
 
 msgid "Do you wish to update/download all language files?"
-msgstr ""
+msgstr "Вы действительно хотите обновить/загрузить все языковые файлы?"
 
 msgid "Done!"
-msgstr ""
+msgstr "Готово!"
 
 msgid "Download"
-msgstr ""
+msgstr "Загрузка"
 
 msgid "Download Boxart image?"
 msgstr "Скачать обложку диска?"
@@ -436,25 +436,25 @@ msgid "Download Now"
 msgstr "Скачать сейчас"
 
 msgid "Download failed."
-msgstr ""
+msgstr "Загрузка завершилась с ошибкой."
 
 msgid "Download finished"
 msgstr "Скачивание завершено"
 
 msgid "Download request failed."
-msgstr ""
+msgstr "Запрос на загрузку завершился с ошибкоа."
 
 msgid "Downloading"
 msgstr "Скачиваю"
 
 msgid "Downloading Page List:"
-msgstr ""
+msgstr "Загружается список страниц:"
 
 msgid "Downloading file"
 msgstr "Скачиваю файл:"
 
 msgid "Downloading image:"
-msgstr ""
+msgstr "Загружается картинка:"
 
 msgid "Dutch"
 msgstr "Голландский"
@@ -466,10 +466,10 @@ msgid "ERROR:"
 msgstr "ОШИБКА:"
 
 msgid "ERROR: Can't set up theme."
-msgstr ""
+msgstr "ОШИБКА: Не удалось установить тему."
 
 msgid "Enable Parental Control"
-msgstr ""
+msgstr "Включить Родительский Контроль"
 
 msgid "English"
 msgstr "Английский"
@@ -487,28 +487,28 @@ msgid "Error reading Disc"
 msgstr "Ошибка чтения диска"
 
 msgid "Error while transfering data."
-msgstr ""
+msgstr "Ошибка при передаче данных."
 
 msgid "Error..."
 msgstr "Ошибка..."
 
 msgid "Error:"
-msgstr ""
+msgstr "Ошибка:"
 
 msgid "Extracting files..."
-msgstr ""
+msgstr "Распаковка файлов..."
 
 msgid "FAT: Use directories"
-msgstr ""
+msgstr "FAT: Использовать каталоги"
 
 msgid "Failed formating"
 msgstr "Форматирование не удалось"
 
 msgid "Failed to extract."
-msgstr ""
+msgstr "Не удалось распаковать."
 
 msgid "Failed to open partition"
-msgstr ""
+msgstr "Не удалось открыть раздел"
 
 msgid "Feb"
 msgstr "Фев"
@@ -520,7 +520,7 @@ msgid "Finishing installation... Ok!"
 msgstr "Завершение установки... ОК!"
 
 msgid "Flip-X"
-msgstr ""
+msgstr "Flip-X"
 
 msgid "Force"
 msgstr "Принудительно"
@@ -550,7 +550,7 @@ msgid "GUI Settings"
 msgstr "Настройки интерфейса"
 
 msgid "GXtheme.cfg not found in any subfolder."
-msgstr ""
+msgstr "GXtheme.cfg не найден ни в одном каталоге."
 
 msgid "Game ID"
 msgstr "ID игры"
@@ -568,16 +568,16 @@ msgid "Game Size"
 msgstr "Размер игры"
 
 msgid "Game Sound Mode"
-msgstr ""
+msgstr "Режим звука в игре"
 
 msgid "Game Sound Volume"
-msgstr ""
+msgstr "Громкость звука в игре"
 
 msgid "Game is already installed:"
 msgstr "Игра уже установлена:"
 
 msgid "Game partition"
-msgstr ""
+msgstr "Раздел игры"
 
 msgid "Games"
 msgstr "Игры"
@@ -589,7 +589,7 @@ msgid "HOME Menu"
 msgstr "Домашнее Меню"
 
 msgid "Hermes CIOS"
-msgstr ""
+msgstr "Hermes CIOS"
 
 msgid "Homebrew Apps Path"
 msgstr "Путь к хоумбрю-программам"
@@ -610,15 +610,15 @@ msgid "How to Shutdown?"
 msgstr "Способ отключения?"
 
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
-msgstr ""
+msgstr "Если у вас нет сети WiFi, нажмите 1 чтобы получить URL для доступа к вашему WiiTDB.ZIP"
 
 #, c-format
 msgid "Incoming file %0.2fKB"
-msgstr ""
+msgstr "Входящий файл размером в %0.2fKB"
 
 #, c-format
 msgid "Incoming file %0.2fMB"
-msgstr ""
+msgstr "Входящий файл размером в %0.2fMB"
 
 msgid "Initializing Network"
 msgstr "Инициализирую сеть"
@@ -627,7 +627,7 @@ msgid "Insert Disk"
 msgstr "Вставьте диск"
 
 msgid "Insert a Wii Disc!"
-msgstr ""
+msgstr "Вставьте диск Wii!"
 
 msgid "Insert an SD-Card to download images."
 msgstr "Для скачивания изображений вставьте SD карту."
@@ -639,10 +639,10 @@ msgid "Insert an SD-Card to use this option."
 msgstr "Для использования этой функции нужна SD карта"
 
 msgid "Install"
-msgstr ""
+msgstr "Установка"
 
 msgid "Install 1:1 Copy"
-msgstr ""
+msgstr "Установка копии 1:1"
 
 msgid "Install Error!"
 msgstr "Ошибка установки!"
@@ -651,10 +651,10 @@ msgid "Install a game"
 msgstr "Установить игру"
 
 msgid "Install not possible"
-msgstr ""
+msgstr "Установка невозможна"
 
 msgid "Install partitions"
-msgstr ""
+msgstr "Установить разделы"
 
 msgid "Installing content... Ok!"
 msgstr "Установка контента... ОК!"
@@ -672,10 +672,10 @@ msgid "Installing wad"
 msgstr "Установка WAD"
 
 msgid "Invalid PIN code"
-msgstr ""
+msgstr "Неправильный PIN-код"
 
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
-msgstr ""
+msgstr "Возможно что у Вас есть информация полезная нам. Пожалуйста передайте эту информацию команде разработчиков."
 
 msgid "Italian"
 msgstr "Итальянский"
@@ -693,7 +693,7 @@ msgid "June"
 msgstr "Июн"
 
 msgid "Keep"
-msgstr ""
+msgstr "Сохранить"
 
 msgid "Keyboard"
 msgstr "Клавиатура"
@@ -702,7 +702,7 @@ msgid "Korean"
 msgstr "Корейский"
 
 msgid "Language File"
-msgstr ""
+msgstr "Языковой файл"
 
 msgid "Language change:"
 msgstr "Смена языка:"
@@ -720,11 +720,11 @@ msgid "Load"
 msgstr "Загрузить"
 
 msgid "Load From SD/USB"
-msgstr ""
+msgstr "Загрузка с SD/USB"
 
 #, c-format
 msgid "Load file from: %s ?"
-msgstr ""
+msgstr "Загрузить файл из %s ?"
 
 msgid "Load this DOL as alternate DOL?"
 msgstr "Загрузить этот DOL в качестве альтернативного ?"
@@ -742,13 +742,13 @@ msgid "Locked"
 msgstr "Заблокировано"
 
 msgid "Loop Sound"
-msgstr ""
+msgstr "Зациклить звут"
 
 msgid "Mar"
 msgstr "Мар"
 
 msgid "Mark new games"
-msgstr ""
+msgstr "Отметить новые игры"
 
 msgid "May"
 msgstr "Май"
@@ -760,6 +760,9 @@ msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr "Размеры картинки не делятся на 4. Поздравляю, блин."
 
 msgid "Mount DVD drive"
+msgstr "Монтировать DVD"
+
+msgid "Music Loop Mode"
 msgstr ""
 
 msgid "Music Volume"
@@ -772,7 +775,7 @@ msgid "Network init error"
 msgstr "Ошибка инициализации сети"
 
 msgid "New Disc Detected"
-msgstr ""
+msgstr "Обнаружен новый диск"
 
 msgid "Next"
 msgstr "Следующий"
@@ -796,10 +799,10 @@ msgid "No SD-Card inserted!"
 msgstr "SD карта не вставлена!"
 
 msgid "No cheats were selected"
-msgstr ""
+msgstr "Не было выбрано ни одного чит-кода"
 
 msgid "No data could be read."
-msgstr ""
+msgstr "Невозможно считать данные."
 
 msgid "No file missing!"
 msgstr "Файл не найден!"
@@ -808,7 +811,7 @@ msgid "No new updates."
 msgstr "Нет обновлений"
 
 msgid "No themes found on the site."
-msgstr ""
+msgstr "На сайте не найдено ни одной темы"
 
 msgid "Normal"
 msgstr "Обычный"
@@ -817,10 +820,10 @@ msgid "Normal Covers"
 msgstr "Обычные обложки"
 
 msgid "Not Found"
-msgstr ""
+msgstr "Не найден"
 
 msgid "Not a DOL/ELF file."
-msgstr ""
+msgstr "Не является файлом DOL/ELF"
 
 msgid "Not a Wii Disc"
 msgstr "Это не диск Wii"
@@ -841,7 +844,7 @@ msgid "OFF"
 msgstr "ВЫКЛ"
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "ON"
 msgstr "ВКЛ"
@@ -853,28 +856,28 @@ msgid "Official Site:"
 msgstr "Оф. сайт:"
 
 msgid "Only Customs"
-msgstr ""
+msgstr "Только измененные"
 
 msgid "Only Original"
-msgstr ""
+msgstr "Только оригинальные"
 
 msgid "Only for Install"
 msgstr "Только при установке"
 
 msgid "Original/Customs"
-msgstr ""
+msgstr "Измененные/Модифицированные"
 
 msgid "Parental Control"
 msgstr "Родительский Контроль"
 
 msgid "Parental Control disabled"
-msgstr ""
+msgstr "Родительский Контроль выключен"
 
 msgid "Partition"
 msgstr "Раздел"
 
 msgid "Partition Format Menu"
-msgstr ""
+msgstr "Меню форматирования раздела"
 
 msgid "Password"
 msgstr "Пароль"
@@ -886,7 +889,7 @@ msgid "Password has been changed"
 msgstr "Пароль был изменен"
 
 msgid "Paste it into your browser to get your WiiTDB.zip."
-msgstr ""
+msgstr "Скопируйте это в Ваш браузер чтобы получить Ваш WiiTDB.zip"
 
 msgid "Patch Country Strings"
 msgstr "Патчить строки страны"
@@ -897,8 +900,17 @@ msgstr "Выберите из списка"
 msgid "Play Count"
 msgstr "Запущено раз"
 
-msgid "Please wait..."
+msgid "Play Next"
 msgstr ""
+
+msgid "Play Previous"
+msgstr ""
+
+msgid "Playing Music:"
+msgstr ""
+
+msgid "Please wait..."
+msgstr "Пожалуйста подождите..."
 
 msgid "Power off the Wii"
 msgstr "Выключить Wii"
@@ -919,7 +931,7 @@ msgid "Reading WAD data... Ok!"
 msgstr "Чтение данных WAD... ОК!"
 
 msgid "Receiving file from:"
-msgstr ""
+msgstr "Получение файлы из:"
 
 msgid "Released"
 msgstr "Выпущено:"
@@ -930,8 +942,14 @@ msgstr "Перечитать SD карту"
 msgid "Rename Game on WBFS"
 msgstr "Переименовать игры в WBFS"
 
+msgid "Reset BG Music"
+msgstr ""
+
 msgid "Reset Playcounter"
 msgstr "Сбросить счетчик запусков"
+
+msgid "Reset to standard BGM?"
+msgstr ""
 
 msgid "Restarting..."
 msgstr "Перезапускаю..."
@@ -961,28 +979,25 @@ msgid "Save Failed"
 msgstr "Сохранение не удалось"
 
 msgid "Save Game List to"
-msgstr ""
+msgstr "Сохранить список игр в"
 
 msgid "Saved"
-msgstr ""
+msgstr "Сохранено"
 
 msgid "Screensaver"
 msgstr "Скринсейвер"
 
 msgid "Select a DOL"
-msgstr ""
+msgstr "Выберите DOL"
 
 msgid "Selected DOL"
-msgstr ""
+msgstr "Выбранный DOL"
 
 msgid "Sept"
 msgstr "Сен"
 
 msgid "Set Search-Filter"
-msgstr ""
-
-msgid "Set as backgroundmusic?"
-msgstr "установить как фоновую музыку"
+msgstr "Установить фильтр для поиска"
 
 msgid "Settings"
 msgstr "Установки"
@@ -994,22 +1009,22 @@ msgid "Shutdown to Idle"
 msgstr "Перевести в режим сна"
 
 msgid "Sort alphabetically"
-msgstr ""
+msgstr "Сортировать по алфавиту"
 
 msgid "Sort by rank"
-msgstr ""
+msgstr "Сортировать по популярности"
 
 msgid "Sort order by most played"
-msgstr ""
+msgstr "Сортировать по частоте проигрывания"
 
 msgid "Sound"
 msgstr "Звук"
 
 msgid "Sound+BGM"
-msgstr ""
+msgstr "Звук и фоновая музыка"
 
 msgid "Sound+Quiet"
-msgstr ""
+msgstr "Звук и тишина"
 
 msgid "Spanish"
 msgstr "Испанский"
@@ -1036,7 +1051,7 @@ msgid "Successfully deleted:"
 msgstr "Успешно удалено:"
 
 msgid "Successfully extracted theme."
-msgstr ""
+msgstr "Успешно извлечена тема."
 
 msgid "Successfully installed:"
 msgstr "Успешно установлено:"
@@ -1054,26 +1069,26 @@ msgid "TXT Cheatcodes Path changed"
 msgstr "Путь к TXT читкодам изменен"
 
 msgid "The entered directory does not exist. Would you like to create it?"
-msgstr ""
+msgstr "Заданный каталог не существует. Хотите создать его?"
 
 msgid "The file is not a .wad"
-msgstr ""
+msgstr "Это не файл .wad"
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."
-msgstr ""
+msgstr "WAD файл установлен, но он не может быть удален с карты SD."
 
 #, c-format
 msgid "The wad installation failed with error %ld"
 msgstr "Установка WAD не удалась, код ошибки %ld"
 
 msgid "Theme Download Path"
-msgstr ""
+msgstr "Путь для загрузки темы"
 
 msgid "Theme Download Path changed"
-msgstr ""
+msgstr "Путь для загрузки темы изменен"
 
 msgid "Theme Downloader"
-msgstr ""
+msgstr "Загрузчик тем"
 
 msgid "Theme Path"
 msgstr "Путь к темам"
@@ -1082,13 +1097,13 @@ msgid "Theme Path Changed"
 msgstr "путь к темам изменён"
 
 msgid "Theme Title:"
-msgstr ""
+msgstr "Заголовок темы:"
 
 msgid "Time left:"
 msgstr "Осталось времени:"
 
 msgid "Title Launcher"
-msgstr ""
+msgstr "Загрузчик тайтла"
 
 msgid "Titles from WiiTDB"
 msgstr "Названия из WiiTDB"
@@ -1097,13 +1112,13 @@ msgid "Tooltips"
 msgstr "Подсказки"
 
 msgid "Transfer failed."
-msgstr ""
+msgstr "Передача не удалась."
 
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX заблокирован"
 
 msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
-msgstr ""
+msgstr "USB Loader GX будет работать только с Hermes CIOS rev 4! Пожалуйста убедитесь что у вас установлена версия 4!"
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
@@ -1113,28 +1128,28 @@ msgid "Uninstall"
 msgstr "Деинсталлировать"
 
 msgid "Uninstall Game"
-msgstr ""
+msgstr "Деинсталлировать игру"
 
 msgid "Uninstall Menu"
-msgstr ""
+msgstr "Деинсталлировать меню"
 
 msgid "Uninstalling wad"
-msgstr ""
+msgstr "Деинсталлируется wad"
 
 msgid "Unlock Parental Control"
-msgstr ""
+msgstr "Разблокировать Родительский Контроль"
 
 msgid "Unlock console to use this option."
 msgstr "Для изменения параметра разблокируйте консоль."
 
 msgid "Unlock the app first."
-msgstr ""
+msgstr "Разблокируйте приложение сначала."
 
 msgid "Unlocked"
 msgstr "Разблокировано"
 
 msgid "Unsupported format, try to extract manually."
-msgstr ""
+msgstr "Формат не поддерживается, попробуйте распаковать самостоятельно."
 
 msgid "Update"
 msgstr "Обновление"
@@ -1146,7 +1161,7 @@ msgid "Update DOL"
 msgstr "Обновить DOL"
 
 msgid "Update Files"
-msgstr ""
+msgstr "Обновить файлы"
 
 msgid "Update Path"
 msgstr "Путь к обновлениям"
@@ -1155,7 +1170,7 @@ msgid "Update Path changed."
 msgstr "Путь к обновлениям изменен"
 
 msgid "Update all Language Files"
-msgstr ""
+msgstr "Обновить все языковые файлы"
 
 msgid "Update failed"
 msgstr "Обновление не удалось"
@@ -1167,38 +1182,38 @@ msgid "Updating"
 msgstr "обновляю"
 
 msgid "Updating Language Files..."
-msgstr ""
+msgstr "Обновление языковых файлов..."
 
 msgid "Updating Language Files:"
-msgstr ""
+msgstr "Обновление языковых файлов:"
 
 msgid "Updating WiiTDB.zip"
-msgstr ""
+msgstr "Обновление WiiTDB.zip"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
-msgstr ""
+msgstr "Загруженный ZIP-файл установлен в каталог homebrew"
 
 msgid "VIDTV Patch"
 msgstr "Патч VIDTV"
 
 #, c-format
 msgid "Version: %s"
-msgstr ""
+msgstr "Версия: %s"
 
 msgid "Video Mode"
 msgstr "Видео режим"
 
 msgid "WIP Patches Path"
-msgstr ""
+msgstr "Путь к патчам QIP"
 
 msgid "WIP Patches Path changed"
-msgstr ""
+msgstr "Путь к патчам QIP изменен"
 
 msgid "Waiting..."
 msgstr "Ожидание..."
 
 msgid "What do you want to update?"
-msgstr ""
+msgstr "Что Вы хотите обновить?"
 
 msgid "WiFi Features"
 msgstr "свойства WiFi"
@@ -1210,16 +1225,16 @@ msgid "Wii Menu"
 msgstr "Меню Wii"
 
 msgid "Wii Settings"
-msgstr ""
+msgstr "Установки Wii"
 
 msgid "WiiTDB Files"
-msgstr ""
+msgstr "Файлы WiiTDB"
 
 msgid "WiiTDB Path"
-msgstr ""
+msgstr "Путь к WiiTDB"
 
 msgid "WiiTDB Path changed."
-msgstr ""
+msgstr "Путь к WiiTDB изменен"
 
 msgid "Wiilight"
 msgstr "Подсветка Wii"
@@ -1237,23 +1252,23 @@ msgid "You are choosing to display favorites and you do not have any selected."
 msgstr "Нельзя отобразить избранные, если вы их до этого не выбрали."
 
 msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
-msgstr ""
+msgstr "Вы используете файловую систему NTFS. Из-за возможных ошибок записи на раздел NTFS установка игры невозможна."
 
 msgid "You can't access this menu!"
-msgstr ""
+msgstr "Вы не можете использовать это меню!"
 
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
-msgstr ""
+msgstr "У Вас не включен Родительский Контроль. Если вы хотите использовать Родительский Контроль, включите его в установках Wii."
 
 msgid "You have attempted to load a bad image"
 msgstr "Вы попытались загрузить плохой образ"
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
-msgstr ""
+msgstr "Ваш URL был сохранен в %sWiiTDB_URL.txt."
 
 msgid "and translaters for language files updates"
-msgstr ""
+msgstr "и переводчики для обновлений языковых файлов"
 
 msgid "available"
 msgstr "доступно"
@@ -1280,7 +1295,7 @@ msgid "files not found on the server!"
 msgstr "файлы не найдены на сервере!"
 
 msgid "for FAT/NTFS support"
-msgstr ""
+msgstr "для поддержки FAT/NTFS"
 
 msgid "for Ocarina"
 msgstr "за Ocarina"
@@ -1295,7 +1310,7 @@ msgid "for his awesome tool LibWiiGui"
 msgstr "за отличную утилиту LibWiiGui"
 
 msgid "for hosting the themes"
-msgstr ""
+msgstr "за хостинг тем"
 
 msgid "for hosting the update files"
 msgstr "за хостинг обновлений"
@@ -1318,35 +1333,41 @@ msgstr "из"
 msgid "seconds left"
 msgstr "секунд осталось"
 
-#~ msgid "Back to Wii Menu"
-#~ msgstr "Вернуться в меню Wii"
+msgid "Backgroundmusic Path changed."
+msgstr "Путь к фоновой музыке изменен."
 
-#~ msgid "Could not initialize DIP module!"
-#~ msgstr "Не могу запустить модуль DIP!"
+msgid "Set as backgroundmusic?"
+msgstr "установить как фоновую музыку"
 
-#~ msgid "Do you want to retry for 30 secs?"
-#~ msgstr "Хотите попробовать еще раз на 30 секунд?"
+msgid "Back to Wii Menu"
+msgstr "Вернуться в меню Wii"
 
-#~ msgid "Format"
-#~ msgstr "Форматировать"
+msgid "Could not initialize DIP module!"
+msgstr "Не могу запустить модуль DIP!"
 
-#~ msgid "No USB Device"
-#~ msgstr "Нет USB устройств"
+msgid "Do you want to retry for 30 secs?"
+msgstr "Хотите попробовать еще раз на 30 секунд?"
 
-#~ msgid "No USB Device found."
-#~ msgstr "USB устройств не обнаружено"
+msgid "Format"
+msgstr "Форматировать"
 
-#~ msgid "USB Device not found"
-#~ msgstr "USB устройство не найдено"
+msgid "No USB Device"
+msgstr "Нет USB устройств"
 
-#~ msgid "Waiting for USB Device"
-#~ msgstr "Ожидание USB устройства"
+msgid "No USB Device found."
+msgstr "USB устройств не обнаружено"
 
-#~ msgid "Exit USB Loader GX?"
-#~ msgstr "Выйти из USB Loader GX?"
+msgid "USB Device not found"
+msgstr "USB устройство не найдено"
 
-#~ msgid "No WBFS partition found"
-#~ msgstr "Не найден раздел WBFS"
+msgid "Waiting for USB Device"
+msgstr "Ожидание USB устройства"
 
-#~ msgid "You need to format a partition"
-#~ msgstr "Требуется форматирование раздела"
+msgid "Exit USB Loader GX?"
+msgstr "Выйти из USB Loader GX?"
+
+msgid "No WBFS partition found"
+msgstr "Не найден раздел WBFS"
+
+msgid "You need to format a partition"
+msgstr "Требуется форматирование раздела"

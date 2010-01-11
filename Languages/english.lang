@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-07 00:14+0100\n"
+"POT-Creation-Date: 2010-01-08 10:44+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -185,9 +185,6 @@ msgstr ""
 msgid "Backgroundmusic"
 msgstr ""
 
-msgid "Backgroundmusic Path changed."
-msgstr ""
-
 msgid "Big thanks to:"
 msgstr ""
 
@@ -216,6 +213,9 @@ msgid "Can't delete:"
 msgstr ""
 
 msgid "Cancel"
+msgstr ""
+
+msgid "Change Play Path"
 msgstr ""
 
 msgid "Channels"
@@ -762,6 +762,9 @@ msgstr ""
 msgid "Mount DVD drive"
 msgstr ""
 
+msgid "Music Loop Mode"
+msgstr ""
+
 msgid "Music Volume"
 msgstr ""
 
@@ -897,6 +900,15 @@ msgstr ""
 msgid "Play Count"
 msgstr ""
 
+msgid "Play Next"
+msgstr ""
+
+msgid "Play Previous"
+msgstr ""
+
+msgid "Playing Music:"
+msgstr ""
+
 msgid "Please wait..."
 msgstr ""
 
@@ -930,7 +942,13 @@ msgstr ""
 msgid "Rename Game on WBFS"
 msgstr ""
 
+msgid "Reset BG Music"
+msgstr ""
+
 msgid "Reset Playcounter"
+msgstr ""
+
+msgid "Reset to standard BGM?"
 msgstr ""
 
 msgid "Restarting..."
@@ -979,9 +997,6 @@ msgid "Sept"
 msgstr ""
 
 msgid "Set Search-Filter"
-msgstr ""
-
-msgid "Set as backgroundmusic?"
 msgstr ""
 
 msgid "Settings"
