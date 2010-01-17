@@ -166,12 +166,12 @@ int main(int argc, char *argv[])
     }
 
     gettextCleanUp();
-	printf("\n\tLoading configuration...");
+    printf("\n\tLoading configuration...");
     CFG_Load();
-	printf("done");
+    printf("done");
 
-    LoadAppCIOS();
-	printf("\n\tcIOS = %u (Rev %u)",IOS_GetVersion(), IOS_GetRevision());
+	LoadAppCIOS();
+    printf("\n\tcIOS = %u (Rev %u)",IOS_GetVersion(), IOS_GetRevision());
 
 	//if a ID was passed via args copy it and try to boot it after the partition is mounted
 	//its not really a headless mode.  more like hairless.

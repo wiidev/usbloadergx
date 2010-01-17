@@ -39,6 +39,37 @@ void HaltCheck()
         usleep(50);
 }
 
+void ReloadHDD_Settings()
+{
+    if(strstr(bootDevice, "USB:") != 0)
+    {
+        CFG_Load();
+        int ios = 249;
+        switch(Settings.cios)
+        {
+            case ios249:
+                ios = 249;
+                break;
+            case ios222:
+                ios = 222;
+                break;
+            case ios250:
+                ios = 250;
+                break;
+        }
+        if(ios != IOS_GetVersion())
+            Sys_ChangeIos(ios);
+    }
+    if(strstr(Settings.ogg_path, "USB:/") != 0)
+    {
+        bgMusic->Load(Settings.ogg_path);
+        bgMusic->Play();
+    }
+
+    // open database if available, load titles if needed
+    OpenXMLDatabase(Settings.titlestxt_path,Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride == 1 ? true: false, true);
+}
+
 int CheckPartition()
 {
     s32 ret2 = -1;
@@ -157,19 +188,11 @@ static void * CheckDevices (void *arg)
         {
             if(CheckHDD() >= 0)
             {
-                // open database if needed, load titles if needed
-                if(isInserted(bootDevice))
-                    OpenXMLDatabase(Settings.titlestxt_path,Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride == 1 ? true: false, true);
-
-                checkthreadState = 1;
-
                 LWP_SetThreadPriority(LWP_GetSelf(), 0);
 
-                if(strstr(Settings.ogg_path, "USB:/") != 0)
-                {
-                    bgMusic->Load(Settings.ogg_path);
-                    bgMusic->Play();
-                }
+                ReloadHDD_Settings();
+
+                checkthreadState = 1;
             }
         }
 

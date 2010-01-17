@@ -248,28 +248,28 @@ s32 IOS_ReloadIOSsafe(int ios)
 		if (ios222rev == -69)
 			ios222rev = getIOSrev(0x00000001000000dell);
 
-		if (ios222rev >= 0 && (ios222rev != 4 && ios222rev != 5))return -2;
+		if (ios222rev >= 0 && !(ios222rev >= 4 && ios222rev < 65280)) return -2;
 	}
 	else if (ios==223)
 	{
 		if (ios223rev == -69)
 			ios223rev = getIOSrev(0x00000001000000dfll);
 
-		if (ios223rev >= 0 && (ios223rev != 4 && ios223rev != 5))return -2;
+		if (ios223rev >= 0 && !(ios223rev >= 4 && ios223rev < 65280)) return -2;
 	}
 	else if (ios==249)
 	{
 		if (ios249rev == -69)
 			ios249rev = getIOSrev(0x00000001000000f9ll);
 
-		if (ios249rev >= 0 && !(ios249rev>=9 && ios249rev<65280))return -2;
+		if (ios249rev >= 0 && !(ios249rev >= 9 && ios249rev < 65280))return -2;
 	}
 	else if (ios==250)
 	{
 		if (ios250rev == -69)
 			ios250rev = getIOSrev(0x00000001000000fall);
 
-		if (ios250rev >= 0 && !(ios250rev>=9 && ios250rev<65280))return -2;
+		if (ios250rev >= 0 && !(ios250rev >= 9 && ios250rev < 65280))return -2;
 	}
 
 	s32 r = IOS_ReloadIOS(ios);
@@ -284,12 +284,12 @@ s32 IOS_ReloadIOSsafe(int ios)
 s32 CheckForCIOS()
 {
     gprintf("\n\tChecking for stub IOS");
-    s32 ret = -1;
-	s32 ios222rev = getIOSrev(0x00000001000000dell);
-	s32 ios249rev = getIOSrev(0x00000001000000f9ll);
+    s32 ret = 1;
+	ios222rev = getIOSrev(0x00000001000000dell);
+	ios249rev = getIOSrev(0x00000001000000f9ll);
 
 	//if we don't like either of the cIOS then scram
-	if (!(ios222rev==4 || ios222rev==5 || (ios249rev>=9 && ios249rev<65280)))
+	if (!((ios222rev >= 4 && ios222rev < 65280) || (ios249rev >=9 && ios249rev < 65280)))
 	{
 		InitTextVideo();
 		printf("\x1b[2J");
@@ -316,15 +316,15 @@ s32 CheckForCIOS()
 		}
 	}
 
-	printf("\n\tReloading ios 249...");
-    ret = IOS_ReloadIOSsafe(249);
-
+    //Needed for Settings load of HDD
+    printf("\n\tReloading ios 222...");
+    ret = IOS_ReloadIOSsafe(222);
 	printf("%d", ret);
 
     if (ret < 0)
     {
-		printf("\n\tIOS 249 failed, reloading ios 222...");
-        ret = IOS_ReloadIOSsafe(222);
+		printf("\n\tIOS 222 failed, reloading ios 249...");
+        ret = IOS_ReloadIOSsafe(249);
 		printf("%d", ret);
 		if (ret < 0) {
 			printf("\n\tIOS 222 failed, reloading ios 250...");
@@ -336,14 +336,14 @@ s32 CheckForCIOS()
                 SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
             }
 		}
-		else
-		{
-		    SDCard_Init();
-		    //only for 222 loading ehc modules
-            printf("\n\tLoad ehc module");
-            load_ehc_module();
-		    SDCard_deInit();
-		}
+    }
+    else
+    {
+        SDCard_Init();
+        //only for 222 loading ehc modules
+        printf("\n\tLoad ehc module");
+        load_ehc_module();
+        SDCard_deInit();
     }
 
     return ret;
@@ -352,45 +352,43 @@ s32 CheckForCIOS()
 int LoadAppCIOS()
 {
     s32 ret = 1;
+    bool IOS_Reloaded = false;
     /* Load Custom IOS */
+    SDCard_deInit();// unmount SD for reloading IOS
+    USBDevice_deInit();// unmount USB for reloading IOS
+    USBStorage_Deinit();
+
     if (Settings.cios == ios222 && IOS_GetVersion() != 222)
     {
-		printf("\n\tReloading IOS to config setting (%d)...", ios222 ? 222 : 223);
-        SDCard_deInit();// unmount SD for reloading IOS
-        USBDevice_deInit();// unmount USB for reloading IOS
-		USBStorage_Deinit();
-        ret = IOS_ReloadIOSsafe(ios222 ? 222 : 223);
+		printf("\n\tReloading IOS to config setting (222)...");
+        ret = IOS_ReloadIOSsafe(222);
 		printf("%d", ret);
         if (ret < 0)
         {
             Settings.cios = ios249;
             IOS_ReloadIOSsafe(249);
         }
-
-        SDCard_Init();
-        USBDevice_Init(); // and mount USB:/
-        if(ret >= 0)
-            load_ehc_module();
+        IOS_Reloaded = true;
     }
-    else if ((Settings.cios == ios249 && IOS_GetVersion() != 249) ||
-            (Settings.cios == ios250 && IOS_GetVersion() != 250))
+
+    if ((Settings.cios == ios249  && IOS_GetVersion() != 249)
+        || (Settings.cios == ios250 && IOS_GetVersion() != 250))
     {
-		printf("\n\tReloading IOS to config setting (%d)...", ios249 ? 249 : 250);
-        SDCard_deInit();// unmount SD for reloading IOS
-        USBDevice_deInit();// unmount USB for reloading IOS
-		USBStorage_Deinit();
-        ret = IOS_ReloadIOSsafe(ios249 ? 249 : 250);
+		printf("\n\tReloading IOS to config setting (%d)...", (Settings.cios == ios249) ? 249 : 250);
+        ret = IOS_ReloadIOSsafe((Settings.cios == ios249) ? 249 : 250);
 		printf("%d", ret);
         if (ret < 0) {
             Settings.cios = ios222;
             ret = IOS_ReloadIOSsafe(222);
-			SDCard_Init();
-            load_ehc_module();
         }
-
-        else SDCard_Init(); // now mount SD:/  //no need to keep mindlessly mounting and unmounting SD card
-        USBDevice_Init(); // and mount USB:/
+        IOS_Reloaded = true;
 	}
+
+    SDCard_Init();
+    if(IOS_GetVersion() == 222 && IOS_Reloaded)
+        load_ehc_module();
+
+    USBDevice_Init();
 
 	return ret;
 }
