@@ -127,9 +127,8 @@ int main(int argc, char *argv[])
 
 	printf("\n\tInitialize USB (wake up)");
     USBDevice_Init();// seems enough to wake up some HDDs if they are in sleep mode when the loader starts (tested with WD MyPassport Essential 2.5")
-    USBDevice_deInit();
-
-    s32 ret;
+	printf("\n\tInitialize sd card");
+    SDCard_Init(); // mount SD for loading cfg's
 
     bool bootDevice_found=false;
     if (argc >= 1) {
@@ -140,17 +139,7 @@ int main(int argc, char *argv[])
             bootDevice_found = true;
     }
 
-	printf("\n\tInitializing controllers");
-
-    /** PAD_Init has to be before InitVideo don't move that **/
-    PAD_Init(); // initialize PAD/WPAD
-
-    ret = CheckForCIOS();
-
-	printf("\n\tInitialize sd card");
-    SDCard_Init(); // mount SD for loading cfg's
-	printf("\n\tInitialize usb device");
-    USBDevice_Init(); // and mount USB:/
+    CheckForCIOS();
 
     if (!bootDevice_found)
     {
@@ -170,6 +159,17 @@ int main(int argc, char *argv[])
     CFG_Load();
     printf("done");
 
+    printf("\n\tLoading Background Music...");
+    bgMusic = new GuiBGM(bg_music_ogg, bg_music_ogg_size, Settings.volume);
+    if(strstr(Settings.ogg_path, "USB:") == 0)
+        bgMusic->Load(Settings.ogg_path);
+    bgMusic->SetLoop(Settings.musicloopmode); //loop music
+
+    printf("\n\tOpening XML Database...");
+    // open database if available, load titles if needed
+    if(!OpenXMLDatabase(Settings.titlestxt_path,Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride == 1 ? true: false, true))
+        printf("failed");
+
 	LoadAppCIOS();
     printf("\n\tcIOS = %u (Rev %u)",IOS_GetVersion(), IOS_GetRevision());
 
@@ -181,6 +181,10 @@ int main(int argc, char *argv[])
             LoadHeadlessID(argv[1]);
 	}
 
+
+	printf("\n\tInitializing controllers");
+    /** PAD_Init has to be before InitVideo don't move that **/
+    PAD_Init(); // initialize PAD/WPAD
     //! Init the rest of the System
     Sys_Init();
     Wpad_Init();

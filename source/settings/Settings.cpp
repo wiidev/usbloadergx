@@ -1426,7 +1426,7 @@ int MenuSettings()
                                     {
                                         bgMusic->LoadStandard();
                                         bgMusic->Play();
-                                        options2.SetValue(Idx, "%s", tr("Standard"));
+                                        options2.SetValue(0, "%s", tr("Standard"));
                                     }
 								}
 

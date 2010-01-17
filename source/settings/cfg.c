@@ -42,11 +42,9 @@ u8 listDisplay = 0;
 u8 partition = -1;
 char alternatedname[40];
 
-#define TITLE_MAX 200
-
 struct ID_Title {
     char id[6];
-    char title[TITLE_MAX];
+    char * title;
 };
 
 struct ID_Control {
@@ -391,8 +389,9 @@ char *cfg_get_title(u8 *id)
         return NULL;
 
     int i;
-    for (i=0; i<num_title; i++) {
-        if (memcmp(id, cfg_title[i].id, 6) == 0) {
+    for (i=0; i<num_title; i++)
+    {
+        if (strncmp((char*) id, cfg_title[i].id, 6) == 0) {
             return cfg_title[i].title;
         }
     }
@@ -411,20 +410,31 @@ char *get_title(struct discHdr *header)
 
 void title_set(char *id, char *title)
 {
+    if(!id || !title)
+        return;
+
+	if(!cfg_title)
+		cfg_title = (struct ID_Title *) malloc(sizeof(struct ID_Title));
+
     char *idt = cfg_get_title((u8*)id);
     if (idt) {
         // replace
-        strlcpy(idt, title, TITLE_MAX);
+        free(idt);
+        idt = strdup(title);
     } else {
-        cfg_title = realloc(cfg_title, (num_title+1) * sizeof(struct ID_Title));
-        if (!cfg_title) {
+        struct ID_Title * tmpStruct = (struct ID_Title *) realloc(cfg_title, (num_title+1) * sizeof(struct ID_Title));
+        if (!tmpStruct) {
             // error
+            CFG_Cleanup();
             num_title = 0;
             return;
         }
+
+        cfg_title = tmpStruct;
+
         // add
-        strcpy(cfg_title[num_title].id, id);
-        strlcpy(cfg_title[num_title].title, title, TITLE_MAX);
+        strncpy(cfg_title[num_title].id, id, 6);
+        cfg_title[num_title].title = strdup(title);
         num_title++;
     }
 }
@@ -433,7 +443,8 @@ void titles_default() {
 	int i;
 	for (i=0; i<num_title; i++) {
         memset(cfg_title[i].id, 0, 6);
-        strlcpy(cfg_title[i].title, "", TITLE_MAX);
+        free(cfg_title[i].title);
+        cfg_title[i].title = NULL;
     }
 }
 
@@ -1868,7 +1879,15 @@ void CFG_LoadGlobal(void) {
     cfg_parsefile(GXGlobal_cfg, &global_cfg_set);
 }
 
-void CFG_Cleanup(void) {
+void CFG_Cleanup(void)
+{
+    int i = 0;
+    for(i = 0; i < num_title; i++)
+    {
+        if(cfg_title[i].title)
+            free(cfg_title[i].title);
+        cfg_title[i].title = NULL;
+    }
     if (cfg_title) {
         free(cfg_title);
         cfg_title = NULL;

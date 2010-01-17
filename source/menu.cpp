@@ -281,13 +281,8 @@ int MainMenu(int menu) {
     bgImg = new GuiImage(background);
     mainWindow->Append(bgImg);
 
-    bgMusic = new GuiBGM(bg_music_ogg, bg_music_ogg_size, Settings.volume);
-    bgMusic->SetLoop(Settings.musicloopmode); //loop music
-    if(strstr(Settings.ogg_path, "USB:/") == 0) //usb is not detected at this point yet
-    {
-        bgMusic->Load(Settings.ogg_path);
-        bgMusic->Play();
-    }
+    bgMusic->Play();
+
     ResumeGui();
 
 
@@ -324,6 +319,8 @@ int MainMenu(int menu) {
 
 	CloseXMLDatabase();
     NewTitles::DestroyInstance();
+	CFG_Cleanup();
+
     if (strcmp(headlessID,"")!=0)//the GUIthread was never started, so it cant be ended and joined properly if headless mode was used.  so we resume it and close it.
         ResumeGui();
 	ExitGUIThreads();

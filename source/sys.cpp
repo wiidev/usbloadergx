@@ -316,47 +316,19 @@ s32 CheckForCIOS()
 		}
 	}
 
-    //Needed for Settings load of HDD
-    printf("\n\tReloading ios 222...");
-    ret = IOS_ReloadIOSsafe(222);
-	printf("%d", ret);
-
-    if (ret < 0)
-    {
-		printf("\n\tIOS 222 failed, reloading ios 249...");
-        ret = IOS_ReloadIOSsafe(249);
-		printf("%d", ret);
-		if (ret < 0) {
-			printf("\n\tIOS 222 failed, reloading ios 250...");
-			ret = IOS_ReloadIOSsafe(250);
-			printf("%d", ret);
-            if (ret < 0) {
-                printf("\n\tERROR: cIOS could not be loaded!\n");
-                sleep(5);
-                SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
-            }
-		}
-    }
-    else
-    {
-        SDCard_Init();
-        //only for 222 loading ehc modules
-        printf("\n\tLoad ehc module");
-        load_ehc_module();
-        SDCard_deInit();
-    }
-
     return ret;
 }
 
 int LoadAppCIOS()
 {
     s32 ret = 1;
-    bool IOS_Reloaded = false;
     /* Load Custom IOS */
     SDCard_deInit();// unmount SD for reloading IOS
     USBDevice_deInit();// unmount USB for reloading IOS
     USBStorage_Deinit();
+
+    //this is needed otherwise IOS_Reload fails
+    IOS_ReloadIOSsafe(249);
 
     if (Settings.cios == ios222 && IOS_GetVersion() != 222)
     {
@@ -368,7 +340,6 @@ int LoadAppCIOS()
             Settings.cios = ios249;
             IOS_ReloadIOSsafe(249);
         }
-        IOS_Reloaded = true;
     }
 
     if ((Settings.cios == ios249  && IOS_GetVersion() != 249)
@@ -381,11 +352,10 @@ int LoadAppCIOS()
             Settings.cios = ios222;
             ret = IOS_ReloadIOSsafe(222);
         }
-        IOS_Reloaded = true;
 	}
 
     SDCard_Init();
-    if(IOS_GetVersion() == 222 && IOS_Reloaded)
+    if(IOS_GetVersion() == 222)
         load_ehc_module();
 
     USBDevice_Init();
