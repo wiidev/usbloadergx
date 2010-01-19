@@ -208,7 +208,7 @@ void Menu_DrawImg(f32 xpos, f32 ypos, f32 zpos, u16 width, u16 height, u8 data[]
 	height*=.5;
 	guMtxIdentity (m1);
 	guMtxScaleApply(m1,m1,scaleX,scaleY,1.0);
-	Vector axis = (Vector) {0 , 0, 1 };
+	guVector axis = (guVector) {0 , 0, 1 };
 	guMtxRotAxisDeg (m2, &axis, degrees);
 	guMtxConcat(m1,m2,m);
 
