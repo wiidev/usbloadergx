@@ -12,7 +12,11 @@
 #include "filelist.h"
 #include "sys.h"
 #include "gct.h"
-#include "../menu/menus.h"
+
+/*** Extern functions ***/
+extern void ResumeGui();
+extern void HaltGui();
+
 /*** Extern variables ***/
 extern GuiWindow * mainWindow;
 

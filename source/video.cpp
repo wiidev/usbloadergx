@@ -22,19 +22,43 @@
 
 #define DEFAULT_FIFO_SIZE 256 * 1024
 static unsigned int *xfb[2] = { NULL, NULL }; // Double buffered
-static unsigned int *xfbTxt = NULL;
 static int whichfb = 0; // Switch
 static GXRModeObj *vmode; // Menu video mode
 static unsigned char gp_fifo[DEFAULT_FIFO_SIZE] ATTRIBUTE_ALIGN (32);
 static Mtx GXmodelView2D;
 int screenheight;
 int screenwidth;
-
-extern bool textVideoInit;
-extern bool geckoinit;
+u32 frameCount = 0;
 
 u8 * gameScreenTex = NULL; // a GX texture screen capture of the game
 u8 * gameScreenTex2 = NULL; // a GX texture screen capture of the game (copy)
+
+/****************************************************************************
+ * UpdatePadsCB
+ *
+ * called by postRetraceCallback in InitGCVideo - scans gcpad and wpad
+ ***************************************************************************/
+static void
+UpdatePadsCB () {
+    frameCount++;
+    WPAD_ScanPads();
+    PAD_ScanPads();
+
+    for (int i=3; i >= 0; i--) {
+        memcpy(&userInput[i].wpad, WPAD_Data(i), sizeof(WPADData));
+
+        userInput[i].chan = i;
+        userInput[i].pad.btns_d = PAD_ButtonsDown(i);
+        userInput[i].pad.btns_u = PAD_ButtonsUp(i);
+        userInput[i].pad.btns_h = PAD_ButtonsHeld(i);
+        userInput[i].pad.stickX = PAD_StickX(i);
+        userInput[i].pad.stickY = PAD_StickY(i);
+        userInput[i].pad.substickX = PAD_SubStickX(i);
+        userInput[i].pad.substickY = PAD_SubStickY(i);
+        userInput[i].pad.triggerL = PAD_TriggerL(i);
+        userInput[i].pad.triggerR = PAD_TriggerR(i);
+    }
+}
 
 /****************************************************************************
  * StartGX
@@ -174,45 +198,6 @@ InitVideo () {
     ResetVideo_Menu();
     // Finally, the video is up and ready for use :)
 }
-
-void InitTextVideo ()
-{
-    gprintf("\nInitTextVideo ()");
-    if (textVideoInit)
-    {
-        gprintf("...0");
-        return;
-    }
-
-    VIDEO_Init();
-	GXRModeObj *vmode = VIDEO_GetPreferredMode(NULL); // get default video mode
-
-    // widescreen fix
-    VIDEO_Configure (vmode);
-
-    // Allocate the video buffers
-    xfbTxt = (u32 *) MEM_K0_TO_K1 (SYS_AllocateFramebuffer (vmode));
-
-    // A console is always useful while debugging
-    console_init (xfbTxt, 20, 64, vmode->fbWidth, vmode->xfbHeight, vmode->fbWidth * 2);
-
-    // Clear framebuffers etc.
-    VIDEO_ClearFrameBuffer (vmode, xfbTxt, COLOR_BLACK);
-    VIDEO_SetNextFramebuffer (xfbTxt);
-
-    VIDEO_SetBlack (FALSE);
-    VIDEO_Flush ();
-    VIDEO_WaitVSync ();
-    if (vmode->viTVMode & VI_NON_INTERLACE)
-        VIDEO_WaitVSync ();
-
-	//send console output to the gecko
-	if (geckoinit)CON_EnableGecko(1, true);
-	textVideoInit = true;
-	gprintf("...1");
-
-}
-
 static unsigned int *xfbDB = NULL;
 
 void InitVideodebug () {
@@ -256,8 +241,8 @@ void StopGX() {
  *
  * Renders everything current sent to GX, and flushes video
  ***************************************************************************/
-void Menu_Render()
-{
+void Menu_Render() {
+
     whichfb ^= 1; // flip framebuffer
     GX_SetZMode(GX_TRUE, GX_LEQUAL, GX_TRUE);
     GX_SetColorUpdate(GX_TRUE);
@@ -507,13 +492,6 @@ void Menu_DrawTPLImg(f32 xpos, f32 ypos, f32 zpos, f32 width, f32 height, GXTexO
  ***************************************************************************/
 s32 TakeScreenshot(const char *path)
 {
-    //check if it is possible to write
-    FILE *f = fopen(path, "wb");
-    if(!f)
-        return -1;
-    else
-        fclose(f);
-
     gprintf("\nTakeScreenshot(%s)", path);
     IMGCTX ctx = PNGU_SelectImageFromDevice (path);
     s32 ret = PNGU_EncodeFromYCbYCr(ctx,vmode->fbWidth, vmode->efbHeight,xfb[whichfb],0);
@@ -521,4 +499,3 @@ s32 TakeScreenshot(const char *path)
     gprintf(":%d", ret);
 	return 1;
 }
-

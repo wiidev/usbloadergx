@@ -19,7 +19,6 @@
 #include "homebrewboot/BootHomebrew.h"
 #include "network/networkops.h"
 #include "menu.h"
-#include "menu/menus.h"
 #include "filelist.h"
 #include "sys.h"
 #include "network/http.h"
@@ -29,13 +28,19 @@
 #include "unzip/miniunz.h"
 #include "usbloader/utils.h"
 
-#include "../menu/menus.h"
+/*** Extern functions ***/
+extern void ResumeGui();
+extern void HaltGui();
 
 /*** Extern variables ***/
+extern GuiWindow * mainWindow;
+extern GuiSound * bgMusic;
 extern GuiImage * bgImg;
 extern u32 infilesize;
 extern u32 uncfilesize;
 extern char wiiloadVersion[2];
+extern u8 shutdown;
+extern u8 reset;
 extern struct SSettings Settings;
 extern void *innetbuffer;
 
@@ -726,6 +731,11 @@ int MenuHomebrewBrowse() {
                 MainButton4.ResetState();
             }
 
+            else if (shutdown == 1)
+                Sys_Shutdown();
+            else if (reset == 1)
+                Sys_Reboot();
+
             else if (backBtn.GetState() == STATE_CLICKED) {
                 menu = MENU_DISCLIST;
                 changed = true;
@@ -824,29 +834,29 @@ int MenuHomebrewBrowse() {
 
                             read += result;
                         }
-
+						
 						char filename[101];
 						if (!error) {
-
+						
 							network_read((u8*) &filename, 100);
-
+							
 							// Do we need to unzip this thing?
 							if (wiiloadVersion[0] > 0 || wiiloadVersion[1] > 4) {
 
 								// We need to unzip...
 								if (temp[0] == 'P' && temp[1] == 'K' && temp[2] == 0x03 && temp[3] == 0x04) {
 									// It's a zip file, unzip to the apps directory
-
+									
 									// Zip archive, ask for permission to install the zip
 									char zippath[255];
 									sprintf((char *) &zippath, "%s%s", Settings.homebrewapps_path, filename);
-
+									
 									FILE *fp = fopen(zippath, "wb");
 									if (fp != NULL)
 									{
 										fwrite(temp, 1, infilesize, fp);
 										fclose(fp);
-
+										
 										// Now unzip the zip file...
 										unzFile uf = unzOpen(zippath);
 										if (uf==NULL) {
@@ -854,9 +864,9 @@ int MenuHomebrewBrowse() {
 										} else {
 											extractZip(uf,0,1,0, Settings.homebrewapps_path);
 											unzCloseCurrentFile(uf);
-
+											
 											remove(zippath);
-
+											
 											// Reload this menu here...
 											menu = MENU_HOMEBREWBROWSE;
 											break;
@@ -870,17 +880,17 @@ int MenuHomebrewBrowse() {
 									uLongf f = uncfilesize;
 									error = uncompress(unc, &f, temp, infilesize) != Z_OK;
 									uncfilesize = f;
-
+									
 									free(temp);
 									temp = unc;
 								}
 							}
-
+							
 							if (!error && strstr(filename,".zip") == NULL) {
 								innetbuffer = temp;
 							}
 						}
-
+						
                         ProgressStop();
 
                         if (error || read != infilesize) {

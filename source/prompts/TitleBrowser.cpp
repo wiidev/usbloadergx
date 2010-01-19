@@ -20,7 +20,6 @@
 #include "settings/cfg.h"
 #include "sys.h"
 #include "menu.h"
-#include "../menu/menus.h"
 #include "audio.h"
 #include "wad/wad.h"
 #include "xml/xml.h"
@@ -38,8 +37,14 @@ u32 titleCnt;
 extern struct discHdr * gameList;
 extern u32 gameCnt;
 
+/*** Extern functions ***/
+extern void ResumeGui();
+extern void HaltGui();
+
 /*** Extern variables ***/
 extern GuiWindow * mainWindow;
+extern u8 shutdown;
+extern u8 reset;
 extern u32 infilesize;
 extern wchar_t *gameFilter;
 
@@ -118,7 +123,7 @@ int TitleBrowser(u32 type) {
 		char line[200];
 		char tmp[50];
 		snprintf(tmp,50," ");
-
+		
 		//check if the content.bin is on the SD card for that game
 		//if there is content.bin,then the game is on the SDmenu and not the wii
 		sprintf(line,"SD:/private/wii/title/%s/content.bin",text);
@@ -290,8 +295,16 @@ int TitleBrowser(u32 type) {
     wifiBtn.SetAlpha(80);
     wifiBtn.SetTrigger(&trigA);
 
+    GuiTrigger trigZ;
+    trigZ.SetButtonOnlyTrigger(-1, WPAD_NUNCHUK_BUTTON_Z | WPAD_CLASSIC_BUTTON_ZL, PAD_TRIGGER_Z);
+
+    GuiButton screenShotBtn(0,0);
+    screenShotBtn.SetPosition(0,0);
+    screenShotBtn.SetTrigger(&trigZ);
+
     HaltGui();
     GuiWindow w(screenwidth, screenheight);
+    w.Append(&screenShotBtn);
     w.Append(&settingsbackgroundbtn);
     w.Append(&titleTxt);
     w.Append(&cancelBtn);
@@ -307,7 +320,12 @@ int TitleBrowser(u32 type) {
     while (!exit) {
         VIDEO_WaitVSync();
 
-        if (wifiBtn.GetState() == STATE_CLICKED) {
+        if (shutdown == 1)
+            Sys_Shutdown();
+        if (reset == 1)
+            Sys_Reboot();
+
+        else if (wifiBtn.GetState() == STATE_CLICKED) {
 
                 ResumeNetworkWait();
                 wifiBtn.ResetState();
@@ -400,7 +418,7 @@ int TitleBrowser(u32 type) {
                 char temp[50];
                 char filepath[100];
 				u32 read = 0;
-
+				
 				//make sure there is a folder for this to be saved in
 				struct stat st;
                 snprintf(filepath, sizeof(filepath), "%s/wad/", bootDevice);
@@ -410,7 +428,7 @@ int TitleBrowser(u32 type) {
 						}
 					}
 				snprintf(filepath, sizeof(filepath), "%s/wad/tmp.tmp", bootDevice);
-
+				
 
                 if (infilesize < MB_SIZE)
                     snprintf(filesizetxt, sizeof(filesizetxt), tr("Incoming file %0.2fKB"), infilesize/KB_SIZE);
@@ -494,9 +512,9 @@ int TitleBrowser(u32 type) {
 										w.Remove(&wifiBtn);
 										w.Remove(&optionBrowser3);
 										ResumeGui();
-
+										
 										Wad_Install(file);
-
+										
 										HaltGui();
 										w.Append(&titleTxt);
 										w.Append(&cancelBtn);
@@ -529,6 +547,12 @@ int TitleBrowser(u32 type) {
             exit = true;
             ret = -10;
         }
+	else if (screenShotBtn.GetState() == STATE_CLICKED) {
+			gprintf("\n\tscreenShotBtn clicked");
+			screenShotBtn.ResetState();
+			ScreenShot();
+			gprintf("...It's easy, mmmmmmKay");
+		    }
     }
 
     CloseConnection();

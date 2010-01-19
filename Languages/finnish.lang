@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-08 10:44+0100\n"
+"POT-Creation-Date: 2009-12-29 03:43+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: c64rmx\n"
 "Language-Team: \n"
@@ -182,8 +182,14 @@ msgstr "Takaisin HBC:hen tai Wii Menuun"
 msgid "Back to Loader"
 msgstr "HBC"
 
+msgid "Back to Wii Menu"
+msgstr "Takaisin Wii Menuun"
+
 msgid "Backgroundmusic"
 msgstr "Taustamusiikki"
+
+msgid "Backgroundmusic Path changed."
+msgstr "Taustamusiikin polku muutettu"
 
 msgid "Big thanks to:"
 msgstr "Isot kiitokset:"
@@ -214,9 +220,6 @@ msgstr "Ei voida poistaa:"
 
 msgid "Cancel"
 msgstr "Peruuta"
-
-msgid "Change Play Path"
-msgstr ""
 
 msgid "Channels"
 msgstr ""
@@ -284,6 +287,9 @@ msgstr "GCT tiedostoa ei voitu luoda"
 
 msgid "Could not find a WBFS partition."
 msgstr "WBFS osiota ei löytynyt."
+
+msgid "Could not initialize DIP module!"
+msgstr "DIP Moduulia ei voitu alustaa!"
 
 msgid "Could not initialize network!"
 msgstr "Verkkoon ei voitu yhdistää!"
@@ -414,6 +420,9 @@ msgstr ""
 msgid "Do you want to format:"
 msgstr "Haluatko formatoida:"
 
+msgid "Do you want to retry for 30 secs?"
+msgstr "Haluatko odottaa 30 sekuntia?"
+
 msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "Haluatko käyttää vaihtoehtoista DOL tiedostoa jonka tiedetään toimivan?"
 
@@ -524,6 +533,9 @@ msgstr "Käännä-X"
 
 msgid "Force"
 msgstr "Pakota"
+
+msgid "Format"
+msgstr "Formatoi"
 
 msgid "Formatting, please wait..."
 msgstr "Formatoi, odota..."
@@ -762,9 +774,6 @@ msgstr "Todennäköisesti sisältää ulottuvuuksia jotka eivät ole jaollisia n
 msgid "Mount DVD drive"
 msgstr ""
 
-msgid "Music Loop Mode"
-msgstr ""
-
 msgid "Music Volume"
 msgstr "Voimakkuus"
 
@@ -797,6 +806,15 @@ msgstr "Ei suosikkeja"
 
 msgid "No SD-Card inserted!"
 msgstr "SD-korttia ei ole asetettu wiihin!"
+
+msgid "No USB Device"
+msgstr "Ei USB-laitetta"
+
+msgid "No USB Device found."
+msgstr "USB-laitetta ei löytynyt."
+
+msgid "No WBFS or FAT/NTFS partition found"
+msgstr ""
 
 msgid "No cheats were selected"
 msgstr ""
@@ -876,9 +894,6 @@ msgstr ""
 msgid "Partition"
 msgstr "Osio"
 
-msgid "Partition Format Menu"
-msgstr ""
-
 msgid "Password"
 msgstr "Salasana"
 
@@ -899,15 +914,6 @@ msgstr "Valitse listasta"
 
 msgid "Play Count"
 msgstr "Pelauksen määrä"
-
-msgid "Play Next"
-msgstr ""
-
-msgid "Play Previous"
-msgstr ""
-
-msgid "Playing Music:"
-msgstr ""
 
 msgid "Please wait..."
 msgstr ""
@@ -942,14 +948,8 @@ msgstr "Uudelleenlataa SD"
 msgid "Rename Game on WBFS"
 msgstr "Uudelleennimeä peli"
 
-msgid "Reset BG Music"
-msgstr ""
-
 msgid "Reset Playcounter"
 msgstr "Resetoi pelauksen määrä"
-
-msgid "Reset to standard BGM?"
-msgstr ""
 
 msgid "Restarting..."
 msgstr "Boottaa..."
@@ -987,6 +987,9 @@ msgstr ""
 msgid "Screensaver"
 msgstr "Näytönsäästäjä"
 
+msgid "Select"
+msgstr ""
+
 msgid "Select a DOL"
 msgstr "Valitse DOL"
 
@@ -998,6 +1001,9 @@ msgstr "syys"
 
 msgid "Set Search-Filter"
 msgstr ""
+
+msgid "Set as backgroundmusic?"
+msgstr "Aseta taustamusiikiksi?"
 
 msgid "Settings"
 msgstr "Asetukset"
@@ -1114,6 +1120,9 @@ msgstr "Vinkit"
 msgid "Transfer failed."
 msgstr ""
 
+msgid "USB Device not found"
+msgstr "USB-laitetta ei löytynyt"
+
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX on suojattu."
 
@@ -1141,9 +1150,6 @@ msgstr ""
 
 msgid "Unlock console to use this option."
 msgstr "Avaa konsoli käyttääksesi tätä vaihtoehtoa"
-
-msgid "Unlock the app first."
-msgstr ""
 
 msgid "Unlocked"
 msgstr "Avattu"
@@ -1209,6 +1215,9 @@ msgstr ""
 msgid "WIP Patches Path changed"
 msgstr ""
 
+msgid "Waiting for USB Device"
+msgstr "Odottaa USB-laitetta..."
+
 msgid "Waiting..."
 msgstr "Odottaa..."
 
@@ -1254,14 +1263,14 @@ msgstr "Olet valinnut näyttääksesi suosikit mutta sinulla ei ole valittuna yh
 msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
 msgstr ""
 
-msgid "You can't access this menu!"
-msgstr ""
-
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr ""
 
 msgid "You have attempted to load a bad image"
 msgstr "Yritit ladata huonoa levykuvaa"
+
+msgid "You need to select or format a partition"
+msgstr ""
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
@@ -1333,41 +1342,11 @@ msgstr "josta"
 msgid "seconds left"
 msgstr "sekuntia jäljellä"
 
-msgid "Backgroundmusic Path changed."
-msgstr "Taustamusiikin polku muutettu"
+#~ msgid "Exit USB Loader GX?"
+#~ msgstr "Poistu USB Loader GX:stä?"
 
-msgid "Set as backgroundmusic?"
-msgstr "Aseta taustamusiikiksi?"
+#~ msgid "No WBFS partition found"
+#~ msgstr "Ei WBFS-osioita löytynyt"
 
-msgid "Back to Wii Menu"
-msgstr "Takaisin Wii Menuun"
-
-msgid "Could not initialize DIP module!"
-msgstr "DIP Moduulia ei voitu alustaa!"
-
-msgid "Do you want to retry for 30 secs?"
-msgstr "Haluatko odottaa 30 sekuntia?"
-
-msgid "Format"
-msgstr "Formatoi"
-
-msgid "No USB Device"
-msgstr "Ei USB-laitetta"
-
-msgid "No USB Device found."
-msgstr "USB-laitetta ei löytynyt."
-
-msgid "USB Device not found"
-msgstr "USB-laitetta ei löytynyt"
-
-msgid "Waiting for USB Device"
-msgstr "Odottaa USB-laitetta..."
-
-msgid "Exit USB Loader GX?"
-msgstr "Poistu USB Loader GX:stä?"
-
-msgid "No WBFS partition found"
-msgstr "Ei WBFS-osioita löytynyt"
-
-msgid "You need to format a partition"
-msgstr "Sinun täytyy formatoida osio"
+#~ msgid "You need to format a partition"
+#~ msgstr "Sinun täytyy formatoida osio"

@@ -9,7 +9,6 @@
 
 #include "../prompts/TitleBrowser.h"
 
-#include "../gecko.h"
 #include "wad/wad.h"
 #include "xml/xml.h"
 #include "../wad/title.h"
@@ -51,9 +50,9 @@ static inline int wcsnicmp(const wchar_t *s1, const wchar_t *s2, int len)
 		if (*s1++ == 0)
 			break;
     } while (--len != 0);
-
+	
 	return (0);
-}
+} 
 
 
 /****************************************************************************
@@ -132,7 +131,7 @@ int __Menu_GetPrevFilter(int t, wchar_t* gameFilter, u32 gameFiltered, wchar_t *
 	struct discHdr *buffer = NULL;
 	u32 cnt, len, i;
 	s32 ret;
-
+	
 	wchar_t *new_gameFilterPrev = wcsdup_new(gameFilter);
 
 
@@ -183,8 +182,8 @@ int __Menu_GetPrevFilter(int t, wchar_t* gameFilter, u32 gameFiltered, wchar_t *
 		{
 			// Check game rating in WiiTDB, since the default Wii parental control setting is enabled
 			s32 rating = GetRatingForGame((char *) header->id);
-
-			if ((rating != -1 && rating > Settings.parental.rating) ||
+		
+			if ((rating != -1 && rating > Settings.parental.rating) || 
 			    (rating == -1 && get_pegi_block(header) > Settings.parental.rating))
 			{
 				continue;
@@ -194,7 +193,7 @@ int __Menu_GetPrevFilter(int t, wchar_t* gameFilter, u32 gameFiltered, wchar_t *
 		wchar_t *wname = FreeTypeGX::charToWideChar(get_title(header));
 		if(wname) nameList.push_back(wname);
 	}
-
+	
 	NewTitles::Instance()->Save();
 
 	/* delete buffer */
@@ -226,7 +225,7 @@ int __Menu_GetPrevFilter(int t, wchar_t* gameFilter, u32 gameFiltered, wchar_t *
 /****************************************************************************
  * Get GameFilter NextList
  ***************************************************************************/
-
+ 
 int int_cmp(const void *a, const void *b) { return *((u32*)a)-*((u32*)b); }
 
 int __Menu_GetGameFilter_NextList(discHdr *gameList, u32 gameCnt, wchar_t **PgameFilter, wchar_t **PgameFilterNextList)
@@ -249,15 +248,15 @@ int __Menu_GetGameFilter_NextList(discHdr *gameList, u32 gameCnt, wchar_t **Pgam
 		}
 		else if(wcslen(gameName) == filter_len)
 			autofill = false; // no autofill when gameNameLen == filterLen
-
+			
 		nextList[i] = nextFilterChar;
 	}
 	qsort(nextList, gameCnt, sizeof(u32), int_cmp);
-
+	
 	*PgameFilterNextList = new wchar_t[gameCnt+1];
 	if(*PgameFilterNextList == NULL) goto error;
-
-
+	
+	
 	p = *PgameFilterNextList;
 	lastChar = 0;
 	for(i=0; i<gameCnt; i++)
@@ -275,14 +274,14 @@ int __Menu_GetGameFilter_NextList(discHdr *gameList, u32 gameCnt, wchar_t **Pgam
 	{
 		wchar_t *newFilter = new wchar_t[filter_len + 2];
 		if(newFilter == NULL) goto error;
-
+		
 		wcscpy(newFilter, *PgameFilter);
 		wcscat(newFilter, *PgameFilterNextList);
 		delete [] *PgameFilter; *PgameFilter = newFilter;
 		delete [] *PgameFilterNextList; *PgameFilterNextList = NULL;
 		return __Menu_GetGameFilter_NextList(gameList, gameCnt, PgameFilter, PgameFilterNextList);
 	}
-
+	
 	return 0;
 error:
 	if(nextList) delete [] nextList;
@@ -307,7 +306,7 @@ int buildTitleList(int t, wchar_t* gameFilter, discHdr ** PgameList, u32 *PgameC
 
     ret = getTitles_TypeCount(typei, &num_titles);
     if (ret < 0) {
-    	return -1;
+    	return -1; 
     }
 
     ret = getTitles_Type(typei, titles, num_titles);
@@ -332,7 +331,7 @@ int buildTitleList(int t, wchar_t* gameFilter, discHdr ** PgameList, u32 *PgameC
         return -1;
 
     memset(buffer, 0, len);
-
+	
 	sprintf(path,"%s/config/database.txt",bootDevice);
     f = fopen(path, "r");
 
@@ -343,20 +342,20 @@ int buildTitleList(int t, wchar_t* gameFilter, discHdr ** PgameList, u32 *PgameC
         char text[15];
         strcpy(name,"");//make sure name is empty
         u8 found=0;
-
+        
 		sprintf(text, "%s", titleText(i<num_titles?typei:0x00010002, i<num_titles?titles[i]:sys_titles[i-num_titles]));
 
-
+        
 		char line[200];
         char tmp[50];
         snprintf(tmp,50," ");
-
+        
 		//check if the content.bin is on the SD card for that game
 		//if there is content.bin,then the game is on the SDmenu and not the wii
 		sprintf(line,"SD:/private/wii/title/%s/content.bin",text);
 		if (!checkfile(line))
 			{
-
+			
 				struct discHdr *header = &buffer[i];
 				if (f) {
 					while (fgets(line, sizeof(line), f)) {
@@ -394,7 +393,7 @@ int buildTitleList(int t, wchar_t* gameFilter, discHdr ** PgameList, u32 *PgameC
 				header->id[4]='1';
 				header->id[5]=(i<num_titles?'1':'2');
 				//header->
-
+				
 //not using these filters right now, but i left them in just in case
 		// Filters
 		/*if (Settings.fave) {
@@ -402,32 +401,32 @@ int buildTitleList(int t, wchar_t* gameFilter, discHdr ** PgameList, u32 *PgameC
 			if (!game_num || game_num->favorite==0)
 				continue;
 		}
-
+		
 		if (Settings.parentalcontrol && !Settings.godmode) {
 			if (get_block(header) >= Settings.parentalcontrol)
 				continue;
 		}*/
-
-        if(gameFilter && *gameFilter) {
+		
+		if(gameFilter && *gameFilter) {
 			u32 filter_len = wcslen(gameFilter);
 			wchar_t *gameName = FreeTypeGX::charToWideChar(get_title(header));
 			if (!gameName || wcsnicmp(gameName, gameFilter, filter_len)) {
 				delete [] gameName;
 				continue;
-            }
-        }
+			}
+		}
 		if(i != cnt2)
 			buffer[cnt2] = buffer[i];
 		cnt2++;
 				}
         i++;
     }
-
+	
 	if (f)fclose(f);
 
     Uninstall_FromTitle(TITLE_ID(1, 0));
     ISFS_Deinitialize();
-
+	
 	if(cnt > cnt2)
 	{
 		cnt = cnt2;
@@ -435,7 +434,7 @@ int buildTitleList(int t, wchar_t* gameFilter, discHdr ** PgameList, u32 *PgameC
 	}
 	if (!buffer)
 		return -1;
-
+	
 	if (Settings.sort==pcount) {
 		qsort(buffer, cnt, sizeof(struct discHdr), __Menu_EntryCmpCount);
 	} else if (Settings.fave) {
@@ -446,12 +445,12 @@ int buildTitleList(int t, wchar_t* gameFilter, discHdr ** PgameList, u32 *PgameC
 	/*PgameList = buffer;
 	buffer = NULL;
 	PgameCnt  = cnt;*/
-
+	
 	if(PgameList) *PgameList = buffer; else free(buffer);
 	if(PgameCnt) *PgameCnt  = cnt;
-
+ 
     return 0;
-
+ 
     return cnt;
 }
 
@@ -470,7 +469,7 @@ int __Menu_GetGameList(int t, wchar_t* gameFilter, discHdr ** PgameList, u32 *Pg
     ret = WBFS_GetCount(&cnt);
     if (ret < 0)
         return ret;
-//gprintf("\n WBFS_GetCount:%d",cnt);
+
     /* Buffer length */
     len = sizeof(struct discHdr) * cnt;
 
@@ -488,7 +487,7 @@ int __Menu_GetGameList(int t, wchar_t* gameFilter, discHdr ** PgameList, u32 *Pg
         if (buffer) free(buffer);
         return ret;
     }
-
+	
     for (u32 i = 0; i < cnt; i++) {
 		struct discHdr *header = &buffer[i];
 
@@ -507,7 +506,7 @@ int __Menu_GetGameList(int t, wchar_t* gameFilter, discHdr ** PgameList, u32 *Pg
                     header->id[2]=='C'&&header->id[3]=='F'&&
                     header->id[4]=='G'&&header->id[5]=='_')
                     continue;
-
+		
 		if (Settings.parentalcontrol && !Settings.godmode && t==0) {
 			if (get_block(header) >= Settings.parentalcontrol)
 				continue;
@@ -518,13 +517,13 @@ int __Menu_GetGameList(int t, wchar_t* gameFilter, discHdr ** PgameList, u32 *Pg
 		{
 			// Check game rating in WiiTDB, since the default Wii parental control setting is enabled
 			s32 rating = GetRatingForGame((char *) header->id);
-			if ((rating != -1 && rating > Settings.parental.rating) ||
+			if ((rating != -1 && rating > Settings.parental.rating) || 
 			    (rating == -1 && get_pegi_block(header) > Settings.parental.rating))
 			{
 				continue;
 			}
 		}
-
+		
 		if(gameFilter && *gameFilter && t==0) {
 			u32 filter_len = wcslen(gameFilter);
 			wchar_t *gameName = FreeTypeGX::charToWideChar(get_title(header));
@@ -538,7 +537,7 @@ int __Menu_GetGameList(int t, wchar_t* gameFilter, discHdr ** PgameList, u32 *Pg
 		cnt2++;
 	}
 	NewTitles::Instance()->Save();
-
+	
 	if(cnt > cnt2)
 	{
 		cnt = cnt2;
@@ -546,7 +545,7 @@ int __Menu_GetGameList(int t, wchar_t* gameFilter, discHdr ** PgameList, u32 *Pg
 	}
 	if (!buffer)
 		return -1;
-
+			
 	if (Settings.sort==pcount) {
 		qsort(buffer, cnt, sizeof(struct discHdr), __Menu_EntryCmpCount);
 	} else if (Settings.fave) {
@@ -558,18 +557,18 @@ int __Menu_GetGameList(int t, wchar_t* gameFilter, discHdr ** PgameList, u32 *Pg
 	/* Set values */
 	if(PgameList) *PgameList = buffer; else free(buffer);
 	if(PgameCnt) *PgameCnt  = cnt;
-
+ 
     return 0;
 }
 
 int __Menu_GetEntries(int t, const wchar_t* Filter) {
-//gprintf("\n__Menu_GetEntries()");
+
 	/*if (mountMethod==3)
-	{
+	{	
 		return buildTitleList();
 	}*/
-
-
+	
+	
 	u32				 new_gameCnt			= 0;
 	struct discHdr	*new_gameList			= NULL;
 	wchar_t 		*new_gameFilter			= NULL;
@@ -577,51 +576,32 @@ int __Menu_GetEntries(int t, const wchar_t* Filter) {
 	wchar_t			*new_gameFilterPrev		= NULL;
 
 	new_gameFilter = wcsdup_new(Filter ? Filter : (gameFilter ? gameFilter : L"") );
-        if(new_gameFilter == NULL)
-        {
-            //gprintf("\nnew_gameFilter == NULL");
-            return -1;
-        }
-
+	if(new_gameFilter == NULL) return -1;
+	
 	for(;;)
 	{
 		if (mountMethod==3)
-        {
-            int butt =buildTitleList(t, new_gameFilter, &new_gameList, &new_gameCnt);
-            if (butt < 0)
-            {
-                gprintf("\nbutt:%d", butt);
-                return -1;
-            }
-        }
-
-		else
-                {
-                    if(__Menu_GetGameList(t, new_gameFilter, &new_gameList, &new_gameCnt) < 0)
-                    {
-                        gprintf("\n__Menu_GetGameList(t, new_gameFilter, &new_gameList, &new_gameCnt) < 0");
-                        return -1;
-                    }
-                }
-
-
+		{if(buildTitleList(t, new_gameFilter, &new_gameList, &new_gameCnt) < 0)
+			return -1;}
+			
+		else 
+		{if(__Menu_GetGameList(t, new_gameFilter, &new_gameList, &new_gameCnt) < 0)
+			return -1;}
+			
+			
 		if(new_gameCnt > 0 || new_gameFilter[0] == 0)
-                {
-                    //gprintf("\nnew_gameCnt:%d",new_gameCnt);
 			break;
-                    }
 		new_gameFilter[wcslen(new_gameFilter)-1] = 0;
 	}
-        if (mountMethod!=3)
-        {
-                /* init GameFilterNextList */
-                if(__Menu_GetGameFilter_NextList(new_gameList, new_gameCnt, &new_gameFilter, &new_gameFilterNextList) < 0)
-                        goto error;
 
-                /* init GameFilterPrev */
-                if(__Menu_GetPrevFilter(t, new_gameFilter, new_gameCnt, &new_gameFilterPrev) < 0)
-                        goto error;
-        }
+	/* init GameFilterNextList */
+	if(__Menu_GetGameFilter_NextList(new_gameList, new_gameCnt, &new_gameFilter, &new_gameFilterNextList) < 0)
+		goto error;
+	
+	/* init GameFilterPrev */
+	if(__Menu_GetPrevFilter(t, new_gameFilter, new_gameCnt, &new_gameFilterPrev) < 0)
+		goto error;
+	
 	/* Set values */
 	if(gameList) 			free(gameList);
 	if(gameFilter)			delete [] gameFilter;
@@ -630,19 +610,14 @@ int __Menu_GetEntries(int t, const wchar_t* Filter) {
 
 	gameList			= new_gameList;
 	gameCnt				= new_gameCnt;
-        gameFilter			= new_gameFilter;
-        gameFilterNextList	= new_gameFilterNextList;
-        gameFilterPrev		= new_gameFilterPrev;
+	gameFilter			= new_gameFilter;
+	gameFilterNextList	= new_gameFilterNextList;
+	gameFilterPrev		= new_gameFilterPrev;
 
-
-        /* Reset variables */
+	/* Reset variables */
 	gameSelected = gameStart = 0;
-        //gprintf("\ncnt:%d", gameCnt);
-
-
-        return 0;
+	return 0;
 error: // clean up
-        gprintf("\nERROR");
 	if(new_gameList)			free(new_gameList);
 	if(new_gameFilter)			delete [] new_gameFilter;
 	if(new_gameFilterNextList)	delete [] new_gameFilterNextList;

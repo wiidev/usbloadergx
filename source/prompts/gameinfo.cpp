@@ -19,15 +19,21 @@
 #include "gameinfo.h"
 #include "usbloader/getentries.h"
 #include "../gecko.h"
-#include "../menu.h"
-#include "../menu/menus.h"
 
 
 /*** Extern variables ***/
+extern GuiWindow * mainWindow;
+extern GuiSound * bgMusic;
+extern u8 shutdown;
+extern u8 reset;
 extern struct gameXMLinfo gameinfo;
 extern struct gameXMLinfo gameinfo_reset;
 extern u32 gameCnt;
 extern struct discHdr * gameList;
+
+/*** Extern functions ***/
+extern void ResumeGui();
+extern void HaltGui();
 
 
 /****************************************************************************
@@ -708,7 +714,7 @@ int showGameInfo(char *ID) {
             snprintf(linebuf, sizeof(linebuf), "%s:",tr("WiFi Features"));
 		} else {
             strcpy(linebuf,"");
-        }
+        }		
 		wifiTxt[0] = new GuiText(linebuf, 16, (GXColor) {0,0,0, 255});
         wifiTxt[0]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
         wifiTxt[0]->SetPosition(205,200+wifiY);
@@ -775,6 +781,13 @@ int showGameInfo(char *ID) {
 
         gameinfoWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_IN, 100);
 
+	GuiTrigger trigZ;
+	trigZ.SetButtonOnlyTrigger(-1, WPAD_NUNCHUK_BUTTON_Z | WPAD_CLASSIC_BUTTON_ZL, PAD_TRIGGER_Z);
+
+	GuiButton screenShotBtn(0,0);
+	screenShotBtn.SetPosition(0,0);
+	screenShotBtn.SetTrigger(&trigZ);
+	gameinfoWindow.Append(&screenShotBtn);
         HaltGui();
         //mainWindow->SetState(STATE_DISABLED);
         mainWindow->Append(&gameinfoWindow);
@@ -786,8 +799,13 @@ int showGameInfo(char *ID) {
         while (choice == -1) {
 
             VIDEO_WaitVSync();
+            if (shutdown == 1) {
+                wiilight(0);
+                Sys_Shutdown();
+            } else if (reset == 1)
+                Sys_Reboot();
 
-            if ((backBtn.GetState()==STATE_CLICKED)||(backBtn.GetState()==STATE_HELD)) {
+            else if ((backBtn.GetState()==STATE_CLICKED)||(backBtn.GetState()==STATE_HELD)) {
 				backBtn.ResetState();
                 if (page==1) {
                     choice=1;
@@ -798,11 +816,13 @@ int showGameInfo(char *ID) {
 					gameinfoWindow2.Remove(&nextBtn);
                     gameinfoWindow2.Remove(&backBtn);
 		    gameinfoWindow2.Remove(&homeBtn);
+		    gameinfoWindow2.Remove(&screenShotBtn);
 		    gameinfoWindow2.SetVisible(false);
                     gameinfoWindow.SetVisible(true);
 					gameinfoWindow.Append(&backBtn);
                     gameinfoWindow.Append(&nextBtn);
 		    gameinfoWindow.Append(&homeBtn);
+		    gameinfoWindow.Append(&screenShotBtn);
 		    mainWindow->Remove(&gameinfoWindow2);
                     ResumeGui();
                     page=1;
@@ -815,12 +835,14 @@ int showGameInfo(char *ID) {
 					gameinfoWindow.Remove(&nextBtn);
                     gameinfoWindow.Remove(&backBtn);
 		    gameinfoWindow.Remove(&homeBtn);
+		    gameinfoWindow.Remove(&screenShotBtn);
 		    gameinfoWindow.SetVisible(false);
                     gameinfoWindow2.SetVisible(true);
                     coverImg->SetPosition(15,30);
                     gameinfoWindow2.Append(&nextBtn);
                     gameinfoWindow2.Append(&backBtn);
 		    gameinfoWindow2.Append(&homeBtn);
+		    gameinfoWindow2.Append(&screenShotBtn);
 		    mainWindow->Append(&gameinfoWindow2);
                     ResumeGui();
                     page=2;
@@ -829,11 +851,13 @@ int showGameInfo(char *ID) {
 					gameinfoWindow2.Remove(&nextBtn);
                     gameinfoWindow2.Remove(&backBtn);
 		    gameinfoWindow2.Remove(&homeBtn);
+		    gameinfoWindow2.Remove(&screenShotBtn);
 		    gameinfoWindow2.SetVisible(false);
                     gameinfoWindow.SetVisible(true);
                     gameinfoWindow.Append(&backBtn);
                     gameinfoWindow.Append(&nextBtn);
 		    gameinfoWindow.Append(&homeBtn);
+		    gameinfoWindow.Append(&screenShotBtn);
 		    mainWindow->Remove(&gameinfoWindow2);
                     ResumeGui();
                     page=1;
@@ -892,6 +916,12 @@ int showGameInfo(char *ID) {
 				}
 				urlBtn.ResetState();
             }
+	    else if (screenShotBtn.GetState() == STATE_CLICKED) {
+			gprintf("\n\tscreenShotBtn clicked");
+			screenShotBtn.ResetState();
+			ScreenShot();
+			gprintf("...It's easy, mmmmmmKay");
+		    }
         }
         if (page==1) {
             gameinfoWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 100);
@@ -1073,10 +1103,10 @@ bool save_XML_URL() { // save xml url as as txt file for people without wifi
         sleep(1);
         return false;
     }
-
+	
 	char XMLurl[3540];
 	build_XML_URL(XMLurl,sizeof(XMLurl));
-
+	
     fprintf(f, "# USB Loader Has Saved this file\n");
     fprintf(f, "# This URL was created based on your list of games and language settings.\n");
     fclose(f);

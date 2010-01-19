@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-08 10:44+0100\n"
+"POT-Creation-Date: 2009-12-29 03:43+0100\n"
 "PO-Revision-Date: 2009-10-23 18:52+0200\n"
 "Last-Translator: boto12\n"
 "Language-Team: boto12\n"
@@ -182,8 +182,14 @@ msgstr "Voltar ao Loader/Menu do Wii"
 msgid "Back to Loader"
 msgstr "Loader"
 
+msgid "Back to Wii Menu"
+msgstr "Menu do Wii"
+
 msgid "Backgroundmusic"
 msgstr "Música de fundo"
+
+msgid "Backgroundmusic Path changed."
+msgstr "Pasta Música Fundo modificada"
 
 msgid "Big thanks to:"
 msgstr "Agradecimentos:"
@@ -214,9 +220,6 @@ msgstr "Não foi possível apagar:"
 
 msgid "Cancel"
 msgstr "Cancelar"
-
-msgid "Change Play Path"
-msgstr ""
 
 msgid "Channels"
 msgstr "Canais"
@@ -284,6 +287,9 @@ msgstr "Não foi possível criar o arquivo GCT"
 
 msgid "Could not find a WBFS partition."
 msgstr "Não foi encontrada nenhuma partição WBFS."
+
+msgid "Could not initialize DIP module!"
+msgstr "Não foi possível inicializar o módulo DIP!"
 
 msgid "Could not initialize network!"
 msgstr "Não foi possível incializar a Ligação de Rede!"
@@ -414,6 +420,9 @@ msgstr "Deseja baixar este tema?"
 msgid "Do you want to format:"
 msgstr "Deseja FORMATAR:"
 
+msgid "Do you want to retry for 30 secs?"
+msgstr "Deseja tentar novamente dentro de 30 segs?"
+
 msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "Deseja usar o DOL alternativo que pensa ser o correcto?"
 
@@ -524,6 +533,9 @@ msgstr "Paginação Horizontal"
 
 msgid "Force"
 msgstr "Forçar"
+
+msgid "Format"
+msgstr "Formatar"
 
 msgid "Formatting, please wait..."
 msgstr "Formatando, por favor aguarde..."
@@ -762,9 +774,6 @@ msgstr "Provável que o tamanho não seja divisível por 4."
 msgid "Mount DVD drive"
 msgstr "Carregar leitor DVD"
 
-msgid "Music Loop Mode"
-msgstr ""
-
 msgid "Music Volume"
 msgstr "Volume da Música"
 
@@ -797,6 +806,15 @@ msgstr "Lista de favoritos vazia"
 
 msgid "No SD-Card inserted!"
 msgstr "Cartão SD não inserido!"
+
+msgid "No USB Device"
+msgstr "Nenhum dispositivo USB"
+
+msgid "No USB Device found."
+msgstr "Nenhum dispositivo USB encontrado."
+
+msgid "No WBFS or FAT/NTFS partition found"
+msgstr "Nenhuma partição WBFS o FAT/NTFS encontrada"
 
 msgid "No cheats were selected"
 msgstr "Nenhuma seleção de truques"
@@ -876,9 +894,6 @@ msgstr ""
 msgid "Partition"
 msgstr "Partição"
 
-msgid "Partition Format Menu"
-msgstr ""
-
 msgid "Password"
 msgstr "Senha"
 
@@ -899,15 +914,6 @@ msgstr "Escolher da lista"
 
 msgid "Play Count"
 msgstr "Vezes jogadas"
-
-msgid "Play Next"
-msgstr ""
-
-msgid "Play Previous"
-msgstr ""
-
-msgid "Playing Music:"
-msgstr ""
 
 msgid "Please wait..."
 msgstr "Por favor aguarde..."
@@ -942,14 +948,8 @@ msgstr "Atualizar do cartão SD"
 msgid "Rename Game on WBFS"
 msgstr "Alterar nome do jogo na partição WBFS"
 
-msgid "Reset BG Music"
-msgstr ""
-
 msgid "Reset Playcounter"
 msgstr "Limpar Contagem"
-
-msgid "Reset to standard BGM?"
-msgstr ""
 
 msgid "Restarting..."
 msgstr "O Wii irá reiniciar"
@@ -987,6 +987,9 @@ msgstr "Gravado"
 msgid "Screensaver"
 msgstr "Proteção de tela"
 
+msgid "Select"
+msgstr ""
+
 msgid "Select a DOL"
 msgstr "Selecionar um DOL"
 
@@ -998,6 +1001,9 @@ msgstr "Set"
 
 msgid "Set Search-Filter"
 msgstr "Usar filtro de busca"
+
+msgid "Set as backgroundmusic?"
+msgstr "Definir como música de fundo?"
 
 msgid "Settings"
 msgstr "Configurações"
@@ -1114,6 +1120,9 @@ msgstr "Dicas"
 msgid "Transfer failed."
 msgstr "Falhou a transferencia"
 
+msgid "USB Device not found"
+msgstr "Dispositivo USB não encontrado"
+
 msgid "USB Loader GX is protected"
 msgstr "O USB Loader GX está bloqueado"
 
@@ -1141,9 +1150,6 @@ msgstr ""
 
 msgid "Unlock console to use this option."
 msgstr "Desbloquear configuração antes de usar esta opção."
-
-msgid "Unlock the app first."
-msgstr ""
 
 msgid "Unlocked"
 msgstr "Desbloqueado"
@@ -1209,6 +1215,9 @@ msgstr ""
 msgid "WIP Patches Path changed"
 msgstr ""
 
+msgid "Waiting for USB Device"
+msgstr "Aguardando pelo Dispositivo USB"
+
 msgid "Waiting..."
 msgstr "Aguardando..."
 
@@ -1254,14 +1263,14 @@ msgstr "Está tentando visualizar os favoritos, mas não existe nenhum seleciona
 msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
 msgstr ""
 
-msgid "You can't access this menu!"
-msgstr ""
-
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr ""
 
 msgid "You have attempted to load a bad image"
 msgstr "Você tentou carregar uma imagem corrompida"
+
+msgid "You need to select or format a partition"
+msgstr ""
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
@@ -1333,59 +1342,26 @@ msgstr "de"
 msgid "seconds left"
 msgstr "segundos restantes"
 
-msgid "Backgroundmusic Path changed."
-msgstr "Pasta Música Fundo modificada"
+#~ msgid "Can't decompress LZ77"
+#~ msgstr "Não foi possivel descomprimir LZ77"
 
-msgid "Set as backgroundmusic?"
-msgstr "Definir como música de fundo?"
+#~ msgid "Can't find disc"
+#~ msgstr "Disco não encontrado"
 
-msgid "Back to Wii Menu"
-msgstr "Menu do Wii"
+#~ msgid "IMD5 Header not right."
+#~ msgstr "Cabeçalho IMD5 não esta correto"
 
-msgid "Could not initialize DIP module!"
-msgstr "Não foi possível inicializar o módulo DIP!"
+#~ msgid "IMET Header wrong."
+#~ msgstr "Cabeçalho IMET errado"
 
-msgid "Do you want to retry for 30 secs?"
-msgstr "Deseja tentar novamente dentro de 30 segs?"
+#~ msgid "Exit USB Loader GX?"
+#~ msgstr "Deseja sair do USB Loader GX?"
 
-msgid "Format"
-msgstr "Formatar"
+#~ msgid "You need to format a partition"
+#~ msgstr "É necessário FORMATAR a partição"
 
-msgid "No USB Device"
-msgstr "Nenhum dispositivo USB"
+#~ msgid "Failed to extract opening.bnr"
+#~ msgstr "Falha ao extrair opening.bnr"
 
-msgid "No USB Device found."
-msgstr "Nenhum dispositivo USB encontrado."
-
-msgid "No WBFS or FAT/NTFS partition found"
-msgstr "Nenhuma partição WBFS o FAT/NTFS encontrada"
-
-msgid "USB Device not found"
-msgstr "Dispositivo USB não encontrado"
-
-msgid "Waiting for USB Device"
-msgstr "Aguardando pelo Dispositivo USB"
-
-msgid "Can't decompress LZ77"
-msgstr "Não foi possivel descomprimir LZ77"
-
-msgid "Can't find disc"
-msgstr "Disco não encontrado"
-
-msgid "IMD5 Header not right."
-msgstr "Cabeçalho IMD5 não esta correto"
-
-msgid "IMET Header wrong."
-msgstr "Cabeçalho IMET errado"
-
-msgid "Exit USB Loader GX?"
-msgstr "Deseja sair do USB Loader GX?"
-
-msgid "You need to format a partition"
-msgstr "É necessário FORMATAR a partição"
-
-msgid "Failed to extract opening.bnr"
-msgstr "Falha ao extrair opening.bnr"
-
-msgid "Homebrew Channel"
-msgstr "Canal Homebrew"
+#~ msgid "Homebrew Channel"
+#~ msgstr "Canal Homebrew"

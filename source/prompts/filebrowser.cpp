@@ -20,7 +20,6 @@
 #include <algorithm>
 
 #include "menu.h"
-#include "../menu/menus.h"
 
 #include "listfiles.h"
 #include "language/gettext.h"
@@ -28,10 +27,15 @@
 #include "libwiigui/gui.h"
 #include "sys.h"
 #include "filebrowser.h"
-#include "../menu.h"
 
 /*** Extern variables ***/
 extern GuiWindow * mainWindow;
+extern u8 shutdown;
+extern u8 reset;
+
+/*** Extern functions ***/
+extern void ResumeGui();
+extern void HaltGui();
 
 static int curDevice = -1;
 static std::vector<BROWSERINFO> browsers;
@@ -313,7 +317,7 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
 	folderBtn.SetImage(&folderImg);
 	folderBtn.SetTrigger(&trigA);
 	folderBtn.SetEffectGrow();
-
+	
 	char imgPath[100];
 	snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
 	GuiImageData btnOutline(imgPath, button_dialogue_box_png);
@@ -389,6 +393,12 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
 	while (menu == MENU_NONE) {
 		VIDEO_WaitVSync();
 
+		if (shutdown == 1)
+			Sys_Shutdown();
+
+		if (reset == 1)
+			Sys_Reboot();
+
 		for (i=0; i<FILEBROWSERSIZE; i++) {
 			if (fileBrowser.fileList[i]->GetState() == STATE_CLICKED) {
 				fileBrowser.fileList[i]->ResetState();
@@ -441,7 +451,6 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
 		}
 
 		if (ExitBtn.GetState() == STATE_CLICKED) {
-		    result = 0;
 			break;
 		}
 		else if (okBtn.GetState() == STATE_CLICKED) {
@@ -477,7 +486,7 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
 			char oldfolder[100];
 			snprintf(newfolder, sizeof(newfolder), "%s%s", browser->rootdir, browser->dir);
 			strcpy(oldfolder,newfolder);
-
+			
 			int result = OnScreenKeyboard(newfolder, sizeof(newfolder), strlen(browser->rootdir));
 			if ( result == 1 ) {
 				unsigned int len = strlen(newfolder);

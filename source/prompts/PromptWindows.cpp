@@ -23,6 +23,7 @@
 #include "fatmounter.h"
 #include "listfiles.h"
 #include "menu.h"
+#include "menu.h"
 #include "filelist.h"
 #include "sys.h"
 #include "wpad.h"
@@ -52,10 +53,15 @@ extern u32 gameCnt;
 extern s32 gameSelected, gameStart;
 extern float gamesize;
 extern struct discHdr * gameList;
+extern u8 shutdown;
+extern u8 reset;
 extern u8 mountMethod;
 extern struct discHdr *dvdheader;
 extern char game_partition[6];
-extern u8 shutdown;
+
+/*** Extern functions ***/
+extern void ResumeGui();
+extern void HaltGui();
 
 /****************************************************************************
  * OnScreenNumpad
@@ -65,9 +71,9 @@ extern u8 shutdown;
  ***************************************************************************/
 int OnScreenNumpad(char * var, u32 maxlen) {
 	int save = -1;
-
+	
 	GuiNumpad numpad(var, maxlen);
-
+	
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
 	// because destroy GuiSound must wait while sound playing is finished, we use a global sound
 	if(!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size,Settings.sfxvolume);
@@ -98,7 +104,7 @@ int OnScreenNumpad(char * var, u32 maxlen) {
     GuiButton cancelBtn(&cancelBtnImg,&cancelBtnImg, 1, 4, -5, -15, &trigA, &btnSoundOver, btnClick2,1);
     cancelBtn.SetLabel(&cancelBtnTxt);
     cancelBtn.SetTrigger(&trigB);
-
+    
     numpad.Append(&okBtn);
     numpad.Append(&cancelBtn);
 
@@ -126,7 +132,7 @@ int OnScreenNumpad(char * var, u32 maxlen) {
     mainWindow->SetState(STATE_DEFAULT);
     ResumeGui();
 	gprintf("\t%s",(save == 1?"saved":"discarded"));
-    return save;
+    return save;	
 }
 
 /****************************************************************************
@@ -690,9 +696,17 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label,
 
     }
 
+    GuiTrigger trigZ;
+    trigZ.SetButtonOnlyTrigger(-1, WPAD_NUNCHUK_BUTTON_Z | WPAD_CLASSIC_BUTTON_ZL, PAD_TRIGGER_Z);
+
+    GuiButton screenShotBtn(0,0);
+    screenShotBtn.SetPosition(0,0);
+    screenShotBtn.SetTrigger(&trigZ);
+
     promptWindow.Append(&dialogBoxImg);
     promptWindow.Append(&titleTxt);
     promptWindow.Append(&msgTxt);
+    promptWindow.Append(&screenShotBtn);
 
     if (btn1Label)
         promptWindow.Append(&btn1);
@@ -712,7 +726,12 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label,
 
     while (choice == -1) {
         VIDEO_WaitVSync();
-
+        if (shutdown == 1) {
+            wiilight(0);
+            Sys_Shutdown();
+        }
+        if (reset == 1)
+            Sys_Reboot();
         if (btn1.GetState() == STATE_CLICKED) {
             choice = 1;
         } else if (btn2.GetState() == STATE_CLICKED) {
@@ -727,7 +746,12 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label,
                 choice = 3;
         } else if (btn4.GetState() == STATE_CLICKED) {
             choice = 0;
-        }
+	} else if (screenShotBtn.GetState() == STATE_CLICKED) {
+			gprintf("\n\tscreenShotBtn clicked");
+			screenShotBtn.ResetState();
+			ScreenShot();
+			gprintf("...It's easy, mmmmmmKay");
+		    }
         if (count>0)count--;
         if (count==0) choice = 1;
     }
@@ -954,9 +978,12 @@ int WindowExitPrompt()
         }
 
 
-        if (shutdown == 1)
+        if (shutdown == 1) {
             wiilight(0);
-
+            Sys_Shutdown();
+        }
+        if (reset == 1)
+            Sys_Reboot();
         if (btn1.GetState() == STATE_CLICKED) {
             choice = 1;
             btn1.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
@@ -1111,6 +1138,12 @@ int GameWindowPrompt() {
     trigPlus.SetButtonOnlyTrigger(-1, WPAD_BUTTON_PLUS | WPAD_CLASSIC_BUTTON_PLUS, 0);
     GuiTrigger trigMinus;
     trigMinus.SetButtonOnlyTrigger(-1, WPAD_BUTTON_MINUS | WPAD_CLASSIC_BUTTON_MINUS, 0);
+    GuiTrigger trigZ;
+    trigZ.SetButtonOnlyTrigger(-1, WPAD_NUNCHUK_BUTTON_Z | WPAD_CLASSIC_BUTTON_ZL, PAD_TRIGGER_Z);
+
+    GuiButton screenShotBtn(0,0);
+    screenShotBtn.SetPosition(0,0);
+    screenShotBtn.SetTrigger(&trigZ);
 
     if (CFG.widescreen)
         snprintf(imgPath, sizeof(imgPath), "%swdialogue_box_startgame.png", CFG.theme_path);
@@ -1241,6 +1274,7 @@ int GameWindowPrompt() {
     promptWindow.Append(&dialogBoxImg);
     promptWindow.Append(&nameBtn);
     promptWindow.Append(&playcntTxt);
+    promptWindow.Append(&screenShotBtn);
     promptWindow.Append(&btn2);
 	if (!mountMethod)//stuff we don't show if it is a DVD mounted
 	{
@@ -1261,7 +1295,7 @@ int GameWindowPrompt() {
 
     promptWindow.Append(&diskImg2);
     promptWindow.Append(&btn1);
-
+	
     short changed = -1;
     GuiImageData * diskCover = NULL;
     GuiImageData * diskCover2 = NULL;
@@ -1418,6 +1452,19 @@ int GameWindowPrompt() {
 
             diskImg.SetSpin(btn1.GetState() == STATE_SELECTED);
             diskImg2.SetSpin(btn1.GetState() == STATE_SELECTED);
+            if (shutdown == 1) { //for power button
+				promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
+                mainWindow->SetState(STATE_DEFAULT);
+				while (promptWindow.GetEffect() > 0) usleep(50);
+				HaltGui();
+				mainWindow->Remove(&promptWindow);
+				ResumeGui();
+                wiilight(0);
+                Sys_Shutdown();
+            }
+
+            if (reset == 1) //for reset button
+                Sys_Reboot();
 
             if(gameSound)
             {
@@ -1497,6 +1544,12 @@ int GameWindowPrompt() {
                 }
                 btnFavorite5.ResetState();
             }
+	    else if (screenShotBtn.GetState() == STATE_CLICKED) {
+			gprintf("\n\tscreenShotBtn clicked");
+			screenShotBtn.ResetState();
+			ScreenShot();
+			gprintf("...It's easy, mmmmmmKay");
+		    }
             // this next part is long because nobody could agree on what the left/right buttons should do
             else if ((btnRight.GetState() == STATE_CLICKED) && (Settings.xflip == no)) {//next game
                 promptWindow.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 50);
@@ -2715,7 +2768,7 @@ int ProgressUpdateWindow() {
 				} else {
 					filesize = download_request("http://www.techjawa.com/usbloadergx/ULNR.file");//for some reason it didn't download completely when saved as a wad.
 				}
-
+				
                 if (filesize > 0) {
 
                     pfile = fopen(dolpath, "wb");//here we save the txt as a wad
@@ -2834,7 +2887,7 @@ int ProgressUpdateWindow() {
 
     return 1;
 }
-#else
+#else  
 int ProgressUpdateWindow() {
 
     gprintf("\nProgressUpdateWindow(not full channel)");
@@ -2998,7 +3051,7 @@ int ProgressUpdateWindow() {
                 promptWindow.Append(&progressbarOutlineImg);
                 promptWindow.Append(&prTxt);
                 msgTxt.SetTextf("%s Rev%i", tr("Update to"), newrev);
-
+				
 				s32 filesize;
 				if (Settings.beta_upgrades) {
 					char url[255];
@@ -3516,6 +3569,14 @@ HBCWindowPrompt(const char *name, const char *coder, const char *version,
     btn2.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
     btn2.SetPosition(-40, 2);
 
+    GuiTrigger trigZ;
+    trigZ.SetButtonOnlyTrigger(-1, WPAD_NUNCHUK_BUTTON_Z | WPAD_CLASSIC_BUTTON_ZL, PAD_TRIGGER_Z);
+
+    GuiButton screenShotBtn(0,0);
+    screenShotBtn.SetPosition(0,0);
+    screenShotBtn.SetTrigger(&trigZ);
+    promptWindow.Append(&screenShotBtn);
+
     promptWindow.Append(&dialogBoxImg);
     if (strcmp(long_description,""))promptWindow.Append(&whiteBoxImg);
     if (strcmp(long_description,""))promptWindow.Append(&scrollbarImg);
@@ -3542,15 +3603,23 @@ HBCWindowPrompt(const char *name, const char *coder, const char *version,
 
     while (choice == -1) {
         VIDEO_WaitVSync();
-
-        if (shutdown == 1)
+        if (shutdown == 1) {
             wiilight(0);
-
+            Sys_Shutdown();
+        }
+        if (reset == 1)
+            Sys_Reboot();
         if (btn1.GetState() == STATE_CLICKED) {
             choice = 1;
         } else if (btn2.GetState() == STATE_CLICKED) {
             choice = 0;
 	}
+	else if (screenShotBtn.GetState() == STATE_CLICKED) {
+			gprintf("\n\tscreenShotBtn clicked");
+			screenShotBtn.ResetState();
+			ScreenShot();
+			gprintf("...It's easy, mmmmmmKay");
+		    }
 	else if ((arrowUpBtn.GetState()==STATE_CLICKED||arrowUpBtn.GetState()==STATE_HELD) ) {
             if (long_descriptionTxt.GetFirstLine()>1)
                 long_descriptionTxt.SetFirstLine(long_descriptionTxt.GetFirstLine()-1);

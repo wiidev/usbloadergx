@@ -19,7 +19,9 @@ public:
     //!Constructor
     //!\param mem Memory of the loaded tpl
     //!\param len Filesize of the tpl
-	GuiBanner(void *mem, u32 len);
+    //!\param w Width of the tpl
+    //!\param h Height of the tpl
+	GuiBanner(void *mem, u32 len, int w, int h);
     //!Destructor
 	~GuiBanner();
 	void Draw();

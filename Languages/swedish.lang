@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-08 10:44+0100\n"
+"POT-Creation-Date: 2009-12-29 03:43+0100\n"
 "PO-Revision-Date: 2009-11-24 22:11+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -182,8 +182,14 @@ msgstr "Tillbaka till HBC eller Wii-Menyn"
 msgid "Back to Loader"
 msgstr "Tillbaka till loader"
 
+msgid "Back to Wii Menu"
+msgstr "Tillbaka till Wii-menyn"
+
 msgid "Backgroundmusic"
 msgstr "Bakgrundsmusik"
+
+msgid "Backgroundmusic Path changed."
+msgstr "Sökväg till bakgrundsmusik ändrad."
 
 msgid "Big thanks to:"
 msgstr "Stort tack till:"
@@ -214,9 +220,6 @@ msgstr "Kunde inte radera:"
 
 msgid "Cancel"
 msgstr "Avbryt"
-
-msgid "Change Play Path"
-msgstr ""
 
 msgid "Channels"
 msgstr ""
@@ -284,6 +287,9 @@ msgstr "Kunde inte skapa GCT fil"
 
 msgid "Could not find a WBFS partition."
 msgstr "Kunde inte hitta WBFS partition."
+
+msgid "Could not initialize DIP module!"
+msgstr "Kunde inte starta DIP-modul!"
 
 msgid "Could not initialize network!"
 msgstr "Kunde inte starta nätverket!"
@@ -414,6 +420,9 @@ msgstr "Vill du ladda ner detta tema?"
 msgid "Do you want to format:"
 msgstr "Vill du formatera:"
 
+msgid "Do you want to retry for 30 secs?"
+msgstr "Vill du försöka igen i 30 sekunder?"
+
 msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "Vill du använda en alternativ DOL som är känd att fungera?"
 
@@ -524,6 +533,9 @@ msgstr "Vänd-X"
 
 msgid "Force"
 msgstr "Tvinga"
+
+msgid "Format"
+msgstr "Formatera"
 
 msgid "Formatting, please wait..."
 msgstr "Formaterar, Vänta..."
@@ -762,9 +774,6 @@ msgstr "Troligtvis har den mått som inte är jämnt dividerade med 4."
 msgid "Mount DVD drive"
 msgstr "Montera DVD läsare"
 
-msgid "Music Loop Mode"
-msgstr ""
-
 msgid "Music Volume"
 msgstr "Volym"
 
@@ -797,6 +806,15 @@ msgstr "Inga favoriter"
 
 msgid "No SD-Card inserted!"
 msgstr "Inget SD-kort isatt!"
+
+msgid "No USB Device"
+msgstr "Ingen USB-enhet"
+
+msgid "No USB Device found."
+msgstr "Ingen USB-enhet hittad."
+
+msgid "No WBFS or FAT/NTFS partition found"
+msgstr ""
 
 msgid "No cheats were selected"
 msgstr "Inga fusk har valda"
@@ -876,9 +894,6 @@ msgstr ""
 msgid "Partition"
 msgstr ""
 
-msgid "Partition Format Menu"
-msgstr ""
-
 msgid "Password"
 msgstr "Lösenord"
 
@@ -899,15 +914,6 @@ msgstr "Välj från en lista"
 
 msgid "Play Count"
 msgstr "Spelat"
-
-msgid "Play Next"
-msgstr ""
-
-msgid "Play Previous"
-msgstr ""
-
-msgid "Playing Music:"
-msgstr ""
 
 msgid "Please wait..."
 msgstr "Vänligen vänta..."
@@ -942,14 +948,8 @@ msgstr "Ladda om SD"
 msgid "Rename Game on WBFS"
 msgstr "Döp om spel på WBFS"
 
-msgid "Reset BG Music"
-msgstr ""
-
 msgid "Reset Playcounter"
 msgstr "Återställ spelat-räknaren"
-
-msgid "Reset to standard BGM?"
-msgstr ""
 
 msgid "Restarting..."
 msgstr "Startar om..."
@@ -987,6 +987,9 @@ msgstr "Sparat"
 msgid "Screensaver"
 msgstr "Skärmsläckare"
 
+msgid "Select"
+msgstr "Välj"
+
 msgid "Select a DOL"
 msgstr "Välj en DOL"
 
@@ -998,6 +1001,9 @@ msgstr ""
 
 msgid "Set Search-Filter"
 msgstr "Ställ in sök-filter"
+
+msgid "Set as backgroundmusic?"
+msgstr "Ställ in som bakgrundsmusik?"
 
 msgid "Settings"
 msgstr "Inställningar"
@@ -1114,6 +1120,9 @@ msgstr "Verktygstips"
 msgid "Transfer failed."
 msgstr "Flytt misslyckades."
 
+msgid "USB Device not found"
+msgstr "USB-enhet ej hittad"
+
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX är skyddad"
 
@@ -1141,9 +1150,6 @@ msgstr ""
 
 msgid "Unlock console to use this option."
 msgstr "Lås upp konsolen för denna inställning."
-
-msgid "Unlock the app first."
-msgstr ""
 
 msgid "Unlocked"
 msgstr "Upplåst"
@@ -1209,6 +1215,9 @@ msgstr ""
 msgid "WIP Patches Path changed"
 msgstr ""
 
+msgid "Waiting for USB Device"
+msgstr "Väntar på USB-enhet"
+
 msgid "Waiting..."
 msgstr "Väntar..."
 
@@ -1254,14 +1263,14 @@ msgstr "Du har valt att visa favoriter men du har inga favoriter valda."
 msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
 msgstr ""
 
-msgid "You can't access this menu!"
-msgstr ""
-
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr ""
 
 msgid "You have attempted to load a bad image"
 msgstr "Du har försökt ladda en dålig bild"
+
+msgid "You need to select or format a partition"
+msgstr "Du måste välja eller formatera en partition"
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
@@ -1333,71 +1342,35 @@ msgstr "av"
 msgid "seconds left"
 msgstr "sekunder kvar"
 
-msgid "Backgroundmusic Path changed."
-msgstr "Sökväg till bakgrundsmusik ändrad."
+#~ msgid "Can't decompress LZ77"
+#~ msgstr "Kunde inte dekomprimera LZ77"
 
-msgid "Set as backgroundmusic?"
-msgstr "Ställ in som bakgrundsmusik?"
+#~ msgid "Can't find disc"
+#~ msgstr "Kunde inte hitta skiva"
 
-msgid "Back to Wii Menu"
-msgstr "Tillbaka till Wii-menyn"
+#~ msgid "IMD5 Header not right."
+#~ msgstr "IMD5 Rubrik stämmer inte."
 
-msgid "Could not initialize DIP module!"
-msgstr "Kunde inte starta DIP-modul!"
+#~ msgid "IMET Header wrong."
+#~ msgstr "IMET Rubriken är fel."
 
-msgid "Do you want to retry for 30 secs?"
-msgstr "Vill du försöka igen i 30 sekunder?"
+#~ msgid "No WBFS or FAT game partition found"
+#~ msgstr "Ingen WBFS eller FAT spel partition hittad"
 
-msgid "Format"
-msgstr "Formatera"
+#~ msgid "Exit USB Loader GX?"
+#~ msgstr "Avsluta USB Loader GX?"
 
-msgid "No USB Device"
-msgstr "Ingen USB-enhet"
+#~ msgid "Homebrew Channel"
+#~ msgstr "Homebrew Kanalen"
 
-msgid "No USB Device found."
-msgstr "Ingen USB-enhet hittad."
+#~ msgid "ERROR: USB device could not be loaded!"
+#~ msgstr "FEL: USB-enhet kunde inte laddas!"
 
-msgid "Select"
-msgstr "Välj"
+#~ msgid "ERROR: cIOS could not be loaded!"
+#~ msgstr "FEL: cIOS kunde inte laddas!"
 
-msgid "USB Device not found"
-msgstr "USB-enhet ej hittad"
+#~ msgid "Loading..."
+#~ msgstr "Laddar..."
 
-msgid "Waiting for USB Device"
-msgstr "Väntar på USB-enhet"
-
-msgid "You need to select or format a partition"
-msgstr "Du måste välja eller formatera en partition"
-
-msgid "Can't decompress LZ77"
-msgstr "Kunde inte dekomprimera LZ77"
-
-msgid "Can't find disc"
-msgstr "Kunde inte hitta skiva"
-
-msgid "IMD5 Header not right."
-msgstr "IMD5 Rubrik stämmer inte."
-
-msgid "IMET Header wrong."
-msgstr "IMET Rubriken är fel."
-
-msgid "No WBFS or FAT game partition found"
-msgstr "Ingen WBFS eller FAT spel partition hittad"
-
-msgid "Exit USB Loader GX?"
-msgstr "Avsluta USB Loader GX?"
-
-msgid "Homebrew Channel"
-msgstr "Homebrew Kanalen"
-
-msgid "ERROR: USB device could not be loaded!"
-msgstr "FEL: USB-enhet kunde inte laddas!"
-
-msgid "ERROR: cIOS could not be loaded!"
-msgstr "FEL: cIOS kunde inte laddas!"
-
-msgid "Loading..."
-msgstr "Laddar..."
-
-msgid "Waiting for your slow USB Device: %i secs..."
-msgstr "Väntar på din slöa USB-enhet: %i sek..."
+#~ msgid "Waiting for your slow USB Device: %i secs..."
+#~ msgstr "Väntar på din slöa USB-enhet: %i sek..."

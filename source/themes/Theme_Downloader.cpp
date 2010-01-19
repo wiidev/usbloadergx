@@ -24,10 +24,16 @@
 #include "ZipFile.h"
 #include "gecko.h"
 
+/*** Extern functions ***/
+extern void ResumeGui();
+extern void HaltGui();
+
 /*** Extern variables ***/
 extern GuiWindow * mainWindow;
 extern GuiSound * bgMusic;
 extern GuiImage * bgImg;
+extern u8 shutdown;
+extern u8 reset;
 
 
 int DownloadTheme(const char *url, const char *title)
@@ -238,6 +244,11 @@ static int Theme_Prompt(const char *title, const char *author, GuiImageData *thu
     while (!leave)
     {
         VIDEO_WaitVSync();
+
+        if (shutdown == 1)
+            Sys_Shutdown();
+        else if (reset == 1)
+            Sys_Reboot();
 
         if (downloadBtn.GetState() == STATE_CLICKED)
         {
@@ -568,7 +579,12 @@ int Theme_Downloader()
         {
             VIDEO_WaitVSync ();
 
-            if (wifiBtn.GetState() == STATE_CLICKED)
+            if (shutdown == 1)
+                Sys_Shutdown();
+            else if (reset == 1)
+                Sys_Reboot();
+
+            else if (wifiBtn.GetState() == STATE_CLICKED)
             {
                 Initialize_Network();
                 wifiBtn.ResetState();

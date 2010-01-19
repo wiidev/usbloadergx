@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# dutch.lang - r885
+# dutch.lang - r874
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-08 10:44+0100\n"
+"POT-Creation-Date: 2009-12-29 03:43+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: glowy\n"
 "Language-Team: tj_cool, glowy\n"
@@ -23,7 +23,7 @@ msgid " could not be downloaded."
 msgstr " kon niet worden gedownload."
 
 msgid " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information."
-msgstr " is opgeslagen. De tekst is niet gecontroleerd. Delen van de code kunnen elkaar tegenwerken. Als je moeilijkheden ondervind, open de tekst in een echte tekstverwerker voor meer informatie."
+msgstr " is opgeslagen. De tekst is niet gecontroleerd. Delen van de code kunnen elkaar tegenwerken. Als je moeilijkheden ondervind, open het bestand in een echte tekstverwerker voor meer informatie."
 
 msgid " is not on the server."
 msgstr " staat niet op de server."
@@ -182,8 +182,14 @@ msgstr "Terug naar HBC of Wii Menu"
 msgid "Back to Loader"
 msgstr "Terug naar lader"
 
+msgid "Back to Wii Menu"
+msgstr "Terug naar Wii Menu"
+
 msgid "Backgroundmusic"
 msgstr "Achtergrondmuziek"
+
+msgid "Backgroundmusic Path changed."
+msgstr "Locatie achtergrondmuziek gewijzigd."
 
 msgid "Big thanks to:"
 msgstr "Grote dank aan:"
@@ -214,9 +220,6 @@ msgstr "Kan niet verwijderen:"
 
 msgid "Cancel"
 msgstr "Annuleren"
-
-msgid "Change Play Path"
-msgstr ""
 
 msgid "Channels"
 msgstr "Kanalen"
@@ -284,6 +287,9 @@ msgstr "Kan GCT bestand niet aanmaken"
 
 msgid "Could not find a WBFS partition."
 msgstr "Kan geen WBFS partitie vinden."
+
+msgid "Could not initialize DIP module!"
+msgstr "Kan DIP module niet initialiseren!"
 
 msgid "Could not initialize network!"
 msgstr "Kan netwerk niet initialiseren!"
@@ -403,7 +409,7 @@ msgid "Do you really want to delete:"
 msgstr "Wil je echt verwijderen:"
 
 msgid "Do you want to apply it now?"
-msgstr "Wil je dit nu toepassen?"
+msgstr ""
 
 msgid "Do you want to change language?"
 msgstr "Wil je de taal wijzigen?"
@@ -413,6 +419,9 @@ msgstr "Wil je dit thema downloaden?"
 
 msgid "Do you want to format:"
 msgstr "Wil je formatteren:"
+
+msgid "Do you want to retry for 30 secs?"
+msgstr "Wil je 30 sec. lang opnieuw proberen?"
 
 msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "Wil je de alt DOL gebruiken waarvan is bevestigd dat deze werkt?"
@@ -466,7 +475,7 @@ msgid "ERROR:"
 msgstr "FOUT:"
 
 msgid "ERROR: Can't set up theme."
-msgstr "FOUT: Kan thema niet instellen"
+msgstr ""
 
 msgid "Enable Parental Control"
 msgstr "Ouderlijk toezicht inschakelen"
@@ -525,6 +534,9 @@ msgstr "X omwisselen"
 msgid "Force"
 msgstr "Forceer"
 
+msgid "Format"
+msgstr "Formatteer"
+
 msgid "Formatting, please wait..."
 msgstr "Bezig met formatteren..."
 
@@ -550,7 +562,7 @@ msgid "GUI Settings"
 msgstr "Menu opties"
 
 msgid "GXtheme.cfg not found in any subfolder."
-msgstr "GXtheme.cfg in geen enkele submap gevonden."
+msgstr ""
 
 msgid "Game ID"
 msgstr "Spel ID"
@@ -762,9 +774,6 @@ msgstr "Waarschijnlijk zijn de afmetingen niet deelbaar door 4."
 msgid "Mount DVD drive"
 msgstr "DVD Laden"
 
-msgid "Music Loop Mode"
-msgstr ""
-
 msgid "Music Volume"
 msgstr "Muziekvolume"
 
@@ -797,6 +806,15 @@ msgstr "Geen favorieten"
 
 msgid "No SD-Card inserted!"
 msgstr "Geen SD kaart gevonden!"
+
+msgid "No USB Device"
+msgstr "Geen USB apparaat"
+
+msgid "No USB Device found."
+msgstr "Geen USB apparaat gevonden."
+
+msgid "No WBFS or FAT/NTFS partition found"
+msgstr "Geen WBFS of FAT/NTFS partitie gevonden"
 
 msgid "No cheats were selected"
 msgstr "Geen cheats geselecteerd"
@@ -876,9 +894,6 @@ msgstr "Ouderlijk toezicht uitgeschakeld"
 msgid "Partition"
 msgstr "Partitie"
 
-msgid "Partition Format Menu"
-msgstr "Partitie Formatteer Menu"
-
 msgid "Password"
 msgstr "Wachtwoord"
 
@@ -899,15 +914,6 @@ msgstr "Kiezen van lijst"
 
 msgid "Play Count"
 msgstr "Gespeeld"
-
-msgid "Play Next"
-msgstr ""
-
-msgid "Play Previous"
-msgstr ""
-
-msgid "Playing Music:"
-msgstr ""
 
 msgid "Please wait..."
 msgstr "Even geduld..."
@@ -942,14 +948,8 @@ msgstr "SD herladen"
 msgid "Rename Game on WBFS"
 msgstr "Spel hernoemen op WBFS"
 
-msgid "Reset BG Music"
-msgstr ""
-
 msgid "Reset Playcounter"
 msgstr "Speeltellers resetten"
-
-msgid "Reset to standard BGM?"
-msgstr ""
 
 msgid "Restarting..."
 msgstr "Herstarten..."
@@ -987,6 +987,9 @@ msgstr "Opgeslagen"
 msgid "Screensaver"
 msgstr "Schermbeveiliging"
 
+msgid "Select"
+msgstr "Selecteer"
+
 msgid "Select a DOL"
 msgstr "Kies een DOL"
 
@@ -998,6 +1001,9 @@ msgstr "Sep"
 
 msgid "Set Search-Filter"
 msgstr "Zoekfilter instellen"
+
+msgid "Set as backgroundmusic?"
+msgstr "Instellen als achtergrondmuziek?"
 
 msgid "Settings"
 msgstr "Instellingen"
@@ -1114,6 +1120,9 @@ msgstr "Knopinfo"
 msgid "Transfer failed."
 msgstr "Overdracht mislukt."
 
+msgid "USB Device not found"
+msgstr "USB Apparaat niet gevonden"
+
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX is vergrendeld"
 
@@ -1141,9 +1150,6 @@ msgstr "Ontgrendel ouderlijk toezicht"
 
 msgid "Unlock console to use this option."
 msgstr "Console moet worden vrijgegeven."
-
-msgid "Unlock the app first."
-msgstr "Geef app eerst vrij."
 
 msgid "Unlocked"
 msgstr "Vrijgegeven"
@@ -1209,6 +1215,9 @@ msgstr "Locatie WIP patches"
 msgid "WIP Patches Path changed"
 msgstr "Locatie WIP Patches gewijzigd"
 
+msgid "Waiting for USB Device"
+msgstr "Wachten op USB apparaat"
+
 msgid "Waiting..."
 msgstr "Wachten..."
 
@@ -1254,14 +1263,14 @@ msgstr "Je wilt favorieten tonen, maar je hebt er geen ingesteld."
 msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
 msgstr "Je gebruikt het NTFS bestandssysteem. Door mogelijke schrijffouten naar een NTFS partitie, is een spel installeren niet mogelijk."
 
-msgid "You can't access this menu!"
-msgstr "Je hebt geen toegang tot dit menu!"
-
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr "Je hebt ouderlijk toezicht niet ingeschakeld. Als je ouderlijk toezicht wilt gebruiken, zet het dan aan in de Wii instellingen."
 
 msgid "You have attempted to load a bad image"
 msgstr "Je probeerde een slechte afbeelding te laden"
+
+msgid "You need to select or format a partition"
+msgstr "Je moet een partitie selecteren of formatteren"
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
@@ -1333,71 +1342,32 @@ msgstr "van"
 msgid "seconds left"
 msgstr "seconden over"
 
-msgid "Backgroundmusic Path changed."
-msgstr "Locatie achtergrondmuziek gewijzigd."
+#~ msgid "Can't decompress LZ77"
+#~ msgstr "Kan LZ77 niet uitpakken"
 
-msgid "Set as backgroundmusic?"
-msgstr "Instellen als achtergrondmuziek?"
+#~ msgid "Can't find disc"
+#~ msgstr "Kan disk niet vinden"
 
-msgid "Back to Wii Menu"
-msgstr "Terug naar Wii Menu"
+#~ msgid "IMD5 Header not right."
+#~ msgstr "IMD5 Header niet correct."
 
-msgid "Could not initialize DIP module!"
-msgstr "Kan DIP module niet initialiseren!"
+#~ msgid "IMET Header wrong."
+#~ msgstr "IMET Header niet correct."
 
-msgid "Do you want to retry for 30 secs?"
-msgstr "Wil je 30 sec. lang opnieuw proberen?"
+#~ msgid "Failed to extract opening.bnr"
+#~ msgstr "Uitpakken opening.bnr mislukt"
 
-msgid "Format"
-msgstr "Formatteer"
+#~ msgid "Homebrew Channel"
+#~ msgstr "Homebrew Kanaal"
 
-msgid "No USB Device"
-msgstr "Geen USB apparaat"
+#~ msgid "ERROR: USB device could not be loaded!"
+#~ msgstr "FOUT: USB apparaat kon niet geladen worden!"
 
-msgid "No USB Device found."
-msgstr "Geen USB apparaat gevonden."
+#~ msgid "ERROR: cIOS could not be loaded!"
+#~ msgstr "FOUT: cIOS kon niet geladen worden!"
 
-msgid "No WBFS or FAT/NTFS partition found"
-msgstr "Geen WBFS of FAT/NTFS partitie gevonden"
+#~ msgid "Loading..."
+#~ msgstr "Laden..."
 
-msgid "Select"
-msgstr "Selecteer"
-
-msgid "USB Device not found"
-msgstr "USB Apparaat niet gevonden"
-
-msgid "Waiting for USB Device"
-msgstr "Wachten op USB apparaat"
-
-msgid "You need to select or format a partition"
-msgstr "Je moet een partitie selecteren of formatteren"
-
-msgid "Can't decompress LZ77"
-msgstr "Kan LZ77 niet uitpakken"
-
-msgid "Can't find disc"
-msgstr "Kan disk niet vinden"
-
-msgid "IMD5 Header not right."
-msgstr "IMD5 Header niet correct."
-
-msgid "IMET Header wrong."
-msgstr "IMET Header niet correct."
-
-msgid "Failed to extract opening.bnr"
-msgstr "Uitpakken opening.bnr mislukt"
-
-msgid "Homebrew Channel"
-msgstr "Homebrew Kanaal"
-
-msgid "ERROR: USB device could not be loaded!"
-msgstr "FOUT: USB apparaat kon niet geladen worden!"
-
-msgid "ERROR: cIOS could not be loaded!"
-msgstr "FOUT: cIOS kon niet geladen worden!"
-
-msgid "Loading..."
-msgstr "Laden..."
-
-msgid "Waiting for your slow USB Device: %i secs..."
-msgstr "Wachten op traag USB apparaat: %i sec..."
+#~ msgid "Waiting for your slow USB Device: %i secs..."
+#~ msgstr "Wachten op traag USB apparaat: %i sec..."

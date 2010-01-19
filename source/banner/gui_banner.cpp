@@ -6,30 +6,6 @@
  ***************************************************************************/
 #include "gui_banner.h"
 
-typedef struct
-{
-	u32 texture_header_offset;
-	u32 palette_header_offset;
-} TPLTexture;
-
-typedef struct
-{
-	u16 heigth;
-	u16 width;
-	//...
-	//there is more but we only need these
-} TPLTextureHeader;
-
-//only one field tpls
-typedef struct
-{
-    u32 magic;
-    u32 ntextures;
-    u32 texture_size;
-    TPLTexture textures;
-} TPLHeader;
-
-
 GuiBanner::GuiBanner(const char *tplfilepath)
 {
     memory = NULL;
@@ -41,6 +17,12 @@ GuiBanner::GuiBanner(const char *tplfilepath)
 
 	if(tplfp !=NULL) {
 
+		unsigned short heighttemp = 0;
+		unsigned short widthtemp = 0;
+
+		fseek(tplfp , 0x14, SEEK_SET);
+		fread((void*)&heighttemp,1,2,tplfp);
+		fread((void*)&widthtemp,1,2,tplfp);
 		fseek (tplfp , 0 , SEEK_END);
         tplfilesize = ftell (tplfp);
         rewind (tplfp);
@@ -51,13 +33,6 @@ GuiBanner::GuiBanner(const char *tplfilepath)
         }
         fread(memory, 1, tplfilesize, tplfp);
 		fclose(tplfp);
-
-		const u8 * buffer = (const u8*) memory;
-        const TPLHeader *hdr = (TPLHeader *) buffer;
-        const TPLTextureHeader *texhdr = (TPLTextureHeader *) &buffer[hdr->textures.texture_header_offset];
-
-        height = texhdr[0].heigth;
-        width = texhdr[0].width;
 
         TPLFile tplfile;
         int ret;
@@ -76,6 +51,8 @@ GuiBanner::GuiBanner(const char *tplfilepath)
         }
         TPL_CloseTPLFile(&tplfile);
 
+		width = widthtemp;
+		height = heighttemp;
 		widescreen = 0;
 		filecheck = true;
 
@@ -85,20 +62,14 @@ GuiBanner::GuiBanner(const char *tplfilepath)
     }
 }
 
-GuiBanner::GuiBanner(void *mem, u32 len)
+GuiBanner::GuiBanner(void *mem, u32 len, int w, int h)
 {
     if(!mem || !len)
         return;
-
     memory = mem;
     tplfilesize = len;
-
-	const u8 * buffer = (const u8*) memory;
-    const TPLHeader *hdr = (TPLHeader *) buffer;
-    const TPLTextureHeader *texhdr = (TPLTextureHeader *) &buffer[hdr->textures.texture_header_offset];
-
-    height = texhdr[0].heigth;
-    width = texhdr[0].width;
+    width = w;
+    height = h;
 
     TPLFile tplfile;
 

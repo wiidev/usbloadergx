@@ -7,18 +7,19 @@ Load game information from XML - Lustar
 #include <malloc.h>
 #include "unzip/unzip.h"
 #include "settings/cfg.h"
-#include "listfiles.h"
-#include "usbloader/partition_usbloader.h"
 #include "xml/xml.h"
-
+//#include "cfg.h"
+//#include "xml.h"
 
 extern struct SSettings Settings; // for loader GX
 extern void title_set(char *id, char *title);
 extern char* trimcopy(char *dest, char *src, int size);
+extern char game_partition[6];
 
 
 /* config */
 static bool xmldebug = false;
+static char xmlcfg_filename[100] = "wiitdb";
 static int xmlmaxsize = 1572864;
 
 
@@ -63,45 +64,22 @@ int xmlloadtime = 0;
 char * get_nodetext(mxml_node_t *node, char *buffer, int buflen);
 bool xml_loaded = false;
 
-static void SearchXMLFile(char * pathname)
-{
-    int i = 0;
-    char temppath[MAXPATHLEN];
-
-    for(i = 0; i < 4; i++)
-    {
-        snprintf(temppath, sizeof(temppath), "%swiitdb_WBFS%i.zip", pathname, i);
-        if(checkfile(temppath))
-        {
-            sprintf(pathname, "%s", temppath);
-            return;
-        }
-        snprintf(temppath, sizeof(temppath), "%swiitdb_FAT%i.zip", pathname, i);
-        if(checkfile(temppath))
-        {
-            sprintf(pathname, "%s", temppath);
-            return;
-        }
-        snprintf(temppath, sizeof(temppath), "%swiitdb_NTFS%i.zip", pathname, i);
-        if(checkfile(temppath))
-        {
-            sprintf(pathname, "%s", temppath);
-            return;
-        }
-    }
-
-    sprintf(pathname, "%swiitdb.zip", pathname);
-}
 
 /* load renamed titles from proper names and game info XML, needs to be after cfg_load_games */
 bool OpenXMLDatabase(char* xmlfilepath, char* argdblang, bool argJPtoEN, bool openfile, bool loadtitles, bool keepopen) {
     if (!xml_loaded) {
         bool opensuccess = false;
-        char pathname[400];
+        char pathname[200];
         snprintf(pathname, sizeof(pathname), "%s", xmlfilepath);
         if (xmlfilepath[strlen(xmlfilepath) - 1] != '/') snprintf(pathname, sizeof(pathname), "%s/",pathname);
-        SearchXMLFile(pathname);
+        snprintf(pathname, sizeof(pathname), "%s%s_%s.zip", pathname, xmlcfg_filename, game_partition);
         if (openfile) opensuccess = OpenXMLFile(pathname);
+        if (!opensuccess) {
+		    snprintf(pathname, sizeof(pathname), "%s", xmlfilepath);
+			if (xmlfilepath[strlen(xmlfilepath) - 1] != '/') snprintf(pathname, sizeof(pathname), "%s/",pathname);
+            snprintf(pathname, sizeof(pathname), "%swiitdb.zip", pathname);
+            if (openfile) opensuccess = OpenXMLFile(pathname);
+        }
         if (!opensuccess && openfile) {
             CloseXMLDatabase();
             return false;

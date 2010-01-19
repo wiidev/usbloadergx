@@ -40,6 +40,10 @@ static time_t start;
 extern GuiWindow * mainWindow;
 extern float gamesize;
 
+/*** Extern functions ***/
+extern void ResumeGui();
+extern void HaltGui();
+
 
 /****************************************************************************
  * GameInstallProgress

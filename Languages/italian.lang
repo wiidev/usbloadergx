@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# italian.lang - v57 - r885
+# italian.lang - v55 - r874
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-08 10:44+0100\n"
+"POT-Creation-Date: 2009-12-29 03:43+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe, Cambo\n"
@@ -182,8 +182,14 @@ msgstr "Torna a HBC/Menu Wii"
 msgid "Back to Loader"
 msgstr "Canale HomeBrew"
 
+msgid "Back to Wii Menu"
+msgstr "Torna al Menu Wii"
+
 msgid "Backgroundmusic"
 msgstr "Musica Sottofondo"
+
+msgid "Backgroundmusic Path changed."
+msgstr "Percorso Musica modificato"
 
 msgid "Big thanks to:"
 msgstr "Grazie mille a:"
@@ -214,9 +220,6 @@ msgstr "Impossibile eliminare:"
 
 msgid "Cancel"
 msgstr "Annulla"
-
-msgid "Change Play Path"
-msgstr ""
 
 msgid "Channels"
 msgstr "Canali"
@@ -284,6 +287,9 @@ msgstr "Non è stato possibile creare il file GCT"
 
 msgid "Could not find a WBFS partition."
 msgstr "Non è stata trovata alcuna partizione WBFS."
+
+msgid "Could not initialize DIP module!"
+msgstr "Non è stato possibile inizializzare il modulo DIP!"
 
 msgid "Could not initialize network!"
 msgstr "Non è stato possibile inizializzare la rete!"
@@ -403,7 +409,7 @@ msgid "Do you really want to delete:"
 msgstr "Vuoi veramente eliminare:"
 
 msgid "Do you want to apply it now?"
-msgstr "Applicare immediatamente?"
+msgstr ""
 
 msgid "Do you want to change language?"
 msgstr "Vuoi cambiare lingua?"
@@ -413,6 +419,9 @@ msgstr "Vuoi scaricare questo tema?"
 
 msgid "Do you want to format:"
 msgstr "Vuoi formattare:"
+
+msgid "Do you want to retry for 30 secs?"
+msgstr "Vuoi riprovare per 30 sec?"
 
 msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "Vuoi utilizzare il DOL alternativo funzionante?"
@@ -466,7 +475,7 @@ msgid "ERROR:"
 msgstr "ERRORE:"
 
 msgid "ERROR: Can't set up theme."
-msgstr "ERRORE: Impossibile configurare il tema."
+msgstr ""
 
 msgid "Enable Parental Control"
 msgstr "Attiva Controllo Genitori"
@@ -525,6 +534,9 @@ msgstr "Scorrimento Dischi"
 msgid "Force"
 msgstr "Forza"
 
+msgid "Format"
+msgstr "Formatta"
+
 msgid "Formatting, please wait..."
 msgstr "Sto Formattando, prego attendere..."
 
@@ -550,7 +562,7 @@ msgid "GUI Settings"
 msgstr "Impostazioni Loader"
 
 msgid "GXtheme.cfg not found in any subfolder."
-msgstr "Nessuna sottocartella contiene il file GXtheme.cfg."
+msgstr ""
 
 msgid "Game ID"
 msgstr "ID Gioco"
@@ -762,9 +774,6 @@ msgstr "Molto probabilmente le dimensioni non sono divisibili per 4."
 msgid "Mount DVD drive"
 msgstr "Avvia DVD"
 
-msgid "Music Loop Mode"
-msgstr ""
-
 msgid "Music Volume"
 msgstr "Volume"
 
@@ -797,6 +806,15 @@ msgstr "Nessun Preferito"
 
 msgid "No SD-Card inserted!"
 msgstr "Nessuna scheda SD inserita!"
+
+msgid "No USB Device"
+msgstr "Nessun Dispositivo USB"
+
+msgid "No USB Device found."
+msgstr "Nessun Dispositivo USB trovato."
+
+msgid "No WBFS or FAT/NTFS partition found"
+msgstr "Non è stata trovata alcuna partizione WBFS o FAT/NTFS"
 
 msgid "No cheats were selected"
 msgstr "Non è stato selezionato alcun trucco"
@@ -876,9 +894,6 @@ msgstr "Controllo Genitori disabilitato"
 msgid "Partition"
 msgstr "Partizione"
 
-msgid "Partition Format Menu"
-msgstr "Menu Formattazione Partizioni"
-
 msgid "Password"
 msgstr ""
 
@@ -899,15 +914,6 @@ msgstr "Seleziona da un elenco"
 
 msgid "Play Count"
 msgstr "Giocati"
-
-msgid "Play Next"
-msgstr ""
-
-msgid "Play Previous"
-msgstr ""
-
-msgid "Playing Music:"
-msgstr ""
 
 msgid "Please wait..."
 msgstr "Attendere prego..."
@@ -942,14 +948,8 @@ msgstr "Ricarica SD"
 msgid "Rename Game on WBFS"
 msgstr "Rinomina Gioco su WBFS"
 
-msgid "Reset BG Music"
-msgstr ""
-
 msgid "Reset Playcounter"
 msgstr "Azzera contatore"
-
-msgid "Reset to standard BGM?"
-msgstr ""
 
 msgid "Restarting..."
 msgstr "Premere OK per riavviare..."
@@ -987,6 +987,9 @@ msgstr "Salvataggio Eseguito"
 msgid "Screensaver"
 msgstr "Salvaschermo"
 
+msgid "Select"
+msgstr "Seleziona"
+
 msgid "Select a DOL"
 msgstr "Seleziona un file DOL"
 
@@ -998,6 +1001,9 @@ msgstr "settembre"
 
 msgid "Set Search-Filter"
 msgstr "Cerca Gioco"
+
+msgid "Set as backgroundmusic?"
+msgstr "Imposto come Musica Sottofondo?"
 
 msgid "Settings"
 msgstr "Impostazioni"
@@ -1114,6 +1120,9 @@ msgstr "Suggerimenti"
 msgid "Transfer failed."
 msgstr "Trasferimento fallito."
 
+msgid "USB Device not found"
+msgstr "Dispositivo USB non Trovato"
+
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX è Protetto"
 
@@ -1141,9 +1150,6 @@ msgstr "Sblocca Controllo Genitori"
 
 msgid "Unlock console to use this option."
 msgstr "Sblocca la Console per usare questa opzione."
-
-msgid "Unlock the app first."
-msgstr "L'applicazione deve essere sbloccata."
 
 msgid "Unlocked"
 msgstr "Sbloccato"
@@ -1209,6 +1215,9 @@ msgstr "Percorso Patch WIP"
 msgid "WIP Patches Path changed"
 msgstr "Percorso Patch WIP modificato"
 
+msgid "Waiting for USB Device"
+msgstr "Caricamento Dispositivo USB"
+
 msgid "Waiting..."
 msgstr "Caricamento..."
 
@@ -1254,14 +1263,14 @@ msgstr "Hai scelto di visualizzare i preferiti e non ne hai selezionato nessuno"
 msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
 msgstr "E' in uso una partizione NTFS. Poiché sono possibili errori in scrittura nelle partizioni NTFS, non è possibile installare alcun gioco."
 
-msgid "You can't access this menu!"
-msgstr "Non puoi accedere a questo menu!"
-
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr "Il Controllo Genitori non è attivo. Se vuoi utilizzare il Controllo Genitori abilitalo nelle Impostazioni della Wii."
 
 msgid "You have attempted to load a bad image"
 msgstr "Hai tentato di caricare un'immagine non valida"
+
+msgid "You need to select or format a partition"
+msgstr "Occorre selezionare o formattare una partizione"
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
@@ -1333,74 +1342,35 @@ msgstr "di"
 msgid "seconds left"
 msgstr "secondi mancanti"
 
-msgid "Backgroundmusic Path changed."
-msgstr "Percorso Musica modificato"
+#~ msgid "Can't decompress LZ77"
+#~ msgstr "Impossibile decomprimere LZ77"
 
-msgid "Set as backgroundmusic?"
-msgstr "Imposto come Musica Sottofondo?"
+#~ msgid "Can't find disc"
+#~ msgstr "Impossibile trovare il disco"
 
-msgid "Back to Wii Menu"
-msgstr "Torna al Menu Wii"
+#~ msgid "IMD5 Header not right."
+#~ msgstr "Header IMD5 non corretto."
 
-msgid "Could not initialize DIP module!"
-msgstr "Non è stato possibile inizializzare il modulo DIP!"
+#~ msgid "IMET Header wrong."
+#~ msgstr "Header IMET errato."
 
-msgid "Do you want to retry for 30 secs?"
-msgstr "Vuoi riprovare per 30 sec?"
+#~ msgid "Failed to extract opening.bnr"
+#~ msgstr "Estrazione opening.bnr fallita"
 
-msgid "Format"
-msgstr "Formatta"
+#~ msgid "Homebrew Channel"
+#~ msgstr "Canale Homebrew"
 
-msgid "No USB Device"
-msgstr "Nessun Dispositivo USB"
+#~ msgid "You need to start this game one time to create a save file, then exit and start it again."
+#~ msgstr "Devi caricare questo gioco almeno una volta per creare un file di salvataggio, quindi esci dal gioco e ricaricalo di nuovo."
 
-msgid "No USB Device found."
-msgstr "Nessun Dispositivo USB trovato."
+#~ msgid "ERROR: USB device could not be loaded!"
+#~ msgstr "ERRORE: non si accede alla periferica USB!"
 
-msgid "No WBFS or FAT/NTFS partition found"
-msgstr "Non è stata trovata alcuna partizione WBFS o FAT/NTFS"
+#~ msgid "ERROR: cIOS could not be loaded!"
+#~ msgstr "ERRORE: non si carica il cIOS!"
 
-msgid "Select"
-msgstr "Seleziona"
+#~ msgid "Loading..."
+#~ msgstr "Sto caricando..."
 
-msgid "USB Device not found"
-msgstr "Dispositivo USB non Trovato"
-
-msgid "Waiting for USB Device"
-msgstr "Caricamento Dispositivo USB"
-
-msgid "You need to select or format a partition"
-msgstr "Occorre selezionare o formattare una partizione"
-
-msgid "Can't decompress LZ77"
-msgstr "Impossibile decomprimere LZ77"
-
-msgid "Can't find disc"
-msgstr "Impossibile trovare il disco"
-
-msgid "IMD5 Header not right."
-msgstr "Header IMD5 non corretto."
-
-msgid "IMET Header wrong."
-msgstr "Header IMET errato."
-
-msgid "Failed to extract opening.bnr"
-msgstr "Estrazione opening.bnr fallita"
-
-msgid "Homebrew Channel"
-msgstr "Canale Homebrew"
-
-msgid "You need to start this game one time to create a save file, then exit and start it again."
-msgstr "Devi caricare questo gioco almeno una volta per creare un file di salvataggio, quindi esci dal gioco e ricaricalo di nuovo."
-
-msgid "ERROR: USB device could not be loaded!"
-msgstr "ERRORE: non si accede alla periferica USB!"
-
-msgid "ERROR: cIOS could not be loaded!"
-msgstr "ERRORE: non si carica il cIOS!"
-
-msgid "Loading..."
-msgstr "Sto caricando..."
-
-msgid "Waiting for your slow USB Device: %i secs..."
-msgstr "Sto aspettando la tua lenta periferica USB: %i secs..."
+#~ msgid "Waiting for your slow USB Device: %i secs..."
+#~ msgstr "Sto aspettando la tua lenta periferica USB: %i secs..."
