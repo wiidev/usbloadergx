@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# italian.lang - v55 - r874
+# italian.lang - v57 - r885
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-29 03:43+0100\n"
+"POT-Creation-Date: 2010-01-19 15:02+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe, Cambo\n"
@@ -409,7 +409,7 @@ msgid "Do you really want to delete:"
 msgstr "Vuoi veramente eliminare:"
 
 msgid "Do you want to apply it now?"
-msgstr ""
+msgstr "Applicare immediatamente?"
 
 msgid "Do you want to change language?"
 msgstr "Vuoi cambiare lingua?"
@@ -475,7 +475,7 @@ msgid "ERROR:"
 msgstr "ERRORE:"
 
 msgid "ERROR: Can't set up theme."
-msgstr ""
+msgstr "ERRORE: Impossibile configurare il tema."
 
 msgid "Enable Parental Control"
 msgstr "Attiva Controllo Genitori"
@@ -562,7 +562,7 @@ msgid "GUI Settings"
 msgstr "Impostazioni Loader"
 
 msgid "GXtheme.cfg not found in any subfolder."
-msgstr ""
+msgstr "Nessuna sottocartella contiene il file GXtheme.cfg."
 
 msgid "Game ID"
 msgstr "ID Gioco"
@@ -1341,6 +1341,15 @@ msgstr "di"
 
 msgid "seconds left"
 msgstr "secondi mancanti"
+
+#~ msgid "Partition Format Menu"
+#~ msgstr "Menu Formattazione Partizioni"
+
+#~ msgid "Unlock the app first."
+#~ msgstr "L'applicazione deve essere sbloccata."
+
+#~ msgid "You can't access this menu!"
+#~ msgstr "Non puoi accedere a questo menu!"
 
 #~ msgid "Can't decompress LZ77"
 #~ msgstr "Impossibile decomprimere LZ77"

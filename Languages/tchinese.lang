@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# tchinese.lang - r874
+# tchinese.lang - r894
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-29 03:43+0100\n"
+"POT-Creation-Date: 2010-01-19 15:02+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Miller Liang\n"
 "Language-Team: kyogc, Miller\n"
@@ -409,7 +409,7 @@ msgid "Do you really want to delete:"
 msgstr "確定刪除:"
 
 msgid "Do you want to apply it now?"
-msgstr ""
+msgstr "要套用設定嗎?"
 
 msgid "Do you want to change language?"
 msgstr "要變更語言嗎?"
@@ -475,7 +475,7 @@ msgid "ERROR:"
 msgstr "錯誤:"
 
 msgid "ERROR: Can't set up theme."
-msgstr ""
+msgstr "錯誤:無法設定佈景主題"
 
 msgid "Enable Parental Control"
 msgstr "啟用親子控制"
@@ -562,7 +562,7 @@ msgid "GUI Settings"
 msgstr "介面設定"
 
 msgid "GXtheme.cfg not found in any subfolder."
-msgstr ""
+msgstr "無法在任何子目錄找到 GXtheme.cfg 檔案"
 
 msgid "Game ID"
 msgstr "遊戲 ID"
@@ -1341,6 +1341,36 @@ msgstr "的"
 
 msgid "seconds left"
 msgstr "剩餘秒數"
+
+#~ msgid "Change Play Path"
+#~ msgstr "變更路徑"
+
+#~ msgid "Music Loop Mode"
+#~ msgstr "音樂循環模式"
+
+#~ msgid "Partition Format Menu"
+#~ msgstr "磁區格式化"
+
+#~ msgid "Play Next"
+#~ msgstr "執行下一個"
+
+#~ msgid "Play Previous"
+#~ msgstr "執行上一個"
+
+#~ msgid "Playing Music:"
+#~ msgstr "播放音樂"
+
+#~ msgid "Reset BG Music"
+#~ msgstr "重置 BG 音樂"
+
+#~ msgid "Reset to standard BGM?"
+#~ msgstr "重置回標準 BG 音樂"
+
+#~ msgid "Unlock the app first."
+#~ msgstr "請先將此應用程式解鎖"
+
+#~ msgid "You can't access this menu!"
+#~ msgstr "您無法存取此選單"
 
 #~ msgid "Can't decompress LZ77"
 #~ msgstr "無法解壓縮的LZ77"

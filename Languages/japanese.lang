@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# japanese.lang - r872
+# japanese.lang - r894
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-29 03:43+0100\n"
+"POT-Creation-Date: 2010-01-19 15:02+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
@@ -33,10 +33,10 @@ msgid "%s : %s May not boot correctly if your System Menu is not up to date."
 msgstr "%s : %s Wiiが更新されていなければ正常に起動できない可能性があります"
 
 msgid "0 (Everyone)"
-msgstr "A(全年齢対象)"
+msgstr "0(セットしない)"
 
 msgid "1 (Child 7+)"
-msgstr "B(12才以上対象)"
+msgstr "1(C以上を制限)"
 
 msgid "1 hour"
 msgstr "1時間"
@@ -45,7 +45,7 @@ msgid "10 min"
 msgstr "10分"
 
 msgid "2 (Teen 12+)"
-msgstr "C(15才以上対象)"
+msgstr "2(D以上を制限)"
 
 msgid "20 min"
 msgstr "20分"
@@ -54,7 +54,7 @@ msgid "2D Cover Path"
 msgstr "2Dカバーのパス"
 
 msgid "3 (Mature 16+)"
-msgstr "D(17才以上対象)"
+msgstr "3(Z以上を制限)"
 
 msgid "3 min"
 msgstr "3分"
@@ -69,7 +69,7 @@ msgid "3D Covers"
 msgstr "3Dカバー"
 
 msgid "4 (Adults Only 18+)"
-msgstr "Z(18才以上対象)"
+msgstr "4(Zを制限)"
 
 msgid "5 min"
 msgstr "5分"
@@ -409,7 +409,7 @@ msgid "Do you really want to delete:"
 msgstr "本当に削除しますか?"
 
 msgid "Do you want to apply it now?"
-msgstr ""
+msgstr "適用しますか?"
 
 msgid "Do you want to change language?"
 msgstr "言語を変更しますか？"
@@ -475,7 +475,7 @@ msgid "ERROR:"
 msgstr "エラー："
 
 msgid "ERROR: Can't set up theme."
-msgstr ""
+msgstr "テーマを適用できませんでした"
 
 msgid "Enable Parental Control"
 msgstr "使用制限機能を有効化"
@@ -562,7 +562,7 @@ msgid "GUI Settings"
 msgstr "基本設定"
 
 msgid "GXtheme.cfg not found in any subfolder."
-msgstr ""
+msgstr "設定ファイルが見つかりません"
 
 msgid "Game ID"
 msgstr "IDのみ"
@@ -726,7 +726,7 @@ msgid "Left"
 msgstr "左ボタンで"
 
 msgid "Like SysMenu"
-msgstr "システムメニュー風"
+msgstr "Wiiメニュー風"
 
 msgid "Load"
 msgstr "はじめる"
@@ -754,7 +754,7 @@ msgid "Locked"
 msgstr "ロックされています"
 
 msgid "Loop Sound"
-msgstr "ループ"
+msgstr "ループさせる"
 
 msgid "Mar"
 msgstr "3月"
@@ -823,7 +823,7 @@ msgid "No data could be read."
 msgstr "読み込みに失敗しました"
 
 msgid "No file missing!"
-msgstr "ファイルがありません"
+msgstr "必要ありません"
 
 msgid "No new updates."
 msgstr "更新はありません"
@@ -832,7 +832,7 @@ msgid "No themes found on the site."
 msgstr "テーマが見つかりません"
 
 msgid "Normal"
-msgstr "大きめ"
+msgstr "ワイド"
 
 msgid "Normal Covers"
 msgstr "2Dカバー"
@@ -1228,7 +1228,7 @@ msgid "WiFi Features"
 msgstr "ネットワーク対応"
 
 msgid "Widescreen Fix"
-msgstr "小さめ"
+msgstr "普通"
 
 msgid "Wii Menu"
 msgstr "Wiiメニューへ"
@@ -1341,6 +1341,48 @@ msgstr "中"
 
 msgid "seconds left"
 msgstr "秒で完了"
+
+#~ msgid "Change Play Path"
+#~ msgstr "プレイパスを変更"
+
+#~ msgid "Loop Directory"
+#~ msgstr "フォルダ内でループ"
+
+#~ msgid "Loop Music"
+#~ msgstr "ループさせる"
+
+#~ msgid "Music Loop Mode"
+#~ msgstr "ループ機能"
+
+#~ msgid "Partition Format Menu"
+#~ msgstr "初期化メニュー"
+
+#~ msgid "Play Next"
+#~ msgstr "次へ"
+
+#~ msgid "Play Once"
+#~ msgstr "一度だけ再生"
+
+#~ msgid "Play Previous"
+#~ msgstr "前へ"
+
+#~ msgid "Playing Music:"
+#~ msgstr "再生中"
+
+#~ msgid "Reset BG Music"
+#~ msgstr "BGMをリセット"
+
+#~ msgid "Reset to standard BGM?"
+#~ msgstr "BGMを初期状態に戻しますか?"
+
+#~ msgid "Unlock the app first."
+#~ msgstr "先にロックを解除してください"
+
+#~ msgid "You can't access this menu!"
+#~ msgstr "このメニューは使用できません"
+
+#~ msgid "Random Directory music"
+#~ msgstr "フォルダ内でランダムに再生"
 
 #~ msgid "Can't decompress LZ77"
 #~ msgstr "LZ77を解凍できませんでした"

@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# dutch.lang - r874
+# dutch.lang - r897
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-29 03:43+0100\n"
+"POT-Creation-Date: 2010-01-19 15:10+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: glowy\n"
 "Language-Team: tj_cool, glowy\n"
@@ -23,7 +23,7 @@ msgid " could not be downloaded."
 msgstr " kon niet worden gedownload."
 
 msgid " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information."
-msgstr " is opgeslagen. De tekst is niet gecontroleerd. Delen van de code kunnen elkaar tegenwerken. Als je moeilijkheden ondervind, open het bestand in een echte tekstverwerker voor meer informatie."
+msgstr " is opgeslagen. De tekst is niet gecontroleerd. Delen van de code kunnen elkaar tegenwerken. Als je moeilijkheden ondervind, open de tekst in een echte tekstverwerker voor meer informatie."
 
 msgid " is not on the server."
 msgstr " staat niet op de server."
@@ -409,7 +409,7 @@ msgid "Do you really want to delete:"
 msgstr "Wil je echt verwijderen:"
 
 msgid "Do you want to apply it now?"
-msgstr ""
+msgstr "Wil je dit nu toepassen?"
 
 msgid "Do you want to change language?"
 msgstr "Wil je de taal wijzigen?"
@@ -475,7 +475,7 @@ msgid "ERROR:"
 msgstr "FOUT:"
 
 msgid "ERROR: Can't set up theme."
-msgstr ""
+msgstr "FOUT: Kan thema niet instellen"
 
 msgid "Enable Parental Control"
 msgstr "Ouderlijk toezicht inschakelen"
@@ -562,7 +562,7 @@ msgid "GUI Settings"
 msgstr "Menu opties"
 
 msgid "GXtheme.cfg not found in any subfolder."
-msgstr ""
+msgstr "GXtheme.cfg in geen enkele submap gevonden."
 
 msgid "Game ID"
 msgstr "Spel ID"
@@ -1341,6 +1341,36 @@ msgstr "van"
 
 msgid "seconds left"
 msgstr "seconden over"
+
+#~ msgid "Change Play Path"
+#~ msgstr "Verander afspeel locatie"
+
+#~ msgid "Music Loop Mode"
+#~ msgstr "Muziek Herhaal Mode"
+
+#~ msgid "Partition Format Menu"
+#~ msgstr "Partitie Formatteer Menu"
+
+#~ msgid "Play Next"
+#~ msgstr "Speel Volgende"
+
+#~ msgid "Play Previous"
+#~ msgstr "Speel Vorige"
+
+#~ msgid "Playing Music:"
+#~ msgstr "Speelt nu:"
+
+#~ msgid "Reset BG Music"
+#~ msgstr "Reset achtergrond muziek"
+
+#~ msgid "Reset to standard BGM?"
+#~ msgstr "Reset naar standaard achtergrond muziek?"
+
+#~ msgid "Unlock the app first."
+#~ msgstr "Geef app eerst vrij."
+
+#~ msgid "You can't access this menu!"
+#~ msgstr "Je hebt geen toegang tot dit menu!"
 
 #~ msgid "Can't decompress LZ77"
 #~ msgstr "Kan LZ77 niet uitpakken"

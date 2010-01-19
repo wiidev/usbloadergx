@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# French V12.1 r878
+# French V12.4 r897
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-29 03:43+0100\n"
+"POT-Creation-Date: 2010-01-19 15:02+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Kin8\n"
 "Language-Team: Badablek, Amour, ikya & Kin8\n"
@@ -1341,6 +1341,48 @@ msgstr "sur"
 
 msgid "seconds left"
 msgstr "secondes restantes"
+
+#~ msgid "Change Play Path"
+#~ msgstr "Changer Dossier"
+
+#~ msgid "Loop Directory"
+#~ msgstr "Répéter Dossier"
+
+#~ msgid "Loop Music"
+#~ msgstr "Répéter Musique"
+
+#~ msgid "Music Loop Mode"
+#~ msgstr "Mode Boucle Musique"
+
+#~ msgid "Partition Format Menu"
+#~ msgstr "Menu Formatage Partition"
+
+#~ msgid "Play Next"
+#~ msgstr "Jouer Suiv."
+
+#~ msgid "Play Once"
+#~ msgstr "Jouer 1 fois"
+
+#~ msgid "Play Previous"
+#~ msgstr "Jouer Précéd."
+
+#~ msgid "Playing Music:"
+#~ msgstr "Musique Actuelle:"
+
+#~ msgid "Random Directory Music"
+#~ msgstr "Aléatoire"
+
+#~ msgid "Reset BG Music"
+#~ msgstr "Reset"
+
+#~ msgid "Reset to standard BGM?"
+#~ msgstr "Restaurer fond sonore standard ?"
+
+#~ msgid "Unlock the app first."
+#~ msgstr "Déverrouillage nécessaire."
+
+#~ msgid "You can't access this menu!"
+#~ msgstr "Accès à ce menu refusé!"
 
 #~ msgid "Can't decompress LZ77"
 #~ msgstr "Décompression LZ77 Impossible"

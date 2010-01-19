@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-# portuguese_pt.lang - r867
+# portuguese_pt.lang - r894
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-29 03:43+0100\n"
-"PO-Revision-Date: 2009-12-21 14:45-0000\n"
+"POT-Creation-Date: 2010-01-19 15:02+0100\n"
+"PO-Revision-Date: 2010-01-16 11:05-0000\n"
 "Last-Translator: Sky8000\n"
 "Language-Team: Sky8000 <sky8000@hotmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -409,7 +409,7 @@ msgid "Do you really want to delete:"
 msgstr "Tem a certeza que quer eliminar o jogo:"
 
 msgid "Do you want to apply it now?"
-msgstr ""
+msgstr "Deseja aplicar agora?"
 
 msgid "Do you want to change language?"
 msgstr "Deseja alterar o idioma?"
@@ -475,7 +475,7 @@ msgid "ERROR:"
 msgstr "ERRO:"
 
 msgid "ERROR: Can't set up theme."
-msgstr ""
+msgstr "ERRO: Impossível configurar tema."
 
 msgid "Enable Parental Control"
 msgstr "Activar Controlo Parental"
@@ -562,7 +562,7 @@ msgid "GUI Settings"
 msgstr "Definições do Interface"
 
 msgid "GXtheme.cfg not found in any subfolder."
-msgstr ""
+msgstr "GXtheme.cfg não encontrado em nenhuma sub-pasta."
 
 msgid "Game ID"
 msgstr "ID do Jogo"
@@ -1341,6 +1341,36 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
+
+#~ msgid "Change Play Path"
+#~ msgstr "Alterar Pasta de Músicas"
+
+#~ msgid "Music Loop Mode"
+#~ msgstr "Modo de Repetição"
+
+#~ msgid "Partition Format Menu"
+#~ msgstr "Menu de Formatação de Partição"
+
+#~ msgid "Play Next"
+#~ msgstr "Próxima"
+
+#~ msgid "Play Previous"
+#~ msgstr "Anterior"
+
+#~ msgid "Playing Music:"
+#~ msgstr "Reproduzindo:"
+
+#~ msgid "Reset BG Music"
+#~ msgstr "Repor Música de Fundo"
+
+#~ msgid "Reset to standard BGM?"
+#~ msgstr "Repor Musica de Fundo predefinida?"
+
+#~ msgid "Unlock the app first."
+#~ msgstr "Desbloquear aplicação primeiro."
+
+#~ msgid "You can't access this menu!"
+#~ msgstr "Não tem acesso a este menu!"
 
 #~ msgid "Can't decompress LZ77"
 #~ msgstr "Não é possível descomprimir LZ77"
