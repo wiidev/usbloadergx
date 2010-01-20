@@ -326,6 +326,8 @@ int MainMenu(int menu) {
 
 	CloseXMLDatabase();
     NewTitles::DestroyInstance();
+	CFG_Cleanup();
+
     if (strcmp(headlessID,"")!=0)//the GUIthread was never started, so it cant be ended and joined properly if headless mode was used.  so we resume it and close it.
 		ResumeGui();
 	ExitGUIThreads();
