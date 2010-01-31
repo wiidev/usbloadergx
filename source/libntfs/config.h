@@ -4,9 +4,11 @@
 /* Define if building universal (internal helper macro) */
 /* #undef AC_APPLE_UNIVERSAL_BUILD */
 
+//#define DEBUG
 /* Define to 1 if debug should be enabled */
 #ifdef DEBUG
-#  define ENABLE_DEBUG
+#define ENABLE_DEBUG
+#define NTFS_ENABLE_LOG
 #endif
 
 /* Define to 1 if using internal fuse */

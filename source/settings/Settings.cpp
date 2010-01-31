@@ -49,7 +49,8 @@ static const char *opts_language[settings_language_max] = {trNOOP("Console Defau
 static const char *opts_cios[settings_ios_max] = {"IOS 249","IOS 222", "IOS 223", "IOS 250"};
 static const char *opts_parentalcontrol[5] = {trNOOP("0 (Everyone)"),trNOOP("1 (Child 7+)"),trNOOP("2 (Teen 12+)"),trNOOP("3 (Mature 16+)"),trNOOP("4 (Adults Only 18+)")};
 static const char *opts_error002[settings_error002_max] = {trNOOP("No"),trNOOP("Yes"),trNOOP("Anti")};
-static const char *opts_partitions[settings_partitions_max] = {trNOOP("Game partition"),trNOOP("All partitions")};
+static const char *opts_partitions[settings_partitions_max] = {trNOOP("Game partition"),trNOOP("All partitions"), trNOOP("Remove update")};
+static const char *opts_installdir[settings_installdir_max] = {trNOOP("None"), trNOOP("GAMEID_Gamename"), trNOOP("Gamename [GAMEID]")};
 
 bool IsValidPartition(int fs_type, int cios) {
 	if (cios == 249 || cios == 250) {
@@ -1035,10 +1036,9 @@ int MenuSettings()
 							if (ret == ++Idx || firstRun)
 							{
 								if (firstRun) options2.SetName(Idx, "%s", tr("FAT: Use directories"));
-								if (ret == Idx) {
-									Settings.FatInstallToDir = Settings.FatInstallToDir == 0 ? 1 : 0;
-								}
-								options2.SetValue(Idx, "%s", tr(opts_no_yes[Settings.FatInstallToDir]));								
+								if (ret == Idx && ++Settings.FatInstallToDir >= settings_installdir_max)
+									Settings.FatInstallToDir = 0;
+								options2.SetValue(Idx, "%s", tr(opts_installdir[Settings.FatInstallToDir]));
 							}
 
 							if(ret == ++Idx || firstRun)

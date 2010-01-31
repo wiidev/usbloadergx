@@ -21,6 +21,20 @@
 
 #include "config.h"
 
+#ifndef GEKKO
 #ifndef NO_NTFS_DEVICE_DEFAULT_IO_OPS
 
+#ifndef __CYGWIN32__
+
+/* Not on Cygwin; use standard Unix style low level device operations. */
+#include "unix_io.c"
+
+#else /* __CYGWIN32__ */
+
+/* On Cygwin; use Win32 low level device operations. */
+#include "win32_io.c"
+
+#endif /* __CYGWIN32__ */
+
 #endif /* NO_NTFS_DEVICE_DEFAULT_IO_OPS */
+#endif /* GEKKO */

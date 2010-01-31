@@ -624,11 +624,22 @@ f32 WBFS_EstimeGameSize(void) {
 		return WBFS_FAT_EstimateGameSize();
 	}
 
-	partition_selector_t part_sel;
+	partition_selector_t part_sel = ONLY_GAME_PARTITION;
 	if (Settings.fullcopy) {
 		part_sel = ALL_PARTITIONS;
 	} else {
-		part_sel = Settings.partitions_to_install == install_game_only ? ONLY_GAME_PARTITION : ALL_PARTITIONS;
+		switch(Settings.partitions_to_install)
+		{
+			case install_game_only:
+				part_sel = ONLY_GAME_PARTITION;
+				break;
+			case install_all:
+				part_sel = ALL_PARTITIONS;
+				break;
+			case install_all_but_update:
+				part_sel = REMOVE_UPDATE_PARTITION;
+				break;
+		}
 	}
     return wbfs_estimate_disc(hdd, __WBFS_ReadDVD, NULL, part_sel);
 }

@@ -123,6 +123,7 @@ typedef struct _ntfs_vd {
     mutex_t lock;                           /* Volume lock mutex */
     s64 id;                                 /* Filesystem id */
     u32 flags;                              /* Mount flags */
+    char name[128];                         /* Volume name (cached) */
     u16 uid;                                /* User id for entry creation */
     u16 gid;                                /* Group id for entry creation */
     u16 fmask;                              /* Unix style permission mask for file creation */

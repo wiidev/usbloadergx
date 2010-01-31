@@ -24,8 +24,6 @@
 
 #include <malloc.h>
 
-#ifdef _NTFS_SYS_MEM_ALLOC
-
 static inline void* ntfs_alloc (size_t size) {
     return malloc(size);
 }
@@ -41,15 +39,5 @@ static inline void* ntfs_align (size_t size) {
 static inline void ntfs_free (void* mem) {
     free(mem);
 }
-
-#else
-
-void* ntfs_alloc (size_t size);
-void* ntfs_align (size_t size);
-void  ntfs_free (void* mem);
-
-#endif
-
-
 
 #endif /* _MEM_ALLOCATE_H */

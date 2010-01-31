@@ -43,9 +43,7 @@ typedef struct _ntfs_file_state {
     bool compressed;                        /* True if file data is compressed */
     bool encrypted;                         /* True if file data is encryted */
     off_t pos;                              /* Current position within the file (in bytes) */
-    //size_t len;                              /* Total length of the file (in bytes) */
-    //size_t is 32 bit, off_t is signed, so use u64 for len!
-    u64 len;                              /* Total length of the file (in bytes) */
+    size_t len;                             /* Total length of the file (in bytes) */
     struct _ntfs_file_state *prevOpenFile;  /* The previous entry in a double-linked FILO list of open files */
     struct _ntfs_file_state *nextOpenFile;  /* The next entry in a double-linked FILO list of open files */
 } ntfs_file_state;

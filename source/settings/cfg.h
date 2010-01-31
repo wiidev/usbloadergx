@@ -283,8 +283,7 @@ extern "C" {
 		settings_error002_max // always the last entry
 	};
 
-
-	 enum {
+	enum {
 		wiilight_off=0,
 		wiilight_on,
 		wiilight_forInstall,
@@ -378,7 +377,14 @@ extern "C" {
 	enum {
 		install_game_only,
 		install_all,
+		install_all_but_update,
 		settings_partitions_max // always the last entry
+	};
+	enum {
+		not_install_to_dir,
+		install_to_gameid_name,
+		install_to_name_gameid,
+		settings_installdir_max // always the last entry
 	};
 	struct SParental {
 		u8 enabled;

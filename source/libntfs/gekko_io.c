@@ -2,6 +2,7 @@
  * gekko_io.c - Gekko style disk io functions.
  *
  * Copyright (c) 2009 Rhys "Shareese" Koedijk
+ * Copyright (c) 2010 Dimok
  *
  * This program/include file is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as published
@@ -83,14 +84,14 @@ static int ntfs_device_gekko_io_open(struct ntfs_device *dev, int flags)
         errno = EBADF;
         return -1;
     }
-    
+
     // Get the device interface
     const DISC_INTERFACE* interface = fd->interface;
     if (!interface) {
         errno = ENODEV;
         return -1;
     }
-    
+
     // Start the device interface and ensure that it is inserted
     if (!interface->startup()) {
         ntfs_log_perror("device failed to start\n");
@@ -102,7 +103,7 @@ static int ntfs_device_gekko_io_open(struct ntfs_device *dev, int flags)
         errno = EIO;
         return -1;
     }
-    
+
     // Check that the device isn't already open (used by another volume?)
     if (NDevOpen(dev)) {
         ntfs_log_perror("device is busy (already open)\n");
@@ -122,7 +123,7 @@ static int ntfs_device_gekko_io_open(struct ntfs_device *dev, int flags)
         errno = EIO;
         return -1;
     }
-    
+
     // Parse the boot sector
     fd->hiddenSectors = le32_to_cpu(boot.bpb.hidden_sectors);
     fd->sectorSize = le16_to_cpu(boot.bpb.bytes_per_sector);
@@ -130,7 +131,7 @@ static int ntfs_device_gekko_io_open(struct ntfs_device *dev, int flags)
     fd->pos = 0;
     fd->len = (fd->sectorCount * fd->sectorSize);
     fd->ino = le64_to_cpu(boot.volume_serial_number);
-    
+
     // If the device sector size is not 512 bytes then we cannot continue,
     // gekko disc I/O works on the assumption that sectors are always 512 bytes long.
     // TODO: Implement support for non-512 byte sector sizes through some fancy maths!?
@@ -144,14 +145,14 @@ static int ntfs_device_gekko_io_open(struct ntfs_device *dev, int flags)
     if (flags & O_RDONLY) {
         NDevSetReadOnly(dev);
     }
-    
+
     // Create the cache
     fd->cache = _NTFS_cache_constructor(fd->cachePageCount, fd->cachePageSize, interface, fd->startSector + fd->sectorCount);
 
     // Mark the device as open
     NDevSetBlock(dev);
     NDevSetOpen(dev);
-    
+
     return 0;
 }
 
@@ -161,7 +162,7 @@ static int ntfs_device_gekko_io_open(struct ntfs_device *dev, int flags)
 static int ntfs_device_gekko_io_close(struct ntfs_device *dev)
 {
     ntfs_log_trace("dev %p\n", dev);
-    
+
     // Get the device driver descriptor
     gekko_fd *fd = DEV_FD(dev);
     if (!fd) {
@@ -175,20 +176,20 @@ static int ntfs_device_gekko_io_close(struct ntfs_device *dev)
         errno = EIO;
         return -1;
     }
-    
+
     // Mark the device as closed
     NDevClearOpen(dev);
     NDevClearBlock(dev);
-    
+
     // Flush the device (if dirty and not read-only)
     if (NDevDirty(dev) && !NDevReadOnly(dev)) {
         ntfs_log_debug("device is dirty, will now sync\n");
 
         // ...?
-        
+
         // Mark the device as clean
         NDevClearDirty(dev);
-        
+
     }
 
     // Flush and destroy the cache (if required)
@@ -196,7 +197,7 @@ static int ntfs_device_gekko_io_close(struct ntfs_device *dev)
         _NTFS_cache_flush(fd->cache);
         _NTFS_cache_destructor(fd->cache);
     }
-    
+
     // Shutdown the device interface
     /*const DISC_INTERFACE* interface = fd->interface;
     if (interface) {
@@ -206,7 +207,7 @@ static int ntfs_device_gekko_io_close(struct ntfs_device *dev)
     // Free the device driver private data
     ntfs_free(dev->d_private);
     dev->d_private = NULL;
-    
+
     return 0;
 }
 
@@ -216,14 +217,14 @@ static int ntfs_device_gekko_io_close(struct ntfs_device *dev)
 static s64 ntfs_device_gekko_io_seek(struct ntfs_device *dev, s64 offset, int whence)
 {
     ntfs_log_trace("dev %p, offset %Li, whence %i\n", dev, offset, whence);
-    
+
     // Get the device driver descriptor
     gekko_fd *fd = DEV_FD(dev);
     if (!fd) {
         errno = EBADF;
         return -1;
     }
-    
+
     // Set the current position on the device (in bytes)
     switch(whence) {
         case SEEK_SET: fd->pos = MIN(MAX(offset, 0), fd->len); break;
@@ -259,7 +260,7 @@ static s64 ntfs_device_gekko_io_pread(struct ntfs_device *dev, void *buf, s64 co
 }
 
 /**
- * 
+ *
  */
 static s64 ntfs_device_gekko_io_pwrite(struct ntfs_device *dev, const void *buf, s64 count, s64 offset)
 {
@@ -271,119 +272,129 @@ static s64 ntfs_device_gekko_io_pwrite(struct ntfs_device *dev, const void *buf,
  */
 static s64 ntfs_device_gekko_io_readbytes(struct ntfs_device *dev, s64 offset, s64 count, void *buf)
 {
-    ntfs_log_trace("dev %p, offset %Li, count %Li\n", dev, offset, count);
-    
+    //ntfs_log_trace("dev %p, offset %Li, count %Li\n", dev, offset, count);
+    ntfs_log_trace("dev %p, offset %d, count %d\n", dev, (u32)offset, (u32)count);
+
     // Get the device driver descriptor
     gekko_fd *fd = DEV_FD(dev);
     if (!fd) {
         errno = EBADF;
         return -1;
     }
-    
+
     // Get the device interface
     const DISC_INTERFACE* interface = fd->interface;
     if (!interface) {
         errno = ENODEV;
         return -1;
     }
-    
-    sec_t sec_start = fd->startSector;
+
+    if(!count)
+        return 0;
+
+    sec_t sec_start = (sec_t) fd->startSector;
     sec_t sec_count = 1;
     u16 buffer_offset = 0;
-    u8 *buffer;
-    
+    u8 *buffer = NULL;
+
     // Determine the range of sectors required for this read
     if (offset > 0) {
-        sec_start += floor(offset / fd->sectorSize);
-        buffer_offset = offset % fd->sectorSize;
+        sec_start += (sec_t) floor(offset / fd->sectorSize);
+        buffer_offset = (sec_t) offset % fd->sectorSize;
     }
     if (count > fd->sectorSize) {
-        sec_count = ceil(count / fd->sectorSize);
+        sec_count = (sec_t) ceil(count / (float)fd->sectorSize);
     }
-    
+
     // If this read happens to be on the sector boundaries then do the read straight into the destination buffer
+
     if((offset % fd->sectorSize == 0) && (count % fd->sectorSize == 0)) {
-        
+
         // Read from the device
         ntfs_log_trace("direct read from sector %d (%d sector(s) long)\n", sec_start, sec_count);
-        if (!ntfs_device_gekko_io_readsectors(dev, sec_start, sec_count, buf)) {        
+        if (!ntfs_device_gekko_io_readsectors(dev, sec_start, sec_count, buf)) {
             ntfs_log_perror("direct read failure @ sector %d (%d sector(s) long)\n", sec_start, sec_count);
             errno = EIO;
             return -1;
         }
-        
+
     // Else read into a buffer and copy over only what was requested
-    } else {
-        
+    } else
+	{
+
         // Allocate a buffer to hold the read data
         buffer = (u8*)ntfs_alloc(sec_count * fd->sectorSize);
         if (!buffer) {
             errno = ENOMEM;
             return -1;
         }
-        
+
         // Read from the device
         ntfs_log_trace("buffered read from sector %d (%d sector(s) long)\n", sec_start, sec_count);
+        ntfs_log_trace("count: %d  sec_count:%d  fd->sectorSize: %d )\n", (u32)count, (u32)sec_count,(u32)fd->sectorSize);
         if (!ntfs_device_gekko_io_readsectors(dev, sec_start, sec_count, buffer)) {
             ntfs_log_perror("buffered read failure @ sector %d (%d sector(s) long)\n", sec_start, sec_count);
             ntfs_free(buffer);
             errno = EIO;
             return -1;
         }
-        
+
         // Copy what was requested to the destination buffer
         memcpy(buf, buffer + buffer_offset, count);
         ntfs_free(buffer);
-        
+
     }
-    
+
     return count;
 }
 
 /**
- * 
+ *
  */
 static s64 ntfs_device_gekko_io_writebytes(struct ntfs_device *dev, s64 offset, s64 count, const void *buf)
 {
     ntfs_log_trace("dev %p, offset %Li, count %Li\n", dev, offset, count);
-    
+
     // Get the device driver descriptor
     gekko_fd *fd = DEV_FD(dev);
     if (!fd) {
         errno = EBADF;
         return -1;
     }
-    
+
     // Get the device interface
     const DISC_INTERFACE* interface = fd->interface;
     if (!interface) {
         errno = ENODEV;
         return -1;
     }
-    
+
     // Check that the device can be written to
     if (NDevReadOnly(dev)) {
         errno = EROFS;
         return -1;
     }
-    
-    sec_t sec_start = fd->startSector;
+
+    if(!count)
+        return 0;
+
+    sec_t sec_start = (sec_t) fd->startSector;
     sec_t sec_count = 1;
-    u16 buffer_offset = 0;
-    u8 *buffer;
-    
+    u32 buffer_offset = 0;
+    u8 *buffer = NULL;
+
     // Determine the range of sectors required for this write
     if (offset > 0) {
-        sec_start += floor(offset / fd->sectorSize);
-        buffer_offset = offset % fd->sectorSize;
+        sec_start += (sec_t) floor(offset / fd->sectorSize);
+        buffer_offset = (u32) ceil(offset % fd->sectorSize);
     }
     if (count > fd->sectorSize) {
-        sec_count = ceil(count / fd->sectorSize);
+        sec_count = (sec_t) ceil((float) count / (float)fd->sectorSize);
     }
-    
+
     // If this write happens to be on the sector boundaries then do the write straight to disc
     if((offset % fd->sectorSize == 0) && (count % fd->sectorSize == 0)) {
-        
+
         // Write to the device
         ntfs_log_trace("direct write to sector %d (%d sector(s) long)\n", sec_start, sec_count);
         if (!ntfs_device_gekko_io_writesectors(dev, sec_start, sec_count, buf)) {
@@ -391,21 +402,20 @@ static s64 ntfs_device_gekko_io_writebytes(struct ntfs_device *dev, s64 offset, 
             errno = EIO;
             return -1;
         }
-        
+
     // Else write from a buffer aligned to the sector boundaries
     } else {
-        
+
         // Allocate a buffer to hold the write data
-        buffer = (u8*)ntfs_alloc(sec_count * fd->sectorSize);
+        buffer = (u8*)ntfs_alloc((sec_count+1) * fd->sectorSize);
         if (!buffer) {
             errno = ENOMEM;
             return -1;
         }
-        
         // Read the first and last sectors of the buffer from disc (if required)
-        // NOTE: This is done because the data does not line up with the sector boundaries, 
+        // NOTE: This is done because the data does not line up with the sector boundaries,
         //       we just read in the buffer edges where the data overlaps with the rest of the disc
-        if((offset % fd->sectorSize == 0)) {
+        if(offset % fd->sectorSize != 0) {
             if (!ntfs_device_gekko_io_readsectors(dev, sec_start, 1, buffer)) {
                 ntfs_log_perror("read failure @ sector %d\n", sec_start);
                 ntfs_free(buffer);
@@ -413,36 +423,36 @@ static s64 ntfs_device_gekko_io_writebytes(struct ntfs_device *dev, s64 offset, 
                 return -1;
             }
         }
-        if((count % fd->sectorSize == 0)) {
-            if (!ntfs_device_gekko_io_readsectors(dev, sec_start + sec_count, 1, buffer + ((sec_count - 1) * fd->sectorSize))) {
+        if(count % fd->sectorSize != 0) {
+            if (!ntfs_device_gekko_io_readsectors(dev, sec_start + sec_count-1, 1, buffer + ((sec_count - 1) * fd->sectorSize))) {
                     ntfs_log_perror("read failure @ sector %d\n", sec_start + sec_count);
                     ntfs_free(buffer);
                     errno = EIO;
                     return -1;
-                }
             }
-        
+        }
+
         // Copy the data into the write buffer
         memcpy(buffer + buffer_offset, buf, count);
-        
+
         // Write to the device
         ntfs_log_trace("buffered write to sector %d (%d sector(s) long)\n", sec_start, sec_count);
         if (!ntfs_device_gekko_io_writesectors(dev, sec_start, sec_count, buffer)) {
             ntfs_log_perror("buffered write failure @ sector %d\n", sec_start);
             ntfs_free(buffer);
             errno = EIO;
-            return false;
+            return -1;
         }
 
         // Free the buffer
         ntfs_free(buffer);
-        
+
     }
-    
+
     // Mark the device as dirty (if we actually wrote anything)
-    if (count)
+    if (count > 0)
         NDevSetDirty(dev);
-    
+
     return count;
 }
 
@@ -454,13 +464,12 @@ static bool ntfs_device_gekko_io_readsectors(struct ntfs_device *dev, sec_t sect
         errno = EBADF;
         return false;
     }
-    
     // Read the sectors from disc (or cache, if enabled)
     if (fd->cache)
         return _NTFS_cache_readSectors(fd->cache, sector, numSectors, buffer);
     else
-        return fd->interface->readSectors(sector, numSectors, buffer); 
-    
+        return fd->interface->readSectors(sector, numSectors, buffer);
+
     return false;
 }
 
@@ -470,15 +479,15 @@ static bool ntfs_device_gekko_io_writesectors(struct ntfs_device *dev, sec_t sec
     gekko_fd *fd = DEV_FD(dev);
     if (!fd) {
         errno = EBADF;
-        return -1;
+        return false;
     }
-    
+
     // Write the sectors to disc (or cache, if enabled)
     if (fd->cache)
         return _NTFS_cache_writeSectors(fd->cache, sector, numSectors, buffer);
     else
         return fd->interface->writeSectors(sector, numSectors, buffer);
-    
+
     return false;
 }
 
@@ -489,7 +498,7 @@ static int ntfs_device_gekko_io_sync(struct ntfs_device *dev)
 {
 	gekko_fd *fd = DEV_FD(dev);
     ntfs_log_trace("dev %p\n", dev);
-    
+
     // Check that the device can be written to
     if (NDevReadOnly(dev)) {
         errno = EROFS;
@@ -498,7 +507,7 @@ static int ntfs_device_gekko_io_sync(struct ntfs_device *dev)
 
     // Mark the device as clean
     NDevClearDirty(dev);
-    
+
     // Flush any sectors in the disc cache (if required)
     if (fd->cache) {
         if (!_NTFS_cache_flush(fd->cache)) {
@@ -506,7 +515,7 @@ static int ntfs_device_gekko_io_sync(struct ntfs_device *dev)
             return -1;
         }
     }
-    
+
     return 0;
 }
 
@@ -516,18 +525,18 @@ static int ntfs_device_gekko_io_sync(struct ntfs_device *dev)
 static int ntfs_device_gekko_io_stat(struct ntfs_device *dev, struct stat *buf)
 {
     ntfs_log_trace("dev %p, buf %p\n", dev, buf);
-    
+
     // Get the device driver descriptor
     gekko_fd *fd = DEV_FD(dev);
     if (!fd) {
         errno = EBADF;
         return -1;
     }
-    
+
     // Short circuit cases were we don't actually have to do anything
     if (!buf)
         return 0;
-    
+
     // Build the device mode
     mode_t mode = (S_IFBLK) |
                   (S_IRUSR | S_IRGRP | S_IROTH) |
@@ -543,7 +552,7 @@ static int ntfs_device_gekko_io_stat(struct ntfs_device *dev, struct stat *buf)
     buf->st_rdev = fd->interface->ioType;
     buf->st_blksize = fd->sectorSize;
     buf->st_blocks = fd->sectorCount;
-    
+
     return 0;
 }
 
@@ -553,17 +562,17 @@ static int ntfs_device_gekko_io_stat(struct ntfs_device *dev, struct stat *buf)
 static int ntfs_device_gekko_io_ioctl(struct ntfs_device *dev, int request, void *argp)
 {
     ntfs_log_trace("dev %p, request %i, argp %p\n", dev, request, argp);
-    
+
     // Get the device driver descriptor
     gekko_fd *fd = DEV_FD(dev);
     if (!fd) {
         errno = EBADF;
         return -1;
     }
-    
+
     // Figure out which i/o control was requested
     switch (request) {
-        
+
         // Get block device size (sectors)
         #if defined(BLKGETSIZE)
         case BLKGETSIZE: {
@@ -571,7 +580,7 @@ static int ntfs_device_gekko_io_ioctl(struct ntfs_device *dev, int request, void
             return 0;
         }
         #endif
-        
+
         // Get block device size (bytes)
         #if defined(BLKGETSIZE64)
         case BLKGETSIZE64: {
@@ -579,7 +588,7 @@ static int ntfs_device_gekko_io_ioctl(struct ntfs_device *dev, int request, void
             return 0;
         }
         #endif
-        
+
         // Get hard drive geometry
         #if defined(HDIO_GETGEO)
         case HDIO_GETGEO: {
@@ -591,7 +600,7 @@ static int ntfs_device_gekko_io_ioctl(struct ntfs_device *dev, int request, void
             return -1;
         }
         #endif
-        
+
         // Get block device sector size (bytes)
         #if defined(BLKSSZGET)
         case BLKSSZGET: {
@@ -599,7 +608,7 @@ static int ntfs_device_gekko_io_ioctl(struct ntfs_device *dev, int request, void
             return 0;
         }
         #endif
-        
+
         // Set block device block size (bytes)
         #if defined(BLKBSZSET)
         case BLKBSZSET: {
@@ -613,16 +622,16 @@ static int ntfs_device_gekko_io_ioctl(struct ntfs_device *dev, int request, void
             return 0;
         }
         #endif
-        
+
         // Unimplemented ioctrl
         default: {
-            ntfs_log_perror("Unimplemented ioctrl %i\n", request); 
+            ntfs_log_perror("Unimplemented ioctrl %i\n", request);
             errno = EOPNOTSUPP;
             return -1;
         }
-            
+
     }
-    
+
     return 0;
 }
 

@@ -41,7 +41,6 @@
 
 #include "ntfsinternal.h"
 #include "ntfsfile.h"
-#include "ntfs.h"
 
 #define STATE(x)    ((ntfs_file_state*)x)
 
@@ -53,10 +52,11 @@ void ntfsCloseFile (ntfs_file_state *file)
 
     // Special case fix ups for compressed and/or encrypted files
     if (file->compressed)
-        ntfs_attr_pclose(file->data_na);        
+        ntfs_attr_pclose(file->data_na);   
+#ifdef HAVE_SETXATTR		     
     if (file->encrypted)
         ntfs_efs_fixup_attribute(NULL, file->data_na);
-        
+#endif        
     // Close the file data attribute (if open)
     if (file->data_na)
         ntfs_attr_close(file->data_na);
@@ -198,6 +198,8 @@ int ntfs_open_r (struct _reent *r, void *fileStruct, const char *path, int flags
     // Set the files current position and length
     file->pos = 0;
     file->len = file->data_na->data_size;
+    
+    ntfs_log_trace("file->len %d\n", file->len);
 
     // Update file times
     ntfsUpdateTimes(file->vd, file->ni, NTFS_UPDATE_ATIME);
@@ -354,8 +356,11 @@ ssize_t ntfs_read_r (struct _reent *r, int fd, char *ptr, size_t len)
     if (file->pos + len > file->len) {
         r->_errno = EOVERFLOW;
         len = file->len - file->pos;
+        ntfs_log_trace("EOVERFLOW");
     }
 
+	ntfs_log_trace("file->pos:%d, len:%d, file->len:%d \n", (u32)file->pos, (u32)len, (u32)file->len);
+	
     // Read from the files data attribute
     while (len) {
         ssize_t ret = ntfs_attr_pread(file->data_na, file->pos, len, ptr);
@@ -369,7 +374,7 @@ ssize_t ntfs_read_r (struct _reent *r, int fd, char *ptr, size_t len)
         file->pos += ret;
         read += ret;
     }
-    
+    //ntfs_log_trace("file->pos: %d \n", (u32)file->pos);
     // Update file times (if we actually read something)
     if (read)
         ntfsUpdateTimes(file->vd, file->ni, NTFS_UPDATE_ATIME);

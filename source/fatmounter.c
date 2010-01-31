@@ -24,9 +24,6 @@
 
 /* Disc interfaces */
 extern const DISC_INTERFACE __io_sdhc;
-// read-only
-extern const DISC_INTERFACE __io_sdhc_ro;
-extern const DISC_INTERFACE __io_usbstorage_ro;
 
 void _FAT_mem_init();
 extern sec_t _FAT_startSector;
@@ -82,7 +79,7 @@ int WBFSDevice_Init(u32 sector) {
     //right now mounts first FAT-partition
 
 	//try first mount with cIOS
-    if (!fatMount("USB", &__io_wiiums, 0, CACHE, SECTORS)) {	
+    if (!fatMount("WBFS", &__io_wiiums, 0, CACHE, SECTORS)) {	
 		//try now mount with libogc
 		if (!fatMount("WBFS", &__io_usbstorage, 0, CACHE, SECTORS)) {
 			return -1;
@@ -154,7 +151,7 @@ s32 MountNTFS(u32 sector)
 	//printf("mounting NTFS\n");
 	//Wpad_WaitButtons();
 	_FAT_mem_init();
-	ntfsInit();
+
 	// ntfsInit resets locale settings
 	// which breaks unicode in console
 	// so we change it back to C-UTF-8
@@ -170,22 +167,21 @@ s32 MountNTFS(u32 sector)
 			}
 		}
 		/* Mount device */
-		if (!ntfsMount("NTFS", &__io_wiiums_ro, sector, CACHE, SECTORS, NTFS_DEFAULT)) {
-			ret = ntfsMount("NTFS", &__io_usbstorage_ro, sector, CACHE, SECTORS, NTFS_DEFAULT);
+		if (!ntfsMount("NTFS", &__io_wiiums, sector, CACHE, SECTORS, NTFS_SHOW_HIDDEN_FILES | NTFS_RECOVER)) {
+			ret = ntfsMount("NTFS", &__io_usbstorage, sector, CACHE, SECTORS, NTFS_SHOW_HIDDEN_FILES | NTFS_RECOVER);
 			if (!ret) {
 				return -2;
 			}
 		}
 	} else if (wbfsDev == WBFS_DEVICE_SDHC) {
 		if (sdhc_mode_sd == 0) {
-			ret = ntfsMount("NTFS", &__io_sdhc_ro, 0, CACHE, SECTORS, NTFS_DEFAULT);
+			ret = ntfsMount("NTFS", &__io_sdhc, 0, CACHE, SECTORS, NTFS_SHOW_HIDDEN_FILES | NTFS_RECOVER);
 		} else {
-			ret = ntfsMount("NTFS", &__io_sdhc_ro, 0, CACHE, SECTORS_SD, NTFS_DEFAULT);
+			ret = ntfsMount("NTFS", &__io_sdhc, 0, CACHE, SECTORS_SD, NTFS_SHOW_HIDDEN_FILES | NTFS_RECOVER);
 		}
 		if (!ret) {
 			return -5;
 		}
-
 	}
 
 	fs_ntfs_mount = 1;
@@ -197,7 +193,7 @@ s32 MountNTFS(u32 sector)
 s32 UnmountNTFS(void)
 {
 	/* Unmount device */
-	fatUnmount("NTFS:/");
+	ntfsUnmount("NTFS:/", true);
 
 	fs_ntfs_mount = 0;
 	fs_ntfs_sec = 0;

@@ -47,6 +47,7 @@ extern "C" {
 #define NTFS_UPDATE_ACCESS_TIMES        0x00000004 /* Update file and directory access times */
 #define NTFS_RECOVER                    0x00000008 /* Reset $LogFile if dirty (i.e. from unclean disconnect) */
 #define NTFS_IGNORE_HIBERFILE           0x00000010 /* Mount even if volume is hibernated */
+#define NTFS_READ_ONLY                  0x00000020 /* Mount in read only mode */
 #define NTFS_SU                         NTFS_SHOW_HIDDEN_FILES & NTFS_SHOW_SYSTEM_FILES
 #define NTFS_FORCE                      NTFS_RECOVER & NTFS_IGNORE_HIBERFILE
 

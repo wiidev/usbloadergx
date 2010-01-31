@@ -66,7 +66,6 @@ extern char *strsep(char **stringp, const char *delim);
 #ifdef GEKKO
 
 #include "mem_allocate.h"
-#include <limits.h>
 
 #define XATTR_CREATE 1 
 #define XATTR_REPLACE 2

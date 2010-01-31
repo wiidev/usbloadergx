@@ -97,6 +97,7 @@ int MenuInstall() {
 
             sprintf(gametxt, "%s", tr("Installing game:"));
 
+/*
             if (gamesize > freespace) {
                 char errortxt[50];
                 sprintf(errortxt, "%s: %.2fGB, %s: %.2fGB",tr("Game Size"), gamesize, tr("Free Space"), freespace);
@@ -104,6 +105,7 @@ int MenuInstall() {
                 menu = MENU_DISCLIST;
                 break;
             } else {
+*/			
                 USBStorage_Watchdog(0);
                 SetupGameInstallProgress(gametxt, name);
                 ret = WBFS_AddGame();
@@ -129,7 +131,7 @@ int MenuInstall() {
                     menu = MENU_DISCLIST;
                     break;
                 }
-            }
+//            }
         } else {
             menu = MENU_DISCLIST;
             break;

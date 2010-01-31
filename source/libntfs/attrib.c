@@ -1,11 +1,12 @@
 /**
  * attrib.c - Attribute handling code. Originated from the Linux-NTFS project.
  *
- * Copyright (c) 2000-2005 Anton Altaparmakov
+ * Copyright (c) 2000-2010 Anton Altaparmakov
  * Copyright (c) 2002-2005 Richard Russon
  * Copyright (c) 2002-2008 Szabolcs Szakacsits
  * Copyright (c) 2004-2007 Yura Pakhuchiy
- * Copyright (c) 2007-2009 Jean-Pierre Andre
+ * Copyright (c) 2007-2010 Jean-Pierre Andre
+ * Copyright (c) 2010      Erik Larsson
  *
  * This program/include file is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as published
@@ -39,6 +40,9 @@
 #ifdef HAVE_ERRNO_H
 #include <errno.h>
 #endif
+#ifdef HAVE_LIMITS_H
+#include <limits.h>
+#endif
 
 #include "compat.h"
 #include "attrib.h"
@@ -59,7 +63,6 @@
 #include "logging.h"
 #include "misc.h"
 #include "efs.h"
-#include "ntfs.h"
 
 #define STANDARD_COMPRESSION_UNIT 4
 
@@ -68,6 +71,17 @@ ntfschar STREAM_SDS[] = { const_cpu_to_le16('$'),
 			const_cpu_to_le16('S'),
 			const_cpu_to_le16('D'),
 			const_cpu_to_le16('S'),
+			const_cpu_to_le16('\0') };
+
+ntfschar TXF_DATA[] = { const_cpu_to_le16('$'),
+			const_cpu_to_le16('T'),
+			const_cpu_to_le16('X'),
+			const_cpu_to_le16('F'),
+			const_cpu_to_le16('_'),
+			const_cpu_to_le16('D'),
+			const_cpu_to_le16('A'),
+			const_cpu_to_le16('T'),
+			const_cpu_to_le16('A'),
 			const_cpu_to_le16('\0') };
 
 static int NAttrFlag(ntfs_attr *na, FILE_ATTR_FLAGS flag)
@@ -1057,7 +1071,6 @@ s64 ntfs_attr_pread(ntfs_attr *na, const s64 pos, s64 count, void *b)
 	return ret;
 }
 
-
 static int ntfs_attr_fill_zero(ntfs_attr *na, s64 pos, s64 count)
 {
 	char *buf;
@@ -1870,6 +1883,7 @@ int ntfs_attr_pclose(ntfs_attr *na)
 	}
 
 retry:
+	written = 0;
 	if (!NVolReadOnly(vol)) {
 			
 		written = ntfs_compressed_close(na, rl, ofs);
@@ -3010,10 +3024,14 @@ int ntfs_attr_size_bounds_check(const ntfs_volume *vol, const ATTR_TYPES type,
 /**
  * ntfs_attr_can_be_non_resident - check if an attribute can be non-resident
  * @vol:	ntfs volume to which the attribute belongs
- * @type:	attribute type which to check
+ * @type:	attribute type to check
+ * @name:	attribute name to check
+ * @name_len:	attribute name length
  *
- * Check whether the attribute of @type on the ntfs volume @vol is allowed to
- * be non-resident. This information is obtained from $AttrDef system file.
+ * Check whether the attribute of @type and @name with name length @name_len on
+ * the ntfs volume @vol is allowed to be non-resident.  This information is
+ * obtained from $AttrDef system file and is augmented by rules imposed by
+ * Microsoft (e.g. see http://support.microsoft.com/kb/974729/).
  *
  * Return 0 if the attribute is allowed to be non-resident and -1 if not or an
  * error occurred. On error the error code is stored in errno. The following
@@ -3022,16 +3040,34 @@ int ntfs_attr_size_bounds_check(const ntfs_volume *vol, const ATTR_TYPES type,
  *	ENOENT	- The attribute @type is not specified in $AttrDef.
  *	EINVAL	- Invalid parameters (e.g. @vol is not valid).
  */
-int ntfs_attr_can_be_non_resident(const ntfs_volume *vol, const ATTR_TYPES type)
+static int ntfs_attr_can_be_non_resident(const ntfs_volume *vol, const ATTR_TYPES type,
+					const ntfschar *name, int name_len)
 {
 	ATTR_DEF *ad;
+	BOOL allowed;
 
-	/* Find the attribute definition record in $AttrDef. */
-	ad = ntfs_attr_find_in_attrdef(vol, type);
-	if (!ad)
-		return -1;
-	/* Check the flags and return the result. */
-	if (ad->flags & ATTR_DEF_RESIDENT) {
+	/*
+	 * Microsoft has decreed that $LOGGED_UTILITY_STREAM attributes with a
+	 * name of $TXF_DATA must be resident despite the entry for
+	 * $LOGGED_UTILITY_STREAM in $AttrDef allowing them to be non-resident.
+	 * Failure to obey this on the root directory mft record of a volume
+	 * causes Windows Vista and later to see the volume as a RAW volume and
+	 * thus cannot mount it at all.
+	 */
+	if ((type == AT_LOGGED_UTILITY_STREAM)
+	    && name
+	    && ntfs_names_are_equal(TXF_DATA, 9, name, name_len,
+			CASE_SENSITIVE, vol->upcase, vol->upcase_len))
+		allowed = FALSE;
+	else {
+		/* Find the attribute definition record in $AttrDef. */
+		ad = ntfs_attr_find_in_attrdef(vol, type);
+		if (!ad)
+			return -1;
+		/* Check the flags and return the result. */
+		allowed = !(ad->flags & ATTR_DEF_RESIDENT);
+	}
+	if (!allowed) {
 		errno = EPERM;
 		ntfs_log_trace("Attribute can't be non-resident\n");
 		return -1;
@@ -3296,7 +3332,7 @@ int ntfs_non_resident_attr_record_add(ntfs_inode *ni, ATTR_TYPES type,
 		return -1;
 	}
 
-	if (ntfs_attr_can_be_non_resident(ni->vol, type)) {
+	if (ntfs_attr_can_be_non_resident(ni->vol, type, name, name_len)) {
 		if (errno == EPERM)
 			ntfs_log_perror("Attribute can't be non resident");
 		else
@@ -3591,7 +3627,7 @@ int ntfs_attr_add(ntfs_inode *ni, ATTR_TYPES type,
 	}
 
 	/* Sanity checks for always resident attributes. */
-	if (ntfs_attr_can_be_non_resident(ni->vol, type)) {
+	if (ntfs_attr_can_be_non_resident(ni->vol, type, name, name_len)) {
 		if (errno != EPERM) {
 			err = errno;
 			ntfs_log_perror("ntfs_attr_can_be_non_resident failed");
@@ -4156,7 +4192,7 @@ int ntfs_attr_make_non_resident(ntfs_attr *na,
 	}
 
 	/* Check that the attribute is allowed to be non-resident. */
-	if (ntfs_attr_can_be_non_resident(vol, na->type))
+	if (ntfs_attr_can_be_non_resident(vol, na->type, na->name, na->name_len))
 		return -1;
 
 	new_allocated_size = (le32_to_cpu(a->value_length) + vol->cluster_size
