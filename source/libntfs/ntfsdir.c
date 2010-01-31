@@ -328,6 +328,12 @@ int ntfs_statvfs_r (struct _reent *r, const char *path, struct statvfs *buf)
     // Zero out the stat buffer
     memset(buf, 0, sizeof(struct statvfs));
 
+	if(ntfs_volume_get_free_space(vd->vol) < 0)
+	{
+		ntfsUnlock(vd);
+		return -1;
+	}
+	
     // File system block size
     buf->f_bsize = vd->vol->cluster_size;
 

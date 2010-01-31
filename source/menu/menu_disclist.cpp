@@ -89,7 +89,7 @@ int MenuDiscList() {
     char theTime[80]="";
     time_t lastrawtime=0;
 
-	if (mountMethod != 3 && load_from_fs == PART_FS_WBFS) {
+	if (mountMethod != 3 && load_from_fs != PART_FS_FAT) {
 		WBFS_DiskSpace(&used, &freespace);
 	}
 
@@ -196,7 +196,7 @@ int MenuDiscList() {
     screenShotBtn.SetTrigger(&trigZ);
 
     char spaceinfo[30];
-	if (load_from_fs != PART_FS_WBFS) {
+	if (load_from_fs == PART_FS_FAT) {
 		memset(spaceinfo, 0, 30);
 	} else {
 		if (!strcmp(Settings.db_language,"JA")) {

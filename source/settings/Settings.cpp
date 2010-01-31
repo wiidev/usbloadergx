@@ -2147,12 +2147,12 @@ int MenuSettings()
 	while (w.GetEffect()>0) usleep(50);
 
 	// if partition has changed, Reinitialize it 
-	PartInfo pinfo = partitions.pinfo[Settings.partition];
-	partitionEntry pentry = partitions.pentry[Settings.partition];
-	load_from_fs = pinfo.part_fs;
 	if (Settings.partition != settingspartitionold) {
 		WBFS_Close();
-		WBFS_OpenPart(load_from_fs, pinfo.index, pentry.sector, pentry.size, (char *) &game_partition);
+		PartInfo pinfo = partitions.pinfo[Settings.partition];
+		partitionEntry pentry = partitions.pentry[Settings.partition];
+ 		WBFS_OpenPart(load_from_fs, pinfo.index, pentry.sector, pentry.size, (char *) &game_partition);
+		load_from_fs = pinfo.part_fs;
 	}
 		
 	// if language has changed, reload titles
