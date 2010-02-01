@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# japanese.lang - r894
+# japanese.lang - r899
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-19 15:02+0100\n"
+"POT-Creation-Date: 2010-02-01 13:58+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
@@ -549,6 +549,9 @@ msgstr "フランス語"
 msgid "Full Shutdown"
 msgstr "シャットダウン"
 
+msgid "GAMEID_Gamename"
+msgstr ""
+
 msgid "GCT Cheatcodes Path"
 msgstr "GCTファイルのパス"
 
@@ -590,6 +593,9 @@ msgstr "このｹﾞｰﾑは既にｲﾝｽﾄｰﾙされています:"
 
 msgid "Game partition"
 msgstr "ゲーム領域のみ"
+
+msgid "Gamename [GAMEID]"
+msgstr ""
 
 msgid "Games"
 msgstr "総ゲーム数"
@@ -654,16 +660,13 @@ msgid "Install"
 msgstr "ｲﾝｽﾄｰﾙ"
 
 msgid "Install 1:1 Copy"
-msgstr "フルコピー"
+msgstr "完全にコピーする"
 
 msgid "Install Error!"
 msgstr "インストールエラー!"
 
 msgid "Install a game"
 msgstr "ゲームをインストール"
-
-msgid "Install not possible"
-msgstr "インストールできません"
 
 msgid "Install partitions"
 msgstr "保存する領域"
@@ -831,6 +834,9 @@ msgstr "更新はありません"
 msgid "No themes found on the site."
 msgstr "テーマが見つかりません"
 
+msgid "None"
+msgstr ""
+
 msgid "Normal"
 msgstr "ワイド"
 
@@ -944,6 +950,9 @@ msgstr "発売日"
 
 msgid "Reload SD"
 msgstr "SDを再読み込み"
+
+msgid "Remove update"
+msgstr ""
 
 msgid "Rename Game on WBFS"
 msgstr "WBFS内のゲーム名を変更"
@@ -1112,7 +1121,7 @@ msgid "Title Launcher"
 msgstr "チャンネルランチャー"
 
 msgid "Titles from WiiTDB"
-msgstr "ゲーム名の日本語化"
+msgstr "ゲーム名のリスト"
 
 msgid "Tooltips"
 msgstr "ヒントバルーン"
@@ -1237,13 +1246,13 @@ msgid "Wii Settings"
 msgstr "データ管理"
 
 msgid "WiiTDB Files"
-msgstr "WiiTDBﾌｧｲﾙ"
+msgstr "ゲーム名リスト"
 
 msgid "WiiTDB Path"
-msgstr "WiiTDBのパス"
+msgstr "ゲーム名リストのパス"
 
 msgid "WiiTDB Path changed."
-msgstr "WiiTDBのパスを変更しました."
+msgstr "ゲーム名リストのパスを変更しました."
 
 msgid "Wiilight"
 msgstr "スロット点灯機能"
@@ -1259,9 +1268,6 @@ msgstr "削除していいですか "
 
 msgid "You are choosing to display favorites and you do not have any selected."
 msgstr "お気に入りの登録がありません"
-
-msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
-msgstr "NTFS領域にｲﾝｽﾄｰﾙ中にｴﾗｰが発生するとｲﾝｽﾄｰﾙに失敗します"
 
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr "Wii本体設定で使用制限機能を有効にしてください"
@@ -1341,6 +1347,12 @@ msgstr "中"
 
 msgid "seconds left"
 msgstr "秒で完了"
+
+#~ msgid "Install not possible"
+#~ msgstr "インストールできません"
+
+#~ msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
+#~ msgstr "NTFS領域にｲﾝｽﾄｰﾙ中にｴﾗｰが発生するとｲﾝｽﾄｰﾙに失敗します"
 
 #~ msgid "Change Play Path"
 #~ msgstr "プレイパスを変更"

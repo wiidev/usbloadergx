@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-# swedish.lang - r894
+# swedish.lang - r898
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-19 15:02+0100\n"
-"PO-Revision-Date: 2009-11-24 22:11+0200\n"
+"POT-Creation-Date: 2010-02-01 13:58+0100\n"
+"PO-Revision-Date: 2010-01-19 17:39+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
 "MIME-Version: 1.0\n"
@@ -549,6 +549,9 @@ msgstr "Franska"
 msgid "Full Shutdown"
 msgstr "Stäng av helt"
 
+msgid "GAMEID_Gamename"
+msgstr ""
+
 msgid "GCT Cheatcodes Path"
 msgstr "Fusksökväg"
 
@@ -562,7 +565,7 @@ msgid "GUI Settings"
 msgstr "GUI inställningar"
 
 msgid "GXtheme.cfg not found in any subfolder."
-msgstr "GXtheme.cfg kunde inte hitta några undermappar."
+msgstr "GXtheme.cfg kunde inte hittas i några undermappar."
 
 msgid "Game ID"
 msgstr "Spel-ID"
@@ -590,6 +593,9 @@ msgstr "Spelet är redan installerat:"
 
 msgid "Game partition"
 msgstr "Spel partition"
+
+msgid "Gamename [GAMEID]"
+msgstr ""
 
 msgid "Games"
 msgstr "Spel"
@@ -661,9 +667,6 @@ msgstr "Fel vid installering!"
 
 msgid "Install a game"
 msgstr "Installera ett spel"
-
-msgid "Install not possible"
-msgstr "Installation inte möjlig"
 
 msgid "Install partitions"
 msgstr "Installera partitioner"
@@ -814,7 +817,7 @@ msgid "No USB Device found."
 msgstr "Ingen USB-enhet hittad."
 
 msgid "No WBFS or FAT/NTFS partition found"
-msgstr ""
+msgstr "Ingen WBFS eller FAT/NTFS partition hittad"
 
 msgid "No cheats were selected"
 msgstr "Inga fusk har valda"
@@ -830,6 +833,9 @@ msgstr "Inga nya uppdateringar"
 
 msgid "No themes found on the site."
 msgstr "Inga teman hittades på sidan."
+
+msgid "None"
+msgstr ""
 
 msgid "Normal"
 msgstr "Vanlig"
@@ -944,6 +950,9 @@ msgstr "Släppt"
 
 msgid "Reload SD"
 msgstr "Ladda om SD"
+
+msgid "Remove update"
+msgstr ""
 
 msgid "Rename Game on WBFS"
 msgstr "Döp om spel på WBFS"
@@ -1127,7 +1136,7 @@ msgid "USB Loader GX is protected"
 msgstr "USB Loader GX är skyddad"
 
 msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
-msgstr "USB Loader GX kommer ändast köra med Hermes CIOS ver 4! Vänligen kontrollera att du har ver 4 installerad!"
+msgstr "USB Loader GX kommer endast köra med Hermes CIOS ver 4! Vänligen kontrollera att du har ver 4 installerad!"
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
@@ -1260,9 +1269,6 @@ msgstr "Då håller på att radera "
 msgid "You are choosing to display favorites and you do not have any selected."
 msgstr "Du har valt att visa favoriter men du har inga favoriter valda."
 
-msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
-msgstr "Du använder NTFS filsystem. Pågrund av möjliga skriv fel till en NTFS parttion, så är det inte möjligt att installera spel."
-
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr "Du har inte föräldrakontroll aktiverad. Om du vill använda föräldrakontroll, aktivera det i Wii inställningar."
 
@@ -1341,6 +1347,12 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder kvar"
+
+#~ msgid "Install not possible"
+#~ msgstr "Installation inte möjlig"
+
+#~ msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
+#~ msgstr "Du använder NTFS filsystem. Pågrund av möjliga skriv fel till en NTFS partition, så är det inte möjligt att installera spel."
 
 #~ msgid "Change Play Path"
 #~ msgstr "Ändra spel sökväg"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-19 15:02+0100\n"
+"POT-Creation-Date: 2010-02-01 13:58+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: knife.hu kavid\n"
 "Language-Team: kavid\n"
@@ -549,6 +549,9 @@ msgstr "法文"
 msgid "Full Shutdown"
 msgstr "完全关机"
 
+msgid "GAMEID_Gamename"
+msgstr ""
+
 msgid "GCT Cheatcodes Path"
 msgstr "作弊码路径"
 
@@ -589,6 +592,9 @@ msgid "Game is already installed:"
 msgstr "已安装的游戏:"
 
 msgid "Game partition"
+msgstr ""
+
+msgid "Gamename [GAMEID]"
 msgstr ""
 
 msgid "Games"
@@ -661,9 +667,6 @@ msgstr "安装错误!"
 
 msgid "Install a game"
 msgstr "安装游戏"
-
-msgid "Install not possible"
-msgstr ""
 
 msgid "Install partitions"
 msgstr ""
@@ -831,6 +834,9 @@ msgstr "没有可用更新"
 msgid "No themes found on the site."
 msgstr ""
 
+msgid "None"
+msgstr ""
+
 msgid "Normal"
 msgstr "一般"
 
@@ -944,6 +950,9 @@ msgstr "放出"
 
 msgid "Reload SD"
 msgstr "重新载入 SD 卡"
+
+msgid "Remove update"
+msgstr ""
 
 msgid "Rename Game on WBFS"
 msgstr "改变 WBFS (硬盘)上的游戏名称"
@@ -1259,9 +1268,6 @@ msgstr "要删除"
 
 msgid "You are choosing to display favorites and you do not have any selected."
 msgstr "你选择显示收藏夹但里面还没有任何收藏"
-
-msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
-msgstr ""
 
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr ""

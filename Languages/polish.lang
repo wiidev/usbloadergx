@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# polish.lang - r718
+# polish.lang - r899
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-19 15:02+0100\n"
+"POT-Creation-Date: 2010-02-01 13:58+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: ziom666 (zadania_prog@vp.pl)\n"
 "Language-Team: \n"
@@ -30,7 +30,7 @@ msgstr " nie istnieje na serwerze"
 
 #, c-format
 msgid "%s : %s May not boot correctly if your System Menu is not up to date."
-msgstr ""
+msgstr "%s : %s Moze nie ladowac sie poprawnie, jesli nie masz aktualnego menu systemowego"
 
 msgid "0 (Everyone)"
 msgstr "0 (dla kazdego)"
@@ -123,10 +123,10 @@ msgid ">> Reading WAD data...Ok!"
 msgstr ">> Odczyt danych WAD...Ok!"
 
 msgid "AUTO"
-msgstr ""
+msgstr "automatycznie"
 
 msgid "All partitions"
-msgstr ""
+msgstr "Wszystkie partycje"
 
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "USB Loader GX odblokowany"
@@ -147,7 +147,7 @@ msgid "Apr"
 msgstr "Kwiecien"
 
 msgid "Are you sure you want to enable Parent Control?"
-msgstr ""
+msgstr "Czy na pewno wlaczyc kontrole rodzicielska?"
 
 msgid "Are you sure?"
 msgstr "Na pewno?"
@@ -156,22 +156,22 @@ msgid "Aug"
 msgstr "Sierpien"
 
 msgid "Author:"
-msgstr ""
+msgstr "Autor: "
 
 msgid "AutoInit Network"
 msgstr "Autoinicjalizacja sieci"
 
 msgid "AutoPatch"
-msgstr ""
+msgstr "Automatyczny patch"
 
 msgid "BCA Codes Path"
-msgstr ""
+msgstr "Sciezka kodow BCA"
 
 msgid "BCA Codes Path changed"
-msgstr ""
+msgstr "Zmieniono sciezke kodow BCA"
 
 msgid "BETA revisions"
-msgstr ""
+msgstr "Wersje beta"
 
 msgid "Back"
 msgstr "Cofnij"
@@ -213,7 +213,7 @@ msgid "Can't create directory"
 msgstr "Nie mozna utworzyc folderu"
 
 msgid "Can't create file"
-msgstr ""
+msgstr "Nie mozna utworzyc pliku"
 
 msgid "Can't delete:"
 msgstr "Nie mozna usunac"
@@ -222,13 +222,13 @@ msgid "Cancel"
 msgstr "Anuluj"
 
 msgid "Channels"
-msgstr ""
+msgstr "Kanaly"
 
 msgid "Cheatfile is blank"
 msgstr "Plik z kodami pusty"
 
 msgid "Checking existing artwork"
-msgstr ""
+msgstr "Sprawdzam istniejace prace graficzne"
 
 msgid "Checking for Updates"
 msgstr "Sprawdzanie aktualizacji"
@@ -259,7 +259,7 @@ msgid "Confirm"
 msgstr "Potwierdz"
 
 msgid "Connection lost..."
-msgstr ""
+msgstr "Utracono polaczenie..."
 
 msgid "Console"
 msgstr "Konsola"
@@ -304,7 +304,7 @@ msgid "Could not read the disc."
 msgstr "Nie mozna odczytac dysku"
 
 msgid "Could not save."
-msgstr ""
+msgstr "Nie mozna zapisac"
 
 msgid "Could not set USB."
 msgstr "Nie mozna ustawic USB"
@@ -364,13 +364,13 @@ msgid "Delete Disc Artwork"
 msgstr "Usun obrazki plyt"
 
 msgid "Design:"
-msgstr ""
+msgstr "Projekt:"
 
 msgid "Developed by"
 msgstr ""
 
 msgid "Directory does not exist!"
-msgstr ""
+msgstr "Katalog nie istnieje!"
 
 msgid "Disc Artwork Download"
 msgstr "Pobierz obrazki"
@@ -409,13 +409,13 @@ msgid "Do you really want to delete:"
 msgstr "Na pewno usunac: "
 
 msgid "Do you want to apply it now?"
-msgstr ""
+msgstr "Czy chcesz to teraz zastosowac?"
 
 msgid "Do you want to change language?"
 msgstr "Zmienic jezyk?"
 
 msgid "Do you want to download this theme?"
-msgstr ""
+msgstr "Pobrac temat?"
 
 msgid "Do you want to format:"
 msgstr "Sformatowac:"
@@ -433,7 +433,7 @@ msgid "Done!"
 msgstr "Zakonczono!"
 
 msgid "Download"
-msgstr ""
+msgstr "Pobierz"
 
 msgid "Download Boxart image?"
 msgstr "Pobrac obrazki box?"
@@ -445,25 +445,25 @@ msgid "Download Now"
 msgstr "Pobierz teraz"
 
 msgid "Download failed."
-msgstr ""
+msgstr "Nie udalo sie pobrac"
 
 msgid "Download finished"
 msgstr "Zakonczono pobieranie"
 
 msgid "Download request failed."
-msgstr ""
+msgstr "Prosba pobierania nieudana"
 
 msgid "Downloading"
 msgstr "Trwa pobieranie"
 
 msgid "Downloading Page List:"
-msgstr ""
+msgstr "Pobieranie listy stron:"
 
 msgid "Downloading file"
 msgstr "Pobieranie pliku"
 
 msgid "Downloading image:"
-msgstr ""
+msgstr "Pobieranie obrazka:"
 
 msgid "Dutch"
 msgstr "holenderski"
@@ -475,10 +475,10 @@ msgid "ERROR:"
 msgstr "Blad:"
 
 msgid "ERROR: Can't set up theme."
-msgstr ""
+msgstr "Blad: nie mozna ustawic tematu"
 
 msgid "Enable Parental Control"
-msgstr ""
+msgstr "Wlacz kontrole rodzicielska"
 
 msgid "English"
 msgstr "angielski"
@@ -505,16 +505,16 @@ msgid "Error:"
 msgstr "Blad:"
 
 msgid "Extracting files..."
-msgstr ""
+msgstr "Rozpakowywanie plikow..."
 
 msgid "FAT: Use directories"
-msgstr ""
+msgstr "FAT: uzyj katalogow"
 
 msgid "Failed formating"
 msgstr "Nie udalo sie sformatowac"
 
 msgid "Failed to extract."
-msgstr ""
+msgstr "Nie udalo sie rozpakowac"
 
 msgid "Failed to open partition"
 msgstr "Nie udalo sie otworzyc partycji"
@@ -549,6 +549,9 @@ msgstr "francuski"
 msgid "Full Shutdown"
 msgstr "Pelne zamkniecie"
 
+msgid "GAMEID_Gamename"
+msgstr ""
+
 msgid "GCT Cheatcodes Path"
 msgstr "Sciezka kodow GCT"
 
@@ -562,7 +565,7 @@ msgid "GUI Settings"
 msgstr "Ustawienia interfejsu graficznego"
 
 msgid "GXtheme.cfg not found in any subfolder."
-msgstr ""
+msgstr "Nie znaleziono pliku GXtheme.cfg"
 
 msgid "Game ID"
 msgstr "ID gry"
@@ -580,15 +583,18 @@ msgid "Game Size"
 msgstr "Rozmiar gry"
 
 msgid "Game Sound Mode"
-msgstr ""
+msgstr "Tryb dzwieku gry"
 
 msgid "Game Sound Volume"
-msgstr ""
+msgstr "Gloscnosc dzwieku  gry"
 
 msgid "Game is already installed:"
 msgstr "Gra jest juz zainstalowana:"
 
 msgid "Game partition"
+msgstr "Partycje z grami"
+
+msgid "Gamename [GAMEID]"
 msgstr ""
 
 msgid "Games"
@@ -654,7 +660,7 @@ msgid "Install"
 msgstr "Zainstaluj"
 
 msgid "Install 1:1 Copy"
-msgstr ""
+msgstr "Zainstaluj kopie 1:1"
 
 msgid "Install Error!"
 msgstr "Blad instalacji"
@@ -662,11 +668,8 @@ msgstr "Blad instalacji"
 msgid "Install a game"
 msgstr "Zainstaluj gre"
 
-msgid "Install not possible"
-msgstr ""
-
 msgid "Install partitions"
-msgstr ""
+msgstr "Zainstaluj partycje"
 
 msgid "Installing content... Ok!"
 msgstr "Instalowanie zawartosci...Ok!"
@@ -684,7 +687,7 @@ msgid "Installing wad"
 msgstr "Instalowanie wad"
 
 msgid "Invalid PIN code"
-msgstr ""
+msgstr "Bledny kod PIN"
 
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
 msgstr ""
@@ -705,7 +708,7 @@ msgid "June"
 msgstr "czerwiec"
 
 msgid "Keep"
-msgstr ""
+msgstr "Trzymaj"
 
 msgid "Keyboard"
 msgstr "Klawiatura"
@@ -732,7 +735,7 @@ msgid "Load"
 msgstr "Zaladuj"
 
 msgid "Load From SD/USB"
-msgstr ""
+msgstr "Zaladuj z SD/USB"
 
 #, c-format
 msgid "Load file from: %s ?"
@@ -754,13 +757,13 @@ msgid "Locked"
 msgstr "Zablokowano"
 
 msgid "Loop Sound"
-msgstr ""
+msgstr "Zapetl dzwieki"
 
 msgid "Mar"
 msgstr "Marzec"
 
 msgid "Mark new games"
-msgstr ""
+msgstr "Oznacz nowe gry"
 
 msgid "May"
 msgstr "Maj"
@@ -772,7 +775,7 @@ msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr "Prawdopodobnie rozdzielczosc nie jest podzielna przez 4"
 
 msgid "Mount DVD drive"
-msgstr ""
+msgstr "Uruchom naped DVD"
 
 msgid "Music Volume"
 msgstr "Poziom glosnosci"
@@ -784,7 +787,7 @@ msgid "Network init error"
 msgstr "Problem inicjalizacji sieci"
 
 msgid "New Disc Detected"
-msgstr ""
+msgstr "Wykryto nowy dysk"
 
 msgid "Next"
 msgstr "nastepny"
@@ -814,10 +817,10 @@ msgid "No USB Device found."
 msgstr "Nie wykryto urzadzenia USB"
 
 msgid "No WBFS or FAT/NTFS partition found"
-msgstr ""
+msgstr "Nie znaleziono partycji WBFS, ani FAT/NTFS"
 
 msgid "No cheats were selected"
-msgstr ""
+msgstr "Nie wybrano zadnych kodow"
 
 msgid "No data could be read."
 msgstr "Blad odczytu"
@@ -829,6 +832,9 @@ msgid "No new updates."
 msgstr "Posiadasz aktualna wersje"
 
 msgid "No themes found on the site."
+msgstr "Nie znaleziono tematow na tej stronie"
+
+msgid "None"
 msgstr ""
 
 msgid "Normal"
@@ -889,7 +895,7 @@ msgid "Parental Control"
 msgstr "Kontrola rodzicielska"
 
 msgid "Parental Control disabled"
-msgstr ""
+msgstr "Kontrola rodzicielska wylaczona"
 
 msgid "Partition"
 msgstr "Partycja"
@@ -916,7 +922,7 @@ msgid "Play Count"
 msgstr "Licznik"
 
 msgid "Please wait..."
-msgstr ""
+msgstr "Prosze czekac..."
 
 msgid "Power off the Wii"
 msgstr "Wylacz Wii"
@@ -944,6 +950,9 @@ msgstr ""
 
 msgid "Reload SD"
 msgstr "Przeladuj SD"
+
+msgid "Remove update"
+msgstr ""
 
 msgid "Rename Game on WBFS"
 msgstr "Zmien tytul gry na WBFS"
@@ -979,28 +988,28 @@ msgid "Save Failed"
 msgstr "Nie udalo sie zapisac"
 
 msgid "Save Game List to"
-msgstr ""
+msgstr "Zapisz liste gier do"
 
 msgid "Saved"
-msgstr ""
+msgstr "Zapisano"
 
 msgid "Screensaver"
 msgstr "Wygaszacz ekranu"
 
 msgid "Select"
-msgstr ""
+msgstr "Wybierz"
 
 msgid "Select a DOL"
-msgstr ""
+msgstr "Wybierz plik DOL"
 
 msgid "Selected DOL"
-msgstr ""
+msgstr "Wybrano plik DOL"
 
 msgid "Sept"
 msgstr "Wrzesien"
 
 msgid "Set Search-Filter"
-msgstr ""
+msgstr "Ustaw filtr wyszukiwania"
 
 msgid "Set as backgroundmusic?"
 msgstr "Ustawic jako muzyke w tle?"
@@ -1018,7 +1027,7 @@ msgid "Sort alphabetically"
 msgstr "Sortuj alfabetycznie"
 
 msgid "Sort by rank"
-msgstr ""
+msgstr "Sortuj wzgledem rankingu"
 
 msgid "Sort order by most played"
 msgstr "Sortuj wg. liczby uruchomien"
@@ -1027,10 +1036,10 @@ msgid "Sound"
 msgstr "Dzwiek"
 
 msgid "Sound+BGM"
-msgstr ""
+msgstr "Dzwieki i muzyka w tle"
 
 msgid "Sound+Quiet"
-msgstr ""
+msgstr "Dzwieki i cisza"
 
 msgid "Spanish"
 msgstr "hiszpanski"
@@ -1057,7 +1066,7 @@ msgid "Successfully deleted:"
 msgstr "Pomyslnie usunieto"
 
 msgid "Successfully extracted theme."
-msgstr ""
+msgstr "Pomyslnie rozpakowano temat."
 
 msgid "Successfully installed:"
 msgstr "Pomyslnie zainstalowano:"
@@ -1075,7 +1084,7 @@ msgid "TXT Cheatcodes Path changed"
 msgstr "Sciezka kodow TXT zmienona"
 
 msgid "The entered directory does not exist. Would you like to create it?"
-msgstr ""
+msgstr "Katalog nie istnieje. Utworzyc?"
 
 msgid "The file is not a .wad"
 msgstr "To nie plik .wad"
@@ -1088,13 +1097,13 @@ msgid "The wad installation failed with error %ld"
 msgstr "Instalacja wad zakonczona bledek %ld"
 
 msgid "Theme Download Path"
-msgstr ""
+msgstr "Sciezka tematow"
 
 msgid "Theme Download Path changed"
-msgstr ""
+msgstr "Zmieniono sciezke tematow"
 
 msgid "Theme Downloader"
-msgstr ""
+msgstr "Pobieranie tematow"
 
 msgid "Theme Path"
 msgstr "Sciezka skorek"
@@ -1103,13 +1112,13 @@ msgid "Theme Path Changed"
 msgstr "Zmieniono sciezke skorek"
 
 msgid "Theme Title:"
-msgstr ""
+msgstr "Tytul:"
 
 msgid "Time left:"
 msgstr "Czas pozostaly"
 
 msgid "Title Launcher"
-msgstr ""
+msgstr "Uruchom tytul"
 
 msgid "Titles from WiiTDB"
 msgstr "Tytuly z pliku WiiTDB"
@@ -1118,7 +1127,7 @@ msgid "Tooltips"
 msgstr "Chmurki z podpowiedziami"
 
 msgid "Transfer failed."
-msgstr ""
+msgstr "Niepowodzenie."
 
 msgid "USB Device not found"
 msgstr "Nie znaleziono urzadzenia USB"
@@ -1127,7 +1136,7 @@ msgid "USB Loader GX is protected"
 msgstr "USB Loader GX zabezpieczony"
 
 msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
-msgstr ""
+msgstr "USB Loader GX dziala tylko z Hermes CIOS rev 4! Upewnij sie czy masz zainstalowana wersje 4!"
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
@@ -1146,7 +1155,7 @@ msgid "Uninstalling wad"
 msgstr "Odinstalowywanie wad"
 
 msgid "Unlock Parental Control"
-msgstr ""
+msgstr "Odblokuj kontrole rodzicielska"
 
 msgid "Unlock console to use this option."
 msgstr "Odblokuj konsole, aby uzyc tej opcji"
@@ -1155,7 +1164,7 @@ msgid "Unlocked"
 msgstr "Odblokowano"
 
 msgid "Unsupported format, try to extract manually."
-msgstr ""
+msgstr "Niewspierany format, sprobuj rozpakowac recznie"
 
 msgid "Update"
 msgstr "Aktualizacja"
@@ -1197,7 +1206,7 @@ msgid "Updating WiiTDB.zip"
 msgstr "Aktualizacja WiiTDB.zip"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
-msgstr ""
+msgstr "Wyslany plik ZIP zainstalowano w katalogu homebrew"
 
 msgid "VIDTV Patch"
 msgstr ""
@@ -1210,10 +1219,10 @@ msgid "Video Mode"
 msgstr "Tryb video"
 
 msgid "WIP Patches Path"
-msgstr ""
+msgstr "Sciezka patchy WIP"
 
 msgid "WIP Patches Path changed"
-msgstr ""
+msgstr "Zmieniono sciezke patchy WIP"
 
 msgid "Waiting for USB Device"
 msgstr "Oczekiwanie na urzadzenie USB"
@@ -1260,24 +1269,21 @@ msgstr "Zamierzasz usunac"
 msgid "You are choosing to display favorites and you do not have any selected."
 msgstr "WybraleS wySwietlenie usubionych, ale zadnych nie wybraleS"
 
-msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
-msgstr ""
-
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
-msgstr ""
+msgstr "Nie masz wlaczonej kontroli rodzicielskiej. Jesli chcesz jej uzywac, uruchom ja w ustawieniach Wii."
 
 msgid "You have attempted to load a bad image"
 msgstr "Probujesz zaladowac zly obraz"
 
 msgid "You need to select or format a partition"
-msgstr ""
+msgstr "Musisz wybrac, lub sformatowac partycje"
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 msgstr "Adres zostal zapisany w pliku %sWiiTDB_URL.txt."
 
 msgid "and translaters for language files updates"
-msgstr ""
+msgstr "i tlumaczon za aktualizacjie plikow jezykowych"
 
 msgid "available"
 msgstr "dostepne"
@@ -1304,7 +1310,7 @@ msgid "files not found on the server!"
 msgstr "nie znaleziono na serwerze"
 
 msgid "for FAT/NTFS support"
-msgstr ""
+msgstr "za pomoc przy FAT/NTFS"
 
 msgid "for Ocarina"
 msgstr "dla Ocarina"
@@ -1319,7 +1325,7 @@ msgid "for his awesome tool LibWiiGui"
 msgstr "za jego niesamowite narzedzie LibWiiGui"
 
 msgid "for hosting the themes"
-msgstr ""
+msgstr "za hosting tematow"
 
 msgid "for hosting the update files"
 msgstr "za hostowanie plikow aktualizacji"
@@ -1341,6 +1347,12 @@ msgstr "z"
 
 msgid "seconds left"
 msgstr "sekund pozostalo"
+
+#~ msgid "Install not possible"
+#~ msgstr "Nie mozna zainstalowac"
+
+#~ msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
+#~ msgstr "Uzywasz partycji NTFS. Instalacja gier na tej partycji nie jest mozliwa."
 
 #~ msgid "Exit USB Loader GX?"
 #~ msgstr "Zakonczyc prace programu?"

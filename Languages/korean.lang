@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-19 15:02+0100\n"
+"POT-Creation-Date: 2010-02-01 13:58+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: nextos@korea.com\n"
 "Language-Team: \n"
@@ -549,6 +549,9 @@ msgstr "불어"
 msgid "Full Shutdown"
 msgstr "완전히 끄기"
 
+msgid "GAMEID_Gamename"
+msgstr ""
+
 msgid "GCT Cheatcodes Path"
 msgstr "치트코드 경로"
 
@@ -589,6 +592,9 @@ msgid "Game is already installed:"
 msgstr "게임이 이미 설치되어 있습니다."
 
 msgid "Game partition"
+msgstr ""
+
+msgid "Gamename [GAMEID]"
 msgstr ""
 
 msgid "Games"
@@ -661,9 +667,6 @@ msgstr "설치 에러!"
 
 msgid "Install a game"
 msgstr "게임을 설치할까요"
-
-msgid "Install not possible"
-msgstr ""
 
 msgid "Install partitions"
 msgstr ""
@@ -831,6 +834,9 @@ msgstr "새로운 업데이트 없음."
 msgid "No themes found on the site."
 msgstr ""
 
+msgid "None"
+msgstr ""
+
 msgid "Normal"
 msgstr "일반"
 
@@ -944,6 +950,9 @@ msgstr "릴리즈됨"
 
 msgid "Reload SD"
 msgstr "SD카드 읽기"
+
+msgid "Remove update"
+msgstr ""
 
 msgid "Rename Game on WBFS"
 msgstr "WBFS에서 게임 이름 변경"
@@ -1259,9 +1268,6 @@ msgstr "삭제 하려고 합니다."
 
 msgid "You are choosing to display favorites and you do not have any selected."
 msgstr "즐겨찾기를 선택했으나 선택된 즐겨찾기가 없네요."
-
-msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
-msgstr ""
 
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr ""

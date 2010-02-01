@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# german.lang - r894
+# german.lang - r898
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-19 15:02+0100\n"
+"POT-Creation-Date: 2010-02-01 13:58+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: ZEN.13\n"
 "Language-Team: Snoozer, wishmasterf, Bertilax, ZEN.13\n"
@@ -549,6 +549,9 @@ msgstr "Französisch"
 msgid "Full Shutdown"
 msgstr "Komplett"
 
+msgid "GAMEID_Gamename"
+msgstr ""
+
 msgid "GCT Cheatcodes Path"
 msgstr "GCT Cheat Dateien"
 
@@ -591,6 +594,9 @@ msgstr "Spiel ist bereits installiert:"
 msgid "Game partition"
 msgstr "Spiel-Partition"
 
+msgid "Gamename [GAMEID]"
+msgstr ""
+
 msgid "Games"
 msgstr "Spiele"
 
@@ -601,7 +607,7 @@ msgid "HOME Menu"
 msgstr "HOME Menü"
 
 msgid "Hermes CIOS"
-msgstr "Hermes cIOS (222)"
+msgstr "cIOS 222/223"
 
 msgid "Homebrew Apps Path"
 msgstr "Homebrew Programme"
@@ -661,9 +667,6 @@ msgstr "Installationsfehler!"
 
 msgid "Install a game"
 msgstr "ein Spiel installieren"
-
-msgid "Install not possible"
-msgstr "Installation nicht möglich"
 
 msgid "Install partitions"
 msgstr "Partitionen installieren"
@@ -831,6 +834,9 @@ msgstr "Keine Aktualisierungen vorhanden."
 msgid "No themes found on the site."
 msgstr "Keine Themes auf der Seite gefunden."
 
+msgid "None"
+msgstr ""
+
 msgid "Normal"
 msgstr "Normal (4:3)"
 
@@ -944,6 +950,9 @@ msgstr "Erschienen am"
 
 msgid "Reload SD"
 msgstr "SD erneut laden"
+
+msgid "Remove update"
+msgstr ""
 
 msgid "Rename Game on WBFS"
 msgstr "Spiel umbenennen"
@@ -1127,7 +1136,7 @@ msgid "USB Loader GX is protected"
 msgstr "USB Loader GX ist jetzt geschützt"
 
 msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
-msgstr "USB Loader GX funktioniert nur mit rev4! Bitte versichere dich das du rev4 installiert hast!"
+msgstr "Hermes' cIOS funktioniert beim USB Loader GX nur mit rev4! Bitte versichere dich das du rev4 installiert hast!"
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
@@ -1260,9 +1269,6 @@ msgstr "Du bist dabei zu löschen "
 msgid "You are choosing to display favorites and you do not have any selected."
 msgstr "Du willst Favoriten anzeigen, hast aber keine ausgewählt."
 
-msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
-msgstr "Du benutzt das NTFS Dateisystem. Wegen möglicher Schreibfehler auf einer NTFS Partition, ist das Installieren eines Spiels nicht möglich."
-
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr "Du hast die Altersbeschränkung nicht aktiviert. Wenn du sie nutzen möchtest, aktiviere sie in den Wii-Systemeinstellungen."
 
@@ -1341,6 +1347,12 @@ msgstr "von"
 
 msgid "seconds left"
 msgstr "Sekunden verbleiben"
+
+#~ msgid "Install not possible"
+#~ msgstr "Installation nicht möglich"
+
+#~ msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
+#~ msgstr "Du benutzt das NTFS Dateisystem. Wegen möglicher Schreibfehler auf einer NTFS Partition, ist das Installieren eines Spiels nicht möglich."
 
 #~ msgid "Change Play Path"
 #~ msgstr "Pfad ändern"

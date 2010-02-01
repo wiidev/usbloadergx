@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-19 15:02+0100\n"
+"POT-Creation-Date: 2010-02-01 13:58+0100\n"
 "PO-Revision-Date: 2009-12-29 11:05+0100\n"
 "Last-Translator: Springdale\n"
 "Language-Team: Tusk, Springdale\n"
@@ -549,6 +549,9 @@ msgstr "Francia"
 msgid "Full Shutdown"
 msgstr "Teljes Kikapcsolás"
 
+msgid "GAMEID_Gamename"
+msgstr ""
+
 msgid "GCT Cheatcodes Path"
 msgstr "Kódok Útvonala"
 
@@ -590,6 +593,9 @@ msgstr "A játék már fel van telepítve:"
 
 msgid "Game partition"
 msgstr "Játék partíció"
+
+msgid "Gamename [GAMEID]"
+msgstr ""
 
 msgid "Games"
 msgstr "Játékok"
@@ -661,9 +667,6 @@ msgstr "Telepítési Hiba!"
 
 msgid "Install a game"
 msgstr "Játék telepítése"
-
-msgid "Install not possible"
-msgstr "A telepítés nem lehetséges"
 
 msgid "Install partitions"
 msgstr "Partíciók telepítése"
@@ -831,6 +834,9 @@ msgstr "Nincs elérhetõ frissítés."
 msgid "No themes found on the site."
 msgstr "Nem találhatóak témák az oldalon."
 
+msgid "None"
+msgstr ""
+
 msgid "Normal"
 msgstr "Normális"
 
@@ -944,6 +950,9 @@ msgstr "Kiadva"
 
 msgid "Reload SD"
 msgstr "SD Újratöltése"
+
+msgid "Remove update"
+msgstr ""
 
 msgid "Rename Game on WBFS"
 msgstr "WBFS játék átnevezése"
@@ -1260,9 +1269,6 @@ msgstr "Törölni készülsz: "
 msgid "You are choosing to display favorites and you do not have any selected."
 msgstr "A Kedvencek megjelenítését választottad, de egy játék sincs így megjelölve."
 
-msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
-msgstr "NTFS fájlrendszert használata esetén a lehetséges írási hibák miatt játékok telepítése nem lehetséges."
-
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr "A szülõi felügyelet nincs bekapcsolva - bekapcsolható a Wii Beállításokban."
 
@@ -1341,6 +1347,12 @@ msgstr "./"
 
 msgid "seconds left"
 msgstr "hátralévõ másodperc"
+
+#~ msgid "Install not possible"
+#~ msgstr "A telepítés nem lehetséges"
+
+#~ msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
+#~ msgstr "NTFS fájlrendszert használata esetén a lehetséges írási hibák miatt játékok telepítése nem lehetséges."
 
 #~ msgid "Can't decompress LZ77"
 #~ msgstr "LZ77 nem kitömöríthetõ"

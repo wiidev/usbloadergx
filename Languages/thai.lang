@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-19 15:02+0100\n"
+"POT-Creation-Date: 2010-02-01 13:58+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Nitro_subzero \n"
 "Language-Team: Nitro_subzero\n"
@@ -549,6 +549,9 @@ msgstr "ฝรั่งเศส"
 msgid "Full Shutdown"
 msgstr "ปิดอย่างสมบรูณ์"
 
+msgid "GAMEID_Gamename"
+msgstr ""
+
 msgid "GCT Cheatcodes Path"
 msgstr "ที่เก็บ สูตรโกง"
 
@@ -589,6 +592,9 @@ msgid "Game is already installed:"
 msgstr "เกมส์นี้ถูกติดตั้งอยู่แล้ว:"
 
 msgid "Game partition"
+msgstr ""
+
+msgid "Gamename [GAMEID]"
 msgstr ""
 
 msgid "Games"
@@ -661,9 +667,6 @@ msgstr "ผิดพลาดขณะติดตั้ง!"
 
 msgid "Install a game"
 msgstr "ติดตั้งเกมส์"
-
-msgid "Install not possible"
-msgstr ""
 
 msgid "Install partitions"
 msgstr ""
@@ -831,6 +834,9 @@ msgstr "ไม่มีไฟล์ Update ตัวใหม่"
 msgid "No themes found on the site."
 msgstr "ไม่พบธีมบนเวบไซต์"
 
+msgid "None"
+msgstr ""
+
 msgid "Normal"
 msgstr "ปกติ"
 
@@ -944,6 +950,9 @@ msgstr "ปล่อย"
 
 msgid "Reload SD"
 msgstr "โหลด SD ใหม่"
+
+msgid "Remove update"
+msgstr ""
 
 msgid "Rename Game on WBFS"
 msgstr "เปลี่ยนชื่อเกมส์บน WBFS"
@@ -1259,9 +1268,6 @@ msgstr "คุณกำลังจะลบ "
 
 msgid "You are choosing to display favorites and you do not have any selected."
 msgstr "คุณเลือกจะแสดงเกมส์ที่ชอบ แต่คุณไม่ได้กำหนดเกมส์ที่ชื่นชอบไว้"
-
-msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
-msgstr ""
 
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr ""

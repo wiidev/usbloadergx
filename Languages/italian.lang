@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-19 15:02+0100\n"
+"POT-Creation-Date: 2010-02-01 13:58+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe, Cambo\n"
@@ -549,6 +549,9 @@ msgstr "Francese"
 msgid "Full Shutdown"
 msgstr "Completo"
 
+msgid "GAMEID_Gamename"
+msgstr ""
+
 msgid "GCT Cheatcodes Path"
 msgstr "Percorso Trucchi in GCT"
 
@@ -590,6 +593,9 @@ msgstr "Gioco già installato:"
 
 msgid "Game partition"
 msgstr "Partizione gioco"
+
+msgid "Gamename [GAMEID]"
+msgstr ""
 
 msgid "Games"
 msgstr "Giochi"
@@ -661,9 +667,6 @@ msgstr "Errore Installazione!"
 
 msgid "Install a game"
 msgstr "Installa un gioco"
-
-msgid "Install not possible"
-msgstr "Impossibile installare"
 
 msgid "Install partitions"
 msgstr "Installa partizioni"
@@ -831,6 +834,9 @@ msgstr "Nessun Aggiornamento."
 msgid "No themes found on the site."
 msgstr "Nessun tema trovato sul sito."
 
+msgid "None"
+msgstr ""
+
 msgid "Normal"
 msgstr "Normale"
 
@@ -944,6 +950,9 @@ msgstr "Rilasciato"
 
 msgid "Reload SD"
 msgstr "Ricarica SD"
+
+msgid "Remove update"
+msgstr ""
 
 msgid "Rename Game on WBFS"
 msgstr "Rinomina Gioco su WBFS"
@@ -1260,9 +1269,6 @@ msgstr "Stai per eliminare "
 msgid "You are choosing to display favorites and you do not have any selected."
 msgstr "Hai scelto di visualizzare i preferiti e non ne hai selezionato nessuno"
 
-msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
-msgstr "E' in uso una partizione NTFS. Poiché sono possibili errori in scrittura nelle partizioni NTFS, non è possibile installare alcun gioco."
-
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr "Il Controllo Genitori non è attivo. Se vuoi utilizzare il Controllo Genitori abilitalo nelle Impostazioni della Wii."
 
@@ -1341,6 +1347,12 @@ msgstr "di"
 
 msgid "seconds left"
 msgstr "secondi mancanti"
+
+#~ msgid "Install not possible"
+#~ msgstr "Impossibile installare"
+
+#~ msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
+#~ msgstr "E' in uso una partizione NTFS. Poiché sono possibili errori in scrittura nelle partizioni NTFS, non è possibile installare alcun gioco."
 
 #~ msgid "Partition Format Menu"
 #~ msgstr "Menu Formattazione Partizioni"

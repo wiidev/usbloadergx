@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-19 15:02+0100\n"
+"POT-Creation-Date: 2010-02-01 13:58+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: raschi\n"
 "Language-Team: raschi\n"
@@ -549,6 +549,9 @@ msgstr "Fransk"
 msgid "Full Shutdown"
 msgstr "Skru helt av"
 
+msgid "GAMEID_Gamename"
+msgstr ""
+
 msgid "GCT Cheatcodes Path"
 msgstr "GCT Juksekode sti"
 
@@ -589,6 +592,9 @@ msgid "Game is already installed:"
 msgstr "Spillet er allerede installert:"
 
 msgid "Game partition"
+msgstr ""
+
+msgid "Gamename [GAMEID]"
 msgstr ""
 
 msgid "Games"
@@ -661,9 +667,6 @@ msgstr "Installasjonsfeil!"
 
 msgid "Install a game"
 msgstr "Installér et spill"
-
-msgid "Install not possible"
-msgstr ""
 
 msgid "Install partitions"
 msgstr ""
@@ -831,6 +834,9 @@ msgstr "Ingen nye oppdateringer."
 msgid "No themes found on the site."
 msgstr "Ingen temaer funnet på websiden."
 
+msgid "None"
+msgstr ""
+
 msgid "Normal"
 msgstr ""
 
@@ -944,6 +950,9 @@ msgstr "Utgitt"
 
 msgid "Reload SD"
 msgstr "Les SD på nytt"
+
+msgid "Remove update"
+msgstr ""
 
 msgid "Rename Game on WBFS"
 msgstr "Gi nytt navn til spill på WBFS"
@@ -1259,9 +1268,6 @@ msgstr "Du er i ferd med å slette "
 
 msgid "You are choosing to display favorites and you do not have any selected."
 msgstr "Du prøver å vise favoritter når du ikke har noen valgt."
-
-msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
-msgstr ""
 
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr ""
