@@ -34,11 +34,6 @@ char wbfs_fs_drive[16];
 char wbfs_fat_dir[16] = "/wbfs";
 char invalid_path[] = "/\\:|<>?*\"'";
 
-int  wbfs_fat_vfs_have = 0;
-int  wbfs_fat_vfs_lba = 0;
-int  wbfs_fat_vfs_dev = 0;
-struct statvfs wbfs_fat_vfs;
-
 split_info_t split;
 
 static u32 fat_sector_size = 512;
@@ -192,7 +187,7 @@ s32 _WBFS_FAT_GetHeadersCount()
 				}
 			}
 			// no title found, read it from wbfs file
-			// but this is a little bit slower 
+			// but this is a little bit slower
 			// open 'partition' file
 			part = WBFS_FAT_OpenPart(fpath);
 			if (!part) {
@@ -317,26 +312,17 @@ s32 WBFS_FAT_DiskSpace(f32 *used, f32 *free)
 {
 	f32 size;
 	int ret;
+	struct statvfs wbfs_fat_vfs;
 
 	*used = 0;
 	*free = 0;
-	// statvfs is slow, so cache values
-	if (!wbfs_fat_vfs_have
-		|| wbfs_fat_vfs_lba != wbfs_part_lba
-		|| wbfs_fat_vfs_dev != wbfsDev )
-	{
-		ret = statvfs(wbfs_fs_drive, &wbfs_fat_vfs);
-		if (ret) return 0;
-		wbfs_fat_vfs_have = 1;
-		wbfs_fat_vfs_lba = wbfs_part_lba;
-		wbfs_fat_vfs_dev = wbfsDev;
-	}
+	ret = statvfs(wbfs_fs_drive, &wbfs_fat_vfs);
+	if (ret) return -1;
 
 	/* FS size in GB */
 	size = (f32)wbfs_fat_vfs.f_frsize * (f32)wbfs_fat_vfs.f_blocks / GB_SIZE;
 	*free = (f32)wbfs_fat_vfs.f_frsize * (f32)wbfs_fat_vfs.f_bfree / GB_SIZE;
 	*used = size - *free;
-
 
 	return 0;
 }
@@ -374,14 +360,14 @@ void title_filename(char *title)
 	}
     // trim trailing space - not allowed on windows directories
     while (len && title[len-1] == ' ') {
-        title[len-1] = 0;
-        len--;
+	title[len-1] = 0;
+	len--;
     }
     // replace silly chars with '_'
     for (i=0; i<len; i++) {
-        if(strchr(invalid_path, title[i]) || iscntrl((int) title[i])) {
-            title[i] = '_';
-        }
+	if(strchr(invalid_path, title[i]) || iscntrl((int) title[i])) {
+	    title[i] = '_';
+	}
     }
 }
 
@@ -654,7 +640,7 @@ s32 WBFS_FAT_DVD_Size(u64 *comp_size, u64 *real_size)
 	wbfs_t *part = NULL;
 	u64 size = (u64)143432*2*0x8000ULL;
 	u32 n_sector = size / fat_sector_size;
-	u32 wii_sec_sz; 
+	u32 wii_sec_sz;
 
 	// init a temporary dummy part
 	// as a placeholder for wbfs_size_disc
@@ -686,7 +672,7 @@ s32 WBFS_FAT_RenameGame(u8 *discid, const void *newname)
 {
 	wbfs_t *part = WBFS_FAT_OpenPart((char *) discid);
 	if (!part)
-        return -1;
+	return -1;
 
     s32 ret = wbfs_ren_disc(part, discid,(u8*)newname);
 
@@ -699,7 +685,7 @@ s32 WBFS_FAT_ReIDGame(u8 *discid, const void *newID)
 {
 	wbfs_t *part = WBFS_FAT_OpenPart((char *) discid);
 	if (!part)
-        return -1;
+	return -1;
 
     s32 ret = wbfs_rID_disc(part, discid,(u8*)newID);
 
@@ -711,19 +697,19 @@ s32 WBFS_FAT_ReIDGame(u8 *discid, const void *newID)
 	    char fnamenew[100];
 	    s32 cnt = 0x31;
 
-        WBFS_FAT_fname(discid, fname, sizeof(fname), NULL);
-        WBFS_FAT_fname((u8*) newID, fnamenew, sizeof(fnamenew), NULL);
+	WBFS_FAT_fname(discid, fname, sizeof(fname), NULL);
+	WBFS_FAT_fname((u8*) newID, fnamenew, sizeof(fnamenew), NULL);
 
-        int stringlength = strlen(fname);
+	int stringlength = strlen(fname);
 
-        while(rename(fname, fnamenew) == 0)
-        {
-            fname[stringlength] = cnt;
-            fname[stringlength+1] = 0;
-            fnamenew[stringlength] = cnt;
-            fnamenew[stringlength+1] = 0;
-            cnt++;
-        }
+	while(rename(fname, fnamenew) == 0)
+	{
+	    fname[stringlength] = cnt;
+	    fname[stringlength+1] = 0;
+	    fnamenew[stringlength] = cnt;
+	    fnamenew[stringlength+1] = 0;
+	    cnt++;
+	}
 	}
 
 	return ret;
@@ -733,7 +719,7 @@ s32 WBFS_FAT_EstimateGameSize(void) {
 	wbfs_t *part = NULL;
 	u64 size = (u64)143432*2*0x8000ULL;
 	u32 n_sector = size / fat_sector_size;
-	u32 wii_sec_sz; 
+	u32 wii_sec_sz;
 
 	// init a temporary dummy part
 	// as a placeholder for wbfs_size_disc
@@ -742,7 +728,7 @@ s32 WBFS_FAT_EstimateGameSize(void) {
 			NULL, fat_sector_size, n_sector, 0, 1);
 	if (!part) return -1;
 	wii_sec_sz = part->wii_sec_sz;
-	
+
 	partition_selector_t part_sel;
 	if (Settings.fullcopy) {
 		part_sel = ALL_PARTITIONS;
