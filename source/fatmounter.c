@@ -152,6 +152,8 @@ s32 MountNTFS(u32 sector)
 	//Wpad_WaitButtons();
 	_FAT_mem_init();
 
+	ntfsInit(); // Call ntfs init here, to prevent locale resets
+	
 	// ntfsInit resets locale settings
 	// which breaks unicode in console
 	// so we change it back to C-UTF-8
