@@ -576,8 +576,9 @@ int TitleBrowser(u32 type) {
 			if (error || read != infilesize) {
 			    WindowPrompt(tr("Error:"), tr("No data could be read."), tr("OK"));
 
-			    if(temp)free(temp);
+
 			}
+			if(temp)free(temp);
 		}
 
 
