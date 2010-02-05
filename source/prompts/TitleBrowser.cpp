@@ -33,6 +33,13 @@
 struct discHdr * titleList=NULL;
 //discHdr ** titleList;
 u32 titleCnt;
+extern u32 infilesize;
+extern u32 uncfilesize;
+extern char wiiloadVersion[2];
+#include <zlib.h>
+#include "settings/cfg.h"
+#include "unzip/unzip.h"
+#include "unzip/miniunz.h"
 
 extern struct discHdr * gameList;
 extern u32 gameCnt;
@@ -417,7 +424,7 @@ int TitleBrowser(u32 type) {
                 char filesizetxt[50];
                 char temp[50];
                 char filepath[100];
-				u32 read = 0;
+//				u32 read = 0;
 				
 				//make sure there is a folder for this to be saved in
 				struct stat st;
@@ -438,107 +445,144 @@ int TitleBrowser(u32 type) {
                 snprintf(temp, sizeof(temp), tr("Load file from: %s ?"), GetIncommingIP());
 
                 int choice = WindowPrompt(filesizetxt, temp, tr("OK"), tr("Cancel"));
+		gprintf("\nchoice:%d",choice);
 
-                if(choice == 1) {
-                        FILE *file = fopen(filepath, "wb");
+		if (choice == 1) {
 
-                        int len = NETWORKBLOCKSIZE;
-                        u8 *buffer = (u8*) malloc(NETWORKBLOCKSIZE);
+			u32 read = 0;
+			u8 *temp = NULL;
+			int len = NETWORKBLOCKSIZE;
+			temp = (u8 *) malloc(infilesize);
 
-                        while (read < infilesize) {
+						bool error = false;
+						u8 *ptr = temp;
+						gprintf("\nrecieving shit");
+			while (read < infilesize) {
 
-                            ShowProgress(tr("Receiving file from:"), GetIncommingIP(), NULL, read, infilesize, true);
+			    ShowProgress(tr("Receiving file from:"), GetIncommingIP(), NULL, read, infilesize, true);
 
-                            if (infilesize - read < (u32) len)
-                                len = infilesize-read;
-                            else
-                                len = NETWORKBLOCKSIZE;
+			    if (infilesize - read < (u32) len)
+				len = infilesize-read;
+			    else
+				len = NETWORKBLOCKSIZE;
 
-                            int result = network_read(buffer, len);
+			    int result = network_read(ptr, len);
 
-                            if (result < 0) {
-                                WindowPrompt(tr("Error while transfering data."), 0, tr("OK"));
-                                fclose(file);
-                                remove(filepath);
-                                break;
-                            }
-                            if (!result)
-                                break;
+			    if (result < 0) {
+				WindowPrompt(tr("Error while transfering data."), 0, tr("OK"));
+				error = true;
+				break;
+			    }
+			    if (!result) {
+				gprintf("\n!RESULT");
+				break;
+							}
+			    ptr += result;
+			    read += result;
+			}
+			ProgressStop();
 
-                            fwrite(temp, 1, len, file);
+						char filename[101];
+						char tmptxt[200];
 
-                            read += result;
 
-                        }
-                        free(buffer);
-                        fclose(file);
-                        ProgressStop();
 
-                        if (read != infilesize) {
-                            WindowPrompt(tr("Error:"), tr("No data could be read."), tr("OK"));
-                            remove(filepath);
-                        } else {
+						//bool installWad=0;
+						if (!error) {
+						    gprintf("\nno error yet");
 
-                        //determine what type of file we just got
-                        char filename[101];
-                        char tmptxt[200];
+							network_read((u8*) &filename, 100);
+							gprintf("\nfilename: %s",filename);
 
-                        network_read((u8*) &filename, 100);
-                        sprintf(tmptxt,"%s",filename);
-                        //if we got a wad
-                        if (strcasestr(tmptxt,".wad")) {
+							// Do we need to unzip this thing?
+							if (wiiloadVersion[0] > 0 || wiiloadVersion[1] > 4) {
+							    gprintf("\nusing newer wiiload version");
 
-                            sprintf(tmptxt,"%s/wad/%s",bootDevice,filename);
-							if (checkfile(tmptxt))remove(tmptxt);
-                            rename(filepath, tmptxt);
+								if (uncfilesize != 0) { // if uncfilesize == 0, it's not compressed
+								    gprintf("\ntrying to uncompress");
+									// It's compressed, uncompress
+									u8 *unc = (u8 *) malloc(uncfilesize);
+									uLongf f = uncfilesize;
+									error = uncompress(unc, &f, temp, infilesize) != Z_OK;
+									uncfilesize = f;
 
-                            //check and make sure the wad we just saved is the correct size
-                            u32 lSize;
-                            file = fopen(tmptxt, "rb");
+									free(temp);
+									temp = unc;
+								}
+							}
 
-                            // obtain file size:
-                            fseek (file , 0 , SEEK_END);
-                            lSize = ftell (file);
+							if (!error) {
+								sprintf(tmptxt,"%s",filename);
+								//if we got a wad
+								if (strcasestr(tmptxt,".wad")) {
+								    FILE *file = fopen(filepath, "wb");
+								    fwrite(temp, 1, (uncfilesize>0?uncfilesize:infilesize), file);
+								    fclose(file);
 
-                            rewind (file);
-                            if (lSize==infilesize) {
-                                int pick = WindowPrompt(tr(" Wad Saved as:"), tmptxt, tr("Install"),tr("Uninstall"),tr("Cancel"));
-                                //install or uninstall it
-                                if (pick==1)
-									{
-										HaltGui();
-										w.Remove(&titleTxt);
-										w.Remove(&cancelBtn);
-										w.Remove(&wifiBtn);
-										w.Remove(&optionBrowser3);
-										ResumeGui();
-										
-										Wad_Install(file);
-										
-										HaltGui();
-										w.Append(&titleTxt);
-										w.Append(&cancelBtn);
-										w.Append(&wifiBtn);
-										w.Append(&optionBrowser3);
-										ResumeGui();
+								    sprintf(tmptxt,"%s/wad/%s",bootDevice,filename);
+								    if (checkfile(tmptxt))remove(tmptxt);
+								    rename(filepath, tmptxt);
 
-									}
-                                if (pick==2)Wad_Uninstall(file);
-                            }
-                            //close that beast, we're done with it
-                            fclose (file);
+								    //check and make sure the wad we just saved is the correct size
+								    u32 lSize;
+								    file = fopen(tmptxt, "rb");
 
-                            //do we want to keep the file in the wad folder
-                            if (WindowPrompt(tr("Delete ?"), tmptxt, tr("Delete"),tr("Keep"))!=0)
-                                remove(tmptxt);
+								    // obtain file size:
+								    fseek (file , 0 , SEEK_END);
+								    lSize = ftell (file);
 
-                        } else {
-                            WindowPrompt(tr("ERROR:"),tr("The file is not a .wad"),tr("OK"));
-                            remove(filepath);
-                        }
-                        }
-                }
-                CloseConnection();
+								    rewind (file);
+								    if (lSize==(uncfilesize>0?uncfilesize:infilesize)) {
+									gprintf("\nsize is ok");
+									int pick = WindowPrompt(tr(" Wad Saved as:"), tmptxt, tr("Install"),tr("Uninstall"),tr("Cancel"));
+									//install or uninstall it
+									if (pick==1)
+										{
+											HaltGui();
+											w.Remove(&titleTxt);
+											w.Remove(&cancelBtn);
+											w.Remove(&wifiBtn);
+											w.Remove(&optionBrowser3);
+											ResumeGui();
+
+											Wad_Install(file);
+
+											HaltGui();
+											w.Append(&titleTxt);
+											w.Append(&cancelBtn);
+											w.Append(&wifiBtn);
+											w.Append(&optionBrowser3);
+											ResumeGui();
+
+										}
+									if (pick==2)Wad_Uninstall(file);
+								    }
+								    else gprintf("\nBad size");
+								    //close that beast, we're done with it
+								    fclose (file);
+
+								    //do we want to keep the file in the wad folder
+								    if (WindowPrompt(tr("Delete ?"), tmptxt, tr("Delete"),tr("Keep"))!=0)
+									remove(tmptxt);
+								    }
+								else {
+								    WindowPrompt(tr("ERROR:"), tr("Not a WAD file."), tr("OK"));
+								    }
+							}
+						}
+
+
+
+			if (error || read != infilesize) {
+			    WindowPrompt(tr("Error:"), tr("No data could be read."), tr("OK"));
+
+			    if(temp)free(temp);
+			}
+		}
+
+
+
+		CloseConnection();
                 ResumeNetworkWait();
         }
 
