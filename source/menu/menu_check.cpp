@@ -145,7 +145,7 @@ int MenuCheck() {
     //cfg_parsefile(pathname, &title_set);
 
     //Spieleliste laden
-    __Menu_GetEntries(0);
+    //__Menu_GetEntries(0);//no point getting the gamelist here
 
     if (strcmp(headlessID,"")!=0)
 		menu = MENU_EXIT;
