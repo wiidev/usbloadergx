@@ -86,9 +86,9 @@ int MenuHomebrewBrowse() {
 
     /*** Sound Variables ***/
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-	// because destroy GuiSound must wait while sound playing is finished, we use a global sound
-	if(!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-	//	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
+    if (!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+    //	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
     GuiSound btnClick1(button_click_pcm, button_click_pcm_size, Settings.sfxvolume);
 
     /*** Image Variables ***/
@@ -219,11 +219,11 @@ int MenuHomebrewBrowse() {
 
     GuiImage MainButton2Img(&MainButtonImgData);
     GuiImage MainButton2ImgOver(&MainButtonImgOverData);
-    GuiText MainButton2Txt(MainButtonText, 18, (GXColor) {0, 0, 0, 255 });
+    GuiText MainButton2Txt(MainButtonText, 18, (GXColor) {0, 0, 0, 255});
     MainButton2Txt.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     MainButton2Txt.SetPosition(148, -12);
     MainButton2Txt.SetMaxWidth(MainButton2Img.GetWidth()-150, GuiText::DOTTED);
-    GuiText MainButton2DescTxt(MainButtonText, 18, (GXColor) { 0, 0, 0, 255});
+    GuiText MainButton2DescTxt(MainButtonText, 18, (GXColor) {0, 0, 0, 255});
     MainButton2DescTxt.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     MainButton2DescTxt.SetPosition(148, 15);
     MainButton2DescTxt.SetMaxWidth(MainButton2Img.GetWidth()-150, GuiText::DOTTED);
@@ -250,11 +250,11 @@ int MenuHomebrewBrowse() {
     MainButton3Txt.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     MainButton3Txt.SetPosition(148, -12);
     MainButton3Txt.SetMaxWidth(MainButton3Img.GetWidth()-150, GuiText::DOTTED);
-    GuiText MainButton3DescTxt(MainButtonText, 18, (GXColor) { 0, 0, 0, 255});
+    GuiText MainButton3DescTxt(MainButtonText, 18, (GXColor) {0, 0, 0, 255});
     MainButton3DescTxt.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     MainButton3DescTxt.SetPosition(148, 15);
     MainButton3DescTxt.SetMaxWidth(MainButton3Img.GetWidth()-150, GuiText::DOTTED);
-    GuiText MainButton3DescOverTxt(MainButtonText, 18, (GXColor) {0, 0, 0, 255 });
+    GuiText MainButton3DescOverTxt(MainButtonText, 18, (GXColor) {0, 0, 0, 255});
     MainButton3DescOverTxt.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     MainButton3DescOverTxt.SetPosition(148, 15);
     MainButton3DescOverTxt.SetMaxWidth(MainButton3Img.GetWidth()-150, GuiText::SCROLL);
@@ -273,7 +273,7 @@ int MenuHomebrewBrowse() {
 
     GuiImage MainButton4Img(&MainButtonImgData);
     GuiImage MainButton4ImgOver(&MainButtonImgOverData);
-    GuiText MainButton4Txt(MainButtonText, 18, (GXColor) {0, 0, 0, 255} );
+    GuiText MainButton4Txt(MainButtonText, 18, (GXColor) {0, 0, 0, 255});
     MainButton4Txt.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     MainButton4Txt.SetPosition(148, -12);
     MainButton4Txt.SetMaxWidth(MainButton4Img.GetWidth()-150, GuiText::DOTTED);
@@ -281,7 +281,7 @@ int MenuHomebrewBrowse() {
     MainButton4DescTxt.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     MainButton4DescTxt.SetPosition(148, 15);
     MainButton4DescTxt.SetMaxWidth(MainButton4Img.GetWidth()-150, GuiText::DOTTED);
-    GuiText MainButton4DescOverTxt(MainButtonText, 18, (GXColor) { 0, 0, 0, 255});
+    GuiText MainButton4DescOverTxt(MainButtonText, 18, (GXColor) {0, 0, 0, 255});
     MainButton4DescOverTxt.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     MainButton4DescOverTxt.SetPosition(148, 15);
     MainButton4DescOverTxt.SetMaxWidth(MainButton4Img.GetWidth()-150, GuiText::SCROLL);
@@ -808,8 +808,8 @@ int MenuHomebrewBrowse() {
                         int len = NETWORKBLOCKSIZE;
                         temp = (u8 *) malloc(infilesize);
 
-						bool error = false;
-						u8 *ptr = temp;
+                        bool error = false;
+                        u8 *ptr = temp;
                         while (read < infilesize) {
 
                             ShowProgress(tr("Receiving file from:"), GetIncommingIP(), NULL, read, infilesize, true);
@@ -823,74 +823,73 @@ int MenuHomebrewBrowse() {
 
                             if (result < 0) {
                                 WindowPrompt(tr("Error while transfering data."), 0, tr("OK"));
-								error = true;
+                                error = true;
                                 break;
                             }
                             if (!result) {
                                 break;
-							}
+                            }
 
-							ptr += result;
+                            ptr += result;
 
                             read += result;
                         }
-						
-						char filename[101];
-						if (!error) {
-						
-							network_read((u8*) &filename, 100);
-							
-							// Do we need to unzip this thing?
-							if (wiiloadVersion[0] > 0 || wiiloadVersion[1] > 4) {
 
-								// We need to unzip...
-								if (temp[0] == 'P' && temp[1] == 'K' && temp[2] == 0x03 && temp[3] == 0x04) {
-									// It's a zip file, unzip to the apps directory
-									
-									// Zip archive, ask for permission to install the zip
-									char zippath[255];
-									sprintf((char *) &zippath, "%s%s", Settings.homebrewapps_path, filename);
-									
-									FILE *fp = fopen(zippath, "wb");
-									if (fp != NULL)
-									{
-										fwrite(temp, 1, infilesize, fp);
-										fclose(fp);
-										
-										// Now unzip the zip file...
-										unzFile uf = unzOpen(zippath);
-										if (uf==NULL) {
-											error = true;
-										} else {
-											extractZip(uf,0,1,0, Settings.homebrewapps_path);
-											unzCloseCurrentFile(uf);
-											
-											remove(zippath);
-											
-											// Reload this menu here...
-											menu = MENU_HOMEBREWBROWSE;
-											break;
-										}
-									} else {
-										error = true;
-									}
-								} else if (uncfilesize != 0) { // if uncfilesize == 0, it's not compressed
-									// It's compressed, uncompress
-									u8 *unc = (u8 *) malloc(uncfilesize);
-									uLongf f = uncfilesize;
-									error = uncompress(unc, &f, temp, infilesize) != Z_OK;
-									uncfilesize = f;
-									
-									free(temp);
-									temp = unc;
-								}
-							}
-							
-							if (!error && strstr(filename,".zip") == NULL) {
-								innetbuffer = temp;
-							}
-						}
-						
+                        char filename[101];
+                        if (!error) {
+
+                            network_read((u8*) &filename, 100);
+
+                            // Do we need to unzip this thing?
+                            if (wiiloadVersion[0] > 0 || wiiloadVersion[1] > 4) {
+
+                                // We need to unzip...
+                                if (temp[0] == 'P' && temp[1] == 'K' && temp[2] == 0x03 && temp[3] == 0x04) {
+                                    // It's a zip file, unzip to the apps directory
+
+                                    // Zip archive, ask for permission to install the zip
+                                    char zippath[255];
+                                    sprintf((char *) &zippath, "%s%s", Settings.homebrewapps_path, filename);
+
+                                    FILE *fp = fopen(zippath, "wb");
+                                    if (fp != NULL) {
+                                        fwrite(temp, 1, infilesize, fp);
+                                        fclose(fp);
+
+                                        // Now unzip the zip file...
+                                        unzFile uf = unzOpen(zippath);
+                                        if (uf==NULL) {
+                                            error = true;
+                                        } else {
+                                            extractZip(uf,0,1,0, Settings.homebrewapps_path);
+                                            unzCloseCurrentFile(uf);
+
+                                            remove(zippath);
+
+                                            // Reload this menu here...
+                                            menu = MENU_HOMEBREWBROWSE;
+                                            break;
+                                        }
+                                    } else {
+                                        error = true;
+                                    }
+                                } else if (uncfilesize != 0) { // if uncfilesize == 0, it's not compressed
+                                    // It's compressed, uncompress
+                                    u8 *unc = (u8 *) malloc(uncfilesize);
+                                    uLongf f = uncfilesize;
+                                    error = uncompress(unc, &f, temp, infilesize) != Z_OK;
+                                    uncfilesize = f;
+
+                                    free(temp);
+                                    temp = unc;
+                                }
+                            }
+
+                            if (!error && strstr(filename,".zip") == NULL) {
+                                innetbuffer = temp;
+                            }
+                        }
+
                         ProgressStop();
 
                         if (error || read != infilesize) {
@@ -898,18 +897,18 @@ int MenuHomebrewBrowse() {
                             FreeHomebrewBuffer();
                         } else {
                             if (strstr(filename,".dol") || strstr(filename,".DOL")
-                                || strstr(filename,".elf") || strstr(filename,".ELF")) {
+                                    || strstr(filename,".elf") || strstr(filename,".ELF")) {
                                 boothomebrew = 2;
                                 menu = MENU_EXIT;
                                 CloseConnection();
                                 break;
                             } else if (strstr(filename,".zip")) {
                                 WindowPrompt(tr("Success:"), tr("Uploaded ZIP file installed to homebrew directory."), tr("OK"));
-								CloseConnection();
+                                CloseConnection();
                             } else {
                                 FreeHomebrewBuffer();
                                 WindowPrompt(tr("ERROR:"), tr("Not a DOL/ELF file."), tr("OK"));
-							}
+                            }
                         }
                     }
                 }

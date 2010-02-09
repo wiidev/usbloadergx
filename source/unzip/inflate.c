@@ -3,8 +3,7 @@
 
 #define CHUNK 1024
 
-int inflateFile(FILE *source, FILE *dest)
-{
+int inflateFile(FILE *source, FILE *dest) {
     int ret;
     unsigned have;
     z_stream strm;
@@ -31,7 +30,7 @@ int inflateFile(FILE *source, FILE *dest)
         if (strm.avail_in == 0)
             break;
         strm.next_in = in;
-		
+
         /* run inflate() on input until output buffer not full */
         do {
             strm.avail_out = CHUNK;

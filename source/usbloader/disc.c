@@ -15,7 +15,7 @@
 #include "wbfs.h"
 #include "../gecko.h"
 #include "../fatmounter.h"
-    
+
 /* Constants */
 #define PTABLE_OFFSET	0x40000
 #define WII_MAGIC	0x5D1C9EA3
@@ -44,8 +44,7 @@ void __Disc_SetLowMem(void) {
     memset(gameid, 0, 8);
     memcpy(gameid, (char*)Disc_ID, 6);
 
-    if ((strcmp(gameid,"R3XE6U")==0) || (strcmp(gameid,"R3XP6V")==0))
-    {
+    if ((strcmp(gameid,"R3XE6U")==0) || (strcmp(gameid,"R3XP6V")==0)) {
         *GameID_Address	= 0x80000000;    // Game ID Address
     }
 
@@ -85,13 +84,13 @@ void __Disc_SetVMode(u8 videoselected) {
 
         /* Select video mode */
         switch (diskid[3]) {
-        /* PAL */
+            /* PAL */
         case 'P':
-		case 'D':
+        case 'D':
         case 'F':
-		case 'I':
-		case 'S':
-		case 'H':
+        case 'I':
+        case 'S':
+        case 'H':
         case 'X':
         case 'Y':
         case 'Z':
@@ -151,8 +150,8 @@ void __Disc_SetVMode(u8 videoselected) {
         if (vmode->viTVMode & VI_NON_INTERLACE)
             VIDEO_WaitVSync();
     }
-	gprintf("\nVideo mode - %s",((progressive)?"progressive":"interlaced"));
-    
+    gprintf("\nVideo mode - %s",((progressive)?"progressive":"interlaced"));
+
 }
 
 void __Disc_SetTime(void) {
@@ -236,12 +235,12 @@ s32 Disc_Wait(void) {
 }
 
 s32 Disc_SetUSB(const u8 *id) {
-	u32 part = 0;
-	if (wbfs_part_fs) {
-		part = wbfs_part_lba;
-	} else {
-		part = wbfs_part_idx ? wbfs_part_idx - 1 : 0;
-	}
+    u32 part = 0;
+    if (wbfs_part_fs) {
+        part = wbfs_part_lba;
+    } else {
+        part = wbfs_part_idx ? wbfs_part_idx - 1 : 0;
+    }
 
     /* Set USB mode */
     return WDVD_SetUSBMode(id, part);
@@ -279,9 +278,9 @@ s32 Disc_BootPartition(u64 offset, u8 videoselected, u8 cheat, u8 vipatch, u8 pa
     if (ret < 0)
         return ret;
 
-	char gameid[8];
-	memset(gameid, 0, 8);
-	memcpy(gameid, (char*)Disc_ID, 6);
+    char gameid[8];
+    memset(gameid, 0, 8);
+    memcpy(gameid, (char*)Disc_ID, 6);
 
     /* Setup low memory */
     __Disc_SetLowMem();
@@ -296,8 +295,8 @@ s32 Disc_BootPartition(u64 offset, u8 videoselected, u8 cheat, u8 vipatch, u8 pa
         do_sd_code(gameid);
     }
 
-	//kill the USB and SD
-	USBDevice_deInit();
+    //kill the USB and SD
+    USBDevice_deInit();
     SDCard_deInit();
 
     /* Set an appropiate video mode */
@@ -313,18 +312,18 @@ s32 Disc_BootPartition(u64 offset, u8 videoselected, u8 cheat, u8 vipatch, u8 pa
     WPAD_Disconnect(0);
     WPAD_Shutdown();
 
-	// Anti-green screen fix
-	VIDEO_SetBlack(TRUE);
-	VIDEO_Flush();
-	VIDEO_WaitVSync();
-	gprintf("\n\nUSB Loader GX is done.\n\n");
+    // Anti-green screen fix
+    VIDEO_SetBlack(TRUE);
+    VIDEO_Flush();
+    VIDEO_WaitVSync();
+    gprintf("\n\nUSB Loader GX is done.\n\n");
 
     /* Shutdown IOS subsystems */
-	// fix for PeppaPig (from NeoGamma)
-	extern void __exception_closeall();
-	IRQ_Disable();
-	__IOS_ShutdownSubsystems();
-	__exception_closeall();
+    // fix for PeppaPig (from NeoGamma)
+    extern void __exception_closeall();
+    IRQ_Disable();
+    __IOS_ShutdownSubsystems();
+    __exception_closeall();
 
     /* Jump to entry point */
     p_entry();

@@ -32,19 +32,19 @@
  * enum NTFS_CLUSTER_ALLOCATION_ZONES -
  */
 typedef enum {
-	FIRST_ZONE	= 0,	/* For sanity checking. */
-	MFT_ZONE	= 0,	/* Allocate from $MFT zone. */
-	DATA_ZONE	= 1,	/* Allocate from $DATA zone. */
-	LAST_ZONE	= 1,	/* For sanity checking. */
+    FIRST_ZONE	= 0,	/* For sanity checking. */
+    MFT_ZONE	= 0,	/* Allocate from $MFT zone. */
+    DATA_ZONE	= 1,	/* Allocate from $DATA zone. */
+    LAST_ZONE	= 1,	/* For sanity checking. */
 } NTFS_CLUSTER_ALLOCATION_ZONES;
 
 extern runlist *ntfs_cluster_alloc(ntfs_volume *vol, VCN start_vcn, s64 count,
-		LCN start_lcn, const NTFS_CLUSTER_ALLOCATION_ZONES zone);
+                                       LCN start_lcn, const NTFS_CLUSTER_ALLOCATION_ZONES zone);
 
 extern int ntfs_cluster_free_from_rl(ntfs_volume *vol, runlist *rl);
 
 extern int ntfs_cluster_free(ntfs_volume *vol, ntfs_attr *na, VCN start_vcn,
-		s64 count);
+                                 s64 count);
 
 #endif /* defined _NTFS_LCNALLOC_H */
 

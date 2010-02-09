@@ -10,31 +10,27 @@ bool textVideoInit = false;
 #include <stdarg.h>
 
 //using the gprintf from crediar because it is smaller than mine
-void gprintf( const char *str, ... )
-{
-	if (!(geckoinit))return;
+void gprintf( const char *str, ... ) {
+    if (!(geckoinit))return;
 
-	char astr[4096];
+    char astr[4096];
 
-	va_list ap;
-	va_start(ap,str);
+    va_list ap;
+    va_start(ap,str);
 
-	vsprintf( astr, str, ap );
+    vsprintf( astr, str, ap );
 
-	va_end(ap);
+    va_end(ap);
 
-	usb_sendbuffer_safe( 1, astr, strlen(astr) );
-} 
+    usb_sendbuffer_safe( 1, astr, strlen(astr) );
+}
 
-bool InitGecko()
-{
-	u32 geckoattached = usb_isgeckoalive(EXI_CHANNEL_1);
-	if (geckoattached)
-	{
-		usb_flush(EXI_CHANNEL_1);
-		return true;
-	}
-	else return false;
+bool InitGecko() {
+    u32 geckoattached = usb_isgeckoalive(EXI_CHANNEL_1);
+    if (geckoattached) {
+        usb_flush(EXI_CHANNEL_1);
+        return true;
+    } else return false;
 }
 
 

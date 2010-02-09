@@ -36,9 +36,8 @@ extern u8 shutdown;
 extern u8 reset;
 
 
-int DownloadTheme(const char *url, const char *title)
-{
-    if(!url)
+int DownloadTheme(const char *url, const char *title) {
+    if (!url)
         return 0;
 
     char filename[255];
@@ -46,8 +45,7 @@ int DownloadTheme(const char *url, const char *title)
 
     int filesize = download_request(url, (char *) &filename);
 
-    if(filesize <= 0)
-    {
+    if (filesize <= 0) {
         WindowPrompt(tr("Download request failed."), 0, tr("OK"));
         return 0;
     }
@@ -62,8 +60,7 @@ int DownloadTheme(const char *url, const char *title)
     snprintf(filepath, sizeof(filepath), "%s/%s", path, filename);
 
     FILE *file = fopen(filepath, "wb");
-    if(!file)
-    {
+    if (!file) {
         WindowPrompt(tr("Download failed."), tr("Can't create file"), tr("OK"));
         return 0;
     }
@@ -74,24 +71,21 @@ int DownloadTheme(const char *url, const char *title)
 
     u8 *buffer = new u8[blocksize];
 
-    while(done < (u32) filesize)
-    {
-        if((u32) blocksize > filesize-done)
+    while (done < (u32) filesize) {
+        if ((u32) blocksize > filesize-done)
             blocksize = filesize-done;
 
         ShowProgress(tr("Downloading file"), 0, (char*) filename, done, filesize, true);
 
         int ret = network_read(buffer, blocksize);
-        if(ret < 0)
-        {
+        if (ret < 0) {
             free(buffer);
             fclose(file);
             remove(path);
             ProgressStop();
             WindowPrompt(tr("Download failed."), tr("Transfer failed."), tr("OK"));
             return 0;
-        }
-        else if (ret == 0)
+        } else if (ret == 0)
             break;
 
         fwrite(buffer, 1, blocksize, file);
@@ -104,8 +98,7 @@ int DownloadTheme(const char *url, const char *title)
 
     ProgressStop();
 
-    if(done != (u32) filesize)
-    {
+    if (done != (u32) filesize) {
         remove(filepath);
         WindowPrompt(tr("Download failed."), tr("Connection lost..."), tr("OK"));
         return 0;
@@ -114,19 +107,15 @@ int DownloadTheme(const char *url, const char *title)
     ZipFile zipfile(filepath);
 
     int result = zipfile.ExtractAll(path);
-    if(result)
-    {
+    if (result) {
         remove(filepath);
         int choice = WindowPrompt(tr("Successfully extracted theme."), tr("Do you want to apply it now?"), tr("Yes"), tr("No"));
-        if(choice)
-        {
+        if (choice) {
             char real_themepath[1024];
             sprintf(real_themepath, "%s", CFG.theme_path);
-            if(SearchFile(path, "GXtheme.cfg", real_themepath) == true)
-            {
+            if (SearchFile(path, "GXtheme.cfg", real_themepath) == true) {
                 char *ptr = strrchr(real_themepath, '/');
-                if(ptr)
-                {
+                if (ptr) {
                     ptr++;
                     ptr[0] = '\0';
                 }
@@ -135,28 +124,25 @@ int DownloadTheme(const char *url, const char *title)
                 CFG_Load();
                 CFG_LoadGlobal();
                 result = 2;
-            }
-            else
+            } else
                 WindowPrompt(tr("ERROR: Can't set up theme."), tr("GXtheme.cfg not found in any subfolder."), tr("OK"));
         }
-    }
-    else
+    } else
         WindowPrompt(tr("Failed to extract."), tr("Unsupported format, try to extract manually."), tr("OK"));
 
     return result;
 }
 
 
-static int Theme_Prompt(const char *title, const char *author, GuiImageData *thumbimageData, const char *downloadlink)
-{
+static int Theme_Prompt(const char *title, const char *author, GuiImageData *thumbimageData, const char *downloadlink) {
     gprintf("\nTheme_Prompt(%s ,%s, <DATA>, %s)",title,author,downloadlink);
     bool leave = false;
     int result = 0;
 
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-	// because destroy GuiSound must wait while sound playing is finished, we use a global sound
-	if(!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-	//	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
+    if (!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+    //	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
     char imgPath[100];
     snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
@@ -196,8 +182,7 @@ static int Theme_Prompt(const char *title, const char *author, GuiImageData *thu
     GuiText downloadBtnTxt(tr("Download") , 22, THEME.prompttext);
     downloadBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
     GuiImage downloadBtnImg(&btnOutline);
-    if (Settings.wsprompt == yes)
-    {
+    if (Settings.wsprompt == yes) {
         downloadBtnTxt.SetWidescreen(CFG.widescreen);
         downloadBtnImg.SetWidescreen(CFG.widescreen);
     }
@@ -208,8 +193,7 @@ static int Theme_Prompt(const char *title, const char *author, GuiImageData *thu
     GuiText backBtnTxt(tr("Back") , 22, THEME.prompttext);
     backBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
     GuiImage backBtnImg(&btnOutline);
-    if (Settings.wsprompt == yes)
-    {
+    if (Settings.wsprompt == yes) {
         backBtnTxt.SetWidescreen(CFG.widescreen);
         backBtnImg.SetWidescreen(CFG.widescreen);
     }
@@ -241,8 +225,7 @@ static int Theme_Prompt(const char *title, const char *author, GuiImageData *thu
     mainWindow->ChangeFocus(&promptWindow);
     ResumeGui();
 
-    while (!leave)
-    {
+    while (!leave) {
         VIDEO_WaitVSync();
 
         if (shutdown == 1)
@@ -250,13 +233,11 @@ static int Theme_Prompt(const char *title, const char *author, GuiImageData *thu
         else if (reset == 1)
             Sys_Reboot();
 
-        if (downloadBtn.GetState() == STATE_CLICKED)
-        {
+        if (downloadBtn.GetState() == STATE_CLICKED) {
             int choice = WindowPrompt(tr("Do you want to download this theme?"), title, tr("Yes"), tr("Cancel"));
-            if(choice)
-            {
+            if (choice) {
                 result = DownloadTheme(downloadlink, title);
-                if(result == 2)
+                if (result == 2)
                     leave = true;
             }
             mainWindow->SetState(STATE_DISABLED);
@@ -265,8 +246,7 @@ static int Theme_Prompt(const char *title, const char *author, GuiImageData *thu
             downloadBtn.ResetState();
         }
 
-        else if (backBtn.GetState() == STATE_CLICKED)
-        {
+        else if (backBtn.GetState() == STATE_CLICKED) {
             leave = true;
             backBtn.ResetState();
         }
@@ -283,8 +263,7 @@ static int Theme_Prompt(const char *title, const char *author, GuiImageData *thu
 }
 
 
-int Theme_Downloader()
-{
+int Theme_Downloader() {
     int pagesize = 4;
     int menu = MENU_NONE;
     bool listchanged = false;
@@ -296,9 +275,9 @@ int Theme_Downloader()
 
     /*** Sound Variables ***/
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-	// because destroy GuiSound must wait while sound playing is finished, we use a global sound
-	if(!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-	//	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
+    if (!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+    //	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
     GuiSound btnClick1(button_click_pcm, button_click_pcm_size, Settings.sfxvolume);
 
     /*** Image Variables ***/
@@ -355,8 +334,7 @@ int Theme_Downloader()
 
     /*** Buttons ***/
 
-    for (int i = 0; i < pagesize; i++)
-    {
+    for (int i = 0; i < pagesize; i++) {
         ImageData[i] = NULL;
         Image[i] = NULL;
         MainButtonTxt[i] = NULL;
@@ -372,16 +350,15 @@ int Theme_Downloader()
     }
 
     /*** Positions ***/
-	MainButton[0]->SetPosition(90, 75);
-	MainButton[1]->SetPosition(340, 75);
-	MainButton[2]->SetPosition(90, 230);
-	MainButton[3]->SetPosition(340, 230);
+    MainButton[0]->SetPosition(90, 75);
+    MainButton[1]->SetPosition(340, 75);
+    MainButton[2]->SetPosition(90, 230);
+    MainButton[3]->SetPosition(340, 230);
 
     GuiText backBtnTxt(tr("Back") , 22, THEME.prompttext);
     backBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
     GuiImage backBtnImg(&btnOutline);
-    if (Settings.wsprompt == yes)
-    {
+    if (Settings.wsprompt == yes) {
         backBtnTxt.SetWidescreen(CFG.widescreen);
         backBtnImg.SetWidescreen(CFG.widescreen);
     }
@@ -417,7 +394,7 @@ int Theme_Downloader()
     GoRightBtn.SetTrigger(&trigPlus);
 
     GuiImage PageindicatorImg(&PageindicatorImgData);
-    GuiText PageindicatorTxt(NULL, 22, (GXColor) { 0, 0, 0, 255});
+    GuiText PageindicatorTxt(NULL, 22, (GXColor) {0, 0, 0, 255 });
     GuiButton PageIndicatorBtn(PageindicatorImg.GetWidth(), PageindicatorImg.GetHeight());
     PageIndicatorBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     PageIndicatorBtn.SetPosition(110, 400);
@@ -429,8 +406,7 @@ int Theme_Downloader()
     PageIndicatorBtn.SetEffectGrow();
 
     GuiImage wifiImg(&wifiImgData);
-    if (Settings.wsprompt == yes)
-    {
+    if (Settings.wsprompt == yes) {
         wifiImg.SetWidescreen(CFG.widescreen);
     }
     GuiButton wifiBtn(wifiImg.GetWidth(), wifiImg.GetHeight());
@@ -448,7 +424,7 @@ int Theme_Downloader()
     mainWindow->Append(&w);
     ResumeGui();
 
-    if(!IsNetworkInit())
+    if (!IsNetworkInit())
         NetworkInitPrompt();
 
     char url[300];
@@ -473,14 +449,12 @@ int Theme_Downloader()
 
     int ThemesOnPage = Theme->GetThemeCount();
 
-    if(!ThemesOnPage)
-    {
+    if (!ThemesOnPage) {
         WindowPrompt(tr("No themes found on the site."), 0, "OK");
         menu = MENU_SETTINGS;
     }
 
-    while(menu == MENU_NONE)
-    {
+    while (menu == MENU_NONE) {
         HaltGui();
         w.RemoveAll();
         w.Append(&background);
@@ -498,24 +472,22 @@ int Theme_Downloader()
 
         int n = 0;
 
-        for(int i = currenttheme; (i < (currenttheme+pagesize)); i++)
-        {
+        for (int i = currenttheme; (i < (currenttheme+pagesize)); i++) {
             ShowProgress(tr("Downloading image:"), 0, (char *) Theme->GetThemeTitle(i), n, pagesize);
 
-            if(MainButtonTxt[n])
+            if (MainButtonTxt[n])
                 delete MainButtonTxt[n];
-            if(ImageData[n])
+            if (ImageData[n])
                 delete ImageData[n];
-            if(Image[n])
+            if (Image[n])
                 delete Image[n];
 
             MainButtonTxt[n] = NULL;
             ImageData[n] = NULL;
             Image[n] = NULL;
 
-            if(i < ThemesOnPage)
-            {
-                MainButtonTxt[n] = new GuiText(Theme->GetThemeTitle(i), 18, (GXColor) { 0, 0, 0, 255});
+            if (i < ThemesOnPage) {
+		MainButtonTxt[n] = new GuiText(Theme->GetThemeTitle(i), 18, (GXColor) {0, 0, 0, 255});
                 MainButtonTxt[n]->SetAlignment(ALIGN_CENTER, ALIGN_TOP);
                 MainButtonTxt[n]->SetPosition(0, 10);
                 MainButtonTxt[n]->SetMaxWidth(theme_box_Data.GetWidth()-10, GuiText::DOTTED);
@@ -527,23 +499,19 @@ int Theme_Downloader()
 
                 FILE * storefile = fopen(filepath, "rb");
 
-                if(!storefile)
-                {
+                if (!storefile) {
                     struct block file = downloadfile(url);
                     char storepath[300];
                     snprintf(storepath, sizeof(storepath), "%s/tmp/", Settings.theme_downloadpath);
                     subfoldercreate(storepath);
-                    if(file.data)
-                    {
+                    if (file.data) {
                         storefile = fopen(filepath, "wb");
                         fwrite(file.data, 1, file.size, storefile);
                         fclose(storefile);
                     }
                     ImageData[n] = new GuiImageData(file.data, file.size);
                     free(file.data);
-                }
-                else
-                {
+                } else {
                     fseek(storefile, 0, SEEK_END);
                     u32 filesize = ftell(storefile);
                     u8 *buffer = (u8*) malloc(filesize);
@@ -566,17 +534,15 @@ int Theme_Downloader()
         ProgressStop();
 
         HaltGui();
-        for(int i = 0; i < pagesize; i++)
-        {
-            if(MainButtonTxt[i])
+        for (int i = 0; i < pagesize; i++) {
+            if (MainButtonTxt[i])
                 w.Append(MainButton[i]);
         }
         ResumeGui();
 
         listchanged = false;
 
-        while(!listchanged)
-        {
+        while (!listchanged) {
             VIDEO_WaitVSync ();
 
             if (shutdown == 1)
@@ -584,52 +550,40 @@ int Theme_Downloader()
             else if (reset == 1)
                 Sys_Reboot();
 
-            else if (wifiBtn.GetState() == STATE_CLICKED)
-            {
+            else if (wifiBtn.GetState() == STATE_CLICKED) {
                 Initialize_Network();
                 wifiBtn.ResetState();
-            }
-            else if (backBtn.GetState() == STATE_CLICKED)
-            {
+            } else if (backBtn.GetState() == STATE_CLICKED) {
                 listchanged = true;
                 menu = MENU_SETTINGS;
                 backBtn.ResetState();
                 break;
-            }
-            else if (GoRightBtn.GetState() == STATE_CLICKED)
-            {
+            } else if (GoRightBtn.GetState() == STATE_CLICKED) {
                 listchanged = true;
                 currenttheme += pagesize;
                 currentpage++;
-                if(currenttheme >= ThemesOnPage)
-                {
+                if (currenttheme >= ThemesOnPage) {
                     currentpage = 1;
                     currenttheme = 0;
                 }
                 GoRightBtn.ResetState();
-            }
-            else if (GoLeftBtn.GetState() == STATE_CLICKED)
-            {
+            } else if (GoLeftBtn.GetState() == STATE_CLICKED) {
                 listchanged = true;
                 currenttheme -= pagesize;
                 currentpage--;
-                if(currenttheme < 0)
-                {
+                if (currenttheme < 0) {
                     currentpage = roundup((ThemesOnPage+1.0f)/pagesize);
                     currenttheme = currentpage*pagesize-pagesize;
                 }
                 GoLeftBtn.ResetState();
             }
 
-            for(int i = 0; i < pagesize; i++)
-            {
-                if(MainButton[i]->GetState() == STATE_CLICKED)
-                {
+            for (int i = 0; i < pagesize; i++) {
+                if (MainButton[i]->GetState() == STATE_CLICKED) {
                     snprintf(url, sizeof(url), "%s", Theme->GetDownloadLink(currenttheme+i));
                     int ret = Theme_Prompt(Theme->GetThemeTitle(currenttheme+i), Theme->GetThemeAuthor(currenttheme+i), ImageData[i], url);
                     MainButton[i]->ResetState();
-                    if(ret == 2)
-                    {
+                    if (ret == 2) {
                         listchanged = true;
                         menu = MENU_THEMEDOWNLOADER;
                     }
@@ -640,26 +594,25 @@ int Theme_Downloader()
 
     w.SetEffect(EFFECT_FADE, -20);
 
-    while(w.GetEffect() > 0) usleep(100);
+    while (w.GetEffect() > 0) usleep(100);
 
     HaltGui();
     mainWindow->Remove(&w);
 
-    for (int i = 0; i < pagesize; i++)
-    {
-        if(MainButton[i])
+    for (int i = 0; i < pagesize; i++) {
+        if (MainButton[i])
             delete MainButton[i];
-        if(theme_box_img[i])
+        if (theme_box_img[i])
             delete theme_box_img[i];
-        if(ImageData[i])
+        if (ImageData[i])
             delete ImageData[i];
-        if(Image[i])
+        if (Image[i])
             delete Image[i];
-        if(MainButtonTxt[i])
+        if (MainButtonTxt[i])
             delete MainButtonTxt[i];
     }
 
-    if(Theme)
+    if (Theme)
         delete Theme;
     Theme = NULL;
 

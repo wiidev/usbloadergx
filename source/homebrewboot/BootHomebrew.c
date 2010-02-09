@@ -37,9 +37,9 @@ void CopyHomebrewMemory(u32 read, u8 *temp, u32 len) {
 }
 
 int BootHomebrew(char * path) {
-	loadStub();
-	if (Set_Stub_Split(0x00010001,"UNEO")<0)
-		Set_Stub_Split(0x00010001,"ULNR");
+    loadStub();
+    if (Set_Stub_Split(0x00010001,"UNEO")<0)
+        Set_Stub_Split(0x00010001,"ULNR");
     void *buffer = NULL;
     u32 filesize = 0;
     entrypoint entry;
@@ -106,9 +106,9 @@ int BootHomebrew(char * path) {
 }
 
 int BootHomebrewFromMem() {
-	loadStub();
-	if (Set_Stub_Split(0x00010001,"UNEO")<0)
-		Set_Stub_Split(0x00010001,"ULNR");
+    loadStub();
+    if (Set_Stub_Split(0x00010001,"UNEO")<0)
+        Set_Stub_Split(0x00010001,"ULNR");
     entrypoint entry;
     u32 cpu_isr;
 

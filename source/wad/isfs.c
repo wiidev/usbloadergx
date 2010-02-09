@@ -153,9 +153,9 @@ static int _ISFS_open_r(struct _reent *r, void *fileStruct, const char *path, in
         omode |= ISFS_OPEN_RW;
 
     if (mode & O_CREAT) {
-    	int user  = 0;
+        int user  = 0;
         int group = 0;
-	int other = 0;
+        int other = 0;
 
         if (flags & S_IRUSR)
             user |= ISFS_OPEN_READ;
@@ -241,7 +241,7 @@ static int _ISFS_read_r(struct _reent *r, int fd, char *ptr, size_t len) {
     } else if (ret < len) {
         r->_errno = EOVERFLOW;
     }
-    
+
     memcpy(ptr, rw_buffer, ret);
     return ret;
 }

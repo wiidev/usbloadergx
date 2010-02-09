@@ -41,32 +41,32 @@ extern const char* DEVICE_NAME;
 typedef enum {FS_UNKNOWN, FS_FAT12, FS_FAT16, FS_FAT32} FS_TYPE;
 
 typedef struct {
-	sec_t    fatStart;
-	uint32_t sectorsPerFat;
-	uint32_t lastCluster;
-	uint32_t firstFree;
+    sec_t    fatStart;
+    uint32_t sectorsPerFat;
+    uint32_t lastCluster;
+    uint32_t firstFree;
 } FAT;
 
 typedef struct {
-	const DISC_INTERFACE* disc;
-	CACHE*                cache;
-	// Info about the partition
-	FS_TYPE               filesysType;
-	uint64_t              totalSize;
-	sec_t                 rootDirStart;
-	uint32_t              rootDirCluster;
-	uint32_t              numberOfSectors;
-	sec_t                 dataStart;
-	uint32_t              bytesPerSector;
-	uint32_t              sectorsPerCluster;
-	uint32_t              bytesPerCluster;
-	FAT                   fat;
-	// Values that may change after construction
-	uint32_t              cwdCluster;			// Current working directory cluster
-	int                   openFileCount;
-	struct _FILE_STRUCT*  firstOpenFile;		// The start of a linked list of files
-	mutex_t               lock;					// A lock for partition operations
-	bool                  readOnly;				// If this is set, then do not try writing to the disc
+    const DISC_INTERFACE* disc;
+    CACHE*                cache;
+    // Info about the partition
+    FS_TYPE               filesysType;
+    uint64_t              totalSize;
+    sec_t                 rootDirStart;
+    uint32_t              rootDirCluster;
+    uint32_t              numberOfSectors;
+    sec_t                 dataStart;
+    uint32_t              bytesPerSector;
+    uint32_t              sectorsPerCluster;
+    uint32_t              bytesPerCluster;
+    FAT                   fat;
+    // Values that may change after construction
+    uint32_t              cwdCluster;			// Current working directory cluster
+    int                   openFileCount;
+    struct _FILE_STRUCT*  firstOpenFile;		// The start of a linked list of files
+    mutex_t               lock;					// A lock for partition operations
+    bool                  readOnly;				// If this is set, then do not try writing to the disc
 } PARTITION;
 
 /*

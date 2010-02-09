@@ -30,17 +30,17 @@ extern "C" {
 #include <gccore.h>
 #include <ogc/disc_io.h>
 
-/* NTFS errno values */
+    /* NTFS errno values */
 #define ENOPART                         3000 /* No partition was found */
 #define EINVALPART                      3001 /* Specified partition is invalid or not supported */
 #define EDIRTY                          3002 /* Volume is dirty and NTFS_RECOVER was not specified during mount */
 #define EHIBERNATED                     3003 /* Volume is hibernated and NTFS_IGNORE_HIBERFILE was not specified during mount */
 
-/* NTFS cache options */
+    /* NTFS cache options */
 #define CACHE_DEFAULT_PAGE_COUNT        8   /* The default number of pages in the cache */
 #define CACHE_DEFAULT_PAGE_SIZE         128 /* The default number of sectors per cache page */
 
-/* NTFS mount flags */
+    /* NTFS mount flags */
 #define NTFS_DEFAULT                    0x00000000 /* Standard mount, expects a clean, non-hibernated volume */
 #define NTFS_SHOW_HIDDEN_FILES          0x00000001 /* Display hidden files when enumerating directories */
 #define NTFS_SHOW_SYSTEM_FILES          0x00000002 /* Display system files when enumerating directories */
@@ -51,93 +51,93 @@ extern "C" {
 #define NTFS_SU                         NTFS_SHOW_HIDDEN_FILES & NTFS_SHOW_SYSTEM_FILES
 #define NTFS_FORCE                      NTFS_RECOVER & NTFS_IGNORE_HIBERFILE
 
-/**
- * ntfs_md - NTFS mount descriptor
- */
-typedef struct _ntfs_md {
-    char name[32];                      /* Mount name (can be accessed as "name:/") */
-    const DISC_INTERFACE *interface;    /* Block device containing the mounted partition */
-    sec_t startSector;                  /* Local block address to first sector of partition */
-} ntfs_md;
+    /**
+     * ntfs_md - NTFS mount descriptor
+     */
+    typedef struct _ntfs_md {
+        char name[32];                      /* Mount name (can be accessed as "name:/") */
+        const DISC_INTERFACE *interface;    /* Block device containing the mounted partition */
+        sec_t startSector;                  /* Local block address to first sector of partition */
+    } ntfs_md;
 
-/**
- * Find all NTFS partitions on a block device.
- *
- * @param INTERFACE The block device to search
- * @param PARTITIONS (out) A pointer to receive the array of partition start sectors
- * 
- * @return The number of entries in PARTITIONS or -1 if an error occurred (see errno)
- * @note The caller is responsible for freeing PARTITIONS when finished with it
- */
-extern int ntfsFindPartitions (const DISC_INTERFACE *interface, sec_t **partitions);
+    /**
+     * Find all NTFS partitions on a block device.
+     *
+     * @param INTERFACE The block device to search
+     * @param PARTITIONS (out) A pointer to receive the array of partition start sectors
+     *
+     * @return The number of entries in PARTITIONS or -1 if an error occurred (see errno)
+     * @note The caller is responsible for freeing PARTITIONS when finished with it
+     */
+    extern int ntfsFindPartitions (const DISC_INTERFACE *interface, sec_t **partitions);
 
-/**
- * Mount all NTFS partitions on all inserted block devices.
- *
- * @param MOUNTS (out) A pointer to receive the array of mount descriptors
- * @param FLAGS Additional mounting flags. (see above)
- * 
- * @return The number of entries in MOUNTS or -1 if an error occurred (see errno)
- * @note The caller is responsible for freeing MOUNTS when finished with it
- * @note All device caches are setup using default values (see above)
- */
-extern int ntfsMountAll (ntfs_md **mounts, u32 flags);
+    /**
+     * Mount all NTFS partitions on all inserted block devices.
+     *
+     * @param MOUNTS (out) A pointer to receive the array of mount descriptors
+     * @param FLAGS Additional mounting flags. (see above)
+     *
+     * @return The number of entries in MOUNTS or -1 if an error occurred (see errno)
+     * @note The caller is responsible for freeing MOUNTS when finished with it
+     * @note All device caches are setup using default values (see above)
+     */
+    extern int ntfsMountAll (ntfs_md **mounts, u32 flags);
 
-/**
- * Mount all NTFS partitions on a block devices.
- *
- * @param INTERFACE The block device to mount.
- * @param MOUNTS (out) A pointer to receive the array of mount descriptors
- * @param FLAGS Additional mounting flags. (see above)
- * 
- * @return The number of entries in MOUNTS or -1 if an error occurred (see errno)
- * @note The caller is responsible for freeing MOUNTS when finished with it
- * @note The device cache is setup using default values (see above)
- */
-extern int ntfsMountDevice (const DISC_INTERFACE* interface, ntfs_md **mounts, u32 flags);
+    /**
+     * Mount all NTFS partitions on a block devices.
+     *
+     * @param INTERFACE The block device to mount.
+     * @param MOUNTS (out) A pointer to receive the array of mount descriptors
+     * @param FLAGS Additional mounting flags. (see above)
+     *
+     * @return The number of entries in MOUNTS or -1 if an error occurred (see errno)
+     * @note The caller is responsible for freeing MOUNTS when finished with it
+     * @note The device cache is setup using default values (see above)
+     */
+    extern int ntfsMountDevice (const DISC_INTERFACE* interface, ntfs_md **mounts, u32 flags);
 
-/**
- * Mount a NTFS partition from a specific sector on a block device.
- *
- * @param NAME The name to mount the device under (can then be accessed as "NAME:/")
- * @param INTERFACE The block device to mount
- * @param STARTSECTOR The sector the partition begins at (see @ntfsFindPartitions)
- * @param CACHEPAGECOUNT The total number of pages in the device cache
- * @param CACHEPAGESIZE The number of sectors per cache page 
- * @param FLAGS Additional mounting flags (see above)
- * 
- * @return True if mount was successful, false if no partition was found or an error occurred (see errno)
- * @note ntfsFindPartitions should be used first to locate the partitions start sector
- */
-extern bool ntfsMount (const char *name, const DISC_INTERFACE *interface, sec_t startSector, u32 cachePageCount, u32 cachePageSize, u32 flags);
+    /**
+     * Mount a NTFS partition from a specific sector on a block device.
+     *
+     * @param NAME The name to mount the device under (can then be accessed as "NAME:/")
+     * @param INTERFACE The block device to mount
+     * @param STARTSECTOR The sector the partition begins at (see @ntfsFindPartitions)
+     * @param CACHEPAGECOUNT The total number of pages in the device cache
+     * @param CACHEPAGESIZE The number of sectors per cache page
+     * @param FLAGS Additional mounting flags (see above)
+     *
+     * @return True if mount was successful, false if no partition was found or an error occurred (see errno)
+     * @note ntfsFindPartitions should be used first to locate the partitions start sector
+     */
+    extern bool ntfsMount (const char *name, const DISC_INTERFACE *interface, sec_t startSector, u32 cachePageCount, u32 cachePageSize, u32 flags);
 
-/**
- * Unmount a NTFS partition.
- *
- * @param NAME The name of mount used in ntfsMountSimple() and ntfsMount()
- * @param FORCE If true unmount even if the device is busy (may lead to data lose)
- */
-extern void ntfsUnmount (const char *name, bool force);
+    /**
+     * Unmount a NTFS partition.
+     *
+     * @param NAME The name of mount used in ntfsMountSimple() and ntfsMount()
+     * @param FORCE If true unmount even if the device is busy (may lead to data lose)
+     */
+    extern void ntfsUnmount (const char *name, bool force);
 
-/**
- * Get the volume name of a mounted NTFS partition.
- *
- * @param NAME The name of mount (see @ntfsMountAll, @ntfsMountDevice, and @ntfsMount)
- *
- * @return The volumes name if successful or NULL if an error occurred (see errno)
- */
-extern const char *ntfsGetVolumeName (const char *name);
+    /**
+     * Get the volume name of a mounted NTFS partition.
+     *
+     * @param NAME The name of mount (see @ntfsMountAll, @ntfsMountDevice, and @ntfsMount)
+     *
+     * @return The volumes name if successful or NULL if an error occurred (see errno)
+     */
+    extern const char *ntfsGetVolumeName (const char *name);
 
-/**
- * Set the volume name of a mounted NTFS partition.
- *
- * @param NAME The name of mount (see @ntfsMountAll, @ntfsMountDevice, and @ntfsMount)
- * @param VOLUMENAME The new volume name
- *
- * @return True if mount was successful, false if an error occurred (see errno)
- * @note The mount must be write-enabled else this will fail
- */
-extern bool ntfsSetVolumeName (const char *name, const char *volumeName);
+    /**
+     * Set the volume name of a mounted NTFS partition.
+     *
+     * @param NAME The name of mount (see @ntfsMountAll, @ntfsMountDevice, and @ntfsMount)
+     * @param VOLUMENAME The new volume name
+     *
+     * @return True if mount was successful, false if an error occurred (see errno)
+     * @note The mount must be write-enabled else this will fail
+     */
+    extern bool ntfsSetVolumeName (const char *name, const char *volumeName);
 
 #ifdef __cplusplus
 }

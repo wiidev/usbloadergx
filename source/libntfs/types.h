@@ -1,5 +1,5 @@
 /*
- * types.h - Misc type definitions not related to on-disk structure.  
+ * types.h - Misc type definitions not related to on-disk structure.
  *           Originated from the Linux-NTFS project.
  *
  * Copyright (c) 2000-2004 Anton Altaparmakov
@@ -94,22 +94,22 @@ typedef sle64 leLSN;
  */
 typedef enum {
 #ifndef FALSE
-	FALSE = 0,
+    FALSE = 0,
 #endif
 #ifndef NO
-	NO = 0,
+    NO = 0,
 #endif
 #ifndef ZERO
-	ZERO = 0,
+    ZERO = 0,
 #endif
 #ifndef TRUE
-	TRUE = 1,
+    TRUE = 1,
 #endif
 #ifndef YES
-	YES = 1,
+    YES = 1,
 #endif
 #ifndef ONE
-	ONE = 1,
+    ONE = 1,
 #endif
 } BOOL;
 #endif /* GEKKO */
@@ -119,8 +119,8 @@ typedef enum {
  * enum IGNORE_CASE_BOOL -
  */
 typedef enum {
-	CASE_SENSITIVE = 0,
-	IGNORE_CASE = 1,
+    CASE_SENSITIVE = 0,
+    IGNORE_CASE = 1,
 } IGNORE_CASE_BOOL;
 
 #define STATUS_OK				(0)

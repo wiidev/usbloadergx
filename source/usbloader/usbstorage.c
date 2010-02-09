@@ -89,7 +89,7 @@ s32 USBStorage_Init(void) {
 
     /* Open USB device */
     fd = IOS_Open(fs, 0);
-	if (fd < 0)
+    if (fd < 0)
         fd = IOS_Open(fs2, 0);
     if (fd < 0)
         return fd;
@@ -149,163 +149,151 @@ void USBStorage_Deinit(void) {
 s32 USBStorage_ReadSectors(u32 sector, u32 numSectors, void *buffer) {
 
 //	void *buf = (void *)buffer;
-	u32   len = (sector_size * numSectors);
+    u32   len = (sector_size * numSectors);
 
-	s32 ret;
+    s32 ret;
 
-	/* Device not opened */
-	if (fd < 0)
-		return fd;
+    /* Device not opened */
+    if (fd < 0)
+        return fd;
 
 
-	ret = IOS_IoctlvFormat(hid, fd, USB_IOCTL_UMS_READ_SECTORS, "ii:d", sector, numSectors, buffer, len);
-	return ret;
+    ret = IOS_IoctlvFormat(hid, fd, USB_IOCTL_UMS_READ_SECTORS, "ii:d", sector, numSectors, buffer, len);
+    return ret;
 }
 
 s32 USBStorage_WriteSectors(u32 sector, u32 numSectors, const void *buffer) {
-	u32   len = (sector_size * numSectors);
+    u32   len = (sector_size * numSectors);
 
-	s32 ret;
+    s32 ret;
 
-	/* Device not opened */
-	if (fd < 0)
-		return fd;
+    /* Device not opened */
+    if (fd < 0)
+        return fd;
 
-	/* Write data */
-	ret = IOS_IoctlvFormat(hid, fd, USB_IOCTL_UMS_WRITE_SECTORS, "ii:d", sector, numSectors, buffer, len);
+    /* Write data */
+    ret = IOS_IoctlvFormat(hid, fd, USB_IOCTL_UMS_WRITE_SECTORS, "ii:d", sector, numSectors, buffer, len);
 
-	return ret;
+    return ret;
 }
 
-static bool __io_usb_Startup(void)
-{
-	return USBStorage_Init() >= 0;
+static bool __io_usb_Startup(void) {
+    return USBStorage_Init() >= 0;
 }
 
-static bool __io_usb_IsInserted(void)
-{
-	s32 ret;
-	if (fd < 0) return false;
-	ret = USBStorage_GetCapacity(NULL);
-	if (ret == 0) return false;
-	return true;
+static bool __io_usb_IsInserted(void) {
+    s32 ret;
+    if (fd < 0) return false;
+    ret = USBStorage_GetCapacity(NULL);
+    if (ret == 0) return false;
+    return true;
 }
 
-bool __io_usb_ReadSectors(u32 sector, u32 count, void *buffer)
-{
-	s32 ret = USBStorage_ReadSectors(sector, count, buffer);
-	return ret > 0;
+bool __io_usb_ReadSectors(u32 sector, u32 count, void *buffer) {
+    s32 ret = USBStorage_ReadSectors(sector, count, buffer);
+    return ret > 0;
 }
 
-bool __io_usb_WriteSectors(u32 sector, u32 count, void *buffer)
-{
-	s32 ret = USBStorage_WriteSectors(sector, count, buffer);
-	return ret > 0;
+bool __io_usb_WriteSectors(u32 sector, u32 count, void *buffer) {
+    s32 ret = USBStorage_WriteSectors(sector, count, buffer);
+    return ret > 0;
 }
 
-static bool __io_usb_ClearStatus(void)
-{
-	return true;
+static bool __io_usb_ClearStatus(void) {
+    return true;
 }
 
-static bool __io_usb_Shutdown(void)
-{
-	// do nothing
-	return true;
+static bool __io_usb_Shutdown(void) {
+    // do nothing
+    return true;
 }
 
-static bool __io_usb_NOP(void)
-{
-	// do nothing
-	return true;
+static bool __io_usb_NOP(void) {
+    // do nothing
+    return true;
 }
 
 const DISC_INTERFACE __io_usbstorage_ro = {
-	DEVICE_TYPE_WII_USB,
-	FEATURE_MEDIUM_CANREAD | FEATURE_WII_USB,
-	(FN_MEDIUM_STARTUP)      &__io_usb_Startup,
-	(FN_MEDIUM_ISINSERTED)   &__io_usb_IsInserted,
-	(FN_MEDIUM_READSECTORS)  &__io_usb_ReadSectors,
-	(FN_MEDIUM_WRITESECTORS) &__io_usb_NOP,  //&__io_usb_WriteSectors,
-	(FN_MEDIUM_CLEARSTATUS)  &__io_usb_ClearStatus,
-	(FN_MEDIUM_SHUTDOWN)     &__io_usb_Shutdown
+    DEVICE_TYPE_WII_USB,
+    FEATURE_MEDIUM_CANREAD | FEATURE_WII_USB,
+    (FN_MEDIUM_STARTUP)      &__io_usb_Startup,
+    (FN_MEDIUM_ISINSERTED)   &__io_usb_IsInserted,
+    (FN_MEDIUM_READSECTORS)  &__io_usb_ReadSectors,
+    (FN_MEDIUM_WRITESECTORS) &__io_usb_NOP,  //&__io_usb_WriteSectors,
+    (FN_MEDIUM_CLEARSTATUS)  &__io_usb_ClearStatus,
+    (FN_MEDIUM_SHUTDOWN)     &__io_usb_Shutdown
 };
 
-s32 USBStorage_WBFS_Open(char *buffer)
-{
-	u32   len = 8;
+s32 USBStorage_WBFS_Open(char *buffer) {
+    u32   len = 8;
 
-	s32 ret;
+    s32 ret;
 
-	/* Device not opened */
-	if (fd < 0)
-		return fd;
+    /* Device not opened */
+    if (fd < 0)
+        return fd;
 
-	extern u32 wbfs_part_lba;
-	u32 part = wbfs_part_lba;
+    extern u32 wbfs_part_lba;
+    u32 part = wbfs_part_lba;
 
-	/* Read data */
-	ret = IOS_IoctlvFormat(hid, fd, USB_IOCTL_WBFS_OPEN_DISC, "dd:", buffer, len, &part, 4);
+    /* Read data */
+    ret = IOS_IoctlvFormat(hid, fd, USB_IOCTL_WBFS_OPEN_DISC, "dd:", buffer, len, &part, 4);
 
-	return ret;
+    return ret;
 }
 
 // woffset is in 32bit words, len is in bytes
-s32 USBStorage_WBFS_Read(u32 woffset, u32 len, void *buffer)
-{
-	s32 ret;
+s32 USBStorage_WBFS_Read(u32 woffset, u32 len, void *buffer) {
+    s32 ret;
 
-	USBStorage_Init();
-	/* Device not opened */
-	if (fd < 0)
-		return fd;
+    USBStorage_Init();
+    /* Device not opened */
+    if (fd < 0)
+        return fd;
 
-	/* Read data */
-	ret = IOS_IoctlvFormat(hid, fd, USB_IOCTL_WBFS_READ_DISC, "ii:d", woffset, len, buffer, len);
+    /* Read data */
+    ret = IOS_IoctlvFormat(hid, fd, USB_IOCTL_WBFS_READ_DISC, "ii:d", woffset, len, buffer, len);
 
-	return ret;
+    return ret;
 }
 
 
-s32 USBStorage_WBFS_ReadDebug(u32 off, u32 size, void *buffer)
-{
-	s32 ret;
+s32 USBStorage_WBFS_ReadDebug(u32 off, u32 size, void *buffer) {
+    s32 ret;
 
-	USBStorage_Init();
-	/* Device not opened */
-	if (fd < 0)
-		return fd;
+    USBStorage_Init();
+    /* Device not opened */
+    if (fd < 0)
+        return fd;
 
-	/* Read data */
-	ret = IOS_IoctlvFormat(hid, fd, USB_IOCTL_WBFS_READ_DEBUG, "ii:d", off, size, buffer, size);
+    /* Read data */
+    ret = IOS_IoctlvFormat(hid, fd, USB_IOCTL_WBFS_READ_DEBUG, "ii:d", off, size, buffer, size);
 
-	return ret;
+    return ret;
 }
 
 
-s32 USBStorage_WBFS_SetDevice(int dev)
-{
-	s32 ret;
-	static s32 retval = 0;
-	retval = 0;
-	USBStorage_Init();
-	// Device not opened
-	if (fd < 0) return fd;
-	// ioctl
-	ret = IOS_IoctlvFormat(hid, fd, USB_IOCTL_WBFS_SET_DEVICE, "i:i", dev, &retval);
-	if (retval) return retval;
-	return ret;
+s32 USBStorage_WBFS_SetDevice(int dev) {
+    s32 ret;
+    static s32 retval = 0;
+    retval = 0;
+    USBStorage_Init();
+    // Device not opened
+    if (fd < 0) return fd;
+    // ioctl
+    ret = IOS_IoctlvFormat(hid, fd, USB_IOCTL_WBFS_SET_DEVICE, "i:i", dev, &retval);
+    if (retval) return retval;
+    return ret;
 }
 
-s32 USBStorage_WBFS_SetFragList(void *p, int size)
-{
-	s32 ret;
-	USBStorage_Init();
-	// Device not opened
-	if (fd < 0) return fd;
-	// ioctl
-	ret = IOS_IoctlvFormat(hid, fd, USB_IOCTL_WBFS_SET_FRAGLIST, "d:", p, size);
-	return ret;
+s32 USBStorage_WBFS_SetFragList(void *p, int size) {
+    s32 ret;
+    USBStorage_Init();
+    // Device not opened
+    if (fd < 0) return fd;
+    // ioctl
+    ret = IOS_IoctlvFormat(hid, fd, USB_IOCTL_WBFS_SET_FRAGLIST, "d:", p, size);
+    return ret;
 }
 
 #define DEVICE_TYPE_WII_UMS (('W'<<24)|('U'<<16)|('M'<<8)|'S')

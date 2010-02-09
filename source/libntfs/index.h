@@ -31,7 +31,7 @@
  *  ... code requiring gcc 2.8 or later ...
  *  #endif
  *  Note - they won't work for gcc1 or glibc1, since the _MINOR macros
- *  were not defined then. 
+ *  were not defined then.
  */
 
 #ifndef __GNUC_PREREQ
@@ -110,41 +110,41 @@
  * to disk.
  */
 typedef struct {
-	ntfs_inode *ni;
-	ntfschar *name;
-	u32 name_len;
-	INDEX_ENTRY *entry;
-	void *data;
-	u16 data_len;
-	COLLATION_RULES cr;
-	BOOL is_in_root;
-	INDEX_ROOT *ir;
-	ntfs_attr_search_ctx *actx;
-	INDEX_BLOCK *ib;
-	ntfs_attr *ia_na;
-	int parent_pos[MAX_PARENT_VCN];  /* parent entries' positions */
-	VCN parent_vcn[MAX_PARENT_VCN]; /* entry's parent nodes */
-	int pindex;	     /* maximum it's the number of the parent nodes  */
-	BOOL ib_dirty;
-	u32 block_size;
-	u8 vcn_size_bits;
+    ntfs_inode *ni;
+    ntfschar *name;
+    u32 name_len;
+    INDEX_ENTRY *entry;
+    void *data;
+    u16 data_len;
+    COLLATION_RULES cr;
+    BOOL is_in_root;
+    INDEX_ROOT *ir;
+    ntfs_attr_search_ctx *actx;
+    INDEX_BLOCK *ib;
+    ntfs_attr *ia_na;
+    int parent_pos[MAX_PARENT_VCN];  /* parent entries' positions */
+    VCN parent_vcn[MAX_PARENT_VCN]; /* entry's parent nodes */
+    int pindex;	     /* maximum it's the number of the parent nodes  */
+    BOOL ib_dirty;
+    u32 block_size;
+    u8 vcn_size_bits;
 } ntfs_index_context;
 
 extern ntfs_index_context *ntfs_index_ctx_get(ntfs_inode *ni,
-						ntfschar *name, u32 name_len);
+            ntfschar *name, u32 name_len);
 extern void ntfs_index_ctx_put(ntfs_index_context *ictx);
 extern void ntfs_index_ctx_reinit(ntfs_index_context *ictx);
 
 extern int ntfs_index_lookup(const void *key, const int key_len,
-		ntfs_index_context *ictx) __attribute_warn_unused_result__;
+                                 ntfs_index_context *ictx) __attribute_warn_unused_result__;
 
 extern INDEX_ENTRY *ntfs_index_next(INDEX_ENTRY *ie,
-		ntfs_index_context *ictx);
+                                        ntfs_index_context *ictx);
 
 extern int ntfs_index_add_filename(ntfs_inode *ni, FILE_NAME_ATTR *fn,
-		MFT_REF mref);
+                                       MFT_REF mref);
 extern int ntfs_index_remove(ntfs_inode *dir_ni, ntfs_inode *ni,
-		const void *key, const int keylen);
+                                 const void *key, const int keylen);
 
 extern INDEX_ROOT *ntfs_index_root_get(ntfs_inode *ni, ATTR_RECORD *attr);
 

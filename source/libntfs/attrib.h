@@ -50,11 +50,11 @@ extern ntfschar TXF_DATA[10];
  * TODO: Describe them.
  */
 typedef enum {
-	LCN_HOLE		= -1,	/* Keep this as highest value or die! */
-	LCN_RL_NOT_MAPPED	= -2,
-	LCN_ENOENT		= -3,
-	LCN_EINVAL		= -4,
-	LCN_EIO			= -5,
+    LCN_HOLE		= -1,	/* Keep this as highest value or die! */
+    LCN_RL_NOT_MAPPED	= -2,
+    LCN_ENOENT		= -3,
+    LCN_EINVAL		= -4,
+    LCN_EIO			= -5,
 } ntfs_lcn_special_values;
 
 /**
@@ -76,30 +76,30 @@ typedef enum {
  * matching attribute.
  */
 struct _ntfs_attr_search_ctx {
-	MFT_RECORD *mrec;
-	ATTR_RECORD *attr;
-	BOOL is_first;
-	ntfs_inode *ntfs_ino;
-	ATTR_LIST_ENTRY *al_entry;
-	ntfs_inode *base_ntfs_ino;
-	MFT_RECORD *base_mrec;
-	ATTR_RECORD *base_attr;
+    MFT_RECORD *mrec;
+    ATTR_RECORD *attr;
+    BOOL is_first;
+    ntfs_inode *ntfs_ino;
+    ATTR_LIST_ENTRY *al_entry;
+    ntfs_inode *base_ntfs_ino;
+    MFT_RECORD *base_mrec;
+    ATTR_RECORD *base_attr;
 };
 
 extern void ntfs_attr_reinit_search_ctx(ntfs_attr_search_ctx *ctx);
 extern ntfs_attr_search_ctx *ntfs_attr_get_search_ctx(ntfs_inode *ni,
-		MFT_RECORD *mrec);
+            MFT_RECORD *mrec);
 extern void ntfs_attr_put_search_ctx(ntfs_attr_search_ctx *ctx);
 
 extern int ntfs_attr_lookup(const ATTR_TYPES type, const ntfschar *name,
-		const u32 name_len, const IGNORE_CASE_BOOL ic,
-		const VCN lowest_vcn, const u8 *val, const u32 val_len,
-		ntfs_attr_search_ctx *ctx);
+                                const u32 name_len, const IGNORE_CASE_BOOL ic,
+                                const VCN lowest_vcn, const u8 *val, const u32 val_len,
+                                ntfs_attr_search_ctx *ctx);
 
 extern int ntfs_attr_position(const ATTR_TYPES type, ntfs_attr_search_ctx *ctx);
 
 extern ATTR_DEF *ntfs_attr_find_in_attrdef(const ntfs_volume *vol,
-		const ATTR_TYPES type);
+            const ATTR_TYPES type);
 
 /**
  * ntfs_attrs_walk - syntactic sugar for walking all attributes in an inode
@@ -126,10 +126,9 @@ extern ATTR_DEF *ntfs_attr_find_in_attrdef(const ntfs_volume *vol,
  *		// Ooops. An error occurred! You should handle this case.
  *	// Now finished with all attributes in the inode.
  */
-static __inline__ int ntfs_attrs_walk(ntfs_attr_search_ctx *ctx)
-{
-	return ntfs_attr_lookup(AT_UNUSED, NULL, 0, CASE_SENSITIVE, 0,
-			NULL, 0, ctx);
+static __inline__ int ntfs_attrs_walk(ntfs_attr_search_ctx *ctx) {
+    return ntfs_attr_lookup(AT_UNUSED, NULL, 0, CASE_SENSITIVE, 0,
+                            NULL, 0, ctx);
 }
 
 /**
@@ -175,20 +174,20 @@ static __inline__ int ntfs_attrs_walk(ntfs_attr_search_ctx *ctx)
  * structure. See ntfs_attr_state_bits above.
  */
 struct _ntfs_attr {
-	runlist_element *rl;
-	ntfs_inode *ni;
-	ATTR_TYPES type;
-	ATTR_FLAGS data_flags;
-	ntfschar *name;
-	u32 name_len;
-	unsigned long state;
-	s64 allocated_size;
-	s64 data_size;
-	s64 initialized_size;
-	s64 compressed_size;
-	u32 compression_block_size;
-	u8 compression_block_size_bits;
-	u8 compression_block_clusters;
+    runlist_element *rl;
+    ntfs_inode *ni;
+    ATTR_TYPES type;
+    ATTR_FLAGS data_flags;
+    ntfschar *name;
+    u32 name_len;
+    unsigned long state;
+    s64 allocated_size;
+    s64 data_size;
+    s64 initialized_size;
+    s64 compressed_size;
+    u32 compression_block_size;
+    u8 compression_block_size_bits;
+    u8 compression_block_clusters;
 };
 
 /**
@@ -196,8 +195,8 @@ struct _ntfs_attr {
  * structure
  */
 typedef enum {
-	NA_Initialized,		/* 1: structure is initialized. */
-	NA_NonResident,		/* 1: Attribute is not resident. */
+    NA_Initialized,		/* 1: structure is initialized. */
+    NA_NonResident,		/* 1: Attribute is not resident. */
 } ntfs_attr_state_bits;
 
 #define  test_nattr_flag(na, flag)	 test_bit(NA_##flag, (na)->state)
@@ -228,53 +227,53 @@ GenNAttrIno(Sparse, 	FILE_ATTR_SPARSE_FILE)
  * For convenience. Used in the attr structure.
  */
 typedef union {
-	u8 _default;	/* Unnamed u8 to serve as default when just using
+    u8 _default;	/* Unnamed u8 to serve as default when just using
 			   a_val without specifying any of the below. */
-	STANDARD_INFORMATION std_inf;
-	ATTR_LIST_ENTRY al_entry;
-	FILE_NAME_ATTR filename;
-	OBJECT_ID_ATTR obj_id;
-	SECURITY_DESCRIPTOR_ATTR sec_desc;
-	VOLUME_NAME vol_name;
-	VOLUME_INFORMATION vol_inf;
-	DATA_ATTR data;
-	INDEX_ROOT index_root;
-	INDEX_BLOCK index_blk;
-	BITMAP_ATTR bmp;
-	REPARSE_POINT reparse;
-	EA_INFORMATION ea_inf;
-	EA_ATTR ea;
-	PROPERTY_SET property_set;
-	LOGGED_UTILITY_STREAM logged_util_stream;
-	EFS_ATTR_HEADER efs;
+    STANDARD_INFORMATION std_inf;
+    ATTR_LIST_ENTRY al_entry;
+    FILE_NAME_ATTR filename;
+    OBJECT_ID_ATTR obj_id;
+    SECURITY_DESCRIPTOR_ATTR sec_desc;
+    VOLUME_NAME vol_name;
+    VOLUME_INFORMATION vol_inf;
+    DATA_ATTR data;
+    INDEX_ROOT index_root;
+    INDEX_BLOCK index_blk;
+    BITMAP_ATTR bmp;
+    REPARSE_POINT reparse;
+    EA_INFORMATION ea_inf;
+    EA_ATTR ea;
+    PROPERTY_SET property_set;
+    LOGGED_UTILITY_STREAM logged_util_stream;
+    EFS_ATTR_HEADER efs;
 } attr_val;
 
 extern void ntfs_attr_init(ntfs_attr *na, const BOOL non_resident,
-		const ATTR_FLAGS data_flags, const BOOL encrypted,
-		const BOOL sparse,
-		const s64 allocated_size, const s64 data_size,
-		const s64 initialized_size, const s64 compressed_size,
-		const u8 compression_unit);
+                               const ATTR_FLAGS data_flags, const BOOL encrypted,
+                               const BOOL sparse,
+                               const s64 allocated_size, const s64 data_size,
+                               const s64 initialized_size, const s64 compressed_size,
+                               const u8 compression_unit);
 
-	/* warning : in the following "name" has to be freeable */
-	/* or one of constants AT_UNNAMED, NTFS_INDEX_I30 or STREAM_SDS */
+/* warning : in the following "name" has to be freeable */
+/* or one of constants AT_UNNAMED, NTFS_INDEX_I30 or STREAM_SDS */
 extern ntfs_attr *ntfs_attr_open(ntfs_inode *ni, const ATTR_TYPES type,
-		ntfschar *name, u32 name_len);
+                                     ntfschar *name, u32 name_len);
 extern void ntfs_attr_close(ntfs_attr *na);
 
 extern s64 ntfs_attr_pread(ntfs_attr *na, const s64 pos, s64 count,
-		void *b);
+                               void *b);
 extern s64 ntfs_attr_pwrite(ntfs_attr *na, const s64 pos, s64 count,
-		const void *b);
+                                const void *b);
 extern int ntfs_attr_pclose(ntfs_attr *na);
 
 extern void *ntfs_attr_readall(ntfs_inode *ni, const ATTR_TYPES type,
-			       ntfschar *name, u32 name_len, s64 *data_size);
+                                   ntfschar *name, u32 name_len, s64 *data_size);
 
 extern s64 ntfs_attr_mst_pread(ntfs_attr *na, const s64 pos,
-		const s64 bk_cnt, const u32 bk_size, void *dst);
+                                   const s64 bk_cnt, const u32 bk_size, void *dst);
 extern s64 ntfs_attr_mst_pwrite(ntfs_attr *na, const s64 pos,
-		s64 bk_cnt, const u32 bk_size, void *src);
+                                    s64 bk_cnt, const u32 bk_size, void *src);
 
 extern int ntfs_attr_map_runlist(ntfs_attr *na, VCN vcn);
 extern int ntfs_attr_map_whole_runlist(ntfs_attr *na);
@@ -283,31 +282,31 @@ extern LCN ntfs_attr_vcn_to_lcn(ntfs_attr *na, const VCN vcn);
 extern runlist_element *ntfs_attr_find_vcn(ntfs_attr *na, const VCN vcn);
 
 extern int ntfs_attr_size_bounds_check(const ntfs_volume *vol,
-		const ATTR_TYPES type, const s64 size);
+                                           const ATTR_TYPES type, const s64 size);
 extern int ntfs_attr_can_be_resident(const ntfs_volume *vol,
-		const ATTR_TYPES type);
+                                         const ATTR_TYPES type);
 int ntfs_attr_make_non_resident(ntfs_attr *na,
-		ntfs_attr_search_ctx *ctx);
+                                ntfs_attr_search_ctx *ctx);
 extern int ntfs_make_room_for_attr(MFT_RECORD *m, u8 *pos, u32 size);
 
 extern int ntfs_resident_attr_record_add(ntfs_inode *ni, ATTR_TYPES type,
-		ntfschar *name, u8 name_len, u8 *val, u32 size,
-		ATTR_FLAGS flags);
+            ntfschar *name, u8 name_len, u8 *val, u32 size,
+            ATTR_FLAGS flags);
 extern int ntfs_non_resident_attr_record_add(ntfs_inode *ni, ATTR_TYPES type,
-		ntfschar *name, u8 name_len, VCN lowest_vcn, int dataruns_size,
-		ATTR_FLAGS flags);
+            ntfschar *name, u8 name_len, VCN lowest_vcn, int dataruns_size,
+            ATTR_FLAGS flags);
 extern int ntfs_attr_record_rm(ntfs_attr_search_ctx *ctx);
 
 extern int ntfs_attr_add(ntfs_inode *ni, ATTR_TYPES type,
-		ntfschar *name, u8 name_len, u8 *val, s64 size);
+                             ntfschar *name, u8 name_len, u8 *val, s64 size);
 extern int ntfs_attr_set_flags(ntfs_inode *ni, ATTR_TYPES type,
-		ntfschar *name, u8 name_len, ATTR_FLAGS flags, ATTR_FLAGS mask);
+                                   ntfschar *name, u8 name_len, ATTR_FLAGS flags, ATTR_FLAGS mask);
 extern int ntfs_attr_rm(ntfs_attr *na);
 
 extern int ntfs_attr_record_resize(MFT_RECORD *m, ATTR_RECORD *a, u32 new_size);
 
 extern int ntfs_resident_attr_value_resize(MFT_RECORD *m, ATTR_RECORD *a,
-		const u32 new_size);
+            const u32 new_size);
 
 extern int ntfs_attr_record_move_to(ntfs_attr_search_ctx *ctx, ntfs_inode *ni);
 extern int ntfs_attr_record_move_away(ntfs_attr_search_ctx *ctx, int extra);
@@ -343,15 +342,15 @@ extern s64 ntfs_get_attribute_value_length(const ATTR_RECORD *a);
  * then nothing was read due to a zero-length attribute value, otherwise
  * errno describes the error.
  */
-extern s64 ntfs_get_attribute_value(const ntfs_volume *vol, 
-				    const ATTR_RECORD *a, u8 *b);
+extern s64 ntfs_get_attribute_value(const ntfs_volume *vol,
+                                        const ATTR_RECORD *a, u8 *b);
 
 extern void  ntfs_attr_name_free(char **name);
 extern char *ntfs_attr_name_get(const ntfschar *uname, const int uname_len);
 extern int   ntfs_attr_exist(ntfs_inode *ni, const ATTR_TYPES type,
-			     ntfschar *name, u32 name_len);
+                                 ntfschar *name, u32 name_len);
 extern int   ntfs_attr_remove(ntfs_inode *ni, const ATTR_TYPES type,
-			      ntfschar *name, u32 name_len);
+                                  ntfschar *name, u32 name_len);
 extern s64   ntfs_attr_get_free_bits(ntfs_attr *na);
 
 #endif /* defined _NTFS_ATTRIB_H */

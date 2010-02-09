@@ -44,31 +44,29 @@ void WBFS_Spinner(s32 x, s32 max) {
     total = max;
 }
 
-wbfs_disc_t* WBFS_OpenDisc(u8 *discid)
-{
-	if (wbfs_part_fs) return WBFS_FAT_OpenDisc(discid);
+wbfs_disc_t* WBFS_OpenDisc(u8 *discid) {
+    if (wbfs_part_fs) return WBFS_FAT_OpenDisc(discid);
 
-	/* No device open */
-	if (!hdd)
-		return NULL;
+    /* No device open */
+    if (!hdd)
+        return NULL;
 
-	/* Open disc */
-	return wbfs_open_disc(hdd, discid);
+    /* Open disc */
+    return wbfs_open_disc(hdd, discid);
 }
 
-void WBFS_CloseDisc(wbfs_disc_t *disc)
-{
-	if (wbfs_part_fs) {
-		WBFS_FAT_CloseDisc(disc);
-		return;
-	}
+void WBFS_CloseDisc(wbfs_disc_t *disc) {
+    if (wbfs_part_fs) {
+        WBFS_FAT_CloseDisc(disc);
+        return;
+    }
 
-	/* No device open */
-	if (!hdd || !disc)
-		return;
+    /* No device open */
+    if (!hdd || !disc)
+        return;
 
-	/* Close disc */
-	wbfs_close_disc(disc);
+    /* Close disc */
+    wbfs_close_disc(disc);
 }
 
 void GetProgressValue(s32 * d, s32 * m) {
@@ -273,159 +271,153 @@ s32 WBFS_Open(void) {
         wbfs_close(hdd);
 
     /* Open hard disk */
-	wbfs_part_fs = wbfs_part_idx = wbfs_part_lba = 0;
+    wbfs_part_fs = wbfs_part_idx = wbfs_part_lba = 0;
     hdd = wbfs_open_hd(readCallback, writeCallback, NULL, sector_size, nb_sectors, 0);
     if (!hdd)
         return -1;
 
-	// Save the new sector size, so it will be used in read and write calls
-	sector_size = 1 << hdd->head->hd_sec_sz_s;
+    // Save the new sector size, so it will be used in read and write calls
+    sector_size = 1 << hdd->head->hd_sec_sz_s;
 
-	wbfs_part_idx = 1;
+    wbfs_part_idx = 1;
     return 0;
 }
 
-s32 WBFS_OpenPart(u32 part_fs, u32 part_idx, u32 part_lba, u32 part_size, char *partition)
-{
-	// close
-	WBFS_Close();
+s32 WBFS_OpenPart(u32 part_fs, u32 part_idx, u32 part_lba, u32 part_size, char *partition) {
+    // close
+    WBFS_Close();
 
-	if (part_fs == PART_FS_FAT) {
-		if (wbfsDev == WBFS_DEVICE_USB && part_lba == fat_usb_sec) {
-			strcpy(wbfs_fs_drive, "USB:");
-		} else if (wbfsDev == WBFS_DEVICE_SDHC && part_lba == fat_sd_sec) {
-			strcpy(wbfs_fs_drive, "SD:");
-		} else {
-			if (WBFSDevice_Init(part_lba)) return -1;
-			strcpy(wbfs_fs_drive, "WBFS:");
-		}
-	} else if (part_fs == PART_FS_NTFS) {
-		int ret = MountNTFS(part_lba);
-		if (ret) return ret;
-		strcpy(wbfs_fs_drive, "NTFS:");
-	} else {
-		if (WBFS_OpenLBA(part_lba, part_size)) return -3;
-	}
+    if (part_fs == PART_FS_FAT) {
+        if (wbfsDev == WBFS_DEVICE_USB && part_lba == fat_usb_sec) {
+            strcpy(wbfs_fs_drive, "USB:");
+        } else if (wbfsDev == WBFS_DEVICE_SDHC && part_lba == fat_sd_sec) {
+            strcpy(wbfs_fs_drive, "SD:");
+        } else {
+            if (WBFSDevice_Init(part_lba)) return -1;
+            strcpy(wbfs_fs_drive, "WBFS:");
+        }
+    } else if (part_fs == PART_FS_NTFS) {
+        int ret = MountNTFS(part_lba);
+        if (ret) return ret;
+        strcpy(wbfs_fs_drive, "NTFS:");
+    } else {
+        if (WBFS_OpenLBA(part_lba, part_size)) return -3;
+    }
 
-	// success
-	wbfs_part_fs = part_fs;
-	wbfs_part_idx = part_idx;
-	wbfs_part_lba = part_lba;
+    // success
+    wbfs_part_fs = part_fs;
+    wbfs_part_idx = part_idx;
+    wbfs_part_lba = part_lba;
 
-	char *fs = "WBFS";
-	if (wbfs_part_fs == PART_FS_FAT) fs = "FAT";
-	if (wbfs_part_fs == PART_FS_NTFS) fs = "NTFS";
-	sprintf(partition, "%s%d", fs, wbfs_part_idx);
-	return 0;
+    char *fs = "WBFS";
+    if (wbfs_part_fs == PART_FS_FAT) fs = "FAT";
+    if (wbfs_part_fs == PART_FS_NTFS) fs = "NTFS";
+    sprintf(partition, "%s%d", fs, wbfs_part_idx);
+    return 0;
 }
 
-s32 WBFS_OpenNamed(char *partition)
-{
-	int i;
-	u32 part_fs  = PART_FS_WBFS;
-	u32 part_idx = 0;
-	u32 part_lba = 0;
-	s32 ret = 0;
-	PartList plist;
+s32 WBFS_OpenNamed(char *partition) {
+    int i;
+    u32 part_fs  = PART_FS_WBFS;
+    u32 part_idx = 0;
+    u32 part_lba = 0;
+    s32 ret = 0;
+    PartList plist;
 
-	// close
-	WBFS_Close();
+    // close
+    WBFS_Close();
 
-	// parse partition option
-	if (strncasecmp(partition, "WBFS", 4) == 0) {
-		i = atoi(partition+4);
-		if (i < 1 || i > 4) goto err;
-		part_fs  = PART_FS_WBFS;
-		part_idx = i;
-	} else if (strncasecmp(partition, "FAT", 3) == 0) {
-		if (wbfsDev != WBFS_DEVICE_USB) goto err;
-		i = atoi(partition+3);
-		if (i < 1 || i > 9) goto err;
-		part_fs  = PART_FS_FAT;
-		part_idx = i;
-	} else if (strncasecmp(partition, "NTFS", 4) == 0) {
-		i = atoi(partition+4);
-		if (i < 1 || i > 9) goto err;
-		part_fs  = PART_FS_NTFS;
-		part_idx = i;
-	} else {
-		goto err;
-	}
+    // parse partition option
+    if (strncasecmp(partition, "WBFS", 4) == 0) {
+        i = atoi(partition+4);
+        if (i < 1 || i > 4) goto err;
+        part_fs  = PART_FS_WBFS;
+        part_idx = i;
+    } else if (strncasecmp(partition, "FAT", 3) == 0) {
+        if (wbfsDev != WBFS_DEVICE_USB) goto err;
+        i = atoi(partition+3);
+        if (i < 1 || i > 9) goto err;
+        part_fs  = PART_FS_FAT;
+        part_idx = i;
+    } else if (strncasecmp(partition, "NTFS", 4) == 0) {
+        i = atoi(partition+4);
+        if (i < 1 || i > 9) goto err;
+        part_fs  = PART_FS_NTFS;
+        part_idx = i;
+    } else {
+        goto err;
+    }
 
-	// Get partition entries
-	ret = Partition_GetList(wbfsDev, &plist);
-	if (ret || plist.num == 0) return -1;
+    // Get partition entries
+    ret = Partition_GetList(wbfsDev, &plist);
+    if (ret || plist.num == 0) return -1;
 
-	if (part_fs == PART_FS_WBFS) {
-		if (part_idx > plist.wbfs_n) goto err;
-		for (i=0; i<plist.num; i++) {
-			if (plist.pinfo[i].wbfs_i == part_idx) break;
-		}
-	} else if (part_fs == PART_FS_FAT) {
-		if (part_idx > plist.fat_n) goto err;
-		for (i=0; i<plist.num; i++) {
-			if (plist.pinfo[i].fat_i == part_idx) break;
-		}
-	} else if (part_fs == PART_FS_NTFS) {
-		if (part_idx > plist.ntfs_n) goto err;
-		for (i=0; i<plist.num; i++) {
-			if (plist.pinfo[i].ntfs_i == part_idx) break;
-		}
-	}
-	if (i >= plist.num) goto err;
-	// set partition lba sector
-	part_lba = plist.pentry[i].sector;
+    if (part_fs == PART_FS_WBFS) {
+        if (part_idx > plist.wbfs_n) goto err;
+        for (i=0; i<plist.num; i++) {
+            if (plist.pinfo[i].wbfs_i == part_idx) break;
+        }
+    } else if (part_fs == PART_FS_FAT) {
+        if (part_idx > plist.fat_n) goto err;
+        for (i=0; i<plist.num; i++) {
+            if (plist.pinfo[i].fat_i == part_idx) break;
+        }
+    } else if (part_fs == PART_FS_NTFS) {
+        if (part_idx > plist.ntfs_n) goto err;
+        for (i=0; i<plist.num; i++) {
+            if (plist.pinfo[i].ntfs_i == part_idx) break;
+        }
+    }
+    if (i >= plist.num) goto err;
+    // set partition lba sector
+    part_lba = plist.pentry[i].sector;
 
-	if (WBFS_OpenPart(part_fs, part_idx, part_lba, plist.pentry[i].size, partition)) {
-		goto err;
-	}
-	// success
-	return 0;
+    if (WBFS_OpenPart(part_fs, part_idx, part_lba, plist.pentry[i].size, partition)) {
+        goto err;
+    }
+    // success
+    return 0;
 err:
-	return -1;
+    return -1;
 }
 
-s32 WBFS_OpenLBA(u32 lba, u32 size)
-{
-	wbfs_t *part = NULL;
+s32 WBFS_OpenLBA(u32 lba, u32 size) {
+    wbfs_t *part = NULL;
 
-	/* Open partition */
-	part = wbfs_open_partition(readCallback, writeCallback, NULL, sector_size, size, lba, 0);
-	if (!part) return -1;
+    /* Open partition */
+    part = wbfs_open_partition(readCallback, writeCallback, NULL, sector_size, size, lba, 0);
+    if (!part) return -1;
 
-	/* Close current hard disk */
-	if (hdd) wbfs_close(hdd);
-	hdd = part;
+    /* Close current hard disk */
+    if (hdd) wbfs_close(hdd);
+    hdd = part;
 
-	return 0;
+    return 0;
 }
 
-bool WBFS_Close(void)
-{
+bool WBFS_Close(void) {
     /* Close hard disk */
     if (hdd) {
         wbfs_close(hdd);
-		hdd = NULL;
-	}
+        hdd = NULL;
+    }
 
-	WBFSDevice_deInit();
-	wbfs_part_fs = 0;
-	wbfs_part_idx = 0;
-	wbfs_part_lba = 0;
-	wbfs_fs_drive[0] = '\0';
+    WBFSDevice_deInit();
+    wbfs_part_fs = 0;
+    wbfs_part_idx = 0;
+    wbfs_part_lba = 0;
+    wbfs_fs_drive[0] = '\0';
 
     return 0;
 }
 
-bool WBFS_Mounted()
-{
-	return (hdd != NULL);
+bool WBFS_Mounted() {
+    return (hdd != NULL);
 }
 
-bool WBFS_Selected()
-{
-	if (wbfs_part_fs && wbfs_part_lba && *wbfs_fs_drive) return true;
-	return WBFS_Mounted();
+bool WBFS_Selected() {
+    if (wbfs_part_fs && wbfs_part_lba && *wbfs_fs_drive) return true;
+    return WBFS_Mounted();
 }
 
 s32 WBFS_Format(u32 lba, u32 size) {
@@ -443,7 +435,7 @@ s32 WBFS_Format(u32 lba, u32 size) {
 }
 
 s32 WBFS_GetCount(u32 *count) {
-	if (wbfs_part_fs) return WBFS_FAT_GetCount(count);
+    if (wbfs_part_fs) return WBFS_FAT_GetCount(count);
 
     /* No device open */
     if (!hdd)
@@ -456,7 +448,7 @@ s32 WBFS_GetCount(u32 *count) {
 }
 
 s32 WBFS_GetHeaders(void *outbuf, u32 cnt, u32 len) {
-	if (wbfs_part_fs) return WBFS_FAT_GetHeaders(outbuf, cnt, len);
+    if (wbfs_part_fs) return WBFS_FAT_GetHeaders(outbuf, cnt, len);
 
     u32 idx, size;
     s32 ret;
@@ -493,7 +485,7 @@ s32 WBFS_CheckGame(u8 *discid) {
 }
 
 s32 WBFS_AddGame(void) {
-	if (wbfs_part_fs) return WBFS_FAT_AddGame();
+    if (wbfs_part_fs) return WBFS_FAT_AddGame();
 
     s32 ret;
 
@@ -502,15 +494,15 @@ s32 WBFS_AddGame(void) {
         return -1;
 
     /* Add game to device */
-	partition_selector_t part_sel;
-	int copy_1_1 = 0;
-	
-	if (Settings.fullcopy) {
-		part_sel = ALL_PARTITIONS;
-		copy_1_1 = 1;
-	} else {
-		part_sel = Settings.partitions_to_install == install_game_only ? ONLY_GAME_PARTITION : ALL_PARTITIONS;
-	}
+    partition_selector_t part_sel;
+    int copy_1_1 = 0;
+
+    if (Settings.fullcopy) {
+        part_sel = ALL_PARTITIONS;
+        copy_1_1 = 1;
+    } else {
+        part_sel = Settings.partitions_to_install == install_game_only ? ONLY_GAME_PARTITION : ALL_PARTITIONS;
+    }
 
     ret = wbfs_add_disc(hdd, __WBFS_ReadDVD, NULL, WBFS_Spinner, part_sel, copy_1_1);
     if (ret < 0)
@@ -520,7 +512,7 @@ s32 WBFS_AddGame(void) {
 }
 
 s32 WBFS_RemoveGame(u8 *discid) {
-	if (wbfs_part_fs) return WBFS_FAT_RemoveGame(discid);
+    if (wbfs_part_fs) return WBFS_FAT_RemoveGame(discid);
 
     s32 ret;
 
@@ -542,24 +534,24 @@ s32 WBFS_GameSize(u8 *discid, f32 *size) {
     u32 sectors;
 
     /* Open disc */
-	disc = WBFS_OpenDisc(discid);
+    disc = WBFS_OpenDisc(discid);
     if (!disc)
         return -2;
 
     /* Get game size in sectors */
-	sectors = wbfs_sector_used(disc->p, disc->header);
+    sectors = wbfs_sector_used(disc->p, disc->header);
 
     /* Copy value */
-	*size = (disc->p->wbfs_sec_sz / GB_SIZE) * sectors;
+    *size = (disc->p->wbfs_sec_sz / GB_SIZE) * sectors;
 
     /* Close disc */
-	WBFS_CloseDisc(disc);
+    WBFS_CloseDisc(disc);
 
     return 0;
 }
 
 s32 WBFS_DiskSpace(f32 *used, f32 *free) {
-	if (wbfs_part_fs) return WBFS_FAT_DiskSpace(used, free);
+    if (wbfs_part_fs) return WBFS_FAT_DiskSpace(used, free);
 
     f32 ssize;
     u32 cnt;
@@ -581,10 +573,8 @@ s32 WBFS_DiskSpace(f32 *used, f32 *free) {
     return 0;
 }
 
-s32 WBFS_RenameGame(u8 *discid, const void *newname)
-{
-	if (wbfs_part_fs)
-    {
+s32 WBFS_RenameGame(u8 *discid, const void *newname) {
+    if (wbfs_part_fs) {
         return WBFS_FAT_RenameGame(discid, newname);
     }
 
@@ -600,12 +590,10 @@ s32 WBFS_RenameGame(u8 *discid, const void *newname)
     return 0;
 }
 
-s32 WBFS_ReIDGame(u8 *discid, const void *newID)
-{
-	if (wbfs_part_fs)
-	{
-	    return WBFS_FAT_ReIDGame(discid, newID);
-	}
+s32 WBFS_ReIDGame(u8 *discid, const void *newID) {
+    if (wbfs_part_fs) {
+        return WBFS_FAT_ReIDGame(discid, newID);
+    }
 
     s32 ret;
 
@@ -620,26 +608,25 @@ s32 WBFS_ReIDGame(u8 *discid, const void *newID)
 }
 
 f32 WBFS_EstimeGameSize(void) {
-	if (wbfs_part_fs) {
-		return WBFS_FAT_EstimateGameSize();
-	}
+    if (wbfs_part_fs) {
+        return WBFS_FAT_EstimateGameSize();
+    }
 
-	partition_selector_t part_sel = ONLY_GAME_PARTITION;
-	if (Settings.fullcopy) {
-		part_sel = ALL_PARTITIONS;
-	} else {
-		switch(Settings.partitions_to_install)
-		{
-			case install_game_only:
-				part_sel = ONLY_GAME_PARTITION;
-				break;
-			case install_all:
-				part_sel = ALL_PARTITIONS;
-				break;
-			case install_all_but_update:
-				part_sel = REMOVE_UPDATE_PARTITION;
-				break;
-		}
-	}
+    partition_selector_t part_sel = ONLY_GAME_PARTITION;
+    if (Settings.fullcopy) {
+        part_sel = ALL_PARTITIONS;
+    } else {
+        switch (Settings.partitions_to_install) {
+        case install_game_only:
+            part_sel = ONLY_GAME_PARTITION;
+            break;
+        case install_all:
+            part_sel = ALL_PARTITIONS;
+            break;
+        case install_all_but_update:
+            part_sel = REMOVE_UPDATE_PARTITION;
+            break;
+        }
+    }
     return wbfs_estimate_disc(hdd, __WBFS_ReadDVD, NULL, part_sel);
 }

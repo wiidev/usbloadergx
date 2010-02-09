@@ -32,7 +32,7 @@ typedef struct {
     char			dir[MAXPATHLEN];	// directory path of browserList
     char			rootdir[ROOTDIRLEN];// directory path of browserList
     int				pageIndex;			// starting index of browserList page display
-	std::vector<BROWSERENTRY> browserList;
+    std::vector<BROWSERENTRY> browserList;
 } BROWSERINFO;
 extern BROWSERINFO *browser;
 
@@ -48,10 +48,10 @@ int noDIRS(BROWSERENTRY *Entry, void* Args);
 int noFILES(BROWSERENTRY *Entry, void* Args);
 int noEXT(BROWSERENTRY *Entry, void* Args);
 
-typedef struct _FILTERCASCADE{
-	FILEFILTERCALLBACK 	filter;
-	void				*filter_args;
-	_FILTERCASCADE		*next;
+typedef struct _FILTERCASCADE {
+    FILEFILTERCALLBACK 	filter;
+    void				*filter_args;
+    _FILTERCASCADE		*next;
 } FILTERCASCADE;
 
 

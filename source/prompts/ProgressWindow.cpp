@@ -58,7 +58,7 @@ static void GameInstallProgress() {
 
     GetProgressValue(&gameinstalldone, &gameinstalltotal);
 
-    if((oldinstalldone == gameinstalldone) && (gameinstalldone > 0))
+    if ((oldinstalldone == gameinstalldone) && (gameinstalldone > 0))
         return;
 
     if (gameinstalldone > gameinstalltotal)
@@ -257,8 +257,7 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
 
         GameInstallProgress();
 
-        if(changed)
-        {
+        if (changed) {
             changed = false;
 
             tmp = static_cast<int>(progressbarImg.GetWidth()*progressDone);
@@ -325,8 +324,7 @@ void ProgressStop() {
  * Callbackfunction for updating the progress values
  * Use this function as standard callback
  ***************************************************************************/
-void ShowProgress(const char *title, const char *msg1, char *dynmsg2, f32 done, f32 total, bool swSize, bool swTime)
-{
+void ShowProgress(const char *title, const char *msg1, char *dynmsg2, f32 done, f32 total, bool swSize, bool swTime) {
     if (total <= 0)
         return;
 

@@ -5,14 +5,13 @@
 #define __MEM2_HPP
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
-void *MEM2_alloc(unsigned int s);
-void *MEM2_realloc(void *p, unsigned int s);
-void MEM2_free(void *p);
-unsigned int MEM2_usableSize(void *p);
+    void *MEM2_alloc(unsigned int s);
+    void *MEM2_realloc(void *p, unsigned int s);
+    void MEM2_free(void *p);
+    unsigned int MEM2_usableSize(void *p);
 
 #ifdef __cplusplus
 }

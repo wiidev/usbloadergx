@@ -49,7 +49,7 @@ int updateLanguageFiles() {
             if (file.data != NULL) {
                 FILE * pfile;
                 pfile = fopen(savepath, "wb");
-                if(pfile != NULL) {
+                if (pfile != NULL) {
                     fwrite(file.data,1,file.size,pfile);
                     fclose(pfile);
                     free(file.data);

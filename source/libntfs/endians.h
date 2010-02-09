@@ -1,5 +1,5 @@
 /*
- * endians.h - Definitions related to handling of byte ordering. 
+ * endians.h - Definitions related to handling of byte ordering.
  *             Originated from the Linux-NTFS project.
  *
  * Copyright (c) 2000-2005 Anton Altaparmakov

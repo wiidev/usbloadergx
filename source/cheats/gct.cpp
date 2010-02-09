@@ -63,8 +63,8 @@ string GCTCheats::getCheatComment(int nr) {
 
 int GCTCheats::createGCT(int nr,const char * filename) {
 
-	if (nr == 0)
-		return 0;
+    if (nr == 0)
+        return 0;
 
     ofstream filestr;
     filestr.open(filename);
@@ -132,8 +132,8 @@ int GCTCheats::createGCT(const char * chtbuffer,const char * filename) {
 
 int GCTCheats::createGCT(int nr[],int cnt,const char * filename) {
 
-	if (cnt == 0)
-		return 0;
+    if (cnt == 0)
+        return 0;
 
     ofstream filestr;
     filestr.open(filename);
@@ -185,54 +185,54 @@ int GCTCheats::openTxtfile(const char * filename) {
     filestr.seekg(0,ios_base::beg);
 
     getline(filestr,sGameID);
-	if (sGameID[sGameID.length() - 1] == '\r')
-		sGameID.erase(sGameID.length() - 1);
-	
+    if (sGameID[sGameID.length() - 1] == '\r')
+        sGameID.erase(sGameID.length() - 1);
+
     getline(filestr,sGameTitle);
-	if (sGameTitle[sGameTitle.length() - 1] == '\r')
-		sGameTitle.erase(sGameTitle.length() - 1);
-				
+    if (sGameTitle[sGameTitle.length() - 1] == '\r')
+        sGameTitle.erase(sGameTitle.length() - 1);
+
     getline(filestr,sCheatName[i]);  // skip first line if file uses CRLF
-	if (!sGameTitle[sGameTitle.length() - 1] == '\r')
-	   filestr.seekg(0,ios_base::beg);
+    if (!sGameTitle[sGameTitle.length() - 1] == '\r')
+        filestr.seekg(0,ios_base::beg);
 
     while (!filestr.eof()) {
         getline(filestr,sCheatName[i]); // '\n' delimiter by default
-		if (sCheatName[i][sCheatName[i].length() - 1] == '\r')
-			sCheatName[i].erase(sCheatName[i].length() - 1);
+        if (sCheatName[i][sCheatName[i].length() - 1] == '\r')
+            sCheatName[i].erase(sCheatName[i].length() - 1);
 
         string cheatdata;
         bool emptyline = false;
 
         do {
-			getline(filestr,str);
-			if (str[str.length() - 1] == '\r')
-				str.erase(str.length() - 1);
-				 
+            getline(filestr,str);
+            if (str[str.length() - 1] == '\r')
+                str.erase(str.length() - 1);
+
             if (str == "" || str[0] == '\r' || str[0] == '\n') {
                 emptyline = true;
                 break;
             }
 
             if (IsCode(str)) {
-				// remove any garbage (comment) after code
-				while (str.size() > 17) {
-					str.erase(str.length() - 1);
-				}
-			    cheatdata.append(str);
+                // remove any garbage (comment) after code
+                while (str.size() > 17) {
+                    str.erase(str.length() - 1);
+                }
+                cheatdata.append(str);
                 size_t found=cheatdata.find(' ');
                 cheatdata.replace(found,1,"");
-			} else {
+            } else {
                 //printf("%i",str.size());
                 sCheatComment[i] = str;
             }
-			if (filestr.eof()) break;
-		   
+            if (filestr.eof()) break;
+
         } while (!emptyline);
 
         sCheats[i] = cheatdata;
-		i++;
-		if (i == MAXCHEATS) break;
+        i++;
+        if (i == MAXCHEATS) break;
     }
     iCntCheats = i;
     filestr.close();
@@ -240,15 +240,15 @@ int GCTCheats::openTxtfile(const char * filename) {
 }
 
 bool GCTCheats::IsCode(const std::string& str) {
-	if (str[8] == ' ' && str.size() >= 17) {
-	// accept strings longer than 17 in case there is a comment on the same line as the code
-		char part1[9];
-		char part2[9];
-		snprintf(part1,sizeof(part1),"%c%c%c%c%c%c%c%c",str[0],str[1],str[2],str[3],str[4],str[5],str[6],str[7]);
-		snprintf(part1,sizeof(part2),"%c%c%c%c%c%c%c%c",str[9],str[10],str[11],str[12],str[13],str[14],str[15],str[16]);
-		if ((strtok(part1,"0123456789ABCDEFabcdef") == NULL) && (strtok(part2,"0123456789ABCDEFabcdef") == NULL)) {
-			return true;
-		}
-	}
-	return false;
+    if (str[8] == ' ' && str.size() >= 17) {
+        // accept strings longer than 17 in case there is a comment on the same line as the code
+        char part1[9];
+        char part2[9];
+        snprintf(part1,sizeof(part1),"%c%c%c%c%c%c%c%c",str[0],str[1],str[2],str[3],str[4],str[5],str[6],str[7]);
+        snprintf(part1,sizeof(part2),"%c%c%c%c%c%c%c%c",str[9],str[10],str[11],str[12],str[13],str[14],str[15],str[16]);
+        if ((strtok(part1,"0123456789ABCDEFabcdef") == NULL) && (strtok(part2,"0123456789ABCDEFabcdef") == NULL)) {
+            return true;
+        }
+    }
+    return false;
 }

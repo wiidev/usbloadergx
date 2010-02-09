@@ -67,46 +67,46 @@ void Sys_Reboot(void) {
 }
 
 int Sys_ChangeIos(int ios) {
-	s32 prevIos = IOS_GetVersion();
-	
-	SDCard_deInit();
-	USBDevice_deInit();
-	
-	WPAD_Flush(0);
-	WPAD_Disconnect(0);
-	WPAD_Shutdown();
-	
-	WDVD_Close();
-	
-	USBStorage_Deinit();
-	
-	s32 ret = IOS_ReloadIOSsafe(ios);
-	if (ret < 0) {
-		ios = prevIos;
-	}
-	
-	SDCard_Init();
+    s32 prevIos = IOS_GetVersion();
 
-	if (ios == 222 || ios == 223) {
-		load_ehc_module();
-	}
-	USBDevice_Init();
+    SDCard_deInit();
+    USBDevice_deInit();
+
+    WPAD_Flush(0);
+    WPAD_Disconnect(0);
+    WPAD_Shutdown();
+
+    WDVD_Close();
+
+    USBStorage_Deinit();
+
+    s32 ret = IOS_ReloadIOSsafe(ios);
+    if (ret < 0) {
+        ios = prevIos;
+    }
+
+    SDCard_Init();
+
+    if (ios == 222 || ios == 223) {
+        load_ehc_module();
+    }
+    USBDevice_Init();
 
     PAD_Init();
     Wpad_Init();
     WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
     WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
 
-	WBFS_Init(WBFS_DEVICE_USB);
-	Disc_Init();
-	
-	if (Sys_IsHermes()) {
-		WBFS_OpenNamed((char *) &game_partition);
-	} else { 
-		WBFS_Open();
-	}
-	
-	return ret;
+    WBFS_Init(WBFS_DEVICE_USB);
+    Disc_Init();
+
+    if (Sys_IsHermes()) {
+        WBFS_OpenNamed((char *) &game_partition);
+    } else {
+        WBFS_Open();
+    }
+
+    return ret;
 }
 
 int Sys_IosReload(int IOS) {
@@ -205,16 +205,16 @@ void Sys_BackToLoader(void) {
 }
 
 bool Sys_IsHermes() {
-	return IOS_GetVersion() == 222 || IOS_GetVersion() == 223;
+    return IOS_GetVersion() == 222 || IOS_GetVersion() == 223;
 }
 
 #include "prompts/PromptWindows.h"
 
 void ShowMemInfo() {
-	char buf[255];
+    char buf[255];
     struct mallinfo mymallinfo = mallinfo();
     sprintf((char *) &buf,"Total: %d, Used: %d, Can be freed: %d", mymallinfo.arena/1024, mymallinfo.uordblks/1024, mymallinfo.keepcost/1024);
-	WindowPrompt("Mem info", (char *) &buf, "OK");
+    WindowPrompt("Mem info", (char *) &buf, "OK");
 }
 
 
@@ -225,58 +225,49 @@ s32 ios223rev = -69;
 s32 ios249rev = -69;
 s32 ios250rev = -69;
 
-s32 IOS_ReloadIOSsafe(int ios)
-{
-	if (ios==222)
-	{	
-		if (ios222rev == -69)
-			ios222rev = getIOSrev(0x00000001000000dell);
-		
-		if (ios222rev >= 0 && (ios222rev != 4 && ios222rev != 5))return -2;
-	}
-	else if (ios==223)
-	{	
-		if (ios223rev == -69)
-			ios223rev = getIOSrev(0x00000001000000dfll);
-		
-		if (ios223rev >= 0 && (ios223rev != 4 && ios223rev != 5))return -2;
-	}
-	else if (ios==249)
-	{	
-		if (ios249rev == -69)
-			ios249rev = getIOSrev(0x00000001000000f9ll);	
-		
-		if (ios249rev >= 0 && !(ios249rev>=9 && ios249rev<65280))return -2;
-	}
-	else if (ios==250)
-	{	
-		if (ios250rev == -69)
-			ios250rev = getIOSrev(0x00000001000000fall);
-			
-		if (ios250rev >= 0 && !(ios250rev>=9 && ios250rev<65280))return -2;
-	}
-		
-	s32 r = IOS_ReloadIOS(ios);
-	if (r >= 0) {
-		WII_Initialize();
-	}
-	return r;
+s32 IOS_ReloadIOSsafe(int ios) {
+    if (ios==222) {
+        if (ios222rev == -69)
+            ios222rev = getIOSrev(0x00000001000000dell);
+
+        if (ios222rev >= 0 && (ios222rev != 4 && ios222rev != 5))return -2;
+    } else if (ios==223) {
+        if (ios223rev == -69)
+            ios223rev = getIOSrev(0x00000001000000dfll);
+
+        if (ios223rev >= 0 && (ios223rev != 4 && ios223rev != 5))return -2;
+    } else if (ios==249) {
+        if (ios249rev == -69)
+            ios249rev = getIOSrev(0x00000001000000f9ll);
+
+        if (ios249rev >= 0 && !(ios249rev>=9 && ios249rev<65280))return -2;
+    } else if (ios==250) {
+        if (ios250rev == -69)
+            ios250rev = getIOSrev(0x00000001000000fall);
+
+        if (ios250rev >= 0 && !(ios250rev>=9 && ios250rev<65280))return -2;
+    }
+
+    s32 r = IOS_ReloadIOS(ios);
+    if (r >= 0) {
+        WII_Initialize();
+    }
+    return r;
 }
 
 #include <time.h>
 
-void ScreenShot()
-{
-  time_t rawtime;
-  struct tm * timeinfo;
-  char buffer [80];
-   char buffer2 [80];
+void ScreenShot() {
+    time_t rawtime;
+    struct tm * timeinfo;
+    char buffer [80];
+    char buffer2 [80];
 
-  time ( &rawtime );
-  timeinfo = localtime ( &rawtime );
-  //USBLoader_GX_ScreenShot-Month_Day_Hour_Minute_Second_Year.png
-  strftime (buffer,80,"USBLoader_GX_ScreenShot-%b%d%H%M%S%y.png",timeinfo);
-   sprintf(buffer2, "%s/config/%s", bootDevice, buffer);
+    time ( &rawtime );
+    timeinfo = localtime ( &rawtime );
+    //USBLoader_GX_ScreenShot-Month_Day_Hour_Minute_Second_Year.png
+    strftime (buffer,80,"USBLoader_GX_ScreenShot-%b%d%H%M%S%y.png",timeinfo);
+    sprintf(buffer2, "%s/config/%s", bootDevice, buffer);
 
-  TakeScreenshot(buffer2);
+    TakeScreenshot(buffer2);
 }

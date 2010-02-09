@@ -1,7 +1,7 @@
 /*
  * gct.h
  * Class to handle Ocarina TXT Cheatfiles
- * 
+ *
  */
 
 #ifndef _GCT_H
@@ -66,9 +66,9 @@ public:
     //!Gets Cheat Comment
     //!\return Cheat Comment
     string getCheatComment(int nr);
-	//!Check if string is a code
+    //!Check if string is a code
     //!\return true/false
-	bool IsCode(const std::string& s);
+    bool IsCode(const std::string& s);
 };
 
 #endif  /* _GCT_H */

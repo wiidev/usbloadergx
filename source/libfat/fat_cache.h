@@ -43,19 +43,19 @@
 #define CACHE_PAGE_SIZE (BYTES_PER_READ * PAGE_SECTORS)
 
 typedef struct {
-	sec_t        sector;
-	unsigned int count;
-	unsigned int last_access;
-	bool         dirty;
-	uint8_t*     cache;
+    sec_t        sector;
+    unsigned int count;
+    unsigned int last_access;
+    bool         dirty;
+    uint8_t*     cache;
 } CACHE_ENTRY;
 
 typedef struct {
-	const DISC_INTERFACE* disc;
-	sec_t		          endOfPartition;
-	unsigned int          numberOfPages;
-	unsigned int          sectorsPerPage;
-	CACHE_ENTRY*          cacheEntries;
+    const DISC_INTERFACE* disc;
+    sec_t		          endOfPartition;
+    unsigned int          numberOfPages;
+    unsigned int          sectorsPerPage;
+    CACHE_ENTRY*          cacheEntries;
 } CACHE;
 
 /*
@@ -100,14 +100,14 @@ bool _FAT_cache_readSectors (CACHE* cache, sec_t sector, sec_t numSectors, void*
 Read a full sector from the cache
 */
 static inline bool _FAT_cache_readSector (CACHE* cache, void* buffer, sec_t sector) {
-	return _FAT_cache_readPartialSector (cache, buffer, sector, 0, BYTES_PER_READ);
+    return _FAT_cache_readPartialSector (cache, buffer, sector, 0, BYTES_PER_READ);
 }
 
 /*
 Write a full sector to the cache
 */
 static inline bool _FAT_cache_writeSector (CACHE* cache, const void* buffer, sec_t sector) {
-	return _FAT_cache_writePartialSector (cache, buffer, sector, 0, BYTES_PER_READ);
+    return _FAT_cache_writePartialSector (cache, buffer, sector, 0, BYTES_PER_READ);
 }
 
 bool _FAT_cache_writeSectors (CACHE* cache, sec_t sector, sec_t numSectors, const void* buffer);

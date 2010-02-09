@@ -62,8 +62,7 @@ const INTERFACE_ID ntfs_disc_interfaces[] = {
 
 #endif
 
-int ntfsAddDevice (const char *name, void *deviceData)
-{
+int ntfsAddDevice (const char *name, void *deviceData) {
     const devoptab_t *devoptab_ntfs = ntfsGetDevOpTab();
     devoptab_t *dev = NULL;
     char *devname = NULL;
@@ -104,8 +103,7 @@ int ntfsAddDevice (const char *name, void *deviceData)
     return -1;
 }
 
-void ntfsRemoveDevice (const char *path)
-{
+void ntfsRemoveDevice (const char *path) {
     const devoptab_t *devoptab = NULL;
     char name[128] = {0};
     int i;
@@ -132,8 +130,7 @@ void ntfsRemoveDevice (const char *path)
     return;
 }
 
-const devoptab_t *ntfsGetDevice (const char *path, bool useDefaultDevice)
-{
+const devoptab_t *ntfsGetDevice (const char *path, bool useDefaultDevice) {
     const devoptab_t *devoptab = NULL;
     char name[128] = {0};
     int i;
@@ -164,14 +161,12 @@ const devoptab_t *ntfsGetDevice (const char *path, bool useDefaultDevice)
     return NULL;
 }
 
-const INTERFACE_ID *ntfsGetDiscInterfaces (void)
-{
+const INTERFACE_ID *ntfsGetDiscInterfaces (void) {
     // Get all know disc interfaces on the host system
     return ntfs_disc_interfaces;
 }
 
-ntfs_vd *ntfsGetVolume (const char *path)
-{
+ntfs_vd *ntfsGetVolume (const char *path) {
     // Get the volume descriptor from the paths associated devoptab (if found)
     const devoptab_t *devoptab_ntfs = ntfsGetDevOpTab();
     const devoptab_t *devoptab = ntfsGetDevice(path, true);
@@ -181,8 +176,7 @@ ntfs_vd *ntfsGetVolume (const char *path)
     return NULL;
 }
 
-int ntfsInitVolume (ntfs_vd *vd)
-{
+int ntfsInitVolume (ntfs_vd *vd) {
     // Sanity check
     if (!vd) {
         errno = ENODEV;
@@ -207,8 +201,7 @@ int ntfsInitVolume (ntfs_vd *vd)
     return 0;
 }
 
-void ntfsDeinitVolume (ntfs_vd *vd)
-{
+void ntfsDeinitVolume (ntfs_vd *vd) {
     // Sanity check
     if (!vd) {
         errno = ENODEV;
@@ -242,8 +235,8 @@ void ntfsDeinitVolume (ntfs_vd *vd)
 
     // Close the volumes current directory (if any)
     //if (vd->cwd_ni) {
-        //ntfsCloseEntry(vd, vd->cwd_ni);
-        //vd->cwd_ni = NULL;
+    //ntfsCloseEntry(vd, vd->cwd_ni);
+    //vd->cwd_ni = NULL;
     //}
 
     // Force the underlying device to sync
@@ -258,13 +251,11 @@ void ntfsDeinitVolume (ntfs_vd *vd)
     return;
 }
 
-ntfs_inode *ntfsOpenEntry (ntfs_vd *vd, const char *path)
-{
+ntfs_inode *ntfsOpenEntry (ntfs_vd *vd, const char *path) {
     return ntfsParseEntry(vd, path, 1);
 }
 
-ntfs_inode *ntfsParseEntry (ntfs_vd *vd, const char *path, int reparseLevel)
-{
+ntfs_inode *ntfsParseEntry (ntfs_vd *vd, const char *path, int reparseLevel) {
     ntfs_inode *ni = NULL;
     char *target = NULL;
     int attr_size;
@@ -324,8 +315,7 @@ ntfs_inode *ntfsParseEntry (ntfs_vd *vd, const char *path, int reparseLevel)
     return ni;
 }
 
-void ntfsCloseEntry (ntfs_vd *vd, ntfs_inode *ni)
-{
+void ntfsCloseEntry (ntfs_vd *vd, ntfs_inode *ni) {
     // Sanity check
     if (!vd) {
         errno = ENODEV;
@@ -349,8 +339,7 @@ void ntfsCloseEntry (ntfs_vd *vd, ntfs_inode *ni)
 }
 
 
-ntfs_inode *ntfsCreate (ntfs_vd *vd, const char *path, mode_t type, const char *target)
-{
+ntfs_inode *ntfsCreate (ntfs_vd *vd, const char *path, mode_t type, const char *target) {
     ntfs_inode *dir_ni = NULL, *ni = NULL;
     char *dir = NULL;
     char *name = NULL;
@@ -364,8 +353,8 @@ ntfs_inode *ntfsCreate (ntfs_vd *vd, const char *path, mode_t type, const char *
     }
 
     // You cannot link between devices
-    if(target) {
-        if(vd != ntfsGetVolume(target)) {
+    if (target) {
+        if (vd != ntfsGetVolume(target)) {
             errno = EXDEV;
             return NULL;
         }
@@ -400,8 +389,7 @@ ntfs_inode *ntfsCreate (ntfs_vd *vd, const char *path, mode_t type, const char *
         goto cleanup;
     }
     name = strrchr(dir, '/');
-    if(name)
-    {
+    if (name) {
         name++;
         name[0] = 0;
     }
@@ -416,24 +404,24 @@ ntfs_inode *ntfsCreate (ntfs_vd *vd, const char *path, mode_t type, const char *
     switch (type) {
 
         // Symbolic link
-        case S_IFLNK:
-            if (!target) {
-                errno = EINVAL;
-                goto cleanup;
-            }
-            utarget_len = ntfsLocalToUnicode(target, &utarget);
-            if (utarget_len < 0) {
-                errno = EINVAL;
-                goto cleanup;
-            }
-            ni = ntfs_create_symlink(dir_ni, 0, uname, uname_len,  utarget, utarget_len);
-            break;
+    case S_IFLNK:
+        if (!target) {
+            errno = EINVAL;
+            goto cleanup;
+        }
+        utarget_len = ntfsLocalToUnicode(target, &utarget);
+        if (utarget_len < 0) {
+            errno = EINVAL;
+            goto cleanup;
+        }
+        ni = ntfs_create_symlink(dir_ni, 0, uname, uname_len,  utarget, utarget_len);
+        break;
 
         // Directory or file
-        case S_IFDIR:
-        case S_IFREG:
-            ni = ntfs_create(dir_ni, 0, uname, uname_len, type);
-            break;
+    case S_IFDIR:
+    case S_IFREG:
+        ni = ntfs_create(dir_ni, 0, uname, uname_len, type);
+        break;
 
     }
 
@@ -456,16 +444,16 @@ ntfs_inode *ntfsCreate (ntfs_vd *vd, const char *path, mode_t type, const char *
 
 cleanup:
 
-    if(dir_ni)
+    if (dir_ni)
         ntfsCloseEntry(vd, dir_ni);
 
-    if(utarget)
+    if (utarget)
         ntfs_free(utarget);
 
-    if(uname)
+    if (uname)
         ntfs_free(uname);
 
-    if(dir)
+    if (dir)
         ntfs_free(dir);
 
     // Unlock
@@ -474,8 +462,7 @@ cleanup:
     return ni;
 }
 
-int ntfsLink (ntfs_vd *vd, const char *old_path, const char *new_path)
-{
+int ntfsLink (ntfs_vd *vd, const char *old_path, const char *new_path) {
     ntfs_inode *dir_ni = NULL, *ni = NULL;
     char *dir = NULL;
     char *name = NULL;
@@ -490,7 +477,7 @@ int ntfsLink (ntfs_vd *vd, const char *old_path, const char *new_path)
     }
 
     // You cannot link between devices
-    if(vd != ntfsGetVolume(new_path)) {
+    if (vd != ntfsGetVolume(new_path)) {
         errno = EXDEV;
         return -1;
     }
@@ -556,16 +543,16 @@ int ntfsLink (ntfs_vd *vd, const char *old_path, const char *new_path)
 
 cleanup:
 
-    if(dir_ni)
+    if (dir_ni)
         ntfsCloseEntry(vd, dir_ni);
 
-    if(ni)
+    if (ni)
         ntfsCloseEntry(vd, ni);
 
-    if(uname)
+    if (uname)
         ntfs_free(uname);
 
-    if(dir)
+    if (dir)
         ntfs_free(dir);
 
     // Unlock
@@ -574,8 +561,7 @@ cleanup:
     return res;
 }
 
-int ntfsUnlink (ntfs_vd *vd, const char *path)
-{
+int ntfsUnlink (ntfs_vd *vd, const char *path) {
     ntfs_inode *dir_ni = NULL, *ni = NULL;
     char *dir = NULL;
     char *name = NULL;
@@ -617,8 +603,7 @@ int ntfsUnlink (ntfs_vd *vd, const char *path)
         goto cleanup;
     }
     name = strrchr(dir, '/');
-    if(name)
-    {
+    if (name) {
         name++;
         name[0] = 0;
     }
@@ -652,16 +637,16 @@ int ntfsUnlink (ntfs_vd *vd, const char *path)
 
 cleanup:
 
-    if(dir_ni)
+    if (dir_ni)
         ntfsCloseEntry(vd, dir_ni);
 
-    if(ni)
+    if (ni)
         ntfsCloseEntry(vd, ni);
 
-    if(uname)
+    if (uname)
         ntfs_free(uname);
 
-    if(dir)
+    if (dir)
         ntfs_free(dir);
 
     // Unlock
@@ -670,8 +655,7 @@ cleanup:
     return 0;
 }
 
-int ntfsSync (ntfs_vd *vd, ntfs_inode *ni)
-{
+int ntfsSync (ntfs_vd *vd, ntfs_inode *ni) {
     int res = 0;
 
     // Sanity check
@@ -702,8 +686,7 @@ int ntfsSync (ntfs_vd *vd, ntfs_inode *ni)
 
 }
 
-int ntfsStat (ntfs_vd *vd, ntfs_inode *ni, struct stat *st)
-{
+int ntfsStat (ntfs_vd *vd, ntfs_inode *ni, struct stat *st) {
     ntfs_attr *na = NULL;
     int res = 0;
 
@@ -742,7 +725,7 @@ int ntfsStat (ntfs_vd *vd, ntfs_inode *ni, struct stat *st)
             ntfs_attr_close(na);
         }
 
-    // Else it must be a file
+        // Else it must be a file
     } else {
         st->st_mode = S_IFREG | (0777 & ~vd->fmask);
         st->st_size = ni->data_size;
@@ -768,8 +751,7 @@ int ntfsStat (ntfs_vd *vd, ntfs_inode *ni, struct stat *st)
     return res;
 }
 
-void ntfsUpdateTimes (ntfs_vd *vd, ntfs_inode *ni, ntfs_time_update_flags mask)
-{
+void ntfsUpdateTimes (ntfs_vd *vd, ntfs_inode *ni, ntfs_time_update_flags mask) {
     // Run the access time update strategy against the device driver settings first
     if (vd && vd->atime == ATIME_DISABLED)
         mask &= ~NTFS_UPDATE_ATIME;
@@ -781,8 +763,7 @@ void ntfsUpdateTimes (ntfs_vd *vd, ntfs_inode *ni, ntfs_time_update_flags mask)
     return;
 }
 
-const char *ntfsRealPath (const char *path)
-{
+const char *ntfsRealPath (const char *path) {
     // Sanity check
     if (!path)
         return NULL;
@@ -798,8 +779,7 @@ const char *ntfsRealPath (const char *path)
     return path;
 }
 
-int ntfsUnicodeToLocal (const ntfschar *ins, const int ins_len, char **outs, int outs_len)
-{
+int ntfsUnicodeToLocal (const ntfschar *ins, const int ins_len, char **outs, int outs_len) {
     int len = 0;
     int i;
 
@@ -836,8 +816,7 @@ int ntfsUnicodeToLocal (const ntfschar *ins, const int ins_len, char **outs, int
     return len;
 }
 
-int ntfsLocalToUnicode (const char *ins, ntfschar **outs)
-{
+int ntfsLocalToUnicode (const char *ins, ntfschar **outs) {
     // Sanity check
     if (!ins || !outs)
         return 0;

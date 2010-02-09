@@ -37,10 +37,10 @@
  * Defined bits for the state field in the ntfs_device structure.
  */
 typedef enum {
-	ND_Open,	/* 1: Device is open. */
-	ND_ReadOnly,	/* 1: Device is read-only. */
-	ND_Dirty,	/* 1: Device is dirty, needs sync. */
-	ND_Block,	/* 1: Device is a block device. */
+    ND_Open,	/* 1: Device is open. */
+    ND_ReadOnly,	/* 1: Device is read-only. */
+    ND_Dirty,	/* 1: Device is dirty, needs sync. */
+    ND_Block,	/* 1: Device is a block device. */
 } ntfs_device_state_bits;
 
 #define  test_ndev_flag(nd, flag)	   test_bit(ND_##flag, (nd)->d_state)
@@ -70,10 +70,10 @@ typedef enum {
  * level device underlying the ntfs volume.
  */
 struct ntfs_device {
-	struct ntfs_device_operations *d_ops;	/* Device operations. */
-	unsigned long d_state;			/* State of the device. */
-	char *d_name;				/* Name of device. */
-	void *d_private;			/* Private data used by the
+    struct ntfs_device_operations *d_ops;	/* Device operations. */
+    unsigned long d_state;			/* State of the device. */
+    char *d_name;				/* Name of device. */
+    void *d_private;			/* Private data used by the
 						   device operations. */
 };
 
@@ -86,37 +86,37 @@ struct stat;
  * the low level device described by an ntfs device structure.
  */
 struct ntfs_device_operations {
-	int (*open)(struct ntfs_device *dev, int flags);
-	int (*close)(struct ntfs_device *dev);
-	s64 (*seek)(struct ntfs_device *dev, s64 offset, int whence);
-	s64 (*read)(struct ntfs_device *dev, void *buf, s64 count);
-	s64 (*write)(struct ntfs_device *dev, const void *buf, s64 count);
-	s64 (*pread)(struct ntfs_device *dev, void *buf, s64 count, s64 offset);
-	s64 (*pwrite)(struct ntfs_device *dev, const void *buf, s64 count,
-			s64 offset);
-	int (*sync)(struct ntfs_device *dev);
-	int (*stat)(struct ntfs_device *dev, struct stat *buf);
-	int (*ioctl)(struct ntfs_device *dev, int request, void *argp);
+    int (*open)(struct ntfs_device *dev, int flags);
+    int (*close)(struct ntfs_device *dev);
+    s64 (*seek)(struct ntfs_device *dev, s64 offset, int whence);
+    s64 (*read)(struct ntfs_device *dev, void *buf, s64 count);
+    s64 (*write)(struct ntfs_device *dev, const void *buf, s64 count);
+    s64 (*pread)(struct ntfs_device *dev, void *buf, s64 count, s64 offset);
+    s64 (*pwrite)(struct ntfs_device *dev, const void *buf, s64 count,
+                  s64 offset);
+    int (*sync)(struct ntfs_device *dev);
+    int (*stat)(struct ntfs_device *dev, struct stat *buf);
+    int (*ioctl)(struct ntfs_device *dev, int request, void *argp);
 };
 
 extern struct ntfs_device *ntfs_device_alloc(const char *name, const long state,
-		struct ntfs_device_operations *dops, void *priv_data);
+                        struct ntfs_device_operations *dops, void *priv_data);
 extern int ntfs_device_free(struct ntfs_device *dev);
 
 extern s64 ntfs_pread(struct ntfs_device *dev, const s64 pos, s64 count,
-		void *b);
+                          void *b);
 extern s64 ntfs_pwrite(struct ntfs_device *dev, const s64 pos, s64 count,
-		const void *b);
+                           const void *b);
 
 extern s64 ntfs_mst_pread(struct ntfs_device *dev, const s64 pos, s64 count,
-		const u32 bksize, void *b);
+                              const u32 bksize, void *b);
 extern s64 ntfs_mst_pwrite(struct ntfs_device *dev, const s64 pos, s64 count,
-		const u32 bksize, void *b);
+                               const u32 bksize, void *b);
 
 extern s64 ntfs_cluster_read(const ntfs_volume *vol, const s64 lcn,
-		const s64 count, void *b);
+                                 const s64 count, void *b);
 extern s64 ntfs_cluster_write(const ntfs_volume *vol, const s64 lcn,
-		const s64 count, const void *b);
+                                  const s64 count, const void *b);
 
 extern s64 ntfs_device_size_get(struct ntfs_device *dev, int block_size);
 extern s64 ntfs_device_partition_start_sector_get(struct ntfs_device *dev);

@@ -68,23 +68,23 @@ int makedir (char *newdir) {
 }
 
 static char *fullfilename(const char *basedir, char *filename) {
-	char *file = (char *) malloc(strlen(basedir) + strlen(filename) + 1);
-	if (basedir == NULL) {
-		strcpy(file, filename);
-	} else {
-		if (basedir[strlen(basedir) - 1] == '/') {
-			sprintf(file, "%s%s", basedir, filename);
-		} else {
-			sprintf(file, "%s/%s", basedir, filename);
-		}
-	}
-	return file;
+    char *file = (char *) malloc(strlen(basedir) + strlen(filename) + 1);
+    if (basedir == NULL) {
+        strcpy(file, filename);
+    } else {
+        if (basedir[strlen(basedir) - 1] == '/') {
+            sprintf(file, "%s%s", basedir, filename);
+        } else {
+            sprintf(file, "%s/%s", basedir, filename);
+        }
+    }
+    return file;
 }
 
 static int do_extract_currentfile(unzFile uf,const int* popt_extract_without_path,int* popt_overwrite,const char* password, const char *basedir) {
     char filename_inzip[256];
     char* filename_withoutpath;
-	char* filename_withpath;
+    char* filename_withpath;
     char* p;
     int err=UNZ_OK;
     FILE *fout=NULL;
@@ -107,7 +107,7 @@ static int do_extract_currentfile(unzFile uf,const int* popt_extract_without_pat
     }
 
     p = filename_withoutpath = filename_inzip;
-	filename_withpath = fullfilename(basedir, filename_inzip);
+    filename_withpath = fullfilename(basedir, filename_inzip);
     while ((*p) != '\0') {
         if (((*p)=='/') || ((*p)=='\\'))
             filename_withoutpath = p+1;
@@ -117,16 +117,16 @@ static int do_extract_currentfile(unzFile uf,const int* popt_extract_without_pat
     if ((*filename_withoutpath)=='\0') {
         if ((*popt_extract_without_path)==0) {
 
-			// Fix the path, this will fail if the directoryname is the same as the first filename in the zip
-			char *path = (char *) malloc(strlen(filename_withpath));
-			strcpy(path, filename_withpath);
-			char *ptr = strstr(path, filename_withoutpath);
-			*ptr = '\0';
+            // Fix the path, this will fail if the directoryname is the same as the first filename in the zip
+            char *path = (char *) malloc(strlen(filename_withpath));
+            strcpy(path, filename_withpath);
+            char *ptr = strstr(path, filename_withoutpath);
+            *ptr = '\0';
 
 //            printf("creating directory: %s\n",path);
             mymkdir(path);
 
-			free(path);
+            free(path);
         }
     } else {
         char* write_filename;
@@ -179,14 +179,14 @@ static int do_extract_currentfile(unzFile uf,const int* popt_extract_without_pat
                 char c=*(filename_withoutpath-1);
                 *(filename_withoutpath-1)='\0';
 
-				// Fix the path, this will fail if the directoryname is the same as the first filename in the zip
-				char *path = (char *) malloc(strlen(write_filename));
-				strcpy(path, write_filename);
-				char *ptr = strstr(path, filename_withoutpath);
-				*ptr = '\0';
+                // Fix the path, this will fail if the directoryname is the same as the first filename in the zip
+                char *path = (char *) malloc(strlen(write_filename));
+                strcpy(path, write_filename);
+                char *ptr = strstr(path, filename_withoutpath);
+                *ptr = '\0';
                 makedir(path);
-				free(path);
-				
+                free(path);
+
                 *(filename_withoutpath-1)=c;
                 fout=fopen(write_filename,"wb");
             }
@@ -225,7 +225,7 @@ static int do_extract_currentfile(unzFile uf,const int* popt_extract_without_pat
         } else
             unzCloseCurrentFile(uf); /* don't lose the error */
     }
-	free(filename_withpath);
+    free(filename_withpath);
     free(buf);
     return err;
 }
@@ -240,20 +240,20 @@ int extractZip(unzFile uf,int opt_extract_without_path,int opt_overwrite,const c
     if (err!=UNZ_OK)
 //        printf("error %d with zipfile in unzGetGlobalInfo \n",err);
 
-    for (i=0;i<gi.number_entry;i++) {
-        if (do_extract_currentfile(uf,&opt_extract_without_path,
-                                   &opt_overwrite,
-                                   password, basedir) != UNZ_OK)
-            break;
-
-        if ((i+1)<gi.number_entry) {
-            err = unzGoToNextFile(uf);
-            if (err!=UNZ_OK) {
-//                printf("error %d with zipfile in unzGoToNextFile\n",err);
+        for (i=0;i<gi.number_entry;i++) {
+            if (do_extract_currentfile(uf,&opt_extract_without_path,
+                                       &opt_overwrite,
+                                       password, basedir) != UNZ_OK)
                 break;
+
+            if ((i+1)<gi.number_entry) {
+                err = unzGoToNextFile(uf);
+                if (err!=UNZ_OK) {
+//                printf("error %d with zipfile in unzGoToNextFile\n",err);
+                    break;
+                }
             }
         }
-    }
 
     return 0;
 }

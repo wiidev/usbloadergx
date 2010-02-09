@@ -45,133 +45,130 @@ extern struct SSettings Settings;
 // Pre-allocate the buffer size for ocarina codes
 u8 filebuff[MAX_GCT_SIZE];
 
-u32 do_sd_code(char *filename)
-{
-gprintf("\ndo_sd_code(%s)",filename);
-printf("\ndo_sd_code(%s)",filename);
+u32 do_sd_code(char *filename) {
+    gprintf("\ndo_sd_code(%s)",filename);
+    printf("\ndo_sd_code(%s)",filename);
 
-	FILE *fp;
-	//u8 *filebuff;
-	u32 filesize;
-	u32 ret;
-	char filepath[150];
+    FILE *fp;
+    //u8 *filebuff;
+    u32 filesize;
+    u32 ret;
+    char filepath[150];
 
     //SDCard_Init();
-	//USBDevice_Init();
+    //USBDevice_Init();
 
-	sprintf(filepath, "%s%s", Settings.Cheatcodespath, filename);
-	filepath[strlen(Settings.Cheatcodespath)+6] = 0x2E;
-	filepath[strlen(Settings.Cheatcodespath)+7] = 0x67;
-	filepath[strlen(Settings.Cheatcodespath)+8] = 0x63;
-	filepath[strlen(Settings.Cheatcodespath)+9] = 0x74;
-	filepath[strlen(Settings.Cheatcodespath)+10] = 0;
+    sprintf(filepath, "%s%s", Settings.Cheatcodespath, filename);
+    filepath[strlen(Settings.Cheatcodespath)+6] = 0x2E;
+    filepath[strlen(Settings.Cheatcodespath)+7] = 0x67;
+    filepath[strlen(Settings.Cheatcodespath)+8] = 0x63;
+    filepath[strlen(Settings.Cheatcodespath)+9] = 0x74;
+    filepath[strlen(Settings.Cheatcodespath)+10] = 0;
 
-	fp = fopen(filepath, "rb");
-	if (!fp) {
+    fp = fopen(filepath, "rb");
+    if (!fp) {
         USBDevice_deInit();
         SDCard_deInit();
-		gprintf("\n\tcan't open %s",filepath);
-		printf("\n\tcan't open %s",filepath);
-		sleep(10);
-		return 0;
-	}
+        gprintf("\n\tcan't open %s",filepath);
+        printf("\n\tcan't open %s",filepath);
+        sleep(10);
+        return 0;
+    }
 
-	fseek(fp, 0, SEEK_END);
-	filesize = ftell(fp);
-        if(filesize <= 16 || filesize>MAX_GCT_SIZE){
-		fclose(fp);
-		sleep(2);
+    fseek(fp, 0, SEEK_END);
+    filesize = ftell(fp);
+    if (filesize <= 16 || filesize>MAX_GCT_SIZE) {
+        fclose(fp);
+        sleep(2);
         USBDevice_deInit();
         SDCard_deInit();
-		gprintf("\n\tError.  size = %d",filesize);
-		printf("\n\tError.  size = %d",filesize);
-		sleep(10);
-		return 0;
-	}
-	fseek(fp, 0, SEEK_SET);
-	
+        gprintf("\n\tError.  size = %d",filesize);
+        printf("\n\tError.  size = %d",filesize);
+        sleep(10);
+        return 0;
+    }
+    fseek(fp, 0, SEEK_SET);
 
-	ret = fread(&filebuff, 1, filesize, fp);
-	if(ret != filesize){
-		fclose(fp);
+
+    ret = fread(&filebuff, 1, filesize, fp);
+    if (ret != filesize) {
+        fclose(fp);
         USBDevice_deInit();
         SDCard_deInit();
-		gprintf("\n\tError. ret != size");
-		printf("\n\tError. ret != size");
-		sleep(10);
-		return 0;
-	}
-	fclose(fp);
-	//USBDevice_deInit();
+        gprintf("\n\tError. ret != size");
+        printf("\n\tError. ret != size");
+        sleep(10);
+        return 0;
+    }
+    fclose(fp);
+    //USBDevice_deInit();
     //SDCard_deInit();
 
     memcpy((void*)0x800027E8, &filebuff,filesize);
     *(vu8*)0x80001807 = 0x01;
-	//gprintf("\n\tDe-init SD & USB");
-	
+    //gprintf("\n\tDe-init SD & USB");
 
-	
-	gprintf("\n\tDone");
-	printf("...Done");
 
-	return 1;
+
+    gprintf("\n\tDone");
+    printf("...Done");
+
+    return 1;
 }
 
-u32 do_bca_code(u8 *gameid)
-{
-	if (IOS_GetVersion() == 222 || IOS_GetVersion() == 223)
-	{
-		FILE *fp;
-		u32 filesize;
-		char filepath[150];
-		memset(filepath, 0, 150);
-		u8 bcaCode[64] ATTRIBUTE_ALIGN(32);
+u32 do_bca_code(u8 *gameid) {
+    if (IOS_GetVersion() == 222 || IOS_GetVersion() == 223) {
+        FILE *fp;
+        u32 filesize;
+        char filepath[150];
+        memset(filepath, 0, 150);
+        u8 bcaCode[64] ATTRIBUTE_ALIGN(32);
 
-		sprintf(filepath, "%s%6s", Settings.BcaCodepath, gameid);
-		filepath[strlen(Settings.BcaCodepath)+6] = '.';
-		filepath[strlen(Settings.BcaCodepath)+7] = 'b';
-		filepath[strlen(Settings.BcaCodepath)+8] = 'c';
-		filepath[strlen(Settings.BcaCodepath)+9] = 'a';
+        sprintf(filepath, "%s%6s", Settings.BcaCodepath, gameid);
+        filepath[strlen(Settings.BcaCodepath)+6] = '.';
+        filepath[strlen(Settings.BcaCodepath)+7] = 'b';
+        filepath[strlen(Settings.BcaCodepath)+8] = 'c';
+        filepath[strlen(Settings.BcaCodepath)+9] = 'a';
 
-		fp = fopen(filepath, "rb");
-		if (!fp) {
-			memset(filepath, 0, 150);
-			sprintf(filepath, "%s%3s", Settings.BcaCodepath, gameid + 1);
-			filepath[strlen(Settings.BcaCodepath)+3] = '.';
-			filepath[strlen(Settings.BcaCodepath)+4] = 'b';
-			filepath[strlen(Settings.BcaCodepath)+5] = 'c';
-			filepath[strlen(Settings.BcaCodepath)+6] = 'a';
-			fp = fopen(filepath, "rb");
-			
-			if (!fp) {
-				// Set default bcaCode
-				memset(bcaCode, 0, 64);
-				bcaCode[0x33] = 1;
-			}
-		}
+        fp = fopen(filepath, "rb");
+        if (!fp) {
+            memset(filepath, 0, 150);
+            sprintf(filepath, "%s%3s", Settings.BcaCodepath, gameid + 1);
+            filepath[strlen(Settings.BcaCodepath)+3] = '.';
+            filepath[strlen(Settings.BcaCodepath)+4] = 'b';
+            filepath[strlen(Settings.BcaCodepath)+5] = 'c';
+            filepath[strlen(Settings.BcaCodepath)+6] = 'a';
+            fp = fopen(filepath, "rb");
 
-		if (fp) {
-			u32 ret = 0;
+            if (!fp) {
+                // Set default bcaCode
+                memset(bcaCode, 0, 64);
+                bcaCode[0x33] = 1;
+            }
+        }
 
-			fseek(fp, 0, SEEK_END);
-			filesize = ftell(fp);
-			
-			if (filesize == 64) {			
-				fseek(fp, 0, SEEK_SET);
-				ret = fread(bcaCode, 1, 64, fp);
-			}
-			fclose(fp);
+        if (fp) {
+            u32 ret = 0;
 
-			if (ret != 64) {
-				// Set default bcaCode
-				memset(bcaCode, 0, 64);
-				bcaCode[0x33] = 1;
-			}
-		}
-		
-		mload_seek(*((u32 *) (dip_plugin+15*4)), SEEK_SET);	// offset 15 (bca_data area)
-		mload_write(bcaCode, 64);
-		mload_close();
-	}
-	return 0;
+            fseek(fp, 0, SEEK_END);
+            filesize = ftell(fp);
+
+            if (filesize == 64) {
+                fseek(fp, 0, SEEK_SET);
+                ret = fread(bcaCode, 1, 64, fp);
+            }
+            fclose(fp);
+
+            if (ret != 64) {
+                // Set default bcaCode
+                memset(bcaCode, 0, 64);
+                bcaCode[0x33] = 1;
+            }
+        }
+
+        mload_seek(*((u32 *) (dip_plugin+15*4)), SEEK_SET);	// offset 15 (bca_data area)
+        mload_write(bcaCode, 64);
+        mload_close();
+    }
+    return 0;
 }
