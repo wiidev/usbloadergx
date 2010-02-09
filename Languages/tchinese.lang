@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-01 13:58+0100\n"
+"POT-Creation-Date: 2010-02-05 14:13+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Miller Liang\n"
 "Language-Team: kyogc, Miller\n"
@@ -849,6 +849,9 @@ msgstr "沒找到"
 msgid "Not a DOL/ELF file."
 msgstr "不是 DOL/ELF 文件."
 
+msgid "Not a WAD file."
+msgstr ""
+
 msgid "Not a Wii Disc"
 msgstr "不是 Wii 的光碟"
 
@@ -1085,9 +1088,6 @@ msgstr "TXT 金手指文件路徑已變更"
 
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "已進入的目錄不存在。你想要創建一個目錄嗎？"
-
-msgid "The file is not a .wad"
-msgstr "這不是一個 WAD 文件"
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."
 msgstr "WAD 已安裝，但文件無法從 SD 卡中刪除。"
@@ -1347,6 +1347,9 @@ msgstr "的"
 
 msgid "seconds left"
 msgstr "剩餘秒數"
+
+#~ msgid "The file is not a .wad"
+#~ msgstr "這不是一個 WAD 文件"
 
 #~ msgid "Install not possible"
 #~ msgstr "無法安裝"

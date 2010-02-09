@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# spanish.lang - r898
+# spanish.lang - r903
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-01 13:58+0100\n"
+"POT-Creation-Date: 2010-02-05 14:13+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: SirPalax\n"
 "Language-Team: Penn, SirPalax\n"
@@ -550,7 +550,7 @@ msgid "Full Shutdown"
 msgstr "Apagado Total"
 
 msgid "GAMEID_Gamename"
-msgstr ""
+msgstr "IDdelJuego_NombreDelJuego"
 
 msgid "GCT Cheatcodes Path"
 msgstr "Ruta de Trucos GCT"
@@ -568,7 +568,7 @@ msgid "GXtheme.cfg not found in any subfolder."
 msgstr "No se encuentra GXtheme.cfg en ninguna subcarpeta."
 
 msgid "Game ID"
-msgstr "ID de Juego"
+msgstr "ID del Juego"
 
 msgid "Game Language"
 msgstr "Idioma"
@@ -595,7 +595,7 @@ msgid "Game partition"
 msgstr "Partición de Juegos"
 
 msgid "Gamename [GAMEID]"
-msgstr ""
+msgstr "NombreDelJuego [IDdelJuego]"
 
 msgid "Games"
 msgstr "Juegos"
@@ -835,7 +835,7 @@ msgid "No themes found on the site."
 msgstr "No hay Temas en este sitio."
 
 msgid "None"
-msgstr ""
+msgstr "Ninguno"
 
 msgid "Normal"
 msgstr ""
@@ -848,6 +848,9 @@ msgstr "No encontrado"
 
 msgid "Not a DOL/ELF file."
 msgstr "No es un archivo DOL/ELF."
+
+msgid "Not a WAD file."
+msgstr ""
 
 msgid "Not a Wii Disc"
 msgstr "No es un Disco Wii"
@@ -952,7 +955,7 @@ msgid "Reload SD"
 msgstr "Recargar SD"
 
 msgid "Remove update"
-msgstr ""
+msgstr "Quitar actualización"
 
 msgid "Rename Game on WBFS"
 msgstr "Renombrar juego en WBFS"
@@ -1085,9 +1088,6 @@ msgstr "Ruta del archivo de Trucos cambiada"
 
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "La carpeta especificada no existe. ¿Quieres crearla?"
-
-msgid "The file is not a .wad"
-msgstr "El archivo no es un .wad"
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."
 msgstr "El archivo WAD se ha instalado. Pero no puede ser borrado de la tarjeta SD."
@@ -1347,6 +1347,9 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
+
+#~ msgid "The file is not a .wad"
+#~ msgstr "El archivo no es un .wad"
 
 #~ msgid "Install not possible"
 #~ msgstr "Imposible instalar"

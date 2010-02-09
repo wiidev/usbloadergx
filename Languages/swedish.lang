@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-01 13:58+0100\n"
+"POT-Creation-Date: 2010-02-05 14:13+0100\n"
 "PO-Revision-Date: 2010-01-19 17:39+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -849,6 +849,9 @@ msgstr "Hittades inte"
 msgid "Not a DOL/ELF file."
 msgstr "Inte en DOL/ELF fil."
 
+msgid "Not a WAD file."
+msgstr ""
+
 msgid "Not a Wii Disc"
 msgstr "Inte en Wii-skiva"
 
@@ -1085,9 +1088,6 @@ msgstr "TXTCheatcodes sökväg ändrad"
 
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "Den angivna katalogen existerar inte. Vill du skapa den?"
-
-msgid "The file is not a .wad"
-msgstr "Filen är inte en .wad"
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."
 msgstr "Wad filen har blivit installerad. Men kunde inte raderas från SD-kortet."
@@ -1347,6 +1347,9 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder kvar"
+
+#~ msgid "The file is not a .wad"
+#~ msgstr "Filen är inte en .wad"
 
 #~ msgid "Install not possible"
 #~ msgstr "Installation inte möjlig"

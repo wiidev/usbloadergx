@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# dutch.lang - r897
+# dutch.lang - r904
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-01 13:58+0100\n"
+"POT-Creation-Date: 2010-02-05 14:22+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: glowy\n"
 "Language-Team: tj_cool, glowy\n"
@@ -550,7 +550,7 @@ msgid "Full Shutdown"
 msgstr "Volledig uitzetten"
 
 msgid "GAMEID_Gamename"
-msgstr ""
+msgstr "SPELID_Spelnaam"
 
 msgid "GCT Cheatcodes Path"
 msgstr "Locatie GCT cheatcodes"
@@ -595,7 +595,7 @@ msgid "Game partition"
 msgstr "Spel partitie"
 
 msgid "Gamename [GAMEID]"
-msgstr ""
+msgstr "Spelnaam [SPELID]"
 
 msgid "Games"
 msgstr "Spellen"
@@ -835,7 +835,7 @@ msgid "No themes found on the site."
 msgstr "Geen thema's gevonden op de site."
 
 msgid "None"
-msgstr ""
+msgstr "Geen"
 
 msgid "Normal"
 msgstr "Normaal"
@@ -848,6 +848,9 @@ msgstr "Niet gevonden"
 
 msgid "Not a DOL/ELF file."
 msgstr "Geen DOL/ELF bestand."
+
+msgid "Not a WAD file."
+msgstr ""
 
 msgid "Not a Wii Disc"
 msgstr "Geen Wii disk"
@@ -952,7 +955,7 @@ msgid "Reload SD"
 msgstr "SD herladen"
 
 msgid "Remove update"
-msgstr ""
+msgstr "Verwijder update"
 
 msgid "Rename Game on WBFS"
 msgstr "Spel hernoemen op WBFS"
@@ -1085,9 +1088,6 @@ msgstr "Locatie TXT cheatcodes gewijzigd"
 
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "De opgegeven map bestaat niet. Wil je deze aanmaken?"
-
-msgid "The file is not a .wad"
-msgstr "Dit is geen .wad bestand"
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."
 msgstr "Het wad bestand is geïnstalleerd. Maar kon niet van de SD kaart verwijderd worden."
@@ -1347,6 +1347,9 @@ msgstr "van"
 
 msgid "seconds left"
 msgstr "seconden over"
+
+#~ msgid "The file is not a .wad"
+#~ msgstr "Dit is geen .wad bestand"
 
 #~ msgid "Install not possible"
 #~ msgstr "Installatie niet mogelijk"

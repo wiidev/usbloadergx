@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-01 13:58+0100\n"
+"POT-Creation-Date: 2010-02-05 14:13+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) \n"
 "Language-Team: r823 - last version on http://djelinek.sweb.cz/_USBLoderGX/czech.lang \n"
@@ -849,6 +849,9 @@ msgstr "Nenalezeno"
 msgid "Not a DOL/ELF file."
 msgstr "To není DOL/ELF soubor."
 
+msgid "Not a WAD file."
+msgstr ""
+
 msgid "Not a Wii Disc"
 msgstr "Toto není Wii disk"
 
@@ -1085,9 +1088,6 @@ msgstr "Cesta k TXT cheatum zmenena"
 
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "Zadaný adresár neexistuje. Chcete ho vytvorit?"
-
-msgid "The file is not a .wad"
-msgstr "Soubor není typu WAD"
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."
 msgstr "WAD soubor byl nainstalován, ale nelze smazat z SD karty"
@@ -1347,6 +1347,9 @@ msgstr "z "
 
 msgid "seconds left"
 msgstr "sekund zbývá"
+
+#~ msgid "The file is not a .wad"
+#~ msgstr "Soubor není typu WAD"
 
 #~ msgid "Can't decompress LZ77"
 #~ msgstr "Nelze dekomprimovat LZ77"

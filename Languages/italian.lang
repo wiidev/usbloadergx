@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# italian.lang - v57 - r885
+# italian.lang - v58 - r903
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-01 13:58+0100\n"
+"POT-Creation-Date: 2010-02-05 14:13+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe, Cambo\n"
@@ -433,7 +433,7 @@ msgid "Done!"
 msgstr "Fatto!"
 
 msgid "Download"
-msgstr ""
+msgstr "Scarica"
 
 msgid "Download Boxart image?"
 msgstr "Scarico la copertina?"
@@ -550,7 +550,7 @@ msgid "Full Shutdown"
 msgstr "Completo"
 
 msgid "GAMEID_Gamename"
-msgstr ""
+msgstr "IDGIOCO_Nomegioco"
 
 msgid "GCT Cheatcodes Path"
 msgstr "Percorso Trucchi in GCT"
@@ -595,7 +595,7 @@ msgid "Game partition"
 msgstr "Partizione gioco"
 
 msgid "Gamename [GAMEID]"
-msgstr ""
+msgstr "Nomegioco [IDGIOCO]"
 
 msgid "Games"
 msgstr "Giochi"
@@ -835,7 +835,7 @@ msgid "No themes found on the site."
 msgstr "Nessun tema trovato sul sito."
 
 msgid "None"
-msgstr ""
+msgstr "Nessuno"
 
 msgid "Normal"
 msgstr "Normale"
@@ -848,6 +848,9 @@ msgstr "Non Trovato"
 
 msgid "Not a DOL/ELF file."
 msgstr "Non è un file DOL/ELF."
+
+msgid "Not a WAD file."
+msgstr ""
 
 msgid "Not a Wii Disc"
 msgstr "Non è un Disco Wii"
@@ -952,7 +955,7 @@ msgid "Reload SD"
 msgstr "Ricarica SD"
 
 msgid "Remove update"
-msgstr ""
+msgstr "Rimuovi aggiornamento"
 
 msgid "Rename Game on WBFS"
 msgstr "Rinomina Gioco su WBFS"
@@ -1085,9 +1088,6 @@ msgstr "Percorso Trucchi in TXT modificato"
 
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "La cartella indicata non esiste. Vuoi crearla?"
-
-msgid "The file is not a .wad"
-msgstr "Non è un file .wad"
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."
 msgstr "File Wad installato. Non si può però eliminare dalla scheda SD."
@@ -1347,6 +1347,9 @@ msgstr "di"
 
 msgid "seconds left"
 msgstr "secondi mancanti"
+
+#~ msgid "The file is not a .wad"
+#~ msgstr "Non è un file .wad"
 
 #~ msgid "Install not possible"
 #~ msgstr "Impossibile installare"

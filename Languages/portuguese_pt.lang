@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-# portuguese_pt.lang - r894
+# portuguese_pt.lang - r903
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-01 13:58+0100\n"
-"PO-Revision-Date: 2010-01-16 11:05-0000\n"
+"POT-Creation-Date: 2010-02-05 14:13+0100\n"
+"PO-Revision-Date: 2010-02-01 18:10-0000\n"
 "Last-Translator: Sky8000\n"
 "Language-Team: Sky8000 <sky8000@hotmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -550,7 +550,7 @@ msgid "Full Shutdown"
 msgstr "Desligar"
 
 msgid "GAMEID_Gamename"
-msgstr ""
+msgstr "IDJOGO_NomeJogo"
 
 msgid "GCT Cheatcodes Path"
 msgstr "Pasta ficheiros GCT"
@@ -595,7 +595,7 @@ msgid "Game partition"
 msgstr "Partição de Jogos"
 
 msgid "Gamename [GAMEID]"
-msgstr ""
+msgstr "NomeJogo [IDJOGO]"
 
 msgid "Games"
 msgstr "Jogos"
@@ -835,7 +835,7 @@ msgid "No themes found on the site."
 msgstr "Nenhum tema encontrado no site."
 
 msgid "None"
-msgstr ""
+msgstr "Nenhum"
 
 msgid "Normal"
 msgstr "Normal"
@@ -848,6 +848,9 @@ msgstr "Não encontrado"
 
 msgid "Not a DOL/ELF file."
 msgstr "Não é um ficheiro DOL/ELF válido."
+
+msgid "Not a WAD file."
+msgstr ""
 
 msgid "Not a Wii Disc"
 msgstr "Não é um Disco da Wii"
@@ -952,7 +955,7 @@ msgid "Reload SD"
 msgstr "Actualizar do cartão SD"
 
 msgid "Remove update"
-msgstr ""
+msgstr "Remover actualização"
 
 msgid "Rename Game on WBFS"
 msgstr "Alterar nome do jogo (WBFS)"
@@ -1085,9 +1088,6 @@ msgstr "Pasta de Dicas alterada"
 
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "A pasta não existe, pretende criá-la?"
-
-msgid "The file is not a .wad"
-msgstr "O ficheiro não é um .wad"
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."
 msgstr "O ficheiro wad foi instalado mas não foi possível eliminá-lo do cartão SD."
@@ -1347,6 +1347,9 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
+
+#~ msgid "The file is not a .wad"
+#~ msgstr "O ficheiro não é um .wad"
 
 #~ msgid "Install not possible"
 #~ msgstr "Não é possível instalar"

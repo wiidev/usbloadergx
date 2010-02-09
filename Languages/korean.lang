@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-01 13:58+0100\n"
+"POT-Creation-Date: 2010-02-05 14:13+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: nextos@korea.com\n"
 "Language-Team: \n"
@@ -849,6 +849,9 @@ msgstr "없음"
 msgid "Not a DOL/ELF file."
 msgstr "DOL/ELF 파일이 아님."
 
+msgid "Not a WAD file."
+msgstr ""
+
 msgid "Not a Wii Disc"
 msgstr "Wii 디스크가 아닙니다"
 
@@ -1085,9 +1088,6 @@ msgstr "TXT 치트코드 경로 변경됨"
 
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr ""
-
-msgid "The file is not a .wad"
-msgstr "화일이 .wad 아님"
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."
 msgstr "WAD화일이 인스톨됨. 하지만 SD 카드에서 삭제할수 없음."
@@ -1347,6 +1347,9 @@ msgstr "중"
 
 msgid "seconds left"
 msgstr "초 남았습니다"
+
+#~ msgid "The file is not a .wad"
+#~ msgstr "화일이 .wad 아님"
 
 #~ msgid "Exit USB Loader GX?"
 #~ msgstr "USB로더 GX를 종료할까요?"

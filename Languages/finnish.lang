@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-01 13:58+0100\n"
+"POT-Creation-Date: 2010-02-05 14:13+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: c64rmx\n"
 "Language-Team: \n"
@@ -849,6 +849,9 @@ msgstr "Ei löytynyt"
 msgid "Not a DOL/ELF file."
 msgstr "Tiedosto ei ole DOL/ELF."
 
+msgid "Not a WAD file."
+msgstr ""
+
 msgid "Not a Wii Disc"
 msgstr "Ei Wii-levy"
 
@@ -1085,9 +1088,6 @@ msgstr "TXT koodien polku muutettu"
 
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr ""
-
-msgid "The file is not a .wad"
-msgstr "Tiedosto ei ole .wad"
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."
 msgstr "Wad tiedostoa ei asennettu mutta sitä ei voitu tuhota SD-kortilta"
@@ -1347,6 +1347,9 @@ msgstr "josta"
 
 msgid "seconds left"
 msgstr "sekuntia jäljellä"
+
+#~ msgid "The file is not a .wad"
+#~ msgstr "Tiedosto ei ole .wad"
 
 #~ msgid "Exit USB Loader GX?"
 #~ msgstr "Poistu USB Loader GX:stä?"
