@@ -27,36 +27,36 @@
 #include "layout.h"
 
 extern BOOL ntfs_names_are_equal(const ntfschar *s1, size_t s1_len,
-                                     const ntfschar *s2, size_t s2_len, const IGNORE_CASE_BOOL ic,
-                                     const ntfschar *upcase, const u32 upcase_size);
+		const ntfschar *s2, size_t s2_len, const IGNORE_CASE_BOOL ic,
+		const ntfschar *upcase, const u32 upcase_size);
 
 extern int ntfs_names_collate(const ntfschar *name1, const u32 name1_len,
-                                  const ntfschar *name2, const u32 name2_len,
-                                  const int err_val, const IGNORE_CASE_BOOL ic,
-                                  const ntfschar *upcase, const u32 upcase_len);
+		const ntfschar *name2, const u32 name2_len,
+		const int err_val, const IGNORE_CASE_BOOL ic,
+		const ntfschar *upcase, const u32 upcase_len);
 
 extern int ntfs_ucsncmp(const ntfschar *s1, const ntfschar *s2, size_t n);
 
 extern int ntfs_ucsncasecmp(const ntfschar *s1, const ntfschar *s2, size_t n,
-                                const ntfschar *upcase, const u32 upcase_size);
+		const ntfschar *upcase, const u32 upcase_size);
 
 extern u32 ntfs_ucsnlen(const ntfschar *s, u32 maxlen);
 
 extern ntfschar *ntfs_ucsndup(const ntfschar *s, u32 maxlen);
 
 extern void ntfs_name_upcase(ntfschar *name, u32 name_len,
-                                 const ntfschar *upcase, const u32 upcase_len);
+		const ntfschar *upcase, const u32 upcase_len);
 
 extern void ntfs_file_value_upcase(FILE_NAME_ATTR *file_name_attr,
-                                       const ntfschar *upcase, const u32 upcase_len);
+		const ntfschar *upcase, const u32 upcase_len);
 
 extern int ntfs_file_values_compare(const FILE_NAME_ATTR *file_name_attr1,
-                                        const FILE_NAME_ATTR *file_name_attr2,
-                                        const int err_val, const IGNORE_CASE_BOOL ic,
-                                        const ntfschar *upcase, const u32 upcase_len);
+		const FILE_NAME_ATTR *file_name_attr2,
+		const int err_val, const IGNORE_CASE_BOOL ic,
+		const ntfschar *upcase, const u32 upcase_len);
 
 extern int ntfs_ucstombs(const ntfschar *ins, const int ins_len, char **outs,
-                             int outs_len);
+		int outs_len);
 extern int ntfs_mbstoucs(const char *ins, ntfschar **outs);
 
 extern void ntfs_upcase_table_build(ntfschar *uc, u32 uc_len);
@@ -67,8 +67,8 @@ extern void ntfs_ucsfree(ntfschar *ucs);
 
 extern BOOL ntfs_forbidden_chars(const ntfschar *name, int len);
 extern BOOL ntfs_collapsible_chars(ntfs_volume *vol,
-                                       const ntfschar *shortname, int shortlen,
-                                       const ntfschar *longname, int longlen);
+				const ntfschar *shortname, int shortlen,
+				const ntfschar *longname, int longlen);
 
 extern int ntfs_set_char_encoding(const char *locale);
 
@@ -84,7 +84,7 @@ extern int ntfs_set_char_encoding(const char *locale);
  * normalization form. Since Windows and most other OS:es use the NFC form while Mac OS X
  * mostly uses NFD, this conversion increases compatibility between Mac applications and
  * NTFS-3G.
- *
+ * 
  * @param normalize decides whether or not the string functions will do automatic filename
  *        normalization when converting to and from UTF-8. 0 means normalization is disabled,
  *        1 means it is enabled.
@@ -94,7 +94,7 @@ extern int ntfs_macosx_normalize_filenames(int normalize);
 
 /**
  * Mac OS X only.
- *
+ * 
  * Normalizes the input string "utf8_string" to one of the normalization forms NFD or NFC.
  * The parameter "composed" decides whether output should be in composed, NFC, form
  * (composed == 1) or decomposed, NFD, form (composed == 0).

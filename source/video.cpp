@@ -202,7 +202,7 @@ static unsigned int *xfbDB = NULL;
 
 void InitVideodebug () {
     VIDEO_Init();
-    GXRModeObj *vmode = VIDEO_GetPreferredMode(NULL); // get default video mode
+  GXRModeObj *vmode = VIDEO_GetPreferredMode(NULL); // get default video mode
 
     // widescreen fix
     VIDEO_Configure (vmode);
@@ -221,7 +221,7 @@ void InitVideodebug () {
     VIDEO_Flush ();
     VIDEO_WaitVSync ();
     if (vmode->viTVMode & VI_NON_INTERLACE)
-        VIDEO_WaitVSync ();
+	VIDEO_WaitVSync ();
 }
 /****************************************************************************
  * StopGX
@@ -490,11 +490,12 @@ void Menu_DrawTPLImg(f32 xpos, f32 ypos, f32 zpos, f32 width, f32 height, GXTexO
  *
  * Copies the current screen into a file "path"
  ***************************************************************************/
-s32 TakeScreenshot(const char *path) {
+s32 TakeScreenshot(const char *path)
+{
     gprintf("\nTakeScreenshot(%s)", path);
     IMGCTX ctx = PNGU_SelectImageFromDevice (path);
     s32 ret = PNGU_EncodeFromYCbYCr(ctx,vmode->fbWidth, vmode->efbHeight,xfb[whichfb],0);
     PNGU_ReleaseImageContext (ctx);
     gprintf(":%d", ret);
-    return 1;
+	return 1;
 }

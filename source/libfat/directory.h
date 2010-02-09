@@ -60,49 +60,49 @@
 typedef enum {FT_DIRECTORY, FT_FILE} FILE_TYPE;
 
 typedef struct {
-    uint32_t cluster;
-    sec_t    sector;
-    int32_t  offset;
+	uint32_t cluster;
+	sec_t    sector;
+	int32_t  offset;
 } DIR_ENTRY_POSITION;
 
 typedef struct {
-    uint8_t            entryData[DIR_ENTRY_DATA_SIZE];
-    DIR_ENTRY_POSITION dataStart;		// Points to the start of the LFN entries of a file, or the alias for no LFN
-    DIR_ENTRY_POSITION dataEnd;			// Always points to the file/directory's alias entry
-    char               filename[MAX_FILENAME_LENGTH];
+	uint8_t            entryData[DIR_ENTRY_DATA_SIZE];
+	DIR_ENTRY_POSITION dataStart;		// Points to the start of the LFN entries of a file, or the alias for no LFN
+	DIR_ENTRY_POSITION dataEnd;			// Always points to the file/directory's alias entry
+	char               filename[MAX_FILENAME_LENGTH];
 } DIR_ENTRY;
 
 // Directory entry offsets
 enum DIR_ENTRY_offset {
-    DIR_ENTRY_name = 0x00,
-    DIR_ENTRY_extension = 0x08,
-    DIR_ENTRY_attributes = 0x0B,
-    DIR_ENTRY_reserved = 0x0C,
-    DIR_ENTRY_cTime_ms = 0x0D,
-    DIR_ENTRY_cTime = 0x0E,
-    DIR_ENTRY_cDate = 0x10,
-    DIR_ENTRY_aDate = 0x12,
-    DIR_ENTRY_clusterHigh = 0x14,
-    DIR_ENTRY_mTime = 0x16,
-    DIR_ENTRY_mDate = 0x18,
-    DIR_ENTRY_cluster = 0x1A,
-    DIR_ENTRY_fileSize = 0x1C
+	DIR_ENTRY_name = 0x00,
+	DIR_ENTRY_extension = 0x08,
+	DIR_ENTRY_attributes = 0x0B,
+	DIR_ENTRY_reserved = 0x0C,
+	DIR_ENTRY_cTime_ms = 0x0D,
+	DIR_ENTRY_cTime = 0x0E,
+	DIR_ENTRY_cDate = 0x10,
+	DIR_ENTRY_aDate = 0x12,
+	DIR_ENTRY_clusterHigh = 0x14,
+	DIR_ENTRY_mTime = 0x16,
+	DIR_ENTRY_mDate = 0x18,
+	DIR_ENTRY_cluster = 0x1A,
+	DIR_ENTRY_fileSize = 0x1C
 };
 
 /*
 Returns true if the file specified by entry is a directory
 */
 static inline bool _FAT_directory_isDirectory (DIR_ENTRY* entry) {
-    return ((entry->entryData[DIR_ENTRY_attributes] & ATTRIB_DIR) != 0);
+	return ((entry->entryData[DIR_ENTRY_attributes] & ATTRIB_DIR) != 0);
 }
 
 static inline bool _FAT_directory_isWritable (DIR_ENTRY* entry) {
-    return ((entry->entryData[DIR_ENTRY_attributes] & ATTRIB_RO) == 0);
+	return ((entry->entryData[DIR_ENTRY_attributes] & ATTRIB_RO) == 0);
 }
 
 static inline bool _FAT_directory_isDot (DIR_ENTRY* entry) {
-    return ((entry->filename[0] == '.') && ((entry->filename[1] == '\0') ||
-                                            ((entry->filename[1] == '.') && entry->filename[2] == '\0')));
+	return ((entry->filename[0] == '.') && ((entry->filename[1] == '\0') ||
+		((entry->filename[1] == '.') && entry->filename[2] == '\0')));
 }
 
 /*

@@ -31,8 +31,8 @@ bool Load_Dol(void **buffer, int* dollen, char * filepath) {
 
     if (file == NULL) {
         fclose(file);
-        //     SDCard_deInit();
-        //     USBDevice_deInit();
+   //     SDCard_deInit();
+   //     USBDevice_deInit();
         return false;
     }
 
@@ -44,22 +44,22 @@ bool Load_Dol(void **buffer, int* dollen, char * filepath) {
     dol_buffer = malloc(filesize);
     if (dol_buffer == NULL) {
         fclose(file);
-        //      SDCard_deInit();
-        //      USBDevice_deInit();
+  //      SDCard_deInit();
+  //      USBDevice_deInit();
         return false;
     }
     ret = fread( dol_buffer, 1, filesize, file);
     if (ret != filesize) {
         free(dol_buffer);
         fclose(file);
-        //     SDCard_deInit();
-        //     USBDevice_deInit();
+   //     SDCard_deInit();
+   //     USBDevice_deInit();
         return false;
     }
     fclose(file);
 
-    // SDCard_deInit();
-    // USBDevice_deInit();
+   // SDCard_deInit();
+   // USBDevice_deInit();
     *buffer = dol_buffer;
     *dollen = filesize;
     return true;
@@ -184,8 +184,9 @@ bool load_dol_image_modified(void **offset, u32 *pos, u32 *len) {
     return false;
 }
 static vu32 dvddone = 0;
-void __dvd_readidcb(s32 result) {
-    dvddone = result;
+void __dvd_readidcb(s32 result)
+{
+	dvddone = result;
 }
 u32 Load_Dol_from_disc(u32 doloffset, u8 videoSelected, u8 patchcountrystring, u8 vipatch) {
     int ret;
@@ -198,13 +199,13 @@ u32 Load_Dol_from_disc(u32 doloffset, u8 videoSelected, u8 patchcountrystring, u
     }
 
     if (!mountMethod)ret = WDVD_Read(dol_header, sizeof(dolheader), (doloffset<<2));
-
-    else {
-        dvddone = 0;
-        ret = bwDVD_LowRead(dol_header, sizeof(dolheader), doloffset, __dvd_readidcb);
-        while (ret>=0 && dvddone==0);
-    }
-
+	
+	else{
+		dvddone = 0;
+		ret = bwDVD_LowRead(dol_header, sizeof(dolheader), doloffset, __dvd_readidcb);
+		while(ret>=0 && dvddone==0);
+	}
+	
     entrypoint = load_dol_start(dol_header);
 
     if (entrypoint == 0) {
@@ -215,7 +216,7 @@ u32 Load_Dol_from_disc(u32 doloffset, u8 videoSelected, u8 patchcountrystring, u
     void *offset;
     u32 pos;
     u32 len;
-
+	
     while (load_dol_image_modified(&offset, &pos, &len)) {
         if (len != 0) {
             ret = WDVD_Read(offset, len, (doloffset<<2) + pos);

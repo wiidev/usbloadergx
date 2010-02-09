@@ -17,7 +17,8 @@
 #include <locale.h>
 #include <wiiuse/wpad.h>
 //#include <debug.h>
-extern "C" {
+extern "C"
+{
     extern void __exception_setreload(int t);
 }
 
@@ -66,7 +67,8 @@ PartList partitions;
 
 u8 dbvideo =0;
 
-static void BootUpProblems() {
+static void BootUpProblems()
+{
     s32 ret2;
 
     // load main font from file, or default to built-in font
@@ -76,7 +78,8 @@ static void BootUpProblems() {
 
     GuiImageData bootimageData(gxlogo_png);
     GuiImage bootimage(&bootimageData);
-    GuiText boottext(NULL, 20, (GXColor) {255, 255, 255, 255});
+    GuiText boottext(NULL, 20, (GXColor) {255, 255, 255, 255}
+    );
     boottext.SetPosition(200, 240-1.2*bootimage.GetHeight()/2+250);
     bootimage.SetPosition(320-1.2*bootimage.GetWidth()/2, 240-1.2*bootimage.GetHeight()/2);
     bootimage.SetScale(1.2);
@@ -89,7 +92,8 @@ static void BootUpProblems() {
 
     time_t curtime;
     time_t endtime = time(0) + 30;
-    do {
+    do
+    {
         /*ret2 = IOS_ReloadIOSsafe(249);
         if (ret2 < 0) {
             ret2 = IOS_ReloadIOSsafe(222);
@@ -108,7 +112,8 @@ static void BootUpProblems() {
         USBDevice_deInit();
         USBDevice_Init();
         ret2 = WBFS_Init(WBFS_DEVICE_USB);
-        if (ret2 >= 0) {
+        if (ret2 >= 0)
+        {
             boottext.SetText("Loading...");
             bootimage.Draw();
             boottext.Draw();
@@ -117,13 +122,14 @@ static void BootUpProblems() {
         }
         curtime = time(0);
         boottext.SetTextf("Waiting for your slow USB Device: %i secs...", int(endtime-curtime));
-        while (curtime == time(0)) {
+        while(curtime == time(0))
+        {
             boottext.Draw();
             bootimage.Draw();
             if (endtime-curtime<15)usbimage.Draw();
             Menu_Render();
         }
-    } while ((endtime-time(0)) > 0);
+    } while((endtime-time(0)) > 0);
 
     /*if(ret2 < 0) {
         boottext.SetText("ERROR: USB device could not be loaded!");
@@ -135,7 +141,8 @@ static void BootUpProblems() {
     }*/
 
     ///delete font to load up custom if set
-    if (fontSystem) {
+    if(fontSystem)
+    {
         delete fontSystem;
         fontSystem = NULL;
     }
@@ -144,15 +151,17 @@ static void BootUpProblems() {
 
 unsigned int *xfb = NULL;
 
-void InitTextVideo () {
+void InitTextVideo ()
+{
     gprintf("\nInitTextVideo ()");
-    if (textVideoInit) {
+    if (textVideoInit)
+    {
         gprintf("...0");
         return;
     }
     dbvideo=1;
     VIDEO_Init();
-    // get default video mode
+                                                  // get default video mode
     GXRModeObj *vmode = VIDEO_GetPreferredMode(NULL);
 
     // widescreen fix
@@ -183,11 +192,13 @@ void InitTextVideo () {
 
 
 int
-main(int argc, char *argv[]) {
+main(int argc, char *argv[])
+{
     setlocale(LC_ALL, "en.UTF-8");
     geckoinit = InitGecko();
 
-    if (hbcStubAvailable() || geckoinit) {
+    if (hbcStubAvailable() || geckoinit)
+    {
         InitTextVideo();
     }
 
@@ -205,7 +216,8 @@ main(int argc, char *argv[]) {
 
     // This part is added, because we need a identify patched ios
 //    printf("\n\tReloading into ios 236");
-    if (IOS_ReloadIOSsafe(236) < 0) {
+    if (IOS_ReloadIOSsafe(236) < 0)
+    {
 //        printf("\n\tIOS 236 not found, reloading into 36");
         IOS_ReloadIOSsafe(36);
     }
@@ -219,12 +231,14 @@ main(int argc, char *argv[]) {
     bool startupproblem = false;
 
     bool bootDevice_found=false;
-    if (argc >= 1) {
-        if (!strncasecmp(argv[0], "usb:/", 5)) {
+    if (argc >= 1)
+    {
+        if (!strncasecmp(argv[0], "usb:/", 5))
+        {
             strcpy(bootDevice, "USB:");
             bootDevice_found = true;
         } else if (!strncasecmp(argv[0], "sd:/", 4))
-            bootDevice_found = true;
+        bootDevice_found = true;
     }
 
     printf("\n\tInitializing controllers");
@@ -241,10 +255,12 @@ main(int argc, char *argv[]) {
     ios249rev = getIOSrev(0x00000001000000f9ll);
 
     //if we don't like either of the cIOS then scram
-    if (!(ios222rev==4 || (ios249rev>=9 && ios249rev<65280))) {
+    if (!(ios222rev==4 || (ios249rev>=9 && ios249rev<65280)))
+    {
         InitTextVideo();
         printf("\x1b[2J");
-        if ((ios222rev < 0 && ios222rev != WII_EINSTALL) && (ios249rev < 0 && ios249rev != WII_EINSTALL)) {
+        if ((ios222rev < 0 && ios222rev != WII_EINSTALL) && (ios249rev < 0 && ios249rev != WII_EINSTALL))
+        {
             printf("\n\n\n\tWARNING!");
             printf("\n\tUSB Loader GX needs unstubbed cIOS 222 v4 or 249 v9+");
             printf("\n\n\tWe cannot determine the versions on your system,\n\tsince you have no patched ios 36 or 236 installed.");
@@ -252,7 +268,9 @@ main(int argc, char *argv[]) {
             printf("\n\tand you should go figure out how to get some cios action going on\n\tin your Wii.");
             printf("\n\n\tThis message will show every time.");
             sleep(5);
-        } else {
+        }
+        else
+        {
             printf("\n\n\n\tERROR!");
             printf("\n\tUSB Loader GX needs unstubbed cIOS 222 v4 or 249 v9+");
             printf("\n\n\tI found \n\t\t222 = %d%s",ios222rev,ios222rev==65280?" (Stubbed by 4.2 update)":"");
@@ -272,22 +290,26 @@ main(int argc, char *argv[]) {
 
     printf("%d", ret);
 
-    if (ret < 0) {
+    if (ret < 0)
+    {
         printf("\n\tIOS 249 failed, reloading ios 222...");
         ret = IOS_ReloadIOSsafe(222);
         printf("%d", ret);
 
-        if (ret < 0) {
+        if (ret < 0)
+        {
             printf("\n\tIOS 222 failed, reloading ios 250...");
             ret = IOS_ReloadIOSsafe(250);
             printf("%d", ret);
 
-            if (ret < 0) {
+            if(ret < 0)
+            {
                 printf("\n\tIOS 250 failed, reloading ios 223...");
                 ret = IOS_ReloadIOSsafe(223);
                 printf("%d", ret);
 
-                if (ret < 0) {
+                if (ret < 0)
+                {
                     printf("\n\tERROR: cIOS could not be loaded!\n");
                     sleep(5);
                     SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
@@ -306,7 +328,8 @@ main(int argc, char *argv[]) {
     ret = WBFS_Init(WBFS_DEVICE_USB);
     printf("%d", ret);
 
-    if (ret < 0) {
+    if (ret < 0)
+    {
         printf("\n\tYou have issues with a slow disc, or a difficult disc\n\tReloading 222...");
         ret = IOS_ReloadIOSsafe(222);
         printf("%d", ret);
@@ -333,7 +356,8 @@ main(int argc, char *argv[]) {
         ret = WBFS_Init(WBFS_DEVICE_USB);
         printf("%d", ret);
 
-        if (ret < 0) {
+        if(ret < 0)
+        {
             //			printf("\n\tSleeping for 4 seconds");
             //			sleep(4);
             InitVideo();                          // Initialise video
@@ -351,14 +375,15 @@ main(int argc, char *argv[]) {
     printf("\n\tInitialize usb device");
     USBDevice_Init();                             // and mount USB:/
 
-    if (!bootDevice_found) {
+    if (!bootDevice_found)
+    {
         printf("\n\tSearch for configuration file");
 
         //try USB
         //left in all the dol and elf files in this check in case this is the first time running the app and they dont have the config
         if (checkfile((char*) "USB:/config/GXglobal.cfg") || (checkfile((char*) "USB:/apps/usbloader_gx/boot.elf"))
-                || checkfile((char*) "USB:/apps/usbloadergx/boot.dol") || (checkfile((char*) "USB:/apps/usbloadergx/boot.elf"))
-                || checkfile((char*) "USB:/apps/usbloader_gx/boot.dol"))
+            || checkfile((char*) "USB:/apps/usbloadergx/boot.dol") || (checkfile((char*) "USB:/apps/usbloadergx/boot.elf"))
+            || checkfile((char*) "USB:/apps/usbloader_gx/boot.dol"))
             strcpy(bootDevice, "USB:");
 
         printf("\n\tConfiguration file is on %s", bootDevice);
@@ -369,7 +394,8 @@ main(int argc, char *argv[]) {
     char GXGlobal_cfg[26];
     sprintf(GXGlobal_cfg, "%s/config/GXGlobal.cfg", bootDevice);
     FILE *fp = fopen(GXGlobal_cfg, "r");
-    if (fp) {
+    if (fp)
+    {
         fclose(fp);
     }
 
@@ -381,7 +407,8 @@ main(int argc, char *argv[]) {
 
     /* Load Custom IOS */
     if ((Settings.cios == ios222 && IOS_GetVersion() != 222) ||
-            (Settings.cios == ios223 && IOS_GetVersion() != 223)) {
+        (Settings.cios == ios223 && IOS_GetVersion() != 223))
+    {
         printf("\n\tReloading IOS to config setting (%d)...", ios222 ? 222 : 223);
         SDCard_deInit();                          // unmount SD for reloading IOS
         USBDevice_deInit();                       // unmount USB for reloading IOS
@@ -390,7 +417,8 @@ main(int argc, char *argv[]) {
         printf("%d", ret);
         SDCard_Init();
         load_ehc_module();
-        if (ret < 0) {
+        if (ret < 0)
+        {
             SDCard_deInit();
             Settings.cios = ios249;
             ret = IOS_ReloadIOSsafe(249);
@@ -401,7 +429,8 @@ main(int argc, char *argv[]) {
         USBDevice_Init();                         // and mount USB:/
         WBFS_Init(WBFS_DEVICE_USB);
     } else if ((Settings.cios == ios249 && IOS_GetVersion() != 249) ||
-               (Settings.cios == ios250 && IOS_GetVersion() != 250)) {
+        (Settings.cios == ios250 && IOS_GetVersion() != 250))
+    {
 
         printf("\n\tReloading IOS to config setting (%d)...", ios249 ? 249 : 250);
         SDCard_deInit();                          // unmount SD for reloading IOS
@@ -409,7 +438,8 @@ main(int argc, char *argv[]) {
         USBStorage_Deinit();
         ret = IOS_ReloadIOSsafe(ios249 ? 249 : 250);
         printf("%d", ret);
-        if (ret < 0) {
+        if (ret < 0)
+        {
             Settings.cios = ios222;
             ret = IOS_ReloadIOSsafe(222);
             SDCard_Init();
@@ -423,7 +453,8 @@ main(int argc, char *argv[]) {
 
     //	Partition_GetList(&partitions);
 
-    if (ret < 0) {
+    if (ret < 0)
+    {
         printf("\nERROR: cIOS could not be loaded!");
         sleep(5);
         exit(0);
@@ -437,7 +468,8 @@ main(int argc, char *argv[]) {
 
     //if a ID was passed via args copy it and try to boot it after the partition is mounted
     //its not really a headless mode.  more like hairless.
-    if (argc > 1 && argv[1]) {
+    if (argc > 1 && argv[1])
+    {
         if (strlen(argv[1])==6)
             strncpy(headlessID, argv[1], sizeof(headlessID));
     }
@@ -445,7 +477,7 @@ main(int argc, char *argv[]) {
     //! Init the rest of the System
     Sys_Init();
     Wpad_Init();
-    if (!startupproblem)
+    if(!startupproblem)
         InitVideo();
     InitAudio();                                  // Initialize audio
 

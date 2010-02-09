@@ -44,7 +44,7 @@ typedef struct _gekko_fd {
     u64 pos;                                /* Current position within the partition (in bytes) */
     u64 len;                                /* Total length of partition (in bytes) */
     ino_t ino;                              /* Device identifier */
-    NTFS_CACHE *cache;                      /* Cache */
+    NTFS_CACHE *cache;                      /* Cache */    
     u32 cachePageCount;                     /* The number of pages in the cache */
     u32 cachePageSize;                      /* The number of sectors per cache page */
 } gekko_fd;

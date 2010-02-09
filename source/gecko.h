@@ -8,12 +8,12 @@ extern "C" {
 #endif
 
 #ifndef NO_DEBUG
-    //use this just like printf();
-    void gprintf(const char *str, ...);
-    bool InitGecko();
+	//use this just like printf();
+	void gprintf(const char *str, ...);
+	bool InitGecko();
 #else
-#define gprintf(...)
-#define InitGecko()      false
+	#define gprintf(...)
+	#define InitGecko()      false
 #endif /* NO_DEBUG */
 
 

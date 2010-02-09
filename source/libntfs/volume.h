@@ -78,27 +78,27 @@ typedef struct _ntfs_volume ntfs_volume;
  * Flags returned by the ntfs_check_if_mounted() function.
  */
 typedef enum {
-    NTFS_MF_MOUNTED		= 1,	/* Device is mounted. */
-    NTFS_MF_ISROOT		= 2,	/* Device is mounted as system root. */
-    NTFS_MF_READONLY	= 4,	/* Device is mounted read-only. */
+	NTFS_MF_MOUNTED		= 1,	/* Device is mounted. */
+	NTFS_MF_ISROOT		= 2,	/* Device is mounted as system root. */
+	NTFS_MF_READONLY	= 4,	/* Device is mounted read-only. */
 } ntfs_mount_flags;
 
 extern int ntfs_check_if_mounted(const char *file, unsigned long *mnt_flags);
 
 typedef enum {
-    NTFS_VOLUME_OK			= 0,
-    NTFS_VOLUME_SYNTAX_ERROR	= 11,
-    NTFS_VOLUME_NOT_NTFS		= 12,
-    NTFS_VOLUME_CORRUPT		= 13,
-    NTFS_VOLUME_HIBERNATED		= 14,
-    NTFS_VOLUME_UNCLEAN_UNMOUNT	= 15,
-    NTFS_VOLUME_LOCKED		= 16,
-    NTFS_VOLUME_RAID		= 17,
-    NTFS_VOLUME_UNKNOWN_REASON	= 18,
-    NTFS_VOLUME_NO_PRIVILEGE	= 19,
-    NTFS_VOLUME_OUT_OF_MEMORY	= 20,
-    NTFS_VOLUME_FUSE_ERROR		= 21,
-    NTFS_VOLUME_INSECURE		= 22
+	NTFS_VOLUME_OK			= 0,
+	NTFS_VOLUME_SYNTAX_ERROR	= 11,
+	NTFS_VOLUME_NOT_NTFS		= 12,
+	NTFS_VOLUME_CORRUPT		= 13,
+	NTFS_VOLUME_HIBERNATED		= 14,
+	NTFS_VOLUME_UNCLEAN_UNMOUNT	= 15,
+	NTFS_VOLUME_LOCKED		= 16,
+	NTFS_VOLUME_RAID		= 17,
+	NTFS_VOLUME_UNKNOWN_REASON	= 18,
+	NTFS_VOLUME_NO_PRIVILEGE	= 19,
+	NTFS_VOLUME_OUT_OF_MEMORY	= 20,
+	NTFS_VOLUME_FUSE_ERROR		= 21,
+	NTFS_VOLUME_INSECURE		= 22
 } ntfs_volume_status;
 
 /**
@@ -107,9 +107,9 @@ typedef enum {
  * Defined bits for the state field in the ntfs_volume structure.
  */
 typedef enum {
-    NV_ReadOnly,		/* 1: Volume is read-only. */
-    NV_CaseSensitive,	/* 1: Volume is mounted case-sensitive. */
-    NV_LogFileEmpty,	/* 1: $logFile journal is empty. */
+	NV_ReadOnly,		/* 1: Volume is read-only. */
+	NV_CaseSensitive,	/* 1: Volume is mounted case-sensitive. */
+	NV_LogFileEmpty,	/* 1: $logFile journal is empty. */
 } ntfs_volume_state_bits;
 
 #define  test_nvol_flag(nv, flag)	 test_bit(NV_##flag, (nv)->state)
@@ -147,99 +147,99 @@ typedef enum {
  * struct _ntfs_volume - structure describing an open volume in memory.
  */
 struct _ntfs_volume {
-    union {
-        struct ntfs_device *dev;	/* NTFS device associated with
+	union {
+		struct ntfs_device *dev;	/* NTFS device associated with
 						   the volume. */
-        void *sb;	/* For kernel porting compatibility. */
-    };
-    char *vol_name;		/* Name of the volume. */
-    unsigned long state;	/* NTFS specific flags describing this volume.
+		void *sb;	/* For kernel porting compatibility. */
+	};
+	char *vol_name;		/* Name of the volume. */
+	unsigned long state;	/* NTFS specific flags describing this volume.
 				   See ntfs_volume_state_bits above. */
 
-    ntfs_inode *vol_ni;	/* ntfs_inode structure for FILE_Volume. */
-    u8 major_ver;		/* Ntfs major version of volume. */
-    u8 minor_ver;		/* Ntfs minor version of volume. */
-    u16 flags;		/* Bit array of VOLUME_* flags. */
+	ntfs_inode *vol_ni;	/* ntfs_inode structure for FILE_Volume. */
+	u8 major_ver;		/* Ntfs major version of volume. */
+	u8 minor_ver;		/* Ntfs minor version of volume. */
+	u16 flags;		/* Bit array of VOLUME_* flags. */
 
-    u16 sector_size;	/* Byte size of a sector. */
-    u8 sector_size_bits;	/* Log(2) of the byte size of a sector. */
-    u32 cluster_size;	/* Byte size of a cluster. */
-    u32 mft_record_size;	/* Byte size of a mft record. */
-    u32 indx_record_size;	/* Byte size of a INDX record. */
-    u8 cluster_size_bits;	/* Log(2) of the byte size of a cluster. */
-    u8 mft_record_size_bits;/* Log(2) of the byte size of a mft record. */
-    u8 indx_record_size_bits;/* Log(2) of the byte size of a INDX record. */
+	u16 sector_size;	/* Byte size of a sector. */
+	u8 sector_size_bits;	/* Log(2) of the byte size of a sector. */
+	u32 cluster_size;	/* Byte size of a cluster. */
+	u32 mft_record_size;	/* Byte size of a mft record. */
+	u32 indx_record_size;	/* Byte size of a INDX record. */
+	u8 cluster_size_bits;	/* Log(2) of the byte size of a cluster. */
+	u8 mft_record_size_bits;/* Log(2) of the byte size of a mft record. */
+	u8 indx_record_size_bits;/* Log(2) of the byte size of a INDX record. */
 
-    /* Variables used by the cluster and mft allocators. */
-    u8 mft_zone_multiplier;	/* Initial mft zone multiplier. */
-    u8 full_zones;		/* cluster zones which are full */
-    s64 mft_data_pos;	/* Mft record number at which to allocate the
+	/* Variables used by the cluster and mft allocators. */
+	u8 mft_zone_multiplier;	/* Initial mft zone multiplier. */
+	u8 full_zones;		/* cluster zones which are full */
+	s64 mft_data_pos;	/* Mft record number at which to allocate the
 				   next mft record. */
-    LCN mft_zone_start;	/* First cluster of the mft zone. */
-    LCN mft_zone_end;	/* First cluster beyond the mft zone. */
-    LCN mft_zone_pos;	/* Current position in the mft zone. */
-    LCN data1_zone_pos;	/* Current position in the first data zone. */
-    LCN data2_zone_pos;	/* Current position in the second data zone. */
+	LCN mft_zone_start;	/* First cluster of the mft zone. */
+	LCN mft_zone_end;	/* First cluster beyond the mft zone. */
+	LCN mft_zone_pos;	/* Current position in the mft zone. */
+	LCN data1_zone_pos;	/* Current position in the first data zone. */
+	LCN data2_zone_pos;	/* Current position in the second data zone. */
 
-    s64 nr_clusters;	/* Volume size in clusters, hence also the
+	s64 nr_clusters;	/* Volume size in clusters, hence also the
 				   number of bits in lcn_bitmap. */
-    ntfs_inode *lcnbmp_ni;	/* ntfs_inode structure for FILE_Bitmap. */
-    ntfs_attr *lcnbmp_na;	/* ntfs_attr structure for the data attribute
+	ntfs_inode *lcnbmp_ni;	/* ntfs_inode structure for FILE_Bitmap. */
+	ntfs_attr *lcnbmp_na;	/* ntfs_attr structure for the data attribute
 				   of FILE_Bitmap. Each bit represents a
 				   cluster on the volume, bit 0 representing
 				   lcn 0 and so on. A set bit means that the
 				   cluster and vice versa. */
 
-    LCN mft_lcn;		/* Logical cluster number of the data attribute
+	LCN mft_lcn;		/* Logical cluster number of the data attribute
 				   for FILE_MFT. */
-    ntfs_inode *mft_ni;	/* ntfs_inode structure for FILE_MFT. */
-    ntfs_attr *mft_na;	/* ntfs_attr structure for the data attribute
+	ntfs_inode *mft_ni;	/* ntfs_inode structure for FILE_MFT. */
+	ntfs_attr *mft_na;	/* ntfs_attr structure for the data attribute
 				   of FILE_MFT. */
-    ntfs_attr *mftbmp_na;	/* ntfs_attr structure for the bitmap attribute
+	ntfs_attr *mftbmp_na;	/* ntfs_attr structure for the bitmap attribute
 				   of FILE_MFT. Each bit represents an mft
 				   record in the $DATA attribute, bit 0
 				   representing mft record 0 and so on. A set
 				   bit means that the mft record is in use and
 				   vice versa. */
 
-    ntfs_inode *secure_ni;	/* ntfs_inode structure for FILE $Secure */
-    ntfs_index_context *secure_xsii; /* index for using $Secure:$SII */
-    ntfs_index_context *secure_xsdh; /* index for using $Secure:$SDH */
-    int secure_reentry;  /* check for non-rentries */
-    unsigned int secure_flags;  /* flags, see security.h for values */
+	ntfs_inode *secure_ni;	/* ntfs_inode structure for FILE $Secure */
+	ntfs_index_context *secure_xsii; /* index for using $Secure:$SII */
+	ntfs_index_context *secure_xsdh; /* index for using $Secure:$SDH */
+	int secure_reentry;  /* check for non-rentries */
+	unsigned int secure_flags;  /* flags, see security.h for values */
 
-    int mftmirr_size;	/* Size of the FILE_MFTMirr in mft records. */
-    LCN mftmirr_lcn;	/* Logical cluster number of the data attribute
+	int mftmirr_size;	/* Size of the FILE_MFTMirr in mft records. */
+	LCN mftmirr_lcn;	/* Logical cluster number of the data attribute
 				   for FILE_MFTMirr. */
-    ntfs_inode *mftmirr_ni;	/* ntfs_inode structure for FILE_MFTMirr. */
-    ntfs_attr *mftmirr_na;	/* ntfs_attr structure for the data attribute
+	ntfs_inode *mftmirr_ni;	/* ntfs_inode structure for FILE_MFTMirr. */
+	ntfs_attr *mftmirr_na;	/* ntfs_attr structure for the data attribute
 				   of FILE_MFTMirr. */
 
-    ntfschar *upcase;	/* Upper case equivalents of all 65536 2-byte
+	ntfschar *upcase;	/* Upper case equivalents of all 65536 2-byte
 				   Unicode characters. Obtained from
 				   FILE_UpCase. */
-    u32 upcase_len;		/* Length in Unicode characters of the upcase
+	u32 upcase_len;		/* Length in Unicode characters of the upcase
 				   table. */
 
-    ATTR_DEF *attrdef;	/* Attribute definitions. Obtained from
+	ATTR_DEF *attrdef;	/* Attribute definitions. Obtained from
 				   FILE_AttrDef. */
-    s32 attrdef_len;	/* Size of the attribute definition table in
+	s32 attrdef_len;	/* Size of the attribute definition table in
 				   bytes. */
 
-    s64 free_clusters; 	/* Track the number of free clusters which
+	s64 free_clusters; 	/* Track the number of free clusters which
 				   greatly improves statfs() performance */
-    s64 free_mft_records; 	/* Same for free mft records (see above) */
-    BOOL efs_raw;		/* volume is mounted for raw access to
+	s64 free_mft_records; 	/* Same for free mft records (see above) */
+	BOOL efs_raw;		/* volume is mounted for raw access to
 				   efs-encrypted files */
 
 #if CACHE_INODE_SIZE
-    struct CACHE_HEADER *xinode_cache;
+	struct CACHE_HEADER *xinode_cache;
 #endif
 #if CACHE_SECURID_SIZE
-    struct CACHE_HEADER *securid_cache;
+	struct CACHE_HEADER *securid_cache;
 #endif
 #if CACHE_LEGACY_SIZE
-    struct CACHE_HEADER *legacy_cache;
+	struct CACHE_HEADER *legacy_cache;
 #endif
 
 };
@@ -249,10 +249,10 @@ extern const char *ntfs_home;
 extern ntfs_volume *ntfs_volume_alloc(void);
 
 extern ntfs_volume *ntfs_volume_startup(struct ntfs_device *dev,
-                                            unsigned long flags);
+		unsigned long flags);
 
 extern ntfs_volume *ntfs_device_mount(struct ntfs_device *dev,
-                                          unsigned long flags);
+		unsigned long flags);
 
 extern ntfs_volume *ntfs_mount(const char *name, unsigned long flags);
 extern int ntfs_umount(ntfs_volume *vol, const BOOL force);

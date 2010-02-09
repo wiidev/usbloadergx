@@ -125,14 +125,17 @@ s32 network_request(const char * request, char * filename) {
     if (!strstr(buf, "HTTP/1.1 200 OK"))
         return -1;
 
-    if (filename) {
+    if(filename)
+    {
         /* Get filename */
         ptr = strstr(buf, "filename=\"");
 
-        if (ptr) {
+        if(ptr)
+        {
             ptr += sizeof("filename=\"")-1;
 
-            for (cnt = 0; ptr[cnt] != '\r' && ptr[cnt] != '\n' && ptr[cnt] != '"'; cnt++) {
+            for(cnt = 0; ptr[cnt] != '\r' && ptr[cnt] != '\n' && ptr[cnt] != '"'; cnt++)
+            {
                 filename[cnt] = ptr[cnt];
                 filename[cnt+1] = '\0';
             }
@@ -269,14 +272,14 @@ int NetworkWait() {
         unsigned char haxx[9];
         //skip haxx
         net_read(connection, &haxx, 8);
-        wiiloadVersion[0] = haxx[4];
-        wiiloadVersion[1] = haxx[5];
+		wiiloadVersion[0] = haxx[4];
+		wiiloadVersion[1] = haxx[5];
 
         net_read(connection, &infilesize, 4);
 
-        if (haxx[4] > 0 || haxx[5] > 4) {
-            net_read(connection, &uncfilesize, 4); // Compressed protocol, read another 4 bytes
-        }
+		if (haxx[4] > 0 || haxx[5] > 4) {
+			net_read(connection, &uncfilesize, 4); // Compressed protocol, read another 4 bytes
+		}
         waitforanswer = true;
         checkincomming = false;
         networkHalt = true;
@@ -295,25 +298,25 @@ int CheckUpdate() {
     int revnumber = 0;
     int currentrev = atoi(GetRev());
 
-    if (Settings.beta_upgrades) {
-        revnumber = CheckForBetaUpdate();
-    } else {
+	if (Settings.beta_upgrades) {
+		revnumber = CheckForBetaUpdate();
+	} else {
 #ifdef FULLCHANNEL
-        struct block file = downloadfile("http://www.techjawa.com/usbloadergx/wadrev.txt");
+		struct block file = downloadfile("http://www.techjawa.com/usbloadergx/wadrev.txt");
 #else
-        struct block file = downloadfile("http://www.techjawa.com/usbloadergx/rev.txt");
+		struct block file = downloadfile("http://www.techjawa.com/usbloadergx/rev.txt");
 #endif
-        char revtxt[10];
+		char revtxt[10];
 
-        u8  i;
-        if (file.data != NULL) {
-            for (i=0; i<9 || i < file.size; i++)
-                revtxt[i] = file.data[i];
-            revtxt[i] = 0;
-            revnumber = atoi(revtxt);
-            free(file.data);
-        }
-    }
+		u8  i;
+		if (file.data != NULL) {
+			for (i=0; i<9 || i < file.size; i++)
+				revtxt[i] = file.data[i];
+			revtxt[i] = 0;
+			revnumber = atoi(revtxt);
+			free(file.data);
+		}
+	}
 
     if (revnumber > currentrev)
         return revnumber;

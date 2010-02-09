@@ -38,9 +38,9 @@ bool MenuOGG() {
     bool returnhere = false;
 
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if (!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    //	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	// because destroy GuiSound must wait while sound playing is finished, we use a global sound
+	if(!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	//	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
     char imgPath[100];
 
@@ -193,8 +193,8 @@ bool MenuOGG() {
                 if (strcmp("", Settings.oggload_path) && strcmp("notset", Settings.ogg_path)) {
                     bgMusic->Load(Settings.ogg_path);
                 } else {
-                    bgMusic->Load(bg_music_ogg, bg_music_ogg_size, true);
-                }
+					bgMusic->Load(bg_music_ogg, bg_music_ogg_size, true);
+				}
                 bgMusic->Play();
             }
             backBtn.ResetState();
@@ -205,14 +205,14 @@ bool MenuOGG() {
             choice = WindowPrompt(tr("Loading standard music."),0,tr("OK"), tr("Cancel"));
             if (choice == 1) {
                 sprintf(Settings.ogg_path, "notset");
-                bgMusic->Load(bg_music_ogg, bg_music_ogg_size, true);
+				bgMusic->Load(bg_music_ogg, bg_music_ogg_size, true);
                 bgMusic->Play();
                 bgMusic->SetVolume(Settings.volume);
                 cfg_save_global();
             }
             defaultBtn.ResetState();
-            if (countoggs > 0)
-                optionBrowser4.SetFocus(1);
+			if (countoggs > 0)
+				optionBrowser4.SetFocus(1);
         }
 
         if (pathBtn.GetState() == STATE_CLICKED) {
@@ -321,9 +321,9 @@ int MenuLanguageSelect() {
     int returnhere = 0;
 
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if (!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    //	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	// because destroy GuiSound must wait while sound playing is finished, we use a global sound
+	if(!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	//	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
     char imgPath[100];
 
@@ -470,13 +470,13 @@ int MenuLanguageSelect() {
                 sprintf(Settings.language_path, "notset");
                 cfg_save_global();
                 gettextCleanUp();
-                HaltGui();
+				HaltGui();
                 CFG_Load();
-                ResumeGui();
+				ResumeGui();
                 returnhere = 2;
             }
             defaultBtn.ResetState();
-            //optionBrowser4.SetFocus(1); // commented out to prevent crash
+			//optionBrowser4.SetFocus(1); // commented out to prevent crash
         }
 
         else if (updateBtn.GetState() == STATE_CLICKED) {
@@ -526,8 +526,8 @@ int MenuLanguageSelect() {
                     break;
                 }
             }
-            updateBtn.ResetState();
-            //optionBrowser4.SetFocus(1); // commented out to prevent crash
+			updateBtn.ResetState();
+			//optionBrowser4.SetFocus(1); // commented out to prevent crash
         }
 
         else if (pathBtn.GetState() == STATE_CLICKED) {
@@ -575,9 +575,9 @@ int MenuLanguageSelect() {
                         WindowPrompt(tr("File not found."),tr("Loading standard language."),tr("OK"));
                     }
                     gettextCleanUp();
-                    HaltGui();
-                    CFG_Load();
-                    ResumeGui();
+					HaltGui();
+					CFG_Load();
+					ResumeGui();
                     returnhere = 2;
                     break;
                 } else {

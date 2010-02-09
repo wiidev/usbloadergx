@@ -198,130 +198,130 @@ void CFG_Default(int widescreen) { // -1 = non forced Mode
         snprintf(Settings.homebrewapps_path, sizeof(Settings.homebrewapps_path), "%s/apps/", bootDevice);
         snprintf(Settings.Cheatcodespath, sizeof(Settings.Cheatcodespath), "%s/codes/", bootDevice);
         snprintf(Settings.TxtCheatcodespath, sizeof(Settings.TxtCheatcodespath), "%s/txtcodes/", bootDevice);
-        snprintf(Settings.BcaCodepath, sizeof(Settings.BcaCodepath), "%s/bca/", bootDevice);
-        snprintf(Settings.WipCodepath, sizeof(Settings.WipCodepath), "%s/wip/", bootDevice);
+		snprintf(Settings.BcaCodepath, sizeof(Settings.BcaCodepath), "%s/bca/", bootDevice);
+		snprintf(Settings.WipCodepath, sizeof(Settings.WipCodepath), "%s/wip/", bootDevice);
         snprintf(Settings.dolpath, sizeof(Settings.dolpath), "%s/", bootDevice);
         snprintf(Settings.oggload_path, sizeof(Settings.oggload_path), "%s/config/backgroundmusic/", bootDevice);
         sprintf(Settings.ogg_path, "notset");
-    }
-    //always set Theme defaults
-    //all alignments are left top here
-    THEME.gamelist_x = 200;
-    THEME.gamelist_y = 49;//40;
-    THEME.gamelist_w = 396;
-    THEME.gamelist_h = 280;
-    THEME.gamegrid_w = 640;
-    THEME.gamegrid_h = 400;
-    THEME.gamegrid_x = 0;
-    THEME.gamegrid_y = 20;
-    THEME.gamecarousel_w = 640;
-    THEME.gamecarousel_h = 400;
-    THEME.gamecarousel_x = 0;
-    THEME.gamecarousel_y = -20;
+	}
+	//always set Theme defaults
+	//all alignments are left top here
+	THEME.gamelist_x = 200;
+	THEME.gamelist_y = 49;//40;
+	THEME.gamelist_w = 396;
+	THEME.gamelist_h = 280;
+	THEME.gamegrid_w = 640;
+	THEME.gamegrid_h = 400;
+	THEME.gamegrid_x = 0;
+	THEME.gamegrid_y = 20;
+	THEME.gamecarousel_w = 640;
+	THEME.gamecarousel_h = 400;
+	THEME.gamecarousel_x = 0;
+	THEME.gamecarousel_y = -20;
 
-    THEME.covers_x = 26;
-    THEME.covers_y = 58;
+	THEME.covers_x = 26;
+	THEME.covers_y = 58;
 
-    THEME.show_id = 1;
-    THEME.id_x = 68;
-    THEME.id_y = 305;
-    THEME.show_region = 1;
-    THEME.region_x = 68;
-    THEME.region_y = 30;
+	THEME.show_id = 1;
+	THEME.id_x = 68;
+	THEME.id_y = 305;
+	THEME.show_region = 1;
+	THEME.region_x = 68;
+	THEME.region_y = 30;
 
-    THEME.sdcard_x = 160;
-    THEME.sdcard_y = 395;
-    THEME.homebrew_x = 410;
-    THEME.homebrew_y = 405;
-    THEME.power_x = 576;
-    THEME.power_y = 355;
-    THEME.home_x = 489;//215;
-    THEME.home_y = 371;
-    THEME.setting_x = 64;//-210
-    THEME.setting_y = 371;
-    THEME.install_x = 16;//-280
-    THEME.install_y = 355;
+	THEME.sdcard_x = 160;
+	THEME.sdcard_y = 395;
+	THEME.homebrew_x = 410;
+	THEME.homebrew_y = 405;
+	THEME.power_x = 576;
+	THEME.power_y = 355;
+	THEME.home_x = 489;//215;
+	THEME.home_y = 371;
+	THEME.setting_x = 64;//-210
+	THEME.setting_y = 371;
+	THEME.install_x = 16;//-280
+	THEME.install_y = 355;
 
-    THEME.clock = (GXColor) {138, 138, 138, 240};
-    THEME.clock_align = CFG_ALIGN_CENTRE;
-    THEME.clock_x = 0;
-    THEME.clock_y = 335;//330;
+	THEME.clock = (GXColor) {138, 138, 138, 240};
+	THEME.clock_align = CFG_ALIGN_CENTRE;
+	THEME.clock_x = 0;
+	THEME.clock_y = 335;//330;
 
-    THEME.info = (GXColor) { 55, 190, 237, 255};
-    THEME.show_hddinfo = 1; //default
-    THEME.hddinfo_align = CFG_ALIGN_CENTRE;
-    THEME.hddinfo_x = 0;
-    THEME.hddinfo_y = 400;
-    THEME.show_gamecount = 1; //default
-    THEME.gamecount_align = CFG_ALIGN_CENTRE;
-    THEME.gamecount_x = 0;
-    THEME.gamecount_y = 420;
+	THEME.info = (GXColor) {55, 190, 237, 255};
+	THEME.show_hddinfo = 1; //default
+	THEME.hddinfo_align = CFG_ALIGN_CENTRE;
+	THEME.hddinfo_x = 0;
+	THEME.hddinfo_y = 400;
+	THEME.show_gamecount = 1; //default
+	THEME.gamecount_align = CFG_ALIGN_CENTRE;
+	THEME.gamecount_x = 0;
+	THEME.gamecount_y = 420;
 
-    THEME.show_tooltip = 1; //1 means use settings, 0 means force turn off
-    THEME.tooltipAlpha = 255;
+	THEME.show_tooltip = 1; //1 means use settings, 0 means force turn off
+	THEME.tooltipAlpha = 255;
 
-    THEME.prompttext = (GXColor) {0, 0, 0, 255};
-    THEME.settingstext = (GXColor) {0, 0, 0, 255};
-    THEME.gametext = (GXColor) {0, 0, 0, 255};
+	THEME.prompttext = (GXColor) {0, 0, 0, 255};
+	THEME.settingstext = (GXColor) {0, 0, 0, 255};
+	THEME.gametext = (GXColor) {0, 0, 0, 255};
 
-    THEME.pagesize = 9;
+	THEME.pagesize = 9;
 
-    THEME.gamelist_favorite_x = CFG.widescreen ? 256 : 220;
-    THEME.gamelist_favorite_y = 13;
-    THEME.gamelist_search_x = CFG.widescreen ? 288 : 260;
-    THEME.gamelist_search_y = 13;
-    THEME.gamelist_abc_x = CFG.widescreen ? 320 : 300;
-    THEME.gamelist_abc_y = 13;
-    THEME.gamelist_count_x = CFG.widescreen ? 352 : 340;
-    THEME.gamelist_count_y = 13;
-    THEME.gamelist_list_x = CFG.widescreen ? 384 : 380;
-    THEME.gamelist_list_y = 13;
-    THEME.gamelist_grid_x = CFG.widescreen ? 416 : 420;
-    THEME.gamelist_grid_y = 13;
-    THEME.gamelist_carousel_x = CFG.widescreen ? 448 : 460;
-    THEME.gamelist_carousel_y = 13;
-    THEME.gamelist_lock_x = CFG.widescreen ? 480 : 500;
-    THEME.gamelist_lock_y = 13;
-    THEME.gamelist_dvd_x = CFG.widescreen ? 512 : 540;
-    THEME.gamelist_dvd_y = 13;
+	THEME.gamelist_favorite_x = CFG.widescreen ? 256 : 220;
+	THEME.gamelist_favorite_y = 13;
+	THEME.gamelist_search_x = CFG.widescreen ? 288 : 260;
+	THEME.gamelist_search_y = 13;
+	THEME.gamelist_abc_x = CFG.widescreen ? 320 : 300;
+	THEME.gamelist_abc_y = 13;
+	THEME.gamelist_count_x = CFG.widescreen ? 352 : 340;
+	THEME.gamelist_count_y = 13;
+	THEME.gamelist_list_x = CFG.widescreen ? 384 : 380;
+	THEME.gamelist_list_y = 13;
+	THEME.gamelist_grid_x = CFG.widescreen ? 416 : 420;
+	THEME.gamelist_grid_y = 13;
+	THEME.gamelist_carousel_x = CFG.widescreen ? 448 : 460;
+	THEME.gamelist_carousel_y = 13;
+	THEME.gamelist_lock_x = CFG.widescreen ? 480 : 500;
+	THEME.gamelist_lock_y = 13;
+	THEME.gamelist_dvd_x = CFG.widescreen ? 512 : 540;
+	THEME.gamelist_dvd_y = 13;
 
-    THEME.gamegrid_favorite_x = CFG.widescreen ? 192 : 160;
-    THEME.gamegrid_favorite_y = 13;
-    THEME.gamegrid_search_x = CFG.widescreen ? 224 : 200;
-    THEME.gamegrid_search_y = 13;
-    THEME.gamegrid_abc_x = CFG.widescreen ? 256 : 240;
-    THEME.gamegrid_abc_y = 13;
-    THEME.gamegrid_count_x = CFG.widescreen ? 288 : 280;
-    THEME.gamegrid_count_y = 13;
-    THEME.gamegrid_list_x = CFG.widescreen ? 320 : 320;
-    THEME.gamegrid_list_y = 13;
-    THEME.gamegrid_grid_x = CFG.widescreen ? 352 : 360;
-    THEME.gamegrid_grid_y = 13;
-    THEME.gamegrid_carousel_x = CFG.widescreen ? 384 : 400;
-    THEME.gamegrid_carousel_y = 13;
-    THEME.gamegrid_lock_x = CFG.widescreen ? 416 : 440;
-    THEME.gamegrid_lock_y = 13;
-    THEME.gamegrid_dvd_x = CFG.widescreen ? 448 : 480;
-    THEME.gamegrid_dvd_y = 13;
+	THEME.gamegrid_favorite_x = CFG.widescreen ? 192 : 160;
+	THEME.gamegrid_favorite_y = 13;
+	THEME.gamegrid_search_x = CFG.widescreen ? 224 : 200;
+	THEME.gamegrid_search_y = 13;
+	THEME.gamegrid_abc_x = CFG.widescreen ? 256 : 240;
+	THEME.gamegrid_abc_y = 13;
+	THEME.gamegrid_count_x = CFG.widescreen ? 288 : 280;
+	THEME.gamegrid_count_y = 13;
+	THEME.gamegrid_list_x = CFG.widescreen ? 320 : 320;
+	THEME.gamegrid_list_y = 13;
+	THEME.gamegrid_grid_x = CFG.widescreen ? 352 : 360;
+	THEME.gamegrid_grid_y = 13;
+	THEME.gamegrid_carousel_x = CFG.widescreen ? 384 : 400;
+	THEME.gamegrid_carousel_y = 13;
+	THEME.gamegrid_lock_x = CFG.widescreen ? 416 : 440;
+	THEME.gamegrid_lock_y = 13;
+	THEME.gamegrid_dvd_x = CFG.widescreen ? 448 : 480;
+	THEME.gamegrid_dvd_y = 13;
 
-    THEME.gamecarousel_favorite_x = CFG.widescreen ? 192 : 160;
-    THEME.gamecarousel_favorite_y = 13;
-    THEME.gamecarousel_search_x = CFG.widescreen ? 224 : 200;
-    THEME.gamecarousel_search_y = 13;
-    THEME.gamecarousel_abc_x = CFG.widescreen ? 256 : 240;
-    THEME.gamecarousel_abc_y = 13;
-    THEME.gamecarousel_count_x = CFG.widescreen ? 288 : 280;
-    THEME.gamecarousel_count_y = 13;
-    THEME.gamecarousel_list_x = CFG.widescreen ? 320 : 320;
-    THEME.gamecarousel_list_y = 13;
-    THEME.gamecarousel_grid_x = CFG.widescreen ? 352 : 360;
-    THEME.gamecarousel_grid_y = 13;
-    THEME.gamecarousel_carousel_x = CFG.widescreen ? 384 : 400;
-    THEME.gamecarousel_carousel_y = 13;
-    THEME.gamecarousel_lock_x = CFG.widescreen ? 416 : 440;
-    THEME.gamecarousel_lock_y = 13;
-    THEME.gamecarousel_dvd_x = CFG.widescreen ? 448 : 480;
-    THEME.gamecarousel_dvd_y = 13;
+	THEME.gamecarousel_favorite_x = CFG.widescreen ? 192 : 160;
+	THEME.gamecarousel_favorite_y = 13;
+	THEME.gamecarousel_search_x = CFG.widescreen ? 224 : 200;
+	THEME.gamecarousel_search_y = 13;
+	THEME.gamecarousel_abc_x = CFG.widescreen ? 256 : 240;
+	THEME.gamecarousel_abc_y = 13;
+	THEME.gamecarousel_count_x = CFG.widescreen ? 288 : 280;
+	THEME.gamecarousel_count_y = 13;
+	THEME.gamecarousel_list_x = CFG.widescreen ? 320 : 320;
+	THEME.gamecarousel_list_y = 13;
+	THEME.gamecarousel_grid_x = CFG.widescreen ? 352 : 360;
+	THEME.gamecarousel_grid_y = 13;
+	THEME.gamecarousel_carousel_x = CFG.widescreen ? 384 : 400;
+	THEME.gamecarousel_carousel_y = 13;
+	THEME.gamecarousel_lock_x = CFG.widescreen ? 416 : 440;
+	THEME.gamecarousel_lock_y = 13;
+	THEME.gamecarousel_dvd_x = CFG.widescreen ? 448 : 480;
+	THEME.gamecarousel_dvd_y = 13;
 }
 
 void Global_Default(void) {
@@ -358,37 +358,39 @@ void Global_Default(void) {
     snprintf(Settings.db_language, sizeof(Settings.db_language), empty);
     Settings.db_JPtoEN = 0;
     Settings.screensaver = 3;
-    Settings.partition = -1;
-    Settings.marknewtitles = 1;
-    Settings.FatInstallToDir = 0;
-    Settings.partitions_to_install = install_game_only;
-    Settings.fullcopy = 0;
-    Settings.beta_upgrades = 0;
+	Settings.partition = -1;
+	Settings.marknewtitles = 1;
+	Settings.FatInstallToDir = 0;
+	Settings.partitions_to_install = install_game_only;
+	Settings.fullcopy = 0;
+	Settings.beta_upgrades = 0;
 
-    memset(&Settings.parental, 0, sizeof(struct SParental));
+	memset(&Settings.parental, 0, sizeof(struct SParental));
 
-    char buf[0x4a];
-    CONF_Init();
-    s32 res = CONF_Get("IPL.PC", buf, 0x4A);
-    if (res > 0) {
-        if (buf[2] != 0x14) {
-            Settings.parental.enabled = 1;
-            Settings.parental.rating = buf[2];
-        }
-        Settings.parental.question = buf[7];
-        memcpy(Settings.parental.pin, buf + 3, 4);
-        memcpy(Settings.parental.answer, buf + 8, 32);
-    }
-    Settings.godmode = (Settings.parental.enabled == 0) ? 1 : 0;
+	char buf[0x4a];
+	CONF_Init();
+	s32 res = CONF_Get("IPL.PC", buf, 0x4A);
+	if (res > 0) {
+		if (buf[2] != 0x14) {
+			Settings.parental.enabled = 1;
+			Settings.parental.rating = buf[2];
+		}
+		Settings.parental.question = buf[7];
+		memcpy(Settings.parental.pin, buf + 3, 4);
+		memcpy(Settings.parental.answer, buf + 8, 32);
+	}
+	Settings.godmode = (Settings.parental.enabled == 0) ? 1 : 0;
 }
 
 
-char *cfg_get_title(u8 *id) {
-    if (!id)
+char *cfg_get_title(u8 *id)
+{
+    if(!id)
         return NULL;
 
     int i;
-    for (i=0; i<num_title; i++) {
+    for (i=0; i<num_title; i++)
+    {
         if (strncmp((char*) id, cfg_title[i].id, 6) == 0) {
             return cfg_title[i].title;
         }
@@ -396,8 +398,9 @@ char *cfg_get_title(u8 *id) {
     return NULL;
 }
 
-char *get_title(struct discHdr *header) {
-    if (!header)
+char *get_title(struct discHdr *header)
+{
+    if(!header)
         return NULL;
 
     char *title = cfg_get_title(header->id);
@@ -405,12 +408,13 @@ char *get_title(struct discHdr *header) {
     return header->title;
 }
 
-void title_set(char *id, char *title) {
-    if (!id || !title)
+void title_set(char *id, char *title)
+{
+    if(!id || !title)
         return;
 
-    if (!cfg_title)
-        cfg_title = (struct ID_Title *) malloc(sizeof(struct ID_Title));
+	if(!cfg_title)
+		cfg_title = (struct ID_Title *) malloc(sizeof(struct ID_Title));
 
     char *idt = cfg_get_title((u8*)id);
     if (idt) {
@@ -436,8 +440,8 @@ void title_set(char *id, char *title) {
 }
 
 void titles_default() {
-    int i;
-    for (i=0; i<num_title; i++) {
+	int i;
+	for (i=0; i<num_title; i++) {
         memset(cfg_title[i].id, 0, 6);
         free(cfg_title[i].title);
         cfg_title[i].title = NULL;
@@ -459,18 +463,13 @@ u8 get_block(struct discHdr *header) {
 }
 
 s8 get_pegi_block(struct discHdr *header) {
-    switch (get_block(header)) {
-    case 1:
-        return 7;
-    case 2:
-        return 12;
-    case 3:
-        return 16;
-    case 4:
-        return 18;
-    default:
-        return -1;
-    }
+	switch(get_block(header)) {
+		case 1: return 7;
+		case 2: return 12;
+		case 3: return 16;
+		case 4: return 18;
+		default: return -1;
+	}
 }
 
 // trim leading and trailing whitespace
@@ -535,7 +534,7 @@ void path_set(char *name, char *val) {
         return;
     }
 
-    if (strcmp(name, "cover2d_path") == 0) {
+   if (strcmp(name, "cover2d_path") == 0) {
         strlcpy(Settings.covers2d_path, val, sizeof(Settings.covers2d_path));
         return;
     }
@@ -683,231 +682,242 @@ static short WorkAroundIconSet=0;
 static short WorkAroundBarOffset=100;
 
 void theme_set(char *name, char *val) {
-    cfg_name = name;
-    cfg_val = val;
-    int wcoords_idx = -1;
+	cfg_name = name;
+	cfg_val = val;
+	int wcoords_idx = -1;
 
-    CFG_COORDS4(gamelist)
-    else CFG_COORDS4(gamegrid)
-        else CFG_COORDS4(gamecarousel)
+	CFG_COORDS4(gamelist)
+	else CFG_COORDS4(gamegrid)
+	else CFG_COORDS4(gamecarousel)
 
-            else CFG_COORDS2(covers)
+	else CFG_COORDS2(covers)
 
-                else CFG_BOOL(show_id)
-                    else CFG_COORDS2(id)
+	else CFG_BOOL(show_id)
+	else CFG_COORDS2(id)
 
-                        else CFG_BOOL(show_region)
-                            else CFG_COORDS2(region)
+	else CFG_BOOL(show_region)
+	else CFG_COORDS2(region)
 
-                                else CFG_COORDS2(sdcard)
-                                    else CFG_COORDS2(homebrew)
-                                        else CFG_COORDS2(power)
-                                            else CFG_COORDS2(home)
-                                                else CFG_COORDS2(setting)
-                                                    else CFG_COORDS2(install)
+	else CFG_COORDS2(sdcard)
+	else CFG_COORDS2(homebrew)
+	else CFG_COORDS2(power)
+	else CFG_COORDS2(home)
+	else CFG_COORDS2(setting)
+	else CFG_COORDS2(install)
 
-                                                        else CFG_COORDS2(clock)
-                                                            else CFG_ALIGN(clock)
-                                                                else CFG_COLOR(clock)
+	else CFG_COORDS2(clock)
+	else CFG_ALIGN(clock)
+	else CFG_COLOR(clock)
 
-                                                                    else CFG_COLOR(info)
-                                                                        else CFG_BOOL(show_hddinfo)
-                                                                            else CFG_ALIGN(hddinfo)
-                                                                                else CFG_COORDS2(hddinfo)
+	else CFG_COLOR(info)
+	else CFG_BOOL(show_hddinfo)
+	else CFG_ALIGN(hddinfo)
+	else CFG_COORDS2(hddinfo)
 
-                                                                                    else CFG_BOOL(show_gamecount)
-                                                                                        else CFG_ALIGN(gamecount)
-                                                                                            else CFG_COORDS2(gamecount)
+	else CFG_BOOL(show_gamecount)
+	else CFG_ALIGN(gamecount)
+	else CFG_COORDS2(gamecount)
 
-                                                                                                else CFG_BOOL(show_tooltip)
-                                                                                                    else CFG_VAL(tooltipAlpha)
+	else CFG_BOOL(show_tooltip)
+	else CFG_VAL(tooltipAlpha)
 
-                                                                                                        else CFG_COLOR(prompttext)
-                                                                                                            else CFG_COLOR(settingstext)
-                                                                                                                else CFG_COLOR(gametext)
+	else CFG_COLOR(prompttext)
+	else CFG_COLOR(settingstext)
+	else CFG_COLOR(gametext)
 
-                                                                                                                    else CFG_VAL(pagesize)
+	else CFG_VAL(pagesize)
 
-                                                                                                                        else CFG_COORDS2(gamelist_favorite)
-                                                                                                                            else CFG_COORDS2(gamegrid_favorite)
-                                                                                                                                else CFG_COORDS2(gamecarousel_favorite)
+	else CFG_COORDS2(gamelist_favorite)
+	else CFG_COORDS2(gamegrid_favorite)
+	else CFG_COORDS2(gamecarousel_favorite)
 
-                                                                                                                                    else CFG_COORDS2(gamelist_search)
-                                                                                                                                        else CFG_COORDS2(gamegrid_search)
-                                                                                                                                            else CFG_COORDS2(gamecarousel_search)
+	else CFG_COORDS2(gamelist_search)
+	else CFG_COORDS2(gamegrid_search)
+	else CFG_COORDS2(gamecarousel_search)
 
-                                                                                                                                                else CFG_COORDS2(gamelist_abc)
-                                                                                                                                                    else CFG_COORDS2(gamegrid_abc)
-                                                                                                                                                        else CFG_COORDS2(gamecarousel_abc)
+	else CFG_COORDS2(gamelist_abc)
+	else CFG_COORDS2(gamegrid_abc)
+	else CFG_COORDS2(gamecarousel_abc)
 
-                                                                                                                                                            else CFG_COORDS2(gamelist_count)
-                                                                                                                                                                else CFG_COORDS2(gamegrid_count)
-                                                                                                                                                                    else CFG_COORDS2(gamecarousel_count)
+	else CFG_COORDS2(gamelist_count)
+	else CFG_COORDS2(gamegrid_count)
+	else CFG_COORDS2(gamecarousel_count)
 
-                                                                                                                                                                        else CFG_COORDS2(gamelist_list)
-                                                                                                                                                                            else CFG_COORDS2(gamegrid_list)
-                                                                                                                                                                                else CFG_COORDS2(gamecarousel_list)
+	else CFG_COORDS2(gamelist_list)
+	else CFG_COORDS2(gamegrid_list)
+	else CFG_COORDS2(gamecarousel_list)
 
-                                                                                                                                                                                    else CFG_COORDS2(gamelist_grid)
-                                                                                                                                                                                        else CFG_COORDS2(gamegrid_grid)
-                                                                                                                                                                                            else CFG_COORDS2(gamecarousel_grid)
+	else CFG_COORDS2(gamelist_grid)
+	else CFG_COORDS2(gamegrid_grid)
+	else CFG_COORDS2(gamecarousel_grid)
 
-                                                                                                                                                                                                else CFG_COORDS2(gamelist_carousel)
-                                                                                                                                                                                                    else CFG_COORDS2(gamegrid_carousel)
-                                                                                                                                                                                                        else CFG_COORDS2(gamecarousel_carousel)
+	else CFG_COORDS2(gamelist_carousel)
+	else CFG_COORDS2(gamegrid_carousel)
+	else CFG_COORDS2(gamecarousel_carousel)
 
-                                                                                                                                                                                                            else CFG_COORDS2(gamelist_lock)
-                                                                                                                                                                                                                else CFG_COORDS2(gamegrid_lock)
-                                                                                                                                                                                                                    else CFG_COORDS2(gamecarousel_lock)
+	else CFG_COORDS2(gamelist_lock)
+	else CFG_COORDS2(gamegrid_lock)
+	else CFG_COORDS2(gamecarousel_lock)
 
-                                                                                                                                                                                                                        else CFG_COORDS2(gamelist_dvd)
-                                                                                                                                                                                                                            else CFG_COORDS2(gamegrid_dvd)
-                                                                                                                                                                                                                                else CFG_COORDS2(gamecarousel_dvd)
+	else CFG_COORDS2(gamelist_dvd)
+	else CFG_COORDS2(gamegrid_dvd)
+	else CFG_COORDS2(gamecarousel_dvd)
 
-                                                                                                                                                                                                                                    //**********************************
-                                                                                                                                                                                                                                    // Workaround for old Themes
-                                                                                                                                                                                                                                    //**********************************
-                                                                                                                                                                                                                                    else if (strcmp(cfg_name, "favorite_coords") == 0) {
-                                                                                                                                                                                                                                        short x,y;
-                                                                                                                                                                                                                                        if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
-                                                                                                                                                                                                                                            // the old Icons are aligned at center and the new at the left top corner.
-                                                                                                                                                                                                                                            // we must add 320 and sub the half image width to get the correct position.
-                                                                                                                                                                                                                                            x += 300;
-                                                                                                                                                                                                                                            // the old stuff is optimized for widescreen.
-                                                                                                                                                                                                                                            // if no widescreen, we must reposition the pos
-                                                                                                                                                                                                                                            if (!CFG.widescreen) x-=20;
-                                                                                                                                                                                                                                            // old themes have no search_coords
-                                                                                                                                                                                                                                            // set the searchIcon to the Position of the favIcon
-                                                                                                                                                                                                                                            THEME.gamelist_search_x = x;
-                                                                                                                                                                                                                                            THEME.gamegrid_search_x = THEME.gamecarousel_search_x = x-WorkAroundBarOffset;
-                                                                                                                                                                                                                                            THEME.gamelist_search_y = THEME.gamegrid_search_y = THEME.gamecarousel_search_y = y;
-                                                                                                                                                                                                                                            // place the favIcon to the left side of the searchIcon
-                                                                                                                                                                                                                                            if (!CFG.widescreen) x-= CFG.widescreen ? 32 : 40;
-                                                                                                                                                                                                                                            THEME.gamelist_favorite_x = x;
-                                                                                                                                                                                                                                            THEME.gamegrid_favorite_x = THEME.gamecarousel_favorite_x = x-WorkAroundBarOffset;
-                                                                                                                                                                                                                                            THEME.gamelist_favorite_y = THEME.gamegrid_favorite_y = THEME.gamecarousel_favorite_y = y;
-                                                                                                                                                                                                                                            WorkAroundIconSet |= OLD_FAV_ICON;
-                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                    } else if (strcmp(cfg_name, "abc_coords") == 0) {
-                                                                                                                                                                                                                                        short x,y;
-                                                                                                                                                                                                                                        if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
-                                                                                                                                                                                                                                            // the old Icons are aligned at center and the new at the left top corner.
-                                                                                                                                                                                                                                            // we must add 320 and sub the half image width to get the correct position.
-                                                                                                                                                                                                                                            x += 300;
-                                                                                                                                                                                                                                            // the old stuff is optimized for widescreen.
-                                                                                                                                                                                                                                            // if no widescreen, we must reposition the pos
-                                                                                                                                                                                                                                            if (!CFG.widescreen) x-=12;
-                                                                                                                                                                                                                                            THEME.gamelist_abc_x = x;
-                                                                                                                                                                                                                                            THEME.gamegrid_abc_x = THEME.gamecarousel_abc_x = x-WorkAroundBarOffset;
-                                                                                                                                                                                                                                            THEME.gamelist_abc_y = THEME.gamegrid_abc_y = THEME.gamecarousel_abc_y = y;
-                                                                                                                                                                                                                                            WorkAroundIconSet |= OLD_ABC_ICON;
-                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                    } else if (strcmp(cfg_name, "count_coords") == 0) {
-                                                                                                                                                                                                                                        short x,y;
-                                                                                                                                                                                                                                        if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
-                                                                                                                                                                                                                                            // the old Icons are aligned at center and the new at the left top corner.
-                                                                                                                                                                                                                                            // we must add 320 and sub the half image width to get the correct position.
-                                                                                                                                                                                                                                            x += 300;
-                                                                                                                                                                                                                                            // the old stuff is optimized for widescreen.
-                                                                                                                                                                                                                                            // if no widescreen, we must reposition the pos
-                                                                                                                                                                                                                                            if (!CFG.widescreen) x-=4;
-                                                                                                                                                                                                                                            THEME.gamelist_count_x = x;
-                                                                                                                                                                                                                                            THEME.gamegrid_count_x = THEME.gamecarousel_count_x = x-WorkAroundBarOffset;
-                                                                                                                                                                                                                                            THEME.gamelist_count_y = THEME.gamegrid_count_y = THEME.gamecarousel_count_y = y;
-                                                                                                                                                                                                                                            WorkAroundIconSet |= OLD_COUNT_ICON;
-                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                    } else if (strcmp(cfg_name, "list_coords") == 0) {
-                                                                                                                                                                                                                                        short x,y;
-                                                                                                                                                                                                                                        if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
-                                                                                                                                                                                                                                            // the old Icons are aligned at center and the new at the left top corner.
-                                                                                                                                                                                                                                            // we must add 320 and sub the half image width to get the correct position.
-                                                                                                                                                                                                                                            x += 300;
-                                                                                                                                                                                                                                            // the old stuff is optimized for widescreen.
-                                                                                                                                                                                                                                            // if no widescreen, we must reposition the pos
-                                                                                                                                                                                                                                            if (!CFG.widescreen) x+=4;
-                                                                                                                                                                                                                                            THEME.gamelist_list_x = x;
-                                                                                                                                                                                                                                            THEME.gamegrid_list_x = THEME.gamecarousel_list_x = x-WorkAroundBarOffset;
-                                                                                                                                                                                                                                            THEME.gamelist_list_y = THEME.gamegrid_list_y = THEME.gamecarousel_list_y = y;
-                                                                                                                                                                                                                                            WorkAroundIconSet |= OLD_LIST_ICON;
-                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                    } else if (strcmp(cfg_name, "grid_coords") == 0) {
-                                                                                                                                                                                                                                        short x,y;
-                                                                                                                                                                                                                                        if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
-                                                                                                                                                                                                                                            // the old Icons are aligned at center and the new at the left top corner.
-                                                                                                                                                                                                                                            // we must add 320 and sub the half image width to get the correct position.
-                                                                                                                                                                                                                                            x += 300;
-                                                                                                                                                                                                                                            // the old stuff is optimized for widescreen.
-                                                                                                                                                                                                                                            // if no widescreen, we must reposition the pos
-                                                                                                                                                                                                                                            if (!CFG.widescreen) x+=12;
-                                                                                                                                                                                                                                            THEME.gamelist_grid_x = x;
-                                                                                                                                                                                                                                            THEME.gamegrid_grid_x = THEME.gamecarousel_grid_x = x-WorkAroundBarOffset;
-                                                                                                                                                                                                                                            THEME.gamelist_grid_y = THEME.gamegrid_grid_y = THEME.gamecarousel_grid_y = y;
-                                                                                                                                                                                                                                            WorkAroundIconSet |= OLD_GRID_ICON;
-                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                    } else if (strcmp(cfg_name, "carousel_coords") == 0) {
-                                                                                                                                                                                                                                        short x,y;
-                                                                                                                                                                                                                                        if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
-                                                                                                                                                                                                                                            // the old Icons are aligned at center and the new at the left top corner.
-                                                                                                                                                                                                                                            // we must add 320 and sub the half image width to get the correct position.
-                                                                                                                                                                                                                                            x += 300;
-                                                                                                                                                                                                                                            // the old stuff is optimized for widescreen.
-                                                                                                                                                                                                                                            // if no widescreen, we must reposition the pos
-                                                                                                                                                                                                                                            if (!CFG.widescreen) x+=20;
-                                                                                                                                                                                                                                            THEME.gamelist_carousel_x = x;
-                                                                                                                                                                                                                                            THEME.gamegrid_carousel_x = THEME.gamecarousel_carousel_x = x-WorkAroundBarOffset;
-                                                                                                                                                                                                                                            THEME.gamelist_carousel_y = THEME.gamegrid_carousel_y = THEME.gamecarousel_carousel_y = y;
-                                                                                                                                                                                                                                            WorkAroundIconSet |= OLD_CAROUSEL_ICON;
+	//**********************************
+	// Workaround for old Themes
+	//**********************************
+	else if (strcmp(cfg_name, "favorite_coords") == 0) {
+		short x,y;
+		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
+			// the old Icons are aligned at center and the new at the left top corner.
+			// we must add 320 and sub the half image width to get the correct position.
+			x += 300;
+			// the old stuff is optimized for widescreen.
+			// if no widescreen, we must reposition the pos
+			if(!CFG.widescreen) x-=20;
+			// old themes have no search_coords
+			// set the searchIcon to the Position of the favIcon
+			THEME.gamelist_search_x = x;
+			THEME.gamegrid_search_x = THEME.gamecarousel_search_x = x-WorkAroundBarOffset;
+			THEME.gamelist_search_y = THEME.gamegrid_search_y = THEME.gamecarousel_search_y = y;
+			// place the favIcon to the left side of the searchIcon
+			if(!CFG.widescreen) x-= CFG.widescreen ? 32 : 40;
+			THEME.gamelist_favorite_x = x;
+			THEME.gamegrid_favorite_x = THEME.gamecarousel_favorite_x = x-WorkAroundBarOffset;
+			THEME.gamelist_favorite_y = THEME.gamegrid_favorite_y = THEME.gamecarousel_favorite_y = y;
+			WorkAroundIconSet |= OLD_FAV_ICON;
+		}
+	}
+	else if (strcmp(cfg_name, "abc_coords") == 0) {
+		short x,y;
+		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
+			// the old Icons are aligned at center and the new at the left top corner.
+			// we must add 320 and sub the half image width to get the correct position.
+			x += 300;
+			// the old stuff is optimized for widescreen.
+			// if no widescreen, we must reposition the pos
+			if(!CFG.widescreen) x-=12;
+			THEME.gamelist_abc_x = x;
+			THEME.gamegrid_abc_x = THEME.gamecarousel_abc_x = x-WorkAroundBarOffset;
+			THEME.gamelist_abc_y = THEME.gamegrid_abc_y = THEME.gamecarousel_abc_y = y;
+			WorkAroundIconSet |= OLD_ABC_ICON;
+		}
+	}
+	else if (strcmp(cfg_name, "count_coords") == 0) {
+		short x,y;
+		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
+			// the old Icons are aligned at center and the new at the left top corner.
+			// we must add 320 and sub the half image width to get the correct position.
+			x += 300;
+			// the old stuff is optimized for widescreen.
+			// if no widescreen, we must reposition the pos
+			if(!CFG.widescreen) x-=4;
+			THEME.gamelist_count_x = x;
+			THEME.gamegrid_count_x = THEME.gamecarousel_count_x = x-WorkAroundBarOffset;
+			THEME.gamelist_count_y = THEME.gamegrid_count_y = THEME.gamecarousel_count_y = y;
+			WorkAroundIconSet |= OLD_COUNT_ICON;
+		}
+	}
+	else if (strcmp(cfg_name, "list_coords") == 0) {
+		short x,y;
+		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
+			// the old Icons are aligned at center and the new at the left top corner.
+			// we must add 320 and sub the half image width to get the correct position.
+			x += 300;
+			// the old stuff is optimized for widescreen.
+			// if no widescreen, we must reposition the pos
+			if(!CFG.widescreen) x+=4;
+			THEME.gamelist_list_x = x;
+			THEME.gamegrid_list_x = THEME.gamecarousel_list_x = x-WorkAroundBarOffset;
+			THEME.gamelist_list_y = THEME.gamegrid_list_y = THEME.gamecarousel_list_y = y;
+			WorkAroundIconSet |= OLD_LIST_ICON;
+		}
+	}
+	else if (strcmp(cfg_name, "grid_coords") == 0) {
+		short x,y;
+		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
+			// the old Icons are aligned at center and the new at the left top corner.
+			// we must add 320 and sub the half image width to get the correct position.
+			x += 300;
+			// the old stuff is optimized for widescreen.
+			// if no widescreen, we must reposition the pos
+			if(!CFG.widescreen) x+=12;
+			THEME.gamelist_grid_x = x;
+			THEME.gamegrid_grid_x = THEME.gamecarousel_grid_x = x-WorkAroundBarOffset;
+			THEME.gamelist_grid_y = THEME.gamegrid_grid_y = THEME.gamecarousel_grid_y = y;
+			WorkAroundIconSet |= OLD_GRID_ICON;
+		}
+	}
+	else if (strcmp(cfg_name, "carousel_coords") == 0) {
+		short x,y;
+		if (sscanf(val, "%hd,%hd", &x, &y) == 2) {
+			// the old Icons are aligned at center and the new at the left top corner.
+			// we must add 320 and sub the half image width to get the correct position.
+			x += 300;
+			// the old stuff is optimized for widescreen.
+			// if no widescreen, we must reposition the pos
+			if(!CFG.widescreen) x+=20;
+			THEME.gamelist_carousel_x = x;
+			THEME.gamegrid_carousel_x = THEME.gamecarousel_carousel_x = x-WorkAroundBarOffset;
+			THEME.gamelist_carousel_y = THEME.gamegrid_carousel_y = THEME.gamecarousel_carousel_y = y;
+			WorkAroundIconSet |= OLD_CAROUSEL_ICON;
 
-                                                                                                                                                                                                                                            // old themes have no dvd_coords
-                                                                                                                                                                                                                                            // place the dvdIcon to the right side of the carouselIcon
-                                                                                                                                                                                                                                            if (!CFG.widescreen) x+= CFG.widescreen ? 32 : 40;
-                                                                                                                                                                                                                                            THEME.gamelist_lock_x = x;
-                                                                                                                                                                                                                                            THEME.gamegrid_lock_x = THEME.gamecarousel_lock_x = x-WorkAroundBarOffset;
-                                                                                                                                                                                                                                            THEME.gamelist_lock_y = THEME.gamegrid_lock_y = THEME.gamecarousel_lock_y = y;
+			// old themes have no dvd_coords
+			// place the dvdIcon to the right side of the carouselIcon
+			if(!CFG.widescreen) x+= CFG.widescreen ? 32 : 40;
+			THEME.gamelist_lock_x = x;
+			THEME.gamegrid_lock_x = THEME.gamecarousel_lock_x = x-WorkAroundBarOffset;
+			THEME.gamelist_lock_y = THEME.gamegrid_lock_y = THEME.gamecarousel_lock_y = y;
 
-                                                                                                                                                                                                                                            x+= CFG.widescreen ? 32 : 40;
-                                                                                                                                                                                                                                            THEME.gamelist_dvd_x = x;
-                                                                                                                                                                                                                                            THEME.gamegrid_dvd_x = THEME.gamecarousel_dvd_x = x-WorkAroundBarOffset;
-                                                                                                                                                                                                                                            THEME.gamelist_dvd_y = THEME.gamegrid_dvd_y = THEME.gamecarousel_dvd_y = y;
-                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                    }
+			x+= CFG.widescreen ? 32 : 40;
+			THEME.gamelist_dvd_x = x;
+			THEME.gamegrid_dvd_x = THEME.gamecarousel_dvd_x = x-WorkAroundBarOffset;
+			THEME.gamelist_dvd_y = THEME.gamegrid_dvd_y = THEME.gamecarousel_dvd_y = y;
+		}
+	}
 
-                                                                                                                                                                                                                                    else if (strcmp(cfg_name, "sortBarOffset") == 0) {
-                                                                                                                                                                                                                                        short o;
-                                                                                                                                                                                                                                        if (sscanf(val, "%hd", &o) == 1) {
-                                                                                                                                                                                                                                            if (WorkAroundIconSet & OLD_FAV_ICON) {
-                                                                                                                                                                                                                                                THEME.gamegrid_favorite_x += WorkAroundBarOffset - o;
-                                                                                                                                                                                                                                                THEME.gamecarousel_favorite_x += WorkAroundBarOffset - o;
-                                                                                                                                                                                                                                                THEME.gamegrid_search_x += WorkAroundBarOffset - o;
-                                                                                                                                                                                                                                                THEME.gamecarousel_search_x += WorkAroundBarOffset - o;
-                                                                                                                                                                                                                                            }
-                                                                                                                                                                                                                                            if (WorkAroundIconSet & OLD_ABC_ICON) {
-                                                                                                                                                                                                                                                THEME.gamegrid_abc_x += WorkAroundBarOffset - o;
-                                                                                                                                                                                                                                                THEME.gamecarousel_abc_x += WorkAroundBarOffset - o;
-                                                                                                                                                                                                                                            }
-                                                                                                                                                                                                                                            if (WorkAroundIconSet & OLD_COUNT_ICON) {
-                                                                                                                                                                                                                                                THEME.gamegrid_count_x += WorkAroundBarOffset - o;
-                                                                                                                                                                                                                                                THEME.gamecarousel_count_x += WorkAroundBarOffset - o;
-                                                                                                                                                                                                                                            }
-                                                                                                                                                                                                                                            if (WorkAroundIconSet & OLD_LIST_ICON) {
-                                                                                                                                                                                                                                                THEME.gamegrid_list_x += WorkAroundBarOffset - o;
-                                                                                                                                                                                                                                                THEME.gamecarousel_list_x += WorkAroundBarOffset - o;
-                                                                                                                                                                                                                                            }
-                                                                                                                                                                                                                                            if (WorkAroundIconSet & OLD_GRID_ICON) {
-                                                                                                                                                                                                                                                THEME.gamegrid_grid_x += WorkAroundBarOffset - o;
-                                                                                                                                                                                                                                                THEME.gamecarousel_grid_x += WorkAroundBarOffset - o;
-                                                                                                                                                                                                                                            }
-                                                                                                                                                                                                                                            if (WorkAroundIconSet & OLD_CAROUSEL_ICON) {
-                                                                                                                                                                                                                                                THEME.gamegrid_carousel_x += WorkAroundBarOffset - o;
-                                                                                                                                                                                                                                                THEME.gamecarousel_carousel_x += WorkAroundBarOffset - o;
-                                                                                                                                                                                                                                                THEME.gamegrid_lock_x += WorkAroundBarOffset - o;
-                                                                                                                                                                                                                                                THEME.gamecarousel_lock_x += WorkAroundBarOffset - o;
-                                                                                                                                                                                                                                                THEME.gamegrid_dvd_x += WorkAroundBarOffset - o;
-                                                                                                                                                                                                                                                THEME.gamecarousel_dvd_x += WorkAroundBarOffset - o;
-                                                                                                                                                                                                                                            }
-                                                                                                                                                                                                                                            WorkAroundBarOffset = o;
-                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                    }
+	else if (strcmp(cfg_name, "sortBarOffset") == 0) {
+		short o;
+		if (sscanf(val, "%hd", &o) == 1) {
+			if(WorkAroundIconSet & OLD_FAV_ICON)
+			{
+				THEME.gamegrid_favorite_x += WorkAroundBarOffset - o;
+				THEME.gamecarousel_favorite_x += WorkAroundBarOffset - o;
+				THEME.gamegrid_search_x += WorkAroundBarOffset - o;
+				THEME.gamecarousel_search_x += WorkAroundBarOffset - o;
+			}
+			if(WorkAroundIconSet & OLD_ABC_ICON)
+			{
+				THEME.gamegrid_abc_x += WorkAroundBarOffset - o;
+				THEME.gamecarousel_abc_x += WorkAroundBarOffset - o;
+			}
+			if(WorkAroundIconSet & OLD_COUNT_ICON)
+			{
+				THEME.gamegrid_count_x += WorkAroundBarOffset - o;
+				THEME.gamecarousel_count_x += WorkAroundBarOffset - o;
+			}
+			if(WorkAroundIconSet & OLD_LIST_ICON)
+			{
+				THEME.gamegrid_list_x += WorkAroundBarOffset - o;
+				THEME.gamecarousel_list_x += WorkAroundBarOffset - o;
+			}
+			if(WorkAroundIconSet & OLD_GRID_ICON)
+			{
+				THEME.gamegrid_grid_x += WorkAroundBarOffset - o;
+				THEME.gamecarousel_grid_x += WorkAroundBarOffset - o;
+			}
+			if(WorkAroundIconSet & OLD_CAROUSEL_ICON)
+			{
+				THEME.gamegrid_carousel_x += WorkAroundBarOffset - o;
+				THEME.gamecarousel_carousel_x += WorkAroundBarOffset - o;
+				THEME.gamegrid_lock_x += WorkAroundBarOffset - o;
+				THEME.gamecarousel_lock_x += WorkAroundBarOffset - o;
+				THEME.gamegrid_dvd_x += WorkAroundBarOffset - o;
+				THEME.gamecarousel_dvd_x += WorkAroundBarOffset - o;
+			}
+			WorkAroundBarOffset = o;
+		}
+	}
 
 
 }
@@ -1102,38 +1112,38 @@ void global_cfg_set(char *name, char *val) {
         }
         return;
     } else if (strcmp(name, "partition") == 0) {
-        int i;
-        if (sscanf(val, "%d", &i) == 1) {
-            Settings.partition = i;
-        }
-        return;
-    } else if (strcmp(name, "marknewtitles") == 0) {
-        int i;
-        if (sscanf(val, "%d", &i) == 1) {
-            Settings.marknewtitles = i;
-        }
-        return;
-    } else if (strcmp(name, "fatInstallToDir") == 0) {
-        int i;
-        if (sscanf(val, "%d", &i) == 1) {
-            Settings.FatInstallToDir = i;
-        }
-    } else if (strcmp(name, "partitions") == 0) {
-        int i;
-        if (sscanf(val, "%d", &i) == 1) {
-            Settings.partitions_to_install = i;
-        }
-    } else if (strcmp(name, "fullcopy") == 0) {
-        int i;
-        if (sscanf(val, "%d", &i) == 1) {
-            Settings.fullcopy = i;
-        }
-    } else if (strcmp(name, "beta_upgrades") == 0) {
-        int i;
-        if (sscanf(val, "%d", &i) == 1) {
-            Settings.beta_upgrades = i;
-        }
-    }
+		int i;
+		if (sscanf(val, "%d", &i) == 1) {
+			Settings.partition = i;
+		}
+		return;
+	} else if (strcmp(name, "marknewtitles") == 0) {
+		int i;
+		if (sscanf(val, "%d", &i) == 1) {
+			Settings.marknewtitles = i;
+		}
+		return;
+	} else if (strcmp(name, "fatInstallToDir") == 0) {
+		int i;
+		if (sscanf(val, "%d", &i) == 1) {
+			Settings.FatInstallToDir = i;
+		}
+	} else if (strcmp(name, "partitions") == 0) {
+		int i;
+		if (sscanf(val, "%d", &i) == 1) {
+			Settings.partitions_to_install = i;
+		}
+	} else if (strcmp(name, "fullcopy") == 0) {
+		int i;
+		if (sscanf(val, "%d", &i) == 1) {
+			Settings.fullcopy = i;
+		}
+	} else if (strcmp(name, "beta_upgrades") == 0) {
+		int i;
+		if (sscanf(val, "%d", &i) == 1) {
+			Settings.beta_upgrades = i;
+		}
+	}
 
     cfg_bool("godmode", &Settings.godmode);
 
@@ -1271,10 +1281,10 @@ void cfg_set_game_opt(struct Game_CFG *game, u8 *id) {
     game->iosreloadblock = reloadblock;
     game->patchcountrystrings = countrystrings;
     game->loadalternatedol = alternatedol;
-    if (game->loadalternatedol == 0) {
-        alternatedoloffset = 0;
-        strcpy(alternatedname, "");
-    }
+	if (game->loadalternatedol == 0) {
+		alternatedoloffset = 0;
+		strcpy(alternatedname, "");
+	}
     game->alternatedolstart = alternatedoloffset;
     strlcpy(game->alternatedolname, alternatedname,sizeof(game->alternatedolname));
 }
@@ -1362,8 +1372,8 @@ bool cfg_save_global() { // save global settings
     fprintf(f, "theme_downloadpath = %s\n ", Settings.theme_downloadpath);
     fprintf(f, "homebrewapps_path = %s\n ", Settings.homebrewapps_path);
     fprintf(f, "Cheatcodespath = %s\n ", Settings.Cheatcodespath);
-    fprintf(f, "BcaCodepath = %s\n ", Settings.BcaCodepath);
-    fprintf(f, "WipCodepath = %s\n ", Settings.WipCodepath);
+	fprintf(f, "BcaCodepath = %s\n ", Settings.BcaCodepath);
+	fprintf(f, "WipCodepath = %s\n ", Settings.WipCodepath);
     fprintf(f, "titlesOverride = %d\n ", Settings.titlesOverride);
     //fprintf(f, "db_url = %s\n ", Settings.db_url);
     //fprintf(f, "db_JPtoEN = %d\n ", Settings.db_JPtoEN);
@@ -1373,12 +1383,12 @@ bool cfg_save_global() { // save global settings
     fprintf(f, "error002 = %d\n ", Settings.error002);
     fprintf(f, "autonetwork = %d\n ", Settings.autonetwork);
     fprintf(f, "discart = %d\n ", Settings.discart);
-    fprintf(f, "partition = %d\n ", Settings.partition);
-    fprintf(f, "marknewtitles = %d\n ", Settings.marknewtitles);
-    fprintf(f, "fatInstallToDir = %d\n ", Settings.FatInstallToDir);
-    fprintf(f, "partitions = %d\n ", Settings.partitions_to_install);
-    fprintf(f, "fullcopy = %d\n ", Settings.fullcopy);
-    fprintf(f, "beta_upgrades = %d\n ", Settings.beta_upgrades);
+	fprintf(f, "partition = %d\n ", Settings.partition);
+	fprintf(f, "marknewtitles = %d\n ", Settings.marknewtitles);
+	fprintf(f, "fatInstallToDir = %d\n ", Settings.FatInstallToDir);
+	fprintf(f, "partitions = %d\n ", Settings.partitions_to_install);
+	fprintf(f, "fullcopy = %d\n ", Settings.fullcopy);
+	fprintf(f, "beta_upgrades = %d\n ", Settings.beta_upgrades);
     fclose(f);
     return true;
 }
@@ -1709,7 +1719,7 @@ bool cfg_load_global() {
     Settings.gamesoundvolume = 80;
 
     Settings.titlesOverride = 1;
-    Settings.partition = -1;
+	Settings.partition = -1;
     char * empty = "";
     snprintf(Settings.db_url, sizeof(Settings.db_url), empty);
     snprintf(Settings.db_language, sizeof(Settings.db_language), empty);
@@ -1797,26 +1807,25 @@ void CFG_Load(void) {
     cfg_parsefile(pathname, &widescreen_set); //first set widescreen
     cfg_parsefile(pathname, &path_set); //then set config and layout options
 
-    WorkAroundIconSet=0;
-    WorkAroundBarOffset=100; // set Workaroundstuff to defaults
-    CLEAR_wCOORD_FLAGS;
-    snprintf(pathname, sizeof(pathname), "%sGXtheme.cfg", CFG.theme_path);
+	WorkAroundIconSet=0; WorkAroundBarOffset=100; // set Workaroundstuff to defaults
+	CLEAR_wCOORD_FLAGS;
+	snprintf(pathname, sizeof(pathname), "%sGXtheme.cfg", CFG.theme_path);
     cfg_parsefile(pathname, &theme_set); //finally set theme information
 
-    // set GUI language, use Wii's language setting if language is set to default
-    int wiilang;
-    bool langisdefault = false;
-    wiilang = CONF_GetLanguage();
-    if (!strcmp("notset", Settings.language_path)) {
-        snprintf(Settings.language_path, sizeof(Settings.language_path), "%s%s.lang", Settings.languagefiles_path, map_get_name(map_language, wiilang + 1)); // + 1 because because CONF_LANG starts at 0
-        if (!checkfile(Settings.language_path)) {
-            sprintf(Settings.language_path, "notset");
-        }
-        gettextLoadLanguage(Settings.language_path);
-        langisdefault = true;
-    }
-    snprintf(pathname, sizeof(pathname), Settings.language_path);
-    gettextLoadLanguage(pathname);
+	// set GUI language, use Wii's language setting if language is set to default
+	int wiilang;
+	bool langisdefault = false;
+	wiilang = CONF_GetLanguage();
+	if (!strcmp("notset", Settings.language_path)) {
+		snprintf(Settings.language_path, sizeof(Settings.language_path), "%s%s.lang", Settings.languagefiles_path, map_get_name(map_language, wiilang + 1)); // + 1 because because CONF_LANG starts at 0
+		if (!checkfile(Settings.language_path)) {
+			sprintf(Settings.language_path, "notset");
+		}
+	    gettextLoadLanguage(Settings.language_path);
+		langisdefault = true;
+	}
+	snprintf(pathname, sizeof(pathname), Settings.language_path);
+	gettextLoadLanguage(pathname);
 
 //	cfg_parsefile(pathname, &language_set);
 
@@ -1830,36 +1839,36 @@ void CFG_Load(void) {
     Global_Default(); //global default depends on theme information
     CFG_LoadGlobal();
 
-    // use GUI language for the database (Settings.db_language is used for game info/titles and covers)
-    char * languagefile;
+	// use GUI language for the database (Settings.db_language is used for game info/titles and covers)
+	char * languagefile;
     languagefile = strrchr(Settings.language_path, '/')+1;
-    int mainlangid = -1;
-    int i;
-    if (strcmp("notset", Settings.language_path)) {
-        for (i=0; map_language[i].name != NULL; i++) {
-            if (strstr(languagefile, map_language[i].name) != NULL) {
-                mainlangid = i - 1; // - 1 because CONF_LANG starts at 0
-                break;
-            }
-        }
-    } else {
+	int mainlangid = -1;
+	int i;
+	if(strcmp("notset", Settings.language_path)) {
+		for (i=0; map_language[i].name != NULL; i++) {
+			if (strstr(languagefile, map_language[i].name) != NULL) {
+				mainlangid = i - 1; // - 1 because CONF_LANG starts at 0
+				break;
+			}
+		}
+	} else {
         mainlangid = wiilang;
-    }
-    GetLanguageToLangCode(&mainlangid, Settings.db_language);
+	}
+	GetLanguageToLangCode(&mainlangid, Settings.db_language);
 
-    // set language code for countries that don't have a language setting on the Wii
-    if (!strcmp(Settings.db_language,"")) {
-        if (strstr(languagefile, "portuguese") != NULL)
-            strcpy(Settings.db_language,"PT");
-    }
-    if (CONF_GetArea() == CONF_AREA_AUS)
-        strcpy(Settings.db_language,"AU");
+	// set language code for countries that don't have a language setting on the Wii
+	if (!strcmp(Settings.db_language,"")) {
+		if (strstr(languagefile, "portuguese") != NULL)
+			strcpy(Settings.db_language,"PT");
+	}
+	if (CONF_GetArea() == CONF_AREA_AUS)
+		strcpy(Settings.db_language,"AU");
 
-    // if GUI language is set to default Settings.language_path needs to remain "notset" (if the detected setting was kept detection wouldn't work next time)
-    if (langisdefault)
-        sprintf(Settings.language_path, "notset");
+	// if GUI language is set to default Settings.language_path needs to remain "notset" (if the detected setting was kept detection wouldn't work next time)
+	if (langisdefault)
+		sprintf(Settings.language_path, "notset");
 
-    Settings.godmode = (Settings.parental.enabled == 0 && (Settings.parentalcontrol == 0 || strlen(Settings.unlockCode) == 0)) ? 1 : 0;
+	Settings.godmode = (Settings.parental.enabled == 0 && (Settings.parentalcontrol == 0 || strlen(Settings.unlockCode) == 0)) ? 1 : 0;
 }
 
 void CFG_LoadGlobal(void) {
@@ -1868,10 +1877,12 @@ void CFG_LoadGlobal(void) {
     cfg_parsefile(GXGlobal_cfg, &global_cfg_set);
 }
 
-void CFG_Cleanup(void) {
+void CFG_Cleanup(void)
+{
     int i = 0;
-    for (i = 0; i < num_title; i++) {
-        if (cfg_title[i].title)
+    for(i = 0; i < num_title; i++)
+    {
+        if(cfg_title[i].title)
             free(cfg_title[i].title);
         cfg_title[i].title = NULL;
     }
@@ -1885,8 +1896,8 @@ void CFG_Cleanup(void) {
 /* map language id (or Wii language settting if langid is set to -1) to language code. CONF_LANG_JAPANESE = 0, not 1 */
 void GetLanguageToLangCode(int *langid, char *langcode) {
 
-    if (langid < 0)
-        *langid = CONF_GetLanguage();
+	if (langid < 0)
+		*langid = CONF_GetLanguage();
 
     switch (*langid) {
     case CONF_LANG_JAPANESE:

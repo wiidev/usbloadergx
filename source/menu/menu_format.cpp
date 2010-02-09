@@ -24,7 +24,7 @@ int MenuFormat() {
     char imgPath[100];
 
     customOptionList options(MAX_PARTITIONS_EX);
-    extern PartList partitions;
+	extern PartList partitions;
 
     u32 cnt, counter = 0;
     int choice, ret;
@@ -44,13 +44,13 @@ int MenuFormat() {
             options.SetName(counter, "%s %d:",tr("Partition"), cnt+1);
             options.SetValue(counter,tr("Can't be formatted"));
         }
-        counter++;
+		counter++;
     }
 
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if (!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    //	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	// because destroy GuiSound must wait while sound playing is finished, we use a global sound
+	if(!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	//	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
     snprintf(imgPath, sizeof(imgPath), "%swiimote_poweroff.png", CFG.theme_path);
     GuiImageData btnpwroff(imgPath, wiimote_poweroff_png);
     snprintf(imgPath, sizeof(imgPath), "%swiimote_poweroff_over.png", CFG.theme_path);
@@ -61,8 +61,8 @@ int MenuFormat() {
     GuiImageData btnhomeOver(imgPath, menu_button_over_png);
     GuiImageData battery(battery_png);
     GuiImageData batteryBar(battery_bar_png);
-    GuiImageData batteryRed(battery_red_png);
-    GuiImageData batteryBarRed(battery_bar_red_png);
+	GuiImageData batteryRed(battery_red_png);
+	GuiImageData batteryBarRed(battery_bar_red_png);
 
 
     GuiTrigger trigA;
@@ -102,40 +102,40 @@ int MenuFormat() {
 
         ret = optionBrowser.GetClickedOption();
 
-        if (ret >= 0) {
-            if (Settings.godmode == 1) {
+        if(ret >= 0) {
+            if(Settings.godmode == 1) {
                 partitionEntry *entry = &partitions.pentry[ret];
                 if (entry->size) {
-                    if (load_from_fs == PART_FS_FAT) {
-                        WBFS_OpenPart(partitions.pinfo[ret].part_fs, partitions.pinfo[ret].index, entry->sector,
-                                      entry->size, (char *) &game_partition);
-                        load_from_fs = partitions.pinfo[ret].part_fs;
-                        menu = MENU_DISCLIST;
-
-                        Settings.partition = ret;
-                        if (isInserted(bootDevice))cfg_save_global();
-                    } else {
-                        sprintf(text, "%s %d : %.2fGB",tr("Partition"), ret+1, entry->size * (partitions.sector_size / GB_SIZE));
-                        choice = WindowPrompt( tr("Do you want to format:"), text,tr("Yes"),tr("No"));
-                        if (choice == 1) {
-                            ret = FormatingPartition(tr("Formatting, please wait..."), entry);
-                            if (ret < 0) {
-                                WindowPrompt(tr("Error !"),tr("Failed formating"),tr("Return"));
-                                menu = MENU_SETTINGS;
-                            } else {
-                                sleep(1);
-                                ret = WBFS_Open();
-                                sprintf(text, "%s %s", text,tr("formatted!"));
-                                WindowPrompt(tr("Success:"),text,tr("OK"));
-                                if (ret < 0) {
-                                    WindowPrompt(tr("ERROR"), tr("Failed to open partition"), tr("OK"));
-                                    Sys_LoadMenu();
-                                }
-                                menu = MENU_DISCLIST;
-                            }
-                        }
-                    }
-                } else if (Settings.godmode == 0) {
+					if (load_from_fs == PART_FS_FAT) {
+						WBFS_OpenPart(partitions.pinfo[ret].part_fs, partitions.pinfo[ret].index, entry->sector,
+									  entry->size, (char *) &game_partition);
+						load_from_fs = partitions.pinfo[ret].part_fs;
+						menu = MENU_DISCLIST;
+						
+						Settings.partition = ret;
+						if(isInserted(bootDevice))cfg_save_global();
+					} else {
+						sprintf(text, "%s %d : %.2fGB",tr("Partition"), ret+1, entry->size * (partitions.sector_size / GB_SIZE));
+						choice = WindowPrompt( tr("Do you want to format:"), text,tr("Yes"),tr("No"));
+						if (choice == 1) {
+							ret = FormatingPartition(tr("Formatting, please wait..."), entry);
+							if (ret < 0) {
+								WindowPrompt(tr("Error !"),tr("Failed formating"),tr("Return"));
+								menu = MENU_SETTINGS;
+							} else {
+								sleep(1);
+								ret = WBFS_Open();
+								sprintf(text, "%s %s", text,tr("formatted!"));
+								WindowPrompt(tr("Success:"),text,tr("OK"));
+								if(ret < 0) {
+									WindowPrompt(tr("ERROR"), tr("Failed to open partition"), tr("OK"));
+									Sys_LoadMenu();
+								}
+								menu = MENU_DISCLIST;
+							}
+						}
+					}
+                } else if(Settings.godmode == 0) {
                     mainWindow->Remove(&optionBrowser);
                     char entered[20] = "";
                     int result = OnScreenKeyboard(entered, 20,0);

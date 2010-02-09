@@ -40,11 +40,11 @@
 #include "directory.h"
 
 typedef struct {
-    PARTITION* partition;
-    DIR_ENTRY  currentEntry;
-    uint32_t   startCluster;
-    bool       inUse;
-    bool       validEntry;
+	PARTITION* partition;
+	DIR_ENTRY  currentEntry;
+	uint32_t   startCluster;
+	bool       inUse;
+	bool       validEntry;
 } DIR_STATE_STRUCT;
 
 extern int _FAT_stat_r (struct _reent *r, const char *path, struct stat *st);

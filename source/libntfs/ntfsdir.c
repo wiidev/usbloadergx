@@ -47,7 +47,8 @@
 
 #define STATE(x)    ((ntfs_dir_state*)(x)->dirStruct)
 
-void ntfsCloseDir (ntfs_dir_state *dir) {
+void ntfsCloseDir (ntfs_dir_state *dir)
+{
     // Sanity check
     if (!dir || !dir->vd)
         return;
@@ -72,7 +73,8 @@ void ntfsCloseDir (ntfs_dir_state *dir) {
     return;
 }
 
-int ntfs_stat_r (struct _reent *r, const char *path, struct stat *st) {
+int ntfs_stat_r (struct _reent *r, const char *path, struct stat *st)
+{
     // Short circuit cases were we don't actually have to do anything
     if (!st || !path)
         return 0;
@@ -89,7 +91,8 @@ int ntfs_stat_r (struct _reent *r, const char *path, struct stat *st) {
         return -1;
     }
 
-    if (strcmp(path, ".") == 0 || strcmp(path, "..") == 0) {
+    if(strcmp(path, ".") == 0 || strcmp(path, "..") == 0)
+    {
         memset(st, 0, sizeof(struct stat));
         st->st_mode = S_IFDIR;
         return 0;
@@ -119,7 +122,8 @@ int ntfs_stat_r (struct _reent *r, const char *path, struct stat *st) {
     return 0;
 }
 
-int ntfs_link_r (struct _reent *r, const char *existing, const char *newLink) {
+int ntfs_link_r (struct _reent *r, const char *existing, const char *newLink)
+{
     ntfs_log_trace("existing %s, newLink %s\n", existing, newLink);
 
     ntfs_vd *vd = NULL;
@@ -152,7 +156,8 @@ int ntfs_link_r (struct _reent *r, const char *existing, const char *newLink) {
     return 0;
 }
 
-int ntfs_unlink_r (struct _reent *r, const char *name) {
+int ntfs_unlink_r (struct _reent *r, const char *name)
+{
     ntfs_log_trace("name %s\n", name);
 
     // Unlink the entry
@@ -163,7 +168,8 @@ int ntfs_unlink_r (struct _reent *r, const char *name) {
     return ret;
 }
 
-int ntfs_chdir_r (struct _reent *r, const char *name) {
+int ntfs_chdir_r (struct _reent *r, const char *name)
+{
     ntfs_log_trace("name %s\n", name);
 
     ntfs_vd *vd = NULL;
@@ -208,7 +214,8 @@ int ntfs_chdir_r (struct _reent *r, const char *name) {
     return 0;
 }
 
-int ntfs_rename_r (struct _reent *r, const char *oldName, const char *newName) {
+int ntfs_rename_r (struct _reent *r, const char *oldName, const char *newName)
+{
     ntfs_log_trace("oldName %s, newName %s\n", oldName, newName);
 
     ntfs_vd *vd = NULL;
@@ -225,7 +232,7 @@ int ntfs_rename_r (struct _reent *r, const char *oldName, const char *newName) {
     ntfsLock(vd);
 
     // You cannot rename between devices
-    if (vd != ntfsGetVolume(newName)) {
+    if(vd != ntfsGetVolume(newName)) {
         ntfsUnlock(vd);
         r->_errno = EXDEV;
         return -1;
@@ -262,7 +269,8 @@ int ntfs_rename_r (struct _reent *r, const char *oldName, const char *newName) {
     return 0;
 }
 
-int ntfs_mkdir_r (struct _reent *r, const char *path, int mode) {
+int ntfs_mkdir_r (struct _reent *r, const char *path, int mode)
+{
     ntfs_log_trace("path %s, mode %i\n", path, mode);
 
     ntfs_vd *vd = NULL;
@@ -295,7 +303,8 @@ int ntfs_mkdir_r (struct _reent *r, const char *path, int mode) {
     return 0;
 }
 
-int ntfs_statvfs_r (struct _reent *r, const char *path, struct statvfs *buf) {
+int ntfs_statvfs_r (struct _reent *r, const char *path, struct statvfs *buf)
+{
     ntfs_log_trace("path %s, buf %p\n", path, buf);
 
     ntfs_vd *vd = NULL;
@@ -319,11 +328,12 @@ int ntfs_statvfs_r (struct _reent *r, const char *path, struct statvfs *buf) {
     // Zero out the stat buffer
     memset(buf, 0, sizeof(struct statvfs));
 
-    if (ntfs_volume_get_free_space(vd->vol) < 0) {
-        ntfsUnlock(vd);
-        return -1;
-    }
-
+	if(ntfs_volume_get_free_space(vd->vol) < 0)
+	{
+		ntfsUnlock(vd);
+		return -1;
+	}
+	
     // File system block size
     buf->f_bsize = vd->vol->cluster_size;
 
@@ -370,7 +380,8 @@ int ntfs_statvfs_r (struct _reent *r, const char *path, struct statvfs *buf) {
  * PRIVATE: Callback for directory walking
  */
 int ntfs_readdir_filler (DIR_ITER *dirState, const ntfschar *name, const int name_len, const int name_type,
-                         const s64 pos, const MFT_REF mref, const unsigned dt_type) {
+                         const s64 pos, const MFT_REF mref, const unsigned dt_type)
+{
     ntfs_dir_state *dir = STATE(dirState);
     ntfs_dir_entry *entry = NULL;
     char *entry_name = NULL;
@@ -407,7 +418,7 @@ int ntfs_readdir_filler (DIR_ITER *dirState, const ntfschar *name, const int nam
 
             // Double check that this entry can be emuerated (as described by the volume descriptor)
             if (((ni->flags & FILE_ATTR_HIDDEN) && !dir->vd->showHiddenFiles) ||
-                    ((ni->flags & FILE_ATTR_SYSTEM) && !dir->vd->showSystemFiles)) {
+                ((ni->flags & FILE_ATTR_SYSTEM) && !dir->vd->showSystemFiles)) {
                 ntfs_inode_close(ni);
                 return 0;
             }
@@ -440,7 +451,8 @@ int ntfs_readdir_filler (DIR_ITER *dirState, const ntfschar *name, const int nam
     return 0;
 }
 
-DIR_ITER *ntfs_diropen_r (struct _reent *r, DIR_ITER *dirState, const char *path) {
+DIR_ITER *ntfs_diropen_r (struct _reent *r, DIR_ITER *dirState, const char *path)
+{
     ntfs_log_trace("dirState %p, path %s\n", dirState, path);
 
     ntfs_dir_state* dir = STATE(dirState);
@@ -505,7 +517,8 @@ DIR_ITER *ntfs_diropen_r (struct _reent *r, DIR_ITER *dirState, const char *path
     return dirState;
 }
 
-int ntfs_dirreset_r (struct _reent *r, DIR_ITER *dirState) {
+int ntfs_dirreset_r (struct _reent *r, DIR_ITER *dirState)
+{
     ntfs_log_trace("dirState %p\n", dirState);
 
     ntfs_dir_state* dir = STATE(dirState);
@@ -531,7 +544,8 @@ int ntfs_dirreset_r (struct _reent *r, DIR_ITER *dirState) {
     return 0;
 }
 
-int ntfs_dirnext_r (struct _reent *r, DIR_ITER *dirState, char *filename, struct stat *filestat) {
+int ntfs_dirnext_r (struct _reent *r, DIR_ITER *dirState, char *filename, struct stat *filestat)
+{
     ntfs_log_trace("dirState %p, filename %p, filestat %p\n", dirState, filename, filestat);
 
     ntfs_dir_state* dir = STATE(dirState);
@@ -555,11 +569,15 @@ int ntfs_dirnext_r (struct _reent *r, DIR_ITER *dirState, char *filename, struct
 
     // Fetch the current entry
     strcpy(filename, dir->current->name);
-    if (filestat != NULL) {
-        if (strcmp(dir->current->name, ".") == 0 || strcmp(dir->current->name, "..") == 0) {
+    if(filestat != NULL)
+    {
+        if(strcmp(dir->current->name, ".") == 0 || strcmp(dir->current->name, "..") == 0)
+        {
             memset(filestat, 0, sizeof(struct stat));
             filestat->st_mode = S_IFDIR;
-        } else {
+        }
+        else
+        {
             ni = ntfsOpenEntry(dir->vd, dir->current->name);
             if (ni) {
                 ntfsStat(dir->vd, ni, filestat);
@@ -580,7 +598,8 @@ int ntfs_dirnext_r (struct _reent *r, DIR_ITER *dirState, char *filename, struct
     return 0;
 }
 
-int ntfs_dirclose_r (struct _reent *r, DIR_ITER *dirState) {
+int ntfs_dirclose_r (struct _reent *r, DIR_ITER *dirState)
+{
     ntfs_log_trace("dirState %p\n", dirState);
 
     ntfs_dir_state* dir = STATE(dirState);

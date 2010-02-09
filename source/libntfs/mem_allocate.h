@@ -29,11 +29,11 @@ static inline void* ntfs_alloc (size_t size) {
 }
 
 static inline void* ntfs_align (size_t size) {
-#ifdef __wii__
+    #ifdef __wii__
     return memalign(32, size);
-#else
+    #else
     return malloc(size);
-#endif
+    #endif
 }
 
 static inline void ntfs_free (void* mem) {

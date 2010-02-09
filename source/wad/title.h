@@ -62,13 +62,13 @@ extern "C" {
     s32 Uninstall_FromTitle(const u64 tid);
 
 //check for a game save present on nand based on game ID
-    int CheckForSave(const char *gameID);
+int CheckForSave(const char *gameID);
 
 //boot HBC in either HAXX or JODI locations
-    s32 WII_BootHBC();
+s32 WII_BootHBC();
 
 //get the rev of a ISO and such without having to load it
-    s32 getIOSrev(u64 req);
+s32 getIOSrev(u64 req);
 
 #ifdef __cplusplus
 }

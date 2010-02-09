@@ -118,10 +118,7 @@ s32 WDVD_Seek(u64 offset) {
 
 s32 WDVD_Offset(u64 offset) {
     //u32 *off = (u32 *)((void *)&offset);
-    union { u64 off64;
-        u32 off32[2];
-    } off;
-    off.off64 = offset;
+	union { u64 off64; u32 off32[2]; } off;off.off64 = offset;
     s32 ret;
 
     memset(inbuf, 0, sizeof(inbuf));
@@ -322,9 +319,9 @@ s32 WDVD_SetUSBMode(const u8 *id, s32 partition) {
     /* Copy ID */
     if (id) {
         memcpy(&inbuf[2], id, 6);
-        if (IOS_GetVersion() != 249) {
-            inbuf[5] = partition;
-        }
+		if (IOS_GetVersion() != 249) {
+			inbuf[5] = partition;
+		}
     }
 
     ret = IOS_Ioctl(di_fd, IOCTL_DI_SETUSBMODE, inbuf, sizeof(inbuf), outbuf, sizeof(outbuf));
@@ -341,18 +338,19 @@ s32 WDVD_SetUSBMode(const u8 *id, s32 partition) {
     return (ret == 1) ? 0 : -ret;
 }
 
-s32 WDVD_Read_Disc_BCA(void *buf) {
-    s32 ret;
+s32 WDVD_Read_Disc_BCA(void *buf)
+{
+	s32 ret;
 
-    memset(inbuf, 0, sizeof(inbuf));
+	memset(inbuf, 0, sizeof(inbuf));
 
-    /* Disc read */
-    inbuf[0] = IOCTL_DI_DISC_BCA << 24;
-    //inbuf[1] = 64;
+	/* Disc read */
+	inbuf[0] = IOCTL_DI_DISC_BCA << 24;
+	//inbuf[1] = 64;
 
-    ret = IOS_Ioctl(di_fd, IOCTL_DI_DISC_BCA, inbuf, sizeof(inbuf), buf, 64);
-    if (ret < 0)
-        return ret;
+	ret = IOS_Ioctl(di_fd, IOCTL_DI_DISC_BCA, inbuf, sizeof(inbuf), buf, 64);
+	if (ret < 0)
+		return ret;
 
-    return (ret == 1) ? 0 : -ret;
+	return (ret == 1) ? 0 : -ret;
 }

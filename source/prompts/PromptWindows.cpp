@@ -70,13 +70,13 @@ extern void HaltGui();
  * into the specified variable.
  ***************************************************************************/
 int OnScreenNumpad(char * var, u32 maxlen) {
-    int save = -1;
-
-    GuiNumpad numpad(var, maxlen);
-
+	int save = -1;
+	
+	GuiNumpad numpad(var, maxlen);
+	
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if (!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size,Settings.sfxvolume);
+	// because destroy GuiSound must wait while sound playing is finished, we use a global sound
+	if(!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size,Settings.sfxvolume);
 
     char imgPath[100];
     snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
@@ -104,7 +104,7 @@ int OnScreenNumpad(char * var, u32 maxlen) {
     GuiButton cancelBtn(&cancelBtnImg,&cancelBtnImg, 1, 4, -5, -15, &trigA, &btnSoundOver, btnClick2,1);
     cancelBtn.SetLabel(&cancelBtnTxt);
     cancelBtn.SetTrigger(&trigB);
-
+    
     numpad.Append(&okBtn);
     numpad.Append(&cancelBtn);
 
@@ -131,8 +131,8 @@ int OnScreenNumpad(char * var, u32 maxlen) {
     mainWindow->Remove(&numpad);
     mainWindow->SetState(STATE_DEFAULT);
     ResumeGui();
-    gprintf("\t%s",(save == 1?"saved":"discarded"));
-    return save;
+	gprintf("\t%s",(save == 1?"saved":"discarded"));
+    return save;	
 }
 
 /****************************************************************************
@@ -151,14 +151,14 @@ int OnScreenKeyboard(char * var, u32 maxlen, int min) {
     else if (Settings.keyset == azerty) keyset = 3;
     else if (Settings.keyset == qwerty) keyset = 4;
 
-    gprintf("\nOnScreenKeyboard(%s, %i, %i) \n\tkeyset = %i",var,maxlen,min,keyset);
+	gprintf("\nOnScreenKeyboard(%s, %i, %i) \n\tkeyset = %i",var,maxlen,min,keyset);
 
     GuiKeyboard keyboard(var, maxlen, min, keyset);
 
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if (!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size,Settings.sfxvolume);
-    //	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	// because destroy GuiSound must wait while sound playing is finished, we use a global sound
+	if(!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size,Settings.sfxvolume);
+	//	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
     char imgPath[100];
     snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
@@ -213,7 +213,7 @@ int OnScreenKeyboard(char * var, u32 maxlen, int min) {
     mainWindow->Remove(&keyboard);
     mainWindow->SetState(STATE_DEFAULT);
     ResumeGui();
-    gprintf("\t%s",(save?"saved":"discarded"));
+	gprintf("\t%s",(save?"saved":"discarded"));
     return save;
 }
 
@@ -222,7 +222,7 @@ int OnScreenKeyboard(char * var, u32 maxlen, int min) {
  * Display credits
  ***************************************************************************/
 void WindowCredits() {
-    gprintf("\nWindowCredits()");
+	gprintf("\nWindowCredits()");
 
     int angle = 0;
     GuiSound * creditsMusic = NULL;
@@ -276,7 +276,7 @@ void WindowCredits() {
 
 
 
-    txt[i] = new GuiText(SvnRev, 16, (GXColor) {255, 255, 255, 255});
+    txt[i] = new GuiText(SvnRev, 16, (GXColor) { 255, 255, 255, 255});
     txt[i]->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
     txt[i]->SetPosition(0,y);
     i++;
@@ -453,33 +453,33 @@ void WindowCredits() {
  * Display screensaver
  ***************************************************************************/
 int WindowScreensaver() {
-    gprintf("\nWindowScreenSaver()");
-    int i = 0;
-    bool exit = false;
-    char imgPath[100];//uncomment for themable screensaver
+	gprintf("\nWindowScreenSaver()");
+	int i = 0;
+	bool exit = false;
+	char imgPath[100];//uncomment for themable screensaver
 
-    /* initialize random seed: */
-    srand ( time(NULL) );
+	/* initialize random seed: */
+	srand ( time(NULL) );
 
-    snprintf(imgPath, sizeof(imgPath), "%sscreensaver.png", CFG.theme_path);//uncomment for themable screensaver
-    GuiImageData GXlogo(imgPath, gxlogo_png);//uncomment for themable screensaver
-    //GuiImageData GXlogo(gxlogo_png);//comment for themable screensaver
-    GuiImage GXlogoImg(&GXlogo);
-    GXlogoImg.SetPosition(172,152);
-    GXlogoImg.SetAlignment(ALIGN_LEFT,ALIGN_TOP);
+	snprintf(imgPath, sizeof(imgPath), "%sscreensaver.png", CFG.theme_path);//uncomment for themable screensaver
+	GuiImageData GXlogo(imgPath, gxlogo_png);//uncomment for themable screensaver
+	//GuiImageData GXlogo(gxlogo_png);//comment for themable screensaver
+	GuiImage GXlogoImg(&GXlogo);
+	GXlogoImg.SetPosition(172,152);
+	GXlogoImg.SetAlignment(ALIGN_LEFT,ALIGN_TOP);
 
-    GuiImage BackgroundImg(640,480,(GXColor) {0, 0, 0, 255});
-    BackgroundImg.SetPosition(0,0);
-    BackgroundImg.SetAlignment(ALIGN_LEFT,ALIGN_TOP);
+	GuiImage BackgroundImg(640,480,(GXColor) {0, 0, 0, 255});
+	BackgroundImg.SetPosition(0,0);
+	BackgroundImg.SetAlignment(ALIGN_LEFT,ALIGN_TOP);
 
-    GuiWindow screensaverWindow(screenwidth,screenheight);
-    screensaverWindow.Append(&BackgroundImg);
-    screensaverWindow.Append(&GXlogoImg);
+	GuiWindow screensaverWindow(screenwidth,screenheight);
+	screensaverWindow.Append(&BackgroundImg);
+	screensaverWindow.Append(&GXlogoImg);
 
-    HaltGui();
-    mainWindow->SetState(STATE_DISABLED);
-    mainWindow->Append(&screensaverWindow);
-    ResumeGui();
+	HaltGui();
+	mainWindow->SetState(STATE_DISABLED);
+	mainWindow->Append(&screensaverWindow);
+	ResumeGui();
 
     while (!exit) {
         i++;
@@ -512,11 +512,11 @@ int WindowScreensaver() {
  * place.
  ***************************************************************************/
 int WindowPrompt(const char *title, const char *msg, const char *btn1Label,
-                 const char *btn2Label, const char *btn3Label,
-                 const char *btn4Label, int wait) {
+             const char *btn2Label, const char *btn3Label,
+             const char *btn4Label, int wait) {
     int choice = -1;
     int count = wait;
-    gprintf("\nWindowPrompt(%s, %s, %s, %s, %s, %s, %i)",title,msg,btn1Label,btn2Label, btn3Label,btn4Label,wait);
+	gprintf("\nWindowPrompt(%s, %s, %s, %s, %s, %s, %i)",title,msg,btn1Label,btn2Label, btn3Label,btn4Label,wait);
 
 
     GuiWindow promptWindow(472,320);
@@ -524,9 +524,9 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label,
     promptWindow.SetPosition(0, -10);
 
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if (!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    //	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size,  Settings.sfxvolume);
+	// because destroy GuiSound must wait while sound playing is finished, we use a global sound
+	if(!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	//	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size,  Settings.sfxvolume);
     char imgPath[100];
     snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
     GuiImageData btnOutline(imgPath, button_dialogue_box_png);
@@ -746,12 +746,12 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label,
                 choice = 3;
         } else if (btn4.GetState() == STATE_CLICKED) {
             choice = 0;
-        } else if (screenShotBtn.GetState() == STATE_CLICKED) {
-            gprintf("\n\tscreenShotBtn clicked");
-            screenShotBtn.ResetState();
-            ScreenShot();
-            gprintf("...It's easy, mmmmmmKay");
-        }
+	} else if (screenShotBtn.GetState() == STATE_CLICKED) {
+			gprintf("\n\tscreenShotBtn clicked");
+			screenShotBtn.ResetState();
+			ScreenShot();
+			gprintf("...It's easy, mmmmmmKay");
+		    }
         if (count>0)count--;
         if (count==0) choice = 1;
     }
@@ -762,7 +762,7 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label,
     mainWindow->Remove(&promptWindow);
     mainWindow->SetState(STATE_DEFAULT);
     ResumeGui();
-    gprintf(" = %i",choice);
+	gprintf(" = %i",choice);
 
     return choice;
 }
@@ -777,8 +777,9 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label,
  * If titel/subtitle or one of the buttons is not needed give him a 0 on that
  * place.
  ***************************************************************************/
-int WindowExitPrompt() {
-    gprintf("\nWindowExitPrompt()");
+int WindowExitPrompt()
+{
+	gprintf("\nWindowExitPrompt()");
 
     GuiSound * homein = NULL;
     homein = new GuiSound(menuin_ogg, menuin_ogg_size, Settings.sfxvolume);
@@ -794,18 +795,18 @@ int WindowExitPrompt() {
     int choice = -1;
     char imgPath[100];
 
-    u64 oldstub = getStubDest();
-    loadStub();
-    if (oldstub != 0x00010001554c4e52ll && oldstub != 0x00010001554e454fll)
-        Set_Stub(oldstub);
+	u64 oldstub = getStubDest();
+	loadStub();
+	if (oldstub != 0x00010001554c4e52ll && oldstub != 0x00010001554e454fll)
+		Set_Stub(oldstub);
 
-    GuiWindow promptWindow(640,480);
+	GuiWindow promptWindow(640,480);
     promptWindow.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     promptWindow.SetPosition(0, 0);
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if (!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    //	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	// because destroy GuiSound must wait while sound playing is finished, we use a global sound
+	if(!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	//	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
     GuiImageData top(exit_top_png);
     GuiImageData topOver(exit_top_over_png);
@@ -817,9 +818,9 @@ int WindowExitPrompt() {
 
     snprintf(imgPath, sizeof(imgPath), "%sbattery_white.png", CFG.theme_path);
     GuiImageData battery(imgPath, battery_white_png);
-    snprintf(imgPath, sizeof(imgPath), "%sbattery_bar_white.png", CFG.theme_path);
+	snprintf(imgPath, sizeof(imgPath), "%sbattery_bar_white.png", CFG.theme_path);
     GuiImageData batteryBar(imgPath, battery_bar_white_png);
-    snprintf(imgPath, sizeof(imgPath), "%sbattery_red.png", CFG.theme_path);
+	snprintf(imgPath, sizeof(imgPath), "%sbattery_red.png", CFG.theme_path);
     GuiImageData batteryRed(imgPath, battery_red_png);
     snprintf(imgPath, sizeof(imgPath), "%sbattery_bar_red.png", CFG.theme_path);
     GuiImageData batteryBarRed(imgPath, battery_bar_red_png);
@@ -835,7 +836,7 @@ int WindowExitPrompt() {
 
         sprintf(txt, "P%d", i+1);
 
-	batteryTxt[i] = new GuiText(txt, 22, (GXColor) {255,255,255, 255});
+        batteryTxt[i] = new GuiText(txt, 22, (GXColor) {255,255,255, 255});
         batteryTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
         batteryImg[i] = new GuiImage(&battery);
         batteryImg[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
@@ -860,7 +861,7 @@ int WindowExitPrompt() {
     batteryBtn[2]->SetPosition(388, 150);
     batteryBtn[3]->SetPosition(494, 150);
 
-    GuiTrigger trigA;
+	GuiTrigger trigA;
     trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
     GuiTrigger trigB;
     trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
@@ -962,11 +963,11 @@ int WindowExitPrompt() {
                 if (level <= 1) {
                     batteryBarImg[i]->SetImage(&batteryBarRed);
                     batteryImg[i]->SetImage(&batteryRed);
-                } else {
+				} else {
                     batteryBarImg[i]->SetImage(&batteryBar);
-                }
+				}
 
-                batteryImg[i]->SetTile(level);
+				batteryImg[i]->SetTile(level);
 
                 batteryBtn[i]->SetAlpha(255);
             } else { // controller not connected
@@ -1053,7 +1054,8 @@ int WindowExitPrompt() {
     return choice;
 }
 
-void SetupFavoriteButton(GuiButton *btnFavorite, int xPos, GuiImage *img, GuiSound *sndOver, GuiSound *sndClick, GuiTrigger *trig) {
+void SetupFavoriteButton(GuiButton *btnFavorite, int xPos, GuiImage *img, GuiSound *sndOver, GuiSound *sndClick, GuiTrigger *trig)
+{
     btnFavorite->SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     btnFavorite->SetPosition(xPos, -60);
     btnFavorite->SetImage(img);
@@ -1063,26 +1065,28 @@ void SetupFavoriteButton(GuiButton *btnFavorite, int xPos, GuiImage *img, GuiSou
     btnFavorite->SetEffectGrow();
 }
 
-u8 SetFavorite(GuiButton *fav1, GuiButton *fav2, GuiButton *fav3, GuiButton *fav4, GuiButton *fav5, u8* gameId, u8 favorite) {
-    struct Game_NUM * game_num = CFG_get_game_num(gameId);
-    if (game_num) {
-        favoritevar = game_num->favorite;
-        playcount = game_num->count;
-    } else {
-        favoritevar = 0;
-        playcount = 0;
-    }
-    favoritevar = (favorite == favoritevar) ? 0 : favorite; // Press the current rank to reset the rank
-    CFG_save_game_num(gameId);
-    return favoritevar;
+u8 SetFavorite(GuiButton *fav1, GuiButton *fav2, GuiButton *fav3, GuiButton *fav4, GuiButton *fav5, u8* gameId, u8 favorite)
+{
+	struct Game_NUM * game_num = CFG_get_game_num(gameId);
+	if (game_num) {
+		favoritevar = game_num->favorite;
+		playcount = game_num->count;
+	} else {
+		favoritevar = 0;
+		playcount = 0;
+	}
+	favoritevar = (favorite == favoritevar) ? 0 : favorite; // Press the current rank to reset the rank
+	CFG_save_game_num(gameId);
+	return favoritevar;
 }
 
-void SetFavoriteImages(GuiImage *b1, GuiImage *b2, GuiImage *b3, GuiImage *b4, GuiImage *b5, GuiImageData *on, GuiImageData *off) {
-    b1->SetImage(favoritevar >= 1 ? on : off);
-    b2->SetImage(favoritevar >= 2 ? on : off);
-    b3->SetImage(favoritevar >= 3 ? on : off);
-    b4->SetImage(favoritevar >= 4 ? on : off);
-    b5->SetImage(favoritevar >= 5 ? on : off);
+void SetFavoriteImages(GuiImage *b1, GuiImage *b2, GuiImage *b3, GuiImage *b4, GuiImage *b5, GuiImageData *on, GuiImageData *off)
+{
+	b1->SetImage(favoritevar >= 1 ? on : off);
+	b2->SetImage(favoritevar >= 2 ? on : off);
+	b3->SetImage(favoritevar >= 3 ? on : off);
+	b4->SetImage(favoritevar >= 4 ? on : off);
+	b5->SetImage(favoritevar >= 5 ? on : off);
 }
 
 /****************************************************************************
@@ -1104,9 +1108,9 @@ int GameWindowPrompt() {
     promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     promptWindow.SetPosition(0, -10);
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if (!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    //	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	// because destroy GuiSound must wait while sound playing is finished, we use a global sound
+	if(!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	//	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
     char imgPath[100];
     snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
@@ -1245,11 +1249,11 @@ int GameWindowPrompt() {
     GuiButton btnFavorite4(imgFavorite.GetWidth(), imgFavorite.GetHeight());
     GuiButton btnFavorite5(imgFavorite.GetWidth(), imgFavorite.GetHeight());
 
-    SetupFavoriteButton(&btnFavorite1, -198, &btnFavoriteImg1, &btnSoundOver, btnClick2, &trigA);
-    SetupFavoriteButton(&btnFavorite2, -171, &btnFavoriteImg2, &btnSoundOver, btnClick2, &trigA);
-    SetupFavoriteButton(&btnFavorite3, -144, &btnFavoriteImg3, &btnSoundOver, btnClick2, &trigA);
-    SetupFavoriteButton(&btnFavorite4, -117, &btnFavoriteImg4, &btnSoundOver, btnClick2, &trigA);
-    SetupFavoriteButton(&btnFavorite5,  -90, &btnFavoriteImg5, &btnSoundOver, btnClick2, &trigA);
+	SetupFavoriteButton(&btnFavorite1, -198, &btnFavoriteImg1, &btnSoundOver, btnClick2, &trigA);
+	SetupFavoriteButton(&btnFavorite2, -171, &btnFavoriteImg2, &btnSoundOver, btnClick2, &trigA);
+	SetupFavoriteButton(&btnFavorite3, -144, &btnFavoriteImg3, &btnSoundOver, btnClick2, &trigA);
+	SetupFavoriteButton(&btnFavorite4, -117, &btnFavoriteImg4, &btnSoundOver, btnClick2, &trigA);
+	SetupFavoriteButton(&btnFavorite5,  -90, &btnFavoriteImg5, &btnSoundOver, btnClick2, &trigA);
 
     GuiImage btnLeftImg(&imgLeft);
     if (Settings.wsprompt == yes) {
@@ -1272,16 +1276,17 @@ int GameWindowPrompt() {
     promptWindow.Append(&playcntTxt);
     promptWindow.Append(&screenShotBtn);
     promptWindow.Append(&btn2);
-    if (!mountMethod) { //stuff we don't show if it is a DVD mounted
-        promptWindow.Append(&sizeTxt);
-        promptWindow.Append(&btnLeft);
-        promptWindow.Append(&btnRight);
-        promptWindow.Append(&btnFavorite1);
-        promptWindow.Append(&btnFavorite2);
-        promptWindow.Append(&btnFavorite3);
-        promptWindow.Append(&btnFavorite4);
-        promptWindow.Append(&btnFavorite5);
-    }
+	if (!mountMethod)//stuff we don't show if it is a DVD mounted
+	{
+		promptWindow.Append(&sizeTxt);
+		promptWindow.Append(&btnLeft);
+		promptWindow.Append(&btnRight);
+		promptWindow.Append(&btnFavorite1);
+		promptWindow.Append(&btnFavorite2);
+		promptWindow.Append(&btnFavorite3);
+		promptWindow.Append(&btnFavorite4);
+		promptWindow.Append(&btnFavorite5);
+	}
 
     //check if unlocked
     if (Settings.godmode == 1 && mountMethod!=2 && mountMethod!=3) {
@@ -1290,7 +1295,7 @@ int GameWindowPrompt() {
 
     promptWindow.Append(&diskImg2);
     promptWindow.Append(&btn1);
-
+	
     short changed = -1;
     GuiImageData * diskCover = NULL;
     GuiImageData * diskCover2 = NULL;
@@ -1313,27 +1318,30 @@ int GameWindowPrompt() {
 
         //load disc image based or what game is seleted
         struct discHdr * header = (mountMethod==1||mountMethod==2?dvdheader:&gameList[gameSelected]);
-        if (Settings.gamesoundvolume > 0) {
-            if (gameSound) {
-                gameSound->Stop();
-                delete gameSound;
-                gameSound = NULL;
-            }
-            u32 gameSoundDataLen;
+        if(Settings.gamesoundvolume > 0)
+        {
+            if(gameSound)
+			{
+				gameSound->Stop();
+				delete gameSound;
+				gameSound = NULL;
+			}
+			u32 gameSoundDataLen;
             const u8 *gameSoundData = LoadBannerSound(header->id, &gameSoundDataLen);
-            if (gameSoundData) {
-                gameSound = new GuiSound(gameSoundData, gameSoundDataLen, Settings.gamesoundvolume, false, true);
-                bgMusic->SetVolume(0);
-                if (Settings.gamesound == 2)
+			if(gameSoundData)
+			{
+				gameSound = new GuiSound(gameSoundData, gameSoundDataLen, Settings.gamesoundvolume, false, true);
+				bgMusic->SetVolume(0);
+                if(Settings.gamesound == 2)
                     gameSound->SetLoop(1);
-                gameSound->Play();
-            }
+				gameSound->Play();
+			}
         }
         snprintf (ID,sizeof(ID),"%c%c%c", header->id[0], header->id[1], header->id[2]);
         snprintf (IDFull,sizeof(IDFull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
 
         gprintf("\n\t%s",IDFull);
-        if (diskCover)
+		if (diskCover)
             delete diskCover;
 
 
@@ -1408,12 +1416,13 @@ int GameWindowPrompt() {
         } else
             diskImg.SetImage(diskCover);
 
-        if (!mountMethod) {
-            WBFS_GameSize(header->id, &size);
-            sizeTxt.SetTextf("%.2fGB", size); //set size text;
-        }
+		if (!mountMethod)
+		{
+			WBFS_GameSize(header->id, &size);
+			sizeTxt.SetTextf("%.2fGB", size); //set size text;
+		}
 
-        nameTxt.SetText(get_title(header));
+		nameTxt.SetText(get_title(header));
 
         struct Game_NUM* game_num = CFG_get_game_num(header->id);
         if (game_num) {
@@ -1424,7 +1433,7 @@ int GameWindowPrompt() {
             favoritevar = 0;
         }
         playcntTxt.SetTextf("%s: %i",tr("Play Count"), playcount);
-        SetFavoriteImages(&btnFavoriteImg1, &btnFavoriteImg2, &btnFavoriteImg3, &btnFavoriteImg4, &btnFavoriteImg5, &imgFavorite, &imgNotFavorite);
+		SetFavoriteImages(&btnFavoriteImg1, &btnFavoriteImg2, &btnFavoriteImg3, &btnFavoriteImg4, &btnFavoriteImg5, &imgFavorite, &imgNotFavorite);
 
         nameTxt.SetPosition(0, 1);
 
@@ -1437,18 +1446,19 @@ int GameWindowPrompt() {
         ResumeGui();
 
         changed = 0;
-        while (choice == -1) {
+        while (choice == -1)
+        {
             VIDEO_WaitVSync ();
 
             diskImg.SetSpin(btn1.GetState() == STATE_SELECTED);
             diskImg2.SetSpin(btn1.GetState() == STATE_SELECTED);
             if (shutdown == 1) { //for power button
-                promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
+				promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
                 mainWindow->SetState(STATE_DEFAULT);
-                while (promptWindow.GetEffect() > 0) usleep(50);
-                HaltGui();
-                mainWindow->Remove(&promptWindow);
-                ResumeGui();
+				while (promptWindow.GetEffect() > 0) usleep(50);
+				HaltGui();
+				mainWindow->Remove(&promptWindow);
+				ResumeGui();
                 wiilight(0);
                 Sys_Shutdown();
             }
@@ -1456,9 +1466,11 @@ int GameWindowPrompt() {
             if (reset == 1) //for reset button
                 Sys_Reboot();
 
-            if (gameSound) {
-                if (!gameSound->IsPlaying()) {
-                    if (Settings.gamesound == 1)
+            if(gameSound)
+            {
+                if(!gameSound->IsPlaying())
+                {
+                    if(Settings.gamesound == 1)
                         bgMusic->SetVolume(Settings.volume);
                 }
             }
@@ -1496,42 +1508,48 @@ int GameWindowPrompt() {
             else if (nameBtn.GetState() == STATE_CLICKED) { //rename
                 choice = 3;
                 promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
-            } else if (btnFavorite1.GetState() == STATE_CLICKED) {//switch favorite
+            }
+            else if (btnFavorite1.GetState() == STATE_CLICKED) {//switch favorite
                 if (isInserted(bootDevice)) {
-                    SetFavorite(&btnFavorite1, &btnFavorite2, &btnFavorite3, &btnFavorite4, &btnFavorite5, header->id, 1);
-                    SetFavoriteImages(&btnFavoriteImg1, &btnFavoriteImg2, &btnFavoriteImg3, &btnFavoriteImg4, &btnFavoriteImg5, &imgFavorite, &imgNotFavorite);
+					SetFavorite(&btnFavorite1, &btnFavorite2, &btnFavorite3, &btnFavorite4, &btnFavorite5, header->id, 1);
+					SetFavoriteImages(&btnFavoriteImg1, &btnFavoriteImg2, &btnFavoriteImg3, &btnFavoriteImg4, &btnFavoriteImg5, &imgFavorite, &imgNotFavorite);
                 }
                 btnFavorite1.ResetState();
-            } else if (btnFavorite2.GetState() == STATE_CLICKED) {//switch favorite
+            }
+            else if (btnFavorite2.GetState() == STATE_CLICKED) {//switch favorite
                 if (isInserted(bootDevice)) {
-                    SetFavorite(&btnFavorite1, &btnFavorite2, &btnFavorite3, &btnFavorite4, &btnFavorite5, header->id, 2);
-                    SetFavoriteImages(&btnFavoriteImg1, &btnFavoriteImg2, &btnFavoriteImg3, &btnFavoriteImg4, &btnFavoriteImg5, &imgFavorite, &imgNotFavorite);
+					SetFavorite(&btnFavorite1, &btnFavorite2, &btnFavorite3, &btnFavorite4, &btnFavorite5, header->id, 2);
+					SetFavoriteImages(&btnFavoriteImg1, &btnFavoriteImg2, &btnFavoriteImg3, &btnFavoriteImg4, &btnFavoriteImg5, &imgFavorite, &imgNotFavorite);
                 }
                 btnFavorite2.ResetState();
-            } else if (btnFavorite3.GetState() == STATE_CLICKED) {//switch favorite
+            }
+            else if (btnFavorite3.GetState() == STATE_CLICKED) {//switch favorite
                 if (isInserted(bootDevice)) {
-                    SetFavorite(&btnFavorite1, &btnFavorite2, &btnFavorite3, &btnFavorite4, &btnFavorite5, header->id, 3);
-                    SetFavoriteImages(&btnFavoriteImg1, &btnFavoriteImg2, &btnFavoriteImg3, &btnFavoriteImg4, &btnFavoriteImg5, &imgFavorite, &imgNotFavorite);
+					SetFavorite(&btnFavorite1, &btnFavorite2, &btnFavorite3, &btnFavorite4, &btnFavorite5, header->id, 3);
+					SetFavoriteImages(&btnFavoriteImg1, &btnFavoriteImg2, &btnFavoriteImg3, &btnFavoriteImg4, &btnFavoriteImg5, &imgFavorite, &imgNotFavorite);
                 }
                 btnFavorite3.ResetState();
-            } else if (btnFavorite4.GetState() == STATE_CLICKED) {//switch favorite
+            }
+            else if (btnFavorite4.GetState() == STATE_CLICKED) {//switch favorite
                 if (isInserted(bootDevice)) {
-                    SetFavorite(&btnFavorite1, &btnFavorite2, &btnFavorite3, &btnFavorite4, &btnFavorite5, header->id, 4);
-                    SetFavoriteImages(&btnFavoriteImg1, &btnFavoriteImg2, &btnFavoriteImg3, &btnFavoriteImg4, &btnFavoriteImg5, &imgFavorite, &imgNotFavorite);
+					SetFavorite(&btnFavorite1, &btnFavorite2, &btnFavorite3, &btnFavorite4, &btnFavorite5, header->id, 4);
+					SetFavoriteImages(&btnFavoriteImg1, &btnFavoriteImg2, &btnFavoriteImg3, &btnFavoriteImg4, &btnFavoriteImg5, &imgFavorite, &imgNotFavorite);
                 }
                 btnFavorite4.ResetState();
-            } else if (btnFavorite5.GetState() == STATE_CLICKED) {//switch favorite
+            }
+            else if (btnFavorite5.GetState() == STATE_CLICKED) {//switch favorite
                 if (isInserted(bootDevice)) {
-                    SetFavorite(&btnFavorite1, &btnFavorite2, &btnFavorite3, &btnFavorite4, &btnFavorite5, header->id, 5);
-                    SetFavoriteImages(&btnFavoriteImg1, &btnFavoriteImg2, &btnFavoriteImg3, &btnFavoriteImg4, &btnFavoriteImg5, &imgFavorite, &imgNotFavorite);
+					SetFavorite(&btnFavorite1, &btnFavorite2, &btnFavorite3, &btnFavorite4, &btnFavorite5, header->id, 5);
+					SetFavoriteImages(&btnFavoriteImg1, &btnFavoriteImg2, &btnFavoriteImg3, &btnFavoriteImg4, &btnFavoriteImg5, &imgFavorite, &imgNotFavorite);
                 }
                 btnFavorite5.ResetState();
-            } else if (screenShotBtn.GetState() == STATE_CLICKED) {
-                gprintf("\n\tscreenShotBtn clicked");
-                screenShotBtn.ResetState();
-                ScreenShot();
-                gprintf("...It's easy, mmmmmmKay");
             }
+	    else if (screenShotBtn.GetState() == STATE_CLICKED) {
+			gprintf("\n\tscreenShotBtn clicked");
+			screenShotBtn.ResetState();
+			ScreenShot();
+			gprintf("...It's easy, mmmmmmKay");
+		    }
             // this next part is long because nobody could agree on what the left/right buttons should do
             else if ((btnRight.GetState() == STATE_CLICKED) && (Settings.xflip == no)) {//next game
                 promptWindow.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 50);
@@ -1636,9 +1654,10 @@ int GameWindowPrompt() {
     delete diskCover;
     delete diskCover2;
 
-    if (gameSound) {
+    if(gameSound)
+    {
         gameSound->Stop();
-        delete gameSound;
+		delete gameSound;
         gameSound = NULL;
     }
     bgMusic->SetVolume(Settings.volume);
@@ -1659,9 +1678,9 @@ DiscWait(const char *title, const char *msg, const char *btn1Label, const char *
     promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     promptWindow.SetPosition(0, -10);
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if (!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    //	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	// because destroy GuiSound must wait while sound playing is finished, we use a global sound
+	if(!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	//	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
     char imgPath[100];
     snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
@@ -1753,14 +1772,14 @@ DiscWait(const char *title, const char *msg, const char *btn1Label, const char *
         while (i >= 0) {
             VIDEO_WaitVSync();
             timerTxt.SetTextf("%u %s", i,tr("seconds left"));
-            /* HaltGui();
-             if (Settings.cios == ios222) {
-                 ret = IOS_ReloadIOS(222);
-                 load_ehc_module();
-             } else {
-                 ret = IOS_ReloadIOS(249);
-             }
-             ResumeGui();*/
+           /* HaltGui();
+            if (Settings.cios == ios222) {
+                ret = IOS_ReloadIOS(222);
+                load_ehc_module();
+            } else {
+                ret = IOS_ReloadIOS(249);
+            }
+            ResumeGui();*/
             sleep(1);
             USBDevice_deInit();
             USBDevice_Init();
@@ -1852,15 +1871,15 @@ FormatingPartition(const char *title, partitionEntry *entry) {
  ***************************************************************************/
 bool SearchMissingImages(int choice2) {
 
-    gprintf("\nSearchMissingImages(%i)",choice2);
+	gprintf("\nSearchMissingImages(%i)",choice2);
     GuiWindow promptWindow(472,320);
     promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     promptWindow.SetPosition(0, -10);
 
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if (!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    //	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	// because destroy GuiSound must wait while sound playing is finished, we use a global sound
+	if(!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	//	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
     char imgPath[100];
     snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
@@ -1899,78 +1918,78 @@ bool SearchMissingImages(int choice2) {
     //make sure that all games are added to the gamelist
     __Menu_GetEntries(1);
 
-    cntMissFiles = 0;
-    u32 i = 0;
-    char filename[11];
+	cntMissFiles = 0;
+	u32 i = 0;
+	char filename[11];
 
-    //add IDs of games that are missing covers to cntMissFiles
-    bool found1 = false;
-    bool found2 = false;
-    bool found3 = false;
-    for (i = 0; i < gameCnt && cntMissFiles < 500; i++) {
-        struct discHdr* header = &gameList[i];
-        if (choice2 != 3) {
+	//add IDs of games that are missing covers to cntMissFiles
+	bool found1 = false;
+	bool found2 = false;
+	bool found3 = false;
+	for (i = 0; i < gameCnt && cntMissFiles < 500; i++) {
+		struct discHdr* header = &gameList[i];
+		if (choice2 != 3) {
 
-            char *covers_path = choice2==1 ? Settings.covers2d_path : Settings.covers_path;
+			char *covers_path = choice2==1 ? Settings.covers2d_path : Settings.covers_path;
 
-            snprintf (filename,sizeof(filename),"%c%c%c.png", header->id[0], header->id[1], header->id[2]);
-            found2 = findfile(filename, covers_path);
+			snprintf (filename,sizeof(filename),"%c%c%c.png", header->id[0], header->id[1], header->id[2]);
+			found2 = findfile(filename, covers_path);
 
-            snprintf (filename,sizeof(filename),"%c%c%c%c.png", header->id[0], header->id[1], header->id[2], header->id[3]);
-            found3 = findfile(filename, covers_path);
+			snprintf (filename,sizeof(filename),"%c%c%c%c.png", header->id[0], header->id[1], header->id[2], header->id[3]);
+			found3 = findfile(filename, covers_path);
 
-            snprintf(filename,sizeof(filename),"%c%c%c%c%c%c.png",header->id[0], header->id[1], header->id[2],
-                     header->id[3], header->id[4], header->id[5]); //full id
-            found1 = findfile(filename, covers_path);
-            if (!found1 && !found2 && !found3) { //if could not find any image
-                snprintf(missingFiles[cntMissFiles],11,"%s",filename);
-                cntMissFiles++;
-            }
-        } else if (choice2 == 3) {
-            snprintf (filename,sizeof(filename),"%c%c%c.png", header->id[0], header->id[1], header->id[2]);
-            found2 = findfile(filename, Settings.disc_path);
-            snprintf(filename,sizeof(filename),"%c%c%c%c%c%c.png",header->id[0], header->id[1], header->id[2],
-                     header->id[3], header->id[4], header->id[5]); //full id
-            found1 = findfile(filename,Settings.disc_path);
-            if (!found1 && !found2) {
-                snprintf(missingFiles[cntMissFiles],11,"%s",filename);
-                cntMissFiles++;
-            }
-        }
-    }
-    if (cntMissFiles == 0) {
-        msgTxt.SetText(tr("No file missing!"));
+			snprintf(filename,sizeof(filename),"%c%c%c%c%c%c.png",header->id[0], header->id[1], header->id[2],
+					 header->id[3], header->id[4], header->id[5]); //full id
+			found1 = findfile(filename, covers_path);
+			if (!found1 && !found2 && !found3) { //if could not find any image
+				snprintf(missingFiles[cntMissFiles],11,"%s",filename);
+				cntMissFiles++;
+			}
+		} else if (choice2 == 3) {
+			snprintf (filename,sizeof(filename),"%c%c%c.png", header->id[0], header->id[1], header->id[2]);
+			found2 = findfile(filename, Settings.disc_path);
+			snprintf(filename,sizeof(filename),"%c%c%c%c%c%c.png",header->id[0], header->id[1], header->id[2],
+					 header->id[3], header->id[4], header->id[5]); //full id
+			found1 = findfile(filename,Settings.disc_path);
+			if (!found1 && !found2) {
+				snprintf(missingFiles[cntMissFiles],11,"%s",filename);
+				cntMissFiles++;
+			}
+		}
+	}
+	if (cntMissFiles == 0) {
+		msgTxt.SetText(tr("No file missing!"));
         sleep(1);
-    }
+	}
 
-    promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
+	promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
     while (promptWindow.GetEffect() > 0) usleep(50);
 
     HaltGui();
     mainWindow->Remove(&promptWindow);
     mainWindow->SetState(STATE_DEFAULT);
-    __Menu_GetEntries();
+	__Menu_GetEntries();
     ResumeGui();
 
-    gprintf(" = %i",cntMissFiles);
+	gprintf(" = %i",cntMissFiles);
     if (cntMissFiles > 0) { //&& !IsNetworkInit()) {
-        NetworkInitPrompt();
-    }
+		NetworkInitPrompt();
+	}
 
-    if (cntMissFiles == 0) {
-        return false;
-    } else {
-        return true;
-    }
+	if (cntMissFiles == 0) {
+		return false;
+	} else {
+		return true;
+	}
 }
 /****************************************************************************
  * NetworkInitPrompt
  ***************************************************************************/
 bool NetworkInitPrompt() {
 
-    gprintf("\nNetworkinitPrompt()");
+	gprintf("\nNetworkinitPrompt()");
     if (IsNetworkInit())
-        return true;
+		return true;
 
     bool success = true;
 
@@ -1979,9 +1998,9 @@ bool NetworkInitPrompt() {
     promptWindow.SetPosition(0, -10);
 
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if (!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    //	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	// because destroy GuiSound must wait while sound playing is finished, we use a global sound
+	if(!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	//	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
     char imgPath[100];
     snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
@@ -2081,9 +2100,9 @@ ProgressDownloadWindow(int choice2) {
     promptWindow.SetPosition(0, -10);
 
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if (!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    //	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	// because destroy GuiSound must wait while sound playing is finished, we use a global sound
+	if(!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	//	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
     char imgPath[100];
     snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
@@ -2234,7 +2253,7 @@ ProgressDownloadWindow(int choice2) {
                 //Creates URL depending from which Country the game is
                 switch (missingFiles[i][3]) {
                 case 'J':
-                    sprintf(URLFile,"%sJA/%s",server3d,missingFiles[i]);
+					sprintf(URLFile,"%sJA/%s",server3d,missingFiles[i]);
                     break;
                 case 'W':
                     sprintf(URLFile,"%sZH/%s",server3d,missingFiles[i]);
@@ -2281,47 +2300,47 @@ ProgressDownloadWindow(int choice2) {
                 //Creates URL depending from which Country the game is
                 switch (missingFiles[i][3]) {
                 case 'J':
-                    if (Settings.discart == 0) {
+                    if(Settings.discart == 0) {
                         sprintf(URLFile,"%sJA/%s",serverDisc,missingFiles[i]);
-                    } else if (Settings.discart == 1) {
+                    } else if(Settings.discart == 1) {
                         sprintf(URLFile,"%sJA/%s",serverDiscCustom,missingFiles[i]);
-                    } else if (Settings.discart == 2 && tries == 0) {
+                    } else if(Settings.discart == 2 && tries == 0) {
                         sprintf(URLFile,"%sJA/%s",serverDisc,missingFiles[i]);
-                    } else if (Settings.discart == 2 && tries == 1) {
+                    } else if(Settings.discart == 2 && tries == 1) {
                         sprintf(URLFile,"%sJA/%s",serverDiscCustom,missingFiles[i]);
-                    } else if (Settings.discart == 3 && tries == 0) {
+                    } else if(Settings.discart == 3 && tries == 0) {
                         sprintf(URLFile,"%sJA/%s",serverDiscCustom,missingFiles[i]);
-                    } else if (Settings.discart == 3 && tries == 1) {
+                    } else if(Settings.discart == 3 && tries == 1) {
                         sprintf(URLFile,"%sJA/%s",serverDisc,missingFiles[i]);
                     }
                     break;
                 case 'W':
-                    if (Settings.discart == 0) {
+                    if(Settings.discart == 0) {
                         sprintf(URLFile,"%sZH/%s",serverDisc,missingFiles[i]);
-                    } else if (Settings.discart == 1) {
+                    } else if(Settings.discart == 1) {
                         sprintf(URLFile,"%sZH/%s",serverDiscCustom,missingFiles[i]);
-                    } else if (Settings.discart == 2 && tries == 0) {
+                    } else if(Settings.discart == 2 && tries == 0) {
                         sprintf(URLFile,"%sZH/%s",serverDisc,missingFiles[i]);
-                    } else if (Settings.discart == 2 && tries == 1) {
+                    } else if(Settings.discart == 2 && tries == 1) {
                         sprintf(URLFile,"%sZH/%s",serverDiscCustom,missingFiles[i]);
-                    } else if (Settings.discart == 3 && tries == 0) {
+                    } else if(Settings.discart == 3 && tries == 0) {
                         sprintf(URLFile,"%sZH/%s",serverDiscCustom,missingFiles[i]);
-                    } else if (Settings.discart == 3 && tries == 1) {
+                    } else if(Settings.discart == 3 && tries == 1) {
                         sprintf(URLFile,"%sZH/%s",serverDisc,missingFiles[i]);
                     }
                     break;
                 case 'K':
-                    if (Settings.discart == 0) {
+                    if(Settings.discart == 0) {
                         sprintf(URLFile,"%sKO/%s",serverDisc,missingFiles[i]);
-                    } else if (Settings.discart == 1) {
+                    } else if(Settings.discart == 1) {
                         sprintf(URLFile,"%sKO/%s",serverDiscCustom,missingFiles[i]);
-                    } else if (Settings.discart == 2 && tries == 0) {
+                    } else if(Settings.discart == 2 && tries == 0) {
                         sprintf(URLFile,"%sKO/%s",serverDisc,missingFiles[i]);
-                    } else if (Settings.discart == 2 && tries == 1) {
+                    } else if(Settings.discart == 2 && tries == 1) {
                         sprintf(URLFile,"%sKO/%s",serverDiscCustom,missingFiles[i]);
-                    } else if (Settings.discart == 3 && tries == 0) {
+                    } else if(Settings.discart == 3 && tries == 0) {
                         sprintf(URLFile,"%sKO/%s",serverDiscCustom,missingFiles[i]);
-                    } else if (Settings.discart == 3 && tries == 1) {
+                    } else if(Settings.discart == 3 && tries == 1) {
                         sprintf(URLFile,"%sKO/%s",serverDisc,missingFiles[i]);
                     }
                     break;
@@ -2335,32 +2354,32 @@ ProgressDownloadWindow(int choice2) {
                 case 'X':
                 case 'Y':
                 case 'Z':
-                    if (Settings.discart == 0) {
+                    if(Settings.discart == 0) {
                         sprintf(URLFile,"%s%s/%s",serverDisc,Settings.db_language,missingFiles[i]);
-                    } else if (Settings.discart == 1) {
+                    } else if(Settings.discart == 1) {
                         sprintf(URLFile,"%s%s/%s",serverDiscCustom,Settings.db_language,missingFiles[i]);
-                    } else if (Settings.discart == 2 && tries == 0) {
+                    } else if(Settings.discart == 2 && tries == 0) {
                         sprintf(URLFile,"%s%s/%s",serverDisc,Settings.db_language,missingFiles[i]);
-                    } else if (Settings.discart == 2 && tries == 1) {
+                    } else if(Settings.discart == 2 && tries == 1) {
                         sprintf(URLFile,"%s%s/%s",serverDiscCustom,Settings.db_language,missingFiles[i]);
-                    } else if (Settings.discart == 3 && tries == 0) {
+                    } else if(Settings.discart == 3 && tries == 0) {
                         sprintf(URLFile,"%s%s/%s",serverDiscCustom,Settings.db_language,missingFiles[i]);
-                    } else if (Settings.discart == 3 && tries == 1) {
+                    } else if(Settings.discart == 3 && tries == 1) {
                         sprintf(URLFile,"%s%s/%s",serverDisc,Settings.db_language,missingFiles[i]);
                     }
                     break;
                 case 'E':
-                    if (Settings.discart == 0) {
+                    if(Settings.discart == 0) {
                         sprintf(URLFile,"%sUS/%s",serverDisc,missingFiles[i]);
-                    } else if (Settings.discart == 1) {
+                    } else if(Settings.discart == 1) {
                         sprintf(URLFile,"%sUS/%s",serverDiscCustom,missingFiles[i]);
-                    } else if (Settings.discart == 2 && tries == 0) {
+                    } else if(Settings.discart == 2 && tries == 0) {
                         sprintf(URLFile,"%sUS/%s",serverDisc,missingFiles[i]);
-                    } else if (Settings.discart == 2 && tries == 1) {
+                    } else if(Settings.discart == 2 && tries == 1) {
                         sprintf(URLFile,"%sUS/%s",serverDiscCustom,missingFiles[i]);
-                    } else if (Settings.discart == 3 && tries == 0) {
+                    } else if(Settings.discart == 3 && tries == 0) {
                         sprintf(URLFile,"%sUS/%s",serverDiscCustom,missingFiles[i]);
-                    } else if (Settings.discart == 3 && tries == 1) {
+                    } else if(Settings.discart == 3 && tries == 1) {
                         sprintf(URLFile,"%sUS/%s",serverDisc,missingFiles[i]);
                     }
                     break;
@@ -2371,17 +2390,17 @@ ProgressDownloadWindow(int choice2) {
                 if (!(file.size == 36864 || file.size <= 1024 || file.size == 7386 || file.size <= 1174 || file.size == 4446 || file.data == NULL)) {
                     break;
                 } else {
-                    if (Settings.discart == 0) {
+                    if(Settings.discart == 0) {
                         sprintf(URLFile,"%sEN/%s",serverDisc,missingFiles[i]);
-                    } else if (Settings.discart == 1) {
+                    } else if(Settings.discart == 1) {
                         sprintf(URLFile,"%sEN/%s",serverDiscCustom,missingFiles[i]);
-                    } else if (Settings.discart == 2 && tries == 0) {
+                    } else if(Settings.discart == 2 && tries == 0) {
                         sprintf(URLFile,"%sEN/%s",serverDisc,missingFiles[i]);
-                    } else if (Settings.discart == 2 && tries == 1) {
+                    } else if(Settings.discart == 2 && tries == 1) {
                         sprintf(URLFile,"%sEN/%s",serverDiscCustom,missingFiles[i]);
-                    } else if (Settings.discart == 3 && tries == 0) {
+                    } else if(Settings.discart == 3 && tries == 0) {
                         sprintf(URLFile,"%sEN/%s",serverDiscCustom,missingFiles[i]);
-                    } else if (Settings.discart == 3 && tries == 1) {
+                    } else if(Settings.discart == 3 && tries == 1) {
                         sprintf(URLFile,"%sEN/%s",serverDisc,missingFiles[i]);
                     }
                     file = downloadfile(URLFile);
@@ -2398,7 +2417,7 @@ ProgressDownloadWindow(int choice2) {
                 //Creates URL depending from which Country the game is
                 switch (missingFiles[i][3]) {
                 case 'J':
-                    sprintf(URLFile,"%sJA/%s",server2d,missingFiles[i]);
+				    sprintf(URLFile,"%sJA/%s",server2d,missingFiles[i]);
                     break;
                 case 'W':
                     sprintf(URLFile,"%sZH/%s",server2d,missingFiles[i]);
@@ -2563,9 +2582,9 @@ int ProgressUpdateWindow() {
     promptWindow.SetPosition(0, -10);
 
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if (!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    //	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
+	// because destroy GuiSound must wait while sound playing is finished, we use a global sound
+	if(!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	//	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
 
     char imgPath[100];
     snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
@@ -2671,8 +2690,8 @@ int ProgressUpdateWindow() {
     }
 
     //make the URL to get XML based on our games
-    char XMLurl[3540];
-    build_XML_URL(XMLurl,sizeof(XMLurl));
+	char XMLurl[3540];
+	build_XML_URL(XMLurl,sizeof(XMLurl));
 
     char dolpath[150];
 //    char dolpathsuccess[150];//use coverspath as a folder for the update wad so we dont make a new folder and have to delete it
@@ -2712,26 +2731,26 @@ int ProgressUpdateWindow() {
                 msgTxt.SetPosition(0,100);
                 msgTxt.SetTextf("%s", tr("Updating WiiTDB.zip"));
 
-                char wiitdbpath[200];
-                char wiitdbpathtmp[200];
+				char wiitdbpath[200];
+				char wiitdbpathtmp[200];
                 struct block file = downloadfile(XMLurl);
                 if (file.data != NULL) {
-                    snprintf(wiitdbpath, sizeof(wiitdbpath), "%swiitdb_%s.zip", Settings.titlestxt_path,game_partition);
-                    snprintf(wiitdbpathtmp, sizeof(wiitdbpathtmp), "%swiitmp_%s.zip", Settings.titlestxt_path,game_partition);
-                    rename(wiitdbpath,wiitdbpathtmp);
-                    pfile = fopen(wiitdbpath, "wb");
-                    fwrite(file.data,1,file.size,pfile);
-                    fclose(pfile);
-                    free(file.data);
-                    CloseXMLDatabase();
-                    if (OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true)) { // open file, reload titles, keep in memory
-                        remove(wiitdbpathtmp);
-                    } else {
-                        remove(wiitdbpath);
-                        rename(wiitdbpathtmp,wiitdbpath);
-                        OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true); // open file, reload titles, keep in memory
-                    }
-                }
+					snprintf(wiitdbpath, sizeof(wiitdbpath), "%swiitdb_%s.zip", Settings.titlestxt_path,game_partition);
+					snprintf(wiitdbpathtmp, sizeof(wiitdbpathtmp), "%swiitmp_%s.zip", Settings.titlestxt_path,game_partition);
+					rename(wiitdbpath,wiitdbpathtmp);
+					pfile = fopen(wiitdbpath, "wb");
+					fwrite(file.data,1,file.size,pfile);
+					fclose(pfile);
+					free(file.data);
+					CloseXMLDatabase();
+					if (OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true)) { // open file, reload titles, keep in memory
+						remove(wiitdbpathtmp);
+					} else {
+						remove(wiitdbpath);
+						rename(wiitdbpathtmp,wiitdbpath);
+						OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true); // open file, reload titles, keep in memory
+					}
+				}
 
                 msgTxt.SetTextf("%s", tr("Updating Language Files:"));
                 updateLanguageFiles();
@@ -2741,15 +2760,15 @@ int ProgressUpdateWindow() {
                 promptWindow.Append(&prTxt);
                 msgTxt.SetTextf("%s Rev%i wad.", tr("Downloading"), newrev);
                 s32 filesize;
-                if (Settings.beta_upgrades) {
-                    char url[255];
-                    memset(&url, 0, 255);
-                    sprintf((char *) &url, "http://usbloader-gui.googlecode.com/files/r%d.wad", newrev);
-                    filesize = download_request((char *) &url);
-                } else {
-                    filesize = download_request("http://www.techjawa.com/usbloadergx/ULNR.file");//for some reason it didn't download completely when saved as a wad.
-                }
-
+				if (Settings.beta_upgrades) {
+					char url[255];
+					memset(&url, 0, 255);
+					sprintf((char *) &url, "http://usbloader-gui.googlecode.com/files/r%d.wad", newrev);
+					filesize = download_request((char *) &url);
+				} else {
+					filesize = download_request("http://www.techjawa.com/usbloadergx/ULNR.file");//for some reason it didn't download completely when saved as a wad.
+				}
+				
                 if (filesize > 0) {
 
                     pfile = fopen(dolpath, "wb");//here we save the txt as a wad
@@ -2829,7 +2848,7 @@ int ProgressUpdateWindow() {
             //sprintf(nipple, tr("The update wad has been saved as %s.  Now let's try to install it."),dolpath);
             //WindowPrompt(0,nipple, tr("OK"));
             gprintf("\n\tinstall wad");
-            error = Wad_Install(wadFile);
+			error = Wad_Install(wadFile);
             fclose(wadFile);
             if (error==0) {
                 diarhea = remove(dolpath);
@@ -2837,7 +2856,7 @@ int ProgressUpdateWindow() {
                     WindowPrompt(tr("Success"),tr("The wad file was installed.  But It could not be deleted from the SD card."),tr("OK"));
             } else {
                 gprintf(" -> failed");
-                sprintf(nipple, tr("The wad installation failed with error %ld"),error);
+				sprintf(nipple, tr("The wad installation failed with error %ld"),error);
                 WindowPrompt(tr("Error"),nipple,tr("OK"));
             }
         }
@@ -2851,7 +2870,7 @@ int ProgressUpdateWindow() {
         ShutdownAudio();
         StopGX();
         gprintf("\nRebooting");
-        WII_Initialize();
+		WII_Initialize();
         WII_LaunchTitle(TITLE_ID(0x00010001,0x554c4e52));
     }
 
@@ -2868,7 +2887,7 @@ int ProgressUpdateWindow() {
 
     return 1;
 }
-#else
+#else  
 int ProgressUpdateWindow() {
 
     gprintf("\nProgressUpdateWindow(not full channel)");
@@ -2879,9 +2898,9 @@ int ProgressUpdateWindow() {
     promptWindow.SetPosition(0, -10);
 
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if (!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    //	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	// because destroy GuiSound must wait while sound playing is finished, we use a global sound
+	if(!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	//	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
     char imgPath[100];
     snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
@@ -3003,173 +3022,173 @@ int ProgressUpdateWindow() {
         }
     }
 
-    //make the URL to get XML based on our games
-    char XMLurl[3540];
-    build_XML_URL(XMLurl,sizeof(XMLurl));
+	//make the URL to get XML based on our games
+	char XMLurl[3540];
+	build_XML_URL(XMLurl,sizeof(XMLurl));
 
-    if (IsNetworkInit() && ret >= 0) {
+	if (IsNetworkInit() && ret >= 0) {
 
-        updatemode = WindowPrompt(tr("What do you want to update?"), 0, "USB Loader GX", tr("WiiTDB Files"), tr("Language File"), tr("Cancel"));
-        mainWindow->SetState(STATE_DISABLED);
-        promptWindow.SetState(STATE_DEFAULT);
-        mainWindow->ChangeFocus(&promptWindow);
+		updatemode = WindowPrompt(tr("What do you want to update?"), 0, "USB Loader GX", tr("WiiTDB Files"), tr("Language File"), tr("Cancel"));
+		mainWindow->SetState(STATE_DISABLED);
+		promptWindow.SetState(STATE_DEFAULT);
+		mainWindow->ChangeFocus(&promptWindow);
 
-        if (updatemode == 1) {
+        if(updatemode == 1) {
 
-            int newrev = CheckUpdate();
-            if (newrev > 0) {
+        int newrev = CheckUpdate();
+        if (newrev > 0) {
 
-                sprintf(msg, "Rev%i %s.", newrev, tr("available"));
-                int choice = WindowPrompt(msg, tr("How do you want to update?"), tr("Update DOL"), tr("Update All"), tr("Cancel"));
-                mainWindow->SetState(STATE_DISABLED);
-                promptWindow.SetState(STATE_DEFAULT);
-                mainWindow->ChangeFocus(&promptWindow);
-                if (choice == 1 || choice == 2) {
-                    titleTxt.SetTextf("%s USB Loader GX", tr("Updating"));
-                    msgTxt.SetPosition(0,100);
-                    promptWindow.Append(&progressbarEmptyImg);
-                    promptWindow.Append(&progressbarImg);
-                    promptWindow.Append(&progressbarOutlineImg);
-                    promptWindow.Append(&prTxt);
-                    msgTxt.SetTextf("%s Rev%i", tr("Update to"), newrev);
+            sprintf(msg, "Rev%i %s.", newrev, tr("available"));
+            int choice = WindowPrompt(msg, tr("How do you want to update?"), tr("Update DOL"), tr("Update All"), tr("Cancel"));
+            mainWindow->SetState(STATE_DISABLED);
+            promptWindow.SetState(STATE_DEFAULT);
+            mainWindow->ChangeFocus(&promptWindow);
+            if (choice == 1 || choice == 2) {
+                titleTxt.SetTextf("%s USB Loader GX", tr("Updating"));
+                msgTxt.SetPosition(0,100);
+                promptWindow.Append(&progressbarEmptyImg);
+                promptWindow.Append(&progressbarImg);
+                promptWindow.Append(&progressbarOutlineImg);
+                promptWindow.Append(&prTxt);
+                msgTxt.SetTextf("%s Rev%i", tr("Update to"), newrev);
+				
+				s32 filesize;
+				if (Settings.beta_upgrades) {
+					char url[255];
+					memset(&url, 0, 255);
+					sprintf((char *) &url, "http://usbloader-gui.googlecode.com/files/r%d.dol", newrev);
+					filesize = download_request((char *) &url);
+				} else {
+					filesize = download_request("http://www.techjawa.com/usbloadergx/boot.dol");
+				}
+                if (filesize > 0) {
+                    FILE * pfile;
+                    pfile = fopen(dolpath, "wb");
+                    u8 * blockbuffer = new unsigned char[BLOCKSIZE];
+                    for (s32 i = 0; i < filesize; i += BLOCKSIZE) {
+                        usleep(100);
+                        prTxt.SetTextf("%i%%", (100*i/filesize)+1);
+                        if ((Settings.wsprompt == yes) && (CFG.widescreen)) {
+                            progressbarImg.SetTile(80*i/filesize);
+                        } else {
+                            progressbarImg.SetTile(100*i/filesize);
+                        }
+                        msg2Txt.SetTextf("%iKB/%iKB", i/1024, filesize/1024);
 
-                    s32 filesize;
-                    if (Settings.beta_upgrades) {
-                        char url[255];
-                        memset(&url, 0, 255);
-                        sprintf((char *) &url, "http://usbloader-gui.googlecode.com/files/r%d.dol", newrev);
-                        filesize = download_request((char *) &url);
-                    } else {
-                        filesize = download_request("http://www.techjawa.com/usbloadergx/boot.dol");
+                        if (btn1.GetState() == STATE_CLICKED) {
+                            fclose(pfile);
+                            remove(dolpath);
+                            failed = -1;
+                            btn1.ResetState();
+                            break;
+                        }
+
+                        u32 blksize;
+                        blksize = (u32)(filesize - i);
+                        if (blksize > BLOCKSIZE)
+                            blksize = BLOCKSIZE;
+
+                        ret = network_read(blockbuffer, blksize);
+                        if (ret != (s32) blksize) {
+                            failed = -1;
+                            ret = -1;
+                            fclose(pfile);
+                            remove(dolpath);
+                            break;
+                        }
+                        fwrite(blockbuffer,1,blksize, pfile);
                     }
-                    if (filesize > 0) {
-                        FILE * pfile;
-                        pfile = fopen(dolpath, "wb");
-                        u8 * blockbuffer = new unsigned char[BLOCKSIZE];
-                        for (s32 i = 0; i < filesize; i += BLOCKSIZE) {
-                            usleep(100);
-                            prTxt.SetTextf("%i%%", (100*i/filesize)+1);
-                            if ((Settings.wsprompt == yes) && (CFG.widescreen)) {
-                                progressbarImg.SetTile(80*i/filesize);
-                            } else {
-                                progressbarImg.SetTile(100*i/filesize);
-                            }
-                            msg2Txt.SetTextf("%iKB/%iKB", i/1024, filesize/1024);
-
-                            if (btn1.GetState() == STATE_CLICKED) {
-                                fclose(pfile);
-                                remove(dolpath);
-                                failed = -1;
-                                btn1.ResetState();
-                                break;
-                            }
-
-                            u32 blksize;
-                            blksize = (u32)(filesize - i);
-                            if (blksize > BLOCKSIZE)
-                                blksize = BLOCKSIZE;
-
-                            ret = network_read(blockbuffer, blksize);
-                            if (ret != (s32) blksize) {
-                                failed = -1;
-                                ret = -1;
-                                fclose(pfile);
-                                remove(dolpath);
-                                break;
-                            }
-                            fwrite(blockbuffer,1,blksize, pfile);
+                    fclose(pfile);
+                    delete blockbuffer;
+                    if (!failed) {
+                        //remove old
+                        if (checkfile(dolpathsuccess)) {
+                            remove(dolpathsuccess);
                         }
-                        fclose(pfile);
-                        delete blockbuffer;
-                        if (!failed) {
-                            //remove old
-                            if (checkfile(dolpathsuccess)) {
-                                remove(dolpathsuccess);
-                            }
-                            //rename new to old
-                            rename(dolpath, dolpathsuccess);
+                        //rename new to old
+                        rename(dolpath, dolpathsuccess);
 
-                            if (choice == 2) {
-                                //get the icon.png and the meta.xml
-                                char xmliconpath[150];
-                                struct block file = downloadfile("http://www.techjawa.com/usbloadergx/meta.file");
-                                if (file.data != NULL) {
-                                    sprintf(xmliconpath, "%smeta.xml", Settings.update_path);
-                                    pfile = fopen(xmliconpath, "wb");
-                                    fwrite(file.data,1,file.size,pfile);
-                                    fclose(pfile);
-                                    free(file.data);
-                                }
-                                file = downloadfile("http://www.techjawa.com/usbloadergx/icon.png");
-                                if (file.data != NULL) {
-                                    sprintf(xmliconpath, "%sicon.png", Settings.update_path);
-                                    pfile = fopen(xmliconpath, "wb");
-                                    fwrite(file.data,1,file.size,pfile);
-                                    fclose(pfile);
-                                    free(file.data);
-                                }
-                                msgTxt.SetTextf("%s", tr("Updating WiiTDB.zip"));
-                                char wiitdbpath[200];
-                                char wiitdbpathtmp[200];
-                                file = downloadfile(XMLurl);
-                                if (file.data != NULL) {
-                                    subfoldercreate(Settings.titlestxt_path);
-                                    snprintf(wiitdbpath, sizeof(wiitdbpath), "%swiitdb_%s.zip", Settings.titlestxt_path,game_partition);
-                                    snprintf(wiitdbpathtmp, sizeof(wiitdbpathtmp), "%swiitmp_%s.zip", Settings.titlestxt_path,game_partition);
-                                    rename(wiitdbpath,wiitdbpathtmp);
-                                    pfile = fopen(wiitdbpath, "wb");
-                                    fwrite(file.data,1,file.size,pfile);
-                                    fclose(pfile);
-                                    free(file.data);
-                                    CloseXMLDatabase();
-                                    if (OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true)) { // open file, reload titles, keep in memory
-                                        remove(wiitdbpathtmp);
-                                    } else {
-                                        remove(wiitdbpath);
-                                        rename(wiitdbpathtmp,wiitdbpath);
-                                        OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true); // open file, reload titles, keep in memory
-                                    }
-                                }
-                                msgTxt.SetTextf("%s", tr("Updating Language Files:"));
-                                updateLanguageFiles();
+                        if (choice == 2) {
+                            //get the icon.png and the meta.xml
+                            char xmliconpath[150];
+                            struct block file = downloadfile("http://www.techjawa.com/usbloadergx/meta.file");
+                            if (file.data != NULL) {
+                                sprintf(xmliconpath, "%smeta.xml", Settings.update_path);
+                                pfile = fopen(xmliconpath, "wb");
+                                fwrite(file.data,1,file.size,pfile);
+                                fclose(pfile);
+                                free(file.data);
                             }
+                            file = downloadfile("http://www.techjawa.com/usbloadergx/icon.png");
+                            if (file.data != NULL) {
+                                sprintf(xmliconpath, "%sicon.png", Settings.update_path);
+                                pfile = fopen(xmliconpath, "wb");
+                                fwrite(file.data,1,file.size,pfile);
+                                fclose(pfile);
+                                free(file.data);
+                            }
+                            msgTxt.SetTextf("%s", tr("Updating WiiTDB.zip"));
+							char wiitdbpath[200];
+				            char wiitdbpathtmp[200];
+                            file = downloadfile(XMLurl);
+                            if (file.data != NULL) {
+								subfoldercreate(Settings.titlestxt_path);
+								snprintf(wiitdbpath, sizeof(wiitdbpath), "%swiitdb_%s.zip", Settings.titlestxt_path,game_partition);
+								snprintf(wiitdbpathtmp, sizeof(wiitdbpathtmp), "%swiitmp_%s.zip", Settings.titlestxt_path,game_partition);
+								rename(wiitdbpath,wiitdbpathtmp);
+								pfile = fopen(wiitdbpath, "wb");
+								fwrite(file.data,1,file.size,pfile);
+								fclose(pfile);
+								free(file.data);
+								CloseXMLDatabase();
+								if (OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true)) { // open file, reload titles, keep in memory
+									remove(wiitdbpathtmp);
+								} else {
+									remove(wiitdbpath);
+									rename(wiitdbpathtmp,wiitdbpath);
+									OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true); // open file, reload titles, keep in memory
+								}
+                            }
+                            msgTxt.SetTextf("%s", tr("Updating Language Files:"));
+                            updateLanguageFiles();
                         }
-                    } else {
-                        failed = -1;
                     }
                 } else {
-                    ret = -1;
+                    failed = -1;
                 }
             } else {
-                WindowPrompt(tr("No new updates."), 0, tr("OK"));
                 ret = -1;
             }
+        } else {
+            WindowPrompt(tr("No new updates."), 0, tr("OK"));
+            ret = -1;
+        }
 
-        } else if (updatemode == 2) {
+        } else if(updatemode == 2) {
             msgTxt.SetTextf("%s", tr("Updating WiiTDB.zip"));
             char wiitdbpath[200];
             char wiitdbpathtmp[200];
             struct block file = downloadfile(XMLurl);
             if (file.data != NULL) {
-                subfoldercreate(Settings.titlestxt_path);
-                snprintf(wiitdbpath, sizeof(wiitdbpath), "%swiitdb_%s.zip", Settings.titlestxt_path,game_partition);
-                snprintf(wiitdbpathtmp, sizeof(wiitdbpathtmp), "%swiitmp_%s.zip", Settings.titlestxt_path,game_partition);
-                rename(wiitdbpath,wiitdbpathtmp);
-                FILE *pfile = fopen(wiitdbpath, "wb");
-                fwrite(file.data,1,file.size,pfile);
-                fclose(pfile);
-                free(file.data);
-                CloseXMLDatabase();
-                if (OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true)) { // open file, reload titles, keep in memory
-                    remove(wiitdbpathtmp);
-                } else {
-                    remove(wiitdbpath);
-                    rename(wiitdbpathtmp,wiitdbpath);
-                    OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true); // open file, reload titles, keep in memory
-                }
+				subfoldercreate(Settings.titlestxt_path);
+				snprintf(wiitdbpath, sizeof(wiitdbpath), "%swiitdb_%s.zip", Settings.titlestxt_path,game_partition);
+				snprintf(wiitdbpathtmp, sizeof(wiitdbpathtmp), "%swiitmp_%s.zip", Settings.titlestxt_path,game_partition);
+				rename(wiitdbpath,wiitdbpathtmp);
+				FILE *pfile = fopen(wiitdbpath, "wb");
+				fwrite(file.data,1,file.size,pfile);
+				fclose(pfile);
+				free(file.data);
+				CloseXMLDatabase();
+				if (OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true)) { // open file, reload titles, keep in memory
+					remove(wiitdbpathtmp);
+				} else {
+					remove(wiitdbpath);
+					rename(wiitdbpathtmp,wiitdbpath);
+					OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride==1?true:false, true); // open file, reload titles, keep in memory
+				}
             }
             ret = 1;
-        } else if (updatemode == 3) {
+        } else if(updatemode == 3) {
 
             msgTxt.SetTextf("%s", tr("Updating Language Files..."));
             updateLanguageFiles();
@@ -3184,10 +3203,10 @@ int ProgressUpdateWindow() {
     if (!failed && ret >= 0 && updatemode == 1) {
         WindowPrompt(tr("Successfully Updated") , tr("Restarting..."), tr("OK"));
 
-        loadStub();
-        Set_Stub_Split(0x00010001,"UNEO");
+		loadStub();
+		Set_Stub_Split(0x00010001,"UNEO");
         Sys_BackToLoader();
-    } else if (updatemode > 0 && ret > 0) {
+    } else if(updatemode > 0 && ret > 0) {
         WindowPrompt(tr("Successfully Updated") , 0, tr("OK"));
     }
 
@@ -3215,9 +3234,9 @@ int CodeDownload(const char *id) {
     promptWindow.SetPosition(0, -10);
 
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if (!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    //	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	// because destroy GuiSound must wait while sound playing is finished, we use a global sound
+	if(!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	//	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
     char imgPath[100];
     snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
@@ -3392,9 +3411,9 @@ HBCWindowPrompt(const char *name, const char *coder, const char *version,
     trigD.SetButtonOnlyTrigger(-1, WPAD_BUTTON_DOWN | WPAD_CLASSIC_BUTTON_DOWN, PAD_BUTTON_DOWN);
 
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if (!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    //	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	// because destroy GuiSound must wait while sound playing is finished, we use a global sound
+	if(!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	//	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
     char imgPath[100];
     snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", CFG.theme_path);
     GuiImageData btnOutline(imgPath, button_dialogue_box_png);
@@ -3594,12 +3613,14 @@ HBCWindowPrompt(const char *name, const char *coder, const char *version,
             choice = 1;
         } else if (btn2.GetState() == STATE_CLICKED) {
             choice = 0;
-        } else if (screenShotBtn.GetState() == STATE_CLICKED) {
-            gprintf("\n\tscreenShotBtn clicked");
-            screenShotBtn.ResetState();
-            ScreenShot();
-            gprintf("...It's easy, mmmmmmKay");
-        } else if ((arrowUpBtn.GetState()==STATE_CLICKED||arrowUpBtn.GetState()==STATE_HELD) ) {
+	}
+	else if (screenShotBtn.GetState() == STATE_CLICKED) {
+			gprintf("\n\tscreenShotBtn clicked");
+			screenShotBtn.ResetState();
+			ScreenShot();
+			gprintf("...It's easy, mmmmmmKay");
+		    }
+	else if ((arrowUpBtn.GetState()==STATE_CLICKED||arrowUpBtn.GetState()==STATE_HELD) ) {
             if (long_descriptionTxt.GetFirstLine()>1)
                 long_descriptionTxt.SetFirstLine(long_descriptionTxt.GetFirstLine()-1);
             usleep(60000);

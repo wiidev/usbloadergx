@@ -58,13 +58,13 @@ uint32_t _FAT_fat_lastCluster (PARTITION* partition, uint32_t cluster);
 unsigned int _FAT_fat_freeClusterCount (PARTITION* partition);
 
 static inline sec_t _FAT_fat_clusterToSector (PARTITION* partition, uint32_t cluster) {
-    return (cluster >= CLUSTER_FIRST) ?
-           ((cluster - CLUSTER_FIRST) * (sec_t)partition->sectorsPerCluster) + partition->dataStart :
-           partition->rootDirStart;
+	return (cluster >= CLUSTER_FIRST) ?
+		((cluster - CLUSTER_FIRST) * (sec_t)partition->sectorsPerCluster) + partition->dataStart :
+		partition->rootDirStart;
 }
 
 static inline bool _FAT_fat_isValidCluster (PARTITION* partition, uint32_t cluster) {
-    return (cluster >= CLUSTER_FIRST) && (cluster <= partition->fat.lastCluster /* This will catch CLUSTER_ERROR */);
+	return (cluster >= CLUSTER_FIRST) && (cluster <= partition->fat.lastCluster /* This will catch CLUSTER_ERROR */);
 }
 
 #endif // _FAT_H

@@ -139,12 +139,14 @@ typedef struct _ntfs_vd {
 } ntfs_vd;
 
 /* Lock volume */
-static inline void ntfsLock (ntfs_vd *vd) {
+static inline void ntfsLock (ntfs_vd *vd)
+{
     LWP_MutexLock(vd->lock);
 }
 
 /* Unlock volume */
-static inline void ntfsUnlock (ntfs_vd *vd) {
+static inline void ntfsUnlock (ntfs_vd *vd)
+{
     LWP_MutexUnlock(vd->lock);
 }
 

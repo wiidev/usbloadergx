@@ -203,7 +203,9 @@ typedef struct ftgxDataOffset_ ftgxDataOffset;
 #define FTGX_COMPATIBILITY_GRRLIB						FTGX_COMPATIBILITY_DEFAULT_TEVOP_GX_PASSCLR | FTGX_COMPATIBILITY_DEFAULT_VTXDESC_GX_NONE
 #define FTGX_COMPATIBILITY_LIBWIISPRITE					FTGX_COMPATIBILITY_DEFAULT_TEVOP_GX_MODULATE | FTGX_COMPATIBILITY_DEFAULT_VTXDESC_GX_DIRECT
 
-const GXColor ftgxWhite = (GXColor) {0xff, 0xff, 0xff, 0xff}
+const GXColor ftgxWhite = (GXColor) {
+    0xff, 0xff, 0xff, 0xff
+}
 ; /**< Constant color value used only to sanitize Doxygen documentation. */
 
 /*! \class FreeTypeGX
@@ -231,7 +233,7 @@ private:
     uint8_t vertexIndex;	/**< Vertex format descriptor index. */
     uint32_t compatibilityMode;	/**< Compatibility mode for default tev operations and vertex descriptors. */
 //    FTGX_Cache fontData; /**< Map which holds the glyph data structures for the corresponding characters. */
-    std::map<uint16_t, FTGX_Cache> fontDatas;
+	std::map<uint16_t, FTGX_Cache> fontDatas;
 
     static uint16_t adjustTextureWidth(uint16_t textureWidth, uint8_t textureFormat);
     static uint16_t adjustTextureHeight(uint16_t textureHeight, uint8_t textureFormat);
@@ -242,7 +244,7 @@ private:
     void unloadFont();
     void clearGlyphData();
     ftgxCharData *cacheGlyphData(wchar_t charCode);
-    ftgxCharData *cacheGlyphData(wchar_t charCode, FTGX_Cache &fontData);
+	ftgxCharData *cacheGlyphData(wchar_t charCode, FTGX_Cache &fontData);
     uint16_t cacheGlyphDataComplete();
     void loadGlyphData(FT_Bitmap *bmp, ftgxCharData *charData);
 

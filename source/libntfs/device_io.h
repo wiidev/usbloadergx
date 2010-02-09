@@ -34,10 +34,10 @@
  * struct hd_geometry -
  */
 struct hd_geometry {
-    unsigned char heads;
-    unsigned char sectors;
-    unsigned short cylinders;
-    unsigned long start;
+	unsigned char heads;
+	unsigned char sectors;
+	unsigned short cylinders;
+	unsigned long start;
 };
 #endif
 #ifndef BLKGETSIZE

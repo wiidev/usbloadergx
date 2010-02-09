@@ -62,113 +62,114 @@ extern wchar_t *gameFilter;
 *********************************************************************************/
 int TitleBrowser(u32 type) {
 
-    u32 num_titles;
-    u32 titles[100] ATTRIBUTE_ALIGN(32);
-    u32 num_sys_titles;
-    u32 sys_titles[10] ATTRIBUTE_ALIGN(32);
-    s32 ret = -1;
-    int numtitle;//to get rid of a stupid compile wrning
-    //open the database file
-    FILE *f;
-    char path[100];
+	u32 num_titles;
+	u32 titles[100] ATTRIBUTE_ALIGN(32);
+	u32 num_sys_titles;
+	u32 sys_titles[10] ATTRIBUTE_ALIGN(32);
+	s32 ret = -1;
+	int numtitle;//to get rid of a stupid compile wrning
+	//open the database file
+	FILE *f;
+	char path[100];
 
-    ISFS_Initialize();
+	ISFS_Initialize();
 
-    sprintf(path,"%s/config/database.txt",bootDevice);
-    f = fopen(path, "r");
+	sprintf(path,"%s/config/database.txt",bootDevice);
+	f = fopen(path, "r");
 
-    // Get count of titles of our requested type
-    ret = getTitles_TypeCount(type, &num_titles);
-    if (ret < 0) {
-        //printf("\tError! Can't get count of titles! (ret = %d)\n", ret);
-        //exit(1);
-    }
+	// Get count of titles of our requested type
+	ret = getTitles_TypeCount(type, &num_titles);
+	if (ret < 0) {
+		//printf("\tError! Can't get count of titles! (ret = %d)\n", ret);
+		//exit(1);
+	}
 
-    // Get titles of our requested type
-    ret = getTitles_Type(type, titles, num_titles);
-    if (ret < 0) {
-        //printf("\tError! Can't get list of titles! (ret = %d)\n", ret);
-        //exit(1);
-    }
+	// Get titles of our requested type
+	ret = getTitles_Type(type, titles, num_titles);
+	if (ret < 0) {
+		//printf("\tError! Can't get list of titles! (ret = %d)\n", ret);
+		//exit(1);
+	}
 
-    // Get count of system titles
-    ret = getTitles_TypeCount(0x00010002, &num_sys_titles);
-    if (ret < 0) {
-        //printf("\tError! Can't get count of titles! (ret = %d)\n", ret);
-        //exit(1);
-    }
+	// Get count of system titles
+	ret = getTitles_TypeCount(0x00010002, &num_sys_titles);
+	if (ret < 0) {
+		//printf("\tError! Can't get count of titles! (ret = %d)\n", ret);
+		//exit(1);
+	}
 
-    // Get system titles
-    ret = getTitles_Type(0x00010002, sys_titles, num_sys_titles);
-    if (ret < 0) {
-        //printf("\tError! Can't get list of titles! (ret = %d)\n", ret);
-        //exit(1);
-    }
-
-
-    //this array will hold all the names for the titles so we only have to get them one time
-    char name[num_titles+num_sys_titles][50];
-
-    customOptionList options3(num_titles+num_sys_titles+1);
-    //write the titles on the option browser
-    u32 i = 0;
+	// Get system titles
+	ret = getTitles_Type(0x00010002, sys_titles, num_sys_titles);
+	if (ret < 0) {
+		//printf("\tError! Can't get list of titles! (ret = %d)\n", ret);
+		//exit(1);
+	}
 
 
+	//this array will hold all the names for the titles so we only have to get them one time
+	char name[num_titles+num_sys_titles][50];
 
-    //first add the good stuff
-    while (i < num_titles) {
-        //start from the beginning of the file each loop
-        if (f)rewind(f);
-        //char name[50];
-        char text[15];
-        strcpy(name[i],"");//make sure name is empty
-        u8 found=0;
-        //set the title's name, number, ID to text
-        sprintf(text, "%s", titleText(type, titles[i]));
+	customOptionList options3(num_titles+num_sys_titles+1);
+	//write the titles on the option browser
+	u32 i = 0;
 
-        //get name from database cause i dont like the ADT function
-        char line[200];
-        char tmp[50];
-        snprintf(tmp,50," ");
 
-        //check if the content.bin is on the SD card for that game
-        //if there is content.bin,then the game is on the SDmenu and not the wii
-        sprintf(line,"SD:/private/wii/title/%s/content.bin",text);
-        if (!checkfile(line)) {
-            if (f) {
-                while (fgets(line, sizeof(line), f)) {
-                    if (line[0]== text[0]&&
-                            line[1]== text[1]&&
-                            line[2]== text[2]) {
-                        int j=0;
-                        found=1;
-                        for (j=0;(line[j+4]!='\0' || j<51);j++)
 
-                            tmp[j]=line[j+4];
-                        snprintf(name[i],sizeof(name[i]),"%s",tmp);
-                        //break;
-                    }
-                }
-            }
-            if (!found) {
-                if (getName00(name[i], TITLE_ID(type, titles[i]),CONF_GetLanguage()*2)>=0)
-                    found=2;
+	//first add the good stuff
+	while (i < num_titles) {
+		//start from the beginning of the file each loop
+		if (f)rewind(f);
+		//char name[50];
+		char text[15];
+		strcpy(name[i],"");//make sure name is empty
+		u8 found=0;
+		//set the title's name, number, ID to text
+		sprintf(text, "%s", titleText(type, titles[i]));
 
-                if (!found) {
-                    if (getNameBN(name[i], TITLE_ID(type, titles[i]))>=0)
-                        found=3;
+		//get name from database cause i dont like the ADT function
+		char line[200];
+		char tmp[50];
+		snprintf(tmp,50," ");
+		
+		//check if the content.bin is on the SD card for that game
+		//if there is content.bin,then the game is on the SDmenu and not the wii
+		sprintf(line,"SD:/private/wii/title/%s/content.bin",text);
+		if (!checkfile(line))
+			{
+				if (f) {
+					while (fgets(line, sizeof(line), f)) {
+						if (line[0]== text[0]&&
+								line[1]== text[1]&&
+								line[2]== text[2]) {
+							int j=0;
+							found=1;
+							for (j=0;(line[j+4]!='\0' || j<51);j++)
 
-                    if (!found)
-                        snprintf(name[i],sizeof(name[i]),"Unknown Title (%08x)",titles[i]);
-                }
-            }
+								tmp[j]=line[j+4];
+							snprintf(name[i],sizeof(name[i]),"%s",tmp);
+							//break;
+						}
+					}
+				}
+				if (!found) {
+					if (getName00(name[i], TITLE_ID(type, titles[i]),CONF_GetLanguage()*2)>=0)
+						found=2;
 
-            //set the text to the option browser
-            options3.SetName(i, "%s",text);
-            options3.SetValue(i, "%s",name[i]);
-            //options3.SetValue(i, " (%08x) %s",titles[i],name[i]);//use this line to show the number to call to launch the channel
-            //move on to the next title
-        }
+					if (!found) {
+						if (getNameBN(name[i], TITLE_ID(type, titles[i]))>=0)
+							found=3;
+
+						if (!found)
+							snprintf(name[i],sizeof(name[i]),"Unknown Title (%08x)",titles[i]);
+					}
+				}
+
+				//set the text to the option browser
+				options3.SetName(i, "%s",text);
+				options3.SetValue(i, "%s",name[i]);
+				//options3.SetValue(i, " (%08x) %s",titles[i],name[i]);//use this line to show the number to call to launch the channel
+				//move on to the next title
+			}
         i++;
     }
 
@@ -239,9 +240,9 @@ int TitleBrowser(u32 type) {
         ResumeNetworkWait();
 
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if (!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    //	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	// because destroy GuiSound must wait while sound playing is finished, we use a global sound
+	if(!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	//	GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
     char imgPath[100];
 
@@ -333,12 +334,12 @@ int TitleBrowser(u32 type) {
 
         else if (wifiBtn.GetState() == STATE_CLICKED) {
 
-            ResumeNetworkWait();
-            wifiBtn.ResetState();
+                ResumeNetworkWait();
+                wifiBtn.ResetState();
         }
 
         if (IsNetworkInit()) {
-            wifiBtn.SetAlpha(255);
+                wifiBtn.SetAlpha(255);
         }
 
         ret = optionBrowser3.GetClickedOption();
@@ -393,7 +394,7 @@ int TitleBrowser(u32 type) {
 
                     char temp[112];
                     //prompt to boot selected title
-                    snprintf(temp, sizeof(temp), tr("%s : %s May not boot correctly if your System Menu is not up to date."),text,name[ret]);
+					snprintf(temp, sizeof(temp), tr("%s : %s May not boot correctly if your System Menu is not up to date."),text,name[ret]);
                     int  choice = WindowPrompt(tr("Boot?"), temp, tr("OK"), tr("Cancel"));
                     if (choice) {//if they say yes
 
@@ -418,181 +419,185 @@ int TitleBrowser(u32 type) {
             }
         }
 
-        if (infilesize > 0) {
+        if(infilesize > 0) {
 
-            char filesizetxt[50];
-            char temp[50];
-            char filepath[100];
+                char filesizetxt[50];
+                char temp[50];
+                char filepath[100];
 //				u32 read = 0;
+				
+				//make sure there is a folder for this to be saved in
+				struct stat st;
+                snprintf(filepath, sizeof(filepath), "%s/wad/", bootDevice);
+				if (stat(filepath, &st) != 0) {
+						if (subfoldercreate(filepath) != 1) {
+							WindowPrompt(tr("Error !"),tr("Can't create directory"),tr("OK"));
+						}
+					}
+				snprintf(filepath, sizeof(filepath), "%s/wad/tmp.tmp", bootDevice);
+				
 
-            //make sure there is a folder for this to be saved in
-            struct stat st;
-            snprintf(filepath, sizeof(filepath), "%s/wad/", bootDevice);
-            if (stat(filepath, &st) != 0) {
-                if (subfoldercreate(filepath) != 1) {
-                    WindowPrompt(tr("Error !"),tr("Can't create directory"),tr("OK"));
-                }
-            }
-            snprintf(filepath, sizeof(filepath), "%s/wad/tmp.tmp", bootDevice);
+                if (infilesize < MB_SIZE)
+                    snprintf(filesizetxt, sizeof(filesizetxt), tr("Incoming file %0.2fKB"), infilesize/KB_SIZE);
+                else
+                    snprintf(filesizetxt, sizeof(filesizetxt), tr("Incoming file %0.2fMB"), infilesize/MB_SIZE);
 
+                snprintf(temp, sizeof(temp), tr("Load file from: %s ?"), GetIncommingIP());
 
-            if (infilesize < MB_SIZE)
-                snprintf(filesizetxt, sizeof(filesizetxt), tr("Incoming file %0.2fKB"), infilesize/KB_SIZE);
-            else
-                snprintf(filesizetxt, sizeof(filesizetxt), tr("Incoming file %0.2fMB"), infilesize/MB_SIZE);
+                int choice = WindowPrompt(filesizetxt, temp, tr("OK"), tr("Cancel"));
+		gprintf("\nchoice:%d",choice);
 
-            snprintf(temp, sizeof(temp), tr("Load file from: %s ?"), GetIncommingIP());
+		if (choice == 1) {
 
-            int choice = WindowPrompt(filesizetxt, temp, tr("OK"), tr("Cancel"));
-            gprintf("\nchoice:%d",choice);
+			u32 read = 0;
+			u8 *temp = NULL;
+			int len = NETWORKBLOCKSIZE;
+			temp = (u8 *) malloc(infilesize);
 
-            if (choice == 1) {
+						bool error = false;
+						u8 *ptr = temp;
+						gprintf("\nrecieving shit");
+			while (read < infilesize) {
 
-                u32 read = 0;
-                u8 *temp = NULL;
-                int len = NETWORKBLOCKSIZE;
-                temp = (u8 *) malloc(infilesize);
+			    ShowProgress(tr("Receiving file from:"), GetIncommingIP(), NULL, read, infilesize, true);
 
-                bool error = false;
-                u8 *ptr = temp;
-                gprintf("\nrecieving shit");
-                while (read < infilesize) {
+			    if (infilesize - read < (u32) len)
+				len = infilesize-read;
+			    else
+				len = NETWORKBLOCKSIZE;
 
-                    ShowProgress(tr("Receiving file from:"), GetIncommingIP(), NULL, read, infilesize, true);
+			    int result = network_read(ptr, len);
 
-                    if (infilesize - read < (u32) len)
-                        len = infilesize-read;
-                    else
-                        len = NETWORKBLOCKSIZE;
+			    if (result < 0) {
+				WindowPrompt(tr("Error while transfering data."), 0, tr("OK"));
+				error = true;
+				break;
+			    }
+			    if (!result) {
+				gprintf("\n!RESULT");
+				break;
+							}
+			    ptr += result;
+			    read += result;
+			}
+			ProgressStop();
 
-                    int result = network_read(ptr, len);
-
-                    if (result < 0) {
-                        WindowPrompt(tr("Error while transfering data."), 0, tr("OK"));
-                        error = true;
-                        break;
-                    }
-                    if (!result) {
-                        gprintf("\n!RESULT");
-                        break;
-                    }
-                    ptr += result;
-                    read += result;
-                }
-                ProgressStop();
-
-                char filename[101];
-                char tmptxt[200];
-
-
-
-                //bool installWad=0;
-                if (!error) {
-                    gprintf("\nno error yet");
-
-                    network_read((u8*) &filename, 100);
-                    gprintf("\nfilename: %s",filename);
-
-                    // Do we need to unzip this thing?
-                    if (wiiloadVersion[0] > 0 || wiiloadVersion[1] > 4) {
-                        gprintf("\nusing newer wiiload version");
-
-                        if (uncfilesize != 0) { // if uncfilesize == 0, it's not compressed
-                            gprintf("\ntrying to uncompress");
-                            // It's compressed, uncompress
-                            u8 *unc = (u8 *) malloc(uncfilesize);
-                            uLongf f = uncfilesize;
-                            error = uncompress(unc, &f, temp, infilesize) != Z_OK;
-                            uncfilesize = f;
-
-                            free(temp);
-                            temp = unc;
-                        }
-                    }
-
-                    if (!error) {
-                        sprintf(tmptxt,"%s",filename);
-                        //if we got a wad
-                        if (strcasestr(tmptxt,".wad")) {
-                            FILE *file = fopen(filepath, "wb");
-                            fwrite(temp, 1, (uncfilesize>0?uncfilesize:infilesize), file);
-                            fclose(file);
-
-                            sprintf(tmptxt,"%s/wad/%s",bootDevice,filename);
-                            if (checkfile(tmptxt))remove(tmptxt);
-                            rename(filepath, tmptxt);
-
-                            //check and make sure the wad we just saved is the correct size
-                            u32 lSize;
-                            file = fopen(tmptxt, "rb");
-
-                            // obtain file size:
-                            fseek (file , 0 , SEEK_END);
-                            lSize = ftell (file);
-
-                            rewind (file);
-                            if (lSize==(uncfilesize>0?uncfilesize:infilesize)) {
-                                gprintf("\nsize is ok");
-                                int pick = WindowPrompt(tr(" Wad Saved as:"), tmptxt, tr("Install"),tr("Uninstall"),tr("Cancel"));
-                                //install or uninstall it
-                                if (pick==1) {
-                                    HaltGui();
-                                    w.Remove(&titleTxt);
-                                    w.Remove(&cancelBtn);
-                                    w.Remove(&wifiBtn);
-                                    w.Remove(&optionBrowser3);
-                                    ResumeGui();
-
-                                    Wad_Install(file);
-
-                                    HaltGui();
-                                    w.Append(&titleTxt);
-                                    w.Append(&cancelBtn);
-                                    w.Append(&wifiBtn);
-                                    w.Append(&optionBrowser3);
-                                    ResumeGui();
-
-                                }
-                                if (pick==2)Wad_Uninstall(file);
-                            } else gprintf("\nBad size");
-                            //close that beast, we're done with it
-                            fclose (file);
-
-                            //do we want to keep the file in the wad folder
-                            if (WindowPrompt(tr("Delete ?"), tmptxt, tr("Delete"),tr("Keep"))!=0)
-                                remove(tmptxt);
-                        } else {
-                            WindowPrompt(tr("ERROR:"), tr("Not a WAD file."), tr("OK"));
-                        }
-                    }
-                }
+						char filename[101];
+						char tmptxt[200];
 
 
 
-                if (error || read != infilesize) {
-                    WindowPrompt(tr("Error:"), tr("No data could be read."), tr("OK"));
+						//bool installWad=0;
+						if (!error) {
+						    gprintf("\nno error yet");
+
+							network_read((u8*) &filename, 100);
+							gprintf("\nfilename: %s",filename);
+
+							// Do we need to unzip this thing?
+							if (wiiloadVersion[0] > 0 || wiiloadVersion[1] > 4) {
+							    gprintf("\nusing newer wiiload version");
+
+								if (uncfilesize != 0) { // if uncfilesize == 0, it's not compressed
+								    gprintf("\ntrying to uncompress");
+									// It's compressed, uncompress
+									u8 *unc = (u8 *) malloc(uncfilesize);
+									uLongf f = uncfilesize;
+									error = uncompress(unc, &f, temp, infilesize) != Z_OK;
+									uncfilesize = f;
+
+									free(temp);
+									temp = unc;
+								}
+							}
+
+							if (!error) {
+								sprintf(tmptxt,"%s",filename);
+								//if we got a wad
+								if (strcasestr(tmptxt,".wad")) {
+								    FILE *file = fopen(filepath, "wb");
+								    fwrite(temp, 1, (uncfilesize>0?uncfilesize:infilesize), file);
+								    fclose(file);
+
+								    sprintf(tmptxt,"%s/wad/%s",bootDevice,filename);
+								    if (checkfile(tmptxt))remove(tmptxt);
+								    rename(filepath, tmptxt);
+
+								    //check and make sure the wad we just saved is the correct size
+								    u32 lSize;
+								    file = fopen(tmptxt, "rb");
+
+								    // obtain file size:
+								    fseek (file , 0 , SEEK_END);
+								    lSize = ftell (file);
+
+								    rewind (file);
+								    if (lSize==(uncfilesize>0?uncfilesize:infilesize)) {
+									gprintf("\nsize is ok");
+									int pick = WindowPrompt(tr(" Wad Saved as:"), tmptxt, tr("Install"),tr("Uninstall"),tr("Cancel"));
+									//install or uninstall it
+									if (pick==1)
+										{
+											HaltGui();
+											w.Remove(&titleTxt);
+											w.Remove(&cancelBtn);
+											w.Remove(&wifiBtn);
+											w.Remove(&optionBrowser3);
+											ResumeGui();
+
+											Wad_Install(file);
+
+											HaltGui();
+											w.Append(&titleTxt);
+											w.Append(&cancelBtn);
+											w.Append(&wifiBtn);
+											w.Append(&optionBrowser3);
+											ResumeGui();
+
+										}
+									if (pick==2)Wad_Uninstall(file);
+								    }
+								    else gprintf("\nBad size");
+								    //close that beast, we're done with it
+								    fclose (file);
+
+								    //do we want to keep the file in the wad folder
+								    if (WindowPrompt(tr("Delete ?"), tmptxt, tr("Delete"),tr("Keep"))!=0)
+									remove(tmptxt);
+								    }
+								else {
+								    WindowPrompt(tr("ERROR:"), tr("Not a WAD file."), tr("OK"));
+								    }
+							}
+						}
 
 
-                }
-                if (temp)free(temp);
-            }
+
+			if (error || read != infilesize) {
+			    WindowPrompt(tr("Error:"), tr("No data could be read."), tr("OK"));
+
+
+			}
+			if(temp)free(temp);
+		}
 
 
 
-            CloseConnection();
-            ResumeNetworkWait();
+		CloseConnection();
+                ResumeNetworkWait();
         }
 
         if (cancelBtn.GetState() == STATE_CLICKED) {
             //break the loop and end the function
             exit = true;
             ret = -10;
-        } else if (screenShotBtn.GetState() == STATE_CLICKED) {
-            gprintf("\n\tscreenShotBtn clicked");
-            screenShotBtn.ResetState();
-            ScreenShot();
-            gprintf("...It's easy, mmmmmmKay");
         }
+	else if (screenShotBtn.GetState() == STATE_CLICKED) {
+			gprintf("\n\tscreenShotBtn clicked");
+			screenShotBtn.ResetState();
+			ScreenShot();
+			gprintf("...It's easy, mmmmmmKay");
+		    }
     }
 
     CloseConnection();

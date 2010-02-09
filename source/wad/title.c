@@ -326,116 +326,121 @@ s32 Uninstall_DeleteTicket(u32 title_u, u32 title_l) {
 //////savegame shit, from waninkoko.  modified for use in this project
 /* Savegame structure */
 struct savegame {
-    /* Title name */
-    char name[65];
+	/* Title name */
+	char name[65];
 
-    /* Title ID */
-    u64 tid;
+	/* Title ID */
+	u64 tid;
 };
 
-s32 Savegame_CheckTitle(const char *path) {
-    FILE *fp = NULL;
+s32 Savegame_CheckTitle(const char *path)
+{
+	FILE *fp = NULL;
 
-    char filepath[128];
+	char filepath[128];
 
-    /* Generate filepath */
-    sprintf(filepath, "%s/banner.bin", path);
+	/* Generate filepath */
+	sprintf(filepath, "%s/banner.bin", path);
 
-    /* Try to open banner */
-    fp = fopen(filepath, "rb");
-    if (!fp)
-        return -1;
+	/* Try to open banner */
+	fp = fopen(filepath, "rb");
+	if (!fp)
+		return -1;
 
-    /* Close file */
-    fclose(fp);
+	/* Close file */
+	fclose(fp);
 
-    return 0;
+	return 0;
 }
 
-s32 Savegame_GetNandPath(u64 tid, char *outbuf) {
-    s32 ret;
-    char buffer[1024] ATTRIBUTE_ALIGN(32);
+s32 Savegame_GetNandPath(u64 tid, char *outbuf)
+{
+	s32 ret;
+	char buffer[1024] ATTRIBUTE_ALIGN(32);
 
-    /* Get data directory */
-    ret = ES_GetDataDir(tid, buffer);
-    if (ret < 0)
-        return ret;
+	/* Get data directory */
+	ret = ES_GetDataDir(tid, buffer);
+	if (ret < 0)
+		return ret;
 
-    /* Generate NAND directory */
-    sprintf(outbuf, "isfs:%s", buffer);
+	/* Generate NAND directory */
+	sprintf(outbuf, "isfs:%s", buffer);
 
-    return 0;
+	return 0;
 }
 
-s32 __Menu_GetNandSaves(struct savegame **outbuf, u32 *outlen) {
-    struct savegame *buffer = NULL;
+s32 __Menu_GetNandSaves(struct savegame **outbuf, u32 *outlen)
+{
+	struct savegame *buffer = NULL;
 
-    u64 *titleList = NULL;
-    u32  titleCnt;
+	u64 *titleList = NULL;
+	u32  titleCnt;
 
-    u32 cnt, idx;
-    s32 ret;
+	u32 cnt, idx;
+	s32 ret;
 
-    /* Get title list */
-    ret = Title_GetList(&titleList, &titleCnt);
-    if (ret < 0)
-        return ret;
+	/* Get title list */
+	ret = Title_GetList(&titleList, &titleCnt);
+	if (ret < 0)
+		return ret;
 
-    /* Allocate memory */
-    buffer = malloc(sizeof(struct savegame) * titleCnt);
-    if (!buffer) {
-        ret = -1;
-        goto out;
-    }
+	/* Allocate memory */
+	buffer = malloc(sizeof(struct savegame) * titleCnt);
+	if (!buffer) {
+		ret = -1;
+		goto out;
+	}
 
-    /* Copy titles */
-    for (cnt = idx = 0; idx < titleCnt; idx++) {
-        u64  tid = titleList[idx];
-        char savepath[128];
+	/* Copy titles */
+	for (cnt = idx = 0; idx < titleCnt; idx++) {
+		u64  tid = titleList[idx];
+		char savepath[128];
 
-        /* Generate dirpath */
-        Savegame_GetNandPath(tid, savepath);
+		/* Generate dirpath */
+		Savegame_GetNandPath(tid, savepath);
 
-        /* Check for title savegame */
-        ret = Savegame_CheckTitle(savepath);
-        if (!ret) {
-            struct savegame *save = &buffer[cnt++];
+		/* Check for title savegame */
+		ret = Savegame_CheckTitle(savepath);
+		if (!ret) {
+			struct savegame *save = &buffer[cnt++];
 
-            /* Set title ID */
-            save->tid = tid;
-        }
-    }
+			/* Set title ID */
+			save->tid = tid;
+		}
+	}
 
-    /* Set values */
-    *outbuf = buffer;
-    *outlen = cnt;
+	/* Set values */
+	*outbuf = buffer;
+	*outlen = cnt;
 
-    /* Success */
-    ret = 0;
+	/* Success */
+	ret = 0;
 
 out:
-    /* Free memory */
-    if (titleList)
-        free(titleList);
+	/* Free memory */
+	if (titleList)
+		free(titleList);
 
-    return ret;
+	return ret;
 }
 
-s32 __Menu_EntryCmp(const void *p1, const void *p2) {
-    struct savegame *s1 = (struct savegame *)p1;
-    struct savegame *s2 = (struct savegame *)p2;
+s32 __Menu_EntryCmp(const void *p1, const void *p2)
+{
+	struct savegame *s1 = (struct savegame *)p1;
+	struct savegame *s2 = (struct savegame *)p2;
 
-    /* Compare entries */
-    return strcmp(s1->name, s2->name);
+	/* Compare entries */
+	return strcmp(s1->name, s2->name);
 }
 
-s32 __Menu_RetrieveList(struct savegame **outbuf, u32 *outlen) {
-    s32 ret;
-    ret = __Menu_GetNandSaves(outbuf, outlen);
-    if (ret >= 0)
-        qsort(*outbuf, *outlen, sizeof(struct savegame), __Menu_EntryCmp);
+s32 __Menu_RetrieveList(struct savegame **outbuf, u32 *outlen)
+{
+	s32 ret;
+	ret = __Menu_GetNandSaves(outbuf, outlen);
+	if (ret >= 0)
+		qsort(*outbuf, *outlen, sizeof(struct savegame), __Menu_EntryCmp);
 
-    return ret;
+	return ret;
 }
 
 //carefull when using this function
@@ -709,31 +714,33 @@ char *titleText(u32 kind, u32 title) {
 
 //giantpune's magic function to check for game saves
 //give a ID4 of a game and returns 1 if the game has save data, 0 if not, or <0 for errors
-int CheckForSave(const char *gameID) {
+int CheckForSave(const char *gameID)
+{
 
-    if (ISFS_Initialize()<0)
-        return -1;
+	if (ISFS_Initialize()<0)
+		return -1;
+	
+	if (!ISFS_Mount())
+		return -2;
+		
+	struct savegame *saveList = NULL;
+	u32 saveCnt;
+	u32 cnt;
+	
+	
+	if (__Menu_RetrieveList(&saveList, &saveCnt)<0)
+		return -3;
 
-    if (!ISFS_Mount())
-        return -2;
-
-    struct savegame *saveList = NULL;
-    u32 saveCnt;
-    u32 cnt;
-
-
-    if (__Menu_RetrieveList(&saveList, &saveCnt)<0)
-        return -3;
-
-    for (cnt=0;cnt<saveCnt;cnt++) {
-        struct savegame *save = &saveList[cnt];
-        if (strcmp(gameID,titleText((u32)(save->tid >> 32),(u32)(save->tid & 0xFFFFFFFF)))==0) {
-            free(saveList);
-            return 1;
-        }
-    }
-    free(saveList);
-    return 0;
+	for (cnt=0;cnt<saveCnt;cnt++)
+	{	
+		struct savegame *save = &saveList[cnt];
+		if (strcmp(gameID,titleText((u32)(save->tid >> 32),(u32)(save->tid & 0xFFFFFFFF)))==0) {
+			free(saveList);
+			return 1;
+		}
+	}
+	free(saveList);
+	return 0;
 
 }
 
@@ -817,118 +824,126 @@ s32 getTitles_Type(u32 type, u32 *titles, u32 count) {
 //this function expects initialize be called before it is called
 // if not, it will fail miserably and catch the wii on fire and kick you in the nuts
 #define TITLE_ID(x,y)		(((u64)(x) << 32) | (y))
-s32 WII_BootHBC() {
-    u32 tmdsize;
-    u64 tid = 0;
-    u64 *list;
-    u32 titlecount;
-    s32 ret;
-    u32 i;
+s32 WII_BootHBC()
+{
+	u32 tmdsize;
+	u64 tid = 0;
+	u64 *list;
+	u32 titlecount;
+	s32 ret;
+	u32 i;
 
-    ret = ES_GetNumTitles(&titlecount);
-    if (ret < 0)
-        return WII_EINTERNAL;
+	ret = ES_GetNumTitles(&titlecount);
+	if(ret < 0)
+		return WII_EINTERNAL;
 
-    list = memalign(32, titlecount * sizeof(u64) + 32);
+	list = memalign(32, titlecount * sizeof(u64) + 32);
 
-    ret = ES_GetTitles(list, titlecount);
-    if (ret < 0) {
-        free(list);
-        return WII_EINTERNAL;
-    }
+	ret = ES_GetTitles(list, titlecount);
+	if(ret < 0) {
+		free(list);
+		return WII_EINTERNAL;
+	}
+	
+	for(i=0; i<titlecount; i++) {
+		if (list[i]==TITLE_ID(0x00010001,0x4A4F4449) 
+			|| list[i]==TITLE_ID(0x00010001,0x48415858))
+		{
+			tid = list[i];
+			break;
+		}
+	}
+	free(list);
 
-    for (i=0; i<titlecount; i++) {
-        if (list[i]==TITLE_ID(0x00010001,0x4A4F4449)
-                || list[i]==TITLE_ID(0x00010001,0x48415858)) {
-            tid = list[i];
-            break;
-        }
-    }
-    free(list);
+	if(!tid)
+		return WII_EINSTALL;
 
-    if (!tid)
-        return WII_EINSTALL;
+	if(ES_GetStoredTMDSize(tid, &tmdsize) < 0)
+		return WII_EINSTALL;
 
-    if (ES_GetStoredTMDSize(tid, &tmdsize) < 0)
-        return WII_EINSTALL;
-
-    return WII_LaunchTitle(tid);
+	return WII_LaunchTitle(tid);
 }
 
-tmd* getTMD(u64 tid) {
-    static char filepath[256] ATTRIBUTE_ALIGN(32);
-    static u8 tmd_buf[MAX_SIGNED_TMD_SIZE] ATTRIBUTE_ALIGN(32);
-    signed_blob *s_tmd = (signed_blob *)tmd_buf;
-    u32 tmd_size;
+tmd* getTMD(u64 tid){
+	static char filepath[256] ATTRIBUTE_ALIGN(32);	
+	static u8 tmd_buf[MAX_SIGNED_TMD_SIZE] ATTRIBUTE_ALIGN(32);
+	signed_blob *s_tmd = (signed_blob *)tmd_buf;
+	u32 tmd_size;
+	
+	if (ES_GetDataDir(tid, filepath) < 0 )
+		return NULL;
+	
+	if (ES_GetStoredTMDSize(tid, &tmd_size) < 0)
+		return NULL;
+	
+	
+	if (ES_GetStoredTMD(tid, s_tmd, tmd_size) < 0)
+		return NULL;
 
-    if (ES_GetDataDir(tid, filepath) < 0 )
-        return NULL;
+	tmd *t = SIGNATURE_PAYLOAD(s_tmd);
 
-    if (ES_GetStoredTMDSize(tid, &tmd_size) < 0)
-        return NULL;
-
-
-    if (ES_GetStoredTMD(tid, s_tmd, tmd_size) < 0)
-        return NULL;
-
-    tmd *t = SIGNATURE_PAYLOAD(s_tmd);
-
-    return t;
-
+	return t;
+	
 }
 
 //some pune magic to make sure we don't try to load a stubbed IOS for those idiots that don't know what theyre doing
-s32 getIOSrev(u64 req) {
-    gprintf("\n\tgetIOSrev(%016llx)",req);
-    u32 tmdsize;
-    u64 tid = 0;
-    u64 *list;
-    u32 titlecount;
-    s32 ret;
-    u32 i;
+s32 getIOSrev(u64 req)
+{
+	gprintf("\n\tgetIOSrev(%016llx)",req);
+	u32 tmdsize;
+	u64 tid = 0;
+	u64 *list;
+	u32 titlecount;
+	s32 ret;
+	u32 i;
 
-    ret = ES_GetNumTitles(&titlecount);
-    if (ret < 0) {
-        ret = WII_EINTERNAL;
-        goto out;
-    }
+	ret = ES_GetNumTitles(&titlecount);
+	if(ret < 0)
+	{
+		ret = WII_EINTERNAL;
+		goto out;
+	}
 
-    list = memalign(32, titlecount * sizeof(u64) + 32);
+	list = memalign(32, titlecount * sizeof(u64) + 32);
 
-    ret = ES_GetTitles(list, titlecount);
-    if (ret < 0) {
-        free(list);
-        ret = WII_EINTERNAL;
-        goto out;
-    }
+	ret = ES_GetTitles(list, titlecount);
+	if(ret < 0) {
+		free(list);
+		ret = WII_EINTERNAL;
+		goto out;
+	}
+	
+	for(i=0; i<titlecount; i++) {
+		if (list[i]==req)
+		{
+			tid = list[i];
+			break;
+		}
+	}
+	free(list);
 
-    for (i=0; i<titlecount; i++) {
-        if (list[i]==req) {
-            tid = list[i];
-            break;
-        }
-    }
-    free(list);
+	if(!tid)
+	{
+		ret = WII_EINSTALL;
+		goto out;
+	}
 
-    if (!tid) {
-        ret = WII_EINSTALL;
-        goto out;
-    }
-
-    if (ES_GetStoredTMDSize(tid, &tmdsize) < 0) {
-        ret = WII_EINSTALL;
-        goto out;
-    }
-
-    tmd *tmd = getTMD(tid);
-
-    if (tmd->title_version<255) {
-        ret = tmd->title_version;
-    }
-
+	if(ES_GetStoredTMDSize(tid, &tmdsize) < 0)
+	{
+		ret = WII_EINSTALL;
+		goto out;
+	}
+		
+	tmd *tmd = getTMD(tid);
+	
+	if(tmd->title_version<255)
+	{
+		ret = tmd->title_version;
+	}
+	
 out:
-    gprintf(" = %d",ret);
-    return ret;
+	gprintf(" = %d",ret);
+	return ret;
 }
 
 

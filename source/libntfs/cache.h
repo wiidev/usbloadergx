@@ -49,19 +49,19 @@
 #define BYTES_PER_READ 512
 
 typedef struct {
-    sec_t        sector;
-    unsigned int count;
-    u64 last_access;
-    bool         dirty;
-    u8*     cache;
+	sec_t        sector;
+	unsigned int count;
+	u64 last_access;
+	bool         dirty;
+	u8*     cache;
 } NTFS_CACHE_ENTRY;
 
 typedef struct {
-    const DISC_INTERFACE* disc;
-    sec_t		          endOfPartition;
-    unsigned int          numberOfPages;
-    unsigned int          sectorsPerPage;
-    NTFS_CACHE_ENTRY*          cacheEntries;
+	const DISC_INTERFACE* disc;
+	sec_t		          endOfPartition;
+	unsigned int          numberOfPages;
+	unsigned int          sectorsPerPage;
+	NTFS_CACHE_ENTRY*          cacheEntries;
 } NTFS_CACHE;
 
 /*

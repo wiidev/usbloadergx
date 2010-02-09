@@ -39,22 +39,26 @@
 #include "ZipFile.h"
 #include "language/gettext.h"
 
-ZipFile::ZipFile(const char *filepath) {
+ZipFile::ZipFile(const char *filepath)
+{
     File = unzOpen(filepath);
-    if (File)
+    if(File)
         this->LoadList();
 }
 
-ZipFile::~ZipFile() {
+ZipFile::~ZipFile()
+{
     unzClose(File);
 }
 
-bool ZipFile::LoadList() {
+bool ZipFile::LoadList()
+{
     return true;
 }
 
-bool ZipFile::ExtractAll(const char *dest) {
-    if (!File)
+bool ZipFile::ExtractAll(const char *dest)
+{
+    if(!File)
         return false;
 
     bool Stop = false;
@@ -62,7 +66,7 @@ bool ZipFile::ExtractAll(const char *dest) {
     u32 blocksize = 1024*50;
     u8 *buffer = new u8[blocksize];
 
-    if (!buffer)
+    if(!buffer)
         return false;
 
     char writepath[MAXPATHLEN];
@@ -70,14 +74,16 @@ bool ZipFile::ExtractAll(const char *dest) {
     memset(filename, 0, sizeof(filename));
 
     int ret = unzGoToFirstFile(File);
-    if (ret != UNZ_OK)
+    if(ret != UNZ_OK)
         Stop = true;
 
-    while (!Stop) {
-        if (unzGetCurrentFileInfo(File, &cur_file_info, filename, sizeof(filename), NULL, NULL, NULL, NULL) != UNZ_OK)
+    while(!Stop)
+    {
+        if(unzGetCurrentFileInfo(File, &cur_file_info, filename, sizeof(filename), NULL, NULL, NULL, NULL) != UNZ_OK)
             Stop = true;
 
-        if (!Stop && filename[strlen(filename)-1] != '/') {
+        if(!Stop && filename[strlen(filename)-1] != '/')
+        {
             u32 uncompressed_size = cur_file_info.uncompressed_size;
 
             u32 done = 0;
@@ -95,31 +101,33 @@ bool ZipFile::ExtractAll(const char *dest) {
 
             subfoldercreate(temppath);
 
-            if (ret == UNZ_OK) {
+            if(ret == UNZ_OK)
+            {
                 FILE *pfile = fopen(writepath, "wb");
 
-                do {
+                do
+                {
                     ShowProgress(tr("Extracting files..."), 0, pointer+1, done, uncompressed_size);
 
-                    if (uncompressed_size - done < blocksize)
+                    if(uncompressed_size - done < blocksize)
                         blocksize = uncompressed_size - done;
 
                     ret = unzReadCurrentFile(File, buffer, blocksize);
 
-                    if (ret == 0)
+                    if(ret == 0)
                         break;
 
                     fwrite(buffer, 1, blocksize, pfile);
 
                     done += ret;
 
-                } while (done < uncompressed_size);
+                } while(done < uncompressed_size);
 
                 fclose(pfile);
                 unzCloseCurrentFile(File);
             }
         }
-        if (unzGoToNextFile(File) != UNZ_OK)
+        if(unzGoToNextFile(File) != UNZ_OK)
             Stop = true;
     }
 

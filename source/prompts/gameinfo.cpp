@@ -58,19 +58,19 @@ int showGameInfo(char *ID) {
         int wifiY=0;
         int intputX=200, inputY=-30, txtXOffset=90;
         u8 nunchuk=0,
-                   classiccontroller=0,
-                                     balanceboard=0,
-                                                  dancepad=0,
-                                                           guitar=0,
-                                                                  gamecube=0,
-                                                                           wheel=0,
-                                                                                 motionplus=0,
-                                                                                            drums=0,
-                                                                                                  microphone=0,
-                                                                                                             zapper=0,
-                                                                                                                    nintendods=0,
-                                                                                                                               //vitalitysensor=0,
-                                                                                                                               wiispeak=0;
+			classiccontroller=0,
+            balanceboard=0,
+            dancepad=0,
+            guitar=0,
+            gamecube=0,
+            wheel=0,
+            motionplus=0,
+            drums=0,
+			microphone=0,
+			zapper=0,
+			nintendods=0,
+			//vitalitysensor=0,
+			wiispeak=0;
         int newline=1;
         u8 page=1;
 
@@ -225,15 +225,15 @@ int showGameInfo(char *ID) {
                 wheel=1;
             if (strcmp(gameinfo.accessoriesReq[i],"balanceboard")==0)
                 balanceboard=1;
-            if (strcmp(gameinfo.accessoriesReq[i],"microphone")==0)
+			if (strcmp(gameinfo.accessoriesReq[i],"microphone")==0)
                 microphone=1;
-            if (strcmp(gameinfo.accessoriesReq[i],"zapper")==0)
+			if (strcmp(gameinfo.accessoriesReq[i],"zapper")==0)
                 zapper=1;
-            if (strcmp(gameinfo.accessoriesReq[i],"nintendods")==0)
+			if (strcmp(gameinfo.accessoriesReq[i],"nintendods")==0)
                 nintendods=1;
-            if (strcmp(gameinfo.accessoriesReq[i],"wiispeak")==0)
+			if (strcmp(gameinfo.accessoriesReq[i],"wiispeak")==0)
                 wiispeak=1;
-            //if (strcmp(gameinfo.accessoriesReq[i],"vitalitysensor")==0)
+			//if (strcmp(gameinfo.accessoriesReq[i],"vitalitysensor")==0)
             //   vitalitysensor=1;
             if (strcmp(gameinfo.accessoriesReq[i],"gamecube")==0)
                 gamecube=1;
@@ -267,13 +267,13 @@ int showGameInfo(char *ID) {
         if (zapper) zapperImgData = new GuiImageData(zapperR_png);
         else zapperImgData = new GuiImageData(zapper_png);
 
-        if (wiispeak) wiispeakImgData = new GuiImageData(wiispeakR_png);
+		if (wiispeak) wiispeakImgData = new GuiImageData(wiispeakR_png);
         else wiispeakImgData = new GuiImageData(wiispeak_png);
 
-        if (nintendods) nintendodsImgData = new GuiImageData(nintendodsR_png);
+		if (nintendods) nintendodsImgData = new GuiImageData(nintendodsR_png);
         else nintendodsImgData = new GuiImageData(nintendods_png);
 
-        //if (vitalitysensor) vitalitysensorImgData = new GuiImageData(vitalitysensorR_png);
+		//if (vitalitysensor) vitalitysensorImgData = new GuiImageData(vitalitysensorR_png);
         //else vitalitysensorImgData = new GuiImageData(vitalitysensor_png);
 
         if (balanceboard) balanceboardImgData = new GuiImageData(balanceboardR_png);
@@ -302,13 +302,13 @@ int showGameInfo(char *ID) {
                 balanceboard=1;
             if (strcmp(gameinfo.accessories[i],"microphone")==0)
                 microphone=1;
-            if (strcmp(gameinfo.accessories[i],"zapper")==0)
+			if (strcmp(gameinfo.accessories[i],"zapper")==0)
                 zapper=1;
-            if (strcmp(gameinfo.accessories[i],"nintendods")==0)
+			if (strcmp(gameinfo.accessories[i],"nintendods")==0)
                 nintendods=1;
-            if (strcmp(gameinfo.accessories[i],"wiispeak")==0)
+			if (strcmp(gameinfo.accessories[i],"wiispeak")==0)
                 wiispeak=1;
-            //if (strcmp(gameinfo.accessories[i],"vitalitysensor")==0)
+			//if (strcmp(gameinfo.accessories[i],"vitalitysensor")==0)
             //    vitalitysensor=1;
             if (strcmp(gameinfo.accessories[i],"gamecube")==0)
                 gamecube=1;
@@ -433,7 +433,7 @@ int showGameInfo(char *ID) {
             gameinfoWindow.Append(microphoneImg);
             intputX += (CFG.widescreen ? microphoneImg->GetWidth() * .8 : microphoneImg->GetWidth())+5;
         }
-        if (zapper==1) {
+		if (zapper==1) {
             zapperImg = new GuiImage( zapperImgData);
             zapperImg->SetWidescreen(CFG.widescreen);
             zapperImg->SetPosition(intputX , inputY);
@@ -441,7 +441,7 @@ int showGameInfo(char *ID) {
             gameinfoWindow.Append(zapperImg);
             intputX += (CFG.widescreen ? zapperImg->GetWidth() * .8 : zapperImg->GetWidth())+5;
         }
-        if (wiispeak==1) {
+		if (wiispeak==1) {
             wiispeakImg = new GuiImage(wiispeakImgData);
             wiispeakImg->SetWidescreen(CFG.widescreen);
             wiispeakImg->SetPosition(intputX , inputY);
@@ -449,7 +449,7 @@ int showGameInfo(char *ID) {
             gameinfoWindow.Append(wiispeakImg);
             intputX += (CFG.widescreen ? wiispeakImg->GetWidth() * .8 : wiispeakImg->GetWidth())+5;
         }
-        if (nintendods==1) {
+		if (nintendods==1) {
             nintendodsImg = new GuiImage(nintendodsImgData);
             nintendodsImg->SetWidescreen(CFG.widescreen);
             nintendodsImg->SetPosition(intputX , inputY);
@@ -457,8 +457,8 @@ int showGameInfo(char *ID) {
             gameinfoWindow.Append(nintendodsImg);
             intputX += (CFG.widescreen ? nintendodsImg->GetWidth() * .8 : nintendodsImg->GetWidth())+5;
         }
-        /*
-        if (vitalitysensor==1) {
+		/*
+		if (vitalitysensor==1) {
             vitalitysensorImg = new GuiImage(vitalitysensorImgData);
             vitalitysensorImg->SetWidescreen(CFG.widescreen);
             vitalitysensorImg->SetPosition(intputX , inputY);
@@ -466,7 +466,7 @@ int showGameInfo(char *ID) {
             gameinfoWindow.Append(vitalitysensorImg);
             intputX += (CFG.widescreen ? vitalitysensorImg->GetWidth() * .8 : vitalitysensorImg->GetWidth())+5;
         }
-        */
+		*/
         if (dancepad==1) {
             dancepadImg = new GuiImage(dancepadImgData);
             dancepadImg->SetWidescreen(CFG.widescreen);
@@ -497,20 +497,20 @@ int showGameInfo(char *ID) {
                 //wifiplayersImgData= new GuiImageData(wifi6_png);
                 wifiplayersImgData= new GuiImageData(wifi8_png);
             }
-            /*
-            if (atoi(gameinfo.wifiplayers)>6) {
+			/*
+			if (atoi(gameinfo.wifiplayers)>6) {
                 wifiplayersImgData= new GuiImageData(wifi8_png);
             }
-            */
+			*/
             if (atoi(gameinfo.wifiplayers)>8) {
-                wifiplayersImgData= new GuiImageData(wifi12_png);
-            }
+            	wifiplayersImgData= new GuiImageData(wifi12_png);
+			}
             if (atoi(gameinfo.wifiplayers)>12) {
-                wifiplayersImgData= new GuiImageData(wifi16_png);
-            }
+            	wifiplayersImgData= new GuiImageData(wifi16_png);
+			}
             if (atoi(gameinfo.wifiplayers)>16) {
-                wifiplayersImgData= new GuiImageData(wifi32_png);
-            }
+            	wifiplayersImgData= new GuiImageData(wifi32_png);
+			}
             wifiplayersImg = new GuiImage(wifiplayersImgData);
             wifiplayersImg->SetWidescreen(CFG.widescreen);
             wifiplayersImg->SetPosition(intputX , inputY);
@@ -584,7 +584,7 @@ int showGameInfo(char *ID) {
             char meminfotxt[200];
             strlcpy(meminfotxt,MemInfo(),sizeof(meminfotxt));
             snprintf(linebuf, sizeof(linebuf), "%s",meminfotxt);
-	    memTxt = new GuiText(linebuf, 18, (GXColor) {0,0,0, 255});
+            memTxt = new GuiText(linebuf, 18, (GXColor) {0,0,0, 255});
             memTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
             memTxt->SetPosition(0,0);
             gameinfoWindow.Append(memTxt);
@@ -594,7 +594,7 @@ int showGameInfo(char *ID) {
         int titlefontsize=25;
         if (strcmp(gameinfo.title,"") != 0) {
             snprintf(linebuf, sizeof(linebuf), "%s",gameinfo.title);
-	    titleTxt = new GuiText(linebuf, titlefontsize, (GXColor) {0,0,0, 255});
+            titleTxt = new GuiText(linebuf, titlefontsize, (GXColor) {0,0,0, 255});
             titleTxt->SetMaxWidth(350, GuiText::SCROLL);
             //while (titleTxt->GetWidth()>250) { titleTxt->SetFontSize(titlefontsize-=2); }
             titleTxt->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
@@ -649,7 +649,7 @@ int showGameInfo(char *ID) {
         }
         if (strcmp(gameinfo.year,"") != 0) {
             snprintf(linebuf, sizeof(linebuf), "%s : %s%s", tr("Released"), linebuf2, gameinfo.year);
-	    releasedTxt = new GuiText(linebuf, 16, (GXColor) {0,0,0, 255});
+            releasedTxt = new GuiText(linebuf, 16, (GXColor) {0,0,0, 255});
             if (releasedTxt->GetWidth()>300) newline=2;
             releasedTxt->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
             releasedTxt->SetPosition(-17,12+indexy);
@@ -661,7 +661,7 @@ int showGameInfo(char *ID) {
         //publisher
         if (strcmp(gameinfo.publisher,"") != 0) {
             snprintf(linebuf, sizeof(linebuf), "%s %s", tr("Published by"), gameinfo.publisher);
-	    publisherTxt = new GuiText(linebuf, 16, (GXColor) {0,0,0, 255});
+            publisherTxt = new GuiText(linebuf, 16, (GXColor) {0,0,0, 255});
             if (publisherTxt->GetWidth()>250) newline=2;
             publisherTxt->SetMaxWidth(250,GuiText::WRAP);
             publisherTxt->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
@@ -674,7 +674,7 @@ int showGameInfo(char *ID) {
         //developer
         if (strcmp(gameinfo.developer,"") != 0 && strcasecmp(gameinfo.developer,gameinfo.publisher) != 0)	{
             snprintf(linebuf, sizeof(linebuf), "%s %s", tr("Developed by"), gameinfo.developer);
-	    developerTxt = new GuiText(linebuf, 16, (GXColor) {0,0,0, 255});
+            developerTxt = new GuiText(linebuf, 16, (GXColor) {0,0,0, 255});
             if (developerTxt->GetWidth()>250) newline=2;
             developerTxt->SetMaxWidth(250,GuiText::WRAP);
             developerTxt->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
@@ -689,7 +689,7 @@ int showGameInfo(char *ID) {
         genreTxt = new GuiText * [gameinfo.genreCnt + 1];
         for (int i=1;i<=gameinfo.genreCnt;i++) {
             snprintf(linebuf, sizeof(linebuf), "%s", gameinfo.genresplit[i]);
-	    genreTxt[i] = new GuiText(linebuf, 16, (GXColor) {0,0,0, 255});
+            genreTxt[i] = new GuiText(linebuf, 16, (GXColor) {0,0,0, 255});
             genreTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
             genreTxt[i]->SetPosition(205,12+genreY);
             genreY+=20;
@@ -704,7 +704,7 @@ int showGameInfo(char *ID) {
             } else {
                 snprintf(linebuf, sizeof(linebuf), "%s",gameinfo.wififeatures[i]);
             }
-	    wifiTxt[i] = new GuiText(linebuf, 16, (GXColor) {0,0,0, 255});
+            wifiTxt[i] = new GuiText(linebuf, 16, (GXColor) {0,0,0, 255});
             wifiTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
             wifiTxt[i]->SetPosition(215,200+wifiY);
             wifiY-=20;
@@ -712,10 +712,10 @@ int showGameInfo(char *ID) {
         }
         if (strcmp(gameinfo.wififeatures[1],"") !=0) {
             snprintf(linebuf, sizeof(linebuf), "%s:",tr("WiFi Features"));
-        } else {
+		} else {
             strcpy(linebuf,"");
-        }
-	wifiTxt[0] = new GuiText(linebuf, 16, (GXColor) {0,0,0, 255});
+        }		
+		wifiTxt[0] = new GuiText(linebuf, 16, (GXColor) {0,0,0, 255});
         wifiTxt[0]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
         wifiTxt[0]->SetPosition(205,200+wifiY);
         gameinfoWindow.Append(wifiTxt[0]);
@@ -724,7 +724,7 @@ int showGameInfo(char *ID) {
         int pagesize=12;
         if (strcmp(gameinfo.synopsis,"") !=0)	{
             snprintf(linebuf, sizeof(linebuf), "%s", gameinfo.synopsis);
-	    synopsisTxt = new GuiText(linebuf, 16, (GXColor) {0,0,0, 255});
+            synopsisTxt = new GuiText(linebuf, 16, (GXColor) {0,0,0, 255});
             synopsisTxt->SetMaxWidth(350,GuiText::WRAP);
             synopsisTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
             synopsisTxt->SetPosition(0,0);
@@ -764,37 +764,37 @@ int showGameInfo(char *ID) {
 
         snprintf(linebuf, sizeof(linebuf), "http://wiitdb.com");
         //snprintf(linebuf, sizeof(linebuf), tr("Don't bother the USB Loader GX Team about errors in this file."));
-	wiitdb1Txt = new GuiText(linebuf, 16, (GXColor) {0,0,0, 255});
+        wiitdb1Txt = new GuiText(linebuf, 16, (GXColor) {0,0,0, 255});
         wiitdb1Txt->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
         wiitdb1Txt->SetPosition(40,-15);
         gameinfoWindow.Append(wiitdb1Txt);
         snprintf(linebuf, sizeof(linebuf), tr("If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"));
-	wiitdb2Txt = new GuiText(linebuf, 14, (GXColor) {0,0,0, 255});
+        wiitdb2Txt = new GuiText(linebuf, 14, (GXColor) {0,0,0, 255});
         wiitdb2Txt->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
         wiitdb2Txt->SetPosition(202,-15);
         gameinfoWindow.Append(wiitdb2Txt);
-        snprintf(linebuf, sizeof(linebuf), " ");
-	wiitdb3Txt = new GuiText(linebuf, 14, (GXColor) {0,0,0, 255});
+		snprintf(linebuf, sizeof(linebuf), " ");
+        wiitdb3Txt = new GuiText(linebuf, 14, (GXColor) {0,0,0, 255});
         wiitdb3Txt->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
         wiitdb3Txt->SetPosition(202,-4);
         gameinfoWindow.Append(wiitdb3Txt);
 
         gameinfoWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_IN, 100);
 
-        GuiTrigger trigZ;
-        trigZ.SetButtonOnlyTrigger(-1, WPAD_NUNCHUK_BUTTON_Z | WPAD_CLASSIC_BUTTON_ZL, PAD_TRIGGER_Z);
+	GuiTrigger trigZ;
+	trigZ.SetButtonOnlyTrigger(-1, WPAD_NUNCHUK_BUTTON_Z | WPAD_CLASSIC_BUTTON_ZL, PAD_TRIGGER_Z);
 
-        GuiButton screenShotBtn(0,0);
-        screenShotBtn.SetPosition(0,0);
-        screenShotBtn.SetTrigger(&trigZ);
-        gameinfoWindow.Append(&screenShotBtn);
+	GuiButton screenShotBtn(0,0);
+	screenShotBtn.SetPosition(0,0);
+	screenShotBtn.SetTrigger(&trigZ);
+	gameinfoWindow.Append(&screenShotBtn);
         HaltGui();
         //mainWindow->SetState(STATE_DISABLED);
         mainWindow->Append(&gameinfoWindow);
         mainWindow->ChangeFocus(&gameinfoWindow);
         ResumeGui();
 
-        bool savedURL = false;
+		bool savedURL = false;
 
         while (choice == -1) {
 
@@ -806,24 +806,24 @@ int showGameInfo(char *ID) {
                 Sys_Reboot();
 
             else if ((backBtn.GetState()==STATE_CLICKED)||(backBtn.GetState()==STATE_HELD)) {
-                backBtn.ResetState();
+				backBtn.ResetState();
                 if (page==1) {
                     choice=1;
                     synopsisTxt = NULL;
                     break;
                 } else if (page==2) {
                     HaltGui();
-                    gameinfoWindow2.Remove(&nextBtn);
+					gameinfoWindow2.Remove(&nextBtn);
                     gameinfoWindow2.Remove(&backBtn);
-                    gameinfoWindow2.Remove(&homeBtn);
-                    gameinfoWindow2.Remove(&screenShotBtn);
-                    gameinfoWindow2.SetVisible(false);
+		    gameinfoWindow2.Remove(&homeBtn);
+		    gameinfoWindow2.Remove(&screenShotBtn);
+		    gameinfoWindow2.SetVisible(false);
                     gameinfoWindow.SetVisible(true);
-                    gameinfoWindow.Append(&backBtn);
+					gameinfoWindow.Append(&backBtn);
                     gameinfoWindow.Append(&nextBtn);
-                    gameinfoWindow.Append(&homeBtn);
-                    gameinfoWindow.Append(&screenShotBtn);
-                    mainWindow->Remove(&gameinfoWindow2);
+		    gameinfoWindow.Append(&homeBtn);
+		    gameinfoWindow.Append(&screenShotBtn);
+		    mainWindow->Remove(&gameinfoWindow2);
                     ResumeGui();
                     page=1;
                 }
@@ -832,33 +832,33 @@ int showGameInfo(char *ID) {
                 nextBtn.ResetState();
                 if (page==1) {
                     HaltGui();
-                    gameinfoWindow.Remove(&nextBtn);
+					gameinfoWindow.Remove(&nextBtn);
                     gameinfoWindow.Remove(&backBtn);
-                    gameinfoWindow.Remove(&homeBtn);
-                    gameinfoWindow.Remove(&screenShotBtn);
-                    gameinfoWindow.SetVisible(false);
+		    gameinfoWindow.Remove(&homeBtn);
+		    gameinfoWindow.Remove(&screenShotBtn);
+		    gameinfoWindow.SetVisible(false);
                     gameinfoWindow2.SetVisible(true);
                     coverImg->SetPosition(15,30);
                     gameinfoWindow2.Append(&nextBtn);
                     gameinfoWindow2.Append(&backBtn);
-                    gameinfoWindow2.Append(&homeBtn);
-                    gameinfoWindow2.Append(&screenShotBtn);
-                    mainWindow->Append(&gameinfoWindow2);
+		    gameinfoWindow2.Append(&homeBtn);
+		    gameinfoWindow2.Append(&screenShotBtn);
+		    mainWindow->Append(&gameinfoWindow2);
                     ResumeGui();
                     page=2;
                 } else {
                     HaltGui();
-                    gameinfoWindow2.Remove(&nextBtn);
+					gameinfoWindow2.Remove(&nextBtn);
                     gameinfoWindow2.Remove(&backBtn);
-                    gameinfoWindow2.Remove(&homeBtn);
-                    gameinfoWindow2.Remove(&screenShotBtn);
-                    gameinfoWindow2.SetVisible(false);
+		    gameinfoWindow2.Remove(&homeBtn);
+		    gameinfoWindow2.Remove(&screenShotBtn);
+		    gameinfoWindow2.SetVisible(false);
                     gameinfoWindow.SetVisible(true);
                     gameinfoWindow.Append(&backBtn);
                     gameinfoWindow.Append(&nextBtn);
-                    gameinfoWindow.Append(&homeBtn);
-                    gameinfoWindow.Append(&screenShotBtn);
-                    mainWindow->Remove(&gameinfoWindow2);
+		    gameinfoWindow.Append(&homeBtn);
+		    gameinfoWindow.Append(&screenShotBtn);
+		    mainWindow->Remove(&gameinfoWindow2);
                     ResumeGui();
                     page=1;
                 }
@@ -898,8 +898,8 @@ int showGameInfo(char *ID) {
                     page=1;
                 }
             } else if (urlBtn.GetState()==STATE_CLICKED && !savedURL) {
-                snprintf(linebuf, sizeof(linebuf), tr("Please wait..."));
-                wiitdb2Txt->SetText(linebuf);
+			    snprintf(linebuf, sizeof(linebuf), tr("Please wait..."));
+				wiitdb2Txt->SetText(linebuf);
                 gameinfoWindow.Append(wiitdb2Txt);
                 if (save_XML_URL()) {
                     snprintf(linebuf, sizeof(linebuf), tr("Your URL has been saved in %sWiiTDB_URL.txt."), Settings.update_path);
@@ -908,19 +908,20 @@ int showGameInfo(char *ID) {
                     snprintf(linebuf, sizeof(linebuf), tr("Paste it into your browser to get your WiiTDB.zip."));
                     wiitdb3Txt->SetText(linebuf);
                     gameinfoWindow.Append(wiitdb3Txt);
-                    savedURL = true;
+					savedURL = true;
                 } else {
-                    snprintf(linebuf, sizeof(linebuf), tr("Could not save."));
-                    wiitdb2Txt->SetText(linebuf);
-                    gameinfoWindow.Append(wiitdb2Txt);
-                }
-                urlBtn.ResetState();
-            } else if (screenShotBtn.GetState() == STATE_CLICKED) {
-                gprintf("\n\tscreenShotBtn clicked");
-                screenShotBtn.ResetState();
-                ScreenShot();
-                gprintf("...It's easy, mmmmmmKay");
+					snprintf(linebuf, sizeof(linebuf), tr("Could not save."));
+					wiitdb2Txt->SetText(linebuf);
+					gameinfoWindow.Append(wiitdb2Txt);
+				}
+				urlBtn.ResetState();
             }
+	    else if (screenShotBtn.GetState() == STATE_CLICKED) {
+			gprintf("\n\tscreenShotBtn clicked");
+			screenShotBtn.ResetState();
+			ScreenShot();
+			gprintf("...It's easy, mmmmmmKay");
+		    }
         }
         if (page==1) {
             gameinfoWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 100);
@@ -1006,17 +1007,17 @@ int showGameInfo(char *ID) {
             ResumeGui();
         }
 
-        if (savedURL) return 3;
+		if (savedURL) return 3;
         return choice;
 
-        /* File not found */
+    /* File not found */
     } else {
         return -1;
     }
 }
 
 bool save_gamelist(int txt) { // save gamelist
-    mainWindow->SetState(STATE_DISABLED);
+	mainWindow->SetState(STATE_DISABLED);
     char tmp[200];
     sprintf(tmp, "%s", Settings.update_path);
     struct stat st;
@@ -1025,65 +1026,65 @@ bool save_gamelist(int txt) { // save gamelist
     }
     FILE *f;
     sprintf(tmp, "%sGameList.txt", Settings.update_path);
-    if (txt==1)
-        sprintf(tmp, "%sGameList.csv", Settings.update_path);
+	if (txt==1)
+	sprintf(tmp, "%sGameList.csv", Settings.update_path);
     f = fopen(tmp, "w");
     if (!f) {
         sleep(1);
-        mainWindow->SetState(STATE_DEFAULT);
+		mainWindow->SetState(STATE_DEFAULT);
         return false;
     }
     //make sure that all games are added to the gamelist
     __Menu_GetEntries(1);
 
     f32 size = 0.0;
-    f32 freespace, used;
-    unsigned int i;
+	f32 freespace, used;
+	unsigned int i;
 
-    WBFS_DiskSpace(&used, &freespace);
+	WBFS_DiskSpace(&used, &freespace);
 
-    fprintf(f, "# USB Loader Has Saved this file\n");
+	fprintf(f, "# USB Loader Has Saved this file\n");
     fprintf(f, "# This file was created based on your list of games and language settings.\n");
     fclose(f);
     /* Closing and reopening because of a write issue we are having right now */
     f = fopen(tmp, "w");
 
-    if (txt==0) 	{
-        fprintf(f, "# USB Loader Has Saved this file\n");
-        fprintf(f, "# This file was created based on your list of games and language settings.\n\n");
+	if (txt==0) 	{
+		fprintf(f, "# USB Loader Has Saved this file\n");
+		fprintf(f, "# This file was created based on your list of games and language settings.\n\n");
 
-        fprintf(f, "%.2fGB %s %.2fGB %s\n\n",freespace,tr("of"),(freespace+used),tr("free"));
-        fprintf(f, "ID     Size(GB)  Name\n");
+		fprintf(f, "%.2fGB %s %.2fGB %s\n\n",freespace,tr("of"),(freespace+used),tr("free"));
+		fprintf(f, "ID     Size(GB)  Name\n");
 
-        for (i = 0; i < gameCnt ; i++) {
-            struct discHdr* header = &gameList[i];
-            WBFS_GameSize(header->id, &size);
-            if (i<500) {
-                fprintf(f, "%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2], header->id[3], header->id[4], header->id[5]);
-                fprintf(f, " [%.2f]   ", size);
-                fprintf(f, " %s",get_title(header));
-            }
-            fprintf(f, "\n");
-        }
-    } else {
+		for (i = 0; i < gameCnt ; i++) {
+			struct discHdr* header = &gameList[i];
+			WBFS_GameSize(header->id, &size);
+			if (i<500) {
+				fprintf(f, "%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2], header->id[3], header->id[4], header->id[5]);
+				fprintf(f, " [%.2f]   ", size);
+				fprintf(f, " %s",get_title(header));
+			}
+			fprintf(f, "\n");
+		}
+	} else {
 
-        fprintf(f, "\"ID\",\"Size(GB)\",\"Name\"\n");
+	fprintf(f, "\"ID\",\"Size(GB)\",\"Name\"\n");
 
-        for (i = 0; i < gameCnt ; i++) {
-            struct discHdr* header = &gameList[i];
-            WBFS_GameSize(header->id, &size);
-            if (i<500) {
-                fprintf(f, "\"%c%c%c%c%c%c\",\"%.2f\",\"%s\"\n", header->id[0], header->id[1], header->id[2], header->id[3], header->id[4], header->id[5], size,get_title(header));
-                //fprintf(f, "\"%.2f\",", size);
-                //fprintf(f, "\"%s\"",get_title(header));
-            }
-            //fprintf(f, "\n");
-        }
-    }
+		for (i = 0; i < gameCnt ; i++) {
+			struct discHdr* header = &gameList[i];
+			WBFS_GameSize(header->id, &size);
+			if (i<500) {
+				fprintf(f, "\"%c%c%c%c%c%c\",\"%.2f\",\"%s\"\n", header->id[0], header->id[1], header->id[2], header->id[3], header->id[4], header->id[5], size,get_title(header));
+				//fprintf(f, "\"%.2f\",", size);
+				//fprintf(f, "\"%s\"",get_title(header));
+			}
+			//fprintf(f, "\n");
+		}
+	}
     fclose(f);
 
     __Menu_GetEntries();
-    mainWindow->SetState(STATE_DEFAULT);
+	mainWindow->SetState(STATE_DEFAULT);
     return true;
 }
 
@@ -1102,10 +1103,10 @@ bool save_XML_URL() { // save xml url as as txt file for people without wifi
         sleep(1);
         return false;
     }
-
-    char XMLurl[3540];
-    build_XML_URL(XMLurl,sizeof(XMLurl));
-
+	
+	char XMLurl[3540];
+	build_XML_URL(XMLurl,sizeof(XMLurl));
+	
     fprintf(f, "# USB Loader Has Saved this file\n");
     fprintf(f, "# This URL was created based on your list of games and language settings.\n");
     fclose(f);
@@ -1122,16 +1123,17 @@ bool save_XML_URL() { // save xml url as as txt file for people without wifi
 }
 
 
-void MemInfoPrompt() {
-    char meminfotxt[200];
+void MemInfoPrompt()
+{
+	char meminfotxt[200];
     strlcpy(meminfotxt,MemInfo(),sizeof(meminfotxt));
-    WindowPrompt(0,meminfotxt, tr("OK"));
+	WindowPrompt(0,meminfotxt, tr("OK"));
 }
 
 
 void build_XML_URL(char *XMLurl, int XMLurlsize) {
     __Menu_GetEntries(1);
-    // NET_BUFFER_SIZE in http.c needs to be set to size of XMLurl + headerformat
+	// NET_BUFFER_SIZE in http.c needs to be set to size of XMLurl + headerformat
     char url[3540];
     char filename[10];
     snprintf(url,sizeof(url),"http://wiitdb.com/wiitdb.zip?LANG=%s&ID=", Settings.db_language);
@@ -1139,12 +1141,12 @@ void build_XML_URL(char *XMLurl, int XMLurlsize) {
     for (i = 0; i < gameCnt ; i++) {
         struct discHdr* header = &gameList[i];
         if (i<500) {
-            snprintf(filename,sizeof(filename),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
+			snprintf(filename,sizeof(filename),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
             strncat(url,filename,6);
             if ((i!=gameCnt-1)&&(i<500))
                 strncat(url, ",",1);
         }
     }
-    strlcpy(XMLurl,url,XMLurlsize);
-    __Menu_GetEntries();
+	strlcpy(XMLurl,url,XMLurlsize);
+	__Menu_GetEntries();
 }

@@ -42,37 +42,37 @@
  *
  * Returns:
  */
-void ntfs_debug_runlist_dump(const runlist_element *rl) {
-    int i = 0;
-    const char *lcn_str[5] = { "LCN_HOLE         ", "LCN_RL_NOT_MAPPED",
-                               "LCN_ENOENT       ", "LCN_EINVAL       ",
-                               "LCN_unknown      "
-                             };
+void ntfs_debug_runlist_dump(const runlist_element *rl)
+{
+	int i = 0;
+	const char *lcn_str[5] = { "LCN_HOLE         ", "LCN_RL_NOT_MAPPED",
+				   "LCN_ENOENT       ", "LCN_EINVAL       ",
+				   "LCN_unknown      " };
 
-    ntfs_log_debug("NTFS-fs DEBUG: Dumping runlist (values in hex):\n");
-    if (!rl) {
-        ntfs_log_debug("Run list not present.\n");
-        return;
-    }
-    ntfs_log_debug("VCN              LCN               Run length\n");
-    do {
-        LCN lcn = (rl + i)->lcn;
+	ntfs_log_debug("NTFS-fs DEBUG: Dumping runlist (values in hex):\n");
+	if (!rl) {
+		ntfs_log_debug("Run list not present.\n");
+		return;
+	}
+	ntfs_log_debug("VCN              LCN               Run length\n");
+	do {
+		LCN lcn = (rl + i)->lcn;
 
-        if (lcn < (LCN)0) {
-            int idx = -lcn - 1;
+		if (lcn < (LCN)0) {
+			int idx = -lcn - 1;
 
-            if (idx > -LCN_EINVAL - 1)
-                idx = 4;
-            ntfs_log_debug("%-16lld %s %-16lld%s\n",
-                           (long long)rl[i].vcn, lcn_str[idx],
-                           (long long)rl[i].length,
-                           rl[i].length ? "" : " (runlist end)");
-        } else
-            ntfs_log_debug("%-16lld %-16lld  %-16lld%s\n",
-                           (long long)rl[i].vcn, (long long)rl[i].lcn,
-                           (long long)rl[i].length,
-                           rl[i].length ? "" : " (runlist end)");
-    } while (rl[i++].length);
+			if (idx > -LCN_EINVAL - 1)
+				idx = 4;
+			ntfs_log_debug("%-16lld %s %-16lld%s\n", 
+				       (long long)rl[i].vcn, lcn_str[idx], 
+				       (long long)rl[i].length, 
+				       rl[i].length ? "" : " (runlist end)");
+		} else
+			ntfs_log_debug("%-16lld %-16lld  %-16lld%s\n", 
+				       (long long)rl[i].vcn, (long long)rl[i].lcn, 
+				       (long long)rl[i].length, 
+				       rl[i].length ? "" : " (runlist end)");
+	} while (rl[i++].length);
 }
 
 #endif

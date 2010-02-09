@@ -1,17 +1,18 @@
 
 #define MAX_SPLIT 10
 
-typedef struct split_info {
-    char fname[1024];
-    //FILE *f[MAX_SPLIT];
-    int fd[MAX_SPLIT];
-    //u64 fsize[MAX_SPLIT];
-    u32 split_sec;
-    u32 total_sec;
-    u64 split_size;
-    u64 total_size;
-    int create_mode;
-    int max_split;
+typedef struct split_info
+{
+	char fname[1024];
+	//FILE *f[MAX_SPLIT];
+	int fd[MAX_SPLIT];
+	//u64 fsize[MAX_SPLIT];
+	u32 split_sec;
+	u32 total_sec;
+	u64 split_size;
+	u64 total_size;
+	int create_mode;
+	int max_split;
 } split_info_t;
 
 // 1 sector less than 4gb
@@ -30,5 +31,5 @@ void  split_set_size(split_info_t *s, u64 split_size, u64 total_size);
 void  split_close(split_info_t *s);
 int   split_open(split_info_t *s, char *fname);
 int   split_create(split_info_t *s, char *fname,
-                   u64 split_size, u64 total_size, bool overwrite);
+		u64 split_size, u64 total_size, bool overwrite);
 

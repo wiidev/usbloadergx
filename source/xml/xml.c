@@ -75,8 +75,8 @@ bool OpenXMLDatabase(char* xmlfilepath, char* argdblang, bool argJPtoEN, bool op
         snprintf(pathname, sizeof(pathname), "%s%s_%s.zip", pathname, xmlcfg_filename, game_partition);
         if (openfile) opensuccess = OpenXMLFile(pathname);
         if (!opensuccess) {
-            snprintf(pathname, sizeof(pathname), "%s", xmlfilepath);
-            if (xmlfilepath[strlen(xmlfilepath) - 1] != '/') snprintf(pathname, sizeof(pathname), "%s/",pathname);
+		    snprintf(pathname, sizeof(pathname), "%s", xmlfilepath);
+			if (xmlfilepath[strlen(xmlfilepath) - 1] != '/') snprintf(pathname, sizeof(pathname), "%s/",pathname);
             snprintf(pathname, sizeof(pathname), "%swiitdb.zip", pathname);
             if (openfile) opensuccess = OpenXMLFile(pathname);
         }
@@ -87,9 +87,9 @@ bool OpenXMLDatabase(char* xmlfilepath, char* argdblang, bool argJPtoEN, bool op
         if (loadtitles) LoadTitlesFromXML(argdblang, argJPtoEN);
         if (!keepopen) CloseXMLDatabase();
     } else {
-        if (loadtitles) LoadTitlesFromXML(argdblang, argJPtoEN);
+	    if (loadtitles) LoadTitlesFromXML(argdblang, argJPtoEN);
         if (!keepopen) CloseXMLDatabase();
-    }
+	}
     return true;
 }
 
@@ -208,9 +208,9 @@ char *GetLangSettingFromGame(char *gameid) {
 
 /* convert language text into ISO 639 two-letter language code (+ZHTW/ZHCN) */
 char *ConvertLangTextToCode(char *languagetxt) {
-    // do not convert if languagetext seems to be a language code (can be 2 or 4 letters)
-    if (strlen(languagetxt) <= 4)
-        return languagetxt;
+	// do not convert if languagetext seems to be a language code (can be 2 or 4 letters)
+	if (strlen(languagetxt) <= 4)
+		return languagetxt;
     int i;
     for (i=0;i<=10;i++) {
         if (!strcasecmp(languagetxt,langlist[i])) // case insensitive comparison
@@ -586,7 +586,7 @@ bool LoadGameInfoFromXML(char* gameid, char* langtxt)
         if (gameid[3] == 'S') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
         if (gameid[3] == 'H') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
         if (gameid[3] == 'U') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
-        if (gameid[3] == 'X') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
+		if (gameid[3] == 'X') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
         if (gameid[3] == 'Y') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
         if (gameid[3] == 'Z') strlcpy(gameinfo.region,"PAL",sizeof(gameinfo.region));
     }
@@ -746,7 +746,8 @@ char * get_nodetext(mxml_node_t *node, char *buffer, int buflen) { /* O - Text i
     return (buffer);
 }
 
-int GetRatingForGame(char *gameid) {
+int GetRatingForGame(char *gameid)
+{
     int retval=-1;
     if (!xml_loaded || nodedata == NULL)
         return -1;
@@ -769,13 +770,13 @@ int GetRatingForGame(char *gameid) {
     }
 
     if (!strcmp(element_text,gameid)) {
-        char type[5], value[5], dest[5];
+		char type[5], value[5], dest[5];
 
         GetTextFromNode(nodeid, nodedata, "rating", "type", NULL, MXML_NO_DESCEND, type, sizeof(type));
         GetTextFromNode(nodeid, nodedata, "rating", "value", NULL, MXML_NO_DESCEND, value, sizeof(value));
         ConvertRating(value, type, "PEGI", dest, sizeof(dest));
 
-        retval = atoi(dest);
-    }
-    return retval;
+		retval = atoi(dest);
+	}
+	return retval;
 }

@@ -9,7 +9,7 @@
 extern "C" {
 #endif
 
-    int inflateFile(FILE *source, FILE *dest);
+int inflateFile(FILE *source, FILE *dest);
 
 #ifdef __cplusplus
 }

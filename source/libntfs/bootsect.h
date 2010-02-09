@@ -1,5 +1,5 @@
 /*
- * bootsect.h - Exports for bootsector record handling.
+ * bootsect.h - Exports for bootsector record handling. 
  *		Originated from the Linux-NTFS project.
  *
  * Copyright (c) 2000-2002 Anton Altaparmakov

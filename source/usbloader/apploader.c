@@ -237,62 +237,72 @@ void Anti_002_fix(void *Address, int Size) {
 void PretendThereIsADiscInTheDrive(void *buffer, u32 len)
 
 {
-    const u8 oldcode[] = { 0x54, 0x60, 0xF7, 0xFF, 0x40, 0x82, 0x00, 0x0C, 0x54, 0x60, 0x07, 0xFF, 0x41, 0x82, 0x00, 0x0C };
-    const u8 newcode[] = { 0x54, 0x60, 0xF7, 0xFF, 0x40, 0x82, 0x00, 0x0C, 0x54, 0x60, 0x07, 0xFF, 0x48, 0x00, 0x00, 0x0C };
+   const u8 oldcode[] = { 0x54, 0x60, 0xF7, 0xFF, 0x40, 0x82, 0x00, 0x0C, 0x54, 0x60, 0x07, 0xFF, 0x41, 0x82, 0x00, 0x0C };
+   const u8 newcode[] = { 0x54, 0x60, 0xF7, 0xFF, 0x40, 0x82, 0x00, 0x0C, 0x54, 0x60, 0x07, 0xFF, 0x48, 0x00, 0x00, 0x0C };
 
-    int n;
+  int n;
 
-    /* Patch cover register */
+     /* Patch cover register */
 
-    for (n=0;n<(len-sizeof(oldcode));n+=4) {
-        if (memcmp(buffer+n, (void *) oldcode, sizeof(oldcode)) == 0) {
-            memcpy(buffer+n, (void *) newcode, sizeof(newcode));
-        }
+  for(n=0;n<(len-sizeof(oldcode));n+=4)
+  {
+    if (memcmp(buffer+n, (void *) oldcode, sizeof(oldcode)) == 0)
+    {
+      memcpy(buffer+n, (void *) newcode, sizeof(newcode));
     }
+  }
 
 }
 
 /** Thanks to WiiPower **/
-bool NewSuperMarioBrosPatch(void *Address, int Size) {
-    if (IOS_GetVersion() == 222 || IOS_GetVersion() == 223) return false; // Don't use this when using Hermes, it'll use the BCA fix instead...
+bool NewSuperMarioBrosPatch(void *Address, int Size)
+{
+	if (IOS_GetVersion() == 222 || IOS_GetVersion() == 223) return false; // Don't use this when using Hermes, it'll use the BCA fix instead...
 
-    if (memcmp("SMNE", (char *)0x80000000, 4) == 0) {
-        u8 SearchPattern[32] = 	{ 0x94, 0x21, 0xFF, 0xD0, 0x7C, 0x08, 0x02, 0xA6, 0x90, 0x01, 0x00, 0x34, 0x39, 0x61, 0x00, 0x30, 0x48, 0x12, 0xD7, 0x89, 0x7C, 0x7B, 0x1B, 0x78, 0x7C, 0x9C, 0x23, 0x78, 0x7C, 0xBD, 0x2B, 0x78 };
-        u8 PatchData[32] = 		{ 0x4E, 0x80, 0x00, 0x20, 0x7C, 0x08, 0x02, 0xA6, 0x90, 0x01, 0x00, 0x34, 0x39, 0x61, 0x00, 0x30, 0x48, 0x12, 0xD7, 0x89, 0x7C, 0x7B, 0x1B, 0x78, 0x7C, 0x9C, 0x23, 0x78, 0x7C, 0xBD, 0x2B, 0x78 };
+	if (memcmp("SMNE", (char *)0x80000000, 4) == 0)
+	{
+		u8 SearchPattern[32] = 	{ 0x94, 0x21, 0xFF, 0xD0, 0x7C, 0x08, 0x02, 0xA6, 0x90, 0x01, 0x00, 0x34, 0x39, 0x61, 0x00, 0x30, 0x48, 0x12, 0xD7, 0x89, 0x7C, 0x7B, 0x1B, 0x78, 0x7C, 0x9C, 0x23, 0x78, 0x7C, 0xBD, 0x2B, 0x78 };
+		u8 PatchData[32] = 		{ 0x4E, 0x80, 0x00, 0x20, 0x7C, 0x08, 0x02, 0xA6, 0x90, 0x01, 0x00, 0x34, 0x39, 0x61, 0x00, 0x30, 0x48, 0x12, 0xD7, 0x89, 0x7C, 0x7B, 0x1B, 0x78, 0x7C, 0x9C, 0x23, 0x78, 0x7C, 0xBD, 0x2B, 0x78 };
 
-        void *Addr = Address;
-        void *Addr_end = Address+Size;
+		void *Addr = Address;
+		void *Addr_end = Address+Size;
 
-        while (Addr <= Addr_end-sizeof(SearchPattern)) {
-            if (memcmp(Addr, SearchPattern, sizeof(SearchPattern))==0) {
-                memcpy(Addr,PatchData,sizeof(PatchData));
-                return true;
-            }
-            Addr += 4;
-        }
-    } else if (memcmp("SMN", (char *)0x80000000, 3) == 0) {
-        u8 SearchPattern[32] = 	{ 0x94, 0x21, 0xFF, 0xD0, 0x7C, 0x08, 0x02, 0xA6, 0x90, 0x01, 0x00, 0x34, 0x39, 0x61, 0x00, 0x30, 0x48, 0x12, 0xD9, 0x39, 0x7C, 0x7B, 0x1B, 0x78, 0x7C, 0x9C, 0x23, 0x78, 0x7C, 0xBD, 0x2B, 0x78 };
-        u8 PatchData[32] = 		{ 0x4E, 0x80, 0x00, 0x20, 0x7C, 0x08, 0x02, 0xA6, 0x90, 0x01, 0x00, 0x34, 0x39, 0x61, 0x00, 0x30, 0x48, 0x12, 0xD9, 0x39, 0x7C, 0x7B, 0x1B, 0x78, 0x7C, 0x9C, 0x23, 0x78, 0x7C, 0xBD, 0x2B, 0x78 };
+		while(Addr <= Addr_end-sizeof(SearchPattern))
+		{
+			if(memcmp(Addr, SearchPattern, sizeof(SearchPattern))==0)
+			{
+				memcpy(Addr,PatchData,sizeof(PatchData));
+				return true;
+			}
+			Addr += 4;
+		}
+	}
+	else if (memcmp("SMN", (char *)0x80000000, 3) == 0)
+	{
+		u8 SearchPattern[32] = 	{ 0x94, 0x21, 0xFF, 0xD0, 0x7C, 0x08, 0x02, 0xA6, 0x90, 0x01, 0x00, 0x34, 0x39, 0x61, 0x00, 0x30, 0x48, 0x12, 0xD9, 0x39, 0x7C, 0x7B, 0x1B, 0x78, 0x7C, 0x9C, 0x23, 0x78, 0x7C, 0xBD, 0x2B, 0x78 };
+		u8 PatchData[32] = 		{ 0x4E, 0x80, 0x00, 0x20, 0x7C, 0x08, 0x02, 0xA6, 0x90, 0x01, 0x00, 0x34, 0x39, 0x61, 0x00, 0x30, 0x48, 0x12, 0xD9, 0x39, 0x7C, 0x7B, 0x1B, 0x78, 0x7C, 0x9C, 0x23, 0x78, 0x7C, 0xBD, 0x2B, 0x78 };
 
-        void *Addr = Address;
-        void *Addr_end = Address+Size;
+		void *Addr = Address;
+		void *Addr_end = Address+Size;
 
-        while (Addr <= Addr_end-sizeof(SearchPattern)) {
-            if (memcmp(Addr, SearchPattern, sizeof(SearchPattern))==0) {
-                memcpy(Addr,PatchData,sizeof(PatchData));
-                return true;
-            }
-            Addr += 4;
-        }
-    }
-    return false;
+		while(Addr <= Addr_end-sizeof(SearchPattern))
+		{
+			if(memcmp(Addr, SearchPattern, sizeof(SearchPattern))==0)
+			{
+				memcpy(Addr,PatchData,sizeof(PatchData));
+				return true;
+			}
+			Addr += 4;
+		}
+	}
+	return false;
 }
 
 void gamepatches(void * dst, int len, u8 videoSelected, u8 patchcountrystring, u8 vipatch) {
 
-    PretendThereIsADiscInTheDrive(dst, len);
+	PretendThereIsADiscInTheDrive(dst, len);
 
-    GXRModeObj** table = NULL;
+	GXRModeObj** table = NULL;
     if (videoSelected == 5) // patch
 
     {
@@ -335,15 +345,15 @@ void gamepatches(void * dst, int len, u8 videoSelected, u8 patchcountrystring, u
         PatchCountryStrings(dst, len);
 
     NewSuperMarioBrosPatch(dst, len);
-
-    do_wip_code((u8 *)0x80000000);
+	
+	do_wip_code((u8 *)0x80000000);
 
 
     //if(Settings.anti002fix == on)
     if (fix002 == 2)
         Anti_002_fix(dst, len);
-
-    //patchdebug(dst, len);
+		
+	//patchdebug(dst, len);
 
 }
 
@@ -355,11 +365,11 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
 
     u32 appldr_len;
     s32 ret;
-    gprintf("\nApploader_Run() started");
+	gprintf("\nApploader_Run() started");
 
-    //u32 geckoattached = usb_isgeckoalive(EXI_CHANNEL_1);
-    //if (geckoattached)usb_flush(EXI_CHANNEL_1);
-    geckoinit = InitGecko();
+	//u32 geckoattached = usb_isgeckoalive(EXI_CHANNEL_1);
+	//if (geckoattached)usb_flush(EXI_CHANNEL_1);
+	geckoinit = InitGecko();
 
     /* Read apploader header */
     ret = WDVD_Read(buffer, 0x20, APPLDR_OFFSET);
@@ -374,7 +384,7 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
     if (ret < 0)
         return ret;
 
-    /* Set apploader entry function */
+	/* Set apploader entry function */
     appldr_entry = (app_entry)buffer[4];
 
     /* Call apploader entry */
@@ -385,7 +395,7 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
 
     if (error002fix!=0) {
         /* ERROR 002 fix (thanks to WiiPower for sharing this)*/
-        *(u32 *)0x80003188 = *(u32 *)0x80003140;
+		*(u32 *)0x80003188 = *(u32 *)0x80003140;
 //        *(u32 *)0x80003140 = *(u32 *)0x80003188;
     }
 
@@ -398,7 +408,7 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
         hooktype = 1;
         memcpy((void*)0x80001800, (char*)0x80000000, 6);	// For WiiRD
         /*HOOKS STUFF - FISHEARS*/
-        printf("\n\tcode handler loaded");
+	printf("\n\tcode handler loaded");
     }
 
     for (;;) {
@@ -440,7 +450,7 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
             *entry = (entry_point) load_dol_image(dolbuffer);
         }
 
-        if (dolbuffer)
+        if(dolbuffer)
             free(dolbuffer);
 
     } else if (alternatedol == 2) {

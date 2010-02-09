@@ -13,7 +13,7 @@ float gamesize;
  ***************************************************************************/
 
 int MenuInstall() {
-    gprintf("\nMenuInstall()");
+	gprintf("\nMenuInstall()");
 
     int menu = MENU_NONE;
     static struct discHdr headerdisc ATTRIBUTE_ALIGN(32);
@@ -29,9 +29,9 @@ int MenuInstall() {
 
     snprintf(imgPath, sizeof(imgPath), "%sbattery.png", CFG.theme_path);
     GuiImageData battery(imgPath, battery_png);
-    snprintf(imgPath, sizeof(imgPath), "%sbattery_bar.png", CFG.theme_path);
+	snprintf(imgPath, sizeof(imgPath), "%sbattery_bar.png", CFG.theme_path);
     GuiImageData batteryBar(imgPath, battery_bar_png);
-    snprintf(imgPath, sizeof(imgPath), "%sbattery_red.png", CFG.theme_path);
+	snprintf(imgPath, sizeof(imgPath), "%sbattery_red.png", CFG.theme_path);
     GuiImageData batteryRed(imgPath, battery_red_png);
     snprintf(imgPath, sizeof(imgPath), "%sbattery_bar_red.png", CFG.theme_path);
     GuiImageData batteryBarRed(imgPath, battery_bar_red_png);
@@ -116,16 +116,16 @@ int MenuInstall() {
                     break;
                 } else {
                     __Menu_GetEntries(); //get the entries again
-                    GuiSound * instsuccess = NULL;
-                    bgMusic->Pause();
-                    instsuccess = new GuiSound(success_ogg, success_ogg_size, Settings.sfxvolume);
-                    instsuccess->SetVolume(Settings.sfxvolume);
-                    instsuccess->SetLoop(0);
-                    instsuccess->Play();
+					GuiSound * instsuccess = NULL;
+					bgMusic->Pause();
+					instsuccess = new GuiSound(success_ogg, success_ogg_size, Settings.sfxvolume);
+					instsuccess->SetVolume(Settings.sfxvolume);
+					instsuccess->SetLoop(0);
+					instsuccess->Play();
                     WindowPrompt (tr("Successfully installed:"),name,tr("OK"));
-                    instsuccess->Stop();
-                    delete instsuccess;
-                    bgMusic->Resume();
+					instsuccess->Stop();
+					delete instsuccess;
+					bgMusic->Resume();
                     menu = MENU_DISCLIST;
                     break;
                 }
