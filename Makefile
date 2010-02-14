@@ -25,13 +25,13 @@ SOURCES		:=	source \
 				source/unzip \
 				source/language \
 				source/mload \
+				source/ramdisk \
 				source/patches \
 				source/usbloader \
 				source/xml \
 				source/network \
 				source/settings \
 				source/prompts \
-				source/ramdisk \
 				source/wad \
 				source/banner \
 				source/cheats \
@@ -40,9 +40,16 @@ SOURCES		:=	source \
 				source/menu \
 				source/libfat \
 				source/memory \
-				source/libntfs
+				source/libntfs \
+				source/usbloader/wbfs \
+#				source/libhfs+ \
+#				source/libhfs+/hfscommon/BTree \
+#				source/libhfs+/hfscommon/Catalog \
+#				source/libhfs+/hfscommon/Misc \
+#				source/libhfs+/hfscommon/Unicode
 DATA		:=	data
-INCLUDES	:=	source
+INCLUDES	:=	source 
+#source/libhfs+/hfscommon/headers
 
 #---------------------------------------------------------------------------------
 # options for code generation

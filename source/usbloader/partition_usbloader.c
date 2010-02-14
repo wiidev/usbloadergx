@@ -117,7 +117,7 @@ bool Device_WriteSectors(u32 device, u32 sector, u32 count, void *buffer)
 	return false;
 }
 
-s32 Partition_GetEntriesEx(u32 device, partitionEntry *outbuf, u32 *psect_size, int *num)
+s32 Partition_GetEntriesEx(u32 device, partitionEntry *outbuf, u32 *psect_size, u8 *num)
 {
 	static partitionTable table ATTRIBUTE_ALIGN(32);
 	partitionEntry *entry;
@@ -260,7 +260,7 @@ int get_fs_type(void *buff)
 {
 	char *buf = buff;
 	// WBFS
-	wbfs_head_t *head = (wbfs_head_t *)buf;
+	wbfs_head_t *head = (wbfs_head_t *)buff;
 	if (head->magic == wbfs_htonl(WBFS_MAGIC)) return FS_TYPE_WBFS;
 	// 55AA
 	if (buf[0x1FE] == 0x55 && buf[0x1FF] == 0xAA) {
@@ -354,12 +354,12 @@ s32 Partition_GetList(u32 device, PartList *plist)
 }
 
 
-int Partition_FixEXT(u32 device, int part)
+int Partition_FixEXT(u32 device, u8 part)
 {
 	static partitionTable table ATTRIBUTE_ALIGN(32);
 	int ret;
 
-	if (part < 0 || part > 3) return -1;
+	if (part > 3) return -1;
 	// Read partition table
 	ret = Device_ReadSectors(device, 0, 1, &table);
 	if (!ret) return -1;

@@ -13,6 +13,7 @@
 #include "cheats/cheatmenu.h"
 #include "fatmounter.h"
 #include "menu.h"
+#include "menu/menus.h"
 #include "filelist.h"
 #include "listfiles.h"
 #include "sys.h"
@@ -30,7 +31,7 @@ extern void titles_default();
 
 /*** Extern variables ***/
 extern GuiWindow * mainWindow;
-extern GuiSound * bgMusic;
+extern GuiBGM * bgMusic;
 extern GuiImage * bgImg;
 extern GuiImageData * pointer[4];
 extern GuiImageData * background;
@@ -1285,8 +1286,6 @@ int MenuSettings()
 					while (optionBrowser2.GetEffect() > 0) usleep(50);
 
 
-					char * oggfile;
-
 					bool firstRun = true;
 					while (!exit)
 					{
@@ -1336,8 +1335,9 @@ int MenuSettings()
 										w.SetEffect(EFFECT_FADE, -20);
 										while (w.GetEffect()>0) usleep(50);
 										mainWindow->Remove(&w);
-										while (returnhere)
-											returnhere = MenuOGG();
+										
+										returnhere = MenuBackgroundMusic();
+										
 										HaltGui();
 										mainWindow->Append(&w);
 										w.SetEffect(EFFECT_FADE, 20);
@@ -1346,13 +1346,15 @@ int MenuSettings()
 									} else
 										WindowPrompt(tr("No SD-Card inserted!"),tr("Insert an SD-Card to use this option."),tr("OK"));
 								}
-								if (!strcmp("notset", Settings.ogg_path))
-									options2.SetValue(Idx, "%s", tr("Standard"));
-								else
+								
+								char * filename = strrchr(Settings.ogg_path, '/');
+								if(filename)
 								{
-									oggfile = strrchr(Settings.ogg_path, '/')+1;
-									options2.SetValue(Idx, "%s", oggfile);
+									filename += 1;
+									options2.SetValue(Idx, "%s", filename);
 								}
+								else
+									options2.SetValue(Idx, "%s", tr("Standard"));
 							}
 
 							if(ret == ++Idx || firstRun)
@@ -1422,7 +1424,43 @@ int MenuSettings()
 								else
 									options2.SetValue(Idx,"%s", tr("OFF"));
 							}
+							
+							if(ret == ++Idx || firstRun)
+							{
+								if(firstRun) options2.SetName(Idx, "%s",tr("Music Loop Mode"));
+								if(ret == Idx)
+								{
+									Settings.musicloopmode++;
+									if (Settings.musicloopmode > 3)
+										Settings.musicloopmode = 0;
+	                                bgMusic->SetLoop(Settings.musicloopmode);
+								}
 
+								if (Settings.musicloopmode == ONCE)
+									options2.SetValue(Idx, tr("Play Once"));
+								else if(Settings.musicloopmode == LOOP)
+									options2.SetValue(Idx, tr("Loop Music"));
+								else if(Settings.musicloopmode == DIR_LOOP)
+									options2.SetValue(Idx, tr("Loop Directory"));
+								else if(Settings.musicloopmode == RANDOM_BGM)
+									options2.SetValue(Idx, tr("Random Directory Music"));
+							}
+							if(ret == ++Idx || firstRun)
+							{
+								if(firstRun) options2.SetName(Idx, "%s",tr("Reset BG Music"));
+								if(ret == Idx)
+								{
+									int result = WindowPrompt(tr("Reset to standard BGM?"), 0, tr("Yes"), tr("No"));
+                                    if(result)
+                                    {
+                                        bgMusic->LoadStandard();
+                                        bgMusic->Play();
+                                        options2.SetValue(Idx, "%s", tr("Standard"));
+                                    }
+								}
+								options2.SetValue(Idx,tr(" "));
+							}
+								
 							firstRun = false;
 						}
 					}
@@ -2148,10 +2186,9 @@ int MenuSettings()
 
 	// if partition has changed, Reinitialize it 
 	if (Settings.partition != settingspartitionold) {
-		WBFS_Close();
 		PartInfo pinfo = partitions.pinfo[Settings.partition];
 		partitionEntry pentry = partitions.pentry[Settings.partition];
- 		WBFS_OpenPart(load_from_fs, pinfo.index, pentry.sector, pentry.size, (char *) &game_partition);
+ 		WBFS_OpenPart(pinfo.part_fs, pinfo.index, pentry.sector, pentry.size, (char *) &game_partition);
 		load_from_fs = pinfo.part_fs;
 	}
 		

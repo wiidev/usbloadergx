@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-05 14:13+0100\n"
+"POT-Creation-Date: 2010-02-15 00:12+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: knife.hu kavid\n"
 "Language-Team: kavid\n"
@@ -188,9 +188,6 @@ msgstr "返回 Wii 系统菜单"
 msgid "Backgroundmusic"
 msgstr "背景音乐"
 
-msgid "Backgroundmusic Path changed."
-msgstr "背景音乐路径已变更"
-
 msgid "Big thanks to:"
 msgstr "非常感谢:"
 
@@ -220,6 +217,9 @@ msgstr "无法删除:"
 
 msgid "Cancel"
 msgstr "取消"
+
+msgid "Change Play Path"
+msgstr ""
 
 msgid "Channels"
 msgstr "频道"
@@ -756,6 +756,12 @@ msgstr "锁定控制台"
 msgid "Locked"
 msgstr "已锁定"
 
+msgid "Loop Directory"
+msgstr ""
+
+msgid "Loop Music"
+msgstr ""
+
 msgid "Loop Sound"
 msgstr ""
 
@@ -776,6 +782,9 @@ msgstr "图片格式错误,可能它的尺寸不是 4 的倍数."
 
 msgid "Mount DVD drive"
 msgstr "挂载DVD光驱"
+
+msgid "Music Loop Mode"
+msgstr ""
 
 msgid "Music Volume"
 msgstr "音量"
@@ -924,6 +933,18 @@ msgstr "从列表中选取"
 msgid "Play Count"
 msgstr "游戏计数"
 
+msgid "Play Next"
+msgstr ""
+
+msgid "Play Once"
+msgstr ""
+
+msgid "Play Previous"
+msgstr ""
+
+msgid "Playing Music:"
+msgstr ""
+
 msgid "Please wait..."
 msgstr "请等待..."
 
@@ -941,6 +962,9 @@ msgstr "发行"
 
 msgid "Quick Boot"
 msgstr "快速启动"
+
+msgid "Random Directory Music"
+msgstr ""
 
 msgid "Reading WAD data... Ok!"
 msgstr "读取 WAD 数据... 完成!"
@@ -960,8 +984,14 @@ msgstr ""
 msgid "Rename Game on WBFS"
 msgstr "改变 WBFS (硬盘)上的游戏名称"
 
+msgid "Reset BG Music"
+msgstr ""
+
 msgid "Reset Playcounter"
 msgstr "重置游戏计数"
+
+msgid "Reset to standard BGM?"
+msgstr ""
 
 msgid "Restarting..."
 msgstr "重启中..."
@@ -1013,9 +1043,6 @@ msgstr "九月"
 
 msgid "Set Search-Filter"
 msgstr "设置搜索过滤器"
-
-msgid "Set as backgroundmusic?"
-msgstr "设置成背景音乐?"
 
 msgid "Settings"
 msgstr "设置"
@@ -1347,6 +1374,12 @@ msgstr "的"
 
 msgid "seconds left"
 msgstr "剩余秒数"
+
+#~ msgid "Backgroundmusic Path changed."
+#~ msgstr "背景音乐路径已变更"
+
+#~ msgid "Set as backgroundmusic?"
+#~ msgstr "设置成背景音乐?"
 
 #~ msgid "The file is not a .wad"
 #~ msgstr "这不是一个 WAD 文件"

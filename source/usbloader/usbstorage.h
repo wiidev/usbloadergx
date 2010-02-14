@@ -14,7 +14,6 @@ extern "C" {
     
 	s32 USBStorage_WBFS_Open(char *buf_id);
 	s32 USBStorage_WBFS_Read(u32 woffset, u32 len, void *buffer);
-	s32 USBStorage_WBFS_ReadDebug(u32 off, u32 size, void *buffer);
 	s32 USBStorage_WBFS_SetDevice(int dev);
 	s32 USBStorage_WBFS_SetFragList(void *p, int size);
     

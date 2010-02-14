@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-05 14:13+0100\n"
+"POT-Creation-Date: 2010-02-15 00:12+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe, Cambo\n"
@@ -188,9 +188,6 @@ msgstr "Torna al Menu Wii"
 msgid "Backgroundmusic"
 msgstr "Musica Sottofondo"
 
-msgid "Backgroundmusic Path changed."
-msgstr "Percorso Musica modificato"
-
 msgid "Big thanks to:"
 msgstr "Grazie mille a:"
 
@@ -220,6 +217,9 @@ msgstr "Impossibile eliminare:"
 
 msgid "Cancel"
 msgstr "Annulla"
+
+msgid "Change Play Path"
+msgstr ""
 
 msgid "Channels"
 msgstr "Canali"
@@ -756,6 +756,12 @@ msgstr "Blocco Console"
 msgid "Locked"
 msgstr "Bloccato"
 
+msgid "Loop Directory"
+msgstr ""
+
+msgid "Loop Music"
+msgstr ""
+
 msgid "Loop Sound"
 msgstr "Suono Ripetuto"
 
@@ -776,6 +782,9 @@ msgstr "Molto probabilmente le dimensioni non sono divisibili per 4."
 
 msgid "Mount DVD drive"
 msgstr "Avvia DVD"
+
+msgid "Music Loop Mode"
+msgstr ""
 
 msgid "Music Volume"
 msgstr "Volume"
@@ -924,6 +933,18 @@ msgstr "Seleziona da un elenco"
 msgid "Play Count"
 msgstr "Giocati"
 
+msgid "Play Next"
+msgstr ""
+
+msgid "Play Once"
+msgstr ""
+
+msgid "Play Previous"
+msgstr ""
+
+msgid "Playing Music:"
+msgstr ""
+
 msgid "Please wait..."
 msgstr "Attendere prego..."
 
@@ -941,6 +962,9 @@ msgstr "Pubblicato da"
 
 msgid "Quick Boot"
 msgstr "Avvio Veloce"
+
+msgid "Random Directory Music"
+msgstr ""
 
 msgid "Reading WAD data... Ok!"
 msgstr "Sto leggendo i dati del WAD... Ok!"
@@ -960,8 +984,14 @@ msgstr "Rimuovi aggiornamento"
 msgid "Rename Game on WBFS"
 msgstr "Rinomina Gioco su WBFS"
 
+msgid "Reset BG Music"
+msgstr ""
+
 msgid "Reset Playcounter"
 msgstr "Azzera contatore"
+
+msgid "Reset to standard BGM?"
+msgstr ""
 
 msgid "Restarting..."
 msgstr "Premere OK per riavviare..."
@@ -1013,9 +1043,6 @@ msgstr "settembre"
 
 msgid "Set Search-Filter"
 msgstr "Cerca Gioco"
-
-msgid "Set as backgroundmusic?"
-msgstr "Imposto come Musica Sottofondo?"
 
 msgid "Settings"
 msgstr "Impostazioni"
@@ -1347,6 +1374,12 @@ msgstr "di"
 
 msgid "seconds left"
 msgstr "secondi mancanti"
+
+#~ msgid "Backgroundmusic Path changed."
+#~ msgstr "Percorso Musica modificato"
+
+#~ msgid "Set as backgroundmusic?"
+#~ msgstr "Imposto come Musica Sottofondo?"
 
 #~ msgid "The file is not a .wad"
 #~ msgstr "Non è un file .wad"

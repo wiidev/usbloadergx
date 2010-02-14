@@ -65,7 +65,7 @@ int MenuCheck() {
 		
 		if (Settings.partition != -1 && partitions.num > Settings.partition) {
 			PartInfo pinfo = partitions.pinfo[Settings.partition];
-			if (WBFS_OpenPart(pinfo.part_fs, pinfo.index, partitions.pentry[Settings.partition].sector, partitions.pentry[Settings.partition].size, (char *) &game_partition) == 0)
+			if (!WBFS_OpenPart(pinfo.part_fs, pinfo.index, partitions.pentry[Settings.partition].sector, partitions.pentry[Settings.partition].size, (char *) &game_partition))
 			{
 				ret2 = 0;
 				load_from_fs = pinfo.part_fs;
@@ -121,7 +121,7 @@ int MenuCheck() {
             menu = MENU_FORMAT;
         }
     }
-
+	
     ret2 = Disc_Init();
     if (ret2 < 0) {
         WindowPrompt (tr("Error !"),tr("Could not initialize DIP module!"),tr("OK"));

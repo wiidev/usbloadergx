@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-05 14:22+0100\n"
+"POT-Creation-Date: 2010-02-15 00:12+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: glowy\n"
 "Language-Team: tj_cool, glowy\n"
@@ -188,9 +188,6 @@ msgstr "Terug naar Wii Menu"
 msgid "Backgroundmusic"
 msgstr "Achtergrondmuziek"
 
-msgid "Backgroundmusic Path changed."
-msgstr "Locatie achtergrondmuziek gewijzigd."
-
 msgid "Big thanks to:"
 msgstr "Grote dank aan:"
 
@@ -220,6 +217,9 @@ msgstr "Kan niet verwijderen:"
 
 msgid "Cancel"
 msgstr "Annuleren"
+
+msgid "Change Play Path"
+msgstr "Verander afspeel locatie"
 
 msgid "Channels"
 msgstr "Kanalen"
@@ -756,6 +756,12 @@ msgstr "Console vergrendelen"
 msgid "Locked"
 msgstr "Vergrendeld"
 
+msgid "Loop Directory"
+msgstr ""
+
+msgid "Loop Music"
+msgstr ""
+
 msgid "Loop Sound"
 msgstr "Geluid herhalen"
 
@@ -776,6 +782,9 @@ msgstr "Waarschijnlijk zijn de afmetingen niet deelbaar door 4."
 
 msgid "Mount DVD drive"
 msgstr "DVD Laden"
+
+msgid "Music Loop Mode"
+msgstr "Muziek Herhaal Mode"
 
 msgid "Music Volume"
 msgstr "Muziekvolume"
@@ -924,6 +933,18 @@ msgstr "Kiezen van lijst"
 msgid "Play Count"
 msgstr "Gespeeld"
 
+msgid "Play Next"
+msgstr "Speel Volgende"
+
+msgid "Play Once"
+msgstr ""
+
+msgid "Play Previous"
+msgstr "Speel Vorige"
+
+msgid "Playing Music:"
+msgstr "Speelt nu:"
+
 msgid "Please wait..."
 msgstr "Even geduld..."
 
@@ -941,6 +962,9 @@ msgstr "Uitgegeven door"
 
 msgid "Quick Boot"
 msgstr "Snelle start"
+
+msgid "Random Directory Music"
+msgstr ""
 
 msgid "Reading WAD data... Ok!"
 msgstr "WAD data lezen... Ok!"
@@ -960,8 +984,14 @@ msgstr "Verwijder update"
 msgid "Rename Game on WBFS"
 msgstr "Spel hernoemen op WBFS"
 
+msgid "Reset BG Music"
+msgstr "Reset achtergrond muziek"
+
 msgid "Reset Playcounter"
 msgstr "Speeltellers resetten"
+
+msgid "Reset to standard BGM?"
+msgstr "Reset naar standaard achtergrond muziek?"
 
 msgid "Restarting..."
 msgstr "Herstarten..."
@@ -1013,9 +1043,6 @@ msgstr "Sep"
 
 msgid "Set Search-Filter"
 msgstr "Zoekfilter instellen"
-
-msgid "Set as backgroundmusic?"
-msgstr "Instellen als achtergrondmuziek?"
 
 msgid "Settings"
 msgstr "Instellingen"
@@ -1348,6 +1375,12 @@ msgstr "van"
 msgid "seconds left"
 msgstr "seconden over"
 
+#~ msgid "Backgroundmusic Path changed."
+#~ msgstr "Locatie achtergrondmuziek gewijzigd."
+
+#~ msgid "Set as backgroundmusic?"
+#~ msgstr "Instellen als achtergrondmuziek?"
+
 #~ msgid "The file is not a .wad"
 #~ msgstr "Dit is geen .wad bestand"
 
@@ -1357,29 +1390,8 @@ msgstr "seconden over"
 #~ msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
 #~ msgstr "Je gebruikt het NTFS bestandssysteem. Door mogelijke schrijffouten naar een NTFS partitie, is een spel installeren niet mogelijk."
 
-#~ msgid "Change Play Path"
-#~ msgstr "Verander afspeel locatie"
-
-#~ msgid "Music Loop Mode"
-#~ msgstr "Muziek Herhaal Mode"
-
 #~ msgid "Partition Format Menu"
 #~ msgstr "Partitie Formatteer Menu"
-
-#~ msgid "Play Next"
-#~ msgstr "Speel Volgende"
-
-#~ msgid "Play Previous"
-#~ msgstr "Speel Vorige"
-
-#~ msgid "Playing Music:"
-#~ msgstr "Speelt nu:"
-
-#~ msgid "Reset BG Music"
-#~ msgstr "Reset achtergrond muziek"
-
-#~ msgid "Reset to standard BGM?"
-#~ msgstr "Reset naar standaard achtergrond muziek?"
 
 #~ msgid "Unlock the app first."
 #~ msgstr "Geef app eerst vrij."

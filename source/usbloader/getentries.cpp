@@ -8,6 +8,7 @@
 #include "settings/newtitles.h"
 
 #include "../prompts/TitleBrowser.h"
+#include  "prompts/PromptWindows.h"
 
 #include "wad/wad.h"
 #include "xml/xml.h"
@@ -15,6 +16,8 @@
 #include <algorithm>
 #include <vector>
 #include <wchar.h>
+
+#include "gecko.h"
 
 #include "listfiles.h"
 #define typei 0x00010001
@@ -26,6 +29,9 @@ u32		 gameCnt=0;
 wchar_t *gameFilter=NULL;
 wchar_t *gameFilterNextList=NULL;
 wchar_t *gameFilterPrev=NULL;
+
+struct discHdr * fullGameList =	NULL;
+s32 			 fullGameCnt  =	-1;
 
 extern u8 mountMethod;
 
@@ -59,19 +65,12 @@ static inline int wcsnicmp(const wchar_t *s1, const wchar_t *s2, int len)
  * EntryCmp
  ***************************************************************************/
 s32 __Menu_EntryCmp(const void *a, const void *b)
-
 {
-
     struct discHdr *hdr1 = (struct discHdr *)a;
-
     struct discHdr *hdr2 = (struct discHdr *)b;
 
-
-
     /* Compare strings */
-
     return stricmp(get_title(hdr1), get_title(hdr2));
-
 }
 
 s32 __Menu_EntryCmpCount(const void *a, const void *b) {
@@ -86,8 +85,6 @@ s32 __Menu_EntryCmpCount(const void *a, const void *b) {
     u16 count2 = 0;
     struct Game_NUM* game_num1 = CFG_get_game_num(hdr1->id);
     struct Game_NUM* game_num2 = CFG_get_game_num(hdr2->id);
-
-
 
     if (game_num1) count1 = game_num1->count;
     if (game_num2) count2 = game_num2->count;
@@ -119,52 +116,86 @@ s32 __Menu_EntryCmpFavorite(const void *a, const void *b) {
 
     return ret;
 }
+
+void ResetGamelist()
+{
+	if (fullGameList != NULL)
+	{
+		fullGameCnt = -1;
+		free(fullGameList);
+		fullGameList = NULL;
+	}
+}
+
+int GetFullHeaders(struct discHdr **headers, u32 *count)
+{
+	if (fullGameList == NULL || fullGameCnt == -1)
+	{
+		gprintf("Retrieving gamelist from WBFS\n");
+
+		// Retrieve all stuff from WBFS
+		u32 cnt;
+		
+		int ret = WBFS_GetCount(&cnt);
+		if (ret < 0)
+			return ret;
+		
+		/* Buffer length */
+		u32 len = sizeof(struct discHdr) * cnt;
+
+		/* Allocate memory */
+		struct discHdr *buffer = (struct discHdr *)memalign(32, len);
+		if (!buffer)
+			return -1;
+
+		/* Clear buffer */
+		memset(buffer, 0, len);
+
+		/* Get header list */
+		ret = WBFS_GetHeaders(buffer, cnt, sizeof(struct discHdr));
+		if (ret < 0) {
+			if (buffer) free(buffer);
+			return ret;
+		}
+				
+		fullGameList = buffer;
+		fullGameCnt = cnt;
+	}
+	else
+		gprintf("Retrieving gamelist from cache\n");
+	
+	*count = fullGameCnt;
+	if (headers != NULL)
+	{
+		*headers = fullGameList;
+	}
+	
+	return 0;
+}
+
 /****************************************************************************
  * Get PrevFilter
  ***************************************************************************/
-
 int __Menu_GetPrevFilter(int t, wchar_t* gameFilter, u32 gameFiltered, wchar_t **PgameFilterPrev)
 {
 
 	std::vector<wchar_t *> nameList;
 
-	struct discHdr *buffer = NULL;
+	struct discHdr *buffer = NULL; // DO NOT FREE THIS BUFFER, IT'S A REFERENCE
 	u32 cnt, len, i;
-	s32 ret;
 	
 	wchar_t *new_gameFilterPrev = wcsdup_new(gameFilter);
 
-
-	/* Get list length */
-	ret = WBFS_GetCount(&cnt);
-	if (ret < 0)
-		return ret;
-
-	/* Buffer length */
-	len = sizeof(struct discHdr) * cnt;
-
-	/* Allocate memory */
-	buffer = (struct discHdr *)memalign(32, len);
-	if (!buffer)
+	if (GetFullHeaders(&buffer, &cnt))
+	{
 		return -1;
-
-	/* Clear buffer */
-	memset(buffer, 0, len);
-
-	/* Get header list */
-	ret = WBFS_GetHeaders(buffer, cnt, sizeof(struct discHdr));
-	if (ret < 0) {
-		if (buffer) free(buffer);
-		return ret;
 	}
+
 	/* Fill nameList */
   	for (i = 0; i < cnt; i++)
 	{
 		struct discHdr *header = &buffer[i];
-
-		/* Register game */
-		NewTitles::Instance()->CheckGame(header->id);
-
+		
 		/* Filter Favorite */
 		if (Settings.fave && t==0)
 		{
@@ -193,11 +224,6 @@ int __Menu_GetPrevFilter(int t, wchar_t* gameFilter, u32 gameFiltered, wchar_t *
 		wchar_t *wname = FreeTypeGX::charToWideChar(get_title(header));
 		if(wname) nameList.push_back(wname);
 	}
-	
-	NewTitles::Instance()->Save();
-
-	/* delete buffer */
-	if(buffer) free(buffer);
 
 	/* Find Prev-Filter */
 	len = wcslen(new_gameFilterPrev);
@@ -455,38 +481,23 @@ int buildTitleList(int t, wchar_t* gameFilter, discHdr ** PgameList, u32 *PgameC
 }
 
 
-
 /****************************************************************************
  * Get Gamelist
  ***************************************************************************/
 int __Menu_GetGameList(int t, wchar_t* gameFilter, discHdr ** PgameList, u32 *PgameCnt) {
     struct discHdr *buffer = NULL;
+	struct discHdr *output = NULL;
 
-    u32 cnt, cnt2=0, len;
-    s32 ret;
+    u32 cnt, cnt2=0;
 
-    /* Get list length */
-    ret = WBFS_GetCount(&cnt);
-    if (ret < 0)
-        return ret;
+	if (GetFullHeaders(&buffer, &cnt))
+	{
+		return -1;
+	}
 
-    /* Buffer length */
-    len = sizeof(struct discHdr) * cnt;
-
-    /* Allocate memory */
-    buffer = (struct discHdr *)memalign(32, len);
-    if (!buffer)
-        return -1;
-
-    /* Clear buffer */
-    memset(buffer, 0, len);
-
-    /* Get header list */
-    ret = WBFS_GetHeaders(buffer, cnt, sizeof(struct discHdr));
-    if (ret < 0) {
-        if (buffer) free(buffer);
-        return ret;
-    }
+	int len = cnt * sizeof(struct discHdr);
+	output = (struct discHdr *) memalign(32, len);
+	memset(output, 0, len);
 	
     for (u32 i = 0; i < cnt; i++) {
 		struct discHdr *header = &buffer[i];
@@ -501,11 +512,11 @@ int __Menu_GetGameList(int t, wchar_t* gameFilter, discHdr ** PgameList, u32 *Pg
 				continue;
 		}
 
-                //ignore uLoader cfg "iso".  i was told it is "__CFG_"  but not confirmed
-                if (header->id[0]=='_'&&header->id[1]=='_'&&
-                    header->id[2]=='C'&&header->id[3]=='F'&&
-                    header->id[4]=='G'&&header->id[5]=='_')
-                    continue;
+		//ignore uLoader cfg "iso".  i was told it is "__CFG_"  but not confirmed
+		if (header->id[0]=='_'&&header->id[1]=='_'&&
+			header->id[2]=='C'&&header->id[3]=='F'&&
+			header->id[4]=='G'&&header->id[5]=='_')
+			continue;
 		
 		if (Settings.parentalcontrol && !Settings.godmode && t==0) {
 			if (get_block(header) >= Settings.parentalcontrol)
@@ -532,32 +543,33 @@ int __Menu_GetGameList(int t, wchar_t* gameFilter, discHdr ** PgameList, u32 *Pg
 				continue;
 			}
 		}
-		if(i != cnt2)
-			buffer[cnt2] = buffer[i];
+		output[cnt2] = buffer[i];
 		cnt2++;
 	}
 	NewTitles::Instance()->Save();
-	
+
 	if(cnt > cnt2)
 	{
 		cnt = cnt2;
-		buffer = (struct discHdr *)realloc(buffer, sizeof(struct discHdr) * cnt);
+		output = (struct discHdr *)realloc(output, sizeof(struct discHdr) * cnt);
 	}
-	if (!buffer)
+	if (!output)
 		return -1;
+	
+	gprintf("After retrieval, gamecount: %d\n", cnt);
 			
 	if (Settings.sort==pcount) {
-		qsort(buffer, cnt, sizeof(struct discHdr), __Menu_EntryCmpCount);
+		qsort(output, cnt, sizeof(struct discHdr), __Menu_EntryCmpCount);
 	} else if (Settings.fave) {
-		qsort(buffer, cnt, sizeof(struct discHdr), __Menu_EntryCmpFavorite);
+		qsort(output, cnt, sizeof(struct discHdr), __Menu_EntryCmpFavorite);
 	} else {
-		qsort(buffer, cnt, sizeof(struct discHdr), __Menu_EntryCmp);
+		qsort(output, cnt, sizeof(struct discHdr), __Menu_EntryCmp);
 	}
 
 	/* Set values */
-	if(PgameList) *PgameList = buffer; else free(buffer);
+	if(PgameList) *PgameList = output; else free(output);
 	if(PgameCnt) *PgameCnt  = cnt;
- 
+
     return 0;
 }
 

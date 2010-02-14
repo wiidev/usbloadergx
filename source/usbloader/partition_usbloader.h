@@ -38,32 +38,32 @@ typedef struct {
 
 typedef struct
 {
-	int fs_type;
-	int part_fs;
-	int wbfs_i;  // seq wbfs part index
-	int fat_i;   // seq fat part index
-	int ntfs_i;  // seq ntfs part index
-	int index;
+	u8 fs_type;
+	u8 part_fs;
+	u8 wbfs_i;  // seq wbfs part index
+	u8 fat_i;   // seq fat part index
+	u8 ntfs_i;  // seq ntfs part index
+	u8 index;
 } PartInfo;
 
 typedef struct
 {
-	int num;
+	u8 num;
 	u32 sector_size;
 	partitionEntry pentry[MAX_PARTITIONS_EX];
-	int wbfs_n;
-	int fat_n;
-	int ntfs_n;
+	u8 wbfs_n;
+	u8 fat_n;
+	u8 ntfs_n;
 	PartInfo pinfo[MAX_PARTITIONS_EX];
 } PartList;
 
 /* Prototypes */
 s32 Partition_GetEntries(u32 device, partitionEntry *outbuf, u32 *outval);
-s32 Partition_GetEntriesEx(u32 device, partitionEntry *outbuf, u32 *outval, int *num);
+s32 Partition_GetEntriesEx(u32 device, partitionEntry *outbuf, u32 *outval, u8 *num);
 bool Device_ReadSectors(u32 device, u32 sector, u32 count, void *buffer);
 bool Device_WriteSectors(u32 device, u32 sector, u32 count, void *buffer);
 s32 Partition_GetList(u32 device, PartList *plist);
-int Partition_FixEXT(u32 device, int part);
+int Partition_FixEXT(u32 device, u8 part);
 
 bool  part_is_extended(int type);
 bool  part_is_data(int type);

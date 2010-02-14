@@ -121,7 +121,7 @@ struct block read_message(s32 connection) {
     buffer.size = offset;
 
     //Shrink the size of the buffer so the data fits exactly in it
-    realloc(buffer.data, buffer.size);
+    buffer.data = realloc(buffer.data, buffer.size);
 
     return buffer;
 }

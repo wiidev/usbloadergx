@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-05 14:13+0100\n"
+"POT-Creation-Date: 2010-02-15 00:12+0100\n"
 "PO-Revision-Date: 2009-10-23 18:52+0200\n"
 "Last-Translator: boto12\n"
 "Language-Team: boto12\n"
@@ -188,9 +188,6 @@ msgstr "Menu do Wii"
 msgid "Backgroundmusic"
 msgstr "Música de fundo"
 
-msgid "Backgroundmusic Path changed."
-msgstr "Pasta Música Fundo modificada"
-
 msgid "Big thanks to:"
 msgstr "Agradecimentos:"
 
@@ -220,6 +217,9 @@ msgstr "Não foi possível apagar:"
 
 msgid "Cancel"
 msgstr "Cancelar"
+
+msgid "Change Play Path"
+msgstr ""
 
 msgid "Channels"
 msgstr "Canais"
@@ -756,6 +756,12 @@ msgstr "Bloquear Configurações"
 msgid "Locked"
 msgstr "Bloqueado"
 
+msgid "Loop Directory"
+msgstr ""
+
+msgid "Loop Music"
+msgstr ""
+
 msgid "Loop Sound"
 msgstr ""
 
@@ -776,6 +782,9 @@ msgstr "Provável que o tamanho não seja divisível por 4."
 
 msgid "Mount DVD drive"
 msgstr "Carregar leitor DVD"
+
+msgid "Music Loop Mode"
+msgstr ""
 
 msgid "Music Volume"
 msgstr "Volume da Música"
@@ -924,6 +933,18 @@ msgstr "Escolher da lista"
 msgid "Play Count"
 msgstr "Vezes jogadas"
 
+msgid "Play Next"
+msgstr ""
+
+msgid "Play Once"
+msgstr ""
+
+msgid "Play Previous"
+msgstr ""
+
+msgid "Playing Music:"
+msgstr ""
+
 msgid "Please wait..."
 msgstr "Por favor aguarde..."
 
@@ -941,6 +962,9 @@ msgstr "Publicado por"
 
 msgid "Quick Boot"
 msgstr "Inicialização Rápida"
+
+msgid "Random Directory Music"
+msgstr ""
 
 msgid "Reading WAD data... Ok!"
 msgstr "Lendo dados do WAD... Ok!"
@@ -960,8 +984,14 @@ msgstr ""
 msgid "Rename Game on WBFS"
 msgstr "Alterar nome do jogo na partição WBFS"
 
+msgid "Reset BG Music"
+msgstr ""
+
 msgid "Reset Playcounter"
 msgstr "Limpar Contagem"
+
+msgid "Reset to standard BGM?"
+msgstr ""
 
 msgid "Restarting..."
 msgstr "O Wii irá reiniciar"
@@ -1013,9 +1043,6 @@ msgstr "Set"
 
 msgid "Set Search-Filter"
 msgstr "Usar filtro de busca"
-
-msgid "Set as backgroundmusic?"
-msgstr "Definir como música de fundo?"
 
 msgid "Settings"
 msgstr "Configurações"
@@ -1347,6 +1374,12 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
+
+#~ msgid "Backgroundmusic Path changed."
+#~ msgstr "Pasta Música Fundo modificada"
+
+#~ msgid "Set as backgroundmusic?"
+#~ msgstr "Definir como música de fundo?"
 
 #~ msgid "The file is not a .wad"
 #~ msgstr "O arquivo não é um .wad"

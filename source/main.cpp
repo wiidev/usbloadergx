@@ -31,6 +31,7 @@ extern "C"
 #include "settings/cfg.h"
 #include "language/gettext.h"
 #include "mload/mload.h"
+#include "mload/mload_modules.h"
 #include "FreeTypeGX.h"
 #include "video.h"
 #include "audio.h"
@@ -255,7 +256,7 @@ main(int argc, char *argv[])
     ios249rev = getIOSrev(0x00000001000000f9ll);
 
     //if we don't like either of the cIOS then scram
-    if (!(ios222rev==4 || (ios249rev>=9 && ios249rev<65280)))
+    if (!(ios222rev==4 || ios222rev==5 || (ios249rev>=9 && ios249rev<65280)))
     {
         InitTextVideo();
         printf("\x1b[2J");
@@ -409,11 +410,11 @@ main(int argc, char *argv[])
     if ((Settings.cios == ios222 && IOS_GetVersion() != 222) ||
         (Settings.cios == ios223 && IOS_GetVersion() != 223))
     {
-        printf("\n\tReloading IOS to config setting (%d)...", ios222 ? 222 : 223);
+        printf("\n\tReloading IOS to config setting (%d)...", Settings.cios == ios222 ? 222 : 223);
         SDCard_deInit();                          // unmount SD for reloading IOS
         USBDevice_deInit();                       // unmount USB for reloading IOS
         USBStorage_Deinit();
-        ret = IOS_ReloadIOSsafe(ios222 ? 222 : 223);
+        ret = IOS_ReloadIOSsafe(Settings.cios == ios222 ? 222 : 223);
         printf("%d", ret);
         SDCard_Init();
         load_ehc_module();

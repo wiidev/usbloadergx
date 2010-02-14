@@ -1,3 +1,9 @@
+#ifndef _SPLITS_H
+#define _SPLITS_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define MAX_SPLIT 10
 
@@ -30,6 +36,10 @@ void  split_init(split_info_t *s, char *fname);
 void  split_set_size(split_info_t *s, u64 split_size, u64 total_size);
 void  split_close(split_info_t *s);
 int   split_open(split_info_t *s, char *fname);
-int   split_create(split_info_t *s, char *fname,
-		u64 split_size, u64 total_size, bool overwrite);
+int   split_create(split_info_t *s, char *fname, u64 split_size, u64 total_size, bool overwrite);
 
+#ifdef __cplusplus
+}
+#endif
+
+#endif //_SPLITS_H

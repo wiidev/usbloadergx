@@ -16,19 +16,20 @@
 */
 
 #include "mload.h"
-#include "ehcmodule_frag_bin.h"
 #include "dip_plugin.h"
 #include <malloc.h>
 
+#include "gecko.h"
+
 static const char mload_fs[] ATTRIBUTE_ALIGN(32) = "/dev/mload";
-static u32 patch_datas[8] ATTRIBUTE_ALIGN(32);
+//static u32 patch_datas[8] ATTRIBUTE_ALIGN(32);
 
 static s32 mload_fd = -1;
 static s32 hid = -1;
-static data_elf my_data_elf;
-static int thread_id = -1;
-void *external_ehcmodule= NULL;
-int size_external_ehcmodule=0;
+//static data_elf my_data_elf;
+//static int thread_id = -1;
+//void *external_ehcmodule= NULL;
+//int size_external_ehcmodule=0;
 
 /*--------------------------------------------------------------------------------------------------------------*/
 
@@ -483,37 +484,7 @@ return ret;
 
 }
 
-
-
-static u32 ios_36[16] ATTRIBUTE_ALIGN(32)=
-{
-	0, // DI_EmulateCmd
-	0,
-	0x2022DDAC, // dvd_read_controlling_data
-	0x20201010+1, // handle_di_cmd_reentry (thumb)
-	0x20200b9c+1, // ios_shared_alloc_aligned (thumb)
-	0x20200b70+1, // ios_shared_free (thumb)
-	0x20205dc0+1, // ios_memcpy (thumb)
-	0x20200048+1, // ios_fatal_di_error (thumb)
-	0x20202b4c+1, // ios_doReadHashEncryptedState (thumb)
-	0x20203934+1, // ios_printf (thumb)
-};
-
-static u32 ios_38[16] ATTRIBUTE_ALIGN(32)=
-{
-	0, // DI_EmulateCmd
-	0,
-	0x2022cdac, // dvd_read_controlling_data
-	0x20200d38+1, // handle_di_cmd_reentry (thumb)
-	0x202008c4+1, // ios_shared_alloc_aligned (thumb)
-	0x20200898+1, // ios_shared_free (thumb)
-	0x20205b80+1, // ios_memcpy (thumb)
-	0x20200048+1, // ios_fatal_di_error (thumb)
-	0x20202874+1, // ios_doReadHashEncryptedState (thumb)
-	0x2020365c+1, // ios_printf (thumb)
-};
-
-
+/*
 int load_ehc_module()
 {
 	int is_ios=0;
@@ -549,7 +520,14 @@ int load_ehc_module()
 	if(!external_ehcmodule)
 		{
 		if(mload_init()<0) return -1;
-		mload_elf((void *) ehcmodule_frag_bin, &my_data_elf);
+		
+		if (IOS_GetRevision() == 4) {
+			gprintf("Loading ehcmodule v4\n");
+			mload_elf((void *) ehcmodule_frag_v4_bin, &my_data_elf);
+		} else if (IOS_GetRevision() == 0) { // 0? Strange value for v5 ehcmodule
+			gprintf("Loading ehcmodule v5\n");
+			mload_elf((void *) ehcmodule_frag_v5_bin, &my_data_elf);
+		}
 		thread_id = mload_run_thread(my_data_elf.start, my_data_elf.stack, my_data_elf.size_stack, my_data_elf.prio);
 		if(thread_id < 0) return -1;
 		}
@@ -579,7 +557,7 @@ int load_ehc_module()
 		{
 		// IOS 36
 		memcpy(ios_36, dip_plugin, 4);		// copy the entry_point
-		memcpy(dip_plugin, ios_36, 4*10);	// copy the adresses from the array
+		memcpy((void *) dip_plugin, ios_36, 4*10);	// copy the adresses from the array
 		
 		mload_seek(0x1377E000, SEEK_SET);	// copy dip_plugin in the starlet
 		mload_write(dip_plugin,size_dip_plugin);
@@ -594,7 +572,7 @@ int load_ehc_module()
 		// IOS 38
 
 		memcpy(ios_38, dip_plugin, 4);	    // copy the entry_point
-		memcpy(dip_plugin, ios_38, 4*10);   // copy the adresses from the array
+		memcpy((void *) dip_plugin, ios_38, 4*10);   // copy the adresses from the array
 		
 		mload_seek(0x1377E000, SEEK_SET);	// copy dip_plugin in the starlet
 		mload_write(dip_plugin,size_dip_plugin);
@@ -610,12 +588,11 @@ int load_ehc_module()
 return 0;
 }
 
-
 int patch_cios_data() {
     patch_datas[0]=*((u32 *) (dip_plugin+16*4));
     mload_set_ES_ioctlv_vector((void *) patch_datas[0]);
     return 1;
 }
-
+*/
 
 

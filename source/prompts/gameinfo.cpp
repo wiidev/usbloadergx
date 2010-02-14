@@ -10,6 +10,7 @@
 #include "libwiigui/gui.h"
 #include "../xml/xml.h"
 #include "menu.h"
+#include "menu/menus.h"
 #include "filelist.h"
 #include "sys.h"
 #include "wpad.h"
@@ -22,8 +23,6 @@
 
 
 /*** Extern variables ***/
-extern GuiWindow * mainWindow;
-extern GuiSound * bgMusic;
 extern u8 shutdown;
 extern u8 reset;
 extern struct gameXMLinfo gameinfo;

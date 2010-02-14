@@ -29,5 +29,6 @@ extern wchar_t *gameFilterPrev;
 int __Menu_GetEntries(int t=0, const wchar_t* Filter=NULL);
 s32 __Menu_EntryCmpCount(const void *a, const void *b);
 s32 __Menu_EntryCmp(const void *a, const void *b);
+void ResetGamelist();
 
 #endif

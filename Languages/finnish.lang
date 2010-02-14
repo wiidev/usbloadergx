@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-05 14:13+0100\n"
+"POT-Creation-Date: 2010-02-15 00:12+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: c64rmx\n"
 "Language-Team: \n"
@@ -188,9 +188,6 @@ msgstr "Takaisin Wii Menuun"
 msgid "Backgroundmusic"
 msgstr "Taustamusiikki"
 
-msgid "Backgroundmusic Path changed."
-msgstr "Taustamusiikin polku muutettu"
-
 msgid "Big thanks to:"
 msgstr "Isot kiitokset:"
 
@@ -220,6 +217,9 @@ msgstr "Ei voida poistaa:"
 
 msgid "Cancel"
 msgstr "Peruuta"
+
+msgid "Change Play Path"
+msgstr ""
 
 msgid "Channels"
 msgstr ""
@@ -756,6 +756,12 @@ msgstr "Lukitse konsoli"
 msgid "Locked"
 msgstr "Lukittu"
 
+msgid "Loop Directory"
+msgstr ""
+
+msgid "Loop Music"
+msgstr ""
+
 msgid "Loop Sound"
 msgstr ""
 
@@ -775,6 +781,9 @@ msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr "Todennäköisesti sisältää ulottuvuuksia jotka eivät ole jaollisia neljällä"
 
 msgid "Mount DVD drive"
+msgstr ""
+
+msgid "Music Loop Mode"
 msgstr ""
 
 msgid "Music Volume"
@@ -924,6 +933,18 @@ msgstr "Valitse listasta"
 msgid "Play Count"
 msgstr "Pelauksen määrä"
 
+msgid "Play Next"
+msgstr ""
+
+msgid "Play Once"
+msgstr ""
+
+msgid "Play Previous"
+msgstr ""
+
+msgid "Playing Music:"
+msgstr ""
+
 msgid "Please wait..."
 msgstr ""
 
@@ -940,6 +961,9 @@ msgid "Published by"
 msgstr "Julkaisu:"
 
 msgid "Quick Boot"
+msgstr ""
+
+msgid "Random Directory Music"
 msgstr ""
 
 msgid "Reading WAD data... Ok!"
@@ -960,8 +984,14 @@ msgstr ""
 msgid "Rename Game on WBFS"
 msgstr "Uudelleennimeä peli"
 
+msgid "Reset BG Music"
+msgstr ""
+
 msgid "Reset Playcounter"
 msgstr "Resetoi pelauksen määrä"
+
+msgid "Reset to standard BGM?"
+msgstr ""
 
 msgid "Restarting..."
 msgstr "Boottaa..."
@@ -1013,9 +1043,6 @@ msgstr "syys"
 
 msgid "Set Search-Filter"
 msgstr ""
-
-msgid "Set as backgroundmusic?"
-msgstr "Aseta taustamusiikiksi?"
 
 msgid "Settings"
 msgstr "Asetukset"
@@ -1347,6 +1374,12 @@ msgstr "josta"
 
 msgid "seconds left"
 msgstr "sekuntia jäljellä"
+
+#~ msgid "Backgroundmusic Path changed."
+#~ msgstr "Taustamusiikin polku muutettu"
+
+#~ msgid "Set as backgroundmusic?"
+#~ msgstr "Aseta taustamusiikiksi?"
 
 #~ msgid "The file is not a .wad"
 #~ msgstr "Tiedosto ei ole .wad"

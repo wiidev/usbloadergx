@@ -89,7 +89,7 @@ int MenuDiscList() {
     char theTime[80]="";
     time_t lastrawtime=0;
 
-	if (mountMethod != 3 && load_from_fs != PART_FS_FAT) {
+	if (mountMethod != 3 && WBFS_ShowFreeSpace()) {
 		WBFS_DiskSpace(&used, &freespace);
 	}
 

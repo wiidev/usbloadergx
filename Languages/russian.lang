@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-05 14:13+0100\n"
+"POT-Creation-Date: 2010-02-15 00:12+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: nikolai_ca\n"
 "Language-Team: Kir, alendit, nikolai_ca\n"
@@ -188,9 +188,6 @@ msgstr "Вернуться в меню Wii"
 msgid "Backgroundmusic"
 msgstr "Фоновая музыка"
 
-msgid "Backgroundmusic Path changed."
-msgstr "Путь к фоновой музыке изменен."
-
 msgid "Big thanks to:"
 msgstr "Большое спасибо:"
 
@@ -220,6 +217,9 @@ msgstr "Невозможно удалить:"
 
 msgid "Cancel"
 msgstr "Отмена"
+
+msgid "Change Play Path"
+msgstr ""
 
 msgid "Channels"
 msgstr "Каналы"
@@ -756,6 +756,12 @@ msgstr "Заблокировать консоль"
 msgid "Locked"
 msgstr "Заблокировано"
 
+msgid "Loop Directory"
+msgstr ""
+
+msgid "Loop Music"
+msgstr ""
+
 msgid "Loop Sound"
 msgstr "Зациклить звут"
 
@@ -776,6 +782,9 @@ msgstr "Размеры картинки не делятся на 4. Поздра
 
 msgid "Mount DVD drive"
 msgstr "Монтировать DVD"
+
+msgid "Music Loop Mode"
+msgstr ""
 
 msgid "Music Volume"
 msgstr "Громкость"
@@ -924,6 +933,18 @@ msgstr "Выберите из списка"
 msgid "Play Count"
 msgstr "Запущено раз"
 
+msgid "Play Next"
+msgstr ""
+
+msgid "Play Once"
+msgstr ""
+
+msgid "Play Previous"
+msgstr ""
+
+msgid "Playing Music:"
+msgstr ""
+
 msgid "Please wait..."
 msgstr "Пожалуйста подождите..."
 
@@ -941,6 +962,9 @@ msgstr "Опубликовано: "
 
 msgid "Quick Boot"
 msgstr "Быстрая загрузка"
+
+msgid "Random Directory Music"
+msgstr ""
 
 msgid "Reading WAD data... Ok!"
 msgstr "Чтение данных WAD... ОК!"
@@ -960,8 +984,14 @@ msgstr ""
 msgid "Rename Game on WBFS"
 msgstr "Переименовать игры в WBFS"
 
+msgid "Reset BG Music"
+msgstr ""
+
 msgid "Reset Playcounter"
 msgstr "Сбросить счетчик запусков"
+
+msgid "Reset to standard BGM?"
+msgstr ""
 
 msgid "Restarting..."
 msgstr "Перезапускаю..."
@@ -1013,9 +1043,6 @@ msgstr "Сен"
 
 msgid "Set Search-Filter"
 msgstr "Установить фильтр для поиска"
-
-msgid "Set as backgroundmusic?"
-msgstr "установить как фоновую музыку"
 
 msgid "Settings"
 msgstr "Установки"
@@ -1347,6 +1374,12 @@ msgstr "из"
 
 msgid "seconds left"
 msgstr "секунд осталось"
+
+#~ msgid "Backgroundmusic Path changed."
+#~ msgstr "Путь к фоновой музыке изменен."
+
+#~ msgid "Set as backgroundmusic?"
+#~ msgstr "установить как фоновую музыку"
 
 #~ msgid "The file is not a .wad"
 #~ msgstr "Это не файл .wad"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-05 14:13+0100\n"
+"POT-Creation-Date: 2010-02-15 00:12+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: raschi\n"
 "Language-Team: raschi\n"
@@ -188,9 +188,6 @@ msgstr "Wii meny"
 msgid "Backgroundmusic"
 msgstr "Bakgrunnsmusikk"
 
-msgid "Backgroundmusic Path changed."
-msgstr "Bakgrunnsmusikk sti endret"
-
 msgid "Big thanks to:"
 msgstr "Stor takk til:"
 
@@ -220,6 +217,9 @@ msgstr "Kan ikke slette:"
 
 msgid "Cancel"
 msgstr "Avbryt"
+
+msgid "Change Play Path"
+msgstr ""
 
 msgid "Channels"
 msgstr "Kanaler"
@@ -756,6 +756,12 @@ msgstr "Lås konsoll"
 msgid "Locked"
 msgstr "Låst"
 
+msgid "Loop Directory"
+msgstr ""
+
+msgid "Loop Music"
+msgstr ""
+
 msgid "Loop Sound"
 msgstr ""
 
@@ -776,6 +782,9 @@ msgstr "Sannsynligvis har bildet dimensjoner som ikke kan deles med 4."
 
 msgid "Mount DVD drive"
 msgstr "Last DVD stasjon"
+
+msgid "Music Loop Mode"
+msgstr ""
 
 msgid "Music Volume"
 msgstr "Musikk volum"
@@ -924,6 +933,18 @@ msgstr "Velg fra liste"
 msgid "Play Count"
 msgstr "Ganger spilt"
 
+msgid "Play Next"
+msgstr ""
+
+msgid "Play Once"
+msgstr ""
+
+msgid "Play Previous"
+msgstr ""
+
+msgid "Playing Music:"
+msgstr ""
+
 msgid "Please wait..."
 msgstr "Vennligst vent..."
 
@@ -941,6 +962,9 @@ msgstr "Publisert av"
 
 msgid "Quick Boot"
 msgstr "Hurtig start"
+
+msgid "Random Directory Music"
+msgstr ""
 
 msgid "Reading WAD data... Ok!"
 msgstr "Leser WAD data... OK!"
@@ -960,8 +984,14 @@ msgstr ""
 msgid "Rename Game on WBFS"
 msgstr "Gi nytt navn til spill på WBFS"
 
+msgid "Reset BG Music"
+msgstr ""
+
 msgid "Reset Playcounter"
 msgstr "Nullstill teller"
+
+msgid "Reset to standard BGM?"
+msgstr ""
 
 msgid "Restarting..."
 msgstr "Starter på nytt..."
@@ -1013,9 +1043,6 @@ msgstr "Sep"
 
 msgid "Set Search-Filter"
 msgstr "Angi søkefilter"
-
-msgid "Set as backgroundmusic?"
-msgstr "Bruk som bakgrunnsmusikk?"
 
 msgid "Settings"
 msgstr "Innstillinger"
@@ -1347,6 +1374,12 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder gjenstår"
+
+#~ msgid "Backgroundmusic Path changed."
+#~ msgstr "Bakgrunnsmusikk sti endret"
+
+#~ msgid "Set as backgroundmusic?"
+#~ msgstr "Bruk som bakgrunnsmusikk?"
 
 #~ msgid "The file is not a .wad"
 #~ msgstr "Denne filen er ikke en .wad"

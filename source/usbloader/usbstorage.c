@@ -45,9 +45,10 @@ distribution.
 #define WBFS_BASE (('W'<<24)|('F'<<16)|('S'<<8))
 #define USB_IOCTL_WBFS_OPEN_DISC	        (WBFS_BASE+0x1)
 #define USB_IOCTL_WBFS_READ_DISC	        (WBFS_BASE+0x2)
-#define USB_IOCTL_WBFS_READ_DEBUG	        (WBFS_BASE+0x3)
-#define USB_IOCTL_WBFS_SET_DEVICE	        (WBFS_BASE+0x4)
-#define USB_IOCTL_WBFS_SET_FRAGLIST         (WBFS_BASE+0x5)
+#define USB_IOCTL_WBFS_READ_DIRECT_DISC	    (WBFS_BASE+0x3)
+#define USB_IOCTL_WBFS_STS_DISC				(WBFS_BASE+0x4)
+#define USB_IOCTL_WBFS_SET_DEVICE	        (WBFS_BASE+0x50)
+#define USB_IOCTL_WBFS_SET_FRAGLIST         (WBFS_BASE+0x51)
 
 #define UMS_HEAPSIZE			0x1000
 
@@ -262,22 +263,6 @@ s32 USBStorage_WBFS_Read(u32 woffset, u32 len, void *buffer)
 
 	/* Read data */
 	ret = IOS_IoctlvFormat(hid, fd, USB_IOCTL_WBFS_READ_DISC, "ii:d", woffset, len, buffer, len);
-
-	return ret;
-}
-
-
-s32 USBStorage_WBFS_ReadDebug(u32 off, u32 size, void *buffer)
-{
-	s32 ret;
-
-	USBStorage_Init();
-	/* Device not opened */
-	if (fd < 0)
-		return fd;
-
-	/* Read data */
-	ret = IOS_IoctlvFormat(hid, fd, USB_IOCTL_WBFS_READ_DEBUG, "ii:d", off, size, buffer, size);
 
 	return ret;
 }

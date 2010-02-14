@@ -201,8 +201,7 @@ void CFG_Default(int widescreen) { // -1 = non forced Mode
 		snprintf(Settings.BcaCodepath, sizeof(Settings.BcaCodepath), "%s/bca/", bootDevice);
 		snprintf(Settings.WipCodepath, sizeof(Settings.WipCodepath), "%s/wip/", bootDevice);
         snprintf(Settings.dolpath, sizeof(Settings.dolpath), "%s/", bootDevice);
-        snprintf(Settings.oggload_path, sizeof(Settings.oggload_path), "%s/config/backgroundmusic/", bootDevice);
-        sprintf(Settings.ogg_path, "notset");
+        strcpy(Settings.ogg_path, "");
 	}
 	//always set Theme defaults
 	//all alignments are left top here
@@ -358,6 +357,7 @@ void Global_Default(void) {
     snprintf(Settings.db_language, sizeof(Settings.db_language), empty);
     Settings.db_JPtoEN = 0;
     Settings.screensaver = 3;
+	Settings.musicloopmode = 1;
 	Settings.partition = -1;
 	Settings.marknewtitles = 1;
 	Settings.FatInstallToDir = 0;
@@ -577,10 +577,6 @@ void path_set(char *name, char *val) {
     }
     if (strcmp(name, "dolpath") == 0) {
         strlcpy(Settings.dolpath, val, sizeof(Settings.dolpath));
-        return;
-    }
-    if (strcmp(name, "oggload_path") == 0) {
-        strlcpy(Settings.oggload_path, val, sizeof(Settings.oggload_path));
         return;
     }
     if (strcmp(name, "ogg_path") == 0) {
@@ -1111,6 +1107,12 @@ void global_cfg_set(char *name, char *val) {
             Settings.screensaver = i;
         }
         return;
+    } else if (strcmp(name, "musicloopmode") == 0) {
+        int i;
+        if (sscanf(val, "%d", &i) == 1) {
+            Settings.musicloopmode = i;
+        }
+        return;
     } else if (strcmp(name, "partition") == 0) {
 		int i;
 		if (sscanf(val, "%d", &i) == 1) {
@@ -1364,7 +1366,6 @@ bool cfg_save_global() { // save global settings
     fprintf(f, "titlestxt_path = %s\n ", Settings.titlestxt_path);
     fprintf(f, "gamesound = %d\n ", Settings.gamesound);
     fprintf(f, "dolpath = %s\n ", Settings.dolpath);
-    fprintf(f, "oggload_path = %s\n ", Settings.oggload_path);
     fprintf(f, "ogg_path = %s\n ", Settings.ogg_path);
     fprintf(f, "wiilight = %d\n ", Settings.wiilight);
     fprintf(f, "gameDisplay = %d\n ", Settings.gameDisplay);
@@ -1380,6 +1381,7 @@ bool cfg_save_global() { // save global settings
     //fprintf(f, "db_language = %d\n ", Settings.language);
     fprintf(f, "patchcountrystrings = %d\n ", Settings.patchcountrystrings);
     fprintf(f, "screensaver = %d\n ", Settings.screensaver);
+	fprintf(f, "musicloopmode = %d\n ", Settings.musicloopmode);
     fprintf(f, "error002 = %d\n ", Settings.error002);
     fprintf(f, "autonetwork = %d\n ", Settings.autonetwork);
     fprintf(f, "discart = %d\n ", Settings.discart);
@@ -1890,6 +1892,7 @@ void CFG_Cleanup(void)
         free(cfg_title);
         cfg_title = NULL;
     }
+	num_title = 0;
 }
 
 

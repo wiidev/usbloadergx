@@ -218,8 +218,6 @@ int mload_setb(const void * addr, u8 dat);
 
 
 /*--------------------------------------------------------------------------------------------------------------*/
-int load_ehc_module();
-int patch_cios_data();
 
 
 #ifdef __cplusplus

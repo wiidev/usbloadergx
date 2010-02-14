@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-05 14:13+0100\n"
+"POT-Creation-Date: 2010-02-15 00:12+0100\n"
 "PO-Revision-Date: 2010-02-01 18:10-0000\n"
 "Last-Translator: Sky8000\n"
 "Language-Team: Sky8000 <sky8000@hotmail.com>\n"
@@ -188,9 +188,6 @@ msgstr "Menu da Wii"
 msgid "Backgroundmusic"
 msgstr "Música de fundo"
 
-msgid "Backgroundmusic Path changed."
-msgstr "Pasta Música Fundo alterada"
-
 msgid "Big thanks to:"
 msgstr "Agradecimentos:"
 
@@ -220,6 +217,9 @@ msgstr "Não foi possível apagar:"
 
 msgid "Cancel"
 msgstr "Cancelar"
+
+msgid "Change Play Path"
+msgstr "Alterar Pasta de Músicas"
 
 msgid "Channels"
 msgstr "Canais"
@@ -756,6 +756,12 @@ msgstr "Bloquear Configurações"
 msgid "Locked"
 msgstr "Bloqueado"
 
+msgid "Loop Directory"
+msgstr ""
+
+msgid "Loop Music"
+msgstr ""
+
 msgid "Loop Sound"
 msgstr "Repetir Sons"
 
@@ -776,6 +782,9 @@ msgstr "O mais provável é que o tamanho não seja divisível por 4."
 
 msgid "Mount DVD drive"
 msgstr "Montar Unidade de DVD"
+
+msgid "Music Loop Mode"
+msgstr "Modo de Repetição"
 
 msgid "Music Volume"
 msgstr "Volume Música"
@@ -924,6 +933,18 @@ msgstr "Escolher da lista"
 msgid "Play Count"
 msgstr "Vezes jogadas"
 
+msgid "Play Next"
+msgstr "Próxima"
+
+msgid "Play Once"
+msgstr ""
+
+msgid "Play Previous"
+msgstr "Anterior"
+
+msgid "Playing Music:"
+msgstr "Reproduzindo:"
+
 msgid "Please wait..."
 msgstr "Por favor aguarde..."
 
@@ -941,6 +962,9 @@ msgstr "Publicado por"
 
 msgid "Quick Boot"
 msgstr "Arranque Rápido"
+
+msgid "Random Directory Music"
+msgstr ""
 
 msgid "Reading WAD data... Ok!"
 msgstr "Lendo dados do WAD... Ok!"
@@ -960,8 +984,14 @@ msgstr "Remover actualização"
 msgid "Rename Game on WBFS"
 msgstr "Alterar nome do jogo (WBFS)"
 
+msgid "Reset BG Music"
+msgstr "Repor Música de Fundo"
+
 msgid "Reset Playcounter"
 msgstr "Limpar Contagem"
+
+msgid "Reset to standard BGM?"
+msgstr "Repor Musica de Fundo predefinida?"
 
 msgid "Restarting..."
 msgstr "A Wii irá reiniciar"
@@ -1013,9 +1043,6 @@ msgstr "Set"
 
 msgid "Set Search-Filter"
 msgstr "Filtro de pesquisa"
-
-msgid "Set as backgroundmusic?"
-msgstr "Definir como música de fundo?"
 
 msgid "Settings"
 msgstr "Configurações"
@@ -1348,6 +1375,12 @@ msgstr "de"
 msgid "seconds left"
 msgstr "segundos restantes"
 
+#~ msgid "Backgroundmusic Path changed."
+#~ msgstr "Pasta Música Fundo alterada"
+
+#~ msgid "Set as backgroundmusic?"
+#~ msgstr "Definir como música de fundo?"
+
 #~ msgid "The file is not a .wad"
 #~ msgstr "O ficheiro não é um .wad"
 
@@ -1357,29 +1390,8 @@ msgstr "segundos restantes"
 #~ msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
 #~ msgstr "Está a utilizar um sistema de ficheiros NTFS. Devido à possibilidade de ocorrerem erros na gravação não será possível instalar jogos."
 
-#~ msgid "Change Play Path"
-#~ msgstr "Alterar Pasta de Músicas"
-
-#~ msgid "Music Loop Mode"
-#~ msgstr "Modo de Repetição"
-
 #~ msgid "Partition Format Menu"
 #~ msgstr "Menu de Formatação de Partição"
-
-#~ msgid "Play Next"
-#~ msgstr "Próxima"
-
-#~ msgid "Play Previous"
-#~ msgstr "Anterior"
-
-#~ msgid "Playing Music:"
-#~ msgstr "Reproduzindo:"
-
-#~ msgid "Reset BG Music"
-#~ msgstr "Repor Música de Fundo"
-
-#~ msgid "Reset to standard BGM?"
-#~ msgstr "Repor Musica de Fundo predefinida?"
 
 #~ msgid "Unlock the app first."
 #~ msgstr "Desbloquear aplicação primeiro."

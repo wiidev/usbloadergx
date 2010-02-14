@@ -15,6 +15,7 @@
 #include "prompts/ProgressWindow.h"
 #include "menu/menus.h"
 #include "mload/mload.h"
+#include "mload/mload_modules.h"
 #include "network/networkops.h"
 #include "patches/patchcode.h"
 #include "settings/Settings.h"
@@ -39,7 +40,7 @@ GuiWindow * mainWindow = NULL;
 GuiImageData * pointer[4];
 GuiImage * bgImg = NULL;
 GuiImageData * background = NULL;
-GuiSound * bgMusic = NULL;
+GuiBGM * bgMusic = NULL;
 GuiSound *btnClick2 = NULL;
 
 struct discHdr *dvdheader = NULL;
@@ -131,6 +132,8 @@ static void * UpdateGUI (void *arg) {
                 for (int i=0; i < 4; i++)
                     mainWindow->Update(&userInput[i]);
 
+				if(bgMusic)
+					bgMusic->UpdateState();
 
             } else {
                 for (int a = 5; a < 255; a += 10) {
@@ -280,20 +283,17 @@ int MainMenu(int menu) {
     if (strcmp(headlessID,"")==0)
 		ResumeGui();
 
-	bgMusic = new GuiSound(bg_music_ogg, bg_music_ogg_size, Settings.volume);
-    bgMusic->SetLoop(1); //loop music
-    // startup music
-    if (strcmp("", Settings.oggload_path) && strcmp("notset", Settings.ogg_path)) {
-        bgMusic->Load(Settings.ogg_path);
-    }
+	bgMusic = new GuiBGM(bg_music_ogg, bg_music_ogg_size, Settings.volume);
+	bgMusic->SetLoop(Settings.musicloopmode); //loop music
+	bgMusic->Load(Settings.ogg_path);
 	bgMusic->Play();
 
     while (currentMenu != MENU_EXIT) {
         bgMusic->SetVolume(Settings.volume);
+		gprintf("Current menu: %d\n", currentMenu);
 
         switch (currentMenu) {
         case MENU_CHECK:
-
             currentMenu = MenuCheck();
             break;
         case MENU_FORMAT:
@@ -516,7 +516,7 @@ int MainMenu(int menu) {
 		gprintf("%d\n", ret);
 
 		if (reloadblock == on && Sys_IsHermes()) {
-            patch_cios_data();
+            enable_ES_ioctlv_vector();
 			if (load_from_fs == PART_FS_WBFS) {
 				mload_close();
 			}

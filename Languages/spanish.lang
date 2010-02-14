@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-05 14:13+0100\n"
+"POT-Creation-Date: 2010-02-15 00:12+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: SirPalax\n"
 "Language-Team: Penn, SirPalax\n"
@@ -188,9 +188,6 @@ msgstr "Volver a Menú Wii"
 msgid "Backgroundmusic"
 msgstr "Música de fondo"
 
-msgid "Backgroundmusic Path changed."
-msgstr "Ruta de Música de fondo cambiada"
-
 msgid "Big thanks to:"
 msgstr "Gracias a:"
 
@@ -220,6 +217,9 @@ msgstr "No se eliminó:"
 
 msgid "Cancel"
 msgstr "Cancelar"
+
+msgid "Change Play Path"
+msgstr "Cambiar Ruta"
 
 msgid "Channels"
 msgstr "Canales"
@@ -756,6 +756,12 @@ msgstr "Bloquear consola"
 msgid "Locked"
 msgstr "Bloqueada"
 
+msgid "Loop Directory"
+msgstr ""
+
+msgid "Loop Music"
+msgstr ""
+
 msgid "Loop Sound"
 msgstr "Bucle de sonido"
 
@@ -776,6 +782,9 @@ msgstr "Probablemente, las dimensiones no sean múltiplo de 4."
 
 msgid "Mount DVD drive"
 msgstr "Montar unidad DVD"
+
+msgid "Music Loop Mode"
+msgstr "Modo Bucle Musical"
 
 msgid "Music Volume"
 msgstr "Volumen de la Música"
@@ -924,6 +933,18 @@ msgstr "Elegir de una lista"
 msgid "Play Count"
 msgstr "Partidas"
 
+msgid "Play Next"
+msgstr "Oír Siguiente"
+
+msgid "Play Once"
+msgstr ""
+
+msgid "Play Previous"
+msgstr "Oír Anterior"
+
+msgid "Playing Music:"
+msgstr "Reproducción Musical:"
+
 msgid "Please wait..."
 msgstr "Por favor, espera..."
 
@@ -941,6 +962,9 @@ msgstr "Publicado por"
 
 msgid "Quick Boot"
 msgstr "Inicio Rápido"
+
+msgid "Random Directory Music"
+msgstr ""
 
 msgid "Reading WAD data... Ok!"
 msgstr "Leyendo datos del WAD... ¡Correcto!"
@@ -960,8 +984,14 @@ msgstr "Quitar actualización"
 msgid "Rename Game on WBFS"
 msgstr "Renombrar juego en WBFS"
 
+msgid "Reset BG Music"
+msgstr "Reiniciar Música de Fondo"
+
 msgid "Reset Playcounter"
 msgstr "Reiniciar Partidas"
+
+msgid "Reset to standard BGM?"
+msgstr "¿Poner la Música por defecto?"
 
 msgid "Restarting..."
 msgstr "Reiniciando..."
@@ -1013,9 +1043,6 @@ msgstr ""
 
 msgid "Set Search-Filter"
 msgstr "Usar filtro de búsqueda"
-
-msgid "Set as backgroundmusic?"
-msgstr "¿Poner como música de fondo?"
 
 msgid "Settings"
 msgstr "Configuración"
@@ -1348,6 +1375,12 @@ msgstr "de"
 msgid "seconds left"
 msgstr "segundos restantes"
 
+#~ msgid "Backgroundmusic Path changed."
+#~ msgstr "Ruta de Música de fondo cambiada"
+
+#~ msgid "Set as backgroundmusic?"
+#~ msgstr "¿Poner como música de fondo?"
+
 #~ msgid "The file is not a .wad"
 #~ msgstr "El archivo no es un .wad"
 
@@ -1357,29 +1390,8 @@ msgstr "segundos restantes"
 #~ msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
 #~ msgstr "Estás utilizando un sistema de archivos NTFS. Debido a posibles errores de escritura en la partición NTFS, la instalación del juego es imposible."
 
-#~ msgid "Change Play Path"
-#~ msgstr "Cambiar Ruta"
-
-#~ msgid "Music Loop Mode"
-#~ msgstr "Modo Bucle Musical"
-
 #~ msgid "Partition Format Menu"
 #~ msgstr "Menú Formatear Partición"
-
-#~ msgid "Play Next"
-#~ msgstr "Oír Siguiente"
-
-#~ msgid "Play Previous"
-#~ msgstr "Oír Anterior"
-
-#~ msgid "Playing Music:"
-#~ msgstr "Reproducción Musical:"
-
-#~ msgid "Reset BG Music"
-#~ msgstr "Reiniciar Música de Fondo"
-
-#~ msgid "Reset to standard BGM?"
-#~ msgstr "¿Poner la Música por defecto?"
 
 #~ msgid "Unlock the app first."
 #~ msgstr "Desbloquea primero la aplicación."

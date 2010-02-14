@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-05 14:13+0100\n"
+"POT-Creation-Date: 2010-02-15 00:12+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Nitro_subzero \n"
 "Language-Team: Nitro_subzero\n"
@@ -188,9 +188,6 @@ msgstr "กลับไป เมนู Wii"
 msgid "Backgroundmusic"
 msgstr "ดนตรีเบื้องหลัง"
 
-msgid "Backgroundmusic Path changed."
-msgstr "เปลี่ยนที่เก็บ ดนตรีเบื้องหลัง"
-
 msgid "Big thanks to:"
 msgstr "ขอขอบคุณ:"
 
@@ -220,6 +217,9 @@ msgstr "ไม่สามารถลบได้:"
 
 msgid "Cancel"
 msgstr "ยกเลิก"
+
+msgid "Change Play Path"
+msgstr ""
 
 msgid "Channels"
 msgstr "แชนแนล"
@@ -756,6 +756,12 @@ msgstr "ล๊อค Console"
 msgid "Locked"
 msgstr "ล๊อค"
 
+msgid "Loop Directory"
+msgstr ""
+
+msgid "Loop Music"
+msgstr ""
+
 msgid "Loop Sound"
 msgstr "เล่นเสียงซ้ำ"
 
@@ -776,6 +782,9 @@ msgstr "ดูเหมือนว่าขนาดจะหารด้วย
 
 msgid "Mount DVD drive"
 msgstr "เชื่อม DVD ไดร์ฟ"
+
+msgid "Music Loop Mode"
+msgstr ""
 
 msgid "Music Volume"
 msgstr "ความดังเสียงเพลง"
@@ -924,6 +933,18 @@ msgstr "เลือกจากรายการ"
 msgid "Play Count"
 msgstr "จำนวนที่เล่น"
 
+msgid "Play Next"
+msgstr ""
+
+msgid "Play Once"
+msgstr ""
+
+msgid "Play Previous"
+msgstr ""
+
+msgid "Playing Music:"
+msgstr ""
+
 msgid "Please wait..."
 msgstr "รอสักครู่"
 
@@ -941,6 +962,9 @@ msgstr "เผยแพร่โดย"
 
 msgid "Quick Boot"
 msgstr "บูตแบบเร็ว"
+
+msgid "Random Directory Music"
+msgstr ""
 
 msgid "Reading WAD data... Ok!"
 msgstr "อ่านข้อมูล WAD... สำเร็จ!"
@@ -960,8 +984,14 @@ msgstr ""
 msgid "Rename Game on WBFS"
 msgstr "เปลี่ยนชื่อเกมส์บน WBFS"
 
+msgid "Reset BG Music"
+msgstr ""
+
 msgid "Reset Playcounter"
 msgstr "เคลียร์การนับจำนวนที่เล่น"
+
+msgid "Reset to standard BGM?"
+msgstr ""
 
 msgid "Restarting..."
 msgstr "รีสตารท์..."
@@ -1013,9 +1043,6 @@ msgstr "กย."
 
 msgid "Set Search-Filter"
 msgstr "กำหนดเงื่อนไขการค้นหา"
-
-msgid "Set as backgroundmusic?"
-msgstr "เลือกเป็น Background music?"
 
 msgid "Settings"
 msgstr "กำหนดค่า"
@@ -1347,6 +1374,12 @@ msgstr "จาก"
 
 msgid "seconds left"
 msgstr "วินาทีที่เหลือ"
+
+#~ msgid "Backgroundmusic Path changed."
+#~ msgstr "เปลี่ยนที่เก็บ ดนตรีเบื้องหลัง"
+
+#~ msgid "Set as backgroundmusic?"
+#~ msgstr "เลือกเป็น Background music?"
 
 #~ msgid "The file is not a .wad"
 #~ msgstr "ไม่ใช่ไฟล์ .wad"

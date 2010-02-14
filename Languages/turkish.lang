@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-05 14:13+0100\n"
+"POT-Creation-Date: 2010-02-15 00:12+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: omercigingelini\n"
 "Language-Team: omercigingelini\n"
@@ -188,9 +188,6 @@ msgstr "Wii Menüye dönüş"
 msgid "Backgroundmusic"
 msgstr "Arkaplan müziği"
 
-msgid "Backgroundmusic Path changed."
-msgstr "Arkaplan müzik Yolu değişti."
-
 msgid "Big thanks to:"
 msgstr "Teşekkürler:"
 
@@ -220,6 +217,9 @@ msgstr "Silinemiyor"
 
 msgid "Cancel"
 msgstr "Iptal"
+
+msgid "Change Play Path"
+msgstr ""
 
 msgid "Channels"
 msgstr "Kanallar"
@@ -756,6 +756,12 @@ msgstr "Konsolu Kilitle"
 msgid "Locked"
 msgstr "Kilitlendi"
 
+msgid "Loop Directory"
+msgstr ""
+
+msgid "Loop Music"
+msgstr ""
+
 msgid "Loop Sound"
 msgstr "Döngüdeki Ses"
 
@@ -776,6 +782,9 @@ msgstr "Muhtemelen 4 ile tam bölünemeyen boyutları var."
 
 msgid "Mount DVD drive"
 msgstr "DVD sürücüsü bağla"
+
+msgid "Music Loop Mode"
+msgstr ""
 
 msgid "Music Volume"
 msgstr "Ses Seviyesi"
@@ -924,6 +933,18 @@ msgstr "Listeden seç"
 msgid "Play Count"
 msgstr "Oynama Sayısı"
 
+msgid "Play Next"
+msgstr ""
+
+msgid "Play Once"
+msgstr ""
+
+msgid "Play Previous"
+msgstr ""
+
+msgid "Playing Music:"
+msgstr ""
+
 msgid "Please wait..."
 msgstr "Lütfen bekleyin.."
 
@@ -941,6 +962,9 @@ msgstr "Yayıncı"
 
 msgid "Quick Boot"
 msgstr "Hızlı Başlatma"
+
+msgid "Random Directory Music"
+msgstr ""
 
 msgid "Reading WAD data... Ok!"
 msgstr "Wad verisi okunuyor..OK!"
@@ -960,8 +984,14 @@ msgstr ""
 msgid "Rename Game on WBFS"
 msgstr "WBFS'deki oyunu yeniden isimlendir"
 
+msgid "Reset BG Music"
+msgstr ""
+
 msgid "Reset Playcounter"
 msgstr "Sayacı sıfırla"
+
+msgid "Reset to standard BGM?"
+msgstr ""
 
 msgid "Restarting..."
 msgstr "Yeniden başlatılıyor"
@@ -1013,9 +1043,6 @@ msgstr "Eyl"
 
 msgid "Set Search-Filter"
 msgstr "Arama Filtresi Ayarla"
-
-msgid "Set as backgroundmusic?"
-msgstr "Arkaplan müziği olarak ayarla?"
 
 msgid "Settings"
 msgstr "Ayarlar"
@@ -1347,6 +1374,12 @@ msgstr "./"
 
 msgid "seconds left"
 msgstr "saniye kaldı"
+
+#~ msgid "Backgroundmusic Path changed."
+#~ msgstr "Arkaplan müzik Yolu değişti."
+
+#~ msgid "Set as backgroundmusic?"
+#~ msgstr "Arkaplan müziği olarak ayarla?"
 
 #~ msgid "The file is not a .wad"
 #~ msgstr "Bu dosya .wad değil"

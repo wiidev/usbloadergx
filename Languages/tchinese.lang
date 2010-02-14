@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-05 14:13+0100\n"
+"POT-Creation-Date: 2010-02-15 00:12+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Miller Liang\n"
 "Language-Team: kyogc, Miller\n"
@@ -188,9 +188,6 @@ msgstr "返回 Wii 系統目錄"
 msgid "Backgroundmusic"
 msgstr "背景音樂"
 
-msgid "Backgroundmusic Path changed."
-msgstr "背景音樂路徑"
-
 msgid "Big thanks to:"
 msgstr "非常感謝:"
 
@@ -220,6 +217,9 @@ msgstr "無法刪除:"
 
 msgid "Cancel"
 msgstr "取消"
+
+msgid "Change Play Path"
+msgstr "變更路徑"
 
 msgid "Channels"
 msgstr "頻道"
@@ -756,6 +756,12 @@ msgstr "鎖定控制台"
 msgid "Locked"
 msgstr "已鎖定"
 
+msgid "Loop Directory"
+msgstr ""
+
+msgid "Loop Music"
+msgstr ""
+
 msgid "Loop Sound"
 msgstr "重複音樂"
 
@@ -776,6 +782,9 @@ msgstr "圖片格式錯誤，可能它的尺寸不是 4 的倍數."
 
 msgid "Mount DVD drive"
 msgstr "掛載DVD光碟"
+
+msgid "Music Loop Mode"
+msgstr "音樂循環模式"
 
 msgid "Music Volume"
 msgstr "音量"
@@ -924,6 +933,18 @@ msgstr "從列表中選取"
 msgid "Play Count"
 msgstr "執行次數"
 
+msgid "Play Next"
+msgstr "執行下一個"
+
+msgid "Play Once"
+msgstr ""
+
+msgid "Play Previous"
+msgstr "執行上一個"
+
+msgid "Playing Music:"
+msgstr "播放音樂"
+
 msgid "Please wait..."
 msgstr "請稍候..."
 
@@ -941,6 +962,9 @@ msgstr "發布者"
 
 msgid "Quick Boot"
 msgstr "快速啟動"
+
+msgid "Random Directory Music"
+msgstr ""
 
 msgid "Reading WAD data... Ok!"
 msgstr "讀取 WAD 數據... 完成!"
@@ -960,8 +984,14 @@ msgstr ""
 msgid "Rename Game on WBFS"
 msgstr "變更WBFS上的遊戲名稱"
 
+msgid "Reset BG Music"
+msgstr "重置 BG 音樂"
+
 msgid "Reset Playcounter"
 msgstr "重置執行次數"
+
+msgid "Reset to standard BGM?"
+msgstr "重置回標準 BG 音樂"
 
 msgid "Restarting..."
 msgstr "正在重新啟動"
@@ -1013,9 +1043,6 @@ msgstr "九月"
 
 msgid "Set Search-Filter"
 msgstr "關鍵字篩選"
-
-msgid "Set as backgroundmusic?"
-msgstr "設定背景音樂"
 
 msgid "Settings"
 msgstr "設定"
@@ -1348,6 +1375,12 @@ msgstr "的"
 msgid "seconds left"
 msgstr "剩餘秒數"
 
+#~ msgid "Backgroundmusic Path changed."
+#~ msgstr "背景音樂路徑"
+
+#~ msgid "Set as backgroundmusic?"
+#~ msgstr "設定背景音樂"
+
 #~ msgid "The file is not a .wad"
 #~ msgstr "這不是一個 WAD 文件"
 
@@ -1357,29 +1390,8 @@ msgstr "剩餘秒數"
 #~ msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
 #~ msgstr "您正在使用 NTFS 文件系統。由於可能一個錯誤寫入到一個 NTFS 分區，這時候是無法安裝遊戲的。"
 
-#~ msgid "Change Play Path"
-#~ msgstr "變更路徑"
-
-#~ msgid "Music Loop Mode"
-#~ msgstr "音樂循環模式"
-
 #~ msgid "Partition Format Menu"
 #~ msgstr "磁區格式化"
-
-#~ msgid "Play Next"
-#~ msgstr "執行下一個"
-
-#~ msgid "Play Previous"
-#~ msgstr "執行上一個"
-
-#~ msgid "Playing Music:"
-#~ msgstr "播放音樂"
-
-#~ msgid "Reset BG Music"
-#~ msgstr "重置 BG 音樂"
-
-#~ msgid "Reset to standard BGM?"
-#~ msgstr "重置回標準 BG 音樂"
 
 #~ msgid "Unlock the app first."
 #~ msgstr "請先將此應用程式解鎖"

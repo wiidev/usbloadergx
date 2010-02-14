@@ -419,7 +419,8 @@ extern "C" {
 		u8		gameDisplay;
 		u8      patchcountrystrings;
 		u8      screensaver;
-		s8		partition;
+		u8		partition;
+		u8		musicloopmode;
 		short	godmode;
 		char	covers_path[100];
 		char	covers2d_path[100];
@@ -430,8 +431,7 @@ extern "C" {
 		char	titlestxt_path[100];
 		char	language_path[100];
 		char	languagefiles_path[100];
-		char	oggload_path[100];
-		char	ogg_path[150];
+		char	ogg_path[250];
 		char	dolpath[150];
 		char	update_path[150];
 		char	homebrewapps_path[150];

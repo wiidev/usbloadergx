@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-05 14:13+0100\n"
+"POT-Creation-Date: 2010-02-15 00:12+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
@@ -188,9 +188,6 @@ msgstr "Wiiメニューへ"
 msgid "Backgroundmusic"
 msgstr "BGM"
 
-msgid "Backgroundmusic Path changed."
-msgstr "BGMのパスを変更しました"
-
 msgid "Big thanks to:"
 msgstr "協力:"
 
@@ -220,6 +217,9 @@ msgstr "削除できません"
 
 msgid "Cancel"
 msgstr "キャンセル"
+
+msgid "Change Play Path"
+msgstr "プレイパスを変更"
 
 msgid "Channels"
 msgstr "チャンネル"
@@ -756,6 +756,12 @@ msgstr "GXをロック"
 msgid "Locked"
 msgstr "ロックされています"
 
+msgid "Loop Directory"
+msgstr "フォルダ内でループ"
+
+msgid "Loop Music"
+msgstr "ループさせる"
+
 msgid "Loop Sound"
 msgstr "ループさせる"
 
@@ -776,6 +782,9 @@ msgstr "4で割り切れない寸法があります"
 
 msgid "Mount DVD drive"
 msgstr "DVDを起動"
+
+msgid "Music Loop Mode"
+msgstr "ループ機能"
 
 msgid "Music Volume"
 msgstr "BGMの音量"
@@ -924,6 +933,18 @@ msgstr "リストから選択"
 msgid "Play Count"
 msgstr "プレイ回数"
 
+msgid "Play Next"
+msgstr "次へ"
+
+msgid "Play Once"
+msgstr "一度だけ再生"
+
+msgid "Play Previous"
+msgstr "前へ"
+
+msgid "Playing Music:"
+msgstr "再生中"
+
 msgid "Please wait..."
 msgstr "しばらくお待ちください"
 
@@ -941,6 +962,9 @@ msgstr "発売元："
 
 msgid "Quick Boot"
 msgstr "ワンボタン起動"
+
+msgid "Random Directory Music"
+msgstr ""
 
 msgid "Reading WAD data... Ok!"
 msgstr "WADﾃﾞｰﾀの読み込み...成功！"
@@ -960,8 +984,14 @@ msgstr ""
 msgid "Rename Game on WBFS"
 msgstr "WBFS内のゲーム名を変更"
 
+msgid "Reset BG Music"
+msgstr "BGMをリセット"
+
 msgid "Reset Playcounter"
 msgstr "プレイ回数をリセット"
+
+msgid "Reset to standard BGM?"
+msgstr "BGMを初期状態に戻しますか?"
 
 msgid "Restarting..."
 msgstr "再起動します"
@@ -1013,9 +1043,6 @@ msgstr "9月"
 
 msgid "Set Search-Filter"
 msgstr "検索"
-
-msgid "Set as backgroundmusic?"
-msgstr "BGMに設定しますか？"
 
 msgid "Settings"
 msgstr "設定"
@@ -1348,6 +1375,12 @@ msgstr "中"
 msgid "seconds left"
 msgstr "秒で完了"
 
+#~ msgid "Backgroundmusic Path changed."
+#~ msgstr "BGMのパスを変更しました"
+
+#~ msgid "Set as backgroundmusic?"
+#~ msgstr "BGMに設定しますか？"
+
 #~ msgid "The file is not a .wad"
 #~ msgstr "WADﾌｧｲﾙではありません"
 
@@ -1357,38 +1390,8 @@ msgstr "秒で完了"
 #~ msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
 #~ msgstr "NTFS領域にｲﾝｽﾄｰﾙ中にｴﾗｰが発生するとｲﾝｽﾄｰﾙに失敗します"
 
-#~ msgid "Change Play Path"
-#~ msgstr "プレイパスを変更"
-
-#~ msgid "Loop Directory"
-#~ msgstr "フォルダ内でループ"
-
-#~ msgid "Loop Music"
-#~ msgstr "ループさせる"
-
-#~ msgid "Music Loop Mode"
-#~ msgstr "ループ機能"
-
 #~ msgid "Partition Format Menu"
 #~ msgstr "初期化メニュー"
-
-#~ msgid "Play Next"
-#~ msgstr "次へ"
-
-#~ msgid "Play Once"
-#~ msgstr "一度だけ再生"
-
-#~ msgid "Play Previous"
-#~ msgstr "前へ"
-
-#~ msgid "Playing Music:"
-#~ msgstr "再生中"
-
-#~ msgid "Reset BG Music"
-#~ msgstr "BGMをリセット"
-
-#~ msgid "Reset to standard BGM?"
-#~ msgstr "BGMを初期状態に戻しますか?"
 
 #~ msgid "Unlock the app first."
 #~ msgstr "先にロックを解除してください"

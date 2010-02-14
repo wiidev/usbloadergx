@@ -155,8 +155,8 @@ int split_read_sector(void *_fp,u32 lba,u32 count,void*buf)
 			split_error("error seeking in disc partition");
 			return 1;
 		}
-		//ret = fread(buf+i*512, 512ULL, chunk, f);
-		ret = read(fd, buf+i*512, chunk * 512);
+		void *ptr = ((u8 *)buf) + (i*512);
+		ret = read(fd, ptr, chunk * 512);
 		if (ret != chunk * 512) {
 			fprintf(stderr, "error reading %u %u [%u] %u = %u\n",
 					lba, count, i, chunk, ret);
@@ -189,7 +189,8 @@ int split_write_sector(void *_fp,u32 lba,u32 count,void*buf)
 		}
 		//if (fwrite(buf+i*512, 512ULL, chunk, f) != chunk) {
 		//printf("write %d %p %d \n", fd, buf+i*512, chunk * 512);
-		ret = write(fd, buf+i*512, chunk * 512);
+		void *ptr = ((u8 *)buf) + (i*512);
+		ret = write(fd, ptr, chunk * 512);
 		//printf("write ret = %d \n", ret);
 		if (ret != chunk * 512) {
 			split_error("error writing disc");

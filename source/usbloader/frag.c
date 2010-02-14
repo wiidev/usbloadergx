@@ -8,12 +8,9 @@
 #include "libntfs/ntfs.h"
 #include "libwbfs/libwbfs.h"
 #include "wbfs.h"
-#include "wbfs_fat.h"
 #include "usbstorage.h"
 #include "frag.h"
 #include "utils.h"
-
-int _FAT_get_fragments (const char *path, _frag_append_t append_fragment, void *callback_data);
 
 FragList *frag_list = NULL;
 
@@ -148,98 +145,7 @@ int frag_remap(FragList *ff, FragList *log, FragList *phy)
 
 int get_frag_list(u8 *id)
 {
-	char fname[1024];
-	char fname1[1024];
-	struct stat st;
-	FragList *fs = NULL;
-	FragList *fa = NULL;
-	FragList *fw = NULL;
-	int ret;
-	int i, j;
-	int is_wbfs = 0;
-	int ret_val = -1;
-
-	if (wbfs_part_fs == PART_FS_WBFS) return 0;
-
-	ret = WBFS_FAT_find_fname(id, fname, sizeof(fname));
-	if (!ret) return -1;
-
-	if (strcasecmp(strrchr(fname,'.'), ".wbfs") == 0) {
-		is_wbfs = 1;
-	}
-
-	fs = malloc(sizeof(FragList));
-	fa = malloc(sizeof(FragList));
-	fw = malloc(sizeof(FragList));
-
-	frag_init(fa, MAX_FRAG);
-
-	for (i=0; i<10; i++) {
-		frag_init(fs, MAX_FRAG);
-		if (i > 0) {
-			fname[strlen(fname)-1] = '0' + i;
-			if (stat(fname, &st) == -1) break;
-		}
-		strcpy(fname1, fname);
-		//printf("::*%s\n", strrchr(fname,'/'));
-		if (wbfs_part_fs == PART_FS_FAT) {
-			ret = _FAT_get_fragments(fname, &_frag_append, fs);
-			if (ret) {
-				printf("fat getf: %d\n", ret);
-				// don't return failure, let it fallback to old method
-				//ret_val = ret;
-				ret_val = 0;
-				goto out;
-			}
-		} else if (wbfs_part_fs == PART_FS_NTFS) {
-			ret = _NTFS_get_fragments(fname, &_frag_append, fs);
-			if (ret) {
-				printf("ntfs getf: %d\n", ret);
-				if (ret == -50 || ret == -500) {
-					printf("Too many fragments! %d\n", fs->num);
-				}
-				ret_val = ret;
-				goto out;
-			}
-			// offset to start of partition
-			for (j=0; j<fs->num; j++) {
-				fs->frag[j].sector += fs_ntfs_sec;
-			}
-		}
-		frag_concat(fa, fs);
-	}
-
-	frag_list = malloc(sizeof(FragList));
-	frag_init(frag_list, MAX_FRAG);
-	if (is_wbfs) {
-		// if wbfs file format, remap.
-		//printf("=====\n");
-		wbfs_disc_t *d = WBFS_OpenDisc(id);
-		if (!d) goto out;
-		frag_init(fw, MAX_FRAG);
-		ret = wbfs_get_fragments(d, &_frag_append, fw);
-		if (ret) goto out;
-		WBFS_CloseDisc(d);
-		// DEBUG: frag_list->num = MAX_FRAG-10; // stress test
-		ret = frag_remap(frag_list, fw, fa);
-		if (ret) goto out;
-	} else {
-		// .iso does not need remap just copy
-		//printf("fa:\n");
-		memcpy(frag_list, fa, sizeof(FragList));
-	}
-
-	ret_val = 0;
-
-out:
-	if (ret_val) {
-		// error
-		SAFE_FREE(frag_list);
-	}
-	SAFE_FREE(fs);
-	SAFE_FREE(fa);
-	SAFE_FREE(fw);
-	return ret_val;
+	return WBFS_GetFragList(id);
 }
 
 int set_frag_list(u8 *id)
@@ -248,7 +154,7 @@ int set_frag_list(u8 *id)
 	if (frag_list == NULL) {
 		if (wbfs_part_fs == PART_FS_FAT) {
 			// fall back to old fat method
-			printf("FAT: fallback to old method\n");
+//			printf("FAT: fallback to old method\n");
 	   		return 0;
 		}
 		// ntfs has no fallback, return error
@@ -259,7 +165,7 @@ int set_frag_list(u8 *id)
 	int size = sizeof(Fragment) * (frag_list->num + 1);
 	int ret = USBStorage_WBFS_SetFragList(frag_list, size);
 	if (ret) {
-		printf("set_frag: %d\n", ret);
+//		printf("set_frag: %d\n", ret);
 		return ret;
 	}
 

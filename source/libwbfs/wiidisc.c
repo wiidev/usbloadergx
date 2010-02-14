@@ -154,27 +154,32 @@ static void do_files(wiidisc_t*d)
 	partition_read(d,apl_offset, apl_header, 0x20,0);
 	apl_size = 0x20 + _be32(apl_header + 0x14) + _be32(apl_header + 0x18);
         // fake read dol and partition
-        partition_read(d,apl_offset, 0, apl_size,1);
+	if (apl_size)
+	        partition_read(d,apl_offset, 0, apl_size,1);
         partition_read(d,dol_offset, 0,  (fst_offset - dol_offset)<<2,1);
         
 
-	fst = wbfs_ioalloc(fst_size);
-	if (fst == 0)
-		wbfs_fatal("malloc fst");
-	partition_read(d,fst_offset, fst, fst_size,0);
-	n_files = _be32(fst + 8);
+	if (fst_size) {
+		fst = wbfs_ioalloc(fst_size);
+		if (fst == 0)
+			wbfs_fatal("malloc fst");
+		partition_read(d,fst_offset, fst, fst_size,0);
+		n_files = _be32(fst + 8);
 
-	if (d->extract_pathname && *d->extract_pathname == 0) {
-		// if empty pathname requested return fst
-		d->extracted_buffer = fst;
-		d->extracted_size = fst_size;
-		d->extract_pathname = NULL;
-		// skip do_fst if only fst requested
-		n_files = 0;
+		if (d->extract_pathname && *d->extract_pathname == 0) {
+			// if empty pathname requested return fst
+			d->extracted_buffer = fst;
+			d->extracted_size = fst_size;
+			d->extract_pathname = NULL;
+			// skip do_fst if only fst requested
+			n_files = 0;
+		}
+
+		if (12*n_files <= fst_size ) { 
+			if (n_files > 1)
+				do_fst(d,fst, (char *)fst + 12*n_files, 0);
+		}
 	}
-
-	if (n_files > 1)
-		do_fst(d,fst, (char *)fst + 12*n_files, 0);
 	wbfs_iofree(b);
 	wbfs_iofree(apl_header);
 	if (fst != d->extracted_buffer)

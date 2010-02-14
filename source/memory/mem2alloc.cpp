@@ -154,6 +154,9 @@ void *CMEM2Alloc::reallocate(void *p, unsigned int s)
 	s = (s - 1) / sizeof (SBlock) + 1;
 	{
 		LockMutex lock(m_mutex);
+		if (i + s + 1 >= m_endAddress)
+			return 0;
+		
 		// Last block
 		if (i->next == 0 && i + s + 1 < m_endAddress)
 		{

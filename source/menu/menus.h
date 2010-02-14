@@ -2,6 +2,7 @@
 #define _MENUS_H
 
 #include "libwiigui/gui.h"
+#include "libwiigui/gui_bgm.h"
 #include "language/gettext.h"
 #include "prompts/PromptWindows.h"
 #include "menu.h"
@@ -12,7 +13,7 @@
 extern void ResumeGui();
 extern void HaltGui();
 extern GuiWindow * mainWindow;
-extern GuiSound * bgMusic;
+extern GuiBGM * bgMusic;
 extern u8 shutdown;
 extern u8 reset;
 

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-05 14:13+0100\n"
+"POT-Creation-Date: 2010-02-15 00:12+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: nextos@korea.com\n"
 "Language-Team: \n"
@@ -188,9 +188,6 @@ msgstr "Wii 메뉴로 놀아가기"
 msgid "Backgroundmusic"
 msgstr "배경음악"
 
-msgid "Backgroundmusic Path changed."
-msgstr "배경음악 경로 변경됨."
-
 msgid "Big thanks to:"
 msgstr "감사 :"
 
@@ -220,6 +217,9 @@ msgstr "삭제할 수 없습니다:"
 
 msgid "Cancel"
 msgstr "취소"
+
+msgid "Change Play Path"
+msgstr ""
 
 msgid "Channels"
 msgstr ""
@@ -756,6 +756,12 @@ msgstr "콘솔 잠금"
 msgid "Locked"
 msgstr "잠김"
 
+msgid "Loop Directory"
+msgstr ""
+
+msgid "Loop Music"
+msgstr ""
+
 msgid "Loop Sound"
 msgstr ""
 
@@ -775,6 +781,9 @@ msgid "Most likely it has dimensions that are not evenly divisible by 4."
 msgstr "대부분 이미지는 4로 나누어져야 되요."
 
 msgid "Mount DVD drive"
+msgstr ""
+
+msgid "Music Loop Mode"
 msgstr ""
 
 msgid "Music Volume"
@@ -924,6 +933,18 @@ msgstr "리스트로 부터 고르기"
 msgid "Play Count"
 msgstr "실행 횟수"
 
+msgid "Play Next"
+msgstr ""
+
+msgid "Play Once"
+msgstr ""
+
+msgid "Play Previous"
+msgstr ""
+
+msgid "Playing Music:"
+msgstr ""
+
 msgid "Please wait..."
 msgstr ""
 
@@ -941,6 +962,9 @@ msgstr "출판자"
 
 msgid "Quick Boot"
 msgstr "게임 바로실행"
+
+msgid "Random Directory Music"
+msgstr ""
 
 msgid "Reading WAD data... Ok!"
 msgstr "WAD 데이터 읽기... 성공!"
@@ -960,8 +984,14 @@ msgstr ""
 msgid "Rename Game on WBFS"
 msgstr "WBFS에서 게임 이름 변경"
 
+msgid "Reset BG Music"
+msgstr ""
+
 msgid "Reset Playcounter"
 msgstr "실행횟수 리셋"
+
+msgid "Reset to standard BGM?"
+msgstr ""
 
 msgid "Restarting..."
 msgstr "재시작..."
@@ -1013,9 +1043,6 @@ msgstr "9월"
 
 msgid "Set Search-Filter"
 msgstr ""
-
-msgid "Set as backgroundmusic?"
-msgstr "벼경음악 설정?"
 
 msgid "Settings"
 msgstr "설정"
@@ -1347,6 +1374,12 @@ msgstr "중"
 
 msgid "seconds left"
 msgstr "초 남았습니다"
+
+#~ msgid "Backgroundmusic Path changed."
+#~ msgstr "배경음악 경로 변경됨."
+
+#~ msgid "Set as backgroundmusic?"
+#~ msgstr "벼경음악 설정?"
 
 #~ msgid "The file is not a .wad"
 #~ msgstr "화일이 .wad 아님"

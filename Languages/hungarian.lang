@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-05 14:13+0100\n"
+"POT-Creation-Date: 2010-02-15 00:12+0100\n"
 "PO-Revision-Date: 2009-12-29 11:05+0100\n"
 "Last-Translator: Springdale\n"
 "Language-Team: Tusk, Springdale\n"
@@ -188,9 +188,6 @@ msgstr "Visszatérés a Wii Menübe"
 msgid "Backgroundmusic"
 msgstr "Háttérzene"
 
-msgid "Backgroundmusic Path changed."
-msgstr "Háttérzene útvonala megváltozott."
-
 msgid "Big thanks to:"
 msgstr "Köszönet:"
 
@@ -220,6 +217,9 @@ msgstr "Nem törölhetõ"
 
 msgid "Cancel"
 msgstr "Mégse"
+
+msgid "Change Play Path"
+msgstr ""
 
 msgid "Channels"
 msgstr "Csatornák"
@@ -756,6 +756,12 @@ msgstr "Konzol Lezárása"
 msgid "Locked"
 msgstr "Lezárva"
 
+msgid "Loop Directory"
+msgstr ""
+
+msgid "Loop Music"
+msgstr ""
+
 msgid "Loop Sound"
 msgstr "Folyamatos hang"
 
@@ -776,6 +782,9 @@ msgstr "Vélhetõen méretei nem oszhatók 4-gyel."
 
 msgid "Mount DVD drive"
 msgstr "DVD meghajtó felcsatolása"
+
+msgid "Music Loop Mode"
+msgstr ""
 
 msgid "Music Volume"
 msgstr "Zene Hangerõ"
@@ -924,6 +933,18 @@ msgstr "Válassz a listából"
 msgid "Play Count"
 msgstr "Indítások"
 
+msgid "Play Next"
+msgstr ""
+
+msgid "Play Once"
+msgstr ""
+
+msgid "Play Previous"
+msgstr ""
+
+msgid "Playing Music:"
+msgstr ""
+
 msgid "Please wait..."
 msgstr "Kérlek várj..."
 
@@ -941,6 +962,9 @@ msgstr "Kiadta"
 
 msgid "Quick Boot"
 msgstr "Gyors Boot"
+
+msgid "Random Directory Music"
+msgstr ""
 
 msgid "Reading WAD data... Ok!"
 msgstr "WAD adat olvasás... Ok!"
@@ -960,8 +984,14 @@ msgstr ""
 msgid "Rename Game on WBFS"
 msgstr "WBFS játék átnevezése"
 
+msgid "Reset BG Music"
+msgstr ""
+
 msgid "Reset Playcounter"
 msgstr "Elindítások nullázása"
+
+msgid "Reset to standard BGM?"
+msgstr ""
 
 msgid "Restarting..."
 msgstr "Újraindítás..."
@@ -1013,9 +1043,6 @@ msgstr "Szep"
 
 msgid "Set Search-Filter"
 msgstr "Keresés"
-
-msgid "Set as backgroundmusic?"
-msgstr "Beállítod háttérzenének?"
 
 msgid "Settings"
 msgstr "Beállítások"
@@ -1347,6 +1374,12 @@ msgstr "./"
 
 msgid "seconds left"
 msgstr "hátralévõ másodperc"
+
+#~ msgid "Backgroundmusic Path changed."
+#~ msgstr "Háttérzene útvonala megváltozott."
+
+#~ msgid "Set as backgroundmusic?"
+#~ msgstr "Beállítod háttérzenének?"
 
 #~ msgid "The file is not a .wad"
 #~ msgstr "A fájl nem .wad"

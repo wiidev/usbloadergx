@@ -7,7 +7,7 @@
 #include "usbloader/disc.h"
 #include "usbloader/wbfs.h"
 #include "usbloader/partition_usbloader.h"
-#include "mload/mload.h"
+#include "mload/mload_modules.h"
 #include "video.h"
 #include "audio.h"
 #include "menu.h"
@@ -232,14 +232,14 @@ s32 IOS_ReloadIOSsafe(int ios)
 		if (ios222rev == -69)
 			ios222rev = getIOSrev(0x00000001000000dell);
 		
-		if (ios222rev >= 0 && (ios222rev != 4 && ios222rev != 5))return -2;
+		if (ios222rev > 0 && (ios222rev != 4 && ios222rev != 5))return -2;
 	}
 	else if (ios==223)
 	{	
 		if (ios223rev == -69)
 			ios223rev = getIOSrev(0x00000001000000dfll);
 		
-		if (ios223rev >= 0 && (ios223rev != 4 && ios223rev != 5))return -2;
+		if (ios223rev > 0 && (ios223rev != 4 && ios223rev != 5))return -2;
 	}
 	else if (ios==249)
 	{	
