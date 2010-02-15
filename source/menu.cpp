@@ -290,7 +290,7 @@ int MainMenu(int menu) {
 
     while (currentMenu != MENU_EXIT) {
         bgMusic->SetVolume(Settings.volume);
-		gprintf("Current menu: %d\n", currentMenu);
+//		gprintf("Current menu: %d\n", currentMenu);
 
         switch (currentMenu) {
         case MENU_CHECK:
@@ -352,7 +352,7 @@ int MainMenu(int menu) {
     if(dbvideo)
 	{
 	InitVideodebug ();
-	printf("\n\n\n\n\n");
+	//printf("\n\n\n\n\n");
     }
 	if (mountMethod==3)
 	{

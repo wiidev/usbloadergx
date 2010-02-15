@@ -123,12 +123,17 @@ s32 Wbfs_Fat::GetHeaders(struct discHdr *outbuf, u32 cnt, u32 len)
 	if (len > sizeof(struct discHdr)) {
 		len = sizeof(struct discHdr);
 	}
-	gprintf("GetHeaders\n");
+#ifdef DEBUG_WBFS
+	gprintf("\n\tGetHeaders");
+#endif
 	for (i=0; i<cnt && i<fat_hdr_count; i++) {
 		memcpy(&outbuf[i], &fat_hdr_list[i], len);
 	}
 	SAFE_FREE(fat_hdr_list);
 	fat_hdr_count = 0;
+#ifdef DEBUG_WBFS
+	gprintf("...ok");
+#endif
 	return 0;
 }
 

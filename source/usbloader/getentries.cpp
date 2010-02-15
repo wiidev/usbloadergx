@@ -22,6 +22,7 @@
 #include "listfiles.h"
 #define typei 0x00010001
 
+#define DEBUG_GAMELIST
 
 struct discHdr * gameList=NULL;
 s32 gameSelected=0, gameStart=0;
@@ -131,8 +132,9 @@ int GetFullHeaders(struct discHdr **headers, u32 *count)
 {
 	if (fullGameList == NULL || fullGameCnt == -1)
 	{
-		gprintf("Retrieving gamelist from WBFS\n");
-
+#ifdef DEBUG_GAMELIST
+	    gprintf("\nRetrieving gamelist from WBFS");
+#endif
 		// Retrieve all stuff from WBFS
 		u32 cnt;
 		
@@ -161,9 +163,11 @@ int GetFullHeaders(struct discHdr **headers, u32 *count)
 		fullGameList = buffer;
 		fullGameCnt = cnt;
 	}
-	else
-		gprintf("Retrieving gamelist from cache\n");
-	
+	else{
+#ifdef DEBUG_GAMELIST
+	    gprintf("\n\tRetrieving gamelist from cache");
+#endif
+	}
 	*count = fullGameCnt;
 	if (headers != NULL)
 	{
@@ -555,9 +559,9 @@ int __Menu_GetGameList(int t, wchar_t* gameFilter, discHdr ** PgameList, u32 *Pg
 	}
 	if (!output)
 		return -1;
-	
-	gprintf("After retrieval, gamecount: %d\n", cnt);
-			
+#ifdef DEBUG_GAMELIST
+	gprintf("\n\tAfter retrieval, gamecount: %d", cnt);
+#endif
 	if (Settings.sort==pcount) {
 		qsort(output, cnt, sizeof(struct discHdr), __Menu_EntryCmpCount);
 	} else if (Settings.fave) {

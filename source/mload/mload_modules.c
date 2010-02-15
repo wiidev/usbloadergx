@@ -136,21 +136,30 @@ if(sd_ok && !external_ehcmodule)
   
 	if(!external_ehcmodule)
 		{
-			
+#ifdef DEBUG_MLOAD
 gprintf("before mload_init\n");
+#endif
 		if(mload_init()<0) return -1;
-gprintf("after mload_init\n");
+#ifdef DEBUG_MLOAD
+		gprintf("after mload_init\n");
+#endif
 		if (IOS_GetRevision() == 4) {
-			gprintf("Loading ehcmodule v4\n");
-			mload_elf((void *) ehcmodule_frag_v4_bin, &my_data_elf);
+#ifdef DEBUG_MLOAD
+		    gprintf("Loading ehcmodule v4\n");
+#endif
+		    mload_elf((void *) ehcmodule_frag_v4_bin, &my_data_elf);
 		} else if (IOS_GetRevision() == 65535) {
-			gprintf("Loading ehcmodule v5\n");
-			mload_elf((void *) ehcmodule_frag_v5_bin, &my_data_elf);
+#ifdef DEBUG_MLOAD
+		    gprintf("Loading ehcmodule v5\n");
+#endif
+		    mload_elf((void *) ehcmodule_frag_v5_bin, &my_data_elf);
 		} else {
 			return -2;
 		}
 //		mload_elf((void *) ehcmodule, &my_data_elf);
-gprintf("before mload_run_thread\n");
+#ifdef DEBUG_MLOAD
+		gprintf("before mload_run_thread\n");
+#endif
 		my_thread_id= mload_run_thread(my_data_elf.start, my_data_elf.stack, my_data_elf.size_stack, my_data_elf.prio);
 		if(my_thread_id<0) return -1;
 		//if(mload_module(ehcmodule, size_ehcmodule)<0) return -1;
