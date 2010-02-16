@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# italian.lang - v58 - r903
+# italian.lang - v59 - r910
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-15 00:12+0100\n"
+"POT-Creation-Date: 2010-02-16 21:04+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe, Cambo\n"
@@ -859,7 +859,7 @@ msgid "Not a DOL/ELF file."
 msgstr "Non è un file DOL/ELF."
 
 msgid "Not a WAD file."
-msgstr ""
+msgstr "Non è un file WAD."
 
 msgid "Not a Wii Disc"
 msgstr "Non è un Disco Wii"
@@ -1380,9 +1380,6 @@ msgstr "secondi mancanti"
 
 #~ msgid "Set as backgroundmusic?"
 #~ msgstr "Imposto come Musica Sottofondo?"
-
-#~ msgid "The file is not a .wad"
-#~ msgstr "Non è un file .wad"
 
 #~ msgid "Install not possible"
 #~ msgstr "Impossibile installare"

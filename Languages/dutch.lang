@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# dutch.lang - r904
+# dutch.lang - r912
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-15 00:12+0100\n"
+"POT-Creation-Date: 2010-02-05 14:22+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: glowy\n"
 "Language-Team: tj_cool, glowy\n"
@@ -757,10 +757,10 @@ msgid "Locked"
 msgstr "Vergrendeld"
 
 msgid "Loop Directory"
-msgstr ""
+msgstr "Herhaal Map"
 
 msgid "Loop Music"
-msgstr ""
+msgstr "Herhaal Muziek"
 
 msgid "Loop Sound"
 msgstr "Geluid herhalen"
@@ -859,7 +859,7 @@ msgid "Not a DOL/ELF file."
 msgstr "Geen DOL/ELF bestand."
 
 msgid "Not a WAD file."
-msgstr ""
+msgstr "Geen WAD bestand."
 
 msgid "Not a Wii Disc"
 msgstr "Geen Wii disk"
@@ -937,7 +937,7 @@ msgid "Play Next"
 msgstr "Speel Volgende"
 
 msgid "Play Once"
-msgstr ""
+msgstr "Speel één maal"
 
 msgid "Play Previous"
 msgstr "Speel Vorige"
@@ -964,7 +964,7 @@ msgid "Quick Boot"
 msgstr "Snelle start"
 
 msgid "Random Directory Music"
-msgstr ""
+msgstr "Willekeurige Map Muziek"
 
 msgid "Reading WAD data... Ok!"
 msgstr "WAD data lezen... Ok!"

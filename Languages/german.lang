@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# german.lang - r903
+# german.lang - r911
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-15 00:12+0100\n"
+"POT-Creation-Date: 2010-02-15 14:31+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: ZEN.13\n"
 "Language-Team: Snoozer, wishmasterf, Bertilax, ZEN.13\n"
@@ -757,13 +757,13 @@ msgid "Locked"
 msgstr "gesperrt"
 
 msgid "Loop Directory"
-msgstr ""
+msgstr "Verzeichnis wiederholen"
 
 msgid "Loop Music"
-msgstr ""
+msgstr "1 Titel wiederholen"
 
 msgid "Loop Sound"
-msgstr "Schleife"
+msgstr "Wiederholen"
 
 msgid "Mar"
 msgstr "März"
@@ -856,10 +856,10 @@ msgid "Not Found"
 msgstr "Nicht gefunden"
 
 msgid "Not a DOL/ELF file."
-msgstr "Keine DOL/ELF Datei."
+msgstr "Das ist keine DOL/ELF Datei."
 
 msgid "Not a WAD file."
-msgstr ""
+msgstr "Das ist keine WAD Datei."
 
 msgid "Not a Wii Disc"
 msgstr "Das ist keine Wii Disc"
@@ -937,7 +937,7 @@ msgid "Play Next"
 msgstr "Nächster Titel"
 
 msgid "Play Once"
-msgstr ""
+msgstr "nur einmal abspielen"
 
 msgid "Play Previous"
 msgstr "Vorheriger Titel"
@@ -964,7 +964,7 @@ msgid "Quick Boot"
 msgstr "Schnelles Laden"
 
 msgid "Random Directory Music"
-msgstr ""
+msgstr "Zufällig aus gewähltem Verzeichnis"
 
 msgid "Reading WAD data... Ok!"
 msgstr "Lese WAD Daten... OK!"
@@ -991,7 +991,7 @@ msgid "Reset Playcounter"
 msgstr "Spielzähler zurücksetzen"
 
 msgid "Reset to standard BGM?"
-msgstr "Auf Standard-Hintergrundmusik zurücksetzen?"
+msgstr "Auf Standard zurücksetzen?"
 
 msgid "Restarting..."
 msgstr "Damit die neue Version benutzt werden kann, muss der Loader neu gestartet werden."
@@ -1102,7 +1102,7 @@ msgid "Successfully installed:"
 msgstr "Erfolgreich installiert:"
 
 msgid "System Default"
-msgstr "Systemstandard"
+msgstr "Konsolenstandard"
 
 msgid "TChinese"
 msgstr "Traditionelles Chinesisch"

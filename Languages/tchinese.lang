@@ -1,14 +1,14 @@
 # USB Loader GX language source file.
-# tchinese.lang - r894
+# tchinese.lang - r911
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-02-15 00:12+0100\n"
-"PO-Revision-Date: 2009-10-01 01:00+0200\n"
-"Last-Translator: Miller Liang\n"
-"Language-Team: kyogc, Miller\n"
+"PO-Revision-Date: 2010-02-15 21:00+0800\n"
+"Last-Translator: Mika Li\n"
+"Language-Team: kyogc, Miller, Mika Li\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -159,7 +159,7 @@ msgid "Author:"
 msgstr "作者"
 
 msgid "AutoInit Network"
-msgstr "自動檢查網絡"
+msgstr "自動檢查網路"
 
 msgid "AutoPatch"
 msgstr "自動修改"
@@ -292,7 +292,7 @@ msgid "Could not initialize DIP module!"
 msgstr "無法啟動 DIP 模塊!"
 
 msgid "Could not initialize network!"
-msgstr "無法啟動網絡!"
+msgstr "無法啟動網路!"
 
 msgid "Could not open Disc"
 msgstr "無法開啟光碟"
@@ -466,7 +466,7 @@ msgid "Downloading image:"
 msgstr "下載圖片"
 
 msgid "Dutch"
-msgstr "荷文"
+msgstr "荷蘭文"
 
 msgid "ERROR"
 msgstr "錯誤"
@@ -639,7 +639,7 @@ msgid "Incoming file %0.2fMB"
 msgstr "正在接收文件 %0.2fMB"
 
 msgid "Initializing Network"
-msgstr "正在啟動網絡"
+msgstr "正在啟動網路"
 
 msgid "Insert Disk"
 msgstr "插入光碟"
@@ -651,7 +651,7 @@ msgid "Insert an SD-Card to download images."
 msgstr "插入 SD 卡以下載封面."
 
 msgid "Insert an SD-Card to save."
-msgstr "插入 SD卡以儲存."
+msgstr "插入 SD 卡以儲存."
 
 msgid "Insert an SD-Card to use this option."
 msgstr "插入 SD 卡使用此功能."
@@ -757,10 +757,10 @@ msgid "Locked"
 msgstr "已鎖定"
 
 msgid "Loop Directory"
-msgstr ""
+msgstr "重複路徑"
 
 msgid "Loop Music"
-msgstr ""
+msgstr "重複音樂"
 
 msgid "Loop Sound"
 msgstr "重複音樂"
@@ -859,7 +859,7 @@ msgid "Not a DOL/ELF file."
 msgstr "不是 DOL/ELF 文件."
 
 msgid "Not a WAD file."
-msgstr ""
+msgstr "不是 WAD 文件."
 
 msgid "Not a Wii Disc"
 msgstr "不是 Wii 的光碟"
@@ -937,7 +937,7 @@ msgid "Play Next"
 msgstr "執行下一個"
 
 msgid "Play Once"
-msgstr ""
+msgstr "播放一次"
 
 msgid "Play Previous"
 msgstr "執行上一個"
@@ -964,7 +964,7 @@ msgid "Quick Boot"
 msgstr "快速啟動"
 
 msgid "Random Directory Music"
-msgstr ""
+msgstr "隨機選取音樂"
 
 msgid "Reading WAD data... Ok!"
 msgstr "讀取 WAD 數據... 完成!"
@@ -979,7 +979,7 @@ msgid "Reload SD"
 msgstr "重新載入 SD 卡"
 
 msgid "Remove update"
-msgstr ""
+msgstr "移除更新"
 
 msgid "Rename Game on WBFS"
 msgstr "變更WBFS上的遊戲名稱"
@@ -1343,7 +1343,7 @@ msgid "for Ocarina"
 msgstr "的 金手指"
 
 msgid "for WiiTDB and hosting covers / disc images"
-msgstr "設置 WTDB與封面檔案存放空間"
+msgstr "設置 WiiTDB 與封面檔案存放空間"
 
 msgid "for diverse patches"
 msgstr "的多種修正"

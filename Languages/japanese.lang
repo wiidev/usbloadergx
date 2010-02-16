@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# japanese.lang - r899
+# japanese.lang - r910
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-15 00:12+0100\n"
+"POT-Creation-Date: 2010-02-16 21:04+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
@@ -550,7 +550,7 @@ msgid "Full Shutdown"
 msgstr "シャットダウン"
 
 msgid "GAMEID_Gamename"
-msgstr ""
+msgstr "ゲームID_ゲーム名"
 
 msgid "GCT Cheatcodes Path"
 msgstr "GCTファイルのパス"
@@ -595,7 +595,7 @@ msgid "Game partition"
 msgstr "ゲーム領域のみ"
 
 msgid "Gamename [GAMEID]"
-msgstr ""
+msgstr "ゲーム名 [ゲームID]"
 
 msgid "Games"
 msgstr "総ゲーム数"
@@ -660,7 +660,7 @@ msgid "Install"
 msgstr "ｲﾝｽﾄｰﾙ"
 
 msgid "Install 1:1 Copy"
-msgstr "完全にコピーする"
+msgstr "フルコピー"
 
 msgid "Install Error!"
 msgstr "インストールエラー!"
@@ -844,7 +844,7 @@ msgid "No themes found on the site."
 msgstr "テーマが見つかりません"
 
 msgid "None"
-msgstr ""
+msgstr "なし"
 
 msgid "Normal"
 msgstr "ワイド"
@@ -859,7 +859,7 @@ msgid "Not a DOL/ELF file."
 msgstr "DOL(ELF)ﾌｧｲﾙではありません"
 
 msgid "Not a WAD file."
-msgstr ""
+msgstr "WADﾌｧｲﾙではありません"
 
 msgid "Not a Wii Disc"
 msgstr "Wiiﾃﾞｨｽｸではありません"
@@ -979,7 +979,7 @@ msgid "Reload SD"
 msgstr "SDを再読み込み"
 
 msgid "Remove update"
-msgstr ""
+msgstr "更新を取り除く"
 
 msgid "Rename Game on WBFS"
 msgstr "WBFS内のゲーム名を変更"
@@ -1380,9 +1380,6 @@ msgstr "秒で完了"
 
 #~ msgid "Set as backgroundmusic?"
 #~ msgstr "BGMに設定しますか？"
-
-#~ msgid "The file is not a .wad"
-#~ msgstr "WADﾌｧｲﾙではありません"
 
 #~ msgid "Install not possible"
 #~ msgstr "インストールできません"
