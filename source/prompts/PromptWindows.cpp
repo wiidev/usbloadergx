@@ -10,7 +10,7 @@
 #include "usbloader/wbfs.h"
 #include "usbloader/wdvd.h"
 #include "usbloader/partition_usbloader.h"
-#include "usbloader/usbstorage.h"
+#include "usbloader/usbstorage2.h"
 #include "usbloader/getentries.h"
 #include "language/gettext.h"
 #include "libwiigui/gui.h"

@@ -19,7 +19,8 @@ extern "C" {
         u8 bufsize;
 
         /* Padding */
-        u8 unused1[14];
+		u8 is_ciso;
+        u8 unused1[13];
 
         /* Magic word */
         u32 magic;

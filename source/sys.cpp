@@ -3,7 +3,7 @@
 #include <unistd.h>
 
 #include "usbloader/wdvd.h"
-#include "usbloader/usbstorage.h"
+#include "usbloader/usbstorage2.h"
 #include "usbloader/disc.h"
 #include "usbloader/wbfs.h"
 #include "usbloader/partition_usbloader.h"
@@ -78,7 +78,7 @@ int Sys_ChangeIos(int ios) {
 	
 	WDVD_Close();
 	
-	USBStorage_Deinit();
+	USBStorage2_Deinit();
 	
 	s32 ret = IOS_ReloadIOSsafe(ios);
 	if (ret < 0) {
@@ -122,7 +122,7 @@ int Sys_IosReload(int IOS) {
 
     WDVD_Close();
 
-    USBStorage_Deinit();
+    USBStorage2_Deinit();
 
     if (IOS == 249 || IOS == 222 || IOS == 223) {
         for (int i = 0; i < 10; i++) {
@@ -132,7 +132,7 @@ int Sys_IosReload(int IOS) {
             ret = WBFS_Init(WBFS_DEVICE_USB);
             if (!(ret < 0)) break;
             sleep(1);
-            USBStorage_Deinit();
+            USBStorage2_Deinit();
         }
         if (ret>=0) {
             ret = Disc_Init();

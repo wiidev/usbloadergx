@@ -7,7 +7,7 @@
 #include <locale.h>
 
 #include "usbloader/sdhc.h"
-#include "usbloader/usbstorage.h"
+#include "usbloader/usbstorage2.h"
 #include "usbloader/wbfs.h"
 #include "libfat/fat.h"
 #include "libntfs/ntfs.h"
@@ -53,15 +53,15 @@ int USBDevice_Init() {
     //right now mounts first FAT-partition
 
 	//try first mount with cIOS
-    if (!fatMount("USB", &__io_wiiums, 0, CACHE, SECTORS)) {
-		//try now mount with libogc
-		if (!fatMount("USB", &__io_usbstorage, 0, CACHE, SECTORS)) {
+//    if (!fatMount("USB", &__io_wiiums, 0, CACHE, SECTORS)) {
+//		//try now mount with libogc
+		if (!fatMount("USB", &__io_usbstorage2, 0, CACHE, SECTORS)) {
 #ifdef DEBUG_FAT
 		    gprintf(":-1");
 #endif
 		    return -1;
 		}
-	}
+//	}
 	
 	fat_usb_mount = 1;
 	fat_usb_sec = _FAT_startSector;
@@ -88,12 +88,12 @@ int WBFSDevice_Init(u32 sector) {
     //right now mounts first FAT-partition
 
 	//try first mount with cIOS
-    if (!fatMount("WBFS", &__io_wiiums, 0, CACHE, SECTORS)) {	
+//    if (!fatMount("WBFS", &__io_wiiums, 0, CACHE, SECTORS)) {	
 		//try now mount with libogc
-		if (!fatMount("WBFS", &__io_usbstorage, 0, CACHE, SECTORS)) {
+		if (!fatMount("WBFS", &__io_usbstorage2, 0, CACHE, SECTORS)) {
 			return -1;
 		}
-	}
+//	}
 
 	fat_wbfs_mount = 1;
 	fat_wbfs_sec = _FAT_startSector;
@@ -180,19 +180,19 @@ s32 MountNTFS(u32 sector)
 
 	if (wbfsDev == WBFS_DEVICE_USB) {
 		/* Initialize WBFS interface */
-		if (!__io_wiiums.startup()) {
-			ret = __io_usbstorage.startup();
+//		if (!__io_wiiums.startup()) {
+			ret = __io_usbstorage2.startup();
 			if (!ret) {
 				return -1;
 			}
-		}
+//		}
 		/* Mount device */
-		if (!ntfsMount("NTFS", &__io_wiiums, sector, CACHE, SECTORS, NTFS_SHOW_HIDDEN_FILES | NTFS_RECOVER)) {
-			ret = ntfsMount("NTFS", &__io_usbstorage, sector, CACHE, SECTORS, NTFS_SHOW_HIDDEN_FILES | NTFS_RECOVER);
+//		if (!ntfsMount("NTFS", &__io_wiiums, sector, CACHE, SECTORS, NTFS_SHOW_HIDDEN_FILES | NTFS_RECOVER)) {
+			ret = ntfsMount("NTFS", &__io_usbstorage2, sector, CACHE, SECTORS, NTFS_SHOW_HIDDEN_FILES | NTFS_RECOVER);
 			if (!ret) {
 				return -2;
 			}
-		}
+//		}
 	} else if (wbfsDev == WBFS_DEVICE_SDHC) {
 		if (sdhc_mode_sd == 0) {
 			ret = ntfsMount("NTFS", &__io_sdhc, 0, CACHE, SECTORS, NTFS_SHOW_HIDDEN_FILES | NTFS_RECOVER);

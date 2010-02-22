@@ -8,7 +8,7 @@
 #include "libntfs/ntfs.h"
 #include "libwbfs/libwbfs.h"
 #include "wbfs.h"
-#include "usbstorage.h"
+#include "usbstorage2.h"
 #include "frag.h"
 #include "utils.h"
 

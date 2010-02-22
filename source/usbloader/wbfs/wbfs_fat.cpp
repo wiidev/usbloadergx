@@ -15,6 +15,8 @@
 #include "usbloader/disc.h"
 #include "fatmounter.h"
 #include "wbfs_fat.h"
+#include "../spinner.h"
+#include "wbfs_rw.h"
 
 #include "gecko.h"
 
@@ -51,7 +53,7 @@ s32 Wbfs_Fat::Open()
 		if (WBFSDevice_Init(lba)) return -1;
 		strcpy(wbfs_fs_drive, "WBFS:");
 	}
-	
+
 	return 0;
 }
 
@@ -170,7 +172,7 @@ s32 Wbfs_Fat::AddGame(void)
 	}
 	wbfs_t *old_hdd = hdd;
 	hdd = part; // used by spinner
-	ret = wbfs_add_disc(part, __ReadDVD, NULL, Spinner, part_sel, copy_1_1);
+	ret = wbfs_add_disc(part, __ReadDVD, NULL, WBFS_Spinner, part_sel, copy_1_1);
 	hdd = old_hdd;
 	wbfs_trim(part);
 	ClosePart(part);
@@ -258,7 +260,7 @@ s32 Wbfs_Fat::ReIDGame(u8 *discid, const void *newID)
 	wbfs_t *part = OpenPart((char *) discid);
 	if (!part)
 	return -1;
-	
+
     s32 ret = wbfs_rID_disc(part, discid,(u8*)newID);
 
 	ClosePart(part);
@@ -287,7 +289,7 @@ s32 Wbfs_Fat::ReIDGame(u8 *discid, const void *newID)
 	return ret;
 }
 
-f32 Wbfs_Fat::EstimateGameSize() 
+f32 Wbfs_Fat::EstimateGameSize()
 {
 	wbfs_t *part = NULL;
 	u64 size = (u64)143432*2*0x8000ULL;
@@ -321,7 +323,7 @@ bool Wbfs_Fat::CheckLayoutB(char *fname, int len, u8* id, char *fname_title)
 	// cut at '['
 	fname_title[len-8] = 0;
 	int n = strlen(fname_title);
-	if (n == 0) return false; 
+	if (n == 0) return false;
 	// cut trailing _ or ' '
 	if (fname_title[n - 1] == ' ' || fname_title[n - 1] == '_' ) {
 		fname_title[n - 1] = 0;
@@ -375,7 +377,7 @@ s32 Wbfs_Fat::GetHeadersCount()
 
 		memcpy(id, fname, 6);
 		id[6] = 0;
-		*fname_title = 0;		
+		*fname_title = 0;
 
 		is_dir = S_ISDIR(st.st_mode);
 		//printf("mode: %d %d %x\n", is_dir, st.st_mode, st.st_mode);
@@ -408,14 +410,18 @@ s32 Wbfs_Fat::GetHeadersCount()
 					strcpy(strrchr(fpath, '.'), ".iso"); // replace .wbfs with .iso
 					if (stat(fpath, &st) == -1) {
 						//printf("missing: %s\n", fpath);
-						if (lay_a && lay_b == 1) {
-							// mark lay_b so that the stat check is still done,
-							// but lay_b is not re-tried again
-							lay_b = 2;
-							// retry with layout b
-							goto try_lay_b;
+						// try .ciso
+						strcpy(strrchr(fpath, '.'), ".ciso"); // replace .iso with .ciso
+						if (stat(fpath, &st) == -1 ) {
+							if (lay_a && lay_b == 1) {
+								// mark lay_b so that the stat check is still done,
+								// but lay_b is not re-tried again
+								lay_b = 2;
+								// retry with layout b
+								goto try_lay_b;
+							}
+							continue;
 						}
-						continue;
 					}
 				}
 			} else {
@@ -424,10 +430,12 @@ s32 Wbfs_Fat::GetHeadersCount()
 		} else {
 			// usb:/wbfs/GAMEID.wbfs
 			// or usb:/wbfs/GAMEID.iso
+			// or usb:/wbfs/GAMEID.ciso
 			p = strrchr(fname, '.');
 			if (!p) continue;
 			if ( (strcasecmp(p, ".wbfs") != 0)
-				&& (strcasecmp(p, ".iso") != 0) ) continue;
+				&& (strcasecmp(p, ".iso") != 0)
+				&& (strcasecmp(p, ".ciso") != 0) ) continue;
 			int n = p - fname; // length withouth .wbfs
 			if (n != 6) {
 				// TITLE [GAMEID].wbfs
@@ -461,6 +469,7 @@ s32 Wbfs_Fat::GetHeadersCount()
 				fseek(fp, 512, SEEK_SET);
 				fread(&tmpHdr, sizeof(struct discHdr), 1, fp);
 				fclose(fp);
+				tmpHdr.is_ciso = 0;
 				if ((tmpHdr.magic == 0x5D1C9EA3) && (memcmp(tmpHdr.id, id, 6) == 0)) {
 					goto add_hdr;
 				}
@@ -472,7 +481,7 @@ s32 Wbfs_Fat::GetHeadersCount()
 			if (!part) {
 				continue;
 			}
-			// Get header 
+			// Get header
 			ret = wbfs_get_disc_info(part, 0, (u8*)&tmpHdr,
 					sizeof(struct discHdr), &size);
 			ClosePart(part);
@@ -486,6 +495,19 @@ s32 Wbfs_Fat::GetHeadersCount()
 				fseek(fp, 0, SEEK_SET);
 				fread(&tmpHdr, sizeof(struct discHdr), 1, fp);
 				fclose(fp);
+				tmpHdr.is_ciso = 0;
+				if ((tmpHdr.magic == 0x5D1C9EA3) && (memcmp(tmpHdr.id, id, 6) == 0)) {
+					goto add_hdr;
+				}
+			}
+		} else if (strcasecmp(strrchr(fpath,'.'), ".ciso") == 0) {
+			// ciso file
+			FILE *fp = fopen(fpath, "rb");
+			if (fp != NULL) {
+				fseek(fp, 0x8000, SEEK_SET);
+				fread(&tmpHdr, sizeof(struct discHdr), 1, fp);
+				fclose(fp);
+				tmpHdr.is_ciso = 1;
 				if ((tmpHdr.magic == 0x5D1C9EA3) && (memcmp(tmpHdr.id, id, 6) == 0)) {
 					goto add_hdr;
 				}
@@ -504,7 +526,7 @@ s32 Wbfs_Fat::GetHeadersCount()
 	}
 	dirclose(dir_iter);
 	//dbg_time2("\nFAT_GetCount"); Wpad_WaitButtonsCommon();
-	
+
 	return 0;
 }
 
@@ -516,6 +538,9 @@ int Wbfs_Fat::FindFilename(u8 *id, char *fname, int len)
 	if (stat(fname, &st) == 0) return 1;
 	// look for direct .iso file
 	strcpy(strrchr(fname, '.'), ".iso"); // replace .wbfs with .iso
+	if (stat(fname, &st) == 0) return 1;
+	// look for direct .ciso file
+	strcpy(strrchr(fname, '.'), ".ciso"); // replace .iso with .ciso
 	if (stat(fname, &st) == 0) return 1;
 	// direct file not found, check subdirs
 	*fname = 0;
@@ -549,6 +574,9 @@ int Wbfs_Fat::FindFilename(u8 *id, char *fname, int len)
 			if (stat(fname, &st) == 0) break;
 			// look for .iso file
 			snprintf(fname, len, "%s/%s/%.6s.iso", path, name, id);
+			if (stat(fname, &st) == 0) break;
+			// look for .ciso file
+			snprintf(fname, len, "%s/%s/%.6s.ciso", path, name, id);
 		} else {
 			// TITLE [GAMEID].wbfs
 			char fn_title[TITLE_LEN];
@@ -556,7 +584,8 @@ int Wbfs_Fat::FindFilename(u8 *id, char *fname, int len)
 			char *p = strrchr(name, '.');
 			if (!p) continue;
 			if ( (strcasecmp(p, ".wbfs") != 0)
-				&& (strcasecmp(p, ".iso") != 0) ) continue;
+				&& (strcasecmp(p, ".iso") != 0)
+				&& (strcasecmp(p, ".ciso") != 0) ) continue;
 			int n = p - name; // length withouth .wbfs
 			if (!CheckLayoutB(name, n, fn_id, fn_title)) continue;
 			if (strncmp((char*)fn_id, (char*)id, 6) != 0) continue;
@@ -745,10 +774,10 @@ int Wbfs_Fat::GetFragList(u8 *id)
 	int i;
 	int is_wbfs = 0;
 	int ret_val = -1;
-	
+
 	ret = FindFilename(id, fname, sizeof(fname));
 	if (!ret) return -1;
-	
+
 	if (strcasecmp(strrchr(fname,'.'), ".wbfs") == 0) {
 		is_wbfs = 1;
 	}
@@ -784,7 +813,8 @@ int Wbfs_Fat::GetFragList(u8 *id)
 		ret = wbfs_get_fragments(d, &_frag_append, fw);
 		if (ret) goto out;
 		CloseDisc(d);
-		// DEBUG: frag_list->num = MAX_FRAG-10; // stress test
+		// DEBUG: 
+		frag_list->num = MAX_FRAG-10; // stress test
 		ret = frag_remap(frag_list, fw, fa);
 		if (ret) goto out;
 	} else {
@@ -808,7 +838,7 @@ out:
 
 int Wbfs_Fat::GetFragList(char *filename, _frag_append_t append_fragment, FragList *fs)
 {
-	return _FAT_get_fragments(filename, append_fragment, fs);	
+	return _FAT_get_fragments(filename, append_fragment, fs);
 }
 
 bool Wbfs_Fat::ShowFreeSpace(void)

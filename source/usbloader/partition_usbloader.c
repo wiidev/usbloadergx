@@ -7,7 +7,7 @@
 
 #include "partition_usbloader.h"
 #include "sdhc.h"
-#include "usbstorage.h"
+#include "usbstorage2.h"
 #include "utils.h"
 #include "wbfs.h"
 #include "libwbfs/libwbfs.h"
@@ -33,12 +33,12 @@ s32 Partition_GetEntries(u32 device, partitionEntry *outbuf, u32 *outval)
 	switch (device) {
 	case WBFS_DEVICE_USB: {
 		/* Get sector size */
-		ret = USBStorage_GetCapacity(&sector_size);
+		ret = USBStorage2_GetCapacity(&sector_size);
 		if (ret == 0)
 			return -1;
 
 		/* Read partition table */
-		ret = USBStorage_ReadSectors(0, 1, &table);
+		ret = USBStorage2_ReadSectors(0, 1, &table);
 		if (ret < 0)
 			return ret;
 
@@ -86,7 +86,7 @@ bool Device_ReadSectors(u32 device, u32 sector, u32 count, void *buffer)
 	/* Read from specified device */
 	switch (device) {
 		case WBFS_DEVICE_USB:
-			ret = USBStorage_ReadSectors(sector, count, buffer);
+			ret = USBStorage2_ReadSectors(sector, count, buffer);
 			if (ret < 0)
 				return false;
 			return true;
@@ -105,7 +105,7 @@ bool Device_WriteSectors(u32 device, u32 sector, u32 count, void *buffer)
 	/* Read from specified device */
 	switch (device) {
 		case WBFS_DEVICE_USB:
-			ret = USBStorage_WriteSectors(sector, count, buffer);
+			ret = USBStorage2_WriteSectors(sector, count, buffer);
 			if (ret < 0)
 				return false;
 			return true;
@@ -129,7 +129,7 @@ s32 Partition_GetEntriesEx(u32 device, partitionEntry *outbuf, u32 *psect_size, 
 	// Get sector size
 	switch (device) {
 	case WBFS_DEVICE_USB:
-		ret = USBStorage_GetCapacity(&sector_size);
+		ret = USBStorage2_GetCapacity(&sector_size);
 		if (ret == 0) return -1;
 		break;
 	case WBFS_DEVICE_SDHC:

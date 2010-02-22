@@ -1882,12 +1882,12 @@ void CFG_LoadGlobal(void) {
 void CFG_Cleanup(void)
 {
     int i = 0;
-    for(i = 0; i < num_title; i++)
-    {
-        if(cfg_title[i].title)
-            free(cfg_title[i].title);
-        cfg_title[i].title = NULL;
-    }
+	for(i = 0; i < num_title; i++)
+	{
+		if(cfg_title[i].title)
+			free(cfg_title[i].title);
+		cfg_title[i].title = NULL;
+	}
     if (cfg_title) {
         free(cfg_title);
         cfg_title = NULL;

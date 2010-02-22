@@ -30,10 +30,6 @@ void WBFS_CloseDisc(wbfs_disc_t *disc) {
 	current->CloseDisc(disc);
 }
 
-void GetProgressValue(s32 * d, s32 * m) {
-	current->GetProgressValue(d, m);
-}
-
 wbfs_t *GetHddInfo(void) {
     return current->GetHddInfo();
 }
@@ -44,7 +40,7 @@ s32 WBFS_Init(u32 device) {
 
 s32 WBFS_Open(void) {
 	WBFS_Close();
-	
+
 	current = new Wbfs_Wbfs(WBFS_DEVICE_USB, 0, 0); // Fix me!
 
 	wbfs_part_fs = wbfs_part_idx = wbfs_part_lba = 0;
@@ -169,7 +165,7 @@ s32 WBFS_OpenLBA(u32 lba, u32 size)
 		delete part;
 		return -1;
 	}
-	
+
 	WBFS_Close();
 	current = part;
 	return 0;
@@ -187,7 +183,7 @@ bool WBFS_Close(void)
 	wbfs_part_idx = 0;
 	wbfs_part_lba = 0;
 	wbfs_fs_drive[0] = '\0';
-	
+
 	ResetGamelist();
 
     return 0;
@@ -262,6 +258,6 @@ int WBFS_GetFragList(u8 *id) {
 	return current->GetFragList(id);
 }
 
-bool WBFS_ShowFreeSpace(void) { 
+bool WBFS_ShowFreeSpace(void) {
 	return current->ShowFreeSpace();
 }

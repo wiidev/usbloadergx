@@ -2,7 +2,7 @@
 
 #include "menus.h"
 #include "fatmounter.h"
-#include "usbloader/usbstorage.h"
+#include "usbloader/usbstorage2.h"
 #include "usbloader/utils.h"
 #include "usbloader/wbfs.h"
 #include "libwiigui/gui_customoptionbrowser.h"
@@ -18,7 +18,7 @@ int MenuFormat() {
     USBDevice_deInit();
     sleep(1);
 
-    USBStorage_Init();
+    USBStorage2_Init();
 
     int menu = MENU_NONE;
     char imgPath[100];

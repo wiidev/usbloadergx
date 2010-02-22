@@ -15,7 +15,7 @@ extern "C" {
     /* Macros */
 	#define WBFS_MIN_DEVICE         1
 	#define WBFS_MAX_DEVICE         2
-	
+
 	extern s32 wbfsDev;
 	extern int wbfs_part_fs;
 	extern u32 wbfs_part_idx;
@@ -23,7 +23,6 @@ extern "C" {
 	extern char wbfs_fs_drive[16];
 
     /* Prototypes */
-    void GetProgressValue(s32 * d, s32 * m);
     s32 WBFS_Init(u32);
     s32 WBFS_Open(void);
     s32 WBFS_Format(u32, u32);
@@ -40,7 +39,7 @@ extern "C" {
     s32 WBFS_RenameGame(u8 *, const void *);
 	s32 WBFS_ReIDGame(u8 *discid, const void *newID);
     f32 WBFS_EstimeGameSize(void);
-	
+
 	int WBFS_GetFragList(u8 *id);
 /*
     s32 __WBFS_ReadUSB(void *fp, u32 lba, u32 count, void *iobuf);

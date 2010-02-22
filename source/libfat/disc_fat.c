@@ -40,14 +40,14 @@ The list is terminated by a NULL/NULL entry.
 
 /* ====================== Wii ====================== */
 #include <sdcard/wiisd_io.h>
-#include <ogc/usbstorage.h>
+#include "usbloader/usbstorage2.h"
 #include <sdcard/gcsd.h>
 
 static const DISC_INTERFACE* get_io_wiisd (void) {
 	return &__io_wiisd;
 }
 static const DISC_INTERFACE* get_io_usbstorage (void) {
-	return &__io_usbstorage;
+	return &__io_usbstorage2;
 }
 
 static const DISC_INTERFACE* get_io_gcsda (void) {

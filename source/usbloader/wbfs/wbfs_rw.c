@@ -1,15 +1,25 @@
 #include <ogcsys.h>
 #include <malloc.h>
+#include <string.h>
 
 #include "usbloader/sdhc.h"
-#include "usbloader/usbstorage.h"
+#include "usbloader/usbstorage2.h"
 #include "usbloader/wdvd.h"
-#include "wbfs_base.h"
+#include "wbfs_rw.h"
 
 /* Constants */
 #define MAX_NB_SECTORS	32
 
-s32 Wbfs::__ReadDVD(void *fp, u32 lba, u32 len, void *iobuf) {
+u32 sector_size = 512;
+rw_sector_callback_t readCallback  = NULL;
+rw_sector_callback_t writeCallback = NULL;
+
+void SetSectorSize(u32 size)
+{
+    sector_size = size;
+}
+
+s32 __ReadDVD(void *fp, u32 lba, u32 len, void *iobuf) {
     void *buffer = NULL;
 
     u64 offset;
@@ -58,7 +68,7 @@ out:
     return ret;
 }
 
-s32 Wbfs::__ReadUSB(void *fp, u32 lba, u32 count, void *iobuf) {
+s32 __ReadUSB(void *fp, u32 lba, u32 count, void *iobuf) {
     u32 cnt = 0;
     s32 ret;
 
@@ -72,7 +82,7 @@ s32 Wbfs::__ReadUSB(void *fp, u32 lba, u32 count, void *iobuf) {
             sectors = MAX_NB_SECTORS;
 
         /* USB read */
-        ret = USBStorage_ReadSectors(lba + cnt, sectors, ptr);
+        ret = USBStorage2_ReadSectors(lba + cnt, sectors, ptr);
         if (ret < 0)
             return ret;
 
@@ -83,7 +93,7 @@ s32 Wbfs::__ReadUSB(void *fp, u32 lba, u32 count, void *iobuf) {
     return 0;
 }
 
-s32 Wbfs::__WriteUSB(void *fp, u32 lba, u32 count, void *iobuf) {
+s32 __WriteUSB(void *fp, u32 lba, u32 count, void *iobuf) {
     u32 cnt = 0;
     s32 ret;
 
@@ -97,7 +107,7 @@ s32 Wbfs::__WriteUSB(void *fp, u32 lba, u32 count, void *iobuf) {
             sectors = MAX_NB_SECTORS;
 
         /* USB write */
-        ret = USBStorage_WriteSectors(lba + cnt, sectors, ptr);
+        ret = USBStorage2_WriteSectors(lba + cnt, sectors, ptr);
         if (ret < 0)
             return ret;
 
@@ -108,7 +118,7 @@ s32 Wbfs::__WriteUSB(void *fp, u32 lba, u32 count, void *iobuf) {
     return 0;
 }
 
-s32 Wbfs::__ReadSDHC(void *fp, u32 lba, u32 count, void *iobuf) {
+s32 __ReadSDHC(void *fp, u32 lba, u32 count, void *iobuf) {
     u32 cnt = 0;
     s32 ret;
 
@@ -133,7 +143,7 @@ s32 Wbfs::__ReadSDHC(void *fp, u32 lba, u32 count, void *iobuf) {
     return 0;
 }
 
-s32 Wbfs::__WriteSDHC(void *fp, u32 lba, u32 count, void *iobuf) {
+s32 __WriteSDHC(void *fp, u32 lba, u32 count, void *iobuf) {
     u32 cnt = 0;
     s32 ret;
 

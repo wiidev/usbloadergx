@@ -5,6 +5,8 @@
 
 #define ALIGNED(x) __attribute__((aligned(x)))
 
+#define DEBUG_MLOAD
+
 /* Used for Hermes NAND emulation */
 int global_mount;
 int sd_ok=0;
@@ -287,7 +289,7 @@ int load_fatffs_module(u8 *discid)
 
 	if(mload_init()<0) return -1;
 
-	mload_elf((void *) fatffs_module, &my_data_elf);
+	mload_elf((void *) fatffs_module_bin, &my_data_elf);
 	my_thread_id= mload_run_thread(my_data_elf.start, my_data_elf.stack, my_data_elf.size_stack, my_data_elf.prio);
 	if(my_thread_id<0) return -1;
 

@@ -1,5 +1,5 @@
 #include "menus.h"
-#include "usbloader/usbstorage.h"
+#include "usbloader/usbstorage2.h"
 #include "usbloader/wbfs.h"
 #include "usbloader/disc.h"
 #include "usbloader/utils.h"
@@ -104,11 +104,11 @@ int MenuInstall() {
                 menu = MENU_DISCLIST;
                 break;
             } else {
-                USBStorage_Watchdog(0);
+                USBStorage2_Watchdog(0);
                 SetupGameInstallProgress(gametxt, name);
                 ret = WBFS_AddGame();
                 ProgressStop();
-                USBStorage_Watchdog(1);
+                USBStorage2_Watchdog(1);
                 wiilight(0);
                 if (ret != 0) {
                     WindowPrompt(tr("Install Error!"),0,tr("Back"));

@@ -2201,6 +2201,7 @@ int MenuSettings()
 		if (Settings.partition != settingspartitionold) {
 			reloaddatabasefile = true;
 			CloseXMLDatabase();
+			CFG_Cleanup();
 		}
 		OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, reloaddatabasefile, Settings.titlesOverride==1?true:false, true); // open file, reload titles, keep in memory
 	}

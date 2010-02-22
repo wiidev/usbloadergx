@@ -5,17 +5,15 @@
 #include <errno.h>
 
 #include "usbloader/sdhc.h"
-#include "usbloader/usbstorage.h"
+#include "usbloader/usbstorage2.h"
 #include "fatmounter.h"
+#include "wbfs_rw.h"
 
 #include "wbfs_base.h"
 
-rw_sector_callback_t Wbfs::readCallback  = NULL;
-rw_sector_callback_t Wbfs::writeCallback = NULL;
 s32 Wbfs::done = -1;
 s32 Wbfs::total = -1;
 u32 Wbfs::nb_sectors;
-u32 Wbfs::sector_size;
 
 Wbfs::Wbfs(u32 device, u32 lba, u32 size) : hdd(NULL)
 {
@@ -36,14 +34,14 @@ s32 Wbfs::Init(u32 device)
     switch (device) {
     case WBFS_DEVICE_USB:
         /* Initialize USB storage */
-        ret = USBStorage_Init();
+        ret = USBStorage2_Init();
         if (ret >= 0) {
             /* Setup callbacks */
             readCallback = __ReadUSB;
             writeCallback = __WriteUSB;
             /* Device info */
             /* Get USB capacity */
-            nb_sectors = USBStorage_GetCapacity(&sector_size);
+            nb_sectors = USBStorage2_GetCapacity(&sector_size);
             if (!nb_sectors)
                 return -1;
         } else
@@ -85,7 +83,7 @@ s32 Wbfs::Format()
 	return -1;
 }
 
-s32 Wbfs::CheckGame(u8 *discid) 
+s32 Wbfs::CheckGame(u8 *discid)
 {
     wbfs_disc_t *disc = NULL;
 
@@ -101,7 +99,7 @@ s32 Wbfs::CheckGame(u8 *discid)
     return 0;
 }
 
-s32 Wbfs::GameSize(u8 *discid, f32 *size) 
+s32 Wbfs::GameSize(u8 *discid, f32 *size)
 {
     wbfs_disc_t *disc = NULL;
 
@@ -124,13 +122,7 @@ s32 Wbfs::GameSize(u8 *discid, f32 *size)
     return 0;
 }
 
-void Wbfs::Spinner(s32 x, s32 max) 
-{
-    done = x;
-    total = max;
-}
-
-wbfs_t *Wbfs::GetHddInfo() 
+wbfs_t *Wbfs::GetHddInfo()
 {
     return hdd;
 }

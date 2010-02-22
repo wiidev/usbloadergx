@@ -40,23 +40,13 @@ public:
 	static s32 OpenLBA(u32 lba, u32 size);
 */
 protected:
-	static rw_sector_callback_t readCallback;
-	static rw_sector_callback_t writeCallback;
-	static s32 __ReadDVD(void *fp, u32 lba, u32 len, void *iobuf);
-	static void Spinner(s32 x, s32 max);
-	
 	static u32 nb_sectors;
-	static u32 sector_size;
 
 	/* WBFS HDD */
 	wbfs_t *hdd;
-	
+
 	u32 device, lba, size;
 private:
-	static s32 __ReadUSB(void *fp, u32 lba, u32 count, void *iobuf);
-	static s32 __WriteUSB(void *fp, u32 lba, u32 count, void *iobuf);
-	static s32 __ReadSDHC(void *fp, u32 lba, u32 count, void *iobuf);
-	static s32 __WriteSDHC(void *fp, u32 lba, u32 count, void *iobuf);
 
 	static s32 total, done;
 };

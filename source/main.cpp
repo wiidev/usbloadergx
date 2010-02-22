@@ -48,7 +48,7 @@ extern "C"
 #include "svnrev.h"
 #include "wad/title.h"
 #include "usbloader/partition_usbloader.h"
-#include "usbloader/usbstorage.h"
+#include "usbloader/usbstorage2.h"
 #include "memory/mem2.h"
 #include "lstub.h"
 
@@ -413,7 +413,7 @@ main(int argc, char *argv[])
         printf("\n\tReloading IOS to config setting (%d)...", Settings.cios == ios222 ? 222 : 223);
         SDCard_deInit();                          // unmount SD for reloading IOS
         USBDevice_deInit();                       // unmount USB for reloading IOS
-        USBStorage_Deinit();
+        USBStorage2_Deinit();
         ret = IOS_ReloadIOSsafe(Settings.cios == ios222 ? 222 : 223);
         printf("%d", ret);
         SDCard_Init();
@@ -436,7 +436,7 @@ main(int argc, char *argv[])
         printf("\n\tReloading IOS to config setting (%d)...", ios249 ? 249 : 250);
         SDCard_deInit();                          // unmount SD for reloading IOS
         USBDevice_deInit();                       // unmount USB for reloading IOS
-        USBStorage_Deinit();
+        USBStorage2_Deinit();
         ret = IOS_ReloadIOSsafe(ios249 ? 249 : 250);
         printf("%d", ret);
         if (ret < 0)

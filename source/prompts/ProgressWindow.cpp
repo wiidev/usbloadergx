@@ -17,6 +17,7 @@
 #include "prompts/ProgressWindow.h"
 #include "usbloader/wbfs.h"
 #include "usbloader/utils.h"
+#include "usbloader/spinner.h"
 
 /*** Variables used only in this file ***/
 static lwp_t progressthread = LWP_THREAD_NULL;
@@ -32,8 +33,8 @@ static f32 progressDone = 0.0;
 static bool showTime = false;
 static bool showSize = false;
 static bool changed = true;
-static s32 gameinstalldone = 0;
-static s32 gameinstalltotal = -1;
+static u32 gameinstalldone = 0;
+static u32 gameinstalltotal = 0;
 static time_t start;
 
 /*** Extern variables ***/
@@ -51,10 +52,10 @@ extern void HaltGui();
 ***************************************************************************/
 static void GameInstallProgress() {
 
-    if (gameinstalltotal <= 0)
+    if (gameinstalltotal == 0)
         return;
 
-    int oldinstalldone = gameinstalldone;
+    u32 oldinstalldone = gameinstalldone;
 
     GetProgressValue(&gameinstalldone, &gameinstalltotal);
 
@@ -312,7 +313,7 @@ static void * ProgressThread (void *arg) {
  ***************************************************************************/
 void ProgressStop() {
     showProgress = 0;
-    gameinstalltotal = -1;
+    gameinstalltotal = 0;
 
     // wait for thread to finish
     while (!LWP_ThreadIsSuspended(progressthread))
