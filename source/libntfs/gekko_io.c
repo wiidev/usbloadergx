@@ -421,21 +421,11 @@ static s64 ntfs_device_gekko_io_writebytes(struct ntfs_device *dev, s64 offset, 
         // Read the first and last sectors of the buffer from disc (if required)
         // NOTE: This is done because the data does not line up with the sector boundaries,
         //       we just read in the buffer edges where the data overlaps with the rest of the disc
-        if(offset % fd->sectorSize != 0) {
-            if (!ntfs_device_gekko_io_readsectors(dev, sec_start, 1, buffer)) {
-                ntfs_log_perror("read failure @ sector %d\n", sec_start);
-                ntfs_free(buffer);
-                errno = EIO;
-                return -1;
-            }
-        }
-        if((count % fd->sectorSize != 0) || buffer_offset > 0) {
-            if (!ntfs_device_gekko_io_readsectors(dev, sec_start + sec_count-1, 1, buffer + ((sec_count - 1) * fd->sectorSize))) {
-                    ntfs_log_perror("read failure @ sector %d\n", sec_start + sec_count);
-                    ntfs_free(buffer);
-                    errno = EIO;
-                    return -1;
-            }
+        if (!ntfs_device_gekko_io_readsectors(dev, sec_start, sec_count, buffer)) {
+            ntfs_log_perror("read failure @ sector %d\n", sec_start);
+            ntfs_free(buffer);
+            errno = EIO;
+            return -1;
         }
 
         // Copy the data into the write buffer

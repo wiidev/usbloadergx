@@ -273,6 +273,10 @@ s32 USBStorage2_WriteSectors(u32 sector, u32 numSectors, const void *buffer)
 	/* Write data */
 	ret = IOS_IoctlvFormat(hid, fd, USB_IOCTL_UMS_WRITE_SECTORS, "ii:d", sector, numSectors, buf, len);
 
+	/* Free memory */
+	if (buf != buffer)
+		iosFree(hid, buf);
+
 	return ret;
 }
 
