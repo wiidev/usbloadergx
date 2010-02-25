@@ -6,15 +6,15 @@
 #include <sdcard/wiisd_io.h>
 #include <locale.h>
 
-#include "usbloader/sdhc.h"
 #include "usbloader/usbstorage2.h"
+#include "usbloader/sdhc.h"
 #include "usbloader/wbfs.h"
 #include "libfat/fat.h"
 #include "libntfs/ntfs.h"
 #include "gecko.h"
 
 //these are the only stable and speed is good
-#define CACHE 32
+#define CACHE 8
 #define SECTORS 64
 #define SECTORS_SD 32
 
@@ -62,7 +62,7 @@ int USBDevice_Init() {
 		    return -1;
 		}
 //	}
-	
+
 	fat_usb_mount = 1;
 	fat_usb_sec = _FAT_startSector;
 #ifdef DEBUG_FAT
@@ -88,7 +88,7 @@ int WBFSDevice_Init(u32 sector) {
     //right now mounts first FAT-partition
 
 	//try first mount with cIOS
-//    if (!fatMount("WBFS", &__io_wiiums, 0, CACHE, SECTORS)) {	
+//    if (!fatMount("WBFS", &__io_wiiums, 0, CACHE, SECTORS)) {
 		//try now mount with libogc
 		if (!fatMount("WBFS", &__io_usbstorage2, 0, CACHE, SECTORS)) {
 			return -1;
@@ -171,7 +171,7 @@ s32 MountNTFS(u32 sector)
 	_FAT_mem_init();
 
 	ntfsInit(); // Call ntfs init here, to prevent locale resets
-	
+
 	// ntfsInit resets locale settings
 	// which breaks unicode in console
 	// so we change it back to C-UTF-8
@@ -195,9 +195,9 @@ s32 MountNTFS(u32 sector)
 //		}
 	} else if (wbfsDev == WBFS_DEVICE_SDHC) {
 		if (sdhc_mode_sd == 0) {
-			ret = ntfsMount("NTFS", &__io_sdhc, 0, CACHE, SECTORS, NTFS_SHOW_HIDDEN_FILES | NTFS_RECOVER);
+			ret = ntfsMount("NTFS", &__io_sdhc, 0, 8, SECTORS, NTFS_SHOW_HIDDEN_FILES | NTFS_RECOVER);
 		} else {
-			ret = ntfsMount("NTFS", &__io_sdhc, 0, CACHE, SECTORS_SD, NTFS_SHOW_HIDDEN_FILES | NTFS_RECOVER);
+			ret = ntfsMount("NTFS", &__io_sdhc, 0, 8, SECTORS_SD, NTFS_SHOW_HIDDEN_FILES | NTFS_RECOVER);
 		}
 		if (!ret) {
 			return -5;
@@ -206,7 +206,7 @@ s32 MountNTFS(u32 sector)
 
 	fs_ntfs_mount = 1;
 	fs_ntfs_sec = sector; //_FAT_startSector;
-	
+
 	return 0;
 }
 
@@ -232,25 +232,10 @@ void* _FAT_mem_allocate(size_t size)
 
 void* _FAT_mem_align(size_t size)
 {
-	return memalign(32, size);		
+	return memalign(32, size);
 }
 
 void _FAT_mem_free(void *mem)
 {
 	free(mem);
-}
-
-void* ntfs_alloc (size_t size)
-{
-	return _FAT_mem_allocate(size);
-}
-
-void* ntfs_align (size_t size)
-{
-	return _FAT_mem_align(size);
-}
-
-void ntfs_free (void* mem)
-{
-	_FAT_mem_free(mem);
 }

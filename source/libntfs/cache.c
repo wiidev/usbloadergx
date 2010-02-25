@@ -111,8 +111,12 @@ void _NTFS_cache_destructor (NTFS_CACHE* cache) {
 	ntfs_free (cache);
 }
 
+static u32 accessCounter = 0;
 
-static inline u64 accessTime(){ return gettime(); }
+static u32 accessTime(){
+	accessCounter++;
+	return accessCounter;
+}
 
 static NTFS_CACHE_ENTRY* _NTFS_cache_getPage(NTFS_CACHE *cache,sec_t sector)
 {
@@ -305,22 +309,6 @@ bool _NTFS_cache_writeSectors (NTFS_CACHE* cache, sec_t sector, sec_t numSectors
 
 	while(numSectors>0)
 	{
-/*
-		entry = _NTFS_cache_getPage(cache,sector);
-		if(entry==NULL) return false;
-
-		sec = sector - entry->sector;
-		secs_to_write = entry->count - sec;
-		if(secs_to_write>numSectors) secs_to_write = numSectors;
-
-		memcpy(entry->cache + (sec*BYTES_PER_READ),src,(secs_to_write*BYTES_PER_READ));
-
-		src += (secs_to_write*BYTES_PER_READ);
-		sector += secs_to_write;
-		numSectors -= secs_to_write;
-
-		entry->dirty = true;
-*/
 		entry = _NTFS_cache_findPage(cache,sector,numSectors);
 
 		if(entry!=NULL) {

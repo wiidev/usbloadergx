@@ -3,7 +3,7 @@
 usbstorage_starlet.c -- USB mass storage support, inside starlet
 Copyright (C) 2009 Kwiirk
 
-If this driver is linked before libogc, this will replace the original 
+If this driver is linked before libogc, this will replace the original
 usbstorage driver by svpe from libogc
 This software is provided 'as-is', without any express or implied
 warranty.  In no event will the authors be held liable for any
@@ -60,7 +60,7 @@ static char fs[] ATTRIBUTE_ALIGN(32) = "/dev/usb2";
 static char fs2[] ATTRIBUTE_ALIGN(32) = "/dev/usb/ehc";
 
 static char fsoff[] ATTRIBUTE_ALIGN(32) = "/dev/usb2/OFF";
- 
+
 static s32 hid = -1, fd = -1;
 static u32 sector_size;
 static int mounted=0;
@@ -152,13 +152,13 @@ s32 USBStorage2_Init(void)
 	if (hid < 0) {
 		hid = iosCreateHeap(UMS_HEAPSIZE);
 		if (hid < 0)
-			return IPC_ENOMEM; 
+			return IPC_ENOMEM;
 	}
 
 	/* Open USB device */
 	fd = IOS_Open(fs, 0);
 	if (fd < 0) fd = IOS_Open(fs2, 0);
-	
+
 	if (fd < 0)
 		return fd;
 
@@ -194,7 +194,7 @@ err:
 		IOS_Close(fd);
 		fd = -1;
 	}
-	
+
 
 	return ret;
 }
@@ -257,7 +257,7 @@ s32 USBStorage2_WriteSectors(u32 sector, u32 numSectors, const void *buffer)
 	if (fd < 0)
 		return fd;
 	if(!mem2_ptr) mem2_ptr=SYS_AllocArena2MemLo(2048*256,32);
-	
+
 
 	/* MEM1 buffer */
 	if (!__USBStorage2_isMEM2Buffer(buffer)) {
@@ -273,17 +273,13 @@ s32 USBStorage2_WriteSectors(u32 sector, u32 numSectors, const void *buffer)
 	/* Write data */
 	ret = IOS_IoctlvFormat(hid, fd, USB_IOCTL_UMS_WRITE_SECTORS, "ii:d", sector, numSectors, buf, len);
 
-	/* Free memory */
-	if (buf != buffer)
-		iosFree(hid, buf);
-
 	return ret;
 }
 
 static bool __usbstorage_Startup(void)
 {
-      
-	  
+
+
 return USBStorage2_Init()==0;
 }
 

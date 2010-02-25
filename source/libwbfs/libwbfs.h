@@ -67,7 +67,7 @@ typedef struct wbfs_disc_info
 
 // callback definition. Return 1 on fatal error (callback is supposed to make retries until no hopes..)
 typedef int (*rw_sector_callback_t)(void*fp,u32 lba,u32 count,void*iobuf);
-typedef void (*progress_callback_t)(u32 status, u32 total);
+typedef void (*progress_callback_t)(s64 status, s64 total);
 
 
 typedef struct wbfs_s

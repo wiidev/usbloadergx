@@ -15,7 +15,7 @@
 #include "usbloader/disc.h"
 #include "fatmounter.h"
 #include "wbfs_fat.h"
-#include "../spinner.h"
+#include "prompts/ProgressWindow.h"
 #include "wbfs_rw.h"
 
 #include "gecko.h"
@@ -172,7 +172,7 @@ s32 Wbfs_Fat::AddGame(void)
 	}
 	wbfs_t *old_hdd = hdd;
 	hdd = part; // used by spinner
-	ret = wbfs_add_disc(part, __ReadDVD, NULL, WBFS_Spinner, part_sel, copy_1_1);
+	ret = wbfs_add_disc(part, __ReadDVD, NULL, ProgressCallback, part_sel, copy_1_1);
 	hdd = old_hdd;
 	wbfs_trim(part);
 	ClosePart(part);
@@ -813,8 +813,8 @@ int Wbfs_Fat::GetFragList(u8 *id)
 		ret = wbfs_get_fragments(d, &_frag_append, fw);
 		if (ret) goto out;
 		CloseDisc(d);
-		// DEBUG: 
-		frag_list->num = MAX_FRAG-10; // stress test
+		// DEBUG:
+		//frag_list->num = MAX_FRAG-10; // stress test
 		ret = frag_remap(frag_list, fw, fa);
 		if (ret) goto out;
 	} else {

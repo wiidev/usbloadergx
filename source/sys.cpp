@@ -54,6 +54,7 @@ static void _ExitApp() {
     StopGX();
     ShutdownAudio();
 
+    UnmountNTFS();
     SDCard_deInit();
     USBDevice_deInit();
     mload_set_ES_ioctlv_vector(NULL);
@@ -68,23 +69,23 @@ void Sys_Reboot(void) {
 
 int Sys_ChangeIos(int ios) {
 	s32 prevIos = IOS_GetVersion();
-	
+
 	SDCard_deInit();
 	USBDevice_deInit();
-	
+
 	WPAD_Flush(0);
 	WPAD_Disconnect(0);
 	WPAD_Shutdown();
-	
+
 	WDVD_Close();
-	
+
 	USBStorage2_Deinit();
-	
+
 	s32 ret = IOS_ReloadIOSsafe(ios);
 	if (ret < 0) {
 		ios = prevIos;
 	}
-	
+
 	SDCard_Init();
 
 	if (ios == 222 || ios == 223) {
@@ -99,13 +100,13 @@ int Sys_ChangeIos(int ios) {
 
 	WBFS_Init(WBFS_DEVICE_USB);
 	Disc_Init();
-	
+
 	if (Sys_IsHermes()) {
 		WBFS_OpenNamed((char *) &game_partition);
-	} else { 
+	} else {
 		WBFS_Open();
 	}
-	
+
 	return ret;
 }
 
@@ -228,34 +229,34 @@ s32 ios250rev = -69;
 s32 IOS_ReloadIOSsafe(int ios)
 {
 	if (ios==222)
-	{	
+	{
 		if (ios222rev == -69)
 			ios222rev = getIOSrev(0x00000001000000dell);
-		
+
 		if (ios222rev > 0 && (ios222rev != 4 && ios222rev != 5))return -2;
 	}
 	else if (ios==223)
-	{	
+	{
 		if (ios223rev == -69)
 			ios223rev = getIOSrev(0x00000001000000dfll);
-		
+
 		if (ios223rev > 0 && (ios223rev != 4 && ios223rev != 5))return -2;
 	}
 	else if (ios==249)
-	{	
+	{
 		if (ios249rev == -69)
-			ios249rev = getIOSrev(0x00000001000000f9ll);	
-		
+			ios249rev = getIOSrev(0x00000001000000f9ll);
+
 		if (ios249rev >= 0 && !(ios249rev>=9 && ios249rev<65280))return -2;
 	}
 	else if (ios==250)
-	{	
+	{
 		if (ios250rev == -69)
 			ios250rev = getIOSrev(0x00000001000000fall);
-			
+
 		if (ios250rev >= 0 && !(ios250rev>=9 && ios250rev<65280))return -2;
 	}
-		
+
 	s32 r = IOS_ReloadIOS(ios);
 	if (r >= 0) {
 		WII_Initialize();

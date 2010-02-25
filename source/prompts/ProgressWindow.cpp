@@ -17,7 +17,6 @@
 #include "prompts/ProgressWindow.h"
 #include "usbloader/wbfs.h"
 #include "usbloader/utils.h"
-#include "usbloader/spinner.h"
 
 /*** Variables used only in this file ***/
 static lwp_t progressthread = LWP_THREAD_NULL;
@@ -33,8 +32,8 @@ static f32 progressDone = 0.0;
 static bool showTime = false;
 static bool showSize = false;
 static bool changed = true;
-static u32 gameinstalldone = 0;
-static u32 gameinstalltotal = 0;
+static s64 gameinstalldone = 0;
+static s64 gameinstalltotal = -1;
 static time_t start;
 
 /*** Extern variables ***/
@@ -47,19 +46,21 @@ extern void HaltGui();
 
 
 /****************************************************************************
+ * ProgressCallback mainly for gameinstallation. Can be used for other C app.
+***************************************************************************/
+extern "C" void ProgressCallback(s64 done, s64 total)
+{
+    gameinstalldone = done;
+    gameinstalltotal = total;
+}
+
+/****************************************************************************
  * GameInstallProgress
  * GameInstallValue updating function
 ***************************************************************************/
-static void GameInstallProgress() {
-
-    if (gameinstalltotal == 0)
-        return;
-
-    u32 oldinstalldone = gameinstalldone;
-
-    GetProgressValue(&gameinstalldone, &gameinstalltotal);
-
-    if((oldinstalldone == gameinstalldone) && (gameinstalldone > 0))
+static void GameInstallProgress()
+{
+    if (gameinstalltotal <= 0)
         return;
 
     if (gameinstalldone > gameinstalltotal)
@@ -313,7 +314,7 @@ static void * ProgressThread (void *arg) {
  ***************************************************************************/
 void ProgressStop() {
     showProgress = 0;
-    gameinstalltotal = 0;
+    gameinstalltotal = -1;
 
     // wait for thread to finish
     while (!LWP_ThreadIsSuspended(progressthread))

@@ -1129,8 +1129,6 @@ put_err_out:
  */
 void ntfs_inode_update_times(ntfs_inode *ni, ntfs_time_update_flags mask)
 {
-    return;
-
 	time_t now;
 
 	if (!ni) {

@@ -34,6 +34,7 @@
 #include <string.h>
 #endif
 
+#include "usbloader/usbstorage2.h"
 #include "ntfsinternal.h"
 #include "ntfsdir.h"
 #include "ntfsfile.h"
@@ -42,7 +43,6 @@
 #include <sdcard/wiisd_io.h>
 #include <sdcard/gcsd.h>
 
-#include "usbloader/usbstorage2.h"
 
 const INTERFACE_ID ntfs_disc_interfaces[] = {
     { "sd", &__io_wiisd },

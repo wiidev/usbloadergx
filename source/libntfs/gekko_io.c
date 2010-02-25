@@ -272,8 +272,7 @@ static s64 ntfs_device_gekko_io_pwrite(struct ntfs_device *dev, const void *buf,
  */
 static s64 ntfs_device_gekko_io_readbytes(struct ntfs_device *dev, s64 offset, s64 count, void *buf)
 {
-    //ntfs_log_trace("dev %p, offset %Li, count %Li\n", dev, offset, count);
-    ntfs_log_trace("dev %p, offset %d, count %d\n", dev, (u32)offset, (u32)count);
+    ntfs_log_trace("dev %p, offset %Li, count %Li\n", dev, offset, count);
 
     // Get the device driver descriptor
     gekko_fd *fd = DEV_FD(dev);
@@ -294,16 +293,19 @@ static s64 ntfs_device_gekko_io_readbytes(struct ntfs_device *dev, s64 offset, s
 
     sec_t sec_start = (sec_t) fd->startSector;
     sec_t sec_count = 1;
-    u16 buffer_offset = 0;
+    u32 buffer_offset = 0;
     u8 *buffer = NULL;
 
     // Determine the range of sectors required for this read
     if (offset > 0) {
-        sec_start += (sec_t) floor(offset / fd->sectorSize);
-        buffer_offset = (sec_t) offset % fd->sectorSize;
+        sec_start += (sec_t) floor((f64) offset/fd->sectorSize);
+        buffer_offset = (u32) (offset % fd->sectorSize);
     }
     if (count > fd->sectorSize) {
-        sec_count = (sec_t) ceil(count / (float)fd->sectorSize);
+        sec_count = (sec_t) ceil((f64) count/fd->sectorSize);
+
+        if(buffer_offset > 0)
+            sec_count += 1;
     }
 
     // If this read happens to be on the sector boundaries then do the read straight into the destination buffer
@@ -319,7 +321,8 @@ static s64 ntfs_device_gekko_io_readbytes(struct ntfs_device *dev, s64 offset, s
         }
 
     // Else read into a buffer and copy over only what was requested
-    } else
+    }
+    else
 	{
 
         // Allocate a buffer to hold the read data
@@ -353,7 +356,7 @@ static s64 ntfs_device_gekko_io_readbytes(struct ntfs_device *dev, s64 offset, s
  */
 static s64 ntfs_device_gekko_io_writebytes(struct ntfs_device *dev, s64 offset, s64 count, const void *buf)
 {
-    ntfs_log_trace("dev %p, offset %Li, count %Li\n", dev, offset, count);
+    ntfs_log_trace("dev %p, offset %lli, count %lli\n", dev, offset, count);
 
     // Get the device driver descriptor
     gekko_fd *fd = DEV_FD(dev);
@@ -385,11 +388,14 @@ static s64 ntfs_device_gekko_io_writebytes(struct ntfs_device *dev, s64 offset, 
 
     // Determine the range of sectors required for this write
     if (offset > 0) {
-        sec_start += (sec_t) floor(offset / fd->sectorSize);
-        buffer_offset = (u32) ceil(offset % fd->sectorSize);
+        sec_start += (sec_t) floor((f64) offset/fd->sectorSize);
+        buffer_offset = (u32) (offset % fd->sectorSize);
     }
     if (count > fd->sectorSize) {
-        sec_count = (sec_t) ceil((float) count / (float)fd->sectorSize);
+        sec_count = (sec_t) ceil((f64) count/fd->sectorSize);
+
+        if(buffer_offset > 0)
+            sec_count += 1;
     }
 
     // If this write happens to be on the sector boundaries then do the write straight to disc
@@ -407,7 +413,7 @@ static s64 ntfs_device_gekko_io_writebytes(struct ntfs_device *dev, s64 offset, 
     } else {
 
         // Allocate a buffer to hold the write data
-        buffer = (u8*)ntfs_alloc((sec_count+1) * fd->sectorSize);
+        buffer = (u8 *) ntfs_alloc(sec_count * fd->sectorSize);
         if (!buffer) {
             errno = ENOMEM;
             return -1;
@@ -423,7 +429,7 @@ static s64 ntfs_device_gekko_io_writebytes(struct ntfs_device *dev, s64 offset, 
                 return -1;
             }
         }
-        if(count % fd->sectorSize != 0) {
+        if((count % fd->sectorSize != 0) || buffer_offset > 0) {
             if (!ntfs_device_gekko_io_readsectors(dev, sec_start + sec_count-1, 1, buffer + ((sec_count - 1) * fd->sectorSize))) {
                     ntfs_log_perror("read failure @ sector %d\n", sec_start + sec_count);
                     ntfs_free(buffer);
@@ -446,7 +452,6 @@ static s64 ntfs_device_gekko_io_writebytes(struct ntfs_device *dev, s64 offset, 
 
         // Free the buffer
         ntfs_free(buffer);
-
     }
 
     // Mark the device as dirty (if we actually wrote anything)

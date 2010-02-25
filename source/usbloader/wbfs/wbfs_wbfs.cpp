@@ -1,5 +1,5 @@
 #include "wbfs_wbfs.h"
-#include "../spinner.h"
+#include "prompts/ProgressWindow.h"
 #include "settings/cfg.h"
 #include "wbfs_rw.h"
 
@@ -110,7 +110,7 @@ s32 Wbfs_Wbfs::AddGame()
 		part_sel = Settings.partitions_to_install == install_game_only ? ONLY_GAME_PARTITION : ALL_PARTITIONS;
 	}
 
-    ret = wbfs_add_disc(hdd, __ReadDVD, NULL, WBFS_Spinner, part_sel, copy_1_1);
+    ret = wbfs_add_disc(hdd, __ReadDVD, NULL, ProgressCallback, part_sel, copy_1_1);
     if (ret < 0)
         return ret;
 
