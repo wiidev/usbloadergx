@@ -440,7 +440,7 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
 
         FST_ENTRY *fst = (FST_ENTRY *)*(u32 *)0x80000038;
 
-        *entry = (entry_point) Load_Dol_from_disc(fst[alternatedoloffset].fileoffset, videoSelected, patchcountrystring, vipatch);
+        *entry = (entry_point) Load_Dol_from_disc(fst[alternatedoloffset].fileoffset, videoSelected, patchcountrystring, vipatch, cheat);
 
         if (*entry == 0)
             SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);

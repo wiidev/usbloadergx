@@ -295,11 +295,14 @@ s32 Disc_BootPartition(u64 offset, u8 videoselected, u8 cheat, u8 vipatch, u8 pa
     if (ret < 0)
         return ret;
 
+    bool cheatloaded = false;
+
     if (cheat == 1) {
         /* OCARINA STUFF - FISHEARS*/
         if(ocarina_load_code((u8 *) gameid) > 0)
         {
             ocarina_do_code();
+            cheatloaded = true;
         }
     }
 
@@ -335,7 +338,7 @@ s32 Disc_BootPartition(u64 offset, u8 videoselected, u8 cheat, u8 vipatch, u8 pa
 
 	appentrypoint = (u32) p_entry;
 
-	if (cheat == 1)
+	if (cheat == 1 && cheatloaded)
 	{
 		__asm__(
 			"lis %r3, appentrypoint@h\n"
