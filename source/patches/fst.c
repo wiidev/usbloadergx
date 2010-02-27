@@ -110,14 +110,19 @@ void app_loadgameconfig(char *discid)
 	//tempgameconfsize = defaultgameconfig_size + 1;
 
 	char filepath[200];
-    snprintf(filepath, "%s/gameconfig.txt", Settings.Cheatcodespath);
+    snprintf(filepath, sizeof(filepath), "%s/gameconfig.txt", Settings.Cheatcodespath);
 
 	fp = fopen(filepath, "rb");
 
 	if (!fp)
 	{
-        snprintf(filepath, "%s/gameconfig.txt", bootDevice);
+        snprintf(filepath, sizeof(filepath), "SD:/gameconfig.txt");
         fp = fopen(filepath, "rb");
+        if(!fp)
+        {
+            snprintf(filepath, sizeof(filepath), "USB:/gameconfig.txt");
+            fp = fopen(filepath, "rb");
+        }
 	}
 
 	if (fp) {

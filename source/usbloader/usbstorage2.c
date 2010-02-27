@@ -282,9 +282,7 @@ s32 USBStorage2_WriteSectors(u32 sector, u32 numSectors, const void *buffer)
 
 static bool __usbstorage_Startup(void)
 {
-
-
-return USBStorage2_Init()==0;
+    return USBStorage2_Init()==0;
 }
 
 static bool __usbstorage_IsInserted(void)
@@ -340,20 +338,6 @@ const DISC_INTERFACE __io_usbstorage2 = {
    (FN_MEDIUM_SHUTDOWN)&__usbstorage_Shutdown
 };
 
-static bool __io_usb_Startup(void)
-{
-	return USBStorage2_Init() >= 0;
-}
-
-static bool __io_usb_IsInserted(void)
-{
-	s32 ret;
-	if (fd < 0) return false;
-	ret = USBStorage2_GetCapacity(NULL);
-	if (ret == 0) return false;
-	return true;
-}
-
 bool __io_usb_ReadSectors(u32 sector, u32 count, void *buffer)
 {
 	s32 ret = USBStorage2_ReadSectors(sector, count, buffer);
@@ -364,17 +348,6 @@ bool __io_usb_WriteSectors(u32 sector, u32 count, void *buffer)
 {
 	s32 ret = USBStorage2_WriteSectors(sector, count, buffer);
 	return ret > 0;
-}
-
-static bool __io_usb_ClearStatus(void)
-{
-	return true;
-}
-
-static bool __io_usb_Shutdown(void)
-{
-	// do nothing
-	return true;
 }
 
 static bool __io_usb_NOP(void)

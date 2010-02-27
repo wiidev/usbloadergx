@@ -1,3 +1,23 @@
+/*
+ *  Copyright (C) 2008 Nuke (wiinuke@gmail.com)
+ *
+ *  this file is part of GeckoOS for USB Gecko
+ *  http://www.usbgecko.com
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -41,11 +61,11 @@ extern void vipatch(u32 address, u32 len);
 
 static const u32 multidolpatch1[2] = {
 	0x3C03FFB4,0x28004F43
-};	
+};
 
 static const u32 healthcheckhook[2] = {
 	0x41810010,0x881D007D
-};	
+};
 
 static const u32 updatecheckhook[3] = {
 	0x80650050,0x80850054,0xA0A50058
@@ -109,7 +129,7 @@ static const u32 vipatchcode[3] = {
 };
 
 const u32 viwiihooks[4] = {
-	0x7CE33B78,0x38870034,0x38A70038,0x38C7004C 
+	0x7CE33B78,0x38870034,0x38A70038,0x38C7004C
 };
 
 const u32 kpadhooks[4] = {
@@ -194,12 +214,12 @@ bool dogamehooks(void *addr, u32 len)
 	{
 		switch(hooktype)
 		{
-		
-			case 0x00:	
+
+			case 0x00:
 				hookpatched = true;
 			break;
 
-			case 0x01:	
+			case 0x01:
 				if(memcmp(addr_start, viwiihooks, sizeof(viwiihooks))==0)
 				{
 					patchhook((u32)addr_start, len);
@@ -213,7 +233,7 @@ bool dogamehooks(void *addr, u32 len)
 			break;
 
 			case 0x02:
-				
+
 				if(memcmp(addr_start, kpadhooks, sizeof(kpadhooks))==0)
 				{
 					patchhook((u32)addr_start, len);
@@ -231,9 +251,9 @@ bool dogamehooks(void *addr, u32 len)
 					hookpatched = true;
 				}
 			break;
-		
+
 			case 0x03:
-				
+
 				if(memcmp(addr_start, joypadhooks, sizeof(joypadhooks))==0)
 				{
 					patchhook((u32)addr_start, len);
@@ -245,9 +265,9 @@ bool dogamehooks(void *addr, u32 len)
 					hookpatched = true;
 				}
 			break;
-				
+
 			case 0x04:
-				
+
 				if(memcmp(addr_start, gxdrawhooks, sizeof(gxdrawhooks))==0)
 				{
 					patchhook((u32)addr_start, len);
@@ -259,9 +279,9 @@ bool dogamehooks(void *addr, u32 len)
 					hookpatched = true;
 				}
 			break;
-				
+
 			case 0x05:
-				
+
 				if(memcmp(addr_start, gxflushhooks, sizeof(gxflushhooks))==0)
 				{
 					patchhook((u32)addr_start, len);
@@ -273,9 +293,9 @@ bool dogamehooks(void *addr, u32 len)
 					hookpatched = true;
 				}
 			break;
-				
+
 			case 0x06:
-				
+
 				if(memcmp(addr_start, ossleepthreadhooks, sizeof(ossleepthreadhooks))==0)
 				{
 					patchhook((u32)addr_start, len);
@@ -287,9 +307,9 @@ bool dogamehooks(void *addr, u32 len)
 					hookpatched = true;
 				}
 			break;
-				
+
 			case 0x07:
-				
+
 				if(memcmp(addr_start, axnextframehooks, sizeof(axnextframehooks))==0)
 				{
 					patchhook((u32)addr_start, len);
@@ -301,9 +321,9 @@ bool dogamehooks(void *addr, u32 len)
 					hookpatched = true;
 				}
 			break;
-				
+
 			case 0x08:
-				
+
 				//if(memcmp(addr_start, customhook, customhooksize)==0)
 				//{
 				//	patchhook((u32)addr_start, len);
@@ -325,7 +345,7 @@ bool dogamehooks(void *addr, u32 len)
 /*
 void patchdol(void *addr, u32 len)
 {
-	
+
 	void *addr_start = addr;
 	void *addr_end = addr+len;
 
@@ -345,17 +365,17 @@ void patchdol(void *addr, u32 len)
 */
 void langpatcher(void *addr, u32 len)
 {
-	
+
 	void *addr_start = addr;
 	void *addr_end = addr+len;
 
 	while(addr_start < addr_end)
 	{
-		
+
 		if(memcmp(addr_start, langpatch, sizeof(langpatch))==0) {
 			if(configbytes[0] != 0xCD){
 				langvipatch((u32)addr_start, len, configbytes[0]);
-			}	
+			}
 		}
 		addr_start += 4;
 	}
@@ -363,17 +383,17 @@ void langpatcher(void *addr, u32 len)
 /*
 void patchdebug(void *addr, u32 len)
 {
-	
+
 	void *addr_start = addr;
 	void *addr_end = addr+len;
 
 	while(addr_start < addr_end)
 	{
-		
+
 		if(memcmp(addr_start, fwritepatch, sizeof(fwritepatch))==0) {
 
 			memcpy(addr_start,fwrite_patch_bin,fwrite_patch_bin_len);
-			// apply patch	
+			// apply patch
 		}
 		addr_start += 4;
 	}
@@ -381,7 +401,7 @@ void patchdebug(void *addr, u32 len)
 */
 void vidolpatcher(void *addr, u32 len)
 {
-	
+
 	void *addr_start = addr;
 	void *addr_end = addr+len;
 
