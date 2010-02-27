@@ -21,9 +21,9 @@
 
 #ifndef __PATCHCODE_H__
 #define __PATCHCODE_H__
+
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 // Globals
 u32 hooktype;
@@ -32,12 +32,10 @@ u8 configbytes[2];
 u32 regionfree;
 
 // Function prototypes
-void dogamehooks(void *addr, u32 len, bool vpatch);
+bool dogamehooks(void *addr, u32 len);
 void langpatcher(void *addr, u32 len);
 void vidolpatcher(void *addr, u32 len);
 void patchdebug(void *addr, u32 len);
-
-
 
 #ifdef __cplusplus
 }

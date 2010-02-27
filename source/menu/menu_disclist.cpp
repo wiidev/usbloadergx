@@ -78,7 +78,7 @@ int MenuDiscList() {
     datagB=0;
     int menu = MENU_NONE, dataef=0;
 
-	
+
     u32 nolist;
     char text[MAX_CHARACTERS + 4];
     int choice = 0, selectedold = 100;
@@ -96,7 +96,7 @@ int MenuDiscList() {
     if (!gameCnt) { //if there is no list of games to display
         nolist = 1;
     }
-	
+
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
 	// because destroy GuiSound must wait while sound playing is finished, we use a global sound
 	if(!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
@@ -159,7 +159,7 @@ int MenuDiscList() {
     GuiImageData imgarrangeCarousel(imgPath, arrangeCarousel_png);
     snprintf(imgPath, sizeof(imgPath), "%sarrangeCarousel_gray.png", CFG.theme_path);
     GuiImageData imgarrangeCarousel_gray(imgPath, NULL);
-	
+
 	snprintf(imgPath, sizeof(imgPath), "%slock.png", CFG.theme_path);
 	GuiImageData imgLock(imgPath, lock_png);
 	snprintf(imgPath, sizeof(imgPath), "%slock_gray.png", CFG.theme_path);
@@ -168,7 +168,7 @@ int MenuDiscList() {
 	GuiImageData imgUnlock(imgPath, unlock_png);
 	snprintf(imgPath, sizeof(imgPath), "%sunlock_gray.png", CFG.theme_path);
 	GuiImageData imgUnlock_gray(imgPath, NULL);
-	
+
     snprintf(imgPath, sizeof(imgPath), "%sdvd.png", CFG.theme_path);
     GuiImageData imgdvd(imgPath, dvd_png);
     snprintf(imgPath, sizeof(imgPath), "%sdvd_gray.png", CFG.theme_path);
@@ -231,7 +231,7 @@ int MenuDiscList() {
     installBtnImgOver.SetWidescreen(CFG.widescreen);
 
     GuiButton installBtn(&installBtnImg, &installBtnImgOver, ALIGN_LEFT, ALIGN_TOP, THEME.install_x, THEME.install_y, &trigA, &btnSoundOver, btnClick2, 1, &installBtnTT,24,-30, 0,5);
-	
+
 
     GuiTooltip settingsBtnTT(tr("Settings"));
     if (Settings.wsprompt == yes)
@@ -376,7 +376,7 @@ int MenuDiscList() {
 	carouselBtn.SetAlpha(180);
 
 	bool canUnlock = (Settings.parentalcontrol == 0 && Settings.parental.enabled == 1);
-	
+
 	GuiTooltip lockBtnTT(canUnlock ? tr("Unlock Parental Control") : tr("Parental Control disabled"));
 	if (Settings.wsprompt == yes)
 		lockBtnTT.SetWidescreen(CFG.widescreen);
@@ -405,7 +405,7 @@ int MenuDiscList() {
 		lockBtn.SetImageOver(&unlockBtnImg_g);
 		lockBtn.SetToolTip(&unlockBtnTT, 15, 52, 1, 3);
 	}
-	
+
 /*
 	GuiButton unlockBtn(&unlockBtnImg_g, &unlockBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_lock_x, THEME.gamelist_lock_y, &trigA, &btnSoundOver, btnClick2,1, &lockBtnTT, 15, 52, 1, 3);
 	unlockBtn.SetAlpha(180);
@@ -471,7 +471,7 @@ int MenuDiscList() {
         carouselBtn.SetImageOver(&carouselBtnImg);
         carouselBtn.SetAlpha(255);
     }
-	
+
     if (Settings.gameDisplay==list) {
 		favoriteBtn.SetPosition(THEME.gamelist_favorite_x, THEME.gamelist_favorite_y);
 		searchBtn.SetPosition(THEME.gamelist_search_x, THEME.gamelist_search_y);
@@ -638,7 +638,7 @@ int MenuDiscList() {
 	}
 
 	ResumeGui();
-	
+
 //	ShowMemInfo();
 
 	while (menu == MENU_NONE) {
@@ -790,7 +790,7 @@ int MenuDiscList() {
 
         } else if (wiiBtn.GetState() == STATE_CLICKED) {
 			gprintf("\n\twiiBtn clicked");
-            
+
             dataed++;
             wiiBtn.ResetState();
             if (Settings.gameDisplay==list) {
@@ -1128,7 +1128,7 @@ int MenuDiscList() {
 						lockBtn.SetImage(&lockBtnImg_g);
 						lockBtn.SetImageOver(&lockBtnImg_g);
 						lockBtn.SetToolTip(&lockBtnTT, 15, 52, 1, 3);
-						
+
 						// Retrieve the gamelist again
 						menu = MENU_DISCLIST;
 						break;
@@ -1138,14 +1138,14 @@ int MenuDiscList() {
 					char pin[5];
 					memset(&pin, 0, 5);
 					int ret = OnScreenNumpad((char *) &pin, 5);
-					
+
 					if (ret == 1) {
 						if (memcmp(pin, Settings.parental.pin, 4) == 0) {
 							Settings.godmode = 1;
 							lockBtn.SetImage(&unlockBtnImg_g);
 							lockBtn.SetImageOver(&unlockBtnImg_g);
 							lockBtn.SetToolTip(&unlockBtnTT, 15, 52, 1, 3);
-							
+
 							// Retrieve the gamelist again
 							menu = MENU_DISCLIST;
 							break;
@@ -1154,7 +1154,7 @@ int MenuDiscList() {
 						}
 					}
 				}
-			}			
+			}
 		}
 		else if (dvdBtn.GetState() == STATE_CLICKED) {
 			gprintf("\n\tdvdBtn Clicked");
@@ -1362,15 +1362,7 @@ int MenuDiscList() {
 						sprintf(nipple, "%s %s",nipple,tr("does not exist!  Loading game without cheats."));
                         WindowPrompt(tr("Error"),nipple,NULL,NULL,NULL,NULL,170);
                     } else {
-                        fseek (exeFile, 0, SEEK_END);
-                        long size=ftell (exeFile);
-                        rewind (exeFile);
                         fclose(exeFile);
-                        if (size>MAX_GCT_SIZE) {
-                            gprintf("\n\tgct is too big");
-							sprintf(nipple, "%s %s",nipple,tr("contains over 255 lines of code.  It will produce unexpected results."));
-                            WindowPrompt(tr("Error"),nipple,NULL,NULL,NULL,NULL,170);
-                        }
                     }
 
                 }
@@ -1391,7 +1383,7 @@ int MenuDiscList() {
 
                     CFG_save_game_num(header->id);
 					gprintf("\n\tplaycount for %c%c%c%c%c%c raised to %i",header->id[0],header->id[1],header->id[2],header->id[3],header->id[4],header->id[5],playcount);
-					
+
                 }
                 menu = MENU_EXIT;
                 break;
@@ -1429,15 +1421,7 @@ int MenuDiscList() {
 							sprintf(nipple, "%s %s",nipple,tr("does not exist!  Loading game without cheats."));
                             WindowPrompt(tr("Error"),nipple,NULL,NULL,NULL,NULL,170);
                         } else {
-                            fseek (exeFile, 0, SEEK_END);
-                            long size=ftell (exeFile);
-                            rewind (exeFile);
                             fclose(exeFile);
-                            if (size>MAX_GCT_SIZE) {
-                                gprintf("\n\tgct file is too big");
-								sprintf(nipple, "%s %s",nipple,tr("contains over 255 lines of code.  It will produce unexpected results."));
-                                WindowPrompt(tr("Error"),nipple,NULL,NULL,NULL,NULL,170);
-                            }
                         }
 
                     }

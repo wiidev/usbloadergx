@@ -4,7 +4,6 @@
 #include <malloc.h>
 
 #include "patches/patchcode.h"
-#include "patches/kenobiwii.h" /*FISHEARS*/
 #include "apploader.h"
 #include "wdvd.h"
 #include "wpad.h"
@@ -14,11 +13,6 @@
 #include "settings/cfg.h"
 #include "gecko.h"
 #include "patches/wip.h"
-
-/*KENOBI! - FISHEARS*/
-extern const unsigned char kenobiwii[];
-extern const int kenobiwii_size;
-/*KENOBI! - FISHEARS*/
 
 extern bool geckoinit;
 
@@ -298,7 +292,7 @@ bool NewSuperMarioBrosPatch(void *Address, int Size)
 	return false;
 }
 
-void gamepatches(void * dst, int len, u8 videoSelected, u8 patchcountrystring, u8 vipatch) {
+void gamepatches(void * dst, int len, u8 videoSelected, u8 patchcountrystring, u8 vipatch, u8 cheat) {
 
 	PretendThereIsADiscInTheDrive(dst, len);
 
@@ -330,8 +324,8 @@ void gamepatches(void * dst, int len, u8 videoSelected, u8 patchcountrystring, u
         Search_and_patch_Video_Modes(dst, len, table);
     }
 
-    /*GAME HOOK - FISHEARS*/
-    dogamehooks(dst,len,vipatch);
+	if(cheat)
+		dogamehooks(dst,len);
 
     //if (vipatch)//moved to degamehooks()
     //    vidolpatcher(dst,len);
@@ -345,14 +339,14 @@ void gamepatches(void * dst, int len, u8 videoSelected, u8 patchcountrystring, u
         PatchCountryStrings(dst, len);
 
     NewSuperMarioBrosPatch(dst, len);
-	
+
 	do_wip_code((u8 *)0x80000000);
 
 
     //if(Settings.anti002fix == on)
     if (fix002 == 2)
         Anti_002_fix(dst, len);
-		
+
 	//patchdebug(dst, len);
 
 }
@@ -399,18 +393,6 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
 //        *(u32 *)0x80003140 = *(u32 *)0x80003188;
     }
 
-    if (cheat || geckoinit) {
-//		gprintf("\n\tkenobiwii loaded");
-        /*HOOKS STUFF - FISHEARS*/
-        memset((void*)0x80001800,0,kenobiwii_size);
-        memcpy((void*)0x80001800,kenobiwii,kenobiwii_size);
-        DCFlushRange((void*)0x80001800,kenobiwii_size);
-        hooktype = 1;
-        memcpy((void*)0x80001800, (char*)0x80000000, 6);	// For WiiRD
-        /*HOOKS STUFF - FISHEARS*/
-	gprintf("\n\tcode handler loaded");
-    }
-
     for (;;) {
         void *dst = NULL;
         int len = 0, offset = 0;
@@ -423,7 +405,7 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
         /* Read data from DVD */
         WDVD_Read(dst, len, (u64)(offset << 2));
 
-        gamepatches(dst, len, videoSelected, patchcountrystring, vipatch);
+        gamepatches(dst, len, videoSelected, patchcountrystring, vipatch, cheat);
 
         DCFlushRange(dst, len);
     }
@@ -442,7 +424,7 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
 
             DCFlushRange(dolbuffer, dollen);
 
-            gamepatches(dolbuffer, dollen, videoSelected, patchcountrystring, vipatch);
+            gamepatches(dolbuffer, dollen, videoSelected, patchcountrystring, vipatch, cheat);
 
             DCFlushRange(dolbuffer, dollen);
 

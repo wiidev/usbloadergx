@@ -188,7 +188,7 @@ void __dvd_readidcb(s32 result)
 {
 	dvddone = result;
 }
-u32 Load_Dol_from_disc(u32 doloffset, u8 videoSelected, u8 patchcountrystring, u8 vipatch) {
+u32 Load_Dol_from_disc(u32 doloffset, u8 videoSelected, u8 patchcountrystring, u8 vipatch, u8 cheat) {
     int ret;
     void *dol_header;
     u32 entrypoint;
@@ -223,7 +223,7 @@ u32 Load_Dol_from_disc(u32 doloffset, u8 videoSelected, u8 patchcountrystring, u
 
             DCFlushRange(offset, len);
 
-            gamepatches(offset, len, videoSelected, patchcountrystring, vipatch);
+            gamepatches(offset, len, videoSelected, patchcountrystring, vipatch, cheat);
 
             DCFlushRange(offset, len);
 

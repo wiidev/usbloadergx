@@ -15,10 +15,13 @@
 #include "wbfs.h"
 #include "../gecko.h"
 #include "../fatmounter.h"
-    
+
 /* Constants */
 #define PTABLE_OFFSET	0x40000
 #define WII_MAGIC	0x5D1C9EA3
+
+//appentrypoint
+u32 appentrypoint;
 
 /* Disc pointers */
 static u32 *buffer = (u32 *)0x93000000;
@@ -38,6 +41,7 @@ void __Disc_SetLowMem(void) {
     *(u32 *)0x800000E4 = 0x80431A80;
     *Dev_Debugger   = 0x81800000;           // Dev Debugger Monitor Address
     *Simulated_Mem  = 0x01800000;           // Simulated Memory Size
+    *(vu32 *)0xCD00643C = 0x00000000;       // 32Mhz on Bus
 
     //If the game is sam & max: season 1  put this shit in
     char gameid[8];
@@ -152,7 +156,7 @@ void __Disc_SetVMode(u8 videoselected) {
             VIDEO_WaitVSync();
     }
 	gprintf("\nVideo mode - %s",((progressive)?"progressive":"interlaced"));
-    
+
 }
 
 void __Disc_SetTime(void) {
@@ -293,7 +297,10 @@ s32 Disc_BootPartition(u64 offset, u8 videoselected, u8 cheat, u8 vipatch, u8 pa
 
     if (cheat == 1) {
         /* OCARINA STUFF - FISHEARS*/
-        do_sd_code(gameid);
+        if(ocarina_load_code((u8 *) gameid) > 0)
+        {
+            ocarina_do_code();
+        }
     }
 
 	//kill the USB and SD
@@ -326,8 +333,31 @@ s32 Disc_BootPartition(u64 offset, u8 videoselected, u8 cheat, u8 vipatch, u8 pa
 	__IOS_ShutdownSubsystems();
 	__exception_closeall();
 
-    /* Jump to entry point */
-    p_entry();
+	appentrypoint = (u32) p_entry;
+
+	if (cheat == 1)
+	{
+		__asm__(
+			"lis %r3, appentrypoint@h\n"
+			"ori %r3, %r3, appentrypoint@l\n"
+			"lwz %r3, 0(%r3)\n"
+			"mtlr %r3\n"
+			"lis %r3, 0x8000\n"
+			"ori %r3, %r3, 0x18A8\n"
+			"mtctr %r3\n"
+			"bctr\n"
+		);
+	}
+	else
+	{
+		__asm__(
+			"lis %r3, appentrypoint@h\n"
+			"ori %r3, %r3, appentrypoint@l\n"
+			"lwz %r3, 0(%r3)\n"
+			"mtlr %r3\n"
+			"blr\n"
+		);
+	}
 
     return 0;
 }
