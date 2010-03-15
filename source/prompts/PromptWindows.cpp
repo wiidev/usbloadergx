@@ -2864,7 +2864,9 @@ int ProgressUpdateWindow() {
         if (error)
             WindowPrompt(tr("ERROR") , tr("An Error occured"), tr("OK"));
         else
-            WindowPrompt(tr("Successfully Updated") , tr("Restarting..."), 0,0,0,0,150);
+	{
+	    WindowPrompt(tr("Restarting..."), tr("Successfully Updated thanks to www.techjawa.com")  , 0,0,0,0,150);
+	}
         CloseXMLDatabase();
         ExitGUIThreads();
         ShutdownAudio();
@@ -3201,7 +3203,7 @@ int ProgressUpdateWindow() {
     CloseConnection();
 
     if (!failed && ret >= 0 && updatemode == 1) {
-        WindowPrompt(tr("Successfully Updated") , tr("Restarting..."), tr("OK"));
+	WindowPrompt(tr("Restarting..."), tr("Successfully Updated thanks to www.techjawa.com")  , 0,0,0,0,150);
 
 		loadStub();
 		Set_Stub_Split(0x00010001,"UNEO");
