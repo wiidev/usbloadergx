@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-16 21:04+0100\n"
+"POT-Creation-Date: 2010-03-16 16:17+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: nextos@korea.com\n"
 "Language-Team: \n"
@@ -1092,6 +1092,9 @@ msgstr "저장 성공"
 msgid "Successfully Updated"
 msgstr "업데이트 성공"
 
+msgid "Successfully Updated thanks to www.techjawa.com"
+msgstr ""
+
 msgid "Successfully deleted:"
 msgstr "삭제 성공:"
 
@@ -1315,9 +1318,6 @@ msgstr ""
 msgid "available"
 msgstr "가능함"
 
-msgid "contains over 255 lines of code.  It will produce unexpected results."
-msgstr "255라인 이상이면 예상치 못한 결과가 나오죠."
-
 msgid "does not exist!"
 msgstr "없어요!"
 
@@ -1374,6 +1374,9 @@ msgstr "중"
 
 msgid "seconds left"
 msgstr "초 남았습니다"
+
+#~ msgid "contains over 255 lines of code.  It will produce unexpected results."
+#~ msgstr "255라인 이상이면 예상치 못한 결과가 나오죠."
 
 #~ msgid "Backgroundmusic Path changed."
 #~ msgstr "배경음악 경로 변경됨."

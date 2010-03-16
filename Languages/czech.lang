@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-16 21:04+0100\n"
+"POT-Creation-Date: 2010-03-16 16:17+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) \n"
 "Language-Team: r823 - last version on http://djelinek.sweb.cz/_USBLoderGX/czech.lang \n"
@@ -1092,6 +1092,9 @@ msgstr "Úspešne uloženo"
 msgid "Successfully Updated"
 msgstr "Úspešne zaktualizováno"
 
+msgid "Successfully Updated thanks to www.techjawa.com"
+msgstr ""
+
 msgid "Successfully deleted:"
 msgstr "Úspešne smazáno:"
 
@@ -1315,9 +1318,6 @@ msgstr "a prekladatele pro aktualizaci jazykových souborů"
 msgid "available"
 msgstr "dostupný"
 
-msgid "contains over 255 lines of code.  It will produce unexpected results."
-msgstr "obsahuje více jak 255 rádek kódu. To muže vyvolat neocekáváné výsledky."
-
 msgid "does not exist!"
 msgstr "neexistuje!"
 
@@ -1374,6 +1374,9 @@ msgstr "z "
 
 msgid "seconds left"
 msgstr "sekund zbývá"
+
+#~ msgid "contains over 255 lines of code.  It will produce unexpected results."
+#~ msgstr "obsahuje více jak 255 rádek kódu. To muže vyvolat neocekáváné výsledky."
 
 #~ msgid "Backgroundmusic Path changed."
 #~ msgstr "Cesta pro hudbu na pozadí zmenena"

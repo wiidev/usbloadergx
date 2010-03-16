@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-15 00:12+0100\n"
+"POT-Creation-Date: 2010-03-16 16:17+0100\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
 "Last-Translator: Mika Li\n"
 "Language-Team: kyogc, Miller, Mika Li\n"
@@ -1092,6 +1092,9 @@ msgstr "儲存成功"
 msgid "Successfully Updated"
 msgstr "更新已完成"
 
+msgid "Successfully Updated thanks to www.techjawa.com"
+msgstr ""
+
 msgid "Successfully deleted:"
 msgstr "成功的刪除:"
 
@@ -1315,9 +1318,6 @@ msgstr "和所有語言包更新的翻譯者"
 msgid "available"
 msgstr "可取得"
 
-msgid "contains over 255 lines of code.  It will produce unexpected results."
-msgstr "超過255行的指令,將導致無法預期的結果"
-
 msgid "does not exist!"
 msgstr "不存在!"
 
@@ -1374,6 +1374,9 @@ msgstr "的"
 
 msgid "seconds left"
 msgstr "剩餘秒數"
+
+#~ msgid "contains over 255 lines of code.  It will produce unexpected results."
+#~ msgstr "超過255行的指令,將導致無法預期的結果"
 
 #~ msgid "Backgroundmusic Path changed."
 #~ msgstr "背景音樂路徑"

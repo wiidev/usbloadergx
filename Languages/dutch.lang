@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-05 14:22+0100\n"
+"POT-Creation-Date: 2010-03-16 16:17+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: glowy\n"
 "Language-Team: tj_cool, glowy\n"
@@ -1092,6 +1092,9 @@ msgstr "Met succes opgeslagen!"
 msgid "Successfully Updated"
 msgstr "Met succes geüpdate!"
 
+msgid "Successfully Updated thanks to www.techjawa.com"
+msgstr ""
+
 msgid "Successfully deleted:"
 msgstr "Met succes verwijderd:"
 
@@ -1315,9 +1318,6 @@ msgstr "en vertalers voor taalbestand updates"
 msgid "available"
 msgstr "beschikbaar"
 
-msgid "contains over 255 lines of code.  It will produce unexpected results."
-msgstr "bevat meer dan 255 lijnen met code. Dit kan slechte gevolgen hebben."
-
 msgid "does not exist!"
 msgstr "bestaat niet!"
 
@@ -1374,6 +1374,9 @@ msgstr "van"
 
 msgid "seconds left"
 msgstr "seconden over"
+
+#~ msgid "contains over 255 lines of code.  It will produce unexpected results."
+#~ msgstr "bevat meer dan 255 lijnen met code. Dit kan slechte gevolgen hebben."
 
 #~ msgid "Backgroundmusic Path changed."
 #~ msgstr "Locatie achtergrondmuziek gewijzigd."

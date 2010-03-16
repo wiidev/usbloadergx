@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-16 21:04+0100\n"
+"POT-Creation-Date: 2010-03-16 16:17+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: omercigingelini\n"
 "Language-Team: omercigingelini\n"
@@ -1092,6 +1092,9 @@ msgstr "Başarıyla Kaydedildi"
 msgid "Successfully Updated"
 msgstr "Başarıyla Güncellendi"
 
+msgid "Successfully Updated thanks to www.techjawa.com"
+msgstr ""
+
 msgid "Successfully deleted:"
 msgstr "Başarıyla silindi:"
 
@@ -1315,9 +1318,6 @@ msgstr "ve dil dosya güncellemelerinin çevirmenleri"
 msgid "available"
 msgstr "mevcut"
 
-msgid "contains over 255 lines of code.  It will produce unexpected results."
-msgstr "255 satırdan fazla kod içeriyor. Beklenmeyen sonuçlar üretebilir."
-
 msgid "does not exist!"
 msgstr "oluşturulmamış!"
 
@@ -1374,6 +1374,9 @@ msgstr "./"
 
 msgid "seconds left"
 msgstr "saniye kaldı"
+
+#~ msgid "contains over 255 lines of code.  It will produce unexpected results."
+#~ msgstr "255 satırdan fazla kod içeriyor. Beklenmeyen sonuçlar üretebilir."
 
 #~ msgid "Backgroundmusic Path changed."
 #~ msgstr "Arkaplan müzik Yolu değişti."

@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# japanese.lang - r910
+# japanese.lang - r913
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-16 21:04+0100\n"
+"POT-Creation-Date: 2010-03-16 16:17+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
@@ -964,7 +964,7 @@ msgid "Quick Boot"
 msgstr "ワンボタン起動"
 
 msgid "Random Directory Music"
-msgstr ""
+msgstr "フォルダ内でランダム再生"
 
 msgid "Reading WAD data... Ok!"
 msgstr "WADﾃﾞｰﾀの読み込み...成功！"
@@ -1091,6 +1091,9 @@ msgstr "保存に成功しました"
 
 msgid "Successfully Updated"
 msgstr "更新しました"
+
+msgid "Successfully Updated thanks to www.techjawa.com"
+msgstr ""
 
 msgid "Successfully deleted:"
 msgstr "削除に成功しました"
@@ -1315,9 +1318,6 @@ msgstr "/ K-M & papa …日本語への翻訳"
 msgid "available"
 msgstr "があります"
 
-msgid "contains over 255 lines of code.  It will produce unexpected results."
-msgstr "ｺｰﾄﾞが255行を超えていて 正しく実行できません"
-
 msgid "does not exist!"
 msgstr "存在しません!"
 
@@ -1374,6 +1374,9 @@ msgstr "中"
 
 msgid "seconds left"
 msgstr "秒で完了"
+
+#~ msgid "contains over 255 lines of code.  It will produce unexpected results."
+#~ msgstr "ｺｰﾄﾞが255行を超えていて 正しく実行できません"
 
 #~ msgid "Backgroundmusic Path changed."
 #~ msgstr "BGMのパスを変更しました"

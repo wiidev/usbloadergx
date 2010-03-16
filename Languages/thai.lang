@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-16 21:04+0100\n"
+"POT-Creation-Date: 2010-03-16 16:17+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Nitro_subzero \n"
 "Language-Team: Nitro_subzero\n"
@@ -1092,6 +1092,9 @@ msgstr "บันทึกสำเร็จ"
 msgid "Successfully Updated"
 msgstr "อัพเดทสำเร็จ"
 
+msgid "Successfully Updated thanks to www.techjawa.com"
+msgstr ""
+
 msgid "Successfully deleted:"
 msgstr "ลบสำเร็จ:"
 
@@ -1315,9 +1318,6 @@ msgstr "และผู้แปลภาษาสำหรับการอั
 msgid "available"
 msgstr "ว่างอยู่"
 
-msgid "contains over 255 lines of code.  It will produce unexpected results."
-msgstr "มีจำนวนบรรทัดมากกว่า 255 บรรทัด ซึ่งอาจทำให้เกิดผลที่ไม่คาดคิด."
-
 msgid "does not exist!"
 msgstr "ไม่มี!"
 
@@ -1374,6 +1374,9 @@ msgstr "จาก"
 
 msgid "seconds left"
 msgstr "วินาทีที่เหลือ"
+
+#~ msgid "contains over 255 lines of code.  It will produce unexpected results."
+#~ msgstr "มีจำนวนบรรทัดมากกว่า 255 บรรทัด ซึ่งอาจทำให้เกิดผลที่ไม่คาดคิด."
 
 #~ msgid "Backgroundmusic Path changed."
 #~ msgstr "เปลี่ยนที่เก็บ ดนตรีเบื้องหลัง"

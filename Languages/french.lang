@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# French V12.7 r912
+# French V12.8 r920
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-16 21:04+0100\n"
+"POT-Creation-Date: 2010-03-16 16:17+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Kin8\n"
 "Language-Team: Badablek, Amour, ikya & Kin8\n"
@@ -1092,6 +1092,9 @@ msgstr "Enregistré avec succès"
 msgid "Successfully Updated"
 msgstr "Mise à Jour terminée"
 
+msgid "Successfully Updated thanks to www.techjawa.com"
+msgstr "Mise à Jour terminée. Merci www.techjawa.com"
+
 msgid "Successfully deleted:"
 msgstr "Supprimé avec succès:"
 
@@ -1315,9 +1318,6 @@ msgstr "et traducteurs pour les MàJ fichiers langues"
 msgid "available"
 msgstr "disponible"
 
-msgid "contains over 255 lines of code.  It will produce unexpected results."
-msgstr "Contient plus de 255 lignes de code. Cela produira des résultats inattendus."
-
 msgid "does not exist!"
 msgstr "inexistant!"
 
@@ -1374,6 +1374,9 @@ msgstr "sur"
 
 msgid "seconds left"
 msgstr "secondes restantes"
+
+#~ msgid "contains over 255 lines of code.  It will produce unexpected results."
+#~ msgstr "Contient plus de 255 lignes de code. Cela produira des résultats inattendus."
 
 #~ msgid "Backgroundmusic Path changed."
 #~ msgstr "Dossier fond sonore modifié."

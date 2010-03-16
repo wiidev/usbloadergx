@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-# italian.lang - v59 - r910
+# italian.lang - v60 - r913
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-16 21:04+0100\n"
-"PO-Revision-Date: 2009-10-01 01:00+0200\n"
+"POT-Creation-Date: 2010-03-16 16:17+0100\n"
+"PO-Revision-Date: 2010-02-21 08:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe, Cambo\n"
 "MIME-Version: 1.0\n"
@@ -219,7 +219,7 @@ msgid "Cancel"
 msgstr "Annulla"
 
 msgid "Change Play Path"
-msgstr ""
+msgstr "Modifica Percorso Suoni"
 
 msgid "Channels"
 msgstr "Canali"
@@ -757,10 +757,10 @@ msgid "Locked"
 msgstr "Bloccato"
 
 msgid "Loop Directory"
-msgstr ""
+msgstr "Cartella Cicli"
 
 msgid "Loop Music"
-msgstr ""
+msgstr "Musica Ripetuta"
 
 msgid "Loop Sound"
 msgstr "Suono Ripetuto"
@@ -784,7 +784,7 @@ msgid "Mount DVD drive"
 msgstr "Avvia DVD"
 
 msgid "Music Loop Mode"
-msgstr ""
+msgstr "Modalità Musica Ripetuta"
 
 msgid "Music Volume"
 msgstr "Volume"
@@ -934,16 +934,16 @@ msgid "Play Count"
 msgstr "Giocati"
 
 msgid "Play Next"
-msgstr ""
+msgstr "Suona Successiva"
 
 msgid "Play Once"
-msgstr ""
+msgstr "Suona una volta"
 
 msgid "Play Previous"
-msgstr ""
+msgstr "Suona Precedente"
 
 msgid "Playing Music:"
-msgstr ""
+msgstr "Sto suonando:"
 
 msgid "Please wait..."
 msgstr "Attendere prego..."
@@ -964,7 +964,7 @@ msgid "Quick Boot"
 msgstr "Avvio Veloce"
 
 msgid "Random Directory Music"
-msgstr ""
+msgstr "Cartella Musica Casuale"
 
 msgid "Reading WAD data... Ok!"
 msgstr "Sto leggendo i dati del WAD... Ok!"
@@ -985,13 +985,13 @@ msgid "Rename Game on WBFS"
 msgstr "Rinomina Gioco su WBFS"
 
 msgid "Reset BG Music"
-msgstr ""
+msgstr "Azzera Musica BG"
 
 msgid "Reset Playcounter"
 msgstr "Azzera contatore"
 
 msgid "Reset to standard BGM?"
-msgstr ""
+msgstr "Azzerare Musica BG?"
 
 msgid "Restarting..."
 msgstr "Premere OK per riavviare..."
@@ -1091,6 +1091,9 @@ msgstr "Salvataggio Eseguito"
 
 msgid "Successfully Updated"
 msgstr "Aggiornamento Eseguito"
+
+msgid "Successfully Updated thanks to www.techjawa.com"
+msgstr ""
 
 msgid "Successfully deleted:"
 msgstr "Eliminato con successo:"
@@ -1315,9 +1318,6 @@ msgstr "ed i traduttori per la localizzazione del loader"
 msgid "available"
 msgstr "disponibile"
 
-msgid "contains over 255 lines of code.  It will produce unexpected results."
-msgstr "contiene più di 255 linee di codice. Possibili effetti inattesi."
-
 msgid "does not exist!"
 msgstr "non esiste!"
 
@@ -1374,6 +1374,9 @@ msgstr "di"
 
 msgid "seconds left"
 msgstr "secondi mancanti"
+
+#~ msgid "contains over 255 lines of code.  It will produce unexpected results."
+#~ msgstr "contiene più di 255 linee di codice. Possibili effetti inattesi."
 
 #~ msgid "Backgroundmusic Path changed."
 #~ msgstr "Percorso Musica modificato"

@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# danish.lang - r899
+# danish.lang - r916
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-16 21:04+0100\n"
+"POT-Creation-Date: 2010-03-16 16:17+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: dorf[dk]\n"
 "Language-Team: dorf[dk]\n"
@@ -219,7 +219,7 @@ msgid "Cancel"
 msgstr "Annullér"
 
 msgid "Change Play Path"
-msgstr ""
+msgstr "Ændre sti til musik"
 
 msgid "Channels"
 msgstr "Kanaler"
@@ -757,10 +757,10 @@ msgid "Locked"
 msgstr "Låst"
 
 msgid "Loop Directory"
-msgstr ""
+msgstr "Afspil mappe i løkke"
 
 msgid "Loop Music"
-msgstr ""
+msgstr "Afspil musik i løkke"
 
 msgid "Loop Sound"
 msgstr "Afspil lyd i løkke"
@@ -784,7 +784,7 @@ msgid "Mount DVD drive"
 msgstr "Mount DVD-drev"
 
 msgid "Music Loop Mode"
-msgstr ""
+msgstr "Musik i løkke"
 
 msgid "Music Volume"
 msgstr "Lydstyrke"
@@ -844,7 +844,7 @@ msgid "No themes found on the site."
 msgstr "Der blev ikke fundet nogle temaer på denne site."
 
 msgid "None"
-msgstr ""
+msgstr "Ingen"
 
 msgid "Normal"
 msgstr "Normal"
@@ -859,7 +859,7 @@ msgid "Not a DOL/ELF file."
 msgstr "Ikke en DOL/ELF-fil."
 
 msgid "Not a WAD file."
-msgstr ""
+msgstr "Ikke en WAD-fil."
 
 msgid "Not a Wii Disc"
 msgstr "Ikke en Wii-DVD"
@@ -934,16 +934,16 @@ msgid "Play Count"
 msgstr "Spiltæller"
 
 msgid "Play Next"
-msgstr ""
+msgstr "Afspil næste"
 
 msgid "Play Once"
-msgstr ""
+msgstr "Afspil én gang"
 
 msgid "Play Previous"
-msgstr ""
+msgstr "Afspil forrige"
 
 msgid "Playing Music:"
-msgstr ""
+msgstr "Afspiller musik:"
 
 msgid "Please wait..."
 msgstr "Vent venligst..."
@@ -964,7 +964,7 @@ msgid "Quick Boot"
 msgstr "Hurtig opstart"
 
 msgid "Random Directory Music"
-msgstr ""
+msgstr "Musik fra tilfældig mappe"
 
 msgid "Reading WAD data... Ok!"
 msgstr "Læser WAD-data... Ok!"
@@ -979,19 +979,19 @@ msgid "Reload SD"
 msgstr "Genindlæs SD"
 
 msgid "Remove update"
-msgstr ""
+msgstr "Fjern opdatering"
 
 msgid "Rename Game on WBFS"
 msgstr "Omdøb spil på WBFS"
 
 msgid "Reset BG Music"
-msgstr ""
+msgstr "Nulstil BG-musik"
 
 msgid "Reset Playcounter"
 msgstr "Nulstil spiltæller"
 
 msgid "Reset to standard BGM?"
-msgstr ""
+msgstr "Nulstil til standard-BGM"
 
 msgid "Restarting..."
 msgstr "Genstarter..."
@@ -1091,6 +1091,9 @@ msgstr "Gem lykkedes"
 
 msgid "Successfully Updated"
 msgstr "Opdateringen lykkedes"
+
+msgid "Successfully Updated thanks to www.techjawa.com"
+msgstr ""
 
 msgid "Successfully deleted:"
 msgstr "Sletningen lykkedes:"
@@ -1315,9 +1318,6 @@ msgstr "og oversætterne for opdateringer til sprogfilerne"
 msgid "available"
 msgstr "tilgængelig"
 
-msgid "contains over 255 lines of code.  It will produce unexpected results."
-msgstr "indeholder over 225 linjer kode. Det vil give uventede resultater."
-
 msgid "does not exist!"
 msgstr "eksisterer ikke!"
 
@@ -1375,14 +1375,14 @@ msgstr "af"
 msgid "seconds left"
 msgstr "sekunder tilbage"
 
+#~ msgid "contains over 255 lines of code.  It will produce unexpected results."
+#~ msgstr "indeholder over 225 linjer kode. Det vil give uventede resultater."
+
 #~ msgid "Backgroundmusic Path changed."
 #~ msgstr "Sti til baggrundsmusik ændret"
 
 #~ msgid "Set as backgroundmusic?"
 #~ msgstr "Indstil som baggrundsmusik?"
-
-#~ msgid "The file is not a .wad"
-#~ msgstr "Filen er ikke en .WAD"
 
 #~ msgid "Install not possible"
 #~ msgstr "Kan ikke installere"

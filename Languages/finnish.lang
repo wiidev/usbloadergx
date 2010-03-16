@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-16 21:04+0100\n"
+"POT-Creation-Date: 2010-03-16 16:17+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: c64rmx\n"
 "Language-Team: \n"
@@ -1092,6 +1092,9 @@ msgstr "Tallennettu onnistuneesti"
 msgid "Successfully Updated"
 msgstr "Päivitetty onnistuneesti"
 
+msgid "Successfully Updated thanks to www.techjawa.com"
+msgstr ""
+
 msgid "Successfully deleted:"
 msgstr "Poistettu onnistuneesti:"
 
@@ -1315,9 +1318,6 @@ msgstr ""
 msgid "available"
 msgstr "Saatavilla"
 
-msgid "contains over 255 lines of code.  It will produce unexpected results."
-msgstr "Sisältää yli 255 riviä koodia. Muodostaa odottamattomia virheitä."
-
 msgid "does not exist!"
 msgstr "Ei löydy!"
 
@@ -1374,6 +1374,9 @@ msgstr "josta"
 
 msgid "seconds left"
 msgstr "sekuntia jäljellä"
+
+#~ msgid "contains over 255 lines of code.  It will produce unexpected results."
+#~ msgstr "Sisältää yli 255 riviä koodia. Muodostaa odottamattomia virheitä."
 
 #~ msgid "Backgroundmusic Path changed."
 #~ msgstr "Taustamusiikin polku muutettu"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-16 21:04+0100\n"
+"POT-Creation-Date: 2010-03-16 16:17+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: raschi\n"
 "Language-Team: raschi\n"
@@ -1092,6 +1092,9 @@ msgstr "Vellykket lagring"
 msgid "Successfully Updated"
 msgstr "Vellykket oppdatering"
 
+msgid "Successfully Updated thanks to www.techjawa.com"
+msgstr ""
+
 msgid "Successfully deleted:"
 msgstr "Vellykket sletting:"
 
@@ -1315,9 +1318,6 @@ msgstr "og oversettere for språkfiler"
 msgid "available"
 msgstr "tilgjengelig"
 
-msgid "contains over 255 lines of code.  It will produce unexpected results."
-msgstr "inneholder over 255 linjer med kode.  Den kan føre til uønskede resultater."
-
 msgid "does not exist!"
 msgstr "finnes ikke!"
 
@@ -1374,6 +1374,9 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder gjenstår"
+
+#~ msgid "contains over 255 lines of code.  It will produce unexpected results."
+#~ msgstr "inneholder over 255 linjer med kode.  Den kan føre til uønskede resultater."
 
 #~ msgid "Backgroundmusic Path changed."
 #~ msgstr "Bakgrunnsmusikk sti endret"
