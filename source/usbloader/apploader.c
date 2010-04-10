@@ -13,6 +13,7 @@
 #include "settings/cfg.h"
 #include "gecko.h"
 #include "patches/wip.h"
+#include "sys.h"
 
 extern bool geckoinit;
 
@@ -251,7 +252,7 @@ void PretendThereIsADiscInTheDrive(void *buffer, u32 len)
 /** Thanks to WiiPower **/
 bool NewSuperMarioBrosPatch(void *Address, int Size)
 {
-	if (IOS_GetVersion() == 222 || IOS_GetVersion() == 223) return false; // Don't use this when using Hermes, it'll use the BCA fix instead...
+	if (is_ios_type(IOS_TYPE_HERMES)) return false; // Don't use this when using Hermes, it'll use the BCA fix instead...
 
 	if (memcmp("SMNE", (char *)0x80000000, 4) == 0)
 	{

@@ -42,7 +42,7 @@ extern "C" {
     s32 getNameBN(char *name, u64 id);
 
 // Get the name of a title from its 00000000.app in NAND
-    s32 getName00(char *name, u64 id, int lang = 2);
+    s32 getName00(char *name, u64 id, int lang);
 
 // Get string representation of lower title id
     char *titleText(u32 kind, u32 title);

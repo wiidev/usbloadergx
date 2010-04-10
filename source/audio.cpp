@@ -31,3 +31,7 @@ void ShutdownAudio() {
     ASND_Pause(1);
     ASND_End();
 }
+
+extern "C" void StopAudio() {
+	ShutdownAudio();
+}

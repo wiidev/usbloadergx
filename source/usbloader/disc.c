@@ -8,13 +8,15 @@
 #include "patches/fst.h"
 #include "apploader.h"
 #include "disc.h"
-#include "video.h"
 #include "wdvd.h"
 #include "alternatedol.h"
 #include "memory.h"
 #include "wbfs.h"
-#include "../gecko.h"
-#include "../fatmounter.h"
+#include "gecko.h"
+#include "fatmounter.h"
+#include "sys.h"
+#include "frag.h"
+#include "usbstorage2.h"
 
 /* Constants */
 #define PTABLE_OFFSET	0x40000
@@ -240,15 +242,36 @@ s32 Disc_Wait(void) {
 }
 
 s32 Disc_SetUSB(const u8 *id) {
-	u32 part = 0;
-	if (wbfs_part_fs) {
-		part = wbfs_part_lba;
-	} else {
-		part = wbfs_part_idx ? wbfs_part_idx - 1 : 0;
+	if (is_ios_type(IOS_TYPE_HERMES)) {
+		u32 part = 0;
+		if (wbfs_part_fs) {
+			part = wbfs_part_lba;
+		} else {
+			part = wbfs_part_idx ? wbfs_part_idx - 1 : 0;
+		}
+		
+		int ret;
+		if (id && *id) {
+			ret = set_frag_list((u8 *) id);
+		} else {
+			ret = USBStorage_WBFS_SetFragList(NULL, 0);
+		}
+		
+		if (ret) {
+			return ret;
+		}
+		
+		/* Set USB mode */
+		return WDVD_SetUSBMode(id, part);
+	}
+	
+	if (WBFS_DEVICE_USB && wbfs_part_fs) {
+		gprintf("Setting frag list for wanin\n");
+		return set_frag_list((u8 *) id);
 	}
 
-    /* Set USB mode */
-    return WDVD_SetUSBMode(id, part);
+	gprintf("Setting disc usb thing for wanin\n");
+	return WDVD_SetWBFSMode(WBFS_DEVICE_USB, (u8 *) id);
 }
 
 s32 Disc_ReadHeader(void *outbuf) {

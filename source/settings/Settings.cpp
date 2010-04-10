@@ -47,19 +47,11 @@ static const char *opts_no_yes[settings_off_on_max] = {trNOOP("No"),trNOOP("Yes"
 static const char *opts_off_on[settings_off_on_max] = {trNOOP("OFF"),trNOOP("ON") };
 static const char *opts_videomode[settings_language_max][2] = {{"",trNOOP("Disc Default")},{trNOOP("System Default"),""},{trNOOP("AutoPatch"),""},{trNOOP("Force"), " PAL50"},{trNOOP("Force")," PAL60"},{trNOOP("Force")," NTSC"}};
 static const char *opts_language[settings_language_max] = {trNOOP("Console Default"),trNOOP("Japanese"),trNOOP("English"),trNOOP("German"),trNOOP("French"),trNOOP("Spanish"),trNOOP("Italian"),trNOOP("Dutch"),trNOOP("SChinese"),trNOOP("TChinese"),trNOOP("Korean")};
-static const char *opts_cios[settings_ios_max] = {"IOS 249","IOS 222", "IOS 223", "IOS 250"};
+static const char *opts_cios[settings_cios_max] = {"IOS 249","IOS 222", "IOS 223", "IOS 224", "IOS 250"};
 static const char *opts_parentalcontrol[5] = {trNOOP("0 (Everyone)"),trNOOP("1 (Child 7+)"),trNOOP("2 (Teen 12+)"),trNOOP("3 (Mature 16+)"),trNOOP("4 (Adults Only 18+)")};
 static const char *opts_error002[settings_error002_max] = {trNOOP("No"),trNOOP("Yes"),trNOOP("Anti")};
 static const char *opts_partitions[settings_partitions_max] = {trNOOP("Game partition"),trNOOP("All partitions"), trNOOP("Remove update")};
 static const char *opts_installdir[settings_installdir_max] = {trNOOP("None"), trNOOP("GAMEID_Gamename"), trNOOP("Gamename [GAMEID]")};
-
-bool IsValidPartition(int fs_type, int cios) {
-	if (cios == 249 || cios == 250) {
-		return fs_type == FS_TYPE_WBFS;
-	} else {
-		return fs_type == FS_TYPE_WBFS || fs_type == FS_TYPE_FAT32 || fs_type == FS_TYPE_NTFS;
-	}
-}
 
 /****************************************************************************
  * MenuSettings
@@ -1003,9 +995,6 @@ int MenuSettings()
 									if (++Settings.cios >= settings_cios_max) {
 										Settings.cios = 0;
 									}
-									if ((Settings.cios == 1 && ios222rev!=4) || (Settings.cios == 2 && ios223rev != 4)) {
-										WindowPrompt(tr("Hermes CIOS"),tr("USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"),tr("OK"));
-									}
 								}
 								if (Settings.godmode == 1)
 									options2.SetValue(Idx, "%s", opts_cios[Settings.cios]);
@@ -1017,12 +1006,7 @@ int MenuSettings()
 							{
 								if (firstRun) options2.SetName(Idx, "%s", tr("Partition"));
 								if (ret == Idx) {
-									// Select the next valid partition, even if that's the same one
-									do
-									{
-										Settings.partition = Settings.partition + 1 == partitions.num ? 0 : Settings.partition + 1;
-									}
-									while (!IsValidPartition(partitions.pinfo[Settings.partition].fs_type, Settings.cios));
+									Settings.partition = Settings.partition + 1 == partitions.num ? 0 : Settings.partition + 1;
 								}
 								
 								PartInfo pInfo = partitions.pinfo[Settings.partition];
@@ -2216,8 +2200,7 @@ int MenuSettings()
 
 	ResumeGui();
 	return menu;
-	}
-
+}
 
 /********************************************************************************
 *Game specific settings
@@ -2438,9 +2421,8 @@ int GameSettings(struct discHdr * header)
 
 		mainWindow->Append(&w);
 
-
-
-		if (game_cfg) { //if there are saved settings for this game use them
+		CFG_set_game_default();
+		if (game_cfg) {
 			videoChoice = game_cfg->video;
 			languageChoice = game_cfg->language;
 			ocarinaChoice = game_cfg->ocarina;
@@ -2454,34 +2436,10 @@ int GameSettings(struct discHdr * header)
 			reloadblock = game_cfg->iosreloadblock;
 			strlcpy(alternatedname, game_cfg->alternatedolname, sizeof(alternatedname));
 		}
-		else
-		{
-			videoChoice = Settings.video;
-			languageChoice = Settings.language;
-			ocarinaChoice = Settings.ocarina;
-			viChoice = Settings.vpatch;
-			if (Settings.cios == ios222)
-				iosChoice = i222;
-                        else if (Settings.cios == ios250)
-				iosChoice = i250;
-			else if (Settings.cios == ios223)
-				iosChoice = i223;
-			else 
-                                iosChoice = i249;
-			parentalcontrolChoice = 0;
-			fix002 = Settings.error002;
-			countrystrings = Settings.patchcountrystrings;
-			alternatedol = off;
-			alternatedoloffset = 0;
-			reloadblock = off;
-			strcpy(alternatedname, "");
-		}
-
+		
 		ResumeGui();
 
 		while (MainButton1.GetEffect() > 0) usleep(50);
-
-
 
 		while (menu == MENU_NONE)
 		{
@@ -2633,7 +2591,7 @@ int GameSettings(struct discHdr * header)
 						if(ret == ++Idx || firstRun)
 						{
 							if(firstRun) options2.SetName(Idx, "IOS");
-							if(ret == Idx && ++iosChoice >= settings_ios_max)
+							if(ret == Idx && ++iosChoice >= settings_cios_max)
 								iosChoice = 0;
 							options2.SetValue(Idx,"%s",opts_cios[iosChoice]);
 						}
@@ -2972,25 +2930,7 @@ int GameSettings(struct discHdr * header)
 				int choice1 = WindowPrompt(tr("Are you sure?"),0,tr("Yes"),tr("Cancel"));
 				if (choice1 == 1)
 				{
-					videoChoice = Settings.video;
-					viChoice = Settings.vpatch;
-					languageChoice = Settings.language;
-					ocarinaChoice = Settings.ocarina;
-					fix002 = Settings.error002;
-					countrystrings = Settings.patchcountrystrings;
-					alternatedol = off;
-					alternatedoloffset = 0;
-					reloadblock = off;
-					if (Settings.cios == ios222)
-						iosChoice = i222;
-					else if (Settings.cios == ios250)
-						iosChoice = i250;
-					else if (Settings.cios == ios223)
-						iosChoice = i223;
-					else
-						iosChoice = i249;
-					parentalcontrolChoice = 0;
-					strcpy(alternatedname, "");
+					CFG_set_game_default();
 					CFG_forget_game_opt(header->id);
 					/* commented because the database language now depends on the main language setting, this could be enabled again if there is a separate language setting for the database
 					// if default language is different than language from main settings, reload titles
@@ -3035,8 +2975,6 @@ int GameSettings(struct discHdr * header)
 	}
 	w.SetEffect(EFFECT_FADE, -20);
 	while (w.GetEffect()>0) usleep(50);
-
-
 
 	HaltGui();
 

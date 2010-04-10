@@ -366,9 +366,6 @@ s32 Wbfs_Fat::GetHeadersCount()
 	dir_iter = diropen(path);
 	if (!dir_iter) return 0;
 
-	dir_iter = diropen(path);
-	if (!dir_iter) return 0;
-
 	while (dirnext(dir_iter, fname, &st) == 0) {
 		//printf("found: %s\n", fname); Wpad_WaitButtonsCommon();
 		if ((char)fname[0] == '.') continue;

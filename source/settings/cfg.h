@@ -239,6 +239,7 @@ extern "C" {
 	void CFG_Load(void);
 	struct Game_CFG* CFG_get_game_opt(u8 *id);
 	struct Game_NUM* CFG_get_game_num(u8 *id);
+	void CFG_set_game_default();
 	bool CFG_save_game_opt(u8 *id);
 	bool CFG_save_game_num(u8 *id);
 	bool CFG_reset_all_playcounters();
@@ -299,17 +300,10 @@ extern "C" {
 	};
 
 	enum {
-		i249=0,
-		i222,
-		i223,
-		i250,
-		settings_ios_max // always the last entry
-	};
-
-	enum {
 		ios249=0,
 		ios222,
 		ios223,
+		ios224,
 		ios250,
 		settings_cios_max // always the last entry
 	};
@@ -463,6 +457,8 @@ extern "C" {
 
 	void GetLanguageToLangCode(int *langid, char *langcode);
 	bool OpenXMLDatabase(char* xmlfilepath, char* argdblang, bool argJPtoEN, bool openfile, bool loadtitles, bool freemem);
+
+	int ciosSetting2Cios(int setting);
 
 	char *get_title(struct discHdr *header);
 	char *cfg_get_title(u8 *id) ;

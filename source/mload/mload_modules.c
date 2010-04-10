@@ -1,11 +1,10 @@
 #include "mload_modules.h"
-#include "ehcmodule_frag_v4_bin.h"
-#include "ehcmodule_frag_v5_bin.h"
+#include "ehcmodule_frag_bin.h"
+#include "dip_plugin_249.h"
+#include "sys.h"
 #include "gecko.h"
 
 #define ALIGNED(x) __attribute__((aligned(x)))
-
-#define DEBUG_MLOAD
 
 /* Used for Hermes NAND emulation */
 int global_mount;
@@ -83,7 +82,6 @@ static u32 ios_60[16] ATTRIBUTE_ALIGN(32)=
 	0x20203750+1, // ios_printf (thumb)
 };
 
-
 u32 patch_datas[8] ATTRIBUTE_ALIGN(32);
 
 data_elf my_data_elf;
@@ -93,105 +91,19 @@ int size_external_ehcmodule=0;
 
 static int my_thread_id=0;
 
-int load_ehc_module()
+int load_ehc_module_hermes()
 {
-int is_ios=0;
+	int is_ios=0;
 
-#if 0
-
-FILE *fp;
-
-// WARNING!!!: load external module suspended
-if(sd_ok && !external_ehcmodule)
-	{
-
-	fp=fopen("sd:/apps/usbloader_gx/ehcmodule.elf","rb");
-		if(fp==NULL)
-			fp=fopen("sd:/apps/usbloadergx/ehcmodule.elf","rb");
-
-	if(fp!=0)
-		{
-		fseek(fp, 0, SEEK_END);
-		size_external_ehcmodule = ftell(fp);
-		external_ehcmodule= memalign(32, size_external_ehcmodule);
-		if(!external_ehcmodule) 
-			{fclose(fp);}
-		else
-			{
-			fseek(fp, 0, SEEK_SET);
-
-			if(fread(external_ehcmodule,1, size_external_ehcmodule ,fp)!=size_external_ehcmodule)
-				{free(external_ehcmodule); external_ehcmodule=NULL;}
-		
-			fclose(fp);
-			}
-		}
-	}
-#endif
-
-/*
 	if(mload_init()<0) return -1;
-	mload_elf((void *) logmodule, &my_data_elf);
+	mload_elf((void *) ehcmodule_frag_bin, &my_data_elf);
 	my_thread_id= mload_run_thread(my_data_elf.start, my_data_elf.stack, my_data_elf.size_stack, my_data_elf.prio);
-	if(my_thread_id<0) return -1;
-	*/
-  
-	if(!external_ehcmodule)
-		{
-#ifdef DEBUG_MLOAD
-gprintf("before mload_init\n");
-#endif
-		if(mload_init()<0) return -1;
-#ifdef DEBUG_MLOAD
-		gprintf("after mload_init\n");
-#endif
-		if (IOS_GetRevision() == 4) {
-#ifdef DEBUG_MLOAD
-		    gprintf("Loading ehcmodule v4\n");
-#endif
-		    mload_elf((void *) ehcmodule_frag_v4_bin, &my_data_elf);
-		} else if (IOS_GetRevision() == 65535) {
-#ifdef DEBUG_MLOAD
-		    gprintf("Loading ehcmodule v5\n");
-#endif
-		    mload_elf((void *) ehcmodule_frag_v5_bin, &my_data_elf);
-		} else {
-			return -2;
-		}
-//		mload_elf((void *) ehcmodule, &my_data_elf);
-#ifdef DEBUG_MLOAD
-		gprintf("before mload_run_thread\n");
-#endif
-		my_thread_id= mload_run_thread(my_data_elf.start, my_data_elf.stack, my_data_elf.size_stack, my_data_elf.prio);
-		if(my_thread_id<0) return -1;
-		//if(mload_module(ehcmodule, size_ehcmodule)<0) return -1;
-		}
-	else
-		{
-		//if(mload_module(external_ehcmodule, size_external_ehcmodule)<0) return -1;
-		if(mload_init()<0) return -1;
-		mload_elf((void *) external_ehcmodule, &my_data_elf);
-		my_thread_id= mload_run_thread(my_data_elf.start, my_data_elf.stack, my_data_elf.size_stack, my_data_elf.prio);
-		if(my_thread_id<0) return -1;
-		}
+	if(my_thread_id<0) return -2;
 	usleep(350*1000);
 	
 
 	// Test for IOS
 
-	#if 0
-	mload_seek(0x20207c84, SEEK_SET);
-	mload_read(patch_datas, 32);
-	if(patch_datas[0]==0x6e657665 ) 
-		{
-		is_ios=38;
-		}
-	else
-		{
-		is_ios=36;
-		}
-
-#endif
 	is_ios=mload_get_IOS_base();
 	
 	switch(is_ios)
@@ -264,10 +176,38 @@ gprintf("before mload_init\n");
 
 		}
 
-	mload_close();
-
-return 0;
+	return 0;
 }
+
+int load_dip_249()
+{
+	gprintf("load_dip_249\n");
+	int ret = -1;
+	if (is_ios_type(IOS_TYPE_WANIN) && IOS_GetRevision() >= 18)
+	{
+		gprintf("mload_init\n");
+		if(mload_init()<0) {
+			return -2;
+		}
+		gprintf("mload_module\n");
+		ret = mload_module(dip_plugin_249, size_dip_plugin_249);
+		gprintf("mload_close\n");
+		mload_close();
+	}
+	gprintf("mload done\n");
+	return ret;
+}
+
+int load_ehc_module()
+{
+	if (is_ios_type(IOS_TYPE_HERMES))
+		return load_ehc_module_hermes();
+	else if (is_ios_type(IOS_TYPE_WANIN))
+		return load_dip_249();
+	return -1;
+}
+
+#if 0
 
 #define IOCTL_FAT_MOUNTSD	0xF0
 #define IOCTL_FAT_UMOUNTSD	0xF1
@@ -428,6 +368,8 @@ s32 ret;
 return ret;
 }
 
+#endif
+
 void enable_ES_ioctlv_vector(void)
 {
 	patch_datas[0]=*((u32 *) (dip_plugin+16*4));
@@ -463,11 +405,7 @@ void test_and_patch_for_port1()
 	
 	u8 * ehc_data = NULL;
 	
-	if (IOS_GetRevision() == 4) {
-		ehc_data=search_for_ehcmodule_cfg((void *) ehcmodule_frag_v4_bin, ehcmodule_frag_v4_bin_size);
-	} else if (IOS_GetRevision() == 65535) {
-		ehc_data=search_for_ehcmodule_cfg((void *) ehcmodule_frag_v5_bin, ehcmodule_frag_v5_bin_size);
-	}
+	ehc_data=search_for_ehcmodule_cfg((void *) ehcmodule_frag_bin, ehcmodule_frag_bin_size);
 	
 	if(ehc_data)
 		{
