@@ -70,6 +70,8 @@ s32 WII_BootHBC();
 //get the rev of a ISO and such without having to load it
 s32 getIOSrev(u64 req);
 
+u32 GetReturnToTitle();
+
 #ifdef __cplusplus
 }
 #endif

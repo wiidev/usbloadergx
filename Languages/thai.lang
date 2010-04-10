@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-16 16:17+0100\n"
+"POT-Creation-Date: 2010-04-10 19:39-0400\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Nitro_subzero \n"
 "Language-Team: Nitro_subzero\n"
@@ -606,9 +606,6 @@ msgstr "เยอรมัน"
 msgid "HOME Menu"
 msgstr "เมนู HOME"
 
-msgid "Hermes CIOS"
-msgstr ""
-
 msgid "Homebrew Apps Path"
 msgstr "ที่เก็บโปรแกรม Homebrew"
 
@@ -1164,9 +1161,6 @@ msgstr "ไม่พบอุปกรณ์ USB"
 
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX 5 ถูกป้องกัน"
-
-msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
-msgstr ""
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."

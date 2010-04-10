@@ -328,12 +328,12 @@ void gamepatches(void * dst, int len, u8 videoSelected, u8 patchcountrystring, u
 	if(cheat)
 		dogamehooks(dst,len);
 
-    //if (vipatch)//moved to degamehooks()
-    //    vidolpatcher(dst,len);
+    if (vipatch)
+	vidolpatcher(dst,len);
 
 
     /*LANGUAGE PATCH - FISHEARS*/
-    //langpatcher(dst,len);//moved to degamehooks()
+    langpatcher(dst,len);
 
     /*Thanks to WiiPower*/
     if (patchcountrystring == 1)
@@ -352,7 +352,7 @@ void gamepatches(void * dst, int len, u8 videoSelected, u8 patchcountrystring, u
 
 }
 
-s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8 patchcountrystring, u8 error002fix, u8 alternatedol, u32 alternatedoloffset) {
+s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8 patchcountrystring, u8 error002fix, u8 alternatedol, u32 alternatedoloffset, u32 rtrn) {
     app_entry appldr_entry;
     app_init  appldr_init;
     app_main  appldr_main;
@@ -360,7 +360,7 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
 
     u32 appldr_len;
     s32 ret;
-	gprintf("\nApploader_Run() started");
+	gprintf("Apploader_Run() started\n");
 
 	//u32 geckoattached = usb_isgeckoalive(EXI_CHANNEL_1);
 	//if (geckoattached)usb_flush(EXI_CHANNEL_1);
@@ -386,13 +386,16 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
     appldr_entry(&appldr_init, &appldr_main, &appldr_final);
 
     /* Initialize apploader */
-    appldr_init(__noprint);
+    appldr_init( gprintf );
 
     if (error002fix!=0) {
         /* ERROR 002 fix (thanks to WiiPower for sharing this)*/
 		*(u32 *)0x80003188 = *(u32 *)0x80003140;
 //        *(u32 *)0x80003140 = *(u32 *)0x80003188;
     }
+
+    u32 dolStart = 0x90000000;
+    u32 dolEnd = 0x0;
 
     for (;;) {
         void *dst = NULL;
@@ -406,9 +409,21 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
         /* Read data from DVD */
         WDVD_Read(dst, len, (u64)(offset << 2));
 
-        gamepatches(dst, len, videoSelected, patchcountrystring, vipatch, cheat);
+	if( !alternatedol )gamepatches(dst, len, videoSelected, patchcountrystring, vipatch, cheat);
 
         DCFlushRange(dst, len);
+	if( dst < dolStart )dolStart = dst;
+	if( dst + len > dolEnd ) dolEnd = dst + len;
+    }
+
+    //this patch should be run on the entire dol at 1 time
+    if( !alternatedol && rtrn)
+    {
+	if( PatchReturnTo( dolStart, dolEnd - dolStart , rtrn) )
+	{
+	    //gprintf("return-to patched\n" );
+	    DCFlushRange( dolStart, dolEnd - dolStart );
+	}
     }
 
     *entry = appldr_final();
@@ -426,8 +441,11 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
             DCFlushRange(dolbuffer, dollen);
 
             gamepatches(dolbuffer, dollen, videoSelected, patchcountrystring, vipatch, cheat);
-
-            DCFlushRange(dolbuffer, dollen);
+	    if( PatchReturnTo( dolStart, dolEnd - dolStart , rtrn ) )
+	    {
+		//gprintf("return-to patched\n" );
+		DCFlushRange(dolbuffer, dollen);
+	    }
 
             /* Set entry point from apploader */
             *entry = (entry_point) load_dol_image(dolbuffer);
@@ -441,7 +459,7 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
 
         FST_ENTRY *fst = (FST_ENTRY *)*(u32 *)0x80000038;
 
-        *entry = (entry_point) Load_Dol_from_disc(fst[alternatedoloffset].fileoffset, videoSelected, patchcountrystring, vipatch, cheat);
+	*entry = (entry_point) Load_Dol_from_disc(fst[alternatedoloffset].fileoffset, videoSelected, patchcountrystring, vipatch, cheat, rtrn);
 
         if (*entry == 0)
             SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);

@@ -603,14 +603,13 @@ int MainMenu(int menu) {
             vipatch = 0;
             break;
         }
-		gprintf("\n\tDisc_wiiBoot");
+	u32 rtrnID = GetReturnToTitle();
+		gprintf("Disc_wiiBoot\n" );
 
-        ret = Disc_WiiBoot(videoselected, cheat, vipatch, countrystrings, errorfixer002, alternatedol, alternatedoloffset);
+	ret = Disc_WiiBoot(videoselected, cheat, vipatch, countrystrings, errorfixer002, alternatedol, alternatedoloffset, rtrnID);
         if (ret < 0) {
             Sys_LoadMenu();
         }
-
-		printf("Returning entry point: 0x%0x\n", ret);
     }
 	return 0;
 }

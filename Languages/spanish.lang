@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-16 16:17+0100\n"
+"POT-Creation-Date: 2010-04-10 19:39-0400\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: SirPalax\n"
 "Language-Team: Penn, SirPalax\n"
@@ -606,9 +606,6 @@ msgstr "Alemán"
 msgid "HOME Menu"
 msgstr "Menú HOME"
 
-msgid "Hermes CIOS"
-msgstr "cIOS Hermes"
-
 msgid "Homebrew Apps Path"
 msgstr "Ruta Apps Homebrew"
 
@@ -1165,9 +1162,6 @@ msgstr "USB no encontrado"
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX está protegido"
 
-msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
-msgstr "¡USB Loader GX sólo funciona con cIOS Hermes rev 4!. ¡Por favor, asegúrate de que tienes instalada la versión 4!"
-
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
 msgstr "No se puede abrir el WAD que acabas de descargar (%s)."
@@ -1374,6 +1368,12 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
+
+#~ msgid "Hermes CIOS"
+#~ msgstr "cIOS Hermes"
+
+#~ msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
+#~ msgstr "¡USB Loader GX sólo funciona con cIOS Hermes rev 4!. ¡Por favor, asegúrate de que tienes instalada la versión 4!"
 
 #~ msgid "contains over 255 lines of code.  It will produce unexpected results."
 #~ msgstr "contiene más de 255 líneas de código. Se producirán resultados inesperados."
