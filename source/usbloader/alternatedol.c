@@ -8,7 +8,9 @@
 #include "apploader.h"
 #include "wdvd.h"
 #include "fstfile.h"
+#include "../gecko.h"
 #include "../patches/dvd_broadway.h"
+#include "../patches/patchcode.h"
 
 extern u8 mountMethod;
 
@@ -218,16 +220,21 @@ u32 Load_Dol_from_disc(u32 doloffset, u8 videoSelected, u8 patchcountrystring, u
 
 
             DCFlushRange(offset, len);
-	    if( offset < dolStart )dolStart = offset;
-	    if( offset + len > dolEnd ) dolEnd = offset + len;
+
+	    if( (u32)offset < dolStart )
+		dolStart = (u32)offset;
+
+	    if( (u32)offset + len > dolEnd )
+		dolEnd = (u32)offset + len;
 
             Remove_001_Protection(offset, len);
         }
     }
-    if( PatchReturnTo( dolStart, dolEnd - dolStart , rtrn ) )
+    gprintf("start: %08x\tend: %x\n", dolStart, dolEnd );
+    if( PatchReturnTo( (u32*)dolStart, dolEnd - dolStart , rtrn ) )
     {
-	    //gprintf("return-to patched\n" );
-	    DCFlushRange( dolStart, dolEnd - dolStart );
+	    // gprintf("return-to patched\n" );
+	    DCFlushRange( (u32*)dolStart, dolEnd - dolStart );
     }
     free(dol_header);
 

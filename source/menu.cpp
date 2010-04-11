@@ -421,7 +421,7 @@ int MainMenu(int menu) {
         struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
 
         if (game_cfg) {
-            videoChoice = game_cfg->video;
+	    videoChoice = game_cfg->video;
             languageChoice = game_cfg->language;
             ocarinaChoice = game_cfg->ocarina;
             viChoice = game_cfg->vipatch;
@@ -606,7 +606,7 @@ int MainMenu(int menu) {
 	u32 rtrnID = GetReturnToTitle();
 		gprintf("Disc_wiiBoot\n" );
 
-	ret = Disc_WiiBoot(videoselected, cheat, vipatch, countrystrings, errorfixer002, alternatedol, alternatedoloffset, rtrnID);
+	ret = Disc_WiiBoot( videoselected, cheat, vipatch, countrystrings, errorfixer002, alternatedol, alternatedoloffset, rtrnID );
         if (ret < 0) {
             Sys_LoadMenu();
         }

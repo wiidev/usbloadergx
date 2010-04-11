@@ -416,88 +416,6 @@ void vidolpatcher(void *addr, u32 len)
 }
 
 //giantpune's magic super patch to return to channels
-/*bool PatchReturnTo(void *Address, int Size, u32 id) {
-    u8 SearchPattern[ 12 ] = 	{ 0x38, 0x80, 0x00, 0x02, 0x38, 0x60, 0x00, 0x01, 0x38, 0xa0, 0x00, 0x00 };
-
-    int found = 0;
-    int patched = 0;
-    int offset = 0;
-    u32 ad[ 3 ] = { 0, 0, 0 };
-
-    void *Addr = Address;
-    void *Addr_end = Address+Size;
-
-    //find __OSLaunchMenu() and remember some addresses in it
-    while (Addr <= Addr_end - 12 ) {
-	if ( memcmp( Addr, SearchPattern, 12 )==0 ) {
-	    ad[ found++ ] = Addr;
-	}
-	else if ( ad[ 0 ] && memcmp( Addr, SearchPattern, 8 )==0 ) //after the first match is found, only search the first 8 bytes for the other 2
-	{
-	    if( !ad[ 1 ] ) ad[ found++ ] = Addr;
-	    else if( !ad[ 2 ] ) ad[ found++ ] = Addr;
-	    if( found >= 3 )break;
-	}
-	Addr += 4;
-	offset += 4;
-    }
-
-    //if the function is found and if it is not too far into the main.dol
-    if( found == 3 && ( offset < 0x1000001 ) )
-    {
-	u32 nop = 0x60000000;
-
-	//the magic that writes the TID to the registers
-	u8 jump[ 20 ] = { 0x3C, 0x60, 0x00, 0x01, 0x60, 0x63, 0x00, 0x01,
-			  0x3C, 0x80, 0x4A, 0x4F, 0x60, 0x84, 0x44, 0x49,
-			  0x4E, 0x80, 0x00, 0x20 };
-	//patch the thing to use the new TID
-	jump[ 10 ] = (u8)( id>>24 );
-	jump[ 11 ] = (u8)( id>>16 );
-	jump[ 14 ] = (u8)( id>>8 );
-	jump[ 15 ] = (u8)id;
-
-	u32 jumpTo = Address - sizeof( jump );
-	void* addr = jumpTo;
-
-	//write new stuff to memory right before the main.dol
-	memcpy( addr, jump, sizeof( jump ) );
-
-	//ES_GetTicketViews()
-	u32 newval = ( jumpTo - ad[ 0 ] );
-	newval &= 0x03FFFFFC;
-	newval |= 0x48000001;
-	addr = ad[ 0 ];
-	//gprintf("addr: %p\n", addr );
-	memcpy( addr, &newval, sizeof( u32) );
-	memcpy( addr + 4, &nop, sizeof( u32) );
-	//gprintf("%p patched to %08x\n", addr, newval );
-
-	//ES_GetTicketViews() again
-	newval = ( jumpTo - ad[ 1 ] );
-	newval &= 0x03FFFFFC;
-	newval |= 0x48000001;
-	addr = ad[ 1 ];
-	//gprintf("addr: %p\n", addr );
-	memcpy( addr, &newval, sizeof( u32) );
-	memcpy( addr + 4, &nop, sizeof( u32) );
-	//gprintf("%p patched to %08x\n", addr, newval );
-
-	//ES_LaunchTitle()
-	newval = ( jumpTo - ad[ 2 ] );
-	newval &= 0x03FFFFFC;
-	newval |= 0x48000001;
-	addr = ad[ 2 ];
-	//gprintf("addr: %p\n", addr );
-	memcpy( addr, &newval, sizeof( u32) );
-	memcpy( addr + 4, &nop, sizeof( u32) );
-	//gprintf("%p patched to %08x\n", addr, newval );
-
-	patched = 1;
-    }
-    return patched;
-}
-*/
 bool PatchReturnTo(void *Address, int Size, u32 id) {
     u8 SearchPattern[ 12 ] = 	{ 0x38, 0x80, 0x00, 0x02, 0x38, 0x60, 0x00, 0x01, 0x38, 0xa0, 0x00, 0x00 };
     u8 SearchPattern2[ 12 ] = 	{ 0x4D, 0x65, 0x74, 0x72, 0x6F, 0x77, 0x65, 0x72, 0x6B, 0x73, 0x20, 0x54 };
@@ -512,18 +430,18 @@ bool PatchReturnTo(void *Address, int Size, u32 id) {
     while (Addr <= Addr_end - 12 ) {
 	//find a safe place or the patch to hang out
 	if ( ! ad[ 3 ] && memcmp( Addr, SearchPattern2, 12 )==0 ) {
-	    ad[ 3 ] = Addr + 0x30;
+	    ad[ 3 ] = (u32)Addr + 0x30;
 	    gprintf("found a safe place @ %08x\n", ad[ 3 ]);
 	    //hexdump( Addr, 0x50 );
 	}
 	//find __OSLaunchMenu() and remember some addresses in it
 	else if ( memcmp( Addr, SearchPattern, 12 )==0 ) {
-	    ad[ found++ ] = Addr;
+	    ad[ found++ ] = (u32)Addr;
 	}
 	else if ( ad[ 0 ] && memcmp( Addr, SearchPattern, 8 )==0 ) //after the first match is found, only search the first 8 bytes for the other 2
 	{
-	    if( !ad[ 1 ] ) ad[ found++ ] = Addr;
-	    else if( !ad[ 2 ] ) ad[ found++ ] = Addr;
+	    if( !ad[ 1 ] ) ad[ found++ ] = (u32)Addr;
+	    else if( !ad[ 2 ] ) ad[ found++ ] = (u32)Addr;
 	    if( found >= 3 )break;
 	}
 	Addr += 4;
@@ -545,38 +463,37 @@ bool PatchReturnTo(void *Address, int Size, u32 id) {
 	jump[ 14 ] = (u8)( id>>8 );
 	jump[ 15 ] = (u8)id;
 
-	//u32 jumpTo = Address - sizeof( jump );
-	void* addr = ad[ 3 ];
+	void* addr = (u32*)ad[ 3 ];
 
-	//write new stuff to memory right before the main.dol
+	//write new stuff to memory main.dol in a unused part of the main.dol
 	memcpy( addr, jump, sizeof( jump ) );
 
 	//ES_GetTicketViews()
 	u32 newval = ( ad[ 3 ] - ad[ 0 ] );
 	newval &= 0x03FFFFFC;
 	newval |= 0x48000001;
-	addr = ad[ 0 ];
+	addr = (u32*)ad[ 0 ];
 	memcpy( addr, &newval, sizeof( u32 ) );
 	memcpy( addr + 4, &nop, sizeof( u32 ) );
-	gprintf("%p -> %08x\n", addr, newval );
+	gprintf("\t%p -> %08x\n", addr, newval );
 
 	//ES_GetTicketViews() again
 	newval = ( ad[ 3 ] - ad[ 1 ] );
 	newval &= 0x03FFFFFC;
 	newval |= 0x48000001;
-	addr = ad[ 1 ];
+	addr = (u32*)ad[ 1 ];
 	memcpy( addr, &newval, sizeof( u32 ) );
 	memcpy( addr + 4, &nop, sizeof( u32 ) );
-	gprintf("%p -> %08x\n", addr, newval );
+	gprintf("\t%p -> %08x\n", addr, newval );
 
 	//ES_LaunchTitle()
 	newval = ( ad[ 3 ] - ad[ 2 ] );
 	newval &= 0x03FFFFFC;
 	newval |= 0x48000001;
-	addr = ad[ 2 ];
+	addr = (u32*)ad[ 2 ];
 	memcpy( addr, &newval, sizeof( u32 ) );
 	memcpy( addr + 4, &nop, sizeof( u32 ) );
-	gprintf("%p -> %08x\n", addr, newval );
+	gprintf("\t%p -> %08x\n", addr, newval );
 
 	patched = 1;
     }

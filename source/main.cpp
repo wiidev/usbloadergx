@@ -140,10 +140,10 @@ unsigned int *xfb = NULL;
 
 void InitTextVideo ()
 {
-    gprintf("\nInitTextVideo ()");
+    gprintf("\n\nInitTextVideo ()");
     if (textVideoInit)
     {
-        gprintf("...0");
+	gprintf("...0\n");
         return;
     }
     dbvideo=1;
@@ -174,7 +174,7 @@ void InitTextVideo ()
     //send console output to the gecko
     if (geckoinit)CON_EnableGecko(1, true);
     textVideoInit = true;
-    gprintf("...1");
+    gprintf("...1\n");
 
 }
 

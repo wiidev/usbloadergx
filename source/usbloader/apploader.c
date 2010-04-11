@@ -34,11 +34,6 @@ static u8 *appldr = (u8 *)0x81200000;
 static u32 buffer[0x20] ATTRIBUTE_ALIGN(32);
 struct SSettings Settings;
 
-static void __noprint(const char *fmt, ...) {
-}
-
-
-
 bool compare_videomodes(GXRModeObj* mode1, GXRModeObj* mode2) {
     if (mode1->viTVMode != mode2->viTVMode || mode1->fbWidth != mode2->fbWidth ||	mode1->efbHeight != mode2->efbHeight || mode1->xfbHeight != mode2->xfbHeight ||
             mode1->viXOrigin != mode2->viXOrigin || mode1->viYOrigin != mode2->viYOrigin || mode1->viWidth != mode2->viWidth || mode1->viHeight != mode2->viHeight ||
@@ -360,7 +355,8 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
 
     u32 appldr_len;
     s32 ret;
-	gprintf("Apploader_Run() started\n");
+	gprintf("Apploader_Run( %p, %d, %d, %d, %d, %d, %d, %d, %08x)\n", \
+		entry, cheat, videoSelected, vipatch, patchcountrystring, error002fix, alternatedol, alternatedoloffset, rtrn);
 
 	//u32 geckoattached = usb_isgeckoalive(EXI_CHANNEL_1);
 	//if (geckoattached)usb_flush(EXI_CHANNEL_1);
@@ -412,17 +408,17 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
 	if( !alternatedol )gamepatches(dst, len, videoSelected, patchcountrystring, vipatch, cheat);
 
         DCFlushRange(dst, len);
-	if( dst < dolStart )dolStart = dst;
-	if( dst + len > dolEnd ) dolEnd = dst + len;
+	if( (u32)dst < dolStart )dolStart = (u32)dst;
+	if( (u32)dst + len > dolEnd ) dolEnd = (u32)dst + len;
     }
 
     //this patch should be run on the entire dol at 1 time
     if( !alternatedol && rtrn)
     {
-	if( PatchReturnTo( dolStart, dolEnd - dolStart , rtrn) )
+	if( PatchReturnTo( (u32*)dolStart, dolEnd - dolStart , rtrn) )
 	{
 	    //gprintf("return-to patched\n" );
-	    DCFlushRange( dolStart, dolEnd - dolStart );
+	    DCFlushRange( (u32*)dolStart, dolEnd - dolStart );
 	}
     }
 
@@ -441,7 +437,7 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
             DCFlushRange(dolbuffer, dollen);
 
             gamepatches(dolbuffer, dollen, videoSelected, patchcountrystring, vipatch, cheat);
-	    if( PatchReturnTo( dolStart, dolEnd - dolStart , rtrn ) )
+	    if( PatchReturnTo( (u32*)dolStart, dolEnd - dolStart , rtrn ) )
 	    {
 		//gprintf("return-to patched\n" );
 		DCFlushRange(dolbuffer, dollen);
