@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# german.lang - r913
+# german.lang - r921
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-10 19:39-0400\n"
+"POT-Creation-Date: 2010-04-11 06:03+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: ZEN.13\n"
 "Language-Team: Snoozer, wishmasterf, Bertilax, ZEN.13\n"
@@ -201,7 +201,7 @@ msgid "Boot?"
 msgstr "Starten?"
 
 msgid "Both"
-msgstr "Beides (ID und Region)"
+msgstr "ID und Region"
 
 msgid "Can't be formatted"
 msgstr "Kann nicht formatiert werden"
@@ -841,7 +841,7 @@ msgid "No themes found on the site."
 msgstr "Keine Themes auf der Seite gefunden."
 
 msgid "None"
-msgstr "Keine"
+msgstr "Nichts"
 
 msgid "Normal"
 msgstr "Normal (4:3)"
@@ -1090,7 +1090,7 @@ msgid "Successfully Updated"
 msgstr "Erfolgreich aktualisiert"
 
 msgid "Successfully Updated thanks to www.techjawa.com"
-msgstr ""
+msgstr "Erfolgreich aktualisiert. Dank an: www.techjawa.com"
 
 msgid "Successfully deleted:"
 msgstr "Erfolgreich gelöscht:"

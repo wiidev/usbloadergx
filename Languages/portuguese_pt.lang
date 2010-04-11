@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-# portuguese_pt.lang - r903
+# portuguese_pt.lang - r921
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-10 19:39-0400\n"
-"PO-Revision-Date: 2010-02-01 18:10-0000\n"
+"POT-Creation-Date: 2010-04-11 06:03+0200\n"
+"PO-Revision-Date: 2010-03-22 10:55-0000\n"
 "Last-Translator: Sky8000\n"
 "Language-Team: Sky8000 <sky8000@hotmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -754,10 +754,10 @@ msgid "Locked"
 msgstr "Bloqueado"
 
 msgid "Loop Directory"
-msgstr ""
+msgstr "Repetir Pasta"
 
 msgid "Loop Music"
-msgstr ""
+msgstr "Repetir Música"
 
 msgid "Loop Sound"
 msgstr "Repetir Sons"
@@ -856,7 +856,7 @@ msgid "Not a DOL/ELF file."
 msgstr "Não é um ficheiro DOL/ELF válido."
 
 msgid "Not a WAD file."
-msgstr ""
+msgstr "Não é um ficheiro WAD."
 
 msgid "Not a Wii Disc"
 msgstr "Não é um Disco da Wii"
@@ -934,7 +934,7 @@ msgid "Play Next"
 msgstr "Próxima"
 
 msgid "Play Once"
-msgstr ""
+msgstr "Tocar uma vez."
 
 msgid "Play Previous"
 msgstr "Anterior"
@@ -961,7 +961,7 @@ msgid "Quick Boot"
 msgstr "Arranque Rápido"
 
 msgid "Random Directory Music"
-msgstr ""
+msgstr "Pasta de Música Aleatória"
 
 msgid "Reading WAD data... Ok!"
 msgstr "Lendo dados do WAD... Ok!"
@@ -1090,7 +1090,7 @@ msgid "Successfully Updated"
 msgstr "Actualização Concluída"
 
 msgid "Successfully Updated thanks to www.techjawa.com"
-msgstr ""
+msgstr "Actualizado com Sucesso graças a www.techjawa.com"
 
 msgid "Successfully deleted:"
 msgstr "Eliminado com Sucesso:"

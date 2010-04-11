@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# japanese.lang - r913
+# japanese.lang - r924
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-10 19:39-0400\n"
+"POT-Creation-Date: 2010-04-11 06:03+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
@@ -1090,7 +1090,7 @@ msgid "Successfully Updated"
 msgstr "更新しました"
 
 msgid "Successfully Updated thanks to www.techjawa.com"
-msgstr ""
+msgstr "更新しました www.techjawa.comに感謝!"
 
 msgid "Successfully deleted:"
 msgstr "削除に成功しました"

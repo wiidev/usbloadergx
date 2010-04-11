@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-# dutch.lang - r912
+# dutch.lang - r921
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-10 19:39-0400\n"
-"PO-Revision-Date: 2009-10-01 01:00+0200\n"
+"POT-Creation-Date: 2010-04-11 06:03+0200\n"
+"PO-Revision-Date: 2010-03-17 07:41+0100\n"
 "Last-Translator: glowy\n"
 "Language-Team: tj_cool, glowy\n"
 "MIME-Version: 1.0\n"
@@ -1090,7 +1090,7 @@ msgid "Successfully Updated"
 msgstr "Met succes geüpdate!"
 
 msgid "Successfully Updated thanks to www.techjawa.com"
-msgstr ""
+msgstr "Met succes geüpdate met dank aan www.techjawa.com"
 
 msgid "Successfully deleted:"
 msgstr "Met succes verwijderd:"
