@@ -418,11 +418,19 @@ void vidolpatcher(void *addr, u32 len)
 //giantpune's magic super patch to return to channels
 bool PatchReturnTo(void *Address, int Size, u32 id) {
     if( !id )return 0;
+    //new __OSLoadMenu() (SM2.0 and higher)
     u8 SearchPattern[ 12 ] = 	{ 0x38, 0x80, 0x00, 0x02, 0x38, 0x60, 0x00, 0x01, 0x38, 0xa0, 0x00, 0x00 };
+
+    //old _OSLoadMenu() (used in launch games)
+    u8 SearchPatternB[ 12 ] = 	{ 0x38, 0xC0, 0x00, 0x02, 0x38, 0xA0, 0x00, 0x01, 0x38, 0xE0, 0x00, 0x00 };
+
+    //identifier for the safe place
     u8 SearchPattern2[ 12 ] = 	{ 0x4D, 0x65, 0x74, 0x72, 0x6F, 0x77, 0x65, 0x72, 0x6B, 0x73, 0x20, 0x54 };
+
 
     int found = 0;
     int patched = 0;
+    u8 oldSDK = 0;
     u32 ad[ 4 ] = { 0, 0, 0, 0 };
 
     void *Addr = Address;
@@ -447,6 +455,29 @@ bool PatchReturnTo(void *Address, int Size, u32 id) {
 	}
 	Addr += 4;
     }
+    //check for the older-ass version of the SDK
+    if( found < 3 && ad[ 3 ] )
+    {
+	Addr = Address;
+	ad[ 0 ] = 0; ad[ 1 ] = 0;
+	ad[ 2 ] = 0;
+	found = 0;
+	oldSDK = 1;
+
+	while (Addr <= Addr_end - 12 ) {
+	    //find __OSLaunchMenu() and remember some addresses in it
+	    if ( memcmp( Addr, SearchPatternB, 12 )==0 ) {
+		ad[ found++ ] = (u32)Addr;
+	    }
+	    else if ( ad[ 0 ] && memcmp( Addr, SearchPatternB, 8 ) == 0 ) //after the first match is found, only search the first 8 bytes for the other 2
+	    {
+		if( !ad[ 1 ] ) ad[ found++ ] = (u32)Addr;
+		else if( !ad[ 2 ] ) ad[ found++ ] = (u32)Addr;
+		if( found >= 3 )break;
+	    }
+	    Addr += 4;
+	}
+    }
 
     //if the function is found and if it is not too far into the main.dol
     if( found == 3 && ( ad[ 2 ] - ad[ 3 ] < 0x1000001 ) && ad[ 3 ] )
@@ -458,10 +489,17 @@ bool PatchReturnTo(void *Address, int Size, u32 id) {
 	u8 jump[ 20 ] = { 0x3C, 0x60, 0x00, 0x01, 0x60, 0x63, 0x00, 0x01,
 			  0x3C, 0x80, 0x4A, 0x4F, 0x60, 0x84, 0x44, 0x49,
 			  0x4E, 0x80, 0x00, 0x20 };
+	if( oldSDK )
+	{
+	    jump[ 1 ] = 0xA0; //3CA00001 60A50001
+	    jump[ 5 ] = 0xA5; //3CC04A4F 60C64449
+	    jump[ 9 ] = 0xC0;
+	    jump[ 13 ] = 0xC6;
+	}
 	//patch the thing to use the new TID
-	jump[ 10 ] = (u8)( id>>24 );
-	jump[ 11 ] = (u8)( id>>16 );
-	jump[ 14 ] = (u8)( id>>8 );
+	jump[ 10 ] = (u8)( id >> 24 );
+	jump[ 11 ] = (u8)( id >> 16 );
+	jump[ 14 ] = (u8)( id >> 8 );
 	jump[ 15 ] = (u8)id;
 
 	void* addr = (u32*)ad[ 3 ];
