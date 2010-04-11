@@ -355,8 +355,8 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
 
     u32 appldr_len;
     s32 ret;
-	gprintf("Apploader_Run( %p, %d, %d, %d, %d, %d, %d, %d, %08x)\n", \
-		entry, cheat, videoSelected, vipatch, patchcountrystring, error002fix, alternatedol, alternatedoloffset, rtrn);
+	gprintf("Apploader_Run( %p, %d, %d, %d, %d, %d, %d, %d, %08x )\n", \
+		entry, cheat, videoSelected, vipatch, patchcountrystring, error002fix, alternatedol, alternatedoloffset, rtrn );
 
 	//u32 geckoattached = usb_isgeckoalive(EXI_CHANNEL_1);
 	//if (geckoattached)usb_flush(EXI_CHANNEL_1);
@@ -455,7 +455,7 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
 
         FST_ENTRY *fst = (FST_ENTRY *)*(u32 *)0x80000038;
 
-	*entry = (entry_point) Load_Dol_from_disc(fst[alternatedoloffset].fileoffset, videoSelected, patchcountrystring, vipatch, cheat, rtrn);
+	*entry = (entry_point) Load_Dol_from_disc(fst[alternatedoloffset].fileoffset, videoSelected, patchcountrystring, vipatch, cheat, rtrn );
 
         if (*entry == 0)
             SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
