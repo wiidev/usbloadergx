@@ -1368,36 +1368,3 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder gjenstår"
-
-#~ msgid "contains over 255 lines of code.  It will produce unexpected results."
-#~ msgstr "inneholder over 255 linjer med kode.  Den kan føre til uønskede resultater."
-
-#~ msgid "Backgroundmusic Path changed."
-#~ msgstr "Bakgrunnsmusikk sti endret"
-
-#~ msgid "Set as backgroundmusic?"
-#~ msgstr "Bruk som bakgrunnsmusikk?"
-
-#~ msgid "The file is not a .wad"
-#~ msgstr "Denne filen er ikke en .wad"
-
-#~ msgid "Exit USB Loader GX?"
-#~ msgstr "Avslutt USB Loader GX?"
-
-#~ msgid "No WBFS partition found"
-#~ msgstr "Ingen WBFS partisjon funnet"
-
-#~ msgid "You need to format a partition"
-#~ msgstr "Du må formatere en partisjon"
-
-#~ msgid "ERROR: USB device could not be loaded!"
-#~ msgstr "FEIL: USB enhet kan ikke lastes!"
-
-#~ msgid "ERROR: cIOS could not be loaded!"
-#~ msgstr "FEIL: cIOS kan ikke lastes!"
-
-#~ msgid "Loading..."
-#~ msgstr "Laster..."
-
-#~ msgid "Waiting for your slow USB Device: %i secs..."
-#~ msgstr "Venter på USB enhet: %i sek..."

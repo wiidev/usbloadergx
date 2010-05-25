@@ -1368,36 +1368,3 @@ msgstr "z "
 
 msgid "seconds left"
 msgstr "sekund zbývá"
-
-#~ msgid "contains over 255 lines of code.  It will produce unexpected results."
-#~ msgstr "obsahuje více jak 255 rádek kódu. To muže vyvolat neocekáváné výsledky."
-
-#~ msgid "Backgroundmusic Path changed."
-#~ msgstr "Cesta pro hudbu na pozadí zmenena"
-
-#~ msgid "Set as backgroundmusic?"
-#~ msgstr "Nastavit jako hudbu na pozadí?"
-
-#~ msgid "The file is not a .wad"
-#~ msgstr "Soubor není typu WAD"
-
-#~ msgid "Can't decompress LZ77"
-#~ msgstr "Nelze dekomprimovat LZ77"
-
-#~ msgid "Can't find disc"
-#~ msgstr "Nelze nalézt disc"
-
-#~ msgid "IMD5 Header not right."
-#~ msgstr "Hlavička IMD5 není správná."
-
-#~ msgid "IMET Header wrong."
-#~ msgstr "Hlavička IMET není správná."
-
-#~ msgid "Exit USB Loader GX?"
-#~ msgstr "Ukoncit USB Loader GX?"
-
-#~ msgid "No WBFS partition found"
-#~ msgstr "Nebyl nalezen oddíl WBFS"
-
-#~ msgid "You need to format a partition"
-#~ msgstr "Musíte naformátovat oddíl"

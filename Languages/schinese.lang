@@ -1368,27 +1368,3 @@ msgstr "的"
 
 msgid "seconds left"
 msgstr "剩余秒数"
-
-#~ msgid "contains over 255 lines of code.  It will produce unexpected results."
-#~ msgstr "代码超过255行,这可能会导致不可预知的结果."
-
-#~ msgid "Backgroundmusic Path changed."
-#~ msgstr "背景音乐路径已变更"
-
-#~ msgid "Set as backgroundmusic?"
-#~ msgstr "设置成背景音乐?"
-
-#~ msgid "The file is not a .wad"
-#~ msgstr "这不是一个 WAD 文件"
-
-#~ msgid "Exit USB Loader GX?"
-#~ msgstr "退出 USB Loader GX?"
-
-#~ msgid "No WBFS partition found"
-#~ msgstr "找不到 WBFS 分区"
-
-#~ msgid "You need to format a partition"
-#~ msgstr "必须格式化一个分区"
-
-#~ msgid "Homebrew Channel"
-#~ msgstr "Homebrew 频道"

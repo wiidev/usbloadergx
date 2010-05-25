@@ -1368,27 +1368,3 @@ msgstr "중"
 
 msgid "seconds left"
 msgstr "초 남았습니다"
-
-#~ msgid "contains over 255 lines of code.  It will produce unexpected results."
-#~ msgstr "255라인 이상이면 예상치 못한 결과가 나오죠."
-
-#~ msgid "Backgroundmusic Path changed."
-#~ msgstr "배경음악 경로 변경됨."
-
-#~ msgid "Set as backgroundmusic?"
-#~ msgstr "벼경음악 설정?"
-
-#~ msgid "The file is not a .wad"
-#~ msgstr "화일이 .wad 아님"
-
-#~ msgid "Exit USB Loader GX?"
-#~ msgstr "USB로더 GX를 종료할까요?"
-
-#~ msgid "No WBFS partition found"
-#~ msgstr "WBFS 파티션이 없습니다."
-
-#~ msgid "You need to format a partition"
-#~ msgstr "파티션을 포맷해야 합니다"
-
-#~ msgid "Homebrew Channel"
-#~ msgstr "홈브류 채널"

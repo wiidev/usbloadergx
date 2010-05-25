@@ -1368,24 +1368,3 @@ msgstr "josta"
 
 msgid "seconds left"
 msgstr "sekuntia jäljellä"
-
-#~ msgid "contains over 255 lines of code.  It will produce unexpected results."
-#~ msgstr "Sisältää yli 255 riviä koodia. Muodostaa odottamattomia virheitä."
-
-#~ msgid "Backgroundmusic Path changed."
-#~ msgstr "Taustamusiikin polku muutettu"
-
-#~ msgid "Set as backgroundmusic?"
-#~ msgstr "Aseta taustamusiikiksi?"
-
-#~ msgid "The file is not a .wad"
-#~ msgstr "Tiedosto ei ole .wad"
-
-#~ msgid "Exit USB Loader GX?"
-#~ msgstr "Poistu USB Loader GX:stä?"
-
-#~ msgid "No WBFS partition found"
-#~ msgstr "Ei WBFS-osioita löytynyt"
-
-#~ msgid "You need to format a partition"
-#~ msgstr "Sinun täytyy formatoida osio"
