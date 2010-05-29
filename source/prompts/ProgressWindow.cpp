@@ -402,7 +402,7 @@ void ShowProgress(const char *title, const char *msg1, char *dynmsg2, f32 done, 
  * Startup Progressthread in idle prio
  ***************************************************************************/
 void InitProgressThread() {
-    LWP_CreateThread(&progressthread, ProgressThread, NULL, NULL, 0, 80);
+    LWP_CreateThread(&progressthread, ProgressThread, NULL, NULL, 16384, 80);
 }
 
 /****************************************************************************

@@ -6,6 +6,7 @@
 #include <wiiuse/wpad.h>
 
 #include "patches/fst.h"
+#include "patches/wip.h"
 #include "apploader.h"
 #include "disc.h"
 #include "video.h"
@@ -287,6 +288,8 @@ s32 Disc_BootPartition(u64 offset, u8 videoselected, u8 cheat, u8 vipatch, u8 pa
 	memset(gameid, 0, 8);
 	memcpy(gameid, (char*)Disc_ID, 6);
 
+    load_wip_code((u8 *) &gameid);
+
     /* Setup low memory */
     __Disc_SetLowMem();
 
@@ -295,9 +298,12 @@ s32 Disc_BootPartition(u64 offset, u8 videoselected, u8 cheat, u8 vipatch, u8 pa
     if (ret < 0)
         return ret;
 
+    free_wip();
+
     bool cheatloaded = false;
 
-    if (cheat == 1) {
+    if (cheat)
+    {
         /* OCARINA STUFF - FISHEARS*/
         if(ocarina_load_code((u8 *) gameid) > 0)
         {

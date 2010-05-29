@@ -182,7 +182,7 @@ static void * UpdateGUI (void *arg) {
  * Startup GUI threads
  ***************************************************************************/
 void InitGUIThreads() {
-    LWP_CreateThread(&guithread, UpdateGUI, NULL, NULL, 0, LWP_PRIO_HIGHEST);
+    LWP_CreateThread(&guithread, UpdateGUI, NULL, NULL, 32768, LWP_PRIO_HIGHEST);
     InitProgressThread();
     InitNetworkThread();
 

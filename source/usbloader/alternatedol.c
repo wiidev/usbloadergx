@@ -199,13 +199,13 @@ u32 Load_Dol_from_disc(u32 doloffset, u8 videoSelected, u8 patchcountrystring, u
     }
 
     if (!mountMethod)ret = WDVD_Read(dol_header, sizeof(dolheader), (doloffset<<2));
-	
+
 	else{
 		dvddone = 0;
 		ret = bwDVD_LowRead(dol_header, sizeof(dolheader), doloffset, __dvd_readidcb);
 		while(ret>=0 && dvddone==0);
 	}
-	
+
     entrypoint = load_dol_start(dol_header);
 
     if (entrypoint == 0) {
@@ -216,12 +216,10 @@ u32 Load_Dol_from_disc(u32 doloffset, u8 videoSelected, u8 patchcountrystring, u
     void *offset;
     u32 pos;
     u32 len;
-	
+
     while (load_dol_image_modified(&offset, &pos, &len)) {
         if (len != 0) {
             ret = WDVD_Read(offset, len, (doloffset<<2) + pos);
-
-            DCFlushRange(offset, len);
 
             gamepatches(offset, len, videoSelected, patchcountrystring, vipatch, cheat);
 

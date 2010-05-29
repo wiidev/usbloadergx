@@ -391,7 +391,7 @@ static void * networkinitcallback(void *arg) {
  * InitNetworkThread with priority 0 (idle)
  ***************************************************************************/
 void InitNetworkThread() {
-    LWP_CreateThread (&networkthread, networkinitcallback, NULL, NULL, 0, 0);
+    LWP_CreateThread (&networkthread, networkinitcallback, NULL, NULL, 16384, 0);
 }
 
 /****************************************************************************

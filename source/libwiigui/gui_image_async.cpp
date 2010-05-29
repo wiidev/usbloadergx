@@ -19,7 +19,7 @@ void debug(int Line, const char* Format, ...)
 	if(debugLock==0) LWP_MutexInit(&debugLock, false);
 
 	LWP_MutexLock(debugLock);
-	
+
 	FILE *fp = fopen("SD:/debug.txt", "a");
 	if(fp)
 	{
@@ -38,7 +38,7 @@ void debug(int Line, const char* Format, ...)
 	LWP_MutexUnlock(debugLock);
 }
 //#define DEBUG(format, ...) debug(__LINE__, format, ##__VA_ARGS__)
-#define DEBUG(format, ...) 
+#define DEBUG(format, ...)
 
 static void *memdup(const void* src, size_t len)
 {
@@ -103,7 +103,7 @@ static u32 GuiImageAsyncThreadInit()
 		CanSleep = false;
 		LWP_MutexInit(&ListLock, false);
 		LWP_MutexInit(&InUseLock, false);
-		LWP_CreateThread(&Thread, GuiImageAsyncThread, NULL, NULL, 0, 75);
+		LWP_CreateThread(&Thread, GuiImageAsyncThread, NULL, NULL, 16384, 75);
 //		while(!CanSleep)
 //			usleep(20);
 	}

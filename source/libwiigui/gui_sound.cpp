@@ -44,7 +44,7 @@ GuiSoundDecoder *GuiSoundDecoder::GetDecoder(const u8 * snd, u32 len, bool snd_i
 	{
 		GuiSoundDecoder *d = NULL;
 		try{ d = de->fnc(snd, len, snd_is_allocated); }
-		catch(const char *error){ 
+		catch(const char *error){
 		gprintf("%s", error); }
 		catch(...){}
 		if(d) return d;
@@ -52,7 +52,7 @@ GuiSoundDecoder *GuiSoundDecoder::GetDecoder(const u8 * snd, u32 len, bool snd_i
 	return NULL;
 }
 
- 
+
 /***************************************************************
  *
  * D E C O D E R – T H R E A D
@@ -191,7 +191,7 @@ GuiSound::GuiSound(const u8 *s, int l, int v/*=100*/, bool r/*=true*/, bool a/*=
 {
 	if(GuiSoundCount++ == 0 || GuiSoundDecoderThreadHandle == LWP_THREAD_NULL)
 	{
-		LWP_CreateThread(&GuiSoundDecoderThreadHandle,GuiSoundDecoderThread,NULL,NULL,32*1024,80);
+		LWP_CreateThread(&GuiSoundDecoderThreadHandle,GuiSoundDecoderThread,NULL,NULL,32768,80);
 	}
 	voice = -1;
 	play_buffer[0]	= (u8*)memalign(32, BUFFER_SIZE*3);	// tripple-buffer first is played
@@ -247,7 +247,7 @@ bool GuiSound::Load(const char *p)
 {
 	Stop();							// stop playing
 	if(!play_buffer[0]) return false;
-	
+
 	bool ret = false;
 	voice = -2;						// -2 marks loading from file
 	u32 filesize = 0;
@@ -300,15 +300,15 @@ void GuiSound::Play()
 	Stop();									// stop playing if it played
 	if(!play_buffer[0]) return;
 	if(!decoder) return;					// no decoder or no play_buffer -> no playing
-	// initialize the buffer 
-	buffer_nr		= 0; 					// allways starts with buffer 0					
+	// initialize the buffer
+	buffer_nr		= 0; 					// allways starts with buffer 0
 	buffer_pos		= 0;					// reset position
 	buffer_ready	= false;
 	buffer_eof		= false;
 	decoder->Rewind();						// play from begin
 	DecoderCallback();						// fill first buffer;
 	if(!buffer_ready || buffer_eof)			// if first buffer not ready -> no play
-		return; 
+		return;
 	voice = ASND_GetFirstUnusedVoice();
 	if(voice >= 0)
 	{
@@ -387,7 +387,7 @@ void GuiSound::DecoderCallback()
 		{
 			if(loop)
 				decoder->Rewind();				// if loop -> rewind and fill the buffer more
-			else if(buffer_pos)	
+			else if(buffer_pos)
 				break;							// has data in buffer -> play the buffer
 			else
 				buffer_eof = true;				// no data in buffer -> return EOF
@@ -420,7 +420,7 @@ void GuiSound::DecoderCallback()
 }
 void GuiSound::PlayerCallback()
 {
-	if(buffer_eof)								// if EOF 
+	if(buffer_eof)								// if EOF
 	{
 		if(ASND_TestPointer(voice, play_buffer[(buffer_nr+2)%3])==0)	// test prev. Buffer
 			Stop();
@@ -429,7 +429,7 @@ void GuiSound::PlayerCallback()
 	{
 		if(ASND_AddVoice(voice, play_buffer[buffer_nr], buffer_pos)==SND_OK)	// add buffer
 		{
-			// next buffer 
+			// next buffer
 			buffer_nr	= (buffer_nr+1)%3;
 			buffer_pos	= 0;
 			buffer_ready= false;

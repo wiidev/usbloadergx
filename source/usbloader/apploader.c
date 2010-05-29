@@ -302,14 +302,14 @@ void gamepatches(void * dst, int len, u8 videoSelected, u8 patchcountrystring, u
         Search_and_patch_Video_Modes(dst, len, table);
     }
 
-	dogamehooks(dst,len);
+    if(cheat)
+        dogamehooks(dst,len);
 
-    //if (vipatch)//moved to degamehooks()
-    //    vidolpatcher(dst,len);
-
+    if (vipatch)
+        vidolpatcher(dst,len);
 
     /*LANGUAGE PATCH - FISHEARS*/
-    //langpatcher(dst,len);//moved to degamehooks()
+    langpatcher(dst,len);
 
     /*Thanks to WiiPower*/
     if (patchcountrystring == 1)
@@ -317,15 +317,10 @@ void gamepatches(void * dst, int len, u8 videoSelected, u8 patchcountrystring, u
 
     NewSuperMarioBrosPatch(dst, len);
 
-	do_wip_code((u8 *)0x80000000);
+    do_wip_code((u8 *) dst, len);
 
-
-    //if(Settings.anti002fix == on)
     if (fix002 == 2)
         Anti_002_fix(dst, len);
-
-	//patchdebug(dst, len);
-
 }
 
 s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8 patchcountrystring, u8 error002fix, u8 alternatedol, u32 alternatedoloffset) {
@@ -383,7 +378,6 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
         WDVD_Read(dst, len, (u64)(offset << 2));
 
         gamepatches(dst, len, videoSelected, patchcountrystring, vipatch, cheat);
-
         DCFlushRange(dst, len);
     }
 
@@ -392,14 +386,13 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
     /** Load alternate dol if set **/
     if (alternatedol == 1) {
 //		gprintf("\n\talt dol from FAT");
+        wip_reset_counter();
         void *dolbuffer;
         int dollen;
 
         bool dolloaded = Load_Dol(&dolbuffer, &dollen, Settings.dolpath);
         if (dolloaded) {
             Remove_001_Protection(dolbuffer, dollen);
-
-            DCFlushRange(dolbuffer, dollen);
 
             gamepatches(dolbuffer, dollen, videoSelected, patchcountrystring, vipatch, cheat);
 
@@ -411,10 +404,10 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
 
         if(dolbuffer)
             free(dolbuffer);
-
-    } else if (alternatedol == 2) {
-//		gprintf("\n\talt dol from WBFS");
-
+    }
+    else if (alternatedol == 2)
+    {
+        wip_reset_counter();
         FST_ENTRY *fst = (FST_ENTRY *)*(u32 *)0x80000038;
 
         *entry = (entry_point) Load_Dol_from_disc(fst[alternatedoloffset].fileoffset, videoSelected, patchcountrystring, vipatch, cheat);

@@ -26,6 +26,8 @@
 
 #include "usbloader/apploader.h"
 #include "patchcode.h"
+#include "settings/cfg.h"
+#include "listfiles.h"
 
 //#include "sd.h"
 //#include "fwrite_patch.h"
@@ -192,6 +194,16 @@ static const u32 newpatch002[3] = {
 bool dogamehooks(void *addr, u32 len)
 //---------------------------------------------------------------------------------
 {
+    //this is temporary since the screen freezes without a file loaded
+    char filepath[150];
+    char GameId[10];
+    memcpy(GameId, (u8 *) 0x80000000, 6);
+    GameId[6] = 0;
+    sprintf(filepath, "%s%s.gct", Settings.Cheatcodespath, GameId);
+
+    if(!checkfile(filepath))
+        return false;
+
 	//TODO for oggzee: when using Ocarina check if a hook as patched
 
 	hooktype = 1; // TODO for oggzee: Create an option for hooktype
