@@ -42,7 +42,7 @@ extern "C" {
     s32 getNameBN(char *name, u64 id);
 
 // Get the name of a title from its 00000000.app in NAND
-    s32 getName00(char *name, u64 id, int lang);
+    s32 getName00(char *name, u64 id, int lang = 2);
 
 // Get string representation of lower title id
     char *titleText(u32 kind, u32 title);
@@ -69,8 +69,6 @@ s32 WII_BootHBC();
 
 //get the rev of a ISO and such without having to load it
 s32 getIOSrev(u64 req);
-
-u32 GetReturnToTitle();
 
 #ifdef __cplusplus
 }

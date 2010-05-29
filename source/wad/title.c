@@ -945,52 +945,5 @@ out:
 	gprintf(" = %d",ret);
 	return ret;
 }
-#define TITLE_LOWER(x)		((u32)(x))
-u32 GetReturnToTitle()
-{
-	u32 tmdsize;
-	u64 tid = 0;
-	u64 *list;
-	u32 titlecount;
-	s32 ret;
-	u32 i;
 
-	ret = ES_GetNumTitles(&titlecount);
-	if(ret < 0)
-		return 0;
-
-	list = memalign(32, titlecount * sizeof(u64) + 32);
-
-	ret = ES_GetTitles(list, titlecount);
-	if(ret < 0) {
-		free(list);
-		return 0;
-	}
-	for(i=0; i<titlecount; i++) {
-		if (list[i]==TITLE_ID(0x00010001,0x554c4e52)
-			|| list[i]==TITLE_ID(0x00010001,0x554e454f))
-		{
-			tid = list[i];
-			break;
-
-		}
-	}
-	for(i=0; i<titlecount && !tid ; i++) {
-		if (list[i]==TITLE_ID(0x00010001,0x4A4F4449)
-			|| list[i]==TITLE_ID(0x00010001,0x48415858))
-		{
-			tid = list[i];
-			break;
-		}
-	}
-	free(list);
-
-	if(!tid)
-		return 0;
-
-	if(ES_GetStoredTMDSize(tid, &tmdsize) < 0)
-		return 0;
-
-	return TITLE_LOWER(tid);
-}
 

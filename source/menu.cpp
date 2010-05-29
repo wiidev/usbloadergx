@@ -25,9 +25,9 @@
 #include "usbloader/getentries.h"
 #include "wad/title.h"
 #include "xml/xml.h"
+#include "audio.h"
 #include "gecko.h"
 #include "menu.h"
-#include "audio.h"
 #include "sys.h"
 #include "wpad.h"
 #include "settings/newtitles.h"
@@ -345,7 +345,6 @@ int MainMenu(int menu) {
     delete coverImg;
 	delete fontClock;
 	delete fontSystem;
-
 	ShutdownAudio();
     StopGX();
 	gettextCleanUp();
@@ -415,13 +414,14 @@ int MainMenu(int menu) {
 			}
 		}
 
+
         int ret = 0;
         header = (mountMethod?dvdheader:&gameList[gameSelected]);
 
         struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
 
         if (game_cfg) {
-	    videoChoice = game_cfg->video;
+            videoChoice = game_cfg->video;
             languageChoice = game_cfg->language;
             ocarinaChoice = game_cfg->ocarina;
             viChoice = game_cfg->vipatch;
@@ -433,9 +433,48 @@ int MainMenu(int menu) {
 				alternatedoloffset = game_cfg->alternatedolstart;
 			}
             reloadblock = game_cfg->iosreloadblock;
+        } else {
+            videoChoice = Settings.video;
+            languageChoice = Settings.language;
+            ocarinaChoice = Settings.ocarina;
+            viChoice = Settings.vpatch;
+            if (Settings.cios == ios222) {
+                iosChoice = i222;
+            } else {
+                iosChoice = i249;
+            }
+            fix002 = Settings.error002;
+            countrystrings = Settings.patchcountrystrings;
+			if (!altdoldefault) {
+				alternatedol = off;
+				alternatedoloffset = 0;
+			}
+            reloadblock = off;
         }
-		
-		int ios2 = ciosSetting2Cios(iosChoice);
+		int ios2;
+
+		switch (iosChoice) {
+		case i249:
+			ios2 = 249;
+			break;
+
+		case i222:
+			ios2 = 222;
+			break;
+
+		case i223:
+			ios2 = 223;
+			break;
+
+		default:
+			ios2 = 249;
+			break;
+		}
+
+		// When the selected ios is 249, and you're loading from FAT, reset ios to 222
+		if (load_from_fs != PART_FS_WBFS && ios2 == 249) {
+			ios2 = 222;
+		}
         bool onlinefix = ShutdownWC24();
 
 		// You cannot reload ios when loading from fat
@@ -449,6 +488,10 @@ int MainMenu(int menu) {
 		{
 			gprintf("\nLoading fragment list...");
 			ret = get_frag_list(header->id);
+			gprintf("%d\n", ret);
+
+			gprintf("\nSetting fragment list...");
+			ret = set_frag_list(header->id);
 			gprintf("%d\n", ret);
 
 			ret = Disc_SetUSB(header->id);
@@ -603,13 +646,14 @@ int MainMenu(int menu) {
             vipatch = 0;
             break;
         }
-	u32 rtrnID = GetReturnToTitle();
-		gprintf("Disc_wiiBoot\n" );
+		gprintf("\n\tDisc_wiiBoot");
 
-	ret = Disc_WiiBoot( videoselected, cheat, vipatch, countrystrings, errorfixer002, alternatedol, alternatedoloffset, rtrnID );
+        ret = Disc_WiiBoot(videoselected, cheat, vipatch, countrystrings, errorfixer002, alternatedol, alternatedoloffset);
         if (ret < 0) {
             Sys_LoadMenu();
         }
+
+		printf("Returning entry point: 0x%0x\n", ret);
     }
 	return 0;
 }

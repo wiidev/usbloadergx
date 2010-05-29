@@ -17,17 +17,12 @@
 #define IOCTL_DI_OFFSET		0xD9
 #define IOCTL_DI_DISC_BCA	0xDA
 #define IOCTL_DI_STOPMOTOR	0xE3
-#define IOCTL_DI_SETWBFSMODE	0xF4
 #define IOCTL_DI_SETUSBMODE	0xF4
 #define IOCTL_DI_DISABLERESET	0xF6
 
 /** Hermes IOS222 **/
 #define DI_SETWBFSMODE	0xfe
 #define DI_SETOFFSETBASE 0xf1
-
-#define IOCTL_DI_SETFRAG	0xF9
-#define IOCTL_DI_GETMODE	0xFA
-#define IOCTL_DI_HELLO		0xFB
 
 /* Variables */
 static u32 inbuf[8]  ATTRIBUTE_ALIGN(32);
@@ -311,27 +306,6 @@ s32 WDVD_DisableReset(u8 val) {
     return (ret == 1) ? 0 : -ret;
 }
 
-s32 WDVD_SetWBFSMode(u32 mode, u8 *discid)
-{
-	s32 ret;
-
-	memset(inbuf, 0, sizeof(inbuf));
-
-	/* Set USB mode */
-	inbuf[0] = IOCTL_DI_SETWBFSMODE << 24;
-	inbuf[1] = mode;
-
-	/* Copy disc ID */
-	if (discid)
-		memcpy(&inbuf[2], discid, 6);
-
-	ret = IOS_Ioctl(di_fd, IOCTL_DI_SETWBFSMODE, inbuf, sizeof(inbuf), outbuf, sizeof(outbuf));
-	if (ret < 0)
-		return ret;
-
-	return (ret == 1) ? 0 : -ret;
-}
-
 /** Hermes **/
 s32 WDVD_SetUSBMode(const u8 *id, s32 partition) {
     s32 ret;
@@ -345,7 +319,9 @@ s32 WDVD_SetUSBMode(const u8 *id, s32 partition) {
     /* Copy ID */
     if (id) {
         memcpy(&inbuf[2], id, 6);
-		inbuf[5] = partition;
+		if (IOS_GetVersion() != 249) {
+			inbuf[5] = partition;
+		}
     }
 
     ret = IOS_Ioctl(di_fd, IOCTL_DI_SETUSBMODE, inbuf, sizeof(inbuf), outbuf, sizeof(outbuf));
@@ -373,28 +349,6 @@ s32 WDVD_Read_Disc_BCA(void *buf)
 	//inbuf[1] = 64;
 
 	ret = IOS_Ioctl(di_fd, IOCTL_DI_DISC_BCA, inbuf, sizeof(inbuf), buf, 64);
-	if (ret < 0)
-		return ret;
-
-	return (ret == 1) ? 0 : -ret;
-}
-
-s32 WDVD_SetFragList(int device, void *fraglist, int size)
-{
-	s32 ret;
-
-	memset(inbuf, 0, sizeof(inbuf));
-	memset(outbuf, 0, sizeof(outbuf));
-
-	/* Set FRAG mode */
-	inbuf[0] = IOCTL_DI_SETFRAG << 24;
-	inbuf[1] = device;
-	inbuf[2] = (u32)fraglist;
-	inbuf[3] = size;
-
-	DCFlushRange(fraglist, size);
-	ret = IOS_Ioctl(di_fd, IOCTL_DI_SETFRAG, inbuf, sizeof(inbuf), outbuf, sizeof(outbuf));
-
 	if (ret < 0)
 		return ret;
 

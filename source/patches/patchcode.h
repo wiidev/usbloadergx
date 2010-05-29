@@ -36,7 +36,6 @@ bool dogamehooks(void *addr, u32 len);
 void langpatcher(void *addr, u32 len);
 void vidolpatcher(void *addr, u32 len);
 void patchdebug(void *addr, u32 len);
-bool PatchReturnTo(void *Address, int Size, u32 id);
 
 #ifdef __cplusplus
 }

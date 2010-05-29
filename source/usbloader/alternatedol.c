@@ -8,9 +8,7 @@
 #include "apploader.h"
 #include "wdvd.h"
 #include "fstfile.h"
-#include "../gecko.h"
 #include "../patches/dvd_broadway.h"
-#include "../patches/patchcode.h"
 
 extern u8 mountMethod;
 
@@ -26,10 +24,15 @@ bool Load_Dol(void **buffer, int* dollen, char * filepath) {
     memcpy(gameidbuffer6, (char*)0x80000000, 6);
     snprintf(fullpath, 200, "%s%s.dol", filepath, gameidbuffer6);
 
+//    SDCard_Init();
+//    USBDevice_Init();
+
     file = fopen(fullpath, "rb");
 
     if (file == NULL) {
         fclose(file);
+   //     SDCard_deInit();
+   //     USBDevice_deInit();
         return false;
     }
 
@@ -41,16 +44,22 @@ bool Load_Dol(void **buffer, int* dollen, char * filepath) {
     dol_buffer = malloc(filesize);
     if (dol_buffer == NULL) {
         fclose(file);
-	return false;
+  //      SDCard_deInit();
+  //      USBDevice_deInit();
+        return false;
     }
     ret = fread( dol_buffer, 1, filesize, file);
     if (ret != filesize) {
         free(dol_buffer);
         fclose(file);
-	 return false;
+   //     SDCard_deInit();
+   //     USBDevice_deInit();
+        return false;
     }
     fclose(file);
 
+   // SDCard_deInit();
+   // USBDevice_deInit();
     *buffer = dol_buffer;
     *dollen = filesize;
     return true;
@@ -179,7 +188,7 @@ void __dvd_readidcb(s32 result)
 {
 	dvddone = result;
 }
-u32 Load_Dol_from_disc(u32 doloffset, u8 videoSelected, u8 patchcountrystring, u8 vipatch, u8 cheat, u32 rtrn ) {
+u32 Load_Dol_from_disc(u32 doloffset, u8 videoSelected, u8 patchcountrystring, u8 vipatch, u8 cheat) {
     int ret;
     void *dol_header;
     u32 entrypoint;
@@ -207,8 +216,6 @@ u32 Load_Dol_from_disc(u32 doloffset, u8 videoSelected, u8 patchcountrystring, u
     void *offset;
     u32 pos;
     u32 len;
-    u32 dolStart = 0x90000000;
-    u32 dolEnd = 0x0;
 	
     while (load_dol_image_modified(&offset, &pos, &len)) {
         if (len != 0) {
@@ -218,24 +225,12 @@ u32 Load_Dol_from_disc(u32 doloffset, u8 videoSelected, u8 patchcountrystring, u
 
             gamepatches(offset, len, videoSelected, patchcountrystring, vipatch, cheat);
 
-
             DCFlushRange(offset, len);
-
-	    if( (u32)offset < dolStart )
-		dolStart = (u32)offset;
-
-	    if( (u32)offset + len > dolEnd )
-		dolEnd = (u32)offset + len;
 
             Remove_001_Protection(offset, len);
         }
     }
-    gprintf("start: %08x\tend: %x\n", dolStart, dolEnd );
-    if( PatchReturnTo( (u32*)dolStart, dolEnd - dolStart , rtrn ) )
-    {
-	    // gprintf("return-to patched\n" );
-	    DCFlushRange( (u32*)dolStart, dolEnd - dolStart );
-    }
+
     free(dol_header);
 
     return entrypoint;

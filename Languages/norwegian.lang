@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-11 06:03+0200\n"
+"POT-Creation-Date: 2010-03-16 16:17+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: raschi\n"
 "Language-Team: raschi\n"
@@ -606,6 +606,9 @@ msgstr "Tysk"
 msgid "HOME Menu"
 msgstr "HOME Meny"
 
+msgid "Hermes CIOS"
+msgstr ""
+
 msgid "Homebrew Apps Path"
 msgstr "Homebrew Apps sti"
 
@@ -1162,6 +1165,9 @@ msgstr "USB enhet ikke funnet"
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX er beskyttet"
 
+msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
+msgstr ""
+
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
 msgstr "Kan ikke åpne nedlastet WAD fil (%s)."
@@ -1368,3 +1374,36 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder gjenstår"
+
+#~ msgid "contains over 255 lines of code.  It will produce unexpected results."
+#~ msgstr "inneholder over 255 linjer med kode.  Den kan føre til uønskede resultater."
+
+#~ msgid "Backgroundmusic Path changed."
+#~ msgstr "Bakgrunnsmusikk sti endret"
+
+#~ msgid "Set as backgroundmusic?"
+#~ msgstr "Bruk som bakgrunnsmusikk?"
+
+#~ msgid "The file is not a .wad"
+#~ msgstr "Denne filen er ikke en .wad"
+
+#~ msgid "Exit USB Loader GX?"
+#~ msgstr "Avslutt USB Loader GX?"
+
+#~ msgid "No WBFS partition found"
+#~ msgstr "Ingen WBFS partisjon funnet"
+
+#~ msgid "You need to format a partition"
+#~ msgstr "Du må formatere en partisjon"
+
+#~ msgid "ERROR: USB device could not be loaded!"
+#~ msgstr "FEIL: USB enhet kan ikke lastes!"
+
+#~ msgid "ERROR: cIOS could not be loaded!"
+#~ msgstr "FEIL: cIOS kan ikke lastes!"
+
+#~ msgid "Loading..."
+#~ msgstr "Laster..."
+
+#~ msgid "Waiting for your slow USB Device: %i secs..."
+#~ msgstr "Venter på USB enhet: %i sek..."

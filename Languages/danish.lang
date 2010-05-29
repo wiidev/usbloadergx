@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# danish.lang - r921
+# danish.lang - r916
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-11 06:03+0200\n"
+"POT-Creation-Date: 2010-03-16 16:17+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: dorf[dk]\n"
 "Language-Team: dorf[dk]\n"
@@ -606,6 +606,9 @@ msgstr "Tysk"
 msgid "HOME Menu"
 msgstr ""
 
+msgid "Hermes CIOS"
+msgstr ""
+
 msgid "Homebrew Apps Path"
 msgstr "Sti til homebrew-programmer"
 
@@ -1090,7 +1093,7 @@ msgid "Successfully Updated"
 msgstr "Opdateringen lykkedes"
 
 msgid "Successfully Updated thanks to www.techjawa.com"
-msgstr "Opdatering lykkedes takket www.techjawa.com"
+msgstr ""
 
 msgid "Successfully deleted:"
 msgstr "Sletningen lykkedes:"
@@ -1161,6 +1164,9 @@ msgstr "USB-enhed ikke fundet"
 
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX er beskyttet"
+
+msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
+msgstr "USB Loader GX fungerer kun med Hermes CIOS rev 4! Kontrollér, at revision 4 er installeret!"
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
@@ -1368,3 +1374,33 @@ msgstr "af"
 
 msgid "seconds left"
 msgstr "sekunder tilbage"
+
+#~ msgid "contains over 255 lines of code.  It will produce unexpected results."
+#~ msgstr "indeholder over 225 linjer kode. Det vil give uventede resultater."
+
+#~ msgid "Backgroundmusic Path changed."
+#~ msgstr "Sti til baggrundsmusik ændret"
+
+#~ msgid "Set as backgroundmusic?"
+#~ msgstr "Indstil som baggrundsmusik?"
+
+#~ msgid "Install not possible"
+#~ msgstr "Kan ikke installere"
+
+#~ msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
+#~ msgstr "Der bruges et NTFS filsystem. Da der kan forekomme skrivefejl på NTFS-partitioner, kan der ikke installeres spil."
+
+#~ msgid "Can't decompress LZ77"
+#~ msgstr "Kan ikke udpakke LZ77"
+
+#~ msgid "Can't find disc"
+#~ msgstr "Kan ikke finde disk"
+
+#~ msgid "IMD5 Header not right."
+#~ msgstr "Fejl i IMD5 header."
+
+#~ msgid "IMET Header wrong."
+#~ msgstr "Fejl i IMET header."
+
+#~ msgid "Exit USB Loader GX?"
+#~ msgstr "Afslut USB Loader GX?"

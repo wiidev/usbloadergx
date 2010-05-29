@@ -11,6 +11,7 @@
 #include "gecko.h"
 
 Wbfs *current = NULL;
+#define DEBUG_WBFS
 
 /* WBFS device */
 s32 wbfsDev = WBFS_MIN_DEVICE;
@@ -56,11 +57,20 @@ s32 WBFS_OpenPart(u32 part_fs, u32 part_idx, u32 part_lba, u32 part_size, char *
 	if (part_fs == PART_FS_FAT) {
 		current = new Wbfs_Fat(wbfsDev, part_lba, part_size);
 		strcpy(wbfs_fs_drive, "USB:");
+#ifdef DEBUG_WBFS
+		gprintf("\n\tCreated WBFS_Fat instance at lba: %d of size %d", part_lba, part_size);
+#endif
 	    } else if (part_fs == PART_FS_NTFS) {
 		current = new Wbfs_Ntfs(wbfsDev, part_lba, part_size);
 		strcpy(wbfs_fs_drive, "NTFS:");
+#ifdef DEBUG_WBFS
+		gprintf("\n\tCreated WBFS_Ntfs instance at lba: %d of size %d", part_lba, part_size);
+#endif
 	    } else {
 		current = new Wbfs_Wbfs(wbfsDev, part_lba, part_size);
+#ifdef DEBUG_WBFS
+		gprintf("\n\tCreated WBFS_Wbfs instance at lba: %d of size %d", part_lba, part_size);
+#endif
 	    }
 	if (current->Open())
 	{

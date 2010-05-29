@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-# dutch.lang - r929
+# dutch.lang - r912
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-11 06:03+0200\n"
-"PO-Revision-Date: 2010-04-12 07:37+0100\n"
+"POT-Creation-Date: 2010-03-16 16:17+0100\n"
+"PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: glowy\n"
 "Language-Team: tj_cool, glowy\n"
 "MIME-Version: 1.0\n"
@@ -606,6 +606,9 @@ msgstr "Duits"
 msgid "HOME Menu"
 msgstr ""
 
+msgid "Hermes CIOS"
+msgstr ""
+
 msgid "Homebrew Apps Path"
 msgstr "Locatie homebrew apps"
 
@@ -1090,7 +1093,7 @@ msgid "Successfully Updated"
 msgstr "Met succes geüpdate!"
 
 msgid "Successfully Updated thanks to www.techjawa.com"
-msgstr "Met succes geüpdate met dank aan www.techjawa.com"
+msgstr ""
 
 msgid "Successfully deleted:"
 msgstr "Met succes verwijderd:"
@@ -1161,6 +1164,9 @@ msgstr "USB Apparaat niet gevonden"
 
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX is vergrendeld"
+
+msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
+msgstr "USB Loader GX werkt alleen met Hermes cIOS rev 4! Zorg dat je revisie 4 hebt geïnstalleerd!"
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
@@ -1368,3 +1374,60 @@ msgstr "van"
 
 msgid "seconds left"
 msgstr "seconden over"
+
+#~ msgid "contains over 255 lines of code.  It will produce unexpected results."
+#~ msgstr "bevat meer dan 255 lijnen met code. Dit kan slechte gevolgen hebben."
+
+#~ msgid "Backgroundmusic Path changed."
+#~ msgstr "Locatie achtergrondmuziek gewijzigd."
+
+#~ msgid "Set as backgroundmusic?"
+#~ msgstr "Instellen als achtergrondmuziek?"
+
+#~ msgid "The file is not a .wad"
+#~ msgstr "Dit is geen .wad bestand"
+
+#~ msgid "Install not possible"
+#~ msgstr "Installatie niet mogelijk"
+
+#~ msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
+#~ msgstr "Je gebruikt het NTFS bestandssysteem. Door mogelijke schrijffouten naar een NTFS partitie, is een spel installeren niet mogelijk."
+
+#~ msgid "Partition Format Menu"
+#~ msgstr "Partitie Formatteer Menu"
+
+#~ msgid "Unlock the app first."
+#~ msgstr "Geef app eerst vrij."
+
+#~ msgid "You can't access this menu!"
+#~ msgstr "Je hebt geen toegang tot dit menu!"
+
+#~ msgid "Can't decompress LZ77"
+#~ msgstr "Kan LZ77 niet uitpakken"
+
+#~ msgid "Can't find disc"
+#~ msgstr "Kan disk niet vinden"
+
+#~ msgid "IMD5 Header not right."
+#~ msgstr "IMD5 Header niet correct."
+
+#~ msgid "IMET Header wrong."
+#~ msgstr "IMET Header niet correct."
+
+#~ msgid "Failed to extract opening.bnr"
+#~ msgstr "Uitpakken opening.bnr mislukt"
+
+#~ msgid "Homebrew Channel"
+#~ msgstr "Homebrew Kanaal"
+
+#~ msgid "ERROR: USB device could not be loaded!"
+#~ msgstr "FOUT: USB apparaat kon niet geladen worden!"
+
+#~ msgid "ERROR: cIOS could not be loaded!"
+#~ msgstr "FOUT: cIOS kon niet geladen worden!"
+
+#~ msgid "Loading..."
+#~ msgstr "Laden..."
+
+#~ msgid "Waiting for your slow USB Device: %i secs..."
+#~ msgstr "Wachten op traag USB apparaat: %i sec..."

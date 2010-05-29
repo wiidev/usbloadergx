@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# german.lang - r928
+# german.lang - r913
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-01 20:50+0200\n"
+"POT-Creation-Date: 2010-03-16 16:17+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: ZEN.13\n"
 "Language-Team: Snoozer, wishmasterf, Bertilax, ZEN.13\n"
@@ -126,7 +126,7 @@ msgid "AUTO"
 msgstr ""
 
 msgid "All partitions"
-msgstr "Alle Partitionen"
+msgstr "alle Partitionen"
 
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "Alle Funktionen des USB Loader GX sind jetzt freigeschaltet."
@@ -135,7 +135,7 @@ msgid "Alternate DOL"
 msgstr "Alternative DOL"
 
 msgid "An Error occured"
-msgstr "Ein Fehler ist aufgetreten."
+msgstr "Ein Fehler ist aufgetreten"
 
 msgid "Anti"
 msgstr ""
@@ -198,19 +198,19 @@ msgid "Boot/Standard"
 msgstr "Bootstandard (cIOS)"
 
 msgid "Boot?"
-msgstr "Kanael starten?"
+msgstr "Starten?"
 
 msgid "Both"
-msgstr "ID und Region"
+msgstr "Beides (ID und Region)"
 
 msgid "Can't be formatted"
-msgstr "Kann nicht formatiert werden."
+msgstr "Kann nicht formatiert werden"
 
 msgid "Can't create directory"
-msgstr "Verzeichnis kann nicht erstellt werden."
+msgstr "Verzeichnis kann nicht erstellt werden"
 
 msgid "Can't create file"
-msgstr "Datei kann nicht erstellt werden."
+msgstr "Datei kann nicht erstellt werden"
 
 msgid "Can't delete:"
 msgstr "Löschen fehlgeschlagen:"
@@ -231,16 +231,16 @@ msgid "Checking existing artwork"
 msgstr "Prüfe existierende Artworks"
 
 msgid "Checking for Updates"
-msgstr "Suche nach Updates"
+msgstr "Suche nach Aktualisierungen"
 
 msgid "Click to Download Covers"
-msgstr "Cover herunterladen"
+msgstr "Cover herunterzuladen"
 
 msgid "Click to change game ID"
 msgstr "Spiel ID ändern"
 
 msgid "Clock"
-msgstr "Uhrformat"
+msgstr "Uhr"
 
 msgid "Close"
 msgstr "   Schließen"
@@ -310,7 +310,7 @@ msgid "Could not set USB."
 msgstr "USB konnte nicht gesetzt werden."
 
 msgid "Cover Download"
-msgstr "Welche Cover herunterladen?"
+msgstr "Welche Cover heruntergeladen?"
 
 msgid "Cover Path Changed"
 msgstr "Pfad geändert"
@@ -349,7 +349,7 @@ msgid "Delete"
 msgstr "Löschen"
 
 msgid "Delete ?"
-msgstr "Wirklich löschen?"
+msgstr "Löschen ?"
 
 msgid "Delete Cheat GCT"
 msgstr "Lösche GCT Cheatdatei"
@@ -391,7 +391,7 @@ msgid "DiskFlip"
 msgstr "DiscFlip"
 
 msgid "Display"
-msgstr "Spielinfos anzeigen"
+msgstr "Anzeige"
 
 msgid "Display as a carousel"
 msgstr "Karussell-Ansicht"
@@ -427,7 +427,7 @@ msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "Die bekannte Alternative DOL verwenden?"
 
 msgid "Do you wish to update/download all language files?"
-msgstr "Alle Sprachdateien aktualisieren?"
+msgstr "Alle Sprachdateien aktualisieren/herunterladen?"
 
 msgid "Done!"
 msgstr "Fertig!"
@@ -445,13 +445,13 @@ msgid "Download Now"
 msgstr "Herunterladen"
 
 msgid "Download failed."
-msgstr "Download fehlgeschlagen"
+msgstr "Download fehlgeschlagen."
 
 msgid "Download finished"
 msgstr "Download abgeschlossen"
 
 msgid "Download request failed."
-msgstr "Downloadanfrage fehlgeschlagen"
+msgstr "Downloadanfrage fehlgeschlagen."
 
 msgid "Downloading"
 msgstr "Dateien werden heruntergeladen"
@@ -523,7 +523,7 @@ msgid "Feb"
 msgstr "Februar"
 
 msgid "File not found."
-msgstr "Datei nicht gefunden"
+msgstr "Datei nicht gefunden."
 
 msgid "Finishing installation... Ok!"
 msgstr "Beende Installation... OK!"
@@ -547,7 +547,7 @@ msgid "French"
 msgstr "Französisch"
 
 msgid "Full Shutdown"
-msgstr "WiiConnect24 aus"
+msgstr "Komplett"
 
 msgid "GAMEID_Gamename"
 msgstr "SPIELID_Spielname"
@@ -592,7 +592,7 @@ msgid "Game is already installed:"
 msgstr "Spiel ist bereits installiert:"
 
 msgid "Game partition"
-msgstr "Spielpartition"
+msgstr "nur Spiel"
 
 msgid "Gamename [GAMEID]"
 msgstr "Spielname [SPIELID]"
@@ -606,8 +606,11 @@ msgstr "Deutsch"
 msgid "HOME Menu"
 msgstr "HOME Menü"
 
+msgid "Hermes CIOS"
+msgstr "cIOS 222/223"
+
 msgid "Homebrew Apps Path"
-msgstr "Homebrew Apps"
+msgstr "Homebrew Anwedungen"
 
 msgid "Homebrew Appspath changed"
 msgstr "Pfad geändert"
@@ -642,7 +645,7 @@ msgid "Insert Disk"
 msgstr "Disc einlegen"
 
 msgid "Insert a Wii Disc!"
-msgstr "Eine Wii Disc einlegen!"
+msgstr "Bitte eine Wii Disc einlegen!"
 
 msgid "Insert an SD-Card to download images."
 msgstr "SD Karte einlegen um Bilder herunterzuladen."
@@ -751,16 +754,16 @@ msgid "Lock Console"
 msgstr "Konsole sperren"
 
 msgid "Locked"
-msgstr "Gesperrt"
+msgstr "gesperrt"
 
 msgid "Loop Directory"
-msgstr "Verzeichnis abspielen"
+msgstr "Verzeichnis wiederholen"
 
 msgid "Loop Music"
-msgstr "Scheife"
+msgstr "1 Titel wiederholen"
 
 msgid "Loop Sound"
-msgstr "Wiederholung"
+msgstr "Wiederholen"
 
 msgid "Mar"
 msgstr "März"
@@ -781,13 +784,13 @@ msgid "Mount DVD drive"
 msgstr "Spiel starten"
 
 msgid "Music Loop Mode"
-msgstr "HGM Wiederholung"
+msgstr "Wiederholungsmodus"
 
 msgid "Music Volume"
 msgstr "Musik Lautstärke"
 
 msgid "Neither"
-msgstr "Keine"
+msgstr "Nichts"
 
 msgid "Network init error"
 msgstr "Netzwerkinitialisierungsfehler"
@@ -796,7 +799,7 @@ msgid "New Disc Detected"
 msgstr "Neu Disc im Laufwerk festgestellt"
 
 msgid "Next"
-msgstr "Weiter"
+msgstr "Nächste"
 
 msgid "No"
 msgstr "Nein"
@@ -805,7 +808,7 @@ msgid "No .dol or .elf files found."
 msgstr "Keine .dol oder .elf Dateien gefunden."
 
 msgid "No Cheatfile found"
-msgstr "Keine Cheatdatei gefunden."
+msgstr "Keine Cheatdatei gefunden"
 
 msgid "No DOL file found on disc."
 msgstr "Keine DOL auf der Disc gefunden."
@@ -826,7 +829,7 @@ msgid "No WBFS or FAT/NTFS partition found"
 msgstr "Keine WBFS oder FAT/NTFS Partition gefunden"
 
 msgid "No cheats were selected"
-msgstr "Es wurden keine Cheats ausgewählt."
+msgstr "Es wurden keine Cheats ausgewählt"
 
 msgid "No data could be read."
 msgstr "Daten konnten nicht gelesen werden."
@@ -835,7 +838,7 @@ msgid "No file missing!"
 msgstr "Keine Datei fehlt!"
 
 msgid "No new updates."
-msgstr "Keine Updates verfügbar."
+msgstr "Keine Aktualisierungen verfügbar."
 
 msgid "No themes found on the site."
 msgstr "Keine Themes auf der Seite gefunden."
@@ -859,7 +862,7 @@ msgid "Not a WAD file."
 msgstr "Das ist keine WAD Datei."
 
 msgid "Not a Wii Disc"
-msgstr "Keine Wii Disc."
+msgstr "Das ist keine Wii Disc"
 
 msgid "Not enough free memory."
 msgstr "Nicht genügend freier Speicher."
@@ -889,7 +892,7 @@ msgid "Official Site:"
 msgstr "Offizielle Seite:"
 
 msgid "Only Customs"
-msgstr "nur Community"
+msgstr "nur von der Community"
 
 msgid "Only Original"
 msgstr "nur Originale"
@@ -925,7 +928,7 @@ msgid "Patch Country Strings"
 msgstr "Country Strings patchen"
 
 msgid "Pick from a list"
-msgstr "Wähle aus der Liste"
+msgstr "Wähle aus Liste"
 
 msgid "Play Count"
 msgstr "Spielzähler"
@@ -934,7 +937,7 @@ msgid "Play Next"
 msgstr "Nächster Titel"
 
 msgid "Play Once"
-msgstr "Einmal abspielen"
+msgstr "nur einmal abspielen"
 
 msgid "Play Previous"
 msgstr "Vorheriger Titel"
@@ -949,7 +952,7 @@ msgid "Power off the Wii"
 msgstr "Wii ausschalten"
 
 msgid "Prev"
-msgstr "Zurück"
+msgstr "Vorherige"
 
 msgid "Prompts Buttons"
 msgstr "Anzeige"
@@ -961,7 +964,7 @@ msgid "Quick Boot"
 msgstr "Schnelles Laden"
 
 msgid "Random Directory Music"
-msgstr "Zufällig"
+msgstr "Zufällig aus gewähltem Verzeichnis"
 
 msgid "Reading WAD data... Ok!"
 msgstr "Lese WAD Daten... OK!"
@@ -973,7 +976,7 @@ msgid "Released"
 msgstr "Erschienen am"
 
 msgid "Reload SD"
-msgstr "SD Karte erneut laden"
+msgstr "SD Karte erneut lesen"
 
 msgid "Remove update"
 msgstr "Update entfernen"
@@ -991,7 +994,7 @@ msgid "Reset to standard BGM?"
 msgstr "Auf Standard zurücksetzen?"
 
 msgid "Restarting..."
-msgstr "Starte neu..."
+msgstr "Damit die neue Version benutzt werden kann, muss der Loader neu gestartet werden."
 
 msgid "Return"
 msgstr "Zurück"
@@ -1048,7 +1051,7 @@ msgid "Shutdown System"
 msgstr "System herunterfahren"
 
 msgid "Shutdown to Idle"
-msgstr "WiiConnect24 an"
+msgstr "Stand By"
 
 msgid "Sort alphabetically"
 msgstr "Alphabetisch ordnen"
@@ -1090,7 +1093,7 @@ msgid "Successfully Updated"
 msgstr "Erfolgreich aktualisiert"
 
 msgid "Successfully Updated thanks to www.techjawa.com"
-msgstr "Erfolgreich aktualisiert. Dank an: www.techjawa.com"
+msgstr ""
 
 msgid "Successfully deleted:"
 msgstr "Erfolgreich gelöscht:"
@@ -1117,7 +1120,7 @@ msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "Das eingegebene Verzeichnis existiert nicht. Möchtest du es erstellen?"
 
 msgid "The wad file was installed.  But It could not be deleted from the SD card."
-msgstr "Die WAD Datei wurde installiert.  Sie konnte aber nicht von der SD Karte gelöscht werden."
+msgstr "Die WAD Datei wurde installiert.  Aber sie konnte nicht von der SD Karte gelöscht werden."
 
 #, c-format
 msgid "The wad installation failed with error %ld"
@@ -1154,13 +1157,16 @@ msgid "Tooltips"
 msgstr ""
 
 msgid "Transfer failed."
-msgstr "Übertragung fehlgeschlagen"
+msgstr "Übertragung fehlgeschlagen."
 
 msgid "USB Device not found"
-msgstr "USB Gerät nicht gefunden."
+msgstr "USB Gerät nicht gefunden"
 
 msgid "USB Loader GX is protected"
-msgstr "USB Loader GX ist jetzt geschützt."
+msgstr "USB Loader GX ist jetzt geschützt"
+
+msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
+msgstr "Hermes' cIOS funktioniert beim USB Loader GX nur mit rev4! Bitte versichere dich das du rev4 installiert hast!"
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
@@ -1185,13 +1191,13 @@ msgid "Unlock console to use this option."
 msgstr "Entsperre den Loader, um diese Option zu nutzen."
 
 msgid "Unlocked"
-msgstr "Entsperrt"
+msgstr "entsperrt"
 
 msgid "Unsupported format, try to extract manually."
 msgstr "Nicht unterstütztes Format. Versuch es manuell zu Entpacken."
 
 msgid "Update"
-msgstr ""
+msgstr "Aktualisieren"
 
 msgid "Update All"
 msgstr "Alles"
@@ -1203,7 +1209,7 @@ msgid "Update Files"
 msgstr "Aktualisieren"
 
 msgid "Update Path"
-msgstr "Updates"
+msgstr "Aktualisierungen"
 
 msgid "Update Path changed."
 msgstr "Pfad geändert"
@@ -1212,7 +1218,7 @@ msgid "Update all Language Files"
 msgstr "Sprachdateien aktualisieren"
 
 msgid "Update failed"
-msgstr "Update fehlgeschlagen"
+msgstr "Aktualisierung fehlgeschlagen"
 
 msgid "Update to"
 msgstr "Aktualisiere auf"
@@ -1297,10 +1303,10 @@ msgid "You don't have Parental Control enabled. If you wish to use Parental Cont
 msgstr "Du hast die Wii-Altersbeschränkung nicht aktiviert. Wenn du sie nutzen möchtest, aktiviere sie in den Wii-Systemeinstellungen."
 
 msgid "You have attempted to load a bad image"
-msgstr "Du hast versucht ein 'schlechtes Bild' zu laden."
+msgstr "Du hast versucht ein 'schlechtes Bild' zu laden"
 
 msgid "You need to select or format a partition"
-msgstr "Du must eine Partition auswählen oder formatieren."
+msgstr "Du must eine Partition auswählen oder formatieren"
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
@@ -1349,7 +1355,7 @@ msgid "for hosting the themes"
 msgstr "für das Hosten der Themes"
 
 msgid "for hosting the update files"
-msgstr "für das Hosten der Updates"
+msgstr "für das Hosten der Aktualisierungen"
 
 msgid "for the USB Loader source"
 msgstr "für die Veröffentlichung des USB Loader-Quellcodes"
@@ -1368,3 +1374,48 @@ msgstr "von"
 
 msgid "seconds left"
 msgstr "Sekunden verbleiben"
+
+#~ msgid "contains over 255 lines of code.  It will produce unexpected results."
+#~ msgstr "enthält mehr als 255 Zeilen Code.  Es wird unerwartete Ergebnisse geben."
+
+#~ msgid "Backgroundmusic Path changed."
+#~ msgstr "Pfad geändert"
+
+#~ msgid "Set as backgroundmusic?"
+#~ msgstr "Als Hintergrundmusik verwenden?"
+
+#~ msgid "The file is not a .wad"
+#~ msgstr "Die Datei ist keine .wad"
+
+#~ msgid "Install not possible"
+#~ msgstr "Installation nicht möglich"
+
+#~ msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
+#~ msgstr "Du benutzt das NTFS Dateisystem. Wegen möglicher Schreibfehler auf einer NTFS Partition, ist das Installieren eines Spiels nicht möglich."
+
+#~ msgid "Partition Format Menu"
+#~ msgstr "Partitionen Formatierungs-Menü"
+
+#~ msgid "Unlock the app first."
+#~ msgstr "Entsperre zuerst den Loader."
+
+#~ msgid "You can't access this menu!"
+#~ msgstr "Du kannst auf dieses Menü nicht zugreifen!"
+
+#~ msgid "Can't decompress LZ77"
+#~ msgstr "LZ77 konnte nicht entpackt werden"
+
+#~ msgid "Can't find disc"
+#~ msgstr "Keine Disc gefunden"
+
+#~ msgid "IMD5 Header not right."
+#~ msgstr "IMD5 Header falsch."
+
+#~ msgid "IMET Header wrong."
+#~ msgstr "IMET Header falsch."
+
+#~ msgid "Homebrew Channel"
+#~ msgstr "Homebrew Kanal"
+
+#~ msgid "You need to start this game one time to create a save file, then exit and start it again."
+#~ msgstr "Du must dieses Spiel einmal starten um einen Speicherstand zu erstellen, dann verlassen und es neustarten."

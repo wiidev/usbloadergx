@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-11 06:03+0200\n"
+"POT-Creation-Date: 2010-03-16 16:17+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: omercigingelini\n"
 "Language-Team: omercigingelini\n"
@@ -606,6 +606,9 @@ msgstr "Almanca"
 msgid "HOME Menu"
 msgstr "HOME Menü"
 
+msgid "Hermes CIOS"
+msgstr ""
+
 msgid "Homebrew Apps Path"
 msgstr "Homebrew Yazılımlarının Yolu"
 
@@ -1162,6 +1165,9 @@ msgstr "USB Aygıtı bulunamadı"
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX koruma altında"
 
+msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
+msgstr "USB Loader GX sadece Hermes CIOS rev4 ile çalışır! Lütfen rev4 ün yüklü olduğundan emin olun!"
+
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
 msgstr "Az önce indirilen wad açılamıyor(%s)"
@@ -1368,3 +1374,39 @@ msgstr "./"
 
 msgid "seconds left"
 msgstr "saniye kaldı"
+
+#~ msgid "contains over 255 lines of code.  It will produce unexpected results."
+#~ msgstr "255 satırdan fazla kod içeriyor. Beklenmeyen sonuçlar üretebilir."
+
+#~ msgid "Backgroundmusic Path changed."
+#~ msgstr "Arkaplan müzik Yolu değişti."
+
+#~ msgid "Set as backgroundmusic?"
+#~ msgstr "Arkaplan müziği olarak ayarla?"
+
+#~ msgid "The file is not a .wad"
+#~ msgstr "Bu dosya .wad değil"
+
+#~ msgid "Can't decompress LZ77"
+#~ msgstr "LZ77 açılamıyor"
+
+#~ msgid "Can't find disc"
+#~ msgstr "Disk bulunamıyor"
+
+#~ msgid "IMD5 Header not right."
+#~ msgstr "IMD5 Başlığı doğru değil"
+
+#~ msgid "IMET Header wrong."
+#~ msgstr "IMET Başlığı yanlış"
+
+#~ msgid "No WBFS or FAT game partition found"
+#~ msgstr "WBFS veya FAT oyun bölümü bulunamadı"
+
+#~ msgid "for FAT support"
+#~ msgstr "FAT desteği için"
+
+#~ msgid "Failed to extract opening.bnr"
+#~ msgstr "opening.bnr çıkartılamadı"
+
+#~ msgid "Homebrew Channel"
+#~ msgstr "Homebrew Kanalı"

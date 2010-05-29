@@ -11,9 +11,6 @@
 #include "usbstorage2.h"
 #include "frag.h"
 #include "utils.h"
-#include "sys.h"
-#include "wdvd.h"
-#include "gecko.h"
 
 FragList *frag_list = NULL;
 
@@ -155,31 +152,27 @@ int set_frag_list(u8 *id)
 {
 	if (wbfs_part_fs == PART_FS_WBFS) return 0;
 	if (frag_list == NULL) {
+		if (wbfs_part_fs == PART_FS_FAT) {
+			// fall back to old fat method
+//			printf("FAT: fallback to old method\n");
+	   		return 0;
+		}
+		// ntfs has no fallback, return error
 		return -1;
 	}
 
 	// (+1 for header which is same size as fragment)
 	int size = sizeof(Fragment) * (frag_list->num + 1);
-	int ret;
-	DCFlushRange(frag_list, size);
-	if (is_ios_type(IOS_TYPE_HERMES)) {
-		ret = USBStorage_WBFS_SetFragList(frag_list, size);
-	} else {
-		gprintf("Calling WDVD_SetFragList\n");
-		ret = WDVD_SetFragList(wbfsDev, frag_list, size);
-	}
+	int ret = USBStorage_WBFS_SetFragList(frag_list, size);
 	if (ret) {
+//		printf("set_frag: %d\n", ret);
 		return ret;
 	}
 
 	// verify id matches
 	char discid[8];
 	memset(discid, 0, sizeof(discid));
-	if (is_ios_type(IOS_TYPE_HERMES)) {
-		ret = USBStorage_WBFS_Read(0, 8, discid);
-	} else { 
-		ret = WDVD_UnencryptedRead(discid, 8, 0);
-	}
-	return (memcmp(id, discid, 6) != 0) ? -1 : 0;
+	ret = USBStorage_WBFS_Read(0, 6, discid);
+	return 0;
 }
 

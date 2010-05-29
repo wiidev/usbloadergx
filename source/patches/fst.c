@@ -32,7 +32,7 @@
 #include "fatmounter.h"
 #include "settings/cfg.h"
 #include "mload/mload.h"
-#include "mload/mload_modules.h"
+#include "mload/dip_plugin.h"
 #include "gecko.h"
 
 #include "patchcode.h"
@@ -830,7 +830,9 @@ u32 do_bca_code(u8 *gameid)
 			}
 		}
 
-		Set_DIP_BCA_Datas((u8 *) &bcaCode);
+		mload_seek(*((u32 *) (dip_plugin+15*4)), SEEK_SET);	// offset 15 (bca_data area)
+		mload_write(bcaCode, 64);
+		mload_close();
 	}
 	return 0;
 }

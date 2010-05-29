@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-11 06:03+0200\n"
+"POT-Creation-Date: 2010-03-16 16:17+0100\n"
 "PO-Revision-Date: 2009-12-29 11:05+0100\n"
 "Last-Translator: Springdale\n"
 "Language-Team: Tusk, Springdale\n"
@@ -606,6 +606,9 @@ msgstr "Német"
 msgid "HOME Menu"
 msgstr "HOME Menü"
 
+msgid "Hermes CIOS"
+msgstr ""
+
 msgid "Homebrew Apps Path"
 msgstr "Homebrew Útvonal"
 
@@ -1162,6 +1165,9 @@ msgstr "USB Meghajtó nem található"
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX levédve"
 
+msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
+msgstr "Az USB Loader GX csak Hermes CIOS rev 4 mellett működik! Gyõződj meg róla, hogy telepítetted!"
+
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
 msgstr "Az épp letöltött wad megnyitása nem sikerült (%s)."
@@ -1368,3 +1374,36 @@ msgstr "./"
 
 msgid "seconds left"
 msgstr "hátralévõ másodperc"
+
+#~ msgid "contains over 255 lines of code.  It will produce unexpected results."
+#~ msgstr "több mint 255 sorból áll a kód. Kiszámíthatatlan eredmények várhatók."
+
+#~ msgid "Backgroundmusic Path changed."
+#~ msgstr "Háttérzene útvonala megváltozott."
+
+#~ msgid "Set as backgroundmusic?"
+#~ msgstr "Beállítod háttérzenének?"
+
+#~ msgid "The file is not a .wad"
+#~ msgstr "A fájl nem .wad"
+
+#~ msgid "Install not possible"
+#~ msgstr "A telepítés nem lehetséges"
+
+#~ msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
+#~ msgstr "NTFS fájlrendszert használata esetén a lehetséges írási hibák miatt játékok telepítése nem lehetséges."
+
+#~ msgid "Can't decompress LZ77"
+#~ msgstr "LZ77 nem kitömöríthetõ"
+
+#~ msgid "Can't find disc"
+#~ msgstr "Lemez nem található"
+
+#~ msgid "IMD5 Header not right."
+#~ msgstr "IMD5 Fejléc nem megfelelõ."
+
+#~ msgid "IMET Header wrong."
+#~ msgstr "IMET fejléc nem megfelelõ."
+
+#~ msgid "Exit USB Loader GX?"
+#~ msgstr "Kilépés az USB Loader GX-bõl?"

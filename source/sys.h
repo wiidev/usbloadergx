@@ -1,10 +1,6 @@
 #ifndef _SYS_H_
 #define _SYS_H_
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 void wiilight(int enable);
 
 /* Prototypes */
@@ -26,19 +22,6 @@ extern s32 ios222rev;
 extern s32 ios223rev;
 extern s32 ios249rev;
 extern s32 ios250rev;
-
-#define IOS_TYPE_UNK    0
-#define IOS_TYPE_WANIN  1
-#define IOS_TYPE_HERMES 2
-#define IOS_TYPE_KWIIRK 3
-
-int get_ios_type();
-int is_ios_type(int type);
-int ios_supports_frag();
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif
 

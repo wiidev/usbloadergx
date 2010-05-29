@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-11 06:03+0200\n"
+"POT-Creation-Date: 2010-03-16 16:17+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: nextos@korea.com\n"
 "Language-Team: \n"
@@ -606,6 +606,9 @@ msgstr "독일어"
 msgid "HOME Menu"
 msgstr "HOME 메뉴"
 
+msgid "Hermes CIOS"
+msgstr ""
+
 msgid "Homebrew Apps Path"
 msgstr "홈브류 경로"
 
@@ -1162,6 +1165,9 @@ msgstr "USB 장치가 없습니다."
 msgid "USB Loader GX is protected"
 msgstr "USB 로더 GX 잠김 상태"
 
+msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
+msgstr ""
+
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
 msgstr "방금 다운로드한 wad화일(%s)을 열수가 없음."
@@ -1368,3 +1374,27 @@ msgstr "중"
 
 msgid "seconds left"
 msgstr "초 남았습니다"
+
+#~ msgid "contains over 255 lines of code.  It will produce unexpected results."
+#~ msgstr "255라인 이상이면 예상치 못한 결과가 나오죠."
+
+#~ msgid "Backgroundmusic Path changed."
+#~ msgstr "배경음악 경로 변경됨."
+
+#~ msgid "Set as backgroundmusic?"
+#~ msgstr "벼경음악 설정?"
+
+#~ msgid "The file is not a .wad"
+#~ msgstr "화일이 .wad 아님"
+
+#~ msgid "Exit USB Loader GX?"
+#~ msgstr "USB로더 GX를 종료할까요?"
+
+#~ msgid "No WBFS partition found"
+#~ msgstr "WBFS 파티션이 없습니다."
+
+#~ msgid "You need to format a partition"
+#~ msgstr "파티션을 포맷해야 합니다"
+
+#~ msgid "Homebrew Channel"
+#~ msgstr "홈브류 채널"

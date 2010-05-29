@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-# portuguese_pt.lang - r921
+# portuguese_pt.lang - r903
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-11 06:03+0200\n"
-"PO-Revision-Date: 2010-03-22 10:55-0000\n"
+"POT-Creation-Date: 2010-03-16 16:17+0100\n"
+"PO-Revision-Date: 2010-02-01 18:10-0000\n"
 "Last-Translator: Sky8000\n"
 "Language-Team: Sky8000 <sky8000@hotmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -606,6 +606,9 @@ msgstr "Alemão"
 msgid "HOME Menu"
 msgstr "Menú Inicial"
 
+msgid "Hermes CIOS"
+msgstr "CIOS Hermes"
+
 msgid "Homebrew Apps Path"
 msgstr "Pasta Apps Homebrew"
 
@@ -754,10 +757,10 @@ msgid "Locked"
 msgstr "Bloqueado"
 
 msgid "Loop Directory"
-msgstr "Repetir Pasta"
+msgstr ""
 
 msgid "Loop Music"
-msgstr "Repetir Música"
+msgstr ""
 
 msgid "Loop Sound"
 msgstr "Repetir Sons"
@@ -856,7 +859,7 @@ msgid "Not a DOL/ELF file."
 msgstr "Não é um ficheiro DOL/ELF válido."
 
 msgid "Not a WAD file."
-msgstr "Não é um ficheiro WAD."
+msgstr ""
 
 msgid "Not a Wii Disc"
 msgstr "Não é um Disco da Wii"
@@ -934,7 +937,7 @@ msgid "Play Next"
 msgstr "Próxima"
 
 msgid "Play Once"
-msgstr "Tocar uma vez."
+msgstr ""
 
 msgid "Play Previous"
 msgstr "Anterior"
@@ -961,7 +964,7 @@ msgid "Quick Boot"
 msgstr "Arranque Rápido"
 
 msgid "Random Directory Music"
-msgstr "Pasta de Música Aleatória"
+msgstr ""
 
 msgid "Reading WAD data... Ok!"
 msgstr "Lendo dados do WAD... Ok!"
@@ -1090,7 +1093,7 @@ msgid "Successfully Updated"
 msgstr "Actualização Concluída"
 
 msgid "Successfully Updated thanks to www.techjawa.com"
-msgstr "Actualizado com Sucesso graças a www.techjawa.com"
+msgstr ""
 
 msgid "Successfully deleted:"
 msgstr "Eliminado com Sucesso:"
@@ -1161,6 +1164,9 @@ msgstr "Dispositivo USB não encontrado"
 
 msgid "USB Loader GX is protected"
 msgstr "O USB Loader GX está bloqueado"
+
+msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
+msgstr "O USB Loader GX só suporta o CIOS Hermes revisão 4! Verifique se esta é a revisão que tem instalada!"
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
@@ -1368,3 +1374,48 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
+
+#~ msgid "contains over 255 lines of code.  It will produce unexpected results."
+#~ msgstr "contém mais de 255 linhas de código. Os resultados podem ser inesperados."
+
+#~ msgid "Backgroundmusic Path changed."
+#~ msgstr "Pasta Música Fundo alterada"
+
+#~ msgid "Set as backgroundmusic?"
+#~ msgstr "Definir como música de fundo?"
+
+#~ msgid "The file is not a .wad"
+#~ msgstr "O ficheiro não é um .wad"
+
+#~ msgid "Install not possible"
+#~ msgstr "Não é possível instalar"
+
+#~ msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
+#~ msgstr "Está a utilizar um sistema de ficheiros NTFS. Devido à possibilidade de ocorrerem erros na gravação não será possível instalar jogos."
+
+#~ msgid "Partition Format Menu"
+#~ msgstr "Menu de Formatação de Partição"
+
+#~ msgid "Unlock the app first."
+#~ msgstr "Desbloquear aplicação primeiro."
+
+#~ msgid "You can't access this menu!"
+#~ msgstr "Não tem acesso a este menu!"
+
+#~ msgid "Can't decompress LZ77"
+#~ msgstr "Não é possível descomprimir LZ77"
+
+#~ msgid "Can't find disc"
+#~ msgstr "Disco não encontrado"
+
+#~ msgid "IMD5 Header not right."
+#~ msgstr "O cabeçalho IMD5 não está correcto."
+
+#~ msgid "IMET Header wrong."
+#~ msgstr "Cabeçalho IMET errado."
+
+#~ msgid "Failed to extract opening.bnr"
+#~ msgstr "Falha ao extrair o opening.bnr"
+
+#~ msgid "Homebrew Channel"
+#~ msgstr "Canal Homebrew"

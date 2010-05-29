@@ -1258,6 +1258,7 @@ void cfg_parsearg(int argc, char **argv)
 
 // PER-GAME SETTINGS
 
+
 // return existing or new
 struct Game_CFG* cfg_get_game(u8 *id) {
     struct Game_CFG *game = CFG_get_game_opt(id);
@@ -1266,22 +1267,6 @@ struct Game_CFG* cfg_get_game(u8 *id) {
     game = &cfg_game[num_saved_games];
     num_saved_games++;
     return game;
-}
-
-void CFG_set_game_default()
-{
-	videoChoice = Settings.video;
-	viChoice = Settings.vpatch;
-	languageChoice = Settings.language;
-	ocarinaChoice = Settings.ocarina;
-	fix002 = Settings.error002;
-	countrystrings = Settings.patchcountrystrings;
-	alternatedol = off;
-	alternatedoloffset = 0;
-	reloadblock = off;
-	iosChoice = Settings.cios;
-	parentalcontrolChoice = 0;
-	strcpy(alternatedname, "");
 }
 
 // current options to game
@@ -1753,7 +1738,6 @@ struct Game_CFG* CFG_get_game_opt(u8 *id) {
             return &cfg_game[i];
         }
     }
-	CFG_set_game_default();
     return NULL;
 }
 
@@ -1950,22 +1934,4 @@ void GetLanguageToLangCode(int *langid, char *langcode) {
         sprintf(langcode, "KO");
         break;
     }
-}
-
-int ciosSetting2Cios(int setting)
-{
-	switch (setting) {
-	case ios222:
-		return 222;
-	case ios223:
-		return 223;
-	case ios224:
-		return 224;
-	case ios250:
-		return 250;
-	case ios249:
-	default:
-		return 249;
-	}
-	
 }

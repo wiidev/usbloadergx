@@ -13,7 +13,6 @@
 #include "settings/cfg.h"
 #include "gecko.h"
 #include "patches/wip.h"
-#include "sys.h"
 
 extern bool geckoinit;
 
@@ -33,6 +32,11 @@ static u8 *appldr = (u8 *)0x81200000;
 /* Variables */
 static u32 buffer[0x20] ATTRIBUTE_ALIGN(32);
 struct SSettings Settings;
+
+static void __noprint(const char *fmt, ...) {
+}
+
+
 
 bool compare_videomodes(GXRModeObj* mode1, GXRModeObj* mode2) {
     if (mode1->viTVMode != mode2->viTVMode || mode1->fbWidth != mode2->fbWidth ||	mode1->efbHeight != mode2->efbHeight || mode1->xfbHeight != mode2->xfbHeight ||
@@ -224,30 +228,10 @@ void Anti_002_fix(void *Address, int Size) {
     }
 }
 
-void PretendThereIsADiscInTheDrive(void *buffer, u32 len)
-
-{
-   const u8 oldcode[] = { 0x54, 0x60, 0xF7, 0xFF, 0x40, 0x82, 0x00, 0x0C, 0x54, 0x60, 0x07, 0xFF, 0x41, 0x82, 0x00, 0x0C };
-   const u8 newcode[] = { 0x54, 0x60, 0xF7, 0xFF, 0x40, 0x82, 0x00, 0x0C, 0x54, 0x60, 0x07, 0xFF, 0x48, 0x00, 0x00, 0x0C };
-
-  int n;
-
-     /* Patch cover register */
-
-  for(n=0;n<(len-sizeof(oldcode));n+=4)
-  {
-    if (memcmp(buffer+n, (void *) oldcode, sizeof(oldcode)) == 0)
-    {
-      memcpy(buffer+n, (void *) newcode, sizeof(newcode));
-    }
-  }
-
-}
-
 /** Thanks to WiiPower **/
 bool NewSuperMarioBrosPatch(void *Address, int Size)
 {
-	if (is_ios_type(IOS_TYPE_HERMES)) return false; // Don't use this when using Hermes, it'll use the BCA fix instead...
+	if (IOS_GetVersion() == 222 || IOS_GetVersion() == 223) return false; // Don't use this when using Hermes, it'll use the BCA fix instead...
 
 	if (memcmp("SMNE", (char *)0x80000000, 4) == 0)
 	{
@@ -290,8 +274,6 @@ bool NewSuperMarioBrosPatch(void *Address, int Size)
 
 void gamepatches(void * dst, int len, u8 videoSelected, u8 patchcountrystring, u8 vipatch, u8 cheat) {
 
-	PretendThereIsADiscInTheDrive(dst, len);
-
 	GXRModeObj** table = NULL;
     if (videoSelected == 5) // patch
 
@@ -320,15 +302,14 @@ void gamepatches(void * dst, int len, u8 videoSelected, u8 patchcountrystring, u
         Search_and_patch_Video_Modes(dst, len, table);
     }
 
-	if(cheat)
-		dogamehooks(dst,len);
+	dogamehooks(dst,len);
 
-    if (vipatch)
-	vidolpatcher(dst,len);
+    //if (vipatch)//moved to degamehooks()
+    //    vidolpatcher(dst,len);
 
 
     /*LANGUAGE PATCH - FISHEARS*/
-    langpatcher(dst,len);
+    //langpatcher(dst,len);//moved to degamehooks()
 
     /*Thanks to WiiPower*/
     if (patchcountrystring == 1)
@@ -347,7 +328,7 @@ void gamepatches(void * dst, int len, u8 videoSelected, u8 patchcountrystring, u
 
 }
 
-s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8 patchcountrystring, u8 error002fix, u8 alternatedol, u32 alternatedoloffset, u32 rtrn) {
+s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8 patchcountrystring, u8 error002fix, u8 alternatedol, u32 alternatedoloffset) {
     app_entry appldr_entry;
     app_init  appldr_init;
     app_main  appldr_main;
@@ -355,8 +336,7 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
 
     u32 appldr_len;
     s32 ret;
-	gprintf("Apploader_Run( %p, %d, %d, %d, %d, %d, %d, %d, %08x )\n", \
-		entry, cheat, videoSelected, vipatch, patchcountrystring, error002fix, alternatedol, alternatedoloffset, rtrn );
+	gprintf("\nApploader_Run() started");
 
 	//u32 geckoattached = usb_isgeckoalive(EXI_CHANNEL_1);
 	//if (geckoattached)usb_flush(EXI_CHANNEL_1);
@@ -382,16 +362,13 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
     appldr_entry(&appldr_init, &appldr_main, &appldr_final);
 
     /* Initialize apploader */
-    appldr_init( gprintf );
+    appldr_init(__noprint);
 
     if (error002fix!=0) {
         /* ERROR 002 fix (thanks to WiiPower for sharing this)*/
 		*(u32 *)0x80003188 = *(u32 *)0x80003140;
 //        *(u32 *)0x80003140 = *(u32 *)0x80003188;
     }
-
-    u32 dolStart = 0x90000000;
-    u32 dolEnd = 0x0;
 
     for (;;) {
         void *dst = NULL;
@@ -405,21 +382,9 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
         /* Read data from DVD */
         WDVD_Read(dst, len, (u64)(offset << 2));
 
-	if( !alternatedol )gamepatches(dst, len, videoSelected, patchcountrystring, vipatch, cheat);
+        gamepatches(dst, len, videoSelected, patchcountrystring, vipatch, cheat);
 
         DCFlushRange(dst, len);
-	if( (u32)dst < dolStart )dolStart = (u32)dst;
-	if( (u32)dst + len > dolEnd ) dolEnd = (u32)dst + len;
-    }
-
-    //this patch should be run on the entire dol at 1 time
-    if( !alternatedol && rtrn)
-    {
-	if( PatchReturnTo( (u32*)dolStart, dolEnd - dolStart , rtrn) )
-	{
-	    //gprintf("return-to patched\n" );
-	    DCFlushRange( (u32*)dolStart, dolEnd - dolStart );
-	}
     }
 
     *entry = appldr_final();
@@ -437,11 +402,8 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
             DCFlushRange(dolbuffer, dollen);
 
             gamepatches(dolbuffer, dollen, videoSelected, patchcountrystring, vipatch, cheat);
-	    if( PatchReturnTo( (u32*)dolStart, dolEnd - dolStart , rtrn ) )
-	    {
-		//gprintf("return-to patched\n" );
-		DCFlushRange(dolbuffer, dollen);
-	    }
+
+            DCFlushRange(dolbuffer, dollen);
 
             /* Set entry point from apploader */
             *entry = (entry_point) load_dol_image(dolbuffer);
@@ -455,7 +417,7 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
 
         FST_ENTRY *fst = (FST_ENTRY *)*(u32 *)0x80000038;
 
-	*entry = (entry_point) Load_Dol_from_disc(fst[alternatedoloffset].fileoffset, videoSelected, patchcountrystring, vipatch, cheat, rtrn );
+        *entry = (entry_point) Load_Dol_from_disc(fst[alternatedoloffset].fileoffset, videoSelected, patchcountrystring, vipatch, cheat);
 
         if (*entry == 0)
             SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);

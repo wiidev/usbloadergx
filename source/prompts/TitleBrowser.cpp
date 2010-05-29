@@ -205,7 +205,7 @@ int TitleBrowser(u32 type) {
             }
         }
         if (!found) {
-            if (getName00(name[i], TITLE_ID(0x00010002, sys_titles[i-num_titles]), 2)>=0)
+            if (getName00(name[i], TITLE_ID(0x00010002, sys_titles[i-num_titles]))>=0)
                 found=2;
 
             if (!found) {

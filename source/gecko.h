@@ -11,7 +11,6 @@ extern "C" {
 	//use this just like printf();
 	void gprintf(const char *str, ...);
 	bool InitGecko();
-	void hexdump(void *d, int len);
 #else
 	#define gprintf(...)
 	#define InitGecko()      false

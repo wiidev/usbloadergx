@@ -16,7 +16,6 @@
 #include <unistd.h>
 #include <locale.h>
 #include <wiiuse/wpad.h>
-#include <ogc/libversion.h>
 //#include <debug.h>
 extern "C"
 {
@@ -96,6 +95,21 @@ static void BootUpProblems()
     time_t endtime = time(0) + 30;
     do
     {
+        /*ret2 = IOS_ReloadIOSsafe(249);
+        if (ret2 < 0) {
+            ret2 = IOS_ReloadIOSsafe(222);
+            SDCard_Init();
+            load_ehc_module();
+            SDCard_deInit();
+            if(ret2 <0) {
+                boottext.SetText("ERROR: cIOS could not be loaded!");
+                bootimage.Draw();
+                boottext.Draw();
+                Menu_Render();
+        sleep(5);
+        SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
+        }
+        }*/
         USBDevice_deInit();
         USBDevice_Init();
         ret2 = WBFS_Init(WBFS_DEVICE_USB);
@@ -140,16 +154,15 @@ unsigned int *xfb = NULL;
 
 void InitTextVideo ()
 {
-    gprintf("\n\nInitTextVideo ()");
+    gprintf("\nInitTextVideo ()");
     if (textVideoInit)
     {
-	gprintf("...0\n");
+        gprintf("...0");
         return;
     }
     dbvideo=1;
     VIDEO_Init();
-	
-	// get default video mode
+                                                  // get default video mode
     GXRModeObj *vmode = VIDEO_GetPreferredMode(NULL);
 
     // widescreen fix
@@ -174,7 +187,7 @@ void InitTextVideo ()
     //send console output to the gecko
     if (geckoinit)CON_EnableGecko(1, true);
     textVideoInit = true;
-    gprintf("...1\n");
+    gprintf("...1");
 
 }
 
@@ -195,13 +208,12 @@ main(int argc, char *argv[])
 
     __exception_setreload(5);                     //auto reset code dump nobody gives us codedump info anyways.
 
-    gprintf("------------------\n");
-    gprintf("USB Loader GX rev%s\n",GetRev());
-    gprintf("<< %s >>\n", _V_STRING );
-    gprintf("main(%d", argc);
+    gprintf("\n\n------------------");
+    gprintf("\nUSB Loader GX rev%s",GetRev());
+    gprintf("\nmain(%d", argc);
     for (int i=0;i<argc;i++)
         gprintf(", %s",argv[i]?argv[i]:"<NULL>");
-    gprintf(")\n");
+    gprintf(")");
 
     // This part is added, because we need a identify patched ios
 //    printf("\n\tReloading into ios 236");
@@ -211,7 +223,7 @@ main(int argc, char *argv[])
         IOS_ReloadIOSsafe(36);
     }
 
-    printf("Starting up\n");
+    printf("\n\tStarting up");
 
     MEM2_init(36);                                // Initialize 36 MB
     MEM2_takeBigOnes(true);
@@ -281,7 +293,7 @@ main(int argc, char *argv[])
 
     if (ret < 0)
     {
-	    printf("\n\tIOS 249 failed, reloading ios 222...");
+        printf("\n\tIOS 249 failed, reloading ios 222...");
         ret = IOS_ReloadIOSsafe(222);
         printf("%d", ret);
 
@@ -305,7 +317,12 @@ main(int argc, char *argv[])
                 }
             }
         }
-		load_ehc_module();
+        printf("\n\tInitialize sd card");
+        SDCard_Init();
+        printf("\n\tLoad ehc module");
+        load_ehc_module();
+        printf("\n\tdeinit sd card");
+        SDCard_deInit();
     }
 
     printf("\n\tInit wbfs...");
@@ -317,8 +334,22 @@ main(int argc, char *argv[])
         printf("\n\tYou have issues with a slow disc, or a difficult disc\n\tReloading 222...");
         ret = IOS_ReloadIOSsafe(222);
         printf("%d", ret);
+        /*if(ret < 0) {
+        //			printf("\n\tSleeping for 4 seconds");
+        //			sleep(4);
+
+            InitVideo(); // Initialise video
+            Menu_Render();
+            BootUpProblems();
+            startupproblem = true;
+            ret = 1;
+        }*/
+        printf("\n\tInitialize sd card");
+        SDCard_Init();
         printf("\n\tLoad ehc module");
         load_ehc_module();
+        printf("\n\tdeinit sd card");
+        SDCard_deInit();
 
         printf("\n\tInitialize wbfs...");
         USBDevice_deInit();
@@ -376,24 +407,65 @@ main(int argc, char *argv[])
     //	gprintf("\n\tbootDevice = %s",bootDevice);
 
     /* Load Custom IOS */
-	if (Settings.cios != IOS_GetVersion())
-	{
-        printf("\n\tReloading IOS to config setting (%d)...", ciosSetting2Cios(Settings.cios));
-		if (Sys_IosReload(ciosSetting2Cios(Settings.cios)) < 0) {
-			int alt_ios = (Settings.cios == ios222 || Settings.cios == ios223) ? 249 : 222;
-			ret = Sys_IosReload(alt_ios);
-
-			if (ret < 0)
-			{
-				printf("\nERROR: cIOS could not be loaded!");
-				sleep(5);
-				exit(0);
-			}
-		}
+    if ((Settings.cios == ios222 && IOS_GetVersion() != 222) ||
+        (Settings.cios == ios223 && IOS_GetVersion() != 223))
+    {
+        printf("\n\tReloading IOS to config setting (%d)...", Settings.cios == ios222 ? 222 : 223);
+        SDCard_deInit();                          // unmount SD for reloading IOS
+        USBDevice_deInit();                       // unmount USB for reloading IOS
+        USBStorage2_Deinit();
+        ret = IOS_ReloadIOSsafe(Settings.cios == ios222 ? 222 : 223);
+        printf("%d", ret);
         SDCard_Init();
-	}
+        load_ehc_module();
+        if (ret < 0)
+        {
+            SDCard_deInit();
+            Settings.cios = ios249;
+            ret = IOS_ReloadIOSsafe(249);
+            // now mount SD:/  //no need to keep mindlessly mounting and unmounting SD card
+            SDCard_Init();
+        }
 
+        USBDevice_Init();                         // and mount USB:/
+        WBFS_Init(WBFS_DEVICE_USB);
+    } else if ((Settings.cios == ios249 && IOS_GetVersion() != 249) ||
+        (Settings.cios == ios250 && IOS_GetVersion() != 250))
+    {
+
+        printf("\n\tReloading IOS to config setting (%d)...", ios249 ? 249 : 250);
+        SDCard_deInit();                          // unmount SD for reloading IOS
+        USBDevice_deInit();                       // unmount USB for reloading IOS
+        USBStorage2_Deinit();
+        ret = IOS_ReloadIOSsafe(ios249 ? 249 : 250);
+        printf("%d", ret);
+        if (ret < 0)
+        {
+            Settings.cios = ios222;
+            ret = IOS_ReloadIOSsafe(222);
+            SDCard_Init();
+            load_ehc_module();
+        }
+
+        else SDCard_Init();                       // now mount SD:/  //no need to keep mindlessly mounting and unmounting SD card
+        USBDevice_Init();                         // and mount USB:/
+        WBFS_Init(WBFS_DEVICE_USB);
+    }
+
+    //	Partition_GetList(&partitions);
+
+    if (ret < 0)
+    {
+        printf("\nERROR: cIOS could not be loaded!");
+        sleep(5);
+        exit(0);
+        //SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
+    }
+    //gprintf("\n\tcIOS = %u (Rev %u)",IOS_GetVersion(), IOS_GetRevision());//don't need gprintf if sending console shit to gecko, too
     printf("\n\tcIOS = %u (Rev %u)",IOS_GetVersion(), IOS_GetRevision());
+
+    //	printf("Sleeping for 5 seconds\n");
+    //	sleep(5);
 
     //if a ID was passed via args copy it and try to boot it after the partition is mounted
     //its not really a headless mode.  more like hairless.

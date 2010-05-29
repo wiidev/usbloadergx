@@ -484,52 +484,115 @@ return ret;
 
 }
 
-int mload_get_version()
+/*
+int load_ehc_module()
 {
-	int ret;
-	if(mload_init()<0) return -1;
-	ret = IOS_IoctlvFormat(hid, mload_fd, MLOAD_GET_MLOAD_VERSION, ":");
-	return ret;
-}
+	int is_ios=0;
+	FILE *fp;
 
+	if(!external_ehcmodule)
+		{
 
+		fp=fopen("SD:/apps/usbloader_gx/ehcmodule.elf","rb");
+		if(fp==NULL)
+			fp=fopen("SD:/apps/usbloadergx/ehcmodule.elf","rb");
 
-/* IOS info structure */
-typedef struct {
-	/* Syscall base */
-	u32 syscall;
+		if(fp!=NULL)
+			{
 
-	/* Module versions */
-	u32 dipVersion;
-	u32 esVersion;
-	u32 ffsVersion;
-	u32 iopVersion;
-} iosInfo;
+			fseek(fp, 0, SEEK_END);
+			size_external_ehcmodule = ftell(fp);
+			external_ehcmodule = memalign(32, size_external_ehcmodule);
+			if(!external_ehcmodule) 
+				{fclose(fp);}
+			else
+				{
+				fseek(fp, 0, SEEK_SET);
 
-int wanin_mload_get_IOS_base()
-{
-	int ret;
-	iosInfo ios;
-	memset(&ios, 0, sizeof(ios));
-
-	if(mload_init()<0) return -1;
-	
-	ret= IOS_IoctlvFormat(hid, mload_fd, MLOAD_GET_IOS_BASE, ":d", &ios, sizeof(ios));
-	//printf("get_ios_base: %d %x\n", ret, ios.dipVersion);
-	if (ret == 0) {
-		switch(ios.dipVersion) {
-			case 0x48776F72: /* DIP: 07/11/08 14:34:26 */
-				return 37;
-
-			case 0x4888E14C: /* DIP: 07/24/08 20:08:44 */
-				return 38;
-
-			case 0x4A262AF5: /* DIP: 06/03/09 07:49:09 */
-				return 57;
-
-			case 0x492ACA9D: /* DIP: 11/24/08 15:39:09 */
-				return 60;
+				if(fread(external_ehcmodule,1, size_external_ehcmodule ,fp)!=size_external_ehcmodule)
+					{free(external_ehcmodule); external_ehcmodule=NULL;}
+			
+				fclose(fp);
+				}
+			}
 		}
-	}
-	return ret;
+	
+	if(!external_ehcmodule)
+		{
+		if(mload_init()<0) return -1;
+		
+		if (IOS_GetRevision() == 4) {
+			gprintf("Loading ehcmodule v4\n");
+			mload_elf((void *) ehcmodule_frag_v4_bin, &my_data_elf);
+		} else if (IOS_GetRevision() == 0) { // 0? Strange value for v5 ehcmodule
+			gprintf("Loading ehcmodule v5\n");
+			mload_elf((void *) ehcmodule_frag_v5_bin, &my_data_elf);
+		}
+		thread_id = mload_run_thread(my_data_elf.start, my_data_elf.stack, my_data_elf.size_stack, my_data_elf.prio);
+		if(thread_id < 0) return -1;
+		}
+	else
+		{
+		if(mload_init()<0) return -1;
+		mload_elf((void *) external_ehcmodule, &my_data_elf);
+		thread_id = mload_run_thread(my_data_elf.start, my_data_elf.stack, my_data_elf.size_stack, my_data_elf.prio);
+		if(thread_id<0) return -1;
+		}
+	usleep(350*1000);
+	
+
+	// Test for IOS
+	mload_seek(0x20207c84, SEEK_SET);
+	mload_read(patch_datas, 4);
+	if(patch_datas[0]==0x6e657665) 
+		{
+		is_ios=38;
+		}
+	else
+		{
+		is_ios=36;
+		}
+
+	if(is_ios==36)
+		{
+		// IOS 36
+		memcpy(ios_36, dip_plugin, 4);		// copy the entry_point
+		memcpy((void *) dip_plugin, ios_36, 4*10);	// copy the adresses from the array
+		
+		mload_seek(0x1377E000, SEEK_SET);	// copy dip_plugin in the starlet
+		mload_write(dip_plugin,size_dip_plugin);
+
+		// enables DIP plugin
+		mload_seek(0x20209040, SEEK_SET);
+		mload_write(ios_36, 4);
+		 
+		}
+	if(is_ios==38)
+		{
+		// IOS 38
+
+		memcpy(ios_38, dip_plugin, 4);	    // copy the entry_point
+		memcpy((void *) dip_plugin, ios_38, 4*10);   // copy the adresses from the array
+		
+		mload_seek(0x1377E000, SEEK_SET);	// copy dip_plugin in the starlet
+		mload_write(dip_plugin,size_dip_plugin);
+
+		// enables DIP plugin
+		mload_seek(0x20208030, SEEK_SET);
+		mload_write(ios_38, 4);
+
+		}
+
+	mload_close();
+
+return 0;
 }
+
+int patch_cios_data() {
+    patch_datas[0]=*((u32 *) (dip_plugin+16*4));
+    mload_set_ES_ioctlv_vector((void *) patch_datas[0]);
+    return 1;
+}
+*/
+
+

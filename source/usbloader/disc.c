@@ -8,15 +8,13 @@
 #include "patches/fst.h"
 #include "apploader.h"
 #include "disc.h"
+#include "video.h"
 #include "wdvd.h"
 #include "alternatedol.h"
 #include "memory.h"
 #include "wbfs.h"
-#include "gecko.h"
-#include "fatmounter.h"
-#include "sys.h"
-#include "frag.h"
-#include "usbstorage2.h"
+#include "../gecko.h"
+#include "../fatmounter.h"
 
 /* Constants */
 #define PTABLE_OFFSET	0x40000
@@ -242,36 +240,15 @@ s32 Disc_Wait(void) {
 }
 
 s32 Disc_SetUSB(const u8 *id) {
-	if (is_ios_type(IOS_TYPE_HERMES)) {
-		u32 part = 0;
-		if (wbfs_part_fs) {
-			part = wbfs_part_lba;
-		} else {
-			part = wbfs_part_idx ? wbfs_part_idx - 1 : 0;
-		}
-		
-		int ret;
-		if (id && *id) {
-			ret = set_frag_list((u8 *) id);
-		} else {
-			ret = USBStorage_WBFS_SetFragList(NULL, 0);
-		}
-		
-		if (ret) {
-			return ret;
-		}
-		
-		/* Set USB mode */
-		return WDVD_SetUSBMode(id, part);
-	}
-	
-	if (WBFS_DEVICE_USB && wbfs_part_fs) {
-		gprintf("Setting frag list for wanin\n");
-		return set_frag_list((u8 *) id);
+	u32 part = 0;
+	if (wbfs_part_fs) {
+		part = wbfs_part_lba;
+	} else {
+		part = wbfs_part_idx ? wbfs_part_idx - 1 : 0;
 	}
 
-	gprintf("Setting disc usb thing for wanin\n");
-	return WDVD_SetWBFSMode(WBFS_DEVICE_USB, (u8 *) id);
+    /* Set USB mode */
+    return WDVD_SetUSBMode(id, part);
 }
 
 s32 Disc_ReadHeader(void *outbuf) {
@@ -296,7 +273,7 @@ s32 Disc_IsWii(void) {
     return 0;
 }
 
-s32 Disc_BootPartition(u64 offset, u8 videoselected, u8 cheat, u8 vipatch, u8 patchcountrystring, u8 error002fix, u8 alternatedol, u32 alternatedoloffset, u32 rtrn) {
+s32 Disc_BootPartition(u64 offset, u8 videoselected, u8 cheat, u8 vipatch, u8 patchcountrystring, u8 error002fix, u8 alternatedol, u32 alternatedoloffset) {
     entry_point p_entry;
 
     s32 ret;
@@ -314,7 +291,7 @@ s32 Disc_BootPartition(u64 offset, u8 videoselected, u8 cheat, u8 vipatch, u8 pa
     __Disc_SetLowMem();
 
     /* Run apploader */
-    ret = Apploader_Run(&p_entry, cheat, videoselected, vipatch, patchcountrystring, error002fix, alternatedol, alternatedoloffset, rtrn);
+    ret = Apploader_Run(&p_entry, cheat, videoselected, vipatch, patchcountrystring, error002fix, alternatedol, alternatedoloffset);
     if (ret < 0)
         return ret;
 
@@ -388,7 +365,7 @@ s32 Disc_BootPartition(u64 offset, u8 videoselected, u8 cheat, u8 vipatch, u8 pa
     return 0;
 }
 
-s32 Disc_WiiBoot(u8 videoselected, u8 cheat, u8 vipatch, u8 patchcountrystring, u8 error002fix, u8 alternatedol, u32 alternatedoloffset, u32 rtrn) {
+s32 Disc_WiiBoot(u8 videoselected, u8 cheat, u8 vipatch, u8 patchcountrystring, u8 error002fix, u8 alternatedol, u32 alternatedoloffset) {
     u64 offset;
     s32 ret;
 
@@ -398,7 +375,7 @@ s32 Disc_WiiBoot(u8 videoselected, u8 cheat, u8 vipatch, u8 patchcountrystring, 
         return ret;
 
     /* Boot partition */
-    return Disc_BootPartition(offset, videoselected, cheat, vipatch, patchcountrystring, error002fix, alternatedol, alternatedoloffset, rtrn);
+    return Disc_BootPartition(offset, videoselected, cheat, vipatch, patchcountrystring, error002fix, alternatedol, alternatedoloffset);
 }
 
 

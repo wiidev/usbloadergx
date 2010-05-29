@@ -14,7 +14,7 @@
 #include "main.h"
 
 void InitGUIThreads(void);
-extern "C" void ExitGUIThreads(void);
+void ExitGUIThreads(void);
 
 int MainMenu (int menuitem);
 

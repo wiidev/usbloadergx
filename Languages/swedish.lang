@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-11 06:03+0200\n"
+"POT-Creation-Date: 2010-03-16 16:17+0100\n"
 "PO-Revision-Date: 2010-01-19 17:39+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -606,6 +606,9 @@ msgstr "Tyska"
 msgid "HOME Menu"
 msgstr "Hemmeny"
 
+msgid "Hermes CIOS"
+msgstr ""
+
 msgid "Homebrew Apps Path"
 msgstr "Homebrew Apps"
 
@@ -1162,6 +1165,9 @@ msgstr "USB-enhet ej hittad"
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX är skyddad"
 
+msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
+msgstr "USB Loader GX kommer endast köra med Hermes CIOS ver 4! Vänligen kontrollera att du har ver 4 installerad!"
+
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
 msgstr "Kunde inte öppna den nedladdade wad filen (%s)."
@@ -1368,3 +1374,63 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder kvar"
+
+#~ msgid "contains over 255 lines of code.  It will produce unexpected results."
+#~ msgstr "Innehåller över 255 rader kod. Det kommer att skapa oväntade resultat."
+
+#~ msgid "Backgroundmusic Path changed."
+#~ msgstr "Sökväg till bakgrundsmusik ändrad."
+
+#~ msgid "Set as backgroundmusic?"
+#~ msgstr "Ställ in som bakgrundsmusik?"
+
+#~ msgid "The file is not a .wad"
+#~ msgstr "Filen är inte en .wad"
+
+#~ msgid "Install not possible"
+#~ msgstr "Installation inte möjlig"
+
+#~ msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
+#~ msgstr "Du använder NTFS filsystem. Pågrund av möjliga skriv fel till en NTFS partition, så är det inte möjligt att installera spel."
+
+#~ msgid "Partition Format Menu"
+#~ msgstr "Partitions formaterings meny"
+
+#~ msgid "Unlock the app first."
+#~ msgstr "Lås upp appen först."
+
+#~ msgid "You can't access this menu!"
+#~ msgstr "Du kan inte komma åt denna menyn!"
+
+#~ msgid "Can't decompress LZ77"
+#~ msgstr "Kunde inte dekomprimera LZ77"
+
+#~ msgid "Can't find disc"
+#~ msgstr "Kunde inte hitta skiva"
+
+#~ msgid "IMD5 Header not right."
+#~ msgstr "IMD5 Rubrik stämmer inte."
+
+#~ msgid "IMET Header wrong."
+#~ msgstr "IMET Rubriken är fel."
+
+#~ msgid "No WBFS or FAT game partition found"
+#~ msgstr "Ingen WBFS eller FAT spel partition hittad"
+
+#~ msgid "Exit USB Loader GX?"
+#~ msgstr "Avsluta USB Loader GX?"
+
+#~ msgid "Homebrew Channel"
+#~ msgstr "Homebrew Kanalen"
+
+#~ msgid "ERROR: USB device could not be loaded!"
+#~ msgstr "FEL: USB-enhet kunde inte laddas!"
+
+#~ msgid "ERROR: cIOS could not be loaded!"
+#~ msgstr "FEL: cIOS kunde inte laddas!"
+
+#~ msgid "Loading..."
+#~ msgstr "Laddar..."
+
+#~ msgid "Waiting for your slow USB Device: %i secs..."
+#~ msgstr "Väntar på din slöa USB-enhet: %i sek..."

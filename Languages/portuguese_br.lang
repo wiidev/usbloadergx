@@ -1,14 +1,14 @@
 # USB Loader GX language source file.
-# portuguese_br.lang - r921
+# portuguese_br.lang - r823
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-11 06:03+0200\n"
+"POT-Creation-Date: 2010-03-16 16:17+0100\n"
 "PO-Revision-Date: 2009-10-23 18:52+0200\n"
-"Last-Translator: aniemotion\n"
-"Language-Team: boto12, aniemotion\n"
+"Last-Translator: boto12\n"
+"Language-Team: boto12\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -126,7 +126,7 @@ msgid "AUTO"
 msgstr ""
 
 msgid "All partitions"
-msgstr "Todas as Partições"
+msgstr ""
 
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "As configurações estão desbloqueadas."
@@ -147,7 +147,7 @@ msgid "Apr"
 msgstr "Abr"
 
 msgid "Are you sure you want to enable Parent Control?"
-msgstr "Tem certeza que você deseja ligar o Controle de Pais?"
+msgstr ""
 
 msgid "Are you sure?"
 msgstr "Tem certeza?"
@@ -165,13 +165,13 @@ msgid "AutoPatch"
 msgstr "Patch automático"
 
 msgid "BCA Codes Path"
-msgstr "Caminho do BCA Codes"
+msgstr ""
 
 msgid "BCA Codes Path changed"
-msgstr "Caminho do BCA Codes alterado"
+msgstr ""
 
 msgid "BETA revisions"
-msgstr "Revisões BETA"
+msgstr ""
 
 msgid "Back"
 msgstr "Voltar"
@@ -219,7 +219,7 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 msgid "Change Play Path"
-msgstr "Alterar Caminho para Play"
+msgstr ""
 
 msgid "Channels"
 msgstr "Canais"
@@ -409,7 +409,7 @@ msgid "Do you really want to delete:"
 msgstr "Tem a certeza que quer eliminar o jogo:"
 
 msgid "Do you want to apply it now?"
-msgstr "Deseja aplicar agora?"
+msgstr ""
 
 msgid "Do you want to change language?"
 msgstr "Deseja alterar o idioma?"
@@ -475,10 +475,10 @@ msgid "ERROR:"
 msgstr "ERRO:"
 
 msgid "ERROR: Can't set up theme."
-msgstr "ERRO: Impossível aplicar tema"
+msgstr ""
 
 msgid "Enable Parental Control"
-msgstr "Ligar Controle de Pais"
+msgstr ""
 
 msgid "English"
 msgstr "Inglês"
@@ -508,7 +508,7 @@ msgid "Extracting files..."
 msgstr "Extraindo arquivos..."
 
 msgid "FAT: Use directories"
-msgstr "FAT: Usar Diretórios"
+msgstr ""
 
 msgid "Failed formating"
 msgstr "Falha ao formatar"
@@ -565,7 +565,7 @@ msgid "GUI Settings"
 msgstr "Definições de Interface"
 
 msgid "GXtheme.cfg not found in any subfolder."
-msgstr "GXtheme.cfg não encontrado em nenhuma subpasta"
+msgstr ""
 
 msgid "Game ID"
 msgstr "ID do Jogo"
@@ -583,7 +583,7 @@ msgid "Game Size"
 msgstr "Tamanho do Jogo"
 
 msgid "Game Sound Mode"
-msgstr "Modo de Som do Jogo"
+msgstr ""
 
 msgid "Game Sound Volume"
 msgstr "Volume dos Sons dos Jogos"
@@ -592,10 +592,10 @@ msgid "Game is already installed:"
 msgstr "Este jogo já está instalado:"
 
 msgid "Game partition"
-msgstr "Partição de Game"
+msgstr ""
 
 msgid "Gamename [GAMEID]"
-msgstr "Nome do Jogo [GAMEID]"
+msgstr ""
 
 msgid "Games"
 msgstr "Jogos"
@@ -605,6 +605,9 @@ msgstr "Alemão"
 
 msgid "HOME Menu"
 msgstr "Menu Inicial"
+
+msgid "Hermes CIOS"
+msgstr ""
 
 msgid "Homebrew Apps Path"
 msgstr "Pasta Apps Homebrew"
@@ -657,7 +660,7 @@ msgid "Install"
 msgstr "Instalar"
 
 msgid "Install 1:1 Copy"
-msgstr "Instalar 1:1 Copy"
+msgstr ""
 
 msgid "Install Error!"
 msgstr "Erro de Instalação!"
@@ -666,7 +669,7 @@ msgid "Install a game"
 msgstr "Instalar um jogo"
 
 msgid "Install partitions"
-msgstr "Instalare partições"
+msgstr ""
 
 msgid "Installing content... Ok!"
 msgstr "Instalando conteúdo... Ok!"
@@ -684,7 +687,7 @@ msgid "Installing wad"
 msgstr "Instalando wad"
 
 msgid "Invalid PIN code"
-msgstr "Código PIN inválido"
+msgstr ""
 
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
 msgstr "Parece que tem uma informação que pode ser útil. Por favor envie esta informação a nossa equipe de desenvolvimento."
@@ -754,19 +757,19 @@ msgid "Locked"
 msgstr "Bloqueado"
 
 msgid "Loop Directory"
-msgstr "Repitir Diretório"
+msgstr ""
 
 msgid "Loop Music"
-msgstr "Repitir Música"
+msgstr ""
 
 msgid "Loop Sound"
-msgstr "Repitir Som"
+msgstr ""
 
 msgid "Mar"
 msgstr ""
 
 msgid "Mark new games"
-msgstr "Marcar games novos"
+msgstr ""
 
 msgid "May"
 msgstr "Mai"
@@ -781,7 +784,7 @@ msgid "Mount DVD drive"
 msgstr "Carregar leitor DVD"
 
 msgid "Music Loop Mode"
-msgstr "Modo Repetição de Música"
+msgstr ""
 
 msgid "Music Volume"
 msgstr "Volume da Música"
@@ -841,7 +844,7 @@ msgid "No themes found on the site."
 msgstr "Nenhum tema encontrado no site"
 
 msgid "None"
-msgstr "Nenhum"
+msgstr ""
 
 msgid "Normal"
 msgstr ""
@@ -856,7 +859,7 @@ msgid "Not a DOL/ELF file."
 msgstr "Não é um arquivo DOL/ELF válido."
 
 msgid "Not a WAD file."
-msgstr "Não é um arquivo Wad"
+msgstr ""
 
 msgid "Not a Wii Disc"
 msgstr "Não é um Disco do Wii"
@@ -904,7 +907,7 @@ msgid "Parental Control"
 msgstr "Controle de Pais"
 
 msgid "Parental Control disabled"
-msgstr "Controle dos Pais desligado"
+msgstr ""
 
 msgid "Partition"
 msgstr "Partição"
@@ -931,16 +934,16 @@ msgid "Play Count"
 msgstr "Vezes jogadas"
 
 msgid "Play Next"
-msgstr "Tocar Próximo"
+msgstr ""
 
 msgid "Play Once"
-msgstr "Tocar uma só vez"
+msgstr ""
 
 msgid "Play Previous"
-msgstr "Tocar Anteior"
+msgstr ""
 
 msgid "Playing Music:"
-msgstr "Tocando a Música:"
+msgstr ""
 
 msgid "Please wait..."
 msgstr "Por favor aguarde..."
@@ -961,7 +964,7 @@ msgid "Quick Boot"
 msgstr "Inicialização Rápida"
 
 msgid "Random Directory Music"
-msgstr "Diretótio Aleatório de Músicas"
+msgstr ""
 
 msgid "Reading WAD data... Ok!"
 msgstr "Lendo dados do WAD... Ok!"
@@ -976,19 +979,19 @@ msgid "Reload SD"
 msgstr "Atualizar do cartão SD"
 
 msgid "Remove update"
-msgstr "Remover atualização"
+msgstr ""
 
 msgid "Rename Game on WBFS"
 msgstr "Alterar nome do jogo na partição WBFS"
 
 msgid "Reset BG Music"
-msgstr "Resetar Música de Fundo"
+msgstr ""
 
 msgid "Reset Playcounter"
 msgstr "Limpar Contagem"
 
 msgid "Reset to standard BGM?"
-msgstr "Resetar para Música de Fundo padrão?"
+msgstr ""
 
 msgid "Restarting..."
 msgstr "O Wii irá reiniciar"
@@ -1027,7 +1030,7 @@ msgid "Screensaver"
 msgstr "Proteção de tela"
 
 msgid "Select"
-msgstr "selecionar"
+msgstr ""
 
 msgid "Select a DOL"
 msgstr "Selecionar um DOL"
@@ -1063,10 +1066,10 @@ msgid "Sound"
 msgstr "Audio"
 
 msgid "Sound+BGM"
-msgstr "Som+Music de Fundo"
+msgstr ""
 
 msgid "Sound+Quiet"
-msgstr "Som+Quieto"
+msgstr ""
 
 msgid "Spanish"
 msgstr "Espanhol"
@@ -1090,7 +1093,7 @@ msgid "Successfully Updated"
 msgstr "Programa atualizado com Sucesso"
 
 msgid "Successfully Updated thanks to www.techjawa.com"
-msgstr "Atualizado com sucesso graças a www.techjawa.com"
+msgstr ""
 
 msgid "Successfully deleted:"
 msgstr "Eliminado com Sucesso:"
@@ -1162,6 +1165,9 @@ msgstr "Dispositivo USB não encontrado"
 msgid "USB Loader GX is protected"
 msgstr "O USB Loader GX está bloqueado"
 
+msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
+msgstr ""
+
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
 msgstr "Não é possível abrir o arquivo wad baixado (%s)."
@@ -1179,7 +1185,7 @@ msgid "Uninstalling wad"
 msgstr "Desinstalando wad"
 
 msgid "Unlock Parental Control"
-msgstr "Desbloquear Controle de Pais"
+msgstr ""
 
 msgid "Unlock console to use this option."
 msgstr "Desbloquear configuração antes de usar esta opção."
@@ -1243,10 +1249,10 @@ msgid "Video Mode"
 msgstr "Modo de Vídeo"
 
 msgid "WIP Patches Path"
-msgstr "Caminho WIP Patches"
+msgstr ""
 
 msgid "WIP Patches Path changed"
-msgstr "Caminho WIP Patches alterado"
+msgstr ""
 
 msgid "Waiting for USB Device"
 msgstr "Aguardando pelo Dispositivo USB"
@@ -1294,13 +1300,13 @@ msgid "You are choosing to display favorites and you do not have any selected."
 msgstr "Está tentando visualizar os favoritos, mas não existe nenhum selecionado."
 
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
-msgstr "Você não tem o Controle de Pais ligado. Se você deseja usar o Controle de Pais, ligue-o nas Configurações do Wii."
+msgstr ""
 
 msgid "You have attempted to load a bad image"
 msgstr "Você tentou carregar uma imagem corrompida"
 
 msgid "You need to select or format a partition"
-msgstr "Você precisa selecionar ou formatar uma partição"
+msgstr ""
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
@@ -1331,7 +1337,7 @@ msgid "files not found on the server!"
 msgstr "arquivos não encontrados no servidor!"
 
 msgid "for FAT/NTFS support"
-msgstr "para suporte a FAT/NTFS"
+msgstr ""
 
 msgid "for Ocarina"
 msgstr "pelo Ocarina"
@@ -1368,3 +1374,39 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
+
+#~ msgid "contains over 255 lines of code.  It will produce unexpected results."
+#~ msgstr "contém mais de 255 linhas de código. Os resultados podem ser inesperados."
+
+#~ msgid "Backgroundmusic Path changed."
+#~ msgstr "Pasta Música Fundo modificada"
+
+#~ msgid "Set as backgroundmusic?"
+#~ msgstr "Definir como música de fundo?"
+
+#~ msgid "The file is not a .wad"
+#~ msgstr "O arquivo não é um .wad"
+
+#~ msgid "Can't decompress LZ77"
+#~ msgstr "Não foi possivel descomprimir LZ77"
+
+#~ msgid "Can't find disc"
+#~ msgstr "Disco não encontrado"
+
+#~ msgid "IMD5 Header not right."
+#~ msgstr "Cabeçalho IMD5 não esta correto"
+
+#~ msgid "IMET Header wrong."
+#~ msgstr "Cabeçalho IMET errado"
+
+#~ msgid "Exit USB Loader GX?"
+#~ msgstr "Deseja sair do USB Loader GX?"
+
+#~ msgid "You need to format a partition"
+#~ msgstr "É necessário FORMATAR a partição"
+
+#~ msgid "Failed to extract opening.bnr"
+#~ msgstr "Falha ao extrair opening.bnr"
+
+#~ msgid "Homebrew Channel"
+#~ msgstr "Canal Homebrew"

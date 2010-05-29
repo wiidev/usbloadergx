@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# japanese.lang - r924
+# japanese.lang - r913
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-11 06:03+0200\n"
+"POT-Creation-Date: 2010-03-16 16:17+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
@@ -606,6 +606,9 @@ msgstr "ドイツ語"
 msgid "HOME Menu"
 msgstr "HOMEﾎﾞﾀﾝﾒﾆｭｰ"
 
+msgid "Hermes CIOS"
+msgstr "注意事項"
+
 msgid "Homebrew Apps Path"
 msgstr "Homebrewのパス"
 
@@ -1090,7 +1093,7 @@ msgid "Successfully Updated"
 msgstr "更新しました"
 
 msgid "Successfully Updated thanks to www.techjawa.com"
-msgstr "更新しました www.techjawa.comに感謝!"
+msgstr ""
 
 msgid "Successfully deleted:"
 msgstr "削除に成功しました"
@@ -1161,6 +1164,9 @@ msgstr "USBﾃﾞﾊﾞｲｽを検出できませんでした"
 
 msgid "USB Loader GX is protected"
 msgstr "USB Loaderは保護されています"
+
+msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
+msgstr "cIOS222と223はrev4の場合のみ 使用できます"
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
@@ -1368,3 +1374,51 @@ msgstr "中"
 
 msgid "seconds left"
 msgstr "秒で完了"
+
+#~ msgid "contains over 255 lines of code.  It will produce unexpected results."
+#~ msgstr "ｺｰﾄﾞが255行を超えていて 正しく実行できません"
+
+#~ msgid "Backgroundmusic Path changed."
+#~ msgstr "BGMのパスを変更しました"
+
+#~ msgid "Set as backgroundmusic?"
+#~ msgstr "BGMに設定しますか？"
+
+#~ msgid "Install not possible"
+#~ msgstr "インストールできません"
+
+#~ msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
+#~ msgstr "NTFS領域にｲﾝｽﾄｰﾙ中にｴﾗｰが発生するとｲﾝｽﾄｰﾙに失敗します"
+
+#~ msgid "Partition Format Menu"
+#~ msgstr "初期化メニュー"
+
+#~ msgid "Unlock the app first."
+#~ msgstr "先にロックを解除してください"
+
+#~ msgid "You can't access this menu!"
+#~ msgstr "このメニューは使用できません"
+
+#~ msgid "Random Directory music"
+#~ msgstr "フォルダ内でランダムに再生"
+
+#~ msgid "Can't decompress LZ77"
+#~ msgstr "LZ77を解凍できませんでした"
+
+#~ msgid "Can't find disc"
+#~ msgstr "ディスクが見つかりません"
+
+#~ msgid "IMD5 Header not right."
+#~ msgstr "IMD5ヘッダが正しくありません"
+
+#~ msgid "IMET Header wrong."
+#~ msgstr "IMETヘッダが間違っています"
+
+#~ msgid "Exit USB Loader GX?"
+#~ msgstr "USBLoaderGXを終了しますか？"
+
+#~ msgid "Failed to extract opening.bnr"
+#~ msgstr "opening.bnrの抽出に失敗しました"
+
+#~ msgid "Homebrew Channel"
+#~ msgstr "HBCへ"
