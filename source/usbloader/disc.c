@@ -6,6 +6,7 @@
 #include <wiiuse/wpad.h>
 
 #include "patches/fst.h"
+#include "patches/gamepatches.h"
 #include "patches/wip.h"
 #include "apploader.h"
 #include "disc.h"
@@ -284,14 +285,17 @@ s32 Disc_BootPartition(u64 offset, u8 videoselected, u8 cheat, u8 vipatch, u8 pa
     if (ret < 0)
         return ret;
 
+    /* Setup low memory */
+    __Disc_SetLowMem();
+
 	char gameid[8];
 	memset(gameid, 0, 8);
 	memcpy(gameid, (char*)Disc_ID, 6);
 
     load_wip_code((u8 *) &gameid);
 
-    /* Setup low memory */
-    __Disc_SetLowMem();
+    /* If a wip file is loaded for this game this does nothing - Dimok */
+    PoPPatch();
 
     /* Run apploader */
     ret = Apploader_Run(&p_entry, cheat, videoselected, vipatch, patchcountrystring, error002fix, alternatedol, alternatedoloffset);

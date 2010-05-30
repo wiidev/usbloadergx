@@ -12,7 +12,7 @@ u32 MALLOC_MEM2 = 0;
 
 static CMEM2Alloc g_mem2gp;
 
-void MEM2_init(unsigned int mem2Size) 
+void MEM2_init(unsigned int mem2Size)
 {
 	g_mem2gp.init(mem2Size);
 }
@@ -130,6 +130,9 @@ void *__wrap_memalign(size_t a, size_t size)
 
 void __wrap_free(void *p)
 {
+    if(!p)
+        return;
+
 	if (((u32)p & 0x10000000) != 0) {
 		MEM2_free(p);
 	} else {

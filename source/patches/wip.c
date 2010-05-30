@@ -5,13 +5,7 @@
 #include "gecko.h"
 
 #include "settings/cfg.h"
-
-typedef struct
-{
-    u32 offset;
-    u32 srcaddress;
-    u32 dstaddress;
-} WIP_Code;
+#include "wip.h"
 
 static WIP_Code * CodeList = NULL;
 static u32 CodesCount = 0;
@@ -58,6 +52,22 @@ void do_wip_code(u8 * dst, u32 len)
     Counter++;
 }
 
+//! for internal patches only
+//! .wip files override internal patches
+//! the codelist has to be freed if the set fails
+//! if set was successful the codelist will be freed when it's done
+bool set_wip_list(WIP_Code * list, int size)
+{
+    if(!CodeList && size > 0)
+    {
+        CodeList = list;
+        CodesCount = size;
+        return true;
+    }
+
+    return false;
+}
+
 void wip_reset_counter()
 {
     ProcessedLength = 0;
@@ -71,6 +81,7 @@ void free_wip()
         free(CodeList);
     CodeList = NULL;
     CodesCount = 0;
+    Counter = 0;
     ProcessedLength = 0;
 }
 
@@ -83,6 +94,13 @@ int load_wip_code(u8 *gameid)
 	snprintf(filepath, sizeof(filepath), "%s%s.wip", Settings.WipCodepath, GameID);
 
 	FILE * fp = fopen(filepath, "rb");
+	if (!fp)
+	{
+        memset(GameID, 0, sizeof(GameID));
+        memcpy(GameID, gameid, 4);
+		snprintf(filepath, sizeof(filepath), "%s%s.wip", Settings.WipCodepath, GameID);
+		fp = fopen(filepath, "rb");
+	}
 	if (!fp)
 	{
         memset(GameID, 0, sizeof(GameID));
@@ -100,6 +118,8 @@ int load_wip_code(u8 *gameid)
     while (fgets(line, sizeof(line), fp))
     {
         if (line[0] == '#') continue;
+        if (line[0] == ';') continue;
+        if (line[0] == ':') continue;
 
         if(strlen(line) < 26) continue;
 
@@ -113,10 +133,8 @@ int load_wip_code(u8 *gameid)
         WIP_Code * tmp = realloc(CodeList, (CodesCount+1)*sizeof(WIP_Code));
         if(!tmp)
         {
-            if(CodeList)
-                free(CodeList);
-            CodeList = NULL;
             fclose(fp);
+            free_wip();
             return -1;
         }
 
