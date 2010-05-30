@@ -577,9 +577,8 @@ int MenuDiscList() {
     w.Append(&sdcardBtn);
     w.Append(&poweroffBtn);
     w.Append(&gameInfo);
-	if (Settings.godmode) {
+	if (Settings.godmode && load_from_fs != PART_FS_NTFS)
 		w.Append(&installBtn);
-	}
     w.Append(&homeBtn);
     w.Append(&settingsBtn);
     w.Append(&DownloadBtn);
@@ -802,11 +801,21 @@ int MenuDiscList() {
             }
         } else if (installBtn.GetState() == STATE_CLICKED) {
             gprintf("\n\tinstallBtn clicked");
-            choice = WindowPrompt(tr("Install a game"),0,tr("Yes"),tr("No"));
-            if (choice == 1) {
-                menu = MENU_INSTALL;
+            if (load_from_fs == PART_FS_NTFS)
+            {
+                choice = 0;
+                WindowPrompt(tr("Install not possible"), tr("You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."), tr("OK"));
+            }
+            else
+             choice = WindowPrompt(tr("Install a game"),0,tr("Yes"),tr("No"));
+            if (choice == 1)
+            {
+                if (load_from_fs == PART_FS_NTFS)
+                    menu = MENU_INSTALL;
                 break;
-            } else {
+            }
+            else
+            {
                 installBtn.ResetState();
                 if (Settings.gameDisplay==list) {
                     gameBrowser->SetFocus(1);
@@ -816,7 +825,7 @@ int MenuDiscList() {
                     gameCarousel->SetFocus(1);
                 }
             }
-        }else if ((covert & 0x2)&&(covert!=covertOld)) {
+        } else if ((covert & 0x2)&&(covert!=covertOld) && load_from_fs != PART_FS_NTFS) {
             gprintf("\n\tNew Disc Detected");
             choice = WindowPrompt(tr("New Disc Detected"),0,tr("Install"),tr("Mount DVD drive"),tr("Cancel"));
             if (choice == 1) {

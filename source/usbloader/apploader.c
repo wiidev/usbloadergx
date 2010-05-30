@@ -390,14 +390,10 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
         void *dolbuffer;
         int dollen;
 
-        bool dolloaded = Load_Dol(&dolbuffer, &dollen, Settings.dolpath);
-        if (dolloaded) {
-            Remove_001_Protection(dolbuffer, dollen);
-
-            gamepatches(dolbuffer, dollen, videoSelected, patchcountrystring, vipatch, cheat);
-
+        bool dolloaded = Load_Dol(&dolbuffer, &dollen, Settings.dolpath, videoSelected, patchcountrystring, vipatch, cheat);
+        if (dolloaded)
+        {
             DCFlushRange(dolbuffer, dollen);
-
             /* Set entry point from apploader */
             *entry = (entry_point) load_dol_image(dolbuffer);
         }

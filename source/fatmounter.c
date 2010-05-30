@@ -14,7 +14,7 @@
 #include "gecko.h"
 
 //these are the only stable and speed is good
-#define CACHE 8
+#define CACHE 32
 #define SECTORS 64
 #define SECTORS_SD 32
 
@@ -188,16 +188,16 @@ s32 MountNTFS(u32 sector)
 //		}
 		/* Mount device */
 //		if (!ntfsMount("NTFS", &__io_wiiums, sector, CACHE, SECTORS, NTFS_SHOW_HIDDEN_FILES | NTFS_RECOVER)) {
-			ret = ntfsMount("NTFS", &__io_usbstorage2, sector, CACHE, SECTORS, NTFS_SHOW_HIDDEN_FILES | NTFS_RECOVER);
+			ret = ntfsMount("NTFS", &__io_usbstorage2, sector, CACHE, SECTORS, NTFS_SHOW_HIDDEN_FILES | NTFS_READ_ONLY | NTFS_RECOVER);
 			if (!ret) {
 				return -2;
 			}
 //		}
 	} else if (wbfsDev == WBFS_DEVICE_SDHC) {
 		if (sdhc_mode_sd == 0) {
-			ret = ntfsMount("NTFS", &__io_sdhc, 0, 8, SECTORS, NTFS_SHOW_HIDDEN_FILES | NTFS_RECOVER);
+			ret = ntfsMount("NTFS", &__io_sdhc, 0, CACHE, SECTORS, NTFS_SHOW_HIDDEN_FILES | NTFS_READ_ONLY | NTFS_RECOVER);
 		} else {
-			ret = ntfsMount("NTFS", &__io_sdhc, 0, 8, SECTORS_SD, NTFS_SHOW_HIDDEN_FILES | NTFS_RECOVER);
+			ret = ntfsMount("NTFS", &__io_sdhc, 0, CACHE, SECTORS_SD, NTFS_SHOW_HIDDEN_FILES | NTFS_READ_ONLY | NTFS_RECOVER);
 		}
 		if (!ret) {
 			return -5;

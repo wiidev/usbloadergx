@@ -97,7 +97,7 @@ typedef struct _dolheader {
 static dolheader *dolfile;
 
 
-u32 load_dol_image(void *dolstart) {
+u32 load_dol_image(void *dolstart, u8 videoSelected, u8 patchcountrystring, u8 vipatch, u8 cheat) {
 
     u32 i;
 
@@ -105,15 +105,19 @@ u32 load_dol_image(void *dolstart) {
         dolfile = (dolheader *) dolstart;
         for (i = 0; i < 7; i++) {
             if ((!dolfile->text_size[i]) || (dolfile->text_start[i] < 0x100)) continue;
-            VIDEO_WaitVSync();
+
             ICInvalidateRange ((void *) dolfile->text_start[i],dolfile->text_size[i]);
             memmove ((void *) dolfile->text_start[i],dolstart+dolfile->text_pos[i],dolfile->text_size[i]);
+            gamepatches((void *) dolfile->text_start[i], dolfile->text_size[i], videoSelected, patchcountrystring, vipatch, cheat);
+            Remove_001_Protection((void *) dolfile->data_start[i], dolfile->data_size[i]);
         }
 
         for (i = 0; i < 11; i++) {
             if ((!dolfile->data_size[i]) || (dolfile->data_start[i] < 0x100)) continue;
-            VIDEO_WaitVSync();
+
             memmove ((void *) dolfile->data_start[i],dolstart+dolfile->data_pos[i],dolfile->data_size[i]);
+            gamepatches((void *) dolfile->data_start[i], dolfile->data_size[i], videoSelected, patchcountrystring, vipatch, cheat);
+            Remove_001_Protection((void *) dolfile->data_start[i], dolfile->data_size[i]);
             DCFlushRangeNoSync ((void *) dolfile->data_start[i],dolfile->data_size[i]);
         }
         /*
@@ -223,9 +227,9 @@ u32 Load_Dol_from_disc(u32 doloffset, u8 videoSelected, u8 patchcountrystring, u
 
             gamepatches(offset, len, videoSelected, patchcountrystring, vipatch, cheat);
 
-            DCFlushRange(offset, len);
-
             Remove_001_Protection(offset, len);
+
+            DCFlushRange(offset, len);
         }
     }
 
