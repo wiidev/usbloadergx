@@ -1,14 +1,14 @@
 # USB Loader GX language source file.
-# tchinese.lang - r911
+# tchinese.lang - r929
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-16 16:17+0100\n"
+"POT-Creation-Date: 2010-05-30 23:36+0200\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
-"Last-Translator: Mika Li\n"
-"Language-Team: kyogc, Miller, Mika Li\n"
+"Last-Translator: Jane.H\n"
+"Language-Team: kyogc, Miller, Mika Li, Jane.H\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -550,7 +550,7 @@ msgid "Full Shutdown"
 msgstr "關機"
 
 msgid "GAMEID_Gamename"
-msgstr ""
+msgstr "GAMEID_遊戲名稱"
 
 msgid "GCT Cheatcodes Path"
 msgstr "金手指檔案路徑"
@@ -595,7 +595,7 @@ msgid "Game partition"
 msgstr "遊戲磁區"
 
 msgid "Gamename [GAMEID]"
-msgstr ""
+msgstr "遊戲名稱 [GAMEID]"
 
 msgid "Games"
 msgstr "遊戲數量"
@@ -667,6 +667,9 @@ msgstr "安裝錯誤!"
 
 msgid "Install a game"
 msgstr "安裝遊戲"
+
+msgid "Install not possible"
+msgstr "無法安裝"
 
 msgid "Install partitions"
 msgstr "安裝磁區"
@@ -844,7 +847,7 @@ msgid "No themes found on the site."
 msgstr "在網站上找不到主題"
 
 msgid "None"
-msgstr ""
+msgstr "沒有"
 
 msgid "Normal"
 msgstr "一般"
@@ -1093,7 +1096,7 @@ msgid "Successfully Updated"
 msgstr "更新已完成"
 
 msgid "Successfully Updated thanks to www.techjawa.com"
-msgstr ""
+msgstr "已更新成功,感謝 www.techjawa.com"
 
 msgid "Successfully deleted:"
 msgstr "成功的刪除:"
@@ -1299,6 +1302,9 @@ msgstr "您即將刪除"
 msgid "You are choosing to display favorites and you do not have any selected."
 msgstr "你選擇顯示收藏夾但裡面還沒有任何收藏"
 
+msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
+msgstr "您正在使用 NTFS 文件系統。由於可能一個錯誤寫入到一個 NTFS 分區，這時候是無法安裝遊戲的。"
+
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr "家長控制已鎖定。如果要解除 Wii 被鎖住的功能，您必須要先至控制台解除家長控制。"
 
@@ -1374,48 +1380,3 @@ msgstr "的"
 
 msgid "seconds left"
 msgstr "剩餘秒數"
-
-#~ msgid "contains over 255 lines of code.  It will produce unexpected results."
-#~ msgstr "超過255行的指令,將導致無法預期的結果"
-
-#~ msgid "Backgroundmusic Path changed."
-#~ msgstr "背景音樂路徑"
-
-#~ msgid "Set as backgroundmusic?"
-#~ msgstr "設定背景音樂"
-
-#~ msgid "The file is not a .wad"
-#~ msgstr "這不是一個 WAD 文件"
-
-#~ msgid "Install not possible"
-#~ msgstr "無法安裝"
-
-#~ msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
-#~ msgstr "您正在使用 NTFS 文件系統。由於可能一個錯誤寫入到一個 NTFS 分區，這時候是無法安裝遊戲的。"
-
-#~ msgid "Partition Format Menu"
-#~ msgstr "磁區格式化"
-
-#~ msgid "Unlock the app first."
-#~ msgstr "請先將此應用程式解鎖"
-
-#~ msgid "You can't access this menu!"
-#~ msgstr "您無法存取此選單"
-
-#~ msgid "Can't decompress LZ77"
-#~ msgstr "無法解壓縮的LZ77"
-
-#~ msgid "Can't find disc"
-#~ msgstr "找不到磁碟"
-
-#~ msgid "IMD5 Header not right."
-#~ msgstr "IMD5 標題不正確"
-
-#~ msgid "IMET Header wrong."
-#~ msgstr "沒有開頭音樂"
-
-#~ msgid "Exit USB Loader GX?"
-#~ msgstr "離開 USB Loader GX?"
-
-#~ msgid "Homebrew Channel"
-#~ msgstr "Homebrew 頻道"

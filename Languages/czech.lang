@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-16 16:17+0100\n"
+"POT-Creation-Date: 2010-05-30 23:36+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) \n"
 "Language-Team: r823 - last version on http://djelinek.sweb.cz/_USBLoderGX/czech.lang \n"
@@ -668,6 +668,9 @@ msgstr "Chyba pri instalaci"
 msgid "Install a game"
 msgstr "Nainstalovat hru"
 
+msgid "Install not possible"
+msgstr ""
+
 msgid "Install partitions"
 msgstr ""
 
@@ -1299,6 +1302,9 @@ msgstr "Pokoušíte se smazat "
 msgid "You are choosing to display favorites and you do not have any selected."
 msgstr "Vybíráte zobrazení oblíbených, ale žádné jste dosud nevybral"
 
+msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
+msgstr ""
+
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr ""
 
@@ -1374,36 +1380,3 @@ msgstr "z "
 
 msgid "seconds left"
 msgstr "sekund zbývá"
-
-#~ msgid "contains over 255 lines of code.  It will produce unexpected results."
-#~ msgstr "obsahuje více jak 255 rádek kódu. To muže vyvolat neocekáváné výsledky."
-
-#~ msgid "Backgroundmusic Path changed."
-#~ msgstr "Cesta pro hudbu na pozadí zmenena"
-
-#~ msgid "Set as backgroundmusic?"
-#~ msgstr "Nastavit jako hudbu na pozadí?"
-
-#~ msgid "The file is not a .wad"
-#~ msgstr "Soubor není typu WAD"
-
-#~ msgid "Can't decompress LZ77"
-#~ msgstr "Nelze dekomprimovat LZ77"
-
-#~ msgid "Can't find disc"
-#~ msgstr "Nelze nalézt disc"
-
-#~ msgid "IMD5 Header not right."
-#~ msgstr "Hlavička IMD5 není správná."
-
-#~ msgid "IMET Header wrong."
-#~ msgstr "Hlavička IMET není správná."
-
-#~ msgid "Exit USB Loader GX?"
-#~ msgstr "Ukoncit USB Loader GX?"
-
-#~ msgid "No WBFS partition found"
-#~ msgstr "Nebyl nalezen oddíl WBFS"
-
-#~ msgid "You need to format a partition"
-#~ msgstr "Musíte naformátovat oddíl"

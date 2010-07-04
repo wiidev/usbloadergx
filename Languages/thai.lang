@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-16 16:17+0100\n"
+"POT-Creation-Date: 2010-05-30 23:36+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Nitro_subzero \n"
 "Language-Team: Nitro_subzero\n"
@@ -668,6 +668,9 @@ msgstr "ผิดพลาดขณะติดตั้ง!"
 msgid "Install a game"
 msgstr "ติดตั้งเกมส์"
 
+msgid "Install not possible"
+msgstr ""
+
 msgid "Install partitions"
 msgstr ""
 
@@ -1299,6 +1302,9 @@ msgstr "คุณกำลังจะลบ "
 msgid "You are choosing to display favorites and you do not have any selected."
 msgstr "คุณเลือกจะแสดงเกมส์ที่ชอบ แต่คุณไม่ได้กำหนดเกมส์ที่ชื่นชอบไว้"
 
+msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
+msgstr ""
+
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr ""
 
@@ -1374,54 +1380,3 @@ msgstr "จาก"
 
 msgid "seconds left"
 msgstr "วินาทีที่เหลือ"
-
-#~ msgid "contains over 255 lines of code.  It will produce unexpected results."
-#~ msgstr "มีจำนวนบรรทัดมากกว่า 255 บรรทัด ซึ่งอาจทำให้เกิดผลที่ไม่คาดคิด."
-
-#~ msgid "Backgroundmusic Path changed."
-#~ msgstr "เปลี่ยนที่เก็บ ดนตรีเบื้องหลัง"
-
-#~ msgid "Set as backgroundmusic?"
-#~ msgstr "เลือกเป็น Background music?"
-
-#~ msgid "The file is not a .wad"
-#~ msgstr "ไม่ใช่ไฟล์ .wad"
-
-#~ msgid "Can't decompress LZ77"
-#~ msgstr "คลายไฟล์ LZ777 ไม่ได้"
-
-#~ msgid "Can't find disc"
-#~ msgstr "หาแผ่นไม่เจอ"
-
-#~ msgid "IMD5 Header not right."
-#~ msgstr "ส่วนขยายไฟล์ผิดพลาด"
-
-#~ msgid "IMET Header wrong."
-#~ msgstr "ส่วนขยายไฟล์ผิดพลาด"
-
-#~ msgid "Exit USB Loader GX?"
-#~ msgstr "ปิด USB Loader GX?"
-
-#~ msgid "No WBFS partition found"
-#~ msgstr "ไม่พบพาร์ติชั่นแบบ WBFS "
-
-#~ msgid "You need to format a partition"
-#~ msgstr "ต้องทำการฟอร์แมทพาร์ติชั่น"
-
-#~ msgid "Failed to extract opening.bnr"
-#~ msgstr "แตกไฟล์ opening.bnr ไม่ได้"
-
-#~ msgid "You need to start this game one time to create a save file, then exit and start it again."
-#~ msgstr "คุณต้องเริ่มโหลดเกมส์นี้ใหม่ เพื่อสร้างไฟล์เซฟ ดังนั้นออกจากเกมส์แล้วเริ่มโหลดอีกครั้ง"
-
-#~ msgid "ERROR: USB device could not be loaded!"
-#~ msgstr "ผิดพลาด! ไม่สามารถโหลดอุปกรณ์ USB ได้"
-
-#~ msgid "ERROR: cIOS could not be loaded!"
-#~ msgstr "ผิดพลาด! ไม่สามารถโหลด cIOS ได้"
-
-#~ msgid "Loading..."
-#~ msgstr "กำลังโหลด..."
-
-#~ msgid "Waiting for your slow USB Device: %i secs..."
-#~ msgstr "กำลังรออุปกรณ์ USB อันเชื่องช้าของคุณ: %i วินาที..."

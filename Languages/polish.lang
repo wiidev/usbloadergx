@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-16 16:17+0100\n"
+"POT-Creation-Date: 2010-05-30 23:36+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: ziom666 (zadania_prog@vp.pl)\n"
 "Language-Team: \n"
@@ -668,6 +668,9 @@ msgstr "Blad instalacji"
 msgid "Install a game"
 msgstr "Zainstaluj gre"
 
+msgid "Install not possible"
+msgstr "Nie mozna zainstalowac"
+
 msgid "Install partitions"
 msgstr "Zainstaluj partycje"
 
@@ -1299,6 +1302,9 @@ msgstr "Zamierzasz usunac"
 msgid "You are choosing to display favorites and you do not have any selected."
 msgstr "WybraleS wySwietlenie usubionych, ale zadnych nie wybraleS"
 
+msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
+msgstr "Uzywasz partycji NTFS. Instalacja gier na tej partycji nie jest mozliwa."
+
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr "Nie masz wlaczonej kontroli rodzicielskiej. Jesli chcesz jej uzywac, uruchom ja w ustawieniach Wii."
 
@@ -1374,30 +1380,3 @@ msgstr "z"
 
 msgid "seconds left"
 msgstr "sekund pozostalo"
-
-#~ msgid "contains over 255 lines of code.  It will produce unexpected results."
-#~ msgstr "zawiera ponad 255 linii kodu. Bedzie coS nie tak."
-
-#~ msgid "Backgroundmusic Path changed."
-#~ msgstr "Sciezka do muzyki w tle zmieniona"
-
-#~ msgid "Set as backgroundmusic?"
-#~ msgstr "Ustawic jako muzyke w tle?"
-
-#~ msgid "The file is not a .wad"
-#~ msgstr "To nie plik .wad"
-
-#~ msgid "Install not possible"
-#~ msgstr "Nie mozna zainstalowac"
-
-#~ msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
-#~ msgstr "Uzywasz partycji NTFS. Instalacja gier na tej partycji nie jest mozliwa."
-
-#~ msgid "Exit USB Loader GX?"
-#~ msgstr "Zakonczyc prace programu?"
-
-#~ msgid "No WBFS partition found"
-#~ msgstr "Nie znaleziono partycji WBFS"
-
-#~ msgid "You need to format a partition"
-#~ msgstr "Musisz sformatowac partycje"

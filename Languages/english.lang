@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-16 16:17+0100\n"
+"POT-Creation-Date: 2010-05-30 23:36+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -668,6 +668,9 @@ msgstr ""
 msgid "Install a game"
 msgstr ""
 
+msgid "Install not possible"
+msgstr ""
+
 msgid "Install partitions"
 msgstr ""
 
@@ -1297,6 +1300,9 @@ msgid "You are about to delete "
 msgstr ""
 
 msgid "You are choosing to display favorites and you do not have any selected."
+msgstr ""
+
+msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
 msgstr ""
 
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."

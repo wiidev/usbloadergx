@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# danish.lang - r916
+# danish.lang - r937
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-16 16:17+0100\n"
+"POT-Creation-Date: 2010-07-04 02:05+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: dorf[dk]\n"
 "Language-Team: dorf[dk]\n"
@@ -668,6 +668,9 @@ msgstr "Installationsfejl!"
 msgid "Install a game"
 msgstr "Installér nyt spil"
 
+msgid "Install not possible"
+msgstr "Kan ikke installere"
+
 msgid "Install partitions"
 msgstr "Installationspartitioner"
 
@@ -1093,7 +1096,7 @@ msgid "Successfully Updated"
 msgstr "Opdateringen lykkedes"
 
 msgid "Successfully Updated thanks to www.techjawa.com"
-msgstr ""
+msgstr "Opdateringen lykkedes takket været www.techjawa.com"
 
 msgid "Successfully deleted:"
 msgstr "Sletningen lykkedes:"
@@ -1299,6 +1302,9 @@ msgstr "Du er ved at slette "
 msgid "You are choosing to display favorites and you do not have any selected."
 msgstr "Du har valgt at vise favoritter, men ingen spil er markerede som favoritter."
 
+msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
+msgstr "Der bruges et NTFS filsystem. Da der kan forekomme skrivefejl på NTFS-partitioner, kan der ikke installeres spil."
+
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr "Børnelåsen er ikke slået til. Hvis børnelåsen skal bruges, skal den slås til i Wiiens indstillinger."
 
@@ -1374,33 +1380,3 @@ msgstr "af"
 
 msgid "seconds left"
 msgstr "sekunder tilbage"
-
-#~ msgid "contains over 255 lines of code.  It will produce unexpected results."
-#~ msgstr "indeholder over 225 linjer kode. Det vil give uventede resultater."
-
-#~ msgid "Backgroundmusic Path changed."
-#~ msgstr "Sti til baggrundsmusik ændret"
-
-#~ msgid "Set as backgroundmusic?"
-#~ msgstr "Indstil som baggrundsmusik?"
-
-#~ msgid "Install not possible"
-#~ msgstr "Kan ikke installere"
-
-#~ msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
-#~ msgstr "Der bruges et NTFS filsystem. Da der kan forekomme skrivefejl på NTFS-partitioner, kan der ikke installeres spil."
-
-#~ msgid "Can't decompress LZ77"
-#~ msgstr "Kan ikke udpakke LZ77"
-
-#~ msgid "Can't find disc"
-#~ msgstr "Kan ikke finde disk"
-
-#~ msgid "IMD5 Header not right."
-#~ msgstr "Fejl i IMD5 header."
-
-#~ msgid "IMET Header wrong."
-#~ msgstr "Fejl i IMET header."
-
-#~ msgid "Exit USB Loader GX?"
-#~ msgstr "Afslut USB Loader GX?"

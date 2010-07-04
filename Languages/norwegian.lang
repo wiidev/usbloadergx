@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-16 16:17+0100\n"
+"POT-Creation-Date: 2010-05-30 23:36+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: raschi\n"
 "Language-Team: raschi\n"
@@ -668,6 +668,9 @@ msgstr "Installasjonsfeil!"
 msgid "Install a game"
 msgstr "Installér et spill"
 
+msgid "Install not possible"
+msgstr ""
+
 msgid "Install partitions"
 msgstr ""
 
@@ -1299,6 +1302,9 @@ msgstr "Du er i ferd med å slette "
 msgid "You are choosing to display favorites and you do not have any selected."
 msgstr "Du prøver å vise favoritter når du ikke har noen valgt."
 
+msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
+msgstr ""
+
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr ""
 
@@ -1374,36 +1380,3 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder gjenstår"
-
-#~ msgid "contains over 255 lines of code.  It will produce unexpected results."
-#~ msgstr "inneholder over 255 linjer med kode.  Den kan føre til uønskede resultater."
-
-#~ msgid "Backgroundmusic Path changed."
-#~ msgstr "Bakgrunnsmusikk sti endret"
-
-#~ msgid "Set as backgroundmusic?"
-#~ msgstr "Bruk som bakgrunnsmusikk?"
-
-#~ msgid "The file is not a .wad"
-#~ msgstr "Denne filen er ikke en .wad"
-
-#~ msgid "Exit USB Loader GX?"
-#~ msgstr "Avslutt USB Loader GX?"
-
-#~ msgid "No WBFS partition found"
-#~ msgstr "Ingen WBFS partisjon funnet"
-
-#~ msgid "You need to format a partition"
-#~ msgstr "Du må formatere en partisjon"
-
-#~ msgid "ERROR: USB device could not be loaded!"
-#~ msgstr "FEIL: USB enhet kan ikke lastes!"
-
-#~ msgid "ERROR: cIOS could not be loaded!"
-#~ msgstr "FEIL: cIOS kan ikke lastes!"
-
-#~ msgid "Loading..."
-#~ msgstr "Laster..."
-
-#~ msgid "Waiting for your slow USB Device: %i secs..."
-#~ msgstr "Venter på USB enhet: %i sek..."

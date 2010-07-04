@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-16 16:17+0100\n"
+"POT-Creation-Date: 2010-05-30 23:36+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: c64rmx\n"
 "Language-Team: \n"
@@ -668,6 +668,9 @@ msgstr "Asennusvirhe!"
 msgid "Install a game"
 msgstr "Asenna peli"
 
+msgid "Install not possible"
+msgstr ""
+
 msgid "Install partitions"
 msgstr ""
 
@@ -1299,6 +1302,9 @@ msgstr "Olet tuhoamassa "
 msgid "You are choosing to display favorites and you do not have any selected."
 msgstr "Olet valinnut näyttääksesi suosikit mutta sinulla ei ole valittuna yhtään."
 
+msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
+msgstr ""
+
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr ""
 
@@ -1374,24 +1380,3 @@ msgstr "josta"
 
 msgid "seconds left"
 msgstr "sekuntia jäljellä"
-
-#~ msgid "contains over 255 lines of code.  It will produce unexpected results."
-#~ msgstr "Sisältää yli 255 riviä koodia. Muodostaa odottamattomia virheitä."
-
-#~ msgid "Backgroundmusic Path changed."
-#~ msgstr "Taustamusiikin polku muutettu"
-
-#~ msgid "Set as backgroundmusic?"
-#~ msgstr "Aseta taustamusiikiksi?"
-
-#~ msgid "The file is not a .wad"
-#~ msgstr "Tiedosto ei ole .wad"
-
-#~ msgid "Exit USB Loader GX?"
-#~ msgstr "Poistu USB Loader GX:stä?"
-
-#~ msgid "No WBFS partition found"
-#~ msgstr "Ei WBFS-osioita löytynyt"
-
-#~ msgid "You need to format a partition"
-#~ msgstr "Sinun täytyy formatoida osio"

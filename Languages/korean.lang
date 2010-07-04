@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-16 16:17+0100\n"
+"POT-Creation-Date: 2010-05-30 23:36+0200\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: nextos@korea.com\n"
 "Language-Team: \n"
@@ -668,6 +668,9 @@ msgstr "설치 에러!"
 msgid "Install a game"
 msgstr "게임을 설치할까요"
 
+msgid "Install not possible"
+msgstr ""
+
 msgid "Install partitions"
 msgstr ""
 
@@ -1299,6 +1302,9 @@ msgstr "삭제 하려고 합니다."
 msgid "You are choosing to display favorites and you do not have any selected."
 msgstr "즐겨찾기를 선택했으나 선택된 즐겨찾기가 없네요."
 
+msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
+msgstr ""
+
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr ""
 
@@ -1374,27 +1380,3 @@ msgstr "중"
 
 msgid "seconds left"
 msgstr "초 남았습니다"
-
-#~ msgid "contains over 255 lines of code.  It will produce unexpected results."
-#~ msgstr "255라인 이상이면 예상치 못한 결과가 나오죠."
-
-#~ msgid "Backgroundmusic Path changed."
-#~ msgstr "배경음악 경로 변경됨."
-
-#~ msgid "Set as backgroundmusic?"
-#~ msgstr "벼경음악 설정?"
-
-#~ msgid "The file is not a .wad"
-#~ msgstr "화일이 .wad 아님"
-
-#~ msgid "Exit USB Loader GX?"
-#~ msgstr "USB로더 GX를 종료할까요?"
-
-#~ msgid "No WBFS partition found"
-#~ msgstr "WBFS 파티션이 없습니다."
-
-#~ msgid "You need to format a partition"
-#~ msgstr "파티션을 포맷해야 합니다"
-
-#~ msgid "Homebrew Channel"
-#~ msgstr "홈브류 채널"
