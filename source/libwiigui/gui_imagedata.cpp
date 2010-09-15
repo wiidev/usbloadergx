@@ -358,7 +358,7 @@ void GuiImageData::LoadJpeg(const u8 *img, int imgSize)
 	jpeg_create_decompress(&cinfo);
     cinfo.err = jpeg_std_error(&jerr);
     cinfo.progress = NULL;
-    jpeg_memory_src(&cinfo, img, n);
+    jpeg_mem_src(&cinfo, (u8 *) img, n);
     jpeg_read_header(&cinfo, TRUE);
 	jpeg_calc_output_dimensions(&cinfo);
 

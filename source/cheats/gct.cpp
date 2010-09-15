@@ -187,11 +187,11 @@ int GCTCheats::openTxtfile(const char * filename) {
     getline(filestr,sGameID);
 	if (sGameID[sGameID.length() - 1] == '\r')
 		sGameID.erase(sGameID.length() - 1);
-	
+
     getline(filestr,sGameTitle);
 	if (sGameTitle[sGameTitle.length() - 1] == '\r')
 		sGameTitle.erase(sGameTitle.length() - 1);
-				
+
     getline(filestr,sCheatName[i]);  // skip first line if file uses CRLF
 	if (!sGameTitle[sGameTitle.length() - 1] == '\r')
 	   filestr.seekg(0,ios_base::beg);
@@ -208,7 +208,7 @@ int GCTCheats::openTxtfile(const char * filename) {
 			getline(filestr,str);
 			if (str[str.length() - 1] == '\r')
 				str.erase(str.length() - 1);
-				 
+
             if (str == "" || str[0] == '\r' || str[0] == '\n') {
                 emptyline = true;
                 break;
@@ -227,7 +227,7 @@ int GCTCheats::openTxtfile(const char * filename) {
                 sCheatComment[i] = str;
             }
 			if (filestr.eof()) break;
-		   
+
         } while (!emptyline);
 
         sCheats[i] = cheatdata;
@@ -245,7 +245,7 @@ bool GCTCheats::IsCode(const std::string& str) {
 		char part1[9];
 		char part2[9];
 		snprintf(part1,sizeof(part1),"%c%c%c%c%c%c%c%c",str[0],str[1],str[2],str[3],str[4],str[5],str[6],str[7]);
-		snprintf(part1,sizeof(part2),"%c%c%c%c%c%c%c%c",str[9],str[10],str[11],str[12],str[13],str[14],str[15],str[16]);
+		snprintf(part2,sizeof(part2),"%c%c%c%c%c%c%c%c",str[9],str[10],str[11],str[12],str[13],str[14],str[15],str[16]);
 		if ((strtok(part1,"0123456789ABCDEFabcdef") == NULL) && (strtok(part2,"0123456789ABCDEFabcdef") == NULL)) {
 			return true;
 		}
