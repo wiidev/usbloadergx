@@ -402,8 +402,13 @@ int ntfs_readdir_filler (DIR_ITER *dirState, const ntfschar *name, const int nam
 
         // Convert the entry name to our current local
         if (ntfsUnicodeToLocal(name, name_len, &entry_name, 0) < 0) {
-            ntfs_free(entry);
             return -1;
+        }
+
+        if(dir->first && dir->first->mref == FILE_root &&
+           MREF(mref) == FILE_root && strcmp(entry_name, "..") == 0)
+        {
+            return 0;
         }
 
         // If this is not the parent or self directory reference
@@ -411,10 +416,8 @@ int ntfs_readdir_filler (DIR_ITER *dirState, const ntfschar *name, const int nam
 
             // Open the entry
             ntfs_inode *ni = ntfs_pathname_to_inode(dir->vd->vol, dir->ni, entry_name);
-            if (!ni) {
-                ntfs_free(entry);
+            if (!ni)
                 return -1;
-            }
 
             // Double check that this entry can be emuerated (as described by the volume descriptor)
             if (((ni->flags & FILE_ATTR_HIDDEN) && !dir->vd->showHiddenFiles) ||
@@ -429,13 +432,14 @@ int ntfs_readdir_filler (DIR_ITER *dirState, const ntfschar *name, const int nam
         }
 
         // Allocate a new directory entry
-        entry = ntfs_alloc(sizeof(ntfs_dir_entry));
+        entry = (ntfs_dir_entry *) ntfs_alloc(sizeof(ntfs_dir_entry));
         if (!entry)
             return -1;
 
         // Setup the entry
         entry->name = entry_name;
         entry->next = NULL;
+        entry->mref = MREF(mref);
 
         // Link the entry to the directory
         if (!dir->first) {

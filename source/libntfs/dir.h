@@ -61,6 +61,9 @@ extern ntfschar NTFS_INDEX_R[3];
 
 extern u64 ntfs_inode_lookup_by_name(ntfs_inode *dir_ni,
 		const ntfschar *uname, const int uname_len);
+extern u64 ntfs_inode_lookup_by_mbsname(ntfs_inode *dir_ni, const char *name);
+extern void ntfs_inode_update_mbsname(ntfs_inode *dir_ni, const char *name,
+				u64 inum);
 
 extern ntfs_inode *ntfs_pathname_to_inode(ntfs_volume *vol, ntfs_inode *parent,
 		const char *pathname);
@@ -104,12 +107,22 @@ typedef int (*ntfs_filldir_t)(void *dirent, const ntfschar *name,
 extern int ntfs_readdir(ntfs_inode *dir_ni, s64 *pos,
 		void *dirent, ntfs_filldir_t filldir);
 
-int ntfs_get_ntfs_dos_name(const char *path,
-			char *value, size_t size, ntfs_inode *ni);
-int ntfs_set_ntfs_dos_name(const char *path,
-			const char *value, size_t size,	int flags,
-			ntfs_inode *ni);
-int ntfs_remove_ntfs_dos_name(const char *path, ntfs_inode *ni);
+ntfs_inode *ntfs_dir_parent_inode(ntfs_inode *ni);
+
+int ntfs_get_ntfs_dos_name(ntfs_inode *ni, ntfs_inode *dir_ni,
+			char *value, size_t size);
+int ntfs_set_ntfs_dos_name(ntfs_inode *ni, ntfs_inode *dir_ni,
+			const char *value, size_t size,	int flags);
+int ntfs_remove_ntfs_dos_name(ntfs_inode *ni, ntfs_inode *dir_ni);
+
+#if CACHE_INODE_SIZE
+
+struct CACHED_GENERIC;
+
+extern int ntfs_dir_inode_hash(const struct CACHED_GENERIC *cached);
+extern int ntfs_dir_lookup_hash(const struct CACHED_GENERIC *cached);
+
+#endif
 
 #endif /* defined _NTFS_DIR_H */
 

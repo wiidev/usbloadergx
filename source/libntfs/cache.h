@@ -1,136 +1,119 @@
 /*
- NTFS_CACHE.h
- The NTFS_CACHE is not visible to the user. It should be flushed
- when any file is closed or changes are made to the filesystem.
+ * cache.h : deal with indexed LRU caches
+ *
+ * Copyright (c) 2008-2009 Jean-Pierre Andre
+ *
+ * This program/include file is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as published
+ * by the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program/include file is distributed in the hope that it will be
+ * useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+ * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program (in the main directory of the NTFS-3G
+ * distribution in the file COPYING); if not, write to the Free Software
+ * Foundation,Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
- This NTFS_CACHE implements a least-used-page replacement policy. This will
- distribute sectors evenly over the pages, so if less than the maximum
- pages are used at once, they should all eventually remain in the NTFS_CACHE.
- This also has the benefit of throwing out old sectors, so as not to keep
- too many stale pages around.
+#ifndef _NTFS_CACHE_H_
+#define _NTFS_CACHE_H_
 
- Copyright (c) 2006 Michael "Chishm" Chisholm
- Copyright (c) 2009 shareese, rodries
+#include "volume.h"
 
- Redistribution and use in source and binary forms, with or without modification,
- are permitted provided that the following conditions are met:
+struct CACHED_GENERIC {
+	struct CACHED_GENERIC *next;
+	struct CACHED_GENERIC *previous;
+	void *variable;
+	size_t varsize;
+	union {
+		/* force alignment for pointers and u64 */
+		u64 u64align;
+		void *ptralign;
+	} fixed[0];
+} ;
 
-  1. Redistributions of source code must retain the above copyright notice,
-     this list of conditions and the following disclaimer.
-  2. Redistributions in binary form must reproduce the above copyright notice,
-     this list of conditions and the following disclaimer in the documentation and/or
-     other materials provided with the distribution.
-  3. The name of the author may not be used to endorse or promote products derived
-     from this software without specific prior written permission.
+struct CACHED_INODE {
+	struct CACHED_INODE *next;
+	struct CACHED_INODE *previous;
+	const char *pathname;
+	size_t varsize;
+		/* above fields must match "struct CACHED_GENERIC" */
+	u64 inum;
+} ;
 
- THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
- WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY
- AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHOR BE
- LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
- EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
+struct CACHED_NIDATA {
+	struct CACHED_NIDATA *next;
+	struct CACHED_NIDATA *previous;
+	const char *pathname;	/* not used */
+	size_t varsize;		/* not used */
+		/* above fields must match "struct CACHED_GENERIC" */
+	u64 inum;
+	ntfs_inode *ni;
+} ;
 
-#ifndef _CACHE_H
-#define _CACHE_H
+struct CACHED_LOOKUP {
+	struct CACHED_LOOKUP *next;
+	struct CACHED_LOOKUP *previous;
+	const char *name;
+	size_t namesize;
+		/* above fields must match "struct CACHED_GENERIC" */
+	u64 parent;
+	u64 inum;
+} ;
 
-//#include "common.h"
-//#include "disc.h"
+enum {
+	CACHE_FREE = 1,
+	CACHE_NOHASH = 2
+} ;
 
-#include <stddef.h>
-#include <stdint.h>
-#include <gctypes.h>
-#include <ogc/disc_io.h>
-#include <gccore.h>
+typedef int (*cache_compare)(const struct CACHED_GENERIC *cached,
+				const struct CACHED_GENERIC *item);
+typedef void (*cache_free)(const struct CACHED_GENERIC *cached);
+typedef int (*cache_hash)(const struct CACHED_GENERIC *cached);
 
-#define BYTES_PER_READ 512
+struct HASH_ENTRY {
+	struct HASH_ENTRY *next;
+	struct CACHED_GENERIC *entry;
+} ;
 
-typedef struct {
-	sec_t        sector;
-	unsigned int count;
-	u64 last_access;
-	bool         dirty;
-	u8*     cache;
-} NTFS_CACHE_ENTRY;
+struct CACHE_HEADER {
+	const char *name;
+	struct CACHED_GENERIC *most_recent_entry;
+	struct CACHED_GENERIC *oldest_entry;
+	struct CACHED_GENERIC *free_entry;
+	struct HASH_ENTRY *free_hash;
+	struct HASH_ENTRY **first_hash;
+	cache_free dofree;
+	cache_hash dohash;
+	unsigned long reads;
+	unsigned long writes;
+	unsigned long hits;
+	int fixed_size;
+	int max_hash;
+	struct CACHED_GENERIC entry[0];
+} ;
 
-typedef struct {
-	const DISC_INTERFACE* disc;
-	sec_t		          endOfPartition;
-	unsigned int          numberOfPages;
-	unsigned int          sectorsPerPage;
-	NTFS_CACHE_ENTRY*          cacheEntries;
-} NTFS_CACHE;
+	/* cast to generic, avoiding gcc warnings */
+#define GENERIC(pstr) ((const struct CACHED_GENERIC*)(const void*)(pstr))
 
-/*
-Read data from a sector in the NTFS_CACHE
-If the sector is not in the NTFS_CACHE, it will be swapped in
-offset is the position to start reading from
-size is the amount of data to read
-Precondition: offset + size <= BYTES_PER_READ
-*/
-//bool _NTFS_cache_readPartialSector (NTFS_CACHE* NTFS_CACHE, void* buffer, sec_t sector, unsigned int offset, size_t size);
+struct CACHED_GENERIC *ntfs_fetch_cache(struct CACHE_HEADER *cache,
+			const struct CACHED_GENERIC *wanted,
+			cache_compare compare);
+struct CACHED_GENERIC *ntfs_enter_cache(struct CACHE_HEADER *cache,
+			const struct CACHED_GENERIC *item,
+			cache_compare compare);
+int ntfs_invalidate_cache(struct CACHE_HEADER *cache,
+			const struct CACHED_GENERIC *item,
+			cache_compare compare, int flags);
+int ntfs_remove_cache(struct CACHE_HEADER *cache,
+			struct CACHED_GENERIC *item, int flags);
 
-//bool _NTFS_cache_readLittleEndianValue (NTFS_CACHE* NTFS_CACHE, uint32_t *value, sec_t sector, unsigned int offset, int num_bytes);
+void ntfs_create_lru_caches(ntfs_volume *vol);
+void ntfs_free_lru_caches(ntfs_volume *vol);
 
-/*
-Write data to a sector in the NTFS_CACHE
-If the sector is not in the NTFS_CACHE, it will be swapped in.
-When the sector is swapped out, the data will be written to the disc
-offset is the position to start writing to
-size is the amount of data to write
-Precondition: offset + size <= BYTES_PER_READ
-*/
-//bool _NTFS_cache_writePartialSector (NTFS_CACHE* NTFS_CACHE, const void* buffer, sec_t sector, unsigned int offset, size_t size);
-
-//bool _NTFS_cache_writeLittleEndianValue (NTFS_CACHE* NTFS_CACHE, const uint32_t value, sec_t sector, unsigned int offset, int num_bytes);
-
-/*
-Write data to a sector in the NTFS_CACHE, zeroing the sector first
-If the sector is not in the NTFS_CACHE, it will be swapped in.
-When the sector is swapped out, the data will be written to the disc
-offset is the position to start writing to
-size is the amount of data to write
-Precondition: offset + size <= BYTES_PER_READ
-*/
-//bool _NTFS_cache_eraseWritePartialSector (NTFS_CACHE* NTFS_CACHE, const void* buffer, sec_t sector, unsigned int offset, size_t size);
-
-/*
-Read several sectors from the NTFS_CACHE
-*/
-bool _NTFS_cache_readSectors (NTFS_CACHE* NTFS_CACHE, sec_t sector, sec_t numSectors, void* buffer);
-
-/*
-Read a full sector from the NTFS_CACHE
-*/
-//static inline bool _NTFS_cache_readSector (NTFS_CACHE* NTFS_CACHE, void* buffer, sec_t sector) {
-//	return _NTFS_cache_readPartialSector (NTFS_CACHE, buffer, sector, 0, BYTES_PER_READ);
-//}
-
-/*
-Write a full sector to the NTFS_CACHE
-*/
-//static inline bool _NTFS_cache_writeSector (NTFS_CACHE* NTFS_CACHE, const void* buffer, sec_t sector) {
-//	return _NTFS_cache_writePartialSector (NTFS_CACHE, buffer, sector, 0, BYTES_PER_READ);
-//}
-
-bool _NTFS_cache_writeSectors (NTFS_CACHE* NTFS_CACHE, sec_t sector, sec_t numSectors, const void* buffer);
-
-/*
-Write any dirty sectors back to disc and clear out the contents of the NTFS_CACHE
-*/
-bool _NTFS_cache_flush (NTFS_CACHE* NTFS_CACHE);
-
-/*
-Clear out the contents of the NTFS_CACHE without writing any dirty sectors first
-*/
-void _NTFS_cache_invalidate (NTFS_CACHE* NTFS_CACHE);
-
-NTFS_CACHE* _NTFS_cache_constructor (unsigned int numberOfPages, unsigned int sectorsPerPage, const DISC_INTERFACE* discInterface, sec_t endOfPartition);
-
-void _NTFS_cache_destructor (NTFS_CACHE* NTFS_CACHE);
-
-#endif // _CACHE_H
+#endif /* _NTFS_CACHE_H_ */
 

@@ -205,10 +205,16 @@ PARTITION* _FAT_partition_constructor (const DISC_INTERFACE* disc, uint32_t cach
 		return NULL;
 	}
 
-	_FAT_startSector = startSector;
-
 	// Init the partition lock
 	_FAT_lock_init(&partition->lock);
+
+	_FAT_startSector = startSector;
+
+	if (!memcmp(sectorBuffer + BPB_FAT16_fileSysType, FAT_SIG, sizeof(FAT_SIG)))
+		strncpy(partition->label, (char*)(sectorBuffer + BPB_FAT16_volumeLabel), 11);
+	else
+		strncpy(partition->label, (char*)(sectorBuffer + BPB_FAT32_volumeLabel), 11);
+	partition->label[11] = '\0';
 
 	// Set partition's disc interface
 	partition->disc = disc;

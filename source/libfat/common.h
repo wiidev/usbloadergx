@@ -3,7 +3,7 @@
  Common definitions and included files for the FATlib
 
  Copyright (c) 2006 Michael "Chishm" Chisholm
-
+	
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
 
@@ -26,23 +26,54 @@
  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef __COMMON_H
-#define __COMMON_H
+#ifndef _COMMON_H
+#define _COMMON_H
 
 #define BYTES_PER_READ 512
-#include "fat.h"
 #include <stddef.h>
 #include <stdint.h>
+#include "libfat/fat.h"
 
+// When compiling for NDS, make sure NDS is defined
+#ifndef NDS
+ #if defined ARM9 || defined ARM7
+  #define NDS
+ #endif
+#endif
 
 // Platform specific includes
-#include <gctypes.h>
-#include <ogc/disc_io.h>
-#include <gccore.h>
+#if defined(__gamecube__) || defined (__wii__)
+   #include <gctypes.h>
+   #include <ogc/disc_io.h>
+   #include <gccore.h>
+#elif defined(NDS)
+   #include <nds/ndstypes.h>
+   #include <nds/system.h>
+   #include <nds/disc_io.h>
+#elif defined(GBA)
+   #include <gba_types.h>
+   #include <disc_io.h>
+#endif
+
 // Platform specific options
-#define DEFAULT_CACHE_PAGES 4
-#define DEFAULT_SECTORS_PAGE 64
-#define USE_LWP_LOCK
-#define USE_RTC_TIME
+#if   defined (__wii__)
+   #define DEFAULT_CACHE_PAGES 4
+   #define DEFAULT_SECTORS_PAGE 64
+   #define USE_LWP_LOCK
+   #define USE_RTC_TIME
+#elif defined (__gamecube__)
+   #define DEFAULT_CACHE_PAGES 4
+   #define DEFAULT_SECTORS_PAGE 64
+   #define USE_LWP_LOCK
+   #define USE_RTC_TIME
+#elif defined (NDS)
+   #define DEFAULT_CACHE_PAGES 4
+   #define DEFAULT_SECTORS_PAGE 8
+   #define USE_RTC_TIME
+#elif defined (GBA)
+   #define DEFAULT_CACHE_PAGES 2
+   #define DEFAULT_SECTORS_PAGE 8
+   #define LIMIT_SECTORS 128
+#endif
 
 #endif // _COMMON_H

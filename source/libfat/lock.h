@@ -26,8 +26,8 @@
 
 */
 
-#ifndef __LOCK_H
-#define __LOCK_H
+#ifndef _LOCK_H
+#define _LOCK_H
 
 #include "common.h"
 

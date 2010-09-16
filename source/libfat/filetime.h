@@ -3,7 +3,7 @@
  Conversion of file time and date values to various other types
 
  Copyright (c) 2006 Michael "Chishm" Chisholm
-
+	
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
 
@@ -26,8 +26,8 @@
  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef __FILETIME_H
-#define __FILETIME_H
+#ifndef _FILETIME_H
+#define _FILETIME_H
 
 #include "common.h"
 #include <sys/types.h>

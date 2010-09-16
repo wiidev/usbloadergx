@@ -65,7 +65,7 @@ typedef struct _ntfs_md {
  *
  * @param INTERFACE The block device to search
  * @param PARTITIONS (out) A pointer to receive the array of partition start sectors
- * 
+ *
  * @return The number of entries in PARTITIONS or -1 if an error occurred (see errno)
  * @note The caller is responsible for freeing PARTITIONS when finished with it
  */
@@ -76,7 +76,7 @@ extern int ntfsFindPartitions (const DISC_INTERFACE *interface, sec_t **partitio
  *
  * @param MOUNTS (out) A pointer to receive the array of mount descriptors
  * @param FLAGS Additional mounting flags. (see above)
- * 
+ *
  * @return The number of entries in MOUNTS or -1 if an error occurred (see errno)
  * @note The caller is responsible for freeing MOUNTS when finished with it
  * @note All device caches are setup using default values (see above)
@@ -89,7 +89,7 @@ extern int ntfsMountAll (ntfs_md **mounts, u32 flags);
  * @param INTERFACE The block device to mount.
  * @param MOUNTS (out) A pointer to receive the array of mount descriptors
  * @param FLAGS Additional mounting flags. (see above)
- * 
+ *
  * @return The number of entries in MOUNTS or -1 if an error occurred (see errno)
  * @note The caller is responsible for freeing MOUNTS when finished with it
  * @note The device cache is setup using default values (see above)
@@ -103,9 +103,9 @@ extern int ntfsMountDevice (const DISC_INTERFACE* interface, ntfs_md **mounts, u
  * @param INTERFACE The block device to mount
  * @param STARTSECTOR The sector the partition begins at (see @ntfsFindPartitions)
  * @param CACHEPAGECOUNT The total number of pages in the device cache
- * @param CACHEPAGESIZE The number of sectors per cache page 
+ * @param CACHEPAGESIZE The number of sectors per cache page
  * @param FLAGS Additional mounting flags (see above)
- * 
+ *
  * @return True if mount was successful, false if no partition was found or an error occurred (see errno)
  * @note ntfsFindPartitions should be used first to locate the partitions start sector
  */
@@ -139,18 +139,6 @@ extern const char *ntfsGetVolumeName (const char *name);
  */
 extern bool ntfsSetVolumeName (const char *name, const char *volumeName);
 
-/*
-typedef struct _FileInfo FileInfo;
-
-struct _FileInfo
-{
-	u64 offset[64];
-	s64 sector[64];
-	u64 count[64];
-	u32 num;
-	u64 filesize;
-};
-*/
 typedef int (*_ntfs_frag_append_t)(void *ff, u32 offset, u32 sector, u32 count);
 int _NTFS_get_fragments (const char *path, _ntfs_frag_append_t append_fragment, void *callback_data);
 

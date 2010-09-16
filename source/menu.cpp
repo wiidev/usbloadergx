@@ -350,10 +350,8 @@ int MainMenu(int menu) {
 	gettextCleanUp();
 
     if(dbvideo)
-	{
-	InitVideodebug ();
-	//printf("\n\n\n\n\n");
-    }
+        InitVideodebug ();
+
 	if (mountMethod==3)
 	{
 			struct discHdr *header = &gameList[gameSelected];
@@ -372,13 +370,13 @@ int MainMenu(int menu) {
 		WII_LaunchTitle(0x0000000100000100ULL);
 	}
 
-    else if (boothomebrew == 1) {
+    if (boothomebrew == 1) {
 		gprintf("\nBootHomebrew");
         BootHomebrew(Settings.selected_homebrew);
     }
 	else if (boothomebrew == 2) {
-		gprintf("\nBootHomebrewFromMenu");
-        BootHomebrewFromMem();
+		gprintf("\nBootHomebrew from Menu");
+        BootHomebrew();
     }
 	else {
 		gprintf("\n\tSettings.partition:%d",Settings.partition);

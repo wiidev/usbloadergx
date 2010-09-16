@@ -699,8 +699,8 @@ BOOL ntfs_is_logfile_clean(ntfs_attr *log_na, RESTART_PAGE_HEADER *rp)
  */
 int ntfs_empty_logfile(ntfs_attr *na)
 {
-	/*s64 pos, count;
-	char buf[NTFS_BUF_SIZE];*/
+	s64 pos, count;
+	char buf[NTFS_BUF_SIZE];
 
 	ntfs_log_trace("Entering.\n");
 	
@@ -713,7 +713,7 @@ int ntfs_empty_logfile(ntfs_attr *na)
 		return -1;
 	}
 
-	/*memset(buf, -1, NTFS_BUF_SIZE);
+	memset(buf, -1, NTFS_BUF_SIZE);
 
 	pos = 0;
 	while ((count = na->data_size - pos) > 0) {
@@ -729,7 +729,7 @@ int ntfs_empty_logfile(ntfs_attr *na)
 			return -1;
 		}
 		pos += count;
-	}*/
+	}
 
 	NVolSetLogFileEmpty(na->ni->vol);
 	

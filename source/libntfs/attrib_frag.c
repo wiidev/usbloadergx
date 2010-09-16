@@ -818,7 +818,7 @@ static s64 ntfs_attr_getfragments_i(ntfs_attr *na, const s64 pos, s64 count, u64
 	s64 br, to_read, ofs, total, total2, max_read, max_init;
 	ntfs_volume *vol;
 	runlist_element *rl;
-//	u16 efs_padding_length;
+	//u16 efs_padding_length;
 
 	/* Sanity checking arguments is done in ntfs_attr_pread(). */
 	

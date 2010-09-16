@@ -32,6 +32,7 @@ typedef struct _ntfs_inode ntfs_inode;
 #include "layout.h"
 #include "support.h"
 #include "volume.h"
+#include "ntfstime.h"
 
 /**
  * enum ntfs_inode_state_bits -
@@ -49,7 +50,8 @@ typedef enum {
 	NI_FileNameDirty,	/* 1: FILE_NAME attributes need to be updated
 				      in the index. */
 	NI_v3_Extensions,	/* 1: JPA v3.x extensions present. */
-	NI_TimesDirty,		/* 1: Times need to be updated */
+	NI_TimesSet,		/* 1: Use times which were set */
+	NI_KnownSize,		/* 1: Set if sizes are meaningful */
 } ntfs_inode_state_bits;
 
 #define  test_nino_flag(ni, flag)	   test_bit(NI_##flag, (ni)->state)
@@ -135,8 +137,11 @@ struct _ntfs_inode {
 	 * These two fields are used to sync filename index and guaranteed to be
 	 * correct, however value in index itself maybe wrong (windows itself
 	 * do not update them properly).
+	 * For directories, they hold the index size, provided the
+	 * flag KnownSize is set.
 	 */
-	s64 data_size;		/* Data size of unnamed DATA attribute. */
+	s64 data_size;		/* Data size of unnamed DATA attribute
+				   (or INDEX_ROOT for directories) */
 	s64 allocated_size;	/* Allocated size stored in the filename
 				   index. (NOTE: Equal to allocated size of
 				   the unnamed data attribute for normal or
@@ -149,10 +154,10 @@ struct _ntfs_inode {
 	 * STANDARD_INFORMATION attribute and used to sync it and FILE_NAME
 	 * attribute in the index.
 	 */
-	time_t creation_time;
-	time_t last_data_change_time;
-	time_t last_mft_change_time;
-	time_t last_access_time;
+	ntfs_time creation_time;
+	ntfs_time last_data_change_time;
+	ntfs_time last_mft_change_time;
+	ntfs_time last_access_time;
 				/* NTFS 3.x extensions added by JPA */
 				/* only if NI_v3_Extensions is set in state */
  	le32 owner_id;
@@ -177,6 +182,19 @@ extern ntfs_inode *ntfs_inode_allocate(ntfs_volume *vol);
 extern ntfs_inode *ntfs_inode_open(ntfs_volume *vol, const MFT_REF mref);
 
 extern int ntfs_inode_close(ntfs_inode *ni);
+extern int ntfs_inode_close_in_dir(ntfs_inode *ni, ntfs_inode *dir_ni);
+
+#if CACHE_NIDATA_SIZE
+
+struct CACHED_GENERIC;
+
+extern int ntfs_inode_real_close(ntfs_inode *ni);
+extern void ntfs_inode_invalidate(ntfs_volume *vol, const MFT_REF mref);
+extern void ntfs_inode_nidata_free(const struct CACHED_GENERIC *cached);
+extern int ntfs_inode_nidata_hash(const struct CACHED_GENERIC *item);
+
+#endif
+
 
 extern ntfs_inode *ntfs_extent_inode_open(ntfs_inode *base_ni,
 		const MFT_REF mref);
@@ -195,9 +213,13 @@ extern int ntfs_inode_free_space(ntfs_inode *ni, int size);
 
 extern int ntfs_inode_badclus_bad(u64 mft_no, ATTR_RECORD *a);
 
-extern int ntfs_inode_get_times(const char *path, char *value,
-			size_t size, ntfs_inode *ni);
-extern int ntfs_inode_set_times(const char *path, const char *value,
-			size_t size, int flags, ntfs_inode *ni);
+extern int ntfs_inode_get_times(ntfs_inode *ni, char *value, size_t size);
+
+extern int ntfs_inode_set_times(ntfs_inode *ni, const char *value,
+			size_t size, int flags);
+
+/* debugging */
+#define debug_double_inode(num, type)
+#define debug_cached_inode(ni)
 
 #endif /* defined _NTFS_INODE_H */

@@ -1,16 +1,26 @@
 
 #include "mem2.h"
-#include "mem2alloc.h"
+#include "mem2alloc.hpp"
 
 #include <malloc.h>
 #include <string.h>
 
-#define MEM2_PRIORITY_SIZE	0x40
+#define MEM2_PRIORITY_SIZE	2097152         //2MB
 
 // Forbid the use of MEM2 through malloc
 u32 MALLOC_MEM2 = 0;
 
 static CMEM2Alloc g_mem2gp;
+
+static bool g_bigGoesToMem2 = false;
+
+extern "C"
+{
+
+void MEM2_takeBigOnes(bool b)
+{
+	g_bigGoesToMem2 = b;
+}
 
 void MEM2_init(unsigned int mem2Size)
 {
@@ -22,40 +32,30 @@ void MEM2_cleanup(void)
 	g_mem2gp.cleanup();
 }
 
-extern "C" void *MEM2_alloc(unsigned int s)
+void *MEM2_alloc(unsigned int s)
 {
 	return g_mem2gp.allocate(s);
 }
 
-extern "C" void MEM2_free(void *p)
+void MEM2_free(void *p)
 {
 	g_mem2gp.release(p);
 }
 
-extern "C" void *MEM2_realloc(void *p, unsigned int s)
+void *MEM2_realloc(void *p, unsigned int s)
 {
 	return g_mem2gp.reallocate(p, s);
 }
 
-extern "C" unsigned int MEM2_usableSize(void *p)
+unsigned int MEM2_usableSize(void *p)
 {
 	return CMEM2Alloc::usableSize(p);
 }
 
-// Give priority to MEM2 for big allocations
-// Used for saving some space in malloc, which is required for 2 reasons :
-// - decent speed on small and frequent allocations
-// - newlib uses its malloc internally (for *printf for example) so it should always have some memory left
-bool g_bigGoesToMem2 = false;
-
-void MEM2_takeBigOnes(bool b)
+unsigned int MEM2_freesize()
 {
-	g_bigGoesToMem2 = b;
+    return g_mem2gp.FreeSize();
 }
-
-
-extern "C"
-{
 
 extern __typeof(malloc) __real_malloc;
 extern __typeof(calloc) __real_calloc;
@@ -133,9 +133,12 @@ void __wrap_free(void *p)
     if(!p)
         return;
 
-	if (((u32)p & 0x10000000) != 0) {
+	if (((u32)p & 0x10000000) != 0)
+	{
 		MEM2_free(p);
-	} else {
+	}
+	else
+	{
 		__real_free(p);
 	}
 }
@@ -185,4 +188,4 @@ size_t __wrap_malloc_usable_size(void *p)
 	return __real_malloc_usable_size(p);
 }
 
-}
+} ///extern "C"

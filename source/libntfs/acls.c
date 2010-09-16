@@ -563,7 +563,8 @@ static BOOL valid_acl(const ACL *pacl, unsigned int end)
 				&((const char*)pacl)[offace];
 			acesz = le16_to_cpu(pace->size);
 			if (((offace + acesz) > end)
-			   || !ntfs_valid_sid(&pace->sid))
+			   || !ntfs_valid_sid(&pace->sid)
+			   || ((ntfs_sid_size(&pace->sid) + 8) != (int)acesz))
 				 ok = FALSE;
 			offace += acesz;
 		}
@@ -614,7 +615,6 @@ BOOL ntfs_valid_descr(const char *securattr, unsigned int attrsz)
 		 * old revision and no DACL though SE_DACL_PRESENT is set
 		 */
 	if ((attrsz >= sizeof(SECURITY_DESCRIPTOR_RELATIVE))
-		&& (ntfs_attr_size(securattr) <= attrsz)
 		&& (phead->revision == SECURITY_DESCRIPTOR_REVISION)
 		&& (offowner >= sizeof(SECURITY_DESCRIPTOR_RELATIVE))
 		&& ((offowner + 2) < attrsz)
@@ -622,14 +622,15 @@ BOOL ntfs_valid_descr(const char *securattr, unsigned int attrsz)
 		&& ((offgroup + 2) < attrsz)
 		&& (!offdacl
 			|| ((offdacl >= sizeof(SECURITY_DESCRIPTOR_RELATIVE))
-			    && (offdacl < attrsz)))
+			    && (offdacl+sizeof(ACL) < attrsz)))
 		&& (!offsacl
 			|| ((offsacl >= sizeof(SECURITY_DESCRIPTOR_RELATIVE))
-			    && (offsacl < attrsz)))
+			    && (offsacl+sizeof(ACL) < attrsz)))
 		&& !(phead->owner & const_cpu_to_le32(3))
 		&& !(phead->group & const_cpu_to_le32(3))
 		&& !(phead->dacl & const_cpu_to_le32(3))
 		&& !(phead->sacl & const_cpu_to_le32(3))
+		&& (ntfs_attr_size(securattr) <= attrsz)
 		&& ntfs_valid_sid((const SID*)&securattr[offowner])
 		&& ntfs_valid_sid((const SID*)&securattr[offgroup])
 			/*
@@ -707,10 +708,12 @@ int ntfs_inherit_acl(const ACL *oldacl, ACL *newacl,
 			if (ntfs_same_sid(&pnewace->sid, ownersid)) {
 				memcpy(&pnewace->sid, usid, usidsz);
 				acesz = usidsz + 8;
+				pnewace->size = cpu_to_le16(acesz);
 			}
 			if (ntfs_same_sid(&pnewace->sid, groupsid)) {
 				memcpy(&pnewace->sid, gsid, gsidsz);
 				acesz = gsidsz + 8;
+				pnewace->size = cpu_to_le16(acesz);
 			}
 			if (pnewace->mask & GENERIC_ALL) {
 				pnewace->mask &= ~GENERIC_ALL;
@@ -2985,8 +2988,10 @@ static int build_std_permissions(const char *securattr,
 	if (offdacl) {
 		acecnt = le16_to_cpu(pacl->ace_count);
 		offace = offdacl + sizeof(ACL);
-	} else
+	} else {
 		acecnt = 0;
+		offace = 0;
+	}
 	for (nace = 0; nace < acecnt; nace++) {
 		pace = (const ACCESS_ALLOWED_ACE*)&securattr[offace];
 		if (!(pace->flags & INHERIT_ONLY_ACE)) {
@@ -3255,8 +3260,10 @@ static int build_ownadmin_permissions(const char *securattr,
 	if (offdacl) {
 		acecnt = le16_to_cpu(pacl->ace_count);
 		offace = offdacl + sizeof(ACL);
-	} else
+	} else {
 		acecnt = 0;
+		offace = 0;
+	}
 	firstapply = TRUE;
 	isforeign = 3;
 	for (nace = 0; nace < acecnt; nace++) {

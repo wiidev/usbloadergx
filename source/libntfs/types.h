@@ -1,5 +1,5 @@
 /*
- * types.h - Misc type definitions not related to on-disk structure.  
+ * types.h - Misc type definitions not related to on-disk structure.
  *           Originated from the Linux-NTFS project.
  *
  * Copyright (c) 2000-2004 Anton Altaparmakov
@@ -87,8 +87,8 @@ typedef sle64 leLSN;
  * Cygwin has a collision between our BOOL and <windef.h>'s
  * As long as this file will be included after <windows.h> were fine.
  */
-#ifndef _WINDEF_H
 #ifndef GEKKO
+#ifndef _WINDEF_H
 /**
  * enum BOOL - These are just to make the code more readable...
  */
@@ -112,8 +112,8 @@ typedef enum {
 	ONE = 1,
 #endif
 } BOOL;
-#endif /* GEKKO */
 #endif /* defined _WINDEF_H */
+#endif /* defined GECKO */
 
 /**
  * enum IGNORE_CASE_BOOL -

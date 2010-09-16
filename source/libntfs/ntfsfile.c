@@ -65,8 +65,8 @@ void ntfsCloseFile (ntfs_file_state *file)
     // Sync the file (and its attributes) to disc
     if(file->write)
     {
-        ntfsSync(file->vd, file->ni);
         ntfsUpdateTimes(file->vd, file->ni, NTFS_UPDATE_ATIME | NTFS_UPDATE_CTIME);
+        ntfsSync(file->vd, file->ni);
     }
 
     if (file->read)

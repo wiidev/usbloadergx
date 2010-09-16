@@ -36,7 +36,7 @@
 #include "fatdir.h"
 #include "lock.h"
 #include "mem_allocate.h"
-#include "disc_fat.h"
+#include "disc.h"
 
 static const devoptab_t dotab_fat = {
 	"fat",
@@ -69,17 +69,17 @@ bool fatMount (const char* name, const DISC_INTERFACE* interface, sec_t startSec
 	devoptab_t* devops;
 	char* nameCopy;
 
+	if(!name || !interface)
+		return false;
+
 	if(!interface->startup())
 		return false;
 
-	if(!interface->isInserted()) {
-		interface->shutdown();
+	if(!interface->isInserted())
 		return false;
-	}
 
 	devops = _FAT_mem_allocate (sizeof(devoptab_t) + strlen(name) + 1);
 	if (!devops) {
-		interface->shutdown();
 		return false;
 	}
 	// Use the space allocated at the end of the devoptab struct for storing the name
@@ -89,7 +89,6 @@ bool fatMount (const char* name, const DISC_INTERFACE* interface, sec_t startSec
 	partition = _FAT_partition_constructor (interface, cacheSize, SectorsPerPage, startSector);
 	if (!partition) {
 		_FAT_mem_free (devops);
-		interface->shutdown();
 		return false;
 	}
 
@@ -111,7 +110,9 @@ bool fatMountSimple (const char* name, const DISC_INTERFACE* interface) {
 void fatUnmount (const char* name) {
 	devoptab_t *devops;
 	PARTITION* partition;
-	const DISC_INTERFACE *disc;
+
+	if(!name)
+		return;
 
 	devops = (devoptab_t*)GetDeviceOpTab (name);
 	if (!devops) {
@@ -128,10 +129,8 @@ void fatUnmount (const char* name) {
 	}
 
 	partition = (PARTITION*)devops->deviceData;
-	disc = partition->disc;
 	_FAT_partition_destructor (partition);
 	_FAT_mem_free (devops);
-	disc->shutdown();
 }
 
 bool fatInit (uint32_t cacheSize, bool setAsDefaultDevice) {
@@ -194,4 +193,49 @@ bool fatInitDefault (void) {
 	return fatInit (DEFAULT_CACHE_PAGES, true);
 }
 
+void fatGetVolumeLabel (const char* name, char *label) {
+	devoptab_t *devops;
+	PARTITION* partition;
+	char *buf;
+	int namelen,i;
 
+	if(!name || !label)
+		return;
+
+	namelen = strlen(name);
+	buf=(char*)_FAT_mem_allocate(sizeof(char)*namelen+2);	
+	strcpy(buf,name);
+
+	if (name[namelen-1] == '/') {
+		buf[namelen-1]='\0';
+		namelen--;
+	}
+
+	if (name[namelen-1] != ':') {
+		buf[namelen]=':';
+		buf[namelen+1]='\0';
+	}
+
+	devops = (devoptab_t*)GetDeviceOpTab(buf);
+
+	for(i=0;buf[i]!='\0' && buf[i]!=':';i++);  
+	if (!devops || strncasecmp(buf,devops->name,i)) {
+		free(buf);
+		return;
+	}
+
+	free(buf);
+
+	// Perform a quick check to make sure we're dealing with a libfat controlled device
+	if (devops->open_r != dotab_fat.open_r) {
+		return;
+	}	
+
+	partition = (PARTITION*)devops->deviceData;
+
+	if(!_FAT_directory_getVolumeLabel(partition, label)) { 
+		strncpy(label,partition->label,11);
+		label[11]='\0';
+	}
+	if(!strncmp(label, "NO NAME", 7)) label[0]='\0';
+}

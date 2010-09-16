@@ -34,7 +34,6 @@
 #include <string.h>
 #endif
 
-#include "usbloader/usbstorage2.h"
 #include "ntfsinternal.h"
 #include "ntfsdir.h"
 #include "ntfsfile.h"
@@ -42,11 +41,11 @@
 #if defined(__wii__)
 #include <sdcard/wiisd_io.h>
 #include <sdcard/gcsd.h>
-
+#include <ogc/usbstorage.h>
 
 const INTERFACE_ID ntfs_disc_interfaces[] = {
     { "sd", &__io_wiisd },
-    { "usb", &__io_usbstorage2 },
+    { "usb", &__io_usbstorage },
     { "carda", &__io_gcsda },
     { "cardb", &__io_gcsdb },
     { NULL, NULL }
@@ -77,7 +76,7 @@ int ntfsAddDevice (const char *name, void *deviceData)
     }
 
     // Allocate a devoptab for this device
-    dev = ntfs_alloc(sizeof(devoptab_t) + strlen(name) + 1);
+    dev = (devoptab_t *) ntfs_alloc(sizeof(devoptab_t) + strlen(name) + 1);
     if (!dev) {
         errno = ENOMEM;
         return false;
@@ -304,7 +303,7 @@ ntfs_inode *ntfsParseEntry (ntfs_vd *vd, const char *path, int reparseLevel)
             }
 
             // Get the target path of this entry
-            target = ntfs_make_symlink(path, ni, &attr_size);
+            target = ntfs_make_symlink(ni, path, &attr_size);
             if (!target) {
                 ntfsCloseEntry(vd, ni);
                 return NULL;
@@ -549,7 +548,6 @@ int ntfsLink (ntfs_vd *vd, const char *old_path, const char *new_path)
     }
 
     // Update entry times
-    ntfsUpdateTimes(vd, ni, NTFS_UPDATE_CTIME);
     ntfsUpdateTimes(vd, dir_ni, NTFS_UPDATE_MCTIME);
 
     // Sync the entry to disc
@@ -816,7 +814,7 @@ int ntfsUnicodeToLocal (const ntfschar *ins, const int ins_len, char **outs, int
         // do it manually by replacing non-ASCII characters with underscores
         if (!*outs || outs_len >= ins_len) {
             if (!*outs) {
-                *outs = ntfs_alloc(ins_len + 1);
+                *outs = (char *) ntfs_alloc(ins_len + 1);
                 if (!*outs) {
                     errno = ENOMEM;
                     return -1;
