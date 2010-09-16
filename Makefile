@@ -96,6 +96,7 @@ TTFFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.ttf)))
 PNGFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.png)))
 OGGFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.ogg)))
 PCMFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.pcm)))
+DOLFILES	:=	$(foreach dir,$(DATA),$(notdir $(wildcard $(dir)/*.dol)))
 MP3FILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.mp3)))
 	
 #---------------------------------------------------------------------------------
@@ -110,7 +111,7 @@ endif
 export OFILES	:=	$(addsuffix .o,$(BINFILES)) \
 					$(CPPFILES:.cpp=.o) $(CFILES:.c=.o) \
 					$(sFILES:.s=.o) $(SFILES:.S=.o) \
-					$(TTFFILES:.ttf=.ttf.o) $(PNGFILES:.png=.png.o) \
+					$(TTFFILES:.ttf=.ttf.o) $(PNGFILES:.png=.png.o) $(addsuffix .o,$(DOLFILES))\
 					$(OGGFILES:.ogg=.ogg.o) $(PCMFILES:.pcm=.pcm.o) $(MP3FILES:.mp3=.mp3.o) \
 					$(addsuffix .o,$(ELFFILES))
 
@@ -197,6 +198,10 @@ language: $(wildcard $(PROJECTDIR)/Languages/*.lang)
 %.elf.o : %.elf
 	@echo $(notdir $<)
 	$(bin2o)
+
+%.dol.o : %.dol
+	@echo $(notdir $<)
+	@bin2s -a 32 $< | $(AS) -o $(@)
 
 %.ttf.o : %.ttf
 	@echo $(notdir $<)

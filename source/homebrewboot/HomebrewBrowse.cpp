@@ -879,6 +879,7 @@ int MenuHomebrewBrowse() {
 									uLongf f = uncfilesize;
 									error = uncompress(unc, &f, temp, infilesize) != Z_OK;
 									uncfilesize = f;
+									homebrewsize = uncfilesize;
 									
 									free(temp);
 									temp = unc;
@@ -887,6 +888,7 @@ int MenuHomebrewBrowse() {
 							
 							if (!error && strstr(filename,".zip") == NULL) {
 								innetbuffer = temp;
+
 							}
 						}
 						
@@ -899,6 +901,7 @@ int MenuHomebrewBrowse() {
                             if (strstr(filename,".dol") || strstr(filename,".DOL")
                                 || strstr(filename,".elf") || strstr(filename,".ELF")) {
                                 boothomebrew = 2;
+				AddBootArgument( filename );
                                 menu = MENU_EXIT;
                                 CloseConnection();
                                 break;
