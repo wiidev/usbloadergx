@@ -23,8 +23,8 @@ void gprintf( const char *str, ... )
 
 	va_end(ap);
 
-	//usb_sendbuffer( 1, astr, strlen(astr) );
-	usb_sendbuffer_safe( 1, astr, strlen(astr) );
+	usb_sendbuffer( 1, astr, strlen(astr) );
+	//usb_sendbuffer_safe( 1, astr, strlen(astr) );
 }
 
 bool InitGecko()
