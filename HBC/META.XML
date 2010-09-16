@@ -2,8 +2,8 @@
 	<app version="1">
 		<name> USB Loader GX</name>
 		<coder>USB Loader GX Team</coder>
-		<version>1.0 r940</version>
-		<release_date>201009151816</release_date>
+		<version>1.0 r941</version>
+		<release_date>201009160837</release_date>
 		<short_description>Loads games from USB-devices</short_description>
 		<long_description>USB Loader GX is a libwiigui based USB iso loader with a wii-like GUI. You can install games to your HDDs and boot them with shorter loading times.
 The interactive GUI is completely controllable with WiiMote, Classic Controller or GC Controller.

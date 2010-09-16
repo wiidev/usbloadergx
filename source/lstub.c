@@ -8,6 +8,7 @@
 
 #include "lstub.h"
 #include "stub_bin.h"
+#include "gecko.h"
 
 #define TITLE_1(x)		((u8)((x) >> 8))
 #define TITLE_2(x)		((u8)((x) >> 16))
@@ -17,6 +18,23 @@
 #define TITLE_6(x)		((u8)((x) >> 48))
 #define TITLE_7(x)		((u8)((x) >> 56))
 #define TITLE_ID(x,y)	(((u64)(x) << 32) | (y))
+
+static char* determineStubTIDLocation()
+{
+    u32 *stubID = (u32*)0x80001818;
+
+    //HBC stub 1.0.6 and lower, and stub.bin
+    if( stubID[ 0 ] == 0x480004c1 && stubID[ 1 ] == 0x480004f5 )
+	return (char *)0x800024C6;
+
+    //HBC stub changed @ version 1.0.7.  this file was last updated for HBC 1.0.8
+    else if ( stubID[ 0 ] == 0x48000859 && stubID[ 1 ] == 0x4800088d )
+	return (char *)0x8000286A;
+
+    //hexdump( stubID, 0x20 );
+    return NULL;
+
+}
 
 s32 Set_Stub(u64 reqID)
 {
@@ -54,7 +72,9 @@ s32 Set_Stub(u64 reqID)
 	if(ES_GetStoredTMDSize(tid, &tmdsize) < 0)
 		return WII_EINSTALL;
 		
-	char *stub = (char *)0x800024C6;
+	char *stub = determineStubTIDLocation();
+	if( !stub )
+	    return -68;
 	
 	stub[0] = TITLE_7(reqID);
     stub[1] = TITLE_6(reqID);
@@ -64,6 +84,8 @@ s32 Set_Stub(u64 reqID)
 	stub[5] = TITLE_2(reqID);
 	stub[12] = TITLE_1(reqID);
 	stub[13] = ((u8)(reqID));
+
+	DCFlushRange( stub, 0x10 );
 	
 	return 1;
 	
@@ -84,6 +106,7 @@ void loadStub()
 {
 	char *stubLoc = (char *)0x80001800;
 	memcpy(stubLoc, stub_bin, stub_bin_size);
+	DCFlushRange( stubLoc, stub_bin_size );
 }
 
 u64 getStubDest()
@@ -91,10 +114,13 @@ u64 getStubDest()
     if (!hbcStubAvailable())
 		return 0;
 
+    char ret[ 8 ];
+    u64 retu = 0;
 
-	char *stub = (char *)0x800024C6;
-	char ret[9];
-	u64 retu =0;
+	char *stub = determineStubTIDLocation();
+	if( !stub )
+	    return 0;
+
 	
 	ret[0] = stub[0];
 	ret[1] = stub[1];
