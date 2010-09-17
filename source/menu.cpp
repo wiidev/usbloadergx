@@ -106,72 +106,74 @@ void HaltGui() {
  *
  * Primary thread to allow GUI to respond to state changes, and draws GUI
  ***************************************************************************/
-static void * UpdateGUI (void *arg) {
-    while (1) {
-        if (guiHalt) {
+static void * UpdateGUI (void *arg)
+{
+    int i;
+
+    while (!ExitRequested)
+    {
+        if (guiHalt)
+        {
             LWP_SuspendThread(guithread);
+            continue;
         }
-		else {
-            if (!ExitRequested) {
-                mainWindow->Draw();
-                if (Settings.tooltips == TooltipsOn && THEME.show_tooltip != 0 && mainWindow->GetState() != STATE_DISABLED)
-                    mainWindow->DrawTooltip();
 
-                for (int i=3; i >= 0; i--) { // so that player 1's cursor appears on top!
-                    if (userInput[i].wpad.ir.valid)
-                        Menu_DrawImg(userInput[i].wpad.ir.x-48, userInput[i].wpad.ir.y-48, 200.0,
-                                     96, 96, pointer[i]->GetImage(), userInput[i].wpad.ir.angle, CFG.widescreen? 0.8 : 1, 1, 255,0,0,0,0,0,0,0,0);
-                    if (Settings.rumble == RumbleOn) {
-                        DoRumble(i);
-                    }
-                }
+        mainWindow->Draw();
+        if (Settings.tooltips == TooltipsOn && THEME.show_tooltip != 0 && mainWindow->GetState() != STATE_DISABLED)
+            mainWindow->DrawTooltip();
 
-                Menu_Render();
-
-                for (int i=0; i < 4; i++)
-                    mainWindow->Update(&userInput[i]);
-
-				if(bgMusic)
-					bgMusic->UpdateState();
-
-            } else {
-                for (int a = 5; a < 255; a += 10) {
-                    if (strcmp(headlessID,"")==0)
-						mainWindow->Draw();
-                    Menu_DrawRectangle(0,0,screenwidth,screenheight,(GXColor) {0, 0, 0, a},1);
-                    Menu_Render();
-                }
-                mainWindow->RemoveAll();
-                ShutoffRumble();
-                return 0;
+        for (i = 3; i >= 0; i--)
+        {
+            if (userInput[i].wpad.ir.valid)
+            {
+                Menu_DrawImg(userInput[i].wpad.ir.x-48, userInput[i].wpad.ir.y-48, 200.0,
+                             96, 96, pointer[i]->GetImage(), userInput[i].wpad.ir.angle, CFG.widescreen? 0.8 : 1, 1, 255,0,0,0,0,0,0,0,0);
             }
         }
 
-        switch (Settings.screensaver) {
-        case 1:
-            WPad_SetIdleTime(180);
-            break;
-        case 2:
-            WPad_SetIdleTime(300);
-            break;
-        case 3:
-            WPad_SetIdleTime(600);
-            break;
-        case 4:
-            WPad_SetIdleTime(1200);
-            break;
-        case 5:
-            WPad_SetIdleTime(1800);
-            break;
-        case 6:
-            WPad_SetIdleTime(3600);
-            break;
+        Menu_Render();
 
+        UpdatePads();
+
+        for (i=0; i < 4; i++)
+            mainWindow->Update(&userInput[i]);
+
+        if(bgMusic)
+            bgMusic->UpdateState();
+
+        switch (Settings.screensaver)
+        {
+            case 1:
+                WPad_SetIdleTime(180);
+                break;
+            case 2:
+                WPad_SetIdleTime(300);
+                break;
+            case 3:
+                WPad_SetIdleTime(600);
+                break;
+            case 4:
+                WPad_SetIdleTime(1200);
+                break;
+            case 5:
+                WPad_SetIdleTime(1800);
+                break;
+            case 6:
+                WPad_SetIdleTime(3600);
+                break;
         }
-
-
-
     }
+
+    for (i = 5; i < 255; i += 10)
+    {
+        if (strcmp(headlessID,"")==0)
+            mainWindow->Draw();
+        Menu_DrawRectangle(0,0,screenwidth,screenheight,(GXColor) {0, 0, 0, i},1);
+        Menu_Render();
+    }
+    mainWindow->RemoveAll();
+    ShutoffRumble();
+
     return NULL;
 }
 
@@ -181,7 +183,7 @@ static void * UpdateGUI (void *arg) {
  * Startup GUI threads
  ***************************************************************************/
 void InitGUIThreads() {
-    LWP_CreateThread(&guithread, UpdateGUI, NULL, NULL, 32768, LWP_PRIO_HIGHEST);
+    LWP_CreateThread(&guithread, UpdateGUI, NULL, NULL, 65536, LWP_PRIO_HIGHEST);
     InitProgressThread();
     InitNetworkThread();
 

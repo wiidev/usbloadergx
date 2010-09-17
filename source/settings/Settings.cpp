@@ -78,7 +78,7 @@ int MenuSettings()
 	int opt_override = Settings.titlesOverride;
 	// backup partition index
 	u8 settingspartitionold = Settings.partition;
-	
+
 
 	enum
 	{
@@ -293,8 +293,9 @@ int MenuSettings()
 	GuiWindow w(screenwidth, screenheight);
 
 	int pageToDisplay = 1;
-	while ( pageToDisplay > 0) { //set pageToDisplay to 0 to quit
-		VIDEO_WaitVSync ();
+	while ( pageToDisplay > 0)
+	{
+		usleep(100);
 
 		menu = MENU_NONE;
 
@@ -611,7 +612,7 @@ int MenuSettings()
 
 		while (menu == MENU_NONE)
 		{
-			VIDEO_WaitVSync ();
+            usleep(100);
 
 			if (shutdown == 1)
 				Sys_Shutdown();
@@ -645,7 +646,6 @@ int MenuSettings()
 					optionBrowser2.SetClickable(true);
 					ResumeGui();
 
-					VIDEO_WaitVSync ();
 					optionBrowser2.SetEffect(EFFECT_FADE, 20);
 					while (optionBrowser2.GetEffect() > 0) usleep(50);
 
@@ -656,7 +656,7 @@ int MenuSettings()
 					bool firstRun = true;
 					while (!exit)
 					{
-						VIDEO_WaitVSync ();
+                        usleep(100);
 
 						returnhere = 1;
 
@@ -867,7 +867,7 @@ int MenuSettings()
 								static const char *opts[settings_screensaver_max] = {trNOOP("OFF"),trNOOP("3 min"),trNOOP("5 min"),trNOOP("10 min"),trNOOP("20 min"),trNOOP("30 min"),trNOOP("1 hour")};
 								options2.SetValue(Idx,"%s",tr(opts[Settings.screensaver]));
 							}
-							
+
 							if(ret == ++Idx || firstRun)
 							{
 								if(firstRun) options2.SetName(Idx, "%s",tr("Mark new games"));
@@ -913,14 +913,13 @@ int MenuSettings()
 					optionBrowser2.SetClickable(true);
 					ResumeGui();
 
-					VIDEO_WaitVSync ();
 					optionBrowser2.SetEffect(EFFECT_FADE, 20);
 					while (optionBrowser2.GetEffect() > 0) usleep(50);
 
 					bool firstRun = true;
 					while (!exit)
 					{
-						VIDEO_WaitVSync ();
+                        usleep(100);
 
 						if (shutdown == 1)
 							Sys_Shutdown();
@@ -1012,7 +1011,7 @@ int MenuSettings()
 								else
 									options2.SetValue(Idx, "********");
 							}
-							
+
 							if (ret == ++Idx || firstRun)
 							{
 								if (firstRun) options2.SetName(Idx, "%s", tr("Partition"));
@@ -1024,16 +1023,16 @@ int MenuSettings()
 									}
 									while (!IsValidPartition(partitions.pinfo[Settings.partition].fs_type, Settings.cios));
 								}
-								
+
 								PartInfo pInfo = partitions.pinfo[Settings.partition];
 								f32 partition_size = partitions.pentry[Settings.partition].size * (partitions.sector_size / GB_SIZE);
-								
+
 								// Get the partition name and it's size in GB's
 								options2.SetValue(Idx,"%s%d (%.2fGB)",	pInfo.fs_type == FS_TYPE_FAT32 ? "FAT" : pInfo.fs_type == FS_TYPE_NTFS ? "NTFS" : "WBFS",
 															            pInfo.index,
 																		partition_size);
 							}
-							
+
 							if (ret == ++Idx || firstRun)
 							{
 								if (firstRun) options2.SetName(Idx, "%s", tr("FAT: Use directories"));
@@ -1111,14 +1110,13 @@ int MenuSettings()
 					optionBrowser2.SetClickable(true);
 					ResumeGui();
 
-					VIDEO_WaitVSync ();
 					optionBrowser2.SetEffect(EFFECT_FADE, 20);
 					while (optionBrowser2.GetEffect() > 0) usleep(50);
 
 					bool firstRun = true;
 					while (!exit)
 					{
-						VIDEO_WaitVSync ();
+                        usleep(100);
 
 						if (shutdown == 1)
 							Sys_Shutdown();
@@ -1168,7 +1166,7 @@ int MenuSettings()
 									{
 										char entered[20];
 										memset(entered, 0, 20);
-										
+
 										//password check to unlock Install,Delete and Format
 										w.Remove(&optionBrowser2);
 										w.Remove(&backBtn);
@@ -1281,7 +1279,6 @@ int MenuSettings()
 					optionBrowser2.SetClickable(true);
 					ResumeGui();
 
-					VIDEO_WaitVSync ();
 					optionBrowser2.SetEffect(EFFECT_FADE, 20);
 					while (optionBrowser2.GetEffect() > 0) usleep(50);
 
@@ -1289,7 +1286,7 @@ int MenuSettings()
 					bool firstRun = true;
 					while (!exit)
 					{
-						VIDEO_WaitVSync ();
+                        usleep(100);
 
 						bool returnhere = true;
 
@@ -1335,9 +1332,9 @@ int MenuSettings()
 										w.SetEffect(EFFECT_FADE, -20);
 										while (w.GetEffect()>0) usleep(50);
 										mainWindow->Remove(&w);
-										
+
 										returnhere = MenuBackgroundMusic();
-										
+
 										HaltGui();
 										mainWindow->Append(&w);
 										w.SetEffect(EFFECT_FADE, 20);
@@ -1346,7 +1343,7 @@ int MenuSettings()
 									} else
 										WindowPrompt(tr("No SD-Card inserted!"),tr("Insert an SD-Card to use this option."),tr("OK"));
 								}
-								
+
 								char * filename = strrchr(Settings.ogg_path, '/');
 								if(filename)
 								{
@@ -1424,7 +1421,7 @@ int MenuSettings()
 								else
 									options2.SetValue(Idx,"%s", tr("OFF"));
 							}
-							
+
 							if(ret == ++Idx || firstRun)
 							{
 								if(firstRun) options2.SetName(Idx, "%s",tr("Music Loop Mode"));
@@ -1460,7 +1457,7 @@ int MenuSettings()
 								}
 								options2.SetValue(Idx,tr(" "));
 							}
-								
+
 							firstRun = false;
 						}
 					}
@@ -1501,7 +1498,6 @@ int MenuSettings()
 					optionBrowser2.SetClickable(true);
 					ResumeGui();
 
-					VIDEO_WaitVSync ();
 					optionBrowser2.SetEffect(EFFECT_FADE, 20);
 					while (optionBrowser2.GetEffect() > 0) usleep(50);
 
@@ -1510,7 +1506,7 @@ int MenuSettings()
 						bool firstRun = true;
 						while (!exit)
 						{
-							VIDEO_WaitVSync ();
+                            usleep(100);
 
 							if (shutdown == 1)
 								Sys_Shutdown();
@@ -1926,7 +1922,7 @@ int MenuSettings()
 									}
 									options2.SetValue(Idx, "%s", Settings.BcaCodepath);
 								}
-								
+
 								if(ret == ++Idx || firstRun)
 								{
 									if(firstRun) options2.SetName(Idx, "%s", tr("WIP Patches Path"));
@@ -2096,6 +2092,7 @@ int MenuSettings()
 					cfg_save_global();
 				menu = MENU_DISCLIST;
 				pageToDisplay = 0;
+				backBtn.ResetState();
 				break;
 			}
 
@@ -2184,14 +2181,14 @@ int MenuSettings()
 	w.SetEffect(EFFECT_FADE, -20);
 	while (w.GetEffect()>0) usleep(50);
 
-	// if partition has changed, Reinitialize it 
+	// if partition has changed, Reinitialize it
 	if (Settings.partition != settingspartitionold) {
 		PartInfo pinfo = partitions.pinfo[Settings.partition];
 		partitionEntry pentry = partitions.pentry[Settings.partition];
  		WBFS_OpenPart(pinfo.part_fs, pinfo.index, pentry.sector, pentry.size, (char *) &game_partition);
 		load_from_fs = pinfo.part_fs;
 	}
-		
+
 	// if language has changed, reload titles
 	char opt_langnew[100];
 	strcpy(opt_langnew,Settings.language_path);
@@ -2380,8 +2377,9 @@ int GameSettings(struct discHdr * header)
 	struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
 
 	int pageToDisplay = 1;
-	while ( pageToDisplay > 0) { //set pageToDisplay to 0 to quit
-		VIDEO_WaitVSync ();
+	while ( pageToDisplay > 0)
+	{
+		usleep(100);
 
 		menu = MENU_NONE;
 
@@ -2466,7 +2464,7 @@ int GameSettings(struct discHdr * header)
 				iosChoice = i250;
 			else if (Settings.cios == ios223)
 				iosChoice = i223;
-			else 
+			else
                                 iosChoice = i249;
 			parentalcontrolChoice = 0;
 			fix002 = Settings.error002;
@@ -2485,7 +2483,7 @@ int GameSettings(struct discHdr * header)
 
 		while (menu == MENU_NONE)
 		{
-			VIDEO_WaitVSync ();
+            usleep(100);
 
 			if (shutdown == 1)
 				Sys_Shutdown();
@@ -2512,7 +2510,6 @@ int GameSettings(struct discHdr * header)
 				optionBrowser2.SetClickable(true);
 				ResumeGui();
 
-				VIDEO_WaitVSync ();
 				optionBrowser2.SetEffect(EFFECT_FADE, 20);
 				while (optionBrowser2.GetEffect() > 0) usleep(50);
 
@@ -2523,7 +2520,7 @@ int GameSettings(struct discHdr * header)
 				bool firstRun = true;
 				while (!exit)
 				{
-					VIDEO_WaitVSync ();
+                    usleep(100);
 
 					returnhere = 1;
 
@@ -2798,7 +2795,7 @@ int GameSettings(struct discHdr * header)
 
 				while (!exit)
 				{
-					VIDEO_WaitVSync ();
+                    usleep(100);
 
 					if (shutdown == 1)
 						Sys_Shutdown();
@@ -3012,6 +3009,7 @@ int GameSettings(struct discHdr * header)
 			{
 				menu = MENU_DISCLIST;
 				pageToDisplay = 0;
+				backBtn.ResetState();
 				break;
 			}
 

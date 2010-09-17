@@ -34,33 +34,6 @@ u8 * gameScreenTex = NULL; // a GX texture screen capture of the game
 u8 * gameScreenTex2 = NULL; // a GX texture screen capture of the game (copy)
 
 /****************************************************************************
- * UpdatePadsCB
- *
- * called by postRetraceCallback in InitGCVideo - scans gcpad and wpad
- ***************************************************************************/
-static void
-UpdatePadsCB () {
-    frameCount++;
-    WPAD_ScanPads();
-    PAD_ScanPads();
-
-    for (int i=3; i >= 0; i--) {
-        memcpy(&userInput[i].wpad, WPAD_Data(i), sizeof(WPADData));
-
-        userInput[i].chan = i;
-        userInput[i].pad.btns_d = PAD_ButtonsDown(i);
-        userInput[i].pad.btns_u = PAD_ButtonsUp(i);
-        userInput[i].pad.btns_h = PAD_ButtonsHeld(i);
-        userInput[i].pad.stickX = PAD_StickX(i);
-        userInput[i].pad.stickY = PAD_StickY(i);
-        userInput[i].pad.substickX = PAD_SubStickX(i);
-        userInput[i].pad.substickY = PAD_SubStickY(i);
-        userInput[i].pad.triggerL = PAD_TriggerL(i);
-        userInput[i].pad.triggerR = PAD_TriggerR(i);
-    }
-}
-
-/****************************************************************************
  * StartGX
  *
  * Initialises GX and sets it up for use
@@ -182,9 +155,6 @@ InitVideo () {
     VIDEO_ClearFrameBuffer (vmode, xfb[1], COLOR_BLACK);
     VIDEO_SetNextFramebuffer (xfb[0]);
 
-    // video callback
-    VIDEO_SetPostRetraceCallback ((VIRetraceCallback)UpdatePadsCB);
-
     VIDEO_SetBlack (FALSE);
     VIDEO_Flush ();
     VIDEO_WaitVSync ();
@@ -251,6 +221,7 @@ void Menu_Render() {
     VIDEO_SetNextFramebuffer(xfb[whichfb]);
     VIDEO_Flush();
     VIDEO_WaitVSync();
+    frameCount++;
 }
 
 /****************************************************************************

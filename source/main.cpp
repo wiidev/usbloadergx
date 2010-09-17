@@ -70,7 +70,6 @@ u8 dbvideo =0;
 int main(int argc, char *argv[])
 {
     MEM2_init(48);
-    PAD_Init();
     InitVideo();
     setlocale(LC_ALL, "en.UTF-8");
     geckoinit = InitGecko();
@@ -124,7 +123,6 @@ int main(int argc, char *argv[])
 
     printf("\n\tCheck for an existing cIOS");
     CheckForCIOS();
-    printf("\n\tcIOS = %u (Rev %u)",IOS_GetVersion(), IOS_GetRevision());
 
     // Let's load the cIOS now
     if(LoadAppCIOS() < 0)
@@ -133,6 +131,8 @@ int main(int argc, char *argv[])
         sleep(5);
         Sys_BackToLoader();
     }
+
+    printf("\n\tLoaded cIOS = %u (Rev %u)",IOS_GetVersion(), IOS_GetRevision());
 
     printf("\n\tWaiting for USB: ");
     if (MountWBFS() < 0)
@@ -152,11 +152,8 @@ int main(int argc, char *argv[])
 
     //! Init the rest of the System
     Sys_Init();
-    Wpad_Init();
+    SetupPads();
     InitAudio();
-
-    WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
-    WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
 
     char *fontPath = NULL;
     asprintf(&fontPath, "%sfont.ttf", CFG.theme_path);
