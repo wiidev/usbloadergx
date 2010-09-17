@@ -182,7 +182,7 @@ static int Theme_Prompt(const char *title, const char *author, GuiImageData *thu
     GuiText titleTxt2(title, 18, THEME.prompttext);
     titleTxt2.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     titleTxt2.SetPosition(230, 50);
-    titleTxt2.SetMaxWidth(dialogBox.GetWidth()-220, GuiText::WRAP);
+    titleTxt2.SetMaxWidth(dialogBox.GetWidth()-220, WRAP);
 
     GuiText authorTxt(tr("Author:"), 18, THEME.prompttext);
     authorTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
@@ -191,7 +191,7 @@ static int Theme_Prompt(const char *title, const char *author, GuiImageData *thu
     GuiText authorTxt2(author, 18, THEME.prompttext);
     authorTxt2.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     authorTxt2.SetPosition(230, 120);
-    authorTxt2.SetMaxWidth(dialogBox.GetWidth()-220, GuiText::DOTTED);
+    authorTxt2.SetMaxWidth(dialogBox.GetWidth()-220, DOTTED);
 
     GuiText downloadBtnTxt(tr("Download") , 22, THEME.prompttext);
     downloadBtnTxt.SetMaxWidth(btnOutline.GetWidth()-30);
@@ -417,7 +417,7 @@ int Theme_Downloader()
     GoRightBtn.SetTrigger(&trigPlus);
 
     GuiImage PageindicatorImg(&PageindicatorImgData);
-    GuiText PageindicatorTxt(NULL, 22, (GXColor) { 0, 0, 0, 255});
+    GuiText PageindicatorTxt((char *) NULL, 22, (GXColor) { 0, 0, 0, 255});
     GuiButton PageIndicatorBtn(PageindicatorImg.GetWidth(), PageindicatorImg.GetHeight());
     PageIndicatorBtn.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     PageIndicatorBtn.SetPosition(110, 400);
@@ -518,7 +518,7 @@ int Theme_Downloader()
                 MainButtonTxt[n] = new GuiText(Theme->GetThemeTitle(i), 18, (GXColor) { 0, 0, 0, 255});
                 MainButtonTxt[n]->SetAlignment(ALIGN_CENTER, ALIGN_TOP);
                 MainButtonTxt[n]->SetPosition(0, 10);
-                MainButtonTxt[n]->SetMaxWidth(theme_box_Data.GetWidth()-10, GuiText::DOTTED);
+                MainButtonTxt[n]->SetMaxWidth(theme_box_Data.GetWidth()-10, DOTTED);
 
                 sprintf(url, "%s", Theme->GetImageLink(i));
 

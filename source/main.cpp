@@ -33,6 +33,7 @@ extern "C"
 #include "mload/mload.h"
 #include "mload/mload_modules.h"
 #include "FreeTypeGX.h"
+#include "FontSystem.h"
 #include "video.h"
 #include "audio.h"
 #include "menu.h"
@@ -63,8 +64,6 @@ extern char headlessID[8];
 #define CONSOLE_WIDTH       340
 #define CONSOLE_HEIGHT      218
 
-FreeTypeGX *fontSystem=0;
-FreeTypeGX *fontClock=0;
 PartList partitions;
 u8 dbvideo =0;
 
@@ -125,6 +124,7 @@ int main(int argc, char *argv[])
 
     printf("\n\tCheck for an existing cIOS");
     CheckForCIOS();
+    printf("\n\tcIOS = %u (Rev %u)",IOS_GetVersion(), IOS_GetRevision());
 
     // Let's load the cIOS now
     if(LoadAppCIOS() < 0)
@@ -134,13 +134,12 @@ int main(int argc, char *argv[])
         Sys_BackToLoader();
     }
 
-    printf("\n\tcIOS = %u (Rev %u)",IOS_GetVersion(), IOS_GetRevision());
-
-    // Init WBFS
-    int ret = WBFS_Init(WBFS_DEVICE_USB);
-    if (ret < 0)
+    printf("\n\tWaiting for USB: ");
+    if (MountWBFS() < 0)
     {
         printf("\nERROR: No WBFS drive mounted.");
+        sleep(5);
+        exit(0);
     }
 
     //if a ID was passed via args copy it and try to boot it after the partition is mounted
@@ -159,17 +158,10 @@ int main(int argc, char *argv[])
     WPAD_SetDataFormat(WPAD_CHAN_ALL,WPAD_FMT_BTNS_ACC_IR);
     WPAD_SetVRes(WPAD_CHAN_ALL, screenwidth, screenheight);
 
-    // load main font from file, or default to built-in font
-    fontSystem = new FreeTypeGX();
     char *fontPath = NULL;
     asprintf(&fontPath, "%sfont.ttf", CFG.theme_path);
-    fontSystem->loadFont(fontPath, font_ttf, font_ttf_size, 0);
-    fontSystem->setCompatibilityMode(FTGX_COMPATIBILITY_DEFAULT_TEVOP_GX_PASSCLR | FTGX_COMPATIBILITY_DEFAULT_VTXDESC_GX_NONE);
+    SetupDefaultFont(fontPath);
     free(fontPath);
-
-    fontClock = new FreeTypeGX();
-    fontClock->loadFont(NULL, clock_ttf, clock_ttf_size, 0);
-    fontClock->setCompatibilityMode(FTGX_COMPATIBILITY_DEFAULT_TEVOP_GX_PASSCLR | FTGX_COMPATIBILITY_DEFAULT_VTXDESC_GX_NONE);
 
     gprintf("\n\tEnd of Main()");
     InitGUIThreads();

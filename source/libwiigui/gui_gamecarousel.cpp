@@ -111,7 +111,7 @@ noCover(nocover_png)
 	gamename->SetParent(this);
     gamename->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     gamename->SetPosition(0, 330);
-    gamename->SetMaxWidth(280, GuiText::DOTTED);
+    gamename->SetMaxWidth(280, DOTTED);
 
 	gameIndex	= new int[pagesize];
 	game		= new GuiButton * [pagesize];

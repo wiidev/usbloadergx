@@ -2275,7 +2275,7 @@ int GameSettings(struct discHdr * header)
 	GuiText titleTxt(!mountMethod?get_title(header):gameName, 28, (GXColor) {0, 0, 0, 255});
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	titleTxt.SetPosition(12,40);
-	titleTxt.SetMaxWidth(356, GuiText::SCROLL);
+	titleTxt.SetMaxWidth(356, SCROLL_HORIZONTAL);
 
 	GuiImage settingsbackground(&settingsbg);
 

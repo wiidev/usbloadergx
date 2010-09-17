@@ -65,7 +65,6 @@ static int ExitRequested = 0;
 
 /*** Extern variables ***/
 extern struct discHdr * gameList;
-extern FreeTypeGX *fontClock;
 extern u8 shutdown;
 extern u8 reset;
 extern s32 gameSelected, gameStart;
@@ -343,7 +342,6 @@ int MainMenu(int menu) {
     delete GameIDTxt;
     delete cover;
     delete coverImg;
-	delete fontClock;
 	delete fontSystem;
 	ShutdownAudio();
     StopGX();

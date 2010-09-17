@@ -91,6 +91,14 @@ enum
 	TRIGGER_BUTTON_ONLY_IN_FOCUS
 };
 
+enum
+{
+	WRAP,
+	DOTTED,
+	SCROLL_HORIZONTAL,
+	SCROLL_NONE
+};
+
 typedef struct _paddata {
 	u16 btns_d;
 	u16 btns_u;
@@ -144,7 +152,7 @@ class GuiSound
 		bool Load(const char *p);
 		//!Destructor
 		~GuiSound();
-		
+
 		//!Start sound playback
 		void Play();
 		//!Stop sound playback
@@ -430,7 +438,7 @@ class GuiElement
 		void Lock();
 		void Unlock();
 //		static mutex_t mutex;
-		static mutex_t	_lock_mutex; 
+		static mutex_t	_lock_mutex;
 		lwp_t	_lock_thread;
 		u16		_lock_count;
 		lwpq_t	_lock_queue;
@@ -700,7 +708,6 @@ class GuiImage : public GuiElement
 		short widescreen; //added
 		bool parentangle;
 };
-
 //!Display, manage, and manipulate text in the GUI
 class GuiText : public GuiElement
 {
@@ -711,6 +718,11 @@ class GuiText : public GuiElement
 		//!\param c Font color
 		GuiText(const char * t, int s, GXColor c);
 		//!\overload
+		//!\param t Text
+		//!\param s Font size
+		//!\param c Font color
+		GuiText(const wchar_t * t, int s, GXColor c);
+		//!\overload
 		//!\Assumes SetPresets() has been called to setup preferred text attributes
 		//!\param t Text
 		GuiText(const char * t);
@@ -718,9 +730,9 @@ class GuiText : public GuiElement
 		~GuiText();
 		//!Sets the text of the GuiText element
 		//!\param t Text
-		void SetText(const char * t);
-		void SetTextf(const char *format, ...) __attribute__((format(printf,2,3)));
-		void SetText(const wchar_t * t);
+		virtual void SetText(const char * t);
+		virtual void SetText(const wchar_t * t);
+		virtual void SetTextf(const char *format, ...) __attribute__((format(printf,2,3)));
 		//!Sets up preset values to be used by GuiText(t)
 		//!Useful when printing multiple text elements, all with the same attributes set
 		//!\param sz Font size
@@ -730,7 +742,7 @@ class GuiText : public GuiElement
 		//!\param s Font style
 		//!\param h Text alignment (horizontal)
 		//!\param v Text alignment (vertical)
-		static void SetPresets(int sz, GXColor c, int w, int wrap, u16 s, int h, int v);
+		static void SetPresets(int sz, GXColor c, int w, u16 s, int h, int v);
 		//!Sets the font size
 		//!\param s Font size
 		void SetFontSize(int s);
@@ -738,60 +750,72 @@ class GuiText : public GuiElement
 		//!If the text exceeds this, it is wrapped to the next line
 		//!\param w Maximum width
 		//!\param m WrapMode
-		enum {
-			WRAP,
-			DOTTED,
-			SCROLL,
-			MARQUEE
-		};
-		void SetMaxWidth(int w, short m=GuiText::WRAP);
+		void SetMaxWidth(int w = 0, int m = WRAP);
 		//!Sets the font color
 		//!\param c Font color
 		void SetColor(GXColor c);
 		//!Sets the FreeTypeGX style attributes
 		//!\param s Style attributes
 		//!\param m Style-Mask attributes
-		void SetStyle(u16 s, u16 m=0xffff);
+		void SetStyle(u16 s);
 		//!Sets the text alignment
 		//!\param hor Horizontal alignment (ALIGN_LEFT, ALIGN_RIGHT, ALIGN_CENTRE)
 		//!\param vert Vertical alignment (ALIGN_TOP, ALIGN_BOTTOM, ALIGN_MIDDLE)
 		void SetAlignment(int hor, int vert);
+		//!Set PassChar
+		void SetPassChar(wchar_t p);
 		//!Sets the font
 		//!\param f Font
 		void SetFont(FreeTypeGX *f);
-		//!Sets a password character
-		//!\param p char
-		void SetPassChar(wchar_t p);
+		//!Get the original text as char
+        virtual const wchar_t * GetText();
 		//!Get the Horizontal Size of Text
 		int GetTextWidth();
-		// not NULL set horizontal scale to 0.75 //added
-		void SetWidescreen(bool w);
-		void SetNumLines(int n);//! these two are used to set the first line and numLine
-		void SetFirstLine(int n);
-		int GetNumLines();//! these return the line variables for this text
-		int GetFirstLine();
-		int GetLineHeight(int n);//! returns the height of the #n of lines  including spacing if wrap mode is on
-		int GetTotalLines();
+        int GetTextWidth(int ind);
+		//!Get the max textwidth
+        int GetTextMaxWidth();
+		//!Gets the total line number
+		virtual int GetLinesCount() { return 1; };
+		//!Get fontsize
+		int GetFontSize() { return size; };
+		//!Set max lines to draw
+        void SetLinesToDraw(int l);
+        void SetWidescreen(bool b) { widescreen = b; };
+		//!Get current Textline (for position calculation)
+        const wchar_t * GetDynText(int ind = 0);
+        virtual const wchar_t * GetTextLine(int ind) { return GetDynText(ind); };
+		//!Change the font
+		//!\param font bufferblock
+		//!\param font filesize
+		bool SetFont(const u8 *font, const u32 filesize);
 		//!Constantly called to draw the text
 		void Draw();
 	protected:
-		wchar_t* text; //!< Unicode text value
+        //!Clear the dynamic text
+        void ClearDynamicText();
+        //!Create a dynamic dotted text if the text is too long
+        void MakeDottedText();
+        //!Scroll the text once
+        void ScrollText();
+        //!Wrap the text to several lines
+        void WrapText();
+
+        wchar_t *text;
+        std::vector<wchar_t *> textDyn;
+		int wrapMode; //!< Wrapping toggle
+		int textScrollPos; //!< Current starting index of text string for scrolling
+		int textScrollInitialDelay; //!< Delay to wait before starting to scroll
+		int textScrollDelay; //!< Scrolling speed
 		int size; //!< Font size
 		int maxWidth; //!< Maximum width of the generated text object (for text wrapping)
-		short wrapMode;
-		short scrollPos1;
-		short scrollPos2;
-		short scrollOffset;
-		u32 scrollDelay;
 		u16 style; //!< FreeTypeGX style attributes
 		GXColor color; //!< Font color
 		FreeTypeGX *font;
-		short widescreen; //added
-		//!these are default until the text is drawn
-		int firstLine; //!these are the first line and the number of lines drawn when the text is wrapped
-		int numLines;//! default is -1 and it means that all lines are drawn
-		int totalLines; //!this is the total # of lines when in wrap mode
-		wchar_t passChar; //!this is the password character
+		int textWidth;
+		int currentSize;
+		int linestodraw;
+		wchar_t passChar;
+		bool widescreen;
 };
 
 //!Display, manage, and manipulate tooltips in the GUI.

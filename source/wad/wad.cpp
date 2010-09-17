@@ -179,27 +179,27 @@ s32 Wad_Install(FILE *fp)
     char msg[50];
     sprintf(msg, " ");
 	// sprintf(msg, "%s", tr("Initializing Network"));
-	GuiText msg1Txt(NULL, 20, THEME.prompttext);
+	GuiText msg1Txt((char*)NULL, 20, THEME.prompttext);
 	msg1Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	msg1Txt.SetPosition(50,75);
 //	char msg2[50] = " ";
-	GuiText msg2Txt(NULL, 20, THEME.prompttext);
+	GuiText msg2Txt((char*)NULL, 20, THEME.prompttext);
 	msg2Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	msg2Txt.SetPosition(50, 98);
 
-	GuiText msg3Txt(NULL, 20, THEME.prompttext);
+	GuiText msg3Txt((char*)NULL, 20, THEME.prompttext);
 	msg3Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	msg3Txt.SetPosition(50, 121);
 
-	GuiText msg4Txt(NULL, 20, THEME.prompttext);
+	GuiText msg4Txt((char*)NULL, 20, THEME.prompttext);
 	msg4Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	msg4Txt.SetPosition(50, 144);
 
-	GuiText msg5Txt(NULL, 20, THEME.prompttext);
+	GuiText msg5Txt((char*)NULL, 20, THEME.prompttext);
 	msg5Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	msg5Txt.SetPosition(50, 167);
 
-	GuiText prTxt(NULL, 26, THEME.prompttext);
+	GuiText prTxt((char*)NULL, 26, THEME.prompttext);
 	prTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 	prTxt.SetPosition(0, 50);
 
@@ -487,23 +487,23 @@ s32 Wad_Uninstall(FILE *fp)
 	titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 	titleTxt.SetPosition(0,40);
 
-	GuiText msg1Txt(NULL, 18, THEME.prompttext);
+	GuiText msg1Txt((char*)NULL, 18, THEME.prompttext);
 	msg1Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	msg1Txt.SetPosition(50,75);
 
-	GuiText msg2Txt(NULL, 18, THEME.prompttext);
+	GuiText msg2Txt((char*)NULL, 18, THEME.prompttext);
 	msg2Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	msg2Txt.SetPosition(50, 98);
 
-	GuiText msg3Txt(NULL, 18, THEME.prompttext);
+	GuiText msg3Txt((char*)NULL, 18, THEME.prompttext);
 	msg3Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	msg3Txt.SetPosition(50, 121);
 
-	GuiText msg4Txt(NULL, 18, THEME.prompttext);
+	GuiText msg4Txt((char*)NULL, 18, THEME.prompttext);
 	msg4Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	msg4Txt.SetPosition(50, 144);
 
-	GuiText msg5Txt(NULL, 18, THEME.prompttext);
+	GuiText msg5Txt((char*)NULL, 18, THEME.prompttext);
 	msg5Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	msg5Txt.SetPosition(50, 167);
 

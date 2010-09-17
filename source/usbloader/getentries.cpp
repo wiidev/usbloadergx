@@ -225,7 +225,7 @@ int __Menu_GetPrevFilter(int t, wchar_t* gameFilter, u32 gameFiltered, wchar_t *
 			}
 		}
 
-		wchar_t *wname = FreeTypeGX::charToWideChar(get_title(header));
+		wchar_t *wname = charToWideChar(get_title(header));
 		if(wname) nameList.push_back(wname);
 	}
 
@@ -268,7 +268,7 @@ int __Menu_GetGameFilter_NextList(discHdr *gameList, u32 gameCnt, wchar_t **Pgam
 	for(i=0; i<gameCnt; i++)
 	{
 		u32 nextFilterChar = 0x10000;
-		wchar_t *gameName = FreeTypeGX::charToWideChar(get_title(&gameList[i]));
+		wchar_t *gameName = charToWideChar(get_title(&gameList[i]));
 		if(gameName == NULL) goto error;
 
 		if(wcslen(gameName) > filter_len)
@@ -439,7 +439,7 @@ int buildTitleList(int t, wchar_t* gameFilter, discHdr ** PgameList, u32 *PgameC
 		
 		if(gameFilter && *gameFilter) {
 			u32 filter_len = wcslen(gameFilter);
-			wchar_t *gameName = FreeTypeGX::charToWideChar(get_title(header));
+			wchar_t *gameName = charToWideChar(get_title(header));
 			if (!gameName || wcsnicmp(gameName, gameFilter, filter_len)) {
 				delete [] gameName;
 				continue;
@@ -541,7 +541,7 @@ int __Menu_GetGameList(int t, wchar_t* gameFilter, discHdr ** PgameList, u32 *Pg
 		
 		if(gameFilter && *gameFilter && t==0) {
 			u32 filter_len = wcslen(gameFilter);
-			wchar_t *gameName = FreeTypeGX::charToWideChar(get_title(header));
+			wchar_t *gameName = charToWideChar(get_title(header));
 			if (!gameName || wcsnicmp(gameName, gameFilter, filter_len)) {
 				delete [] gameName;
 				continue;

@@ -107,13 +107,13 @@ GuiOptionBrowser::GuiOptionBrowser(int w, int h, OptionList * l, const u8 *image
 //	optionBg = new GuiImage(bgOptionsEntry);
 	for(int i=0; i<PAGESIZE; i++)
 	{
-		optionTxt[i] = new GuiText(NULL, 20, (GXColor){0, 0, 0, 0xff});
+		optionTxt[i] = new GuiText((char *) NULL, 20, (GXColor){0, 0, 0, 0xff});
 		optionTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 		optionTxt[i]->SetPosition(24,0);
 
 		optionBg[i] = new GuiImage(bgOptionsEntry);
 
-		optionVal[i] = new GuiText(NULL, 20, (GXColor){0, 0, 0, 0xff});
+		optionVal[i] = new GuiText((char *) NULL, 20, (GXColor){0, 0, 0, 0xff});
 		optionVal[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 		optionVal[i]->SetPosition(250,0);
 
@@ -232,7 +232,7 @@ GuiOptionBrowser::GuiOptionBrowser(int w, int h, OptionList * l, const char *the
 
 		optionBg[i] = new GuiImage(bgOptionsEntry);
 
-		optionVal[i] = new GuiText(NULL, 20, (GXColor){0, 0, 0, 0xff});
+		optionVal[i] = new GuiText((char *) NULL, 20, (GXColor){0, 0, 0, 0xff});
 		optionVal[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 		optionVal[i]->SetPosition(250,0);
 

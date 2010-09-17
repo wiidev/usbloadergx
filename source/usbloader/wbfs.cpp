@@ -1,5 +1,9 @@
 #include <ogcsys.h>
+#include <unistd.h>
+#include <time.h>
 
+#include "usbloader/usbstorage2.h"
+#include "fatmounter.h"
 #include "wbfs.h"
 #include "usbloader/wbfs/wbfs_base.h"
 #include "usbloader/wbfs/wbfs_wbfs.h"
@@ -260,4 +264,27 @@ int WBFS_GetFragList(u8 *id) {
 
 bool WBFS_ShowFreeSpace(void) {
 	return current->ShowFreeSpace();
+}
+
+int MountWBFS()
+{
+    int ret = -1;
+    time_t currTime = time(0);
+
+    while(time(0)-currTime < 15)
+    {
+        USBDevice_deInit();
+        USBStorage2_Deinit();
+        USBDevice_Init();
+        ret = WBFS_Init(WBFS_DEVICE_USB);
+        printf("%i...", int(time(0)-currTime));
+        if(ret < 0)
+            sleep(1);
+        else
+            break;
+    }
+
+    printf("\n");
+
+    return ret;
 }

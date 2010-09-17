@@ -132,13 +132,13 @@ GuiGameBrowser::GuiGameBrowser(int w, int h, struct discHdr * l, int gameCnt, co
 		gameTxt[i] = new GuiText(get_title(&gameList[i]), 20, THEME.gametext);
 		gameTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 		gameTxt[i]->SetPosition(24,0);
-		gameTxt[i]->SetMaxWidth(maxTextWidth, GuiText::DOTTED);
+		gameTxt[i]->SetMaxWidth(maxTextWidth, DOTTED);
 
 
 		gameTxtOver[i] = new GuiText(get_title(&gameList[i]), 20, THEME.gametext);
 		gameTxtOver[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 		gameTxtOver[i]->SetPosition(24,0);
-		gameTxtOver[i]->SetMaxWidth(maxTextWidth, GuiText::SCROLL);
+		gameTxtOver[i]->SetMaxWidth(maxTextWidth, SCROLL_HORIZONTAL);
 
 		gameBg[i] = new GuiImage(bgGamesEntry);
 
@@ -344,11 +344,11 @@ void GuiGameBrowser::UpdateListEntries()
 			if (Settings.marknewtitles) {
 				bool isNew = NewTitles::Instance()->IsNew(gameList[next].id);
 				if (isNew) {
-					gameTxt[i]->SetMaxWidth(maxTextWidth - (newGames->GetWidth() + 1), GuiText::DOTTED);
-					gameTxtOver[i]->SetMaxWidth(maxTextWidth - (newGames->GetWidth() + 1), GuiText::SCROLL);
+					gameTxt[i]->SetMaxWidth(maxTextWidth - (newGames->GetWidth() + 1), DOTTED);
+					gameTxtOver[i]->SetMaxWidth(maxTextWidth - (newGames->GetWidth() + 1), SCROLL_HORIZONTAL);
 				} else {
-					gameTxt[i]->SetMaxWidth(maxTextWidth, GuiText::DOTTED);
-					gameTxtOver[i]->SetMaxWidth(maxTextWidth, GuiText::SCROLL);
+					gameTxt[i]->SetMaxWidth(maxTextWidth, DOTTED);
+					gameTxtOver[i]->SetMaxWidth(maxTextWidth, SCROLL_HORIZONTAL);
 				}
 				newImg[i]->SetVisible(isNew);
 			}

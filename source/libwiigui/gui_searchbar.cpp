@@ -16,7 +16,7 @@ public:
 	wchar(*Char),
 	image(keyImageData),
 	imageOver(keyOverImageData),
-	text(NULL, 20, (GXColor){0, 0, 0, 0xff}),
+	text((char *) NULL, 20, (GXColor){0, 0, 0, 0xff}),
 	button(&image, &imageOver, ALIGN_LEFT, ALIGN_TOP, x, y, trig, sndOver, sndClick, 1)
 	{
 		text.SetText(Char);
@@ -35,7 +35,7 @@ private:
 GuiSearchBar::GuiSearchBar(const wchar_t *SearchChars)
 :
 inSide(0),
-text(NULL, 22, (GXColor) {0, 0, 0, 255}),
+text((char *) NULL, 22, (GXColor) {0, 0, 0, 255}),
 buttons(0),
 keyImageData(keyboard_key_png),
 keyOverImageData(keyboard_key_over_png),
@@ -70,7 +70,7 @@ sndClick(button_click_pcm, button_click_pcm_size, Settings.sfxvolume)
 	text.SetPosition(10, 15);
 	text.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	text.SetWidescreen(CFG.widescreen);
-	text.SetMaxWidth(width-(10+2*42+10), GuiText::SCROLL);
+	text.SetMaxWidth(width-(10+2*42+10), SCROLL_HORIZONTAL);
 	this->Append(&text);
 
     snprintf(imgPath, sizeof(imgPath), "%skeyboard_backspace_over.png", CFG.theme_path);

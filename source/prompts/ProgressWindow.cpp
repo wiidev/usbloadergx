@@ -175,30 +175,30 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
         msg1Txt.SetPosition(0,120);
     else
         msg1Txt.SetPosition(0,100);
-    msg1Txt.SetMaxWidth(430, GuiText::DOTTED);
+    msg1Txt.SetMaxWidth(430, DOTTED);
 
     GuiText msg2Txt(msg2, 22, THEME.prompttext );
     msg2Txt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     msg2Txt.SetPosition(0,125);
-    msg2Txt.SetMaxWidth(430, GuiText::DOTTED);
+    msg2Txt.SetMaxWidth(430, DOTTED);
 
     GuiText prsTxt("%", 22, THEME.prompttext);
     prsTxt.SetAlignment(ALIGN_RIGHT, ALIGN_MIDDLE);
     prsTxt.SetPosition(-188,40);
 
-    GuiText timeTxt(NULL, 22, THEME.prompttext);
+    GuiText timeTxt((char*) NULL, 22, THEME.prompttext);
     timeTxt.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
     timeTxt.SetPosition(280,-50);
 
-    GuiText sizeTxt(NULL, 22, THEME.prompttext);
+    GuiText sizeTxt((char*) NULL, 22, THEME.prompttext);
     sizeTxt.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
     sizeTxt.SetPosition(50, -50);
 
-    GuiText speedTxt(NULL, 22, THEME.prompttext);
+    GuiText speedTxt((char*) NULL, 22, THEME.prompttext);
     speedTxt.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
     speedTxt.SetPosition(50, -74);
 
-    GuiText prTxt(NULL, 26, THEME.prompttext);
+    GuiText prTxt((char*) NULL, 26, THEME.prompttext);
     prTxt.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     prTxt.SetPosition(200, 40);
 
@@ -208,8 +208,8 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
         progressbarEmptyImg.SetPosition(80,40);
         progressbarEmptyImg.SetTile(78);
         progressbarImg.SetPosition(80, 40);
-        msg1Txt.SetMaxWidth(380, GuiText::DOTTED);
-        msg2Txt.SetMaxWidth(380, GuiText::DOTTED);
+        msg1Txt.SetMaxWidth(380, DOTTED);
+        msg2Txt.SetMaxWidth(380, DOTTED);
 
         timeTxt.SetPosition(250,-50);
         timeTxt.SetFontSize(20);

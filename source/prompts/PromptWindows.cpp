@@ -15,6 +15,7 @@
 #include "language/gettext.h"
 #include "libwiigui/gui.h"
 #include "libwiigui/gui_diskcover.h"
+#include "libwiigui/Text.hpp"
 #include "network/networkops.h"
 #include "network/http.h"
 #include "prompts/PromptWindows.h"
@@ -71,9 +72,9 @@ extern void HaltGui();
  ***************************************************************************/
 int OnScreenNumpad(char * var, u32 maxlen) {
 	int save = -1;
-	
+
 	GuiNumpad numpad(var, maxlen);
-	
+
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
 	// because destroy GuiSound must wait while sound playing is finished, we use a global sound
 	if(!btnClick2) btnClick2=new GuiSound(button_click2_pcm, button_click2_pcm_size,Settings.sfxvolume);
@@ -104,7 +105,7 @@ int OnScreenNumpad(char * var, u32 maxlen) {
     GuiButton cancelBtn(&cancelBtnImg,&cancelBtnImg, 1, 4, -5, -15, &trigA, &btnSoundOver, btnClick2,1);
     cancelBtn.SetLabel(&cancelBtnTxt);
     cancelBtn.SetTrigger(&trigB);
-    
+
     numpad.Append(&okBtn);
     numpad.Append(&cancelBtn);
 
@@ -132,7 +133,7 @@ int OnScreenNumpad(char * var, u32 maxlen) {
     mainWindow->SetState(STATE_DEFAULT);
     ResumeGui();
 	gprintf("\t%s",(save == 1?"saved":"discarded"));
-    return save;	
+    return save;
 }
 
 /****************************************************************************
@@ -299,7 +300,7 @@ void WindowCredits() {
     i++;
     y+=26;
 
-    GuiText::SetPresets(22, (GXColor) {255, 255, 255,  255}, 0, GuiText::WRAP,FTGX_JUSTIFY_LEFT | FTGX_ALIGN_TOP, ALIGN_LEFT, ALIGN_TOP);
+    GuiText::SetPresets(22, (GXColor) {255, 255, 255,  255}, 3000, FTGX_JUSTIFY_LEFT | FTGX_ALIGN_TOP, ALIGN_LEFT, ALIGN_TOP);
 
     txt[i] = new GuiText(tr("Coding:"));
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
@@ -1159,7 +1160,7 @@ int GameWindowPrompt() {
     GuiText nameTxt("", 22, THEME.prompttext);
     if (Settings.wsprompt == yes)
         nameTxt.SetWidescreen(CFG.widescreen);
-    nameTxt.SetMaxWidth(350, GuiText::SCROLL);
+    nameTxt.SetMaxWidth(350, SCROLL_HORIZONTAL);
     GuiButton nameBtn(120,50);
     nameBtn.SetLabel(&nameTxt);
 //	nameBtn.SetLabelOver(&nameTxt);
@@ -1174,7 +1175,7 @@ int GameWindowPrompt() {
         nameBtn.SetEffectGrow();
     }
 
-    GuiText sizeTxt(NULL, 22, THEME.prompttext); //TODO: get the size here
+    GuiText sizeTxt((char*) NULL, 22, THEME.prompttext); //TODO: get the size here
     sizeTxt.SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
     sizeTxt.SetPosition(-60,70);
 
@@ -1190,7 +1191,7 @@ int GameWindowPrompt() {
     diskImg2.SetAngle(angle);
     diskImg2.SetBeta(180);
 
-    GuiText playcntTxt(NULL, 18, THEME.info);
+    GuiText playcntTxt((char*) NULL, 18, THEME.info);
     playcntTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     playcntTxt.SetPosition(-115,45);
 
@@ -1295,7 +1296,7 @@ int GameWindowPrompt() {
 
     promptWindow.Append(&diskImg2);
     promptWindow.Append(&btn1);
-	
+
     short changed = -1;
     GuiImageData * diskCover = NULL;
     GuiImageData * diskCover2 = NULL;
@@ -1746,7 +1747,7 @@ DiscWait(const char *title, const char *msg, const char *btn1Label, const char *
         }
     }
 
-    GuiText timerTxt(NULL, 26, THEME.prompttext);
+    GuiText timerTxt((char*) NULL, 26, THEME.prompttext);
     timerTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     timerTxt.SetPosition(0,160);
 
@@ -2143,15 +2144,15 @@ ProgressDownloadWindow(int choice2) {
     titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     titleTxt.SetPosition(0,60);
 
-    GuiText msgTxt(NULL, 20, THEME.prompttext);
+    GuiText msgTxt((char*) NULL, 20, THEME.prompttext);
     msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     msgTxt.SetPosition(0,130);
 
-    GuiText msg2Txt(NULL, 26, THEME.prompttext);
+    GuiText msg2Txt((char*) NULL, 26, THEME.prompttext);
     msg2Txt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     msg2Txt.SetPosition(0,100);
 
-    GuiText prTxt(NULL, 26, THEME.prompttext);
+    GuiText prTxt((char*) NULL, 26, THEME.prompttext);
     prTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     prTxt.SetPosition(0, 40);
 
@@ -2768,7 +2769,7 @@ int ProgressUpdateWindow() {
 				} else {
 					filesize = download_request("http://www.techjawa.com/usbloadergx/ULNR.file");//for some reason it didn't download completely when saved as a wad.
 				}
-				
+
                 if (filesize > 0) {
 
                     pfile = fopen(dolpath, "wb");//here we save the txt as a wad
@@ -2889,7 +2890,7 @@ int ProgressUpdateWindow() {
 
     return 1;
 }
-#else  
+#else
 int ProgressUpdateWindow() {
 
     gprintf("\nProgressUpdateWindow(not full channel)");
@@ -2954,7 +2955,7 @@ int ProgressUpdateWindow() {
     msg2Txt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     msg2Txt.SetPosition(0, 50);
 
-    GuiText prTxt(NULL, 26, THEME.prompttext);
+    GuiText prTxt((char*) NULL, 26, THEME.prompttext);
     prTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     prTxt.SetPosition(0, 7);
 
@@ -3053,7 +3054,7 @@ int ProgressUpdateWindow() {
                 promptWindow.Append(&progressbarOutlineImg);
                 promptWindow.Append(&prTxt);
                 msgTxt.SetTextf("%s Rev%i", tr("Update to"), newrev);
-				
+
 				s32 filesize;
 				if (Settings.beta_upgrades) {
 					char url[255];
@@ -3487,7 +3488,7 @@ HBCWindowPrompt(const char *name, const char *coder, const char *version,
     GuiText nameTxt(name,30 , THEME.prompttext);
     nameTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     nameTxt.SetPosition(0,-15);
-    nameTxt.SetMaxWidth(430, GuiText::SCROLL);
+    nameTxt.SetMaxWidth(430, SCROLL_HORIZONTAL);
 
 
     if (strcmp(coder,""))
@@ -3512,11 +3513,11 @@ HBCWindowPrompt(const char *name, const char *coder, const char *version,
     release_dateTxt.SetMaxWidth(430);
 
     int pagesize = 6;
-    GuiText long_descriptionTxt(long_description, 20, THEME.prompttext);
+    Text long_descriptionTxt(long_description, 20, THEME.prompttext);
     long_descriptionTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     long_descriptionTxt.SetPosition(46,117);
     long_descriptionTxt.SetMaxWidth(360);
-    long_descriptionTxt.SetNumLines(pagesize);
+    long_descriptionTxt.SetLinesToDraw(pagesize);
 
     //convert filesize from u64 to char and put unit of measurement after it
     char temp2[7];
@@ -3623,18 +3624,17 @@ HBCWindowPrompt(const char *name, const char *coder, const char *version,
 			gprintf("...It's easy, mmmmmmKay");
 		    }
 	else if ((arrowUpBtn.GetState()==STATE_CLICKED||arrowUpBtn.GetState()==STATE_HELD) ) {
-            if (long_descriptionTxt.GetFirstLine()>1)
-                long_descriptionTxt.SetFirstLine(long_descriptionTxt.GetFirstLine()-1);
+            long_descriptionTxt.SetTextLine(long_descriptionTxt.GetCurrPos()-1);
             usleep(60000);
             if (!((ButtonsHold() & WPAD_BUTTON_UP)||(ButtonsHold() & PAD_BUTTON_UP)))
                 arrowUpBtn.ResetState();
         } else if ((arrowDownBtn.GetState()==STATE_CLICKED||arrowDownBtn.GetState()==STATE_HELD)
-                   &&long_descriptionTxt.GetTotalLines()>pagesize
-                   &&long_descriptionTxt.GetFirstLine()-1<long_descriptionTxt.GetTotalLines()-pagesize) {
+                   &&long_descriptionTxt.GetTotalLinesCount()>pagesize
+                   &&long_descriptionTxt.GetCurrPos()-1<long_descriptionTxt.GetTotalLinesCount()-pagesize) {
             int l=0;
-            l=long_descriptionTxt.GetFirstLine()+1;
+            l=long_descriptionTxt.GetCurrPos()+1;
 
-            long_descriptionTxt.SetFirstLine(l);
+            long_descriptionTxt.SetTextLine(l);
             usleep(60000);
             if (!((ButtonsHold() & WPAD_BUTTON_DOWN)||(ButtonsHold() & PAD_BUTTON_DOWN)))
                 arrowDownBtn.ResetState();

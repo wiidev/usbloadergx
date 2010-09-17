@@ -364,11 +364,11 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
 	fileBrowser.SetPosition(0, 120);
 
 	GuiImageData Address(addressbar_textbox_png);
-	GuiText AdressText(NULL, 20, (GXColor) { 0, 0, 0, 255});
+	GuiText AdressText((char*) NULL, 20, (GXColor) { 0, 0, 0, 255});
 	AdressText.SetTextf("%s%s", browser->rootdir, browser->dir);
 	AdressText.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 	AdressText.SetPosition(20, 0);
-	AdressText.SetMaxWidth(Address.GetWidth()-40, GuiText::SCROLL);
+	AdressText.SetMaxWidth(Address.GetWidth()-40, SCROLL_HORIZONTAL);
 	GuiImage AdressbarImg(&Address);
 	GuiButton Adressbar(Address.GetWidth(), Address.GetHeight());
 	Adressbar.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);

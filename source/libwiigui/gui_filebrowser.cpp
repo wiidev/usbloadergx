@@ -108,15 +108,15 @@ GuiFileBrowser::GuiFileBrowser(int w, int h)
 
 	for(int i=0; i<FILEBROWSERSIZE; i++)
 	{
-		fileListText[i] = new GuiText(NULL,20, (GXColor){0, 0, 0, 0xff});
+		fileListText[i] = new GuiText((char *) NULL,20, (GXColor){0, 0, 0, 0xff});
 		fileListText[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 		fileListText[i]->SetPosition(5,0);
-		fileListText[i]->SetMaxWidth(bgFileSelectionImg->GetWidth() - (arrowDownImg->GetWidth()+20), GuiText::DOTTED);
+		fileListText[i]->SetMaxWidth(bgFileSelectionImg->GetWidth() - (arrowDownImg->GetWidth()+20), DOTTED);
 
-		fileListTextOver[i] = new GuiText(NULL,20, (GXColor){0, 0, 0, 0xff});
+		fileListTextOver[i] = new GuiText((char *) NULL,20, (GXColor){0, 0, 0, 0xff});
 		fileListTextOver[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 		fileListTextOver[i]->SetPosition(5,0);
-		fileListTextOver[i]->SetMaxWidth(bgFileSelectionImg->GetWidth() - (arrowDownImg->GetWidth()+20), GuiText::SCROLL);
+		fileListTextOver[i]->SetMaxWidth(bgFileSelectionImg->GetWidth() - (arrowDownImg->GetWidth()+20), SCROLL_HORIZONTAL);
 
 		fileListBg[i] = new GuiImage(bgFileSelectionEntry);
 		//fileListArchives[i] = new GuiImage(fileArchives);

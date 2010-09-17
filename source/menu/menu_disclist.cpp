@@ -559,11 +559,11 @@ int MenuDiscList() {
     GuiText clockTimeBack("88:88", 40, (GXColor) {THEME.clock.r, THEME.clock.g, THEME.clock.b, THEME.clock.a/6});
     clockTimeBack.SetAlignment(THEME.clock_align, ALIGN_TOP);
     clockTimeBack.SetPosition(THEME.clock_x, THEME.clock_y);
-    clockTimeBack.SetFont(fontClock);
+    clockTimeBack.SetFont(clock_ttf, clock_ttf_size);
     GuiText clockTime(theTime, 40, THEME.clock);
     clockTime.SetAlignment(THEME.clock_align, ALIGN_TOP);
     clockTime.SetPosition(THEME.clock_x, THEME.clock_y);
-    clockTime.SetFont(fontClock);
+    clockTime.SetFont(clock_ttf, clock_ttf_size);
 
     HaltGui();
     GuiWindow w(screenwidth, screenheight);
