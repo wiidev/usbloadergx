@@ -3518,6 +3518,7 @@ HBCWindowPrompt(const char *name, const char *coder, const char *version,
     long_descriptionTxt.SetPosition(46,117);
     long_descriptionTxt.SetMaxWidth(360);
     long_descriptionTxt.SetLinesToDraw(pagesize);
+    long_descriptionTxt.Refresh();
 
     //convert filesize from u64 to char and put unit of measurement after it
     char temp2[7];
@@ -3604,42 +3605,49 @@ HBCWindowPrompt(const char *name, const char *coder, const char *version,
     mainWindow->ChangeFocus(&promptWindow);
     ResumeGui();
 
-    while (choice == -1) {
+    while (choice == -1)
+    {
         VIDEO_WaitVSync();
-        if (shutdown == 1) {
+
+        if (shutdown == 1)
+        {
             wiilight(0);
             Sys_Shutdown();
         }
-        if (reset == 1)
+        else if (reset == 1)
+        {
+            wiilight(0);
             Sys_Reboot();
-        if (btn1.GetState() == STATE_CLICKED) {
+        }
+
+        if (btn1.GetState() == STATE_CLICKED)
             choice = 1;
-        } else if (btn2.GetState() == STATE_CLICKED) {
+        else if (btn2.GetState() == STATE_CLICKED)
             choice = 0;
-	}
-	else if (screenShotBtn.GetState() == STATE_CLICKED) {
-			gprintf("\n\tscreenShotBtn clicked");
-			screenShotBtn.ResetState();
-			ScreenShot();
-			gprintf("...It's easy, mmmmmmKay");
-		    }
-	else if ((arrowUpBtn.GetState()==STATE_CLICKED||arrowUpBtn.GetState()==STATE_HELD) ) {
-            long_descriptionTxt.SetTextLine(long_descriptionTxt.GetCurrPos()-1);
-            usleep(60000);
+
+        else if (screenShotBtn.GetState() == STATE_CLICKED)
+        {
+            gprintf("\n\tscreenShotBtn clicked");
+            screenShotBtn.ResetState();
+            ScreenShot();
+            gprintf("...It's easy, mmmmmmKay");
+        }
+        else if (arrowUpBtn.GetState() == STATE_CLICKED || arrowUpBtn.GetState() == STATE_HELD)
+        {
+            long_descriptionTxt.PreviousLine();
+
+            usleep(6000);
             if (!((ButtonsHold() & WPAD_BUTTON_UP)||(ButtonsHold() & PAD_BUTTON_UP)))
                 arrowUpBtn.ResetState();
-        } else if ((arrowDownBtn.GetState()==STATE_CLICKED||arrowDownBtn.GetState()==STATE_HELD)
-                   &&long_descriptionTxt.GetTotalLinesCount()>pagesize
-                   &&long_descriptionTxt.GetCurrPos()-1<long_descriptionTxt.GetTotalLinesCount()-pagesize) {
-            int l=0;
-            l=long_descriptionTxt.GetCurrPos()+1;
+        }
+        else if (arrowDownBtn.GetState() == STATE_CLICKED || arrowDownBtn.GetState() == STATE_HELD)
+        {
+            long_descriptionTxt.NextLine();
 
-            long_descriptionTxt.SetTextLine(l);
             usleep(60000);
             if (!((ButtonsHold() & WPAD_BUTTON_DOWN)||(ButtonsHold() & PAD_BUTTON_DOWN)))
                 arrowDownBtn.ResetState();
         }
-
     }
 
     promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
