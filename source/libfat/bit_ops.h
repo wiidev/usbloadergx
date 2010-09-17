@@ -3,7 +3,7 @@
  Functions for dealing with conversion of data between types
 
  Copyright (c) 2006 Michael "Chishm" Chisholm
-	
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
 
@@ -26,8 +26,8 @@
  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef _BIT_OPS_H
-#define _BIT_OPS_H
+#ifndef __BIT_OPS_H
+#define __BIT_OPS_H
 
 #include <stdint.h>
 

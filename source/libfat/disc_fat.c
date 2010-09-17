@@ -2,9 +2,9 @@
  disc.c
  Interface to the low level disc functions. Used by the higher level
  file system code.
- 
+
  Copyright (c) 2008 Michael "Chishm" Chisholm
-	
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
 
@@ -27,7 +27,7 @@
  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include "disc.h"
+#include "disc_fat.h"
 
 /*
 The list of interfaces consists of a series of name/interface pairs.
@@ -39,16 +39,15 @@ The list is terminated by a NULL/NULL entry.
 */
 
 /* ====================== Wii ====================== */
-#if   defined (__wii__)
 #include <sdcard/wiisd_io.h>
-#include <ogc/usbstorage.h>
+#include "usbloader/usbstorage2.h"
 #include <sdcard/gcsd.h>
 
 static const DISC_INTERFACE* get_io_wiisd (void) {
 	return &__io_wiisd;
 }
 static const DISC_INTERFACE* get_io_usbstorage (void) {
-	return &__io_usbstorage;
+	return &__io_usbstorage2;
 }
 
 static const DISC_INTERFACE* get_io_gcsda (void) {
@@ -64,42 +63,5 @@ const INTERFACE_ID _FAT_disc_interfaces[] = {
 	{"carda", get_io_gcsda},
 	{"cardb", get_io_gcsdb},
 	{NULL, NULL}
-};	
-	
-/* ==================== Gamecube ==================== */
-#elif defined (__gamecube__)
-#include <sdcard/gcsd.h>
-
-static const DISC_INTERFACE* get_io_gcsda (void) {
-	return &__io_gcsda;
-}
-static const DISC_INTERFACE* get_io_gcsdb (void) {
-	return &__io_gcsdb;
-}
-
-const INTERFACE_ID _FAT_disc_interfaces[] = {
-	{"carda", get_io_gcsda},
-	{"cardb", get_io_gcsdb},
-	{NULL, NULL}
-};	
-
-/* ====================== NDS ====================== */
-#elif defined (NDS)
-#include <nds/arm9/dldi.h>
-
-const INTERFACE_ID _FAT_disc_interfaces[] = {
-	{"fat", dldiGetInternal},
-	{NULL, NULL}
-};	
-
-/* ====================== GBA ====================== */
-#elif defined (GBA)
-#include <disc.h>
-
-const INTERFACE_ID _FAT_disc_interfaces[] = {
-	{"fat", discGetInterface},
-	{NULL, NULL}
-};	
-
-#endif
+};
 

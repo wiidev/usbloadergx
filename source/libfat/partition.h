@@ -4,7 +4,7 @@
  on various block devices.
 
  Copyright (c) 2006 Michael "Chishm" Chisholm
-	
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
 
@@ -27,11 +27,11 @@
  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef _PARTITION_H
-#define _PARTITION_H
+#ifndef __PARTITION_H
+#define __PARTITION_H
 
 #include "common.h"
-#include "cache.h"
+#include "fat_cache.h"
 #include "lock.h"
 
 // Device name
@@ -67,7 +67,6 @@ typedef struct {
 	struct _FILE_STRUCT*  firstOpenFile;		// The start of a linked list of files
 	mutex_t               lock;					// A lock for partition operations
 	bool                  readOnly;				// If this is set, then do not try writing to the disc
-	char                  label[12];			// Volume label
 } PARTITION;
 
 /*
@@ -76,7 +75,7 @@ Mount the supplied device and return a pointer to the struct necessary to use it
 PARTITION* _FAT_partition_constructor (const DISC_INTERFACE* disc, uint32_t cacheSize, uint32_t SectorsPerPage, sec_t startSector);
 
 /*
-Dismount the device and free all structures used. 
+Dismount the device and free all structures used.
 Will also attempt to synchronise all open files to disc.
 */
 void _FAT_partition_destructor (PARTITION* partition);

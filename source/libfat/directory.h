@@ -4,7 +4,7 @@
  a FAT partition
 
  Copyright (c) 2006 Michael "Chishm" Chisholm
-	
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
 
@@ -27,8 +27,8 @@
  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef _DIRECTORY_H
-#define _DIRECTORY_H
+#ifndef __DIRECTORY_H
+#define __DIRECTORY_H
 
 #include <sys/stat.h>
 
@@ -132,7 +132,7 @@ Returns true on success, false on failure
 */
 bool _FAT_directory_entryFromPath (PARTITION* partition, DIR_ENTRY* entry, const char* path, const char* pathEnd);
 
-/* 
+/*
 Changes the current directory to the one specified by path
 Returns true on success, false on failure
 */
@@ -156,10 +156,10 @@ bool _FAT_directory_addEntry (PARTITION* partition, DIR_ENTRY* entry, uint32_t d
 /*
 Get the start cluster of a file from it's entry data
 */
-uint32_t _FAT_directory_entryGetCluster (PARTITION* partition, const uint8_t* entryData); 
+uint32_t _FAT_directory_entryGetCluster (PARTITION* partition, const uint8_t* entryData);
 
-/* 
-Fill in the file name and entry data of DIR_ENTRY* entry. 
+/*
+Fill in the file name and entry data of DIR_ENTRY* entry.
 Assumes that the entry's dataStart and dataEnd are correct
 Returns true on success, false on failure
 */
@@ -169,10 +169,5 @@ bool _FAT_directory_entryFromPosition (PARTITION* partition, DIR_ENTRY* entry);
 Fill in a stat struct based on a file entry
 */
 void _FAT_directory_entryStat (PARTITION* partition, DIR_ENTRY* entry, struct stat *st);
-
-/*
-Get volume label
-*/
-bool _FAT_directory_getVolumeLabel (PARTITION* partition, char *label);
 
 #endif // _DIRECTORY_H

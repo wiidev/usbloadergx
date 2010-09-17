@@ -5,7 +5,7 @@
  malloc is unavailable
 
  Copyright (c) 2006 Michael "Chishm" Chisholm
-	
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
 
@@ -28,8 +28,8 @@
  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef _MEM_ALLOCATE_H
-#define _MEM_ALLOCATE_H
+#ifndef __MEM_ALLOCATE_H_
+#define __MEM_ALLOCATE_H_
 
 #include <malloc.h>
 
@@ -38,6 +38,7 @@ static inline void* _FAT_mem_allocate (size_t size) {
 }
 
 static inline void* _FAT_mem_align (size_t size) {
+
 	return memalign (32, size);
 }
 

@@ -37,8 +37,8 @@
 #include <limits.h>
 
 #include "common.h"
-#include "cache.h"
-#include "disc.h"
+#include "fat_cache.h"
+#include "disc_fat.h"
 
 #include "mem_allocate.h"
 #include "bit_ops.h"
@@ -127,7 +127,7 @@ static CACHE_ENTRY* _FAT_cache_getPage(CACHE *cache,sec_t sector)
 			cacheEntries[i].last_access = accessTime();
 			return &(cacheEntries[i]);
 		}
-		
+
 		if(foundFree==false && (cacheEntries[i].sector==CACHE_FREE || cacheEntries[i].last_access<oldAccess)) {
 			if(cacheEntries[i].sector==CACHE_FREE) foundFree = true;
 			oldUsed = i;
@@ -181,7 +181,7 @@ bool _FAT_cache_readSectors(CACHE *cache,sec_t sector,sec_t numSectors,void *buf
 /*
 Reads some data from a cache page, determined by the sector number
 */
-bool _FAT_cache_readPartialSector (CACHE* cache, void* buffer, sec_t sector, unsigned int offset, size_t size) 
+bool _FAT_cache_readPartialSector (CACHE* cache, void* buffer, sec_t sector, unsigned int offset, size_t size)
 {
 	sec_t sec;
 	CACHE_ENTRY *entry;
@@ -213,7 +213,7 @@ bool _FAT_cache_readLittleEndianValue (CACHE* cache, uint32_t *value, sec_t sect
 /*
 Writes some data to a cache page, making sure it is loaded into memory first.
 */
-bool _FAT_cache_writePartialSector (CACHE* cache, const void* buffer, sec_t sector, unsigned int offset, size_t size) 
+bool _FAT_cache_writePartialSector (CACHE* cache, const void* buffer, sec_t sector, unsigned int offset, size_t size)
 {
 	sec_t sec;
 	CACHE_ENTRY *entry;
@@ -246,7 +246,7 @@ bool _FAT_cache_writeLittleEndianValue (CACHE* cache, const uint32_t value, sec_
 /*
 Writes some data to a cache page, zeroing out the page first
 */
-bool _FAT_cache_eraseWritePartialSector (CACHE* cache, const void* buffer, sec_t sector, unsigned int offset, size_t size) 
+bool _FAT_cache_eraseWritePartialSector (CACHE* cache, const void* buffer, sec_t sector, unsigned int offset, size_t size)
 {
 	sec_t sec;
 	CACHE_ENTRY *entry;
@@ -292,7 +292,7 @@ static CACHE_ENTRY* _FAT_cache_findPage(CACHE *cache, sec_t sector, sec_t count)
 	return entry;
 }
 
-bool _FAT_cache_writeSectors (CACHE* cache, sec_t sector, sec_t numSectors, const void* buffer) 
+bool _FAT_cache_writeSectors (CACHE* cache, sec_t sector, sec_t numSectors, const void* buffer)
 {
 	sec_t sec;
 	sec_t secs_to_write;
@@ -306,15 +306,15 @@ bool _FAT_cache_writeSectors (CACHE* cache, sec_t sector, sec_t numSectors, cons
 		if(entry!=NULL) {
 
 			if ( entry->sector > sector) {
-				
+
 				secs_to_write = entry->sector - sector;
-				
+
 				_FAT_disc_writeSectors(cache->disc,sector,secs_to_write,src);
 				src += (secs_to_write*BYTES_PER_READ);
 				sector += secs_to_write;
 				numSectors -= secs_to_write;
 			}
-				
+
 			sec = sector - entry->sector;
 			secs_to_write = entry->count - sec;
 
@@ -327,7 +327,7 @@ bool _FAT_cache_writeSectors (CACHE* cache, sec_t sector, sec_t numSectors, cons
 			numSectors -= secs_to_write;
 
 			entry->dirty = true;
-				
+
 		} else {
 			_FAT_disc_writeSectors(cache->disc,sector,numSectors,src);
 			numSectors=0;

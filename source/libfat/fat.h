@@ -1,10 +1,8 @@
 /*
 	fat.h
 	Simple functionality for startup, mounting and unmounting of FAT-based devices.
-	
- Copyright (c) 2006 - 2009
-	Michael "Chishm" Chisholm
-	Dave "WinterMute" Murphy
+
+ Copyright (c) 2006 Michael "Chishm" Chisholm
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -36,24 +34,8 @@
 extern "C" {
 #endif
 
-// When compiling for NDS, make sure NDS is defined
-#ifndef NDS
- #if defined ARM9 || defined ARM7
-  #define NDS
- #endif
-#endif
-
 #include <stdint.h>
-
-#if defined(__gamecube__) || defined (__wii__)
-#  include <ogc/disc_io.h>
-#else
-#  ifdef NDS
-#    include "nds/disc_io.h"
-#  else
-#    include "disc_io.h"
-#  endif
-#endif
+#include <ogc/disc_io.h>
 
 /*
 Initialise any inserted block-devices.
@@ -71,7 +53,7 @@ extern bool fatInitDefault (void);
 /*
 Mount the device pointed to by interface, and set up a devoptab entry for it as "name:".
 You can then access the filesystem using "name:/".
-This will mount the active partition or the first valid partition on the disc, 
+This will mount the active partition or the first valid partition on the disc,
 and will use a cache size optimized for the host system.
 */
 extern bool fatMountSimple (const char* name, const DISC_INTERFACE* interface);
@@ -85,17 +67,11 @@ cacheSize specifies the number of pages to allocate for the cache.
 This will not startup the disc, so you need to call interface->startup(); first.
 */
 extern bool fatMount (const char* name, const DISC_INTERFACE* interface, sec_t startSector, uint32_t cacheSize, uint32_t SectorsPerPage);
-
 /*
 Unmount the partition specified by name.
 If there are open files, it will attempt to synchronise them to disc.
 */
 extern void fatUnmount (const char* name);
-
-/*
-Get Volume Label
-*/
-extern void fatGetVolumeLabel (const char* name, char *label);
 
 #ifdef __cplusplus
 }

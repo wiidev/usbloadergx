@@ -39,7 +39,7 @@
 #include <ctype.h>
 #include <unistd.h>
 
-#include "cache.h"
+#include "fat_cache.h"
 #include "file_allocation_table.h"
 #include "bit_ops.h"
 #include "filetime.h"
