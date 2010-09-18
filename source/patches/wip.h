@@ -10,9 +10,9 @@ typedef struct
     u32 dstaddress;
 } WIP_Code;
 
-int load_wip_code(u8 *gameid);
-void do_wip_code(u8 * dst, u32 len);
-bool set_wip_list(WIP_Code * list, int size);
+int load_wip_code( u8 *gameid );
+void do_wip_code( u8 * dst, u32 len );
+bool set_wip_list( WIP_Code * list, int size );
 void wip_reset_counter();
 void free_wip();
 

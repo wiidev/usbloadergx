@@ -33,17 +33,20 @@
 
 #include <malloc.h>
 
-static inline void* _FAT_mem_allocate (size_t size) {
-	return malloc (size);
+static inline void* _FAT_mem_allocate ( size_t size )
+{
+    return malloc ( size );
 }
 
-static inline void* _FAT_mem_align (size_t size) {
+static inline void* _FAT_mem_align ( size_t size )
+{
 
-	return memalign (32, size);
+    return memalign ( 32, size );
 }
 
-static inline void _FAT_mem_free (void* mem) {
-	free (mem);
+static inline void _FAT_mem_free ( void* mem )
+{
+    free ( mem );
 }
 
 #endif // _MEM_ALLOCATE_H

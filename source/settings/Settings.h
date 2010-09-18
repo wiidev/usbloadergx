@@ -9,5 +9,5 @@
 #define _SETTINGS_H_
 
 int MenuSettings();
-int GameSettings(struct discHdr * header);
+int GameSettings( struct discHdr * header );
 #endif

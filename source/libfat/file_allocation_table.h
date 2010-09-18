@@ -33,38 +33,40 @@
 #include "common.h"
 #include "partition.h"
 
-#define CLUSTER_EOF_16	0xFFFF
-#define	CLUSTER_EOF		0x0FFFFFFF
-#define CLUSTER_FREE	0x00000000
-#define CLUSTER_ROOT	0x00000000
-#define CLUSTER_FIRST	0x00000002
-#define CLUSTER_ERROR	0xFFFFFFFF
+#define CLUSTER_EOF_16  0xFFFF
+#define CLUSTER_EOF     0x0FFFFFFF
+#define CLUSTER_FREE    0x00000000
+#define CLUSTER_ROOT    0x00000000
+#define CLUSTER_FIRST   0x00000002
+#define CLUSTER_ERROR   0xFFFFFFFF
 
 #define CLUSTERS_PER_FAT12 4085
 #define CLUSTERS_PER_FAT16 65525
 
 
-uint32_t _FAT_fat_nextCluster(PARTITION* partition, uint32_t cluster);
+uint32_t _FAT_fat_nextCluster( PARTITION* partition, uint32_t cluster );
 
-uint32_t _FAT_fat_linkFreeCluster(PARTITION* partition, uint32_t cluster);
-uint32_t _FAT_fat_linkFreeClusterCleared (PARTITION* partition, uint32_t cluster);
+uint32_t _FAT_fat_linkFreeCluster( PARTITION* partition, uint32_t cluster );
+uint32_t _FAT_fat_linkFreeClusterCleared ( PARTITION* partition, uint32_t cluster );
 
-bool _FAT_fat_clearLinks (PARTITION* partition, uint32_t cluster);
+bool _FAT_fat_clearLinks ( PARTITION* partition, uint32_t cluster );
 
-uint32_t _FAT_fat_trimChain (PARTITION* partition, uint32_t startCluster, unsigned int chainLength);
+uint32_t _FAT_fat_trimChain ( PARTITION* partition, uint32_t startCluster, unsigned int chainLength );
 
-uint32_t _FAT_fat_lastCluster (PARTITION* partition, uint32_t cluster);
+uint32_t _FAT_fat_lastCluster ( PARTITION* partition, uint32_t cluster );
 
-unsigned int _FAT_fat_freeClusterCount (PARTITION* partition);
+unsigned int _FAT_fat_freeClusterCount ( PARTITION* partition );
 
-static inline sec_t _FAT_fat_clusterToSector (PARTITION* partition, uint32_t cluster) {
-	return (cluster >= CLUSTER_FIRST) ?
-		((cluster - CLUSTER_FIRST) * (sec_t)partition->sectorsPerCluster) + partition->dataStart :
-		partition->rootDirStart;
+static inline sec_t _FAT_fat_clusterToSector ( PARTITION* partition, uint32_t cluster )
+{
+    return ( cluster >= CLUSTER_FIRST ) ?
+           ( ( cluster - CLUSTER_FIRST ) * ( sec_t )partition->sectorsPerCluster ) + partition->dataStart :
+           partition->rootDirStart;
 }
 
-static inline bool _FAT_fat_isValidCluster (PARTITION* partition, uint32_t cluster) {
-	return (cluster >= CLUSTER_FIRST) && (cluster <= partition->fat.lastCluster /* This will catch CLUSTER_ERROR */);
+static inline bool _FAT_fat_isValidCluster ( PARTITION* partition, uint32_t cluster )
+{
+    return ( cluster >= CLUSTER_FIRST ) && ( cluster <= partition->fat.lastCluster /* This will catch CLUSTER_ERROR */ );
 }
 
 #endif // _FAT_H

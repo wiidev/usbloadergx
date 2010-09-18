@@ -4,20 +4,21 @@
 #define _GECKO_H_
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
-    char ascii(char s);
+    char ascii( char s );
 
 #ifndef NO_DEBUG
-	//use this just like printf();
-	void gprintf(const char *str, ...);
-	bool InitGecko();
-	void hexdump(void *d, int len);
+    //use this just like printf();
+    void gprintf( const char *str, ... );
+    bool InitGecko();
+    void hexdump( void *d, int len );
 #else
-	#define gprintf(...)
-	#define InitGecko()      false
-	#define hexdump( x, y )
+#define gprintf(...)
+#define InitGecko()      false
+#define hexdump( x, y )
 #endif /* NO_DEBUG */
 
 

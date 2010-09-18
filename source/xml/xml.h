@@ -6,18 +6,20 @@
 
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 // open database, close database, load info for a game
-    bool OpenXMLDatabase(char* xmlfilepath, char* argdblang, bool argJPtoEN, bool openfile, bool loadtitles, bool keepopen);
+    bool OpenXMLDatabase( char* xmlfilepath, char* argdblang, bool argJPtoEN, bool openfile, bool loadtitles, bool keepopen );
     void CloseXMLDatabase();
-    bool LoadGameInfoFromXML(char* gameid, char* langcode);
+    bool LoadGameInfoFromXML( char* gameid, char* langcode );
 
 #define XML_ELEMMAX 15
 #define XML_SYNOPSISLEN 4000
 
-    struct gameXMLinfo {
+    struct gameXMLinfo
+    {
         char    id[7];
         char    version[50];
         char    region[7];
@@ -56,17 +58,17 @@ extern "C" {
         char    iso_sha1[41];
     } ;
 
-    bool OpenXMLFile(char* filename);
-    void LoadTitlesFromXML(char *langcode, bool forcejptoen);
-    void GetPublisherFromGameid(char *idtxt, char *dest, int destsize);
-    char *ConvertLangTextToCode(char *langtext);
-    void ConvertRating(char *ratingvalue, char *fromrating, char *torating, char *destvalue, int destsize);
-    void PrintGameInfo(bool showfullinfo);
+    bool OpenXMLFile( char* filename );
+    void LoadTitlesFromXML( char *langcode, bool forcejptoen );
+    void GetPublisherFromGameid( char *idtxt, char *dest, int destsize );
+    char *ConvertLangTextToCode( char *langtext );
+    void ConvertRating( char *ratingvalue, char *fromrating, char *torating, char *destvalue, int destsize );
+    void PrintGameInfo( bool showfullinfo );
     char *MemInfo();
-    void GetTextFromNode(mxml_node_t *currentnode, mxml_node_t *topnode, char *nodename,
-                         char *attributename, char *value, int descend, char *dest, int destsize);
-	int GetRatingForGame(char *gameid);
-	char * get_nodetext(mxml_node_t *node, char *buffer, int buflen);
+    void GetTextFromNode( mxml_node_t *currentnode, mxml_node_t *topnode, char *nodename,
+                          char *attributename, char *value, int descend, char *dest, int destsize );
+    int GetRatingForGame( char *gameid );
+    char * get_nodetext( mxml_node_t *node, char *buffer, int buflen );
 
 #ifdef __cplusplus
 }

@@ -24,20 +24,23 @@
 
 #include <malloc.h>
 
-static inline void* ntfs_alloc (size_t size) {
-    return malloc(size);
+static inline void* ntfs_alloc ( size_t size )
+{
+    return malloc( size );
 }
 
-static inline void* ntfs_align (size_t size) {
-    #ifdef __wii__
-    return memalign(32, size);
-    #else
-    return malloc(size);
-    #endif
+static inline void* ntfs_align ( size_t size )
+{
+#ifdef __wii__
+    return memalign( 32, size );
+#else
+    return malloc( size );
+#endif
 }
 
-static inline void ntfs_free (void* mem) {
-    free(mem);
+static inline void ntfs_free ( void* mem )
+{
+    free( mem );
 }
 
 #endif /* _MEM_ALLOCATE_H */

@@ -26,9 +26,9 @@
 #include "types.h"
 #include "layout.h"
 
-extern int ntfs_mst_post_read_fixup(NTFS_RECORD *b, const u32 size);
-extern int ntfs_mst_pre_write_fixup(NTFS_RECORD *b, const u32 size);
-extern void ntfs_mst_post_write_fixup(NTFS_RECORD *b);
+extern int ntfs_mst_post_read_fixup( NTFS_RECORD *b, const u32 size );
+extern int ntfs_mst_pre_write_fixup( NTFS_RECORD *b, const u32 size );
+extern void ntfs_mst_post_write_fixup( NTFS_RECORD *b );
 
 #endif /* defined _NTFS_MST_H */
 

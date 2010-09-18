@@ -13,12 +13,13 @@
 #include "settings/cfg.h"
 #include "main.h"
 
-void InitGUIThreads(void);
-void ExitGUIThreads(void);
+void InitGUIThreads( void );
+void ExitGUIThreads( void );
 
-int MainMenu (int menuitem);
+int MainMenu ( int menuitem );
 
-enum {
+enum
+{
     MENU_EXIT = -1,
     MENU_NONE,
     MENU_SETTINGS,
@@ -32,7 +33,7 @@ enum {
     MENU_THEMEDOWNLOADER
 };
 class GuiImageData;
-GuiImageData *LoadCoverImage(struct discHdr *header, bool Prefere3D=true, bool noCover=true);
+GuiImageData *LoadCoverImage( struct discHdr *header, bool Prefere3D = true, bool noCover = true );
 class GuiSound;
 extern GuiSound *btnClick2;
 #endif

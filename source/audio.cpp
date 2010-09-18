@@ -15,10 +15,11 @@
  *
  * Initializes the Wii's audio subsystem
  ***************************************************************************/
-void InitAudio() {
-    AUDIO_Init(NULL);
+void InitAudio()
+{
+    AUDIO_Init( NULL );
     ASND_Init();
-    ASND_Pause(0);
+    ASND_Pause( 0 );
 }
 
 /****************************************************************************
@@ -27,7 +28,8 @@ void InitAudio() {
  * Shuts down audio subsystem. Useful to avoid unpleasant sounds if a
  * crash occurs during shutdown.
  ***************************************************************************/
-void ShutdownAudio() {
-    ASND_Pause(1);
+void ShutdownAudio()
+{
+    ASND_Pause( 1 );
     ASND_End();
 }

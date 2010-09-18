@@ -16,7 +16,7 @@ class HomebrewXML
         //!Destructor
         ~HomebrewXML() { };
         //!\param filename Filepath of the XML file
-        int LoadHomebrewXMLData(const char* filename);
+        int LoadHomebrewXMLData( const char* filename );
         //! Get name
         const char * GetName() { return Name.c_str(); };
         //! Get coder
@@ -30,7 +30,7 @@ class HomebrewXML
         //! Get longdescription
         const char * GetLongDescription() { return LongDescription.c_str(); };
         //! Set Name
-        void SetName(char * newName) { Name = newName; };
+        void SetName( char * newName ) { Name = newName; };
     protected:
         std::string Name;
         std::string Coder;

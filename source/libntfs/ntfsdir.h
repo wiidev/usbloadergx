@@ -28,7 +28,8 @@
 /**
  * ntfs_dir_entry - Directory entry
  */
-typedef struct _ntfs_dir_entry {
+typedef struct _ntfs_dir_entry
+{
     char *name;
     u64 mref;
     struct _ntfs_dir_entry *next;
@@ -37,7 +38,8 @@ typedef struct _ntfs_dir_entry {
 /**
  * ntfs_dir_state - Directory state
  */
-typedef struct _ntfs_dir_state {
+typedef struct _ntfs_dir_state
+{
     ntfs_vd *vd;                            /* Volume this directory belongs to */
     ntfs_inode *ni;                         /* Directory descriptor */
     ntfs_dir_entry *first;                  /* The first entry in the directory */
@@ -47,22 +49,22 @@ typedef struct _ntfs_dir_state {
 } ntfs_dir_state;
 
 /* Directory state routines */
-void ntfsCloseDir (ntfs_dir_state *file);
+void ntfsCloseDir ( ntfs_dir_state *file );
 
 /* Gekko devoptab directory routines for NTFS-based devices */
-extern int ntfs_stat_r (struct _reent *r, const char *path, struct stat *st);
-extern int ntfs_link_r (struct _reent *r, const char *existing, const char *newLink);
-extern int ntfs_unlink_r (struct _reent *r, const char *name);
-extern int ntfs_chdir_r (struct _reent *r, const char *name);
-extern int ntfs_rename_r (struct _reent *r, const char *oldName, const char *newName);
-extern int ntfs_mkdir_r (struct _reent *r, const char *path, int mode);
-extern int ntfs_statvfs_r (struct _reent *r, const char *path, struct statvfs *buf);
+extern int ntfs_stat_r ( struct _reent *r, const char *path, struct stat *st );
+extern int ntfs_link_r ( struct _reent *r, const char *existing, const char *newLink );
+extern int ntfs_unlink_r ( struct _reent *r, const char *name );
+extern int ntfs_chdir_r ( struct _reent *r, const char *name );
+extern int ntfs_rename_r ( struct _reent *r, const char *oldName, const char *newName );
+extern int ntfs_mkdir_r ( struct _reent *r, const char *path, int mode );
+extern int ntfs_statvfs_r ( struct _reent *r, const char *path, struct statvfs *buf );
 
 /* Gekko devoptab directory walking routines for NTFS-based devices */
-extern DIR_ITER *ntfs_diropen_r (struct _reent *r, DIR_ITER *dirState, const char *path);
-extern int ntfs_dirreset_r (struct _reent *r, DIR_ITER *dirState);
-extern int ntfs_dirnext_r (struct _reent *r, DIR_ITER *dirState, char *filename, struct stat *filestat);
-extern int ntfs_dirclose_r (struct _reent *r, DIR_ITER *dirState);
+extern DIR_ITER *ntfs_diropen_r ( struct _reent *r, DIR_ITER *dirState, const char *path );
+extern int ntfs_dirreset_r ( struct _reent *r, DIR_ITER *dirState );
+extern int ntfs_dirnext_r ( struct _reent *r, DIR_ITER *dirState, char *filename, struct stat *filestat );
+extern int ntfs_dirclose_r ( struct _reent *r, DIR_ITER *dirState );
 
 #endif /* _NTFSDIR_H */
 

@@ -36,38 +36,38 @@
  *   size of the bitmap.
  */
 
-extern void ntfs_bit_set(u8 *bitmap, const u64 bit, const u8 new_value);
-extern char ntfs_bit_get(const u8 *bitmap, const u64 bit);
-extern char ntfs_bit_get_and_set(u8 *bitmap, const u64 bit, const u8 new_value);
-extern int  ntfs_bitmap_set_run(ntfs_attr *na, s64 start_bit, s64 count);
-extern int  ntfs_bitmap_clear_run(ntfs_attr *na, s64 start_bit, s64 count);
+extern void ntfs_bit_set( u8 *bitmap, const u64 bit, const u8 new_value );
+extern char ntfs_bit_get( const u8 *bitmap, const u64 bit );
+extern char ntfs_bit_get_and_set( u8 *bitmap, const u64 bit, const u8 new_value );
+extern int  ntfs_bitmap_set_run( ntfs_attr *na, s64 start_bit, s64 count );
+extern int  ntfs_bitmap_clear_run( ntfs_attr *na, s64 start_bit, s64 count );
 
 /**
  * ntfs_bitmap_set_bit - set a bit in a bitmap
- * @na:		attribute containing the bitmap
- * @bit:	bit to set
+ * @na:     attribute containing the bitmap
+ * @bit:    bit to set
  *
  * Set the @bit in the bitmap described by the attribute @na.
  *
  * On success return 0 and on error return -1 with errno set to the error code.
  */
-static __inline__ int ntfs_bitmap_set_bit(ntfs_attr *na, s64 bit)
+static __inline__ int ntfs_bitmap_set_bit( ntfs_attr *na, s64 bit )
 {
-	return ntfs_bitmap_set_run(na, bit, 1);
+    return ntfs_bitmap_set_run( na, bit, 1 );
 }
 
 /**
  * ntfs_bitmap_clear_bit - clear a bit in a bitmap
- * @na:		attribute containing the bitmap
- * @bit:	bit to clear
+ * @na:     attribute containing the bitmap
+ * @bit:    bit to clear
  *
  * Clear @bit in the bitmap described by the attribute @na.
  *
  * On success return 0 and on error return -1 with errno set to the error code.
  */
-static __inline__ int ntfs_bitmap_clear_bit(ntfs_attr *na, s64 bit)
+static __inline__ int ntfs_bitmap_clear_bit( ntfs_attr *na, s64 bit )
 {
-	return ntfs_bitmap_clear_run(na, bit, 1);
+    return ntfs_bitmap_clear_run( na, bit, 1 );
 }
 
 /*
@@ -76,9 +76,9 @@ static __inline__ int ntfs_bitmap_clear_bit(ntfs_attr *na, s64 bit)
  * @word: value to rotate
  * @shift: bits to roll
  */
-static __inline__ u32 ntfs_rol32(u32 word, unsigned int shift)
+static __inline__ u32 ntfs_rol32( u32 word, unsigned int shift )
 {
-        return (word << shift) | (word >> (32 - shift));
+    return ( word << shift ) | ( word >> ( 32 - shift ) );
 }
 
 /*
@@ -87,9 +87,9 @@ static __inline__ u32 ntfs_rol32(u32 word, unsigned int shift)
  * @word: value to rotate
  * @shift: bits to roll
  */
-static __inline__ u32 ntfs_ror32(u32 word, unsigned int shift)
+static __inline__ u32 ntfs_ror32( u32 word, unsigned int shift )
 {
-        return (word >> shift) | (word << (32 - shift));
+    return ( word >> shift ) | ( word << ( 32 - shift ) );
 }
 
 #endif /* defined _NTFS_BITMAP_H */

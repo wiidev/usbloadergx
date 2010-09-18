@@ -32,10 +32,10 @@
 #include "common.h"
 #include <sys/types.h>
 
-uint16_t _FAT_filetime_getTimeFromRTC (void);
-uint16_t _FAT_filetime_getDateFromRTC (void);
+uint16_t _FAT_filetime_getTimeFromRTC ( void );
+uint16_t _FAT_filetime_getDateFromRTC ( void );
 
-time_t _FAT_filetime_to_time_t (uint16_t t, uint16_t d);
+time_t _FAT_filetime_to_time_t ( uint16_t t, uint16_t d );
 
 
 #endif // _FILETIME_H

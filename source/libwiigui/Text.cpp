@@ -1,7 +1,7 @@
 #include "Text.hpp"
 
-Text::Text(const char * t, int s, GXColor c)
-    : GuiText(t, s, c)
+Text::Text( const char * t, int s, GXColor c )
+        : GuiText( t, s, c )
 {
     maxWidth = 400;
     linestodraw = 9;
@@ -9,30 +9,30 @@ Text::Text(const char * t, int s, GXColor c)
     FirstLineOffset = 0;
     wText = NULL;
 
-    if(!text)
+    if ( !text )
         return;
 
-    wText = new (std::nothrow) wString(text);
-    if(!wText)
+    wText = new ( std::nothrow ) wString( text );
+    if ( !wText )
     {
         return;
     }
 
-    if(wText->size() == 0)
+    if ( wText->size() == 0 )
     {
-        wText->push_back(L' ');
-        wText->push_back(0);
+        wText->push_back( L' ' );
+        wText->push_back( 0 );
     }
 
-    textWidth = (font ? font : fontSystem)->getWidth(wText->data(), currentSize);
+    textWidth = ( font ? font : fontSystem )->getWidth( wText->data(), currentSize );
     delete [] text;
     text = NULL;
 
-    SetMaxWidth(maxWidth);
+    SetMaxWidth( maxWidth );
 }
 
-Text::Text(const wchar_t * t, int s, GXColor c)
-    : GuiText((wchar_t *) NULL, s, c)
+Text::Text( const wchar_t * t, int s, GXColor c )
+        : GuiText( ( wchar_t * ) NULL, s, c )
 {
     maxWidth = 400;
     linestodraw = 9;
@@ -40,29 +40,29 @@ Text::Text(const wchar_t * t, int s, GXColor c)
     FirstLineOffset = 0;
     wText = NULL;
 
-    if(!t)
+    if ( !t )
         return;
 
-    wText = new (std::nothrow) wString(t);
-    if(!wText)
+    wText = new ( std::nothrow ) wString( t );
+    if ( !wText )
     {
         return;
     }
 
-    if(wText->size() == 0)
+    if ( wText->size() == 0 )
     {
-        wText->push_back(L' ');
-        wText->push_back(0);
+        wText->push_back( L' ' );
+        wText->push_back( 0 );
     }
 
-    textWidth = (font ? font : fontSystem)->getWidth(wText->data(), currentSize);
+    textWidth = ( font ? font : fontSystem )->getWidth( wText->data(), currentSize );
 
-    SetMaxWidth(maxWidth);
+    SetMaxWidth( maxWidth );
 }
 
 Text::~Text()
 {
-    if(wText)
+    if ( wText )
         delete wText;
     wText = NULL;
 
@@ -70,28 +70,28 @@ Text::~Text()
     ClearDynamicText();
 }
 
-void Text::SetText(const char * t)
+void Text::SetText( const char * t )
 {
-    wchar_t * tmp = charToWideChar(t);
-    if(!tmp)
+    wchar_t * tmp = charToWideChar( t );
+    if ( !tmp )
         return;
 
-    if(wText)
+    if ( wText )
         delete wText;
 
-    wText = new (std::nothrow) wString(tmp);
-    if(!wText)
+    wText = new ( std::nothrow ) wString( tmp );
+    if ( !wText )
     {
         return;
     }
 
-    if(wText->size() == 0)
+    if ( wText->size() == 0 )
     {
-        wText->push_back(L' ');
-        wText->push_back(0);
+        wText->push_back( L' ' );
+        wText->push_back( 0 );
     }
 
-    textWidth = (font ? font : fontSystem)->getWidth(wText->data(), currentSize);
+    textWidth = ( font ? font : fontSystem )->getWidth( wText->data(), currentSize );
 
     delete [] tmp;
 
@@ -99,54 +99,54 @@ void Text::SetText(const char * t)
     CalcLineOffsets();
 }
 
-void Text::SetText(const wchar_t * t)
+void Text::SetText( const wchar_t * t )
 {
-    if(!t)
+    if ( !t )
         return;
 
-    if(wText)
+    if ( wText )
         delete wText;
 
-    wText = new wString(t);
-    textWidth = (font ? font : fontSystem)->getWidth(wText->data(), currentSize);
+    wText = new wString( t );
+    textWidth = ( font ? font : fontSystem )->getWidth( wText->data(), currentSize );
     CalcLineOffsets();
 }
 
-void Text::SetMaxWidth(int w)
+void Text::SetMaxWidth( int w )
 {
     maxWidth = w;
     curLineStart = 0;
     Refresh();
 }
 
-void Text::SetTextLine(int line)
+void Text::SetTextLine( int line )
 {
-	if(line < 0)
-		line = 0;
-	else if(line > (int) TextLines.size()-1)
-		line = TextLines.size()-1;
+    if ( line < 0 )
+        line = 0;
+    else if ( line > ( int ) TextLines.size() - 1 )
+        line = TextLines.size() - 1;
 
     curLineStart = line;
 
     FillRows();
 
-    while((int) textDyn.size() < linestodraw && curLineStart > 0)
+    while ( ( int ) textDyn.size() < linestodraw && curLineStart > 0 )
     {
         PreviousLine();
     }
 }
 
-void Text::SetTextPos(int pos)
+void Text::SetTextPos( int pos )
 {
-    if(!wText)
+    if ( !wText )
         return;
 
     int diff = 10000;
 
-    for(u32 i = 0; i < TextLines.size(); i++)
+    for ( u32 i = 0; i < TextLines.size(); i++ )
     {
-        int curDiff = abs(TextLines[i].LineOffset - pos);
-        if(curDiff < diff)
+        int curDiff = abs( TextLines[i].LineOffset - pos );
+        if ( curDiff < diff )
         {
             diff = curDiff;
             curLineStart = i;
@@ -155,7 +155,7 @@ void Text::SetTextPos(int pos)
 
     FillRows();
 
-    while((int) textDyn.size() < linestodraw && curLineStart > 0)
+    while ( ( int ) textDyn.size() < linestodraw && curLineStart > 0 )
     {
         PreviousLine();
     }
@@ -166,34 +166,34 @@ const wchar_t * Text::GetText()
     return wText->c_str();
 }
 
-std::string Text::GetUTF8String(void) const
+std::string Text::GetUTF8String( void ) const
 {
     return wText->toUTF8();
 }
 
-int Text::GetLineOffset(int ind)
+int Text::GetLineOffset( int ind )
 {
-    if(TextLines.size() == 0)
+    if ( TextLines.size() == 0 )
         return 0;
 
-    if(ind < 0)
+    if ( ind < 0 )
         return TextLines[0].LineOffset;
 
-    if(ind >= (int) TextLines.size()-1)
+    if ( ind >= ( int ) TextLines.size() - 1 )
         return TextLines[TextLines.size()-1].LineOffset;
 
     return TextLines[ind].LineOffset;
 }
 
-const wchar_t * Text::GetTextLine(int ind)
+const wchar_t * Text::GetTextLine( int ind )
 {
-    if(filling || textDyn.size() == 0)
+    if ( filling || textDyn.size() == 0 )
         return NULL;
 
-    if(ind < 0)
+    if ( ind < 0 )
         return textDyn[0];
 
-    if(ind >= (int) textDyn.size())
+    if ( ind >= ( int ) textDyn.size() )
         return textDyn[textDyn.size()-1];
 
     return textDyn[ind];
@@ -207,7 +207,7 @@ void Text::Refresh()
 
 void Text::NextLine()
 {
-    if(!wText || (curLineStart+1 > ((int) TextLines.size()-linestodraw)))
+    if ( !wText || ( curLineStart + 1 > ( ( int ) TextLines.size() - linestodraw ) ) )
         return;
 
     ++curLineStart;
@@ -217,7 +217,7 @@ void Text::NextLine()
 
 void Text::PreviousLine()
 {
-    if(!wText || curLineStart-1 < 0)
+    if ( !wText || curLineStart - 1 < 0 )
         return;
 
     --curLineStart;
@@ -227,25 +227,25 @@ void Text::PreviousLine()
 
 void Text::FillRows()
 {
-    if(!wText)
+    if ( !wText )
         return;
 
     filling = true;
 
     ClearDynamicText();
 
-    for(int i = 0; i < linestodraw && i < (int) TextLines.size(); i++)
+    for ( int i = 0; i < linestodraw && i < ( int ) TextLines.size(); i++ )
     {
-        if(i >= (int) textDyn.size())
+        if ( i >= ( int ) textDyn.size() )
         {
-			textDyn.resize(i+1);
+            textDyn.resize( i + 1 );
             textDyn[i] = new wchar_t[maxWidth];
         }
         int offset = TextLines[curLineStart+i].LineOffset;
-        int count = TextLines[curLineStart+i].CharCount+1;
+        int count = TextLines[curLineStart+i].CharCount + 1;
 
-        for(int n = 0; n < count && offset+n < (int) wText->size(); n++)
-            textDyn[i][n] = wText->at(offset+n);
+        for ( int n = 0; n < count && offset + n < ( int ) wText->size(); n++ )
+            textDyn[i][n] = wText->at( offset + n );
 
         textDyn[i][count] = 0;
     }
@@ -257,7 +257,7 @@ void Text::FillRows()
 
 void Text::CalcLineOffsets()
 {
-    if(!wText)
+    if ( !wText )
         return;
 
     TextLines.clear();
@@ -274,35 +274,35 @@ void Text::CalcLineOffsets()
     int currWidth = 0;
     int i = 0;
 
-    while(origTxt[ch])
+    while ( origTxt[ch] )
     {
-        currWidth += fontSystem->getCharWidth(origTxt[ch], currentSize, ch > 0 ? origTxt[ch-1] : 0x0000);
+        currWidth += fontSystem->getCharWidth( origTxt[ch], currentSize, ch > 0 ? origTxt[ch-1] : 0x0000 );
 
-        if(currWidth >= maxWidth)
+        if ( currWidth >= maxWidth )
         {
-            if(lastSpace > 0)
+            if ( lastSpace > 0 )
             {
                 ch = lastSpace;
             }
-            TmpLine.CharCount = ch-TmpLine.LineOffset;
+            TmpLine.CharCount = ch - TmpLine.LineOffset;
             TmpLine.width = currWidth;
-            TextLines.push_back(TmpLine);
+            TextLines.push_back( TmpLine );
             currWidth = 0;
             lastSpace = -1;
             i = -1;
-            TmpLine.LineOffset = ch+1;
+            TmpLine.LineOffset = ch + 1;
         }
-        else if(origTxt[ch] == '\n')
+        else if ( origTxt[ch] == '\n' )
         {
-            TmpLine.CharCount = ch-TmpLine.LineOffset;
+            TmpLine.CharCount = ch - TmpLine.LineOffset;
             TmpLine.width = currWidth;
-            TextLines.push_back(TmpLine);
+            TextLines.push_back( TmpLine );
             currWidth = 0;
             lastSpace = -1;
             i = -1;
-            TmpLine.LineOffset = ch+1;
+            TmpLine.LineOffset = ch + 1;
         }
-        else if(origTxt[ch] == ' ')
+        else if ( origTxt[ch] == ' ' )
         {
             lastSpace = ch;
             lastSpaceIndex = i;
@@ -312,39 +312,39 @@ void Text::CalcLineOffsets()
         i++;
     }
 
-    TmpLine.CharCount = ch-TmpLine.LineOffset;
+    TmpLine.CharCount = ch - TmpLine.LineOffset;
     TmpLine.width = currWidth;
 
-    if(TmpLine.CharCount > 0)
-        TextLines.push_back(TmpLine);
+    if ( TmpLine.CharCount > 0 )
+        TextLines.push_back( TmpLine );
 }
 
 void Text::Draw()
 {
-    if(textDyn.size() == 0)
+    if ( textDyn.size() == 0 )
         return;
 
-	if(!this->IsVisible())
-		return;
+    if ( !this->IsVisible() )
+        return;
 
-	GXColor c = color;
-	c.a = this->GetAlpha();
+    GXColor c = color;
+    c.a = this->GetAlpha();
 
-	int newSize = size*GetScale();
+    int newSize = size * GetScale();
 
-	if(newSize != currentSize)
-	{
-		currentSize = newSize;
+    if ( newSize != currentSize )
+    {
+        currentSize = newSize;
 
-        if(wText)
-            textWidth = (font ? font : fontSystem)->getWidth(wText->data(), currentSize);
-	}
+        if ( wText )
+            textWidth = ( font ? font : fontSystem )->getWidth( wText->data(), currentSize );
+    }
 
     u16 lineheight = newSize + 6;
 
-    for(u32 i = 0; i < textDyn.size(); i++)
+    for ( u32 i = 0; i < textDyn.size(); i++ )
     {
-        if(!filling)
-            (font ? font : fontSystem)->drawText(this->GetLeft(), this->GetTop()+i*lineheight, 0, textDyn[i], currentSize, c, style, 0, maxWidth);
+        if ( !filling )
+            ( font ? font : fontSystem )->drawText( this->GetLeft(), this->GetTop() + i*lineheight, 0, textDyn[i], currentSize, c, style, 0, maxWidth );
     }
 }

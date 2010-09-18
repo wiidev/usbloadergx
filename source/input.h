@@ -12,14 +12,14 @@
 #include <gccore.h>
 #include <wiiuse/wpad.h>
 
-#define PI 				3.14159265f
-#define PADCAL			50
+#define PI              3.14159265f
+#define PADCAL          50
 
 extern int rumbleRequest[4];
 
 void SetupPads();
 void UpdatePads();
 void ShutoffRumble();
-void DoRumble(int i);
+void DoRumble( int i );
 
 #endif

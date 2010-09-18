@@ -36,8 +36,8 @@
 #include "partition.h"
 
 #define DIR_ENTRY_DATA_SIZE 0x20
-#define MAX_LFN_LENGTH	256
-#define MAX_FILENAME_LENGTH 768		// 256 UCS-2 characters encoded into UTF-8 can use up to 768 UTF-8 chars
+#define MAX_LFN_LENGTH  256
+#define MAX_FILENAME_LENGTH 768     // 256 UCS-2 characters encoded into UTF-8 can use up to 768 UTF-8 chars
 #define MAX_ALIAS_LENGTH 13
 #define LFN_ENTRY_LENGTH 13
 #define ALIAS_ENTRY_LENGTH 11
@@ -49,60 +49,66 @@
 #define DIR_SEPARATOR '/'
 
 // File attributes
-#define ATTRIB_ARCH	0x20			// Archive
-#define ATTRIB_DIR	0x10			// Directory
-#define ATTRIB_LFN	0x0F			// Long file name
-#define ATTRIB_VOL	0x08			// Volume
-#define ATTRIB_SYS	0x04			// System
-#define ATTRIB_HID	0x02			// Hidden
-#define ATTRIB_RO	0x01			// Read only
+#define ATTRIB_ARCH 0x20            // Archive
+#define ATTRIB_DIR  0x10            // Directory
+#define ATTRIB_LFN  0x0F            // Long file name
+#define ATTRIB_VOL  0x08            // Volume
+#define ATTRIB_SYS  0x04            // System
+#define ATTRIB_HID  0x02            // Hidden
+#define ATTRIB_RO   0x01            // Read only
 
 typedef enum {FT_DIRECTORY, FT_FILE} FILE_TYPE;
 
-typedef struct {
-	uint32_t cluster;
-	sec_t    sector;
-	int32_t  offset;
+typedef struct
+{
+    uint32_t cluster;
+    sec_t    sector;
+    int32_t  offset;
 } DIR_ENTRY_POSITION;
 
-typedef struct {
-	uint8_t            entryData[DIR_ENTRY_DATA_SIZE];
-	DIR_ENTRY_POSITION dataStart;		// Points to the start of the LFN entries of a file, or the alias for no LFN
-	DIR_ENTRY_POSITION dataEnd;			// Always points to the file/directory's alias entry
-	char               filename[MAX_FILENAME_LENGTH];
+typedef struct
+{
+    uint8_t            entryData[DIR_ENTRY_DATA_SIZE];
+    DIR_ENTRY_POSITION dataStart;       // Points to the start of the LFN entries of a file, or the alias for no LFN
+    DIR_ENTRY_POSITION dataEnd;         // Always points to the file/directory's alias entry
+    char               filename[MAX_FILENAME_LENGTH];
 } DIR_ENTRY;
 
 // Directory entry offsets
-enum DIR_ENTRY_offset {
-	DIR_ENTRY_name = 0x00,
-	DIR_ENTRY_extension = 0x08,
-	DIR_ENTRY_attributes = 0x0B,
-	DIR_ENTRY_reserved = 0x0C,
-	DIR_ENTRY_cTime_ms = 0x0D,
-	DIR_ENTRY_cTime = 0x0E,
-	DIR_ENTRY_cDate = 0x10,
-	DIR_ENTRY_aDate = 0x12,
-	DIR_ENTRY_clusterHigh = 0x14,
-	DIR_ENTRY_mTime = 0x16,
-	DIR_ENTRY_mDate = 0x18,
-	DIR_ENTRY_cluster = 0x1A,
-	DIR_ENTRY_fileSize = 0x1C
+enum DIR_ENTRY_offset
+{
+    DIR_ENTRY_name = 0x00,
+    DIR_ENTRY_extension = 0x08,
+    DIR_ENTRY_attributes = 0x0B,
+    DIR_ENTRY_reserved = 0x0C,
+    DIR_ENTRY_cTime_ms = 0x0D,
+    DIR_ENTRY_cTime = 0x0E,
+    DIR_ENTRY_cDate = 0x10,
+    DIR_ENTRY_aDate = 0x12,
+    DIR_ENTRY_clusterHigh = 0x14,
+    DIR_ENTRY_mTime = 0x16,
+    DIR_ENTRY_mDate = 0x18,
+    DIR_ENTRY_cluster = 0x1A,
+    DIR_ENTRY_fileSize = 0x1C
 };
 
 /*
 Returns true if the file specified by entry is a directory
 */
-static inline bool _FAT_directory_isDirectory (DIR_ENTRY* entry) {
-	return ((entry->entryData[DIR_ENTRY_attributes] & ATTRIB_DIR) != 0);
+static inline bool _FAT_directory_isDirectory ( DIR_ENTRY* entry )
+{
+    return ( ( entry->entryData[DIR_ENTRY_attributes] & ATTRIB_DIR ) != 0 );
 }
 
-static inline bool _FAT_directory_isWritable (DIR_ENTRY* entry) {
-	return ((entry->entryData[DIR_ENTRY_attributes] & ATTRIB_RO) == 0);
+static inline bool _FAT_directory_isWritable ( DIR_ENTRY* entry )
+{
+    return ( ( entry->entryData[DIR_ENTRY_attributes] & ATTRIB_RO ) == 0 );
 }
 
-static inline bool _FAT_directory_isDot (DIR_ENTRY* entry) {
-	return ((entry->filename[0] == '.') && ((entry->filename[1] == '\0') ||
-		((entry->filename[1] == '.') && entry->filename[2] == '\0')));
+static inline bool _FAT_directory_isDot ( DIR_ENTRY* entry )
+{
+    return ( ( entry->filename[0] == '.' ) && ( ( entry->filename[1] == '\0' ) ||
+             ( ( entry->filename[1] == '.' ) && entry->filename[2] == '\0' ) ) );
 }
 
 /*
@@ -111,7 +117,7 @@ Places result in entry
 entry will be destroyed even if no directory entry is found
 Returns true on success, false on failure
 */
-bool _FAT_directory_getFirstEntry (PARTITION* partition, DIR_ENTRY* entry, uint32_t dirCluster);
+bool _FAT_directory_getFirstEntry ( PARTITION* partition, DIR_ENTRY* entry, uint32_t dirCluster );
 
 /*
 Reads the next directory entry after the one already pointed to by entry
@@ -119,7 +125,7 @@ Places result in entry
 entry will be destroyed even if no directory entry is found
 Returns true on success, false on failure
 */
-bool _FAT_directory_getNextEntry (PARTITION* partition, DIR_ENTRY* entry);
+bool _FAT_directory_getNextEntry ( PARTITION* partition, DIR_ENTRY* entry );
 
 /*
 Gets the directory entry corrsponding to the supplied path
@@ -130,20 +136,20 @@ pathEnd specifies the end of the path string, for cutting strings short if neede
  after pathEND.
 Returns true on success, false on failure
 */
-bool _FAT_directory_entryFromPath (PARTITION* partition, DIR_ENTRY* entry, const char* path, const char* pathEnd);
+bool _FAT_directory_entryFromPath ( PARTITION* partition, DIR_ENTRY* entry, const char* path, const char* pathEnd );
 
 /*
 Changes the current directory to the one specified by path
 Returns true on success, false on failure
 */
-bool _FAT_directory_chdir (PARTITION* partition, const char* path);
+bool _FAT_directory_chdir ( PARTITION* partition, const char* path );
 
 /*
 Removes the directory entry specified by entry
 Assumes that entry is valid
 Returns true on success, false on failure
 */
-bool _FAT_directory_removeEntry (PARTITION* partition, DIR_ENTRY* entry);
+bool _FAT_directory_removeEntry ( PARTITION* partition, DIR_ENTRY* entry );
 
 /*
 Add a directory entry to the directory specified by dirCluster
@@ -151,23 +157,23 @@ The fileData, dataStart and dataEnd elements of the DIR_ENTRY struct are
 updated with the new directory entry position and alias.
 Returns true on success, false on failure
 */
-bool _FAT_directory_addEntry (PARTITION* partition, DIR_ENTRY* entry, uint32_t dirCluster);
+bool _FAT_directory_addEntry ( PARTITION* partition, DIR_ENTRY* entry, uint32_t dirCluster );
 
 /*
 Get the start cluster of a file from it's entry data
 */
-uint32_t _FAT_directory_entryGetCluster (PARTITION* partition, const uint8_t* entryData);
+uint32_t _FAT_directory_entryGetCluster ( PARTITION* partition, const uint8_t* entryData );
 
 /*
 Fill in the file name and entry data of DIR_ENTRY* entry.
 Assumes that the entry's dataStart and dataEnd are correct
 Returns true on success, false on failure
 */
-bool _FAT_directory_entryFromPosition (PARTITION* partition, DIR_ENTRY* entry);
+bool _FAT_directory_entryFromPosition ( PARTITION* partition, DIR_ENTRY* entry );
 
 /*
 Fill in a stat struct based on a file entry
 */
-void _FAT_directory_entryStat (PARTITION* partition, DIR_ENTRY* entry, struct stat *st);
+void _FAT_directory_entryStat ( PARTITION* partition, DIR_ENTRY* entry, struct stat *st );
 
 #endif // _DIRECTORY_H

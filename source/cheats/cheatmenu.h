@@ -8,6 +8,6 @@
 #ifndef _CHEATMENU_H_
 #define _CHEATMENU_H_
 
-int CheatMenu(const char * gameID);
+int CheatMenu( const char * gameID );
 
 #endif

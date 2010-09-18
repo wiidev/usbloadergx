@@ -11,115 +11,115 @@
 #include "gui.h"
 #include "wstring.hpp"
 
-#define MAX_LINES_TO_DRAW	9
+#define MAX_LINES_TO_DRAW   9
 
 static int presetSize = 18;
 static int presetMaxWidth = 0;
 static int presetAlignmentHor = 0;
 static int presetAlignmentVert = 0;
 static u16 presetStyle = 0;
-static GXColor presetColor = (GXColor){255, 255, 255, 255};
+static GXColor presetColor = ( GXColor ) {255, 255, 255, 255};
 
-#define TEXT_SCROLL_DELAY			5
-#define	TEXT_SCROLL_INITIAL_DELAY	8
+#define TEXT_SCROLL_DELAY           5
+#define TEXT_SCROLL_INITIAL_DELAY   8
 
 /**
  * Constructor for the GuiText class.
  */
 
-GuiText::GuiText(const char * t, int s, GXColor c)
+GuiText::GuiText( const char * t, int s, GXColor c )
 {
-	text = NULL;
-	size = s;
-	currentSize = size;
-	color = c;
-	alpha = c.a;
-	style = FTGX_JUSTIFY_CENTER | FTGX_ALIGN_MIDDLE;
-	maxWidth = 0;
-	wrapMode = 0;
-	passChar = 0;
-	font = NULL;
-	linestodraw = MAX_LINES_TO_DRAW;
-	textScrollPos = 0;
-	textScrollInitialDelay = TEXT_SCROLL_INITIAL_DELAY;
-	textScrollDelay = TEXT_SCROLL_DELAY;
+    text = NULL;
+    size = s;
+    currentSize = size;
+    color = c;
+    alpha = c.a;
+    style = FTGX_JUSTIFY_CENTER | FTGX_ALIGN_MIDDLE;
+    maxWidth = 0;
+    wrapMode = 0;
+    passChar = 0;
+    font = NULL;
+    linestodraw = MAX_LINES_TO_DRAW;
+    textScrollPos = 0;
+    textScrollInitialDelay = TEXT_SCROLL_INITIAL_DELAY;
+    textScrollDelay = TEXT_SCROLL_DELAY;
 
-	alignmentHor = ALIGN_CENTRE;
-	alignmentVert = ALIGN_MIDDLE;
+    alignmentHor = ALIGN_CENTRE;
+    alignmentVert = ALIGN_MIDDLE;
 
-	if(t)
-	{
-		text = charToWideChar(t);
-		if(!text)
-		    return;
-
-		textWidth = fontSystem->getWidth(text, currentSize);
-	}
-}
-
-GuiText::GuiText(const wchar_t * t, int s, GXColor c)
-{
-	text = NULL;
-	size = s;
-	currentSize = size;
-	color = c;
-	alpha = c.a;
-	style = FTGX_JUSTIFY_CENTER | FTGX_ALIGN_MIDDLE;
-	maxWidth = 0;
-	wrapMode = 0;
-	passChar = 0;
-	font = NULL;
-	linestodraw = MAX_LINES_TO_DRAW;
-	textScrollPos = 0;
-	textScrollInitialDelay = TEXT_SCROLL_INITIAL_DELAY;
-	textScrollDelay = TEXT_SCROLL_DELAY;
-
-	alignmentHor = ALIGN_CENTRE;
-	alignmentVert = ALIGN_MIDDLE;
-
-	if(t)
-	{
-		text = new (std::nothrow) wchar_t[wcslen(t)+1];
-		if(!text)
+    if ( t )
+    {
+        text = charToWideChar( t );
+        if ( !text )
             return;
 
-		wcscpy(text, t);
+        textWidth = fontSystem->getWidth( text, currentSize );
+    }
+}
 
-		textWidth = fontSystem->getWidth(text, currentSize);
-	}
+GuiText::GuiText( const wchar_t * t, int s, GXColor c )
+{
+    text = NULL;
+    size = s;
+    currentSize = size;
+    color = c;
+    alpha = c.a;
+    style = FTGX_JUSTIFY_CENTER | FTGX_ALIGN_MIDDLE;
+    maxWidth = 0;
+    wrapMode = 0;
+    passChar = 0;
+    font = NULL;
+    linestodraw = MAX_LINES_TO_DRAW;
+    textScrollPos = 0;
+    textScrollInitialDelay = TEXT_SCROLL_INITIAL_DELAY;
+    textScrollDelay = TEXT_SCROLL_DELAY;
+
+    alignmentHor = ALIGN_CENTRE;
+    alignmentVert = ALIGN_MIDDLE;
+
+    if ( t )
+    {
+        text = new ( std::nothrow ) wchar_t[wcslen( t )+1];
+        if ( !text )
+            return;
+
+        wcscpy( text, t );
+
+        textWidth = fontSystem->getWidth( text, currentSize );
+    }
 }
 
 /**
  * Constructor for the GuiText class, uses presets
  */
-GuiText::GuiText(const char * t)
+GuiText::GuiText( const char * t )
 {
-	text = NULL;
-	size = presetSize;
-	currentSize = size;
-	color = presetColor;
-	alpha = presetColor.a;
-	style = presetStyle;
-	maxWidth = presetMaxWidth;
-	wrapMode = 0;
-	passChar = 0;
-	font = NULL;
-	linestodraw = MAX_LINES_TO_DRAW;
-	textScrollPos = 0;
-	textScrollInitialDelay = TEXT_SCROLL_INITIAL_DELAY;
-	textScrollDelay = TEXT_SCROLL_DELAY;
+    text = NULL;
+    size = presetSize;
+    currentSize = size;
+    color = presetColor;
+    alpha = presetColor.a;
+    style = presetStyle;
+    maxWidth = presetMaxWidth;
+    wrapMode = 0;
+    passChar = 0;
+    font = NULL;
+    linestodraw = MAX_LINES_TO_DRAW;
+    textScrollPos = 0;
+    textScrollInitialDelay = TEXT_SCROLL_INITIAL_DELAY;
+    textScrollDelay = TEXT_SCROLL_DELAY;
 
-	alignmentHor = presetAlignmentHor;
-	alignmentVert = presetAlignmentVert;
+    alignmentHor = presetAlignmentHor;
+    alignmentVert = presetAlignmentVert;
 
-	if(t)
-	{
-		text = charToWideChar(t);
-		if(!text)
-		    return;
+    if ( t )
+    {
+        text = charToWideChar( t );
+        if ( !text )
+            return;
 
-		textWidth = fontSystem->getWidth(text, currentSize);
-	}
+        textWidth = fontSystem->getWidth( text, currentSize );
+    }
 }
 
 
@@ -128,12 +128,12 @@ GuiText::GuiText(const char * t)
  */
 GuiText::~GuiText()
 {
-	if(text)
-		delete [] text;
-	text = NULL;
+    if ( text )
+        delete [] text;
+    text = NULL;
 
-	if(font)
-	{
+    if ( font )
+    {
         delete font;
         font = NULL;
     }
@@ -141,201 +141,201 @@ GuiText::~GuiText()
     ClearDynamicText();
 }
 
-void GuiText::SetText(const char * t)
+void GuiText::SetText( const char * t )
 {
-    LOCK(this);
+    LOCK( this );
 
-	if(text)
-		delete [] text;
+    if ( text )
+        delete [] text;
     text = NULL;
 
     ClearDynamicText();
 
-	textScrollPos = 0;
-	textScrollInitialDelay = TEXT_SCROLL_INITIAL_DELAY;
+    textScrollPos = 0;
+    textScrollInitialDelay = TEXT_SCROLL_INITIAL_DELAY;
 
-	if(t)
-	{
-		text = charToWideChar(t);
-		if(!text)
-		    return;
-
-		if (passChar != 0)
-		{
-			for (u8 i = 0; i < wcslen(text); i++)
-				text[i] = passChar;
-		}
-
-		textWidth = fontSystem->getWidth(text, currentSize);
-	}
-}
-
-void GuiText::SetTextf(const char *format, ...)
-{
-    if(!format)
-        SetText((char *) NULL);
-
-	char *tmp=0;
-	va_list va;
-	va_start(va, format);
-	if((vasprintf(&tmp, format, va)>=0) && tmp)
-	{
-		SetText(tmp);
-	}
-	va_end(va);
-
-	if(tmp)
-        free(tmp);
-}
-
-
-void GuiText::SetText(const wchar_t * t)
-{
-    LOCK(this);
-
-	if(text)
-		delete [] text;
-    text = NULL;
-
-    ClearDynamicText();
-
-	textScrollPos = 0;
-	textScrollInitialDelay = TEXT_SCROLL_INITIAL_DELAY;
-
-	if(t)
-	{
-		text = new (std::nothrow) wchar_t[wcslen(t)+1];
-		if(!text)
+    if ( t )
+    {
+        text = charToWideChar( t );
+        if ( !text )
             return;
 
-		wcscpy(text, t);
+        if ( passChar != 0 )
+        {
+            for ( u8 i = 0; i < wcslen( text ); i++ )
+                text[i] = passChar;
+        }
 
-		if (passChar != 0)
-		{
-			for (u8 i = 0; i < wcslen(text); i++)
-				text[i] = passChar;
-		}
+        textWidth = fontSystem->getWidth( text, currentSize );
+    }
+}
 
-		textWidth = fontSystem->getWidth(text, currentSize);
-	}
+void GuiText::SetTextf( const char *format, ... )
+{
+    if ( !format )
+        SetText( ( char * ) NULL );
+
+    char *tmp = 0;
+    va_list va;
+    va_start( va, format );
+    if ( ( vasprintf( &tmp, format, va ) >= 0 ) && tmp )
+    {
+        SetText( tmp );
+    }
+    va_end( va );
+
+    if ( tmp )
+        free( tmp );
+}
+
+
+void GuiText::SetText( const wchar_t * t )
+{
+    LOCK( this );
+
+    if ( text )
+        delete [] text;
+    text = NULL;
+
+    ClearDynamicText();
+
+    textScrollPos = 0;
+    textScrollInitialDelay = TEXT_SCROLL_INITIAL_DELAY;
+
+    if ( t )
+    {
+        text = new ( std::nothrow ) wchar_t[wcslen( t )+1];
+        if ( !text )
+            return;
+
+        wcscpy( text, t );
+
+        if ( passChar != 0 )
+        {
+            for ( u8 i = 0; i < wcslen( text ); i++ )
+                text[i] = passChar;
+        }
+
+        textWidth = fontSystem->getWidth( text, currentSize );
+    }
 }
 
 void GuiText::ClearDynamicText()
 {
-    for(u32 i = 0; i < textDyn.size(); i++)
+    for ( u32 i = 0; i < textDyn.size(); i++ )
     {
-        if(textDyn[i])
+        if ( textDyn[i] )
             delete [] textDyn[i];
     }
     textDyn.clear();
 }
 
-void GuiText::SetPresets(int sz, GXColor c, int w, u16 s, int h, int v)
+void GuiText::SetPresets( int sz, GXColor c, int w, u16 s, int h, int v )
 {
-	presetSize = sz;
-	presetColor = c;
-	presetStyle = s;
-	presetMaxWidth = w;
-	presetAlignmentHor = h;
-	presetAlignmentVert = v;
+    presetSize = sz;
+    presetColor = c;
+    presetStyle = s;
+    presetMaxWidth = w;
+    presetAlignmentHor = h;
+    presetAlignmentVert = v;
 }
 
-void GuiText::SetFontSize(int s)
+void GuiText::SetFontSize( int s )
 {
-    LOCK(this);
+    LOCK( this );
 
-	size = s;
+    size = s;
 }
 
-void GuiText::SetMaxWidth(int width, int w)
+void GuiText::SetMaxWidth( int width, int w )
 {
-    LOCK(this);
+    LOCK( this );
 
-	maxWidth = width;
-	wrapMode = w;
+    maxWidth = width;
+    wrapMode = w;
 
-	if(w == SCROLL_HORIZONTAL)
-	{
+    if ( w == SCROLL_HORIZONTAL )
+    {
         textScrollPos = 0;
         textScrollInitialDelay = TEXT_SCROLL_INITIAL_DELAY;
         textScrollDelay = TEXT_SCROLL_DELAY;
-	}
+    }
 
     ClearDynamicText();
 }
 
-void GuiText::SetPassChar(wchar_t p)
+void GuiText::SetPassChar( wchar_t p )
 {
-	LOCK(this);
-	passChar = p;
+    LOCK( this );
+    passChar = p;
 }
 
-void GuiText::SetColor(GXColor c)
+void GuiText::SetColor( GXColor c )
 {
-    LOCK(this);
-	color = c;
-	alpha = c.a;
+    LOCK( this );
+    color = c;
+    alpha = c.a;
 }
 
-void GuiText::SetStyle(u16 s)
+void GuiText::SetStyle( u16 s )
 {
-    LOCK(this);
-	style = s;
+    LOCK( this );
+    style = s;
 }
 
-void GuiText::SetAlignment(int hor, int vert)
+void GuiText::SetAlignment( int hor, int vert )
 {
-    LOCK(this);
-	style = 0;
+    LOCK( this );
+    style = 0;
 
-	switch(hor)
-	{
-		case ALIGN_LEFT:
-			style |= FTGX_JUSTIFY_LEFT;
-			break;
-		case ALIGN_RIGHT:
-			style |= FTGX_JUSTIFY_RIGHT;
-			break;
-		default:
-			style |= FTGX_JUSTIFY_CENTER;
-			break;
-	}
-	switch(vert)
-	{
-		case ALIGN_TOP:
-			style |= FTGX_ALIGN_TOP;
-			break;
-		case ALIGN_BOTTOM:
-			style |= FTGX_ALIGN_BOTTOM;
-			break;
-		default:
-			style |= FTGX_ALIGN_MIDDLE;
-			break;
-	}
+    switch ( hor )
+    {
+        case ALIGN_LEFT:
+            style |= FTGX_JUSTIFY_LEFT;
+            break;
+        case ALIGN_RIGHT:
+            style |= FTGX_JUSTIFY_RIGHT;
+            break;
+        default:
+            style |= FTGX_JUSTIFY_CENTER;
+            break;
+    }
+    switch ( vert )
+    {
+        case ALIGN_TOP:
+            style |= FTGX_ALIGN_TOP;
+            break;
+        case ALIGN_BOTTOM:
+            style |= FTGX_ALIGN_BOTTOM;
+            break;
+        default:
+            style |= FTGX_ALIGN_MIDDLE;
+            break;
+    }
 
-	alignmentHor = hor;
-	alignmentVert = vert;
+    alignmentHor = hor;
+    alignmentVert = vert;
 }
 
-void GuiText::SetLinesToDraw(int l)
+void GuiText::SetLinesToDraw( int l )
 {
     linestodraw = l;
 }
 
 int GuiText::GetTextWidth()
 {
-	if(!text)
-		return 0;
+    if ( !text )
+        return 0;
 
-	return fontSystem->getWidth(text, currentSize);
+    return fontSystem->getWidth( text, currentSize );
 }
 
-int GuiText::GetTextWidth(int ind)
+int GuiText::GetTextWidth( int ind )
 {
-	if(ind < 0 || ind >= (int) textDyn.size())
-		return this->GetTextWidth();
+    if ( ind < 0 || ind >= ( int ) textDyn.size() )
+        return this->GetTextWidth();
 
-	return fontSystem->getWidth(textDyn[ind], currentSize);
+    return fontSystem->getWidth( textDyn[ind], currentSize );
 }
 
 int GuiText::GetTextMaxWidth()
@@ -343,9 +343,9 @@ int GuiText::GetTextMaxWidth()
     return maxWidth;
 }
 
-const wchar_t * GuiText::GetDynText(int ind)
+const wchar_t * GuiText::GetDynText( int ind )
 {
-    if(ind < 0 || ind >= (int) textDyn.size())
+    if ( ind < 0 || ind >= ( int ) textDyn.size() )
         return text;
 
     return textDyn[ind];
@@ -359,37 +359,37 @@ const wchar_t * GuiText::GetText()
 /**
  * Change font
  */
-bool GuiText::SetFont(const u8 *fontbuffer, const u32 filesize)
+bool GuiText::SetFont( const u8 *fontbuffer, const u32 filesize )
 {
-    if(!fontbuffer || !filesize)
+    if ( !fontbuffer || !filesize )
         return false;
 
-    LOCK(this);
-    if(font)
+    LOCK( this );
+    if ( font )
     {
         delete font;
         font = NULL;
     }
-	font = new FreeTypeGX(fontbuffer, filesize);
-	textWidth = font->getWidth(text, currentSize);
+    font = new FreeTypeGX( fontbuffer, filesize );
+    textWidth = font->getWidth( text, currentSize );
 
-	return true;
+    return true;
 }
 
 void GuiText::MakeDottedText()
 {
     int pos = textDyn.size();
-    textDyn.resize(pos+1);
+    textDyn.resize( pos + 1 );
 
     int i = 0, currentWidth = 0;
     textDyn[pos] = new wchar_t[maxWidth];
 
-    while(text[i])
+    while ( text[i] )
     {
-        currentWidth += (font ? font : fontSystem)->getCharWidth(text[i], currentSize, i > 0 ? text[i-1] : 0x0000);
-        if(currentWidth >= maxWidth)
+        currentWidth += ( font ? font : fontSystem )->getCharWidth( text[i], currentSize, i > 0 ? text[i-1] : 0x0000 );
+        if ( currentWidth >= maxWidth )
         {
-            if(i > 3)
+            if ( i > 3 )
             {
                 textDyn[pos][i-3] = '.';
                 textDyn[pos][i-2] = '.';
@@ -407,19 +407,19 @@ void GuiText::MakeDottedText()
 
 void GuiText::ScrollText()
 {
-    if(textDyn.size() == 0)
+    if ( textDyn.size() == 0 )
     {
         int pos = textDyn.size();
         int i = 0, currentWidth = 0;
-        textDyn.resize(pos+1);
+        textDyn.resize( pos + 1 );
 
         textDyn[pos] = new wchar_t[maxWidth];
 
-        while(text[i] && currentWidth < maxWidth)
+        while ( text[i] && currentWidth < maxWidth )
         {
             textDyn[pos][i] = text[i];
 
-            currentWidth += (font ? font : fontSystem)->getCharWidth(text[i], currentSize, i > 0 ? text[i-1] : 0x0000);
+            currentWidth += ( font ? font : fontSystem )->getCharWidth( text[i], currentSize, i > 0 ? text[i-1] : 0x0000 );
 
             ++i;
         }
@@ -428,39 +428,39 @@ void GuiText::ScrollText()
         return;
     }
 
-    if(frameCount % textScrollDelay != 0)
+    if ( frameCount % textScrollDelay != 0 )
     {
         return;
     }
 
-    if(textScrollInitialDelay)
+    if ( textScrollInitialDelay )
     {
         --textScrollInitialDelay;
         return;
     }
 
-    int strlen = wcslen(text);
+    int strlen = wcslen( text );
 
     ++textScrollPos;
-    if(textScrollPos > strlen)
+    if ( textScrollPos > strlen )
     {
         textScrollPos = 0;
         textScrollInitialDelay = TEXT_SCROLL_INITIAL_DELAY;
     }
 
     int ch = textScrollPos;
-    int pos = textDyn.size()-1;
+    int pos = textDyn.size() - 1;
 
-    if(textDyn[pos])
+    if ( textDyn[pos] )
         delete [] textDyn[pos];
 
     textDyn[pos] = new wchar_t[maxWidth];
 
     int i = 0, currentWidth = 0;
 
-    while(currentWidth < maxWidth)
+    while ( currentWidth < maxWidth )
     {
-        if(ch > strlen-1)
+        if ( ch > strlen - 1 )
         {
             textDyn[pos][i++] = ' ';
             textDyn[pos][i++] = ' ';
@@ -472,14 +472,14 @@ void GuiText::ScrollText()
         ++ch;
         ++i;
 
-        currentWidth += (font ? font : fontSystem)->getCharWidth(text[ch], currentSize, ch > 0 ? text[ch-1] : 0x0000);
+        currentWidth += ( font ? font : fontSystem )->getCharWidth( text[ch], currentSize, ch > 0 ? text[ch-1] : 0x0000 );
     }
     textDyn[pos][i] = 0;
 }
 
 void GuiText::WrapText()
 {
-    if(textDyn.size() > 0)
+    if ( textDyn.size() > 0 )
         return;
 
     int i = 0;
@@ -489,22 +489,22 @@ void GuiText::WrapText()
     int lastSpaceIndex = -1;
     int currentWidth = 0;
 
-    while(text[ch] && linenum < linestodraw)
+    while ( text[ch] && linenum < linestodraw )
     {
-        if(linenum >= (int) textDyn.size())
+        if ( linenum >= ( int ) textDyn.size() )
         {
-            textDyn.resize(linenum+1);
+            textDyn.resize( linenum + 1 );
             textDyn[linenum] = new wchar_t[maxWidth];
         }
 
         textDyn[linenum][i] = text[ch];
         textDyn[linenum][i+1] = 0;
 
-        currentWidth += (font ? font : fontSystem)->getCharWidth(text[ch], currentSize, ch > 0 ? text[ch-1] : 0x0000);
+        currentWidth += ( font ? font : fontSystem )->getCharWidth( text[ch], currentSize, ch > 0 ? text[ch-1] : 0x0000 );
 
-        if(currentWidth >= maxWidth)
+        if ( currentWidth >= maxWidth )
         {
-            if(lastSpace >= 0)
+            if ( lastSpace >= 0 )
             {
                 textDyn[linenum][lastSpaceIndex] = 0; // discard space, and everything after
                 ch = lastSpace; // go backwards to the last space
@@ -512,7 +512,7 @@ void GuiText::WrapText()
                 lastSpaceIndex = -1;
             }
 
-            if(linenum+1 == linestodraw && text[ch+1] != 0x0000)
+            if ( linenum + 1 == linestodraw && text[ch+1] != 0x0000 )
             {
                 textDyn[linenum][i-2] = '.';
                 textDyn[linenum][i-1] = '.';
@@ -524,7 +524,7 @@ void GuiText::WrapText()
             ++linenum;
             i = -1;
         }
-        if(text[ch] == ' ' && i >= 0)
+        if ( text[ch] == ' ' && i >= 0 )
         {
             lastSpace = ch;
             lastSpaceIndex = i;
@@ -539,62 +539,62 @@ void GuiText::WrapText()
  */
 void GuiText::Draw()
 {
-	if(!text)
-		return;
+    if ( !text )
+        return;
 
-	if(!IsVisible())
-		return;
+    if ( !IsVisible() )
+        return;
 
-	GXColor c = color;
-	c.a = GetAlpha();
+    GXColor c = color;
+    c.a = GetAlpha();
 
-	int newSize = size*GetScale();
+    int newSize = size * GetScale();
 
-	if(newSize != currentSize)
-	{
-		currentSize = newSize;
+    if ( newSize != currentSize )
+    {
+        currentSize = newSize;
 
-        if(text)
-            textWidth = (font ? font : fontSystem)->getWidth(text, currentSize);
-	}
+        if ( text )
+            textWidth = ( font ? font : fontSystem )->getWidth( text, currentSize );
+    }
 
-	if(maxWidth > 0 && maxWidth <= textWidth)
-	{
-		if(wrapMode == DOTTED) // text dotted
-		{
-		    if(textDyn.size() == 0)
-		        MakeDottedText();
+    if ( maxWidth > 0 && maxWidth <= textWidth )
+    {
+        if ( wrapMode == DOTTED ) // text dotted
+        {
+            if ( textDyn.size() == 0 )
+                MakeDottedText();
 
-		    if(textDyn.size() > 0)
-                (font ? font : fontSystem)->drawText(this->GetLeft(), this->GetTop(), 0, textDyn[textDyn.size()-1], currentSize, c, style);
-		}
-
-		else if(wrapMode == SCROLL_HORIZONTAL)
-		{
-		    ScrollText();
-
-			if(textDyn.size() > 0)
-				(font ? font : fontSystem)->drawText(this->GetLeft(), this->GetTop(), 0, textDyn[textDyn.size()-1], currentSize, c, style);
+            if ( textDyn.size() > 0 )
+                ( font ? font : fontSystem )->drawText( this->GetLeft(), this->GetTop(), 0, textDyn[textDyn.size()-1], currentSize, c, style );
         }
-		else if(wrapMode == WRAP)
-		{
+
+        else if ( wrapMode == SCROLL_HORIZONTAL )
+        {
+            ScrollText();
+
+            if ( textDyn.size() > 0 )
+                ( font ? font : fontSystem )->drawText( this->GetLeft(), this->GetTop(), 0, textDyn[textDyn.size()-1], currentSize, c, style );
+        }
+        else if ( wrapMode == WRAP )
+        {
             int lineheight = currentSize + 6;
             int voffset = 0;
-            if(alignmentVert == ALIGN_MIDDLE)
-                voffset = -(lineheight*textDyn.size())/2 + lineheight/2;
+            if ( alignmentVert == ALIGN_MIDDLE )
+                voffset = -( lineheight * textDyn.size() ) / 2 + lineheight / 2;
 
-		    if(textDyn.size() == 0)
+            if ( textDyn.size() == 0 )
                 WrapText();
 
-            for(u32 i = 0; i < textDyn.size(); i++)
+            for ( u32 i = 0; i < textDyn.size(); i++ )
             {
-                (font ? font : fontSystem)->drawText(this->GetLeft(), this->GetTop()+voffset+i*lineheight, 0, textDyn[i], currentSize, c, style);
+                ( font ? font : fontSystem )->drawText( this->GetLeft(), this->GetTop() + voffset + i*lineheight, 0, textDyn[i], currentSize, c, style );
             }
-		}
-	}
-	else
-	{
-		(font ? font : fontSystem)->drawText(this->GetLeft(), this->GetTop(), 0, text, currentSize, c, style, textWidth);
-	}
-	this->UpdateEffects();
+        }
+    }
+    else
+    {
+        ( font ? font : fontSystem )->drawText( this->GetLeft(), this->GetTop(), 0, text, currentSize, c, style, textWidth );
+    }
+    this->UpdateEffects();
 }

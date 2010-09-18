@@ -19,7 +19,7 @@
 //#include <debug.h>
 extern "C"
 {
-    extern void __exception_setreload(int t);
+    extern void __exception_setreload( int t );
 }
 
 
@@ -67,91 +67,86 @@ NandTitle titles;
 #define CONSOLE_HEIGHT      218
 
 PartList partitions;
-u8 dbvideo =0;
+u8 dbvideo = 0;
 
-int main(int argc, char *argv[])
+int main( int argc, char *argv[] )
 {
-    MEM2_init(48);
+    MEM2_init( 48 );
     InitVideo();
-    setlocale(LC_ALL, "en.UTF-8");
+    setlocale( LC_ALL, "en.UTF-8" );
     geckoinit = InitGecko();
-    __exception_setreload(20);
+    __exception_setreload( 20 );
 
-    printf("\tStarting up\n");
+    printf( "\tStarting up\n" );
     titles.Get();
-    titles.Exists( 0x100014e414c45ULL );
 
-    bool bootDevice_found=false;
-    if (argc >= 1)
+    bool bootDevice_found = false;
+    if ( argc >= 1 )
     {
-        if (!strncasecmp(argv[0], "usb:/", 5))
+        if ( !strncasecmp( argv[0], "usb:/", 5 ) )
         {
-            strcpy(bootDevice, "USB:");
+            strcpy( bootDevice, "USB:" );
             bootDevice_found = true;
-        } else if (!strncasecmp(argv[0], "sd:/", 4))
-        bootDevice_found = true;
+        }
+        else if ( !strncasecmp( argv[0], "sd:/", 4 ) )
+            bootDevice_found = true;
     }
 
     //Let's use libogc sd/usb for config loading
-    printf("\tInitialize sd card\n");
+    printf( "\tInitialize sd card\n" );
     SDCard_Init();
-    printf("\tInitialize usb device\n");
+    printf( "\tInitialize usb device\n" );
     USBDevice_Init();
 
-    if (!bootDevice_found)
+    if ( !bootDevice_found )
     {
-	printf("\tSearch for configuration file\n");
+        printf( "\tSearch for configuration file\n" );
         //try USB
         //left in all the dol and elf files in this check in case this is the first time running the app and they dont have the config
-        if (checkfile((char*) "USB:/config/GXglobal.cfg") || (checkfile((char*) "USB:/apps/usbloader_gx/boot.elf"))
-            || checkfile((char*) "USB:/apps/usbloadergx/boot.dol") || (checkfile((char*) "USB:/apps/usbloadergx/boot.elf"))
-            || checkfile((char*) "USB:/apps/usbloader_gx/boot.dol"))
-            strcpy(bootDevice, "USB:");
+        if ( checkfile( ( char* ) "USB:/config/GXglobal.cfg" ) || ( checkfile( ( char* ) "USB:/apps/usbloader_gx/boot.elf" ) )
+                || checkfile( ( char* ) "USB:/apps/usbloadergx/boot.dol" ) || ( checkfile( ( char* ) "USB:/apps/usbloadergx/boot.elf" ) )
+                || checkfile( ( char* ) "USB:/apps/usbloader_gx/boot.dol" ) )
+            strcpy( bootDevice, "USB:" );
 
-	printf("\tConfiguration file is on %s\n", bootDevice);
+        printf( "\tConfiguration file is on %s\n", bootDevice );
     }
 
     gettextCleanUp();
-    printf("\tLoading configuration...");
+    printf( "\tLoading configuration..." );
     CFG_Load();
-    printf("done\n");
+    printf( "done\n" );
 
     SDCard_deInit();// unmount SD for reloading IOS
     USBDevice_deInit();// unmount USB for reloading IOS
     USBStorage2_Deinit();
 
-    // This part is added, because we need a identify patched ios
-    //! pune please replace this with your magic patch functions - Dimok
-    //if (IOS_ReloadIOSsafe(236) < 0)
-       // IOS_ReloadIOSsafe(36);
-
-    printf("\tCheck for an existing cIOS\n");
+    printf( "\tCheck for an existing cIOS\n" );
     CheckForCIOS();
 
     // Let's load the cIOS now
-    if(LoadAppCIOS() < 0)
+    if ( LoadAppCIOS() < 0 )
     {
-        printf("\n\tERROR: No cIOS could be loaded. Exiting....");
-        sleep(5);
+        printf( "\n\tERROR: No cIOS could be loaded. Exiting...." );
+        sleep( 5 );
         Sys_BackToLoader();
     }
 
-    printf("\n\tLoaded cIOS = %u (Rev %u)",IOS_GetVersion(), IOS_GetRevision());
+    printf( "\n\tLoaded cIOS = %u (Rev %u)", IOS_GetVersion(), IOS_GetRevision() );
 
-    printf("\n\tWaiting for USB: ");
-    if (MountWBFS() < 0)
+    printf( "\n\tWaiting for USB: " );
+    if ( MountWBFS() < 0 )
     {
-        printf("\nERROR: No WBFS drive mounted.");
-        sleep(5);
-        exit(0);
+        printf( "\nERROR: No WBFS drive mounted." );
+        sleep( 5 );
+        exit( 0 );
     }
 
     //if a ID was passed via args copy it and try to boot it after the partition is mounted
     //its not really a headless mode.  more like hairless.
-    if (argc > 1 && argv[1])
+    if ( argc > 1 && argv[1] )
     {
-        if (strlen(argv[1])==6)
-            strncpy(headlessID, argv[1], sizeof(headlessID));
+        if ( strlen( argv[1] ) == 6 )
+            strncpy( headlessID, argv[1], sizeof( headlessID ) );
     }
 
     //! Init the rest of the System
@@ -160,12 +155,12 @@ int main(int argc, char *argv[])
     InitAudio();
 
     char *fontPath = NULL;
-    asprintf(&fontPath, "%sfont.ttf", CFG.theme_path);
-    SetupDefaultFont(fontPath);
-    free(fontPath);
+    asprintf( &fontPath, "%sfont.ttf", CFG.theme_path );
+    SetupDefaultFont( fontPath );
+    free( fontPath );
 
-    gprintf("\n\tEnd of Main()");
+    gprintf( "\n\tEnd of Main()" );
     InitGUIThreads();
-    MainMenu(MENU_CHECK);
+    MainMenu( MENU_CHECK );
     return 0;
 }

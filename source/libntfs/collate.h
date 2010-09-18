@@ -29,6 +29,6 @@
 
 #define NTFS_COLLATION_ERROR -2
 
-extern COLLATE ntfs_get_collate_function(COLLATION_RULES);
+extern COLLATE ntfs_get_collate_function( COLLATION_RULES );
 
 #endif /* _NTFS_COLLATE_H */

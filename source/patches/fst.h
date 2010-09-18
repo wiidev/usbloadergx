@@ -23,16 +23,17 @@
 #define __FST_H__
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 //u32 do_fst(u32 fstlocation);
 //u32 do_sd_code(char *filename);
 
 #define MAX_GCT_SIZE 2056
 
-u32 do_bca_code(u8 *gameid);
-int ocarina_load_code(u8 *id);
-int ocarina_do_code();
+    u32 do_bca_code( u8 *gameid );
+    int ocarina_load_code( u8 *id );
+    int ocarina_do_code();
 
 #ifdef __cplusplus
 }
