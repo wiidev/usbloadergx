@@ -7,6 +7,8 @@
 extern "C" {
 #endif
 
+    char ascii(char s);
+
 #ifndef NO_DEBUG
 	//use this just like printf();
 	void gprintf(const char *str, ...);

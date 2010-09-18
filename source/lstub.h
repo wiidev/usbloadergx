@@ -4,10 +4,6 @@
 #ifndef _LSTUB_H_
 #define _LSTUB_H_
 
-#ifdef __cplusplus
-extern "C" {
-#endif
- 
 //to set the "return to" stub for a certain ID
 //!reqID is the Requested ID to return to
 //!returns WII_EINTERNAL if it cant get the list of installed titles with ES functions
@@ -30,9 +26,5 @@ u64 getStubDest();
 //returns 0 or 1 depending on wether the stub is available
 u8 hbcStubAvailable();
 
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif

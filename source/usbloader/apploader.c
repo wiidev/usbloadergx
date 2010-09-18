@@ -95,7 +95,7 @@ s32 Apploader_Run(entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8
     appldr_entry(&appldr_init, &appldr_main, &appldr_final);
 
     /* Initialize apploader */
-    appldr_init(__noprint);
+    appldr_init( gprintf );
 
     if (error002fix!=0)
     {

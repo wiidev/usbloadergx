@@ -20,6 +20,7 @@
 #include "usbloader/partition_usbloader.h"
 #include "usbloader/utils.h"
 #include "xml/xml.h"
+#include "wad/nandtitle.h"
 
 #define MAXOPTIONS 13
 
@@ -1001,7 +1002,7 @@ int MenuSettings()
 									if (++Settings.cios >= settings_cios_max) {
 										Settings.cios = 0;
 									}
-									if ((Settings.cios == 1 && ios222rev!=4) || (Settings.cios == 2 && ios223rev != 4)) {
+									if ((Settings.cios == 1 && titles.VersionOf( 0x1000000deULL ) != 4 ) || (Settings.cios == 2 && titles.VersionOf( 0x1000000dfULL ) != 4)) {
 										WindowPrompt(tr("Hermes CIOS"),tr("USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"),tr("OK"));
 									}
 								}

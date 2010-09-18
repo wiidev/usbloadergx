@@ -9,6 +9,7 @@
 #include "gui.h"
 #include "../wpad.h"
 #include "../main.h"
+#include "../gecko.h"
 #include "../settings/cfg.h"
 #include "gui_customoptionbrowser.h"
 
@@ -83,7 +84,7 @@ void customOptionList::SetSize(int Size) //set number of lines
 }
 void customOptionList::SetName(int i, const char *format, ...)
 {
-	if(i >= length) SetLength(i+1);
+    	if(i >= length) SetLength(i+1);
 
 	if(i >= 0 && i < length)
 	{
@@ -95,6 +96,7 @@ void customOptionList::SetName(int i, const char *format, ...)
 		va_end(va);
 		changed = true;
 	}
+	//gprintf("customOptionList::SetName( %d, %s )\n", i, name[i] );
 }
 void customOptionList::SetValue(int i, const char *format, ...)
 {
@@ -120,6 +122,7 @@ void customOptionList::SetValue(int i, const char *format, ...)
 			}
 		}
 	}
+	//gprintf("customOptionList::SetValue( %d, %s )\n", i, value[i] );
 }
 void customOptionList::Clear(bool OnlyValue/*=false*/)
 {

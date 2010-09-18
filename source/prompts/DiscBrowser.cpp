@@ -17,7 +17,6 @@
 #include "sys.h"
 #include "settings/cfg.h"
 #include "memory.h"
-#include "../wad/title.h"
 #include "../gecko.h"
 #include "../patches/dvd_broadway.h"
 

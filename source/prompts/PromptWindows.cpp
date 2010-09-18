@@ -34,7 +34,6 @@
 #include "svnrev.h"
 #include "audio.h"
 #include "xml/xml.h"
-#include "wad/title.h"
 #include "language/UpdateLanguage.h"
 #include "gecko.h"
 #include "lstub.h"

@@ -16,6 +16,7 @@
 #include "sys.h"
 #include "wpad.h"
 #include "lstub.h"
+#include "wad/nandtitle.h"
 
 extern char game_partition[6];
 extern u8 load_from_fs;
@@ -221,61 +222,65 @@ void ShowMemInfo() {
 	WindowPrompt("Mem info", (char *) &buf, "OK");
 }
 
-
-#include "wad/title.h"
-
-s32 ios222rev = -69;
-s32 ios223rev = -69;
-s32 ios249rev = -69;
-s32 ios250rev = -69;
-
 s32 IOS_ReloadIOSsafe(int ios)
 {
-	if (ios==222)
+	if( ios == 222 )
 	{
-		if (ios222rev == -69)
-			ios222rev = getIOSrev(0x00000001000000dell);
-
-		if (ios222rev > 0 && (ios222rev != 4 && ios222rev != 5))return -2;
+	    s32 ios222rev = titles.VersionOf( 0x1000000deULL );
+	    if( !ios222rev )
+		return -2;
+	    if( ios222rev != 4 && ios222rev != 5 && ios222rev != 65535 )
+		return -2;
 	}
 	else if (ios==223)
 	{
-		if (ios223rev == -69)
-			ios223rev = getIOSrev(0x00000001000000dfll);
-
-		if (ios223rev > 0 && (ios223rev != 4 && ios223rev != 5))return -2;
+	    s32 ios223rev = titles.VersionOf( 0x1000000dfULL );
+	    if( !ios223rev )
+		return -2;
+	    if( ios223rev != 4 && ios223rev != 5 && ios223rev != 65535 )
+		return -2;
 	}
 	else if (ios==249)
 	{
-		if (ios249rev == -69)
-			ios249rev = getIOSrev(0x00000001000000f9ll);
-
-		if (ios249rev >= 0 && !(ios249rev>=9 && ios249rev<65280))return -2;
+	    s32 ios249rev = titles.VersionOf( 0x1000000f9ULL );
+	    if( !ios249rev )
+		return -2;
+	    if( ios249rev < 9 || ios249rev == 65280 )
+		return -2;
 	}
 	else if (ios==250)
 	{
-		if (ios250rev == -69)
-			ios250rev = getIOSrev(0x00000001000000fall);
-
-		if (ios250rev >= 0 && !(ios250rev>=9 && ios250rev<65280))return -2;
+	    s32 ios250rev = titles.VersionOf( 0x1000000faULL );
+	    if( !ios250rev )
+		return -2;
+	    if( ios250rev < 9 || ios250rev == 65280 )
+		return -2;
 	}
 
 	s32 r = IOS_ReloadIOS(ios);
-	if (r >= 0) {
-		WII_Initialize();
+	if( r >= 0 )
+	{
+	    WII_Initialize();
 	}
 	return r;
 }
 
 s32 CheckForCIOS()
 {
-    gprintf("\n\tChecking for stub IOS");
+    gprintf("\tChecking for stub IOS\n");
     s32 ret = 1;
-	ios222rev = getIOSrev(0x00000001000000dell);
-	ios249rev = getIOSrev(0x00000001000000f9ll);
+	s32 ios222rev = titles.VersionOf( 0x00000001000000deULL );
+	s32 ios249rev = titles.VersionOf( 0x00000001000000f9ULL );
+
+	u8 ios222OK = !( ios222rev < 4 || ios222rev == 65280 );
+	u8 ios249OK = !( ios249rev < 9 || ios249rev == 65280 );
+
+	gprintf("222ok: %u\t 249ok: %u\n", ios222OK, ios249OK );
+	return 1;
 
 	//if we don't like either of the cIOS then scram
-	if (!((ios222rev >= 4 && ios222rev < 65280) || (ios249rev >=9 && ios249rev < 65280)))
+	//if( !((ios222rev >= 4 && ios222rev < 65280) || (ios249rev >=9 && ios249rev < 65280)))
+	if( ios222rev < 4 || ios222rev == 65280 || ios249rev < 9 || ios249rev == 65280 )
 	{
 		printf("\x1b[2J");
 		if ((ios222rev < 0 && ios222rev != WII_EINSTALL) && (ios249rev < 0 && ios249rev != WII_EINSTALL)) {

@@ -47,16 +47,18 @@ extern "C"
 #include "fat.h"
 #include "gecko.h"
 #include "svnrev.h"
-#include "wad/title.h"
 #include "usbloader/partition_usbloader.h"
 #include "usbloader/usbstorage2.h"
 #include "memory/mem2.h"
 #include "lstub.h"
 #include "usbloader/usbstorage2.h"
+#include "wad/nandtitle.h"
 
 extern bool geckoinit;
 extern bool textVideoInit;
 extern char headlessID[8];
+
+NandTitle titles;
 
 /* Constants */
 #define CONSOLE_XCOORD      260
@@ -75,7 +77,9 @@ int main(int argc, char *argv[])
     geckoinit = InitGecko();
     __exception_setreload(20);
 
-    printf("\n\tStarting up");
+    printf("\tStarting up\n");
+    titles.Get();
+    titles.Exists( 0x100014e414c45ULL );
 
     bool bootDevice_found=false;
     if (argc >= 1)
@@ -89,14 +93,14 @@ int main(int argc, char *argv[])
     }
 
     //Let's use libogc sd/usb for config loading
-    printf("\n\tInitialize sd card");
+    printf("\tInitialize sd card\n");
     SDCard_Init();
-    printf("\n\tInitialize usb device");
+    printf("\tInitialize usb device\n");
     USBDevice_Init();
 
     if (!bootDevice_found)
     {
-        printf("\n\tSearch for configuration file");
+	printf("\tSearch for configuration file\n");
         //try USB
         //left in all the dol and elf files in this check in case this is the first time running the app and they dont have the config
         if (checkfile((char*) "USB:/config/GXglobal.cfg") || (checkfile((char*) "USB:/apps/usbloader_gx/boot.elf"))
@@ -104,13 +108,13 @@ int main(int argc, char *argv[])
             || checkfile((char*) "USB:/apps/usbloader_gx/boot.dol"))
             strcpy(bootDevice, "USB:");
 
-        printf("\n\tConfiguration file is on %s", bootDevice);
+	printf("\tConfiguration file is on %s\n", bootDevice);
     }
 
     gettextCleanUp();
-    printf("\n\tLoading configuration...");
+    printf("\tLoading configuration...");
     CFG_Load();
-    printf("done");
+    printf("done\n");
 
     SDCard_deInit();// unmount SD for reloading IOS
     USBDevice_deInit();// unmount USB for reloading IOS
@@ -118,10 +122,10 @@ int main(int argc, char *argv[])
 
     // This part is added, because we need a identify patched ios
     //! pune please replace this with your magic patch functions - Dimok
-    if (IOS_ReloadIOSsafe(236) < 0)
-        IOS_ReloadIOSsafe(36);
+    //if (IOS_ReloadIOSsafe(236) < 0)
+       // IOS_ReloadIOSsafe(36);
 
-    printf("\n\tCheck for an existing cIOS");
+    printf("\tCheck for an existing cIOS\n");
     CheckForCIOS();
 
     // Let's load the cIOS now

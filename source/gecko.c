@@ -33,12 +33,13 @@ bool InitGecko()
 	if (geckoattached)
 	{
 		usb_flush(EXI_CHANNEL_1);
+		CON_EnableGecko( 1, true );
 		return true;
 	}
 	else return false;
 }
 
-static char ascii(char s)
+char ascii(char s)
 {
     if(s < 0x20)
 	return '.';

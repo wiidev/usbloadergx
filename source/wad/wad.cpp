@@ -4,10 +4,11 @@
 #include <ogcsys.h>
 #include <unistd.h>
 
-#include "title.h"
 #include "utils.h"
 #include "video.h"
 #include "wad.h"
+
+#include "nandtitle.h"
 
 
 
@@ -569,7 +570,7 @@ s32 Wad_Uninstall(FILE *fp)
 	msg2Txt.SetText(tr(">> Deleting tickets..."));
 
 	// Get ticket views
-	ret = Title_GetTicketViews(tid, &viewData, &viewCnt);
+	ret = titles.GetTicketViews(tid, &viewData, &viewCnt);
 	if (ret < 0){
 		char errTxt[50];
 		sprintf(errTxt,"%sret = %d",tr(">> Deleting tickets...ERROR! "),ret);
