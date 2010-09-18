@@ -11,7 +11,7 @@
 #include "usbloader/wdvd.h"
 #include "usbloader/partition_usbloader.h"
 #include "usbloader/usbstorage2.h"
-#include "usbloader/getentries.h"
+#include "usbloader/GameList.h"
 #include "language/gettext.h"
 #include "libwiigui/gui.h"
 #include "libwiigui/gui_diskcover.h"
@@ -50,10 +50,8 @@ static char missingFiles[500][12];
 /*** Extern variables ***/
 extern GuiWindow * mainWindow;
 extern GuiSound * bgMusic;
-extern u32 gameCnt;
-extern s32 gameSelected, gameStart;
+s32 gameSelected = 0, gameStart = 0;
 extern float gamesize;
-extern struct discHdr * gameList;
 extern u8 shutdown;
 extern u8 reset;
 extern u8 mountMethod;
@@ -1318,7 +1316,7 @@ int GameWindowPrompt() {
         }
 
         //load disc image based or what game is seleted
-        struct discHdr * header = (mountMethod==1||mountMethod==2?dvdheader:&gameList[gameSelected]);
+        struct discHdr * header = (mountMethod==1||mountMethod==2?dvdheader:gameList[gameSelected]);
         if(Settings.gamesoundvolume > 0)
         {
             if(gameSound)
@@ -1556,7 +1554,7 @@ int GameWindowPrompt() {
                 promptWindow.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 50);
                 changed = 1;
                 btnClick2->Play();
-                gameSelected = (gameSelected + 1) % gameCnt;
+                gameSelected = (gameSelected + 1) % gameList.size();
                 btnRight.ResetState();
                 break;
             }
@@ -1565,7 +1563,7 @@ int GameWindowPrompt() {
                 promptWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 50);
                 changed = 2;
                 btnClick2->Play();
-                gameSelected = (gameSelected - 1 + gameCnt) % gameCnt;
+                gameSelected = (gameSelected - 1 + gameList.size()) % gameList.size();
                 btnLeft.ResetState();
                 break;
             }
@@ -1574,7 +1572,7 @@ int GameWindowPrompt() {
                 promptWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 50);
                 changed = 2;
                 btnClick2->Play();
-                gameSelected = (gameSelected - 1 + gameCnt) % gameCnt;
+                gameSelected = (gameSelected - 1 + gameList.size()) % gameList.size();
                 btnRight.ResetState();
                 break;
             }
@@ -1583,7 +1581,7 @@ int GameWindowPrompt() {
                 promptWindow.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 50);
                 changed = 1;
                 btnClick2->Play();
-                gameSelected = (gameSelected + 1) % gameCnt;
+                gameSelected = (gameSelected + 1) % gameList.size();
                 btnLeft.ResetState();
                 break;
             }
@@ -1592,7 +1590,7 @@ int GameWindowPrompt() {
                 promptWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 50);
                 changed = 2;
                 btnClick2->Play();
-                gameSelected = (gameSelected + 1) % gameCnt;
+                gameSelected = (gameSelected + 1) % gameList.size();
                 btnRight.ResetState();
                 break;
             }
@@ -1601,7 +1599,7 @@ int GameWindowPrompt() {
                 promptWindow.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 50);
                 changed = 1;
                 btnClick2->Play();
-                gameSelected = (gameSelected - 1 + gameCnt) % gameCnt;
+                gameSelected = (gameSelected - 1 + gameList.size()) % gameList.size();
                 btnLeft.ResetState();
                 break;
             }
@@ -1610,7 +1608,7 @@ int GameWindowPrompt() {
                 promptWindow.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 50);
                 changed = 1;
                 btnClick2->Play();
-                gameSelected = (gameSelected - 1 + gameCnt) % gameCnt;
+                gameSelected = (gameSelected - 1 + gameList.size()) % gameList.size();
                 btnRight.ResetState();
                 break;
             }
@@ -1619,7 +1617,7 @@ int GameWindowPrompt() {
                 promptWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 50);
                 changed = 2;
                 btnClick2->Play();
-                gameSelected = (gameSelected + 1) % gameCnt;
+                gameSelected = (gameSelected + 1) % gameList.size();
                 btnLeft.ResetState();
                 break;
             }
@@ -1628,7 +1626,7 @@ int GameWindowPrompt() {
 //				diskImg.SetBetaRotateEffect(45, 90);
                 changed = 3;
                 btnClick2->Play();
-                gameSelected = (gameSelected + 1) % gameCnt;
+                gameSelected = (gameSelected + 1) % gameList.size();
                 btnRight.ResetState();
                 break;
             }
@@ -1638,7 +1636,7 @@ int GameWindowPrompt() {
 //				promptWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 1/*50*/);
                 changed = 4;
                 btnClick2->Play();
-                gameSelected = (gameSelected - 1 + gameCnt) % gameCnt;
+                gameSelected = (gameSelected - 1 + gameList.size()) % gameList.size();
                 btnLeft.ResetState();
                 break;
             }
@@ -1917,18 +1915,18 @@ bool SearchMissingImages(int choice2) {
     ResumeGui();
 
     //make sure that all games are added to the gamelist
-    __Menu_GetEntries(1);
+    gameList.LoadUnfiltered();
 
 	cntMissFiles = 0;
-	u32 i = 0;
+	int i = 0;
 	char filename[11];
 
 	//add IDs of games that are missing covers to cntMissFiles
 	bool found1 = false;
 	bool found2 = false;
 	bool found3 = false;
-	for (i = 0; i < gameCnt && cntMissFiles < 500; i++) {
-		struct discHdr* header = &gameList[i];
+	for (i = 0; i < gameList.size() && cntMissFiles < 500; i++) {
+		struct discHdr* header = gameList[i];
 		if (choice2 != 3) {
 
 			char *covers_path = choice2==1 ? Settings.covers2d_path : Settings.covers_path;
@@ -1969,7 +1967,7 @@ bool SearchMissingImages(int choice2) {
     HaltGui();
     mainWindow->Remove(&promptWindow);
     mainWindow->SetState(STATE_DEFAULT);
-	__Menu_GetEntries();
+	gameList.FilterList();
     ResumeGui();
 
 	gprintf(" = %i",cntMissFiles);

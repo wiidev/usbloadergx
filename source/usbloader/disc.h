@@ -6,52 +6,54 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-    /* Disc header structure */
-    struct discHdr {
-        /* Game ID */
-        u8 id[6];
 
-        /* Game version */
-        u16 version;
+/* Disc header structure */
+struct discHdr
+{
+    /* Game ID */
+    u8 id[6];
 
-        /* Audio streaming */
-        u8 streaming;
-        u8 bufsize;
+    /* Game version */
+    u16 version;
 
-        /* Padding */
-		u8 is_ciso;
-        u8 unused1[13];
+    /* Audio streaming */
+    u8 streaming;
+    u8 bufsize;
 
-        /* Magic word */
-        u32 magic;
+    /* Padding */
+    u8 is_ciso;
+    u8 unused1[13];
 
-        /* Padding */
-        u8 unused2[4];
+    /* Magic word */
+    u32 magic;
 
-        /* Game title */
-        char title[64];
+    /* Padding */
+    u8 unused2[4];
 
-        /* Encryption/Hashing */
-        u8 encryption;
-        u8 h3_verify;
+    /* Game title */
+    char title[64];
 
-        /* Padding */
-        u8 unused3[30];
-    } ATTRIBUTE_PACKED;
+    /* Encryption/Hashing */
+    u8 encryption;
+    u8 h3_verify;
 
-    /* Prototypes */
-    s32  Disc_Init(void);
-    s32  Disc_Open(void);
-    s32  Disc_Wait(void);
-    void __Disc_SetLowMem(void);
-    s32  Disc_SetUSB(const u8 *);
-    s32  Disc_ReadHeader(void *);
-    s32  Disc_IsWii(void);
-    s32  Disc_BootPartition(u64, u8, u8, u8, u8, u8, u8, u32);
-    s32  Disc_WiiBoot(u8, u8, u8, u8, u8, u8, u32);
-    s32 __Disc_FindPartition(u64 *outbuf);
-    void PatchCountryStrings(void *Address, int Size);
-    s32 __Disc_FindPartition(u64 *outbuf);
+    /* Padding */
+    u8 unused3[30];
+} ATTRIBUTE_PACKED;
+
+/* Prototypes */
+s32  Disc_Init(void);
+s32  Disc_Open(void);
+s32  Disc_Wait(void);
+void __Disc_SetLowMem(void);
+s32  Disc_SetUSB(const u8 *);
+s32  Disc_ReadHeader(void *);
+s32  Disc_IsWii(void);
+s32  Disc_BootPartition(u64, u8, u8, u8, u8, u8, u8, u32);
+s32  Disc_WiiBoot(u8, u8, u8, u8, u8, u8, u32);
+s32 __Disc_FindPartition(u64 *outbuf);
+void PatchCountryStrings(void *Address, int Size);
+s32 __Disc_FindPartition(u64 *outbuf);
 
 #ifdef __cplusplus
 }

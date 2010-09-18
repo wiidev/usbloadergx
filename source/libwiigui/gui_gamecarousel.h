@@ -7,7 +7,7 @@ class GuiImageAsync;
 class GuiGameCarousel : public GuiElement
 {
 	public:
-		GuiGameCarousel(int w, int h, struct discHdr * l, int gameCnt, const char *themePath, const u8 *imagebg, int selected = 0, int offset = 0);
+		GuiGameCarousel(int w, int h, const char *themePath, const u8 *imagebg, int selected = 0, int offset = 0);
 		~GuiGameCarousel();
 		int FindMenuItem(int c, int d);
 		int GetClickedOption();
@@ -17,7 +17,7 @@ class GuiGameCarousel : public GuiElement
 		void Draw();
 		void Update(GuiTrigger * t);
 		int GetOffset();
-		void Reload(struct discHdr * l, int count);
+		void Reload();
 		//GuiText * optionVal[PAGESIZE];
 	protected:
 		GuiImageData	noCover;
@@ -27,9 +27,6 @@ class GuiGameCarousel : public GuiElement
 		int pagesize;
 		int speed;
 		int clickedItem;
-
-		struct discHdr * gameList;
-		int gameCnt;
 
 		int * gameIndex;
 		GuiButton ** game;

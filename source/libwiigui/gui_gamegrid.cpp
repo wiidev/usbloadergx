@@ -12,6 +12,7 @@
 #include <unistd.h>
 #include "gui_gamegrid.h"
 #include "gui_image_async.h"
+#include "usbloader/GameList.h"
 #include "../settings/cfg.h"
 #include "../prompts/PromptWindows.h"
 #include "../language/gettext.h"
@@ -280,7 +281,7 @@ static GuiImageData *GameGridLoadCoverImage(void * Arg)
 /**
  * Constructor for the GuiGamegrid class.
  */
-GuiGameGrid::GuiGameGrid(int w, int h, struct discHdr * l, int count, const char *themePath, const u8 *imagebg, int selected, int offset) :
+GuiGameGrid::GuiGameGrid(int w, int h, const char *themePath, const u8 *imagebg, int selected, int offset) :
 noCover(nocoverFlat_png)
 {
 	width = w;
@@ -361,7 +362,7 @@ noCover(nocoverFlat_png)
 	coverImg	= NULL;
 	game		= NULL;
 
-	Reload(l, count, Settings.gridRows, 0);
+	Reload(Settings.gridRows, 0);
 }
 
 
@@ -403,7 +404,7 @@ GuiGameGrid::~GuiGameGrid()
 void GuiGameGrid::SetFocus(int f)
 {
 	LOCK(this);
-	if(!gameCnt)
+	if(!gameList.size())
 		return;
 
 	focus = f;
@@ -474,7 +475,7 @@ int GuiGameGrid::GetSelectedOption()
 void GuiGameGrid::Draw()
 {
 	LOCK(this);
-	if(!this->IsVisible() || !gameCnt)
+	if(!this->IsVisible() || !gameList.size())
 		return;
 
 	if(goLeft>0)
@@ -527,7 +528,7 @@ void GuiGameGrid::Draw()
 
 	for(int i=0; i<pagesize; i++)
 		game[i]->Draw();
-	if(gameCnt > pagesize-2*rows)
+	if(gameList.size() > pagesize-2*rows)
 	{
 		btnRight->Draw();
 		btnLeft->Draw();
@@ -552,14 +553,14 @@ void GuiGameGrid::ChangeRows(int n)
 {
 	LOCK(this);
 	if(n != rows)
-		Reload(gameList, gameCnt, n, -1);
+		Reload(n, -1);
 }
 
 
 void GuiGameGrid::Update(GuiTrigger * t)
 {
 	LOCK(this);
-	if(state == STATE_DISABLED || !t || !gameCnt)
+	if(state == STATE_DISABLED || !t || !gameList.size())
 		return;
 
 	if(!(game[0]->GetEffect() || game[0]->GetEffectOnOver()))
@@ -589,7 +590,7 @@ void GuiGameGrid::Update(GuiTrigger * t)
 
 	}
 	// navigation
-	if(focus && gameCnt >= (pagesize-2*rows) && goLeft==0 && goRight==0)
+	if(focus && gameList.size() >= (pagesize-2*rows) && goLeft==0 && goRight==0)
 	{
 		// Left/Right Navigation
 
@@ -631,7 +632,7 @@ void GuiGameGrid::Update(GuiTrigger * t)
 		{
 			GuiButton *tmpButton[rows];
 			GuiTooltip *tmpTooltip[rows];
-			listOffset = OFFSETLIMIT(listOffset + rows, rows, gameCnt); // set the new listOffset
+			listOffset = OFFSETLIMIT(listOffset + rows, rows, gameList.size()); // set the new listOffset
 			// Save left Tooltip & Button and destroy left Image + Image-Data 
 			for (int i=0; i<rows; i++)
 			{
@@ -655,19 +656,19 @@ void GuiGameGrid::Update(GuiTrigger * t)
 			for (int i=0; i<rows; i++)
 			{
 				int ii = i+pagesize-rows;
-				gameIndex[ii]		= GetGameIndex(ii, rows, listOffset, gameCnt);
+				gameIndex[ii]		= GetGameIndex(ii, rows, listOffset, gameList.size());
 				titleTT[ii]			= tmpTooltip[i];
 				coverImg[ii]		= NULL;
 				if(gameIndex[ii] != -1)
 				{
-					coverImg[ii]	= new GuiImageAsync(GameGridLoadCoverImage, &gameList[gameIndex[ii]], sizeof(struct discHdr), &noCover);
+					coverImg[ii]	= new GuiImageAsync(GameGridLoadCoverImage, gameList[gameIndex[ii]], sizeof(struct discHdr), &noCover);
 					if(coverImg[ii])
 					{
 						coverImg[ii]		->SetWidescreen(CFG.widescreen);
 						coverImg[ii]		->SetScale(VALUE4ROWS(rows, 1.0, 0.6, 0.26));
 						coverImg[ii]		->SetPosition(0,VALUE4ROWS(rows, 0, -50, -80));
 					}
-					titleTT[ii]		->SetText(get_title(&gameList[gameIndex[ii]]));
+					titleTT[ii]		->SetText(get_title(gameList[gameIndex[ii]]));
 				}
 				else
 				{
@@ -716,7 +717,7 @@ void GuiGameGrid::Update(GuiTrigger * t)
 		{
 			GuiButton *tmpButton[rows];
 			GuiTooltip *tmpTooltip[rows];
-			listOffset = OFFSETLIMIT(listOffset - rows, rows, gameCnt); // set the new listOffset
+			listOffset = OFFSETLIMIT(listOffset - rows, rows, gameList.size()); // set the new listOffset
 			// Save right Button & Tooltip and destroy right Image-Data 
 			for (int i=0; i<rows; i++)
 			{
@@ -740,19 +741,19 @@ void GuiGameGrid::Update(GuiTrigger * t)
 
 			for (int i=0; i<rows; i++)
 			{
-				gameIndex[i]		= GetGameIndex(i, rows, listOffset, gameCnt);
+				gameIndex[i]		= GetGameIndex(i, rows, listOffset, gameList.size());
 				titleTT[i]			= tmpTooltip[i];
 				coverImg[i]			= NULL;
 				if(gameIndex[i] != -1)
 				{
-					coverImg[i]	= new GuiImageAsync(GameGridLoadCoverImage, &gameList[gameIndex[i]], sizeof(struct discHdr), &noCover);
+					coverImg[i]	= new GuiImageAsync(GameGridLoadCoverImage, gameList[gameIndex[i]], sizeof(struct discHdr), &noCover);
 					if(coverImg[i])
 					{
 						coverImg[i]		->SetWidescreen(CFG.widescreen);
 						coverImg[i]		->SetScale(VALUE4ROWS(rows, 1.0, 0.6, 0.26));
 						coverImg[i]		->SetPosition(0,VALUE4ROWS(rows, 0, -50, -80));
 					}
-					titleTT[i]		->SetText(get_title(&gameList[gameIndex[i]]));
+					titleTT[i]		->SetText(get_title(gameList[gameIndex[i]]));
 				}
 				else
 				{
@@ -800,8 +801,8 @@ void GuiGameGrid::Update(GuiTrigger * t)
 
 	if ((btnRowUp->GetState() == STATE_CLICKED))
 	{
-		if ((rows==1)&&(gameCnt>=18))this->ChangeRows(2);
-		else if ((rows==2)&&(gameCnt>=45))this->ChangeRows(3);
+		if ((rows==1)&&(gameList.size()>=18))this->ChangeRows(2);
+		else if ((rows==2)&&(gameList.size()>=45))this->ChangeRows(3);
 		btnRowUp->ResetState();
 		return;
 	}
@@ -819,7 +820,7 @@ void GuiGameGrid::Update(GuiTrigger * t)
 }
 
 
-void GuiGameGrid::Reload(struct discHdr * l, int count, int Rows, int ListOffset)
+void GuiGameGrid::Reload(int Rows, int ListOffset)
 {
 	LOCK(this);
 	
@@ -846,18 +847,16 @@ void GuiGameGrid::Reload(struct discHdr * l, int count, int Rows, int ListOffset
 //	delete [] cover;
 	delete [] titleTT;
 	
-	gameList = l;
-	gameCnt = count;
 	goLeft = 0;
 	goRight = 0;
 
 	rows = Rows > 3 ? 3 : (Rows < 1 ? 1 : Rows);
-	if ((count<45)&&(rows==3))rows=2;
-	if ((count<18)&&(rows==2))rows=1;
+	if ((gameList.size()<45)&&(rows==3))rows=2;
+	if ((gameList.size()<18)&&(rows==2))rows=1;
 
 	if(ListOffset>=0) // if ListOffset < 0 then no change
 		listOffset = ListOffset;
-	listOffset = OFFSETLIMIT(listOffset, rows, gameCnt);
+	listOffset = OFFSETLIMIT(listOffset, rows, gameList.size());
 
 	selectedItem = -1;
 	clickedItem = -1;
@@ -884,13 +883,13 @@ void GuiGameGrid::Reload(struct discHdr * l, int count, int Rows, int ListOffset
 		//------------------------
 		// Index
 		//------------------------
-		gameIndex[i] = GetGameIndex(i, rows, listOffset, gameCnt);
+		gameIndex[i] = GetGameIndex(i, rows, listOffset, gameList.size());
 
 		//------------------------
 		// Tooltip
 		//------------------------
 		if( gameIndex[i] != -1 ) 
-			titleTT[i] = new GuiTooltip(get_title(&gameList[gameIndex[i]]), THEME.tooltipAlpha);
+			titleTT[i] = new GuiTooltip(get_title(gameList[gameIndex[i]]), THEME.tooltipAlpha);
 		else
 			titleTT[i] = new GuiTooltip(NULL, THEME.tooltipAlpha);
 
@@ -908,7 +907,7 @@ void GuiGameGrid::Reload(struct discHdr * l, int count, int Rows, int ListOffset
 		coverImg[i] = NULL;
 		if( gameIndex[i] != -1 )
 		{ 
-			coverImg[i]	= new GuiImageAsync(GameGridLoadCoverImage, &gameList[gameIndex[i]], sizeof(struct discHdr), &noCover);
+			coverImg[i]	= new GuiImageAsync(GameGridLoadCoverImage, gameList[gameIndex[i]], sizeof(struct discHdr), &noCover);
 			if(coverImg[i])
 			{
 				coverImg[i]->SetWidescreen(CFG.widescreen);

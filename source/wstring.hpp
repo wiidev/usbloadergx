@@ -20,6 +20,7 @@ public:
 };
 
 size_t utf8Len(const char *s);
+int wcsnicmp(const wchar_t *s1, const wchar_t *s2, int len);
 
 
 #endif // !defined(__WSTRING_HPP)

@@ -7,7 +7,7 @@ class GuiImageAsync;
 class GuiGameGrid : public GuiElement
 {
 	public:
-		GuiGameGrid(int w, int h, struct discHdr * l, int gameCnt, const char *themePath, const u8 *imagebg, int selected = 0, int offset = 0);
+		GuiGameGrid(int w, int h, const char *themePath, const u8 *imagebg, int selected = 0, int offset = 0);
 		~GuiGameGrid();
 		int FindMenuItem(int c, int d);
 		int GetClickedOption();
@@ -17,7 +17,7 @@ class GuiGameGrid : public GuiElement
 		void Draw();
 		void Update(GuiTrigger * t);
 		int GetOffset();
-		void Reload(struct discHdr * l, int count, int Rows, int ListOffset);
+		void Reload(int Rows, int ListOffset);
 		void ChangeRows(int n);
 	protected:
 		GuiImageData	noCover;
@@ -28,9 +28,6 @@ class GuiGameGrid : public GuiElement
 		int rows;
 		int goLeft;
 		int goRight;
-
-		struct discHdr * gameList;
-		int gameCnt;
 
 		int * gameIndex;
 		GuiButton ** game;

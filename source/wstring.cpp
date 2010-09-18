@@ -1,3 +1,4 @@
+#include <wctype.h>
 #include "wstring.hpp"
 
 using namespace std;
@@ -148,4 +149,20 @@ size_t utf8Len(const char *s)
 			return 0;
 	}
 	return len;
+}
+
+int wcsnicmp(const wchar_t *s1, const wchar_t *s2, int len)
+{
+	if (len <= 0)
+		return (0);
+
+	do
+    {
+		int r = towupper(*s1) - towupper(*s2++);
+		if (r) return r;
+		if (*s1++ == 0)
+			break;
+    } while (--len != 0);
+
+	return (0);
 }

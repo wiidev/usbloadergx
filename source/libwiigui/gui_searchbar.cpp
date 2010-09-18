@@ -4,7 +4,7 @@
 #include "../wpad.h"
 #include "../main.h"
 #include "../settings/cfg.h"
-#include "../usbloader/getentries.h"
+#include "../usbloader/GameList.h"
 
 extern GuiWindow * mainWindow;
 
@@ -66,7 +66,7 @@ sndClick(button_click_pcm, button_click_pcm_size, Settings.sfxvolume)
 	height = 10+42+y*42+10;
 
 
-	text.SetText(gameFilter);
+	text.SetText(gameList.GetCurrentFilter());
 	text.SetPosition(10, 15);
 	text.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
 	text.SetWidescreen(CFG.widescreen);

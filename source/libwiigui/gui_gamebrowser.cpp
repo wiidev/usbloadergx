@@ -14,6 +14,7 @@
 #include "../settings/cfg.h"
 #include "../main.h"
 #include "settings/newtitles.h"
+#include "usbloader/GameList.h"
 
 #include <string.h>
 #include <sstream>
@@ -23,16 +24,14 @@ int txtscroll = 0;
 /**
  * Constructor for the GuiGameBrowser class.
  */
-GuiGameBrowser::GuiGameBrowser(int w, int h, struct discHdr * l, int gameCnt, const char *themePath, const u8 *imagebg, int selected, int offset)
+GuiGameBrowser::GuiGameBrowser(int w, int h, const char *themePath, const u8 *imagebg, int selected, int offset)
 {
 	width = w;
 	height = h;
-	this->gameCnt = gameCnt;
-	gameList = l;
 	pagesize = THEME.pagesize;
-	scrollbaron = (gameCnt > pagesize) ? 1 : 0;
+	scrollbaron = (gameList.size() > pagesize) ? 1 : 0;
 	selectable = true;
-	listOffset = MAX(0,MIN(offset,(gameCnt-pagesize)));
+	listOffset = MAX(0,MIN(offset,(gameList.size()-pagesize)));
 	selectedItem = selected - offset;
 	focus = 1; // allow focus
 	char imgPath[100];
@@ -129,13 +128,13 @@ GuiGameBrowser::GuiGameBrowser(int w, int h, struct discHdr * l, int gameCnt, co
 
 	for(int i=0; i < pagesize; i++)
 	{
-		gameTxt[i] = new GuiText(get_title(&gameList[i]), 20, THEME.gametext);
+		gameTxt[i] = new GuiText(get_title(gameList[i]), 20, THEME.gametext);
 		gameTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 		gameTxt[i]->SetPosition(24,0);
 		gameTxt[i]->SetMaxWidth(maxTextWidth, DOTTED);
 
 
-		gameTxtOver[i] = new GuiText(get_title(&gameList[i]), 20, THEME.gametext);
+		gameTxtOver[i] = new GuiText(get_title(gameList[i]), 20, THEME.gametext);
 		gameTxtOver[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 		gameTxtOver[i]->SetPosition(24,0);
 		gameTxtOver[i]->SetMaxWidth(maxTextWidth, SCROLL_HORIZONTAL);
@@ -211,7 +210,7 @@ GuiGameBrowser::~GuiGameBrowser()
 void GuiGameBrowser::SetFocus(int f)
 {
 	LOCK(this);
-    if(!gameCnt)
+    if(!gameList.size())
         return;
 
 	focus = f;
@@ -282,10 +281,10 @@ int GuiGameBrowser::FindMenuItem(int currentItem, int direction)
 {
 	int nextItem = currentItem + direction;
 
-	if(nextItem < 0 || nextItem >= gameCnt)
+	if(nextItem < 0 || nextItem >= gameList.size())
 		return -1;
 
-	if(strlen(get_title(&gameList[nextItem])) > 0)
+	if(strlen(get_title(gameList[nextItem])) > 0)
 		return nextItem;
 	else
 		return FindMenuItem(nextItem, direction);
@@ -297,7 +296,7 @@ int GuiGameBrowser::FindMenuItem(int currentItem, int direction)
 void GuiGameBrowser::Draw()
 {
 	LOCK(this);
-	if(!this->IsVisible() || !gameCnt)
+	if(!this->IsVisible() || !gameList.size())
 		return;
 
 	bgGameImg->Draw();
@@ -336,13 +335,13 @@ void GuiGameBrowser::UpdateListEntries()
 				game[i]->SetVisible(true);
 				game[i]->SetState(STATE_DEFAULT);
 			}
-			gameTxt[i]->SetText(get_title(&gameList[next]));
+			gameTxt[i]->SetText(get_title(gameList[next]));
 			gameTxt[i]->SetPosition(24, 0);
-			gameTxtOver[i]->SetText(get_title(&gameList[next]));
+			gameTxtOver[i]->SetText(get_title(gameList[next]));
 			gameTxtOver[i]->SetPosition(24, 0);
 
 			if (Settings.marknewtitles) {
-				bool isNew = NewTitles::Instance()->IsNew(gameList[next].id);
+				bool isNew = NewTitles::Instance()->IsNew(gameList[next]->id);
 				if (isNew) {
 					gameTxt[i]->SetMaxWidth(maxTextWidth - (newGames->GetWidth() + 1), DOTTED);
 					gameTxtOver[i]->SetMaxWidth(maxTextWidth - (newGames->GetWidth() + 1), SCROLL_HORIZONTAL);
@@ -367,7 +366,7 @@ void GuiGameBrowser::UpdateListEntries()
 void GuiGameBrowser::Update(GuiTrigger * t)
 {
 	LOCK(this);
-	if(state == STATE_DISABLED || !t || !gameCnt)
+	if(state == STATE_DISABLED || !t || !gameList.size())
 		return;
 
 	int next, prev;
@@ -413,7 +412,7 @@ void GuiGameBrowser::Update(GuiTrigger * t)
     }
 
 	// pad and joystick navigation
-	if(!focus || !gameCnt)
+	if(!focus || !gameList.size())
 		return; // skip navigation
 
 	if (scrollbaron == 1)
@@ -527,27 +526,27 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 			position2 = 0;
 		}
 
-		if(scrollbarBoxBtn->GetState() == STATE_HELD && scrollbarBoxBtn->GetStateChan() == t->chan && t->wpad.ir.valid && gameCnt > pagesize)
+		if(scrollbarBoxBtn->GetState() == STATE_HELD && scrollbarBoxBtn->GetStateChan() == t->chan && t->wpad.ir.valid && gameList.size() > pagesize)
 		{
 			// allow dragging of scrollbar box
 			scrollbarBoxBtn->SetPosition(width/2-18+7,0);
 			int position = t->wpad.ir.y - 32 - scrollbarBoxBtn->GetTop();
 
-			listOffset = (position * gameCnt)/(25.2 * pagesize) - selectedItem;
+			listOffset = (position * gameList.size())/(25.2 * pagesize) - selectedItem;
 
 			if(listOffset <= 0)
 			{
 				listOffset = 0;
 				selectedItem = 0;
 			}
-			else if(listOffset+pagesize >= gameCnt)
+			else if(listOffset+pagesize >= gameList.size())
 			{
-				listOffset = gameCnt - pagesize;
+				listOffset = gameList.size() - pagesize;
 				selectedItem = pagesize-1;
 			}
 
 		}
-		int positionbar = (25.2 * pagesize)*(listOffset + selectedItem) / gameCnt;
+		int positionbar = (25.2 * pagesize)*(listOffset + selectedItem) / gameList.size();
 
 		if(positionbar > (24 * pagesize))
 			positionbar = (24 * pagesize);
@@ -556,11 +555,11 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 
 		if(t->Right()) //skip pagesize # of games if right is pressed
 		{
-			if(listOffset < gameCnt && gameCnt > pagesize)
+			if(listOffset < gameList.size() && gameList.size() > pagesize)
 			{
 				listOffset =listOffset+ pagesize;
-				if(listOffset+pagesize >= gameCnt)
-					listOffset = gameCnt-pagesize;
+				if(listOffset+pagesize >= gameList.size())
+					listOffset = gameList.size()-pagesize;
 			}
 		}
 		else if(t->Left())
@@ -623,12 +622,10 @@ void GuiGameBrowser::Update(GuiTrigger * t)
 		updateCB(this);
 }
 
-void GuiGameBrowser::Reload(struct discHdr * l, int count)
+void GuiGameBrowser::Reload()
 {
 	LOCK(this);
-	gameList = l;
-	gameCnt = count;
-	scrollbaron = (gameCnt > pagesize) ? 1 : 0;
+	scrollbaron = (gameList.size() > pagesize) ? 1 : 0;
 	selectedItem = 0;
 	listOffset = 0;
 	focus = 1;

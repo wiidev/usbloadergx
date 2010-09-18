@@ -23,10 +23,9 @@
 #include "audio.h"
 #include "wad/wad.h"
 #include "xml/xml.h"
-#include "../wad/title.h"
-#include "../usbloader/getentries.h"
-#include "../usbloader/utils.h"
-#include "../gecko.h"
+#include "wad/title.h"
+#include "usbloader/utils.h"
+#include "gecko.h"
 
 #define typei 0x00010001
 

@@ -3,7 +3,7 @@
 #include "usbloader/wbfs.h"
 #include "usbloader/disc.h"
 #include "usbloader/utils.h"
-#include "usbloader/getentries.h"
+#include "usbloader/GameList.h"
 #include "prompts/ProgressWindow.h"
 
 float gamesize;
@@ -115,7 +115,8 @@ int MenuInstall() {
                     menu = MENU_DISCLIST;
                     break;
                 } else {
-                    __Menu_GetEntries(); //get the entries again
+                    gameList.ReadGameList(); //get the entries again
+                    gameList.FilterList();
 					GuiSound * instsuccess = NULL;
 					bgMusic->Pause();
 					instsuccess = new GuiSound(success_ogg, success_ogg_size, Settings.sfxvolume);

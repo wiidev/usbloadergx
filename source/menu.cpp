@@ -22,7 +22,7 @@
 #include "settings/cfg.h"
 #include "themes/Theme_Downloader.h"
 #include "usbloader/disc.h"
-#include "usbloader/getentries.h"
+#include "usbloader/GameList.h"
 #include "wad/title.h"
 #include "xml/xml.h"
 #include "audio.h"
@@ -64,7 +64,6 @@ static int ExitRequested = 0;
 
 
 /*** Extern variables ***/
-extern struct discHdr * gameList;
 extern u8 shutdown;
 extern u8 reset;
 extern s32 gameSelected, gameStart;
@@ -354,7 +353,7 @@ int MainMenu(int menu) {
 
 	if (mountMethod==3)
 	{
-			struct discHdr *header = &gameList[gameSelected];
+			struct discHdr *header = gameList[gameSelected];
 			char tmp[20];
 			u32 tid;
 			sprintf(tmp,"%c%c%c%c",header->id[0],header->id[1],header->id[2],header->id[3]);
@@ -385,16 +384,16 @@ int MainMenu(int menu) {
 		if (strcmp(headlessID,"")!=0)
 		{
 			gprintf("\n\tHeadless mode (%s)",headlessID);
-			__Menu_GetEntries(1);
-			if (!gameCnt)
+			gameList.LoadUnfiltered();
+			if (!gameList.size())
 			{
 				gprintf("  ERROR : !gameCnt");
 				exit(0);
 			}
 			//gprintf("\n\tgameCnt:%d",gameCnt);
-			for(u32 i=0;i<gameCnt;i++)
+			for(int i=0;i< gameList.size();i++)
 			{
-				header = &gameList[i];
+				header = gameList[i];
 				char tmp[8];
 				sprintf(tmp,"%c%c%c%c%c%c",header->id[0],header->id[1],header->id[2],header->id[3],header->id[4],header->id[5]);
 				if (strcmp(tmp,headlessID)==0)
@@ -404,7 +403,7 @@ int MainMenu(int menu) {
 					break;
 				}
 				//if the game was not found
-				if (i==gameCnt-1)
+				if (i==gameList.GameCount()-1)
 				{
 					gprintf("  not found (%d IDs checked)",i);
 					exit(0);
@@ -414,7 +413,7 @@ int MainMenu(int menu) {
 
 
         int ret = 0;
-        header = (mountMethod?dvdheader:&gameList[gameSelected]);
+        header = (mountMethod?dvdheader:gameList[gameSelected]);
 
         struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
 
@@ -503,9 +502,6 @@ int MainMenu(int menu) {
 
         if (ret < 0) Sys_BackToLoader();
 
-        if (gameList){
-			free(gameList);
-		}
 		if(dvdheader)
 			delete dvdheader;
 

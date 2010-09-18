@@ -73,7 +73,7 @@ int main(int argc, char *argv[])
     InitVideo();
     setlocale(LC_ALL, "en.UTF-8");
     geckoinit = InitGecko();
-    __exception_setreload(5);
+    __exception_setreload(20);
 
     printf("\n\tStarting up");
 

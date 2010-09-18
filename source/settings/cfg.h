@@ -237,8 +237,8 @@ extern "C" {
 
 	void CFG_Default(int widescreen); // -1 = non forced mode
 	void CFG_Load(void);
-	struct Game_CFG* CFG_get_game_opt(u8 *id);
-	struct Game_NUM* CFG_get_game_num(u8 *id);
+	struct Game_CFG* CFG_get_game_opt(const u8 *id);
+	struct Game_NUM* CFG_get_game_num(const u8 *id);
 	bool CFG_save_game_opt(u8 *id);
 	bool CFG_save_game_num(u8 *id);
 	bool CFG_reset_all_playcounters();
@@ -321,8 +321,8 @@ extern "C" {
 		settings_clock_max // always the last entry
 	};
 	enum {
-		all=0,
-		pcount,
+		ALL=0,
+		PLAYCOUNT,
 	};
 
 	enum {
@@ -454,7 +454,7 @@ extern "C" {
 		u8		partitions_to_install;
 		u8		fullcopy;
 		u8		beta_upgrades;
-		struct SParental parental;		
+		struct SParental parental;
 	};
 	extern struct SSettings Settings;
 

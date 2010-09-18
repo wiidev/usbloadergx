@@ -2,7 +2,6 @@
 #include <unistd.h>
 
 #include "usbloader/wbfs.h"
-#include "usbloader/getentries.h"
 #include "language/gettext.h"
 #include "libwiigui/gui.h"
 #include "libwiigui/gui_customoptionbrowser.h"

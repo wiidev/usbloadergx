@@ -7,7 +7,7 @@
 class GuiGameBrowser : public GuiElement
 {
 	public:
-		GuiGameBrowser(int w, int h, struct discHdr *l, int gameCnt, const char *themePath, const u8 *imagebg, int selected = 0, int offset = 0);
+		GuiGameBrowser(int w, int h, const char *themePath, const u8 *imagebg, int selected = 0, int offset = 0);
 		~GuiGameBrowser();
 		int FindMenuItem(int c, int d);
 		int GetClickedOption();
@@ -17,7 +17,7 @@ class GuiGameBrowser : public GuiElement
 		void Draw();
 		void Update(GuiTrigger * t);
 		int GetOffset();
-		void Reload(struct discHdr * l, int count);
+		void Reload();
 		//GuiText * optionVal[PAGESIZE];
 	protected:
 		void UpdateListEntries();
@@ -26,9 +26,6 @@ class GuiGameBrowser : public GuiElement
 		int scrollbaron;
 		int pagesize;
 		int maxTextWidth;
-
-		struct discHdr * gameList;
-		int gameCnt;
 
 		int * gameIndex;
 		GuiButton ** game;

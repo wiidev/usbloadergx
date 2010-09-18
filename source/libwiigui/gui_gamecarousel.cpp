@@ -13,6 +13,7 @@
 #include <unistd.h>
 #include "gui_image_async.h"
 #include "gui_gamecarousel.h"
+#include "usbloader/GameList.h"
 #include "../settings/cfg.h"
 #include "../main.h"
 
@@ -41,14 +42,12 @@ static GuiImageData *GameCarouselLoadCoverImage(void * Arg)
 /**
  * Constructor for the GuiGameCarousel class.
  */
-GuiGameCarousel::GuiGameCarousel(int w, int h, struct discHdr * l, int count, const char *themePath, const u8 *imagebg, int selected, int offset) :
+GuiGameCarousel::GuiGameCarousel(int w, int h, const char *themePath, const u8 *imagebg, int selected, int offset) :
 noCover(nocover_png)
 {
 	width = w;
 	height = h;
-	gameCnt = count;
-	gameList = l;
-	pagesize = (gameCnt < 11) ? gameCnt : 11;
+	pagesize = (gameList.size() < 11) ? gameList.size() : 11;
 	listOffset = 0;
 	selectable = true;
 	selectedItem = -1;
@@ -122,12 +121,12 @@ noCover(nocover_png)
 		//------------------------
 		// Index
 		//------------------------
-		gameIndex[i] = GetGameIndex(i, listOffset, gameCnt);
+		gameIndex[i] = GetGameIndex(i, listOffset, gameList.size());
 
 		//------------------------
 		// Image
 		//------------------------
-		coverImg[i]	= new(std::nothrow) GuiImageAsync(GameCarouselLoadCoverImage, &gameList[gameIndex[i]], sizeof(struct discHdr), &noCover);
+		coverImg[i]	= new(std::nothrow) GuiImageAsync(GameCarouselLoadCoverImage, gameList[gameIndex[i]], sizeof(struct discHdr), &noCover);
 		if(coverImg[i])
 			coverImg[i]->SetWidescreen(CFG.widescreen);
 
@@ -186,7 +185,7 @@ GuiGameCarousel::~GuiGameCarousel()
 void GuiGameCarousel::SetFocus(int f)
 {
 	LOCK(this);
-	if(!gameCnt) return;
+	if(!gameList.size()) return;
 
 	focus = f;
 
@@ -255,7 +254,7 @@ int GuiGameCarousel::GetSelectedOption()
 void GuiGameCarousel::Draw()
 {
 	LOCK(this);
-	if(!this->IsVisible() || !gameCnt)
+	if(!this->IsVisible() || !gameList.size())
 		return;
 
 	for(int i=0; i<pagesize; i++)
@@ -264,7 +263,7 @@ void GuiGameCarousel::Draw()
 
     gamename->Draw();
 
-	if(gameCnt > 6)
+	if(gameList.size() > 6)
 	{
 		btnRight->Draw();
 		btnLeft->Draw();
@@ -282,7 +281,7 @@ void GuiGameCarousel::Draw()
 void GuiGameCarousel::Update(GuiTrigger * t)
 {
 	LOCK(this);
-	if(state == STATE_DISABLED || !t || !gameCnt)
+	if(state == STATE_DISABLED || !t || !gameList.size())
 		return;
 
 	btnRight->Update(t);
@@ -317,7 +316,7 @@ void GuiGameCarousel::Update(GuiTrigger * t)
 		if(selectedItem>=0)
 		{
 			game[selectedItem]->SetEffect(EFFECT_SCALE, 1, 130);
-			char *gameTitle = get_title(&gameList[gameIndex[selectedItem]]);
+			char *gameTitle = get_title(gameList[gameIndex[selectedItem]]);
 			gamename->SetText(gameTitle);
 		}
 		else
@@ -326,7 +325,7 @@ void GuiGameCarousel::Update(GuiTrigger * t)
 			game[selectedItem_old]->SetEffect(EFFECT_SCALE, -1, 100);
 	}
 	// navigation
-	if(focus && gameCnt>6)
+	if(focus && gameList.size()>6)
 	{
 
 		int newspeed = 0;
@@ -386,7 +385,7 @@ void GuiGameCarousel::Update(GuiTrigger * t)
 		if(speed > 0) // rotate right
 		{
 			GuiButton *tmpButton;
-			listOffset = OFFSETLIMIT(listOffset - 1, gameCnt); // set the new listOffset
+			listOffset = OFFSETLIMIT(listOffset - 1, gameList.size()); // set the new listOffset
 			// Save right Button + TollTip and destroy right Image + Image-Data 
 			delete coverImg[pagesize-1]; coverImg[pagesize-1] = NULL;game[pagesize-1]->SetImage(NULL);
 			tmpButton	= game[pagesize-1];
@@ -400,7 +399,7 @@ void GuiGameCarousel::Update(GuiTrigger * t)
 			}
 			// set saved Button & gameIndex to right
 			gameIndex[0]		= listOffset;
-			coverImg[0]			= new GuiImageAsync(GameCarouselLoadCoverImage, &gameList[gameIndex[0]], sizeof(struct discHdr), &noCover);
+			coverImg[0]			= new GuiImageAsync(GameCarouselLoadCoverImage, gameList[gameIndex[0]], sizeof(struct discHdr), &noCover);
 			coverImg[0]			->SetWidescreen(CFG.widescreen);
 
 			game[0]				= tmpButton;
@@ -418,7 +417,7 @@ void GuiGameCarousel::Update(GuiTrigger * t)
 		else if(speed < 0) // rotate left
 		{
 			GuiButton *tmpButton;
-			listOffset = OFFSETLIMIT(listOffset + 1, gameCnt); // set the new listOffset
+			listOffset = OFFSETLIMIT(listOffset + 1, gameList.size()); // set the new listOffset
 			// Save left Button + TollTip and destroy left Image + Image-Data 
 			delete coverImg[0]; coverImg[0] = NULL;game[0]->SetImage(NULL);
 			tmpButton	= game[0];
@@ -432,8 +431,8 @@ void GuiGameCarousel::Update(GuiTrigger * t)
 			}
 			// set saved Button & gameIndex to right
 			int ii = pagesize-1;
-			gameIndex[ii]		= OFFSETLIMIT(listOffset + ii, gameCnt);
-			coverImg[ii]		= new GuiImageAsync(GameCarouselLoadCoverImage, &gameList[gameIndex[ii]], sizeof(struct discHdr), &noCover);
+			gameIndex[ii]		= OFFSETLIMIT(listOffset + ii, gameList.size());
+			coverImg[ii]		= new GuiImageAsync(GameCarouselLoadCoverImage, gameList[gameIndex[ii]], sizeof(struct discHdr), &noCover);
 			coverImg[ii]		->SetWidescreen(CFG.widescreen);
 
 			game[ii]			= tmpButton;

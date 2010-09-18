@@ -1,7 +1,7 @@
 #include "menus.h"
 #include "fatmounter.h"
 #include "usbloader/wdvd.h"
-#include "usbloader/getentries.h"
+#include "usbloader/GameList.h"
 #include "usbloader/wbfs.h"
 #include "patches/fst.h"
 #include "network/networkops.h"
@@ -50,8 +50,8 @@ int MenuDiscList() {
 
     gprintf("\nMenuDiscList()");
     //TakeScreenshot("SD:/screenshot1.png");
-    __Menu_GetEntries();
-    int offset = MIN(startat,gameCnt-1);
+    gameList.FilterList();
+    int offset = MIN((int)startat,gameList.size()-1);
     startat = offset;
     //gprintf("\n\tstartat:%d offset:%d",startat,offset);
     int datag = 0;
@@ -93,7 +93,7 @@ int MenuDiscList() {
 		WBFS_DiskSpace(&used, &freespace);
 	}
 
-    if (!gameCnt) { //if there is no list of games to display
+    if (!gameList.size()) { //if there is no list of games to display
         nolist = 1;
     }
 
@@ -211,7 +211,7 @@ int MenuDiscList() {
     usedSpaceTxt.SetPosition(THEME.hddinfo_x, THEME.hddinfo_y);
 
 	char GamesCnt[15];
-    sprintf(GamesCnt,"%s: %i",(mountMethod!=3?tr("Games"):tr("Channels")), gameCnt);
+    sprintf(GamesCnt,"%s: %i",(mountMethod!=3?tr("Games"):tr("Channels")), gameList.size());
     GuiText gamecntTxt(GamesCnt, 18, THEME.info);
 
 	GuiButton gamecntBtn(100,18);
@@ -439,9 +439,9 @@ int MenuDiscList() {
         favoriteBtn.SetAlpha(255);
     }
 	static bool show_searchwindow = false;
-	if(gameFilter && *gameFilter)
+	if(*gameList.GetCurrentFilter())
     {
-		if(show_searchwindow && gameCnt==1)
+		if(show_searchwindow && gameList.size()==1)
 			show_searchwindow = false;
 		if(!show_searchwindow)
 			searchBtn.SetEffect(EFFECT_PULSE, 10, 105);
@@ -449,11 +449,11 @@ int MenuDiscList() {
         searchBtn.SetImageOver(&searchBtnImg);
         searchBtn.SetAlpha(255);
 	}
-    if (Settings.sort==all) {
+    if (Settings.sort==ALL) {
         abcBtn.SetImage(&abcBtnImg);
         abcBtn.SetImageOver(&abcBtnImg);
         abcBtn.SetAlpha(255);
-    } else if (Settings.sort==pcount) {
+    } else if (Settings.sort==PLAYCOUNT) {
         countBtn.SetImage(&countBtnImg);
         countBtn.SetImageOver(&countBtnImg);
         countBtn.SetAlpha(255);
@@ -542,16 +542,16 @@ int MenuDiscList() {
     GuiGameGrid * gameGrid = NULL;
     GuiGameCarousel * gameCarousel = NULL;
     if (Settings.gameDisplay==list) {
-        gameBrowser = new GuiGameBrowser(THEME.gamelist_w, THEME.gamelist_h, gameList, gameCnt, CFG.theme_path, bg_options_png, startat, offset);
+        gameBrowser = new GuiGameBrowser(THEME.gamelist_w, THEME.gamelist_h, CFG.theme_path, bg_options_png, startat, offset);
         gameBrowser->SetPosition(THEME.gamelist_x, THEME.gamelist_y);
         gameBrowser->SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
     } else if (Settings.gameDisplay==grid) {
-        gameGrid = new GuiGameGrid(THEME.gamegrid_w,THEME.gamegrid_h, gameList, gameCnt, CFG.theme_path, bg_options_png, 0, 0);
+        gameGrid = new GuiGameGrid(THEME.gamegrid_w,THEME.gamegrid_h, CFG.theme_path, bg_options_png, 0, 0);
         gameGrid->SetPosition(THEME.gamegrid_x,THEME.gamegrid_y);
         gameGrid->SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
     } else if (Settings.gameDisplay==carousel) {
-        //GuiGameCarousel gameCarousel(THEME.gamecarousel_w, THEME.gamecarousel_h, gameList, gameCnt, CFG.theme_path, bg_options_png, startat, offset);
-        gameCarousel = new GuiGameCarousel(640, 400, gameList, gameCnt, CFG.theme_path, bg_options_png, startat, offset);
+        //GuiGameCarousel gameCarousel(THEME.gamecarousel_w, THEME.gamecarousel_h, gameList, gameList.size(), CFG.theme_path, bg_options_png, startat, offset);
+        gameCarousel = new GuiGameCarousel(640, 400, CFG.theme_path, bg_options_png, startat, offset);
         gameCarousel->SetPosition(THEME.gamecarousel_x,THEME.gamecarousel_y);
         gameCarousel->SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
     }
@@ -631,7 +631,7 @@ int MenuDiscList() {
 
 	GuiSearchBar *searchBar=NULL;
 	if(show_searchwindow) {
-		searchBar = new GuiSearchBar(gameFilterNextList);
+		searchBar = new GuiSearchBar(gameList.GetAvailableSearchChars());
 		if(searchBar)
 			mainWindow->Append(searchBar);
 	}
@@ -662,13 +662,13 @@ int MenuDiscList() {
         WDVD_GetCoverStatus(&covert);//for detecting if i disc has been inserted
 
         // if the idiot is showing favorites and don't have any
-        if (Settings.fave && !gameCnt) {
+        if (Settings.fave && !gameList.size()) {
             WindowPrompt(tr("No Favorites"),tr("You are choosing to display favorites and you do not have any selected."),tr("Back"));
             Settings.fave=!Settings.fave;
             if (isInserted(bootDevice)) {
                 cfg_save_global();
             }
-            __Menu_GetEntries();
+            gameList.FilterList();
             menu = MENU_DISCLIST;
             break;
         }
@@ -927,7 +927,7 @@ int MenuDiscList() {
             if (isInserted(bootDevice)) {
                 cfg_save_global();
             }
-            __Menu_GetEntries();
+            gameList.FilterList();
             menu = MENU_DISCLIST;
             break;
 
@@ -946,18 +946,18 @@ int MenuDiscList() {
 			}
 			if(show_searchwindow)
 			{
-				if(gameFilter && *gameFilter)
+				if(*gameList.GetCurrentFilter())
 				{
 					searchBtn.StopEffect();
 					searchBtn.SetEffectGrow();
 				}
-				searchBar = new GuiSearchBar(gameFilterNextList);
+				searchBar = new GuiSearchBar(gameList.GetAvailableSearchChars());
 				if(searchBar)
 					mainWindow->Append(searchBar);
 			}
 			else
 			{
-				if(gameFilter && *gameFilter)
+				if(*gameList.GetCurrentFilter())
 					searchBtn.SetEffect(EFFECT_PULSE, 10, 105);
 			}
 			searchBtn.ResetState();
@@ -967,15 +967,15 @@ int MenuDiscList() {
         else if (searchBar && (searchChar=searchBar->GetClicked())) {
 			if(searchChar > 27)
 			{
-				int len = gameFilter ? wcslen(gameFilter) : 0;
+				int len = gameList.GetCurrentFilter() ? wcslen(gameList.GetCurrentFilter()) : 0;
 				wchar_t newFilter[len+2];
-				if(gameFilter)
-					wcscpy(newFilter, gameFilter);
+				if(gameList.GetCurrentFilter())
+					wcscpy(newFilter, gameList.GetCurrentFilter());
 				newFilter[len] = searchChar;
 				newFilter[len+1] = 0;
 
 
-				__Menu_GetEntries(0, newFilter);
+				gameList.FilterList(newFilter);
 				menu = MENU_DISCLIST;
 				break;
 			}
@@ -989,7 +989,7 @@ int MenuDiscList() {
 					delete searchBar;
 					searchBar = NULL;
 				}
-				if(gameFilter && *gameFilter)
+				if(*gameList.GetCurrentFilter())
 				{
 					searchBtn.SetEffect(EFFECT_PULSE, 10, 105);
 					searchBtn.SetImage(&searchBtnImg);
@@ -1009,7 +1009,12 @@ int MenuDiscList() {
 			}
 			else if(searchChar == 8) // Backspace
 			{
-				__Menu_GetEntries(0, gameFilterPrev);
+				int len = wcslen(gameList.GetCurrentFilter());
+				wchar_t newFilter[len+1];
+				if(gameList.GetCurrentFilter())
+					wcscpy(newFilter, gameList.GetCurrentFilter());
+                newFilter[len > 0 ? len-1 : 0] = 0;
+				gameList.FilterList(newFilter);
 				menu = MENU_DISCLIST;
 				break;
 			}
@@ -1018,12 +1023,12 @@ int MenuDiscList() {
 
         else if (abcBtn.GetState() == STATE_CLICKED) {
             gprintf("\n\tabcBtn clicked");
-            if (Settings.sort != all) {
-                Settings.sort=all;
+            if (Settings.sort != ALL) {
+                Settings.sort=ALL;
                 if (isInserted(bootDevice)) {
                     cfg_save_global();
                 }
-                __Menu_GetEntries();
+                gameList.FilterList();
 
                 menu = MENU_DISCLIST;
                 break;
@@ -1033,13 +1038,13 @@ int MenuDiscList() {
 
         else if (countBtn.GetState() == STATE_CLICKED) {
             gprintf("\n\tcountBtn Clicked");
-            if (Settings.sort != pcount) {
-                Settings.sort=pcount;
+            if (Settings.sort != PLAYCOUNT) {
+                Settings.sort = PLAYCOUNT;
                 //if(isSdInserted()) {
                 if (isInserted(bootDevice)) {
                     cfg_save_global();
                 }
-                __Menu_GetEntries();
+                gameList.FilterList();
 
                 menu = MENU_DISCLIST;
                 break;
@@ -1102,10 +1107,10 @@ int MenuDiscList() {
 	else if (gameInfo.GetState() == STATE_CLICKED && mountMethod!=3) {
 		    gprintf("\n\tgameinfo Clicked");
             gameInfo.ResetState();
-			if(selectImg1>=0 && selectImg1<(s32)gameCnt) {
+			if(selectImg1>=0 && selectImg1<(s32)gameList.size()) {
                 gameSelected = selectImg1;
                 rockout();
-                struct discHdr *header = &gameList[selectImg1];
+                struct discHdr *header = gameList[selectImg1];
                 snprintf (IDfull,sizeof(IDfull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
                 choice = showGameInfo(IDfull);
                 rockout(2);
@@ -1196,10 +1201,10 @@ int MenuDiscList() {
                 selectimg = gameSelected;
 
 			char gameregion[7];
-            if ((selectimg >= 0) && (selectimg < (s32) gameCnt)) {
+            if ((selectimg >= 0) && (selectimg < (s32) gameList.size())) {
                 if (selectimg != selectedold) {
                     selectedold = selectimg;//update displayed cover, game ID, and region if the selected game changes
-                    struct discHdr *header = &gameList[selectimg];
+                    struct discHdr *header = gameList[selectimg];
                     snprintf (ID,sizeof(ID),"%c%c%c", header->id[0], header->id[1], header->id[2]);
                     snprintf (IDfull,sizeof(IDfull),"%s%c%c%c", ID, header->id[3], header->id[4], header->id[5]);
                     w.Remove(&DownloadBtn);
@@ -1282,7 +1287,7 @@ int MenuDiscList() {
 
 			if (idBtn.GetState() == STATE_CLICKED && mountMethod!=3) {
 			gprintf("\n\tidBtn Clicked");
-            struct discHdr * header = &gameList[gameBrowser->GetSelectedOption()];
+            struct discHdr * header = gameList[gameBrowser->GetSelectedOption()];
                     //enter new game ID
 					char entered[10];
                     snprintf(entered, sizeof(entered), "%s", IDfull);
@@ -1299,7 +1304,7 @@ int MenuDiscList() {
 		startat=gameBrowser->GetOffset(), offset=startat;
         }
 
-        if (((gameSelected >= 0) && (gameSelected < (s32)gameCnt))
+        if (((gameSelected >= 0) && (gameSelected < (s32)gameList.size()))
 			|| mountMethod==1
 			|| mountMethod==2) {
 			if(searchBar)
@@ -1309,8 +1314,8 @@ int MenuDiscList() {
 				ResumeGui();
 			}
 				rockout();
-				struct discHdr *header = (mountMethod==1||mountMethod==2?dvdheader:&gameList[gameSelected]);
-			//	struct discHdr *header = dvdheader:&gameList[gameSelected]);
+				struct discHdr *header = (mountMethod==1||mountMethod==2?dvdheader:gameList[gameSelected]);
+			//	struct discHdr *header = dvdheader:gameList[gameSelected]);
 			if (!mountMethod)//only get this stuff it we are booting a game from USB
 			{
 				WBFS_GameSize(header->id, &size);
@@ -1326,7 +1331,7 @@ int MenuDiscList() {
             //check if alt Dol and gct file is present
             FILE *exeFile = NULL;
             char nipple[100];
-			header = (mountMethod==1||mountMethod==2?dvdheader:&gameList[gameSelected]); //reset header
+			header = (mountMethod==1||mountMethod==2?dvdheader:gameList[gameSelected]); //reset header
             snprintf (IDfull,sizeof(IDfull),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
             struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
 
@@ -1395,7 +1400,7 @@ int MenuDiscList() {
                 returnHere = false;
                 if (Settings.wiilight != wiilight_forInstall) wiilight(1);
 				choice = GameWindowPrompt();
-                // header = &gameList[gameSelected]; //reset header
+                // header = gameList[gameSelected]; //reset header
 
                 if (choice == 1) {
                     if (alternatedol == on) {
@@ -1440,7 +1445,7 @@ int MenuDiscList() {
                     ResumeGui();
 
                     //re-evaluate header now in case they changed games while on the game prompt
-                    header = (mountMethod==1||mountMethod==2?dvdheader:&gameList[gameSelected]);
+                    header = (mountMethod==1||mountMethod==2?dvdheader:gameList[gameSelected]);
                     int settret = GameSettings(header);
 					/* unneeded for now, kept in case database gets a separate language setting
                     //menu = MENU_DISCLIST; // refresh titles (needed if the language setting has changed)
@@ -1462,7 +1467,7 @@ int MenuDiscList() {
                 else if (choice == 3 && !mountMethod) { //WBFS renaming
                     wiilight(0);
 					//re-evaluate header now in case they changed games while on the game prompt
-                    header = &gameList[gameSelected];
+                    header = gameList[gameSelected];
 
                     //enter new game title
                     char entered[60];
@@ -1471,7 +1476,8 @@ int MenuDiscList() {
                     int result = OnScreenKeyboard(entered, 60,0);
                     if (result == 1) {
                         WBFS_RenameGame(header->id, entered);
-                        __Menu_GetEntries();
+                        gameList.ReadGameList();
+                        gameList.FilterList();
                         menu = MENU_DISCLIST;
                     }
                 } else if (choice == 0) {
@@ -1514,7 +1520,7 @@ int MenuDiscList() {
 
 	// set alt dol default
 	if (menu == MENU_EXIT && altdoldefault) {
-		struct discHdr *header = (mountMethod==1||mountMethod==2?dvdheader:&gameList[gameSelected]);
+		struct discHdr *header = (mountMethod==1||mountMethod==2?dvdheader:gameList[gameSelected]);
 		struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
 		// use default only if no alt dol was selected manually
 		if (game_cfg) {
@@ -1573,29 +1579,16 @@ void DiscListWinUpdateCallback(void * e)
 	}
 }
 
-void rockout(int f) {
-
-
+void rockout(int f)
+{
     HaltGui();
-    int num=(f==2?-1:gameSelected);
 
     char imgPath[100];
-    if ((!(strcasestr(get_title(&gameList[num]),"guitar")||
-            strcasestr(get_title(&gameList[num]),"band")||
-            strcasestr(get_title(&gameList[num]),"rock")||
-            f==1))||mountMethod) {
-        for (int i = 0; i < 4; i++)
-            delete pointer[i];
-        snprintf(imgPath, sizeof(imgPath), "%splayer1_point.png", CFG.theme_path);
-        pointer[0] = new GuiImageData(imgPath, player1_point_png);
-        snprintf(imgPath, sizeof(imgPath), "%splayer2_point.png", CFG.theme_path);
-        pointer[1] = new GuiImageData(imgPath, player2_point_png);
-        snprintf(imgPath, sizeof(imgPath), "%splayer3_point.png", CFG.theme_path);
-        pointer[2] = new GuiImageData(imgPath, player3_point_png);
-        snprintf(imgPath, sizeof(imgPath), "%splayer4_point.png", CFG.theme_path);
-        pointer[3] = new GuiImageData(imgPath, player4_point_png);
-    } else {
-
+    if (gameSelected >= 0 && gameSelected < gameList.size() &&
+        (strcasestr(get_title(gameList[gameSelected]),"guitar") ||
+         strcasestr(get_title(gameList[gameSelected]),"band") ||
+         strcasestr(get_title(gameList[gameSelected]),"rock")))
+    {
         for (int i = 0; i < 4; i++)
             delete pointer[i];
         snprintf(imgPath, sizeof(imgPath), "%srplayer1_point.png", CFG.theme_path);
@@ -1606,6 +1599,20 @@ void rockout(int f) {
         pointer[2] = new GuiImageData(imgPath, rplayer3_point_png);
         snprintf(imgPath, sizeof(imgPath), "%srplayer4_point.png", CFG.theme_path);
         pointer[3] = new GuiImageData(imgPath, rplayer4_point_png);
+    }
+    else
+    {
+
+        for (int i = 0; i < 4; i++)
+            delete pointer[i];
+        snprintf(imgPath, sizeof(imgPath), "%splayer1_point.png", CFG.theme_path);
+        pointer[0] = new GuiImageData(imgPath, player1_point_png);
+        snprintf(imgPath, sizeof(imgPath), "%splayer2_point.png", CFG.theme_path);
+        pointer[1] = new GuiImageData(imgPath, player2_point_png);
+        snprintf(imgPath, sizeof(imgPath), "%splayer3_point.png", CFG.theme_path);
+        pointer[2] = new GuiImageData(imgPath, player3_point_png);
+        snprintf(imgPath, sizeof(imgPath), "%splayer4_point.png", CFG.theme_path);
+        pointer[3] = new GuiImageData(imgPath, player4_point_png);
     }
     ResumeGui();
 }

@@ -19,7 +19,7 @@
 #include "listfiles.h"
 #include "prompts/PromptWindows.h"
 #include "gameinfo.h"
-#include "usbloader/getentries.h"
+#include "usbloader/GameList.h"
 #include "../gecko.h"
 
 
@@ -28,8 +28,6 @@ extern u8 shutdown;
 extern u8 reset;
 extern struct gameXMLinfo gameinfo;
 extern struct gameXMLinfo gameinfo_reset;
-extern u32 gameCnt;
-extern struct discHdr * gameList;
 
 /*** Extern functions ***/
 extern void ResumeGui();
@@ -1043,11 +1041,11 @@ bool save_gamelist(int txt) { // save gamelist
         return false;
     }
     //make sure that all games are added to the gamelist
-    __Menu_GetEntries(1);
+    gameList.LoadUnfiltered();
 
     f32 size = 0.0;
 	f32 freespace, used;
-	unsigned int i;
+	int i;
 
 	WBFS_DiskSpace(&used, &freespace);
 
@@ -1064,8 +1062,8 @@ bool save_gamelist(int txt) { // save gamelist
 		fprintf(f, "%.2fGB %s %.2fGB %s\n\n",freespace,tr("of"),(freespace+used),tr("free"));
 		fprintf(f, "ID     Size(GB)  Name\n");
 
-		for (i = 0; i < gameCnt ; i++) {
-			struct discHdr* header = &gameList[i];
+		for (i = 0; i < gameList.size() ; i++) {
+			struct discHdr* header = gameList[i];
 			WBFS_GameSize(header->id, &size);
 			if (i<500) {
 				fprintf(f, "%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2], header->id[3], header->id[4], header->id[5]);
@@ -1078,8 +1076,8 @@ bool save_gamelist(int txt) { // save gamelist
 
 	fprintf(f, "\"ID\",\"Size(GB)\",\"Name\"\n");
 
-		for (i = 0; i < gameCnt ; i++) {
-			struct discHdr* header = &gameList[i];
+		for (i = 0; i < gameList.size() ; i++) {
+			struct discHdr* header = gameList[i];
 			WBFS_GameSize(header->id, &size);
 			if (i<500) {
 				fprintf(f, "\"%c%c%c%c%c%c\",\"%.2f\",\"%s\"\n", header->id[0], header->id[1], header->id[2], header->id[3], header->id[4], header->id[5], size,get_title(header));
@@ -1091,7 +1089,7 @@ bool save_gamelist(int txt) { // save gamelist
 	}
     fclose(f);
 
-    __Menu_GetEntries();
+    gameList.FilterList();
 	mainWindow->SetState(STATE_DEFAULT);
     return true;
 }
@@ -1139,22 +1137,23 @@ void MemInfoPrompt()
 }
 
 
-void build_XML_URL(char *XMLurl, int XMLurlsize) {
-    __Menu_GetEntries(1);
+void build_XML_URL(char *XMLurl, int XMLurlsize)
+{
+    gameList.LoadUnfiltered();
 	// NET_BUFFER_SIZE in http.c needs to be set to size of XMLurl + headerformat
     char url[3540];
     char filename[10];
     snprintf(url,sizeof(url),"http://wiitdb.com/wiitdb.zip?LANG=%s&ID=", Settings.db_language);
-    unsigned int i;
-    for (i = 0; i < gameCnt ; i++) {
-        struct discHdr* header = &gameList[i];
+    int i;
+    for (i = 0; i < gameList.size(); i++) {
+        struct discHdr* header = gameList[i];
         if (i<500) {
 			snprintf(filename,sizeof(filename),"%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],header->id[3], header->id[4], header->id[5]);
             strncat(url,filename,6);
-            if ((i!=gameCnt-1)&&(i<500))
+            if ((i!=gameList.size()-1)&&(i<500))
                 strncat(url, ",",1);
         }
     }
 	strlcpy(XMLurl,url,XMLurlsize);
-	__Menu_GetEntries();
+	gameList.FilterList();
 }

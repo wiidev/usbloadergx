@@ -4,7 +4,6 @@
 #include "menus.h"
 #include "wpad.h"
 #include "fatmounter.h"
-#include "usbloader/getentries.h"
 #include "usbloader/wbfs.h"
 
 extern int load_from_fs;

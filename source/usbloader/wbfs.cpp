@@ -11,7 +11,7 @@
 #include "usbloader/wbfs/wbfs_ntfs.h"
 
 #include "usbloader/partition_usbloader.h"
-#include "usbloader/getentries.h"
+#include "usbloader/GameList.h"
 #include "gecko.h"
 
 Wbfs *current = NULL;
@@ -38,8 +38,9 @@ wbfs_t *GetHddInfo(void) {
     return current->GetHddInfo();
 }
 
-s32 WBFS_Init(u32 device) {
-	return Wbfs::Init(device);
+s32 WBFS_Init(u32 device)
+{
+    return Wbfs::Init(device);
 }
 
 s32 WBFS_Open(void) {
@@ -188,7 +189,7 @@ bool WBFS_Close(void)
 	wbfs_part_lba = 0;
 	wbfs_fs_drive[0] = '\0';
 
-	ResetGamelist();
+	gameList.clear();
 
     return 0;
 }
@@ -216,17 +217,17 @@ s32 WBFS_CheckGame(u8 *discid) {
 
 s32 WBFS_AddGame(void) {
 	s32 retval = current->AddGame();
-	if (retval == 0) {
-		ResetGamelist();
-	}
+	if (retval == 0)
+		gameList.clear();
+
 	return retval;
 }
 
 s32 WBFS_RemoveGame(u8 *discid) {
 	s32 retval = current->RemoveGame(discid);
-	if (retval == 0) {
-		ResetGamelist();
-	}
+	if (retval == 0)
+		gameList.clear();
+
 	return retval;
 }
 
@@ -240,17 +241,17 @@ s32 WBFS_DiskSpace(f32 *used, f32 *free) {
 
 s32 WBFS_RenameGame(u8 *discid, const void *newname) {
 	s32 retval = current->RenameGame(discid, newname);
-	if (retval == 0) {
-		ResetGamelist();
-	}
+	if (retval == 0)
+		gameList.clear();
+
 	return retval;
 }
 
 s32 WBFS_ReIDGame(u8 *discid, const void *newID) {
 	s32 retval = current->ReIDGame(discid, newID);
-	if (retval == 0) {
-		ResetGamelist();
-	}
+	if (retval == 0)
+		gameList.clear();
+
 	return retval;
 }
 

@@ -1731,7 +1731,7 @@ bool cfg_load_global() {
 
 
 
-struct Game_CFG* CFG_get_game_opt(u8 *id) {
+struct Game_CFG* CFG_get_game_opt(const u8 *id) {
     int i;
     for (i=0; i<num_saved_games; i++) {
         if (memcmp(id, cfg_game[i].id, 6) == 0) {
@@ -1742,7 +1742,7 @@ struct Game_CFG* CFG_get_game_opt(u8 *id) {
 }
 
 
-struct Game_NUM* CFG_get_game_num(u8 *id) {
+struct Game_NUM* CFG_get_game_num(const u8 *id) {
     int i;
     for (i=0; i<num_saved_game_num; i++) {
         if (memcmp(id, cfg_game_num[i].id, 6) == 0) {
