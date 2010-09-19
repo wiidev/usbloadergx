@@ -7,8 +7,11 @@
 #include <stdio.h>
 #include <malloc.h>
 #include <sys/stat.h>
+#include <vector>
+#include <map>
 
 #include "wstring.hpp"
+using namespace std;
 
 #define TITLE_ID(x,y)       (((u64)(x) << 32) | (y))
 #define TITLE_UPPER(x)      ((u32)((x) >> 32))
@@ -65,10 +68,10 @@ class NandTitle
         s32 Get();
         u64 At( u32 i );
         int IndexOf( u64 tid );
-        u32 Count() { return numTitles; }
+	u32 Count() { return titleIds.size(); }
 
-        char* NameOf( u64 tid );
-        char* NameFromIndex( u32 i );
+	const char* NameOf( u64 tid );
+	const char* NameFromIndex( u32 i );
 
         u16 VersionOf( u64 tid );
         u16 VersionFromIndex( u32 i );
@@ -94,10 +97,9 @@ class NandTitle
         u64 operator[]( u32 i ) { return At( i ); }
 
     private:
-        u64* list;
-        char* nameList;
-        u32 numTitles;
-        bool GetName( u64 tid, int language, wchar_t* name );
+	std::vector<u64> titleIds;
+	std::map<u64, string> NameList;
+	bool GetName( u64 tid, int language, wchar_t* name );
         tmd* GetTMD( u64 tid );
 
 

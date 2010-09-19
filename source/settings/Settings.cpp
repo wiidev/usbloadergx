@@ -1101,7 +1101,7 @@ int MenuSettings()
 				int haveTitle = titles.FindU32( Settings.returnTo );
 				if( haveTitle >= 0 )
 				{
-				    name = titles.NameFromIndex( haveTitle );
+				    name = (char*)titles.NameFromIndex( haveTitle );
 				    if( !strlen( name ) )
 					name = NULL;
 				}

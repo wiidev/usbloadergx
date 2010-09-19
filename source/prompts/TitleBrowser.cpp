@@ -112,7 +112,7 @@ bool TitleSelector( char output[] )
 	char id[ 5 ];
 	titles.AsciiTID( tid, ( char* )&id );
 
-	char* name = titles.NameOf( tid );
+	const char* name = titles.NameOf( tid );
 	//gprintf("%016llx: %s: %s\n%p\t%p\n", tid, id, name, &id, name );
 
 	options4.SetName( i, "%s", id );
@@ -309,7 +309,7 @@ int TitleBrowser()
 	    gprintf( "shit happened3\n" );
 	    break;
 	}
-	//gprintf("[ %u] tid: %016llx\t%s\n", i, tid, titles.NameOf( tid ) );
+	gprintf("[ %u ] tid: %016llx\t%s\n", i, tid, titles.NameOf( tid ) );
 
 	if ( !titles.Exists( tid ) )
 	{
@@ -319,7 +319,7 @@ int TitleBrowser()
 	char id[ 5 ];
 	titles.AsciiTID( tid, ( char* )&id );
 
-	char* name = titles.NameOf( tid );
+	const char* name = titles.NameOf( tid );
 
 	options3.SetName( i, "%s", id );
 	options3.SetValue( i, "%s", name ? titles.NameOf( tid ) : tr( "Unknown" ) );
@@ -345,7 +345,7 @@ int TitleBrowser()
 
 	char id[ 5 ];
 	titles.AsciiTID( tid, ( char* )&id );
-	char* name = titles.NameOf( tid );
+	const char* name = titles.NameOf( tid );
 
 	options3.SetName( i, "%s", id );
 	options3.SetValue( i, "%s", name ? titles.NameOf( tid ) : tr( "Unknown" ) );

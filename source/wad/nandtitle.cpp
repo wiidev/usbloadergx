@@ -27,43 +27,24 @@ static u64 atoi_hex( const char *s ) {
 
 NandTitle::NandTitle()
 {
-    numTitles = 0;
     currentIndex = 0;
     currentType = 0;
-    list = NULL;
-    nameList = NULL;
 }
 
 NandTitle::~NandTitle()
 {
-    if ( list )
-    {
-        free( list );
-        list = NULL;
-    }
-
-    if ( nameList )
-    {
-        free( nameList );
-        nameList = NULL;
-    }
+    titleIds.clear();
+    NameList.clear();
 }
 
 s32 NandTitle::Get()
 {
     s32 ret;
+    u64 *list = NULL;
+    u32 numTitles = 0;
 
-    if ( list )
-    {
-        free( list );
-        list = NULL;
-    }
-
-    if ( nameList )
-    {
-        free( nameList );
-        nameList = NULL;
-    }
+    titleIds.clear();
+    NameList.clear();
 
     ret = ES_GetNumTitles( &numTitles );
     if ( ret < 0 )
@@ -82,13 +63,13 @@ s32 NandTitle::Get()
         return WII_EINTERNAL;
     }
 
-    nameList = ( char* )malloc( IMET_MAX_NAME_LEN * numTitles );
-    if ( !nameList )
+    for( u32 i = 0; i < numTitles; i++ )
     {
-        free( nameList );
-        return -2;
+	titleIds.push_back( list[ i ] );
     }
-    memset( nameList, 0, IMET_MAX_NAME_LEN * numTitles );
+
+    free( list );
+
 
     MagicPatches( 1 );
     int language = CONF_GetLanguage();
@@ -96,15 +77,13 @@ s32 NandTitle::Get()
 
     wchar_t name[ IMET_MAX_NAME_LEN ];
 
-    for ( u32 i = 0; i < numTitles; i++ )
+    for ( u32 i = 0; i < titleIds.size(); i++ )
     {
-        bool r = GetName( list[ i ], language, name );
+	bool r = GetName( titleIds.at( i ), language, name );
         if ( r )
         {
-            wString *wsname = new wString( name );
-            memcpy( nameList + ( IMET_MAX_NAME_LEN * i ), ( wsname->toUTF8() ).c_str(), strlen( ( wsname->toUTF8() ).c_str() ) );
-            //gprintf("adding: %s\n", (wsname->toUTF8()).c_str() );
-            delete wsname;
+	    wString wsname( name );
+	    NameList[ titleIds.at( i ) ] = wsname.toUTF8();
         }
     }
 
@@ -270,64 +249,57 @@ bool NandTitle::Exists( u64 tid )
 
 bool NandTitle::ExistsFromIndex( u32 i )
 {
-    if ( i > numTitles || i < 0 )
+    if ( i > titleIds.size() || i < 0 )
         return false;
 
-    return Exists( list[ i ] );
+    return Exists( titleIds.at( i ) );
 }
 
 u64 NandTitle::At( u32 i )
 {
-    if ( i > numTitles || i < 0 )
+    if ( i > titleIds.size() || i < 0 )
         return 0;
 
-    return list[ i ];
+    return titleIds.at( i );
 }
 
 int NandTitle::IndexOf( u64 tid )
 {
-    for ( u32 i = 0; i < numTitles; i++ )
+    for ( u32 i = 0; i < titleIds.size(); i++ )
     {
-        if ( list[ i ] == tid )
+	if ( titleIds.at( i ) == tid )
             return i;
     }
 
     return WII_EINSTALL;
 }
 
-char* NandTitle::NameOf( u64 tid )
+const char* NandTitle::NameOf( u64 tid )
 {
-    for ( u32 i = 0; i < numTitles; i++ )
-    {
-        if ( list[ i ] == tid )
-        {
-            if ( !nameList[ IMET_MAX_NAME_LEN * i ] )
-                return NULL;
+    map<u64, string>::iterator itr = NameList.find( tid );
+    if( itr != NameList.end() )
+	return itr->second.c_str();
 
-            return nameList + ( IMET_MAX_NAME_LEN * i );
-        }
-
-    }
     return NULL;
-
 }
 
-char* NandTitle::NameFromIndex( u32 i )
+const char* NandTitle::NameFromIndex( u32 i )
 {
-    if ( i > numTitles || i < 0 )
+    if ( i > titleIds.size() || i < 0 )
         return NULL;
 
-    if ( !nameList[ IMET_MAX_NAME_LEN * i ] )
-        return NULL;
+    map<u64, string>::iterator itr = NameList.find( titleIds.at( i ) );
+    if( itr != NameList.end() )
+	return itr->second.c_str();
 
-    return nameList + ( IMET_MAX_NAME_LEN * i );
+    return NULL;
 }
 
 u16 NandTitle::VersionOf( u64 tid )
 {
-    for ( u32 i = 0; i < numTitles; i++ )
+    for ( u32 i = 0; i < titleIds.size(); i++ )
     {
-        if ( list[ i ] == tid )
+	if ( titleIds.at( i ) == tid )
         {
             tmd* Tmd = GetTMD( tid );
             if ( !Tmd )
@@ -342,10 +314,10 @@ u16 NandTitle::VersionOf( u64 tid )
 
 u16 NandTitle::VersionFromIndex( u32 i )
 {
-    if ( i > numTitles || i < 0 )
+    if ( i > titleIds.size() || i < 0 )
         return 0;
 
-    tmd* Tmd = GetTMD( list[ i ] );
+    tmd* Tmd = GetTMD( titleIds.at( i ) );
     if ( !Tmd )
         return 0;
 
@@ -355,9 +327,9 @@ u16 NandTitle::VersionFromIndex( u32 i )
 u32 NandTitle::CountType( u32 type )
 {
     u32 ret = 0;
-    for ( u32 i = 0; i < numTitles; i++ )
+    for ( u32 i = 0; i < titleIds.size(); i++ )
     {
-        if ( TITLE_UPPER( list[ i ] ) == type )
+	if ( TITLE_UPPER( titleIds.at( i ) ) == type )
         {
             ret++;
         }
@@ -378,19 +350,19 @@ u64 NandTitle::Next()
     u64 ret = 0;
     //gprintf("Next( %08x, %u )\n", currentType, currentIndex );
     u32 i;
-    for ( i = currentIndex; i < numTitles; i++ )
+    for ( i = currentIndex; i < titleIds.size(); i++ )
     {
         if ( currentType )
         {
-            if ( currentType == TITLE_UPPER( list[ i ] ) )
+	    if ( currentType == TITLE_UPPER( titleIds.at( i ) ) )
             {
-                ret = list[ i ];
+		ret = titleIds.at( i );
                 break;
             }
         }
         else
         {
-            ret = list[ i ];
+	    ret = titleIds.at( i );
             break;
         }
     }
@@ -417,13 +389,13 @@ void NandTitle::AsciiTID( u64 tid, char* out )
 
 void NandTitle::AsciiFromIndex( u32 i, char* out )
 {
-    if ( i > numTitles || i < 0 )
+    if ( i > titleIds.size() || i < 0 )
     {
         out[ 0 ] = 0;
         return;
     }
 
-    AsciiTID( list[ i ], out );
+    AsciiTID( titleIds.at( i ), out );
 }
 
 s32 NandTitle::GetTicketViews( u64 tid, tikview **outbuf, u32 *outlen )
@@ -471,9 +443,9 @@ int NandTitle::FindU64( const char *s )
 int NandTitle::FindU32( const char *s )
 {
     u64 tid = atoi_hex( s );
-    for ( u32 i = 0; i < numTitles; i++ )
+    for ( u32 i = 0; i < titleIds.size(); i++ )
     {
-	if ( TITLE_LOWER( list[ i ] ) == TITLE_LOWER( tid ) )
+	if ( TITLE_LOWER( titleIds.at( i ) ) == TITLE_LOWER( tid ) )
 	    return i;
     }
     return WII_EINSTALL;
