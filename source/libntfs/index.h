@@ -31,7 +31,7 @@
  *  ... code requiring gcc 2.8 or later ...
  *  #endif
  *  Note - they won't work for gcc1 or glibc1, since the _MINOR macros
- *  were not defined then.
+ *  were not defined then. 
  */
 
 #ifndef __GNUC_PREREQ
@@ -61,31 +61,31 @@
 
 #define  VCN_INDEX_ROOT_PARENT  ((VCN)-2)
 
-#define  MAX_PARENT_VCN     32
+#define  MAX_PARENT_VCN		32
 
-typedef int ( *COLLATE )( ntfs_volume *vol, const void *data1, int len1,
-                          const void *data2, int len2 );
+typedef int (*COLLATE)(ntfs_volume *vol, const void *data1, int len1,
+					 const void *data2, int len2);
 
 /**
  * struct ntfs_index_context -
- * @ni:         inode containing the @entry described by this context
- * @name:       name of the index described by this context
- * @name_len:       length of the index name
- * @entry:      index entry (points into @ir or @ia)
- * @data:       index entry data (points into @entry)
- * @data_len:       length in bytes of @data
- * @is_in_root:     TRUE if @entry is in @ir or FALSE if it is in @ia
- * @ir:         index root if @is_in_root or NULL otherwise
- * @actx:       attribute search context if in root or NULL otherwise
- * @ia:         index block if @is_in_root is FALSE or NULL otherwise
- * @ia_na:      opened INDEX_ALLOCATION attribute
- * @parent_pos:     parent entries' positions in the index block
- * @parent_vcn:     entry's parent node or VCN_INDEX_ROOT_PARENT
+ * @ni:			inode containing the @entry described by this context
+ * @name:		name of the index described by this context
+ * @name_len:		length of the index name
+ * @entry:		index entry (points into @ir or @ia)
+ * @data:		index entry data (points into @entry)
+ * @data_len:		length in bytes of @data
+ * @is_in_root:		TRUE if @entry is in @ir or FALSE if it is in @ia
+ * @ir:			index root if @is_in_root or NULL otherwise
+ * @actx:		attribute search context if in root or NULL otherwise
+ * @ia:			index block if @is_in_root is FALSE or NULL otherwise
+ * @ia_na:		opened INDEX_ALLOCATION attribute
+ * @parent_pos:		parent entries' positions in the index block
+ * @parent_vcn:		entry's parent node or VCN_INDEX_ROOT_PARENT
  * @new_vcn:            new VCN if we need to create a new index block
- * @median:     move to the parent if splitting index blocks
- * @ib_dirty:       TRUE if index block was changed
- * @block_size:     index block size
- * @vcn_size_bits:  VCN size bits for this index block
+ * @median:		move to the parent if splitting index blocks
+ * @ib_dirty:		TRUE if index block was changed
+ * @block_size:		index block size
+ * @vcn_size_bits:	VCN size bits for this index block
  *
  * @ni is the inode this context belongs to.
  *
@@ -112,57 +112,56 @@ typedef int ( *COLLATE )( ntfs_volume *vol, const void *data1, int len1,
  * the call to ntfs_index_ctx_put() to ensure that the changes are written
  * to disk.
  */
-typedef struct
-{
-    ntfs_inode *ni;
-    ntfschar *name;
-    u32 name_len;
-    INDEX_ENTRY *entry;
-    void *data;
-    u16 data_len;
-    COLLATE collate;
-    BOOL is_in_root;
-    INDEX_ROOT *ir;
-    ntfs_attr_search_ctx *actx;
-    INDEX_BLOCK *ib;
-    ntfs_attr *ia_na;
-    int parent_pos[MAX_PARENT_VCN];  /* parent entries' positions */
-    VCN parent_vcn[MAX_PARENT_VCN]; /* entry's parent nodes */
-    int pindex;      /* maximum it's the number of the parent nodes  */
-    BOOL ib_dirty;
-    u32 block_size;
-    u8 vcn_size_bits;
+typedef struct {
+	ntfs_inode *ni;
+	ntfschar *name;
+	u32 name_len;
+	INDEX_ENTRY *entry;
+	void *data;
+	u16 data_len;
+	COLLATE collate;
+	BOOL is_in_root;
+	INDEX_ROOT *ir;
+	ntfs_attr_search_ctx *actx;
+	INDEX_BLOCK *ib;
+	ntfs_attr *ia_na;
+	int parent_pos[MAX_PARENT_VCN];  /* parent entries' positions */
+	VCN parent_vcn[MAX_PARENT_VCN]; /* entry's parent nodes */
+	int pindex;	     /* maximum it's the number of the parent nodes  */
+	BOOL ib_dirty;
+	u32 block_size;
+	u8 vcn_size_bits;
 } ntfs_index_context;
 
-extern ntfs_index_context *ntfs_index_ctx_get( ntfs_inode *ni,
-        ntfschar *name, u32 name_len );
-extern void ntfs_index_ctx_put( ntfs_index_context *ictx );
-extern void ntfs_index_ctx_reinit( ntfs_index_context *ictx );
+extern ntfs_index_context *ntfs_index_ctx_get(ntfs_inode *ni,
+						ntfschar *name, u32 name_len);
+extern void ntfs_index_ctx_put(ntfs_index_context *ictx);
+extern void ntfs_index_ctx_reinit(ntfs_index_context *ictx);
 
-extern int ntfs_index_lookup( const void *key, const int key_len,
-                              ntfs_index_context *ictx ) __attribute_warn_unused_result__;
+extern int ntfs_index_lookup(const void *key, const int key_len,
+		ntfs_index_context *ictx) __attribute_warn_unused_result__;
 
-extern INDEX_ENTRY *ntfs_index_next( INDEX_ENTRY *ie,
-                                     ntfs_index_context *ictx );
+extern INDEX_ENTRY *ntfs_index_next(INDEX_ENTRY *ie,
+		ntfs_index_context *ictx);
 
-extern int ntfs_index_add_filename( ntfs_inode *ni, FILE_NAME_ATTR *fn,
-                                    MFT_REF mref );
-extern int ntfs_index_remove( ntfs_inode *dir_ni, ntfs_inode *ni,
-                              const void *key, const int keylen );
+extern int ntfs_index_add_filename(ntfs_inode *ni, FILE_NAME_ATTR *fn,
+		MFT_REF mref);
+extern int ntfs_index_remove(ntfs_inode *dir_ni, ntfs_inode *ni,
+		const void *key, const int keylen);
 
-extern INDEX_ROOT *ntfs_index_root_get( ntfs_inode *ni, ATTR_RECORD *attr );
+extern INDEX_ROOT *ntfs_index_root_get(ntfs_inode *ni, ATTR_RECORD *attr);
 
-extern VCN ntfs_ie_get_vcn( INDEX_ENTRY *ie );
+extern VCN ntfs_ie_get_vcn(INDEX_ENTRY *ie);
 
-extern void ntfs_index_entry_mark_dirty( ntfs_index_context *ictx );
+extern void ntfs_index_entry_mark_dirty(ntfs_index_context *ictx);
 
-extern char *ntfs_ie_filename_get( INDEX_ENTRY *ie );
-extern void ntfs_ie_filename_dump( INDEX_ENTRY *ie );
-extern void ntfs_ih_filename_dump( INDEX_HEADER *ih );
+extern char *ntfs_ie_filename_get(INDEX_ENTRY *ie);
+extern void ntfs_ie_filename_dump(INDEX_ENTRY *ie);
+extern void ntfs_ih_filename_dump(INDEX_HEADER *ih);
 
 /* the following was added by JPA for use in security.c */
-extern int ntfs_ie_add( ntfs_index_context *icx, INDEX_ENTRY *ie );
-extern int ntfs_index_rm( ntfs_index_context *icx );
+extern int ntfs_ie_add(ntfs_index_context *icx, INDEX_ENTRY *ie);
+extern int ntfs_index_rm(ntfs_index_context *icx);
 
 #endif /* _NTFS_INDEX_H */
 

@@ -96,10 +96,13 @@ int GameList::ReadGameList()
     return LoadUnfiltered();
 }
 
-static bool WCharSortCallback( const wchar_t char1, const wchar_t char2 )
+static bool WCharSortCallback(const wchar_t char1, const wchar_t char2)
 {
-    if( char2 == 0 )return true;
-    if( char1 == 0 )return false;
+    if(char2 == 0)
+        return true;
+    if(char1 == 0)
+        return false;
+
     return char2 > char1;
 }
 
@@ -243,41 +246,41 @@ void GameList::SortList()
 
 }
 
-bool GameList::NameSortCallback( const struct discHdr *a, const struct discHdr *b )
+bool GameList::NameSortCallback(const struct discHdr *a, const struct discHdr *b)
 {
-    return ( strcasecmp( get_title( ( struct discHdr * ) a ), get_title( ( struct discHdr * ) b ) ) < 0 );
+    return (strcasecmp(get_title((struct discHdr *) a), get_title((struct discHdr *) b)) < 0);
 }
 
-bool GameList::PlaycountSortCallback( const struct discHdr *a, const struct discHdr *b )
+bool GameList::PlaycountSortCallback(const struct discHdr *a, const struct discHdr *b)
 {
     struct Game_NUM* game_num1 = CFG_get_game_num( a->id );
     struct Game_NUM* game_num2 = CFG_get_game_num( b->id );
     int count1 = 0, count2 = 0;
 
-    if ( game_num1 )
+    if (game_num1)
         count1 = game_num1->count;
-    if ( game_num2 )
+    if (game_num2)
         count2 = game_num2->count;
 
-    if ( count1 == count2 )
-        return NameSortCallback( a, b );
+    if (count1 == count2)
+        return NameSortCallback(a, b);
 
-    return ( count1 > count2 );
+    return (count1 > count2);
 }
 
-bool GameList::FavoriteSortCallback( const struct discHdr *a, const struct discHdr *b )
+bool GameList::FavoriteSortCallback(const struct discHdr *a, const struct discHdr *b)
 {
     struct Game_NUM* game_num1 = CFG_get_game_num( a->id );
     struct Game_NUM* game_num2 = CFG_get_game_num( b->id );
     int fav1 = 0, fav2 = 0;
 
-    if ( game_num1 )
+    if (game_num1)
         fav1 = game_num1->favorite;
-    if ( game_num2 )
+    if (game_num2)
         fav2 = game_num2->favorite;
 
-    if ( fav1 == fav2 );
-    return NameSortCallback( a, b );
+    if (fav1 == fav2)
+        return NameSortCallback(a, b);
 
-    return ( fav1 > fav2 );
+    return (fav1 > fav2);
 }

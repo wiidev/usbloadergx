@@ -33,24 +33,24 @@
 /*
  * Our mailing list. Use this define to prevent typos in email address.
  */
-#define NTFS_DEV_LIST   "ntfs-3g-devel@lists.sf.net"
+#define NTFS_DEV_LIST	"ntfs-3g-devel@lists.sf.net"
 
 /*
  * Generic macro to convert pointers to values for comparison purposes.
  */
 #ifndef p2n
-#define p2n(p)      ((ptrdiff_t)((ptrdiff_t*)(p)))
+#define p2n(p)		((ptrdiff_t)((ptrdiff_t*)(p)))
 #endif
 
 /*
  * The classic min and max macros.
  */
 #ifndef min
-#define min(a,b)    ((a) <= (b) ? (a) : (b))
+#define min(a,b)	((a) <= (b) ? (a) : (b))
 #endif
 
 #ifndef max
-#define max(a,b)    ((a) >= (b) ? (a) : (b))
+#define max(a,b)	((a) >= (b) ? (a) : (b))
 #endif
 
 /*
@@ -63,22 +63,22 @@
 /*
  * Simple bit operation macros. NOTE: These are NOT atomic.
  */
-#define test_bit(bit, var)        ((var) & (1 << (bit)))
-#define set_bit(bit, var)         (var) |= 1 << (bit)
-#define clear_bit(bit, var)       (var) &= ~(1 << (bit))
+#define test_bit(bit, var)	      ((var) & (1 << (bit)))
+#define set_bit(bit, var)	      (var) |= 1 << (bit)
+#define clear_bit(bit, var)	      (var) &= ~(1 << (bit))
 
-#define test_and_set_bit(bit, var)          \
-({                          \
-    const BOOL old_state = test_bit(bit, var);  \
-    set_bit(bit, var);              \
-    old_state;                  \
+#define test_and_set_bit(bit, var)			\
+({							\
+	const BOOL old_state = test_bit(bit, var);	\
+	set_bit(bit, var);				\
+	old_state;					\
 })
 
-#define test_and_clear_bit(bit, var)            \
-({                          \
-    const BOOL old_state = test_bit(bit, var);  \
-    clear_bit(bit, var);                \
-    old_state;                  \
+#define test_and_clear_bit(bit, var)			\
+({							\
+	const BOOL old_state = test_bit(bit, var);	\
+	clear_bit(bit, var);				\
+	old_state;					\
 })
 
 #endif /* defined _NTFS_SUPPORT_H */

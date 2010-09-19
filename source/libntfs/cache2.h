@@ -46,23 +46,21 @@
 #include <ogc/disc_io.h>
 #include <gccore.h>
 
-typedef struct
-{
-    sec_t           sector;
-    unsigned int    count;
-    u64             last_access;
-    bool            dirty;
-    u8*             cache;
+typedef struct {
+	sec_t           sector;
+	unsigned int    count;
+	u64             last_access;
+	bool            dirty;
+	u8*             cache;
 } NTFS_CACHE_ENTRY;
 
-typedef struct
-{
-    const DISC_INTERFACE* disc;
-    sec_t                 endOfPartition;
-    unsigned int          numberOfPages;
-    unsigned int          sectorsPerPage;
-    sec_t                 sectorSize;
-    NTFS_CACHE_ENTRY*     cacheEntries;
+typedef struct {
+	const DISC_INTERFACE* disc;
+	sec_t		          endOfPartition;
+	unsigned int          numberOfPages;
+	unsigned int          sectorsPerPage;
+	sec_t                 sectorSize;
+	NTFS_CACHE_ENTRY*     cacheEntries;
 } NTFS_CACHE;
 
 /*
@@ -101,37 +99,37 @@ Precondition: offset + size <= BYTES_PER_READ
 /*
 Read several sectors from the NTFS_CACHE
 */
-bool _NTFS_cache_readSectors ( NTFS_CACHE* NTFS_CACHE, sec_t sector, sec_t numSectors, void* buffer );
+bool _NTFS_cache_readSectors (NTFS_CACHE* NTFS_CACHE, sec_t sector, sec_t numSectors, void* buffer);
 
 /*
 Read a full sector from the NTFS_CACHE
 */
 //static inline bool _NTFS_cache_readSector (NTFS_CACHE* NTFS_CACHE, void* buffer, sec_t sector) {
-//  return _NTFS_cache_readPartialSector (NTFS_CACHE, buffer, sector, 0, BYTES_PER_READ);
+//	return _NTFS_cache_readPartialSector (NTFS_CACHE, buffer, sector, 0, BYTES_PER_READ);
 //}
 
 /*
 Write a full sector to the NTFS_CACHE
 */
 //static inline bool _NTFS_cache_writeSector (NTFS_CACHE* NTFS_CACHE, const void* buffer, sec_t sector) {
-//  return _NTFS_cache_writePartialSector (NTFS_CACHE, buffer, sector, 0, BYTES_PER_READ);
+//	return _NTFS_cache_writePartialSector (NTFS_CACHE, buffer, sector, 0, BYTES_PER_READ);
 //}
 
-bool _NTFS_cache_writeSectors ( NTFS_CACHE* NTFS_CACHE, sec_t sector, sec_t numSectors, const void* buffer );
+bool _NTFS_cache_writeSectors (NTFS_CACHE* NTFS_CACHE, sec_t sector, sec_t numSectors, const void* buffer);
 
 /*
 Write any dirty sectors back to disc and clear out the contents of the NTFS_CACHE
 */
-bool _NTFS_cache_flush ( NTFS_CACHE* NTFS_CACHE );
+bool _NTFS_cache_flush (NTFS_CACHE* NTFS_CACHE);
 
 /*
 Clear out the contents of the NTFS_CACHE without writing any dirty sectors first
 */
-void _NTFS_cache_invalidate ( NTFS_CACHE* NTFS_CACHE );
+void _NTFS_cache_invalidate (NTFS_CACHE* NTFS_CACHE);
 
-NTFS_CACHE* _NTFS_cache_constructor ( unsigned int numberOfPages, unsigned int sectorsPerPage, const DISC_INTERFACE* discInterface, sec_t endOfPartition, sec_t sectorSize );
+NTFS_CACHE* _NTFS_cache_constructor (unsigned int numberOfPages, unsigned int sectorsPerPage, const DISC_INTERFACE* discInterface, sec_t endOfPartition, sec_t sectorSize);
 
-void _NTFS_cache_destructor ( NTFS_CACHE* NTFS_CACHE );
+void _NTFS_cache_destructor (NTFS_CACHE* NTFS_CACHE);
 
 #endif // _CACHE_H
 

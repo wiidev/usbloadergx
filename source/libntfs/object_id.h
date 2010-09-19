@@ -24,12 +24,12 @@
 #ifndef OBJECT_ID_H
 #define OBJECT_ID_H
 
-int ntfs_get_ntfs_object_id( ntfs_inode *ni, char *value, size_t size );
+int ntfs_get_ntfs_object_id(ntfs_inode *ni, char *value, size_t size);
 
-int ntfs_set_ntfs_object_id( ntfs_inode *ni, const char *value,
-                             size_t size, int flags );
-int ntfs_remove_ntfs_object_id( ntfs_inode *ni );
+int ntfs_set_ntfs_object_id(ntfs_inode *ni, const char *value,
+			size_t size, int flags);
+int ntfs_remove_ntfs_object_id(ntfs_inode *ni);
 
-int ntfs_delete_object_id_index( ntfs_inode *ni );
+int ntfs_delete_object_id_index(ntfs_inode *ni);
 
 #endif /* OBJECT_ID_H */

@@ -36,38 +36,38 @@
 #endif
 
 #ifndef HAVE_FFS
-extern int ffs( int i );
+extern int ffs(int i);
 #endif /* HAVE_FFS */
 
 #ifndef HAVE_DAEMON
-extern int daemon( int nochdir, int noclose );
+extern int daemon(int nochdir, int noclose);
 #endif /* HAVE_DAEMON */
 
 #ifndef HAVE_STRSEP
-extern char *strsep( char **stringp, const char *delim );
+extern char *strsep(char **stringp, const char *delim);
 #endif /* HAVE_STRSEP */
 
 #ifdef WINDOWS
 
-#define HAVE_STDIO_H        /* mimic config.h */
+#define HAVE_STDIO_H		/* mimic config.h */
 #define HAVE_STDARG_H
 
-#define atoll           _atoi64
-#define fdatasync       commit
-#define __inline__      inline
-#define __attribute__(X)    /*nothing*/
+#define atoll			_atoi64
+#define fdatasync		commit
+#define __inline__		inline
+#define __attribute__(X)	/*nothing*/
 
 #else /* !defined WINDOWS */
 
 #ifndef O_BINARY
-#define O_BINARY        0       /* unix is binary by default */
+#define O_BINARY		0		/* unix is binary by default */
 #endif
 
 #ifdef GEKKO
 
 #include "mem_allocate.h"
 
-#define XATTR_CREATE 1
+#define XATTR_CREATE 1 
 #define XATTR_REPLACE 2
 
 #define MINORBITS       20
@@ -75,7 +75,7 @@ extern char *strsep( char **stringp, const char *delim );
 
 #define major(dev)      ((unsigned int) ((dev) >> MINORBITS))
 #define minor(dev)      ((unsigned int) ((dev) & MINORMASK))
-#define mkdev(ma,mi)    (((ma) << MINORBITS) | (mi))
+#define mkdev(ma,mi)    (((ma) << MINORBITS) | (mi)) 
 #define random          rand
 
 #endif /* defined GEKKO */

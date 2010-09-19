@@ -41,29 +41,28 @@
 #else /* __CYGWIN32__ */
 
 #ifndef HDIO_GETGEO
-#   define HDIO_GETGEO  0x301
+#	define HDIO_GETGEO	0x301
 /**
  * struct hd_geometry -
  */
-struct hd_geometry
-{
-    unsigned char heads;
-    unsigned char sectors;
-    unsigned short cylinders;
-    unsigned long start;
+struct hd_geometry {
+	unsigned char heads;
+	unsigned char sectors;
+	unsigned short cylinders;
+	unsigned long start;
 };
 #endif
 #ifndef BLKGETSIZE
-#   define BLKGETSIZE   0x1260
+#	define BLKGETSIZE	0x1260
 #endif
 #ifndef BLKSSZGET
-#   define BLKSSZGET    0x1268
+#	define BLKSSZGET	0x1268
 #endif
 #ifndef BLKGETSIZE64
-#   define BLKGETSIZE64 0x80041272
+#	define BLKGETSIZE64	0x80041272
 #endif
 #ifndef BLKBSZSET
-#   define BLKBSZSET    0x40041271
+#	define BLKBSZSET	0x40041271
 #endif
 
 /* On Cygwin; use Win32 low level device operations. */

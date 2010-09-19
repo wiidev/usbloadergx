@@ -1,6 +1,6 @@
 /*
- * bootsect.h - Exports for bootsector record handling.
- *      Originated from the Linux-NTFS project.
+ * bootsect.h - Exports for bootsector record handling. 
+ *		Originated from the Linux-NTFS project.
  *
  * Copyright (c) 2000-2002 Anton Altaparmakov
  * Copyright (c) 2006 Szabolcs Szakacsits
@@ -30,13 +30,13 @@
 
 /**
  * ntfs_boot_sector_is_ntfs - check a boot sector for describing an ntfs volume
- * @b:      buffer containing the boot sector
+ * @b:		buffer containing the boot sector
  *
  * This function checks the boot sector in @b for describing a valid ntfs
  * volume. Return TRUE if @b is a valid NTFS boot sector or FALSE otherwise.
  */
-extern BOOL ntfs_boot_sector_is_ntfs( NTFS_BOOT_SECTOR *b );
-extern int ntfs_boot_sector_parse( ntfs_volume *vol, const NTFS_BOOT_SECTOR *bs );
+extern BOOL ntfs_boot_sector_is_ntfs(NTFS_BOOT_SECTOR *b);
+extern int ntfs_boot_sector_parse(ntfs_volume *vol, const NTFS_BOOT_SECTOR *bs);
 
 #endif /* defined _NTFS_BOOTSECT_H */
 

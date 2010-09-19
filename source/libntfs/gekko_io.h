@@ -33,8 +33,7 @@
 /**
  * gekko_fd - Gekko device driver descriptor
  */
-typedef struct _gekko_fd
-{
+typedef struct _gekko_fd {
     const DISC_INTERFACE* interface;        /* Device disc interface */
     sec_t startSector;                      /* LBA of partition start */
     sec_t hiddenSectors;                    /* LBA offset to true partition start (as described by boot sector) */

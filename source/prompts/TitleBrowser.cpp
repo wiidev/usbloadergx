@@ -56,7 +56,7 @@ bool TitleSelector( char output[] )
 {
     gprintf("TitleSelector()\n");
 
-    u32 num_titles;
+    s32 num_titles;
     s32 r = -1;
     bool ret = false;
     u64 *titleList = NULL;
@@ -93,7 +93,7 @@ bool TitleSelector( char output[] )
     customOptionList options4( num_titles + 1 );
     //write the titles on the option browser
 
-    u32 i = 0;
+    s32 i = 0;
     titles.SetType( 0x10001 );
     while ( i < num_titles )
     {

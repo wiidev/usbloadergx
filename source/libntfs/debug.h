@@ -31,17 +31,17 @@
 struct _runlist_element;
 
 #ifdef DEBUG
-extern void ntfs_debug_runlist_dump( const struct _runlist_element *rl );
+extern void ntfs_debug_runlist_dump(const struct _runlist_element *rl);
 #else
-static __inline__ void ntfs_debug_runlist_dump( const struct _runlist_element *rl __attribute__( ( unused ) ) ) {}
+static __inline__ void ntfs_debug_runlist_dump(const struct _runlist_element *rl __attribute__((unused))) {}
 #endif
 
-#define NTFS_BUG(msg)                           \
-{                                   \
-    int ___i;                           \
-    ntfs_log_critical("Bug in %s(): %s\n", __FUNCTION__, msg);  \
-    ntfs_log_debug("Forcing segmentation fault!");          \
-    ___i = ((int*)NULL)[1];                     \
+#define NTFS_BUG(msg)							\
+{									\
+	int ___i;							\
+	ntfs_log_critical("Bug in %s(): %s\n", __FUNCTION__, msg);	\
+	ntfs_log_debug("Forcing segmentation fault!");			\
+	___i = ((int*)NULL)[1];						\
 }
 
 #endif /* defined _NTFS_DEBUG_H */

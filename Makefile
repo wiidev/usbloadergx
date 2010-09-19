@@ -41,15 +41,9 @@ SOURCES		:=	source \
 				source/libfat \
 				source/memory \
 				source/libntfs \
-				source/usbloader/wbfs \
-#				source/libhfs+ \
-#				source/libhfs+/hfscommon/BTree \
-#				source/libhfs+/hfscommon/Catalog \
-#				source/libhfs+/hfscommon/Misc \
-#				source/libhfs+/hfscommon/Unicode
+				source/usbloader/wbfs
 DATA		:=	data
-INCLUDES	:=	source 
-#source/libhfs+/hfscommon/headers
+INCLUDES	:=	source
 
 #---------------------------------------------------------------------------------
 # options for code generation
