@@ -49,12 +49,10 @@ static u32 startat = 0;
 int MenuDiscList()
 {
 
-    gprintf( "\nMenuDiscList()" );
-    //TakeScreenshot("SD:/screenshot1.png");
+    gprintf( "MenuDiscList()\n" );
     gameList.FilterList();
     int offset = MIN( ( int )startat, gameList.size() - 1 );
     startat = offset;
-    //gprintf("\n\tstartat:%d offset:%d",startat,offset);
     int datag = 0;
     int datagB = 0;
     int dataed = -1;
@@ -299,7 +297,6 @@ int MenuDiscList()
     favoriteBtnTT.SetAlpha( THEME.tooltipAlpha );
     GuiImage favoriteBtnImg( &imgfavIcon );
     favoriteBtnImg.SetWidescreen( CFG.widescreen );
-//    GuiImage favoriteBtnImg_g(favoriteBtnImg);favoriteBtnImg_g.SetGrayscale();
     GuiImage favoriteBtnImg_g( &imgfavIcon_gray );
     if ( favoriteBtnImg_g.GetImage() == NULL ) { favoriteBtnImg_g = favoriteBtnImg; favoriteBtnImg_g.SetGrayscale();}
     favoriteBtnImg_g.SetWidescreen( CFG.widescreen );
@@ -312,7 +309,6 @@ int MenuDiscList()
     searchBtnTT.SetAlpha( THEME.tooltipAlpha );
     GuiImage searchBtnImg( &imgsearchIcon );
     searchBtnImg.SetWidescreen( CFG.widescreen );
-//    GuiImage searchBtnImg_g(searchBtnImg); searchBtnImg_g.SetGrayscale();
     GuiImage searchBtnImg_g( &imgsearchIcon_gray );
     if ( searchBtnImg_g.GetImage() == NULL ) { searchBtnImg_g = searchBtnImg; searchBtnImg_g.SetGrayscale();}
     searchBtnImg_g.SetWidescreen( CFG.widescreen );
@@ -325,7 +321,6 @@ int MenuDiscList()
     abcBtnTT.SetAlpha( THEME.tooltipAlpha );
     GuiImage abcBtnImg( Settings.fave ? &imgrankIcon : &imgabcIcon );
     abcBtnImg.SetWidescreen( CFG.widescreen );
-//    GuiImage abcBtnImg_g(abcBtnImg); abcBtnImg_g.SetGrayscale();
     GuiImage abcBtnImg_g( Settings.fave ? &imgrankIcon_gray : &imgabcIcon_gray );
     if ( abcBtnImg_g.GetImage() == NULL ) { abcBtnImg_g = abcBtnImg; abcBtnImg_g.SetGrayscale();}
     abcBtnImg_g.SetWidescreen( CFG.widescreen );
@@ -338,7 +333,6 @@ int MenuDiscList()
     countBtnTT.SetAlpha( THEME.tooltipAlpha );
     GuiImage countBtnImg( &imgplayCountIcon );
     countBtnImg.SetWidescreen( CFG.widescreen );
-//    GuiImage countBtnImg_g(countBtnImg); countBtnImg_g.SetGrayscale();
     GuiImage countBtnImg_g( &imgplayCountIcon_gray );
     if ( countBtnImg_g.GetImage() == NULL ) { countBtnImg_g = countBtnImg; countBtnImg_g.SetGrayscale();}
     countBtnImg_g.SetWidescreen( CFG.widescreen );
@@ -351,7 +345,6 @@ int MenuDiscList()
     listBtnTT.SetAlpha( THEME.tooltipAlpha );
     GuiImage listBtnImg( &imgarrangeList );
     listBtnImg.SetWidescreen( CFG.widescreen );
-//    GuiImage listBtnImg_g(listBtnImg); listBtnImg_g.SetGrayscale();
     GuiImage listBtnImg_g( &imgarrangeList_gray );
     if ( listBtnImg_g.GetImage() == NULL ) { listBtnImg_g = listBtnImg; listBtnImg_g.SetGrayscale();}
     listBtnImg_g.SetWidescreen( CFG.widescreen );
@@ -364,7 +357,6 @@ int MenuDiscList()
     gridBtnTT.SetAlpha( THEME.tooltipAlpha );
     GuiImage gridBtnImg( &imgarrangeGrid );
     gridBtnImg.SetWidescreen( CFG.widescreen );
-//    GuiImage gridBtnImg_g(gridBtnImg); gridBtnImg_g.SetGrayscale();
     GuiImage gridBtnImg_g( &imgarrangeGrid_gray );
     if ( gridBtnImg_g.GetImage() == NULL ) { gridBtnImg_g = gridBtnImg; gridBtnImg_g.SetGrayscale();}
     gridBtnImg_g.SetWidescreen( CFG.widescreen );
@@ -377,7 +369,6 @@ int MenuDiscList()
     carouselBtnTT.SetAlpha( THEME.tooltipAlpha );
     GuiImage carouselBtnImg( &imgarrangeCarousel );
     carouselBtnImg.SetWidescreen( CFG.widescreen );
-//  GuiImage carouselBtnImg_g(carouselBtnImg); carouselBtnImg_g.SetGrayscale();
     GuiImage carouselBtnImg_g( &imgarrangeCarousel_gray );
     if ( carouselBtnImg_g.GetImage() == NULL ) { carouselBtnImg_g = carouselBtnImg; carouselBtnImg_g.SetGrayscale();}
     carouselBtnImg_g.SetWidescreen( CFG.widescreen );
@@ -426,8 +417,7 @@ int MenuDiscList()
     dvdBtnTT.SetAlpha( THEME.tooltipAlpha );
     GuiImage dvdBtnImg( &imgdvd );
     dvdBtnImg.SetWidescreen( CFG.widescreen );
-    GuiImage dvdBtnImg_g( dvdBtnImg ); //dvdBtnImg_g.SetGrayscale();
-//  GuiImage carouselBtnImg_g(&imgarrangeCarousel_gray);
+    GuiImage dvdBtnImg_g( dvdBtnImg );
     dvdBtnImg_g.SetWidescreen( CFG.widescreen );
     GuiButton dvdBtn( &dvdBtnImg_g, &dvdBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_dvd_x, THEME.gamelist_dvd_y, &trigA, &btnSoundOver, btnClick2, 1, &dvdBtnTT, 15, 52, 1, 3 );
     dvdBtn.SetAlpha( 180 );
@@ -682,7 +672,7 @@ int MenuDiscList()
 
         if ( idiotFlag == 1 )
         {
-            gprintf( "\n\tIdiot flag" );
+	    gprintf( "\tIdiot flag\n" );
             char idiotBuffer[200];
             snprintf( idiotBuffer, sizeof( idiotBuffer ), "%s (%s). %s", tr( "You have attempted to load a bad image" ),
                       idiotChar, tr( "Most likely it has dimensions that are not evenly divisible by 4." ) );
@@ -717,7 +707,7 @@ int MenuDiscList()
         }
 
         //CLOCK
-        time_t rawtime = time( 0 );                                                             //this fixes code dump caused by the clock
+	time_t rawtime = time( 0 );
         if ( ( ( Settings.hddinfo == hr12 ) || ( Settings.hddinfo == hr24 ) ) && rawtime != lastrawtime )
         {
             lastrawtime = rawtime;
@@ -761,7 +751,7 @@ int MenuDiscList()
 
         if ( updateavailable == true )
         {
-            gprintf( "\n\tUpdate Available" );
+	    gprintf( "\tUpdate Available\n" );
             HaltGui();
             GuiWindow ww( 640, 480 );
             w.SetState( STATE_DISABLED );
@@ -778,7 +768,7 @@ int MenuDiscList()
         {
 
 
-            gprintf( "\n\tpoweroffBtn clicked" );
+	    gprintf( "\tpoweroffBtn clicked\n" );
             choice = WindowPrompt( tr( "How to Shutdown?" ), 0, tr( "Full Shutdown" ), tr( "Shutdown to Idle" ), tr( "Cancel" ) );
             if ( choice == 2 )
             {
@@ -808,7 +798,7 @@ int MenuDiscList()
         }
         else if ( gamecntBtn.GetState() == STATE_CLICKED && mountMethod != 3 )
         {
-            gprintf( "\n\tgameCntBtn clicked" );
+	    gprintf( "\tgameCntBtn clicked\n" );
             gamecntBtn.ResetState();
             char linebuf[150];
             snprintf( linebuf, sizeof( linebuf ), "%s %sGameList ?", tr( "Save Game List to" ), Settings.update_path );
@@ -826,16 +816,13 @@ int MenuDiscList()
         }
         else if ( screenShotBtn.GetState() == STATE_CLICKED )
         {
-            gprintf( "\n\tscreenShotBtn clicked" );
+	    gprintf( "\tscreenShotBtn clicked\n" );
             screenShotBtn.ResetState();
-            ScreenShot();
-            gprintf( "...It's easy, mmmmmmKay" );
-
-
+	    ScreenShot();
         }
         else if ( homeBtn.GetState() == STATE_CLICKED )
         {
-            gprintf( "\n\thomeBtn clicked" );
+	    gprintf( "\thomeBtn clicked\n" );
             bgMusic->Pause();
             choice = WindowExitPrompt();
             bgMusic->Resume();
@@ -868,7 +855,7 @@ int MenuDiscList()
         }
         else if ( wiiBtn.GetState() == STATE_CLICKED )
         {
-            gprintf( "\n\twiiBtn clicked" );
+	    gprintf( "\twiiBtn clicked\n" );
 
             dataed++;
             wiiBtn.ResetState();
@@ -912,7 +899,7 @@ int MenuDiscList()
         }
         else if ( ( covert & 0x2 ) && ( covert != covertOld ) )
         {
-            gprintf( "\n\tNew Disc Detected" );
+	    gprintf( "\tNew Disc Detected\n" );
             choice = WindowPrompt( tr( "New Disc Detected" ), 0, tr( "Install" ), tr( "Mount DVD drive" ), tr( "Cancel" ) );
             if ( choice == 1 )
             {
@@ -942,7 +929,7 @@ int MenuDiscList()
 
         else if ( sdcardBtn.GetState() == STATE_CLICKED )
         {
-            gprintf( "\n\tsdCardBtn Clicked" );
+	    gprintf( "\tsdCardBtn Clicked\n" );
             SDCard_deInit();
             SDCard_Init();
             if ( Settings.gameDisplay == list )
@@ -973,7 +960,7 @@ int MenuDiscList()
 
         else if ( DownloadBtn.GetState() == STATE_CLICKED )
         {
-            gprintf( "\n\tDownloadBtn Clicked" );
+	    gprintf( "\tDownloadBtn Clicked\n" );
             if ( isInserted( bootDevice ) )
             {
                 choice = WindowPrompt( tr( "Cover Download" ), 0, tr( "Normal Covers" ), tr( "3D Covers" ), tr( "Disc Images" ), tr( "Back" ) ); // ask for download choice
@@ -1033,7 +1020,7 @@ int MenuDiscList()
 
         else if ( settingsBtn.GetState() == STATE_CLICKED )
         {
-            gprintf( "\n\tsettingsBtn Clicked" );
+	    gprintf( "\tsettingsBtn Clicked\n" );
             if ( Settings.gameDisplay == list )
             {
                 startat = gameBrowser->GetSelectedOption();
@@ -1056,7 +1043,7 @@ int MenuDiscList()
 
         else if ( favoriteBtn.GetState() == STATE_CLICKED )
         {
-            gprintf( "\n\tfavoriteBtn Clicked" );
+	    gprintf( "\tfavoriteBtn Clicked\n" );
             Settings.fave = !Settings.fave;
             if ( isInserted( bootDevice ) )
             {
@@ -1071,7 +1058,7 @@ int MenuDiscList()
         else if ( searchBtn.GetState() == STATE_CLICKED && mountMethod != 3 )
         {
 
-            gprintf( "\n\tsearchBtn Clicked" );
+	    gprintf( "\tsearchBtn Clicked\n" );
             show_searchwindow = !show_searchwindow;
             HaltGui();
             if ( searchBar )
@@ -1082,12 +1069,12 @@ int MenuDiscList()
             }
             if ( show_searchwindow )
             {
-                if ( *gameList.GetCurrentFilter() )
+		if ( *gameList.GetCurrentFilter() )
                 {
                     searchBtn.StopEffect();
                     searchBtn.SetEffectGrow();
                 }
-                searchBar = new GuiSearchBar( gameList.GetAvailableSearchChars() );
+		searchBar = new GuiSearchBar( gameList.GetAvailableSearchChars() );
                 if ( searchBar )
                     mainWindow->Append( searchBar );
             }
@@ -1160,7 +1147,7 @@ int MenuDiscList()
 
         else if ( abcBtn.GetState() == STATE_CLICKED )
         {
-            gprintf( "\n\tabcBtn clicked" );
+	    gprintf( "\tabcBtn clicked\n" );
             if ( Settings.sort != ALL )
             {
                 Settings.sort = ALL;
@@ -1178,11 +1165,10 @@ int MenuDiscList()
 
         else if ( countBtn.GetState() == STATE_CLICKED )
         {
-            gprintf( "\n\tcountBtn Clicked" );
+	    gprintf( "\tcountBtn Clicked\n" );
             if ( Settings.sort != PLAYCOUNT )
             {
-                Settings.sort = PLAYCOUNT;
-                //if(isSdInserted()) {
+		Settings.sort = PLAYCOUNT;
                 if ( isInserted( bootDevice ) )
                 {
                     cfg_save_global();
@@ -1198,7 +1184,7 @@ int MenuDiscList()
 
         else if ( listBtn.GetState() == STATE_CLICKED )
         {
-            gprintf( "\n\tlistBtn Clicked" );
+	    gprintf( "\tlistBtn Clicked\n" );
             if ( Settings.gameDisplay != list )
             {
                 Settings.gameDisplay = list;
@@ -1216,10 +1202,9 @@ int MenuDiscList()
             }
         }
 
-
         else if ( gridBtn.GetState() == STATE_CLICKED )
         {
-            gprintf( "\n\tgridBtn Clicked" );
+	    gprintf( "\tgridBtn Clicked\n" );
             if ( Settings.gameDisplay != grid )
             {
 
@@ -1240,7 +1225,7 @@ int MenuDiscList()
 
         else if ( carouselBtn.GetState() == STATE_CLICKED )
         {
-            gprintf( "\n\tcarouselBtn Clicked" );
+	    gprintf( "\tcarouselBtn Clicked\n" );
             if ( Settings.gameDisplay != carousel )
             {
                 Settings.gameDisplay = carousel;
@@ -1257,15 +1242,17 @@ int MenuDiscList()
                 carouselBtn.ResetState();
             }
         }
-        else if ( homebrewBtn.GetState() == STATE_CLICKED )
+
+	else if ( homebrewBtn.GetState() == STATE_CLICKED )
         {
-            gprintf( "\n\thomebrewBtn Clicked" );
+	    gprintf( "\thomebrewBtn Clicked\n" );
             menu = MENU_HOMEBREWBROWSE;
             break;
         }
-        else if ( gameInfo.GetState() == STATE_CLICKED && mountMethod != 3 )
+
+	else if ( gameInfo.GetState() == STATE_CLICKED && mountMethod != 3 )
         {
-            gprintf( "\n\tgameinfo Clicked" );
+	    gprintf( "\tgameinfo Clicked\n" );
             gameInfo.ResetState();
             if ( selectImg1 >= 0 && selectImg1 < ( s32 )gameList.size() )
             {
@@ -1286,7 +1273,7 @@ int MenuDiscList()
         }
         else if ( lockBtn.GetState() == STATE_CLICKED )
         {
-            gprintf( "\n\tlockBtn clicked" );
+	    gprintf( "\tlockBtn clicked\n" );
             lockBtn.ResetState();
             if ( !canUnlock )
             {
@@ -1338,7 +1325,7 @@ int MenuDiscList()
         }
         else if ( dvdBtn.GetState() == STATE_CLICKED )
         {
-            gprintf( "\n\tdvdBtn Clicked" );
+	    gprintf( "\tdvdBtn Clicked\n" );
             mountMethodOLD = ( mountMethod == 3 ? mountMethod : 0 );
 
             mountMethod = DiscMount( dvdheader );
@@ -1567,7 +1554,7 @@ int MenuDiscList()
                     exeFile = fopen ( nipple , "rb" );
                     if ( exeFile == NULL )
                     {
-                        gprintf( "\n\ttried to load missing gct." );
+			gprintf( "\ttried to load missing gct.\n" );
                         sprintf( nipple, "%s %s", nipple, tr( "does not exist!  Loading game without cheats." ) );
                         WindowPrompt( tr( "Error" ), nipple, NULL, NULL, NULL, NULL, 170 );
                     }
@@ -1640,7 +1627,7 @@ int MenuDiscList()
                         exeFile = fopen ( nipple , "rb" );
                         if ( exeFile == NULL )
                         {
-                            gprintf( "\n\ttried to load gct file that isn't there" );
+			    gprintf( "\ttried to load gct file that isn't there\n" );
                             sprintf( nipple, "%s %s", nipple, tr( "does not exist!  Loading game without cheats." ) );
                             WindowPrompt( tr( "Error" ), nipple, NULL, NULL, NULL, NULL, 170 );
                         }

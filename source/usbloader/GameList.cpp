@@ -98,6 +98,8 @@ int GameList::ReadGameList()
 
 static bool WCharSortCallback( const wchar_t char1, const wchar_t char2 )
 {
+    if( char2 == 0 )return true;
+    if( char1 == 0 )return false;
     return char2 > char1;
 }
 

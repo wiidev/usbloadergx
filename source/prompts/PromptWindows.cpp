@@ -231,7 +231,7 @@ int OnScreenKeyboard( char * var, u32 maxlen, int min )
  ***************************************************************************/
 void WindowCredits()
 {
-    gprintf( "\nWindowCredits()" );
+    gprintf( "WindowCredits()\n" );
 
     int angle = 0;
     GuiSound * creditsMusic = NULL;
@@ -465,7 +465,7 @@ void WindowCredits()
  ***************************************************************************/
 int WindowScreensaver()
 {
-    gprintf( "\nWindowScreenSaver()" );
+    gprintf( "WindowScreenSaver()\n" );
     int i = 0;
     bool exit = false;
     char imgPath[100];//uncomment for themable screensaver
@@ -532,7 +532,7 @@ int WindowPrompt( const char *title, const char *msg, const char *btn1Label,
 {
     int choice = -1;
     int count = wait;
-    gprintf( "\nWindowPrompt(%s, %s, %s, %s, %s, %s, %i)", title, msg, btn1Label, btn2Label, btn3Label, btn4Label, wait );
+    gprintf( "WindowPrompt( %s, %s, %s, %s, %s, %s, %i ): ", title, msg, btn1Label, btn2Label, btn3Label, btn4Label, wait );
 
 
     GuiWindow promptWindow( 472, 320 );
@@ -799,11 +799,9 @@ int WindowPrompt( const char *title, const char *msg, const char *btn1Label,
             choice = 0;
         }
         else if ( screenShotBtn.GetState() == STATE_CLICKED )
-        {
-            gprintf( "\n\tscreenShotBtn clicked" );
+	{
             screenShotBtn.ResetState();
-            ScreenShot();
-            gprintf( "...It's easy, mmmmmmKay" );
+	    ScreenShot();
         }
         if ( count > 0 )count--;
         if ( count == 0 ) choice = 1;
@@ -815,7 +813,7 @@ int WindowPrompt( const char *title, const char *msg, const char *btn1Label,
     mainWindow->Remove( &promptWindow );
     mainWindow->SetState( STATE_DEFAULT );
     ResumeGui();
-    gprintf( " = %i", choice );
+    gprintf( " %i\n", choice );
 
     return choice;
 }
@@ -832,7 +830,7 @@ int WindowPrompt( const char *title, const char *msg, const char *btn1Label,
  ***************************************************************************/
 int WindowExitPrompt()
 {
-    gprintf( "\nWindowExitPrompt()" );
+    gprintf( "WindowExitPrompt()\n" );
 
     GuiSound * homein = NULL;
     homein = new GuiSound( menuin_ogg, menuin_ogg_size, Settings.sfxvolume );
@@ -1187,7 +1185,7 @@ int GameWindowPrompt()
 
     GuiSound * gameSound = NULL;
 
-    gprintf( "\nGameWindowPrompt()" );
+    gprintf( "GameWindowPrompt()\n" );
     GuiWindow promptWindow( 472, 320 );
     promptWindow.SetAlignment( ALIGN_CENTRE, ALIGN_MIDDLE );
     promptWindow.SetPosition( 0, -10 );
@@ -1439,7 +1437,7 @@ int GameWindowPrompt()
         snprintf ( ID, sizeof( ID ), "%c%c%c", header->id[0], header->id[1], header->id[2] );
         snprintf ( IDFull, sizeof( IDFull ), "%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2], header->id[3], header->id[4], header->id[5] );
 
-        gprintf( "\n\t%s", IDFull );
+	gprintf( "\t%s\n", IDFull );
         if ( diskCover )
             delete diskCover;
 
@@ -1674,11 +1672,9 @@ int GameWindowPrompt()
                 btnFavorite5.ResetState();
             }
             else if ( screenShotBtn.GetState() == STATE_CLICKED )
-            {
-                gprintf( "\n\tscreenShotBtn clicked" );
+	    {
                 screenShotBtn.ResetState();
-                ScreenShot();
-                gprintf( "...It's easy, mmmmmmKay" );
+		ScreenShot();
             }
             // this next part is long because nobody could agree on what the left/right buttons should do
             else if ( ( btnRight.GetState() == STATE_CLICKED ) && ( Settings.xflip == no ) )  //next game
@@ -1803,7 +1799,7 @@ int GameWindowPrompt()
     }
     bgMusic->SetVolume( Settings.volume );
 
-    gprintf( "\n\treturn %i", choice );
+    gprintf( "\tret: %i\n", choice );
     return choice;
 }
 

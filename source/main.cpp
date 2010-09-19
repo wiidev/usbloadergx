@@ -72,9 +72,10 @@ u8 dbvideo = 0;
 int main( int argc, char *argv[] )
 {
     MEM2_init( 48 );
-    InitVideo();
     setlocale( LC_ALL, "en.UTF-8" );
     geckoinit = InitGecko();
+    InitVideo();	//TODO: some sort of magic is done in the CFG_Load()  ( maybe stff with CONF_ ).  if videoinit is after cfg load, my full screen is used.
+			//with videoinit before CFG load, i get black box around my picture
     __exception_setreload( 20 );
 
     printf( "\tStarting up\n" );
@@ -126,17 +127,17 @@ int main( int argc, char *argv[] )
     // Let's load the cIOS now
     if ( LoadAppCIOS() < 0 )
     {
-        printf( "\n\tERROR: No cIOS could be loaded. Exiting...." );
+	printf( "\tERROR: No cIOS could be loaded. Exiting....\n" );
         sleep( 5 );
         Sys_BackToLoader();
     }
 
-    printf( "\n\tLoaded cIOS = %u (Rev %u)", IOS_GetVersion(), IOS_GetRevision() );
+    printf( "\tLoaded cIOS = %u (Rev %u)\n", IOS_GetVersion(), IOS_GetRevision() );
 
-    printf( "\n\tWaiting for USB: " );
+    printf( "\tWaiting for USB:\n" );
     if ( MountWBFS() < 0 )
     {
-        printf( "\nERROR: No WBFS drive mounted." );
+	printf( "ERROR: No WBFS drive mounted.\n" );
         sleep( 5 );
         exit( 0 );
     }
@@ -150,6 +151,7 @@ int main( int argc, char *argv[] )
     }
 
     //! Init the rest of the System
+
     Sys_Init();
     SetupPads();
     InitAudio();
