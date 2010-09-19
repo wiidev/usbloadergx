@@ -5,6 +5,7 @@
 #include "wpad.h"
 #include "fatmounter.h"
 #include "usbloader/wbfs.h"
+#include "xml/xml.h"
 
 extern int load_from_fs;
 extern char game_partition[6];
@@ -36,11 +37,11 @@ int MenuCheck()
         WPAD_Shutdown();
         if ( ret2 == 1 )
         {
-            Settings.cios = ios249;
+            Settings.cios = 249;
         }
         else if ( ret2 == 2 )
         {
-            Settings.cios = ios222;
+            Settings.cios = 222;
         }
         else
         {
@@ -128,7 +129,7 @@ int MenuCheck()
 
         if ( ( ret2 >= 0 || load_from_fs != PART_FS_WBFS ) && isInserted( bootDevice ) )
         {
-            cfg_save_global();
+            Settings.Save();
             break;
         }
         sleep( 1 );

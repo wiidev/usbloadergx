@@ -5,15 +5,10 @@
 #include <mxml.h>
 
 
-#ifdef __cplusplus
-extern "C"
-{
-#endif
-
 // open database, close database, load info for a game
-    bool OpenXMLDatabase( char* xmlfilepath, char* argdblang, bool argJPtoEN, bool openfile, bool loadtitles, bool keepopen );
-    void CloseXMLDatabase();
-    bool LoadGameInfoFromXML( char* gameid, char* langcode );
+bool OpenXMLDatabase( char* xmlfilepath, char* argdblang, bool argJPtoEN, bool openfile, bool loadtitles, bool keepopen );
+void CloseXMLDatabase();
+bool LoadGameInfoFromXML( char* gameid, char* langcode );
 
 #define XML_ELEMMAX 15
 #define XML_SYNOPSISLEN 4000
@@ -61,18 +56,14 @@ extern "C"
     bool OpenXMLFile( char* filename );
     void LoadTitlesFromXML( char *langcode, bool forcejptoen );
     void GetPublisherFromGameid( char *idtxt, char *dest, int destsize );
-    char *ConvertLangTextToCode( char *langtext );
-    void ConvertRating( char *ratingvalue, char *fromrating, char *torating, char *destvalue, int destsize );
+    const char *ConvertLangTextToCode( char *langtext );
+    void ConvertRating( char *ratingvalue, char *fromrating, const char *torating, char *destvalue, int destsize );
     void PrintGameInfo( bool showfullinfo );
     char *MemInfo();
-    void GetTextFromNode( mxml_node_t *currentnode, mxml_node_t *topnode, char *nodename,
-                          char *attributename, char *value, int descend, char *dest, int destsize );
+    void GetTextFromNode( mxml_node_t *currentnode, mxml_node_t *topnode, const char *nodename,
+                          const char *attributename, char *value, int descend, char *dest, int destsize );
     int GetRatingForGame( char *gameid );
     char * get_nodetext( mxml_node_t *node, char *buffer, int buflen );
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif
 

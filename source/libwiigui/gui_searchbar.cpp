@@ -3,7 +3,7 @@
 
 #include "../wpad.h"
 #include "../main.h"
-#include "../settings/cfg.h"
+#include "../settings/CSettings.h"
 #include "../usbloader/GameList.h"
 
 extern GuiWindow * mainWindow;
@@ -69,18 +69,18 @@ sndClick( button_click_pcm, button_click_pcm_size, Settings.sfxvolume )
     text.SetText( gameList.GetCurrentFilter() );
     text.SetPosition( 10, 15 );
     text.SetAlignment( ALIGN_LEFT, ALIGN_TOP );
-    text.SetWidescreen( CFG.widescreen );
+    text.SetWidescreen( Settings.widescreen );
     text.SetMaxWidth( width - ( 10 + 2*42 + 10 ), SCROLL_HORIZONTAL );
     this->Append( &text );
 
-    snprintf( imgPath, sizeof( imgPath ), "%skeyboard_backspace_over.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%skeyboard_backspace_over.png", Settings.theme_path );
     imgBacspaceBtn = new GuiImageData( imgPath, keyboard_backspace_over_png );
     BacspaceBtnImg_Over = new GuiImage( imgBacspaceBtn );
     BacspaceBtnImg = new GuiImage( BacspaceBtnImg_Over ); BacspaceBtnImg->SetGrayscale();
     BacspaceBtn = new GuiButton( BacspaceBtnImg, BacspaceBtnImg_Over, ALIGN_RIGHT, ALIGN_TOP, -52, 10, &trig, &sndOver, &sndClick, 1 );
     this->Append( BacspaceBtn );
 
-    snprintf( imgPath, sizeof( imgPath ), "%skeyboard_clear_over.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%skeyboard_clear_over.png", Settings.theme_path );
     imgClearBtn = new GuiImageData( imgPath, keyboard_clear_over_png );
     ClearBtnImg_Over = new GuiImage( imgClearBtn );
     ClearBtnImg = new GuiImage( ClearBtnImg_Over ); ClearBtnImg->SetGrayscale();

@@ -3,6 +3,10 @@
 
 #include <gccore.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct
 {
     u32 offset;
@@ -15,5 +19,9 @@ void do_wip_code( u8 * dst, u32 len );
 bool set_wip_list( WIP_Code * list, int size );
 void wip_reset_counter();
 void free_wip();
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif //__WIP_H__

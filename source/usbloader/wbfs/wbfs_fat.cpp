@@ -11,7 +11,7 @@
 #include <sys/statvfs.h>
 #include <ctype.h>
 
-#include "settings/cfg.h"
+#include "settings/CSettings.h"
 #include "usbloader/disc.h"
 #include "fatmounter.h"
 #include "wbfs_fat.h"

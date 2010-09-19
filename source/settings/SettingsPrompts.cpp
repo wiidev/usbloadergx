@@ -7,7 +7,7 @@
 #include "prompts/ProgressWindow.h"
 #include "libwiigui/gui.h"
 #include "libwiigui/gui_customoptionbrowser.h"
-#include "settings/cfg.h"
+#include "settings/CSettings.h"
 #include "network/URL_List.h"
 #include "listfiles.h"
 #include "main.h"
@@ -100,9 +100,9 @@ int MenuLanguageSelect()
 
     char imgPath[100];
 
-    snprintf( imgPath, sizeof( imgPath ), "%sbutton_dialogue_box.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sbutton_dialogue_box.png", Settings.theme_path );
     GuiImageData btnOutline( imgPath, button_dialogue_box_png );
-    snprintf( imgPath, sizeof( imgPath ), "%ssettings_background.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%ssettings_background.png", Settings.theme_path );
     GuiImageData settingsbg( imgPath, settings_background_png );
 
     GuiTrigger trigA;
@@ -143,8 +143,8 @@ int MenuLanguageSelect()
     GuiImage backBtnImg( &btnOutline );
     if ( Settings.wsprompt == yes )
     {
-        backBtnTxt.SetWidescreen( CFG.widescreen );
-        backBtnImg.SetWidescreen( CFG.widescreen );
+        backBtnTxt.SetWidescreen( Settings.widescreen );
+        backBtnImg.SetWidescreen( Settings.widescreen );
     }
     GuiButton backBtn( btnOutline.GetWidth(), btnOutline.GetHeight() );
     backBtn.SetAlignment( ALIGN_CENTRE, ALIGN_TOP );
@@ -162,8 +162,8 @@ int MenuLanguageSelect()
     GuiImage defaultBtnImg( &btnOutline );
     if ( Settings.wsprompt == yes )
     {
-        defaultBtnTxt.SetWidescreen( CFG.widescreen );
-        defaultBtnImg.SetWidescreen( CFG.widescreen );
+        defaultBtnTxt.SetWidescreen( Settings.widescreen );
+        defaultBtnImg.SetWidescreen( Settings.widescreen );
     }
     GuiButton defaultBtn( btnOutline.GetWidth(), btnOutline.GetHeight() );
     defaultBtn.SetAlignment( ALIGN_CENTRE, ALIGN_TOP );
@@ -180,8 +180,8 @@ int MenuLanguageSelect()
     GuiImage updateBtnImg( &btnOutline );
     if ( Settings.wsprompt == yes )
     {
-        updateBtnTxt.SetWidescreen( CFG.widescreen );
-        updateBtnImg.SetWidescreen( CFG.widescreen );
+        updateBtnTxt.SetWidescreen( Settings.widescreen );
+        updateBtnImg.SetWidescreen( Settings.widescreen );
     }
     GuiButton updateBtn( btnOutline.GetWidth(), btnOutline.GetHeight() );
     updateBtn.SetAlignment( ALIGN_CENTRE, ALIGN_TOP );
@@ -215,7 +215,7 @@ int MenuLanguageSelect()
         scrollon = 1;
     }
 
-    GuiCustomOptionBrowser optionBrowser4( 396, 280, &options2, CFG.theme_path, "bg_options_settings.png", bg_options_settings_png, scrollon, 10 );
+    GuiCustomOptionBrowser optionBrowser4( 396, 280, &options2, Settings.theme_path, "bg_options_settings.png", bg_options_settings_png, scrollon, 10 );
     optionBrowser4.SetPosition( 0, 90 );
     optionBrowser4.SetAlignment( ALIGN_CENTRE, ALIGN_TOP );
 
@@ -254,11 +254,11 @@ int MenuLanguageSelect()
             choice = WindowPrompt( tr( "Loading standard language." ), 0, tr( "OK" ), tr( "Cancel" ) );
             if ( choice == 1 )
             {
-                sprintf( Settings.language_path, "notset" );
-                cfg_save_global();
+                strcpy( Settings.language_path, "" );
+                Settings.Save();
                 gettextCleanUp();
                 HaltGui();
-                CFG_Load();
+                Settings.Load();
                 ResumeGui();
                 returnhere = 2;
             }
@@ -346,7 +346,7 @@ int MenuLanguageSelect()
                 WindowPrompt( tr( "Languagepath changed." ), 0, tr( "OK" ) );
                 if ( isInserted( bootDevice ) )
                 {
-                    cfg_save_global();
+                    Settings.Save();
                     returnhere = 1;
                     break;
                 }
@@ -372,7 +372,7 @@ int MenuLanguageSelect()
                 if ( isInserted( bootDevice ) )
                 {
                     snprintf( Settings.language_path, sizeof( Settings.language_path ), "%s%s", Settings.languagefiles_path, GetFileName( ret ) );
-                    cfg_save_global();
+                    Settings.Save();
                     if ( !checkfile( Settings.language_path ) )
                     {
                         sprintf( Settings.language_path, tr( "not set" ) );
@@ -380,7 +380,7 @@ int MenuLanguageSelect()
                     }
                     gettextCleanUp();
                     HaltGui();
-                    CFG_Load();
+                    Settings.Load();
                     ResumeGui();
                     returnhere = 2;
                     break;

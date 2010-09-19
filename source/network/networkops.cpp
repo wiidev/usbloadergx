@@ -13,7 +13,7 @@
 
 #include "prompts/PromptWindows.h"
 #include "language/gettext.h"
-#include "settings/cfg.h"
+#include "settings/CSettings.h"
 #include "main.h"
 #include "http.h"
 #include "svnrev.h"

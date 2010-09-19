@@ -56,13 +56,13 @@ int MenuFormat()
     // because destroy GuiSound must wait while sound playing is finished, we use a global sound
     if ( !btnClick2 ) btnClick2 = new GuiSound( button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume );
     //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    snprintf( imgPath, sizeof( imgPath ), "%swiimote_poweroff.png", CFG.theme_path );
+snprintf( imgPath, sizeof( imgPath ), "%swiimote_poweroff.png", Settings.theme_path );
     GuiImageData btnpwroff( imgPath, wiimote_poweroff_png );
-    snprintf( imgPath, sizeof( imgPath ), "%swiimote_poweroff_over.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%swiimote_poweroff_over.png", Settings.theme_path );
     GuiImageData btnpwroffOver( imgPath, wiimote_poweroff_over_png );
-    snprintf( imgPath, sizeof( imgPath ), "%smenu_button.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%smenu_button.png", Settings.theme_path );
     GuiImageData btnhome( imgPath, menu_button_png );
-    snprintf( imgPath, sizeof( imgPath ), "%smenu_button_over.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%smenu_button_over.png", Settings.theme_path );
     GuiImageData btnhomeOver( imgPath, menu_button_over_png );
     GuiImageData battery( battery_png );
     GuiImageData batteryBar( battery_bar_png );
@@ -77,17 +77,17 @@ int MenuFormat()
 
     GuiImage poweroffBtnImg( &btnpwroff );
     GuiImage poweroffBtnImgOver( &btnpwroffOver );
-    poweroffBtnImg.SetWidescreen( CFG.widescreen );
-    poweroffBtnImgOver.SetWidescreen( CFG.widescreen );
+    poweroffBtnImg.SetWidescreen( Settings.widescreen );
+    poweroffBtnImgOver.SetWidescreen( Settings.widescreen );
     GuiButton poweroffBtn( &poweroffBtnImg, &poweroffBtnImgOver, 0, 3, THEME.power_x, THEME.power_y, &trigA, &btnSoundOver, btnClick2, 1 );
     GuiImage exitBtnImg( &btnhome );
     GuiImage exitBtnImgOver( &btnhomeOver );
-    exitBtnImg.SetWidescreen( CFG.widescreen );
-    exitBtnImgOver.SetWidescreen( CFG.widescreen );
+    exitBtnImg.SetWidescreen( Settings.widescreen );
+    exitBtnImgOver.SetWidescreen( Settings.widescreen );
     GuiButton exitBtn( &exitBtnImg, &exitBtnImgOver, 0, 3, THEME.home_x, THEME.home_y, &trigA, &btnSoundOver, btnClick2, 1 );
     exitBtn.SetTrigger( &trigHome );
 
-    GuiCustomOptionBrowser optionBrowser( 396, 280, &options, CFG.theme_path, "bg_options_settings.png", bg_options_settings_png, 0, 10 );
+    GuiCustomOptionBrowser optionBrowser( 396, 280, &options, Settings.theme_path, "bg_options_settings.png", bg_options_settings_png, 0, 10 );
     optionBrowser.SetPosition( 0, 40 );
     optionBrowser.SetAlignment( ALIGN_CENTRE, ALIGN_TOP );
 
@@ -123,7 +123,7 @@ int MenuFormat()
                         menu = MENU_DISCLIST;
 
                         Settings.partition = ret;
-                        if ( isInserted( bootDevice ) )cfg_save_global();
+                        Settings.Save();
                     }
                     else
                     {

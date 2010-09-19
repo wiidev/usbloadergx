@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "cfg.h"
+#include "CSettings.h"
 #include "newtitles.h"
 
 #define NEW_SECONDS 24 * 60 * 60

@@ -34,9 +34,9 @@ int CheatMenu( const char * gameID )
     //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
     char imgPath[100];
-    snprintf( imgPath, sizeof( imgPath ), "%sbutton_dialogue_box.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sbutton_dialogue_box.png", Settings.theme_path );
     GuiImageData btnOutline( imgPath, button_dialogue_box_png );
-    snprintf( imgPath, sizeof( imgPath ), "%ssettings_background.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%ssettings_background.png", Settings.theme_path );
     GuiImageData settingsbg( imgPath, settings_background_png );
     GuiImage settingsbackground( &settingsbg );
 
@@ -84,7 +84,7 @@ int CheatMenu( const char * gameID )
         case 1:
             int cntcheats = c.getCnt();
             customOptionList cheatslst( cntcheats );
-            GuiCustomOptionBrowser chtBrowser( 400, 280, &cheatslst, CFG.theme_path, "bg_options_settings.png", bg_options_settings_png, 1, 90 );
+            GuiCustomOptionBrowser chtBrowser( 400, 280, &cheatslst, Settings.theme_path, "bg_options_settings.png", bg_options_settings_png, 1, 90 );
             chtBrowser.SetPosition( 0, 90 );
             chtBrowser.SetAlignment( ALIGN_CENTRE, ALIGN_TOP );
             chtBrowser.SetClickable( true );

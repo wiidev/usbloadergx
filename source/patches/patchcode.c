@@ -28,11 +28,14 @@
 #include "patchcode.h"
 #include "settings/cfg.h"
 #include "listfiles.h"
+#include "fst.h"
 
 //#include "sd.h"
 //#include "fwrite_patch.h"
 //#include "fwrite_patch_slota.h"
 //#include "main.h"
+
+extern const char * CheatFilepath;
 
 extern void patchhook( u32 address, u32 len );
 extern void patchhook2( u32 address, u32 len );
@@ -225,12 +228,15 @@ static const u32 newpatch002[3] =
 bool dogamehooks( void *addr, u32 len )
 //---------------------------------------------------------------------------------
 {
+    if(!CheatFilepath)
+        return false;
+
     //this is temporary since the screen freezes without a file loaded
     char filepath[150];
     char GameId[10];
     memcpy( GameId, ( u8 * ) 0x80000000, 6 );
     GameId[6] = 0;
-    sprintf( filepath, "%s%s.gct", Settings.Cheatcodespath, GameId );
+    sprintf( filepath, "%s%s.gct", CheatFilepath, GameId );
 
     if ( !checkfile( filepath ) )
         return false;

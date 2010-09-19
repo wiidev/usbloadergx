@@ -127,7 +127,7 @@ static void * UpdateGUI ( void *arg )
             if ( userInput[i].wpad.ir.valid )
             {
                 Menu_DrawImg( userInput[i].wpad.ir.x - 48, userInput[i].wpad.ir.y - 48, 200.0,
-                              96, 96, pointer[i]->GetImage(), userInput[i].wpad.ir.angle, CFG.widescreen ? 0.8 : 1, 1, 255, 0, 0, 0, 0, 0, 0, 0, 0 );
+                              96, 96, pointer[i]->GetImage(), userInput[i].wpad.ir.angle, Settings.widescreen ? 0.8 : 1, 1, 255, 0, 0, 0, 0, 0, 0, 0, 0 );
             }
         }
 
@@ -237,7 +237,7 @@ GuiImageData *LoadCoverImage( struct discHdr *header, bool Prefere3D, bool noCov
         for ( int i = 0; i < 2; ++i )
         {
             const char *nocoverPath = ( flag ? "%snoimage.png" : "%snoimage2d.png" ); flag = !flag;
-            snprintf( Path, sizeof( Path ), nocoverPath, CFG.theme_path );
+            snprintf( Path, sizeof( Path ), nocoverPath, Settings.theme_path );
             delete Cover; Cover = new( std::nothrow ) GuiImageData( Path, ( Prefere3D ? nocover_png : nocoverFlat_png ) );
             if ( Cover && Cover->GetImage() )
                 break;
@@ -263,23 +263,23 @@ int MainMenu( int menu )
     //if (strcmp(headlessID,"")!=0)HaltGui();
     //WindowPrompt("Can you see me now",0,"ok");
 
-    snprintf( imgPath, sizeof( imgPath ), "%splayer1_point.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%splayer1_point.png", Settings.theme_path );
     pointer[0] = new GuiImageData( imgPath, player1_point_png );
-    snprintf( imgPath, sizeof( imgPath ), "%splayer2_point.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%splayer2_point.png", Settings.theme_path );
     pointer[1] = new GuiImageData( imgPath, player2_point_png );
-    snprintf( imgPath, sizeof( imgPath ), "%splayer3_point.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%splayer3_point.png", Settings.theme_path );
     pointer[2] = new GuiImageData( imgPath, player3_point_png );
-    snprintf( imgPath, sizeof( imgPath ), "%splayer4_point.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%splayer4_point.png", Settings.theme_path );
     pointer[3] = new GuiImageData( imgPath, player4_point_png );
 
     mainWindow = new GuiWindow( screenwidth, screenheight );
 
-    if ( CFG.widescreen )
-        snprintf( imgPath, sizeof( imgPath ), "%swbackground.png", CFG.theme_path );
+    if ( Settings.widescreen )
+        snprintf( imgPath, sizeof( imgPath ), "%swbackground.png", Settings.theme_path );
     else
-        snprintf( imgPath, sizeof( imgPath ), "%sbackground.png", CFG.theme_path );
+        snprintf( imgPath, sizeof( imgPath ), "%sbackground.png", Settings.theme_path );
 
-    background = new GuiImageData( imgPath, CFG.widescreen ? wbackground_png : background_png );
+    background = new GuiImageData( imgPath, Settings.widescreen ? wbackground_png : background_png );
 
     bgImg = new GuiImage( background );
     mainWindow->Append( bgImg );
@@ -443,18 +443,11 @@ int MainMenu( int menu )
         }
         else
         {
-            videoChoice = Settings.video;
+            videoChoice = Settings.videomode;
             languageChoice = Settings.language;
             ocarinaChoice = Settings.ocarina;
-            viChoice = Settings.vpatch;
-            if ( Settings.cios == ios222 )
-            {
-                iosChoice = i222;
-            }
-            else
-            {
-                iosChoice = i249;
-            }
+            viChoice = Settings.videopatch;
+            iosChoice = Settings.cios;
             fix002 = Settings.error002;
             countrystrings = Settings.patchcountrystrings;
             if ( !altdoldefault )
@@ -466,25 +459,6 @@ int MainMenu( int menu )
 	    returnToLoaderGV = 1;
         }
         int ios2;
-
-        switch ( iosChoice )
-        {
-            case i249:
-                ios2 = 249;
-                break;
-
-            case i222:
-                ios2 = 222;
-                break;
-
-            case i223:
-                ios2 = 223;
-                break;
-
-            default:
-                ios2 = 249;
-                break;
-        }
 
         // When the selected ios is 249, and you're loading from FAT, reset ios to 222
         if ( load_from_fs != PART_FS_WBFS && ios2 == 249 )
@@ -540,19 +514,7 @@ int MainMenu( int menu )
             }
         }
 
-        u8 errorfixer002 = 0;
-        switch ( fix002 )
-        {
-            case on:
-                errorfixer002 = 1;
-                break;
-            case off:
-                errorfixer002 = 0;
-                break;
-            case anti:
-                errorfixer002 = 2;
-                break;
-        }
+        u8 errorfixer002 = fix002;
 
         switch ( languageChoice )
         {
@@ -677,9 +639,14 @@ int MainMenu( int menu )
 	    if( idx >= 0 )
 		channel = TITLE_LOWER( titles.At( idx ) );
 	}
+
+	//This is temporary
+	SetCheatFilepath(Settings.Cheatcodespath);
+	SetBCAFilepath(Settings.BcaCodepath);
+
         gprintf( "\tDisc_wiiBoot\n" );
 
-	ret = Disc_WiiBoot( videoselected, cheat, vipatch, countrystrings, errorfixer002, alternatedol, alternatedoloffset, channel );
+	ret = Disc_WiiBoot( Settings.dolpath, videoselected, cheat, vipatch, countrystrings, errorfixer002, alternatedol, alternatedoloffset, channel );
         if ( ret < 0 )
         {
             Sys_LoadMenu();

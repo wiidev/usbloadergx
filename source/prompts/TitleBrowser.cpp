@@ -136,9 +136,9 @@ bool TitleSelector( char output[] )
 
     char imgPath[100];
 
-    snprintf( imgPath, sizeof( imgPath ), "%sbutton_dialogue_box.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sbutton_dialogue_box.png", Settings.theme_path );
     GuiImageData btnOutline( imgPath, button_dialogue_box_png );
-    snprintf( imgPath, sizeof( imgPath ), "%sgamesettings_background.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sgamesettings_background.png", Settings.theme_path );
     GuiImageData settingsbg( imgPath, settings_background_png );
 
     GuiImage settingsbackground( &settingsbg );
@@ -157,8 +157,8 @@ bool TitleSelector( char output[] )
     GuiImage cancelBtnImg( &btnOutline );
     if ( Settings.wsprompt == yes )
     {
-	cancelBtnTxt.SetWidescreen( CFG.widescreen );
-	cancelBtnImg.SetWidescreen( CFG.widescreen );
+	cancelBtnTxt.SetWidescreen( Settings.widescreen );
+	cancelBtnImg.SetWidescreen( Settings.widescreen );
     }
     GuiButton cancelBtn( &cancelBtnImg, &cancelBtnImg, 2, 3, 180, 400, &trigA, &btnSoundOver, btnClick2, 1 );
     cancelBtn.SetLabel( &cancelBtnTxt );
@@ -168,7 +168,7 @@ bool TitleSelector( char output[] )
     if ( num_titles + 1 > 9 )
 	scrollbaron = 1;
 
-    GuiCustomOptionBrowser optionBrowser4( 396, 280, &options4, CFG.theme_path, "bg_options_gamesettings.png", bg_options_settings_png, scrollbaron, 200 );
+    GuiCustomOptionBrowser optionBrowser4( 396, 280, &options4, Settings.theme_path, "bg_options_gamesettings.png", bg_options_settings_png, scrollbaron, 200 );
     optionBrowser4.SetPosition( 0, 90 );
     optionBrowser4.SetAlignment( ALIGN_CENTRE, ALIGN_TOP );
 
@@ -375,9 +375,9 @@ int TitleBrowser()
 
     char imgPath[100];
 
-    snprintf( imgPath, sizeof( imgPath ), "%sbutton_dialogue_box.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sbutton_dialogue_box.png", Settings.theme_path );
     GuiImageData btnOutline( imgPath, button_dialogue_box_png );
-    snprintf( imgPath, sizeof( imgPath ), "%sgamesettings_background.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sgamesettings_background.png", Settings.theme_path );
     GuiImageData settingsbg( imgPath, settings_background_png );
 
     GuiTrigger trigA;
@@ -403,8 +403,8 @@ int TitleBrowser()
     GuiImage cancelBtnImg( &btnOutline );
     if ( Settings.wsprompt == yes )
     {
-	cancelBtnTxt.SetWidescreen( CFG.widescreen );
-	cancelBtnImg.SetWidescreen( CFG.widescreen );
+	cancelBtnTxt.SetWidescreen( Settings.widescreen );
+	cancelBtnImg.SetWidescreen( Settings.widescreen );
     }
     GuiButton cancelBtn( &cancelBtnImg, &cancelBtnImg, 2, 3, 180, 400, &trigA, &btnSoundOver, btnClick2, 1 );
     cancelBtn.SetScale( 0.9 );
@@ -415,16 +415,16 @@ int TitleBrowser()
     if ( total + 1 > 9 )
 	scrollbaron = 1;
 
-    GuiCustomOptionBrowser optionBrowser3( 396, 280, &options3, CFG.theme_path, "bg_options_gamesettings.png", bg_options_settings_png, scrollbaron, 200 );
+    GuiCustomOptionBrowser optionBrowser3( 396, 280, &options3, Settings.theme_path, "bg_options_gamesettings.png", bg_options_settings_png, scrollbaron, 200 );
     optionBrowser3.SetPosition( 0, 90 );
     optionBrowser3.SetAlignment( ALIGN_CENTRE, ALIGN_TOP );
 
-    snprintf( imgPath, sizeof( imgPath ), "%sWifi_btn.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sWifi_btn.png", Settings.theme_path );
     GuiImageData wifiImgData( imgPath, Wifi_btn_png );
     GuiImage wifiImg( &wifiImgData );
     if ( Settings.wsprompt == yes )
     {
-	wifiImg.SetWidescreen( CFG.widescreen );
+	wifiImg.SetWidescreen( Settings.widescreen );
     }
     GuiButton wifiBtn( wifiImg.GetWidth(), wifiImg.GetHeight() );
     wifiBtn.SetImage( &wifiImg );

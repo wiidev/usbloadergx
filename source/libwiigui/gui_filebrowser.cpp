@@ -10,7 +10,7 @@
 
 #include "gui.h"
 #include "prompts/filebrowser.h"
-#include "settings/cfg.h"
+#include "settings/CSettings.h"
 
 /**
  * Constructor for the GuiFileBrowser class.
@@ -35,13 +35,13 @@ GuiFileBrowser::GuiFileBrowser( int w, int h )
     btnSoundClick = new GuiSound( button_click_pcm, button_click_pcm_size, Settings.sfxvolume );
 
     char imgPath[100];
-    snprintf( imgPath, sizeof( imgPath ), "%sbg_browser.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sbg_browser.png", Settings.theme_path );
     bgFileSelection = new GuiImageData( imgPath, bg_browser_png );
     bgFileSelectionImg = new GuiImage( bgFileSelection );
     bgFileSelectionImg->SetParent( this );
     bgFileSelectionImg->SetAlignment( ALIGN_LEFT, ALIGN_MIDDLE );
 
-    snprintf( imgPath, sizeof( imgPath ), "%sbg_browser_selection.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sbg_browser_selection.png", Settings.theme_path );
     bgFileSelectionEntry = new GuiImageData( imgPath, bg_browser_selection_png );
 //  fileArchives = new GuiImageData(icon_archives_png);
 //  fileDefault = new GuiImageData(icon_default_png);
@@ -52,7 +52,7 @@ GuiFileBrowser::GuiFileBrowser( int w, int h )
 //  fileTXT = new GuiImageData(icon_txt_png);
 //  fileXML = new GuiImageData(icon_xml_png);
 
-    snprintf( imgPath, sizeof( imgPath ), "%sscrollbar.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sscrollbar.png", Settings.theme_path );
     scrollbar = new GuiImageData( imgPath, scrollbar_png );
     scrollbarImg = new GuiImage( scrollbar );
     scrollbarImg->SetParent( this );
@@ -60,13 +60,13 @@ GuiFileBrowser::GuiFileBrowser( int w, int h )
     scrollbarImg->SetPosition( 0, 2 );
     scrollbarImg->SetSkew( 0, 0, 0, 0, 0, -30, 0, -30 );
 
-    snprintf( imgPath, sizeof( imgPath ), "%sscrollbar_arrowdown.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sscrollbar_arrowdown.png", Settings.theme_path );
     arrowDown = new GuiImageData( imgPath, scrollbar_arrowdown_png );
     arrowDownImg = new GuiImage( arrowDown );
-    snprintf( imgPath, sizeof( imgPath ), "%sscrollbar_arrowup.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sscrollbar_arrowup.png", Settings.theme_path );
     arrowUp = new GuiImageData( imgPath, scrollbar_arrowup_png );
     arrowUpImg = new GuiImage( arrowUp );
-    snprintf( imgPath, sizeof( imgPath ), "%sscrollbar_box.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sscrollbar_box.png", Settings.theme_path );
     scrollbarBox = new GuiImageData( imgPath, scrollbar_box_png );
     scrollbarBoxImg = new GuiImage( scrollbarBox );
 

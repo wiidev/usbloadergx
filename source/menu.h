@@ -10,7 +10,7 @@
 #define _MENU_H_
 
 #include <ogcsys.h>
-#include "settings/cfg.h"
+#include "settings/CSettings.h"
 #include "main.h"
 
 void InitGUIThreads( void );

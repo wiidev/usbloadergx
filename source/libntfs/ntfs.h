@@ -140,6 +140,9 @@ extern const char *ntfsGetVolumeName (const char *name);
  */
 extern bool ntfsSetVolumeName (const char *name, const char *volumeName);
 
+typedef int ( *_ntfs_frag_append_t )( void *ff, u32 offset, u32 sector, u32 count );
+int _NTFS_get_fragments ( const char *path, _ntfs_frag_append_t append_fragment, void *callback_data );
+
 #ifdef __cplusplus
 }
 #endif

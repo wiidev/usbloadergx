@@ -104,81 +104,81 @@ int MenuDiscList()
     if ( !btnClick2 ) btnClick2 = new GuiSound( button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume );
     //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
-    snprintf( imgPath, sizeof( imgPath ), "%sbutton_install.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sbutton_install.png", Settings.theme_path );
     GuiImageData btnInstall( imgPath, button_install_png );
-    snprintf( imgPath, sizeof( imgPath ), "%sbutton_install_over.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sbutton_install_over.png", Settings.theme_path );
     GuiImageData btnInstallOver( imgPath, button_install_over_png );
 
-    snprintf( imgPath, sizeof( imgPath ), "%ssettings_button.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%ssettings_button.png", Settings.theme_path );
     GuiImageData btnSettings( imgPath, settings_button_png );
-    snprintf( imgPath, sizeof( imgPath ), "%ssettings_button_over.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%ssettings_button_over.png", Settings.theme_path );
     GuiImageData btnSettingsOver( imgPath, settings_button_over_png );
     GuiImageData dataID( &data1 );
 
-    snprintf( imgPath, sizeof( imgPath ), "%swiimote_poweroff.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%swiimote_poweroff.png", Settings.theme_path );
     GuiImageData btnpwroff( imgPath, wiimote_poweroff_png );
-    snprintf( imgPath, sizeof( imgPath ), "%swiimote_poweroff_over.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%swiimote_poweroff_over.png", Settings.theme_path );
     GuiImageData btnpwroffOver( imgPath, wiimote_poweroff_over_png );
-    snprintf( imgPath, sizeof( imgPath ), "%smenu_button.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%smenu_button.png", Settings.theme_path );
     GuiImageData btnhome( imgPath, menu_button_png );
-    snprintf( imgPath, sizeof( imgPath ), "%smenu_button_over.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%smenu_button_over.png", Settings.theme_path );
     GuiImageData btnhomeOver( imgPath, menu_button_over_png );
-    snprintf( imgPath, sizeof( imgPath ), "%sSDcard_over.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sSDcard_over.png", Settings.theme_path );
     GuiImageData btnsdcardOver( imgPath, sdcard_over_png );
-    snprintf( imgPath, sizeof( imgPath ), "%sSDcard.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sSDcard.png", Settings.theme_path );
     GuiImageData btnsdcard( imgPath, sdcard_png );
 
 
-    snprintf( imgPath, sizeof( imgPath ), "%sfavIcon.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sfavIcon.png", Settings.theme_path );
     GuiImageData imgfavIcon( imgPath, favIcon_png );
-    snprintf( imgPath, sizeof( imgPath ), "%sfavIcon_gray.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sfavIcon_gray.png", Settings.theme_path );
     GuiImageData imgfavIcon_gray( imgPath, NULL );
-    snprintf( imgPath, sizeof( imgPath ), "%ssearchIcon.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%ssearchIcon.png", Settings.theme_path );
     GuiImageData imgsearchIcon( imgPath, searchIcon_png );
-    snprintf( imgPath, sizeof( imgPath ), "%ssearchIcon_gray.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%ssearchIcon_gray.png", Settings.theme_path );
     GuiImageData imgsearchIcon_gray( imgPath, NULL );
-    snprintf( imgPath, sizeof( imgPath ), "%sabcIcon.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sabcIcon.png", Settings.theme_path );
     GuiImageData imgabcIcon( imgPath, abcIcon_png );
-    snprintf( imgPath, sizeof( imgPath ), "%sabcIcon_gray.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sabcIcon_gray.png", Settings.theme_path );
     GuiImageData imgabcIcon_gray( imgPath, NULL );
-    snprintf( imgPath, sizeof( imgPath ), "%srankIcon.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%srankIcon.png", Settings.theme_path );
     GuiImageData imgrankIcon( imgPath, rankIcon_png );
-    snprintf( imgPath, sizeof( imgPath ), "%srankIcon_gray.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%srankIcon_gray.png", Settings.theme_path );
     GuiImageData imgrankIcon_gray( imgPath, NULL );
-    snprintf( imgPath, sizeof( imgPath ), "%splayCountIcon.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%splayCountIcon.png", Settings.theme_path );
     GuiImageData imgplayCountIcon( imgPath, playCountIcon_png );
-    snprintf( imgPath, sizeof( imgPath ), "%splayCountIcon_gray.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%splayCountIcon_gray.png", Settings.theme_path );
     GuiImageData imgplayCountIcon_gray( imgPath, NULL );
-    snprintf( imgPath, sizeof( imgPath ), "%sarrangeGrid.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sarrangeGrid.png", Settings.theme_path );
     GuiImageData imgarrangeGrid( imgPath, arrangeGrid_png );
-    snprintf( imgPath, sizeof( imgPath ), "%sarrangeGrid_gray.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sarrangeGrid_gray.png", Settings.theme_path );
     GuiImageData imgarrangeGrid_gray( imgPath, NULL );
-    snprintf( imgPath, sizeof( imgPath ), "%sarrangeList.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sarrangeList.png", Settings.theme_path );
     GuiImageData imgarrangeList( imgPath, arrangeList_png );
-    snprintf( imgPath, sizeof( imgPath ), "%sarrangeList_gray.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sarrangeList_gray.png", Settings.theme_path );
     GuiImageData imgarrangeList_gray( imgPath, NULL );
-    snprintf( imgPath, sizeof( imgPath ), "%sarrangeCarousel.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sarrangeCarousel.png", Settings.theme_path );
     GuiImageData imgarrangeCarousel( imgPath, arrangeCarousel_png );
-    snprintf( imgPath, sizeof( imgPath ), "%sarrangeCarousel_gray.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sarrangeCarousel_gray.png", Settings.theme_path );
     GuiImageData imgarrangeCarousel_gray( imgPath, NULL );
 
-    snprintf( imgPath, sizeof( imgPath ), "%slock.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%slock.png", Settings.theme_path );
     GuiImageData imgLock( imgPath, lock_png );
-    snprintf( imgPath, sizeof( imgPath ), "%slock_gray.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%slock_gray.png", Settings.theme_path );
     GuiImageData imgLock_gray( imgPath, NULL );
-    snprintf( imgPath, sizeof( imgPath ), "%sunlock.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sunlock.png", Settings.theme_path );
     GuiImageData imgUnlock( imgPath, unlock_png );
-    snprintf( imgPath, sizeof( imgPath ), "%sunlock_gray.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sunlock_gray.png", Settings.theme_path );
     GuiImageData imgUnlock_gray( imgPath, NULL );
 
-    snprintf( imgPath, sizeof( imgPath ), "%sdvd.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sdvd.png", Settings.theme_path );
     GuiImageData imgdvd( imgPath, dvd_png );
-    snprintf( imgPath, sizeof( imgPath ), "%sdvd_gray.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sdvd_gray.png", Settings.theme_path );
     GuiImageData imgdvd_gray( imgPath, NULL );
 
-    snprintf( imgPath, sizeof( imgPath ), "%sbrowser.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sbrowser.png", Settings.theme_path );
     GuiImageData homebrewImgData( imgPath, browser_png );
-    snprintf( imgPath, sizeof( imgPath ), "%sbrowser_over.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sbrowser_over.png", Settings.theme_path );
     GuiImageData homebrewImgDataOver( imgPath, browser_over_png );
 
 
@@ -231,56 +231,56 @@ int MenuDiscList()
 
     GuiTooltip installBtnTT( tr( "Install a game" ) );
     if ( Settings.wsprompt == yes )
-        installBtnTT.SetWidescreen( CFG.widescreen );
+        installBtnTT.SetWidescreen( Settings.widescreen );
     installBtnTT.SetAlpha( THEME.tooltipAlpha );
     GuiImage installBtnImg( &btnInstall );
     GuiImage installBtnImgOver( &btnInstallOver );
-    installBtnImg.SetWidescreen( CFG.widescreen );
-    installBtnImgOver.SetWidescreen( CFG.widescreen );
+    installBtnImg.SetWidescreen( Settings.widescreen );
+    installBtnImgOver.SetWidescreen( Settings.widescreen );
 
     GuiButton installBtn( &installBtnImg, &installBtnImgOver, ALIGN_LEFT, ALIGN_TOP, THEME.install_x, THEME.install_y, &trigA, &btnSoundOver, btnClick2, 1, &installBtnTT, 24, -30, 0, 5 );
 
 
     GuiTooltip settingsBtnTT( tr( "Settings" ) );
     if ( Settings.wsprompt == yes )
-        settingsBtnTT.SetWidescreen( CFG.widescreen );
+        settingsBtnTT.SetWidescreen( Settings.widescreen );
     settingsBtnTT.SetAlpha( THEME.tooltipAlpha );
     GuiImage settingsBtnImg( &btnSettings );
-    settingsBtnImg.SetWidescreen( CFG.widescreen );
+    settingsBtnImg.SetWidescreen( Settings.widescreen );
     GuiImage settingsBtnImgOver( &btnSettingsOver );
-    settingsBtnImgOver.SetWidescreen( CFG.widescreen );
+    settingsBtnImgOver.SetWidescreen( Settings.widescreen );
     GuiButton settingsBtn( &settingsBtnImg, &settingsBtnImgOver, 0, 3, THEME.setting_x, THEME.setting_y, &trigA, &btnSoundOver, btnClick2, 1, &settingsBtnTT, 65, -30, 0, 5 );
 
     GuiTooltip homeBtnTT( tr( "Back to HBC or Wii Menu" ) );
     if ( Settings.wsprompt == yes )
-        homeBtnTT.SetWidescreen( CFG.widescreen );
+        homeBtnTT.SetWidescreen( Settings.widescreen );
     settingsBtnTT.SetAlpha( THEME.tooltipAlpha );
     GuiImage homeBtnImg( &btnhome );
-    homeBtnImg.SetWidescreen( CFG.widescreen );
+    homeBtnImg.SetWidescreen( Settings.widescreen );
     GuiImage homeBtnImgOver( &btnhomeOver );
-    homeBtnImgOver.SetWidescreen( CFG.widescreen );
+    homeBtnImgOver.SetWidescreen( Settings.widescreen );
     GuiButton homeBtn( &homeBtnImg, &homeBtnImgOver, 0, 3, THEME.home_x, THEME.home_y, &trigA, &btnSoundOver, btnClick2, 1, &homeBtnTT, 15, -30, 1, 5 );
     homeBtn.RemoveSoundClick();
     homeBtn.SetTrigger( &trigHome );
 
     GuiTooltip poweroffBtnTT( tr( "Power off the Wii" ) );
     if ( Settings.wsprompt == yes )
-        poweroffBtnTT.SetWidescreen( CFG.widescreen );
+        poweroffBtnTT.SetWidescreen( Settings.widescreen );
     poweroffBtnTT.SetAlpha( THEME.tooltipAlpha );
     GuiImage poweroffBtnImg( &btnpwroff );
     GuiImage poweroffBtnImgOver( &btnpwroffOver );
-    poweroffBtnImg.SetWidescreen( CFG.widescreen );
-    poweroffBtnImgOver.SetWidescreen( CFG.widescreen );
+    poweroffBtnImg.SetWidescreen( Settings.widescreen );
+    poweroffBtnImgOver.SetWidescreen( Settings.widescreen );
     GuiButton poweroffBtn( &poweroffBtnImg, &poweroffBtnImgOver, 0, 3, THEME.power_x, THEME.power_y, &trigA, &btnSoundOver, btnClick2, 1, &poweroffBtnTT, -10, -30, 1, 5 );
 
     GuiTooltip sdcardBtnTT( tr( "Reload SD" ) );
     if ( Settings.wsprompt == yes )
-        sdcardBtnTT.SetWidescreen( CFG.widescreen );
+        sdcardBtnTT.SetWidescreen( Settings.widescreen );
     sdcardBtnTT.SetAlpha( THEME.tooltipAlpha );
     GuiImage sdcardImg( &btnsdcard );
     GuiImage sdcardImgOver( &btnsdcardOver );
-    sdcardImg.SetWidescreen( CFG.widescreen );
-    sdcardImgOver.SetWidescreen( CFG.widescreen );
+    sdcardImg.SetWidescreen( Settings.widescreen );
+    sdcardImgOver.SetWidescreen( Settings.widescreen );
     GuiButton sdcardBtn( &sdcardImg, &sdcardImgOver, 0, 3, THEME.sdcard_x, THEME.sdcard_y, &trigA, &btnSoundOver, btnClick2, 1, &sdcardBtnTT, 15, -30, 0, 5 );
 
     GuiButton gameInfo( 0, 0 );
@@ -289,116 +289,116 @@ int MenuDiscList()
 
 
     GuiImage wiiBtnImg( &dataID );
-    wiiBtnImg.SetWidescreen( CFG.widescreen );
+    wiiBtnImg.SetWidescreen( Settings.widescreen );
     GuiButton wiiBtn( &wiiBtnImg, &wiiBtnImg, 0, 4, 0, -10, &trigA, &btnSoundOver, btnClick2, 0 );
 
     GuiTooltip favoriteBtnTT( tr( "Display favorites" ) );
     if ( Settings.wsprompt == yes )
-        favoriteBtnTT.SetWidescreen( CFG.widescreen );
+        favoriteBtnTT.SetWidescreen( Settings.widescreen );
     favoriteBtnTT.SetAlpha( THEME.tooltipAlpha );
     GuiImage favoriteBtnImg( &imgfavIcon );
-    favoriteBtnImg.SetWidescreen( CFG.widescreen );
+    favoriteBtnImg.SetWidescreen( Settings.widescreen );
     GuiImage favoriteBtnImg_g( &imgfavIcon_gray );
     if ( favoriteBtnImg_g.GetImage() == NULL ) { favoriteBtnImg_g = favoriteBtnImg; favoriteBtnImg_g.SetGrayscale();}
-    favoriteBtnImg_g.SetWidescreen( CFG.widescreen );
+    favoriteBtnImg_g.SetWidescreen( Settings.widescreen );
     GuiButton favoriteBtn( &favoriteBtnImg_g, &favoriteBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_favorite_x, THEME.gamelist_favorite_y, &trigA, &btnSoundOver, btnClick2, 1, &favoriteBtnTT, -15, 52, 0, 3 );
     favoriteBtn.SetAlpha( 180 );
 
     GuiTooltip searchBtnTT( tr( "Set Search-Filter" ) );
     if ( Settings.wsprompt == yes )
-        searchBtnTT.SetWidescreen( CFG.widescreen );
+        searchBtnTT.SetWidescreen( Settings.widescreen );
     searchBtnTT.SetAlpha( THEME.tooltipAlpha );
     GuiImage searchBtnImg( &imgsearchIcon );
-    searchBtnImg.SetWidescreen( CFG.widescreen );
+    searchBtnImg.SetWidescreen( Settings.widescreen );
     GuiImage searchBtnImg_g( &imgsearchIcon_gray );
     if ( searchBtnImg_g.GetImage() == NULL ) { searchBtnImg_g = searchBtnImg; searchBtnImg_g.SetGrayscale();}
-    searchBtnImg_g.SetWidescreen( CFG.widescreen );
+    searchBtnImg_g.SetWidescreen( Settings.widescreen );
     GuiButton searchBtn( &searchBtnImg_g, &searchBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_search_x, THEME.gamelist_search_y, &trigA, &btnSoundOver, btnClick2, 1, &searchBtnTT, -15, 52, 0, 3 );
     searchBtn.SetAlpha( 180 );
 
     GuiTooltip abcBtnTT( Settings.fave ? tr( "Sort by rank" ) : tr( "Sort alphabetically" ) );
     if ( Settings.wsprompt == yes )
-        abcBtnTT.SetWidescreen( CFG.widescreen );
+        abcBtnTT.SetWidescreen( Settings.widescreen );
     abcBtnTT.SetAlpha( THEME.tooltipAlpha );
     GuiImage abcBtnImg( Settings.fave ? &imgrankIcon : &imgabcIcon );
-    abcBtnImg.SetWidescreen( CFG.widescreen );
+    abcBtnImg.SetWidescreen( Settings.widescreen );
     GuiImage abcBtnImg_g( Settings.fave ? &imgrankIcon_gray : &imgabcIcon_gray );
     if ( abcBtnImg_g.GetImage() == NULL ) { abcBtnImg_g = abcBtnImg; abcBtnImg_g.SetGrayscale();}
-    abcBtnImg_g.SetWidescreen( CFG.widescreen );
+    abcBtnImg_g.SetWidescreen( Settings.widescreen );
     GuiButton abcBtn( &abcBtnImg_g, &abcBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_abc_x, THEME.gamelist_abc_y, &trigA, &btnSoundOver, btnClick2, 1, &abcBtnTT, -15, 52, 0, 3 );
     abcBtn.SetAlpha( 180 );
 
     GuiTooltip countBtnTT( tr( "Sort order by most played" ) );
     if ( Settings.wsprompt == yes )
-        countBtnTT.SetWidescreen( CFG.widescreen );
+        countBtnTT.SetWidescreen( Settings.widescreen );
     countBtnTT.SetAlpha( THEME.tooltipAlpha );
     GuiImage countBtnImg( &imgplayCountIcon );
-    countBtnImg.SetWidescreen( CFG.widescreen );
+    countBtnImg.SetWidescreen( Settings.widescreen );
     GuiImage countBtnImg_g( &imgplayCountIcon_gray );
     if ( countBtnImg_g.GetImage() == NULL ) { countBtnImg_g = countBtnImg; countBtnImg_g.SetGrayscale();}
-    countBtnImg_g.SetWidescreen( CFG.widescreen );
+    countBtnImg_g.SetWidescreen( Settings.widescreen );
     GuiButton countBtn( &countBtnImg_g, &countBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_count_x, THEME.gamelist_count_y, &trigA, &btnSoundOver, btnClick2, 1, &countBtnTT, -15, 52, 0, 3 );
     countBtn.SetAlpha( 180 );
 
     GuiTooltip listBtnTT( tr( "Display as a list" ) );
     if ( Settings.wsprompt == yes )
-        listBtnTT.SetWidescreen( CFG.widescreen );
+        listBtnTT.SetWidescreen( Settings.widescreen );
     listBtnTT.SetAlpha( THEME.tooltipAlpha );
     GuiImage listBtnImg( &imgarrangeList );
-    listBtnImg.SetWidescreen( CFG.widescreen );
+    listBtnImg.SetWidescreen( Settings.widescreen );
     GuiImage listBtnImg_g( &imgarrangeList_gray );
     if ( listBtnImg_g.GetImage() == NULL ) { listBtnImg_g = listBtnImg; listBtnImg_g.SetGrayscale();}
-    listBtnImg_g.SetWidescreen( CFG.widescreen );
+    listBtnImg_g.SetWidescreen( Settings.widescreen );
     GuiButton listBtn( &listBtnImg_g, &listBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_list_x, THEME.gamelist_list_y, &trigA, &btnSoundOver, btnClick2, 1, &listBtnTT, 15, 52, 1, 3 );
     listBtn.SetAlpha( 180 );
 
     GuiTooltip gridBtnTT( tr( "Display as a grid" ) );
     if ( Settings.wsprompt == yes )
-        gridBtnTT.SetWidescreen( CFG.widescreen );
+        gridBtnTT.SetWidescreen( Settings.widescreen );
     gridBtnTT.SetAlpha( THEME.tooltipAlpha );
     GuiImage gridBtnImg( &imgarrangeGrid );
-    gridBtnImg.SetWidescreen( CFG.widescreen );
+    gridBtnImg.SetWidescreen( Settings.widescreen );
     GuiImage gridBtnImg_g( &imgarrangeGrid_gray );
     if ( gridBtnImg_g.GetImage() == NULL ) { gridBtnImg_g = gridBtnImg; gridBtnImg_g.SetGrayscale();}
-    gridBtnImg_g.SetWidescreen( CFG.widescreen );
+    gridBtnImg_g.SetWidescreen( Settings.widescreen );
     GuiButton gridBtn( &gridBtnImg_g, &gridBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_grid_x, THEME.gamelist_grid_y, &trigA, &btnSoundOver, btnClick2, 1, &gridBtnTT, 15, 52, 1, 3 );
     gridBtn.SetAlpha( 180 );
 
     GuiTooltip carouselBtnTT( tr( "Display as a carousel" ) );
     if ( Settings.wsprompt == yes )
-        carouselBtnTT.SetWidescreen( CFG.widescreen );
+        carouselBtnTT.SetWidescreen( Settings.widescreen );
     carouselBtnTT.SetAlpha( THEME.tooltipAlpha );
     GuiImage carouselBtnImg( &imgarrangeCarousel );
-    carouselBtnImg.SetWidescreen( CFG.widescreen );
+    carouselBtnImg.SetWidescreen( Settings.widescreen );
     GuiImage carouselBtnImg_g( &imgarrangeCarousel_gray );
     if ( carouselBtnImg_g.GetImage() == NULL ) { carouselBtnImg_g = carouselBtnImg; carouselBtnImg_g.SetGrayscale();}
-    carouselBtnImg_g.SetWidescreen( CFG.widescreen );
+    carouselBtnImg_g.SetWidescreen( Settings.widescreen );
     GuiButton carouselBtn( &carouselBtnImg_g, &carouselBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_carousel_x, THEME.gamelist_carousel_y, &trigA, &btnSoundOver, btnClick2, 1, &carouselBtnTT, 15, 52, 1, 3 );
     carouselBtn.SetAlpha( 180 );
 
-    bool canUnlock = ( Settings.parentalcontrol == 0 && Settings.parental.enabled == 1 );
+    bool canUnlock = ( Settings.parentalcontrol == 0 && Settings.Parental.enabled == 1 );
 
     GuiTooltip lockBtnTT( canUnlock ? tr( "Unlock Parental Control" ) : tr( "Parental Control disabled" ) );
     if ( Settings.wsprompt == yes )
-        lockBtnTT.SetWidescreen( CFG.widescreen );
+        lockBtnTT.SetWidescreen( Settings.widescreen );
     lockBtnTT.SetAlpha( THEME.tooltipAlpha );
     GuiImage lockBtnImg( &imgLock );
-    lockBtnImg.SetWidescreen( CFG.widescreen );
+    lockBtnImg.SetWidescreen( Settings.widescreen );
     GuiImage lockBtnImg_g( &imgLock_gray );
     if ( lockBtnImg_g.GetImage() == NULL ) { lockBtnImg_g = lockBtnImg; lockBtnImg_g.SetGrayscale(); }
-    lockBtnImg_g.SetWidescreen( CFG.widescreen );
+    lockBtnImg_g.SetWidescreen( Settings.widescreen );
     GuiButton lockBtn( &lockBtnImg_g, &lockBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_lock_x, THEME.gamelist_lock_y, &trigA, &btnSoundOver, btnClick2, 1, &lockBtnTT, 15, 52, 1, 3 );
     lockBtn.SetAlpha( 180 );
 
     GuiTooltip unlockBtnTT( tr( "Enable Parental Control" ) );
     if ( Settings.wsprompt == yes )
-        unlockBtnTT.SetWidescreen( CFG.widescreen );
+        unlockBtnTT.SetWidescreen( Settings.widescreen );
     unlockBtnTT.SetAlpha( THEME.tooltipAlpha );
     GuiImage unlockBtnImg( &imgUnlock );
-    unlockBtnImg.SetWidescreen( CFG.widescreen );
+    unlockBtnImg.SetWidescreen( Settings.widescreen );
     GuiImage unlockBtnImg_g( &imgUnlock_gray );
     if ( unlockBtnImg_g.GetImage() == NULL ) { unlockBtnImg_g = unlockBtnImg; unlockBtnImg_g.SetGrayscale(); }
-    unlockBtnImg_g.SetWidescreen( CFG.widescreen );
+    unlockBtnImg_g.SetWidescreen( Settings.widescreen );
 
     if ( canUnlock && Settings.godmode )
     {
@@ -414,23 +414,23 @@ int MenuDiscList()
 
     GuiTooltip dvdBtnTT( tr( "Mount DVD drive" ) );
     if ( Settings.wsprompt == yes )
-        dvdBtnTT.SetWidescreen( CFG.widescreen );
+        dvdBtnTT.SetWidescreen( Settings.widescreen );
     dvdBtnTT.SetAlpha( THEME.tooltipAlpha );
     GuiImage dvdBtnImg( &imgdvd );
-    dvdBtnImg.SetWidescreen( CFG.widescreen );
+    dvdBtnImg.SetWidescreen( Settings.widescreen );
     GuiImage dvdBtnImg_g( dvdBtnImg );
-    dvdBtnImg_g.SetWidescreen( CFG.widescreen );
+    dvdBtnImg_g.SetWidescreen( Settings.widescreen );
     GuiButton dvdBtn( &dvdBtnImg_g, &dvdBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_dvd_x, THEME.gamelist_dvd_y, &trigA, &btnSoundOver, btnClick2, 1, &dvdBtnTT, 15, 52, 1, 3 );
     dvdBtn.SetAlpha( 180 );
 
     GuiTooltip homebrewBtnTT( tr( "Homebrew Launcher" ) );
     if ( Settings.wsprompt == yes )
-        homebrewBtnTT.SetWidescreen( CFG.widescreen );
+        homebrewBtnTT.SetWidescreen( Settings.widescreen );
     homebrewBtnTT.SetAlpha( THEME.tooltipAlpha );
     GuiImage homebrewImg( &homebrewImgData );
     GuiImage homebrewImgOver( &homebrewImgDataOver );
-    homebrewImg.SetWidescreen( CFG.widescreen );
-    homebrewImgOver.SetWidescreen( CFG.widescreen );
+    homebrewImg.SetWidescreen( Settings.widescreen );
+    homebrewImgOver.SetWidescreen( Settings.widescreen );
     GuiButton homebrewBtn( &homebrewImg, &homebrewImgOver, ALIGN_LEFT, ALIGN_TOP, THEME.homebrew_x, THEME.homebrew_y, &trigA, &btnSoundOver, btnClick2, 1, &homebrewBtnTT, 15, -30, 1, 5 );
 
     if ( Settings.fave )
@@ -522,7 +522,7 @@ int MenuDiscList()
     //Downloading Covers
     GuiTooltip DownloadBtnTT( tr( "Click to Download Covers" ) );
     if ( Settings.wsprompt == yes )
-        DownloadBtnTT.SetWidescreen( CFG.widescreen );
+        DownloadBtnTT.SetWidescreen( Settings.widescreen );
     DownloadBtnTT.SetAlpha( THEME.tooltipAlpha );
     GuiButton DownloadBtn( 0, 0 );
     DownloadBtn.SetAlignment( ALIGN_LEFT, ALIGN_TOP );
@@ -530,7 +530,7 @@ int MenuDiscList()
 
     GuiTooltip IDBtnTT( tr( "Click to change game ID" ) );
     if ( Settings.wsprompt == yes )
-        IDBtnTT.SetWidescreen( CFG.widescreen );
+        IDBtnTT.SetWidescreen( Settings.widescreen );
     IDBtnTT.SetAlpha( THEME.tooltipAlpha );
     GuiButton idBtn( 0, 0 );
     idBtn.SetAlignment( ALIGN_LEFT, ALIGN_TOP );
@@ -559,20 +559,20 @@ int MenuDiscList()
     GuiGameCarousel * gameCarousel = NULL;
     if ( Settings.gameDisplay == list )
     {
-        gameBrowser = new GuiGameBrowser( THEME.gamelist_w, THEME.gamelist_h, CFG.theme_path, bg_options_png, startat, offset );
+        gameBrowser = new GuiGameBrowser( THEME.gamelist_w, THEME.gamelist_h, Settings.theme_path, bg_options_png, startat, offset );
         gameBrowser->SetPosition( THEME.gamelist_x, THEME.gamelist_y );
         gameBrowser->SetAlignment( ALIGN_LEFT, ALIGN_CENTRE );
     }
     else if ( Settings.gameDisplay == grid )
     {
-        gameGrid = new GuiGameGrid( THEME.gamegrid_w, THEME.gamegrid_h, CFG.theme_path, bg_options_png, 0, 0 );
+        gameGrid = new GuiGameGrid( THEME.gamegrid_w, THEME.gamegrid_h, Settings.theme_path, bg_options_png, 0, 0 );
         gameGrid->SetPosition( THEME.gamegrid_x, THEME.gamegrid_y );
         gameGrid->SetAlignment( ALIGN_LEFT, ALIGN_CENTRE );
     }
     else if ( Settings.gameDisplay == carousel )
     {
-        //GuiGameCarousel gameCarousel(THEME.gamecarousel_w, THEME.gamecarousel_h, gameList, gameList.size(), CFG.theme_path, bg_options_png, startat, offset);
-        gameCarousel = new GuiGameCarousel( 640, 400, CFG.theme_path, bg_options_png, startat, offset );
+        //GuiGameCarousel gameCarousel(THEME.gamecarousel_w, THEME.gamecarousel_h, gameList, gameList.size(), Settings.theme_path, bg_options_png, startat, offset);
+        gameCarousel = new GuiGameCarousel( 640, 400, Settings.theme_path, bg_options_png, startat, offset );
         gameCarousel->SetPosition( THEME.gamecarousel_x, THEME.gamecarousel_y );
         gameCarousel->SetAlignment( ALIGN_LEFT, ALIGN_CENTRE );
     }
@@ -700,7 +700,7 @@ int MenuDiscList()
             Settings.fave = !Settings.fave;
             if ( isInserted( bootDevice ) )
             {
-                cfg_save_global();
+                Settings.Save();
             }
             gameList.FilterList();
             menu = MENU_DISCLIST;
@@ -740,7 +740,7 @@ int MenuDiscList()
 
         }
 
-        if ( ( datagB < 1 ) && ( Settings.cios == 1 ) && ( Settings.video == ntsc ) && ( Settings.hddinfo == hr12 ) && ( Settings.qboot == 1 ) && ( Settings.wsprompt == 0 ) && ( Settings.language == ger ) && ( Settings.tooltips == 0 ) ) {dataed = 1; dataef = 1;} if ( dataef == 1 ) {if ( cosa > 7 ) {cosa = 1;} datag++; if ( sina == 3 ) {wiiBtn.SetAlignment( ALIGN_LEFT, ALIGN_BOTTOM ); wiiBtnImg.SetAngle( 0 ); if ( datag > 163 ) {datag = 1;} else if ( datag < 62 ) {wiiBtn.SetPosition( ( ( cosa )*70 ), ( -2*( datag ) + 120 ) );} else if ( 62 <= datag ) {wiiBtn.SetPosition( ( ( cosa )*70 ), ( ( datag*2 ) - 130 ) );} if ( datag > 162 ) {wiiBtn.SetPosition( 700, 700 ); w.Remove( &wiiBtn ); datagB = 2; cosa++; sina = lastrawtime % 4;} w.Append( &wiiBtn );} if ( sina == 2 ) {wiiBtn.SetAlignment( ALIGN_RIGHT, ALIGN_TOP ); wiiBtnImg.SetAngle( 270 ); if ( datag > 163 ) {datag = 1;} else if ( datag < 62 ) {wiiBtn.SetPosition( ( ( -2*( datag ) + 130 ) ), ( ( cosa )*50 ) );} else if ( 62 <= datag ) {wiiBtn.SetPosition( ( 2*( datag ) - 120 ), ( ( cosa )*50 ) );} if ( datag > 162 ) {wiiBtn.SetPosition( 700, 700 ); w.Remove( &wiiBtn ); datagB = 2; cosa++; sina = lastrawtime % 4;} w.Append( &wiiBtn );} if ( sina == 1 ) {wiiBtn.SetAlignment( ALIGN_TOP, ALIGN_LEFT ); wiiBtnImg.SetAngle( 180 ); if ( datag > 163 ) {datag = 1;} else if ( datag < 62 ) {wiiBtn.SetPosition( ( ( cosa )*70 ), ( 2*( datag ) - 120 ) );} else if ( 62 <= datag ) {wiiBtn.SetPosition( ( ( cosa )*70 ), ( -2*( datag ) + 130 ) );} if ( datag > 162 ) {wiiBtn.SetPosition( 700, 700 ); w.Remove( &wiiBtn ); datagB = 2; cosa++; sina = lastrawtime % 4;} w.Append( &wiiBtn );} if ( sina == 0 ) {wiiBtn.SetAlignment( ALIGN_TOP, ALIGN_LEFT ); wiiBtnImg.SetAngle( 90 ); if ( datag > 163 ) {datag = 1;} else if ( datag < 62 ) {wiiBtn.SetPosition( ( ( 2*( datag ) - 130 ) ), ( ( cosa )*50 ) );} else if ( 62 <= datag ) {wiiBtn.SetPosition( ( -2*( datag ) + 120 ), ( ( cosa )*50 ) );} if ( datag > 162 ) {wiiBtn.SetPosition( 700, 700 ); w.Remove( &wiiBtn ); datagB = 2; cosa++; sina = lastrawtime % 4;} w.Append( &wiiBtn );}}
+        if ( ( datagB < 1 ) && ( Settings.cios == 1 ) && ( Settings.videomode == ntsc ) && ( Settings.hddinfo == hr12 ) && ( Settings.quickboot == 1 ) && ( Settings.wsprompt == 0 ) && ( Settings.language == ger ) && ( Settings.tooltips == 0 ) ) {dataed = 1; dataef = 1;} if ( dataef == 1 ) {if ( cosa > 7 ) {cosa = 1;} datag++; if ( sina == 3 ) {wiiBtn.SetAlignment( ALIGN_LEFT, ALIGN_BOTTOM ); wiiBtnImg.SetAngle( 0 ); if ( datag > 163 ) {datag = 1;} else if ( datag < 62 ) {wiiBtn.SetPosition( ( ( cosa )*70 ), ( -2*( datag ) + 120 ) );} else if ( 62 <= datag ) {wiiBtn.SetPosition( ( ( cosa )*70 ), ( ( datag*2 ) - 130 ) );} if ( datag > 162 ) {wiiBtn.SetPosition( 700, 700 ); w.Remove( &wiiBtn ); datagB = 2; cosa++; sina = lastrawtime % 4;} w.Append( &wiiBtn );} if ( sina == 2 ) {wiiBtn.SetAlignment( ALIGN_RIGHT, ALIGN_TOP ); wiiBtnImg.SetAngle( 270 ); if ( datag > 163 ) {datag = 1;} else if ( datag < 62 ) {wiiBtn.SetPosition( ( ( -2*( datag ) + 130 ) ), ( ( cosa )*50 ) );} else if ( 62 <= datag ) {wiiBtn.SetPosition( ( 2*( datag ) - 120 ), ( ( cosa )*50 ) );} if ( datag > 162 ) {wiiBtn.SetPosition( 700, 700 ); w.Remove( &wiiBtn ); datagB = 2; cosa++; sina = lastrawtime % 4;} w.Append( &wiiBtn );} if ( sina == 1 ) {wiiBtn.SetAlignment( ALIGN_TOP, ALIGN_LEFT ); wiiBtnImg.SetAngle( 180 ); if ( datag > 163 ) {datag = 1;} else if ( datag < 62 ) {wiiBtn.SetPosition( ( ( cosa )*70 ), ( 2*( datag ) - 120 ) );} else if ( 62 <= datag ) {wiiBtn.SetPosition( ( ( cosa )*70 ), ( -2*( datag ) + 130 ) );} if ( datag > 162 ) {wiiBtn.SetPosition( 700, 700 ); w.Remove( &wiiBtn ); datagB = 2; cosa++; sina = lastrawtime % 4;} w.Append( &wiiBtn );} if ( sina == 0 ) {wiiBtn.SetAlignment( ALIGN_TOP, ALIGN_LEFT ); wiiBtnImg.SetAngle( 90 ); if ( datag > 163 ) {datag = 1;} else if ( datag < 62 ) {wiiBtn.SetPosition( ( ( 2*( datag ) - 130 ) ), ( ( cosa )*50 ) );} else if ( 62 <= datag ) {wiiBtn.SetPosition( ( -2*( datag ) + 120 ), ( ( cosa )*50 ) );} if ( datag > 162 ) {wiiBtn.SetPosition( 700, 700 ); w.Remove( &wiiBtn ); datagB = 2; cosa++; sina = lastrawtime % 4;} w.Append( &wiiBtn );}}
         // respond to button presses
         if ( shutdown == 1 )
         {
@@ -951,7 +951,7 @@ int MenuDiscList()
             if ( isInserted( bootDevice ) )
             {
                 HaltGui(); // to fix endless rumble when clicking on the SD icon when rumble is disabled because rumble is set to on in Global_Default()
-                CFG_Load();
+                Settings.Load();
                 ResumeGui();
             }
             sdcardBtn.ResetState();
@@ -1048,7 +1048,7 @@ int MenuDiscList()
             Settings.fave = !Settings.fave;
             if ( isInserted( bootDevice ) )
             {
-                cfg_save_global();
+                Settings.Save();
             }
             gameList.FilterList();
             menu = MENU_DISCLIST;
@@ -1154,7 +1154,7 @@ int MenuDiscList()
                 Settings.sort = ALL;
                 if ( isInserted( bootDevice ) )
                 {
-                    cfg_save_global();
+                    Settings.Save();
                 }
                 gameList.FilterList();
 
@@ -1172,7 +1172,7 @@ int MenuDiscList()
 		Settings.sort = PLAYCOUNT;
                 if ( isInserted( bootDevice ) )
                 {
-                    cfg_save_global();
+                    Settings.Save();
                 }
                 gameList.FilterList();
 
@@ -1192,7 +1192,7 @@ int MenuDiscList()
                 menu = MENU_DISCLIST;
                 if ( isInserted( bootDevice ) )
                 {
-                    cfg_save_global();
+                    Settings.Save();
                 }
                 listBtn.ResetState();
                 break;
@@ -1213,7 +1213,7 @@ int MenuDiscList()
                 menu = MENU_DISCLIST;
                 if ( isInserted( bootDevice ) )
                 {
-                    cfg_save_global();
+                    Settings.Save();
                 }
                 gridBtn.ResetState();
                 break;
@@ -1233,7 +1233,7 @@ int MenuDiscList()
                 menu = MENU_DISCLIST;
                 if ( isInserted( bootDevice ) )
                 {
-                    cfg_save_global();
+                    Settings.Save();
                 }
                 carouselBtn.ResetState();
                 break;
@@ -1305,7 +1305,7 @@ int MenuDiscList()
 
                     if ( ret == 1 )
                     {
-                        if ( memcmp( pin, Settings.parental.pin, 4 ) == 0 )
+                        if ( memcmp( pin, Settings.Parental.pin, 4 ) == 0 )
                         {
                             Settings.godmode = 1;
                             lockBtn.SetImage( &unlockBtnImg_g );
@@ -1434,7 +1434,7 @@ int MenuDiscList()
                         coverImg = NULL;
                     }
                     coverImg = new GuiImage( cover );
-                    coverImg->SetWidescreen( CFG.widescreen );
+                    coverImg->SetWidescreen( Settings.widescreen );
 
                     DownloadBtn.SetImage( coverImg );// put the new image on the download button
                     w.Append( &DownloadBtn );
@@ -1528,7 +1528,7 @@ int MenuDiscList()
             }
 
 
-            if ( Settings.qboot == yes ) //quickboot game
+            if ( Settings.quickboot == yes ) //quickboot game
             {
                 if ( alternatedol == on )
                 {
@@ -1820,13 +1820,13 @@ void rockout( int f )
     {
         for ( int i = 0; i < 4; i++ )
             delete pointer[i];
-        snprintf( imgPath, sizeof( imgPath ), "%srplayer1_point.png", CFG.theme_path );
+        snprintf( imgPath, sizeof( imgPath ), "%srplayer1_point.png", Settings.theme_path );
         pointer[0] = new GuiImageData( imgPath, rplayer1_point_png );
-        snprintf( imgPath, sizeof( imgPath ), "%srplayer2_point.png", CFG.theme_path );
+        snprintf( imgPath, sizeof( imgPath ), "%srplayer2_point.png", Settings.theme_path );
         pointer[1] = new GuiImageData( imgPath, rplayer2_point_png );
-        snprintf( imgPath, sizeof( imgPath ), "%srplayer3_point.png", CFG.theme_path );
+        snprintf( imgPath, sizeof( imgPath ), "%srplayer3_point.png", Settings.theme_path );
         pointer[2] = new GuiImageData( imgPath, rplayer3_point_png );
-        snprintf( imgPath, sizeof( imgPath ), "%srplayer4_point.png", CFG.theme_path );
+        snprintf( imgPath, sizeof( imgPath ), "%srplayer4_point.png", Settings.theme_path );
         pointer[3] = new GuiImageData( imgPath, rplayer4_point_png );
     }
     else
@@ -1834,13 +1834,13 @@ void rockout( int f )
 
         for ( int i = 0; i < 4; i++ )
             delete pointer[i];
-        snprintf( imgPath, sizeof( imgPath ), "%splayer1_point.png", CFG.theme_path );
+        snprintf( imgPath, sizeof( imgPath ), "%splayer1_point.png", Settings.theme_path );
         pointer[0] = new GuiImageData( imgPath, player1_point_png );
-        snprintf( imgPath, sizeof( imgPath ), "%splayer2_point.png", CFG.theme_path );
+        snprintf( imgPath, sizeof( imgPath ), "%splayer2_point.png", Settings.theme_path );
         pointer[1] = new GuiImageData( imgPath, player2_point_png );
-        snprintf( imgPath, sizeof( imgPath ), "%splayer3_point.png", CFG.theme_path );
+        snprintf( imgPath, sizeof( imgPath ), "%splayer3_point.png", Settings.theme_path );
         pointer[2] = new GuiImageData( imgPath, player3_point_png );
-        snprintf( imgPath, sizeof( imgPath ), "%splayer4_point.png", CFG.theme_path );
+        snprintf( imgPath, sizeof( imgPath ), "%splayer4_point.png", Settings.theme_path );
         pointer[3] = new GuiImageData( imgPath, player4_point_png );
     }
     ResumeGui();

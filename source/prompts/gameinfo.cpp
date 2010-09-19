@@ -150,15 +150,15 @@ int showGameInfo( char *ID )
         GuiSound btnSoundOver( button_over_pcm, button_over_pcm_size, Settings.sfxvolume );
         GuiSound btnClick( button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume );
         char imgPath[100];
-        snprintf( imgPath, sizeof( imgPath ), "%sbutton_dialogue_box.png", CFG.theme_path );
+        snprintf( imgPath, sizeof( imgPath ), "%sbutton_dialogue_box.png", Settings.theme_path );
         GuiImageData btnOutline( imgPath, button_dialogue_box_png );
-        snprintf( imgPath, sizeof( imgPath ), "%sgameinfo1_png.png", CFG.theme_path );
+        snprintf( imgPath, sizeof( imgPath ), "%sgameinfo1_png.png", Settings.theme_path );
         GuiImageData dialogBox1( imgPath, gameinfo1_png );
-        snprintf( imgPath, sizeof( imgPath ), "%sgameinfo1a_png.png", CFG.theme_path );
+        snprintf( imgPath, sizeof( imgPath ), "%sgameinfo1a_png.png", Settings.theme_path );
         GuiImageData dialogBox2( imgPath, gameinfo1a_png );
-        snprintf( imgPath, sizeof( imgPath ), "%sgameinfo2_png.png", CFG.theme_path );
+        snprintf( imgPath, sizeof( imgPath ), "%sgameinfo2_png.png", Settings.theme_path );
         GuiImageData dialogBox3( imgPath, gameinfo2_png );
-        snprintf( imgPath, sizeof( imgPath ), "%sgameinfo2a_png.png", CFG.theme_path );
+        snprintf( imgPath, sizeof( imgPath ), "%sgameinfo2a_png.png", Settings.theme_path );
         GuiImageData dialogBox4( imgPath, gameinfo2a_png );
 
         GuiTrigger trig1;
@@ -349,7 +349,7 @@ int showGameInfo( char *ID )
         coverImg = NULL;
 
         coverImg = new GuiImage( cover );
-        coverImg->SetWidescreen( CFG.widescreen );
+        coverImg->SetWidescreen( Settings.widescreen );
         coverImg->SetPosition( 15, 30 );
         gameinfoWindow.Append( coverImg );
 
@@ -367,140 +367,140 @@ int showGameInfo( char *ID )
             }
 
             playersImg = new GuiImage( playersImgData );
-            playersImg->SetWidescreen( CFG.widescreen );
+            playersImg->SetWidescreen( Settings.widescreen );
             playersImg->SetPosition( intputX , inputY );
             playersImg->SetAlignment( 0, 4 );
             gameinfoWindow.Append( playersImg );
-            intputX += ( CFG.widescreen ? playersImg->GetWidth() * .8 : playersImg->GetWidth() ) + 5;
+            intputX += ( Settings.widescreen ? playersImg->GetWidth() * .8 : playersImg->GetWidth() ) + 5;
         }
 
         //draw the input types for this game
         if ( motionplus == 1 )
         {
             motionplusImg = new GuiImage( motionplusImgData );
-            motionplusImg->SetWidescreen( CFG.widescreen );
+            motionplusImg->SetWidescreen( Settings.widescreen );
             motionplusImg->SetPosition( intputX , inputY );
             motionplusImg->SetAlignment( 0, 4 );
             gameinfoWindow.Append( motionplusImg );
-            intputX += ( CFG.widescreen ? motionplusImg->GetWidth() * .8 : motionplusImg->GetWidth() ) + 5;
+            intputX += ( Settings.widescreen ? motionplusImg->GetWidth() * .8 : motionplusImg->GetWidth() ) + 5;
         }
         if ( nunchuk == 1 )
         {
             nunchukImg = new GuiImage( nunchukImgData );
-            nunchukImg->SetWidescreen( CFG.widescreen );
+            nunchukImg->SetWidescreen( Settings.widescreen );
             nunchukImg->SetPosition( intputX , inputY );
             nunchukImg->SetAlignment( 0, 4 );
             gameinfoWindow.Append( nunchukImg );
-            intputX += ( CFG.widescreen ? nunchukImg->GetWidth() * .8 : nunchukImg->GetWidth() ) + 5;
+            intputX += ( Settings.widescreen ? nunchukImg->GetWidth() * .8 : nunchukImg->GetWidth() ) + 5;
         }
         if ( classiccontroller == 1 )
         {
             classiccontrollerImg = new GuiImage( classiccontrollerImgData );
-            classiccontrollerImg->SetWidescreen( CFG.widescreen );
+            classiccontrollerImg->SetWidescreen( Settings.widescreen );
             classiccontrollerImg->SetPosition( intputX , inputY );
             classiccontrollerImg->SetAlignment( 0, 4 );
             gameinfoWindow.Append( classiccontrollerImg );
-            intputX += ( CFG.widescreen ? classiccontrollerImg->GetWidth() * .8 : classiccontrollerImg->GetWidth() ) + 5;
+            intputX += ( Settings.widescreen ? classiccontrollerImg->GetWidth() * .8 : classiccontrollerImg->GetWidth() ) + 5;
         }
         if ( gamecube == 1 )
         {
             gcImg = new GuiImage( gamecubeImgData );
-            gcImg->SetWidescreen( CFG.widescreen );
+            gcImg->SetWidescreen( Settings.widescreen );
             gcImg->SetPosition( intputX , inputY );
             gcImg->SetAlignment( 0, 4 );
             gameinfoWindow.Append( gcImg );
-            intputX += ( CFG.widescreen ? gcImg->GetWidth() * .8 : gcImg->GetWidth() ) + 5;
+            intputX += ( Settings.widescreen ? gcImg->GetWidth() * .8 : gcImg->GetWidth() ) + 5;
         }
         if ( wheel == 1 )
         {
             wheelImg = new GuiImage( wheelImgData );
-            wheelImg->SetWidescreen( CFG.widescreen );
+            wheelImg->SetWidescreen( Settings.widescreen );
             wheelImg->SetPosition( intputX , inputY );
             wheelImg->SetAlignment( 0, 4 );
             gameinfoWindow.Append( wheelImg );
-            intputX += ( CFG.widescreen ? wheelImg->GetWidth() * .8 : wheelImg->GetWidth() ) + 5;
+            intputX += ( Settings.widescreen ? wheelImg->GetWidth() * .8 : wheelImg->GetWidth() ) + 5;
         }
         if ( guitar == 1 )
         {
             guitarImg = new GuiImage( guitarImgData );
-            guitarImg->SetWidescreen( CFG.widescreen );
+            guitarImg->SetWidescreen( Settings.widescreen );
             guitarImg->SetPosition( intputX , inputY );
             guitarImg->SetAlignment( 0, 4 );
             gameinfoWindow.Append( guitarImg );
-            intputX += ( CFG.widescreen ? guitarImg->GetWidth() * .8 : guitarImg->GetWidth() ) + 5;
+            intputX += ( Settings.widescreen ? guitarImg->GetWidth() * .8 : guitarImg->GetWidth() ) + 5;
         }
         if ( drums == 1 )
         {
             drumsImg = new GuiImage( drumsImgData );
-            drumsImg->SetWidescreen( CFG.widescreen );
+            drumsImg->SetWidescreen( Settings.widescreen );
             drumsImg->SetPosition( intputX , inputY );
             drumsImg->SetAlignment( 0, 4 );
             gameinfoWindow.Append( drumsImg );
-            intputX += ( CFG.widescreen ? drumsImg->GetWidth() * .8 : drumsImg->GetWidth() ) + 5;
+            intputX += ( Settings.widescreen ? drumsImg->GetWidth() * .8 : drumsImg->GetWidth() ) + 5;
         }
         if ( microphone == 1 )
         {
             microphoneImg = new GuiImage( microphoneImgData );
-            microphoneImg->SetWidescreen( CFG.widescreen );
+            microphoneImg->SetWidescreen( Settings.widescreen );
             microphoneImg->SetPosition( intputX , inputY );
             microphoneImg->SetAlignment( 0, 4 );
             gameinfoWindow.Append( microphoneImg );
-            intputX += ( CFG.widescreen ? microphoneImg->GetWidth() * .8 : microphoneImg->GetWidth() ) + 5;
+            intputX += ( Settings.widescreen ? microphoneImg->GetWidth() * .8 : microphoneImg->GetWidth() ) + 5;
         }
         if ( zapper == 1 )
         {
             zapperImg = new GuiImage( zapperImgData );
-            zapperImg->SetWidescreen( CFG.widescreen );
+            zapperImg->SetWidescreen( Settings.widescreen );
             zapperImg->SetPosition( intputX , inputY );
             zapperImg->SetAlignment( 0, 4 );
             gameinfoWindow.Append( zapperImg );
-            intputX += ( CFG.widescreen ? zapperImg->GetWidth() * .8 : zapperImg->GetWidth() ) + 5;
+            intputX += ( Settings.widescreen ? zapperImg->GetWidth() * .8 : zapperImg->GetWidth() ) + 5;
         }
         if ( wiispeak == 1 )
         {
             wiispeakImg = new GuiImage( wiispeakImgData );
-            wiispeakImg->SetWidescreen( CFG.widescreen );
+            wiispeakImg->SetWidescreen( Settings.widescreen );
             wiispeakImg->SetPosition( intputX , inputY );
             wiispeakImg->SetAlignment( 0, 4 );
             gameinfoWindow.Append( wiispeakImg );
-            intputX += ( CFG.widescreen ? wiispeakImg->GetWidth() * .8 : wiispeakImg->GetWidth() ) + 5;
+            intputX += ( Settings.widescreen ? wiispeakImg->GetWidth() * .8 : wiispeakImg->GetWidth() ) + 5;
         }
         if ( nintendods == 1 )
         {
             nintendodsImg = new GuiImage( nintendodsImgData );
-            nintendodsImg->SetWidescreen( CFG.widescreen );
+            nintendodsImg->SetWidescreen( Settings.widescreen );
             nintendodsImg->SetPosition( intputX , inputY );
             nintendodsImg->SetAlignment( 0, 4 );
             gameinfoWindow.Append( nintendodsImg );
-            intputX += ( CFG.widescreen ? nintendodsImg->GetWidth() * .8 : nintendodsImg->GetWidth() ) + 5;
+            intputX += ( Settings.widescreen ? nintendodsImg->GetWidth() * .8 : nintendodsImg->GetWidth() ) + 5;
         }
         /*
         if (vitalitysensor==1) {
             vitalitysensorImg = new GuiImage(vitalitysensorImgData);
-            vitalitysensorImg->SetWidescreen(CFG.widescreen);
+            vitalitysensorImg->SetWidescreen(Settings.widescreen);
             vitalitysensorImg->SetPosition(intputX , inputY);
             vitalitysensorImg->SetAlignment(0,4);
             gameinfoWindow.Append(vitalitysensorImg);
-            intputX += (CFG.widescreen ? vitalitysensorImg->GetWidth() * .8 : vitalitysensorImg->GetWidth())+5;
+            intputX += (Settings.widescreen ? vitalitysensorImg->GetWidth() * .8 : vitalitysensorImg->GetWidth())+5;
         }
         */
         if ( dancepad == 1 )
         {
             dancepadImg = new GuiImage( dancepadImgData );
-            dancepadImg->SetWidescreen( CFG.widescreen );
+            dancepadImg->SetWidescreen( Settings.widescreen );
             dancepadImg->SetPosition( intputX , inputY );
             dancepadImg->SetAlignment( 0, 4 );
             gameinfoWindow.Append( dancepadImg );
-            intputX += ( CFG.widescreen ? dancepadImg->GetWidth() * .8 : dancepadImg->GetWidth() ) + 5;
+            intputX += ( Settings.widescreen ? dancepadImg->GetWidth() * .8 : dancepadImg->GetWidth() ) + 5;
         }
         if ( balanceboard == 1 )
         {
             balanceboardImg = new GuiImage( balanceboardImgData );
-            balanceboardImg->SetWidescreen( CFG.widescreen );
+            balanceboardImg->SetWidescreen( Settings.widescreen );
             balanceboardImg->SetPosition( intputX , inputY );
             balanceboardImg->SetAlignment( 0, 4 );
             gameinfoWindow.Append( balanceboardImg );
-            intputX += ( CFG.widescreen ? balanceboardImg->GetWidth() * .8 : balanceboardImg->GetWidth() ) + 5;
+            intputX += ( Settings.widescreen ? balanceboardImg->GetWidth() * .8 : balanceboardImg->GetWidth() ) + 5;
         }
 
         // # online players
@@ -538,11 +538,11 @@ int showGameInfo( char *ID )
                 wifiplayersImgData = new GuiImageData( wifi32_png );
             }
             wifiplayersImg = new GuiImage( wifiplayersImgData );
-            wifiplayersImg->SetWidescreen( CFG.widescreen );
+            wifiplayersImg->SetWidescreen( Settings.widescreen );
             wifiplayersImg->SetPosition( intputX , inputY );
             wifiplayersImg->SetAlignment( 0, 4 );
             gameinfoWindow.Append( wifiplayersImg );
-            intputX += ( CFG.widescreen ? wifiplayersImg->GetWidth() * .8 : wifiplayersImg->GetWidth() ) + 5;
+            intputX += ( Settings.widescreen ? wifiplayersImg->GetWidth() * .8 : wifiplayersImg->GetWidth() ) + 5;
         }
 
         // ratings
@@ -607,11 +607,11 @@ int showGameInfo( char *ID )
                 ratingImgData = new GuiImageData( norating_png );
             }
             ratingImg = new GuiImage( ratingImgData );
-            ratingImg->SetWidescreen( CFG.widescreen );
+            ratingImg->SetWidescreen( Settings.widescreen );
             ratingImg->SetPosition( -25 , inputY );
             ratingImg->SetAlignment( 1, 4 );
             gameinfoWindow.Append( ratingImg );
-            intputX += ( CFG.widescreen ? ratingImg->GetWidth() * .8 : ratingImg->GetWidth() ) + 5;
+            intputX += ( Settings.widescreen ? ratingImg->GetWidth() * .8 : ratingImg->GetWidth() ) + 5;
         }
 
         // memory info
@@ -808,7 +808,7 @@ int showGameInfo( char *ID )
             txtWindow.Append( &upBtn );
             txtWindow.Append( &dnBtn );
             coverImg2 = new GuiImage( cover );
-            coverImg2->SetWidescreen( CFG.widescreen );
+            coverImg2->SetWidescreen( Settings.widescreen );
             coverImg2->SetPosition( 15, 30 );
             gameinfoWindow2.Append( coverImg2 );
             gameinfoWindow2.Append( &txtWindow );

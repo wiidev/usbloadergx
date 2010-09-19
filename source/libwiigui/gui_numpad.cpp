@@ -10,7 +10,7 @@
 
 #include "gui.h"
 #include "../main.h"
-#include "../settings/cfg.h"
+#include "../settings/CSettings.h"
 #include <stdio.h>
 #include <string.h>
 /**

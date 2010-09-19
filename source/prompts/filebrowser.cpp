@@ -328,14 +328,14 @@ int BrowseDevice( char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*
     folderBtn.SetEffectGrow();
 
     char imgPath[100];
-    snprintf( imgPath, sizeof( imgPath ), "%sbutton_dialogue_box.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sbutton_dialogue_box.png", Settings.theme_path );
     GuiImageData btnOutline( imgPath, button_dialogue_box_png );
     GuiText ExitBtnTxt( tr( "Cancel" ), 24, ( GXColor ) {0, 0, 0, 255} );
     GuiImage ExitBtnImg( &btnOutline );
     if ( Settings.wsprompt == yes )
     {
-        ExitBtnTxt.SetWidescreen( CFG.widescreen );
-        ExitBtnImg.SetWidescreen( CFG.widescreen );
+        ExitBtnTxt.SetWidescreen( Settings.widescreen );
+        ExitBtnImg.SetWidescreen( Settings.widescreen );
     }
     GuiButton ExitBtn( btnOutline.GetWidth(), btnOutline.GetHeight() );
     ExitBtn.SetAlignment( ALIGN_RIGHT, ALIGN_BOTTOM );
@@ -350,8 +350,8 @@ int BrowseDevice( char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*
     GuiImage usbBtnImg( &btnOutline );
     if ( Settings.wsprompt == yes )
     {
-        usbBtnTxt.SetWidescreen( CFG.widescreen );
-        usbBtnImg.SetWidescreen( CFG.widescreen );
+        usbBtnTxt.SetWidescreen( Settings.widescreen );
+        usbBtnImg.SetWidescreen( Settings.widescreen );
     }
     GuiButton usbBtn( btnOutline.GetWidth(), btnOutline.GetHeight() );
     usbBtn.SetAlignment( ALIGN_CENTRE, ALIGN_BOTTOM );
@@ -365,8 +365,8 @@ int BrowseDevice( char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*
     GuiImage okBtnImg( &btnOutline );
     if ( Settings.wsprompt == yes )
     {
-        okBtnTxt.SetWidescreen( CFG.widescreen );
-        okBtnImg.SetWidescreen( CFG.widescreen );
+        okBtnTxt.SetWidescreen( Settings.widescreen );
+        okBtnImg.SetWidescreen( Settings.widescreen );
     }
     GuiButton okBtn( &okBtnImg, &okBtnImg, 0, 4, 40, -35, &trigA, &btnSoundOver, btnClick2, 1 );
     okBtn.SetLabel( &okBtnTxt );

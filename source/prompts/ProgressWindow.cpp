@@ -132,9 +132,9 @@ static void ProgressWindow( const char *title, const char *msg1, const char *msg
     promptWindow.SetPosition( 0, -10 );
 
     char imgPath[100];
-    snprintf( imgPath, sizeof( imgPath ), "%sbutton_dialogue_box.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sbutton_dialogue_box.png", Settings.theme_path );
     GuiImageData btnOutline( imgPath, button_dialogue_box_png );
-    snprintf( imgPath, sizeof( imgPath ), "%sdialogue_box.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sdialogue_box.png", Settings.theme_path );
     GuiImageData dialogBox( imgPath, dialogue_box_png );
 
     GuiTrigger trigA;
@@ -143,28 +143,28 @@ static void ProgressWindow( const char *title, const char *msg1, const char *msg
     GuiImage dialogBoxImg( &dialogBox );
     if ( Settings.wsprompt == yes )
     {
-        dialogBoxImg.SetWidescreen( CFG.widescreen );
+        dialogBoxImg.SetWidescreen( Settings.widescreen );
     }
 
-    snprintf( imgPath, sizeof( imgPath ), "%sprogressbar_outline.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sprogressbar_outline.png", Settings.theme_path );
     GuiImageData progressbarOutline( imgPath, progressbar_outline_png );
 
     GuiImage progressbarOutlineImg( &progressbarOutline );
     if ( Settings.wsprompt == yes )
     {
-        progressbarOutlineImg.SetWidescreen( CFG.widescreen );
+        progressbarOutlineImg.SetWidescreen( Settings.widescreen );
     }
     progressbarOutlineImg.SetAlignment( ALIGN_LEFT, ALIGN_MIDDLE );
     progressbarOutlineImg.SetPosition( 25, 40 );
 
-    snprintf( imgPath, sizeof( imgPath ), "%sprogressbar_empty.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sprogressbar_empty.png", Settings.theme_path );
     GuiImageData progressbarEmpty( imgPath, progressbar_empty_png );
     GuiImage progressbarEmptyImg( &progressbarEmpty );
     progressbarEmptyImg.SetAlignment( ALIGN_LEFT, ALIGN_MIDDLE );
     progressbarEmptyImg.SetPosition( 25, 40 );
     progressbarEmptyImg.SetTile( 100 );
 
-    snprintf( imgPath, sizeof( imgPath ), "%sprogressbar.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sprogressbar.png", Settings.theme_path );
     GuiImageData progressbar( imgPath, progressbar_png );
     GuiImage progressbarImg( &progressbar );
     progressbarImg.SetAlignment( ALIGN_LEFT, ALIGN_MIDDLE );
@@ -207,7 +207,7 @@ static void ProgressWindow( const char *title, const char *msg1, const char *msg
     prTxt.SetAlignment( ALIGN_LEFT, ALIGN_MIDDLE );
     prTxt.SetPosition( 200, 40 );
 
-    if ( ( Settings.wsprompt == yes ) && ( CFG.widescreen ) )  /////////////adjust for widescreen
+    if ( ( Settings.wsprompt == yes ) && ( Settings.widescreen ) )  /////////////adjust for widescreen
     {
         progressbarOutlineImg.SetAlignment( ALIGN_CENTRE, ALIGN_MIDDLE );
         progressbarOutlineImg.SetPosition( 0, 40 );
@@ -273,7 +273,7 @@ static void ProgressWindow( const char *title, const char *msg1, const char *msg
 
             tmp = static_cast<int>( progressbarImg.GetWidth() * progressDone );
 
-            if ( CFG.widescreen && Settings.wsprompt == yes )
+            if ( Settings.widescreen && Settings.wsprompt == yes )
                 progressbarImg.SetSkew( 0, 0, static_cast<int>( progressbarImg.GetWidth()*progressDone*0.8 ) - progressbarImg.GetWidth(), 0, static_cast<int>( progressbarImg.GetWidth()*progressDone*0.8 ) - progressbarImg.GetWidth(), 0, 0, 0 );
             else
                 progressbarImg.SetSkew( 0, 0, static_cast<int>( progressbarImg.GetWidth()*progressDone ) - progressbarImg.GetWidth(), 0, static_cast<int>( progressbarImg.GetWidth()*progressDone ) - progressbarImg.GetWidth(), 0, 0, 0 );

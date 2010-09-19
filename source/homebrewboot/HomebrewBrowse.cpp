@@ -40,7 +40,6 @@ extern u32 uncfilesize;
 extern char wiiloadVersion[2];
 extern u8 shutdown;
 extern u8 reset;
-extern struct SSettings Settings;
 
 /*** Variables used elsewhere ***/
 u8 boothomebrew = 0;
@@ -95,28 +94,28 @@ int MenuHomebrewBrowse()
 
     /*** Image Variables ***/
     char imgPath[150];
-    snprintf( imgPath, sizeof( imgPath ), "%sbutton_dialogue_box.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sbutton_dialogue_box.png", Settings.theme_path );
     GuiImageData btnOutline( imgPath, button_dialogue_box_png );
 
-    snprintf( imgPath, sizeof( imgPath ), "%ssettings_background.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%ssettings_background.png", Settings.theme_path );
     GuiImageData bgData( imgPath, settings_background_png );
 
-    snprintf( imgPath, sizeof( imgPath ), "%ssettings_title.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%ssettings_title.png", Settings.theme_path );
     GuiImageData MainButtonImgData( imgPath, settings_title_png );
 
-    snprintf( imgPath, sizeof( imgPath ), "%ssettings_title_over.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%ssettings_title_over.png", Settings.theme_path );
     GuiImageData MainButtonImgOverData( imgPath, settings_title_over_png );
 
-    snprintf( imgPath, sizeof( imgPath ), "%sstartgame_arrow_left.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sstartgame_arrow_left.png", Settings.theme_path );
     GuiImageData arrow_left( imgPath, startgame_arrow_left_png );
 
-    snprintf( imgPath, sizeof( imgPath ), "%sstartgame_arrow_right.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sstartgame_arrow_right.png", Settings.theme_path );
     GuiImageData arrow_right( imgPath, startgame_arrow_right_png );
 
-    snprintf( imgPath, sizeof( imgPath ), "%sWifi_btn.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sWifi_btn.png", Settings.theme_path );
     GuiImageData wifiImgData( imgPath, Wifi_btn_png );
 
-    snprintf( imgPath, sizeof( imgPath ), "%sChannel_btn.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sChannel_btn.png", Settings.theme_path );
     GuiImageData channelImgData( imgPath, Channel_btn_png );
 
 
@@ -157,8 +156,8 @@ int MenuHomebrewBrowse()
     GuiImage backBtnImg( &btnOutline );
     if ( Settings.wsprompt == yes )
     {
-        backBtnTxt.SetWidescreen( CFG.widescreen );
-        backBtnImg.SetWidescreen( CFG.widescreen );
+        backBtnTxt.SetWidescreen( Settings.widescreen );
+        backBtnImg.SetWidescreen( Settings.widescreen );
     }
     GuiButton backBtn( &backBtnImg, &backBtnImg, 2, 3, -180, 400, &trigA, &btnSoundOver, btnClick2, 1 );
     backBtn.SetLabel( &backBtnTxt );
@@ -305,7 +304,7 @@ int MenuHomebrewBrowse()
     GuiImage wifiImg( &wifiImgData );
     if ( Settings.wsprompt == yes )
     {
-        wifiImg.SetWidescreen( CFG.widescreen );
+        wifiImg.SetWidescreen( Settings.widescreen );
     }
     GuiButton wifiBtn( wifiImg.GetWidth(), wifiImg.GetHeight() );
     wifiBtn.SetImage( &wifiImg );
@@ -317,7 +316,7 @@ int MenuHomebrewBrowse()
     wifiBtn.SetTrigger( &trigA );
 
     GuiImage channelBtnImg( &channelImgData );
-    channelBtnImg.SetWidescreen( CFG.widescreen );
+    channelBtnImg.SetWidescreen( Settings.widescreen );
     GuiButton channelBtn( channelBtnImg.GetWidth(), channelBtnImg.GetHeight() );
     channelBtn.SetAlignment( ALIGN_LEFT, ALIGN_TOP );
     channelBtn.SetPosition( 440, 400 );
@@ -835,7 +834,7 @@ int MenuHomebrewBrowse()
 
             else if ( homo.GetState() == STATE_CLICKED )
             {
-                cfg_save_global();
+                Settings.Save();
                 bgMusic->Pause();
                 choice = WindowExitPrompt();
                 bgMusic->Resume();

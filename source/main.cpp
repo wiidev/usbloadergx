@@ -56,6 +56,7 @@ extern "C"
 
 extern bool geckoinit;
 extern char headlessID[8];
+char bootDevice[10];
 
 NandTitle titles;
 PartList partitions;
@@ -105,8 +106,8 @@ int main( int argc, char *argv[] )
 
     gettextCleanUp();
     printf( "\tLoading configuration..." );
-    CFG_Load();
-    VIDEO_SetWidescreen(CFG.widescreen);
+    Settings.Load();
+    VIDEO_SetWidescreen(Settings.widescreen);
     printf( "done\n" );
 
     SDCard_deInit();// unmount SD for reloading IOS
@@ -149,7 +150,7 @@ int main( int argc, char *argv[] )
     InitAudio();
 
     char *fontPath = NULL;
-    asprintf( &fontPath, "%sfont.ttf", CFG.theme_path );
+    asprintf( &fontPath, "%sfont.ttf", Settings.theme_path );
     SetupDefaultFont( fontPath );
     free( fontPath );
 

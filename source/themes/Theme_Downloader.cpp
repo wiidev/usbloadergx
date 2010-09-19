@@ -121,7 +121,7 @@ int DownloadTheme( const char *url, const char *title )
         if ( choice )
         {
             char real_themepath[1024];
-            sprintf( real_themepath, "%s", CFG.theme_path );
+            sprintf( real_themepath, "%s", Settings.theme_path );
             if ( SearchFile( path, "GXtheme.cfg", real_themepath ) == true )
             {
                 char *ptr = strrchr( real_themepath, '/' );
@@ -130,10 +130,9 @@ int DownloadTheme( const char *url, const char *title )
                     ptr++;
                     ptr[0] = '\0';
                 }
-                snprintf( CFG.theme_path, sizeof( CFG.theme_path ), "%s", real_themepath );
-                cfg_save_global();
-                CFG_Load();
-                CFG_LoadGlobal();
+                snprintf( Settings.theme_path, sizeof( Settings.theme_path ), "%s", real_themepath );
+                Settings.Save();
+                Settings.Load();
                 result = 2;
             }
             else
@@ -159,9 +158,9 @@ static int Theme_Prompt( const char *title, const char *author, GuiImageData *th
     //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
     char imgPath[100];
-    snprintf( imgPath, sizeof( imgPath ), "%sbutton_dialogue_box.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sbutton_dialogue_box.png", Settings.theme_path );
     GuiImageData btnOutline( imgPath, button_dialogue_box_png );
-    snprintf( imgPath, sizeof( imgPath ), "%stheme_dialogue_box.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%stheme_dialogue_box.png", Settings.theme_path );
     GuiImageData dialogBox( imgPath, theme_dialogue_box_png );
 
     GuiImage dialogBoxImg( &dialogBox );
@@ -198,8 +197,8 @@ static int Theme_Prompt( const char *title, const char *author, GuiImageData *th
     GuiImage downloadBtnImg( &btnOutline );
     if ( Settings.wsprompt == yes )
     {
-        downloadBtnTxt.SetWidescreen( CFG.widescreen );
-        downloadBtnImg.SetWidescreen( CFG.widescreen );
+        downloadBtnTxt.SetWidescreen( Settings.widescreen );
+        downloadBtnImg.SetWidescreen( Settings.widescreen );
     }
     GuiButton downloadBtn( &downloadBtnImg, &downloadBtnImg, ALIGN_RIGHT, ALIGN_TOP, -5, 170, &trigA, &btnSoundOver, btnClick2, 1 );
     downloadBtn.SetLabel( &downloadBtnTxt );
@@ -210,8 +209,8 @@ static int Theme_Prompt( const char *title, const char *author, GuiImageData *th
     GuiImage backBtnImg( &btnOutline );
     if ( Settings.wsprompt == yes )
     {
-        backBtnTxt.SetWidescreen( CFG.widescreen );
-        backBtnImg.SetWidescreen( CFG.widescreen );
+        backBtnTxt.SetWidescreen( Settings.widescreen );
+        backBtnImg.SetWidescreen( Settings.widescreen );
     }
     GuiButton backBtn( &backBtnImg, &backBtnImg, ALIGN_RIGHT, ALIGN_TOP, -5, 220, &trigA, &btnSoundOver, btnClick2, 1 );
     backBtn.SetLabel( &backBtnTxt );
@@ -303,25 +302,25 @@ int Theme_Downloader()
 
     /*** Image Variables ***/
     char imgPath[150];
-    snprintf( imgPath, sizeof( imgPath ), "%sbutton_dialogue_box.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sbutton_dialogue_box.png", Settings.theme_path );
     GuiImageData btnOutline( imgPath, button_dialogue_box_png );
 
-    snprintf( imgPath, sizeof( imgPath ), "%stheme_box.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%stheme_box.png", Settings.theme_path );
     GuiImageData theme_box_Data( imgPath, theme_box_png );
 
-    snprintf( imgPath, sizeof( imgPath ), "%ssettings_background.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%ssettings_background.png", Settings.theme_path );
     GuiImageData bgData( imgPath, settings_background_png );
 
-    snprintf( imgPath, sizeof( imgPath ), "%sstartgame_arrow_left.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sstartgame_arrow_left.png", Settings.theme_path );
     GuiImageData arrow_left( imgPath, startgame_arrow_left_png );
 
-    snprintf( imgPath, sizeof( imgPath ), "%sstartgame_arrow_right.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sstartgame_arrow_right.png", Settings.theme_path );
     GuiImageData arrow_right( imgPath, startgame_arrow_right_png );
 
-    snprintf( imgPath, sizeof( imgPath ), "%sWifi_btn.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sWifi_btn.png", Settings.theme_path );
     GuiImageData wifiImgData( imgPath, Wifi_btn_png );
 
-    snprintf( imgPath, sizeof( imgPath ), "%spageindicator.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%spageindicator.png", Settings.theme_path );
     GuiImageData PageindicatorImgData( imgPath, pageindicator_png );
 
     GuiImage background( &bgData );
@@ -382,8 +381,8 @@ int Theme_Downloader()
     GuiImage backBtnImg( &btnOutline );
     if ( Settings.wsprompt == yes )
     {
-        backBtnTxt.SetWidescreen( CFG.widescreen );
-        backBtnImg.SetWidescreen( CFG.widescreen );
+        backBtnTxt.SetWidescreen( Settings.widescreen );
+        backBtnImg.SetWidescreen( Settings.widescreen );
     }
     GuiButton backBtn( &backBtnImg, &backBtnImg, 2, 3, -180, 400, &trigA, &btnSoundOver, btnClick2, 1 );
     backBtn.SetLabel( &backBtnTxt );
@@ -431,7 +430,7 @@ int Theme_Downloader()
     GuiImage wifiImg( &wifiImgData );
     if ( Settings.wsprompt == yes )
     {
-        wifiImg.SetWidescreen( CFG.widescreen );
+        wifiImg.SetWidescreen( Settings.widescreen );
     }
     GuiButton wifiBtn( wifiImg.GetWidth(), wifiImg.GetHeight() );
     wifiBtn.SetImage( &wifiImg );

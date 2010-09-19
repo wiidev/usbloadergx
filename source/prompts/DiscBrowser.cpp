@@ -159,9 +159,9 @@ int DiscBrowse( struct discHdr * header )
 
     char imgPath[100];
 
-    snprintf( imgPath, sizeof( imgPath ), "%sbutton_dialogue_box.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sbutton_dialogue_box.png", Settings.theme_path );
     GuiImageData btnOutline( imgPath, button_dialogue_box_png );
-    snprintf( imgPath, sizeof( imgPath ), "%sgamesettings_background.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sgamesettings_background.png", Settings.theme_path );
     GuiImageData settingsbg( imgPath, settings_background_png );
 
     GuiTrigger trigA;
@@ -187,8 +187,8 @@ int DiscBrowse( struct discHdr * header )
     GuiImage cancelBtnImg( &btnOutline );
     if ( Settings.wsprompt == yes )
     {
-        cancelBtnTxt.SetWidescreen( CFG.widescreen );
-        cancelBtnImg.SetWidescreen( CFG.widescreen );
+        cancelBtnTxt.SetWidescreen( Settings.widescreen );
+        cancelBtnImg.SetWidescreen( Settings.widescreen );
     }
     GuiButton cancelBtn( &cancelBtnImg, &cancelBtnImg, 2, 3, 180, 400, &trigA, &btnSoundOver, btnClick2, 1 );
     cancelBtn.SetScale( 0.9 );
@@ -199,7 +199,7 @@ int DiscBrowse( struct discHdr * header )
     if ( dolfilecount > 9 )
         scrollbaron = 1;
 
-    GuiCustomOptionBrowser optionBrowser3( 396, 280, &options3, CFG.theme_path, "bg_options_gamesettings.png", bg_options_settings_png, dolfilecount > 9 ? 1 : 0, 200 );
+    GuiCustomOptionBrowser optionBrowser3( 396, 280, &options3, Settings.theme_path, "bg_options_gamesettings.png", bg_options_settings_png, dolfilecount > 9 ? 1 : 0, 200 );
     optionBrowser3.SetPosition( 0, 90 );
     optionBrowser3.SetAlignment( ALIGN_CENTRE, ALIGN_TOP );
 

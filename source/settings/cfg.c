@@ -8,15 +8,11 @@
 
 #include "language/gettext.h"
 #include "listfiles.h"
-#include "xml/xml.h" /* XML - Lustar*/
 #include "cfg.h"
 #define isspace2(c) (c == ' ' || c == '\f' || c == '\n' || c == '\r' || c == '\t' || c == '\v')
 
-struct SSettings Settings;
+static bool WideScreen = false;
 
-char bootDevice[10] = "SD:";
-
-struct CFG CFG;
 struct THEME THEME;
 u8 ocarinaChoice = 0;
 u8 videoChoice = 0;
@@ -191,42 +187,8 @@ void cfg_int( char *name, short *var, int count )
 
 //static char bg_path[100];
 
-void CFG_Default( int widescreen ) // -1 = non forced Mode
+void CFG_DefaultTheme() // -1 = non forced Mode
 {
-    if ( widescreen == -1 )
-        CFG.widescreen = CONF_GetAspectRatio();
-    else
-        CFG.widescreen = widescreen;
-
-    if ( CFG.widescreen )
-    {
-        snprintf( CFG.theme_path, sizeof( CFG.theme_path ), "%s/wtheme/", bootDevice );
-    }
-    else
-    {
-        snprintf( CFG.theme_path, sizeof( CFG.theme_path ), "%s/theme/", bootDevice );
-    }
-
-    if ( widescreen == -1 )
-    {
-        snprintf( Settings.covers_path, sizeof( Settings.covers_path ), "%s/images/", bootDevice ); //default image path
-        snprintf( Settings.covers2d_path, sizeof( Settings.covers2d_path ), "%s/images/2D/", bootDevice ); //default image path
-        snprintf( Settings.disc_path, sizeof( Settings.disc_path ), "%s/images/disc/", bootDevice );
-        snprintf( Settings.titlestxt_path, sizeof( Settings.titlestxt_path ), "%s/config/", bootDevice );//default path for disc images
-        char * empty = "";
-        snprintf( Settings.unlockCode, sizeof( Settings.unlockCode ), empty );  // default password
-        snprintf( Settings.language_path, sizeof( Settings.language_path ), "notset" );
-        snprintf( Settings.languagefiles_path, sizeof( Settings.languagefiles_path ), "%s/config/language/", bootDevice );
-        snprintf( Settings.update_path, sizeof( Settings.update_path ), "%s/apps/usbloader_gx/", bootDevice );
-        snprintf( Settings.theme_downloadpath, sizeof( Settings.theme_downloadpath ), "%s/config/themes/", bootDevice );
-        snprintf( Settings.homebrewapps_path, sizeof( Settings.homebrewapps_path ), "%s/apps/", bootDevice );
-        snprintf( Settings.Cheatcodespath, sizeof( Settings.Cheatcodespath ), "%s/codes/", bootDevice );
-        snprintf( Settings.TxtCheatcodespath, sizeof( Settings.TxtCheatcodespath ), "%s/txtcodes/", bootDevice );
-        snprintf( Settings.BcaCodepath, sizeof( Settings.BcaCodepath ), "%s/bca/", bootDevice );
-        snprintf( Settings.WipCodepath, sizeof( Settings.WipCodepath ), "%s/wip/", bootDevice );
-        snprintf( Settings.dolpath, sizeof( Settings.dolpath ), "%s/", bootDevice );
-        strcpy( Settings.ogg_path, "" );
-    }
     //always set Theme defaults
     //all alignments are left top here
     THEME.gamelist_x = 200;
@@ -289,126 +251,62 @@ void CFG_Default( int widescreen ) // -1 = non forced Mode
 
     THEME.pagesize = 9;
 
-    THEME.gamelist_favorite_x = CFG.widescreen ? 256 : 220;
+    THEME.gamelist_favorite_x = WideScreen ? 256 : 220;
     THEME.gamelist_favorite_y = 13;
-    THEME.gamelist_search_x = CFG.widescreen ? 288 : 260;
+    THEME.gamelist_search_x = WideScreen ? 288 : 260;
     THEME.gamelist_search_y = 13;
-    THEME.gamelist_abc_x = CFG.widescreen ? 320 : 300;
+    THEME.gamelist_abc_x = WideScreen ? 320 : 300;
     THEME.gamelist_abc_y = 13;
-    THEME.gamelist_count_x = CFG.widescreen ? 352 : 340;
+    THEME.gamelist_count_x = WideScreen ? 352 : 340;
     THEME.gamelist_count_y = 13;
-    THEME.gamelist_list_x = CFG.widescreen ? 384 : 380;
+    THEME.gamelist_list_x = WideScreen ? 384 : 380;
     THEME.gamelist_list_y = 13;
-    THEME.gamelist_grid_x = CFG.widescreen ? 416 : 420;
+    THEME.gamelist_grid_x = WideScreen ? 416 : 420;
     THEME.gamelist_grid_y = 13;
-    THEME.gamelist_carousel_x = CFG.widescreen ? 448 : 460;
+    THEME.gamelist_carousel_x = WideScreen ? 448 : 460;
     THEME.gamelist_carousel_y = 13;
-    THEME.gamelist_lock_x = CFG.widescreen ? 480 : 500;
+    THEME.gamelist_lock_x = WideScreen ? 480 : 500;
     THEME.gamelist_lock_y = 13;
-    THEME.gamelist_dvd_x = CFG.widescreen ? 512 : 540;
+    THEME.gamelist_dvd_x = WideScreen ? 512 : 540;
     THEME.gamelist_dvd_y = 13;
 
-    THEME.gamegrid_favorite_x = CFG.widescreen ? 192 : 160;
+    THEME.gamegrid_favorite_x = WideScreen ? 192 : 160;
     THEME.gamegrid_favorite_y = 13;
-    THEME.gamegrid_search_x = CFG.widescreen ? 224 : 200;
+    THEME.gamegrid_search_x = WideScreen ? 224 : 200;
     THEME.gamegrid_search_y = 13;
-    THEME.gamegrid_abc_x = CFG.widescreen ? 256 : 240;
+    THEME.gamegrid_abc_x = WideScreen ? 256 : 240;
     THEME.gamegrid_abc_y = 13;
-    THEME.gamegrid_count_x = CFG.widescreen ? 288 : 280;
+    THEME.gamegrid_count_x = WideScreen ? 288 : 280;
     THEME.gamegrid_count_y = 13;
-    THEME.gamegrid_list_x = CFG.widescreen ? 320 : 320;
+    THEME.gamegrid_list_x = WideScreen ? 320 : 320;
     THEME.gamegrid_list_y = 13;
-    THEME.gamegrid_grid_x = CFG.widescreen ? 352 : 360;
+    THEME.gamegrid_grid_x = WideScreen ? 352 : 360;
     THEME.gamegrid_grid_y = 13;
-    THEME.gamegrid_carousel_x = CFG.widescreen ? 384 : 400;
+    THEME.gamegrid_carousel_x = WideScreen ? 384 : 400;
     THEME.gamegrid_carousel_y = 13;
-    THEME.gamegrid_lock_x = CFG.widescreen ? 416 : 440;
+    THEME.gamegrid_lock_x = WideScreen ? 416 : 440;
     THEME.gamegrid_lock_y = 13;
-    THEME.gamegrid_dvd_x = CFG.widescreen ? 448 : 480;
+    THEME.gamegrid_dvd_x = WideScreen ? 448 : 480;
     THEME.gamegrid_dvd_y = 13;
 
-    THEME.gamecarousel_favorite_x = CFG.widescreen ? 192 : 160;
+    THEME.gamecarousel_favorite_x = WideScreen ? 192 : 160;
     THEME.gamecarousel_favorite_y = 13;
-    THEME.gamecarousel_search_x = CFG.widescreen ? 224 : 200;
+    THEME.gamecarousel_search_x = WideScreen ? 224 : 200;
     THEME.gamecarousel_search_y = 13;
-    THEME.gamecarousel_abc_x = CFG.widescreen ? 256 : 240;
+    THEME.gamecarousel_abc_x = WideScreen ? 256 : 240;
     THEME.gamecarousel_abc_y = 13;
-    THEME.gamecarousel_count_x = CFG.widescreen ? 288 : 280;
+    THEME.gamecarousel_count_x = WideScreen ? 288 : 280;
     THEME.gamecarousel_count_y = 13;
-    THEME.gamecarousel_list_x = CFG.widescreen ? 320 : 320;
+    THEME.gamecarousel_list_x = WideScreen ? 320 : 320;
     THEME.gamecarousel_list_y = 13;
-    THEME.gamecarousel_grid_x = CFG.widescreen ? 352 : 360;
+    THEME.gamecarousel_grid_x = WideScreen ? 352 : 360;
     THEME.gamecarousel_grid_y = 13;
-    THEME.gamecarousel_carousel_x = CFG.widescreen ? 384 : 400;
+    THEME.gamecarousel_carousel_x = WideScreen ? 384 : 400;
     THEME.gamecarousel_carousel_y = 13;
-    THEME.gamecarousel_lock_x = CFG.widescreen ? 416 : 440;
+    THEME.gamecarousel_lock_x = WideScreen ? 416 : 440;
     THEME.gamecarousel_lock_y = 13;
-    THEME.gamecarousel_dvd_x = CFG.widescreen ? 448 : 480;
+    THEME.gamecarousel_dvd_x = WideScreen ? 448 : 480;
     THEME.gamecarousel_dvd_y = 13;
-}
-
-void Global_Default( void )
-{
-    Settings.video = discdefault;
-    Settings.vpatch = off;
-    Settings.language = ConsoleLangDefault;
-    Settings.ocarina = off;
-    Settings.hddinfo = hr12;
-    Settings.sinfo = ( ( THEME.show_id ) ? GameID : Neither );
-    Settings.rumble = RumbleOn;
-    if ( THEME.show_region )
-    {
-        Settings.sinfo = ( ( Settings.sinfo == GameID ) ? Both : GameRegion );
-    }
-    Settings.volume = 80;
-    Settings.sfxvolume = 80;
-    Settings.gamesoundvolume = 80;
-    Settings.tooltips = TooltipsOn;
-    char * empty = "";
-    snprintf( Settings.unlockCode, sizeof( Settings.unlockCode ), empty );
-    snprintf( Settings.returnTo, sizeof( Settings.returnTo ), empty );
-//    Settings.godmode = 1;
-    Settings.gamesound = 1;
-    Settings.parentalcontrol = 0;
-    Settings.cios = ios249;
-    Settings.xflip = no;
-    Settings.qboot = no;
-    Settings.wiilight = 1;
-    Settings.autonetwork = 0;
-    Settings.discart = 0;
-    Settings.patchcountrystrings = 0;
-    Settings.gridRows = 3;
-    Settings.error002 = 2;
-    Settings.titlesOverride = 1;
-    snprintf( Settings.db_url, sizeof( Settings.db_url ), empty );
-    snprintf( Settings.db_language, sizeof( Settings.db_language ), empty );
-    Settings.db_JPtoEN = 0;
-    Settings.screensaver = 3;
-    Settings.musicloopmode = 1;
-    Settings.partition = -1;
-    Settings.marknewtitles = 1;
-    Settings.FatInstallToDir = 0;
-    Settings.partitions_to_install = install_game_only;
-    Settings.fullcopy = 0;
-    Settings.beta_upgrades = 0;
-
-    memset( &Settings.parental, 0, sizeof( struct SParental ) );
-
-    char buf[0x4a];
-    CONF_Init();
-    s32 res = CONF_Get( "IPL.PC", buf, 0x4A );
-    if ( res > 0 )
-    {
-        if ( buf[2] != 0x14 )
-        {
-            Settings.parental.enabled = 1;
-            Settings.parental.rating = buf[2];
-        }
-        Settings.parental.question = buf[7];
-        memcpy( Settings.parental.pin, buf + 3, 4 );
-        memcpy( Settings.parental.answer, buf + 8, 32 );
-    }
-    Settings.godmode = ( Settings.parental.enabled == 0 ) ? 1 : 0;
 }
 
 
@@ -547,119 +445,6 @@ char* trimcopy( char *dest, char *src, int size )
     return dest;
 }
 
-void widescreen_set( char *name, char *val )
-{
-    cfg_name = name;
-    cfg_val = val;
-
-    short widescreen;
-    if ( cfg_bool( "widescreen", &widescreen ) && CFG.widescreen != widescreen )
-        CFG_Default( widescreen ); //reset default when forced an other Screenmode
-}
-
-
-
-void path_set( char *name, char *val )
-{
-    cfg_name = name;
-    cfg_val = val;
-
-    // if these are defined in txt file, use them.  otherwise use defaults
-
-    if ( !CFG.widescreen && ( strcmp( name, "theme_path" ) == 0 ) )  // if in 4:3
-    {
-        strlcpy( CFG.theme_path, val, sizeof( CFG.theme_path ) );
-        return;
-    }
-
-    if ( CFG.widescreen && strcmp( name, "wtheme_path" ) == 0 )   // if in 16:9
-    {
-        strlcpy( CFG.theme_path, val, sizeof( CFG.theme_path ) );
-        return;
-    }
-
-    if ( strcmp( name, "cover_path" ) == 0 )
-    {
-        strlcpy( Settings.covers_path, val, sizeof( Settings.covers_path ) );
-        return;
-    }
-
-    if ( strcmp( name, "cover2d_path" ) == 0 )
-    {
-        strlcpy( Settings.covers2d_path, val, sizeof( Settings.covers2d_path ) );
-        return;
-    }
-
-    if ( strcmp( name, "disc_path" ) == 0 )
-    {
-        strlcpy( Settings.disc_path, val, sizeof( Settings.disc_path ) );
-        return;
-    }
-    if ( strcmp( name, "titlestxt_path" ) == 0 )
-    {
-        strlcpy( Settings.titlestxt_path, val, sizeof( Settings.titlestxt_path ) );
-        return;
-    }
-    if ( strcmp( name, "language_path" ) == 0 )
-    {
-        strlcpy( Settings.language_path, val, sizeof( Settings.language_path ) );
-        return;
-    }
-    if ( strcmp( name, "languagefiles_path" ) == 0 )
-    {
-        strlcpy( Settings.languagefiles_path, val, sizeof( Settings.languagefiles_path ) );
-        return;
-    }
-    if ( strcmp( name, "update_path" ) == 0 )
-    {
-        strlcpy( Settings.update_path, val, sizeof( Settings.update_path ) );
-        return;
-    }
-    if ( strcmp( name, "theme_downloadpath" ) == 0 )
-    {
-        strlcpy( Settings.theme_downloadpath, val, sizeof( Settings.theme_downloadpath ) );
-        return;
-    }
-    if ( strcmp( name, "homebrewapps_path" ) == 0 )
-    {
-        strlcpy( Settings.homebrewapps_path, val, sizeof( Settings.homebrewapps_path ) );
-        return;
-    }
-    if ( strcmp( name, "Cheatcodespath" ) == 0 )
-    {
-        strlcpy( Settings.Cheatcodespath, val, sizeof( Settings.Cheatcodespath ) );
-        return;
-    }
-    if ( strcmp( name, "TxtCheatcodespath" ) == 0 )
-    {
-        strlcpy( Settings.TxtCheatcodespath, val, sizeof( Settings.TxtCheatcodespath ) );
-        return;
-    }
-    if ( strcmp( name, "dolpath" ) == 0 )
-    {
-        strlcpy( Settings.dolpath, val, sizeof( Settings.dolpath ) );
-        return;
-    }
-    if ( strcmp( name, "ogg_path" ) == 0 )
-    {
-        strlcpy( Settings.ogg_path, val, sizeof( Settings.ogg_path ) );
-        return;
-    }
-    if ( strcmp( name, "BcaCodepath" ) == 0 )
-    {
-        strlcpy( Settings.BcaCodepath, val, sizeof( Settings.BcaCodepath ) );
-        return;
-    }
-    if ( strcmp( name, "WipCodepath" ) == 0 )
-    {
-        strlcpy( Settings.WipCodepath, val, sizeof( Settings.WipCodepath ) );
-        return;
-    }
-
-    return;
-
-}
-
 static u32 wCOORDS_FLAGS[2] = {0, 0}; // space for 64 coords - this is enough, also for the future
 #define GET_wCOORD_FLAG(i)  (wCOORDS_FLAGS[i/32] & (1UL << (i%32)))
 #define SET_wCOORD_FLAG(i)  (wCOORDS_FLAGS[i/32] |= (1UL << (i%32)))
@@ -675,7 +460,7 @@ static u32 wCOORDS_FLAGS[2] = {0, 0}; // space for 64 coords - this is enough, a
             THEME.name##_y = y;                                     \
         }                                                           \
     }                                                               \
-    else if (CFG.widescreen &&                                      \
+    else if (WideScreen &&                                      \
                 strcmp(cfg_name, "w" #name "_coords") == 0) {       \
         short x,y;                                                  \
         if (sscanf(val, "%hd,%hd", &x, &y) == 2) {                  \
@@ -695,7 +480,7 @@ static u32 wCOORDS_FLAGS[2] = {0, 0}; // space for 64 coords - this is enough, a
             THEME.name##_h = h;                                     \
         }                                                           \
     }                                                               \
-    else if (CFG.widescreen &&                                      \
+    else if (WideScreen &&                                      \
                 strcmp(cfg_name, "w" #name "_coords") == 0) {       \
     short x,y,w,h;                                                  \
     if (sscanf(val, "%hd,%hd,%hd,%hd", &x, &y, &w, &h) == 4) {      \
@@ -741,7 +526,7 @@ static u32 wCOORDS_FLAGS[2] = {0, 0}; // space for 64 coords - this is enough, a
 static short WorkAroundIconSet = 0;
 static short WorkAroundBarOffset = 100;
 
-void theme_set( char *name, char *val )
+void theme_set(char *name, char *val )
 {
     cfg_name = name;
     cfg_val = val;
@@ -835,16 +620,16 @@ void theme_set( char *name, char *val )
                                                                                                                                                                                                                                             // the old Icons are aligned at center and the new at the left top corner.
                                                                                                                                                                                                                                             // we must add 320 and sub the half image width to get the correct position.
                                                                                                                                                                                                                                             x += 300;
-                                                                                                                                                                                                                                            // the old stuff is optimized for widescreen.
-                                                                                                                                                                                                                                            // if no widescreen, we must reposition the pos
-                                                                                                                                                                                                                                            if ( !CFG.widescreen ) x -= 20;
+                                                                                                                                                                                                                                            // the old stuff is optimized for WideScreen.
+                                                                                                                                                                                                                                            // if no WideScreen, we must reposition the pos
+                                                                                                                                                                                                                                            if ( !WideScreen ) x -= 20;
                                                                                                                                                                                                                                             // old themes have no search_coords
                                                                                                                                                                                                                                             // set the searchIcon to the Position of the favIcon
                                                                                                                                                                                                                                             THEME.gamelist_search_x = x;
                                                                                                                                                                                                                                             THEME.gamegrid_search_x = THEME.gamecarousel_search_x = x - WorkAroundBarOffset;
                                                                                                                                                                                                                                             THEME.gamelist_search_y = THEME.gamegrid_search_y = THEME.gamecarousel_search_y = y;
                                                                                                                                                                                                                                             // place the favIcon to the left side of the searchIcon
-                                                                                                                                                                                                                                            if ( !CFG.widescreen ) x -= CFG.widescreen ? 32 : 40;
+                                                                                                                                                                                                                                            if ( !WideScreen ) x -= WideScreen ? 32 : 40;
                                                                                                                                                                                                                                             THEME.gamelist_favorite_x = x;
                                                                                                                                                                                                                                             THEME.gamegrid_favorite_x = THEME.gamecarousel_favorite_x = x - WorkAroundBarOffset;
                                                                                                                                                                                                                                             THEME.gamelist_favorite_y = THEME.gamegrid_favorite_y = THEME.gamecarousel_favorite_y = y;
@@ -859,9 +644,9 @@ void theme_set( char *name, char *val )
                                                                                                                                                                                                                                             // the old Icons are aligned at center and the new at the left top corner.
                                                                                                                                                                                                                                             // we must add 320 and sub the half image width to get the correct position.
                                                                                                                                                                                                                                             x += 300;
-                                                                                                                                                                                                                                            // the old stuff is optimized for widescreen.
-                                                                                                                                                                                                                                            // if no widescreen, we must reposition the pos
-                                                                                                                                                                                                                                            if ( !CFG.widescreen ) x -= 12;
+                                                                                                                                                                                                                                            // the old stuff is optimized for WideScreen.
+                                                                                                                                                                                                                                            // if no WideScreen, we must reposition the pos
+                                                                                                                                                                                                                                            if ( !WideScreen ) x -= 12;
                                                                                                                                                                                                                                             THEME.gamelist_abc_x = x;
                                                                                                                                                                                                                                             THEME.gamegrid_abc_x = THEME.gamecarousel_abc_x = x - WorkAroundBarOffset;
                                                                                                                                                                                                                                             THEME.gamelist_abc_y = THEME.gamegrid_abc_y = THEME.gamecarousel_abc_y = y;
@@ -876,9 +661,9 @@ void theme_set( char *name, char *val )
                                                                                                                                                                                                                                             // the old Icons are aligned at center and the new at the left top corner.
                                                                                                                                                                                                                                             // we must add 320 and sub the half image width to get the correct position.
                                                                                                                                                                                                                                             x += 300;
-                                                                                                                                                                                                                                            // the old stuff is optimized for widescreen.
-                                                                                                                                                                                                                                            // if no widescreen, we must reposition the pos
-                                                                                                                                                                                                                                            if ( !CFG.widescreen ) x -= 4;
+                                                                                                                                                                                                                                            // the old stuff is optimized for WideScreen.
+                                                                                                                                                                                                                                            // if no WideScreen, we must reposition the pos
+                                                                                                                                                                                                                                            if ( !WideScreen ) x -= 4;
                                                                                                                                                                                                                                             THEME.gamelist_count_x = x;
                                                                                                                                                                                                                                             THEME.gamegrid_count_x = THEME.gamecarousel_count_x = x - WorkAroundBarOffset;
                                                                                                                                                                                                                                             THEME.gamelist_count_y = THEME.gamegrid_count_y = THEME.gamecarousel_count_y = y;
@@ -893,9 +678,9 @@ void theme_set( char *name, char *val )
                                                                                                                                                                                                                                             // the old Icons are aligned at center and the new at the left top corner.
                                                                                                                                                                                                                                             // we must add 320 and sub the half image width to get the correct position.
                                                                                                                                                                                                                                             x += 300;
-                                                                                                                                                                                                                                            // the old stuff is optimized for widescreen.
-                                                                                                                                                                                                                                            // if no widescreen, we must reposition the pos
-                                                                                                                                                                                                                                            if ( !CFG.widescreen ) x += 4;
+                                                                                                                                                                                                                                            // the old stuff is optimized for WideScreen.
+                                                                                                                                                                                                                                            // if no WideScreen, we must reposition the pos
+                                                                                                                                                                                                                                            if ( !WideScreen ) x += 4;
                                                                                                                                                                                                                                             THEME.gamelist_list_x = x;
                                                                                                                                                                                                                                             THEME.gamegrid_list_x = THEME.gamecarousel_list_x = x - WorkAroundBarOffset;
                                                                                                                                                                                                                                             THEME.gamelist_list_y = THEME.gamegrid_list_y = THEME.gamecarousel_list_y = y;
@@ -910,9 +695,9 @@ void theme_set( char *name, char *val )
                                                                                                                                                                                                                                             // the old Icons are aligned at center and the new at the left top corner.
                                                                                                                                                                                                                                             // we must add 320 and sub the half image width to get the correct position.
                                                                                                                                                                                                                                             x += 300;
-                                                                                                                                                                                                                                            // the old stuff is optimized for widescreen.
-                                                                                                                                                                                                                                            // if no widescreen, we must reposition the pos
-                                                                                                                                                                                                                                            if ( !CFG.widescreen ) x += 12;
+                                                                                                                                                                                                                                            // the old stuff is optimized for WideScreen.
+                                                                                                                                                                                                                                            // if no WideScreen, we must reposition the pos
+                                                                                                                                                                                                                                            if ( !WideScreen ) x += 12;
                                                                                                                                                                                                                                             THEME.gamelist_grid_x = x;
                                                                                                                                                                                                                                             THEME.gamegrid_grid_x = THEME.gamecarousel_grid_x = x - WorkAroundBarOffset;
                                                                                                                                                                                                                                             THEME.gamelist_grid_y = THEME.gamegrid_grid_y = THEME.gamecarousel_grid_y = y;
@@ -927,9 +712,9 @@ void theme_set( char *name, char *val )
                                                                                                                                                                                                                                             // the old Icons are aligned at center and the new at the left top corner.
                                                                                                                                                                                                                                             // we must add 320 and sub the half image width to get the correct position.
                                                                                                                                                                                                                                             x += 300;
-                                                                                                                                                                                                                                            // the old stuff is optimized for widescreen.
-                                                                                                                                                                                                                                            // if no widescreen, we must reposition the pos
-                                                                                                                                                                                                                                            if ( !CFG.widescreen ) x += 20;
+                                                                                                                                                                                                                                            // the old stuff is optimized for WideScreen.
+                                                                                                                                                                                                                                            // if no WideScreen, we must reposition the pos
+                                                                                                                                                                                                                                            if ( !WideScreen ) x += 20;
                                                                                                                                                                                                                                             THEME.gamelist_carousel_x = x;
                                                                                                                                                                                                                                             THEME.gamegrid_carousel_x = THEME.gamecarousel_carousel_x = x - WorkAroundBarOffset;
                                                                                                                                                                                                                                             THEME.gamelist_carousel_y = THEME.gamegrid_carousel_y = THEME.gamecarousel_carousel_y = y;
@@ -937,12 +722,12 @@ void theme_set( char *name, char *val )
 
                                                                                                                                                                                                                                             // old themes have no dvd_coords
                                                                                                                                                                                                                                             // place the dvdIcon to the right side of the carouselIcon
-                                                                                                                                                                                                                                            if ( !CFG.widescreen ) x += CFG.widescreen ? 32 : 40;
+                                                                                                                                                                                                                                            if ( !WideScreen ) x += WideScreen ? 32 : 40;
                                                                                                                                                                                                                                             THEME.gamelist_lock_x = x;
                                                                                                                                                                                                                                             THEME.gamegrid_lock_x = THEME.gamecarousel_lock_x = x - WorkAroundBarOffset;
                                                                                                                                                                                                                                             THEME.gamelist_lock_y = THEME.gamegrid_lock_y = THEME.gamecarousel_lock_y = y;
 
-                                                                                                                                                                                                                                            x += CFG.widescreen ? 32 : 40;
+                                                                                                                                                                                                                                            x += WideScreen ? 32 : 40;
                                                                                                                                                                                                                                             THEME.gamelist_dvd_x = x;
                                                                                                                                                                                                                                             THEME.gamegrid_dvd_x = THEME.gamecarousel_dvd_x = x - WorkAroundBarOffset;
                                                                                                                                                                                                                                             THEME.gamelist_dvd_y = THEME.gamegrid_dvd_y = THEME.gamecarousel_dvd_y = y;
@@ -997,356 +782,6 @@ void theme_set( char *name, char *val )
 
 }
 
-void global_cfg_set( char *name, char *val )
-{
-    cfg_name = name;
-    cfg_val = val;
-
-    if ( strcmp( name, "video" ) == 0 )
-    {
-        int i;
-        if ( sscanf( val, "%d", &i ) == 1 )
-        {
-            Settings.video = i;
-        }
-        return;
-    }
-    else if ( strcmp( name, "vpatch" ) == 0 )
-    {
-        int i;
-        if ( sscanf( val, "%d", &i ) == 1 )
-        {
-            Settings.vpatch = i;
-        }
-        return;
-    }
-
-    else if ( strcmp( name, "language" ) == 0 )
-    {
-        int i;
-        if ( sscanf( val, "%d", &i ) == 1 )
-        {
-            Settings.language = i;
-        }
-        return;
-    }
-    else if ( strcmp( name, "ocarina" ) == 0 )
-    {
-        int i;
-        if ( sscanf( val, "%d", &i ) == 1 )
-        {
-            Settings.ocarina = i;
-        }
-        return;
-    }
-    else if ( strcmp( name, "sort" ) == 0 )
-    {
-        int i;
-        if ( sscanf( val, "%d", &i ) == 1 )
-        {
-            Settings.sort = i;
-        }
-        return;
-    }
-    else if ( strcmp( name, "fave" ) == 0 )
-    {
-        int i;
-        if ( sscanf( val, "%d", &i ) == 1 )
-        {
-            Settings.fave = i;
-        }
-        return;
-    }
-    else if ( strcmp( name, "keyset" ) == 0 )
-    {
-        int i;
-        if ( sscanf( val, "%d", &i ) == 1 )
-        {
-            Settings.keyset = i;
-        }
-        return;
-    }
-    else if ( strcmp( name, "hddinfo" ) == 0 )
-    {
-        int i;
-        if ( sscanf( val, "%d", &i ) == 1 )
-        {
-            Settings.hddinfo = i;
-        }
-        return;
-    }
-    else if ( strcmp( name, "sinfo" ) == 0 )
-    {
-        int i;
-        if ( sscanf( val, "%d", &i ) == 1 )
-        {
-            Settings.sinfo = i;
-        }
-        return;
-    }
-    else if ( strcmp( name, "rumble" ) == 0 )
-    {
-        int i;
-        if ( sscanf( val, "%d", &i ) == 1 )
-        {
-            Settings.rumble = i;
-        }
-        return;
-    }
-    else if ( strcmp( name, "volume" ) == 0 )
-    {
-        int i;
-        if ( sscanf( val, "%d", &i ) == 1 )
-        {
-            Settings.volume = i;
-        }
-        return;
-    }
-    else if ( strcmp( name, "sfxvolume" ) == 0 )
-    {
-        int i;
-        if ( sscanf( val, "%d", &i ) == 1 )
-        {
-            Settings.sfxvolume = i;
-        }
-        return;
-    }
-    else if ( strcmp( name, "gamesoundvolume" ) == 0 )
-    {
-        int i;
-        if ( sscanf( val, "%d", &i ) == 1 )
-        {
-            Settings.gamesoundvolume = i;
-        }
-        return;
-    }
-    else if ( strcmp( name, "tooltips" ) == 0 )
-    {
-        int i;
-        if ( sscanf( val, "%d", &i ) == 1 )
-        {
-            Settings.tooltips = i;
-        }
-        return;
-    }
-    else if ( strcmp( name, "password" ) == 0 )
-    {
-	strlcpy( Settings.unlockCode, val, sizeof( Settings.unlockCode ) );
-	return;
-    }
-    else if ( strcmp( name, "returnTo" ) == 0 )
-    {
-	strlcpy( Settings.returnTo, val, sizeof( Settings.returnTo ) );
-	return;
-    }
-    else if ( strcmp( name, "parentalcontrol" ) == 0 )
-    {
-        int i;
-        if ( sscanf( val, "%d", &i ) == 1 )
-        {
-            Settings.parentalcontrol = i;
-        }
-        return;
-    }
-    else if ( strcmp( name, "cios" ) == 0 )
-    {
-        int i;
-        if ( sscanf( val, "%d", &i ) == 1 )
-        {
-            Settings.cios = i;
-        }
-        return;
-    }
-    else if ( strcmp( name, "gridRows" ) == 0 )
-    {
-        int i;
-        if ( sscanf( val, "%d", &i ) == 1 )
-        {
-            Settings.gridRows = i;
-        }
-        return;
-    }
-    else if ( strcmp( name, "xflip" ) == 0 )
-    {
-        int i;
-        if ( sscanf( val, "%d", &i ) == 1 )
-        {
-            Settings.xflip = i;
-        }
-        return;
-    }
-    else if ( strcmp( name, "qboot" ) == 0 )
-    {
-        int i;
-        if ( sscanf( val, "%d", &i ) == 1 )
-        {
-            Settings.qboot = i;
-        }
-        return;
-    }
-    else if ( strcmp( name, "wsprompt" ) == 0 )
-    {
-        int i;
-        if ( sscanf( val, "%d", &i ) == 1 )
-        {
-            Settings.wsprompt = i;
-        }
-        return;
-    }
-    else if ( strcmp( name, "wiilight" ) == 0 )
-    {
-        int i;
-        if ( sscanf( val, "%d", &i ) == 1 )
-        {
-            Settings.wiilight = i;
-        }
-        return;
-    }
-    else if ( strcmp( name, "autonetwork" ) == 0 )
-    {
-        int i;
-        if ( sscanf( val, "%d", &i ) == 1 )
-        {
-            Settings.autonetwork = i;
-        }
-        return;
-    }
-    else if ( strcmp( name, "discart" ) == 0 )
-    {
-        int i;
-        if ( sscanf( val, "%d", &i ) == 1 )
-        {
-            Settings.discart = i;
-        }
-        return;
-    }
-    else if ( strcmp( name, "patchcountrystrings" ) == 0 )
-    {
-        int i;
-        if ( sscanf( val, "%d", &i ) == 1 )
-        {
-            Settings.patchcountrystrings = i;
-        }
-        return;
-    }
-    else if ( strcmp( name, "error002" ) == 0 )
-    {
-        int i;
-        if ( sscanf( val, "%d", &i ) == 1 )
-        {
-            Settings.error002 = i;
-        }
-        return;
-    }
-    else if ( strcmp( name, "gamesound" ) == 0 )
-    {
-        int i;
-        if ( sscanf( val, "%d", &i ) == 1 )
-        {
-            Settings.gamesound = i;
-        }
-        return;
-    }
-    else if ( strcmp( name, "titlesOverride" ) == 0 )
-    {
-        int i;
-        if ( sscanf( val, "%d", &i ) == 1 )
-        {
-            Settings.titlesOverride = i;
-        }
-        return;
-    }
-    else if ( strcmp( name, "db_JPtoEN" ) == 0 )
-    {
-        int i;
-        if ( sscanf( val, "%d", &i ) == 1 )
-        {
-            Settings.db_JPtoEN = i;
-        }
-        return;
-    }
-    else if ( strcmp( name, "gameDisplay" ) == 0 )
-    {
-        int i;
-        if ( sscanf( val, "%d", &i ) == 1 )
-        {
-            Settings.gameDisplay = i;
-        }
-        return;
-    }
-    else if ( strcmp( name, "screensaver" ) == 0 )
-    {
-        int i;
-        if ( sscanf( val, "%d", &i ) == 1 )
-        {
-            Settings.screensaver = i;
-        }
-        return;
-    }
-    else if ( strcmp( name, "musicloopmode" ) == 0 )
-    {
-        int i;
-        if ( sscanf( val, "%d", &i ) == 1 )
-        {
-            Settings.musicloopmode = i;
-        }
-        return;
-    }
-    else if ( strcmp( name, "partition" ) == 0 )
-    {
-        int i;
-        if ( sscanf( val, "%d", &i ) == 1 )
-        {
-            Settings.partition = i;
-        }
-        return;
-    }
-    else if ( strcmp( name, "marknewtitles" ) == 0 )
-    {
-        int i;
-        if ( sscanf( val, "%d", &i ) == 1 )
-        {
-            Settings.marknewtitles = i;
-        }
-        return;
-    }
-    else if ( strcmp( name, "fatInstallToDir" ) == 0 )
-    {
-        int i;
-        if ( sscanf( val, "%d", &i ) == 1 )
-        {
-            Settings.FatInstallToDir = i;
-        }
-    }
-    else if ( strcmp( name, "partitions" ) == 0 )
-    {
-        int i;
-        if ( sscanf( val, "%d", &i ) == 1 )
-        {
-            Settings.partitions_to_install = i;
-        }
-    }
-    else if ( strcmp( name, "fullcopy" ) == 0 )
-    {
-        int i;
-        if ( sscanf( val, "%d", &i ) == 1 )
-        {
-            Settings.fullcopy = i;
-        }
-    }
-    else if ( strcmp( name, "beta_upgrades" ) == 0 )
-    {
-        int i;
-        if ( sscanf( val, "%d", &i ) == 1 )
-        {
-            Settings.beta_upgrades = i;
-        }
-    }
-
-    cfg_bool( "godmode", &Settings.godmode );
-
-    return;
-}
 
 // split line to part1 delimiter part2
 bool trimsplit( char *line, char *part1, char *part2, char delim, int size )
@@ -1519,100 +954,6 @@ void cfg_set_game_num( struct Game_NUM *game, u8 *id )
     game->id[6] = 0;
     game->favorite = favoritevar;
     game->count = playcount;
-}
-
-
-bool cfg_save_global()   // save global settings
-{
-    char GXGlobal_cfg[26];
-    sprintf( GXGlobal_cfg, "%s/config", bootDevice );
-    struct stat st;
-    if ( stat( GXGlobal_cfg, &st ) != 0 )
-    {
-        mkdir( GXGlobal_cfg, 0777 );
-    }
-    FILE *f;
-    sprintf( GXGlobal_cfg, "%s/config/GXGlobal.cfg", bootDevice );
-    f = fopen( GXGlobal_cfg, "w" );
-    if ( !f )
-    {
-        printf( "Error saving %s\n", GXGlobal_cfg );
-        sleep( 1 );
-        return false;
-    }
-    fprintf( f, "# USB Loader global settings file\n" );
-    fprintf( f, "# Note: This file is automatically generated\n" );
-    fclose( f );
-    /* Closing and reopening because of a write issue we are having right now */
-    f = fopen( GXGlobal_cfg, "w" );
-    fprintf( f, "# USB Loader global settings file\n" );
-    fprintf( f, "# Note: This file is automatically generated\n " );
-    fprintf( f, "video = %d\n ", Settings.video );
-    fprintf( f, "vpatch = %d\n ", Settings.vpatch );
-    fprintf( f, "language = %d\n ", Settings.language );
-    fprintf( f, "ocarina = %d\n ", Settings.ocarina );
-    fprintf( f, "hddinfo = %d\n ", Settings.hddinfo );
-    fprintf( f, "sinfo = %d\n ", Settings.sinfo );
-    fprintf( f, "rumble = %d\n ", Settings.rumble );
-    fprintf( f, "volume = %d\n ", Settings.volume );
-    fprintf( f, "sfxvolume = %d\n ", Settings.sfxvolume );
-    fprintf( f, "gamesoundvolume = %d\n ", Settings.gamesoundvolume );
-    fprintf( f, "tooltips = %d\n ", Settings.tooltips );
-    fprintf( f, "password = %s\n ", Settings.unlockCode );
-    fprintf( f, "sort = %d\n ", Settings.sort );
-    fprintf( f, "fave = %d\n ", Settings.fave );
-    fprintf( f, "cios = %d\n ", Settings.cios );
-    fprintf( f, "keyset = %d\n ", Settings.keyset );
-    fprintf( f, "xflip = %d\n ", Settings.xflip );
-    fprintf( f, "gridRows = %d\n ", Settings.gridRows );
-    fprintf( f, "qboot = %d\n ", Settings.qboot );
-    fprintf( f, "wsprompt = %d\n ", Settings.wsprompt );
-    fprintf( f, "parentalcontrol = %d\n ", Settings.parentalcontrol );
-    fprintf( f, "cover_path = %s\n ", Settings.covers_path );
-    fprintf( f, "cover2d_path = %s\n ", Settings.covers2d_path );
-    if ( CFG.widescreen )
-    {
-        fprintf( f, "wtheme_path = %s\n ", CFG.theme_path );
-    }
-    else
-    {
-        fprintf( f, "theme_path = %s\n ", CFG.theme_path );
-    }
-    fprintf( f, "disc_path = %s\n ", Settings.disc_path );
-    fprintf( f, "language_path = %s\n ", Settings.language_path );
-    fprintf( f, "languagefiles_path = %s\n ", Settings.languagefiles_path );
-    fprintf( f, "TxtCheatcodespath = %s\n ", Settings.TxtCheatcodespath );
-    fprintf( f, "titlestxt_path = %s\n ", Settings.titlestxt_path );
-    fprintf( f, "gamesound = %d\n ", Settings.gamesound );
-    fprintf( f, "dolpath = %s\n ", Settings.dolpath );
-    fprintf( f, "ogg_path = %s\n ", Settings.ogg_path );
-    fprintf( f, "wiilight = %d\n ", Settings.wiilight );
-    fprintf( f, "gameDisplay = %d\n ", Settings.gameDisplay );
-    fprintf( f, "update_path = %s\n ", Settings.update_path );
-    fprintf( f, "theme_downloadpath = %s\n ", Settings.theme_downloadpath );
-    fprintf( f, "homebrewapps_path = %s\n ", Settings.homebrewapps_path );
-    fprintf( f, "Cheatcodespath = %s\n ", Settings.Cheatcodespath );
-    fprintf( f, "BcaCodepath = %s\n ", Settings.BcaCodepath );
-    fprintf( f, "WipCodepath = %s\n ", Settings.WipCodepath );
-    fprintf( f, "titlesOverride = %d\n ", Settings.titlesOverride );
-    //fprintf(f, "db_url = %s\n ", Settings.db_url);
-    //fprintf(f, "db_JPtoEN = %d\n ", Settings.db_JPtoEN);
-    //fprintf(f, "db_language = %d\n ", Settings.language);
-    fprintf( f, "patchcountrystrings = %d\n ", Settings.patchcountrystrings );
-    fprintf( f, "screensaver = %d\n ", Settings.screensaver );
-    fprintf( f, "musicloopmode = %d\n ", Settings.musicloopmode );
-    fprintf( f, "error002 = %d\n ", Settings.error002 );
-    fprintf( f, "autonetwork = %d\n ", Settings.autonetwork );
-    fprintf( f, "discart = %d\n ", Settings.discart );
-    fprintf( f, "partition = %d\n ", Settings.partition );
-    fprintf( f, "marknewtitles = %d\n ", Settings.marknewtitles );
-    fprintf( f, "fatInstallToDir = %d\n ", Settings.FatInstallToDir );
-    fprintf( f, "partitions = %d\n ", Settings.partitions_to_install );
-    fprintf( f, "fullcopy = %d\n ", Settings.fullcopy );
-    fprintf( f, "beta_upgrades = %d\n ", Settings.beta_upgrades );
-    fprintf( f, "returnTo = %s\n ", Settings.returnTo );
-    fclose( f );
-    return true;
 }
 
 void game_set( char *name, char *val )
@@ -1973,42 +1314,6 @@ bool CFG_reset_all_playcounters()
     return true;
 }
 
-#if 0
-bool cfg_load_global()
-{
-    char GXGlobal_cfg[26];
-    sprintf( GXGlobal_cfg, "%s/config/GXGlobal.cfg", bootDevice );
-    //Default values defined by dev team
-    Settings.video = discdefault;
-    Settings.vpatch = off;
-    Settings.language = ConsoleLangDefault;
-    Settings.ocarina = off;
-    Settings.xflip = off;
-    Settings.qboot = off;
-    Settings.wsprompt = off;
-    Settings.keyset = us;
-    Settings.hddinfo = hr12;
-    Settings.gameDisplay = list;
-    Settings.sinfo = ( ( THEME.show_id ) ? GameID : Neither );
-    Settings.rumble = RumbleOn;
-    if ( THEME.show_region )
-    {
-        Settings.sinfo = ( ( Settings.sinfo == GameID ) ? Both : GameRegion );
-    }
-    Settings.volume = 80;
-    Settings.sfxvolume = 80;
-    Settings.gamesoundvolume = 80;
-
-    Settings.titlesOverride = 1;
-    Settings.partition = -1;
-    char * empty = "";
-    snprintf( Settings.db_url, sizeof( Settings.db_url ), empty );
-    snprintf( Settings.db_language, sizeof( Settings.db_language ), empty );
-    Settings.db_JPtoEN = 0;
-    return cfg_parsefile( GXGlobal_cfg, &global_cfg_set );
-}
-#endif
-
 
 struct Game_CFG* CFG_get_game_opt( const u8 *id )
 {
@@ -2084,46 +1389,17 @@ bool CFG_forget_game_num( u8 *id )
 }
 
 
-void CFG_Load( void )
+void CFG_LoadTheme( bool wide, const char * theme_path )
 {
-// GUI should be stopped at the time of calling CFG_Load() to prevent default settings from having any effect
-
     char pathname[200];
-//  bool ret = false;
+	WideScreen = wide;
 
-    //set app path
-//  chdir_app(argv[0]);
-
-    CFG_Default( -1 ); // set defaults non forced
-
-    snprintf( pathname, sizeof( pathname ), "%s/config/GXGlobal.cfg", bootDevice );
-
-    cfg_parsefile( pathname, &widescreen_set ); //first set widescreen
-    cfg_parsefile( pathname, &path_set ); //then set config and layout options
+    CFG_DefaultTheme(); // set defaults non forced
 
     WorkAroundIconSet = 0; WorkAroundBarOffset = 100; // set Workaroundstuff to defaults
     CLEAR_wCOORD_FLAGS;
-    snprintf( pathname, sizeof( pathname ), "%sGXtheme.cfg", CFG.theme_path );
+    snprintf( pathname, sizeof( pathname ), "%sGXtheme.cfg", theme_path);
     cfg_parsefile( pathname, &theme_set ); //finally set theme information
-
-    // set GUI language, use Wii's language setting if language is set to default
-    int wiilang;
-    bool langisdefault = false;
-    wiilang = CONF_GetLanguage();
-    if ( !strcmp( "notset", Settings.language_path ) )
-    {
-        snprintf( Settings.language_path, sizeof( Settings.language_path ), "%s%s.lang", Settings.languagefiles_path, map_get_name( map_language, wiilang + 1 ) ); // + 1 because because CONF_LANG starts at 0
-        if ( !checkfile( Settings.language_path ) )
-        {
-            sprintf( Settings.language_path, "notset" );
-        }
-        gettextLoadLanguage( Settings.language_path );
-        langisdefault = true;
-    }
-    snprintf( pathname, sizeof( pathname ), Settings.language_path );
-    gettextLoadLanguage( pathname );
-
-//  cfg_parsefile(pathname, &language_set);
 
     snprintf( pathname, sizeof( pathname ), "%s/config/GXGameSettings.cfg", bootDevice );
     cfg_parsefile( pathname, &parental_set );
@@ -2131,53 +1407,6 @@ void CFG_Load( void )
     // load per-game settings
     cfg_load_games();
     cfg_load_game_num();
-
-    Global_Default(); //global default depends on theme information
-    CFG_LoadGlobal();
-
-    // use GUI language for the database (Settings.db_language is used for game info/titles and covers)
-    char * languagefile;
-    languagefile = strrchr( Settings.language_path, '/' ) + 1;
-    int mainlangid = -1;
-    int i;
-    if ( strcmp( "notset", Settings.language_path ) )
-    {
-        for ( i = 0; map_language[i].name != NULL; i++ )
-        {
-            if ( strstr( languagefile, map_language[i].name ) != NULL )
-            {
-                mainlangid = i - 1; // - 1 because CONF_LANG starts at 0
-                break;
-            }
-        }
-    }
-    else
-    {
-        mainlangid = wiilang;
-    }
-    GetLanguageToLangCode( &mainlangid, Settings.db_language );
-
-    // set language code for countries that don't have a language setting on the Wii
-    if ( !strcmp( Settings.db_language, "" ) )
-    {
-        if ( strstr( languagefile, "portuguese" ) != NULL )
-            strcpy( Settings.db_language, "PT" );
-    }
-    if ( CONF_GetArea() == CONF_AREA_AUS )
-        strcpy( Settings.db_language, "AU" );
-
-    // if GUI language is set to default Settings.language_path needs to remain "notset" (if the detected setting was kept detection wouldn't work next time)
-    if ( langisdefault )
-        sprintf( Settings.language_path, "notset" );
-
-    Settings.godmode = ( Settings.parental.enabled == 0 && ( Settings.parentalcontrol == 0 || strlen( Settings.unlockCode ) == 0 ) ) ? 1 : 0;
-}
-
-void CFG_LoadGlobal( void )
-{
-    char GXGlobal_cfg[26];
-    sprintf( GXGlobal_cfg, "%s/config/GXGlobal.cfg", bootDevice );
-    cfg_parsefile( GXGlobal_cfg, &global_cfg_set );
 }
 
 void CFG_Cleanup( void )
@@ -2197,45 +1426,3 @@ void CFG_Cleanup( void )
     num_title = 0;
 }
 
-
-/* map language id (or Wii language settting if langid is set to -1) to language code. CONF_LANG_JAPANESE = 0, not 1 */
-void GetLanguageToLangCode( int *langid, char *langcode )
-{
-
-    if ( langid < 0 )
-        *langid = CONF_GetLanguage();
-
-    switch ( *langid )
-    {
-        case CONF_LANG_JAPANESE:
-            sprintf( langcode, "JA" );
-            break;
-        case CONF_LANG_ENGLISH:
-            sprintf( langcode, "EN" );
-            break;
-        case CONF_LANG_GERMAN:
-            sprintf( langcode, "DE" );
-            break;
-        case CONF_LANG_FRENCH:
-            sprintf( langcode, "FR" );
-            break;
-        case CONF_LANG_SPANISH:
-            sprintf( langcode, "ES" );
-            break;
-        case CONF_LANG_ITALIAN:
-            sprintf( langcode, "IT" );
-            break;
-        case CONF_LANG_DUTCH:
-            sprintf( langcode, "NL" );
-            break;
-        case CONF_LANG_SIMP_CHINESE:
-            sprintf( langcode, "ZHCN" ); // People's Republic of China
-            break;
-        case CONF_LANG_TRAD_CHINESE:
-            sprintf( langcode, "ZHTW" ); // Taiwan
-            break;
-        case CONF_LANG_KOREAN:
-            sprintf( langcode, "KO" );
-            break;
-    }
-}

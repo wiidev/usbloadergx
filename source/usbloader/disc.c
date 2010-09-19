@@ -296,7 +296,7 @@ s32 Disc_IsWii( void )
     return 0;
 }
 
-s32 Disc_BootPartition( u64 offset, u8 videoselected, u8 cheat, u8 vipatch, u8 patchcountrystring, u8 error002fix, u8 alternatedol, u32 alternatedoloffset, u32 returnTo )
+s32 Disc_BootPartition( u64 offset, char * dolpath, u8 videoselected, u8 cheat, u8 vipatch, u8 patchcountrystring, u8 error002fix, u8 alternatedol, u32 alternatedoloffset, u32 returnTo )
 {
     gprintf("booting partition IOS %u v%u\n", IOS_GetVersion(), IOS_GetRevision() );
     entry_point p_entry;
@@ -321,7 +321,7 @@ s32 Disc_BootPartition( u64 offset, u8 videoselected, u8 cheat, u8 vipatch, u8 p
     PoPPatch();
 
     /* Run apploader */
-    ret = Apploader_Run( &p_entry, cheat, videoselected, vipatch, patchcountrystring, error002fix, alternatedol, alternatedoloffset, returnTo );
+    ret = Apploader_Run( &p_entry, dolpath, cheat, videoselected, vipatch, patchcountrystring, error002fix, alternatedol, alternatedoloffset, returnTo );
     if ( ret < 0 )
         return ret;
 
@@ -398,7 +398,7 @@ s32 Disc_BootPartition( u64 offset, u8 videoselected, u8 cheat, u8 vipatch, u8 p
     return 0;
 }
 
-s32 Disc_WiiBoot( u8 videoselected, u8 cheat, u8 vipatch, u8 patchcountrystring, u8 error002fix, u8 alternatedol, u32 alternatedoloffset, u32 returnTo )
+s32 Disc_WiiBoot( char * dolpath, u8 videoselected, u8 cheat, u8 vipatch, u8 patchcountrystring, u8 error002fix, u8 alternatedol, u32 alternatedoloffset, u32 returnTo )
 {
     u64 offset;
     s32 ret;
@@ -409,7 +409,7 @@ s32 Disc_WiiBoot( u8 videoselected, u8 cheat, u8 vipatch, u8 patchcountrystring,
         return ret;
 
     /* Boot partition */
-    return Disc_BootPartition( offset, videoselected, cheat, vipatch, patchcountrystring, error002fix, alternatedol, alternatedoloffset, returnTo );
+    return Disc_BootPartition( offset, dolpath, videoselected, cheat, vipatch, patchcountrystring, error002fix, alternatedol, alternatedoloffset, returnTo );
 }
 
 

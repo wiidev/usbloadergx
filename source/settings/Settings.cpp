@@ -48,9 +48,8 @@ static const char *opts_no_yes[settings_off_on_max] = {trNOOP( "No" ), trNOOP( "
 static const char *opts_off_on[settings_off_on_max] = {trNOOP( "OFF" ), trNOOP( "ON" ) };
 static const char *opts_videomode[settings_language_max][2] = {{"", trNOOP( "Disc Default" )}, {trNOOP( "System Default" ), ""}, {trNOOP( "AutoPatch" ), ""}, {trNOOP( "Force" ), " PAL50"}, {trNOOP( "Force" ), " PAL60"}, {trNOOP( "Force" ), " NTSC"}};
 static const char *opts_language[settings_language_max] = {trNOOP( "Console Default" ), trNOOP( "Japanese" ), trNOOP( "English" ), trNOOP( "German" ), trNOOP( "French" ), trNOOP( "Spanish" ), trNOOP( "Italian" ), trNOOP( "Dutch" ), trNOOP( "SChinese" ), trNOOP( "TChinese" ), trNOOP( "Korean" )};
-static const char *opts_cios[settings_ios_max] = {"IOS 249", "IOS 222", "IOS 223", "IOS 250"};
 static const char *opts_parentalcontrol[5] = {trNOOP( "0 (Everyone)" ), trNOOP( "1 (Child 7+)" ), trNOOP( "2 (Teen 12+)" ), trNOOP( "3 (Mature 16+)" ), trNOOP( "4 (Adults Only 18+)" )};
-static const char *opts_error002[settings_error002_max] = {trNOOP( "No" ), trNOOP( "Yes" ), trNOOP( "Anti" )};
+static const char *opts_error002[3] = {trNOOP( "No" ), trNOOP( "Yes" ), trNOOP( "Anti" )};
 static const char *opts_partitions[settings_partitions_max] = {trNOOP( "Game partition" ), trNOOP( "All partitions" ), trNOOP( "Remove update" )};
 static const char *opts_installdir[settings_installdir_max] = {trNOOP( "None" ), trNOOP( "GAMEID_Gamename" ), trNOOP( "Gamename [GAMEID]" )};
 
@@ -102,30 +101,30 @@ int MenuSettings()
 
     char imgPath[100];
 
-    snprintf( imgPath, sizeof( imgPath ), "%sbutton_dialogue_box.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sbutton_dialogue_box.png", Settings.theme_path );
     GuiImageData btnOutline( imgPath, button_dialogue_box_png );
-    snprintf( imgPath, sizeof( imgPath ), "%ssettings_background.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%ssettings_background.png", Settings.theme_path );
     GuiImageData settingsbg( imgPath, settings_background_png );
 
-    snprintf( imgPath, sizeof( imgPath ), "%ssettings_title.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%ssettings_title.png", Settings.theme_path );
     GuiImageData MainButtonImgData( imgPath, settings_title_png );
 
-    snprintf( imgPath, sizeof( imgPath ), "%ssettings_title_over.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%ssettings_title_over.png", Settings.theme_path );
     GuiImageData MainButtonImgOverData( imgPath, settings_title_over_png );
 
-    snprintf( imgPath, sizeof( imgPath ), "%spageindicator.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%spageindicator.png", Settings.theme_path );
     GuiImageData PageindicatorImgData( imgPath, pageindicator_png );
 
-    snprintf( imgPath, sizeof( imgPath ), "%sstartgame_arrow_left.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sstartgame_arrow_left.png", Settings.theme_path );
     GuiImageData arrow_left( imgPath, startgame_arrow_left_png );
 
-    snprintf( imgPath, sizeof( imgPath ), "%sstartgame_arrow_right.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sstartgame_arrow_right.png", Settings.theme_path );
     GuiImageData arrow_right( imgPath, startgame_arrow_right_png );
 
-    snprintf( imgPath, sizeof( imgPath ), "%scredits_button.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%scredits_button.png", Settings.theme_path );
     GuiImageData creditsImgData( imgPath, credits_button_png );
 
-    snprintf( imgPath, sizeof( imgPath ), "%scredits_button_over.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%scredits_button_over.png", Settings.theme_path );
     GuiImageData creditsOver( imgPath, credits_button_over_png );
 
     GuiImage creditsImg( &creditsImgData );
@@ -157,8 +156,8 @@ int MenuSettings()
     GuiImage backBtnImg( &btnOutline );
     if ( Settings.wsprompt == yes )
     {
-        backBtnTxt.SetWidescreen( CFG.widescreen );
-        backBtnImg.SetWidescreen( CFG.widescreen );
+        backBtnTxt.SetWidescreen( Settings.widescreen );
+        backBtnImg.SetWidescreen( Settings.widescreen );
     }
     GuiButton backBtn( &backBtnImg, &backBtnImg, 2, 3, -180, 400, &trigA, &btnSoundOver, btnClick2, 1 );
     backBtn.SetLabel( &backBtnTxt );
@@ -291,7 +290,7 @@ int MenuSettings()
     MainButton4.SetTrigger( &trigA );
 
     customOptionList options2( MAXOPTIONS );
-    GuiCustomOptionBrowser optionBrowser2( 396, 280, &options2, CFG.theme_path, "bg_options_settings.png", bg_options_settings_png, 0, 150 );
+    GuiCustomOptionBrowser optionBrowser2( 396, 280, &options2, Settings.theme_path, "bg_options_settings.png", bg_options_settings_png, 0, 150 );
     optionBrowser2.SetPosition( 0, 90 );
     optionBrowser2.SetAlignment( ALIGN_CENTRE, ALIGN_TOP );
 
@@ -688,7 +687,7 @@ int MenuSettings()
 
                         else if ( homo.GetState() == STATE_CLICKED )
                         {
-                            cfg_save_global();
+                            Settings.Save();
                             optionBrowser2.SetState( STATE_DISABLED );
                             bgMusic->Pause();
                             choice = WindowExitPrompt();
@@ -941,7 +940,7 @@ int MenuSettings()
 
                         else if ( homo.GetState() == STATE_CLICKED )
                         {
-                            cfg_save_global();
+                            Settings.Save();
                             optionBrowser2.SetState( STATE_DISABLED );
                             bgMusic->Pause();
                             choice = WindowExitPrompt();
@@ -964,17 +963,17 @@ int MenuSettings()
                             if ( ret == ++Idx || firstRun )
                             {
                                 if ( firstRun ) options2.SetName( Idx, "%s", tr( "Video Mode" ) );
-                                if ( ret == Idx && ++Settings.video >= settings_video_max )
-                                    Settings.video = 0;
-                                options2.SetValue( Idx, "%s%s", opts_videomode[Settings.video][0], tr( opts_videomode[Settings.video][1] ) );
+                                if ( ret == Idx && ++Settings.videomode >= settings_video_max )
+                                    Settings.videomode = 0;
+                                options2.SetValue( Idx, "%s%s", opts_videomode[Settings.videomode][0], tr( opts_videomode[Settings.videomode][1] ) );
                             }
 
                             if ( ret == ++Idx || firstRun )
                             {
                                 if ( firstRun ) options2.SetName( Idx, "%s", tr( "VIDTV Patch" ) );
-                                if ( ret == Idx && ++Settings.vpatch >= settings_off_on_max )
-                                    Settings.vpatch = 0;
-                                options2.SetValue( Idx, "%s", tr( opts_off_on[Settings.vpatch] ) );
+                                if ( ret == Idx && ++Settings.videopatch >= settings_off_on_max )
+                                    Settings.videopatch = 0;
+                                options2.SetValue( Idx, "%s", tr( opts_off_on[Settings.videopatch] ) );
                             }
 
                             if ( ret == ++Idx || firstRun )
@@ -1006,17 +1005,34 @@ int MenuSettings()
                                 if ( firstRun ) options2.SetName( Idx, "%s", tr( "Boot/Standard" ) );
                                 if ( ret == Idx && Settings.godmode == 1 )
                                 {
-                                    if ( ++Settings.cios >= settings_cios_max )
+                                    switch(Settings.cios)
                                     {
-                                        Settings.cios = 0;
+										case 222:
+											Settings.cios = 223;
+											break;
+										case 223:
+											Settings.cios = 224;
+											break;
+										case 224:
+											Settings.cios = 249;
+											break;
+										case 249:
+											Settings.cios = 250;
+											break;
+										case 250:
+											Settings.cios = 222;
+											break;
+										default:
+											Settings.cios = 222;
+											break;
                                     }
-                                    if ( ( Settings.cios == 1 && titles.VersionOf( 0x1000000deULL ) != 4 ) || ( Settings.cios == 2 && titles.VersionOf( 0x1000000dfULL ) != 4 ) )
+                                    if ( ( Settings.cios == 222 && titles.VersionOf( 0x1000000deULL ) != 4 ) || ( Settings.cios == 2 && titles.VersionOf( 0x1000000dfULL ) != 4 ) )
                                     {
                                         WindowPrompt( tr( "Hermes CIOS" ), tr( "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!" ), tr( "OK" ) );
                                     }
                                 }
                                 if ( Settings.godmode == 1 )
-                                    options2.SetValue( Idx, "%s", opts_cios[Settings.cios] );
+                                    options2.SetValue( Idx, "IOS %i", Settings.cios );
                                 else
                                     options2.SetValue( Idx, "********" );
                             }
@@ -1054,15 +1070,15 @@ int MenuSettings()
                             if ( ret == ++Idx || firstRun )
                             {
                                 if ( firstRun ) options2.SetName( Idx, "%s", tr( "Quick Boot" ) );
-                                if ( ret == Idx && ++Settings.qboot >= settings_off_on_max )
-                                    Settings.qboot = 0;
-                                options2.SetValue( Idx, "%s", tr( opts_no_yes[Settings.qboot] ) );
+                                if ( ret == Idx && ++Settings.quickboot >= settings_off_on_max )
+                                    Settings.quickboot = 0;
+                                options2.SetValue( Idx, "%s", tr( opts_no_yes[Settings.quickboot] ) );
                             }
 
                             if ( ret == ++Idx || firstRun )
                             {
                                 if ( firstRun ) options2.SetName( Idx, "%s", tr( "Error 002 fix" ) );
-                                if ( ret == Idx && ++Settings.error002 >= settings_error002_max )
+                                if ( ret == Idx && ++Settings.error002 >= 3 )
                                     Settings.error002 = 0;
                                 options2.SetValue( Idx, "%s", tr( opts_error002[Settings.error002] ) );
                             }
@@ -1166,7 +1182,7 @@ int MenuSettings()
 
                         else if ( homo.GetState() == STATE_CLICKED )
                         {
-                            cfg_save_global();
+                            Settings.Save();
                             optionBrowser2.SetState( STATE_DISABLED );
                             bgMusic->Pause();
                             choice = WindowExitPrompt();
@@ -1192,7 +1208,7 @@ int MenuSettings()
                                 if ( firstRun ) options2.SetName( Idx, "%s", tr( "Console" ) );
                                 if ( ret == Idx )
                                 {
-                                    if ( !strcmp( "", Settings.unlockCode ) && Settings.parental.enabled == 0 )
+                                    if ( !strcmp( "", Settings.unlockCode ) && Settings.Parental.enabled == 0 )
                                     {
                                         Settings.godmode = !Settings.godmode;
                                     }
@@ -1204,12 +1220,12 @@ int MenuSettings()
                                         //password check to unlock Install,Delete and Format
                                         w.Remove( &optionBrowser2 );
                                         w.Remove( &backBtn );
-                                        int result = Settings.parental.enabled == 0 ? OnScreenKeyboard( entered, 20, 0 ) : OnScreenNumpad( entered, 5 );
+                                        int result = Settings.Parental.enabled == 0 ? OnScreenKeyboard( entered, 20, 0 ) : OnScreenNumpad( entered, 5 );
                                         w.Append( &optionBrowser2 );
                                         w.Append( &backBtn );
                                         if ( result == 1 )
                                         {
-                                            if ( !strcmp( entered, Settings.unlockCode ) || !memcmp( entered, Settings.parental.pin, 4 ) )   //if password correct
+                                            if ( !strcmp( entered, Settings.unlockCode ) || !memcmp( entered, Settings.Parental.pin, 4 ) )   //if password correct
                                             {
                                                 if ( Settings.godmode == 0 )
                                                 {
@@ -1338,7 +1354,7 @@ int MenuSettings()
 
                         else if ( homo.GetState() == STATE_CLICKED )
                         {
-                            cfg_save_global();
+                            Settings.Save();
                             optionBrowser2.SetState( STATE_DISABLED );
                             bgMusic->Pause();
                             choice = WindowExitPrompt();
@@ -1558,7 +1574,7 @@ int MenuSettings()
 
                             else if ( homo.GetState() == STATE_CLICKED )
                             {
-                                cfg_save_global();
+                                Settings.Save();
                                 optionBrowser2.SetState( STATE_DISABLED );
                                 bgMusic->Pause();
                                 choice = WindowExitPrompt();
@@ -1673,7 +1689,7 @@ int MenuSettings()
                                         w.Remove( &backBtn );
                                         char entered[100] = "";
                                         titleTxt.SetText( tr( "Theme Path" ) );
-                                        strlcpy( entered, CFG.theme_path, sizeof( entered ) );
+                                        strlcpy( entered, Settings.theme_path, sizeof( entered ) );
                                         int result = BrowseDevice( entered, sizeof( entered ), FB_DEFAULT, noFILES );
                                         HaltGui();
                                         w.RemoveAll();
@@ -1682,32 +1698,31 @@ int MenuSettings()
                                             int len = ( strlen( entered ) - 1 );
                                             if ( entered[len] != '/' )
                                                 strncat ( entered, "/", 1 );
-                                            strlcpy( CFG.theme_path, entered, sizeof( CFG.theme_path ) );
+                                            strlcpy( Settings.theme_path, entered, sizeof( Settings.theme_path ) );
                                             WindowPrompt( tr( "Theme Path Changed" ), 0, tr( "OK" ) );
                                             if ( !isInserted( bootDevice ) )
                                                 WindowPrompt( tr( "No SD-Card inserted!" ), tr( "Insert an SD-Card to save." ), tr( "OK" ) );
                                             else
-                                                cfg_save_global();
+                                                Settings.Save();
                                             mainWindow->Remove( bgImg );
                                             HaltGui();
-                                            CFG_Load();
-                                            CFG_LoadGlobal();
+                                            CFG_LoadTheme(Settings.widescreen, Settings.theme_path);
                                             ResumeGui();
                                             menu = MENU_SETTINGS;
-                                            snprintf( imgPath, sizeof( imgPath ), "%splayer1_point.png", CFG.theme_path );
+                                            snprintf( imgPath, sizeof( imgPath ), "%splayer1_point.png", Settings.theme_path );
                                             pointer[0] = new GuiImageData( imgPath, player1_point_png );
-                                            snprintf( imgPath, sizeof( imgPath ), "%splayer2_point.png", CFG.theme_path );
+                                            snprintf( imgPath, sizeof( imgPath ), "%splayer2_point.png", Settings.theme_path );
                                             pointer[1] = new GuiImageData( imgPath, player2_point_png );
-                                            snprintf( imgPath, sizeof( imgPath ), "%splayer3_point.png", CFG.theme_path );
+                                            snprintf( imgPath, sizeof( imgPath ), "%splayer3_point.png", Settings.theme_path );
                                             pointer[2] = new GuiImageData( imgPath, player3_point_png );
-                                            snprintf( imgPath, sizeof( imgPath ), "%splayer4_point.png", CFG.theme_path );
+                                            snprintf( imgPath, sizeof( imgPath ), "%splayer4_point.png", Settings.theme_path );
                                             pointer[3] = new GuiImageData( imgPath, player4_point_png );
-                                            if ( CFG.widescreen )
-                                                snprintf( imgPath, sizeof( imgPath ), "%swbackground.png", CFG.theme_path );
+                                            if ( Settings.widescreen )
+                                                snprintf( imgPath, sizeof( imgPath ), "%swbackground.png", Settings.theme_path );
                                             else
-                                                snprintf( imgPath, sizeof( imgPath ), "%sbackground.png", CFG.theme_path );
+                                                snprintf( imgPath, sizeof( imgPath ), "%sbackground.png", Settings.theme_path );
 
-                                            background = new GuiImageData( imgPath, CFG.widescreen ? wbackground_png : background_png );
+                                            background = new GuiImageData( imgPath, Settings.widescreen ? wbackground_png : background_png );
 
                                             bgImg = new GuiImage( background );
                                             mainWindow->Append( bgImg );
@@ -1720,7 +1735,7 @@ int MenuSettings()
                                         w.Append( &optionBrowser2 );
                                         ResumeGui();
                                     }
-                                    options2.SetValue( Idx, "%s", CFG.theme_path );
+                                    options2.SetValue( Idx, "%s", Settings.theme_path );
                                 }
 
 
@@ -1747,9 +1762,9 @@ int MenuSettings()
                                             WindowPrompt( tr( "WiiTDB Path changed." ), 0, tr( "OK" ) );
                                             if ( isInserted( bootDevice ) )
                                             {
-                                                cfg_save_global();
+                                                Settings.Save();
                                                 HaltGui();
-                                                CFG_Load();
+                                                Settings.Load();
                                                 ResumeGui();
                                             }
                                             else
@@ -2060,15 +2075,9 @@ int MenuSettings()
                         int choice = WindowPrompt( tr( "Are you sure?" ), 0, tr( "Yes" ), tr( "Cancel" ) );
                         if ( choice == 1 )
                         {
-                            if ( isInserted( bootDevice ) )
-                            {
-                                char GXGlobal_cfg[26];
-                                sprintf( GXGlobal_cfg, "%s/config/GXGlobal.cfg", bootDevice );
-                                remove( GXGlobal_cfg );
-                            }
                             gettextCleanUp();
                             HaltGui();
-                            CFG_Load();
+                            Settings.Reset();
                             ResumeGui();
                             menu = MENU_SETTINGS;
                             pageToDisplay = 0;
@@ -2113,7 +2122,7 @@ int MenuSettings()
                 if ( MainButton1.GetState() == STATE_CLICKED )
                 {
                     if ( isInserted( bootDevice ) )
-                        cfg_save_global();
+                        Settings.Save();
                     menu = MENU_THEMEDOWNLOADER;
                     pageToDisplay = 0;
                     break;
@@ -2125,7 +2134,7 @@ int MenuSettings()
             {
                 //Add the procedure call to save the global configuration
                 if ( isInserted( bootDevice ) )
-                    cfg_save_global();
+                    Settings.Save();
                 menu = MENU_DISCLIST;
                 pageToDisplay = 0;
                 backBtn.ResetState();
@@ -2197,7 +2206,7 @@ int MenuSettings()
             }
             else if ( homo.GetState() == STATE_CLICKED )
             {
-                cfg_save_global();
+                Settings.Save();
                 optionBrowser2.SetState( STATE_DISABLED );
                 bgMusic->Pause();
                 choice = WindowExitPrompt();
@@ -2275,15 +2284,15 @@ int GameSettings( struct discHdr * header )
 
     char imgPath[100];
 
-    snprintf( imgPath, sizeof( imgPath ), "%sbutton_dialogue_box.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sbutton_dialogue_box.png", Settings.theme_path );
     GuiImageData btnOutline( imgPath, button_dialogue_box_png );
-    snprintf( imgPath, sizeof( imgPath ), "%ssettings_background.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%ssettings_background.png", Settings.theme_path );
     GuiImageData settingsbg( imgPath, settings_background_png );
 
-    snprintf( imgPath, sizeof( imgPath ), "%ssettings_title.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%ssettings_title.png", Settings.theme_path );
     GuiImageData MainButtonImgData( imgPath, settings_title_png );
 
-    snprintf( imgPath, sizeof( imgPath ), "%ssettings_title_over.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%ssettings_title_over.png", Settings.theme_path );
     GuiImageData MainButtonImgOverData( imgPath, settings_title_over_png );
 
     GuiTrigger trigA;
@@ -2320,8 +2329,8 @@ int GameSettings( struct discHdr * header )
     GuiImage backBtnImg( &btnOutline );
     if ( Settings.wsprompt == yes )
     {
-        backBtnTxt.SetWidescreen( CFG.widescreen );
-        backBtnImg.SetWidescreen( CFG.widescreen );
+        backBtnTxt.SetWidescreen( Settings.widescreen );
+        backBtnImg.SetWidescreen( Settings.widescreen );
     }
     GuiButton backBtn( &backBtnImg, &backBtnImg, 2, 3, -180, 400, &trigA, &btnSoundOver, btnClick2, 1 );
     backBtn.SetLabel( &backBtnTxt );
@@ -2335,8 +2344,8 @@ int GameSettings( struct discHdr * header )
     GuiImage saveBtnImg( &btnOutline );
     if ( Settings.wsprompt == yes )
     {
-        saveBtnTxt.SetWidescreen( CFG.widescreen );
-        saveBtnImg.SetWidescreen( CFG.widescreen );
+        saveBtnTxt.SetWidescreen( Settings.widescreen );
+        saveBtnImg.SetWidescreen( Settings.widescreen );
     }
     GuiButton saveBtn( &saveBtnImg, &saveBtnImg, 2, 3, 180, 400, &trigA, &btnSoundOver, btnClick2, 1 );
     saveBtn.SetLabel( &saveBtnTxt );
@@ -2407,7 +2416,7 @@ int GameSettings( struct discHdr * header )
     MainButton4.SetTrigger( &trigA );
 
     customOptionList options2( MAXOPTIONS );
-    GuiCustomOptionBrowser optionBrowser2( 396, 280, &options2, CFG.theme_path, "bg_options_settings.png", bg_options_settings_png, 0, 150 );
+    GuiCustomOptionBrowser optionBrowser2( 396, 280, &options2, Settings.theme_path, "bg_options_settings.png", bg_options_settings_png, 0, 150 );
     optionBrowser2.SetPosition( 0, 90 );
     optionBrowser2.SetAlignment( ALIGN_CENTRE, ALIGN_TOP );
 
@@ -2489,32 +2498,25 @@ int GameSettings( struct discHdr * header )
             countrystrings = game_cfg->patchcountrystrings;
             alternatedol = game_cfg->loadalternatedol;
             alternatedoloffset = game_cfg->alternatedolstart;
-	    reloadblock = game_cfg->iosreloadblock;
-	    strlcpy( alternatedname, game_cfg->alternatedolname, sizeof( alternatedname ) );
-	    returnToLoaderGV = game_cfg->returnTo;
+			reloadblock = game_cfg->iosreloadblock;
+			strlcpy( alternatedname, game_cfg->alternatedolname, sizeof( alternatedname ) );
+			returnToLoaderGV = game_cfg->returnTo;
         }
         else
         {
-            videoChoice = Settings.video;
+            videoChoice = Settings.videomode;
             languageChoice = Settings.language;
             ocarinaChoice = Settings.ocarina;
-            viChoice = Settings.vpatch;
-            if ( Settings.cios == ios222 )
-                iosChoice = i222;
-            else if ( Settings.cios == ios250 )
-                iosChoice = i250;
-            else if ( Settings.cios == ios223 )
-                iosChoice = i223;
-            else
-                iosChoice = i249;
+            viChoice = Settings.videopatch;
+            iosChoice = Settings.cios;
             parentalcontrolChoice = 0;
             fix002 = Settings.error002;
             countrystrings = Settings.patchcountrystrings;
             alternatedol = off;
             alternatedoloffset = 0;
             reloadblock = off;
-	    strcpy( alternatedname, "" );
-	    returnToLoaderGV = 1;
+			strcpy( alternatedname, "" );
+			returnToLoaderGV = 1;
         }
 
         ResumeGui();
@@ -2587,7 +2589,7 @@ int GameSettings( struct discHdr * header )
 
                     else if ( homo.GetState() == STATE_CLICKED )
                     {
-                        cfg_save_global();
+                        Settings.Save();
                         optionBrowser2.SetState( STATE_DISABLED );
                         bgMusic->Pause();
                         choice = WindowExitPrompt();
@@ -2671,9 +2673,31 @@ int GameSettings( struct discHdr * header )
                         if ( ret == ++Idx || firstRun )
                         {
                             if ( firstRun ) options2.SetName( Idx, "IOS" );
-                            if ( ret == Idx && ++iosChoice >= settings_ios_max )
-                                iosChoice = 0;
-                            options2.SetValue( Idx, "%s", opts_cios[iosChoice] );
+                            if ( ret == Idx )
+							{
+								switch(iosChoice)
+								{
+									case 222:
+										iosChoice = 223;
+										break;
+									case 223:
+										iosChoice = 224;
+										break;
+									case 224:
+										iosChoice = 249;
+										break;
+									case 249:
+										iosChoice = 250;
+										break;
+									case 250:
+										iosChoice = 222;
+										break;
+									default:
+										iosChoice = 222;
+										break;
+								}
+							}
+                            options2.SetValue( Idx, "IOS %i", iosChoice );
                         }
 
                         if ( ret == ++Idx || firstRun )
@@ -2687,7 +2711,7 @@ int GameSettings( struct discHdr * header )
 			if ( ret == ++Idx || firstRun )
 			{
 			    if ( firstRun ) options2.SetName( Idx, "%s", tr( "Error 002 fix" ) );
-			    if ( ret == Idx && ++fix002 >= settings_error002_max )
+			    if ( ret == Idx && ++fix002 >= 3 )
 				fix002 = 0;
 			    options2.SetValue( Idx, "%s", tr( opts_error002[fix002] ) );
 			}
@@ -2868,7 +2892,7 @@ int GameSettings( struct discHdr * header )
 
                     else if ( homo.GetState() == STATE_CLICKED )
                     {
-                        cfg_save_global();
+                        Settings.Save();
                         optionBrowser2.SetState( STATE_DISABLED );
                         bgMusic->Pause();
                         choice = WindowExitPrompt();
@@ -3027,8 +3051,8 @@ int GameSettings( struct discHdr * header )
                 int choice1 = WindowPrompt( tr( "Are you sure?" ), 0, tr( "Yes" ), tr( "Cancel" ) );
                 if ( choice1 == 1 )
                 {
-                    videoChoice = Settings.video;
-                    viChoice = Settings.vpatch;
+                    videoChoice = Settings.videomode;
+                    viChoice = Settings.videopatch;
                     languageChoice = Settings.language;
                     ocarinaChoice = Settings.ocarina;
                     fix002 = Settings.error002;
@@ -3036,26 +3060,11 @@ int GameSettings( struct discHdr * header )
                     alternatedol = off;
                     alternatedoloffset = 0;
                     reloadblock = off;
-                    if ( Settings.cios == ios222 )
-                        iosChoice = i222;
-                    else if ( Settings.cios == ios250 )
-                        iosChoice = i250;
-                    else if ( Settings.cios == ios223 )
-                        iosChoice = i223;
-                    else
-                        iosChoice = i249;
-		    parentalcontrolChoice = 0;
-		    strcpy( alternatedname, "" );
-		    returnToLoaderGV = 1;
+                    iosChoice = Settings.cios;
+					parentalcontrolChoice = 0;
+					strcpy( alternatedname, "" );
+					returnToLoaderGV = 1;
                     CFG_forget_game_opt( header->id );
-                    /* commented because the database language now depends on the main language setting, this could be enabled again if there is a separate language setting for the database
-                    // if default language is different than language from main settings, reload titles
-                    int opt_langnew = 0;
-                    opt_langnew = Settings.language;
-                    if (Settings.titlesOverride==1 && opt_lang != opt_langnew)
-                        OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, true, false); // open file, reload titles, do not keep in memory
-                    // titles are refreshed in menu.cpp as soon as this function returns
-                    */
                 }
 
                 pageToDisplay = 1;
@@ -3074,7 +3083,7 @@ int GameSettings( struct discHdr * header )
 
             else if ( homo.GetState() == STATE_CLICKED )
             {
-                cfg_save_global();
+                Settings.Save();
                 optionBrowser2.SetState( STATE_DISABLED );
                 bgMusic->Pause();
                 choice = WindowExitPrompt();

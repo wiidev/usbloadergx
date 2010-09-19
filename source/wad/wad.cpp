@@ -133,9 +133,9 @@ s32 Wad_Install( FILE *fp )
     //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
     char imgPath[100];
-    snprintf( imgPath, sizeof( imgPath ), "%sbutton_dialogue_box.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sbutton_dialogue_box.png", Settings.theme_path );
     GuiImageData btnOutline( imgPath, button_dialogue_box_png );
-    snprintf( imgPath, sizeof( imgPath ), "%sdialogue_box.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sdialogue_box.png", Settings.theme_path );
     GuiImageData dialogBox( imgPath, dialogue_box_png );
     GuiTrigger trigA;
     trigA.SetSimpleTrigger( -1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A );
@@ -143,38 +143,38 @@ s32 Wad_Install( FILE *fp )
     GuiImage dialogBoxImg( &dialogBox );
     if ( Settings.wsprompt == yes )
     {
-        dialogBoxImg.SetWidescreen( CFG.widescreen );
+        dialogBoxImg.SetWidescreen( Settings.widescreen );
     }
 
     GuiText btn1Txt( tr( "OK" ), 22, THEME.prompttext );
     GuiImage btn1Img( &btnOutline );
     if ( Settings.wsprompt == yes )
     {
-        btn1Txt.SetWidescreen( CFG.widescreen );
-        btn1Img.SetWidescreen( CFG.widescreen );
+        btn1Txt.SetWidescreen( Settings.widescreen );
+        btn1Img.SetWidescreen( Settings.widescreen );
     }
     GuiButton btn1( &btn1Img, &btn1Img, 2, 4, 0, -35, &trigA, &btnSoundOver, btnClick2, 1 );
     btn1.SetLabel( &btn1Txt );
     btn1.SetState( STATE_SELECTED );
 
-    snprintf( imgPath, sizeof( imgPath ), "%sprogressbar_outline.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sprogressbar_outline.png", Settings.theme_path );
     GuiImageData progressbarOutline( imgPath, progressbar_outline_png );
     GuiImage progressbarOutlineImg( &progressbarOutline );
     if ( Settings.wsprompt == yes )
     {
-        progressbarOutlineImg.SetWidescreen( CFG.widescreen );
+        progressbarOutlineImg.SetWidescreen( Settings.widescreen );
     }
     progressbarOutlineImg.SetAlignment( ALIGN_LEFT, ALIGN_MIDDLE );
     progressbarOutlineImg.SetPosition( 25, 50 );
 
-    snprintf( imgPath, sizeof( imgPath ), "%sprogressbar_empty.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sprogressbar_empty.png", Settings.theme_path );
     GuiImageData progressbarEmpty( imgPath, progressbar_empty_png );
     GuiImage progressbarEmptyImg( &progressbarEmpty );
     progressbarEmptyImg.SetAlignment( ALIGN_LEFT, ALIGN_MIDDLE );
     progressbarEmptyImg.SetPosition( 25, 50 );
     progressbarEmptyImg.SetTile( 100 );
 
-    snprintf( imgPath, sizeof( imgPath ), "%sprogressbar.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sprogressbar.png", Settings.theme_path );
     GuiImageData progressbar( imgPath, progressbar_png );
     GuiImage progressbarImg( &progressbar );
     progressbarImg.SetAlignment( ALIGN_LEFT, ALIGN_MIDDLE );
@@ -213,7 +213,7 @@ s32 Wad_Install( FILE *fp )
     prTxt.SetPosition( 0, 50 );
 
 
-    if ( ( Settings.wsprompt == yes ) && ( CFG.widescreen ) ) /////////////adjust for widescreen
+    if ( ( Settings.wsprompt == yes ) && ( Settings.widescreen ) ) /////////////adjust for widescreen
     {
         progressbarOutlineImg.SetAlignment( ALIGN_CENTRE, ALIGN_MIDDLE );
         progressbarOutlineImg.SetPosition( 0, 50 );
@@ -391,7 +391,7 @@ s32 Wad_Install( FILE *fp )
             //msg4Txt.SetText(imgPath);
 
             prTxt.SetTextf( "%i%%", 100*( cnt*len + idx ) / ( tmd_data->num_contents*len ) );
-            if ( ( Settings.wsprompt == yes ) && ( CFG.widescreen ) )
+            if ( ( Settings.wsprompt == yes ) && ( Settings.widescreen ) )
             {
                 progressbarImg.SetTile( 78*( cnt*len + idx ) / ( tmd_data->num_contents*len ) );
             }
@@ -480,9 +480,9 @@ s32 Wad_Uninstall( FILE *fp )
     //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
     char imgPath[100];
-    snprintf( imgPath, sizeof( imgPath ), "%sbutton_dialogue_box.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sbutton_dialogue_box.png", Settings.theme_path );
     GuiImageData btnOutline( imgPath, button_dialogue_box_png );
-    snprintf( imgPath, sizeof( imgPath ), "%sdialogue_box.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sdialogue_box.png", Settings.theme_path );
     GuiImageData dialogBox( imgPath, dialogue_box_png );
     GuiTrigger trigA;
     trigA.SetSimpleTrigger( -1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A );
@@ -490,15 +490,15 @@ s32 Wad_Uninstall( FILE *fp )
     GuiImage dialogBoxImg( &dialogBox );
     if ( Settings.wsprompt == yes )
     {
-        dialogBoxImg.SetWidescreen( CFG.widescreen );
+        dialogBoxImg.SetWidescreen( Settings.widescreen );
     }
 
     GuiText btn1Txt( tr( "OK" ), 22, THEME.prompttext );
     GuiImage btn1Img( &btnOutline );
     if ( Settings.wsprompt == yes )
     {
-        btn1Txt.SetWidescreen( CFG.widescreen );
-        btn1Img.SetWidescreen( CFG.widescreen );
+        btn1Txt.SetWidescreen( Settings.widescreen );
+        btn1Img.SetWidescreen( Settings.widescreen );
     }
     GuiButton btn1( &btn1Img, &btn1Img, 2, 4, 0, -55, &trigA, &btnSoundOver, btnClick2, 1 );
     btn1.SetLabel( &btn1Txt );
@@ -532,7 +532,7 @@ s32 Wad_Uninstall( FILE *fp )
 
 
 
-    if ( ( Settings.wsprompt == yes ) && ( CFG.widescreen ) ) /////////////adjust for widescreen
+    if ( ( Settings.wsprompt == yes ) && ( Settings.widescreen ) ) /////////////adjust for widescreen
     {
 
         msg1Txt.SetPosition( 70, 95 );

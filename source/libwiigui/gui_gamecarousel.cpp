@@ -14,7 +14,7 @@
 #include "gui_image_async.h"
 #include "gui_gamecarousel.h"
 #include "usbloader/GameList.h"
-#include "../settings/cfg.h"
+#include "../settings/CSettings.h"
 #include "../main.h"
 
 #include <string.h>
@@ -71,16 +71,16 @@ GuiGameCarousel::GuiGameCarousel( int w, int h, const char *themePath, const u8 
     btnSoundClick = new GuiSound( button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume );
     btnSoundOver = new GuiSound( button_over_pcm, button_over_pcm_size, Settings.sfxvolume );
 
-    snprintf( imgPath, sizeof( imgPath ), "%sstartgame_arrow_left.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sstartgame_arrow_left.png", Settings.theme_path );
     imgLeft = new GuiImageData( imgPath, startgame_arrow_left_png );
-    snprintf( imgPath, sizeof( imgPath ), "%sstartgame_arrow_right.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sstartgame_arrow_right.png", Settings.theme_path );
     imgRight = new GuiImageData( imgPath, startgame_arrow_right_png );
 
     int btnHeight = ( int ) lround( sqrt( RADIUS * RADIUS - 90000 ) - RADIUS - 50 );
 
     btnLeftImg = new GuiImage( imgLeft );
     if ( Settings.wsprompt == yes )
-        btnLeftImg->SetWidescreen( CFG.widescreen );
+        btnLeftImg->SetWidescreen( Settings.widescreen );
     btnLeft = new GuiButton( imgLeft->GetWidth(), imgLeft->GetHeight() );
     btnLeft->SetAlignment( ALIGN_LEFT, ALIGN_MIDDLE );
     btnLeft->SetPosition( 20, btnHeight );
@@ -94,7 +94,7 @@ GuiGameCarousel::GuiGameCarousel( int w, int h, const char *themePath, const u8 
 
     btnRightImg = new GuiImage( imgRight );
     if ( Settings.wsprompt == yes )
-        btnRightImg->SetWidescreen( CFG.widescreen );
+        btnRightImg->SetWidescreen( Settings.widescreen );
     btnRight = new GuiButton( imgRight->GetWidth(), imgRight->GetHeight() );
     btnRight->SetParent( this );
     btnRight->SetAlignment( ALIGN_RIGHT, ALIGN_MIDDLE );
@@ -128,7 +128,7 @@ GuiGameCarousel::GuiGameCarousel( int w, int h, const char *themePath, const u8 
         //------------------------
         coverImg[i] = new( std::nothrow ) GuiImageAsync( GameCarouselLoadCoverImage, gameList[gameIndex[i]], sizeof( struct discHdr ), &noCover );
         if ( coverImg[i] )
-            coverImg[i]->SetWidescreen( CFG.widescreen );
+            coverImg[i]->SetWidescreen( Settings.widescreen );
 
         //------------------------
         // GameButton
@@ -403,7 +403,7 @@ void GuiGameCarousel::Update( GuiTrigger * t )
             // set saved Button & gameIndex to right
             gameIndex[0]        = listOffset;
             coverImg[0]         = new GuiImageAsync( GameCarouselLoadCoverImage, gameList[gameIndex[0]], sizeof( struct discHdr ), &noCover );
-            coverImg[0]         ->SetWidescreen( CFG.widescreen );
+            coverImg[0]         ->SetWidescreen( Settings.widescreen );
 
             game[0]             = tmpButton;
             game[0]             ->SetImage( coverImg[0] );
@@ -436,7 +436,7 @@ void GuiGameCarousel::Update( GuiTrigger * t )
             int ii = pagesize - 1;
             gameIndex[ii]       = OFFSETLIMIT( listOffset + ii, gameList.size() );
             coverImg[ii]        = new GuiImageAsync( GameCarouselLoadCoverImage, gameList[gameIndex[ii]], sizeof( struct discHdr ), &noCover );
-            coverImg[ii]        ->SetWidescreen( CFG.widescreen );
+            coverImg[ii]        ->SetWidescreen( Settings.widescreen );
 
             game[ii]            = tmpButton;
             game[ii]            ->SetImage( coverImg[ii] );

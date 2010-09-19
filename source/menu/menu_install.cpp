@@ -28,13 +28,13 @@ int MenuInstall()
 
     char imgPath[100];
 
-    snprintf( imgPath, sizeof( imgPath ), "%sbattery.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sbattery.png", Settings.theme_path );
     GuiImageData battery( imgPath, battery_png );
-    snprintf( imgPath, sizeof( imgPath ), "%sbattery_bar.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sbattery_bar.png", Settings.theme_path );
     GuiImageData batteryBar( imgPath, battery_bar_png );
-    snprintf( imgPath, sizeof( imgPath ), "%sbattery_red.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sbattery_red.png", Settings.theme_path );
     GuiImageData batteryRed( imgPath, battery_red_png );
-    snprintf( imgPath, sizeof( imgPath ), "%sbattery_bar_red.png", CFG.theme_path );
+    snprintf( imgPath, sizeof( imgPath ), "%sbattery_bar_red.png", Settings.theme_path );
     GuiImageData batteryBarRed( imgPath, battery_bar_red_png );
 
     HaltGui();

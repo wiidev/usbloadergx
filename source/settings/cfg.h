@@ -43,14 +43,6 @@ extern "C"
 #define CFG_ALIGN_MIDDLE 5
 
     extern char bootDevice[10];
-//extern char *cfg_path;
-
-    struct CFG
-    {
-        short widescreen;
-        char theme_path[100];
-    };
-
 
     struct THEME
     {
@@ -190,7 +182,6 @@ extern "C"
         short gamecarousel_lock_y;
     };
 
-    extern struct CFG CFG;
     extern struct THEME THEME;
     extern u8 ocarinaChoice;
     extern u16 playcnt;
@@ -216,6 +207,20 @@ extern "C"
     extern char alternatedname[40];
     extern u8 returnToLoaderGV;
 
+    enum {
+        ConsoleLangDefault = 0,
+        jap,
+        eng,
+        ger,
+        fren,
+        esp,
+        it,
+        dut,
+        schin,
+        tchin,
+        kor,
+        settings_language_max // always the last entry
+    };
 
     struct Game_CFG
     {
@@ -232,7 +237,7 @@ extern "C"
         u32 alternatedolstart;
         u8 patchcountrystrings;
         char alternatedolname[40];
-	u8 returnTo;
+        u8 returnTo;
     };
     struct Game_NUM
     {
@@ -242,8 +247,8 @@ extern "C"
     };
 
 
-    void CFG_Default( int widescreen ); // -1 = non forced mode
-    void CFG_Load( void );
+    void CFG_DefaultTheme(); // -1 = non forced mode
+    void CFG_LoadTheme( bool widescreen, const char * theme_path );
     struct Game_CFG* CFG_get_game_opt( const u8 *id );
     struct Game_NUM* CFG_get_game_num( const u8 *id );
     bool CFG_save_game_opt( u8 *id );
@@ -251,22 +256,6 @@ extern "C"
     bool CFG_reset_all_playcounters();
     bool CFG_forget_game_opt( u8 *id );
     bool CFG_forget_game_num( u8 *id );
-
-
-    enum {
-        ConsoleLangDefault = 0,
-        jap,
-        eng,
-        ger,
-        fren,
-        esp,
-        it,
-        dut,
-        schin,
-        tchin,
-        kor,
-        settings_language_max // always the last entry
-    };
 
     enum {
         systemdefault = 0,
@@ -283,12 +272,6 @@ extern "C"
         on,
         settings_off_on_max // always the last entry
     };
-    enum {
-        //off=0,
-        //on,
-        anti = 2,
-        settings_error002_max // always the last entry
-    };
 
     enum {
         wiilight_off = 0,
@@ -303,22 +286,6 @@ extern "C"
         Both,
         Neither,
         settings_sinfo_max // always the last entry
-    };
-
-    enum {
-        i249 = 0,
-        i222,
-        i223,
-        i250,
-        settings_ios_max // always the last entry
-    };
-
-    enum {
-        ios249 = 0,
-        ios222,
-        ios223,
-        ios250,
-        settings_cios_max // always the last entry
     };
 
     enum {
@@ -393,86 +360,6 @@ extern "C"
         install_to_name_gameid,
         settings_installdir_max // always the last entry
     };
-    struct SParental
-    {
-        u8 enabled;
-        u8 rating;
-        u8 pin[4];
-        u8 question;
-        wchar_t answer[32]; // IS WCHAR!
-    };
-    struct SSettings
-    {
-        u8      video;
-        u8      language;
-        u8      ocarina;
-        u8      vpatch;
-        int     ios;
-        u8      sinfo;
-        u8      hddinfo;
-        u8      rumble;
-        u8      xflip;
-        int     volume;
-        int     sfxvolume;
-        int     gamesoundvolume;
-        u8      tooltips;
-        char    unlockCode[20];
-        u8      parentalcontrol;
-        u8      cios;
-        u8      qboot;
-        u8      wsprompt;
-        u8      keyset;
-        u8      sort;
-        u8      fave;
-        u8      wiilight;
-        u8      gameDisplay;
-        u8      patchcountrystrings;
-        u8      screensaver;
-        u8      partition;
-        u8      musicloopmode;
-        short   godmode;
-        char    covers_path[100];
-        char    covers2d_path[100];
-        char    theme_path[100];
-        char    wtheme_path[100];
-        char    theme_downloadpath[100];
-        char    disc_path[100];
-        char    titlestxt_path[100];
-        char    language_path[100];
-        char    languagefiles_path[100];
-        char    ogg_path[250];
-        char    dolpath[150];
-        char    update_path[150];
-        char    homebrewapps_path[150];
-        char    selected_homebrew[200];
-        char    Cheatcodespath[100];
-        char    TxtCheatcodespath[100];
-        char    BcaCodepath[100];
-        char    WipCodepath[100];
-        short   error002;
-        u8      titlesOverride; // db_titles
-        char    db_url[200];
-        char    db_language[20];
-        u8      db_JPtoEN;
-        u8      gridRows;
-        u8      autonetwork;
-        u8      discart;
-        short   gamesound;
-        u8      marknewtitles;
-        u8      FatInstallToDir;
-        u8      partitions_to_install;
-        u8      fullcopy;
-        u8      beta_upgrades;
-        struct SParental parental;
-	char	returnTo[ 20 ];
-    };
-    extern struct SSettings Settings;
-
-    void CFG_LoadGlobal( void );
-    bool cfg_save_global( void );
-
-    void GetLanguageToLangCode( int *langid, char *langcode );
-    bool OpenXMLDatabase( char* xmlfilepath, char* argdblang, bool argJPtoEN, bool openfile, bool loadtitles, bool freemem );
 
     char *get_title( struct discHdr *header );
     char *cfg_get_title( u8 *id ) ;

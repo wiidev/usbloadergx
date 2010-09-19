@@ -11,7 +11,7 @@
 
 #include <unistd.h>
 #include "gui_gamebrowser.h"
-#include "../settings/cfg.h"
+#include "../settings/CSettings.h"
 #include "../main.h"
 #include "settings/newtitles.h"
 #include "usbloader/GameList.h"

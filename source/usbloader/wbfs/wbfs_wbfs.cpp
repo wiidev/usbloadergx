@@ -1,6 +1,6 @@
 #include "wbfs_wbfs.h"
 #include "prompts/ProgressWindow.h"
-#include "settings/cfg.h"
+#include "settings/CSettings.h"
 #include "wbfs_rw.h"
 
 extern u32 sector_size;

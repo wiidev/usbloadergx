@@ -34,6 +34,8 @@ extern "C"
     u32 do_bca_code( u8 *gameid );
     int ocarina_load_code( u8 *id );
     int ocarina_do_code();
+    void SetCheatFilepath(const char * path);
+    void SetBCAFilepath(const char * path);
 
 #ifdef __cplusplus
 }

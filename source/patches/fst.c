@@ -27,10 +27,10 @@
 #include <malloc.h>
 #include <sys/unistd.h>
 #include <ogc/ipc.h>
+
 #include "fst.h"
 #include "dvd_broadway.h"
 #include "fatmounter.h"
-#include "settings/cfg.h"
 #include "mload/mload.h"
 #include "mload/dip_plugin.h"
 #include "gecko.h"
@@ -52,6 +52,9 @@
 
 #define MAX_FILENAME_LEN    128
 
+const char * CheatFilepath = NULL;
+static const char * BCAFilepath = NULL;
+
 static u8 *codelistend;
 void *codelist;
 
@@ -70,6 +73,15 @@ extern const u32 axnextframehooks[4];
 extern const u32 wpadbuttonsdownhooks[4];
 extern const u32 wpadbuttonsdown2hooks[4];
 
+void SetCheatFilepath(const char * path)
+{
+	CheatFilepath = path;
+}
+
+void SetBCAFilepath(const char * path)
+{
+	BCAFilepath = path;
+}
 
 //static vu32 dvddone = 0;
 
@@ -77,11 +89,14 @@ extern const u32 wpadbuttonsdown2hooks[4];
 void app_loadgameconfig( char *discid )
 //---------------------------------------------------------------------------------
 {
+	if(!CheatFilepath)
+		return;
+
     gameconfsize = 0;
 
     if ( gameconf == NULL )
     {
-        gameconf = malloc( 65536 );
+        gameconf = (u32*) malloc( 65536 );
         if ( gameconf == NULL )
         {
             //TODO for oggzee
@@ -110,7 +125,7 @@ void app_loadgameconfig( char *discid )
     //tempgameconfsize = defaultgameconfig_size + 1;
 
     char filepath[200];
-    snprintf( filepath, sizeof( filepath ), "%s/gameconfig.txt", Settings.Cheatcodespath );
+    snprintf( filepath, sizeof( filepath ), "%s/gameconfig.txt", CheatFilepath );
 
     fp = fopen( filepath, "rb" );
 
@@ -131,7 +146,7 @@ void app_loadgameconfig( char *discid )
         filesize = ftell( fp );
         fseek( fp, 0, SEEK_SET );
 
-        tempgameconf = malloc( filesize );
+        tempgameconf = (u8*) malloc( filesize );
         if ( tempgameconf == NULL )
         {
             //TODO for oggzee
@@ -529,12 +544,12 @@ int ocarina_load_code( u8 *id )
     gprintf( "Ocarina: Searching codes..." );
     gprintf( "\n" );
 
-    sprintf( filepath, "%s%s", Settings.Cheatcodespath, ( char * ) id );
-    filepath[strlen( Settings.Cheatcodespath )+6] = 0x2E;
-    filepath[strlen( Settings.Cheatcodespath )+7] = 0x67;
-    filepath[strlen( Settings.Cheatcodespath )+8] = 0x63;
-    filepath[strlen( Settings.Cheatcodespath )+9] = 0x74;
-    filepath[strlen( Settings.Cheatcodespath )+10] = 0;
+    sprintf( filepath, "%s%s", CheatFilepath, ( char * ) id );
+    filepath[strlen( CheatFilepath )+6] = 0x2E;
+    filepath[strlen( CheatFilepath )+7] = 0x67;
+    filepath[strlen( CheatFilepath )+8] = 0x63;
+    filepath[strlen( CheatFilepath )+9] = 0x74;
+    filepath[strlen( CheatFilepath )+10] = 0;
 
     FILE * fp = fopen( filepath, "rb" );
     if ( !fp )
@@ -571,7 +586,7 @@ int ocarina_load_code( u8 *id )
         return 0;
     }
 
-    if ( code_size > ( u32 )codelistend - ( u32 )codelist )
+    if ( code_size > ( s32 )codelistend - ( s32 )codelist )
     {
         gprintf( "Ocarina: Too many codes found" );
         gprintf( "\n" );
@@ -786,6 +801,9 @@ int ocarina_do_code()
 
 u32 do_bca_code( u8 *gameid )
 {
+	if(!BCAFilepath)
+		return 0;
+
     if ( IOS_GetVersion() == 222 || IOS_GetVersion() == 223 )
     {
         FILE *fp;
@@ -794,21 +812,21 @@ u32 do_bca_code( u8 *gameid )
         memset( filepath, 0, 150 );
         u8 bcaCode[64] ATTRIBUTE_ALIGN( 32 );
 
-        sprintf( filepath, "%s%6s", Settings.BcaCodepath, gameid );
-        filepath[strlen( Settings.BcaCodepath )+6] = '.';
-        filepath[strlen( Settings.BcaCodepath )+7] = 'b';
-        filepath[strlen( Settings.BcaCodepath )+8] = 'c';
-        filepath[strlen( Settings.BcaCodepath )+9] = 'a';
+        sprintf( filepath, "%s%6s", BCAFilepath, gameid );
+        filepath[strlen( BCAFilepath )+6] = '.';
+        filepath[strlen( BCAFilepath )+7] = 'b';
+        filepath[strlen( BCAFilepath )+8] = 'c';
+        filepath[strlen( BCAFilepath )+9] = 'a';
 
         fp = fopen( filepath, "rb" );
         if ( !fp )
         {
             memset( filepath, 0, 150 );
-            sprintf( filepath, "%s%3s", Settings.BcaCodepath, gameid + 1 );
-            filepath[strlen( Settings.BcaCodepath )+3] = '.';
-            filepath[strlen( Settings.BcaCodepath )+4] = 'b';
-            filepath[strlen( Settings.BcaCodepath )+5] = 'c';
-            filepath[strlen( Settings.BcaCodepath )+6] = 'a';
+            sprintf( filepath, "%s%3s", BCAFilepath, gameid + 1 );
+            filepath[strlen( BCAFilepath )+3] = '.';
+            filepath[strlen( BCAFilepath )+4] = 'b';
+            filepath[strlen( BCAFilepath )+5] = 'c';
+            filepath[strlen( BCAFilepath )+6] = 'a';
             fp = fopen( filepath, "rb" );
 
             if ( !fp )

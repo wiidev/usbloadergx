@@ -34,7 +34,7 @@ static u8 *appldr = ( u8 * )0x81200000;
 /* Variables */
 static u32 buffer[0x20] ATTRIBUTE_ALIGN( 32 );
 
-void gamepatches( void * dst, int len, u8 videoSelected, u8 patchcountrystring, u8 vipatch, u8 cheat )
+void gamepatches( u8 * dst, int len, u8 videoSelected, u8 patchcountrystring, u8 vipatch, u8 cheat )
 {
     VideoModePatcher( dst, len, videoSelected );
 
@@ -59,7 +59,7 @@ void gamepatches( void * dst, int len, u8 videoSelected, u8 patchcountrystring, 
         Anti_002_fix( dst, len );
 }
 
-s32 Apploader_Run( entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8 patchcountrystring, u8 error002fix, u8 alternatedol, u32 alternatedoloffset, u32 returnTo )
+s32 Apploader_Run( entry_point *entry, char * dolpath, u8 cheat, u8 videoSelected, u8 vipatch, u8 patchcountrystring, u8 error002fix, u8 alternatedol, u32 alternatedoloffset, u32 returnTo )
 {
     app_entry appldr_entry;
     app_init  appldr_init;
@@ -143,7 +143,7 @@ s32 Apploader_Run( entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u
         void *dolbuffer = NULL;
         int dollen = 0;
 
-        bool dolloaded = Load_Dol( &dolbuffer, &dollen, Settings.dolpath, videoSelected, patchcountrystring, vipatch, cheat );
+        bool dolloaded = Load_Dol( &dolbuffer, &dollen, dolpath, videoSelected, patchcountrystring, vipatch, cheat );
         if ( dolloaded )
         {
             *entry = ( entry_point ) load_dol_image( dolbuffer );

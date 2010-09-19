@@ -350,28 +350,28 @@ int LoadAppCIOS()
     USBDevice_deInit();// unmount USB for reloading IOS
     USBStorage2_Deinit();
 
-    if ( Settings.cios == ios222 && IOS_GetVersion() != 222 )
+    if ( Settings.cios == 222 && IOS_GetVersion() != 222 )
     {
         printf( "\n\tReloading IOS to config setting (222)..." );
         ret = IOS_ReloadIOSsafe( 222 );
         printf( "%d", ret );
         if ( ret < 0 )
         {
-            Settings.cios = ios249;
-            IOS_ReloadIOSsafe( 249 );
+            Settings.cios = 249;
+            IOS_ReloadIOSsafe( Settings.cios );
         }
     }
 
-    if ( ( Settings.cios == ios249  && IOS_GetVersion() != 249 )
-            || ( Settings.cios == ios250 && IOS_GetVersion() != 250 ) )
+    if ( ( Settings.cios == 249  && IOS_GetVersion() != 249 )
+            || ( Settings.cios == 250 && IOS_GetVersion() != 250 ) )
     {
-        printf( "\n\tReloading IOS to config setting (%d)...", ( Settings.cios == ios249 ) ? 249 : 250 );
-        ret = IOS_ReloadIOSsafe( ( Settings.cios == ios249 ) ? 249 : 250 );
+        printf( "\n\tReloading IOS to config setting (%d)...", ( Settings.cios == 249 ) ? 249 : 250 );
+        ret = IOS_ReloadIOSsafe( ( Settings.cios == 249 ) ? 249 : 250 );
         printf( "%d", ret );
         if ( ret < 0 )
         {
-            Settings.cios = ios222;
-            ret = IOS_ReloadIOSsafe( 222 );
+            Settings.cios = 222;
+            ret = IOS_ReloadIOSsafe( Settings.cios );
         }
     }
 

@@ -26,7 +26,7 @@
 #include <malloc.h>
 #include "usbloader/wbfs.h"
 #include "settings/newtitles.h"
-#include "settings/cfg.h"
+#include "settings/CSettings.h"
 #include "xml/xml.h"
 #include "FreeTypeGX.h"
 #include "GameList.h"
@@ -140,12 +140,12 @@ int GameList::FilterList( const wchar_t * gameFilter )
                 continue;
 
         /* Other parental control method */
-        if ( Settings.parentalcontrol == 0 && Settings.godmode == 0 && Settings.parental.enabled == 1 )
+        if ( Settings.parentalcontrol == 0 && Settings.godmode == 0 && Settings.Parental.enabled == 1 )
         {
             // Check game rating in WiiTDB, since the default Wii parental control setting is enabled
             s32 rating = GetRatingForGame( ( char * ) header->id );
-            if ( ( rating != -1 && rating > Settings.parental.rating ) ||
-                    ( rating == -1 && get_pegi_block( header ) > Settings.parental.rating ) )
+            if ( ( rating != -1 && rating > Settings.Parental.rating ) ||
+                    ( rating == -1 && get_pegi_block( header ) > Settings.Parental.rating ) )
             {
                 continue;
             }

@@ -10,7 +10,7 @@
 #include "../wpad.h"
 #include "../main.h"
 #include "../gecko.h"
-#include "../settings/cfg.h"
+#include "../settings/CSettings.h"
 #include "gui_customoptionbrowser.h"
 
 #include <unistd.h>

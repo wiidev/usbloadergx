@@ -6,16 +6,14 @@ Load game information from XML - Lustar
 
 #include <malloc.h>
 #include "unzip/unzip.h"
-#include "settings/cfg.h"
+#include "settings/CSettings.h"
 #include "xml/xml.h"
-//#include "cfg.h"
-//#include "xml.h"
 
-extern struct SSettings Settings; // for loader GX
+extern "C" {
 extern void title_set( char *id, char *title );
 extern char* trimcopy( char *dest, char *src, int size );
 extern char game_partition[6];
-
+}
 
 /* config */
 static bool xmldebug = false;
@@ -111,8 +109,8 @@ void CloseXMLDatabase()
 }
 
 
-void GetTextFromNode( mxml_node_t *currentnode, mxml_node_t *topnode, char *nodename,
-                      char *attributename, char *value, int descend, char *dest, int destsize )
+void GetTextFromNode( mxml_node_t *currentnode, mxml_node_t *topnode, const char *nodename,
+                      const char *attributename, char *value, int descend, char *dest, int destsize )
 {
     *element_text = 0;
     nodefound = mxmlFindElement( currentnode, topnode, nodename, attributename, value, descend );
@@ -180,7 +178,7 @@ bool OpenXMLFile( char *filename )
             return false;
         }
 
-        char * zipfilebuffer = malloc( zipfilebuffersize );
+        char * zipfilebuffer = (char *) malloc( zipfilebuffersize );
         memset( zipfilebuffer, 0, zipfilebuffersize );
         if ( zipfilebuffer == NULL )
         {
@@ -235,7 +233,7 @@ char *GetLangSettingFromGame( char *gameid )
 
 
 /* convert language text into ISO 639 two-letter language code (+ZHTW/ZHCN) */
-char *ConvertLangTextToCode( char *languagetxt )
+const char *ConvertLangTextToCode( char *languagetxt )
 {
     // do not convert if languagetext seems to be a language code (can be 2 or 4 letters)
     if ( strlen( languagetxt ) <= 4 )
@@ -268,7 +266,7 @@ char ConvertRatingToIndex( char *ratingtext )
     return type;
 }
 
-void ConvertRating( char *ratingvalue, char *fromrating, char *torating, char *destvalue, int destsize )
+void ConvertRating( char *ratingvalue, char *fromrating, const char *torating, char *destvalue, int destsize )
 {
     if ( !strcmp( fromrating, torating ) )
     {
@@ -281,7 +279,7 @@ void ConvertRating( char *ratingvalue, char *fromrating, char *torating, char *d
     int desttype = -1;
 
     type = ConvertRatingToIndex( fromrating );
-    desttype = ConvertRatingToIndex( torating );
+    desttype = ConvertRatingToIndex( (char *) torating );
     if ( type == -1 || desttype == -1 )
         return;
 
@@ -289,7 +287,7 @@ void ConvertRating( char *ratingvalue, char *fromrating, char *torating, char *d
     /* the list is ordered to pick the most likely value first: */
     /* EC and AO are less likely to be used so they are moved down to only be picked up when converting ESRB to PEGI or CERO */
     /* the conversion can never be perfect because ratings can differ between regions for the same game */
-    char ratingtable[12][3][4] =
+    char ratingtable[12][3][5] =
     {
         {{"A"}, {"E"}, {"3"}},
         {{"A"}, {"E"}, {"4"}},
