@@ -9,5 +9,6 @@
 #define _TITLEBROWSER_H_
 
 int TitleBrowser();
+bool TitleSelector( char output[] );
 
 #endif

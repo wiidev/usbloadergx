@@ -21,6 +21,7 @@
 #include "usbloader/utils.h"
 #include "xml/xml.h"
 #include "wad/nandtitle.h"
+#include "prompts/TitleBrowser.h"
 
 #define MAXOPTIONS 13
 
@@ -1074,15 +1075,38 @@ int MenuSettings()
                                 options2.SetValue( Idx, "%s", tr( opts_partitions[Settings.partitions_to_install] ) );
                             }
 
-                            if ( ret == ++Idx || firstRun )
-                            {
-                                if ( firstRun ) options2.SetName( Idx, "%s", tr( "Install 1:1 Copy" ) );
-                                if ( ret == Idx )
-                                {
-                                    Settings.fullcopy = Settings.fullcopy == 0 ? 1 : 0;
-                                }
-                                options2.SetValue( Idx, "%s", tr( opts_no_yes[Settings.fullcopy] ) );
-                            }
+			    if ( ret == ++Idx || firstRun )
+			    {
+				if ( firstRun ) options2.SetName( Idx, "%s", tr( "Install 1:1 Copy" ) );
+				if ( ret == Idx )
+				{
+				    Settings.fullcopy = Settings.fullcopy == 0 ? 1 : 0;
+				}
+				options2.SetValue( Idx, "%s", tr( opts_no_yes[Settings.fullcopy] ) );
+			    }
+
+			    if ( ret == ++Idx || firstRun )
+			    {
+				char* name = NULL;
+				if ( firstRun ) options2.SetName( Idx, "%s", tr( "Return To" ) );
+				if ( ret == Idx )
+				{
+				    char tidChar[ 10 ];
+				    bool getChannel = TitleSelector( tidChar );
+				    if( getChannel )
+				    {
+					snprintf( Settings.returnTo, sizeof( Settings.returnTo ), "%s", tidChar );
+				    }
+				}
+				int haveTitle = titles.FindU32( Settings.returnTo );
+				if( haveTitle >= 0 )
+				{
+				    name = titles.NameFromIndex( haveTitle );
+				    if( !strlen( name ) )
+					name = NULL;
+				}
+				options2.SetValue( Idx, "%s",  name ? name : tr( opts_off_on[ 0 ] ) );
+			    }
 
                             firstRun = false;
                         }
@@ -2465,8 +2489,9 @@ int GameSettings( struct discHdr * header )
             countrystrings = game_cfg->patchcountrystrings;
             alternatedol = game_cfg->loadalternatedol;
             alternatedoloffset = game_cfg->alternatedolstart;
-            reloadblock = game_cfg->iosreloadblock;
-            strlcpy( alternatedname, game_cfg->alternatedolname, sizeof( alternatedname ) );
+	    reloadblock = game_cfg->iosreloadblock;
+	    strlcpy( alternatedname, game_cfg->alternatedolname, sizeof( alternatedname ) );
+	    returnToLoaderGV = game_cfg->returnTo;
         }
         else
         {
@@ -2488,7 +2513,8 @@ int GameSettings( struct discHdr * header )
             alternatedol = off;
             alternatedoloffset = 0;
             reloadblock = off;
-            strcpy( alternatedname, "" );
+	    strcpy( alternatedname, "" );
+	    returnToLoaderGV = 1;
         }
 
         ResumeGui();
@@ -2520,8 +2546,7 @@ int GameSettings( struct discHdr * header )
                 w.Remove( &MainButton3 );
                 w.Remove( &MainButton4 );
                 exit = false;
-                options2.SetLength( 0 );
-//              optionBrowser2.SetScrollbar(1);
+		options2.SetLength( 0 );
                 w.Append( &optionBrowser2 );
                 optionBrowser2.SetClickable( true );
                 ResumeGui();
@@ -2659,15 +2684,32 @@ int GameSettings( struct discHdr * header )
                             options2.SetValue( Idx, "%s", tr( opts_parentalcontrol[parentalcontrolChoice] ) );
                         }
 
-                        if ( ret == ++Idx || firstRun )
-                        {
-                            if ( firstRun ) options2.SetName( Idx, "%s", tr( "Error 002 fix" ) );
-                            if ( ret == Idx && ++fix002 >= settings_error002_max )
-                                fix002 = 0;
-                            options2.SetValue( Idx, "%s", tr( opts_error002[fix002] ) );
-                        }
+			if ( ret == ++Idx || firstRun )
+			{
+			    if ( firstRun ) options2.SetName( Idx, "%s", tr( "Error 002 fix" ) );
+			    if ( ret == Idx && ++fix002 >= settings_error002_max )
+				fix002 = 0;
+			    options2.SetValue( Idx, "%s", tr( opts_error002[fix002] ) );
+			}
 
-                        if ( ret == ++Idx || firstRun )
+			if ( ret == ++Idx || firstRun )
+			{
+			    if ( firstRun ) options2.SetName( Idx, "%s", tr( "Return To" ) );
+			    if ( ret == Idx && ++returnToLoaderGV >= settings_off_on_max )
+				returnToLoaderGV = 0;
+
+			    char text[ IMET_MAX_NAME_LEN ];
+			    int channel = titles.FindU32( Settings.returnTo );//is the channel set in the global settings actually installed?
+
+			    if( !returnToLoaderGV || channel < 0 )//channel is not installed or the uer wants to not use it
+				sprintf( text, "%s", tr( opts_off_on[ 0 ] ) );
+
+			    else snprintf( text, sizeof( text ), "%s", titles.NameFromIndex( channel ) );
+
+			    options2.SetValue( Idx, "%s", text );
+			}
+
+			if ( ret == ++Idx || firstRun )
                         {
                             if ( firstRun ) options2.SetName( Idx, "%s", tr( "Patch Country Strings" ) );
                             if ( ret == Idx && ++countrystrings >= settings_off_on_max )
@@ -3002,8 +3044,9 @@ int GameSettings( struct discHdr * header )
                         iosChoice = i223;
                     else
                         iosChoice = i249;
-                    parentalcontrolChoice = 0;
-                    strcpy( alternatedname, "" );
+		    parentalcontrolChoice = 0;
+		    strcpy( alternatedname, "" );
+		    returnToLoaderGV = 1;
                     CFG_forget_game_opt( header->id );
                     /* commented because the database language now depends on the main language setting, this could be enabled again if there is a separate language setting for the database
                     // if default language is different than language from main settings, reload titles

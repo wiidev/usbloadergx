@@ -59,7 +59,7 @@ void gamepatches( void * dst, int len, u8 videoSelected, u8 patchcountrystring, 
         Anti_002_fix( dst, len );
 }
 
-s32 Apploader_Run( entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8 patchcountrystring, u8 error002fix, u8 alternatedol, u32 alternatedoloffset )
+s32 Apploader_Run( entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u8 patchcountrystring, u8 error002fix, u8 alternatedol, u32 alternatedoloffset, u32 returnTo )
 {
     app_entry appldr_entry;
     app_init  appldr_init;
@@ -102,6 +102,9 @@ s32 Apploader_Run( entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u
         *( u32 * )0x80003188 = *( u32 * )0x80003140;
     }
 
+    u32 dolStart = 0x90000000;
+    u32 dolEnd = 0x0;
+
     for ( ;; )
     {
         void *dst = NULL;
@@ -117,6 +120,18 @@ s32 Apploader_Run( entry_point *entry, u8 cheat, u8 videoSelected, u8 vipatch, u
 
         gamepatches( dst, len, videoSelected, patchcountrystring, vipatch, cheat );
         DCFlushRange( dst, len );
+
+	if( (u32)dst < dolStart )dolStart = (u32)dst;
+	if( (u32)dst + len > dolEnd ) dolEnd = (u32)dst + len;
+    }
+
+    //this patch should be run on the entire dol at 1 time
+    if( !alternatedol && returnTo)
+    {
+	if( PatchReturnTo( (u32*)dolStart, dolEnd - dolStart , returnTo) )
+	{
+	    DCFlushRange( (u32*)dolStart, dolEnd - dolStart );
+	}
     }
 
     *entry = appldr_final();

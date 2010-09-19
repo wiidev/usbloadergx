@@ -7,6 +7,7 @@
 #include "network/networkops.h"
 #include "prompts/gameinfo.h"
 #include "prompts/DiscBrowser.h"
+#include "prompts/TitleBrowser.h"
 #include "settings/Settings.h"
 #include "wpad.h"
 #include "sys.h"

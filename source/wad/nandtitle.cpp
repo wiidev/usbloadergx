@@ -8,6 +8,23 @@ extern "C"
 
 static u8 tmd_buf[ MAX_SIGNED_TMD_SIZE ] ATTRIBUTE_ALIGN( 32 );
 
+//based on one from comex's nand formatter
+static u64 atoi_hex( const char *s ) {
+    u64 ret=0;
+    u32 n = strlen( s );
+
+    for( u32 i = 0; i < n; i++) {
+	    if(s[i] > 0x39) {
+		    ret += (s[i] & ~0x20) - 0x37;
+	    } else {
+		    ret += (s[i]-0x30);
+	    }
+	    if (i != (n-1)) ret *= 16;
+    }
+
+    return ret;
+}
+
 NandTitle::NandTitle()
 {
     numTitles = 0;
@@ -443,4 +460,21 @@ err:
         free( views );
 
     return ret;
+}
+
+int NandTitle::FindU64( const char *s )
+{
+    u64 tid = atoi_hex( s );
+    return IndexOf( tid );
+}
+
+int NandTitle::FindU32( const char *s )
+{
+    u64 tid = atoi_hex( s );
+    for ( u32 i = 0; i < numTitles; i++ )
+    {
+	if ( TITLE_LOWER( list[ i ] ) == TITLE_LOWER( tid ) )
+	    return i;
+    }
+    return WII_EINSTALL;
 }

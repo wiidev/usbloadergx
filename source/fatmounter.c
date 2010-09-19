@@ -47,7 +47,7 @@ sec_t fs_ntfs_sec = 0;
 int USBDevice_Init()
 {
 #ifdef DEBUG_FAT
-    gprintf( "\nUSBDevice_Init()" );
+    gprintf( "USBDevice_Init()" );
 #endif
     //closing all open Files write back the cache and then shutdown em!
     fatUnmount( "USB:/" );
@@ -59,7 +59,7 @@ int USBDevice_Init()
     if ( !fatMount( "USB", &__io_usbstorage2, 0, CACHE, SECTORS ) )
     {
 #ifdef DEBUG_FAT
-        gprintf( ":-1" );
+	gprintf( ":-1\n" );
 #endif
         return -1;
     }
@@ -68,7 +68,7 @@ int USBDevice_Init()
     fat_usb_mount = 1;
     fat_usb_sec = _FAT_startSector;
 #ifdef DEBUG_FAT
-    gprintf( ":0" );
+    gprintf( ":0\n" );
 #endif
     return 0;
 }
@@ -76,13 +76,16 @@ int USBDevice_Init()
 void USBDevice_deInit()
 {
 #ifdef DEBUG_FAT
-    gprintf( "\nUSBDevice_deInit()" );
+    gprintf( "USBDevice_deInit(): " );
 #endif
     //closing all open Files write back the cache and then shutdown em!
     fatUnmount( "USB:/" );
 
     fat_usb_mount = 0;
     fat_usb_sec = 0;
+#ifdef DEBUG_FAT
+    gprintf( "ok\n" );
+#endif
 }
 
 int WBFSDevice_Init( u32 sector )
@@ -130,7 +133,7 @@ int isInserted( const char *path )
 int SDCard_Init()
 {
 #ifdef DEBUG_FAT
-    gprintf( "\nSDCard_Init()" );
+    gprintf( "SDCard_Init()" );
 #endif
     //closing all open Files write back the cache and then shutdown em!
     fatUnmount( "SD:/" );
@@ -140,7 +143,7 @@ int SDCard_Init()
         fat_sd_mount = MOUNT_SD;
         fat_sd_sec = _FAT_startSector;
 #ifdef DEBUG_FAT
-        gprintf( ":1" );
+	gprintf( ":1\n" );
 #endif
         return 1;
     }
@@ -149,12 +152,12 @@ int SDCard_Init()
         fat_sd_mount = MOUNT_SDHC;
         fat_sd_sec = _FAT_startSector;
 #ifdef DEBUG_FAT
-        gprintf( ":1" );
+	gprintf( ":1\n" );
 #endif
         return 1;
     }
 #ifdef DEBUG_FAT
-    gprintf( ":-1" );
+    gprintf( ":-1\n" );
 #endif
     return -1;
 }
@@ -162,13 +165,16 @@ int SDCard_Init()
 void SDCard_deInit()
 {
 #ifdef DEBUG_FAT
-    gprintf( "\nSDCard_deInit()" );
+    gprintf( "SDCard_deInit(): " );
 #endif
     //closing all open Files write back the cache and then shutdown em!
     fatUnmount( "SD:/" );
 
     fat_sd_mount = MOUNT_NONE;
     fat_sd_sec = 0;
+#ifdef DEBUG_FAT
+    gprintf( "ok\n" );
+#endif
 }
 
 void ntfsInit();

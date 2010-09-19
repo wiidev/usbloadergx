@@ -104,10 +104,10 @@ void customOptionList::SetValue( int i, const char *format, ... )
 
     if ( i >= 0 && i < length )
     {
-        char *tmp = 0;
+	char *tmp = 0;
         va_list va;
         va_start( va, format );
-        vasprintf( &tmp, format, va );
+	vasprintf( &tmp, format, va );
         va_end( va );
 
         if ( tmp )

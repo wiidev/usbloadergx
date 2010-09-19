@@ -86,6 +86,9 @@ class NandTitle
         bool Exists( u64 tid );
         bool ExistsFromIndex( u32 i );
 
+	int FindU64( const char *s );
+	int FindU32( const char *s );
+
         s32 GetTicketViews( u64 tid, tikview **outbuf, u32 *outlen );
 
         u64 operator[]( u32 i ) { return At( i ); }

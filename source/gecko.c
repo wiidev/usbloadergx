@@ -14,7 +14,7 @@ void gprintf( const char *str, ... )
 {
     if ( !( geckoinit ) )return;
 
-    char astr[4096];
+    char astr[ 0x100 ];
 
     va_list ap;
     va_start( ap, str );
@@ -23,8 +23,8 @@ void gprintf( const char *str, ... )
 
     va_end( ap );
 
-    //usb_sendbuffer( 1, astr, strlen( astr ) );
-    usb_sendbuffer_safe( 1, astr, strlen(astr) );
+    usb_sendbuffer( 1, astr, strlen( astr ) );
+    //usb_sendbuffer_safe( 1, astr, strlen(astr) );
 }
 
 bool InitGecko()

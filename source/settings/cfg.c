@@ -41,6 +41,7 @@ u16 playcount = 0;
 u8 listDisplay = 0;
 u8 partition = -1;
 char alternatedname[40];
+u8 returnToLoaderGV = 1; //global variable used for returnToLoaderShit.  defaults to "yes, patch return to loader"
 
 struct ID_Title
 {
@@ -365,6 +366,7 @@ void Global_Default( void )
     Settings.tooltips = TooltipsOn;
     char * empty = "";
     snprintf( Settings.unlockCode, sizeof( Settings.unlockCode ), empty );
+    snprintf( Settings.returnTo, sizeof( Settings.returnTo ), empty );
 //    Settings.godmode = 1;
     Settings.gamesound = 1;
     Settings.parentalcontrol = 0;
@@ -747,48 +749,48 @@ void theme_set( char *name, char *val )
 
     CFG_COORDS4( gamelist )
     else CFG_COORDS4( gamegrid )
-        else CFG_COORDS4( gamecarousel )
+    else CFG_COORDS4( gamecarousel )
 
-            else CFG_COORDS2( covers )
+    else CFG_COORDS2( covers )
 
-                else CFG_BOOL( show_id )
-                    else CFG_COORDS2( id )
+    else CFG_BOOL( show_id )
+    else CFG_COORDS2( id )
 
-                        else CFG_BOOL( show_region )
-                            else CFG_COORDS2( region )
+    else CFG_BOOL( show_region )
+    else CFG_COORDS2( region )
 
-                                else CFG_COORDS2( sdcard )
-                                    else CFG_COORDS2( homebrew )
-                                        else CFG_COORDS2( power )
-                                            else CFG_COORDS2( home )
-                                                else CFG_COORDS2( setting )
-                                                    else CFG_COORDS2( install )
+    else CFG_COORDS2( sdcard )
+    else CFG_COORDS2( homebrew )
+    else CFG_COORDS2( power )
+    else CFG_COORDS2( home )
+    else CFG_COORDS2( setting )
+    else CFG_COORDS2( install )
 
-                                                        else CFG_COORDS2( clock )
-                                                            else CFG_ALIGN( clock )
-                                                                else CFG_COLOR( clock )
+    else CFG_COORDS2( clock )
+    else CFG_ALIGN( clock )
+    else CFG_COLOR( clock )
 
-                                                                    else CFG_COLOR( info )
-                                                                        else CFG_BOOL( show_hddinfo )
-                                                                            else CFG_ALIGN( hddinfo )
-                                                                                else CFG_COORDS2( hddinfo )
+    else CFG_COLOR( info )
+    else CFG_BOOL( show_hddinfo )
+    else CFG_ALIGN( hddinfo )
+    else CFG_COORDS2( hddinfo )
 
-                                                                                    else CFG_BOOL( show_gamecount )
-                                                                                        else CFG_ALIGN( gamecount )
-                                                                                            else CFG_COORDS2( gamecount )
+    else CFG_BOOL( show_gamecount )
+    else CFG_ALIGN( gamecount )
+    else CFG_COORDS2( gamecount )
 
-                                                                                                else CFG_BOOL( show_tooltip )
-                                                                                                    else CFG_VAL( tooltipAlpha )
+    else CFG_BOOL( show_tooltip )
+    else CFG_VAL( tooltipAlpha )
 
-                                                                                                        else CFG_COLOR( prompttext )
-                                                                                                            else CFG_COLOR( settingstext )
-                                                                                                                else CFG_COLOR( gametext )
+    else CFG_COLOR( prompttext )
+    else CFG_COLOR( settingstext )
+    else CFG_COLOR( gametext )
 
-                                                                                                                    else CFG_VAL( pagesize )
+    else CFG_VAL( pagesize )
 
-                                                                                                                        else CFG_COORDS2( gamelist_favorite )
-                                                                                                                            else CFG_COORDS2( gamegrid_favorite )
-                                                                                                                                else CFG_COORDS2( gamecarousel_favorite )
+    else CFG_COORDS2( gamelist_favorite )
+    else CFG_COORDS2( gamegrid_favorite )
+    else CFG_COORDS2( gamecarousel_favorite )
 
                                                                                                                                     else CFG_COORDS2( gamelist_search )
                                                                                                                                         else CFG_COORDS2( gamegrid_search )
@@ -1129,8 +1131,13 @@ void global_cfg_set( char *name, char *val )
     }
     else if ( strcmp( name, "password" ) == 0 )
     {
-        strlcpy( Settings.unlockCode, val, sizeof( Settings.unlockCode ) );
-        return;
+	strlcpy( Settings.unlockCode, val, sizeof( Settings.unlockCode ) );
+	return;
+    }
+    else if ( strcmp( name, "returnTo" ) == 0 )
+    {
+	strlcpy( Settings.returnTo, val, sizeof( Settings.returnTo ) );
+	return;
     }
     else if ( strcmp( name, "parentalcontrol" ) == 0 )
     {
@@ -1492,6 +1499,7 @@ void cfg_set_game_opt( struct Game_CFG *game, u8 *id )
     }
     game->alternatedolstart = alternatedoloffset;
     strlcpy( game->alternatedolname, alternatedname, sizeof( game->alternatedolname ) );
+    game->returnTo = returnToLoaderGV;
 }
 
 struct Game_NUM* cfg_get_game_num( u8 *id )
@@ -1602,6 +1610,7 @@ bool cfg_save_global()   // save global settings
     fprintf( f, "partitions = %d\n ", Settings.partitions_to_install );
     fprintf( f, "fullcopy = %d\n ", Settings.fullcopy );
     fprintf( f, "beta_upgrades = %d\n ", Settings.beta_upgrades );
+    fprintf( f, "returnTo = %s\n ", Settings.returnTo );
     fclose( f );
     return true;
 }
@@ -1711,10 +1720,14 @@ void game_set( char *name, char *val )
                     game->alternatedolstart = opt_c;
                 }
             }
-            if ( strcmp( "alternatedolname", opt_name ) == 0 )
-            {
-                strlcpy( game->alternatedolname, opt_val, sizeof( game->alternatedolname ) );
-            }
+	    if ( strcmp( "alternatedolname", opt_name ) == 0 )
+	    {
+		strlcpy( game->alternatedolname, opt_val, sizeof( game->alternatedolname ) );
+	    }
+	    if ( strcmp( "returnTo", opt_name ) == 0 )
+	    {
+		strlcpy( game->returnTo, opt_val, sizeof( game->returnTo ) );
+	    }
         }
         // next opt
         if ( np ) p = np + 1;
@@ -1879,7 +1892,8 @@ bool cfg_save_games()
         fprintf( f, "patchcountrystrings:%d; ", cfg_game[i].patchcountrystrings );
         fprintf( f, "loadalternatedol:%d;", cfg_game[i].loadalternatedol );
         fprintf( f, "alternatedolstart:%d;", cfg_game[i].alternatedolstart );
-        fprintf( f, "alternatedolname:%s;\n", cfg_game[i].alternatedolname );
+	fprintf( f, "alternatedolname:%s;\n", cfg_game[i].alternatedolname );
+	fprintf( f, "returnTo:%s;\n", cfg_game[i].returnTo );
     }
     fprintf( f, "# END\n" );
     fclose( f );
@@ -1956,6 +1970,7 @@ bool CFG_reset_all_playcounters()
     return true;
 }
 
+#if 0
 bool cfg_load_global()
 {
     char GXGlobal_cfg[26];
@@ -1989,7 +2004,7 @@ bool cfg_load_global()
     Settings.db_JPtoEN = 0;
     return cfg_parsefile( GXGlobal_cfg, &global_cfg_set );
 }
-
+#endif
 
 
 struct Game_CFG* CFG_get_game_opt( const u8 *id )

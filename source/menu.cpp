@@ -439,6 +439,7 @@ int MainMenu( int menu )
                 alternatedoloffset = game_cfg->alternatedolstart;
             }
             reloadblock = game_cfg->iosreloadblock;
+	    returnToLoaderGV = game_cfg->returnTo;
         }
         else
         {
@@ -462,6 +463,7 @@ int MainMenu( int menu )
                 alternatedoloffset = 0;
             }
             reloadblock = off;
+	    returnToLoaderGV = 1;
         }
         int ios2;
 
@@ -667,9 +669,17 @@ int MainMenu( int menu )
                 vipatch = 0;
                 break;
         }
+
+	u32 channel = 0;
+	if( returnToLoaderGV )
+	{
+	    int idx = titles.FindU32( Settings.returnTo );
+	    if( idx >= 0 )
+		channel = TITLE_LOWER( titles.At( idx ) );
+	}
         gprintf( "\tDisc_wiiBoot\n" );
 
-        ret = Disc_WiiBoot( videoselected, cheat, vipatch, countrystrings, errorfixer002, alternatedol, alternatedoloffset );
+	ret = Disc_WiiBoot( videoselected, cheat, vipatch, countrystrings, errorfixer002, alternatedol, alternatedoloffset, channel );
         if ( ret < 0 )
         {
             Sys_LoadMenu();

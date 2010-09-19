@@ -214,6 +214,7 @@ extern "C"
     extern u16 playcount;
     extern u8 favoritevar;
     extern char alternatedname[40];
+    extern u8 returnToLoaderGV;
 
 
     struct Game_CFG
@@ -231,6 +232,7 @@ extern "C"
         u32 alternatedolstart;
         u8 patchcountrystrings;
         char alternatedolname[40];
+	u8 returnTo;
     };
     struct Game_NUM
     {
@@ -462,6 +464,7 @@ extern "C"
         u8      fullcopy;
         u8      beta_upgrades;
         struct SParental parental;
+	char	returnTo[ 20 ];
     };
     extern struct SSettings Settings;
 
