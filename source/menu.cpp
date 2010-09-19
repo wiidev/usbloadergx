@@ -68,7 +68,6 @@ extern u8 shutdown;
 extern u8 reset;
 extern s32 gameSelected, gameStart;
 extern u8 boothomebrew;
-extern u8 dbvideo;
 
 
 /****************************************************************************
@@ -354,9 +353,6 @@ int MainMenu( int menu )
     ShutdownAudio();
     StopGX();
     gettextCleanUp();
-
-    if ( dbvideo )
-        InitVideodebug ();
 
     if ( mountMethod == 3 )
     {

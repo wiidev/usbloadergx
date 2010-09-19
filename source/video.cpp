@@ -138,13 +138,6 @@ InitVideo ()
     VIDEO_Init();
     vmode = VIDEO_GetPreferredMode( NULL ); // get default video mode
 
-    // widescreen fix
-    if ( CFG.widescreen )
-    {
-        vmode->viWidth = VI_MAX_WIDTH_PAL - 12;
-        vmode->viXOrigin = ( ( VI_MAX_WIDTH_PAL - vmode->viWidth ) / 2 ) + 2;
-    }
-
     VIDEO_Configure ( vmode );
 
     screenheight = 480;
@@ -172,31 +165,21 @@ InitVideo ()
     // A console is always useful while debugging
     console_init ( xfb[0], 80, 100, 500, 350, vmode->fbWidth * 2 );
 }
-static unsigned int *xfbDB = NULL;
 
-void InitVideodebug ()
+void VIDEO_SetWidescreen(bool widescreen)
 {
-    VIDEO_Init();
-    GXRModeObj *vmode = VIDEO_GetPreferredMode( NULL ); // get default video mode
+    if ( widescreen )
+    {
+        // widescreen fix
+        vmode->viWidth = VI_MAX_WIDTH_PAL - 12;
+        vmode->viXOrigin = ( ( VI_MAX_WIDTH_PAL - vmode->viWidth ) / 2 ) + 2;
+    }
+    else
+    {
+        VIDEO_GetPreferredMode( NULL );
+    }
 
-    // widescreen fix
     VIDEO_Configure ( vmode );
-
-    // Allocate the video buffers
-    xfbDB = ( u32 * ) MEM_K0_TO_K1 ( SYS_AllocateFramebuffer ( vmode ) );
-
-    // A console is always useful while debugging
-    console_init ( xfbDB, 20, 64, vmode->fbWidth, vmode->xfbHeight, vmode->fbWidth * 2 );
-
-    // Clear framebuffers etc.
-    VIDEO_ClearFrameBuffer ( vmode, xfbDB, COLOR_BLACK );
-    VIDEO_SetNextFramebuffer ( xfbDB );
-
-    VIDEO_SetBlack ( FALSE );
-    VIDEO_Flush ();
-    VIDEO_WaitVSync ();
-    if ( vmode->viTVMode & VI_NON_INTERLACE )
-        VIDEO_WaitVSync ();
 }
 /****************************************************************************
  * StopGX
@@ -219,7 +202,6 @@ void StopGX()
  ***************************************************************************/
 void Menu_Render()
 {
-
     whichfb ^= 1; // flip framebuffer
     GX_SetZMode( GX_TRUE, GX_LEQUAL, GX_TRUE );
     GX_SetColorUpdate( GX_TRUE );

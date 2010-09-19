@@ -55,27 +55,17 @@ extern "C"
 #include "wad/nandtitle.h"
 
 extern bool geckoinit;
-extern bool textVideoInit;
 extern char headlessID[8];
 
 NandTitle titles;
-
-/* Constants */
-#define CONSOLE_XCOORD      260
-#define CONSOLE_YCOORD      115
-#define CONSOLE_WIDTH       340
-#define CONSOLE_HEIGHT      218
-
 PartList partitions;
-u8 dbvideo = 0;
 
 int main( int argc, char *argv[] )
 {
     MEM2_init( 48 );
     setlocale( LC_ALL, "en.UTF-8" );
     geckoinit = InitGecko();
-    InitVideo();	//TODO: some sort of magic is done in the CFG_Load()  ( maybe stff with CONF_ ).  if videoinit is after cfg load, my full screen is used.
-			//with videoinit before CFG load, i get black box around my picture
+    InitVideo();
     __exception_setreload( 20 );
 
     printf( "\tStarting up\n" );
@@ -115,6 +105,7 @@ int main( int argc, char *argv[] )
     gettextCleanUp();
     printf( "\tLoading configuration..." );
     CFG_Load();
+    VIDEO_SetWidescreen(CFG.widescreen);
     printf( "done\n" );
 
     SDCard_deInit();// unmount SD for reloading IOS
@@ -137,7 +128,7 @@ int main( int argc, char *argv[] )
     printf( "\tWaiting for USB:\n" );
     if ( MountWBFS() < 0 )
     {
-	printf( "ERROR: No WBFS drive mounted.\n" );
+        printf( "ERROR: No WBFS drive mounted.\n" );
         sleep( 5 );
         exit( 0 );
     }
