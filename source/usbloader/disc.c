@@ -298,6 +298,7 @@ s32 Disc_IsWii( void )
 
 s32 Disc_BootPartition( u64 offset, u8 videoselected, u8 cheat, u8 vipatch, u8 patchcountrystring, u8 error002fix, u8 alternatedol, u32 alternatedoloffset, u32 returnTo )
 {
+    gprintf("booting partition IOS %u v%u\n", IOS_GetVersion(), IOS_GetRevision() );
     entry_point p_entry;
 
     s32 ret;

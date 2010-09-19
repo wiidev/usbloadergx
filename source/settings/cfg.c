@@ -1726,7 +1726,10 @@ void game_set( char *name, char *val )
 	    }
 	    if ( strcmp( "returnTo", opt_name ) == 0 )
 	    {
-		strlcpy( game->returnTo, opt_val, sizeof( game->returnTo ) );
+		if ( sscanf( opt_val, "%hd", &opt_c ) == 1 )
+		{
+		    game->returnTo = opt_c;
+		}
 	    }
         }
         // next opt
@@ -1893,7 +1896,7 @@ bool cfg_save_games()
         fprintf( f, "loadalternatedol:%d;", cfg_game[i].loadalternatedol );
         fprintf( f, "alternatedolstart:%d;", cfg_game[i].alternatedolstart );
 	fprintf( f, "alternatedolname:%s;\n", cfg_game[i].alternatedolname );
-	fprintf( f, "returnTo:%s;\n", cfg_game[i].returnTo );
+	fprintf( f, "returnTo:%d;\n", cfg_game[i].returnTo );
     }
     fprintf( f, "# END\n" );
     fclose( f );

@@ -130,6 +130,7 @@ int isInserted( const char *path )
     return __io_sdhc.isInserted() || __io_wiisd.isInserted();
 }
 
+static u8 sdIsInited = 0;
 int SDCard_Init()
 {
 #ifdef DEBUG_FAT
@@ -142,6 +143,7 @@ int SDCard_Init()
     {
         fat_sd_mount = MOUNT_SD;
         fat_sd_sec = _FAT_startSector;
+	sdIsInited = 1;
 #ifdef DEBUG_FAT
 	gprintf( ":1\n" );
 #endif
@@ -151,6 +153,7 @@ int SDCard_Init()
     {
         fat_sd_mount = MOUNT_SDHC;
         fat_sd_sec = _FAT_startSector;
+	sdIsInited = 1;
 #ifdef DEBUG_FAT
 	gprintf( ":1\n" );
 #endif
@@ -165,13 +168,17 @@ int SDCard_Init()
 void SDCard_deInit()
 {
 #ifdef DEBUG_FAT
-    gprintf( "SDCard_deInit(): " );
+    gprintf( "SDCard_deInit( %d ): ", sdIsInited );
 #endif
     //closing all open Files write back the cache and then shutdown em!
-    fatUnmount( "SD:/" );
+    if( sdIsInited )
+    {
+	fatUnmount( "SD:/" );
 
-    fat_sd_mount = MOUNT_NONE;
-    fat_sd_sec = 0;
+	fat_sd_mount = MOUNT_NONE;
+	fat_sd_sec = 0;
+	sdIsInited = 0;
+    }
 #ifdef DEBUG_FAT
     gprintf( "ok\n" );
 #endif
