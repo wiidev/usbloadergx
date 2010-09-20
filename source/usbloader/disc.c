@@ -331,7 +331,7 @@ s32 Disc_BootPartition( u64 offset, char * dolpath, u8 videoselected, u8 cheat, 
 
     if ( cheat )
     {
-        /* OCARINA STUFF - FISHEARS*/
+	// OCARINA STUFF - FISHEARS
         if ( ocarina_load_code( ( u8 * ) gameid ) > 0 )
         {
             ocarina_do_code();
@@ -349,8 +349,6 @@ s32 Disc_BootPartition( u64 offset, char * dolpath, u8 videoselected, u8 cheat, 
     /* Set time */
     __Disc_SetTime();
 
-    //gprintf("\n\tDe-init SD & USB");
-
     /* Disconnect Wiimote */
     WPAD_Flush( 0 );
     WPAD_Disconnect( 0 );
@@ -360,7 +358,7 @@ s32 Disc_BootPartition( u64 offset, char * dolpath, u8 videoselected, u8 cheat, 
     VIDEO_SetBlack( TRUE );
     VIDEO_Flush();
     VIDEO_WaitVSync();
-    gprintf( "\n\nUSB Loader GX is done.\n\n" );
+    gprintf( "USB Loader GX is done.\n" );
 
     /* Shutdown IOS subsystems */
     // fix for PeppaPig (from NeoGamma)

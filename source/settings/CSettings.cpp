@@ -75,7 +75,6 @@ void CSettings::SetDefault()
     sinfo = on;
     rumble = RumbleOn;
     volume = 80;
-    widescreen = 0;
     sfxvolume = 80;
     gamesoundvolume = 80;
     tooltips = TooltipsOn;
@@ -121,6 +120,7 @@ void CSettings::SetDefault()
         memcpy( Parental.pin, buf + 3, 4 );
         memcpy( Parental.answer, buf + 8, 32 );
     }
+    widescreen = CONF_GetAspectRatio();
     godmode = ( Parental.enabled == 0 ) ? 1 : 0;
 
     CFG_DefaultTheme();
@@ -203,7 +203,7 @@ bool CSettings::Save()
     fprintf(file, "fullcopy = %d\n ", fullcopy );
     fprintf(file, "beta_upgrades = %d\n ", beta_upgrades );
     fprintf(file, "returnTo = %s\n ", returnTo );
-    fprintf(file, "widescreen = %d\n ", widescreen);
+    //fprintf(file, "widescreen = %d\n ", widescreen);// no need to save this to the settings.  it is determined by the CONF_ stuff and there is no way to adjust it in the gui
 	fclose(file);
 
 	return true;
@@ -480,11 +480,6 @@ bool CSettings::SetSetting(char *name, char *value)
 	else if (strcmp(name, "FatInstallToDir") == 0) {
 		if (sscanf(value, "%d", &i) == 1)
 			FatInstallToDir = i;
-		return true;
-	}
-	else if (strcmp(name, "widescreen") == 0) {
-		if (sscanf(value, "%d", &i) == 1)
-			widescreen = i;
 		return true;
 	}
 	else if (strcmp(name, "beta_upgrades") == 0) {

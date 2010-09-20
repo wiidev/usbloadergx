@@ -566,8 +566,7 @@ int ocarina_load_code( u8 *id )
     code_buf = ( u8* ) malloc( filesize );
     if ( !code_buf )
     {
-        gprintf( "Ocarina: No codes found" );
-        printf( "\n" );
+	gprintf( "Ocarina: No codes found\n" );
         fclose( fp );
         return 0;
     }
@@ -578,8 +577,7 @@ int ocarina_load_code( u8 *id )
 
     if ( code_size <= 0 )
     {
-        gprintf( "Ocarina: could not read file." );
-        gprintf( "\n" );
+	gprintf( "Ocarina: could not read file.\n" );
         free( code_buf );
         code_buf = NULL;
         code_size = 0;
@@ -588,16 +586,14 @@ int ocarina_load_code( u8 *id )
 
     if ( code_size > ( s32 )codelistend - ( s32 )codelist )
     {
-        gprintf( "Ocarina: Too many codes found" );
-        gprintf( "\n" );
+	gprintf( "Ocarina: Too many codes found\n" );
         free( code_buf );
         code_buf = NULL;
         code_size = 0;
         return 0;
     }
 
-    gprintf( "Ocarina: Codes found." );
-    gprintf( "\n" );
+    gprintf( "Ocarina: Codes found.\n" );
 
     return code_size;
 }
