@@ -546,4 +546,16 @@ extern const u32    lock_png_size;
 extern const u8     unlock_png[];
 extern const u32    unlock_png_size;
 
+extern const u8     stub_bin[];
+extern const u32    stub_bin_size;
+
+extern const u8     fatffs_module_bin[];
+extern const u32    fatffs_module_bin_size;
+
+extern const u8     ehcmodule_frag_v4_bin[];
+extern const u32    ehcmodule_frag_v4_bin_size;
+
+extern const u8     ehcmodule_frag_v5_bin[];
+extern const u32    ehcmodule_frag_v5_bin_size;
+
 #endif

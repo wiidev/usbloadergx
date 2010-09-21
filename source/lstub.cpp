@@ -7,7 +7,7 @@
 
 
 #include "lstub.h"
-#include "stub_bin.h"
+#include "filelist.h"
 #include "gecko.h"
 
 #include "wad/nandtitle.h"

@@ -129,26 +129,26 @@ export OUTPUT	:=	$(CURDIR)/$(TARGET)
 $(BUILD):
 	@[ -d $@ ] || mkdir -p $@
 	@/bin/bash ./buildtype.sh
-	@make --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
+	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
 #	@echo debug...
 #	start geckoreader.exe
 
 channel:
 	@[ -d build ] || mkdir -p build
 	@/bin/bash ./buildtype.sh FULLCHANNEL
-	@make --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
+	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
 
 #---------------------------------------------------------------------------------
 lang:
 	@[ -d build ] || mkdir -p build
-	@make --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile language
+	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile language
 
 #---------------------------------------------------------------------------------
 all:
 	@[ -d build ] || mkdir -p build
 	@./buildtype.sh
-	@make --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
-	@make --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile language
+	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
+	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile language
 
 #---------------------------------------------------------------------------------
 clean:
@@ -156,7 +156,7 @@ clean:
 	@rm -fr $(BUILD) $(OUTPUT).elf $(OUTPUT).dol
 #---------------------------------------------------------------------------------
 run:
-	make
+	$(MAKE)
 	@echo Done building ...
 	@echo Now Run That Shit ...
 	
@@ -168,7 +168,7 @@ reload:
 
 #---------------------------------------------------------------------------------	
 release: 
-	make
+	$(MAKE)
 	cp boot.dol ./hbc/boot.dol
 
 
@@ -190,7 +190,7 @@ language: $(wildcard $(PROJECTDIR)/Languages/*.lang)
 
 %.elf.o : %.elf
 	@echo $(notdir $<)
-	$(bin2o)
+	@bin2s -a 32 $< | $(AS) -o $(@)
 
 %.dol.o : %.dol
 	@echo $(notdir $<)
@@ -198,39 +198,44 @@ language: $(wildcard $(PROJECTDIR)/Languages/*.lang)
 
 %.ttf.o : %.ttf
 	@echo $(notdir $<)
-	$(bin2o)
+	@bin2s -a 32 $< | $(AS) -o $(@)
 
 %.png.o : %.png
 	@echo $(notdir $<)
-	$(bin2o)
+	@bin2s -a 32 $< | $(AS) -o $(@)
 	
 %.ogg.o : %.ogg
 	@echo $(notdir $<)
-	$(bin2o)
+	@bin2s -a 32 $< | $(AS) -o $(@)
 	
 %.pcm.o : %.pcm
 	@echo $(notdir $<)
-	$(bin2o)
+	@bin2s -a 32 $< | $(AS) -o $(@)
 
 %.mp3.o : %.mp3
 	@echo $(notdir $<)
-	$(bin2o)
+	@bin2s -a 32 $< | $(AS) -o $(@)
 	
 %.certs.o	:	%.certs
 	@echo $(notdir $<)
-	$(bin2o)
+	@bin2s -a 32 $< | $(AS) -o $(@)
+
 %.dat.o	:	%.dat
 	@echo $(notdir $<)
-	$(bin2o)
+	@bin2s -a 32 $< | $(AS) -o $(@)
+
 %.bin.o	:	%.bin
 	@echo $(notdir $<)
-	$(bin2o)
+	@bin2s -a 32 $< | $(AS) -o $(@)
+
 %.tik.o	:	%.tik
 	@echo $(notdir $<)
-	$(bin2o)
+	@bin2s -a 32 $< | $(AS) -o $(@)
+
 %.tmd.o	:	%.tmd
 	@echo $(notdir $<)
-	$(bin2o)
+	@bin2s -a 32 $< | $(AS) -o $(@)
+
 
 
 export PATH		:=	$(PROJECTDIR)/gettext-bin:$(PATH)

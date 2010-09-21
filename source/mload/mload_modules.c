@@ -1,6 +1,5 @@
 #include "mload_modules.h"
-#include "ehcmodule_frag_v4_bin.h"
-#include "ehcmodule_frag_v5_bin.h"
+#include "filelist.h"
 #include "gecko.h"
 
 #define ALIGNED(x) __attribute__((aligned(x)))

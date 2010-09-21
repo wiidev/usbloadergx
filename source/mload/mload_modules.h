@@ -3,7 +3,7 @@
 
 #include "dip_plugin.h"
 #include "mload.h"
-#include "fatffs_module_bin.h"
+#include "filelist.h"
 
 #ifdef __cplusplus
 extern "C"
