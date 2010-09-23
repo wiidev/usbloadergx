@@ -21,6 +21,7 @@ SOURCES		:=	source \
 				source/images \
 				source/fonts \
 				source/sounds \
+				source/system \
 				source/libwbfs \
 				source/unzip \
 				source/language \

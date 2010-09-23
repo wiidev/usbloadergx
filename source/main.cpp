@@ -19,9 +19,8 @@
 //#include <debug.h>
 extern "C"
 {
-    extern void __exception_setreload( int t );
+    extern void __exception_setreload(int t);
 }
-
 
 #include <di/di.h>
 #include <sys/iosupport.h>
@@ -53,6 +52,7 @@ extern "C"
 #include "lstub.h"
 #include "usbloader/usbstorage2.h"
 #include "wad/nandtitle.h"
+#include "system/IosLoader.h"
 
 extern bool geckoinit;
 extern char headlessID[8];
@@ -61,101 +61,98 @@ char bootDevice[10];
 NandTitle titles;
 PartList partitions;
 
-
-int main( int argc, char *argv[] )
+int main(int argc, char *argv[])
 {
-    MEM2_init( 48 );
-    setlocale( LC_ALL, "en.UTF-8" );
+    MEM2_init(48);
+    setlocale(LC_ALL, "en.UTF-8");
     geckoinit = InitGecko();
     InitVideo();
-    __exception_setreload( 20 );
+    __exception_setreload(20);
 
-    printf( "\tStarting up\n" );
+    printf("\tStarting up\n");
     titles.Get();
 
     bool bootDevice_found = false;
-    if ( argc >= 1 )
+    if (argc >= 1)
     {
-        if ( !strncasecmp( argv[0], "usb:/", 5 ) )
+        if (!strncasecmp(argv[0], "usb:/", 5))
         {
-            strcpy( bootDevice, "USB:" );
+            strcpy(bootDevice, "USB:");
             bootDevice_found = true;
         }
-        else if ( !strncasecmp( argv[0], "sd:/", 4 ) )
-            bootDevice_found = true;
+        else if (!strncasecmp(argv[0], "sd:/", 4)) bootDevice_found = true;
     }
 
     //Let's use libogc sd/usb for config loading
-    printf( "\tInitialize sd card\n" );
+    printf("\tInitialize sd card\n");
     SDCard_Init();
-    printf( "\tInitialize usb device\n" );
+    printf("\tInitialize usb device\n");
     USBDevice_Init();
 
-    if ( !bootDevice_found )
+    if (!bootDevice_found)
     {
-        printf( "\tSearch for configuration file\n" );
+        printf("\tSearch for configuration file\n");
         //try USB
         //left in all the dol and elf files in this check in case this is the first time running the app and they dont have the config
-        if ( checkfile( ( char* ) "USB:/config/GXglobal.cfg" ) || ( checkfile( ( char* ) "USB:/apps/usbloader_gx/boot.elf" ) )
-                || checkfile( ( char* ) "USB:/apps/usbloadergx/boot.dol" ) || ( checkfile( ( char* ) "USB:/apps/usbloadergx/boot.elf" ) )
-                || checkfile( ( char* ) "USB:/apps/usbloader_gx/boot.dol" ) )
-            strcpy( bootDevice, "USB:" );
+        if (checkfile((char*) "USB:/config/GXglobal.cfg") || (checkfile((char*) "USB:/apps/usbloader_gx/boot.elf"))
+                || checkfile((char*) "USB:/apps/usbloadergx/boot.dol") || (checkfile(
+                (char*) "USB:/apps/usbloadergx/boot.elf")) || checkfile((char*) "USB:/apps/usbloader_gx/boot.dol")) strcpy(
+                bootDevice, "USB:");
 
-        printf( "\tConfiguration file is on %s\n", bootDevice );
+        printf("\tConfiguration file is on %s\n", bootDevice);
     }
 
     gettextCleanUp();
-    printf( "\tLoading configuration..." );
+    printf("\tLoading configuration...");
     Settings.Load();
     VIDEO_SetWidescreen(Settings.widescreen);
-    printf( "done\n" );
-
-    SDCard_deInit();// unmount SD for reloading IOS
-    USBDevice_deInit();// unmount USB for reloading IOS
-    USBStorage2_Deinit();
-
-    printf( "\tCheck for an existing cIOS\n" );
-    CheckForCIOS();
+    printf("done\n");
 
     // Let's load the cIOS now
-    if ( LoadAppCIOS() < 0 )
+    IosLoader loader(titles);
+    if (loader.LoadAppCios() < 0)
     {
-	printf( "\tERROR: No cIOS could be loaded. Exiting....\n" );
-        sleep( 5 );
+        printf("\n\tWARNING!\n");
+        printf("\tUSB Loader GX needs unstubbed cIOS 222 v4 or 249 v9+\n\n");
+
+        printf(
+                "\tWe cannot determine the versions on your system,\n\tsince you have no patched ios 36 or 236 installed.\n");
+        printf("\tTherefor, if loading of USB Loader GX fails, you\n\tprobably have installed the 4.2 update,\n");
+        printf("\tand you should go figure out how to get some cios action going on\n\tin your Wii.\n");
+
+        printf("\tERROR: No cIOS could be loaded. Exiting....\n");
+        sleep(10);
         Sys_BackToLoader();
     }
+    printf("\tLoaded cIOS = %u (Rev %u)\n", IOS_GetVersion(), IOS_GetRevision());
 
-    printf( "\tLoaded cIOS = %u (Rev %u)\n", IOS_GetVersion(), IOS_GetRevision() );
-
-    printf( "\tWaiting for USB:\n" );
-    if ( MountWBFS() < 0 )
+    printf("\tWaiting for USB:\n");
+    if (MountWBFS() < 0)
     {
-        printf( "ERROR: No WBFS drive mounted.\n" );
-        sleep( 5 );
-        exit( 0 );
+        printf("ERROR: No WBFS drive mounted.\n");
+        sleep(5);
+        exit(0);
     }
 
     //if a ID was passed via args copy it and try to boot it after the partition is mounted
     //its not really a headless mode.  more like hairless.
-    if ( argc > 1 && argv[1] )
+    if (argc > 1 && argv[1])
     {
-        if ( strlen( argv[1] ) == 6 )
-            strncpy( headlessID, argv[1], sizeof( headlessID ) );
+        if (strlen(argv[1]) == 6) strncpy(headlessID, argv[1], sizeof(headlessID));
     }
 
     //! Init the rest of the System
-
     Sys_Init();
     SetupPads();
     InitAudio();
 
     char *fontPath = NULL;
-    asprintf( &fontPath, "%sfont.ttf", Settings.theme_path );
-    SetupDefaultFont( fontPath );
-    free( fontPath );
+    asprintf(&fontPath, "%sfont.ttf", Settings.theme_path);
+    SetupDefaultFont(fontPath);
+    free(fontPath);
 
-    gprintf( "\n\tEnd of Main()" );
+    gprintf("\n\tEnd of Main()");
     InitGUIThreads();
-    MainMenu( MENU_CHECK );
+    MainMenu(MENU_CHECK);
     return 0;
 }

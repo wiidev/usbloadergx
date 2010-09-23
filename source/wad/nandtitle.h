@@ -34,8 +34,6 @@ using namespace std;
 #define RF_NEWS_CHANNEL         0x48414741
 #define RF_FORECAST_CHANNEL     0x48414641
 
-
-
 typedef struct
 {
     u8  zeroes1[0x40];
@@ -57,7 +55,6 @@ typedef struct
     u8  zeroes2[0x24c];
     u8  md5[0x10];
 } IMET;
-
 
 class NandTitle
 {

@@ -311,8 +311,9 @@ int MountWBFS()
     int ret = -1;
     time_t currTime = time( 0 );
 
-    while ( time( 0 ) - currTime < 15 )
+    while ( time( 0 ) - currTime < 30 )
     {
+
         USBDevice_deInit();
         USBStorage2_Deinit();
         USBDevice_Init();

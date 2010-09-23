@@ -456,26 +456,9 @@ int MainMenu( int menu )
                 alternatedoloffset = 0;
             }
             reloadblock = off;
-	    returnToLoaderGV = 1;
+            returnToLoaderGV = 1;
         }
-        int ios2;
 
-        // When the selected ios is 249, and you're loading from FAT, reset ios to 222
-        if ( load_from_fs != PART_FS_WBFS && ios2 == 249 )
-        {
-            ios2 = 222;
-        }
-        bool onlinefix = ShutdownWC24();
-
-        // You cannot reload ios when loading from fat
-        if ( IOS_GetVersion() != ios2 || onlinefix )
-        {
-            ret = Sys_ChangeIos( ios2 );
-            if ( ret < 0 )
-            {
-                Sys_ChangeIos( 249 );
-            }
-        }
         if ( !mountMethod )
         {
             gprintf( "Loading fragment list..." );
