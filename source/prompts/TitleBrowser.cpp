@@ -32,8 +32,6 @@ extern u32 uncfilesize;
 extern char wiiloadVersion[2];
 #include <zlib.h>
 #include "settings/cfg.h"
-#include "unzip/unzip.h"
-#include "unzip/miniunz.h"
 
 /*** Extern functions ***/
 extern void ResumeGui();

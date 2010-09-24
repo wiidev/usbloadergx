@@ -8,6 +8,8 @@
  ***************************************************************************/
 #include <string.h>
 #include <unistd.h>
+#include <zlib.h>
+#include <unzip/unzip.h>
 
 #include "language/gettext.h"
 #include "libwiigui/gui.h"
@@ -23,10 +25,8 @@
 #include "filelist.h"
 #include "sys.h"
 #include "network/http.h"
-#include <zlib.h>
 #include "settings/cfg.h"
-#include "unzip/unzip.h"
-#include "unzip/miniunz.h"
+#include "utils/minizip/miniunz.h"
 #include "usbloader/utils.h"
 
 /*** Extern functions ***/

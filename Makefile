@@ -23,7 +23,6 @@ SOURCES		:=	source \
 				source/sounds \
 				source/system \
 				source/libwbfs \
-				source/unzip \
 				source/language \
 				source/mload \
 				source/ramdisk \
@@ -42,6 +41,7 @@ SOURCES		:=	source \
 				source/libfat \
 				source/memory \
 				source/libntfs \
+				source/utils/minizip \
 				source/usbloader/wbfs
 DATA		:=	data
 INCLUDES	:=	source
@@ -58,7 +58,7 @@ LDFLAGS		=	-g $(MACHDEP) -Wl,-Map,$(notdir $@).map,--section-start,.init=0x80B00
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project
 #---------------------------------------------------------------------------------
-LIBS :=  -lpngu -lpng -lm -lz -lwiiuse -lbte -lasnd -logc -lfreetype -lvorbisidec -lmad -lmxml -ljpeg
+LIBS :=  -lpngu -lpng -lm -lz -lwiiuse -lbte -lasnd -logc -lfreetype -lvorbisidec -lmad -lmxml -ljpeg -lunzip
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
 # include and lib

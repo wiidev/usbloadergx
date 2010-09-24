@@ -29,7 +29,6 @@
 #include "sys.h"
 #include "wpad.h"
 #include "wad/wad.h"
-#include "unzip/unzip.h"
 #include "zlib.h"
 #include "svnrev.h"
 #include "audio.h"

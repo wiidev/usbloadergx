@@ -14,7 +14,7 @@
 # include <unistd.h>
 # include <utime.h>
 
-#include "unzip.h"
+#include "miniunz.h"
 
 #define CASESENSITIVITY (0)
 #define WRITEBUFFERSIZE (8192)
