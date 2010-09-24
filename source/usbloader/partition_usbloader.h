@@ -72,7 +72,7 @@ extern "C"
     char* part_type_data(int type);
     char* part_type_name(int type);
     bool part_valid_data(partitionEntry *entry);
-    int get_fs_type(void *buf);
+    int get_fs_type(u8 *buf);
     bool is_type_fat(int type);
     char* get_fs_name(int i);
 

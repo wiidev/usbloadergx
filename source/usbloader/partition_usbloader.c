@@ -150,7 +150,7 @@ s32 Partition_GetEntriesEx(u32 device, partitionEntry *outbuf, u32 *psect_size, 
     ret = Device_ReadSectors(device, 0, 1, table);
     if (!ret) return -1;
     // Check if it's a RAW WBFS disc, without partition table
-    if (get_fs_type(table) == FS_TYPE_WBFS)
+    if (get_fs_type((u8 *) table) == FS_TYPE_WBFS)
     {
         memset(outbuf, 0, sizeof(table->entries));
         wbfs_head_t * head = (wbfs_head_t *) Buffer;
@@ -186,7 +186,7 @@ s32 Partition_GetEntriesEx(u32 device, partitionEntry *outbuf, u32 *psect_size, 
         {
             // handle the invalid scenario where wbfs is on an EXTENDED
             // partition instead of on the Logical inside Extended.
-            if (get_fs_type(&table) == FS_TYPE_WBFS) break;
+            if (get_fs_type((u8 *) table) == FS_TYPE_WBFS) break;
         }
         entry = &table->entries[0];
         entry->sector = swap32(entry->sector);
@@ -283,20 +283,19 @@ char *part_type_name(int type)
     return unk;
 }
 
-int get_fs_type(void *buff)
+int get_fs_type(u8 *buff)
 {
-    char *buf = buff;
     // WBFS
     wbfs_head_t *head = (wbfs_head_t *) buff;
     if (head->magic == wbfs_htonl( WBFS_MAGIC )) return FS_TYPE_WBFS;
     // 55AA
-    if (buf[0x1FE] == 0x55 && buf[0x1FF] == 0xAA)
+    if (buff[0x1FE] == 0x55 && buff[0x1FF] == 0xAA)
     {
         // FAT
-        if (memcmp(buf + 0x36, "FAT", 3) == 0) return FS_TYPE_FAT16;
-        if (memcmp(buf + 0x52, "FAT", 3) == 0) return FS_TYPE_FAT32;
+        if (memcmp(buff + 0x36, "FAT", 3) == 0) return FS_TYPE_FAT16;
+        if (memcmp(buff + 0x52, "FAT", 3) == 0) return FS_TYPE_FAT32;
         // NTFS
-        if (memcmp(buf + 0x03, "NTFS", 4) == 0) return FS_TYPE_NTFS;
+        if (memcmp(buff + 0x03, "NTFS", 4) == 0) return FS_TYPE_NTFS;
     }
     return FS_TYPE_UNK;
 }
@@ -375,7 +374,7 @@ s32 Partition_GetList(u32 device, PartList *plist)
         // even though wrong, it's possible WBFS is on an extended part.
         //if (!part_is_data(entry->type)) continue;
         if (!Device_ReadSectors(device, entry->sector, 1, buf)) continue;
-        pinfo->fs_type = get_fs_type(buf);
+        pinfo->fs_type = get_fs_type((u8 *) buf);
         if (pinfo->fs_type == FS_TYPE_WBFS)
         {
             // multiple wbfs on sdhc not supported

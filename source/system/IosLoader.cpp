@@ -28,7 +28,7 @@ s32 IosLoader::LoadAppCios()
     u32 activeCios = IOS_GetVersion();
 
 
-    for (u8 i=(sizeof(ciosLoadPriority)/sizeof(ciosLoadPriority[0])); i>=0; i--)
+    for (u8 i = (sizeof(ciosLoadPriority)/sizeof(ciosLoadPriority[0]))-1; i >= 0; i--)
     {
         u32 cios = ciosLoadPriority[i];
 

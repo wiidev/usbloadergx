@@ -16,7 +16,7 @@
 
 #define GAMESELECTSIZE      30
 
-static int scrollbaron, startat, loaded = 0;
+static int scrollbaron = 0, startat = 0, loaded = 0;
 /**
  * Constructor for the GuiOptionBrowser class.
  */
@@ -433,7 +433,7 @@ void GuiOptionBrowser::Update(GuiTrigger * t)
             selectedItem = startat;
             optionBtn[selectedItem]->SetState(STATE_SELECTED, t->chan);
         }
-        else
+        else if(startat < PAGESIZE)
         {
             listOffset = (startat - 4);
             selectedItem = startat;
