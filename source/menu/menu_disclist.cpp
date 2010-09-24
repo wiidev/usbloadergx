@@ -9,6 +9,7 @@
 #include "prompts/DiscBrowser.h"
 #include "prompts/TitleBrowser.h"
 #include "settings/Settings.h"
+#include "settings/CGameSettings.h"
 #include "themes/CTheme.h"
 #include "wpad.h"
 #include "sys.h"
@@ -1656,8 +1657,10 @@ int MenuDiscList()
             header = (mountMethod == 1 || mountMethod == 2 ? dvdheader : gameList[gameSelected]); //reset header
             snprintf(IDfull, sizeof(IDfull), "%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],
                     header->id[3], header->id[4], header->id[5]);
-            struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
-
+            GameCFG* game_cfg = GameSettings.GetGameCFG(header->id);
+			u8 alternatedol;
+			u8 ocarinaChoice;
+			
             if (game_cfg)
             {
                 alternatedol = game_cfg->loadalternatedol;
@@ -1799,7 +1802,7 @@ int MenuDiscList()
 
                     //re-evaluate header now in case they changed games while on the game prompt
                     header = (mountMethod == 1 || mountMethod == 2 ? dvdheader : gameList[gameSelected]);
-                    int settret = GameSettings(header);
+                    int settret = MenuGameSettings(header);
                     /* unneeded for now, kept in case database gets a separate language setting
                      //menu = MENU_DISCLIST; // refresh titles (needed if the language setting has changed)
                      */
@@ -1884,45 +1887,7 @@ int MenuDiscList()
         }
         covertOld = covert;
     }
-
-    // set alt dol default
-    if (menu == MENU_EXIT && altdoldefault)
-    {
-        struct discHdr *header = (mountMethod == 1 || mountMethod == 2 ? dvdheader : gameList[gameSelected]);
-        struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
-        // use default only if no alt dol was selected manually
-        if (game_cfg)
-        {
-            if (game_cfg->alternatedolstart != 0) altdoldefault = false;
-        }
-        if (altdoldefault)
-        {
-            int autodol = autoSelectDol((char*) header->id, true);
-            if (autodol > 0)
-            {
-                alternatedol = 2;
-                alternatedoloffset = autodol;
-                char temp[20];
-                sprintf(temp, "%d", autodol);
-            }
-            else
-            {
-                // alt dol menu for games that require more than a single alt dol
-                int autodol = autoSelectDolMenu((char*) header->id, true);
-                if (autodol > 0)
-                {
-                    alternatedol = 2;
-                    alternatedoloffset = autodol;
-                }
-            }
-        }
-    }
-    //no need to close sd here.  we still need to get settings and codes  and shit
-    /*if (menu == MENU_EXIT) {
-     SDCard_deInit();
-     }*/
-    //if (Settings.gameDisplay==list) {startat=gameBrowser->GetOffset(), offset=startat;}//save the variables in case we are refreshing the list
-    //gprintf("\n\tstartat:%d offset:%d",startat,offset);
+	
     HaltGui();
     mainWindow->RemoveAll();
     mainWindow->Append(bgImg);

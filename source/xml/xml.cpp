@@ -7,6 +7,7 @@
 #include <malloc.h>
 #include <unzip/unzip.h>
 #include "settings/CSettings.h"
+#include "settings/CGameSettings.h"
 #include "xml/xml.h"
 
 extern "C"
@@ -189,8 +190,7 @@ bool OpenXMLFile(char *filename)
 char *GetLangSettingFromGame(char *gameid)
 {
     int langcode;
-    struct Game_CFG *game_cfg = NULL;
-    game_cfg = CFG_get_game_opt((u8*) gameid);
+    GameCFG *game_cfg = GameSettings.GetGameCFG((u8*) gameid);
     if (game_cfg)
     {
         langcode = game_cfg->language;

@@ -8,6 +8,7 @@
 #include "prompts/PromptWindows.h"
 #include "prompts/DiscBrowser.h"
 #include "settings/SettingsPrompts.h"
+#include "settings/CGameSettings.h"
 #include "prompts/filebrowser.h"
 #include "cheats/cheatmenu.h"
 #include "themes/CTheme.h"
@@ -2275,7 +2276,7 @@ int MenuSettings()
 /********************************************************************************
  *Game specific settings
  *********************************************************************************/
-int GameSettings(struct discHdr * header)
+int MenuGameSettings(struct discHdr * header)
 {
     int menu = MENU_NONE;
     int ret;
@@ -2433,8 +2434,32 @@ int GameSettings(struct discHdr * header)
     optionBrowser2.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 
     GuiWindow w(screenwidth, screenheight);
-    //int opt_lang = languageChoice; // backup language setting
-    struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
+
+	GameCFG game_cfg;
+
+    GameCFG* existCFG = GameSettings.GetGameCFG(header->id);
+
+	if (existCFG)
+	{
+	    memcpy(&game_cfg, existCFG, sizeof(GameCFG));
+	}
+	else
+	{
+        snprintf(game_cfg.id, sizeof(game_cfg.id), "%s", (char *) header->id);
+        game_cfg.video = Settings.videomode;
+        game_cfg.language = Settings.language;
+        game_cfg.ocarina = Settings.ocarina;
+        game_cfg.vipatch = Settings.videopatch;
+        game_cfg.ios = Settings.cios;
+        game_cfg.parentalcontrol = 0;
+        game_cfg.errorfix002 = Settings.error002;
+        game_cfg.patchcountrystrings = Settings.patchcountrystrings;
+        game_cfg.loadalternatedol = off;
+        game_cfg.alternatedolstart = 0;
+        game_cfg.iosreloadblock = off;
+        strcpy(game_cfg.alternatedolname, "");
+        game_cfg.returnTo = 1;
+	}
 
     int pageToDisplay = 1;
     while (pageToDisplay > 0)
@@ -2494,39 +2519,6 @@ int GameSettings(struct discHdr * header)
         MainButton4.SetEffect(EFFECT_FADE, 20);
 
         mainWindow->Append(&w);
-
-        if (game_cfg) //if there are saved settings for this game use them
-        {
-            videoChoice = game_cfg->video;
-            languageChoice = game_cfg->language;
-            ocarinaChoice = game_cfg->ocarina;
-            viChoice = game_cfg->vipatch;
-            iosChoice = game_cfg->ios;
-            parentalcontrolChoice = game_cfg->parentalcontrol;
-            fix002 = game_cfg->errorfix002;
-            countrystrings = game_cfg->patchcountrystrings;
-            alternatedol = game_cfg->loadalternatedol;
-            alternatedoloffset = game_cfg->alternatedolstart;
-            reloadblock = game_cfg->iosreloadblock;
-            strlcpy(alternatedname, game_cfg->alternatedolname, sizeof(alternatedname));
-            returnToLoaderGV = game_cfg->returnTo;
-        }
-        else
-        {
-            videoChoice = Settings.videomode;
-            languageChoice = Settings.language;
-            ocarinaChoice = Settings.ocarina;
-            viChoice = Settings.videopatch;
-            iosChoice = Settings.cios;
-            parentalcontrolChoice = 0;
-            fix002 = Settings.error002;
-            countrystrings = Settings.patchcountrystrings;
-            alternatedol = off;
-            alternatedoloffset = 0;
-            reloadblock = off;
-            strcpy(alternatedname, "");
-            returnToLoaderGV = 1;
-        }
 
         ResumeGui();
 
@@ -2610,25 +2602,12 @@ int GameSettings(struct discHdr * header)
 
                     else if (saveBtn.GetState() == STATE_CLICKED)
                     {
-                        if (isInserted(bootDevice))
+                        if (GameSettings.AddGame(&game_cfg))
                         {
-                            if (CFG_save_game_opt(header->id))
-                            {
-                                /* commented because the database language now depends on the main language setting, this could be enabled again if there is a separate language setting for the database
-                                 // if game language has changed when saving game settings, reload titles
-                                 int opt_langnew = 0;
-                                 game_cfg = CFG_get_game_opt(header->id);
-                                 if (game_cfg) opt_langnew = game_cfg->language;
-                                 if (Settings.titlesOverride==1 && opt_lang != opt_langnew)
-                                 OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, true, false); // open file, reload titles, do not keep in memory
-                                 // titles are refreshed in menu.cpp as soon as this function returns
-                                 */
-                                game_cfg = CFG_get_game_opt(header->id); // needed here for "if (game_cfg)" earlier in case it's the first time settings are saved for a game
-                                WindowPrompt(tr( "Successfully Saved" ), 0, tr( "OK" ));
-                            }
-                            else WindowPrompt(tr( "Save Failed" ), 0, tr( "OK" ));
+                            WindowPrompt(tr( "Successfully Saved" ), 0, tr( "OK" ));
                         }
-                        else WindowPrompt(tr( "No SD-Card inserted!" ), tr( "Insert an SD-Card to save." ), tr( "OK" ));
+                        else
+                            WindowPrompt(tr( "Save Failed. No device inserted?" ), 0, tr( "OK" ));
 
                         saveBtn.ResetState();
                         optionBrowser2.SetFocus(1);
@@ -2643,31 +2622,31 @@ int GameSettings(struct discHdr * header)
                         if (ret == ++Idx || firstRun)
                         {
                             if (firstRun) options2.SetName(Idx, "%s", tr( "Video Mode" ));
-                            if (ret == Idx && ++videoChoice >= settings_video_max) videoChoice = 0;
-                            options2.SetValue(Idx, "%s%s", opts_videomode[videoChoice][0],
-                                    tr( opts_videomode[videoChoice][1] ));
+                            if (ret == Idx && ++game_cfg.video >= settings_video_max) game_cfg.video = 0;
+                            options2.SetValue(Idx, "%s%s", opts_videomode[game_cfg.video][0],
+                                    tr( opts_videomode[game_cfg.video][1] ));
                         }
 
                         if (ret == ++Idx || firstRun)
                         {
                             if (firstRun) options2.SetName(Idx, "%s", tr( "VIDTV Patch" ));
-                            if (ret == Idx && ++viChoice >= settings_off_on_max) viChoice = 0;
-                            options2.SetValue(Idx, "%s", tr( opts_off_on[viChoice] ));
+                            if (ret == Idx && ++game_cfg.vipatch >= settings_off_on_max) game_cfg.vipatch = 0;
+                            options2.SetValue(Idx, "%s", tr( opts_off_on[game_cfg.vipatch] ));
 
                         }
 
                         if (ret == ++Idx || firstRun)
                         {
                             if (firstRun) options2.SetName(Idx, "%s", tr( "Game Language" ));
-                            if (ret == Idx && ++languageChoice >= settings_language_max) languageChoice = 0;
-                            options2.SetValue(Idx, "%s", tr( opts_language[languageChoice] ));
+                            if (ret == Idx && ++game_cfg.language >= settings_language_max) game_cfg.language = 0;
+                            options2.SetValue(Idx, "%s", tr( opts_language[game_cfg.language] ));
                         }
 
                         if (ret == ++Idx || firstRun)
                         {
                             if (firstRun) options2.SetName(Idx, "Ocarina");
-                            if (ret == Idx && ++ocarinaChoice >= settings_off_on_max) ocarinaChoice = 0;
-                            options2.SetValue(Idx, "%s", tr( opts_off_on[ocarinaChoice] ));
+                            if (ret == Idx && ++game_cfg.ocarina >= settings_off_on_max) game_cfg.ocarina = 0;
+                            options2.SetValue(Idx, "%s", tr( opts_off_on[game_cfg.ocarina] ));
                         }
 
                         if (ret == ++Idx || firstRun)
@@ -2675,54 +2654,54 @@ int GameSettings(struct discHdr * header)
                             if (firstRun) options2.SetName(Idx, "IOS");
                             if (ret == Idx)
                             {
-                                switch (iosChoice)
+                                switch (game_cfg.ios)
                                 {
                                     case 222:
-                                        iosChoice = 223;
+                                        game_cfg.ios = 223;
                                         break;
                                     case 223:
-                                        iosChoice = 224;
+                                        game_cfg.ios = 224;
                                         break;
                                     case 224:
-                                        iosChoice = 249;
+                                        game_cfg.ios = 249;
                                         break;
                                     case 249:
-                                        iosChoice = 250;
+                                        game_cfg.ios = 250;
                                         break;
                                     case 250:
-                                        iosChoice = 222;
+                                        game_cfg.ios = 222;
                                         break;
                                     default:
-                                        iosChoice = 222;
+                                        game_cfg.ios = 222;
                                         break;
                                 }
                             }
-                            options2.SetValue(Idx, "IOS %i", iosChoice);
+                            options2.SetValue(Idx, "IOS %i", game_cfg.ios);
                         }
 
                         if (ret == ++Idx || firstRun)
                         {
                             if (firstRun) options2.SetName(Idx, "%s", tr( "Parental Control" ));
-                            if (ret == Idx && ++parentalcontrolChoice >= 5) parentalcontrolChoice = 0;
-                            options2.SetValue(Idx, "%s", tr( opts_parentalcontrol[parentalcontrolChoice] ));
+                            if (ret == Idx && ++game_cfg.parentalcontrol >= 5) game_cfg.parentalcontrol = 0;
+                            options2.SetValue(Idx, "%s", tr( opts_parentalcontrol[game_cfg.parentalcontrol] ));
                         }
 
                         if (ret == ++Idx || firstRun)
                         {
                             if (firstRun) options2.SetName(Idx, "%s", tr( "Error 002 fix" ));
-                            if (ret == Idx && ++fix002 >= 3) fix002 = 0;
-                            options2.SetValue(Idx, "%s", tr( opts_error002[fix002] ));
+                            if (ret == Idx && ++game_cfg.errorfix002 >= 3) game_cfg.errorfix002 = 0;
+                            options2.SetValue(Idx, "%s", tr( opts_error002[game_cfg.errorfix002] ));
                         }
 
                         if (ret == ++Idx || firstRun)
                         {
                             if (firstRun) options2.SetName(Idx, "%s", tr( "Return To" ));
-                            if (ret == Idx && ++returnToLoaderGV >= settings_off_on_max) returnToLoaderGV = 0;
+                            if (ret == Idx && ++game_cfg.returnTo >= settings_off_on_max) game_cfg.returnTo = 0;
 
                             char text[IMET_MAX_NAME_LEN];
                             int channel = NandTitles.FindU32(Settings.returnTo);//is the channel set in the global settings actually installed?
 
-                            if (!returnToLoaderGV || channel < 0)//channel is not installed or the uer wants to not use it
+                            if (!game_cfg.returnTo || channel < 0)//channel is not installed or the uer wants to not use it
                                 sprintf(text, "%s", tr( opts_off_on[ 0 ] ));
 
                             else snprintf(text, sizeof(text), "%s", NandTitles.NameFromIndex(channel));
@@ -2733,19 +2712,19 @@ int GameSettings(struct discHdr * header)
                         if (ret == ++Idx || firstRun)
                         {
                             if (firstRun) options2.SetName(Idx, "%s", tr( "Patch Country Strings" ));
-                            if (ret == Idx && ++countrystrings >= settings_off_on_max) countrystrings = 0;
-                            options2.SetValue(Idx, "%s", tr( opts_off_on[countrystrings] ));
+                            if (ret == Idx && ++game_cfg.patchcountrystrings >= settings_off_on_max) game_cfg.patchcountrystrings = 0;
+                            options2.SetValue(Idx, "%s", tr( opts_off_on[game_cfg.patchcountrystrings] ));
                         }
 
                         if (ret == ++Idx || firstRun)
                         {
                             if (firstRun) options2.SetName(Idx, "%s", tr( "Alternate DOL" ));
-                            int last_alternatedol = alternatedol;
-                            if (ret == Idx && (alternatedol = (alternatedol + 2) % 3) >= 3) // 0->2->1->0
-                            alternatedol = 0;
+                            int last_alternatedol = game_cfg.loadalternatedol;
+                            if (ret == Idx && (game_cfg.loadalternatedol = (game_cfg.loadalternatedol + 2) % 3) >= 3) // 0->2->1->0
+                            game_cfg.loadalternatedol = 0;
                             static const char *opts[] = { trNOOP( "Default" ), trNOOP( "Load From SD/USB" ),
                                     trNOOP( "Select a DOL" ) };
-                            options2.SetValue(Idx, "%s", tr( opts[alternatedol] ));
+                            options2.SetValue(Idx, "%s", tr( opts[game_cfg.loadalternatedol] ));
                             if (last_alternatedol != 1)
                             {
                                 firstRun = true; // force re-init follow Entries
@@ -2753,28 +2732,27 @@ int GameSettings(struct discHdr * header)
                             }
                         }
 
-                        if (alternatedol == 2 && (ret == ++Idx || firstRun))
+                        if (game_cfg.loadalternatedol == 2 && (ret == ++Idx || firstRun))
                         {
                             if (firstRun) options2.SetName(Idx, "%s", tr( "Selected DOL" ));
                             if (ret == Idx)
                             {
-                                if (alternatedol == 2)
+                                if (game_cfg.loadalternatedol == 2)
                                 {
                                     char filename[10];
-                                    snprintf(filename, sizeof(filename), "%c%c%c%c%c%c", header->id[0], header->id[1],
-                                            header->id[2], header->id[3], header->id[4], header->id[5]);
+                                    snprintf(filename, 7, "%s", (char *) header->id);
                                     int dolchoice = 0;
                                     //alt dol menu for games that require more than a single alt dol
                                     int autodol = autoSelectDolMenu(filename, false);
 
                                     if (autodol > 0)
                                     {
-                                        alternatedoloffset = autodol;
+                                        game_cfg.alternatedolstart = autodol;
                                         snprintf(alternatedname, sizeof(alternatedname), "%s <%i>", tr( "AUTO" ),
                                                 autodol);
                                     }
                                     else if (autodol == 0)
-                                        alternatedol = 0; // default was chosen
+                                        game_cfg.loadalternatedol = 0; // default was chosen
                                     else
                                     {
                                         //check to see if we already know the offset of the correct dol
@@ -2788,10 +2766,10 @@ int GameSettings(struct discHdr * header)
                                                             tr( "Do you want to use the alternate DOL that is known to be correct?" ),
                                                             tr( "Yes" ), tr( "Pick from a list" ), tr( "Cancel" ));
                                             if (dolchoice == 0)
-                                                alternatedol = 0;
+                                                game_cfg.loadalternatedol = 0;
                                             else if (dolchoice == 1)
                                             {
-                                                alternatedoloffset = autodol;
+                                                game_cfg.alternatedolstart = autodol;
                                                 snprintf(alternatedname, sizeof(alternatedname), "%s <%i>",
                                                         tr( "AUTO" ), autodol);
                                             }
@@ -2799,7 +2777,7 @@ int GameSettings(struct discHdr * header)
                                             {
                                                 int res = DiscBrowse(header);
                                                 if ((res >= 0) && (res != 696969)) //if res==696969 they pressed the back button
-                                                alternatedoloffset = res;
+                                                game_cfg.alternatedolstart = res;
                                             }
                                         }
                                         else
@@ -2807,21 +2785,21 @@ int GameSettings(struct discHdr * header)
                                             int res = DiscBrowse(header);
                                             if ((res >= 0) && (res != 696969))
                                             {
-                                                alternatedoloffset = res;
+                                                game_cfg.alternatedolstart = res;
                                                 char tmp[170];
                                                 snprintf(
                                                         tmp,
                                                         sizeof(tmp),
                                                         "%s %s - %i",
                                                         tr( "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team." ),
-                                                        filename, alternatedoloffset);
+                                                        filename, game_cfg.alternatedolstart);
                                                 WindowPrompt(0, tmp, tr( "OK" ));
                                             }
                                         }
                                     }
                                 }
                             }
-                            if (alternatedol == 0)
+                            if (game_cfg.loadalternatedol == 0)
                             {
                                 firstRun = true; // force re-init follow Entries
                                 options2.SetLength(Idx--); // remove this Entry
@@ -2833,8 +2811,8 @@ int GameSettings(struct discHdr * header)
                         if (ret == ++Idx || firstRun)
                         {
                             if (firstRun) options2.SetName(Idx, "%s", tr( "Block IOS Reload" ));
-                            if (ret == Idx && ++reloadblock >= settings_off_on_max) reloadblock = 0;
-                            options2.SetValue(Idx, "%s", tr( opts_off_on[reloadblock] ));
+                            if (ret == Idx && ++game_cfg.iosreloadblock >= settings_off_on_max) game_cfg.iosreloadblock = 0;
+                            options2.SetValue(Idx, "%s", tr( opts_off_on[game_cfg.iosreloadblock] ));
                         }
 
                         firstRun = false;
@@ -2926,7 +2904,7 @@ int GameSettings(struct discHdr * header)
                                         tr( "Yes" ), tr( "Cancel" ));
                                 if (choice1 == 1 && !mountMethod)
                                 {
-                                    CFG_forget_game_opt(header->id);
+                                    GameSettings.Remove(header->id);
                                     CFG_forget_game_num(header->id);
                                     ret = WBFS_RemoveGame(header->id);
                                     if (ret < 0)
@@ -3057,20 +3035,20 @@ int GameSettings(struct discHdr * header)
                 int choice1 = WindowPrompt(tr( "Are you sure?" ), 0, tr( "Yes" ), tr( "Cancel" ));
                 if (choice1 == 1)
                 {
-                    videoChoice = Settings.videomode;
-                    viChoice = Settings.videopatch;
-                    languageChoice = Settings.language;
-                    ocarinaChoice = Settings.ocarina;
-                    fix002 = Settings.error002;
-                    countrystrings = Settings.patchcountrystrings;
-                    alternatedol = off;
-                    alternatedoloffset = 0;
-                    reloadblock = off;
-                    iosChoice = Settings.cios;
-                    parentalcontrolChoice = 0;
-                    strcpy(alternatedname, "");
-                    returnToLoaderGV = 1;
-                    CFG_forget_game_opt(header->id);
+                    game_cfg.video = Settings.videomode;
+                    game_cfg.vipatch = Settings.videopatch;
+                    game_cfg.language = Settings.language;
+                    game_cfg.ocarina = Settings.ocarina;
+                    game_cfg.errorfix002 = Settings.error002;
+                    game_cfg.patchcountrystrings = Settings.patchcountrystrings;
+                    game_cfg.loadalternatedol = off;
+                    game_cfg.alternatedolstart = 0;
+                    game_cfg.iosreloadblock = off;
+                    game_cfg.ios = Settings.cios;
+                    game_cfg.parentalcontrol = 0;
+                    strcpy(game_cfg.alternatedolname, "");
+                    game_cfg.returnTo = 1;
+                    GameSettings.Remove(header->id);
                 }
 
                 pageToDisplay = 1;

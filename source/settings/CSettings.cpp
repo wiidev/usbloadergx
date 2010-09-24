@@ -84,7 +84,7 @@ void CSettings::SetDefault()
     parentalcontrol = 0;
     cios = 249;
     xflip = no;
-    qboot = no;
+    quickboot = no;
     wiilight = 1;
     autonetwork = 0;
     discart = 0;
@@ -204,7 +204,7 @@ bool CSettings::Save()
     fprintf(file, "keyset = %d\n ", keyset);
     fprintf(file, "xflip = %d\n ", xflip);
     fprintf(file, "gridRows = %d\n ", gridRows);
-    fprintf(file, "qboot = %d\n ", qboot);
+    fprintf(file, "quickboot = %d\n ", quickboot);
     fprintf(file, "wsprompt = %d\n ", wsprompt);
     fprintf(file, "parentalcontrol = %d\n ", parentalcontrol);
     fprintf(file, "cover_path = %s\n ", covers_path);
@@ -372,9 +372,9 @@ bool CSettings::SetSetting(char *name, char *value)
         if (sscanf(value, "%d", &i) == 1) gridRows = i;
         return true;
     }
-    else if (strcmp(name, "qboot") == 0)
+    else if (strcmp(name, "quickboot") == 0)
     {
-        if (sscanf(value, "%d", &i) == 1) qboot = i;
+        if (sscanf(value, "%d", &i) == 1) quickboot = i;
         return true;
     }
     else if (strcmp(name, "partition") == 0)

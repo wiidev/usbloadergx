@@ -33,7 +33,7 @@ static u8 *appldr = (u8 *) 0x81200000;
 /* Variables */
 static u32 buffer[0x20] ATTRIBUTE_ALIGN( 32 );
 
-void gamepatches(u8 * dst, int len, u8 videoSelected, u8 patchcountrystring, u8 vipatch, u8 cheat)
+void gamepatches(u8 * dst, int len, u8 videoSelected, u8 patchcountrystring, u8 vipatch, u8 cheat, u8 fix002)
 {
     VideoModePatcher(dst, len, videoSelected);
 
@@ -55,7 +55,7 @@ void gamepatches(u8 * dst, int len, u8 videoSelected, u8 patchcountrystring, u8 
 }
 
 s32 Apploader_Run(entry_point *entry, char * dolpath, u8 cheat, u8 videoSelected, u8 vipatch, u8 patchcountrystring,
-        u8 error002fix, u8 alternatedol, u32 alternatedoloffset, u32 returnTo)
+        u8 error002fix, u8 alternatedol, u32 alternatedoloffset, u32 returnTo, u8 fix002)
 {
     app_entry appldr_entry;
     app_init appldr_init;
@@ -111,7 +111,7 @@ s32 Apploader_Run(entry_point *entry, char * dolpath, u8 cheat, u8 videoSelected
         /* Read data from DVD */
         WDVD_Read(dst, len, (u64) (offset << 2));
 
-        gamepatches(dst, len, videoSelected, patchcountrystring, vipatch, cheat);
+        gamepatches(dst, len, videoSelected, patchcountrystring, vipatch, cheat, fix002);
         DCFlushRange(dst, len);
 
         if ((u32) dst < dolStart) dolStart = (u32) dst;

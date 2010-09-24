@@ -19,6 +19,7 @@
 #include "network/networkops.h"
 #include "patches/patchcode.h"
 #include "settings/Settings.h"
+#include "settings/CGameSettings.h"
 #include "themes/CTheme.h"
 #include "themes/Theme_Downloader.h"
 #include "usbloader/disc.h"
@@ -417,7 +418,19 @@ int MainMenu(int menu)
         int ret = 0;
         header = (mountMethod ? dvdheader : gameList[gameSelected]);
 
-        struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
+        u8 videoChoice = Settings.videomode;
+        u8 languageChoice = Settings.language;
+        u8 ocarinaChoice = Settings.ocarina;
+        u8 viChoice = Settings.videopatch;
+        u8 iosChoice = Settings.cios;
+        u8 fix002 = Settings.error002;
+        u8 countrystrings = Settings.patchcountrystrings;
+		u8 alternatedol = off;
+        u32 alternatedoloffset = 0;
+        u8 reloadblock = off;
+        u8 returnToLoaderGV = 1;
+
+        GameCFG * game_cfg = GameSettings.GetGameCFG(header->id);
 
         if (game_cfg)
         {
@@ -435,23 +448,6 @@ int MainMenu(int menu)
             }
             reloadblock = game_cfg->iosreloadblock;
             returnToLoaderGV = game_cfg->returnTo;
-        }
-        else
-        {
-            videoChoice = Settings.videomode;
-            languageChoice = Settings.language;
-            ocarinaChoice = Settings.ocarina;
-            viChoice = Settings.videopatch;
-            iosChoice = Settings.cios;
-            fix002 = Settings.error002;
-            countrystrings = Settings.patchcountrystrings;
-            if (!altdoldefault)
-            {
-                alternatedol = off;
-                alternatedoloffset = 0;
-            }
-            reloadblock = off;
-            returnToLoaderGV = 1;
         }
 
         if (!mountMethod)
@@ -623,7 +619,7 @@ int MainMenu(int menu)
         gprintf("\tDisc_wiiBoot\n");
 
         ret = Disc_WiiBoot(Settings.dolpath, videoselected, cheat, vipatch, countrystrings, errorfixer002,
-                alternatedol, alternatedoloffset, channel);
+                alternatedol, alternatedoloffset, channel, fix002);
         if (ret < 0)
         {
             Sys_LoadMenu();

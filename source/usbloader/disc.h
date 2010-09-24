@@ -50,8 +50,8 @@ extern "C"
     s32 Disc_SetUSB(const u8 *);
     s32 Disc_ReadHeader(void *);
     s32 Disc_IsWii(void);
-    s32 Disc_BootPartition(u64, char *, u8, u8, u8, u8, u8, u8, u32, u32 returnTo);
-    s32 Disc_WiiBoot(char *, u8, u8, u8, u8, u8, u8, u32, u32 returnTo);
+    s32 Disc_BootPartition(u64, char *, u8, u8, u8, u8, u8, u8, u32, u32 returnTo, u8 fix002);
+    s32 Disc_WiiBoot(char *, u8, u8, u8, u8, u8, u8, u32, u32 returnTo, u8 fix002);
     s32 __Disc_FindPartition(u64 *outbuf);
     void PatchCountryStrings(void *Address, int Size);
     s32 __Disc_FindPartition(u64 *outbuf);

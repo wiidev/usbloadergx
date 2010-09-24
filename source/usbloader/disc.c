@@ -287,7 +287,7 @@ s32 Disc_IsWii(void)
 }
 
 s32 Disc_BootPartition(u64 offset, char * dolpath, u8 videoselected, u8 cheat, u8 vipatch, u8 patchcountrystring,
-        u8 error002fix, u8 alternatedol, u32 alternatedoloffset, u32 returnTo)
+        u8 error002fix, u8 alternatedol, u32 alternatedoloffset, u32 returnTo, u8 fix002)
 {
     gprintf("booting partition IOS %u v%u\n", IOS_GetVersion(), IOS_GetRevision());
     entry_point p_entry;
@@ -312,7 +312,7 @@ s32 Disc_BootPartition(u64 offset, char * dolpath, u8 videoselected, u8 cheat, u
 
     /* Run apploader */
     ret = Apploader_Run(&p_entry, dolpath, cheat, videoselected, vipatch, patchcountrystring, error002fix,
-            alternatedol, alternatedoloffset, returnTo);
+            alternatedol, alternatedoloffset, returnTo, fix002);
     if (ret < 0) return ret;
 
     free_wip();
@@ -387,7 +387,7 @@ s32 Disc_BootPartition(u64 offset, char * dolpath, u8 videoselected, u8 cheat, u
 }
 
 s32 Disc_WiiBoot(char * dolpath, u8 videoselected, u8 cheat, u8 vipatch, u8 patchcountrystring, u8 error002fix,
-        u8 alternatedol, u32 alternatedoloffset, u32 returnTo)
+        u8 alternatedol, u32 alternatedoloffset, u32 returnTo, u8 fix002)
 {
     u64 offset;
     s32 ret;
@@ -398,7 +398,7 @@ s32 Disc_WiiBoot(char * dolpath, u8 videoselected, u8 cheat, u8 vipatch, u8 patc
 
     /* Boot partition */
     return Disc_BootPartition(offset, dolpath, videoselected, cheat, vipatch, patchcountrystring, error002fix,
-            alternatedol, alternatedoloffset, returnTo);
+            alternatedol, alternatedoloffset, returnTo, fix002);
 }
 
 void PatchCountryStrings(void *Address, int Size)

@@ -37,29 +37,30 @@ extern "C"
 
     extern char bootDevice[10];
 
-    extern u8 ocarinaChoice;
-    extern u16 playcnt;
-    extern u8 videoChoice;
-    extern u8 languageChoice;
-    extern u8 viChoice;
-    extern u8 iosChoice;
-    extern u8 parentalcontrolChoice;
-    extern u8 fix002;
-    extern u8 reloadblock;
-    extern u8 countrystrings;
-    extern u8 alternatedol;
-    extern u32 alternatedoloffset;
-    extern u8 xflip;
-    extern u8 qboot;
-    extern u8 sort;
-    extern u8 fave;
-    extern u8 wsprompt;
-    extern u8 keyset;
-    extern u8 gameDisplay;
+//    extern u8 ocarinaChoice;
+//    extern u16 playcnt;
+//
+//    extern u8 videoChoice;
+//    extern u8 languageChoice;
+//    extern u8 viChoice;
+//    extern u8 iosChoice;
+//    extern u8 parentalcontrolChoice;
+//    extern u8 fix002;
+//    extern u8 reloadblock;
+//    extern u8 countrystrings;
+//    extern u8 alternatedol;
+//    extern u32 alternatedoloffset;
+//    extern u8 xflip;
+//    extern u8 qboot;
+//    extern u8 sort;
+//    extern u8 fave;
+//    extern u8 wsprompt;
+//    extern u8 keyset;
+//    extern u8 gameDisplay;
     extern u16 playcount;
     extern u8 favoritevar;
     extern char alternatedname[40];
-    extern u8 returnToLoaderGV;
+//    extern u8 returnToLoaderGV;
 
     enum
     {
@@ -67,23 +68,6 @@ extern "C"
     // always the last entry
     };
 
-    struct Game_CFG
-    {
-            u8 id[8];
-            u8 video;
-            u8 language;
-            u8 ocarina;
-            u8 vipatch;
-            u8 ios;
-            u8 parentalcontrol;
-            u8 errorfix002;
-            u8 iosreloadblock;
-            u8 loadalternatedol;
-            u32 alternatedolstart;
-            u8 patchcountrystrings;
-            char alternatedolname[40];
-            u8 returnTo;
-    };
     struct Game_NUM
     {
             u8 id[8];
@@ -92,12 +76,9 @@ extern "C"
     };
 
     void CFG_LoadGameNum(); // -1 = non forced mode
-    struct Game_CFG* CFG_get_game_opt(const u8 *id);
     struct Game_NUM* CFG_get_game_num(const u8 *id);
-    bool CFG_save_game_opt(u8 *id);
     bool CFG_save_game_num(u8 *id);
     bool CFG_reset_all_playcounters();
-    bool CFG_forget_game_opt(u8 *id);
     bool CFG_forget_game_num(u8 *id);
 
     enum
