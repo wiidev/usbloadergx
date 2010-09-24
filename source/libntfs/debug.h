@@ -33,7 +33,9 @@ struct _runlist_element;
 #ifdef DEBUG
 extern void ntfs_debug_runlist_dump(const struct _runlist_element *rl);
 #else
-static __inline__ void ntfs_debug_runlist_dump(const struct _runlist_element *rl __attribute__((unused))) {}
+static __inline__ void ntfs_debug_runlist_dump(const struct _runlist_element *rl __attribute__((unused)))
+{
+}
 #endif
 
 #define NTFS_BUG(msg)							\

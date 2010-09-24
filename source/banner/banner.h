@@ -13,7 +13,7 @@ extern "C"
 {
 #endif
 
-    s32 dump_banner( const u8 *discid, const char * dest );
+    s32 dump_banner(const u8 *discid, const char * dest);
 
 #ifdef __cplusplus
 }

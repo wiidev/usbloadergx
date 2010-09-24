@@ -24,12 +24,12 @@ int txtscroll = 0;
 /**
  * Constructor for the GuiGameBrowser class.
  */
-GuiGameBrowser::GuiGameBrowser( int w, int h, const char *themePath, const u8 *imagebg, int selected, int offset )
+GuiGameBrowser::GuiGameBrowser(int w, int h, const char *themePath, const u8 *imagebg, int selected, int offset)
 {
     width = w;
     height = h;
     pagesize = THEME.pagesize;
-    scrollbaron = ( gameList.size() > pagesize ) ? 1 : 0;
+    scrollbaron = (gameList.size() > pagesize) ? 1 : 0;
     selectable = true;
     listOffset = MAX( 0, MIN( offset, ( gameList.size() - pagesize ) ) );
     selectedItem = selected - offset;
@@ -37,124 +37,123 @@ GuiGameBrowser::GuiGameBrowser( int w, int h, const char *themePath, const u8 *i
     char imgPath[100];
 
     trigA = new GuiTrigger;
-    trigA->SetSimpleTrigger( -1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A );
+    trigA->SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
     trigHeldA = new GuiTrigger;
-    trigHeldA->SetHeldTrigger( -1, WPAD_BUTTON_A, PAD_BUTTON_A );
-    btnSoundClick = new GuiSound( button_click_pcm, button_click_pcm_size, Settings.sfxvolume );
+    trigHeldA->SetHeldTrigger(-1, WPAD_BUTTON_A, PAD_BUTTON_A);
+    btnSoundClick = new GuiSound(button_click_pcm, button_click_pcm_size, Settings.sfxvolume);
 
-    snprintf( imgPath, sizeof( imgPath ), "%sbg_options.png", themePath );
-    bgGames = new GuiImageData( imgPath, imagebg );
+    snprintf(imgPath, sizeof(imgPath), "%sbg_options.png", themePath);
+    bgGames = new GuiImageData(imgPath, imagebg);
 
-    snprintf( imgPath, sizeof( imgPath ), "%snew.png", themePath );
-    newGames = new GuiImageData( imgPath, new_png );
+    snprintf(imgPath, sizeof(imgPath), "%snew.png", themePath);
+    newGames = new GuiImageData(imgPath, new_png);
 
-    bgGameImg = new GuiImage( bgGames );
-    bgGameImg->SetParent( this );
-    bgGameImg->SetAlignment( ALIGN_LEFT, ALIGN_MIDDLE );
+    bgGameImg = new GuiImage(bgGames);
+    bgGameImg->SetParent(this);
+    bgGameImg->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 
     maxTextWidth = bgGameImg->GetWidth() - 24 - 4;
 
-    snprintf( imgPath, sizeof( imgPath ), "%sbg_options_entry.png", themePath );
-    bgGamesEntry = new GuiImageData( imgPath, bg_options_entry_png );
+    snprintf(imgPath, sizeof(imgPath), "%sbg_options_entry.png", themePath);
+    bgGamesEntry = new GuiImageData(imgPath, bg_options_entry_png);
 
-    snprintf( imgPath, sizeof( imgPath ), "%sscrollbar.png", themePath );
-    scrollbar = new GuiImageData( imgPath, scrollbar_png );
-    scrollbarImg = new GuiImage( scrollbar );
-    scrollbarImg->SetParent( this );
-    scrollbarImg->SetAlignment( ALIGN_RIGHT, ALIGN_TOP );
-    scrollbarImg->SetPosition( 0, 4 );
+    snprintf(imgPath, sizeof(imgPath), "%sscrollbar.png", themePath);
+    scrollbar = new GuiImageData(imgPath, scrollbar_png);
+    scrollbarImg = new GuiImage(scrollbar);
+    scrollbarImg->SetParent(this);
+    scrollbarImg->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
+    scrollbarImg->SetPosition(0, 4);
 
     maxTextWidth -= scrollbarImg->GetWidth() + 4;
 
-    snprintf( imgPath, sizeof( imgPath ), "%sscrollbar_arrowdown.png", themePath );
-    arrowDown = new GuiImageData( imgPath, scrollbar_arrowdown_png );
-    arrowDownImg = new GuiImage( arrowDown );
-    arrowDownOver = new GuiImageData( imgPath, scrollbar_arrowdown_png );
-    arrowDownOverImg = new GuiImage( arrowDownOver );
-    snprintf( imgPath, sizeof( imgPath ), "%sscrollbar_arrowup.png", themePath );
-    arrowUp = new GuiImageData( imgPath, scrollbar_arrowup_png );
-    arrowUpImg = new GuiImage( arrowUp );
-    arrowUpOver = new GuiImageData( imgPath, scrollbar_arrowup_png );
-    arrowUpOverImg = new GuiImage( arrowUpOver );
-    snprintf( imgPath, sizeof( imgPath ), "%sscrollbar_box.png", themePath );
-    scrollbarBox = new GuiImageData( imgPath, scrollbar_box_png );
-    scrollbarBoxImg = new GuiImage( scrollbarBox );
-    scrollbarBoxOver = new GuiImageData( imgPath, scrollbar_box_png );
-    scrollbarBoxOverImg = new GuiImage( scrollbarBoxOver );
+    snprintf(imgPath, sizeof(imgPath), "%sscrollbar_arrowdown.png", themePath);
+    arrowDown = new GuiImageData(imgPath, scrollbar_arrowdown_png);
+    arrowDownImg = new GuiImage(arrowDown);
+    arrowDownOver = new GuiImageData(imgPath, scrollbar_arrowdown_png);
+    arrowDownOverImg = new GuiImage(arrowDownOver);
+    snprintf(imgPath, sizeof(imgPath), "%sscrollbar_arrowup.png", themePath);
+    arrowUp = new GuiImageData(imgPath, scrollbar_arrowup_png);
+    arrowUpImg = new GuiImage(arrowUp);
+    arrowUpOver = new GuiImageData(imgPath, scrollbar_arrowup_png);
+    arrowUpOverImg = new GuiImage(arrowUpOver);
+    snprintf(imgPath, sizeof(imgPath), "%sscrollbar_box.png", themePath);
+    scrollbarBox = new GuiImageData(imgPath, scrollbar_box_png);
+    scrollbarBoxImg = new GuiImage(scrollbarBox);
+    scrollbarBoxOver = new GuiImageData(imgPath, scrollbar_box_png);
+    scrollbarBoxOverImg = new GuiImage(scrollbarBoxOver);
 
-    arrowUpBtn = new GuiButton( arrowUpImg->GetWidth(), arrowUpImg->GetHeight() );
-    arrowUpBtn->SetParent( this );
-    arrowUpBtn->SetImage( arrowUpImg );
-    arrowUpBtn->SetImageOver( arrowUpOverImg );
-    arrowUpBtn->SetImageHold( arrowUpOverImg );
-    arrowUpBtn->SetAlignment( ALIGN_CENTRE, ALIGN_TOP );
-    arrowUpBtn->SetPosition( width / 2 - 18 + 7, -18 );
-    arrowUpBtn->SetSelectable( false );
-    arrowUpBtn->SetTrigger( trigA );
-    arrowUpBtn->SetEffectOnOver( EFFECT_SCALE, 50, 130 );
-    arrowUpBtn->SetSoundClick( btnSoundClick );
+    arrowUpBtn = new GuiButton(arrowUpImg->GetWidth(), arrowUpImg->GetHeight());
+    arrowUpBtn->SetParent(this);
+    arrowUpBtn->SetImage(arrowUpImg);
+    arrowUpBtn->SetImageOver(arrowUpOverImg);
+    arrowUpBtn->SetImageHold(arrowUpOverImg);
+    arrowUpBtn->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+    arrowUpBtn->SetPosition(width / 2 - 18 + 7, -18);
+    arrowUpBtn->SetSelectable(false);
+    arrowUpBtn->SetTrigger(trigA);
+    arrowUpBtn->SetEffectOnOver(EFFECT_SCALE, 50, 130);
+    arrowUpBtn->SetSoundClick(btnSoundClick);
 
-    arrowDownBtn = new GuiButton( arrowDownImg->GetWidth(), arrowDownImg->GetHeight() );
-    arrowDownBtn->SetParent( this );
-    arrowDownBtn->SetImage( arrowDownImg );
-    arrowDownBtn->SetImageOver( arrowDownOverImg );
-    arrowDownBtn->SetImageHold( arrowDownOverImg );
-    arrowDownBtn->SetAlignment( ALIGN_CENTRE, ALIGN_BOTTOM );
-    arrowDownBtn->SetPosition( width / 2 - 18 + 7, 18 );
-    arrowDownBtn->SetSelectable( false );
-    arrowDownBtn->SetTrigger( trigA );
-    arrowDownBtn->SetEffectOnOver( EFFECT_SCALE, 50, 130 );
-    arrowDownBtn->SetSoundClick( btnSoundClick );
+    arrowDownBtn = new GuiButton(arrowDownImg->GetWidth(), arrowDownImg->GetHeight());
+    arrowDownBtn->SetParent(this);
+    arrowDownBtn->SetImage(arrowDownImg);
+    arrowDownBtn->SetImageOver(arrowDownOverImg);
+    arrowDownBtn->SetImageHold(arrowDownOverImg);
+    arrowDownBtn->SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
+    arrowDownBtn->SetPosition(width / 2 - 18 + 7, 18);
+    arrowDownBtn->SetSelectable(false);
+    arrowDownBtn->SetTrigger(trigA);
+    arrowDownBtn->SetEffectOnOver(EFFECT_SCALE, 50, 130);
+    arrowDownBtn->SetSoundClick(btnSoundClick);
 
-    scrollbarBoxBtn = new GuiButton( scrollbarBoxImg->GetWidth(), scrollbarBoxImg->GetHeight() );
-    scrollbarBoxBtn->SetParent( this );
-    scrollbarBoxBtn->SetImage( scrollbarBoxImg );
-    scrollbarBoxBtn->SetImageOver( scrollbarBoxOverImg );
-    scrollbarBoxBtn->SetImageHold( scrollbarBoxOverImg );
-    scrollbarBoxBtn->SetAlignment( ALIGN_CENTRE, ALIGN_TOP );
-    scrollbarBoxBtn->SetSelectable( false );
-    scrollbarBoxBtn->SetEffectOnOver( EFFECT_SCALE, 50, 120 );
-    scrollbarBoxBtn->SetMinY( 0 );
-    scrollbarBoxBtn->SetMaxY( height - 30 );
-    scrollbarBoxBtn->SetHoldable( true );
-    scrollbarBoxBtn->SetTrigger( trigHeldA );
+    scrollbarBoxBtn = new GuiButton(scrollbarBoxImg->GetWidth(), scrollbarBoxImg->GetHeight());
+    scrollbarBoxBtn->SetParent(this);
+    scrollbarBoxBtn->SetImage(scrollbarBoxImg);
+    scrollbarBoxBtn->SetImageOver(scrollbarBoxOverImg);
+    scrollbarBoxBtn->SetImageHold(scrollbarBoxOverImg);
+    scrollbarBoxBtn->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+    scrollbarBoxBtn->SetSelectable(false);
+    scrollbarBoxBtn->SetEffectOnOver(EFFECT_SCALE, 50, 120);
+    scrollbarBoxBtn->SetMinY(0);
+    scrollbarBoxBtn->SetMaxY(height - 30);
+    scrollbarBoxBtn->SetHoldable(true);
+    scrollbarBoxBtn->SetTrigger(trigHeldA);
 
     gameIndex = new int[pagesize];
-    game = new GuiButton * [pagesize];
-    gameTxt = new GuiText * [pagesize];
-    gameTxtOver = new GuiText * [pagesize];
-    gameBg = new GuiImage * [pagesize];
-    newImg = new GuiImage * [pagesize];
+    game = new GuiButton *[pagesize];
+    gameTxt = new GuiText *[pagesize];
+    gameTxtOver = new GuiText *[pagesize];
+    gameBg = new GuiImage *[pagesize];
+    newImg = new GuiImage *[pagesize];
 
-    for ( int i = 0; i < pagesize; i++ )
+    for (int i = 0; i < pagesize; i++)
     {
-        gameTxt[i] = new GuiText( get_title( gameList[i] ), 20, THEME.gametext );
-        gameTxt[i]->SetAlignment( ALIGN_LEFT, ALIGN_MIDDLE );
-        gameTxt[i]->SetPosition( 24, 0 );
-        gameTxt[i]->SetMaxWidth( maxTextWidth, DOTTED );
+        gameTxt[i] = new GuiText(get_title(gameList[i]), 20, THEME.gametext);
+        gameTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
+        gameTxt[i]->SetPosition(24, 0);
+        gameTxt[i]->SetMaxWidth(maxTextWidth, DOTTED);
 
+        gameTxtOver[i] = new GuiText(get_title(gameList[i]), 20, THEME.gametext);
+        gameTxtOver[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
+        gameTxtOver[i]->SetPosition(24, 0);
+        gameTxtOver[i]->SetMaxWidth(maxTextWidth, SCROLL_HORIZONTAL);
 
-        gameTxtOver[i] = new GuiText( get_title( gameList[i] ), 20, THEME.gametext );
-        gameTxtOver[i]->SetAlignment( ALIGN_LEFT, ALIGN_MIDDLE );
-        gameTxtOver[i]->SetPosition( 24, 0 );
-        gameTxtOver[i]->SetMaxWidth( maxTextWidth, SCROLL_HORIZONTAL );
+        gameBg[i] = new GuiImage(bgGamesEntry);
 
-        gameBg[i] = new GuiImage( bgGamesEntry );
+        newImg[i] = new GuiImage(newGames);
+        newImg[i]->SetAlignment(ALIGN_RIGHT, ALIGN_MIDDLE);
+        newImg[i]->SetVisible(false);
 
-        newImg[i] = new GuiImage( newGames );
-        newImg[i]->SetAlignment( ALIGN_RIGHT, ALIGN_MIDDLE );
-        newImg[i]->SetVisible( false );
-
-        game[i] = new GuiButton( width - 28, GAMESELECTSIZE );
-        game[i]->SetParent( this );
-        game[i]->SetLabel( gameTxt[i] );
-        game[i]->SetLabelOver( gameTxtOver[i] );
-        game[i]->SetIcon( newImg[i] );
-        game[i]->SetImageOver( gameBg[i] );
-        game[i]->SetPosition( 5, GAMESELECTSIZE*i + 4 );
-        game[i]->SetRumble( false );
-        game[i]->SetTrigger( trigA );
-        game[i]->SetSoundClick( btnSoundClick );
+        game[i] = new GuiButton(width - 28, GAMESELECTSIZE);
+        game[i]->SetParent(this);
+        game[i]->SetLabel(gameTxt[i]);
+        game[i]->SetLabelOver(gameTxtOver[i]);
+        game[i]->SetIcon(newImg[i]);
+        game[i]->SetImageOver(gameBg[i]);
+        game[i]->SetPosition(5, GAMESELECTSIZE * i + 4);
+        game[i]->SetRumble(false);
+        game[i]->SetTrigger(trigA);
+        game[i]->SetSoundClick(btnSoundClick);
 
         gameIndex[i] = i;
     }
@@ -192,7 +191,7 @@ GuiGameBrowser::~GuiGameBrowser()
     delete trigHeldA;
     delete btnSoundClick;
 
-    for ( int i = 0; i < pagesize; i++ )
+    for (int i = 0; i < pagesize; i++)
     {
         delete gameTxt[i];
         delete gameTxtOver[i];
@@ -200,38 +199,36 @@ GuiGameBrowser::~GuiGameBrowser()
         delete game[i];
         delete newImg[i];
     }
-    delete [] gameIndex;
-    delete [] game;
-    delete [] gameTxt;
-    delete [] gameTxtOver;
-    delete [] gameBg;
+    delete[] gameIndex;
+    delete[] game;
+    delete[] gameTxt;
+    delete[] gameTxtOver;
+    delete[] gameBg;
 }
 
-void GuiGameBrowser::SetFocus( int f )
+void GuiGameBrowser::SetFocus(int f)
 {
     LOCK( this );
-    if ( !gameList.size() )
-        return;
+    if (!gameList.size()) return;
 
     focus = f;
 
-    for ( int i = 0; i < pagesize; i++ )
+    for (int i = 0; i < pagesize; i++)
         game[i]->ResetState();
 
-    if ( f == 1 )
-        game[selectedItem]->SetState( STATE_SELECTED );
+    if (f == 1) game[selectedItem]->SetState(STATE_SELECTED);
 }
 
 void GuiGameBrowser::ResetState()
 {
     LOCK( this );
-    if ( state != STATE_DISABLED )
+    if (state != STATE_DISABLED)
     {
         state = STATE_DEFAULT;
         stateChan = -1;
     }
 
-    for ( int i = 0; i < pagesize; i++ )
+    for (int i = 0; i < pagesize; i++)
     {
         game[i]->ResetState();
     }
@@ -244,11 +241,11 @@ int GuiGameBrowser::GetOffset()
 int GuiGameBrowser::GetClickedOption()
 {
     int found = -1;
-    for ( int i = 0; i < pagesize; i++ )
+    for (int i = 0; i < pagesize; i++)
     {
-        if ( game[i]->GetState() == STATE_CLICKED )
+        if (game[i]->GetState() == STATE_CLICKED)
         {
-            game[i]->SetState( STATE_SELECTED );
+            game[i]->SetState(STATE_SELECTED);
             found = gameIndex[i];
             break;
         }
@@ -259,11 +256,11 @@ int GuiGameBrowser::GetClickedOption()
 int GuiGameBrowser::GetSelectedOption()
 {
     int found = -1;
-    for ( int i = 0; i < pagesize; i++ )
+    for (int i = 0; i < pagesize; i++)
     {
-        if ( game[i]->GetState() == STATE_SELECTED )
+        if (game[i]->GetState() == STATE_SELECTED)
         {
-            game[i]->SetState( STATE_SELECTED );
+            game[i]->SetState(STATE_SELECTED);
             found = gameIndex[i];
             break;
         }
@@ -277,17 +274,15 @@ int GuiGameBrowser::GetSelectedOption()
  * Help function to find the next visible menu item on the list
  ***************************************************************************/
 
-int GuiGameBrowser::FindMenuItem( int currentItem, int direction )
+int GuiGameBrowser::FindMenuItem(int currentItem, int direction)
 {
     int nextItem = currentItem + direction;
 
-    if ( nextItem < 0 || nextItem >= gameList.size() )
-        return -1;
+    if (nextItem < 0 || nextItem >= gameList.size()) return -1;
 
-    if ( strlen( get_title( gameList[nextItem] ) ) > 0 )
+    if (strlen(get_title(gameList[nextItem])) > 0)
         return nextItem;
-    else
-        return FindMenuItem( nextItem, direction );
+    else return FindMenuItem(nextItem, direction);
 }
 
 /**
@@ -296,25 +291,23 @@ int GuiGameBrowser::FindMenuItem( int currentItem, int direction )
 void GuiGameBrowser::Draw()
 {
     LOCK( this );
-    if ( !this->IsVisible() || !gameList.size() )
-        return;
+    if (!this->IsVisible() || !gameList.size()) return;
 
     bgGameImg->Draw();
 
     int next = listOffset;
 
-    for ( int i = 0; i < pagesize; i++ )
+    for (int i = 0; i < pagesize; i++)
     {
-        if ( next >= 0 )
+        if (next >= 0)
         {
             game[i]->Draw();
-            next = this->FindMenuItem( next, 1 );
+            next = this->FindMenuItem(next, 1);
         }
-        else
-            break;
+        else break;
     }
 
-    if ( scrollbaron == 1 )
+    if (scrollbaron == 1)
     {
         scrollbarImg->Draw();
         arrowUpBtn->Draw();
@@ -327,52 +320,51 @@ void GuiGameBrowser::Draw()
 void GuiGameBrowser::UpdateListEntries()
 {
     int next = listOffset;
-    for ( int i = 0; i < pagesize; i++ )
+    for (int i = 0; i < pagesize; i++)
     {
-        if ( next >= 0 )
+        if (next >= 0)
         {
-            if ( game[i]->GetState() == STATE_DISABLED )
+            if (game[i]->GetState() == STATE_DISABLED)
             {
-                game[i]->SetVisible( true );
-                game[i]->SetState( STATE_DEFAULT );
+                game[i]->SetVisible(true);
+                game[i]->SetState(STATE_DEFAULT);
             }
-            gameTxt[i]->SetText( get_title( gameList[next] ) );
-            gameTxt[i]->SetPosition( 24, 0 );
-            gameTxtOver[i]->SetText( get_title( gameList[next] ) );
-            gameTxtOver[i]->SetPosition( 24, 0 );
+            gameTxt[i]->SetText(get_title(gameList[next]));
+            gameTxt[i]->SetPosition(24, 0);
+            gameTxtOver[i]->SetText(get_title(gameList[next]));
+            gameTxtOver[i]->SetPosition(24, 0);
 
-            if ( Settings.marknewtitles )
+            if (Settings.marknewtitles)
             {
-                bool isNew = NewTitles::Instance()->IsNew( gameList[next]->id );
-                if ( isNew )
+                bool isNew = NewTitles::Instance()->IsNew(gameList[next]->id);
+                if (isNew)
                 {
-                    gameTxt[i]->SetMaxWidth( maxTextWidth - ( newGames->GetWidth() + 1 ), DOTTED );
-                    gameTxtOver[i]->SetMaxWidth( maxTextWidth - ( newGames->GetWidth() + 1 ), SCROLL_HORIZONTAL );
+                    gameTxt[i]->SetMaxWidth(maxTextWidth - (newGames->GetWidth() + 1), DOTTED);
+                    gameTxtOver[i]->SetMaxWidth(maxTextWidth - (newGames->GetWidth() + 1), SCROLL_HORIZONTAL);
                 }
                 else
                 {
-                    gameTxt[i]->SetMaxWidth( maxTextWidth, DOTTED );
-                    gameTxtOver[i]->SetMaxWidth( maxTextWidth, SCROLL_HORIZONTAL );
+                    gameTxt[i]->SetMaxWidth(maxTextWidth, DOTTED);
+                    gameTxtOver[i]->SetMaxWidth(maxTextWidth, SCROLL_HORIZONTAL);
                 }
-                newImg[i]->SetVisible( isNew );
+                newImg[i]->SetVisible(isNew);
             }
 
             gameIndex[i] = next;
-            next = this->FindMenuItem( next, 1 );
+            next = this->FindMenuItem(next, 1);
         }
         else
         {
-            game[i]->SetVisible( false );
-            game[i]->SetState( STATE_DISABLED );
+            game[i]->SetVisible(false);
+            game[i]->SetState(STATE_DISABLED);
         }
     }
 }
 
-void GuiGameBrowser::Update( GuiTrigger * t )
+void GuiGameBrowser::Update(GuiTrigger * t)
 {
     LOCK( this );
-    if ( state == STATE_DISABLED || !t || !gameList.size() )
-        return;
+    if (state == STATE_DISABLED || !t || !gameList.size()) return;
 
     int next, prev;
     int old_listOffset = listOffset;
@@ -381,37 +373,36 @@ void GuiGameBrowser::Update( GuiTrigger * t )
     // when the arrows are clicked
     float scrolldelay = 3.5;
 
-    if ( scrollbaron == 1 )
+    if (scrollbaron == 1)
     {
         // update the location of the scroll box based on the position in the option list
-        arrowUpBtn->Update( t );
-        arrowDownBtn->Update( t );
-        scrollbarBoxBtn->Update( t );
+        arrowUpBtn->Update(t);
+        arrowDownBtn->Update(t);
+        scrollbarBoxBtn->Update(t);
     }
 
     next = listOffset;
 
     u32 buttonshold = ButtonsHold();
 
-    if ( buttonshold != WPAD_BUTTON_UP && buttonshold != WPAD_BUTTON_DOWN )
+    if (buttonshold != WPAD_BUTTON_UP && buttonshold != WPAD_BUTTON_DOWN)
     {
 
-        for ( int i = 0; i < pagesize; i++ )
+        for (int i = 0; i < pagesize; i++)
         {
-            if ( next >= 0 )
-                next = this->FindMenuItem( next, 1 );
+            if (next >= 0) next = this->FindMenuItem(next, 1);
 
-            if ( focus )
+            if (focus)
             {
-                if ( i != selectedItem && game[i]->GetState() == STATE_SELECTED )
+                if (i != selectedItem && game[i]->GetState() == STATE_SELECTED)
                     game[i]->ResetState();
-                else if ( i == selectedItem && game[i]->GetState() == STATE_DEFAULT )
-                    game[selectedItem]->SetState( STATE_SELECTED, t->chan );
+                else if (i == selectedItem && game[i]->GetState() == STATE_DEFAULT) game[selectedItem]->SetState(
+                        STATE_SELECTED, t->chan);
             }
 
-            game[i]->Update( t );
+            game[i]->Update(t);
 
-            if ( game[i]->GetState() == STATE_SELECTED )
+            if (game[i]->GetState() == STATE_SELECTED)
             {
                 selectedItem = i;
             }
@@ -419,43 +410,41 @@ void GuiGameBrowser::Update( GuiTrigger * t )
     }
 
     // pad and joystick navigation
-    if ( !focus || !gameList.size() )
-        return; // skip navigation
+    if (!focus || !gameList.size()) return; // skip navigation
 
-    if ( scrollbaron == 1 )
+    if (scrollbaron == 1)
     {
 
-        if ( t->Down() || arrowDownBtn->GetState() == STATE_CLICKED || arrowDownBtn->GetState() == STATE_HELD ) //down
+        if (t->Down() || arrowDownBtn->GetState() == STATE_CLICKED || arrowDownBtn->GetState() == STATE_HELD) //down
         {
 
-            next = this->FindMenuItem( gameIndex[selectedItem], 1 );
+            next = this->FindMenuItem(gameIndex[selectedItem], 1);
 
-            if ( next >= 0 )
+            if (next >= 0)
             {
-                if ( selectedItem == pagesize - 1 )
+                if (selectedItem == pagesize - 1)
                 {
                     // move list down by 1
-                    listOffset = this->FindMenuItem( listOffset, 1 );
+                    listOffset = this->FindMenuItem(listOffset, 1);
                 }
-                else if ( game[selectedItem+1]->IsVisible() )
+                else if (game[selectedItem + 1]->IsVisible())
                 {
                     game[selectedItem]->ResetState();
-                    game[selectedItem+1]->SetState( STATE_SELECTED, t->chan );
+                    game[selectedItem + 1]->SetState(STATE_SELECTED, t->chan);
                     selectedItem++;
                 }
-//              scrollbarBoxBtn->Draw();
-                usleep( 10000 * scrolldelay );
+                //              scrollbarBoxBtn->Draw();
+                usleep(10000 * scrolldelay);
             }
-            if ( !( ButtonsHold() & WPAD_BUTTON_A ) )
-                arrowDownBtn->ResetState();
+            if (!(ButtonsHold() & WPAD_BUTTON_A)) arrowDownBtn->ResetState();
         }
-        else if ( t->Up() || arrowUpBtn->GetState() == STATE_CLICKED || arrowUpBtn->GetState() == STATE_HELD ) //up
+        else if (t->Up() || arrowUpBtn->GetState() == STATE_CLICKED || arrowUpBtn->GetState() == STATE_HELD) //up
         {
-            prev = this->FindMenuItem( gameIndex[selectedItem], -1 );
+            prev = this->FindMenuItem(gameIndex[selectedItem], -1);
 
-            if ( prev >= 0 )
+            if (prev >= 0)
             {
-                if ( selectedItem == 0 )
+                if (selectedItem == 0)
                 {
                     // move list up by 1
                     listOffset = prev;
@@ -463,33 +452,32 @@ void GuiGameBrowser::Update( GuiTrigger * t )
                 else
                 {
                     game[selectedItem]->ResetState();
-                    game[selectedItem-1]->SetState( STATE_SELECTED, t->chan );
+                    game[selectedItem - 1]->SetState(STATE_SELECTED, t->chan);
                     selectedItem--;
                 }
-//              scrollbarBoxBtn->Draw();
-                usleep( 10000 * scrolldelay );
+                //              scrollbarBoxBtn->Draw();
+                usleep(10000 * scrolldelay);
             }
-            if ( !( ButtonsHold() & WPAD_BUTTON_A ) )
-                arrowUpBtn->ResetState();
+            if (!(ButtonsHold() & WPAD_BUTTON_A)) arrowUpBtn->ResetState();
         }
         int position1 = t->wpad.ir.y;
 
-        if ( position2 == 0 && position1 > 0 )
+        if (position2 == 0 && position1 > 0)
         {
             position2 = position1;
         }
 
-        if ( ( buttonshold & WPAD_BUTTON_B ) && position1 > 0 )
+        if ((buttonshold & WPAD_BUTTON_B) && position1 > 0)
         {
-            scrollbarBoxBtn->ScrollIsOn( 1 );
-            if ( position2 > position1 )
+            scrollbarBoxBtn->ScrollIsOn(1);
+            if (position2 > position1)
             {
 
-                prev = this->FindMenuItem( gameIndex[selectedItem], -1 );
+                prev = this->FindMenuItem(gameIndex[selectedItem], -1);
 
-                if ( prev >= 0 )
+                if (prev >= 0)
                 {
-                    if ( selectedItem == 0 )
+                    if (selectedItem == 0)
                     {
                         // move list up by 1
                         listOffset = prev;
@@ -497,117 +485,114 @@ void GuiGameBrowser::Update( GuiTrigger * t )
                     else
                     {
                         game[selectedItem]->ResetState();
-                        game[selectedItem-1]->SetState( STATE_SELECTED, t->chan );
+                        game[selectedItem - 1]->SetState(STATE_SELECTED, t->chan);
                         selectedItem--;
                     }
-//                  scrollbarBoxBtn->Draw();
-                    usleep( 10000 * scrolldelay );
+                    //                  scrollbarBoxBtn->Draw();
+                    usleep(10000 * scrolldelay);
                 }
             }
-            else if ( position2 < position1 )
+            else if (position2 < position1)
             {
-                next = this->FindMenuItem( gameIndex[selectedItem], 1 );
+                next = this->FindMenuItem(gameIndex[selectedItem], 1);
 
-                if ( next >= 0 )
+                if (next >= 0)
                 {
-                    if ( selectedItem == pagesize - 1 )
+                    if (selectedItem == pagesize - 1)
                     {
                         // move list down by 1
-                        listOffset = this->FindMenuItem( listOffset, 1 );
+                        listOffset = this->FindMenuItem(listOffset, 1);
                     }
-                    else if ( game[selectedItem+1]->IsVisible() )
+                    else if (game[selectedItem + 1]->IsVisible())
                     {
                         game[selectedItem]->ResetState();
-                        game[selectedItem+1]->SetState( STATE_SELECTED, t->chan );
+                        game[selectedItem + 1]->SetState(STATE_SELECTED, t->chan);
                         selectedItem++;
                     }
-//                  scrollbarBoxBtn->Draw();
-                    usleep( 10000 * scrolldelay );
+                    //                  scrollbarBoxBtn->Draw();
+                    usleep(10000 * scrolldelay);
                 }
             }
 
         }
-        else if ( !( buttonshold & WPAD_BUTTON_B ) )
+        else if (!(buttonshold & WPAD_BUTTON_B))
         {
-            scrollbarBoxBtn->ScrollIsOn( 0 );
+            scrollbarBoxBtn->ScrollIsOn(0);
             position2 = 0;
         }
 
-        if ( scrollbarBoxBtn->GetState() == STATE_HELD && scrollbarBoxBtn->GetStateChan() == t->chan && t->wpad.ir.valid && gameList.size() > pagesize )
+        if (scrollbarBoxBtn->GetState() == STATE_HELD && scrollbarBoxBtn->GetStateChan() == t->chan && t->wpad.ir.valid
+                && gameList.size() > pagesize)
         {
             // allow dragging of scrollbar box
-            scrollbarBoxBtn->SetPosition( width / 2 - 18 + 7, 0 );
+            scrollbarBoxBtn->SetPosition(width / 2 - 18 + 7, 0);
             int position = t->wpad.ir.y - 32 - scrollbarBoxBtn->GetTop();
 
-            listOffset = ( position * gameList.size() ) / ( 25.2 * pagesize ) - selectedItem;
+            listOffset = (position * gameList.size()) / (25.2 * pagesize) - selectedItem;
 
-            if ( listOffset <= 0 )
+            if (listOffset <= 0)
             {
                 listOffset = 0;
                 selectedItem = 0;
             }
-            else if ( listOffset + pagesize >= gameList.size() )
+            else if (listOffset + pagesize >= gameList.size())
             {
                 listOffset = gameList.size() - pagesize;
                 selectedItem = pagesize - 1;
             }
 
         }
-        int positionbar = ( 25.2 * pagesize ) * ( listOffset + selectedItem ) / gameList.size();
+        int positionbar = (25.2 * pagesize) * (listOffset + selectedItem) / gameList.size();
 
-        if ( positionbar > ( 24 * pagesize ) )
-            positionbar = ( 24 * pagesize );
-        scrollbarBoxBtn->SetPosition( width / 2 - 18 + 7, positionbar + 8 );
+        if (positionbar > (24 * pagesize)) positionbar = (24 * pagesize);
+        scrollbarBoxBtn->SetPosition(width / 2 - 18 + 7, positionbar + 8);
 
-
-        if ( t->Right() ) //skip pagesize # of games if right is pressed
+        if (t->Right()) //skip pagesize # of games if right is pressed
         {
-            if ( listOffset < gameList.size() && gameList.size() > pagesize )
+            if (listOffset < gameList.size() && gameList.size() > pagesize)
             {
                 listOffset = listOffset + pagesize;
-                if ( listOffset + pagesize >= gameList.size() )
-                    listOffset = gameList.size() - pagesize;
+                if (listOffset + pagesize >= gameList.size()) listOffset = gameList.size() - pagesize;
             }
         }
-        else if ( t->Left() )
+        else if (t->Left())
         {
-            if ( listOffset > 0 )
+            if (listOffset > 0)
             {
                 listOffset = listOffset - pagesize;
-                if ( listOffset < 0 )
-                    listOffset = 0;
+                if (listOffset < 0) listOffset = 0;
             }
         }
 
     }
     else
     {
-        if ( t->Down() ) //if there isn't a scrollbar and down is pressed
+        if (t->Down()) //if there isn't a scrollbar and down is pressed
         {
-            next = this->FindMenuItem( gameIndex[selectedItem], 1 );
+            next = this->FindMenuItem(gameIndex[selectedItem], 1);
 
-            if ( next >= 0 )
+            if (next >= 0)
             {
-                if ( selectedItem == pagesize - 1 )
+                if (selectedItem == pagesize - 1)
                 {
                     // move list down by 1
-                    listOffset = this->FindMenuItem( listOffset, 1 );
+                    listOffset = this->FindMenuItem(listOffset, 1);
                 }
-                else if ( game[selectedItem+1]->IsVisible() )
+                else if (game[selectedItem + 1]->IsVisible())
                 {
                     game[selectedItem]->ResetState();
-                    game[selectedItem+1]->SetState( STATE_SELECTED, t->chan );
+                    game[selectedItem + 1]->SetState(STATE_SELECTED, t->chan);
                     selectedItem++;
                 }
             }
         }
-        else if ( t->Up() ) //up
+        else if (t->Up()) //up
         {
-            prev = this->FindMenuItem( gameIndex[selectedItem], -1 );
+            prev = this->FindMenuItem(gameIndex[selectedItem], -1);
 
-            if ( prev >= 0 )
+            if (prev >= 0)
             {
-                if ( selectedItem == 0 )
+                if (selectedItem == 0)
                 {
                     // move list up by 1
                     listOffset = prev;
@@ -615,29 +600,27 @@ void GuiGameBrowser::Update( GuiTrigger * t )
                 else
                 {
                     game[selectedItem]->ResetState();
-                    game[selectedItem-1]->SetState( STATE_SELECTED, t->chan );
+                    game[selectedItem - 1]->SetState(STATE_SELECTED, t->chan);
                     selectedItem--;
                 }
             }
         }
     }
 
-    if ( old_listOffset != listOffset )
-        UpdateListEntries();
+    if (old_listOffset != listOffset) UpdateListEntries();
 
-    if ( updateCB )
-        updateCB( this );
+    if (updateCB) updateCB(this);
 }
 
 void GuiGameBrowser::Reload()
 {
     LOCK( this );
-    scrollbaron = ( gameList.size() > pagesize ) ? 1 : 0;
+    scrollbaron = (gameList.size() > pagesize) ? 1 : 0;
     selectedItem = 0;
     listOffset = 0;
     focus = 1;
     UpdateListEntries();
 
-    for ( int i = 0; i < pagesize; i++ )
+    for (int i = 0; i < pagesize; i++)
         game[i]->ResetState();
 }

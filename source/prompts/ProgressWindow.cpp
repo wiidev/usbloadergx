@@ -44,11 +44,10 @@ extern float gamesize;
 extern void ResumeGui();
 extern void HaltGui();
 
-
 /****************************************************************************
  * ProgressCallback mainly for gameinstallation. Can be used for other C app.
-***************************************************************************/
-extern "C" void ProgressCallback( s64 done, s64 total )
+ ***************************************************************************/
+extern "C" void ProgressCallback(s64 done, s64 total)
 {
     gameinstalldone = done;
     gameinstalltotal = total;
@@ -57,14 +56,12 @@ extern "C" void ProgressCallback( s64 done, s64 total )
 /****************************************************************************
  * GameInstallProgress
  * GameInstallValue updating function
-***************************************************************************/
+ ***************************************************************************/
 static void GameInstallProgress()
 {
-    if ( gameinstalltotal <= 0 )
-        return;
+    if (gameinstalltotal <= 0) return;
 
-    if ( gameinstalldone > gameinstalltotal )
-        gameinstalldone = gameinstalltotal;
+    if (gameinstalldone > gameinstalltotal) gameinstalldone = gameinstalltotal;
 
     static u32 expected = 300;
 
@@ -72,50 +69,49 @@ static void GameInstallProgress()
     f32 speed = 0;
 
     //Elapsed time
-    elapsed = time( 0 ) - start;
+    elapsed = time(0) - start;
 
     //Calculate speed in MB/s
-    if ( elapsed > 0 )
-        speed = KB_SIZE * gamesize * gameinstalldone / ( gameinstalltotal * elapsed );
+    if (elapsed > 0) speed = KB_SIZE * gamesize * gameinstalldone / (gameinstalltotal * elapsed);
 
-    if ( gameinstalldone != gameinstalltotal )
+    if (gameinstalldone != gameinstalltotal)
     {
         //Expected time
-        if ( elapsed )
-            expected = ( expected * 3 + elapsed * gameinstalltotal / gameinstalldone ) / 4;
+        if (elapsed) expected = (expected * 3 + elapsed * gameinstalltotal / gameinstalldone) / 4;
 
         //Remaining time
-        elapsed = ( expected > elapsed ) ? ( expected - elapsed ) : 0;
+        elapsed = (expected > elapsed) ? (expected - elapsed) : 0;
     }
 
     //Calculate time values
-    h =  elapsed / 3600;
-    m = ( elapsed / 60 ) % 60;
-    s =  elapsed % 60;
+    h = elapsed / 3600;
+    m = (elapsed / 60) % 60;
+    s = elapsed % 60;
 
     progressDone = 100.0 * gameinstalldone / gameinstalltotal;
 
-    snprintf( progressTime, sizeof( progressTime ), "%s %d:%02d:%02d", tr( "Time left:" ), h, m, s );
-    snprintf( progressSizeLeft, sizeof( progressSizeLeft ), "%.2fGB/%.2fGB", gamesize * gameinstalldone / gameinstalltotal, gamesize );
-    snprintf( progressSpeed, sizeof( progressSpeed ), "%.1fMB/s", speed );
+    snprintf(progressTime, sizeof(progressTime), "%s %d:%02d:%02d", tr( "Time left:" ), h, m, s);
+    snprintf(progressSizeLeft, sizeof(progressSizeLeft), "%.2fGB/%.2fGB",
+            gamesize * gameinstalldone / gameinstalltotal, gamesize);
+    snprintf(progressSpeed, sizeof(progressSpeed), "%.1fMB/s", speed);
 
     changed = true;
 }
 
 /****************************************************************************
  * SetupGameInstallProgress
-***************************************************************************/
-void SetupGameInstallProgress( char * title, char * game )
+ ***************************************************************************/
+void SetupGameInstallProgress(char * title, char * game)
 {
 
-    strlcpy( progressTitle, title, sizeof( progressTitle ) );
-    strlcpy( progressMsg1, game, sizeof( progressMsg1 ) );
+    strlcpy(progressTitle, title, sizeof(progressTitle));
+    strlcpy(progressMsg1, game, sizeof(progressMsg1));
     gameinstalltotal = 1;
     showProgress = 1;
     showSize = true;
     showTime = true;
-    LWP_ResumeThread( progressthread );
-    start = time( 0 );
+    LWP_ResumeThread(progressthread);
+    start = time(0);
 }
 
 /****************************************************************************
@@ -125,197 +121,192 @@ void SetupGameInstallProgress( char * title, char * game )
  * progress bar showing % completion, or a throbber that only shows that an
  * action is in progress.
  ***************************************************************************/
-static void ProgressWindow( const char *title, const char *msg1, const char *msg2 )
+static void ProgressWindow(const char *title, const char *msg1, const char *msg2)
 {
-    GuiWindow promptWindow( 472, 320 );
-    promptWindow.SetAlignment( ALIGN_CENTRE, ALIGN_MIDDLE );
-    promptWindow.SetPosition( 0, -10 );
+    GuiWindow promptWindow(472, 320);
+    promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+    promptWindow.SetPosition(0, -10);
 
     char imgPath[100];
-    snprintf( imgPath, sizeof( imgPath ), "%sbutton_dialogue_box.png", Settings.theme_path );
-    GuiImageData btnOutline( imgPath, button_dialogue_box_png );
-    snprintf( imgPath, sizeof( imgPath ), "%sdialogue_box.png", Settings.theme_path );
-    GuiImageData dialogBox( imgPath, dialogue_box_png );
+    snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", Settings.theme_path);
+    GuiImageData btnOutline(imgPath, button_dialogue_box_png);
+    snprintf(imgPath, sizeof(imgPath), "%sdialogue_box.png", Settings.theme_path);
+    GuiImageData dialogBox(imgPath, dialogue_box_png);
 
     GuiTrigger trigA;
-    trigA.SetSimpleTrigger( -1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A );
+    trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 
-    GuiImage dialogBoxImg( &dialogBox );
-    if ( Settings.wsprompt == yes )
+    GuiImage dialogBoxImg(&dialogBox);
+    if (Settings.wsprompt == yes)
     {
-        dialogBoxImg.SetWidescreen( Settings.widescreen );
+        dialogBoxImg.SetWidescreen(Settings.widescreen);
     }
 
-    snprintf( imgPath, sizeof( imgPath ), "%sprogressbar_outline.png", Settings.theme_path );
-    GuiImageData progressbarOutline( imgPath, progressbar_outline_png );
+    snprintf(imgPath, sizeof(imgPath), "%sprogressbar_outline.png", Settings.theme_path);
+    GuiImageData progressbarOutline(imgPath, progressbar_outline_png);
 
-    GuiImage progressbarOutlineImg( &progressbarOutline );
-    if ( Settings.wsprompt == yes )
+    GuiImage progressbarOutlineImg(&progressbarOutline);
+    if (Settings.wsprompt == yes)
     {
-        progressbarOutlineImg.SetWidescreen( Settings.widescreen );
+        progressbarOutlineImg.SetWidescreen(Settings.widescreen);
     }
-    progressbarOutlineImg.SetAlignment( ALIGN_LEFT, ALIGN_MIDDLE );
-    progressbarOutlineImg.SetPosition( 25, 40 );
+    progressbarOutlineImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
+    progressbarOutlineImg.SetPosition(25, 40);
 
-    snprintf( imgPath, sizeof( imgPath ), "%sprogressbar_empty.png", Settings.theme_path );
-    GuiImageData progressbarEmpty( imgPath, progressbar_empty_png );
-    GuiImage progressbarEmptyImg( &progressbarEmpty );
-    progressbarEmptyImg.SetAlignment( ALIGN_LEFT, ALIGN_MIDDLE );
-    progressbarEmptyImg.SetPosition( 25, 40 );
-    progressbarEmptyImg.SetTile( 100 );
+    snprintf(imgPath, sizeof(imgPath), "%sprogressbar_empty.png", Settings.theme_path);
+    GuiImageData progressbarEmpty(imgPath, progressbar_empty_png);
+    GuiImage progressbarEmptyImg(&progressbarEmpty);
+    progressbarEmptyImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
+    progressbarEmptyImg.SetPosition(25, 40);
+    progressbarEmptyImg.SetTile(100);
 
-    snprintf( imgPath, sizeof( imgPath ), "%sprogressbar.png", Settings.theme_path );
-    GuiImageData progressbar( imgPath, progressbar_png );
-    GuiImage progressbarImg( &progressbar );
-    progressbarImg.SetAlignment( ALIGN_LEFT, ALIGN_MIDDLE );
-    progressbarImg.SetPosition( 25, 40 );
+    snprintf(imgPath, sizeof(imgPath), "%sprogressbar.png", Settings.theme_path);
+    GuiImageData progressbar(imgPath, progressbar_png);
+    GuiImage progressbarImg(&progressbar);
+    progressbarImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
+    progressbarImg.SetPosition(25, 40);
 
-    GuiText titleTxt( title, 26, THEME.prompttext );
-    titleTxt.SetAlignment( ALIGN_CENTRE, ALIGN_TOP );
-    titleTxt.SetPosition( 0, 60 );
+    GuiText titleTxt(title, 26, THEME.prompttext);
+    titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+    titleTxt.SetPosition(0, 60);
 
-    GuiText msg1Txt( msg1, 22, THEME.prompttext );
-    msg1Txt.SetAlignment( ALIGN_CENTRE, ALIGN_TOP );
-    if ( msg2 )
-        msg1Txt.SetPosition( 0, 120 );
-    else
-        msg1Txt.SetPosition( 0, 100 );
-    msg1Txt.SetMaxWidth( 430, DOTTED );
+    GuiText msg1Txt(msg1, 22, THEME.prompttext);
+    msg1Txt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+    if (msg2)
+        msg1Txt.SetPosition(0, 120);
+    else msg1Txt.SetPosition(0, 100);
+    msg1Txt.SetMaxWidth(430, DOTTED);
 
-    GuiText msg2Txt( msg2, 22, THEME.prompttext );
-    msg2Txt.SetAlignment( ALIGN_CENTRE, ALIGN_TOP );
-    msg2Txt.SetPosition( 0, 125 );
-    msg2Txt.SetMaxWidth( 430, DOTTED );
+    GuiText msg2Txt(msg2, 22, THEME.prompttext);
+    msg2Txt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+    msg2Txt.SetPosition(0, 125);
+    msg2Txt.SetMaxWidth(430, DOTTED);
 
-    GuiText prsTxt( "%", 22, THEME.prompttext );
-    prsTxt.SetAlignment( ALIGN_RIGHT, ALIGN_MIDDLE );
-    prsTxt.SetPosition( -188, 40 );
+    GuiText prsTxt("%", 22, THEME.prompttext);
+    prsTxt.SetAlignment(ALIGN_RIGHT, ALIGN_MIDDLE);
+    prsTxt.SetPosition(-188, 40);
 
-    GuiText timeTxt( ( char* ) NULL, 22, THEME.prompttext );
-    timeTxt.SetAlignment( ALIGN_LEFT, ALIGN_BOTTOM );
-    timeTxt.SetPosition( 280, -50 );
+    GuiText timeTxt((char*) NULL, 22, THEME.prompttext);
+    timeTxt.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+    timeTxt.SetPosition(280, -50);
 
-    GuiText sizeTxt( ( char* ) NULL, 22, THEME.prompttext );
-    sizeTxt.SetAlignment( ALIGN_LEFT, ALIGN_BOTTOM );
-    sizeTxt.SetPosition( 50, -50 );
+    GuiText sizeTxt((char*) NULL, 22, THEME.prompttext);
+    sizeTxt.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+    sizeTxt.SetPosition(50, -50);
 
-    GuiText speedTxt( ( char* ) NULL, 22, THEME.prompttext );
-    speedTxt.SetAlignment( ALIGN_LEFT, ALIGN_BOTTOM );
-    speedTxt.SetPosition( 50, -74 );
+    GuiText speedTxt((char*) NULL, 22, THEME.prompttext);
+    speedTxt.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
+    speedTxt.SetPosition(50, -74);
 
-    GuiText prTxt( ( char* ) NULL, 26, THEME.prompttext );
-    prTxt.SetAlignment( ALIGN_LEFT, ALIGN_MIDDLE );
-    prTxt.SetPosition( 200, 40 );
+    GuiText prTxt((char*) NULL, 26, THEME.prompttext);
+    prTxt.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
+    prTxt.SetPosition(200, 40);
 
-    if ( ( Settings.wsprompt == yes ) && ( Settings.widescreen ) )  /////////////adjust for widescreen
+    if ((Settings.wsprompt == yes) && (Settings.widescreen)) /////////////adjust for widescreen
     {
-        progressbarOutlineImg.SetAlignment( ALIGN_CENTRE, ALIGN_MIDDLE );
-        progressbarOutlineImg.SetPosition( 0, 40 );
-        progressbarEmptyImg.SetPosition( 80, 40 );
-        progressbarEmptyImg.SetTile( 78 );
-        progressbarImg.SetPosition( 80, 40 );
-        msg1Txt.SetMaxWidth( 380, DOTTED );
-        msg2Txt.SetMaxWidth( 380, DOTTED );
+        progressbarOutlineImg.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+        progressbarOutlineImg.SetPosition(0, 40);
+        progressbarEmptyImg.SetPosition(80, 40);
+        progressbarEmptyImg.SetTile(78);
+        progressbarImg.SetPosition(80, 40);
+        msg1Txt.SetMaxWidth(380, DOTTED);
+        msg2Txt.SetMaxWidth(380, DOTTED);
 
-        timeTxt.SetPosition( 250, -50 );
-        timeTxt.SetFontSize( 20 );
-        speedTxt.SetPosition( 90, -74 );
-        speedTxt.SetFontSize( 20 );
-        sizeTxt.SetPosition( 90, -50 );
-        sizeTxt.SetFontSize( 20 );
+        timeTxt.SetPosition(250, -50);
+        timeTxt.SetFontSize(20);
+        speedTxt.SetPosition(90, -74);
+        speedTxt.SetFontSize(20);
+        sizeTxt.SetPosition(90, -50);
+        sizeTxt.SetFontSize(20);
     }
 
-    usleep( 400000 ); // wait to see if progress flag changes soon
-    if ( !showProgress )
-        return;
+    usleep(400000); // wait to see if progress flag changes soon
+    if (!showProgress) return;
 
-    promptWindow.Append( &dialogBoxImg );
-    promptWindow.Append( &progressbarEmptyImg );
-    promptWindow.Append( &progressbarImg );
-    promptWindow.Append( &progressbarOutlineImg );
-    promptWindow.Append( &prTxt );
-    promptWindow.Append( &prsTxt );
-    if ( title )
-        promptWindow.Append( &titleTxt );
-    if ( msg1 )
-        promptWindow.Append( &msg1Txt );
-    if ( msg2 )
-        promptWindow.Append( &msg2Txt );
-    if ( showTime )
-        promptWindow.Append( &timeTxt );
-    if ( showSize )
+    promptWindow.Append(&dialogBoxImg);
+    promptWindow.Append(&progressbarEmptyImg);
+    promptWindow.Append(&progressbarImg);
+    promptWindow.Append(&progressbarOutlineImg);
+    promptWindow.Append(&prTxt);
+    promptWindow.Append(&prsTxt);
+    if (title) promptWindow.Append(&titleTxt);
+    if (msg1) promptWindow.Append(&msg1Txt);
+    if (msg2) promptWindow.Append(&msg2Txt);
+    if (showTime) promptWindow.Append(&timeTxt);
+    if (showSize)
     {
-        promptWindow.Append( &sizeTxt );
-        promptWindow.Append( &speedTxt );
+        promptWindow.Append(&sizeTxt);
+        promptWindow.Append(&speedTxt);
     }
 
     HaltGui();
-    promptWindow.SetEffect( EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50 );
-    mainWindow->SetState( STATE_DISABLED );
-    mainWindow->Append( &promptWindow );
-    mainWindow->ChangeFocus( &promptWindow );
+    promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
+    mainWindow->SetState(STATE_DISABLED);
+    mainWindow->Append(&promptWindow);
+    mainWindow->ChangeFocus(&promptWindow);
     ResumeGui();
 
-    while ( promptWindow.GetEffect() > 0 ) usleep( 100 );
-
+    while (promptWindow.GetEffect() > 0)
+        usleep(100);
 
     int tmp;
-    while ( showProgress )
+    while (showProgress)
     {
 
         VIDEO_WaitVSync();
 
         GameInstallProgress();
 
-        if ( changed )
+        if (changed)
         {
             changed = false;
 
-            tmp = static_cast<int>( progressbarImg.GetWidth() * progressDone );
+            tmp = static_cast<int> (progressbarImg.GetWidth() * progressDone);
 
-            if ( Settings.widescreen && Settings.wsprompt == yes )
-                progressbarImg.SetSkew( 0, 0, static_cast<int>( progressbarImg.GetWidth()*progressDone*0.8 ) - progressbarImg.GetWidth(), 0, static_cast<int>( progressbarImg.GetWidth()*progressDone*0.8 ) - progressbarImg.GetWidth(), 0, 0, 0 );
-            else
-                progressbarImg.SetSkew( 0, 0, static_cast<int>( progressbarImg.GetWidth()*progressDone ) - progressbarImg.GetWidth(), 0, static_cast<int>( progressbarImg.GetWidth()*progressDone ) - progressbarImg.GetWidth(), 0, 0, 0 );
+            if (Settings.widescreen && Settings.wsprompt == yes)
+                progressbarImg.SetSkew(0, 0, static_cast<int> (progressbarImg.GetWidth() * progressDone * 0.8)
+                        - progressbarImg.GetWidth(), 0, static_cast<int> (progressbarImg.GetWidth() * progressDone
+                        * 0.8) - progressbarImg.GetWidth(), 0, 0, 0);
+            else progressbarImg.SetSkew(0, 0, static_cast<int> (progressbarImg.GetWidth() * progressDone)
+                    - progressbarImg.GetWidth(), 0, static_cast<int> (progressbarImg.GetWidth() * progressDone)
+                    - progressbarImg.GetWidth(), 0, 0, 0);
 
-            prTxt.SetTextf( "%.2f", progressDone );
+            prTxt.SetTextf("%.2f", progressDone);
 
-            if ( showSize )
+            if (showSize)
             {
-                sizeTxt.SetText( progressSizeLeft );
-                speedTxt.SetText( progressSpeed );
+                sizeTxt.SetText(progressSizeLeft);
+                speedTxt.SetText(progressSpeed);
             }
 
-            if ( showTime )
-                timeTxt.SetText( progressTime );
+            if (showTime) timeTxt.SetText(progressTime);
 
-            if ( msg2 )
-                msg2Txt.SetText( dyn_message );
+            if (msg2) msg2Txt.SetText(dyn_message);
         }
     }
 
-    promptWindow.SetEffect( EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50 );
-    while ( promptWindow.GetEffect() > 0 ) usleep( 100 );
+    promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
+    while (promptWindow.GetEffect() > 0)
+        usleep(100);
 
     HaltGui();
-    mainWindow->Remove( &promptWindow );
-    mainWindow->SetState( STATE_DEFAULT );
+    mainWindow->Remove(&promptWindow);
+    mainWindow->SetState(STATE_DEFAULT);
     ResumeGui();
 }
 
 /****************************************************************************
  * ProgressThread
-  ***************************************************************************/
+ ***************************************************************************/
 
-static void * ProgressThread ( void *arg )
+static void * ProgressThread(void *arg)
 {
-    while ( 1 )
+    while (1)
     {
-        if ( !showProgress )
-            LWP_SuspendThread ( progressthread );
+        if (!showProgress) LWP_SuspendThread(progressthread);
 
-        ProgressWindow( progressTitle, progressMsg1, progressMsg2 );
-        usleep( 100 );
+        ProgressWindow(progressTitle, progressMsg1, progressMsg2);
+        usleep(100);
     }
     return NULL;
 }
@@ -329,8 +320,8 @@ void ProgressStop()
     gameinstalltotal = -1;
 
     // wait for thread to finish
-    while ( !LWP_ThreadIsSuspended( progressthread ) )
-        usleep( 100 );
+    while (!LWP_ThreadIsSuspended(progressthread))
+        usleep(100);
 }
 
 /****************************************************************************
@@ -339,72 +330,68 @@ void ProgressStop()
  * Callbackfunction for updating the progress values
  * Use this function as standard callback
  ***************************************************************************/
-void ShowProgress( const char *title, const char *msg1, char *dynmsg2, f32 done, f32 total, bool swSize, bool swTime )
+void ShowProgress(const char *title, const char *msg1, char *dynmsg2, f32 done, f32 total, bool swSize, bool swTime)
 {
-    if ( total <= 0 )
+    if (total <= 0)
         return;
 
-    else if ( done > total )
-        done = total;
+    else if (done > total) done = total;
 
     showSize = swSize;
     showTime = swTime;
 
-    if ( title )
-        strlcpy( progressTitle, title, sizeof( progressTitle ) );
-    if ( msg1 )
-        strlcpy( progressMsg1, msg1, sizeof( progressMsg1 ) );
-    if ( dynmsg2 )
-        dyn_message = dynmsg2;
+    if (title) strlcpy(progressTitle, title, sizeof(progressTitle));
+    if (msg1) strlcpy(progressMsg1, msg1, sizeof(progressMsg1));
+    if (dynmsg2) dyn_message = dynmsg2;
 
     static u32 expected;
 
     u32 elapsed, h, m, s, speed = 0;
 
-    if ( !done )
+    if (!done)
     {
-        start    = time( 0 );
+        start = time(0);
         expected = 300;
-        LWP_ResumeThread( progressthread );
+        LWP_ResumeThread(progressthread);
     }
 
     //Elapsed time
-    elapsed = time( 0 ) - start;
+    elapsed = time(0) - start;
 
     //Calculate speed in KB/s
-    if ( elapsed > 0 )
-        speed = done / ( elapsed * KB_SIZE );
+    if (elapsed > 0) speed = done / (elapsed * KB_SIZE);
 
-    if ( done != total )
+    if (done != total)
     {
         //Expected time
-        if ( elapsed )
-            expected = ( expected * 3 + elapsed * total / done ) / 4;
+        if (elapsed) expected = (expected * 3 + elapsed * total / done) / 4;
 
         //Remaining time
-        elapsed = ( expected > elapsed ) ? ( expected - elapsed ) : 0;
+        elapsed = (expected > elapsed) ? (expected - elapsed) : 0;
     }
 
     //Calculate time values
-    h =  elapsed / 3600;
-    m = ( elapsed / 60 ) % 60;
-    s =  elapsed % 60;
+    h = elapsed / 3600;
+    m = (elapsed / 60) % 60;
+    s = elapsed % 60;
 
-    if ( swTime == true )
+    if (swTime == true)
     {
-        snprintf( progressTime, sizeof( progressTime ), "%s %d:%02d:%02d", tr( "Time left:" ), h, m, s );
+        snprintf(progressTime, sizeof(progressTime), "%s %d:%02d:%02d", tr( "Time left:" ), h, m, s);
     }
 
-    if ( swSize == true )
+    if (swSize == true)
     {
-        if ( total < MB_SIZE )
-            snprintf( progressSizeLeft, sizeof( progressSizeLeft ), "%0.2fKB/%0.2fKB", done * done / total / KB_SIZE, total / KB_SIZE );
-        else if ( total > MB_SIZE && total < GB_SIZE )
-            snprintf( progressSizeLeft, sizeof( progressSizeLeft ), "%0.2fMB/%0.2fMB", done * done / total / MB_SIZE, total / MB_SIZE );
-        else
-            snprintf( progressSizeLeft, sizeof( progressSizeLeft ), "%0.2fGB/%0.2fGB", done * done / total / GB_SIZE, total / GB_SIZE );
+        if (total < MB_SIZE)
+            snprintf(progressSizeLeft, sizeof(progressSizeLeft), "%0.2fKB/%0.2fKB", done * done / total / KB_SIZE,
+                    total / KB_SIZE);
+        else if (total > MB_SIZE && total < GB_SIZE)
+            snprintf(progressSizeLeft, sizeof(progressSizeLeft), "%0.2fMB/%0.2fMB", done * done / total / MB_SIZE,
+                    total / MB_SIZE);
+        else snprintf(progressSizeLeft, sizeof(progressSizeLeft), "%0.2fGB/%0.2fGB", done * done / total / GB_SIZE,
+                total / GB_SIZE);
 
-        snprintf( progressSpeed, sizeof( progressSpeed ), "%dKB/s", speed );
+        snprintf(progressSpeed, sizeof(progressSpeed), "%dKB/s", speed);
     }
 
     showProgress = 1;
@@ -419,7 +406,7 @@ void ShowProgress( const char *title, const char *msg1, char *dynmsg2, f32 done,
  ***************************************************************************/
 void InitProgressThread()
 {
-    LWP_CreateThread( &progressthread, ProgressThread, NULL, NULL, 16384, 80 );
+    LWP_CreateThread(&progressthread, ProgressThread, NULL, NULL, 16384, 80);
 }
 
 /****************************************************************************
@@ -429,6 +416,6 @@ void InitProgressThread()
  ***************************************************************************/
 void ExitProgressThread()
 {
-    LWP_JoinThread( progressthread, NULL );
+    LWP_JoinThread(progressthread, NULL);
     progressthread = LWP_THREAD_NULL;
 }

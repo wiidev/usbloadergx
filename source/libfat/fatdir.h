@@ -9,13 +9,13 @@
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
 
-  1. Redistributions of source code must retain the above copyright notice,
-     this list of conditions and the following disclaimer.
-  2. Redistributions in binary form must reproduce the above copyright notice,
-     this list of conditions and the following disclaimer in the documentation and/or
-     other materials provided with the distribution.
-  3. The name of the author may not be used to endorse or promote products derived
-     from this software without specific prior written permission.
+ 1. Redistributions of source code must retain the above copyright notice,
+ this list of conditions and the following disclaimer.
+ 2. Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation and/or
+ other materials provided with the distribution.
+ 3. The name of the author may not be used to endorse or promote products derived
+ from this software without specific prior written permission.
 
  THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY
@@ -26,8 +26,7 @@
  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
-
+ */
 
 #ifndef __FATDIR_H
 #define __FATDIR_H
@@ -41,34 +40,33 @@
 
 typedef struct
 {
-    PARTITION* partition;
-    DIR_ENTRY  currentEntry;
-    uint32_t   startCluster;
-    bool       inUse;
-    bool       validEntry;
+        PARTITION* partition;
+        DIR_ENTRY currentEntry;
+        uint32_t startCluster;
+        bool inUse;
+        bool validEntry;
 } DIR_STATE_STRUCT;
 
-extern int _FAT_stat_r ( struct _reent *r, const char *path, struct stat *st );
+extern int _FAT_stat_r(struct _reent *r, const char *path, struct stat *st);
 
-extern int _FAT_link_r ( struct _reent *r, const char *existing, const char *newLink );
+extern int _FAT_link_r(struct _reent *r, const char *existing, const char *newLink);
 
-extern int _FAT_unlink_r ( struct _reent *r, const char *name );
+extern int _FAT_unlink_r(struct _reent *r, const char *name);
 
-extern int _FAT_chdir_r ( struct _reent *r, const char *name );
+extern int _FAT_chdir_r(struct _reent *r, const char *name);
 
-extern int _FAT_rename_r ( struct _reent *r, const char *oldName, const char *newName );
+extern int _FAT_rename_r(struct _reent *r, const char *oldName, const char *newName);
 
-extern int _FAT_mkdir_r ( struct _reent *r, const char *path, int mode );
+extern int _FAT_mkdir_r(struct _reent *r, const char *path, int mode);
 
-extern int _FAT_statvfs_r ( struct _reent *r, const char *path, struct statvfs *buf );
+extern int _FAT_statvfs_r(struct _reent *r, const char *path, struct statvfs *buf);
 
 /*
-Directory iterator functions
-*/
-extern DIR_ITER* _FAT_diropen_r( struct _reent *r, DIR_ITER *dirState, const char *path );
-extern int _FAT_dirreset_r ( struct _reent *r, DIR_ITER *dirState );
-extern int _FAT_dirnext_r ( struct _reent *r, DIR_ITER *dirState, char *filename, struct stat *filestat );
-extern int _FAT_dirclose_r ( struct _reent *r, DIR_ITER *dirState );
-
+ Directory iterator functions
+ */
+extern DIR_ITER* _FAT_diropen_r(struct _reent *r, DIR_ITER *dirState, const char *path);
+extern int _FAT_dirreset_r(struct _reent *r, DIR_ITER *dirState);
+extern int _FAT_dirnext_r(struct _reent *r, DIR_ITER *dirState, char *filename, struct stat *filestat);
+extern int _FAT_dirclose_r(struct _reent *r, DIR_ITER *dirState);
 
 #endif // _FATDIR_H

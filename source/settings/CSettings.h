@@ -1,4 +1,4 @@
- /****************************************************************************
+/****************************************************************************
  * Copyright (C) 2010
  * by Dimok
  *
@@ -29,7 +29,8 @@
 #include <gctypes.h>
 #include "cfg.h"
 
-enum {
+enum
+{
     APP_DEFAULT = 0,
     CONSOLE_DEFAULT,
     JAPANESE,
@@ -48,92 +49,92 @@ enum {
 class CSettings
 {
     public:
-		//!Constructor
+        //!Constructor
         CSettings();
-		//!Destructor
-		~CSettings();
-		//!Set Default Settings
-		void SetDefault();
-		//!Load Settings
-		bool Load();
-		//!Save Settings
+        //!Destructor
+        ~CSettings();
+        //!Set Default Settings
+        void SetDefault();
+        //!Load Settings
+        bool Load();
+        //!Save Settings
         bool Save();
-		//!Reset Settings
+        //!Reset Settings
         bool Reset();
-		//!Load a languagefile
-		//!\param language
+        //!Load a languagefile
+        //!\param language
         bool LoadLanguage(const char *path, int language = -1);
 
         /** Variables **/
-        char    BootDevice[10];
-        char    ConfigPath[80];
-        short   videomode;
-        short   language;
-        short   ocarina;
-        short   videopatch;
-        short   sinfo;
-        short   hddinfo;
-        short   rumble;
-        short   xflip;
-        int     volume;
-        int     sfxvolume;
-        int     gamesoundvolume;
-        short   tooltips;
-        char    unlockCode[20];
-        short   parentalcontrol;
-        short   cios;
-        short   quickboot;
-        short   wsprompt;
-        short   keyset;
-        short   sort;
-        short   fave;
-        short   wiilight;
-        short   gameDisplay;
-        short   patchcountrystrings;
-        short   screensaver;
-        short   partition;
-        short   musicloopmode;
-        short   widescreen;
-        short   godmode;
-        char    covers_path[100];
-        char    covers2d_path[100];
-        char    theme_path[100];
-        char    theme_downloadpath[100];
-        char    disc_path[100];
-        char    titlestxt_path[100];
-        char    language_path[100];
-        char    languagefiles_path[100];
-        char    ogg_path[250];
-        char    dolpath[150];
-        char    update_path[150];
-        char    homebrewapps_path[150];
-        char    selected_homebrew[200];
-        char    Cheatcodespath[100];
-        char    TxtCheatcodespath[100];
-        char    BcaCodepath[100];
-        char    WipCodepath[100];
-        short   error002;
-        short   titlesOverride; // db_titles
-        char    db_url[200];
-        char    db_language[20];
-        short   db_JPtoEN;
-        short   gridRows;
-        short   autonetwork;
-        short   discart;
-        short   gamesound;
-        short   marknewtitles;
-        short   FatInstallToDir;
-        short   partitions_to_install;
-        short   fullcopy;
-        short   beta_upgrades;
-        char    returnTo[20];
+        char BootDevice[10];
+        char ConfigPath[80];
+        short videomode;
+        short language;
+        short ocarina;
+        short videopatch;
+        short sinfo;
+        short hddinfo;
+        short rumble;
+        short xflip;
+        int volume;
+        int sfxvolume;
+        int gamesoundvolume;
+        short tooltips;
+        char unlockCode[20];
+        short parentalcontrol;
+        short cios;
+        short quickboot;
+        short wsprompt;
+        short keyset;
+        short sort;
+        short fave;
+        short wiilight;
+        short gameDisplay;
+        short patchcountrystrings;
+        short screensaver;
+        short partition;
+        short musicloopmode;
+        short widescreen;
+        short godmode;
+        char covers_path[100];
+        char covers2d_path[100];
+        char theme_path[100];
+        char theme_downloadpath[100];
+        char disc_path[100];
+        char titlestxt_path[100];
+        char language_path[100];
+        char languagefiles_path[100];
+        char ogg_path[250];
+        char dolpath[150];
+        char update_path[150];
+        char homebrewapps_path[150];
+        char selected_homebrew[200];
+        char Cheatcodespath[100];
+        char TxtCheatcodespath[100];
+        char BcaCodepath[100];
+        char WipCodepath[100];
+        short error002;
+        short titlesOverride; // db_titles
+        char db_url[200];
+        char db_language[20];
+        short db_JPtoEN;
+        short gridRows;
+        short autonetwork;
+        short discart;
+        short gamesound;
+        short marknewtitles;
+        short FatInstallToDir;
+        short partitions_to_install;
+        short fullcopy;
+        short beta_upgrades;
+        char returnTo[20];
         struct
         {
-            u8 enabled;
-            u8 rating;
-            u8 pin[4];
-            u8 question;
-            wchar_t answer[32]; // IS WCHAR!
+                u8 enabled;
+                u8 rating;
+                u8 pin[4];
+                u8 question;
+                wchar_t answer[32]; // IS WCHAR!
         } Parental;
     protected:
         bool SetSetting(char *name, char *value);

@@ -45,11 +45,12 @@
 /**
  * struct hd_geometry -
  */
-struct hd_geometry {
-	unsigned char heads;
-	unsigned char sectors;
-	unsigned short cylinders;
-	unsigned long start;
+struct hd_geometry
+{
+    unsigned char heads;
+    unsigned char sectors;
+    unsigned short cylinders;
+    unsigned long start;
 };
 #endif
 #ifndef BLKGETSIZE
@@ -69,7 +70,6 @@ struct hd_geometry {
 #define ntfs_device_default_io_ops ntfs_device_win32_io_ops
 
 #endif /* __CYGWIN32__ */
-
 
 /* Forward declaration. */
 struct ntfs_device_operations;

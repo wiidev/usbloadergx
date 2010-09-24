@@ -18,14 +18,14 @@ extern "C"
      */
     struct block
     {
-        u32 size;
-        unsigned char *data;
+            u32 size;
+            unsigned char *data;
     };
 
     extern const struct block emptyblock;
 
-    struct block downloadfile( const char *url );
-    s32 GetConnection( char * domain );
+    struct block downloadfile(const char *url);
+    s32 GetConnection(char * domain);
 
 #ifdef __cplusplus
 }

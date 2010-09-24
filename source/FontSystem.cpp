@@ -27,55 +27,52 @@
 #include "filelist.h"
 
 FreeTypeGX * fontSystem = NULL;
-static FT_Byte * MainFont = ( FT_Byte * ) font_ttf;
+static FT_Byte * MainFont = (FT_Byte *) font_ttf;
 static u32 MainFontSize = font_ttf_size;
 
 void ClearFontData()
 {
-    if ( fontSystem )
-        delete fontSystem;
+    if (fontSystem) delete fontSystem;
     fontSystem = NULL;
 
-    if ( MainFont != ( FT_Byte * ) font_ttf )
+    if (MainFont != (FT_Byte *) font_ttf)
     {
-        if ( MainFont != NULL )
-            delete [] MainFont;
-        MainFont = ( FT_Byte * ) font_ttf;
+        if (MainFont != NULL) delete[] MainFont;
+        MainFont = (FT_Byte *) font_ttf;
         MainFontSize = font_ttf_size;
     }
 }
 
-bool SetupDefaultFont( const char *path )
+bool SetupDefaultFont(const char *path)
 {
     bool result = false;
     FILE *pfile = NULL;
 
     ClearFontData();
 
-    if ( path )
-        pfile = fopen( path, "rb" );
+    if (path) pfile = fopen(path, "rb");
 
-    if ( pfile )
+    if (pfile)
     {
-        fseek( pfile, 0, SEEK_END );
-        MainFontSize = ftell( pfile );
-        rewind( pfile );
+        fseek(pfile, 0, SEEK_END);
+        MainFontSize = ftell(pfile);
+        rewind(pfile);
 
-        MainFont = new ( std::nothrow ) FT_Byte[MainFontSize];
-        if ( !MainFont )
+        MainFont = new (std::nothrow) FT_Byte[MainFontSize];
+        if (!MainFont)
         {
-            MainFont = ( FT_Byte * ) font_ttf;
+            MainFont = (FT_Byte *) font_ttf;
             MainFontSize = font_ttf_size;
         }
         else
         {
-            fread( MainFont, 1, MainFontSize, pfile );
+            fread(MainFont, 1, MainFontSize, pfile);
             result = true;
         }
-        fclose( pfile );
+        fclose(pfile);
     }
 
-    fontSystem = new FreeTypeGX( MainFont, MainFontSize );
+    fontSystem = new FreeTypeGX(MainFont, MainFontSize);
 
     return result;
 }

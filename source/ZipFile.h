@@ -32,22 +32,22 @@
 
 typedef struct
 {
-    u64 offset; // ZipFile offset
-    u64 length; // uncompressed file length in 64 bytes for sizes higher than 4GB
-    bool isdir; // 0 - file, 1 - directory
-    char filename[256]; // full filename
+        u64 offset; // ZipFile offset
+        u64 length; // uncompressed file length in 64 bytes for sizes higher than 4GB
+        bool isdir; // 0 - file, 1 - directory
+        char filename[256]; // full filename
 } FileStructure;
 
 class ZipFile
 {
     public:
         //!Constructor
-        ZipFile( const char *filepath );
+        ZipFile(const char *filepath);
         //!Destructor
         ~ZipFile();
         //!Extract all files from a zip file to a directory
         //!\param dest Destination path to where to extract
-        bool ExtractAll( const char *dest );
+        bool ExtractAll(const char *dest);
     protected:
         bool LoadList();
         unzFile File;

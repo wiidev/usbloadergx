@@ -27,9 +27,7 @@ extern "C"
 #define     Online_Check    ((u32*) 0x80003180)
 #define     GameID_Address  ((u32*) 0x80003184)
 
-
 #define allocate_memory(size) memalign(32, (size+31)&(~31))
-
 
 #ifdef __cplusplus
 }

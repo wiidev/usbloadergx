@@ -57,17 +57,15 @@ typedef sle64 ntfs_time;
  */
 static __inline__ struct timespec ntfs2timespec(ntfs_time ntfstime)
 {
-	struct timespec spec;
-	s64 cputime;
+    struct timespec spec;
+    s64 cputime;
 
-	cputime = sle64_to_cpu(ntfstime);
-	spec.tv_sec = (cputime - (NTFS_TIME_OFFSET)) / 10000000;
-	spec.tv_nsec = (cputime - (NTFS_TIME_OFFSET)
-			- (s64)spec.tv_sec*10000000)*100;
-		/* force zero nsec for overflowing dates */
-	if ((spec.tv_nsec < 0) || (spec.tv_nsec > 999999999))
-		spec.tv_nsec = 0;
-	return (spec);
+    cputime = sle64_to_cpu(ntfstime);
+    spec.tv_sec = (cputime - (NTFS_TIME_OFFSET)) / 10000000;
+    spec.tv_nsec = (cputime - (NTFS_TIME_OFFSET) - (s64) spec.tv_sec * 10000000) * 100;
+    /* force zero nsec for overflowing dates */
+    if ((spec.tv_nsec < 0) || (spec.tv_nsec > 999999999)) spec.tv_nsec = 0;
+    return (spec);
 }
 
 /**
@@ -88,11 +86,10 @@ static __inline__ struct timespec ntfs2timespec(ntfs_time ntfstime)
  */
 static __inline__ ntfs_time timespec2ntfs(struct timespec spec)
 {
-	s64 units;
+    s64 units;
 
-	units = (s64)spec.tv_sec * 10000000
-				+ NTFS_TIME_OFFSET + spec.tv_nsec/100;
-	return (cpu_to_le64(units));
+    units = (s64) spec.tv_sec * 10000000 + NTFS_TIME_OFFSET + spec.tv_nsec / 100;
+    return (cpu_to_le64(units));
 }
 
 /*
@@ -101,21 +98,21 @@ static __inline__ ntfs_time timespec2ntfs(struct timespec spec)
 
 static __inline__ ntfs_time ntfs_current_time(void)
 {
-	struct timespec now;
+    struct timespec now;
 
 #if defined(HAVE_CLOCK_GETTIME) || defined(HAVE_SYS_CLOCK_GETTIME)
-	clock_gettime(CLOCK_REALTIME, &now);
+    clock_gettime(CLOCK_REALTIME, &now);
 #elif defined(HAVE_GETTIMEOFDAY)
-	struct timeval microseconds;
+    struct timeval microseconds;
 
-	gettimeofday(&microseconds, (struct timezone*)NULL);
-	now.tv_sec = microseconds.tv_sec;
-	now.tv_nsec = microseconds.tv_usec*1000;
+    gettimeofday(&microseconds, (struct timezone*)NULL);
+    now.tv_sec = microseconds.tv_sec;
+    now.tv_nsec = microseconds.tv_usec*1000;
 #else
-	now.tv_sec = time((time_t*)NULL);
-	now.tv_nsec = 0;
+    now.tv_sec = time((time_t*) NULL);
+    now.tv_nsec = 0;
 #endif
-	return (timespec2ntfs(now));
+    return (timespec2ntfs(now));
 }
 
 #endif /* _NTFS_NTFSTIME_H */

@@ -34,20 +34,20 @@
 #include "types.h"
 
 /* Function prototype for the logging handlers */
-typedef int (ntfs_log_handler)(const char *function, const char *file, int line,
-	u32 level, void *data, const char *format, va_list args);
+typedef int ( ntfs_log_handler)(const char *function, const char *file, int line, u32 level, void *data,
+        const char *format, va_list args);
 
 /* Set the logging handler from one of the functions, below. */
 void ntfs_log_set_handler(ntfs_log_handler *handler 
 			  __attribute__((format(printf, 6, 0))));
 
 /* Logging handlers */
-ntfs_log_handler ntfs_log_handler_syslog  __attribute__((format(printf, 6, 0)));
+ntfs_log_handler ntfs_log_handler_syslog __attribute__((format(printf, 6, 0)));
 ntfs_log_handler ntfs_log_handler_fprintf __attribute__((format(printf, 6, 0)));
-ntfs_log_handler ntfs_log_handler_null    __attribute__((format(printf, 6, 0)));
-ntfs_log_handler ntfs_log_handler_stdout  __attribute__((format(printf, 6, 0)));
-ntfs_log_handler ntfs_log_handler_outerr  __attribute__((format(printf, 6, 0)));
-ntfs_log_handler ntfs_log_handler_stderr  __attribute__((format(printf, 6, 0)));
+ntfs_log_handler ntfs_log_handler_null __attribute__((format(printf, 6, 0)));
+ntfs_log_handler ntfs_log_handler_stdout __attribute__((format(printf, 6, 0)));
+ntfs_log_handler ntfs_log_handler_outerr __attribute__((format(printf, 6, 0)));
+ntfs_log_handler ntfs_log_handler_stderr __attribute__((format(printf, 6, 0)));
 
 /* Enable/disable certain log levels */
 u32 ntfs_log_set_levels(u32 levels);
@@ -62,9 +62,8 @@ u32 ntfs_log_get_flags(void);
 /* Turn command-line options into logging flags */
 BOOL ntfs_log_parse_option(const char *option);
 
-int ntfs_log_redirect(const char *function, const char *file, int line,
-	u32 level, void *data, const char *format, ...)
-	__attribute__((format(printf, 6, 7)));
+int ntfs_log_redirect(const char *function, const char *file, int line, u32 level, void *data, const char *format, ...)
+__attribute__((format(printf, 6, 7)));
 
 /* Logging levels - Determine what gets logged */
 #define NTFS_LOG_LEVEL_DEBUG	(1 <<  0) /* x = 42 */

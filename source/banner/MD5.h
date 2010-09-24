@@ -5,6 +5,7 @@
 extern "C"
 {
 #endif
+
     /* ========================================================================== **
      *
      *                                    MD5.h
@@ -87,18 +88,17 @@ extern "C"
 
     typedef struct
     {
-        unsigned int len;
-        unsigned int ABCD[4];
-        int      b_used;
-        unsigned char    block[64];
+            unsigned int len;
+            unsigned int ABCD[4];
+            int b_used;
+            unsigned char block[64];
     } auth_md5Ctx;
-
 
     /* -------------------------------------------------------------------------- **
      * Functions:
      */
 
-    auth_md5Ctx *auth_md5InitCtx( auth_md5Ctx *ctx );
+    auth_md5Ctx *auth_md5InitCtx(auth_md5Ctx *ctx);
     /* ------------------------------------------------------------------------ **
      * Initialize an MD5 context.
      *
@@ -127,10 +127,7 @@ extern "C"
      * ------------------------------------------------------------------------ **
      */
 
-
-    auth_md5Ctx *auth_md5SumCtx( auth_md5Ctx *ctx,
-                                 const unsigned char *src,
-                                 const int    len );
+    auth_md5Ctx *auth_md5SumCtx(auth_md5Ctx *ctx, const unsigned char *src, const int len);
     /* ------------------------------------------------------------------------ **
      * Build an MD5 Message Digest within the given context.
      *
@@ -147,8 +144,7 @@ extern "C"
      * ------------------------------------------------------------------------ **
      */
 
-
-    auth_md5Ctx *auth_md5CloseCtx( auth_md5Ctx *ctx, unsigned char *dst );
+    auth_md5Ctx *auth_md5CloseCtx(auth_md5Ctx *ctx, unsigned char *dst);
     /* ------------------------------------------------------------------------ **
      * Close an MD5 Message Digest context and generate the final MD5 sum.
      *
@@ -168,8 +164,7 @@ extern "C"
      * ------------------------------------------------------------------------ **
      */
 
-
-    unsigned char * MD5( unsigned char * hash, const unsigned char *src, const int len );
+    unsigned char * MD5(unsigned char * hash, const unsigned char *src, const int len);
     /* ------------------------------------------------------------------------ **
      * Compute an MD5 message digest.
      *
@@ -203,7 +198,7 @@ extern "C"
      * ------------------------------------------------------------------------ **
      */
 
-    unsigned char * MD5fromFile( unsigned char *dst, const char *src );
+    unsigned char * MD5fromFile(unsigned char *dst, const char *src);
     /* ------------------------------------------------------------------------ **
      * Compute an MD5 message digest.
      *
@@ -235,10 +230,10 @@ extern "C"
      * ------------------------------------------------------------------------ **
      */
 
-    const char * MD5ToString( const unsigned char *hash, char *dst );
-    unsigned char * StringToMD5( const char * hash, unsigned char * dst );
+    const char * MD5ToString(const unsigned char *hash, char *dst);
+    unsigned char * StringToMD5(const char * hash, unsigned char * dst);
 
-    /* ========================================================================== */
+/* ========================================================================== */
 
 #ifdef __cplusplus
 }

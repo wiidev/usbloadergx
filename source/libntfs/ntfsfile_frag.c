@@ -54,18 +54,18 @@ void ntfsCloseFile ( ntfs_file_state *file )
 {
     // Sanity check
     if ( !file || !file->vd )
-        return;
+    return;
 
     // Special case fix ups for compressed and/or encrypted files
     if ( file->compressed )
-        ntfs_attr_pclose( file->data_na );
+    ntfs_attr_pclose( file->data_na );
 #ifdef HAVE_SETXATTR
     if ( file->encrypted )
-        ntfs_efs_fixup_attribute( NULL, file->data_na );
+    ntfs_efs_fixup_attribute( NULL, file->data_na );
 #endif
     // Close the file data attribute (if open)
     if ( file->data_na )
-        ntfs_attr_close( file->data_na );
+    ntfs_attr_close( file->data_na );
 
     // Sync the file (and its attributes) to disc
     if ( file->write )
@@ -75,11 +75,11 @@ void ntfsCloseFile ( ntfs_file_state *file )
     }
 
     if ( file->read )
-        ntfsUpdateTimes( file->vd, file->ni, NTFS_UPDATE_ATIME );
+    ntfsUpdateTimes( file->vd, file->ni, NTFS_UPDATE_ATIME );
 
     // Close the file (if open)
     if ( file->ni )
-        ntfsCloseEntry( file->vd, file->ni );
+    ntfsCloseEntry( file->vd, file->ni );
 
     // Reset the file state
     file->ni = NULL;
@@ -276,11 +276,11 @@ int ntfs_close_r ( struct _reent *r, int fd )
     // Remove the file from the double-linked FILO list of open files
     file->vd->openFileCount--;
     if ( file->nextOpenFile )
-        file->nextOpenFile->prevOpenFile = file->prevOpenFile;
+    file->nextOpenFile->prevOpenFile = file->prevOpenFile;
     if ( file->prevOpenFile )
-        file->prevOpenFile->nextOpenFile = file->nextOpenFile;
+    file->prevOpenFile->nextOpenFile = file->nextOpenFile;
     else
-        file->vd->firstOpenFile = file->nextOpenFile;
+    file->vd->firstOpenFile = file->nextOpenFile;
 
     // Unlock
     ntfsUnlock( file->vd );
@@ -350,7 +350,7 @@ ssize_t ntfs_write_r ( struct _reent *r, int fd, const char *ptr, size_t len )
 
     // Mark the file for archiving (if we actually wrote something)
     if ( written )
-        file->ni->flags |= FILE_ATTR_ARCHIVE;
+    file->ni->flags |= FILE_ATTR_ARCHIVE;
 
     // Update the files data length
     file->len = file->data_na->data_size;
@@ -363,11 +363,10 @@ ssize_t ntfs_write_r ( struct _reent *r, int fd, const char *ptr, size_t len )
 
 #endif
 
-s64 ntfs_attr_getfragments( ntfs_attr *na, const s64 pos, s64 count, u64 offset,
-                            _ntfs_frag_append_t append_fragment, void *callback_data );
+s64 ntfs_attr_getfragments(ntfs_attr *na, const s64 pos, s64 count, u64 offset, _ntfs_frag_append_t append_fragment,
+        void *callback_data);
 
-int _NTFS_get_fragments ( const char *path,
-                          _ntfs_frag_append_t append_fragment, void *callback_data )
+int _NTFS_get_fragments(const char *path, _ntfs_frag_append_t append_fragment, void *callback_data)
 {
     struct _reent r;
     ntfs_file_state file_st, *file = &file_st;
@@ -376,59 +375,54 @@ int _NTFS_get_fragments ( const char *path,
 
     // Open File
     r._errno = 0;
-    int fd = ntfs_open_r( &r, file, path, O_RDONLY, 0 );
-    if ( fd != ( int )file ) return -12;
-
-
-
-
+    int fd = ntfs_open_r(&r, file, path, O_RDONLY, 0);
+    if (fd != (int) file) return -12;
 
     // Sanity check
-    if ( !file || !file->vd || !file->ni || !file->data_na )
+    if (!file || !file->vd || !file->ni || !file->data_na)
     {
         //r->_errno = EINVAL;
         return -13;
     }
     /*
-    // Short circuit cases where we don't actually have to do anything
-    if (!ptr || len <= 0) {
-        return 0;
-    }
-    */
+     // Short circuit cases where we don't actually have to do anything
+     if (!ptr || len <= 0) {
+     return 0;
+     }
+     */
 
     // Lock
-    ntfsLock( file->vd );
+    ntfsLock(file->vd);
 
     /*
-    // Check that we are allowed to read from this file
-    if (!file->read) {
-        ntfsUnlock(file->vd);
-        r->_errno = EACCES;
-        return -1;
-    }
+     // Check that we are allowed to read from this file
+     if (!file->read) {
+     ntfsUnlock(file->vd);
+     r->_errno = EACCES;
+     return -1;
+     }
 
-    // Don't read past the end of file
-    if (file->pos + len > file->len) {
-        r->_errno = EOVERFLOW;
-        len = file->len - file->pos;
-        ntfs_log_trace("EOVERFLOW");
-    }
-    */
+     // Don't read past the end of file
+     if (file->pos + len > file->len) {
+     r->_errno = EOVERFLOW;
+     len = file->len - file->pos;
+     ntfs_log_trace("EOVERFLOW");
+     }
+     */
 
     u64 offset = 0;
     u64 len = file->len;
 
     // Read from the files data attribute
-    while ( len )
+    while (len)
     {
-        s64 ret = ntfs_attr_getfragments( file->data_na, file->pos,
-                                          len, offset, append_fragment, callback_data );
-        if ( ret <= 0 || ret > len )
+        s64 ret = ntfs_attr_getfragments(file->data_na, file->pos, len, offset, append_fragment, callback_data);
+        if (ret <= 0 || ret > len)
         {
-            ntfsUnlock( file->vd );
+            ntfsUnlock(file->vd);
             //r->_errno = errno;
             ret_val = -14;
-            if ( ret < 0 ) ret_val = ret;
+            if (ret < 0) ret_val = ret;
             goto out;
         }
         offset += ret;
@@ -438,22 +432,22 @@ int _NTFS_get_fragments ( const char *path,
     }
 
     // set file size
-    append_fragment( callback_data, file->len >> 9, 0, 0 );
+    append_fragment(callback_data, file->len >> 9, 0, 0);
     // success
     ret_val = 0;
 
     /*
-    //ntfs_log_trace("file->pos: %d \n", (u32)file->pos);
-    // Update file times (if we actually read something)
-    if (read)
-        ntfsUpdateTimes(file->vd, file->ni, NTFS_UPDATE_ATIME);
-    */
+     //ntfs_log_trace("file->pos: %d \n", (u32)file->pos);
+     // Update file times (if we actually read something)
+     if (read)
+     ntfsUpdateTimes(file->vd, file->ni, NTFS_UPDATE_ATIME);
+     */
 
-out:
+    out:
     // Unlock
-    ntfsUnlock( file->vd );
+    ntfsUnlock(file->vd);
     // Close the file
-    ntfs_close_r ( &r, fd );
+    ntfs_close_r(&r, fd);
 
     return ret_val;
 }
@@ -506,12 +500,12 @@ int ntfs_fstat_r ( struct _reent *r, int fd, struct stat *st )
 
     // Short circuit cases were we don't actually have to do anything
     if ( !st )
-        return 0;
+    return 0;
 
     // Get the file stats
     ret = ntfsStat( file->vd, file->ni, st );
     if ( ret )
-        r->_errno = errno;
+    r->_errno = errno;
 
     return ret;
 }
@@ -573,11 +567,11 @@ int ntfs_ftruncate_r ( struct _reent *r, int fd, off_t len )
 
     // Mark the file for archiving (if we actually changed something)
     if ( file->len != file->data_na->data_size )
-        file->ni->flags |= FILE_ATTR_ARCHIVE;
+    file->ni->flags |= FILE_ATTR_ARCHIVE;
 
     // Update file times (if we actually changed something)
     if ( file->len != file->data_na->data_size )
-        ntfsUpdateTimes( file->vd, file->ni, NTFS_UPDATE_AMCTIME );
+    ntfsUpdateTimes( file->vd, file->ni, NTFS_UPDATE_AMCTIME );
 
     // Update the files data length
     file->len = file->data_na->data_size;
@@ -611,7 +605,7 @@ int ntfs_fsync_r ( struct _reent *r, int fd )
     // Sync the file (and its attributes) to disc
     ret = ntfsSync( file->vd, file->ni );
     if ( ret )
-        r->_errno = errno;
+    r->_errno = errno;
 
     // Unlock
     ntfsUnlock( file->vd );

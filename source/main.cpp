@@ -153,6 +153,6 @@ int main(int argc, char *argv[])
 
     gprintf("\n\tEnd of Main()");
     InitGUIThreads();
-    MainMenu(MENU_CHECK);
+    MainMenu( MENU_CHECK);
     return 0;
 }

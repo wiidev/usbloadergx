@@ -8,13 +8,13 @@
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
 
-  1. Redistributions of source code must retain the above copyright notice,
-     this list of conditions and the following disclaimer.
-  2. Redistributions in binary form must reproduce the above copyright notice,
-     this list of conditions and the following disclaimer in the documentation and/or
-     other materials provided with the distribution.
-  3. The name of the author may not be used to endorse or promote products derived
-     from this software without specific prior written permission.
+ 1. Redistributions of source code must retain the above copyright notice,
+ this list of conditions and the following disclaimer.
+ 2. Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation and/or
+ other materials provided with the distribution.
+ 3. The name of the author may not be used to endorse or promote products derived
+ from this software without specific prior written permission.
 
  THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY
@@ -25,7 +25,7 @@
  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
+ */
 
 #ifndef __PARTITION_H
 #define __PARTITION_H
@@ -38,53 +38,57 @@
 extern const char* DEVICE_NAME;
 
 // Filesystem type
-typedef enum {FS_UNKNOWN, FS_FAT12, FS_FAT16, FS_FAT32} FS_TYPE;
+typedef enum
+{
+    FS_UNKNOWN, FS_FAT12, FS_FAT16, FS_FAT32
+} FS_TYPE;
 
 typedef struct
 {
-    sec_t    fatStart;
-    uint32_t sectorsPerFat;
-    uint32_t lastCluster;
-    uint32_t firstFree;
+        sec_t fatStart;
+        uint32_t sectorsPerFat;
+        uint32_t lastCluster;
+        uint32_t firstFree;
 } FAT;
 
 typedef struct
 {
-    const DISC_INTERFACE* disc;
-    CACHE*                cache;
-    // Info about the partition
-    FS_TYPE               filesysType;
-    uint64_t              totalSize;
-    sec_t                 rootDirStart;
-    uint32_t              rootDirCluster;
-    uint32_t              numberOfSectors;
-    sec_t                 dataStart;
-    uint32_t              bytesPerSector;
-    uint32_t              sectorsPerCluster;
-    uint32_t              bytesPerCluster;
-    FAT                   fat;
-    // Values that may change after construction
-    uint32_t              cwdCluster;           // Current working directory cluster
-    int                   openFileCount;
-    struct _FILE_STRUCT*  firstOpenFile;        // The start of a linked list of files
-    mutex_t               lock;                 // A lock for partition operations
-    bool                  readOnly;             // If this is set, then do not try writing to the disc
+        const DISC_INTERFACE* disc;
+        CACHE* cache;
+        // Info about the partition
+        FS_TYPE filesysType;
+        uint64_t totalSize;
+        sec_t rootDirStart;
+        uint32_t rootDirCluster;
+        uint32_t numberOfSectors;
+        sec_t dataStart;
+        uint32_t bytesPerSector;
+        uint32_t sectorsPerCluster;
+        uint32_t bytesPerCluster;
+        FAT fat;
+        // Values that may change after construction
+        uint32_t cwdCluster; // Current working directory cluster
+        int openFileCount;
+        struct _FILE_STRUCT* firstOpenFile; // The start of a linked list of files
+        mutex_t lock; // A lock for partition operations
+        bool readOnly; // If this is set, then do not try writing to the disc
 } PARTITION;
 
 /*
-Mount the supplied device and return a pointer to the struct necessary to use it
-*/
-PARTITION* _FAT_partition_constructor ( const DISC_INTERFACE* disc, uint32_t cacheSize, uint32_t SectorsPerPage, sec_t startSector );
+ Mount the supplied device and return a pointer to the struct necessary to use it
+ */
+PARTITION* _FAT_partition_constructor(const DISC_INTERFACE* disc, uint32_t cacheSize, uint32_t SectorsPerPage,
+        sec_t startSector);
 
 /*
-Dismount the device and free all structures used.
-Will also attempt to synchronise all open files to disc.
-*/
-void _FAT_partition_destructor ( PARTITION* partition );
+ Dismount the device and free all structures used.
+ Will also attempt to synchronise all open files to disc.
+ */
+void _FAT_partition_destructor(PARTITION* partition);
 
 /*
-Return the partition specified in a path, as taken from the devoptab.
-*/
-PARTITION* _FAT_partition_getPartitionFromPath ( const char* path );
+ Return the partition specified in a path, as taken from the devoptab.
+ */
+PARTITION* _FAT_partition_getPartitionFromPath(const char* path);
 
 #endif // _PARTITION_H

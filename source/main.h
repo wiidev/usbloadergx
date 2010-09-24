@@ -10,7 +10,6 @@
 
 #include "FreeTypeGX.h"
 
-
 void DefaultSettings();
 extern FreeTypeGX *fontSystem;
 

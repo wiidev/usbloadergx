@@ -24,39 +24,38 @@ extern "C"
     extern char wbfs_fs_drive[16];
 
     /* Prototypes */
-    s32 WBFS_Init( u32 );
-    s32 WBFS_Open( void );
-    s32 WBFS_Format( u32, u32 );
-    s32 WBFS_GetCount( u32 * );
-    s32 WBFS_GetHeaders( struct discHdr *, u32, u32 );
-//    s32 __WBFS_ReadDVD(void *fp, u32 lba, u32 len, void *iobuf);
-    wbfs_t *GetHddInfo( void );
-    s32 WBFS_CheckGame( u8 * );
-    s32 WBFS_AddGame( void );
-    s32 WBFS_RemoveGame( u8 * );
-    s32 WBFS_GameSize( u8 *, f32 * );
-    bool WBFS_ShowFreeSpace( void );
-    s32 WBFS_DiskSpace( f32 *, f32 * );
-    s32 WBFS_RenameGame( u8 *, const void * );
-    s32 WBFS_ReIDGame( u8 *discid, const void *newID );
-    f32 WBFS_EstimeGameSize( void );
+    s32 WBFS_Init(u32);
+    s32 WBFS_Open(void);
+    s32 WBFS_Format(u32, u32);
+    s32 WBFS_GetCount(u32 *);
+    s32 WBFS_GetHeaders(struct discHdr *, u32, u32);
+    //    s32 __WBFS_ReadDVD(void *fp, u32 lba, u32 len, void *iobuf);
+    wbfs_t *GetHddInfo(void);
+    s32 WBFS_CheckGame(u8 *);
+    s32 WBFS_AddGame(void);
+    s32 WBFS_RemoveGame(u8 *);
+    s32 WBFS_GameSize(u8 *, f32 *);
+    bool WBFS_ShowFreeSpace(void);
+    s32 WBFS_DiskSpace(f32 *, f32 *);
+    s32 WBFS_RenameGame(u8 *, const void *);
+    s32 WBFS_ReIDGame(u8 *discid, const void *newID);
+    f32 WBFS_EstimeGameSize(void);
 
-    int WBFS_GetFragList( u8 *id );
+    int WBFS_GetFragList(u8 *id);
     /*
-        s32 __WBFS_ReadUSB(void *fp, u32 lba, u32 count, void *iobuf);
-        s32 __WBFS_WriteUSB(void *fp, u32 lba, u32 count, void *iobuf);
-    */
+     s32 __WBFS_ReadUSB(void *fp, u32 lba, u32 count, void *iobuf);
+     s32 __WBFS_WriteUSB(void *fp, u32 lba, u32 count, void *iobuf);
+     */
 
-    s32 WBFS_OpenPart( u32 part_fat, u32 part_idx, u32 part_lba, u32 part_size, char *partition );
-    s32 WBFS_OpenNamed( char *partition );
-    s32 WBFS_OpenLBA( u32 lba, u32 size );
-    wbfs_disc_t* WBFS_OpenDisc( u8 *discid );
-    void WBFS_CloseDisc( wbfs_disc_t *disc );
+    s32 WBFS_OpenPart(u32 part_fat, u32 part_idx, u32 part_lba, u32 part_size, char *partition);
+    s32 WBFS_OpenNamed(char *partition);
+    s32 WBFS_OpenLBA(u32 lba, u32 size);
+    wbfs_disc_t* WBFS_OpenDisc(u8 *discid);
+    void WBFS_CloseDisc(wbfs_disc_t *disc);
     bool WBFS_Close();
     bool WBFS_Mounted();
     bool WBFS_Selected();
     int MountWBFS();
-
 
 #ifdef __cplusplus
 }

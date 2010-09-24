@@ -32,34 +32,35 @@
 /**
  * ntfs_file_state - File state
  */
-typedef struct _ntfs_file_state {
-    ntfs_vd *vd;                            /* Volume this file belongs to */
-    ntfs_inode *ni;                         /* File descriptor */
-    ntfs_attr *data_na;                     /* File data descriptor */
-    int flags;                              /* Opening flags */
-    bool read;                              /* True if allowed to read from file */
-    bool write;                             /* True if allowed to write to file */
-    bool append;                            /* True if allowed to append to file */
-    bool compressed;                        /* True if file data is compressed */
-    bool encrypted;                         /* True if file data is encryted */
-    off_t pos;                              /* Current position within the file (in bytes) */
-    u64 len;                                /* Total length of the file (in bytes) */
-    struct _ntfs_file_state *prevOpenFile;  /* The previous entry in a double-linked FILO list of open files */
-    struct _ntfs_file_state *nextOpenFile;  /* The next entry in a double-linked FILO list of open files */
+typedef struct _ntfs_file_state
+{
+        ntfs_vd *vd; /* Volume this file belongs to */
+        ntfs_inode *ni; /* File descriptor */
+        ntfs_attr *data_na; /* File data descriptor */
+        int flags; /* Opening flags */
+        bool read; /* True if allowed to read from file */
+        bool write; /* True if allowed to write to file */
+        bool append; /* True if allowed to append to file */
+        bool compressed; /* True if file data is compressed */
+        bool encrypted; /* True if file data is encryted */
+        off_t pos; /* Current position within the file (in bytes) */
+        u64 len; /* Total length of the file (in bytes) */
+        struct _ntfs_file_state *prevOpenFile; /* The previous entry in a double-linked FILO list of open files */
+        struct _ntfs_file_state *nextOpenFile; /* The next entry in a double-linked FILO list of open files */
 } ntfs_file_state;
 
 /* File state routines */
-void ntfsCloseFile (ntfs_file_state *file);
+void ntfsCloseFile(ntfs_file_state *file);
 
 /* Gekko devoptab file routines for NTFS-based devices */
-extern int ntfs_open_r (struct _reent *r, void *fileStruct, const char *path, int flags, int mode);
-extern int ntfs_close_r (struct _reent *r, int fd);
-extern ssize_t ntfs_write_r (struct _reent *r, int fd, const char *ptr, size_t len);
-extern ssize_t ntfs_read_r (struct _reent *r, int fd, char *ptr, size_t len);
-extern off_t ntfs_seek_r (struct _reent *r, int fd, off_t pos, int dir);
-extern int ntfs_fstat_r (struct _reent *r, int fd, struct stat *st);
-extern int ntfs_ftruncate_r (struct _reent *r, int fd, off_t len);
-extern int ntfs_fsync_r (struct _reent *r, int fd);
+extern int ntfs_open_r(struct _reent *r, void *fileStruct, const char *path, int flags, int mode);
+extern int ntfs_close_r(struct _reent *r, int fd);
+extern ssize_t ntfs_write_r(struct _reent *r, int fd, const char *ptr, size_t len);
+extern ssize_t ntfs_read_r(struct _reent *r, int fd, char *ptr, size_t len);
+extern off_t ntfs_seek_r(struct _reent *r, int fd, off_t pos, int dir);
+extern int ntfs_fstat_r(struct _reent *r, int fd, struct stat *st);
+extern int ntfs_ftruncate_r(struct _reent *r, int fd, off_t len);
+extern int ntfs_fsync_r(struct _reent *r, int fd);
 
 #endif /* _NTFSFILE_H */
 

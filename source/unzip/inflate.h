@@ -1,4 +1,3 @@
-
 #ifndef _INFLATE_H
 #define _INFLATE_H
 
@@ -10,7 +9,7 @@ extern "C"
 {
 #endif
 
-    int inflateFile( FILE *source, FILE *dest );
+    int inflateFile(FILE *source, FILE *dest);
 
 #ifdef __cplusplus
 }

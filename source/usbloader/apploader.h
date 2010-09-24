@@ -7,11 +7,12 @@ extern "C"
 #endif
 
     /* Entry point */
-typedef void ( *entry_point )( void );
+    typedef void (*entry_point)(void);
 
     /* Prototypes */
-s32 Apploader_Run( entry_point *entry, char * dolpath, u8 cheat, u8 videoSelected, u8 vipatch, u8 patchcountrystring, u8 error002fix, u8 alternatedol, u32 alternatedoloffset, u32 returnTo );
-void gamepatches( u8 * dst, int len, u8 videoSelected, u8 patchcountrystring, u8 vipatch, u8 cheat );
+    s32 Apploader_Run(entry_point *entry, char * dolpath, u8 cheat, u8 videoSelected, u8 vipatch,
+            u8 patchcountrystring, u8 error002fix, u8 alternatedol, u32 alternatedoloffset, u32 returnTo);
+    void gamepatches(u8 * dst, int len, u8 videoSelected, u8 patchcountrystring, u8 vipatch, u8 cheat);
 
 #ifdef __cplusplus
 }

@@ -41,31 +41,29 @@ static int curDevice = -1;
 static std::vector<BROWSERINFO> browsers;
 BROWSERINFO *browser = NULL;
 
-
-
 /****************************************************************************
  * FileFilterCallbacks
  * return: 1-visible 0-hidden
  ***************************************************************************/
-int noDIRS( BROWSERENTRY *Entry, void* Args )
+int noDIRS(BROWSERENTRY *Entry, void* Args)
 {
     return !Entry->isdir;
 }
-int noFILES( BROWSERENTRY *Entry, void* Args )
+int noFILES(BROWSERENTRY *Entry, void* Args)
 {
     return Entry->isdir;
 }
-int noEXT( BROWSERENTRY *Entry, void* Args )
+int noEXT(BROWSERENTRY *Entry, void* Args)
 {
-    if ( !Entry->isdir )
+    if (!Entry->isdir)
     {
-        char *cptr = strrchr( Entry->displayname, '.' );
-        if ( cptr && cptr != Entry->displayname ) *cptr = 0;
+        char *cptr = strrchr(Entry->displayname, '.');
+        if (cptr && cptr != Entry->displayname) *cptr = 0;
     }
     return 1;
 }
 
-void ResetBrowser( BROWSERINFO *browser );
+void ResetBrowser(BROWSERINFO *browser);
 /****************************************************************************
  * InitBrowsers()
  * Clears the file browser memory, and allocates one initial entry
@@ -76,23 +74,23 @@ int InitBrowsers()
     browsers.clear();
     browser = NULL;
     char rootdir[ROOTDIRLEN];
-    for ( int i = 3; i < STD_MAX; i++ )
+    for (int i = 3; i < STD_MAX; i++)
     {
-        if ( strcmp( devoptab_list[i]->name, "stdnull" ) && devoptab_list[i]->write_r != NULL )
+        if (strcmp(devoptab_list[i]->name, "stdnull") && devoptab_list[i]->write_r != NULL)
         {
-            snprintf( rootdir, sizeof( rootdir ) , "%s:/", devoptab_list[i]->name );
+            snprintf(rootdir, sizeof(rootdir), "%s:/", devoptab_list[i]->name);
             if ( DIR_ITER *dir = diropen( rootdir ) )
             {
-                dirclose( dir );
+                dirclose(dir);
                 BROWSERINFO browser;
                 browser.dir[0] = '\0';
-                strcpy( browser.rootdir, rootdir );
-                ResetBrowser( &browser );
-                browsers.push_back( browser );
+                strcpy(browser.rootdir, rootdir);
+                ResetBrowser(&browser);
+                browsers.push_back(browser);
             }
         }
     }
-    if ( !browsers.size() ) return -1;
+    if (!browsers.size()) return -1;
     curDevice = 0;
     browser = &browsers[curDevice];
     return 0;
@@ -101,21 +99,21 @@ int InitBrowsers()
  * ResetBrowser()
  * Clears the file browser memory, and allocates one initial entry
  ***************************************************************************/
-void ResetBrowser( BROWSERINFO *browser )
+void ResetBrowser(BROWSERINFO *browser)
 {
-    browser->pageIndex      = 0;
+    browser->pageIndex = 0;
     browser->browserList.clear();
     /*
-        // Clear any existing values
-        if (browser->browserList != NULL) {
-            free(browser->browserList);
-            browser->browserList = NULL;
-        }
-        // set aside space for 1 entry
-        browser->browserList = (BROWSERENTRY *)malloc(sizeof(BROWSERENTRY));
-        if(browser->browserList)
-            memset(browser->browserList, 0, sizeof(BROWSERENTRY));
-    */
+     // Clear any existing values
+     if (browser->browserList != NULL) {
+     free(browser->browserList);
+     browser->browserList = NULL;
+     }
+     // set aside space for 1 entry
+     browser->browserList = (BROWSERENTRY *)malloc(sizeof(BROWSERENTRY));
+     if(browser->browserList)
+     memset(browser->browserList, 0, sizeof(BROWSERENTRY));
+     */
 }
 
 /****************************************************************************
@@ -128,42 +126,41 @@ void ResetBrowser( BROWSERINFO *browser )
  *   <files>
  ***************************************************************************/
 //int FileSortCallback(const void *f1, const void *f2) {
-bool operator< ( const BROWSERENTRY &f1, const BROWSERENTRY &f2 )
+bool operator<(const BROWSERENTRY &f1, const BROWSERENTRY &f2)
 {
     /* Special case for implicit directories */
-    if ( f1.filename[0] == '.' || f2.filename[0] == '.' )
+    if (f1.filename[0] == '.' || f2.filename[0] == '.')
     {
-        if ( strcmp( f1.filename, "." ) == 0 )
+        if (strcmp(f1.filename, ".") == 0)
         {
             return true;
         }
-        if ( strcmp( f2.filename, "." ) == 0 )
+        if (strcmp(f2.filename, ".") == 0)
         {
             return false;
         }
-        if ( strcmp( f1.filename, ".." ) == 0 )
+        if (strcmp(f1.filename, "..") == 0)
         {
             return true;
         }
-        if ( strcmp( f2.filename, ".." ) == 0 )
+        if (strcmp(f2.filename, "..") == 0)
         {
             return false;
         }
     }
 
     /* If one is a file and one is a directory the directory is first. */
-    if ( f1.isdir && !( f2.isdir ) ) return true;
-    if ( !( f1.isdir ) && f2.isdir ) return false;
+    if (f1.isdir && !(f2.isdir)) return true;
+    if (!(f1.isdir) && f2.isdir) return false;
 
-    return stricmp( f1.filename, f2.filename ) < 0;
+    return stricmp(f1.filename, f2.filename) < 0;
 }
 
-int ParseFilter( FILTERCASCADE *Filter, BROWSERENTRY* Entry )
+int ParseFilter(FILTERCASCADE *Filter, BROWSERENTRY* Entry)
 {
-    while ( Filter )
+    while (Filter)
     {
-        if ( Filter->filter && Filter->filter( Entry, Filter->filter_args ) == 0 )
-            return 0;
+        if (Filter->filter && Filter->filter(Entry, Filter->filter_args) == 0) return 0;
         Filter = Filter->next;
     }
     return 1;
@@ -171,7 +168,7 @@ int ParseFilter( FILTERCASCADE *Filter, BROWSERENTRY* Entry )
 /***************************************************************************
  * Browse subdirectories
  **************************************************************************/
-int ParseDirectory( const char* Path, int Flags, FILTERCASCADE *Filter )
+int ParseDirectory(const char* Path, int Flags, FILTERCASCADE *Filter)
 {
     DIR_ITER *dir = NULL;
     char fulldir[MAXPATHLEN];
@@ -179,107 +176,101 @@ int ParseDirectory( const char* Path, int Flags, FILTERCASCADE *Filter )
     struct stat filestat;
     unsigned int i;
 
-    if ( curDevice == -1 )
-        if ( InitBrowsers() ) return -1;                            // InitBrowser fails
+    if (curDevice == -1) if (InitBrowsers()) return -1; // InitBrowser fails
 
-    if ( Path ) // note in this codeblock use filename temporary
+    if (Path) // note in this codeblock use filename temporary
     {
-        strlcpy( fulldir, Path, sizeof( fulldir ) );
-        if ( *fulldir && fulldir[strlen( fulldir )-1] != '/' )      // a file
+        strlcpy(fulldir, Path, sizeof(fulldir));
+        if (*fulldir && fulldir[strlen(fulldir) - 1] != '/') // a file
         {
-            char * chrp = strrchr( fulldir, '/' );
-            if ( chrp ) chrp[1] = 0;
+            char * chrp = strrchr(fulldir, '/');
+            if (chrp) chrp[1] = 0;
         }
-        if ( strchr( fulldir, ':' ) == NULL )                       // Path has no device device
+        if (strchr(fulldir, ':') == NULL) // Path has no device device
         {
-            getcwd( filename, sizeof( filename ) );             // save the current working dir
-            if ( *fulldir == 0 )                                    // if path is empty
-                strlcpy( fulldir, filename, sizeof( fulldir ) );    //  we use the current working dir
+            getcwd(filename, sizeof(filename)); // save the current working dir
+            if (*fulldir == 0) // if path is empty
+                strlcpy(fulldir, filename, sizeof(fulldir)); //  we use the current working dir
             else
-            {                                                                   // path is not empty
-                if ( chdir( fulldir ) );                                    // sets the path to concatenate and validate
+            { // path is not empty
+                if (chdir(fulldir)) ; // sets the path to concatenate and validate
                 {
-                    if ( Flags & ( FB_TRYROOTDIR | FB_TRYSTDDEV ) )
-                        if ( chdir( "/" ) && !( Flags & FB_TRYSTDDEV ) )// try to set root if is needed
-                            return -1;
+                    if (Flags & (FB_TRYROOTDIR | FB_TRYSTDDEV)) if (chdir("/") && !(Flags & FB_TRYSTDDEV)) // try to set root if is needed
+                    return -1;
                 }
-                if ( getcwd( fulldir, sizeof( fulldir ) ) ) return -1; // gets the concatenated current working dir
-                chdir( filename );                                          // restore the saved cwd
+                if (getcwd(fulldir, sizeof(fulldir))) return -1; // gets the concatenated current working dir
+                chdir(filename); // restore the saved cwd
             }
         }
-        for ( i = 0; i < browsers.size(); i++ )                 // searchs the browser who match the path
+        for (i = 0; i < browsers.size(); i++) // searchs the browser who match the path
         {
-            if ( strnicmp( fulldir, browsers[i].rootdir, strlen( browsers[i].rootdir ) - 1 /*means without trailing '/'*/ ) == 0 )
+            if (strnicmp(fulldir, browsers[i].rootdir, strlen(browsers[i].rootdir) - 1 /*means without trailing '/'*/)
+                    == 0)
             {
                 browser = &browsers[curDevice];
                 break;
             }
         }
-        if ( i != browsers.size() )                                 // found browser
+        if (i != browsers.size()) // found browser
         {
             curDevice = i;
             browser = &browsers[curDevice];
-            strcpy( browser->dir, &fulldir[strlen( browser->rootdir )] );
+            strcpy(browser->dir, &fulldir[strlen(browser->rootdir)]);
         }
-        else if ( Flags & FB_TRYSTDDEV )
+        else if (Flags & FB_TRYSTDDEV)
         {
             curDevice = 0;
-            browser = &browsers[curDevice];                                 // when no browser was found and
-            browser->dir[0] = 0;                                                // we alowed try StdDevice and try RootDir
-            strlcpy( fulldir, browser->rootdir, sizeof( fulldir ) ); // set the first browser with root-dir
+            browser = &browsers[curDevice]; // when no browser was found and
+            browser->dir[0] = 0; // we alowed try StdDevice and try RootDir
+            strlcpy(fulldir, browser->rootdir, sizeof(fulldir)); // set the first browser with root-dir
         }
-        else
-            return -1;
+        else return -1;
     }
-    else
-        snprintf( fulldir, sizeof( fulldir ), "%s%s", browser->rootdir, browser->dir );
+    else snprintf(fulldir, sizeof(fulldir), "%s%s", browser->rootdir, browser->dir);
 
     // reset browser
-    ResetBrowser( browser );
+    ResetBrowser(browser);
 
     // open the directory
-    if ( ( dir = diropen( fulldir ) ) == NULL )
+    if ((dir = diropen(fulldir)) == NULL)
     {
-        if ( Flags & FB_TRYROOTDIR )
+        if (Flags & FB_TRYROOTDIR)
         {
             browser->dir[0] = 0;
-            if ( ( dir = diropen( browser->rootdir ) ) == NULL )
-                return -1;
+            if ((dir = diropen(browser->rootdir)) == NULL) return -1;
         }
-        else
-            return -1;
+        else return -1;
     }
 
-    while ( dirnext( dir, filename, &filestat ) == 0 )
+    while (dirnext(dir, filename, &filestat) == 0)
     {
-        if ( strcmp( filename, "." ) != 0 )
+        if (strcmp(filename, ".") != 0)
         {
             BROWSERENTRY newEntry;
-            memset( &newEntry, 0, sizeof( BROWSERENTRY ) ); // clear the new entry
-            strlcpy( newEntry.filename, filename, sizeof( newEntry.filename ) );
-            strlcpy( newEntry.displayname, filename, sizeof( newEntry.displayname ) );
+            memset(&newEntry, 0, sizeof(BROWSERENTRY)); // clear the new entry
+            strlcpy(newEntry.filename, filename, sizeof(newEntry.filename));
+            strlcpy(newEntry.displayname, filename, sizeof(newEntry.displayname));
             newEntry.length = filestat.st_size;
-            newEntry.isdir = ( filestat.st_mode & S_IFDIR ) == 0 ? 0 : 1; // flag this as a dir
-            if ( ParseFilter( Filter, &newEntry ) )
-                browser->browserList.push_back( newEntry );
+            newEntry.isdir = (filestat.st_mode & S_IFDIR) == 0 ? 0 : 1; // flag this as a dir
+            if (ParseFilter(Filter, &newEntry)) browser->browserList.push_back(newEntry);
         }
     }
 
     // close directory
-    dirclose( dir );
+    dirclose(dir);
 
     // Sort the file list
-    std::sort( browser->browserList.begin(), browser->browserList.end() );
+    std::sort(browser->browserList.begin(), browser->browserList.end());
     return 0;
 }
-int ParseDirectory( int Device, int Flags, FILTERCASCADE *Filter )
+int ParseDirectory(int Device, int Flags, FILTERCASCADE *Filter)
 {
-    if ( Device >= 0 && Device < ( int )browsers.size() )
+    if (Device >= 0 && Device < (int) browsers.size())
     {
         int old_curDevice = curDevice;
         curDevice = Device;
         browser = &browsers[curDevice];
-        if ( ParseDirectory( ( char* )NULL, Flags, Filter ) == 0 ) return 0;
+        if (ParseDirectory((char*) NULL, Flags, Filter) == 0) return 0;
         curDevice = old_curDevice;
         browser = &browsers[old_curDevice];
     }
@@ -291,255 +282,257 @@ int ParseDirectory( int Device, int Flags, FILTERCASCADE *Filter )
  * Displays a list of files on the selected path
  ***************************************************************************/
 
-int BrowseDevice( char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=NULL*/ )
+int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=NULL*/)
 {
     int result = -1;
     int i;
 
-    if ( InitBrowsers() || ParseDirectory( Path, Flags, Filter ) )
+    if (InitBrowsers() || ParseDirectory(Path, Flags, Filter))
     {
-        WindowPrompt( tr( "Error" ), 0, tr( "OK" ) );
+        WindowPrompt(tr( "Error" ), 0, tr( "OK" ));
         return -1;
     }
     int menu = MENU_NONE;
 
     /*
-        GuiText titleTxt("Browse Files", 28, (GXColor){0, 0, 0, 230});
-        titleTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-        titleTxt.SetPosition(70,20);
-    */
+     GuiText titleTxt("Browse Files", 28, (GXColor){0, 0, 0, 230});
+     titleTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+     titleTxt.SetPosition(70,20);
+     */
     GuiTrigger trigA;
-    trigA.SetSimpleTrigger( -1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A );
+    trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
     GuiTrigger trigB;
-    trigB.SetButtonOnlyTrigger( -1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B );
+    trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 
-    GuiSound btnSoundOver( button_over_pcm, button_over_pcm_size, Settings.sfxvolume );
+    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
     // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if ( !btnClick2 ) btnClick2 = new GuiSound( button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume );
+    if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
     //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
-    GuiImageData folderImgData( icon_folder_png );
-    GuiImage folderImg( &folderImgData );
-    GuiButton folderBtn( folderImg.GetWidth(), folderImg.GetHeight() );
-    folderBtn.SetAlignment( ALIGN_CENTRE, ALIGN_MIDDLE );
-    folderBtn.SetPosition( -210, -145 );
-    folderBtn.SetImage( &folderImg );
-    folderBtn.SetTrigger( &trigA );
+    GuiImageData folderImgData(icon_folder_png);
+    GuiImage folderImg(&folderImgData);
+    GuiButton folderBtn(folderImg.GetWidth(), folderImg.GetHeight());
+    folderBtn.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
+    folderBtn.SetPosition(-210, -145);
+    folderBtn.SetImage(&folderImg);
+    folderBtn.SetTrigger(&trigA);
     folderBtn.SetEffectGrow();
 
     char imgPath[100];
-    snprintf( imgPath, sizeof( imgPath ), "%sbutton_dialogue_box.png", Settings.theme_path );
-    GuiImageData btnOutline( imgPath, button_dialogue_box_png );
-    GuiText ExitBtnTxt( tr( "Cancel" ), 24, ( GXColor ) {0, 0, 0, 255} );
-    GuiImage ExitBtnImg( &btnOutline );
-    if ( Settings.wsprompt == yes )
+    snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", Settings.theme_path);
+    GuiImageData btnOutline(imgPath, button_dialogue_box_png);
+    GuiText ExitBtnTxt(tr( "Cancel" ), 24, ( GXColor )
+    {   0, 0, 0, 255});
+    GuiImage ExitBtnImg(&btnOutline);
+    if (Settings.wsprompt == yes)
     {
-        ExitBtnTxt.SetWidescreen( Settings.widescreen );
-        ExitBtnImg.SetWidescreen( Settings.widescreen );
+        ExitBtnTxt.SetWidescreen(Settings.widescreen);
+        ExitBtnImg.SetWidescreen(Settings.widescreen);
     }
-    GuiButton ExitBtn( btnOutline.GetWidth(), btnOutline.GetHeight() );
-    ExitBtn.SetAlignment( ALIGN_RIGHT, ALIGN_BOTTOM );
-    ExitBtn.SetPosition( -40, -35 );
-    ExitBtn.SetLabel( &ExitBtnTxt );
-    ExitBtn.SetImage( &ExitBtnImg );
-    ExitBtn.SetTrigger( &trigA );
-    ExitBtn.SetTrigger( &trigB );
+    GuiButton ExitBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
+    ExitBtn.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
+    ExitBtn.SetPosition(-40, -35);
+    ExitBtn.SetLabel(&ExitBtnTxt);
+    ExitBtn.SetImage(&ExitBtnImg);
+    ExitBtn.SetTrigger(&trigA);
+    ExitBtn.SetTrigger(&trigB);
     ExitBtn.SetEffectGrow();
 
-    GuiText usbBtnTxt( browsers[( curDevice+1 )%browsers.size()].rootdir, 24, ( GXColor ) {0, 0, 0, 255} );
-    GuiImage usbBtnImg( &btnOutline );
-    if ( Settings.wsprompt == yes )
+    GuiText usbBtnTxt(browsers[(curDevice + 1) % browsers.size()].rootdir, 24, ( GXColor )
+    {   0, 0, 0, 255});
+    GuiImage usbBtnImg(&btnOutline);
+    if (Settings.wsprompt == yes)
     {
-        usbBtnTxt.SetWidescreen( Settings.widescreen );
-        usbBtnImg.SetWidescreen( Settings.widescreen );
+        usbBtnTxt.SetWidescreen(Settings.widescreen);
+        usbBtnImg.SetWidescreen(Settings.widescreen);
     }
-    GuiButton usbBtn( btnOutline.GetWidth(), btnOutline.GetHeight() );
-    usbBtn.SetAlignment( ALIGN_CENTRE, ALIGN_BOTTOM );
-    usbBtn.SetPosition( 0, -35 );
-    usbBtn.SetLabel( &usbBtnTxt );
-    usbBtn.SetImage( &usbBtnImg );
-    usbBtn.SetTrigger( &trigA );
+    GuiButton usbBtn(btnOutline.GetWidth(), btnOutline.GetHeight());
+    usbBtn.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
+    usbBtn.SetPosition(0, -35);
+    usbBtn.SetLabel(&usbBtnTxt);
+    usbBtn.SetImage(&usbBtnImg);
+    usbBtn.SetTrigger(&trigA);
     usbBtn.SetEffectGrow();
 
-    GuiText okBtnTxt( tr( "OK" ), 22, THEME.prompttext );
-    GuiImage okBtnImg( &btnOutline );
-    if ( Settings.wsprompt == yes )
+    GuiText okBtnTxt(tr( "OK" ), 22, THEME.prompttext);
+    GuiImage okBtnImg(&btnOutline);
+    if (Settings.wsprompt == yes)
     {
-        okBtnTxt.SetWidescreen( Settings.widescreen );
-        okBtnImg.SetWidescreen( Settings.widescreen );
+        okBtnTxt.SetWidescreen(Settings.widescreen);
+        okBtnImg.SetWidescreen(Settings.widescreen);
     }
-    GuiButton okBtn( &okBtnImg, &okBtnImg, 0, 4, 40, -35, &trigA, &btnSoundOver, btnClick2, 1 );
-    okBtn.SetLabel( &okBtnTxt );
+    GuiButton okBtn(&okBtnImg, &okBtnImg, 0, 4, 40, -35, &trigA, &btnSoundOver, btnClick2, 1);
+    okBtn.SetLabel(&okBtnTxt);
 
-    GuiFileBrowser fileBrowser( 396, 248 );
-    fileBrowser.SetAlignment( ALIGN_CENTRE, ALIGN_TOP );
-    fileBrowser.SetPosition( 0, 120 );
+    GuiFileBrowser fileBrowser(396, 248);
+    fileBrowser.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+    fileBrowser.SetPosition(0, 120);
 
-    GuiImageData Address( addressbar_textbox_png );
-    GuiText AdressText( ( char* ) NULL, 20, ( GXColor ) { 0, 0, 0, 255} );
-    AdressText.SetTextf( "%s%s", browser->rootdir, browser->dir );
-    AdressText.SetAlignment( ALIGN_LEFT, ALIGN_MIDDLE );
-    AdressText.SetPosition( 20, 0 );
-    AdressText.SetMaxWidth( Address.GetWidth() - 40, SCROLL_HORIZONTAL );
-    GuiImage AdressbarImg( &Address );
-    GuiButton Adressbar( Address.GetWidth(), Address.GetHeight() );
-    Adressbar.SetAlignment( ALIGN_CENTRE, ALIGN_TOP );
-    Adressbar.SetPosition( 0, fileBrowser.GetTop() - 45 );
-    Adressbar.SetImage( &AdressbarImg );
-    Adressbar.SetLabel( &AdressText );
+    GuiImageData Address(addressbar_textbox_png);
+    GuiText AdressText((char*) NULL, 20, ( GXColor )
+    {   0, 0, 0, 255});
+    AdressText.SetTextf("%s%s", browser->rootdir, browser->dir);
+    AdressText.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
+    AdressText.SetPosition(20, 0);
+    AdressText.SetMaxWidth(Address.GetWidth() - 40, SCROLL_HORIZONTAL);
+    GuiImage AdressbarImg(&Address);
+    GuiButton Adressbar(Address.GetWidth(), Address.GetHeight());
+    Adressbar.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+    Adressbar.SetPosition(0, fileBrowser.GetTop() - 45);
+    Adressbar.SetImage(&AdressbarImg);
+    Adressbar.SetLabel(&AdressText);
 
     HaltGui();
-    GuiWindow w( screenwidth, screenheight );
-    w.Append( &ExitBtn );
-//  w.Append(&titleTxt);
-    w.Append( &fileBrowser );
-    w.Append( &Adressbar );
-    w.Append( &okBtn );
-    if ( !( Flags & FB_NOFOLDER_BTN ) )
-        w.Append( &folderBtn );
-    if ( browsers.size() > 1 && !( Flags & FB_NODEVICE_BTN ) )
-        w.Append( &usbBtn );
-    mainWindow->Append( &w );
+    GuiWindow w(screenwidth, screenheight);
+    w.Append(&ExitBtn);
+    //  w.Append(&titleTxt);
+    w.Append(&fileBrowser);
+    w.Append(&Adressbar);
+    w.Append(&okBtn);
+    if (!(Flags & FB_NOFOLDER_BTN)) w.Append(&folderBtn);
+    if (browsers.size() > 1 && !(Flags & FB_NODEVICE_BTN)) w.Append(&usbBtn);
+    mainWindow->Append(&w);
     ResumeGui();
     int clickedIndex = -1;
-    while ( menu == MENU_NONE )
+    while (menu == MENU_NONE)
     {
         VIDEO_WaitVSync();
 
-        if ( shutdown == 1 )
-            Sys_Shutdown();
+        if (shutdown == 1) Sys_Shutdown();
 
-        if ( reset == 1 )
-            Sys_Reboot();
+        if (reset == 1) Sys_Reboot();
 
-        for ( i = 0; i < FILEBROWSERSIZE; i++ )
+        for (i = 0; i < FILEBROWSERSIZE; i++)
         {
-            if ( fileBrowser.fileList[i]->GetState() == STATE_CLICKED )
+            if (fileBrowser.fileList[i]->GetState() == STATE_CLICKED)
             {
                 fileBrowser.fileList[i]->ResetState();
 
                 clickedIndex = browser->pageIndex + i;
                 bool pathCanged = false;
                 // check corresponding browser entry
-                if ( browser->browserList[clickedIndex].isdir )
+                if (browser->browserList[clickedIndex].isdir)
                 {
                     /* go up to parent directory */
-                    if ( strcmp( browser->browserList[clickedIndex].filename, ".." ) == 0 )
+                    if (strcmp(browser->browserList[clickedIndex].filename, "..") == 0)
                     {
                         /* remove last subdirectory name */
-                        int len = strlen( browser->dir );
-                        while ( browser->dir[0] && browser->dir[len-1] == '/' )
-                            browser->dir[--len] = '\0';                     // remove all trailing '/'
-                        char *cptr = strrchr( browser->dir, '/' );
-                        if ( cptr ) *++cptr = 0; else browser->dir[0] = '\0';   // remove trailing dir
+                        int len = strlen(browser->dir);
+                        while (browser->dir[0] && browser->dir[len - 1] == '/')
+                            browser->dir[--len] = '\0'; // remove all trailing '/'
+                        char *cptr = strrchr(browser->dir, '/');
+                        if (cptr)
+                            *++cptr = 0;
+                        else browser->dir[0] = '\0'; // remove trailing dir
                         pathCanged = true;
                     }
                     /* Open a directory */
                     /* current directory doesn't change */
-                    else if ( strcmp( browser->browserList[clickedIndex].filename, "." ) )
+                    else if (strcmp(browser->browserList[clickedIndex].filename, "."))
                     {
                         /* test new directory namelength */
-                        if ( ( strlen( browser->dir ) + strlen( browser->browserList[clickedIndex].filename )
-                                + 1/*'/'*/ ) < MAXPATHLEN )
+                        if ((strlen(browser->dir) + strlen(browser->browserList[clickedIndex].filename) + 1/*'/'*/)
+                                < MAXPATHLEN)
                         {
                             /* update current directory name */
-                            sprintf( browser->dir, "%s%s/", browser->dir,
-                                     browser->browserList[clickedIndex].filename );
+                            sprintf(browser->dir, "%s%s/", browser->dir, browser->browserList[clickedIndex].filename);
                             pathCanged = true;
                         }
                     }
-                    if ( pathCanged )
+                    if (pathCanged)
                     {
                         LOCK( &fileBrowser );
-                        ParseDirectory( ( char* )NULL, Flags, Filter );
+                        ParseDirectory((char*) NULL, Flags, Filter);
                         fileBrowser.ResetState();
                         fileBrowser.TriggerUpdate();
-                        AdressText.SetTextf( "%s%s", browser->rootdir, browser->dir );
+                        AdressText.SetTextf("%s%s", browser->rootdir, browser->dir);
                     }
                     clickedIndex = -1;
                 }
                 else /* isFile */
                 {
-                    AdressText.SetTextf( "%s%s%s", browser->rootdir, browser->dir, browser->browserList[clickedIndex].filename );
+                    AdressText.SetTextf("%s%s%s", browser->rootdir, browser->dir,
+                            browser->browserList[clickedIndex].filename);
                 }
             }
         }
 
-        if ( ExitBtn.GetState() == STATE_CLICKED )
+        if (ExitBtn.GetState() == STATE_CLICKED)
         {
             result = 0;
             break;
         }
-        else if ( okBtn.GetState() == STATE_CLICKED )
+        else if (okBtn.GetState() == STATE_CLICKED)
         {
-            if ( clickedIndex >= 0 )
-                snprintf( Path, Path_size, "%s%s%s", browser->rootdir, browser->dir, browser->browserList[clickedIndex].filename );
-            else
-                snprintf( Path, Path_size, "%s%s", browser->rootdir, browser->dir );
+            if (clickedIndex >= 0)
+                snprintf(Path, Path_size, "%s%s%s", browser->rootdir, browser->dir,
+                        browser->browserList[clickedIndex].filename);
+            else snprintf(Path, Path_size, "%s%s", browser->rootdir, browser->dir);
             result = 1;
             break;
         }
-        else if ( usbBtn.GetState() == STATE_CLICKED )
+        else if (usbBtn.GetState() == STATE_CLICKED)
         {
             usbBtn.ResetState();
-            for ( u32 i = 1; i < browsers.size(); i++ )
+            for (u32 i = 1; i < browsers.size(); i++)
             {
                 LOCK( &fileBrowser );
-                if ( ParseDirectory( ( curDevice + i ) % browsers.size(), Flags, Filter ) == 0 )
+                if (ParseDirectory((curDevice + i) % browsers.size(), Flags, Filter) == 0)
                 {
                     fileBrowser.ResetState();
                     fileBrowser.TriggerUpdate();
-                    AdressText.SetTextf( "%s%s", browser->rootdir, browser->dir );
-                    usbBtnTxt.SetText( browsers[( curDevice+1 )%browsers.size()].rootdir );
+                    AdressText.SetTextf("%s%s", browser->rootdir, browser->dir);
+                    usbBtnTxt.SetText(browsers[(curDevice + 1) % browsers.size()].rootdir);
                     break;
                 }
             }
         }
-        else if ( folderBtn.GetState() == STATE_CLICKED )
+        else if (folderBtn.GetState() == STATE_CLICKED)
         {
             folderBtn.ResetState();
 
             HaltGui();
-            mainWindow->Remove( &w );
+            mainWindow->Remove(&w);
             ResumeGui();
             char newfolder[100];
             char oldfolder[100];
-            snprintf( newfolder, sizeof( newfolder ), "%s%s", browser->rootdir, browser->dir );
-            strcpy( oldfolder, newfolder );
+            snprintf(newfolder, sizeof(newfolder), "%s%s", browser->rootdir, browser->dir);
+            strcpy(oldfolder, newfolder);
 
-            int result = OnScreenKeyboard( newfolder, sizeof( newfolder ), strlen( browser->rootdir ) );
-            if ( result == 1 )
+            int result = OnScreenKeyboard(newfolder, sizeof(newfolder), strlen(browser->rootdir));
+            if (result == 1)
             {
-                unsigned int len = strlen( newfolder );
-                if ( len > 0 && len + 1 < sizeof( newfolder ) && newfolder[len-1] != '/' )
+                unsigned int len = strlen(newfolder);
+                if (len > 0 && len + 1 < sizeof(newfolder) && newfolder[len - 1] != '/')
                 {
                     newfolder[len] = '/';
-                    newfolder[len+1] = '\0';
+                    newfolder[len + 1] = '\0';
                 }
 
                 struct stat st;
-                if ( stat( newfolder, &st ) != 0 )
+                if (stat(newfolder, &st) != 0)
                 {
-                    if ( WindowPrompt( tr( "Directory does not exist!" ), tr( "The entered directory does not exist. Would you like to create it?" ) , tr( "OK" ), tr( "Cancel" ) ) == 1 )
-                        if ( subfoldercreate( newfolder ) == false )
-                            WindowPrompt( tr( "Error !" ), tr( "Can't create directory" ), tr( "OK" ) );
+                    if (WindowPrompt(tr( "Directory does not exist!" ),
+                            tr( "The entered directory does not exist. Would you like to create it?" ),
+                            tr( "OK" ), tr( "Cancel" )) == 1) if (subfoldercreate(newfolder) == false) WindowPrompt(
+                            tr( "Error !" ), tr( "Can't create directory" ), tr( "OK" ));
                 }
-                if ( ParseDirectory( newfolder, Flags, Filter ) == 0 )
+                if (ParseDirectory(newfolder, Flags, Filter) == 0)
                 {
                     fileBrowser.ResetState();
                     fileBrowser.TriggerUpdate();
-                    AdressText.SetTextf( "%s%s", browser->rootdir, browser->dir );
-                    usbBtnTxt.SetText( browsers[( curDevice+1 )%browsers.size()].rootdir );
+                    AdressText.SetTextf("%s%s", browser->rootdir, browser->dir);
+                    usbBtnTxt.SetText(browsers[(curDevice + 1) % browsers.size()].rootdir);
                 }
             }
             HaltGui();
-            mainWindow->Append( &w );
+            mainWindow->Append(&w);
             ResumeGui();
         }
 
     }
     HaltGui();
-    mainWindow->Remove( &w );
+    mainWindow->Remove(&w);
     ResumeGui();
 
     //}
@@ -547,12 +540,12 @@ int BrowseDevice( char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*
     return result;
 }
 
-int BrowseDevice( char * Path, int Path_size, int Flags, FILEFILTERCALLBACK Filter, void *FilterArgs )
+int BrowseDevice(char * Path, int Path_size, int Flags, FILEFILTERCALLBACK Filter, void *FilterArgs)
 {
-    if ( Filter )
+    if (Filter)
     {
-        FILTERCASCADE filter = {Filter, FilterArgs, NULL};
-        return BrowseDevice( Path, Path_size, Flags, &filter );
+        FILTERCASCADE filter = { Filter, FilterArgs, NULL };
+        return BrowseDevice(Path, Path_size, Flags, &filter);
     }
-    return BrowseDevice( Path, Path_size,  Flags );
+    return BrowseDevice(Path, Path_size, Flags);
 }

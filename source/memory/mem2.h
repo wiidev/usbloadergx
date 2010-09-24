@@ -9,13 +9,13 @@ extern "C"
 {
 #endif
 
-    void MEM2_init( unsigned int mem2Size );
-    void MEM2_cleanup( void );
-    void MEM2_takeBigOnes( bool b );
-    void *MEM2_alloc( unsigned int s );
-    void *MEM2_realloc( void *p, unsigned int s );
-    void MEM2_free( void *p );
-    unsigned int MEM2_usableSize( void *p );
+    void MEM2_init(unsigned int mem2Size);
+    void MEM2_cleanup(void);
+    void MEM2_takeBigOnes(bool b);
+    void *MEM2_alloc(unsigned int s);
+    void *MEM2_realloc(void *p, unsigned int s);
+    void MEM2_free(void *p);
+    unsigned int MEM2_usableSize(void *p);
     unsigned int MEM2_freesize();
 
 #ifdef __cplusplus

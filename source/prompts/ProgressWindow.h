@@ -10,9 +10,9 @@
 
 void InitProgressThread();
 void ExitProgressThread();
-void SetupGameInstallProgress( char * titl, char * game );
-void ShowProgress ( const char *title, const char *msg1, char *dynmsg2,
-                    f32 done, f32 total, bool swSize = false, bool swTime = false );
+void SetupGameInstallProgress(char * titl, char * game);
+void ShowProgress(const char *title, const char *msg1, char *dynmsg2, f32 done, f32 total, bool swSize = false,
+        bool swTime = false);
 void ProgressStop();
 
 #ifdef __cplusplus
@@ -20,7 +20,7 @@ extern "C"
 {
 #endif
 
-    void ProgressCallback( s64 gameinstalldone, s64 gameinstalltotal );
+    void ProgressCallback(s64 gameinstalldone, s64 gameinstalltotal);
 
 #ifdef __cplusplus
 }

@@ -12,28 +12,25 @@
 
 enum
 {
-    ONCE = 0,
-    LOOP,
-    RANDOM_BGM,
-    DIR_LOOP
+    ONCE = 0, LOOP, RANDOM_BGM, DIR_LOOP
 };
 
-class GuiBGM : public GuiSound
+class GuiBGM: public GuiSound
 {
     public:
-        GuiBGM( const u8 *s, int l, int v );
+        GuiBGM(const u8 *s, int l, int v);
         ~GuiBGM();
-        bool Load( const char *path );
+        bool Load(const char *path);
         bool LoadStandard();
-        bool ParsePath( const char * folderpath );
+        bool ParsePath(const char * folderpath);
         bool PlayNext();
         bool PlayPrevious();
         bool PlayRandom();
-        void SetLoop( bool l );
-        void SetLoop( int l );
+        void SetLoop(bool l);
+        void SetLoop(int l);
         void UpdateState();
     protected:
-        void AddEntrie( const char * filename );
+        void AddEntrie(const char * filename);
         void ClearList();
 
         int currentPlaying;

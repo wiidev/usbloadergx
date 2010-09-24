@@ -39,12 +39,12 @@
 #include "compat.h"
 #else /* GEKKO */
 
-typedef uint8_t  u8;			/* Unsigned types of an exact size */
+typedef uint8_t u8; /* Unsigned types of an exact size */
 typedef uint16_t u16;
 typedef uint32_t u32;
 typedef uint64_t u64;
 
-typedef int8_t  s8;			/* Signed types of an exact size */
+typedef int8_t s8; /* Signed types of an exact size */
 typedef int16_t s16;
 typedef int32_t s32;
 typedef int64_t s64;
@@ -63,7 +63,7 @@ typedef u16 sle16;
 typedef u32 sle32;
 typedef u64 sle64;
 
-typedef u16 ntfschar;			/* 2-byte Unicode character type. */
+typedef u16 ntfschar; /* 2-byte Unicode character type. */
 #define UCHAR_T_SIZE_BITS 1
 
 /*
@@ -92,24 +92,25 @@ typedef sle64 leLSN;
 /**
  * enum BOOL - These are just to make the code more readable...
  */
-typedef enum {
+typedef enum
+{
 #ifndef FALSE
-	FALSE = 0,
+    FALSE = 0,
 #endif
 #ifndef NO
-	NO = 0,
+    NO = 0,
 #endif
 #ifndef ZERO
-	ZERO = 0,
+    ZERO = 0,
 #endif
 #ifndef TRUE
-	TRUE = 1,
+    TRUE = 1,
 #endif
 #ifndef YES
-	YES = 1,
+    YES = 1,
 #endif
 #ifndef ONE
-	ONE = 1,
+    ONE = 1,
 #endif
 } BOOL;
 #endif /* defined _WINDEF_H */
@@ -118,9 +119,9 @@ typedef enum {
 /**
  * enum IGNORE_CASE_BOOL -
  */
-typedef enum {
-	CASE_SENSITIVE = 0,
-	IGNORE_CASE = 1,
+typedef enum
+{
+    CASE_SENSITIVE = 0, IGNORE_CASE = 1,
 } IGNORE_CASE_BOOL;
 
 #define STATUS_OK				(0)

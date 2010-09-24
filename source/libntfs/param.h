@@ -31,23 +31,22 @@
 #define FORCE_FORMAT_v1x 0	/* Insert security data as in NTFS v1.x */
 #define OWNERFROMACL 1		/* Get the owner from ACL (not Windows owner) */
 
-		/* default security sub-authorities */
-enum {
-	DEFSECAUTH1 = -1153374643, /* 3141592653 */
-	DEFSECAUTH2 = 589793238,
-	DEFSECAUTH3 = 462843383,
-	DEFSECBASE = 10000
+/* default security sub-authorities */
+enum
+{
+    DEFSECAUTH1 = -1153374643, /* 3141592653 */
+    DEFSECAUTH2 = 589793238, DEFSECAUTH3 = 462843383, DEFSECBASE = 10000
 };
 
 /*
  *		Parameters for compression
  */
 
-	/* default option for compression */
+/* default option for compression */
 #define DEFAULT_COMPRESSION FALSE
-	/* (log2 of) number of clusters in a compression block for new files */
+/* (log2 of) number of clusters in a compression block for new files */
 #define STANDARD_COMPRESSION_UNIT 4
-	/* maximum cluster size for allowing compression for new files */
+/* maximum cluster size for allowing compression for new files */
 #define MAX_COMPRESSION_CLUSTER_SIZE 4096
 
 /*

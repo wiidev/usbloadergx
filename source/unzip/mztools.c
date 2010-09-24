@@ -1,8 +1,8 @@
 /*
-  Additional tools for Minizip
-  Code: Xavier Roche '2004
-  License: Same as ZLIB (www.gzip.org)
-*/
+ Additional tools for Minizip
+ Code: Xavier Roche '2004
+ License: Same as ZLIB (www.gzip.org)
+ */
 
 /* Code */
 #include <stdio.h>
@@ -27,18 +27,14 @@
   WRITE_16((unsigned char*)(buff) + 2, (n) >> 16); \
 } while(0)
 
-extern int ZEXPORT unzRepair( file, fileOut, fileOutTmp, nRecovered, bytesRecovered )
-const char* file;
-const char* fileOut;
-const char* fileOutTmp;
-uLong* nRecovered;
-uLong* bytesRecovered;
+extern int ZEXPORT unzRepair(file, fileOut, fileOutTmp, nRecovered, bytesRecovered)
+    const char* file;const char* fileOut;const char* fileOutTmp;uLong* nRecovered;uLong* bytesRecovered;
 {
     int err = Z_OK;
-    FILE* fpZip = fopen( file, "rb" );
-    FILE* fpOut = fopen( fileOut, "wb" );
-    FILE* fpOutCD = fopen( fileOutTmp, "wb" );
-    if ( fpZip != NULL &&  fpOut != NULL )
+    FILE* fpZip = fopen(file, "rb");
+    FILE* fpOut = fopen(fileOut, "wb");
+    FILE* fpOutCD = fopen(fileOutTmp, "wb");
+    if (fpZip != NULL && fpOut != NULL)
     {
         int entries = 0;
         uLong totalBytes = 0;
@@ -47,12 +43,12 @@ uLong* bytesRecovered;
         char extra[1024];
         int offset = 0;
         int offsetCD = 0;
-        while ( fread( header, 1, 30, fpZip ) == 30 )
+        while (fread(header, 1, 30, fpZip) == 30)
         {
             int currentOffset = offset;
 
             /* File entry */
-            if ( READ_32( header ) == 0x04034b50 )
+            if (READ_32( header ) == 0x04034b50)
             {
                 unsigned int version = READ_16( header + 4 );
                 unsigned int gpflag = READ_16( header + 6 );
@@ -67,7 +63,7 @@ uLong* bytesRecovered;
                 filename[0] = extra[0] = '\0';
 
                 /* Header */
-                if ( fwrite( header, 1, 30, fpOut ) == 30 )
+                if (fwrite(header, 1, 30, fpOut) == 30)
                 {
                     offset += 30;
                 }
@@ -78,11 +74,11 @@ uLong* bytesRecovered;
                 }
 
                 /* Filename */
-                if ( fnsize > 0 )
+                if (fnsize > 0)
                 {
-                    if ( fread( filename, 1, fnsize, fpZip ) == fnsize )
+                    if (fread(filename, 1, fnsize, fpZip) == fnsize)
                     {
-                        if ( fwrite( filename, 1, fnsize, fpOut ) == fnsize )
+                        if (fwrite(filename, 1, fnsize, fpOut) == fnsize)
                         {
                             offset += fnsize;
                         }
@@ -105,11 +101,11 @@ uLong* bytesRecovered;
                 }
 
                 /* Extra field */
-                if ( extsize > 0 )
+                if (extsize > 0)
                 {
-                    if ( fread( extra, 1, extsize, fpZip ) == extsize )
+                    if (fread(extra, 1, extsize, fpZip) == extsize)
                     {
-                        if ( fwrite( extra, 1, extsize, fpOut ) == extsize )
+                        if (fwrite(extra, 1, extsize, fpOut) == extsize)
                         {
                             offset += extsize;
                         }
@@ -129,18 +125,18 @@ uLong* bytesRecovered;
                 /* Data */
                 {
                     int dataSize = cpsize;
-                    if ( dataSize == 0 )
+                    if (dataSize == 0)
                     {
                         dataSize = uncpsize;
                     }
-                    if ( dataSize > 0 )
+                    if (dataSize > 0)
                     {
-                        char* data = malloc( dataSize );
-                        if ( data != NULL )
+                        char* data = malloc(dataSize);
+                        if (data != NULL)
                         {
-                            if ( ( int )fread( data, 1, dataSize, fpZip ) == dataSize )
+                            if ((int) fread(data, 1, dataSize, fpZip) == dataSize)
                             {
-                                if ( ( int )fwrite( data, 1, dataSize, fpOut ) == dataSize )
+                                if ((int) fwrite(data, 1, dataSize, fpOut) == dataSize)
                                 {
                                     offset += dataSize;
                                     totalBytes += dataSize;
@@ -154,8 +150,8 @@ uLong* bytesRecovered;
                             {
                                 err = Z_ERRNO;
                             }
-                            free( data );
-                            if ( err != Z_OK )
+                            free(data);
+                            if (err != Z_OK)
                             {
                                 break;
                             }
@@ -172,7 +168,7 @@ uLong* bytesRecovered;
                 {
                     char header[46];
                     char* comment = "";
-                    int comsize = ( int ) strlen( comment );
+                    int comsize = (int) strlen(comment);
                     WRITE_32( header, 0x02014b50 );
                     WRITE_16( header + 4, version );
                     WRITE_16( header + 6, version );
@@ -186,19 +182,19 @@ uLong* bytesRecovered;
                     WRITE_16( header + 28, fnsize );
                     WRITE_16( header + 30, extsize );
                     WRITE_16( header + 32, comsize );
-                    WRITE_16( header + 34, 0 );   /* disk # */
-                    WRITE_16( header + 36, 0 );   /* int attrb */
-                    WRITE_32( header + 38, 0 );   /* ext attrb */
+                    WRITE_16( header + 34, 0 ); /* disk # */
+                    WRITE_16( header + 36, 0 ); /* int attrb */
+                    WRITE_32( header + 38, 0 ); /* ext attrb */
                     WRITE_32( header + 42, currentOffset );
                     /* Header */
-                    if ( fwrite( header, 1, 46, fpOutCD ) == 46 )
+                    if (fwrite(header, 1, 46, fpOutCD) == 46)
                     {
                         offsetCD += 46;
 
                         /* Filename */
-                        if ( fnsize > 0 )
+                        if (fnsize > 0)
                         {
-                            if ( fwrite( filename, 1, fnsize, fpOutCD ) == fnsize )
+                            if (fwrite(filename, 1, fnsize, fpOutCD) == fnsize)
                             {
                                 offsetCD += fnsize;
                             }
@@ -215,9 +211,9 @@ uLong* bytesRecovered;
                         }
 
                         /* Extra field */
-                        if ( extsize > 0 )
+                        if (extsize > 0)
                         {
-                            if ( fwrite( extra, 1, extsize, fpOutCD ) == extsize )
+                            if (fwrite(extra, 1, extsize, fpOutCD) == extsize)
                             {
                                 offsetCD += extsize;
                             }
@@ -229,9 +225,9 @@ uLong* bytesRecovered;
                         }
 
                         /* Comment field */
-                        if ( comsize > 0 )
+                        if (comsize > 0)
                         {
-                            if ( ( int )fwrite( comment, 1, comsize, fpOutCD ) == comsize )
+                            if ((int) fwrite(comment, 1, comsize, fpOutCD) == comsize)
                             {
                                 offsetCD += comsize;
                             }
@@ -241,7 +237,6 @@ uLong* bytesRecovered;
                                 break;
                             }
                         }
-
 
                     }
                     else
@@ -266,28 +261,28 @@ uLong* bytesRecovered;
             int entriesZip = entries;
             char header[22];
             char* comment = ""; // "ZIP File recovered by zlib/minizip/mztools";
-            int comsize = ( int ) strlen( comment );
-            if ( entriesZip > 0xffff )
+            int comsize = (int) strlen(comment);
+            if (entriesZip > 0xffff)
             {
                 entriesZip = 0xffff;
             }
             WRITE_32( header, 0x06054b50 );
-            WRITE_16( header + 4, 0 );  /* disk # */
-            WRITE_16( header + 6, 0 );  /* disk # */
+            WRITE_16( header + 4, 0 ); /* disk # */
+            WRITE_16( header + 6, 0 ); /* disk # */
             WRITE_16( header + 8, entriesZip ); /* hack */
-            WRITE_16( header + 10, entriesZip );  /* hack */
-            WRITE_32( header + 12, offsetCD );  /* size of CD */
-            WRITE_32( header + 16, offset );    /* offset to CD */
-            WRITE_16( header + 20, comsize );   /* comment */
+            WRITE_16( header + 10, entriesZip ); /* hack */
+            WRITE_32( header + 12, offsetCD ); /* size of CD */
+            WRITE_32( header + 16, offset ); /* offset to CD */
+            WRITE_16( header + 20, comsize ); /* comment */
 
             /* Header */
-            if ( fwrite( header, 1, 22, fpOutCD ) == 22 )
+            if (fwrite(header, 1, 22, fpOutCD) == 22)
             {
 
                 /* Comment field */
-                if ( comsize > 0 )
+                if (comsize > 0)
                 {
-                    if ( ( int )fwrite( comment, 1, comsize, fpOutCD ) != comsize )
+                    if ((int) fwrite(comment, 1, comsize, fpOutCD) != comsize)
                     {
                         err = Z_ERRNO;
                     }
@@ -301,41 +296,41 @@ uLong* bytesRecovered;
         }
 
         /* Final merge (file + central directory) */
-        fclose( fpOutCD );
-        if ( err == Z_OK )
+        fclose(fpOutCD);
+        if (err == Z_OK)
         {
-            fpOutCD = fopen( fileOutTmp, "rb" );
-            if ( fpOutCD != NULL )
+            fpOutCD = fopen(fileOutTmp, "rb");
+            if (fpOutCD != NULL)
             {
                 int nRead;
                 char buffer[8192];
-                while ( ( nRead = ( int )fread( buffer, 1, sizeof( buffer ), fpOutCD ) ) > 0 )
+                while ((nRead = (int) fread(buffer, 1, sizeof(buffer), fpOutCD)) > 0)
                 {
-                    if ( ( int )fwrite( buffer, 1, nRead, fpOut ) != nRead )
+                    if ((int) fwrite(buffer, 1, nRead, fpOut) != nRead)
                     {
                         err = Z_ERRNO;
                         break;
                     }
                 }
-                fclose( fpOutCD );
+                fclose(fpOutCD);
             }
         }
 
         /* Close */
-        fclose( fpZip );
-        fclose( fpOut );
+        fclose(fpZip);
+        fclose(fpOut);
 
         /* Wipe temporary file */
-        ( void )remove( fileOutTmp );
+        (void) remove(fileOutTmp);
 
         /* Number of recovered entries */
-        if ( err == Z_OK )
+        if (err == Z_OK)
         {
-            if ( nRecovered != NULL )
+            if (nRecovered != NULL)
             {
                 *nRecovered = entries;
             }
-            if ( bytesRecovered != NULL )
+            if (bytesRecovered != NULL)
             {
                 *bytesRecovered = totalBytes;
             }

@@ -10,9 +10,9 @@ class NewTitles
         static void DestroyInstance();
 
         void Save();
-        void CheckGame( u8 *titleid );
-        bool IsNew( u8 *titleid );
-        void Remove( u8 *titleid );
+        void CheckGame(u8 *titleid);
+        bool IsNew(u8 *titleid);
+        void Remove(u8 *titleid);
     private:
         NewTitles();
         ~NewTitles();

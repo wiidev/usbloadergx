@@ -10,20 +10,40 @@ class GameList
     public:
         GameList();
         int ReadGameList();
-        int size() { return FilteredList.size(); };
-        int GameCount() { return FullGameList.size(); };
-        int FilterList( const wchar_t * gameFilter = NULL );
+        int size()
+        {
+            return FilteredList.size();
+        }
+        ;
+        int GameCount()
+        {
+            return FullGameList.size();
+        }
+        ;
+        int FilterList(const wchar_t * gameFilter = NULL);
         int LoadUnfiltered();
-        struct discHdr * at( int i );
-        struct discHdr * operator[]( int i ) { return at( i ); };
-        const wchar_t * GetCurrentFilter() { return GameFilter.c_str(); };
-        const wchar_t * GetAvailableSearchChars() { return AvailableSearchChars.c_str(); };
+        struct discHdr * at(int i);
+        struct discHdr * operator[](int i)
+        {
+            return at(i);
+        }
+        ;
+        const wchar_t * GetCurrentFilter()
+        {
+            return GameFilter.c_str();
+        }
+        ;
+        const wchar_t * GetAvailableSearchChars()
+        {
+            return AvailableSearchChars.c_str();
+        }
+        ;
         void SortList();
         void clear();
     protected:
-        static bool NameSortCallback( const struct discHdr *a, const struct discHdr *b );
-        static bool PlaycountSortCallback( const struct discHdr *a, const struct discHdr *b );
-        static bool FavoriteSortCallback( const struct discHdr *a, const struct discHdr *b );
+        static bool NameSortCallback(const struct discHdr *a, const struct discHdr *b);
+        static bool PlaycountSortCallback(const struct discHdr *a, const struct discHdr *b);
+        static bool FavoriteSortCallback(const struct discHdr *a, const struct discHdr *b);
 
         wString AvailableSearchChars;
         wString GameFilter;

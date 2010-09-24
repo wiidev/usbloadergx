@@ -22,7 +22,6 @@
 #ifndef __GECKOMENU_H__
 #define __GECKOMENU_H__
 
-
 #define ROOTMENU 0
 #define ABOUTMENU 1
 #define CONFIGMENU 2
@@ -32,7 +31,7 @@
 #define config_itemcount 9
 #define rebooter_itemcount 6
 
-u32 currentmenu;    // 0 ROOT
+u32 currentmenu; // 0 ROOT
 u32 rootmenu_item;
 u32 menufreeze;
 u32 langselect;
@@ -48,13 +47,12 @@ u32 regionfreeselect;
 u32 nocopyselect;
 u32 buttonskipselect;
 
-u32 doprogress( u32 progstate, u32 noelements );
-void drawmenu( u32 menuid );
-void drawselected( u32 menuidpos );
+u32 doprogress(u32 progstate, u32 noelements);
+void drawmenu(u32 menuid);
+void drawselected(u32 menuidpos);
 void processwpad();
-void clearscreen( u32 *framebuffer, u16 xscreen, u16 yscreen, u16 width, u16 height, u32 color );
-void drawicon( u32 *framebuffer, u16 xscreen, u16 yscreen, u16 width, u16 height, u32 gicon );
-u32 CvtRGB ( u8 r1, u8 g1, u8 b1, u8 r2, u8 g2, u8 b2 );
-
+void clearscreen(u32 *framebuffer, u16 xscreen, u16 yscreen, u16 width, u16 height, u32 color);
+void drawicon(u32 *framebuffer, u16 xscreen, u16 yscreen, u16 width, u16 height, u32 gicon);
+u32 CvtRGB(u8 r1, u8 g1, u8 b1, u8 r2, u8 g2, u8 b2);
 
 #endif // __GECKOLOAD_H__

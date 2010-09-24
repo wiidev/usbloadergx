@@ -69,110 +69,117 @@ struct _ntfs_dir_state;
 /**
  * PRIMARY_PARTITION - Block device partition record
  */
-typedef struct _PARTITION_RECORD {
-    u8 status;                              /* Partition status; see above */
-    u8 chs_start[3];                        /* Cylinder-head-sector address to first block of partition */
-    u8 type;                                /* Partition type; see above */
-    u8 chs_end[3];                          /* Cylinder-head-sector address to last block of partition */
-    u32 lba_start;                          /* Local block address to first sector of partition */
-    u32 block_count;                        /* Number of blocks in partition */
-} __attribute__((__packed__)) PARTITION_RECORD;
+typedef struct _PARTITION_RECORD
+{
+        u8 status; /* Partition status; see above */
+        u8 chs_start[3]; /* Cylinder-head-sector address to first block of partition */
+        u8 type; /* Partition type; see above */
+        u8 chs_end[3]; /* Cylinder-head-sector address to last block of partition */
+        u32 lba_start; /* Local block address to first sector of partition */
+        u32 block_count; /* Number of blocks in partition */
+}__attribute__((__packed__)) PARTITION_RECORD;
 
 /**
  * MASTER_BOOT_RECORD - Block device master boot record
  */
-typedef struct _MASTER_BOOT_RECORD {
-    u8 code_area[446];                      /* Code area; normally empty */
-    PARTITION_RECORD partitions[4];         /* 4 primary partitions */
-    u16 signature;                          /* MBR signature; 0xAA55 */
-} __attribute__((__packed__)) MASTER_BOOT_RECORD;
+typedef struct _MASTER_BOOT_RECORD
+{
+        u8 code_area[446]; /* Code area; normally empty */
+        PARTITION_RECORD partitions[4]; /* 4 primary partitions */
+        u16 signature; /* MBR signature; 0xAA55 */
+}__attribute__((__packed__)) MASTER_BOOT_RECORD;
 
 /**
  * EXTENDED_PARTITION - Block device extended boot record
  */
-typedef struct _EXTENDED_BOOT_RECORD {
-    u8 code_area[446];                      /* Code area; normally empty */
-    PARTITION_RECORD partition;             /* Primary partition */
-    PARTITION_RECORD next_ebr;              /* Next extended boot record in the chain */
-    u8 reserved[32];                        /* Normally empty */
-    u16 signature;                          /* EBR signature; 0xAA55 */
-} __attribute__((__packed__)) EXTENDED_BOOT_RECORD;
+typedef struct _EXTENDED_BOOT_RECORD
+{
+        u8 code_area[446]; /* Code area; normally empty */
+        PARTITION_RECORD partition; /* Primary partition */
+        PARTITION_RECORD next_ebr; /* Next extended boot record in the chain */
+        u8 reserved[32]; /* Normally empty */
+        u16 signature; /* EBR signature; 0xAA55 */
+}__attribute__((__packed__)) EXTENDED_BOOT_RECORD;
 
 /**
  * INTERFACE_ID - Disc interface identifier
  */
-typedef struct _INTERFACE_ID {
-    const char *name;                       /* Interface name */
-    const DISC_INTERFACE *interface;        /* Disc interface */
+typedef struct _INTERFACE_ID
+{
+        const char *name; /* Interface name */
+        const DISC_INTERFACE *interface; /* Disc interface */
 } INTERFACE_ID;
 
 /**
  * ntfs_atime_t - File access time update strategies
  */
-typedef enum {
-    ATIME_ENABLED,                          /* Update access times */
-    ATIME_DISABLED                          /* Don't update access times */
+typedef enum
+{
+    ATIME_ENABLED, /* Update access times */
+    ATIME_DISABLED
+/* Don't update access times */
 } ntfs_atime_t;
 
 /**
  * ntfs_vd - NTFS volume descriptor
  */
-typedef struct _ntfs_vd {
-    struct ntfs_device *dev;                /* NTFS device handle */
-    ntfs_volume *vol;                       /* NTFS volume handle */
-    mutex_t lock;                           /* Volume lock mutex */
-    s64 id;                                 /* Filesystem id */
-    u32 flags;                              /* Mount flags */
-    char name[128];                         /* Volume name (cached) */
-    u16 uid;                                /* User id for entry creation */
-    u16 gid;                                /* Group id for entry creation */
-    u16 fmask;                              /* Unix style permission mask for file creation */
-    u16 dmask;                              /* Unix style permission mask for directory creation */
-    ntfs_atime_t atime;                     /* Entry access time update strategy */
-    bool showHiddenFiles;                   /* If true, show hidden files when enumerating directories */
-    bool showSystemFiles;                   /* If true, show system files when enumerating directories */
-    ntfs_inode *cwd_ni;                     /* Current directory */
-    struct _ntfs_dir_state *firstOpenDir;   /* The start of a FILO linked list of currently opened directories */
-    struct _ntfs_file_state *firstOpenFile; /* The start of a FILO linked list of currently opened files */
-    u16 openDirCount;                       /* The total number of directories currently open in this volume */
-    u16 openFileCount;                      /* The total number of files currently open in this volume */
+typedef struct _ntfs_vd
+{
+        struct ntfs_device *dev; /* NTFS device handle */
+        ntfs_volume *vol; /* NTFS volume handle */
+        mutex_t lock; /* Volume lock mutex */
+        s64 id; /* Filesystem id */
+        u32 flags; /* Mount flags */
+        char name[128]; /* Volume name (cached) */
+        u16 uid; /* User id for entry creation */
+        u16 gid; /* Group id for entry creation */
+        u16 fmask; /* Unix style permission mask for file creation */
+        u16 dmask; /* Unix style permission mask for directory creation */
+        ntfs_atime_t atime; /* Entry access time update strategy */
+        bool showHiddenFiles; /* If true, show hidden files when enumerating directories */
+        bool showSystemFiles; /* If true, show system files when enumerating directories */
+        ntfs_inode *cwd_ni; /* Current directory */
+        struct _ntfs_dir_state *firstOpenDir; /* The start of a FILO linked list of currently opened directories */
+        struct _ntfs_file_state *firstOpenFile; /* The start of a FILO linked list of currently opened files */
+        u16 openDirCount; /* The total number of directories currently open in this volume */
+        u16 openFileCount; /* The total number of files currently open in this volume */
 } ntfs_vd;
 
 /* Lock volume */
-static inline void ntfsLock (ntfs_vd *vd)
+static inline void ntfsLock(ntfs_vd *vd)
 {
     LWP_MutexLock(vd->lock);
 }
 
 /* Unlock volume */
-static inline void ntfsUnlock (ntfs_vd *vd)
+static inline void ntfsUnlock(ntfs_vd *vd)
 {
     LWP_MutexUnlock(vd->lock);
 }
 
 /* Gekko device related routines */
-int ntfsAddDevice (const char *name, void *deviceData);
-void ntfsRemoveDevice (const char *path);
-const devoptab_t *ntfsGetDevice (const char *path, bool useDefaultDevice);
-const devoptab_t *ntfsGetDevOpTab (void);
-const INTERFACE_ID* ntfsGetDiscInterfaces (void);
+int ntfsAddDevice(const char *name, void *deviceData);
+void ntfsRemoveDevice(const char *path);
+const devoptab_t *ntfsGetDevice(const char *path, bool useDefaultDevice);
+const devoptab_t *ntfsGetDevOpTab(void);
+const INTERFACE_ID* ntfsGetDiscInterfaces(void);
 
 /* Miscellaneous helper/support routines */
-int ntfsInitVolume (ntfs_vd *vd);
-void ntfsDeinitVolume (ntfs_vd *vd);
-ntfs_vd *ntfsGetVolume (const char *path);
-ntfs_inode *ntfsOpenEntry (ntfs_vd *vd, const char *path);
-ntfs_inode *ntfsParseEntry (ntfs_vd *vd, const char *path, int reparseLevel);
-void ntfsCloseEntry (ntfs_vd *vd, ntfs_inode *ni);
-ntfs_inode *ntfsCreate (ntfs_vd *vd, const char *path, mode_t type, const char *target);
-int ntfsLink (ntfs_vd *vd, const char *old_path, const char *new_path);
-int ntfsUnlink (ntfs_vd *vd, const char *path);
-int ntfsSync (ntfs_vd *vd, ntfs_inode *ni);
-int ntfsStat (ntfs_vd *vd, ntfs_inode *ni, struct stat *st);
-void ntfsUpdateTimes (ntfs_vd *vd, ntfs_inode *ni, ntfs_time_update_flags mask);
+int ntfsInitVolume(ntfs_vd *vd);
+void ntfsDeinitVolume(ntfs_vd *vd);
+ntfs_vd *ntfsGetVolume(const char *path);
+ntfs_inode *ntfsOpenEntry(ntfs_vd *vd, const char *path);
+ntfs_inode *ntfsParseEntry(ntfs_vd *vd, const char *path, int reparseLevel);
+void ntfsCloseEntry(ntfs_vd *vd, ntfs_inode *ni);
+ntfs_inode *ntfsCreate(ntfs_vd *vd, const char *path, mode_t type, const char *target);
+int ntfsLink(ntfs_vd *vd, const char *old_path, const char *new_path);
+int ntfsUnlink(ntfs_vd *vd, const char *path);
+int ntfsSync(ntfs_vd *vd, ntfs_inode *ni);
+int ntfsStat(ntfs_vd *vd, ntfs_inode *ni, struct stat *st);
+void ntfsUpdateTimes(ntfs_vd *vd, ntfs_inode *ni, ntfs_time_update_flags mask);
 
-const char *ntfsRealPath (const char *path);
-int ntfsUnicodeToLocal (const ntfschar *ins, const int ins_len, char **outs, int outs_len);
-int ntfsLocalToUnicode (const char *ins, ntfschar **outs);
+const char *ntfsRealPath(const char *path);
+int ntfsUnicodeToLocal(const ntfschar *ins, const int ins_len, char **outs, int outs_len);
+int ntfsLocalToUnicode(const char *ins, ntfschar **outs);
 
 #endif /* _NTFSINTERNAL_H */

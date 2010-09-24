@@ -4,23 +4,23 @@
 #include "gui.h"
 #include "../usbloader/disc.h"
 class GuiImageAsync;
-class GuiGameCarousel : public GuiElement
+class GuiGameCarousel: public GuiElement
 {
     public:
-        GuiGameCarousel( int w, int h, const char *themePath, const u8 *imagebg, int selected = 0, int offset = 0 );
+        GuiGameCarousel(int w, int h, const char *themePath, const u8 *imagebg, int selected = 0, int offset = 0);
         ~GuiGameCarousel();
-        int FindMenuItem( int c, int d );
+        int FindMenuItem(int c, int d);
         int GetClickedOption();
         int GetSelectedOption();
         void ResetState();
-        void SetFocus( int f );
+        void SetFocus(int f);
         void Draw();
-        void Update( GuiTrigger * t );
+        void Update(GuiTrigger * t);
         int GetOffset();
         void Reload();
         //GuiText * optionVal[PAGESIZE];
     protected:
-        GuiImageData    noCover;
+        GuiImageData noCover;
         int selectedItem;
         int listOffset;
         int scrollbaron;

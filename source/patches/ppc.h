@@ -1,5 +1,4 @@
 
-
 /* Condition Register Bit Fields */
 
 #define cr0 0
@@ -10,7 +9,6 @@
 #define cr5 5
 #define cr6 6
 #define cr7 7
-
 
 /* General Purpose Registers  */
 

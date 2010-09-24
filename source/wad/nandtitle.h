@@ -36,24 +36,24 @@ using namespace std;
 
 typedef struct
 {
-    u8  zeroes1[0x40];
-    u32 sig;        // "IMET"
-    u32 unk1;
-    u32 unk2;
-    u32 filesizes[3];
-    u32 unk3;
-    u16 name_japanese[IMET_MAX_NAME_LEN];
-    u16 name_english[IMET_MAX_NAME_LEN];
-    u16 name_german[IMET_MAX_NAME_LEN];
-    u16 name_french[IMET_MAX_NAME_LEN];
-    u16 name_spanish[IMET_MAX_NAME_LEN];
-    u16 name_italian[IMET_MAX_NAME_LEN];
-    u16 name_dutch[IMET_MAX_NAME_LEN];
-    u16 name_simp_chinese[IMET_MAX_NAME_LEN];
-    u16 name_trad_chinese[IMET_MAX_NAME_LEN];
-    u16 name_korean[IMET_MAX_NAME_LEN];
-    u8  zeroes2[0x24c];
-    u8  md5[0x10];
+        u8 zeroes1[0x40];
+        u32 sig; // "IMET"
+        u32 unk1;
+        u32 unk2;
+        u32 filesizes[3];
+        u32 unk3;
+        u16 name_japanese[IMET_MAX_NAME_LEN];
+        u16 name_english[IMET_MAX_NAME_LEN];
+        u16 name_german[IMET_MAX_NAME_LEN];
+        u16 name_french[IMET_MAX_NAME_LEN];
+        u16 name_spanish[IMET_MAX_NAME_LEN];
+        u16 name_italian[IMET_MAX_NAME_LEN];
+        u16 name_dutch[IMET_MAX_NAME_LEN];
+        u16 name_simp_chinese[IMET_MAX_NAME_LEN];
+        u16 name_trad_chinese[IMET_MAX_NAME_LEN];
+        u16 name_korean[IMET_MAX_NAME_LEN];
+        u8 zeroes2[0x24c];
+        u8 md5[0x10];
 } IMET;
 
 class NandTitle
@@ -63,42 +63,46 @@ class NandTitle
         ~NandTitle();
 
         s32 Get();
-        u64 At( u32 i );
-        int IndexOf( u64 tid );
-	u32 Count() { return titleIds.size(); }
+        u64 At(u32 i);
+        int IndexOf(u64 tid);
+        u32 Count()
+        {
+            return titleIds.size();
+        }
 
-	const char* NameOf( u64 tid );
-	const char* NameFromIndex( u32 i );
+        const char* NameOf(u64 tid);
+        const char* NameFromIndex(u32 i);
 
-        u16 VersionOf( u64 tid );
-        u16 VersionFromIndex( u32 i );
+        u16 VersionOf(u64 tid);
+        u16 VersionFromIndex(u32 i);
 
-        u32 CountType( u32 type );
+        u32 CountType(u32 type);
 
-
-        u32 SetType( u32 upper );
+        u32 SetType(u32 upper);
         u64 Next();
         void ResetCounter();
 
-        void AsciiTID( u64 tid, char* out );
-        void AsciiFromIndex( u32 i, char* out );
+        void AsciiTID(u64 tid, char* out);
+        void AsciiFromIndex(u32 i, char* out);
 
-        bool Exists( u64 tid );
-        bool ExistsFromIndex( u32 i );
+        bool Exists(u64 tid);
+        bool ExistsFromIndex(u32 i);
 
-	int FindU64( const char *s );
-	int FindU32( const char *s );
+        int FindU64(const char *s);
+        int FindU32(const char *s);
 
-        s32 GetTicketViews( u64 tid, tikview **outbuf, u32 *outlen );
+        s32 GetTicketViews(u64 tid, tikview **outbuf, u32 *outlen);
 
-        u64 operator[]( u32 i ) { return At( i ); }
+        u64 operator[](u32 i)
+        {
+            return At(i);
+        }
 
     private:
-	std::vector<u64> titleIds;
-	std::map<u64, string> NameList;
-	bool GetName( u64 tid, int language, wchar_t* name );
-        tmd* GetTMD( u64 tid );
-
+        std::vector<u64> titleIds;
+        std::map<u64, string> NameList;
+        bool GetName(u64 tid, int language, wchar_t* name);
+        tmd* GetTMD(u64 tid);
 
         u32 currentIndex;
         u32 currentType;
@@ -106,4 +110,3 @@ class NandTitle
 
 extern NandTitle titles;
 #endif // NANDTITLE_H
-

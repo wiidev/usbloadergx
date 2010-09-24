@@ -1,5 +1,4 @@
 
-
 #ifndef _GECKO_H_
 #define _GECKO_H_
 
@@ -8,20 +7,18 @@ extern "C"
 {
 #endif
 
-    char ascii( char s );
+    char ascii(char s);
 
 #ifndef NO_DEBUG
     //use this just like printf();
-    void gprintf( const char *str, ... );
+    void gprintf(const char *str, ...);
     bool InitGecko();
-    void hexdump( void *d, int len );
+    void hexdump(void *d, int len);
 #else
 #define gprintf(...)
 #define InitGecko()      false
 #define hexdump( x, y )
 #endif /* NO_DEBUG */
-
-
 
 #ifdef __cplusplus
 }

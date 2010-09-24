@@ -56,19 +56,17 @@ GuiText * GameRegionTxt = NULL;
 GuiImage * coverImg = NULL;
 GuiImageData * cover = NULL;
 bool altdoldefault = true;
-char headlessID[8] = {0};
+char headlessID[8] = { 0 };
 
 static lwp_t guithread = LWP_THREAD_NULL;
 static bool guiHalt = true;
 static int ExitRequested = 0;
-
 
 /*** Extern variables ***/
 extern u8 shutdown;
 extern u8 reset;
 extern s32 gameSelected, gameStart;
 extern u8 boothomebrew;
-
 
 /****************************************************************************
  * ResumeGui
@@ -80,7 +78,7 @@ extern u8 boothomebrew;
 void ResumeGui()
 {
     guiHalt = false;
-    LWP_ResumeThread ( guithread );
+    LWP_ResumeThread(guithread);
 }
 
 /****************************************************************************
@@ -93,12 +91,12 @@ void ResumeGui()
  ***************************************************************************/
 void HaltGui()
 {
-    if ( guiHalt )return;
+    if (guiHalt) return;
     guiHalt = true;
 
     // wait for thread to finish
-    while ( !LWP_ThreadIsSuspended( guithread ) )
-        usleep( 50 );
+    while (!LWP_ThreadIsSuspended(guithread))
+        usleep(50);
 }
 
 /****************************************************************************
@@ -106,28 +104,28 @@ void HaltGui()
  *
  * Primary thread to allow GUI to respond to state changes, and draws GUI
  ***************************************************************************/
-static void * UpdateGUI ( void *arg )
+static void * UpdateGUI(void *arg)
 {
     int i;
 
-    while ( !ExitRequested )
+    while (!ExitRequested)
     {
-        if ( guiHalt )
+        if (guiHalt)
         {
-            LWP_SuspendThread( guithread );
+            LWP_SuspendThread(guithread);
             continue;
         }
 
         mainWindow->Draw();
-        if ( Settings.tooltips == TooltipsOn && THEME.show_tooltip != 0 && mainWindow->GetState() != STATE_DISABLED )
-            mainWindow->DrawTooltip();
+        if (Settings.tooltips == TooltipsOn && THEME.show_tooltip != 0 && mainWindow->GetState() != STATE_DISABLED) mainWindow->DrawTooltip();
 
-        for ( i = 3; i >= 0; i-- )
+        for (i = 3; i >= 0; i--)
         {
-            if ( userInput[i].wpad.ir.valid )
+            if (userInput[i].wpad.ir.valid)
             {
-                Menu_DrawImg( userInput[i].wpad.ir.x - 48, userInput[i].wpad.ir.y - 48, 200.0,
-                              96, 96, pointer[i]->GetImage(), userInput[i].wpad.ir.angle, Settings.widescreen ? 0.8 : 1, 1, 255, 0, 0, 0, 0, 0, 0, 0, 0 );
+                Menu_DrawImg(userInput[i].wpad.ir.x - 48, userInput[i].wpad.ir.y - 48, 200.0, 96, 96,
+                        pointer[i]->GetImage(), userInput[i].wpad.ir.angle, Settings.widescreen ? 0.8 : 1, 1, 255, 0,
+                        0, 0, 0, 0, 0, 0, 0);
             }
         }
 
@@ -135,40 +133,39 @@ static void * UpdateGUI ( void *arg )
 
         UpdatePads();
 
-        for ( i = 0; i < 4; i++ )
-            mainWindow->Update( &userInput[i] );
+        for (i = 0; i < 4; i++)
+            mainWindow->Update(&userInput[i]);
 
-        if ( bgMusic )
-            bgMusic->UpdateState();
+        if (bgMusic) bgMusic->UpdateState();
 
-        switch ( Settings.screensaver )
+        switch (Settings.screensaver)
         {
             case 1:
-                WPad_SetIdleTime( 180 );
+                WPad_SetIdleTime(180);
                 break;
             case 2:
-                WPad_SetIdleTime( 300 );
+                WPad_SetIdleTime(300);
                 break;
             case 3:
-                WPad_SetIdleTime( 600 );
+                WPad_SetIdleTime(600);
                 break;
             case 4:
-                WPad_SetIdleTime( 1200 );
+                WPad_SetIdleTime(1200);
                 break;
             case 5:
-                WPad_SetIdleTime( 1800 );
+                WPad_SetIdleTime(1800);
                 break;
             case 6:
-                WPad_SetIdleTime( 3600 );
+                WPad_SetIdleTime(3600);
                 break;
         }
     }
 
-    for ( i = 5; i < 255; i += 10 )
+    for (i = 5; i < 255; i += 10)
     {
-        if ( strcmp( headlessID, "" ) == 0 )
-            mainWindow->Draw();
-        Menu_DrawRectangle( 0, 0, screenwidth, screenheight, ( GXColor ) {0, 0, 0, i}, 1 );
+        if (strcmp(headlessID, "") == 0) mainWindow->Draw();
+        Menu_DrawRectangle(0, 0, screenwidth, screenheight, ( GXColor )
+        {   0, 0, 0, i}, 1);
         Menu_Render();
     }
     mainWindow->RemoveAll();
@@ -184,66 +181,67 @@ static void * UpdateGUI ( void *arg )
  ***************************************************************************/
 void InitGUIThreads()
 {
-    LWP_CreateThread( &guithread, UpdateGUI, NULL, NULL, 65536, LWP_PRIO_HIGHEST );
+    LWP_CreateThread(&guithread, UpdateGUI, NULL, NULL, 65536, LWP_PRIO_HIGHEST);
     InitProgressThread();
     InitNetworkThread();
 
-    if ( Settings.autonetwork )
-        ResumeNetworkThread();
+    if (Settings.autonetwork) ResumeNetworkThread();
 }
 
 void ExitGUIThreads()
 {
     ExitRequested = 1;
-    LWP_JoinThread( guithread, NULL );
+    LWP_JoinThread(guithread, NULL);
     guithread = LWP_THREAD_NULL;
 }
 
 /****************************************************************************
  * LoadCoverImage
  ***************************************************************************/
-GuiImageData *LoadCoverImage( struct discHdr *header, bool Prefere3D, bool noCover )
+GuiImageData *LoadCoverImage(struct discHdr *header, bool Prefere3D, bool noCover)
 {
-    if ( !header ) return NULL;
+    if (!header) return NULL;
     GuiImageData *Cover = NULL;
     char ID[4];
     char IDfull[7];
     char Path[100];
     bool flag = Prefere3D;
 
+    snprintf(ID, sizeof(ID), "%c%c%c", header->id[0], header->id[1], header->id[2]);
+    snprintf(IDfull, sizeof(IDfull), "%s%c%c%c", ID, header->id[3], header->id[4], header->id[5]);
 
-    snprintf( ID, sizeof( ID ), "%c%c%c", header->id[0], header->id[1], header->id[2] );
-    snprintf( IDfull, sizeof( IDfull ), "%s%c%c%c", ID, header->id[3], header->id[4], header->id[5] );
-
-    for ( int i = 0; i < 2; ++i )
+    for (int i = 0; i < 2; ++i)
     {
-        char *coverPath = flag ? Settings.covers_path : Settings.covers2d_path; flag = !flag;
+        char *coverPath = flag ? Settings.covers_path : Settings.covers2d_path;
+        flag = !flag;
         //Load full id image
-        snprintf( Path, sizeof( Path ), "%s%s.png", coverPath, IDfull );
-        delete Cover; Cover = new( std::nothrow ) GuiImageData( Path, NULL );
+        snprintf(Path, sizeof(Path), "%s%s.png", coverPath, IDfull);
+        delete Cover;
+        Cover = new (std::nothrow) GuiImageData(Path, NULL);
         //Load short id image
-        if ( !Cover || !Cover->GetImage() )
+        if (!Cover || !Cover->GetImage())
         {
-            snprintf( Path, sizeof( Path ), "%s%s.png", coverPath, ID );
-            delete Cover; Cover = new( std::nothrow ) GuiImageData( Path, NULL );
+            snprintf(Path, sizeof(Path), "%s%s.png", coverPath, ID);
+            delete Cover;
+            Cover = new (std::nothrow) GuiImageData(Path, NULL);
         }
-        if ( Cover && Cover->GetImage() )
-            break;
+        if (Cover && Cover->GetImage()) break;
     }
     //Load no image
-    if ( noCover && ( !Cover || !Cover->GetImage() ) )
+    if (noCover && (!Cover || !Cover->GetImage()))
     {
         flag = Prefere3D;
-        for ( int i = 0; i < 2; ++i )
+        for (int i = 0; i < 2; ++i)
         {
-            const char *nocoverPath = ( flag ? "%snoimage.png" : "%snoimage2d.png" ); flag = !flag;
-            snprintf( Path, sizeof( Path ), nocoverPath, Settings.theme_path );
-            delete Cover; Cover = new( std::nothrow ) GuiImageData( Path, ( Prefere3D ? nocover_png : nocoverFlat_png ) );
-            if ( Cover && Cover->GetImage() )
-                break;
+            const char *nocoverPath = (flag ? "%snoimage.png" : "%snoimage2d.png");
+            flag = !flag;
+            snprintf(Path, sizeof(Path), nocoverPath, Settings.theme_path);
+            delete Cover;
+            Cover = new (std::nothrow) GuiImageData(Path, (Prefere3D ? nocover_png : nocoverFlat_png));
+            if (Cover && Cover->GetImage()) break;
         }
     }
-    if ( Cover && !Cover->GetImage() )
+    if (Cover && !Cover->GetImage())
     {
         delete Cover;
         Cover = NULL;
@@ -254,7 +252,7 @@ GuiImageData *LoadCoverImage( struct discHdr *header, bool Prefere3D, bool noCov
 /****************************************************************************
  * MainMenu
  ***************************************************************************/
-int MainMenu( int menu )
+int MainMenu(int menu)
 {
 
     currentMenu = menu;
@@ -263,41 +261,39 @@ int MainMenu( int menu )
     //if (strcmp(headlessID,"")!=0)HaltGui();
     //WindowPrompt("Can you see me now",0,"ok");
 
-    snprintf( imgPath, sizeof( imgPath ), "%splayer1_point.png", Settings.theme_path );
-    pointer[0] = new GuiImageData( imgPath, player1_point_png );
-    snprintf( imgPath, sizeof( imgPath ), "%splayer2_point.png", Settings.theme_path );
-    pointer[1] = new GuiImageData( imgPath, player2_point_png );
-    snprintf( imgPath, sizeof( imgPath ), "%splayer3_point.png", Settings.theme_path );
-    pointer[2] = new GuiImageData( imgPath, player3_point_png );
-    snprintf( imgPath, sizeof( imgPath ), "%splayer4_point.png", Settings.theme_path );
-    pointer[3] = new GuiImageData( imgPath, player4_point_png );
+    snprintf(imgPath, sizeof(imgPath), "%splayer1_point.png", Settings.theme_path);
+    pointer[0] = new GuiImageData(imgPath, player1_point_png);
+    snprintf(imgPath, sizeof(imgPath), "%splayer2_point.png", Settings.theme_path);
+    pointer[1] = new GuiImageData(imgPath, player2_point_png);
+    snprintf(imgPath, sizeof(imgPath), "%splayer3_point.png", Settings.theme_path);
+    pointer[2] = new GuiImageData(imgPath, player3_point_png);
+    snprintf(imgPath, sizeof(imgPath), "%splayer4_point.png", Settings.theme_path);
+    pointer[3] = new GuiImageData(imgPath, player4_point_png);
 
-    mainWindow = new GuiWindow( screenwidth, screenheight );
+    mainWindow = new GuiWindow(screenwidth, screenheight);
 
-    if ( Settings.widescreen )
-        snprintf( imgPath, sizeof( imgPath ), "%swbackground.png", Settings.theme_path );
-    else
-        snprintf( imgPath, sizeof( imgPath ), "%sbackground.png", Settings.theme_path );
+    if (Settings.widescreen)
+        snprintf(imgPath, sizeof(imgPath), "%swbackground.png", Settings.theme_path);
+    else snprintf(imgPath, sizeof(imgPath), "%sbackground.png", Settings.theme_path);
 
-    background = new GuiImageData( imgPath, Settings.widescreen ? wbackground_png : background_png );
+    background = new GuiImageData(imgPath, Settings.widescreen ? wbackground_png : background_png);
 
-    bgImg = new GuiImage( background );
-    mainWindow->Append( bgImg );
+    bgImg = new GuiImage(background);
+    mainWindow->Append(bgImg);
 
-    if ( strcmp( headlessID, "" ) == 0 )
-        ResumeGui();
+    if (strcmp(headlessID, "") == 0) ResumeGui();
 
-    bgMusic = new GuiBGM( bg_music_ogg, bg_music_ogg_size, Settings.volume );
-    bgMusic->SetLoop( Settings.musicloopmode ); //loop music
-    bgMusic->Load( Settings.ogg_path );
+    bgMusic = new GuiBGM(bg_music_ogg, bg_music_ogg_size, Settings.volume);
+    bgMusic->SetLoop(Settings.musicloopmode); //loop music
+    bgMusic->Load(Settings.ogg_path);
     bgMusic->Play();
 
-    while ( currentMenu != MENU_EXIT )
+    while (currentMenu != MENU_EXIT)
     {
-        bgMusic->SetVolume( Settings.volume );
-//      gprintf("Current menu: %d\n", currentMenu);
+        bgMusic->SetVolume(Settings.volume);
+        //      gprintf("Current menu: %d\n", currentMenu);
 
-        switch ( currentMenu )
+        switch (currentMenu)
         {
             case MENU_CHECK:
                 currentMenu = MenuCheck();
@@ -326,16 +322,15 @@ int MainMenu( int menu )
         }
     }
 
-
     // MemInfoPrompt();
-    gprintf( "Exiting main GUI.  mountMethod = %d\n", mountMethod );
+    gprintf("Exiting main GUI.  mountMethod = %d\n", mountMethod);
 
     CloseXMLDatabase();
     NewTitles::DestroyInstance();
     CFG_Cleanup();
 
-    if ( strcmp( headlessID, "" ) != 0 )//the GUIthread was never started, so it cant be ended and joined properly if headless mode was used.  so we resume it and close it.
-        ResumeGui();
+    if (strcmp(headlessID, "") != 0) //the GUIthread was never started, so it cant be ended and joined properly if headless mode was used.  so we resume it and close it.
+    ResumeGui();
     ExitGUIThreads();
 
     bgMusic->Stop();
@@ -343,7 +338,7 @@ int MainMenu( int menu )
     delete background;
     delete bgImg;
     delete mainWindow;
-    for ( int i = 0; i < 4; i++ )
+    for (int i = 0; i < 4; i++)
         delete pointer[i];
     delete GameRegionTxt;
     delete GameIDTxt;
@@ -354,77 +349,77 @@ int MainMenu( int menu )
     StopGX();
     gettextCleanUp();
 
-    if ( mountMethod == 3 )
+    if (mountMethod == 3)
     {
         struct discHdr *header = gameList[gameSelected];
         char tmp[20];
         u32 tid;
-        sprintf( tmp, "%c%c%c%c", header->id[0], header->id[1], header->id[2], header->id[3] );
-        memcpy( &tid, tmp, 4 );
-        gprintf( "\nBooting title %016llx", TITLE_ID( ( header->id[5] == '1' ? 0x00010001 : 0x00010002 ), tid ) );
+        sprintf(tmp, "%c%c%c%c", header->id[0], header->id[1], header->id[2], header->id[3]);
+        memcpy(&tid, tmp, 4);
+        gprintf("\nBooting title %016llx", TITLE_ID( ( header->id[5] == '1' ? 0x00010001 : 0x00010002 ), tid ));
         WII_Initialize();
-        WII_LaunchTitle( TITLE_ID( ( header->id[5] == '1' ? 0x00010001 : 0x00010002 ), tid ) );
+        WII_LaunchTitle(TITLE_ID( ( header->id[5] == '1' ? 0x00010001 : 0x00010002 ), tid ));
     }
-    if ( mountMethod == 2 )
+    if (mountMethod == 2)
     {
-        gprintf( "\nLoading BC for GameCube" );
+        gprintf("\nLoading BC for GameCube");
         WII_Initialize();
-        WII_LaunchTitle( 0x0000000100000100ULL );
+        WII_LaunchTitle(0x0000000100000100ULL);
     }
 
-    if ( boothomebrew == 1 )
+    if (boothomebrew == 1)
     {
-        gprintf( "\nBootHomebrew" );
-        BootHomebrew( Settings.selected_homebrew );
+        gprintf("\nBootHomebrew");
+        BootHomebrew(Settings.selected_homebrew);
     }
-    else if ( boothomebrew == 2 )
+    else if (boothomebrew == 2)
     {
-        gprintf( "\nBootHomebrew from Menu" );
+        gprintf("\nBootHomebrew from Menu");
         //BootHomebrew();
         BootHomebrewFromMem();
     }
     else
     {
-        gprintf( "\tSettings.partition: %d\n", Settings.partition );
+        gprintf("\tSettings.partition: %d\n", Settings.partition);
         struct discHdr *header = NULL;
         //if the GUI was "skipped" to boot a game from main(argv[1])
-        if ( strcmp( headlessID, "" ) != 0 )
+        if (strcmp(headlessID, "") != 0)
         {
-            gprintf( "\tHeadless mode (%s)\n", headlessID );
+            gprintf("\tHeadless mode (%s)\n", headlessID);
             gameList.LoadUnfiltered();
-            if ( !gameList.size() )
+            if (!gameList.size())
             {
-                gprintf( "  ERROR : !gameCnt" );
-                exit( 0 );
+                gprintf("  ERROR : !gameCnt");
+                exit(0);
             }
             //gprintf("\n\tgameCnt:%d",gameCnt);
-            for ( int i = 0; i < gameList.size(); i++ )
+            for (int i = 0; i < gameList.size(); i++)
             {
                 header = gameList[i];
                 char tmp[8];
-                sprintf( tmp, "%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2], header->id[3], header->id[4], header->id[5] );
-                if ( strcmp( tmp, headlessID ) == 0 )
+                sprintf(tmp, "%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2], header->id[3], header->id[4],
+                        header->id[5]);
+                if (strcmp(tmp, headlessID) == 0)
                 {
                     gameSelected = i;
-                    gprintf( "  found (%d)\n", i );
+                    gprintf("  found (%d)\n", i);
                     break;
                 }
                 //if the game was not found
-                if ( i == gameList.GameCount() - 1 )
+                if (i == gameList.GameCount() - 1)
                 {
-                    gprintf( "  not found (%d IDs checked)\n", i );
-                    exit( 0 );
+                    gprintf("  not found (%d IDs checked)\n", i);
+                    exit(0);
                 }
             }
         }
 
-
         int ret = 0;
-        header = ( mountMethod ? dvdheader : gameList[gameSelected] );
+        header = (mountMethod ? dvdheader : gameList[gameSelected]);
 
-        struct Game_CFG* game_cfg = CFG_get_game_opt( header->id );
+        struct Game_CFG* game_cfg = CFG_get_game_opt(header->id);
 
-        if ( game_cfg )
+        if (game_cfg)
         {
             videoChoice = game_cfg->video;
             languageChoice = game_cfg->language;
@@ -433,13 +428,13 @@ int MainMenu( int menu )
             fix002 = game_cfg->errorfix002;
             iosChoice = game_cfg->ios;
             countrystrings = game_cfg->patchcountrystrings;
-            if ( !altdoldefault )
+            if (!altdoldefault)
             {
                 alternatedol = game_cfg->loadalternatedol;
                 alternatedoloffset = game_cfg->alternatedolstart;
             }
             reloadblock = game_cfg->iosreloadblock;
-	    returnToLoaderGV = game_cfg->returnTo;
+            returnToLoaderGV = game_cfg->returnTo;
         }
         else
         {
@@ -450,7 +445,7 @@ int MainMenu( int menu )
             iosChoice = Settings.cios;
             fix002 = Settings.error002;
             countrystrings = Settings.patchcountrystrings;
-            if ( !altdoldefault )
+            if (!altdoldefault)
             {
                 alternatedol = off;
                 alternatedoloffset = 0;
@@ -459,39 +454,38 @@ int MainMenu( int menu )
             returnToLoaderGV = 1;
         }
 
-        if ( !mountMethod )
+        if (!mountMethod)
         {
-            gprintf( "Loading fragment list..." );
-            ret = get_frag_list( header->id );
-            gprintf( "%d\n", ret );
+            gprintf("Loading fragment list...");
+            ret = get_frag_list(header->id);
+            gprintf("%d\n", ret);
 
-            gprintf( "Setting fragment list..." );
-            ret = set_frag_list( header->id );
-            gprintf( "%d\n", ret );
+            gprintf("Setting fragment list...");
+            ret = set_frag_list(header->id);
+            gprintf("%d\n", ret);
 
-            ret = Disc_SetUSB( header->id );
-            if ( ret < 0 ) Sys_BackToLoader();
-            gprintf( "\tUSB set to game\n" );
+            ret = Disc_SetUSB(header->id);
+            if (ret < 0) Sys_BackToLoader();
+            gprintf("\tUSB set to game\n");
         }
         else
         {
-            gprintf( "\tUSB not set, loading DVD\n" );
+            gprintf("\tUSB not set, loading DVD\n");
         }
         ret = Disc_Open();
 
-        if ( ret < 0 ) Sys_BackToLoader();
+        if (ret < 0) Sys_BackToLoader();
 
-        if ( dvdheader )
-            delete dvdheader;
+        if (dvdheader) delete dvdheader;
 
-        gprintf( "Loading BCA data..." );
-        ret = do_bca_code( header->id );
-        gprintf( "%d\n", ret );
+        gprintf("Loading BCA data...");
+        ret = do_bca_code(header->id);
+        gprintf("%d\n", ret);
 
-        if ( reloadblock == on && Sys_IsHermes() )
+        if (reloadblock == on && Sys_IsHermes())
         {
             enable_ES_ioctlv_vector();
-            if ( load_from_fs == PART_FS_WBFS )
+            if (load_from_fs == PART_FS_WBFS)
             {
                 mload_close();
             }
@@ -499,7 +493,7 @@ int MainMenu( int menu )
 
         u8 errorfixer002 = fix002;
 
-        switch ( languageChoice )
+        switch (languageChoice)
         {
             case ConsoleLangDefault:
                 configbytes[0] = 0xCD;
@@ -552,7 +546,7 @@ int MainMenu( int menu )
 
         u8 videoselected = 0;
 
-        switch ( videoChoice )
+        switch (videoChoice)
         {
             case discdefault:
                 videoselected = 0;
@@ -584,7 +578,7 @@ int MainMenu( int menu )
         }
 
         u32 cheat = 0;
-        switch ( ocarinaChoice )
+        switch (ocarinaChoice)
         {
             case on:
                 cheat = 1;
@@ -600,7 +594,7 @@ int MainMenu( int menu )
         }
 
         u8 vipatch = 0;
-        switch ( viChoice )
+        switch (viChoice)
         {
             case on:
                 vipatch = 1;
@@ -615,28 +609,28 @@ int MainMenu( int menu )
                 break;
         }
 
-	u32 channel = 0;
-	if( returnToLoaderGV )
-	{
-	    int idx = titles.FindU32( Settings.returnTo );
-	    if( idx >= 0 )
-		channel = TITLE_LOWER( titles.At( idx ) );
-	}
+        u32 channel = 0;
+        if (returnToLoaderGV)
+        {
+            int idx = titles.FindU32(Settings.returnTo);
+            if (idx >= 0) channel = TITLE_LOWER( titles.At( idx ) );
+        }
 
-	//This is temporary
-	SetCheatFilepath(Settings.Cheatcodespath);
-	SetBCAFilepath(Settings.BcaCodepath);
+        //This is temporary
+        SetCheatFilepath(Settings.Cheatcodespath);
+        SetBCAFilepath(Settings.BcaCodepath);
 
-        gprintf( "\tDisc_wiiBoot\n" );
+        gprintf("\tDisc_wiiBoot\n");
 
-	ret = Disc_WiiBoot( Settings.dolpath, videoselected, cheat, vipatch, countrystrings, errorfixer002, alternatedol, alternatedoloffset, channel );
-        if ( ret < 0 )
+        ret = Disc_WiiBoot(Settings.dolpath, videoselected, cheat, vipatch, countrystrings, errorfixer002,
+                alternatedol, alternatedoloffset, channel);
+        if (ret < 0)
         {
             Sys_LoadMenu();
         }
 
         //should never get here
-        printf( "Returning entry point: 0x%0x\n", ret );
+        printf("Returning entry point: 0x%0x\n", ret);
     }
     return 0;
 }

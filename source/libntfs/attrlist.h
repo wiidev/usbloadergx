@@ -42,10 +42,9 @@ extern int ntfs_attrlist_entry_rm(ntfs_attr_search_ctx *ctx);
  */
 static __inline__ void ntfs_attrlist_mark_dirty(ntfs_inode *ni)
 {
-	if (ni->nr_extents == -1)
-		NInoAttrListSetDirty(ni->base_ni);
-	else
-		NInoAttrListSetDirty(ni);
+    if (ni->nr_extents == -1)
+        NInoAttrListSetDirty(ni->base_ni);
+    else NInoAttrListSetDirty(ni);
 }
 
 #endif /* defined _NTFS_ATTRLIST_H */

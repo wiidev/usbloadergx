@@ -55,12 +55,10 @@
  */
 void ntfs_bit_set(u8 *bitmap, const u64 bit, const u8 new_value)
 {
-	if (!bitmap || new_value > 1)
-		return;
-	if (!new_value)
-		bitmap[bit >> 3] &= ~(1 << (bit & 7));
-	else
-		bitmap[bit >> 3] |= (1 << (bit & 7));
+    if (!bitmap || new_value > 1) return;
+    if (!new_value)
+        bitmap[bit >> 3] &= ~(1 << (bit & 7));
+    else bitmap[bit >> 3] |= (1 << (bit & 7));
 }
 
 /**
@@ -73,9 +71,8 @@ void ntfs_bit_set(u8 *bitmap, const u64 bit, const u8 new_value)
  */
 char ntfs_bit_get(const u8 *bitmap, const u64 bit)
 {
-	if (!bitmap)
-		return -1;
-	return (bitmap[bit >> 3] >> (bit & 7)) & 1;
+    if (!bitmap) return -1;
+    return (bitmap[bit >> 3] >> (bit & 7)) & 1;
 }
 
 /**
@@ -89,15 +86,13 @@ char ntfs_bit_get(const u8 *bitmap, const u64 bit)
  */
 char ntfs_bit_get_and_set(u8 *bitmap, const u64 bit, const u8 new_value)
 {
-	register u8 old_bit, shift;
+    register u8 old_bit, shift;
 
-	if (!bitmap || new_value > 1)
-		return -1;
-	shift = bit & 7;
-	old_bit = (bitmap[bit >> 3] >> shift) & 1;
-	if (new_value != old_bit)
-		bitmap[bit >> 3] ^= 1 << shift;
-	return old_bit;
+    if (!bitmap || new_value > 1) return -1;
+    shift = bit & 7;
+    old_bit = (bitmap[bit >> 3] >> shift) & 1;
+    if (new_value != old_bit) bitmap[bit >> 3] ^= 1 << shift;
+    return old_bit;
 }
 
 /**
@@ -112,146 +107,147 @@ char ntfs_bit_get_and_set(u8 *bitmap, const u64 bit, const u8 new_value)
  *
  * On success return 0 and on error return -1 with errno set to the error code.
  */
-static int ntfs_bitmap_set_bits_in_run(ntfs_attr *na, s64 start_bit,
-				       s64 count, int value)
+static int ntfs_bitmap_set_bits_in_run(ntfs_attr *na, s64 start_bit, s64 count, int value)
 {
-	s64 bufsize, br;
-	u8 *buf, *lastbyte_buf;
-	int bit, firstbyte, lastbyte, lastbyte_pos, tmp, ret = -1;
+    s64 bufsize, br;
+    u8 *buf, *lastbyte_buf;
+    int bit, firstbyte, lastbyte, lastbyte_pos, tmp, ret = -1;
 
-	if (!na || start_bit < 0 || count < 0) {
-		errno = EINVAL;
-		ntfs_log_perror("%s: Invalid argument (%p, %lld, %lld)",
-			__FUNCTION__, na, (long long)start_bit, (long long)count);
-		return -1;
-	}
+    if (!na || start_bit < 0 || count < 0)
+    {
+        errno = EINVAL;
+        ntfs_log_perror("%s: Invalid argument (%p, %lld, %lld)",
+                __FUNCTION__, na, (long long)start_bit, (long long)count);
+        return -1;
+    }
 
-	bit = start_bit & 7;
-	if (bit)
-		firstbyte = 1;
-	else
-		firstbyte = 0;
+    bit = start_bit & 7;
+    if (bit)
+        firstbyte = 1;
+    else firstbyte = 0;
 
-	/* Calculate the required buffer size in bytes, capping it at 8kiB. */
-	bufsize = ((count - (bit ? 8 - bit : 0) + 7) >> 3) + firstbyte;
-	if (bufsize > 8192)
-		bufsize = 8192;
+    /* Calculate the required buffer size in bytes, capping it at 8kiB. */
+    bufsize = ((count - (bit ? 8 - bit : 0) + 7) >> 3) + firstbyte;
+    if (bufsize > 8192) bufsize = 8192;
 
-	buf = ntfs_malloc(bufsize);
-	if (!buf)
-		return -1;
-	
-	/* Depending on @value, zero or set all bits in the allocated buffer. */
-	memset(buf, value ? 0xff : 0, bufsize);
+    buf = ntfs_malloc(bufsize);
+    if (!buf) return -1;
 
-	/* If there is a first partial byte... */
-	if (bit) {
-		/* read it in... */
-		br = ntfs_attr_pread(na, start_bit >> 3, 1, buf);
-		if (br != 1) {
-			if (br >= 0)
-				errno = EIO;
-			goto free_err_out;
-		}
-		/* and set or clear the appropriate bits in it. */
-		while ((bit & 7) && count--) {
-			if (value)
-				*buf |= 1 << bit++;
-			else
-				*buf &= ~(1 << bit++);
-		}
-		/* Update @start_bit to the new position. */
-		start_bit = (start_bit + 7) & ~7;
-	}
+    /* Depending on @value, zero or set all bits in the allocated buffer. */
+    memset(buf, value ? 0xff : 0, bufsize);
 
-	/* Loop until @count reaches zero. */
-	lastbyte = 0;
-	lastbyte_buf = NULL;
-	bit = count & 7;
-	do {
-		/* If there is a last partial byte... */
-		if (count > 0 && bit) {
-			lastbyte_pos = ((count + 7) >> 3) + firstbyte;
-			if (!lastbyte_pos) {
-				// FIXME: Eeek! BUG!
-				ntfs_log_error("Lastbyte is zero. Leaving "
-						"inconsistent metadata.\n");
-				errno = EIO;
-				goto free_err_out;
-			}
-			/* and it is in the currently loaded bitmap window... */
-			if (lastbyte_pos <= bufsize) {
-				lastbyte_buf = buf + lastbyte_pos - 1;
+    /* If there is a first partial byte... */
+    if (bit)
+    {
+        /* read it in... */
+        br = ntfs_attr_pread(na, start_bit >> 3, 1, buf);
+        if (br != 1)
+        {
+            if (br >= 0) errno = EIO;
+            goto free_err_out;
+        }
+        /* and set or clear the appropriate bits in it. */
+        while ((bit & 7) && count--)
+        {
+            if (value)
+                *buf |= 1 << bit++;
+            else *buf &= ~(1 << bit++);
+        }
+        /* Update @start_bit to the new position. */
+        start_bit = (start_bit + 7) & ~7;
+    }
 
-				/* read the byte in... */
-				br = ntfs_attr_pread(na, (start_bit + count) >>
-						3, 1, lastbyte_buf);
-				if (br != 1) {
-					// FIXME: Eeek! We need rollback! (AIA)
-					if (br >= 0)
-						errno = EIO;
-					ntfs_log_perror("Reading of last byte "
-						"failed (%lld). Leaving inconsistent "
-						"metadata", (long long)br);
-					goto free_err_out;
-				}
-				/* and set/clear the appropriate bits in it. */
-				while (bit && count--) {
-					if (value)
-						*lastbyte_buf |= 1 << --bit;
-					else
-						*lastbyte_buf &= ~(1 << --bit);
-				}
-				/* We don't want to come back here... */
-				bit = 0;
-				/* We have a last byte that we have handled. */
-				lastbyte = 1;
-			}
-		}
+    /* Loop until @count reaches zero. */
+    lastbyte = 0;
+    lastbyte_buf = NULL;
+    bit = count & 7;
+    do
+    {
+        /* If there is a last partial byte... */
+        if (count > 0 && bit)
+        {
+            lastbyte_pos = ((count + 7) >> 3) + firstbyte;
+            if (!lastbyte_pos)
+            {
+                // FIXME: Eeek! BUG!
+                ntfs_log_error("Lastbyte is zero. Leaving "
+                        "inconsistent metadata.\n");
+                errno = EIO;
+                goto free_err_out;
+            }
+            /* and it is in the currently loaded bitmap window... */
+            if (lastbyte_pos <= bufsize)
+            {
+                lastbyte_buf = buf + lastbyte_pos - 1;
 
-		/* Write the prepared buffer to disk. */
-		tmp = (start_bit >> 3) - firstbyte;
-		br = ntfs_attr_pwrite(na, tmp, bufsize, buf);
-		if (br != bufsize) {
-			// FIXME: Eeek! We need rollback! (AIA)
-			if (br >= 0)
-				errno = EIO;
-			ntfs_log_perror("Failed to write buffer to bitmap "
-				"(%lld != %lld). Leaving inconsistent metadata",
-				(long long)br, (long long)bufsize);
-			goto free_err_out;
-		}
+                /* read the byte in... */
+                br = ntfs_attr_pread(na, (start_bit + count) >> 3, 1, lastbyte_buf);
+                if (br != 1)
+                {
+                    // FIXME: Eeek! We need rollback! (AIA)
+                    if (br >= 0) errno = EIO;
+                    ntfs_log_perror("Reading of last byte "
+                            "failed (%lld). Leaving inconsistent "
+                            "metadata", (long long)br);
+                    goto free_err_out;
+                }
+                /* and set/clear the appropriate bits in it. */
+                while (bit && count--)
+                {
+                    if (value)
+                        *lastbyte_buf |= 1 << --bit;
+                    else *lastbyte_buf &= ~(1 << --bit);
+                }
+                /* We don't want to come back here... */
+                bit = 0;
+                /* We have a last byte that we have handled. */
+                lastbyte = 1;
+            }
+        }
 
-		/* Update counters. */
-		tmp = (bufsize - firstbyte - lastbyte) << 3;
-		if (firstbyte) {
-			firstbyte = 0;
-			/*
-			 * Re-set the partial first byte so a subsequent write
-			 * of the buffer does not have stale, incorrect bits.
-			 */
-			*buf = value ? 0xff : 0;
-		}
-		start_bit += tmp;
-		count -= tmp;
-		if (bufsize > (tmp = (count + 7) >> 3))
-			bufsize = tmp;
+        /* Write the prepared buffer to disk. */
+        tmp = (start_bit >> 3) - firstbyte;
+        br = ntfs_attr_pwrite(na, tmp, bufsize, buf);
+        if (br != bufsize)
+        {
+            // FIXME: Eeek! We need rollback! (AIA)
+            if (br >= 0) errno = EIO;
+            ntfs_log_perror("Failed to write buffer to bitmap "
+                    "(%lld != %lld). Leaving inconsistent metadata",
+                    (long long)br, (long long)bufsize);
+            goto free_err_out;
+        }
 
-		if (lastbyte && count != 0) {
-			// FIXME: Eeek! BUG!
-			ntfs_log_error("Last buffer but count is not zero "
-				       "(%lld). Leaving inconsistent metadata.\n",
-				       (long long)count);
-			errno = EIO;
-			goto free_err_out;
-		}
-	} while (count > 0);
-	
-	ret = 0;
-	
-free_err_out:
-	free(buf);
-	return ret;
+        /* Update counters. */
+        tmp = (bufsize - firstbyte - lastbyte) << 3;
+        if (firstbyte)
+        {
+            firstbyte = 0;
+            /*
+             * Re-set the partial first byte so a subsequent write
+             * of the buffer does not have stale, incorrect bits.
+             */
+            *buf = value ? 0xff : 0;
+        }
+        start_bit += tmp;
+        count -= tmp;
+        if (bufsize > (tmp = (count + 7) >> 3)) bufsize = tmp;
+
+        if (lastbyte && count != 0)
+        {
+            // FIXME: Eeek! BUG!
+            ntfs_log_error("Last buffer but count is not zero "
+                    "(%lld). Leaving inconsistent metadata.\n",
+                    (long long)count);
+            errno = EIO;
+            goto free_err_out;
+        }
+    } while (count > 0);
+
+    ret = 0;
+
+    free_err_out: free(buf);
+    return ret;
 }
 
 /**
@@ -267,13 +263,13 @@ free_err_out:
  */
 int ntfs_bitmap_set_run(ntfs_attr *na, s64 start_bit, s64 count)
 {
-	int ret; 
-	
-	ntfs_log_enter("Set from bit %lld, count %lld\n",
-		       (long long)start_bit, (long long)count);
-	ret = ntfs_bitmap_set_bits_in_run(na, start_bit, count, 1);
-	ntfs_log_leave("\n");
-	return ret;
+    int ret;
+
+    ntfs_log_enter("Set from bit %lld, count %lld\n",
+            (long long)start_bit, (long long)count);
+    ret = ntfs_bitmap_set_bits_in_run(na, start_bit, count, 1);
+    ntfs_log_leave("\n");
+    return ret;
 }
 
 /**
@@ -289,12 +285,12 @@ int ntfs_bitmap_set_run(ntfs_attr *na, s64 start_bit, s64 count)
  */
 int ntfs_bitmap_clear_run(ntfs_attr *na, s64 start_bit, s64 count)
 {
-	int ret; 
-	
-	ntfs_log_enter("Clear from bit %lld, count %lld\n",
-		       (long long)start_bit, (long long)count);
-	ret = ntfs_bitmap_set_bits_in_run(na, start_bit, count, 0);
-	ntfs_log_leave("\n");
-	return ret;
+    int ret;
+
+    ntfs_log_enter("Clear from bit %lld, count %lld\n",
+            (long long)start_bit, (long long)count);
+    ret = ntfs_bitmap_set_bits_in_run(na, start_bit, count, 0);
+    ntfs_log_leave("\n");
+    return ret;
 }
 

@@ -4,23 +4,23 @@
 #include "gui.h"
 #include "../usbloader/disc.h"
 class GuiImageAsync;
-class GuiGameGrid : public GuiElement
+class GuiGameGrid: public GuiElement
 {
     public:
-        GuiGameGrid( int w, int h, const char *themePath, const u8 *imagebg, int selected = 0, int offset = 0 );
+        GuiGameGrid(int w, int h, const char *themePath, const u8 *imagebg, int selected = 0, int offset = 0);
         ~GuiGameGrid();
-        int FindMenuItem( int c, int d );
+        int FindMenuItem(int c, int d);
         int GetClickedOption();
         int GetSelectedOption();
         void ResetState();
-        void SetFocus( int f );
+        void SetFocus(int f);
         void Draw();
-        void Update( GuiTrigger * t );
+        void Update(GuiTrigger * t);
         int GetOffset();
-        void Reload( int Rows, int ListOffset );
-        void ChangeRows( int n );
+        void Reload(int Rows, int ListOffset);
+        void ChangeRows(int n);
     protected:
-        GuiImageData    noCover;
+        GuiImageData noCover;
         int selectedItem;
         int listOffset;
         int pagesize;
@@ -33,7 +33,6 @@ class GuiGameGrid : public GuiElement
         GuiButton ** game;
         GuiTooltip ** titleTT;
         GuiImageAsync ** coverImg;
-
 
         GuiButton * btnRight;
         GuiButton * btnLeft;

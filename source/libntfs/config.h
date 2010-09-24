@@ -133,7 +133,7 @@
 #undef HAVE_SETXATTR
 
 /* Define to 1 if `stat' has the bug that it succeeds when given the
-   zero-length file name argument. */
+ zero-length file name argument. */
 #define HAVE_STAT_EMPTY_STRING_BUG 1
 
 /* Define to 1 if you have the <stdarg.h> header file. */
@@ -203,7 +203,7 @@
 #undef HAVE_STRUCT_STAT_ST_RDEV
 
 /* Define to 1 if your `struct stat' has `st_blocks'. Deprecated, use
-   `HAVE_STRUCT_STAT_ST_BLOCKS' instead. */
+ `HAVE_STRUCT_STAT_ST_BLOCKS' instead. */
 #undef HAVE_ST_BLOCKS
 
 /* Define to 1 if you have the `sysconf' function. */
@@ -279,7 +279,7 @@
 #undef IGNORE_MTAB
 
 /* Define to 1 if `lstat' dereferences a symlink specified with a trailing
-   slash. */
+ slash. */
 #undef LSTAT_FOLLOWS_SLASHED_SYMLINK
 
 /* Define to 1 if your C compiler doesn't accept -c and -o together. */
@@ -340,11 +340,11 @@
 #undef WINDOWS
 
 /* Define to 1 if your processor stores words with the most significant byte
-   first (like Motorola and SPARC, unlike Intel and VAX). */
+ first (like Motorola and SPARC, unlike Intel and VAX). */
 #define WORDS_BIGENDIAN 1
 
 /* Define to 1 if your processor stores words with the least significant byte
-   first (like Intel and VAX, unlike Motorola and SPARC). */
+ first (like Intel and VAX, unlike Motorola and SPARC). */
 #undef WORDS_LITTLEENDIAN
 
 /* Number of bits in a file offset, on hosts where this is settable. */
@@ -362,7 +362,7 @@
 #undef _REENTRANT
 
 /* Define to `__inline__' or `__inline' if that's what the C compiler
-   calls it, or to nothing if 'inline' is not supported under any name.  */
+ calls it, or to nothing if 'inline' is not supported under any name.  */
 #ifndef __cplusplus
 #define inline __inline__
 #endif

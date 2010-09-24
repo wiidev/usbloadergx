@@ -13,7 +13,7 @@
 extern u8 mountMethod;
 
 /** Alternate dolloader made by WiiPower modified by dimok **/
-bool Load_Dol( void **buffer, int* dollen, char * filepath )
+bool Load_Dol(void **buffer, int* dollen, char * filepath)
 {
     int ret;
     FILE* file;
@@ -21,46 +21,46 @@ bool Load_Dol( void **buffer, int* dollen, char * filepath )
 
     char fullpath[200];
     char gameidbuffer6[7];
-    memset( gameidbuffer6, 0, 7 );
-    memcpy( gameidbuffer6, ( char* )0x80000000, 6 );
-    snprintf( fullpath, 200, "%s%s.dol", filepath, gameidbuffer6 );
+    memset(gameidbuffer6, 0, 7);
+    memcpy(gameidbuffer6, (char*) 0x80000000, 6);
+    snprintf(fullpath, 200, "%s%s.dol", filepath, gameidbuffer6);
 
-//    SDCard_Init();
-//    USBDevice_Init();
+    //    SDCard_Init();
+    //    USBDevice_Init();
 
-    file = fopen( fullpath, "rb" );
+    file = fopen(fullpath, "rb");
 
-    if ( file == NULL )
+    if (file == NULL)
     {
-        fclose( file );
+        fclose(file);
         //     SDCard_deInit();
         //     USBDevice_deInit();
         return false;
     }
 
     int filesize;
-    fseek( file, 0, SEEK_END );
-    filesize = ftell( file );
-    fseek( file, 0, SEEK_SET );
+    fseek(file, 0, SEEK_END);
+    filesize = ftell(file);
+    fseek(file, 0, SEEK_SET);
 
-    dol_buffer = malloc( filesize );
-    if ( dol_buffer == NULL )
+    dol_buffer = malloc(filesize);
+    if (dol_buffer == NULL)
     {
-        fclose( file );
+        fclose(file);
         //      SDCard_deInit();
         //      USBDevice_deInit();
         return false;
     }
-    ret = fread( dol_buffer, 1, filesize, file );
-    if ( ret != filesize )
+    ret = fread(dol_buffer, 1, filesize, file);
+    if (ret != filesize)
     {
-        free( dol_buffer );
-        fclose( file );
+        free(dol_buffer);
+        fclose(file);
         //     SDCard_deInit();
         //     USBDevice_deInit();
         return false;
     }
-    fclose( file );
+    fclose(file);
 
     // SDCard_deInit();
     // USBDevice_deInit();
@@ -69,19 +69,21 @@ bool Load_Dol( void **buffer, int* dollen, char * filepath )
     return true;
 }
 
-bool Remove_001_Protection( void *Address, int Size )
+bool Remove_001_Protection(void *Address, int Size)
 {
-    u8 SearchPattern[16] =  { 0x40, 0x82, 0x00, 0x0C, 0x38, 0x60, 0x00, 0x01, 0x48, 0x00, 0x02, 0x44, 0x38, 0x61, 0x00, 0x18 };
-    u8 PatchData[16] =      { 0x40, 0x82, 0x00, 0x04, 0x38, 0x60, 0x00, 0x01, 0x48, 0x00, 0x02, 0x44, 0x38, 0x61, 0x00, 0x18 };
+    u8 SearchPattern[16] = { 0x40, 0x82, 0x00, 0x0C, 0x38, 0x60, 0x00, 0x01, 0x48, 0x00, 0x02, 0x44, 0x38, 0x61, 0x00,
+            0x18 };
+    u8 PatchData[16] =
+            { 0x40, 0x82, 0x00, 0x04, 0x38, 0x60, 0x00, 0x01, 0x48, 0x00, 0x02, 0x44, 0x38, 0x61, 0x00, 0x18 };
 
     void *Addr = Address;
     void *Addr_end = Address + Size;
 
-    while ( Addr <= Addr_end - sizeof( SearchPattern ) )
+    while (Addr <= Addr_end - sizeof(SearchPattern))
     {
-        if ( memcmp( Addr, SearchPattern, sizeof( SearchPattern ) ) == 0 )
+        if (memcmp(Addr, SearchPattern, sizeof(SearchPattern)) == 0)
         {
-            memcpy( Addr, PatchData, sizeof( PatchData ) );
+            memcpy(Addr, PatchData, sizeof(PatchData));
             return true;
         }
         Addr += 4;
@@ -104,38 +106,39 @@ typedef struct _dolheader
 
 static dolheader *dolfile;
 
-
-u32 load_dol_image( void *dolstart, u8 videoSelected, u8 patchcountrystring, u8 vipatch, u8 cheat )
+u32 load_dol_image(void *dolstart, u8 videoSelected, u8 patchcountrystring, u8 vipatch, u8 cheat)
 {
 
     u32 i;
 
-    if ( dolstart )
+    if (dolstart)
     {
-        dolfile = ( dolheader * ) dolstart;
-        for ( i = 0; i < 7; i++ )
+        dolfile = (dolheader *) dolstart;
+        for (i = 0; i < 7; i++)
         {
-            if ( ( !dolfile->text_size[i] ) || ( dolfile->text_start[i] < 0x100 ) ) continue;
+            if ((!dolfile->text_size[i]) || (dolfile->text_start[i] < 0x100)) continue;
 
-            ICInvalidateRange ( ( void * ) dolfile->text_start[i], dolfile->text_size[i] );
-            memmove ( ( void * ) dolfile->text_start[i], dolstart + dolfile->text_pos[i], dolfile->text_size[i] );
-            gamepatches( ( void * ) dolfile->text_start[i], dolfile->text_size[i], videoSelected, patchcountrystring, vipatch, cheat );
-            Remove_001_Protection( ( void * ) dolfile->data_start[i], dolfile->data_size[i] );
+            ICInvalidateRange((void *) dolfile->text_start[i], dolfile->text_size[i]);
+            memmove((void *) dolfile->text_start[i], dolstart + dolfile->text_pos[i], dolfile->text_size[i]);
+            gamepatches((void *) dolfile->text_start[i], dolfile->text_size[i], videoSelected, patchcountrystring,
+                    vipatch, cheat);
+            Remove_001_Protection((void *) dolfile->data_start[i], dolfile->data_size[i]);
         }
 
-        for ( i = 0; i < 11; i++ )
+        for (i = 0; i < 11; i++)
         {
-            if ( ( !dolfile->data_size[i] ) || ( dolfile->data_start[i] < 0x100 ) ) continue;
+            if ((!dolfile->data_size[i]) || (dolfile->data_start[i] < 0x100)) continue;
 
-            memmove ( ( void * ) dolfile->data_start[i], dolstart + dolfile->data_pos[i], dolfile->data_size[i] );
-            gamepatches( ( void * ) dolfile->data_start[i], dolfile->data_size[i], videoSelected, patchcountrystring, vipatch, cheat );
-            Remove_001_Protection( ( void * ) dolfile->data_start[i], dolfile->data_size[i] );
-            DCFlushRangeNoSync ( ( void * ) dolfile->data_start[i], dolfile->data_size[i] );
+            memmove((void *) dolfile->data_start[i], dolstart + dolfile->data_pos[i], dolfile->data_size[i]);
+            gamepatches((void *) dolfile->data_start[i], dolfile->data_size[i], videoSelected, patchcountrystring,
+                    vipatch, cheat);
+            Remove_001_Protection((void *) dolfile->data_start[i], dolfile->data_size[i]);
+            DCFlushRangeNoSync((void *) dolfile->data_start[i], dolfile->data_size[i]);
         }
         /*
-        memset ((void *) dolfile->bss_start, 0, dolfile->bss_size);
-        DCFlushRange((void *) dolfile->bss_start, dolfile->bss_size);
-        */
+         memset ((void *) dolfile->bss_start, 0, dolfile->bss_size);
+         DCFlushRange((void *) dolfile->bss_start, dolfile->bss_size);
+         */
         return dolfile->entry_point;
     }
     return 0;
@@ -144,11 +147,11 @@ u32 load_dol_image( void *dolstart, u8 videoSelected, u8 patchcountrystring, u8 
 static int i;
 static int phase;
 
-u32 load_dol_start( void *dolstart )
+u32 load_dol_start(void *dolstart)
 {
-    if ( dolstart )
+    if (dolstart)
     {
-        dolfile = ( dolheader * )dolstart;
+        dolfile = (dolheader *) dolstart;
         return dolfile->entry_point;
     }
     else
@@ -156,25 +159,25 @@ u32 load_dol_start( void *dolstart )
         return 0;
     }
 
-    memset( ( void * )dolfile->bss_start, 0, dolfile->bss_size );
-    DCFlushRange( ( void * )dolfile->bss_start, dolfile->bss_size );
+    memset((void *) dolfile->bss_start, 0, dolfile->bss_size);
+    DCFlushRange((void *) dolfile->bss_start, dolfile->bss_size);
 
     phase = 0;
     i = 0;
 }
 
-bool load_dol_image_modified( void **offset, u32 *pos, u32 *len )
+bool load_dol_image_modified(void **offset, u32 *pos, u32 *len)
 {
-    if ( phase == 0 )
+    if (phase == 0)
     {
-        if ( i == 7 )
+        if (i == 7)
         {
             phase = 1;
             i = 0;
         }
         else
         {
-            if ( ( !dolfile->text_size[i] ) || ( dolfile->text_start[i] < 0x100 ) )
+            if ((!dolfile->text_size[i]) || (dolfile->text_start[i] < 0x100))
             {
                 *offset = 0;
                 *pos = 0;
@@ -182,7 +185,7 @@ bool load_dol_image_modified( void **offset, u32 *pos, u32 *len )
             }
             else
             {
-                *offset = ( void * )dolfile->text_start[i];
+                *offset = (void *) dolfile->text_start[i];
                 *pos = dolfile->text_pos[i];
                 *len = dolfile->text_size[i];
             }
@@ -191,15 +194,15 @@ bool load_dol_image_modified( void **offset, u32 *pos, u32 *len )
         }
     }
 
-    if ( phase == 1 )
+    if (phase == 1)
     {
-        if ( i == 11 )
+        if (i == 11)
         {
             phase = 2;
             return false;
         }
 
-        if ( ( !dolfile->data_size[i] ) || ( dolfile->data_start[i] < 0x100 ) )
+        if ((!dolfile->data_size[i]) || (dolfile->data_start[i] < 0x100))
         {
             *offset = 0;
             *pos = 0;
@@ -207,7 +210,7 @@ bool load_dol_image_modified( void **offset, u32 *pos, u32 *len )
         }
         else
         {
-            *offset = ( void * )dolfile->data_start[i];
+            *offset = (void *) dolfile->data_start[i];
             *pos = dolfile->data_pos[i];
             *len = dolfile->data_size[i];
         }
@@ -217,36 +220,38 @@ bool load_dol_image_modified( void **offset, u32 *pos, u32 *len )
     return false;
 }
 static vu32 dvddone = 0;
-void __dvd_readidcb( s32 result )
+void __dvd_readidcb(s32 result)
 {
     dvddone = result;
 }
-u32 Load_Dol_from_disc( u32 doloffset, u8 videoSelected, u8 patchcountrystring, u8 vipatch, u8 cheat )
+u32 Load_Dol_from_disc(u32 doloffset, u8 videoSelected, u8 patchcountrystring, u8 vipatch, u8 cheat)
 {
     int ret;
     void *dol_header;
     u32 entrypoint;
 
-    dol_header = memalign( 32, sizeof( dolheader ) );
-    if ( dol_header == NULL )
+    dol_header = memalign(32, sizeof(dolheader));
+    if (dol_header == NULL)
     {
         return -1;
     }
 
-    if ( !mountMethod )ret = WDVD_Read( dol_header, sizeof( dolheader ), ( doloffset << 2 ) );
+    if (!mountMethod)
+        ret = WDVD_Read(dol_header, sizeof(dolheader), (doloffset << 2));
 
     else
     {
         dvddone = 0;
-        ret = bwDVD_LowRead( dol_header, sizeof( dolheader ), doloffset, __dvd_readidcb );
-        while ( ret >= 0 && dvddone == 0 );
+        ret = bwDVD_LowRead(dol_header, sizeof(dolheader), doloffset, __dvd_readidcb);
+        while (ret >= 0 && dvddone == 0)
+            ;
     }
 
-    entrypoint = load_dol_start( dol_header );
+    entrypoint = load_dol_start(dol_header);
 
-    if ( entrypoint == 0 )
+    if (entrypoint == 0)
     {
-        free( dol_header );
+        free(dol_header);
         return -1;
     }
 
@@ -254,21 +259,21 @@ u32 Load_Dol_from_disc( u32 doloffset, u8 videoSelected, u8 patchcountrystring, 
     u32 pos;
     u32 len;
 
-    while ( load_dol_image_modified( &offset, &pos, &len ) )
+    while (load_dol_image_modified(&offset, &pos, &len))
     {
-        if ( len != 0 )
+        if (len != 0)
         {
-            ret = WDVD_Read( offset, len, ( doloffset << 2 ) + pos );
+            ret = WDVD_Read(offset, len, (doloffset << 2) + pos);
 
-            gamepatches( offset, len, videoSelected, patchcountrystring, vipatch, cheat );
+            gamepatches(offset, len, videoSelected, patchcountrystring, vipatch, cheat);
 
-            Remove_001_Protection( offset, len );
+            Remove_001_Protection(offset, len);
 
-            DCFlushRange( offset, len );
+            DCFlushRange(offset, len);
         }
     }
 
-    free( dol_header );
+    free(dol_header);
 
     return entrypoint;
 

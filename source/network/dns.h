@@ -7,14 +7,13 @@
 #include <stdlib.h>
 
 #include <unistd.h> //usleep
-
 #ifdef __cplusplus
 extern "C"
 {
 #endif
 
-    u32 getipbyname( char *domain );
-    u32 getipbynamecached( char *domain );
+    u32 getipbyname(char *domain);
+    u32 getipbynamecached(char *domain);
 
 #ifdef __cplusplus
 }

@@ -10,7 +10,7 @@
 #ifndef _HOMEBREWBROWSE_H_
 #define _HOMEBREWBROWSE_H_
 
-int roundup( float number );
+int roundup(float number);
 int MenuHomebrewBrowse();
 
 #endif

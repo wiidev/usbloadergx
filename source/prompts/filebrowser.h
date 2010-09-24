@@ -19,25 +19,23 @@
 #define MAXDISPLAY MAXPATHLEN
 #define ROOTDIRLEN 10
 
-
 typedef struct
 {
-    u64 offset; // DVD offset
-    u64 length; // file length in 64 bytes for sizes higher than 4GB
-    char isdir; // 0 - file, 1 - directory
-    char filename[MAXJOLIET + 1]; // full filename
-    char displayname[MAXDISPLAY + 1]; // name for browser display
+        u64 offset; // DVD offset
+        u64 length; // file length in 64 bytes for sizes higher than 4GB
+        char isdir; // 0 - file, 1 - directory
+        char filename[MAXJOLIET + 1]; // full filename
+        char displayname[MAXDISPLAY + 1]; // name for browser display
 } BROWSERENTRY;
 
 typedef struct
 {
-    char            dir[MAXPATHLEN];    // directory path of browserList
-    char            rootdir[ROOTDIRLEN];// directory path of browserList
-    int             pageIndex;          // starting index of browserList page display
-    std::vector<BROWSERENTRY> browserList;
+        char dir[MAXPATHLEN]; // directory path of browserList
+        char rootdir[ROOTDIRLEN];// directory path of browserList
+        int pageIndex; // starting index of browserList page display
+        std::vector<BROWSERENTRY> browserList;
 } BROWSERINFO;
 extern BROWSERINFO *browser;
-
 
 #define FB_NOFOLDER_BTN     0x0001
 #define FB_NODEVICE_BTN     0x0002
@@ -45,19 +43,17 @@ extern BROWSERINFO *browser;
 #define FB_TRYSTDDEV        0x0008
 #define FB_DEFAULT          (FB_TRYROOTDIR | FB_TRYSTDDEV)
 
-typedef int ( *FILEFILTERCALLBACK )( BROWSERENTRY *Entry, void* Args );
-int noDIRS( BROWSERENTRY *Entry, void* Args );
-int noFILES( BROWSERENTRY *Entry, void* Args );
-int noEXT( BROWSERENTRY *Entry, void* Args );
+typedef int (*FILEFILTERCALLBACK)(BROWSERENTRY *Entry, void* Args);
+int noDIRS(BROWSERENTRY *Entry, void* Args);
+int noFILES(BROWSERENTRY *Entry, void* Args);
+int noEXT(BROWSERENTRY *Entry, void* Args);
 
 typedef struct _FILTERCASCADE
 {
-    FILEFILTERCALLBACK  filter;
-    void                *filter_args;
-    _FILTERCASCADE      *next;
+        FILEFILTERCALLBACK filter;
+        void *filter_args;
+        _FILTERCASCADE *next;
 } FILTERCASCADE;
-
-
 
 /****************************************************************************
  * BrowseDevice
@@ -75,8 +71,8 @@ typedef struct _FILTERCASCADE
  *
  *
  ***************************************************************************/
-int BrowseDevice( char * Path, int Path_size, int Flags/*=FB_DEFAULT*/, FILTERCASCADE *Filter = NULL ) ;
-int BrowseDevice( char * Path, int Path_size, int Flags, FILEFILTERCALLBACK Filter, void *FilterArgs = NULL );
+int BrowseDevice(char * Path, int Path_size, int Flags/*=FB_DEFAULT*/, FILTERCASCADE *Filter = NULL);
+int BrowseDevice(char * Path, int Path_size, int Flags, FILEFILTERCALLBACK Filter, void *FilterArgs = NULL);
 
 #endif
 
