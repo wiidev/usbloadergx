@@ -119,7 +119,8 @@ bool Device_WriteSectors(u32 device, u32 sector, u32 count, void *buffer)
 
 s32 Partition_GetEntriesEx(u32 device, partitionEntry *outbuf, u32 *psect_size, u8 *num)
 {
-    static partitionTable table ATTRIBUTE_ALIGN( 32 );
+    static u8 Buffer[sizeof(partitionTable)] ATTRIBUTE_ALIGN( 32 );
+    partitionTable *table = (partitionTable *) Buffer;
     partitionEntry *entry;
 
     u32 i, sector_size;
@@ -146,13 +147,13 @@ s32 Partition_GetEntriesEx(u32 device, partitionEntry *outbuf, u32 *psect_size, 
     u32 next = 0;
 
     // Read partition table
-    ret = Device_ReadSectors(device, 0, 1, &table);
+    ret = Device_ReadSectors(device, 0, 1, table);
     if (!ret) return -1;
     // Check if it's a RAW WBFS disc, without partition table
-    if (get_fs_type(&table) == FS_TYPE_WBFS)
+    if (get_fs_type(table) == FS_TYPE_WBFS)
     {
-        memset(outbuf, 0, sizeof(table.entries));
-        wbfs_head_t *head = (wbfs_head_t*) &table;
+        memset(outbuf, 0, sizeof(table->entries));
+        wbfs_head_t * head = (wbfs_head_t *) Buffer;
         outbuf->size = wbfs_ntohl( head->n_hd_sec );
         *num = 1;
         return 0;
@@ -160,7 +161,7 @@ s32 Partition_GetEntriesEx(u32 device, partitionEntry *outbuf, u32 *psect_size, 
     /* Swap endianess */
     for (i = 0; i < 4; i++)
     {
-        entry = &table.entries[i];
+        entry = &table->entries[i];
         entry->sector = swap32(entry->sector);
         entry->size = swap32(entry->size);
         if (!ext && part_is_extended(entry->type))
@@ -169,7 +170,7 @@ s32 Partition_GetEntriesEx(u32 device, partitionEntry *outbuf, u32 *psect_size, 
         }
     }
     /* Set partition entries */
-    memcpy(outbuf, table.entries, sizeof(table.entries));
+    memcpy(outbuf, table->entries, sizeof(table->entries));
     // num primary
     *num = 4;
 
@@ -179,7 +180,7 @@ s32 Partition_GetEntriesEx(u32 device, partitionEntry *outbuf, u32 *psect_size, 
     // scan extended partition for logical
     for (i = 0; i < maxpart - 4; i++)
     {
-        ret = Device_ReadSectors(device, next, 1, &table);
+        ret = Device_ReadSectors(device, next, 1, table);
         if (!ret) break;
         if (i == 0)
         {
@@ -187,7 +188,7 @@ s32 Partition_GetEntriesEx(u32 device, partitionEntry *outbuf, u32 *psect_size, 
             // partition instead of on the Logical inside Extended.
             if (get_fs_type(&table) == FS_TYPE_WBFS) break;
         }
-        entry = &table.entries[0];
+        entry = &table->entries[0];
         entry->sector = swap32(entry->sector);
         entry->size = swap32(entry->size);
         if (entry->type && entry->size && entry->sector)
