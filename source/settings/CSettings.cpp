@@ -207,8 +207,8 @@ bool CSettings::Save()
     fprintf(file, "quickboot = %d\n ", quickboot);
     fprintf(file, "wsprompt = %d\n ", wsprompt);
     fprintf(file, "parentalcontrol = %d\n ", parentalcontrol);
-    fprintf(file, "cover_path = %s\n ", covers_path);
-    fprintf(file, "cover2d_path = %s\n ", covers2d_path);
+    fprintf(file, "covers_path = %s\n ", covers_path);
+    fprintf(file, "covers2d_path = %s\n ", covers2d_path);
     fprintf(file, "theme_path = %s\n ", theme_path);
     fprintf(file, "disc_path = %s\n ", disc_path);
     fprintf(file, "language_path = %s\n ", language_path);
@@ -235,8 +235,8 @@ bool CSettings::Save()
     fprintf(file, "discart = %d\n ", discart);
     fprintf(file, "partition = %d\n ", partition);
     fprintf(file, "marknewtitles = %d\n ", marknewtitles);
-    fprintf(file, "fatInstallToDir = %d\n ", FatInstallToDir);
-    fprintf(file, "partitions = %d\n ", partitions_to_install);
+    fprintf(file, "FatInstallToDir = %d\n ", FatInstallToDir);
+    fprintf(file, "partitions_to_install = %d\n ", partitions_to_install);
     fprintf(file, "fullcopy = %d\n ", fullcopy);
     fprintf(file, "beta_upgrades = %d\n ", beta_upgrades);
     fprintf(file, "returnTo = %s\n ", returnTo);
@@ -337,7 +337,7 @@ bool CSettings::SetSetting(char *name, char *value)
         }
         return true;
     }
-    else if (strcmp(name, "unlockCode") == 0)
+    else if (strcmp(name, "password") == 0)
     {
         strcpy(unlockCode, value);
         return true;

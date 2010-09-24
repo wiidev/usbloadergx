@@ -2602,7 +2602,7 @@ int MenuGameSettings(struct discHdr * header)
 
                     else if (saveBtn.GetState() == STATE_CLICKED)
                     {
-                        if (GameSettings.AddGame(&game_cfg))
+                        if (GameSettings.AddGame(&game_cfg) && GameSettings.Save())
                         {
                             WindowPrompt(tr( "Successfully Saved" ), 0, tr( "OK" ));
                         }
@@ -2905,6 +2905,7 @@ int MenuGameSettings(struct discHdr * header)
                                 if (choice1 == 1 && !mountMethod)
                                 {
                                     GameSettings.Remove(header->id);
+                                    GameSettings.Save();
                                     CFG_forget_game_num(header->id);
                                     ret = WBFS_RemoveGame(header->id);
                                     if (ret < 0)
@@ -3049,6 +3050,7 @@ int MenuGameSettings(struct discHdr * header)
                     strcpy(game_cfg.alternatedolname, "");
                     game_cfg.returnTo = 1;
                     GameSettings.Remove(header->id);
+                    GameSettings.Save();
                 }
 
                 pageToDisplay = 1;

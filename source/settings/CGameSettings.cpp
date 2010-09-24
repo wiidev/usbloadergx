@@ -93,13 +93,13 @@ bool CGameSettings::AddGame(const GameCFG * NewGame)
         if(strncmp(NewGame->id, GameList[i].id, 6) == 0)
         {
             memcpy(&GameList[i], NewGame, sizeof(GameCFG));
-            return Save();
+            return true;
         }
     }
 
     GameList.push_back(*NewGame);
 
-    return Save();
+    return true;
 }
 
 bool CGameSettings::RemoveAll()
@@ -124,7 +124,7 @@ bool CGameSettings::Remove(const char * id)
         }
     }
 
-    return Save();
+    return true;
 }
 
 bool CGameSettings::Load(const char * path)
@@ -341,12 +341,10 @@ void CGameSettings::ParseLine(char *line)
     if(!ReadGameID(line, GameID, 6))
         return;
 
-    int pos = GameList.size();
+    GameCFG NewCFG;
+    memset(&NewCFG, 0, sizeof(GameCFG));
 
-    GameList.resize(pos+1);
-    memset(&GameList[pos], 0, sizeof(GameCFG));
-
-    strcpy(GameList[pos].id, GameID);
+    strcpy(NewCFG.id, GameID);
 
     char * LinePtr = strchr(line, '=');
 
@@ -361,10 +359,12 @@ void CGameSettings::ParseLine(char *line)
         this->TrimLine(name, LinePtr, sizeof(name));
         this->TrimLine(value, eq + 1, sizeof(value));
 
-        SetSetting(GameList[pos], name, value);
+        SetSetting(NewCFG, name, value);
 
         LinePtr = strchr(LinePtr, ';');
     }
+
+    AddGame(&NewCFG);
 }
 
 void CGameSettings::TrimLine(char *dest, const char *src, int size)
