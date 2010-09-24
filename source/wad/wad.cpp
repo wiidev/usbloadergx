@@ -560,7 +560,7 @@ s32 Wad_Uninstall(FILE *fp)
     msg2Txt.SetText(tr( ">> Deleting tickets..." ));
 
     // Get ticket views
-    ret = titles.GetTicketViews(tid, &viewData, &viewCnt);
+    ret = NandTitles.GetTicketViews(tid, &viewData, &viewCnt);
     if (ret < 0)
     {
         char errTxt[50];

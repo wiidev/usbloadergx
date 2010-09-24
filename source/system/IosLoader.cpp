@@ -6,26 +6,11 @@
 #include "../wad/nandtitle.h"
 #include "../mload/mload_modules.h"
 #include "../settings/CSettings.h"
-
-/******************************************************************************
- * Construction/Destruction:
- ******************************************************************************/
-
-/* Initializes a new instance of the IosLoader class. */
-IosLoader::IosLoader(NandTitle titles)
-{
-    nandTitles = titles;
-}
-
-/* Finalizes an instance of the IosLoader class. */
-IosLoader::~IosLoader()
-{
-}
+#include "wad/nandtitle.h"
 
 /******************************************************************************
  * Public Methods:
  ******************************************************************************/
-
 /*
  * Loads CIOS (If possible the one from the settings file).
  * @return 0 if a cios has been successfully loaded. Else a value below 0 is returned.
@@ -83,25 +68,25 @@ s32 IosLoader::ReloadIosSafe(s32 ios)
     {
         case 222:
         {
-            s32 ios222rev = nandTitles.VersionOf(0x1000000deULL);
+            s32 ios222rev = NandTitles.VersionOf(0x1000000deULL);
             if (ios222rev == 4 || ios222rev == 5 || ios222rev == 65535) break;
             return -2;
         }
         case 223:
         {
-            s32 ios223rev = nandTitles.VersionOf(0x1000000dfULL);
+            s32 ios223rev = NandTitles.VersionOf(0x1000000dfULL);
             if (ios223rev == 4 || ios223rev == 5 || ios223rev == 65535) break;
             return -2;
         }
         case 249:
         {
-            s32 ios249rev = nandTitles.VersionOf(0x1000000f9ULL);
+            s32 ios249rev = NandTitles.VersionOf(0x1000000f9ULL);
             if (ios249rev < 9 || ios249rev == 65280) return -2;
             break;
         }
         case 250:
         {
-            s32 ios250rev = nandTitles.VersionOf(0x1000000faULL);
+            s32 ios250rev = NandTitles.VersionOf(0x1000000faULL);
             if (ios250rev < 9 || ios250rev == 65280) return -2;
             break;
         }

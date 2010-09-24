@@ -1045,8 +1045,8 @@ int MenuSettings()
                                             Settings.cios = 222;
                                             break;
                                     }
-                                    if ((Settings.cios == 222 && titles.VersionOf(0x1000000deULL) != 4)
-                                            || (Settings.cios == 2 && titles.VersionOf(0x1000000dfULL) != 4))
+                                    if ((Settings.cios == 222 && NandTitles.VersionOf(0x1000000deULL) != 4)
+                                            || (Settings.cios == 2 && NandTitles.VersionOf(0x1000000dfULL) != 4))
                                     {
                                         WindowPrompt(
                                                 tr( "Hermes CIOS" ),
@@ -1135,10 +1135,10 @@ int MenuSettings()
                                         snprintf(Settings.returnTo, sizeof(Settings.returnTo), "%s", tidChar);
                                     }
                                 }
-                                int haveTitle = titles.FindU32(Settings.returnTo);
+                                int haveTitle = NandTitles.FindU32(Settings.returnTo);
                                 if (haveTitle >= 0)
                                 {
-                                    name = (char*) titles.NameFromIndex(haveTitle);
+                                    name = (char*) NandTitles.NameFromIndex(haveTitle);
                                     if (!strlen(name)) name = NULL;
                                 }
                                 options2.SetValue(Idx, "%s", name ? name : tr( opts_off_on[ 0 ] ));
@@ -2719,12 +2719,12 @@ int GameSettings(struct discHdr * header)
                             if (ret == Idx && ++returnToLoaderGV >= settings_off_on_max) returnToLoaderGV = 0;
 
                             char text[IMET_MAX_NAME_LEN];
-                            int channel = titles.FindU32(Settings.returnTo);//is the channel set in the global settings actually installed?
+                            int channel = NandTitles.FindU32(Settings.returnTo);//is the channel set in the global settings actually installed?
 
                             if (!returnToLoaderGV || channel < 0)//channel is not installed or the uer wants to not use it
                                 sprintf(text, "%s", tr( opts_off_on[ 0 ] ));
 
-                            else snprintf(text, sizeof(text), "%s", titles.NameFromIndex(channel));
+                            else snprintf(text, sizeof(text), "%s", NandTitles.NameFromIndex(channel));
 
                             options2.SetValue(Idx, "%s", text);
                         }

@@ -29,7 +29,7 @@ static char* determineStubTIDLocation()
 
 s32 Set_Stub(u64 reqID)
 {
-    if (titles.IndexOf(reqID) < 0) return WII_EINSTALL;
+    if (NandTitles.IndexOf(reqID) < 0) return WII_EINSTALL;
 
     char *stub = determineStubTIDLocation();
     if (!stub) return -68;

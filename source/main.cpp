@@ -58,7 +58,6 @@ extern bool geckoinit;
 extern char headlessID[8];
 char bootDevice[10];
 
-NandTitle titles;
 PartList partitions;
 
 int main(int argc, char *argv[])
@@ -70,7 +69,7 @@ int main(int argc, char *argv[])
     __exception_setreload(20);
 
     printf("\tStarting up\n");
-    titles.Get();
+    NandTitles.Get();
 
     bool bootDevice_found = false;
     if (argc >= 1)
@@ -109,8 +108,7 @@ int main(int argc, char *argv[])
     printf("done\n");
 
     // Let's load the cIOS now
-    IosLoader loader(titles);
-    if (loader.LoadAppCios() < 0)
+    if (IosLoader::LoadAppCios() < 0)
     {
         printf("\n\tWARNING!\n");
         printf("\tUSB Loader GX needs unstubbed cIOS 222 v4 or 249 v9+\n\n");

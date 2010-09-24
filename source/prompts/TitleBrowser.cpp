@@ -59,19 +59,19 @@ bool TitleSelector(char output[])
     ISFS_Initialize();//initialize for "titles.Exists()"
 
     // Get count of titles of the good titles
-    num_titles = titles.SetType(0x10001);
+    num_titles = NandTitles.SetType(0x10001);
     u32 n = num_titles;
     //gprintf("num_titles: %u\n", num_titles );
     for (u32 i = 0; i < n; i++)
     {
-        u64 tid = titles.Next();
+        u64 tid = NandTitles.Next();
         if (!tid)
         {
             break;
         }
 
         //remove ones not actually installed on the nand
-        if (!titles.Exists(tid))
+        if (!NandTitles.Exists(tid))
         {
             num_titles--;
         }
@@ -89,29 +89,29 @@ bool TitleSelector(char output[])
     //write the titles on the option browser
 
     s32 i = 0;
-    titles.SetType(0x10001);
+    NandTitles.SetType(0x10001);
     while (i < num_titles)
     {
-        u64 tid = titles.Next();
+        u64 tid = NandTitles.Next();
         if (!tid)
         {
             gprintf("shit happened\n");
             break;
         }
 
-        if (!titles.Exists(tid))
+        if (!NandTitles.Exists(tid))
         {
             continue;
         }
 
         char id[5];
-        titles.AsciiTID(tid, (char*) &id);
+        NandTitles.AsciiTID(tid, (char*) &id);
 
-        const char* name = titles.NameOf(tid);
+        const char* name = NandTitles.NameOf(tid);
         //gprintf("%016llx: %s: %s\n%p\t%p\n", tid, id, name, &id, name );
 
         options4.SetName(i, "%s", id);
-        options4.SetValue(i, "%s", name ? titles.NameOf(tid) : tr( "Unknown" ));
+        options4.SetValue(i, "%s", name ? NandTitles.NameOf(tid) : tr( "Unknown" ));
         titleList[i] = tid;
         i++;
     }
@@ -238,29 +238,29 @@ int TitleBrowser()
     ISFS_Initialize();//initialize for "titles.Exists()"
 
     // Get count of titles of the good titles
-    num_titles = titles.SetType(0x10001);
+    num_titles = NandTitles.SetType(0x10001);
     u32 n = num_titles;
     for (u32 i = 0; i < n; i++)
     {
-        u64 tid = titles.Next();
+        u64 tid = NandTitles.Next();
         if (!tid)
         {
             break;
         }
 
         //remove ones not actually installed on the nand
-        if (!titles.Exists(tid))
+        if (!NandTitles.Exists(tid))
         {
             num_titles--;
         }
     }
 
     // Get count of system titles
-    num_sys_titles = titles.SetType(0x10002);
+    num_sys_titles = NandTitles.SetType(0x10002);
     n = num_sys_titles;
     for (u32 i = 0; i < n; i++)
     {
-        u64 tid = titles.Next();
+        u64 tid = NandTitles.Next();
         if (!tid)
         {
             break;
@@ -273,7 +273,7 @@ int TitleBrowser()
         }
 
         //these aren't installed on the nand
-        if (!titles.Exists(tid))
+        if (!NandTitles.Exists(tid))
         {
             num_sys_titles--;
         }
@@ -290,55 +290,55 @@ int TitleBrowser()
     //write the titles on the option browser
 
     u32 i = 0;
-    titles.SetType(0x10001);
+    NandTitles.SetType(0x10001);
     //first add the good stuff
     while (i < num_titles)
     {
-        u64 tid = titles.Next();
+        u64 tid = NandTitles.Next();
         if (!tid)
         {
             gprintf("shit happened3\n");
             break;
         }
-        gprintf("[ %u ] tid: %016llx\t%s\n", i, tid, titles.NameOf(tid));
+        gprintf("[ %u ] tid: %016llx\t%s\n", i, tid, NandTitles.NameOf(tid));
 
-        if (!titles.Exists(tid))
+        if (!NandTitles.Exists(tid))
         {
             continue;
         }
 
         char id[5];
-        titles.AsciiTID(tid, (char*) &id);
+        NandTitles.AsciiTID(tid, (char*) &id);
 
-        const char* name = titles.NameOf(tid);
+        const char* name = NandTitles.NameOf(tid);
 
         options3.SetName(i, "%s", id);
-        options3.SetValue(i, "%s", name ? titles.NameOf(tid) : tr( "Unknown" ));
+        options3.SetValue(i, "%s", name ? NandTitles.NameOf(tid) : tr( "Unknown" ));
         titleList[i] = tid;
         i++;
     }
 
-    titles.SetType(0x10002);
+    NandTitles.SetType(0x10002);
     while (i < num_sys_titles + num_titles)
     {
-        u64 tid = titles.Next();
+        u64 tid = NandTitles.Next();
         if (!tid)
         {
             break;
         }
         if (TITLE_LOWER( tid ) == 0x48414741 || TITLE_LOWER( tid ) == 0x48414141 || TITLE_LOWER( tid ) == 0x48414641) continue;
 
-        if (!titles.Exists(tid))
+        if (!NandTitles.Exists(tid))
         {
             continue;
         }
 
         char id[5];
-        titles.AsciiTID(tid, (char*) &id);
-        const char* name = titles.NameOf(tid);
+        NandTitles.AsciiTID(tid, (char*) &id);
+        const char* name = NandTitles.NameOf(tid);
 
         options3.SetName(i, "%s", id);
-        options3.SetValue(i, "%s", name ? titles.NameOf(tid) : tr( "Unknown" ));
+        options3.SetValue(i, "%s", name ? NandTitles.NameOf(tid) : tr( "Unknown" ));
         titleList[i] = tid;
         i++;
     }
@@ -470,9 +470,9 @@ int TitleBrowser()
                 //set the title's name, number, ID to text
                 char text[0x100];
                 char id[5];
-                titles.AsciiTID(titleList[ret], (char*) &id);
+                NandTitles.AsciiTID(titleList[ret], (char*) &id);
 
-                snprintf(text, sizeof(text), "%s : %s", id, titles.NameOf(titleList[ret]));
+                snprintf(text, sizeof(text), "%s : %s", id, NandTitles.NameOf(titleList[ret]));
 
                 //prompt to boot selected title
                 if (WindowPrompt(tr( "Boot?" ), text, tr( "OK" ), tr( "Cancel" )))

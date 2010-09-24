@@ -612,8 +612,8 @@ int MainMenu(int menu)
         u32 channel = 0;
         if (returnToLoaderGV)
         {
-            int idx = titles.FindU32(Settings.returnTo);
-            if (idx >= 0) channel = TITLE_LOWER( titles.At( idx ) );
+            int idx = NandTitles.FindU32(Settings.returnTo);
+            if (idx >= 0) channel = TITLE_LOWER( NandTitles.At( idx ) );
         }
 
         //This is temporary

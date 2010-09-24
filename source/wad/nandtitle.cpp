@@ -1,6 +1,8 @@
 #include "nandtitle.h"
 #include "gecko.h"
 
+NandTitle NandTitles;
+
 extern "C"
 {
     extern s32 MagicPatches(s32);

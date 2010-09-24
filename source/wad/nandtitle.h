@@ -108,5 +108,6 @@ class NandTitle
         u32 currentType;
 };
 
-extern NandTitle titles;
+extern NandTitle NandTitles;
+
 #endif // NANDTITLE_H
