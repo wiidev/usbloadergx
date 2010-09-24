@@ -17,6 +17,7 @@
 #include "filelist.h"
 #include "listfiles.h"
 #include "settings/cfg.h"
+#include "themes/CTheme.h"
 #include "sys.h"
 #include "menu.h"
 #include "audio.h"
@@ -147,7 +148,7 @@ bool TitleSelector(char output[])
     GuiTrigger trigB;
     trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 
-    GuiText cancelBtnTxt(tr( "Back" ), 22, THEME.prompttext);
+    GuiText cancelBtnTxt(tr( "Back" ), 22, Theme.prompttext);
     cancelBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
     GuiImage cancelBtnImg(&btnOutline);
     if (Settings.wsprompt == yes)
@@ -387,7 +388,7 @@ int TitleBrowser()
     settingsbackgroundbtn.SetPosition(0, 0);
     settingsbackgroundbtn.SetImage(&settingsbackground);
 
-    GuiText cancelBtnTxt(tr( "Back" ), 22, THEME.prompttext);
+    GuiText cancelBtnTxt(tr( "Back" ), 22, Theme.prompttext);
     cancelBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
     GuiImage cancelBtnImg(&btnOutline);
     if (Settings.wsprompt == yes)

@@ -20,6 +20,7 @@
 #include "homebrewboot/HomebrewXML.h"
 #include "homebrewboot/BootHomebrew.h"
 #include "network/networkops.h"
+#include "themes/CTheme.h"
 #include "menu.h"
 #include "menu/menus.h"
 #include "filelist.h"
@@ -147,7 +148,7 @@ int MenuHomebrewBrowse()
     }
     /*** Buttons ***/
 
-    GuiText backBtnTxt(tr( "Back" ), 22, THEME.prompttext);
+    GuiText backBtnTxt(tr( "Back" ), 22, Theme.prompttext);
     backBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
     GuiImage backBtnImg(&btnOutline);
     if (Settings.wsprompt == yes)
@@ -1067,7 +1068,7 @@ int MenuHomebrewBrowse()
                     wifiBtn.SetAlpha(255);
 
                     titleTT = new GuiTooltip(GetNetworkIP());
-                    titleTT->SetAlpha(THEME.tooltipAlpha);
+                    titleTT->SetAlpha(Theme.tooltipAlpha);
                     wifiBtn.SetToolTip(titleTT, 0, -50, 0, 5);
                     wifi_btn_loaded = true;
                 }

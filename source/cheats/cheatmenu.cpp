@@ -6,6 +6,7 @@
 #include "libwiigui/gui_customoptionbrowser.h"
 #include "prompts/PromptWindows.h"
 #include "language/gettext.h"
+#include "themes/CTheme.h"
 #include "fatmounter.h"
 #include "listfiles.h"
 #include "menu.h"
@@ -45,14 +46,14 @@ int CheatMenu(const char * gameID)
     GuiTrigger trigB;
     trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 
-    GuiText backBtnTxt(tr( "Back" ), 22, THEME.prompttext);
+    GuiText backBtnTxt(tr( "Back" ), 22, Theme.prompttext);
     backBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
     GuiImage backBtnImg(&btnOutline);
     GuiButton backBtn(&backBtnImg, &backBtnImg, 2, 3, -140, 400, &trigA, NULL, btnClick2, 1);
     backBtn.SetLabel(&backBtnTxt);
     backBtn.SetTrigger(&trigB);
 
-    GuiText createBtnTxt(tr( "Create" ), 22, THEME.prompttext);
+    GuiText createBtnTxt(tr( "Create" ), 22, Theme.prompttext);
     createBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
     GuiImage createBtnImg(&btnOutline);
     GuiButton createBtn(&createBtnImg, &createBtnImg, 2, 3, 160, 400, &trigA, NULL, btnClick2, 1);

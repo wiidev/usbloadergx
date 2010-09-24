@@ -15,6 +15,7 @@
 #include "gui_gamecarousel.h"
 #include "usbloader/GameList.h"
 #include "../settings/CSettings.h"
+#include "themes/CTheme.h"
 #include "../main.h"
 
 #include <string.h>
@@ -105,7 +106,7 @@ GuiGameCarousel::GuiGameCarousel(int w, int h, const char *themePath, const u8 *
     btnRight->SetTrigger(trigPlus);
     btnRight->SetEffectGrow();
 
-    gamename = new GuiText(" ", 18, THEME.info);
+    gamename = new GuiText(" ", 18, Theme.info);
     gamename->SetParent(this);
     gamename->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     gamename->SetPosition(0, 330);

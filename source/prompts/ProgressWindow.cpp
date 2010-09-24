@@ -17,6 +17,7 @@
 #include "prompts/ProgressWindow.h"
 #include "usbloader/wbfs.h"
 #include "usbloader/utils.h"
+#include "themes/CTheme.h"
 
 /*** Variables used only in this file ***/
 static lwp_t progressthread = LWP_THREAD_NULL;
@@ -166,39 +167,39 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
     progressbarImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     progressbarImg.SetPosition(25, 40);
 
-    GuiText titleTxt(title, 26, THEME.prompttext);
+    GuiText titleTxt(title, 26, Theme.prompttext);
     titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     titleTxt.SetPosition(0, 60);
 
-    GuiText msg1Txt(msg1, 22, THEME.prompttext);
+    GuiText msg1Txt(msg1, 22, Theme.prompttext);
     msg1Txt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     if (msg2)
         msg1Txt.SetPosition(0, 120);
     else msg1Txt.SetPosition(0, 100);
     msg1Txt.SetMaxWidth(430, DOTTED);
 
-    GuiText msg2Txt(msg2, 22, THEME.prompttext);
+    GuiText msg2Txt(msg2, 22, Theme.prompttext);
     msg2Txt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     msg2Txt.SetPosition(0, 125);
     msg2Txt.SetMaxWidth(430, DOTTED);
 
-    GuiText prsTxt("%", 22, THEME.prompttext);
+    GuiText prsTxt("%", 22, Theme.prompttext);
     prsTxt.SetAlignment(ALIGN_RIGHT, ALIGN_MIDDLE);
     prsTxt.SetPosition(-188, 40);
 
-    GuiText timeTxt((char*) NULL, 22, THEME.prompttext);
+    GuiText timeTxt((char*) NULL, 22, Theme.prompttext);
     timeTxt.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
     timeTxt.SetPosition(280, -50);
 
-    GuiText sizeTxt((char*) NULL, 22, THEME.prompttext);
+    GuiText sizeTxt((char*) NULL, 22, Theme.prompttext);
     sizeTxt.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
     sizeTxt.SetPosition(50, -50);
 
-    GuiText speedTxt((char*) NULL, 22, THEME.prompttext);
+    GuiText speedTxt((char*) NULL, 22, Theme.prompttext);
     speedTxt.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
     speedTxt.SetPosition(50, -74);
 
-    GuiText prTxt((char*) NULL, 26, THEME.prompttext);
+    GuiText prTxt((char*) NULL, 26, Theme.prompttext);
     prTxt.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     prTxt.SetPosition(200, 40);
 

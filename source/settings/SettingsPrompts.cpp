@@ -8,6 +8,7 @@
 #include "libwiigui/gui.h"
 #include "libwiigui/gui_customoptionbrowser.h"
 #include "settings/CSettings.h"
+#include "themes/CTheme.h"
 #include "network/URL_List.h"
 #include "listfiles.h"
 #include "main.h"
@@ -138,7 +139,7 @@ int MenuLanguageSelect()
     oggmenubackground.SetAlignment( ALIGN_LEFT, ALIGN_TOP );
     oggmenubackground.SetPosition( 0, 0 );
 
-    GuiText backBtnTxt( tr( "Back" ) , 22, THEME.prompttext );
+    GuiText backBtnTxt( tr( "Back" ) , 22, Theme.prompttext );
     backBtnTxt.SetMaxWidth( btnOutline.GetWidth() - 30 );
     GuiImage backBtnImg( &btnOutline );
     if ( Settings.wsprompt == yes )
@@ -157,7 +158,7 @@ int MenuLanguageSelect()
     backBtn.SetTrigger( &trigB );
     backBtn.SetEffectGrow();
 
-    GuiText defaultBtnTxt( tr( "Default" ) , 22, THEME.prompttext );
+    GuiText defaultBtnTxt( tr( "Default" ) , 22, Theme.prompttext );
     defaultBtnTxt.SetMaxWidth( btnOutline.GetWidth() - 30 );
     GuiImage defaultBtnImg( &btnOutline );
     if ( Settings.wsprompt == yes )
@@ -175,7 +176,7 @@ int MenuLanguageSelect()
     defaultBtn.SetTrigger( &trigA );
     defaultBtn.SetEffectGrow();
 
-    GuiText updateBtnTxt( tr( "Update Files" ) , 22, THEME.prompttext );
+    GuiText updateBtnTxt( tr( "Update Files" ) , 22, Theme.prompttext );
     updateBtnTxt.SetMaxWidth( btnOutline.GetWidth() - 30 );
     GuiImage updateBtnImg( &btnOutline );
     if ( Settings.wsprompt == yes )

@@ -15,6 +15,8 @@
 #include "language/gettext.h"
 #include "menu.h"
 #include "filelist.h"
+#include "themes/CTheme.h"
+
 /*** Extern functions ***/
 extern void ResumeGui();
 extern void HaltGui();
@@ -137,7 +139,7 @@ s32 Wad_Install(FILE *fp)
         dialogBoxImg.SetWidescreen(Settings.widescreen);
     }
 
-    GuiText btn1Txt(tr( "OK" ), 22, THEME.prompttext);
+    GuiText btn1Txt(tr( "OK" ), 22, Theme.prompttext);
     GuiImage btn1Img(&btnOutline);
     if (Settings.wsprompt == yes)
     {
@@ -173,33 +175,33 @@ s32 Wad_Install(FILE *fp)
 
     char title[50];
     sprintf(title, "%s", tr( "Installing wad" ));
-    GuiText titleTxt(title, 26, THEME.prompttext);
+    GuiText titleTxt(title, 26, Theme.prompttext);
     titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     titleTxt.SetPosition(0, 40);
     char msg[50];
     sprintf(msg, " ");
     // sprintf(msg, "%s", tr("Initializing Network"));
-    GuiText msg1Txt((char*) NULL, 20, THEME.prompttext);
+    GuiText msg1Txt((char*) NULL, 20, Theme.prompttext);
     msg1Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     msg1Txt.SetPosition(50, 75);
     //  char msg2[50] = " ";
-    GuiText msg2Txt((char*) NULL, 20, THEME.prompttext);
+    GuiText msg2Txt((char*) NULL, 20, Theme.prompttext);
     msg2Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     msg2Txt.SetPosition(50, 98);
 
-    GuiText msg3Txt((char*) NULL, 20, THEME.prompttext);
+    GuiText msg3Txt((char*) NULL, 20, Theme.prompttext);
     msg3Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     msg3Txt.SetPosition(50, 121);
 
-    GuiText msg4Txt((char*) NULL, 20, THEME.prompttext);
+    GuiText msg4Txt((char*) NULL, 20, Theme.prompttext);
     msg4Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     msg4Txt.SetPosition(50, 144);
 
-    GuiText msg5Txt((char*) NULL, 20, THEME.prompttext);
+    GuiText msg5Txt((char*) NULL, 20, Theme.prompttext);
     msg5Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     msg5Txt.SetPosition(50, 167);
 
-    GuiText prTxt((char*) NULL, 26, THEME.prompttext);
+    GuiText prTxt((char*) NULL, 26, Theme.prompttext);
     prTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     prTxt.SetPosition(0, 50);
 
@@ -460,7 +462,7 @@ s32 Wad_Uninstall(FILE *fp)
         dialogBoxImg.SetWidescreen(Settings.widescreen);
     }
 
-    GuiText btn1Txt(tr( "OK" ), 22, THEME.prompttext);
+    GuiText btn1Txt(tr( "OK" ), 22, Theme.prompttext);
     GuiImage btn1Img(&btnOutline);
     if (Settings.wsprompt == yes)
     {
@@ -473,27 +475,27 @@ s32 Wad_Uninstall(FILE *fp)
 
     char title[50];
     sprintf(title, "%s", tr( "Uninstalling wad" ));
-    GuiText titleTxt(title, 26, THEME.prompttext);
+    GuiText titleTxt(title, 26, Theme.prompttext);
     titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     titleTxt.SetPosition(0, 40);
 
-    GuiText msg1Txt((char*) NULL, 18, THEME.prompttext);
+    GuiText msg1Txt((char*) NULL, 18, Theme.prompttext);
     msg1Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     msg1Txt.SetPosition(50, 75);
 
-    GuiText msg2Txt((char*) NULL, 18, THEME.prompttext);
+    GuiText msg2Txt((char*) NULL, 18, Theme.prompttext);
     msg2Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     msg2Txt.SetPosition(50, 98);
 
-    GuiText msg3Txt((char*) NULL, 18, THEME.prompttext);
+    GuiText msg3Txt((char*) NULL, 18, Theme.prompttext);
     msg3Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     msg3Txt.SetPosition(50, 121);
 
-    GuiText msg4Txt((char*) NULL, 18, THEME.prompttext);
+    GuiText msg4Txt((char*) NULL, 18, Theme.prompttext);
     msg4Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     msg4Txt.SetPosition(50, 144);
 
-    GuiText msg5Txt((char*) NULL, 18, THEME.prompttext);
+    GuiText msg5Txt((char*) NULL, 18, Theme.prompttext);
     msg5Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     msg5Txt.SetPosition(50, 167);
 

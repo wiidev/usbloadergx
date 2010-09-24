@@ -21,6 +21,7 @@
 
 #include "menu.h"
 
+#include "themes/CTheme.h"
 #include "listfiles.h"
 #include "language/gettext.h"
 #include "PromptWindows.h"
@@ -354,7 +355,7 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
     usbBtn.SetTrigger(&trigA);
     usbBtn.SetEffectGrow();
 
-    GuiText okBtnTxt(tr( "OK" ), 22, THEME.prompttext);
+    GuiText okBtnTxt(tr( "OK" ), 22, Theme.prompttext);
     GuiImage okBtnImg(&btnOutline);
     if (Settings.wsprompt == yes)
     {

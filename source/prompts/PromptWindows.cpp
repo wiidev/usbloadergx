@@ -20,6 +20,7 @@
 #include "network/http.h"
 #include "prompts/PromptWindows.h"
 #include "prompts/gameinfo.h"
+#include "themes/CTheme.h"
 #include "mload/mload.h"
 #include "fatmounter.h"
 #include "listfiles.h"
@@ -85,7 +86,7 @@ int OnScreenNumpad(char * var, u32 maxlen)
     GuiTrigger trigB;
     trigB.SetSimpleTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 
-    GuiText okBtnTxt(tr( "OK" ), 22, THEME.prompttext);
+    GuiText okBtnTxt(tr( "OK" ), 22, Theme.prompttext);
     GuiImage okBtnImg(&btnOutline);
     if (Settings.wsprompt == yes)
     {
@@ -94,7 +95,7 @@ int OnScreenNumpad(char * var, u32 maxlen)
     }
     GuiButton okBtn(&okBtnImg, &okBtnImg, 0, 4, 5, -15, &trigA, &btnSoundOver, btnClick2, 1);
     okBtn.SetLabel(&okBtnTxt);
-    GuiText cancelBtnTxt(tr( "Cancel" ), 22, THEME.prompttext);
+    GuiText cancelBtnTxt(tr( "Cancel" ), 22, Theme.prompttext);
     GuiImage cancelBtnImg(&btnOutline);
     if (Settings.wsprompt == yes)
     {
@@ -175,7 +176,7 @@ int OnScreenKeyboard(char * var, u32 maxlen, int min)
     GuiTrigger trigB;
     trigB.SetSimpleTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 
-    GuiText okBtnTxt(tr( "OK" ), 22, THEME.prompttext);
+    GuiText okBtnTxt(tr( "OK" ), 22, Theme.prompttext);
     GuiImage okBtnImg(&btnOutline);
     if (Settings.wsprompt == yes)
     {
@@ -184,7 +185,7 @@ int OnScreenKeyboard(char * var, u32 maxlen, int min)
     }
     GuiButton okBtn(&okBtnImg, &okBtnImg, 0, 4, 5, 15, &trigA, &btnSoundOver, btnClick2, 1);
     okBtn.SetLabel(&okBtnTxt);
-    GuiText cancelBtnTxt(tr( "Cancel" ), 22, THEME.prompttext);
+    GuiText cancelBtnTxt(tr( "Cancel" ), 22, Theme.prompttext);
     GuiImage cancelBtnImg(&btnOutline);
     if (Settings.wsprompt == yes)
     {
@@ -561,15 +562,15 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label, cons
         dialogBoxImg.SetWidescreen(Settings.widescreen);
     }
 
-    GuiText titleTxt(title, 26, THEME.prompttext);
+    GuiText titleTxt(title, 26, Theme.prompttext);
     titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     titleTxt.SetPosition(0, 55);
-    GuiText msgTxt(msg, 22, THEME.prompttext);
+    GuiText msgTxt(msg, 22, Theme.prompttext);
     msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     msgTxt.SetPosition(0, -40);
     msgTxt.SetMaxWidth(430);
 
-    GuiText btn1Txt(btn1Label, 22, THEME.prompttext);
+    GuiText btn1Txt(btn1Label, 22, Theme.prompttext);
     GuiImage btn1Img(&btnOutline);
     if (Settings.wsprompt == yes)
     {
@@ -581,7 +582,7 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label, cons
     btn1.SetLabel(&btn1Txt);
     btn1.SetState(STATE_SELECTED);
 
-    GuiText btn2Txt(btn2Label, 22, THEME.prompttext);
+    GuiText btn2Txt(btn2Label, 22, Theme.prompttext);
     GuiImage btn2Img(&btnOutline);
     if (Settings.wsprompt == yes)
     {
@@ -592,7 +593,7 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label, cons
     btn2.SetLabel(&btn2Txt);
     if (!btn3Label && !btn4Label) btn2.SetTrigger(&trigB);
 
-    GuiText btn3Txt(btn3Label, 22, THEME.prompttext);
+    GuiText btn3Txt(btn3Label, 22, Theme.prompttext);
     GuiImage btn3Img(&btnOutline);
     if (Settings.wsprompt == yes)
     {
@@ -603,7 +604,7 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label, cons
     btn3.SetLabel(&btn3Txt);
     if (!btn4Label) btn3.SetTrigger(&trigB);
 
-    GuiText btn4Txt(btn4Label, 22, THEME.prompttext);
+    GuiText btn4Txt(btn4Label, 22, Theme.prompttext);
     GuiImage btn4Img(&btnOutline);
     if (Settings.wsprompt == yes)
     {
@@ -1234,7 +1235,7 @@ int GameWindowPrompt()
 
     GuiTooltip nameBtnTT(tr( "Rename Game on WBFS" ));
     if (Settings.wsprompt == yes) nameBtnTT.SetWidescreen(Settings.widescreen);
-    GuiText nameTxt("", 22, THEME.prompttext);
+    GuiText nameTxt("", 22, Theme.prompttext);
     if (Settings.wsprompt == yes) nameTxt.SetWidescreen(Settings.widescreen);
     nameTxt.SetMaxWidth(350, SCROLL_HORIZONTAL);
     GuiButton nameBtn(120, 50);
@@ -1252,7 +1253,7 @@ int GameWindowPrompt()
         nameBtn.SetEffectGrow();
     }
 
-    GuiText sizeTxt((char*) NULL, 22, THEME.prompttext); //TODO: get the size here
+    GuiText sizeTxt((char*) NULL, 22, Theme.prompttext); //TODO: get the size here
     sizeTxt.SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
     sizeTxt.SetPosition(-60, 70);
 
@@ -1268,7 +1269,7 @@ int GameWindowPrompt()
     diskImg2.SetAngle(angle);
     diskImg2.SetBeta(180);
 
-    GuiText playcntTxt((char*) NULL, 18, THEME.info);
+    GuiText playcntTxt((char*) NULL, 18, Theme.info);
     playcntTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     playcntTxt.SetPosition(-115, 45);
 
@@ -1282,7 +1283,7 @@ int GameWindowPrompt()
     btn1.SetTrigger(&trigA);
     btn1.SetState(STATE_SELECTED);
 
-    GuiText btn2Txt(tr( "Back" ), 22, THEME.prompttext);
+    GuiText btn2Txt(tr( "Back" ), 22, Theme.prompttext);
     GuiImage btn2Img(&btnOutline);
     if (Settings.wsprompt == yes)
     {
@@ -1304,7 +1305,7 @@ int GameWindowPrompt()
     btn2.SetLabel(&btn2Txt);
     btn2.SetTrigger(&trigB);
 
-    GuiText btn3Txt(tr( "Settings" ), 22, THEME.prompttext);
+    GuiText btn3Txt(tr( "Settings" ), 22, Theme.prompttext);
     GuiImage btn3Img(&btnOutline);
     if (Settings.wsprompt == yes)
     {
@@ -1834,15 +1835,15 @@ int DiscWait(const char *title, const char *msg, const char *btn1Label, const ch
         dialogBoxImg.SetWidescreen(Settings.widescreen);
     }
 
-    GuiText titleTxt(title, 26, THEME.prompttext);
+    GuiText titleTxt(title, 26, Theme.prompttext);
     titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     titleTxt.SetPosition(0, 60);
-    GuiText msgTxt(msg, 22, THEME.prompttext);
+    GuiText msgTxt(msg, 22, Theme.prompttext);
     msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     msgTxt.SetPosition(0, -40);
     msgTxt.SetMaxWidth(430);
 
-    GuiText btn1Txt(btn1Label, 22, THEME.prompttext);
+    GuiText btn1Txt(btn1Label, 22, Theme.prompttext);
     GuiImage btn1Img(&btnOutline);
     if (Settings.wsprompt == yes)
     {
@@ -1866,7 +1867,7 @@ int DiscWait(const char *title, const char *msg, const char *btn1Label, const ch
     btn1.SetTrigger(&trigB);
     btn1.SetState(STATE_SELECTED);
 
-    GuiText btn2Txt(btn2Label, 22, THEME.prompttext);
+    GuiText btn2Txt(btn2Label, 22, Theme.prompttext);
     GuiImage btn2Img(&btnOutline);
     if (Settings.wsprompt == yes)
     {
@@ -1892,7 +1893,7 @@ int DiscWait(const char *title, const char *msg, const char *btn1Label, const ch
         }
     }
 
-    GuiText timerTxt((char*) NULL, 26, THEME.prompttext);
+    GuiText timerTxt((char*) NULL, 26, Theme.prompttext);
     timerTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     timerTxt.SetPosition(0, 160);
 
@@ -1984,7 +1985,7 @@ int FormatingPartition(const char *title, partitionEntry *entry)
         dialogBoxImg.SetWidescreen(Settings.widescreen);
     }
 
-    GuiText titleTxt(title, 26, THEME.prompttext);
+    GuiText titleTxt(title, 26, Theme.prompttext);
     titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     titleTxt.SetPosition(0, 60);
 
@@ -2042,12 +2043,12 @@ bool SearchMissingImages(int choice2)
         dialogBoxImg.SetWidescreen(Settings.widescreen);
     }
 
-    GuiText titleTxt(tr( "Checking existing artwork" ), 26, THEME.prompttext);
+    GuiText titleTxt(tr( "Checking existing artwork" ), 26, Theme.prompttext);
     titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     titleTxt.SetPosition(0, 60);
 
     char msg[20] = " ";
-    GuiText msgTxt(msg, 22, THEME.prompttext);
+    GuiText msgTxt(msg, 22, Theme.prompttext);
     msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     msgTxt.SetPosition(0, -40);
 
@@ -2177,16 +2178,16 @@ bool NetworkInitPrompt()
         dialogBoxImg.SetWidescreen(Settings.widescreen);
     }
 
-    GuiText titleTxt(tr( "Initializing Network" ), 26, THEME.prompttext);
+    GuiText titleTxt(tr( "Initializing Network" ), 26, Theme.prompttext);
     titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     titleTxt.SetPosition(0, 60);
 
     char msg[20] = " ";
-    GuiText msgTxt(msg, 22, THEME.prompttext);
+    GuiText msgTxt(msg, 22, Theme.prompttext);
     msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     msgTxt.SetPosition(0, -40);
 
-    GuiText btn1Txt(tr( "Cancel" ), 22, THEME.prompttext);
+    GuiText btn1Txt(tr( "Cancel" ), 22, Theme.prompttext);
     GuiImage btn1Img(&btnOutline);
     if (Settings.wsprompt == yes)
     {
@@ -2308,23 +2309,23 @@ int ProgressDownloadWindow(int choice2)
     progressbarImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     progressbarImg.SetPosition(25, 40);
 
-    GuiText titleTxt(tr( "Downloading file" ), 26, THEME.prompttext);
+    GuiText titleTxt(tr( "Downloading file" ), 26, Theme.prompttext);
     titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     titleTxt.SetPosition(0, 60);
 
-    GuiText msgTxt((char*) NULL, 20, THEME.prompttext);
+    GuiText msgTxt((char*) NULL, 20, Theme.prompttext);
     msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     msgTxt.SetPosition(0, 130);
 
-    GuiText msg2Txt((char*) NULL, 26, THEME.prompttext);
+    GuiText msg2Txt((char*) NULL, 26, Theme.prompttext);
     msg2Txt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     msg2Txt.SetPosition(0, 100);
 
-    GuiText prTxt((char*) NULL, 26, THEME.prompttext);
+    GuiText prTxt((char*) NULL, 26, Theme.prompttext);
     prTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     prTxt.SetPosition(0, 40);
 
-    GuiText btn1Txt(tr( "Cancel" ), 22, THEME.prompttext);
+    GuiText btn1Txt(tr( "Cancel" ), 22, Theme.prompttext);
     GuiImage btn1Img(&btnOutline);
     if (Settings.wsprompt == yes)
     {
@@ -2919,24 +2920,24 @@ int ProgressUpdateWindow()
 
     char title[50];
     sprintf( title, "%s", tr( "Checking for Updates" ) );
-    GuiText titleTxt( title, 26, THEME.prompttext );
+    GuiText titleTxt( title, 26, Theme.prompttext );
     titleTxt.SetAlignment( ALIGN_CENTRE, ALIGN_TOP );
     titleTxt.SetPosition( 0, 50 );
     char msg[50];
     sprintf( msg, "%s", tr( "Initializing Network" ) );
-    GuiText msgTxt( msg, 26, THEME.prompttext );
+    GuiText msgTxt( msg, 26, Theme.prompttext );
     msgTxt.SetAlignment( ALIGN_CENTRE, ALIGN_TOP );
     msgTxt.SetPosition( 0, 140 );
     char msg2[50] = " ";
-    GuiText msg2Txt( msg2, 26, THEME.prompttext );
+    GuiText msg2Txt( msg2, 26, Theme.prompttext );
     msg2Txt.SetAlignment( ALIGN_CENTRE, ALIGN_MIDDLE );
     msg2Txt.SetPosition( 0, 50 );
 
-    GuiText prTxt( NULL, 26, THEME.prompttext );
+    GuiText prTxt( NULL, 26, Theme.prompttext );
     prTxt.SetAlignment( ALIGN_CENTRE, ALIGN_MIDDLE );
     prTxt.SetPosition( 0, 7 );
 
-    GuiText btn1Txt( tr( "Cancel" ), 22, THEME.prompttext );
+    GuiText btn1Txt( tr( "Cancel" ), 22, Theme.prompttext );
     GuiImage btn1Img( &btnOutline );
     if ( Settings.wsprompt == yes )
     {
@@ -3285,24 +3286,24 @@ int ProgressUpdateWindow()
 
     char title[50];
     sprintf(title, "%s", tr( "Checking for Updates" ));
-    GuiText titleTxt(title, 26, THEME.prompttext);
+    GuiText titleTxt(title, 26, Theme.prompttext);
     titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     titleTxt.SetPosition(0, 50);
     char msg[50];
     sprintf(msg, "%s", tr( "Initializing Network" ));
-    GuiText msgTxt(msg, 26, THEME.prompttext);
+    GuiText msgTxt(msg, 26, Theme.prompttext);
     msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     msgTxt.SetPosition(0, 140);
     char msg2[50] = " ";
-    GuiText msg2Txt(msg2, 26, THEME.prompttext);
+    GuiText msg2Txt(msg2, 26, Theme.prompttext);
     msg2Txt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     msg2Txt.SetPosition(0, 50);
 
-    GuiText prTxt((char*) NULL, 26, THEME.prompttext);
+    GuiText prTxt((char*) NULL, 26, Theme.prompttext);
     prTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     prTxt.SetPosition(0, 7);
 
-    GuiText btn1Txt(tr( "Cancel" ), 22, THEME.prompttext);
+    GuiText btn1Txt(tr( "Cancel" ), 22, Theme.prompttext);
     GuiImage btn1Img(&btnOutline);
     if (Settings.wsprompt == yes)
     {
@@ -3661,20 +3662,20 @@ int CodeDownload(const char *id)
 
     char title[50];
     sprintf(title, "%s", tr( "Code Download" ));
-    GuiText titleTxt(title, 26, THEME.prompttext);
+    GuiText titleTxt(title, 26, Theme.prompttext);
     titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     titleTxt.SetPosition(0, 50);
     char msg[50];
     sprintf(msg, "%s", tr( "Initializing Network" ));
-    GuiText msgTxt(msg, 26, THEME.prompttext);
+    GuiText msgTxt(msg, 26, Theme.prompttext);
     msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     msgTxt.SetPosition(0, 140);
     char msg2[50] = " ";
-    GuiText msg2Txt(msg2, 26, THEME.prompttext);
+    GuiText msg2Txt(msg2, 26, Theme.prompttext);
     msg2Txt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     msg2Txt.SetPosition(0, 50);
 
-    GuiText btn1Txt(tr( "Cancel" ), 22, THEME.prompttext);
+    GuiText btn1Txt(tr( "Cancel" ), 22, Theme.prompttext);
     GuiImage btn1Img(&btnOutline);
     if (Settings.wsprompt == yes)
     {
@@ -3901,32 +3902,32 @@ int HBCWindowPrompt(const char *name, const char *coder, const char *version, co
 
     char tmp[510];
 
-    GuiText nameTxt(name, 30, THEME.prompttext);
+    GuiText nameTxt(name, 30, Theme.prompttext);
     nameTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     nameTxt.SetPosition(0, -15);
     nameTxt.SetMaxWidth(430, SCROLL_HORIZONTAL);
 
     if (strcmp(coder, "")) snprintf(tmp, sizeof(tmp), tr( "Coded by: %s" ), coder);
-    GuiText coderTxt(tmp, 16, THEME.prompttext);
+    GuiText coderTxt(tmp, 16, Theme.prompttext);
     coderTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     coderTxt.SetPosition(180, 30);
     coderTxt.SetMaxWidth(280);
 
     if (strcmp(version, "")) snprintf(tmp, sizeof(tmp), tr( "Version: %s" ), version);
-    GuiText versionTxt(tmp, 16, THEME.prompttext);
+    GuiText versionTxt(tmp, 16, Theme.prompttext);
     versionTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     versionTxt.SetPosition(40, 65);
     versionTxt.SetMaxWidth(430);
 
     //if (release_date)
     //snprintf(tmp, sizeof(tmp), tr("Released: %s"),release_date);
-    GuiText release_dateTxt(release_date, 16, THEME.prompttext);
+    GuiText release_dateTxt(release_date, 16, Theme.prompttext);
     release_dateTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     release_dateTxt.SetPosition(40, 85);
     release_dateTxt.SetMaxWidth(430);
 
     int pagesize = 6;
-    Text long_descriptionTxt(long_description, 20, THEME.prompttext);
+    Text long_descriptionTxt(long_description, 20, Theme.prompttext);
     long_descriptionTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     long_descriptionTxt.SetPosition(46, 117);
     long_descriptionTxt.SetMaxWidth(360);
@@ -3958,11 +3959,11 @@ int HBCWindowPrompt(const char *name, const char *coder, const char *version, co
         snprintf(filesizeCH, sizeof(filesizeCH), "%s MB", temp2);
 
     }
-    GuiText filesizeTxt(filesizeCH, 16, THEME.prompttext);
+    GuiText filesizeTxt(filesizeCH, 16, Theme.prompttext);
     filesizeTxt.SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
     filesizeTxt.SetPosition(-40, 12);
 
-    GuiText btn1Txt(tr( "Load" ), 22, THEME.prompttext);
+    GuiText btn1Txt(tr( "Load" ), 22, Theme.prompttext);
     GuiImage btn1Img(&btnOutline);
     if (Settings.wsprompt == yes)
     {
@@ -3974,7 +3975,7 @@ int HBCWindowPrompt(const char *name, const char *coder, const char *version, co
     btn1.SetLabel(&btn1Txt);
     btn1.SetState(STATE_SELECTED);
 
-    GuiText btn2Txt(tr( "Back" ), 22, THEME.prompttext);
+    GuiText btn2Txt(tr( "Back" ), 22, Theme.prompttext);
     GuiImage btn2Img(&btnOutline);
     if (Settings.wsprompt == yes)
     {

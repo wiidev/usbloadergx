@@ -14,6 +14,7 @@
 #include "gui_image_async.h"
 #include "usbloader/GameList.h"
 #include "../settings/CSettings.h"
+#include "themes/CTheme.h"
 #include "../prompts/PromptWindows.h"
 #include "../language/gettext.h"
 #include "../menu.h"
@@ -399,8 +400,8 @@ void GuiGameGrid::Draw()
 
         for (int i = 0; i < pagesize - rows; i++)
         {
-            game[i]->SetPosition(Pos[i][wsi][0] * f1 + Pos[i + rows][wsi][0] * f2 + THEME.gamegrid_x, Pos[i][wsi][1]
-                    * f1 + Pos[i + rows][wsi][1] * f2 + THEME.gamegrid_y);
+            game[i]->SetPosition(Pos[i][wsi][0] * f1 + Pos[i + rows][wsi][0] * f2 + Theme.gamegrid_x, Pos[i][wsi][1]
+                    * f1 + Pos[i + rows][wsi][1] * f2 + Theme.gamegrid_y);
 
             game[i]->SetSkew(Skew[i][0] * f1 + Skew[i + rows][0] * f2, Skew[i][1] * f1 + Skew[i + rows][1] * f2,
                     Skew[i][2] * f1 + Skew[i + rows][2] * f2, Skew[i][3] * f1 + Skew[i + rows][3] * f2, Skew[i][4] * f1
@@ -418,8 +419,8 @@ void GuiGameGrid::Draw()
         int (*Skew)[8] = VALUE4ROWS( rows, Skew1, Skew2, Skew3 );
         for (int i = rows; i < pagesize; i++)
         {
-            game[i]->SetPosition(Pos[i][wsi][0] * f1 + Pos[i - rows][wsi][0] * f2 + THEME.gamegrid_x, Pos[i][wsi][1]
-                    * f1 + Pos[i - rows][wsi][1] * f2 + THEME.gamegrid_y);
+            game[i]->SetPosition(Pos[i][wsi][0] * f1 + Pos[i - rows][wsi][0] * f2 + Theme.gamegrid_x, Pos[i][wsi][1]
+                    * f1 + Pos[i - rows][wsi][1] * f2 + Theme.gamegrid_y);
 
             game[i]->SetSkew(Skew[i][0] * f1 + Skew[i - rows][0] * f2, Skew[i][1] * f1 + Skew[i - rows][1] * f2,
                     Skew[i][2] * f1 + Skew[i - rows][2] * f2, Skew[i][3] * f1 + Skew[i - rows][3] * f2, Skew[i][4] * f1
@@ -785,8 +786,8 @@ void GuiGameGrid::Reload(int Rows, int ListOffset)
         // Tooltip
         //------------------------
         if (gameIndex[i] != -1)
-            titleTT[i] = new GuiTooltip(get_title(gameList[gameIndex[i]]), THEME.tooltipAlpha);
-        else titleTT[i] = new GuiTooltip(NULL, THEME.tooltipAlpha);
+            titleTT[i] = new GuiTooltip(get_title(gameList[gameIndex[i]]), Theme.tooltipAlpha);
+        else titleTT[i] = new GuiTooltip(NULL, Theme.tooltipAlpha);
 
         //------------------------
         // ImageData
@@ -821,7 +822,7 @@ void GuiGameGrid::Reload(int Rows, int ListOffset)
         game[i]->SetParent(this);
         game[i]->SetImage(coverImg[i]);
         game[i]->SetAlignment(ALIGN_TOP, ALIGN_LEFT);
-        game[i]->SetPosition(Pos[i][wsi][0] + THEME.gamegrid_x, Pos[i][wsi][1] + THEME.gamegrid_y);
+        game[i]->SetPosition(Pos[i][wsi][0] + Theme.gamegrid_x, Pos[i][wsi][1] + Theme.gamegrid_y);
         game[i]->SetSkew(&Skew[i][0]);
         game[i]->SetTrigger(trigA);
         game[i]->SetSoundOver(btnSoundOver);

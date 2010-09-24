@@ -28,6 +28,7 @@
 
 #include "CSettings.h"
 #include "language/gettext.h"
+#include "themes/CTheme.h"
 #include "listfiles.h"
 
 #define DEFAULT_APP_PATH    "apps/usbloader_gx/"
@@ -38,6 +39,7 @@ CSettings Settings;
 
 CSettings::CSettings()
 {
+    CONF_Init();
     strcpy(BootDevice, "SD:");
     this->SetDefault();
 }
@@ -107,7 +109,6 @@ void CSettings::SetDefault()
     memset(&Parental, 0, sizeof(Parental));
 
     char buf[0x4a];
-    CONF_Init();
     s32 res = CONF_Get("IPL.PC", buf, 0x4A);
     if (res > 0)
     {
@@ -120,10 +121,48 @@ void CSettings::SetDefault()
         memcpy(Parental.pin, buf + 3, 4);
         memcpy(Parental.answer, buf + 8, 32);
     }
-    widescreen = CONF_GetAspectRatio();
+    widescreen = (CONF_GetAspectRatio() == CONF_ASPECT_16_9);
     godmode = (Parental.enabled == 0) ? 1 : 0;
 
-    CFG_DefaultTheme();
+    Theme.SetDefault(); //! We need to move this later
+}
+
+bool CSettings::Load()
+{
+    FindConfig();
+
+    char line[1024];
+    char filepath[300];
+    snprintf(filepath, sizeof(filepath), "%s", ConfigPath);
+
+    file = fopen(filepath, "r");
+    if (!file) return false;
+
+    while (fgets(line, sizeof(line), file))
+    {
+        if (line[0] == '#') continue;
+
+        this->ParseLine(line);
+    }
+    fclose(file);
+
+    //!The following needs to be moved later
+    CFG_LoadGameNum();
+
+    snprintf(filepath, sizeof(filepath), "%sGXtheme.cfg", theme_path);
+    Theme.Load(filepath);
+
+    return true;
+
+}
+
+bool CSettings::Reset()
+{
+    this->SetDefault();
+
+    if (this->Save()) return true;
+
+    return false;
 }
 
 bool CSettings::Save()
@@ -201,88 +240,9 @@ bool CSettings::Save()
     fprintf(file, "fullcopy = %d\n ", fullcopy);
     fprintf(file, "beta_upgrades = %d\n ", beta_upgrades);
     fprintf(file, "returnTo = %s\n ", returnTo);
-    //fprintf(file, "widescreen = %d\n ", widescreen);// no need to save this to the settings.  it is determined by the CONF_ stuff and there is no way to adjust it in the gui
     fclose(file);
 
     return true;
-}
-
-bool CSettings::FindConfig()
-{
-    bool found = false;
-    strcpy(BootDevice, "SD:");
-
-    for (int i = 0; i < 2; ++i)
-    {
-        if (i == 1) strcpy(BootDevice, "USB:");
-
-        snprintf(ConfigPath, sizeof(ConfigPath), "%s/config/GXGlobal.cfg", BootDevice);
-        if ((found = checkfile(ConfigPath))) break;
-
-        snprintf(ConfigPath, sizeof(ConfigPath), "%s/apps/usbloader_gx/GXGlobal.cfg", BootDevice);
-        if ((found = checkfile(ConfigPath))) break;
-    }
-
-    if (!found)
-    {
-        FILE * testFp = NULL;
-        strcpy(BootDevice, "SD:");
-        //! No existing config so try to find a place where we can write it too
-        for (int i = 0; i < 2; ++i)
-        {
-            if (i == 1) strcpy(BootDevice, "USB:");
-            if (!found)
-            {
-                snprintf(ConfigPath, sizeof(ConfigPath), "%s/config/GXGlobal.cfg", BootDevice);
-                testFp = fopen(ConfigPath, "wb");
-                found = (testFp != NULL);
-                fclose(testFp);
-            }
-            if (!found)
-            {
-                snprintf(ConfigPath, sizeof(ConfigPath), "%s/apps/usbloader_gx/GXGlobal.cfg", BootDevice);
-                testFp = fopen(ConfigPath, "wb");
-                found = (testFp != NULL);
-                fclose(testFp);
-            }
-        }
-    }
-
-    return found;
-}
-
-bool CSettings::Load()
-{
-    FindConfig();
-
-    char line[1024];
-    char filepath[300];
-    snprintf(filepath, sizeof(filepath), "%s", ConfigPath);
-
-    file = fopen(filepath, "r");
-    if (!file) return false;
-
-    while (fgets(line, sizeof(line), file))
-    {
-        if (line[0] == '#') continue;
-
-        this->ParseLine(line);
-    }
-    fclose(file);
-
-    CFG_LoadTheme(widescreen, theme_path);
-
-    return true;
-
-}
-
-bool CSettings::Reset()
-{
-    this->SetDefault();
-
-    if (this->Save()) return true;
-
-    return false;
 }
 
 bool CSettings::SetSetting(char *name, char *value)
@@ -594,6 +554,50 @@ bool CSettings::SetSetting(char *name, char *value)
     }
 
     return false;
+}
+
+bool CSettings::FindConfig()
+{
+    bool found = false;
+    strcpy(BootDevice, "SD:");
+
+    for (int i = 0; i < 2; ++i)
+    {
+        if (i == 1) strcpy(BootDevice, "USB:");
+
+        snprintf(ConfigPath, sizeof(ConfigPath), "%s/config/GXGlobal.cfg", BootDevice);
+        if ((found = checkfile(ConfigPath))) break;
+
+        snprintf(ConfigPath, sizeof(ConfigPath), "%s/apps/usbloader_gx/GXGlobal.cfg", BootDevice);
+        if ((found = checkfile(ConfigPath))) break;
+    }
+
+    if (!found)
+    {
+        FILE * testFp = NULL;
+        strcpy(BootDevice, "SD:");
+        //! No existing config so try to find a place where we can write it too
+        for (int i = 0; i < 2; ++i)
+        {
+            if (i == 1) strcpy(BootDevice, "USB:");
+            if (!found)
+            {
+                snprintf(ConfigPath, sizeof(ConfigPath), "%s/config/GXGlobal.cfg", BootDevice);
+                testFp = fopen(ConfigPath, "wb");
+                found = (testFp != NULL);
+                fclose(testFp);
+            }
+            if (!found)
+            {
+                snprintf(ConfigPath, sizeof(ConfigPath), "%s/apps/usbloader_gx/GXGlobal.cfg", BootDevice);
+                testFp = fopen(ConfigPath, "wb");
+                found = (testFp != NULL);
+                fclose(testFp);
+            }
+        }
+    }
+
+    return found;
 }
 
 void CSettings::ParseLine(char *line)

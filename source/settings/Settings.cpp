@@ -10,6 +10,7 @@
 #include "settings/SettingsPrompts.h"
 #include "prompts/filebrowser.h"
 #include "cheats/cheatmenu.h"
+#include "themes/CTheme.h"
 #include "fatmounter.h"
 #include "menu.h"
 #include "menu/menus.h"
@@ -156,7 +157,7 @@ int MenuSettings()
 
     GuiImage settingsbackground(&settingsbg);
 
-    GuiText backBtnTxt(tr( "Back" ), 22, THEME.prompttext);
+    GuiText backBtnTxt(tr( "Back" ), 22, Theme.prompttext);
     backBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
     GuiImage backBtnImg(&btnOutline);
     if (Settings.wsprompt == yes)
@@ -1725,7 +1726,7 @@ int MenuSettings()
                                             else Settings.Save();
                                             mainWindow->Remove(bgImg);
                                             HaltGui();
-                                            CFG_LoadTheme(Settings.widescreen, Settings.theme_path);
+											Theme.Load(Settings.theme_path);
                                             ResumeGui();
                                             menu = MENU_SETTINGS;
                                             snprintf(imgPath, sizeof(imgPath), "%splayer1_point.png",
@@ -2332,7 +2333,7 @@ int GameSettings(struct discHdr * header)
 
     GuiImage settingsbackground(&settingsbg);
 
-    GuiText backBtnTxt(tr( "Back" ), 22, THEME.prompttext);
+    GuiText backBtnTxt(tr( "Back" ), 22, Theme.prompttext);
     backBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
     GuiImage backBtnImg(&btnOutline);
     if (Settings.wsprompt == yes)
@@ -2347,7 +2348,7 @@ int GameSettings(struct discHdr * header)
     GuiButton homo(1, 1);
     homo.SetTrigger(&trigHome);
 
-    GuiText saveBtnTxt(tr( "Save" ), 22, THEME.prompttext);
+    GuiText saveBtnTxt(tr( "Save" ), 22, Theme.prompttext);
     saveBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
     GuiImage saveBtnImg(&btnOutline);
     if (Settings.wsprompt == yes)

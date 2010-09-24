@@ -15,6 +15,7 @@
 #include "../main.h"
 #include "settings/newtitles.h"
 #include "usbloader/GameList.h"
+#include "themes/CTheme.h"
 
 #include <string.h>
 #include <sstream>
@@ -28,7 +29,7 @@ GuiGameBrowser::GuiGameBrowser(int w, int h, const char *themePath, const u8 *im
 {
     width = w;
     height = h;
-    pagesize = THEME.pagesize;
+    pagesize = Theme.pagesize;
     scrollbaron = (gameList.size() > pagesize) ? 1 : 0;
     selectable = true;
     listOffset = MAX( 0, MIN( offset, ( gameList.size() - pagesize ) ) );
@@ -128,12 +129,12 @@ GuiGameBrowser::GuiGameBrowser(int w, int h, const char *themePath, const u8 *im
 
     for (int i = 0; i < pagesize; i++)
     {
-        gameTxt[i] = new GuiText(get_title(gameList[i]), 20, THEME.gametext);
+        gameTxt[i] = new GuiText(get_title(gameList[i]), 20, Theme.gametext);
         gameTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
         gameTxt[i]->SetPosition(24, 0);
         gameTxt[i]->SetMaxWidth(maxTextWidth, DOTTED);
 
-        gameTxtOver[i] = new GuiText(get_title(gameList[i]), 20, THEME.gametext);
+        gameTxtOver[i] = new GuiText(get_title(gameList[i]), 20, Theme.gametext);
         gameTxtOver[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
         gameTxtOver[i]->SetPosition(24, 0);
         gameTxtOver[i]->SetMaxWidth(maxTextWidth, SCROLL_HORIZONTAL);

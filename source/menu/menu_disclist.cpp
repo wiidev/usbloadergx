@@ -9,6 +9,7 @@
 #include "prompts/DiscBrowser.h"
 #include "prompts/TitleBrowser.h"
 #include "settings/Settings.h"
+#include "themes/CTheme.h"
 #include "wpad.h"
 #include "sys.h"
 
@@ -212,72 +213,72 @@ int MenuDiscList()
                     + used), tr( "free" ));
         }
     }
-    GuiText usedSpaceTxt(spaceinfo, 18, THEME.info);
-    usedSpaceTxt.SetAlignment(THEME.hddinfo_align, ALIGN_TOP);
-    usedSpaceTxt.SetPosition(THEME.hddinfo_x, THEME.hddinfo_y);
+    GuiText usedSpaceTxt(spaceinfo, 18, Theme.info);
+    usedSpaceTxt.SetAlignment(Theme.hddinfo_align, ALIGN_TOP);
+    usedSpaceTxt.SetPosition(Theme.hddinfo_x, Theme.hddinfo_y);
 
     char GamesCnt[15];
     sprintf(GamesCnt, "%s: %i", (mountMethod != 3 ? tr( "Games" ) : tr( "Channels" )), gameList.size());
-    GuiText gamecntTxt(GamesCnt, 18, THEME.info);
+    GuiText gamecntTxt(GamesCnt, 18, Theme.info);
 
     GuiButton gamecntBtn(100, 18);
-    gamecntBtn.SetAlignment(THEME.gamecount_align, ALIGN_TOP);
-    gamecntBtn.SetPosition(THEME.gamecount_x, THEME.gamecount_y);
+    gamecntBtn.SetAlignment(Theme.gamecount_align, ALIGN_TOP);
+    gamecntBtn.SetPosition(Theme.gamecount_x, Theme.gamecount_y);
     gamecntBtn.SetLabel(&gamecntTxt);
     gamecntBtn.SetEffectGrow();
     gamecntBtn.SetTrigger(&trigA);
 
     GuiTooltip installBtnTT(tr( "Install a game" ));
     if (Settings.wsprompt == yes) installBtnTT.SetWidescreen(Settings.widescreen);
-    installBtnTT.SetAlpha(THEME.tooltipAlpha);
+    installBtnTT.SetAlpha(Theme.tooltipAlpha);
     GuiImage installBtnImg(&btnInstall);
     GuiImage installBtnImgOver(&btnInstallOver);
     installBtnImg.SetWidescreen(Settings.widescreen);
     installBtnImgOver.SetWidescreen(Settings.widescreen);
 
-    GuiButton installBtn(&installBtnImg, &installBtnImgOver, ALIGN_LEFT, ALIGN_TOP, THEME.install_x, THEME.install_y,
+    GuiButton installBtn(&installBtnImg, &installBtnImgOver, ALIGN_LEFT, ALIGN_TOP, Theme.install_x, Theme.install_y,
             &trigA, &btnSoundOver, btnClick2, 1, &installBtnTT, 24, -30, 0, 5);
 
     GuiTooltip settingsBtnTT(tr( "Settings" ));
     if (Settings.wsprompt == yes) settingsBtnTT.SetWidescreen(Settings.widescreen);
-    settingsBtnTT.SetAlpha(THEME.tooltipAlpha);
+    settingsBtnTT.SetAlpha(Theme.tooltipAlpha);
     GuiImage settingsBtnImg(&btnSettings);
     settingsBtnImg.SetWidescreen(Settings.widescreen);
     GuiImage settingsBtnImgOver(&btnSettingsOver);
     settingsBtnImgOver.SetWidescreen(Settings.widescreen);
-    GuiButton settingsBtn(&settingsBtnImg, &settingsBtnImgOver, 0, 3, THEME.setting_x, THEME.setting_y, &trigA,
+    GuiButton settingsBtn(&settingsBtnImg, &settingsBtnImgOver, 0, 3, Theme.setting_x, Theme.setting_y, &trigA,
             &btnSoundOver, btnClick2, 1, &settingsBtnTT, 65, -30, 0, 5);
 
     GuiTooltip homeBtnTT(tr( "Back to HBC or Wii Menu" ));
     if (Settings.wsprompt == yes) homeBtnTT.SetWidescreen(Settings.widescreen);
-    settingsBtnTT.SetAlpha(THEME.tooltipAlpha);
+    settingsBtnTT.SetAlpha(Theme.tooltipAlpha);
     GuiImage homeBtnImg(&btnhome);
     homeBtnImg.SetWidescreen(Settings.widescreen);
     GuiImage homeBtnImgOver(&btnhomeOver);
     homeBtnImgOver.SetWidescreen(Settings.widescreen);
-    GuiButton homeBtn(&homeBtnImg, &homeBtnImgOver, 0, 3, THEME.home_x, THEME.home_y, &trigA, &btnSoundOver, btnClick2,
+    GuiButton homeBtn(&homeBtnImg, &homeBtnImgOver, 0, 3, Theme.home_x, Theme.home_y, &trigA, &btnSoundOver, btnClick2,
             1, &homeBtnTT, 15, -30, 1, 5);
     homeBtn.RemoveSoundClick();
     homeBtn.SetTrigger(&trigHome);
 
     GuiTooltip poweroffBtnTT(tr( "Power off the Wii" ));
     if (Settings.wsprompt == yes) poweroffBtnTT.SetWidescreen(Settings.widescreen);
-    poweroffBtnTT.SetAlpha(THEME.tooltipAlpha);
+    poweroffBtnTT.SetAlpha(Theme.tooltipAlpha);
     GuiImage poweroffBtnImg(&btnpwroff);
     GuiImage poweroffBtnImgOver(&btnpwroffOver);
     poweroffBtnImg.SetWidescreen(Settings.widescreen);
     poweroffBtnImgOver.SetWidescreen(Settings.widescreen);
-    GuiButton poweroffBtn(&poweroffBtnImg, &poweroffBtnImgOver, 0, 3, THEME.power_x, THEME.power_y, &trigA,
+    GuiButton poweroffBtn(&poweroffBtnImg, &poweroffBtnImgOver, 0, 3, Theme.power_x, Theme.power_y, &trigA,
             &btnSoundOver, btnClick2, 1, &poweroffBtnTT, -10, -30, 1, 5);
 
     GuiTooltip sdcardBtnTT(tr( "Reload SD" ));
     if (Settings.wsprompt == yes) sdcardBtnTT.SetWidescreen(Settings.widescreen);
-    sdcardBtnTT.SetAlpha(THEME.tooltipAlpha);
+    sdcardBtnTT.SetAlpha(Theme.tooltipAlpha);
     GuiImage sdcardImg(&btnsdcard);
     GuiImage sdcardImgOver(&btnsdcardOver);
     sdcardImg.SetWidescreen(Settings.widescreen);
     sdcardImgOver.SetWidescreen(Settings.widescreen);
-    GuiButton sdcardBtn(&sdcardImg, &sdcardImgOver, 0, 3, THEME.sdcard_x, THEME.sdcard_y, &trigA, &btnSoundOver,
+    GuiButton sdcardBtn(&sdcardImg, &sdcardImgOver, 0, 3, Theme.sdcard_x, Theme.sdcard_y, &trigA, &btnSoundOver,
             btnClick2, 1, &sdcardBtnTT, 15, -30, 0, 5);
 
     GuiButton gameInfo(0, 0);
@@ -290,7 +291,7 @@ int MenuDiscList()
 
     GuiTooltip favoriteBtnTT(tr( "Display favorites" ));
     if (Settings.wsprompt == yes) favoriteBtnTT.SetWidescreen(Settings.widescreen);
-    favoriteBtnTT.SetAlpha(THEME.tooltipAlpha);
+    favoriteBtnTT.SetAlpha(Theme.tooltipAlpha);
     GuiImage favoriteBtnImg(&imgfavIcon);
     favoriteBtnImg.SetWidescreen(Settings.widescreen);
     GuiImage favoriteBtnImg_g(&imgfavIcon_gray);
@@ -300,13 +301,13 @@ int MenuDiscList()
         favoriteBtnImg_g.SetGrayscale();
     }
     favoriteBtnImg_g.SetWidescreen(Settings.widescreen);
-    GuiButton favoriteBtn(&favoriteBtnImg_g, &favoriteBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_favorite_x,
-            THEME.gamelist_favorite_y, &trigA, &btnSoundOver, btnClick2, 1, &favoriteBtnTT, -15, 52, 0, 3);
+    GuiButton favoriteBtn(&favoriteBtnImg_g, &favoriteBtnImg_g, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_favorite_x,
+            Theme.gamelist_favorite_y, &trigA, &btnSoundOver, btnClick2, 1, &favoriteBtnTT, -15, 52, 0, 3);
     favoriteBtn.SetAlpha(180);
 
     GuiTooltip searchBtnTT(tr( "Set Search-Filter" ));
     if (Settings.wsprompt == yes) searchBtnTT.SetWidescreen(Settings.widescreen);
-    searchBtnTT.SetAlpha(THEME.tooltipAlpha);
+    searchBtnTT.SetAlpha(Theme.tooltipAlpha);
     GuiImage searchBtnImg(&imgsearchIcon);
     searchBtnImg.SetWidescreen(Settings.widescreen);
     GuiImage searchBtnImg_g(&imgsearchIcon_gray);
@@ -316,13 +317,13 @@ int MenuDiscList()
         searchBtnImg_g.SetGrayscale();
     }
     searchBtnImg_g.SetWidescreen(Settings.widescreen);
-    GuiButton searchBtn(&searchBtnImg_g, &searchBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_search_x,
-            THEME.gamelist_search_y, &trigA, &btnSoundOver, btnClick2, 1, &searchBtnTT, -15, 52, 0, 3);
+    GuiButton searchBtn(&searchBtnImg_g, &searchBtnImg_g, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_search_x,
+            Theme.gamelist_search_y, &trigA, &btnSoundOver, btnClick2, 1, &searchBtnTT, -15, 52, 0, 3);
     searchBtn.SetAlpha(180);
 
     GuiTooltip abcBtnTT(Settings.fave ? tr( "Sort by rank" ) : tr( "Sort alphabetically" ));
     if (Settings.wsprompt == yes) abcBtnTT.SetWidescreen(Settings.widescreen);
-    abcBtnTT.SetAlpha(THEME.tooltipAlpha);
+    abcBtnTT.SetAlpha(Theme.tooltipAlpha);
     GuiImage abcBtnImg(Settings.fave ? &imgrankIcon : &imgabcIcon);
     abcBtnImg.SetWidescreen(Settings.widescreen);
     GuiImage abcBtnImg_g(Settings.fave ? &imgrankIcon_gray : &imgabcIcon_gray);
@@ -332,13 +333,13 @@ int MenuDiscList()
         abcBtnImg_g.SetGrayscale();
     }
     abcBtnImg_g.SetWidescreen(Settings.widescreen);
-    GuiButton abcBtn(&abcBtnImg_g, &abcBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_abc_x, THEME.gamelist_abc_y,
+    GuiButton abcBtn(&abcBtnImg_g, &abcBtnImg_g, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_abc_x, Theme.gamelist_abc_y,
             &trigA, &btnSoundOver, btnClick2, 1, &abcBtnTT, -15, 52, 0, 3);
     abcBtn.SetAlpha(180);
 
     GuiTooltip countBtnTT(tr( "Sort order by most played" ));
     if (Settings.wsprompt == yes) countBtnTT.SetWidescreen(Settings.widescreen);
-    countBtnTT.SetAlpha(THEME.tooltipAlpha);
+    countBtnTT.SetAlpha(Theme.tooltipAlpha);
     GuiImage countBtnImg(&imgplayCountIcon);
     countBtnImg.SetWidescreen(Settings.widescreen);
     GuiImage countBtnImg_g(&imgplayCountIcon_gray);
@@ -348,13 +349,13 @@ int MenuDiscList()
         countBtnImg_g.SetGrayscale();
     }
     countBtnImg_g.SetWidescreen(Settings.widescreen);
-    GuiButton countBtn(&countBtnImg_g, &countBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_count_x,
-            THEME.gamelist_count_y, &trigA, &btnSoundOver, btnClick2, 1, &countBtnTT, -15, 52, 0, 3);
+    GuiButton countBtn(&countBtnImg_g, &countBtnImg_g, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_count_x,
+            Theme.gamelist_count_y, &trigA, &btnSoundOver, btnClick2, 1, &countBtnTT, -15, 52, 0, 3);
     countBtn.SetAlpha(180);
 
     GuiTooltip listBtnTT(tr( "Display as a list" ));
     if (Settings.wsprompt == yes) listBtnTT.SetWidescreen(Settings.widescreen);
-    listBtnTT.SetAlpha(THEME.tooltipAlpha);
+    listBtnTT.SetAlpha(Theme.tooltipAlpha);
     GuiImage listBtnImg(&imgarrangeList);
     listBtnImg.SetWidescreen(Settings.widescreen);
     GuiImage listBtnImg_g(&imgarrangeList_gray);
@@ -364,13 +365,13 @@ int MenuDiscList()
         listBtnImg_g.SetGrayscale();
     }
     listBtnImg_g.SetWidescreen(Settings.widescreen);
-    GuiButton listBtn(&listBtnImg_g, &listBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_list_x,
-            THEME.gamelist_list_y, &trigA, &btnSoundOver, btnClick2, 1, &listBtnTT, 15, 52, 1, 3);
+    GuiButton listBtn(&listBtnImg_g, &listBtnImg_g, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_list_x,
+            Theme.gamelist_list_y, &trigA, &btnSoundOver, btnClick2, 1, &listBtnTT, 15, 52, 1, 3);
     listBtn.SetAlpha(180);
 
     GuiTooltip gridBtnTT(tr( "Display as a grid" ));
     if (Settings.wsprompt == yes) gridBtnTT.SetWidescreen(Settings.widescreen);
-    gridBtnTT.SetAlpha(THEME.tooltipAlpha);
+    gridBtnTT.SetAlpha(Theme.tooltipAlpha);
     GuiImage gridBtnImg(&imgarrangeGrid);
     gridBtnImg.SetWidescreen(Settings.widescreen);
     GuiImage gridBtnImg_g(&imgarrangeGrid_gray);
@@ -380,13 +381,13 @@ int MenuDiscList()
         gridBtnImg_g.SetGrayscale();
     }
     gridBtnImg_g.SetWidescreen(Settings.widescreen);
-    GuiButton gridBtn(&gridBtnImg_g, &gridBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_grid_x,
-            THEME.gamelist_grid_y, &trigA, &btnSoundOver, btnClick2, 1, &gridBtnTT, 15, 52, 1, 3);
+    GuiButton gridBtn(&gridBtnImg_g, &gridBtnImg_g, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_grid_x,
+            Theme.gamelist_grid_y, &trigA, &btnSoundOver, btnClick2, 1, &gridBtnTT, 15, 52, 1, 3);
     gridBtn.SetAlpha(180);
 
     GuiTooltip carouselBtnTT(tr( "Display as a carousel" ));
     if (Settings.wsprompt == yes) carouselBtnTT.SetWidescreen(Settings.widescreen);
-    carouselBtnTT.SetAlpha(THEME.tooltipAlpha);
+    carouselBtnTT.SetAlpha(Theme.tooltipAlpha);
     GuiImage carouselBtnImg(&imgarrangeCarousel);
     carouselBtnImg.SetWidescreen(Settings.widescreen);
     GuiImage carouselBtnImg_g(&imgarrangeCarousel_gray);
@@ -396,15 +397,15 @@ int MenuDiscList()
         carouselBtnImg_g.SetGrayscale();
     }
     carouselBtnImg_g.SetWidescreen(Settings.widescreen);
-    GuiButton carouselBtn(&carouselBtnImg_g, &carouselBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_carousel_x,
-            THEME.gamelist_carousel_y, &trigA, &btnSoundOver, btnClick2, 1, &carouselBtnTT, 15, 52, 1, 3);
+    GuiButton carouselBtn(&carouselBtnImg_g, &carouselBtnImg_g, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_carousel_x,
+            Theme.gamelist_carousel_y, &trigA, &btnSoundOver, btnClick2, 1, &carouselBtnTT, 15, 52, 1, 3);
     carouselBtn.SetAlpha(180);
 
     bool canUnlock = (Settings.parentalcontrol == 0 && Settings.Parental.enabled == 1);
 
     GuiTooltip lockBtnTT(canUnlock ? tr( "Unlock Parental Control" ) : tr( "Parental Control disabled" ));
     if (Settings.wsprompt == yes) lockBtnTT.SetWidescreen(Settings.widescreen);
-    lockBtnTT.SetAlpha(THEME.tooltipAlpha);
+    lockBtnTT.SetAlpha(Theme.tooltipAlpha);
     GuiImage lockBtnImg(&imgLock);
     lockBtnImg.SetWidescreen(Settings.widescreen);
     GuiImage lockBtnImg_g(&imgLock_gray);
@@ -414,13 +415,13 @@ int MenuDiscList()
         lockBtnImg_g.SetGrayscale();
     }
     lockBtnImg_g.SetWidescreen(Settings.widescreen);
-    GuiButton lockBtn(&lockBtnImg_g, &lockBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_lock_x,
-            THEME.gamelist_lock_y, &trigA, &btnSoundOver, btnClick2, 1, &lockBtnTT, 15, 52, 1, 3);
+    GuiButton lockBtn(&lockBtnImg_g, &lockBtnImg_g, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_lock_x,
+            Theme.gamelist_lock_y, &trigA, &btnSoundOver, btnClick2, 1, &lockBtnTT, 15, 52, 1, 3);
     lockBtn.SetAlpha(180);
 
     GuiTooltip unlockBtnTT(tr( "Enable Parental Control" ));
     if (Settings.wsprompt == yes) unlockBtnTT.SetWidescreen(Settings.widescreen);
-    unlockBtnTT.SetAlpha(THEME.tooltipAlpha);
+    unlockBtnTT.SetAlpha(Theme.tooltipAlpha);
     GuiImage unlockBtnImg(&imgUnlock);
     unlockBtnImg.SetWidescreen(Settings.widescreen);
     GuiImage unlockBtnImg_g(&imgUnlock_gray);
@@ -439,29 +440,29 @@ int MenuDiscList()
     }
 
     /*
-     GuiButton unlockBtn(&unlockBtnImg_g, &unlockBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_lock_x, THEME.gamelist_lock_y, &trigA, &btnSoundOver, btnClick2,1, &lockBtnTT, 15, 52, 1, 3);
+     GuiButton unlockBtn(&unlockBtnImg_g, &unlockBtnImg_g, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_lock_x, Theme.gamelist_lock_y, &trigA, &btnSoundOver, btnClick2,1, &lockBtnTT, 15, 52, 1, 3);
      unlockBtn.SetAlpha(180);
      */
 
     GuiTooltip dvdBtnTT(tr( "Mount DVD drive" ));
     if (Settings.wsprompt == yes) dvdBtnTT.SetWidescreen(Settings.widescreen);
-    dvdBtnTT.SetAlpha(THEME.tooltipAlpha);
+    dvdBtnTT.SetAlpha(Theme.tooltipAlpha);
     GuiImage dvdBtnImg(&imgdvd);
     dvdBtnImg.SetWidescreen(Settings.widescreen);
     GuiImage dvdBtnImg_g(dvdBtnImg);
     dvdBtnImg_g.SetWidescreen(Settings.widescreen);
-    GuiButton dvdBtn(&dvdBtnImg_g, &dvdBtnImg_g, ALIGN_LEFT, ALIGN_TOP, THEME.gamelist_dvd_x, THEME.gamelist_dvd_y,
+    GuiButton dvdBtn(&dvdBtnImg_g, &dvdBtnImg_g, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_dvd_x, Theme.gamelist_dvd_y,
             &trigA, &btnSoundOver, btnClick2, 1, &dvdBtnTT, 15, 52, 1, 3);
     dvdBtn.SetAlpha(180);
 
     GuiTooltip homebrewBtnTT(tr( "Homebrew Launcher" ));
     if (Settings.wsprompt == yes) homebrewBtnTT.SetWidescreen(Settings.widescreen);
-    homebrewBtnTT.SetAlpha(THEME.tooltipAlpha);
+    homebrewBtnTT.SetAlpha(Theme.tooltipAlpha);
     GuiImage homebrewImg(&homebrewImgData);
     GuiImage homebrewImgOver(&homebrewImgDataOver);
     homebrewImg.SetWidescreen(Settings.widescreen);
     homebrewImgOver.SetWidescreen(Settings.widescreen);
-    GuiButton homebrewBtn(&homebrewImg, &homebrewImgOver, ALIGN_LEFT, ALIGN_TOP, THEME.homebrew_x, THEME.homebrew_y,
+    GuiButton homebrewBtn(&homebrewImg, &homebrewImgOver, ALIGN_LEFT, ALIGN_TOP, Theme.homebrew_x, Theme.homebrew_y,
             &trigA, &btnSoundOver, btnClick2, 1, &homebrewBtnTT, 15, -30, 1, 5);
 
     if (Settings.fave)
@@ -512,55 +513,55 @@ int MenuDiscList()
 
     if (Settings.gameDisplay == list)
     {
-        favoriteBtn.SetPosition(THEME.gamelist_favorite_x, THEME.gamelist_favorite_y);
-        searchBtn.SetPosition(THEME.gamelist_search_x, THEME.gamelist_search_y);
-        abcBtn.SetPosition(THEME.gamelist_abc_x, THEME.gamelist_abc_y);
-        countBtn.SetPosition(THEME.gamelist_count_x, THEME.gamelist_count_y);
-        listBtn.SetPosition(THEME.gamelist_list_x, THEME.gamelist_list_y);
-        gridBtn.SetPosition(THEME.gamelist_grid_x, THEME.gamelist_grid_y);
-        carouselBtn.SetPosition(THEME.gamelist_carousel_x, THEME.gamelist_carousel_y);
-        lockBtn.SetPosition(THEME.gamelist_lock_x, THEME.gamelist_lock_y);
-        dvdBtn.SetPosition(THEME.gamelist_dvd_x, THEME.gamelist_dvd_y);
+        favoriteBtn.SetPosition(Theme.gamelist_favorite_x, Theme.gamelist_favorite_y);
+        searchBtn.SetPosition(Theme.gamelist_search_x, Theme.gamelist_search_y);
+        abcBtn.SetPosition(Theme.gamelist_abc_x, Theme.gamelist_abc_y);
+        countBtn.SetPosition(Theme.gamelist_count_x, Theme.gamelist_count_y);
+        listBtn.SetPosition(Theme.gamelist_list_x, Theme.gamelist_list_y);
+        gridBtn.SetPosition(Theme.gamelist_grid_x, Theme.gamelist_grid_y);
+        carouselBtn.SetPosition(Theme.gamelist_carousel_x, Theme.gamelist_carousel_y);
+        lockBtn.SetPosition(Theme.gamelist_lock_x, Theme.gamelist_lock_y);
+        dvdBtn.SetPosition(Theme.gamelist_dvd_x, Theme.gamelist_dvd_y);
     }
     else if (Settings.gameDisplay == grid)
     {
-        favoriteBtn.SetPosition(THEME.gamegrid_favorite_x, THEME.gamegrid_favorite_y);
-        searchBtn.SetPosition(THEME.gamegrid_search_x, THEME.gamegrid_search_y);
-        abcBtn.SetPosition(THEME.gamegrid_abc_x, THEME.gamegrid_abc_y);
-        countBtn.SetPosition(THEME.gamegrid_count_x, THEME.gamegrid_count_y);
-        listBtn.SetPosition(THEME.gamegrid_list_x, THEME.gamegrid_list_y);
-        gridBtn.SetPosition(THEME.gamegrid_grid_x, THEME.gamegrid_grid_y);
-        carouselBtn.SetPosition(THEME.gamegrid_carousel_x, THEME.gamegrid_carousel_y);
-        lockBtn.SetPosition(THEME.gamegrid_lock_x, THEME.gamegrid_lock_y);
-        dvdBtn.SetPosition(THEME.gamegrid_dvd_x, THEME.gamegrid_dvd_y);
+        favoriteBtn.SetPosition(Theme.gamegrid_favorite_x, Theme.gamegrid_favorite_y);
+        searchBtn.SetPosition(Theme.gamegrid_search_x, Theme.gamegrid_search_y);
+        abcBtn.SetPosition(Theme.gamegrid_abc_x, Theme.gamegrid_abc_y);
+        countBtn.SetPosition(Theme.gamegrid_count_x, Theme.gamegrid_count_y);
+        listBtn.SetPosition(Theme.gamegrid_list_x, Theme.gamegrid_list_y);
+        gridBtn.SetPosition(Theme.gamegrid_grid_x, Theme.gamegrid_grid_y);
+        carouselBtn.SetPosition(Theme.gamegrid_carousel_x, Theme.gamegrid_carousel_y);
+        lockBtn.SetPosition(Theme.gamegrid_lock_x, Theme.gamegrid_lock_y);
+        dvdBtn.SetPosition(Theme.gamegrid_dvd_x, Theme.gamegrid_dvd_y);
     }
     else if (Settings.gameDisplay == carousel)
     {
-        favoriteBtn.SetPosition(THEME.gamecarousel_favorite_x, THEME.gamecarousel_favorite_y);
-        searchBtn.SetPosition(THEME.gamecarousel_search_x, THEME.gamecarousel_favorite_y);
-        abcBtn.SetPosition(THEME.gamecarousel_abc_x, THEME.gamecarousel_abc_y);
-        countBtn.SetPosition(THEME.gamecarousel_count_x, THEME.gamecarousel_count_y);
-        listBtn.SetPosition(THEME.gamecarousel_list_x, THEME.gamecarousel_list_y);
-        gridBtn.SetPosition(THEME.gamecarousel_grid_x, THEME.gamecarousel_grid_y);
-        carouselBtn.SetPosition(THEME.gamecarousel_carousel_x, THEME.gamecarousel_carousel_y);
-        lockBtn.SetPosition(THEME.gamecarousel_lock_x, THEME.gamecarousel_lock_y);
-        dvdBtn.SetPosition(THEME.gamecarousel_dvd_x, THEME.gamecarousel_dvd_y);
+        favoriteBtn.SetPosition(Theme.gamecarousel_favorite_x, Theme.gamecarousel_favorite_y);
+        searchBtn.SetPosition(Theme.gamecarousel_search_x, Theme.gamecarousel_favorite_y);
+        abcBtn.SetPosition(Theme.gamecarousel_abc_x, Theme.gamecarousel_abc_y);
+        countBtn.SetPosition(Theme.gamecarousel_count_x, Theme.gamecarousel_count_y);
+        listBtn.SetPosition(Theme.gamecarousel_list_x, Theme.gamecarousel_list_y);
+        gridBtn.SetPosition(Theme.gamecarousel_grid_x, Theme.gamecarousel_grid_y);
+        carouselBtn.SetPosition(Theme.gamecarousel_carousel_x, Theme.gamecarousel_carousel_y);
+        lockBtn.SetPosition(Theme.gamecarousel_lock_x, Theme.gamecarousel_lock_y);
+        dvdBtn.SetPosition(Theme.gamecarousel_dvd_x, Theme.gamecarousel_dvd_y);
     }
 
     //Downloading Covers
     GuiTooltip DownloadBtnTT(tr( "Click to Download Covers" ));
     if (Settings.wsprompt == yes) DownloadBtnTT.SetWidescreen(Settings.widescreen);
-    DownloadBtnTT.SetAlpha(THEME.tooltipAlpha);
+    DownloadBtnTT.SetAlpha(Theme.tooltipAlpha);
     GuiButton DownloadBtn(0, 0);
     DownloadBtn.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    DownloadBtn.SetPosition(THEME.covers_x, THEME.covers_y);
+    DownloadBtn.SetPosition(Theme.covers_x, Theme.covers_y);
 
     GuiTooltip IDBtnTT(tr( "Click to change game ID" ));
     if (Settings.wsprompt == yes) IDBtnTT.SetWidescreen(Settings.widescreen);
-    IDBtnTT.SetAlpha(THEME.tooltipAlpha);
+    IDBtnTT.SetAlpha(Theme.tooltipAlpha);
     GuiButton idBtn(0, 0);
     idBtn.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    idBtn.SetPosition(THEME.id_x, THEME.id_y);
+    idBtn.SetPosition(Theme.id_x, Theme.id_y);
 
     if (Settings.godmode == 1 && mountMethod != 3) //only make the button have trigger & tooltip if in godmode
     {
@@ -585,43 +586,43 @@ int MenuDiscList()
     GuiGameCarousel * gameCarousel = NULL;
     if (Settings.gameDisplay == list)
     {
-        gameBrowser = new GuiGameBrowser(THEME.gamelist_w, THEME.gamelist_h, Settings.theme_path, bg_options_png,
+        gameBrowser = new GuiGameBrowser(Theme.gamelist_w, Theme.gamelist_h, Settings.theme_path, bg_options_png,
                 startat, offset);
-        gameBrowser->SetPosition(THEME.gamelist_x, THEME.gamelist_y);
+        gameBrowser->SetPosition(Theme.gamelist_x, Theme.gamelist_y);
         gameBrowser->SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
     }
     else if (Settings.gameDisplay == grid)
     {
-        gameGrid = new GuiGameGrid(THEME.gamegrid_w, THEME.gamegrid_h, Settings.theme_path, bg_options_png, 0, 0);
-        gameGrid->SetPosition(THEME.gamegrid_x, THEME.gamegrid_y);
+        gameGrid = new GuiGameGrid(Theme.gamegrid_w, Theme.gamegrid_h, Settings.theme_path, bg_options_png, 0, 0);
+        gameGrid->SetPosition(Theme.gamegrid_x, Theme.gamegrid_y);
         gameGrid->SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
     }
     else if (Settings.gameDisplay == carousel)
     {
-        //GuiGameCarousel gameCarousel(THEME.gamecarousel_w, THEME.gamecarousel_h, gameList, gameList.size(), Settings.theme_path, bg_options_png, startat, offset);
+        //GuiGameCarousel gameCarousel(Theme.gamecarousel_w, Theme.gamecarousel_h, gameList, gameList.size(), Settings.theme_path, bg_options_png, startat, offset);
         gameCarousel = new GuiGameCarousel(640, 400, Settings.theme_path, bg_options_png, startat, offset);
-        gameCarousel->SetPosition(THEME.gamecarousel_x, THEME.gamecarousel_y);
+        gameCarousel->SetPosition(Theme.gamecarousel_x, Theme.gamecarousel_y);
         gameCarousel->SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
     }
 
     GuiText clockTimeBack("88:88", 40, ( GXColor )
-    {   THEME.clock.r, THEME.clock.g, THEME.clock.b, THEME.clock.a / 6});
-    clockTimeBack.SetAlignment(THEME.clock_align, ALIGN_TOP);
-    clockTimeBack.SetPosition(THEME.clock_x, THEME.clock_y);
+    {   Theme.clock.r, Theme.clock.g, Theme.clock.b, Theme.clock.a / 6});
+    clockTimeBack.SetAlignment(Theme.clock_align, ALIGN_TOP);
+    clockTimeBack.SetPosition(Theme.clock_x, Theme.clock_y);
     clockTimeBack.SetFont(clock_ttf, clock_ttf_size);
-    GuiText clockTime(theTime, 40, THEME.clock);
-    clockTime.SetAlignment(THEME.clock_align, ALIGN_TOP);
-    clockTime.SetPosition(THEME.clock_x, THEME.clock_y);
+    GuiText clockTime(theTime, 40, Theme.clock);
+    clockTime.SetAlignment(Theme.clock_align, ALIGN_TOP);
+    clockTime.SetPosition(Theme.clock_x, Theme.clock_y);
     clockTime.SetFont(clock_ttf, clock_ttf_size);
 
     HaltGui();
     GuiWindow w(screenwidth, screenheight);
 
-    if (THEME.show_hddinfo == -1 || THEME.show_hddinfo == 1) //force show hdd info
+    if (Theme.show_hddinfo == -1 || Theme.show_hddinfo == 1) //force show hdd info
     {
         w.Append(&usedSpaceTxt);
     }
-    if (THEME.show_gamecount == -1 || THEME.show_gamecount == 1) //force show game cnt info
+    if (Theme.show_gamecount == -1 || Theme.show_gamecount == 1) //force show game cnt info
     {
         w.Append(&gamecntBtn);
     }
@@ -1583,9 +1584,9 @@ int MenuDiscList()
 
                     if ((Settings.sinfo == GameID) || (Settings.sinfo == Both))
                     {
-                        GameIDTxt = new GuiText(IDfull, 22, THEME.info);
+                        GameIDTxt = new GuiText(IDfull, 22, Theme.info);
                         GameIDTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-                        //GameIDTxt->SetPosition(THEME.id_x,THEME.id_y);
+                        //GameIDTxt->SetPosition(Theme.id_x,Theme.id_y);
                         idBtn.SetEffect(EFFECT_FADE, 20);
                         idBtn.SetLabel(GameIDTxt);
                         w.Append(&idBtn);
@@ -1593,9 +1594,9 @@ int MenuDiscList()
                     //don't try to show region for channels because all the custom channels wont follow the rules
                     if (((Settings.sinfo == GameRegion) || (Settings.sinfo == Both)) && mountMethod != 3)
                     {
-                        GameRegionTxt = new GuiText(gameregion, 22, THEME.info);
+                        GameRegionTxt = new GuiText(gameregion, 22, Theme.info);
                         GameRegionTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-                        GameRegionTxt->SetPosition(THEME.region_x, THEME.region_y);
+                        GameRegionTxt->SetPosition(Theme.region_x, Theme.region_y);
                         GameRegionTxt->SetEffect(EFFECT_FADE, 20);
                         w.Append(GameRegionTxt);
                     }

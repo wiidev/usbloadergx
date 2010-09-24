@@ -16,6 +16,7 @@
 #include "homebrewboot/HomebrewBrowse.h"
 #include "network/networkops.h"
 #include "themes/Theme_List.h"
+#include "themes/CTheme.h"
 #include "menu.h"
 #include "filelist.h"
 #include "listfiles.h"
@@ -169,25 +170,25 @@ static int Theme_Prompt(const char *title, const char *author, GuiImageData *thu
     GuiTrigger trigB;
     trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 
-    GuiText titleTxt(tr( "Theme Title:" ), 18, THEME.prompttext);
+    GuiText titleTxt(tr( "Theme Title:" ), 18, Theme.prompttext);
     titleTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     titleTxt.SetPosition(230, 30);
 
-    GuiText titleTxt2(title, 18, THEME.prompttext);
+    GuiText titleTxt2(title, 18, Theme.prompttext);
     titleTxt2.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     titleTxt2.SetPosition(230, 50);
     titleTxt2.SetMaxWidth(dialogBox.GetWidth() - 220, WRAP);
 
-    GuiText authorTxt(tr( "Author:" ), 18, THEME.prompttext);
+    GuiText authorTxt(tr( "Author:" ), 18, Theme.prompttext);
     authorTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     authorTxt.SetPosition(230, 100);
 
-    GuiText authorTxt2(author, 18, THEME.prompttext);
+    GuiText authorTxt2(author, 18, Theme.prompttext);
     authorTxt2.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     authorTxt2.SetPosition(230, 120);
     authorTxt2.SetMaxWidth(dialogBox.GetWidth() - 220, DOTTED);
 
-    GuiText downloadBtnTxt(tr( "Download" ), 22, THEME.prompttext);
+    GuiText downloadBtnTxt(tr( "Download" ), 22, Theme.prompttext);
     downloadBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
     GuiImage downloadBtnImg(&btnOutline);
     if (Settings.wsprompt == yes)
@@ -200,7 +201,7 @@ static int Theme_Prompt(const char *title, const char *author, GuiImageData *thu
     downloadBtn.SetLabel(&downloadBtnTxt);
     downloadBtn.SetScale(0.9);
 
-    GuiText backBtnTxt(tr( "Back" ), 22, THEME.prompttext);
+    GuiText backBtnTxt(tr( "Back" ), 22, Theme.prompttext);
     backBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
     GuiImage backBtnImg(&btnOutline);
     if (Settings.wsprompt == yes)
@@ -345,7 +346,7 @@ int Theme_Downloader()
     GuiImage *theme_box_img[pagesize];
     GuiButton *MainButton[pagesize];
     GuiText *MainButtonTxt[pagesize];
-    Theme_List *Theme = NULL;
+    Theme_List *ThemeList = NULL;
 
     /*** Buttons ***/
 
@@ -371,7 +372,7 @@ int Theme_Downloader()
     MainButton[2]->SetPosition(90, 230);
     MainButton[3]->SetPosition(340, 230);
 
-    GuiText backBtnTxt(tr( "Back" ), 22, THEME.prompttext);
+    GuiText backBtnTxt(tr( "Back" ), 22, Theme.prompttext);
     backBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
     GuiImage backBtnImg(&btnOutline);
     if (Settings.wsprompt == yes)
@@ -463,9 +464,9 @@ int Theme_Downloader()
 
     ShowProgress(tr( "Downloading Page List:" ), "", (char *) tr( "Please wait..." ), 0, pagesize);
 
-    Theme = new Theme_List(THEME_LINK);
+    ThemeList = new Theme_List(THEME_LINK);
 
-    int ThemesOnPage = Theme->GetThemeCount();
+    int ThemesOnPage = ThemeList->GetThemeCount();
 
     if (!ThemesOnPage)
     {
@@ -494,7 +495,7 @@ int Theme_Downloader()
 
         for (int i = currenttheme; (i < (currenttheme + pagesize)); i++)
         {
-            ShowProgress(tr( "Downloading image:" ), 0, (char *) Theme->GetThemeTitle(i), n, pagesize);
+            ShowProgress(tr( "Downloading image:" ), 0, (char *) ThemeList->GetThemeTitle(i), n, pagesize);
 
             if (MainButtonTxt[n]) delete MainButtonTxt[n];
             if (ImageData[n]) delete ImageData[n];
@@ -506,17 +507,17 @@ int Theme_Downloader()
 
             if (i < ThemesOnPage)
             {
-                MainButtonTxt[n] = new GuiText(Theme->GetThemeTitle(i), 18, ( GXColor )
+                MainButtonTxt[n] = new GuiText(ThemeList->GetThemeTitle(i), 18, ( GXColor )
                 {   0, 0, 0, 255});
                 MainButtonTxt[n]->SetAlignment(ALIGN_CENTER, ALIGN_TOP);
                 MainButtonTxt[n]->SetPosition(0, 10);
                 MainButtonTxt[n]->SetMaxWidth(theme_box_Data.GetWidth() - 10, DOTTED);
 
-                sprintf(url, "%s", Theme->GetImageLink(i));
+                sprintf(url, "%s", ThemeList->GetImageLink(i));
 
                 char filepath[300];
                 snprintf(filepath, sizeof(filepath), "%s/tmp/%s.jpg", Settings.theme_downloadpath,
-                        Theme->GetThemeTitle(i));
+                        ThemeList->GetThemeTitle(i));
 
                 FILE * storefile = fopen(filepath, "rb");
 
@@ -617,8 +618,8 @@ int Theme_Downloader()
             {
                 if (MainButton[i]->GetState() == STATE_CLICKED)
                 {
-                    snprintf(url, sizeof(url), "%s", Theme->GetDownloadLink(currenttheme + i));
-                    int ret = Theme_Prompt(Theme->GetThemeTitle(currenttheme + i), Theme->GetThemeAuthor(currenttheme
+                    snprintf(url, sizeof(url), "%s", ThemeList->GetDownloadLink(currenttheme + i));
+                    int ret = Theme_Prompt(ThemeList->GetThemeTitle(currenttheme + i), ThemeList->GetThemeAuthor(currenttheme
                             + i), ImageData[i], url);
                     MainButton[i]->ResetState();
                     if (ret == 2)
@@ -648,8 +649,8 @@ int Theme_Downloader()
         if (MainButtonTxt[i]) delete MainButtonTxt[i];
     }
 
-    if (Theme) delete Theme;
-    Theme = NULL;
+    if (ThemeList) delete ThemeList;
+    ThemeList = NULL;
 
     ResumeGui();
 

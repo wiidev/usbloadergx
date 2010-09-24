@@ -6,6 +6,7 @@
 #include "usbloader/utils.h"
 #include "usbloader/wbfs.h"
 #include "libwiigui/gui_customoptionbrowser.h"
+#include "themes/CTheme.h"
 
 extern int load_from_fs;
 extern char game_partition[6];
@@ -78,13 +79,13 @@ int MenuFormat()
     GuiImage poweroffBtnImgOver(&btnpwroffOver);
     poweroffBtnImg.SetWidescreen(Settings.widescreen);
     poweroffBtnImgOver.SetWidescreen(Settings.widescreen);
-    GuiButton poweroffBtn(&poweroffBtnImg, &poweroffBtnImgOver, 0, 3, THEME.power_x, THEME.power_y, &trigA,
+    GuiButton poweroffBtn(&poweroffBtnImg, &poweroffBtnImgOver, 0, 3, Theme.power_x, Theme.power_y, &trigA,
             &btnSoundOver, btnClick2, 1);
     GuiImage exitBtnImg(&btnhome);
     GuiImage exitBtnImgOver(&btnhomeOver);
     exitBtnImg.SetWidescreen(Settings.widescreen);
     exitBtnImgOver.SetWidescreen(Settings.widescreen);
-    GuiButton exitBtn(&exitBtnImg, &exitBtnImgOver, 0, 3, THEME.home_x, THEME.home_y, &trigA, &btnSoundOver, btnClick2,
+    GuiButton exitBtn(&exitBtnImg, &exitBtnImgOver, 0, 3, Theme.home_x, Theme.home_y, &trigA, &btnSoundOver, btnClick2,
             1);
     exitBtn.SetTrigger(&trigHome);
 

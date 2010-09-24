@@ -19,7 +19,7 @@
 #include "network/networkops.h"
 #include "patches/patchcode.h"
 #include "settings/Settings.h"
-#include "settings/cfg.h"
+#include "themes/CTheme.h"
 #include "themes/Theme_Downloader.h"
 #include "usbloader/disc.h"
 #include "usbloader/GameList.h"
@@ -117,7 +117,7 @@ static void * UpdateGUI(void *arg)
         }
 
         mainWindow->Draw();
-        if (Settings.tooltips == TooltipsOn && THEME.show_tooltip != 0 && mainWindow->GetState() != STATE_DISABLED) mainWindow->DrawTooltip();
+        if (Settings.tooltips == TooltipsOn && Theme.show_tooltip != 0 && mainWindow->GetState() != STATE_DISABLED) mainWindow->DrawTooltip();
 
         for (i = 3; i >= 0; i--)
         {

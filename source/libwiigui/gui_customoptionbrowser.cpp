@@ -12,6 +12,7 @@
 #include "../gecko.h"
 #include "../settings/CSettings.h"
 #include "gui_customoptionbrowser.h"
+#include "themes/CTheme.h"
 
 #include <unistd.h>
 
@@ -240,17 +241,17 @@ GuiCustomOptionBrowser::GuiCustomOptionBrowser(int w, int h, customOptionList * 
 
     for (int i = 0; i < size; i++)
     {
-        optionTxt[i] = new GuiText(options->GetName(i), 20, THEME.settingstext);
+        optionTxt[i] = new GuiText(options->GetName(i), 20, Theme.settingstext);
         optionTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
         optionTxt[i]->SetPosition(24, 0);
         optionTxt[i]->SetMaxWidth(bgOptionsImg->GetWidth() - (coL2 + 24), DOTTED);
 
         optionBg[i] = new GuiImage(bgOptionsEntry);
 
-        optionVal[i] = new GuiText((char *) NULL, 20, THEME.settingstext);
+        optionVal[i] = new GuiText((char *) NULL, 20, Theme.settingstext);
         optionVal[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 
-        optionValOver[i] = new GuiText((char *) NULL, 20, THEME.settingstext);
+        optionValOver[i] = new GuiText((char *) NULL, 20, Theme.settingstext);
         optionValOver[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 
         optionBtn[i] = new GuiButton(width - 28, GAMESELECTSIZE);

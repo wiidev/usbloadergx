@@ -16,6 +16,7 @@
 #include "main.h"
 #include "sys.h"
 #include "settings/cfg.h"
+#include "themes/CTheme.h"
 #include "memory.h"
 #include "../gecko.h"
 #include "../patches/dvd_broadway.h"
@@ -181,7 +182,7 @@ int DiscBrowse(struct discHdr * header)
     settingsbackgroundbtn.SetPosition(0, 0);
     settingsbackgroundbtn.SetImage(&settingsbackground);
 
-    GuiText cancelBtnTxt(tr( "Back" ), 22, THEME.prompttext);
+    GuiText cancelBtnTxt(tr( "Back" ), 22, Theme.prompttext);
     cancelBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
     GuiImage cancelBtnImg(&btnOutline);
     if (Settings.wsprompt == yes)
