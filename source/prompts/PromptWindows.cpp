@@ -16,6 +16,7 @@
 #include "libwiigui/gui.h"
 #include "libwiigui/gui_diskcover.h"
 #include "libwiigui/Text.hpp"
+#include "settings/CGameStatistics.h"
 #include "network/networkops.h"
 #include "network/http.h"
 #include "prompts/PromptWindows.h"
@@ -1143,25 +1144,19 @@ void SetupFavoriteButton(GuiButton *btnFavorite, int xPos, GuiImage *img, GuiSou
 u8 SetFavorite(GuiButton *fav1, GuiButton *fav2, GuiButton *fav3, GuiButton *fav4, GuiButton *fav5, u8* gameId,
         u8 favorite)
 {
-    struct Game_NUM * game_num = CFG_get_game_num(gameId);
-    if (game_num)
-    {
-        favoritevar = game_num->favorite;
-        playcount = game_num->count;
-    }
-    else
-    {
-        favoritevar = 0;
-        playcount = 0;
-    }
-    favoritevar = (favorite == favoritevar) ? 0 : favorite; // Press the current rank to reset the rank
-    CFG_save_game_num(gameId);
-    return favoritevar;
+    int FavoriteRank = (favorite == GameStatistics.GetFavoriteRank(gameId)) ? 0 : favorite; // Press the current rank to reset the rank
+
+	GameStatistics.SetFavoriteRank(gameId, FavoriteRank);
+	GameStatistics.Save();
+
+	return FavoriteRank;
 }
 
-void SetFavoriteImages(GuiImage *b1, GuiImage *b2, GuiImage *b3, GuiImage *b4, GuiImage *b5, GuiImageData *on,
+void SetFavoriteImages(const u8 * gameid, GuiImage *b1, GuiImage *b2, GuiImage *b3, GuiImage *b4, GuiImage *b5, GuiImageData *on,
         GuiImageData *off)
 {
+	int favoritevar = GameStatistics.GetFavoriteRank(gameid);
+
     b1->SetImage(favoritevar >= 1 ? on : off);
     b2->SetImage(favoritevar >= 2 ? on : off);
     b3->SetImage(favoritevar >= 3 ? on : off);
@@ -1516,20 +1511,8 @@ int GameWindowPrompt()
         }
 
         nameTxt.SetText(get_title(header));
-
-        struct Game_NUM* game_num = CFG_get_game_num(header->id);
-        if (game_num)
-        {
-            playcount = game_num->count;
-            favoritevar = game_num->favorite;
-        }
-        else
-        {
-            playcount = 0;
-            favoritevar = 0;
-        }
-        playcntTxt.SetTextf("%s: %i", tr( "Play Count" ), playcount);
-        SetFavoriteImages(&btnFavoriteImg1, &btnFavoriteImg2, &btnFavoriteImg3, &btnFavoriteImg4, &btnFavoriteImg5,
+        playcntTxt.SetTextf("%s: %i", tr( "Play Count" ), GameStatistics.GetPlayCount(header));
+        SetFavoriteImages(header->id, &btnFavoriteImg1, &btnFavoriteImg2, &btnFavoriteImg3, &btnFavoriteImg4, &btnFavoriteImg5,
                 &imgFavorite, &imgNotFavorite);
 
         nameTxt.SetPosition(0, 1);
@@ -1576,23 +1559,8 @@ int GameWindowPrompt()
 
             if (btn1.GetState() == STATE_CLICKED)
             {
-                //playcounter
-                struct Game_NUM* game_num = CFG_get_game_num(header->id);
-                if (game_num)
-                {
-                    favoritevar = game_num->favorite;
-                    playcount = game_num->count;
-                }
-                else
-                {
-                    favoritevar = 0;
-                    playcount = 0;
-                }
-                playcount += 1;
-                if (isInserted(bootDevice))
-                {
-                    CFG_save_game_num(header->id);
-                }
+				GameStatistics.SetPlayCount(header->id, GameStatistics.GetPlayCount(header->id)+1);
+                GameStatistics.Save();
 
                 choice = 1;
             }
@@ -1622,7 +1590,7 @@ int GameWindowPrompt()
                 {
                     SetFavorite(&btnFavorite1, &btnFavorite2, &btnFavorite3, &btnFavorite4, &btnFavorite5, header->id,
                             1);
-                    SetFavoriteImages(&btnFavoriteImg1, &btnFavoriteImg2, &btnFavoriteImg3, &btnFavoriteImg4,
+                    SetFavoriteImages(header->id, &btnFavoriteImg1, &btnFavoriteImg2, &btnFavoriteImg3, &btnFavoriteImg4,
                             &btnFavoriteImg5, &imgFavorite, &imgNotFavorite);
                 }
                 btnFavorite1.ResetState();
@@ -1633,7 +1601,7 @@ int GameWindowPrompt()
                 {
                     SetFavorite(&btnFavorite1, &btnFavorite2, &btnFavorite3, &btnFavorite4, &btnFavorite5, header->id,
                             2);
-                    SetFavoriteImages(&btnFavoriteImg1, &btnFavoriteImg2, &btnFavoriteImg3, &btnFavoriteImg4,
+                    SetFavoriteImages(header->id, &btnFavoriteImg1, &btnFavoriteImg2, &btnFavoriteImg3, &btnFavoriteImg4,
                             &btnFavoriteImg5, &imgFavorite, &imgNotFavorite);
                 }
                 btnFavorite2.ResetState();
@@ -1644,7 +1612,7 @@ int GameWindowPrompt()
                 {
                     SetFavorite(&btnFavorite1, &btnFavorite2, &btnFavorite3, &btnFavorite4, &btnFavorite5, header->id,
                             3);
-                    SetFavoriteImages(&btnFavoriteImg1, &btnFavoriteImg2, &btnFavoriteImg3, &btnFavoriteImg4,
+                    SetFavoriteImages(header->id, &btnFavoriteImg1, &btnFavoriteImg2, &btnFavoriteImg3, &btnFavoriteImg4,
                             &btnFavoriteImg5, &imgFavorite, &imgNotFavorite);
                 }
                 btnFavorite3.ResetState();
@@ -1655,7 +1623,7 @@ int GameWindowPrompt()
                 {
                     SetFavorite(&btnFavorite1, &btnFavorite2, &btnFavorite3, &btnFavorite4, &btnFavorite5, header->id,
                             4);
-                    SetFavoriteImages(&btnFavoriteImg1, &btnFavoriteImg2, &btnFavoriteImg3, &btnFavoriteImg4,
+                    SetFavoriteImages(header->id, &btnFavoriteImg1, &btnFavoriteImg2, &btnFavoriteImg3, &btnFavoriteImg4,
                             &btnFavoriteImg5, &imgFavorite, &imgNotFavorite);
                 }
                 btnFavorite4.ResetState();
@@ -1666,7 +1634,7 @@ int GameWindowPrompt()
                 {
                     SetFavorite(&btnFavorite1, &btnFavorite2, &btnFavorite3, &btnFavorite4, &btnFavorite5, header->id,
                             5);
-                    SetFavoriteImages(&btnFavoriteImg1, &btnFavoriteImg2, &btnFavoriteImg3, &btnFavoriteImg4,
+                    SetFavoriteImages(header->id, &btnFavoriteImg1, &btnFavoriteImg2, &btnFavoriteImg3, &btnFavoriteImg4,
                             &btnFavoriteImg5, &imgFavorite, &imgNotFavorite);
                 }
                 btnFavorite5.ResetState();

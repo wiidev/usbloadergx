@@ -57,8 +57,6 @@ extern "C"
 //    extern u8 wsprompt;
 //    extern u8 keyset;
 //    extern u8 gameDisplay;
-    extern u16 playcount;
-    extern u8 favoritevar;
     extern char alternatedname[40];
 //    extern u8 returnToLoaderGV;
 
@@ -68,18 +66,7 @@ extern "C"
     // always the last entry
     };
 
-    struct Game_NUM
-    {
-            u8 id[8];
-            u8 favorite;
-            u16 count;
-    };
-
     void CFG_LoadGameNum(); // -1 = non forced mode
-    struct Game_NUM* CFG_get_game_num(const u8 *id);
-    bool CFG_save_game_num(u8 *id);
-    bool CFG_reset_all_playcounters();
-    bool CFG_forget_game_num(u8 *id);
 
     enum
     {

@@ -37,7 +37,7 @@ class CGameSettings
         //!Save
         bool Save();
         //!AddGame
-        bool AddGame(const GameCFG * NewGame);
+        bool AddGame(const GameCFG & NewGame);
         //!Reset
         bool RemoveAll();
         //!Overload Reset for one Game

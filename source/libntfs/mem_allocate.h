@@ -23,24 +23,21 @@
 #define _MEM_ALLOCATE_H
 
 #include <malloc.h>
+#include "memory/mem2.h"
 
 static inline void* ntfs_alloc(size_t size)
 {
-    return malloc(size);
+    return MEM2_alloc(size);
 }
 
 static inline void* ntfs_align(size_t size)
 {
-#ifdef __wii__
-    return memalign(32, size);
-#else
-    return malloc(size);
-#endif
+    return MEM2_alloc(size);
 }
 
 static inline void ntfs_free(void* mem)
 {
-    free(mem);
+    MEM2_free(mem);
 }
 
 #endif /* _MEM_ALLOCATE_H */

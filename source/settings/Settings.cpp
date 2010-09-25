@@ -9,6 +9,7 @@
 #include "prompts/DiscBrowser.h"
 #include "settings/SettingsPrompts.h"
 #include "settings/CGameSettings.h"
+#include "settings/CGameStatistics.h"
 #include "prompts/filebrowser.h"
 #include "cheats/cheatmenu.h"
 #include "themes/CTheme.h"
@@ -2602,7 +2603,7 @@ int MenuGameSettings(struct discHdr * header)
 
                     else if (saveBtn.GetState() == STATE_CLICKED)
                     {
-                        if (GameSettings.AddGame(&game_cfg) && GameSettings.Save())
+                        if (GameSettings.AddGame(game_cfg) && GameSettings.Save())
                         {
                             WindowPrompt(tr( "Successfully Saved" ), 0, tr( "OK" ));
                         }
@@ -2906,7 +2907,8 @@ int MenuGameSettings(struct discHdr * header)
                                 {
                                     GameSettings.Remove(header->id);
                                     GameSettings.Save();
-                                    CFG_forget_game_num(header->id);
+                                    GameStatistics.Remove(header->id);
+									GameStatistics.Save();
                                     ret = WBFS_RemoveGame(header->id);
                                     if (ret < 0)
                                     {
@@ -2932,19 +2934,8 @@ int MenuGameSettings(struct discHdr * header)
                                 {
                                     if (isInserted(bootDevice))
                                     {
-                                        struct Game_NUM* game_num = CFG_get_game_num(header->id);
-                                        if (game_num)
-                                        {
-                                            favoritevar = game_num->favorite;
-                                            playcount = game_num->count;
-                                        }
-                                        else
-                                        {
-                                            favoritevar = 0;
-                                            playcount = 0;
-                                        }
-                                        playcount = 0;
-                                        CFG_save_game_num(header->id);
+                                        GameStatistics.SetPlayCount(header->id, 0);
+										GameStatistics.Save();
                                     }
                                 }
                             }

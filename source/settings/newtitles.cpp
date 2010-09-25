@@ -2,6 +2,7 @@
 #include <string.h>
 
 #include "CSettings.h"
+#include "settings/CGameStatistics.h"
 #include "newtitles.h"
 
 #define NEW_SECONDS 24 * 60 * 60
@@ -145,8 +146,8 @@ bool NewTitles::IsNew(u8 *titleid)
             if ((time(NULL) - t->timestamp) < NEW_SECONDS)
             {
                 // Only count the game as new when it's never been played through GX
-                Game_NUM *gnum = CFG_get_game_num(titleid);
-                return gnum == NULL || gnum->count == 0;
+                GameStatus *gnum = GameStatistics.GetGameStatus(titleid);
+                return gnum == NULL || gnum->PlayCount == 0;
             }
             return false;
         }

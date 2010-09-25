@@ -27,6 +27,7 @@
 #include "usbloader/wbfs.h"
 #include "settings/newtitles.h"
 #include "settings/CSettings.h"
+#include "settings/CGameStatistics.h"
 #include "xml/xml.h"
 #include "FreeTypeGX.h"
 #include "GameList.h"
@@ -118,8 +119,8 @@ int GameList::FilterList(const wchar_t * gameFilter)
         /* Filters */
         if (Settings.fave)
         {
-            struct Game_NUM* game_num = CFG_get_game_num(header->id);
-            if (!game_num || game_num->favorite == 0) continue;
+            GameStatus * GameStats = GameStatistics.GetGameStatus(header->id);
+            if (!GameStats || GameStats->FavoriteRank == 0) continue;
         }
 
         //ignore uLoader cfg "iso".  i was told it is "__CFG_"  but not confirmed
@@ -237,12 +238,8 @@ bool GameList::NameSortCallback(const struct discHdr *a, const struct discHdr *b
 
 bool GameList::PlaycountSortCallback(const struct discHdr *a, const struct discHdr *b)
 {
-    struct Game_NUM* game_num1 = CFG_get_game_num(a->id);
-    struct Game_NUM* game_num2 = CFG_get_game_num(b->id);
-    int count1 = 0, count2 = 0;
-
-    if (game_num1) count1 = game_num1->count;
-    if (game_num2) count2 = game_num2->count;
+    int count1 = GameStatistics.GetPlayCount(a->id);
+    int count2 = GameStatistics.GetPlayCount(b->id);
 
     if (count1 == count2) return NameSortCallback(a, b);
 
@@ -251,12 +248,8 @@ bool GameList::PlaycountSortCallback(const struct discHdr *a, const struct discH
 
 bool GameList::FavoriteSortCallback(const struct discHdr *a, const struct discHdr *b)
 {
-    struct Game_NUM* game_num1 = CFG_get_game_num(a->id);
-    struct Game_NUM* game_num2 = CFG_get_game_num(b->id);
-    int fav1 = 0, fav2 = 0;
-
-    if (game_num1) fav1 = game_num1->favorite;
-    if (game_num2) fav2 = game_num2->favorite;
+    int fav1 = GameStatistics.GetFavoriteRank(a->id);
+	int fav2 = GameStatistics.GetFavoriteRank(b->id);
 
     if (fav1 == fav2) return NameSortCallback(a, b);
 

@@ -28,6 +28,7 @@
 
 #include "CSettings.h"
 #include "CGameSettings.h"
+#include "CGameStatistics.h"
 #include "language/gettext.h"
 #include "themes/CTheme.h"
 #include "FileOperations/fileops.h"
@@ -144,13 +145,12 @@ bool CSettings::Load()
     fclose(file);
 
     //!The following needs to be moved later
-    CFG_LoadGameNum();
-
     char GameSetPath[200];
     snprintf(GameSetPath, sizeof(GameSetPath), ConfigPath);
     char * ptr = strrchr(GameSetPath, '/');
     if(ptr) ptr[1] = 0;
-
+	
+    GameStatistics.Load(GameSetPath);
     GameSettings.Load(GameSetPath);
     Theme.Load(theme_path);
 

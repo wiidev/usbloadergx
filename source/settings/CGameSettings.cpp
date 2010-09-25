@@ -83,21 +83,18 @@ GameCFG * CGameSettings::GetGameCFG(const char * id)
     return NULL;
 }
 
-bool CGameSettings::AddGame(const GameCFG * NewGame)
+bool CGameSettings::AddGame(const GameCFG & NewGame)
 {
-    if(!NewGame)
-        return false;
-
     for(u32 i = 0; i < GameList.size(); ++i)
     {
-        if(strncmp(NewGame->id, GameList[i].id, 6) == 0)
+        if(strncmp(NewGame.id, GameList[i].id, 6) == 0)
         {
-            memcpy(&GameList[i], NewGame, sizeof(GameCFG));
+            memcpy(&GameList[i], &NewGame, sizeof(GameCFG));
             return true;
         }
     }
 
-    GameList.push_back(*NewGame);
+    GameList.push_back(NewGame);
 
     return true;
 }
@@ -341,6 +338,9 @@ void CGameSettings::ParseLine(char *line)
     if(!ReadGameID(line, GameID, 6))
         return;
 
+    if(strlen(GameID) != 6)
+        return;
+
     GameCFG NewCFG;
     memset(&NewCFG, 0, sizeof(GameCFG));
 
@@ -354,7 +354,7 @@ void CGameSettings::ParseLine(char *line)
 
         char * eq = strchr(LinePtr, ':');
 
-        if (!eq) return;
+        if (!eq) break;
 
         this->TrimLine(name, LinePtr, sizeof(name));
         this->TrimLine(value, eq + 1, sizeof(value));
@@ -364,7 +364,7 @@ void CGameSettings::ParseLine(char *line)
         LinePtr = strchr(LinePtr, ';');
     }
 
-    AddGame(&NewCFG);
+    AddGame(NewCFG);
 }
 
 void CGameSettings::TrimLine(char *dest, const char *src, int size)
@@ -376,7 +376,7 @@ void CGameSettings::TrimLine(char *dest, const char *src, int size)
 
     for(i = 0; i < size; i++, src++)
     {
-        if(*src == ';' || *src == '\n' ||
+        if(*src == ':' || *src == ';' || *src == '\n' ||
            *src == '\r' || *src == '\0')
             break;
 

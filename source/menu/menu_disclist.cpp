@@ -10,6 +10,7 @@
 #include "prompts/TitleBrowser.h"
 #include "settings/Settings.h"
 #include "settings/CGameSettings.h"
+#include "settings/CGameStatistics.h"
 #include "themes/CTheme.h"
 #include "wpad.h"
 #include "sys.h"
@@ -1515,7 +1516,7 @@ int MenuDiscList()
             GameCFG* game_cfg = GameSettings.GetGameCFG(header->id);
 			u8 alternatedol;
 			u8 ocarinaChoice;
-			
+
             if (game_cfg)
             {
                 alternatedol = game_cfg->loadalternatedol;
@@ -1569,23 +1570,11 @@ int MenuDiscList()
                 if (isInserted(bootDevice))
                 {
                     //////////save game play count////////////////
-                    struct Game_NUM* game_num = CFG_get_game_num(header->id);
+					GameStatistics.SetPlayCount(header->id, GameStatistics.GetPlayCount(header->id)+1);
+					GameStatistics.Save();
 
-                    if (game_num)
-                    {
-                        favoritevar = game_num->favorite;
-                        playcount = game_num->count;
-                    }
-                    else
-                    {
-                        favoritevar = 0;
-                        playcount = 0;
-                    }
-                    playcount += 1;
-
-                    CFG_save_game_num(header->id);
                     gprintf("\n\tplaycount for %c%c%c%c%c%c raised to %i", header->id[0], header->id[1], header->id[2],
-                            header->id[3], header->id[4], header->id[5], playcount);
+                            header->id[3], header->id[4], header->id[5],  GameStatistics.GetPlayCount(header->id));
 
                 }
                 menu = MENU_EXIT;
@@ -1742,7 +1731,7 @@ int MenuDiscList()
         }
         covertOld = covert;
     }
-	
+
     HaltGui();
     mainWindow->RemoveAll();
     mainWindow->Append(bgImg);
