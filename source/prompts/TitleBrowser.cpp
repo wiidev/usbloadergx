@@ -15,7 +15,7 @@
 #include "network/networkops.h"
 #include "network/http.h"
 #include "filelist.h"
-#include "listfiles.h"
+#include "FileOperations/fileops.h"
 #include "settings/cfg.h"
 #include "themes/CTheme.h"
 #include "sys.h"

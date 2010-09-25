@@ -26,7 +26,7 @@
 #include "banner.h"
 #include "openingbnr.h"
 #include "../ramdisk/ramdisk.h"
-#include "../listfiles.h"
+#include "FileOperations/fileops.h"
 
 u16 be16(const u8 *p)
 {
@@ -453,7 +453,7 @@ int extractbnrfile(const char * filepath, const char * destpath)
     FILE *fp = fopen(filepath, "rb");
     if (fp)
     {
-        subfoldercreate(destpath);
+        CreateSubfolder(destpath);
         chdir(destpath);
 
         do_imet_header(fp);
@@ -470,7 +470,7 @@ int unpackBin(const char * filename, const char * outdir)
     ;
     if (fp)
     {
-        subfoldercreate(outdir);
+        CreateSubfolder(outdir);
         chdir(outdir);
 
         do_U8_archivebanner(fp);
@@ -489,7 +489,7 @@ int unpackBanner(const u8 *gameid, int what, const char *outdir)
     char path[256];
     if (!ramdiskMount("BANNER", NULL)) return -1;
 
-    subfoldercreate(TMP_PATH( "/" ));
+    CreateSubfolder(TMP_PATH( "/" ));
     s32 ret = dump_banner(gameid, TMP_PATH( "/opening.bnr" ));
     if (ret != 1)
     {

@@ -19,7 +19,7 @@
 #include "themes/CTheme.h"
 #include "menu.h"
 #include "filelist.h"
-#include "listfiles.h"
+#include "FileOperations/fileops.h"
 #include "sys.h"
 #include "network/http.h"
 #include "ZipFile.h"
@@ -56,7 +56,7 @@ int DownloadTheme(const char *url, const char *title)
 
     snprintf(path, sizeof(path), "%s%s", Settings.theme_downloadpath, title);
 
-    subfoldercreate(path);
+    CreateSubfolder(path);
 
     snprintf(filepath, sizeof(filepath), "%s/%s", path, filename);
 
@@ -526,7 +526,7 @@ int Theme_Downloader()
                     struct block file = downloadfile(url);
                     char storepath[300];
                     snprintf(storepath, sizeof(storepath), "%s/tmp/", Settings.theme_downloadpath);
-                    subfoldercreate(storepath);
+                    CreateSubfolder(storepath);
                     if (file.data)
                     {
                         storefile = fopen(filepath, "wb");

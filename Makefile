@@ -41,6 +41,8 @@ SOURCES		:=	source \
 				source/libfat \
 				source/memory \
 				source/libntfs \
+				source/FileOperations \
+				source/utils \
 				source/utils/minizip \
 				source/usbloader/wbfs
 DATA		:=	data

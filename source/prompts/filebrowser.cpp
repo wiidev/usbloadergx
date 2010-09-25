@@ -22,7 +22,7 @@
 #include "menu.h"
 
 #include "themes/CTheme.h"
-#include "listfiles.h"
+#include "FileOperations/fileops.h"
 #include "language/gettext.h"
 #include "PromptWindows.h"
 #include "libwiigui/gui.h"
@@ -515,7 +515,7 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
                 {
                     if (WindowPrompt(tr( "Directory does not exist!" ),
                             tr( "The entered directory does not exist. Would you like to create it?" ),
-                            tr( "OK" ), tr( "Cancel" )) == 1) if (subfoldercreate(newfolder) == false) WindowPrompt(
+                            tr( "OK" ), tr( "Cancel" )) == 1) if (CreateSubfolder(newfolder) == false) WindowPrompt(
                             tr( "Error !" ), tr( "Can't create directory" ), tr( "OK" ));
                 }
                 if (ParseDirectory(newfolder, Flags, Filter) == 0)

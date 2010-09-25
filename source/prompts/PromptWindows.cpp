@@ -23,7 +23,7 @@
 #include "themes/CTheme.h"
 #include "mload/mload.h"
 #include "fatmounter.h"
-#include "listfiles.h"
+#include "FileOperations/fileops.h"
 #include "menu.h"
 #include "menu.h"
 #include "filelist.h"
@@ -2083,15 +2083,15 @@ bool SearchMissingImages(int choice2)
             char *covers_path = choice2 == 1 ? Settings.covers2d_path : Settings.covers_path;
 
             snprintf(filename, sizeof(filename), "%c%c%c.png", header->id[0], header->id[1], header->id[2]);
-            found2 = findfile(filename, covers_path);
+            found2 = FindFile(filename, covers_path);
 
             snprintf(filename, sizeof(filename), "%c%c%c%c.png", header->id[0], header->id[1], header->id[2],
                     header->id[3]);
-            found3 = findfile(filename, covers_path);
+            found3 = FindFile(filename, covers_path);
 
             snprintf(filename, sizeof(filename), "%c%c%c%c%c%c.png", header->id[0], header->id[1], header->id[2],
                     header->id[3], header->id[4], header->id[5]); //full id
-            found1 = findfile(filename, covers_path);
+            found1 = FindFile(filename, covers_path);
             if (!found1 && !found2 && !found3) //if could not find any image
             {
                 snprintf(missingFiles[cntMissFiles], 11, "%s", filename);
@@ -2101,10 +2101,10 @@ bool SearchMissingImages(int choice2)
         else if (choice2 == 3)
         {
             snprintf(filename, sizeof(filename), "%c%c%c.png", header->id[0], header->id[1], header->id[2]);
-            found2 = findfile(filename, Settings.disc_path);
+            found2 = FindFile(filename, Settings.disc_path);
             snprintf(filename, sizeof(filename), "%c%c%c%c%c%c.png", header->id[0], header->id[1], header->id[2],
                     header->id[3], header->id[4], header->id[5]); //full id
-            found1 = findfile(filename, Settings.disc_path);
+            found1 = FindFile(filename, Settings.disc_path);
             if (!found1 && !found2)
             {
                 snprintf(missingFiles[cntMissFiles], 11, "%s", filename);
@@ -2378,7 +2378,7 @@ int ProgressDownloadWindow(int choice2)
     struct stat st;
     if (stat(Settings.covers_path, &st) != 0)
     {
-        if (subfoldercreate(Settings.covers_path) != 1)
+        if (!CreateSubfolder(Settings.covers_path))
         {
             WindowPrompt(tr( "Error !" ), tr( "Can't create directory" ), tr( "OK" ));
             cntMissFiles = 0;
@@ -2386,7 +2386,7 @@ int ProgressDownloadWindow(int choice2)
     }
     if (stat(Settings.covers2d_path, &st) != 0)
     {
-        if (subfoldercreate(Settings.covers2d_path) != 1)
+        if (!CreateSubfolder(Settings.covers2d_path))
         {
             WindowPrompt(tr( "Error !" ), tr( "Can't create directory" ), tr( "OK" ));
             cntMissFiles = 0;
@@ -2394,7 +2394,7 @@ int ProgressDownloadWindow(int choice2)
     }
     if (stat(Settings.disc_path, &st) != 0)
     {
-        if (subfoldercreate(Settings.disc_path) != 1)
+        if (!CreateSubfolder(Settings.disc_path))
         {
             WindowPrompt(tr( "Error !" ), tr( "Can't create directory" ), tr( "OK" ));
             cntMissFiles = 0;
@@ -3340,7 +3340,7 @@ int ProgressUpdateWindow()
     struct stat st;
     if (stat(Settings.update_path, &st) != 0)
     {
-        if (subfoldercreate(Settings.update_path) != 1)
+        if (!CreateSubfolder(Settings.update_path))
         {
             WindowPrompt(tr( "Error !" ), tr( "Can't create directory" ), tr( "OK" ));
             ret = -1;
@@ -3474,7 +3474,7 @@ int ProgressUpdateWindow()
                         if (!failed)
                         {
                             //remove old
-                            if (checkfile(dolpathsuccess))
+                            if (CheckFile(dolpathsuccess))
                             {
                                 remove(dolpathsuccess);
                             }
@@ -3509,7 +3509,7 @@ int ProgressUpdateWindow()
                                 file = downloadfile(XMLurl);
                                 if (file.data != NULL)
                                 {
-                                    subfoldercreate(Settings.titlestxt_path);
+                                    CreateSubfolder(Settings.titlestxt_path);
                                     snprintf(wiitdbpath, sizeof(wiitdbpath), "%swiitdb_%s.zip",
                                             Settings.titlestxt_path, game_partition);
                                     snprintf(wiitdbpathtmp, sizeof(wiitdbpathtmp), "%swiitmp_%s.zip",
@@ -3564,7 +3564,7 @@ int ProgressUpdateWindow()
             struct block file = downloadfile(XMLurl);
             if (file.data != NULL)
             {
-                subfoldercreate(Settings.titlestxt_path);
+                CreateSubfolder(Settings.titlestxt_path);
                 snprintf(wiitdbpath, sizeof(wiitdbpath), "%swiitdb_%s.zip", Settings.titlestxt_path, game_partition);
                 snprintf(wiitdbpathtmp, sizeof(wiitdbpathtmp), "%swiitmp_%s.zip", Settings.titlestxt_path,
                         game_partition);
@@ -3703,7 +3703,7 @@ int CodeDownload(const char *id)
     struct stat st;
     if (stat(Settings.TxtCheatcodespath, &st) != 0)
     {
-        if (subfoldercreate(Settings.TxtCheatcodespath) != 1)
+        if (!CreateSubfolder(Settings.TxtCheatcodespath))
         {
             WindowPrompt(tr( "Error !" ), tr( "Can't create directory" ), tr( "OK" ));
             ret = -1;
@@ -3880,7 +3880,7 @@ int HBCWindowPrompt(const char *name, const char *coder, const char *version, co
     GuiImage *iconImg = NULL;
     snprintf(imgPath, sizeof(imgPath), "%s", iconPath);
 
-    bool iconExist = checkfile(imgPath);
+    bool iconExist = CheckFile(imgPath);
     if (iconExist)
     {
         iconData = new GuiImageData(iconPath, dialogue_box_png);

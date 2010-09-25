@@ -36,7 +36,7 @@
 #include <unzip/unzip.h>
 
 #include "prompts/ProgressWindow.h"
-#include "listfiles.h"
+#include "FileOperations/fileops.h"
 #include "ZipFile.h"
 #include "language/gettext.h"
 
@@ -96,7 +96,7 @@ bool ZipFile::ExtractAll(const char *dest)
             char temppath[strlen(writepath)];
             snprintf(temppath, position, "%s", writepath);
 
-            subfoldercreate(temppath);
+            CreateSubfolder(temppath);
 
             if (ret == UNZ_OK)
             {

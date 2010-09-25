@@ -27,7 +27,7 @@
 #include <string.h>
 
 #include "CGameSettings.h"
-#include "listfiles.h"
+#include "FileOperations/fileops.h"
 
 CGameSettings GameSettings;
 
@@ -131,7 +131,7 @@ bool CGameSettings::Load(const char * path)
 {
     char line[1024];
     char filepath[300];
-    snprintf(filepath, sizeof(filepath), "%s/config/GXCGameSettings.cfg", path);
+    snprintf(filepath, sizeof(filepath), "%sGXGameSettings.cfg", path);
 
     ConfigPath = filepath;
 
@@ -159,7 +159,7 @@ bool CGameSettings::Save()
     if(ptr)
         ptr[0] = 0;
 
-    subfoldercreate(filepath);
+    CreateSubfolder(filepath);
 
     FILE * f = fopen(ConfigPath.c_str(), "w");
     if (!f) return false;

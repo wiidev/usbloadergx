@@ -8,7 +8,8 @@
 #include <sys/dir.h>
 
 #include "UpdateLanguage.h"
-#include "listfiles.h"
+#include "FileOperations/fileops.h"
+#include "FileOperations/DirList.h"
 #include "menu.h"
 #include "network/networkops.h"
 #include "network/http.h"
@@ -16,25 +17,24 @@
 int updateLanguageFiles()
 {
     char languageFiles[50][MAXLANGUAGEFILES];
-
-    //get all the files in the language path
-    int countfiles = GetAllDirFiles(Settings.languagefiles_path);
+	
+	DirList Dir(Settings.languagefiles_path);
 
     //give up now if we didn't find any
-    if (!countfiles) return -2;
+    if (Dir.GetFilecount() == 0) return -2;
 
     //now from the files we got, get only the .lang files
-    for (int cnt = 0; cnt < countfiles; cnt++)
+    for (int cnt = 0; cnt <  Dir.GetFilecount(); cnt++)
     {
         char filename[64];
-        strlcpy(filename, GetFileName(cnt), sizeof(filename));
+        strlcpy(filename, Dir.GetFilename(cnt), sizeof(filename));
         if (strcasestr(filename, ".lang"))
         {
             strcpy(languageFiles[cnt], filename);
         }
     }
 
-    subfoldercreate(Settings.languagefiles_path);
+    CreateSubfolder(Settings.languagefiles_path);
 
     //we assume that the network will already be init by another function
     // ( that has gui eletents in it because this one doesn't)
@@ -42,7 +42,7 @@ int updateLanguageFiles()
     if (IsNetworkInit())
     {
         //build the URL, save path, and download each file and save it
-        while (j < countfiles)
+        while (j < Dir.GetFilecount())
         {
             char savepath[150];
             char codeurl[200];

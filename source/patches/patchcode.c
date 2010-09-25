@@ -27,7 +27,7 @@
 #include "usbloader/apploader.h"
 #include "patchcode.h"
 #include "settings/cfg.h"
-#include "listfiles.h"
+#include "FileOperations/fileops.h"
 #include "fst.h"
 
 //#include "sd.h"
@@ -146,7 +146,7 @@ bool dogamehooks(void *addr, u32 len)
     GameId[6] = 0;
     sprintf(filepath, "%s%s.gct", CheatFilepath, GameId);
 
-    if (!checkfile(filepath)) return false;
+    if (!CheckFile(filepath)) return false;
 
     //TODO for oggzee: when using Ocarina check if a hook as patched
 

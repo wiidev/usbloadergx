@@ -10,7 +10,8 @@
 #include "settings/CSettings.h"
 #include "themes/CTheme.h"
 #include "network/URL_List.h"
-#include "listfiles.h"
+#include "FileOperations/fileops.h"
+#include "FileOperations/DirList.h"
 #include "main.h"
 #include "fatmounter.h"
 #include "filelist.h"
@@ -112,7 +113,7 @@ int MenuLanguageSelect()
     trigB.SetButtonOnlyTrigger( -1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B );
 
     char fullpath[100];
-    int countfiles = GetAllDirFiles( Settings.languagefiles_path );
+    DirList Dir( Settings.languagefiles_path );
 
     if ( !strcmp( "", Settings.languagefiles_path ) )
     {
@@ -194,12 +195,12 @@ int MenuLanguageSelect()
     updateBtn.SetTrigger( &trigA );
     updateBtn.SetEffectGrow();
 
-    customOptionList options2( countfiles );
+    customOptionList options2( Dir.GetFilecount() );
 
-    for ( cnt = 0; cnt < countfiles; cnt++ )
+    for ( cnt = 0; cnt < Dir.GetFilecount(); cnt++ )
     {
         char filename[64];
-        strlcpy( filename, GetFileName( cnt ), sizeof( filename ) );
+        strlcpy( filename, Dir.GetFilename( cnt ), sizeof( filename ) );
         char *dot = strchr( filename, '.' );
         if ( dot ) *dot = '\0';
         options2.SetName( cnt, "%s", filename );
@@ -288,7 +289,7 @@ int MenuLanguageSelect()
                     URL_List LinkList( URL );
                     int listsize = LinkList.GetURLCount();
 
-                    subfoldercreate( Settings.languagefiles_path );
+                    CreateSubfolder( Settings.languagefiles_path );
 
                     for ( int i = 0; i < listsize; i++ )
                     {
@@ -356,7 +357,7 @@ int MenuLanguageSelect()
                     WindowPrompt( tr( "No SD-Card inserted!" ), tr( "Insert an SD-Card to save." ), tr( "OK" ) );
                 }
             }
-            if ( countfiles > 0 )
+            if ( Dir.GetFilecount() > 0 )
             {
                 optionBrowser4.SetFocus( 1 );
             }
@@ -372,9 +373,9 @@ int MenuLanguageSelect()
             {
                 if ( isInserted( bootDevice ) )
                 {
-                    snprintf( Settings.language_path, sizeof( Settings.language_path ), "%s%s", Settings.languagefiles_path, GetFileName( ret ) );
+                    snprintf( Settings.language_path, sizeof( Settings.language_path ), "%s%s", Settings.languagefiles_path, Dir.GetFilename( ret ) );
                     Settings.Save();
-                    if ( !checkfile( Settings.language_path ) )
+                    if ( !CheckFile( Settings.language_path ) )
                     {
                         sprintf( Settings.language_path, tr( "not set" ) );
                         WindowPrompt( tr( "File not found." ), tr( "Loading standard language." ), tr( "OK" ) );

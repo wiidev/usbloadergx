@@ -27,13 +27,10 @@
 #include <string.h>
 
 #include "CSettings.h"
+#include "CGameSettings.h"
 #include "language/gettext.h"
 #include "themes/CTheme.h"
-#include "listfiles.h"
-
-#define DEFAULT_APP_PATH    "apps/usbloader_gx/"
-#define CONFIGPATH          "config/"
-#define CONFIGNAME          "GXGlobal.cfg"
+#include "FileOperations/fileops.h"
 
 CSettings Settings;
 
@@ -149,8 +146,13 @@ bool CSettings::Load()
     //!The following needs to be moved later
     CFG_LoadGameNum();
 
-    snprintf(filepath, sizeof(filepath), "%sGXtheme.cfg", theme_path);
-    Theme.Load(filepath);
+    char GameSetPath[200];
+    snprintf(GameSetPath, sizeof(GameSetPath), ConfigPath);
+    char * ptr = strrchr(GameSetPath, '/');
+    if(ptr) ptr[1] = 0;
+
+    GameSettings.Load(GameSetPath);
+    Theme.Load(theme_path);
 
     return true;
 
@@ -179,7 +181,7 @@ bool CSettings::Save()
         tmppath[0] = '\0';
     }
 
-    subfoldercreate(filedest);
+    if(!CreateSubfolder(filedest))	return false;
 
     file = fopen(ConfigPath, "w");
     if (!file) return false;
@@ -566,10 +568,10 @@ bool CSettings::FindConfig()
         if (i == 1) strcpy(BootDevice, "USB:");
 
         snprintf(ConfigPath, sizeof(ConfigPath), "%s/config/GXGlobal.cfg", BootDevice);
-        if ((found = checkfile(ConfigPath))) break;
+        if ((found = CheckFile(ConfigPath))) break;
 
         snprintf(ConfigPath, sizeof(ConfigPath), "%s/apps/usbloader_gx/GXGlobal.cfg", BootDevice);
-        if ((found = checkfile(ConfigPath))) break;
+        if ((found = CheckFile(ConfigPath))) break;
     }
 
     if (!found)

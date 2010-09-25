@@ -16,7 +16,7 @@
 #include "sys.h"
 #include "wpad.h"
 #include "fatmounter.h"
-#include "listfiles.h"
+#include "FileOperations/fileops.h"
 #include "prompts/PromptWindows.h"
 #include "gameinfo.h"
 #include "usbloader/GameList.h"

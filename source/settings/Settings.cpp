@@ -16,7 +16,7 @@
 #include "menu.h"
 #include "menu/menus.h"
 #include "filelist.h"
-#include "listfiles.h"
+#include "FileOperations/fileops.h"
 #include "sys.h"
 #include "cfg.h"
 #include "usbloader/partition_usbloader.h"
@@ -2962,7 +2962,7 @@ int MenuGameSettings(struct discHdr * header)
                                 int choice1 = WindowPrompt(tr( "Delete" ), tmp, tr( "Yes" ), tr( "No" ));
                                 if (choice1 == 1)
                                 {
-                                    if (checkfile(tmp)) remove(tmp);
+                                    if (CheckFile(tmp)) remove(tmp);
                                 }
                             }
                         }
@@ -2979,7 +2979,7 @@ int MenuGameSettings(struct discHdr * header)
                                 int choice1 = WindowPrompt(tr( "Delete" ), tmp, tr( "Yes" ), tr( "No" ));
                                 if (choice1 == 1)
                                 {
-                                    if (checkfile(tmp)) remove(tmp);
+                                    if (CheckFile(tmp)) remove(tmp);
                                 }
                             }
                         }
@@ -2997,7 +2997,7 @@ int MenuGameSettings(struct discHdr * header)
                                 int choice1 = WindowPrompt(tr( "Delete" ), tmp, tr( "Yes" ), tr( "No" ));
                                 if (choice1 == 1)
                                 {
-                                    if (checkfile(tmp)) remove(tmp);
+                                    if (CheckFile(tmp)) remove(tmp);
                                 }
                             }
                         }
@@ -3015,7 +3015,7 @@ int MenuGameSettings(struct discHdr * header)
                                 int choice1 = WindowPrompt(tr( "Delete" ), tmp, tr( "Yes" ), tr( "No" ));
                                 if (choice1 == 1)
                                 {
-                                    if (checkfile(tmp)) remove(tmp);
+                                    if (CheckFile(tmp)) remove(tmp);
                                 }
                             }
                         }

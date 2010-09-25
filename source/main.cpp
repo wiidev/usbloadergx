@@ -38,7 +38,7 @@ extern "C"
 #include "menu.h"
 #include "input.h"
 #include "filelist.h"
-#include "listfiles.h"
+#include "FileOperations/fileops.h"
 #include "main.h"
 #include "fatmounter.h"
 #include "sys.h"
@@ -93,9 +93,9 @@ int main(int argc, char *argv[])
         printf("\tSearch for configuration file\n");
         //try USB
         //left in all the dol and elf files in this check in case this is the first time running the app and they dont have the config
-        if (checkfile((char*) "USB:/config/GXglobal.cfg") || (checkfile((char*) "USB:/apps/usbloader_gx/boot.elf"))
-                || checkfile((char*) "USB:/apps/usbloadergx/boot.dol") || (checkfile(
-                (char*) "USB:/apps/usbloadergx/boot.elf")) || checkfile((char*) "USB:/apps/usbloader_gx/boot.dol")) strcpy(
+        if (CheckFile((char*) "USB:/config/GXglobal.cfg") || (CheckFile((char*) "USB:/apps/usbloader_gx/boot.elf"))
+                || CheckFile((char*) "USB:/apps/usbloadergx/boot.dol") || (CheckFile(
+                (char*) "USB:/apps/usbloadergx/boot.elf")) || CheckFile((char*) "USB:/apps/usbloader_gx/boot.dol")) strcpy(
                 bootDevice, "USB:");
 
         printf("\tConfiguration file is on %s\n", bootDevice);

@@ -56,10 +56,8 @@ int MenuDiscList()
     gameList.FilterList();
     int offset = MIN( ( int )startat, gameList.size() - 1 );
     startat = offset;
-    int datag = 0;
     int datagB = 0;
     int dataed = -1;
-    int cosa = 0, sina = 0;
     int selectImg1 = 0;
     char ID[4];
     char IDfull[7];
@@ -77,7 +75,7 @@ int MenuDiscList()
     int check = 0; //to skip the first cycle when wiimote isn't completely connected
 
     datagB = 0;
-    int menu = MENU_NONE, dataef = 0;
+    int menu = MENU_NONE;
 
     u32 nolist;
     char text[MAX_CHARACTERS + 4];
@@ -113,7 +111,6 @@ int MenuDiscList()
     GuiImageData btnSettings(imgPath, settings_button_png);
     snprintf(imgPath, sizeof(imgPath), "%ssettings_button_over.png", Settings.theme_path);
     GuiImageData btnSettingsOver(imgPath, settings_button_over_png);
-    GuiImageData dataID(&data1);
 
     snprintf(imgPath, sizeof(imgPath), "%swiimote_poweroff.png", Settings.theme_path);
     GuiImageData btnpwroff(imgPath, wiimote_poweroff_png);
@@ -285,10 +282,6 @@ int MenuDiscList()
     GuiButton gameInfo(0, 0);
     gameInfo.SetTrigger(&trig2);
     gameInfo.SetSoundClick(btnClick2);
-
-    GuiImage wiiBtnImg(&dataID);
-    wiiBtnImg.SetWidescreen(Settings.widescreen);
-    GuiButton wiiBtn(&wiiBtnImg, &wiiBtnImg, 0, 4, 0, -10, &trigA, &btnSoundOver, btnClick2, 0);
 
     GuiTooltip favoriteBtnTT(tr( "Display favorites" ));
     if (Settings.wsprompt == yes) favoriteBtnTT.SetWidescreen(Settings.widescreen);
@@ -764,125 +757,6 @@ int MenuDiscList()
 
         }
 
-        if ((datagB < 1) && (Settings.cios == 1) && (Settings.videomode == ntsc) && (Settings.hddinfo == hr12)
-                && (Settings.quickboot == 1) && (Settings.wsprompt == 0) && (Settings.language == ger)
-                && (Settings.tooltips == 0))
-        {
-            dataed = 1;
-            dataef = 1;
-        }
-        if (dataef == 1)
-        {
-            if (cosa > 7)
-            {
-                cosa = 1;
-            }
-            datag++;
-            if (sina == 3)
-            {
-                wiiBtn.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-                wiiBtnImg.SetAngle(0);
-                if (datag > 163)
-                {
-                    datag = 1;
-                }
-                else if (datag < 62)
-                {
-                    wiiBtn.SetPosition(((cosa) * 70), (-2 * (datag) + 120));
-                }
-                else if (62 <= datag)
-                {
-                    wiiBtn.SetPosition(((cosa) * 70), ((datag * 2) - 130));
-                }
-                if (datag > 162)
-                {
-                    wiiBtn.SetPosition(700, 700);
-                    w.Remove(&wiiBtn);
-                    datagB = 2;
-                    cosa++;
-                    sina = lastrawtime % 4;
-                }
-                w.Append(&wiiBtn);
-            }
-            if (sina == 2)
-            {
-                wiiBtn.SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
-                wiiBtnImg.SetAngle(270);
-                if (datag > 163)
-                {
-                    datag = 1;
-                }
-                else if (datag < 62)
-                {
-                    wiiBtn.SetPosition(((-2 * (datag) + 130)), ((cosa) * 50));
-                }
-                else if (62 <= datag)
-                {
-                    wiiBtn.SetPosition((2 * (datag) - 120), ((cosa) * 50));
-                }
-                if (datag > 162)
-                {
-                    wiiBtn.SetPosition(700, 700);
-                    w.Remove(&wiiBtn);
-                    datagB = 2;
-                    cosa++;
-                    sina = lastrawtime % 4;
-                }
-                w.Append(&wiiBtn);
-            }
-            if (sina == 1)
-            {
-                wiiBtn.SetAlignment(ALIGN_TOP, ALIGN_LEFT);
-                wiiBtnImg.SetAngle(180);
-                if (datag > 163)
-                {
-                    datag = 1;
-                }
-                else if (datag < 62)
-                {
-                    wiiBtn.SetPosition(((cosa) * 70), (2 * (datag) - 120));
-                }
-                else if (62 <= datag)
-                {
-                    wiiBtn.SetPosition(((cosa) * 70), (-2 * (datag) + 130));
-                }
-                if (datag > 162)
-                {
-                    wiiBtn.SetPosition(700, 700);
-                    w.Remove(&wiiBtn);
-                    datagB = 2;
-                    cosa++;
-                    sina = lastrawtime % 4;
-                }
-                w.Append(&wiiBtn);
-            }
-            if (sina == 0)
-            {
-                wiiBtn.SetAlignment(ALIGN_TOP, ALIGN_LEFT);
-                wiiBtnImg.SetAngle(90);
-                if (datag > 163)
-                {
-                    datag = 1;
-                }
-                else if (datag < 62)
-                {
-                    wiiBtn.SetPosition(((2 * (datag) - 130)), ((cosa) * 50));
-                }
-                else if (62 <= datag)
-                {
-                    wiiBtn.SetPosition((-2 * (datag) + 120), ((cosa) * 50));
-                }
-                if (datag > 162)
-                {
-                    wiiBtn.SetPosition(700, 700);
-                    w.Remove(&wiiBtn);
-                    datagB = 2;
-                    cosa++;
-                    sina = lastrawtime % 4;
-                }
-                w.Append(&wiiBtn);
-            }
-        }
         // respond to button presses
         if (shutdown == 1)
         {
@@ -993,25 +867,6 @@ int MenuDiscList()
                 }
             }
 
-        }
-        else if (wiiBtn.GetState() == STATE_CLICKED)
-        {
-            gprintf("\twiiBtn clicked\n");
-
-            dataed++;
-            wiiBtn.ResetState();
-            if (Settings.gameDisplay == list)
-            {
-                gameBrowser->SetFocus(1);
-            }
-            else if (Settings.gameDisplay == grid)
-            {
-                gameGrid->SetFocus(1);
-            }
-            else if (Settings.gameDisplay == carousel)
-            {
-                gameCarousel->SetFocus(1);
-            }
         }
         else if (installBtn.GetState() == STATE_CLICKED)
         {
