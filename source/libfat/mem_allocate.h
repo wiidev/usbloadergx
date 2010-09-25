@@ -32,21 +32,22 @@
 #define __MEM_ALLOCATE_H_
 
 #include <malloc.h>
+#include "memory/mem2.h"
 
 static inline void* _FAT_mem_allocate(size_t size)
 {
-    return malloc(size);
+    return MEM2_alloc(size);
 }
 
 static inline void* _FAT_mem_align(size_t size)
 {
 
-    return memalign(32, size);
+    return MEM2_alloc(size);
 }
 
 static inline void _FAT_mem_free(void* mem)
 {
-    free(mem);
+    MEM2_free(mem);
 }
 
 #endif // _MEM_ALLOCATE_H

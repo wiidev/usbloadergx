@@ -190,9 +190,6 @@ s32 MountNTFS(u32 sector)
     s32 ret;
 
     if (fs_ntfs_mount) return 0;
-    //printf("mounting NTFS\n");
-    //Wpad_WaitButtons();
-    _FAT_mem_init();
 
     ntfsInit(); // Call ntfs init here, to prevent locale resets
 
@@ -252,23 +249,4 @@ s32 UnmountNTFS(void)
     fs_ntfs_sec = 0;
 
     return 0;
-}
-
-void _FAT_mem_init()
-{
-}
-
-void* _FAT_mem_allocate(size_t size)
-{
-    return malloc(size);
-}
-
-void* _FAT_mem_align(size_t size)
-{
-    return memalign(32, size);
-}
-
-void _FAT_mem_free(void *mem)
-{
-    free(mem);
 }
