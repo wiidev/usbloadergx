@@ -141,6 +141,7 @@ CTheme::CTheme()
 
 CTheme::~CTheme()
 {
+    Resources::Clear();
 }
 
 void CTheme::SetDefault()

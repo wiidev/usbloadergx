@@ -4,6 +4,7 @@
 
 #include "mload/mload.h"
 #include "settings/CSettings.h"
+#include "utils/ResourceManager.h"
 #include "audio.h"
 #include "fatmounter.h"
 #include "lstub.h"
@@ -53,6 +54,8 @@ static void _ExitApp()
     ExitGUIThreads();
     StopGX();
     ShutdownAudio();
+
+    ResourceManager::DestroyInstance();
 
     UnmountNTFS();
     SDCard_deInit();

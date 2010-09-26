@@ -27,6 +27,7 @@
 #include "ImageOperations/TextureConverter.h"
 #include "ImageOperations/TplImage.h"
 #include "FileOperations/fileops.h"
+#include "utils/ResourceManager.h"
 
 #define ALIGN32(x) (((x) + 31) & ~31)
 
@@ -59,7 +60,19 @@ GuiImageData::GuiImageData(const u8 * img, int imgSize)
 	height = 0;
 	format = GX_TF_RGBA8;
 
-	LoadImage(img, imgSize);
+    if(ResourceManager::Exists(img, imgSize) == true)
+    {
+        GuiImageData * Image = ResourceManager::GetImageData(img, imgSize);
+
+        data = Image->GetImage();
+        width = Image->GetWidth();
+        height = Image->GetHeight();
+        format = Image->GetTextureFormat();
+    }
+    else
+    {
+        LoadImage(img, imgSize);
+    }
 }
 
 /**
@@ -67,11 +80,8 @@ GuiImageData::GuiImageData(const u8 * img, int imgSize)
  */
 GuiImageData::~GuiImageData()
 {
-	if(data)
-	{
-		free(data);
-		data = NULL;
-	}
+    if(data)
+        ResourceManager::Remove(data);
 }
 
 void GuiImageData::LoadImage(const u8 * img, int imgSize)
