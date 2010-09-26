@@ -31,27 +31,33 @@
 
 #include <map>
 
+typedef struct _ImageData
+{
+    u8 * data;
+    int width;
+    int height;
+    u8 format;
+} ImageData;
+
 class ResourceManager
 {
 	public:
 		static ResourceManager *Instance();
 		static void DestroyInstance();
 
-		static GuiImageData * GetImageData(const u8 *img, u32 imgSize);
-		static bool Exists(const u8 *img, u32 imgSize);
-		static void Remove(GuiImageData * img);
+		static void AddImageData(const u8 *img, ImageData & data);
+		static ImageData * GetImageData(const u8 *img);
 		static void Remove(u8 * img);
 	private:
-        bool InternalExists(const u8 *img, u32 imgSize);
-		GuiImageData *InternalGetImageData(const u8 *img, u32 imgSize);
-		void InternalRemoveImageData(GuiImageData *img);
-		void InternalRemoveImageData(u8 *img);
+        void InternalAddImageData(const u8 * img, ImageData & Data);
+		ImageData *InternalGetImageData(const u8 *img);
+		void InternalRemoveImageData(u8 * img);
 
 		~ResourceManager();
 
 		static ResourceManager *instance;
 
-		std::map<const u8 *, GuiImageData *> images;
+		std::map<const u8 *, ImageData> images;
 		std::map<u8 *, int> imageCount;
 };
 

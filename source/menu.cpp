@@ -165,8 +165,7 @@ static void * UpdateGUI(void *arg)
     for (i = 5; i < 255; i += 10)
     {
         if (strcmp(headlessID, "") == 0) mainWindow->Draw();
-        Menu_DrawRectangle(0, 0, screenwidth, screenheight, ( GXColor )
-        {   0, 0, 0, i}, 1);
+        Menu_DrawRectangle(0, 0, screenwidth, screenheight, (GXColor) {0, 0, 0, i}, 1);
         Menu_Render();
     }
     mainWindow->RemoveAll();
@@ -236,7 +235,7 @@ GuiImageData *LoadCoverImage(struct discHdr *header, bool Prefere3D, bool noCove
         {
             flag = !flag;
             delete Cover;
-            Cover = new (std::nothrow) GuiImageData(Resources::GetFile(Prefere3D ? "nocover.png" : "nocoverFlat.png"), Resources::GetFileSize(Prefere3D ? "nocover.png" : "nocoverFlat.png"));
+            Cover = Resources::GetImageData(Prefere3D ? "nocover.png" : "nocoverFlat.png");
             if (Cover && Cover->GetImage()) break;
         }
     }
@@ -253,22 +252,16 @@ GuiImageData *LoadCoverImage(struct discHdr *header, bool Prefere3D, bool noCove
  ***************************************************************************/
 int MainMenu(int menu)
 {
-
     currentMenu = menu;
 
-    //if (strcmp(headlessID,"")!=0)HaltGui();
-    //WindowPrompt("Can you see me now",0,"ok");
-
-    pointer[0] = new GuiImageData(Resources::GetFile("player1_point.png"), Resources::GetFileSize("player1_point.png"));
-    pointer[1] = new GuiImageData(Resources::GetFile("player2_point.png"), Resources::GetFileSize("player2_point.png"));
-    pointer[2] = new GuiImageData(Resources::GetFile("player3_point.png"), Resources::GetFileSize("player3_point.png"));
-    pointer[3] = new GuiImageData(Resources::GetFile("player4_point.png"), Resources::GetFileSize("player4_point.png"));
+    pointer[0] = Resources::GetImageData("player1_point.png");
+    pointer[1] = Resources::GetImageData("player2_point.png");
+    pointer[2] = Resources::GetImageData("player3_point.png");
+    pointer[3] = Resources::GetImageData("player4_point.png");
 
     mainWindow = new GuiWindow(screenwidth, screenheight);
-	
-	const char * image = Settings.widescreen ? "wbackground.png" : "background.png";
 
-    background = new GuiImageData(Resources::GetFile(image), Resources::GetFileSize(image));
+    background = Resources::GetImageData(Settings.widescreen ? "wbackground.png" : "background.png");
 
     bgImg = new GuiImage(background);
     mainWindow->Append(bgImg);

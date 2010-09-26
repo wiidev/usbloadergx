@@ -51,9 +51,8 @@ class GuiImageData
 		int GetHeight() { return height; };
 		//!Gets the texture format
 		u8 GetTextureFormat() { return format; };
-		//!Load a new image into this GuiImageData
-        void LoadImage(const u8 * img, int imgSize);
 	protected:
+        void LoadImage(const u8 * img, int imgSize);
 		void LoadPNG(const u8 *img, int imgSize);
 		void LoadBMP(const u8 *img, int imgSize);
 		void LoadJpeg(const u8 *img, int imgSize);

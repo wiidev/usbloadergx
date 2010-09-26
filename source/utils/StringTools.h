@@ -30,6 +30,8 @@
 extern "C" {
 #endif
 
+//! fmt and wfmt can only be used once at a session and the strings needs
+//! to be copied afterwards. A second use overwrites the first string.
 const char * fmt(const char * format, ...);
 const wchar_t * wfmt(const char * format, ...);
 bool char2wchar_t(const char * src, wchar_t * dest);

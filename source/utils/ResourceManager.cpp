@@ -46,59 +46,50 @@ void ResourceManager::DestroyInstance()
 ResourceManager::~ResourceManager()
 {
 	// Delete all images...
-	std::map<const u8 *, GuiImageData *>::iterator imgitr;
+	std::map<const u8 *, ImageData>::iterator imgitr;
 	for (imgitr = images.begin(); imgitr != images.end(); imgitr++)
 	{
-		delete imgitr->second;
+		if(imgitr->second.data)
+            free(imgitr->second.data);
 	}
 	images.clear();
 	imageCount.clear();
 }
 
-bool ResourceManager::Exists(const u8 *img, u32 imgSize)
+void ResourceManager::AddImageData(const u8 *img, ImageData & Data)
 {
-	return ResourceManager::Instance()->InternalExists(img, imgSize);
+	ResourceManager::Instance()->InternalAddImageData(img, Data);
 }
 
-bool ResourceManager::InternalExists(const u8 *img, u32 imgSize)
+ImageData * ResourceManager::GetImageData(const u8 *img)
 {
-	std::map<const u8 *, GuiImageData *>::iterator itr = images.find(img);
-
-	return (itr != images.end());
+	return ResourceManager::Instance()->InternalGetImageData(img);
 }
 
-GuiImageData * ResourceManager::GetImageData(const u8 *img, u32 imgSize)
-{
-	return ResourceManager::Instance()->InternalGetImageData(img, imgSize);
-}
-
-void ResourceManager::Remove(GuiImageData *img)
-{
-	if(!img)
-		return;
-
-	ResourceManager::Instance()->InternalRemoveImageData(img->GetImage());
-}
-
-void ResourceManager::Remove(u8 *img)
+void ResourceManager::Remove(u8 * img)
 {
 	ResourceManager::Instance()->InternalRemoveImageData(img);
 }
 
-GuiImageData * ResourceManager::InternalGetImageData(const u8 *img, u32 imgSize)
+void ResourceManager::InternalAddImageData(const u8 * img, ImageData & Data)
 {
-	std::map<const u8 *, GuiImageData *>::iterator itr = images.find(img);
-	if (itr == images.end())
-	{
-		// Not found, create a new one
-		GuiImageData *d = new GuiImageData(img, imgSize);
-		images[img] = d;
-		imageCount[d->GetImage()] = 1;
-		return d;
+	std::map<const u8 *, ImageData>::iterator itr = images.find(img);
+	if (itr != images.end())
+		return;
 
-	}
-	imageCount[itr->second->GetImage()]++;
-	return itr->second;
+    images[img] = Data;
+    imageCount[Data.data] = 1;
+}
+
+ImageData * ResourceManager::InternalGetImageData(const u8 *img)
+{
+	std::map<const u8 *, ImageData>::iterator itr = images.find(img);
+	if (itr == images.end())
+		return NULL;
+
+	imageCount[itr->second.data]++;
+
+	return &itr->second;
 }
 
 void ResourceManager::InternalRemoveImageData(u8 * img)
@@ -112,12 +103,13 @@ void ResourceManager::InternalRemoveImageData(u8 * img)
 		{
 			imageCount.erase(itr);
 
-			std::map<const u8 *, GuiImageData *>::iterator iitr;
+			std::map<const u8 *, ImageData>::iterator iitr;
 			for (iitr = images.begin(); iitr != images.end(); iitr++)
 			{
-				if (iitr->second->GetImage() == img)
+				if (iitr->second.data == img)
 				{
-					delete iitr->second;
+				    if(iitr->second.data)
+                        free(iitr->second.data);
 					images.erase(iitr);
 					break;
 				}
@@ -126,32 +118,7 @@ void ResourceManager::InternalRemoveImageData(u8 * img)
 	}
 	else if(img)
 	{
+	    //! This case should actually never accur
 	    free(img);
 	}
 }
-
-void ResourceManager::InternalRemoveImageData(GuiImageData * img)
-{
-	std::map<u8 *, int>::iterator itr = imageCount.find(img->GetImage());
-	if (itr != imageCount.end())
-	{
-		itr->second--;
-
-		if (itr->second == 0) // Remove the resource
-		{
-			imageCount.erase(itr);
-
-			std::map<const u8 *, GuiImageData *>::iterator iitr;
-			for (iitr = images.begin(); iitr != images.end(); iitr++)
-			{
-				if (iitr->second == img)
-				{
-					delete iitr->second;
-					images.erase(iitr);
-					break;
-				}
-			}
-		}
-	}
-}
-
