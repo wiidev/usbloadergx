@@ -124,6 +124,10 @@ void ResourceManager::InternalRemoveImageData(u8 * img)
 			}
 		}
 	}
+	else if(img)
+	{
+	    free(img);
+	}
 }
 
 void ResourceManager::InternalRemoveImageData(GuiImageData * img)
