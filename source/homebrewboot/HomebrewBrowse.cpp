@@ -90,30 +90,21 @@ int MenuHomebrewBrowse()
     GuiSound btnClick1(button_click_pcm, button_click_pcm_size, Settings.sfxvolume);
 
     /*** Image Variables ***/
-    char imgPath[150];
-    snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", Settings.theme_path);
-    GuiImageData btnOutline(imgPath, button_dialogue_box_png);
+    GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
 
-    snprintf(imgPath, sizeof(imgPath), "%ssettings_background.png", Settings.theme_path);
-    GuiImageData bgData(imgPath, settings_background_png);
+    GuiImageData bgData(Resources::GetFile("settings_background.png"), Resources::GetFileSize("settings_background.png"));
 
-    snprintf(imgPath, sizeof(imgPath), "%ssettings_title.png", Settings.theme_path);
-    GuiImageData MainButtonImgData(imgPath, settings_title_png);
+    GuiImageData MainButtonImgData(Resources::GetFile("settings_title.png"), Resources::GetFileSize("settings_title.png"));
 
-    snprintf(imgPath, sizeof(imgPath), "%ssettings_title_over.png", Settings.theme_path);
-    GuiImageData MainButtonImgOverData(imgPath, settings_title_over_png);
+    GuiImageData MainButtonImgOverData(Resources::GetFile("settings_title_over.png"), Resources::GetFileSize("settings_title_over.png"));
 
-    snprintf(imgPath, sizeof(imgPath), "%sstartgame_arrow_left.png", Settings.theme_path);
-    GuiImageData arrow_left(imgPath, startgame_arrow_left_png);
+    GuiImageData arrow_left(Resources::GetFile("startgame_arrow_left.png"), Resources::GetFileSize("startgame_arrow_left.png"));
 
-    snprintf(imgPath, sizeof(imgPath), "%sstartgame_arrow_right.png", Settings.theme_path);
-    GuiImageData arrow_right(imgPath, startgame_arrow_right_png);
+    GuiImageData arrow_right(Resources::GetFile("startgame_arrow_right.png"), Resources::GetFileSize("startgame_arrow_right.png"));
 
-    snprintf(imgPath, sizeof(imgPath), "%sWifi_btn.png", Settings.theme_path);
-    GuiImageData wifiImgData(imgPath, Wifi_btn_png);
+    GuiImageData wifiImgData(Resources::GetFile("Wifi_btn.png"), Resources::GetFileSize("Wifi_btn.png"));
 
-    snprintf(imgPath, sizeof(imgPath), "%sChannel_btn.png", Settings.theme_path);
-    GuiImageData channelImgData(imgPath, Channel_btn_png);
+    GuiImageData channelImgData(Resources::GetFile("Channel_btn.png"), Resources::GetFileSize("Channel_btn.png"));
 
     GuiImage background(&bgData);
 
@@ -400,7 +391,7 @@ int MenuHomebrewBrowse()
             {
                 char iconpath[200];
                 snprintf(iconpath, sizeof(iconpath), "%sicon.png", HomebrewFiles.GetFilepath(fileoffset + i));
-                IconData[i] = new GuiImageData(iconpath, 0);
+                IconData[i] = new GuiImageData(iconpath);
                 if (IconData[i]->GetImage())
                 {
                     IconImg[i] = new GuiImage(IconData[i]);

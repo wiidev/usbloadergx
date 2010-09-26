@@ -1,292 +1,65 @@
-/****************************************************************************
- * libwiigui
+/***************************************************************************
+ * Copyright (C) 2010
+ * by Dimok
  *
- * Tantric 2009
+ * This software is provided 'as-is', without any express or implied
+ * warranty. In no event will the authors be held liable for any
+ * damages arising from the use of this software.
  *
- * gui_imagedata.cpp
+ * Permission is granted to anyone to use this software for any
+ * purpose, including commercial applications, and to alter it and
+ * redistribute it freely, subject to the following restrictions:
  *
- * LoadJpeg copyright by r-win for WiiXplorer
- * check WiiXplorer source for license conditions
+ * 1. The origin of this software must not be misrepresented; you
+ * must not claim that you wrote the original software. If you use
+ * this software in a product, an acknowledgment in the product
+ * documentation would be appreciated but is not required.
  *
- * GUI class definitions
+ * 2. Altered source versions must be plainly marked as such, and
+ * must not be misrepresented as being the original software.
+ *
+ * 3. This notice may not be removed or altered from any source
+ * distribution.
+ *
+ * for WiiXplorer 2010
  ***************************************************************************/
-
 #include "gui.h"
+#include "ImageOperations/TextureConverter.h"
+#include "ImageOperations/TplImage.h"
+#include "FileOperations/fileops.h"
 
-#ifdef __cplusplus
-extern "C"
-{
-#endif
-
-#include <jpeglib.h>
-
-#ifdef __cplusplus
-}
-#endif
-
-#define new_width 640
-#define new_height 480
+#define ALIGN32(x) (((x) + 31) & ~31)
 
 /**
  * Constructor for the GuiImageData class.
  */
-
-extern int idiotFlag;
-extern char idiotChar[50];
-GuiImageData::GuiImageData(const u8 * img)
+GuiImageData::GuiImageData(const char * filepath)
 {
-    data = NULL;
-    width = 0;
-    height = 0;
+	data = NULL;
+	width = 0;
+	height = 0;
+	format = GX_TF_RGBA8;
 
-    if (img)
-    {
-        PNGUPROP imgProp;
-        IMGCTX ctx = PNGU_SelectImageFromBuffer(img);
+    u8 *buffer = NULL;
+    u64 size = 0;
 
-        if (!ctx) return;
+    if(LoadFileToMem(filepath, &buffer, &size) < 0)
+        return;
 
-        int res = PNGU_GetImageProperties(ctx, &imgProp);
-        //if (((4%imgProp.imgWidth)!=0)||((4%imgProp.imgHeight)!=0))idiotFlag=1;
+    LoadImage(buffer, size);
 
-        if (res == PNGU_OK)
-        {
-            int len = imgProp.imgWidth * imgProp.imgHeight * 4;
-            if (len % 32) len += (32 - len % 32);
-            data = (u8 *) memalign(32, len);
-
-            if (data)
-            {
-                res = PNGU_DecodeTo4x4RGBA8(ctx, imgProp.imgWidth, imgProp.imgHeight, data, 255);
-
-                if (res == PNGU_OK)
-                {
-                    width = imgProp.imgWidth;
-                    height = imgProp.imgHeight;
-                    DCFlushRange(data, len);
-                }
-                else
-                {
-                    free(data);
-                    data = NULL;
-                    idiotFlag = 1;
-                    snprintf(idiotChar, sizeof(idiotChar), "%s", img);
-
-                }
-            }
-        }
-        PNGU_ReleaseImageContext(ctx);
-    }
+    if(buffer)
+        free(buffer);
 }
 
 GuiImageData::GuiImageData(const u8 * img, int imgSize)
 {
-    data = NULL;
-    width = 0;
-    height = 0;
+	data = NULL;
+	width = 0;
+	height = 0;
+	format = GX_TF_RGBA8;
 
-    if (img)
-    {
-        if (img[0] == 0xFF && img[1] == 0xD8) // IMAGE_JPEG
-        {
-            LoadJpeg(img, imgSize);
-        }
-    }
-}
-/**
- * Constructor for the GuiImageData class.
- */
-GuiImageData::GuiImageData(const char * imgPath, const u8 * buffer)
-{
-    data = NULL;
-    width = 0;
-    height = 0;
-
-    if (imgPath)
-    {
-        PNGUPROP imgProp;
-        IMGCTX ctx = PNGU_SelectImageFromDevice(imgPath);
-        //if (((4%imgProp.imgWidth)!=0)||((4%imgProp.imgHeight)!=0))idiotFlag=1;
-
-        if (ctx)
-        {
-            int res = PNGU_GetImageProperties(ctx, &imgProp);
-
-            if (res == PNGU_OK)
-            {
-                int len = imgProp.imgWidth * imgProp.imgHeight * 4;
-                if (len % 32) len += (32 - len % 32);
-                data = (u8 *) memalign(32, len);
-
-                if (data)
-                {
-                    res = PNGU_DecodeTo4x4RGBA8(ctx, imgProp.imgWidth, imgProp.imgHeight, data, 255);
-
-                    if (res == PNGU_OK)
-                    {
-                        width = imgProp.imgWidth;
-                        height = imgProp.imgHeight;
-                        DCFlushRange(data, len);
-                    }
-                    else
-                    {
-                        free(data);
-                        data = NULL;
-                        idiotFlag = 1;
-                        snprintf(idiotChar, sizeof(idiotChar), "%s", imgPath);
-                    }
-                }
-            }
-            PNGU_ReleaseImageContext(ctx);
-        }
-    }
-
-    if (!data) //use buffer data instead
-    {
-        width = 0;
-        height = 0;
-        if (buffer)
-        {
-            PNGUPROP imgProp;
-            IMGCTX ctx = PNGU_SelectImageFromBuffer(buffer);
-
-            if (!ctx) return;
-
-            int res = PNGU_GetImageProperties(ctx, &imgProp);
-
-            if (res == PNGU_OK)
-            {
-                int len = imgProp.imgWidth * imgProp.imgHeight * 4;
-                if (len % 32) len += (32 - len % 32);
-                data = (u8 *) memalign(32, len);
-
-                if (data)
-                {
-                    res = PNGU_DecodeTo4x4RGBA8(ctx, imgProp.imgWidth, imgProp.imgHeight, data, 255);
-
-                    if (res == PNGU_OK)
-                    {
-                        width = imgProp.imgWidth;
-                        height = imgProp.imgHeight;
-                        DCFlushRange(data, len);
-                    }
-                    else
-                    {
-                        free(data);
-                        data = NULL;
-                    }
-                }
-            }
-            PNGU_ReleaseImageContext(ctx);
-        }
-    }
-}
-
-/**
- * Constructor for the GuiImageData class.
- */
-GuiImageData::GuiImageData(const char *path, const char *file, const u8 *buffer, bool force_widescreen/*=false*/,
-        const u8 *wbuffer/*=NULL*/)
-{
-    data = NULL;
-    width = 0;
-    height = 0;
-    char path_4_3[100];
-    char path_16_9[100];
-    char *imgPath;
-
-    snprintf(path_4_3, sizeof(path_4_3), "%s%s", path, file);
-    if (force_widescreen)
-    {
-        snprintf(path_16_9, sizeof(path_16_9), "%sw%s", path, file);
-        imgPath = path_16_9;
-        if (wbuffer) buffer = wbuffer;
-    }
-    else imgPath = path_4_3;
-
-    for (;;)
-    {
-        if (imgPath)
-        {
-            PNGUPROP imgProp;
-            IMGCTX ctx = PNGU_SelectImageFromDevice(imgPath);
-            //if (((4%imgProp.imgWidth)!=0)||((4%imgProp.imgHeight)!=0))idiotFlag=1;
-
-            if (ctx)
-            {
-                int res = PNGU_GetImageProperties(ctx, &imgProp);
-
-                if (res == PNGU_OK)
-                {
-                    int len = imgProp.imgWidth * imgProp.imgHeight * 4;
-                    if (len % 32) len += (32 - len % 32);
-                    data = (u8 *) memalign(32, len);
-
-                    if (data)
-                    {
-                        res = PNGU_DecodeTo4x4RGBA8(ctx, imgProp.imgWidth, imgProp.imgHeight, data, 255);
-
-                        if (res == PNGU_OK)
-                        {
-                            width = imgProp.imgWidth;
-                            height = imgProp.imgHeight;
-                            DCFlushRange(data, len);
-                        }
-                        else
-                        {
-                            free(data);
-                            data = NULL;
-                            idiotFlag = 1;
-                            snprintf(idiotChar, sizeof(idiotChar), "%s", imgPath);
-                        }
-                    }
-                }
-                PNGU_ReleaseImageContext(ctx);
-            }
-        }
-        if (data || imgPath == path_4_3) break;
-        imgPath = path_4_3;
-    }
-
-    if (!data) //use buffer data instead
-    {
-        width = 0;
-        height = 0;
-        if (buffer)
-        {
-            PNGUPROP imgProp;
-            IMGCTX ctx = PNGU_SelectImageFromBuffer(buffer);
-
-            if (!ctx) return;
-
-            int res = PNGU_GetImageProperties(ctx, &imgProp);
-
-            if (res == PNGU_OK)
-            {
-                int len = imgProp.imgWidth * imgProp.imgHeight * 4;
-                if (len % 32) len += (32 - len % 32);
-                data = (u8 *) memalign(32, len);
-
-                if (data)
-                {
-                    res = PNGU_DecodeTo4x4RGBA8(ctx, imgProp.imgWidth, imgProp.imgHeight, data, 255);
-
-                    if (res == PNGU_OK)
-                    {
-                        width = imgProp.imgWidth;
-                        height = imgProp.imgHeight;
-                        DCFlushRange(data, len);
-                    }
-                    else
-                    {
-                        free(data);
-                        data = NULL;
-                    }
-                }
-            }
-            PNGU_ReleaseImageContext(ctx);
-        }
-    }
+	LoadImage(img, imgSize);
 }
 
 /**
@@ -294,162 +67,114 @@ GuiImageData::GuiImageData(const char *path, const char *file, const u8 *buffer,
  */
 GuiImageData::~GuiImageData()
 {
-    if (data)
+	if(data)
+	{
+		free(data);
+		data = NULL;
+	}
+}
+
+void GuiImageData::LoadImage(const u8 * img, int imgSize)
+{
+	if(!img)
+        return;
+
+    if(data)
     {
         free(data);
         data = NULL;
     }
-}
 
-u8 * GuiImageData::GetImage()
-{
-    return data;
-}
-
-int GuiImageData::GetWidth()
-{
-    return width;
-}
-
-int GuiImageData::GetHeight()
-{
-    return height;
-}
-void GuiImageData::SetGrayscale(void)
-{
-    GXColor color;
-    u32 offset, gray;
-
-    for (int x = 0; x < width; x++)
+    if (imgSize < 8)
     {
-        for (int y = 0; y < height; y++)
-        {
-            offset = (((y >> 2) << 4) * width) + ((x >> 2) << 6) + (((y % 4 << 2) + x % 4) << 1);
-            color.r = *(data + offset + 1);
-            color.g = *(data + offset + 32);
-            color.b = *(data + offset + 33);
-
-            gray = (77 * color.r + 150 * color.g + 28 * color.b) / 255;
-
-            *(data + offset + 1) = gray;
-            *(data + offset + 32) = gray;
-            *(data + offset + 33) = gray;
-        }
+        return;
+    }
+    else if (img[0] == 0x89 && img[1] == 'P' && img[2] == 'N' && img[3] == 'G')
+    {
+        // IMAGE_PNG
+        LoadPNG(img, imgSize);
+    }
+    else if (img[0] == 0xFF && img[1] == 0xD8)
+    {
+        // IMAGE_JPEG
+        LoadJpeg(img, imgSize);
+    }
+    else if (img[0] == 'B' && img[1] == 'M')
+    {
+        // IMAGE_BMP
+        LoadBMP(img, imgSize);
+    }
+    else if (img[0] == 'G' && img[1] == 'I' && img[2] == 'F')
+    {
+        // IMAGE_GIF
+        LoadGIF(img, imgSize);
+    }
+    else if (img[0] == 0x00 && img[1] == 0x20 && img[2] == 0xAF && img[3] == 0x30)
+    {
+        // IMAGE_TPL
+        LoadTPL(img, imgSize);
     }
 }
 
-// This function finds it's origin in GRRLIB, which can be found here: http://code.google.com/p/grrlib/
+void GuiImageData::LoadPNG(const u8 *img, int imgSize)
+{
+    gdImagePtr gdImg = gdImageCreateFromPngPtr(imgSize, (u8*) img);
+    if(gdImg == 0)
+        return;
+
+    data = GDImageToRGBA8(&gdImg, &width, &height);
+    gdImageDestroy(gdImg);
+}
+
 void GuiImageData::LoadJpeg(const u8 *img, int imgSize)
 {
-    struct jpeg_decompress_struct cinfo;
-    struct jpeg_error_mgr jerr;
+    gdImagePtr gdImg = gdImageCreateFromJpegPtr(imgSize, (u8*) img);
+    if(gdImg == 0)
+        return;
 
-    int n = imgSize;
-
-    while (n > 1)
-    {
-        if (img[n - 1] == 0xff && img[n] == 0xd9)
-        {
-            break;
-        }
-        n--;
-    }
-
-    jpeg_create_decompress( &cinfo );
-    cinfo.err = jpeg_std_error(&jerr);
-    cinfo.progress = NULL;
-    jpeg_mem_src(&cinfo, (u8 *) img, n);
-    jpeg_read_header(&cinfo, TRUE);
-    jpeg_calc_output_dimensions(&cinfo);
-
-    if (cinfo.output_width > new_width || cinfo.output_height > new_height)
-    {
-        float factor = (cinfo.output_width > cinfo.output_height) ? (1.0 * cinfo.output_width) / new_width : (1.0
-                * cinfo.output_height) / new_height;
-        cinfo.scale_num = 1;
-        cinfo.scale_denom = factor;
-        cinfo.do_fancy_upsampling = true;
-        cinfo.do_block_smoothing = false;
-        cinfo.dct_method = JDCT_IFAST;
-    }
-
-    jpeg_start_decompress(&cinfo);
-
-    int rowsize = cinfo.output_width * cinfo.num_components;
-    unsigned char *tempBuffer = (unsigned char *) malloc(rowsize * cinfo.output_height);
-
-    JSAMPROW row_pointer[1];
-
-    row_pointer[0] = (unsigned char*) malloc(rowsize);
-    size_t location = 0;
-    while (cinfo.output_scanline < cinfo.output_height)
-    {
-        jpeg_read_scanlines(&cinfo, row_pointer, 1);
-        memcpy(tempBuffer + location, row_pointer[0], rowsize);
-        location += rowsize;
-    }
-
-    int len = ((cinfo.output_width + 3) >> 2) * ((cinfo.output_height + 3) >> 2) * 32 * 2;
-
-    data = (u8 *) memalign(32, len);
-
-    RawTo4x4RGBA(tempBuffer, data, cinfo.output_width, cinfo.output_height);
-    DCFlushRange(data, len);
-
-    width = cinfo.output_width;
-    height = cinfo.output_height;
-
-    jpeg_finish_decompress(&cinfo);
-    jpeg_destroy_decompress(&cinfo);
-    free(row_pointer[0]);
-    free(tempBuffer);
+    data = GDImageToRGBA8(&gdImg, &width, &height);
+    gdImageDestroy(gdImg);
 }
 
-/**
- * Convert a raw bmp (RGB, no alpha) to 4x4RGBA.
- * @author DragonMinded
- * @param src
- * @param dst
- * @param width
- * @param height
- */
-void GuiImageData::RawTo4x4RGBA(const unsigned char *src, void *dst, const unsigned int width,
-        const unsigned int height)
+void GuiImageData::LoadGIF(const u8 *img, int imgSize)
 {
-    unsigned int block;
-    unsigned int i;
-    unsigned int c;
-    unsigned int ar;
-    unsigned int gb;
-    unsigned char *p = (unsigned char*) dst;
+    gdImagePtr gdImg = gdImageCreateFromGifPtr(imgSize, (u8*) img);
+    if(gdImg == 0)
+        return;
 
-    for (block = 0; block < height; block += 4)
+    data = GDImageToRGBA8(&gdImg, &width, &height);
+    gdImageDestroy(gdImg);
+}
+
+void GuiImageData::LoadBMP(const u8 *img, int imgSize)
+{
+    gdImagePtr gdImg = gdImageCreateFromBmpPtr(imgSize, (u8*) img);
+    if(gdImg == 0)
+        return;
+
+    data = GDImageToRGBA8(&gdImg, &width, &height);
+    gdImageDestroy(gdImg);
+}
+
+void GuiImageData::LoadTPL(const u8 *img, int imgSize)
+{
+    TplImage TplFile(img, imgSize);
+
+    width = TplFile.GetWidth(0);
+    height = TplFile.GetHeight(0);
+    format = (u8) TplFile.GetFormat(0);
+
+    const u8 * ImgPtr = TplFile.GetTextureBuffer(0);
+
+    if(ImgPtr)
     {
-        for (i = 0; i < width; i += 4)
-        {
-            /* Alpha and Red */
-            for (c = 0; c < 4; ++c)
-            {
-                for (ar = 0; ar < 4; ++ar)
-                {
-                    /* Alpha pixels */
-                    *p++ = 255;
-                    /* Red pixels */
-                    *p++ = src[((i + ar) + ((block + c) * width)) * 3];
-                }
-            }
+        int len =  ALIGN32(TplFile.GetTextureSize(0));
 
-            /* Green and Blue */
-            for (c = 0; c < 4; ++c)
-            {
-                for (gb = 0; gb < 4; ++gb)
-                {
-                    /* Green pixels */
-                    *p++ = src[(((i + gb) + ((block + c) * width)) * 3) + 1];
-                    /* Blue pixels */
-                    *p++ = src[(((i + gb) + ((block + c) * width)) * 3) + 2];
-                }
-            }
-        } /* i */
-    } /* block */
+        data = (u8 *) memalign(32, len);
+        if(!data)
+            return;
+
+        memcpy(data, ImgPtr, len);
+        DCFlushRange(data, len);
+    }
 }

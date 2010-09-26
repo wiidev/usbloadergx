@@ -78,9 +78,7 @@ int OnScreenNumpad(char * var, u32 maxlen)
     // because destroy GuiSound must wait while sound playing is finished, we use a global sound
     if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
-    char imgPath[100];
-    snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", Settings.theme_path);
-    GuiImageData btnOutline(imgPath, button_dialogue_box_png);
+    GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
 
     GuiTrigger trigA;
     trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
@@ -168,9 +166,7 @@ int OnScreenKeyboard(char * var, u32 maxlen, int min)
     if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
     //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
-    char imgPath[100];
-    snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", Settings.theme_path);
-    GuiImageData btnOutline(imgPath, button_dialogue_box_png);
+    GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
 
     GuiTrigger trigA;
     trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
@@ -254,12 +250,12 @@ void WindowCredits()
     GuiWindow creditsWindowBox(580, 448);
     creditsWindowBox.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 
-    GuiImageData creditsBox(credits_bg_png);
+    GuiImageData creditsBox(credits_bg_png, credits_bg_png_size);
     GuiImage creditsBoxImg(&creditsBox);
     creditsBoxImg.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     creditsWindowBox.Append(&creditsBoxImg);
 
-    GuiImageData star(little_star_png);
+    GuiImageData star(little_star_png, little_star_png_size);
     GuiImage starImg(&star);
     starImg.SetWidescreen(Settings.widescreen); //added
     starImg.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
@@ -471,13 +467,11 @@ int WindowScreensaver()
     gprintf("WindowScreenSaver()\n");
     int i = 0;
     bool exit = false;
-    char imgPath[100];//uncomment for themable screensaver
 
     /* initialize random seed: */
     srand(time(NULL));
 
-    snprintf(imgPath, sizeof(imgPath), "%sscreensaver.png", Settings.theme_path);//uncomment for themable screensaver
-    GuiImageData GXlogo(imgPath, gxlogo_png);//uncomment for themable screensaver
+    GuiImageData GXlogo(Resources::GetFile("gxlogo.png"), Resources::GetFileSize("gxlogo.png"));//uncomment for themable screensaver
     //GuiImageData GXlogo(gxlogo_png);//comment for themable screensaver
     GuiImage GXlogoImg(&GXlogo);
     GXlogoImg.SetPosition(172, 152);
@@ -545,12 +539,9 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label, cons
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
     // because destroy GuiSound must wait while sound playing is finished, we use a global sound
     if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size,  Settings.sfxvolume);
-    char imgPath[100];
-    snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", Settings.theme_path);
-    GuiImageData btnOutline(imgPath, button_dialogue_box_png);
-    snprintf(imgPath, sizeof(imgPath), "%sdialogue_box.png", Settings.theme_path);
-    GuiImageData dialogBox(imgPath, dialogue_box_png);
+	
+    GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
+    GuiImageData dialogBox(Resources::GetFile("dialogue_box.png"), Resources::GetFileSize("dialogue_box.png"));
 
     GuiTrigger trigA;
     trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
@@ -837,7 +828,6 @@ int WindowExitPrompt()
     homeout->SetLoop(0);
 
     int choice = -1;
-    char imgPath[100];
 
     u64 oldstub = getStubDest();
     loadStub();
@@ -851,22 +841,18 @@ int WindowExitPrompt()
     if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
     //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
-    GuiImageData top(exit_top_png);
-    GuiImageData topOver(exit_top_over_png);
-    GuiImageData bottom(exit_bottom_png);
-    GuiImageData bottomOver(exit_bottom_over_png);
-    GuiImageData button(exit_button_png);
-    GuiImageData wiimote(wiimote_png);
-    GuiImageData close(closebutton_png);
+    GuiImageData top(exit_top_png, exit_top_png_size);
+    GuiImageData topOver(exit_top_over_png, exit_top_over_png_size);
+    GuiImageData bottom(exit_bottom_png, exit_bottom_png_size);
+    GuiImageData bottomOver(exit_bottom_over_png, exit_bottom_over_png_size);
+    GuiImageData button(exit_button_png, exit_button_png_size);
+    GuiImageData wiimote(wiimote_png, wiimote_png_size);
+    GuiImageData close(closebutton_png, closebutton_png_size);
 
-    snprintf(imgPath, sizeof(imgPath), "%sbattery_white.png", Settings.theme_path);
-    GuiImageData battery(imgPath, battery_white_png);
-    snprintf(imgPath, sizeof(imgPath), "%sbattery_bar_white.png", Settings.theme_path);
-    GuiImageData batteryBar(imgPath, battery_bar_white_png);
-    snprintf(imgPath, sizeof(imgPath), "%sbattery_red.png", Settings.theme_path);
-    GuiImageData batteryRed(imgPath, battery_red_png);
-    snprintf(imgPath, sizeof(imgPath), "%sbattery_bar_red.png", Settings.theme_path);
-    GuiImageData batteryBarRed(imgPath, battery_bar_red_png);
+    GuiImageData battery(Resources::GetFile("battery_white.png"), Resources::GetFileSize("battery_white.png"));
+    GuiImageData batteryBar(Resources::GetFile("battery_bar_white.png"), Resources::GetFileSize("battery_bar_white.png"));
+    GuiImageData batteryRed(Resources::GetFile("battery_red.png"), Resources::GetFileSize("battery_red.png"));
+    GuiImageData batteryBarRed(Resources::GetFile("battery_bar_red.png"), Resources::GetFileSize("battery_bar_red.png"));
 
     int i = 0, ret = 0, level;
     char txt[3];
@@ -1188,19 +1174,13 @@ int GameWindowPrompt()
     if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
     //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
-    char imgPath[100];
-    snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", Settings.theme_path);
-    GuiImageData btnOutline(imgPath, button_dialogue_box_png);
+    GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
 
-    snprintf(imgPath, sizeof(imgPath), "%sfavorite.png", Settings.theme_path);
-    GuiImageData imgFavorite(imgPath, favorite_png);
-    snprintf(imgPath, sizeof(imgPath), "%snot_favorite.png", Settings.theme_path);
-    GuiImageData imgNotFavorite(imgPath, not_favorite_png);
+    GuiImageData imgFavorite(Resources::GetFile("favorite.png"), Resources::GetFileSize("favorite.png"));
+    GuiImageData imgNotFavorite(Resources::GetFile("not_favorite.png"), Resources::GetFileSize("not_favorite.png"));
 
-    snprintf(imgPath, sizeof(imgPath), "%sstartgame_arrow_left.png", Settings.theme_path);
-    GuiImageData imgLeft(imgPath, startgame_arrow_left_png);
-    snprintf(imgPath, sizeof(imgPath), "%sstartgame_arrow_right.png", Settings.theme_path);
-    GuiImageData imgRight(imgPath, startgame_arrow_right_png);
+    GuiImageData imgLeft(Resources::GetFile("startgame_arrow_left.png"), Resources::GetFileSize("startgame_arrow_left.png"));
+    GuiImageData imgRight(Resources::GetFile("startgame_arrow_right.png"), Resources::GetFileSize("startgame_arrow_right.png"));
 
     GuiTrigger trigA;
     trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
@@ -1220,12 +1200,13 @@ int GameWindowPrompt()
     GuiButton screenShotBtn(0, 0);
     screenShotBtn.SetPosition(0, 0);
     screenShotBtn.SetTrigger(&trigZ);
+	
+	const char * image = "dialogue_box_startgame.png";
 
     if (Settings.widescreen)
-        snprintf(imgPath, sizeof(imgPath), "%swdialogue_box_startgame.png", Settings.theme_path);
-    else snprintf(imgPath, sizeof(imgPath), "%sdialogue_box_startgame.png", Settings.theme_path);
+        image = "wdialogue_box_startgame.png";
 
-    GuiImageData dialogBox(imgPath, Settings.widescreen ? wdialogue_box_startgame_png : dialogue_box_startgame_png);
+    GuiImageData dialogBox(Resources::GetFile(image), Resources::GetFileSize(image));
     GuiImage dialogBoxImg(&dialogBox);
 
     GuiTooltip nameBtnTT(tr( "Rename Game on WBFS" ));
@@ -1428,15 +1409,15 @@ int GameWindowPrompt()
 
         gprintf("\t%s\n", IDFull);
         if (diskCover) delete diskCover;
-
+		char imgPath[150];
         snprintf(imgPath, sizeof(imgPath), "%s%s.png", Settings.disc_path, IDFull); //changed to current full id
-        diskCover = new GuiImageData(imgPath, 0);
+        diskCover = new GuiImageData(imgPath);
 
         if (!diskCover->GetImage())
         {
             delete diskCover;
             snprintf(imgPath, sizeof(imgPath), "%s%s.png", Settings.disc_path, ID); //changed to current id
-            diskCover = new GuiImageData(imgPath, 0);
+            diskCover = new GuiImageData(imgPath);
 
             if (!diskCover->GetImage())
             {
@@ -1444,12 +1425,11 @@ int GameWindowPrompt()
 
                 delete diskCover;
                 snprintf(imgPath, sizeof(imgPath), "%s%s.png", Settings.disc_path, ID); //changed to current id
-                diskCover = new GuiImageData(imgPath, 0);
+                diskCover = new GuiImageData(imgPath);
                 if (!diskCover->GetImage())
                 {
                     delete diskCover;
-                    snprintf(imgPath, sizeof(imgPath), "%snodisc.png", Settings.theme_path); //changed to nodisc.png
-                    diskCover = new GuiImageData(imgPath, nodisc_png);
+                    diskCover = Resources::GetImageData("nodisc.png");
                 }
             }
         }
@@ -1787,11 +1767,8 @@ int DiscWait(const char *title, const char *msg, const char *btn1Label, const ch
     if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
     //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
-    char imgPath[100];
-    snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", Settings.theme_path);
-    GuiImageData btnOutline(imgPath, button_dialogue_box_png);
-    snprintf(imgPath, sizeof(imgPath), "%sdialogue_box.png", Settings.theme_path);
-    GuiImageData dialogBox(imgPath, dialogue_box_png);
+    GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
+    GuiImageData dialogBox(Resources::GetFile("dialogue_box.png"), Resources::GetFileSize("dialogue_box.png"));
     GuiTrigger trigA;
     trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
     GuiTrigger trigB;
@@ -1938,11 +1915,8 @@ int FormatingPartition(const char *title, partitionEntry *entry)
     promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     promptWindow.SetPosition(0, -10);
 
-    char imgPath[100];
-    snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", Settings.theme_path);
-    GuiImageData btnOutline(imgPath, button_dialogue_box_png);
-    snprintf(imgPath, sizeof(imgPath), "%sdialogue_box.png", Settings.theme_path);
-    GuiImageData dialogBox(imgPath, dialogue_box_png);
+    GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
+    GuiImageData dialogBox(Resources::GetFile("dialogue_box.png"), Resources::GetFileSize("dialogue_box.png"));
 
     GuiTrigger trigA;
     trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
@@ -1996,11 +1970,8 @@ bool SearchMissingImages(int choice2)
     if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
     //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
-    char imgPath[100];
-    snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", Settings.theme_path);
-    GuiImageData btnOutline(imgPath, button_dialogue_box_png);
-    snprintf(imgPath, sizeof(imgPath), "%sdialogue_box.png", Settings.theme_path);
-    GuiImageData dialogBox(imgPath, dialogue_box_png);
+    GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
+    GuiImageData dialogBox(Resources::GetFile("dialogue_box.png"), Resources::GetFileSize("dialogue_box.png"));
     GuiTrigger trigA;
     trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 
@@ -2131,11 +2102,8 @@ bool NetworkInitPrompt()
     if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
     //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
-    char imgPath[100];
-    snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", Settings.theme_path);
-    GuiImageData btnOutline(imgPath, button_dialogue_box_png);
-    snprintf(imgPath, sizeof(imgPath), "%sdialogue_box.png", Settings.theme_path);
-    GuiImageData dialogBox(imgPath, dialogue_box_png);
+    GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
+    GuiImageData dialogBox(Resources::GetFile("dialogue_box.png"), Resources::GetFileSize("dialogue_box.png"));
     GuiTrigger trigA;
     trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 
@@ -2240,11 +2208,8 @@ int ProgressDownloadWindow(int choice2)
     if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
     //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
-    char imgPath[100];
-    snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", Settings.theme_path);
-    GuiImageData btnOutline(imgPath, button_dialogue_box_png);
-    snprintf(imgPath, sizeof(imgPath), "%sdialogue_box.png", Settings.theme_path);
-    GuiImageData dialogBox(imgPath, dialogue_box_png);
+    GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
+    GuiImageData dialogBox(Resources::GetFile("dialogue_box.png"), Resources::GetFileSize("dialogue_box.png"));
     GuiTrigger trigA;
     trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 
@@ -2254,8 +2219,7 @@ int ProgressDownloadWindow(int choice2)
         dialogBoxImg.SetWidescreen(Settings.widescreen);
     }
 
-    snprintf(imgPath, sizeof(imgPath), "%sprogressbar_outline.png", Settings.theme_path);
-    GuiImageData progressbarOutline(imgPath, progressbar_outline_png);
+    GuiImageData progressbarOutline(Resources::GetFile("progressbar_outline.png"), Resources::GetFileSize("progressbar_outline.png"));
     GuiImage progressbarOutlineImg(&progressbarOutline);
     if (Settings.wsprompt == yes)
     {
@@ -2264,15 +2228,13 @@ int ProgressDownloadWindow(int choice2)
     progressbarOutlineImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     progressbarOutlineImg.SetPosition(25, 40);
 
-    snprintf(imgPath, sizeof(imgPath), "%sprogressbar_empty.png", Settings.theme_path);
-    GuiImageData progressbarEmpty(imgPath, progressbar_empty_png);
+    GuiImageData progressbarEmpty(Resources::GetFile("progressbar_empty.png"), Resources::GetFileSize("progressbar_empty.png"));
     GuiImage progressbarEmptyImg(&progressbarEmpty);
     progressbarEmptyImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     progressbarEmptyImg.SetPosition(25, 40);
     progressbarEmptyImg.SetTile(100);
 
-    snprintf(imgPath, sizeof(imgPath), "%sprogressbar.png", Settings.theme_path);
-    GuiImageData progressbar(imgPath, progressbar_png);
+    GuiImageData progressbar(Resources::GetFile("progressbar.png"), Resources::GetFileSize("progressbar.png"));
     GuiImage progressbarImg(&progressbar);
     progressbarImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     progressbarImg.SetPosition(25, 40);
@@ -3215,11 +3177,8 @@ int ProgressUpdateWindow()
     if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
     //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
-    char imgPath[100];
-    snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", Settings.theme_path);
-    GuiImageData btnOutline(imgPath, button_dialogue_box_png);
-    snprintf(imgPath, sizeof(imgPath), "%sdialogue_box.png", Settings.theme_path);
-    GuiImageData dialogBox(imgPath, dialogue_box_png);
+    GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
+    GuiImageData dialogBox(Resources::GetFile("dialogue_box.png"), Resources::GetFileSize("dialogue_box.png"));
     GuiTrigger trigA;
     trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 
@@ -3229,8 +3188,7 @@ int ProgressUpdateWindow()
         dialogBoxImg.SetWidescreen(Settings.widescreen);
     }
 
-    snprintf(imgPath, sizeof(imgPath), "%sprogressbar_outline.png", Settings.theme_path);
-    GuiImageData progressbarOutline(imgPath, progressbar_outline_png);
+    GuiImageData progressbarOutline(Resources::GetFile("progressbar_outline.png"), Resources::GetFileSize("progressbar_outline.png"));
     GuiImage progressbarOutlineImg(&progressbarOutline);
     if (Settings.wsprompt == yes)
     {
@@ -3239,15 +3197,13 @@ int ProgressUpdateWindow()
     progressbarOutlineImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     progressbarOutlineImg.SetPosition(25, 7);
 
-    snprintf(imgPath, sizeof(imgPath), "%sprogressbar_empty.png", Settings.theme_path);
-    GuiImageData progressbarEmpty(imgPath, progressbar_empty_png);
+    GuiImageData progressbarEmpty(Resources::GetFile("progressbar_empty.png"), Resources::GetFileSize("progressbar_empty.png"));
     GuiImage progressbarEmptyImg(&progressbarEmpty);
     progressbarEmptyImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     progressbarEmptyImg.SetPosition(25, 7);
     progressbarEmptyImg.SetTile(100);
 
-    snprintf(imgPath, sizeof(imgPath), "%sprogressbar.png", Settings.theme_path);
-    GuiImageData progressbar(imgPath, progressbar_png);
+    GuiImageData progressbar(Resources::GetFile("progressbar.png"), Resources::GetFileSize("progressbar.png"));
     GuiImage progressbarImg(&progressbar);
     progressbarImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     progressbarImg.SetPosition(25, 7);
@@ -3614,11 +3570,8 @@ int CodeDownload(const char *id)
     if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
     //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
-    char imgPath[100];
-    snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", Settings.theme_path);
-    GuiImageData btnOutline(imgPath, button_dialogue_box_png);
-    snprintf(imgPath, sizeof(imgPath), "%sdialogue_box.png", Settings.theme_path);
-    GuiImageData dialogBox(imgPath, dialogue_box_png);
+    GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
+    GuiImageData dialogBox(Resources::GetFile("dialogue_box.png"), Resources::GetFileSize("dialogue_box.png"));
     GuiTrigger trigA;
     trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 
@@ -3801,28 +3754,22 @@ int HBCWindowPrompt(const char *name, const char *coder, const char *version, co
     // because destroy GuiSound must wait while sound playing is finished, we use a global sound
     if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
     //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    char imgPath[100];
-    snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", Settings.theme_path);
-    GuiImageData btnOutline(imgPath, button_dialogue_box_png);
-    snprintf(imgPath, sizeof(imgPath), "%sdialogue_box.png", Settings.theme_path);
-    GuiImageData dialogBox(imgPath, dialogue_box_png);
-    snprintf(imgPath, sizeof(imgPath), "%sbg_options.png", Settings.theme_path);
-    GuiImageData whiteBox(imgPath, bg_options_png);
+	
+    GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
+    GuiImageData dialogBox(Resources::GetFile("dialogue_box.png"), Resources::GetFileSize("dialogue_box.png"));
+    GuiImageData whiteBox(Resources::GetFile("bg_options.png"), Resources::GetFileSize("bg_options.png"));
 
-    snprintf(imgPath, sizeof(imgPath), "%sscrollbar.png", Settings.theme_path);
-    GuiImageData scrollbar(imgPath, scrollbar_png);
+    GuiImageData scrollbar(Resources::GetFile("scrollbar.png"), Resources::GetFileSize("scrollbar.png"));
     GuiImage scrollbarImg(&scrollbar);
     scrollbarImg.SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
     scrollbarImg.SetPosition(-40, 114);
     scrollbarImg.SetSkew(0, 0, 0, 0, 0, -120, 0, -120);
 
-    snprintf(imgPath, sizeof(imgPath), "%sscrollbar_arrowdown.png", Settings.theme_path);
-    GuiImageData arrowDown(imgPath, scrollbar_arrowdown_png);
+    GuiImageData arrowDown(Resources::GetFile("scrollbar_arrowdown.png"), Resources::GetFileSize("scrollbar_arrowdown.png"));
     GuiImage arrowDownImg(&arrowDown);
     arrowDownImg.SetScale(.8);
 
-    snprintf(imgPath, sizeof(imgPath), "%sscrollbar_arrowup.png", Settings.theme_path);
-    GuiImageData arrowUp(imgPath, scrollbar_arrowup_png);
+    GuiImageData arrowUp(Resources::GetFile("scrollbar_arrowup.png"), Resources::GetFileSize("scrollbar_arrowup.png"));
     GuiImage arrowUpImg(&arrowUp);
     arrowUpImg.SetScale(.8);
 
@@ -3846,13 +3793,20 @@ int HBCWindowPrompt(const char *name, const char *coder, const char *version, co
 
     GuiImageData *iconData = NULL;
     GuiImage *iconImg = NULL;
+	
+	char imgPath[150];
     snprintf(imgPath, sizeof(imgPath), "%s", iconPath);
 
     bool iconExist = CheckFile(imgPath);
     if (iconExist)
     {
-        iconData = new GuiImageData(iconPath, dialogue_box_png);
-        iconImg = new GuiImage(iconData);
+        iconData = new GuiImageData(imgPath);
+		if(!iconData->GetImage())
+		{
+			delete iconData;
+			iconData = new GuiImageData(Resources::GetFile("dialogue_box.png"), Resources::GetFileSize("dialogue_box.png"));
+        }
+		iconImg = new GuiImage(iconData);
         iconImg->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
         iconImg->SetPosition(45, 10);
     }

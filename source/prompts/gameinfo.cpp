@@ -18,6 +18,7 @@
 #include "fatmounter.h"
 #include "FileOperations/fileops.h"
 #include "prompts/PromptWindows.h"
+#include "themes/CTheme.h"
 #include "gameinfo.h"
 #include "usbloader/GameList.h"
 #include "../gecko.h"
@@ -137,17 +138,12 @@ int showGameInfo(char *ID)
 
         GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
         GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-        char imgPath[100];
-        snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", Settings.theme_path);
-        GuiImageData btnOutline(imgPath, button_dialogue_box_png);
-        snprintf(imgPath, sizeof(imgPath), "%sgameinfo1_png.png", Settings.theme_path);
-        GuiImageData dialogBox1(imgPath, gameinfo1_png);
-        snprintf(imgPath, sizeof(imgPath), "%sgameinfo1a_png.png", Settings.theme_path);
-        GuiImageData dialogBox2(imgPath, gameinfo1a_png);
-        snprintf(imgPath, sizeof(imgPath), "%sgameinfo2_png.png", Settings.theme_path);
-        GuiImageData dialogBox3(imgPath, gameinfo2_png);
-        snprintf(imgPath, sizeof(imgPath), "%sgameinfo2a_png.png", Settings.theme_path);
-        GuiImageData dialogBox4(imgPath, gameinfo2a_png);
+		
+        GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
+        GuiImageData dialogBox1(Resources::GetFile("gameinfo1.png"), Resources::GetFileSize("gameinfo1.png"));
+        GuiImageData dialogBox2(Resources::GetFile("gameinfo1a.png"), Resources::GetFileSize("gameinfo1a.png"));
+        GuiImageData dialogBox3(Resources::GetFile("gameinfo2.png"), Resources::GetFileSize("gameinfo2.png"));
+        GuiImageData dialogBox4(Resources::GetFile("gameinfo2a.png"), Resources::GetFileSize("gameinfo2a.png"));
 
         GuiTrigger trig1;
         trig1.SetButtonOnlyTrigger(-1, WPAD_BUTTON_1 | WPAD_CLASSIC_BUTTON_X, 0);
@@ -217,59 +213,56 @@ int showGameInfo(char *ID)
 
         // switch icons
         if (nunchuk)
-            nunchukImgData = new GuiImageData(nunchukR_png);
-        else nunchukImgData = new GuiImageData(nunchuk_png);
+            nunchukImgData = Resources::GetImageData("nunchukR.png");
+        else nunchukImgData = Resources::GetImageData("nunchuk.png");
 
         if (classiccontroller)
-            classiccontrollerImgData = new GuiImageData(classiccontrollerR_png);
-        else classiccontrollerImgData = new GuiImageData(classiccontroller_png);
+            classiccontrollerImgData = Resources::GetImageData("classiccontrollerR.png");
+        else classiccontrollerImgData = Resources::GetImageData("classiccontroller.png");
 
         if (guitar)
-            guitarImgData = new GuiImageData(guitarR_png);
-        else guitarImgData = new GuiImageData(guitar_png);
+            guitarImgData = Resources::GetImageData("guitarR.png");
+        else guitarImgData = Resources::GetImageData("guitar.png");
 
         if (gamecube)
-            gamecubeImgData = new GuiImageData(gcncontrollerR_png);
-        else gamecubeImgData = new GuiImageData(gcncontroller_png);
+            gamecubeImgData = Resources::GetImageData("gcncontrollerR.png");
+        else gamecubeImgData = Resources::GetImageData("gcncontroller.png");
 
         if (wheel)
-            wheelImgData = new GuiImageData(wheelR_png);
-        else wheelImgData = new GuiImageData(wheel_png);
+            wheelImgData = Resources::GetImageData("wheelR.png");
+        else wheelImgData = Resources::GetImageData("wheel.png");
 
         if (motionplus)
-            motionplusImgData = new GuiImageData(motionplusR_png);
-        else motionplusImgData = new GuiImageData(motionplus_png);
+            motionplusImgData = Resources::GetImageData("motionplusR.png");
+        else motionplusImgData = Resources::GetImageData("motionplus.png");
 
         if (drums)
-            drumsImgData = new GuiImageData(drumsR_png);
-        else drumsImgData = new GuiImageData(drums_png);
+            drumsImgData = Resources::GetImageData("drumsR.png");
+        else drumsImgData = Resources::GetImageData("drums.png");
 
         if (microphone)
-            microphoneImgData = new GuiImageData(microphoneR_png);
-        else microphoneImgData = new GuiImageData(microphone_png);
+            microphoneImgData = Resources::GetImageData("microphoneR.png");
+        else microphoneImgData = Resources::GetImageData("microphone.png");
 
         if (zapper)
-            zapperImgData = new GuiImageData(zapperR_png);
-        else zapperImgData = new GuiImageData(zapper_png);
+            zapperImgData = Resources::GetImageData("zapperR.png");
+        else zapperImgData = Resources::GetImageData("zapper.png");
 
         if (wiispeak)
-            wiispeakImgData = new GuiImageData(wiispeakR_png);
-        else wiispeakImgData = new GuiImageData(wiispeak_png);
+            wiispeakImgData = Resources::GetImageData("wiispeakR.png");
+        else wiispeakImgData = Resources::GetImageData("wiispeak.png");
 
         if (nintendods)
-            nintendodsImgData = new GuiImageData(nintendodsR_png);
-        else nintendodsImgData = new GuiImageData(nintendods_png);
-
-        //if (vitalitysensor) vitalitysensorImgData = new GuiImageData(vitalitysensorR_png);
-        //else vitalitysensorImgData = new GuiImageData(vitalitysensor_png);
+            nintendodsImgData = Resources::GetImageData("nintendodsR.png");
+        else nintendodsImgData = Resources::GetImageData("nintendods.png");
 
         if (balanceboard)
-            balanceboardImgData = new GuiImageData(balanceboardR_png);
-        else balanceboardImgData = new GuiImageData(balanceboard_png);
+            balanceboardImgData = Resources::GetImageData("balanceboardR.png");
+        else balanceboardImgData = Resources::GetImageData("balanceboard.png");
 
         if (dancepad)
-            dancepadImgData = new GuiImageData(dancepadR_png);
-        else dancepadImgData = new GuiImageData(dancepad_png);
+            dancepadImgData = Resources::GetImageData("dancepadR.png");
+        else dancepadImgData = Resources::GetImageData("dancepad.png");
 
         // look for optional accessories
         for (int i = 1; i <= XML_ELEMMAX; i++)
@@ -311,14 +304,14 @@ int showGameInfo(char *ID)
         gameinfoWindow.Append(dialogBoxImg2);
         gameinfoWindow.Append(dialogBoxImg3);
         gameinfoWindow.Append(dialogBoxImg4);
-
+		
+		char imgPath[150];
         snprintf(imgPath, sizeof(imgPath), "%s%s.png", Settings.covers_path, ID);
-        cover = new GuiImageData(imgPath, 0); //load full id image
+        cover = new GuiImageData(imgPath); //load full id image
         if (!cover->GetImage())
         {
             delete cover;
-            snprintf(imgPath, sizeof(imgPath), "%snoimage.png", Settings.covers_path);
-            cover = new GuiImageData(imgPath, nocover_png); //load no image
+            cover = Resources::GetImageData("nocover.png");
         }
         delete coverImg;
         coverImg = NULL;
@@ -331,14 +324,14 @@ int showGameInfo(char *ID)
         // # of players
         if (strcmp(gameinfo.players, "") != 0)
         {
-            playersImgData = new GuiImageData(Wiimote1_png);
+            playersImgData = Resources::GetImageData("wiimote1.png");
             if (atoi(gameinfo.players) > 1)
             {
-                playersImgData = new GuiImageData(Wiimote2_png);
+                playersImgData = Resources::GetImageData("wiimote2.png");
             }
             if (atoi(gameinfo.players) > 2)
             {
-                playersImgData = new GuiImageData(Wiimote4_png);
+                playersImgData = Resources::GetImageData("wiimote4.png");
             }
 
             playersImg = new GuiImage(playersImgData);
@@ -450,16 +443,6 @@ int showGameInfo(char *ID)
             gameinfoWindow.Append(nintendodsImg);
             intputX += (Settings.widescreen ? nintendodsImg->GetWidth() * .8 : nintendodsImg->GetWidth()) + 5;
         }
-        /*
-         if (vitalitysensor==1) {
-         vitalitysensorImg = new GuiImage(vitalitysensorImgData);
-         vitalitysensorImg->SetWidescreen(Settings.widescreen);
-         vitalitysensorImg->SetPosition(intputX , inputY);
-         vitalitysensorImg->SetAlignment(0,4);
-         gameinfoWindow.Append(vitalitysensorImg);
-         intputX += (Settings.widescreen ? vitalitysensorImg->GetWidth() * .8 : vitalitysensorImg->GetWidth())+5;
-         }
-         */
         if (dancepad == 1)
         {
             dancepadImg = new GuiImage(dancepadImgData);
@@ -482,36 +465,30 @@ int showGameInfo(char *ID)
         // # online players
         if ((strcmp(gameinfo.wifiplayers, "") != 0) && (strcmp(gameinfo.wifiplayers, "0") != 0))
         {
-            wifiplayersImgData = new GuiImageData(wifi1_png);
+            wifiplayersImgData = Resources::GetImageData("wifi1.png");
             if (atoi(gameinfo.wifiplayers) > 1)
             {
-                wifiplayersImgData = new GuiImageData(wifi2_png);
+                wifiplayersImgData = Resources::GetImageData("wifi2.png");
             }
             if (atoi(gameinfo.wifiplayers) > 2)
             {
-                wifiplayersImgData = new GuiImageData(wifi4_png);
+                wifiplayersImgData = Resources::GetImageData("wifi4.png");
             }
             if (atoi(gameinfo.wifiplayers) > 4)
             {
-                //wifiplayersImgData= new GuiImageData(wifi6_png);
-                wifiplayersImgData = new GuiImageData(wifi8_png);
+                wifiplayersImgData =Resources::GetImageData("wifi8.png");
             }
-            /*
-             if (atoi(gameinfo.wifiplayers)>6) {
-             wifiplayersImgData= new GuiImageData(wifi8_png);
-             }
-             */
             if (atoi(gameinfo.wifiplayers) > 8)
             {
-                wifiplayersImgData = new GuiImageData(wifi12_png);
+                wifiplayersImgData = Resources::GetImageData("wifi12.png");
             }
             if (atoi(gameinfo.wifiplayers) > 12)
             {
-                wifiplayersImgData = new GuiImageData(wifi16_png);
+                wifiplayersImgData = Resources::GetImageData("wifi16.png");
             }
             if (atoi(gameinfo.wifiplayers) > 16)
             {
-                wifiplayersImgData = new GuiImageData(wifi32_png);
+                wifiplayersImgData = Resources::GetImageData("wifi32.png");
             }
             wifiplayersImg = new GuiImage(wifiplayersImgData);
             wifiplayersImg->SetWidescreen(Settings.widescreen);
@@ -527,60 +504,60 @@ int showGameInfo(char *ID)
             if (strcmp(gameinfo.ratingtype, "ESRB") == 0)
             {
                 if (strcmp(gameinfo.ratingvalueESRB, "EC") == 0)
-                    ratingImgData = new GuiImageData(esrb_ec_png);
+                    ratingImgData = Resources::GetImageData("esrb_ec.png");
                 else if (strcmp(gameinfo.ratingvalueESRB, "E") == 0)
-                    ratingImgData = new GuiImageData(esrb_e_png);
+                    ratingImgData = Resources::GetImageData("esrb_e.png");
                 else if (strcmp(gameinfo.ratingvalueESRB, "E10+") == 0)
-                    ratingImgData = new GuiImageData(esrb_eten_png);
+                    ratingImgData = Resources::GetImageData("esrb_eten.png");
                 else if (strcmp(gameinfo.ratingvalueESRB, "T") == 0)
-                    ratingImgData = new GuiImageData(esrb_t_png);
+                    ratingImgData = Resources::GetImageData("esrb_t.png");
                 else if (strcmp(gameinfo.ratingvalueESRB, "M") == 0)
-                    ratingImgData = new GuiImageData(esrb_m_png);
+                    ratingImgData = Resources::GetImageData("esrb_m.png");
                 else if (strcmp(gameinfo.ratingvalueESRB, "AO") == 0)
-                    ratingImgData = new GuiImageData(esrb_ao_png);
+                    ratingImgData = Resources::GetImageData("esrb_ao.png");
                 else
                 {
-                    ratingImgData = new GuiImageData(norating_png);
+                    ratingImgData = Resources::GetImageData("norating.png");
                 }
             } //there are 2 values here cause some countries are stupid and
             else if (strcmp(gameinfo.ratingtype, "PEGI") == 0) //can't use the same as everybody else
             {
                 if ((strcmp(gameinfo.ratingvaluePEGI, "3") == 0) || (strcmp(gameinfo.ratingvaluePEGI, "4") == 0))
-                    ratingImgData = new GuiImageData(pegi_3_png);
+                    ratingImgData = Resources::GetImageData("pegi_3.png");
                 else if ((strcmp(gameinfo.ratingvaluePEGI, "7") == 0) || (strcmp(gameinfo.ratingvaluePEGI, "7") == 0))
-                    ratingImgData = new GuiImageData(pegi_7_png);
+                    ratingImgData = Resources::GetImageData("pegi_7.png");
                 else if (strcmp(gameinfo.ratingvaluePEGI, "12") == 0)
-                    ratingImgData = new GuiImageData(pegi_12_png);
+                    ratingImgData = Resources::GetImageData("pegi_12.png");
                 else if ((strcmp(gameinfo.ratingvaluePEGI, "16") == 0) || (strcmp(gameinfo.ratingvaluePEGI, "15") == 0))
-                    ratingImgData = new GuiImageData(pegi_16_png);
+                    ratingImgData = Resources::GetImageData("pegi_16.png");
                 else if (strcmp(gameinfo.ratingvaluePEGI, "18") == 0)
-                    ratingImgData = new GuiImageData(pegi_18_png);
+                    ratingImgData = Resources::GetImageData("pegi_18.png");
                 else
                 {
-                    ratingImgData = new GuiImageData(norating_png);
+                    ratingImgData = Resources::GetImageData("norating.png");
                 }
             }
             else if (strcmp(gameinfo.ratingtype, "CERO") == 0)
             {
                 if (strcmp(gameinfo.ratingvalueCERO, "A") == 0)
-                    ratingImgData = new GuiImageData(cero_a_png);
+                    ratingImgData = Resources::GetImageData("cero_a.png");
                 else if (strcmp(gameinfo.ratingvalueCERO, "B") == 0)
-                    ratingImgData = new GuiImageData(cero_b_png);
+                    ratingImgData = Resources::GetImageData("cero_b.png");
                 else if (strcmp(gameinfo.ratingvalueCERO, "C") == 0)
-                    ratingImgData = new GuiImageData(cero_c_png);
+                    ratingImgData = Resources::GetImageData("cero_c.png");
                 else if (strcmp(gameinfo.ratingvalueCERO, "D") == 0)
-                    ratingImgData = new GuiImageData(cero_d_png);
+                    ratingImgData = Resources::GetImageData("cero_d.png");
                 else if (strcmp(gameinfo.ratingvalueCERO, "Z") == 0)
-                    ratingImgData = new GuiImageData(cero_z_png);
+                    ratingImgData = Resources::GetImageData("cero_z.png");
                 else
                 {
-                    ratingImgData = new GuiImageData(norating_png);
+                    ratingImgData = Resources::GetImageData("norating.png");
                 }
             }
 
             else
             {
-                ratingImgData = new GuiImageData(norating_png);
+                ratingImgData = Resources::GetImageData("norating.png");
             }
             ratingImg = new GuiImage(ratingImgData);
             ratingImg->SetWidescreen(Settings.widescreen);

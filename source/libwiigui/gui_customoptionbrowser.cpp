@@ -141,8 +141,7 @@ void customOptionList::Clear(bool OnlyValue/*=false*/)
 /**
  * Constructor for the GuiCustomOptionBrowser class.
  */
-GuiCustomOptionBrowser::GuiCustomOptionBrowser(int w, int h, customOptionList * l, const char *themePath,
-        const char *custombg, const u8 *imagebg, int scrollon, int col2)
+GuiCustomOptionBrowser::GuiCustomOptionBrowser(int w, int h, customOptionList * l, const char * custombg, int scrollon, int col2)
 {
     width = w;
     height = h;
@@ -154,7 +153,6 @@ GuiCustomOptionBrowser::GuiCustomOptionBrowser(int w, int h, customOptionList * 
     selectedItem = 0;
     focus = 1; // allow focus
     coL2 = col2;
-    char imgPath[100];
 
     trigA = new GuiTrigger;
     trigA->SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
@@ -162,37 +160,31 @@ GuiCustomOptionBrowser::GuiCustomOptionBrowser(int w, int h, customOptionList * 
     trigHeldA->SetHeldTrigger(-1, WPAD_BUTTON_A, PAD_BUTTON_A);
     btnSoundClick = new GuiSound(button_click_pcm, button_click_pcm_size, Settings.sfxvolume);
 
-    snprintf(imgPath, sizeof(imgPath), "%s%s", themePath, custombg);
-    bgOptions = new GuiImageData(imgPath, imagebg);
+    bgOptions = Resources::GetImageData(custombg);
 
     bgOptionsImg = new GuiImage(bgOptions);
     bgOptionsImg->SetParent(this);
     bgOptionsImg->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 
-    snprintf(imgPath, sizeof(imgPath), "%sbg_options_entry.png", themePath);
-    bgOptionsEntry = new GuiImageData(imgPath, bg_options_entry_png);
+    bgOptionsEntry = Resources::GetImageData("bg_options_entry.png");
 
-    snprintf(imgPath, sizeof(imgPath), "%sscrollbar.png", themePath);
-    scrollbar = new GuiImageData(imgPath, scrollbar_png);
+    scrollbar = Resources::GetImageData("scrollbar.png");
     scrollbarImg = new GuiImage(scrollbar);
     scrollbarImg->SetParent(this);
     scrollbarImg->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
     scrollbarImg->SetPosition(0, 4);
 
-    snprintf(imgPath, sizeof(imgPath), "%sscrollbar_arrowdown.png", themePath);
-    arrowDown = new GuiImageData(imgPath, scrollbar_arrowdown_png);
+    arrowDown = Resources::GetImageData("scrollbar_arrowdown.png");
     arrowDownImg = new GuiImage(arrowDown);
-    arrowDownOver = new GuiImageData(imgPath, scrollbar_arrowdown_png);
+    arrowDownOver = Resources::GetImageData("scrollbar_arrowdown.png");
     arrowDownOverImg = new GuiImage(arrowDownOver);
-    snprintf(imgPath, sizeof(imgPath), "%sscrollbar_arrowup.png", themePath);
-    arrowUp = new GuiImageData(imgPath, scrollbar_arrowup_png);
+    arrowUp = Resources::GetImageData("scrollbar_arrowup.png");
     arrowUpImg = new GuiImage(arrowUp);
-    arrowUpOver = new GuiImageData(imgPath, scrollbar_arrowup_png);
+    arrowUpOver = Resources::GetImageData("scrollbar_arrowup.png");
     arrowUpOverImg = new GuiImage(arrowUpOver);
-    snprintf(imgPath, sizeof(imgPath), "%sscrollbar_box.png", themePath);
-    scrollbarBox = new GuiImageData(imgPath, scrollbar_box_png);
+    scrollbarBox = Resources::GetImageData("scrollbar_box.png");
     scrollbarBoxImg = new GuiImage(scrollbarBox);
-    scrollbarBoxOver = new GuiImageData(imgPath, scrollbar_box_png);
+    scrollbarBoxOver = Resources::GetImageData("scrollbar_box.png");
     scrollbarBoxOverImg = new GuiImage(scrollbarBoxOver);
 
     arrowUpBtn = new GuiButton(arrowUpImg->GetWidth(), arrowUpImg->GetHeight());

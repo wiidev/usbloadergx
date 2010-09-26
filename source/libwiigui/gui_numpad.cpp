@@ -35,7 +35,7 @@ GuiNumpad::GuiNumpad(char * t, u32 max)
     char thekeys[11] = { '1', '2', '3', '4', '5', '6', '7', '8', '9', '\0', '0' };
     memcpy(keys, thekeys, sizeof(thekeys));
 
-    keyTextbox = new GuiImageData(keyboard_textbox_png);
+    keyTextbox = new GuiImageData(keyboard_textbox_png, keyboard_textbox_png_size);
     keyTextboxImg = new GuiImage(keyTextbox);
     keyTextboxImg->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     keyTextboxImg->SetPosition(0, 40);//(0,0);
@@ -48,8 +48,8 @@ GuiNumpad::GuiNumpad(char * t, u32 max)
     kbText->SetPassChar('*');
     this->Append(kbText);
 
-    keyMedium = new GuiImageData(keyboard_mediumkey_over_png);
-    keyMediumOver = new GuiImageData(keyboard_mediumkey_over_png);
+    keyMedium = new GuiImageData(keyboard_mediumkey_over_png, keyboard_mediumkey_over_png_size);
+    keyMediumOver = new GuiImageData(keyboard_mediumkey_over_png, keyboard_mediumkey_over_png_size);
 
     keySoundOver = new GuiSound(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
     keySoundClick = new GuiSound(button_click_pcm, button_click_pcm_size, Settings.sfxvolume);

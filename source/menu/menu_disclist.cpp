@@ -63,7 +63,6 @@ int MenuDiscList()
     char ID[4];
     char IDfull[7];
     u32 covert = 0;
-    char imgPath[100];
     if (!dvdheader) dvdheader = new struct discHdr;
     u8 mountMethodOLD = 0;
 
@@ -103,80 +102,46 @@ int MenuDiscList()
     if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
     //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
-    snprintf(imgPath, sizeof(imgPath), "%sbutton_install.png", Settings.theme_path);
-    GuiImageData btnInstall(imgPath, button_install_png);
-    snprintf(imgPath, sizeof(imgPath), "%sbutton_install_over.png", Settings.theme_path);
-    GuiImageData btnInstallOver(imgPath, button_install_over_png);
+    GuiImageData btnInstall(Resources::GetFile("button_install.png"), Resources::GetFileSize("button_install.png"));
+    GuiImageData btnInstallOver(Resources::GetFile("button_install_over.png"), Resources::GetFileSize("button_install_over.png"));
 
-    snprintf(imgPath, sizeof(imgPath), "%ssettings_button.png", Settings.theme_path);
-    GuiImageData btnSettings(imgPath, settings_button_png);
-    snprintf(imgPath, sizeof(imgPath), "%ssettings_button_over.png", Settings.theme_path);
-    GuiImageData btnSettingsOver(imgPath, settings_button_over_png);
+    GuiImageData btnSettings(Resources::GetFile("settings_button.png"), Resources::GetFileSize("settings_button.png"));
+    GuiImageData btnSettingsOver(Resources::GetFile("settings_button_over.png"), Resources::GetFileSize("settings_button_over.png"));
 
-    snprintf(imgPath, sizeof(imgPath), "%swiimote_poweroff.png", Settings.theme_path);
-    GuiImageData btnpwroff(imgPath, wiimote_poweroff_png);
-    snprintf(imgPath, sizeof(imgPath), "%swiimote_poweroff_over.png", Settings.theme_path);
-    GuiImageData btnpwroffOver(imgPath, wiimote_poweroff_over_png);
-    snprintf(imgPath, sizeof(imgPath), "%smenu_button.png", Settings.theme_path);
-    GuiImageData btnhome(imgPath, menu_button_png);
-    snprintf(imgPath, sizeof(imgPath), "%smenu_button_over.png", Settings.theme_path);
-    GuiImageData btnhomeOver(imgPath, menu_button_over_png);
-    snprintf(imgPath, sizeof(imgPath), "%sSDcard_over.png", Settings.theme_path);
-    GuiImageData btnsdcardOver(imgPath, sdcard_over_png);
-    snprintf(imgPath, sizeof(imgPath), "%sSDcard.png", Settings.theme_path);
-    GuiImageData btnsdcard(imgPath, sdcard_png);
+    GuiImageData btnpwroff(Resources::GetFile("wiimote_poweroff.png"), Resources::GetFileSize("wiimote_poweroff.png"));
+    GuiImageData btnpwroffOver(Resources::GetFile("wiimote_poweroff_over.png"), Resources::GetFileSize("wiimote_poweroff_over.png"));
+    GuiImageData btnhome(Resources::GetFile("menu_button.png"), Resources::GetFileSize("menu_button.png"));
+    GuiImageData btnhomeOver(Resources::GetFile("menu_button_over.png"), Resources::GetFileSize("menu_button_over.png"));
+    GuiImageData btnsdcardOver(Resources::GetFile("sdcard_over.png"), Resources::GetFileSize("sdcard_over.png"));
+    GuiImageData btnsdcard(Resources::GetFile("sdcard.png"), Resources::GetFileSize("sdcard.png"));
 
-    snprintf(imgPath, sizeof(imgPath), "%sfavIcon.png", Settings.theme_path);
-    GuiImageData imgfavIcon(imgPath, favIcon_png);
-    snprintf(imgPath, sizeof(imgPath), "%sfavIcon_gray.png", Settings.theme_path);
-    GuiImageData imgfavIcon_gray(imgPath, NULL);
-    snprintf(imgPath, sizeof(imgPath), "%ssearchIcon.png", Settings.theme_path);
-    GuiImageData imgsearchIcon(imgPath, searchIcon_png);
-    snprintf(imgPath, sizeof(imgPath), "%ssearchIcon_gray.png", Settings.theme_path);
-    GuiImageData imgsearchIcon_gray(imgPath, NULL);
-    snprintf(imgPath, sizeof(imgPath), "%sabcIcon.png", Settings.theme_path);
-    GuiImageData imgabcIcon(imgPath, abcIcon_png);
-    snprintf(imgPath, sizeof(imgPath), "%sabcIcon_gray.png", Settings.theme_path);
-    GuiImageData imgabcIcon_gray(imgPath, NULL);
-    snprintf(imgPath, sizeof(imgPath), "%srankIcon.png", Settings.theme_path);
-    GuiImageData imgrankIcon(imgPath, rankIcon_png);
-    snprintf(imgPath, sizeof(imgPath), "%srankIcon_gray.png", Settings.theme_path);
-    GuiImageData imgrankIcon_gray(imgPath, NULL);
-    snprintf(imgPath, sizeof(imgPath), "%splayCountIcon.png", Settings.theme_path);
-    GuiImageData imgplayCountIcon(imgPath, playCountIcon_png);
-    snprintf(imgPath, sizeof(imgPath), "%splayCountIcon_gray.png", Settings.theme_path);
-    GuiImageData imgplayCountIcon_gray(imgPath, NULL);
-    snprintf(imgPath, sizeof(imgPath), "%sarrangeGrid.png", Settings.theme_path);
-    GuiImageData imgarrangeGrid(imgPath, arrangeGrid_png);
-    snprintf(imgPath, sizeof(imgPath), "%sarrangeGrid_gray.png", Settings.theme_path);
-    GuiImageData imgarrangeGrid_gray(imgPath, NULL);
-    snprintf(imgPath, sizeof(imgPath), "%sarrangeList.png", Settings.theme_path);
-    GuiImageData imgarrangeList(imgPath, arrangeList_png);
-    snprintf(imgPath, sizeof(imgPath), "%sarrangeList_gray.png", Settings.theme_path);
-    GuiImageData imgarrangeList_gray(imgPath, NULL);
-    snprintf(imgPath, sizeof(imgPath), "%sarrangeCarousel.png", Settings.theme_path);
-    GuiImageData imgarrangeCarousel(imgPath, arrangeCarousel_png);
-    snprintf(imgPath, sizeof(imgPath), "%sarrangeCarousel_gray.png", Settings.theme_path);
-    GuiImageData imgarrangeCarousel_gray(imgPath, NULL);
+    GuiImageData imgfavIcon(Resources::GetFile("favIcon.png"), Resources::GetFileSize("favIcon.png"));
+    GuiImageData imgfavIcon_gray(Resources::GetFile("favIcon_gray.png"), Resources::GetFileSize("favIcon_gray.png"));
+    GuiImageData imgsearchIcon(Resources::GetFile("searchIcon.png"), Resources::GetFileSize("searchIcon.png"));
+    GuiImageData imgsearchIcon_gray(Resources::GetFile("searchIcon_gray.png"), Resources::GetFileSize("searchIcon_gray.png"));
+    GuiImageData imgabcIcon(Resources::GetFile("abcIcon.png"), Resources::GetFileSize("abcIcon.png"));
+    GuiImageData imgabcIcon_gray(Resources::GetFile("abcIcon_gray.png"), Resources::GetFileSize("abcIcon_gray.png"));
+    GuiImageData imgrankIcon(Resources::GetFile("rankIcon.png"), Resources::GetFileSize("rankIcon.png"));
+    GuiImageData imgrankIcon_gray(Resources::GetFile("rankIcon_gray.png"), Resources::GetFileSize("rankIcon_gray.png"));
+    GuiImageData imgplayCountIcon(Resources::GetFile("playCountIcon.png"), Resources::GetFileSize("playCountIcon.png"));
+    GuiImageData imgplayCountIcon_gray(Resources::GetFile("playCountIcon_gray.png"), Resources::GetFileSize("playCountIcon_gray.png"));
+    GuiImageData imgarrangeGrid(Resources::GetFile("arrangeGrid.png"), Resources::GetFileSize("arrangeGrid.png"));
+    GuiImageData imgarrangeGrid_gray(Resources::GetFile("arrangeGrid_gray.png"), Resources::GetFileSize("arrangeGrid_gray.png"));
+    GuiImageData imgarrangeList(Resources::GetFile("arrangeList.png"), Resources::GetFileSize("arrangeList.png"));
+    GuiImageData imgarrangeList_gray(Resources::GetFile("arrangeList_gray.png"), Resources::GetFileSize("arrangeList_gray.png"));
+    GuiImageData imgarrangeCarousel(Resources::GetFile("arrangeCarousel.png"), Resources::GetFileSize("arrangeCarousel.png"));
+    GuiImageData imgarrangeCarousel_gray(Resources::GetFile("arrangeCarousel_gray.png"), Resources::GetFileSize("arrangeCarousel_gray.png"));
 
-    snprintf(imgPath, sizeof(imgPath), "%slock.png", Settings.theme_path);
-    GuiImageData imgLock(imgPath, lock_png);
-    snprintf(imgPath, sizeof(imgPath), "%slock_gray.png", Settings.theme_path);
-    GuiImageData imgLock_gray(imgPath, NULL);
-    snprintf(imgPath, sizeof(imgPath), "%sunlock.png", Settings.theme_path);
-    GuiImageData imgUnlock(imgPath, unlock_png);
-    snprintf(imgPath, sizeof(imgPath), "%sunlock_gray.png", Settings.theme_path);
-    GuiImageData imgUnlock_gray(imgPath, NULL);
+    GuiImageData imgLock(Resources::GetFile("lock.png"), Resources::GetFileSize("lock.png"));
+    GuiImageData imgLock_gray(Resources::GetFile("lock_gray.png"), Resources::GetFileSize("lock_gray.png"));
+    GuiImageData imgUnlock(Resources::GetFile("lock_gray.png"), Resources::GetFileSize("lock_gray.png"));
+    GuiImageData imgUnlock_gray(Resources::GetFile("unlock_gray.png"), Resources::GetFileSize("unlock_gray.png"));
 
-    snprintf(imgPath, sizeof(imgPath), "%sdvd.png", Settings.theme_path);
-    GuiImageData imgdvd(imgPath, dvd_png);
-    snprintf(imgPath, sizeof(imgPath), "%sdvd_gray.png", Settings.theme_path);
-    GuiImageData imgdvd_gray(imgPath, NULL);
+    GuiImageData imgdvd(Resources::GetFile("dvd.png"), Resources::GetFileSize("dvd.png"));
+    GuiImageData imgdvd_gray(Resources::GetFile("dvd_gray.png"), Resources::GetFileSize("dvd_gray.png"));
 
-    snprintf(imgPath, sizeof(imgPath), "%sbrowser.png", Settings.theme_path);
-    GuiImageData homebrewImgData(imgPath, browser_png);
-    snprintf(imgPath, sizeof(imgPath), "%sbrowser_over.png", Settings.theme_path);
-    GuiImageData homebrewImgDataOver(imgPath, browser_over_png);
+    GuiImageData homebrewImgData(Resources::GetFile("browser.png"), Resources::GetFileSize("browser.png"));
+    GuiImageData homebrewImgDataOver(Resources::GetFile("browser_over.png"), Resources::GetFileSize("browser_over.png"));
 
     GuiTrigger trigA;
     trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
@@ -290,11 +255,6 @@ int MenuDiscList()
     GuiImage favoriteBtnImg(&imgfavIcon);
     favoriteBtnImg.SetWidescreen(Settings.widescreen);
     GuiImage favoriteBtnImg_g(&imgfavIcon_gray);
-    if (favoriteBtnImg_g.GetImage() == NULL)
-    {
-        favoriteBtnImg_g = favoriteBtnImg;
-        favoriteBtnImg_g.SetGrayscale();
-    }
     favoriteBtnImg_g.SetWidescreen(Settings.widescreen);
     GuiButton favoriteBtn(&favoriteBtnImg_g, &favoriteBtnImg_g, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_favorite_x,
             Theme.gamelist_favorite_y, &trigA, &btnSoundOver, btnClick2, 1, &favoriteBtnTT, -15, 52, 0, 3);
@@ -306,11 +266,6 @@ int MenuDiscList()
     GuiImage searchBtnImg(&imgsearchIcon);
     searchBtnImg.SetWidescreen(Settings.widescreen);
     GuiImage searchBtnImg_g(&imgsearchIcon_gray);
-    if (searchBtnImg_g.GetImage() == NULL)
-    {
-        searchBtnImg_g = searchBtnImg;
-        searchBtnImg_g.SetGrayscale();
-    }
     searchBtnImg_g.SetWidescreen(Settings.widescreen);
     GuiButton searchBtn(&searchBtnImg_g, &searchBtnImg_g, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_search_x,
             Theme.gamelist_search_y, &trigA, &btnSoundOver, btnClick2, 1, &searchBtnTT, -15, 52, 0, 3);
@@ -322,11 +277,6 @@ int MenuDiscList()
     GuiImage abcBtnImg(Settings.fave ? &imgrankIcon : &imgabcIcon);
     abcBtnImg.SetWidescreen(Settings.widescreen);
     GuiImage abcBtnImg_g(Settings.fave ? &imgrankIcon_gray : &imgabcIcon_gray);
-    if (abcBtnImg_g.GetImage() == NULL)
-    {
-        abcBtnImg_g = abcBtnImg;
-        abcBtnImg_g.SetGrayscale();
-    }
     abcBtnImg_g.SetWidescreen(Settings.widescreen);
     GuiButton abcBtn(&abcBtnImg_g, &abcBtnImg_g, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_abc_x, Theme.gamelist_abc_y,
             &trigA, &btnSoundOver, btnClick2, 1, &abcBtnTT, -15, 52, 0, 3);
@@ -338,11 +288,6 @@ int MenuDiscList()
     GuiImage countBtnImg(&imgplayCountIcon);
     countBtnImg.SetWidescreen(Settings.widescreen);
     GuiImage countBtnImg_g(&imgplayCountIcon_gray);
-    if (countBtnImg_g.GetImage() == NULL)
-    {
-        countBtnImg_g = countBtnImg;
-        countBtnImg_g.SetGrayscale();
-    }
     countBtnImg_g.SetWidescreen(Settings.widescreen);
     GuiButton countBtn(&countBtnImg_g, &countBtnImg_g, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_count_x,
             Theme.gamelist_count_y, &trigA, &btnSoundOver, btnClick2, 1, &countBtnTT, -15, 52, 0, 3);
@@ -354,11 +299,6 @@ int MenuDiscList()
     GuiImage listBtnImg(&imgarrangeList);
     listBtnImg.SetWidescreen(Settings.widescreen);
     GuiImage listBtnImg_g(&imgarrangeList_gray);
-    if (listBtnImg_g.GetImage() == NULL)
-    {
-        listBtnImg_g = listBtnImg;
-        listBtnImg_g.SetGrayscale();
-    }
     listBtnImg_g.SetWidescreen(Settings.widescreen);
     GuiButton listBtn(&listBtnImg_g, &listBtnImg_g, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_list_x,
             Theme.gamelist_list_y, &trigA, &btnSoundOver, btnClick2, 1, &listBtnTT, 15, 52, 1, 3);
@@ -370,11 +310,6 @@ int MenuDiscList()
     GuiImage gridBtnImg(&imgarrangeGrid);
     gridBtnImg.SetWidescreen(Settings.widescreen);
     GuiImage gridBtnImg_g(&imgarrangeGrid_gray);
-    if (gridBtnImg_g.GetImage() == NULL)
-    {
-        gridBtnImg_g = gridBtnImg;
-        gridBtnImg_g.SetGrayscale();
-    }
     gridBtnImg_g.SetWidescreen(Settings.widescreen);
     GuiButton gridBtn(&gridBtnImg_g, &gridBtnImg_g, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_grid_x,
             Theme.gamelist_grid_y, &trigA, &btnSoundOver, btnClick2, 1, &gridBtnTT, 15, 52, 1, 3);
@@ -386,11 +321,6 @@ int MenuDiscList()
     GuiImage carouselBtnImg(&imgarrangeCarousel);
     carouselBtnImg.SetWidescreen(Settings.widescreen);
     GuiImage carouselBtnImg_g(&imgarrangeCarousel_gray);
-    if (carouselBtnImg_g.GetImage() == NULL)
-    {
-        carouselBtnImg_g = carouselBtnImg;
-        carouselBtnImg_g.SetGrayscale();
-    }
     carouselBtnImg_g.SetWidescreen(Settings.widescreen);
     GuiButton carouselBtn(&carouselBtnImg_g, &carouselBtnImg_g, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_carousel_x,
             Theme.gamelist_carousel_y, &trigA, &btnSoundOver, btnClick2, 1, &carouselBtnTT, 15, 52, 1, 3);
@@ -404,11 +334,6 @@ int MenuDiscList()
     GuiImage lockBtnImg(&imgLock);
     lockBtnImg.SetWidescreen(Settings.widescreen);
     GuiImage lockBtnImg_g(&imgLock_gray);
-    if (lockBtnImg_g.GetImage() == NULL)
-    {
-        lockBtnImg_g = lockBtnImg;
-        lockBtnImg_g.SetGrayscale();
-    }
     lockBtnImg_g.SetWidescreen(Settings.widescreen);
     GuiButton lockBtn(&lockBtnImg_g, &lockBtnImg_g, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_lock_x,
             Theme.gamelist_lock_y, &trigA, &btnSoundOver, btnClick2, 1, &lockBtnTT, 15, 52, 1, 3);
@@ -420,11 +345,6 @@ int MenuDiscList()
     GuiImage unlockBtnImg(&imgUnlock);
     unlockBtnImg.SetWidescreen(Settings.widescreen);
     GuiImage unlockBtnImg_g(&imgUnlock_gray);
-    if (unlockBtnImg_g.GetImage() == NULL)
-    {
-        unlockBtnImg_g = unlockBtnImg;
-        unlockBtnImg_g.SetGrayscale();
-    }
     unlockBtnImg_g.SetWidescreen(Settings.widescreen);
 
     if (canUnlock && Settings.godmode)
@@ -581,8 +501,7 @@ int MenuDiscList()
     GuiGameCarousel * gameCarousel = NULL;
     if (Settings.gameDisplay == list)
     {
-        gameBrowser = new GuiGameBrowser(Theme.gamelist_w, Theme.gamelist_h, Settings.theme_path, bg_options_png,
-                startat, offset);
+        gameBrowser = new GuiGameBrowser(Theme.gamelist_w, Theme.gamelist_h, startat, offset);
         gameBrowser->SetPosition(Theme.gamelist_x, Theme.gamelist_y);
         gameBrowser->SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
     }
@@ -1765,35 +1684,26 @@ void rockout(int f)
 {
     HaltGui();
 
-    char imgPath[100];
     if (gameSelected >= 0 && gameSelected < gameList.size() && (strcasestr(get_title(gameList[gameSelected]), "guitar")
             || strcasestr(get_title(gameList[gameSelected]), "band") || strcasestr(get_title(gameList[gameSelected]),
             "rock")))
     {
         for (int i = 0; i < 4; i++)
             delete pointer[i];
-        snprintf(imgPath, sizeof(imgPath), "%srplayer1_point.png", Settings.theme_path);
-        pointer[0] = new GuiImageData(imgPath, rplayer1_point_png);
-        snprintf(imgPath, sizeof(imgPath), "%srplayer2_point.png", Settings.theme_path);
-        pointer[1] = new GuiImageData(imgPath, rplayer2_point_png);
-        snprintf(imgPath, sizeof(imgPath), "%srplayer3_point.png", Settings.theme_path);
-        pointer[2] = new GuiImageData(imgPath, rplayer3_point_png);
-        snprintf(imgPath, sizeof(imgPath), "%srplayer4_point.png", Settings.theme_path);
-        pointer[3] = new GuiImageData(imgPath, rplayer4_point_png);
+        pointer[0] = Resources::GetImageData("rplayer1_point.png");
+        pointer[1] = Resources::GetImageData("rplayer2_point.png");
+        pointer[2] = Resources::GetImageData("rplayer3_point.png");
+        pointer[3] = Resources::GetImageData("rplayer4_point.png");
     }
     else
     {
 
         for (int i = 0; i < 4; i++)
             delete pointer[i];
-        snprintf(imgPath, sizeof(imgPath), "%splayer1_point.png", Settings.theme_path);
-        pointer[0] = new GuiImageData(imgPath, player1_point_png);
-        snprintf(imgPath, sizeof(imgPath), "%splayer2_point.png", Settings.theme_path);
-        pointer[1] = new GuiImageData(imgPath, player2_point_png);
-        snprintf(imgPath, sizeof(imgPath), "%splayer3_point.png", Settings.theme_path);
-        pointer[2] = new GuiImageData(imgPath, player3_point_png);
-        snprintf(imgPath, sizeof(imgPath), "%splayer4_point.png", Settings.theme_path);
-        pointer[3] = new GuiImageData(imgPath, player4_point_png);
+        pointer[0] = Resources::GetImageData("player1_point.png");
+        pointer[1] = Resources::GetImageData("player2_point.png");
+        pointer[2] = Resources::GetImageData("player3_point.png");
+        pointer[3] = Resources::GetImageData("player4_point.png");
     }
     ResumeGui();
 }

@@ -145,6 +145,8 @@ CTheme::~CTheme()
 
 void CTheme::SetDefault()
 {
+    Resources::Clear();
+
     gamelist_x = 200;
     gamelist_y = 49;//40;
     gamelist_w = 396;
@@ -356,6 +358,8 @@ bool CTheme::Load(const char * theme_path)
         this->ParseLine(line);
     }
     fclose(file);
+
+    Resources::LoadFiles(theme_path);
 
     return true;
 }

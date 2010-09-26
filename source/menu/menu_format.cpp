@@ -23,7 +23,6 @@ int MenuFormat()
     USBStorage2_Init();
 
     int menu = MENU_NONE;
-    char imgPath[100];
 
     customOptionList options(MAX_PARTITIONS_EX);
     extern PartList partitions;
@@ -56,19 +55,15 @@ int MenuFormat()
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
     // because destroy GuiSound must wait while sound playing is finished, we use a global sound
     if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    snprintf(imgPath, sizeof(imgPath), "%swiimote_poweroff.png", Settings.theme_path);
-    GuiImageData btnpwroff(imgPath, wiimote_poweroff_png);
-    snprintf(imgPath, sizeof(imgPath), "%swiimote_poweroff_over.png", Settings.theme_path);
-    GuiImageData btnpwroffOver(imgPath, wiimote_poweroff_over_png);
-    snprintf(imgPath, sizeof(imgPath), "%smenu_button.png", Settings.theme_path);
-    GuiImageData btnhome(imgPath, menu_button_png);
-    snprintf(imgPath, sizeof(imgPath), "%smenu_button_over.png", Settings.theme_path);
-    GuiImageData btnhomeOver(imgPath, menu_button_over_png);
-    GuiImageData battery(battery_png);
-    GuiImageData batteryBar(battery_bar_png);
-    GuiImageData batteryRed(battery_red_png);
-    GuiImageData batteryBarRed(battery_bar_red_png);
+	
+    GuiImageData btnpwroff(Resources::GetFile("wiimote_poweroff.png"), Resources::GetFileSize("wiimote_poweroff.png"));
+    GuiImageData btnpwroffOver(Resources::GetFile("wiimote_poweroff_over.png"), Resources::GetFileSize("wiimote_poweroff_over.png"));
+    GuiImageData btnhome(Resources::GetFile("menu_button.png"), Resources::GetFileSize("menu_button.png"));
+    GuiImageData btnhomeOver(Resources::GetFile("menu_button_over.png"), Resources::GetFileSize("menu_button_over.png"));
+    GuiImageData battery(Resources::GetFile("battery.png"), Resources::GetFileSize("battery.png"));
+    GuiImageData batteryBar(Resources::GetFile("battery_bar.png"), Resources::GetFileSize("battery_bar.png"));
+    GuiImageData batteryRed(Resources::GetFile("battery_red.png"), Resources::GetFileSize("battery_red.png"));
+    GuiImageData batteryBarRed(Resources::GetFile("battery_bar_red.png"), Resources::GetFileSize("battery_bar_red.png"));
 
     GuiTrigger trigA;
     trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
@@ -89,8 +84,7 @@ int MenuFormat()
             1);
     exitBtn.SetTrigger(&trigHome);
 
-    GuiCustomOptionBrowser optionBrowser(396, 280, &options, Settings.theme_path, "bg_options_settings.png",
-            bg_options_settings_png, 0, 10);
+    GuiCustomOptionBrowser optionBrowser(396, 280, &options, "bg_options_settings.png", 0, 10);
     optionBrowser.SetPosition(0, 40);
     optionBrowser.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 

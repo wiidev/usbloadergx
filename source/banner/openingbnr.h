@@ -33,7 +33,7 @@ extern "C"
 #define UNPACK_ICON_BIN     2 /* extract icon.bin to outdir/icon/   */
 #define UNPACK_SOUND_BIN    4 /* copies sound.bin to outdir/sound.bin   */
 #define UNPACK_ALL (UNPACK_SOUND_BIN | UNPACK_ICON_BIN | UNPACK_BANNER_BIN)
-    int unpackBanner(const u8 * gameid, int what, const char *outdir);
+    //int unpackBanner(const u8 * gameid, int what, const char *outdir);
     //! Extract the lz77 compressed banner, icon and sound .bin
     u8* decompress_lz77(u8 *data, size_t data_size, size_t* decompressed_size);
 

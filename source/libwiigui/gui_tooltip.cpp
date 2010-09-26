@@ -10,9 +10,9 @@
 
 #include "gui.h"
 
-static GuiImageData tooltipLeft(tooltip_left_png);
-static GuiImageData tooltipTile(tooltip_tile_png);
-static GuiImageData tooltipRight(tooltip_right_png);
+static GuiImageData tooltipLeft(tooltip_left_png, tooltip_left_png_size);
+static GuiImageData tooltipTile(tooltip_tile_png, tooltip_left_png_size);
+static GuiImageData tooltipRight(tooltip_right_png, tooltip_right_png_size);
 
 /**
  * Constructor for the GuiTooltip class.

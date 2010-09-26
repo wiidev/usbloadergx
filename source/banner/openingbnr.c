@@ -25,7 +25,6 @@
 #include "MD5.h"
 #include "banner.h"
 #include "openingbnr.h"
-#include "../ramdisk/ramdisk.h"
 #include "FileOperations/fileops.h"
 
 u16 be16(const u8 *p)
@@ -480,6 +479,8 @@ int unpackBin(const char * filename, const char * outdir)
     return 0;
 }
 
+#if 0
+
 #define TMP_PATH(s) "BANNER:/dump"s
 //#define TMP_PATH(s) "SD:/dump"s
 
@@ -559,3 +560,4 @@ int unpackBanner(const u8 *gameid, int what, const char *outdir)
     error2: if (ret < 0) return ret;
     return 1;
 }
+#endif

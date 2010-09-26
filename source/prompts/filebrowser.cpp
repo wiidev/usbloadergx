@@ -310,7 +310,7 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
     if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
     //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
-    GuiImageData folderImgData(icon_folder_png);
+    GuiImageData folderImgData(Resources::GetFile("icon_folder.png"), Resources::GetFileSize("icon_folder.png"));
     GuiImage folderImg(&folderImgData);
     GuiButton folderBtn(folderImg.GetWidth(), folderImg.GetHeight());
     folderBtn.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
@@ -319,9 +319,7 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
     folderBtn.SetTrigger(&trigA);
     folderBtn.SetEffectGrow();
 
-    char imgPath[100];
-    snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", Settings.theme_path);
-    GuiImageData btnOutline(imgPath, button_dialogue_box_png);
+    GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
     GuiText ExitBtnTxt(tr( "Cancel" ), 24, ( GXColor )
     {   0, 0, 0, 255});
     GuiImage ExitBtnImg(&btnOutline);
@@ -369,7 +367,7 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
     fileBrowser.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     fileBrowser.SetPosition(0, 120);
 
-    GuiImageData Address(addressbar_textbox_png);
+    GuiImageData Address(Resources::GetFile("addressbar_textbox.png"), Resources::GetFileSize("addressbar_textbox.png"));
     GuiText AdressText((char*) NULL, 20, ( GXColor )
     {   0, 0, 0, 255});
     AdressText.SetTextf("%s%s", browser->rootdir, browser->dir);

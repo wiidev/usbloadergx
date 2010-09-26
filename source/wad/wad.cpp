@@ -125,11 +125,8 @@ s32 Wad_Install(FILE *fp)
     if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
     //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
-    char imgPath[100];
-    snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", Settings.theme_path);
-    GuiImageData btnOutline(imgPath, button_dialogue_box_png);
-    snprintf(imgPath, sizeof(imgPath), "%sdialogue_box.png", Settings.theme_path);
-    GuiImageData dialogBox(imgPath, dialogue_box_png);
+    GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
+    GuiImageData dialogBox(Resources::GetFile("dialogue_box.png"), Resources::GetFileSize("dialogue_box.png"));
     GuiTrigger trigA;
     trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 
@@ -150,8 +147,7 @@ s32 Wad_Install(FILE *fp)
     btn1.SetLabel(&btn1Txt);
     btn1.SetState(STATE_SELECTED);
 
-    snprintf(imgPath, sizeof(imgPath), "%sprogressbar_outline.png", Settings.theme_path);
-    GuiImageData progressbarOutline(imgPath, progressbar_outline_png);
+    GuiImageData progressbarOutline(Resources::GetFile("progressbar_outline.png"), Resources::GetFileSize("progressbar_outline.png"));
     GuiImage progressbarOutlineImg(&progressbarOutline);
     if (Settings.wsprompt == yes)
     {
@@ -160,15 +156,13 @@ s32 Wad_Install(FILE *fp)
     progressbarOutlineImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     progressbarOutlineImg.SetPosition(25, 50);
 
-    snprintf(imgPath, sizeof(imgPath), "%sprogressbar_empty.png", Settings.theme_path);
-    GuiImageData progressbarEmpty(imgPath, progressbar_empty_png);
+    GuiImageData progressbarEmpty(Resources::GetFile("progressbar_empty.png"), Resources::GetFileSize("progressbar_empty.png"));
     GuiImage progressbarEmptyImg(&progressbarEmpty);
     progressbarEmptyImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     progressbarEmptyImg.SetPosition(25, 50);
     progressbarEmptyImg.SetTile(100);
 
-    snprintf(imgPath, sizeof(imgPath), "%sprogressbar.png", Settings.theme_path);
-    GuiImageData progressbar(imgPath, progressbar_png);
+    GuiImageData progressbar(Resources::GetFile("progressbar.png"), Resources::GetFileSize("progressbar.png"));
     GuiImage progressbarImg(&progressbar);
     progressbarImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     progressbarImg.SetPosition(25, 50);
@@ -311,6 +305,8 @@ s32 Wad_Install(FILE *fp)
 
     // Get TMD info
     tmd_data = (tmd *) SIGNATURE_PAYLOAD(p_tmd);
+	
+	char imgPath[150];
 
     // Install contents
     //ResumeGui();
@@ -448,11 +444,8 @@ s32 Wad_Uninstall(FILE *fp)
     if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
     //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
-    char imgPath[100];
-    snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", Settings.theme_path);
-    GuiImageData btnOutline(imgPath, button_dialogue_box_png);
-    snprintf(imgPath, sizeof(imgPath), "%sdialogue_box.png", Settings.theme_path);
-    GuiImageData dialogBox(imgPath, dialogue_box_png);
+    GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
+    GuiImageData dialogBox(Resources::GetFile("dialogue_box.png"), Resources::GetFileSize("dialogue_box.png"));
     GuiTrigger trigA;
     trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 

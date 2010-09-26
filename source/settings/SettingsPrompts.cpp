@@ -100,12 +100,8 @@ int MenuLanguageSelect()
     if ( !btnClick2 ) btnClick2 = new GuiSound( button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume );
     //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
-    char imgPath[100];
-
-    snprintf( imgPath, sizeof( imgPath ), "%sbutton_dialogue_box.png", Settings.theme_path );
-    GuiImageData btnOutline( imgPath, button_dialogue_box_png );
-    snprintf( imgPath, sizeof( imgPath ), "%ssettings_background.png", Settings.theme_path );
-    GuiImageData settingsbg( imgPath, settings_background_png );
+    GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
+    GuiImageData settingsbg(Resources::GetFile("settings_background.png"), Resources::GetFileSize("settings_background.png"));
 
     GuiTrigger trigA;
     trigA.SetSimpleTrigger( -1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A );
@@ -217,7 +213,7 @@ int MenuLanguageSelect()
         scrollon = 1;
     }
 
-    GuiCustomOptionBrowser optionBrowser4( 396, 280, &options2, Settings.theme_path, "bg_options_settings.png", bg_options_settings_png, scrollon, 10 );
+    GuiCustomOptionBrowser optionBrowser4( 396, 280, &options2, "bg_options_settings.png", scrollon, 10 );
     optionBrowser4.SetPosition( 0, 90 );
     optionBrowser4.SetAlignment( ALIGN_CENTRE, ALIGN_TOP );
 

@@ -156,12 +156,8 @@ int DiscBrowse(struct discHdr * header)
     if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
     //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
-    char imgPath[100];
-
-    snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", Settings.theme_path);
-    GuiImageData btnOutline(imgPath, button_dialogue_box_png);
-    snprintf(imgPath, sizeof(imgPath), "%sgamesettings_background.png", Settings.theme_path);
-    GuiImageData settingsbg(imgPath, settings_background_png);
+    GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
+    GuiImageData settingsbg(Resources::GetFile("settings_background.png"), Resources::GetFileSize("settings_background.png"));
 
     GuiTrigger trigA;
     trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
@@ -198,8 +194,7 @@ int DiscBrowse(struct discHdr * header)
     u8 scrollbaron = 0;
     if (dolfilecount > 9) scrollbaron = 1;
 
-    GuiCustomOptionBrowser optionBrowser3(396, 280, &options3, Settings.theme_path, "bg_options_gamesettings.png",
-            bg_options_settings_png, dolfilecount > 9 ? 1 : 0, 200);
+    GuiCustomOptionBrowser optionBrowser3(396, 280, &options3, "bg_options_gamesettings.png", dolfilecount > 9 ? 1 : 0, 200);
     optionBrowser3.SetPosition(0, 90);
     optionBrowser3.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 

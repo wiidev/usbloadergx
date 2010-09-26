@@ -5,6 +5,7 @@
 #include "usbloader/utils.h"
 #include "usbloader/GameList.h"
 #include "prompts/ProgressWindow.h"
+#include "themes/CTheme.h"
 
 float gamesize;
 
@@ -26,16 +27,10 @@ int MenuInstall()
 
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
 
-    char imgPath[100];
-
-    snprintf(imgPath, sizeof(imgPath), "%sbattery.png", Settings.theme_path);
-    GuiImageData battery(imgPath, battery_png);
-    snprintf(imgPath, sizeof(imgPath), "%sbattery_bar.png", Settings.theme_path);
-    GuiImageData batteryBar(imgPath, battery_bar_png);
-    snprintf(imgPath, sizeof(imgPath), "%sbattery_red.png", Settings.theme_path);
-    GuiImageData batteryRed(imgPath, battery_red_png);
-    snprintf(imgPath, sizeof(imgPath), "%sbattery_bar_red.png", Settings.theme_path);
-    GuiImageData batteryBarRed(imgPath, battery_bar_red_png);
+    GuiImageData battery(Resources::GetFile("battery.png"), Resources::GetFileSize("battery.png"));
+    GuiImageData batteryBar(Resources::GetFile("battery_bar.png"), Resources::GetFileSize("battery_bar.png"));
+    GuiImageData batteryRed(Resources::GetFile("battery_red.png"), Resources::GetFileSize("battery_red.png"));
+    GuiImageData batteryBarRed(Resources::GetFile("battery_bar_red.png"), Resources::GetFileSize("battery_bar_red.png"));
 
     HaltGui();
     GuiWindow w(screenwidth, screenheight);

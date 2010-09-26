@@ -4,6 +4,7 @@
 #include <string>
 #include <stdio.h>
 #include <gctypes.h>
+#include "Resources.h"
 
 class CTheme
 {

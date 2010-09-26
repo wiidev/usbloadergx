@@ -218,13 +218,13 @@ GuiImageData *LoadCoverImage(struct discHdr *header, bool Prefere3D, bool noCove
         //Load full id image
         snprintf(Path, sizeof(Path), "%s%s.png", coverPath, IDfull);
         delete Cover;
-        Cover = new (std::nothrow) GuiImageData(Path, NULL);
+        Cover = new (std::nothrow) GuiImageData(Path);
         //Load short id image
         if (!Cover || !Cover->GetImage())
         {
             snprintf(Path, sizeof(Path), "%s%s.png", coverPath, ID);
             delete Cover;
-            Cover = new (std::nothrow) GuiImageData(Path, NULL);
+            Cover = new (std::nothrow) GuiImageData(Path);
         }
         if (Cover && Cover->GetImage()) break;
     }
@@ -234,11 +234,9 @@ GuiImageData *LoadCoverImage(struct discHdr *header, bool Prefere3D, bool noCove
         flag = Prefere3D;
         for (int i = 0; i < 2; ++i)
         {
-            const char *nocoverPath = (flag ? "%snoimage.png" : "%snoimage2d.png");
             flag = !flag;
-            snprintf(Path, sizeof(Path), nocoverPath, Settings.theme_path);
             delete Cover;
-            Cover = new (std::nothrow) GuiImageData(Path, (Prefere3D ? nocover_png : nocoverFlat_png));
+            Cover = new (std::nothrow) GuiImageData(Resources::GetFile(Prefere3D ? "nocover.png" : "nocoverFlat.png"), Resources::GetFileSize(Prefere3D ? "nocover.png" : "nocoverFlat.png"));
             if (Cover && Cover->GetImage()) break;
         }
     }
@@ -257,27 +255,20 @@ int MainMenu(int menu)
 {
 
     currentMenu = menu;
-    char imgPath[100];
 
     //if (strcmp(headlessID,"")!=0)HaltGui();
     //WindowPrompt("Can you see me now",0,"ok");
 
-    snprintf(imgPath, sizeof(imgPath), "%splayer1_point.png", Settings.theme_path);
-    pointer[0] = new GuiImageData(imgPath, player1_point_png);
-    snprintf(imgPath, sizeof(imgPath), "%splayer2_point.png", Settings.theme_path);
-    pointer[1] = new GuiImageData(imgPath, player2_point_png);
-    snprintf(imgPath, sizeof(imgPath), "%splayer3_point.png", Settings.theme_path);
-    pointer[2] = new GuiImageData(imgPath, player3_point_png);
-    snprintf(imgPath, sizeof(imgPath), "%splayer4_point.png", Settings.theme_path);
-    pointer[3] = new GuiImageData(imgPath, player4_point_png);
+    pointer[0] = new GuiImageData(Resources::GetFile("player1_point.png"), Resources::GetFileSize("player1_point.png"));
+    pointer[1] = new GuiImageData(Resources::GetFile("player2_point.png"), Resources::GetFileSize("player2_point.png"));
+    pointer[2] = new GuiImageData(Resources::GetFile("player3_point.png"), Resources::GetFileSize("player3_point.png"));
+    pointer[3] = new GuiImageData(Resources::GetFile("player4_point.png"), Resources::GetFileSize("player4_point.png"));
 
     mainWindow = new GuiWindow(screenwidth, screenheight);
+	
+	const char * image = Settings.widescreen ? "wbackground.png" : "background.png";
 
-    if (Settings.widescreen)
-        snprintf(imgPath, sizeof(imgPath), "%swbackground.png", Settings.theme_path);
-    else snprintf(imgPath, sizeof(imgPath), "%sbackground.png", Settings.theme_path);
-
-    background = new GuiImageData(imgPath, Settings.widescreen ? wbackground_png : background_png);
+    background = new GuiImageData(Resources::GetFile(image), Resources::GetFileSize(image));
 
     bgImg = new GuiImage(background);
     mainWindow->Append(bgImg);

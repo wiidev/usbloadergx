@@ -116,30 +116,9 @@ extern const u32 settings_background_png_size;
 extern const u8 bg_browser_png[];
 extern const u32 bg_browser_png_size;
 
-extern const u8 icon_archives_png[];
-extern const u32 icon_archives_png_size;
-
-//extern const u8   icon_default_png[];
-//extern const u32  icon_default_png_size;
-
 extern const u8 icon_folder_png[];
 extern const u32 icon_folder_png_size;
-/*
- extern const u8     icon_gfx_png[];
- extern const u32    icon_gfx_png_size;
 
- extern const u8     icon_pls_png[];
- extern const u32    icon_pls_png_size;
-
- extern const u8     icon_sfx_png[];
- extern const u32    icon_sfx_png_size;
-
- extern const u8     icon_txt_png[];
- extern const u32    icon_txt_png_size;
-
- extern const u8     icon_xml_png[];
- extern const u32    icon_xml_png_size;
- */
 extern const u8 bg_browser_selection_png[];
 extern const u32 bg_browser_selection_png_size;
 
@@ -176,11 +155,8 @@ extern const u32 dialogue_box_startgame_png_size;
 extern const u8 wdialogue_box_startgame_png[];
 extern const u32 wdialogue_box_startgame_png_size;
 
-extern const u8 button_dialogue_box_startgame_png[];
-extern const u32 button_dialogue_box_startgame_size;
-
 extern const u8 button_dialogue_box_png[];
-extern const u32 button_dialogue_box_size;
+extern const u32 button_dialogue_box_png_size;
 
 extern const u8 keyboard_textbox_png[];
 extern const u32 keyboard_textbox_png_size;
@@ -204,19 +180,19 @@ extern const u8 keyboard_clear_over_png[];
 extern const u32 keyboard_clear_over_png_size;
 
 extern const u8 menu_button_png[];
-extern const u32 menu_button_size;
+extern const u32 menu_button_png_size;
 
 extern const u8 menu_button_over_png[];
-extern const u32 menu_button_over_size;
+extern const u32 menu_button_over_png_size;
 
 extern const u8 settings_button_png[];
-extern const u32 settings_button_size;
+extern const u32 settings_button_png_size;
 
 extern const u8 settings_button_over_png[];
-extern const u32 settings_button_over_size;
+extern const u32 settings_button_over_png_size;
 
 extern const u8 settings_menu_button_png[];
-extern const u32 settings_menu_button_size;
+extern const u32 settings_menu_button_png_size;
 
 extern const u8 wiimote_poweroff_png[];
 extern const u32 wiimote_poweroff_png_size;
@@ -242,20 +218,11 @@ extern const u32 scrollbar_png_size;
 extern const u8 scrollbar_arrowup_png[];
 extern const u32 scrollbar_arrowup_png_size;
 
-extern const u8 scrollbar_arrowup_over_png[];
-extern const u32 scrollbar_arrowup_over_png_size;
-
 extern const u8 scrollbar_arrowdown_png[];
 extern const u32 scrollbar_arrowdown_png_size;
 
-extern const u8 scrollbar_arrowdown_over_png[];
-extern const u32 scrollbar_arrowdown_over_png_size;
-
 extern const u8 scrollbar_box_png[];
 extern const u32 scrollbar_box_png_size;
-
-extern const u8 scrollbar_box_over_png[];
-extern const u32 scrollbar_box_over_png_size;
 
 extern const u8 progressbar_png[];
 extern const u32 progressbar_png_size;
@@ -344,26 +311,50 @@ extern const u32 not_favorite_png_size;
 extern const u8 favIcon_png[];
 extern const u32 favIcon_png_size;
 
+extern const u8 favIcon_gray_png[];
+extern const u32 favIcon_gray_png_size;
+
 extern const u8 searchIcon_png[];
 extern const u32 searchIcon_png_size;
+
+extern const u8 searchIcon_gray_png[];
+extern const u32 searchIcon_gray_png_size;
 
 extern const u8 abcIcon_png[];
 extern const u32 abcIcon_png_size;
 
+extern const u8 abcIcon_gray_png[];
+extern const u32 abcIcon_gray_png_size;
+
 extern const u8 rankIcon_png[];
 extern const u32 rankIcon_png_size;
+
+extern const u8 rankIcon_gray_png[];
+extern const u32 rankIcon_gray_png_size;
 
 extern const u8 playCountIcon_png[];
 extern const u32 playCountIcon_png_size;
 
+extern const u8 playCountIcon_gray_png[];
+extern const u32 playCountIcon_gray_png_size;
+
 extern const u8 arrangeList_png[];
 extern const u32 arrangeList_png_size;
+
+extern const u8 arrangeList_gray_png[];
+extern const u32 arrangeList_gray_png_size;
 
 extern const u8 arrangeGrid_png[];
 extern const u32 arrangeGrid_png_size;
 
+extern const u8 arrangeGrid_gray_png[];
+extern const u32 arrangeGrid_gray_png_size;
+
 extern const u8 arrangeCarousel_png[];
 extern const u32 arrangeCarousel_png_size;
+
+extern const u8 arrangeCarousel_gray_png[];
+extern const u32 arrangeCarousel_gray_png_size;
 
 extern const u8 settings_title_png[];
 extern const u32 settings_title_png_size;
@@ -387,16 +378,13 @@ extern const u8 wifi1_png[];
 extern const u32 wifi1_png_size;
 
 extern const u8 wifi2_png[];
-extern const u32 wifi2png_size;
+extern const u32 wifi2_png_size;
 
 extern const u8 wifi3_png[];
 extern const u32 wifi3_png_size;
 
 extern const u8 wifi4_png[];
 extern const u32 wifi4_png_size;
-
-//extern const u8   wifi6_png[];
-//extern const u32  wifi6_png_size;
 
 extern const u8 wifi8_png[];
 extern const u32 wifi8_png_size;
@@ -438,10 +426,10 @@ extern const u32 nunchuk_png_size;
 extern const u8 nunchukR_png[];
 extern const u32 nunchukR_png_size;
 
-extern const u8 dancepadR_png[];
-extern const u32 dancepadR_size;
 extern const u8 dancepad_png[];
 extern const u32 dancepad_png_size;
+extern const u8 dancepadR_png[];
+extern const u32 dancepadR_png_size;
 
 extern const u8 balanceboard_png[];
 extern const u32 balanceboard_png_size;
@@ -477,12 +465,7 @@ extern const u8 nintendods_png[];
 extern const u32 nintendods_png_size;
 extern const u8 nintendodsR_png[];
 extern const u32 nintendodsR_png_size;
-/*
- extern const u8     vitalitysensor_png[];
- extern const u32    vitalitysensor_png_size;
- extern const u8     vitalitysensor_png[];
- extern const u32    vitalitysensorR_png_size;
- */
+
 extern const u8 esrb_ec_png[];
 extern const u32 esrb_ec_png_size;
 
@@ -537,14 +520,23 @@ extern const u32 usbport_png_size;
 extern const u8 dvd_png[];
 extern const u32 dvd_png_size;
 
+extern const u8 dvd_gray_png[];
+extern const u32 dvd_gray_png_size;
+
 extern const u8 new_png[];
 extern const u32 new_png_size;
 
 extern const u8 lock_png[];
 extern const u32 lock_png_size;
 
+extern const u8 lock_gray_png[];
+extern const u32 lock_gray_png_size;
+
 extern const u8 unlock_png[];
 extern const u32 unlock_png_size;
+
+extern const u8 unlock_gray_png[];
+extern const u32 unlock_gray_png_size;
 
 extern const u8 stub_bin[];
 extern const u32 stub_bin_size;

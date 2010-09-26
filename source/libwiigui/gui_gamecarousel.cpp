@@ -44,8 +44,8 @@ static GuiImageData *GameCarouselLoadCoverImage(void * Arg)
 /**
  * Constructor for the GuiGameCarousel class.
  */
-GuiGameCarousel::GuiGameCarousel(int w, int h, const char *themePath, const u8 *imagebg, int selected, int offset) :
-    noCover(nocover_png)
+GuiGameCarousel::GuiGameCarousel(int w, int h, const char *themePath, const u8 *imagebg, int imagebgsize, int selected, int offset) :
+    noCover(nocover_png, nocover_png_size)
 {
     width = w;
     height = h;
@@ -57,7 +57,6 @@ GuiGameCarousel::GuiGameCarousel(int w, int h, const char *themePath, const u8 *
     clickedItem = -1;
 
     speed = 0;
-    char imgPath[100];
 
     trigA = new GuiTrigger;
     trigA->SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
@@ -73,10 +72,8 @@ GuiGameCarousel::GuiGameCarousel(int w, int h, const char *themePath, const u8 *
     btnSoundClick = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
     btnSoundOver = new GuiSound(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
 
-    snprintf(imgPath, sizeof(imgPath), "%sstartgame_arrow_left.png", Settings.theme_path);
-    imgLeft = new GuiImageData(imgPath, startgame_arrow_left_png);
-    snprintf(imgPath, sizeof(imgPath), "%sstartgame_arrow_right.png", Settings.theme_path);
-    imgRight = new GuiImageData(imgPath, startgame_arrow_right_png);
+    imgLeft = Resources::GetImageData("startgame_arrow_left.png");
+    imgRight = Resources::GetImageData("startgame_arrow_right.png");
 
     int btnHeight = (int) lround(sqrt(RADIUS * RADIUS - 90000) - RADIUS - 50);
 

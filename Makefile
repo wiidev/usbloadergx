@@ -25,7 +25,6 @@ SOURCES		:=	source \
 				source/libwbfs \
 				source/language \
 				source/mload \
-				source/ramdisk \
 				source/patches \
 				source/usbloader \
 				source/xml \
@@ -42,6 +41,7 @@ SOURCES		:=	source \
 				source/memory \
 				source/libntfs \
 				source/FileOperations \
+				source/ImageOperations \
 				source/utils \
 				source/utils/minizip \
 				source/usbloader/wbfs
@@ -60,7 +60,7 @@ LDFLAGS		=	-g $(MACHDEP) -Wl,-Map,$(notdir $@).map,--section-start,.init=0x80B00
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project
 #---------------------------------------------------------------------------------
-LIBS :=  -lpngu -lpng -lm -lz -lwiiuse -lbte -lasnd -logc -lfreetype -lvorbisidec -lmad -lmxml -ljpeg -lunzip
+LIBS :=  -lpngu -lpng -lgd -lm -lz -lwiiuse -lbte -lasnd -logc -lfreetype -lvorbisidec -lmad -lmxml -ljpeg -lunzip
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
 # include and lib

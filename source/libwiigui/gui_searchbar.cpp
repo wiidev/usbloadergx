@@ -4,6 +4,7 @@
 #include "../wpad.h"
 #include "../main.h"
 #include "../settings/CSettings.h"
+#include "../themes/CTheme.h"
 #include "../usbloader/GameList.h"
 
 extern GuiWindow * mainWindow;
@@ -30,11 +31,10 @@ class cSearchButton
 
 GuiSearchBar::GuiSearchBar(const wchar_t *SearchChars) :
     inSide(0), text((char *) NULL, 22, ( GXColor )
-    {   0, 0, 0, 255}), buttons(0), keyImageData(keyboard_key_png), keyOverImageData(keyboard_key_over_png), sndOver(
+    {   0, 0, 0, 255}), buttons(0), keyImageData(keyboard_key_png, keyboard_key_png_size), keyOverImageData(keyboard_key_over_png, keyboard_key_over_png_size), sndOver(
             button_over_pcm, button_over_pcm_size, Settings.sfxvolume), sndClick(button_click_pcm,
             button_click_pcm_size, Settings.sfxvolume)
 {
-    char imgPath[100];
     trig.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
     SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 
@@ -69,8 +69,7 @@ GuiSearchBar::GuiSearchBar(const wchar_t *SearchChars) :
     text.SetMaxWidth(width - (10 + 2 * 42 + 10), SCROLL_HORIZONTAL);
     this->Append(&text);
 
-    snprintf(imgPath, sizeof(imgPath), "%skeyboard_backspace_over.png", Settings.theme_path);
-    imgBacspaceBtn = new GuiImageData(imgPath, keyboard_backspace_over_png);
+    imgBacspaceBtn = Resources::GetImageData("keyboard_backspace_over.png");
     BacspaceBtnImg_Over = new GuiImage(imgBacspaceBtn);
     BacspaceBtnImg = new GuiImage(BacspaceBtnImg_Over);
     BacspaceBtnImg->SetGrayscale();
@@ -78,8 +77,7 @@ GuiSearchBar::GuiSearchBar(const wchar_t *SearchChars) :
             &sndClick, 1);
     this->Append(BacspaceBtn);
 
-    snprintf(imgPath, sizeof(imgPath), "%skeyboard_clear_over.png", Settings.theme_path);
-    imgClearBtn = new GuiImageData(imgPath, keyboard_clear_over_png);
+    imgClearBtn = Resources::GetImageData("keyboard_clear_over.png");
     ClearBtnImg_Over = new GuiImage(imgClearBtn);
     ClearBtnImg = new GuiImage(ClearBtnImg_Over);
     ClearBtnImg->SetGrayscale();

@@ -11,6 +11,7 @@
 #include "gui.h"
 #include "prompts/filebrowser.h"
 #include "settings/CSettings.h"
+#include "themes/CTheme.h"
 
 /**
  * Constructor for the GuiFileBrowser class.
@@ -34,40 +35,27 @@ GuiFileBrowser::GuiFileBrowser(int w, int h)
     btnSoundOver = new GuiSound(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
     btnSoundClick = new GuiSound(button_click_pcm, button_click_pcm_size, Settings.sfxvolume);
 
-    char imgPath[100];
-    snprintf(imgPath, sizeof(imgPath), "%sbg_browser.png", Settings.theme_path);
-    bgFileSelection = new GuiImageData(imgPath, bg_browser_png);
+    bgFileSelection = new GuiImageData(Resources::GetFile("bg_browser.png"), Resources::GetFileSize("bg_browser.png"));
     bgFileSelectionImg = new GuiImage(bgFileSelection);
     bgFileSelectionImg->SetParent(this);
     bgFileSelectionImg->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 
-    snprintf(imgPath, sizeof(imgPath), "%sbg_browser_selection.png", Settings.theme_path);
-    bgFileSelectionEntry = new GuiImageData(imgPath, bg_browser_selection_png);
-    //  fileArchives = new GuiImageData(icon_archives_png);
-    //  fileDefault = new GuiImageData(icon_default_png);
-    fileFolder = new GuiImageData(icon_folder_png);
-    //  fileGFX = new GuiImageData(icon_gfx_png);
-    //  filePLS = new GuiImageData(icon_pls_png);
-    //  fileSFX = new GuiImageData(icon_sfx_png);
-    //  fileTXT = new GuiImageData(icon_txt_png);
-    //  fileXML = new GuiImageData(icon_xml_png);
-
-    snprintf(imgPath, sizeof(imgPath), "%sscrollbar.png", Settings.theme_path);
-    scrollbar = new GuiImageData(imgPath, scrollbar_png);
+    bgFileSelectionEntry = Resources::GetImageData("bg_browser_selection.png");
+	
+    fileFolder = Resources::GetImageData("icon_folder.png");
+	
+    scrollbar = Resources::GetImageData("scrollbar.png");
     scrollbarImg = new GuiImage(scrollbar);
     scrollbarImg->SetParent(this);
     scrollbarImg->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
     scrollbarImg->SetPosition(0, 2);
     scrollbarImg->SetSkew(0, 0, 0, 0, 0, -30, 0, -30);
 
-    snprintf(imgPath, sizeof(imgPath), "%sscrollbar_arrowdown.png", Settings.theme_path);
-    arrowDown = new GuiImageData(imgPath, scrollbar_arrowdown_png);
+    arrowDown = Resources::GetImageData("scrollbar_arrowdown.png");
     arrowDownImg = new GuiImage(arrowDown);
-    snprintf(imgPath, sizeof(imgPath), "%sscrollbar_arrowup.png", Settings.theme_path);
-    arrowUp = new GuiImageData(imgPath, scrollbar_arrowup_png);
+    arrowUp = Resources::GetImageData("scrollbar_arrowup.png");
     arrowUpImg = new GuiImage(arrowUp);
-    snprintf(imgPath, sizeof(imgPath), "%sscrollbar_box.png", Settings.theme_path);
-    scrollbarBox = new GuiImageData(imgPath, scrollbar_box_png);
+    scrollbarBox = Resources::GetImageData("scrollbar_box.png");
     scrollbarBoxImg = new GuiImage(scrollbarBox);
 
     arrowUpBtn = new GuiButton(arrowUpImg->GetWidth(), arrowUpImg->GetHeight());

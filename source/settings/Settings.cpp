@@ -106,33 +106,22 @@ int MenuSettings()
     //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
     GuiSound btnClick1(button_click_pcm, button_click_pcm_size, Settings.sfxvolume);
 
-    char imgPath[100];
+    GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
+    GuiImageData settingsbg(Resources::GetFile("settings_background.png"), Resources::GetFileSize("settings_background.png"));
 
-    snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", Settings.theme_path);
-    GuiImageData btnOutline(imgPath, button_dialogue_box_png);
-    snprintf(imgPath, sizeof(imgPath), "%ssettings_background.png", Settings.theme_path);
-    GuiImageData settingsbg(imgPath, settings_background_png);
+    GuiImageData MainButtonImgData(Resources::GetFile("settings_title.png"), Resources::GetFileSize("settings_title.png"));
 
-    snprintf(imgPath, sizeof(imgPath), "%ssettings_title.png", Settings.theme_path);
-    GuiImageData MainButtonImgData(imgPath, settings_title_png);
+    GuiImageData MainButtonImgOverData(Resources::GetFile("settings_title_over.png"), Resources::GetFileSize("settings_title_over.png"));
 
-    snprintf(imgPath, sizeof(imgPath), "%ssettings_title_over.png", Settings.theme_path);
-    GuiImageData MainButtonImgOverData(imgPath, settings_title_over_png);
+    GuiImageData PageindicatorImgData(Resources::GetFile("pageindicator.png"), Resources::GetFileSize("pageindicator.png"));
 
-    snprintf(imgPath, sizeof(imgPath), "%spageindicator.png", Settings.theme_path);
-    GuiImageData PageindicatorImgData(imgPath, pageindicator_png);
+    GuiImageData arrow_left(Resources::GetFile("startgame_arrow_left.png"), Resources::GetFileSize("startgame_arrow_left.png"));
 
-    snprintf(imgPath, sizeof(imgPath), "%sstartgame_arrow_left.png", Settings.theme_path);
-    GuiImageData arrow_left(imgPath, startgame_arrow_left_png);
+    GuiImageData arrow_right(Resources::GetFile("startgame_arrow_right.png"), Resources::GetFileSize("startgame_arrow_right.png"));
 
-    snprintf(imgPath, sizeof(imgPath), "%sstartgame_arrow_right.png", Settings.theme_path);
-    GuiImageData arrow_right(imgPath, startgame_arrow_right_png);
+    GuiImageData creditsImgData(Resources::GetFile("credits_button.png"), Resources::GetFileSize("credits_button.png"));
 
-    snprintf(imgPath, sizeof(imgPath), "%scredits_button.png", Settings.theme_path);
-    GuiImageData creditsImgData(imgPath, credits_button_png);
-
-    snprintf(imgPath, sizeof(imgPath), "%scredits_button_over.png", Settings.theme_path);
-    GuiImageData creditsOver(imgPath, credits_button_over_png);
+    GuiImageData creditsOver(Resources::GetFile("credits_button_over.png"), Resources::GetFileSize("credits_button_over.png"));
 
     GuiImage creditsImg(&creditsImgData);
     GuiImage creditsImgOver(&creditsOver);
@@ -305,8 +294,7 @@ int MenuSettings()
     MainButton4.SetTrigger(&trigA);
 
     customOptionList options2(MAXOPTIONS);
-    GuiCustomOptionBrowser optionBrowser2(396, 280, &options2, Settings.theme_path, "bg_options_settings.png",
-            bg_options_settings_png, 0, 150);
+    GuiCustomOptionBrowser optionBrowser2(396, 280, &options2, "bg_options_settings.png", 0, 150);
     optionBrowser2.SetPosition(0, 90);
     optionBrowser2.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 
@@ -1731,27 +1719,17 @@ int MenuSettings()
 											Theme.Load(Settings.theme_path);
                                             ResumeGui();
                                             menu = MENU_SETTINGS;
-                                            snprintf(imgPath, sizeof(imgPath), "%splayer1_point.png",
-                                                    Settings.theme_path);
-                                            pointer[0] = new GuiImageData(imgPath, player1_point_png);
-                                            snprintf(imgPath, sizeof(imgPath), "%splayer2_point.png",
-                                                    Settings.theme_path);
-                                            pointer[1] = new GuiImageData(imgPath, player2_point_png);
-                                            snprintf(imgPath, sizeof(imgPath), "%splayer3_point.png",
-                                                    Settings.theme_path);
-                                            pointer[2] = new GuiImageData(imgPath, player3_point_png);
-                                            snprintf(imgPath, sizeof(imgPath), "%splayer4_point.png",
-                                                    Settings.theme_path);
-                                            pointer[3] = new GuiImageData(imgPath, player4_point_png);
-                                            if (Settings.widescreen)
-                                                snprintf(imgPath, sizeof(imgPath), "%swbackground.png",
-                                                        Settings.theme_path);
-                                            else snprintf(imgPath, sizeof(imgPath), "%sbackground.png",
-                                                    Settings.theme_path);
-
-                                            background = new GuiImageData(imgPath,
-                                                    Settings.widescreen ? wbackground_png : background_png);
-
+											if(pointer[0]) delete pointer[0];
+											if(pointer[1]) delete pointer[1];
+											if(pointer[2]) delete pointer[2];
+											if(pointer[3]) delete pointer[3];
+                                            pointer[0] = Resources::GetImageData("player1_point.png");
+                                            pointer[1] = Resources::GetImageData("player2_point.png");
+                                            pointer[2] = Resources::GetImageData("player3_point.png");
+                                            pointer[3] = Resources::GetImageData("player4_point.png");
+											if(background) delete background;
+                                            background = Resources::GetImageData(Settings.widescreen ? "wbackground.png" : "background.png");
+											if(bgImg) delete bgImg;
                                             bgImg = new GuiImage(background);
                                             mainWindow->Append(bgImg);
                                             mainWindow->Append(&w);
@@ -2292,18 +2270,12 @@ int MenuGameSettings(struct discHdr * header)
     //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
     GuiSound btnClick1(button_click_pcm, button_click_pcm_size, Settings.sfxvolume);
 
-    char imgPath[100];
+    GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
+    GuiImageData settingsbg(Resources::GetFile("settings_background.png"), Resources::GetFileSize("settings_background.png"));
 
-    snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", Settings.theme_path);
-    GuiImageData btnOutline(imgPath, button_dialogue_box_png);
-    snprintf(imgPath, sizeof(imgPath), "%ssettings_background.png", Settings.theme_path);
-    GuiImageData settingsbg(imgPath, settings_background_png);
+    GuiImageData MainButtonImgData(Resources::GetFile("settings_title.png"), Resources::GetFileSize("settings_title.png"));
 
-    snprintf(imgPath, sizeof(imgPath), "%ssettings_title.png", Settings.theme_path);
-    GuiImageData MainButtonImgData(imgPath, settings_title_png);
-
-    snprintf(imgPath, sizeof(imgPath), "%ssettings_title_over.png", Settings.theme_path);
-    GuiImageData MainButtonImgOverData(imgPath, settings_title_over_png);
+    GuiImageData MainButtonImgOverData(Resources::GetFile("settings_title_over.png"), Resources::GetFileSize("settings_title_over.png"));
 
     GuiTrigger trigA;
     trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
@@ -2429,8 +2401,7 @@ int MenuGameSettings(struct discHdr * header)
     MainButton4.SetTrigger(&trigA);
 
     customOptionList options2(MAXOPTIONS);
-    GuiCustomOptionBrowser optionBrowser2(396, 280, &options2, Settings.theme_path, "bg_options_settings.png",
-            bg_options_settings_png, 0, 150);
+    GuiCustomOptionBrowser optionBrowser2(396, 280, &options2, "bg_options_settings.png", 0, 150);
     optionBrowser2.SetPosition(0, 90);
     optionBrowser2.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 

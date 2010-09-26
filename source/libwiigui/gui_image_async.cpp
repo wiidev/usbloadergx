@@ -160,7 +160,7 @@ static void GuiImageAsyncThread_RemoveImage(GuiImageAsync* Image)
  */
 GuiImageData *StdImageLoaderCallback(void *arg)
 {
-    return new GuiImageData((char*) arg, NULL);
+    return new GuiImageData((char*) arg);
 }
 
 GuiImageAsync::GuiImageAsync(const char *Filename, GuiImageData * PreloadImg) :

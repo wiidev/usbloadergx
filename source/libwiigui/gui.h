@@ -40,7 +40,7 @@
 #include <math.h>
 #include <asndlib.h>
 #include <wiiuse/wpad.h>
-#include "pngu/pngu.h"
+#include "gui_imagedata.h"
 #include "FreeTypeGX.h"
 #include "video.h"
 #include "filelist.h"
@@ -558,41 +558,6 @@ class GuiWindow: public GuiElement
         std::vector<GuiElement*> _elements; //!< Contains all elements within the GuiWindow
 };
 
-//!Converts image data into GX-useable RGBA8. Currently designed for use only with PNG files
-class GuiImageData
-{
-    public:
-        //!Constructor
-        //!Converts the image data to RGBA8 - expects PNG format
-        //!\param i Image data
-        GuiImageData(const u8 * i);
-        GuiImageData(const char * imgPath, const u8 * buffer);
-        GuiImageData(const u8 * img, int imgSize);
-        GuiImageData(const char *path, const char *file, const u8 * buffer, bool force_widescreen = false,
-                const u8 * wbuffer = NULL);
-        //!Destructor
-        ~GuiImageData();
-        //!Gets a pointer to the image data
-        //!\return pointer to image data
-        u8 * GetImage();
-        //!Gets the image width
-        //!\return image width
-        int GetWidth();
-        //!Gets the image height
-        //!\return image height
-        int GetHeight();
-        //!LoadJpeg file
-        void LoadJpeg(const u8 *img, int imgSize);
-        //!RawTo4x4RGBA
-        void RawTo4x4RGBA(const unsigned char *src, void *dst, const unsigned int width, const unsigned int height);
-        //!Sets the image to grayscale
-        void SetGrayscale(void);
-    protected:
-        u8 * data; //!< Image data
-        int height; //!< Height of image
-        int width; //!< Width of image
-};
-
 //!Display, manage, and manipulate images in the GUI
 class GuiImage: public GuiElement
 {
@@ -1078,9 +1043,8 @@ typedef struct _optionlist
 class GuiOptionBrowser: public GuiElement
 {
     public:
-        GuiOptionBrowser(int w, int h, OptionList * l, const u8 *imagebg, int scrollbar);
-        GuiOptionBrowser(int w, int h, OptionList * l, const char * themePath, const u8 *imagebg, int scrollbar,
-                int start);
+        GuiOptionBrowser(int w, int h, OptionList * l, const char *imagebg, int scrollbar);
+        GuiOptionBrowser(int w, int h, OptionList * l, const char *imagebg, int scrollbar, int start);
         ~GuiOptionBrowser();
         void SetCol2Position(int x);
         int FindMenuItem(int c, int d);

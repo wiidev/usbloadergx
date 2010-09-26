@@ -117,7 +117,7 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
         memcpy(keys, thekeys, sizeof(thekeys));
     }
 
-    keyTextbox = new GuiImageData(keyboard_textbox_png);
+    keyTextbox = new GuiImageData(keyboard_textbox_png, keyboard_textbox_png_size);
     keyTextboxImg = new GuiImage(keyTextbox);
     keyTextboxImg->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     keyTextboxImg->SetPosition(0, 40);//(0,0);
@@ -129,12 +129,12 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
     kbText->SetPosition(0, 53);//(0, 13);
     this->Append(kbText);
 
-    key = new GuiImageData(keyboard_key_png);
-    keyOver = new GuiImageData(keyboard_key_over_png);
-    keyMedium = new GuiImageData(keyboard_mediumkey_over_png);
-    keyMediumOver = new GuiImageData(keyboard_mediumkey_over_png);
-    keyLarge = new GuiImageData(keyboard_largekey_over_png);
-    keyLargeOver = new GuiImageData(keyboard_largekey_over_png);
+    key = new GuiImageData(keyboard_key_png, keyboard_key_png_size);
+    keyOver = new GuiImageData(keyboard_key_over_png, keyboard_key_over_png_size);
+    keyMedium = new GuiImageData(keyboard_mediumkey_over_png, keyboard_mediumkey_over_png_size);
+    keyMediumOver = new GuiImageData(keyboard_mediumkey_over_png, keyboard_mediumkey_over_png_size);
+    keyLarge = new GuiImageData(keyboard_largekey_over_png, keyboard_largekey_over_png_size);
+    keyLargeOver = new GuiImageData(keyboard_largekey_over_png, keyboard_largekey_over_png_size);
 
     keySoundOver = new GuiSound(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
     keySoundClick = new GuiSound(button_click_pcm, button_click_pcm_size, Settings.sfxvolume);

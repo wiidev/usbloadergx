@@ -130,12 +130,8 @@ bool TitleSelector(char output[])
     // because destroy GuiSound must wait while sound playing is finished, we use a global sound
     if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
-    char imgPath[100];
-
-    snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", Settings.theme_path);
-    GuiImageData btnOutline(imgPath, button_dialogue_box_png);
-    snprintf(imgPath, sizeof(imgPath), "%sgamesettings_background.png", Settings.theme_path);
-    GuiImageData settingsbg(imgPath, settings_background_png);
+    GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
+    GuiImageData settingsbg(Resources::GetFile("settings_background.png"), Resources::GetFileSize("settings_background.png"));
 
     GuiImage settingsbackground(&settingsbg);
     GuiButton settingsbackgroundbtn(settingsbackground.GetWidth(), settingsbackground.GetHeight());
@@ -163,8 +159,7 @@ bool TitleSelector(char output[])
     u8 scrollbaron = 0;
     if (num_titles + 1 > 9) scrollbaron = 1;
 
-    GuiCustomOptionBrowser optionBrowser4(396, 280, &options4, Settings.theme_path, "bg_options_gamesettings.png",
-            bg_options_settings_png, scrollbaron, 200);
+    GuiCustomOptionBrowser optionBrowser4(396, 280, &options4, "bg_options_gamesettings.png", scrollbaron, 200);
     optionBrowser4.SetPosition(0, 90);
     optionBrowser4.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 
@@ -362,12 +357,8 @@ int TitleBrowser()
     if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
     //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
-    char imgPath[100];
-
-    snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", Settings.theme_path);
-    GuiImageData btnOutline(imgPath, button_dialogue_box_png);
-    snprintf(imgPath, sizeof(imgPath), "%sgamesettings_background.png", Settings.theme_path);
-    GuiImageData settingsbg(imgPath, settings_background_png);
+    GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
+    GuiImageData settingsbg(Resources::GetFile("settings_background.png"), Resources::GetFileSize("settings_background.png"));
 
     GuiTrigger trigA;
     trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
@@ -404,13 +395,11 @@ int TitleBrowser()
     u8 scrollbaron = 0;
     if (total + 1 > 9) scrollbaron = 1;
 
-    GuiCustomOptionBrowser optionBrowser3(396, 280, &options3, Settings.theme_path, "bg_options_gamesettings.png",
-            bg_options_settings_png, scrollbaron, 200);
+    GuiCustomOptionBrowser optionBrowser3(396, 280, &options3, "bg_options_gamesettings.png", scrollbaron, 200);
     optionBrowser3.SetPosition(0, 90);
     optionBrowser3.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 
-    snprintf(imgPath, sizeof(imgPath), "%sWifi_btn.png", Settings.theme_path);
-    GuiImageData wifiImgData(imgPath, Wifi_btn_png);
+    GuiImageData wifiImgData(Resources::GetFile("Wifi_btn.png"), Resources::GetFileSize("Wifi_btn.png"));
     GuiImage wifiImg(&wifiImgData);
     if (Settings.wsprompt == yes)
     {

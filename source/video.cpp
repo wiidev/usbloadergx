@@ -13,6 +13,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <wiiuse/wpad.h>
+#include <pngu/pngu.h>
 
 #include "input.h"
 #include "gecko.h"

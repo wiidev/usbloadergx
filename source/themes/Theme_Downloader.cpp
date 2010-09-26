@@ -153,11 +153,8 @@ static int Theme_Prompt(const char *title, const char *author, GuiImageData *thu
     if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
     //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
-    char imgPath[100];
-    snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", Settings.theme_path);
-    GuiImageData btnOutline(imgPath, button_dialogue_box_png);
-    snprintf(imgPath, sizeof(imgPath), "%stheme_dialogue_box.png", Settings.theme_path);
-    GuiImageData dialogBox(imgPath, theme_dialogue_box_png);
+    GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
+    GuiImageData dialogBox(Resources::GetFile("theme_dialogue_box.png"), Resources::GetFileSize("theme_dialogue_box.png"));
 
     GuiImage dialogBoxImg(&dialogBox);
 
@@ -285,38 +282,28 @@ int Theme_Downloader()
 
     char THEME_LINK[70];
     sprintf(THEME_LINK, "http://wii.spiffy360.com/themes.php?xml=1&category=1&adult=%d", Settings.godmode);
-    //gprintf("\nTHEME_LINK: %s", THEME_LINK);
-    //const char THEME_LINK_ADULT[70] = "http://wii.spiffy360.com/themes.php?xml=1&category=1&adult=1";
 
     /*** Sound Variables ***/
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
     // because destroy GuiSound must wait while sound playing is finished, we use a global sound
     if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
+	
     GuiSound btnClick1(button_click_pcm, button_click_pcm_size, Settings.sfxvolume);
 
     /*** Image Variables ***/
-    char imgPath[150];
-    snprintf(imgPath, sizeof(imgPath), "%sbutton_dialogue_box.png", Settings.theme_path);
-    GuiImageData btnOutline(imgPath, button_dialogue_box_png);
+    GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
 
-    snprintf(imgPath, sizeof(imgPath), "%stheme_box.png", Settings.theme_path);
-    GuiImageData theme_box_Data(imgPath, theme_box_png);
+    GuiImageData theme_box_Data(Resources::GetFile("theme_box.png"), Resources::GetFileSize("theme_box.png"));
 
-    snprintf(imgPath, sizeof(imgPath), "%ssettings_background.png", Settings.theme_path);
-    GuiImageData bgData(imgPath, settings_background_png);
+    GuiImageData bgData(Resources::GetFile("settings_background.png"), Resources::GetFileSize("settings_background.png"));
 
-    snprintf(imgPath, sizeof(imgPath), "%sstartgame_arrow_left.png", Settings.theme_path);
-    GuiImageData arrow_left(imgPath, startgame_arrow_left_png);
+    GuiImageData arrow_left(Resources::GetFile("startgame_arrow_left.png"), Resources::GetFileSize("startgame_arrow_left.png"));
 
-    snprintf(imgPath, sizeof(imgPath), "%sstartgame_arrow_right.png", Settings.theme_path);
-    GuiImageData arrow_right(imgPath, startgame_arrow_right_png);
+    GuiImageData arrow_right(Resources::GetFile("startgame_arrow_right.png"), Resources::GetFileSize("startgame_arrow_right.png"));
 
-    snprintf(imgPath, sizeof(imgPath), "%sWifi_btn.png", Settings.theme_path);
-    GuiImageData wifiImgData(imgPath, Wifi_btn_png);
+    GuiImageData wifiImgData(Resources::GetFile("Wifi_btn.png"), Resources::GetFileSize("Wifi_btn.png"));
 
-    snprintf(imgPath, sizeof(imgPath), "%spageindicator.png", Settings.theme_path);
-    GuiImageData PageindicatorImgData(imgPath, pageindicator_png);
+    GuiImageData PageindicatorImgData(Resources::GetFile("pageindicator.png"), Resources::GetFileSize("pageindicator.png"));
 
     GuiImage background(&bgData);
 
