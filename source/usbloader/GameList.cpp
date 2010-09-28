@@ -128,7 +128,7 @@ int GameList::FilterList(const wchar_t * gameFilter)
 
         if (Settings.parentalcontrol && !Settings.godmode) if (get_block(header) >= Settings.parentalcontrol) continue;
 
-        /* Other parental control method */
+        /* Rating based parental control method */
         if (Settings.parentalcontrol == 0 && Settings.godmode == 0 && Settings.Parental.enabled == 1)
         {
             // Check game rating in WiiTDB, since the default Wii parental control setting is enabled
@@ -139,6 +139,11 @@ int GameList::FilterList(const wchar_t * gameFilter)
                 continue;
             }
         }
+
+        /* Game lock based parental control method */
+        // If game lock is set to "1 (Unlocked Games Only)" and the game is locked, then skip
+        if(Settings.lockedgames == 1 && Settings.godmode == 0 && GameStatistics.GetLockStatus(header->id) == 1)
+            continue;
 
         wchar_t *gameName = charToWideChar(get_title(header));
 

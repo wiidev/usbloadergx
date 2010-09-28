@@ -80,6 +80,7 @@ void CSettings::SetDefault()
     tooltips = TooltipsOn;
     gamesound = 1;
     parentalcontrol = 0;
+    lockedgames = 0;
     cios = 249;
     xflip = no;
     quickboot = no;
@@ -149,7 +150,7 @@ bool CSettings::Load()
     snprintf(GameSetPath, sizeof(GameSetPath), ConfigPath);
     char * ptr = strrchr(GameSetPath, '/');
     if(ptr) ptr[1] = 0;
-	
+
     GameStatistics.Load(GameSetPath);
     GameSettings.Load(GameSetPath);
     Theme.Load(theme_path);
@@ -209,6 +210,7 @@ bool CSettings::Save()
     fprintf(file, "quickboot = %d\n ", quickboot);
     fprintf(file, "wsprompt = %d\n ", wsprompt);
     fprintf(file, "parentalcontrol = %d\n ", parentalcontrol);
+    fprintf(file, "lockedgames = %d\n ", lockedgames);
     fprintf(file, "covers_path = %s\n ", covers_path);
     fprintf(file, "covers2d_path = %s\n ", covers2d_path);
     fprintf(file, "theme_path = %s\n ", theme_path);
@@ -397,6 +399,11 @@ bool CSettings::SetSetting(char *name, char *value)
     else if (strcmp(name, "parentalcontrol") == 0)
     {
         if (sscanf(value, "%d", &i) == 1) parentalcontrol = i;
+        return true;
+    }
+    else if (strcmp(name, "lockedgames") == 0)
+    {
+        if (sscanf(value, "%d", &i) == 1) lockedgames = i;
         return true;
     }
     else if (strcmp(name, "screensaver") == 0)

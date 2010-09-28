@@ -55,6 +55,7 @@ static const char *opts_videomode[settings_language_max][2] = { { "", trNOOP( "D
 static const char *opts_language[settings_language_max] = { trNOOP( "Console Default" ), trNOOP( "Japanese" ),
         trNOOP( "English" ), trNOOP( "German" ), trNOOP( "French" ), trNOOP( "Spanish" ), trNOOP( "Italian" ),
         trNOOP( "Dutch" ), trNOOP( "SChinese" ), trNOOP( "TChinese" ), trNOOP( "Korean" ) };
+static const char *opts_lockedgames[2] = { trNOOP( "0 (Locked and Unlocked Games)" ), trNOOP( "1 (Unlocked Games Only)" ) };
 static const char *opts_parentalcontrol[5] = { trNOOP( "0 (Everyone)" ), trNOOP( "1 (Child 7+)" ),
         trNOOP( "2 (Teen 12+)" ), trNOOP( "3 (Mature 16+)" ), trNOOP( "4 (Adults Only 18+)" ) };
 static const char *opts_error002[3] = { trNOOP( "No" ), trNOOP( "Yes" ), trNOOP( "Anti" ) };
@@ -1313,6 +1314,16 @@ int MenuSettings()
                                         = 0;
                                 if (Settings.godmode == 1)
                                     options2.SetValue(Idx, "%s", tr( opts_parentalcontrol[Settings.parentalcontrol] ));
+                                else options2.SetValue(Idx, "********");
+                            }
+
+                           if (ret == ++Idx || firstRun)
+                            {
+                                if (firstRun) options2.SetName(Idx, "%s", tr( "GamesLevel" ));
+                                if (ret == Idx && Settings.godmode == 1 && ++Settings.lockedgames >= 2) Settings.lockedgames
+                                        = 0;
+                                if (Settings.godmode == 1)
+                                    options2.SetValue(Idx, "%s", tr( opts_lockedgames[Settings.lockedgames] ));
                                 else options2.SetValue(Idx, "********");
                             }
 

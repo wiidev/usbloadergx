@@ -82,6 +82,7 @@ class CSettings
         short tooltips;
         char unlockCode[20];
         short parentalcontrol;
+        short lockedgames;
         short cios;
         short quickboot;
         short wsprompt;

@@ -11,6 +11,7 @@ typedef struct _Stats
 {
     char id[7];
     u8 FavoriteRank;
+    u8 LockStatus;
     u8 PlayCount;
 } GameStatus;
 
@@ -49,6 +50,14 @@ class CGameStatistics
         int GetFavoriteRank(const char * id);
         int GetFavoriteRank(const u8 * id) { return GetFavoriteRank((const char *) id); };
         int GetFavoriteRank(const struct discHdr * game) { if(!game) return 0; else return GetFavoriteRank(game->id); };
+        //!Overloads for set LockStatus
+        void SetLockStatus(const char * id, int lock);
+        void SetLockStatus(const u8 * id, int lock) { SetLockStatus((const char *) id, lock); };
+        void SetLockStatus(const struct discHdr * game, int lock) { if(!game) return; SetLockStatus(game->id, lock); };
+        //!Overloads for get LockStatus
+        int GetLockStatus(const char * id);
+        int GetLockStatus(const u8 * id) { return GetLockStatus((const char *) id); };
+        int GetLockStatus(const struct discHdr * game) { if(!game) return 0; else return GetLockStatus(game->id); };
         //!Get GameStatus
         GameStatus * GetGameStatus(const char * id);
         //!Overload
