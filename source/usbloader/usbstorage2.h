@@ -9,19 +9,15 @@ extern "C"
 #endif
 
     /* Prototypes */
-    s32 USBStorage2_GetCapacity(u32 *);
     s32 USBStorage2_Init(void);
     void USBStorage2_Deinit(void);
     s32 USBStorage2_Umount(void);
+    s32 USBStorage2_GetCapacity(u32 *);
 
     s32 USBStorage2_ReadSectors(u32, u32, void *);
     s32 USBStorage2_WriteSectors(u32, u32, const void *);
 
     s32 USBStorage2_Watchdog(u32 on_off);
-
-    s32 USBStorage2_TestMode(u32 on_off);
-
-    s32 USBStorage2_EHC_Off(void);
 
     s32 USBStorage_WBFS_Read(u32 woffset, u32 len, void *buffer);
     s32 USBStorage_WBFS_SetDevice(int dev);

@@ -38,34 +38,16 @@ class Text: public GuiText
         //!Set to the char pos in text
         void SetTextPos(int pos);
         //!Refresh the rows to draw
-        int GetCurrPos()
-        {
-            return curLineStart;
-        }
-        ;
+        int GetCurrPos() { return curLineStart; };
         //!Get  the count of loaded lines
-        int GetLinesCount()
-        {
-            return textDyn.size();
-        }
-        ;
+        int GetLinesCount() { return textDyn.size(); };
         //!Get the total count of lines
-        int GetTotalLinesCount()
-        {
-            return TextLines.size();
-        }
-        ;
+        int GetTotalLinesCount() { return TextLines.size(); };
         //!Get the original full Text
         const wchar_t * GetText();
         //!Get the original full Text as wString
-        wString * GetwString()
-        {
-            return wText;
-        }
-        ;
+        wString * GetwString() { return wText; };
         //!Get the original Text as a UTF-8 text
-        //!memory is allocated in this
-        //!which needs to be deleted later
         std::string GetUTF8String() const;
         //!Get a Textline
         const wchar_t * GetTextLine(int ind);
