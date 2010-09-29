@@ -181,17 +181,10 @@ s32 USBStorage2_ReadSectors(u32 sector, u32 numSectors, void *buffer)
     if (!mem2_ptr)
         mem2_ptr = (u8 *) MEM2_alloc(sector_size * MAX_BUFFER_SECTORS);
 
-    /* MEM1 buffer */
+    // Do not read more than MAX_BUFFER_SECTORS sectors at once and create a mem overflow!
     if (!isMEM2Buffer(buffer))
     {
-        /* Allocate memory */
         buf = mem2_ptr;
-        if (!buf) return IPC_ENOMEM;
-    }
-
-    // Do not read more than 256 sectors at once and create a mem overflow!
-    if(buf != buffer)
-    {
         s32 read_size;
         s32 sectors_done = 0;
 
@@ -236,7 +229,7 @@ s32 USBStorage2_WriteSectors(u32 sector, u32 numSectors, const void *buffer)
     /* MEM1 buffer */
     if (!isMEM2Buffer(buffer))
     {
-        // Do not read more than 256 sectors at once and create a mem overflow!
+        // Do not read more than MAX_BUFFER_SECTORS sectors at once and create a mem overflow!
         buf = mem2_ptr;
         s32 write_size;
         s32 sectors_done = 0;

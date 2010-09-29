@@ -60,7 +60,27 @@ GuiImageData::GuiImageData(const u8 * img, int imgSize)
 	height = 0;
 	format = GX_TF_RGBA8;
 
+    ImageData * Image = ResourceManager::GetImageData(img);
+    if(Image != NULL && Image->data != NULL)
+    {
+        data = Image->data;
+        width = Image->width;
+        height = Image->height;
+        format = Image->format;
+        return;
+    }
+
     LoadImage(img, imgSize);
+
+    if(data)
+    {
+        ImageData NewImage;
+        NewImage.data = data;
+        NewImage.width = width;
+        NewImage.height = height;
+        NewImage.format = format;
+        ResourceManager::AddImageData(img, NewImage);
+    }
 }
 
 /**
@@ -76,16 +96,6 @@ void GuiImageData::LoadImage(const u8 * img, int imgSize)
 {
 	if(!img)
         return;
-
-    ImageData * Image = ResourceManager::GetImageData(img);
-    if(Image != NULL && Image->data != NULL)
-    {
-        data = Image->data;
-        width = Image->width;
-        height = Image->height;
-        format = Image->format;
-        return;
-    }
 
     else if (imgSize < 8)
     {
@@ -116,13 +126,6 @@ void GuiImageData::LoadImage(const u8 * img, int imgSize)
         // IMAGE_TPL
         LoadTPL(img, imgSize);
     }
-
-    ImageData NewImage;
-    NewImage.data = data;
-    NewImage.width = width;
-    NewImage.height = height;
-    NewImage.format = format;
-    ResourceManager::AddImageData(img, NewImage);
 }
 
 void GuiImageData::LoadPNG(const u8 *img, int imgSize)
