@@ -4,6 +4,7 @@
 #include "dolpatcher.h"
 #include "wip.h"
 #include "gecko.h"
+#include "../settings/cfg.h"
 
 /** Anti 002 fix for IOS 249 rev > 12 thanks to WiiPower **/
 bool Anti_002_fix(u8 * Address, int Size)
@@ -237,7 +238,7 @@ static bool Search_and_patch_Video_Modes(u8 * Address, u32 Size, GXRModeObj* Tab
 void VideoModePatcher(u8 * dst, int len, u8 videoSelected)
 {
     GXRModeObj** table = NULL;
-    if (videoSelected == 5) // patch
+    if (videoSelected == patch) // patch enum'd in cfg.h
 
     {
         switch (CONF_GetVideo())

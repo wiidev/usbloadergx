@@ -469,127 +469,9 @@ int MainMenu(int menu)
             {
                 mload_close();
             }
-        }
+	}
 
-        u8 errorfixer002 = fix002;
-
-        switch (languageChoice)
-        {
-            case ConsoleLangDefault:
-                configbytes[0] = 0xCD;
-                break;
-
-            case jap:
-                configbytes[0] = 0x00;
-                break;
-
-            case eng:
-                configbytes[0] = 0x01;
-                break;
-
-            case ger:
-                configbytes[0] = 0x02;
-                break;
-
-            case fren:
-                configbytes[0] = 0x03;
-                break;
-
-            case esp:
-                configbytes[0] = 0x04;
-                break;
-
-            case it:
-                configbytes[0] = 0x05;
-                break;
-
-            case dut:
-                configbytes[0] = 0x06;
-                break;
-
-            case schin:
-                configbytes[0] = 0x07;
-                break;
-
-            case tchin:
-                configbytes[0] = 0x08;
-                break;
-
-            case kor:
-                configbytes[0] = 0x09;
-                break;
-                //wenn nicht genau klar ist welches
-            default:
-                configbytes[0] = 0xCD;
-                break;
-        }
-
-        u8 videoselected = 0;
-
-        switch (videoChoice)
-        {
-            case discdefault:
-                videoselected = 0;
-                break;
-
-            case pal50:
-                videoselected = 1;
-                break;
-
-            case pal60:
-                videoselected = 2;
-                break;
-
-            case ntsc:
-                videoselected = 3;
-                break;
-
-            case systemdefault:
-                videoselected = 4;
-                break;
-
-            case patch:
-                videoselected = 5;
-                break;
-
-            default:
-                videoselected = 0;
-                break;
-        }
-
-        u32 cheat = 0;
-        switch (ocarinaChoice)
-        {
-            case on:
-                cheat = 1;
-                break;
-
-            case off:
-                cheat = 0;
-                break;
-
-            default:
-                cheat = 1;
-                break;
-        }
-
-        u8 vipatch = 0;
-        switch (viChoice)
-        {
-            case on:
-                vipatch = 1;
-                break;
-
-            case off:
-                vipatch = 0;
-                break;
-
-            default:
-                vipatch = 0;
-                break;
-        }
-
-        u32 channel = 0;
+	u32 channel = 0;
         if (returnToLoaderGV)
         {
             int idx = NandTitles.FindU32(Settings.returnTo);
@@ -602,7 +484,7 @@ int MainMenu(int menu)
 
         gprintf("\tDisc_wiiBoot\n");
 
-        ret = Disc_WiiBoot(Settings.dolpath, videoselected, cheat, vipatch, countrystrings, errorfixer002,
+	ret = Disc_WiiBoot(Settings.dolpath, videoChoice, languageChoice, ocarinaChoice, viChoice, countrystrings,
                 alternatedol, alternatedoloffset, channel, fix002);
         if (ret < 0)
         {

@@ -15,6 +15,7 @@
 #include "alternatedol.h"
 #include "memory.h"
 #include "wbfs.h"
+#include "../settings/cfg.h"
 #include "../gecko.h"
 #include "../fatmounter.h"
 
@@ -91,62 +92,59 @@ void __Disc_SetVMode(u8 videoselected)
 
     switch (videoselected)
     {
-        case 0:
-
-            /* Select video mode */
-            switch (diskid[3])
-            {
-                /* PAL */
-                case 'P':
-                case 'D':
-                case 'F':
-                case 'I':
-                case 'S':
-                case 'H':
-                case 'X':
-                case 'Y':
-                case 'Z':
-                    if (tvmode != CONF_VIDEO_PAL)
-                    {
-                        vmode_reg = 5;
-                        vmode = (progressive) ? &TVNtsc480Prog : &TVEurgb60Hz480IntDf;
-                    }
-
-                    break;
-
-                    /* NTSC or unknown */
-                case 'E':
-                case 'J':
-                case 'K':
-                case 'W':
-                    if (tvmode != CONF_VIDEO_NTSC)
-                    {
-                        vmode_reg = 0;
-                        vmode = (progressive) ? &TVNtsc480Prog : &TVNtsc480IntDf;
-                    }
-
-                    break;
-            }
-            break;
-
-        case 1:
+	case pal50:
             vmode = &TVPal528IntDf;
             vmode_reg = (vmode->viTVMode) >> 2;
             break;
-        case 2:
-            progressive = (CONF_GetProgressiveScan() > 0) && VIDEO_HaveComponentCable();
+	case pal60:
             vmode = (progressive) ? &TVNtsc480Prog : &TVEurgb60Hz480IntDf;
             vmode_reg = (vmode->viTVMode) >> 2;
             break;
-        case 3:
-            progressive = (CONF_GetProgressiveScan() > 0) && VIDEO_HaveComponentCable();
+	case ntsc:
             vmode = (progressive) ? &TVNtsc480Prog : &TVNtsc480IntDf;
             vmode_reg = (vmode->viTVMode) >> 2;
             break;
-        case 4:
+	case systemdefault:
             //       vmode     = VIDEO_GetPreferredMode(NULL);
             break;
-    }
+	case discdefault:
+	default:
+	    /* Select video mode */
+	    switch (diskid[3])
+	    {
+		/* PAL */
+		case 'P':
+		case 'D':
+		case 'F':
+		case 'I':
+		case 'S':
+		case 'H':
+		case 'X':
+		case 'Y':
+		case 'Z':
+		    if (tvmode != CONF_VIDEO_PAL)
+		    {
+			vmode_reg = 5;
+			vmode = (progressive) ? &TVNtsc480Prog : &TVEurgb60Hz480IntDf;
+		    }
+
+		    break;
+
+		    /* NTSC or unknown */
+		case 'E':
+		case 'J':
+		case 'K':
+		case 'W':
+		    if (tvmode != CONF_VIDEO_NTSC)
+		    {
+			vmode_reg = 0;
+			vmode = (progressive) ? &TVNtsc480Prog : &TVNtsc480IntDf;
+		    }
+
+		    break;
+	    }
+	    break;
+	}
 
     /* Set video mode register */
     *Video_Mode = vmode_reg;
@@ -286,8 +284,8 @@ s32 Disc_IsWii(void)
     return 0;
 }
 
-s32 Disc_BootPartition(u64 offset, char * dolpath, u8 videoselected, u8 cheat, u8 vipatch, u8 patchcountrystring,
-        u8 error002fix, u8 alternatedol, u32 alternatedoloffset, u32 returnTo, u8 fix002)
+s32 Disc_BootPartition(u64 offset, char * dolpath, u8 videoselected, u8 languageChoice, u8 cheat, u8 vipatch, u8 patchcountrystring,
+	u8 alternatedol, u32 alternatedoloffset, u32 returnTo, u8 fix002)
 {
     gprintf("booting partition IOS %u v%u\n", IOS_GetVersion(), IOS_GetRevision());
     entry_point p_entry;
@@ -311,7 +309,7 @@ s32 Disc_BootPartition(u64 offset, char * dolpath, u8 videoselected, u8 cheat, u
     PoPPatch();
 
     /* Run apploader */
-    ret = Apploader_Run(&p_entry, dolpath, cheat, videoselected, vipatch, patchcountrystring, error002fix,
+    ret = Apploader_Run(&p_entry, dolpath, cheat, videoselected, languageChoice, vipatch, patchcountrystring,
             alternatedol, alternatedoloffset, returnTo, fix002);
     if (ret < 0) return ret;
 
@@ -386,7 +384,7 @@ s32 Disc_BootPartition(u64 offset, char * dolpath, u8 videoselected, u8 cheat, u
     return 0;
 }
 
-s32 Disc_WiiBoot(char * dolpath, u8 videoselected, u8 cheat, u8 vipatch, u8 patchcountrystring, u8 error002fix,
+s32 Disc_WiiBoot(char * dolpath, u8 videoselected, u8 languageChoice, u8 cheat, u8 vipatch, u8 patchcountrystring,
         u8 alternatedol, u32 alternatedoloffset, u32 returnTo, u8 fix002)
 {
     u64 offset;
@@ -397,7 +395,7 @@ s32 Disc_WiiBoot(char * dolpath, u8 videoselected, u8 cheat, u8 vipatch, u8 patc
     if (ret < 0) return ret;
 
     /* Boot partition */
-    return Disc_BootPartition(offset, dolpath, videoselected, cheat, vipatch, patchcountrystring, error002fix,
+    return Disc_BootPartition(offset, dolpath, videoselected, languageChoice, cheat, vipatch, patchcountrystring,
             alternatedol, alternatedoloffset, returnTo, fix002);
 }
 

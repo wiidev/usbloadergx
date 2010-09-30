@@ -319,8 +319,48 @@ bool dogamehooks(void *addr, u32 len)
  }
  }
  */
-void langpatcher(void *addr, u32 len)
+void langpatcher(void *addr, u32 len, u8 languageChoice)
 {
+    u8 ocarinaLangPatchByte = 1;
+    switch (languageChoice)
+    {
+	case jap:
+	    ocarinaLangPatchByte = 0x00;
+	    break;
+	case eng:
+	    ocarinaLangPatchByte = 0x01;
+	    break;
+	case ger:
+	    ocarinaLangPatchByte = 0x02;
+	    break;
+	case fren:
+	    ocarinaLangPatchByte = 0x03;
+	    break;
+	case esp:
+	    ocarinaLangPatchByte = 0x04;
+	    break;
+	case it:
+	    ocarinaLangPatchByte = 0x05;
+	    break;
+	case dut:
+	    ocarinaLangPatchByte = 0x06;
+	    break;
+	case schin:
+	    ocarinaLangPatchByte = 0x07;
+	    break;
+	case tchin:
+	    ocarinaLangPatchByte = 0x08;
+	    break;
+	case kor:
+	    ocarinaLangPatchByte = 0x09;
+	    break;
+	case ConsoleLangDefault:
+	default:
+	    return;
+	    break;
+    }
+
+
 
     void *addr_start = addr;
     void *addr_end = addr + len;
@@ -330,10 +370,7 @@ void langpatcher(void *addr, u32 len)
 
         if (memcmp(addr_start, langpatch, sizeof(langpatch)) == 0)
         {
-            if (configbytes[0] != 0xCD)
-            {
-                langvipatch((u32) addr_start, len, configbytes[0]);
-            }
+	    langvipatch((u32) addr_start, len, ocarinaLangPatchByte);
         }
         addr_start += 4;
     }

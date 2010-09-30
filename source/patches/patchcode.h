@@ -29,12 +29,12 @@ extern "C"
     // Globals
     u32 hooktype;
     int patched;
-    u8 configbytes[2];
-    u32 regionfree;
+    //u8 configbytes[2];
+    //u32 regionfree;
 
     // Function prototypes
     bool dogamehooks(void *addr, u32 len);
-    void langpatcher(void *addr, u32 len);
+    void langpatcher(void *addr, u32 len, u8 languageChoice);
     void vidolpatcher(void *addr, u32 len);
     void patchdebug(void *addr, u32 len);
 

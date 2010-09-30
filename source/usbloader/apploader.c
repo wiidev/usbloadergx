@@ -33,7 +33,7 @@ static u8 *appldr = (u8 *) 0x81200000;
 /* Variables */
 static u32 buffer[0x20] ATTRIBUTE_ALIGN( 32 );
 
-void gamepatches( u8 * dst, int len, u8 videoSelected, u8 patchcountrystring, u8 vipatch, u8 cheat, u32 returnTo, u8 fix002 )
+void gamepatches( u8 * dst, int len, u8 videoSelected, u8 languageChoice, u8 patchcountrystring, u8 vipatch, u8 cheat, u32 returnTo, u8 fix002 )
 {
     VideoModePatcher( dst, len, videoSelected );
 
@@ -44,7 +44,7 @@ void gamepatches( u8 * dst, int len, u8 videoSelected, u8 patchcountrystring, u8
 	vidolpatcher( dst, len );
 
     /*LANGUAGE PATCH - FISHEARS*/
-    langpatcher( dst, len );
+    langpatcher( dst, len, languageChoice );
 
     /*Thanks to WiiPower*/
     if ( patchcountrystring == 1 ) PatchCountryStrings( dst, len );
@@ -59,8 +59,8 @@ void gamepatches( u8 * dst, int len, u8 videoSelected, u8 patchcountrystring, u8
     PatchReturnTo( dst, len, returnTo );
 }
 
-s32 Apploader_Run(entry_point *entry, char * dolpath, u8 cheat, u8 videoSelected, u8 vipatch, u8 patchcountrystring,
-        u8 error002fix, u8 alternatedol, u32 alternatedoloffset, u32 returnTo, u8 fix002)
+s32 Apploader_Run(entry_point *entry, char * dolpath, u8 cheat, u8 videoSelected, u8 languageChoice, u8 vipatch, u8 patchcountrystring,
+	u8 alternatedol, u32 alternatedoloffset, u32 returnTo, u8 fix002)
 {
     app_entry appldr_entry;
     app_init appldr_init;
@@ -70,10 +70,6 @@ s32 Apploader_Run(entry_point *entry, char * dolpath, u8 cheat, u8 videoSelected
     u32 appldr_len;
     s32 ret;
     gprintf("\nApploader_Run() started\n");
-
-    //u32 geckoattached = usb_isgeckoalive(EXI_CHANNEL_1);
-    //if (geckoattached)usb_flush(EXI_CHANNEL_1);
-    geckoinit = InitGecko();
 
     /* Read apploader header */
     ret = WDVD_Read(buffer, 0x20, APPLDR_OFFSET);
@@ -95,7 +91,7 @@ s32 Apploader_Run(entry_point *entry, char * dolpath, u8 cheat, u8 videoSelected
     /* Initialize apploader */
     appldr_init(gprintf);
 
-    if (error002fix != 0)
+    if (fix002 != 0)
     {
         /* ERROR 002 fix (thanks to WiiPower for sharing this)*/
         *(u32 *) 0x80003188 = *(u32 *) 0x80003140;
@@ -114,7 +110,7 @@ s32 Apploader_Run(entry_point *entry, char * dolpath, u8 cheat, u8 videoSelected
         WDVD_Read(dst, len, (u64) (offset << 2));
 
 	if( !alternatedol )
-	    gamepatches(dst, len, videoSelected, patchcountrystring, vipatch, cheat, returnTo, fix002 );
+	    gamepatches(dst, len, videoSelected, languageChoice, patchcountrystring, vipatch, cheat, returnTo, fix002 );
 
 	DCFlushRange(dst, len);
     }
@@ -128,7 +124,7 @@ s32 Apploader_Run(entry_point *entry, char * dolpath, u8 cheat, u8 videoSelected
         void *dolbuffer = NULL;
         int dollen = 0;
 
-	bool dolloaded = Load_Dol(&dolbuffer, &dollen, dolpath, videoSelected, patchcountrystring, vipatch, cheat, returnTo);
+	bool dolloaded = Load_Dol(&dolbuffer, &dollen, dolpath, videoSelected, languageChoice, patchcountrystring, vipatch, cheat, returnTo);
         if (dolloaded)
         {
             *entry = (entry_point) load_dol_image(dolbuffer);
@@ -141,7 +137,7 @@ s32 Apploader_Run(entry_point *entry, char * dolpath, u8 cheat, u8 videoSelected
         wip_reset_counter();
         FST_ENTRY *fst = (FST_ENTRY *) *(u32 *) 0x80000038;
 
-        *entry = (entry_point) Load_Dol_from_disc(fst[alternatedoloffset].fileoffset, videoSelected,
+	*entry = (entry_point) Load_Dol_from_disc(fst[alternatedoloffset].fileoffset, videoSelected, languageChoice,
 		patchcountrystring, vipatch, cheat, returnTo);
 
         if (*entry == 0) SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
