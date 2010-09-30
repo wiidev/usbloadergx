@@ -164,7 +164,7 @@ void __Disc_SetVMode(u8 videoselected)
 
         if (vmode->viTVMode & VI_NON_INTERLACE) VIDEO_WaitVSync();
     }
-    gprintf("\nVideo mode - %s", ((progressive) ? "progressive" : "interlaced"));
+    gprintf("Video mode - %s\n", ((progressive) ? "progressive" : "interlaced"));
 
 }
 

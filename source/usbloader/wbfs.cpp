@@ -15,7 +15,7 @@
 #include "gecko.h"
 
 Wbfs *current = NULL;
-#define DEBUG_WBFS
+//#define DEBUG_WBFS
 
 /* WBFS device */
 s32 wbfsDev = WBFS_MIN_DEVICE;

@@ -215,7 +215,7 @@ void CGameStatistics::ParseLine(char *line)
         this->TrimLine(name, LinePtr, sizeof(name));
         this->TrimLine(value, eq + 1, sizeof(value));
 
-        gprintf("\nID: %s, Name = %s, Value = %s\n", GameID, name, value);
+	//gprintf("ID: %s, Name = %s, Value = %s\n", GameID, name, value);
         SetSetting(NewGame, name, value);
 
         LinePtr = strchr(LinePtr, ';');

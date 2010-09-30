@@ -16,7 +16,7 @@ extern char headlessID[8];
  ***************************************************************************/
 int MenuCheck()
 {
-    gprintf("\nMenuCheck()");
+    gprintf("MenuCheck()\n");
     int menu = MENU_NONE;
     int i = 0;
     int choice;

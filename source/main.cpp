@@ -149,7 +149,7 @@ int main(int argc, char *argv[])
     SetupDefaultFont(fontPath);
     free(fontPath);
 
-    gprintf("\n\tEnd of Main()");
+    //gprintf("\tEnd of Main()\n");
     InitGUIThreads();
     MainMenu( MENU_CHECK);
     return 0;

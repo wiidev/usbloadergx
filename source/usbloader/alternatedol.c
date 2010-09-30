@@ -106,7 +106,7 @@ typedef struct _dolheader
 
 static dolheader *dolfile;
 
-u32 load_dol_image(void *dolstart, u8 videoSelected, u8 patchcountrystring, u8 vipatch, u8 cheat, u8 fix002)
+u32 load_dol_image(void *dolstart, u8 videoSelected, u8 patchcountrystring, u8 vipatch, u8 cheat, u32 returnTo, u8 fix002)
 {
 
     u32 i;
@@ -121,7 +121,7 @@ u32 load_dol_image(void *dolstart, u8 videoSelected, u8 patchcountrystring, u8 v
             ICInvalidateRange((void *) dolfile->text_start[i], dolfile->text_size[i]);
             memmove((void *) dolfile->text_start[i], dolstart + dolfile->text_pos[i], dolfile->text_size[i]);
             gamepatches((void *) dolfile->text_start[i], dolfile->text_size[i], videoSelected, patchcountrystring,
-                    vipatch, cheat, fix002);
+		    vipatch, cheat, returnTo, fix002);
             Remove_001_Protection((void *) dolfile->data_start[i], dolfile->data_size[i]);
         }
 
@@ -131,7 +131,7 @@ u32 load_dol_image(void *dolstart, u8 videoSelected, u8 patchcountrystring, u8 v
 
             memmove((void *) dolfile->data_start[i], dolstart + dolfile->data_pos[i], dolfile->data_size[i]);
             gamepatches((void *) dolfile->data_start[i], dolfile->data_size[i], videoSelected, patchcountrystring,
-                    vipatch, cheat, fix002);
+		    vipatch, cheat, returnTo, fix002);
             Remove_001_Protection((void *) dolfile->data_start[i], dolfile->data_size[i]);
             DCFlushRangeNoSync((void *) dolfile->data_start[i], dolfile->data_size[i]);
         }
@@ -224,7 +224,7 @@ void __dvd_readidcb(s32 result)
 {
     dvddone = result;
 }
-u32 Load_Dol_from_disc(u32 doloffset, u8 videoSelected, u8 patchcountrystring, u8 vipatch, u8 cheat, u8 fix002)
+u32 Load_Dol_from_disc(u32 doloffset, u8 videoSelected, u8 patchcountrystring, u8 vipatch, u8 cheat, u32 returnTo, u8 fix002)
 {
     int ret;
     void *dol_header;
@@ -265,7 +265,7 @@ u32 Load_Dol_from_disc(u32 doloffset, u8 videoSelected, u8 patchcountrystring, u
         {
             ret = WDVD_Read(offset, len, (doloffset << 2) + pos);
 
-            gamepatches(offset, len, videoSelected, patchcountrystring, vipatch, cheat, fix002);
+	    gamepatches(offset, len, videoSelected, patchcountrystring, vipatch, cheat, returnTo, fix002);
 
             Remove_001_Protection(offset, len);
 
