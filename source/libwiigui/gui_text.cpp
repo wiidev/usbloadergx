@@ -398,7 +398,7 @@ void GuiText::ScrollText()
 
         textDyn[pos] = new wchar_t[maxWidth];
 
-        while (text[i] && currentWidth < maxWidth)
+        while (text[i] && currentWidth < maxWidth-40)
         {
             textDyn[pos][i] = text[i];
 
@@ -441,7 +441,7 @@ void GuiText::ScrollText()
 
     int i = 0, currentWidth = 0;
 
-    while (currentWidth < maxWidth)
+    while (currentWidth < maxWidth-40)
     {
         if (ch > strlen - 1)
         {

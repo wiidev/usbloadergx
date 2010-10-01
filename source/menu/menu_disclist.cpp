@@ -519,8 +519,7 @@ int MenuDiscList()
         gameCarousel->SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
     }
 
-    GuiText clockTimeBack("88:88", 40, ( GXColor )
-    {   Theme.clock.r, Theme.clock.g, Theme.clock.b, Theme.clock.a / 6});
+    GuiText clockTimeBack("88:88", 40, (GXColor) {Theme.clock.r, Theme.clock.g, Theme.clock.b, Theme.clock.a / 6});
     clockTimeBack.SetAlignment(Theme.clock_align, ALIGN_TOP);
     clockTimeBack.SetPosition(Theme.clock_x, Theme.clock_y);
     clockTimeBack.SetFont(clock_ttf, clock_ttf_size);

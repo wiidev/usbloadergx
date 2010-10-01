@@ -181,8 +181,8 @@ void CTheme::SetDefault()
     install_x = 16;//-280
     install_y = 355;
     clock = (GXColor) {138, 138, 138, 240};
-    clock_align = ALIGN_CENTRE;
-    clock_x = 0;
+    clock_align = ALIGN_LEFT;
+    clock_x = 275;
     clock_y = 335;//330;
     info = ( GXColor ) {55, 190, 237, 255};
     show_hddinfo = 1;

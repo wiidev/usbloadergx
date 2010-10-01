@@ -1037,14 +1037,6 @@ int MenuSettings()
                                             Settings.cios = 222;
                                             break;
                                     }
-                                    if ((Settings.cios == 222 && NandTitles.VersionOf(0x1000000deULL) != 4)
-                                            || (Settings.cios == 2 && NandTitles.VersionOf(0x1000000dfULL) != 4))
-                                    {
-                                        WindowPrompt(
-                                                tr( "Hermes CIOS" ),
-                                                tr( "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!" ),
-                                                tr( "OK" ));
-                                    }
                                 }
                                 if (Settings.godmode == 1)
                                     options2.SetValue(Idx, "IOS %i", Settings.cios);
