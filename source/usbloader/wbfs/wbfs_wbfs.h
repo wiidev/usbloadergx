@@ -2,7 +2,7 @@
 #define _WBFS_WBFS_H
 
 #include "wbfs_base.h"
-#include "libwbfs/libwbfs.h"
+#include "libs/libwbfs/libwbfs.h"
 
 class Wbfs_Wbfs: public Wbfs
 {

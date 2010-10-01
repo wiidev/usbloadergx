@@ -1,7 +1,7 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "libfat/fat.h"
+#include <fat.h>
 #include "libwiigui/gui.h"
 #include "libwiigui/gui_customoptionbrowser.h"
 #include "prompts/PromptWindows.h"

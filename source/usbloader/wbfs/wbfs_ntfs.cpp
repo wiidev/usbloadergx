@@ -1,6 +1,6 @@
 #include "wbfs_ntfs.h"
 #include "fatmounter.h"
-#include "libntfs/ntfs.h"
+#include "libs/libntfs/ntfs.h"
 
 s32 Wbfs_Ntfs::Open()
 {

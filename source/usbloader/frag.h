@@ -9,7 +9,7 @@ extern "C"
 {
 #endif
 
-#include "libwbfs/libwbfs.h"
+#include "libs/libwbfs/libwbfs.h"
 
     typedef struct
     {

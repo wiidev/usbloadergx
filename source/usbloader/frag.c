@@ -5,8 +5,8 @@
 #include <sys/stat.h>
 
 #include "fatmounter.h"
-#include "libntfs/ntfs.h"
-#include "libwbfs/libwbfs.h"
+#include "libs/libntfs/ntfs.h"
+#include "libs/libwbfs/libwbfs.h"
 #include "wbfs.h"
 #include "usbstorage2.h"
 #include "frag.h"

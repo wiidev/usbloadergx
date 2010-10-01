@@ -20,7 +20,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include "libfat/fat.h"
+#include <fat.h>
 
 #include "MD5.h"
 #include "openingbnr.h"

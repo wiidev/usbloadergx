@@ -216,7 +216,7 @@ bool shadow_mload()
     int ios = IOS_GetVersion();
 
     if(ios != 222 || ios != 223 || ios != 224)
-        return;
+        return false;
 
     int v51 = (5 << 4) & 1;
     if (IOS_GetRevision() >= 5 && mload_get_version() >= v51)

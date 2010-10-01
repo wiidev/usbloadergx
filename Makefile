@@ -22,7 +22,9 @@ SOURCES		:=	source \
 				source/fonts \
 				source/sounds \
 				source/system \
-				source/libwbfs \
+				source/libs/libwbfs \
+				source/libs/libfat \
+				source/libs/libntfs \
 				source/language \
 				source/mload \
 				source/mload/modules \
@@ -38,9 +40,7 @@ SOURCES		:=	source \
 				source/homebrewboot \
 				source/themes \
 				source/menu \
-				source/libfat \
 				source/memory \
-				source/libntfs \
 				source/FileOperations \
 				source/ImageOperations \
 				source/utils \

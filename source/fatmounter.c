@@ -5,12 +5,13 @@
 #include <ogc/usbstorage.h>
 #include <sdcard/wiisd_io.h>
 #include <locale.h>
+#include <fat.h>
+#include <ntfs.h>
 
 #include "usbloader/usbstorage2.h"
 #include "usbloader/sdhc.h"
 #include "usbloader/wbfs.h"
-#include "libntfs/ntfs.h"
-#include "libfat/fat.h"
+#include "fatmounter.h"
 #include "gecko.h"
 
 //these are the only stable and speed is good
@@ -46,26 +47,28 @@ sec_t fs_ntfs_sec = 0;
 int USBDevice_Init()
 {
     //closing all open Files write back the cache and then shutdown em!
-    fatUnmount("USB:/");
+    USBDevice_deInit();
     //right now mounts first FAT-partition
 
     if (!fatMount("USB", &__io_usbstorage2, 0, CACHE, SECTORS))
-    {
-        // libogc usbstorage
-        if(!fatMount("USB", &__io_usbstorage, 0, CACHE, SECTORS))
-            return -1;
-    }
+        return -1;
+
+    if(!fatMount("USB", &__io_usbstorage, 0, CACHE, SECTORS))
+        return -1;
+
 
     fat_usb_mount = 1;
     fat_usb_sec = _FAT_startSector;
 
-    return 0;
+    return 1;
 }
 
 void USBDevice_deInit()
 {
     //closing all open Files write back the cache and then shutdown em!
     fatUnmount("USB:/");
+    __io_usbstorage.shutdown();
+    __io_usbstorage2.shutdown();
 
     fat_usb_mount = 0;
     fat_usb_sec = 0;
@@ -109,7 +112,7 @@ int isInserted(const char *path)
 int SDCard_Init()
 {
     //closing all open Files write back the cache and then shutdown em!
-    fatUnmount("SD:/");
+    SDCard_deInit();
 
     //right now mounts first FAT-partition
     if (fatMount("SD", &__io_wiisd, 0, CACHE, SECTORS))
@@ -118,7 +121,10 @@ int SDCard_Init()
         fat_sd_sec = _FAT_startSector;
         return 1;
     }
-    else if (fatMount("SD", &__io_sdhc, 0, CACHE, SDHC_SECTOR_SIZE))
+
+    __io_wiisd.shutdown();
+
+    if (fatMount("SD", &__io_sdhc, 0, CACHE, SECTORS))
     {
         fat_sd_mount = MOUNT_SDHC;
         fat_sd_sec = _FAT_startSector;
@@ -131,6 +137,8 @@ int SDCard_Init()
 void SDCard_deInit()
 {
     fatUnmount("SD:/");
+    __io_wiisd.shutdown();
+    __io_sdhc.shutdown();
 
     fat_sd_mount = MOUNT_NONE;
     fat_sd_sec = 0;

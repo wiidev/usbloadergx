@@ -6,7 +6,7 @@
 #include "usbloader/disc.h"
 #include "usbloader/wbfs.h"
 #include "prompts/PromptWindows.h"
-#include "libwbfs/libwbfs.h"
+#include "libs/libwbfs/libwbfs.h"
 #include "language/gettext.h"
 #include "bannersound.h"
 
