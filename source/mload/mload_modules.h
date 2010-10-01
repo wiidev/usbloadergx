@@ -1,31 +1,23 @@
 #ifndef _MLOAD_MODULES_H_
 #define _MLOAD_MODULES_H_
 
-#include "dip_plugin.h"
 #include "mload.h"
-#include "filelist.h"
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
-    extern void *external_ehcmodule;
-    extern int size_external_ehcmodule;
-    extern int use_port1;
-
-    int load_ehc_module();
-    int load_fatffs_module(u8 *discid);
-
-    void enable_ES_ioctlv_vector(void);
-    void Set_DIP_BCA_Datas(u8 *bca_data);
-
-    void test_and_patch_for_port1();
-
-    int enable_ffs(int mode);
+int load_modules(const u8 * ehcmodule, int ehcmodule_size, const u8 * dip_plugin, int dip_plugin_size);
+void enable_ES_ioctlv_vector(void);
+void Set_DIP_BCA_Datas(u8 *bca_data);
+void disableIOSReload(void);
+u8 *search_for_ehcmodule_cfg(u8 *p, int size);
+bool shadow_mload();
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif
+
+

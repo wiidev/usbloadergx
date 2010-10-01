@@ -33,9 +33,6 @@
 #include "usbstorage2.h"
 #include "memory/mem2.h"
 
-#define isMEM2Buffer(p) (((u32) p & 0x10000000) != 0)
-
-#define MAX_BUFFER_SECTORS  256
 
 /* IOCTL commands */
 #define UMS_BASE            (('U'<<24)|('M'<<16)|('S'<<8))
@@ -53,24 +50,26 @@
 #define WBFS_BASE (('W'<<24)|('F'<<16)|('S'<<8))
 #define USB_IOCTL_WBFS_OPEN_DISC            (WBFS_BASE+0x1)
 #define USB_IOCTL_WBFS_READ_DISC            (WBFS_BASE+0x2)
-#define USB_IOCTL_WBFS_READ_DIRECT_DISC     (WBFS_BASE+0x3)
-#define USB_IOCTL_WBFS_STS_DISC             (WBFS_BASE+0x4)
 #define USB_IOCTL_WBFS_SET_DEVICE           (WBFS_BASE+0x50)
 #define USB_IOCTL_WBFS_SET_FRAGLIST         (WBFS_BASE+0x51)
 
-#define UMS_HEAPSIZE            0x1000
+#define isMEM2Buffer(p) (((u32) p & 0x10000000) != 0)
+
+#define MAX_BUFFER_SECTORS      256
+#define UMS_HEAPSIZE            0x8000
+
 /* Variables */
-static char fs[] ATTRIBUTE_ALIGN( 32 ) = "/dev/usb2";
-static char fs2[] ATTRIBUTE_ALIGN( 32 ) = "/dev/usb/ehc";
+static char fs[] ATTRIBUTE_ALIGN(32) = "/dev/usb2";
+static char fs2[] ATTRIBUTE_ALIGN(32) = "/dev/usb123";
+static char fs3[] ATTRIBUTE_ALIGN(32) = "/dev/usb/ehc";
 
 static u8 * mem2_ptr = NULL;
 static s32 hid = -1, fd = -1;
 static u32 sector_size = 0;
-static int mounted = 0;
 
 s32 USBStorage2_Init(void)
 {
-    s32 ret, ret2;
+    s32 ret;
 
     /* Already open */
     if (fd >= 0) return 0;
@@ -85,34 +84,19 @@ s32 USBStorage2_Init(void)
     /* Open USB device */
     fd = IOS_Open(fs, 0);
     if (fd < 0) fd = IOS_Open(fs2, 0);
+    if (fd < 0) fd = IOS_Open(fs3, 0);
 
     if (fd < 0) return fd;
 
     /* Initialize USB storage */
     ret = IOS_IoctlvFormat(hid, fd, USB_IOCTL_UMS_INIT, ":");
     if (ret < 0) goto err;
-    if (ret > 1) ret = 0;
-    ret2 = ret;
 
     /* Get device capacity */
     ret = USBStorage2_GetCapacity(&sector_size);
-    if (!ret)
-    {
-        ret = -1;
-        goto err;
-    }
-    if (ret2 == 0 && sector_size != 512) // check for HD sector size 512 bytes
-    {
-        ret = -20001;
-        goto err;
-    }
-    if (ret2 == 1 && sector_size != 2048) // check for DVD sector size 2048 bytes
-    {
-        ret = -20002;
-        goto err;
-    }
-    mounted = 1;
-    return ret2; // 0->HDD, 1->DVD
+    if (ret < 0) goto err;
+
+    return ret; // 0->HDD, 1->DVD
 
     err:
     /* Close USB device */
@@ -127,8 +111,6 @@ s32 USBStorage2_Init(void)
 
 void USBStorage2_Deinit(void)
 {
-    mounted = 0;
-
     /* Close USB device */
     if (fd >= 0)
     {

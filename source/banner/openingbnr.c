@@ -23,7 +23,6 @@
 #include "libfat/fat.h"
 
 #include "MD5.h"
-#include "banner.h"
 #include "openingbnr.h"
 #include "FileOperations/fileops.h"
 

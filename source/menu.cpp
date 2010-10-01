@@ -24,6 +24,7 @@
 #include "themes/Theme_Downloader.h"
 #include "usbloader/disc.h"
 #include "usbloader/GameList.h"
+#include "mload/mload_modules.h"
 #include "xml/xml.h"
 #include "audio.h"
 #include "gecko.h"
@@ -484,8 +485,11 @@ int MainMenu(int menu)
 
         gprintf("\tDisc_wiiBoot\n");
 
-	ret = Disc_WiiBoot(Settings.dolpath, videoChoice, languageChoice, ocarinaChoice, viChoice, countrystrings,
-                alternatedol, alternatedoloffset, channel, fix002);
+        shadow_mload();
+
+        ret = Disc_WiiBoot(Settings.dolpath, videoChoice, languageChoice, ocarinaChoice, viChoice, countrystrings,
+                            alternatedol, alternatedoloffset, channel, fix002);
+
         if (ret < 0)
         {
             Sys_LoadMenu();

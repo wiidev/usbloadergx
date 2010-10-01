@@ -7,6 +7,7 @@
 
 void aes_set_key(u8 *key);
 void aes_decrypt(u8 *iv, u8 *inbuf, u8 *outbuf, unsigned long long len);
+static u8 get_fst = 0;
 
 static void _decrypt_title_key(u8 *tik, u8 *title_key)
 {
@@ -166,6 +167,12 @@ static void do_files(wiidisc_t*d)
         partition_read(d, fst_offset, fst, fst_size, 0);
         n_files = _be32(fst + 8);
 
+        if(get_fst && !d->extracted_buffer)
+        {
+            d->extracted_buffer = malloc(fst_size);
+            memcpy(d->extracted_buffer, fst, fst_size);
+        }
+
         if (d->extract_pathname && *d->extract_pathname == 0)
         {
             // if empty pathname requested return fst
@@ -302,6 +309,21 @@ u8 * wd_extract_file(wiidisc_t *d, partition_selector_t partition_type, char *pa
 {
     u8 *retval = 0;
     d->extract_pathname = pathname;
+    d->extracted_buffer = 0;
+    d->part_sel = partition_type;
+    do_disc(d);
+    d->extract_pathname = 0;
+    d->part_sel = ALL_PARTITIONS;
+    retval = d->extracted_buffer;
+    d->extracted_buffer = 0;
+    return retval;
+}
+
+u8 * wd_get_fst(wiidisc_t *d, partition_selector_t partition_type)
+{
+    get_fst = 1;
+    u8 *retval = 0;
+    d->extract_pathname = 0;
     d->extracted_buffer = 0;
     d->part_sel = partition_type;
     do_disc(d);

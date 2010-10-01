@@ -1912,14 +1912,6 @@ int DiscWait(const char *title, const char *msg, const char *btn1Label, const ch
         {
             VIDEO_WaitVSync();
             timerTxt.SetTextf("%u %s", i, tr( "seconds left" ));
-            /* HaltGui();
-             if (Settings.cios == ios222) {
-             ret = IOS_ReloadIOS(222);
-             load_ehc_module();
-             } else {
-             ret = IOS_ReloadIOS(249);
-             }
-             ResumeGui();*/
             sleep(1);
             USBDevice_deInit();
             USBDevice_Init();

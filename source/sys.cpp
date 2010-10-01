@@ -137,7 +137,9 @@ void Sys_BackToLoader(void)
 
 bool Sys_IsHermes()
 {
-    return IOS_GetVersion() == 222 || IOS_GetVersion() == 223;
+    int ios = IOS_GetVersion();
+
+    return ios == 222 || ios == 223 || ios == 224;
 }
 
 void ScreenShot()

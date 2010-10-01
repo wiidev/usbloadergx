@@ -25,6 +25,7 @@ SOURCES		:=	source \
 				source/libwbfs \
 				source/language \
 				source/mload \
+				source/mload/modules \
 				source/patches \
 				source/usbloader \
 				source/xml \

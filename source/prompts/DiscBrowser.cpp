@@ -13,6 +13,9 @@
 #include "usbloader/disc.h"
 #include "usbloader/fstfile.h"
 #include "usbloader/wdvd.h"
+#include "usbloader/wbfs.h"
+#include "libwbfs/libwbfs.h"
+#include "libwbfs/wiidisc.h"
 #include "main.h"
 #include "sys.h"
 #include "settings/cfg.h"
@@ -38,93 +41,39 @@ int DiscBrowse(struct discHdr * header)
 {
     gprintf("\nDiscBrowser() started");
     bool exit = false;
-    int ret, choice;
-    u64 offset;
+    int ret = 0, choice;
 
     HaltGui();
-    if (!mountMethod)
-    {
-        ret = Disc_SetUSB(header->id);
-        if (ret < 0)
-        {
-            ResumeGui();
-            WindowPrompt(tr( "ERROR:" ), tr( "Could not set USB." ), tr( "OK" ));
-            return ret;
-        }
-    }
 
-    ret = Disc_Open();
-    if (ret < 0)
+    Disc_SetUSB(NULL);
+    wbfs_disc_t *disc = WBFS_OpenDisc((u8 *) header->id);
+    if (!disc)
+    {
+        ResumeGui();
+        WindowPrompt(tr( "ERROR:" ), tr( "Could not open Disc" ), tr( "OK" ));
+        return ret;
+    }
+    wiidisc_t *wdisc = wd_open_disc((int(*)(void *, u32, u32, void *)) wbfs_disc_read, disc);
+    if (!wdisc)
     {
         ResumeGui();
         WindowPrompt(tr( "ERROR:" ), tr( "Could not open Disc" ), tr( "OK" ));
         return ret;
     }
 
-    ret = __Disc_FindPartition(&offset);
-    if (ret < 0)
-    {
-        ResumeGui();
-        WindowPrompt(tr( "ERROR:" ), tr( "Could not find a WBFS partition." ), tr( "OK" ));
-        return ret;
-    }
-
-    ret = WDVD_OpenPartition(offset);
-    if (ret < 0)
-    {
-        ResumeGui();
-        WindowPrompt(tr( "ERROR:" ), tr( "Could not open WBFS partition" ), tr( "OK" ));
-        return ret;
-    }
-
-    int *buffer = (int*) allocate_memory( 0x20 );
-
-    if (buffer == NULL)
+    FST_ENTRY * fstbuffer = (FST_ENTRY *) wd_get_fst(wdisc, ONLY_GAME_PARTITION);
+    if (!fstbuffer)
     {
         ResumeGui();
         WindowPrompt(tr( "ERROR:" ), tr( "Not enough free memory." ), tr( "OK" ));
         return -1;
     }
 
-    ret = WDVD_Read(buffer, 0x20, 0x420);
-    if (ret < 0)
-    {
-        ResumeGui();
-        WindowPrompt(tr( "ERROR:" ), tr( "Could not read the disc." ), tr( "OK" ));
-        return ret;
-    }
+    wd_close_disc(wdisc);
+    WBFS_CloseDisc(disc);
 
-    void *fstbuffer = allocate_memory( buffer[2] * 4 );
-    FST_ENTRY *fst = (FST_ENTRY *) fstbuffer;
-
-    if (fst == NULL)
-    {
-        ResumeGui();
-        WindowPrompt(tr( "ERROR:" ), tr( "Not enough free memory." ), tr( "OK" ));
-        free(buffer);
-        return -1;
-    }
-
-    ret = WDVD_Read(fstbuffer, buffer[2] * 4, buffer[1] * 4);
-
-    if (ret < 0)
-    {
-        ResumeGui();
-        WindowPrompt(tr( "ERROR:" ), tr( "Could not read the disc." ), tr( "OK" ));
-        free(buffer);
-        free(fstbuffer);
-        return ret;
-    }
-    ResumeGui();
-    free(buffer);
-
-    WDVD_Reset();
-    //Disc_SetUSB(NULL);
-    WDVD_ClosePartition();
-
-    u32 discfilecount = fst[0].filelen;
+    u32 discfilecount = fstbuffer[0].filelen;
     u32 dolfilecount = 0;
-    //int offsetselect[20];
 
     customOptionList options3(discfilecount);
 
@@ -132,12 +81,12 @@ int DiscBrowse(struct discHdr * header)
     {
 
         //don't add files that aren't .dol to the list
-        int len = (strlen(fstfiles(fst, i)));
-        if (fstfiles(fst, i)[len - 4] == '.' && fstfiles(fst, i)[len - 3] == 'd' && fstfiles(fst, i)[len - 2] == 'o'
-                && fstfiles(fst, i)[len - 1] == 'l')
+        int len = (strlen(fstfiles(fstbuffer, i)));
+        if (fstfiles(fstbuffer, i)[len - 4] == '.' && fstfiles(fstbuffer, i)[len - 3] == 'd' && fstfiles(fstbuffer, i)[len - 2] == 'o'
+                && fstfiles(fstbuffer, i)[len - 1] == 'l')
         {
             options3.SetName(i, "%i", i);
-            options3.SetValue(i, fstfiles(fst, i));
+            options3.SetValue(i, fstfiles(fstbuffer, i));
             //options3.SetName(i, fstfiles(fst, i));
 
             dolfilecount++;
@@ -220,7 +169,7 @@ int DiscBrowse(struct discHdr * header)
         if (ret > 0)
         {
             char temp[100];
-            strlcpy(temp, fstfiles(fst, ret), sizeof(temp));
+            strlcpy(temp, fstfiles(fstbuffer, ret), sizeof(temp));
             choice = WindowPrompt(temp, tr( "Load this DOL as alternate DOL?" ), tr( "OK" ), tr( "Cancel" ));
             if (choice)
             {

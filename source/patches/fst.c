@@ -31,7 +31,7 @@
 #include "dvd_broadway.h"
 #include "fatmounter.h"
 #include "mload/mload.h"
-#include "mload/dip_plugin.h"
+#include "mload/mload_modules.h"
 #include "gecko.h"
 
 #include "patchcode.h"
@@ -852,10 +852,8 @@ u32 do_bca_code(u8 *gameid)
                 bcaCode[0x33] = 1;
             }
         }
-
-        mload_seek(*((u32 *) (dip_plugin + 15 * 4)), SEEK_SET); // offset 15 (bca_data area)
-        mload_write(bcaCode, 64);
-        mload_close();
+		
+		Set_DIP_BCA_Datas(bcaCode);
     }
     return 0;
 }

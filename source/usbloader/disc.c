@@ -259,7 +259,7 @@ s32 Disc_SetUSB(const u8 *id)
     }
 
     /* Set USB mode */
-    return WDVD_SetUSBMode(id, part);
+    return WDVD_SetUSBMode((u8  *) id, part);
 }
 
 s32 Disc_ReadHeader(void *outbuf)
