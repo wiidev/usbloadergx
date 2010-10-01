@@ -1381,7 +1381,7 @@ int MenuDiscList()
 
             if (idBtn.GetState() == STATE_CLICKED && mountMethod != 3)
             {
-                gprintf("\n\tidBtn Clicked");
+		gprintf("\tidBtn Clicked\n");
                 struct discHdr * header = gameList[gameBrowser->GetSelectedOption()];
                 //enter new game ID
                 char entered[10];
@@ -1492,7 +1492,7 @@ int MenuDiscList()
 					GameStatistics.SetPlayCount(header->id, GameStatistics.GetPlayCount(header->id)+1);
 					GameStatistics.Save();
 
-                    gprintf("\n\tplaycount for %c%c%c%c%c%c raised to %i", header->id[0], header->id[1], header->id[2],
+		    gprintf("\tplaycount for %c%c%c%c%c%c raised to %i\n", header->id[0], header->id[1], header->id[2],
                             header->id[3], header->id[4], header->id[5],  GameStatistics.GetPlayCount(header->id));
 
                 }

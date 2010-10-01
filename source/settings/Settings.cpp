@@ -1131,7 +1131,7 @@ int MenuSettings()
                                 if (haveTitle >= 0)
                                 {
                                     name = (char*) NandTitles.NameFromIndex(haveTitle);
-                                    if (!strlen(name)) name = NULL;
+				    if( name && !strlen(name) ) name = NULL;
                                 }
                                 options2.SetValue(Idx, "%s", name ? name : tr( opts_off_on[ 0 ] ));
                             }

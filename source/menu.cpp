@@ -409,7 +409,7 @@ int MainMenu(int menu)
         u8 iosChoice = Settings.cios;
         u8 fix002 = Settings.error002;
         u8 countrystrings = Settings.patchcountrystrings;
-		u8 alternatedol = off;
+	u8 alternatedol = off;
         u32 alternatedoloffset = 0;
         u8 reloadblock = off;
         u8 returnToLoaderGV = 1;
@@ -425,11 +425,11 @@ int MainMenu(int menu)
             fix002 = game_cfg->errorfix002;
             iosChoice = game_cfg->ios;
             countrystrings = game_cfg->patchcountrystrings;
-            if (!altdoldefault)
-            {
+	    //if (!altdoldefault)
+	    //{
                 alternatedol = game_cfg->loadalternatedol;
                 alternatedoloffset = game_cfg->alternatedolstart;
-            }
+	    //}
             reloadblock = game_cfg->iosreloadblock;
             returnToLoaderGV = game_cfg->returnTo;
         }
