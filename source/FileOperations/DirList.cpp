@@ -185,7 +185,7 @@ char *DirList::GetFilepath(int ind)
 unsigned int DirList::GetFilesize(int ind)
 {
     if (ind >= filecount || !filecount || !FileInfo)
-        return NULL;
+        return 0;
     else
         return FileInfo[ind].FileSize;
 }

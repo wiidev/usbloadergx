@@ -1,4 +1,5 @@
 #include <string.h>
+#include <unistd.h>
 #include <ogc/lwp_watchdog.h>
 #include <ogc/mutex.h>
 #include <ogc/system.h>
@@ -50,25 +51,37 @@ int USBDevice_Init()
     USBDevice_deInit();
     //right now mounts first FAT-partition
 
-    if (!fatMount("USB", &__io_usbstorage2, 0, CACHE, SECTORS))
-        return -1;
+    //usbstorage.startup is actually not needed since it's done in libfat
+    //let's still do it before mount and wait a bit for slow ass hdds before reading from them
+    __io_usbstorage2.startup();
+    usleep(200000);
 
-    if(!fatMount("USB", &__io_usbstorage, 0, CACHE, SECTORS))
-        return -1;
+    if (fatMount("USB", &__io_usbstorage2, 0, CACHE, SECTORS))
+    {
+        fat_usb_sec = _FAT_startSector;
+        return (fat_usb_mount = 1);
+    }
 
+    __io_usbstorage.startup();
+    usleep(200000);
 
-    fat_usb_mount = 1;
-    fat_usb_sec = _FAT_startSector;
+    if(fatMount("USB", &__io_usbstorage, 0, CACHE, SECTORS))
+    {
+        fat_usb_sec = _FAT_startSector;
+        return (fat_usb_mount = 1);
+    }
 
-    return 1;
+    __io_usbstorage.shutdown();
+
+    return -1;
 }
 
 void USBDevice_deInit()
 {
     //closing all open Files write back the cache and then shutdown em!
     fatUnmount("USB:/");
+    //only shutdown libogc usb and not the cios one
     __io_usbstorage.shutdown();
-    __io_usbstorage2.shutdown();
 
     fat_usb_mount = 0;
     fat_usb_sec = 0;

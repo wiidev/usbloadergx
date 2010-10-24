@@ -888,7 +888,7 @@ extern "C" void GetFolderSize(const char * folderpath, u64 * foldersize, u32 * f
         }
         else
         {
-            if(filecount) *filecount++;
+            if(filecount) *filecount += 1;
             if(foldersize) *foldersize += st.st_size;
         }
 	}

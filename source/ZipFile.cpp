@@ -76,7 +76,7 @@ bool ZipFile::ExtractAll(const char *dest)
 
     while (!Stop)
     {
-        if (unzGetCurrentFileInfo(File, &cur_file_info, filename, sizeof(filename), NULL, NULL, NULL, NULL) != UNZ_OK) Stop
+        if (unzGetCurrentFileInfo(File, &cur_file_info, filename, sizeof(filename), NULL, 0, NULL, 0) != UNZ_OK) Stop
                 = true;
 
         if (!Stop && filename[strlen(filename) - 1] != '/')

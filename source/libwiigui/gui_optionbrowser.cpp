@@ -525,7 +525,7 @@ void GuiOptionBrowser::Update(GuiTrigger * t)
 
             }
             WPAD_ScanPads();
-            u8 cnt, buttons = NULL;
+            u8 cnt, buttons = 0;
             /* Get pressed buttons */
             for (cnt = 0; cnt < 4; cnt++)
                 buttons |= WPAD_ButtonsHeld(cnt);
@@ -563,7 +563,7 @@ void GuiOptionBrowser::Update(GuiTrigger * t)
 
             }
             WPAD_ScanPads();
-            u8 cnt, buttons = NULL;
+            u8 cnt, buttons = 0;
             /* Get pressed buttons */
             for (cnt = 0; cnt < 4; cnt++)
                 buttons |= WPAD_ButtonsHeld(cnt);

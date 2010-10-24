@@ -181,7 +181,7 @@ const u8 *LoadBannerSound(const u8 *discid, u32 *size)
 
     if (*((u32*) soundChunk) == 0x4C5A3737 /*"LZ77"*/)
     {
-        u32 uncSize = NULL;
+        u32 uncSize = 0;
         u8 * uncompressed_data = uncompressLZ77(soundChunk, soundChunkSize, uncSize);
         if (!uncompressed_data)
         {

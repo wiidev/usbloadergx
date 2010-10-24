@@ -2,9 +2,11 @@
  * HomebrewXML Class
  * for USB Loader GX
  ***************************************************************************/
+#include <gctypes.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "FileOperations/fileops.h"
 #include "xml/xml.h"
 
 #include "HomebrewXML.h"
@@ -24,40 +26,54 @@ HomebrewXML::~HomebrewXML()
 /* qparam filename Filepath of the XML file */
 int HomebrewXML::LoadHomebrewXMLData(const char* filename)
 {
-    mxml_node_t *nodedataHB = NULL;
-    mxml_node_t *nodetreeHB = NULL;
+    Name.clear();
+    Coder.clear();
+    Version.clear();
+    ShortDescription.clear();
+    LongDescription.clear();
+    Releasedate.clear();
 
     /* Load XML file */
-    FILE *filexml;
-    filexml = fopen(filename, "rb");
-    if (!filexml) return -1;
+    u8 * xmlbuffer = NULL;
+    u64 size = 0;
+    LoadFileToMem(filename, &xmlbuffer, &size);
 
-    nodetreeHB = mxmlLoadFile(NULL, filexml, MXML_OPAQUE_CALLBACK);
-    fclose(filexml);
+    if(!xmlbuffer)
+        return -1;
 
-    if (nodetreeHB == NULL) return -2;
+    mxml_node_t * nodetree = mxmlLoadString(NULL, (const char *) xmlbuffer, MXML_OPAQUE_CALLBACK);
 
-    nodedataHB = mxmlFindElement(nodetreeHB, nodetreeHB, "app", NULL, NULL, MXML_DESCEND);
-    if (nodedataHB == NULL) return -5;
+    if (!nodetree)
+        return -2;
+
+    mxml_node_t * node = mxmlFindElement(nodetree, nodetree, "app", NULL, NULL, MXML_DESCEND_FIRST);
+    if (!node)
+        return -5;
 
     char * Entrie = new char[ENTRIE_SIZE];
 
-    GetTextFromNode(nodedataHB, nodedataHB, (char*) "name", NULL, NULL, MXML_DESCEND, Entrie, ENTRIE_SIZE);
+    Entrie[0] = '\0';
+    GetTextFromNode(node, nodetree, (char*) "name", NULL, NULL, MXML_DESCEND, Entrie, ENTRIE_SIZE);
     Name = Entrie;
 
-    GetTextFromNode(nodedataHB, nodedataHB, (char*) "coder", NULL, NULL, MXML_DESCEND, Entrie, ENTRIE_SIZE);
+    Entrie[0] = '\0';
+    GetTextFromNode(node, nodetree, (char*) "coder", NULL, NULL, MXML_DESCEND, Entrie, ENTRIE_SIZE);
     Coder = Entrie;
 
-    GetTextFromNode(nodedataHB, nodedataHB, (char*) "version", NULL, NULL, MXML_DESCEND, Entrie, ENTRIE_SIZE);
+    Entrie[0] = '\0';
+    GetTextFromNode(node, nodetree, (char*) "version", NULL, NULL, MXML_DESCEND, Entrie, ENTRIE_SIZE);
     Version = Entrie;
 
-    GetTextFromNode(nodedataHB, nodedataHB, (char*) "short_description", NULL, NULL, MXML_DESCEND, Entrie, ENTRIE_SIZE);
+    Entrie[0] = '\0';
+    GetTextFromNode(node, nodetree, (char*) "short_description", NULL, NULL, MXML_DESCEND, Entrie, ENTRIE_SIZE);
     ShortDescription = Entrie;
 
-    GetTextFromNode(nodedataHB, nodedataHB, (char*) "long_description", NULL, NULL, MXML_DESCEND, Entrie, ENTRIE_SIZE);
+    Entrie[0] = '\0';
+    GetTextFromNode(node, nodetree, (char*) "long_description", NULL, NULL, MXML_DESCEND, Entrie, ENTRIE_SIZE);
     LongDescription = Entrie;
 
-    GetTextFromNode(nodedataHB, nodedataHB, (char*) "release_date", NULL, NULL, MXML_DESCEND, Entrie, ENTRIE_SIZE);
+    Entrie[0] = '\0';
+    GetTextFromNode(node, nodetree, (char*) "release_date", NULL, NULL, MXML_DESCEND, Entrie, ENTRIE_SIZE);
 
     int len = (strlen(Entrie) - 6); //length of the date string without the 200000 at the end
     if (len == 8)
@@ -69,16 +85,17 @@ int HomebrewXML::LoadHomebrewXMLData(const char* filename)
 
     Releasedate = Entrie;
 
-    free(nodedataHB);
-    free(nodetreeHB);
-
     delete[] Entrie;
+
+    mxmlDelete(node);
+    mxmlDelete(nodetree);
+    free(xmlbuffer);
 
     return 1;
 }
 
 /* Get name */
-const char * HomebrewXML::GetName()
+const char * HomebrewXML::GetName() const
 {
     return Name.c_str();
 }
@@ -90,31 +107,31 @@ void HomebrewXML::SetName(char * newName)
 }
 
 /* Get coder */
-const char * HomebrewXML::GetCoder()
+const char * HomebrewXML::GetCoder() const
 {
     return Coder.c_str();
 }
 
 /* Get version */
-const char * HomebrewXML::GetVersion()
+const char * HomebrewXML::GetVersion() const
 {
     return Version.c_str();
 }
 
 /* Get releasedate */
-const char * HomebrewXML::GetReleasedate()
+const char * HomebrewXML::GetReleasedate() const
 {
     return Releasedate.c_str();
 }
 
 /* Get shortdescription */
-const char * HomebrewXML::GetShortDescription()
+const char * HomebrewXML::GetShortDescription() const
 {
     return ShortDescription.c_str();
 }
 
 /* Get longdescription */
-const char * HomebrewXML::GetLongDescription()
+const char * HomebrewXML::GetLongDescription() const
 {
     return LongDescription.c_str();
 }

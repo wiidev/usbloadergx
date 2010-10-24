@@ -15,13 +15,13 @@ class HomebrewXML
 
         int LoadHomebrewXMLData(const char* filename);
 
-        const char * GetName();
+        const char * GetName() const;
         void SetName(char * newName);
-        const char * GetCoder();
-        const char * GetVersion();
-        const char * GetReleasedate();
-        const char * GetShortDescription();
-        const char * GetLongDescription();
+        const char * GetCoder() const;
+        const char * GetVersion() const;
+        const char * GetReleasedate() const;
+        const char * GetShortDescription() const;
+        const char * GetLongDescription() const;
 
     protected:
         std::string Name;

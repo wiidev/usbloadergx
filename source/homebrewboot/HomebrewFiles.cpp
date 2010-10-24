@@ -111,7 +111,7 @@ char * HomebrewFiles::GetFilepath(int ind)
 unsigned int HomebrewFiles::GetFilesize(int ind)
 {
     if (ind > filecount || !filecount || !FileInfo)
-        return NULL;
+        return 0;
     else return FileInfo[ind].FileSize;
 }
 

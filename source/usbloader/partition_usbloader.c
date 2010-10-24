@@ -289,7 +289,7 @@ int get_fs_type(u8 *buff)
     wbfs_head_t *head = (wbfs_head_t *) buff;
     if (head->magic == wbfs_htonl( WBFS_MAGIC )) return FS_TYPE_WBFS;
     // 55AA
-    if (buff[0x1FE] == 0x55 && buff[0x1FF] == 0xAA)
+    if(*((u16 *) (buff + 0x1FE)) == 0x55AA)
     {
         // FAT
         if (memcmp(buff + 0x36, "FAT", 3) == 0) return FS_TYPE_FAT16;

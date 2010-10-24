@@ -241,7 +241,7 @@ const u32 Resources::GetFileSize(const char * filename)
         }
     }
 
-    return NULL;
+    return 0;
 }
 
 GuiImageData * Resources::GetImageData(const char * filename)
