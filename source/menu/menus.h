@@ -19,7 +19,7 @@ extern u8 reset;
 
 int MenuInstall();
 int MenuDiscList();
-int MenuFormat();
-int MenuCheck();
+int SelectPartitionMenu();
+int MountGamePartition(bool ShowGUI = true);
 
 #endif // _MENUS_H

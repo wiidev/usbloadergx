@@ -36,6 +36,7 @@
 #include "usbloader/frag.h"
 #include "usbloader/wbfs.h"
 #include "wad/nandtitle.h"
+#include "GameBootProcess.h"
 
 /*** Variables that are also used extern ***/
 GuiWindow * mainWindow = NULL;
@@ -45,7 +46,6 @@ GuiImageData * background = NULL;
 GuiBGM * bgMusic = NULL;
 GuiSound *btnClick2 = NULL;
 
-struct discHdr *dvdheader = NULL;
 int currentMenu;
 u8 mountMethod = 0;
 
@@ -58,7 +58,6 @@ GuiText * GameRegionTxt = NULL;
 GuiImage * coverImg = NULL;
 GuiImageData * cover = NULL;
 bool altdoldefault = true;
-char headlessID[8] = { 0 };
 
 static lwp_t guithread = LWP_THREAD_NULL;
 static bool guiHalt = true;
@@ -165,7 +164,7 @@ static void * UpdateGUI(void *arg)
 
     for (i = 5; i < 255; i += 10)
     {
-        if (strcmp(headlessID, "") == 0) mainWindow->Draw();
+        mainWindow->Draw();
         Menu_DrawRectangle(0, 0, screenwidth, screenheight, (GXColor) {0, 0, 0, i}, 1);
         Menu_Render();
     }
@@ -255,6 +254,8 @@ int MainMenu(int menu)
 {
     currentMenu = menu;
 
+    MountGamePartition();
+
     pointer[0] = Resources::GetImageData("player1_point.png");
     pointer[1] = Resources::GetImageData("player2_point.png");
     pointer[2] = Resources::GetImageData("player3_point.png");
@@ -267,7 +268,7 @@ int MainMenu(int menu)
     bgImg = new GuiImage(background);
     mainWindow->Append(bgImg);
 
-    if (strcmp(headlessID, "") == 0) ResumeGui();
+    ResumeGui();
 
     bgMusic = new GuiBGM(bg_music_ogg, bg_music_ogg_size, Settings.volume);
     bgMusic->SetLoop(Settings.musicloopmode); //loop music
@@ -281,12 +282,6 @@ int MainMenu(int menu)
 
         switch (currentMenu)
         {
-            case MENU_CHECK:
-                currentMenu = MenuCheck();
-                break;
-            case MENU_FORMAT:
-                currentMenu = MenuFormat();
-                break;
             case MENU_INSTALL:
                 currentMenu = MenuInstall();
                 break;
@@ -300,10 +295,8 @@ int MainMenu(int menu)
                 currentMenu = MenuHomebrewBrowse();
                 break;
             case MENU_DISCLIST:
-                currentMenu = MenuDiscList();
-                break;
             default: // unrecognized menu
-                currentMenu = MenuCheck();
+                currentMenu = MenuDiscList();
                 break;
         }
     }
@@ -314,8 +307,7 @@ int MainMenu(int menu)
     CloseXMLDatabase();
     NewTitles::DestroyInstance();
 
-    if (strcmp(headlessID, "") != 0) //the GUIthread was never started, so it cant be ended and joined properly if headless mode was used.  so we resume it and close it.
-    ResumeGui();
+	ResumeGui();
     ExitGUIThreads();
 
     bgMusic->Stop();
@@ -356,146 +348,14 @@ int MainMenu(int menu)
     {
         gprintf("\nBootHomebrew");
         BootHomebrew(Settings.selected_homebrew);
+        return 0;
     }
     else if (boothomebrew == 2)
     {
         gprintf("\nBootHomebrew from Menu");
-        //BootHomebrew();
         BootHomebrewFromMem();
+        return 0;
     }
-    else
-    {
-        gprintf("\tSettings.partition: %d\n", Settings.partition);
-        struct discHdr *header = NULL;
-        //if the GUI was "skipped" to boot a game from main(argv[1])
-        if (strcmp(headlessID, "") != 0)
-        {
-            gprintf("\tHeadless mode (%s)\n", headlessID);
-            gameList.LoadUnfiltered();
-            if (!gameList.size())
-            {
-                gprintf("  ERROR : !gameCnt");
-                exit(0);
-            }
-            //gprintf("\n\tgameCnt:%d",gameCnt);
-            for (int i = 0; i < gameList.size(); i++)
-            {
-                header = gameList[i];
-                char tmp[8];
-                sprintf(tmp, "%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2], header->id[3], header->id[4],
-                        header->id[5]);
-                if (strcmp(tmp, headlessID) == 0)
-                {
-                    gameSelected = i;
-                    gprintf("  found (%d)\n", i);
-                    break;
-                }
-                //if the game was not found
-                if (i == gameList.GameCount() - 1)
-                {
-                    gprintf("  not found (%d IDs checked)\n", i);
-                    exit(0);
-                }
-            }
-        }
 
-        int ret = 0;
-        header = (mountMethod ? dvdheader : gameList[gameSelected]);
-
-        u8 videoChoice = Settings.videomode;
-        u8 languageChoice = Settings.language;
-        u8 ocarinaChoice = Settings.ocarina;
-        u8 viChoice = Settings.videopatch;
-        u8 iosChoice = Settings.cios;
-        u8 fix002 = Settings.error002;
-        u8 countrystrings = Settings.patchcountrystrings;
-		u8 alternatedol = OFF;
-        u32 alternatedoloffset = 0;
-        u8 reloadblock = OFF;
-        u8 returnToLoaderGV = 1;
-
-        GameCFG * game_cfg = GameSettings.GetGameCFG(header->id);
-
-        if (game_cfg)
-        {
-            videoChoice = game_cfg->video;
-            languageChoice = game_cfg->language;
-            ocarinaChoice = game_cfg->ocarina;
-            viChoice = game_cfg->vipatch;
-            fix002 = game_cfg->errorfix002;
-            iosChoice = game_cfg->ios;
-            countrystrings = game_cfg->patchcountrystrings;
-	    //if (!altdoldefault)
-	    //{
-                alternatedol = game_cfg->loadalternatedol;
-                alternatedoloffset = game_cfg->alternatedolstart;
-	    //}
-            reloadblock = game_cfg->iosreloadblock;
-            returnToLoaderGV = game_cfg->returnTo;
-        }
-
-        if (!mountMethod)
-        {
-            gprintf("Loading fragment list...");
-            ret = get_frag_list(header->id);
-            gprintf("%d\n", ret);
-
-            gprintf("Setting fragment list...");
-            ret = set_frag_list(header->id);
-            gprintf("%d\n", ret);
-
-            ret = Disc_SetUSB(header->id);
-            if (ret < 0) Sys_BackToLoader();
-            gprintf("\tUSB set to game\n");
-        }
-        else
-        {
-            gprintf("\tUSB not set, loading DVD\n");
-        }
-        ret = Disc_Open();
-
-        if (ret < 0) Sys_BackToLoader();
-
-        if (dvdheader) delete dvdheader;
-
-        gprintf("Loading BCA data...");
-        ret = do_bca_code(header->id);
-        gprintf("%d\n", ret);
-
-        if (reloadblock == ON && Sys_IsHermes())
-        {
-            enable_ES_ioctlv_vector();
-            if (load_from_fs == PART_FS_WBFS)
-            {
-                mload_close();
-            }
-	}
-
-	u32 channel = 0;
-        if (returnToLoaderGV)
-        {
-            int idx = NandTitles.FindU32(Settings.returnTo);
-            if (idx >= 0) channel = TITLE_LOWER( NandTitles.At( idx ) );
-        }
-
-        //This is temporary
-        SetCheatFilepath(Settings.Cheatcodespath);
-        SetBCAFilepath(Settings.BcaCodepath);
-
-        gprintf("\tDisc_wiiBoot\n");
-
-        shadow_mload();
-
-        ret = Disc_WiiBoot(Settings.dolpath, videoChoice, languageChoice, ocarinaChoice, viChoice, countrystrings,
-                            alternatedol, alternatedoloffset, channel, fix002);
-
-        if (ret < 0)
-        {
-            Sys_LoadMenu();
-        }
-
-        //should never get here
-        printf("Returning entry point: 0x%0x\n", ret);
-    }
-    return 0;
+    return BootGame((const char *) gameList[gameSelected]->id);
 }

@@ -55,7 +55,7 @@ extern "C"
     bool WBFS_Close();
     bool WBFS_Mounted();
     bool WBFS_Selected();
-    int MountWBFS();
+    int MountWBFS(bool ShowGUI);
 
 #ifdef __cplusplus
 }

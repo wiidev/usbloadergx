@@ -1446,7 +1446,7 @@ int MenuDiscList()
                     {
                         sprintf(nipple, "%s %s", nipple, tr( "does not exist!" ));
                         WindowPrompt(tr( "Error" ), nipple, tr( "OK" ));
-                        menu = MENU_CHECK;
+                        menu = MENU_DISCLIST;
                         wiilight(0);
                         break;
                     }
@@ -1508,7 +1508,7 @@ int MenuDiscList()
                             gprintf("\n\tTried to load alt dol that isn't there");
                             sprintf(nipple, "%s %s", nipple, tr( "does not exist!  You Messed something up, Idiot." ));
                             WindowPrompt(tr( "Error" ), nipple, tr( "OK" ));
-                            menu = MENU_CHECK;
+                            menu = MENU_DISCLIST;
                             wiilight(0);
                             break;
                         }

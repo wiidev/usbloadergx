@@ -56,6 +56,17 @@ struct discHdr * GameList::at(int i)
     return FilteredList[i];
 }
 
+struct discHdr * GameList::GetDiscHeader(const char * gameID)
+{
+    for (u32 i = 0; i < FilteredList.size(); ++i)
+    {
+        if(strncasecmp(gameID, (const char *) FilteredList[i]->id, 6) == 0)
+            return FilteredList[i];
+    }
+
+    return NULL;
+}
+
 int GameList::ReadGameList()
 {
     FullGameList.clear();

@@ -12,6 +12,7 @@
 #include "usbloader/partition_usbloader.h"
 #include "usbloader/usbstorage2.h"
 #include "usbloader/GameList.h"
+#include "usbloader/utils.h"
 #include "language/gettext.h"
 #include "libwiigui/gui.h"
 #include "libwiigui/gui_diskcover.h"
@@ -1902,13 +1903,13 @@ int DiscWait(const char *title, const char *msg, const char *btn1Label, const ch
         {
             VIDEO_WaitVSync();
             timerTxt.SetTextf("%u %s", i, tr( "seconds left" ));
-            sleep(1);
             USBDevice_deInit();
             USBDevice_Init();
             ret = WBFS_Init(WBFS_DEVICE_USB);
             if (ret >= 0) break;
 
             i--;
+            sleep(1);
         }
     }
     else
@@ -1941,6 +1942,14 @@ int DiscWait(const char *title, const char *msg, const char *btn1Label, const ch
  ***************************************************************************/
 int FormatingPartition(const char *title, partitionEntry *entry)
 {
+    extern PartList partitions;
+
+    char text[255];
+    sprintf(text, "%s: %.2fGB", tr( "Partition" ), entry->size * (partitions.sector_size / GB_SIZE));
+    int choice = WindowPrompt(tr( "Do you want to format:" ), text, tr( "Yes" ), tr( "No" ));
+    if (choice == 0)
+        return -666;
+
     int ret;
     GuiWindow promptWindow(472, 320);
     promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
@@ -1974,6 +1983,23 @@ int FormatingPartition(const char *title, partitionEntry *entry)
 
     VIDEO_WaitVSync();
     ret = WBFS_Format(entry->sector, entry->size);
+
+    if (ret < 0)
+    {
+        WindowPrompt(tr( "Error !" ), tr( "Failed formating" ), tr( "Return" ));
+    }
+    else
+    {
+        sleep(1);
+        ret = WBFS_Open();
+        sprintf(text, "%s %s", text, tr( "formatted!" ));
+        WindowPrompt(tr( "Success:" ), text, tr( "OK" ));
+        if (ret < 0)
+        {
+            WindowPrompt(tr( "ERROR" ), tr( "Failed to open partition" ), tr( "OK" ));
+            Sys_LoadMenu();
+        }
+    }
 
     promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
     while (promptWindow.GetEffect() > 0)

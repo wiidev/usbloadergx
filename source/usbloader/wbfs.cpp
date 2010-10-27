@@ -12,6 +12,7 @@
 
 #include "usbloader/partition_usbloader.h"
 #include "usbloader/GameList.h"
+#include "menu/menus.h"
 #include "gecko.h"
 
 Wbfs *current = NULL;
@@ -301,8 +302,11 @@ bool WBFS_ShowFreeSpace(void)
     return current->ShowFreeSpace();
 }
 
-int MountWBFS()
+int MountWBFS(bool ShowGUI)
 {
+    if(ShowGUI)
+        return DiscWait(tr( "Waiting for USB Device" ), 0, 0, 0, 1);
+
     int ret = -1;
     time_t currTime = time(0);
 

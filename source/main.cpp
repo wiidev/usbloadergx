@@ -35,6 +35,7 @@ extern "C"
 #include "FontSystem.h"
 #include "video.h"
 #include "audio.h"
+#include "menu/menus.h"
 #include "menu.h"
 #include "input.h"
 #include "filelist.h"
@@ -53,10 +54,9 @@ extern "C"
 #include "usbloader/usbstorage2.h"
 #include "wad/nandtitle.h"
 #include "system/IosLoader.h"
+#include "GameBootProcess.h"
 
 extern bool geckoinit;
-extern char headlessID[8];
-char bootDevice[10];
 
 PartList partitions;
 
@@ -100,19 +100,12 @@ int main(int argc, char *argv[])
     }
     printf("\tLoaded cIOS = %u (Rev %u)\n", IOS_GetVersion(), IOS_GetRevision());
 
-    printf("\tWaiting for USB:\n");
-    if (MountWBFS() < 0)
-    {
-        printf("ERROR: No WBFS drive mounted.\n");
-        sleep(5);
-        exit(0);
-    }
-
     //if a ID was passed via args copy it and try to boot it after the partition is mounted
     //its not really a headless mode.  more like hairless.
     if (argc > 1 && argv[1])
     {
-        if (strlen(argv[1]) == 6) strncpy(headlessID, argv[1], sizeof(headlessID));
+        MountGamePartition(false);
+        return BootGame(argv[1]);
     }
 
     //! Init the rest of the System
@@ -127,6 +120,6 @@ int main(int argc, char *argv[])
 
     //gprintf("\tEnd of Main()\n");
     InitGUIThreads();
-    MainMenu( MENU_CHECK);
+    MainMenu(MENU_DISCLIST);
     return 0;
 }
