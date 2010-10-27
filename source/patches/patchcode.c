@@ -26,7 +26,7 @@
 
 #include "usbloader/apploader.h"
 #include "patchcode.h"
-#include "settings/cfg.h"
+#include "settings/SettingsEnums.h"
 #include "FileOperations/fileops.h"
 #include "fst.h"
 
@@ -324,37 +324,37 @@ void langpatcher(void *addr, u32 len, u8 languageChoice)
     u8 ocarinaLangPatchByte = 1;
     switch (languageChoice)
     {
-	case jap:
+	case JAPANESE:
 	    ocarinaLangPatchByte = 0x00;
 	    break;
-	case eng:
+	case ENGLISH:
 	    ocarinaLangPatchByte = 0x01;
 	    break;
-	case ger:
+	case GERMAN:
 	    ocarinaLangPatchByte = 0x02;
 	    break;
-	case fren:
+	case FRENCH:
 	    ocarinaLangPatchByte = 0x03;
 	    break;
-	case esp:
+	case SPANISH:
 	    ocarinaLangPatchByte = 0x04;
 	    break;
-	case it:
+	case ITALIAN:
 	    ocarinaLangPatchByte = 0x05;
 	    break;
-	case dut:
+	case DUTCH:
 	    ocarinaLangPatchByte = 0x06;
 	    break;
-	case schin:
+	case S_CHINESE:
 	    ocarinaLangPatchByte = 0x07;
 	    break;
-	case tchin:
+	case T_CHINESE:
 	    ocarinaLangPatchByte = 0x08;
 	    break;
-	case kor:
+	case KOREAN:
 	    ocarinaLangPatchByte = 0x09;
 	    break;
-	case ConsoleLangDefault:
+	case CONSOLE_DEFAULT:
 	default:
 	    return;
 	    break;

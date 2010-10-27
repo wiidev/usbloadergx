@@ -48,7 +48,7 @@ void UpdatePads()
         userInput[i].pad.triggerL = PAD_TriggerL(i);
         userInput[i].pad.triggerR = PAD_TriggerR(i);
 
-        if (Settings.rumble == RumbleOn) DoRumble(i);
+        if (Settings.rumble == ON) DoRumble(i);
     }
 }
 

@@ -87,7 +87,7 @@ int OnScreenNumpad(char * var, u32 maxlen)
 
     GuiText okBtnTxt(tr( "OK" ), 22, Theme.prompttext);
     GuiImage okBtnImg(&btnOutline);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         okBtnTxt.SetWidescreen(Settings.widescreen);
         okBtnImg.SetWidescreen(Settings.widescreen);
@@ -96,7 +96,7 @@ int OnScreenNumpad(char * var, u32 maxlen)
     okBtn.SetLabel(&okBtnTxt);
     GuiText cancelBtnTxt(tr( "Cancel" ), 22, Theme.prompttext);
     GuiImage cancelBtnImg(&btnOutline);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         cancelBtnTxt.SetWidescreen(Settings.widescreen);
         cancelBtnImg.SetWidescreen(Settings.widescreen);
@@ -146,20 +146,10 @@ int OnScreenKeyboard(char * var, u32 maxlen, int min)
 {
 
     int save = -1;
-    int keyset = 0;
-    if (Settings.keyset == us)
-        keyset = 0;
-    else if (Settings.keyset == dvorak)
-        keyset = 1;
-    else if (Settings.keyset == euro)
-        keyset = 2;
-    else if (Settings.keyset == azerty)
-        keyset = 3;
-    else if (Settings.keyset == qwerty) keyset = 4;
 
-    gprintf("\nOnScreenKeyboard(%s, %i, %i) \n\tkeyset = %i", var, maxlen, min, keyset);
+    gprintf("\nOnScreenKeyboard(%s, %i, %i) \n\tkeyset = %i", var, maxlen, min, Settings.keyset);
 
-    GuiKeyboard keyboard(var, maxlen, min, keyset);
+    GuiKeyboard keyboard(var, maxlen, min, Settings.keyset);
 
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
     // because destroy GuiSound must wait while sound playing is finished, we use a global sound
@@ -175,7 +165,7 @@ int OnScreenKeyboard(char * var, u32 maxlen, int min)
 
     GuiText okBtnTxt(tr( "OK" ), 22, Theme.prompttext);
     GuiImage okBtnImg(&btnOutline);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         okBtnTxt.SetWidescreen(Settings.widescreen);
         okBtnImg.SetWidescreen(Settings.widescreen);
@@ -184,7 +174,7 @@ int OnScreenKeyboard(char * var, u32 maxlen, int min)
     okBtn.SetLabel(&okBtnTxt);
     GuiText cancelBtnTxt(tr( "Cancel" ), 22, Theme.prompttext);
     GuiImage cancelBtnImg(&btnOutline);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         cancelBtnTxt.SetWidescreen(Settings.widescreen);
         cancelBtnImg.SetWidescreen(Settings.widescreen);
@@ -549,7 +539,7 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label, cons
     trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 
     GuiImage dialogBoxImg(&dialogBox);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         dialogBoxImg.SetWidescreen(Settings.widescreen);
     }
@@ -564,7 +554,7 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label, cons
 
     GuiText btn1Txt(btn1Label, 22, Theme.prompttext);
     GuiImage btn1Img(&btnOutline);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         btn1Txt.SetWidescreen(Settings.widescreen);
         btn1Img.SetWidescreen(Settings.widescreen);
@@ -576,7 +566,7 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label, cons
 
     GuiText btn2Txt(btn2Label, 22, Theme.prompttext);
     GuiImage btn2Img(&btnOutline);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         btn2Txt.SetWidescreen(Settings.widescreen);
         btn2Img.SetWidescreen(Settings.widescreen);
@@ -587,7 +577,7 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label, cons
 
     GuiText btn3Txt(btn3Label, 22, Theme.prompttext);
     GuiImage btn3Img(&btnOutline);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         btn3Txt.SetWidescreen(Settings.widescreen);
         btn3Img.SetWidescreen(Settings.widescreen);
@@ -598,7 +588,7 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label, cons
 
     GuiText btn4Txt(btn4Label, 22, Theme.prompttext);
     GuiImage btn4Img(&btnOutline);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         btn4Txt.SetWidescreen(Settings.widescreen);
         btn4Img.SetWidescreen(Settings.widescreen);
@@ -607,7 +597,7 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label, cons
     btn4.SetLabel(&btn4Txt);
     if (btn4Label) btn4.SetTrigger(&trigB);
 
-    if ((Settings.wsprompt == yes) && (Settings.widescreen)) /////////////adjust buttons for widescreen
+    if ((Settings.wsprompt) && (Settings.widescreen)) /////////////adjust buttons for widescreen
     {
         msgTxt.SetMaxWidth(330);
 
@@ -909,7 +899,7 @@ int WindowExitPrompt()
     {   0, 0, 0, 255});
     closeTxt.SetPosition(10, 3);
     GuiImage closeImg(&close);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         closeTxt.SetWidescreen(Settings.widescreen);
         closeImg.SetWidescreen(Settings.widescreen);
@@ -930,7 +920,7 @@ int WindowExitPrompt()
     GuiText btn2Txt(tr( "Back to Loader" ), 28, ( GXColor )
     {   0, 0, 0, 255});
     GuiImage btn2Img(&button);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         btn2Txt.SetWidescreen(Settings.widescreen);
         btn2Img.SetWidescreen(Settings.widescreen);
@@ -944,7 +934,7 @@ int WindowExitPrompt()
     GuiText btn3Txt(tr( "Wii Menu" ), 28, ( GXColor )
     {   0, 0, 0, 255});
     GuiImage btn3Img(&button);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         btn3Txt.SetWidescreen(Settings.widescreen);
         btn3Img.SetWidescreen(Settings.widescreen);
@@ -963,7 +953,7 @@ int WindowExitPrompt()
     btn4.SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_IN, 50);
 
     GuiImage wiimoteImg(&wiimote);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         wiimoteImg.SetWidescreen(Settings.widescreen);
     }
@@ -1242,9 +1232,9 @@ int GameWindowPrompt()
     GuiImage dialogBoxImg(&dialogBox);
 
     GuiTooltip nameBtnTT(tr( "Rename Game on WBFS" ));
-    if (Settings.wsprompt == yes) nameBtnTT.SetWidescreen(Settings.widescreen);
+    if (Settings.wsprompt) nameBtnTT.SetWidescreen(Settings.widescreen);
     GuiText nameTxt("", 22, Theme.prompttext);
-    if (Settings.wsprompt == yes) nameTxt.SetWidescreen(Settings.widescreen);
+    if (Settings.wsprompt) nameTxt.SetWidescreen(Settings.widescreen);
     nameTxt.SetMaxWidth(350, SCROLL_HORIZONTAL);
     GuiButton nameBtn(120, 50);
     nameBtn.SetLabel(&nameTxt);
@@ -1293,7 +1283,7 @@ int GameWindowPrompt()
 
     GuiText btn2Txt(tr( "Back" ), 22, Theme.prompttext);
     GuiImage btn2Img(&btnOutline);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         btn2Txt.SetWidescreen(Settings.widescreen);
         btn2Img.SetWidescreen(Settings.widescreen);
@@ -1315,7 +1305,7 @@ int GameWindowPrompt()
 
     GuiText btn3Txt(tr( "Settings" ), 22, Theme.prompttext);
     GuiImage btn3Img(&btnOutline);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         btn3Txt.SetWidescreen(Settings.widescreen);
         btn3Img.SetWidescreen(Settings.widescreen);
@@ -1353,7 +1343,7 @@ int GameWindowPrompt()
     SetupLockedButton(&btnLocked, &btnLockedImg, &btnSoundOver, btnClick2, &trigA);
 
     GuiImage btnLeftImg(&imgLeft);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         btnLeftImg.SetWidescreen(Settings.widescreen);
     }
@@ -1362,7 +1352,7 @@ int GameWindowPrompt()
     btnLeft.SetTrigger(&trigMinus);
 
     GuiImage btnRightImg(&imgRight);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         btnRightImg.SetWidescreen(Settings.widescreen);
     }
@@ -1606,7 +1596,7 @@ int GameWindowPrompt()
             }
             else if (btnFavorite1.GetState() == STATE_CLICKED) //switch favorite
             {
-                if (isInserted(bootDevice))
+                if (isInserted(Settings.BootDevice))
                 {
                     SetFavorite(&btnFavorite1, &btnFavorite2, &btnFavorite3, &btnFavorite4, &btnFavorite5, header->id,
                             1);
@@ -1617,7 +1607,7 @@ int GameWindowPrompt()
             }
             else if (btnLocked.GetState() == STATE_CLICKED) //switch locked
             {
-                if (isInserted(bootDevice))
+                if (isInserted(Settings.BootDevice))
                 {
                     SetLocked(&btnLocked, header->id, 1);
                     SetLockedImage(header->id, &btnLockedImg, &imgLocked, &imgNotLocked);
@@ -1626,7 +1616,7 @@ int GameWindowPrompt()
             }
             else if (btnFavorite2.GetState() == STATE_CLICKED) //switch favorite
             {
-                if (isInserted(bootDevice))
+                if (isInserted(Settings.BootDevice))
                 {
                     SetFavorite(&btnFavorite1, &btnFavorite2, &btnFavorite3, &btnFavorite4, &btnFavorite5, header->id,
                             2);
@@ -1637,7 +1627,7 @@ int GameWindowPrompt()
             }
             else if (btnFavorite3.GetState() == STATE_CLICKED) //switch favorite
             {
-                if (isInserted(bootDevice))
+                if (isInserted(Settings.BootDevice))
                 {
                     SetFavorite(&btnFavorite1, &btnFavorite2, &btnFavorite3, &btnFavorite4, &btnFavorite5, header->id,
                             3);
@@ -1648,7 +1638,7 @@ int GameWindowPrompt()
             }
             else if (btnFavorite4.GetState() == STATE_CLICKED) //switch favorite
             {
-                if (isInserted(bootDevice))
+                if (isInserted(Settings.BootDevice))
                 {
                     SetFavorite(&btnFavorite1, &btnFavorite2, &btnFavorite3, &btnFavorite4, &btnFavorite5, header->id,
                             4);
@@ -1659,7 +1649,7 @@ int GameWindowPrompt()
             }
             else if (btnFavorite5.GetState() == STATE_CLICKED) //switch favorite
             {
-                if (isInserted(bootDevice))
+                if (isInserted(Settings.BootDevice))
                 {
                     SetFavorite(&btnFavorite1, &btnFavorite2, &btnFavorite3, &btnFavorite4, &btnFavorite5, header->id,
                             5);
@@ -1674,7 +1664,7 @@ int GameWindowPrompt()
                 ScreenShot();
             }
             // this next part is long because nobody could agree on what the left/right buttons should do
-            else if ((btnRight.GetState() == STATE_CLICKED) && (Settings.xflip == no)) //next game
+            else if ((btnRight.GetState() == STATE_CLICKED) && (Settings.xflip == XFLIP_NO)) //next game
             {
                 promptWindow.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 50);
                 changed = 1;
@@ -1684,7 +1674,7 @@ int GameWindowPrompt()
                 break;
             }
 
-            else if ((btnLeft.GetState() == STATE_CLICKED) && (Settings.xflip == no)) //previous game
+            else if ((btnLeft.GetState() == STATE_CLICKED) && (Settings.xflip == XFLIP_NO)) //previous game
             {
                 promptWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 50);
                 changed = 2;
@@ -1694,7 +1684,7 @@ int GameWindowPrompt()
                 break;
             }
 
-            else if ((btnRight.GetState() == STATE_CLICKED) && (Settings.xflip == yes)) //previous game
+            else if ((btnRight.GetState() == STATE_CLICKED) && (Settings.xflip == XFLIP_YES)) //previous game
             {
                 promptWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 50);
                 changed = 2;
@@ -1704,7 +1694,7 @@ int GameWindowPrompt()
                 break;
             }
 
-            else if ((btnLeft.GetState() == STATE_CLICKED) && (Settings.xflip == yes)) //next game
+            else if ((btnLeft.GetState() == STATE_CLICKED) && (Settings.xflip == XFLIP_YES)) //next game
             {
                 promptWindow.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 50);
                 changed = 1;
@@ -1714,7 +1704,7 @@ int GameWindowPrompt()
                 break;
             }
 
-            else if ((btnRight.GetState() == STATE_CLICKED) && (Settings.xflip == sysmenu)) //previous game
+            else if ((btnRight.GetState() == STATE_CLICKED) && (Settings.xflip == XFLIP_SYSMENU)) //previous game
             {
                 promptWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 50);
                 changed = 2;
@@ -1724,7 +1714,7 @@ int GameWindowPrompt()
                 break;
             }
 
-            else if ((btnLeft.GetState() == STATE_CLICKED) && (Settings.xflip == sysmenu)) //next game
+            else if ((btnLeft.GetState() == STATE_CLICKED) && (Settings.xflip == XFLIP_SYSMENU)) //next game
             {
                 promptWindow.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 50);
                 changed = 1;
@@ -1734,7 +1724,7 @@ int GameWindowPrompt()
                 break;
             }
 
-            else if ((btnRight.GetState() == STATE_CLICKED) && (Settings.xflip == wtf)) //previous game
+            else if ((btnRight.GetState() == STATE_CLICKED) && (Settings.xflip == XFLIP_WTF)) //previous game
             {
                 promptWindow.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 50);
                 changed = 1;
@@ -1744,7 +1734,7 @@ int GameWindowPrompt()
                 break;
             }
 
-            else if ((btnLeft.GetState() == STATE_CLICKED) && (Settings.xflip == wtf)) //next game
+            else if ((btnLeft.GetState() == STATE_CLICKED) && (Settings.xflip == XFLIP_WTF)) //next game
             {
                 promptWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 50);
                 changed = 2;
@@ -1754,7 +1744,7 @@ int GameWindowPrompt()
                 break;
             }
 
-            else if ((btnRight.GetState() == STATE_CLICKED) && (Settings.xflip == disk3d)) //next game
+            else if ((btnRight.GetState() == STATE_CLICKED) && (Settings.xflip == XFLIP_DISK3D)) //next game
             {
                 //              diskImg.SetBetaRotateEffect(45, 90);
                 changed = 3;
@@ -1764,7 +1754,7 @@ int GameWindowPrompt()
                 break;
             }
 
-            else if ((btnLeft.GetState() == STATE_CLICKED) && (Settings.xflip == disk3d)) //previous game
+            else if ((btnLeft.GetState() == STATE_CLICKED) && (Settings.xflip == XFLIP_DISK3D)) //previous game
             {
                 //              diskImg.SetBetaRotateEffect(-45, 90);
                 //              promptWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 1/*50*/);
@@ -1824,7 +1814,7 @@ int DiscWait(const char *title, const char *msg, const char *btn1Label, const ch
     trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 
     GuiImage dialogBoxImg(&dialogBox);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         dialogBoxImg.SetWidescreen(Settings.widescreen);
     }
@@ -1839,7 +1829,7 @@ int DiscWait(const char *title, const char *msg, const char *btn1Label, const ch
 
     GuiText btn1Txt(btn1Label, 22, Theme.prompttext);
     GuiImage btn1Img(&btnOutline);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         btn1Txt.SetWidescreen(Settings.widescreen);
         btn1Img.SetWidescreen(Settings.widescreen);
@@ -1863,7 +1853,7 @@ int DiscWait(const char *title, const char *msg, const char *btn1Label, const ch
 
     GuiText btn2Txt(btn2Label, 22, Theme.prompttext);
     GuiImage btn2Img(&btnOutline);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         btn2Txt.SetWidescreen(Settings.widescreen);
         btn2Img.SetWidescreen(Settings.widescreen);
@@ -1871,7 +1861,7 @@ int DiscWait(const char *title, const char *msg, const char *btn1Label, const ch
     GuiButton btn2(&btn2Img, &btn2Img, 1, 4, -20, -25, &trigA, &btnSoundOver, btnClick2, 1);
     btn2.SetLabel(&btn2Txt);
 
-    if ((Settings.wsprompt == yes) && (Settings.widescreen)) /////////////adjust buttons for widescreen
+    if ((Settings.wsprompt) && (Settings.widescreen)) /////////////adjust buttons for widescreen
     {
         msgTxt.SetMaxWidth(380);
         if (btn2Label)
@@ -1963,7 +1953,7 @@ int FormatingPartition(const char *title, partitionEntry *entry)
     trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 
     GuiImage dialogBoxImg(&dialogBox);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         dialogBoxImg.SetWidescreen(Settings.widescreen);
     }
@@ -2018,7 +2008,7 @@ bool SearchMissingImages(int choice2)
 
     GuiImage dialogBoxImg(&dialogBox);
 
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         dialogBoxImg.SetWidescreen(Settings.widescreen);
     }
@@ -2150,7 +2140,7 @@ bool NetworkInitPrompt()
 
     GuiImage dialogBoxImg(&dialogBox);
 
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         dialogBoxImg.SetWidescreen(Settings.widescreen);
     }
@@ -2166,7 +2156,7 @@ bool NetworkInitPrompt()
 
     GuiText btn1Txt(tr( "Cancel" ), 22, Theme.prompttext);
     GuiImage btn1Img(&btnOutline);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         btn1Txt.SetWidescreen(Settings.widescreen);
         btn1Img.SetWidescreen(Settings.widescreen);
@@ -2175,7 +2165,7 @@ bool NetworkInitPrompt()
     btn1.SetLabel(&btn1Txt);
     btn1.SetState(STATE_SELECTED);
 
-    if ((Settings.wsprompt == yes) && (Settings.widescreen)) /////////////adjust buttons for widescreen
+    if ((Settings.wsprompt) && (Settings.widescreen)) /////////////adjust buttons for widescreen
     {
         btn1.SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
         btn1.SetPosition(0, -80);
@@ -2255,14 +2245,14 @@ int ProgressDownloadWindow(int choice2)
     trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 
     GuiImage dialogBoxImg(&dialogBox);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         dialogBoxImg.SetWidescreen(Settings.widescreen);
     }
 
     GuiImageData progressbarOutline(Resources::GetFile("progressbar_outline.png"), Resources::GetFileSize("progressbar_outline.png"));
     GuiImage progressbarOutlineImg(&progressbarOutline);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         progressbarOutlineImg.SetWidescreen(Settings.widescreen);
     }
@@ -2298,7 +2288,7 @@ int ProgressDownloadWindow(int choice2)
 
     GuiText btn1Txt(tr( "Cancel" ), 22, Theme.prompttext);
     GuiImage btn1Img(&btnOutline);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         btn1Txt.SetWidescreen(Settings.widescreen);
         btn1Img.SetWidescreen(Settings.widescreen);
@@ -2307,7 +2297,7 @@ int ProgressDownloadWindow(int choice2)
     btn1.SetLabel(&btn1Txt);
     btn1.SetState(STATE_SELECTED);
 
-    if ((Settings.wsprompt == yes) && (Settings.widescreen)) /////////////adjust for widescreen
+    if ((Settings.wsprompt) && (Settings.widescreen)) /////////////adjust for widescreen
     {
         progressbarOutlineImg.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
         progressbarOutlineImg.SetPosition(0, 40);
@@ -2378,7 +2368,7 @@ int ProgressDownloadWindow(int choice2)
         tries = 0;
         prTxt.SetTextf("%i%%", 100 * i / cntMissFiles);
 
-        if ((Settings.wsprompt == yes) && (Settings.widescreen))
+        if ((Settings.wsprompt) && (Settings.widescreen))
         {
             //adjust for widescreen
             progressbarImg.SetPosition(80, 40);
@@ -2861,7 +2851,7 @@ int ProgressUpdateWindow()
     trigA.SetSimpleTrigger( -1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A );
 
     GuiImage dialogBoxImg( &dialogBox );
-    if ( Settings.wsprompt == yes )
+    if ( Settings.wsprompt )
     {
         dialogBoxImg.SetWidescreen( Settings.widescreen );
     }
@@ -2869,7 +2859,7 @@ int ProgressUpdateWindow()
     snprintf( imgPath, sizeof( imgPath ), "%sprogressbar_outline.png", Settings.theme_path );
     GuiImageData progressbarOutline( imgPath, progressbar_outline_png );
     GuiImage progressbarOutlineImg( &progressbarOutline );
-    if ( Settings.wsprompt == yes )
+    if ( Settings.wsprompt )
     {
         progressbarOutlineImg.SetWidescreen( Settings.widescreen );
     }
@@ -2910,7 +2900,7 @@ int ProgressUpdateWindow()
 
     GuiText btn1Txt( tr( "Cancel" ), 22, Theme.prompttext );
     GuiImage btn1Img( &btnOutline );
-    if ( Settings.wsprompt == yes )
+    if ( Settings.wsprompt )
     {
         btn1Txt.SetWidescreen( Settings.widescreen );
         btn1Img.SetWidescreen( Settings.widescreen );
@@ -2919,7 +2909,7 @@ int ProgressUpdateWindow()
     btn1.SetLabel( &btn1Txt );
     btn1.SetState( STATE_SELECTED );
 
-    if ( ( Settings.wsprompt == yes ) && ( Settings.widescreen ) ) /////////////adjust for widescreen
+    if ( ( Settings.wsprompt ) && ( Settings.widescreen ) ) /////////////adjust for widescreen
 
     {
         progressbarOutlineImg.SetAlignment( ALIGN_CENTRE, ALIGN_MIDDLE );
@@ -3069,7 +3059,7 @@ int ProgressUpdateWindow()
                     {
                         usleep( 100 );
                         prTxt.SetTextf( "%i%%", ( 100*i / filesize ) + 1 );
-                        if ( ( Settings.wsprompt == yes ) && ( Settings.widescreen ) )
+                        if ( ( Settings.wsprompt ) && ( Settings.widescreen ) )
                         {
                             progressbarImg.SetTile( 80*i / filesize );
                         }
@@ -3224,14 +3214,14 @@ int ProgressUpdateWindow()
     trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 
     GuiImage dialogBoxImg(&dialogBox);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         dialogBoxImg.SetWidescreen(Settings.widescreen);
     }
 
     GuiImageData progressbarOutline(Resources::GetFile("progressbar_outline.png"), Resources::GetFileSize("progressbar_outline.png"));
     GuiImage progressbarOutlineImg(&progressbarOutline);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         progressbarOutlineImg.SetWidescreen(Settings.widescreen);
     }
@@ -3270,7 +3260,7 @@ int ProgressUpdateWindow()
 
     GuiText btn1Txt(tr( "Cancel" ), 22, Theme.prompttext);
     GuiImage btn1Img(&btnOutline);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         btn1Txt.SetWidescreen(Settings.widescreen);
         btn1Img.SetWidescreen(Settings.widescreen);
@@ -3279,7 +3269,7 @@ int ProgressUpdateWindow()
     btn1.SetLabel(&btn1Txt);
     btn1.SetState(STATE_SELECTED);
 
-    if ((Settings.wsprompt == yes) && (Settings.widescreen)) /////////////adjust for widescreen
+    if ((Settings.wsprompt) && (Settings.widescreen)) /////////////adjust for widescreen
     {
         progressbarOutlineImg.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
         progressbarOutlineImg.SetPosition(0, 7);
@@ -3400,7 +3390,7 @@ int ProgressUpdateWindow()
                         {
                             usleep(100);
                             prTxt.SetTextf("%i%%", (100 * i / filesize) + 1);
-                            if ((Settings.wsprompt == yes) && (Settings.widescreen))
+                            if ((Settings.wsprompt) && (Settings.widescreen))
                             {
                                 progressbarImg.SetTile(80 * i / filesize);
                             }
@@ -3617,7 +3607,7 @@ int CodeDownload(const char *id)
     trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 
     GuiImage dialogBoxImg(&dialogBox);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         dialogBoxImg.SetWidescreen(Settings.widescreen);
     }
@@ -3639,7 +3629,7 @@ int CodeDownload(const char *id)
 
     GuiText btn1Txt(tr( "Cancel" ), 22, Theme.prompttext);
     GuiImage btn1Img(&btnOutline);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         btn1Txt.SetWidescreen(Settings.widescreen);
         btn1Img.SetWidescreen(Settings.widescreen);
@@ -3859,7 +3849,7 @@ int HBCWindowPrompt(const char *name, const char *coder, const char *version, co
     whiteBoxImg.SetPosition(0, 110);
     whiteBoxImg.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     whiteBoxImg.SetSkew(0, 0, 0, 0, 0, -120, 0, -120);
-    /*if (Settings.wsprompt == yes){
+    /*if (Settings.wsprompt){
      dialogBoxImg.SetWidescreen(Settings.widescreen);
      }*/
 
@@ -3928,7 +3918,7 @@ int HBCWindowPrompt(const char *name, const char *coder, const char *version, co
 
     GuiText btn1Txt(tr( "Load" ), 22, Theme.prompttext);
     GuiImage btn1Img(&btnOutline);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         btn1Txt.SetWidescreen(Settings.widescreen);
         btn1Img.SetWidescreen(Settings.widescreen);
@@ -3940,7 +3930,7 @@ int HBCWindowPrompt(const char *name, const char *coder, const char *version, co
 
     GuiText btn2Txt(tr( "Back" ), 22, Theme.prompttext);
     GuiImage btn2Img(&btnOutline);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         btn2Txt.SetWidescreen(Settings.widescreen);
         btn2Img.SetWidescreen(Settings.widescreen);

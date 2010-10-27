@@ -37,7 +37,7 @@ extern u8 mountMethod;
 /********************************************************************************
  *Disk Browser
  *********************************************************************************/
-int DiscBrowse(struct discHdr * header)
+int DiscBrowse(struct discHdr * header, char * alternatedname, int alternatedname_size)
 {
     gprintf("\nDiscBrowser() started");
     bool exit = false;
@@ -130,7 +130,7 @@ int DiscBrowse(struct discHdr * header)
     GuiText cancelBtnTxt(tr( "Back" ), 22, Theme.prompttext);
     cancelBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
     GuiImage cancelBtnImg(&btnOutline);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt == ON)
     {
         cancelBtnTxt.SetWidescreen(Settings.widescreen);
         cancelBtnImg.SetWidescreen(Settings.widescreen);
@@ -174,7 +174,7 @@ int DiscBrowse(struct discHdr * header)
             if (choice)
             {
                 //ret = offsetselect[ret];
-                strlcpy(alternatedname, temp, sizeof(alternatedname));
+                strlcpy(alternatedname, temp, alternatedname_size);
                 exit = true;
             }
         }

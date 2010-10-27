@@ -3,6 +3,7 @@
 #include "IosLoader.h"
 #include "../fatmounter.h"
 #include "../usbloader/usbstorage2.h"
+#include "../usbloader/disc.h"
 #include "../wad/nandtitle.h"
 #include "../mload/mload_modules.h"
 #include "../settings/CSettings.h"

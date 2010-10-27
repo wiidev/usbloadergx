@@ -153,7 +153,7 @@ void ScreenShot()
     timeinfo = localtime(&rawtime);
     //USBLoader_GX_ScreenShot-Month_Day_Hour_Minute_Second_Year.png
     strftime(buffer, 80, "USBLoader_GX_ScreenShot-%b%d%H%M%S%y.png", timeinfo);
-    sprintf(buffer2, "%s/config/%s", bootDevice, buffer);
+    sprintf(buffer2, "%s/config/%s", Settings.BootDevice, buffer);
 
     TakeScreenshot(buffer2);
 }

@@ -15,7 +15,7 @@
 #include "alternatedol.h"
 #include "memory.h"
 #include "wbfs.h"
-#include "../settings/cfg.h"
+#include "../settings/SettingsEnums.h"
 #include "../gecko.h"
 #include "../fatmounter.h"
 
@@ -92,22 +92,22 @@ void __Disc_SetVMode(u8 videoselected)
 
     switch (videoselected)
     {
-	case pal50:
+	case VIDEO_MODE_PAL50:
             vmode = &TVPal528IntDf;
             vmode_reg = (vmode->viTVMode) >> 2;
             break;
-	case pal60:
+	case VIDEO_MODE_PAL60:
             vmode = (progressive) ? &TVNtsc480Prog : &TVEurgb60Hz480IntDf;
             vmode_reg = (vmode->viTVMode) >> 2;
             break;
-	case ntsc:
+	case VIDEO_MODE_NTSC:
             vmode = (progressive) ? &TVNtsc480Prog : &TVNtsc480IntDf;
             vmode_reg = (vmode->viTVMode) >> 2;
             break;
-	case systemdefault:
+	case VIDEO_MODE_SYSDEFAULT:
             //       vmode     = VIDEO_GetPreferredMode(NULL);
             break;
-	case discdefault:
+	case VIDEO_MODE_DISCDEFAULT:
 	default:
 	    /* Select video mode */
 	    switch (diskid[3])

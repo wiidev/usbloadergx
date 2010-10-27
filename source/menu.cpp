@@ -119,7 +119,7 @@ static void * UpdateGUI(void *arg)
         }
 
         mainWindow->Draw();
-        if (Settings.tooltips == TooltipsOn && Theme.show_tooltip != 0 && mainWindow->GetState() != STATE_DISABLED) mainWindow->DrawTooltip();
+        if (Settings.tooltips == ON && Theme.show_tooltip != 0 && mainWindow->GetState() != STATE_DISABLED) mainWindow->DrawTooltip();
 
         for (i = 3; i >= 0; i--)
         {
@@ -313,7 +313,6 @@ int MainMenu(int menu)
 
     CloseXMLDatabase();
     NewTitles::DestroyInstance();
-    CFG_Cleanup();
 
     if (strcmp(headlessID, "") != 0) //the GUIthread was never started, so it cant be ended and joined properly if headless mode was used.  so we resume it and close it.
     ResumeGui();
@@ -410,9 +409,9 @@ int MainMenu(int menu)
         u8 iosChoice = Settings.cios;
         u8 fix002 = Settings.error002;
         u8 countrystrings = Settings.patchcountrystrings;
-	u8 alternatedol = off;
+		u8 alternatedol = OFF;
         u32 alternatedoloffset = 0;
-        u8 reloadblock = off;
+        u8 reloadblock = OFF;
         u8 returnToLoaderGV = 1;
 
         GameCFG * game_cfg = GameSettings.GetGameCFG(header->id);
@@ -463,7 +462,7 @@ int MainMenu(int menu)
         ret = do_bca_code(header->id);
         gprintf("%d\n", ret);
 
-        if (reloadblock == on && Sys_IsHermes())
+        if (reloadblock == ON && Sys_IsHermes())
         {
             enable_ES_ioctlv_vector();
             if (load_from_fs == PART_FS_WBFS)

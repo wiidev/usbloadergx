@@ -47,21 +47,21 @@ extern PartList partitions;
 extern char game_partition[6];
 extern u8 load_from_fs;
 
-static const char *opts_no_yes[settings_off_on_max] = { trNOOP( "No" ), trNOOP( "Yes" ) };
-static const char *opts_off_on[settings_off_on_max] = { trNOOP( "OFF" ), trNOOP( "ON" ) };
-static const char *opts_videomode[settings_language_max][2] = { { "", trNOOP( "Disc Default" ) }, {
+static const char *opts_no_yes[MAX_ON_OFF] = { trNOOP( "No" ), trNOOP( "Yes" ) };
+static const char *opts_off_on[MAX_ON_OFF] = { trNOOP( "OFF" ), trNOOP( "ON" ) };
+static const char *opts_videomode[VIDEO_MODE_MAX][2] = { { "", trNOOP( "Disc Default" ) }, {
         trNOOP( "System Default" ), "" }, { trNOOP( "AutoPatch" ), "" }, { trNOOP( "Force" ), " PAL50" }, {
         trNOOP( "Force" ), " PAL60" }, { trNOOP( "Force" ), " NTSC" } };
-static const char *opts_language[settings_language_max] = { trNOOP( "Console Default" ), trNOOP( "Japanese" ),
+static const char *opts_language[MAX_LANGUAGE] = { trNOOP( "App Default" ), trNOOP( "Console Default" ), trNOOP( "Japanese" ),
         trNOOP( "English" ), trNOOP( "German" ), trNOOP( "French" ), trNOOP( "Spanish" ), trNOOP( "Italian" ),
         trNOOP( "Dutch" ), trNOOP( "SChinese" ), trNOOP( "TChinese" ), trNOOP( "Korean" ) };
 static const char *opts_lockedgames[2] = { trNOOP( "0 (Locked and Unlocked Games)" ), trNOOP( "1 (Unlocked Games Only)" ) };
 static const char *opts_parentalcontrol[5] = { trNOOP( "0 (Everyone)" ), trNOOP( "1 (Child 7+)" ),
         trNOOP( "2 (Teen 12+)" ), trNOOP( "3 (Mature 16+)" ), trNOOP( "4 (Adults Only 18+)" ) };
 static const char *opts_error002[3] = { trNOOP( "No" ), trNOOP( "Yes" ), trNOOP( "Anti" ) };
-static const char *opts_partitions[settings_partitions_max] = { trNOOP( "Game partition" ), trNOOP( "All partitions" ),
+static const char *opts_partitions[3] = { trNOOP( "Game partition" ), trNOOP( "All partitions" ),
         trNOOP( "Remove update" ) };
-static const char *opts_installdir[settings_installdir_max] = { trNOOP( "None" ), trNOOP( "GAMEID_Gamename" ),
+static const char *opts_installdir[INSTALL_TO_MAX] = { trNOOP( "None" ), trNOOP( "GAMEID_Gamename" ),
         trNOOP( "Gamename [GAMEID]" ) };
 
 bool IsValidPartition(int fs_type, int cios)
@@ -152,7 +152,7 @@ int MenuSettings()
     GuiText backBtnTxt(tr( "Back" ), 22, Theme.prompttext);
     backBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
     GuiImage backBtnImg(&btnOutline);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt == ON)
     {
         backBtnTxt.SetWidescreen(Settings.widescreen);
         backBtnImg.SetWidescreen(Settings.widescreen);
@@ -724,7 +724,7 @@ int MenuSettings()
                                 if (firstRun) options2.SetName(Idx, "%s", tr( "App Language" ));
                                 if (ret == Idx)
                                 {
-                                    if (isInserted(bootDevice))
+                                    if (isInserted(Settings.BootDevice))
                                     {
                                         if (Settings.godmode == 1)
                                         {
@@ -773,8 +773,8 @@ int MenuSettings()
                             if (ret == ++Idx || firstRun)
                             {
                                 if (firstRun) options2.SetName(Idx, "%s", tr( "Display" ));
-                                if (ret == Idx && ++Settings.sinfo >= settings_sinfo_max) Settings.sinfo = 0;
-                                static const char *opts[settings_sinfo_max] = { trNOOP( "Game ID" ),
+                                if (ret == Idx && ++Settings.sinfo >= GAMEINFO_MAX) Settings.sinfo = 0;
+                                static const char *opts[GAMEINFO_MAX] = { trNOOP( "Game ID" ),
                                         trNOOP( "Game Region" ), trNOOP( "Both" ), trNOOP( "Neither" ) };
                                 options2.SetValue(Idx, "%s", tr( opts[Settings.sinfo] ));
                             }
@@ -782,26 +782,26 @@ int MenuSettings()
                             if (ret == ++Idx || firstRun)
                             {
                                 if (firstRun) options2.SetName(Idx, "%s", tr( "Clock" ));
-                                if (ret == Idx && ++Settings.hddinfo >= settings_clock_max) Settings.hddinfo = 0; //CLOCK
-                                if (Settings.hddinfo == hr12)
+                                if (ret == Idx && ++Settings.hddinfo >= CLOCK_MAX) Settings.hddinfo = 0; //CLOCK
+                                if (Settings.hddinfo == CLOCK_HR12)
                                     options2.SetValue(Idx, "12 %s", tr( "Hour" ));
-                                else if (Settings.hddinfo == hr24)
+                                else if (Settings.hddinfo == CLOCK_HR24)
                                     options2.SetValue(Idx, "24 %s", tr( "Hour" ));
-                                else if (Settings.hddinfo == Off) options2.SetValue(Idx, "%s", tr( "OFF" ));
+                                else if (Settings.hddinfo == OFF) options2.SetValue(Idx, "%s", tr( "OFF" ));
                             }
 
                             if (ret == ++Idx || firstRun)
                             {
                                 if (firstRun) options2.SetName(Idx, "%s", tr( "Tooltips" ));
-                                if (ret == Idx && ++Settings.tooltips >= settings_tooltips_max) Settings.tooltips = 0;
+                                if (ret == Idx && ++Settings.tooltips >= MAX_ON_OFF) Settings.tooltips = 0;
                                 options2.SetValue(Idx, "%s", tr( opts_off_on[Settings.tooltips] ));
                             }
 
                             if (ret == ++Idx || firstRun)
                             {
                                 if (firstRun) options2.SetName(Idx, "%s", tr( "Flip-X" ));
-                                if (ret == Idx && ++Settings.xflip >= settings_xflip_max) Settings.xflip = 0;
-                                static const char *opts[settings_xflip_max][3] =
+                                if (ret == Idx && ++Settings.xflip >= XFLIP_MAX) Settings.xflip = 0;
+                                static const char *opts[XFLIP_MAX][3] =
                                         { { trNOOP( "Right" ), "/", trNOOP( "Next" ) }, { trNOOP( "Left" ), "/",
                                                 trNOOP( "Prev" ) }, { trNOOP( "Like SysMenu" ), "", "" }, {
                                                 trNOOP( "Right" ), "/", trNOOP( "Prev" ) }, { trNOOP( "DiskFlip" ),
@@ -813,8 +813,8 @@ int MenuSettings()
                             if (ret == ++Idx || firstRun)
                             {
                                 if (firstRun) options2.SetName(Idx, "%s", tr( "Prompts Buttons" ));
-                                if (ret == Idx && ++Settings.wsprompt >= settings_off_on_max) Settings.wsprompt = 0;
-                                static const char *opts[settings_off_on_max] = { trNOOP( "Normal" ),
+                                if (ret == Idx && ++Settings.wsprompt >= MAX_ON_OFF) Settings.wsprompt = 0;
+                                static const char *opts[MAX_ON_OFF] = { trNOOP( "Normal" ),
                                         trNOOP( "Widescreen Fix" ) };
                                 options2.SetValue(Idx, "%s", tr( opts[Settings.wsprompt] ));
                             }
@@ -822,9 +822,9 @@ int MenuSettings()
                             if (ret == ++Idx || firstRun)
                             {
                                 if (firstRun) options2.SetName(Idx, "%s", tr( "Keyboard" ));
-                                if (ret == Idx && ++Settings.keyset >= settings_keyset_max) Settings.keyset = 0;
-                                static const char *opts[settings_keyset_max] = { "QWERTY", "QWERTY 2", "DVORAK",
-                                        "QWERTZ", "AZERTY" };
+                                if (ret == Idx && ++Settings.keyset >= KEYBOARD_MAX) Settings.keyset = 0;
+                                static const char *opts[KEYBOARD_MAX] = { "QWERTY", "DVORAK",
+                                        "QWERTZ", "AZERTY", "QWERTY 2" };
                                 options2.SetValue(Idx, "%s", opts[Settings.keyset]);
                             }
 
@@ -840,8 +840,8 @@ int MenuSettings()
                             if (ret == ++Idx || firstRun)
                             {
                                 if (firstRun) options2.SetName(Idx, "%s", tr( "Wiilight" ));
-                                if (ret == Idx && ++Settings.wiilight >= settings_wiilight_max) Settings.wiilight = 0;
-                                static const char *opts[settings_wiilight_max] = { trNOOP( "OFF" ), trNOOP( "ON" ),
+                                if (ret == Idx && ++Settings.wiilight >= WIILIGHT_MAX) Settings.wiilight = 0;
+                                static const char *opts[WIILIGHT_MAX] = { trNOOP( "OFF" ), trNOOP( "ON" ),
                                         trNOOP( "Only for Install" ) };
                                 options2.SetValue(Idx, "%s", tr( opts[Settings.wiilight] ));
                             }
@@ -849,14 +849,14 @@ int MenuSettings()
                             if (ret == ++Idx || firstRun)
                             {
                                 if (firstRun) options2.SetName(Idx, "%s", tr( "Rumble" ));
-                                if (ret == Idx && ++Settings.rumble >= settings_rumble_max) Settings.rumble = 0; //RUMBLE
+                                if (ret == Idx && ++Settings.rumble >= MAX_ON_OFF) Settings.rumble = 0; //RUMBLE
                                 options2.SetValue(Idx, "%s", tr( opts_off_on[Settings.rumble] ));
                             }
 
                             if (ret == ++Idx || firstRun)
                             {
                                 if (firstRun) options2.SetName(Idx, "%s", tr( "AutoInit Network" ));
-                                if (ret == Idx && ++Settings.autonetwork >= settings_off_on_max) Settings.autonetwork
+                                if (ret == Idx && ++Settings.autonetwork >= MAX_ON_OFF) Settings.autonetwork
                                         = 0;
                                 options2.SetValue(Idx, "%s", tr( opts_off_on[Settings.autonetwork] ));
                             }
@@ -864,7 +864,7 @@ int MenuSettings()
                             if (ret == ++Idx || firstRun)
                             {
                                 if (firstRun) options2.SetName(Idx, "%s", tr( "BETA revisions" ));
-                                if (ret == Idx && ++Settings.beta_upgrades >= settings_off_on_max) Settings.beta_upgrades
+                                if (ret == Idx && ++Settings.beta_upgrades >= MAX_ON_OFF) Settings.beta_upgrades
                                         = 0;
                                 options2.SetValue(Idx, "%s", tr( opts_off_on[Settings.beta_upgrades] ));
                             }
@@ -872,7 +872,7 @@ int MenuSettings()
                             if (ret == ++Idx || firstRun)
                             {
                                 if (firstRun) options2.SetName(Idx, "%s", tr( "Titles from WiiTDB" ));
-                                if (ret == Idx && ++Settings.titlesOverride >= settings_off_on_max) Settings.titlesOverride
+                                if (ret == Idx && ++Settings.titlesOverride >= MAX_ON_OFF) Settings.titlesOverride
                                         = 0;
                                 options2.SetValue(Idx, "%s", tr( opts_off_on[Settings.titlesOverride] ));
                             }
@@ -880,9 +880,9 @@ int MenuSettings()
                             if (ret == ++Idx || firstRun)
                             {
                                 if (firstRun) options2.SetName(Idx, "%s", tr( "Screensaver" ));
-                                if (ret == Idx && ++Settings.screensaver >= settings_screensaver_max) Settings.screensaver
+                                if (ret == Idx && ++Settings.screensaver >= SCREENSAVER_MAX) Settings.screensaver
                                         = 0; //RUMBLE
-                                static const char *opts[settings_screensaver_max] = { trNOOP( "OFF" ),
+                                static const char *opts[SCREENSAVER_MAX] = { trNOOP( "OFF" ),
                                         trNOOP( "3 min" ), trNOOP( "5 min" ), trNOOP( "10 min" ), trNOOP( "20 min" ),
                                         trNOOP( "30 min" ), trNOOP( "1 hour" ) };
                                 options2.SetValue(Idx, "%s", tr( opts[Settings.screensaver] ));
@@ -891,7 +891,7 @@ int MenuSettings()
                             if (ret == ++Idx || firstRun)
                             {
                                 if (firstRun) options2.SetName(Idx, "%s", tr( "Mark new games" ));
-                                if (ret == Idx && ++Settings.marknewtitles >= settings_off_on_max) Settings.marknewtitles
+                                if (ret == Idx && ++Settings.marknewtitles >= MAX_ON_OFF) Settings.marknewtitles
                                         = 0;
                                 options2.SetValue(Idx, "%s", tr( opts_off_on[Settings.marknewtitles] ));
                             }
@@ -977,7 +977,7 @@ int MenuSettings()
                             if (ret == ++Idx || firstRun)
                             {
                                 if (firstRun) options2.SetName(Idx, "%s", tr( "Video Mode" ));
-                                if (ret == Idx && ++Settings.videomode >= settings_video_max) Settings.videomode = 0;
+                                if (ret == Idx && ++Settings.videomode >= VIDEO_MODE_MAX) Settings.videomode = 0;
                                 options2.SetValue(Idx, "%s%s", opts_videomode[Settings.videomode][0],
                                         tr( opts_videomode[Settings.videomode][1] ));
                             }
@@ -985,21 +985,21 @@ int MenuSettings()
                             if (ret == ++Idx || firstRun)
                             {
                                 if (firstRun) options2.SetName(Idx, "%s", tr( "VIDTV Patch" ));
-                                if (ret == Idx && ++Settings.videopatch >= settings_off_on_max) Settings.videopatch = 0;
+                                if (ret == Idx && ++Settings.videopatch >= MAX_ON_OFF) Settings.videopatch = 0;
                                 options2.SetValue(Idx, "%s", tr( opts_off_on[Settings.videopatch] ));
                             }
 
                             if (ret == ++Idx || firstRun)
                             {
                                 if (firstRun) options2.SetName(Idx, "%s", tr( "Game Language" ));
-                                if (ret == Idx && ++Settings.language >= settings_language_max) Settings.language = 0;
+                                if (ret == Idx && ++Settings.language >= MAX_LANGUAGE) Settings.language = 0;
                                 options2.SetValue(Idx, "%s", tr( opts_language[Settings.language] ));
                             }
 
                             if (ret == ++Idx || firstRun)
                             {
                                 if (firstRun) options2.SetName(Idx, "%s", tr( "Patch Country Strings" ));
-                                if (ret == Idx && ++Settings.patchcountrystrings >= settings_off_on_max) Settings.patchcountrystrings
+                                if (ret == Idx && ++Settings.patchcountrystrings >= MAX_ON_OFF) Settings.patchcountrystrings
                                         = 0;
                                 options2.SetValue(Idx, "%s", tr( opts_off_on[Settings.patchcountrystrings] ));
                             }
@@ -1007,7 +1007,7 @@ int MenuSettings()
                             if (ret == ++Idx || firstRun)
                             {
                                 if (firstRun) options2.SetName(Idx, "Ocarina");
-                                if (ret == Idx && ++Settings.ocarina >= settings_off_on_max) Settings.ocarina = 0;
+                                if (ret == Idx && ++Settings.ocarina >= MAX_ON_OFF) Settings.ocarina = 0;
                                 options2.SetValue(Idx, "%s", tr( opts_off_on[Settings.ocarina] ));
                             }
 
@@ -1069,7 +1069,7 @@ int MenuSettings()
                             if (ret == ++Idx || firstRun)
                             {
                                 if (firstRun) options2.SetName(Idx, "%s", tr( "FAT: Use directories" ));
-                                if (ret == Idx && ++Settings.FatInstallToDir >= settings_installdir_max) Settings.FatInstallToDir
+                                if (ret == Idx && ++Settings.FatInstallToDir >= INSTALL_TO_MAX) Settings.FatInstallToDir
                                         = 0;
                                 options2.SetValue(Idx, "%s", tr( opts_installdir[Settings.FatInstallToDir] ));
                             }
@@ -1077,7 +1077,7 @@ int MenuSettings()
                             if (ret == ++Idx || firstRun)
                             {
                                 if (firstRun) options2.SetName(Idx, "%s", tr( "Quick Boot" ));
-                                if (ret == Idx && ++Settings.quickboot >= settings_off_on_max) Settings.quickboot = 0;
+                                if (ret == Idx && ++Settings.quickboot >= MAX_ON_OFF) Settings.quickboot = 0;
                                 options2.SetValue(Idx, "%s", tr( opts_no_yes[Settings.quickboot] ));
                             }
 
@@ -1091,9 +1091,9 @@ int MenuSettings()
                             if (ret == ++Idx || firstRun)
                             {
                                 if (firstRun) options2.SetName(Idx, "%s", tr( "Install partitions" ));
-                                if (ret == Idx && ++Settings.partitions_to_install >= settings_partitions_max) Settings.partitions_to_install
+                                if (ret == Idx && ++Settings.InstallPartitions >= 3) Settings.InstallPartitions
                                         = 0;
-                                options2.SetValue(Idx, "%s", tr( opts_partitions[Settings.partitions_to_install] ));
+                                options2.SetValue(Idx, "%s", tr( opts_partitions[Settings.InstallPartitions] ));
                             }
 
                             if (ret == ++Idx || firstRun)
@@ -1403,7 +1403,7 @@ int MenuSettings()
                                 if (firstRun) options2.SetName(Idx, "%s", tr( "Backgroundmusic" ));
                                 if (ret == Idx)
                                 {
-                                    if (isInserted(bootDevice))
+                                    if (isInserted(Settings.BootDevice))
                                     {
                                         w.SetEffect(EFFECT_FADE, -20);
                                         while (w.GetEffect() > 0)
@@ -1633,7 +1633,7 @@ int MenuSettings()
                                             if (entered[len] != '/') strncat(entered, "/", 1);
                                             strlcpy(Settings.covers_path, entered, sizeof(Settings.covers_path));
                                             WindowPrompt(tr( "Cover Path Changed" ), 0, tr( "OK" ));
-                                            if (!isInserted(bootDevice)) WindowPrompt(tr( "No SD-Card inserted!" ),
+                                            if (!isInserted(Settings.BootDevice)) WindowPrompt(tr( "No SD-Card inserted!" ),
                                                     tr( "Insert an SD-Card to save." ), tr( "OK" ));
                                         }
                                     }
@@ -1660,7 +1660,7 @@ int MenuSettings()
                                             if (entered[len] != '/') strncat(entered, "/", 1);
                                             strlcpy(Settings.covers2d_path, entered, sizeof(Settings.covers2d_path));
                                             WindowPrompt(tr( "Cover Path Changed" ), 0, tr( "OK" ));
-                                            if (!isInserted(bootDevice)) WindowPrompt(tr( "No SD-Card inserted!" ),
+                                            if (!isInserted(Settings.BootDevice)) WindowPrompt(tr( "No SD-Card inserted!" ),
                                                     tr( "Insert an SD-Card to save." ), tr( "OK" ));
                                         }
                                     }
@@ -1687,7 +1687,7 @@ int MenuSettings()
                                             if (entered[len] != '/') strncat(entered, "/", 1);
                                             strlcpy(Settings.disc_path, entered, sizeof(Settings.disc_path));
                                             WindowPrompt(tr( "Disc Path Changed" ), 0, tr( "OK" ));
-                                            if (!isInserted(bootDevice)) WindowPrompt(tr( "No SD-Card inserted!" ),
+                                            if (!isInserted(Settings.BootDevice)) WindowPrompt(tr( "No SD-Card inserted!" ),
                                                     tr( "Insert an SD-Card to save." ), tr( "OK" ));
                                         }
                                     }
@@ -1713,7 +1713,7 @@ int MenuSettings()
                                             if (entered[len] != '/') strncat(entered, "/", 1);
                                             strlcpy(Settings.theme_path, entered, sizeof(Settings.theme_path));
                                             WindowPrompt(tr( "Theme Path Changed" ), 0, tr( "OK" ));
-                                            if (!isInserted(bootDevice))
+                                            if (!isInserted(Settings.BootDevice))
                                                 WindowPrompt(tr( "No SD-Card inserted!" ),
                                                         tr( "Insert an SD-Card to save." ), tr( "OK" ));
                                             else Settings.Save();
@@ -1767,7 +1767,7 @@ int MenuSettings()
                                             if (entered[len] != '/') strncat(entered, "/", 1);
                                             strlcpy(Settings.titlestxt_path, entered, sizeof(Settings.titlestxt_path));
                                             WindowPrompt(tr( "WiiTDB Path changed." ), 0, tr( "OK" ));
-                                            if (isInserted(bootDevice))
+                                            if (isInserted(Settings.BootDevice))
                                             {
                                                 Settings.Save();
                                                 HaltGui();
@@ -1877,7 +1877,7 @@ int MenuSettings()
                                             if (entered[len] != '/') strncat(entered, "/", 1);
                                             strlcpy(Settings.dolpath, entered, sizeof(Settings.dolpath));
                                             WindowPrompt(tr( "DOL path changed" ), 0, tr( "OK" ));
-                                            if (!isInserted(bootDevice))
+                                            if (!isInserted(Settings.BootDevice))
                                             {
                                                 WindowPrompt(tr( "No SD-Card inserted!" ),
                                                         tr( "Insert an SD-Card to save." ), tr( "OK" ));
@@ -1908,7 +1908,7 @@ int MenuSettings()
                                             strlcpy(Settings.homebrewapps_path, entered,
                                                     sizeof(Settings.homebrewapps_path));
                                             WindowPrompt(tr( "Homebrew Appspath changed" ), 0, tr( "OK" ));
-                                            if (!isInserted(bootDevice))
+                                            if (!isInserted(Settings.BootDevice))
                                             {
                                                 WindowPrompt(tr( "No SD-Card inserted!" ),
                                                         tr( "Insert an SD-Card to save." ), tr( "OK" ));
@@ -1939,7 +1939,7 @@ int MenuSettings()
                                             strlcpy(Settings.theme_downloadpath, entered,
                                                     sizeof(Settings.theme_downloadpath));
                                             WindowPrompt(tr( "Theme Download Path changed" ), 0, tr( "OK" ));
-                                            if (!isInserted(bootDevice)) WindowPrompt(tr( "No SD-Card inserted!" ),
+                                            if (!isInserted(Settings.BootDevice)) WindowPrompt(tr( "No SD-Card inserted!" ),
                                                     tr( "Insert an SD-Card to save." ), tr( "OK" ));
                                         }
                                     }
@@ -1966,7 +1966,7 @@ int MenuSettings()
                                             if (entered[len] != '/') strncat(entered, "/", 1);
                                             strlcpy(Settings.BcaCodepath, entered, sizeof(Settings.BcaCodepath));
                                             WindowPrompt(tr( "BCA Codes Path changed" ), 0, tr( "OK" ));
-                                            if (!isInserted(bootDevice)) WindowPrompt(tr( "No SD-Card inserted!" ),
+                                            if (!isInserted(Settings.BootDevice)) WindowPrompt(tr( "No SD-Card inserted!" ),
                                                     tr( "Insert an SD-Card to save." ), tr( "OK" ));
                                         }
                                     }
@@ -1993,7 +1993,7 @@ int MenuSettings()
                                             if (entered[len] != '/') strncat(entered, "/", 1);
                                             strlcpy(Settings.WipCodepath, entered, sizeof(Settings.WipCodepath));
                                             WindowPrompt(tr( "WIP Patches Path changed" ), 0, tr( "OK" ));
-                                            if (!isInserted(bootDevice)) WindowPrompt(tr( "No SD-Card inserted!" ),
+                                            if (!isInserted(Settings.BootDevice)) WindowPrompt(tr( "No SD-Card inserted!" ),
                                                     tr( "Insert an SD-Card to save." ), tr( "OK" ));
                                         }
                                     }
@@ -2033,7 +2033,7 @@ int MenuSettings()
                     w.Remove(&MainButton2);
                     w.Remove(&MainButton3);
                     w.Remove(&MainButton4);
-                    if (isInserted(bootDevice) && Settings.godmode)
+                    if (isInserted(Settings.BootDevice) && Settings.godmode)
                     {
                         w.Remove(&optionBrowser2);
                         w.Remove(&backBtn);
@@ -2119,7 +2119,7 @@ int MenuSettings()
             {
                 if (MainButton1.GetState() == STATE_CLICKED)
                 {
-                    if (isInserted(bootDevice)) Settings.Save();
+                    if (isInserted(Settings.BootDevice)) Settings.Save();
                     menu = MENU_THEMEDOWNLOADER;
                     pageToDisplay = 0;
                     break;
@@ -2129,7 +2129,7 @@ int MenuSettings()
             if (backBtn.GetState() == STATE_CLICKED)
             {
                 //Add the procedure call to save the global configuration
-                if (isInserted(bootDevice)) Settings.Save();
+                if (isInserted(Settings.BootDevice)) Settings.Save();
                 menu = MENU_DISCLIST;
                 pageToDisplay = 0;
                 backBtn.ResetState();
@@ -2313,7 +2313,7 @@ int MenuGameSettings(struct discHdr * header)
     GuiText backBtnTxt(tr( "Back" ), 22, Theme.prompttext);
     backBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
     GuiImage backBtnImg(&btnOutline);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt == ON)
     {
         backBtnTxt.SetWidescreen(Settings.widescreen);
         backBtnImg.SetWidescreen(Settings.widescreen);
@@ -2328,7 +2328,7 @@ int MenuGameSettings(struct discHdr * header)
     GuiText saveBtnTxt(tr( "Save" ), 22, Theme.prompttext);
     saveBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
     GuiImage saveBtnImg(&btnOutline);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt == ON)
     {
         saveBtnTxt.SetWidescreen(Settings.widescreen);
         saveBtnImg.SetWidescreen(Settings.widescreen);
@@ -2429,9 +2429,9 @@ int MenuGameSettings(struct discHdr * header)
         game_cfg.parentalcontrol = 0;
         game_cfg.errorfix002 = Settings.error002;
         game_cfg.patchcountrystrings = Settings.patchcountrystrings;
-        game_cfg.loadalternatedol = off;
+        game_cfg.loadalternatedol = OFF;
         game_cfg.alternatedolstart = 0;
-        game_cfg.iosreloadblock = off;
+        game_cfg.iosreloadblock = OFF;
         strcpy(game_cfg.alternatedolname, "");
         game_cfg.returnTo = 1;
 	}
@@ -2592,12 +2592,13 @@ int MenuGameSettings(struct discHdr * header)
 
                     if (ret >= 0 || firstRun == true)
                     {
+						char alternatedname[100];
                         int Idx = -1;
 
                         if (ret == ++Idx || firstRun)
                         {
                             if (firstRun) options2.SetName(Idx, "%s", tr( "Video Mode" ));
-                            if (ret == Idx && ++game_cfg.video >= settings_video_max) game_cfg.video = 0;
+                            if (ret == Idx && ++game_cfg.video >= VIDEO_MODE_MAX) game_cfg.video = 0;
                             options2.SetValue(Idx, "%s%s", opts_videomode[game_cfg.video][0],
                                     tr( opts_videomode[game_cfg.video][1] ));
                         }
@@ -2605,7 +2606,7 @@ int MenuGameSettings(struct discHdr * header)
                         if (ret == ++Idx || firstRun)
                         {
                             if (firstRun) options2.SetName(Idx, "%s", tr( "VIDTV Patch" ));
-                            if (ret == Idx && ++game_cfg.vipatch >= settings_off_on_max) game_cfg.vipatch = 0;
+                            if (ret == Idx && ++game_cfg.vipatch >= MAX_ON_OFF) game_cfg.vipatch = 0;
                             options2.SetValue(Idx, "%s", tr( opts_off_on[game_cfg.vipatch] ));
 
                         }
@@ -2613,14 +2614,14 @@ int MenuGameSettings(struct discHdr * header)
                         if (ret == ++Idx || firstRun)
                         {
                             if (firstRun) options2.SetName(Idx, "%s", tr( "Game Language" ));
-                            if (ret == Idx && ++game_cfg.language >= settings_language_max) game_cfg.language = 0;
+                            if (ret == Idx && ++game_cfg.language >= MAX_LANGUAGE) game_cfg.language = 0;
                             options2.SetValue(Idx, "%s", tr( opts_language[game_cfg.language] ));
                         }
 
                         if (ret == ++Idx || firstRun)
                         {
                             if (firstRun) options2.SetName(Idx, "Ocarina");
-                            if (ret == Idx && ++game_cfg.ocarina >= settings_off_on_max) game_cfg.ocarina = 0;
+                            if (ret == Idx && ++game_cfg.ocarina >= MAX_ON_OFF) game_cfg.ocarina = 0;
                             options2.SetValue(Idx, "%s", tr( opts_off_on[game_cfg.ocarina] ));
                         }
 
@@ -2671,7 +2672,7 @@ int MenuGameSettings(struct discHdr * header)
                         if (ret == ++Idx || firstRun)
                         {
                             if (firstRun) options2.SetName(Idx, "%s", tr( "Return To" ));
-                            if (ret == Idx && ++game_cfg.returnTo >= settings_off_on_max) game_cfg.returnTo = 0;
+                            if (ret == Idx && ++game_cfg.returnTo >= MAX_ON_OFF) game_cfg.returnTo = 0;
 
                             char text[IMET_MAX_NAME_LEN];
                             int channel = NandTitles.FindU32(Settings.returnTo);//is the channel set in the global settings actually installed?
@@ -2687,7 +2688,7 @@ int MenuGameSettings(struct discHdr * header)
                         if (ret == ++Idx || firstRun)
                         {
                             if (firstRun) options2.SetName(Idx, "%s", tr( "Patch Country Strings" ));
-                            if (ret == Idx && ++game_cfg.patchcountrystrings >= settings_off_on_max) game_cfg.patchcountrystrings = 0;
+                            if (ret == Idx && ++game_cfg.patchcountrystrings >= MAX_ON_OFF) game_cfg.patchcountrystrings = 0;
                             options2.SetValue(Idx, "%s", tr( opts_off_on[game_cfg.patchcountrystrings] ));
                         }
 
@@ -2750,14 +2751,14 @@ int MenuGameSettings(struct discHdr * header)
                                             }
                                             else if (dolchoice == 2) //they want to search for the correct dol themselves
                                             {
-                                                int res = DiscBrowse(header);
+                                                int res = DiscBrowse(header, alternatedname, sizeof(alternatedname));
                                                 if ((res >= 0) && (res != 696969)) //if res==696969 they pressed the back button
                                                 game_cfg.alternatedolstart = res;
                                             }
                                         }
                                         else
                                         {
-                                            int res = DiscBrowse(header);
+                                            int res = DiscBrowse(header, alternatedname, sizeof(alternatedname));
                                             if ((res >= 0) && (res != 696969))
                                             {
                                                 game_cfg.alternatedolstart = res;
@@ -2786,7 +2787,7 @@ int MenuGameSettings(struct discHdr * header)
                         if (ret == ++Idx || firstRun)
                         {
                             if (firstRun) options2.SetName(Idx, "%s", tr( "Block IOS Reload" ));
-                            if (ret == Idx && ++game_cfg.iosreloadblock >= settings_off_on_max) game_cfg.iosreloadblock = 0;
+                            if (ret == Idx && ++game_cfg.iosreloadblock >= MAX_ON_OFF) game_cfg.iosreloadblock = 0;
                             options2.SetValue(Idx, "%s", tr( opts_off_on[game_cfg.iosreloadblock] ));
                         }
 
@@ -2906,7 +2907,7 @@ int MenuGameSettings(struct discHdr * header)
                                 int result = WindowPrompt(tr( "Are you sure?" ), 0, tr( "Yes" ), tr( "Cancel" ));
                                 if (result == 1)
                                 {
-                                    if (isInserted(bootDevice))
+                                    if (isInserted(Settings.BootDevice))
                                     {
                                         GameStatistics.SetPlayCount(header->id, 0);
 										GameStatistics.Save();
@@ -3007,9 +3008,9 @@ int MenuGameSettings(struct discHdr * header)
                     game_cfg.ocarina = Settings.ocarina;
                     game_cfg.errorfix002 = Settings.error002;
                     game_cfg.patchcountrystrings = Settings.patchcountrystrings;
-                    game_cfg.loadalternatedol = off;
+                    game_cfg.loadalternatedol = OFF;
                     game_cfg.alternatedolstart = 0;
-                    game_cfg.iosreloadblock = off;
+                    game_cfg.iosreloadblock = OFF;
                     game_cfg.ios = Settings.cios;
                     game_cfg.parentalcontrol = 0;
                     strcpy(game_cfg.alternatedolname, "");

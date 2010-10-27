@@ -193,7 +193,7 @@ int MenuDiscList()
     gamecntBtn.SetTrigger(&trigA);
 
     GuiTooltip installBtnTT(tr( "Install a game" ));
-    if (Settings.wsprompt == yes) installBtnTT.SetWidescreen(Settings.widescreen);
+    if (Settings.wsprompt) installBtnTT.SetWidescreen(Settings.widescreen);
     installBtnTT.SetAlpha(Theme.tooltipAlpha);
     GuiImage installBtnImg(&btnInstall);
     GuiImage installBtnImgOver(&btnInstallOver);
@@ -204,7 +204,7 @@ int MenuDiscList()
             &trigA, &btnSoundOver, btnClick2, 1, &installBtnTT, 24, -30, 0, 5);
 
     GuiTooltip settingsBtnTT(tr( "Settings" ));
-    if (Settings.wsprompt == yes) settingsBtnTT.SetWidescreen(Settings.widescreen);
+    if (Settings.wsprompt) settingsBtnTT.SetWidescreen(Settings.widescreen);
     settingsBtnTT.SetAlpha(Theme.tooltipAlpha);
     GuiImage settingsBtnImg(&btnSettings);
     settingsBtnImg.SetWidescreen(Settings.widescreen);
@@ -214,7 +214,7 @@ int MenuDiscList()
             &btnSoundOver, btnClick2, 1, &settingsBtnTT, 65, -30, 0, 5);
 
     GuiTooltip homeBtnTT(tr( "Back to HBC or Wii Menu" ));
-    if (Settings.wsprompt == yes) homeBtnTT.SetWidescreen(Settings.widescreen);
+    if (Settings.wsprompt) homeBtnTT.SetWidescreen(Settings.widescreen);
     settingsBtnTT.SetAlpha(Theme.tooltipAlpha);
     GuiImage homeBtnImg(&btnhome);
     homeBtnImg.SetWidescreen(Settings.widescreen);
@@ -226,7 +226,7 @@ int MenuDiscList()
     homeBtn.SetTrigger(&trigHome);
 
     GuiTooltip poweroffBtnTT(tr( "Power off the Wii" ));
-    if (Settings.wsprompt == yes) poweroffBtnTT.SetWidescreen(Settings.widescreen);
+    if (Settings.wsprompt) poweroffBtnTT.SetWidescreen(Settings.widescreen);
     poweroffBtnTT.SetAlpha(Theme.tooltipAlpha);
     GuiImage poweroffBtnImg(&btnpwroff);
     GuiImage poweroffBtnImgOver(&btnpwroffOver);
@@ -236,7 +236,7 @@ int MenuDiscList()
             &btnSoundOver, btnClick2, 1, &poweroffBtnTT, -10, -30, 1, 5);
 
     GuiTooltip sdcardBtnTT(tr( "Reload SD" ));
-    if (Settings.wsprompt == yes) sdcardBtnTT.SetWidescreen(Settings.widescreen);
+    if (Settings.wsprompt) sdcardBtnTT.SetWidescreen(Settings.widescreen);
     sdcardBtnTT.SetAlpha(Theme.tooltipAlpha);
     GuiImage sdcardImg(&btnsdcard);
     GuiImage sdcardImgOver(&btnsdcardOver);
@@ -250,7 +250,7 @@ int MenuDiscList()
     gameInfo.SetSoundClick(btnClick2);
 
     GuiTooltip favoriteBtnTT(tr( "Display favorites" ));
-    if (Settings.wsprompt == yes) favoriteBtnTT.SetWidescreen(Settings.widescreen);
+    if (Settings.wsprompt) favoriteBtnTT.SetWidescreen(Settings.widescreen);
     favoriteBtnTT.SetAlpha(Theme.tooltipAlpha);
     GuiImage favoriteBtnImg(&imgfavIcon);
     favoriteBtnImg.SetWidescreen(Settings.widescreen);
@@ -261,7 +261,7 @@ int MenuDiscList()
     favoriteBtn.SetAlpha(180);
 
     GuiTooltip searchBtnTT(tr( "Set Search-Filter" ));
-    if (Settings.wsprompt == yes) searchBtnTT.SetWidescreen(Settings.widescreen);
+    if (Settings.wsprompt) searchBtnTT.SetWidescreen(Settings.widescreen);
     searchBtnTT.SetAlpha(Theme.tooltipAlpha);
     GuiImage searchBtnImg(&imgsearchIcon);
     searchBtnImg.SetWidescreen(Settings.widescreen);
@@ -271,19 +271,19 @@ int MenuDiscList()
             Theme.gamelist_search_y, &trigA, &btnSoundOver, btnClick2, 1, &searchBtnTT, -15, 52, 0, 3);
     searchBtn.SetAlpha(180);
 
-    GuiTooltip abcBtnTT(Settings.fave ? tr( "Sort by rank" ) : tr( "Sort alphabetically" ));
-    if (Settings.wsprompt == yes) abcBtnTT.SetWidescreen(Settings.widescreen);
+    GuiTooltip abcBtnTT(Settings.GameSort == SORT_RANKING ? tr( "Sort by rank" ) : tr( "Sort alphabetically" ));
+    if (Settings.wsprompt) abcBtnTT.SetWidescreen(Settings.widescreen);
     abcBtnTT.SetAlpha(Theme.tooltipAlpha);
-    GuiImage abcBtnImg(Settings.fave ? &imgrankIcon : &imgabcIcon);
+    GuiImage abcBtnImg(Settings.GameSort == SORT_RANKING ? &imgrankIcon : &imgabcIcon);
     abcBtnImg.SetWidescreen(Settings.widescreen);
-    GuiImage abcBtnImg_g(Settings.fave ? &imgrankIcon_gray : &imgabcIcon_gray);
+    GuiImage abcBtnImg_g(Settings.GameSort == SORT_RANKING ? &imgrankIcon_gray : &imgabcIcon_gray);
     abcBtnImg_g.SetWidescreen(Settings.widescreen);
     GuiButton abcBtn(&abcBtnImg_g, &abcBtnImg_g, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_abc_x, Theme.gamelist_abc_y,
             &trigA, &btnSoundOver, btnClick2, 1, &abcBtnTT, -15, 52, 0, 3);
     abcBtn.SetAlpha(180);
 
     GuiTooltip countBtnTT(tr( "Sort order by most played" ));
-    if (Settings.wsprompt == yes) countBtnTT.SetWidescreen(Settings.widescreen);
+    if (Settings.wsprompt) countBtnTT.SetWidescreen(Settings.widescreen);
     countBtnTT.SetAlpha(Theme.tooltipAlpha);
     GuiImage countBtnImg(&imgplayCountIcon);
     countBtnImg.SetWidescreen(Settings.widescreen);
@@ -294,7 +294,7 @@ int MenuDiscList()
     countBtn.SetAlpha(180);
 
     GuiTooltip listBtnTT(tr( "Display as a list" ));
-    if (Settings.wsprompt == yes) listBtnTT.SetWidescreen(Settings.widescreen);
+    if (Settings.wsprompt) listBtnTT.SetWidescreen(Settings.widescreen);
     listBtnTT.SetAlpha(Theme.tooltipAlpha);
     GuiImage listBtnImg(&imgarrangeList);
     listBtnImg.SetWidescreen(Settings.widescreen);
@@ -305,7 +305,7 @@ int MenuDiscList()
     listBtn.SetAlpha(180);
 
     GuiTooltip gridBtnTT(tr( "Display as a grid" ));
-    if (Settings.wsprompt == yes) gridBtnTT.SetWidescreen(Settings.widescreen);
+    if (Settings.wsprompt) gridBtnTT.SetWidescreen(Settings.widescreen);
     gridBtnTT.SetAlpha(Theme.tooltipAlpha);
     GuiImage gridBtnImg(&imgarrangeGrid);
     gridBtnImg.SetWidescreen(Settings.widescreen);
@@ -316,7 +316,7 @@ int MenuDiscList()
     gridBtn.SetAlpha(180);
 
     GuiTooltip carouselBtnTT(tr( "Display as a carousel" ));
-    if (Settings.wsprompt == yes) carouselBtnTT.SetWidescreen(Settings.widescreen);
+    if (Settings.wsprompt) carouselBtnTT.SetWidescreen(Settings.widescreen);
     carouselBtnTT.SetAlpha(Theme.tooltipAlpha);
     GuiImage carouselBtnImg(&imgarrangeCarousel);
     carouselBtnImg.SetWidescreen(Settings.widescreen);
@@ -329,7 +329,7 @@ int MenuDiscList()
     bool canUnlock = (Settings.parentalcontrol == 0 && Settings.Parental.enabled == 1);
 
     GuiTooltip lockBtnTT(canUnlock ? tr( "Unlock Parental Control" ) : tr( "Parental Control disabled" ));
-    if (Settings.wsprompt == yes) lockBtnTT.SetWidescreen(Settings.widescreen);
+    if (Settings.wsprompt) lockBtnTT.SetWidescreen(Settings.widescreen);
     lockBtnTT.SetAlpha(Theme.tooltipAlpha);
     GuiImage lockBtnImg(&imgLock);
     lockBtnImg.SetWidescreen(Settings.widescreen);
@@ -340,7 +340,7 @@ int MenuDiscList()
     lockBtn.SetAlpha(180);
 
     GuiTooltip unlockBtnTT(tr( "Enable Parental Control" ));
-    if (Settings.wsprompt == yes) unlockBtnTT.SetWidescreen(Settings.widescreen);
+    if (Settings.wsprompt) unlockBtnTT.SetWidescreen(Settings.widescreen);
     unlockBtnTT.SetAlpha(Theme.tooltipAlpha);
     GuiImage unlockBtnImg(&imgUnlock);
     unlockBtnImg.SetWidescreen(Settings.widescreen);
@@ -360,7 +360,7 @@ int MenuDiscList()
      */
 
     GuiTooltip dvdBtnTT(tr( "Mount DVD drive" ));
-    if (Settings.wsprompt == yes) dvdBtnTT.SetWidescreen(Settings.widescreen);
+    if (Settings.wsprompt) dvdBtnTT.SetWidescreen(Settings.widescreen);
     dvdBtnTT.SetAlpha(Theme.tooltipAlpha);
     GuiImage dvdBtnImg(&imgdvd);
     dvdBtnImg.SetWidescreen(Settings.widescreen);
@@ -371,7 +371,7 @@ int MenuDiscList()
     dvdBtn.SetAlpha(180);
 
     GuiTooltip homebrewBtnTT(tr( "Homebrew Launcher" ));
-    if (Settings.wsprompt == yes) homebrewBtnTT.SetWidescreen(Settings.widescreen);
+    if (Settings.wsprompt) homebrewBtnTT.SetWidescreen(Settings.widescreen);
     homebrewBtnTT.SetAlpha(Theme.tooltipAlpha);
     GuiImage homebrewImg(&homebrewImgData);
     GuiImage homebrewImgOver(&homebrewImgDataOver);
@@ -380,7 +380,7 @@ int MenuDiscList()
     GuiButton homebrewBtn(&homebrewImg, &homebrewImgOver, ALIGN_LEFT, ALIGN_TOP, Theme.homebrew_x, Theme.homebrew_y,
             &trigA, &btnSoundOver, btnClick2, 1, &homebrewBtnTT, 15, -30, 1, 5);
 
-    if (Settings.fave)
+    if (Settings.GameSort == SORT_RANKING)
     {
         favoriteBtn.SetImage(&favoriteBtnImg);
         favoriteBtn.SetImageOver(&favoriteBtnImg);
@@ -395,38 +395,38 @@ int MenuDiscList()
         searchBtn.SetImageOver(&searchBtnImg);
         searchBtn.SetAlpha(255);
     }
-    if (Settings.sort == ALL)
+    if (Settings.GameSort == SORT_ABC)
     {
         abcBtn.SetImage(&abcBtnImg);
         abcBtn.SetImageOver(&abcBtnImg);
         abcBtn.SetAlpha(255);
     }
-    else if (Settings.sort == PLAYCOUNT)
+    else if (Settings.GameSort == SORT_PLAYCOUNT)
     {
         countBtn.SetImage(&countBtnImg);
         countBtn.SetImageOver(&countBtnImg);
         countBtn.SetAlpha(255);
     }
-    if (Settings.gameDisplay == list)
+    if (Settings.gameDisplay == LIST_MODE)
     {
         listBtn.SetImage(&listBtnImg);
         listBtn.SetImageOver(&listBtnImg);
         listBtn.SetAlpha(255);
     }
-    else if (Settings.gameDisplay == grid)
+    else if (Settings.gameDisplay == GRID_MODE)
     {
         gridBtn.SetImage(&gridBtnImg);
         gridBtn.SetImageOver(&gridBtnImg);
         gridBtn.SetAlpha(255);
     }
-    else if (Settings.gameDisplay == carousel)
+    else if (Settings.gameDisplay == CAROUSEL_MODE)
     {
         carouselBtn.SetImage(&carouselBtnImg);
         carouselBtn.SetImageOver(&carouselBtnImg);
         carouselBtn.SetAlpha(255);
     }
 
-    if (Settings.gameDisplay == list)
+    if (Settings.gameDisplay == LIST_MODE)
     {
         favoriteBtn.SetPosition(Theme.gamelist_favorite_x, Theme.gamelist_favorite_y);
         searchBtn.SetPosition(Theme.gamelist_search_x, Theme.gamelist_search_y);
@@ -438,7 +438,7 @@ int MenuDiscList()
         lockBtn.SetPosition(Theme.gamelist_lock_x, Theme.gamelist_lock_y);
         dvdBtn.SetPosition(Theme.gamelist_dvd_x, Theme.gamelist_dvd_y);
     }
-    else if (Settings.gameDisplay == grid)
+    else if (Settings.gameDisplay == GRID_MODE)
     {
         favoriteBtn.SetPosition(Theme.gamegrid_favorite_x, Theme.gamegrid_favorite_y);
         searchBtn.SetPosition(Theme.gamegrid_search_x, Theme.gamegrid_search_y);
@@ -450,7 +450,7 @@ int MenuDiscList()
         lockBtn.SetPosition(Theme.gamegrid_lock_x, Theme.gamegrid_lock_y);
         dvdBtn.SetPosition(Theme.gamegrid_dvd_x, Theme.gamegrid_dvd_y);
     }
-    else if (Settings.gameDisplay == carousel)
+    else if (Settings.gameDisplay == CAROUSEL_MODE)
     {
         favoriteBtn.SetPosition(Theme.gamecarousel_favorite_x, Theme.gamecarousel_favorite_y);
         searchBtn.SetPosition(Theme.gamecarousel_search_x, Theme.gamecarousel_favorite_y);
@@ -465,14 +465,14 @@ int MenuDiscList()
 
     //Downloading Covers
     GuiTooltip DownloadBtnTT(tr( "Click to Download Covers" ));
-    if (Settings.wsprompt == yes) DownloadBtnTT.SetWidescreen(Settings.widescreen);
+    if (Settings.wsprompt) DownloadBtnTT.SetWidescreen(Settings.widescreen);
     DownloadBtnTT.SetAlpha(Theme.tooltipAlpha);
     GuiButton DownloadBtn(0, 0);
     DownloadBtn.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     DownloadBtn.SetPosition(Theme.covers_x, Theme.covers_y);
 
     GuiTooltip IDBtnTT(tr( "Click to change game ID" ));
-    if (Settings.wsprompt == yes) IDBtnTT.SetWidescreen(Settings.widescreen);
+    if (Settings.wsprompt) IDBtnTT.SetWidescreen(Settings.widescreen);
     IDBtnTT.SetAlpha(Theme.tooltipAlpha);
     GuiButton idBtn(0, 0);
     idBtn.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
@@ -499,19 +499,19 @@ int MenuDiscList()
     GuiGameBrowser * gameBrowser = NULL;
     GuiGameGrid * gameGrid = NULL;
     GuiGameCarousel * gameCarousel = NULL;
-    if (Settings.gameDisplay == list)
+    if (Settings.gameDisplay == LIST_MODE)
     {
         gameBrowser = new GuiGameBrowser(Theme.gamelist_w, Theme.gamelist_h, startat, offset);
         gameBrowser->SetPosition(Theme.gamelist_x, Theme.gamelist_y);
         gameBrowser->SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
     }
-    else if (Settings.gameDisplay == grid)
+    else if (Settings.gameDisplay == GRID_MODE)
     {
         gameGrid = new GuiGameGrid(Theme.gamegrid_w, Theme.gamegrid_h, Settings.theme_path, bg_options_png, 0, 0);
         gameGrid->SetPosition(Theme.gamegrid_x, Theme.gamegrid_y);
         gameGrid->SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
     }
-    else if (Settings.gameDisplay == carousel)
+    else if (Settings.gameDisplay == CAROUSEL_MODE)
     {
         //GuiGameCarousel gameCarousel(Theme.gamecarousel_w, Theme.gamecarousel_h, gameList, gameList.size(), Settings.theme_path, bg_options_png, startat, offset);
         gameCarousel = new GuiGameCarousel(640, 400, Settings.theme_path, bg_options_png, startat, offset);
@@ -574,21 +574,21 @@ int MenuDiscList()
 
     if (Settings.godmode == 1) w.Append(&homebrewBtn);
 
-    if ((Settings.hddinfo == hr12) || (Settings.hddinfo == hr24))
+    if ((Settings.hddinfo == CLOCK_HR12) || (Settings.hddinfo == CLOCK_HR24))
     {
         w.Append(&clockTimeBack);
         w.Append(&clockTime);
     }
 
-    if (Settings.gameDisplay == list)
+    if (Settings.gameDisplay == LIST_MODE)
     {
         mainWindow->Append(gameBrowser);
     }
-    if (Settings.gameDisplay == grid)
+    if (Settings.gameDisplay == GRID_MODE)
     {
         mainWindow->Append(gameGrid);
     }
-    if (Settings.gameDisplay == carousel)
+    if (Settings.gameDisplay == CAROUSEL_MODE)
     {
         mainWindow->Append(gameCarousel);
     }
@@ -630,36 +630,21 @@ int MenuDiscList()
 
         WDVD_GetCoverStatus(&covert);//for detecting if i disc has been inserted
 
-        // if the idiot is showing favorites and don't have any
-        if (Settings.fave && !gameList.size())
-        {
-            WindowPrompt(tr( "No Favorites" ),
-                    tr( "You are choosing to display favorites and you do not have any selected." ), tr( "Back" ));
-            Settings.fave = !Settings.fave;
-            if (isInserted(bootDevice))
-            {
-                Settings.Save();
-            }
-            gameList.FilterList();
-            menu = MENU_DISCLIST;
-            break;
-        }
-
         //CLOCK
         time_t rawtime = time(0);
-        if (((Settings.hddinfo == hr12) || (Settings.hddinfo == hr24)) && rawtime != lastrawtime)
+        if (((Settings.hddinfo == CLOCK_HR12) || (Settings.hddinfo == CLOCK_HR24)) && rawtime != lastrawtime)
         {
             lastrawtime = rawtime;
             timeinfo = localtime(&rawtime);
             if (dataed < 1)
             {
-                if (Settings.hddinfo == hr12)
+                if (Settings.hddinfo == CLOCK_HR12)
                 {
                     if (rawtime & 1)
                         strftime(theTime, sizeof(theTime), "%I:%M", timeinfo);
                     else strftime(theTime, sizeof(theTime), "%I %M", timeinfo);
                 }
-                if (Settings.hddinfo == hr24)
+                if (Settings.hddinfo == CLOCK_HR24)
                 {
                     if (rawtime & 1)
                         strftime(theTime, sizeof(theTime), "%H:%M", timeinfo);
@@ -716,15 +701,15 @@ int MenuDiscList()
             else
             {
                 poweroffBtn.ResetState();
-                if (Settings.gameDisplay == list)
+                if (Settings.gameDisplay == LIST_MODE)
                 {
                     gameBrowser->SetFocus(1);
                 }
-                else if (Settings.gameDisplay == grid)
+                else if (Settings.gameDisplay == GRID_MODE)
                 {
                     gameGrid->SetFocus(1);
                 }
-                else if (Settings.gameDisplay == carousel)
+                else if (Settings.gameDisplay == CAROUSEL_MODE)
                 {
                     gameCarousel->SetFocus(1);
                 }
@@ -772,15 +757,15 @@ int MenuDiscList()
             else
             {
                 homeBtn.ResetState();
-                if (Settings.gameDisplay == list)
+                if (Settings.gameDisplay == LIST_MODE)
                 {
                     gameBrowser->SetFocus(1);
                 }
-                else if (Settings.gameDisplay == grid)
+                else if (Settings.gameDisplay == GRID_MODE)
                 {
                     gameGrid->SetFocus(1);
                 }
-                else if (Settings.gameDisplay == carousel)
+                else if (Settings.gameDisplay == CAROUSEL_MODE)
                 {
                     gameCarousel->SetFocus(1);
                 }
@@ -798,15 +783,15 @@ int MenuDiscList()
             else
             {
                 installBtn.ResetState();
-                if (Settings.gameDisplay == list)
+                if (Settings.gameDisplay == LIST_MODE)
                 {
                     gameBrowser->SetFocus(1);
                 }
-                else if (Settings.gameDisplay == grid)
+                else if (Settings.gameDisplay == GRID_MODE)
                 {
                     gameGrid->SetFocus(1);
                 }
-                else if (Settings.gameDisplay == carousel)
+                else if (Settings.gameDisplay == CAROUSEL_MODE)
                 {
                     gameCarousel->SetFocus(1);
                 }
@@ -829,15 +814,15 @@ int MenuDiscList()
             }
             else
             {
-                if (Settings.gameDisplay == list)
+                if (Settings.gameDisplay == LIST_MODE)
                 {
                     gameBrowser->SetFocus(1);
                 }
-                else if (Settings.gameDisplay == grid)
+                else if (Settings.gameDisplay == GRID_MODE)
                 {
                     gameGrid->SetFocus(1);
                 }
-                else if (Settings.gameDisplay == carousel)
+                else if (Settings.gameDisplay == CAROUSEL_MODE)
                 {
                     gameCarousel->SetFocus(1);
                 }
@@ -849,22 +834,22 @@ int MenuDiscList()
             gprintf("\tsdCardBtn Clicked\n");
             SDCard_deInit();
             SDCard_Init();
-            if (Settings.gameDisplay == list)
+            if (Settings.gameDisplay == LIST_MODE)
             {
                 startat = gameBrowser->GetSelectedOption();
                 offset = gameBrowser->GetOffset();
             }
-            else if (Settings.gameDisplay == grid)
+            else if (Settings.gameDisplay == GRID_MODE)
             {
                 startat = gameGrid->GetSelectedOption();
                 offset = gameGrid->GetOffset();
             }
-            else if (Settings.gameDisplay == carousel)
+            else if (Settings.gameDisplay == CAROUSEL_MODE)
             {
                 startat = gameCarousel->GetSelectedOption();
                 offset = gameCarousel->GetOffset();
             }
-            if (isInserted(bootDevice))
+            if (isInserted(Settings.BootDevice))
             {
                 HaltGui(); // to fix endless rumble when clicking on the SD icon when rumble is disabled because rumble is set to on in Global_Default()
                 Settings.Load();
@@ -878,7 +863,7 @@ int MenuDiscList()
         else if (DownloadBtn.GetState() == STATE_CLICKED)
         {
             gprintf("\tDownloadBtn Clicked\n");
-            if (isInserted(bootDevice))
+            if (isInserted(Settings.BootDevice))
             {
                 choice = WindowPrompt(tr( "Cover Download" ), 0, tr( "Normal Covers" ), tr( "3D Covers" ),
                         tr( "Disc Images" ), tr( "Back" )); // ask for download choice
@@ -924,15 +909,15 @@ int MenuDiscList()
             }
             menu = MENU_DISCLIST;
             DownloadBtn.ResetState();
-            if (Settings.gameDisplay == list)
+            if (Settings.gameDisplay == LIST_MODE)
             {
                 gameBrowser->SetFocus(1);
             }
-            else if (Settings.gameDisplay == grid)
+            else if (Settings.gameDisplay == GRID_MODE)
             {
                 gameGrid->SetFocus(1);
             }
-            else if (Settings.gameDisplay == carousel)
+            else if (Settings.gameDisplay == CAROUSEL_MODE)
             {
                 gameCarousel->SetFocus(1);
             }
@@ -941,17 +926,17 @@ int MenuDiscList()
         else if (settingsBtn.GetState() == STATE_CLICKED)
         {
             gprintf("\tsettingsBtn Clicked\n");
-            if (Settings.gameDisplay == list)
+            if (Settings.gameDisplay == LIST_MODE)
             {
                 startat = gameBrowser->GetSelectedOption();
                 offset = gameBrowser->GetOffset();
             }
-            else if (Settings.gameDisplay == grid)
+            else if (Settings.gameDisplay == GRID_MODE)
             {
                 startat = gameGrid->GetSelectedOption();
                 offset = gameGrid->GetOffset();
             }
-            else if (Settings.gameDisplay == carousel)
+            else if (Settings.gameDisplay == CAROUSEL_MODE)
             {
                 startat = gameCarousel->GetSelectedOption();
                 offset = gameCarousel->GetOffset();
@@ -963,16 +948,20 @@ int MenuDiscList()
 
         else if (favoriteBtn.GetState() == STATE_CLICKED)
         {
-            gprintf("\tfavoriteBtn Clicked\n");
-            Settings.fave = !Settings.fave;
-            if (isInserted(bootDevice))
-            {
-                Settings.Save();
-            }
-            gameList.FilterList();
-            menu = MENU_DISCLIST;
-            break;
-
+			if(Settings.GameSort != SORT_RANKING)
+			{
+				gprintf("\tfavoriteBtn Clicked\n");
+				Settings.GameSort = SORT_RANKING;
+				if (isInserted(Settings.BootDevice))
+				{
+					Settings.Save();
+				}
+				gameList.FilterList();
+				menu = MENU_DISCLIST;
+				break;
+			}
+			else
+			favoriteBtn.ResetState();
         }
 
         else if (searchBtn.GetState() == STATE_CLICKED && mountMethod != 3)
@@ -1063,10 +1052,10 @@ int MenuDiscList()
         else if (abcBtn.GetState() == STATE_CLICKED)
         {
             gprintf("\tabcBtn clicked\n");
-            if (Settings.sort != ALL)
+            if (Settings.GameSort != SORT_ABC)
             {
-                Settings.sort = ALL;
-                if (isInserted(bootDevice))
+                Settings.GameSort = SORT_ABC;
+                if (isInserted(Settings.BootDevice))
                 {
                     Settings.Save();
                 }
@@ -1081,10 +1070,10 @@ int MenuDiscList()
         else if (countBtn.GetState() == STATE_CLICKED)
         {
             gprintf("\tcountBtn Clicked\n");
-            if (Settings.sort != PLAYCOUNT)
+            if (Settings.GameSort != SORT_PLAYCOUNT)
             {
-                Settings.sort = PLAYCOUNT;
-                if (isInserted(bootDevice))
+                Settings.GameSort = SORT_PLAYCOUNT;
+                if (isInserted(Settings.BootDevice))
                 {
                     Settings.Save();
                 }
@@ -1100,11 +1089,11 @@ int MenuDiscList()
         else if (listBtn.GetState() == STATE_CLICKED)
         {
             gprintf("\tlistBtn Clicked\n");
-            if (Settings.gameDisplay != list)
+            if (Settings.gameDisplay != LIST_MODE)
             {
-                Settings.gameDisplay = list;
+                Settings.gameDisplay = LIST_MODE;
                 menu = MENU_DISCLIST;
-                if (isInserted(bootDevice))
+                if (isInserted(Settings.BootDevice))
                 {
                     Settings.Save();
                 }
@@ -1120,12 +1109,12 @@ int MenuDiscList()
         else if (gridBtn.GetState() == STATE_CLICKED)
         {
             gprintf("\tgridBtn Clicked\n");
-            if (Settings.gameDisplay != grid)
+            if (Settings.gameDisplay != GRID_MODE)
             {
 
-                Settings.gameDisplay = grid;
+                Settings.gameDisplay = GRID_MODE;
                 menu = MENU_DISCLIST;
-                if (isInserted(bootDevice))
+                if (isInserted(Settings.BootDevice))
                 {
                     Settings.Save();
                 }
@@ -1141,11 +1130,11 @@ int MenuDiscList()
         else if (carouselBtn.GetState() == STATE_CLICKED)
         {
             gprintf("\tcarouselBtn Clicked\n");
-            if (Settings.gameDisplay != carousel)
+            if (Settings.gameDisplay != CAROUSEL_MODE)
             {
-                Settings.gameDisplay = carousel;
+                Settings.gameDisplay = CAROUSEL_MODE;
                 menu = MENU_DISCLIST;
-                if (isInserted(bootDevice))
+                if (isInserted(Settings.BootDevice))
                 {
                     Settings.Save();
                 }
@@ -1253,7 +1242,7 @@ int MenuDiscList()
             rockout();
             //break;
         }
-        if (Settings.gameDisplay == grid)
+        if (Settings.gameDisplay == GRID_MODE)
         {
             int selectimg;
             DownloadBtn.SetSize(0, 0);
@@ -1262,7 +1251,7 @@ int MenuDiscList()
             selectImg1 = selectimg;
         }
 
-        if (Settings.gameDisplay == carousel)
+        if (Settings.gameDisplay == CAROUSEL_MODE)
         {
             int selectimg;
             DownloadBtn.SetSize(0, 0);
@@ -1270,7 +1259,7 @@ int MenuDiscList()
             gameSelected = gameCarousel->GetClickedOption();
             selectImg1 = selectimg;
         }
-        if (Settings.gameDisplay == list)
+        if (Settings.gameDisplay == LIST_MODE)
         {
             //Get selected game under cursor
             int selectimg;
@@ -1357,7 +1346,7 @@ int MenuDiscList()
                     DownloadBtn.SetImage(coverImg);// put the new image on the download button
                     w.Append(&DownloadBtn);
 
-                    if ((Settings.sinfo == GameID) || (Settings.sinfo == Both))
+                    if ((Settings.sinfo == GAMEINFO_ID) || (Settings.sinfo == GAMEINFO_BOTH))
                     {
                         GameIDTxt = new GuiText(IDfull, 22, Theme.info);
                         GameIDTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
@@ -1367,7 +1356,7 @@ int MenuDiscList()
                         w.Append(&idBtn);
                     }
                     //don't try to show region for channels because all the custom channels wont follow the rules
-                    if (((Settings.sinfo == GameRegion) || (Settings.sinfo == Both)) && mountMethod != 3)
+                    if (((Settings.sinfo == GAMEINFO_REGION) || (Settings.sinfo == GAMEINFO_BOTH)) && mountMethod != 3)
                     {
                         GameRegionTxt = new GuiText(gameregion, 22, Theme.info);
                         GameRegionTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
@@ -1442,13 +1431,13 @@ int MenuDiscList()
             }
             else
             {
-                alternatedol = off;
+                alternatedol = OFF;
                 ocarinaChoice = Settings.ocarina;
             }
 
-            if (Settings.quickboot == yes) //quickboot game
+            if (Settings.quickboot == ON) //quickboot game
             {
-                if (alternatedol == on)
+                if (alternatedol == ON)
                 {
                     /* Open dol File and check exist */
                     sprintf(nipple, "%s%s.dol", Settings.dolpath, IDfull);
@@ -1466,7 +1455,7 @@ int MenuDiscList()
                         fclose(exeFile);
                     }
                 }
-                if (ocarinaChoice != off)
+                if (ocarinaChoice != OFF)
                 {
                     /* Open gct File and check exist */
                     sprintf(nipple, "%s%s.gct", Settings.Cheatcodespath, IDfull);
@@ -1485,7 +1474,7 @@ int MenuDiscList()
                 }
 
                 wiilight(0);
-                if (isInserted(bootDevice))
+                if (isInserted(Settings.BootDevice))
                 {
                     //////////save game play count////////////////
 					GameStatistics.SetPlayCount(header->id, GameStatistics.GetPlayCount(header->id)+1);
@@ -1503,13 +1492,13 @@ int MenuDiscList()
             while (returnHere)
             {
                 returnHere = false;
-                if (Settings.wiilight != wiilight_forInstall) wiilight(1);
+                if (Settings.wiilight != WIILIGHT_INSTALL) wiilight(1);
                 choice = GameWindowPrompt();
                 // header = gameList[gameSelected]; //reset header
 
                 if (choice == 1)
                 {
-                    if (alternatedol == on)
+                    if (alternatedol == ON)
                     {
                         /* Open dol File and check exist */
                         sprintf(nipple, "%s%s.dol", Settings.dolpath, IDfull);
@@ -1528,7 +1517,7 @@ int MenuDiscList()
                             fclose(exeFile);
                         }
                     }
-                    if (ocarinaChoice != off)
+                    if (ocarinaChoice != OFF)
                     {
                         /* Open gct File and check exist */
                         sprintf(nipple, "%s%s.gct", Settings.Cheatcodespath, IDfull);
@@ -1554,11 +1543,11 @@ int MenuDiscList()
                 {
                     wiilight(0);
                     HaltGui();
-                    if (Settings.gameDisplay == list)
+                    if (Settings.gameDisplay == LIST_MODE)
                         mainWindow->Remove(gameBrowser);
-                    else if (Settings.gameDisplay == grid)
+                    else if (Settings.gameDisplay == GRID_MODE)
                         mainWindow->Remove(gameGrid);
-                    else if (Settings.gameDisplay == carousel) mainWindow->Remove(gameCarousel);
+                    else if (Settings.gameDisplay == CAROUSEL_MODE) mainWindow->Remove(gameCarousel);
                     mainWindow->Remove(&w);
                     ResumeGui();
 
@@ -1569,11 +1558,11 @@ int MenuDiscList()
                      //menu = MENU_DISCLIST; // refresh titles (needed if the language setting has changed)
                      */
                     HaltGui();
-                    if (Settings.gameDisplay == list)
+                    if (Settings.gameDisplay == LIST_MODE)
                         mainWindow->Append(gameBrowser);
-                    else if (Settings.gameDisplay == grid)
+                    else if (Settings.gameDisplay == GRID_MODE)
                         mainWindow->Append(gameGrid);
-                    else if (Settings.gameDisplay == carousel) mainWindow->Append(gameCarousel);
+                    else if (Settings.gameDisplay == CAROUSEL_MODE) mainWindow->Append(gameCarousel);
                     mainWindow->Append(&w);
                     ResumeGui();
                     if (settret == 1) //if deleted
@@ -1608,15 +1597,15 @@ int MenuDiscList()
                 {
                     rockout(2);
                     if (mountMethod == 1 || mountMethod == 2) mountMethod = mountMethodOLD;
-                    if (Settings.gameDisplay == list)
+                    if (Settings.gameDisplay == LIST_MODE)
                     {
                         gameBrowser->SetFocus(1);
                     }
-                    else if (Settings.gameDisplay == grid)
+                    else if (Settings.gameDisplay == GRID_MODE)
                     {
                         gameGrid->SetFocus(1);
                     }
-                    else if (Settings.gameDisplay == carousel)
+                    else if (Settings.gameDisplay == CAROUSEL_MODE)
                     {
                         gameCarousel->SetFocus(1);
                     }

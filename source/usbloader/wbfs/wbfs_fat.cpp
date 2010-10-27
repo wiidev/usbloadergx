@@ -168,18 +168,7 @@ s32 Wbfs_Fat::AddGame(void)
     /* Add game to device */
     partition_selector_t part_sel = ALL_PARTITIONS;
     int copy_1_1 = Settings.fullcopy;
-    switch (Settings.partitions_to_install)
-    {
-        case install_game_only:
-            part_sel = ONLY_GAME_PARTITION;
-            break;
-        case install_all:
-            part_sel = ALL_PARTITIONS;
-            break;
-        case install_all_but_update:
-            part_sel = REMOVE_UPDATE_PARTITION;
-            break;
-    }
+    part_sel = (partition_selector_t) Settings.InstallPartitions;
     if (copy_1_1)
     {
         part_sel = ALL_PARTITIONS;
@@ -322,7 +311,7 @@ f32 Wbfs_Fat::EstimateGameSize()
     }
     else
     {
-        part_sel = Settings.partitions_to_install == install_game_only ? ONLY_GAME_PARTITION : ALL_PARTITIONS;
+        part_sel = (partition_selector_t) Settings.InstallPartitions;
     }
     return wbfs_estimate_disc(part, __ReadDVD, NULL, part_sel);
 }

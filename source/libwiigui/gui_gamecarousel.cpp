@@ -78,7 +78,7 @@ GuiGameCarousel::GuiGameCarousel(int w, int h, const char *themePath, const u8 *
     int btnHeight = (int) lround(sqrt(RADIUS * RADIUS - 90000) - RADIUS - 50);
 
     btnLeftImg = new GuiImage(imgLeft);
-    if (Settings.wsprompt == yes) btnLeftImg->SetWidescreen(Settings.widescreen);
+    if (Settings.wsprompt == ON) btnLeftImg->SetWidescreen(Settings.widescreen);
     btnLeft = new GuiButton(imgLeft->GetWidth(), imgLeft->GetHeight());
     btnLeft->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     btnLeft->SetPosition(20, btnHeight);
@@ -91,7 +91,7 @@ GuiGameCarousel::GuiGameCarousel(int w, int h, const char *themePath, const u8 *
     btnLeft->SetEffectGrow();
 
     btnRightImg = new GuiImage(imgRight);
-    if (Settings.wsprompt == yes) btnRightImg->SetWidescreen(Settings.widescreen);
+    if (Settings.wsprompt == ON) btnRightImg->SetWidescreen(Settings.widescreen);
     btnRight = new GuiButton(imgRight->GetWidth(), imgRight->GetHeight());
     btnRight->SetParent(this);
     btnRight->SetAlignment(ALIGN_RIGHT, ALIGN_MIDDLE);
@@ -261,7 +261,7 @@ void GuiGameCarousel::Draw()
     }
 
     //!Draw tooltip after the Images to have it on top
-    if (focus && Settings.tooltips == TooltipsOn) for (int i = 0; i < pagesize; i++)
+    if (focus && Settings.tooltips == ON) for (int i = 0; i < pagesize; i++)
         game[i]->DrawTooltip();
 
     this->UpdateEffects();
@@ -328,7 +328,7 @@ void GuiGameCarousel::Update(GuiTrigger * t)
                 return;
             }
 
-            if (Settings.xflip == sysmenu || Settings.xflip == yes || Settings.xflip == disk3d)
+            if (Settings.xflip == XFLIP_SYSMENU || Settings.xflip == XFLIP_YES || Settings.xflip == XFLIP_DISK3D)
                 newspeed = SHIFT_SPEED;
             else newspeed = -SHIFT_SPEED;
         }
@@ -343,7 +343,7 @@ void GuiGameCarousel::Update(GuiTrigger * t)
                 btnRight->ResetState();
                 return;
             }
-            if (Settings.xflip == sysmenu || Settings.xflip == yes || Settings.xflip == disk3d)
+            if (Settings.xflip == XFLIP_SYSMENU || Settings.xflip == XFLIP_YES || Settings.xflip == XFLIP_DISK3D)
                 newspeed = -SHIFT_SPEED;
             else newspeed = SHIFT_SPEED;
         }

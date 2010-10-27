@@ -131,14 +131,14 @@ s32 Wad_Install(FILE *fp)
     trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 
     GuiImage dialogBoxImg(&dialogBox);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         dialogBoxImg.SetWidescreen(Settings.widescreen);
     }
 
     GuiText btn1Txt(tr( "OK" ), 22, Theme.prompttext);
     GuiImage btn1Img(&btnOutline);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         btn1Txt.SetWidescreen(Settings.widescreen);
         btn1Img.SetWidescreen(Settings.widescreen);
@@ -149,7 +149,7 @@ s32 Wad_Install(FILE *fp)
 
     GuiImageData progressbarOutline(Resources::GetFile("progressbar_outline.png"), Resources::GetFileSize("progressbar_outline.png"));
     GuiImage progressbarOutlineImg(&progressbarOutline);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         progressbarOutlineImg.SetWidescreen(Settings.widescreen);
     }
@@ -199,7 +199,7 @@ s32 Wad_Install(FILE *fp)
     prTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     prTxt.SetPosition(0, 50);
 
-    if ((Settings.wsprompt == yes) && (Settings.widescreen)) /////////////adjust for widescreen
+    if ((Settings.wsprompt) && (Settings.widescreen)) /////////////adjust for widescreen
     {
         progressbarOutlineImg.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
         progressbarOutlineImg.SetPosition(0, 50);
@@ -368,7 +368,7 @@ s32 Wad_Install(FILE *fp)
             //msg4Txt.SetText(imgPath);
 
             prTxt.SetTextf("%i%%", 100 * (cnt * len + idx) / (tmd_data->num_contents * len));
-            if ((Settings.wsprompt == yes) && (Settings.widescreen))
+            if ((Settings.wsprompt) && (Settings.widescreen))
             {
                 progressbarImg.SetTile(78 * (cnt * len + idx) / (tmd_data->num_contents * len));
             }
@@ -450,14 +450,14 @@ s32 Wad_Uninstall(FILE *fp)
     trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 
     GuiImage dialogBoxImg(&dialogBox);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         dialogBoxImg.SetWidescreen(Settings.widescreen);
     }
 
     GuiText btn1Txt(tr( "OK" ), 22, Theme.prompttext);
     GuiImage btn1Img(&btnOutline);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         btn1Txt.SetWidescreen(Settings.widescreen);
         btn1Img.SetWidescreen(Settings.widescreen);
@@ -492,7 +492,7 @@ s32 Wad_Uninstall(FILE *fp)
     msg5Txt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     msg5Txt.SetPosition(50, 167);
 
-    if ((Settings.wsprompt == yes) && (Settings.widescreen)) /////////////adjust for widescreen
+    if ((Settings.wsprompt) && (Settings.widescreen)) /////////////adjust for widescreen
     {
 
         msg1Txt.SetPosition(70, 95);

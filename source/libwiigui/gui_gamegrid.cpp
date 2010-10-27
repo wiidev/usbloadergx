@@ -440,7 +440,7 @@ void GuiGameGrid::Draw()
     btnRowUp->Draw();
     btnRowDown->Draw();
 
-    if (focus && Settings.tooltips == TooltipsOn) for (int i = 0; i < pagesize; i++)
+    if (focus && Settings.tooltips == ON) for (int i = 0; i < pagesize; i++)
         game[i]->DrawTooltip();
 
     this->UpdateEffects();
@@ -503,7 +503,7 @@ void GuiGameGrid::Update(GuiTrigger * t)
                 return;
             }
 
-            if (Settings.xflip == sysmenu || Settings.xflip == yes || Settings.xflip == disk3d)
+            if (Settings.xflip == XFLIP_SYSMENU || Settings.xflip == XFLIP_YES || Settings.xflip == XFLIP_DISK3D)
                 goRight = goSteps;
             else goLeft = goSteps;
         }
@@ -518,7 +518,7 @@ void GuiGameGrid::Update(GuiTrigger * t)
                 btnRight->ResetState();
                 return;
             }
-            if (Settings.xflip == sysmenu || Settings.xflip == yes || Settings.xflip == disk3d)
+            if (Settings.xflip == XFLIP_SYSMENU || Settings.xflip == XFLIP_YES || Settings.xflip == XFLIP_DISK3D)
                 goLeft = goSteps;
             else goRight = goSteps;
         }

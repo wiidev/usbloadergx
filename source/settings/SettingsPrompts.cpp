@@ -40,7 +40,7 @@ bool MenuBackgroundMusic()
 
     if ( strcmp( entered, "" ) == 0 )
     {
-        sprintf( entered, "%s", bootDevice );
+        sprintf( entered, "%s", Settings.BootDevice );
     }
     else
     {
@@ -65,7 +65,7 @@ bool MenuBackgroundMusic()
                 return true;
         }
         else
-            sprintf( entered, "%s", bootDevice );
+            sprintf( entered, "%s", Settings.BootDevice );
     }
 
     result = BrowseDevice( entered, sizeof( entered ), FB_DEFAULT );
@@ -139,7 +139,7 @@ int MenuLanguageSelect()
     GuiText backBtnTxt( tr( "Back" ) , 22, Theme.prompttext );
     backBtnTxt.SetMaxWidth( btnOutline.GetWidth() - 30 );
     GuiImage backBtnImg( &btnOutline );
-    if ( Settings.wsprompt == yes )
+    if ( Settings.wsprompt == ON )
     {
         backBtnTxt.SetWidescreen( Settings.widescreen );
         backBtnImg.SetWidescreen( Settings.widescreen );
@@ -158,7 +158,7 @@ int MenuLanguageSelect()
     GuiText defaultBtnTxt( tr( "Default" ) , 22, Theme.prompttext );
     defaultBtnTxt.SetMaxWidth( btnOutline.GetWidth() - 30 );
     GuiImage defaultBtnImg( &btnOutline );
-    if ( Settings.wsprompt == yes )
+    if ( Settings.wsprompt == ON )
     {
         defaultBtnTxt.SetWidescreen( Settings.widescreen );
         defaultBtnImg.SetWidescreen( Settings.widescreen );
@@ -176,7 +176,7 @@ int MenuLanguageSelect()
     GuiText updateBtnTxt( tr( "Update Files" ) , 22, Theme.prompttext );
     updateBtnTxt.SetMaxWidth( btnOutline.GetWidth() - 30 );
     GuiImage updateBtnImg( &btnOutline );
-    if ( Settings.wsprompt == yes )
+    if ( Settings.wsprompt == ON )
     {
         updateBtnTxt.SetWidescreen( Settings.widescreen );
         updateBtnImg.SetWidescreen( Settings.widescreen );
@@ -342,7 +342,7 @@ int MenuLanguageSelect()
                     strncat ( entered, "/", 1 );
                 strlcpy( Settings.languagefiles_path, entered, sizeof( Settings.languagefiles_path ) );
                 WindowPrompt( tr( "Languagepath changed." ), 0, tr( "OK" ) );
-                if ( isInserted( bootDevice ) )
+                if ( isInserted( Settings.BootDevice ) )
                 {
                     Settings.Save();
                     returnhere = 1;
@@ -367,7 +367,7 @@ int MenuLanguageSelect()
             choice = WindowPrompt( tr( "Do you want to change language?" ), 0, tr( "Yes" ), tr( "Cancel" ) );
             if ( choice == 1 )
             {
-                if ( isInserted( bootDevice ) )
+                if ( isInserted( Settings.BootDevice ) )
                 {
                     snprintf( Settings.language_path, sizeof( Settings.language_path ), "%s%s", Settings.languagefiles_path, Dir.GetFilename( ret ) );
                     Settings.Save();

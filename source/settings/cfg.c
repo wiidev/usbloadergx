@@ -14,7 +14,7 @@
 
 u8 ocarinaChoice = 0;
 u8 videoChoice = 0;
-u8 faveChoice = no;
+u8 faveChoice = 0;
 u8 languageChoice = 0;
 u8 viChoice = 0;
 u8 iosChoice = 0;

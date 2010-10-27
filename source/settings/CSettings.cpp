@@ -67,23 +67,23 @@ void CSettings::SetDefault()
     strcpy(ogg_path, "");
     strcpy(unlockCode, "");
 
-    videomode = discdefault;
-    videopatch = off;
-    language = ConsoleLangDefault;
-    ocarina = off;
-    hddinfo = hr12;
-    sinfo = on;
-    rumble = RumbleOn;
+    videomode = VIDEO_MODE_DISCDEFAULT;
+    videopatch = OFF;
+    language = CONSOLE_DEFAULT;
+    ocarina = OFF;
+    hddinfo = CLOCK_HR12;
+    sinfo = ON;
+    rumble = ON;
     volume = 80;
     sfxvolume = 80;
     gamesoundvolume = 80;
-    tooltips = TooltipsOn;
+    tooltips = ON;
     gamesound = 1;
     parentalcontrol = 0;
     lockedgames = 0;
     cios = 249;
-    xflip = no;
-    quickboot = no;
+    xflip = XFLIP_NO;
+    quickboot = OFF;
     wiilight = 1;
     autonetwork = 0;
     discart = 0;
@@ -97,7 +97,7 @@ void CSettings::SetDefault()
     partition = -1;
     marknewtitles = 1;
     FatInstallToDir = 0;
-    partitions_to_install = install_game_only;
+    InstallPartitions = ONLY_GAME_PARTITION;
     fullcopy = 0;
     beta_upgrades = 0;
     strcpy(db_url, "");
@@ -201,8 +201,7 @@ bool CSettings::Save()
     fprintf(file, "gamesoundvolume = %d\n ", gamesoundvolume);
     fprintf(file, "tooltips = %d\n ", tooltips);
     fprintf(file, "password = %s\n ", unlockCode);
-    fprintf(file, "sort = %d\n ", sort);
-    fprintf(file, "fave = %d\n ", fave);
+    fprintf(file, "sort = %d\n ", GameSort);
     fprintf(file, "cios = %d\n ", cios);
     fprintf(file, "keyset = %d\n ", keyset);
     fprintf(file, "xflip = %d\n ", xflip);
@@ -240,7 +239,7 @@ bool CSettings::Save()
     fprintf(file, "partition = %d\n ", partition);
     fprintf(file, "marknewtitles = %d\n ", marknewtitles);
     fprintf(file, "FatInstallToDir = %d\n ", FatInstallToDir);
-    fprintf(file, "partitions_to_install = %d\n ", partitions_to_install);
+    fprintf(file, "InstallPartitions = %d\n ", InstallPartitions);
     fprintf(file, "fullcopy = %d\n ", fullcopy);
     fprintf(file, "beta_upgrades = %d\n ", beta_upgrades);
     fprintf(file, "returnTo = %s\n ", returnTo);
@@ -346,14 +345,9 @@ bool CSettings::SetSetting(char *name, char *value)
         strcpy(unlockCode, value);
         return true;
     }
-    else if (strcmp(name, "sort") == 0)
+    else if (strcmp(name, "GameSort") == 0)
     {
-        if (sscanf(value, "%d", &i) == 1) sort = i;
-        return true;
-    }
-    else if (strcmp(name, "fave") == 0)
-    {
-        if (sscanf(value, "%d", &i) == 1) fave = i;
+        if (sscanf(value, "%d", &i) == 1) GameSort = i;
         return true;
     }
     else if (strcmp(name, "cios") == 0)
@@ -471,9 +465,9 @@ bool CSettings::SetSetting(char *name, char *value)
         if (sscanf(value, "%d", &i) == 1) beta_upgrades = i;
         return true;
     }
-    else if (strcmp(name, "partitions_to_install") == 0)
+    else if (strcmp(name, "InstallPartitions") == 0)
     {
-        if (sscanf(value, "%d", &i) == 1) partitions_to_install = i;
+        if (sscanf(value, "%u", &i) == 1) InstallPartitions = i;
         return true;
     }
     else if (strcmp(name, "covers_path") == 0)

@@ -135,7 +135,7 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
     trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 
     GuiImage dialogBoxImg(&dialogBox);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         dialogBoxImg.SetWidescreen(Settings.widescreen);
     }
@@ -143,7 +143,7 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
     GuiImageData progressbarOutline(Resources::GetFile("progressbar_outline.png"), Resources::GetFileSize("progressbar_outline.png"));
 
     GuiImage progressbarOutlineImg(&progressbarOutline);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         progressbarOutlineImg.SetWidescreen(Settings.widescreen);
     }
@@ -197,7 +197,7 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
     prTxt.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     prTxt.SetPosition(200, 40);
 
-    if ((Settings.wsprompt == yes) && (Settings.widescreen)) /////////////adjust for widescreen
+    if ((Settings.wsprompt) && (Settings.widescreen)) /////////////adjust for widescreen
     {
         progressbarOutlineImg.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
         progressbarOutlineImg.SetPosition(0, 40);
@@ -258,7 +258,7 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
 
             tmp = static_cast<int> (progressbarImg.GetWidth() * progressDone);
 
-            if (Settings.widescreen && Settings.wsprompt == yes)
+            if (Settings.widescreen && Settings.wsprompt)
                 progressbarImg.SetSkew(0, 0, static_cast<int> (progressbarImg.GetWidth() * progressDone * 0.8)
                         - progressbarImg.GetWidth(), 0, static_cast<int> (progressbarImg.GetWidth() * progressDone
                         * 0.8) - progressbarImg.GetWidth(), 0, 0, 0);

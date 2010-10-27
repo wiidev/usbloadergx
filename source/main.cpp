@@ -71,35 +71,11 @@ int main(int argc, char *argv[])
     printf("\tStarting up\n");
     NandTitles.Get();
 
-    bool bootDevice_found = false;
-    if (argc >= 1)
-    {
-        if (!strncasecmp(argv[0], "usb:/", 5))
-        {
-            strcpy(bootDevice, "USB:");
-            bootDevice_found = true;
-        }
-        else if (!strncasecmp(argv[0], "sd:/", 4)) bootDevice_found = true;
-    }
-
     //Let's use libogc sd/usb for config loading
     printf("\tInitialize sd card\n");
     SDCard_Init();
     printf("\tInitialize usb device\n");
     USBDevice_Init();
-
-    if (!bootDevice_found)
-    {
-        printf("\tSearch for configuration file\n");
-        //try USB
-        //left in all the dol and elf files in this check in case this is the first time running the app and they dont have the config
-        if (CheckFile((char*) "USB:/config/GXglobal.cfg") || (CheckFile((char*) "USB:/apps/usbloader_gx/boot.elf"))
-                || CheckFile((char*) "USB:/apps/usbloadergx/boot.dol") || (CheckFile(
-                (char*) "USB:/apps/usbloadergx/boot.elf")) || CheckFile((char*) "USB:/apps/usbloader_gx/boot.dol")) strcpy(
-                bootDevice, "USB:");
-
-        printf("\tConfiguration file is on %s\n", bootDevice);
-    }
 
     gettextCleanUp();
     printf("\tLoading configuration...");

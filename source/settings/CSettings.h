@@ -27,24 +27,8 @@
 #include <string>
 #include <stdio.h>
 #include <gctypes.h>
+#include "SettingsEnums.h"
 #include "cfg.h"
-
-enum
-{
-    APP_DEFAULT = 0,
-    CONSOLE_DEFAULT,
-    JAPANESE,
-    ENGLISH,
-    GERMAN,
-    FRENCH,
-    SPANISH,
-    ITALIAN,
-    DUTCH,
-    S_CHINESE,
-    T_CHINESE,
-    KOREAN,
-    MAX_LANGUAGE
-};
 
 class CSettings
 {
@@ -87,8 +71,7 @@ class CSettings
         short quickboot;
         short wsprompt;
         short keyset;
-        short sort;
-        short fave;
+        short GameSort;
         short wiilight;
         short gameDisplay;
         short patchcountrystrings;
@@ -125,7 +108,7 @@ class CSettings
         short gamesound;
         short marknewtitles;
         short FatInstallToDir;
-        short partitions_to_install;
+        u32 InstallPartitions;
         short fullcopy;
         short beta_upgrades;
         char returnTo[20];

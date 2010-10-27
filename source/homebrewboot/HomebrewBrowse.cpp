@@ -142,7 +142,7 @@ int MenuHomebrewBrowse()
     GuiText backBtnTxt(tr( "Back" ), 22, Theme.prompttext);
     backBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
     GuiImage backBtnImg(&btnOutline);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         backBtnTxt.SetWidescreen(Settings.widescreen);
         backBtnImg.SetWidescreen(Settings.widescreen);
@@ -302,7 +302,7 @@ int MenuHomebrewBrowse()
     MainButton4.SetTrigger(&trigA);
 
     GuiImage wifiImg(&wifiImgData);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         wifiImg.SetWidescreen(Settings.widescreen);
     }

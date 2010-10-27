@@ -104,7 +104,7 @@ s32 Wbfs_Wbfs::AddGame()
     }
     else
     {
-        part_sel = Settings.partitions_to_install == install_game_only ? ONLY_GAME_PARTITION : ALL_PARTITIONS;
+        part_sel = (partition_selector_t) Settings.InstallPartitions;
     }
 
     ret = wbfs_add_disc(hdd, __ReadDVD, NULL, ProgressCallback, part_sel, copy_1_1);
@@ -181,18 +181,7 @@ f32 Wbfs_Wbfs::EstimateGameSize()
     }
     else
     {
-        switch (Settings.partitions_to_install)
-        {
-            case install_game_only:
-                part_sel = ONLY_GAME_PARTITION;
-                break;
-            case install_all:
-                part_sel = ALL_PARTITIONS;
-                break;
-            case install_all_but_update:
-                part_sel = REMOVE_UPDATE_PARTITION;
-                break;
-        }
+        part_sel = (partition_selector_t) Settings.InstallPartitions;
     }
     return wbfs_estimate_disc(hdd, __ReadDVD, NULL, part_sel);
 }

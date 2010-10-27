@@ -147,7 +147,7 @@ bool TitleSelector(char output[])
     GuiText cancelBtnTxt(tr( "Back" ), 22, Theme.prompttext);
     cancelBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
     GuiImage cancelBtnImg(&btnOutline);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         cancelBtnTxt.SetWidescreen(Settings.widescreen);
         cancelBtnImg.SetWidescreen(Settings.widescreen);
@@ -382,7 +382,7 @@ int TitleBrowser()
     GuiText cancelBtnTxt(tr( "Back" ), 22, Theme.prompttext);
     cancelBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
     GuiImage cancelBtnImg(&btnOutline);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         cancelBtnTxt.SetWidescreen(Settings.widescreen);
         cancelBtnImg.SetWidescreen(Settings.widescreen);
@@ -401,7 +401,7 @@ int TitleBrowser()
 
     GuiImageData wifiImgData(Resources::GetFile("Wifi_btn.png"), Resources::GetFileSize("Wifi_btn.png"));
     GuiImage wifiImg(&wifiImgData);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         wifiImg.SetWidescreen(Settings.widescreen);
     }

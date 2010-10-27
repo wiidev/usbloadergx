@@ -188,7 +188,7 @@ static int Theme_Prompt(const char *title, const char *author, GuiImageData *thu
     GuiText downloadBtnTxt(tr( "Download" ), 22, Theme.prompttext);
     downloadBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
     GuiImage downloadBtnImg(&btnOutline);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         downloadBtnTxt.SetWidescreen(Settings.widescreen);
         downloadBtnImg.SetWidescreen(Settings.widescreen);
@@ -201,7 +201,7 @@ static int Theme_Prompt(const char *title, const char *author, GuiImageData *thu
     GuiText backBtnTxt(tr( "Back" ), 22, Theme.prompttext);
     backBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
     GuiImage backBtnImg(&btnOutline);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         backBtnTxt.SetWidescreen(Settings.widescreen);
         backBtnImg.SetWidescreen(Settings.widescreen);
@@ -362,7 +362,7 @@ int Theme_Downloader()
     GuiText backBtnTxt(tr( "Back" ), 22, Theme.prompttext);
     backBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
     GuiImage backBtnImg(&btnOutline);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         backBtnTxt.SetWidescreen(Settings.widescreen);
         backBtnImg.SetWidescreen(Settings.widescreen);
@@ -412,7 +412,7 @@ int Theme_Downloader()
     PageIndicatorBtn.SetEffectGrow();
 
     GuiImage wifiImg(&wifiImgData);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         wifiImg.SetWidescreen(Settings.widescreen);
     }

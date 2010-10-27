@@ -323,7 +323,7 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
     GuiText ExitBtnTxt(tr( "Cancel" ), 24, ( GXColor )
     {   0, 0, 0, 255});
     GuiImage ExitBtnImg(&btnOutline);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         ExitBtnTxt.SetWidescreen(Settings.widescreen);
         ExitBtnImg.SetWidescreen(Settings.widescreen);
@@ -340,7 +340,7 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
     GuiText usbBtnTxt(browsers[(curDevice + 1) % browsers.size()].rootdir, 24, ( GXColor )
     {   0, 0, 0, 255});
     GuiImage usbBtnImg(&btnOutline);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         usbBtnTxt.SetWidescreen(Settings.widescreen);
         usbBtnImg.SetWidescreen(Settings.widescreen);
@@ -355,7 +355,7 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
 
     GuiText okBtnTxt(tr( "OK" ), 22, Theme.prompttext);
     GuiImage okBtnImg(&btnOutline);
-    if (Settings.wsprompt == yes)
+    if (Settings.wsprompt)
     {
         okBtnTxt.SetWidescreen(Settings.widescreen);
         okBtnImg.SetWidescreen(Settings.widescreen);
