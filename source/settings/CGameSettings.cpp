@@ -179,7 +179,8 @@ bool CGameSettings::Save()
         fprintf(f, "loadalternatedol:%d; ", GameList[i].loadalternatedol);
         fprintf(f, "alternatedolstart:%d; ", GameList[i].alternatedolstart);
         fprintf(f, "alternatedolname:%s; ", GameList[i].alternatedolname);
-        fprintf(f, "returnTo:%d;\n", GameList[i].returnTo);
+        fprintf(f, "returnTo:%d; ", GameList[i].returnTo);
+        fprintf(f, "Locked:%d;\n", GameList[i].Locked);
     }
     fprintf(f, "# END\n");
     fclose(f);
@@ -300,6 +301,14 @@ bool CGameSettings::SetSetting(GameCFG & game, char *name, char *value)
         }
         return true;
     }
+    else if(strcmp(name, "Locked") == 0)
+    {
+        if (sscanf(value, "%d", &i) == 1)
+        {
+            game.Locked = i;
+        }
+        return true;
+    }
 
     return false;
 }
@@ -384,4 +393,16 @@ void CGameSettings::TrimLine(char *dest, const char *src, int size)
     }
 
     dest[i] = '\0';
+}
+
+int CGameSettings::GetPartenalPEGI(int parental)
+{
+	switch(parental)
+	{
+		case 1: return 7;
+		case 2: return 12;
+		case 3: return 16;
+		case 4: return 18;
+		default: return -1;
+	}
 }

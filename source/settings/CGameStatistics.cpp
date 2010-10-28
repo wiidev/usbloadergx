@@ -119,7 +119,6 @@ bool CGameStatistics::Save()
     {
         fprintf(f, "game:%s = ", GameList[i].id);
         fprintf(f, "FavoriteRank:%d; ", GameList[i].FavoriteRank);
-        fprintf(f, "LockStatus:%d; ", GameList[i].LockStatus);
         fprintf(f, "PlayCount:%d;\n", GameList[i].PlayCount);
     }
     fprintf(f, "# END\n");
@@ -137,14 +136,6 @@ bool CGameStatistics::SetSetting(GameStatus & game, char *name, char *value)
         if (sscanf(value, "%d", &i) == 1)
         {
             game.FavoriteRank = i;
-        }
-        return true;
-    }
-    else if(strcmp(name, "LockStatus") == 0)
-    {
-        if (sscanf(value, "%d", &i) == 1)
-        {
-            game.LockStatus = i;
         }
         return true;
     }
@@ -251,14 +242,12 @@ void CGameStatistics::SetPlayCount(const char * id, int count)
     GameStatus NewStatus;
     snprintf(NewStatus.id, sizeof(NewStatus.id), id);
     NewStatus.FavoriteRank = 0;
-    NewStatus.LockStatus = 0;
     NewStatus.PlayCount = count;
 
     GameStatus * game = GetGameStatus(id);
     if(game)
     {
         NewStatus.FavoriteRank = game->FavoriteRank;
-        NewStatus.LockStatus = game->LockStatus;
     }
 
     AddGame(NewStatus);
@@ -272,35 +261,12 @@ void CGameStatistics::SetFavoriteRank(const char * id, int rank)
     GameStatus NewStatus;
     snprintf(NewStatus.id, sizeof(NewStatus.id), id);
     NewStatus.FavoriteRank = rank;
-    NewStatus.LockStatus = 0;
     NewStatus.PlayCount = 0;
 
     GameStatus * game = GetGameStatus(id);
     if(game)
     {
         NewStatus.PlayCount = game->PlayCount;
-        NewStatus.LockStatus = game->LockStatus;
-    }
-
-    AddGame(NewStatus);
-}
-
-void CGameStatistics::SetLockStatus(const char * id, int lock)
-{
-    if(!id)
-        return;
-
-    GameStatus NewStatus;
-    snprintf(NewStatus.id, sizeof(NewStatus.id), id);
-    NewStatus.FavoriteRank = 0;
-    NewStatus.LockStatus = lock;
-    NewStatus.PlayCount = 0;
-
-    GameStatus * game = GetGameStatus(id);
-    if(game)
-    {
-        NewStatus.PlayCount = game->PlayCount;
-        NewStatus.FavoriteRank = game->FavoriteRank;
     }
 
     AddGame(NewStatus);
@@ -329,16 +295,3 @@ int CGameStatistics::GetFavoriteRank(const char * id)
 
     return 0;
 }
-
-int CGameStatistics::GetLockStatus(const char * id)
-{
-    if(!id)
-        return 0;
-
-    GameStatus * game = GetGameStatus(id);
-    if(game)
-        return game->LockStatus;
-
-    return 0;
-}
-

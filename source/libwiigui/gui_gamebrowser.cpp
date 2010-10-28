@@ -14,6 +14,7 @@
 #include "../settings/CSettings.h"
 #include "../main.h"
 #include "settings/newtitles.h"
+#include "settings/GameTitles.h"
 #include "usbloader/GameList.h"
 #include "themes/CTheme.h"
 
@@ -120,12 +121,12 @@ GuiGameBrowser::GuiGameBrowser(int w, int h, int selected, int offset)
 
     for (int i = 0; i < pagesize; i++)
     {
-        gameTxt[i] = new GuiText(get_title(gameList[i]), 20, Theme.gametext);
+        gameTxt[i] = new GuiText(GameTitles.GetTitle(gameList[i]), 20, Theme.gametext);
         gameTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
         gameTxt[i]->SetPosition(24, 0);
         gameTxt[i]->SetMaxWidth(maxTextWidth, DOTTED);
 
-        gameTxtOver[i] = new GuiText(get_title(gameList[i]), 20, Theme.gametext);
+        gameTxtOver[i] = new GuiText(GameTitles.GetTitle(gameList[i]), 20, Theme.gametext);
         gameTxtOver[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
         gameTxtOver[i]->SetPosition(24, 0);
         gameTxtOver[i]->SetMaxWidth(maxTextWidth, SCROLL_HORIZONTAL);
@@ -272,9 +273,10 @@ int GuiGameBrowser::FindMenuItem(int currentItem, int direction)
 
     if (nextItem < 0 || nextItem >= gameList.size()) return -1;
 
-    if (strlen(get_title(gameList[nextItem])) > 0)
+    if (strlen(GameTitles.GetTitle(gameList[nextItem])) > 0)
         return nextItem;
-    else return FindMenuItem(nextItem, direction);
+    
+	return FindMenuItem(nextItem, direction);
 }
 
 /**
@@ -321,9 +323,9 @@ void GuiGameBrowser::UpdateListEntries()
                 game[i]->SetVisible(true);
                 game[i]->SetState(STATE_DEFAULT);
             }
-            gameTxt[i]->SetText(get_title(gameList[next]));
+            gameTxt[i]->SetText(GameTitles.GetTitle(gameList[next]));
             gameTxt[i]->SetPosition(24, 0);
-            gameTxtOver[i]->SetText(get_title(gameList[next]));
+            gameTxtOver[i]->SetText(GameTitles.GetTitle(gameList[next]));
             gameTxtOver[i]->SetPosition(24, 0);
 
             if (Settings.marknewtitles)

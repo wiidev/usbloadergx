@@ -26,7 +26,6 @@
 #include "filelist.h"
 #include "sys.h"
 #include "network/http.h"
-#include "settings/cfg.h"
 #include "utils/minizip/miniunz.h"
 #include "usbloader/utils.h"
 

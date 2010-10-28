@@ -18,7 +18,7 @@
 #include "libs/libwbfs/wiidisc.h"
 #include "main.h"
 #include "sys.h"
-#include "settings/cfg.h"
+#include "settings/GameTitles.h"
 #include "themes/CTheme.h"
 #include "memory.h"
 #include "../gecko.h"
@@ -115,8 +115,7 @@ int DiscBrowse(struct discHdr * header, char * alternatedname, int alternatednam
     GuiTrigger trigB;
     trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 
-    GuiText titleTxt(get_title(header), 28, ( GXColor )
-    {   0, 0, 0, 255});
+    GuiText titleTxt(GameTitles.GetTitle(header), 28, ( GXColor ) {0, 0, 0, 255});
     titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     titleTxt.SetPosition(12, 40);
     titleTxt.SetMaxWidth(356, SCROLL_HORIZONTAL);

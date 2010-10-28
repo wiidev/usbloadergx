@@ -6,6 +6,7 @@
  ***************************************************************************/
 
 #include <dirent.h>
+#include <zlib.h>
 
 #include "language/gettext.h"
 #include "libwiigui/gui.h"
@@ -16,7 +17,6 @@
 #include "network/http.h"
 #include "filelist.h"
 #include "FileOperations/fileops.h"
-#include "settings/cfg.h"
 #include "themes/CTheme.h"
 #include "sys.h"
 #include "menu.h"
@@ -31,8 +31,6 @@ u32 titleCnt;
 extern u32 infilesize;
 extern u32 uncfilesize;
 extern char wiiloadVersion[2];
-#include <zlib.h>
-#include "settings/cfg.h"
 
 /*** Extern functions ***/
 extern void ResumeGui();

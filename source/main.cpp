@@ -16,18 +16,11 @@
 #include <unistd.h>
 #include <locale.h>
 #include <wiiuse/wpad.h>
-//#include <debug.h>
-extern "C"
-{
-    extern void __exception_setreload(int t);
-}
-
 #include <di/di.h>
 #include <sys/iosupport.h>
 
 #include "libwiigui/gui.h"
 #include "usbloader/wbfs.h"
-#include "settings/cfg.h"
 #include "language/gettext.h"
 #include "mload/mload.h"
 #include "mload/mload_modules.h"
@@ -55,6 +48,11 @@ extern "C"
 #include "wad/nandtitle.h"
 #include "system/IosLoader.h"
 #include "GameBootProcess.h"
+
+extern "C"
+{
+    extern void __exception_setreload(int t);
+}
 
 extern bool geckoinit;
 

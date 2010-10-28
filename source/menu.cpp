@@ -254,8 +254,6 @@ int MainMenu(int menu)
 {
     currentMenu = menu;
 
-    MountGamePartition();
-
     pointer[0] = Resources::GetImageData("player1_point.png");
     pointer[1] = Resources::GetImageData("player2_point.png");
     pointer[2] = Resources::GetImageData("player3_point.png");
@@ -274,6 +272,8 @@ int MainMenu(int menu)
     bgMusic->SetLoop(Settings.musicloopmode); //loop music
     bgMusic->Load(Settings.ogg_path);
     bgMusic->Play();
+
+    MountGamePartition();
 
     while (currentMenu != MENU_EXIT)
     {

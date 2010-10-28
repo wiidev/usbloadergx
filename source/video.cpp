@@ -19,8 +19,6 @@
 #include "gecko.h"
 #include "libwiigui/gui.h"
 
-#include "settings/cfg.h"
-
 #define DEFAULT_FIFO_SIZE 256 * 1024
 static unsigned int *xfb[2] = { NULL, NULL }; // Double buffered
 static int whichfb = 0; // Switch

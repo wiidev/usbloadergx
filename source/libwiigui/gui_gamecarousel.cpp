@@ -14,6 +14,7 @@
 #include "gui_image_async.h"
 #include "gui_gamecarousel.h"
 #include "usbloader/GameList.h"
+#include "settings/GameTitles.h"
 #include "../settings/CSettings.h"
 #include "themes/CTheme.h"
 #include "../main.h"
@@ -304,8 +305,7 @@ void GuiGameCarousel::Update(GuiTrigger * t)
         if (selectedItem >= 0)
         {
             game[selectedItem]->SetEffect(EFFECT_SCALE, 1, 130);
-            char *gameTitle = get_title(gameList[gameIndex[selectedItem]]);
-            gamename->SetText(gameTitle);
+            gamename->SetText(GameTitles.GetTitle(gameList[gameIndex[selectedItem]]));
         }
         else gamename->SetText((char*) NULL);
         if (selectedItem_old >= 0) game[selectedItem_old]->SetEffect(EFFECT_SCALE, -1, 100);

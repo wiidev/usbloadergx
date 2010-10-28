@@ -18,6 +18,7 @@
 #include "libwiigui/gui_diskcover.h"
 #include "libwiigui/Text.hpp"
 #include "settings/CGameStatistics.h"
+#include "settings/GameTitles.h"
 #include "network/networkops.h"
 #include "network/http.h"
 #include "prompts/PromptWindows.h"
@@ -1106,35 +1107,6 @@ int WindowExitPrompt()
     return choice;
 }
 
-void SetupLockedButton(GuiButton *btnLocked, GuiImage *img, GuiSound *sndOver, GuiSound *sndClick,
-        GuiTrigger *trig)
-{
-    btnLocked->SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-    //btnLocked->SetPosition(xPos, yPos);
-    btnLocked->SetPosition(125, 40);
-    btnLocked->SetImage(img);
-    btnLocked->SetSoundOver(sndOver);
-    btnLocked->SetSoundClick(sndClick);
-    btnLocked->SetTrigger(trig);
-    btnLocked->SetEffectGrow();
-}
-
-u8 SetLocked(GuiButton *lock1, u8* gameId, u8 locked)
-{
-    int LockStatus = (locked == GameStatistics.GetLockStatus(gameId)) ? 0 : locked; // Press the current rank to reset the rank
-
-    GameStatistics.SetLockStatus(gameId, LockStatus);
-    GameStatistics.Save();
-
-    return LockStatus;
-}
-
-void SetLockedImage(const u8 * gameid, GuiImage *b1, GuiImageData *on, GuiImageData *off)
-{
-    int lockedvar = GameStatistics.GetLockStatus(gameid);
-    b1->SetImage(lockedvar == 1 ? on : off);
-}
-
 void SetupFavoriteButton(GuiButton *btnFavorite, int xPos, GuiImage *img, GuiSound *sndOver, GuiSound *sndClick,
         GuiTrigger *trig)
 {
@@ -1338,11 +1310,6 @@ int GameWindowPrompt()
     SetupFavoriteButton(&btnFavorite4, -117, &btnFavoriteImg4, &btnSoundOver, btnClick2, &trigA);
     SetupFavoriteButton(&btnFavorite5, -90, &btnFavoriteImg5, &btnSoundOver, btnClick2, &trigA);
 
-    GuiImage btnLockedImg;
-    btnLockedImg.SetWidescreen(Settings.widescreen);
-    GuiButton btnLocked(imgLocked.GetWidth(), imgLocked.GetHeight());
-    SetupLockedButton(&btnLocked, &btnLockedImg, &btnSoundOver, btnClick2, &trigA);
-
     GuiImage btnLeftImg(&imgLeft);
     if (Settings.wsprompt)
     {
@@ -1382,7 +1349,6 @@ int GameWindowPrompt()
     if (Settings.godmode == 1 && mountMethod != 2 && mountMethod != 3)
     {
         promptWindow.Append(&btn3);
-        promptWindow.Append(&btnLocked);
     }
 
     promptWindow.Append(&diskImg2);
@@ -1519,12 +1485,10 @@ int GameWindowPrompt()
             sizeTxt.SetTextf("%.2fGB", size); //set size text;
         }
 
-        nameTxt.SetText(get_title(header));
+        nameTxt.SetText(GameTitles.GetTitle(header));
         playcntTxt.SetTextf("%s: %i", tr( "Play Count" ), GameStatistics.GetPlayCount(header));
         SetFavoriteImages(header->id, &btnFavoriteImg1, &btnFavoriteImg2, &btnFavoriteImg3, &btnFavoriteImg4, &btnFavoriteImg5,
                 &imgFavorite, &imgNotFavorite);
-
-        SetLockedImage(header->id, &btnLockedImg, &imgLocked, &imgNotLocked);
 
         nameTxt.SetPosition(0, 1);
 
@@ -1605,15 +1569,6 @@ int GameWindowPrompt()
                             &btnFavoriteImg5, &imgFavorite, &imgNotFavorite);
                 }
                 btnFavorite1.ResetState();
-            }
-            else if (btnLocked.GetState() == STATE_CLICKED) //switch locked
-            {
-                if (isInserted(Settings.BootDevice))
-                {
-                    SetLocked(&btnLocked, header->id, 1);
-                    SetLockedImage(header->id, &btnLockedImg, &imgLocked, &imgNotLocked);
-                }
-                btnLocked.ResetState();
             }
             else if (btnFavorite2.GetState() == STATE_CLICKED) //switch favorite
             {
@@ -1803,9 +1758,8 @@ int DiscWait(const char *title, const char *msg, const char *btn1Label, const ch
     promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     promptWindow.SetPosition(0, -10);
     GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
+
     if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
     GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
     GuiImageData dialogBox(Resources::GetFile("dialogue_box.png"), Resources::GetFileSize("dialogue_box.png"));
@@ -1862,7 +1816,7 @@ int DiscWait(const char *title, const char *msg, const char *btn1Label, const ch
     GuiButton btn2(&btn2Img, &btn2Img, 1, 4, -20, -25, &trigA, &btnSoundOver, btnClick2, 1);
     btn2.SetLabel(&btn2Txt);
 
-    if ((Settings.wsprompt) && (Settings.widescreen)) /////////////adjust buttons for widescreen
+    if (Settings.wsprompt && Settings.widescreen) /////////////adjust buttons for widescreen
     {
         msgTxt.SetMaxWidth(380);
         if (btn2Label)

@@ -28,7 +28,6 @@
 #include <stdio.h>
 #include <gctypes.h>
 #include "SettingsEnums.h"
-#include "cfg.h"
 
 class CSettings
 {

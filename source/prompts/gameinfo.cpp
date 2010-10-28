@@ -19,6 +19,7 @@
 #include "FileOperations/fileops.h"
 #include "prompts/PromptWindows.h"
 #include "themes/CTheme.h"
+#include "settings/GameTitles.h"
 #include "gameinfo.h"
 #include "usbloader/GameList.h"
 #include "../gecko.h"
@@ -1117,7 +1118,7 @@ bool save_gamelist(int txt) // save gamelist
                 fprintf(f, "%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2], header->id[3], header->id[4],
                         header->id[5]);
                 fprintf(f, " [%.2f]   ", size);
-                fprintf(f, " %s", get_title(header));
+                fprintf(f, " %s", GameTitles.GetTitle(header));
             }
             fprintf(f, "\n");
         }
@@ -1134,11 +1135,8 @@ bool save_gamelist(int txt) // save gamelist
             if (i < 500)
             {
                 fprintf(f, "\"%c%c%c%c%c%c\",\"%.2f\",\"%s\"\n", header->id[0], header->id[1], header->id[2],
-                        header->id[3], header->id[4], header->id[5], size, get_title(header));
-                //fprintf(f, "\"%.2f\",", size);
-                //fprintf(f, "\"%s\"",get_title(header));
+                        header->id[3], header->id[4], header->id[5], size, GameTitles.GetTitle(header));
             }
-            //fprintf(f, "\n");
         }
     }
     fclose(f);

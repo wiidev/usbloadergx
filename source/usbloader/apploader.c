@@ -10,7 +10,6 @@
 #include "disc.h"
 #include "alternatedol.h"
 #include "fstfile.h"
-#include "settings/cfg.h"
 #include "gecko.h"
 #include "patches/wip.h"
 #include "patches/dolpatcher.h"

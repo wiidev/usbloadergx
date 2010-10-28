@@ -8,15 +8,24 @@
 #include <unzip/unzip.h>
 #include "settings/CSettings.h"
 #include "settings/CGameSettings.h"
+#include "settings/GameTitles.h"
 #include "xml/xml.h"
 
-extern "C"
-{
-    extern void title_set(char *id, char *title);
-    extern char* trimcopy(char *dest, char *src, int size);
-    extern char game_partition[6];
-}
+extern char game_partition[6];
 
+static char * trimcopy(char *dest, char *src, int size)
+{
+    int len;
+    while (*src == ' ')
+        src++;
+    len = strlen(src);
+    // trim trailing " \r\n"
+    while (len > 0 && strchr(" \r\n", src[len - 1]))
+        len--;
+    if (len >= size) len = size - 1;
+    strlcpy(dest, src, len + 1);
+    return dest;
+}
 /* config */
 static bool xmldebug = false;
 static char xmlcfg_filename[100] = "wiitdb";
@@ -334,7 +343,7 @@ void LoadTitlesFromXML(char *langtxt, bool forcejptoen)
             }
 
             snprintf(id_text, 7, "%s", id_text);
-            title_set(id_text, title_text);
+            GameTitles.SetGameTitle(id_text, title_text);
         }
     }
 

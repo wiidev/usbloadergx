@@ -11,6 +11,7 @@
 #include "settings/Settings.h"
 #include "settings/CGameSettings.h"
 #include "settings/CGameStatistics.h"
+#include "settings/GameTitles.h"
 #include "themes/CTheme.h"
 #include "wpad.h"
 #include "sys.h"
@@ -1402,13 +1403,13 @@ int MenuDiscList()
             if (!mountMethod)//only get this stuff it we are booting a game from USB
             {
                 WBFS_GameSize(header->id, &size);
-                if (strlen(get_title(header)) < (MAX_CHARACTERS + 3))
+                if (strlen(GameTitles.GetTitle(header)) < (MAX_CHARACTERS + 3))
                 {
-                    sprintf(text, "%s", get_title(header));
+                    sprintf(text, "%s", GameTitles.GetTitle(header));
                 }
                 else
                 {
-                    strncpy(text, get_title(header), MAX_CHARACTERS);
+                    strncpy(text, GameTitles.GetTitle(header), MAX_CHARACTERS);
                     text[MAX_CHARACTERS] = '\0';
                     strncat(text, "...", 3);
                 }
@@ -1582,7 +1583,7 @@ int MenuDiscList()
 
                     //enter new game title
                     char entered[60];
-                    snprintf(entered, sizeof(entered), "%s", get_title(header));
+                    snprintf(entered, sizeof(entered), "%s", GameTitles.GetTitle(header));
                     entered[59] = '\0';
                     int result = OnScreenKeyboard(entered, 60, 0);
                     if (result == 1)
@@ -1672,8 +1673,8 @@ void rockout(int f)
 {
     HaltGui();
 
-    if (gameSelected >= 0 && gameSelected < gameList.size() && (strcasestr(get_title(gameList[gameSelected]), "guitar")
-            || strcasestr(get_title(gameList[gameSelected]), "band") || strcasestr(get_title(gameList[gameSelected]),
+    if (gameSelected >= 0 && gameSelected < gameList.size() && (strcasestr(GameTitles.GetTitle(gameList[gameSelected]), "guitar")
+            || strcasestr(GameTitles.GetTitle(gameList[gameSelected]), "band") || strcasestr(GameTitles.GetTitle(gameList[gameSelected]),
             "rock")))
     {
         for (int i = 0; i < 4; i++)

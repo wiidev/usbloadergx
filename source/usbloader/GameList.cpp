@@ -27,7 +27,9 @@
 #include "usbloader/wbfs.h"
 #include "settings/newtitles.h"
 #include "settings/CSettings.h"
+#include "settings/CGameSettings.h"
 #include "settings/CGameStatistics.h"
+#include "settings/GameTitles.h"
 #include "xml/xml.h"
 #include "FreeTypeGX.h"
 #include "GameList.h"
@@ -135,28 +137,37 @@ int GameList::FilterList(const wchar_t * gameFilter)
         }
 
         //ignore uLoader cfg "iso".  i was told it is "__CFG_"  but not confirmed
-        if (strncasecmp((char*) header->id, "__CFG_", 6) == 0) continue;
+        if (strncasecmp((char*) header->id, "__CFG_", 6) == 0)
+            continue;
 
-        if (Settings.parentalcontrol && !Settings.godmode) if (get_block(header) >= Settings.parentalcontrol) continue;
+        GameCFG * GameConfig = GameSettings.GetGameCFG(header);
+
+        if (Settings.parentalcontrol && !Settings.godmode)
+        {
+            if (GameConfig && GameConfig->parentalcontrol >= Settings.parentalcontrol)
+                continue;
+        }
 
         /* Rating based parental control method */
         if (Settings.parentalcontrol == 0 && Settings.godmode == 0 && Settings.Parental.enabled == 1)
         {
             // Check game rating in WiiTDB, since the default Wii parental control setting is enabled
             s32 rating = GetRatingForGame((char *) header->id);
-            if ((rating != -1 && rating > Settings.Parental.rating) || (rating == -1 && get_pegi_block(header)
-                    > Settings.Parental.rating))
+
+            if ((rating != -1 && rating > Settings.Parental.rating) ||
+                (GameConfig && rating == -1 &&
+                 CGameSettings::GetPartenalPEGI(GameConfig->parentalcontrol)
+                 > Settings.Parental.rating))
             {
                 continue;
             }
         }
 
-        /* Game lock based parental control method */
-        // If game lock is set to "1 (Unlocked Games Only)" and the game is locked, then skip
-        if(Settings.lockedgames == 1 && Settings.godmode == 0 && GameStatistics.GetLockStatus(header->id) == 1)
+        //! Per game lock method
+        if(!Settings.godmode && Settings.lockedgames && GameConfig && GameConfig->Locked)
             continue;
 
-        wchar_t *gameName = charToWideChar(get_title(header));
+        wchar_t *gameName = charToWideChar(GameTitles.GetTitle(header));
 
         if (gameName && *GameFilter.c_str())
         {
@@ -203,7 +214,7 @@ int GameList::LoadUnfiltered()
         /* Register game */
         NewTitles::Instance()->CheckGame(header->id);
 
-        wchar_t *gameName = charToWideChar(get_title(header));
+        wchar_t *gameName = charToWideChar(GameTitles.GetTitle(header));
         if (gameName)
         {
             if (wcslen(gameName) > GameFilter.size() && AvailableSearchChars.find(gameName[GameFilter.size()])
@@ -249,7 +260,7 @@ void GameList::SortList()
 
 bool GameList::NameSortCallback(const struct discHdr *a, const struct discHdr *b)
 {
-    return (strcasecmp(get_title((struct discHdr *) a), get_title((struct discHdr *) b)) < 0);
+    return (strcasecmp(GameTitles.GetTitle((struct discHdr *) a), GameTitles.GetTitle((struct discHdr *) b)) < 0);
 }
 
 bool GameList::PlaycountSortCallback(const struct discHdr *a, const struct discHdr *b)

@@ -12,6 +12,7 @@
 #include <ctype.h>
 
 #include "settings/CSettings.h"
+#include "settings/GameTitles.h"
 #include "usbloader/disc.h"
 #include "fatmounter.h"
 #include "wbfs_fat.h"
@@ -357,7 +358,7 @@ s32 Wbfs_Fat::GetHeadersCount()
     int len;
     char dir_title[65];
     char fname_title[TITLE_LEN];
-    char *title;
+    const char *title;
     DIR_ITER *dir_iter;
 
     //dbg_time1();
@@ -467,7 +468,7 @@ s32 Wbfs_Fat::GetHeadersCount()
         // size must be at least 1MB to be considered a valid wbfs file
         if (st.st_size < 1024 * 1024) continue;
         // if we have titles.txt entry use that
-        title = cfg_get_title(id);
+        title = GameTitles.GetTitle(id);
         // if no titles.txt get title from dir or file name
         if (!title && *fname_title)
         {
@@ -741,7 +742,7 @@ void Wbfs_Fat::mk_title_txt(struct discHdr *header, char *path)
 
     f = fopen(fname, "wb");
     if (!f) return;
-    fprintf(f, "%.6s = %.64s\n", header->id, get_title(header));
+    fprintf(f, "%.6s = %.64s\n", header->id, GameTitles.GetTitle(header));
     fclose(f);
     printf("Info file: %s\n", fname);
 }
@@ -754,7 +755,7 @@ void Wbfs_Fat::mk_gameid_title(struct discHdr *header, char *name, int re_space,
 
     memcpy(name, header->id, 6);
     name[6] = 0;
-    strncpy(title, get_title(header), sizeof(title));
+    strncpy(title, GameTitles.GetTitle(header), sizeof(title));
     title_filename(title);
 
     if (layout == 0)

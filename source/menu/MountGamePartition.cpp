@@ -17,7 +17,7 @@ static int FindGamesPartition(PartList * partitions)
     if (partitions->wbfs_n != 0)
     {
         WBFS_Open();
-        
+
 		for (int p = 0; p < partitions->num; p++)
         {
             if (partitions->pinfo[p].fs_type == FS_TYPE_WBFS)
@@ -115,8 +115,10 @@ int MountGamePartition(bool ShowGUI)
     // Added for slow HDD
     for (int retries = 10; retries > 0; retries--)
     {
-        if (Partition_GetList(WBFS_DEVICE_USB, &partitions) != 0)
+        if (Partition_GetList(WBFS_DEVICE_USB, &partitions) == 0)
             break;
+
+        sleep(1);
     }
 
     if (Settings.partition != -1 && partitions.num > Settings.partition)

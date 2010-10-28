@@ -10,6 +10,7 @@
 #include "settings/SettingsPrompts.h"
 #include "settings/CGameSettings.h"
 #include "settings/CGameStatistics.h"
+#include "settings/GameTitles.h"
 #include "prompts/filebrowser.h"
 #include "cheats/cheatmenu.h"
 #include "themes/CTheme.h"
@@ -19,7 +20,6 @@
 #include "filelist.h"
 #include "FileOperations/fileops.h"
 #include "sys.h"
-#include "cfg.h"
 #include "usbloader/partition_usbloader.h"
 #include "usbloader/utils.h"
 #include "xml/xml.h"
@@ -2238,13 +2238,13 @@ int MenuSettings()
         {
             reloaddatabasefile = true;
             CloseXMLDatabase();
-            CFG_Cleanup();
+            GameTitles.SetDefault();
         }
         OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, reloaddatabasefile,
                 Settings.titlesOverride == 1 ? true : false, true); // open file, reload titles, keep in memory
     }
     // disable titles from database if setting has changed
-    if (opt_override != opt_overridenew && Settings.titlesOverride == 0) titles_default();
+    if (opt_override != opt_overridenew && Settings.titlesOverride == 0) GameTitles.SetDefault();
 
     HaltGui();
 
@@ -2290,11 +2290,11 @@ int MenuGameSettings(struct discHdr * header)
     char gameName[31];
     if (!mountMethod)
     {
-        if (strlen(get_title(header)) < (27 + 3))
-            sprintf(gameName, "%s", get_title(header));
+        if (strlen(GameTitles.GetTitle(header)) < (27 + 3))
+            sprintf(gameName, "%s", GameTitles.GetTitle(header));
         else
         {
-            strncpy(gameName, get_title(header), 27);
+            strncpy(gameName, GameTitles.GetTitle(header), 27);
             gameName[27] = '\0';
             strncat(gameName, "...", 3);
         }
@@ -2302,7 +2302,7 @@ int MenuGameSettings(struct discHdr * header)
     else sprintf(gameName, "%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2], header->id[3], header->id[4],
             header->id[5]);
 
-    GuiText titleTxt(!mountMethod ? get_title(header) : gameName, 28, ( GXColor )
+    GuiText titleTxt(!mountMethod ? GameTitles.GetTitle(header) : gameName, 28, ( GXColor )
     {   0, 0, 0, 255});
     titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     titleTxt.SetPosition(12, 40);
@@ -2434,6 +2434,7 @@ int MenuGameSettings(struct discHdr * header)
         game_cfg.iosreloadblock = OFF;
         strcpy(game_cfg.alternatedolname, "");
         game_cfg.returnTo = 1;
+        game_cfg.Locked = 0;
 	}
 
     int pageToDisplay = 1;
@@ -2791,6 +2792,13 @@ int MenuGameSettings(struct discHdr * header)
                             options2.SetValue(Idx, "%s", tr( opts_off_on[game_cfg.iosreloadblock] ));
                         }
 
+                        if (ret == ++Idx || firstRun)
+                        {
+                            if (firstRun) options2.SetName(Idx, "%s", tr( "Game Locked" ));
+                            if (ret == Idx && ++game_cfg.Locked >= MAX_ON_OFF) game_cfg.Locked = 0;
+                            options2.SetValue(Idx, "%s", tr( opts_off_on[game_cfg.Locked] ));
+                        }
+
                         firstRun = false;
                     }
                 }
@@ -3015,6 +3023,7 @@ int MenuGameSettings(struct discHdr * header)
                     game_cfg.parentalcontrol = 0;
                     strcpy(game_cfg.alternatedolname, "");
                     game_cfg.returnTo = 1;
+                    game_cfg.Locked = 0;
                     GameSettings.Remove(header->id);
                     GameSettings.Save();
                 }

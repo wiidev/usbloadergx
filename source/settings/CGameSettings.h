@@ -23,6 +23,7 @@ typedef struct _GameCFG
     u8 patchcountrystrings;
     char alternatedolname[40];
     u8 returnTo;
+    u8 Locked;
 } GameCFG;
 
 class CGameSettings
@@ -50,7 +51,8 @@ class CGameSettings
         GameCFG * GetGameCFG(const u8 * id) { return GetGameCFG((const char *) id); };
         //!Overload
         GameCFG * GetGameCFG(const struct discHdr * game) { if(!game) return NULL; else return GetGameCFG(game->id); };
-
+        //!Quick settings to PEGI conversion
+        static int GetPartenalPEGI(int parentalsetting);
     protected:
         bool ReadGameID(const char * src, char * GameID, int size);
         bool SetSetting(GameCFG & game, char *name, char *value);

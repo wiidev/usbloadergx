@@ -13,6 +13,7 @@
 #include "gui_gamegrid.h"
 #include "gui_image_async.h"
 #include "usbloader/GameList.h"
+#include "settings/GameTitles.h"
 #include "../settings/CSettings.h"
 #include "themes/CTheme.h"
 #include "../prompts/PromptWindows.h"
@@ -566,7 +567,7 @@ void GuiGameGrid::Update(GuiTrigger * t)
                         coverImg[ii] ->SetScale(VALUE4ROWS( rows, 1.0, 0.6, 0.26 ));
                         coverImg[ii] ->SetPosition(0, VALUE4ROWS( rows, 0, -50, -80 ));
                     }
-                    titleTT[ii] ->SetText(get_title(gameList[gameIndex[ii]]));
+                    titleTT[ii] ->SetText(GameTitles.GetTitle(gameList[gameIndex[ii]]));
                 }
                 else
                 {
@@ -654,7 +655,7 @@ void GuiGameGrid::Update(GuiTrigger * t)
                         coverImg[i] ->SetScale(VALUE4ROWS( rows, 1.0, 0.6, 0.26 ));
                         coverImg[i] ->SetPosition(0, VALUE4ROWS( rows, 0, -50, -80 ));
                     }
-                    titleTT[i] ->SetText(get_title(gameList[gameIndex[i]]));
+                    titleTT[i] ->SetText(GameTitles.GetTitle(gameList[gameIndex[i]]));
                 }
                 else
                 {
@@ -786,7 +787,7 @@ void GuiGameGrid::Reload(int Rows, int ListOffset)
         // Tooltip
         //------------------------
         if (gameIndex[i] != -1)
-            titleTT[i] = new GuiTooltip(get_title(gameList[gameIndex[i]]), Theme.tooltipAlpha);
+            titleTT[i] = new GuiTooltip(GameTitles.GetTitle(gameList[gameIndex[i]]), Theme.tooltipAlpha);
         else titleTT[i] = new GuiTooltip(NULL, Theme.tooltipAlpha);
 
         //------------------------
