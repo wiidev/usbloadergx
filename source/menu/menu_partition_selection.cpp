@@ -16,7 +16,7 @@ extern PartList partitions;
 int SelectPartitionMenu()
 {
     bool ExitSelect = false;
-    customOptionList options(MAX_PARTITIONS_EX);
+    OptionList options;
 
     u32 cnt, counter = 0;
     int choice = -1;

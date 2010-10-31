@@ -84,7 +84,7 @@ bool TitleSelector(char output[])
         gprintf("TitleLister(): out of memory!\n");
         return false;
     }
-    customOptionList options4(num_titles + 1);
+    OptionList options4;
     //write the titles on the option browser
 
     s32 i = 0;
@@ -280,7 +280,7 @@ int TitleBrowser()
         gprintf("TitleBrowser(): out of memory!\n");
         return -1;
     }
-    customOptionList options3(num_titles + num_sys_titles + 1);
+    OptionList options3;
     //write the titles on the option browser
 
     u32 i = 0;

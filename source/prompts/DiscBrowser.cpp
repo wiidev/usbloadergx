@@ -75,7 +75,7 @@ int DiscBrowse(struct discHdr * header, char * alternatedname, int alternatednam
     u32 discfilecount = fstbuffer[0].filelen;
     u32 dolfilecount = 0;
 
-    customOptionList options3(discfilecount);
+    OptionList options3;
 
     for (u32 i = 0; i < discfilecount; i++)
     {

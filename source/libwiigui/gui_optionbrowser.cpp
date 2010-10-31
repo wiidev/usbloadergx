@@ -223,8 +223,7 @@ GuiOptionBrowser::GuiOptionBrowser(int w, int h, OptionList * l, const char *ima
     //  optionBg = new GuiImage(bgOptionsEntry);
     for (int i = 0; i < PAGESIZE; i++)
     {
-        optionTxt[i] = new GuiText(options->name[i], 20, ( GXColor )
-        {   0, 0, 0, 0xff});
+        optionTxt[i] = new GuiText(options->GetName(i), 20, ( GXColor ) {0, 0, 0, 0xff});
         optionTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
         optionTxt[i]->SetPosition(24, 0);
 
@@ -362,11 +361,12 @@ int GuiOptionBrowser::FindMenuItem(int currentItem, int direction)
 {
     int nextItem = currentItem + direction;
 
-    if (nextItem < 0 || nextItem >= options->length) return -1;
+    if (nextItem < 0 || nextItem >= options->GetLength()) return -1;
 
-    if (strlen(options->name[nextItem]) > 0)
+    if (options->GetName(nextItem) && strlen(options->GetName(nextItem)) > 0)
         return nextItem;
-    else return FindMenuItem(nextItem, direction);
+    else
+		return FindMenuItem(nextItem, direction);
 }
 
 /**
@@ -409,7 +409,7 @@ void GuiOptionBrowser::TriggerUpdate()
 void GuiOptionBrowser::Update(GuiTrigger * t)
 {
     LOCK( this );
-    int next, prev, lang = options->length;
+    int next, prev, lang = options->GetLength();
 
     //go to the last game selected
     if ((loaded == 0) && (startat > 0))
@@ -465,8 +465,8 @@ void GuiOptionBrowser::Update(GuiTrigger * t)
                     optionBtn[i]->SetState(STATE_DEFAULT);
                 }
 
-                optionTxt[i]->SetText(options->name[next]);
-                optionVal[i]->SetText(options->value[next]);
+                optionTxt[i]->SetText(options->GetName(next));
+                optionVal[i]->SetText(options->GetValue(next));
                 optionIndex[i] = next;
                 next = this->FindMenuItem(next, 1);
             }
@@ -579,7 +579,7 @@ void GuiOptionBrowser::Update(GuiTrigger * t)
         }
 
         if (scrollbarBoxBtn->GetState() == STATE_HELD && scrollbarBoxBtn->GetStateChan() == t->chan && t->wpad.ir.valid
-                && options->length > PAGESIZE)
+                && options->GetLength() > PAGESIZE)
         {
             scrollbarBoxBtn->SetPosition(width / 2 - 18 + 7, 0);
             int position = t->wpad.ir.y - 50 - scrollbarBoxBtn->GetTop();

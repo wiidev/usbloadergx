@@ -1,50 +1,10 @@
 #include "gui.h"
 
-class customOptionList
-{
-    public:
-        customOptionList(int Size);
-        ~customOptionList();
-        void SetLength(int Length);
-        void SetName(int i, const char *format, ...) __attribute__( ( format ( printf, 3, 4 ) ) );
-        const char *GetName(int i)
-        {
-            if (i >= 0 && i < length && name[i])
-                return name[i];
-            else return "";
-        }
-        void SetValue(int i, const char *format, ...) __attribute__( ( format ( printf, 3, 4 ) ) );
-        const char *GetValue(int i)
-        {
-            if (i >= 0 && i < length && value[i])
-                return value[i];
-            else return "";
-        }
-        void Clear(bool OnlyValue = false);
-        int GetLength()
-        {
-            return length;
-        }
-        bool IsChanged()
-        {
-            bool ret = changed;
-            changed = false;
-            return ret;
-        }
-    private:
-        void SetSize(int Size);
-        int size;
-        char ** name;
-        char ** value;
-        int length;
-        bool changed;
-};
-
 //!Display a list of menu options
 class GuiCustomOptionBrowser: public GuiElement
 {
     public:
-        GuiCustomOptionBrowser(int w, int h, customOptionList * l, const char * background, int scrollbar, int col2);
+        GuiCustomOptionBrowser(int w, int h, OptionList * l, const char * background, int scrollbar, int col2);
         ~GuiCustomOptionBrowser();
         int FindMenuItem(int c, int d);
         int GetClickedOption();
@@ -64,7 +24,7 @@ class GuiCustomOptionBrowser: public GuiElement
         int coL2;
         int scrollbaron;
 
-        customOptionList * options;
+        OptionList * options;
         int * optionIndex;
         GuiButton ** optionBtn;
         GuiText ** optionTxt;

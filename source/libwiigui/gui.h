@@ -45,6 +45,7 @@
 #include "video.h"
 #include "filelist.h"
 #include "input.h"
+#include "OptionList.hpp"
 
 extern FreeTypeGX *fontSystem;
 
@@ -1031,13 +1032,6 @@ class GuiNumpad: public GuiWindow
         GuiTrigger * trigA;
         GuiTrigger * trigB;
 };
-
-typedef struct _optionlist
-{
-        int length;
-        char name[MAX_OPTIONS][60];
-        char value[MAX_OPTIONS][30];
-} OptionList;
 
 //!Display a list of menu options
 class GuiOptionBrowser: public GuiElement

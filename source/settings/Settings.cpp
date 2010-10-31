@@ -142,8 +142,7 @@ int MenuSettings()
     GuiTrigger trigPlus;
     trigPlus.SetButtonOnlyTrigger(-1, WPAD_BUTTON_PLUS | WPAD_CLASSIC_BUTTON_PLUS, 0);
 
-    GuiText titleTxt(tr( "Settings" ), 28, ( GXColor )
-    {   0, 0, 0, 255});
+    GuiText titleTxt(tr( "Settings" ), 28, ( GXColor ) {0, 0, 0, 255});
     titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     titleTxt.SetPosition(0, 40);
 
@@ -165,8 +164,7 @@ int MenuSettings()
     homo.SetTrigger(&trigHome);
 
     GuiImage PageindicatorImg1(&PageindicatorImgData);
-    GuiText PageindicatorTxt1("1", 22, ( GXColor )
-    {   0, 0, 0, 255});
+    GuiText PageindicatorTxt1("1", 22, ( GXColor ) {0, 0, 0, 255});
     GuiButton PageIndicatorBtn1(PageindicatorImg1.GetWidth(), PageindicatorImg1.GetHeight());
     PageIndicatorBtn1.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     PageIndicatorBtn1.SetPosition(165, 400);
@@ -178,8 +176,7 @@ int MenuSettings()
     PageIndicatorBtn1.SetEffectGrow();
 
     GuiImage PageindicatorImg2(&PageindicatorImgData);
-    GuiText PageindicatorTxt2("2", 22, ( GXColor )
-    {   0, 0, 0, 255});
+    GuiText PageindicatorTxt2("2", 22, ( GXColor ) {0, 0, 0, 255});
     GuiButton PageIndicatorBtn2(PageindicatorImg2.GetWidth(), PageindicatorImg2.GetHeight());
     PageIndicatorBtn2.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     PageIndicatorBtn2.SetPosition(200, 400);
@@ -191,8 +188,7 @@ int MenuSettings()
     PageIndicatorBtn2.SetEffectGrow();
 
     GuiImage PageindicatorImg3(&PageindicatorImgData);
-    GuiText PageindicatorTxt3("3", 22, ( GXColor )
-    {   0, 0, 0, 255});
+    GuiText PageindicatorTxt3("3", 22, ( GXColor ) {0, 0, 0, 255});
     GuiButton PageIndicatorBtn3(PageindicatorImg3.GetWidth(), PageindicatorImg3.GetHeight());
     PageIndicatorBtn3.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     PageIndicatorBtn3.SetPosition(235, 400);
@@ -232,8 +228,7 @@ int MenuSettings()
 
     GuiImage MainButton1Img(&MainButtonImgData);
     GuiImage MainButton1ImgOver(&MainButtonImgOverData);
-    GuiText MainButton1Txt(MainButtonText, 22, ( GXColor )
-    {   0, 0, 0, 255});
+    GuiText MainButton1Txt(MainButtonText, 22, ( GXColor ) {0, 0, 0, 255});
     MainButton1Txt.SetMaxWidth(MainButton1Img.GetWidth());
     GuiButton MainButton1(MainButton1Img.GetWidth(), MainButton1Img.GetHeight());
     MainButton1.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
@@ -248,8 +243,7 @@ int MenuSettings()
 
     GuiImage MainButton2Img(&MainButtonImgData);
     GuiImage MainButton2ImgOver(&MainButtonImgOverData);
-    GuiText MainButton2Txt(MainButtonText, 22, ( GXColor )
-    {   0, 0, 0, 255});
+    GuiText MainButton2Txt(MainButtonText, 22, ( GXColor ) {0, 0, 0, 255});
     MainButton2Txt.SetMaxWidth(MainButton2Img.GetWidth());
     GuiButton MainButton2(MainButton2Img.GetWidth(), MainButton2Img.GetHeight());
     MainButton2.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
@@ -264,8 +258,7 @@ int MenuSettings()
 
     GuiImage MainButton3Img(&MainButtonImgData);
     GuiImage MainButton3ImgOver(&MainButtonImgOverData);
-    GuiText MainButton3Txt(MainButtonText, 22, ( GXColor )
-    {   0, 0, 0, 255});
+    GuiText MainButton3Txt(MainButtonText, 22, ( GXColor ) {0, 0, 0, 255});
     MainButton3Txt.SetMaxWidth(MainButton3Img.GetWidth());
     GuiButton MainButton3(MainButton3Img.GetWidth(), MainButton3Img.GetHeight());
     MainButton3.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
@@ -280,8 +273,7 @@ int MenuSettings()
 
     GuiImage MainButton4Img(&MainButtonImgData);
     GuiImage MainButton4ImgOver(&MainButtonImgOverData);
-    GuiText MainButton4Txt(MainButtonText, 22, ( GXColor )
-    {   0, 0, 0, 255});
+    GuiText MainButton4Txt(MainButtonText, 22, ( GXColor ) {0, 0, 0, 255});
     MainButton4Txt.SetMaxWidth(MainButton4Img.GetWidth());
     GuiButton MainButton4(MainButton4Img.GetWidth(), MainButton4Img.GetHeight());
     MainButton4.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
@@ -294,7 +286,7 @@ int MenuSettings()
     MainButton4.SetEffectGrow();
     MainButton4.SetTrigger(&trigA);
 
-    customOptionList options2(MAXOPTIONS);
+    OptionList options2;
     GuiCustomOptionBrowser optionBrowser2(396, 280, &options2, "bg_options_settings.png", 0, 150);
     optionBrowser2.SetPosition(0, 90);
     optionBrowser2.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
@@ -657,7 +649,7 @@ int MenuSettings()
                     w.Remove(&MainButton4);
                     titleTxt.SetText(tr( "GUI Settings" ));
                     exit = false;
-                    options2.SetLength(0);
+                    options2.ClearList();
                     //                  optionBrowser2.SetScrollbar(1);
                     w.Append(&optionBrowser2);
                     optionBrowser2.SetClickable(true);
@@ -929,7 +921,7 @@ int MenuSettings()
                     w.Remove(&MainButton4);
                     titleTxt.SetText(tr( "Game Load" ));
                     exit = false;
-                    options2.SetLength(0);
+                    options2.ClearList();
                     w.Append(&optionBrowser2);
                     optionBrowser2.SetClickable(true);
                     ResumeGui();
@@ -1161,7 +1153,7 @@ int MenuSettings()
                     w.Remove(&MainButton4);
                     titleTxt.SetText(tr( "Parental Control" ));
                     exit = false;
-                    options2.SetLength(0);
+                    options2.ClearList();
                     w.Append(&optionBrowser2);
                     optionBrowser2.SetClickable(true);
                     ResumeGui();
@@ -1352,7 +1344,7 @@ int MenuSettings()
                     w.Remove(&MainButton4);
                     titleTxt.SetText(tr( "Sound" ));
                     exit = false;
-                    options2.SetLength(0);
+                    options2.ClearList();
                     w.Append(&optionBrowser2);
                     optionBrowser2.SetClickable(true);
                     ResumeGui();
@@ -1564,7 +1556,7 @@ int MenuSettings()
                     w.Remove(&MainButton4);
                     titleTxt.SetText(tr( "Custom Paths" ));
                     exit = false;
-                    options2.SetLength(0);
+                    options2.ClearList();
                     //                  optionBrowser2.SetScrollbar(1);
                     w.Append(&optionBrowser2);
                     optionBrowser2.SetClickable(true);
@@ -2389,8 +2381,7 @@ int MenuGameSettings(struct discHdr * header)
 
     GuiImage MainButton4Img(&MainButtonImgData);
     GuiImage MainButton4ImgOver(&MainButtonImgOverData);
-    GuiText MainButton4Txt(MainButtonText, 22, ( GXColor )
-    {   0, 0, 0, 255});
+    GuiText MainButton4Txt(MainButtonText, 22, ( GXColor ) {0, 0, 0, 255});
     MainButton4Txt.SetMaxWidth(MainButton4Img.GetWidth());
     GuiButton MainButton4(MainButton4Img.GetWidth(), MainButton4Img.GetHeight());
     MainButton4.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
@@ -2403,7 +2394,7 @@ int MenuGameSettings(struct discHdr * header)
     MainButton4.SetEffectGrow();
     MainButton4.SetTrigger(&trigA);
 
-    customOptionList options2(MAXOPTIONS);
+    OptionList options2;
     GuiCustomOptionBrowser optionBrowser2(396, 280, &options2, "bg_options_settings.png", 0, 150);
     optionBrowser2.SetPosition(0, 90);
     optionBrowser2.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
@@ -2523,7 +2514,7 @@ int MenuGameSettings(struct discHdr * header)
                 w.Remove(&MainButton3);
                 w.Remove(&MainButton4);
                 exit = false;
-                options2.SetLength(0);
+                options2.ClearList();
                 w.Append(&optionBrowser2);
                 optionBrowser2.SetClickable(true);
                 ResumeGui();
@@ -2705,7 +2696,7 @@ int MenuGameSettings(struct discHdr * header)
                             if (last_alternatedol != 1)
                             {
                                 firstRun = true; // force re-init follow Entries
-                                options2.SetLength(Idx + 1);
+                                options2.Resize(Idx + 1);
                             }
                         }
 
@@ -2779,7 +2770,7 @@ int MenuGameSettings(struct discHdr * header)
                             if (game_cfg.loadalternatedol == 0)
                             {
                                 firstRun = true; // force re-init follow Entries
-                                options2.SetLength(Idx--); // remove this Entry
+                                options2.Resize(Idx--); // remove this Entry
                                 options2.SetValue(Idx, "%s", tr( "Default" )); // re-set prev Entry
                             }
                             else options2.SetValue(Idx, alternatedname);
@@ -2835,7 +2826,7 @@ int MenuGameSettings(struct discHdr * header)
                 w.Remove(&MainButton3);
                 w.Remove(&MainButton4);
                 exit = false;
-                options2.SetLength(0);
+                options2.ClearList();
                 w.Append(&optionBrowser2);
                 optionBrowser2.SetClickable(true);
                 ResumeGui();

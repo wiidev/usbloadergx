@@ -212,18 +212,15 @@ int MenuHomebrewBrowse()
 
     GuiImage MainButton2Img(&MainButtonImgData);
     GuiImage MainButton2ImgOver(&MainButtonImgOverData);
-    GuiText MainButton2Txt(MainButtonText, 18, ( GXColor )
-    {   0, 0, 0, 255});
+    GuiText MainButton2Txt(MainButtonText, 18, ( GXColor ) {0, 0, 0, 255});
     MainButton2Txt.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     MainButton2Txt.SetPosition(148, -12);
     MainButton2Txt.SetMaxWidth(MainButton2Img.GetWidth() - 150, DOTTED);
-    GuiText MainButton2DescTxt(MainButtonText, 18, ( GXColor )
-    {   0, 0, 0, 255});
+    GuiText MainButton2DescTxt(MainButtonText, 18, ( GXColor ) {0, 0, 0, 255});
     MainButton2DescTxt.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     MainButton2DescTxt.SetPosition(148, 15);
     MainButton2DescTxt.SetMaxWidth(MainButton2Img.GetWidth() - 150, DOTTED);
-    GuiText MainButton2DescOverTxt(MainButtonText, 18, ( GXColor )
-    {   0, 0, 0, 255});
+    GuiText MainButton2DescOverTxt(MainButtonText, 18, ( GXColor ) {0, 0, 0, 255});
     MainButton2DescOverTxt.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     MainButton2DescOverTxt.SetPosition(148, 15);
     MainButton2DescOverTxt.SetMaxWidth(MainButton2Img.GetWidth() - 150, SCROLL_HORIZONTAL);
@@ -242,18 +239,15 @@ int MenuHomebrewBrowse()
 
     GuiImage MainButton3Img(&MainButtonImgData);
     GuiImage MainButton3ImgOver(&MainButtonImgOverData);
-    GuiText MainButton3Txt(MainButtonText, 18, ( GXColor )
-    {   0, 0, 0, 255});
+    GuiText MainButton3Txt(MainButtonText, 18, ( GXColor ) {0, 0, 0, 255});
     MainButton3Txt.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     MainButton3Txt.SetPosition(148, -12);
     MainButton3Txt.SetMaxWidth(MainButton3Img.GetWidth() - 150, DOTTED);
-    GuiText MainButton3DescTxt(MainButtonText, 18, ( GXColor )
-    {   0, 0, 0, 255});
+    GuiText MainButton3DescTxt(MainButtonText, 18, ( GXColor ) {0, 0, 0, 255});
     MainButton3DescTxt.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     MainButton3DescTxt.SetPosition(148, 15);
     MainButton3DescTxt.SetMaxWidth(MainButton3Img.GetWidth() - 150, DOTTED);
-    GuiText MainButton3DescOverTxt(MainButtonText, 18, ( GXColor )
-    {   0, 0, 0, 255});
+    GuiText MainButton3DescOverTxt(MainButtonText, 18, ( GXColor ) {0, 0, 0, 255});
     MainButton3DescOverTxt.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     MainButton3DescOverTxt.SetPosition(148, 15);
     MainButton3DescOverTxt.SetMaxWidth(MainButton3Img.GetWidth() - 150, SCROLL_HORIZONTAL);
@@ -436,11 +430,9 @@ int MenuHomebrewBrowse()
                 snprintf(temp, sizeof(temp), "%smeta.xml", HomebrewFiles.GetFilepath(fileoffset));
                 if (XMLInfo[0].LoadHomebrewXMLData(temp) > 0)
                 {
-                    snprintf(MainButtonText, sizeof(MainButtonText), "%s", XMLInfo[0].GetName());
-                    MainButton1Txt.SetText(MainButtonText);
-                    snprintf(MainButtonText, sizeof(MainButtonText), "%s", XMLInfo[0].GetShortDescription());
-                    MainButton1DescTxt.SetText(MainButtonText);
-                    MainButton1DescOverTxt.SetText(MainButtonText);
+                    MainButton1Txt.SetText(XMLInfo[0].GetName());
+                    MainButton1DescTxt.SetText(XMLInfo[0].GetShortDescription());
+                    MainButton1DescOverTxt.SetText(XMLInfo[0].GetShortDescription());
                 }
                 else
                 {
@@ -462,11 +454,9 @@ int MenuHomebrewBrowse()
                 snprintf(temp, sizeof(temp), "%smeta.xml", HomebrewFiles.GetFilepath(fileoffset + 1));
                 if (XMLInfo[1].LoadHomebrewXMLData(temp) > 0)
                 {
-                    snprintf(MainButtonText, sizeof(MainButtonText), "%s", XMLInfo[1].GetName());
-                    MainButton2Txt.SetText(MainButtonText);
-                    snprintf(MainButtonText, sizeof(MainButtonText), "%s", XMLInfo[1].GetShortDescription());
-                    MainButton2DescTxt.SetText(MainButtonText);
-                    MainButton2DescOverTxt.SetText(MainButtonText);
+                    MainButton2Txt.SetText(XMLInfo[1].GetName());
+                    MainButton2DescTxt.SetText(XMLInfo[1].GetShortDescription());
+                    MainButton2DescOverTxt.SetText(XMLInfo[1].GetShortDescription());
                 }
                 else
                 {
@@ -486,13 +476,11 @@ int MenuHomebrewBrowse()
             if (buttonsleft > 2)
             {
                 snprintf(temp, sizeof(temp), "%smeta.xml", HomebrewFiles.GetFilepath(fileoffset + 2));
-                if (XMLInfo[3].LoadHomebrewXMLData(temp) > 0)
+                if (XMLInfo[2].LoadHomebrewXMLData(temp) > 0)
                 {
-                    snprintf(MainButtonText, sizeof(MainButtonText), "%s", XMLInfo[3].GetName());
-                    MainButton3Txt.SetText(MainButtonText);
-                    snprintf(MainButtonText, sizeof(MainButtonText), "%s", XMLInfo[3].GetShortDescription());
-                    MainButton3DescTxt.SetText(MainButtonText);
-                    MainButton3DescOverTxt.SetText(MainButtonText);
+                    MainButton3Txt.SetText(XMLInfo[2].GetName());
+                    MainButton3DescTxt.SetText(XMLInfo[2].GetShortDescription());
+                    MainButton3DescOverTxt.SetText(XMLInfo[2].GetShortDescription());
                 }
                 else
                 {
@@ -514,11 +502,9 @@ int MenuHomebrewBrowse()
                 snprintf(temp, sizeof(temp), "%smeta.xml", HomebrewFiles.GetFilepath(fileoffset + 3));
                 if (XMLInfo[3].LoadHomebrewXMLData(temp) > 0)
                 {
-                    snprintf(MainButtonText, sizeof(MainButtonText), "%s", XMLInfo[3].GetName());
-                    MainButton4Txt.SetText(MainButtonText);
-                    snprintf(MainButtonText, sizeof(MainButtonText), "%s", XMLInfo[3].GetShortDescription());
-                    MainButton4DescTxt.SetText(MainButtonText);
-                    MainButton4DescOverTxt.SetText(MainButtonText);
+                    MainButton4Txt.SetText(XMLInfo[3].GetName());
+                    MainButton4DescTxt.SetText(XMLInfo[3].GetShortDescription());
+                    MainButton4DescOverTxt.SetText(XMLInfo[3].GetShortDescription());
                 }
                 else
                 {
@@ -592,11 +578,11 @@ int MenuHomebrewBrowse()
             w.Append(&MainButton2);
 
             snprintf(temp, sizeof(temp), "%smeta.xml", HomebrewFiles.GetFilepath(fileoffset + 2));
-            if (XMLInfo[3].LoadHomebrewXMLData(temp) > 0)
+            if (XMLInfo[2].LoadHomebrewXMLData(temp) > 0)
             {
-                snprintf(MainButtonText, sizeof(MainButtonText), "%s", XMLInfo[3].GetName());
+                snprintf(MainButtonText, sizeof(MainButtonText), "%s", XMLInfo[2].GetName());
                 MainButton3Txt.SetText(MainButtonText);
-                snprintf(MainButtonText, sizeof(MainButtonText), "%s", XMLInfo[3].GetShortDescription());
+                snprintf(MainButtonText, sizeof(MainButtonText), "%s", XMLInfo[2].GetShortDescription());
                 MainButton3DescTxt.SetText(MainButtonText);
                 MainButton3DescOverTxt.SetText(MainButtonText);
             }

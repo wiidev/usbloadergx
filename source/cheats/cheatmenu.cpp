@@ -79,14 +79,13 @@ int CheatMenu(const char * gameID)
             else break;
         case 1:
             int cntcheats = c.getCnt();
-            customOptionList cheatslst(cntcheats);
+            OptionList cheatslst;
             GuiCustomOptionBrowser chtBrowser(400, 280, &cheatslst, "bg_options_settings.png", 1, 90);
             chtBrowser.SetPosition(0, 90);
             chtBrowser.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
             chtBrowser.SetClickable(true);
 
-            GuiText titleTxt(c.getGameName().c_str(), 28, ( GXColor )
-            {   0, 0, 0, 255});
+            GuiText titleTxt(c.getGameName().c_str(), 28, ( GXColor ) {0, 0, 0, 255});
             titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
             titleTxt.SetMaxWidth(350, SCROLL_HORIZONTAL);
             titleTxt.SetPosition(12, 40);

@@ -39,131 +39,104 @@ int MenuInstall()
 
     ResumeGui();
 
-    while (menu == MENU_NONE)
+    ret = DiscWait(tr( "Insert Disk" ), tr( "Waiting..." ), tr( "Cancel" ), 0, 0);
+    if (ret < 0)
     {
-        VIDEO_WaitVSync();
+        WindowPrompt(tr( "Error reading Disc" ), 0, tr( "Back" ));
+        menu = MENU_DISCLIST;
+    }
+    ret = Disc_Open();
+    if (ret < 0)
+    {
+        WindowPrompt(tr( "Could not open Disc" ), 0, tr( "Back" ));
+        menu = MENU_DISCLIST;
+    }
 
-        ret = DiscWait(tr( "Insert Disk" ), tr( "Waiting..." ), tr( "Cancel" ), 0, 0);
-        if (ret < 0)
-        {
-            WindowPrompt(tr( "Error reading Disc" ), 0, tr( "Back" ));
-            menu = MENU_DISCLIST;
-            break;
-        }
-        ret = Disc_Open();
-        if (ret < 0)
-        {
-            WindowPrompt(tr( "Could not open Disc" ), 0, tr( "Back" ));
-            menu = MENU_DISCLIST;
-            break;
-        }
-
-        ret = Disc_IsWii();
-        if (ret < 0)
-        {
-            choice = WindowPrompt(tr( "Not a Wii Disc" ), tr( "Insert a Wii Disc!" ), tr( "OK" ), tr( "Back" ));
-
-            if (choice == 1)
-            {
-                menu = MENU_INSTALL;
-                break;
-            }
-            else menu = MENU_DISCLIST;
-            break;
-        }
-
-        Disc_ReadHeader(&headerdisc);
-        snprintf(name, sizeof(name), "%s", headerdisc.title);
-
-        ret = WBFS_CheckGame(headerdisc.id);
-        if (ret)
-        {
-            WindowPrompt(tr( "Game is already installed:" ), name, tr( "Back" ));
-            menu = MENU_DISCLIST;
-            break;
-        }
-
-        f32 freespace, used;
-
-        WBFS_DiskSpace(&used, &freespace);
-        gamesize = WBFS_EstimeGameSize() / GB_SIZE;
-
-        char gametxt[50];
-
-        sprintf(gametxt, "%s : %.2fGB", name, gamesize);
-
-        wiilight(1);
-        choice = WindowPrompt(tr( "Continue to install game?" ), gametxt, tr( "OK" ), tr( "Cancel" ));
+    ret = Disc_IsWii();
+    if (ret < 0)
+    {
+        choice = WindowPrompt(tr( "Not a Wii Disc" ), tr( "Insert a Wii Disc!" ), tr( "OK" ), tr( "Back" ));
 
         if (choice == 1)
         {
+            menu = MENU_INSTALL;
+        }
+        else menu = MENU_DISCLIST;
+    }
 
-            sprintf(gametxt, "%s", tr( "Installing game:" ));
+    Disc_ReadHeader(&headerdisc);
+    snprintf(name, sizeof(name), "%s", headerdisc.title);
 
-            if (gamesize > freespace)
-            {
-                char errortxt[50];
-                sprintf(errortxt, "%s: %.2fGB, %s: %.2fGB", tr( "Game Size" ), gamesize, tr( "Free Space" ), freespace);
-                WindowPrompt(tr( "Not enough free space!" ), errortxt, tr( "OK" ));
-                menu = MENU_DISCLIST;
-                break;
-            }
-            else
-            {
-                USBStorage2_Watchdog(0);
-                SetupGameInstallProgress(gametxt, name);
-                ret = WBFS_AddGame();
-                ProgressStop();
-                USBStorage2_Watchdog(1);
-                wiilight(0);
-                if (ret != 0)
-                {
-                    WindowPrompt(tr( "Install Error!" ), 0, tr( "Back" ));
-                    menu = MENU_DISCLIST;
-                    break;
-                }
-                else
-                {
-                    gameList.ReadGameList(); //get the entries again
-                    gameList.FilterList();
-                    GuiSound * instsuccess = NULL;
-                    bgMusic->Pause();
-                    instsuccess = new GuiSound(success_ogg, success_ogg_size, Settings.sfxvolume);
-                    instsuccess->SetVolume(Settings.sfxvolume);
-                    instsuccess->SetLoop(0);
-                    instsuccess->Play();
-                    WindowPrompt(tr( "Successfully installed:" ), name, tr( "OK" ));
-                    instsuccess->Stop();
-                    delete instsuccess;
-                    bgMusic->Resume();
-                    menu = MENU_DISCLIST;
-                    break;
-                }
-            }
+    ret = WBFS_CheckGame(headerdisc.id);
+    if (ret)
+    {
+        WindowPrompt(tr( "Game is already installed:" ), name, tr( "Back" ));
+        menu = MENU_DISCLIST;
+    }
+
+    f32 freespace, used;
+
+    WBFS_DiskSpace(&used, &freespace);
+    gamesize = WBFS_EstimeGameSize() / GB_SIZE;
+
+    char gametxt[50];
+
+    sprintf(gametxt, "%s : %.2fGB", name, gamesize);
+
+    wiilight(1);
+    choice = WindowPrompt(tr( "Continue to install game?" ), gametxt, tr( "OK" ), tr( "Cancel" ));
+
+    if (choice == 1)
+    {
+        sprintf(gametxt, "%s", tr( "Installing game:" ));
+
+        if (gamesize > freespace)
+        {
+            char errortxt[50];
+            sprintf(errortxt, "%s: %.2fGB, %s: %.2fGB", tr( "Game Size" ), gamesize, tr( "Free Space" ), freespace);
+            WindowPrompt(tr( "Not enough free space!" ), errortxt, tr( "OK" ));
+            menu = MENU_DISCLIST;
         }
         else
         {
-            menu = MENU_DISCLIST;
-            break;
-        }
-
-        if (shutdown == 1)
-        {
+            USBStorage2_Watchdog(0);
+            SetupGameInstallProgress(gametxt, name);
+            ret = WBFS_AddGame();
+            ProgressStop();
+            USBStorage2_Watchdog(1);
             wiilight(0);
-            Sys_Shutdown();
+            if (ret != 0)
+            {
+                WindowPrompt(tr( "Install Error!" ), 0, tr( "Back" ));
+                menu = MENU_DISCLIST;
+            }
+            else
+            {
+                gameList.ReadGameList(); //get the entries again
+                gameList.FilterList();
+                GuiSound * instsuccess = NULL;
+                bgMusic->Pause();
+                instsuccess = new GuiSound(success_ogg, success_ogg_size, Settings.sfxvolume);
+                instsuccess->SetVolume(Settings.sfxvolume);
+                instsuccess->SetLoop(0);
+                instsuccess->Play();
+                WindowPrompt(tr( "Successfully installed:" ), name, tr( "OK" ));
+                instsuccess->Stop();
+                delete instsuccess;
+                bgMusic->Resume();
+                menu = MENU_DISCLIST;
+            }
         }
-        if (reset == 1)
-        {
-            wiilight(0);
-            Sys_Reboot();
-        }
+    }
+    else
+    {
+        menu = MENU_DISCLIST;
     }
 
     //Turn off the WiiLight
     wiilight(0);
 
     HaltGui();
-
     mainWindow->Remove(&w);
     ResumeGui();
     return menu;

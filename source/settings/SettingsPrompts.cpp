@@ -191,7 +191,7 @@ int MenuLanguageSelect()
     updateBtn.SetTrigger( &trigA );
     updateBtn.SetEffectGrow();
 
-    customOptionList options2( Dir.GetFilecount() );
+    OptionList options2;
 
     for ( cnt = 0; cnt < Dir.GetFilecount(); cnt++ )
     {

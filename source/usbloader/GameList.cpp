@@ -44,6 +44,8 @@ GameList::GameList()
 
 void GameList::clear()
 {
+    GameFilter.clear();
+    AvailableSearchChars.clear();
     FullGameList.clear();
     FilteredList.clear();
     //! Clear memory of the vector completely
@@ -71,14 +73,18 @@ struct discHdr * GameList::GetDiscHeader(const char * gameID)
 
 int GameList::ReadGameList()
 {
-    FullGameList.clear();
-    FilteredList.clear();
+    // Clear list
+    clear();
 
     // Retrieve all stuff from WBFS
     u32 cnt;
 
     int ret = WBFS_GetCount(&cnt);
     if (ret < 0) return -1;
+
+    // We are done here if no games are there
+    if(cnt == 0)
+        return 0;
 
     /* Buffer length */
     u32 len = sizeof(struct discHdr) * cnt;

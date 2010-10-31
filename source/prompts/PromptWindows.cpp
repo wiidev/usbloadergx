@@ -24,6 +24,7 @@
 #include "prompts/PromptWindows.h"
 #include "prompts/gameinfo.h"
 #include "themes/CTheme.h"
+#include "utils/StringTools.h"
 #include "mload/mload.h"
 #include "fatmounter.h"
 #include "FileOperations/fileops.h"
@@ -3811,12 +3812,8 @@ int HBCWindowPrompt(const char *name, const char *coder, const char *version, co
     bool iconExist = CheckFile(imgPath);
     if (iconExist)
     {
+        //! This does not crash even if there is no file
         iconData = new GuiImageData(imgPath);
-		if(!iconData->GetImage())
-		{
-			delete iconData;
-			iconData = new GuiImageData(Resources::GetFile("dialogue_box.png"), Resources::GetFileSize("dialogue_box.png"));
-        }
 		iconImg = new GuiImage(iconData);
         iconImg->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
         iconImg->SetPosition(45, 10);
@@ -3829,31 +3826,22 @@ int HBCWindowPrompt(const char *name, const char *coder, const char *version, co
     whiteBoxImg.SetPosition(0, 110);
     whiteBoxImg.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     whiteBoxImg.SetSkew(0, 0, 0, 0, 0, -120, 0, -120);
-    /*if (Settings.wsprompt){
-     dialogBoxImg.SetWidescreen(Settings.widescreen);
-     }*/
-
-    char tmp[510];
 
     GuiText nameTxt(name, 30, Theme.prompttext);
     nameTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     nameTxt.SetPosition(0, -15);
     nameTxt.SetMaxWidth(430, SCROLL_HORIZONTAL);
 
-    if (strcmp(coder, "")) snprintf(tmp, sizeof(tmp), tr( "Coded by: %s" ), coder);
-    GuiText coderTxt(tmp, 16, Theme.prompttext);
+    GuiText coderTxt(fmt(tr( "Coded by: %s" ), coder), 16, Theme.prompttext);
     coderTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     coderTxt.SetPosition(180, 30);
     coderTxt.SetMaxWidth(280);
 
-    if (strcmp(version, "")) snprintf(tmp, sizeof(tmp), tr( "Version: %s" ), version);
-    GuiText versionTxt(tmp, 16, Theme.prompttext);
+    GuiText versionTxt(fmt(tr( "Version: %s" ), version), 16, Theme.prompttext);
     versionTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     versionTxt.SetPosition(40, 65);
     versionTxt.SetMaxWidth(430);
 
-    //if (release_date)
-    //snprintf(tmp, sizeof(tmp), tr("Released: %s"),release_date);
     GuiText release_dateTxt(release_date, 16, Theme.prompttext);
     release_dateTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     release_dateTxt.SetPosition(40, 85);
@@ -3868,30 +3856,14 @@ int HBCWindowPrompt(const char *name, const char *coder, const char *version, co
     long_descriptionTxt.Refresh();
 
     //convert filesize from u64 to char and put unit of measurement after it
-    char temp2[7];
     char filesizeCH[15];
-    f32 sizeAdjusted;
     if (filesize <= 1024.0)
-    {
-        sizeAdjusted = filesize;
-        snprintf(temp2, sizeof(temp2), "%.2f", sizeAdjusted);
-        snprintf(filesizeCH, sizeof(filesizeCH), "%s B", temp2);
-
-    }
+        snprintf(filesizeCH, sizeof(filesizeCH), "%lld B", filesize);
     if (filesize > 1024.0)
-    {
-        sizeAdjusted = filesize / 1024.0;
-        snprintf(temp2, sizeof(temp2), "%.2f", sizeAdjusted);
-        snprintf(filesizeCH, sizeof(filesizeCH), "%s KB", temp2);
-
-    }
+        snprintf(filesizeCH, sizeof(filesizeCH), "%0.2f KB", filesize / 1024.0);
     if (filesize > 1048576.0)
-    {
-        sizeAdjusted = filesize / 1048576.0;
-        snprintf(temp2, sizeof(temp2), "%.2f", sizeAdjusted);
-        snprintf(filesizeCH, sizeof(filesizeCH), "%s MB", temp2);
+        snprintf(filesizeCH, sizeof(filesizeCH), "%0.2f MB", filesize / 1048576.0);
 
-    }
     GuiText filesizeTxt(filesizeCH, 16, Theme.prompttext);
     filesizeTxt.SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
     filesizeTxt.SetPosition(-40, 12);
@@ -3933,18 +3905,18 @@ int HBCWindowPrompt(const char *name, const char *coder, const char *version, co
     promptWindow.Append(&screenShotBtn);
 
     promptWindow.Append(&dialogBoxImg);
-    if (strcmp(long_description, "")) promptWindow.Append(&whiteBoxImg);
-    if (strcmp(long_description, "")) promptWindow.Append(&scrollbarImg);
-    if (strcmp(long_description, "")) promptWindow.Append(&arrowDownBtn);
-    if (strcmp(long_description, "")) promptWindow.Append(&arrowUpBtn);
+    promptWindow.Append(&whiteBoxImg);
+    promptWindow.Append(&scrollbarImg);
+    promptWindow.Append(&arrowDownBtn);
+    promptWindow.Append(&arrowUpBtn);
 
-    if (strcmp(name, "")) promptWindow.Append(&nameTxt);
-    if (strcmp(version, "")) promptWindow.Append(&versionTxt);
-    if (strcmp(coder, "")) promptWindow.Append(&coderTxt);
-    if (strcmp(release_date, "")) promptWindow.Append(&release_dateTxt);
-    if (strcmp(long_description, "")) promptWindow.Append(&long_descriptionTxt);
+    if(strcmp(name, "") != 0) promptWindow.Append(&nameTxt);
+    if(strcmp(version, "") != 0) promptWindow.Append(&versionTxt);
+    if(strcmp(coder, "") != 0) promptWindow.Append(&coderTxt);
+    if(strcmp(release_date, "") != 0) promptWindow.Append(&release_dateTxt);
+    if(strcmp(long_description, "") != 0) promptWindow.Append(&long_descriptionTxt);
     promptWindow.Append(&filesizeTxt);
-    if (iconExist) promptWindow.Append(iconImg);
+    promptWindow.Append(iconImg);
     promptWindow.Append(&btn1);
     promptWindow.Append(&btn2);
 

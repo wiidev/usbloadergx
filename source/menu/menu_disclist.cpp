@@ -21,7 +21,6 @@
 #include "libwiigui/gui_gamecarousel.h"
 #include "libwiigui/gui_searchbar.h"
 
-#define MAX_CHARACTERS      38
 extern u8 * gameScreenTex;
 extern struct discHdr *dvdheader;
 extern u8 mountMethod;
@@ -53,7 +52,6 @@ static u32 startat = 0;
  ***************************************************************************/
 int MenuDiscList()
 {
-
     gprintf("MenuDiscList()\n");
     gameList.FilterList();
     int offset = MIN( ( int )startat, gameList.size() - 1 );
@@ -79,7 +77,6 @@ int MenuDiscList()
     int menu = MENU_NONE;
 
     u32 nolist;
-    char text[MAX_CHARACTERS + 4];
     int choice = 0, selectedold = 100;
     s32 ret;
 
@@ -1403,16 +1400,6 @@ int MenuDiscList()
             if (!mountMethod)//only get this stuff it we are booting a game from USB
             {
                 WBFS_GameSize(header->id, &size);
-                if (strlen(GameTitles.GetTitle(header)) < (MAX_CHARACTERS + 3))
-                {
-                    sprintf(text, "%s", GameTitles.GetTitle(header));
-                }
-                else
-                {
-                    strncpy(text, GameTitles.GetTitle(header), MAX_CHARACTERS);
-                    text[MAX_CHARACTERS] = '\0';
-                    strncat(text, "...", 3);
-                }
             }
 
             //check if alt Dol and gct file is present
