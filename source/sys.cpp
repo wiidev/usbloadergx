@@ -4,12 +4,17 @@
 
 #include "mload/mload.h"
 #include "settings/CSettings.h"
+#include "settings/newtitles.h"
+#include "language/gettext.h"
 #include "utils/ResourceManager.h"
+#include "FontSystem.h"
 #include "audio.h"
 #include "fatmounter.h"
 #include "lstub.h"
 #include "menu.h"
 #include "video.h"
+#include "gecko.h"
+#include "xml/xml.h"
 
 extern char game_partition[6];
 extern u8 load_from_fs;
@@ -49,25 +54,50 @@ void Sys_Init(void)
     SYS_SetPowerCallback(__Sys_PowerCallback);
 }
 
-static void _ExitApp()
+void AppCleanUp(void)
 {
+	extern u8 mountMethod;
+    gprintf("Exiting main GUI.  mountMethod = %d\n", mountMethod);
+
     ExitGUIThreads();
+
+    delete bgMusic;
+    delete background;
+    delete bgImg;
+    delete mainWindow;
+    for (int i = 0; i < 4; i++)
+        delete pointer[i];
+    delete GameRegionTxt;
+    delete GameIDTxt;
+    delete cover;
+    delete coverImg;
+    gettextCleanUp();
+    CloseXMLDatabase();
+    ClearFontData();
+    NewTitles::DestroyInstance();
+
     StopGX();
     ShutdownAudio();
 
     ResourceManager::DestroyInstance();
 
+    WPAD_Flush(0);
+    WPAD_Disconnect(0);
+    WPAD_Shutdown();
+}
+
+void ExitApp(void)
+{
+    AppCleanUp();
     UnmountNTFS();
     SDCard_deInit();
     USBDevice_deInit();
-    mload_set_ES_ioctlv_vector(NULL);
-    mload_close();
 }
 
 void Sys_Reboot(void)
 {
     /* Restart console */
-    _ExitApp();
+    ExitApp();
     STM_RebootSystem();
 }
 
@@ -77,10 +107,7 @@ void Sys_Reboot(void)
 
 static void _Sys_Shutdown(int SHUTDOWN_MODE)
 {
-    _ExitApp();
-    WPAD_Flush(0);
-    WPAD_Disconnect(0);
-    WPAD_Shutdown();
+    ExitApp();
 
     /* Poweroff console */
     if ((CONF_GetShutdownMode() == CONF_SHUTDOWN_IDLE && SHUTDOWN_MODE != ShutdownToStandby) || SHUTDOWN_MODE
@@ -118,7 +145,7 @@ void Sys_ShutdownToStandby(void)
 
 void Sys_LoadMenu(void)
 {
-    _ExitApp();
+    ExitApp();
     /* Return to the Wii system menu */
     SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
 }
@@ -128,7 +155,7 @@ void Sys_BackToLoader(void)
 
     if (hbcStubAvailable())
     {
-        _ExitApp();
+        ExitApp();
         exit(0);
     }
     // Channel Version

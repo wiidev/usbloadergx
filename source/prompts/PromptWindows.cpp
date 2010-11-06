@@ -51,8 +51,6 @@ int cntMissFiles = 0;
 static char missingFiles[500][12];
 
 /*** Extern variables ***/
-extern GuiWindow * mainWindow;
-extern GuiSound * bgMusic;
 s32 gameSelected = 0, gameStart = 0;
 extern float gamesize;
 extern u8 shutdown;
@@ -60,10 +58,6 @@ extern u8 reset;
 extern u8 mountMethod;
 extern struct discHdr *dvdheader;
 extern char game_partition[6];
-
-/*** Extern functions ***/
-extern void ResumeGui();
-extern void HaltGui();
 
 /****************************************************************************
  * OnScreenNumpad

@@ -4,6 +4,8 @@
 void wiilight(int enable);
 
 /* Prototypes */
+void AppCleanUp(void);  //! Deletes all allocated space for everything
+void ExitApp(void);     //! Like AppCleanUp() and additional device unmount
 void Sys_Init(void);
 void Sys_Reboot(void);
 void Sys_Shutdown(void);

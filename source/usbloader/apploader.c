@@ -37,23 +37,24 @@ void gamepatches( u8 * dst, int len, u8 videoSelected, u8 languageChoice, u8 pat
     VideoModePatcher( dst, len, videoSelected );
 
     if ( cheat )
-	dogamehooks( dst, len );
+        dogamehooks( dst, len );
 
     if ( vipatch )
-	vidolpatcher( dst, len );
+        vidolpatcher( dst, len );
 
     /*LANGUAGE PATCH - FISHEARS*/
     langpatcher( dst, len, languageChoice );
 
     /*Thanks to WiiPower*/
-    if ( patchcountrystring == 1 ) PatchCountryStrings( dst, len );
+    if ( patchcountrystring == 1 )
+        PatchCountryStrings( dst, len );
 
     NSMBPatch( dst, len );
 
     do_wip_code( ( u8 * ) dst, len );
 
     if ( fix002 == 2 )
-	Anti_002_fix( dst, len );
+        Anti_002_fix( dst, len );
 
     PatchReturnTo( dst, len, returnTo );
 }
@@ -108,10 +109,10 @@ s32 Apploader_Run(entry_point *entry, char * dolpath, u8 cheat, u8 videoSelected
         /* Read data from DVD */
         WDVD_Read(dst, len, (u64) (offset << 2));
 
-	if( !alternatedol )
-	    gamepatches(dst, len, videoSelected, languageChoice, patchcountrystring, vipatch, cheat, returnTo, fix002 );
+        if( !alternatedol )
+            gamepatches(dst, len, videoSelected, languageChoice, patchcountrystring, vipatch, cheat, returnTo, fix002 );
 
-	DCFlushRange(dst, len);
+        DCFlushRange(dst, len);
     }
 
     *entry = appldr_final();
@@ -123,7 +124,7 @@ s32 Apploader_Run(entry_point *entry, char * dolpath, u8 cheat, u8 videoSelected
         void *dolbuffer = NULL;
         int dollen = 0;
 
-	bool dolloaded = Load_Dol(&dolbuffer, &dollen, dolpath, videoSelected, languageChoice, patchcountrystring, vipatch, cheat, returnTo);
+        bool dolloaded = Load_Dol(&dolbuffer, &dollen, dolpath, videoSelected, languageChoice, patchcountrystring, vipatch, cheat, returnTo);
         if (dolloaded)
         {
             *entry = (entry_point) load_dol_image(dolbuffer);
@@ -136,10 +137,8 @@ s32 Apploader_Run(entry_point *entry, char * dolpath, u8 cheat, u8 videoSelected
         wip_reset_counter();
         FST_ENTRY *fst = (FST_ENTRY *) *(u32 *) 0x80000038;
 
-	*entry = (entry_point) Load_Dol_from_disc(fst[alternatedoloffset].fileoffset, videoSelected, languageChoice,
+        *entry = (entry_point) Load_Dol_from_disc(fst[alternatedoloffset].fileoffset, videoSelected, languageChoice,
 		patchcountrystring, vipatch, cheat, returnTo);
-
-        if (*entry == 0) SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
     }
 
     return 0;

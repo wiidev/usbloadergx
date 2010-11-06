@@ -585,14 +585,18 @@ bool CSettings::FindConfig()
             if (i == 1) strcpy(BootDevice, "USB:");
             if (!found)
             {
-                snprintf(ConfigPath, sizeof(ConfigPath), "%s/config/GXGlobal.cfg", BootDevice);
+                snprintf(ConfigPath, sizeof(ConfigPath), "%s/apps/usbloader_gx/", BootDevice);
+                CreateSubfolder(ConfigPath);
+                strcat(ConfigPath, "GXGlobal.cfg");
                 testFp = fopen(ConfigPath, "wb");
                 found = (testFp != NULL);
                 fclose(testFp);
             }
             if (!found)
             {
-                snprintf(ConfigPath, sizeof(ConfigPath), "%s/apps/usbloader_gx/GXGlobal.cfg", BootDevice);
+                snprintf(ConfigPath, sizeof(ConfigPath), "%s/config/", BootDevice);
+                CreateSubfolder(ConfigPath);
+                strcat(ConfigPath, "GXGlobal.cfg");
                 testFp = fopen(ConfigPath, "wb");
                 found = (testFp != NULL);
                 fclose(testFp);

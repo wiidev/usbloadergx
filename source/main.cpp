@@ -116,8 +116,6 @@ int main(int argc, char *argv[])
     SetupDefaultFont(fontPath);
     free(fontPath);
 
-    //gprintf("\tEnd of Main()\n");
-    InitGUIThreads();
     MainMenu(MENU_DISCLIST);
     return 0;
 }

@@ -1,6 +1,7 @@
 #include <gccore.h>
 #include <stdio.h>
 #include <string.h>
+#include <malloc.h>
 
 /* init-globals */
 bool geckoinit = false;
@@ -9,22 +10,24 @@ bool textVideoInit = false;
 #ifndef NO_DEBUG
 #include <stdarg.h>
 
-//using the gprintf from crediar because it is smaller than mine
-void gprintf(const char *str, ...)
+void gprintf(const char *format, ...)
 {
-    if (!(geckoinit)) return;
+	if (!geckoinit)
+        return;
 
-    char astr[0x100];
+	char * tmp = NULL;
+	va_list va;
+	va_start(va, format);
+	if((vasprintf(&tmp, format, va) >= 0) && tmp)
+	{
+        u32 level = IRQ_Disable();
+        usb_sendbuffer(1, tmp, strlen(tmp));
+        IRQ_Restore(level);
+	}
+	va_end(va);
 
-    va_list ap;
-    va_start( ap, str );
-
-    vsprintf(astr, str, ap);
-
-    va_end( ap );
-
-    usb_sendbuffer(1, astr, strlen(astr));
-    //usb_sendbuffer_safe( 1, astr, strlen(astr) );
+	if(tmp)
+        free(tmp);
 }
 
 bool InitGecko()

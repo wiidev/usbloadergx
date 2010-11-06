@@ -4,6 +4,7 @@
 #include "../fatmounter.h"
 #include "../usbloader/usbstorage2.h"
 #include "../usbloader/disc.h"
+#include "../usbloader/wdvd.h"
 #include "../wad/nandtitle.h"
 #include "../mload/mload_modules.h"
 #include "../settings/CSettings.h"
@@ -62,6 +63,35 @@ s32 IosLoader::LoadAppCios()
     SDCard_Init();
     USBDevice_Init();
     Disc_Init();
+
+    return ret;
+}
+
+
+/*
+ * Loads a CIOS before a game start.
+ * @return 0 if a cios has been successfully loaded. Else a value below 0 is returned.
+ */
+s32 IosLoader::LoadGameCios(s32 ios)
+{
+    if(ios == IOS_GetVersion())
+        return 0;
+
+    s32 ret = -1;
+
+    // Unmount fat before reloading IOS.
+    SDCard_deInit();
+    USBDevice_deInit();
+    WDVD_Close();
+    __io_usbstorage.shutdown(); // libogc usb
+    __io_usbstorage2.shutdown(); // cios usb
+    USB_Deinitialize(); // main usb handle
+
+    ret = ReloadIosSafe(ios);
+
+    // Remount devices after reloading IOS.
+    SDCard_Init();
+    USBDevice_Init();
 
     return ret;
 }

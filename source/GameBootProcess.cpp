@@ -2,6 +2,8 @@
 #include "mload/mload.h"
 #include "mload/mload_modules.h"
 #include "usbloader/disc.h"
+#include "usbloader/apploader.h"
+#include "usbloader/wdvd.h"
 #include "usbloader/GameList.h"
 #include "settings/Settings.h"
 #include "settings/CGameSettings.h"
@@ -9,16 +11,86 @@
 #include "usbloader/wbfs.h"
 #include "settings/newtitles.h"
 #include "patches/fst.h"
+#include "patches/gamepatches.h"
+#include "patches/wip.h"
+#include "system/IosLoader.h"
 #include "wad/nandtitle.h"
+#include "menu/menus.h"
+#include "memory/memory.h"
+#include "fatmounter.h"
+#include "FontSystem.h"
+#include "sys.h"
+
+//appentrypoint has to be global because of asm
+u32 AppEntrypoint = 0;
 
 struct discHdr *dvdheader = NULL;
 extern int load_from_fs;
 extern int mountMethod;
 
+
+static u32 BootPartition(char * dolpath, u8 videoselected, u8 languageChoice, u8 cheat, u8 vipatch, u8 patchcountrystring,
+	u8 alternatedol, u32 alternatedoloffset, u32 returnTo, u8 fix002)
+{
+    gprintf("booting partition IOS %u v%u\n", IOS_GetVersion(), IOS_GetRevision());
+    entry_point p_entry;
+    s32 ret;
+    u64 offset;
+
+    /* Find game partition offset */
+    ret = __Disc_FindPartition(&offset);
+    if (ret < 0)
+        return 0;
+
+    /* Open specified partition */
+    ret = WDVD_OpenPartition(offset);
+    if (ret < 0)
+        return 0;
+
+    load_wip_code((u8*) Disc_ID);
+
+    /* If a wip file is loaded for this game this does nothing - Dimok */
+    PoPPatch();
+
+    /* Setup low memory */
+    __Disc_SetLowMem();
+
+    /* Run apploader */
+    ret = Apploader_Run(&p_entry, dolpath, cheat, videoselected, languageChoice, vipatch, patchcountrystring,
+            alternatedol, alternatedoloffset, returnTo, fix002);
+
+    if (ret < 0)
+        return 0;
+
+    free_wip();
+
+    return (u32) p_entry;
+}
+
 int BootGame(const char * gameID)
 {
     if(!gameID || strlen(gameID) < 3)
         return -1;
+
+    if (mountMethod == 3)
+    {
+        ExitApp();
+        struct discHdr *header = gameList.GetDiscHeader(gameID);
+        u32 tid;
+        memcpy(&tid, header->id, 4);
+        gprintf("\nBooting title %016llx", TITLE_ID( ( header->id[5] == '1' ? 0x00010001 : 0x00010002 ), tid ));
+        WII_Initialize();
+        return WII_LaunchTitle(TITLE_ID( ( header->id[5] == '1' ? 0x00010001 : 0x00010002 ), tid ));
+    }
+    if (mountMethod == 2)
+    {
+        ExitApp();
+        gprintf("\nLoading BC for GameCube");
+        WII_Initialize();
+        return WII_LaunchTitle(0x0000000100000100ULL);
+    }
+
+    AppCleanUp();
 
     gprintf("\tSettings.partition: %d\n", Settings.partition);
 
@@ -61,6 +133,14 @@ int BootGame(const char * gameID)
         alternatedoloffset = game_cfg->alternatedolstart;
         reloadblock = game_cfg->iosreloadblock;
         returnToLoaderGV = game_cfg->returnTo;
+    }
+
+    if(iosChoice != IOS_GetVersion())
+    {
+        gprintf("Reloading into cIOS: %i\n", iosChoice);
+        IosLoader::LoadGameCios(iosChoice);
+        if(MountGamePartition(false) < 0)
+            return -1;
     }
 
     if (!mountMethod)
@@ -114,16 +194,35 @@ int BootGame(const char * gameID)
 
     gprintf("\tDisc_wiiBoot\n");
 
-    shadow_mload();
-
-    ret = Disc_WiiBoot(Settings.dolpath, videoChoice, languageChoice, ocarinaChoice, viChoice, countrystrings,
+    /* Boot partition */
+    AppEntrypoint = BootPartition(Settings.dolpath, videoChoice, languageChoice, ocarinaChoice, viChoice, countrystrings,
                         alternatedol, alternatedoloffset, channel, fix002);
 
-    if (ret < 0)
-        Sys_LoadMenu();
+    if(AppEntrypoint != 0)
+    {
+        bool enablecheat = false;
 
-    //should never get here
-    printf("Returning entry point: 0x%0x\n", ret);
+        if (ocarinaChoice)
+        {
+            // OCARINA STUFF - FISHEARS
+            if (ocarina_load_code((u8 *) Disc_ID) > 0)
+            {
+                ocarina_do_code();
+                enablecheat = true;
+            }
+        }
 
-    return ret;
+        shadow_mload();
+        UnmountNTFS();
+        SDCard_deInit();
+        USBDevice_deInit();
+
+        gprintf("Jumping to game entrypoint: 0x%08X.\n", AppEntrypoint);
+
+        return Disc_JumpToEntrypoint(videoChoice, enablecheat);
+    }
+
+    WDVD_ClosePartition();
+
+    return -1;
 }

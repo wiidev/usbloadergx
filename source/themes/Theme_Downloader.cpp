@@ -25,14 +25,7 @@
 #include "ZipFile.h"
 #include "gecko.h"
 
-/*** Extern functions ***/
-extern void ResumeGui();
-extern void HaltGui();
-
 /*** Extern variables ***/
-extern GuiWindow * mainWindow;
-extern GuiSound * bgMusic;
-extern GuiImage * bgImg;
 extern u8 shutdown;
 extern u8 reset;
 

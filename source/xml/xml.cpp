@@ -5,7 +5,7 @@
  */
 
 #include <malloc.h>
-#include <unzip/unzip.h>
+#include <zip/unzip.h>
 #include "settings/CSettings.h"
 #include "settings/CGameSettings.h"
 #include "settings/GameTitles.h"
@@ -321,7 +321,7 @@ void LoadTitlesFromXML(char *langtxt, bool forcejptoen)
             }
 
             /* if enabled, force English title for all games set to Japanese */
-            if (forcejptoen && (!strcmp(langcode, "JA"))) strcpy(langcode, "EN");
+            if (forcejptoen && (strcmp(langcode, "JA")) == 0) strcpy(langcode, "EN");
 
             /* load title from nodes */
             nodefound = mxmlFindElement(nodeid, nodedata, "locale", "lang", "EN", MXML_NO_DESCEND);

@@ -10,10 +10,6 @@
 #include "filelist.h"
 #include "sys.h"
 
-extern void ResumeGui();
-extern void HaltGui();
-extern GuiWindow * mainWindow;
-extern GuiBGM * bgMusic;
 extern u8 shutdown;
 extern u8 reset;
 

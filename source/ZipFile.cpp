@@ -33,7 +33,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <malloc.h>
-#include <unzip/unzip.h>
 
 #include "prompts/ProgressWindow.h"
 #include "FileOperations/fileops.h"

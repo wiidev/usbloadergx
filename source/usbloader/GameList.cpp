@@ -33,7 +33,7 @@
 #include "xml/xml.h"
 #include "FreeTypeGX.h"
 #include "GameList.h"
-#include "memory.h"
+#include "memory/memory.h"
 
 GameList gameList;
 

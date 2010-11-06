@@ -36,7 +36,6 @@
 #include "usbloader/frag.h"
 #include "usbloader/wbfs.h"
 #include "wad/nandtitle.h"
-#include "GameBootProcess.h"
 
 /*** Variables that are also used extern ***/
 GuiWindow * mainWindow = NULL;
@@ -61,13 +60,12 @@ bool altdoldefault = true;
 
 static lwp_t guithread = LWP_THREAD_NULL;
 static bool guiHalt = true;
-static int ExitRequested = 0;
+static bool ExitRequested = false;
 
 /*** Extern variables ***/
 extern u8 shutdown;
 extern u8 reset;
 extern s32 gameSelected, gameStart;
-extern u8 boothomebrew;
 
 /****************************************************************************
  * ResumeGui
@@ -168,6 +166,7 @@ static void * UpdateGUI(void *arg)
         Menu_DrawRectangle(0, 0, screenwidth, screenheight, (GXColor) {0, 0, 0, i}, 1);
         Menu_Render();
     }
+
     mainWindow->RemoveAll();
     ShutoffRumble();
 
@@ -181,18 +180,22 @@ static void * UpdateGUI(void *arg)
  ***************************************************************************/
 void InitGUIThreads()
 {
-    LWP_CreateThread(&guithread, UpdateGUI, NULL, NULL, 65536, LWP_PRIO_HIGHEST);
-    InitProgressThread();
-    InitNetworkThread();
+    ExitRequested = false;
 
-    if (Settings.autonetwork) ResumeNetworkThread();
+    if(guithread == LWP_THREAD_NULL)
+        LWP_CreateThread(&guithread, UpdateGUI, NULL, NULL, 65536, LWP_PRIO_HIGHEST);
 }
 
 void ExitGUIThreads()
 {
-    ExitRequested = 1;
-    LWP_JoinThread(guithread, NULL);
-    guithread = LWP_THREAD_NULL;
+    ExitRequested = true;
+
+    if(guithread != LWP_THREAD_NULL)
+    {
+        ResumeGui();
+        LWP_JoinThread(guithread, NULL);
+        guithread = LWP_THREAD_NULL;
+    }
 }
 
 /****************************************************************************
@@ -254,6 +257,14 @@ int MainMenu(int menu)
 {
     currentMenu = menu;
 
+    InitGUIThreads();
+
+    InitProgressThread();
+    InitNetworkThread();
+
+    if (Settings.autonetwork)
+        ResumeNetworkThread();
+
     pointer[0] = Resources::GetImageData("player1_point.png");
     pointer[1] = Resources::GetImageData("player2_point.png");
     pointer[2] = Resources::GetImageData("player3_point.png");
@@ -301,61 +312,8 @@ int MainMenu(int menu)
         }
     }
 
-    // MemInfoPrompt();
-    gprintf("Exiting main GUI.  mountMethod = %d\n", mountMethod);
+    //! THIS SHOULD NEVER HAPPEN ANYMORE
+    ExitApp();
 
-    CloseXMLDatabase();
-    NewTitles::DestroyInstance();
-
-	ResumeGui();
-    ExitGUIThreads();
-
-    bgMusic->Stop();
-    delete bgMusic;
-    delete background;
-    delete bgImg;
-    delete mainWindow;
-    for (int i = 0; i < 4; i++)
-        delete pointer[i];
-    delete GameRegionTxt;
-    delete GameIDTxt;
-    delete cover;
-    delete coverImg;
-    delete fontSystem;
-    ShutdownAudio();
-    StopGX();
-    gettextCleanUp();
-
-    if (mountMethod == 3)
-    {
-        struct discHdr *header = gameList[gameSelected];
-        char tmp[20];
-        u32 tid;
-        sprintf(tmp, "%c%c%c%c", header->id[0], header->id[1], header->id[2], header->id[3]);
-        memcpy(&tid, tmp, 4);
-        gprintf("\nBooting title %016llx", TITLE_ID( ( header->id[5] == '1' ? 0x00010001 : 0x00010002 ), tid ));
-        WII_Initialize();
-        WII_LaunchTitle(TITLE_ID( ( header->id[5] == '1' ? 0x00010001 : 0x00010002 ), tid ));
-    }
-    if (mountMethod == 2)
-    {
-        gprintf("\nLoading BC for GameCube");
-        WII_Initialize();
-        WII_LaunchTitle(0x0000000100000100ULL);
-    }
-
-    if (boothomebrew == 1)
-    {
-        gprintf("\nBootHomebrew");
-        BootHomebrew(Settings.selected_homebrew);
-        return 0;
-    }
-    else if (boothomebrew == 2)
-    {
-        gprintf("\nBootHomebrew from Menu");
-        BootHomebrewFromMem();
-        return 0;
-    }
-
-    return BootGame((const char *) gameList[gameSelected]->id);
+    return -1;
 }

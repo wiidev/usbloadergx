@@ -9,7 +9,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <zlib.h>
-#include <unzip/unzip.h>
+#include <zip/unzip.h>
 
 #include "language/gettext.h"
 #include "libwiigui/gui.h"
@@ -34,15 +34,11 @@ extern void ResumeGui();
 extern void HaltGui();
 
 /*** Extern variables ***/
-extern GuiImage * bgImg;
 extern u32 infilesize;
 extern u32 uncfilesize;
 extern char wiiloadVersion[2];
 extern u8 shutdown;
 extern u8 reset;
-
-/*** Variables used elsewhere ***/
-u8 boothomebrew = 0;
 
 /****************************************************************************
  * roundup Function
@@ -52,6 +48,137 @@ int roundup(float number)
     if (number == (int) number)
         return (int) number;
     else return (int) (number + 1);
+}
+
+static int ReceiveFile()
+{
+    char filesizetxt[50];
+    char temp[50];
+    u32 filesize = 0;
+
+    if (infilesize < MB_SIZE)
+        snprintf(filesizetxt, sizeof(filesizetxt), tr( "Incoming file %0.2fKB" ), infilesize / KB_SIZE);
+    else snprintf(filesizetxt, sizeof(filesizetxt), tr( "Incoming file %0.2fMB" ), infilesize / MB_SIZE);
+
+    snprintf(temp, sizeof(temp), tr( "Load file from: %s ?" ), GetIncommingIP());
+
+    int choice = WindowPrompt(filesizetxt, temp, tr( "OK" ), tr( "Cancel" ));
+
+    if (choice == 0)
+        return MENU_NONE;
+
+    u32 read = 0;
+    int len = NETWORKBLOCKSIZE;
+    filesize = infilesize;
+    u8 * buffer = (u8 *) malloc(infilesize);
+    if(!buffer)
+    {
+        WindowPrompt(tr( "Not enough memory." ), 0, tr( "OK" ));
+        return MENU_NONE;
+    }
+
+    bool error = false;
+    while (read < infilesize)
+    {
+        ShowProgress(tr( "Receiving file from:" ), GetIncommingIP(), NULL, read, infilesize, true);
+
+        if (infilesize - read < (u32) len)
+            len = infilesize - read;
+        else len = NETWORKBLOCKSIZE;
+
+        int result = network_read(buffer+read, len);
+
+        if (result < 0)
+        {
+            WindowPrompt(tr( "Error while transfering data." ), 0, tr( "OK" ));
+            free(buffer);
+            return MENU_NONE;
+        }
+        if (!result)
+        {
+            break;
+        }
+
+        read += result;
+    }
+
+    char filename[101];
+    network_read((u8*) &filename, 100);
+
+    // Do we need to unzip this thing?
+    if (wiiloadVersion[0] > 0 || wiiloadVersion[1] > 4)
+    {
+        // We need to unzip...
+        if (buffer[0] == 'P' && buffer[1] == 'K' && buffer[2] == 0x03 && buffer[3] == 0x04)
+        {
+            // It's a zip file, unzip to the apps directory
+            // Zip archive, ask for permission to install the zip
+            char zippath[255];
+            sprintf((char *) &zippath, "%s%s", Settings.homebrewapps_path, filename);
+
+            FILE *fp = fopen(zippath, "wb");
+            if (!fp)
+            {
+                WindowPrompt(tr( "Error writing the data." ), 0, tr( "OK" ));
+                return MENU_NONE;
+            }
+
+            fwrite(buffer, 1, infilesize, fp);
+            fclose(fp);
+
+            free(buffer);
+            buffer = NULL;
+
+            // Now unzip the zip file...
+            unzFile uf = unzOpen(zippath);
+            if (uf == NULL)
+            {
+                WindowPrompt(tr( "Error while opening the zip." ), 0, tr( "OK" ));
+                return MENU_NONE;
+            }
+
+            extractZip(uf, 0, 1, 0, Settings.homebrewapps_path);
+            unzCloseCurrentFile(uf);
+
+            remove(zippath);
+
+            WindowPrompt(tr( "Success:" ),
+                    tr( "Uploaded ZIP file installed to homebrew directory." ), tr( "OK" ));
+
+            // Reload this menu here...
+            return MENU_HOMEBREWBROWSE;
+        }
+        else if (uncfilesize != 0) // if uncfilesize == 0, it's not compressed
+        {
+            // It's compressed, uncompress
+            u8 *unc = (u8 *) malloc(uncfilesize);
+            uLongf f = uncfilesize;
+            error = uncompress(unc, &f, buffer, infilesize) != Z_OK;
+            uncfilesize = f;
+            filesize = uncfilesize;
+
+            free(buffer);
+            buffer = unc;
+        }
+    }
+
+    CopyHomebrewMemory(buffer, 0, filesize);
+    free(buffer);
+
+    ProgressStop();
+
+    if (error || read != infilesize || strcasestr(filename, ".dol") || strcasestr(filename, ".elf"))
+    {
+        WindowPrompt(tr( "Error:" ), tr( "No data could be read." ), tr( "OK" ));
+        FreeHomebrewBuffer();
+        return MENU_NONE;
+    }
+
+    CloseConnection();
+
+    AddBootArgument(filename);
+
+    return BootHomebrewFromMem();
 }
 
 /****************************************************************************
@@ -695,10 +822,9 @@ int MenuHomebrewBrowse()
                         XMLInfo[0].GetReleasedate(), XMLInfo[0].GetLongDescription(), iconpath, filesize);
                 if (choice == 1)
                 {
-                    boothomebrew = 1;
-                    menu = MENU_EXIT;
                     snprintf(Settings.selected_homebrew, sizeof(Settings.selected_homebrew), "%s%s",
                             HomebrewFiles.GetFilepath(fileoffset), HomebrewFiles.GetFilename(fileoffset));
+                    BootHomebrew(Settings.selected_homebrew);
                     break;
                 }
                 MainButton1.ResetState();
@@ -728,10 +854,9 @@ int MenuHomebrewBrowse()
                         XMLInfo[1].GetReleasedate(), XMLInfo[1].GetLongDescription(), iconpath, filesize);
                 if (choice == 1)
                 {
-                    boothomebrew = 1;
-                    menu = MENU_EXIT;
                     snprintf(Settings.selected_homebrew, sizeof(Settings.selected_homebrew), "%s%s",
                             HomebrewFiles.GetFilepath(fileoffset + 1), HomebrewFiles.GetFilename(fileoffset + 1));
+                    BootHomebrew(Settings.selected_homebrew);
                     break;
                 }
                 MainButton2.ResetState();
@@ -761,10 +886,9 @@ int MenuHomebrewBrowse()
                         XMLInfo[2].GetReleasedate(), XMLInfo[2].GetLongDescription(), iconpath, filesize);
                 if (choice == 1)
                 {
-                    boothomebrew = 1;
-                    menu = MENU_EXIT;
                     snprintf(Settings.selected_homebrew, sizeof(Settings.selected_homebrew), "%s%s",
                             HomebrewFiles.GetFilepath(fileoffset + 2), HomebrewFiles.GetFilename(fileoffset + 2));
+                    BootHomebrew(Settings.selected_homebrew);
                     break;
                 }
                 MainButton3.ResetState();
@@ -794,10 +918,9 @@ int MenuHomebrewBrowse()
                         XMLInfo[3].GetReleasedate(), XMLInfo[3].GetLongDescription(), iconpath, filesize);
                 if (choice == 1)
                 {
-                    boothomebrew = 1;
-                    menu = MENU_EXIT;
                     snprintf(Settings.selected_homebrew, sizeof(Settings.selected_homebrew), "%s%s",
                             HomebrewFiles.GetFilepath(fileoffset + 3), HomebrewFiles.GetFilename(fileoffset + 3));
+                    BootHomebrew(Settings.selected_homebrew);
                     break;
                 }
                 MainButton4.ResetState();
@@ -864,166 +987,9 @@ int MenuHomebrewBrowse()
 
             else if (infilesize > 0)
             {
-                char filesizetxt[50];
-                char temp[50];
-
-                if (infilesize < MB_SIZE)
-                    snprintf(filesizetxt, sizeof(filesizetxt), tr( "Incoming file %0.2fKB" ), infilesize / KB_SIZE);
-                else snprintf(filesizetxt, sizeof(filesizetxt), tr( "Incoming file %0.2fMB" ), infilesize / MB_SIZE);
-
-                snprintf(temp, sizeof(temp), tr( "Load file from: %s ?" ), GetIncommingIP());
-
-                int choice = WindowPrompt(filesizetxt, temp, tr( "OK" ), tr( "Cancel" ));
-
-                if (choice == 1)
-                {
-
-                    int res = AllocHomebrewMemory(infilesize);
-
-                    if (res < 0)
-                    {
-                        CloseConnection();
-                        WindowPrompt(tr( "Not enough free memory." ), 0, tr( "OK" ));
-                    }
-                    else
-                    {
-                        u32 read = 0;
-                        u8 *temp = NULL;
-                        int len = NETWORKBLOCKSIZE;
-                        temp = (u8 *) malloc(infilesize);
-
-                        bool error = false;
-                        u8 *ptr = temp;
-                        while (read < infilesize)
-                        {
-
-                            ShowProgress(tr( "Receiving file from:" ), GetIncommingIP(), NULL, read, infilesize, true);
-
-                            if (infilesize - read < (u32) len)
-                                len = infilesize - read;
-                            else len = NETWORKBLOCKSIZE;
-
-                            int result = network_read(ptr, len);
-
-                            if (result < 0)
-                            {
-                                WindowPrompt(tr( "Error while transfering data." ), 0, tr( "OK" ));
-                                error = true;
-                                break;
-                            }
-                            if (!result)
-                            {
-                                break;
-                            }
-
-                            ptr += result;
-
-                            read += result;
-                        }
-
-                        char filename[101];
-                        if (!error)
-                        {
-
-                            network_read((u8*) &filename, 100);
-
-                            // Do we need to unzip this thing?
-                            if (wiiloadVersion[0] > 0 || wiiloadVersion[1] > 4)
-                            {
-
-                                // We need to unzip...
-                                if (temp[0] == 'P' && temp[1] == 'K' && temp[2] == 0x03 && temp[3] == 0x04)
-                                {
-                                    // It's a zip file, unzip to the apps directory
-
-                                    // Zip archive, ask for permission to install the zip
-                                    char zippath[255];
-                                    sprintf((char *) &zippath, "%s%s", Settings.homebrewapps_path, filename);
-
-                                    FILE *fp = fopen(zippath, "wb");
-                                    if (fp != NULL)
-                                    {
-                                        fwrite(temp, 1, infilesize, fp);
-                                        fclose(fp);
-
-                                        // Now unzip the zip file...
-                                        unzFile uf = unzOpen(zippath);
-                                        if (uf == NULL)
-                                        {
-                                            error = true;
-                                        }
-                                        else
-                                        {
-                                            extractZip(uf, 0, 1, 0, Settings.homebrewapps_path);
-                                            unzCloseCurrentFile(uf);
-
-                                            remove(zippath);
-
-                                            // Reload this menu here...
-                                            menu = MENU_HOMEBREWBROWSE;
-                                            break;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        error = true;
-                                    }
-                                }
-                                else if (uncfilesize != 0) // if uncfilesize == 0, it's not compressed
-                                {
-                                    // It's compressed, uncompress
-                                    u8 *unc = (u8 *) malloc(uncfilesize);
-                                    uLongf f = uncfilesize;
-                                    error = uncompress(unc, &f, temp, infilesize) != Z_OK;
-                                    uncfilesize = f;
-                                    homebrewsize = uncfilesize;
-
-                                    free(temp);
-                                    temp = unc;
-                                }
-                            }
-
-                            if (!error && strstr(filename, ".zip") == NULL)
-                            {
-                                innetbuffer = temp;
-
-                            }
-                        }
-
-                        ProgressStop();
-
-                        if (error || read != infilesize)
-                        {
-                            WindowPrompt(tr( "Error:" ), tr( "No data could be read." ), tr( "OK" ));
-                            FreeHomebrewBuffer();
-                        }
-                        else
-                        {
-                            if (strstr(filename, ".dol") || strstr(filename, ".DOL") || strstr(filename, ".elf")
-                                    || strstr(filename, ".ELF"))
-                            {
-                                boothomebrew = 2;
-                                AddBootArgument(filename);
-                                menu = MENU_EXIT;
-                                CloseConnection();
-                                break;
-                            }
-                            else if (strstr(filename, ".zip"))
-                            {
-                                WindowPrompt(tr( "Success:" ),
-                                        tr( "Uploaded ZIP file installed to homebrew directory." ), tr( "OK" ));
-                                CloseConnection();
-                            }
-                            else
-                            {
-                                FreeHomebrewBuffer();
-                                WindowPrompt(tr( "ERROR:" ), tr( "Not a DOL/ELF file." ), tr( "OK" ));
-                            }
-                        }
-                    }
-                }
-                CloseConnection();
-                ResumeNetworkWait();
+                menu = ReceiveFile();
+				CloseConnection();
+				ResumeNetworkWait();
             }
 
             else if (channelBtn.GetState() == STATE_CLICKED)

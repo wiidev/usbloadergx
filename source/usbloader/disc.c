@@ -13,7 +13,7 @@
 #include "video.h"
 #include "wdvd.h"
 #include "alternatedol.h"
-#include "memory.h"
+#include "memory/memory.h"
 #include "wbfs.h"
 #include "../settings/SettingsEnums.h"
 #include "../gecko.h"
@@ -22,9 +22,6 @@
 /* Constants */
 #define PTABLE_OFFSET   0x40000
 #define WII_MAGIC   0x5D1C9EA3
-
-//appentrypoint
-u32 appentrypoint;
 
 /* Disc pointers */
 static u32 *buffer = (u32 *) 0x93000000;
@@ -48,11 +45,7 @@ void __Disc_SetLowMem(void)
     *(vu32 *) 0xCD00643C = 0x00000000; // 32Mhz on Bus
 
     //If the game is sam & max: season 1  put this shit in
-    char gameid[8];
-    memset(gameid, 0, 8);
-    memcpy(gameid, (char*) Disc_ID, 6);
-
-    if ((strcmp(gameid, "R3XE6U") == 0) || (strcmp(gameid, "R3XP6V") == 0))
+    if ((strncmp((char*) Disc_ID, "R3XE6U", 6) == 0) || (strncmp((char*) Disc_ID, "R3XP6V", 6) == 0))
     {
         *GameID_Address = 0x80000000; // Game ID Address
     }
@@ -284,84 +277,33 @@ s32 Disc_IsWii(void)
     return 0;
 }
 
-s32 Disc_BootPartition(u64 offset, char * dolpath, u8 videoselected, u8 languageChoice, u8 cheat, u8 vipatch, u8 patchcountrystring,
-	u8 alternatedol, u32 alternatedoloffset, u32 returnTo, u8 fix002)
+s32 Disc_JumpToEntrypoint(u8 videoselected, bool enablecheat)
 {
-    gprintf("booting partition IOS %u v%u\n", IOS_GetVersion(), IOS_GetRevision());
-    entry_point p_entry;
-
-    s32 ret;
-
-    /* Open specified partition */
-    ret = WDVD_OpenPartition(offset);
-    if (ret < 0) return ret;
-
-    /* Setup low memory */
-    __Disc_SetLowMem();
-
-    char gameid[8];
-    memset(gameid, 0, 8);
-    memcpy(gameid, (char*) Disc_ID, 6);
-
-    load_wip_code((u8 *) &gameid);
-
-    /* If a wip file is loaded for this game this does nothing - Dimok */
-    PoPPatch();
-
-    /* Run apploader */
-    ret = Apploader_Run(&p_entry, dolpath, cheat, videoselected, languageChoice, vipatch, patchcountrystring,
-            alternatedol, alternatedoloffset, returnTo, fix002);
-    if (ret < 0) return ret;
-
-    free_wip();
-
-    bool cheatloaded = false;
-
-    if (cheat)
-    {
-        // OCARINA STUFF - FISHEARS
-        if (ocarina_load_code((u8 *) gameid) > 0)
-        {
-            ocarina_do_code();
-            cheatloaded = true;
-        }
-    }
-
-    //kill the USB and SD
-    USBDevice_deInit();
-    SDCard_deInit();
-
     /* Set an appropiate video mode */
     __Disc_SetVMode(videoselected);
 
     /* Set time */
     __Disc_SetTime();
 
-    /* Disconnect Wiimote */
-    WPAD_Flush(0);
-    WPAD_Disconnect(0);
-    WPAD_Shutdown();
-
     // Anti-green screen fix
     VIDEO_SetBlack(TRUE);
     VIDEO_Flush();
     VIDEO_WaitVSync();
+	VIDEO_WaitVSync();
     gprintf("USB Loader GX is done.\n");
 
     /* Shutdown IOS subsystems */
-    // fix for PeppaPig (from NeoGamma)
-    extern void __exception_closeall();
-    IRQ_Disable();
-    __IOS_ShutdownSubsystems();
-    __exception_closeall();
+    // fix for PeppaPig (from WiiFlow)
+	u8 temp_data[4];
+	memcpy(temp_data, (u8 *) 0x800000F4, 4);
+	SYS_ResetSystem(SYS_SHUTDOWN, 0, 0);
+	memcpy((u8 *) 0x800000F4, temp_data, 4);
 
-    appentrypoint = (u32) p_entry;
-
-    if (cheat == 1 && cheatloaded)
+    if (enablecheat)
     {
         __asm__(
-                "lis %r3, appentrypoint@h\n"
-                "ori %r3, %r3, appentrypoint@l\n"
+                "lis %r3, AppEntrypoint@h\n"
+                "ori %r3, %r3, AppEntrypoint@l\n"
                 "lwz %r3, 0(%r3)\n"
                 "mtlr %r3\n"
                 "lis %r3, 0x8000\n"
@@ -373,8 +315,8 @@ s32 Disc_BootPartition(u64 offset, char * dolpath, u8 videoselected, u8 language
     else
     {
         __asm__(
-                "lis %r3, appentrypoint@h\n"
-                "ori %r3, %r3, appentrypoint@l\n"
+                "lis %r3, AppEntrypoint@h\n"
+                "ori %r3, %r3, AppEntrypoint@l\n"
                 "lwz %r3, 0(%r3)\n"
                 "mtlr %r3\n"
                 "blr\n"
@@ -382,21 +324,6 @@ s32 Disc_BootPartition(u64 offset, char * dolpath, u8 videoselected, u8 language
     }
 
     return 0;
-}
-
-s32 Disc_WiiBoot(char * dolpath, u8 videoselected, u8 languageChoice, u8 cheat, u8 vipatch, u8 patchcountrystring,
-        u8 alternatedol, u32 alternatedoloffset, u32 returnTo, u8 fix002)
-{
-    u64 offset;
-    s32 ret;
-
-    /* Find game partition offset */
-    ret = __Disc_FindPartition(&offset);
-    if (ret < 0) return ret;
-
-    /* Boot partition */
-    return Disc_BootPartition(offset, dolpath, videoselected, languageChoice, cheat, vipatch, patchcountrystring,
-            alternatedol, alternatedoloffset, returnTo, fix002);
 }
 
 void PatchCountryStrings(void *Address, int Size)

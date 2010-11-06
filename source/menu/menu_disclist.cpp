@@ -13,6 +13,7 @@
 #include "settings/CGameStatistics.h"
 #include "settings/GameTitles.h"
 #include "themes/CTheme.h"
+#include "GameBootProcess.h"
 #include "wpad.h"
 #include "sys.h"
 
@@ -1472,9 +1473,8 @@ int MenuDiscList()
                             header->id[3], header->id[4], header->id[5],  GameStatistics.GetPlayCount(header->id));
 
                 }
-                menu = MENU_EXIT;
-                break;
-
+                //Just calling that shuts down everything and starts game
+                BootGame((const char *) header->id);
             }
             bool returnHere = true;// prompt to start game
             while (returnHere)
@@ -1494,7 +1494,7 @@ int MenuDiscList()
                         if (exeFile == NULL)
                         {
                             gprintf("\n\tTried to load alt dol that isn't there");
-                            sprintf(nipple, "%s %s", nipple, tr( "does not exist!  You Messed something up, Idiot." ));
+                            sprintf(nipple, "%s %s", nipple, tr( "does not exist!  You messed something up." ));
                             WindowPrompt(tr( "Error" ), nipple, tr( "OK" ));
                             menu = MENU_DISCLIST;
                             wiilight(0);
@@ -1524,8 +1524,8 @@ int MenuDiscList()
                     }
                     wiilight(0);
                     returnHere = false;
-                    menu = MENU_EXIT;
-
+                    //Just calling that shuts down everything and starts game
+                    BootGame((const char *) gameList[gameSelected]->id);
                 }
                 else if (choice == 2)
                 {

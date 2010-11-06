@@ -10,6 +10,8 @@
 #define _MENU_H_
 
 #include <ogcsys.h>
+#include "libwiigui/gui.h"
+#include "libwiigui/gui_bgm.h"
 #include "settings/CSettings.h"
 #include "main.h"
 
@@ -30,8 +32,21 @@ enum
     BOOTHOMEBREW,
     MENU_THEMEDOWNLOADER
 };
-class GuiImageData;
+
+void ResumeGui();
+void HaltGui();
 GuiImageData *LoadCoverImage(struct discHdr *header, bool Prefere3D = true, bool noCover = true);
-class GuiSound;
+
 extern GuiSound *btnClick2;
+extern GuiBGM *bgMusic;
+extern GuiImageData *pointer[4];
+extern GuiImageData *background;
+extern GuiImage *bgImg;
+extern GuiWindow *mainWindow;
+extern GuiText *GameRegionTxt;
+extern GuiText *GameIDTxt;
+extern GuiImageData *cover;
+extern GuiImage *coverImg;
+extern FreeTypeGX *fontSystem;
+
 #endif
