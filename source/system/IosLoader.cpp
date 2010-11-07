@@ -10,10 +10,6 @@
 #include "../settings/CSettings.h"
 #include "wad/nandtitle.h"
 #include "mload/mload.h"
-#include "mload/modules/ehcmodule_2.h"
-#include "mload/modules/dip_plugin_2.h"
-#include "mload/modules/ehcmodule_3.h"
-#include "mload/modules/dip_plugin_3.h"
 #include "mload/modules/ehcmodule_5.h"
 #include "mload/modules/dip_plugin_249.h"
 #include "mload/modules/odip_frag.h"
@@ -125,7 +121,7 @@ s32 IosLoader::ReloadIosSafe(s32 ios)
     if(IsHermesIOS(ios))
     {
         s32 iosRev = NandTitles.VersionOf(TITLE_ID(1, ios));
-        if((iosRev < 2 || iosRev > 5) && iosRev != 65535)
+        if(iosRev != 4 && iosRev != 5 && iosRev != 65535)
             return -11;
     }
     else if(IsWaninkokoIOS(ios))
@@ -160,30 +156,11 @@ void IosLoader::LoadIOSModules(s32 ios, s32 ios_rev)
         const u8 * dip_plugin = NULL;
         int dip_plugin_size = 0;
 
-        switch (ios_rev)
-        {
-            case 2:
-                ech_module = ehcmodule_2;
-                ehc_module_size = ehcmodule_2_size;
-                dip_plugin = dip_plugin_2;
-                dip_plugin_size = dip_plugin_2_size;
-                gprintf("Loading ehc and dip module v2\n");
-                break;
-            case 3:
-                ech_module = ehcmodule_3;
-                ehc_module_size = ehcmodule_3_size;
-                dip_plugin = dip_plugin_3;
-                dip_plugin_size = dip_plugin_3_size;
-                gprintf("Loading ehc and dip module v3\n");
-                break;
-            default:
-                ech_module = ehcmodule_5;
-                ehc_module_size = ehcmodule_5_size;
-                dip_plugin = odip_frag;
-                dip_plugin_size = odip_frag_size;
-                gprintf("Loading ehc v5 and opendip module\n");
-                break;
-        }
+        ech_module = ehcmodule_5;
+        ehc_module_size = ehcmodule_5_size;
+        dip_plugin = odip_frag;
+        dip_plugin_size = odip_frag_size;
+        gprintf("Loading ehc v5 and opendip module\n");
 
         u8 *ehc_cfg = search_for_ehcmodule_cfg((u8 *) ech_module, ehc_module_size);
         if (ehc_cfg)

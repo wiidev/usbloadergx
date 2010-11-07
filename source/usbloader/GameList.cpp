@@ -136,7 +136,7 @@ int GameList::FilterList(const wchar_t * gameFilter)
         NewTitles::Instance()->CheckGame(header->id);
 
         /* Filters */
-        if (Settings.GameSort == SORT_RANKING)
+        if (Settings.GameSort & SORT_FAVORITE)
         {
             GameStatus * GameStats = GameStatistics.GetGameStatus(header->id);
             if (!GameStats || GameStats->FavoriteRank == 0) continue;
@@ -246,13 +246,13 @@ void GameList::SortList()
 {
     if (FilteredList.size() < 2) return;
 
-    if (Settings.GameSort == SORT_PLAYCOUNT)
+    if (Settings.GameSort & SORT_PLAYCOUNT)
     {
         std::sort(FilteredList.begin(), FilteredList.end(), PlaycountSortCallback);
     }
-    else if(Settings.GameSort == SORT_RANKING)
+    else if(Settings.GameSort & SORT_RANKING)
     {
-        std::sort(FilteredList.begin(), FilteredList.end(), FavoriteSortCallback);
+        std::sort(FilteredList.begin(), FilteredList.end(), RankingSortCallback);
     }
     else
     {
@@ -279,7 +279,7 @@ bool GameList::PlaycountSortCallback(const struct discHdr *a, const struct discH
     return (count1 > count2);
 }
 
-bool GameList::FavoriteSortCallback(const struct discHdr *a, const struct discHdr *b)
+bool GameList::RankingSortCallback(const struct discHdr *a, const struct discHdr *b)
 {
     int fav1 = GameStatistics.GetFavoriteRank(a->id);
 	int fav2 = GameStatistics.GetFavoriteRank(b->id);

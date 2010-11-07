@@ -157,7 +157,7 @@ bool TitleSelector(char output[])
     u8 scrollbaron = 0;
     if (num_titles + 1 > 9) scrollbaron = 1;
 
-    GuiCustomOptionBrowser optionBrowser4(396, 280, &options4, "bg_options_gamesettings.png", scrollbaron, 200);
+    GuiCustomOptionBrowser optionBrowser4(396, 280, &options4, "bg_options_settings.png", scrollbaron, 200);
     optionBrowser4.SetPosition(0, 90);
     optionBrowser4.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 

@@ -2,6 +2,8 @@
 #include <unistd.h>
 
 #include "FileOperations/fileops.h"
+#include "wad/nandtitle.h"
+#include "system/IosLoader.h"
 #include "menus.h"
 #include "wpad.h"
 #include "fatmounter.h"
@@ -28,6 +30,10 @@ static int FindGamesPartition(PartList * partitions)
             }
         }
     }
+
+
+    if(IosLoader::IsWaninkokoIOS() && NandTitles.VersionOf(TITLE_ID(1, IOS_GetVersion())) < 18)
+        return -1;
 
     // Loop through FAT/NTFS partitions, and find the first partition with games on it (if there is one)
     for (int i = 0; i < partitions->num; i++)
@@ -74,6 +80,10 @@ static int PartitionChoice()
         int part_num = SelectPartitionMenu();
         if(part_num >= 0)
         {
+            if(IosLoader::IsWaninkokoIOS() && NandTitles.VersionOf(TITLE_ID(1, IOS_GetVersion())) < 18
+                && (partitions.pinfo[part_num].part_fs == FS_TYPE_FAT32 || partitions.pinfo[part_num].part_fs == FS_TYPE_NTFS))
+                WindowPrompt(tr("Warning:"), tr("You are trying to select a FAT32/NTFS partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."), tr("OK"));
+
             ret = WBFS_OpenPart(partitions.pinfo[part_num].part_fs, partitions.pinfo[part_num].index, partitions.pentry[part_num].sector, partitions.pentry[part_num].size, (char *) &game_partition);
 
             load_from_fs = partitions.pinfo[part_num].part_fs;

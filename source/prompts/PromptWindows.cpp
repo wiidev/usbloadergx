@@ -2930,8 +2930,10 @@ int ProgressUpdateWindow()
     }
 
     //make the URL to get XML based on our games
-    char XMLurl[3540];
-    build_XML_URL( XMLurl, sizeof( XMLurl ) );
+    //std::string allocates the memory and does not depend on stack
+    std::string XMLurl;
+    XMLurl.resize(4096);
+    build_XML_URL(&XMLurl[0], XMLurl.size());
 
     char dolpath[150];
     //    char dolpathsuccess[150];//use coverspath as a folder for the update wad so we dont make a new folder and have to delete it
@@ -2981,7 +2983,7 @@ int ProgressUpdateWindow()
 
                 char wiitdbpath[200];
                 char wiitdbpathtmp[200];
-                struct block file = downloadfile( XMLurl );
+                struct block file = downloadfile( XMLurl.c_str() );
                 if ( file.data != NULL )
                 {
                     snprintf( wiitdbpath, sizeof( wiitdbpath ), "%swiitdb_%s.zip", Settings.titlestxt_path, game_partition );
@@ -3309,8 +3311,10 @@ int ProgressUpdateWindow()
     }
 
     //make the URL to get XML based on our games
-    char XMLurl[3540];
-    build_XML_URL(XMLurl, sizeof(XMLurl));
+    //std::string allocates the memory and does not depend on stack
+    std::string XMLurl;
+    XMLurl.resize(4096);
+    build_XML_URL(&XMLurl[0], XMLurl.size());
 
     if (IsNetworkInit() && ret >= 0)
     {
@@ -3436,7 +3440,7 @@ int ProgressUpdateWindow()
                                 msgTxt.SetTextf("%s", tr( "Updating WiiTDB.zip" ));
                                 char wiitdbpath[200];
                                 char wiitdbpathtmp[200];
-                                file = downloadfile(XMLurl);
+                                file = downloadfile(XMLurl.c_str());
                                 if (file.data != NULL)
                                 {
                                     CreateSubfolder(Settings.titlestxt_path);
@@ -3491,7 +3495,7 @@ int ProgressUpdateWindow()
             msgTxt.SetTextf("%s", tr( "Updating WiiTDB.zip" ));
             char wiitdbpath[200];
             char wiitdbpathtmp[200];
-            struct block file = downloadfile(XMLurl);
+            struct block file = downloadfile(XMLurl.c_str());
             if (file.data != NULL)
             {
                 CreateSubfolder(Settings.titlestxt_path);

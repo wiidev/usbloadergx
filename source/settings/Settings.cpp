@@ -22,6 +22,7 @@
 #include "sys.h"
 #include "usbloader/partition_usbloader.h"
 #include "usbloader/utils.h"
+#include "system/IosLoader.h"
 #include "xml/xml.h"
 #include "wad/nandtitle.h"
 #include "prompts/TitleBrowser.h"
@@ -63,6 +64,19 @@ static const char *opts_partitions[3] = { trNOOP( "Game partition" ), trNOOP( "A
         trNOOP( "Remove update" ) };
 static const char *opts_installdir[INSTALL_TO_MAX] = { trNOOP( "None" ), trNOOP( "GAMEID_Gamename" ),
         trNOOP( "Gamename [GAMEID]" ) };
+
+
+static inline bool IsValidPartition(int fs_type, int cios)
+{
+    if (IosLoader::IsWaninkokoIOS() && NandTitles.VersionOf(TITLE_ID(1, cios)) < 18)
+    {
+        return fs_type == FS_TYPE_WBFS;
+    }
+    else
+    {
+        return fs_type == FS_TYPE_WBFS || fs_type == FS_TYPE_FAT32 || fs_type == FS_TYPE_NTFS;
+    }
+}
 
 /****************************************************************************
  * MenuSettings
@@ -648,8 +662,11 @@ int MenuSettings()
                         usleep(50);
 
                     int returnhere = 1;
-                    char * languagefile;
-                    languagefile = strrchr(Settings.language_path, '/') + 1;
+                    const char * languagefile = strrchr(Settings.language_path, '/');
+                    if(languagefile)
+                        languagefile += 1;
+                    else
+                        languagefile = tr("Default");
 
                     bool firstRun = true;
                     while (!exit)
@@ -1026,11 +1043,13 @@ int MenuSettings()
                                 {
                                     // Select the next valid partition, even if that's the same one
 									int fs_type = partitions.pinfo[Settings.partition].fs_type;
+									int ios = IOS_GetVersion();
                                     do
                                     {
                                         Settings.partition = (Settings.partition + 1) % partitions.num;
 										fs_type = partitions.pinfo[Settings.partition].fs_type;
-                                    } while (!(fs_type == FS_TYPE_WBFS || fs_type == FS_TYPE_FAT32 || fs_type == FS_TYPE_NTFS));
+                                    }
+                                    while (!IsValidPartition(fs_type, ios));
                                 }
 
                                 PartInfo pInfo = partitions.pinfo[Settings.partition];
@@ -2607,18 +2626,18 @@ int MenuGameSettings(struct discHdr * header)
                             if (ret == Idx)
                             {
                                 char entered[4];
-                                snprintf(entered, sizeof(entered), "%i", Settings.cios);
+                                snprintf(entered, sizeof(entered), "%i", game_cfg.ios);
                                 if(OnScreenKeyboard(entered, sizeof(entered), 0))
                                 {
-                                    Settings.cios = atoi(entered);
-                                    if(Settings.cios < 200) Settings.cios = 200;
-                                    else if(Settings.cios > 255) Settings.cios = 255;
+                                    game_cfg.ios = atoi(entered);
+                                    if(game_cfg.ios < 200) game_cfg.ios = 200;
+                                    else if(game_cfg.ios > 255) game_cfg.ios = 255;
 
-                                    if(NandTitles.IndexOf(TITLE_ID(1, Settings.cios)) < 0)
+                                    if(NandTitles.IndexOf(TITLE_ID(1, game_cfg.ios)) < 0)
                                     {
                                         WindowPrompt(tr("Warning:"), tr("This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."), tr("OK"));
                                     }
-                                    else if(Settings.cios == 254)
+                                    else if(game_cfg.ios == 254)
                                     {
                                         WindowPrompt(tr("Warning:"), tr("This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."), tr("OK"));
                                     }

@@ -181,7 +181,7 @@ void gettextCleanUp(void)
 bool gettextLoadLanguage(const char* langFile)
 {
     FILE *f;
-    char line[200];
+    char line[512];
     char *lastID = NULL;
 
     gettextCleanUp();

@@ -199,14 +199,12 @@ void CTheme::SetDefault()
     settingstext = (GXColor) {0, 0, 0, 255};
     gametext = (GXColor) {0, 0, 0, 255};
     pagesize = 9;
-    gamelist_favorite_x = WideScreen ? 256 : 220;
+    gamelist_favorite_x = WideScreen ? 288 : 260;
     gamelist_favorite_y = 13;
-    gamelist_search_x = WideScreen ? 288 : 260;
+    gamelist_search_x = WideScreen ? 320 : 300;
     gamelist_search_y = 13;
-    gamelist_abc_x = WideScreen ? 320 : 300;
+    gamelist_abc_x = WideScreen ? 352 : 340;
     gamelist_abc_y = 13;
-    gamelist_count_x = WideScreen ? 352 : 340;
-    gamelist_count_y = 13;
     gamelist_list_x = WideScreen ? 384 : 380;
     gamelist_list_y = 13;
     gamelist_grid_x = WideScreen ? 416 : 420;
@@ -217,14 +215,12 @@ void CTheme::SetDefault()
     gamelist_lock_y = 13;
     gamelist_dvd_x = WideScreen ? 512 : 540;
     gamelist_dvd_y = 13;
-    gamegrid_favorite_x = WideScreen ? 192 : 160;
+    gamegrid_favorite_x = WideScreen ? 224 : 200;
     gamegrid_favorite_y = 13;
-    gamegrid_search_x = WideScreen ? 224 : 200;
+    gamegrid_search_x = WideScreen ? 256 : 240;
     gamegrid_search_y = 13;
-    gamegrid_abc_x = WideScreen ? 256 : 240;
+    gamegrid_abc_x = WideScreen ? 288 : 280;
     gamegrid_abc_y = 13;
-    gamegrid_count_x = WideScreen ? 288 : 280;
-    gamegrid_count_y = 13;
     gamegrid_list_x = WideScreen ? 320 : 320;
     gamegrid_list_y = 13;
     gamegrid_grid_x = WideScreen ? 352 : 360;
@@ -235,14 +231,12 @@ void CTheme::SetDefault()
     gamegrid_lock_y = 13;
     gamegrid_dvd_x = WideScreen ? 448 : 480;
     gamegrid_dvd_y = 13;
-    gamecarousel_favorite_x = WideScreen ? 192 : 160;
+    gamecarousel_favorite_x = WideScreen ? 224 : 200;
     gamecarousel_favorite_y = 13;
-    gamecarousel_search_x = WideScreen ? 224 : 200;
+    gamecarousel_search_x = WideScreen ? 256 : 240;
     gamecarousel_search_y = 13;
-    gamecarousel_abc_x = WideScreen ? 256 : 240;
+    gamecarousel_abc_x = WideScreen ? 288 : 280;
     gamecarousel_abc_y = 13;
-    gamecarousel_count_x = WideScreen ? 288 : 280;
-    gamecarousel_count_y = 13;
     gamecarousel_list_x = WideScreen ? 320 : 320;
     gamecarousel_list_y = 13;
     gamecarousel_grid_x = WideScreen ? 352 : 360;
@@ -312,10 +306,6 @@ bool CTheme::SetSetting(char *name, char *value)
     CFG_COORDS2( gamelist_abc )
     CFG_COORDS2( gamegrid_abc )
     CFG_COORDS2( gamecarousel_abc )
-
-    CFG_COORDS2( gamelist_count )
-    CFG_COORDS2( gamegrid_count )
-    CFG_COORDS2( gamecarousel_count )
 
     CFG_COORDS2( gamelist_list )
     CFG_COORDS2( gamegrid_list )

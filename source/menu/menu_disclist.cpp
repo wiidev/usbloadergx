@@ -119,11 +119,8 @@ int MenuDiscList()
     GuiImageData imgsearchIcon(Resources::GetFile("searchIcon.png"), Resources::GetFileSize("searchIcon.png"));
     GuiImageData imgsearchIcon_gray(Resources::GetFile("searchIcon_gray.png"), Resources::GetFileSize("searchIcon_gray.png"));
     GuiImageData imgabcIcon(Resources::GetFile("abcIcon.png"), Resources::GetFileSize("abcIcon.png"));
-    GuiImageData imgabcIcon_gray(Resources::GetFile("abcIcon_gray.png"), Resources::GetFileSize("abcIcon_gray.png"));
     GuiImageData imgrankIcon(Resources::GetFile("rankIcon.png"), Resources::GetFileSize("rankIcon.png"));
-    GuiImageData imgrankIcon_gray(Resources::GetFile("rankIcon_gray.png"), Resources::GetFileSize("rankIcon_gray.png"));
     GuiImageData imgplayCountIcon(Resources::GetFile("playCountIcon.png"), Resources::GetFileSize("playCountIcon.png"));
-    GuiImageData imgplayCountIcon_gray(Resources::GetFile("playCountIcon_gray.png"), Resources::GetFileSize("playCountIcon_gray.png"));
     GuiImageData imgarrangeGrid(Resources::GetFile("arrangeGrid.png"), Resources::GetFileSize("arrangeGrid.png"));
     GuiImageData imgarrangeGrid_gray(Resources::GetFile("arrangeGrid_gray.png"), Resources::GetFileSize("arrangeGrid_gray.png"));
     GuiImageData imgarrangeList(Resources::GetFile("arrangeList.png"), Resources::GetFileSize("arrangeList.png"));
@@ -248,7 +245,7 @@ int MenuDiscList()
     gameInfo.SetTrigger(&trig2);
     gameInfo.SetSoundClick(btnClick2);
 
-    GuiTooltip favoriteBtnTT(tr( "Display favorites" ));
+    GuiTooltip favoriteBtnTT(tr( "Display favorites only" ));
     if (Settings.wsprompt) favoriteBtnTT.SetWidescreen(Settings.widescreen);
     favoriteBtnTT.SetAlpha(Theme.tooltipAlpha);
     GuiImage favoriteBtnImg(&imgfavIcon);
@@ -270,27 +267,32 @@ int MenuDiscList()
             Theme.gamelist_search_y, &trigA, &btnSoundOver, btnClick2, 1, &searchBtnTT, -15, 52, 0, 3);
     searchBtn.SetAlpha(180);
 
-    GuiTooltip abcBtnTT(Settings.GameSort == SORT_RANKING ? tr( "Sort by rank" ) : tr( "Sort alphabetically" ));
-    if (Settings.wsprompt) abcBtnTT.SetWidescreen(Settings.widescreen);
-    abcBtnTT.SetAlpha(Theme.tooltipAlpha);
-    GuiImage abcBtnImg(Settings.GameSort == SORT_RANKING ? &imgrankIcon : &imgabcIcon);
-    abcBtnImg.SetWidescreen(Settings.widescreen);
-    GuiImage abcBtnImg_g(Settings.GameSort == SORT_RANKING ? &imgrankIcon_gray : &imgabcIcon_gray);
-    abcBtnImg_g.SetWidescreen(Settings.widescreen);
-    GuiButton abcBtn(&abcBtnImg_g, &abcBtnImg_g, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_abc_x, Theme.gamelist_abc_y,
-            &trigA, &btnSoundOver, btnClick2, 1, &abcBtnTT, -15, 52, 0, 3);
-    abcBtn.SetAlpha(180);
+    const char * sortTTText = NULL;
+    GuiImageData * sortImgData = NULL;
 
-    GuiTooltip countBtnTT(tr( "Sort order by most played" ));
-    if (Settings.wsprompt) countBtnTT.SetWidescreen(Settings.widescreen);
-    countBtnTT.SetAlpha(Theme.tooltipAlpha);
-    GuiImage countBtnImg(&imgplayCountIcon);
-    countBtnImg.SetWidescreen(Settings.widescreen);
-    GuiImage countBtnImg_g(&imgplayCountIcon_gray);
-    countBtnImg_g.SetWidescreen(Settings.widescreen);
-    GuiButton countBtn(&countBtnImg_g, &countBtnImg_g, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_count_x,
-            Theme.gamelist_count_y, &trigA, &btnSoundOver, btnClick2, 1, &countBtnTT, -15, 52, 0, 3);
-    countBtn.SetAlpha(180);
+    if(Settings.GameSort & SORT_RANKING)
+    {
+        sortTTText = tr( "Sort by rank" );
+        sortImgData = &imgrankIcon;
+    }
+    else if(Settings.GameSort & SORT_PLAYCOUNT)
+    {
+        sortTTText = tr( "Sort order by most played");
+        sortImgData = &imgplayCountIcon;
+    }
+    else
+    {
+        sortTTText = tr("Sort alphabetically");
+        sortImgData = &imgabcIcon;
+    }
+
+    GuiTooltip sortBtnTT(sortTTText);
+    if (Settings.wsprompt) sortBtnTT.SetWidescreen(Settings.widescreen);
+    sortBtnTT.SetAlpha(Theme.tooltipAlpha);
+
+    GuiImage sortBtnImg(sortImgData);
+    sortBtnImg.SetWidescreen(Settings.widescreen);
+    GuiButton sortBtn(&sortBtnImg, &sortBtnImg, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_abc_x, Theme.gamelist_abc_y, &trigA, &btnSoundOver, btnClick2, 1, &sortBtnTT, -15, 52, 0, 3);
 
     GuiTooltip listBtnTT(tr( "Display as a list" ));
     if (Settings.wsprompt) listBtnTT.SetWidescreen(Settings.widescreen);
@@ -353,11 +355,6 @@ int MenuDiscList()
         lockBtn.SetToolTip(&unlockBtnTT, 15, 52, 1, 3);
     }
 
-    /*
-     GuiButton unlockBtn(&unlockBtnImg_g, &unlockBtnImg_g, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_lock_x, Theme.gamelist_lock_y, &trigA, &btnSoundOver, btnClick2,1, &lockBtnTT, 15, 52, 1, 3);
-     unlockBtn.SetAlpha(180);
-     */
-
     GuiTooltip dvdBtnTT(tr( "Mount DVD drive" ));
     if (Settings.wsprompt) dvdBtnTT.SetWidescreen(Settings.widescreen);
     dvdBtnTT.SetAlpha(Theme.tooltipAlpha);
@@ -379,7 +376,7 @@ int MenuDiscList()
     GuiButton homebrewBtn(&homebrewImg, &homebrewImgOver, ALIGN_LEFT, ALIGN_TOP, Theme.homebrew_x, Theme.homebrew_y,
             &trigA, &btnSoundOver, btnClick2, 1, &homebrewBtnTT, 15, -30, 1, 5);
 
-    if (Settings.GameSort == SORT_RANKING)
+    if (Settings.GameSort & SORT_FAVORITE)
     {
         favoriteBtn.SetImage(&favoriteBtnImg);
         favoriteBtn.SetImageOver(&favoriteBtnImg);
@@ -393,18 +390,6 @@ int MenuDiscList()
         searchBtn.SetImage(&searchBtnImg);
         searchBtn.SetImageOver(&searchBtnImg);
         searchBtn.SetAlpha(255);
-    }
-    if (Settings.GameSort == SORT_ABC)
-    {
-        abcBtn.SetImage(&abcBtnImg);
-        abcBtn.SetImageOver(&abcBtnImg);
-        abcBtn.SetAlpha(255);
-    }
-    else if (Settings.GameSort == SORT_PLAYCOUNT)
-    {
-        countBtn.SetImage(&countBtnImg);
-        countBtn.SetImageOver(&countBtnImg);
-        countBtn.SetAlpha(255);
     }
     if (Settings.gameDisplay == LIST_MODE)
     {
@@ -429,8 +414,7 @@ int MenuDiscList()
     {
         favoriteBtn.SetPosition(Theme.gamelist_favorite_x, Theme.gamelist_favorite_y);
         searchBtn.SetPosition(Theme.gamelist_search_x, Theme.gamelist_search_y);
-        abcBtn.SetPosition(Theme.gamelist_abc_x, Theme.gamelist_abc_y);
-        countBtn.SetPosition(Theme.gamelist_count_x, Theme.gamelist_count_y);
+        sortBtn.SetPosition(Theme.gamelist_abc_x, Theme.gamelist_abc_y);
         listBtn.SetPosition(Theme.gamelist_list_x, Theme.gamelist_list_y);
         gridBtn.SetPosition(Theme.gamelist_grid_x, Theme.gamelist_grid_y);
         carouselBtn.SetPosition(Theme.gamelist_carousel_x, Theme.gamelist_carousel_y);
@@ -441,8 +425,7 @@ int MenuDiscList()
     {
         favoriteBtn.SetPosition(Theme.gamegrid_favorite_x, Theme.gamegrid_favorite_y);
         searchBtn.SetPosition(Theme.gamegrid_search_x, Theme.gamegrid_search_y);
-        abcBtn.SetPosition(Theme.gamegrid_abc_x, Theme.gamegrid_abc_y);
-        countBtn.SetPosition(Theme.gamegrid_count_x, Theme.gamegrid_count_y);
+        sortBtn.SetPosition(Theme.gamegrid_abc_x, Theme.gamegrid_abc_y);
         listBtn.SetPosition(Theme.gamegrid_list_x, Theme.gamegrid_list_y);
         gridBtn.SetPosition(Theme.gamegrid_grid_x, Theme.gamegrid_grid_y);
         carouselBtn.SetPosition(Theme.gamegrid_carousel_x, Theme.gamegrid_carousel_y);
@@ -453,8 +436,7 @@ int MenuDiscList()
     {
         favoriteBtn.SetPosition(Theme.gamecarousel_favorite_x, Theme.gamecarousel_favorite_y);
         searchBtn.SetPosition(Theme.gamecarousel_search_x, Theme.gamecarousel_favorite_y);
-        abcBtn.SetPosition(Theme.gamecarousel_abc_x, Theme.gamecarousel_abc_y);
-        countBtn.SetPosition(Theme.gamecarousel_count_x, Theme.gamecarousel_count_y);
+        sortBtn.SetPosition(Theme.gamecarousel_abc_x, Theme.gamecarousel_abc_y);
         listBtn.SetPosition(Theme.gamecarousel_list_x, Theme.gamecarousel_list_y);
         gridBtn.SetPosition(Theme.gamecarousel_grid_x, Theme.gamecarousel_grid_y);
         carouselBtn.SetPosition(Theme.gamecarousel_carousel_x, Theme.gamecarousel_carousel_y);
@@ -553,23 +535,20 @@ int MenuDiscList()
     Toolbar[0] = &favoriteBtn;
     w.Append(&searchBtn);
     Toolbar[1] = &searchBtn;
-    w.Append(&abcBtn);
-    Toolbar[2] = &abcBtn;
-    w.Append(&countBtn);
-    Toolbar[3] = &countBtn;
+    w.Append(&sortBtn);
+    Toolbar[2] = &sortBtn;
     w.Append(&listBtn);
-    Toolbar[4] = &listBtn;
+    Toolbar[3] = &listBtn;
     w.Append(&gridBtn);
-    Toolbar[5] = &gridBtn;
+    Toolbar[4] = &gridBtn;
     w.Append(&carouselBtn);
-    Toolbar[6] = &carouselBtn;
+    Toolbar[5] = &carouselBtn;
     w.Append(&lockBtn);
-    Toolbar[7] = &lockBtn;
+    Toolbar[6] = &lockBtn;
     w.Append(&dvdBtn);
-    Toolbar[8] = &dvdBtn;
+    Toolbar[7] = &dvdBtn;
     w.SetUpdateCallback(DiscListWinUpdateCallback);
     // End Toolbar
-
 
     if (Settings.godmode == 1) w.Append(&homebrewBtn);
 
@@ -947,20 +926,16 @@ int MenuDiscList()
 
         else if (favoriteBtn.GetState() == STATE_CLICKED)
         {
-			if(Settings.GameSort != SORT_RANKING)
-			{
-				gprintf("\tfavoriteBtn Clicked\n");
-				Settings.GameSort = SORT_RANKING;
-				if (isInserted(Settings.BootDevice))
-				{
-					Settings.Save();
-				}
-				gameList.FilterList();
-				menu = MENU_DISCLIST;
-				break;
-			}
-			else
-			favoriteBtn.ResetState();
+            favoriteBtn.ResetState();
+            gprintf("\tfavoriteBtn Clicked\n");
+
+            if(Settings.GameSort & SORT_FAVORITE)
+                Settings.GameSort &= ~SORT_FAVORITE;
+            else
+                Settings.GameSort |= SORT_FAVORITE;
+            Settings.Save();
+            menu = MENU_DISCLIST;
+            break;
         }
 
         else if (searchBtn.GetState() == STATE_CLICKED && mountMethod != 3)
@@ -1048,41 +1023,28 @@ int MenuDiscList()
 
         }
 
-        else if (abcBtn.GetState() == STATE_CLICKED)
+        else if (sortBtn.GetState() == STATE_CLICKED)
         {
-            gprintf("\tabcBtn clicked\n");
-            if (Settings.GameSort != SORT_ABC)
+            sortBtn.ResetState();
+            gprintf("\tsortBtn clicked\n");
+            if(Settings.GameSort & SORT_ABC)
             {
-                Settings.GameSort = SORT_ABC;
-                if (isInserted(Settings.BootDevice))
-                {
-                    Settings.Save();
-                }
-                gameList.FilterList();
-
-                menu = MENU_DISCLIST;
-                break;
+                Settings.GameSort &= ~SORT_ABC;
+                Settings.GameSort |= SORT_RANKING;
             }
-            abcBtn.ResetState();
-        }
-
-        else if (countBtn.GetState() == STATE_CLICKED)
-        {
-            gprintf("\tcountBtn Clicked\n");
-            if (Settings.GameSort != SORT_PLAYCOUNT)
+            else if(Settings.GameSort & SORT_RANKING)
             {
-                Settings.GameSort = SORT_PLAYCOUNT;
-                if (isInserted(Settings.BootDevice))
-                {
-                    Settings.Save();
-                }
-                gameList.FilterList();
-
-                menu = MENU_DISCLIST;
-                break;
+                Settings.GameSort &= ~SORT_RANKING;
+                Settings.GameSort |= SORT_PLAYCOUNT;
             }
-            countBtn.ResetState();
-
+            else if(Settings.GameSort & SORT_PLAYCOUNT)
+            {
+                Settings.GameSort &= ~SORT_PLAYCOUNT;
+                Settings.GameSort |= SORT_ABC;
+            }
+            Settings.Save();
+            menu = MENU_DISCLIST;
+            break;
         }
 
         else if (listBtn.GetState() == STATE_CLICKED)

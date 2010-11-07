@@ -24,7 +24,7 @@ class GameList
     protected:
         static bool NameSortCallback(const struct discHdr *a, const struct discHdr *b);
         static bool PlaycountSortCallback(const struct discHdr *a, const struct discHdr *b);
-        static bool FavoriteSortCallback(const struct discHdr *a, const struct discHdr *b);
+        static bool RankingSortCallback(const struct discHdr *a, const struct discHdr *b);
 
         wString AvailableSearchChars;
         wString GameFilter;

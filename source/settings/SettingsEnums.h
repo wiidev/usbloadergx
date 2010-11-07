@@ -87,9 +87,11 @@ enum
 
 enum
 {
-    SORT_ABC = 0,
-    SORT_PLAYCOUNT,
-    SORT_RANKING,
+    //! Sorting should be used as AND to allow favorite ABC/RANK
+    SORT_ABC = 0x01,
+    SORT_PLAYCOUNT = 0x02,
+    SORT_RANKING = 0x04,
+    SORT_FAVORITE = 0x08,
 };
 enum
 {

@@ -54,7 +54,7 @@ GuiGameBrowser::GuiGameBrowser(int w, int h, int selected, int offset)
 
     bgGamesEntry = Resources::GetImageData("bg_options_entry.png");
 
-    scrollbar = Resources::GetImageData("sscrollbar.png");
+    scrollbar = Resources::GetImageData("scrollbar.png");
     scrollbarImg = new GuiImage(scrollbar);
     scrollbarImg->SetParent(this);
     scrollbarImg->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
@@ -275,7 +275,7 @@ int GuiGameBrowser::FindMenuItem(int currentItem, int direction)
 
     if (strlen(GameTitles.GetTitle(gameList[nextItem])) > 0)
         return nextItem;
-    
+
 	return FindMenuItem(nextItem, direction);
 }
 

@@ -53,7 +53,6 @@ void CSettings::SetDefault()
     snprintf(covers2d_path, sizeof(covers2d_path), "%s/images/2D/", BootDevice);
     snprintf(disc_path, sizeof(disc_path), "%s/images/disc/", BootDevice);
     snprintf(titlestxt_path, sizeof(titlestxt_path), "%s/config/", BootDevice);
-    snprintf(language_path, sizeof(language_path), "notset");
     snprintf(languagefiles_path, sizeof(languagefiles_path), "%s/config/language/", BootDevice);
     snprintf(update_path, sizeof(update_path), "%s/apps/usbloader_gx/", BootDevice);
     snprintf(theme_downloadpath, sizeof(theme_downloadpath), "%s/config/themes/", BootDevice);
@@ -64,6 +63,7 @@ void CSettings::SetDefault()
     snprintf(WipCodepath, sizeof(WipCodepath), "%s/wip/", BootDevice);
     snprintf(theme_path, sizeof(theme_path), "%s/theme/", BootDevice);
     snprintf(dolpath, sizeof(dolpath), "%s/", BootDevice);
+    strcpy(language_path, "");
     strcpy(ogg_path, "");
     strcpy(unlockCode, "");
 
@@ -74,6 +74,7 @@ void CSettings::SetDefault()
     hddinfo = CLOCK_HR12;
     sinfo = ON;
     rumble = ON;
+    GameSort = SORT_ABC;
     volume = 80;
     sfxvolume = 80;
     gamesoundvolume = 80;
@@ -81,7 +82,7 @@ void CSettings::SetDefault()
     gamesound = 1;
     parentalcontrol = 0;
     lockedgames = 0;
-    cios = 249;
+    cios = 222;
     xflip = XFLIP_NO;
     quickboot = OFF;
     wiilight = 1;
@@ -129,6 +130,14 @@ void CSettings::SetDefault()
 bool CSettings::Load()
 {
     FindConfig();
+    //! Reset default path variables to the right device
+    SetDefault();
+    //! Set up the default path in the classes
+    //! in case the config file does not exist yet
+    char tempPath[100];
+    snprintf(tempPath, sizeof(tempPath), "%s/config/", BootDevice);
+    GameStatistics.Load(tempPath);
+    GameSettings.Load(tempPath);
 
     char line[1024];
     char filepath[300];
@@ -154,6 +163,7 @@ bool CSettings::Load()
     GameStatistics.Load(GameSetPath);
     GameSettings.Load(GameSetPath);
     Theme.Load(theme_path);
+    this->LoadLanguage(this->language_path);
 
     return true;
 
@@ -201,7 +211,7 @@ bool CSettings::Save()
     fprintf(file, "gamesoundvolume = %d\n ", gamesoundvolume);
     fprintf(file, "tooltips = %d\n ", tooltips);
     fprintf(file, "password = %s\n ", unlockCode);
-    fprintf(file, "sort = %d\n ", GameSort);
+    fprintf(file, "GameSort = %d\n ", GameSort);
     fprintf(file, "cios = %d\n ", cios);
     fprintf(file, "keyset = %d\n ", keyset);
     fprintf(file, "xflip = %d\n ", xflip);
@@ -638,6 +648,7 @@ void CSettings::TrimLine(char *dest, char *src, int size)
     dest[len] = 0;
 }
 
+//! Get the language code from CONF
 static inline const char * GetLangCode(int langid)
 {
     switch (langid)
@@ -667,6 +678,40 @@ static inline const char * GetLangCode(int langid)
     }
 }
 
+//! Get language code from the selected language file
+//! eg. german.lang = DE and default to EN
+static inline const char * GetLangCode(const char * langpath)
+{
+    if(strcasestr(langpath, "japanese"))
+        return "JA";
+
+    else if(strcasestr(langpath, "german"))
+        return "DE";
+
+    else if(strcasestr(langpath, "french"))
+        return "FR";
+
+    else if(strcasestr(langpath, "spanish"))
+        return "ES";
+
+    else if(strcasestr(langpath, "italian"))
+        return "IT";
+
+    else if(strcasestr(langpath, "dutch"))
+        return "NL";
+
+    else if(strcasestr(langpath, "s_chinese"))
+        return "ZHCN";
+
+    else if(strcasestr(langpath, "t_chinese"))
+        return "ZHTW";
+
+    else if(strcasestr(langpath, "korean"))
+        return "KO";
+
+    return "EN";
+}
+
 bool CSettings::LoadLanguage(const char *path, int language)
 {
     bool ret = false;
@@ -690,7 +735,7 @@ bool CSettings::LoadLanguage(const char *path, int language)
 
         if (language == APP_DEFAULT)
         {
-            strcpy(language_path, langpath);
+            strcpy(language_path, "");
             gettextCleanUp();
             return true;
         }
@@ -741,8 +786,6 @@ bool CSettings::LoadLanguage(const char *path, int language)
 
         ret = gettextLoadLanguage(filepath);
         if (ret) strncpy(language_path, filepath, sizeof(language_path));
-
-        strcpy(db_language, GetLangCode(language));
     }
     else if (strlen(path) < 3)
     {
@@ -751,7 +794,12 @@ bool CSettings::LoadLanguage(const char *path, int language)
     else
     {
         ret = gettextLoadLanguage(path);
-        if (ret) strncpy(language_path, path, sizeof(language_path));
+        if (ret)
+        {
+            strncpy(language_path, path, sizeof(language_path));
+            strcpy(db_language, GetLangCode(language_path));
+        }
+
     }
 
     return ret;

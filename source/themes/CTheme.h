@@ -101,9 +101,6 @@ class CTheme
         short gamelist_abc_x;
         short gamelist_abc_y;
 
-        short gamelist_count_x;
-        short gamelist_count_y;
-
         short gamelist_list_x;
         short gamelist_list_y;
 
@@ -128,9 +125,6 @@ class CTheme
         short gamegrid_abc_x;
         short gamegrid_abc_y;
 
-        short gamegrid_count_x;
-        short gamegrid_count_y;
-
         short gamegrid_list_x;
         short gamegrid_list_y;
 
@@ -154,9 +148,6 @@ class CTheme
 
         short gamecarousel_abc_x;
         short gamecarousel_abc_y;
-
-        short gamecarousel_count_x;
-        short gamecarousel_count_y;
 
         short gamecarousel_list_x;
         short gamecarousel_list_y;

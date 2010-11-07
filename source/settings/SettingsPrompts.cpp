@@ -111,9 +111,9 @@ int MenuLanguageSelect()
     char fullpath[100];
     DirList Dir( Settings.languagefiles_path );
 
-    if ( !strcmp( "", Settings.languagefiles_path ) )
+    if ( !strcmp( "", Settings.language_path ) )
     {
-        sprintf( fullpath, "%s", tr( "Standard" ) );
+        sprintf( fullpath, "%s", tr( "Default" ) );
     }
     else
     {
@@ -234,7 +234,6 @@ int MenuLanguageSelect()
 
     while ( !returnhere )
     {
-
         if ( shutdown == 1 )
             Sys_Shutdown();
         else if ( reset == 1 )
@@ -242,7 +241,6 @@ int MenuLanguageSelect()
 
         else if ( backBtn.GetState() == STATE_CLICKED )
         {
-
             backBtn.ResetState();
             break;
         }
@@ -252,12 +250,8 @@ int MenuLanguageSelect()
             choice = WindowPrompt( tr( "Loading standard language." ), 0, tr( "OK" ), tr( "Cancel" ) );
             if ( choice == 1 )
             {
-                strcpy( Settings.language_path, "" );
+                Settings.LoadLanguage(NULL, APP_DEFAULT);
                 Settings.Save();
-                gettextCleanUp();
-                HaltGui();
-                Settings.Load();
-                ResumeGui();
                 returnhere = 2;
             }
             defaultBtn.ResetState();
@@ -367,26 +361,21 @@ int MenuLanguageSelect()
             choice = WindowPrompt( tr( "Do you want to change language?" ), 0, tr( "Yes" ), tr( "Cancel" ) );
             if ( choice == 1 )
             {
-                if ( isInserted( Settings.BootDevice ) )
+                char newLangPath[150];
+                snprintf( Settings.languagefiles_path, sizeof( Settings.languagefiles_path ), "%s", Dir.GetFilepath(ret));
+                snprintf( newLangPath, sizeof( newLangPath ), "%s/%s", Dir.GetFilepath(ret), Dir.GetFilename( ret ) );
+                if ( !CheckFile( newLangPath ) )
                 {
-                    snprintf( Settings.language_path, sizeof( Settings.language_path ), "%s%s", Settings.languagefiles_path, Dir.GetFilename( ret ) );
-                    Settings.Save();
-                    if ( !CheckFile( Settings.language_path ) )
-                    {
-                        sprintf( Settings.language_path, tr( "not set" ) );
-                        WindowPrompt( tr( "File not found." ), tr( "Loading standard language." ), tr( "OK" ) );
-                    }
-                    gettextCleanUp();
-                    HaltGui();
-                    Settings.Load();
-                    ResumeGui();
-                    returnhere = 2;
-                    break;
+                    WindowPrompt( tr( "File not found." ), tr( "Loading standard language." ), tr( "OK" ) );
+                    Settings.LoadLanguage(NULL, APP_DEFAULT);
                 }
                 else
                 {
-                    WindowPrompt( tr( "No SD-Card inserted!" ), tr( "Insert an SD-Card to save." ), tr( "OK" ), 0, 0, 0, -1 );
+                    Settings.LoadLanguage(newLangPath);
                 }
+                Settings.Save();
+                returnhere = 2;
+                break;
             }
             optionBrowser4.SetFocus( 1 );
         }
