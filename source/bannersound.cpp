@@ -123,7 +123,6 @@ const u8 *LoadBannerSound(const u8 *discid, u32 *size)
 {
     if (!discid) return NULL;
 
-    Disc_SetUSB(NULL);
     wbfs_disc_t *disc = WBFS_OpenDisc((u8 *) discid);
     if (!disc)
     {

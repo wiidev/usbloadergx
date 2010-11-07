@@ -12,6 +12,7 @@
 #include "disc.h"
 #include "video.h"
 #include "wdvd.h"
+#include "frag.h"
 #include "alternatedol.h"
 #include "memory/memory.h"
 #include "wbfs.h"
@@ -241,15 +242,10 @@ s32 Disc_Wait(void)
 
 s32 Disc_SetUSB(const u8 *id)
 {
-    u32 part = 0;
-    if (wbfs_part_fs)
-    {
-        part = wbfs_part_lba;
-    }
-    else
-    {
-        part = wbfs_part_idx ? wbfs_part_idx - 1 : 0;
-    }
+	if (wbfs_part_fs)
+		return set_frag_list((u8 *) id);
+
+    u32 part = wbfs_part_idx ? wbfs_part_idx - 1 : 0;
 
     /* Set USB mode */
     return WDVD_SetUSBMode((u8  *) id, part);
@@ -293,11 +289,10 @@ s32 Disc_JumpToEntrypoint(u8 videoselected, bool enablecheat)
     gprintf("USB Loader GX is done.\n");
 
     /* Shutdown IOS subsystems */
-    // fix for PeppaPig (from WiiFlow)
-	u8 temp_data[4];
-	memcpy(temp_data, (u8 *) 0x800000F4, 4);
-	SYS_ResetSystem(SYS_SHUTDOWN, 0, 0);
-	memcpy((u8 *) 0x800000F4, temp_data, 4);
+    extern void __exception_closeall();
+    u32 level = IRQ_Disable();
+    __IOS_ShutdownSubsystems();
+    __exception_closeall();
 
     if (enablecheat)
     {
@@ -322,6 +317,8 @@ s32 Disc_JumpToEntrypoint(u8 videoselected, bool enablecheat)
                 "blr\n"
         );
     }
+
+    IRQ_Restore(level);
 
     return 0;
 }

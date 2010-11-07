@@ -44,7 +44,6 @@ int DiscBrowse(struct discHdr * header, char * alternatedname, int alternatednam
 
     HaltGui();
 
-    Disc_SetUSB(NULL);
     wbfs_disc_t *disc = WBFS_OpenDisc((u8 *) header->id);
     if (!disc)
     {

@@ -79,6 +79,7 @@ s32 WDVD_Reset(void)
 	inbuf[0] = IOCTL_DI_RESET << 24;
 	inbuf[1] = 1;
 
+
 	ret = IOS_Ioctl(di_fd, IOCTL_DI_RESET, inbuf, sizeof(inbuf), outbuf, sizeof(outbuf));
 	if (ret < 0)
 		return ret;

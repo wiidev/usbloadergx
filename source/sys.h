@@ -13,7 +13,6 @@ void Sys_ShutdownToIdel(void);
 void Sys_ShutdownToStandby(void);
 void Sys_LoadMenu(void);
 void Sys_BackToLoader(void);
-bool Sys_IsHermes();
 void ScreenShot();
 
 #endif

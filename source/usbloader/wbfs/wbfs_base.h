@@ -17,8 +17,7 @@ class Wbfs
         s32 GameSize(u8 *, f32 *);
         wbfs_t *GetHddInfo(void);
         bool Mounted();
-        virtual int GetFragList(u8 *id);
-        virtual int GetFragList(char *filename, _frag_append_t append_fragment, FragList *);
+        virtual int GetFragList(u8 *id) { return 0; };
         virtual bool ShowFreeSpace(void);
 
         virtual s32 Open() = 0;

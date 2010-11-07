@@ -64,18 +64,6 @@ static const char *opts_partitions[3] = { trNOOP( "Game partition" ), trNOOP( "A
 static const char *opts_installdir[INSTALL_TO_MAX] = { trNOOP( "None" ), trNOOP( "GAMEID_Gamename" ),
         trNOOP( "Gamename [GAMEID]" ) };
 
-bool IsValidPartition(int fs_type, int cios)
-{
-    if (cios == 249 || cios == 250)
-    {
-        return fs_type == FS_TYPE_WBFS;
-    }
-    else
-    {
-        return fs_type == FS_TYPE_WBFS || fs_type == FS_TYPE_FAT32 || fs_type == FS_TYPE_NTFS;
-    }
-}
-
 /****************************************************************************
  * MenuSettings
  ***************************************************************************/
@@ -1008,26 +996,22 @@ int MenuSettings()
                                 if (firstRun) options2.SetName(Idx, "%s", tr( "Boot/Standard" ));
                                 if (ret == Idx && Settings.godmode == 1)
                                 {
-                                    switch (Settings.cios)
+                                    char entered[4];
+                                    snprintf(entered, sizeof(entered), "%i", Settings.cios);
+                                    if(OnScreenKeyboard(entered, sizeof(entered), 0))
                                     {
-                                        case 222:
-                                            Settings.cios = 223;
-                                            break;
-                                        case 223:
-                                            Settings.cios = 224;
-                                            break;
-                                        case 224:
-                                            Settings.cios = 249;
-                                            break;
-                                        case 249:
-                                            Settings.cios = 250;
-                                            break;
-                                        case 250:
-                                            Settings.cios = 222;
-                                            break;
-                                        default:
-                                            Settings.cios = 222;
-                                            break;
+                                        Settings.cios = atoi(entered);
+                                        if(Settings.cios < 200) Settings.cios = 200;
+                                        else if(Settings.cios > 255) Settings.cios = 255;
+
+                                        if(NandTitles.IndexOf(TITLE_ID(1, Settings.cios)) < 0)
+                                        {
+                                            WindowPrompt(tr("Warning:"), tr("This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."), tr("OK"));
+                                        }
+                                        else if(Settings.cios == 254)
+                                        {
+                                            WindowPrompt(tr("Warning:"), tr("This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."), tr("OK"));
+                                        }
                                     }
                                 }
                                 if (Settings.godmode == 1)
@@ -1041,12 +1025,12 @@ int MenuSettings()
                                 if (ret == Idx)
                                 {
                                     // Select the next valid partition, even if that's the same one
+									int fs_type = partitions.pinfo[Settings.partition].fs_type;
                                     do
                                     {
-                                        Settings.partition = Settings.partition + 1 == partitions.num ? 0
-                                                : Settings.partition + 1;
-                                    } while (!IsValidPartition(partitions.pinfo[Settings.partition].fs_type,
-                                            Settings.cios));
+                                        Settings.partition = (Settings.partition + 1) % partitions.num;
+										fs_type = partitions.pinfo[Settings.partition].fs_type;
+                                    } while (!(fs_type == FS_TYPE_WBFS || fs_type == FS_TYPE_FAT32 || fs_type == FS_TYPE_NTFS));
                                 }
 
                                 PartInfo pInfo = partitions.pinfo[Settings.partition];
@@ -2622,26 +2606,22 @@ int MenuGameSettings(struct discHdr * header)
                             if (firstRun) options2.SetName(Idx, "IOS");
                             if (ret == Idx)
                             {
-                                switch (game_cfg.ios)
+                                char entered[4];
+                                snprintf(entered, sizeof(entered), "%i", Settings.cios);
+                                if(OnScreenKeyboard(entered, sizeof(entered), 0))
                                 {
-                                    case 222:
-                                        game_cfg.ios = 223;
-                                        break;
-                                    case 223:
-                                        game_cfg.ios = 224;
-                                        break;
-                                    case 224:
-                                        game_cfg.ios = 249;
-                                        break;
-                                    case 249:
-                                        game_cfg.ios = 250;
-                                        break;
-                                    case 250:
-                                        game_cfg.ios = 222;
-                                        break;
-                                    default:
-                                        game_cfg.ios = 222;
-                                        break;
+                                    Settings.cios = atoi(entered);
+                                    if(Settings.cios < 200) Settings.cios = 200;
+                                    else if(Settings.cios > 255) Settings.cios = 255;
+
+                                    if(NandTitles.IndexOf(TITLE_ID(1, Settings.cios)) < 0)
+                                    {
+                                        WindowPrompt(tr("Warning:"), tr("This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."), tr("OK"));
+                                    }
+                                    else if(Settings.cios == 254)
+                                    {
+                                        WindowPrompt(tr("Warning:"), tr("This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."), tr("OK"));
+                                    }
                                 }
                             }
                             options2.SetValue(Idx, "IOS %i", game_cfg.ios);

@@ -817,86 +817,11 @@ bool Wbfs_Fat::is_gameid(char *id)
 int Wbfs_Fat::GetFragList(u8 *id)
 {
     char fname[1024];
-    char fname1[1024];
-    struct stat st;
-    FragList *fs = NULL;
-    FragList *fa = NULL;
-    FragList *fw = NULL;
-    int ret;
-    int i;
-    int is_wbfs = 0;
-    int ret_val = -1;
 
-    ret = FindFilename(id, fname, sizeof(fname));
+    int ret = FindFilename(id, fname, sizeof(fname));
     if (!ret) return -1;
 
-    if (strcasecmp(strrchr(fname, '.'), ".wbfs") == 0)
-    {
-        is_wbfs = 1;
-    }
-
-    fs = (FragList *) malloc(sizeof(FragList));
-    fa = (FragList *) malloc(sizeof(FragList));
-    fw = (FragList *) malloc(sizeof(FragList));
-
-    frag_init(fa, MAX_FRAG);
-
-    for (i = 0; i < 10; i++)
-    {
-        frag_init(fs, MAX_FRAG);
-        if (i > 0)
-        {
-            fname[strlen(fname) - 1] = '0' + i;
-            if (stat(fname, &st) == -1) break;
-        }
-        strcpy(fname1, fname);
-        if ((ret = GetFragList((char *) &fname, &_frag_append, fs)))
-        {
-            ret_val = ret;
-            goto out;
-        }
-        frag_concat(fa, fs);
-    }
-    frag_list = (FragList *) malloc(sizeof(FragList));
-    frag_init(frag_list, MAX_FRAG);
-    if (is_wbfs)
-    {
-        // if wbfs file format, remap.
-        //printf("=====\n");
-        wbfs_disc_t *d = OpenDisc(id);
-        if (!d) goto out;
-        frag_init(fw, MAX_FRAG);
-        ret = wbfs_get_fragments(d, &_frag_append, fw);
-        if (ret) goto out;
-        CloseDisc(d);
-        // DEBUG:
-        //frag_list->num = MAX_FRAG-10; // stress test
-        ret = frag_remap(frag_list, fw, fa);
-        if (ret) goto out;
-    }
-    else
-    {
-        // .iso does not need remap just copy
-        //printf("fa:\n");
-        memcpy(frag_list, fa, sizeof(FragList));
-    }
-
-    ret_val = 0;
-
-    out: if (ret_val)
-    {
-        // error
-        SAFE_FREE( frag_list );
-    }
-    SAFE_FREE( fs );
-    SAFE_FREE( fa );
-    SAFE_FREE( fw );
-    return ret_val;
-}
-
-int Wbfs_Fat::GetFragList(char *filename, _frag_append_t append_fragment, FragList *fs)
-{
-    return _FAT_get_fragments(filename, append_fragment, fs);
+    return get_frag_list_for_file(fname, id);
 }
 
 bool Wbfs_Fat::ShowFreeSpace(void)

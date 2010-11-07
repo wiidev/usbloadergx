@@ -30,7 +30,6 @@ class Wbfs_Fat: public Wbfs
         f32 EstimateGameSize();
 
         int GetFragList(u8 *);
-        virtual int GetFragList(char *, _frag_append_t, FragList *);
         virtual bool ShowFreeSpace(void);
 
     protected:

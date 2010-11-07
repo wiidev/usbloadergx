@@ -1,6 +1,7 @@
 #include "menu/menus.h"
 #include "mload/mload.h"
 #include "mload/mload_modules.h"
+#include "system/IosLoader.h"
 #include "usbloader/disc.h"
 #include "usbloader/apploader.h"
 #include "usbloader/wdvd.h"
@@ -137,7 +138,7 @@ int BootGame(const char * gameID)
 
     if(iosChoice != IOS_GetVersion())
     {
-        gprintf("Reloading into cIOS: %i\n", iosChoice);
+        gprintf("Reloading into game cIOS: %i...\n", iosChoice);
         IosLoader::LoadGameCios(iosChoice);
         if(MountGamePartition(false) < 0)
             return -1;
@@ -149,10 +150,6 @@ int BootGame(const char * gameID)
         ret = get_frag_list(header->id);
         gprintf("%d\n", ret);
 
-        gprintf("Setting fragment list...");
-        ret = set_frag_list(header->id);
-        gprintf("%d\n", ret);
-
         ret = Disc_SetUSB(header->id);
         if (ret < 0) Sys_BackToLoader();
         gprintf("\tUSB set to game\n");
@@ -162,9 +159,12 @@ int BootGame(const char * gameID)
         gprintf("\tUSB not set, loading DVD\n");
     }
 
+    gprintf("Disc_Open()...");
     ret = Disc_Open();
+    gprintf("%d\n", ret);
 
-    if (ret < 0) Sys_BackToLoader();
+    if (ret < 0)
+        Sys_BackToLoader();
 
     if (dvdheader) delete dvdheader;
 
@@ -172,7 +172,7 @@ int BootGame(const char * gameID)
     ret = do_bca_code(header->id);
     gprintf("%d\n", ret);
 
-    if (reloadblock == ON && Sys_IsHermes())
+    if (reloadblock == ON && IosLoader::IsHermesIOS())
     {
         enable_ES_ioctlv_vector();
         if (load_from_fs == PART_FS_WBFS)

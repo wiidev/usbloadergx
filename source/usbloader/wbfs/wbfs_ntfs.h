@@ -13,7 +13,6 @@ class Wbfs_Ntfs: public Wbfs_Fat
 
         virtual s32 Open();
 
-        int GetFragList(char *filename, _frag_append_t append_fragment, FragList *fs);
         bool ShowFreeSpace(void);
 };
 

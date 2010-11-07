@@ -162,13 +162,6 @@ void Sys_BackToLoader(void)
     Sys_LoadMenu();
 }
 
-bool Sys_IsHermes()
-{
-    int ios = IOS_GetVersion();
-
-    return ios == 222 || ios == 223 || ios == 224;
-}
-
 void ScreenShot()
 {
     time_t rawtime;

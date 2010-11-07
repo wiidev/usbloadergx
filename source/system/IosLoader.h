@@ -1,7 +1,7 @@
 #ifndef _IOSLOADER_H_
 #define _IOSLOADER_H_
 
-#include <gctypes.h>
+#include <gccore.h>
 
 class IosLoader
 {
@@ -9,6 +9,8 @@ class IosLoader
         static s32 LoadAppCios();
         static s32 LoadGameCios(s32 ios);
         static s32 ReloadIosSafe(s32 ios);
+        static bool IsHermesIOS(s32 ios = IOS_GetVersion());
+        static bool IsWaninkokoIOS(s32 ios = IOS_GetVersion());
     private:
         static void LoadIOSModules(s32 ios, s32 ios_rev);
 };

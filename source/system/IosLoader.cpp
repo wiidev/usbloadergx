@@ -17,11 +17,31 @@
 #include "mload/modules/ehcmodule_5.h"
 #include "mload/modules/dip_plugin_249.h"
 #include "mload/modules/odip_frag.h"
+#include "gecko.h"
 
 
 /******************************************************************************
  * Public Methods:
  ******************************************************************************/
+/*
+ * Check if the ios passed is a Hermes ios.
+ */
+bool IosLoader::IsHermesIOS(s32 ios)
+{
+    return (ios == 222 || ios == 223 || ios == 224 || ios == 202);
+}
+
+/*
+ * Check if the ios passed is a Waninkoko ios.
+ */
+bool IosLoader::IsWaninkokoIOS(s32 ios)
+{
+    if(ios < 200 || ios > 255)
+        return false;
+
+    return !IsHermesIOS(ios);
+}
+
 /*
  * Loads CIOS (If possible the one from the settings file).
  * @return 0 if a cios has been successfully loaded. Else a value below 0 is returned.
@@ -102,34 +122,21 @@ s32 IosLoader::LoadGameCios(s32 ios)
  */
 s32 IosLoader::ReloadIosSafe(s32 ios)
 {
-    switch (ios)
+    if(IsHermesIOS(ios))
     {
-        case 222:
-        {
-            s32 ios222rev = NandTitles.VersionOf(0x1000000deULL);
-            if (ios222rev == 4 || ios222rev == 5 || ios222rev == 65535) break;
-            return -2;
-        }
-        case 223:
-        {
-            s32 ios223rev = NandTitles.VersionOf(0x1000000dfULL);
-            if (ios223rev == 4 || ios223rev == 5 || ios223rev == 65535) break;
-            return -2;
-        }
-        case 249:
-        {
-            s32 ios249rev = NandTitles.VersionOf(0x1000000f9ULL);
-            if (ios249rev < 9 || ios249rev == 65280) return -2;
-            break;
-        }
-        case 250:
-        {
-            s32 ios250rev = NandTitles.VersionOf(0x1000000faULL);
-            if (ios250rev < 9 || ios250rev == 65280) return -2;
-            break;
-        }
-        default:
-            return -3;
+        s32 iosRev = NandTitles.VersionOf(TITLE_ID(1, ios));
+        if((iosRev < 2 || iosRev > 5) && iosRev != 65535)
+            return -11;
+    }
+    else if(IsWaninkokoIOS(ios))
+    {
+        s32 iosRev = NandTitles.VersionOf(TITLE_ID(1, ios));
+        if(iosRev < 9 || iosRev > 30) //let's see if Waninkoko actually gets to 30
+            return -22;
+    }
+    else
+    {
+        return -33;
     }
 
     s32 r = IOS_ReloadIOS(ios);
@@ -146,7 +153,7 @@ s32 IosLoader::ReloadIosSafe(s32 ios)
 void IosLoader::LoadIOSModules(s32 ios, s32 ios_rev)
 {
     //! Hermes IOS
-    if(ios == 222 || ios == 223 || ios == 224)
+    if(IsHermesIOS(ios))
     {
         const u8 * ech_module = NULL;
         int ehc_module_size = 0;
@@ -160,18 +167,21 @@ void IosLoader::LoadIOSModules(s32 ios, s32 ios_rev)
                 ehc_module_size = ehcmodule_2_size;
                 dip_plugin = dip_plugin_2;
                 dip_plugin_size = dip_plugin_2_size;
+                gprintf("Loading ehc and dip module v2\n");
                 break;
             case 3:
                 ech_module = ehcmodule_3;
                 ehc_module_size = ehcmodule_3_size;
                 dip_plugin = dip_plugin_3;
                 dip_plugin_size = dip_plugin_3_size;
+                gprintf("Loading ehc and dip module v3\n");
                 break;
             default:
                 ech_module = ehcmodule_5;
                 ehc_module_size = ehcmodule_5_size;
                 dip_plugin = odip_frag;
                 dip_plugin_size = odip_frag_size;
+                gprintf("Loading ehc v5 and opendip module\n");
                 break;
         }
 
@@ -180,18 +190,20 @@ void IosLoader::LoadIOSModules(s32 ios, s32 ios_rev)
         {
             ehc_cfg += 12;
             ehc_cfg[0] = 0; // USB Port 0
+            gprintf("Patched ehc module to use usb port 0.\n");
         }
 
         load_modules(ech_module, ehc_module_size, dip_plugin, dip_plugin_size);
     }
     //! Waninkoko IOS
-    else if(ios == 249 || ios == 250)
+    else if(IsWaninkokoIOS(ios))
     {
         if(ios_rev >= 18)
         {
             if(mload_init() < 0)
                 return;
 
+            gprintf("Loading dip module for Waninkoko's cios\n");
             mload_module((u8 *) dip_plugin_249, dip_plugin_249_size);
             mload_close();
         }

@@ -137,15 +137,6 @@ bool Wbfs::Mounted()
     return hdd == NULL;
 }
 
-int Wbfs::GetFragList(u8 *id)
-{
-    return 0;
-}
-
-int Wbfs::GetFragList(char *filename, _frag_append_t append_fragment, FragList *)
-{
-    return 0;
-}
 
 bool Wbfs::ShowFreeSpace(void)
 {
