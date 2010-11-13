@@ -17,6 +17,7 @@
 #include "settings/GameTitles.h"
 #include "usbloader/GameList.h"
 #include "themes/CTheme.h"
+#include "menu.h"
 
 #include <string.h>
 #include <sstream>
@@ -41,7 +42,6 @@ GuiGameBrowser::GuiGameBrowser(int w, int h, int selected, int offset)
     trigA->SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
     trigHeldA = new GuiTrigger;
     trigHeldA->SetHeldTrigger(-1, WPAD_BUTTON_A, PAD_BUTTON_A);
-    btnSoundClick = new GuiSound(button_click_pcm, button_click_pcm_size, Settings.sfxvolume);
 
     bgGames = Resources::GetImageData("bg_options.png");
     newGames = Resources::GetImageData("new.png");
@@ -182,7 +182,6 @@ GuiGameBrowser::~GuiGameBrowser()
 
     delete trigA;
     delete trigHeldA;
-    delete btnSoundClick;
 
     for (int i = 0; i < pagesize; i++)
     {

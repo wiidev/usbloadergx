@@ -43,8 +43,6 @@ class GuiGameCarousel: public GuiElement
         GuiImageData * imgLeft;
         GuiImageData * imgRight;
 
-        GuiSound * btnSoundOver;
-        GuiSound * btnSoundClick;
         GuiTrigger * trigA;
         GuiTrigger * trigL;
         GuiTrigger * trigR;

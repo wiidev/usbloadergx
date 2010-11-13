@@ -120,11 +120,6 @@ s32 Wad_Install(FILE *fp)
     promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     promptWindow.SetPosition(0, -10);
 
-    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-
     GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
     GuiImageData dialogBox(Resources::GetFile("dialogue_box.png"), Resources::GetFileSize("dialogue_box.png"));
     GuiTrigger trigA;
@@ -143,7 +138,7 @@ s32 Wad_Install(FILE *fp)
         btn1Txt.SetWidescreen(Settings.widescreen);
         btn1Img.SetWidescreen(Settings.widescreen);
     }
-    GuiButton btn1(&btn1Img, &btn1Img, 2, 4, 0, -35, &trigA, &btnSoundOver, btnClick2, 1);
+    GuiButton btn1(&btn1Img, &btn1Img, 2, 4, 0, -35, &trigA, btnSoundOver, btnSoundClick2, 1);
     btn1.SetLabel(&btn1Txt);
     btn1.SetState(STATE_SELECTED);
 
@@ -305,7 +300,7 @@ s32 Wad_Install(FILE *fp)
 
     // Get TMD info
     tmd_data = (tmd *) SIGNATURE_PAYLOAD(p_tmd);
-	
+
 	char imgPath[150];
 
     // Install contents
@@ -439,11 +434,6 @@ s32 Wad_Uninstall(FILE *fp)
     promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     promptWindow.SetPosition(0, -10);
 
-    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-
     GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
     GuiImageData dialogBox(Resources::GetFile("dialogue_box.png"), Resources::GetFileSize("dialogue_box.png"));
     GuiTrigger trigA;
@@ -462,7 +452,7 @@ s32 Wad_Uninstall(FILE *fp)
         btn1Txt.SetWidescreen(Settings.widescreen);
         btn1Img.SetWidescreen(Settings.widescreen);
     }
-    GuiButton btn1(&btn1Img, &btn1Img, 2, 4, 0, -55, &trigA, &btnSoundOver, btnClick2, 1);
+    GuiButton btn1(&btn1Img, &btn1Img, 2, 4, 0, -55, &trigA, btnSoundOver, btnSoundClick2, 1);
     btn1.SetLabel(&btn1Txt);
     btn1.SetState(STATE_SELECTED);
 

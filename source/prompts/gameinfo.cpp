@@ -137,9 +137,6 @@ int showGameInfo(char *ID)
         txtWindow.SetAlignment(ALIGN_CENTRE, ALIGN_RIGHT);
         txtWindow.SetPosition(95, 55);
 
-        GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-        GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-		
         GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
         GuiImageData dialogBox1(Resources::GetFile("gameinfo1.png"), Resources::GetFileSize("gameinfo1.png"));
         GuiImageData dialogBox2(Resources::GetFile("gameinfo1a.png"), Resources::GetFileSize("gameinfo1a.png"));
@@ -305,7 +302,7 @@ int showGameInfo(char *ID)
         gameinfoWindow.Append(dialogBoxImg2);
         gameinfoWindow.Append(dialogBoxImg3);
         gameinfoWindow.Append(dialogBoxImg4);
-		
+
 		char imgPath[150];
         snprintf(imgPath, sizeof(imgPath), "%s%s.png", Settings.covers_path, ID);
         cover = new GuiImageData(imgPath); //load full id image

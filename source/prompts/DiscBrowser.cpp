@@ -36,7 +36,7 @@ extern u8 reset;
 /********************************************************************************
  *Disk Browser
  *********************************************************************************/
-int DiscBrowse(struct discHdr * header, char * alternatedname, int alternatedname_size)
+int DiscBrowse(const char * GameID, char * alternatedname, int alternatedname_size)
 {
     gprintf("\nDiscBrowser() started");
     bool exit = false;
@@ -44,7 +44,7 @@ int DiscBrowse(struct discHdr * header, char * alternatedname, int alternatednam
 
     HaltGui();
 
-    wbfs_disc_t *disc = WBFS_OpenDisc((u8 *) header->id);
+    wbfs_disc_t *disc = WBFS_OpenDisc((u8 *) GameID);
     if (!disc)
     {
         ResumeGui();
@@ -98,11 +98,6 @@ int DiscBrowse(struct discHdr * header, char * alternatedname, int alternatednam
         return -1;
     }
 
-    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-
     GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
     GuiImageData settingsbg(Resources::GetFile("settings_background.png"), Resources::GetFileSize("settings_background.png"));
 
@@ -113,7 +108,7 @@ int DiscBrowse(struct discHdr * header, char * alternatedname, int alternatednam
     GuiTrigger trigB;
     trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 
-    GuiText titleTxt(GameTitles.GetTitle(header), 28, ( GXColor ) {0, 0, 0, 255});
+    GuiText titleTxt(GameTitles.GetTitle(GameID), 28, ( GXColor ) {0, 0, 0, 255});
     titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     titleTxt.SetPosition(12, 40);
     titleTxt.SetMaxWidth(356, SCROLL_HORIZONTAL);
@@ -132,7 +127,7 @@ int DiscBrowse(struct discHdr * header, char * alternatedname, int alternatednam
         cancelBtnTxt.SetWidescreen(Settings.widescreen);
         cancelBtnImg.SetWidescreen(Settings.widescreen);
     }
-    GuiButton cancelBtn(&cancelBtnImg, &cancelBtnImg, 2, 3, 180, 400, &trigA, &btnSoundOver, btnClick2, 1);
+    GuiButton cancelBtn(&cancelBtnImg, &cancelBtnImg, 2, 3, 180, 400, &trigA, btnSoundOver, btnSoundClick2, 1);
     cancelBtn.SetScale(0.9);
     cancelBtn.SetLabel(&cancelBtnTxt);
     cancelBtn.SetTrigger(&trigB);
@@ -300,7 +295,7 @@ int autoSelectDolMenu(const char *id, bool force)
     //Indiana Jones and the Staff of Kings (Fate of Atlantis)
     if (strcmp(id, "RJ8E64") == 0)
     {
-        int choice = WindowPrompt(tr( "Select a DOL" ), 0, "Fate of Atlantis", tr( "Default" ));
+        int choice = WindowPrompt(tr( "Select a DOL" ), 0, "Fate of Atlantis", tr( "Cancel" ));
         switch (choice)
         {
             case 1:
@@ -314,7 +309,7 @@ int autoSelectDolMenu(const char *id, bool force)
     }
     if (strcmp(id, "RJ8P64") == 0)
     {
-        int choice = WindowPrompt(tr( "Select a DOL" ), 0, "Fate of Atlantis", tr( "Default" ));
+        int choice = WindowPrompt(tr( "Select a DOL" ), 0, "Fate of Atlantis", tr( "Cancel" ));
         switch (choice)
         {
             case 1:
@@ -330,7 +325,7 @@ int autoSelectDolMenu(const char *id, bool force)
     //Metal Slug Anthology (Metal Slug 6)
     if (strcmp(id, "RMLEH4") == 0)
     {
-        int choice = WindowPrompt(tr( "Select a DOL" ), 0, "Metal Slug 6", tr( "Default" ));
+        int choice = WindowPrompt(tr( "Select a DOL" ), 0, "Metal Slug 6", tr( "Cancel" ));
         switch (choice)
         {
             case 1:
@@ -344,7 +339,7 @@ int autoSelectDolMenu(const char *id, bool force)
     }
     if (strcmp(id, "RMLP7U") == 0)
     {
-        int choice = WindowPrompt(tr( "Select a DOL" ), 0, "Metal Slug 6", tr( "Default" ));
+        int choice = WindowPrompt(tr( "Select a DOL" ), 0, "Metal Slug 6", tr( "Cancel" ));
         switch (choice)
         {
             case 1:
@@ -367,8 +362,7 @@ int autoSelectDolMenu(const char *id, bool force)
          return -1;
          }
          */
-        int choice = WindowPrompt(tr( "Select a DOL" ), 0, "Metroid Prime", "Metroid Prime 2", "Metroid Prime 3",
-                tr( "Default" ));
+        int choice = WindowPrompt(tr( "Select a DOL" ), 0, "Metroid Prime", "Metroid Prime 2", "Metroid Prime 3", tr( "Cancel" ));
         switch (choice)
         {
             case 1:
@@ -394,8 +388,7 @@ int autoSelectDolMenu(const char *id, bool force)
          return -1;
          }
          */
-        int choice = WindowPrompt(tr( "Select a DOL" ), 0, "Metroid Prime", "Metroid Prime 2", "Metroid Prime 3",
-                tr( "Default" ));
+        int choice = WindowPrompt(tr( "Select a DOL" ), 0, "Metroid Prime", "Metroid Prime 2", "Metroid Prime 3", tr( "Cancel" ));
         switch (choice)
         {
             case 1:
@@ -417,7 +410,7 @@ int autoSelectDolMenu(const char *id, bool force)
     //Rampage: Total Destruction (M1.dol=Rampage, jarvos.dol=Rampage World Tour)
     if (strcmp(id, "RPGP5D") == 0)
     {
-        int choice = WindowPrompt(tr( "Select a DOL" ), 0, "Rampage", "World Tour", tr( "Default" ));
+        int choice = WindowPrompt(tr( "Select a DOL" ), 0, "Rampage", "World Tour", tr( "Cancel" ));
         switch (choice)
         {
             case 1:
@@ -436,7 +429,7 @@ int autoSelectDolMenu(const char *id, bool force)
     //The House Of The Dead 2 & 3 Return (only to play 2)
     if (strcmp(id, "RHDE8P") == 0)
     {
-        int choice = WindowPrompt(tr( "Select a DOL" ), 0, "HotD 2", tr( "Default" ));
+        int choice = WindowPrompt(tr( "Select a DOL" ), 0, "HotD 2", tr( "Cancel" ));
         switch (choice)
         {
             case 1:
@@ -450,7 +443,7 @@ int autoSelectDolMenu(const char *id, bool force)
     }
     if (strcmp(id, "RHDP8P") == 0)
     {
-        int choice = WindowPrompt(tr( "Select a DOL" ), 0, "HotD 2", tr( "Default" ));
+        int choice = WindowPrompt(tr( "Select a DOL" ), 0, "HotD 2", tr( "Cancel" ));
         switch (choice)
         {
             case 1:

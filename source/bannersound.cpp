@@ -9,6 +9,7 @@
 #include "libs/libwbfs/libwbfs.h"
 #include "language/gettext.h"
 #include "bannersound.h"
+#include "utils/uncompress.h"
 
 struct IMD5Header
 {
@@ -65,58 +66,6 @@ struct LZ77Info
 static char *u8Filename(const U8Entry *fst, int i)
 {
     return (char *) (fst + fst[0].numEntries) + fst[i].nameOffset;
-}
-
-inline u32 le32(u32 i)
-{
-    return ((i & 0xFF) << 24) | ((i & 0xFF00) << 8) | ((i & 0xFF0000) >> 8) | ((i & 0xFF000000) >> 24);
-}
-
-inline u16 le16(u16 i)
-{
-    return ((i & 0xFF) << 8) | ((i & 0xFF00) >> 8);
-}
-
-static u8 *uncompressLZ77(const u8 *inBuf, u32 inLength, u32 &size)
-{
-    u8 *buffer = NULL;
-    if (inLength <= 0x8 || *((const u32 *) inBuf) != 0x4C5A3737 /*"LZ77"*/|| inBuf[4] != 0x10) return NULL;
-    u32 uncSize = le32(((const u32 *) inBuf)[1] << 8);
-
-    const u8 *inBufEnd = inBuf + inLength;
-    inBuf += 8;
-    buffer = new (std::nothrow) u8[uncSize];
-    if (!buffer) return buffer;
-
-    u8 *bufCur = buffer;
-    u8 *bufEnd = buffer + uncSize;
-
-    while (bufCur < bufEnd && inBuf < inBufEnd)
-    {
-        u8 flags = *inBuf;
-        ++inBuf;
-        for (int i = 0; i < 8 && bufCur < bufEnd && inBuf < inBufEnd; ++i)
-        {
-            if ((flags & 0x80) != 0)
-            {
-                const LZ77Info &info = *(const LZ77Info *) inBuf;
-                inBuf += sizeof(LZ77Info);
-                int length = info.length + 3;
-                if (bufCur - info.offset - 1 < buffer || bufCur + length > bufEnd) return buffer;
-                memcpy(bufCur, bufCur - info.offset - 1, length);
-                bufCur += length;
-            }
-            else
-            {
-                *bufCur = *inBuf;
-                ++inBuf;
-                ++bufCur;
-            }
-            flags <<= 1;
-        }
-    }
-    size = uncSize;
-    return buffer;
 }
 
 const u8 *LoadBannerSound(const u8 *discid, u32 *size)
@@ -181,7 +130,7 @@ const u8 *LoadBannerSound(const u8 *discid, u32 *size)
     if (*((u32*) soundChunk) == 0x4C5A3737 /*"LZ77"*/)
     {
         u32 uncSize = 0;
-        u8 * uncompressed_data = uncompressLZ77(soundChunk, soundChunkSize, uncSize);
+        u8 * uncompressed_data = uncompressLZ77(soundChunk, soundChunkSize, &uncSize);
         if (!uncompressed_data)
         {
             //  WindowPrompt(tr("Can't decompress LZ77"), 0, tr("OK"));
@@ -192,7 +141,7 @@ const u8 *LoadBannerSound(const u8 *discid, u32 *size)
         free(opening_bnr);
         return uncompressed_data;
     }
-    u8 *out = new (std::nothrow) u8[soundChunkSize];
+    u8 *out = (u8 *) malloc(soundChunkSize);
     if (out)
     {
         memcpy(out, soundChunk, soundChunkSize);

@@ -82,6 +82,7 @@ void USBDevice_deInit()
     fatUnmount("USB:/");
     //only shutdown libogc usb and not the cios one
     __io_usbstorage.shutdown();
+    __io_usbstorage2.shutdown();
 
     fat_usb_mount = 0;
     fat_usb_sec = 0;

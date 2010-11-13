@@ -38,8 +38,6 @@ GuiOptionBrowser::GuiOptionBrowser(int w, int h, OptionList * l, const char *ima
     trigHeldA = new GuiTrigger;
     trigHeldA->SetHeldTrigger(-1, WPAD_BUTTON_A, PAD_BUTTON_A);
 
-    btnSoundClick = new GuiSound(button_click_pcm, button_click_pcm_size, Settings.sfxvolume);
-
     bgOptions = Resources::GetImageData(imagebg);
     bgOptionsImg = new GuiImage(bgOptions);
     bgOptionsImg->SetParent(this);
@@ -152,7 +150,6 @@ GuiOptionBrowser::GuiOptionBrowser(int w, int h, OptionList * l, const char *ima
     trigA->SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
     trigHeldA = new GuiTrigger;
     trigHeldA->SetHeldTrigger(-1, WPAD_BUTTON_A, PAD_BUTTON_A);
-    btnSoundClick = new GuiSound(button_click_pcm, button_click_pcm_size, Settings.sfxvolume);
 
     bgOptions = Resources::GetImageData(imagebg);
 
@@ -276,7 +273,6 @@ GuiOptionBrowser::~GuiOptionBrowser()
     loaded = 0;
 
     delete trigA;
-    delete btnSoundClick;
 
     //  delete optionBg;
     for (int i = 0; i < PAGESIZE; i++)

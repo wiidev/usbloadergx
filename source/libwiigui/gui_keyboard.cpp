@@ -13,6 +13,7 @@
 #include "../settings/CSettings.h"
 #include <stdio.h>
 #include <string.h>
+#include "menu.h"
 /**
  * Constructor for the GuiKeyboard class.
  */
@@ -136,8 +137,6 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
     keyLarge = new GuiImageData(keyboard_largekey_over_png, keyboard_largekey_over_png_size);
     keyLargeOver = new GuiImageData(keyboard_largekey_over_png, keyboard_largekey_over_png_size);
 
-    keySoundOver = new GuiSound(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    keySoundClick = new GuiSound(button_click_pcm, button_click_pcm_size, Settings.sfxvolume);
     trigA = new GuiTrigger;
     trigA->SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
     trigB = new GuiTrigger;
@@ -161,11 +160,9 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
         keyBackText = new GuiText("Back", 20, ( GXColor )
         {   0, 0, 0, 0xff});
     }
-    //GuiButton(GuiImage* img, GuiImage* imgOver, int hor, int vert, int x, int y, GuiTrigger* trig, GuiSound* sndOver, GuiSound* sndClick, u8 grow);
-
     //keyBack = new GuiButton(keyMedium->GetWidth(), keyMedium->GetHeight());
     keyBack = new GuiButton(keyBackImg, keyBackOverImg, 0, 3, 11 * 42 + 40 + eurocheck, 0 * 42 + 120, trigA,
-            keySoundOver, keySoundClick, 1);
+            btnSoundOver, btnSoundClick, 1);
     //keyBack->SetImage(keyBackImg);
     //keyBack->SetImageOver(keyBackOverImg);
     keyBack->SetLabel(keyBackText);
@@ -366,8 +363,6 @@ GuiKeyboard::~GuiKeyboard()
     delete keyMediumOver;
     delete keyLarge;
     delete keyLargeOver;
-    delete keySoundOver;
-    delete keySoundClick;
     delete trigA;
     delete trigB;
 

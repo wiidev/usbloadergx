@@ -43,7 +43,9 @@ GuiImageData * pointer[4];
 GuiImage * bgImg = NULL;
 GuiImageData * background = NULL;
 GuiBGM * bgMusic = NULL;
-GuiSound *btnClick2 = NULL;
+GuiSound *btnSoundClick = NULL;
+GuiSound *btnSoundClick2 = NULL;
+GuiSound *btnSoundOver = NULL;
 
 int currentMenu;
 u8 mountMethod = 0;
@@ -265,6 +267,10 @@ int MainMenu(int menu)
     if (Settings.autonetwork)
         ResumeNetworkThread();
 
+    btnSoundClick = new GuiSound(button_click_wav, button_click_wav_size, Settings.sfxvolume);
+    btnSoundClick2 = new GuiSound(button_click2_wav, button_click2_wav_size, Settings.sfxvolume);
+    btnSoundOver = new GuiSound(button_over_wav, button_over_wav_size, Settings.sfxvolume);
+
     pointer[0] = Resources::GetImageData("player1_point.png");
     pointer[1] = Resources::GetImageData("player2_point.png");
     pointer[2] = Resources::GetImageData("player3_point.png");
@@ -279,10 +285,15 @@ int MainMenu(int menu)
 
     ResumeGui();
 
+    gprintf("Vor bgm\n");
     bgMusic = new GuiBGM(bg_music_ogg, bg_music_ogg_size, Settings.volume);
+    gprintf("new bgm\n");
     bgMusic->SetLoop(Settings.musicloopmode); //loop music
+    gprintf("SetLoop\n");
     bgMusic->Load(Settings.ogg_path);
+    gprintf("Load\n");
     bgMusic->Play();
+    gprintf("Nach bgm\n");
 
     MountGamePartition();
 

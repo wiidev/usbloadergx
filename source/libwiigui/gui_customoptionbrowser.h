@@ -1,4 +1,8 @@
+#ifndef GUI_CUSTOMBROWSER_H_
+#define GUI_CUSTOMBROWSER_H_
+
 #include "gui.h"
+#include <vector>
 
 //!Display a list of menu options
 class GuiCustomOptionBrowser: public GuiElement
@@ -20,17 +24,16 @@ class GuiCustomOptionBrowser: public GuiElement
         void UpdateListEntries();
         int selectedItem;
         int listOffset;
-        int size;
         int coL2;
         int scrollbaron;
 
         OptionList * options;
-        int * optionIndex;
-        GuiButton ** optionBtn;
-        GuiText ** optionTxt;
-        GuiText ** optionVal;
-        GuiText ** optionValOver;
-        GuiImage ** optionBg;
+        int optionIndex[PAGESIZE];
+        GuiButton * optionBtn[PAGESIZE];
+        GuiText * optionTxt[PAGESIZE];
+        GuiText * optionVal[PAGESIZE];
+        GuiText * optionValOver[PAGESIZE];
+        GuiImage * optionBg[PAGESIZE];
 
         GuiButton * arrowUpBtn;
         GuiButton * arrowDownBtn;
@@ -55,7 +58,8 @@ class GuiCustomOptionBrowser: public GuiElement
         GuiImageData * scrollbarBox;
         GuiImageData * scrollbarBoxOver;
 
-        GuiSound * btnSoundClick;
         GuiTrigger * trigA;
         GuiTrigger * trigHeldA;
 };
+
+#endif

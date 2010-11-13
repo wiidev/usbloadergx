@@ -161,7 +161,7 @@ int MountGamePartition(bool ShowGUI)
 
     // open database if needed, load titles if needed
     if (CheckFile(Settings.titlestxt_path))
-        OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride == 1 ? true : false, true);
+        OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride, true);
 
     return ret;
 }

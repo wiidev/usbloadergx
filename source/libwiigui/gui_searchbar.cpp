@@ -31,9 +31,7 @@ class cSearchButton
 
 GuiSearchBar::GuiSearchBar(const wchar_t *SearchChars) :
     inSide(0), text((char *) NULL, 22, ( GXColor )
-    {   0, 0, 0, 255}), buttons(0), keyImageData(keyboard_key_png, keyboard_key_png_size), keyOverImageData(keyboard_key_over_png, keyboard_key_over_png_size), sndOver(
-            button_over_pcm, button_over_pcm_size, Settings.sfxvolume), sndClick(button_click_pcm,
-            button_click_pcm_size, Settings.sfxvolume)
+    {   0, 0, 0, 255}), buttons(0), keyImageData(keyboard_key_png, keyboard_key_png_size), keyOverImageData(keyboard_key_over_png, keyboard_key_over_png_size)
 {
     trig.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
     SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
@@ -57,7 +55,7 @@ GuiSearchBar::GuiSearchBar(const wchar_t *SearchChars) :
         if (x == 0) y++;
         charstr[0] = SearchChars[i];
         buttons[i] = new cSearchButton(charstr, &keyImageData, &keyOverImageData, x_start + x * 42, y_start - 42 + y
-                * 42, &trig, &sndOver, &sndClick);
+                * 42, &trig, btnSoundOver, btnSoundClick);
         this->Append(&(buttons[i]->button));
     }
     height = 10 + 42 + y * 42 + 10;
@@ -73,16 +71,14 @@ GuiSearchBar::GuiSearchBar(const wchar_t *SearchChars) :
     BacspaceBtnImg_Over = new GuiImage(imgBacspaceBtn);
     BacspaceBtnImg = new GuiImage(BacspaceBtnImg_Over);
     BacspaceBtnImg->SetGrayscale();
-    BacspaceBtn = new GuiButton(BacspaceBtnImg, BacspaceBtnImg_Over, ALIGN_RIGHT, ALIGN_TOP, -52, 10, &trig, &sndOver,
-            &sndClick, 1);
+    BacspaceBtn = new GuiButton(BacspaceBtnImg, BacspaceBtnImg_Over, ALIGN_RIGHT, ALIGN_TOP, -52, 10, &trig, btnSoundOver, btnSoundClick, 1);
     this->Append(BacspaceBtn);
 
     imgClearBtn = Resources::GetImageData("keyboard_clear_over.png");
     ClearBtnImg_Over = new GuiImage(imgClearBtn);
     ClearBtnImg = new GuiImage(ClearBtnImg_Over);
     ClearBtnImg->SetGrayscale();
-    ClearBtn = new GuiButton(ClearBtnImg, ClearBtnImg_Over, ALIGN_RIGHT, ALIGN_TOP, -10, 10, &trig, &sndOver,
-            &sndClick, 1);
+    ClearBtn = new GuiButton(ClearBtnImg, ClearBtnImg_Over, ALIGN_RIGHT, ALIGN_TOP, -10, 10, &trig, btnSoundOver, btnSoundClick, 1);
     this->Append(ClearBtn);
 
     //  SetPosition(100,100);

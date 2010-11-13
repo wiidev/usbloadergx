@@ -30,10 +30,6 @@ int CheatMenu(const char * gameID)
     bool exit = false;
     int ret = 1;
 
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-
     GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
     GuiImageData settingsbg(Resources::GetFile("settings_background.png"), Resources::GetFileSize("settings_background.png"));
     GuiImage settingsbackground(&settingsbg);
@@ -46,14 +42,14 @@ int CheatMenu(const char * gameID)
     GuiText backBtnTxt(tr( "Back" ), 22, Theme.prompttext);
     backBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
     GuiImage backBtnImg(&btnOutline);
-    GuiButton backBtn(&backBtnImg, &backBtnImg, 2, 3, -140, 400, &trigA, NULL, btnClick2, 1);
+    GuiButton backBtn(&backBtnImg, &backBtnImg, 2, 3, -140, 400, &trigA, NULL, btnSoundClick2, 1);
     backBtn.SetLabel(&backBtnTxt);
     backBtn.SetTrigger(&trigB);
 
     GuiText createBtnTxt(tr( "Create" ), 22, Theme.prompttext);
     createBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
     GuiImage createBtnImg(&btnOutline);
-    GuiButton createBtn(&createBtnImg, &createBtnImg, 2, 3, 160, 400, &trigA, NULL, btnClick2, 1);
+    GuiButton createBtn(&createBtnImg, &createBtnImg, 2, 3, 160, 400, &trigA, NULL, btnSoundClick2, 1);
     createBtn.SetLabel(&createBtnTxt);
 
     char txtfilename[55];

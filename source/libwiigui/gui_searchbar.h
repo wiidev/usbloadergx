@@ -30,7 +30,5 @@ class GuiSearchBar: public GuiWindow
         GuiImageData keyImageData;
         GuiImageData keyOverImageData;
         GuiTrigger trig;
-        GuiSound sndOver;
-        GuiSound sndClick;
 
 };

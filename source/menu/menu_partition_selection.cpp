@@ -43,10 +43,6 @@ int SelectPartitionMenu()
         counter++;
     }
 
-    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-
     GuiImageData btnpwroff(Resources::GetFile("wiimote_poweroff.png"), Resources::GetFileSize("wiimote_poweroff.png"));
     GuiImageData btnpwroffOver(Resources::GetFile("wiimote_poweroff_over.png"), Resources::GetFileSize("wiimote_poweroff_over.png"));
     GuiImageData btnhome(Resources::GetFile("menu_button.png"), Resources::GetFileSize("menu_button.png"));
@@ -66,12 +62,12 @@ int SelectPartitionMenu()
     poweroffBtnImg.SetWidescreen(Settings.widescreen);
     poweroffBtnImgOver.SetWidescreen(Settings.widescreen);
     GuiButton poweroffBtn(&poweroffBtnImg, &poweroffBtnImgOver, 0, 3, Theme.power_x, Theme.power_y, &trigA,
-            &btnSoundOver, btnClick2, 1);
+            btnSoundOver, btnSoundClick2, 1);
     GuiImage exitBtnImg(&btnhome);
     GuiImage exitBtnImgOver(&btnhomeOver);
     exitBtnImg.SetWidescreen(Settings.widescreen);
     exitBtnImgOver.SetWidescreen(Settings.widescreen);
-    GuiButton exitBtn(&exitBtnImg, &exitBtnImgOver, 0, 3, Theme.home_x, Theme.home_y, &trigA, &btnSoundOver, btnClick2,
+    GuiButton exitBtn(&exitBtnImg, &exitBtnImgOver, 0, 3, Theme.home_x, Theme.home_y, &trigA, btnSoundOver, btnSoundClick2,
             1);
     exitBtn.SetTrigger(&trigHome);
 

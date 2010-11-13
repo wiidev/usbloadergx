@@ -96,11 +96,6 @@ int MenuDiscList()
         nolist = 1;
     }
 
-    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-
     GuiImageData btnInstall(Resources::GetFile("button_install.png"), Resources::GetFileSize("button_install.png"));
     GuiImageData btnInstallOver(Resources::GetFile("button_install_over.png"), Resources::GetFileSize("button_install_over.png"));
 
@@ -197,7 +192,7 @@ int MenuDiscList()
     installBtnImgOver.SetWidescreen(Settings.widescreen);
 
     GuiButton installBtn(&installBtnImg, &installBtnImgOver, ALIGN_LEFT, ALIGN_TOP, Theme.install_x, Theme.install_y,
-            &trigA, &btnSoundOver, btnClick2, 1, &installBtnTT, 24, -30, 0, 5);
+            &trigA, btnSoundOver, btnSoundClick2, 1, &installBtnTT, 24, -30, 0, 5);
 
     GuiTooltip settingsBtnTT(tr( "Settings" ));
     if (Settings.wsprompt) settingsBtnTT.SetWidescreen(Settings.widescreen);
@@ -207,7 +202,7 @@ int MenuDiscList()
     GuiImage settingsBtnImgOver(&btnSettingsOver);
     settingsBtnImgOver.SetWidescreen(Settings.widescreen);
     GuiButton settingsBtn(&settingsBtnImg, &settingsBtnImgOver, 0, 3, Theme.setting_x, Theme.setting_y, &trigA,
-            &btnSoundOver, btnClick2, 1, &settingsBtnTT, 65, -30, 0, 5);
+            btnSoundOver, btnSoundClick2, 1, &settingsBtnTT, 65, -30, 0, 5);
 
     GuiTooltip homeBtnTT(tr( "Back to HBC or Wii Menu" ));
     if (Settings.wsprompt) homeBtnTT.SetWidescreen(Settings.widescreen);
@@ -216,7 +211,7 @@ int MenuDiscList()
     homeBtnImg.SetWidescreen(Settings.widescreen);
     GuiImage homeBtnImgOver(&btnhomeOver);
     homeBtnImgOver.SetWidescreen(Settings.widescreen);
-    GuiButton homeBtn(&homeBtnImg, &homeBtnImgOver, 0, 3, Theme.home_x, Theme.home_y, &trigA, &btnSoundOver, btnClick2,
+    GuiButton homeBtn(&homeBtnImg, &homeBtnImgOver, 0, 3, Theme.home_x, Theme.home_y, &trigA, btnSoundOver, btnSoundClick2,
             1, &homeBtnTT, 15, -30, 1, 5);
     homeBtn.RemoveSoundClick();
     homeBtn.SetTrigger(&trigHome);
@@ -229,7 +224,7 @@ int MenuDiscList()
     poweroffBtnImg.SetWidescreen(Settings.widescreen);
     poweroffBtnImgOver.SetWidescreen(Settings.widescreen);
     GuiButton poweroffBtn(&poweroffBtnImg, &poweroffBtnImgOver, 0, 3, Theme.power_x, Theme.power_y, &trigA,
-            &btnSoundOver, btnClick2, 1, &poweroffBtnTT, -10, -30, 1, 5);
+            btnSoundOver, btnSoundClick2, 1, &poweroffBtnTT, -10, -30, 1, 5);
 
     GuiTooltip sdcardBtnTT(tr( "Reload SD" ));
     if (Settings.wsprompt) sdcardBtnTT.SetWidescreen(Settings.widescreen);
@@ -238,12 +233,12 @@ int MenuDiscList()
     GuiImage sdcardImgOver(&btnsdcardOver);
     sdcardImg.SetWidescreen(Settings.widescreen);
     sdcardImgOver.SetWidescreen(Settings.widescreen);
-    GuiButton sdcardBtn(&sdcardImg, &sdcardImgOver, 0, 3, Theme.sdcard_x, Theme.sdcard_y, &trigA, &btnSoundOver,
-            btnClick2, 1, &sdcardBtnTT, 15, -30, 0, 5);
+    GuiButton sdcardBtn(&sdcardImg, &sdcardImgOver, 0, 3, Theme.sdcard_x, Theme.sdcard_y, &trigA, btnSoundOver,
+            btnSoundClick2, 1, &sdcardBtnTT, 15, -30, 0, 5);
 
     GuiButton gameInfo(0, 0);
     gameInfo.SetTrigger(&trig2);
-    gameInfo.SetSoundClick(btnClick2);
+    gameInfo.SetSoundClick(btnSoundClick2);
 
     GuiTooltip favoriteBtnTT(tr( "Display favorites only" ));
     if (Settings.wsprompt) favoriteBtnTT.SetWidescreen(Settings.widescreen);
@@ -253,7 +248,7 @@ int MenuDiscList()
     GuiImage favoriteBtnImg_g(&imgfavIcon_gray);
     favoriteBtnImg_g.SetWidescreen(Settings.widescreen);
     GuiButton favoriteBtn(&favoriteBtnImg_g, &favoriteBtnImg_g, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_favorite_x,
-            Theme.gamelist_favorite_y, &trigA, &btnSoundOver, btnClick2, 1, &favoriteBtnTT, -15, 52, 0, 3);
+            Theme.gamelist_favorite_y, &trigA, btnSoundOver, btnSoundClick2, 1, &favoriteBtnTT, -15, 52, 0, 3);
     favoriteBtn.SetAlpha(180);
 
     GuiTooltip searchBtnTT(tr( "Set Search-Filter" ));
@@ -264,7 +259,7 @@ int MenuDiscList()
     GuiImage searchBtnImg_g(&imgsearchIcon_gray);
     searchBtnImg_g.SetWidescreen(Settings.widescreen);
     GuiButton searchBtn(&searchBtnImg_g, &searchBtnImg_g, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_search_x,
-            Theme.gamelist_search_y, &trigA, &btnSoundOver, btnClick2, 1, &searchBtnTT, -15, 52, 0, 3);
+            Theme.gamelist_search_y, &trigA, btnSoundOver, btnSoundClick2, 1, &searchBtnTT, -15, 52, 0, 3);
     searchBtn.SetAlpha(180);
 
     const char * sortTTText = NULL;
@@ -292,7 +287,7 @@ int MenuDiscList()
 
     GuiImage sortBtnImg(sortImgData);
     sortBtnImg.SetWidescreen(Settings.widescreen);
-    GuiButton sortBtn(&sortBtnImg, &sortBtnImg, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_abc_x, Theme.gamelist_abc_y, &trigA, &btnSoundOver, btnClick2, 1, &sortBtnTT, -15, 52, 0, 3);
+    GuiButton sortBtn(&sortBtnImg, &sortBtnImg, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_abc_x, Theme.gamelist_abc_y, &trigA, btnSoundOver, btnSoundClick2, 1, &sortBtnTT, -15, 52, 0, 3);
 
     GuiTooltip listBtnTT(tr( "Display as a list" ));
     if (Settings.wsprompt) listBtnTT.SetWidescreen(Settings.widescreen);
@@ -302,7 +297,7 @@ int MenuDiscList()
     GuiImage listBtnImg_g(&imgarrangeList_gray);
     listBtnImg_g.SetWidescreen(Settings.widescreen);
     GuiButton listBtn(&listBtnImg_g, &listBtnImg_g, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_list_x,
-            Theme.gamelist_list_y, &trigA, &btnSoundOver, btnClick2, 1, &listBtnTT, 15, 52, 1, 3);
+            Theme.gamelist_list_y, &trigA, btnSoundOver, btnSoundClick2, 1, &listBtnTT, 15, 52, 1, 3);
     listBtn.SetAlpha(180);
 
     GuiTooltip gridBtnTT(tr( "Display as a grid" ));
@@ -313,7 +308,7 @@ int MenuDiscList()
     GuiImage gridBtnImg_g(&imgarrangeGrid_gray);
     gridBtnImg_g.SetWidescreen(Settings.widescreen);
     GuiButton gridBtn(&gridBtnImg_g, &gridBtnImg_g, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_grid_x,
-            Theme.gamelist_grid_y, &trigA, &btnSoundOver, btnClick2, 1, &gridBtnTT, 15, 52, 1, 3);
+            Theme.gamelist_grid_y, &trigA, btnSoundOver, btnSoundClick2, 1, &gridBtnTT, 15, 52, 1, 3);
     gridBtn.SetAlpha(180);
 
     GuiTooltip carouselBtnTT(tr( "Display as a carousel" ));
@@ -324,7 +319,7 @@ int MenuDiscList()
     GuiImage carouselBtnImg_g(&imgarrangeCarousel_gray);
     carouselBtnImg_g.SetWidescreen(Settings.widescreen);
     GuiButton carouselBtn(&carouselBtnImg_g, &carouselBtnImg_g, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_carousel_x,
-            Theme.gamelist_carousel_y, &trigA, &btnSoundOver, btnClick2, 1, &carouselBtnTT, 15, 52, 1, 3);
+            Theme.gamelist_carousel_y, &trigA, btnSoundOver, btnSoundClick2, 1, &carouselBtnTT, 15, 52, 1, 3);
     carouselBtn.SetAlpha(180);
 
     bool canUnlock = (Settings.parentalcontrol == 0 && Settings.Parental.enabled == 1);
@@ -337,7 +332,7 @@ int MenuDiscList()
     GuiImage lockBtnImg_g(&imgLock_gray);
     lockBtnImg_g.SetWidescreen(Settings.widescreen);
     GuiButton lockBtn(&lockBtnImg_g, &lockBtnImg_g, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_lock_x,
-            Theme.gamelist_lock_y, &trigA, &btnSoundOver, btnClick2, 1, &lockBtnTT, 15, 52, 1, 3);
+            Theme.gamelist_lock_y, &trigA, btnSoundOver, btnSoundClick2, 1, &lockBtnTT, 15, 52, 1, 3);
     lockBtn.SetAlpha(180);
 
     GuiTooltip unlockBtnTT(tr( "Enable Parental Control" ));
@@ -363,7 +358,7 @@ int MenuDiscList()
     GuiImage dvdBtnImg_g(dvdBtnImg);
     dvdBtnImg_g.SetWidescreen(Settings.widescreen);
     GuiButton dvdBtn(&dvdBtnImg_g, &dvdBtnImg_g, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_dvd_x, Theme.gamelist_dvd_y,
-            &trigA, &btnSoundOver, btnClick2, 1, &dvdBtnTT, 15, 52, 1, 3);
+            &trigA, btnSoundOver, btnSoundClick2, 1, &dvdBtnTT, 15, 52, 1, 3);
     dvdBtn.SetAlpha(180);
 
     GuiTooltip homebrewBtnTT(tr( "Homebrew Launcher" ));
@@ -374,7 +369,7 @@ int MenuDiscList()
     homebrewImg.SetWidescreen(Settings.widescreen);
     homebrewImgOver.SetWidescreen(Settings.widescreen);
     GuiButton homebrewBtn(&homebrewImg, &homebrewImgOver, ALIGN_LEFT, ALIGN_TOP, Theme.homebrew_x, Theme.homebrew_y,
-            &trigA, &btnSoundOver, btnClick2, 1, &homebrewBtnTT, 15, -30, 1, 5);
+            &trigA, btnSoundOver, btnSoundClick2, 1, &homebrewBtnTT, 15, -30, 1, 5);
 
     if (Settings.GameSort & SORT_FAVORITE)
     {
@@ -461,12 +456,12 @@ int MenuDiscList()
 
     if (Settings.godmode == 1 && mountMethod != 3) //only make the button have trigger & tooltip if in godmode
     {
-        DownloadBtn.SetSoundOver(&btnSoundOver);
+        DownloadBtn.SetSoundOver(btnSoundOver);
         DownloadBtn.SetTrigger(&trigA);
         DownloadBtn.SetTrigger(&trig1);
         DownloadBtn.SetToolTip(&DownloadBtnTT, 205, -30);
 
-        idBtn.SetSoundOver(&btnSoundOver);
+        idBtn.SetSoundOver(btnSoundOver);
         idBtn.SetTrigger(&trigA);
         idBtn.SetToolTip(&IDBtnTT, 205, -30);
 

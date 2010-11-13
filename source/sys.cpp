@@ -59,9 +59,14 @@ void AppCleanUp(void)
 	extern u8 mountMethod;
     gprintf("Exiting main GUI.  mountMethod = %d\n", mountMethod);
 
+    Settings.Save();
+
     ExitGUIThreads();
 
     delete bgMusic;
+    delete btnSoundClick;
+    delete btnSoundOver;
+    delete btnSoundClick2;
     delete background;
     delete bgImg;
     delete mainWindow;

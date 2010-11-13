@@ -238,9 +238,6 @@ GuiGameGrid::GuiGameGrid(int w, int h, const char *themePath, const u8 *imagebg,
     trigMinus = new GuiTrigger;
     trigMinus->SetButtonOnlyTrigger(-1, WPAD_BUTTON_MINUS | WPAD_CLASSIC_BUTTON_MINUS, 0);
 
-    btnSoundClick = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    btnSoundOver = new GuiSound(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-
     int btnHeight = (int) lround(sqrt(RADIUS * RADIUS - 90000) - RADIUS - 50);
 
     // Button Left
@@ -303,8 +300,6 @@ GuiGameGrid::~GuiGameGrid()
     delete trigMinus;
     delete trig1;
     delete trig2;
-    delete btnSoundClick;
-    delete btnSoundOver;
 
     for (int i = pagesize - 1; i >= 0; i--)
     {

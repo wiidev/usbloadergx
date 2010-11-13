@@ -51,8 +51,6 @@ GuiNumpad::GuiNumpad(char * t, u32 max)
     keyMedium = new GuiImageData(keyboard_mediumkey_over_png, keyboard_mediumkey_over_png_size);
     keyMediumOver = new GuiImageData(keyboard_mediumkey_over_png, keyboard_mediumkey_over_png_size);
 
-    keySoundOver = new GuiSound(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    keySoundClick = new GuiSound(button_click_pcm, button_click_pcm_size, Settings.sfxvolume);
     trigA = new GuiTrigger;
     trigA->SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
     trigB = new GuiTrigger;
@@ -120,8 +118,6 @@ GuiNumpad::~GuiNumpad()
     SAFEFREE( keyClearText )
     SAFEFREE( keyMedium )
     SAFEFREE( keyMediumOver )
-    SAFEFREE( keySoundOver )
-    SAFEFREE( keySoundClick )
     SAFEFREE( trigA )
     SAFEFREE( trigB )
 

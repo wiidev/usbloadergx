@@ -23,10 +23,6 @@
 extern u8 shutdown;
 extern u8 reset;
 
-/*** Extern functions ***/
-extern void ResumeGui();
-extern void HaltGui();
-
 
 /****************************************************************************
  * MenuOGG
@@ -95,11 +91,6 @@ int MenuLanguageSelect()
     int scrollon;
     int returnhere = 0;
 
-    GuiSound btnSoundOver( button_over_pcm, button_over_pcm_size, Settings.sfxvolume );
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if ( !btnClick2 ) btnClick2 = new GuiSound( button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume );
-    //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-
     GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
     GuiImageData settingsbg(Resources::GetFile("settings_background.png"), Resources::GetFileSize("settings_background.png"));
 
@@ -127,8 +118,8 @@ int MenuLanguageSelect()
     pathBtn.SetAlignment( ALIGN_CENTRE, ALIGN_TOP );
     pathBtn.SetPosition( 0, 28 );
     pathBtn.SetLabel( &titleTxt );
-    pathBtn.SetSoundOver( &btnSoundOver );
-    pathBtn.SetSoundClick( btnClick2 );
+    pathBtn.SetSoundOver( btnSoundOver );
+    pathBtn.SetSoundClick( btnSoundClick2 );
     pathBtn.SetTrigger( &trigA );
     pathBtn.SetEffectGrow();
 
@@ -149,8 +140,8 @@ int MenuLanguageSelect()
     backBtn.SetPosition( -190, 400 );
     backBtn.SetLabel( &backBtnTxt );
     backBtn.SetImage( &backBtnImg );
-    backBtn.SetSoundOver( &btnSoundOver );
-    backBtn.SetSoundClick( btnClick2 );
+    backBtn.SetSoundOver( btnSoundOver );
+    backBtn.SetSoundClick( btnSoundClick2 );
     backBtn.SetTrigger( &trigA );
     backBtn.SetTrigger( &trigB );
     backBtn.SetEffectGrow();
@@ -168,8 +159,8 @@ int MenuLanguageSelect()
     defaultBtn.SetPosition( 190, 400 );
     defaultBtn.SetLabel( &defaultBtnTxt );
     defaultBtn.SetImage( &defaultBtnImg );
-    defaultBtn.SetSoundOver( &btnSoundOver );
-    defaultBtn.SetSoundClick( btnClick2 );
+    defaultBtn.SetSoundOver( btnSoundOver );
+    defaultBtn.SetSoundClick( btnSoundClick2 );
     defaultBtn.SetTrigger( &trigA );
     defaultBtn.SetEffectGrow();
 
@@ -186,8 +177,8 @@ int MenuLanguageSelect()
     updateBtn.SetPosition( 0, 400 );
     updateBtn.SetLabel( &updateBtnTxt );
     updateBtn.SetImage( &updateBtnImg );
-    updateBtn.SetSoundOver( &btnSoundOver );
-    updateBtn.SetSoundClick( btnClick2 );
+    updateBtn.SetSoundOver( btnSoundOver );
+    updateBtn.SetSoundClick( btnSoundClick2 );
     updateBtn.SetTrigger( &trigA );
     updateBtn.SetEffectGrow();
 

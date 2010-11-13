@@ -25,8 +25,6 @@ int MenuInstall()
     int ret, choice = 0;
     char name[200];
 
-    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-
     GuiImageData battery(Resources::GetFile("battery.png"), Resources::GetFileSize("battery.png"));
     GuiImageData batteryBar(Resources::GetFile("battery_bar.png"), Resources::GetFileSize("battery_bar.png"));
     GuiImageData batteryRed(Resources::GetFile("battery_red.png"), Resources::GetFileSize("battery_red.png"));

@@ -32,18 +32,15 @@ GuiFileBrowser::GuiFileBrowser(int w, int h)
     trigHeldA = new GuiTrigger;
     trigHeldA->SetHeldTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 
-    btnSoundOver = new GuiSound(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    btnSoundClick = new GuiSound(button_click_pcm, button_click_pcm_size, Settings.sfxvolume);
-
     bgFileSelection = new GuiImageData(Resources::GetFile("bg_browser.png"), Resources::GetFileSize("bg_browser.png"));
     bgFileSelectionImg = new GuiImage(bgFileSelection);
     bgFileSelectionImg->SetParent(this);
     bgFileSelectionImg->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 
     bgFileSelectionEntry = Resources::GetImageData("bg_browser_selection.png");
-	
+
     fileFolder = Resources::GetImageData("icon_folder.png");
-	
+
     scrollbar = Resources::GetImageData("scrollbar.png");
     scrollbarImg = new GuiImage(scrollbar);
     scrollbarImg->SetParent(this);
@@ -160,8 +157,6 @@ GuiFileBrowser::~GuiFileBrowser()
     delete arrowUp;
     delete scrollbarBox;
 
-    delete btnSoundOver;
-    delete btnSoundClick;
     delete trigHeldA;
     delete trigA;
 

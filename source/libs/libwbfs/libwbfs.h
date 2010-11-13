@@ -185,7 +185,7 @@ extern "C"
      @sel: selects which partitions to copy.
      @copy_1_1: makes a 1:1 copy, whenever a game would not use the wii disc format, and some data is hidden outside the filesystem.
      */
-    u32 wbfs_add_disc(wbfs_t*p, read_wiidisc_callback_t read_src_wii_disc, void *callback_data,
+    s32 wbfs_add_disc(wbfs_t*p, read_wiidisc_callback_t read_src_wii_disc, void *callback_data,
             progress_callback_t spinner, partition_selector_t sel, int copy_1_1);
 
     /*! remove a wiidvd inside a partition */

@@ -71,10 +71,6 @@ int OnScreenNumpad(char * var, u32 maxlen)
 
     GuiNumpad numpad(var, maxlen);
 
-    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-
     GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
 
     GuiTrigger trigA;
@@ -89,7 +85,7 @@ int OnScreenNumpad(char * var, u32 maxlen)
         okBtnTxt.SetWidescreen(Settings.widescreen);
         okBtnImg.SetWidescreen(Settings.widescreen);
     }
-    GuiButton okBtn(&okBtnImg, &okBtnImg, 0, 4, 5, -15, &trigA, &btnSoundOver, btnClick2, 1);
+    GuiButton okBtn(&okBtnImg, &okBtnImg, 0, 4, 5, -15, &trigA, btnSoundOver, btnSoundClick2, 1);
     okBtn.SetLabel(&okBtnTxt);
     GuiText cancelBtnTxt(tr( "Cancel" ), 22, Theme.prompttext);
     GuiImage cancelBtnImg(&btnOutline);
@@ -98,7 +94,7 @@ int OnScreenNumpad(char * var, u32 maxlen)
         cancelBtnTxt.SetWidescreen(Settings.widescreen);
         cancelBtnImg.SetWidescreen(Settings.widescreen);
     }
-    GuiButton cancelBtn(&cancelBtnImg, &cancelBtnImg, 1, 4, -5, -15, &trigA, &btnSoundOver, btnClick2, 1);
+    GuiButton cancelBtn(&cancelBtnImg, &cancelBtnImg, 1, 4, -5, -15, &trigA, btnSoundOver, btnSoundClick2, 1);
     cancelBtn.SetLabel(&cancelBtnTxt);
     cancelBtn.SetTrigger(&trigB);
 
@@ -148,11 +144,6 @@ int OnScreenKeyboard(char * var, u32 maxlen, int min)
 
     GuiKeyboard keyboard(var, maxlen, min, Settings.keyset);
 
-    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-
     GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
 
     GuiTrigger trigA;
@@ -167,7 +158,7 @@ int OnScreenKeyboard(char * var, u32 maxlen, int min)
         okBtnTxt.SetWidescreen(Settings.widescreen);
         okBtnImg.SetWidescreen(Settings.widescreen);
     }
-    GuiButton okBtn(&okBtnImg, &okBtnImg, 0, 4, 5, 15, &trigA, &btnSoundOver, btnClick2, 1);
+    GuiButton okBtn(&okBtnImg, &okBtnImg, 0, 4, 5, 15, &trigA, btnSoundOver, btnSoundClick2, 1);
     okBtn.SetLabel(&okBtnTxt);
     GuiText cancelBtnTxt(tr( "Cancel" ), 22, Theme.prompttext);
     GuiImage cancelBtnImg(&btnOutline);
@@ -176,7 +167,7 @@ int OnScreenKeyboard(char * var, u32 maxlen, int min)
         cancelBtnTxt.SetWidescreen(Settings.widescreen);
         cancelBtnImg.SetWidescreen(Settings.widescreen);
     }
-    GuiButton cancelBtn(&cancelBtnImg, &cancelBtnImg, 1, 4, -5, 15, &trigA, &btnSoundOver, btnClick2, 1);
+    GuiButton cancelBtn(&cancelBtnImg, &cancelBtnImg, 1, 4, -5, 15, &trigA, btnSoundOver, btnSoundClick2, 1);
     cancelBtn.SetLabel(&cancelBtnTxt);
     cancelBtn.SetTrigger(&trigB);
 
@@ -523,10 +514,6 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label, cons
     promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     promptWindow.SetPosition(0, -10);
 
-    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-
     GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
     GuiImageData dialogBox(Resources::GetFile("dialogue_box.png"), Resources::GetFileSize("dialogue_box.png"));
 
@@ -557,7 +544,7 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label, cons
         btn1Img.SetWidescreen(Settings.widescreen);
     }
 
-    GuiButton btn1(&btn1Img, &btn1Img, 0, 3, 0, 0, &trigA, &btnSoundOver, btnClick2, 1);
+    GuiButton btn1(&btn1Img, &btn1Img, 0, 3, 0, 0, &trigA, btnSoundOver, btnSoundClick2, 1);
     btn1.SetLabel(&btn1Txt);
     btn1.SetState(STATE_SELECTED);
 
@@ -568,7 +555,7 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label, cons
         btn2Txt.SetWidescreen(Settings.widescreen);
         btn2Img.SetWidescreen(Settings.widescreen);
     }
-    GuiButton btn2(&btn2Img, &btn2Img, 0, 3, 0, 0, &trigA, &btnSoundOver, btnClick2, 1);
+    GuiButton btn2(&btn2Img, &btn2Img, 0, 3, 0, 0, &trigA, btnSoundOver, btnSoundClick2, 1);
     btn2.SetLabel(&btn2Txt);
     if (!btn3Label && !btn4Label) btn2.SetTrigger(&trigB);
 
@@ -579,7 +566,7 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label, cons
         btn3Txt.SetWidescreen(Settings.widescreen);
         btn3Img.SetWidescreen(Settings.widescreen);
     }
-    GuiButton btn3(&btn3Img, &btn3Img, 0, 3, 0, 0, &trigA, &btnSoundOver, btnClick2, 1);
+    GuiButton btn3(&btn3Img, &btn3Img, 0, 3, 0, 0, &trigA, btnSoundOver, btnSoundClick2, 1);
     btn3.SetLabel(&btn3Txt);
     if (!btn4Label) btn3.SetTrigger(&trigB);
 
@@ -590,7 +577,7 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label, cons
         btn4Txt.SetWidescreen(Settings.widescreen);
         btn4Img.SetWidescreen(Settings.widescreen);
     }
-    GuiButton btn4(&btn4Img, &btn4Img, 0, 3, 0, 0, &trigA, &btnSoundOver, btnClick2, 1);
+    GuiButton btn4(&btn4Img, &btn4Img, 0, 3, 0, 0, &trigA, btnSoundOver, btnSoundClick2, 1);
     btn4.SetLabel(&btn4Txt);
     if (btn4Label) btn4.SetTrigger(&trigB);
 
@@ -823,11 +810,6 @@ int WindowExitPrompt()
     GuiWindow promptWindow(640, 480);
     promptWindow.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     promptWindow.SetPosition(0, 0);
-    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-
     GuiImageData top(exit_top_png, exit_top_png_size);
     GuiImageData topOver(exit_top_over_png, exit_top_over_png_size);
     GuiImageData bottom(exit_bottom_png, exit_bottom_png_size);
@@ -911,7 +893,7 @@ int WindowExitPrompt()
 
     GuiImage btn1Img(&top);
     GuiImage btn1OverImg(&topOver);
-    GuiButton btn1(&btn1Img, &btn1OverImg, 0, 3, 0, 0, &trigA, &btnSoundOver, btnClick2, 0);
+    GuiButton btn1(&btn1Img, &btn1OverImg, 0, 3, 0, 0, &trigA, btnSoundOver, btnSoundClick2, 0);
     btn1.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
 
     GuiText btn2Txt(tr( "Back to Loader" ), 28, ( GXColor )
@@ -922,7 +904,7 @@ int WindowExitPrompt()
         btn2Txt.SetWidescreen(Settings.widescreen);
         btn2Img.SetWidescreen(Settings.widescreen);
     }
-    GuiButton btn2(&btn2Img, &btn2Img, 2, 5, -150, 0, &trigA, &btnSoundOver, btnClick2, 1);
+    GuiButton btn2(&btn2Img, &btn2Img, 2, 5, -150, 0, &trigA, btnSoundOver, btnSoundClick2, 1);
     btn2.SetLabel(&btn2Txt);
     btn2.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_IN, 50);
     btn2.SetRumble(false);
@@ -936,7 +918,7 @@ int WindowExitPrompt()
         btn3Txt.SetWidescreen(Settings.widescreen);
         btn3Img.SetWidescreen(Settings.widescreen);
     }
-    GuiButton btn3(&btn3Img, &btn3Img, 2, 5, 150, 0, &trigA, &btnSoundOver, btnClick2, 1);
+    GuiButton btn3(&btn3Img, &btn3Img, 2, 5, 150, 0, &trigA, btnSoundOver, btnSoundClick2, 1);
     btn3.SetLabel(&btn3Txt);
     btn3.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_IN, 50);
     btn3.SetRumble(false);
@@ -944,7 +926,7 @@ int WindowExitPrompt()
 
     GuiImage btn4Img(&bottom);
     GuiImage btn4OverImg(&bottomOver);
-    GuiButton btn4(&btn4Img, &btn4OverImg, 0, 4, 0, 0, &trigA, &btnSoundOver, btnClick2, 0);
+    GuiButton btn4(&btn4Img, &btn4OverImg, 0, 4, 0, 0, &trigA, btnSoundOver, btnSoundClick2, 0);
     btn4.SetTrigger(&trigB);
     btn4.SetTrigger(&trigHome);
     btn4.SetEffect(EFFECT_SLIDE_BOTTOM | EFFECT_SLIDE_IN, 50);
@@ -1156,10 +1138,6 @@ int GameWindowPrompt()
     GuiWindow promptWindow(472, 320);
     promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     promptWindow.SetPosition(0, -10);
-    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
     GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
 
@@ -1209,8 +1187,8 @@ int GameWindowPrompt()
     //  nameBtn.SetLabelOver(&nameTxt);
     nameBtn.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     nameBtn.SetPosition(0, -122);
-    nameBtn.SetSoundOver(&btnSoundOver);
-    nameBtn.SetSoundClick(btnClick2);
+    nameBtn.SetSoundOver(btnSoundOver);
+    nameBtn.SetSoundClick(btnSoundClick2);
     if (!mountMethod) nameBtn.SetToolTip(&nameBtnTT, 24, -30, ALIGN_LEFT);
 
     if (Settings.godmode == 1 && !mountMethod)
@@ -1244,8 +1222,8 @@ int GameWindowPrompt()
     btn1.SetPosition(0, -20);
     btn1.SetImage(&diskImg);
 
-    btn1.SetSoundOver(&btnSoundOver);
-    btn1.SetSoundClick(btnClick2);
+    btn1.SetSoundOver(btnSoundOver);
+    btn1.SetSoundClick(btnSoundClick2);
     btn1.SetTrigger(&trigA);
     btn1.SetState(STATE_SELECTED);
 
@@ -1256,7 +1234,7 @@ int GameWindowPrompt()
         btn2Txt.SetWidescreen(Settings.widescreen);
         btn2Img.SetWidescreen(Settings.widescreen);
     }
-    GuiButton btn2(&btn2Img, &btn2Img, 1, 5, 0, 0, &trigA, &btnSoundOver, btnClick2, 1);
+    GuiButton btn2(&btn2Img, &btn2Img, 1, 5, 0, 0, &trigA, btnSoundOver, btnSoundClick2, 1);
     if (Settings.godmode == 1 && mountMethod != 2 && mountMethod != 3)
     {
         btn2.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
@@ -1278,7 +1256,7 @@ int GameWindowPrompt()
         btn3Txt.SetWidescreen(Settings.widescreen);
         btn3Img.SetWidescreen(Settings.widescreen);
     }
-    GuiButton btn3(&btn3Img, &btn3Img, 0, 4, 50, -40, &trigA, &btnSoundOver, btnClick2, 1);
+    GuiButton btn3(&btn3Img, &btn3Img, 0, 4, 50, -40, &trigA, btnSoundOver, btnSoundClick2, 1);
     btn3.SetLabel(&btn3Txt);
 
     GuiImage btnFavoriteImg1;
@@ -1292,25 +1270,25 @@ int GameWindowPrompt()
     GuiImage btnFavoriteImg5;
     btnFavoriteImg5.SetWidescreen(Settings.widescreen);
 
-    //GuiButton btnFavorite(&btnFavoriteImg,&btnFavoriteImg, 2, 5, -125, -60, &trigA, &btnSoundOver, &btnClick,1);
+    //GuiButton btnFavorite(&btnFavoriteImg,&btnFavoriteImg, 2, 5, -125, -60, &trigA, btnSoundOver, &btnClick,1);
     GuiButton btnFavorite1(imgFavorite.GetWidth(), imgFavorite.GetHeight());
     GuiButton btnFavorite2(imgFavorite.GetWidth(), imgFavorite.GetHeight());
     GuiButton btnFavorite3(imgFavorite.GetWidth(), imgFavorite.GetHeight());
     GuiButton btnFavorite4(imgFavorite.GetWidth(), imgFavorite.GetHeight());
     GuiButton btnFavorite5(imgFavorite.GetWidth(), imgFavorite.GetHeight());
 
-    SetupFavoriteButton(&btnFavorite1, -198, &btnFavoriteImg1, &btnSoundOver, btnClick2, &trigA);
-    SetupFavoriteButton(&btnFavorite2, -171, &btnFavoriteImg2, &btnSoundOver, btnClick2, &trigA);
-    SetupFavoriteButton(&btnFavorite3, -144, &btnFavoriteImg3, &btnSoundOver, btnClick2, &trigA);
-    SetupFavoriteButton(&btnFavorite4, -117, &btnFavoriteImg4, &btnSoundOver, btnClick2, &trigA);
-    SetupFavoriteButton(&btnFavorite5, -90, &btnFavoriteImg5, &btnSoundOver, btnClick2, &trigA);
+    SetupFavoriteButton(&btnFavorite1, -198, &btnFavoriteImg1, btnSoundOver, btnSoundClick2, &trigA);
+    SetupFavoriteButton(&btnFavorite2, -171, &btnFavoriteImg2, btnSoundOver, btnSoundClick2, &trigA);
+    SetupFavoriteButton(&btnFavorite3, -144, &btnFavoriteImg3, btnSoundOver, btnSoundClick2, &trigA);
+    SetupFavoriteButton(&btnFavorite4, -117, &btnFavoriteImg4, btnSoundOver, btnSoundClick2, &trigA);
+    SetupFavoriteButton(&btnFavorite5, -90, &btnFavoriteImg5, btnSoundOver, btnSoundClick2, &trigA);
 
     GuiImage btnLeftImg(&imgLeft);
     if (Settings.wsprompt)
     {
         btnLeftImg.SetWidescreen(Settings.widescreen);
     }
-    GuiButton btnLeft(&btnLeftImg, &btnLeftImg, 0, 5, 20, 0, &trigA, &btnSoundOver, btnClick2, 1);
+    GuiButton btnLeft(&btnLeftImg, &btnLeftImg, 0, 5, 20, 0, &trigA, btnSoundOver, btnSoundClick2, 1);
     btnLeft.SetTrigger(&trigL);
     btnLeft.SetTrigger(&trigMinus);
 
@@ -1319,7 +1297,7 @@ int GameWindowPrompt()
     {
         btnRightImg.SetWidescreen(Settings.widescreen);
     }
-    GuiButton btnRight(&btnRightImg, &btnRightImg, 1, 5, -20, 0, &trigA, &btnSoundOver, btnClick2, 1);
+    GuiButton btnRight(&btnRightImg, &btnRightImg, 1, 5, -20, 0, &trigA, btnSoundOver, btnSoundClick2, 1);
     btnRight.SetTrigger(&trigR);
     btnRight.SetTrigger(&trigPlus);
 
@@ -1387,7 +1365,7 @@ int GameWindowPrompt()
             const u8 *gameSoundData = LoadBannerSound(header->id, &gameSoundDataLen);
             if (gameSoundData)
             {
-                gameSound = new GuiSound(gameSoundData, gameSoundDataLen, Settings.gamesoundvolume, false, true);
+                gameSound = new GuiSound(gameSoundData, gameSoundDataLen, Settings.gamesoundvolume, true);
                 bgMusic->SetVolume(0);
                 if (Settings.gamesound == 2) gameSound->SetLoop(1);
                 gameSound->Play();
@@ -1619,7 +1597,7 @@ int GameWindowPrompt()
             {
                 promptWindow.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 50);
                 changed = 1;
-                btnClick2->Play();
+                btnSoundClick2->Play();
                 gameSelected = (gameSelected + 1) % gameList.size();
                 btnRight.ResetState();
                 break;
@@ -1629,7 +1607,7 @@ int GameWindowPrompt()
             {
                 promptWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 50);
                 changed = 2;
-                btnClick2->Play();
+                btnSoundClick2->Play();
                 gameSelected = (gameSelected - 1 + gameList.size()) % gameList.size();
                 btnLeft.ResetState();
                 break;
@@ -1639,7 +1617,7 @@ int GameWindowPrompt()
             {
                 promptWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 50);
                 changed = 2;
-                btnClick2->Play();
+                btnSoundClick2->Play();
                 gameSelected = (gameSelected - 1 + gameList.size()) % gameList.size();
                 btnRight.ResetState();
                 break;
@@ -1649,7 +1627,7 @@ int GameWindowPrompt()
             {
                 promptWindow.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 50);
                 changed = 1;
-                btnClick2->Play();
+                btnSoundClick2->Play();
                 gameSelected = (gameSelected + 1) % gameList.size();
                 btnLeft.ResetState();
                 break;
@@ -1659,7 +1637,7 @@ int GameWindowPrompt()
             {
                 promptWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 50);
                 changed = 2;
-                btnClick2->Play();
+                btnSoundClick2->Play();
                 gameSelected = (gameSelected + 1) % gameList.size();
                 btnRight.ResetState();
                 break;
@@ -1669,7 +1647,7 @@ int GameWindowPrompt()
             {
                 promptWindow.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 50);
                 changed = 1;
-                btnClick2->Play();
+                btnSoundClick2->Play();
                 gameSelected = (gameSelected - 1 + gameList.size()) % gameList.size();
                 btnLeft.ResetState();
                 break;
@@ -1679,7 +1657,7 @@ int GameWindowPrompt()
             {
                 promptWindow.SetEffect(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, 50);
                 changed = 1;
-                btnClick2->Play();
+                btnSoundClick2->Play();
                 gameSelected = (gameSelected - 1 + gameList.size()) % gameList.size();
                 btnRight.ResetState();
                 break;
@@ -1689,7 +1667,7 @@ int GameWindowPrompt()
             {
                 promptWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 50);
                 changed = 2;
-                btnClick2->Play();
+                btnSoundClick2->Play();
                 gameSelected = (gameSelected + 1) % gameList.size();
                 btnLeft.ResetState();
                 break;
@@ -1699,7 +1677,7 @@ int GameWindowPrompt()
             {
                 //              diskImg.SetBetaRotateEffect(45, 90);
                 changed = 3;
-                btnClick2->Play();
+                btnSoundClick2->Play();
                 gameSelected = (gameSelected + 1) % gameList.size();
                 btnRight.ResetState();
                 break;
@@ -1710,7 +1688,7 @@ int GameWindowPrompt()
                 //              diskImg.SetBetaRotateEffect(-45, 90);
                 //              promptWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 1/*50*/);
                 changed = 4;
-                btnClick2->Play();
+                btnSoundClick2->Play();
                 gameSelected = (gameSelected - 1 + gameList.size()) % gameList.size();
                 btnLeft.ResetState();
                 break;
@@ -1752,9 +1730,6 @@ int DiscWait(const char *title, const char *msg, const char *btn1Label, const ch
     GuiWindow promptWindow(472, 320);
     promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     promptWindow.SetPosition(0, -10);
-    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-
-    if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
     GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
     GuiImageData dialogBox(Resources::GetFile("dialogue_box.png"), Resources::GetFileSize("dialogue_box.png"));
@@ -1784,7 +1759,7 @@ int DiscWait(const char *title, const char *msg, const char *btn1Label, const ch
         btn1Txt.SetWidescreen(Settings.widescreen);
         btn1Img.SetWidescreen(Settings.widescreen);
     }
-    GuiButton btn1(&btn1Img, &btn1Img, 1, 5, 0, 0, &trigA, &btnSoundOver, btnClick2, 1);
+    GuiButton btn1(&btn1Img, &btn1Img, 1, 5, 0, 0, &trigA, btnSoundOver, btnSoundClick2, 1);
 
     if (btn2Label)
     {
@@ -1808,7 +1783,7 @@ int DiscWait(const char *title, const char *msg, const char *btn1Label, const ch
         btn2Txt.SetWidescreen(Settings.widescreen);
         btn2Img.SetWidescreen(Settings.widescreen);
     }
-    GuiButton btn2(&btn2Img, &btn2Img, 1, 4, -20, -25, &trigA, &btnSoundOver, btnClick2, 1);
+    GuiButton btn2(&btn2Img, &btn2Img, 1, 4, -20, -25, &trigA, btnSoundOver, btnSoundClick2, 1);
     btn2.SetLabel(&btn2Txt);
 
     if (Settings.wsprompt && Settings.widescreen) /////////////adjust buttons for widescreen
@@ -1971,11 +1946,6 @@ bool SearchMissingImages(int choice2)
     promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     promptWindow.SetPosition(0, -10);
 
-    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-
     GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
     GuiImageData dialogBox(Resources::GetFile("dialogue_box.png"), Resources::GetFileSize("dialogue_box.png"));
     GuiTrigger trigA;
@@ -2103,11 +2073,6 @@ bool NetworkInitPrompt()
     promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     promptWindow.SetPosition(0, -10);
 
-    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-
     GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
     GuiImageData dialogBox(Resources::GetFile("dialogue_box.png"), Resources::GetFileSize("dialogue_box.png"));
     GuiTrigger trigA;
@@ -2136,7 +2101,7 @@ bool NetworkInitPrompt()
         btn1Txt.SetWidescreen(Settings.widescreen);
         btn1Img.SetWidescreen(Settings.widescreen);
     }
-    GuiButton btn1(&btn1Img, &btn1Img, 2, 4, 0, -45, &trigA, &btnSoundOver, btnClick2, 1);
+    GuiButton btn1(&btn1Img, &btn1Img, 2, 4, 0, -45, &trigA, btnSoundOver, btnSoundClick2, 1);
     btn1.SetLabel(&btn1Txt);
     btn1.SetState(STATE_SELECTED);
 
@@ -2209,11 +2174,6 @@ int ProgressDownloadWindow(int choice2)
     promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     promptWindow.SetPosition(0, -10);
 
-    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-
     GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
     GuiImageData dialogBox(Resources::GetFile("dialogue_box.png"), Resources::GetFileSize("dialogue_box.png"));
     GuiTrigger trigA;
@@ -2268,7 +2228,7 @@ int ProgressDownloadWindow(int choice2)
         btn1Txt.SetWidescreen(Settings.widescreen);
         btn1Img.SetWidescreen(Settings.widescreen);
     }
-    GuiButton btn1(&btn1Img, &btn1Img, 2, 4, 0, -45, &trigA, &btnSoundOver, btnClick2, 1);
+    GuiButton btn1(&btn1Img, &btn1Img, 2, 4, 0, -45, &trigA, btnSoundOver, btnSoundClick2, 1);
     btn1.SetLabel(&btn1Txt);
     btn1.SetState(STATE_SELECTED);
 
@@ -2812,11 +2772,6 @@ int ProgressUpdateWindow()
     promptWindow.SetAlignment( ALIGN_CENTRE, ALIGN_MIDDLE );
     promptWindow.SetPosition( 0, -10 );
 
-    GuiSound btnSoundOver( button_over_pcm, button_over_pcm_size, Settings.sfxvolume );
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if ( !btnClick2 ) btnClick2 = new GuiSound( button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume );
-    //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, SOUND_PCM, Settings.sfxvolume);
-
     char imgPath[100];
     snprintf( imgPath, sizeof( imgPath ), "%sbutton_dialogue_box.png", Settings.theme_path );
     GuiImageData btnOutline( imgPath, button_dialogue_box_png );
@@ -2880,7 +2835,7 @@ int ProgressUpdateWindow()
         btn1Txt.SetWidescreen( Settings.widescreen );
         btn1Img.SetWidescreen( Settings.widescreen );
     }
-    GuiButton btn1( &btn1Img, &btn1Img, 2, 4, 0, -40, &trigA, &btnSoundOver, btnClick2, 1 );
+    GuiButton btn1( &btn1Img, &btn1Img, 2, 4, 0, -40, &trigA, btnSoundOver, btnSoundClick2, 1 );
     btn1.SetLabel( &btn1Txt );
     btn1.SetState( STATE_SELECTED );
 
@@ -3180,11 +3135,6 @@ int ProgressUpdateWindow()
     promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     promptWindow.SetPosition(0, -10);
 
-    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-
     GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
     GuiImageData dialogBox(Resources::GetFile("dialogue_box.png"), Resources::GetFileSize("dialogue_box.png"));
     GuiTrigger trigA;
@@ -3242,7 +3192,7 @@ int ProgressUpdateWindow()
         btn1Txt.SetWidescreen(Settings.widescreen);
         btn1Img.SetWidescreen(Settings.widescreen);
     }
-    GuiButton btn1(&btn1Img, &btn1Img, 2, 4, 0, -40, &trigA, &btnSoundOver, btnClick2, 1);
+    GuiButton btn1(&btn1Img, &btn1Img, 2, 4, 0, -40, &trigA, btnSoundOver, btnSoundClick2, 1);
     btn1.SetLabel(&btn1Txt);
     btn1.SetState(STATE_SELECTED);
 
@@ -3575,11 +3525,6 @@ int CodeDownload(const char *id)
     promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     promptWindow.SetPosition(0, -10);
 
-    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-
     GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
     GuiImageData dialogBox(Resources::GetFile("dialogue_box.png"), Resources::GetFileSize("dialogue_box.png"));
     GuiTrigger trigA;
@@ -3613,7 +3558,7 @@ int CodeDownload(const char *id)
         btn1Txt.SetWidescreen(Settings.widescreen);
         btn1Img.SetWidescreen(Settings.widescreen);
     }
-    GuiButton btn1(&btn1Img, &btn1Img, 2, 4, 0, -40, &trigA, &btnSoundOver, btnClick2, 1);
+    GuiButton btn1(&btn1Img, &btn1Img, 2, 4, 0, -40, &trigA, btnSoundOver, btnSoundClick2, 1);
     btn1.SetLabel(&btn1Txt);
     btn1.SetState(STATE_SELECTED);
 
@@ -3760,11 +3705,6 @@ int HBCWindowPrompt(const char *name, const char *coder, const char *version, co
     GuiTrigger trigD;
     trigD.SetButtonOnlyTrigger(-1, WPAD_BUTTON_DOWN | WPAD_CLASSIC_BUTTON_DOWN, PAD_BUTTON_DOWN);
 
-    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-
     GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
     GuiImageData dialogBox(Resources::GetFile("dialogue_box.png"), Resources::GetFileSize("dialogue_box.png"));
     GuiImageData whiteBox(Resources::GetFile("bg_options.png"), Resources::GetFileSize("bg_options.png"));
@@ -3790,7 +3730,7 @@ int HBCWindowPrompt(const char *name, const char *coder, const char *version, co
     arrowUpBtn.SetTrigger(&trigA);
     arrowUpBtn.SetTrigger(&trigU);
     arrowUpBtn.SetEffectOnOver(EFFECT_SCALE, 50, 130);
-    arrowUpBtn.SetSoundClick(btnClick2);
+    arrowUpBtn.SetSoundClick(btnSoundClick2);
 
     GuiButton arrowDownBtn(arrowDownImg.GetWidth(), arrowDownImg.GetHeight());
     arrowDownBtn.SetImage(&arrowDownImg);
@@ -3799,7 +3739,7 @@ int HBCWindowPrompt(const char *name, const char *coder, const char *version, co
     arrowDownBtn.SetTrigger(&trigA);
     arrowDownBtn.SetTrigger(&trigD);
     arrowDownBtn.SetEffectOnOver(EFFECT_SCALE, 50, 130);
-    arrowDownBtn.SetSoundClick(btnClick2);
+    arrowDownBtn.SetSoundClick(btnSoundClick2);
 
     GuiImageData *iconData = NULL;
     GuiImage *iconImg = NULL;
@@ -3874,7 +3814,7 @@ int HBCWindowPrompt(const char *name, const char *coder, const char *version, co
         btn1Img.SetWidescreen(Settings.widescreen);
     }
 
-    GuiButton btn1(&btn1Img, &btn1Img, 0, 3, 0, 0, &trigA, &btnSoundOver, btnClick2, 1);
+    GuiButton btn1(&btn1Img, &btn1Img, 0, 3, 0, 0, &trigA, btnSoundOver, btnSoundClick2, 1);
     btn1.SetLabel(&btn1Txt);
     btn1.SetState(STATE_SELECTED);
 
@@ -3885,7 +3825,7 @@ int HBCWindowPrompt(const char *name, const char *coder, const char *version, co
         btn2Txt.SetWidescreen(Settings.widescreen);
         btn2Img.SetWidescreen(Settings.widescreen);
     }
-    GuiButton btn2(&btn2Img, &btn2Img, 0, 3, 0, 0, &trigA, &btnSoundOver, btnClick2, 1);
+    GuiButton btn2(&btn2Img, &btn2Img, 0, 3, 0, 0, &trigA, btnSoundOver, btnSoundClick2, 1);
     btn2.SetLabel(&btn2Txt);
     btn2.SetTrigger(&trigB);
 

@@ -6,7 +6,7 @@
 #define debug_printf(fmt, ...);
 
 #include <stdio.h>
-#define wbfs_fatal(x)       do { printf("\nwbfs panic: %s\n\n",x); while(1); } while(0)
+#define wbfs_fatal(x)       do { printf("\nwbfs panic: %s\n\n",x); return; } while(0)
 #define wbfs_error(x)       do { printf("\nwbfs error: %s\n\n",x); } while(0)
 
 #include <stdlib.h>

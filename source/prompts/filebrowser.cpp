@@ -295,20 +295,10 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
     }
     int menu = MENU_NONE;
 
-    /*
-     GuiText titleTxt("Browse Files", 28, (GXColor){0, 0, 0, 230});
-     titleTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-     titleTxt.SetPosition(70,20);
-     */
     GuiTrigger trigA;
     trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
     GuiTrigger trigB;
     trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
-
-    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
 
     GuiImageData folderImgData(Resources::GetFile("icon_folder.png"), Resources::GetFileSize("icon_folder.png"));
     GuiImage folderImg(&folderImgData);
@@ -320,8 +310,7 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
     folderBtn.SetEffectGrow();
 
     GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
-    GuiText ExitBtnTxt(tr( "Cancel" ), 24, ( GXColor )
-    {   0, 0, 0, 255});
+    GuiText ExitBtnTxt(tr( "Cancel" ), 24, ( GXColor ) {0, 0, 0, 255});
     GuiImage ExitBtnImg(&btnOutline);
     if (Settings.wsprompt)
     {
@@ -337,8 +326,7 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
     ExitBtn.SetTrigger(&trigB);
     ExitBtn.SetEffectGrow();
 
-    GuiText usbBtnTxt(browsers[(curDevice + 1) % browsers.size()].rootdir, 24, ( GXColor )
-    {   0, 0, 0, 255});
+    GuiText usbBtnTxt(browsers[(curDevice + 1) % browsers.size()].rootdir, 24, ( GXColor ) {0, 0, 0, 255});
     GuiImage usbBtnImg(&btnOutline);
     if (Settings.wsprompt)
     {
@@ -360,7 +348,7 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
         okBtnTxt.SetWidescreen(Settings.widescreen);
         okBtnImg.SetWidescreen(Settings.widescreen);
     }
-    GuiButton okBtn(&okBtnImg, &okBtnImg, 0, 4, 40, -35, &trigA, &btnSoundOver, btnClick2, 1);
+    GuiButton okBtn(&okBtnImg, &okBtnImg, 0, 4, 40, -35, &trigA, btnSoundOver, btnSoundClick2, 1);
     okBtn.SetLabel(&okBtnTxt);
 
     GuiFileBrowser fileBrowser(396, 248);
@@ -368,8 +356,7 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
     fileBrowser.SetPosition(0, 120);
 
     GuiImageData Address(Resources::GetFile("addressbar_textbox.png"), Resources::GetFileSize("addressbar_textbox.png"));
-    GuiText AdressText((char*) NULL, 20, ( GXColor )
-    {   0, 0, 0, 255});
+    GuiText AdressText((char*) NULL, 20, ( GXColor ) {0, 0, 0, 255});
     AdressText.SetTextf("%s%s", browser->rootdir, browser->dir);
     AdressText.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     AdressText.SetPosition(20, 0);

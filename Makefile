@@ -33,6 +33,7 @@ SOURCES		:=	source \
 				source/xml \
 				source/network \
 				source/settings \
+				source/settings/menus \
 				source/prompts \
 				source/wad \
 				source/banner \
@@ -43,6 +44,7 @@ SOURCES		:=	source \
 				source/memory \
 				source/FileOperations \
 				source/ImageOperations \
+				source/SoundOperations \
 				source/utils \
 				source/utils/minizip \
 				source/usbloader/wbfs
@@ -53,7 +55,7 @@ INCLUDES	:=	source
 # options for code generation
 #---------------------------------------------------------------------------------
 
-CFLAGS		=	-g -O4 -Wall $(MACHDEP) $(INCLUDE) -DHAVE_CONFIG_H
+CFLAGS		=	-g -O4 -Wall -Wno-multichar $(MACHDEP) $(INCLUDE) -DHAVE_CONFIG_H
 CXXFLAGS	=	-Xassembler -aln=$@.lst $(CFLAGS)
 LDFLAGS		=	-g $(MACHDEP) -Wl,-Map,$(notdir $@).map,--section-start,.init=0x80B00000,-wrap,malloc,-wrap,free,-wrap,memalign,-wrap,calloc,-wrap,realloc,-wrap,malloc_usable_size
 -include $(PROJECTDIR)/Make.config
@@ -93,6 +95,7 @@ TTFFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.ttf)))
 PNGFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.png)))
 OGGFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.ogg)))
 PCMFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.pcm)))
+WAVFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.wav)))
 DOLFILES	:=	$(foreach dir,$(DATA),$(notdir $(wildcard $(dir)/*.dol)))
 MP3FILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.mp3)))
 	
@@ -110,7 +113,7 @@ export OFILES	:=	$(addsuffix .o,$(BINFILES)) \
 					$(sFILES:.s=.o) $(SFILES:.S=.o) \
 					$(TTFFILES:.ttf=.ttf.o) $(PNGFILES:.png=.png.o) $(addsuffix .o,$(DOLFILES))\
 					$(OGGFILES:.ogg=.ogg.o) $(PCMFILES:.pcm=.pcm.o) $(MP3FILES:.mp3=.mp3.o) \
-					$(addsuffix .o,$(ELFFILES)) $(CURDIR)/data/magic_patcher.o
+					$(WAVFILES:.wav=.wav.o) $(addsuffix .o,$(ELFFILES)) $(CURDIR)/data/magic_patcher.o
 
 #---------------------------------------------------------------------------------
 # build a list of include paths
@@ -213,6 +216,10 @@ language: $(wildcard $(PROJECTDIR)/Languages/*.lang)
 	@bin2s -a 32 $< | $(AS) -o $(@)
 	
 %.pcm.o : %.pcm
+	@echo $(notdir $<)
+	@bin2s -a 32 $< | $(AS) -o $(@)
+	
+%.wav.o : %.wav
 	@echo $(notdir $<)
 	@bin2s -a 32 $< | $(AS) -o $(@)
 

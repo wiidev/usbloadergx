@@ -11,7 +11,6 @@
 
 #include <ogcsys.h>
 #include "libwiigui/gui.h"
-#include "libwiigui/gui_bgm.h"
 #include "settings/CSettings.h"
 #include "main.h"
 
@@ -37,8 +36,6 @@ void ResumeGui();
 void HaltGui();
 GuiImageData *LoadCoverImage(struct discHdr *header, bool Prefere3D = true, bool noCover = true);
 
-extern GuiSound *btnClick2;
-extern GuiBGM *bgMusic;
 extern GuiImageData *pointer[4];
 extern GuiImageData *background;
 extern GuiImage *bgImg;

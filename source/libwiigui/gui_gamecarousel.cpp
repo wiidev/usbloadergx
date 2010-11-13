@@ -70,9 +70,6 @@ GuiGameCarousel::GuiGameCarousel(int w, int h, const char *themePath, const u8 *
     trigMinus = new GuiTrigger;
     trigMinus->SetButtonOnlyTrigger(-1, WPAD_BUTTON_MINUS | WPAD_CLASSIC_BUTTON_MINUS, 0);
 
-    btnSoundClick = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    btnSoundOver = new GuiSound(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-
     imgLeft = Resources::GetImageData("startgame_arrow_left.png");
     imgRight = Resources::GetImageData("startgame_arrow_right.png");
 
@@ -164,8 +161,6 @@ GuiGameCarousel::~GuiGameCarousel()
     delete trigR;
     delete trigPlus;
     delete trigMinus;
-    delete btnSoundClick;
-    delete btnSoundOver;
     delete gamename;
 
     for (int i = 0; i < pagesize; i++)

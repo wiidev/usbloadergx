@@ -58,7 +58,6 @@ class GuiGameBrowser: public GuiElement
         GuiImageData * scrollbarBox;
         GuiImageData * scrollbarBoxOver;
 
-        GuiSound * btnSoundClick;
         GuiTrigger * trigA;
         GuiTrigger * trigHeldA;
 };

@@ -46,8 +46,15 @@
 #include "filelist.h"
 #include "input.h"
 #include "OptionList.hpp"
+#include "SoundOperations/gui_sound.h"
+#include "SoundOperations/gui_bgm.h"
 
+//! Frequently used variables
 extern FreeTypeGX *fontSystem;
+extern GuiSound *btnSoundClick;
+extern GuiSound *btnSoundClick2;
+extern GuiSound *btnSoundOver;
+extern GuiBGM *bgMusic;
 
 #define SCROLL_INITIAL_DELAY    20
 #define SCROLL_LOOP_DELAY       3
@@ -107,70 +114,6 @@ typedef struct _paddata
 #define EFFECT_PULSE                512
 #define EFFECT_ROCK_VERTICLE        1024
 #define EFFECT_GOROUND              2048
-
-#define MAX_SND_VOICES          16
-
-class GuiSoundDecoder;
-class GuiSound
-{
-    public:
-        //!Constructor
-        //!\param s Pointer to the sound data
-        //!\param l Length of sound data
-        //!\param v Sound volume (0-100)
-        //!\param r RAW PCM Sound, when no decoder is found then try to play as raw-pcm
-        //!\param a true--> Pointer to the sound data is allocated with new u8[...]
-        //!\                GuiSound will be destroy the buffer if it no more needed
-        //!\        false-> sound data buffer has to live just as long as GuiSound
-        GuiSound(const u8 *s, int l, int v = 100, bool r = true, bool a = false);
-        //!Constructor
-        //!\param p Path to the sound data
-        //!\param v Sound volume (0-100)
-        GuiSound(const char *p, int v = 100);
-        //!Load - stop playing and load the new sound data
-        //!       if load not failed replace the current with new sound data
-        //!       otherwise the current date will not changed
-        //!\params same as by Constructors
-        //!\return true ok / false = failed
-        bool Load(const u8 *s, int l, bool r = false, bool a = false);
-        bool Load(const char *p);
-        //!Destructor
-        ~GuiSound();
-
-        //!Start sound playback
-        void Play();
-        //!Stop sound playback
-        void Stop();
-        //!Pause sound playback
-        void Pause();
-        //!Resume sound playback
-        void Resume();
-        //!Checks if the sound is currently playing
-        //!\return true if sound is playing, false otherwise
-        bool IsPlaying();
-        //!Set sound volume
-        //!\param v Sound volume (0-100)
-        void SetVolume(int v);
-        //!Set the sound to loop playback (only applies to OGG)
-        //!\param l Loop (true to loop)
-        void SetLoop(bool l);
-        //!Get the playing time in ms for that moment (only applies to OGG)
-    protected:
-        s32 voice; // used asnd-voice
-        u8 *play_buffer[3]; // trpple-playbuffer
-        int buffer_nr; // current playbuffer
-        int buffer_pos; // current idx to write in buffer
-        bool buffer_ready; // buffer is filled and ready
-        bool buffer_eof; // no mor datas - will stop playing
-        bool loop; // play looped
-        s32 volume; // volume
-        GuiSoundDecoder *decoder;
-
-        void DecoderCallback();
-        void PlayerCallback();
-        friend void *GuiSoundDecoderThread(void *args);
-        friend void GuiSoundPlayerCallback(s32 Voice);
-};
 
 //!Menu input trigger management. Determine if action is neccessary based on input data by comparing controller input data to a specific trigger element.
 class GuiTrigger

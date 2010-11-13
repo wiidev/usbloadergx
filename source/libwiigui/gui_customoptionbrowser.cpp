@@ -13,6 +13,7 @@
 #include "../settings/CSettings.h"
 #include "gui_customoptionbrowser.h"
 #include "themes/CTheme.h"
+#include "menu.h"
 
 #include <unistd.h>
 
@@ -26,7 +27,6 @@ GuiCustomOptionBrowser::GuiCustomOptionBrowser(int w, int h, OptionList * l, con
     width = w;
     height = h;
     options = l;
-    size = PAGESIZE;
     scrollbaron = scrollon;
     selectable = true;
     listOffset = this->FindMenuItem(-1, 1);
@@ -38,7 +38,6 @@ GuiCustomOptionBrowser::GuiCustomOptionBrowser(int w, int h, OptionList * l, con
     trigA->SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
     trigHeldA = new GuiTrigger;
     trigHeldA->SetHeldTrigger(-1, WPAD_BUTTON_A, PAD_BUTTON_A);
-    btnSoundClick = new GuiSound(button_click_pcm, button_click_pcm_size, Settings.sfxvolume);
 
     bgOptions = Resources::GetImageData(custombg);
 
@@ -104,14 +103,7 @@ GuiCustomOptionBrowser::GuiCustomOptionBrowser(int w, int h, OptionList * l, con
     scrollbarBoxBtn->SetHoldable(true);
     scrollbarBoxBtn->SetTrigger(trigHeldA);
 
-    optionIndex = new int[size];
-    optionVal = new GuiText *[size];
-    optionValOver = new GuiText *[size];
-    optionBtn = new GuiButton *[size];
-    optionTxt = new GuiText *[size];
-    optionBg = new GuiImage *[size];
-
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < PAGESIZE; i++)
     {
         optionTxt[i] = new GuiText(options->GetName(i), 20, Theme.settingstext);
         optionTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
@@ -170,9 +162,8 @@ GuiCustomOptionBrowser::~GuiCustomOptionBrowser()
 
     delete trigA;
     delete trigHeldA;
-    delete btnSoundClick;
 
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < PAGESIZE; i++)
     {
         delete optionTxt[i];
         delete optionVal[i];
@@ -180,20 +171,13 @@ GuiCustomOptionBrowser::~GuiCustomOptionBrowser()
         delete optionBg[i];
         delete optionBtn[i];
     }
-    delete[] optionIndex;
-    delete[] optionVal;
-    delete[] optionValOver;
-    delete[] optionBtn;
-    delete[] optionTxt;
-    delete[] optionBg;
 }
 
 void GuiCustomOptionBrowser::SetFocus(int f)
 {
-    LOCK( this );
     focus = f;
 
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < PAGESIZE; i++)
         optionBtn[i]->ResetState();
 
     if (f == 1) optionBtn[selectedItem]->SetState(STATE_SELECTED);
@@ -201,14 +185,13 @@ void GuiCustomOptionBrowser::SetFocus(int f)
 
 void GuiCustomOptionBrowser::ResetState()
 {
-    LOCK( this );
     if (state != STATE_DISABLED)
     {
         state = STATE_DEFAULT;
         stateChan = -1;
     }
 
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < PAGESIZE; i++)
     {
         optionBtn[i]->ResetState();
     }
@@ -217,7 +200,7 @@ void GuiCustomOptionBrowser::ResetState()
 int GuiCustomOptionBrowser::GetClickedOption()
 {
     int found = -1;
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < PAGESIZE; i++)
     {
         if (optionBtn[i]->GetState() == STATE_CLICKED)
         {
@@ -232,7 +215,7 @@ int GuiCustomOptionBrowser::GetClickedOption()
 int GuiCustomOptionBrowser::GetSelectedOption()
 {
     int found = -1;
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < PAGESIZE; i++)
     {
         if (optionBtn[i]->GetState() == STATE_SELECTED)
         {
@@ -245,7 +228,7 @@ int GuiCustomOptionBrowser::GetSelectedOption()
 
 void GuiCustomOptionBrowser::SetClickable(bool enable)
 {
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < PAGESIZE; i++)
     {
         optionBtn[i]->SetClickable(enable);
     }
@@ -284,14 +267,13 @@ int GuiCustomOptionBrowser::FindMenuItem(int currentItem, int direction)
  */
 void GuiCustomOptionBrowser::Draw()
 {
-    LOCK( this );
     if (!this->IsVisible()) return;
 
     bgOptionsImg->Draw();
 
     int next = listOffset;
 
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < PAGESIZE; i++)
     {
         if (next >= 0)
         {
@@ -313,12 +295,12 @@ void GuiCustomOptionBrowser::Draw()
 
 void GuiCustomOptionBrowser::UpdateListEntries()
 {
-    scrollbaron = options->GetLength() > size;
+    scrollbaron = options->GetLength() > PAGESIZE;
     if (listOffset < 0) listOffset = this->FindMenuItem(-1, 1);
     int next = listOffset;
 
     int maxNameWidth = 0;
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < PAGESIZE; i++)
     {
         if (next >= 0)
         {
@@ -343,7 +325,7 @@ void GuiCustomOptionBrowser::UpdateListEntries()
         }
     }
     if (coL2 < (24 + maxNameWidth + 16)) coL2 = 24 + maxNameWidth + 16;
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < PAGESIZE; i++)
     {
         if (optionBtn[i]->GetState() != STATE_DISABLED)
         {
@@ -358,7 +340,6 @@ void GuiCustomOptionBrowser::UpdateListEntries()
 
 void GuiCustomOptionBrowser::Update(GuiTrigger * t)
 {
-    LOCK( this );
     int next, prev, lang = options->GetLength();
 
     if (state == STATE_DISABLED || !t) return;
@@ -384,7 +365,7 @@ void GuiCustomOptionBrowser::Update(GuiTrigger * t)
 
     if (buttonshold != WPAD_BUTTON_UP && buttonshold != WPAD_BUTTON_DOWN)
     {
-        for (int i = 0; i < size; i++)
+        for (int i = 0; i < PAGESIZE; i++)
         {
             if (next >= 0) next = this->FindMenuItem(next, 1);
 
@@ -418,7 +399,7 @@ void GuiCustomOptionBrowser::Update(GuiTrigger * t)
 
         if (next >= 0)
         {
-            if (selectedItem == size - 1)
+            if (selectedItem == PAGESIZE - 1)
             {
                 // move list down by 1
                 listOffset = this->FindMenuItem(listOffset, 1);
@@ -460,7 +441,7 @@ void GuiCustomOptionBrowser::Update(GuiTrigger * t)
 
             if (next >= 0)
             {
-                if (selectedItem == size - 1)
+                if (selectedItem == PAGESIZE - 1)
                 {
                     // move list down by 1
                     listOffset = this->FindMenuItem(listOffset, 1);
@@ -506,7 +487,7 @@ void GuiCustomOptionBrowser::Update(GuiTrigger * t)
         }
 
         if (scrollbarBoxBtn->GetState() == STATE_HELD && scrollbarBoxBtn->GetStateChan() == t->chan && t->wpad.ir.valid
-                && options->GetLength() > size)
+                && options->GetLength() > PAGESIZE)
         {
             scrollbarBoxBtn->SetPosition(width / 2 - 18 + 7, 0);
 
@@ -519,10 +500,10 @@ void GuiCustomOptionBrowser::Update(GuiTrigger * t)
                 listOffset = 0;
                 selectedItem = 0;
             }
-            else if (listOffset + size >= lang)
+            else if (listOffset + PAGESIZE >= lang)
             {
-                listOffset = lang - size;
-                selectedItem = size - 1;
+                listOffset = lang - PAGESIZE;
+                selectedItem = PAGESIZE - 1;
             }
         }
         int positionbar = 237 * (listOffset + selectedItem) / lang;
@@ -532,17 +513,17 @@ void GuiCustomOptionBrowser::Update(GuiTrigger * t)
 
         if (t->Right())
         {
-            if (listOffset < lang && lang > size)
+            if (listOffset < lang && lang > PAGESIZE)
             {
-                listOffset = listOffset + size;
-                if (listOffset + size >= lang) listOffset = lang - size;
+                listOffset = listOffset + PAGESIZE;
+                if (listOffset + PAGESIZE >= lang) listOffset = lang - PAGESIZE;
             }
         }
         else if (t->Left())
         {
             if (listOffset > 0)
             {
-                listOffset = listOffset - size;
+                listOffset = listOffset - PAGESIZE;
                 if (listOffset < 0) listOffset = 0;
             }
         }

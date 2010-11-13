@@ -51,10 +51,10 @@ GuiButton::GuiButton(int w, int h)
 GuiButton::GuiButton(GuiImage* img, GuiImage* imgOver, int hor, int vert, int x, int y, GuiTrigger* trig,
         GuiSound* sndOver, GuiSound* sndClick, u8 grow)
 {
-    width = img->GetWidth();
-    height = img->GetHeight();
+    width = img ? img->GetWidth() : 0;
+    height = img ? img->GetHeight() : 0;
     image = img;
-    image->SetParent(this);
+    if(image) image->SetParent(this);
     imageOver = imgOver;
     if (imageOver) imageOver->SetParent(this);
     imageHold = NULL;
@@ -97,10 +97,10 @@ GuiButton::GuiButton(GuiImage* img, GuiImage* imgOver, int hor, int vert, int x,
 GuiButton::GuiButton(GuiImage* img, GuiImage* imgOver, int hor, int vert, int x, int y, GuiTrigger* trig,
         GuiSound* sndOver, GuiSound* sndClick, u8 grow, GuiTooltip* tt, int ttx, int tty, int h_align, int v_align)
 {
-    width = img->GetWidth();
-    height = img->GetHeight();
+    width = img ? img->GetWidth() : 0;
+    height = img ? img->GetHeight() : 0;
     image = img;
-    image->SetParent(this);
+    if(image) image->SetParent(this);
     imageOver = imgOver;
     if (imageOver) imageOver->SetParent(this);
     imageHold = NULL;
@@ -139,9 +139,12 @@ GuiButton::GuiButton(GuiImage* img, GuiImage* imgOver, int hor, int vert, int x,
     }
 
     toolTip = tt;
-    toolTip->SetParent(this);
-    toolTip->SetAlignment(h_align, v_align);
-    toolTip->SetPosition(ttx, tty);
+    if(toolTip)
+    {
+        toolTip->SetParent(this);
+        toolTip->SetAlignment(h_align, v_align);
+        toolTip->SetPosition(ttx, tty);
+    }
 
     time1 = time2 = 0;
 }

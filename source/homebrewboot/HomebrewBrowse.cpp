@@ -208,13 +208,6 @@ int MenuHomebrewBrowse()
 
     int slidedirection = FADE;
 
-    /*** Sound Variables ***/
-    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    GuiSound btnClick1(button_click_pcm, button_click_pcm_size, Settings.sfxvolume);
-
     /*** Image Variables ***/
     GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
 
@@ -273,7 +266,7 @@ int MenuHomebrewBrowse()
         backBtnTxt.SetWidescreen(Settings.widescreen);
         backBtnImg.SetWidescreen(Settings.widescreen);
     }
-    GuiButton backBtn(&backBtnImg, &backBtnImg, 2, 3, -180, 400, &trigA, &btnSoundOver, btnClick2, 1);
+    GuiButton backBtn(&backBtnImg, &backBtnImg, 2, 3, -180, 400, &trigA, btnSoundOver, btnSoundClick2, 1);
     backBtn.SetLabel(&backBtnTxt);
     backBtn.SetTrigger(&trigB);
 
@@ -285,8 +278,8 @@ int MenuHomebrewBrowse()
     GoLeftBtn.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     GoLeftBtn.SetPosition(25, -25);
     GoLeftBtn.SetImage(&GoLeftImg);
-    GoLeftBtn.SetSoundOver(&btnSoundOver);
-    GoLeftBtn.SetSoundClick(btnClick2);
+    GoLeftBtn.SetSoundOver(btnSoundOver);
+    GoLeftBtn.SetSoundClick(btnSoundClick2);
     GoLeftBtn.SetEffectGrow();
     GoLeftBtn.SetTrigger(&trigA);
     GoLeftBtn.SetTrigger(&trigL);
@@ -297,8 +290,8 @@ int MenuHomebrewBrowse()
     GoRightBtn.SetAlignment(ALIGN_RIGHT, ALIGN_MIDDLE);
     GoRightBtn.SetPosition(-25, -25);
     GoRightBtn.SetImage(&GoRightImg);
-    GoRightBtn.SetSoundOver(&btnSoundOver);
-    GoRightBtn.SetSoundClick(btnClick2);
+    GoRightBtn.SetSoundOver(btnSoundOver);
+    GoRightBtn.SetSoundClick(btnSoundClick2);
     GoRightBtn.SetEffectGrow();
     GoRightBtn.SetTrigger(&trigA);
     GoRightBtn.SetTrigger(&trigR);
@@ -332,8 +325,8 @@ int MenuHomebrewBrowse()
     MainButton1.SetLabel(&MainButton1Txt);
     MainButton1.SetLabel(&MainButton1DescTxt, 1);
     MainButton1.SetLabelOver(&MainButton1DescOverTxt, 1);
-    MainButton1.SetSoundOver(&btnSoundOver);
-    MainButton1.SetSoundClick(&btnClick1);
+    MainButton1.SetSoundOver(btnSoundOver);
+    MainButton1.SetSoundClick(btnSoundClick);
     MainButton1.SetEffectGrow();
     MainButton1.SetTrigger(&trigA);
 
@@ -359,8 +352,8 @@ int MenuHomebrewBrowse()
     MainButton2.SetLabel(&MainButton2Txt);
     MainButton2.SetLabel(&MainButton2DescTxt, 1);
     MainButton2.SetLabelOver(&MainButton2DescOverTxt, 1);
-    MainButton2.SetSoundOver(&btnSoundOver);
-    MainButton2.SetSoundClick(&btnClick1);
+    MainButton2.SetSoundOver(btnSoundOver);
+    MainButton2.SetSoundClick(btnSoundClick);
     MainButton2.SetEffectGrow();
     MainButton2.SetTrigger(&trigA);
 
@@ -386,8 +379,8 @@ int MenuHomebrewBrowse()
     MainButton3.SetLabel(&MainButton3Txt);
     MainButton3.SetLabel(&MainButton3DescTxt, 1);
     MainButton3.SetLabelOver(&MainButton3DescOverTxt, 1);
-    MainButton3.SetSoundOver(&btnSoundOver);
-    MainButton3.SetSoundClick(&btnClick1);
+    MainButton3.SetSoundOver(btnSoundOver);
+    MainButton3.SetSoundClick(btnSoundClick);
     MainButton3.SetEffectGrow();
     MainButton3.SetTrigger(&trigA);
 
@@ -416,8 +409,8 @@ int MenuHomebrewBrowse()
     MainButton4.SetLabel(&MainButton4Txt);
     MainButton4.SetLabel(&MainButton4DescTxt, 1);
     MainButton4.SetLabelOver(&MainButton4DescOverTxt, 1);
-    MainButton4.SetSoundOver(&btnSoundOver);
-    MainButton4.SetSoundClick(&btnClick1);
+    MainButton4.SetSoundOver(btnSoundOver);
+    MainButton4.SetSoundClick(btnSoundClick);
     MainButton4.SetEffectGrow();
     MainButton4.SetTrigger(&trigA);
 
@@ -429,8 +422,8 @@ int MenuHomebrewBrowse()
     GuiButton wifiBtn(wifiImg.GetWidth(), wifiImg.GetHeight());
     wifiBtn.SetImage(&wifiImg);
     wifiBtn.SetPosition(500, 400);
-    wifiBtn.SetSoundOver(&btnSoundOver);
-    wifiBtn.SetSoundClick(&btnClick1);
+    wifiBtn.SetSoundOver(btnSoundOver);
+    wifiBtn.SetSoundClick(btnSoundClick);
     wifiBtn.SetEffectGrow();
     wifiBtn.SetAlpha(80);
     wifiBtn.SetTrigger(&trigA);
@@ -441,8 +434,8 @@ int MenuHomebrewBrowse()
     channelBtn.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     channelBtn.SetPosition(440, 400);
     channelBtn.SetImage(&channelBtnImg);
-    channelBtn.SetSoundOver(&btnSoundOver);
-    channelBtn.SetSoundClick(btnClick2);
+    channelBtn.SetSoundOver(btnSoundOver);
+    channelBtn.SetSoundClick(btnSoundClick2);
     channelBtn.SetEffectGrow();
     channelBtn.SetTrigger(&trigA);
 

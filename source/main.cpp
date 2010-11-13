@@ -85,7 +85,7 @@ int main(int argc, char *argv[])
     if (IosLoader::LoadAppCios() < 0)
     {
         printf("\n\tWARNING!\n");
-        printf("\tUSB Loader GX needs unstubbed cIOS 222 v4 or 249 v9+\n\n");
+        printf("\tUSB Loader GX needs unstubbed cIOS 222 v4+ or 249 v9+\n\n");
 
         printf(
                 "\tWe cannot determine the versions on your system,\n\tsince you have no patched ios 36 or 236 installed.\n");

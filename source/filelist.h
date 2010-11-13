@@ -71,14 +71,14 @@ extern const u32 credits_button_png_size;
 extern const u8 credits_button_over_png[];
 extern const u32 credits_button_over_png_size;
 
-extern const u8 button_over_pcm[];
-extern const u32 button_over_pcm_size;
+extern const u8 button_over_wav[];
+extern const u32 button_over_wav_size;
 
-extern const u8 button_click_pcm[];
-extern const u32 button_click_pcm_size;
+extern const u8 button_click_wav[];
+extern const u32 button_click_wav_size;
 
-extern const u8 button_click2_pcm[];
-extern const u32 button_click2_pcm_size;
+extern const u8 button_click2_wav[];
+extern const u32 button_click2_wav_size;
 
 extern const u8 tooltip_left_png[];
 extern const u32 tooltip_left_png_size;

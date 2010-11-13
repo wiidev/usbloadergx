@@ -2,7 +2,6 @@
 #define _MENUS_H
 
 #include "libwiigui/gui.h"
-#include "libwiigui/gui_bgm.h"
 #include "language/gettext.h"
 #include "prompts/PromptWindows.h"
 #include "menu.h"

@@ -141,11 +141,6 @@ static int Theme_Prompt(const char *title, const char *author, GuiImageData *thu
     bool leave = false;
     int result = 0;
 
-    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-    //  GuiSound btnClick(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-
     GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
     GuiImageData dialogBox(Resources::GetFile("theme_dialogue_box.png"), Resources::GetFileSize("theme_dialogue_box.png"));
 
@@ -186,8 +181,8 @@ static int Theme_Prompt(const char *title, const char *author, GuiImageData *thu
         downloadBtnTxt.SetWidescreen(Settings.widescreen);
         downloadBtnImg.SetWidescreen(Settings.widescreen);
     }
-    GuiButton downloadBtn(&downloadBtnImg, &downloadBtnImg, ALIGN_RIGHT, ALIGN_TOP, -5, 170, &trigA, &btnSoundOver,
-            btnClick2, 1);
+    GuiButton downloadBtn(&downloadBtnImg, &downloadBtnImg, ALIGN_RIGHT, ALIGN_TOP, -5, 170, &trigA, btnSoundOver,
+            btnSoundClick2, 1);
     downloadBtn.SetLabel(&downloadBtnTxt);
     downloadBtn.SetScale(0.9);
 
@@ -199,7 +194,7 @@ static int Theme_Prompt(const char *title, const char *author, GuiImageData *thu
         backBtnTxt.SetWidescreen(Settings.widescreen);
         backBtnImg.SetWidescreen(Settings.widescreen);
     }
-    GuiButton backBtn(&backBtnImg, &backBtnImg, ALIGN_RIGHT, ALIGN_TOP, -5, 220, &trigA, &btnSoundOver, btnClick2, 1);
+    GuiButton backBtn(&backBtnImg, &backBtnImg, ALIGN_RIGHT, ALIGN_TOP, -5, 220, &trigA, btnSoundOver, btnSoundClick2, 1);
     backBtn.SetLabel(&backBtnTxt);
     backBtn.SetTrigger(&trigB);
     backBtn.SetScale(0.9);
@@ -276,13 +271,6 @@ int Theme_Downloader()
     char THEME_LINK[70];
     sprintf(THEME_LINK, "http://wii.spiffy360.com/themes.php?xml=1&category=1&adult=%d", Settings.godmode);
 
-    /*** Sound Variables ***/
-    GuiSound btnSoundOver(button_over_pcm, button_over_pcm_size, Settings.sfxvolume);
-    // because destroy GuiSound must wait while sound playing is finished, we use a global sound
-    if (!btnClick2) btnClick2 = new GuiSound(button_click2_pcm, button_click2_pcm_size, Settings.sfxvolume);
-	
-    GuiSound btnClick1(button_click_pcm, button_click_pcm_size, Settings.sfxvolume);
-
     /*** Image Variables ***/
     GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
 
@@ -339,8 +327,8 @@ int Theme_Downloader()
 
         MainButton[i] = new GuiButton(theme_box_Data.GetWidth(), theme_box_Data.GetHeight());
         MainButton[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-        MainButton[i]->SetSoundOver(&btnSoundOver);
-        MainButton[i]->SetSoundClick(&btnClick1);
+        MainButton[i]->SetSoundOver(btnSoundOver);
+        MainButton[i]->SetSoundClick(btnSoundClick);
         MainButton[i]->SetImage(theme_box_img[i]);
         MainButton[i]->SetEffectGrow();
         MainButton[i]->SetTrigger(&trigA);
@@ -360,7 +348,7 @@ int Theme_Downloader()
         backBtnTxt.SetWidescreen(Settings.widescreen);
         backBtnImg.SetWidescreen(Settings.widescreen);
     }
-    GuiButton backBtn(&backBtnImg, &backBtnImg, 2, 3, -180, 400, &trigA, &btnSoundOver, btnClick2, 1);
+    GuiButton backBtn(&backBtnImg, &backBtnImg, 2, 3, -180, 400, &trigA, btnSoundOver, btnSoundClick2, 1);
     backBtn.SetLabel(&backBtnTxt);
     backBtn.SetTrigger(&trigB);
 
@@ -372,8 +360,8 @@ int Theme_Downloader()
     GoLeftBtn.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     GoLeftBtn.SetPosition(25, -25);
     GoLeftBtn.SetImage(&GoLeftImg);
-    GoLeftBtn.SetSoundOver(&btnSoundOver);
-    GoLeftBtn.SetSoundClick(btnClick2);
+    GoLeftBtn.SetSoundOver(btnSoundOver);
+    GoLeftBtn.SetSoundClick(btnSoundClick2);
     GoLeftBtn.SetEffectGrow();
     GoLeftBtn.SetTrigger(&trigA);
     GoLeftBtn.SetTrigger(&trigL);
@@ -384,8 +372,8 @@ int Theme_Downloader()
     GoRightBtn.SetAlignment(ALIGN_RIGHT, ALIGN_MIDDLE);
     GoRightBtn.SetPosition(-25, -25);
     GoRightBtn.SetImage(&GoRightImg);
-    GoRightBtn.SetSoundOver(&btnSoundOver);
-    GoRightBtn.SetSoundClick(btnClick2);
+    GoRightBtn.SetSoundOver(btnSoundOver);
+    GoRightBtn.SetSoundClick(btnSoundClick2);
     GoRightBtn.SetEffectGrow();
     GoRightBtn.SetTrigger(&trigA);
     GoRightBtn.SetTrigger(&trigR);
@@ -399,8 +387,8 @@ int Theme_Downloader()
     PageIndicatorBtn.SetPosition(110, 400);
     PageIndicatorBtn.SetImage(&PageindicatorImg);
     PageIndicatorBtn.SetLabel(&PageindicatorTxt);
-    PageIndicatorBtn.SetSoundOver(&btnSoundOver);
-    PageIndicatorBtn.SetSoundClick(&btnClick1);
+    PageIndicatorBtn.SetSoundOver(btnSoundOver);
+    PageIndicatorBtn.SetSoundClick(btnSoundClick);
     PageIndicatorBtn.SetTrigger(&trigA);
     PageIndicatorBtn.SetEffectGrow();
 
@@ -412,8 +400,8 @@ int Theme_Downloader()
     GuiButton wifiBtn(wifiImg.GetWidth(), wifiImg.GetHeight());
     wifiBtn.SetImage(&wifiImg);
     wifiBtn.SetPosition(500, 400);
-    wifiBtn.SetSoundOver(&btnSoundOver);
-    wifiBtn.SetSoundClick(&btnClick1);
+    wifiBtn.SetSoundOver(btnSoundOver);
+    wifiBtn.SetSoundClick(btnSoundClick);
     wifiBtn.SetEffectGrow();
     wifiBtn.SetTrigger(&trigA);
 

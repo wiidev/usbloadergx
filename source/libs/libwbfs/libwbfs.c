@@ -398,7 +398,7 @@ static void free_block(wbfs_t *p, int bl)
     p->freeblks[i] = wbfs_htonl( v | 1 << j );
 }
 
-u32 wbfs_add_disc(wbfs_t*p, read_wiidisc_callback_t read_src_wii_disc, void *callback_data,
+s32 wbfs_add_disc(wbfs_t*p, read_wiidisc_callback_t read_src_wii_disc, void *callback_data,
         progress_callback_t spinner, partition_selector_t sel, int copy_1_1)
 {
     int i, discn;
