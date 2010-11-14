@@ -8,13 +8,12 @@
 class GuiCustomOptionBrowser: public GuiElement
 {
     public:
-        GuiCustomOptionBrowser(int w, int h, OptionList * l, const char * background, int scrollbar, int col2);
+        GuiCustomOptionBrowser(int w, int h, OptionList * l, const char * background);
         ~GuiCustomOptionBrowser();
         int FindMenuItem(int c, int d);
         int GetClickedOption();
         int GetSelectedOption();
         void SetClickable(bool enable);
-        void SetScrollbar(int enable);
         void SetOffset(int optionnumber);
         void ResetState();
         void SetFocus(int f);
@@ -25,7 +24,7 @@ class GuiCustomOptionBrowser: public GuiElement
         int selectedItem;
         int listOffset;
         int coL2;
-        int scrollbaron;
+        bool scrollbaron;
 
         OptionList * options;
         int optionIndex[PAGESIZE];

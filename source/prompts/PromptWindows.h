@@ -8,6 +8,7 @@
 #ifndef _PROMPTWINDOWS_H_
 #define _PROMPTWINDOWS_H_
 
+#include "libwiigui/gui.h"
 #include "usbloader/partition_usbloader.h"
 
 int WindowPrompt(const char *title, const char *msg = NULL, const char * btn1Label = NULL, const char * btn2Label =
@@ -28,6 +29,6 @@ char * GetMissingFiles();
 int WindowScreensaver();
 int CodeDownload(const char *id);
 int HBCWindowPrompt(const char *name, const char *coder, const char *version, const char *release_date,
-        const char *long_description, const char *iconPath, u64 filesize);
+        const char *long_description, GuiImageData * iconImgData, u64 filesize);
 
 #endif

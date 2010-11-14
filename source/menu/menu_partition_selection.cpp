@@ -71,7 +71,7 @@ int SelectPartitionMenu()
             1);
     exitBtn.SetTrigger(&trigHome);
 
-    GuiCustomOptionBrowser optionBrowser(396, 280, &options, "bg_options_settings.png", 0, 10);
+    GuiCustomOptionBrowser optionBrowser(396, 280, &options, "bg_options_settings.png");
     optionBrowser.SetPosition(0, 40);
     optionBrowser.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 

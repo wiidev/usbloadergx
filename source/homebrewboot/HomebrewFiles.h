@@ -35,7 +35,7 @@ class HomebrewFiles
         //!\param list index
         unsigned int GetFilesize(int index);
         //! Get the filecount of the whole list
-        int GetFilecount();
+        int GetFilecount() { return filecount; };
         //! Sort list by filepath
         void SortList();
     protected:

@@ -35,18 +35,18 @@ class FlyingButtonsMenu : public GuiWindow
     public:
         FlyingButtonsMenu(const char * menu_title);
         ~FlyingButtonsMenu();
-        int MainLoop();
-        void HideMenu();
-        void ShowMenu();
+        virtual int MainLoop();
+        virtual void HideMenu();
+        virtual void ShowMenu();
     protected:
         virtual void CreateSettingsMenu(int index) { };
         virtual void DeleteSettingsMenu() { };
         virtual void SetupMainButtons() { };
-        void AddMainButtons();
-        void ShowButtonsEffects(int effect, int effect_speed);
-        void SlideButtons(int slide_direction);
-        void SetPageIndicators();
-        void SetMainButton(int position, const char * ButtonText, GuiImageData * imageData, GuiImageData * imageOver);
+        virtual void AddMainButtons();
+        virtual void ShowButtonsEffects(int effect, int effect_speed);
+        virtual void SlideButtons(int slide_direction);
+        virtual void SetPageIndicators();
+        virtual void SetMainButton(int position, const char * ButtonText, GuiImageData * imageData, GuiImageData * imageOver);
 
         int currentPage;
         int returnMenu;

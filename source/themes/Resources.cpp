@@ -171,6 +171,7 @@ RecourceFile Resources::RecourceFiles[] =
     {"lock_gray.png", lock_gray_png, lock_gray_png_size, NULL, 0},
     {"unlock.png", unlock_png, unlock_png_size, NULL, 0},
     {"unlock_gray.png", unlock_gray_png, unlock_gray_png_size, NULL, 0},
+    {"Channel_btn.png", Channel_btn_png, Channel_btn_png_size, NULL, 0},
     {NULL, NULL, 0, NULL, 0}
 };
 

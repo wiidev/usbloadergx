@@ -97,7 +97,7 @@ void HaltGui()
 
     // wait for thread to finish
     while (!LWP_ThreadIsSuspended(guithread))
-        usleep(50);
+        usleep(100);
 }
 
 /****************************************************************************

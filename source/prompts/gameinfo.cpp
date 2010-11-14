@@ -963,7 +963,7 @@ int showGameInfo(char *ID)
         {
             gameinfoWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 100);
             while (gameinfoWindow.GetEffect() > 0)
-                usleep(50);
+                usleep(100);
             HaltGui();
             mainWindow->Remove(&gameinfoWindow);
             mainWindow->SetState(STATE_DEFAULT);
@@ -1045,7 +1045,7 @@ int showGameInfo(char *ID)
         {
             gameinfoWindow2.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 100);
             while (gameinfoWindow2.GetEffect() > 0)
-                usleep(50);
+                usleep(100);
             HaltGui();
             mainWindow->Remove(&gameinfoWindow2);
             mainWindow->SetState(STATE_DEFAULT);

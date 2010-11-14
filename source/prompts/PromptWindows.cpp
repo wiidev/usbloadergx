@@ -422,7 +422,7 @@ void WindowCredits()
 
     creditsWindow.SetEffect(EFFECT_FADE, -30);
     while (creditsWindow.GetEffect() > 0)
-        usleep(50);
+        usleep(100);
     HaltGui();
     mainWindow->Remove(&creditsWindow);
     mainWindow->SetState(STATE_DEFAULT);
@@ -766,7 +766,7 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label, cons
 
     promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
     while (promptWindow.GetEffect() > 0)
-        usleep(50);
+        usleep(100);
     HaltGui();
     mainWindow->Remove(&promptWindow);
     mainWindow->SetState(STATE_DEFAULT);
@@ -1068,16 +1068,16 @@ int WindowExitPrompt()
     }
     homeout->Play();
     while (btn1.GetEffect() > 0)
-        usleep(50);
+        usleep(100);
     while (promptWindow.GetEffect() > 0)
-        usleep(50);
+        usleep(100);
     HaltGui();
     homein->Stop();
     delete homein;
     mainWindow->Remove(&promptWindow);
     mainWindow->SetState(STATE_DEFAULT);
     while (homeout->IsPlaying() > 0)
-        usleep(50);
+        usleep(100);
     homeout->Stop();
     delete homeout;
     ResumeGui();
@@ -1415,7 +1415,7 @@ int GameWindowPrompt()
             nameTxt.SetEffect(EFFECT_FADE, -17);
             ResumeGui();
             while (nameTxt.GetEffect() > 0 || diskImg.GetBetaRotateEffect())
-                usleep(50);
+                usleep(100);
             HaltGui();
             diskImg.SetImage(diskCover);
             diskImg.SetBeta(90);
@@ -1439,7 +1439,7 @@ int GameWindowPrompt()
             nameTxt.SetEffect(EFFECT_FADE, -17);
             ResumeGui();
             while (nameTxt.GetEffect() > 0 || diskImg.GetBetaRotateEffect())
-                usleep(50);
+                usleep(100);
             HaltGui();
             diskImg.SetImage(diskCover);
             diskImg.SetBeta(270);
@@ -1486,7 +1486,7 @@ int GameWindowPrompt()
                 promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
                 mainWindow->SetState(STATE_DEFAULT);
                 while (promptWindow.GetEffect() > 0)
-                    usleep(50);
+                    usleep(100);
                 HaltGui();
                 mainWindow->Remove(&promptWindow);
                 ResumeGui();
@@ -1696,7 +1696,7 @@ int GameWindowPrompt()
         }
 
         while (promptWindow.GetEffect() > 0)
-            usleep(50);
+            usleep(100);
         HaltGui();
         if (changed != 3 && changed != 4) // changed==3 or changed==4 --> only Halt the GUI
         {
@@ -1853,7 +1853,7 @@ int DiscWait(const char *title, const char *msg, const char *btn1Label, const ch
 
     promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
     while (promptWindow.GetEffect() > 0)
-        usleep(50);
+        usleep(100);
     HaltGui();
     mainWindow->Remove(&promptWindow);
     mainWindow->SetState(STATE_DEFAULT);
@@ -1927,7 +1927,7 @@ int FormatingPartition(const char *title, partitionEntry *entry)
 
     promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
     while (promptWindow.GetEffect() > 0)
-        usleep(50);
+        usleep(100);
     HaltGui();
     mainWindow->Remove(&promptWindow);
     mainWindow->SetState(STATE_DEFAULT);
@@ -2035,7 +2035,7 @@ bool SearchMissingImages(int choice2)
 
     promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
     while (promptWindow.GetEffect() > 0)
-        usleep(50);
+        usleep(100);
 
     HaltGui();
     mainWindow->Remove(&promptWindow);
@@ -2148,7 +2148,7 @@ bool NetworkInitPrompt()
 
     promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
     while (promptWindow.GetEffect() > 0)
-        usleep(50);
+        usleep(100);
 
     HaltGui();
     mainWindow->Remove(&promptWindow);
@@ -3112,7 +3112,7 @@ int ProgressUpdateWindow()
     }
 
     // promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
-    //while(promptWindow.GetEffect() > 0) usleep(50);
+    //while(promptWindow.GetEffect() > 0) usleep(100);
 
     HaltGui();
     //mainWindow->Remove(&promptWindow);
@@ -3503,7 +3503,7 @@ int ProgressUpdateWindow()
 
     promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
     while (promptWindow.GetEffect() > 0)
-        usleep(50);
+        usleep(100);
 
     HaltGui();
     mainWindow->Remove(&promptWindow);
@@ -3657,7 +3657,7 @@ int CodeDownload(const char *id)
     }
     exit: promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
     while (promptWindow.GetEffect() > 0)
-        usleep(50);
+        usleep(100);
 
     HaltGui();
     mainWindow->Remove(&promptWindow);
@@ -3679,16 +3679,8 @@ char * GetMissingFiles()
  * presenting a user with a choice of up to 2 Buttons.
  *
  ***************************************************************************/
-/* <name>
- <coder>
- <version>
- <release_date>
- <short_description>
- <long_description>
- SD:/APPS/FTPII/ICON.PNG*/
-
 int HBCWindowPrompt(const char *name, const char *coder, const char *version, const char *release_date,
-        const char *long_description, const char *iconPath, u64 filesize)
+        const char *long_description, GuiImageData * iconImgData, u64 filesize)
 {
     int choice = -1;
 
@@ -3741,21 +3733,9 @@ int HBCWindowPrompt(const char *name, const char *coder, const char *version, co
     arrowDownBtn.SetEffectOnOver(EFFECT_SCALE, 50, 130);
     arrowDownBtn.SetSoundClick(btnSoundClick2);
 
-    GuiImageData *iconData = NULL;
-    GuiImage *iconImg = NULL;
-
-	char imgPath[150];
-    snprintf(imgPath, sizeof(imgPath), "%s", iconPath);
-
-    bool iconExist = CheckFile(imgPath);
-    if (iconExist)
-    {
-        //! This does not crash even if there is no file
-        iconData = new GuiImageData(imgPath);
-		iconImg = new GuiImage(iconData);
-        iconImg->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-        iconImg->SetPosition(45, 10);
-    }
+    GuiImage *iconImg = new GuiImage(iconImgData);
+    iconImg->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+    iconImg->SetPosition(45, 10);
 
     GuiImage dialogBoxImg(&dialogBox);
     dialogBoxImg.SetSkew(0, -80, 0, -80, 0, 50, 0, 50);
@@ -3910,11 +3890,14 @@ int HBCWindowPrompt(const char *name, const char *coder, const char *version, co
 
     promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
     while (promptWindow.GetEffect() > 0)
-        usleep(50);
+        usleep(100);
     HaltGui();
     mainWindow->Remove(&promptWindow);
     mainWindow->SetState(STATE_DEFAULT);
     ResumeGui();
+
+    delete iconImg;
+
     return choice;
 }
 

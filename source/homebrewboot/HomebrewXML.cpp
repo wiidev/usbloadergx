@@ -13,16 +13,6 @@
 
 #define ENTRIE_SIZE     8192
 
-/* Initializes a new instance of the HomebrewXML class. */
-HomebrewXML::HomebrewXML()
-{
-}
-
-/* Finalizes an instance of the HomebrewXML class. */
-HomebrewXML::~HomebrewXML()
-{
-}
-
 /* qparam filename Filepath of the XML file */
 int HomebrewXML::LoadHomebrewXMLData(const char* filename)
 {

@@ -204,7 +204,7 @@ int MenuLanguageSelect()
         scrollon = 1;
     }
 
-    GuiCustomOptionBrowser optionBrowser4( 396, 280, &options2, "bg_options_settings.png", scrollon, 10 );
+    GuiCustomOptionBrowser optionBrowser4( 396, 280, &options2, "bg_options_settings.png");
     optionBrowser4.SetPosition( 0, 90 );
     optionBrowser4.SetAlignment( ALIGN_CENTRE, ALIGN_TOP );
 

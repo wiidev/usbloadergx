@@ -58,13 +58,14 @@ SettingsMenu::SettingsMenu(const char * title, OptionList * opts, int returnTo)
         Append(backBtn);
     }
 
-	optionBrowser = new GuiCustomOptionBrowser(396, 280, Options, "bg_options_settings.png", 0, 150);
+	optionBrowser = new GuiCustomOptionBrowser(396, 280, Options, "bg_options_settings.png");
     optionBrowser->SetPosition(0, 90);
     optionBrowser->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 
 	titleTxt = new GuiText(title, 28, (GXColor) {0, 0, 0, 255});
     titleTxt->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     titleTxt->SetPosition(0, 40);
+    titleTxt->SetMaxWidth(310, SCROLL_HORIZONTAL);
 
 	Append(optionBrowser);
 	Append(titleTxt);

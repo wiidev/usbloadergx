@@ -76,7 +76,7 @@ int CheatMenu(const char * gameID)
         case 1:
             int cntcheats = c.getCnt();
             OptionList cheatslst;
-            GuiCustomOptionBrowser chtBrowser(400, 280, &cheatslst, "bg_options_settings.png", 1, 90);
+            GuiCustomOptionBrowser chtBrowser(400, 280, &cheatslst, "bg_options_settings.png");
             chtBrowser.SetPosition(0, 90);
             chtBrowser.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
             chtBrowser.SetClickable(true);

@@ -132,10 +132,7 @@ int DiscBrowse(const char * GameID, char * alternatedname, int alternatedname_si
     cancelBtn.SetLabel(&cancelBtnTxt);
     cancelBtn.SetTrigger(&trigB);
 
-    u8 scrollbaron = 0;
-    if (dolfilecount > 9) scrollbaron = 1;
-
-    GuiCustomOptionBrowser optionBrowser3(396, 280, &options3, "bg_options_gamesettings.png", dolfilecount > 9 ? 1 : 0, 200);
+    GuiCustomOptionBrowser optionBrowser3(396, 280, &options3, "bg_options_gamesettings.png");
     optionBrowser3.SetPosition(0, 90);
     optionBrowser3.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 

@@ -253,7 +253,7 @@ static int Theme_Prompt(const char *title, const char *author, GuiImageData *thu
 
     promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
     while (promptWindow.GetEffect() > 0)
-        usleep(50);
+        usleep(100);
     HaltGui();
     mainWindow->Remove(&promptWindow);
     mainWindow->SetState(STATE_DEFAULT);
@@ -576,7 +576,7 @@ int Theme_Downloader()
                 currentpage--;
                 if (currenttheme < 0)
                 {
-                    currentpage = roundup((ThemesOnPage + 1.0f) / pagesize);
+                    currentpage = ceil((ThemesOnPage + 1.0f) / pagesize);
                     currenttheme = currentpage * pagesize - pagesize;
                 }
                 GoLeftBtn.ResetState();

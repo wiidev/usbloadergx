@@ -115,11 +115,6 @@ unsigned int HomebrewFiles::GetFilesize(int ind)
     else return FileInfo[ind].FileSize;
 }
 
-int HomebrewFiles::GetFilecount()
-{
-    return filecount;
-}
-
 static int ListCompare(const void *a, const void *b)
 {
     FileInfos *ab = (FileInfos*) a;

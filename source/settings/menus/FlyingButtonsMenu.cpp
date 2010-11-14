@@ -265,6 +265,7 @@ void FlyingButtonsMenu::ShowMenu()
     titleTxt = new GuiText(MenuTitle.c_str(), 28, ( GXColor ) {0, 0, 0, 255});
     titleTxt->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     titleTxt->SetPosition(0, 40);
+    titleTxt->SetMaxWidth(310, SCROLL_HORIZONTAL);
     Append(titleTxt);
 
     GoLeftImg = new GuiImage(arrow_left);

@@ -10,8 +10,8 @@
 class HomebrewXML
 {
     public:
-        HomebrewXML();
-        ~HomebrewXML();
+        HomebrewXML() { };
+        HomebrewXML(const char* filename) { LoadHomebrewXMLData(filename); };
 
         int LoadHomebrewXMLData(const char* filename);
 

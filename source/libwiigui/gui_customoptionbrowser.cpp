@@ -22,17 +22,17 @@
 /**
  * Constructor for the GuiCustomOptionBrowser class.
  */
-GuiCustomOptionBrowser::GuiCustomOptionBrowser(int w, int h, OptionList * l, const char * custombg, int scrollon, int col2)
+GuiCustomOptionBrowser::GuiCustomOptionBrowser(int w, int h, OptionList * l, const char * custombg)
 {
     width = w;
     height = h;
     options = l;
-    scrollbaron = scrollon;
     selectable = true;
-    listOffset = this->FindMenuItem(-1, 1);
     selectedItem = 0;
     focus = 1; // allow focus
-    coL2 = col2;
+    coL2 = 50;
+    scrollbaron = false;
+    listOffset = 0;
 
     trigA = new GuiTrigger;
     trigA->SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
@@ -105,17 +105,17 @@ GuiCustomOptionBrowser::GuiCustomOptionBrowser(int w, int h, OptionList * l, con
 
     for (int i = 0; i < PAGESIZE; i++)
     {
-        optionTxt[i] = new GuiText(options->GetName(i), 20, Theme.settingstext);
+        optionTxt[i] = new GuiText((wchar_t *) NULL, 20, Theme.settingstext);
         optionTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
         optionTxt[i]->SetPosition(24, 0);
         optionTxt[i]->SetMaxWidth(bgOptionsImg->GetWidth() - (coL2 + 24), DOTTED);
 
         optionBg[i] = new GuiImage(bgOptionsEntry);
 
-        optionVal[i] = new GuiText((char *) NULL, 20, Theme.settingstext);
+        optionVal[i] = new GuiText((wchar_t *) NULL, 20, Theme.settingstext);
         optionVal[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 
-        optionValOver[i] = new GuiText((char *) NULL, 20, Theme.settingstext);
+        optionValOver[i] = new GuiText((wchar_t *) NULL, 20, Theme.settingstext);
         optionValOver[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
 
         optionBtn[i] = new GuiButton(width - 28, GAMESELECTSIZE);
@@ -128,9 +128,7 @@ GuiCustomOptionBrowser::GuiCustomOptionBrowser(int w, int h, OptionList * l, con
         optionBtn[i]->SetRumble(false);
         optionBtn[i]->SetTrigger(trigA);
         optionBtn[i]->SetSoundClick(btnSoundClick);
-
     }
-    UpdateListEntries();
 }
 
 /**
@@ -199,31 +197,28 @@ void GuiCustomOptionBrowser::ResetState()
 
 int GuiCustomOptionBrowser::GetClickedOption()
 {
-    int found = -1;
     for (int i = 0; i < PAGESIZE; i++)
     {
         if (optionBtn[i]->GetState() == STATE_CLICKED)
         {
             optionBtn[i]->SetState(STATE_SELECTED);
-            found = optionIndex[i];
-            break;
+            return optionIndex[i];
         }
     }
-    return found;
+
+    return -1;
 }
 
 int GuiCustomOptionBrowser::GetSelectedOption()
 {
-    int found = -1;
     for (int i = 0; i < PAGESIZE; i++)
     {
         if (optionBtn[i]->GetState() == STATE_SELECTED)
         {
-            found = optionIndex[i];
-            break;
+            return optionIndex[i];
         }
     }
-    return found;
+    return -1;
 }
 
 void GuiCustomOptionBrowser::SetClickable(bool enable)
@@ -232,11 +227,6 @@ void GuiCustomOptionBrowser::SetClickable(bool enable)
     {
         optionBtn[i]->SetClickable(enable);
     }
-}
-
-void GuiCustomOptionBrowser::SetScrollbar(int enable)
-{
-    scrollbaron = enable;
 }
 
 void GuiCustomOptionBrowser::SetOffset(int optionnumber)
@@ -259,7 +249,8 @@ int GuiCustomOptionBrowser::FindMenuItem(int currentItem, int direction)
 
     if (strlen(options->GetName(nextItem)) > 0)
         return nextItem;
-    else return FindMenuItem(nextItem, direction);
+
+    return FindMenuItem(nextItem, direction);
 }
 
 /**
@@ -283,7 +274,7 @@ void GuiCustomOptionBrowser::Draw()
         else break;
     }
 
-    if (scrollbaron == 1)
+    if (PAGESIZE < options->GetLength())
     {
         scrollbarImg->Draw();
         arrowUpBtn->Draw();
@@ -295,6 +286,7 @@ void GuiCustomOptionBrowser::Draw()
 
 void GuiCustomOptionBrowser::UpdateListEntries()
 {
+    LOCK(this);
     scrollbaron = options->GetLength() > PAGESIZE;
     if (listOffset < 0) listOffset = this->FindMenuItem(-1, 1);
     int next = listOffset;
@@ -324,7 +316,10 @@ void GuiCustomOptionBrowser::UpdateListEntries()
             optionBtn[i]->SetState(STATE_DISABLED);
         }
     }
-    if (coL2 < (24 + maxNameWidth + 16)) coL2 = 24 + maxNameWidth + 16;
+
+    if (coL2 < (24 + maxNameWidth + 16))
+        coL2 = 24 + maxNameWidth + 16;
+
     for (int i = 0; i < PAGESIZE; i++)
     {
         if (optionBtn[i]->GetState() != STATE_DISABLED)
@@ -340,18 +335,12 @@ void GuiCustomOptionBrowser::UpdateListEntries()
 
 void GuiCustomOptionBrowser::Update(GuiTrigger * t)
 {
-    int next, prev, lang = options->GetLength();
-
     if (state == STATE_DISABLED || !t) return;
 
-    if (options->IsChanged())
-    {
-        coL2 = 0;
-        UpdateListEntries();
-    }
+    int next, prev, length = options->GetLength();
     int old_listOffset = listOffset;
 
-    if (scrollbaron == 1)
+    if (length < PAGESIZE)
     {
         // update the location of the scroll box based on the position in the option list
         arrowUpBtn->Update(t);
@@ -359,11 +348,14 @@ void GuiCustomOptionBrowser::Update(GuiTrigger * t)
         scrollbarBoxBtn->Update(t);
     }
 
+    if(options->IsChanged())
+        UpdateListEntries();
+
     next = listOffset;
 
-    u32 buttonshold = ButtonsHold();
-
-    if (buttonshold != WPAD_BUTTON_UP && buttonshold != WPAD_BUTTON_DOWN)
+    if (!(t->wpad.btns_h & WPAD_BUTTON_UP || t->wpad.btns_h & WPAD_BUTTON_DOWN ||
+          t->wpad.btns_h & WPAD_CLASSIC_BUTTON_UP || t->wpad.btns_h & WPAD_CLASSIC_BUTTON_DOWN ||
+          t->pad.btns_h & PAD_BUTTON_UP || t->pad.btns_h & PAD_BUTTON_DOWN))
     {
         for (int i = 0; i < PAGESIZE; i++)
         {
@@ -432,104 +424,106 @@ void GuiCustomOptionBrowser::Update(GuiTrigger * t)
         }
     }
 
-    if (scrollbaron == 1)
+    if (!scrollbaron)
+        return;
+
+    if (arrowDownBtn->GetState() == STATE_CLICKED || arrowDownBtn->GetState() == STATE_HELD)
     {
-        if (arrowDownBtn->GetState() == STATE_CLICKED || arrowDownBtn->GetState() == STATE_HELD)
+        next = this->FindMenuItem(optionIndex[selectedItem], 1);
+
+        if (next >= 0)
         {
-
-            next = this->FindMenuItem(optionIndex[selectedItem], 1);
-
-            if (next >= 0)
+            if (selectedItem == PAGESIZE - 1)
             {
-                if (selectedItem == PAGESIZE - 1)
-                {
-                    // move list down by 1
-                    listOffset = this->FindMenuItem(listOffset, 1);
-                }
-                else if (optionBtn[selectedItem + 1]->IsVisible())
-                {
-                    optionBtn[selectedItem]->ResetState();
-                    optionBtn[selectedItem + 1]->SetState(STATE_SELECTED, t->chan);
-                    selectedItem++;
-                }
-                scrollbarBoxBtn->Draw();
-                usleep(35000);
+                // move list down by 1
+                listOffset = this->FindMenuItem(listOffset, 1);
             }
-            if (buttonshold != WPAD_BUTTON_A)
+            else if (optionBtn[selectedItem + 1]->IsVisible())
             {
-                arrowDownBtn->ResetState();
+                optionBtn[selectedItem]->ResetState();
+                optionBtn[selectedItem + 1]->SetState(STATE_SELECTED, t->chan);
+                selectedItem++;
             }
+            scrollbarBoxBtn->Draw();
+            usleep(35000);
         }
-        else if (arrowUpBtn->GetState() == STATE_CLICKED || arrowUpBtn->GetState() == STATE_HELD)
+        if (!(t->wpad.btns_h & WPAD_BUTTON_A || t->wpad.btns_h & WPAD_CLASSIC_BUTTON_A ||
+              t->pad.btns_h & PAD_BUTTON_A))
         {
-            prev = this->FindMenuItem(optionIndex[selectedItem], -1);
-
-            if (prev >= 0)
-            {
-                if (selectedItem == 0)
-                {
-                    // move list up by 1
-                    listOffset = prev;
-                }
-                else
-                {
-                    optionBtn[selectedItem]->ResetState();
-                    optionBtn[selectedItem - 1]->SetState(STATE_SELECTED, t->chan);
-                    selectedItem--;
-                }
-                scrollbarBoxBtn->Draw();
-                usleep(35000);
-            }
-            if (buttonshold != WPAD_BUTTON_A)
-            {
-                arrowUpBtn->ResetState();
-            }
+            arrowDownBtn->ResetState();
         }
+    }
+    else if (arrowUpBtn->GetState() == STATE_CLICKED || arrowUpBtn->GetState() == STATE_HELD)
+    {
+        prev = this->FindMenuItem(optionIndex[selectedItem], -1);
 
-        if (scrollbarBoxBtn->GetState() == STATE_HELD && scrollbarBoxBtn->GetStateChan() == t->chan && t->wpad.ir.valid
-                && options->GetLength() > PAGESIZE)
+        if (prev >= 0)
         {
-            scrollbarBoxBtn->SetPosition(width / 2 - 18 + 7, 0);
-
-            int position = t->wpad.ir.y - 50 - scrollbarBoxBtn->GetTop();
-
-            listOffset = (position * lang) / 180 - selectedItem;
-
-            if (listOffset <= 0)
+            if (selectedItem == 0)
             {
-                listOffset = 0;
-                selectedItem = 0;
+                // move list up by 1
+                listOffset = prev;
             }
-            else if (listOffset + PAGESIZE >= lang)
+            else
             {
-                listOffset = lang - PAGESIZE;
-                selectedItem = PAGESIZE - 1;
+                optionBtn[selectedItem]->ResetState();
+                optionBtn[selectedItem - 1]->SetState(STATE_SELECTED, t->chan);
+                selectedItem--;
             }
+            scrollbarBoxBtn->Draw();
+            usleep(35000);
         }
-        int positionbar = 237 * (listOffset + selectedItem) / lang;
-
-        if (positionbar > 216) positionbar = 216;
-        scrollbarBoxBtn->SetPosition(width / 2 - 18 + 7, positionbar + 8);
-
-        if (t->Right())
+        if (!(t->wpad.btns_h & WPAD_BUTTON_A || t->wpad.btns_h & WPAD_CLASSIC_BUTTON_A ||
+              t->pad.btns_h & PAD_BUTTON_A))
         {
-            if (listOffset < lang && lang > PAGESIZE)
-            {
-                listOffset = listOffset + PAGESIZE;
-                if (listOffset + PAGESIZE >= lang) listOffset = lang - PAGESIZE;
-            }
-        }
-        else if (t->Left())
-        {
-            if (listOffset > 0)
-            {
-                listOffset = listOffset - PAGESIZE;
-                if (listOffset < 0) listOffset = 0;
-            }
+            arrowUpBtn->ResetState();
         }
     }
 
-    if (old_listOffset != listOffset) UpdateListEntries();
+    if (scrollbarBoxBtn->GetState() == STATE_HELD && scrollbarBoxBtn->GetStateChan() == t->chan && t->wpad.ir.valid
+            && options->GetLength() > PAGESIZE)
+    {
+        scrollbarBoxBtn->SetPosition(width / 2 - 18 + 7, 0);
+
+        int position = t->wpad.ir.y - 50 - scrollbarBoxBtn->GetTop();
+
+        listOffset = (position * length) / 180 - selectedItem;
+
+        if (listOffset <= 0)
+        {
+            listOffset = 0;
+            selectedItem = 0;
+        }
+        else if (listOffset + PAGESIZE >= length)
+        {
+            listOffset = length - PAGESIZE;
+            selectedItem = PAGESIZE - 1;
+        }
+    }
+    int positionbar = 237 * (listOffset + selectedItem) / length;
+
+    if (positionbar > 216) positionbar = 216;
+    scrollbarBoxBtn->SetPosition(width / 2 - 18 + 7, positionbar + 8);
+
+    if (t->Right())
+    {
+        if (listOffset < length && length > PAGESIZE)
+        {
+            listOffset = listOffset + PAGESIZE;
+            if (listOffset + PAGESIZE >= length) listOffset = length - PAGESIZE;
+        }
+    }
+    else if (t->Left())
+    {
+        if (listOffset > 0)
+        {
+            listOffset = listOffset - PAGESIZE;
+            if (listOffset < 0) listOffset = 0;
+        }
+    }
+
+    if (old_listOffset != listOffset)
+        UpdateListEntries();
 
     if (updateCB) updateCB(this);
 }
