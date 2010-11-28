@@ -109,7 +109,7 @@ static int PartitionChoice()
  ***************************************************************************/
 int MountGamePartition(bool ShowGUI)
 {
-    gprintf("MenuCheck()\n");
+    gprintf("MountGamePartition()\n");
 
     s32 wbfsinit = MountWBFS(ShowGUI);
     if (wbfsinit < 0)
@@ -122,6 +122,7 @@ int MountGamePartition(bool ShowGUI)
     memset(game_partition, 0, 6);
     load_from_fs = -1;
 
+    gprintf("\tPartition_GetList\n");
     // Added for slow HDD
     for (int retries = 10; retries > 0; retries--)
     {
@@ -131,6 +132,7 @@ int MountGamePartition(bool ShowGUI)
         sleep(1);
     }
 
+    gprintf("\tWBFS_OpenPart: start sector %u, sector count: %u\n", partitions.pentry[Settings.partition].sector, partitions.pentry[Settings.partition].size);
     if (Settings.partition != -1 && partitions.num > Settings.partition)
     {
         PartInfo pinfo = partitions.pinfo[Settings.partition];
@@ -151,6 +153,7 @@ int MountGamePartition(bool ShowGUI)
     if(ret < 0)
         Sys_LoadMenu();
 
+    gprintf("\tDisc_Init\n");
     ret = Disc_Init();
     if (ret < 0)
     {
@@ -159,9 +162,12 @@ int MountGamePartition(bool ShowGUI)
         Sys_LoadMenu();
     }
 
+    gprintf("\tOpenXMLDatabase\n");
     // open database if needed, load titles if needed
     if (CheckFile(Settings.titlestxt_path))
         OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride, true);
+
+    gprintf("MountGamePartition() return: %i\n", ret);
 
     return ret;
 }

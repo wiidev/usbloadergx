@@ -97,15 +97,17 @@ int BootGame(const char * gameID)
 
     gameList.LoadUnfiltered();
 
-    struct discHdr *header = gameList.GetDiscHeader(gameID);
-    if(!header)
+    if(!gameList.GetDiscHeader(gameID))
     {
         gprintf("Game was not found: %s\n", gameID);
         return -1;
     }
 
+    struct discHdr gameHeader;
+    memcpy(&gameHeader, gameList.GetDiscHeader(gameID), sizeof(struct discHdr));
+
     int ret = 0;
-    header = (mountMethod ? dvdheader : header);
+    struct discHdr * header = (mountMethod ? dvdheader : &gameHeader);
 
     u8 videoChoice = Settings.videomode;
     u8 languageChoice = Settings.language;

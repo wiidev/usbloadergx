@@ -4,6 +4,7 @@
 #include "../fatmounter.h"
 #include "../usbloader/usbstorage2.h"
 #include "../usbloader/disc.h"
+#include "../usbloader/wbfs.h"
 #include "../usbloader/wdvd.h"
 #include "../wad/nandtitle.h"
 #include "../mload/mload_modules.h"
@@ -92,15 +93,17 @@ s32 IosLoader::LoadGameCios(s32 ios)
     s32 ret = -1;
 
     // Unmount fat before reloading IOS.
+    WBFS_Close();
+    WDVD_Close();
     SDCard_deInit();
     USBDevice_deInit();
-    WDVD_Close();
 
     ret = ReloadIosSafe(ios);
 
     // Remount devices after reloading IOS.
     SDCard_Init();
     USBDevice_Init();
+    Disc_Init();
 
     return ret;
 }

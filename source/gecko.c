@@ -35,7 +35,7 @@ bool InitGecko()
     if (geckoattached)
     {
         usb_flush(EXI_CHANNEL_1);
-        CON_EnableGecko(1, true);
+        CON_EnableGecko(1, false);
         geckoinit = true;
         return true;
     }
