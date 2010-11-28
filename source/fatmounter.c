@@ -90,12 +90,16 @@ int USBDevice_Init_Loop()
             if(printStart)
             {
                 printf("failed\n");
-                printf("\tWaiting for slow HDD...\n");
+                printf("\tWaiting for slow HDD...");
                 printStart = false;
             }
             printf("%i ", (int) (timenow-starttime+1));
         }
+
+        timenow = time(0);
     }
+
+    printf("\n");
 
     return ret;
 }
