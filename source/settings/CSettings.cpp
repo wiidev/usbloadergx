@@ -82,7 +82,7 @@ void CSettings::SetDefault()
     gamesound = 1;
     parentalcontrol = 0;
     lockedgames = 0;
-    cios = 222;
+    cios = 249;
     xflip = XFLIP_NO;
     quickboot = OFF;
     wiilight = 1;

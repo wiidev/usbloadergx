@@ -57,7 +57,7 @@ int USBDevice_Init()
     // wait 0.5 sec for the USB to spin up...stupid slow ass HDD
     do
     {
-        started = (!__io_usbstorage2.startup() || !__io_usbstorage2.isInserted());
+        started = (__io_usbstorage2.startup() && __io_usbstorage2.isInserted());
         usleep(50000);
         --retries;
     }
@@ -79,29 +79,34 @@ int USBDevice_Init_Loop()
 {
     time_t starttime = time(0);
     time_t timenow = starttime;
-    int ret = -1;
-    bool printStart = true;
+    bool StatusPrinted = false;
+    bool started = false;
 
-    while(timenow-starttime < 30 && ret < 0)
+    do
     {
-        ret = USBDevice_Init();
-        if(ret < 0)
+        started = (__io_usbstorage2.startup() && __io_usbstorage2.isInserted());
+
+        if(!started)
         {
-            if(printStart)
+            if(timenow != time(0))
             {
-                printf("failed\n");
-                printf("\tWaiting for slow HDD...");
-                printStart = false;
+                timenow = time(0);
+                if(!StatusPrinted)
+                {
+                    printf("\tWaiting for slow HDD...");
+                    StatusPrinted = true;
+                }
+                printf("%i ", (int) (timenow-starttime));
             }
-            printf("%i ", (int) (timenow-starttime+1));
+            usleep(100000);
         }
-
-        timenow = time(0);
     }
+    while(!started && timenow-starttime < 30);
 
-    printf("\n");
+    if(StatusPrinted)
+        printf("\n");
 
-    return ret;
+    return USBDevice_Init();
 }
 
 void USBDevice_deInit()

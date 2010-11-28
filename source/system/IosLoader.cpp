@@ -54,10 +54,8 @@ s32 IosLoader::LoadAppCios()
     // Unmount fat before reloading IOS.
     SDCard_deInit();
     USBDevice_deInit();
-    __io_usbstorage.shutdown();
-    USB_Deinitialize();
 
-    u32 ciosLoadPriority[] = { 250, 222, 249, Settings.cios }; // Descending.
+    u32 ciosLoadPriority[] = { 250, 249, 222, Settings.cios }; // Descending.
 
 
     for (u8 i = (sizeof(ciosLoadPriority)/sizeof(ciosLoadPriority[0]))-1; i >= 0; i--)
@@ -97,9 +95,6 @@ s32 IosLoader::LoadGameCios(s32 ios)
     SDCard_deInit();
     USBDevice_deInit();
     WDVD_Close();
-    __io_usbstorage.shutdown(); // libogc usb
-    __io_usbstorage2.shutdown(); // cios usb
-    USB_Deinitialize(); // main usb handle
 
     ret = ReloadIosSafe(ios);
 
