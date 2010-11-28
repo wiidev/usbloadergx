@@ -44,17 +44,20 @@ bool IosLoader::IsWaninkokoIOS(s32 ios)
  */
 s32 IosLoader::LoadAppCios()
 {
+    u32 activeCios = IOS_GetVersion();
     s32 ret = -1;
+
+    // We have what we need
+    if((int) activeCios == Settings.cios)
+        return 0;
 
     // Unmount fat before reloading IOS.
     SDCard_deInit();
     USBDevice_deInit();
-    __io_usbstorage.shutdown(); // libogc usb
-    __io_usbstorage2.shutdown(); // cios usb
-    USB_Deinitialize(); // main usb handle
+    __io_usbstorage.shutdown();
+    USB_Deinitialize();
 
-    u32 ciosLoadPriority[] = { 250, 249, 222, Settings.cios }; // Descending.
-    u32 activeCios = IOS_GetVersion();
+    u32 ciosLoadPriority[] = { 250, 222, 249, Settings.cios }; // Descending.
 
 
     for (u8 i = (sizeof(ciosLoadPriority)/sizeof(ciosLoadPriority[0]))-1; i >= 0; i--)
@@ -74,11 +77,6 @@ s32 IosLoader::LoadAppCios()
             break;
         }
     }
-
-    // Remount devices after reloading IOS.
-    SDCard_Init();
-    USBDevice_Init();
-    Disc_Init();
 
     return ret;
 }

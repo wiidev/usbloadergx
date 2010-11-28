@@ -39,6 +39,7 @@ CSettings::CSettings()
 {
     CONF_Init();
     strcpy(BootDevice, "SD:");
+    snprintf(ConfigPath, sizeof(ConfigPath), "%s/config/", BootDevice);
     this->SetDefault();
 }
 
@@ -48,20 +49,19 @@ CSettings::~CSettings()
 
 void CSettings::SetDefault()
 {
-    snprintf(ConfigPath, sizeof(ConfigPath), "%s/config/GXGlobal.cfg", BootDevice);
-    snprintf(covers_path, sizeof(covers_path), "%s/images/", BootDevice);
-    snprintf(covers2d_path, sizeof(covers2d_path), "%s/images/2D/", BootDevice);
-    snprintf(disc_path, sizeof(disc_path), "%s/images/disc/", BootDevice);
-    snprintf(titlestxt_path, sizeof(titlestxt_path), "%s/config/", BootDevice);
-    snprintf(languagefiles_path, sizeof(languagefiles_path), "%s/config/language/", BootDevice);
+    snprintf(covers_path, sizeof(covers_path), "%simages/", ConfigPath);
+    snprintf(covers2d_path, sizeof(covers2d_path), "%simages/2D/", ConfigPath);
+    snprintf(disc_path, sizeof(disc_path), "%simages/disc/", ConfigPath);
+    snprintf(titlestxt_path, sizeof(titlestxt_path), "%s", ConfigPath);
+    snprintf(languagefiles_path, sizeof(languagefiles_path), "%slanguage/", ConfigPath);
     snprintf(update_path, sizeof(update_path), "%s/apps/usbloader_gx/", BootDevice);
-    snprintf(theme_downloadpath, sizeof(theme_downloadpath), "%s/config/themes/", BootDevice);
+    snprintf(theme_downloadpath, sizeof(theme_downloadpath), "%sthemes/", ConfigPath);
     snprintf(homebrewapps_path, sizeof(homebrewapps_path), "%s/apps/", BootDevice);
-    snprintf(Cheatcodespath, sizeof(Cheatcodespath), "%s/codes/", BootDevice);
-    snprintf(TxtCheatcodespath, sizeof(TxtCheatcodespath), "%s/txtcodes/", BootDevice);
-    snprintf(BcaCodepath, sizeof(BcaCodepath), "%s/bca/", BootDevice);
-    snprintf(WipCodepath, sizeof(WipCodepath), "%s/wip/", BootDevice);
-    snprintf(theme_path, sizeof(theme_path), "%s/theme/", BootDevice);
+    snprintf(Cheatcodespath, sizeof(Cheatcodespath), "%scodes/", ConfigPath);
+    snprintf(TxtCheatcodespath, sizeof(TxtCheatcodespath), "%stxtcodes/", ConfigPath);
+    snprintf(BcaCodepath, sizeof(BcaCodepath), "%sbca/", ConfigPath);
+    snprintf(WipCodepath, sizeof(WipCodepath), "%swip/", ConfigPath);
+    snprintf(theme_path, sizeof(theme_path), "%stheme/", ConfigPath);
     snprintf(dolpath, sizeof(dolpath), "%s/", BootDevice);
     strcpy(language_path, "");
     strcpy(ogg_path, "");
@@ -132,16 +132,10 @@ bool CSettings::Load()
     FindConfig();
     //! Reset default path variables to the right device
     SetDefault();
-    //! Set up the default path in the classes
-    //! in case the config file does not exist yet
-    char tempPath[100];
-    snprintf(tempPath, sizeof(tempPath), "%s/config/", BootDevice);
-    GameStatistics.Load(tempPath);
-    GameSettings.Load(tempPath);
 
     char line[1024];
     char filepath[300];
-    snprintf(filepath, sizeof(filepath), "%s", ConfigPath);
+    snprintf(filepath, sizeof(filepath), "%sGXGlobal.cfg", ConfigPath);
 
     file = fopen(filepath, "r");
     if (!file) return false;
@@ -153,17 +147,6 @@ bool CSettings::Load()
         this->ParseLine(line);
     }
     fclose(file);
-
-    //!The following needs to be moved later
-    char GameSetPath[200];
-    snprintf(GameSetPath, sizeof(GameSetPath), ConfigPath);
-    char * ptr = strrchr(GameSetPath, '/');
-    if(ptr) ptr[1] = 0;
-
-    GameStatistics.Load(GameSetPath);
-    GameSettings.Load(GameSetPath);
-    Theme.Load(theme_path);
-    this->LoadLanguage(this->language_path);
 
     return true;
 
@@ -182,19 +165,12 @@ bool CSettings::Save()
 {
     if (!FindConfig()) return false;
 
-    char filedest[100];
-    snprintf(filedest, sizeof(filedest), "%s", ConfigPath);
+    char filedest[300];
+    snprintf(filedest, sizeof(filedest), "%sGXGlobal.cfg", ConfigPath);
 
-    char * tmppath = strrchr(filedest, '/');
-    if (tmppath)
-    {
-        tmppath++;
-        tmppath[0] = '\0';
-    }
+    if(!CreateSubfolder(ConfigPath))	return false;
 
-    if(!CreateSubfolder(filedest))	return false;
-
-    file = fopen(ConfigPath, "w");
+    file = fopen(filedest, "w");
     if (!file) return false;
 
     fprintf(file, "# USB Loader global settings file\n");
@@ -572,17 +548,20 @@ bool CSettings::SetSetting(char *name, char *value)
 bool CSettings::FindConfig()
 {
     bool found = false;
+    char CheckPath[300];
     strcpy(BootDevice, "SD:");
 
     for (int i = 0; i < 2; ++i)
     {
         if (i == 1) strcpy(BootDevice, "USB:");
 
-        snprintf(ConfigPath, sizeof(ConfigPath), "%s/config/GXGlobal.cfg", BootDevice);
-        if ((found = CheckFile(ConfigPath))) break;
+        snprintf(ConfigPath, sizeof(ConfigPath), "%s/apps/usbloader_gx/", BootDevice);
+        snprintf(CheckPath, sizeof(CheckPath), "%sGXGlobal.cfg", ConfigPath);
+        if ((found = CheckFile(CheckPath))) break;
 
-        snprintf(ConfigPath, sizeof(ConfigPath), "%s/apps/usbloader_gx/GXGlobal.cfg", BootDevice);
-        if ((found = CheckFile(ConfigPath))) break;
+        snprintf(ConfigPath, sizeof(ConfigPath), "%s/config/", BootDevice);
+        snprintf(CheckPath, sizeof(CheckPath), "%sGXGlobal.cfg", ConfigPath);
+        if ((found = CheckFile(CheckPath))) break;
     }
 
     if (!found)
@@ -596,9 +575,8 @@ bool CSettings::FindConfig()
             if (!found)
             {
                 snprintf(ConfigPath, sizeof(ConfigPath), "%s/apps/usbloader_gx/", BootDevice);
-                CreateSubfolder(ConfigPath);
-                strcat(ConfigPath, "GXGlobal.cfg");
-                testFp = fopen(ConfigPath, "wb");
+                snprintf(CheckPath, sizeof(CheckPath), "%sGXGlobal.cfg", ConfigPath);
+                testFp = fopen(CheckPath, "wb");
                 found = (testFp != NULL);
                 fclose(testFp);
             }
@@ -606,8 +584,8 @@ bool CSettings::FindConfig()
             {
                 snprintf(ConfigPath, sizeof(ConfigPath), "%s/config/", BootDevice);
                 CreateSubfolder(ConfigPath);
-                strcat(ConfigPath, "GXGlobal.cfg");
-                testFp = fopen(ConfigPath, "wb");
+                snprintf(CheckPath, sizeof(CheckPath), "%sGXGlobal.cfg", ConfigPath);
+                testFp = fopen(CheckPath, "wb");
                 found = (testFp != NULL);
                 fclose(testFp);
             }
@@ -716,7 +694,7 @@ bool CSettings::LoadLanguage(const char *path, int language)
 {
     bool ret = false;
 
-    if (language >= 0 || !path)
+    if (language >= 0 || !path || strlen(path) == 0)
     {
         if (language < 0) return false;
 
@@ -785,7 +763,11 @@ bool CSettings::LoadLanguage(const char *path, int language)
         }
 
         ret = gettextLoadLanguage(filepath);
-        if (ret) strncpy(language_path, filepath, sizeof(language_path));
+        if (ret)
+        {
+            strncpy(language_path, filepath, sizeof(language_path));
+            strcpy(db_language, GetLangCode(language_path));
+        }
     }
     else if (strlen(path) < 3)
     {
@@ -799,7 +781,6 @@ bool CSettings::LoadLanguage(const char *path, int language)
             strncpy(language_path, path, sizeof(language_path));
             strcpy(db_language, GetLangCode(language_path));
         }
-
     }
 
     return ret;

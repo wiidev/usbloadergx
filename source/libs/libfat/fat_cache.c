@@ -158,7 +158,7 @@ bool _FAT_cache_readSectors(CACHE *cache,sec_t sector,sec_t numSectors,void *buf
 	sec_t sec;
 	sec_t secs_to_read;
 	CACHE_ENTRY *entry;
-	uint8_t *dest = buffer;
+	uint8_t *dest = (uint8_t *)buffer;
 
 	while(numSectors>0) {
 		entry = _FAT_cache_getPage(cache,sector);
@@ -264,7 +264,7 @@ bool _FAT_cache_eraseWritePartialSector (CACHE* cache, const void* buffer, sec_t
 	return true;
 }
 
-
+#ifndef GEKKO
 static CACHE_ENTRY* _FAT_cache_findPage(CACHE *cache, sec_t sector, sec_t count) {
 
 	unsigned int i;
@@ -291,47 +291,46 @@ static CACHE_ENTRY* _FAT_cache_findPage(CACHE *cache, sec_t sector, sec_t count)
 
 	return entry;
 }
+#endif
 
 bool _FAT_cache_writeSectors (CACHE* cache, sec_t sector, sec_t numSectors, const void* buffer) 
 {
 	sec_t sec;
 	sec_t secs_to_write;
 	CACHE_ENTRY* entry;
-	const uint8_t *src = buffer;
+	const uint8_t *src = (const uint8_t *)buffer;
 
 	while(numSectors>0)
 	{
+#ifdef GEKKO
+		entry = _FAT_cache_getPage(cache,sector);
+		if(entry==NULL) return false;
+#else
 		entry = _FAT_cache_findPage(cache,sector,numSectors);
 
-		if(entry!=NULL) {
+		if(entry==NULL)
+			return _FAT_disc_writeSectors(cache->disc,sector,numSectors,src);
 
-			if ( entry->sector > sector) {
+		if ( entry->sector > sector) {
+			secs_to_write = entry->sector - sector;
 				
-				secs_to_write = entry->sector - sector;
-				
-				_FAT_disc_writeSectors(cache->disc,sector,secs_to_write,src);
-				src += (secs_to_write*BYTES_PER_READ);
-				sector += secs_to_write;
-				numSectors -= secs_to_write;
-			}
-				
-			sec = sector - entry->sector;
-			secs_to_write = entry->count - sec;
-
-			if(secs_to_write>numSectors) secs_to_write = numSectors;
-
-			memcpy(entry->cache + (sec*BYTES_PER_READ),src,(secs_to_write*BYTES_PER_READ));
-
+			_FAT_disc_writeSectors(cache->disc,sector,secs_to_write,src);
 			src += (secs_to_write*BYTES_PER_READ);
 			sector += secs_to_write;
 			numSectors -= secs_to_write;
-
-			entry->dirty = true;
-				
-		} else {
-			_FAT_disc_writeSectors(cache->disc,sector,numSectors,src);
-			numSectors=0;
 		}
+#endif
+		sec = sector - entry->sector;
+		secs_to_write = entry->count - sec;
+		if(secs_to_write>numSectors) secs_to_write = numSectors;
+
+		memcpy(entry->cache + (sec*BYTES_PER_READ),src,(secs_to_write*BYTES_PER_READ));
+
+		src += (secs_to_write*BYTES_PER_READ);
+		sector += secs_to_write;
+		numSectors -= secs_to_write;
+
+		entry->dirty = true;
 	}
 	return true;
 }

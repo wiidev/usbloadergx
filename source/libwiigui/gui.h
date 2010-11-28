@@ -935,8 +935,6 @@ class GuiKeyboard: public GuiWindow
         GuiImageData * keyMediumOver;
         GuiImageData * keyLarge;
         GuiImageData * keyLargeOver;
-        GuiSound * keySoundOver;
-        GuiSound * keySoundClick;
         GuiTrigger * trigA;
         GuiTrigger * trigB;
 };

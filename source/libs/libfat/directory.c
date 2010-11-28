@@ -439,22 +439,23 @@ bool _FAT_directory_getVolumeLabel (PARTITION* partition, char *label) {
 	end = false;
 	//this entry should be among the first 3 entries in the root directory table, if not, then system can have trouble displaying the right volume label
 	while(!end) {   
-		if (_FAT_directory_incrementDirEntryPosition (partition, &entryEnd, false) == false) {
-			end = true;
-		}
-
 		if(!_FAT_cache_readPartialSector (partition->cache, entryData,
 			_FAT_fat_clusterToSector(partition, entryEnd.cluster) + entryEnd.sector,
 			entryEnd.offset * DIR_ENTRY_DATA_SIZE, DIR_ENTRY_DATA_SIZE))
 		{ //error reading
 			return false;
 		}
+
 		if (entryData[DIR_ENTRY_attributes] == ATTRIB_VOL && entryData[0] != DIR_ENTRY_FREE) {		
 			for (i = 0; i < 11; i++) {
-				label[i] = entryData[DIR_ENTRY_name + i];
+				label[i] = entryData[DIR_ENTRY_name + i];				
 			}
 			return true;
 		} else if (entryData[0] == DIR_ENTRY_LAST) {
+			end = true;
+		}
+		
+		if (_FAT_directory_incrementDirEntryPosition (partition, &entryEnd, false) == false) {
 			end = true;
 		}
 	}

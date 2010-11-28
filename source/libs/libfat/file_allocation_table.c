@@ -246,7 +246,7 @@ uint32_t _FAT_fat_linkFreeCluster(PARTITION* partition, uint32_t cluster) {
 	}
 	partition->fat.firstFree = firstFree;
 
-	if ((cluster >= CLUSTER_FIRST) && (cluster < lastCluster))
+	if ((cluster >= CLUSTER_FIRST) && (cluster <= lastCluster))
 	{
 		// Update the linked from FAT entry
 		_FAT_fat_writeFatEntry (partition, cluster, firstFree);

@@ -31,8 +31,6 @@
 
 #include "common.h"
 
-#ifdef USE_LWP_LOCK
-
 static inline void _FAT_lock_init(mutex_t *mutex)
 {
 	LWP_MutexInit(mutex, false);
@@ -52,35 +50,6 @@ static inline void _FAT_unlock(mutex_t *mutex)
 {
 	LWP_MutexUnlock(*mutex);
 }
-
-#else
-
-// We still need a blank lock type
-#ifndef mutex_t
-typedef int mutex_t;
-#endif
-
-static inline void _FAT_lock_init(mutex_t *mutex)
-{
-	return;
-}
-
-static inline void _FAT_lock_deinit(mutex_t *mutex)
-{
-	return;
-}
-
-static inline void _FAT_lock(mutex_t *mutex)
-{
-	return;
-}
-
-static inline void _FAT_unlock(mutex_t *mutex)
-{
-	return;
-}
-
-#endif // USE_LWP_LOCK
 
 
 #endif // _LOCK_H

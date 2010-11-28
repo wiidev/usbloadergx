@@ -51,10 +51,20 @@ int USBDevice_Init()
     USBDevice_deInit();
     //right now mounts first FAT-partition
 
-    //usbstorage.startup is actually not needed since it's done in libfat
-    //let's still do it before mount and wait a bit for slow ass hdds before reading from them
-    __io_usbstorage2.startup();
-    usleep(200000);
+    bool started = false;
+    int retries = 10;
+
+    // wait 0.5 sec for the USB to spin up...stupid slow ass HDD
+    do
+    {
+        started = (!__io_usbstorage2.startup() || !__io_usbstorage2.isInserted());
+        usleep(50000);
+        --retries;
+    }
+    while(!started && retries > 0);
+
+    if(!started)
+        return -1;
 
     if (fatMount("USB", &__io_usbstorage2, 0, CACHE, SECTORS))
     {
@@ -62,18 +72,32 @@ int USBDevice_Init()
         return (fat_usb_mount = 1);
     }
 
-    __io_usbstorage.startup();
-    usleep(200000);
+    return -1;
+}
 
-    if(fatMount("USB", &__io_usbstorage, 0, CACHE, SECTORS))
+int USBDevice_Init_Loop()
+{
+    time_t starttime = time(0);
+    time_t timenow = starttime;
+    int ret = -1;
+    bool printStart = true;
+
+    while(timenow-starttime < 30 && ret < 0)
     {
-        fat_usb_sec = _FAT_startSector;
-        return (fat_usb_mount = 1);
+        ret = USBDevice_Init();
+        if(ret < 0)
+        {
+            if(printStart)
+            {
+                printf("failed\n");
+                printf("\tWaiting for slow HDD...\n");
+                printStart = false;
+            }
+            printf("%i ", (int) (timenow-starttime+1));
+        }
     }
 
-    __io_usbstorage.shutdown();
-
-    return -1;
+    return ret;
 }
 
 void USBDevice_deInit()
@@ -81,7 +105,6 @@ void USBDevice_deInit()
     //closing all open Files write back the cache and then shutdown em!
     fatUnmount("USB:/");
     //only shutdown libogc usb and not the cios one
-    __io_usbstorage.shutdown();
     __io_usbstorage2.shutdown();
 
     fat_usb_mount = 0;
@@ -100,11 +123,7 @@ int WBFSDevice_Init(u32 sector)
 
     fat_wbfs_mount = 1;
     fat_wbfs_sec = _FAT_startSector;
-    if (sector && fat_wbfs_sec != sector)
-    {
-        // This is an error situation...actually, but is ignored in Config loader also
-        // Should ask Oggzee about it...
-    }
+
     return 0;
 }
 
@@ -169,11 +188,7 @@ s32 MountNTFS(u32 sector)
     {
         ret = ntfsMount("NTFS", &__io_usbstorage2, sector, CACHE, SECTORS, NTFS_SHOW_HIDDEN_FILES | NTFS_RECOVER);
         if (!ret)
-        {
-            ret = ntfsMount("NTFS", &__io_usbstorage, sector, CACHE, SECTORS, NTFS_SHOW_HIDDEN_FILES | NTFS_RECOVER);
-            if(!ret)
-                return -2;
-        }
+            return -2;
     }
     else if (wbfsDev == WBFS_DEVICE_SDHC)
     {

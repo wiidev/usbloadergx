@@ -1,7 +1,7 @@
 /*
 	fat.h
 	Simple functionality for startup, mounting and unmounting of FAT-based devices.
-	
+
  Copyright (c) 2006 - 2009
 	Michael "Chishm" Chisholm
 	Dave "WinterMute" Murphy
@@ -71,7 +71,7 @@ extern bool fatInitDefault (void);
 /*
 Mount the device pointed to by interface, and set up a devoptab entry for it as "name:".
 You can then access the filesystem using "name:/".
-This will mount the active partition or the first valid partition on the disc, 
+This will mount the active partition or the first valid partition on the disc,
 and will use a cache size optimized for the host system.
 */
 extern bool fatMountSimple (const char* name, const DISC_INTERFACE* interface);

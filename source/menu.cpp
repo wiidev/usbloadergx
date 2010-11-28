@@ -285,22 +285,16 @@ int MainMenu(int menu)
 
     ResumeGui();
 
-    gprintf("Vor bgm\n");
     bgMusic = new GuiBGM(bg_music_ogg, bg_music_ogg_size, Settings.volume);
-    gprintf("new bgm\n");
     bgMusic->SetLoop(Settings.musicloopmode); //loop music
-    gprintf("SetLoop\n");
     bgMusic->Load(Settings.ogg_path);
-    gprintf("Load\n");
     bgMusic->Play();
-    gprintf("Nach bgm\n");
 
     MountGamePartition();
 
     while (currentMenu != MENU_EXIT)
     {
         bgMusic->SetVolume(Settings.volume);
-        //      gprintf("Current menu: %d\n", currentMenu);
 
         switch (currentMenu)
         {

@@ -16,6 +16,7 @@ extern int fat_wbfs_mount;
 extern sec_t fat_wbfs_sec;
 
 int USBDevice_Init();
+int USBDevice_Init_Loop(); //! Wait's for the drive before mounting it, only used on bootup
 void USBDevice_deInit();
 int WBFSDevice_Init(u32 sector);
 void WBFSDevice_deInit();

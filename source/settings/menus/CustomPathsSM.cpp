@@ -46,6 +46,7 @@ CustomPathsSM::CustomPathsSM()
     Options->SetName(Idx++, tr("Theme Download Path"));
     Options->SetName(Idx++, tr("BCA Codes Path"));
     Options->SetName(Idx++, tr("WIP Patches Path"));
+    Options->SetName(Idx++, tr("Languagefiles Path"));
 
     SetOptionValues();
 }
@@ -92,6 +93,9 @@ void CustomPathsSM::SetOptionValues()
 
     //! Settings: WIP Patches Path
     Options->SetValue(Idx++, Settings.WipCodepath);
+
+    //! Settings: Languagefiles Path
+    Options->SetValue(Idx++, Settings.languagefiles_path);
 }
 
 int CustomPathsSM::GetMenuInternal()
@@ -213,6 +217,13 @@ int CustomPathsSM::GetMenuInternal()
     {
         titleTxt->SetText(tr( "WIP Patches Path" ));
         ChangePath(Settings.WipCodepath, sizeof(Settings.WipCodepath));
+    }
+
+    //! Settings: Languagefiles Path
+    else if (ret == ++Idx)
+    {
+        titleTxt->SetText(tr( "Languagefiles Path" ));
+        ChangePath(Settings.languagefiles_path, sizeof(Settings.languagefiles_path));
     }
 
     //! Global set back of the titleTxt after a change

@@ -47,10 +47,13 @@ bool SetupDefaultFont(const char *path)
 {
     bool result = false;
     FILE *pfile = NULL;
+    char FontPath[300];
 
     ClearFontData();
 
-    if (path) pfile = fopen(path, "rb");
+    snprintf(FontPath, sizeof(FontPath), "%sfont.ttf", path);
+
+    pfile = fopen(FontPath, "rb");
 
     if (pfile)
     {

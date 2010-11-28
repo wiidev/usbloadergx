@@ -4,8 +4,7 @@
 #include <malloc.h>
 
 /* init-globals */
-bool geckoinit = false;
-bool textVideoInit = false;
+static bool geckoinit = false;
 
 #ifndef NO_DEBUG
 #include <stdarg.h>
@@ -37,6 +36,7 @@ bool InitGecko()
     {
         usb_flush(EXI_CHANNEL_1);
         CON_EnableGecko(1, true);
+        geckoinit = true;
         return true;
     }
     else return false;

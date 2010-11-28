@@ -166,8 +166,8 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
     //keyBack->SetImage(keyBackImg);
     //keyBack->SetImageOver(keyBackOverImg);
     keyBack->SetLabel(keyBackText);
-    //keyBack->SetSoundOver(keySoundOver);
-    //keyBack->SetSoundClick(keySoundClick);
+    //keyBack->SetSoundOver(btnSoundOver);
+    //keyBack->SetSoundClick(btnSoundClick);
     //keyBack->SetTrigger(trigA);
     keyBack->SetTrigger(trigB);
     if (mode > 1)
@@ -194,13 +194,13 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
         {   0, 0, 0, 0xff});
     }
     keyClear = new GuiButton(keyClearImg, keyClearOverImg, 0, 3, (10 * 42 + 40) + eurocheck, 4 * 42 + 120, trigA,
-            keySoundOver, keySoundClick, 1);
+            btnSoundOver, btnSoundClick, 1);
     //keyClear = new GuiButton(keyMedium->GetWidth(), keyMedium->GetHeight());
     //keyClear->SetImage(keyClearImg);
     //keyClear->SetImageOver(keyClearOverImg);
     keyClear->SetLabel(keyClearText);
-    //keyClear->SetSoundOver(keySoundOver);
-    //keyClear->SetSoundClick(keySoundClick);
+    //keyClear->SetSoundOver(btnSoundOver);
+    //keyClear->SetSoundClick(btnSoundClick);
     //keyClear->SetTrigger(trigA);
     //keyClear->SetPosition((10*42+40)+eurocheck, 4*42+120);//(10*42+40, 0*42+80);
     //keyClear->SetEffectGrow();
@@ -210,14 +210,14 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
     keyAltOverImg = new GuiImage(keyMediumOver);
     keyAltText = new GuiText("Alt Gr", 20, ( GXColor )
     {   0, 0, 0, 0xff});
-    keyAlt = new GuiButton(keyAltImg, keyAltOverImg, 0, 3, 84 + eurocheck, 4 * 42 + 120, trigA, keySoundOver,
-            keySoundClick, 1);
+    keyAlt = new GuiButton(keyAltImg, keyAltOverImg, 0, 3, 84 + eurocheck, 4 * 42 + 120, trigA, btnSoundOver,
+            btnSoundClick, 1);
     //keyAlt = new GuiButton(keyMedium->GetWidth(), keyMedium->GetHeight());
     //keyAlt->SetImage(keyAltImg);
     //keyAlt->SetImageOver(keyAltOverImg);
     keyAlt->SetLabel(keyAltText);
-    //keyAlt->SetSoundOver(keySoundOver);
-    //keyAlt->SetSoundClick(keySoundClick);
+    //keyAlt->SetSoundOver(btnSoundOver);
+    //keyAlt->SetSoundClick(btnSoundClick);
     //keyAlt->SetTrigger(trigA);
     //keyAlt->SetPosition(84+eurocheck, 4*42+120);//(10*42+40, 4*42+120);
     //keyAlt->SetEffectGrow();
@@ -231,13 +231,13 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
     keyAlt2Text = new GuiText("Accent", 20, ( GXColor )
     {   0, 0, 0, 0xff});
     keyAlt2 = new GuiButton(keyAlt2Img, keyAlt2OverImg, 0, 3, (8 * 42 + 40) + eurocheck, 4 * 42 + 120, trigA,
-            keySoundOver, keySoundClick, 1);
+            btnSoundOver, btnSoundClick, 1);
     //keyAlt2 = new GuiButton(keyMedium->GetWidth(), keyMedium->GetHeight());
     //keyAlt2->SetImage(keyAlt2Img);
     //keyAlt2->SetImageOver(keyAlt2OverImg);
     keyAlt2->SetLabel(keyAlt2Text);
-    //keyAlt2->SetSoundOver(keySoundOver);
-    //keyAlt2->SetSoundClick(keySoundClick);
+    //keyAlt2->SetSoundOver(btnSoundOver);
+    //keyAlt2->SetSoundClick(btnSoundClick);
     //keyAlt2->SetTrigger(trigA);
     //keyAlt2->SetPosition((8*42+40)+eurocheck, 4*42+120);//(10*42+40, 4*42+120);
     //keyAlt2->SetEffectGrow();
@@ -250,14 +250,14 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
     keyCapsOverImg = new GuiImage(keyMediumOver);
     keyCapsText = new GuiText("Caps", 20, ( GXColor )
     {   0, 0, 0, 0xff});
-    keyCaps = new GuiButton(keyCapsImg, keyCapsOverImg, 0, 3, 0 + eurocheck, 2 * 42 + 120, trigA, keySoundOver,
-            keySoundClick, 1);
+    keyCaps = new GuiButton(keyCapsImg, keyCapsOverImg, 0, 3, 0 + eurocheck, 2 * 42 + 120, trigA, btnSoundOver,
+            btnSoundClick, 1);
     //keyCaps = new GuiButton(keyMedium->GetWidth(), keyMedium->GetHeight());
     //keyCaps->SetImage(keyCapsImg);
     //keyCaps->SetImageOver(keyCapsOverImg);
     keyCaps->SetLabel(keyCapsText);
-    //keyCaps->SetSoundOver(keySoundOver);
-    //keyCaps->SetSoundClick(keySoundClick);
+    //keyCaps->SetSoundOver(btnSoundOver);
+    //keyCaps->SetSoundClick(btnSoundClick);
     //keyCaps->SetTrigger(trigA);
     //keyCaps->SetPosition(0+eurocheck, 2*42+120);//(0, 2*42+80);
     //keyCaps->SetEffectGrow();
@@ -267,14 +267,14 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
     keyShiftOverImg = new GuiImage(keyMediumOver);
     keyShiftText = new GuiText("Shift", 20, ( GXColor )
     {   0, 0, 0, 0xff});
-    keyShift = new GuiButton(keyShiftImg, keyShiftOverImg, 0, 3, 21 + eurocheck, 3 * 42 + 120, trigA, keySoundOver,
-            keySoundClick, 1);
+    keyShift = new GuiButton(keyShiftImg, keyShiftOverImg, 0, 3, 21 + eurocheck, 3 * 42 + 120, trigA, btnSoundOver,
+            btnSoundClick, 1);
     //keyShift = new GuiButton(keyMedium->GetWidth(), keyMedium->GetHeight());
     //keyShift->SetImage(keyShiftImg);
     //keyShift->SetImageOver(keyShiftOverImg);
     keyShift->SetLabel(keyShiftText);
-    //keyShift->SetSoundOver(keySoundOver);
-    //keyShift->SetSoundClick(keySoundClick);
+    //keyShift->SetSoundOver(btnSoundOver);
+    //keyShift->SetSoundClick(btnSoundClick);
     //keyShift->SetTrigger(trigA);
     //keyShift->SetPosition(21+eurocheck, 3*42+120);//(21, 3*42+80);
     //keyShift->SetEffectGrow();
@@ -282,13 +282,13 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
 
     keySpaceImg = new GuiImage(keyLarge);
     keySpaceOverImg = new GuiImage(keyLargeOver);
-    keySpace = new GuiButton(keySpaceImg, keySpaceOverImg, 2, 3, 0 + eurocheck, 4 * 42 + 120, trigA, keySoundOver,
-            keySoundClick, 1);
+    keySpace = new GuiButton(keySpaceImg, keySpaceOverImg, 2, 3, 0 + eurocheck, 4 * 42 + 120, trigA, btnSoundOver,
+            btnSoundClick, 1);
     //keySpace = new GuiButton(keyLarge->GetWidth(), keyLarge->GetHeight());
     //keySpace->SetImage(keySpaceImg);
     //keySpace->SetImageOver(keySpaceOverImg);
-    //keySpace->SetSoundOver(keySoundOver);
-    //keySpace->SetSoundClick(keySoundClick);
+    //keySpace->SetSoundOver(btnSoundOver);
+    //keySpace->SetSoundClick(btnSoundClick);
     //keySpace->SetTrigger(trigA);
     //keySpace->SetPosition(0+eurocheck, 4*42+120);//(0, 4*42+80);
     //keySpace->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
@@ -310,12 +310,12 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
                 keyTxt[i][j]->SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
                 keyTxt[i][j]->SetPosition(0, -10);
                 keyBtn[i][j] = new GuiButton(keyImg[i][j], keyImgOver[i][j], 0, 3, (j * 42 + 21 * i + 40) + eurocheck,
-                        i * 42 + 120, trigA, keySoundOver, keySoundClick, 1);
+                        i * 42 + 120, trigA, btnSoundOver, btnSoundClick, 1);
                 //keyBtn[i][j] = new GuiButton(key->GetWidth(), key->GetHeight());
                 //keyBtn[i][j]->SetImage(keyImg[i][j]);
                 //keyBtn[i][j]->SetImageOver(keyImgOver[i][j]);
-                //keyBtn[i][j]->SetSoundOver(keySoundOver);
-                //keyBtn[i][j]->SetSoundClick(keySoundClick);
+                //keyBtn[i][j]->SetSoundOver(btnSoundOver);
+                //keyBtn[i][j]->SetSoundClick(btnSoundClick);
                 //keyBtn[i][j]->SetTrigger(trigA);
                 keyBtn[i][j]->SetLabel(keyTxt[i][j]);
                 //keyBtn[i][j]->SetPosition((j*42+21*i+40)+eurocheck, i*42+120);//SetPosition(j*42+21*i+40, i*42+80);

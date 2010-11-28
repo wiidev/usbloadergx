@@ -1724,7 +1724,7 @@ int GameWindowPrompt()
  ***************************************************************************/
 int DiscWait(const char *title, const char *msg, const char *btn1Label, const char *btn2Label, int IsDeviceWait)
 {
-    int i = 30, ret = 0;
+    int ret = 0;
     u32 cover = 0;
 
     GuiWindow promptWindow(472, 320);
@@ -1823,18 +1823,20 @@ int DiscWait(const char *title, const char *msg, const char *btn1Label, const ch
 
     if (IsDeviceWait)
     {
-        while (i >= 0)
+        time_t starttime = time(0);
+        time_t timenow = starttime;
+        do
         {
-            VIDEO_WaitVSync();
-            timerTxt.SetTextf("%u %s", i, tr( "seconds left" ));
-            USBDevice_deInit();
-            USBDevice_Init();
+            gprintf("%i\n", (int) (timenow-starttime));
             ret = WBFS_Init(WBFS_DEVICE_USB);
             if (ret >= 0) break;
 
-            i--;
-            sleep(1);
+            timerTxt.SetTextf("%i %s", (int) (30-(timenow-starttime)), tr( "seconds left" ));
+            USBDevice_deInit();
+            USBDevice_Init();
+            timenow = time(0);
         }
+        while (timenow-starttime < 30);
     }
     else
     {

@@ -654,16 +654,17 @@ ssize_t _FAT_write_r (struct _reent *r, int fd, const char *ptr, size_t len) {
 	_FAT_lock(&partition->lock);
 
 	// Only write up to the maximum file size, taking into account wrap-around of ints
-	if (remain + file->filesize > FILE_MAX_SIZE || len + file->filesize < file->filesize) {
+	if (len + file->filesize > FILE_MAX_SIZE || len + file->filesize < file->filesize) {
 		len = FILE_MAX_SIZE - file->filesize;
 	}
-	remain = len;
 
 	// Short circuit cases where len is 0 (or less)
 	if (len <= 0) {
 		_FAT_unlock(&partition->lock);
 		return 0;
 	}
+
+	remain = len;
 
 	// Get a new cluster for the start of the file if required
 	if (file->startCluster == CLUSTER_FREE) {
@@ -772,7 +773,7 @@ ssize_t _FAT_write_r (struct _reent *r, int fd, const char *ptr, size_t len) {
 #endif
 				(chunkSize + partition->bytesPerCluster < remain))
 		{
-			// pretend to use up all sectors in next_position 
+			// pretend to use up all sectors in next_position
 			next_position.sector = partition->sectorsPerCluster;
 			// get or allocate next cluster
 			_FAT_check_position_for_next_cluster(r, &next_position, partition,
@@ -1129,6 +1130,7 @@ int _FAT_fsync_r (struct _reent *r, int fd) {
 
 	return ret;
 }
+
 
 typedef int (*_frag_append_t)(void *ff, u32 offset, u32 sector, u32 count);
 
