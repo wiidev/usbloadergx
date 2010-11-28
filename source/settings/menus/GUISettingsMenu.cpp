@@ -22,7 +22,7 @@
  * distribution.
  ***************************************************************************/
 #include <unistd.h>
-#include "GuiSettingsMenu.hpp"
+#include "GUISettingsMenu.hpp"
 #include "settings/CSettings.h"
 #include "prompts/PromptWindows.h"
 #include "language/gettext.h"
