@@ -25,7 +25,7 @@
 #include "themes/CTheme.h"
 #include "prompts/PromptWindows.h"
 #include "language/gettext.h"
-#include "GuiSettingsMenu.hpp"
+#include "GUISettingsMenu.hpp"
 #include "GameLoadSM.hpp"
 #include "ParentalControlSM.hpp"
 #include "SoundSettingsMenu.hpp"
