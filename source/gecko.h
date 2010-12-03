@@ -14,6 +14,7 @@ extern "C"
     void gprintf(const char *str, ...);
     bool InitGecko();
     void hexdump(void *d, int len);
+    void USBGeckoOutput();
 #else
 #define gprintf(...)
 #define InitGecko()      false

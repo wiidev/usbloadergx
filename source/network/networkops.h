@@ -14,12 +14,12 @@ bool IsNetworkInit(void);
 char * GetNetworkIP(void);
 char * GetIncommingIP(void);
 bool ShutdownWC24();
-s32 network_request(const char * request, char * filename);
-s32 network_read(u8 *buf, u32 len);
+s32 network_request(s32 connection, const char * request, char * filename);
+s32 network_read(s32 connection, u8 *buf, u32 len);
 s32 download_request(const char * url, char * filename = NULL);
 void CloseConnection();
 int CheckUpdate();
-
+char * HEAD_Request(const char * url);
 void HaltNetworkThread();
 void ResumeNetworkWait();
 void ResumeNetworkThread();

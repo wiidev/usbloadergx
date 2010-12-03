@@ -17,7 +17,7 @@
 int updateLanguageFiles()
 {
     char languageFiles[50][MAXLANGUAGEFILES];
-	
+
 	DirList Dir(Settings.languagefiles_path);
 
     //give up now if we didn't find any
@@ -48,7 +48,7 @@ int updateLanguageFiles()
             char codeurl[200];
             snprintf(codeurl, sizeof(codeurl), "http://usbloader-gui.googlecode.com/svn/trunk/Languages/%s",
                     languageFiles[j]);
-            snprintf(savepath, sizeof(savepath), "%s%s", Settings.languagefiles_path, languageFiles[j]);
+            snprintf(savepath, sizeof(savepath), "%s/%s", Settings.languagefiles_path, languageFiles[j]);
 
             struct block file = downloadfile(codeurl);
 

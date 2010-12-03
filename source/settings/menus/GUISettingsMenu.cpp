@@ -123,13 +123,7 @@ GuiSettingsMenu::GuiSettingsMenu()
 GuiSettingsMenu::~GuiSettingsMenu()
 {
     if (Settings.titlesOverride != OldTitlesOverride)
-    {
-        CloseXMLDatabase();
-        GameTitles.SetDefault();
-        if(Settings.titlesOverride)
-            OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride, true);
-    }
-
+        GameTitles.LoadTitlesFromWiiTDB(Settings.titlestxt_path);
 }
 
 void GuiSettingsMenu::SetOptionValues()

@@ -20,6 +20,7 @@
 #include "settings/CGameStatistics.h"
 #include "settings/GameTitles.h"
 #include "network/networkops.h"
+#include "network/update.h"
 #include "network/http.h"
 #include "prompts/PromptWindows.h"
 #include "prompts/gameinfo.h"
@@ -58,6 +59,7 @@ extern u8 reset;
 extern u8 mountMethod;
 extern struct discHdr *dvdheader;
 extern char game_partition[6];
+extern int connection;
 
 /****************************************************************************
  * OnScreenNumpad
@@ -2663,60 +2665,6 @@ int ProgressDownloadWindow(int choice2)
         }
     }
 
-    /**Temporary redownloading 1st image because of a fucking corruption bug **/
-#if 0 // is no longer necessary, since libfat is fixed
-    char URLFile[100];
-    struct block file = downloadfile( URLFile );
-    if ( choice2 == 2 )
-    {
-        while ( tries < serverCnt3d )
-        {
-            sprintf( URLFile, "%s%s", server3d, missingFiles[0] );
-            sprintf( imgPath, "%s%s", Settings.covers_path, missingFiles[0] );
-            file = downloadfile( URLFile );
-            if ( !( file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.size == 4446 || file.data == NULL ) )break;
-            tries++;
-        }
-
-    }
-    if ( choice2 == 3 )
-    {
-        while ( tries < serverCntDisc )
-        {
-            sprintf( URLFile, "%s%s", serverDisc, missingFiles[0] );
-            sprintf( imgPath, "%s%s", Settings.disc_path, missingFiles[0] );
-            file = downloadfile( URLFile );
-            if ( !( file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.size == 4446 || file.data == NULL ) )break;
-            tries++;
-        }
-    }
-    if ( choice2 == 1 )
-    {
-        while ( tries < serverCnt2d )
-        {
-            sprintf( URLFile, "%s%s", server2d, missingFiles[0] );
-            sprintf( imgPath, "%s%s", Settings.covers2d_path, missingFiles[0] );
-            file = downloadfile( URLFile );
-            if ( !( file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.size == 4446 || file.data == NULL ) )break;
-            tries++;
-        }
-    }
-    if ( file.size == 36864 || file.size <= 1024 || file.size == 7386 || file.size <= 1174 || file.size == 4446 || file.data == NULL )
-    {
-    }
-    else
-    {
-        if ( file.data != NULL )
-        {
-            // save png to sd card
-            FILE *pfile;
-            pfile = fopen( imgPath, "wb" );
-            fwrite( file.data, 1, file.size, pfile );
-            fclose ( pfile );
-            free( file.data );
-        }
-    }
-#endif
     HaltGui();
     mainWindow->Remove(&promptWindow);
     mainWindow->SetState(STATE_DEFAULT);
@@ -2886,12 +2834,6 @@ int ProgressUpdateWindow()
         }
     }
 
-    //make the URL to get XML based on our games
-    //std::string allocates the memory and does not depend on stack
-    std::string XMLurl;
-    XMLurl.resize(4096);
-    build_XML_URL(&XMLurl[0], XMLurl.size());
-
     char dolpath[150];
     //    char dolpathsuccess[150];//use coverspath as a folder for the update wad so we dont make a new folder and have to delete it
     snprintf( dolpath, sizeof( dolpath ), "%sULNR.wad", Settings.covers_path );
@@ -2937,33 +2879,7 @@ int ProgressUpdateWindow()
                 titleTxt.SetTextf( "%s USB Loader GX", tr( "Updating" ) );
                 msgTxt.SetPosition( 0, 100 );
                 msgTxt.SetTextf( "%s", tr( "Updating WiiTDB.zip" ) );
-
-                char wiitdbpath[200];
-                char wiitdbpathtmp[200];
-                struct block file = downloadfile( XMLurl.c_str() );
-                if ( file.data != NULL )
-                {
-                    snprintf( wiitdbpath, sizeof( wiitdbpath ), "%swiitdb_%s.zip", Settings.titlestxt_path, game_partition );
-                    snprintf( wiitdbpathtmp, sizeof( wiitdbpathtmp ), "%swiitmp_%s.zip", Settings.titlestxt_path, game_partition );
-                    rename( wiitdbpath, wiitdbpathtmp );
-                    pfile = fopen( wiitdbpath, "wb" );
-                    fwrite( file.data, 1, file.size, pfile );
-                    fclose( pfile );
-                    free( file.data );
-                    CloseXMLDatabase();
-                    if ( OpenXMLDatabase( Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride == 1 ? true : false, true ) ) // open file, reload titles, keep in memory
-
-                    {
-                        remove( wiitdbpathtmp );
-                    }
-                    else
-                    {
-                        remove( wiitdbpath );
-                        rename( wiitdbpathtmp, wiitdbpath );
-                        OpenXMLDatabase( Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride == 1 ? true : false, true ); // open file, reload titles, keep in memory
-                    }
-                }
-
+                UpdateWiiTDB();
                 msgTxt.SetTextf( "%s", tr( "Updating Language Files:" ) );
                 updateLanguageFiles();
                 promptWindow.Append( &progressbarEmptyImg );
@@ -3271,8 +3187,7 @@ int ProgressUpdateWindow()
     if (IsNetworkInit() && ret >= 0)
     {
 
-        updatemode = WindowPrompt(tr( "What do you want to update?" ), 0, "USB Loader GX", tr( "WiiTDB Files" ),
-                tr( "Language File" ), tr( "Cancel" ));
+        updatemode = WindowPrompt(tr( "What do you want to update?" ), 0, "USB Loader GX", tr( "WiiTDB Files" ), tr( "Language File" ), tr( "Cancel" ));
         mainWindow->SetState(STATE_DISABLED);
         promptWindow.SetState(STATE_DEFAULT);
         mainWindow->ChangeFocus(&promptWindow);
@@ -3344,7 +3259,7 @@ int ProgressUpdateWindow()
                             blksize = (u32) (filesize - i);
                             if (blksize > BLOCKSIZE) blksize = BLOCKSIZE;
 
-                            ret = network_read(blockbuffer, blksize);
+                            ret = network_read(connection, blockbuffer, blksize);
                             if (ret != (s32) blksize)
                             {
                                 failed = -1;
@@ -3390,36 +3305,7 @@ int ProgressUpdateWindow()
                                     free(file.data);
                                 }
                                 msgTxt.SetTextf("%s", tr( "Updating WiiTDB.zip" ));
-                                char wiitdbpath[200];
-                                char wiitdbpathtmp[200];
-                                file = downloadfile(XMLurl.c_str());
-                                if (file.data != NULL)
-                                {
-                                    CreateSubfolder(Settings.titlestxt_path);
-                                    snprintf(wiitdbpath, sizeof(wiitdbpath), "%swiitdb_%s.zip",
-                                            Settings.titlestxt_path, game_partition);
-                                    snprintf(wiitdbpathtmp, sizeof(wiitdbpathtmp), "%swiitmp_%s.zip",
-                                            Settings.titlestxt_path, game_partition);
-                                    rename(wiitdbpath, wiitdbpathtmp);
-                                    pfile = fopen(wiitdbpath, "wb");
-                                    fwrite(file.data, 1, file.size, pfile);
-                                    fclose(pfile);
-                                    free(file.data);
-                                    CloseXMLDatabase();
-                                    if (OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language,
-                                            Settings.db_JPtoEN, true, Settings.titlesOverride == 1 ? true : false, true)) // open file, reload titles, keep in memory
-                                    {
-                                        remove(wiitdbpathtmp);
-                                    }
-                                    else
-                                    {
-                                        remove(wiitdbpath);
-                                        rename(wiitdbpathtmp, wiitdbpath);
-                                        OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language,
-                                                Settings.db_JPtoEN, true, Settings.titlesOverride == 1 ? true : false,
-                                                true); // open file, reload titles, keep in memory
-                                    }
-                                }
+                                UpdateWiiTDB();
                                 msgTxt.SetTextf("%s", tr( "Updating Language Files:" ));
                                 updateLanguageFiles();
                             }
@@ -3445,33 +3331,10 @@ int ProgressUpdateWindow()
         else if (updatemode == 2)
         {
             msgTxt.SetTextf("%s", tr( "Updating WiiTDB.zip" ));
-            char wiitdbpath[200];
-            char wiitdbpathtmp[200];
-            struct block file = downloadfile(XMLurl.c_str());
-            if (file.data != NULL)
+            if(UpdateWiiTDB() < 0)
             {
-                CreateSubfolder(Settings.titlestxt_path);
-                snprintf(wiitdbpath, sizeof(wiitdbpath), "%swiitdb_%s.zip", Settings.titlestxt_path, game_partition);
-                snprintf(wiitdbpathtmp, sizeof(wiitdbpathtmp), "%swiitmp_%s.zip", Settings.titlestxt_path,
-                        game_partition);
-                rename(wiitdbpath, wiitdbpathtmp);
-                FILE *pfile = fopen(wiitdbpath, "wb");
-                fwrite(file.data, 1, file.size, pfile);
-                fclose(pfile);
-                free(file.data);
-                CloseXMLDatabase();
-                if (OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true,
-                        Settings.titlesOverride == 1 ? true : false, true)) // open file, reload titles, keep in memory
-                {
-                    remove(wiitdbpathtmp);
-                }
-                else
-                {
-                    remove(wiitdbpath);
-                    rename(wiitdbpathtmp, wiitdbpath);
-                    OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true,
-                            Settings.titlesOverride == 1 ? true : false, true); // open file, reload titles, keep in memory
-                }
+                msgTxt.SetTextf("%s", tr( "WiiTDB is up to date." ));
+                sleep(3);
             }
             ret = 1;
         }

@@ -8,7 +8,9 @@
 #include "wpad.h"
 #include "fatmounter.h"
 #include "usbloader/wbfs.h"
-#include "xml/xml.h"
+#include "usbloader/GameList.h"
+#include "settings/GameTitles.h"
+#include "xml/WiiTDB.hpp"
 
 extern int load_from_fs;
 extern char game_partition[6];
@@ -163,11 +165,8 @@ int MountGamePartition(bool ShowGUI)
     }
 
     gprintf("\tOpenXMLDatabase\n");
-    // open database if needed, load titles if needed
-    if (CheckFile(Settings.titlestxt_path))
-        OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride, true);
 
-    gprintf("MountGamePartition() return: %i\n", ret);
+    GameTitles.LoadTitlesFromWiiTDB(Settings.titlestxt_path);
 
     return ret;
 }

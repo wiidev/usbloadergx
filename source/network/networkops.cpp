@@ -14,10 +14,12 @@
 #include "prompts/PromptWindows.h"
 #include "language/gettext.h"
 #include "settings/CSettings.h"
+#include "networkops.h"
 #include "main.h"
 #include "http.h"
 #include "svnrev.h"
 #include "buildtype.h"
+#include "gecko.h"
 #include "update.h"
 
 #define PORT            4299
@@ -110,7 +112,7 @@ bool ShutdownWC24()
     return onlinefix;
 }
 
-s32 network_request(const char * request, char * filename)
+s32 network_request(s32 connect, const char * request, char * filename)
 {
     char buf[1024];
     char *ptr = NULL;
@@ -119,7 +121,7 @@ s32 network_request(const char * request, char * filename)
     s32 ret;
 
     /* Send request */
-    ret = net_send(connection, request, strlen(request), 0);
+    ret = net_send(connect, request, strlen(request), 0);
     if (ret < 0) return ret;
 
     /* Clear buffer */
@@ -127,7 +129,7 @@ s32 network_request(const char * request, char * filename)
 
     /* Read HTTP header */
     for (cnt = 0; !strstr(buf, "\r\n\r\n"); cnt++)
-        if (net_recv(connection, buf + cnt, 1, 0) <= 0) return -1;
+        if (net_recv(connect, buf + cnt, 1, 0) <= 0) return -1;
 
     /* HTTP request OK? */
     if (!strstr(buf, "HTTP/1.1 200 OK")) return -1;
@@ -157,7 +159,7 @@ s32 network_request(const char * request, char * filename)
     return size;
 }
 
-s32 network_read(u8 *buf, u32 len)
+s32 network_read(s32 connect, u8 *buf, u32 len)
 {
     u32 read = 0;
     s32 ret = -1;
@@ -166,7 +168,7 @@ s32 network_read(u8 *buf, u32 len)
     while (read < len)
     {
         /* Read network data */
-        ret = net_read(connection, buf + read, len - read);
+        ret = net_read(connect, buf + read, len - read);
         if (ret < 0) return ret;
 
         /* Read finished */
@@ -221,9 +223,76 @@ s32 download_request(const char * url, char * filename)
     char header[strlen(path) + strlen(domain) + strlen(url) + 100];
     sprintf(header, "GET %s HTTP/1.1\r\nHost: %s\r\nReferer: %s\r\nConnection: close\r\n\r\n", path, domain, url);
 
-    s32 filesize = network_request(header, filename);
+    s32 filesize = network_request(connection, header, filename);
 
     return filesize;
+}
+
+/****************************************************************************
+ * HTML HEAD request
+ ***************************************************************************/
+char * HEAD_Request(const char * url)
+{
+    if(strncmp(url, "http://", strlen("http://")) != 0)
+    {
+        gprintf("Not a valid URL");
+		return NULL;
+    }
+	char *path = strchr(url + strlen("http://"), '/');
+
+	if(!path)
+	{
+        gprintf("Not a valid URL path");
+        return NULL;
+	}
+
+	int domainlength = path - url - strlen("http://");
+
+	if(domainlength == 0)
+	{
+        gprintf("Not a valid domain");
+		return NULL;
+	}
+
+	char domain[domainlength + 1];
+	strncpy(domain, url + strlen("http://"), domainlength);
+	domain[domainlength] = '\0';
+
+	connection = GetConnection(domain);
+    if(connection < 0)
+    {
+        gprintf("Could not connect to the server.");
+        return NULL;
+    }
+
+    char header[strlen(path)+strlen(domain)*2+150];
+    sprintf(header, "HEAD %s HTTP/1.1\r\nHost: %s\r\nReferer: %s\r\nUser-Agent: USB Loader GX\r\nConnection: close\r\n\r\n", path, domain, domain);
+
+    /* Send request */
+    s32 ret = net_send(connection, header, strlen(header), 0);
+    if (ret < 0)
+    {
+        CloseConnection();
+        return NULL;
+    }
+
+    u32 cnt = 0;
+    char * buf = (char *) malloc(1024);
+    memset(buf, 0, 1024);
+
+    for (cnt = 0; !strstr(buf, "\r\n\r\n") && cnt < 1024; cnt++)
+    {
+        if(net_recv(connection, buf + cnt, 1, 0) <= 0)
+        {
+            CloseConnection();
+            free(buf);
+            return NULL;
+        }
+    }
+
+    CloseConnection();
+
+    return buf;
 }
 
 void CloseConnection()

@@ -1,5 +1,5 @@
 /***************************************************************************
- * Copyright (C) 2009
+ * Copyright (C) 2010
  * by Dimok
  *
  * This software is provided 'as-is', without any express or implied
@@ -21,15 +21,12 @@
  * 3. This notice may not be removed or altered from any source
  * distribution.
  *
- * update.h
- *
- * Update operations
- * for Wii-Xplorer 2009
+ * for WiiXplorer 2010
  ***************************************************************************/
-#ifndef _UPDATEOPS_H_
-#define _UPDATEOPS_H_
+#ifndef FILE_DOWNLOADER_H_
+#define FILE_DOWNLOADER_H_
 
-int CheckForBetaUpdate();
-int UpdateWiiTDB();
+int DownloadFileToMem(const char *url, u8 **inbuffer, u32 *size);
+int DownloadFileToPath(const char *url, const char *dest, bool UseFilename = true);
 
 #endif

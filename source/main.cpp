@@ -118,6 +118,9 @@ int main(int argc, char *argv[])
         return BootGame(argv[1]);
     }
 
+    //! Now we startup the GUI so no need for console prints. Output only to gecko.
+    USBGeckoOutput();
+
     //! Init the rest of the System
     Sys_Init();
     SetupPads();

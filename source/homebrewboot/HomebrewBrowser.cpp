@@ -37,6 +37,7 @@
 extern u32 infilesize;
 extern u32 uncfilesize;
 extern char wiiloadVersion[2];
+extern int connection;
 
 HomebrewBrowser::HomebrewBrowser()
     : FlyingButtonsMenu(tr( "Homebrew Launcher" ))
@@ -293,7 +294,7 @@ int HomebrewBrowser::ReceiveFile()
             len = infilesize - read;
         else len = NETWORKBLOCKSIZE;
 
-        int result = network_read(buffer+read, len);
+        int result = network_read(connection, buffer+read, len);
 
         if (result < 0)
         {
@@ -310,7 +311,7 @@ int HomebrewBrowser::ReceiveFile()
     }
 
     char filename[101];
-    network_read((u8*) &filename, 100);
+    network_read(connection, (u8*) &filename, 100);
 
     // Do we need to unzip this thing?
     if (wiiloadVersion[0] > 0 || wiiloadVersion[1] > 4)

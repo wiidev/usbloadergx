@@ -28,6 +28,7 @@
 /*** Extern variables ***/
 extern u8 shutdown;
 extern u8 reset;
+extern int connection;
 
 int DownloadTheme(const char *url, const char *title)
 {
@@ -72,7 +73,7 @@ int DownloadTheme(const char *url, const char *title)
 
         ShowProgress(tr( "Downloading file" ), 0, (char*) filename, done, filesize, true);
 
-        int ret = network_read(buffer, blocksize);
+        int ret = network_read(connection, buffer, blocksize);
         if (ret < 0)
         {
             free(buffer);

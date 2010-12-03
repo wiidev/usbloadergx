@@ -131,17 +131,17 @@ GameLoadSM::GameLoadSM()
 
 GameLoadSM::~GameLoadSM()
 {
-    // if partition has changed, Reinitialize it
+    //! if partition has changed, Reinitialize it
     if (Settings.partition != OldSettingsPartition)
     {
         PartInfo pinfo = partitions.pinfo[Settings.partition];
         partitionEntry pentry = partitions.pentry[Settings.partition];
         WBFS_OpenPart(pinfo.part_fs, pinfo.index, pentry.sector, pentry.size, (char *) &game_partition);
         load_from_fs = pinfo.part_fs;
-        CloseXMLDatabase();
-        GameTitles.SetDefault();
-        OpenXMLDatabase(Settings.titlestxt_path, Settings.db_language, Settings.db_JPtoEN, true, Settings.titlesOverride, true);
+
+        //! Reload the new game titles
         gameList.ReadGameList();
+        GameTitles.LoadTitlesFromWiiTDB(Settings.titlestxt_path);
     }
 }
 

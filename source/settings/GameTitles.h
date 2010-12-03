@@ -28,6 +28,8 @@ class CGameTitles
         //! Overload
         const char * GetTitle(const struct discHdr *header);
 
+        //! Load Game Titles from WiiTDB
+        void LoadTitlesFromWiiTDB(const char * path);
         //! Set default game titles
         void SetDefault();
     protected:
