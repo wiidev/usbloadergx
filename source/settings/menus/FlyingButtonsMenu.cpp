@@ -152,7 +152,7 @@ void FlyingButtonsMenu::SetPageIndicators()
     for(int i = 0; i < IndicatorCount; ++i)
     {
         PageindicatorImg.push_back(new GuiImage(PageindicatorImgData));
-        PageindicatorTxt.push_back(new GuiText(fmt("%i", i), 22, ( GXColor ) {0, 0, 0, 255}));
+        PageindicatorTxt.push_back(new GuiText(fmt("%i", i+1), 22, ( GXColor ) {0, 0, 0, 255}));
         PageIndicatorBtn.push_back(new GuiButton(PageindicatorImgData->GetWidth(), PageindicatorImgData->GetHeight()));
         PageIndicatorBtn[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
         PageIndicatorBtn[i]->SetPosition(270-IndicatorCount*35+35*i, 400);

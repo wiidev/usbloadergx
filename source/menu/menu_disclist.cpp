@@ -1383,7 +1383,7 @@ int MenuDiscList()
 
             if (Settings.quickboot == ON) //quickboot game
             {
-                if (alternatedol == ON)
+                if (alternatedol == 2)
                 {
                     /* Open dol File and check exist */
                     sprintf(nipple, "%s%s.dol", Settings.dolpath, IDfull);
@@ -1443,7 +1443,7 @@ int MenuDiscList()
 
                 if (choice == 1)
                 {
-                    if (alternatedol == ON)
+                    if (alternatedol == 2)
                     {
                         /* Open dol File and check exist */
                         sprintf(nipple, "%s%s.dol", Settings.dolpath, IDfull);

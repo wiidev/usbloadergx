@@ -118,7 +118,7 @@ s32 Apploader_Run(entry_point *entry, char * dolpath, u8 cheat, u8 videoSelected
     *entry = appldr_final();
 
     /** Load alternate dol if set **/
-    if (alternatedol == 1)
+    if (alternatedol == 2)
     {
         wip_reset_counter();
         void *dolbuffer = NULL;
@@ -132,7 +132,7 @@ s32 Apploader_Run(entry_point *entry, char * dolpath, u8 cheat, u8 videoSelected
 
         if (dolbuffer) free(dolbuffer);
     }
-    else if (alternatedol == 2)
+    else if (alternatedol == 1)
     {
         wip_reset_counter();
         FST_ENTRY *fst = (FST_ENTRY *) *(u32 *) 0x80000038;

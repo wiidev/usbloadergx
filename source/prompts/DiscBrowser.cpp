@@ -71,27 +71,27 @@ int DiscBrowse(const char * GameID, char * alternatedname, int alternatedname_si
     WBFS_CloseDisc(disc);
 
     u32 discfilecount = fstbuffer[0].filelen;
-    u32 dolfilecount = 0;
 
     OptionList options3;
 
     for (u32 i = 0; i < discfilecount; i++)
     {
-
         //don't add files that aren't .dol to the list
-        int len = (strlen(fstfiles(fstbuffer, i)));
-        if (fstfiles(fstbuffer, i)[len - 4] == '.' && fstfiles(fstbuffer, i)[len - 3] == 'd' && fstfiles(fstbuffer, i)[len - 2] == 'o'
-                && fstfiles(fstbuffer, i)[len - 1] == 'l')
+        const char * filename = fstfiles(fstbuffer, i);
+        const char * fileext = NULL;
+
+        if(filename)
+            fileext = strrchr(filename, '.');
+
+        if (fileext && strcasecmp(fileext, ".dol") == 0)
         {
             options3.SetName(i, "%i", i);
             options3.SetValue(i, fstfiles(fstbuffer, i));
-            //options3.SetName(i, fstfiles(fst, i));
-
-            dolfilecount++;
         }
     }
-    gprintf("\n%i alt dols found", dolfilecount);
-    if (dolfilecount <= 0)
+
+    gprintf("\n%i alt dols found", options3.GetLength()+1);
+    if (options3.GetLength() <= 0)
     {
         WindowPrompt(tr( "ERROR" ), tr( "No DOL file found on disc." ), tr( "OK" ));
         free(fstbuffer);

@@ -82,8 +82,8 @@ static const char * ParentalText[5] =
 static const char * AlternateDOLText[] =
 {
     trNOOP( "OFF" ),
+    trNOOP( "Select a DOL from Game" ),
     trNOOP( "Load From SD/USB" ),
-    trNOOP( "Select a DOL" )
 };
 
 IndGameLoadSM::IndGameLoadSM(const char * GameID)
@@ -216,7 +216,7 @@ void IndGameLoadSM::SetOptionValues()
     Options->SetValue(Idx++, "%s", tr( AlternateDOLText[GameConfig.loadalternatedol] ));
 
     //! Settings: Select DOL Offset
-    if(GameConfig.loadalternatedol != 2)
+    if(GameConfig.loadalternatedol != 1)
         Options->SetValue(Idx++, tr("Not required"));
     else
     {
@@ -327,12 +327,12 @@ int IndGameLoadSM::GetMenuInternal()
     //! Settings: Alternate DOL
     else if (ret == ++Idx)
     {
-        if (--GameConfig.loadalternatedol < 0) // 0->2->1->0
-            GameConfig.loadalternatedol = 2;
+        if (++GameConfig.loadalternatedol > 2)
+            GameConfig.loadalternatedol = 0;
     }
 
-    //! Settings: Select DOL Offset
-    else if (ret == ++Idx && GameConfig.loadalternatedol == 2)
+    //! Settings: Select DOL Offset from Game
+    else if (ret == ++Idx && GameConfig.loadalternatedol == 1)
     {
         char filename[10];
         snprintf(filename, 7, "%s", GameConfig.id);
