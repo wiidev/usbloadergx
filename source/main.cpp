@@ -103,12 +103,12 @@ int main(int argc, char *argv[])
 
         // Loading now the cios setup in the settings
         IosLoader::LoadAppCios();
-        printf("\tLoaded cIOS = %u (Rev %u)\n", IOS_GetVersion(), IOS_GetRevision());
 
         // Remount devices after reloading IOS.
         SDCard_Init();
         USBDevice_Init_Loop();
     }
+    printf("\tLoaded cIOS = %u (Rev %u)\n", IOS_GetVersion(), IOS_GetRevision());
 
     //if a ID was passed via args copy it and try to boot it after the partition is mounted
     //its not really a headless mode.  more like hairless.

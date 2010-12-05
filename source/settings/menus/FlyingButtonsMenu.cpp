@@ -41,6 +41,7 @@ FlyingButtonsMenu::FlyingButtonsMenu(const char * menu_title)
 {
 	currentPage = 0;
 	returnMenu = MENU_NONE;
+	ParentMenu = MENU_DISCLIST;
 	CurrentMenu = NULL;
     titleTxt = NULL;
 	GoLeftImg = NULL;
@@ -390,7 +391,7 @@ int FlyingButtonsMenu::MainLoop()
         }
         else
         {
-            return MENU_DISCLIST;
+            return ParentMenu;
         }
         backBtn->ResetState();
     }

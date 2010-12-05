@@ -33,8 +33,8 @@
 #ifndef GEKKO
 /* Not on Cygwin; use standard Unix style low level device operations. */
 #define ntfs_device_default_io_ops ntfs_device_unix_io_ops
-#else /*  GEKKO  */
-/* On Nintendo GameCube/Wii; use Gekko low level device operations. */
+#else
+/* Wii i/o device. */
 #define ntfs_device_default_io_ops ntfs_device_gekko_io_ops
 #endif
 
@@ -79,3 +79,4 @@ extern struct ntfs_device_operations ntfs_device_default_io_ops;
 #endif /* NO_NTFS_DEVICE_DEFAULT_IO_OPS */
 
 #endif /* defined _NTFS_DEVICE_IO_H */
+

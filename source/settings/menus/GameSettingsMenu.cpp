@@ -35,6 +35,8 @@ GameSettingsMenu::GameSettingsMenu(struct discHdr * header)
     : FlyingButtonsMenu(GameTitles.GetTitle(header))
 {
     DiscHeader = header;
+    //! Don't switch menu's by default but return to disc window.
+	ParentMenu = -2;
 }
 
 GameSettingsMenu::~GameSettingsMenu()

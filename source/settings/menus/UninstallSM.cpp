@@ -72,7 +72,6 @@ void UninstallSM::SetOptionValues()
 
     //! Settings: Delete Cheat GCT
     Options->SetValue(Idx++, " ");
-
 }
 
 int UninstallSM::GetMenuInternal()
@@ -90,6 +89,7 @@ int UninstallSM::GetMenuInternal()
         int choice = WindowPrompt(tr( "Do you really want to delete:" ), GameTitles.GetTitle(DiscHeader), tr( "Yes" ), tr( "Cancel" ));
         if (choice == 1)
         {
+            std::string Title = GameTitles.GetTitle(DiscHeader);
             GameSettings.Remove(DiscHeader->id);
             GameSettings.Save();
             GameStatistics.Remove(DiscHeader->id);
@@ -98,9 +98,9 @@ int UninstallSM::GetMenuInternal()
             if(!mountMethod)
                 ret = WBFS_RemoveGame(DiscHeader->id);
             if (ret < 0)
-                WindowPrompt(tr( "Can't delete:" ), GameTitles.GetTitle(DiscHeader), tr( "OK" ));
+                WindowPrompt(tr( "Can't delete:" ), Title.c_str(), tr( "OK" ));
             else
-                WindowPrompt(tr( "Successfully deleted:" ), GameTitles.GetTitle(DiscHeader), tr( "OK" ));
+                WindowPrompt(tr( "Successfully deleted:" ), Title.c_str(), tr( "OK" ));
 
             return MENU_DISCLIST;
         }

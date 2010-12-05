@@ -1510,7 +1510,7 @@ int MenuDiscList()
                     else if (Settings.gameDisplay == CAROUSEL_MODE) mainWindow->Append(gameCarousel);
                     mainWindow->Append(&w);
                     ResumeGui();
-                    if (settret == 1) //if deleted
+                    if (settret == MENU_DISCLIST) //if deleted
                     {
                         menu = MENU_DISCLIST;
                         break;
