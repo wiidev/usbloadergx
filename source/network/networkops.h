@@ -10,6 +10,7 @@
 
 #define NETWORKBLOCKSIZE       5*1024      //5KB
 void Initialize_Network(void);
+void DeinitNetwork(void);
 bool IsNetworkInit(void);
 char * GetNetworkIP(void);
 char * GetIncommingIP(void);

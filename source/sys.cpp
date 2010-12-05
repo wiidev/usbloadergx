@@ -6,6 +6,7 @@
 #include "settings/CSettings.h"
 #include "settings/newtitles.h"
 #include "language/gettext.h"
+#include "network/networkops.h"
 #include "utils/ResourceManager.h"
 #include "FontSystem.h"
 #include "audio.h"
@@ -80,6 +81,7 @@ void AppCleanUp(void)
     CloseXMLDatabase();
     ClearFontData();
     NewTitles::DestroyInstance();
+    DeinitNetwork();
 
     StopGX();
     ShutdownAudio();

@@ -67,6 +67,16 @@ void Initialize_Network(void)
 }
 
 /****************************************************************************
+ * DeinitNetwork
+ ***************************************************************************/
+void DeinitNetwork(void)
+{
+    net_wc24cleanup();
+    net_deinit();
+    networkinitialized = false;
+}
+
+/****************************************************************************
  * Check if network was initialised
  ***************************************************************************/
 bool IsNetworkInit(void)
@@ -88,28 +98,6 @@ char * GetNetworkIP(void)
 char * GetIncommingIP(void)
 {
     return incommingIP;
-}
-
-/****************************************************************************
- * Get network IP
- ***************************************************************************/
-bool ShutdownWC24()
-{
-    bool onlinefix = IsNetworkInit();
-    if (onlinefix)
-    {
-        s32 kd_fd, ret;
-        STACK_ALIGN( u8, kd_buf, 0x20, 32 );
-
-        kd_fd = IOS_Open("/dev/net/kd/request", 0);
-        if (kd_fd >= 0)
-        {
-            ret = IOS_Ioctl(kd_fd, 7, NULL, 0, kd_buf, 0x20);
-            if (ret >= 0) onlinefix = false; // fixed no IOS reload needed
-            IOS_Close(kd_fd);
-        }
-    }
-    return onlinefix;
 }
 
 s32 network_request(s32 connect, const char * request, char * filename)
