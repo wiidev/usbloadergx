@@ -26,6 +26,8 @@ void SDCard_deInit();
 
 s32 MountNTFS(u32 sector);
 s32 UnmountNTFS(void);
+s32 MountEXT(u32 sector);
+s32 UnmountEXT(void);
 
 extern int fat_usb_mount;
 extern sec_t fat_usb_sec;

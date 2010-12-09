@@ -297,6 +297,7 @@ int get_fs_type(u8 *buff)
         // NTFS
         if (memcmp(buff + 0x03, "NTFS", 4) == 0) return FS_TYPE_NTFS;
     }
+
     return FS_TYPE_UNK;
 }
 
@@ -310,6 +311,8 @@ int get_part_fs(int fs_type)
             return PART_FS_NTFS;
         case FS_TYPE_WBFS:
             return PART_FS_WBFS;
+        case FS_TYPE_EXT:
+            return PART_FS_EXT;
         default:
             return -1;
     }
@@ -330,6 +333,8 @@ char *get_fs_name(int i)
             return "FAT32";
         case FS_TYPE_NTFS:
             return "NTFS";
+        case FS_TYPE_EXT:
+            return "EXT";
         case FS_TYPE_WBFS:
             return "WBFS";
     }
@@ -375,6 +380,7 @@ s32 Partition_GetList(u32 device, PartList *plist)
         //if (!part_is_data(entry->type)) continue;
         if (!Device_ReadSectors(device, entry->sector, 1, buf)) continue;
         pinfo->fs_type = get_fs_type((u8 *) buf);
+        if(entry->type == 0x83) pinfo->fs_type = FS_TYPE_EXT;
         if (pinfo->fs_type == FS_TYPE_WBFS)
         {
             // multiple wbfs on sdhc not supported
@@ -391,6 +397,11 @@ s32 Partition_GetList(u32 device, PartList *plist)
         {
             plist->ntfs_n++;
             pinfo->ntfs_i = pinfo->index = plist->ntfs_n;
+        }
+        else if (pinfo->fs_type == FS_TYPE_EXT)
+        {
+            plist->ext_n++;
+            pinfo->ext_i = pinfo->index = plist->ext_n;
         }
         pinfo->part_fs = get_part_fs(pinfo->fs_type);
     }

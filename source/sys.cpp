@@ -97,6 +97,7 @@ void ExitApp(void)
 {
     AppCleanUp();
     UnmountNTFS();
+    UnmountEXT();
     SDCard_deInit();
     USBDevice_deInit();
 }

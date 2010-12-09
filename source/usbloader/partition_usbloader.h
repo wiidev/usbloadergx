@@ -37,6 +37,7 @@ extern "C"
 #define FS_TYPE_FAT32 2
 #define FS_TYPE_NTFS  3
 #define FS_TYPE_WBFS  4
+#define FS_TYPE_EXT   5
 
     typedef struct
     {
@@ -45,6 +46,7 @@ extern "C"
             u8 wbfs_i; // seq wbfs part index
             u8 fat_i; // seq fat part index
             u8 ntfs_i; // seq ntfs part index
+            u8 ext_i; // seq ntfs part index
             u8 index;
     } PartInfo;
 
@@ -56,6 +58,7 @@ extern "C"
             u8 wbfs_n;
             u8 fat_n;
             u8 ntfs_n;
+            u8 ext_n;
             PartInfo pinfo[MAX_PARTITIONS_EX];
     } PartList;
 

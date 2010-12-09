@@ -12,6 +12,7 @@ extern "C"
 #define PART_FS_WBFS 0
 #define PART_FS_FAT  1
 #define PART_FS_NTFS 2
+#define PART_FS_EXT  3
 
     /* Macros */
 #define WBFS_MIN_DEVICE         1

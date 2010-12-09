@@ -6,6 +6,7 @@
 
 #include "libs/libntfs/ntfs.h"
 #include "libs/libwbfs/libwbfs.h"
+#include "libs/libext2fs/ext2_frag.h"
 
 #include "usbloader/wbfs.h"
 #include "usbloader/wdvd.h"
@@ -17,6 +18,7 @@
 #define SAFE_FREE(x) if(x) { free(x); x = NULL; }
 
 extern sec_t fs_ntfs_sec;
+extern sec_t fs_ext_sec;
 
 int _FAT_get_fragments (const char *path, _frag_append_t append_fragment, void *callback_data);
 
@@ -212,6 +214,16 @@ int get_frag_list_for_file(char *fname, u8 *id)
 			// offset to start of partition
 			for (j=0; j<fs->num; j++) {
 				fs->frag[j].sector += fs_ntfs_sec;
+			}
+		} else if (wbfs_part_fs == PART_FS_EXT) {
+			ret = _EXT2_get_fragments(fname, &_frag_append, fs);
+			if (ret) {
+				ret_val = ret;
+				goto out;
+			}
+			// offset to start of partition
+			for (j=0; j<fs->num; j++) {
+				fs->frag[j].sector += fs_ext_sec;
 			}
 		}
 		frag_concat(fa, fs);

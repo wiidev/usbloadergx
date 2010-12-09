@@ -216,6 +216,7 @@ int BootGame(const char * gameID)
 
         shadow_mload();
         UnmountNTFS();
+        UnmountEXT();
         SDCard_deInit();
         USBDevice_deInit();
 

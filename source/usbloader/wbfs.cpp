@@ -9,6 +9,7 @@
 #include "usbloader/wbfs/wbfs_wbfs.h"
 #include "usbloader/wbfs/wbfs_fat.h"
 #include "usbloader/wbfs/wbfs_ntfs.h"
+#include "usbloader/wbfs/wbfs_ext.h"
 
 #include "usbloader/partition_usbloader.h"
 #include "usbloader/GameList.h"
@@ -80,6 +81,14 @@ s32 WBFS_OpenPart(u32 part_fs, u32 part_idx, u32 part_lba, u32 part_size, char *
         gprintf("\n\tCreated WBFS_Ntfs instance at lba: %d of size %d", part_lba, part_size);
 #endif
     }
+    else if (part_fs == PART_FS_EXT)
+    {
+        current = new Wbfs_Ext(wbfsDev, part_lba, part_size);
+        strcpy(wbfs_fs_drive, "EXT:");
+#ifdef DEBUG_WBFS
+        gprintf("\n\tCreated WBFS_Ext instance at lba: %d of size %d", part_lba, part_size);
+#endif
+    }
     else
     {
         current = new Wbfs_Wbfs(wbfsDev, part_lba, part_size);
@@ -102,6 +111,7 @@ s32 WBFS_OpenPart(u32 part_fs, u32 part_idx, u32 part_lba, u32 part_size, char *
     const char *fs = "WBFS";
     if (wbfs_part_fs == PART_FS_FAT) fs = "FAT";
     if (wbfs_part_fs == PART_FS_NTFS) fs = "NTFS";
+    if (wbfs_part_fs == PART_FS_EXT) fs = "EXT";
     sprintf(partition, "%s%d", fs, wbfs_part_idx);
     return 0;
 }
@@ -141,6 +151,13 @@ s32 WBFS_OpenNamed(char *partition)
         part_fs = PART_FS_NTFS;
         part_idx = i;
     }
+    else if (strncasecmp(partition, "EXT", 3) == 0)
+    {
+        i = atoi(partition + 3);
+        if (i < 1 || i > 9) goto err;
+        part_fs = PART_FS_EXT;
+        part_idx = i;
+    }
     else
     {
         goto err;
@@ -172,6 +189,14 @@ s32 WBFS_OpenNamed(char *partition)
         for (i = 0; i < plist.num; i++)
         {
             if (plist.pinfo[i].ntfs_i == part_idx) break;
+        }
+    }
+    else if (part_fs == PART_FS_EXT)
+    {
+        if (part_idx > plist.ext_n) goto err;
+        for (i = 0; i < plist.num; i++)
+        {
+            if (plist.pinfo[i].ext_i == part_idx) break;
         }
     }
     if (i >= plist.num) goto err;

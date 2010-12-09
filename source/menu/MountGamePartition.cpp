@@ -37,10 +37,11 @@ static int FindGamesPartition(PartList * partitions)
     if(IosLoader::IsWaninkokoIOS() && NandTitles.VersionOf(TITLE_ID(1, IOS_GetVersion())) < 18)
         return -1;
 
-    // Loop through FAT/NTFS partitions, and find the first partition with games on it (if there is one)
+    // Loop through FAT/NTFS/EXT partitions, and find the first partition with games on it (if there is one)
     for (int i = 0; i < partitions->num; i++)
     {
-        if (partitions->pinfo[i].fs_type == FS_TYPE_FAT32 || partitions->pinfo[i].fs_type == FS_TYPE_NTFS)
+        if (partitions->pinfo[i].fs_type == FS_TYPE_FAT32 || partitions->pinfo[i].fs_type == FS_TYPE_NTFS ||
+            partitions->pinfo[i].fs_type == FS_TYPE_EXT)
         {
             if (!WBFS_OpenPart(partitions->pinfo[i].part_fs, partitions->pinfo[i].index,
                     partitions->pentry[i].sector, partitions->pentry[i].size, (char *) &game_partition))
@@ -70,7 +71,7 @@ static int PartitionChoice()
 {
     int ret = -1;
 
-    int choice = WindowPrompt(tr( "No WBFS or FAT/NTFS partition found" ),
+    int choice = WindowPrompt(tr( "No WBFS or FAT/NTFS/EXT partition found" ),
             tr( "You need to select or format a partition" ), tr( "Select" ), tr( "Format" ), tr( "Return" ));
 
     if (choice == 0)
@@ -83,8 +84,9 @@ static int PartitionChoice()
         if(part_num >= 0)
         {
             if(IosLoader::IsWaninkokoIOS() && NandTitles.VersionOf(TITLE_ID(1, IOS_GetVersion())) < 18
-                && (partitions.pinfo[part_num].part_fs == FS_TYPE_FAT32 || partitions.pinfo[part_num].part_fs == FS_TYPE_NTFS))
-                WindowPrompt(tr("Warning:"), tr("You are trying to select a FAT32/NTFS partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."), tr("OK"));
+                && (partitions.pinfo[part_num].part_fs == FS_TYPE_FAT32 || partitions.pinfo[part_num].part_fs == FS_TYPE_NTFS
+                    || partitions.pinfo[part_num].part_fs == FS_TYPE_EXT))
+                WindowPrompt(tr("Warning:"), tr("You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."), tr("OK"));
 
             ret = WBFS_OpenPart(partitions.pinfo[part_num].part_fs, partitions.pinfo[part_num].index, partitions.pentry[part_num].sector, partitions.pentry[part_num].size, (char *) &game_partition);
 

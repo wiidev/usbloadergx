@@ -8,6 +8,7 @@
 #include <locale.h>
 #include <fat.h>
 #include <ntfs.h>
+#include <ext2.h>
 
 #include "usbloader/usbstorage2.h"
 #include "usbloader/sdhc.h"
@@ -44,6 +45,9 @@ sec_t fat_wbfs_sec = 0;
 
 int fs_ntfs_mount = 0;
 sec_t fs_ntfs_sec = 0;
+
+int fs_ext_mount = 0;
+sec_t fs_ext_sec = 0;
 
 int USBDevice_Init()
 {
@@ -234,6 +238,34 @@ s32 UnmountNTFS(void)
 
     fs_ntfs_mount = 0;
     fs_ntfs_sec = 0;
+
+    return 0;
+}
+
+s32 MountEXT(u32 sector)
+{
+    s32 ret;
+
+    if (fs_ext_mount)
+        return 0;
+
+    ret = ext2Mount("EXT", &__io_usbstorage2, sector, CACHE, SECTORS, EXT2_FLAG_DEFAULT);
+    if (!ret)
+        return -2;
+
+    fs_ext_mount = 1;
+    fs_ext_sec = sector;
+
+    return 0;
+}
+
+s32 UnmountEXT(void)
+{
+    /* Unmount device */
+    ext2Unmount("EXT:/");
+
+    fs_ext_mount = 0;
+    fs_ext_sec = 0;
 
     return 0;
 }

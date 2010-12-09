@@ -101,7 +101,7 @@ static inline bool IsValidPartition(int fs_type, int cios)
     }
     else
     {
-        return fs_type == FS_TYPE_WBFS || fs_type == FS_TYPE_FAT32 || fs_type == FS_TYPE_NTFS;
+        return fs_type == FS_TYPE_WBFS || fs_type == FS_TYPE_FAT32 || fs_type == FS_TYPE_NTFS || fs_type == FS_TYPE_EXT;
     }
 }
 
@@ -177,7 +177,7 @@ void GameLoadSM::SetOptionValues()
 
     // Get the partition name and it's size in GB's
     Options->SetValue(Idx++, "%s%d (%.2fGB)", pInfo.fs_type == FS_TYPE_FAT32 ? "FAT"
-            : pInfo.fs_type == FS_TYPE_NTFS ? "NTFS" : "WBFS", pInfo.index, partition_size);
+            : pInfo.fs_type == FS_TYPE_NTFS ? "NTFS" : pInfo.fs_type == FS_TYPE_EXT ? "LINUX" : "WBFS", pInfo.index, partition_size);
 
     //! Settings: FAT: Use directories
     Options->SetValue(Idx++, "%s", tr( InstallToText[Settings.FatInstallToDir] ));
