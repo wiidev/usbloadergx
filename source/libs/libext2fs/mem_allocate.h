@@ -2,25 +2,22 @@
 #define _MEM_ALLOCATE_H
 
 #include <malloc.h>
+#include "memory/mem2.h"
 
-static inline void* mem_alloc (size_t size) {
-    return malloc(size);
+extern __inline__ void* mem_alloc (size_t size) {
+    return MEM2_alloc(size);
 }
 
-static inline void* mem_realloc (void *p, size_t size) {
-    return realloc(p, size);
+extern __inline__ void* mem_realloc (void *p, size_t size) {
+    return MEM2_realloc(p, size);
 }
 
-static inline void* mem_align (size_t size) {
-    #ifdef __wii__
-    return memalign(32, size);
-    #else
-    return malloc(size);
-    #endif
+extern __inline__ void* mem_align (size_t a, size_t size) {
+    return MEM2_alloc(size);
 }
 
-static inline void mem_free (void* mem) {
-    free(mem);
+extern __inline__ void mem_free (void* mem) {
+    MEM2_free(mem);
 }
 
 #endif /* _MEM_ALLOCATE_H */

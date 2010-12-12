@@ -7,7 +7,7 @@
 class GuiGameBrowser: public GuiElement
 {
     public:
-        GuiGameBrowser(int w, int h, int selected = 0, int offset = 0);
+        GuiGameBrowser(int w, int h, int selectedGame = 0);
         ~GuiGameBrowser();
         int FindMenuItem(int c, int d);
         int GetClickedOption();

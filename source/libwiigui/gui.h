@@ -968,8 +968,6 @@ class GuiNumpad: public GuiWindow
         GuiImageData * keyTextbox;
         GuiImageData * keyMedium;
         GuiImageData * keyMediumOver;
-        GuiSound * keySoundOver;
-        GuiSound * keySoundClick;
         GuiTrigger * trigA;
         GuiTrigger * trigB;
 };
@@ -1026,8 +1024,6 @@ class GuiOptionBrowser: public GuiElement
         GuiImageData * scrollbarBox;
         GuiImageData * scrollbarBoxOver;
 
-        GuiSound * btnSoundOver;
-        GuiSound * btnSoundClick;
         GuiTrigger * trigA;
         GuiTrigger * trigB;
         GuiTrigger * trigHeldA;
@@ -1088,8 +1084,6 @@ class GuiFileBrowser: public GuiElement
         GuiImageData * arrowUp;
         GuiImageData * scrollbarBox;
 
-        GuiSound * btnSoundOver;
-        GuiSound * btnSoundClick;
         GuiTrigger * trigA;
         GuiTrigger * trigHeldA;
 };

@@ -7,7 +7,7 @@ class GuiImageAsync;
 class GuiGameGrid: public GuiElement
 {
     public:
-        GuiGameGrid(int w, int h, const char *themePath, const u8 *imagebg, int selected = 0, int offset = 0);
+        GuiGameGrid(int w, int h, const char *themePath, const u8 *imagebg, int selectedGame = 0);
         ~GuiGameGrid();
         int FindMenuItem(int c, int d);
         int GetClickedOption();

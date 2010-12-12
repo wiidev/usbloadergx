@@ -64,7 +64,8 @@ LDFLAGS		=	-g $(MACHDEP) -Wl,-Map,$(notdir $@).map,--section-start,.init=0x80B00
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project
 #---------------------------------------------------------------------------------
-LIBS :=  -lpngu -lpng -lgd -lm -lz -lwiiuse -lbte -lasnd -logc -lfreetype -lvorbisidec -lmad -lmxml -ljpeg -lzip -lext2fs
+LIBS :=  -lpngu -lpng -lgd -lm -lz -lwiiuse -lbte -lasnd -logc -lfreetype -lvorbisidec \
+		-lmad -lmxml -ljpeg -lzip -lcustomext2fs
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
 # include and lib
@@ -99,7 +100,7 @@ PCMFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.pcm)))
 WAVFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.wav)))
 DOLFILES	:=	$(foreach dir,$(DATA),$(notdir $(wildcard $(dir)/*.dol)))
 MP3FILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.mp3)))
-	
+
 #---------------------------------------------------------------------------------
 # use CXX for linking C++ projects, CC for standard C
 #---------------------------------------------------------------------------------
@@ -127,7 +128,7 @@ export INCLUDE	:=	$(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) \
 #---------------------------------------------------------------------------------
 # build a list of library paths
 #---------------------------------------------------------------------------------
-export LIBPATHS	:=	$(foreach dir,$(LIBDIRS),-L$(dir)/lib) \
+export LIBPATHS	:=	$(foreach dir,$(LIBDIRS),-L$(dir)/lib) -L$(CURDIR)/source/libs/libext2fs/ \
 					-L$(LIBOGC_LIB)
 
 export OUTPUT	:=	$(CURDIR)/$(TARGET)
@@ -167,15 +168,15 @@ run:
 	$(MAKE)
 	@echo Done building ...
 	@echo Now Run That Shit ...
-	
+
 	wiiload $(OUTPUT).dol
 
 #---------------------------------------------------------------------------------
 reload:
 	wiiload -r $(OUTPUT).dol
 
-#---------------------------------------------------------------------------------	
-release: 
+#---------------------------------------------------------------------------------
+release:
 	$(MAKE)
 	cp boot.dol ./hbc/boot.dol
 
@@ -183,7 +184,7 @@ release:
 #---------------------------------------------------------------------------------
 else
 
-DEPENDS	:=	$(OFILES:.o=.d) 
+DEPENDS	:=	$(OFILES:.o=.d)
 
 #---------------------------------------------------------------------------------
 # main targets
@@ -211,15 +212,15 @@ language: $(wildcard $(PROJECTDIR)/Languages/*.lang)
 %.png.o : %.png
 	@echo $(notdir $<)
 	@bin2s -a 32 $< | $(AS) -o $(@)
-	
+
 %.ogg.o : %.ogg
 	@echo $(notdir $<)
 	@bin2s -a 32 $< | $(AS) -o $(@)
-	
+
 %.pcm.o : %.pcm
 	@echo $(notdir $<)
 	@bin2s -a 32 $< | $(AS) -o $(@)
-	
+
 %.wav.o : %.wav
 	@echo $(notdir $<)
 	@bin2s -a 32 $< | $(AS) -o $(@)
@@ -227,7 +228,7 @@ language: $(wildcard $(PROJECTDIR)/Languages/*.lang)
 %.mp3.o : %.mp3
 	@echo $(notdir $<)
 	@bin2s -a 32 $< | $(AS) -o $(@)
-	
+
 %.certs.o	:	%.certs
 	@echo $(notdir $<)
 	@bin2s -a 32 $< | $(AS) -o $(@)

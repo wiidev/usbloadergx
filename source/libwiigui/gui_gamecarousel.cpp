@@ -45,13 +45,13 @@ static GuiImageData *GameCarouselLoadCoverImage(void * Arg)
 /**
  * Constructor for the GuiGameCarousel class.
  */
-GuiGameCarousel::GuiGameCarousel(int w, int h, const char *themePath, const u8 *imagebg, int imagebgsize, int selected, int offset) :
+GuiGameCarousel::GuiGameCarousel(int w, int h, const char *themePath, const u8 *imagebg, int imagebgsize, int selectedGame) :
     noCover(nocover_png, nocover_png_size)
 {
     width = w;
     height = h;
     pagesize = (gameList.size() < 11) ? gameList.size() : 11;
-    listOffset = 0;
+    listOffset = (selectedGame >= 0 && selectedGame < gameList.size()) ? selectedGame : 0;
     selectable = true;
     selectedItem = -1;
     focus = 1; // allow focus

@@ -142,7 +142,7 @@ void Sys_Shutdown(void)
     _Sys_Shutdown(ShutdownToDefault);
 }
 
-void Sys_ShutdownToIdel(void)
+void Sys_ShutdownToIdle(void)
 {
     _Sys_Shutdown(ShutdownToIdle);
 }

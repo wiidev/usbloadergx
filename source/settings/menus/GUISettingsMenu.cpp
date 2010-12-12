@@ -225,7 +225,11 @@ int GuiSettingsMenu::GetMenuInternal()
             returnhere = MenuLanguageSelect();
 
         if (returnhere == 2)
+        {
+            //! Language changed. Reload game titles with new lang code.
+            GameTitles.LoadTitlesFromWiiTDB(Settings.titlestxt_path);
             return MENU_SETTINGS;
+        }
 
         HaltGui();
         if(parentElement)

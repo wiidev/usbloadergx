@@ -27,15 +27,15 @@ int txtscroll = 0;
 /**
  * Constructor for the GuiGameBrowser class.
  */
-GuiGameBrowser::GuiGameBrowser(int w, int h, int selected, int offset)
+GuiGameBrowser::GuiGameBrowser(int w, int h, int selectedGame)
 {
     width = w;
     height = h;
     pagesize = Theme.pagesize;
     scrollbaron = (gameList.size() > pagesize) ? 1 : 0;
     selectable = true;
-    listOffset = MAX( 0, MIN( offset, ( gameList.size() - pagesize ) ) );
-    selectedItem = selected - offset;
+    listOffset = selectedGame - (selectedGame % pagesize);
+    selectedItem = selectedGame - listOffset;
     focus = 1; // allow focus
 
     trigA = new GuiTrigger;

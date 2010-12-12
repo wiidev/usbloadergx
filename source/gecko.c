@@ -21,7 +21,7 @@ void gprintf(const char *format, ...)
 	if((vasprintf(&tmp, format, va) >= 0) && tmp)
 	{
         u32 level = IRQ_Disable();
-        usb_sendbuffer(1, tmp, strlen(tmp));
+        usb_sendbuffer_safe(1, tmp, strlen(tmp));
         IRQ_Restore(level);
 	}
 	va_end(va);

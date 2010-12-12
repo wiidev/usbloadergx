@@ -52,7 +52,7 @@ int cntMissFiles = 0;
 static char missingFiles[500][12];
 
 /*** Extern variables ***/
-s32 gameSelected = 0, gameStart = 0;
+s32 gameStart = 0;
 extern float gamesize;
 extern u8 shutdown;
 extern u8 reset;
@@ -445,7 +445,6 @@ void WindowCredits()
 int WindowScreensaver()
 {
     gprintf("WindowScreenSaver()\n");
-    int i = 0;
     bool exit = false;
 
     /* initialize random seed: */
@@ -473,18 +472,15 @@ int WindowScreensaver()
 
     while (!exit)
     {
-        i++;
         if (IsWpadConnected())
         {
             exit = true;
+            break;
         }
-        /* Set position only every 400000th loop */
-        if ((i % 8000000) == 0)
-        {
             /* Set random position */
-            GXlogoImg.SetPosition((rand() % 345), (rand() % 305));
-        }
+        GXlogoImg.SetPosition((rand() % 345), (rand() % 305));
 
+        sleep(4);
     }
 
     HaltGui();
@@ -1127,7 +1123,7 @@ void SetFavoriteImages(const u8 * gameid, GuiImage *b1, GuiImage *b2, GuiImage *
  * Displays a prompt window to user, with information, an error message, or
  * presenting a user with a choice
  ***************************************************************************/
-int GameWindowPrompt()
+int GameWindowPrompt(int gameSelected)
 {
     int choice = -1, angle = 0;
     f32 size = 0.0;
@@ -1531,8 +1527,32 @@ int GameWindowPrompt()
 
             else if (nameBtn.GetState() == STATE_CLICKED) //rename
             {
+                nameBtn.ResetState();
+                if(mountMethod == 3)
+                {
+                    WindowPrompt(tr("ERROR:"), tr("You can't rename this game"), tr("OK"));
+                    continue;
+                }
+
                 choice = 3;
                 promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
+                while(promptWindow.GetEffect() > 0) usleep(100);
+
+                wiilight(0);
+                //re-evaluate header now in case they changed games while on the game prompt
+                struct discHdr *header = gameList[gameSelected];
+
+                //enter new game title
+                char entered[60];
+                snprintf(entered, sizeof(entered), "%s", GameTitles.GetTitle(header));
+                int result = OnScreenKeyboard(entered, 60, 0);
+                if (result == 1)
+                {
+                    WBFS_RenameGame(header->id, entered);
+                    wString oldFilter(gameList.GetCurrentFilter());
+                    gameList.ReadGameList();
+                    gameList.FilterList(oldFilter.c_str());
+                }
             }
             else if (btnFavorite1.GetState() == STATE_CLICKED) //switch favorite
             {

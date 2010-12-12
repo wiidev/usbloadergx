@@ -31,6 +31,8 @@
 #include "prompts/PromptWindows.h"
 #include "language/gettext.h"
 #include "usbloader/wbfs.h"
+#include "usbloader/GameList.h"
+#include "wstring.hpp"
 
 extern int mountMethod;
 
@@ -97,6 +99,14 @@ int UninstallSM::GetMenuInternal()
             int ret = 0;
             if(!mountMethod)
                 ret = WBFS_RemoveGame(DiscHeader->id);
+
+            if(ret >= 0)
+            {
+                wString oldFilter(gameList.GetCurrentFilter());
+                gameList.ReadGameList();
+                gameList.FilterList(oldFilter.c_str());
+            }
+
             if (ret < 0)
                 WindowPrompt(tr( "Can't delete:" ), Title.c_str(), tr( "OK" ));
             else

@@ -1,3 +1,5 @@
+#ifndef GUI_SEARCHBAR_H_
+#define GUI_SEARCHBAR_H_
 #include "gui.h"
 
 class cSearchButton;
@@ -32,3 +34,5 @@ class GuiSearchBar: public GuiWindow
         GuiTrigger trig;
 
 };
+
+#endif

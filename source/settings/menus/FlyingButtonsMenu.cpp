@@ -101,7 +101,7 @@ FlyingButtonsMenu::~FlyingButtonsMenu()
     ResumeGui();
 
     SetEffect(EFFECT_FADE, -FADE_SPEED);
-    while(this->GetEffect() > 0) usleep(100);
+    while(parentElement && this->GetEffect() > 0) usleep(100);
 
     HaltGui();
     if(parentElement)
@@ -321,9 +321,8 @@ void FlyingButtonsMenu::AddMainButtons()
 void FlyingButtonsMenu::ShowButtonsEffects(int effect, int effect_speed)
 {
     int FirstItem = currentPage*DISPLAY_BUTTONS;
-
-    if(FirstItem >= (int) MainButton.size())
-        return;
+    if(FirstItem < 0)
+        FirstItem = 0;
 
     HaltGui();
 
@@ -335,11 +334,14 @@ void FlyingButtonsMenu::ShowButtonsEffects(int effect, int effect_speed)
 
     ResumeGui();
 
+    if(FirstItem < 0 || FirstItem >= (int) MainButton.size())
+        return;
+
     //! Don't lock on fade in for initiation purpose
     if(effect & EFFECT_FADE && effect_speed > 0)
         return;
 
-    while (MainButton[FirstItem]->GetEffect() > 0)
+    while (parentElement && MainButton[FirstItem]->GetEffect() > 0)
         usleep(100);
 }
 
