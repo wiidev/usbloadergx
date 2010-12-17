@@ -5,16 +5,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-30 23:36+0200\n"
+"POT-Creation-Date: 2010-12-17 18:50+0100\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
 "Last-Translator: Jane.H\n"
 "Language-Team: kyogc, Miller, Mika Li, Jane.H\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-msgid " "
-msgstr ""
 
 msgid " Wad Saved as:"
 msgstr "WAD 儲存為:"
@@ -28,15 +25,17 @@ msgstr "已經被儲存.內容尚未驗證.部分代碼可能無法作用.如果
 msgid " is not on the server."
 msgstr "不在伺服器上"
 
-#, c-format
-msgid "%s : %s May not boot correctly if your System Menu is not up to date."
-msgstr "%s : %s 可能無法正確啟動，也許您的系統目錄不是最新的。"
-
 msgid "0 (Everyone)"
 msgstr "0 (全年齡)"
 
+msgid "0 (Locked and Unlocked Games)"
+msgstr ""
+
 msgid "1 (Child 7+)"
 msgstr "1 (7歲以上)"
+
+msgid "1 (Unlocked Games Only)"
+msgstr ""
 
 msgid "1 hour"
 msgstr "1 小時"
@@ -125,6 +124,9 @@ msgstr ">> 讀取 WAD 數據... 成功!"
 msgid "AUTO"
 msgstr "自動"
 
+msgid "All images downloaded successfully."
+msgstr ""
+
 msgid "All partitions"
 msgstr "所有磁區"
 
@@ -149,6 +151,9 @@ msgstr "四月"
 msgid "Are you sure you want to enable Parent Control?"
 msgstr "您確定要啟用家長控制？"
 
+msgid "Are you sure you want to reset?"
+msgstr ""
+
 msgid "Are you sure?"
 msgstr "確定?"
 
@@ -167,9 +172,6 @@ msgstr "自動修改"
 msgid "BCA Codes Path"
 msgstr "BAC 路徑"
 
-msgid "BCA Codes Path changed"
-msgstr "BAC 路徑已變更"
-
 msgid "BETA revisions"
 msgstr "測試版本"
 
@@ -181,9 +183,6 @@ msgstr "返回 HBC 或 Wii 系統目錄"
 
 msgid "Back to Loader"
 msgstr "返回 Loader"
-
-msgid "Back to Wii Menu"
-msgstr "返回 Wii 系統目錄"
 
 msgid "Backgroundmusic"
 msgstr "背景音樂"
@@ -218,20 +217,20 @@ msgstr "無法刪除:"
 msgid "Cancel"
 msgstr "取消"
 
+msgid "Cannot write to destination."
+msgstr ""
+
 msgid "Change Play Path"
 msgstr "變更路徑"
-
-msgid "Channels"
-msgstr "頻道"
 
 msgid "Cheatfile is blank"
 msgstr "金手指文件是空的"
 
-msgid "Checking existing artwork"
-msgstr "檢查已存在的插圖"
-
 msgid "Checking for Updates"
 msgstr "檢查軟件最新版本"
+
+msgid "Clear"
+msgstr ""
 
 msgid "Click to Download Covers"
 msgstr "點擊下載封面"
@@ -254,9 +253,6 @@ msgstr "程式設計者: %s"
 
 msgid "Coding:"
 msgstr "編譯:"
-
-msgid "Confirm"
-msgstr "確認"
 
 msgid "Connection lost..."
 msgstr "遺失連接..."
@@ -282,11 +278,14 @@ msgstr "遊戲分級"
 msgid "Correct Password"
 msgstr "密碼正確"
 
+msgid "Could not connect to the server."
+msgstr ""
+
 msgid "Could not create GCT file"
 msgstr "無法建立 GCT 文件"
 
-msgid "Could not find a WBFS partition."
-msgstr "找不到 WBFS 磁區."
+msgid "Could not find info for this game in the wiitdb.xml."
+msgstr ""
 
 msgid "Could not initialize DIP module!"
 msgstr "無法啟動 DIP 模塊!"
@@ -297,23 +296,14 @@ msgstr "無法啟動網路!"
 msgid "Could not open Disc"
 msgstr "無法開啟光碟"
 
-msgid "Could not open WBFS partition"
-msgstr "無法打開 WBFS 磁區"
-
-msgid "Could not read the disc."
-msgstr "無法讀取光碟."
+msgid "Could not open wiitdb.xml."
+msgstr ""
 
 msgid "Could not save."
 msgstr "無法儲存"
 
-msgid "Could not set USB."
-msgstr "無法設置 USB."
-
 msgid "Cover Download"
 msgstr "下載封面"
-
-msgid "Cover Path Changed"
-msgstr "封面路徑已變更"
 
 msgid "Create"
 msgstr "產生"
@@ -329,9 +319,6 @@ msgstr "自製/原始"
 
 msgid "DOL Path"
 msgstr "DOL 路徑"
-
-msgid "DOL path changed"
-msgstr "DOL 路徑已變更"
 
 msgid "Dec"
 msgstr "十二月"
@@ -384,9 +371,6 @@ msgstr "光碟預設"
 msgid "Disc Images"
 msgstr "光碟圖像"
 
-msgid "Disc Path Changed"
-msgstr "光碟圖像路徑已變更"
-
 msgid "DiskFlip"
 msgstr "光碟滑動"
 
@@ -402,8 +386,8 @@ msgstr "封面牆模式"
 msgid "Display as a list"
 msgstr "表單模式"
 
-msgid "Display favorites"
-msgstr "我的最愛模式"
+msgid "Display favorites only"
+msgstr ""
 
 msgid "Do you really want to delete:"
 msgstr "確定刪除:"
@@ -419,9 +403,6 @@ msgstr "是否要下載這個佈景主題？"
 
 msgid "Do you want to format:"
 msgstr "是否格式化:"
-
-msgid "Do you want to retry for 30 secs?"
-msgstr "是否等待 30 秒後重試?"
 
 msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "使用這個已知是正確的 Alt DOL 文件?"
@@ -462,6 +443,12 @@ msgstr "下載主題預覽圖片"
 msgid "Downloading file"
 msgstr "檔案下載中"
 
+msgid "Downloading file..."
+msgstr ""
+
+msgid "Downloading files"
+msgstr ""
+
 msgid "Downloading image:"
 msgstr "下載圖片"
 
@@ -476,9 +463,6 @@ msgstr "錯誤:"
 
 msgid "ERROR: Can't set up theme."
 msgstr "錯誤:無法設定佈景主題"
-
-msgid "Enable Parental Control"
-msgstr "啟用親子控制"
 
 msgid "English"
 msgstr "英文"
@@ -495,8 +479,14 @@ msgstr "修正002錯誤"
 msgid "Error reading Disc"
 msgstr "讀取光碟錯誤"
 
+msgid "Error while opening the zip."
+msgstr ""
+
 msgid "Error while transfering data."
 msgstr "檔案傳輸過程錯誤"
+
+msgid "Error writing the data."
+msgstr ""
 
 msgid "Error..."
 msgstr "錯誤..."
@@ -525,14 +515,26 @@ msgstr "二月"
 msgid "File not found."
 msgstr "找不到該檔案"
 
+msgid "Filesize is 0 Byte."
+msgstr ""
+
 msgid "Finishing installation... Ok!"
 msgstr "正在完成安裝...完成!"
+
+msgid "Flat Covers"
+msgstr ""
 
 msgid "Flip-X"
 msgstr "按鍵規則"
 
-msgid "Force"
-msgstr "強制"
+msgid "Force NTSC"
+msgstr ""
+
+msgid "Force PAL50"
+msgstr ""
+
+msgid "Force PAL60"
+msgstr ""
 
 msgid "Format"
 msgstr "格式化"
@@ -555,9 +557,6 @@ msgstr "GAMEID_遊戲名稱"
 msgid "GCT Cheatcodes Path"
 msgstr "金手指檔案路徑"
 
-msgid "GCT Cheatcodes Path changed"
-msgstr "金手指檔案路徑已變更"
-
 msgid "GCT File created"
 msgstr "GCT 檔案已產生"
 
@@ -570,11 +569,17 @@ msgstr "無法在任何子目錄找到 GXtheme.cfg 檔案"
 msgid "Game ID"
 msgstr "遊戲 ID"
 
+msgid "Game IOS"
+msgstr ""
+
 msgid "Game Language"
 msgstr "遊戲語言"
 
 msgid "Game Load"
 msgstr "遊戲載入設定"
+
+msgid "Game Lock"
+msgstr ""
 
 msgid "Game Region"
 msgstr "遊戲區碼"
@@ -600,20 +605,23 @@ msgstr "遊戲名稱 [GAMEID]"
 msgid "Games"
 msgstr "遊戲數量"
 
+msgid "GamesLevel"
+msgstr ""
+
 msgid "German"
 msgstr "德文"
+
+msgid "Gerne:"
+msgstr ""
+
+msgid "Global Settings"
+msgstr ""
 
 msgid "HOME Menu"
 msgstr "主選單"
 
-msgid "Hermes CIOS"
-msgstr ""
-
 msgid "Homebrew Apps Path"
 msgstr "HBC 應用程式路徑"
-
-msgid "Homebrew Appspath changed"
-msgstr "HBC 應用程式路徑已變更"
 
 msgid "Homebrew Launcher"
 msgstr "HBC 應用程式"
@@ -647,9 +655,6 @@ msgstr "插入光碟"
 msgid "Insert a Wii Disc!"
 msgstr "插入 Wii 光碟!"
 
-msgid "Insert an SD-Card to download images."
-msgstr "插入 SD 卡以下載封面."
-
 msgid "Insert an SD-Card to save."
 msgstr "插入 SD 卡以儲存."
 
@@ -667,9 +672,6 @@ msgstr "安裝錯誤!"
 
 msgid "Install a game"
 msgstr "安裝遊戲"
-
-msgid "Install not possible"
-msgstr "無法安裝"
 
 msgid "Install partitions"
 msgstr "安裝磁區"
@@ -724,6 +726,9 @@ msgstr "語言檔案"
 
 msgid "Language change:"
 msgstr "變更語言為:"
+
+msgid "Languagefiles Path"
+msgstr ""
 
 msgid "Languagepath changed."
 msgstr "語言路徑已變更"
@@ -780,9 +785,6 @@ msgstr "五月"
 msgid "Missing files"
 msgstr "缺少的文件"
 
-msgid "Most likely it has dimensions that are not evenly divisible by 4."
-msgstr "圖片格式錯誤，可能它的尺寸不是 4 的倍數."
-
 msgid "Mount DVD drive"
 msgstr "掛載DVD光碟"
 
@@ -795,9 +797,6 @@ msgstr "音量"
 msgid "Neither"
 msgstr "皆不顯示"
 
-msgid "Network init error"
-msgstr "網路啟動錯誤"
-
 msgid "New Disc Detected"
 msgstr "新光碟已檢查"
 
@@ -807,35 +806,29 @@ msgstr "往後"
 msgid "No"
 msgstr "否"
 
-msgid "No .dol or .elf files found."
-msgstr "找不到 .dol 或 .elf 文件"
-
 msgid "No Cheatfile found"
 msgstr "金手指文件沒找到"
 
 msgid "No DOL file found on disc."
 msgstr "光碟中未找到 DOL 文件."
 
-msgid "No Favorites"
-msgstr "沒有收藏記錄"
-
 msgid "No SD-Card inserted!"
 msgstr "未插入 SD 卡!"
 
-msgid "No USB Device"
-msgstr "沒有 USB 設備"
+msgid "No URL or Path specified."
+msgstr ""
 
-msgid "No USB Device found."
-msgstr "找不到 USB 設備."
-
-msgid "No WBFS or FAT/NTFS partition found"
-msgstr "找不到 WBFS 和 FAT/NTFS 磁區中的遊戲"
+msgid "No WBFS or FAT/NTFS/EXT partition found"
+msgstr ""
 
 msgid "No cheats were selected"
 msgstr "沒有選擇金手指"
 
 msgid "No data could be read."
 msgstr "無法讀取數據"
+
+msgid "No favorites selected."
+msgstr ""
 
 msgid "No file missing!"
 msgstr "沒有文件缺少!"
@@ -852,26 +845,32 @@ msgstr "沒有"
 msgid "Normal"
 msgstr "一般"
 
-msgid "Normal Covers"
-msgstr "普通封面"
-
-msgid "Not Found"
-msgstr "沒找到"
-
-msgid "Not a DOL/ELF file."
-msgstr "不是 DOL/ELF 文件."
-
 msgid "Not a WAD file."
 msgstr "不是 WAD 文件."
 
 msgid "Not a Wii Disc"
 msgstr "不是 Wii 的光碟"
 
+msgid "Not a valid URL"
+msgstr ""
+
+msgid "Not a valid URL path"
+msgstr ""
+
+msgid "Not a valid domain"
+msgstr ""
+
 msgid "Not enough free memory."
 msgstr "剩餘記憶體不足."
 
 msgid "Not enough free space!"
 msgstr "剩餘空間不足!"
+
+msgid "Not enough memory."
+msgstr ""
+
+msgid "Not required"
+msgstr ""
 
 msgid "Not supported format!"
 msgstr "未支援的格式"
@@ -888,11 +887,17 @@ msgstr "確定"
 msgid "ON"
 msgstr "開啟"
 
+msgid "Ocarina"
+msgstr ""
+
 msgid "Oct"
 msgstr "十月"
 
 msgid "Official Site:"
 msgstr "官方網址:"
+
+msgid "Offset"
+msgstr ""
 
 msgid "Only Customs"
 msgstr "只顯示自製"
@@ -929,6 +934,9 @@ msgstr "複製這個鏈接到瀏覽器來下載 WiiTDB.zip 文件."
 
 msgid "Patch Country Strings"
 msgstr "修改國別設定"
+
+msgid "Path Changed"
+msgstr ""
 
 msgid "Pick from a list"
 msgstr "從列表中選取"
@@ -993,14 +1001,17 @@ msgstr "重置 BG 音樂"
 msgid "Reset Playcounter"
 msgstr "重置執行次數"
 
-msgid "Reset to standard BGM?"
-msgstr "重置回標準 BG 音樂"
+msgid "Reset to default BGM?"
+msgstr ""
 
 msgid "Restarting..."
 msgstr "正在重新啟動"
 
 msgid "Return"
 msgstr "返回"
+
+msgid "Return To"
+msgstr ""
 
 msgid "Return to Wii Menu"
 msgstr "返回 Wii 主目錄"
@@ -1020,8 +1031,8 @@ msgstr "音效音量"
 msgid "Save"
 msgstr "儲存"
 
-msgid "Save Failed"
-msgstr "儲存失敗"
+msgid "Save Failed. No device inserted?"
+msgstr ""
 
 msgid "Save Game List to"
 msgstr "儲存遊戲列表至"
@@ -1035,11 +1046,14 @@ msgstr "螢幕保護"
 msgid "Select"
 msgstr "選取"
 
+msgid "Select DOL Offset"
+msgstr ""
+
 msgid "Select a DOL"
 msgstr "選擇一個 DOL"
 
-msgid "Selected DOL"
-msgstr "已選擇 DOL"
+msgid "Select a DOL from Game"
+msgstr ""
 
 msgid "Sept"
 msgstr "九月"
@@ -1068,6 +1082,9 @@ msgstr "以執行次數排列"
 msgid "Sound"
 msgstr "音效設定"
 
+msgid "Sound Settings"
+msgstr ""
+
 msgid "Sound+BGM"
 msgstr "音樂+音效"
 
@@ -1079,9 +1096,6 @@ msgstr "西班牙文"
 
 msgid "Special thanks to:"
 msgstr "特別感謝"
-
-msgid "Standard"
-msgstr "預設"
 
 msgid "Success"
 msgstr "成功"
@@ -1116,9 +1130,6 @@ msgstr "繁體中文"
 msgid "TXT Cheatcodes Path"
 msgstr "TXT 金手指文件路徑"
 
-msgid "TXT Cheatcodes Path changed"
-msgstr "TXT 金手指文件路徑已變更"
-
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "已進入的目錄不存在。你想要創建一個目錄嗎？"
 
@@ -1132,20 +1143,20 @@ msgstr "WAD 安裝失敗，錯誤號 %ld"
 msgid "Theme Download Path"
 msgstr "佈景主題下載路徑"
 
-msgid "Theme Download Path changed"
-msgstr "佈景主題下載路徑已變更"
-
 msgid "Theme Downloader"
 msgstr "佈景主題下載"
 
 msgid "Theme Path"
 msgstr "佈景主題路徑"
 
-msgid "Theme Path Changed"
-msgstr "佈景主題路徑已變更"
-
 msgid "Theme Title:"
 msgstr "佈景主題標題"
+
+msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
+msgstr ""
+
+msgid "This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."
+msgstr ""
 
 msgid "Time left:"
 msgstr "剩餘時間:"
@@ -1159,6 +1170,9 @@ msgstr "從 WiiTDB 中顯示遊戲名稱"
 msgid "Tooltips"
 msgstr "提示信息"
 
+msgid "Transfer failed"
+msgstr ""
+
 msgid "Transfer failed."
 msgstr "傳輸失敗"
 
@@ -1167,9 +1181,6 @@ msgstr "找不到 USB 設備"
 
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX 被鎖定"
-
-msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
-msgstr "USB Loader GX 只能執行 Hermes CIO rev4！請確認您安裝的版本是 rev4！"
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
@@ -1186,6 +1197,9 @@ msgstr "刪除選單"
 
 msgid "Uninstalling wad"
 msgstr "移除 WAD"
+
+msgid "Unknown"
+msgstr ""
 
 msgid "Unlock Parental Control"
 msgstr "解鎖家長控制"
@@ -1213,9 +1227,6 @@ msgstr "更新檔案"
 
 msgid "Update Path"
 msgstr "更新路徑"
-
-msgid "Update Path changed."
-msgstr "更新路徑已變更"
 
 msgid "Update all Language Files"
 msgstr "更新所有語言檔案"
@@ -1254,14 +1265,14 @@ msgstr "影像格式"
 msgid "WIP Patches Path"
 msgstr "WIP 補丁路徑"
 
-msgid "WIP Patches Path changed"
-msgstr "WIP 補丁路徑已更新"
-
 msgid "Waiting for USB Device"
 msgstr "等待 USB 設備"
 
 msgid "Waiting..."
 msgstr "等待中..."
+
+msgid "Warning:"
+msgstr ""
 
 msgid "What do you want to update?"
 msgstr "更新何者?"
@@ -1284,8 +1295,8 @@ msgstr "WiiTDB檔案"
 msgid "WiiTDB Path"
 msgstr "WiiTDB路徑"
 
-msgid "WiiTDB Path changed."
-msgstr "WiiTDB路徑已變更"
+msgid "WiiTDB is up to date."
+msgstr ""
 
 msgid "Wiilight"
 msgstr "光碟機藍光"
@@ -1296,20 +1307,11 @@ msgstr "密碼錯誤"
 msgid "Yes"
 msgstr "是"
 
-msgid "You are about to delete "
-msgstr "您即將刪除"
-
-msgid "You are choosing to display favorites and you do not have any selected."
-msgstr "你選擇顯示收藏夾但裡面還沒有任何收藏"
-
-msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
-msgstr "您正在使用 NTFS 文件系統。由於可能一個錯誤寫入到一個 NTFS 分區，這時候是無法安裝遊戲的。"
+msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
+msgstr ""
 
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr "家長控制已鎖定。如果要解除 Wii 被鎖住的功能，您必須要先至控制台解除家長控制。"
-
-msgid "You have attempted to load a bad image"
-msgstr "載入的影像有問題"
 
 msgid "You need to select or format a partition"
 msgstr "選擇你要格式化的磁區"
@@ -1329,12 +1331,6 @@ msgstr "不存在!"
 
 msgid "does not exist!  Loading game without cheats."
 msgstr "不存在!載入遊戲但不啟用金手指"
-
-msgid "does not exist!  You Messed something up, Idiot."
-msgstr "不存在!檔案錯誤"
-
-msgid "file left"
-msgstr "剩餘文件"
 
 msgid "files left"
 msgstr "剩下的檔案"
@@ -1380,3 +1376,147 @@ msgstr "的"
 
 msgid "seconds left"
 msgstr "剩餘秒數"
+
+#~ msgid "%s : %s May not boot correctly if your System Menu is not up to date."
+#~ msgstr "%s : %s 可能無法正確啟動，也許您的系統目錄不是最新的。"
+
+#~ msgid "BCA Codes Path changed"
+#~ msgstr "BAC 路徑已變更"
+
+#~ msgid "Back to Wii Menu"
+#~ msgstr "返回 Wii 系統目錄"
+
+#~ msgid "Channels"
+#~ msgstr "頻道"
+
+#~ msgid "Checking existing artwork"
+#~ msgstr "檢查已存在的插圖"
+
+#~ msgid "Confirm"
+#~ msgstr "確認"
+
+#~ msgid "Could not find a WBFS partition."
+#~ msgstr "找不到 WBFS 磁區."
+
+#~ msgid "Could not open WBFS partition"
+#~ msgstr "無法打開 WBFS 磁區"
+
+#~ msgid "Could not read the disc."
+#~ msgstr "無法讀取光碟."
+
+#~ msgid "Could not set USB."
+#~ msgstr "無法設置 USB."
+
+#~ msgid "Cover Path Changed"
+#~ msgstr "封面路徑已變更"
+
+#~ msgid "DOL path changed"
+#~ msgstr "DOL 路徑已變更"
+
+#~ msgid "Disc Path Changed"
+#~ msgstr "光碟圖像路徑已變更"
+
+#~ msgid "Display favorites"
+#~ msgstr "我的最愛模式"
+
+#~ msgid "Do you want to retry for 30 secs?"
+#~ msgstr "是否等待 30 秒後重試?"
+
+#~ msgid "Enable Parental Control"
+#~ msgstr "啟用親子控制"
+
+#~ msgid "Force"
+#~ msgstr "強制"
+
+#~ msgid "GCT Cheatcodes Path changed"
+#~ msgstr "金手指檔案路徑已變更"
+
+#~ msgid "Homebrew Appspath changed"
+#~ msgstr "HBC 應用程式路徑已變更"
+
+#~ msgid "Insert an SD-Card to download images."
+#~ msgstr "插入 SD 卡以下載封面."
+
+#~ msgid "Install not possible"
+#~ msgstr "無法安裝"
+
+#~ msgid "Most likely it has dimensions that are not evenly divisible by 4."
+#~ msgstr "圖片格式錯誤，可能它的尺寸不是 4 的倍數."
+
+#~ msgid "Network init error"
+#~ msgstr "網路啟動錯誤"
+
+#~ msgid "No .dol or .elf files found."
+#~ msgstr "找不到 .dol 或 .elf 文件"
+
+#~ msgid "No Favorites"
+#~ msgstr "沒有收藏記錄"
+
+#~ msgid "No USB Device"
+#~ msgstr "沒有 USB 設備"
+
+#~ msgid "No USB Device found."
+#~ msgstr "找不到 USB 設備."
+
+#~ msgid "No WBFS or FAT/NTFS partition found"
+#~ msgstr "找不到 WBFS 和 FAT/NTFS 磁區中的遊戲"
+
+#~ msgid "Normal Covers"
+#~ msgstr "普通封面"
+
+#~ msgid "Not Found"
+#~ msgstr "沒找到"
+
+#~ msgid "Not a DOL/ELF file."
+#~ msgstr "不是 DOL/ELF 文件."
+
+#~ msgid "Reset to standard BGM?"
+#~ msgstr "重置回標準 BG 音樂"
+
+#~ msgid "Save Failed"
+#~ msgstr "儲存失敗"
+
+#~ msgid "Selected DOL"
+#~ msgstr "已選擇 DOL"
+
+#~ msgid "Standard"
+#~ msgstr "預設"
+
+#~ msgid "TXT Cheatcodes Path changed"
+#~ msgstr "TXT 金手指文件路徑已變更"
+
+#~ msgid "Theme Download Path changed"
+#~ msgstr "佈景主題下載路徑已變更"
+
+#~ msgid "Theme Path Changed"
+#~ msgstr "佈景主題路徑已變更"
+
+#~ msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
+#~ msgstr "USB Loader GX 只能執行 Hermes CIO rev4！請確認您安裝的版本是 rev4！"
+
+#~ msgid "Update Path changed."
+#~ msgstr "更新路徑已變更"
+
+#~ msgid "WIP Patches Path changed"
+#~ msgstr "WIP 補丁路徑已更新"
+
+#~ msgid "WiiTDB Path changed."
+#~ msgstr "WiiTDB路徑已變更"
+
+#~ msgid "You are about to delete "
+#~ msgstr "您即將刪除"
+
+#~ msgid "You are choosing to display favorites and you do not have any selected."
+#~ msgstr "你選擇顯示收藏夾但裡面還沒有任何收藏"
+
+#~ msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
+#~ msgstr "您正在使用 NTFS 文件系統。由於可能一個錯誤寫入到一個 NTFS 分區，這時候是無法安裝遊戲的。"
+
+#~ msgid "You have attempted to load a bad image"
+#~ msgstr "載入的影像有問題"
+
+#~ msgid "does not exist!  You Messed something up, Idiot."
+#~ msgstr "不存在!檔案錯誤"
+
+#~ msgid "file left"
+#~ msgstr "剩餘文件"

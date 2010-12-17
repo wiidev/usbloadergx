@@ -45,12 +45,6 @@
 #include "bannersound.h"
 #include "buildtype.h"
 
-/*** Variables that are also used extern ***/
-int cntMissFiles = 0;
-
-/*** Variables used only in this file ***/
-static char missingFiles[500][12];
-
 /*** Extern variables ***/
 s32 gameStart = 0;
 extern float gamesize;
@@ -1123,11 +1117,12 @@ void SetFavoriteImages(const u8 * gameid, GuiImage *b1, GuiImage *b2, GuiImage *
  * Displays a prompt window to user, with information, an error message, or
  * presenting a user with a choice
  ***************************************************************************/
-int GameWindowPrompt(int gameSelected)
+int GameWindowPrompt(int & gameSelected)
 {
     int choice = -1, angle = 0;
     f32 size = 0.0;
-    char ID[5];
+    char ID3[4];
+    char ID4[5];
     char IDFull[7];
 
     GuiSound * gameSound = NULL;
@@ -1233,7 +1228,7 @@ int GameWindowPrompt(int gameSelected)
         btn2Img.SetWidescreen(Settings.widescreen);
     }
     GuiButton btn2(&btn2Img, &btn2Img, 1, 5, 0, 0, &trigA, btnSoundOver, btnSoundClick2, 1);
-    if (Settings.godmode == 1 && mountMethod != 2 && mountMethod != 3)
+    if (Settings.godmode == 1 && mountMethod != 2)
     {
         btn2.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
         btn2.SetPosition(-50, -40);
@@ -1317,7 +1312,7 @@ int GameWindowPrompt(int gameSelected)
     }
 
     //check if unlocked
-    if (Settings.godmode == 1 && mountMethod != 2 && mountMethod != 3)
+    if (Settings.godmode == 1 && mountMethod != 2)
     {
         promptWindow.Append(&btn3);
     }
@@ -1350,7 +1345,7 @@ int GameWindowPrompt(int gameSelected)
         }
 
         //load disc image based or what game is seleted
-        struct discHdr * header = (mountMethod == 1 || mountMethod == 2 ? dvdheader : gameList[gameSelected]);
+        struct discHdr * header = (mountMethod ? dvdheader : gameList[gameSelected]);
         if (Settings.gamesoundvolume > 0)
         {
             if (gameSound)
@@ -1369,9 +1364,9 @@ int GameWindowPrompt(int gameSelected)
                 gameSound->Play();
             }
         }
-        snprintf(ID, sizeof(ID), "%c%c%c", header->id[0], header->id[1], header->id[2]);
-        snprintf(IDFull, sizeof(IDFull), "%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2], header->id[3],
-                header->id[4], header->id[5]);
+        snprintf(IDFull, sizeof(IDFull), "%s", (char*) header->id);
+        snprintf(ID3, sizeof(ID3), "%s", IDFull);
+        snprintf(ID4, sizeof(ID4), "%s", IDFull);
 
         gprintf("\t%s\n", IDFull);
         if (diskCover) delete diskCover;
@@ -1382,15 +1377,13 @@ int GameWindowPrompt(int gameSelected)
         if (!diskCover->GetImage())
         {
             delete diskCover;
-            snprintf(imgPath, sizeof(imgPath), "%s%s.png", Settings.disc_path, ID); //changed to current id
+            snprintf(imgPath, sizeof(imgPath), "%s%s.png", Settings.disc_path, ID3); //changed to current id
             diskCover = new GuiImageData(imgPath);
 
             if (!diskCover->GetImage())
             {
-                snprintf(ID, sizeof(ID), "%c%c%c%c", header->id[0], header->id[1], header->id[2], header->id[3]);
-
                 delete diskCover;
-                snprintf(imgPath, sizeof(imgPath), "%s%s.png", Settings.disc_path, ID); //changed to current id
+                snprintf(imgPath, sizeof(imgPath), "%s%s.png", Settings.disc_path, ID4); //changed to current id
                 diskCover = new GuiImageData(imgPath);
                 if (!diskCover->GetImage())
                 {
@@ -1528,11 +1521,6 @@ int GameWindowPrompt(int gameSelected)
             else if (nameBtn.GetState() == STATE_CLICKED) //rename
             {
                 nameBtn.ResetState();
-                if(mountMethod == 3)
-                {
-                    WindowPrompt(tr("ERROR:"), tr("You can't rename this game"), tr("OK"));
-                    continue;
-                }
 
                 choice = 3;
                 promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
@@ -1960,129 +1948,6 @@ int FormatingPartition(const char *title, partitionEntry *entry)
 }
 
 /****************************************************************************
- * SearchMissingImages
- ***************************************************************************/
-bool SearchMissingImages(int choice2)
-{
-
-    gprintf("\nSearchMissingImages(%i)", choice2);
-    GuiWindow promptWindow(472, 320);
-    promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-    promptWindow.SetPosition(0, -10);
-
-    GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
-    GuiImageData dialogBox(Resources::GetFile("dialogue_box.png"), Resources::GetFileSize("dialogue_box.png"));
-    GuiTrigger trigA;
-    trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
-
-    GuiImage dialogBoxImg(&dialogBox);
-
-    if (Settings.wsprompt)
-    {
-        dialogBoxImg.SetWidescreen(Settings.widescreen);
-    }
-
-    GuiText titleTxt(tr( "Checking existing artwork" ), 26, Theme.prompttext);
-    titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-    titleTxt.SetPosition(0, 60);
-
-    char msg[20] = " ";
-    GuiText msgTxt(msg, 22, Theme.prompttext);
-    msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-    msgTxt.SetPosition(0, -40);
-
-    promptWindow.Append(&dialogBoxImg);
-    promptWindow.Append(&titleTxt);
-    promptWindow.Append(&msgTxt);
-
-    promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
-    HaltGui();
-    mainWindow->SetState(STATE_DISABLED);
-    mainWindow->Append(&promptWindow);
-    mainWindow->ChangeFocus(&promptWindow);
-    ResumeGui();
-
-    //make sure that all games are added to the gamelist
-    gameList.LoadUnfiltered();
-
-    cntMissFiles = 0;
-    int i = 0;
-    char filename[11];
-
-    //add IDs of games that are missing covers to cntMissFiles
-    bool found1 = false;
-    bool found2 = false;
-    bool found3 = false;
-    for (i = 0; i < gameList.size() && cntMissFiles < 500; i++)
-    {
-        struct discHdr* header = gameList[i];
-        if (choice2 != 3)
-        {
-
-            char *covers_path = choice2 == 1 ? Settings.covers2d_path : Settings.covers_path;
-
-            snprintf(filename, sizeof(filename), "%c%c%c.png", header->id[0], header->id[1], header->id[2]);
-            found2 = FindFile(filename, covers_path);
-
-            snprintf(filename, sizeof(filename), "%c%c%c%c.png", header->id[0], header->id[1], header->id[2],
-                    header->id[3]);
-            found3 = FindFile(filename, covers_path);
-
-            snprintf(filename, sizeof(filename), "%c%c%c%c%c%c.png", header->id[0], header->id[1], header->id[2],
-                    header->id[3], header->id[4], header->id[5]); //full id
-            found1 = FindFile(filename, covers_path);
-            if (!found1 && !found2 && !found3) //if could not find any image
-            {
-                snprintf(missingFiles[cntMissFiles], 11, "%s", filename);
-                cntMissFiles++;
-            }
-        }
-        else if (choice2 == 3)
-        {
-            snprintf(filename, sizeof(filename), "%c%c%c.png", header->id[0], header->id[1], header->id[2]);
-            found2 = FindFile(filename, Settings.disc_path);
-            snprintf(filename, sizeof(filename), "%c%c%c%c%c%c.png", header->id[0], header->id[1], header->id[2],
-                    header->id[3], header->id[4], header->id[5]); //full id
-            found1 = FindFile(filename, Settings.disc_path);
-            if (!found1 && !found2)
-            {
-                snprintf(missingFiles[cntMissFiles], 11, "%s", filename);
-                cntMissFiles++;
-            }
-        }
-    }
-    if (cntMissFiles == 0)
-    {
-        msgTxt.SetText(tr( "No file missing!" ));
-        sleep(1);
-    }
-
-    promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
-    while (promptWindow.GetEffect() > 0)
-        usleep(100);
-
-    HaltGui();
-    mainWindow->Remove(&promptWindow);
-    mainWindow->SetState(STATE_DEFAULT);
-    gameList.FilterList();
-    ResumeGui();
-
-    gprintf(" = %i", cntMissFiles);
-    if (cntMissFiles > 0) //&& !IsNetworkInit()) {
-    {
-        NetworkInitPrompt();
-    }
-
-    if (cntMissFiles == 0)
-    {
-        return false;
-    }
-    else
-    {
-        return true;
-    }
-}
-/****************************************************************************
  * NetworkInitPrompt
  ***************************************************************************/
 bool NetworkInitPrompt()
@@ -2180,524 +2045,6 @@ bool NetworkInitPrompt()
     ResumeGui();
 
     return success;
-}
-
-/****************************************************************************
- * ProgressDownloadWindow
- *
- * Opens a window, which displays progress to the user. Can either display a
- * progress bar showing % completion, or a throbber that only shows that an
- * action is in progress.
- ***************************************************************************/
-int ProgressDownloadWindow(int choice2)
-{
-
-    int i = 0, cntNotFound = 0;
-
-    GuiWindow promptWindow(472, 320);
-    promptWindow.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-    promptWindow.SetPosition(0, -10);
-
-    GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
-    GuiImageData dialogBox(Resources::GetFile("dialogue_box.png"), Resources::GetFileSize("dialogue_box.png"));
-    GuiTrigger trigA;
-    trigA.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
-
-    GuiImage dialogBoxImg(&dialogBox);
-    if (Settings.wsprompt)
-    {
-        dialogBoxImg.SetWidescreen(Settings.widescreen);
-    }
-
-    GuiImageData progressbarOutline(Resources::GetFile("progressbar_outline.png"), Resources::GetFileSize("progressbar_outline.png"));
-    GuiImage progressbarOutlineImg(&progressbarOutline);
-    if (Settings.wsprompt)
-    {
-        progressbarOutlineImg.SetWidescreen(Settings.widescreen);
-    }
-    progressbarOutlineImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-    progressbarOutlineImg.SetPosition(25, 40);
-
-    GuiImageData progressbarEmpty(Resources::GetFile("progressbar_empty.png"), Resources::GetFileSize("progressbar_empty.png"));
-    GuiImage progressbarEmptyImg(&progressbarEmpty);
-    progressbarEmptyImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-    progressbarEmptyImg.SetPosition(25, 40);
-    progressbarEmptyImg.SetTile(100);
-
-    GuiImageData progressbar(Resources::GetFile("progressbar.png"), Resources::GetFileSize("progressbar.png"));
-    GuiImage progressbarImg(&progressbar);
-    progressbarImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-    progressbarImg.SetPosition(25, 40);
-
-    GuiText titleTxt(tr( "Downloading file" ), 26, Theme.prompttext);
-    titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-    titleTxt.SetPosition(0, 60);
-
-    GuiText msgTxt((char*) NULL, 20, Theme.prompttext);
-    msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-    msgTxt.SetPosition(0, 130);
-
-    GuiText msg2Txt((char*) NULL, 26, Theme.prompttext);
-    msg2Txt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-    msg2Txt.SetPosition(0, 100);
-
-    GuiText prTxt((char*) NULL, 26, Theme.prompttext);
-    prTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-    prTxt.SetPosition(0, 40);
-
-    GuiText btn1Txt(tr( "Cancel" ), 22, Theme.prompttext);
-    GuiImage btn1Img(&btnOutline);
-    if (Settings.wsprompt)
-    {
-        btn1Txt.SetWidescreen(Settings.widescreen);
-        btn1Img.SetWidescreen(Settings.widescreen);
-    }
-    GuiButton btn1(&btn1Img, &btn1Img, 2, 4, 0, -45, &trigA, btnSoundOver, btnSoundClick2, 1);
-    btn1.SetLabel(&btn1Txt);
-    btn1.SetState(STATE_SELECTED);
-
-    if ((Settings.wsprompt) && (Settings.widescreen)) /////////////adjust for widescreen
-    {
-        progressbarOutlineImg.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
-        progressbarOutlineImg.SetPosition(0, 40);
-        progressbarEmptyImg.SetPosition(80, 40);
-        progressbarEmptyImg.SetTile(78);
-        progressbarImg.SetPosition(80, 40);
-    }
-
-    promptWindow.Append(&dialogBoxImg);
-    promptWindow.Append(&titleTxt);
-    promptWindow.Append(&msgTxt);
-    promptWindow.Append(&msg2Txt);
-    promptWindow.Append(&progressbarEmptyImg);
-    promptWindow.Append(&progressbarImg);
-    promptWindow.Append(&progressbarOutlineImg);
-    promptWindow.Append(&prTxt);
-    promptWindow.Append(&btn1);
-
-    HaltGui();
-    mainWindow->SetState(STATE_DISABLED);
-    mainWindow->Append(&promptWindow);
-    mainWindow->ChangeFocus(&promptWindow);
-    ResumeGui();
-
-    int offset = 0, tries = 0;
-    int serverCnt3d = 1, serverCnt2d = 1, serverCntDisc = 2;
-
-    char server3d[100];
-    char serverDisc[100];
-    char serverDiscCustom[100];
-    char server2d[100];
-
-    snprintf(server3d, sizeof(server3d), "http://wiitdb.com/wiitdb/artwork/cover3D/");
-    snprintf(serverDisc, sizeof(serverDisc), "http://wiitdb.com/wiitdb/artwork/disc/");
-    snprintf(serverDiscCustom, sizeof(serverDiscCustom), "http://wiitdb.com/wiitdb/artwork/disccustom/");
-    snprintf(server2d, sizeof(server2d), "http://wiitdb.com/wiitdb/artwork/cover/");
-
-    //check if directory exist and if not create one
-    struct stat st;
-    if (stat(Settings.covers_path, &st) != 0)
-    {
-        if (!CreateSubfolder(Settings.covers_path))
-        {
-            WindowPrompt(tr( "Error !" ), tr( "Can't create directory" ), tr( "OK" ));
-            cntMissFiles = 0;
-        }
-    }
-    if (stat(Settings.covers2d_path, &st) != 0)
-    {
-        if (!CreateSubfolder(Settings.covers2d_path))
-        {
-            WindowPrompt(tr( "Error !" ), tr( "Can't create directory" ), tr( "OK" ));
-            cntMissFiles = 0;
-        }
-    }
-    if (stat(Settings.disc_path, &st) != 0)
-    {
-        if (!CreateSubfolder(Settings.disc_path))
-        {
-            WindowPrompt(tr( "Error !" ), tr( "Can't create directory" ), tr( "OK" ));
-            cntMissFiles = 0;
-        }
-    }
-
-    //int server = 1;
-    while (i < cntMissFiles)
-    {
-        tries = 0;
-        prTxt.SetTextf("%i%%", 100 * i / cntMissFiles);
-
-        if ((Settings.wsprompt) && (Settings.widescreen))
-        {
-            //adjust for widescreen
-            progressbarImg.SetPosition(80, 40);
-            progressbarImg.SetTile(80 * i / cntMissFiles);
-        }
-        else
-        {
-            progressbarImg.SetTile(100 * i / cntMissFiles);
-        }
-
-        if (cntMissFiles - i > 1)
-            msgTxt.SetTextf("%i %s", cntMissFiles - i, tr( "files left" ));
-        else msgTxt.SetTextf("%i %s", cntMissFiles - i, tr( "file left" ));
-        msg2Txt.SetTextf("http://wiitdb.com : %s", missingFiles[i]);
-
-        //download cover
-        char imgPath[100];
-        char URLFile[100];
-        char tmp[75];
-        sprintf(tmp, tr( "Not Found" ));
-        struct block file = downloadfile(URLFile);
-        if (choice2 == 2)
-        {
-            while (tries < serverCnt3d)
-            {
-
-                //Creates URL depending from which Country the game is
-                switch (missingFiles[i][3])
-                {
-                    case 'J':
-                        sprintf(URLFile, "%sJA/%s", server3d, missingFiles[i]);
-                        break;
-                    case 'W':
-                        sprintf(URLFile, "%sZH/%s", server3d, missingFiles[i]);
-                        break;
-                    case 'K':
-                        sprintf(URLFile, "%sKO/%s", server3d, missingFiles[i]);
-                        break;
-                    case 'P':
-                    case 'D':
-                    case 'F':
-                    case 'I':
-                    case 'S':
-                    case 'H':
-                    case 'U':
-                    case 'X':
-                    case 'Y':
-                    case 'Z':
-                        sprintf(URLFile, "%s%s/%s", server3d, Settings.db_language, missingFiles[i]);
-                        break;
-                    case 'E':
-                        sprintf(URLFile, "%sUS/%s", server3d, missingFiles[i]);
-                        break;
-                }
-
-                sprintf(imgPath, "%s%s", Settings.covers_path, missingFiles[i]);
-                file = downloadfile(URLFile);
-
-                if (!(file.size == 36864 || file.size <= 1024 || file.size == 7386 || file.size <= 1174 || file.size
-                        == 4446 || file.data == NULL))
-                {
-                    break;
-                }
-                else
-                {
-                    sprintf(URLFile, "%sEN/%s", server3d, missingFiles[i]);
-                    file = downloadfile(URLFile);
-                    if (!(file.size == 36864 || file.size <= 1024 || file.size == 7386 || file.size <= 1174
-                            || file.size == 4446 || file.data == NULL))
-                    {
-                        break;
-                    }
-                }
-                tries++;
-            }
-
-        }
-        if (choice2 == 3)
-        {
-            while (tries < serverCntDisc)
-            {
-
-                //Creates URL depending from which Country the game is
-                switch (missingFiles[i][3])
-                {
-                    case 'J':
-                        if (Settings.discart == 0)
-                        {
-                            sprintf(URLFile, "%sJA/%s", serverDisc, missingFiles[i]);
-                        }
-                        else if (Settings.discart == 1)
-                        {
-                            sprintf(URLFile, "%sJA/%s", serverDiscCustom, missingFiles[i]);
-                        }
-                        else if (Settings.discart == 2 && tries == 0)
-                        {
-                            sprintf(URLFile, "%sJA/%s", serverDisc, missingFiles[i]);
-                        }
-                        else if (Settings.discart == 2 && tries == 1)
-                        {
-                            sprintf(URLFile, "%sJA/%s", serverDiscCustom, missingFiles[i]);
-                        }
-                        else if (Settings.discart == 3 && tries == 0)
-                        {
-                            sprintf(URLFile, "%sJA/%s", serverDiscCustom, missingFiles[i]);
-                        }
-                        else if (Settings.discart == 3 && tries == 1)
-                        {
-                            sprintf(URLFile, "%sJA/%s", serverDisc, missingFiles[i]);
-                        }
-                        break;
-                    case 'W':
-                        if (Settings.discart == 0)
-                        {
-                            sprintf(URLFile, "%sZH/%s", serverDisc, missingFiles[i]);
-                        }
-                        else if (Settings.discart == 1)
-                        {
-                            sprintf(URLFile, "%sZH/%s", serverDiscCustom, missingFiles[i]);
-                        }
-                        else if (Settings.discart == 2 && tries == 0)
-                        {
-                            sprintf(URLFile, "%sZH/%s", serverDisc, missingFiles[i]);
-                        }
-                        else if (Settings.discart == 2 && tries == 1)
-                        {
-                            sprintf(URLFile, "%sZH/%s", serverDiscCustom, missingFiles[i]);
-                        }
-                        else if (Settings.discart == 3 && tries == 0)
-                        {
-                            sprintf(URLFile, "%sZH/%s", serverDiscCustom, missingFiles[i]);
-                        }
-                        else if (Settings.discart == 3 && tries == 1)
-                        {
-                            sprintf(URLFile, "%sZH/%s", serverDisc, missingFiles[i]);
-                        }
-                        break;
-                    case 'K':
-                        if (Settings.discart == 0)
-                        {
-                            sprintf(URLFile, "%sKO/%s", serverDisc, missingFiles[i]);
-                        }
-                        else if (Settings.discart == 1)
-                        {
-                            sprintf(URLFile, "%sKO/%s", serverDiscCustom, missingFiles[i]);
-                        }
-                        else if (Settings.discart == 2 && tries == 0)
-                        {
-                            sprintf(URLFile, "%sKO/%s", serverDisc, missingFiles[i]);
-                        }
-                        else if (Settings.discart == 2 && tries == 1)
-                        {
-                            sprintf(URLFile, "%sKO/%s", serverDiscCustom, missingFiles[i]);
-                        }
-                        else if (Settings.discart == 3 && tries == 0)
-                        {
-                            sprintf(URLFile, "%sKO/%s", serverDiscCustom, missingFiles[i]);
-                        }
-                        else if (Settings.discart == 3 && tries == 1)
-                        {
-                            sprintf(URLFile, "%sKO/%s", serverDisc, missingFiles[i]);
-                        }
-                        break;
-                    case 'P':
-                    case 'D':
-                    case 'F':
-                    case 'I':
-                    case 'S':
-                    case 'H':
-                    case 'U':
-                    case 'X':
-                    case 'Y':
-                    case 'Z':
-                        if (Settings.discart == 0)
-                        {
-                            sprintf(URLFile, "%s%s/%s", serverDisc, Settings.db_language, missingFiles[i]);
-                        }
-                        else if (Settings.discart == 1)
-                        {
-                            sprintf(URLFile, "%s%s/%s", serverDiscCustom, Settings.db_language, missingFiles[i]);
-                        }
-                        else if (Settings.discart == 2 && tries == 0)
-                        {
-                            sprintf(URLFile, "%s%s/%s", serverDisc, Settings.db_language, missingFiles[i]);
-                        }
-                        else if (Settings.discart == 2 && tries == 1)
-                        {
-                            sprintf(URLFile, "%s%s/%s", serverDiscCustom, Settings.db_language, missingFiles[i]);
-                        }
-                        else if (Settings.discart == 3 && tries == 0)
-                        {
-                            sprintf(URLFile, "%s%s/%s", serverDiscCustom, Settings.db_language, missingFiles[i]);
-                        }
-                        else if (Settings.discart == 3 && tries == 1)
-                        {
-                            sprintf(URLFile, "%s%s/%s", serverDisc, Settings.db_language, missingFiles[i]);
-                        }
-                        break;
-                    case 'E':
-                        if (Settings.discart == 0)
-                        {
-                            sprintf(URLFile, "%sUS/%s", serverDisc, missingFiles[i]);
-                        }
-                        else if (Settings.discart == 1)
-                        {
-                            sprintf(URLFile, "%sUS/%s", serverDiscCustom, missingFiles[i]);
-                        }
-                        else if (Settings.discart == 2 && tries == 0)
-                        {
-                            sprintf(URLFile, "%sUS/%s", serverDisc, missingFiles[i]);
-                        }
-                        else if (Settings.discart == 2 && tries == 1)
-                        {
-                            sprintf(URLFile, "%sUS/%s", serverDiscCustom, missingFiles[i]);
-                        }
-                        else if (Settings.discart == 3 && tries == 0)
-                        {
-                            sprintf(URLFile, "%sUS/%s", serverDiscCustom, missingFiles[i]);
-                        }
-                        else if (Settings.discart == 3 && tries == 1)
-                        {
-                            sprintf(URLFile, "%sUS/%s", serverDisc, missingFiles[i]);
-                        }
-                        break;
-                }
-
-                sprintf(imgPath, "%s%s", Settings.disc_path, missingFiles[i]);
-                file = downloadfile(URLFile);
-                if (!(file.size == 36864 || file.size <= 1024 || file.size == 7386 || file.size <= 1174 || file.size
-                        == 4446 || file.data == NULL))
-                {
-                    break;
-                }
-                else
-                {
-                    if (Settings.discart == 0)
-                    {
-                        sprintf(URLFile, "%sEN/%s", serverDisc, missingFiles[i]);
-                    }
-                    else if (Settings.discart == 1)
-                    {
-                        sprintf(URLFile, "%sEN/%s", serverDiscCustom, missingFiles[i]);
-                    }
-                    else if (Settings.discart == 2 && tries == 0)
-                    {
-                        sprintf(URLFile, "%sEN/%s", serverDisc, missingFiles[i]);
-                    }
-                    else if (Settings.discart == 2 && tries == 1)
-                    {
-                        sprintf(URLFile, "%sEN/%s", serverDiscCustom, missingFiles[i]);
-                    }
-                    else if (Settings.discart == 3 && tries == 0)
-                    {
-                        sprintf(URLFile, "%sEN/%s", serverDiscCustom, missingFiles[i]);
-                    }
-                    else if (Settings.discart == 3 && tries == 1)
-                    {
-                        sprintf(URLFile, "%sEN/%s", serverDisc, missingFiles[i]);
-                    }
-                    file = downloadfile(URLFile);
-                    if (!(file.size == 36864 || file.size <= 1024 || file.size == 7386 || file.size <= 1174
-                            || file.size == 4446 || file.data == NULL))
-                    {
-                        break;
-                    }
-                }
-                tries++;
-            }
-        }
-        if (choice2 == 1)
-        {
-            while (tries < serverCnt2d)
-            {
-
-                //Creates URL depending from which Country the game is
-                switch (missingFiles[i][3])
-                {
-                    case 'J':
-                        sprintf(URLFile, "%sJA/%s", server2d, missingFiles[i]);
-                        break;
-                    case 'W':
-                        sprintf(URLFile, "%sZH/%s", server2d, missingFiles[i]);
-                        break;
-                    case 'K':
-                        sprintf(URLFile, "%sKO/%s", server2d, missingFiles[i]);
-                        break;
-                    case 'P':
-                    case 'D':
-                    case 'F':
-                    case 'I':
-                    case 'S':
-                    case 'H':
-                    case 'U':
-                    case 'X':
-                    case 'Y':
-                    case 'Z':
-                        sprintf(URLFile, "%s%s/%s", server2d, Settings.db_language, missingFiles[i]);
-                        break;
-                    case 'E':
-                        sprintf(URLFile, "%sUS/%s", server2d, missingFiles[i]);
-                        break;
-                }
-
-                sprintf(imgPath, "%s%s", Settings.covers2d_path, missingFiles[i]);
-                file = downloadfile(URLFile);
-
-                if (!(file.size == 36864 || file.size <= 1024 || file.size == 7386 || file.size <= 1174 || file.size
-                        == 4446 || file.data == NULL))
-                {
-                    break;
-                }
-                else
-                {
-                    sprintf(URLFile, "%sEN/%s", server2d, missingFiles[i]);
-                    file = downloadfile(URLFile);
-                    if (!(file.size == 36864 || file.size <= 1024 || file.size == 7386 || file.size <= 1174
-                            || file.size == 4446 || file.data == NULL))
-                    {
-                        break;
-                    }
-                }
-                tries++;
-            }
-        }
-
-        offset++;
-
-        if (file.size == 36864 || file.size <= 1024 || file.size <= 1174 || file.size == 7386 || file.size == 4446
-                || file.data == NULL)
-        {
-            cntNotFound++;
-            i++;
-        }
-        else
-        {
-            if (file.data != NULL)
-            {
-                // save png to sd card
-                FILE *pfile = NULL;
-                if ((pfile = fopen(imgPath, "wb")) != NULL)
-                {
-                    fwrite(file.data, 1, file.size, pfile);
-                    fclose(pfile);
-                }
-                free(file.data);
-            }
-            i++;
-
-        }
-
-        if (btn1.GetState() == STATE_CLICKED)
-        {
-            cntNotFound = cntMissFiles - i + cntNotFound;
-            break;
-        }
-    }
-
-    HaltGui();
-    mainWindow->Remove(&promptWindow);
-    mainWindow->SetState(STATE_DEFAULT);
-    ResumeGui();
-
-    if (cntNotFound != 0)
-    {
-        return cntNotFound;
-    }
-    else
-    {
-        return 0;
-    }
 }
 
 /****************************************************************************
@@ -3550,11 +2897,6 @@ int CodeDownload(const char *id)
     ResumeGui();
 
     return ret;
-}
-
-char * GetMissingFiles()
-{
-    return (char *) missingFiles;
 }
 
 /****************************************************************************

@@ -5,16 +5,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-30 23:36+0200\n"
+"POT-Creation-Date: 2010-12-17 18:50+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-msgid " "
-msgstr ""
 
 msgid " Wad Saved as:"
 msgstr ""
@@ -28,14 +25,16 @@ msgstr ""
 msgid " is not on the server."
 msgstr ""
 
-#, c-format
-msgid "%s : %s May not boot correctly if your System Menu is not up to date."
-msgstr ""
-
 msgid "0 (Everyone)"
 msgstr ""
 
+msgid "0 (Locked and Unlocked Games)"
+msgstr ""
+
 msgid "1 (Child 7+)"
+msgstr ""
+
+msgid "1 (Unlocked Games Only)"
 msgstr ""
 
 msgid "1 hour"
@@ -125,6 +124,9 @@ msgstr ""
 msgid "AUTO"
 msgstr ""
 
+msgid "All images downloaded successfully."
+msgstr ""
+
 msgid "All partitions"
 msgstr ""
 
@@ -149,6 +151,9 @@ msgstr ""
 msgid "Are you sure you want to enable Parent Control?"
 msgstr ""
 
+msgid "Are you sure you want to reset?"
+msgstr ""
+
 msgid "Are you sure?"
 msgstr ""
 
@@ -167,9 +172,6 @@ msgstr ""
 msgid "BCA Codes Path"
 msgstr ""
 
-msgid "BCA Codes Path changed"
-msgstr ""
-
 msgid "BETA revisions"
 msgstr ""
 
@@ -180,9 +182,6 @@ msgid "Back to HBC or Wii Menu"
 msgstr ""
 
 msgid "Back to Loader"
-msgstr ""
-
-msgid "Back to Wii Menu"
 msgstr ""
 
 msgid "Backgroundmusic"
@@ -218,19 +217,19 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-msgid "Change Play Path"
+msgid "Cannot write to destination."
 msgstr ""
 
-msgid "Channels"
+msgid "Change Play Path"
 msgstr ""
 
 msgid "Cheatfile is blank"
 msgstr ""
 
-msgid "Checking existing artwork"
+msgid "Checking for Updates"
 msgstr ""
 
-msgid "Checking for Updates"
+msgid "Clear"
 msgstr ""
 
 msgid "Click to Download Covers"
@@ -253,9 +252,6 @@ msgid "Coded by: %s"
 msgstr ""
 
 msgid "Coding:"
-msgstr ""
-
-msgid "Confirm"
 msgstr ""
 
 msgid "Connection lost..."
@@ -282,10 +278,13 @@ msgstr ""
 msgid "Correct Password"
 msgstr ""
 
+msgid "Could not connect to the server."
+msgstr ""
+
 msgid "Could not create GCT file"
 msgstr ""
 
-msgid "Could not find a WBFS partition."
+msgid "Could not find info for this game in the wiitdb.xml."
 msgstr ""
 
 msgid "Could not initialize DIP module!"
@@ -297,22 +296,13 @@ msgstr ""
 msgid "Could not open Disc"
 msgstr ""
 
-msgid "Could not open WBFS partition"
-msgstr ""
-
-msgid "Could not read the disc."
+msgid "Could not open wiitdb.xml."
 msgstr ""
 
 msgid "Could not save."
 msgstr ""
 
-msgid "Could not set USB."
-msgstr ""
-
 msgid "Cover Download"
-msgstr ""
-
-msgid "Cover Path Changed"
 msgstr ""
 
 msgid "Create"
@@ -328,9 +318,6 @@ msgid "Customs/Original"
 msgstr ""
 
 msgid "DOL Path"
-msgstr ""
-
-msgid "DOL path changed"
 msgstr ""
 
 msgid "Dec"
@@ -384,9 +371,6 @@ msgstr ""
 msgid "Disc Images"
 msgstr ""
 
-msgid "Disc Path Changed"
-msgstr ""
-
 msgid "DiskFlip"
 msgstr ""
 
@@ -402,7 +386,7 @@ msgstr ""
 msgid "Display as a list"
 msgstr ""
 
-msgid "Display favorites"
+msgid "Display favorites only"
 msgstr ""
 
 msgid "Do you really want to delete:"
@@ -418,9 +402,6 @@ msgid "Do you want to download this theme?"
 msgstr ""
 
 msgid "Do you want to format:"
-msgstr ""
-
-msgid "Do you want to retry for 30 secs?"
 msgstr ""
 
 msgid "Do you want to use the alternate DOL that is known to be correct?"
@@ -462,6 +443,12 @@ msgstr ""
 msgid "Downloading file"
 msgstr ""
 
+msgid "Downloading file..."
+msgstr ""
+
+msgid "Downloading files"
+msgstr ""
+
 msgid "Downloading image:"
 msgstr ""
 
@@ -475,9 +462,6 @@ msgid "ERROR:"
 msgstr ""
 
 msgid "ERROR: Can't set up theme."
-msgstr ""
-
-msgid "Enable Parental Control"
 msgstr ""
 
 msgid "English"
@@ -495,7 +479,13 @@ msgstr ""
 msgid "Error reading Disc"
 msgstr ""
 
+msgid "Error while opening the zip."
+msgstr ""
+
 msgid "Error while transfering data."
+msgstr ""
+
+msgid "Error writing the data."
 msgstr ""
 
 msgid "Error..."
@@ -525,13 +515,25 @@ msgstr ""
 msgid "File not found."
 msgstr ""
 
+msgid "Filesize is 0 Byte."
+msgstr ""
+
 msgid "Finishing installation... Ok!"
+msgstr ""
+
+msgid "Flat Covers"
 msgstr ""
 
 msgid "Flip-X"
 msgstr ""
 
-msgid "Force"
+msgid "Force NTSC"
+msgstr ""
+
+msgid "Force PAL50"
+msgstr ""
+
+msgid "Force PAL60"
 msgstr ""
 
 msgid "Format"
@@ -555,9 +557,6 @@ msgstr ""
 msgid "GCT Cheatcodes Path"
 msgstr ""
 
-msgid "GCT Cheatcodes Path changed"
-msgstr ""
-
 msgid "GCT File created"
 msgstr ""
 
@@ -570,10 +569,16 @@ msgstr ""
 msgid "Game ID"
 msgstr ""
 
+msgid "Game IOS"
+msgstr ""
+
 msgid "Game Language"
 msgstr ""
 
 msgid "Game Load"
+msgstr ""
+
+msgid "Game Lock"
 msgstr ""
 
 msgid "Game Region"
@@ -600,19 +605,22 @@ msgstr ""
 msgid "Games"
 msgstr ""
 
+msgid "GamesLevel"
+msgstr ""
+
 msgid "German"
+msgstr ""
+
+msgid "Gerne:"
+msgstr ""
+
+msgid "Global Settings"
 msgstr ""
 
 msgid "HOME Menu"
 msgstr ""
 
-msgid "Hermes CIOS"
-msgstr ""
-
 msgid "Homebrew Apps Path"
-msgstr ""
-
-msgid "Homebrew Appspath changed"
 msgstr ""
 
 msgid "Homebrew Launcher"
@@ -647,9 +655,6 @@ msgstr ""
 msgid "Insert a Wii Disc!"
 msgstr ""
 
-msgid "Insert an SD-Card to download images."
-msgstr ""
-
 msgid "Insert an SD-Card to save."
 msgstr ""
 
@@ -666,9 +671,6 @@ msgid "Install Error!"
 msgstr ""
 
 msgid "Install a game"
-msgstr ""
-
-msgid "Install not possible"
 msgstr ""
 
 msgid "Install partitions"
@@ -723,6 +725,9 @@ msgid "Language File"
 msgstr ""
 
 msgid "Language change:"
+msgstr ""
+
+msgid "Languagefiles Path"
 msgstr ""
 
 msgid "Languagepath changed."
@@ -780,9 +785,6 @@ msgstr ""
 msgid "Missing files"
 msgstr ""
 
-msgid "Most likely it has dimensions that are not evenly divisible by 4."
-msgstr ""
-
 msgid "Mount DVD drive"
 msgstr ""
 
@@ -795,9 +797,6 @@ msgstr ""
 msgid "Neither"
 msgstr ""
 
-msgid "Network init error"
-msgstr ""
-
 msgid "New Disc Detected"
 msgstr ""
 
@@ -807,34 +806,28 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-msgid "No .dol or .elf files found."
-msgstr ""
-
 msgid "No Cheatfile found"
 msgstr ""
 
 msgid "No DOL file found on disc."
 msgstr ""
 
-msgid "No Favorites"
-msgstr ""
-
 msgid "No SD-Card inserted!"
 msgstr ""
 
-msgid "No USB Device"
+msgid "No URL or Path specified."
 msgstr ""
 
-msgid "No USB Device found."
-msgstr ""
-
-msgid "No WBFS or FAT/NTFS partition found"
+msgid "No WBFS or FAT/NTFS/EXT partition found"
 msgstr ""
 
 msgid "No cheats were selected"
 msgstr ""
 
 msgid "No data could be read."
+msgstr ""
+
+msgid "No favorites selected."
 msgstr ""
 
 msgid "No file missing!"
@@ -852,25 +845,31 @@ msgstr ""
 msgid "Normal"
 msgstr ""
 
-msgid "Normal Covers"
-msgstr ""
-
-msgid "Not Found"
-msgstr ""
-
-msgid "Not a DOL/ELF file."
-msgstr ""
-
 msgid "Not a WAD file."
 msgstr ""
 
 msgid "Not a Wii Disc"
 msgstr ""
 
+msgid "Not a valid URL"
+msgstr ""
+
+msgid "Not a valid URL path"
+msgstr ""
+
+msgid "Not a valid domain"
+msgstr ""
+
 msgid "Not enough free memory."
 msgstr ""
 
 msgid "Not enough free space!"
+msgstr ""
+
+msgid "Not enough memory."
+msgstr ""
+
+msgid "Not required"
 msgstr ""
 
 msgid "Not supported format!"
@@ -888,10 +887,16 @@ msgstr ""
 msgid "ON"
 msgstr ""
 
+msgid "Ocarina"
+msgstr ""
+
 msgid "Oct"
 msgstr ""
 
 msgid "Official Site:"
+msgstr ""
+
+msgid "Offset"
 msgstr ""
 
 msgid "Only Customs"
@@ -928,6 +933,9 @@ msgid "Paste it into your browser to get your WiiTDB.zip."
 msgstr ""
 
 msgid "Patch Country Strings"
+msgstr ""
+
+msgid "Path Changed"
 msgstr ""
 
 msgid "Pick from a list"
@@ -993,13 +1001,16 @@ msgstr ""
 msgid "Reset Playcounter"
 msgstr ""
 
-msgid "Reset to standard BGM?"
+msgid "Reset to default BGM?"
 msgstr ""
 
 msgid "Restarting..."
 msgstr ""
 
 msgid "Return"
+msgstr ""
+
+msgid "Return To"
 msgstr ""
 
 msgid "Return to Wii Menu"
@@ -1020,7 +1031,7 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-msgid "Save Failed"
+msgid "Save Failed. No device inserted?"
 msgstr ""
 
 msgid "Save Game List to"
@@ -1035,10 +1046,13 @@ msgstr ""
 msgid "Select"
 msgstr ""
 
+msgid "Select DOL Offset"
+msgstr ""
+
 msgid "Select a DOL"
 msgstr ""
 
-msgid "Selected DOL"
+msgid "Select a DOL from Game"
 msgstr ""
 
 msgid "Sept"
@@ -1068,6 +1082,9 @@ msgstr ""
 msgid "Sound"
 msgstr ""
 
+msgid "Sound Settings"
+msgstr ""
+
 msgid "Sound+BGM"
 msgstr ""
 
@@ -1078,9 +1095,6 @@ msgid "Spanish"
 msgstr ""
 
 msgid "Special thanks to:"
-msgstr ""
-
-msgid "Standard"
 msgstr ""
 
 msgid "Success"
@@ -1116,9 +1130,6 @@ msgstr ""
 msgid "TXT Cheatcodes Path"
 msgstr ""
 
-msgid "TXT Cheatcodes Path changed"
-msgstr ""
-
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr ""
 
@@ -1132,19 +1143,19 @@ msgstr ""
 msgid "Theme Download Path"
 msgstr ""
 
-msgid "Theme Download Path changed"
-msgstr ""
-
 msgid "Theme Downloader"
 msgstr ""
 
 msgid "Theme Path"
 msgstr ""
 
-msgid "Theme Path Changed"
+msgid "Theme Title:"
 msgstr ""
 
-msgid "Theme Title:"
+msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
+msgstr ""
+
+msgid "This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."
 msgstr ""
 
 msgid "Time left:"
@@ -1159,6 +1170,9 @@ msgstr ""
 msgid "Tooltips"
 msgstr ""
 
+msgid "Transfer failed"
+msgstr ""
+
 msgid "Transfer failed."
 msgstr ""
 
@@ -1166,9 +1180,6 @@ msgid "USB Device not found"
 msgstr ""
 
 msgid "USB Loader GX is protected"
-msgstr ""
-
-msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
 msgstr ""
 
 #, c-format
@@ -1185,6 +1196,9 @@ msgid "Uninstall Menu"
 msgstr ""
 
 msgid "Uninstalling wad"
+msgstr ""
+
+msgid "Unknown"
 msgstr ""
 
 msgid "Unlock Parental Control"
@@ -1212,9 +1226,6 @@ msgid "Update Files"
 msgstr ""
 
 msgid "Update Path"
-msgstr ""
-
-msgid "Update Path changed."
 msgstr ""
 
 msgid "Update all Language Files"
@@ -1254,13 +1265,13 @@ msgstr ""
 msgid "WIP Patches Path"
 msgstr ""
 
-msgid "WIP Patches Path changed"
-msgstr ""
-
 msgid "Waiting for USB Device"
 msgstr ""
 
 msgid "Waiting..."
+msgstr ""
+
+msgid "Warning:"
 msgstr ""
 
 msgid "What do you want to update?"
@@ -1284,7 +1295,7 @@ msgstr ""
 msgid "WiiTDB Path"
 msgstr ""
 
-msgid "WiiTDB Path changed."
+msgid "WiiTDB is up to date."
 msgstr ""
 
 msgid "Wiilight"
@@ -1296,19 +1307,10 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-msgid "You are about to delete "
-msgstr ""
-
-msgid "You are choosing to display favorites and you do not have any selected."
-msgstr ""
-
-msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
+msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr ""
 
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
-msgstr ""
-
-msgid "You have attempted to load a bad image"
 msgstr ""
 
 msgid "You need to select or format a partition"
@@ -1328,12 +1330,6 @@ msgid "does not exist!"
 msgstr ""
 
 msgid "does not exist!  Loading game without cheats."
-msgstr ""
-
-msgid "does not exist!  You Messed something up, Idiot."
-msgstr ""
-
-msgid "file left"
 msgstr ""
 
 msgid "files left"

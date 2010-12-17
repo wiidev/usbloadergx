@@ -110,13 +110,8 @@ const char * OptionList::GetValue(int i)
 
 void OptionList::Resize(int size)
 {
-    while(size < (int) name.size())
-        RemoveOption(name.size()-1);
-
-    int oldsize = name.size();
-
-    name.resize(oldsize+1);
-    value.resize(oldsize+1);
+    name.resize(size);
+    value.resize(size);
 }
 
 void OptionList::RemoveOption(int i)

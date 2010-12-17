@@ -9,6 +9,7 @@
 #include "usbloader/wdvd.h"
 #include "usbloader/GameList.h"
 #include "network/networkops.h"
+#include "network/CoverDownload.h"
 #include "FileOperations/fileops.h"
 #include "settings/Settings.h"
 #include "settings/CSettings.h"
@@ -18,6 +19,7 @@
 #include "utils/StringTools.h"
 #include "GameBootProcess.h"
 #include "utils/rockout.h"
+#include "utils/ShowError.h"
 #include "utils/tools.h"
 #include "fatmounter.h"
 #include "gecko.h"
@@ -45,12 +47,15 @@ GameBrowseMenu::GameBrowseMenu()
     searchBar = NULL;
     gameCover = NULL;
     gameCoverImg = NULL;
+    GameIDTxt = NULL;
+    GameRegionTxt = NULL;
     ScreensaverTimer = 0;
     memset(theTime, 0, sizeof(theTime));
+    WDVD_GetCoverStatus(&DiscDriveCoverOld);
     wString oldFilter(gameList.GetCurrentFilter());
     gameList.FilterList(oldFilter.c_str());
 
-    if (mountMethod != 3 && WBFS_ShowFreeSpace())
+    if (WBFS_ShowFreeSpace())
         WBFS_DiskSpace(&used, &freespace);
 
     btnInstall = Resources::GetImageData("button_install.png");
@@ -81,7 +86,7 @@ GameBrowseMenu::GameBrowseMenu()
     imgdvd_gray = Resources::GetImageData("dvd_gray.png");
     imgLock = Resources::GetImageData("lock.png");
     imgLock_gray = Resources::GetImageData("lock_gray.png");
-    imgUnlock = Resources::GetImageData("lock_gray.png");
+    imgUnlock = Resources::GetImageData("unlock.png");
     imgUnlock_gray = Resources::GetImageData("unlock_gray.png");
 
     homebrewImgData = Resources::GetImageData("browser.png");
@@ -97,7 +102,7 @@ GameBrowseMenu::GameBrowseMenu()
     trig1->SetButtonOnlyTrigger(-1, WPAD_BUTTON_1 | WPAD_CLASSIC_BUTTON_Y, 0);
 
     char spaceinfo[30];
-    if (load_from_fs == PART_FS_FAT || mountMethod == 3)
+    if (load_from_fs == PART_FS_FAT)
     {
         memset(spaceinfo, 0, 30);
     }
@@ -394,6 +399,8 @@ GameBrowseMenu::~GameBrowseMenu()
     delete homebrewImgOver;
     delete gameCoverImg;
 
+    delete GameIDTxt;
+    delete GameRegionTxt;
     delete usedSpaceTxt;
     delete gamecntTxt;
     delete clockTimeBack;
@@ -457,7 +464,7 @@ void GameBrowseMenu::ReloadBrowser()
     RemoveAll();
     mainWindow->Remove(searchBar);
 
-    gamecntTxt->SetText(fmt("%s: %i", (mountMethod != 3 ? tr( "Games" ) : tr( "Channels" )), gameList.size()));
+    gamecntTxt->SetText(fmt("%s: %i", tr( "Games" ), gameList.size()));
 
     const char * sortTTText = NULL;
     GuiImageData * sortImgData = NULL;
@@ -504,7 +511,7 @@ void GameBrowseMenu::ReloadBrowser()
         searchBtn->SetImageOver(searchBtnImg_g);
     }
 
-    if (Settings.godmode == 1 && mountMethod != 3) //only make the button have trigger & tooltip if in godmode
+    if (Settings.godmode == 1) //only make the button have trigger & tooltip if in godmode
     {
         DownloadBtn->SetSoundOver(btnSoundOver);
         DownloadBtn->SetTrigger(0, trigA);
@@ -527,14 +534,15 @@ void GameBrowseMenu::ReloadBrowser()
 
     if ((Settings.parentalcontrol == 0 && Settings.Parental.enabled == 1) && Settings.godmode)
     {
-        lockBtn->SetImage(unlockBtnImg_g);
-        lockBtn->SetImageOver(unlockBtnImg_g);
+        lockBtn->SetImage(unlockBtnImg);
+        lockBtn->SetImageOver(unlockBtnImg);
         lockBtnTT->SetText(tr( "Unlock Parental Control" ));
     }
     else
     {
-        lockBtn->SetImage(lockBtnImg_g);
-        lockBtn->SetImageOver(lockBtnImg_g);
+        GuiImage * lockImage = Settings.Parental.enabled ? lockBtnImg : lockBtnImg_g;
+        lockBtn->SetImage(lockImage);
+        lockBtn->SetImageOver(lockImage);
         lockBtnTT->SetText(tr( "Parental Control disabled" ));
     }
 
@@ -579,6 +587,7 @@ void GameBrowseMenu::ReloadBrowser()
     {
         DownloadBtn->SetImage(NULL);
         DownloadBtn->SetSize(0, 0);
+        UpdateGameInfoText(NULL);
         gridBtn->SetImage(gridBtnImg);
         gridBtn->SetImageOver(gridBtnImg);
         listBtn->SetImage(listBtnImg_g);
@@ -603,6 +612,7 @@ void GameBrowseMenu::ReloadBrowser()
     {
         DownloadBtn->SetImage(NULL);
         DownloadBtn->SetSize(0, 0);
+        UpdateGameInfoText(NULL);
         carouselBtn->SetImage(carouselBtnImg);
         carouselBtn->SetImageOver(carouselBtnImg);
         listBtn->SetImage(listBtnImg_g);
@@ -749,8 +759,6 @@ int GameBrowseMenu::MainLoop()
     {
         gprintf("\tgameCntBtn clicked\n");
         gamecntBtn->ResetState();
-        if(mountMethod == 3)
-            return MENU_NONE;
 
         int choice = WindowPrompt(0, fmt("%s %sGameList ?", tr( "Save Game List to" ), Settings.update_path), "TXT", "CSV", tr( "Back" ));
         if (choice)
@@ -828,13 +836,21 @@ int GameBrowseMenu::MainLoop()
             Settings.GameSort &= ~SORT_FAVORITE;
         else
             Settings.GameSort |= SORT_FAVORITE;
-        Settings.Save();
+
         wString oldFilter(gameList.GetCurrentFilter());
         gameList.FilterList(oldFilter.c_str());
-        ReloadBrowser();
+
+        if(Settings.GameSort & SORT_FAVORITE && gameList.size() == 0)
+        {
+            Settings.GameSort &= ~SORT_FAVORITE;
+            gameList.FilterList(oldFilter.c_str());
+            ShowError(tr("No favorites selected."));
+        }
+        else
+            ReloadBrowser();
     }
 
-    else if (searchBtn->GetState() == STATE_CLICKED && mountMethod != 3)
+    else if (searchBtn->GetState() == STATE_CLICKED)
     {
         gprintf("\tsearchBtn Clicked\n");
         show_searchwindow = !show_searchwindow;
@@ -892,7 +908,7 @@ int GameBrowseMenu::MainLoop()
             Settings.GameSort &= ~SORT_PLAYCOUNT;
             Settings.GameSort |= SORT_ABC;
         }
-        Settings.Save();
+
         wString oldFilter(gameList.GetCurrentFilter());
         gameList.FilterList(oldFilter.c_str());
         ReloadBrowser();
@@ -904,7 +920,6 @@ int GameBrowseMenu::MainLoop()
         if (Settings.gameDisplay != LIST_MODE)
         {
             Settings.gameDisplay = LIST_MODE;
-            Settings.Save();
             ReloadBrowser();
         }
         listBtn->ResetState();
@@ -916,7 +931,6 @@ int GameBrowseMenu::MainLoop()
         if (Settings.gameDisplay != GRID_MODE)
         {
             Settings.gameDisplay = GRID_MODE;
-            Settings.Save();
             ReloadBrowser();
         }
         gridBtn->ResetState();
@@ -928,7 +942,6 @@ int GameBrowseMenu::MainLoop()
         if (Settings.gameDisplay != CAROUSEL_MODE)
         {
             Settings.gameDisplay = CAROUSEL_MODE;
-            Settings.Save();
             ReloadBrowser();
         }
         carouselBtn->ResetState();
@@ -940,7 +953,7 @@ int GameBrowseMenu::MainLoop()
         return MENU_HOMEBREWBROWSE;
     }
 
-    else if (gameInfo->GetState() == STATE_CLICKED && mountMethod != 3)
+    else if (gameInfo->GetState() == STATE_CLICKED)
     {
         gprintf("\tgameinfo Clicked\n");
         int SelectedGame = GetSelectedGame();
@@ -969,12 +982,15 @@ int GameBrowseMenu::MainLoop()
             return MENU_NONE;
         }
 
-        if (Settings.godmode && WindowPrompt(tr( "Parental Control" ), tr( "Are you sure you want to enable Parent Control?" ), tr( "Yes" ), tr( "No" )) == 1)
+        if (Settings.godmode)
         {
-            Settings.godmode = 0;
-            wString oldFilter(gameList.GetCurrentFilter());
-            gameList.FilterList(oldFilter.c_str());
-            ReloadBrowser();
+            if(WindowPrompt(tr( "Parental Control" ), tr( "Are you sure you want to enable Parent Control?" ), tr( "Yes" ), tr( "No" )) == 1)
+            {
+                Settings.godmode = 0;
+                wString oldFilter(gameList.GetCurrentFilter());
+                gameList.FilterList(oldFilter.c_str());
+                ReloadBrowser();
+            }
         }
         else
         {
@@ -1000,13 +1016,15 @@ int GameBrowseMenu::MainLoop()
     else if (dvdBtn->GetState() == STATE_CLICKED)
     {
         gprintf("\tdvdBtn Clicked\n");
+        if(!dvdheader)
+            dvdheader = new struct discHdr;
         mountMethod = DiscMount(dvdheader);
         dvdBtn->ResetState();
 
         rockout(GetSelectedGame());
     }
 
-    else if (Settings.gameDisplay == LIST_MODE && idBtn->GetState() == STATE_CLICKED && mountMethod != 3)
+    else if (Settings.gameDisplay == LIST_MODE && idBtn->GetState() == STATE_CLICKED)
     {
         gprintf("\tidBtn Clicked\n");
         struct discHdr * header = gameList[GetSelectedGame()];
@@ -1038,7 +1056,7 @@ int GameBrowseMenu::MainLoop()
     }
 
 	gameClicked = GetClickedGame();
-    if ((gameClicked >= 0 && gameClicked < (s32) gameList.size()) || mountMethod == 1 || mountMethod == 2)
+    if ((gameClicked >= 0 && gameClicked < (s32) gameList.size()) || mountMethod != 0)
     {
         OpenClickedGame();
     }
@@ -1089,6 +1107,17 @@ int GameBrowseMenu::GetClickedGame()
 
 void GameBrowseMenu::UpdateGameInfoText(const u8 * gameId)
 {
+    if(!gameId)
+    {
+        Remove(GameIDTxt);
+        delete GameIDTxt;
+        GameIDTxt = NULL;
+        Remove(GameRegionTxt);
+        delete GameRegionTxt;
+        GameRegionTxt = NULL;
+        return;
+    }
+
     char gameregion[10];
     char IDfull[7];
     memset(IDfull, 0, sizeof(IDfull));
@@ -1135,7 +1164,7 @@ void GameBrowseMenu::UpdateGameInfoText(const u8 * gameId)
         Append(idBtn);
     }
     //don't try to show region for channels because all the custom channels wont follow the rules
-    if (((Settings.sinfo == GAMEINFO_REGION) || (Settings.sinfo == GAMEINFO_BOTH)) && mountMethod != 3)
+    if ((Settings.sinfo == GAMEINFO_REGION) || (Settings.sinfo == GAMEINFO_BOTH))
     {
         Remove(GameRegionTxt);
         delete GameRegionTxt;
@@ -1161,12 +1190,9 @@ int GameBrowseMenu::OpenClickedGame()
         ResumeGui();
     }
 
-    float size = 0.0;
     rockout(gameSelected);
 
-    struct discHdr *header = (mountMethod == 1 || mountMethod == 2 ? dvdheader : gameList[gameSelected]);
-    if (!mountMethod)//only get this stuff if we are booting a game from USB
-        WBFS_GameSize(header->id, &size);
+    struct discHdr *header = (mountMethod ? dvdheader : gameList[gameSelected]);
 
     char IDfull[7];
     snprintf(IDfull, sizeof(IDfull), "%s", (char *) header->id);
@@ -1198,6 +1224,9 @@ int GameBrowseMenu::OpenClickedGame()
             SetState(STATE_DISABLED);
             choice = GameWindowPrompt(gameSelected);
             SetState(STATE_DEFAULT);
+            //update header and id if it was changed
+            header = (mountMethod ? dvdheader : gameList[gameSelected]);
+            snprintf(IDfull, sizeof(IDfull), "%s", (char *) header->id);
         }
 
         if (choice == 1)
@@ -1219,7 +1248,7 @@ int GameBrowseMenu::OpenClickedGame()
         {
             wiilight(0);
 
-            header = (mountMethod == 1 || mountMethod == 2 ? dvdheader : gameList[gameSelected]);
+            header = (mountMethod ? dvdheader : gameList[gameSelected]);
             SetState(STATE_DISABLED);
             int settret = MenuGameSettings(header);
             SetState(STATE_DEFAULT);
@@ -1281,46 +1310,6 @@ void GameBrowseMenu::CheckAlternativeDOL(const char * IDfull)
     {
         sprintf(filepath, "%s %s", filepath, tr( "does not exist!" ));
         WindowPrompt(tr( "Error" ), filepath, tr( "OK" ));
-    }
-}
-
-void GameBrowseMenu::CoverDownload()
-{
-    int choice = WindowPrompt(tr( "Cover Download" ), 0, tr( "Normal Covers" ), tr( "3D Covers" ),
-            tr( "Disc Images" ), tr( "Back" )); // ask for download choice
-    if (choice == 0)
-        return;
-
-    int choice2 = choice;
-    bool missing;
-    missing = SearchMissingImages(choice2);
-    if (IsNetworkInit() == false && missing == true)
-    {
-        WindowPrompt(tr( "Network init error" ), 0, tr( "OK" ));
-        return;
-    }
-
-    if (cntMissFiles > 0)
-    {
-        char tempCnt[40];
-        sprintf(tempCnt, "%i %s", cntMissFiles, tr( "Missing files" ));
-        if (choice != 3)
-            choice = WindowPrompt(tr( "Download Boxart image?" ), tempCnt, tr( "Yes" ), tr( "No" ));
-        else if (choice == 3)
-            choice = WindowPrompt(tr( "Download Discart image?" ), tempCnt, tr( "Yes" ), tr( "No" ));
-        if (choice == 1)
-        {
-            int ret = ProgressDownloadWindow(choice2);
-            if (ret == 0)
-            {
-                WindowPrompt(tr( "Download finished" ), 0, tr( "OK" ));
-            }
-            else
-            {
-                sprintf(tempCnt, "%i %s", ret, tr( "files not found on the server!" ));
-                WindowPrompt(tr( "Download finished" ), tempCnt, tr( "OK" ));
-            }
-        }
     }
 }
 

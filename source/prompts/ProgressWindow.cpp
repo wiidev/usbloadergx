@@ -21,13 +21,13 @@
 
 /*** Variables used only in this file ***/
 static lwp_t progressthread = LWP_THREAD_NULL;
+static ProgressAbortCallback AbortCallback = NULL;
 static char progressTitle[100];
-static char progressMsg1[150];
-static char progressMsg2[150];
+static const char * progressMsg1 = NULL;
+static const char * progressMsg2 = NULL;
 static char progressTime[80];
 static char progressSizeLeft[80];
 static char progressSpeed[15];
-static char *dyn_message;
 static int showProgress = 0;
 static f32 progressDone = 0.0;
 static bool showTime = false;
@@ -106,7 +106,7 @@ void SetupGameInstallProgress(char * title, char * game)
 {
 
     strlcpy(progressTitle, title, sizeof(progressTitle));
-    strlcpy(progressMsg1, game, sizeof(progressMsg1));
+    progressMsg1 = game;
     gameinstalltotal = 1;
     showProgress = 1;
     showSize = true;
@@ -168,8 +168,9 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
     GuiText msg1Txt(msg1, 22, Theme.prompttext);
     msg1Txt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     if (msg2)
+        msg1Txt.SetPosition(0, 100);
+    else
         msg1Txt.SetPosition(0, 120);
-    else msg1Txt.SetPosition(0, 100);
     msg1Txt.SetMaxWidth(430, DOTTED);
 
     GuiText msg2Txt(msg2, 22, Theme.prompttext);
@@ -215,6 +216,17 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
         sizeTxt.SetFontSize(20);
     }
 
+    GuiText cancelTxt(tr( "Cancel" ), 22, Theme.prompttext);
+    GuiImage cancelImg(&btnOutline);
+    if (Settings.wsprompt)
+    {
+        cancelTxt.SetWidescreen(Settings.widescreen);
+        cancelImg.SetWidescreen(Settings.widescreen);
+    }
+    GuiButton cancelBtn(&cancelImg, &cancelImg, 2, 4, 0, -45, &trigA, btnSoundOver, btnSoundClick2, 1);
+    cancelBtn.SetLabel(&cancelTxt);
+    cancelBtn.SetState(STATE_SELECTED);
+
     usleep(400000); // wait to see if progress flag changes soon
     if (!showProgress) return;
 
@@ -225,14 +237,16 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
     promptWindow.Append(&prTxt);
     promptWindow.Append(&prsTxt);
     if (title) promptWindow.Append(&titleTxt);
-    if (msg1) promptWindow.Append(&msg1Txt);
-    if (msg2) promptWindow.Append(&msg2Txt);
+    promptWindow.Append(&msg1Txt);
+    promptWindow.Append(&msg2Txt);
     if (showTime) promptWindow.Append(&timeTxt);
     if (showSize)
     {
         promptWindow.Append(&sizeTxt);
         promptWindow.Append(&speedTxt);
     }
+    if(AbortCallback)
+        promptWindow.Append(&cancelBtn);
 
     HaltGui();
     promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
@@ -247,8 +261,7 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
     int tmp;
     while (showProgress)
     {
-
-        VIDEO_WaitVSync();
+        usleep(100000);
 
         GameInstallProgress();
 
@@ -276,7 +289,14 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
 
             if (showTime) timeTxt.SetText(progressTime);
 
-            if (msg2) msg2Txt.SetText(dyn_message);
+            if (progressMsg1) msg1Txt.SetText(progressMsg1);
+            if (progressMsg2) msg2Txt.SetText(progressMsg2);
+        }
+
+        if(cancelBtn.GetState() == STATE_CLICKED)
+        {
+            if(AbortCallback) AbortCallback();
+            cancelBtn.ResetState();
         }
     }
 
@@ -312,6 +332,9 @@ static void * ProgressThread(void *arg)
 void ProgressStop()
 {
     showProgress = 0;
+	strcpy(progressTitle, "");
+	progressMsg1 = NULL;
+	progressMsg2 = NULL;
     gameinstalltotal = -1;
 
     // wait for thread to finish
@@ -325,7 +348,7 @@ void ProgressStop()
  * Callbackfunction for updating the progress values
  * Use this function as standard callback
  ***************************************************************************/
-void ShowProgress(const char *title, const char *msg1, char *dynmsg2, f32 done, f32 total, bool swSize, bool swTime)
+void ShowProgress(const char *title, const char *msg1, const char *msg2, f32 done, f32 total, bool swSize, bool swTime)
 {
     if (total <= 0)
         return;
@@ -336,8 +359,8 @@ void ShowProgress(const char *title, const char *msg1, char *dynmsg2, f32 done, 
     showTime = swTime;
 
     if (title) strlcpy(progressTitle, title, sizeof(progressTitle));
-    if (msg1) strlcpy(progressMsg1, msg1, sizeof(progressMsg1));
-    if (dynmsg2) dyn_message = dynmsg2;
+    progressMsg1 = msg1;
+    progressMsg2 = msg2;
 
     static u32 expected;
 
@@ -392,6 +415,16 @@ void ShowProgress(const char *title, const char *msg1, char *dynmsg2, f32 done, 
     showProgress = 1;
     progressDone = 100.0 * done / total;
     changed = true;
+}
+
+/****************************************************************************
+ * ProgressSetAbortCallback
+ *
+ * Set a callback for the cancel button
+ ***************************************************************************/
+void ProgressSetAbortCallback(ProgressAbortCallback callback)
+{
+    AbortCallback = callback;
 }
 
 /****************************************************************************

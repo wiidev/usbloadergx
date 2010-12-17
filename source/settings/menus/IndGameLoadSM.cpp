@@ -369,19 +369,18 @@ int IndGameLoadSM::GetMenuInternal()
             else if (dolchoice == 2) //they want to search for the correct dol themselves
             {
                 int res = DiscBrowse(GameConfig.id, GameConfig.alternatedolname, sizeof(GameConfig.alternatedolname));
-                if ((res >= 0) && (res != 696969)) //if res==696969 they pressed the back button
+                if (res >= 0)
                     GameConfig.alternatedolstart = res;
             }
         }
         else
         {
             int res = DiscBrowse(GameConfig.id, GameConfig.alternatedolname, sizeof(GameConfig.alternatedolname));
-            if ((res >= 0) && (res != 696969))
+            if (res >= 0)
             {
                 GameConfig.alternatedolstart = res;
                 char tmp[170];
-                snprintf(tmp, sizeof(tmp), "%s %s - %i", tr( "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team." ),
-                        filename, GameConfig.alternatedolstart);
+                snprintf(tmp, sizeof(tmp), "%s %s - %i", tr( "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team." ), filename, GameConfig.alternatedolstart);
                 WindowPrompt(0, tmp, tr( "OK" ));
             }
         }

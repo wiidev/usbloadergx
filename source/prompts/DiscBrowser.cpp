@@ -4,6 +4,7 @@
  *
  * DiscBrowser.h
  ***************************************************************************/
+#include <unistd.h>
 #include "language/gettext.h"
 #include "libwiigui/gui.h"
 #include "libwiigui/gui_customoptionbrowser.h"
@@ -14,6 +15,7 @@
 #include "usbloader/fstfile.h"
 #include "usbloader/wdvd.h"
 #include "usbloader/wbfs.h"
+#include "patches/dvd_broadway.h"
 #include "libs/libwbfs/libwbfs.h"
 #include "libs/libwbfs/wiidisc.h"
 #include "main.h"
@@ -21,8 +23,7 @@
 #include "settings/GameTitles.h"
 #include "themes/CTheme.h"
 #include "memory/memory.h"
-#include "../gecko.h"
-#include "../patches/dvd_broadway.h"
+#include "gecko.h"
 
 /*** Extern functions ***/
 extern void ResumeGui();
@@ -40,10 +41,11 @@ int DiscBrowse(const char * GameID, char * alternatedname, int alternatedname_si
 {
     gprintf("\nDiscBrowser() started");
     bool exit = false;
-    int ret = 0, choice;
+    int ret = -1, choice;
 
     HaltGui();
 
+    gprintf("WBFS_OpenDisc\n");
     wbfs_disc_t *disc = WBFS_OpenDisc((u8 *) GameID);
     if (!disc)
     {
@@ -51,6 +53,7 @@ int DiscBrowse(const char * GameID, char * alternatedname, int alternatedname_si
         WindowPrompt(tr( "ERROR:" ), tr( "Could not open Disc" ), tr( "OK" ));
         return ret;
     }
+    gprintf("wd_open_disc\n");
     wiidisc_t *wdisc = wd_open_disc((int(*)(void *, u32, u32, void *)) wbfs_disc_read, disc);
     if (!wdisc)
     {
@@ -59,6 +62,7 @@ int DiscBrowse(const char * GameID, char * alternatedname, int alternatedname_si
         return ret;
     }
 
+    gprintf("wd_get_fst\n");
     FST_ENTRY * fstbuffer = (FST_ENTRY *) wd_get_fst(wdisc, ONLY_GAME_PARTITION);
     if (!fstbuffer)
     {
@@ -67,35 +71,41 @@ int DiscBrowse(const char * GameID, char * alternatedname, int alternatedname_si
         return -1;
     }
 
+    gprintf("wd_close_disc\n");
     wd_close_disc(wdisc);
+    gprintf("WBFS_CloseDisc\n");
     WBFS_CloseDisc(disc);
 
-    u32 discfilecount = fstbuffer[0].filelen;
+    gprintf("options\n");
+    OptionList options;
 
-    OptionList options3;
-
-    for (u32 i = 0; i < discfilecount; i++)
+    for (u32 i = 0, position = 0; i < fstbuffer[0].filelen; i++)
     {
         //don't add files that aren't .dol to the list
         const char * filename = fstfiles(fstbuffer, i);
         const char * fileext = NULL;
 
         if(filename)
+            gprintf("%s\n", filename);
+
+        if(filename)
             fileext = strrchr(filename, '.');
 
         if (fileext && strcasecmp(fileext, ".dol") == 0)
         {
-            options3.SetName(i, "%i", i);
-            options3.SetValue(i, fstfiles(fstbuffer, i));
+            options.SetName(position, "%s %03i", tr("Offset"), i);
+            options.SetValue(position, filename);
+            position++;
         }
     }
 
-    gprintf("\n%i alt dols found", options3.GetLength()+1);
-    if (options3.GetLength() <= 0)
+    free(fstbuffer);
+
+    gprintf("\n%i alt dols found", options.GetLength()+1);
+    if (options.GetLength() <= 0)
     {
         WindowPrompt(tr( "ERROR" ), tr( "No DOL file found on disc." ), tr( "OK" ));
-        free(fstbuffer);
-        return -1;
+        return ret;
     }
 
     GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
@@ -132,7 +142,7 @@ int DiscBrowse(const char * GameID, char * alternatedname, int alternatedname_si
     cancelBtn.SetLabel(&cancelBtnTxt);
     cancelBtn.SetTrigger(&trigB);
 
-    GuiCustomOptionBrowser optionBrowser3(396, 280, &options3, "bg_options_gamesettings.png");
+    GuiCustomOptionBrowser optionBrowser3(396, 280, &options, "bg_options_settings.png");
     optionBrowser3.SetPosition(0, 90);
     optionBrowser3.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 
@@ -148,29 +158,32 @@ int DiscBrowse(const char * GameID, char * alternatedname, int alternatedname_si
     ResumeGui();
     while (!exit)
     {
-        VIDEO_WaitVSync();
+        usleep(100);
 
-        if (shutdown == 1) Sys_Shutdown();
-        if (reset == 1) Sys_Reboot();
+        if (shutdown)
+            Sys_Shutdown();
+        if (reset)
+            Sys_Reboot();
 
         ret = optionBrowser3.GetClickedOption();
 
-        if (ret > 0)
+        if (ret >= 0)
         {
-            char temp[100];
-            strlcpy(temp, fstfiles(fstbuffer, ret), sizeof(temp));
-            choice = WindowPrompt(temp, tr( "Load this DOL as alternate DOL?" ), tr( "OK" ), tr( "Cancel" ));
+            choice = WindowPrompt(options.GetValue(ret), tr( "Load this DOL as alternate DOL?" ), tr( "OK" ), tr( "Cancel" ));
             if (choice)
             {
-                //ret = offsetselect[ret];
-                strlcpy(alternatedname, temp, alternatedname_size);
+                snprintf(alternatedname, alternatedname_size, options.GetValue(ret));
+                const char * offset = options.GetName(ret);
+                if(offset)
+                    ret = atoi(offset+strlen("Offset ")); //doloffset
+                else
+                    ret = -1; // weird problem
                 exit = true;
             }
         }
 
         if (cancelBtn.GetState() == STATE_CLICKED)
         {
-            ret = 696969;
             exit = true;
         }
     }
@@ -178,9 +191,6 @@ int DiscBrowse(const char * GameID, char * alternatedname, int alternatedname_si
     HaltGui();
     mainWindow->Remove(&w);
     ResumeGui();
-
-    //free not needed list buffer anymore
-    free(fstbuffer);
 
     return ret;
 }
@@ -459,46 +469,34 @@ int autoSelectDolMenu(const char *id, bool force)
 /********************************************************************************
  * Mount a DVD, get the type and ID.
  *********************************************************************************/
-static vu32 dvddone = 0;
-static dvddiskid *g_diskID = (dvddiskid*) 0x80000000; // If you change this address, the read functions will FAIL!
-void __dvd_readidcb(s32 result)
-{
-    dvddone = result;
-}
-
-u8 DiscMount(discHdr *header)
+u8 DiscMount(struct discHdr * header)
 {
     gprintf("\nDiscMount() ");
+    u8 * g_diskID = (u8 *) 0x80000000;
     int ret;
     HaltGui();
 
     u8 *tmpBuff = (u8 *) malloc(0x60);
     memcpy(tmpBuff, g_diskID, 0x60); // Make a backup of the first 96 bytes at 0x80000000
 
-    ret = bwDVD_LowInit();
-    dvddone = 0;
-    ret = bwDVD_LowReset(__dvd_readidcb);
-    while (ret >= 0 && dvddone == 0)
-        ;
+    Disc_SetUSB(NULL);
+    ret = WDVD_Reset();
+    if(ret < 0)
+        return 0;
 
-    dvddone = 0;
-    ret = bwDVD_LowReadID(g_diskID, __dvd_readidcb); // Leave this one here, or you'll get an IOCTL error
-    while (ret >= 0 && dvddone == 0)
-        ;
+    ret = WDVD_ReadDiskId(g_diskID);
+    if(ret < 0)
+        return 0;
 
-    dvddone = 0;
-    ret = bwDVD_LowUnencryptedRead(g_diskID, 0x60, 0x00, __dvd_readidcb); // Overwrite the g_diskID thing
-    while (ret >= 0 && dvddone == 0)
-        ;
+    ret = WDVD_UnencryptedRead(g_diskID, 0x60, 0x00);
+    if(ret < 0)
+        return 0;
 
     memcpy(header, g_diskID, 0x60);
     memcpy(g_diskID, tmpBuff, 0x60); // Put the backup back, or games won't load
     free(tmpBuff);
 
     ResumeGui();
-    if (dvddone != 1)
-    {
-        return 0;
-    }
+
     return (header->magic == 0x5D1C9EA3) ? 1 : 2; // Don't check gamecube magic (0xC2339F3D)
 }

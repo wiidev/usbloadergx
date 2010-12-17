@@ -5,16 +5,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-30 23:36+0200\n"
+"POT-Creation-Date: 2010-12-17 18:50+0100\n"
 "PO-Revision-Date: 2010-02-21 08:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe, Cambo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-msgid " "
-msgstr ""
 
 msgid " Wad Saved as:"
 msgstr " Wad salvato con il nome:"
@@ -28,15 +25,17 @@ msgstr " è stato salvato. Parte del codice potrebbe non funzionare correttament
 msgid " is not on the server."
 msgstr " non è disponibile sul server."
 
-#, c-format
-msgid "%s : %s May not boot correctly if your System Menu is not up to date."
-msgstr "%s : %s Potrebbe non essere caricato correttamente se il tuo System Menu non è aggiornato."
-
 msgid "0 (Everyone)"
 msgstr "0 (Tutti)"
 
+msgid "0 (Locked and Unlocked Games)"
+msgstr ""
+
 msgid "1 (Child 7+)"
 msgstr "1 (Bambini 7+)"
+
+msgid "1 (Unlocked Games Only)"
+msgstr ""
 
 msgid "1 hour"
 msgstr "1 ora"
@@ -125,6 +124,9 @@ msgstr ">> Lettura dati WAD...OK!"
 msgid "AUTO"
 msgstr "Automatico"
 
+msgid "All images downloaded successfully."
+msgstr ""
+
 msgid "All partitions"
 msgstr "Tutte le partizioni"
 
@@ -149,6 +151,9 @@ msgstr "aprile"
 msgid "Are you sure you want to enable Parent Control?"
 msgstr "Sei sicuro di voler attivare il Controllo Genitori?"
 
+msgid "Are you sure you want to reset?"
+msgstr ""
+
 msgid "Are you sure?"
 msgstr "Sei sicuro?"
 
@@ -167,9 +172,6 @@ msgstr "Correzione automatica"
 msgid "BCA Codes Path"
 msgstr "Percorso Codici BCA"
 
-msgid "BCA Codes Path changed"
-msgstr "Percorso Codici BCA modificato"
-
 msgid "BETA revisions"
 msgstr "Versioni BETA"
 
@@ -181,9 +183,6 @@ msgstr "Torna a HBC/Menu Wii"
 
 msgid "Back to Loader"
 msgstr "Canale HomeBrew"
-
-msgid "Back to Wii Menu"
-msgstr "Torna al Menu Wii"
 
 msgid "Backgroundmusic"
 msgstr "Musica Sottofondo"
@@ -218,20 +217,20 @@ msgstr "Impossibile eliminare:"
 msgid "Cancel"
 msgstr "Annulla"
 
+msgid "Cannot write to destination."
+msgstr ""
+
 msgid "Change Play Path"
 msgstr "Modifica Percorso Suoni"
-
-msgid "Channels"
-msgstr "Canali"
 
 msgid "Cheatfile is blank"
 msgstr "il file dei trucchi è vuoto"
 
-msgid "Checking existing artwork"
-msgstr "Verifico le copertine presenti"
-
 msgid "Checking for Updates"
 msgstr "Verifica Aggiornamenti"
+
+msgid "Clear"
+msgstr ""
 
 msgid "Click to Download Covers"
 msgstr "Premi per scaricare le Copertine"
@@ -254,9 +253,6 @@ msgstr "Sviluppato da: %s"
 
 msgid "Coding:"
 msgstr "Sviluppo:"
-
-msgid "Confirm"
-msgstr "Confermare"
 
 msgid "Connection lost..."
 msgstr "Connessione persa..."
@@ -282,11 +278,14 @@ msgstr "Livello Protezione"
 msgid "Correct Password"
 msgstr "Password Corretta"
 
+msgid "Could not connect to the server."
+msgstr ""
+
 msgid "Could not create GCT file"
 msgstr "Non è stato possibile creare il file GCT"
 
-msgid "Could not find a WBFS partition."
-msgstr "Non è stata trovata alcuna partizione WBFS."
+msgid "Could not find info for this game in the wiitdb.xml."
+msgstr ""
 
 msgid "Could not initialize DIP module!"
 msgstr "Non è stato possibile inizializzare il modulo DIP!"
@@ -297,23 +296,14 @@ msgstr "Non è stato possibile inizializzare la rete!"
 msgid "Could not open Disc"
 msgstr "Non è stato possibile accedere al Disco"
 
-msgid "Could not open WBFS partition"
-msgstr "Non è stato possibile accedere alla partizione WBFS"
-
-msgid "Could not read the disc."
-msgstr "Non è stato possibile leggere il disco."
+msgid "Could not open wiitdb.xml."
+msgstr ""
 
 msgid "Could not save."
 msgstr "Non è stato possibile salvare."
 
-msgid "Could not set USB."
-msgstr "Non è stato possibile impostare la porta USB."
-
 msgid "Cover Download"
 msgstr "Scaricamento Copertine"
-
-msgid "Cover Path Changed"
-msgstr "Percorso Copertine Modificato"
 
 msgid "Create"
 msgstr "Crea"
@@ -329,9 +319,6 @@ msgstr "Modific./Origin."
 
 msgid "DOL Path"
 msgstr "Percorso File DOL"
-
-msgid "DOL path changed"
-msgstr "Percorso File DOL Modificato"
 
 msgid "Dec"
 msgstr "dicembre"
@@ -384,9 +371,6 @@ msgstr "Predefinita Disco"
 msgid "Disc Images"
 msgstr "Immagini Disco"
 
-msgid "Disc Path Changed"
-msgstr "Percorso Immagini Disco Modificato"
-
 msgid "DiskFlip"
 msgstr "Gira i dischi"
 
@@ -402,8 +386,8 @@ msgstr "Visualizzazione a Griglia"
 msgid "Display as a list"
 msgstr "Visualizzazione a Elenco"
 
-msgid "Display favorites"
-msgstr "Mostra i preferiti"
+msgid "Display favorites only"
+msgstr ""
 
 msgid "Do you really want to delete:"
 msgstr "Vuoi veramente eliminare:"
@@ -419,9 +403,6 @@ msgstr "Vuoi scaricare questo tema?"
 
 msgid "Do you want to format:"
 msgstr "Vuoi formattare:"
-
-msgid "Do you want to retry for 30 secs?"
-msgstr "Vuoi riprovare per 30 sec?"
 
 msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "Vuoi utilizzare il DOL alternativo funzionante?"
@@ -462,6 +443,12 @@ msgstr "Sto scaricando l'elenco:"
 msgid "Downloading file"
 msgstr "Sto scaricando il file"
 
+msgid "Downloading file..."
+msgstr ""
+
+msgid "Downloading files"
+msgstr ""
+
 msgid "Downloading image:"
 msgstr "Sto scaricando l'immagine:"
 
@@ -476,9 +463,6 @@ msgstr "ERRORE:"
 
 msgid "ERROR: Can't set up theme."
 msgstr "ERRORE: Impossibile configurare il tema."
-
-msgid "Enable Parental Control"
-msgstr "Attiva Controllo Genitori"
 
 msgid "English"
 msgstr "Inglese"
@@ -495,8 +479,14 @@ msgstr "Correzione Error002"
 msgid "Error reading Disc"
 msgstr "Errore Lettura Disco"
 
+msgid "Error while opening the zip."
+msgstr ""
+
 msgid "Error while transfering data."
 msgstr "Errore durante il trasferimento dei dati."
+
+msgid "Error writing the data."
+msgstr ""
 
 msgid "Error..."
 msgstr "Errore..."
@@ -525,14 +515,26 @@ msgstr "febbraio"
 msgid "File not found."
 msgstr "File non trovato."
 
+msgid "Filesize is 0 Byte."
+msgstr ""
+
 msgid "Finishing installation... Ok!"
 msgstr "Sto terminando l'installazione... Ok!"
+
+msgid "Flat Covers"
+msgstr ""
 
 msgid "Flip-X"
 msgstr "Scorrimento Dischi"
 
-msgid "Force"
-msgstr "Forza"
+msgid "Force NTSC"
+msgstr ""
+
+msgid "Force PAL50"
+msgstr ""
+
+msgid "Force PAL60"
+msgstr ""
 
 msgid "Format"
 msgstr "Formatta"
@@ -555,9 +557,6 @@ msgstr "IDGIOCO_Nomegioco"
 msgid "GCT Cheatcodes Path"
 msgstr "Percorso Trucchi in GCT"
 
-msgid "GCT Cheatcodes Path changed"
-msgstr "Percorso Trucchi in GCT modificato"
-
 msgid "GCT File created"
 msgstr "File GCT creato"
 
@@ -570,11 +569,17 @@ msgstr "Nessuna sottocartella contiene il file GXtheme.cfg."
 msgid "Game ID"
 msgstr "ID Gioco"
 
+msgid "Game IOS"
+msgstr ""
+
 msgid "Game Language"
 msgstr "Lingua Gioco"
 
 msgid "Game Load"
 msgstr "Impostazioni Giochi"
+
+msgid "Game Lock"
+msgstr ""
 
 msgid "Game Region"
 msgstr "Regione Gioco"
@@ -600,20 +605,23 @@ msgstr "Nomegioco [IDGIOCO]"
 msgid "Games"
 msgstr "Giochi"
 
+msgid "GamesLevel"
+msgstr ""
+
 msgid "German"
 msgstr "Tedesco"
+
+msgid "Gerne:"
+msgstr ""
+
+msgid "Global Settings"
+msgstr ""
 
 msgid "HOME Menu"
 msgstr "Menu HOME"
 
-msgid "Hermes CIOS"
-msgstr "cIOS di Hermes"
-
 msgid "Homebrew Apps Path"
 msgstr "Percorso Applic. Homebrew"
-
-msgid "Homebrew Appspath changed"
-msgstr "Percorso app. Homebrew modificato"
 
 msgid "Homebrew Launcher"
 msgstr "Applicazioni Homebrew"
@@ -647,9 +655,6 @@ msgstr "Inserisci Disco"
 msgid "Insert a Wii Disc!"
 msgstr "Inserisci un Disco nella Wii!"
 
-msgid "Insert an SD-Card to download images."
-msgstr "Inserisci una scheda SD per scaricare le immagini."
-
 msgid "Insert an SD-Card to save."
 msgstr "Inserisci una scheda SD per Salvare."
 
@@ -667,9 +672,6 @@ msgstr "Errore Installazione!"
 
 msgid "Install a game"
 msgstr "Installa un gioco"
-
-msgid "Install not possible"
-msgstr "Impossibile installare"
 
 msgid "Install partitions"
 msgstr "Installa partizioni"
@@ -724,6 +726,9 @@ msgstr "File Lingue"
 
 msgid "Language change:"
 msgstr "Modifica Lingua:"
+
+msgid "Languagefiles Path"
+msgstr ""
 
 msgid "Languagepath changed."
 msgstr "Percorso Lingue modificato"
@@ -780,9 +785,6 @@ msgstr "maggio"
 msgid "Missing files"
 msgstr "File Mancante/i"
 
-msgid "Most likely it has dimensions that are not evenly divisible by 4."
-msgstr "Molto probabilmente le dimensioni non sono divisibili per 4."
-
 msgid "Mount DVD drive"
 msgstr "Avvia DVD"
 
@@ -795,9 +797,6 @@ msgstr "Volume"
 msgid "Neither"
 msgstr "Nessuno"
 
-msgid "Network init error"
-msgstr "Errore inizializzazione rete"
-
 msgid "New Disc Detected"
 msgstr "Trovato Nuovo Disco"
 
@@ -807,35 +806,29 @@ msgstr "Avanti"
 msgid "No"
 msgstr ""
 
-msgid "No .dol or .elf files found."
-msgstr "Non sono stati trovati file .dol o .elf"
-
 msgid "No Cheatfile found"
 msgstr "Nessun file trucchi trovato"
 
 msgid "No DOL file found on disc."
 msgstr "Nessun file DOL trovato sul disco."
 
-msgid "No Favorites"
-msgstr "Nessun Preferito"
-
 msgid "No SD-Card inserted!"
 msgstr "Nessuna scheda SD inserita!"
 
-msgid "No USB Device"
-msgstr "Nessun Dispositivo USB"
+msgid "No URL or Path specified."
+msgstr ""
 
-msgid "No USB Device found."
-msgstr "Nessun Dispositivo USB trovato."
-
-msgid "No WBFS or FAT/NTFS partition found"
-msgstr "Non è stata trovata alcuna partizione WBFS o FAT/NTFS"
+msgid "No WBFS or FAT/NTFS/EXT partition found"
+msgstr ""
 
 msgid "No cheats were selected"
 msgstr "Non è stato selezionato alcun trucco"
 
 msgid "No data could be read."
 msgstr "Non è stato possibile leggere alcun dato."
+
+msgid "No favorites selected."
+msgstr ""
 
 msgid "No file missing!"
 msgstr "Nessun file mancante!"
@@ -852,26 +845,32 @@ msgstr "Nessuno"
 msgid "Normal"
 msgstr "Normale"
 
-msgid "Normal Covers"
-msgstr "Copert. Normali"
-
-msgid "Not Found"
-msgstr "Non Trovato"
-
-msgid "Not a DOL/ELF file."
-msgstr "Non è un file DOL/ELF."
-
 msgid "Not a WAD file."
 msgstr "Non è un file WAD."
 
 msgid "Not a Wii Disc"
 msgstr "Non è un Disco Wii"
 
+msgid "Not a valid URL"
+msgstr ""
+
+msgid "Not a valid URL path"
+msgstr ""
+
+msgid "Not a valid domain"
+msgstr ""
+
 msgid "Not enough free memory."
 msgstr "Memoria insufficiente."
 
 msgid "Not enough free space!"
 msgstr "Spazio Insufficiente!"
+
+msgid "Not enough memory."
+msgstr ""
+
+msgid "Not required"
+msgstr ""
 
 msgid "Not supported format!"
 msgstr "Formato non supportato."
@@ -888,11 +887,17 @@ msgstr ""
 msgid "ON"
 msgstr "Attivato"
 
+msgid "Ocarina"
+msgstr ""
+
 msgid "Oct"
 msgstr "ottobre"
 
 msgid "Official Site:"
 msgstr "Sito Ufficiale:"
+
+msgid "Offset"
+msgstr ""
 
 msgid "Only Customs"
 msgstr "Modificate"
@@ -929,6 +934,9 @@ msgstr "Copialo nel tuo browser per scaricare il file WiiTDB.zip."
 
 msgid "Patch Country Strings"
 msgstr "Patch Regione"
+
+msgid "Path Changed"
+msgstr ""
 
 msgid "Pick from a list"
 msgstr "Seleziona da un elenco"
@@ -993,14 +1001,17 @@ msgstr "Azzera Musica BG"
 msgid "Reset Playcounter"
 msgstr "Azzera contatore"
 
-msgid "Reset to standard BGM?"
-msgstr "Azzerare Musica BG?"
+msgid "Reset to default BGM?"
+msgstr ""
 
 msgid "Restarting..."
 msgstr "Premere OK per riavviare..."
 
 msgid "Return"
 msgstr "Ritorna"
+
+msgid "Return To"
+msgstr ""
 
 msgid "Return to Wii Menu"
 msgstr "Torna al Menu Wii"
@@ -1020,8 +1031,8 @@ msgstr "Volume SFX"
 msgid "Save"
 msgstr "Salva"
 
-msgid "Save Failed"
-msgstr "Salvataggio Fallito"
+msgid "Save Failed. No device inserted?"
+msgstr ""
 
 msgid "Save Game List to"
 msgstr "Salvataggio Elenco Giochi in"
@@ -1035,11 +1046,14 @@ msgstr "Salvaschermo"
 msgid "Select"
 msgstr "Seleziona"
 
+msgid "Select DOL Offset"
+msgstr ""
+
 msgid "Select a DOL"
 msgstr "Seleziona un file DOL"
 
-msgid "Selected DOL"
-msgstr "File DOL selezionato"
+msgid "Select a DOL from Game"
+msgstr ""
 
 msgid "Sept"
 msgstr "settembre"
@@ -1068,6 +1082,9 @@ msgstr "Mostra i più giocati"
 msgid "Sound"
 msgstr "Audio"
 
+msgid "Sound Settings"
+msgstr ""
+
 msgid "Sound+BGM"
 msgstr "Suono+BGM"
 
@@ -1079,9 +1096,6 @@ msgstr "Spagnolo"
 
 msgid "Special thanks to:"
 msgstr "Un ringraziamento speciale a:"
-
-msgid "Standard"
-msgstr "Standard"
 
 msgid "Success"
 msgstr "Successo"
@@ -1116,9 +1130,6 @@ msgstr "Cinese Tradizionale"
 msgid "TXT Cheatcodes Path"
 msgstr "Percorso Trucchi in TXT"
 
-msgid "TXT Cheatcodes Path changed"
-msgstr "Percorso Trucchi in TXT modificato"
-
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "La cartella indicata non esiste. Vuoi crearla?"
 
@@ -1132,20 +1143,20 @@ msgstr "L'installazione del WAD è fallita con errore %ld"
 msgid "Theme Download Path"
 msgstr "Percorso Download Temi"
 
-msgid "Theme Download Path changed"
-msgstr "Percorso Download Temi modificato"
-
 msgid "Theme Downloader"
 msgstr "Scaricamento Temi"
 
 msgid "Theme Path"
 msgstr "Percorso Tema"
 
-msgid "Theme Path Changed"
-msgstr "Percorso Tema modificato"
-
 msgid "Theme Title:"
 msgstr "Titolo del tema:"
+
+msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
+msgstr ""
+
+msgid "This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."
+msgstr ""
 
 msgid "Time left:"
 msgstr "Restante:"
@@ -1159,6 +1170,9 @@ msgstr "Titoli dal file WiiTDB"
 msgid "Tooltips"
 msgstr "Suggerimenti"
 
+msgid "Transfer failed"
+msgstr ""
+
 msgid "Transfer failed."
 msgstr "Trasferimento fallito."
 
@@ -1167,9 +1181,6 @@ msgstr "Dispositivo USB non Trovato"
 
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX è Protetto"
-
-msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
-msgstr "USB Loader GX funziona solo con la rev 4 del cIOS di Hermes! Accertarsi di aver installato la rev 4!"
 
 #, c-format
 msgid "Unable to open the wad that was just downloaded (%s)."
@@ -1186,6 +1197,9 @@ msgstr "Disinstalla Menu"
 
 msgid "Uninstalling wad"
 msgstr "Disinstalla WAD"
+
+msgid "Unknown"
+msgstr ""
 
 msgid "Unlock Parental Control"
 msgstr "Sblocca Controllo Genitori"
@@ -1213,9 +1227,6 @@ msgstr "Aggiorna File"
 
 msgid "Update Path"
 msgstr "Percorso Aggiornamento"
-
-msgid "Update Path changed."
-msgstr "Perc. Aggiornamento Modificato"
 
 msgid "Update all Language Files"
 msgstr "Aggiorna tutti i file delle lingue"
@@ -1254,14 +1265,14 @@ msgstr "Modalità Video"
 msgid "WIP Patches Path"
 msgstr "Percorso Patch WIP"
 
-msgid "WIP Patches Path changed"
-msgstr "Percorso Patch WIP modificato"
-
 msgid "Waiting for USB Device"
 msgstr "Caricamento Dispositivo USB"
 
 msgid "Waiting..."
 msgstr "Caricamento..."
+
+msgid "Warning:"
+msgstr ""
 
 msgid "What do you want to update?"
 msgstr "Che cosa vuoi aggiornare?"
@@ -1284,8 +1295,8 @@ msgstr "File WiiTDB"
 msgid "WiiTDB Path"
 msgstr "Percorso Archivio WiiTDB"
 
-msgid "WiiTDB Path changed."
-msgstr "Percorso archivio WiiTDB modificato."
+msgid "WiiTDB is up to date."
+msgstr ""
 
 msgid "Wiilight"
 msgstr "Illuminazione Wii"
@@ -1296,20 +1307,11 @@ msgstr "Password Errata"
 msgid "Yes"
 msgstr "Sì"
 
-msgid "You are about to delete "
-msgstr "Stai per eliminare "
-
-msgid "You are choosing to display favorites and you do not have any selected."
-msgstr "Hai scelto di visualizzare i preferiti e non ne hai selezionato nessuno"
-
-msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
-msgstr "E' in uso una partizione NTFS. Poiché sono possibili errori in scrittura nelle partizioni NTFS, non è possibile installare alcun gioco."
+msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
+msgstr ""
 
 msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr "Il Controllo Genitori non è attivo. Se vuoi utilizzare il Controllo Genitori abilitalo nelle Impostazioni della Wii."
-
-msgid "You have attempted to load a bad image"
-msgstr "Hai tentato di caricare un'immagine non valida"
 
 msgid "You need to select or format a partition"
 msgstr "Occorre selezionare o formattare una partizione"
@@ -1329,12 +1331,6 @@ msgstr "non esiste!"
 
 msgid "does not exist!  Loading game without cheats."
 msgstr "non esiste! Carico il gioco senza i trucchi."
-
-msgid "does not exist!  You Messed something up, Idiot."
-msgstr "non esiste! Hai fatto qualche casino."
-
-msgid "file left"
-msgstr "file mancante"
 
 msgid "files left"
 msgstr "file mancanti"
@@ -1380,3 +1376,150 @@ msgstr "di"
 
 msgid "seconds left"
 msgstr "secondi mancanti"
+
+#~ msgid "%s : %s May not boot correctly if your System Menu is not up to date."
+#~ msgstr "%s : %s Potrebbe non essere caricato correttamente se il tuo System Menu non è aggiornato."
+
+#~ msgid "BCA Codes Path changed"
+#~ msgstr "Percorso Codici BCA modificato"
+
+#~ msgid "Back to Wii Menu"
+#~ msgstr "Torna al Menu Wii"
+
+#~ msgid "Channels"
+#~ msgstr "Canali"
+
+#~ msgid "Checking existing artwork"
+#~ msgstr "Verifico le copertine presenti"
+
+#~ msgid "Confirm"
+#~ msgstr "Confermare"
+
+#~ msgid "Could not find a WBFS partition."
+#~ msgstr "Non è stata trovata alcuna partizione WBFS."
+
+#~ msgid "Could not open WBFS partition"
+#~ msgstr "Non è stato possibile accedere alla partizione WBFS"
+
+#~ msgid "Could not read the disc."
+#~ msgstr "Non è stato possibile leggere il disco."
+
+#~ msgid "Could not set USB."
+#~ msgstr "Non è stato possibile impostare la porta USB."
+
+#~ msgid "Cover Path Changed"
+#~ msgstr "Percorso Copertine Modificato"
+
+#~ msgid "DOL path changed"
+#~ msgstr "Percorso File DOL Modificato"
+
+#~ msgid "Disc Path Changed"
+#~ msgstr "Percorso Immagini Disco Modificato"
+
+#~ msgid "Display favorites"
+#~ msgstr "Mostra i preferiti"
+
+#~ msgid "Do you want to retry for 30 secs?"
+#~ msgstr "Vuoi riprovare per 30 sec?"
+
+#~ msgid "Enable Parental Control"
+#~ msgstr "Attiva Controllo Genitori"
+
+#~ msgid "Force"
+#~ msgstr "Forza"
+
+#~ msgid "GCT Cheatcodes Path changed"
+#~ msgstr "Percorso Trucchi in GCT modificato"
+
+#~ msgid "Hermes CIOS"
+#~ msgstr "cIOS di Hermes"
+
+#~ msgid "Homebrew Appspath changed"
+#~ msgstr "Percorso app. Homebrew modificato"
+
+#~ msgid "Insert an SD-Card to download images."
+#~ msgstr "Inserisci una scheda SD per scaricare le immagini."
+
+#~ msgid "Install not possible"
+#~ msgstr "Impossibile installare"
+
+#~ msgid "Most likely it has dimensions that are not evenly divisible by 4."
+#~ msgstr "Molto probabilmente le dimensioni non sono divisibili per 4."
+
+#~ msgid "Network init error"
+#~ msgstr "Errore inizializzazione rete"
+
+#~ msgid "No .dol or .elf files found."
+#~ msgstr "Non sono stati trovati file .dol o .elf"
+
+#~ msgid "No Favorites"
+#~ msgstr "Nessun Preferito"
+
+#~ msgid "No USB Device"
+#~ msgstr "Nessun Dispositivo USB"
+
+#~ msgid "No USB Device found."
+#~ msgstr "Nessun Dispositivo USB trovato."
+
+#~ msgid "No WBFS or FAT/NTFS partition found"
+#~ msgstr "Non è stata trovata alcuna partizione WBFS o FAT/NTFS"
+
+#~ msgid "Normal Covers"
+#~ msgstr "Copert. Normali"
+
+#~ msgid "Not Found"
+#~ msgstr "Non Trovato"
+
+#~ msgid "Not a DOL/ELF file."
+#~ msgstr "Non è un file DOL/ELF."
+
+#~ msgid "Reset to standard BGM?"
+#~ msgstr "Azzerare Musica BG?"
+
+#~ msgid "Save Failed"
+#~ msgstr "Salvataggio Fallito"
+
+#~ msgid "Selected DOL"
+#~ msgstr "File DOL selezionato"
+
+#~ msgid "Standard"
+#~ msgstr "Standard"
+
+#~ msgid "TXT Cheatcodes Path changed"
+#~ msgstr "Percorso Trucchi in TXT modificato"
+
+#~ msgid "Theme Download Path changed"
+#~ msgstr "Percorso Download Temi modificato"
+
+#~ msgid "Theme Path Changed"
+#~ msgstr "Percorso Tema modificato"
+
+#~ msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
+#~ msgstr "USB Loader GX funziona solo con la rev 4 del cIOS di Hermes! Accertarsi di aver installato la rev 4!"
+
+#~ msgid "Update Path changed."
+#~ msgstr "Perc. Aggiornamento Modificato"
+
+#~ msgid "WIP Patches Path changed"
+#~ msgstr "Percorso Patch WIP modificato"
+
+#~ msgid "WiiTDB Path changed."
+#~ msgstr "Percorso archivio WiiTDB modificato."
+
+#~ msgid "You are about to delete "
+#~ msgstr "Stai per eliminare "
+
+#~ msgid "You are choosing to display favorites and you do not have any selected."
+#~ msgstr "Hai scelto di visualizzare i preferiti e non ne hai selezionato nessuno"
+
+#~ msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
+#~ msgstr "E' in uso una partizione NTFS. Poiché sono possibili errori in scrittura nelle partizioni NTFS, non è possibile installare alcun gioco."
+
+#~ msgid "You have attempted to load a bad image"
+#~ msgstr "Hai tentato di caricare un'immagine non valida"
+
+#~ msgid "does not exist!  You Messed something up, Idiot."
+#~ msgstr "non esiste! Hai fatto qualche casino."
+
+#~ msgid "file left"
+#~ msgstr "file mancante"

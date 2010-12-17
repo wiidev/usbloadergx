@@ -18,14 +18,11 @@ void WindowCredits();
 int OnScreenKeyboard(char * var, u32 maxlen, int min);
 int OnScreenNumpad(char * var, u32 maxlen);
 int WindowExitPrompt();
-int GameWindowPrompt(int gameSelected);
+int GameWindowPrompt(int & gameSelected);
 int DiscWait(const char *title, const char *msg, const char *btn1Label, const char *btn2Label, int IsDeviceWait);
 int FormatingPartition(const char *title, partitionEntry *entry);
-bool SearchMissingImages(int choice2);
-int ProgressDownloadWindow(int choice2);
 int ProgressUpdateWindow();
 bool NetworkInitPrompt();
-char * GetMissingFiles();
 int WindowScreensaver();
 int CodeDownload(const char *id);
 int HBCWindowPrompt(const char *name, const char *coder, const char *version, const char *release_date,

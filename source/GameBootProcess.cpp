@@ -73,16 +73,6 @@ int BootGame(const char * gameID)
     if(!gameID || strlen(gameID) < 3)
         return -1;
 
-    if (mountMethod == 3)
-    {
-        ExitApp();
-        struct discHdr *header = gameList.GetDiscHeader(gameID);
-        u32 tid;
-        memcpy(&tid, header->id, 4);
-        gprintf("\nBooting title %016llx", TITLE_ID( ( header->id[5] == '1' ? 0x00010001 : 0x00010002 ), tid ));
-        WII_Initialize();
-        return WII_LaunchTitle(TITLE_ID( ( header->id[5] == '1' ? 0x00010001 : 0x00010002 ), tid ));
-    }
     if (mountMethod == 2)
     {
         ExitApp();

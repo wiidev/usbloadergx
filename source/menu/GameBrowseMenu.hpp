@@ -23,7 +23,6 @@ class GameBrowseMenu : public GuiWindow
         void LoadCover(struct discHdr *header);
         void CheckAlternativeDOL(const char * IDfull);
         void CheckOcarina(const char * IDfull);
-        void CoverDownload();
         static void UpdateCallback(void * e);
 
         GuiImageData * btnInstall;

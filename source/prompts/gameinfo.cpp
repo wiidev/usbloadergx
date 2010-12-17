@@ -9,7 +9,7 @@
 #include "language/gettext.h"
 #include "libwiigui/gui.h"
 #include "libwiigui/Text.hpp"
-#include "../xml/xml.h"
+#include "xml/xml.h"
 #include "menu.h"
 #include "menu/menus.h"
 #include "filelist.h"
@@ -22,8 +22,9 @@
 #include "settings/GameTitles.h"
 #include "gameinfo.h"
 #include "usbloader/GameList.h"
-#include "../gecko.h"
+#include "gecko.h"
 #include "xml/WiiTDB.hpp"
+#include "utils/ShowError.h"
 
 /****************************************************************************
  * gameinfo
@@ -40,14 +41,20 @@ int showGameInfo(char *ID)
     WiiTDB XML_DB;
 
     if(!XML_DB.OpenFile(xmlpath))
+    {
+        ShowError(tr("Could not open wiitdb.xml."));
         return -1;
+    }
 
     XML_DB.SetLanguageCode(Settings.db_language);
 
     GameXMLInfo GameInfo;
 
     if(!XML_DB.GetGameXMLInfo(ID, &GameInfo))
+    {
+        ShowError(tr("Could not find info for this game in the wiitdb.xml."));
         return -1;
+    }
 
     XML_DB.CloseFile();
 
