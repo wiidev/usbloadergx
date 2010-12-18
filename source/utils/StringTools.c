@@ -33,7 +33,7 @@
 const char * fmt(const char * format, ...)
 {
     static char strChar[512];
-    memset(strChar, 0, sizeof(strChar));
+    strChar[0] = 0;
 	char * tmp = NULL;
 
 	va_list va;
@@ -59,10 +59,10 @@ const wchar_t * wfmt(const char * format, ...)
     strWChar[0] = 0;
 
 	if(!format)
-        return (const wchar_t *) &strWChar;
+        return (const wchar_t *) strWChar;
 
 	if(strcmp(format, "") == 0)
-        return (const wchar_t *) &strWChar;
+        return (const wchar_t *) strWChar;
 
 	char * tmp = NULL;
 
@@ -79,7 +79,7 @@ const wchar_t * wfmt(const char * format, ...)
         if(bt > 0)
         {
             strWChar[bt] = 0;
-            return (const wchar_t *) &strWChar;
+            return (const wchar_t *) strWChar;
         }
 	}
 	va_end(va);
@@ -98,7 +98,7 @@ bool char2wchar_t(const char * strChar, wchar_t * dest)
     int	bt;
     bt = mbstowcs(dest, strChar, strlen(strChar));
     if (bt > 0) {
-        dest[bt] = (wchar_t) '\0';
+        dest[bt] = 0;
         return true;
     }
 
@@ -125,4 +125,22 @@ int strtokcmp(const char * string, const char * compare, const char * separator)
     }
 
     return -1;
+}
+
+inline const char * FullpathToFilename(const char *path)
+{
+    if(!path) return path;
+
+    const char * ptr = path;
+    const char * Filename = ptr;
+
+    while(*ptr != '\0')
+    {
+        if(*ptr == '/' && ptr[1] != '\0')
+            Filename = ptr+1;
+
+        ++ptr;
+    }
+
+    return Filename;
 }

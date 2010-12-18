@@ -23,6 +23,8 @@ class GameBrowseMenu : public GuiWindow
         void LoadCover(struct discHdr *header);
         void CheckAlternativeDOL(const char * IDfull);
         void CheckOcarina(const char * IDfull);
+        void CheckDiscSlotUpdate();
+        void UpdateClock();
         static void UpdateCallback(void * e);
 
         GuiImageData * btnInstall;
@@ -98,6 +100,8 @@ class GameBrowseMenu : public GuiWindow
         GuiText * gamecntTxt;
         GuiText * clockTimeBack;
         GuiText * clockTime;
+        GuiText * GameRegionTxt;
+        GuiText * GameIDTxt;
 
         GuiButton * gamecntBtn;
         GuiButton * installBtn;
@@ -139,9 +143,8 @@ class GameBrowseMenu : public GuiWindow
         GuiGameGrid * gameGrid;
         GuiGameCarousel * gameCarousel;
         GuiSearchBar * searchBar;
-        char theTime[50];
-        u32 DiscDriveCover;
         u32 DiscDriveCoverOld;
+        int returnMenu;
         int gameSelectedOld;
         int gameClicked;
         time_t lastrawtime;

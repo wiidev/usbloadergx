@@ -73,10 +73,7 @@ void AppCleanUp(void)
     delete mainWindow;
     for (int i = 0; i < 4; i++)
         delete pointer[i];
-    delete GameRegionTxt;
-    delete GameIDTxt;
-    delete cover;
-    delete coverImg;
+
     gettextCleanUp();
     CloseXMLDatabase();
     ClearFontData();
@@ -160,12 +157,10 @@ void Sys_LoadMenu(void)
 
 void Sys_BackToLoader(void)
 {
+    ExitApp();
 
     if (hbcStubAvailable())
-    {
-        ExitApp();
         exit(0);
-    }
     // Channel Version
     Sys_LoadMenu();
 }

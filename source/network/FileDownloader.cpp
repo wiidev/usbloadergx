@@ -234,6 +234,15 @@ int DownloadFileToPath(const char *orig_url, const char *dest, bool UseFilename)
         strcat((char *) dest, filename);
     }
 
+    if(!UseFilename && strcmp(filename, "") == 0)
+    {
+        const char * ptr = strrchr(dest, '/');
+        if(ptr) ptr++;
+        else ptr = dest;
+
+        snprintf(filename, sizeof(filename), "%s", ptr);
+    }
+
     FILE *file = fopen(dest, "wb");
     if(!file)
     {

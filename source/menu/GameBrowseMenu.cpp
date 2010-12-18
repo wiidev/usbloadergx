@@ -9,6 +9,7 @@
 #include "usbloader/wdvd.h"
 #include "usbloader/GameList.h"
 #include "network/networkops.h"
+#include "network/update.h"
 #include "network/CoverDownload.h"
 #include "FileOperations/fileops.h"
 #include "settings/Settings.h"
@@ -39,7 +40,9 @@ GameBrowseMenu::GameBrowseMenu()
     : GuiWindow(screenwidth, screenheight)
 {
     float freespace = 0.0, used = 0.0;
+    returnMenu = MENU_NONE;
     gameSelectedOld = -1;
+    lastrawtime = 0;
     show_searchwindow = false;
     gameBrowser = NULL;
     gameGrid = NULL;
@@ -50,7 +53,6 @@ GameBrowseMenu::GameBrowseMenu()
     GameIDTxt = NULL;
     GameRegionTxt = NULL;
     ScreensaverTimer = 0;
-    memset(theTime, 0, sizeof(theTime));
     WDVD_GetCoverStatus(&DiscDriveCoverOld);
     wString oldFilter(gameList.GetCurrentFilter());
     gameList.FilterList(oldFilter.c_str());
@@ -265,7 +267,7 @@ GameBrowseMenu::GameBrowseMenu()
     dvdBtnTT->SetAlpha(Theme.tooltipAlpha);
     dvdBtnImg = new GuiImage(imgdvd);
     dvdBtnImg->SetWidescreen(Settings.widescreen);
-    dvdBtnImg_g = new GuiImage(dvdBtnImg);
+    dvdBtnImg_g = new GuiImage(imgdvd_gray);
     dvdBtnImg_g->SetWidescreen(Settings.widescreen);
     dvdBtn = new GuiButton(dvdBtnImg_g, dvdBtnImg_g, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_dvd_x, Theme.gamelist_dvd_y,
                            trigA, btnSoundOver, btnSoundClick2, 1, dvdBtnTT, 15, 52, 1, 3);
@@ -299,7 +301,7 @@ GameBrowseMenu::GameBrowseMenu()
     clockTimeBack->SetPosition(Theme.clock_x, Theme.clock_y);
     clockTimeBack->SetFont(clock_ttf, clock_ttf_size);
 
-    clockTime = new GuiText(theTime, 40, Theme.clock);
+    clockTime = new GuiText("", 40, Theme.clock);
     clockTime->SetAlignment(Theme.clock_align, ALIGN_TOP);
     clockTime->SetPosition(Theme.clock_x, Theme.clock_y);
     clockTime->SetFont(clock_ttf, clock_ttf_size);
@@ -487,6 +489,11 @@ void GameBrowseMenu::ReloadBrowser()
 
     sortBtnTT->SetText(sortTTText);
     sortBtnImg->SetImage(sortImgData);
+
+    if(DiscDriveCoverOld & 0x02)
+        dvdBtn->SetImage(dvdBtnImg);
+    else
+        dvdBtn->SetImage(dvdBtnImg_g);
 
     if (Settings.GameSort & SORT_FAVORITE)
     {
@@ -707,39 +714,14 @@ int GameBrowseMenu::Show()
 
 int GameBrowseMenu::MainLoop()
 {
-    WDVD_GetCoverStatus(&DiscDriveCover);//for detecting if i disc has been inserted
-
-    //CLOCK
-    if (Settings.hddinfo == CLOCK_HR12 || Settings.hddinfo == CLOCK_HR24)
-    {
-        time_t rawtime = time(0);
-        if(rawtime != lastrawtime)
-        {
-            lastrawtime = rawtime;
-            struct tm * timeinfo = localtime(&rawtime);
-            if (Settings.hddinfo == CLOCK_HR12)
-            {
-                if (rawtime & 1)
-                    strftime(theTime, sizeof(theTime), "%I:%M", timeinfo);
-                else
-                    strftime(theTime, sizeof(theTime), "%I %M", timeinfo);
-            }
-            if (Settings.hddinfo == CLOCK_HR24)
-            {
-                if (rawtime & 1)
-                    strftime(theTime, sizeof(theTime), "%H:%M", timeinfo);
-                else
-                    strftime(theTime, sizeof(theTime), "%H %M", timeinfo);
-            }
-            clockTime->SetText(theTime);
-        }
-    }
+    UpdateClock();
+    CheckDiscSlotUpdate();
 
     if (updateavailable == true)
     {
         gprintf("\tUpdate Available\n");
         SetState(STATE_DISABLED);
-        ProgressUpdateWindow();
+        UpdateApp();
         updateavailable = false;
         SetState(STATE_DEFAULT);
     }
@@ -791,16 +773,6 @@ int GameBrowseMenu::MainLoop()
 
         installBtn->ResetState();
     }
-    else if ((DiscDriveCover & 0x02) && (DiscDriveCover != DiscDriveCoverOld))
-    {
-        gprintf("\tNew Disc Detected\n");
-        int choice = WindowPrompt(tr( "New Disc Detected" ), 0, tr( "Install" ), tr( "Mount DVD drive" ), tr( "Cancel" ));
-        if (choice == 1)
-            return MENU_INSTALL;
-        else if (choice == 2)
-            dvdBtn->SetState(STATE_CLICKED);
-    }
-
     else if (sdcardBtn->GetState() == STATE_CLICKED)
     {
         gprintf("\tsdCardBtn Clicked\n");
@@ -1013,16 +985,6 @@ int GameBrowseMenu::MainLoop()
                 WindowPrompt(tr( "Parental Control" ), tr( "Invalid PIN code" ), tr( "OK" ));
         }
     }
-    else if (dvdBtn->GetState() == STATE_CLICKED)
-    {
-        gprintf("\tdvdBtn Clicked\n");
-        if(!dvdheader)
-            dvdheader = new struct discHdr;
-        mountMethod = DiscMount(dvdheader);
-        dvdBtn->ResetState();
-
-        rockout(GetSelectedGame());
-    }
 
     else if (Settings.gameDisplay == LIST_MODE && idBtn->GetState() == STATE_CLICKED)
     {
@@ -1043,7 +1005,7 @@ int GameBrowseMenu::MainLoop()
         idBtn->ResetState();
     }
 
-    if (Settings.gameDisplay == LIST_MODE && GetSelectedGame() != gameSelectedOld)
+    else if (Settings.gameDisplay == LIST_MODE && GetSelectedGame() != gameSelectedOld)
     {
 		gameSelectedOld = GetSelectedGame();
 		int gameSelected = gameSelectedOld;
@@ -1072,9 +1034,74 @@ int GameBrowseMenu::MainLoop()
     else
         ScreensaverTimer = 0;
 
-    DiscDriveCoverOld = DiscDriveCover;
+	return returnMenu;
+}
 
-	return MENU_NONE;
+void GameBrowseMenu::CheckDiscSlotUpdate()
+{
+    u32 DiscDriveCover;
+    WDVD_GetCoverStatus(&DiscDriveCover);//for detecting if i disc has been inserted
+
+    if ((DiscDriveCover & 0x02) && (DiscDriveCover != DiscDriveCoverOld))
+    {
+        gprintf("\tNew Disc Detected\n");
+        int choice = WindowPrompt(tr( "New Disc Detected" ), 0, tr( "Install" ), tr( "Mount DVD drive" ), tr( "Cancel" ));
+        if (choice == 1)
+            returnMenu = MENU_INSTALL;
+        else if (choice == 2)
+            dvdBtn->SetState(STATE_CLICKED);
+    }
+    else if (dvdBtn->GetState() == STATE_CLICKED)
+    {
+        gprintf("\tdvdBtn Clicked\n");
+        if(!dvdheader)
+            dvdheader = new struct discHdr;
+        mountMethod = DiscMount(dvdheader);
+        dvdBtn->ResetState();
+
+        rockout(GetSelectedGame());
+    }
+
+    if(DiscDriveCoverOld != DiscDriveCover)
+    {
+        if(DiscDriveCover & 0x02)
+            dvdBtn->SetImage(dvdBtnImg);
+        else
+            dvdBtn->SetImage(dvdBtnImg_g);
+
+        DiscDriveCoverOld = DiscDriveCover;
+    }
+}
+
+void GameBrowseMenu::UpdateClock()
+{
+    if(Settings.hddinfo != CLOCK_HR12 && Settings.hddinfo != CLOCK_HR24)
+        return;
+
+    time_t rawtime = time(0);
+    if(rawtime == lastrawtime) //! Only update every 1 second
+        return;
+
+    char theTime[50];
+    theTime[0] = 0;
+
+    lastrawtime = rawtime;
+    struct tm * timeinfo = localtime(&rawtime);
+    if (Settings.hddinfo == CLOCK_HR12)
+    {
+        if (rawtime & 1)
+            strftime(theTime, sizeof(theTime), "%I:%M", timeinfo);
+        else
+            strftime(theTime, sizeof(theTime), "%I %M", timeinfo);
+    }
+    if (Settings.hddinfo == CLOCK_HR24)
+    {
+        if (rawtime & 1)
+            strftime(theTime, sizeof(theTime), "%H:%M", timeinfo);
+        else
+            strftime(theTime, sizeof(theTime), "%H %M", timeinfo);
+    }
+    clockTime->SetText(theTime);
 }
 
 int GameBrowseMenu::GetSelectedGame()
@@ -1262,6 +1289,8 @@ int GameBrowseMenu::OpenClickedGame()
         else if(choice == 3)
             returnHere = true;
     }
+
+    mountMethod = 0;
 
     if (searchBar)
     {

@@ -54,10 +54,6 @@ char game_partition[6];
 int load_from_fs;
 
 /*** Variables used only in the menus ***/
-GuiText * GameIDTxt = NULL;
-GuiText * GameRegionTxt = NULL;
-GuiImage * coverImg = NULL;
-GuiImageData * cover = NULL;
 bool altdoldefault = true;
 
 static lwp_t guithread = LWP_THREAD_NULL;

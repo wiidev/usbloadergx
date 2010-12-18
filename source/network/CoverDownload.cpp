@@ -24,7 +24,7 @@ static void AbortCallback(void)
     AbortRequested = true;
 }
 
-static int CoverDownloadWithProgress(const char * url, const char * writepath, std::vector<std::string> & MissingFilesList)
+static int CoverDownloadWithProgress(const char * url, const char * progressTitle, const char * writepath, std::vector<std::string> & MissingFilesList)
 {
     if(!url || !writepath)
         return -1;
@@ -38,7 +38,7 @@ static int CoverDownloadWithProgress(const char * url, const char * writepath, s
     char downloadURL[512];
     char progressMsg[255];
     int FilesSkipped = MissingFilesList.size();
-    ProgressSetAbortCallback((ProgressAbortCallback) AbortCallback);
+    ProgressSetAbortCallback(AbortCallback);
 
     for(u32 i = 0; i < MissingFilesList.size(); ++i)
     {
@@ -47,9 +47,9 @@ static int CoverDownloadWithProgress(const char * url, const char * writepath, s
 
         snprintf(progressMsg, sizeof(progressMsg), "http://wiitdb.com : %s.png", MissingFilesList[i].c_str());
 
-        ShowProgress(tr("Downloading files"), fmt("%i %s", MissingFilesList.size() - i, tr( "files left" )), progressMsg, i, MissingFilesList.size());
+        ShowProgress(progressTitle, fmt("%i %s", MissingFilesList.size() - i, tr( "files left" )), progressMsg, i, MissingFilesList.size());
 
-        if(MissingFilesList[i].size() < 6)
+        if(MissingFilesList[i].size() < 4)
             continue;
 
         //Creates URL depending from which Country the game is
@@ -98,7 +98,7 @@ static int CoverDownloadWithProgress(const char * url, const char * writepath, s
         }
 
         char imgPath[200];
-        snprintf(imgPath, sizeof(imgPath), "%s%s.png", writepath, MissingFilesList[i].c_str());
+        snprintf(imgPath, sizeof(imgPath), "%s/%s.png", writepath, MissingFilesList[i].c_str());
 
         FILE *pfile = fopen(imgPath, "wb");
         if (pfile != NULL)
@@ -125,6 +125,13 @@ void CoverDownload()
         return;
 
     const char * writepath = choice == 1 ? Settings.covers_path : choice == 2 ? Settings.covers2d_path : Settings.disc_path;
+    const char * downloadURL = choice == 1 ? serverURL3D : choice == 2 ? serverURL2D : NULL;
+    const char * progressTitle = choice != 3 ? tr("Downloading covers") : NULL;
+    if(choice == 3)
+    {
+        downloadURL = (Settings.discart == 0 || Settings.discart == 2) ? serverURLOrigDiscs : serverURLCustomDiscs;
+        progressTitle = (Settings.discart == 0 || Settings.discart == 2) ? tr("Downloading original Discarts") : tr("Downloading custom Discarts");
+    }
 
     std::vector<std::string> MissingFilesList;
     GetMissingGameFiles(writepath, ".png", MissingFilesList);
@@ -148,24 +155,23 @@ void CoverDownload()
 
     AbortRequested = false;
 
-    const char * downloadURL = choice == 1 ? serverURL3D : choice == 2 ? serverURL2D : NULL;
+    int FileSkipped = CoverDownloadWithProgress(downloadURL, progressTitle, writepath, MissingFilesList);
 
-    if(choice == 3)
-    {
-        downloadURL = (Settings.discart == 0 || Settings.discart == 2) ? serverURLOrigDiscs : serverURLCustomDiscs;
-    }
-
-    int FileSkipped = CoverDownloadWithProgress(downloadURL, writepath, MissingFilesList);
-
-    if(choice == 3 && FileSkipped > 0)
+    if(choice == 3 && FileSkipped > 0 && Settings.discart > 1)
     {
         if(downloadURL == serverURLOrigDiscs)
+        {
+            progressTitle = tr("Trying custom Discarts");
             downloadURL = serverURLCustomDiscs;
+        }
         else
+        {
+            progressTitle = tr("Trying original Discarts");
             downloadURL = serverURLOrigDiscs;
+        }
 
         GetMissingGameFiles(writepath, ".png", MissingFilesList);
-        FileSkipped = CoverDownloadWithProgress(downloadURL, writepath, MissingFilesList);
+        FileSkipped = CoverDownloadWithProgress(downloadURL, progressTitle, writepath, MissingFilesList);
     }
 
     if (FileSkipped == 0)

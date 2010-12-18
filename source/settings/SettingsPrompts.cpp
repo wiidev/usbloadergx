@@ -3,6 +3,7 @@
 #include <string.h>
 
 #include "language/gettext.h"
+#include "language/UpdateLanguage.h"
 #include "prompts/PromptWindows.h"
 #include "prompts/ProgressWindow.h"
 #include "libwiigui/gui.h"
@@ -100,7 +101,7 @@ int MenuLanguageSelect()
     trigB.SetButtonOnlyTrigger( -1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B );
 
     char fullpath[100];
-    DirList Dir( Settings.languagefiles_path );
+    DirList Dir(Settings.languagefiles_path, ".lang");
 
     if ( !strcmp( "", Settings.language_path ) )
     {
@@ -254,51 +255,10 @@ int MenuLanguageSelect()
             choice = WindowPrompt( tr( "Update all Language Files" ), tr( "Do you wish to update/download all language files?" ), tr( "OK" ), tr( "Cancel" ) );
             if ( choice == 1 )
             {
-
-                bool network = true;
-                if ( !IsNetworkInit() )
+                if (IsNetworkInit() || NetworkInitPrompt())
                 {
-                    network = NetworkInitPrompt();
-                }
-
-                if ( network )
-                {
-                    const char URL[60] = "http://usbloader-gui.googlecode.com/svn/trunk/Languages/";
-                    char fullURL[300];
-                    FILE *pfile;
-
-                    URL_List LinkList( URL );
-                    int listsize = LinkList.GetURLCount();
-
-                    CreateSubfolder( Settings.languagefiles_path );
-
-                    for ( int i = 0; i < listsize; i++ )
-                    {
-
-                        ShowProgress( tr( "Updating Language Files:" ), 0, LinkList.GetURL( i ), i, listsize - 1 );
-
-                        if ( strcasecmp( ".lang", strrchr( LinkList.GetURL( i ), '.' ) ) == 0 )
-                        {
-
-                            snprintf( fullURL, sizeof( fullURL ), "%s%s", URL, LinkList.GetURL( i ) );
-
-                            struct block file = downloadfile( fullURL );
-
-                            if ( file.data && file.size )
-                            {
-                                char filepath[300];
-
-                                snprintf( filepath, sizeof( filepath ), "%s%s", Settings.languagefiles_path, LinkList.GetURL( i ) );
-                                pfile = fopen( filepath, "wb" );
-                                fwrite( file.data, 1, file.size, pfile );
-                                fclose( pfile );
-
-                            }
-
-                            free( file.data );
-                        }
-                    }
-                    ProgressStop();
+                    if(DownloadAllLanguageFiles() > 0)
+                        WindowPrompt(tr("Update successfull"), 0, tr("OK"));
                     returnhere = 1;
                     break;
                 }
@@ -354,7 +314,9 @@ int MenuLanguageSelect()
             {
                 char newLangPath[150];
                 snprintf( Settings.languagefiles_path, sizeof( Settings.languagefiles_path ), "%s", Dir.GetFilepath(ret));
-                snprintf( newLangPath, sizeof( newLangPath ), "%s/%s", Dir.GetFilepath(ret), Dir.GetFilename( ret ) );
+                char * ptr = strrchr(Settings.languagefiles_path, '/');
+                if(ptr) ptr[1] = 0;
+                snprintf( newLangPath, sizeof( newLangPath ), "%s", Dir.GetFilepath(ret));
                 if ( !CheckFile( newLangPath ) )
                 {
                     WindowPrompt( tr( "File not found." ), tr( "Loading standard language." ), tr( "OK" ) );

@@ -39,6 +39,13 @@
 #include "FileDownloader.h"
 #include "settings/CSettings.h"
 #include "settings/GameTitles.h"
+#include "language/gettext.h"
+#include "language/UpdateLanguage.h"
+#include "homebrewboot/BootHomebrew.h"
+#include "utils/StringTools.h"
+#include "utils/ShowError.h"
+#include "prompts/PromptWindows.h"
+#include "FileOperations/fileops.h"
 #include "xml/WiiTDB.hpp"
 
 static const char * WiiTDB_URL = "http://wiitdb.com/wiitdb.zip";
@@ -153,4 +160,176 @@ int UpdateWiiTDB()
     GameTitles.LoadTitlesFromWiiTDB(Settings.titlestxt_path);
 
     return (result ? filesize : -1);
+}
+
+static void UpdateIconPng()
+{
+    char iconpath[200];
+    struct block file = downloadfile("http://www.techjawa.com/usbloadergx/icon.png");
+    if (file.data != NULL)
+    {
+        snprintf(iconpath, sizeof(iconpath), "%sicon.png", Settings.update_path);
+        FILE * pfile = fopen(iconpath, "wb");
+        if(pfile)
+        {
+            fwrite(file.data, 1, file.size, pfile);
+            fclose(pfile);
+        }
+        free(file.data);
+    }
+}
+
+static void UpdateMetaXml()
+{
+    char xmlpath[200];
+    struct block file = downloadfile("http://www.techjawa.com/usbloadergx/meta.file");
+    if (file.data != NULL)
+    {
+        snprintf(xmlpath, sizeof(xmlpath), "%smeta.xml", Settings.update_path);
+        FILE *pfile = fopen(xmlpath, "wb");
+        if(pfile)
+        {
+            fwrite(file.data, 1, file.size, pfile);
+            fclose(pfile);
+        }
+        free(file.data);
+    }
+}
+
+static int ApplicationDownload(int newrev)
+{
+    bool update_error = false;
+    char tmppath[250];
+
+    #ifdef FULLCHANNEL
+        const char * DownloadURL = "http://www.techjawa.com/usbloadergx/ULNR.wad";
+        snprintf(tmppath, sizeof(tmppath), "%s/ULNR.wad", Settings.BootDevice);
+    #else
+        char realpath[250];
+        snprintf(realpath, sizeof(realpath), "%sboot.dol", Settings.update_path);
+        const char * DownloadURL = "http://www.techjawa.com/usbloadergx/boot.dol";
+        snprintf(tmppath, sizeof(tmppath), "%sboot.tmp", Settings.update_path);
+    #endif
+
+    int update_choice = WindowPrompt(fmt("Rev%i %s.", newrev, tr( "available" )), tr( "How do you want to update?" ), tr( "Update DOL" ), tr( "Update All" ), tr( "Cancel" ));
+    if (update_choice == 0)
+        return 0;
+
+    int ret = DownloadFileToPath(DownloadURL, tmppath, false);
+    if(ret < 1024*1024)
+    {
+        remove(tmppath);
+        WindowPrompt(tr("Failed updating"), tr("Error while downloding file"), tr( "OK" ));
+        if(update_choice == 1)
+            return -1;
+
+        update_error = true;
+    }
+    else
+    {
+    #ifdef FULLCHANNEL
+        FILE * wadFile = fopen(realpath, "rb");
+        if(!wadFile)
+        {
+            update_error = true;
+            WindowPrompt(tr("Failed updating"), tr("Error opening downloaded file"), tr( "OK" ));
+            return -1;
+        }
+
+        int error = Wad_Install( wadFile );
+        if(error)
+        {
+            update_error = true;
+            ShowError(tr( "The wad installation failed with error %i" ), error);
+        }
+        else
+            WindowPrompt(tr( "Success" ), tr( "The wad file was installed" ), tr( "OK" ));
+
+        RemoveFile(realpath);
+    #else
+        gprintf("%s\n%s\n", realpath, tmppath);
+        RemoveFile(realpath);
+        if(!RenameFile(tmppath, realpath))
+            update_error = true;
+    #endif
+    }
+
+    if (update_choice == 2)
+    {
+        UpdateIconPng();
+        UpdateMetaXml();
+        UpdateWiiTDB();
+        DownloadAllLanguageFiles();
+    }
+
+    if(update_error)
+    {
+        ShowError(tr( "Error while updating USB Loader GX." ));
+        return -1;
+    }
+
+    if (update_choice > 0)
+    {
+        WindowPrompt(tr( "Restarting..." ), tr( "Successfully Updated thanks to www.techjawa.com" ), 0, 0, 0, 0, 150);
+        #ifdef FULLCHANNEL
+            ExitApp();
+            WII_Initialize();
+            WII_LaunchTitle(TITLE_ID( 0x00010001, 0x554c4e52 ));
+        #else
+            BootHomebrew(realpath);
+        #endif
+    }
+
+    return 0;
+}
+
+int UpdateApp()
+{
+    if (!IsNetworkInit() && !NetworkInitPrompt())
+    {
+        WindowPrompt(tr("Error !"), tr("Could not initialize network!"), tr("OK"));
+        return -1;
+    }
+
+    if (!CreateSubfolder(Settings.update_path))
+    {
+        WindowPrompt(tr("Error !"), tr("Can't create directory"), tr("OK"));
+        return -1;
+    }
+
+    int choice = WindowPrompt(tr( "What do you want to update?" ), 0, "USB Loader GX", tr( "WiiTDB Files" ), tr( "Language File" ), tr( "Cancel" ));
+    if(choice == 0)
+        return -1;
+
+    if(choice == 1)
+    {
+        int newrev = CheckUpdate();
+        if (newrev < 0)
+        {
+            WindowPrompt(tr( "No new updates." ), 0, tr( "OK" ));
+            return 0;
+        }
+
+        return ApplicationDownload(newrev);
+    }
+    else if (choice == 2)
+    {
+        if(UpdateWiiTDB() < 0)
+        {
+            WindowPrompt(fmt("%s", tr( "WiiTDB is up to date." )), 0, tr("OK"));
+            return 1;
+        }
+        else
+        {
+            WindowPrompt(tr( "Successfully Updated" ), 0, tr( "OK" ));
+            return 1;
+        }
+    }
+    else if (choice == 3)
+    {
+        if(UpdateLanguageFiles() > 0)
+            WindowPrompt(tr( "Successfully Updated" ), 0, tr( "OK" ));
+    }
+
+    return 1;
 }

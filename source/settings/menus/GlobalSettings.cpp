@@ -24,6 +24,7 @@
 #include "GlobalSettings.hpp"
 #include "themes/CTheme.h"
 #include "prompts/PromptWindows.h"
+#include "network/update.h"
 #include "language/gettext.h"
 #include "GUISettingsMenu.hpp"
 #include "GameLoadSM.hpp"
@@ -122,7 +123,7 @@ void GlobalSettings::CreateSettingsMenu(int menuNr)
             HideMenu();
             Remove(backBtn);
             ResumeGui();
-            int ret = ProgressUpdateWindow();
+            int ret = UpdateApp();
             if (ret < 0)
                 WindowPrompt(tr( "Update failed" ), 0, tr( "OK" ));
             Append(backBtn);
