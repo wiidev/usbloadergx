@@ -2,6 +2,7 @@
 #include "GameTitles.h"
 #include "CSettings.h"
 #include "usbloader/GameList.h"
+#include "xml/xml.h"
 #include "xml/WiiTDB.hpp"
 
 CGameTitles GameTitles;
@@ -61,6 +62,20 @@ const char * CGameTitles::GetTitle(const struct discHdr *header)
     return header->title;
 }
 
+int CGameTitles::GetParentalRating(const char * id)
+{
+    if(!id)
+        return -1;
+
+    for(u32 i = 0; i < TitleList.size(); ++i)
+    {
+        if(strncasecmp(id, TitleList[i].GameID, 6) == 0)
+            return TitleList[i].ParentalRating;
+    }
+
+    return -1;
+}
+
 void CGameTitles::SetDefault()
 {
     TitleList.clear();
@@ -85,10 +100,25 @@ void CGameTitles::LoadTitlesFromWiiTDB(const char * path)
 
     WiiTDB XML_DB(Filepath.c_str());
     XML_DB.SetLanguageCode(Settings.db_language);
+    int Rating;
+    std::string RatValTxt;
 
     for(int i = 0; i < gameList.GameCount(); ++i)
     {
-        if(XML_DB.GetTitle((const char *) gameList[i]->id, Title))
-            this->SetGameTitle(gameList[i]->id, Title.c_str());
+        if(!XML_DB.GetTitle((const char *) gameList[i]->id, Title))
+            continue;
+
+        this->SetGameTitle(gameList[i]->id, Title.c_str());
+
+        TitleList[TitleList.size()-1].ParentalRating = -1;
+
+        Rating = XML_DB.GetRating((const char *) gameList[i]->id);
+        if(Rating < 0)
+            continue;
+
+        if(!XML_DB.GetRatingValue((const char *) gameList[i]->id, RatValTxt))
+            continue;
+
+        TitleList[TitleList.size()-1].ParentalRating = ConvertRating(RatValTxt.c_str(), WiiTDB::RatingToString(Rating), "PEGI");
     }
 }

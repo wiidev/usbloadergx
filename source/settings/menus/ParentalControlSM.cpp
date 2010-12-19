@@ -26,6 +26,7 @@
 #include "settings/CSettings.h"
 #include "prompts/PromptWindows.h"
 #include "language/gettext.h"
+#include "utils/PasswordCheck.h"
 
 static const char * LockModeText[] =
 {
@@ -101,41 +102,27 @@ int ParentalControlSM::GetMenuInternal()
     //! Settings: Console
     if (ret == ++Idx)
     {
-        if (strcmp(Settings.unlockCode, "") == 0 && !Settings.Parental.enabled)
+        if (!Settings.godmode)
         {
-            Settings.godmode = !Settings.godmode;
-        }
-        else if (!Settings.godmode)
-        {
-            char entered[20];
-            memset(entered, 0, 20);
-
             //password check to unlock Install,Delete and Format
             SetState(STATE_DISABLED);
-            int result = Settings.Parental.enabled == 0 ? OnScreenKeyboard(entered, 20, 0) : OnScreenNumpad(entered, 5);
+            int result = PasswordCheck(Settings.unlockCode);
             SetState(STATE_DEFAULT);
-            if (result == 1)
+            if (result > 0)
             {
-                if (strcmp(entered, Settings.unlockCode) == 0 || !memcmp(entered, Settings.Parental.pin, 4)) //if password correct
-                {
-                    WindowPrompt(
-                            tr( "Correct Password" ),
-                            tr( "All the features of USB Loader GX are unlocked." ),
-                            tr( "OK" ));
-                    Settings.godmode = 1;
-                }
-                else
-                    WindowPrompt(tr( "Wrong Password" ), tr( "USB Loader GX is protected" ), tr( "OK" ));
+                if(result == 1)
+                    WindowPrompt( tr( "Correct Password" ), tr( "All the features of USB Loader GX are unlocked." ), tr( "OK" ));
+                Settings.godmode = 1;
             }
+            else if(result < 0)
+                WindowPrompt(tr( "Wrong Password" ), tr( "USB Loader GX is protected" ), tr( "OK" ));
         }
         else
         {
-            int choice = WindowPrompt(tr( "Lock Console" ), tr( "Are you sure?" ),
-                    tr( "Yes" ), tr( "No" ));
+            int choice = WindowPrompt(tr( "Lock Console" ), tr( "Are you sure?" ), tr( "Yes" ), tr( "No" ));
             if (choice == 1)
             {
-                WindowPrompt(tr( "Console Locked" ), tr( "USB Loader GX is protected" ),
-                        tr( "OK" ));
+                WindowPrompt(tr( "Console Locked" ), tr( "USB Loader GX is protected" ), tr( "OK" ));
                 Settings.godmode = 0;
             }
         }

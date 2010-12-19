@@ -13,26 +13,9 @@
 
 extern char game_partition[6];
 
-static char * trimcopy(char *dest, char *src, int size)
-{
-    int len;
-    while (*src == ' ')
-        src++;
-    len = strlen(src);
-    // trim trailing " \r\n"
-    while (len > 0 && strchr(" \r\n", src[len - 1]))
-        len--;
-    if (len >= size) len = size - 1;
-    strlcpy(dest, src, len + 1);
-    return dest;
-}
 /* config */
-static bool xmldebug = false;
 static char xmlcfg_filename[100] = "wiitdb";
 static int xmlmaxsize = 1572864;
-
-struct gameXMLinfo gameinfo;
-struct gameXMLinfo gameinfo_reset;
 
 static char langlist[11][22] = { { "Console Default" }, { "Japanese" }, { "English" }, { "German" }, { "French" }, {
         "Spanish" }, { "Italian" }, { "Dutch" }, { "S. Chinese" }, { "T. Chinese" }, { "Korean" } };
@@ -128,7 +111,6 @@ bool OpenXMLFile(char *filename)
 
     if (xml_loaded) return false;
 
-    gameinfo = gameinfo_reset;
     nodedata = NULL;
     nodetree = NULL;
     nodeid = NULL;
@@ -245,40 +227,70 @@ char ConvertRatingToIndex(char *ratingtext)
     return type;
 }
 
-void ConvertRating(char *ratingvalue, char *fromrating, const char *torating, char *destvalue, int destsize)
+int ConvertRating(const char *ratingvalue, const char *fromrating, const char *torating)
 {
     if (!strcmp(fromrating, torating))
     {
-        strlcpy(destvalue, ratingvalue, destsize);
-        return;
+        int ret = atoi(ratingvalue);
+        if(ret < 7)
+            return 0;
+        else if(ret < 12)
+            return 1;
+        else if(ret < 16)
+            return 2;
+        else if(ret < 18)
+            return 3;
+        else
+            return 4;
     }
 
-    strcpy(destvalue, "");
     int type = -1;
     int desttype = -1;
 
-    type = ConvertRatingToIndex(fromrating);
+    type = ConvertRatingToIndex((char *) fromrating);
     desttype = ConvertRatingToIndex((char *) torating);
-    if (type == -1 || desttype == -1) return;
+    if (type == -1 || desttype == -1) return -1;
 
     /* rating conversion table */
     /* the list is ordered to pick the most likely value first: */
     /* EC and AO are less likely to be used so they are moved down to only be picked up when converting ESRB to PEGI or CERO */
     /* the conversion can never be perfect because ratings can differ between regions for the same game */
-    char ratingtable[12][3][5] = { { { "A" }, { "E" }, { "3" } }, { { "A" }, { "E" }, { "4" } }, { { "A" }, { "E" }, {
-            "6" } }, { { "A" }, { "E" }, { "7" } }, { { "A" }, { "EC" }, { "3" } }, { { "A" }, { "E10+" }, { "7" } }, {
-            { "B" }, { "T" }, { "12" } }, { { "D" }, { "M" }, { "18" } }, { { "D" }, { "M" }, { "16" } }, { { "C" }, {
-            "T" }, { "16" } }, { { "C" }, { "T" }, { "15" } }, { { "Z" }, { "AO" }, { "18" } }, };
+    char ratingtable[12][3][5] =
+    {
+        { { "A" }, { "E" }, { "3" } },
+        { { "A" }, { "E" }, { "4" } },
+        { { "A" }, { "E" }, { "6" } },
+        { { "A" }, { "E" }, { "7" } },
+        { { "A" }, { "EC" }, { "3" } },
+        { { "A" }, { "E10+" }, { "7" } },
+        { { "B" }, { "T" }, { "12" } },
+        { { "D" }, { "M" }, { "18" } },
+        { { "D" }, { "M" }, { "16" } },
+        { { "C" }, { "T" }, { "16" } },
+        { { "C" }, { "T" }, { "15" } },
+        { { "Z" }, { "AO" }, { "18" } },
+    };
 
     int i;
     for (i = 0; i <= 11; i++)
     {
         if (!strcmp(ratingtable[i][type], ratingvalue))
         {
-            strlcpy(destvalue, ratingtable[i][desttype], destsize);
-            return;
+            int ret = atoi(ratingtable[i][desttype]);
+            if(ret < 7)
+                return 0;
+            else if(ret < 12)
+                return 1;
+            else if(ret < 16)
+                return 2;
+            else if(ret < 18)
+                return 3;
+            else
+                return 4;
         }
     }
+
+    return -1;
 }
 
 void LoadTitlesFromXML(char *langtxt, bool forcejptoen)
@@ -388,388 +400,6 @@ void GetPublisherFromGameid(char *idtxt, char *dest, int destsize)
     mxmlIndexDelete(nodeindextmp);
 }
 
-bool LoadGameInfoFromXML(char* gameid, char* langtxt)
-/* gameid: full game id */
-/* langtxt: "English","French","German" */
-{
-    bool exist = false;
-    if (!xml_loaded || nodedata == NULL) return exist;
-
-    // load game info using forced language, or game individual setting, or main language setting
-    char langcode[100] = "";
-    if (!strcmp(langtxt, "")) langtxt = GetLangSettingFromGame(gameid);
-    strlcpy(langcode, ConvertLangTextToCode(langtxt), sizeof(langcode));
-
-    /* reset all game info */
-    gameinfo = gameinfo_reset;
-
-    /* index all IDs */
-    nodeindex = mxmlIndexNew(nodedata, "id", NULL);
-    nodeid = mxmlIndexReset(nodeindex);
-    *element_text = 0;
-    /* search for game matching gameid */
-    while (1)
-    {
-        nodeid = mxmlIndexFind(nodeindex, "id", NULL);
-        if (nodeid != NULL)
-        {
-            get_nodetext(nodeid, element_text, sizeof(element_text));
-            if (!strcmp(element_text, gameid))
-            {
-                break;
-            }
-        }
-        else
-        {
-            break;
-        }
-    }
-
-    if (!strcmp(element_text, gameid))
-    {
-        /* text from elements */
-        strlcpy(gameinfo.id, element_text, sizeof(gameinfo.id));
-        GetTextFromNode(nodeid, nodedata, "region", NULL, NULL, MXML_NO_DESCEND, gameinfo.region,
-                sizeof(gameinfo.region));
-        GetTextFromNode(nodeid, nodedata, "version", NULL, NULL, MXML_NO_DESCEND, gameinfo.version,
-                sizeof(gameinfo.version));
-        GetTextFromNode(nodeid, nodedata, "genre", NULL, NULL, MXML_NO_DESCEND, gameinfo.genre, sizeof(gameinfo.genre));
-        GetTextFromNode(nodeid, nodedata, "developer", NULL, NULL, MXML_NO_DESCEND, gameinfo.developer,
-                sizeof(gameinfo.developer));
-        GetTextFromNode(nodeid, nodedata, "publisher", NULL, NULL, MXML_NO_DESCEND, gameinfo.publisher,
-                sizeof(gameinfo.publisher));
-        GetPublisherFromGameid(gameid, gameinfo.publisherfromid, sizeof(gameinfo.publisherfromid));
-
-        /* text from attributes */
-        GetTextFromNode(nodeid, nodedata, "date", "year", NULL, MXML_NO_DESCEND, gameinfo.year, sizeof(gameinfo.year));
-        GetTextFromNode(nodeid, nodedata, "date", "month", NULL, MXML_NO_DESCEND, gameinfo.month,
-                sizeof(gameinfo.month));
-        GetTextFromNode(nodeid, nodedata, "date", "day", NULL, MXML_NO_DESCEND, gameinfo.day, sizeof(gameinfo.day));
-        GetTextFromNode(nodeid, nodedata, "rating", "type", NULL, MXML_NO_DESCEND, gameinfo.ratingtype,
-                sizeof(gameinfo.ratingtype));
-        GetTextFromNode(nodeid, nodedata, "rating", "value", NULL, MXML_NO_DESCEND, gameinfo.ratingvalue,
-                sizeof(gameinfo.ratingvalue));
-        GetTextFromNode(nodeid, nodedata, "rom", "crc", NULL, MXML_NO_DESCEND, gameinfo.iso_crc,
-                sizeof(gameinfo.iso_crc));
-        GetTextFromNode(nodeid, nodedata, "rom", "md5", NULL, MXML_NO_DESCEND, gameinfo.iso_md5,
-                sizeof(gameinfo.iso_md5));
-        GetTextFromNode(nodeid, nodedata, "rom", "sha1", NULL, MXML_NO_DESCEND, gameinfo.iso_sha1,
-                sizeof(gameinfo.iso_sha1));
-
-        /* text from child elements */
-        nodefound = mxmlFindElement(nodeid, nodedata, "locale", "lang", "EN", MXML_NO_DESCEND);
-        if (nodefound != NULL)
-        {
-            GetTextFromNode(nodefound, nodedata, "title", NULL, NULL, MXML_DESCEND, gameinfo.title_EN,
-                    sizeof(gameinfo.title_EN));
-            GetTextFromNode(nodefound, nodedata, "synopsis", NULL, NULL, MXML_DESCEND, gameinfo.synopsis_EN,
-                    sizeof(gameinfo.synopsis_EN));
-        }
-        nodefound = mxmlFindElement(nodeid, nodedata, "locale", "lang", langcode, MXML_NO_DESCEND);
-        if (nodefound != NULL)
-        {
-            GetTextFromNode(nodefound, nodedata, "title", NULL, NULL, MXML_DESCEND, gameinfo.title,
-                    sizeof(gameinfo.title));
-            GetTextFromNode(nodefound, nodedata, "synopsis", NULL, NULL, MXML_DESCEND, gameinfo.synopsis,
-                    sizeof(gameinfo.synopsis));
-        }
-        // fall back to English title and synopsis if prefered language was not found
-        if (!strcmp(gameinfo.title, ""))
-        {
-            strlcpy(gameinfo.title, gameinfo.title_EN, sizeof(gameinfo.title));
-        }
-        if (!strcmp(gameinfo.synopsis, ""))
-        {
-            strlcpy(gameinfo.synopsis, gameinfo.synopsis_EN, sizeof(gameinfo.synopsis));
-        }
-
-        /* list locale lang attributes */
-        nodefound = mxmlFindElement(nodeid, nodedata, "locale", "lang", NULL, MXML_NO_DESCEND);
-        if (nodefound != NULL)
-        {
-            int incr = 0;
-            while (nodefound != NULL)
-            {
-                ++incr;
-                strlcpy(gameinfo.locales[incr], mxmlElementGetAttr(nodefound, "lang"), sizeof(gameinfo.locales[incr]));
-                nodefound = mxmlWalkNext(nodefound, nodedata, MXML_NO_DESCEND);
-                if (nodefound != NULL)
-                {
-                    nodefound = mxmlFindElement(nodefound, nodedata, "locale", "lang", NULL, MXML_NO_DESCEND);
-                }
-            }
-        }
-
-        /* unbounded child elements */
-        GetTextFromNode(nodeid, nodedata, "wi-fi", "players", NULL, MXML_NO_DESCEND, gameinfo.wifiplayers,
-                sizeof(gameinfo.wifiplayers));
-        nodefound = mxmlFindElement(nodeid, nodedata, "wi-fi", NULL, NULL, MXML_NO_DESCEND);
-        if (nodefound != NULL)
-        {
-            gameinfo.wifiCnt = 0;
-            nodeindextmp = mxmlIndexNew(nodefound, "feature", NULL);
-            nodeidtmp = mxmlIndexReset(nodeindextmp);
-            while (nodeidtmp != NULL)
-            {
-                nodeidtmp = mxmlIndexFind(nodeindextmp, "feature", NULL);
-                if (nodeidtmp != NULL)
-                {
-                    ++gameinfo.wifiCnt;
-                    GetTextFromNode(nodeidtmp, nodedata, "feature", NULL, NULL, MXML_DESCEND,
-                            gameinfo.wififeatures[gameinfo.wifiCnt], sizeof(gameinfo.wififeatures[gameinfo.wifiCnt]));
-                    gameinfo.wififeatures[gameinfo.wifiCnt][0] = toupper(
-                            (int) gameinfo.wififeatures[gameinfo.wifiCnt][0]);
-                    if (gameinfo.wifiCnt == XML_ELEMMAX) break;
-                }
-            }
-            mxmlIndexDelete(nodeindextmp); // placed after each mxmlIndexNew to prevent memory leak
-        }
-
-        nodefound = mxmlFindElement(nodeid, nodedata, "rating", NULL, NULL, MXML_NO_DESCEND);
-        if (nodefound != NULL)
-        {
-            gameinfo.descriptorCnt = 0;
-            nodeindextmp = mxmlIndexNew(nodefound, "descriptor", NULL);
-            nodeidtmp = mxmlIndexReset(nodeindextmp);
-            while (nodeidtmp != NULL)
-            {
-                nodeidtmp = mxmlIndexFind(nodeindextmp, "descriptor", NULL);
-                if (nodeidtmp != NULL)
-                {
-                    ++gameinfo.descriptorCnt;
-                    GetTextFromNode(nodeidtmp, nodedata, "descriptor", NULL, NULL, MXML_DESCEND,
-                            gameinfo.ratingdescriptors[gameinfo.descriptorCnt],
-                            sizeof(gameinfo.ratingdescriptors[gameinfo.descriptorCnt]));
-                    if (gameinfo.descriptorCnt == XML_ELEMMAX) break;
-                }
-            }
-            mxmlIndexDelete(nodeindextmp);
-        }
-
-        GetTextFromNode(nodeid, nodedata, "input", "players", NULL, MXML_NO_DESCEND, gameinfo.players,
-                sizeof(gameinfo.players));
-        nodefound = mxmlFindElement(nodeid, nodedata, "input", NULL, NULL, MXML_NO_DESCEND);
-        if (nodefound != NULL)
-        {
-            gameinfo.accessoryCnt = 0;
-            gameinfo.accessoryReqCnt = 0;
-            nodeindextmp = mxmlIndexNew(nodefound, "control", NULL);
-            nodeidtmp = mxmlIndexReset(nodeindextmp);
-            while (nodeidtmp != NULL)
-            {
-                nodeidtmp = mxmlIndexFind(nodeindextmp, "control", NULL);
-                if (nodeidtmp != NULL)
-                {
-                    if (!strcmp(mxmlElementGetAttr(nodeidtmp, "required"), "true") && gameinfo.accessoryReqCnt
-                            < XML_ELEMMAX)
-                    {
-                        ++gameinfo.accessoryReqCnt;
-                        strlcpy(gameinfo.accessoriesReq[gameinfo.accessoryReqCnt],
-                                mxmlElementGetAttr(nodeidtmp, "type"),
-                                sizeof(gameinfo.accessoriesReq[gameinfo.accessoryReqCnt]));
-                    }
-                    else if (gameinfo.accessoryCnt < XML_ELEMMAX)
-                    {
-                        ++gameinfo.accessoryCnt;
-                        strlcpy(gameinfo.accessories[gameinfo.accessoryCnt], mxmlElementGetAttr(nodeidtmp, "type"),
-                                sizeof(gameinfo.accessories[gameinfo.accessoryCnt]));
-                    }
-                }
-            }
-            mxmlIndexDelete(nodeindextmp);
-        }
-
-        /* convert rating value */
-        ConvertRating(gameinfo.ratingvalue, gameinfo.ratingtype, "CERO", gameinfo.ratingvalueCERO,
-                sizeof(gameinfo.ratingvalueCERO));
-        ConvertRating(gameinfo.ratingvalue, gameinfo.ratingtype, "ESRB", gameinfo.ratingvalueESRB,
-                sizeof(gameinfo.ratingvalueESRB));
-        ConvertRating(gameinfo.ratingvalue, gameinfo.ratingtype, "PEGI", gameinfo.ratingvaluePEGI,
-                sizeof(gameinfo.ratingvaluePEGI));
-
-        /* provide genre as an array: gameinfo.genresplit */
-        if (strcmp(gameinfo.genre, "") != 0)
-        {
-            gameinfo.genreCnt = 0;
-            const char *delimgenre = ",;";
-            char genretxt[200];
-            strlcpy(genretxt, gameinfo.genre, sizeof(genretxt));
-            char *splitresult;
-            splitresult = strtok(genretxt, delimgenre);
-            if (splitresult != NULL)
-            {
-                ++gameinfo.genreCnt;
-                trimcopy(splitresult, splitresult, strlen(splitresult) + 1);
-                strlcpy(gameinfo.genresplit[gameinfo.genreCnt], splitresult,
-                        sizeof(gameinfo.genresplit[gameinfo.genreCnt]));
-                gameinfo.genresplit[gameinfo.genreCnt][0] = toupper((int) gameinfo.genresplit[gameinfo.genreCnt][0]);
-                while (splitresult != NULL)
-                {
-                    splitresult = strtok(NULL, delimgenre);
-                    if (splitresult != NULL && strcmp(splitresult, "") != 0)
-                    {
-                        ++gameinfo.genreCnt;
-                        trimcopy(splitresult, splitresult, strlen(splitresult) + 1);
-                        strlcpy(gameinfo.genresplit[gameinfo.genreCnt], splitresult,
-                                sizeof(gameinfo.genresplit[gameinfo.genreCnt]));
-                        gameinfo.genresplit[gameinfo.genreCnt][0] = toupper(
-                                (int) gameinfo.genresplit[gameinfo.genreCnt][0]);
-                        if (gameinfo.genreCnt == XML_ELEMMAX) break;
-                    }
-                }
-            }
-
-        }
-
-        exist = true;
-    }
-    else
-    {
-        /*game not found */
-        exist = false;
-    }
-
-    // if game was not found or info is missing
-    // guess publisher from game id in case it is missing
-    if (!strcmp(gameinfo.publisher, ""))
-    {
-        GetPublisherFromGameid(gameid, gameinfo.publisherfromid, sizeof(gameinfo.publisherfromid));
-        strlcpy(gameinfo.publisher, gameinfo.publisherfromid, sizeof(gameinfo.publisher));
-    }
-
-    // if missing, get region from game ID
-    if (!strcmp(gameinfo.region, ""))
-    {
-        if (gameid[3] == 'E') strlcpy(gameinfo.region, "NTSC-U", sizeof(gameinfo.region));
-        if (gameid[3] == 'J') strlcpy(gameinfo.region, "NTSC-J", sizeof(gameinfo.region));
-        if (gameid[3] == 'W') strlcpy(gameinfo.region, "NTSC-J", sizeof(gameinfo.region));
-        if (gameid[3] == 'K') strlcpy(gameinfo.region, "NTSC-K", sizeof(gameinfo.region));
-        if (gameid[3] == 'P') strlcpy(gameinfo.region, "PAL", sizeof(gameinfo.region));
-        if (gameid[3] == 'D') strlcpy(gameinfo.region, "PAL", sizeof(gameinfo.region));
-        if (gameid[3] == 'F') strlcpy(gameinfo.region, "PAL", sizeof(gameinfo.region));
-        if (gameid[3] == 'I') strlcpy(gameinfo.region, "PAL", sizeof(gameinfo.region));
-        if (gameid[3] == 'S') strlcpy(gameinfo.region, "PAL", sizeof(gameinfo.region));
-        if (gameid[3] == 'H') strlcpy(gameinfo.region, "PAL", sizeof(gameinfo.region));
-        if (gameid[3] == 'U') strlcpy(gameinfo.region, "PAL", sizeof(gameinfo.region));
-        if (gameid[3] == 'X') strlcpy(gameinfo.region, "PAL", sizeof(gameinfo.region));
-        if (gameid[3] == 'Y') strlcpy(gameinfo.region, "PAL", sizeof(gameinfo.region));
-        if (gameid[3] == 'Z') strlcpy(gameinfo.region, "PAL", sizeof(gameinfo.region));
-    }
-
-    // free memory
-    mxmlIndexDelete(nodeindex);
-
-    return exist;
-}
-
-void PrintGameInfo(bool showfullinfo)
-{
-    if (showfullinfo)
-    {
-
-        //Con_Clear();
-
-        //printf("id: %s version: %s region: %s",gameinfo.id, gameinfo.version, gameinfo.region);
-        //printf("title: %s\n",gameinfo.title);
-        int i;
-        printf("languages:");
-        for (i = 1; strcmp(gameinfo.locales[i], "") != 0; i++)
-        {
-            printf(" %s", gameinfo.locales[i]);
-        }
-        printf("\n");
-        //printf("developer: %s\n",gameinfo.developer);
-        //printf("publisher: %s\n",gameinfo.publisher);
-        //printf("publisher from ID: %s\n",gameinfo.publisherfromid);
-        printf("year:%s month:%s day:%s\n", gameinfo.year, gameinfo.month, gameinfo.day);
-        printf("genre: %s\n", gameinfo.genre);
-        //printf("rating: %s %s (CERO: %s ESRB: %s PEGI: %s)\n",gameinfo.ratingtype, gameinfo.ratingvalue,
-        //       gameinfo.ratingvalueCERO,gameinfo.ratingvalueESRB,gameinfo.ratingvaluePEGI);
-        printf("content descriptors:");
-        for (i = 1; strcmp(gameinfo.wififeatures[i], "") != 0; i++)
-        {
-            printf(" %s", gameinfo.ratingdescriptors[i]);
-        }
-        printf("\n");
-        printf("players: %s online: %s\n", gameinfo.players, gameinfo.wifiplayers);
-        printf("online features:");
-        for (i = 1; strcmp(gameinfo.wififeatures[i], "") != 0; i++)
-        {
-            printf(" %s", gameinfo.wififeatures[i]);
-        }
-        printf("\n");
-        printf("required accessories:");
-        for (i = 1; strcmp(gameinfo.accessoriesReq[i], "") != 0; i++)
-        {
-            printf(" %s", gameinfo.accessoriesReq[i]);
-        }
-        printf("\n");
-        printf("accessories:");
-        for (i = 1; strcmp(gameinfo.accessories[i], "") != 0; i++)
-        {
-            printf(" %s", gameinfo.accessories[i]);
-        }
-        printf("\n");
-        //printf("iso_crc: %s iso_md5: %s\n",gameinfo.iso_crc,gameinfo.iso_md5);
-        //printf("iso_sha1: %s\n",gameinfo.iso_sha1);
-        //printf("synopsis: %s\n",gameinfo.synopsis);
-
-    }
-    else
-    {
-
-        char linebuf[1000] = "";
-
-        if (xmldebug)
-        {
-            //char xmltime[100];
-            //sprintf(xmltime,"%d",xmlloadtime);
-            //printf("xml load time: %s\n",xmltime);
-            /*
-             printf("xml forcelang: %s\n",CFG.db_lang);
-             printf("xml url: %s\n",CFG.db_url);
-             printf("xml file: %s\n",CFG.db_filename);
-             char xmljptoen[100];
-             sprintf(xmljptoen,"%d",CFG.db_JPtoEN);
-             printf("xml JPtoEN: %s\n",xmljptoen);
-             */
-            printf(MemInfo()); // guidebug
-        }
-
-        //printf("%s: ",gameidfull);
-        //printf("%s\n",gameinfo.title);
-        if (strcmp(gameinfo.year, "") != 0) snprintf(linebuf, sizeof(linebuf), "%s ", gameinfo.year);
-        if (strcmp(gameinfo.publisher, "") != 0) snprintf(linebuf, sizeof(linebuf), "%s%s", linebuf, gameinfo.publisher);
-        if (strcmp(gameinfo.developer, "") != 0 && strcmp(gameinfo.developer, gameinfo.publisher) != 0) snprintf(
-                linebuf, sizeof(linebuf), "%s / %s", linebuf, gameinfo.developer);
-        if (strlen(linebuf) >= 100)
-        {
-            char buffer[200] = "";
-            strlcpy(buffer, linebuf, 100);
-            strcat(buffer, "...");
-            snprintf(linebuf, sizeof(linebuf), "%s", buffer);
-        }
-        printf("%s\n", linebuf);
-        strcpy(linebuf, "");
-
-        if (strcmp(gameinfo.ratingvalue, "") != 0)
-        {
-            snprintf(linebuf, sizeof(linebuf), "rated %s", gameinfo.ratingvalue);
-            if (!strcmp(gameinfo.ratingtype, "PEGI")) snprintf(linebuf, sizeof(linebuf), "%s+ ", linebuf);
-            snprintf(linebuf, sizeof(linebuf), "%s ", linebuf);
-        }
-        if (strcmp(gameinfo.players, "") != 0)
-        {
-            snprintf(linebuf, sizeof(linebuf), "%sfor %s player", linebuf, gameinfo.players);
-            if (atoi(gameinfo.players) > 1) snprintf(linebuf, sizeof(linebuf), "%ss", linebuf);
-            if (atoi(gameinfo.wifiplayers) > 1) snprintf(linebuf, sizeof(linebuf), "%s (%s online)", linebuf,
-                    gameinfo.wifiplayers);
-        }
-        printf("%s\n", linebuf);
-        strcpy(linebuf, "");
-    }
-}
-
 char *MemInfo()
 {
     char linebuf[300] = "";
@@ -818,44 +448,4 @@ char * get_nodetext(mxml_node_t *node, char *buffer, int buflen) /* O - Text in 
     }
     *ptr = '\0';
     return (buffer);
-}
-
-int GetRatingForGame(char *gameid)
-{
-    int retval = -1;
-    if (!xml_loaded || nodedata == NULL) return -1;
-
-    /* index all IDs */
-    nodeindex = mxmlIndexNew(nodedata, "id", NULL);
-    nodeid = mxmlIndexReset(nodeindex);
-    *element_text = 0;
-    /* search for game matching gameid */
-    while (1)
-    {
-        nodeid = mxmlIndexFind(nodeindex, "id", NULL);
-        if (nodeid != NULL)
-        {
-            get_nodetext(nodeid, element_text, sizeof(element_text));
-            if (!strcmp(element_text, gameid))
-            {
-                break;
-            }
-        }
-        else
-        {
-            break;
-        }
-    }
-
-    if (!strcmp(element_text, gameid))
-    {
-        char type[5], value[5], dest[5];
-
-        GetTextFromNode(nodeid, nodedata, "rating", "type", NULL, MXML_NO_DESCEND, type, sizeof(type));
-        GetTextFromNode(nodeid, nodedata, "rating", "value", NULL, MXML_NO_DESCEND, value, sizeof(value));
-        ConvertRating(value, type, "PEGI", dest, sizeof(dest));
-
-        retval = atoi(dest);
-    }
-    return retval;
 }

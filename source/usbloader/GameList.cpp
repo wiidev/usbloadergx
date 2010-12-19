@@ -155,18 +155,12 @@ int GameList::FilterList(const wchar_t * gameFilter)
         }
 
         /* Rating based parental control method */
-        if (Settings.parentalcontrol == 0 && Settings.godmode == 0 && Settings.Parental.enabled == 1)
+        if (Settings.parentalcontrol != 4 && Settings.godmode == 0)
         {
             // Check game rating in WiiTDB, since the default Wii parental control setting is enabled
-            s32 rating = GetRatingForGame((char *) header->id);
-
-            if ((rating != -1 && rating > Settings.Parental.rating) ||
-                (GameConfig && rating == -1 &&
-                 CGameSettings::GetPartenalPEGI(GameConfig->parentalcontrol)
-                 > Settings.Parental.rating))
-            {
+            int rating = GameTitles.GetParentalRating((char *) header->id);
+            if (rating > Settings.parentalcontrol)
                 continue;
-            }
         }
 
         //! Per game lock method

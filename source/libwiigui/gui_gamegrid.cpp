@@ -7,18 +7,19 @@
  ***************************************************************************/
 
 #include "gui.h"
-#include "../wpad.h"
+#include "wpad.h"
 
 #include <unistd.h>
 #include "gui_gamegrid.h"
 #include "gui_image_async.h"
+#include "libwiigui/LoadCoverImage.h"
 #include "usbloader/GameList.h"
 #include "settings/GameTitles.h"
-#include "../settings/CSettings.h"
+#include "settings/CSettings.h"
 #include "themes/CTheme.h"
-#include "../prompts/PromptWindows.h"
-#include "../language/gettext.h"
-#include "../menu.h"
+#include "prompts/PromptWindows.h"
+#include "language/gettext.h"
+#include "menu.h"
 #include "fatmounter.h"
 
 #include <string.h>
@@ -206,23 +207,10 @@ GuiGameGrid::GuiGameGrid(int w, int h, const char *themePath, const u8 *imagebg,
 {
     width = w;
     height = h;
-    //  gameCnt = count;            will be set later in Reload
-    //  gameList = l;               will be set later in Reload
-    //  listOffset = 0;             will be set later in Reload
-    //  goLeft = 0;                 will be set later in Reload
-    //  goRight = 0;                will be set later in Reload
 
     selectable = true;
     focus = 1; // allow focus
-    //  selectedItem = -1;          will be set later in Reload
-    //  clickedItem = -1;           will be set later in Reload
-    /*          will be set later in Reload
-     rows = Settings.gridRows;
-     if ((count<45)&&(rows==3))rows=2;
-     if ((count<18)&&(rows==2))rows=1;
 
-     pagesize = ROWS2PAGESIZE(rows);
-     */
     trigA = new GuiTrigger;
     trigA->SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
     trigL = new GuiTrigger;
@@ -274,10 +262,6 @@ GuiGameGrid::GuiGameGrid(int w, int h, const char *themePath, const u8 *imagebg,
 
     // Page-Stuff
     gameIndex = NULL;
-    titleTT = NULL;
-    //  cover       = NULL;
-    coverImg = NULL;
-    game = NULL;
 
     Reload(Settings.gridRows, 0);
 }
@@ -301,17 +285,22 @@ GuiGameGrid::~GuiGameGrid()
     delete trig1;
     delete trig2;
 
-    for (int i = pagesize - 1; i >= 0; i--)
-    {
-        delete game[i];
-        delete coverImg[i];
-        delete titleTT[i];
-    }
+    GuiImageAsync::ClearQueue();
 
-    delete[] gameIndex;
-    delete[] game;
-    delete[] coverImg;
-    delete[] titleTT;
+    for (u32 i = 0; i < game.size(); ++i)
+        delete game[i];
+
+    for (u32 i = 0; i < coverImg.size(); ++i)
+        delete coverImg[i];
+
+    for (u32 i = 0; i < titleTT.size(); ++i)
+        delete titleTT[i];
+
+    if(gameIndex)
+        delete [] gameIndex;
+    game.clear();
+    coverImg.clear();
+    titleTT.clear();
 }
 
 void GuiGameGrid::SetFocus(int f)
@@ -447,7 +436,6 @@ void GuiGameGrid::Draw()
  */
 void GuiGameGrid::ChangeRows(int n)
 {
-    LOCK( this );
     if (n != rows) Reload(n, -1);
 }
 
@@ -489,10 +477,7 @@ void GuiGameGrid::Update(GuiTrigger * t)
 
         if (btnLeft->GetState() == STATE_CLICKED)
         {
-            WPAD_ScanPads();
-            u16 buttons = 0;
-            for (int i = 0; i < 4; i++)
-                buttons |= WPAD_ButtonsHeld(i);
+            u32 buttons = t->wpad.btns_h;
             if (!((buttons & WPAD_BUTTON_A) || (buttons & WPAD_BUTTON_MINUS) || t->Left()))
             {
                 btnLeft->ResetState();
@@ -505,10 +490,7 @@ void GuiGameGrid::Update(GuiTrigger * t)
         }
         else if (btnRight->GetState() == STATE_CLICKED)
         {
-            WPAD_ScanPads();
-            u16 buttons = 0;
-            for (int i = 0; i < 4; i++)
-                buttons |= WPAD_ButtonsHeld(i);
+            u32 buttons = t->wpad.btns_h;
             if (!((buttons & WPAD_BUTTON_A) || (buttons & WPAD_BUTTON_PLUS) || t->Right()))
             {
                 btnRight->ResetState();
@@ -721,25 +703,24 @@ void GuiGameGrid::Reload(int Rows, int ListOffset)
 {
     LOCK( this );
 
+    //Prevent to wait before all images are loaded before we can delete them
+    GuiImageAsync::ClearQueue();
+
     // CleanUp
-    if (game) for (int i = pagesize - 1; i >= 0; i--)
+    for (u32 i = 0; i < game.size(); ++i)
         delete game[i];
 
-    if (coverImg) for (int i = pagesize - 1; i >= 0; i--)
+    for (u32 i = 0; i < coverImg.size(); ++i)
         delete coverImg[i];
 
-    //  if(cover)
-    //      for(int i=pagesize-1; i>=0; i--)
-    //          delete cover[i];
-
-    if (titleTT) for (int i = pagesize - 1; i >= 0; i--)
+    for (u32 i = 0; i < titleTT.size(); ++i)
         delete titleTT[i];
 
-    delete[] gameIndex;
-    delete[] game;
-    delete[] coverImg;
-    //  delete [] cover;
-    delete[] titleTT;
+    if(gameIndex)
+        delete [] gameIndex;
+    game.clear();
+    coverImg.clear();
+    titleTT.clear();
 
     goLeft = 0;
     goRight = 0;
@@ -759,10 +740,9 @@ void GuiGameGrid::Reload(int Rows, int ListOffset)
 
     // Page-Stuff
     gameIndex = new int[pagesize];
-    titleTT = new GuiTooltip *[pagesize];
-    //  cover       = new GuiImageData *[pagesize];
-    coverImg = new GuiImageAsync *[pagesize];
-    game = new GuiButton *[pagesize];
+    titleTT.resize(pagesize);
+    coverImg.resize(pagesize);
+    game.resize(pagesize);
 
     int wsi = Settings.widescreen ? 0 : 1;
     int (*Pos)[2][2] = VALUE4ROWS( rows, Pos1, Pos2, Pos3 );
@@ -799,8 +779,7 @@ void GuiGameGrid::Reload(int Rows, int ListOffset)
         coverImg[i] = NULL;
         if (gameIndex[i] != -1)
         {
-            coverImg[i] = new GuiImageAsync(GameGridLoadCoverImage, gameList[gameIndex[i]], sizeof(struct discHdr),
-                    &noCover);
+            coverImg[i] = new GuiImageAsync(GameGridLoadCoverImage, gameList[gameIndex[i]], sizeof(struct discHdr), &noCover);
             if (coverImg[i])
             {
                 coverImg[i]->SetWidescreen(Settings.widescreen);

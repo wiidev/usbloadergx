@@ -7,17 +7,18 @@
  ***************************************************************************/
 
 #include "gui.h"
-#include "../wpad.h"
-#include "../menu.h"
+#include "wpad.h"
+#include "menu.h"
 
 #include <unistd.h>
 #include "gui_image_async.h"
 #include "gui_gamecarousel.h"
 #include "usbloader/GameList.h"
 #include "settings/GameTitles.h"
-#include "../settings/CSettings.h"
+#include "settings/CSettings.h"
+#include "libwiigui/LoadCoverImage.h"
 #include "themes/CTheme.h"
-#include "../main.h"
+#include "main.h"
 
 #include <string.h>
 #include <math.h>
@@ -108,8 +109,8 @@ GuiGameCarousel::GuiGameCarousel(int w, int h, const char *themePath, const u8 *
     gamename->SetMaxWidth(280, DOTTED);
 
     gameIndex = new int[pagesize];
-    game = new GuiButton *[pagesize];
-    coverImg = new GuiImageAsync *[pagesize];
+    game.resize(pagesize);
+    coverImg.resize(pagesize);
 
     for (int i = 0; i < pagesize; i++)
     {
@@ -163,14 +164,14 @@ GuiGameCarousel::~GuiGameCarousel()
     delete trigMinus;
     delete gamename;
 
-    for (int i = 0; i < pagesize; i++)
-    {
+    GuiImageAsync::ClearQueue();
+
+    for (u32 i = 0; i < game.size(); ++i)
         delete coverImg[i];
+    for (u32 i = 0; i < game.size(); ++i)
         delete game[i];
-    }
+
     delete[] gameIndex;
-    delete[] coverImg;
-    delete[] game;
 
 }
 

@@ -102,7 +102,7 @@ s32 IosLoader::LoadGameCios(s32 ios)
 
     // Remount devices after reloading IOS.
     SDCard_Init();
-    USBDevice_Init();
+    USBDevice_Init_Loop();
     Disc_Init();
 
     return ret;

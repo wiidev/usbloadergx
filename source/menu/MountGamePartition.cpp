@@ -118,7 +118,7 @@ int MountGamePartition(bool ShowGUI)
     s32 wbfsinit = MountWBFS(ShowGUI);
     if (wbfsinit < 0)
     {
-        WindowPrompt(tr( "Error !" ), tr( "USB Device not found" ), tr( "OK" ));
+        if(ShowGUI) WindowPrompt(tr( "Error !" ), tr( "USB Device not found" ), tr( "OK" ));
         Sys_LoadMenu();
     }
 

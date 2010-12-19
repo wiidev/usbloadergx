@@ -380,7 +380,7 @@ s32 Partition_GetList(u32 device, PartList *plist)
         //if (!part_is_data(entry->type)) continue;
         if (!Device_ReadSectors(device, entry->sector, 1, buf)) continue;
         pinfo->fs_type = get_fs_type((u8 *) buf);
-        if(entry->type == 0x83) pinfo->fs_type = FS_TYPE_EXT;
+        if(entry->type == 0x83 && pinfo->fs_type == FS_TYPE_UNK) pinfo->fs_type = FS_TYPE_EXT;
         if (pinfo->fs_type == FS_TYPE_WBFS)
         {
             // multiple wbfs on sdhc not supported

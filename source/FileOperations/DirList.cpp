@@ -125,7 +125,7 @@ void DirList::AddEntrie(const char * folderpath, const char * filename, u64 file
 
     FileInfo.resize(pos+1);
 
-    FileInfo[pos].FilePath = new (std::nothrow) char[strlen(folderpath)+strlen(filename)+1];
+    FileInfo[pos].FilePath = new (std::nothrow) char[strlen(folderpath)+strlen(filename)+2];
     if(FileInfo[pos].FilePath)
         sprintf(FileInfo[pos].FilePath, "%s/%s", folderpath, filename);
     FileInfo[pos].FileSize = filesize;

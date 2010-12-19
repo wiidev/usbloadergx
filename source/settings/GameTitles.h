@@ -10,6 +10,7 @@ typedef struct _GameTitle
 {
     char GameID[7];
     std::string Title;
+    int ParentalRating;
 
 } GameTitle;
 
@@ -27,6 +28,9 @@ class CGameTitles
         const char * GetTitle(const u8 * id) { return GetTitle((const char *) id); };
         //! Overload
         const char * GetTitle(const struct discHdr *header);
+
+        //! Get game parental rating
+        int GetParentalRating(const char * id);
 
         //! Load Game Titles from WiiTDB
         void LoadTitlesFromWiiTDB(const char * path);

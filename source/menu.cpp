@@ -197,58 +197,6 @@ void ExitGUIThreads()
 }
 
 /****************************************************************************
- * LoadCoverImage
- ***************************************************************************/
-GuiImageData *LoadCoverImage(struct discHdr *header, bool Prefere3D, bool noCover)
-{
-    if (!header) return NULL;
-    GuiImageData *Cover = NULL;
-    char ID[4];
-    char IDfull[7];
-    char Path[100];
-    bool flag = Prefere3D;
-
-    snprintf(ID, sizeof(ID), "%c%c%c", header->id[0], header->id[1], header->id[2]);
-    snprintf(IDfull, sizeof(IDfull), "%s%c%c%c", ID, header->id[3], header->id[4], header->id[5]);
-
-    for (int i = 0; i < 2; ++i)
-    {
-        char *coverPath = flag ? Settings.covers_path : Settings.covers2d_path;
-        flag = !flag;
-        //Load full id image
-        snprintf(Path, sizeof(Path), "%s%s.png", coverPath, IDfull);
-        delete Cover;
-        Cover = new (std::nothrow) GuiImageData(Path);
-        //Load short id image
-        if (!Cover || !Cover->GetImage())
-        {
-            snprintf(Path, sizeof(Path), "%s%s.png", coverPath, ID);
-            delete Cover;
-            Cover = new (std::nothrow) GuiImageData(Path);
-        }
-        if (Cover && Cover->GetImage()) break;
-    }
-    //Load no image
-    if (noCover && (!Cover || !Cover->GetImage()))
-    {
-        flag = Prefere3D;
-        for (int i = 0; i < 2; ++i)
-        {
-            flag = !flag;
-            delete Cover;
-            Cover = Resources::GetImageData(Prefere3D ? "nocover.png" : "nocoverFlat.png");
-            if (Cover && Cover->GetImage()) break;
-        }
-    }
-    if (Cover && !Cover->GetImage())
-    {
-        delete Cover;
-        Cover = NULL;
-    }
-    return Cover;
-}
-
-/****************************************************************************
  * MainMenu
  ***************************************************************************/
 int MainMenu(int menu)

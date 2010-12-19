@@ -32,6 +32,7 @@
 #include "language/gettext.h"
 #include "themes/CTheme.h"
 #include "FileOperations/fileops.h"
+#include "utils/encrypt.h"
 
 CSettings Settings;
 
@@ -66,7 +67,11 @@ void CSettings::SetDefault()
     strcpy(language_path, "");
     strcpy(ogg_path, "");
     strcpy(unlockCode, "");
+    strcpy(db_url, "");
+    strcpy(db_language, "");
+    strcpy(returnTo, "");
 
+    godmode = 1;
     videomode = VIDEO_MODE_DISCDEFAULT;
     videopatch = OFF;
     language = CONSOLE_DEFAULT;
@@ -80,7 +85,7 @@ void CSettings::SetDefault()
     gamesoundvolume = 80;
     tooltips = ON;
     gamesound = 1;
-    parentalcontrol = 0;
+    parentalcontrol = 4;
     lockedgames = 0;
     cios = 249;
     xflip = XFLIP_NO;
@@ -101,28 +106,7 @@ void CSettings::SetDefault()
     InstallPartitions = ONLY_GAME_PARTITION;
     fullcopy = 0;
     beta_upgrades = 0;
-    strcpy(db_url, "");
-    strcpy(db_language, "");
-    strcpy(unlockCode, "");
-    strcpy(returnTo, "");
-
-    memset(&Parental, 0, sizeof(Parental));
-
-    char buf[0x4a];
-    s32 res = CONF_Get("IPL.PC", buf, 0x4A);
-    if (res > 0)
-    {
-        if (buf[2] != 0x14)
-        {
-            Parental.enabled = 1;
-            Parental.rating = buf[2];
-        }
-        Parental.question = buf[7];
-        memcpy(Parental.pin, buf + 3, 4);
-        memcpy(Parental.answer, buf + 8, 32);
-    }
     widescreen = (CONF_GetAspectRatio() == CONF_ASPECT_16_9);
-    godmode = (Parental.enabled == 0) ? 1 : 0;
 
     Theme.SetDefault(); //! We need to move this later
 }
@@ -187,7 +171,9 @@ bool CSettings::Save()
     fprintf(file, "sfxvolume = %d\n ", sfxvolume);
     fprintf(file, "gamesoundvolume = %d\n ", gamesoundvolume);
     fprintf(file, "tooltips = %d\n ", tooltips);
-    fprintf(file, "password = %s\n ", unlockCode);
+    char EncryptedTxt[50];
+    EncryptString(unlockCode, EncryptedTxt);
+    fprintf(file, "password = %s\n ", EncryptedTxt);
     fprintf(file, "GameSort = %d\n ", GameSort);
     fprintf(file, "cios = %d\n ", cios);
     fprintf(file, "keyset = %d\n ", keyset);
@@ -243,7 +229,7 @@ bool CSettings::SetSetting(char *name, char *value)
     {
         if (sscanf(value, "%d", &i) == 1)
         {
-            if(Parental.enabled) godmode = i;
+            godmode = i;
         }
         return true;
     }
@@ -337,7 +323,9 @@ bool CSettings::SetSetting(char *name, char *value)
     }
     else if (strcmp(name, "password") == 0)
     {
-        strcpy(unlockCode, value);
+        char EncryptedTxt[50];
+        strcpy(EncryptedTxt, value);
+        DecryptString(EncryptedTxt, unlockCode);
         return true;
     }
     else if (strcmp(name, "GameSort") == 0)

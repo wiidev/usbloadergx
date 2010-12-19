@@ -34,7 +34,6 @@ enum
 
 void ResumeGui();
 void HaltGui();
-GuiImageData *LoadCoverImage(struct discHdr *header, bool Prefere3D = true, bool noCover = true);
 
 extern GuiImageData *pointer[4];
 extern GuiImageData *background;

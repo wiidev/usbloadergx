@@ -1,5 +1,6 @@
 #include <unistd.h>
 #include "GameBrowseMenu.hpp"
+#include "libwiigui/LoadCoverImage.h"
 #include "prompts/PromptWindows.h"
 #include "prompts/gameinfo.h"
 #include "prompts/DiscBrowser.h"
@@ -22,6 +23,7 @@
 #include "utils/rockout.h"
 #include "utils/ShowError.h"
 #include "utils/tools.h"
+#include "utils/PasswordCheck.h"
 #include "fatmounter.h"
 #include "gecko.h"
 #include "menus.h"
@@ -539,18 +541,18 @@ void GameBrowseMenu::ReloadBrowser()
         idBtn->SetToolTip(NULL, 0, 0);
     }
 
-    if ((Settings.parentalcontrol == 0 && Settings.Parental.enabled == 1) && Settings.godmode)
+    if (Settings.godmode)
     {
-        lockBtn->SetImage(unlockBtnImg);
-        lockBtn->SetImageOver(unlockBtnImg);
-        lockBtnTT->SetText(tr( "Unlock Parental Control" ));
+        GuiImage * unlockImage = strcmp(Settings.unlockCode, "") == 0 ? unlockBtnImg_g : unlockBtnImg;
+        lockBtn->SetImage(unlockImage);
+        lockBtn->SetImageOver(unlockImage);
+        lockBtnTT->SetText(tr( "Lock USB Loader GX" ));
     }
     else
     {
-        GuiImage * lockImage = Settings.Parental.enabled ? lockBtnImg : lockBtnImg_g;
-        lockBtn->SetImage(lockImage);
-        lockBtn->SetImageOver(lockImage);
-        lockBtnTT->SetText(tr( "Parental Control disabled" ));
+        lockBtn->SetImage(lockBtnImg);
+        lockBtn->SetImageOver(lockBtnImg);
+        lockBtnTT->SetText(tr( "Unlock USB Loader GX" ));
     }
 
     if(GetSelectedGame() >= 0)
@@ -948,15 +950,9 @@ int GameBrowseMenu::MainLoop()
     {
         gprintf("\tlockBtn clicked\n");
         lockBtn->ResetState();
-        if (!(Settings.parentalcontrol == 0 && Settings.Parental.enabled == 1))
-        {
-            WindowPrompt(tr( "Parental Control" ), tr( "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings." ), tr( "OK" ));
-            return MENU_NONE;
-        }
-
         if (Settings.godmode)
         {
-            if(WindowPrompt(tr( "Parental Control" ), tr( "Are you sure you want to enable Parent Control?" ), tr( "Yes" ), tr( "No" )) == 1)
+            if(WindowPrompt(tr( "Parental Control" ), tr( "Are you sure you want to lock USB Loader GX?" ), tr( "Yes" ), tr( "No" )) == 1)
             {
                 Settings.godmode = 0;
                 wString oldFilter(gameList.GetCurrentFilter());
@@ -966,23 +962,21 @@ int GameBrowseMenu::MainLoop()
         }
         else
         {
-            // Require the user to enter the PIN code
-            char pin[5];
-            memset(&pin, 0, 5);
-            int ret = OnScreenNumpad((char *) &pin, 5);
-
-            if (ret <= 0)
-                return MENU_NONE;
-
-            if (memcmp(pin, Settings.Parental.pin, 4) == 0)
+            //password check to unlock Install,Delete and Format
+            SetState(STATE_DISABLED);
+            int result = PasswordCheck(Settings.unlockCode);
+            SetState(STATE_DEFAULT);
+            if (result > 0)
             {
+                if(result == 1)
+                    WindowPrompt( tr( "Correct Password" ), tr( "All the features of USB Loader GX are unlocked." ), tr( "OK" ));
                 Settings.godmode = 1;
                 wString oldFilter(gameList.GetCurrentFilter());
                 gameList.FilterList(oldFilter.c_str());
                 ReloadBrowser();
             }
-            else
-                WindowPrompt(tr( "Parental Control" ), tr( "Invalid PIN code" ), tr( "OK" ));
+            else if(result < 0)
+                WindowPrompt(tr( "Wrong Password" ), tr( "USB Loader GX is protected" ), tr( "OK" ));
         }
     }
 

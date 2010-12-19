@@ -1,8 +1,10 @@
 #ifndef _GUIGAMEGRID_H_
 #define _GUIGAMEGRID_H_
 
+#include <vector>
 #include "gui.h"
-#include "../usbloader/disc.h"
+#include "usbloader/disc.h"
+
 class GuiImageAsync;
 class GuiGameGrid: public GuiElement
 {
@@ -30,9 +32,9 @@ class GuiGameGrid: public GuiElement
         int goRight;
 
         int * gameIndex;
-        GuiButton ** game;
-        GuiTooltip ** titleTT;
-        GuiImageAsync ** coverImg;
+        std::vector<GuiButton *> game;
+        std::vector<GuiTooltip *> titleTT;
+        std::vector<GuiImageAsync *> coverImg;
 
         GuiButton * btnRight;
         GuiButton * btnLeft;

@@ -1,187 +1,149 @@
 /****************************************************************************
- * libwiigui
- *
- * Tantric 2009
+ * USB Loader GX
  *
  * gui_imagea_sync.cpp
- *
- * GUI class definitions
  ***************************************************************************/
-
-#include "gui.h"
-//#include <string.h>
 #include <unistd.h>
 #include "gui_image_async.h"
-static mutex_t debugLock = LWP_MUTEX_NULL;
 
-void debug(int Line, const char* Format, ...)
+std::vector<GuiImageAsync *> GuiImageAsync::List;
+lwp_t GuiImageAsync::Thread = LWP_THREAD_NULL;
+mutex_t GuiImageAsync::ListLock = LWP_THREAD_NULL;
+GuiImageAsync * GuiImageAsync::InUse = NULL;
+u32 GuiImageAsync::ThreadCount = 0;
+bool GuiImageAsync::ThreadSleep = true;
+bool GuiImageAsync::CloseThread = false;
+
+static inline void * memdup(const void* src, size_t len)
 {
-    if (debugLock == 0) LWP_MutexInit(&debugLock, false);
+    if(!src) return NULL;
 
-    LWP_MutexLock(debugLock);
-
-    FILE *fp = fopen("SD:/debug.txt", "a");
-    if (fp)
-    {
-        char theTime[10];
-        time_t rawtime = time(0); //this fixes code dump caused by the clock
-        struct tm * timeinfo = localtime(&rawtime);
-        strftime(theTime, sizeof(theTime), "%H:%M:%S", timeinfo);
-        char format[10 + strlen(Format) + strlen(theTime)];
-        sprintf(format, "%s %i - %s\n", theTime, Line, Format);
-        va_list va;
-        va_start( va, Format );
-        vfprintf(fp, format, va);
-        va_end( va );
-        fclose(fp);
-    }
-    LWP_MutexUnlock(debugLock);
-}
-//#define DEBUG(format, ...) debug(__LINE__, format, ##__VA_ARGS__)
-#define DEBUG(format, ...)
-
-static void *memdup(const void* src, size_t len)
-{
     void *dst = malloc(len);
     if (dst) memcpy(dst, src, len);
     return dst;
 }
-static std::vector<GuiImageAsync *> List;
-static u32 ThreadCount = 0;
-static lwp_t Thread = LWP_THREAD_NULL;
-static mutex_t ListLock = LWP_MUTEX_NULL;
-static mutex_t InUseLock = LWP_MUTEX_NULL;
-static GuiImageAsync *InUse = NULL;
-static bool Quit = false;
-static bool CanSleep = true;
-void *GuiImageAsyncThread(void *arg)
+
+static GuiImageData * StdImageLoaderCallback(void *arg)
 {
-    while (!Quit)
-    {
-        LWP_MutexLock(ListLock);
-        if (List.size())
-        {
-            LWP_MutexLock(InUseLock);
-
-            InUse = List.front();
-            List.erase(List.begin());
-
-            LWP_MutexUnlock(ListLock);
-
-            if (InUse)
-            {
-                GuiImageData *data = InUse->callback(InUse->arg);
-                InUse->loadet_imgdata = data;
-                if (InUse->loadet_imgdata && InUse->loadet_imgdata->GetImage())
-                {
-                    //  InUse->SetImage(InUse->loadet_imgdata); can’t use here. There can occur a deadlock
-                    // Sets the image directly without lock. This is not fine, but it prevents a deadlock
-                    InUse->image = InUse->loadet_imgdata->GetImage();
-                    InUse->width = InUse->loadet_imgdata->GetWidth();
-                    InUse->height = InUse->loadet_imgdata->GetHeight();
-                }
-            }
-            InUse = NULL;
-            LWP_MutexUnlock(InUseLock);
-        }
-        else
-        {
-            LWP_MutexUnlock(ListLock);
-            if (!Quit && CanSleep) LWP_SuspendThread(Thread);
-        }
-        CanSleep = true;
-    }
-    Quit = false;
-    return NULL;
+    return new GuiImageData((char *) arg);
 }
 
-static u32 GuiImageAsyncThreadInit()
+GuiImageAsync::GuiImageAsync(const char *Filename, GuiImageData * PreloadImg) :
+    GuiImage(PreloadImg), imgData(NULL), callback(StdImageLoaderCallback), arg(strdup(Filename))
 {
-    if (0 == ThreadCount++)
-    {
-        CanSleep = false;
-        LWP_MutexInit(&ListLock, false);
-        LWP_MutexInit(&InUseLock, false);
-        LWP_CreateThread(&Thread, GuiImageAsyncThread, NULL, NULL, 16384, 75);
-        //      while(!CanSleep)
-        //          usleep(20);
-    }
-    return ThreadCount;
-}
-static u32 GuiImageAsyncThreadExit()
-{
-    if (--ThreadCount == 0)
-    {
-        Quit = true;
-        LWP_ResumeThread(Thread);
-        //      while(Quit)
-        //          usleep(20);
-        LWP_JoinThread(Thread, NULL);
-        LWP_MutexDestroy(ListLock);
-        LWP_MutexDestroy(InUseLock);
-        Thread = LWP_THREAD_NULL;
-        ListLock = LWP_MUTEX_NULL;
-        InUseLock = LWP_MUTEX_NULL;
-    }
-    return ThreadCount;
+    ThreadInit();
+    ThreadAddImage(this);
 }
 
-static void GuiImageAsyncThread_AddImage(GuiImageAsync* Image)
+GuiImageAsync::GuiImageAsync(ImageLoaderCallback Callback, const void * Arg, int ArgLen, GuiImageData * PreloadImg) :
+    GuiImage(PreloadImg), imgData(NULL), callback(Callback), arg(memdup(Arg, ArgLen))
+{
+    ThreadInit();
+    ThreadAddImage(this);
+}
+
+GuiImageAsync::~GuiImageAsync()
+{
+    ThreadRemoveImage(this);
+    ThreadExit();
+    while(InUse == this) usleep(100);
+    if (imgData) delete imgData;
+    if (arg) free(arg);
+}
+
+void GuiImageAsync::ThreadAddImage(GuiImageAsync *Image)
 {
     LWP_MutexLock(ListLock);
     List.push_back(Image);
     LWP_MutexUnlock(ListLock);
-    CanSleep = false;
-    //  if(LWP_ThreadIsSuspended(Thread))
+    ThreadSleep = false;
     LWP_ResumeThread(Thread);
 }
-static void GuiImageAsyncThread_RemoveImage(GuiImageAsync* Image)
+
+void GuiImageAsync::ThreadRemoveImage(GuiImageAsync *Image)
 {
-    LWP_MutexLock(ListLock);
-    for (std::vector<GuiImageAsync *>::iterator iter = List.begin(); iter != List.end(); iter++)
+    for(u32 i = 0; i < List.size(); ++i)
     {
-        if (*iter == Image)
+        if(List[i] == Image)
         {
-            List.erase(iter);
+            LWP_MutexLock(ListLock);
+            List.erase(List.begin()+i);
             LWP_MutexUnlock(ListLock);
-            return;
+            break;
         }
     }
-    if (InUse == Image)
-    {
-        LWP_MutexLock(InUseLock);
-        LWP_MutexUnlock(InUseLock);
-    }
+}
+
+void GuiImageAsync::ClearQueue()
+{
+    LWP_MutexLock(ListLock);
+    List.clear();
     LWP_MutexUnlock(ListLock);
 }
 
-/**
- * Constructor for the GuiImageAsync class.
- */
-GuiImageData *StdImageLoaderCallback(void *arg)
+void * GuiImageAsync::GuiImageAsyncThread(void *arg)
 {
-    return new GuiImageData((char*) arg);
+    while(!CloseThread)
+    {
+        if(ThreadSleep)
+            LWP_SuspendThread(Thread);
+
+        while(!List.empty() && !CloseThread)
+        {
+            LWP_MutexLock(ListLock);
+            InUse = List.front();
+            List.erase(List.begin());
+            LWP_MutexUnlock(ListLock);
+
+            if (!InUse)
+                continue;
+
+            InUse->imgData = InUse->callback(InUse->arg);
+
+            if (InUse->imgData && InUse->imgData->GetImage())
+            {
+                InUse->width = InUse->imgData->GetWidth();
+                InUse->height = InUse->imgData->GetHeight();
+                InUse->image = InUse->imgData->GetImage();
+            }
+
+            InUse = NULL;
+        }
+
+        ThreadSleep = true;
+    }
+
+    return NULL;
 }
 
-GuiImageAsync::GuiImageAsync(const char *Filename, GuiImageData * PreloadImg) :
-    GuiImage(PreloadImg), loadet_imgdata(NULL), callback(StdImageLoaderCallback), arg(strdup(Filename))
+u32 GuiImageAsync::ThreadInit()
 {
-    GuiImageAsyncThreadInit();
-    GuiImageAsyncThread_AddImage(this);
+    if (Thread == LWP_THREAD_NULL)
+    {
+        LWP_MutexInit(&ListLock, false);
+        LWP_CreateThread(&Thread, GuiImageAsyncThread, NULL, NULL, 32768, 80);
+    }
+    return ++ThreadCount;
 }
-GuiImageAsync::GuiImageAsync(ImageLoaderCallback Callback, void *Arg, int ArgLen, GuiImageData * PreloadImg) :
-    GuiImage(PreloadImg), loadet_imgdata(NULL), callback(Callback), arg(memdup(Arg, ArgLen))
+
+u32 GuiImageAsync::ThreadExit()
 {
-    DEBUG( "Constructor %p", this );
-    GuiImageAsyncThreadInit();
-    GuiImageAsyncThread_AddImage(this);
-}
-GuiImageAsync::~GuiImageAsync()
-{
-    GuiImageAsyncThread_RemoveImage(this);
-    GuiImageAsyncThreadExit();
-    DEBUG( "Deconstructor %p (loadet_imgdata=%p)", this, loadet_imgdata );
-    if (loadet_imgdata) delete loadet_imgdata;
-    if (arg) free(arg);
+    //! We don't need to always shutdown and startup the thread, especially
+    //! since this is a nested startup/shutdown from the gui thread.
+    //! It's fine with being put to suspended only.
+    /*
+    if (--ThreadCount == 0)
+    {
+        CloseThread = true;
+        LWP_ResumeThread(Thread);
+        LWP_JoinThread(Thread, NULL);
+        LWP_MutexUnlock(ListLock);
+        LWP_MutexDestroy(ListLock);
+        Thread = LWP_THREAD_NULL;
+        ListLock = LWP_MUTEX_NULL;
+        ListLock = LWP_MUTEX_NULL;
+    }
+    */
+    return --ThreadCount;
 }
 

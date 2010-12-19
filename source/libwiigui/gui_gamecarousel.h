@@ -1,8 +1,9 @@
 #ifndef _GUIGAMECAROUSEL_H_
 #define _GUIGAMECAROUSEL_H_
 
+#include <vector>
 #include "gui.h"
-#include "../usbloader/disc.h"
+#include "usbloader/disc.h"
 class GuiImageAsync;
 class GuiGameCarousel: public GuiElement
 {
@@ -29,8 +30,8 @@ class GuiGameCarousel: public GuiElement
         int clickedItem;
 
         int * gameIndex;
-        GuiButton ** game;
-        GuiImageAsync ** coverImg;
+        std::vector<GuiButton *> game;
+        std::vector<GuiImageAsync *> coverImg;
 
         GuiText * gamename;
 

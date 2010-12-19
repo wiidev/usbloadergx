@@ -110,14 +110,6 @@ class CSettings
         short fullcopy;
         short beta_upgrades;
         char returnTo[20];
-        struct
-        {
-                u8 enabled;
-                u8 rating;
-                u8 pin[4];
-                u8 question;
-                wchar_t answer[32]; // IS WCHAR!
-        } Parental;
     protected:
         bool SetSetting(char *name, char *value);
         //!Find the config file in the default paths
