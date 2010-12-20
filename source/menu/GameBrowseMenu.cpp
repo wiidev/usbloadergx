@@ -4,6 +4,7 @@
 #include "prompts/PromptWindows.h"
 #include "prompts/gameinfo.h"
 #include "prompts/DiscBrowser.h"
+#include "prompts/GameWindow.hpp"
 #include "themes/CTheme.h"
 #include "language/gettext.h"
 #include "usbloader/wbfs.h"
@@ -1243,7 +1244,11 @@ int GameBrowseMenu::OpenClickedGame()
         else
         {
             SetState(STATE_DISABLED);
-            choice = GameWindowPrompt(gameSelected);
+			GameWindow * GamePrompt = new GameWindow(gameSelected);
+			mainWindow->Append(GamePrompt);
+            choice = GamePrompt->Show();
+			gameSelected = GamePrompt->GetSelectedGame();
+			delete GamePrompt;
             SetState(STATE_DEFAULT);
             //update header and id if it was changed
             header = (mountMethod ? dvdheader : gameList[gameSelected]);
@@ -1267,21 +1272,9 @@ int GameBrowseMenu::OpenClickedGame()
         }
         else if (choice == 2)
         {
-            wiilight(0);
-
-            header = (mountMethod ? dvdheader : gameList[gameSelected]);
-            SetState(STATE_DISABLED);
-            int settret = MenuGameSettings(header);
-            SetState(STATE_DEFAULT);
-            if (settret != MENU_DISCLIST)
-                returnHere = true;
-            else
-                ReloadBrowser();
-
+            ReloadBrowser();
             rockout(2, GetSelectedGame());
         }
-        else if(choice == 3)
-            returnHere = true;
     }
 
     mountMethod = 0;
