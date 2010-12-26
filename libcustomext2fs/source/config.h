@@ -1,0 +1,10 @@
+
+#define HAVE_UNISTD_H 1
+#define HAVE_SYS_STAT_H 1
+#define HAVE_SYS_TYPES_H 1
+#define HAVE_UTIME_H 1
+#define WORDS_BIGENDIAN 1
+#define HAVE_ERRNO_H 1
+#define EXT2_FLAT_INCLUDES 1
+#define HAVE_STRDUP 1
+#define HAVE_SYS_RESOURCE_H 1
