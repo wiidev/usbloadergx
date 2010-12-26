@@ -341,7 +341,7 @@ int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=
     usbBtn.SetTrigger(&trigA);
     usbBtn.SetEffectGrow();
 
-    GuiText okBtnTxt(tr( "OK" ), 22, Theme.prompttext);
+    GuiText okBtnTxt(tr( "OK" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     GuiImage okBtnImg(&btnOutline);
     if (Settings.wsprompt)
     {

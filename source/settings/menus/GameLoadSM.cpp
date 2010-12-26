@@ -86,13 +86,6 @@ static const char * Error002Text[3] =
     trNOOP( "Anti" )
 };
 
-static const char * InstPartitionsText[3] =
-{
-    trNOOP( "Game partition" ),
-    trNOOP( "All partitions" ),
-    trNOOP( "Remove update" )
-};
-
 static inline bool IsValidPartition(int fs_type, int cios)
 {
     if (IosLoader::IsWaninkokoIOS() && NandTitles.VersionOf(TITLE_ID(1, cios)) < 18)
@@ -121,7 +114,6 @@ GameLoadSM::GameLoadSM()
     Options->SetName(Idx++, "%s", tr( "Quick Boot" ));
     Options->SetName(Idx++, "%s", tr( "Error 002 fix" ));
     Options->SetName(Idx++, "%s", tr( "Install partitions" ));
-    Options->SetName(Idx++, "%s", tr( "Install 1:1 Copy" ));
     Options->SetName(Idx++, "%s", tr( "Return To" ));
 
     SetOptionValues();
@@ -189,18 +181,20 @@ void GameLoadSM::SetOptionValues()
     Options->SetValue(Idx++, "%s", tr( Error002Text[Settings.error002] ));
 
     //! Settings: Install partitions
-    Options->SetValue(Idx++, "%s", tr( InstPartitionsText[Settings.InstallPartitions] ));
-
-    //! Settings: Install 1:1 Copy
-    Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.fullcopy] ));
+    if(Settings.InstallPartitions == ONLY_GAME_PARTITION)
+        Options->SetValue(Idx++, "%s", tr("Game partition"));
+    else if(Settings.InstallPartitions == ALL_PARTITIONS)
+        Options->SetValue(Idx++, "%s", tr("All partitions"));
+    else if(Settings.InstallPartitions == REMOVE_UPDATE_PARTITION)
+        Options->SetValue(Idx++, "%s", tr("Remove update"));
 
     //! Settings: Return To
     const char* TitleName = NULL;
     int haveTitle = NandTitles.FindU32(Settings.returnTo);
     if (haveTitle >= 0)
         TitleName = NandTitles.NameFromIndex(haveTitle);
-    Options->SetValue(Idx++, "%s", TitleName ? TitleName : strlen(Settings.returnTo) > 0 ?
-                                    Settings.returnTo : tr( OnOffText[0] ));
+    TitleName = TitleName ? TitleName : strlen(Settings.returnTo) > 0 ? Settings.returnTo : tr(OnOffText[0]);
+    Options->SetValue(Idx++, "%s", TitleName);
 }
 
 int GameLoadSM::GetMenuInternal()
@@ -302,13 +296,19 @@ int GameLoadSM::GetMenuInternal()
     //! Settings: Install partitions
     else if (ret == ++Idx)
     {
-        if (++Settings.InstallPartitions >= 3) Settings.InstallPartitions = 0;
-    }
-
-    //! Settings: Install 1:1 Copy
-    else if (ret == ++Idx)
-    {
-        if (++Settings.fullcopy >= MAX_ON_OFF) Settings.fullcopy = 0;
+        switch(Settings.InstallPartitions)
+        {
+            case ONLY_GAME_PARTITION:
+                Settings.InstallPartitions = ALL_PARTITIONS;
+                break;
+            case ALL_PARTITIONS:
+                Settings.InstallPartitions = REMOVE_UPDATE_PARTITION;
+                break;
+            default:
+            case REMOVE_UPDATE_PARTITION:
+                Settings.InstallPartitions = ONLY_GAME_PARTITION;
+                break;
+        }
     }
 
     //! Settings: Return To

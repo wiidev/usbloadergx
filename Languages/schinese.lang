@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-17 18:50+0100\n"
+"POT-Creation-Date: 2010-12-26 16:16+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: knife.hu kavid\n"
 "Language-Team: kavid\n"
@@ -25,53 +25,14 @@ msgstr "已经被保存.内容尚未验证.部分代码可能无法作用.如果
 msgid " is not on the server."
 msgstr "不在服务器上"
 
-msgid "0 (Everyone)"
-msgstr "0 (全年龄)"
-
-msgid "0 (Locked and Unlocked Games)"
-msgstr ""
-
-msgid "1 (Child 7+)"
-msgstr "1 (7岁以上)"
-
-msgid "1 (Unlocked Games Only)"
-msgstr ""
-
-msgid "1 hour"
-msgstr "1 小时"
-
-msgid "10 min"
-msgstr "10 分钟"
-
-msgid "2 (Teen 12+)"
-msgstr "2 (12岁以上)"
-
-msgid "20 min"
-msgstr "20 分钟"
-
 msgid "2D Cover Path"
 msgstr "2D封面路径"
-
-msgid "3 (Mature 16+)"
-msgstr "3 (16岁以上)"
-
-msgid "3 min"
-msgstr "3 分钟"
-
-msgid "30 min"
-msgstr "30 分钟"
 
 msgid "3D Cover Path"
 msgstr "3D封面路径"
 
 msgid "3D Covers"
 msgstr "3D 封面"
-
-msgid "4 (Adults Only 18+)"
-msgstr "4 (18岁以上成人)"
-
-msgid "5 min"
-msgstr "5 分钟"
 
 msgid ">> Deleting tickets..."
 msgstr ">> 删除 tickets..."
@@ -136,19 +97,13 @@ msgstr "USB Loader GX 功能已解锁."
 msgid "Alternate DOL"
 msgstr "可选择Alt DOL文件"
 
-msgid "An Error occured"
-msgstr "发生一个错误"
-
-msgid "Anti"
-msgstr "防止"
-
 msgid "App Language"
 msgstr "语言设定"
 
 msgid "Apr"
 msgstr "四月"
 
-msgid "Are you sure you want to enable Parent Control?"
+msgid "Are you sure you want to lock USB Loader GX?"
 msgstr ""
 
 msgid "Are you sure you want to reset?"
@@ -165,9 +120,6 @@ msgstr ""
 
 msgid "AutoInit Network"
 msgstr "自动检测网络"
-
-msgid "AutoPatch"
-msgstr "自动修改"
 
 msgid "BCA Codes Path"
 msgstr ""
@@ -199,9 +151,6 @@ msgstr "启动/标准"
 msgid "Boot?"
 msgstr "启动?"
 
-msgid "Both"
-msgstr "全部"
-
 msgid "Can't be formatted"
 msgstr "无法格式化"
 
@@ -225,9 +174,6 @@ msgstr ""
 
 msgid "Cheatfile is blank"
 msgstr "作弊码文件是空的"
-
-msgid "Checking for Updates"
-msgstr "检测软件最新版本"
 
 msgid "Clear"
 msgstr ""
@@ -260,9 +206,6 @@ msgstr ""
 msgid "Console"
 msgstr "控制台"
 
-msgid "Console Default"
-msgstr "主机默认"
-
 msgid "Console Locked"
 msgstr "主机锁定"
 
@@ -283,6 +226,10 @@ msgstr ""
 
 msgid "Could not create GCT file"
 msgstr "无法建立 GCT 文件"
+
+#, c-format
+msgid "Could not create path: %s"
+msgstr ""
 
 msgid "Could not find info for this game in the wiitdb.xml."
 msgstr ""
@@ -313,9 +260,6 @@ msgstr "作者信息"
 
 msgid "Custom Paths"
 msgstr "自定义路径"
-
-msgid "Customs/Original"
-msgstr "自定义/官方"
 
 msgid "DOL Path"
 msgstr "DOL 路径"
@@ -365,14 +309,8 @@ msgstr "光盘图片下载"
 msgid "Disc Artwork Path"
 msgstr "光盘图片路径"
 
-msgid "Disc Default"
-msgstr "游戏默认"
-
 msgid "Disc Images"
 msgstr "光盘图片"
-
-msgid "DiskFlip"
-msgstr "光盘滑动"
 
 msgid "Display"
 msgstr "显示"
@@ -404,6 +342,9 @@ msgstr ""
 msgid "Do you want to format:"
 msgstr "是否格式化:"
 
+msgid "Do you want to load this theme?"
+msgstr ""
+
 msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "使用这个已知是正确的 Alt DOL 文件?"
 
@@ -434,10 +375,13 @@ msgstr "下载完成"
 msgid "Download request failed."
 msgstr ""
 
-msgid "Downloading"
-msgstr "下载"
-
 msgid "Downloading Page List:"
+msgstr ""
+
+msgid "Downloading covers"
+msgstr ""
+
+msgid "Downloading custom Discarts"
 msgstr ""
 
 msgid "Downloading file"
@@ -446,14 +390,11 @@ msgstr "下载文件:"
 msgid "Downloading file..."
 msgstr ""
 
-msgid "Downloading files"
-msgstr ""
-
 msgid "Downloading image:"
 msgstr ""
 
-msgid "Dutch"
-msgstr "荷文"
+msgid "Downloading original Discarts"
+msgstr ""
 
 msgid "ERROR"
 msgstr "错误"
@@ -464,9 +405,6 @@ msgstr "错误:"
 msgid "ERROR: Can't set up theme."
 msgstr ""
 
-msgid "English"
-msgstr "英文"
-
 msgid "Error"
 msgstr "错误"
 
@@ -476,14 +414,23 @@ msgstr "错误 !"
 msgid "Error 002 fix"
 msgstr "002 错误修正"
 
+msgid "Error opening downloaded file"
+msgstr ""
+
 msgid "Error reading Disc"
 msgstr "读取光盘错误"
+
+msgid "Error while downloding file"
+msgstr ""
 
 msgid "Error while opening the zip."
 msgstr ""
 
 msgid "Error while transfering data."
 msgstr "传送数据错误."
+
+msgid "Error while updating USB Loader GX."
+msgstr ""
 
 msgid "Error writing the data."
 msgstr ""
@@ -509,6 +456,9 @@ msgstr ""
 msgid "Failed to open partition"
 msgstr "打开分区失败"
 
+msgid "Failed updating"
+msgstr ""
+
 msgid "Feb"
 msgstr "二月"
 
@@ -527,15 +477,6 @@ msgstr ""
 msgid "Flip-X"
 msgstr "按键规则"
 
-msgid "Force NTSC"
-msgstr ""
-
-msgid "Force PAL50"
-msgstr ""
-
-msgid "Force PAL60"
-msgstr ""
-
 msgid "Format"
 msgstr "格式化"
 
@@ -545,14 +486,8 @@ msgstr "格式化中, 请稍候..."
 msgid "Free Space"
 msgstr "剩余空间"
 
-msgid "French"
-msgstr "法文"
-
 msgid "Full Shutdown"
 msgstr "完全关机"
-
-msgid "GAMEID_Gamename"
-msgstr ""
 
 msgid "GCT Cheatcodes Path"
 msgstr "作弊码路径"
@@ -566,9 +501,6 @@ msgstr "界面设置"
 msgid "GXtheme.cfg not found in any subfolder."
 msgstr ""
 
-msgid "Game ID"
-msgstr "游戏 ID"
-
 msgid "Game IOS"
 msgstr ""
 
@@ -580,9 +512,6 @@ msgstr "游戏载入"
 
 msgid "Game Lock"
 msgstr ""
-
-msgid "Game Region"
-msgstr "游戏区域"
 
 msgid "Game Size"
 msgstr "游戏容量"
@@ -599,17 +528,11 @@ msgstr "已安装的游戏:"
 msgid "Game partition"
 msgstr ""
 
-msgid "Gamename [GAMEID]"
-msgstr ""
-
 msgid "Games"
 msgstr "游戏"
 
 msgid "GamesLevel"
 msgstr ""
-
-msgid "German"
-msgstr "德文"
 
 msgid "Gerne:"
 msgstr ""
@@ -664,9 +587,6 @@ msgstr "插入 SD 卡使用此功能."
 msgid "Install"
 msgstr "安装"
 
-msgid "Install 1:1 Copy"
-msgstr ""
-
 msgid "Install Error!"
 msgstr "安装错误!"
 
@@ -691,20 +611,11 @@ msgstr "安装 title... 完成!"
 msgid "Installing wad"
 msgstr "安裝 WAD"
 
-msgid "Invalid PIN code"
-msgstr ""
-
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
 msgstr "看來你有一些能帮到我们的信息.请将这些信息发送给开发团队.%s - %i"
 
-msgid "Italian"
-msgstr "意大利文"
-
 msgid "Jan"
 msgstr "一月"
-
-msgid "Japanese"
-msgstr "日文"
 
 msgid "July"
 msgstr "七月"
@@ -718,9 +629,6 @@ msgstr "保持"
 msgid "Keyboard"
 msgstr "键盘"
 
-msgid "Korean"
-msgstr "韩文"
-
 msgid "Language File"
 msgstr "语言文件"
 
@@ -733,17 +641,8 @@ msgstr ""
 msgid "Languagepath changed."
 msgstr "语言文件路径已变更"
 
-msgid "Left"
-msgstr "左"
-
-msgid "Like SysMenu"
-msgstr "同系统选单"
-
 msgid "Load"
 msgstr "载入"
-
-msgid "Load From SD/USB"
-msgstr "从 SD/USB 载入"
 
 #, c-format
 msgid "Load file from: %s ?"
@@ -751,6 +650,9 @@ msgstr "从%s 载入文件?"
 
 msgid "Load this DOL as alternate DOL?"
 msgstr "载入这个 DOL 作为 ALT DOL?"
+
+msgid "Loading default theme."
+msgstr ""
 
 msgid "Loading standard language."
 msgstr "载入标准语言"
@@ -761,16 +663,7 @@ msgstr "载入标准音乐."
 msgid "Lock Console"
 msgstr "锁定控制台"
 
-msgid "Locked"
-msgstr "已锁定"
-
-msgid "Loop Directory"
-msgstr ""
-
-msgid "Loop Music"
-msgstr ""
-
-msgid "Loop Sound"
+msgid "Lock USB Loader GX"
 msgstr ""
 
 msgid "Mar"
@@ -794,14 +687,11 @@ msgstr ""
 msgid "Music Volume"
 msgstr "音量"
 
-msgid "Neither"
-msgstr "全不"
+msgid "Network is not initiated."
+msgstr ""
 
 msgid "New Disc Detected"
 msgstr "新光盘已检测"
-
-msgid "Next"
-msgstr "往后"
 
 msgid "No"
 msgstr "否"
@@ -838,12 +728,6 @@ msgstr "没有可用更新"
 
 msgid "No themes found on the site."
 msgstr ""
-
-msgid "None"
-msgstr ""
-
-msgid "Normal"
-msgstr "一般"
 
 msgid "Not a WAD file."
 msgstr ""
@@ -884,9 +768,6 @@ msgstr "关闭"
 msgid "OK"
 msgstr "确定"
 
-msgid "ON"
-msgstr "开启"
-
 msgid "Ocarina"
 msgstr ""
 
@@ -899,23 +780,8 @@ msgstr "官方网址:"
 msgid "Offset"
 msgstr ""
 
-msgid "Only Customs"
-msgstr "仅自定义"
-
-msgid "Only Original"
-msgstr "仅官方"
-
-msgid "Only for Install"
-msgstr "仅安装"
-
-msgid "Original/Customs"
-msgstr "官方/自定义"
-
 msgid "Parental Control"
 msgstr "家长控制"
-
-msgid "Parental Control disabled"
-msgstr ""
 
 msgid "Partition"
 msgstr "分区"
@@ -947,9 +813,6 @@ msgstr "游戏计数"
 msgid "Play Next"
 msgstr ""
 
-msgid "Play Once"
-msgstr ""
-
 msgid "Play Previous"
 msgstr ""
 
@@ -962,9 +825,6 @@ msgstr "请等待..."
 msgid "Power off the Wii"
 msgstr "关闭 Wii 主机"
 
-msgid "Prev"
-msgstr "往前"
-
 msgid "Prompts Buttons"
 msgstr "显示校正"
 
@@ -973,9 +833,6 @@ msgstr "发行"
 
 msgid "Quick Boot"
 msgstr "快速启动"
-
-msgid "Random Directory Music"
-msgstr ""
 
 msgid "Reading WAD data... Ok!"
 msgstr "读取 WAD 数据... 完成!"
@@ -1016,14 +873,8 @@ msgstr ""
 msgid "Return to Wii Menu"
 msgstr "返回 Wii 主菜单"
 
-msgid "Right"
-msgstr "右"
-
 msgid "Rumble"
 msgstr "震动"
-
-msgid "SChinese"
-msgstr "简体中文"
 
 msgid "SFX Volume"
 msgstr "SFX 音量"
@@ -1051,9 +902,6 @@ msgstr ""
 
 msgid "Select a DOL"
 msgstr "选择一个 DOL"
-
-msgid "Select a DOL from Game"
-msgstr ""
 
 msgid "Sept"
 msgstr "九月"
@@ -1085,15 +933,6 @@ msgstr "声音"
 msgid "Sound Settings"
 msgstr ""
 
-msgid "Sound+BGM"
-msgstr ""
-
-msgid "Sound+Quiet"
-msgstr ""
-
-msgid "Spanish"
-msgstr "西班牙文"
-
 msgid "Special thanks to:"
 msgstr "特别感谢"
 
@@ -1121,24 +960,18 @@ msgstr ""
 msgid "Successfully installed:"
 msgstr "成功安装:"
 
-msgid "System Default"
-msgstr "系统默认"
-
-msgid "TChinese"
-msgstr "繁体中文"
-
 msgid "TXT Cheatcodes Path"
 msgstr "TXT 作弊码文件路径"
 
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "已进入的目录不存在。你想要创建一个目录吗？"
 
-msgid "The wad file was installed.  But It could not be deleted from the SD card."
-msgstr "WAD 已安装,但文件无法从 SD 卡中删除."
+msgid "The wad file was installed"
+msgstr ""
 
 #, c-format
-msgid "The wad installation failed with error %ld"
-msgstr "WAD 安装失败，错误号 %ld"
+msgid "The wad installation failed with error %i"
+msgstr ""
 
 msgid "Theme Download Path"
 msgstr ""
@@ -1150,6 +983,9 @@ msgid "Theme Path"
 msgstr "主题路径"
 
 msgid "Theme Title:"
+msgstr ""
+
+msgid "Theme path is changed."
 msgstr ""
 
 msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
@@ -1176,15 +1012,17 @@ msgstr ""
 msgid "Transfer failed."
 msgstr ""
 
+msgid "Trying custom Discarts"
+msgstr ""
+
+msgid "Trying original Discarts"
+msgstr ""
+
 msgid "USB Device not found"
 msgstr "找不到 USB 设备"
 
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX 被锁定"
-
-#, c-format
-msgid "Unable to open the wad that was just downloaded (%s)."
-msgstr "不能打开刚下载的 WAD 文件 (%s)."
 
 msgid "Uninstall"
 msgstr "删除"
@@ -1201,14 +1039,11 @@ msgstr "卸载 WAD"
 msgid "Unknown"
 msgstr ""
 
-msgid "Unlock Parental Control"
+msgid "Unlock USB Loader GX"
 msgstr ""
 
 msgid "Unlock console to use this option."
 msgstr "请解锁后使用此功能"
-
-msgid "Unlocked"
-msgstr "已解锁"
 
 msgid "Unsupported format, try to extract manually."
 msgstr ""
@@ -1234,20 +1069,11 @@ msgstr "升级全部语言文件"
 msgid "Update failed"
 msgstr "升级失败"
 
-msgid "Update to"
-msgstr "升级到"
-
-msgid "Updating"
-msgstr "升级中"
-
-msgid "Updating Language Files..."
-msgstr "升级语言文件..."
+msgid "Update successfull"
+msgstr ""
 
 msgid "Updating Language Files:"
 msgstr "正在升级语言文件:"
-
-msgid "Updating WiiTDB.zip"
-msgstr "正在升级 WiiTDB.zip"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "上传已安装Zip文件到自制程序目录"
@@ -1280,9 +1106,6 @@ msgstr "要升级么?"
 msgid "WiFi Features"
 msgstr "WiFi 功能"
 
-msgid "Widescreen Fix"
-msgstr "宽屏校正"
-
 msgid "Wii Menu"
 msgstr "Wii 系统菜单"
 
@@ -1308,9 +1131,6 @@ msgid "Yes"
 msgstr "是"
 
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
-msgstr ""
-
-msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr ""
 
 msgid "You need to select or format a partition"
@@ -1376,6 +1196,177 @@ msgstr "的"
 
 msgid "seconds left"
 msgstr "剩余秒数"
+
+#~ msgid "0 (Everyone)"
+#~ msgstr "0 (全年龄)"
+
+#~ msgid "1 (Child 7+)"
+#~ msgstr "1 (7岁以上)"
+
+#~ msgid "1 hour"
+#~ msgstr "1 小时"
+
+#~ msgid "10 min"
+#~ msgstr "10 分钟"
+
+#~ msgid "2 (Teen 12+)"
+#~ msgstr "2 (12岁以上)"
+
+#~ msgid "20 min"
+#~ msgstr "20 分钟"
+
+#~ msgid "3 (Mature 16+)"
+#~ msgstr "3 (16岁以上)"
+
+#~ msgid "3 min"
+#~ msgstr "3 分钟"
+
+#~ msgid "30 min"
+#~ msgstr "30 分钟"
+
+#~ msgid "4 (Adults Only 18+)"
+#~ msgstr "4 (18岁以上成人)"
+
+#~ msgid "5 min"
+#~ msgstr "5 分钟"
+
+#~ msgid "An Error occured"
+#~ msgstr "发生一个错误"
+
+#~ msgid "Anti"
+#~ msgstr "防止"
+
+#~ msgid "AutoPatch"
+#~ msgstr "自动修改"
+
+#~ msgid "Both"
+#~ msgstr "全部"
+
+#~ msgid "Checking for Updates"
+#~ msgstr "检测软件最新版本"
+
+#~ msgid "Console Default"
+#~ msgstr "主机默认"
+
+#~ msgid "Customs/Original"
+#~ msgstr "自定义/官方"
+
+#~ msgid "Disc Default"
+#~ msgstr "游戏默认"
+
+#~ msgid "DiskFlip"
+#~ msgstr "光盘滑动"
+
+#~ msgid "Downloading"
+#~ msgstr "下载"
+
+#~ msgid "Dutch"
+#~ msgstr "荷文"
+
+#~ msgid "English"
+#~ msgstr "英文"
+
+#~ msgid "French"
+#~ msgstr "法文"
+
+#~ msgid "Game ID"
+#~ msgstr "游戏 ID"
+
+#~ msgid "Game Region"
+#~ msgstr "游戏区域"
+
+#~ msgid "German"
+#~ msgstr "德文"
+
+#~ msgid "Italian"
+#~ msgstr "意大利文"
+
+#~ msgid "Japanese"
+#~ msgstr "日文"
+
+#~ msgid "Korean"
+#~ msgstr "韩文"
+
+#~ msgid "Left"
+#~ msgstr "左"
+
+#~ msgid "Like SysMenu"
+#~ msgstr "同系统选单"
+
+#~ msgid "Load From SD/USB"
+#~ msgstr "从 SD/USB 载入"
+
+#~ msgid "Locked"
+#~ msgstr "已锁定"
+
+#~ msgid "Neither"
+#~ msgstr "全不"
+
+#~ msgid "Next"
+#~ msgstr "往后"
+
+#~ msgid "Normal"
+#~ msgstr "一般"
+
+#~ msgid "ON"
+#~ msgstr "开启"
+
+#~ msgid "Only Customs"
+#~ msgstr "仅自定义"
+
+#~ msgid "Only Original"
+#~ msgstr "仅官方"
+
+#~ msgid "Only for Install"
+#~ msgstr "仅安装"
+
+#~ msgid "Original/Customs"
+#~ msgstr "官方/自定义"
+
+#~ msgid "Prev"
+#~ msgstr "往前"
+
+#~ msgid "Right"
+#~ msgstr "右"
+
+#~ msgid "SChinese"
+#~ msgstr "简体中文"
+
+#~ msgid "Spanish"
+#~ msgstr "西班牙文"
+
+#~ msgid "System Default"
+#~ msgstr "系统默认"
+
+#~ msgid "TChinese"
+#~ msgstr "繁体中文"
+
+#~ msgid "The wad file was installed.  But It could not be deleted from the SD card."
+#~ msgstr "WAD 已安装,但文件无法从 SD 卡中删除."
+
+#~ msgid "The wad installation failed with error %ld"
+#~ msgstr "WAD 安装失败，错误号 %ld"
+
+#~ msgid "Unable to open the wad that was just downloaded (%s)."
+#~ msgstr "不能打开刚下载的 WAD 文件 (%s)."
+
+#~ msgid "Unlocked"
+#~ msgstr "已解锁"
+
+#~ msgid "Update to"
+#~ msgstr "升级到"
+
+#~ msgid "Updating"
+#~ msgstr "升级中"
+
+#~ msgid "Updating Language Files..."
+#~ msgstr "升级语言文件..."
+
+#~ msgid "Updating WiiTDB.zip"
+#~ msgstr "正在升级 WiiTDB.zip"
+
+#~ msgid "Widescreen Fix"
+#~ msgstr "宽屏校正"
 
 #~ msgid "Back to Wii Menu"
 #~ msgstr "返回 Wii 系统菜单"

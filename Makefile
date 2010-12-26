@@ -23,9 +23,6 @@ SOURCES		:=	source \
 				source/sounds \
 				source/system \
 				source/libs/libwbfs \
-				source/libs/libfat \
-				source/libs/libntfs \
-				source/libs/libext2fs \
 				source/language \
 				source/mload \
 				source/mload/modules \
@@ -56,7 +53,7 @@ INCLUDES	:=	source
 # options for code generation
 #---------------------------------------------------------------------------------
 
-CFLAGS		=	-g -O4 -Wall -Wno-multichar $(MACHDEP) $(INCLUDE) -DHAVE_CONFIG_H
+CFLAGS		=	-g -O3 -Wall -Wno-multichar $(MACHDEP) $(INCLUDE) -DHAVE_CONFIG_H
 CXXFLAGS	=	-Xassembler -aln=$@.lst $(CFLAGS)
 LDFLAGS		=	-g $(MACHDEP) -Wl,-Map,$(notdir $@).map,--section-start,.init=0x80B00000,-wrap,malloc,-wrap,free,-wrap,memalign,-wrap,calloc,-wrap,realloc,-wrap,malloc_usable_size
 -include $(PROJECTDIR)/Make.config
@@ -65,7 +62,7 @@ LDFLAGS		=	-g $(MACHDEP) -Wl,-Map,$(notdir $@).map,--section-start,.init=0x80B00
 # any extra libraries we wish to link with the project
 #---------------------------------------------------------------------------------
 LIBS :=  -lpngu -lpng -lgd -lm -lz -lwiiuse -lbte -lasnd -logc -lfreetype -lvorbisidec \
-		-lmad -lmxml -ljpeg -lzip -lcustomext2fs
+		-lmad -lmxml -ljpeg -lzip -lcustomfat -lcustomntfs -lcustomext2fs
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
 # include and lib
@@ -128,7 +125,8 @@ export INCLUDE	:=	$(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) \
 #---------------------------------------------------------------------------------
 # build a list of library paths
 #---------------------------------------------------------------------------------
-export LIBPATHS	:=	$(foreach dir,$(LIBDIRS),-L$(dir)/lib) -L$(CURDIR)/source/libs/libext2fs/ \
+export LIBPATHS	:=	$(foreach dir,$(LIBDIRS),-L$(dir)/lib) -L$(CURDIR)/source/libs/libfat/ \
+					-L$(CURDIR)/source/libs/libntfs/ -L$(CURDIR)/source/libs/libext2fs/ \
 					-L$(LIBOGC_LIB)
 
 export OUTPUT	:=	$(CURDIR)/$(TARGET)
@@ -149,6 +147,11 @@ channel:
 
 #---------------------------------------------------------------------------------
 lang:
+	@[ -d build ] || mkdir -p build
+	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile language
+	
+#---------------------------------------------------------------------------------
+theme:
 	@[ -d build ] || mkdir -p build
 	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile language
 
@@ -192,7 +195,7 @@ DEPENDS	:=	$(OFILES:.o=.d)
 $(OUTPUT).dol: $(OUTPUT).elf
 $(OUTPUT).elf: $(OFILES)
 
-language: $(wildcard $(PROJECTDIR)/Languages/*.lang)
+language: $(wildcard $(PROJECTDIR)/Languages/*.lang) $(wildcard $(PROJECTDIR)/Themes/*.them)
 #---------------------------------------------------------------------------------
 # This rule links in binary data with .ttf, .png, and .mp3 extensions
 #---------------------------------------------------------------------------------
@@ -254,14 +257,20 @@ language: $(wildcard $(PROJECTDIR)/Languages/*.lang)
 export PATH		:=	$(PROJECTDIR)/gettext-bin:$(PATH)
 
 %.pot: $(CFILES) $(CPPFILES)
-	@echo Update Language-Files ...
-	@xgettext -C -cTRANSLATORS --from-code=utf-8 --sort-output --no-wrap --no-location -k -ktr -ktrNOOP -o $@ $^
+	@echo Updating Languagefiles ...
+	@touch $(PROJECTDIR)/Languages/$(TARGET).pot
+	@xgettext -C -cTRANSLATORS --from-code=utf-8 --sort-output --no-wrap --no-location -ktr -o$(PROJECTDIR)/Languages/$(TARGET).pot -p $@ $^
+	@echo Updating Themefiles ...
+	@touch $(PROJECTDIR)/Themes/$(TARGET).pot
+	@xgettext -C -cTRANSLATORS --from-code=utf-8 -F --no-wrap --add-location -kthInt -kthColor -kthAlign -o$(PROJECTDIR)/Themes/$(TARGET).pot -p $@ $^
 
 %.lang: $(PROJECTDIR)/Languages/$(TARGET).pot
 	@msgmerge -U -N --no-wrap --no-location --backup=none -q $@ $<
 	@touch $@
 
-
+%.them: $(PROJECTDIR)/Themes/$(TARGET).pot
+	@msgmerge -U -N --no-wrap --no-location --backup=none -q $@ $<
+	@touch $@
 
 -include $(DEPENDS)
 

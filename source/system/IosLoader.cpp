@@ -117,13 +117,13 @@ s32 IosLoader::ReloadIosSafe(s32 ios)
     if(IsHermesIOS(ios))
     {
         s32 iosRev = NandTitles.VersionOf(TITLE_ID(1, ios));
-        if(iosRev != 4 && iosRev != 5 && iosRev != 65535)
+        if((iosRev < 4 || iosRev > 6) && iosRev != 65535)
             return -11;
     }
     else if(IsWaninkokoIOS(ios))
     {
         s32 iosRev = NandTitles.VersionOf(TITLE_ID(1, ios));
-        if(iosRev < 9 || iosRev > 30) //let's see if Waninkoko actually gets to 30
+        if((iosRev < 9 || iosRev > 30) && iosRev != 65535)  //let's see if Waninkoko actually gets to 30
             return -22;
     }
     else

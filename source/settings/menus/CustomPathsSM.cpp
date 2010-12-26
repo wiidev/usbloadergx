@@ -23,6 +23,7 @@
  ***************************************************************************/
 #include <unistd.h>
 #include "CustomPathsSM.hpp"
+#include "settings/SettingsPrompts.h"
 #include "settings/CSettings.h"
 #include "prompts/PromptWindows.h"
 #include "language/gettext.h"
@@ -132,12 +133,19 @@ int CustomPathsSM::GetMenuInternal()
     else if (ret == ++Idx)
     {
         titleTxt->SetText(tr( "Theme Path" ));
-        int result = ChangePath(Settings.theme_path, sizeof(Settings.theme_path));
-        if (result == 1)
+        HaltGui();
+        GuiWindow * parent = (GuiWindow *) parentElement;
+        if(parent) parent->SetState(STATE_DISABLED);
+        this->SetState(STATE_DEFAULT);
+        this->Remove(optionBrowser);
+        ResumeGui();
+        int res = MenuThemeSelect();
+        if(parent) parent->SetState(STATE_DEFAULT);
+        this->Append(optionBrowser);
+        if (res == 1)
         {
             HaltGui();
             mainWindow->Remove(bgImg);
-            Theme.Load(Settings.theme_path);
             if(pointer[0]) delete pointer[0];
             if(pointer[1]) delete pointer[1];
             if(pointer[2]) delete pointer[2];

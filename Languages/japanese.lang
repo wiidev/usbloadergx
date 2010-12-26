@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-17 18:50+0100\n"
+"POT-Creation-Date: 2010-12-26 16:16+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
@@ -25,53 +25,14 @@ msgstr "に保存されました。使用は 自己責任でお願いします�
 msgid " is not on the server."
 msgstr "はｻｰﾊﾞｰにありません"
 
-msgid "0 (Everyone)"
-msgstr "0(セットしない)"
-
-msgid "0 (Locked and Unlocked Games)"
-msgstr ""
-
-msgid "1 (Child 7+)"
-msgstr "1(C以上を制限)"
-
-msgid "1 (Unlocked Games Only)"
-msgstr ""
-
-msgid "1 hour"
-msgstr "1時間"
-
-msgid "10 min"
-msgstr "10分"
-
-msgid "2 (Teen 12+)"
-msgstr "2(D以上を制限)"
-
-msgid "20 min"
-msgstr "20分"
-
 msgid "2D Cover Path"
 msgstr "2Dカバーのパス"
-
-msgid "3 (Mature 16+)"
-msgstr "3(Z以上を制限)"
-
-msgid "3 min"
-msgstr "3分"
-
-msgid "30 min"
-msgstr "30分"
 
 msgid "3D Cover Path"
 msgstr "3Dカバーのパス"
 
 msgid "3D Covers"
 msgstr "3Dカバー"
-
-msgid "4 (Adults Only 18+)"
-msgstr "4(Zを制限)"
-
-msgid "5 min"
-msgstr "5分"
 
 msgid ">> Deleting tickets..."
 msgstr ">> ﾁｹｯﾄを削除します"
@@ -136,20 +97,14 @@ msgstr "GXの使用者制限が解除されました"
 msgid "Alternate DOL"
 msgstr "代理DOL起動"
 
-msgid "An Error occured"
-msgstr "エラーが起きました"
-
-msgid "Anti"
-msgstr "排除する"
-
 msgid "App Language"
 msgstr "使用言語"
 
 msgid "Apr"
 msgstr "4月"
 
-msgid "Are you sure you want to enable Parent Control?"
-msgstr "使用制限機能を使用しますか?"
+msgid "Are you sure you want to lock USB Loader GX?"
+msgstr ""
 
 msgid "Are you sure you want to reset?"
 msgstr ""
@@ -165,9 +120,6 @@ msgstr "制作者:"
 
 msgid "AutoInit Network"
 msgstr "自動接続機能"
-
-msgid "AutoPatch"
-msgstr "自動パッチ"
 
 msgid "BCA Codes Path"
 msgstr "BCAコードのパス"
@@ -199,9 +151,6 @@ msgstr "使用するcIOS"
 msgid "Boot?"
 msgstr "起動しますか？"
 
-msgid "Both"
-msgstr "IDとﾘｰｼﾞｮﾝを表示"
-
 msgid "Can't be formatted"
 msgstr "初期化できません"
 
@@ -225,9 +174,6 @@ msgstr "プレイパスを変更"
 
 msgid "Cheatfile is blank"
 msgstr "チートファイルがありません"
-
-msgid "Checking for Updates"
-msgstr "最新版を確認中"
 
 msgid "Clear"
 msgstr ""
@@ -260,9 +206,6 @@ msgstr "接続失敗･･･"
 msgid "Console"
 msgstr "状態"
 
-msgid "Console Default"
-msgstr "GXのデフォルト"
-
 msgid "Console Locked"
 msgstr "GXはロックされています"
 
@@ -283,6 +226,10 @@ msgstr ""
 
 msgid "Could not create GCT file"
 msgstr "GCTﾌｧｲﾙを作成できませんでした"
+
+#, c-format
+msgid "Could not create path: %s"
+msgstr ""
 
 msgid "Could not find info for this game in the wiitdb.xml."
 msgstr ""
@@ -313,9 +260,6 @@ msgstr "提供･協力"
 
 msgid "Custom Paths"
 msgstr "パスを変更"
-
-msgid "Customs/Original"
-msgstr "カスタムを優先"
 
 msgid "DOL Path"
 msgstr "DOLのパス"
@@ -365,14 +309,8 @@ msgstr "使用するディスク画像"
 msgid "Disc Artwork Path"
 msgstr "ディスク画像のパス"
 
-msgid "Disc Default"
-msgstr "ディスクのデフォルト"
-
 msgid "Disc Images"
 msgstr "ディスク画像"
-
-msgid "DiskFlip"
-msgstr "ディスクの回転風"
 
 msgid "Display"
 msgstr "ゲーム情報"
@@ -404,6 +342,9 @@ msgstr "ダウンロードしますか?"
 msgid "Do you want to format:"
 msgstr "初期化しますか?"
 
+msgid "Do you want to load this theme?"
+msgstr ""
+
 msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "既知の代替DOLを利用しますか？"
 
@@ -434,11 +375,14 @@ msgstr "ダウンロードが終了しました"
 msgid "Download request failed."
 msgstr "ダウンロードに失敗しました"
 
-msgid "Downloading"
-msgstr "ダウンロードします"
-
 msgid "Downloading Page List:"
 msgstr "リストをダウンロード中"
+
+msgid "Downloading covers"
+msgstr ""
+
+msgid "Downloading custom Discarts"
+msgstr ""
 
 msgid "Downloading file"
 msgstr "ファイルをダウンロード中"
@@ -446,14 +390,11 @@ msgstr "ファイルをダウンロード中"
 msgid "Downloading file..."
 msgstr ""
 
-msgid "Downloading files"
-msgstr ""
-
 msgid "Downloading image:"
 msgstr "画像をダウンロード中"
 
-msgid "Dutch"
-msgstr "オランダ語"
+msgid "Downloading original Discarts"
+msgstr ""
 
 msgid "ERROR"
 msgstr "エラー"
@@ -464,9 +405,6 @@ msgstr "エラー："
 msgid "ERROR: Can't set up theme."
 msgstr "テーマを適用できませんでした"
 
-msgid "English"
-msgstr "英語"
-
 msgid "Error"
 msgstr "エラー"
 
@@ -476,14 +414,23 @@ msgstr "エラー!"
 msgid "Error 002 fix"
 msgstr "Error002対策"
 
+msgid "Error opening downloaded file"
+msgstr ""
+
 msgid "Error reading Disc"
 msgstr "読み込みに失敗しました"
+
+msgid "Error while downloding file"
+msgstr ""
 
 msgid "Error while opening the zip."
 msgstr ""
 
 msgid "Error while transfering data."
 msgstr "転送中にエラーが発生しました"
+
+msgid "Error while updating USB Loader GX."
+msgstr ""
 
 msgid "Error writing the data."
 msgstr ""
@@ -509,6 +456,9 @@ msgstr "解凍に失敗しました"
 msgid "Failed to open partition"
 msgstr "領域を開けませんでした"
 
+msgid "Failed updating"
+msgstr ""
+
 msgid "Feb"
 msgstr "2月"
 
@@ -527,15 +477,6 @@ msgstr ""
 msgid "Flip-X"
 msgstr "ゲームリストの回転"
 
-msgid "Force NTSC"
-msgstr ""
-
-msgid "Force PAL50"
-msgstr ""
-
-msgid "Force PAL60"
-msgstr ""
-
 msgid "Format"
 msgstr "初期化"
 
@@ -545,14 +486,8 @@ msgstr "初期化中です、暫くお待ち下さい..."
 msgid "Free Space"
 msgstr "空き"
 
-msgid "French"
-msgstr "フランス語"
-
 msgid "Full Shutdown"
 msgstr "シャットダウン"
-
-msgid "GAMEID_Gamename"
-msgstr "ゲームID_ゲーム名"
 
 msgid "GCT Cheatcodes Path"
 msgstr "GCTファイルのパス"
@@ -566,9 +501,6 @@ msgstr "基本設定"
 msgid "GXtheme.cfg not found in any subfolder."
 msgstr "設定ファイルが見つかりません"
 
-msgid "Game ID"
-msgstr "IDのみ"
-
 msgid "Game IOS"
 msgstr ""
 
@@ -580,9 +512,6 @@ msgstr "読み込みの設定"
 
 msgid "Game Lock"
 msgstr ""
-
-msgid "Game Region"
-msgstr "リージョンのみ"
 
 msgid "Game Size"
 msgstr "サイズ"
@@ -599,17 +528,11 @@ msgstr "このｹﾞｰﾑは既にｲﾝｽﾄｰﾙされています:"
 msgid "Game partition"
 msgstr "ゲーム領域のみ"
 
-msgid "Gamename [GAMEID]"
-msgstr "ゲーム名 [ゲームID]"
-
 msgid "Games"
 msgstr "総ゲーム数"
 
 msgid "GamesLevel"
 msgstr ""
-
-msgid "German"
-msgstr "ドイツ語"
 
 msgid "Gerne:"
 msgstr ""
@@ -664,9 +587,6 @@ msgstr "このｵﾌﾟｼｮﾝを使用するためSDｶｰﾄﾞを挿入し�
 msgid "Install"
 msgstr "ｲﾝｽﾄｰﾙ"
 
-msgid "Install 1:1 Copy"
-msgstr "フルコピー"
-
 msgid "Install Error!"
 msgstr "インストールエラー!"
 
@@ -691,20 +611,11 @@ msgstr "ﾀｲﾄﾙをｲﾝｽﾄｰﾙ...成功！"
 msgid "Installing wad"
 msgstr "WADをｲﾝｽﾄｰﾙします"
 
-msgid "Invalid PIN code"
-msgstr "暗証番号を間違えています"
-
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
 msgstr "この情報は開発者までお知らせください"
 
-msgid "Italian"
-msgstr "イタリア語"
-
 msgid "Jan"
 msgstr "1月"
-
-msgid "Japanese"
-msgstr "日本語"
 
 msgid "July"
 msgstr "7月"
@@ -718,9 +629,6 @@ msgstr "保存"
 msgid "Keyboard"
 msgstr "キーボードのタイプ"
 
-msgid "Korean"
-msgstr "韓国語"
-
 msgid "Language File"
 msgstr "言語ファイル"
 
@@ -733,17 +641,8 @@ msgstr ""
 msgid "Languagepath changed."
 msgstr "言語のパスを変更しました"
 
-msgid "Left"
-msgstr "左ボタンで"
-
-msgid "Like SysMenu"
-msgstr "Wiiメニュー風"
-
 msgid "Load"
 msgstr "はじめる"
-
-msgid "Load From SD/USB"
-msgstr "SD/USBからロード"
 
 #, c-format
 msgid "Load file from: %s ?"
@@ -751,6 +650,9 @@ msgstr "%sからﾌｧｲﾙをﾛｰﾄﾞしますか？"
 
 msgid "Load this DOL as alternate DOL?"
 msgstr "このDOLを代替DOLとしてﾛｰﾄﾞしますか？"
+
+msgid "Loading default theme."
+msgstr ""
 
 msgid "Loading standard language."
 msgstr "標準の言語に変更しますか"
@@ -761,17 +663,8 @@ msgstr "初期設定に戻しますか"
 msgid "Lock Console"
 msgstr "GXをロック"
 
-msgid "Locked"
-msgstr "ロックされています"
-
-msgid "Loop Directory"
-msgstr "フォルダ内でループ"
-
-msgid "Loop Music"
-msgstr "ループさせる"
-
-msgid "Loop Sound"
-msgstr "ループさせる"
+msgid "Lock USB Loader GX"
+msgstr ""
 
 msgid "Mar"
 msgstr "3月"
@@ -794,14 +687,11 @@ msgstr "ループ機能"
 msgid "Music Volume"
 msgstr "BGMの音量"
 
-msgid "Neither"
-msgstr "非表示"
+msgid "Network is not initiated."
+msgstr ""
 
 msgid "New Disc Detected"
 msgstr "新しいディスクが検出されました"
-
-msgid "Next"
-msgstr "左へ"
 
 msgid "No"
 msgstr "いいえ"
@@ -838,12 +728,6 @@ msgstr "更新はありません"
 
 msgid "No themes found on the site."
 msgstr "テーマが見つかりません"
-
-msgid "None"
-msgstr "なし"
-
-msgid "Normal"
-msgstr "ワイド"
 
 msgid "Not a WAD file."
 msgstr "WADﾌｧｲﾙではありません"
@@ -884,9 +768,6 @@ msgstr "使わない"
 msgid "OK"
 msgstr ""
 
-msgid "ON"
-msgstr "使う"
-
 msgid "Ocarina"
 msgstr ""
 
@@ -899,23 +780,8 @@ msgstr "公式サイト:"
 msgid "Offset"
 msgstr ""
 
-msgid "Only Customs"
-msgstr "カスタムのみ"
-
-msgid "Only Original"
-msgstr "公式のみ"
-
-msgid "Only for Install"
-msgstr "インストール中のみ"
-
-msgid "Original/Customs"
-msgstr "公式を優先"
-
 msgid "Parental Control"
 msgstr "ﾍﾟｱﾚﾝﾀﾙｺﾝﾄﾛｰﾙ"
-
-msgid "Parental Control disabled"
-msgstr "使用制限機能を無効にしました"
 
 msgid "Partition"
 msgstr "使用する領域"
@@ -947,9 +813,6 @@ msgstr "プレイ回数"
 msgid "Play Next"
 msgstr "次へ"
 
-msgid "Play Once"
-msgstr "一度だけ再生"
-
 msgid "Play Previous"
 msgstr "前へ"
 
@@ -962,9 +825,6 @@ msgstr "しばらくお待ちください"
 msgid "Power off the Wii"
 msgstr "Wiiの電源を切る"
 
-msgid "Prev"
-msgstr "左へ"
-
 msgid "Prompts Buttons"
 msgstr "ウインドウサイズ"
 
@@ -973,9 +833,6 @@ msgstr "発売元："
 
 msgid "Quick Boot"
 msgstr "ワンボタン起動"
-
-msgid "Random Directory Music"
-msgstr "フォルダ内でランダム再生"
 
 msgid "Reading WAD data... Ok!"
 msgstr "WADﾃﾞｰﾀの読み込み...成功！"
@@ -1016,14 +873,8 @@ msgstr ""
 msgid "Return to Wii Menu"
 msgstr "Wiiメニューへもどる"
 
-msgid "Right"
-msgstr "右ボタンで"
-
 msgid "Rumble"
 msgstr "Wiiリモコンの振動機能"
-
-msgid "SChinese"
-msgstr "簡体中国語"
 
 msgid "SFX Volume"
 msgstr "効果音の音量"
@@ -1051,9 +902,6 @@ msgstr ""
 
 msgid "Select a DOL"
 msgstr "DOLを選択"
-
-msgid "Select a DOL from Game"
-msgstr ""
 
 msgid "Sept"
 msgstr "9月"
@@ -1085,15 +933,6 @@ msgstr "サウンド"
 msgid "Sound Settings"
 msgstr ""
 
-msgid "Sound+BGM"
-msgstr "サウンドとBGM"
-
-msgid "Sound+Quiet"
-msgstr "サウンドのみ"
-
-msgid "Spanish"
-msgstr "スペイン語"
-
 msgid "Special thanks to:"
 msgstr "スペシャルサンクス:"
 
@@ -1121,24 +960,18 @@ msgstr "テーマの解凍を完了しました."
 msgid "Successfully installed:"
 msgstr "このｹﾞｰﾑをｲﾝｽﾄｰﾙしました"
 
-msgid "System Default"
-msgstr "Wiiのデフォルト"
-
-msgid "TChinese"
-msgstr "繁体中国語"
-
 msgid "TXT Cheatcodes Path"
 msgstr "TXTコードのパス"
 
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "ﾃﾞｨﾚｸﾄﾘがありません。作りますか？"
 
-msgid "The wad file was installed.  But It could not be deleted from the SD card."
-msgstr "WADﾌｧｲﾙをｲﾝｽﾄｰﾙしましたが、SDから削除できませんでした"
+msgid "The wad file was installed"
+msgstr ""
 
 #, c-format
-msgid "The wad installation failed with error %ld"
-msgstr "WADのｲﾝｽﾄｰﾙはｴﾗｰ:%ldで失敗しました"
+msgid "The wad installation failed with error %i"
+msgstr ""
 
 msgid "Theme Download Path"
 msgstr "テーマを保存するパス"
@@ -1151,6 +984,9 @@ msgstr "テーマのパス"
 
 msgid "Theme Title:"
 msgstr "テーマ名:"
+
+msgid "Theme path is changed."
+msgstr ""
 
 msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
 msgstr ""
@@ -1176,15 +1012,17 @@ msgstr ""
 msgid "Transfer failed."
 msgstr "転送を失敗しました"
 
+msgid "Trying custom Discarts"
+msgstr ""
+
+msgid "Trying original Discarts"
+msgstr ""
+
 msgid "USB Device not found"
 msgstr "USBﾃﾞﾊﾞｲｽを検出できませんでした"
 
 msgid "USB Loader GX is protected"
 msgstr "USB Loaderは保護されています"
-
-#, c-format
-msgid "Unable to open the wad that was just downloaded (%s)."
-msgstr "ﾀﾞｳﾝﾛｰﾄﾞ中のためWADを開けません (%s)."
 
 msgid "Uninstall"
 msgstr "ｱﾝｲﾝｽﾄｰﾙ"
@@ -1201,14 +1039,11 @@ msgstr "WADをｱﾝｲﾝｽﾄｰﾙ"
 msgid "Unknown"
 msgstr ""
 
-msgid "Unlock Parental Control"
-msgstr "使用制限機能を解除"
+msgid "Unlock USB Loader GX"
+msgstr ""
 
 msgid "Unlock console to use this option."
 msgstr "ロックを解除してください"
-
-msgid "Unlocked"
-msgstr "ロックされていません"
 
 msgid "Unsupported format, try to extract manually."
 msgstr "非対応の形式なので自己解凍してください"
@@ -1234,20 +1069,11 @@ msgstr "全言語ファイルを更新"
 msgid "Update failed"
 msgstr "更新に失敗しました"
 
-msgid "Update to"
-msgstr "最新版:"
-
-msgid "Updating"
-msgstr "更新中 -"
-
-msgid "Updating Language Files..."
-msgstr "言語ファイルを更新中..."
+msgid "Update successfull"
+msgstr ""
 
 msgid "Updating Language Files:"
 msgstr "言語ファイルを更新中:"
-
-msgid "Updating WiiTDB.zip"
-msgstr "WiiTDB.zipを更新中"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "ｲﾝｽﾄｰﾙ済みﾃﾞｨﾚｸﾄﾘにZIPを送信しました"
@@ -1280,9 +1106,6 @@ msgstr "何を更新しますか？"
 msgid "WiFi Features"
 msgstr "ネットワーク対応"
 
-msgid "Widescreen Fix"
-msgstr "普通"
-
 msgid "Wii Menu"
 msgstr "Wiiメニューへ"
 
@@ -1309,9 +1132,6 @@ msgstr "はい"
 
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr ""
-
-msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
-msgstr "Wii本体設定で使用制限機能を有効にしてください"
 
 msgid "You need to select or format a partition"
 msgstr "領域を選択するか初期化してください"
@@ -1376,6 +1196,225 @@ msgstr "中"
 
 msgid "seconds left"
 msgstr "秒で完了"
+
+#~ msgid "Install 1:1 Copy"
+#~ msgstr "フルコピー"
+
+#~ msgid "0 (Everyone)"
+#~ msgstr "0(セットしない)"
+
+#~ msgid "1 (Child 7+)"
+#~ msgstr "1(C以上を制限)"
+
+#~ msgid "1 hour"
+#~ msgstr "1時間"
+
+#~ msgid "10 min"
+#~ msgstr "10分"
+
+#~ msgid "2 (Teen 12+)"
+#~ msgstr "2(D以上を制限)"
+
+#~ msgid "20 min"
+#~ msgstr "20分"
+
+#~ msgid "3 (Mature 16+)"
+#~ msgstr "3(Z以上を制限)"
+
+#~ msgid "3 min"
+#~ msgstr "3分"
+
+#~ msgid "30 min"
+#~ msgstr "30分"
+
+#~ msgid "4 (Adults Only 18+)"
+#~ msgstr "4(Zを制限)"
+
+#~ msgid "5 min"
+#~ msgstr "5分"
+
+#~ msgid "An Error occured"
+#~ msgstr "エラーが起きました"
+
+#~ msgid "Anti"
+#~ msgstr "排除する"
+
+#~ msgid "Are you sure you want to enable Parent Control?"
+#~ msgstr "使用制限機能を使用しますか?"
+
+#~ msgid "AutoPatch"
+#~ msgstr "自動パッチ"
+
+#~ msgid "Both"
+#~ msgstr "IDとﾘｰｼﾞｮﾝを表示"
+
+#~ msgid "Checking for Updates"
+#~ msgstr "最新版を確認中"
+
+#~ msgid "Console Default"
+#~ msgstr "GXのデフォルト"
+
+#~ msgid "Customs/Original"
+#~ msgstr "カスタムを優先"
+
+#~ msgid "Disc Default"
+#~ msgstr "ディスクのデフォルト"
+
+#~ msgid "DiskFlip"
+#~ msgstr "ディスクの回転風"
+
+#~ msgid "Downloading"
+#~ msgstr "ダウンロードします"
+
+#~ msgid "Dutch"
+#~ msgstr "オランダ語"
+
+#~ msgid "English"
+#~ msgstr "英語"
+
+#~ msgid "French"
+#~ msgstr "フランス語"
+
+#~ msgid "GAMEID_Gamename"
+#~ msgstr "ゲームID_ゲーム名"
+
+#~ msgid "Game ID"
+#~ msgstr "IDのみ"
+
+#~ msgid "Game Region"
+#~ msgstr "リージョンのみ"
+
+#~ msgid "Gamename [GAMEID]"
+#~ msgstr "ゲーム名 [ゲームID]"
+
+#~ msgid "German"
+#~ msgstr "ドイツ語"
+
+#~ msgid "Invalid PIN code"
+#~ msgstr "暗証番号を間違えています"
+
+#~ msgid "Italian"
+#~ msgstr "イタリア語"
+
+#~ msgid "Japanese"
+#~ msgstr "日本語"
+
+#~ msgid "Korean"
+#~ msgstr "韓国語"
+
+#~ msgid "Left"
+#~ msgstr "左ボタンで"
+
+#~ msgid "Like SysMenu"
+#~ msgstr "Wiiメニュー風"
+
+#~ msgid "Load From SD/USB"
+#~ msgstr "SD/USBからロード"
+
+#~ msgid "Locked"
+#~ msgstr "ロックされています"
+
+#~ msgid "Loop Directory"
+#~ msgstr "フォルダ内でループ"
+
+#~ msgid "Loop Music"
+#~ msgstr "ループさせる"
+
+#~ msgid "Loop Sound"
+#~ msgstr "ループさせる"
+
+#~ msgid "Neither"
+#~ msgstr "非表示"
+
+#~ msgid "Next"
+#~ msgstr "左へ"
+
+#~ msgid "None"
+#~ msgstr "なし"
+
+#~ msgid "Normal"
+#~ msgstr "ワイド"
+
+#~ msgid "ON"
+#~ msgstr "使う"
+
+#~ msgid "Only Customs"
+#~ msgstr "カスタムのみ"
+
+#~ msgid "Only Original"
+#~ msgstr "公式のみ"
+
+#~ msgid "Only for Install"
+#~ msgstr "インストール中のみ"
+
+#~ msgid "Original/Customs"
+#~ msgstr "公式を優先"
+
+#~ msgid "Parental Control disabled"
+#~ msgstr "使用制限機能を無効にしました"
+
+#~ msgid "Play Once"
+#~ msgstr "一度だけ再生"
+
+#~ msgid "Prev"
+#~ msgstr "左へ"
+
+#~ msgid "Random Directory Music"
+#~ msgstr "フォルダ内でランダム再生"
+
+#~ msgid "Right"
+#~ msgstr "右ボタンで"
+
+#~ msgid "SChinese"
+#~ msgstr "簡体中国語"
+
+#~ msgid "Sound+BGM"
+#~ msgstr "サウンドとBGM"
+
+#~ msgid "Sound+Quiet"
+#~ msgstr "サウンドのみ"
+
+#~ msgid "Spanish"
+#~ msgstr "スペイン語"
+
+#~ msgid "System Default"
+#~ msgstr "Wiiのデフォルト"
+
+#~ msgid "TChinese"
+#~ msgstr "繁体中国語"
+
+#~ msgid "The wad file was installed.  But It could not be deleted from the SD card."
+#~ msgstr "WADﾌｧｲﾙをｲﾝｽﾄｰﾙしましたが、SDから削除できませんでした"
+
+#~ msgid "The wad installation failed with error %ld"
+#~ msgstr "WADのｲﾝｽﾄｰﾙはｴﾗｰ:%ldで失敗しました"
+
+#~ msgid "Unable to open the wad that was just downloaded (%s)."
+#~ msgstr "ﾀﾞｳﾝﾛｰﾄﾞ中のためWADを開けません (%s)."
+
+#~ msgid "Unlock Parental Control"
+#~ msgstr "使用制限機能を解除"
+
+#~ msgid "Unlocked"
+#~ msgstr "ロックされていません"
+
+#~ msgid "Update to"
+#~ msgstr "最新版:"
+
+#~ msgid "Updating"
+#~ msgstr "更新中 -"
+
+#~ msgid "Updating Language Files..."
+#~ msgstr "言語ファイルを更新中..."
+
+#~ msgid "Updating WiiTDB.zip"
+#~ msgstr "WiiTDB.zipを更新中"
+
+#~ msgid "Widescreen Fix"
+#~ msgstr "普通"
+
+#~ msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
+#~ msgstr "Wii本体設定で使用制限機能を有効にしてください"
 
 #~ msgid "%s : %s May not boot correctly if your System Menu is not up to date."
 #~ msgstr "%s : %s Wiiが更新されていなければ正常に起動できない可能性があります"

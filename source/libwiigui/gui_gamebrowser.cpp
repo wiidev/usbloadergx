@@ -31,7 +31,7 @@ GuiGameBrowser::GuiGameBrowser(int w, int h, int selectedGame)
 {
     width = w;
     height = h;
-    pagesize = Theme.pagesize;
+    pagesize = thInt("9 - game list browser page size");
     scrollbaron = (gameList.size() > pagesize) ? 1 : 0;
     selectable = true;
     listOffset = selectedGame - (selectedGame % pagesize);
@@ -121,12 +121,12 @@ GuiGameBrowser::GuiGameBrowser(int w, int h, int selectedGame)
 
     for (int i = 0; i < pagesize; i++)
     {
-        gameTxt[i] = new GuiText(GameTitles.GetTitle(gameList[i]), 20, Theme.gametext);
+        gameTxt[i] = new GuiText(GameTitles.GetTitle(gameList[i]), 20, thColor("r=0 g=0 b=0 a=255 - game browser list text color"));
         gameTxt[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
         gameTxt[i]->SetPosition(24, 0);
         gameTxt[i]->SetMaxWidth(maxTextWidth, DOTTED);
 
-        gameTxtOver[i] = new GuiText(GameTitles.GetTitle(gameList[i]), 20, Theme.gametext);
+        gameTxtOver[i] = new GuiText(GameTitles.GetTitle(gameList[i]), 20, thColor("r=0 g=0 b=0 a=255 - game browser list text color over"));
         gameTxtOver[i]->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
         gameTxtOver[i]->SetPosition(24, 0);
         gameTxtOver[i]->SetMaxWidth(maxTextWidth, SCROLL_HORIZONTAL);

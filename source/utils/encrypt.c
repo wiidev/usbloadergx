@@ -32,7 +32,7 @@ const char * sid = "USBLoaderGX";
 
 void EncryptString(const char *src, char *dst)
 {
-	int i;
+	unsigned int i;
 	char tmp[3];
 	dst[0] = 0;
 
@@ -45,7 +45,7 @@ void EncryptString(const char *src, char *dst)
 
 void DecryptString(const char *src, char *dst)
 {
-	int i;
+	unsigned int i;
 	for (i = 0; i < strlen(src); i += 2)
 	{
 		char c = (src[i] >= 'a' ? (src[i] - 'a') + 10 : (src[i] - '0')) << 4;

@@ -4,8 +4,9 @@
 #include <unistd.h>
 #include <sys/stat.h>
 
-#include "libs/libntfs/ntfs.h"
 #include "libs/libwbfs/libwbfs.h"
+#include "libs/libfat/fatfile_frag.h"
+#include "libs/libntfs/ntfsfile_frag.h"
 #include "libs/libext2fs/ext2_frag.h"
 
 #include "usbloader/wbfs.h"
@@ -19,8 +20,6 @@
 
 extern sec_t fs_ntfs_sec;
 extern sec_t fs_ext_sec;
-
-int _FAT_get_fragments (const char *path, _frag_append_t append_fragment, void *callback_data);
 
 static FragList *frag_list = NULL;
 

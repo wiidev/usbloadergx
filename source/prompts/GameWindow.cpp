@@ -59,7 +59,7 @@ GameWindow::GameWindow(int Selected)
 
     nameBtnTT = new GuiTooltip(tr( "Rename Game on WBFS" ));
     if (Settings.wsprompt) nameBtnTT->SetWidescreen(Settings.widescreen);
-    nameTxt = new GuiText("", 22, Theme.prompttext);
+    nameTxt = new GuiText("", 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     if (Settings.wsprompt) nameTxt->SetWidescreen(Settings.widescreen);
     nameTxt->SetMaxWidth(350, SCROLL_HORIZONTAL);
     nameBtn = new GuiButton(120, 50);
@@ -76,7 +76,7 @@ GameWindow::GameWindow(int Selected)
         nameBtn->SetEffectGrow();
     }
 
-    sizeTxt = new GuiText((char*) NULL, 22, Theme.prompttext);
+    sizeTxt = new GuiText((char*) NULL, 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     sizeTxt->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
     sizeTxt->SetPosition(-60, 70);
 
@@ -91,7 +91,7 @@ GameWindow::GameWindow(int Selected)
     diskImg2->SetAngle(0);
     diskImg2->SetBeta(180);
 
-    playcntTxt = new GuiText((char*) NULL, 18, Theme.info);
+    playcntTxt = new GuiText((char*) NULL, 18, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     playcntTxt->SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     playcntTxt->SetPosition(-115, 45);
 
@@ -104,7 +104,7 @@ GameWindow::GameWindow(int Selected)
     gameBtn->SetTrigger(trigA);
     gameBtn->SetState(STATE_SELECTED);
 
-    backBtnTxt = new GuiText(tr( "Back" ), 22, Theme.prompttext);
+    backBtnTxt = new GuiText(tr( "Back" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     backBtnImg = new GuiImage(btnOutline);
     if (Settings.wsprompt)
     {
@@ -125,7 +125,7 @@ GameWindow::GameWindow(int Selected)
         backBtn->SetPosition(0, -40);
     }
 
-    settingsBtnTxt = new GuiText(tr( "Settings" ), 22, Theme.prompttext);
+    settingsBtnTxt = new GuiText(tr( "Settings" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     settingsBtnImg = new GuiImage(btnOutline);
     if (Settings.wsprompt)
     {
@@ -542,9 +542,14 @@ int GameWindow::MainLoop()
 
     else if (btnRight->GetState() == STATE_CLICKED) //next game
     {
-        if(Settings.xflip == XFLIP_YES || Settings.xflip == XFLIP_SYSMENU)
+        if(Settings.xflip == XFLIP_YES)
         {
             gameSelected = (gameSelected - 1 + gameList.size()) % gameList.size();
+            ChangeGame(LEFT);
+        }
+        else if(Settings.xflip == XFLIP_SYSMENU)
+        {
+            gameSelected = (gameSelected + 1) % gameList.size();
             ChangeGame(LEFT);
         }
         else
@@ -556,11 +561,16 @@ int GameWindow::MainLoop()
         btnRight->ResetState();
     }
 
-    else if (btnLeft->GetState() == STATE_CLICKED) //next game
+    else if (btnLeft->GetState() == STATE_CLICKED) //previous game
     {
-        if(Settings.xflip == XFLIP_YES || Settings.xflip == XFLIP_SYSMENU)
+        if(Settings.xflip == XFLIP_YES)
         {
             gameSelected = (gameSelected + 1) % gameList.size();
+            ChangeGame(RIGHT);
+        }
+        else if(Settings.xflip == XFLIP_SYSMENU)
+        {
+            gameSelected = (gameSelected - 1 + gameList.size()) % gameList.size();
             ChangeGame(RIGHT);
         }
         else

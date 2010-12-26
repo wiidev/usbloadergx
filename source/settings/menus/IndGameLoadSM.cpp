@@ -105,7 +105,7 @@ IndGameLoadSM::IndGameLoadSM(const char * GameID)
         trigA = new GuiTrigger();
     trigA->SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
 
-    saveBtnTxt = new GuiText(tr( "Save" ), 22, Theme.prompttext);
+    saveBtnTxt = new GuiText(tr( "Save" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     saveBtnTxt->SetMaxWidth(btnOutline->GetWidth() - 30);
     saveBtnImg = new GuiImage (btnOutline);
     if (Settings.wsprompt == ON)

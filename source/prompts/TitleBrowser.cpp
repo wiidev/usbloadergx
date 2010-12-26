@@ -138,7 +138,7 @@ bool TitleSelector(char output[])
     GuiTrigger trigB;
     trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 
-    GuiText cancelBtnTxt(tr( "Back" ), 22, Theme.prompttext);
+    GuiText cancelBtnTxt(tr( "Back" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     cancelBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
     GuiImage cancelBtnImg(&btnOutline);
     if (Settings.wsprompt)
@@ -365,7 +365,7 @@ int TitleBrowser()
     settingsbackgroundbtn.SetPosition(0, 0);
     settingsbackgroundbtn.SetImage(&settingsbackground);
 
-    GuiText cancelBtnTxt(tr( "Back" ), 22, Theme.prompttext);
+    GuiText cancelBtnTxt(tr( "Back" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     cancelBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
     GuiImage cancelBtnImg(&btnOutline);
     if (Settings.wsprompt)

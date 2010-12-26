@@ -167,16 +167,11 @@ s32 Wbfs_Fat::AddGame(void)
     part = CreatePart(header.id, path);
     if (!part) return -1;
     /* Add game to device */
-    partition_selector_t part_sel = ALL_PARTITIONS;
-    int copy_1_1 = Settings.fullcopy;
-    part_sel = (partition_selector_t) Settings.InstallPartitions;
-    if (copy_1_1)
-    {
-        part_sel = ALL_PARTITIONS;
-    }
+    partition_selector_t part_sel = (partition_selector_t) Settings.InstallPartitions;
+
     wbfs_t *old_hdd = hdd;
     hdd = part; // used by spinner
-    ret = wbfs_add_disc(part, __ReadDVD, NULL, ProgressCallback, part_sel, copy_1_1);
+    ret = wbfs_add_disc(hdd, __ReadDVD, NULL, ProgressCallback, part_sel, 0);
     hdd = old_hdd;
     wbfs_trim(part);
     ClosePart(part);
@@ -305,15 +300,7 @@ f32 Wbfs_Fat::EstimateGameSize()
     if (!part) return -1;
     wii_sec_sz = part->wii_sec_sz;
 
-    partition_selector_t part_sel;
-    if (Settings.fullcopy)
-    {
-        part_sel = ALL_PARTITIONS;
-    }
-    else
-    {
-        part_sel = (partition_selector_t) Settings.InstallPartitions;
-    }
+    partition_selector_t part_sel = (partition_selector_t) Settings.InstallPartitions;
     return wbfs_estimate_disc(part, __ReadDVD, NULL, part_sel);
 }
 

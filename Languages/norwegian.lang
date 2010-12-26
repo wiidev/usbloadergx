@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-17 18:50+0100\n"
+"POT-Creation-Date: 2010-12-26 16:16+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: raschi\n"
 "Language-Team: raschi\n"
@@ -25,53 +25,14 @@ msgstr " har blitt lagret.  Teksten har ikke blitt verifisert.  Noe av koden vil
 msgid " is not on the server."
 msgstr " finnes ikke på serveren."
 
-msgid "0 (Everyone)"
-msgstr "0 (Alle)"
-
-msgid "0 (Locked and Unlocked Games)"
-msgstr ""
-
-msgid "1 (Child 7+)"
-msgstr "1 (Barn 7+)"
-
-msgid "1 (Unlocked Games Only)"
-msgstr ""
-
-msgid "1 hour"
-msgstr "1 time"
-
-msgid "10 min"
-msgstr ""
-
-msgid "2 (Teen 12+)"
-msgstr "2 (Ungdom 12+)"
-
-msgid "20 min"
-msgstr ""
-
 msgid "2D Cover Path"
 msgstr "2D Cover sti"
-
-msgid "3 (Mature 16+)"
-msgstr "3 (Ungdom 16+)"
-
-msgid "3 min"
-msgstr ""
-
-msgid "30 min"
-msgstr ""
 
 msgid "3D Cover Path"
 msgstr "3D Cover sti"
 
 msgid "3D Covers"
 msgstr "3D cover"
-
-msgid "4 (Adults Only 18+)"
-msgstr "4 (Voksen 18+)"
-
-msgid "5 min"
-msgstr ""
 
 msgid ">> Deleting tickets..."
 msgstr ">> Sletter tickets..."
@@ -136,19 +97,13 @@ msgstr "Alle funksjonene til USB Loader GX er opplåst."
 msgid "Alternate DOL"
 msgstr "Alternativ DOL"
 
-msgid "An Error occured"
-msgstr "En feil oppstod"
-
-msgid "Anti"
-msgstr ""
-
 msgid "App Language"
 msgstr "Program språk"
 
 msgid "Apr"
 msgstr ""
 
-msgid "Are you sure you want to enable Parent Control?"
+msgid "Are you sure you want to lock USB Loader GX?"
 msgstr ""
 
 msgid "Are you sure you want to reset?"
@@ -165,9 +120,6 @@ msgstr "Forfatter:"
 
 msgid "AutoInit Network"
 msgstr "Autostart nettverk"
-
-msgid "AutoPatch"
-msgstr ""
 
 msgid "BCA Codes Path"
 msgstr ""
@@ -199,9 +151,6 @@ msgstr "Boot/Standard"
 msgid "Boot?"
 msgstr "Start?"
 
-msgid "Both"
-msgstr "Begge"
-
 msgid "Can't be formatted"
 msgstr "Kan ikke formateres"
 
@@ -225,9 +174,6 @@ msgstr ""
 
 msgid "Cheatfile is blank"
 msgstr "Juksefil er blank"
-
-msgid "Checking for Updates"
-msgstr "Søker etter oppdateringer"
 
 msgid "Clear"
 msgstr ""
@@ -260,9 +206,6 @@ msgstr ""
 msgid "Console"
 msgstr "Konsoll"
 
-msgid "Console Default"
-msgstr "Konsoll Standard"
-
 msgid "Console Locked"
 msgstr "Konsoll låst"
 
@@ -283,6 +226,10 @@ msgstr ""
 
 msgid "Could not create GCT file"
 msgstr "Kan ikke opprette GCT fil"
+
+#, c-format
+msgid "Could not create path: %s"
+msgstr ""
 
 msgid "Could not find info for this game in the wiitdb.xml."
 msgstr ""
@@ -313,9 +260,6 @@ msgstr "Medvirkende"
 
 msgid "Custom Paths"
 msgstr "Endre stier"
-
-msgid "Customs/Original"
-msgstr "Custom/Original"
 
 msgid "DOL Path"
 msgstr "DOL sti"
@@ -365,14 +309,8 @@ msgstr "Platebilde nedlasting"
 msgid "Disc Artwork Path"
 msgstr "Platebilde sti"
 
-msgid "Disc Default"
-msgstr "Spill Standard"
-
 msgid "Disc Images"
 msgstr "Plate bilder"
-
-msgid "DiskFlip"
-msgstr "Snu plate"
 
 msgid "Display"
 msgstr "Vis"
@@ -404,6 +342,9 @@ msgstr "Vil du laste ned dette temaet?"
 msgid "Do you want to format:"
 msgstr "Vil du formatere:"
 
+msgid "Do you want to load this theme?"
+msgstr ""
+
 msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "Vil du bruke alt DOL filen som er kjent for å være riktig?"
 
@@ -434,11 +375,14 @@ msgstr "Nedlasting ferdig"
 msgid "Download request failed."
 msgstr "Nedlast spørring feilet."
 
-msgid "Downloading"
-msgstr "Laster ned"
-
 msgid "Downloading Page List:"
 msgstr "Laster ned side liste:"
+
+msgid "Downloading covers"
+msgstr ""
+
+msgid "Downloading custom Discarts"
+msgstr ""
 
 msgid "Downloading file"
 msgstr "Laster ned fil"
@@ -446,14 +390,11 @@ msgstr "Laster ned fil"
 msgid "Downloading file..."
 msgstr ""
 
-msgid "Downloading files"
-msgstr ""
-
 msgid "Downloading image:"
 msgstr "Laster ned bilde:"
 
-msgid "Dutch"
-msgstr "Nederlandsk"
+msgid "Downloading original Discarts"
+msgstr ""
 
 msgid "ERROR"
 msgstr "FEIL"
@@ -464,9 +405,6 @@ msgstr "FEIL:"
 msgid "ERROR: Can't set up theme."
 msgstr ""
 
-msgid "English"
-msgstr "Engelsk"
-
 msgid "Error"
 msgstr "Feil"
 
@@ -476,14 +414,23 @@ msgstr "Feil !"
 msgid "Error 002 fix"
 msgstr "Error 002 fiks"
 
+msgid "Error opening downloaded file"
+msgstr ""
+
 msgid "Error reading Disc"
 msgstr "Feil ved lesing av plate"
+
+msgid "Error while downloding file"
+msgstr ""
 
 msgid "Error while opening the zip."
 msgstr ""
 
 msgid "Error while transfering data."
 msgstr "Feil ved overføring av data."
+
+msgid "Error while updating USB Loader GX."
+msgstr ""
 
 msgid "Error writing the data."
 msgstr ""
@@ -509,6 +456,9 @@ msgstr "Utpakking feilet."
 msgid "Failed to open partition"
 msgstr "Feil ved åpning av partisjon"
 
+msgid "Failed updating"
+msgstr ""
+
 msgid "Feb"
 msgstr ""
 
@@ -527,15 +477,6 @@ msgstr ""
 msgid "Flip-X"
 msgstr ""
 
-msgid "Force NTSC"
-msgstr ""
-
-msgid "Force PAL50"
-msgstr ""
-
-msgid "Force PAL60"
-msgstr ""
-
 msgid "Format"
 msgstr "Formatér"
 
@@ -545,14 +486,8 @@ msgstr "Formaterer, vennligst vent..."
 msgid "Free Space"
 msgstr "Ledig plass"
 
-msgid "French"
-msgstr "Fransk"
-
 msgid "Full Shutdown"
 msgstr "Skru helt av"
-
-msgid "GAMEID_Gamename"
-msgstr ""
 
 msgid "GCT Cheatcodes Path"
 msgstr "GCT Juksekode sti"
@@ -566,9 +501,6 @@ msgstr "GUI innstillinger"
 msgid "GXtheme.cfg not found in any subfolder."
 msgstr ""
 
-msgid "Game ID"
-msgstr "Spill ID"
-
 msgid "Game IOS"
 msgstr ""
 
@@ -580,9 +512,6 @@ msgstr "Lasting av spill"
 
 msgid "Game Lock"
 msgstr ""
-
-msgid "Game Region"
-msgstr "Region"
 
 msgid "Game Size"
 msgstr "Spill størrelse"
@@ -599,17 +528,11 @@ msgstr "Spillet er allerede installert:"
 msgid "Game partition"
 msgstr ""
 
-msgid "Gamename [GAMEID]"
-msgstr ""
-
 msgid "Games"
 msgstr "Spill"
 
 msgid "GamesLevel"
 msgstr ""
-
-msgid "German"
-msgstr "Tysk"
 
 msgid "Gerne:"
 msgstr ""
@@ -664,9 +587,6 @@ msgstr "Sett inn et SD-kort for å bruke innstillingen."
 msgid "Install"
 msgstr "Installér"
 
-msgid "Install 1:1 Copy"
-msgstr ""
-
 msgid "Install Error!"
 msgstr "Installasjonsfeil!"
 
@@ -691,20 +611,11 @@ msgstr "Installerer tittel... OK!"
 msgid "Installing wad"
 msgstr "Installerer WAD"
 
-msgid "Invalid PIN code"
-msgstr ""
-
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
 msgstr "Det ser ut til at du har informasjon som kan være nyttig for oss. Vennligst videresend denne informasjonen til utviklerteamet."
 
-msgid "Italian"
-msgstr "Italiensk"
-
 msgid "Jan"
 msgstr ""
-
-msgid "Japanese"
-msgstr "Japansk"
 
 msgid "July"
 msgstr "Jul"
@@ -718,9 +629,6 @@ msgstr "Behold"
 msgid "Keyboard"
 msgstr "Tastatur"
 
-msgid "Korean"
-msgstr "Koreansk"
-
 msgid "Language File"
 msgstr "Språk Fil"
 
@@ -733,17 +641,8 @@ msgstr ""
 msgid "Languagepath changed."
 msgstr "Språksti endret."
 
-msgid "Left"
-msgstr "Venstre"
-
-msgid "Like SysMenu"
-msgstr "Lik Systemmeny"
-
 msgid "Load"
 msgstr "Start"
-
-msgid "Load From SD/USB"
-msgstr "Start fra SD/USB"
 
 #, c-format
 msgid "Load file from: %s ?"
@@ -751,6 +650,9 @@ msgstr "Start fil fra: %s ?"
 
 msgid "Load this DOL as alternate DOL?"
 msgstr "Last denne DOL som alternativ DOL?"
+
+msgid "Loading default theme."
+msgstr ""
 
 msgid "Loading standard language."
 msgstr "Laster standard språk."
@@ -761,16 +663,7 @@ msgstr "Laster standard musikk."
 msgid "Lock Console"
 msgstr "Lås konsoll"
 
-msgid "Locked"
-msgstr "Låst"
-
-msgid "Loop Directory"
-msgstr ""
-
-msgid "Loop Music"
-msgstr ""
-
-msgid "Loop Sound"
+msgid "Lock USB Loader GX"
 msgstr ""
 
 msgid "Mar"
@@ -794,14 +687,11 @@ msgstr ""
 msgid "Music Volume"
 msgstr "Musikk volum"
 
-msgid "Neither"
-msgstr "Ingen"
+msgid "Network is not initiated."
+msgstr ""
 
 msgid "New Disc Detected"
 msgstr "Ny plate oppdaget"
-
-msgid "Next"
-msgstr "Neste"
 
 msgid "No"
 msgstr "Nei"
@@ -838,12 +728,6 @@ msgstr "Ingen nye oppdateringer."
 
 msgid "No themes found on the site."
 msgstr "Ingen temaer funnet på websiden."
-
-msgid "None"
-msgstr ""
-
-msgid "Normal"
-msgstr ""
 
 msgid "Not a WAD file."
 msgstr ""
@@ -884,9 +768,6 @@ msgstr "AV"
 msgid "OK"
 msgstr ""
 
-msgid "ON"
-msgstr "PÅ"
-
 msgid "Ocarina"
 msgstr ""
 
@@ -899,23 +780,8 @@ msgstr "Offisiell nettside:"
 msgid "Offset"
 msgstr ""
 
-msgid "Only Customs"
-msgstr "Kun custom"
-
-msgid "Only Original"
-msgstr "Kun original"
-
-msgid "Only for Install"
-msgstr "Kun for installering"
-
-msgid "Original/Customs"
-msgstr "Original/Custom"
-
 msgid "Parental Control"
 msgstr "Foreldrekontroll"
-
-msgid "Parental Control disabled"
-msgstr ""
 
 msgid "Partition"
 msgstr "Partisjon"
@@ -947,9 +813,6 @@ msgstr "Ganger spilt"
 msgid "Play Next"
 msgstr ""
 
-msgid "Play Once"
-msgstr ""
-
 msgid "Play Previous"
 msgstr ""
 
@@ -962,9 +825,6 @@ msgstr "Vennligst vent..."
 msgid "Power off the Wii"
 msgstr "Skru av Wii"
 
-msgid "Prev"
-msgstr "Forrige"
-
 msgid "Prompts Buttons"
 msgstr "Dialog knapper"
 
@@ -973,9 +833,6 @@ msgstr "Publisert av"
 
 msgid "Quick Boot"
 msgstr "Hurtig start"
-
-msgid "Random Directory Music"
-msgstr ""
 
 msgid "Reading WAD data... Ok!"
 msgstr "Leser WAD data... OK!"
@@ -1016,14 +873,8 @@ msgstr ""
 msgid "Return to Wii Menu"
 msgstr "Tilbake til Wii meny"
 
-msgid "Right"
-msgstr "Høyre"
-
 msgid "Rumble"
 msgstr "Vibrasjon"
-
-msgid "SChinese"
-msgstr "S.Kinesisk"
 
 msgid "SFX Volume"
 msgstr "Effekt volum"
@@ -1051,9 +902,6 @@ msgstr ""
 
 msgid "Select a DOL"
 msgstr "Velg en DOL fil"
-
-msgid "Select a DOL from Game"
-msgstr ""
 
 msgid "Sept"
 msgstr "Sep"
@@ -1085,15 +933,6 @@ msgstr "Lyd"
 msgid "Sound Settings"
 msgstr ""
 
-msgid "Sound+BGM"
-msgstr ""
-
-msgid "Sound+Quiet"
-msgstr ""
-
-msgid "Spanish"
-msgstr "Spansk"
-
 msgid "Special thanks to:"
 msgstr "Spesielt takk til:"
 
@@ -1121,24 +960,18 @@ msgstr "Vellykket utpakking av tema."
 msgid "Successfully installed:"
 msgstr "Vellykket installering:"
 
-msgid "System Default"
-msgstr "System Standard"
-
-msgid "TChinese"
-msgstr "T.Kinesisk"
-
 msgid "TXT Cheatcodes Path"
 msgstr "TXTjuksekode sti"
 
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "Valgt mappe finnes ikke. Vil du opprette den?"
 
-msgid "The wad file was installed.  But It could not be deleted from the SD card."
-msgstr "WAD filen ble installert.  Men ble ikke slettet fra SD kort."
+msgid "The wad file was installed"
+msgstr ""
 
 #, c-format
-msgid "The wad installation failed with error %ld"
-msgstr "WAD installasjonen feilet med feilkode %ld"
+msgid "The wad installation failed with error %i"
+msgstr ""
 
 msgid "Theme Download Path"
 msgstr "Tema nedlasting sti"
@@ -1151,6 +984,9 @@ msgstr "Tema sti"
 
 msgid "Theme Title:"
 msgstr "Tema tittel:"
+
+msgid "Theme path is changed."
+msgstr ""
 
 msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
 msgstr ""
@@ -1176,15 +1012,17 @@ msgstr ""
 msgid "Transfer failed."
 msgstr "Overføring feilet."
 
+msgid "Trying custom Discarts"
+msgstr ""
+
+msgid "Trying original Discarts"
+msgstr ""
+
 msgid "USB Device not found"
 msgstr "USB enhet ikke funnet"
 
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX er beskyttet"
-
-#, c-format
-msgid "Unable to open the wad that was just downloaded (%s)."
-msgstr "Kan ikke åpne nedlastet WAD fil (%s)."
 
 msgid "Uninstall"
 msgstr "Avinstallér"
@@ -1201,14 +1039,11 @@ msgstr "Avinstallerer WAD"
 msgid "Unknown"
 msgstr ""
 
-msgid "Unlock Parental Control"
+msgid "Unlock USB Loader GX"
 msgstr ""
 
 msgid "Unlock console to use this option."
 msgstr "Lås opp konsollen for å bruke denne innstillingen."
-
-msgid "Unlocked"
-msgstr "Opplåst"
 
 msgid "Unsupported format, try to extract manually."
 msgstr "Format ikke støttet, prøv å pakk ut manuelt."
@@ -1234,20 +1069,11 @@ msgstr "Oppdater alle språkfiler"
 msgid "Update failed"
 msgstr "Mislykket oppdatering"
 
-msgid "Update to"
-msgstr "Oppdater til"
-
-msgid "Updating"
-msgstr "Oppdaterer"
-
-msgid "Updating Language Files..."
-msgstr "Oppdaterer språkfiler..."
+msgid "Update successfull"
+msgstr ""
 
 msgid "Updating Language Files:"
 msgstr "Oppdaterer språkfiler:"
-
-msgid "Updating WiiTDB.zip"
-msgstr "Oppdaterer WiiTDB.zip"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Opplastet ZIP fil installert i homebrew mappen."
@@ -1280,9 +1106,6 @@ msgstr "Hva vil du oppdatere?"
 msgid "WiFi Features"
 msgstr "WiFi egenskaper"
 
-msgid "Widescreen Fix"
-msgstr "Widescreen fiks"
-
 msgid "Wii Menu"
 msgstr "Wii Meny"
 
@@ -1308,9 +1131,6 @@ msgid "Yes"
 msgstr "Ja"
 
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
-msgstr ""
-
-msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr ""
 
 msgid "You need to select or format a partition"
@@ -1376,6 +1196,153 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder gjenstår"
+
+#~ msgid "0 (Everyone)"
+#~ msgstr "0 (Alle)"
+
+#~ msgid "1 (Child 7+)"
+#~ msgstr "1 (Barn 7+)"
+
+#~ msgid "1 hour"
+#~ msgstr "1 time"
+
+#~ msgid "2 (Teen 12+)"
+#~ msgstr "2 (Ungdom 12+)"
+
+#~ msgid "3 (Mature 16+)"
+#~ msgstr "3 (Ungdom 16+)"
+
+#~ msgid "4 (Adults Only 18+)"
+#~ msgstr "4 (Voksen 18+)"
+
+#~ msgid "An Error occured"
+#~ msgstr "En feil oppstod"
+
+#~ msgid "Both"
+#~ msgstr "Begge"
+
+#~ msgid "Checking for Updates"
+#~ msgstr "Søker etter oppdateringer"
+
+#~ msgid "Console Default"
+#~ msgstr "Konsoll Standard"
+
+#~ msgid "Customs/Original"
+#~ msgstr "Custom/Original"
+
+#~ msgid "Disc Default"
+#~ msgstr "Spill Standard"
+
+#~ msgid "DiskFlip"
+#~ msgstr "Snu plate"
+
+#~ msgid "Downloading"
+#~ msgstr "Laster ned"
+
+#~ msgid "Dutch"
+#~ msgstr "Nederlandsk"
+
+#~ msgid "English"
+#~ msgstr "Engelsk"
+
+#~ msgid "French"
+#~ msgstr "Fransk"
+
+#~ msgid "Game ID"
+#~ msgstr "Spill ID"
+
+#~ msgid "Game Region"
+#~ msgstr "Region"
+
+#~ msgid "German"
+#~ msgstr "Tysk"
+
+#~ msgid "Italian"
+#~ msgstr "Italiensk"
+
+#~ msgid "Japanese"
+#~ msgstr "Japansk"
+
+#~ msgid "Korean"
+#~ msgstr "Koreansk"
+
+#~ msgid "Left"
+#~ msgstr "Venstre"
+
+#~ msgid "Like SysMenu"
+#~ msgstr "Lik Systemmeny"
+
+#~ msgid "Load From SD/USB"
+#~ msgstr "Start fra SD/USB"
+
+#~ msgid "Locked"
+#~ msgstr "Låst"
+
+#~ msgid "Neither"
+#~ msgstr "Ingen"
+
+#~ msgid "Next"
+#~ msgstr "Neste"
+
+#~ msgid "ON"
+#~ msgstr "PÅ"
+
+#~ msgid "Only Customs"
+#~ msgstr "Kun custom"
+
+#~ msgid "Only Original"
+#~ msgstr "Kun original"
+
+#~ msgid "Only for Install"
+#~ msgstr "Kun for installering"
+
+#~ msgid "Original/Customs"
+#~ msgstr "Original/Custom"
+
+#~ msgid "Prev"
+#~ msgstr "Forrige"
+
+#~ msgid "Right"
+#~ msgstr "Høyre"
+
+#~ msgid "SChinese"
+#~ msgstr "S.Kinesisk"
+
+#~ msgid "Spanish"
+#~ msgstr "Spansk"
+
+#~ msgid "System Default"
+#~ msgstr "System Standard"
+
+#~ msgid "TChinese"
+#~ msgstr "T.Kinesisk"
+
+#~ msgid "The wad file was installed.  But It could not be deleted from the SD card."
+#~ msgstr "WAD filen ble installert.  Men ble ikke slettet fra SD kort."
+
+#~ msgid "The wad installation failed with error %ld"
+#~ msgstr "WAD installasjonen feilet med feilkode %ld"
+
+#~ msgid "Unable to open the wad that was just downloaded (%s)."
+#~ msgstr "Kan ikke åpne nedlastet WAD fil (%s)."
+
+#~ msgid "Unlocked"
+#~ msgstr "Opplåst"
+
+#~ msgid "Update to"
+#~ msgstr "Oppdater til"
+
+#~ msgid "Updating"
+#~ msgstr "Oppdaterer"
+
+#~ msgid "Updating Language Files..."
+#~ msgstr "Oppdaterer språkfiler..."
+
+#~ msgid "Updating WiiTDB.zip"
+#~ msgstr "Oppdaterer WiiTDB.zip"
+
+#~ msgid "Widescreen Fix"
+#~ msgstr "Widescreen fiks"
 
 #~ msgid "%s : %s May not boot correctly if your System Menu is not up to date."
 #~ msgstr "%s : %s vil kanskje ikke starte riktig hvis System Menyen ikke er oppdatert."

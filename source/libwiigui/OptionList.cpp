@@ -112,6 +112,7 @@ void OptionList::Resize(int size)
 {
     name.resize(size);
     value.resize(size);
+    listChanged = true;
 }
 
 void OptionList::RemoveOption(int i)
@@ -121,6 +122,7 @@ void OptionList::RemoveOption(int i)
 
     name.erase(name.begin()+i);
     value.erase(value.begin()+i);
+    listChanged = true;
 }
 
 void OptionList::ClearList()
@@ -129,4 +131,5 @@ void OptionList::ClearList()
 	value.clear();
 	std::vector<std::string>().swap(name);
 	std::vector<std::string>().swap(value);
+    listChanged = true;
 }

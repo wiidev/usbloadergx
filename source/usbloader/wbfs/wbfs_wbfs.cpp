@@ -93,21 +93,10 @@ s32 Wbfs_Wbfs::AddGame()
     /* No device open */
     if (!hdd) return -1;
 
+    partition_selector_t part_sel = (partition_selector_t) Settings.InstallPartitions;
+
     /* Add game to device */
-    partition_selector_t part_sel;
-    int copy_1_1 = 0;
-
-    if (Settings.fullcopy)
-    {
-        part_sel = ALL_PARTITIONS;
-        copy_1_1 = 1;
-    }
-    else
-    {
-        part_sel = (partition_selector_t) Settings.InstallPartitions;
-    }
-
-    ret = wbfs_add_disc(hdd, __ReadDVD, NULL, ProgressCallback, part_sel, copy_1_1);
+    ret = wbfs_add_disc(hdd, __ReadDVD, NULL, ProgressCallback, part_sel, 0);
     if (ret < 0) return ret;
 
     return 0;
@@ -174,14 +163,6 @@ s32 Wbfs_Wbfs::ReIDGame(u8 *discid, const void *newID)
 
 f32 Wbfs_Wbfs::EstimateGameSize()
 {
-    partition_selector_t part_sel = ONLY_GAME_PARTITION;
-    if (Settings.fullcopy)
-    {
-        part_sel = ALL_PARTITIONS;
-    }
-    else
-    {
-        part_sel = (partition_selector_t) Settings.InstallPartitions;
-    }
+    partition_selector_t part_sel = (partition_selector_t) Settings.InstallPartitions;
     return wbfs_estimate_disc(hdd, __ReadDVD, NULL, part_sel);
 }

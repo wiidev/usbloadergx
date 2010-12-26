@@ -80,7 +80,7 @@ FlyingButtonsMenu::FlyingButtonsMenu(const char * menu_title)
     homeBtn->SetTrigger(trigHome);
     Append(homeBtn);
 
-    backBtnTxt = new GuiText(tr( "Back" ), 22, Theme.prompttext);
+    backBtnTxt = new GuiText(tr( "Back" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     backBtnTxt->SetMaxWidth(btnOutline->GetWidth() - 30);
     backBtnImg = new GuiImage(btnOutline);
     if (Settings.wsprompt == ON)

@@ -30,6 +30,8 @@ class GuiGameGrid: public GuiElement
         int rows;
         int goLeft;
         int goRight;
+        int theme_posX;
+        int theme_posY;
 
         int * gameIndex;
         std::vector<GuiButton *> game;

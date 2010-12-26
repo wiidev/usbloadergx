@@ -104,11 +104,10 @@ void CSettings::SetDefault()
     marknewtitles = 1;
     FatInstallToDir = 0;
     InstallPartitions = ONLY_GAME_PARTITION;
-    fullcopy = 0;
     beta_upgrades = 0;
     widescreen = (CONF_GetAspectRatio() == CONF_ASPECT_16_9);
 
-    Theme.SetDefault(); //! We need to move this later
+    Theme::SetDefault(); //! We need to move this later
 }
 
 bool CSettings::Load()
@@ -212,8 +211,7 @@ bool CSettings::Save()
     fprintf(file, "partition = %d\n ", partition);
     fprintf(file, "marknewtitles = %d\n ", marknewtitles);
     fprintf(file, "FatInstallToDir = %d\n ", FatInstallToDir);
-    fprintf(file, "InstallPartitions = %d\n ", InstallPartitions);
-    fprintf(file, "fullcopy = %d\n ", fullcopy);
+    fprintf(file, "InstallPartitions = %08X\n ", InstallPartitions);
     fprintf(file, "beta_upgrades = %d\n ", beta_upgrades);
     fprintf(file, "returnTo = %s\n ", returnTo);
     fclose(file);
@@ -418,11 +416,6 @@ bool CSettings::SetSetting(char *name, char *value)
         if (sscanf(value, "%d", &i) == 1) patchcountrystrings = i;
         return true;
     }
-    else if (strcmp(name, "fullcopy") == 0)
-    {
-        if (sscanf(value, "%d", &i) == 1) fullcopy = i;
-        return true;
-    }
     else if (strcmp(name, "discart") == 0)
     {
         if (sscanf(value, "%d", &i) == 1) discart = i;
@@ -450,7 +443,7 @@ bool CSettings::SetSetting(char *name, char *value)
     }
     else if (strcmp(name, "InstallPartitions") == 0)
     {
-        if (sscanf(value, "%u", &i) == 1) InstallPartitions = i;
+        InstallPartitions = strtoul(value, 0, 16);
         return true;
     }
     else if (strcmp(name, "covers_path") == 0)
@@ -675,10 +668,10 @@ static inline const char * GetLangCode(const char * langpath)
     else if(strcasestr(langpath, "dutch"))
         return "NL";
 
-    else if(strcasestr(langpath, "s_chinese"))
+    else if(strcasestr(langpath, "schinese"))
         return "ZHCN";
 
-    else if(strcasestr(langpath, "t_chinese"))
+    else if(strcasestr(langpath, "tchinese"))
         return "ZHTW";
 
     else if(strcasestr(langpath, "korean"))
@@ -748,11 +741,11 @@ bool CSettings::LoadLanguage(const char *path, int language)
         }
         else if (language == S_CHINESE)
         {
-            snprintf(filepath, sizeof(filepath), "%s/s_chinese.lang", langpath);
+            snprintf(filepath, sizeof(filepath), "%s/schinese.lang", langpath);
         }
         else if (language == T_CHINESE)
         {
-            snprintf(filepath, sizeof(filepath), "%s/t_chinese.lang", langpath);
+            snprintf(filepath, sizeof(filepath), "%s/tchinese.lang", langpath);
         }
         else if (language == KOREAN)
         {

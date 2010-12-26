@@ -80,7 +80,7 @@ class BufferCircle
         u16 Which() { return which; };
     protected:
         //!> Check if the position is a valid position in the vector
-        bool Valid(int pos) { return !(which < 0 || which >= Size()); };
+        bool Valid(int pos) { return !(pos < 0 || pos >= Size()); };
 
         u16 which;
         u32 BufferBlockSize;

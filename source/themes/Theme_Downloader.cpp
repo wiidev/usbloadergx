@@ -156,25 +156,25 @@ static int Theme_Prompt(const char *title, const char *author, GuiImageData *thu
     GuiTrigger trigB;
     trigB.SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 
-    GuiText titleTxt(tr( "Theme Title:" ), 18, Theme.prompttext);
+    GuiText titleTxt(tr( "Theme Title:" ), 18, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     titleTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     titleTxt.SetPosition(230, 30);
 
-    GuiText titleTxt2(title, 18, Theme.prompttext);
+    GuiText titleTxt2(title, 18, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     titleTxt2.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     titleTxt2.SetPosition(230, 50);
     titleTxt2.SetMaxWidth(dialogBox.GetWidth() - 220, WRAP);
 
-    GuiText authorTxt(tr( "Author:" ), 18, Theme.prompttext);
+    GuiText authorTxt(tr( "Author:" ), 18, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     authorTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     authorTxt.SetPosition(230, 100);
 
-    GuiText authorTxt2(author, 18, Theme.prompttext);
+    GuiText authorTxt2(author, 18, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     authorTxt2.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     authorTxt2.SetPosition(230, 120);
     authorTxt2.SetMaxWidth(dialogBox.GetWidth() - 220, DOTTED);
 
-    GuiText downloadBtnTxt(tr( "Download" ), 22, Theme.prompttext);
+    GuiText downloadBtnTxt(tr( "Download" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     downloadBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
     GuiImage downloadBtnImg(&btnOutline);
     if (Settings.wsprompt)
@@ -187,7 +187,7 @@ static int Theme_Prompt(const char *title, const char *author, GuiImageData *thu
     downloadBtn.SetLabel(&downloadBtnTxt);
     downloadBtn.SetScale(0.9);
 
-    GuiText backBtnTxt(tr( "Back" ), 22, Theme.prompttext);
+    GuiText backBtnTxt(tr( "Back" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     backBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
     GuiImage backBtnImg(&btnOutline);
     if (Settings.wsprompt)
@@ -341,7 +341,7 @@ int Theme_Downloader()
     MainButton[2]->SetPosition(90, 230);
     MainButton[3]->SetPosition(340, 230);
 
-    GuiText backBtnTxt(tr( "Back" ), 22, Theme.prompttext);
+    GuiText backBtnTxt(tr( "Back" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     backBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
     GuiImage backBtnImg(&btnOutline);
     if (Settings.wsprompt)

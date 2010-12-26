@@ -161,11 +161,11 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
     progressbarImg.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     progressbarImg.SetPosition(25, 40);
 
-    GuiText titleTxt(title, 26, Theme.prompttext);
+    GuiText titleTxt(title, 26, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     titleTxt.SetPosition(0, 60);
 
-    GuiText msg1Txt(msg1, 22, Theme.prompttext);
+    GuiText msg1Txt(msg1, 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     msg1Txt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     if (msg2)
         msg1Txt.SetPosition(0, 100);
@@ -173,28 +173,28 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
         msg1Txt.SetPosition(0, 120);
     msg1Txt.SetMaxWidth(430, DOTTED);
 
-    GuiText msg2Txt(msg2, 22, Theme.prompttext);
+    GuiText msg2Txt(msg2, 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     msg2Txt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     msg2Txt.SetPosition(0, 125);
     msg2Txt.SetMaxWidth(430, DOTTED);
 
-    GuiText prsTxt("%", 22, Theme.prompttext);
+    GuiText prsTxt("%", 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     prsTxt.SetAlignment(ALIGN_RIGHT, ALIGN_MIDDLE);
     prsTxt.SetPosition(-188, 40);
 
-    GuiText timeTxt((char*) NULL, 22, Theme.prompttext);
+    GuiText timeTxt((char*) NULL, 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     timeTxt.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
     timeTxt.SetPosition(280, -50);
 
-    GuiText sizeTxt((char*) NULL, 22, Theme.prompttext);
+    GuiText sizeTxt((char*) NULL, 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     sizeTxt.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
     sizeTxt.SetPosition(50, -50);
 
-    GuiText speedTxt((char*) NULL, 22, Theme.prompttext);
+    GuiText speedTxt((char*) NULL, 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     speedTxt.SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
     speedTxt.SetPosition(50, -74);
 
-    GuiText prTxt((char*) NULL, 26, Theme.prompttext);
+    GuiText prTxt((char*) NULL, 26, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     prTxt.SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
     prTxt.SetPosition(200, 40);
 
@@ -216,7 +216,7 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
         sizeTxt.SetFontSize(20);
     }
 
-    GuiText cancelTxt(tr( "Cancel" ), 22, Theme.prompttext);
+    GuiText cancelTxt(tr( "Cancel" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     GuiImage cancelImg(&btnOutline);
     if (Settings.wsprompt)
     {

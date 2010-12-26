@@ -85,19 +85,25 @@ int BootGame(const char * gameID)
 
     gprintf("\tSettings.partition: %d\n", Settings.partition);
 
+    struct discHdr gameHeader;
     gameList.LoadUnfiltered();
 
-    if(!gameList.GetDiscHeader(gameID))
+    if(mountMethod == 0 && !gameList.GetDiscHeader(gameID))
     {
         gprintf("Game was not found: %s\n", gameID);
         return -1;
     }
+    else if(mountMethod && !dvdheader)
+    {
+        gprintf("Error: Loading empty disc header from DVD\n");
+        return -1;
+    }
 
-    struct discHdr gameHeader;
-    memcpy(&gameHeader, gameList.GetDiscHeader(gameID), sizeof(struct discHdr));
+    memcpy(&gameHeader, (mountMethod ? dvdheader : gameList.GetDiscHeader(gameID)), sizeof(struct discHdr));
 
+    delete dvdheader;
+    dvdheader = NULL;
     int ret = 0;
-    struct discHdr * header = (mountMethod ? dvdheader : &gameHeader);
 
     u8 videoChoice = Settings.videomode;
     u8 languageChoice = Settings.language;
@@ -111,7 +117,7 @@ int BootGame(const char * gameID)
     u8 reloadblock = OFF;
     u8 returnToLoaderGV = 1;
 
-    GameCFG * game_cfg = GameSettings.GetGameCFG(header->id);
+    GameCFG * game_cfg = GameSettings.GetGameCFG(gameHeader.id);
 
     if (game_cfg)
     {
@@ -139,10 +145,10 @@ int BootGame(const char * gameID)
     if (!mountMethod)
     {
         gprintf("Loading fragment list...");
-        ret = get_frag_list(header->id);
+        ret = get_frag_list(gameHeader.id);
         gprintf("%d\n", ret);
 
-        ret = Disc_SetUSB(header->id);
+        ret = Disc_SetUSB(gameHeader.id);
         if (ret < 0) Sys_BackToLoader();
         gprintf("\tUSB set to game\n");
     }
@@ -158,19 +164,15 @@ int BootGame(const char * gameID)
     if (ret < 0)
         Sys_BackToLoader();
 
-    if (dvdheader) delete dvdheader;
-
     gprintf("Loading BCA data...");
-    ret = do_bca_code(header->id);
+    ret = do_bca_code(gameHeader.id);
     gprintf("%d\n", ret);
 
     if (reloadblock == ON && IosLoader::IsHermesIOS())
     {
         enable_ES_ioctlv_vector();
         if (load_from_fs == PART_FS_WBFS)
-        {
             mload_close();
-        }
     }
 
     u32 channel = 0;

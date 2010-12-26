@@ -129,7 +129,7 @@ int DiscBrowse(const char * GameID, char * alternatedname, int alternatedname_si
     settingsbackgroundbtn.SetPosition(0, 0);
     settingsbackgroundbtn.SetImage(&settingsbackground);
 
-    GuiText cancelBtnTxt(tr( "Back" ), 22, Theme.prompttext);
+    GuiText cancelBtnTxt(tr( "Back" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     cancelBtnTxt.SetMaxWidth(btnOutline.GetWidth() - 30);
     GuiImage cancelBtnImg(&btnOutline);
     if (Settings.wsprompt == ON)

@@ -123,70 +123,75 @@ GameBrowseMenu::GameBrowseMenu()
             sprintf(spaceinfo, "%.2fGB %s %.2fGB %s", freespace, tr( "of" ), (freespace + used), tr( "free" ));
         }
     }
-    usedSpaceTxt = new GuiText(spaceinfo, 18, Theme.info);
-    usedSpaceTxt->SetAlignment(Theme.hddinfo_align, ALIGN_TOP);
-    usedSpaceTxt->SetPosition(Theme.hddinfo_x, Theme.hddinfo_y);
+    usedSpaceTxt = new GuiText(spaceinfo, 18, thColor("r=55 g=190 b=237 a=255 - hdd info color"));
+    usedSpaceTxt->SetAlignment(thAlign("center - hdd info align ver"), thAlign("top - hdd info align hor"));
+    usedSpaceTxt->SetPosition(thInt("0 - hdd info pos x"), thInt("400 - hdd info pos y"));
 
-    gamecntTxt = new GuiText((char *) NULL, 18, Theme.info);
+    gamecntTxt = new GuiText((char *) NULL, 18, thColor("r=55 g=190 b=237 a=255 - game count color"));
     gamecntBtn = new GuiButton(100, 18);
-    gamecntBtn->SetAlignment(Theme.gamecount_align, ALIGN_TOP);
-    gamecntBtn->SetPosition(Theme.gamecount_x, Theme.gamecount_y);
+    gamecntBtn->SetAlignment(thAlign("center - game count align ver"), thAlign("top - game count align hor"));
+    gamecntBtn->SetPosition(thInt("0 - game count pos x"), thInt("420 - game count pos y"));
     gamecntBtn->SetLabel(gamecntTxt);
     gamecntBtn->SetEffectGrow();
     gamecntBtn->SetTrigger(trigA);
 
     installBtnTT = new GuiTooltip(tr( "Install a game" ));
     if (Settings.wsprompt) installBtnTT->SetWidescreen(Settings.widescreen);
-    installBtnTT->SetAlpha(Theme.tooltipAlpha);
+    installBtnTT->SetAlpha(thInt("255 - tooltip alpha"));
     installBtnImg = new GuiImage(btnInstall);
     installBtnImgOver = new GuiImage(btnInstallOver);
     installBtnImg->SetWidescreen(Settings.widescreen);
     installBtnImgOver->SetWidescreen(Settings.widescreen);
 
-    installBtn = new GuiButton(installBtnImg, installBtnImgOver, ALIGN_LEFT, ALIGN_TOP, Theme.install_x, Theme.install_y,
+    installBtn = new GuiButton(installBtnImg, installBtnImgOver, ALIGN_LEFT, ALIGN_TOP,
+                               thInt("16 - install btn pos x"), thInt("355 - install btn pos y"),
                                trigA, btnSoundOver, btnSoundClick2, 1, installBtnTT, 24, -30, 0, 5);
 
     settingsBtnTT = new GuiTooltip(tr( "Settings" ));
     if (Settings.wsprompt) settingsBtnTT->SetWidescreen(Settings.widescreen);
-    settingsBtnTT->SetAlpha(Theme.tooltipAlpha);
+    settingsBtnTT->SetAlpha(thInt("255 - tooltip alpha"));
     settingsBtnImg = new GuiImage(btnSettings);
     settingsBtnImg->SetWidescreen(Settings.widescreen);
     settingsBtnImgOver = new GuiImage(btnSettingsOver);
     settingsBtnImgOver->SetWidescreen(Settings.widescreen);
-    settingsBtn = new GuiButton(settingsBtnImg, settingsBtnImgOver, 0, 3, Theme.setting_x, Theme.setting_y, trigA,
-                                btnSoundOver, btnSoundClick2, 1, settingsBtnTT, 65, -30, 0, 5);
+    settingsBtn = new GuiButton(settingsBtnImg, settingsBtnImgOver, 0, 3,
+                                thInt("64 - settings btn pos x"), thInt("371 - settings btn pos y"),
+                                trigA, btnSoundOver, btnSoundClick2, 1, settingsBtnTT, 65, -30, 0, 5);
 
     homeBtnTT = new GuiTooltip(tr( "Back to HBC or Wii Menu" ));
     if (Settings.wsprompt) homeBtnTT->SetWidescreen(Settings.widescreen);
-    settingsBtnTT->SetAlpha(Theme.tooltipAlpha);
+    settingsBtnTT->SetAlpha(thInt("255 - tooltip alpha"));
     homeBtnImg = new GuiImage(btnhome);
     homeBtnImg->SetWidescreen(Settings.widescreen);
     homeBtnImgOver = new GuiImage(btnhomeOver);
     homeBtnImgOver->SetWidescreen(Settings.widescreen);
-    homeBtn = new GuiButton(homeBtnImg, homeBtnImgOver, 0, 3, Theme.home_x, Theme.home_y, trigA, btnSoundOver, btnSoundClick2,
-                            1, homeBtnTT, 15, -30, 1, 5);
+    homeBtn = new GuiButton(homeBtnImg, homeBtnImgOver, 0, 3,
+                            thInt("489 - home menu btn pos x"), thInt("371 - home menu btn pos x"),
+                            trigA, btnSoundOver, btnSoundClick2, 1, homeBtnTT, 15, -30, 1, 5);
     homeBtn->RemoveSoundClick();
     homeBtn->SetTrigger(trigHome);
 
     poweroffBtnTT = new GuiTooltip(tr( "Power off the Wii" ));
     if (Settings.wsprompt) poweroffBtnTT->SetWidescreen(Settings.widescreen);
-    poweroffBtnTT->SetAlpha(Theme.tooltipAlpha);
+    poweroffBtnTT->SetAlpha(thInt("255 - tooltip alpha"));
     poweroffBtnImg = new GuiImage(btnpwroff);
     poweroffBtnImgOver = new GuiImage(btnpwroffOver);
     poweroffBtnImg->SetWidescreen(Settings.widescreen);
     poweroffBtnImgOver->SetWidescreen(Settings.widescreen);
-    poweroffBtn = new GuiButton(poweroffBtnImg, poweroffBtnImgOver, 0, 3, Theme.power_x, Theme.power_y, trigA,
-                                btnSoundOver, btnSoundClick2, 1, poweroffBtnTT, -10, -30, 1, 5);
+    poweroffBtn = new GuiButton(poweroffBtnImg, poweroffBtnImgOver, 0, 3,
+                                thInt("576 - power off btn pos x"), thInt("355 - power off btn pos y"),
+                                trigA, btnSoundOver, btnSoundClick2, 1, poweroffBtnTT, -10, -30, 1, 5);
 
     sdcardBtnTT = new GuiTooltip(tr( "Reload SD" ));
     if (Settings.wsprompt) sdcardBtnTT->SetWidescreen(Settings.widescreen);
-    sdcardBtnTT->SetAlpha(Theme.tooltipAlpha);
+    sdcardBtnTT->SetAlpha(thInt("255 - tooltip alpha"));
     sdcardImg = new GuiImage(btnsdcard);
     sdcardImgOver = new GuiImage(btnsdcardOver);
     sdcardImg->SetWidescreen(Settings.widescreen);
     sdcardImgOver->SetWidescreen(Settings.widescreen);
-    sdcardBtn = new GuiButton(sdcardImg, sdcardImgOver, 0, 3, Theme.sdcard_x, Theme.sdcard_y, trigA, btnSoundOver,
-                              btnSoundClick2, 1, sdcardBtnTT, 15, -30, 0, 5);
+    sdcardBtn = new GuiButton(sdcardImg, sdcardImgOver, 0, 3,
+                              thInt("160 - sd card btn pos x"), thInt("395 - sd card btn pos y"),
+                              trigA, btnSoundOver, btnSoundClick2, 1, sdcardBtnTT, 15, -30, 0, 5);
 
     gameInfo = new GuiButton(0, 0);
     gameInfo->SetTrigger(trig2);
@@ -194,71 +199,69 @@ GameBrowseMenu::GameBrowseMenu()
 
     favoriteBtnTT = new GuiTooltip(tr( "Display favorites only" ));
     if (Settings.wsprompt) favoriteBtnTT->SetWidescreen(Settings.widescreen);
-    favoriteBtnTT->SetAlpha(Theme.tooltipAlpha);
+    favoriteBtnTT->SetAlpha(thInt("255 - tooltip alpha"));
     favoriteBtnImg = new GuiImage(imgfavIcon);
     favoriteBtnImg->SetWidescreen(Settings.widescreen);
     favoriteBtnImg_g = new GuiImage(imgfavIcon_gray);
     favoriteBtnImg_g->SetWidescreen(Settings.widescreen);
-    favoriteBtn = new GuiButton(favoriteBtnImg_g, favoriteBtnImg_g, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_favorite_x,
-                                Theme.gamelist_favorite_y, trigA, btnSoundOver, btnSoundClick2, 1, favoriteBtnTT, -15, 52, 0, 3);
+    favoriteBtn = new GuiButton(favoriteBtnImg_g, favoriteBtnImg_g, ALIGN_LEFT, ALIGN_TOP,
+                                0, 0,
+                                trigA, btnSoundOver, btnSoundClick2, 1, favoriteBtnTT, -15, 52, 0, 3);
 
     searchBtnTT = new GuiTooltip(tr( "Set Search-Filter" ));
     if (Settings.wsprompt) searchBtnTT->SetWidescreen(Settings.widescreen);
-    searchBtnTT->SetAlpha(Theme.tooltipAlpha);
+    searchBtnTT->SetAlpha(thInt("255 - tooltip alpha"));
     searchBtnImg = new GuiImage(imgsearchIcon);
     searchBtnImg->SetWidescreen(Settings.widescreen);
     searchBtnImg_g = new GuiImage(imgsearchIcon_gray);
     searchBtnImg_g->SetWidescreen(Settings.widescreen);
-    searchBtn = new GuiButton(searchBtnImg_g, searchBtnImg_g, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_search_x,
-                              Theme.gamelist_search_y, trigA, btnSoundOver, btnSoundClick2, 1, searchBtnTT, -15, 52, 0, 3);
+    searchBtn = new GuiButton(searchBtnImg_g, searchBtnImg_g, ALIGN_LEFT, ALIGN_TOP,
+                              0, 0,
+                              trigA, btnSoundOver, btnSoundClick2, 1, searchBtnTT, -15, 52, 0, 3);
 
     sortBtnTT = new GuiTooltip(" ");
     if (Settings.wsprompt) sortBtnTT->SetWidescreen(Settings.widescreen);
-    sortBtnTT->SetAlpha(Theme.tooltipAlpha);
+    sortBtnTT->SetAlpha(thInt("255 - tooltip alpha"));
 
     sortBtnImg = new GuiImage(imgabcIcon);
     sortBtnImg->SetWidescreen(Settings.widescreen);
-    sortBtn = new GuiButton(sortBtnImg, sortBtnImg, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_abc_x, Theme.gamelist_abc_y, trigA, btnSoundOver, btnSoundClick2, 1, sortBtnTT, -15, 52, 0, 3);
+    sortBtn = new GuiButton(sortBtnImg, sortBtnImg, ALIGN_LEFT, ALIGN_TOP, 0, 0, trigA, btnSoundOver, btnSoundClick2, 1, sortBtnTT, -15, 52, 0, 3);
 
     listBtnTT = new GuiTooltip(tr( "Display as a list" ));
     if (Settings.wsprompt) listBtnTT->SetWidescreen(Settings.widescreen);
-    listBtnTT->SetAlpha(Theme.tooltipAlpha);
+    listBtnTT->SetAlpha(thInt("255 - tooltip alpha"));
     listBtnImg = new GuiImage(imgarrangeList);
     listBtnImg->SetWidescreen(Settings.widescreen);
     listBtnImg_g = new GuiImage(imgarrangeList_gray);
     listBtnImg_g->SetWidescreen(Settings.widescreen);
-    listBtn = new GuiButton(listBtnImg_g, listBtnImg_g, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_list_x,
-                            Theme.gamelist_list_y, trigA, btnSoundOver, btnSoundClick2, 1, listBtnTT, 15, 52, 1, 3);
+    listBtn = new GuiButton(listBtnImg_g, listBtnImg_g, ALIGN_LEFT, ALIGN_TOP, 0, 0, trigA, btnSoundOver, btnSoundClick2, 1, listBtnTT, 15, 52, 1, 3);
 
     gridBtnTT = new GuiTooltip(tr( "Display as a grid" ));
     if (Settings.wsprompt) gridBtnTT->SetWidescreen(Settings.widescreen);
-    gridBtnTT->SetAlpha(Theme.tooltipAlpha);
+    gridBtnTT->SetAlpha(thInt("255 - tooltip alpha"));
     gridBtnImg = new GuiImage(imgarrangeGrid);
     gridBtnImg->SetWidescreen(Settings.widescreen);
     gridBtnImg_g = new GuiImage(imgarrangeGrid_gray);
     gridBtnImg_g->SetWidescreen(Settings.widescreen);
-    gridBtn = new GuiButton(gridBtnImg_g, gridBtnImg_g, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_grid_x,
-                      Theme.gamelist_grid_y, trigA, btnSoundOver, btnSoundClick2, 1, gridBtnTT, 15, 52, 1, 3);
+    gridBtn = new GuiButton(gridBtnImg_g, gridBtnImg_g, ALIGN_LEFT, ALIGN_TOP, 0, 0, trigA, btnSoundOver, btnSoundClick2, 1, gridBtnTT, 15, 52, 1, 3);
 
     carouselBtnTT = new GuiTooltip(tr( "Display as a carousel" ));
     if (Settings.wsprompt) carouselBtnTT->SetWidescreen(Settings.widescreen);
-    carouselBtnTT->SetAlpha(Theme.tooltipAlpha);
+    carouselBtnTT->SetAlpha(thInt("255 - tooltip alpha"));
     carouselBtnImg = new GuiImage(imgarrangeCarousel);
     carouselBtnImg->SetWidescreen(Settings.widescreen);
     carouselBtnImg_g = new GuiImage(imgarrangeCarousel_gray);
     carouselBtnImg_g->SetWidescreen(Settings.widescreen);
-    carouselBtn = new GuiButton(carouselBtnImg_g, carouselBtnImg_g, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_carousel_x,
-                                Theme.gamelist_carousel_y, trigA, btnSoundOver, btnSoundClick2, 1, carouselBtnTT, 15, 52, 1, 3);
+    carouselBtn = new GuiButton(carouselBtnImg_g, carouselBtnImg_g, ALIGN_LEFT, ALIGN_TOP, 0, 0, trigA, btnSoundOver, btnSoundClick2, 1, carouselBtnTT, 15, 52, 1, 3);
 
     lockBtnTT = new GuiTooltip(NULL);
     if (Settings.wsprompt) lockBtnTT->SetWidescreen(Settings.widescreen);
-    lockBtnTT->SetAlpha(Theme.tooltipAlpha);
+    lockBtnTT->SetAlpha(thInt("255 - tooltip alpha"));
     lockBtnImg = new GuiImage(imgLock);
     lockBtnImg->SetWidescreen(Settings.widescreen);
     lockBtnImg_g = new GuiImage(imgLock_gray);
     lockBtnImg_g->SetWidescreen(Settings.widescreen);
-    lockBtn = new GuiButton(lockBtnImg_g, lockBtnImg_g, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_lock_x,
-                            Theme.gamelist_lock_y, trigA, btnSoundOver, btnSoundClick2, 1, lockBtnTT, 15, 52, 1, 3);
+    lockBtn = new GuiButton(lockBtnImg_g, lockBtnImg_g, ALIGN_LEFT, ALIGN_TOP, 0, 0, trigA, btnSoundOver, btnSoundClick2, 1, lockBtnTT, 15, 52, 1, 3);
 
     unlockBtnImg = new GuiImage(imgUnlock);
     unlockBtnImg->SetWidescreen(Settings.widescreen);
@@ -267,46 +270,47 @@ GameBrowseMenu::GameBrowseMenu()
 
     dvdBtnTT = new GuiTooltip(tr( "Mount DVD drive" ));
     if (Settings.wsprompt) dvdBtnTT->SetWidescreen(Settings.widescreen);
-    dvdBtnTT->SetAlpha(Theme.tooltipAlpha);
+    dvdBtnTT->SetAlpha(thInt("255 - tooltip alpha"));
     dvdBtnImg = new GuiImage(imgdvd);
     dvdBtnImg->SetWidescreen(Settings.widescreen);
     dvdBtnImg_g = new GuiImage(imgdvd_gray);
     dvdBtnImg_g->SetWidescreen(Settings.widescreen);
-    dvdBtn = new GuiButton(dvdBtnImg_g, dvdBtnImg_g, ALIGN_LEFT, ALIGN_TOP, Theme.gamelist_dvd_x, Theme.gamelist_dvd_y,
+    dvdBtn = new GuiButton(dvdBtnImg_g, dvdBtnImg_g, ALIGN_LEFT, ALIGN_TOP, 0, 0,
                            trigA, btnSoundOver, btnSoundClick2, 1, dvdBtnTT, 15, 52, 1, 3);
 
     homebrewBtnTT = new GuiTooltip(tr( "Homebrew Launcher" ));
     if (Settings.wsprompt) homebrewBtnTT->SetWidescreen(Settings.widescreen);
-    homebrewBtnTT->SetAlpha(Theme.tooltipAlpha);
+    homebrewBtnTT->SetAlpha(thInt("255 - tooltip alpha"));
     homebrewImg = new GuiImage(homebrewImgData);
     homebrewImgOver = new GuiImage(homebrewImgDataOver);
     homebrewImg->SetWidescreen(Settings.widescreen);
     homebrewImgOver->SetWidescreen(Settings.widescreen);
-    homebrewBtn = new GuiButton(homebrewImg, homebrewImgOver, ALIGN_LEFT, ALIGN_TOP, Theme.homebrew_x, Theme.homebrew_y,
+    homebrewBtn = new GuiButton(homebrewImg, homebrewImgOver, ALIGN_LEFT, ALIGN_TOP, thInt("410 - HBC btn pos x"), thInt("405 - HBC btn pos y"),
                                 trigA, btnSoundOver, btnSoundClick2, 1, homebrewBtnTT, 15, -30, 1, 5);
     //Downloading Covers
     DownloadBtnTT = new GuiTooltip(tr( "Click to Download Covers" ));
     if (Settings.wsprompt) DownloadBtnTT->SetWidescreen(Settings.widescreen);
-    DownloadBtnTT->SetAlpha(Theme.tooltipAlpha);
+    DownloadBtnTT->SetAlpha(thInt("255 - tooltip alpha"));
     DownloadBtn = new GuiButton (0, 0);
     DownloadBtn->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    DownloadBtn->SetPosition(Theme.covers_x, Theme.covers_y);
+    DownloadBtn->SetPosition(thInt("26 - cover/download btn pos x"), thInt("58 - cover/download btn pos y"));
 
     IDBtnTT = new GuiTooltip(tr( "Click to change game ID" ));
     if (Settings.wsprompt) IDBtnTT->SetWidescreen(Settings.widescreen);
-    IDBtnTT->SetAlpha(Theme.tooltipAlpha);
+    IDBtnTT->SetAlpha(thInt("255 - tooltip alpha"));
     idBtn = new GuiButton(60, 23);
     idBtn->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    idBtn->SetPosition(Theme.id_x, Theme.id_y);
+    idBtn->SetPosition(thInt("68 - gameID btn pos x"), thInt("305 - gameID btn pos y"));
 
-    clockTimeBack = new GuiText("88:88", 40, (GXColor) {Theme.clock.r, Theme.clock.g, Theme.clock.b, Theme.clock.a / 6});
-    clockTimeBack->SetAlignment(Theme.clock_align, ALIGN_TOP);
-    clockTimeBack->SetPosition(Theme.clock_x, Theme.clock_y);
+    GXColor clockColor = thColor("r=138 g=138 b=138 a=240 - clock color");
+    clockTimeBack = new GuiText("88:88", 40, (GXColor) {clockColor.r, clockColor.g, clockColor.b, clockColor.a / 6});
+    clockTimeBack->SetAlignment(thAlign("left - clock align ver"), thAlign("top - clock align hor"));
+    clockTimeBack->SetPosition(thInt("275 - clock pos x"), thInt("275 - clock pos y"));
     clockTimeBack->SetFont(clock_ttf, clock_ttf_size);
 
-    clockTime = new GuiText("", 40, Theme.clock);
-    clockTime->SetAlignment(Theme.clock_align, ALIGN_TOP);
-    clockTime->SetPosition(Theme.clock_x, Theme.clock_y);
+    clockTime = new GuiText("", 40, clockColor);
+    clockTime->SetAlignment(thAlign("left - clock align ver"), thAlign("top - clock align hor"));
+    clockTime->SetPosition(thInt("275 - clock pos x"), thInt("275 - clock pos y"));
     clockTime->SetFont(clock_ttf, clock_ttf_size);
 
     ToolBar.push_back(favoriteBtn);
@@ -580,17 +584,25 @@ void GameBrowseMenu::ReloadBrowser()
         carouselBtn->SetImage(carouselBtnImg_g);
         carouselBtn->SetImageOver(carouselBtnImg_g);
 
-        favoriteBtn->SetPosition(Theme.gamelist_favorite_x, Theme.gamelist_favorite_y);
-        searchBtn->SetPosition(Theme.gamelist_search_x, Theme.gamelist_search_y);
-        sortBtn->SetPosition(Theme.gamelist_abc_x, Theme.gamelist_abc_y);
-        listBtn->SetPosition(Theme.gamelist_list_x, Theme.gamelist_list_y);
-        gridBtn->SetPosition(Theme.gamelist_grid_x, Theme.gamelist_grid_y);
-        carouselBtn->SetPosition(Theme.gamelist_carousel_x, Theme.gamelist_carousel_y);
-        lockBtn->SetPosition(Theme.gamelist_lock_x, Theme.gamelist_lock_y);
-        dvdBtn->SetPosition(Theme.gamelist_dvd_x, Theme.gamelist_dvd_y);
+        favoriteBtn->SetPosition(Settings.widescreen ? thInt("288 - list layout favorite btn pos x widescreen") : thInt("260 - list layout favorite btn pos x"),
+                                thInt("13 - list layout favorite btn pos y"));
+        searchBtn->SetPosition(Settings.widescreen ? thInt("320 - list layout search btn pos x widescreen") : thInt("300 - list layout search btn pos x"),
+                                thInt("13 - list layout search btn pos x"));
+        sortBtn->SetPosition(Settings.widescreen ? thInt("352 - list layout abc/sort btn pos x widescreen") : thInt("340 - list layout abc/sort btn pos x"),
+                                thInt("13 - list layout abc/sort btn pos y"));
+        listBtn->SetPosition(Settings.widescreen ? thInt("384 - list layout list btn pos x widescreen") : thInt("380 - list layout list btn pos x"),
+                                thInt("13 - list layout list btn pos y"));
+        gridBtn->SetPosition(Settings.widescreen ? thInt("416 - list layout grid btn pos x widescreen") : thInt("420 - list layout grid btn pos x"),
+                                thInt("13 - list layout grid btn pos y"));
+        carouselBtn->SetPosition(Settings.widescreen ? thInt("448 - list layout carousel btn pos x widescreen") : thInt("460 - list layout carousel btn pos x"),
+                                thInt("13 - list layout carousel btn pos y"));
+        lockBtn->SetPosition(Settings.widescreen ? thInt("480 - list layout lock btn pos x widescreen") : thInt("500 - list layout lock btn pos x"),
+                                thInt("13 - list layout lock btn pos y"));
+        dvdBtn->SetPosition(Settings.widescreen ? thInt("512 - list layout dvd btn pos x widescreen") : thInt("540 - list layout dvd btn pos x"),
+                                thInt("13 - list layout dvd btn pos y"));
 
-        gameBrowser = new GuiGameBrowser(Theme.gamelist_w, Theme.gamelist_h, lastSelectedGame);
-        gameBrowser->SetPosition(Theme.gamelist_x, Theme.gamelist_y);
+        gameBrowser = new GuiGameBrowser(thInt("396 - game list layout width"), thInt("280 - game list layout height"), lastSelectedGame);
+        gameBrowser->SetPosition(thInt("200 - game list layout pos x"), thInt("49 - game list layout pos y"));
         gameBrowser->SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
     }
     else if (Settings.gameDisplay == GRID_MODE)
@@ -605,17 +617,25 @@ void GameBrowseMenu::ReloadBrowser()
         carouselBtn->SetImage(carouselBtnImg_g);
         carouselBtn->SetImageOver(carouselBtnImg_g);
 
-        favoriteBtn->SetPosition(Theme.gamegrid_favorite_x, Theme.gamegrid_favorite_y);
-        searchBtn->SetPosition(Theme.gamegrid_search_x, Theme.gamegrid_search_y);
-        sortBtn->SetPosition(Theme.gamegrid_abc_x, Theme.gamegrid_abc_y);
-        listBtn->SetPosition(Theme.gamegrid_list_x, Theme.gamegrid_list_y);
-        gridBtn->SetPosition(Theme.gamegrid_grid_x, Theme.gamegrid_grid_y);
-        carouselBtn->SetPosition(Theme.gamegrid_carousel_x, Theme.gamegrid_carousel_y);
-        lockBtn->SetPosition(Theme.gamegrid_lock_x, Theme.gamegrid_lock_y);
-        dvdBtn->SetPosition(Theme.gamegrid_dvd_x, Theme.gamegrid_dvd_y);
+        favoriteBtn->SetPosition(Settings.widescreen ? thInt("224 - grid layout favorite btn pos x widescreen") : thInt("200 - grid layout favorite btn pos x"),
+                                thInt("13 - grid layout favorite btn pos y"));
+        searchBtn->SetPosition(Settings.widescreen ? thInt("256 - grid layout search btn pos x widescreen") : thInt("240 - grid layout search btn pos x"),
+                                thInt("13 - grid layout search btn pos x"));
+        sortBtn->SetPosition(Settings.widescreen ? thInt("288 - grid layout abc/sort btn pos x widescreen") : thInt("280 - grid layout abc/sort btn pos x"),
+                                thInt("13 - grid layout abc/sort btn pos y"));
+        listBtn->SetPosition(Settings.widescreen ? thInt("320 - grid layout list btn pos x widescreen") : thInt("320 - grid layout list btn pos x"),
+                                thInt("13 - grid layout list btn pos y"));
+        gridBtn->SetPosition(Settings.widescreen ? thInt("352 - grid layout grid btn pos x widescreen") : thInt("360 - grid layout grid btn pos x"),
+                                thInt("13 - grid layout grid btn pos y"));
+        carouselBtn->SetPosition(Settings.widescreen ? thInt("384 - grid layout carousel btn pos x widescreen") : thInt("400 - grid layout carousel btn pos x"),
+                                thInt("13 - grid layout carousel btn pos y"));
+        lockBtn->SetPosition(Settings.widescreen ? thInt("416 - grid layout lock btn pos x widescreen") : thInt("440 - grid layout lock btn pos x"),
+                                thInt("13 - grid layout lock btn pos y"));
+        dvdBtn->SetPosition(Settings.widescreen ? thInt("448 - grid layout dvd btn pos x widescreen") : thInt("480 - grid layout dvd btn pos x"),
+                                thInt("13 - grid layout dvd btn pos y"));
 
-        gameGrid = new GuiGameGrid(Theme.gamegrid_w, Theme.gamegrid_h, Settings.theme_path, bg_options_png, lastSelectedGame);
-        gameGrid->SetPosition(Theme.gamegrid_x, Theme.gamegrid_y);
+        gameGrid = new GuiGameGrid(thInt("640 - game grid layout width"), thInt("400 - game grid layout height"), Settings.theme_path, bg_options_png, lastSelectedGame);
+        gameGrid->SetPosition(thInt("0 - game grid layout pos x"), thInt("20 - game grid layout pos y"));
         gameGrid->SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
     }
     else if (Settings.gameDisplay == CAROUSEL_MODE)
@@ -630,24 +650,32 @@ void GameBrowseMenu::ReloadBrowser()
         gridBtn->SetImage(gridBtnImg_g);
         gridBtn->SetImageOver(gridBtnImg_g);
 
-        favoriteBtn->SetPosition(Theme.gamecarousel_favorite_x, Theme.gamecarousel_favorite_y);
-        searchBtn->SetPosition(Theme.gamecarousel_search_x, Theme.gamecarousel_favorite_y);
-        sortBtn->SetPosition(Theme.gamecarousel_abc_x, Theme.gamecarousel_abc_y);
-        listBtn->SetPosition(Theme.gamecarousel_list_x, Theme.gamecarousel_list_y);
-        gridBtn->SetPosition(Theme.gamecarousel_grid_x, Theme.gamecarousel_grid_y);
-        carouselBtn->SetPosition(Theme.gamecarousel_carousel_x, Theme.gamecarousel_carousel_y);
-        lockBtn->SetPosition(Theme.gamecarousel_lock_x, Theme.gamecarousel_lock_y);
-        dvdBtn->SetPosition(Theme.gamecarousel_dvd_x, Theme.gamecarousel_dvd_y);
+        favoriteBtn->SetPosition(Settings.widescreen ? thInt("224 - carousel layout favorite btn pos x widescreen") : thInt("200 - carousel layout favorite btn pos x"),
+                                thInt("13 - carousel layout favorite btn pos y"));
+        searchBtn->SetPosition(Settings.widescreen ? thInt("256 - carousel layout search btn pos x widescreen") : thInt("240 - carousel layout search btn pos x"),
+                                thInt("13 - carousel layout search btn pos x"));
+        sortBtn->SetPosition(Settings.widescreen ? thInt("288 - carousel layout abc/sort btn pos x widescreen") : thInt("280 - carousel layout abc/sort btn pos x"),
+                                thInt("13 - carousel layout abc/sort btn pos y"));
+        listBtn->SetPosition(Settings.widescreen ? thInt("320 - carousel layout list btn pos x widescreen") : thInt("320 - carousel layout list btn pos x"),
+                                thInt("13 - carousel layout list btn pos y"));
+        gridBtn->SetPosition(Settings.widescreen ? thInt("352 - carousel layout grid btn pos x widescreen") : thInt("360 - carousel layout grid btn pos x"),
+                                thInt("13 - carousel layout grid btn pos y"));
+        carouselBtn->SetPosition(Settings.widescreen ? thInt("384 - carousel layout carousel btn pos x widescreen") : thInt("400 - carousel layout carousel btn pos x"),
+                                thInt("13 - carousel layout carousel btn pos y"));
+        lockBtn->SetPosition(Settings.widescreen ? thInt("416 - carousel layout lock btn pos x widescreen") : thInt("440 - carousel layout lock btn pos x"),
+                                thInt("13 - carousel layout lock btn pos y"));
+        dvdBtn->SetPosition(Settings.widescreen ? thInt("448 - carousel layout dvd btn pos x widescreen") : thInt("480 - carousel layout dvd btn pos x"),
+                                thInt("13 - carousel layout dvd btn pos y"));
 
-        gameCarousel = new GuiGameCarousel(640, 400, Settings.theme_path, bg_options_png, lastSelectedGame);
-        gameCarousel->SetPosition(Theme.gamecarousel_x, Theme.gamecarousel_y);
+        gameCarousel = new GuiGameCarousel(thInt("640 - game carousel layout width"), thInt("400 - game carousel layout height"), Settings.theme_path, bg_options_png, lastSelectedGame);
+        gameCarousel->SetPosition(thInt("0 - game carousel layout pos x"), thInt("-20 - game carousel layout pos y"));
         gameCarousel->SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
     }
 
 
-    if (Theme.show_hddinfo == -1 || Theme.show_hddinfo == 1) //force show hdd info
+    if (thInt("1 - show hdd info: 1 for on and 0 for off") == 1) //force show hdd info
         Append(usedSpaceTxt);
-    if (Theme.show_gamecount == -1 || Theme.show_gamecount == 1) //force show game cnt info
+    if (thInt("1 - show game count: 1 for on and 0 for off") == 1) //force show game cnt info
         Append(gamecntBtn);
     Append(sdcardBtn);
     Append(poweroffBtn);
@@ -1137,6 +1165,7 @@ void GameBrowseMenu::UpdateGameInfoText(const u8 * gameId)
         Remove(GameRegionTxt);
         delete GameRegionTxt;
         GameRegionTxt = NULL;
+        idBtn->SetLabel(NULL);
         return;
     }
 
@@ -1179,7 +1208,7 @@ void GameBrowseMenu::UpdateGameInfoText(const u8 * gameId)
     {
         Remove(GameIDTxt);
         delete GameIDTxt;
-        GameIDTxt = new GuiText(IDfull, 22, Theme.info);
+        GameIDTxt = new GuiText(IDfull, 22, thColor("r=55 g=190 b=237 a=255 - game id text color"));
         GameIDTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
         idBtn->SetEffect(EFFECT_FADE, 20);
         idBtn->SetLabel(GameIDTxt);
@@ -1190,9 +1219,9 @@ void GameBrowseMenu::UpdateGameInfoText(const u8 * gameId)
     {
         Remove(GameRegionTxt);
         delete GameRegionTxt;
-        GameRegionTxt = new GuiText(gameregion, 22, Theme.info);
+        GameRegionTxt = new GuiText(gameregion, 22, thColor("r=55 g=190 b=237 a=255 - region info text color"));
         GameRegionTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-        GameRegionTxt->SetPosition(Theme.region_x, Theme.region_y);
+        GameRegionTxt->SetPosition(thInt("68 - region info text pos x"), thInt("30 - region info text pos x"));
         GameRegionTxt->SetEffect(EFFECT_FADE, 20);
         Append(GameRegionTxt);
     }

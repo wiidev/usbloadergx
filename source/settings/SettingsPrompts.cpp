@@ -89,7 +89,6 @@ int MenuLanguageSelect()
 {
     int cnt = 0;
     int ret = 0, choice = 0;
-    int scrollon;
     int returnhere = 0;
 
     GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
@@ -128,7 +127,7 @@ int MenuLanguageSelect()
     oggmenubackground.SetAlignment( ALIGN_LEFT, ALIGN_TOP );
     oggmenubackground.SetPosition( 0, 0 );
 
-    GuiText backBtnTxt( tr( "Back" ) , 22, Theme.prompttext );
+    GuiText backBtnTxt( tr( "Back" ) , 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     backBtnTxt.SetMaxWidth( btnOutline.GetWidth() - 30 );
     GuiImage backBtnImg( &btnOutline );
     if ( Settings.wsprompt == ON )
@@ -147,7 +146,7 @@ int MenuLanguageSelect()
     backBtn.SetTrigger( &trigB );
     backBtn.SetEffectGrow();
 
-    GuiText defaultBtnTxt( tr( "Default" ) , 22, Theme.prompttext );
+    GuiText defaultBtnTxt( tr( "Default" ) , 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     defaultBtnTxt.SetMaxWidth( btnOutline.GetWidth() - 30 );
     GuiImage defaultBtnImg( &btnOutline );
     if ( Settings.wsprompt == ON )
@@ -165,7 +164,7 @@ int MenuLanguageSelect()
     defaultBtn.SetTrigger( &trigA );
     defaultBtn.SetEffectGrow();
 
-    GuiText updateBtnTxt( tr( "Update Files" ) , 22, Theme.prompttext );
+    GuiText updateBtnTxt( tr( "Update Files" ) , 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     updateBtnTxt.SetMaxWidth( btnOutline.GetWidth() - 30 );
     GuiImage updateBtnImg( &btnOutline );
     if ( Settings.wsprompt == ON )
@@ -196,15 +195,6 @@ int MenuLanguageSelect()
 
     }
 
-    if ( cnt < 9 )
-    {
-        scrollon = 0;
-    }
-    else
-    {
-        scrollon = 1;
-    }
-
     GuiCustomOptionBrowser optionBrowser4( 396, 280, &options2, "bg_options_settings.png");
     optionBrowser4.SetPosition( 0, 90 );
     optionBrowser4.SetAlignment( ALIGN_CENTRE, ALIGN_TOP );
@@ -226,6 +216,8 @@ int MenuLanguageSelect()
 
     while ( !returnhere )
     {
+		usleep(100);
+
         if ( shutdown == 1 )
             Sys_Shutdown();
         else if ( reset == 1 )
@@ -343,5 +335,211 @@ int MenuLanguageSelect()
     ResumeGui();
 
     return returnhere;
+}
+
+
+/****************************************************************************
+ * MenuThemeSelect
+ ***************************************************************************/
+int MenuThemeSelect()
+{
+    char themepath[250];
+    int cnt = 0;
+    int ret = 0, choice = 0;
+    int returnVal = 0;
+
+    snprintf(themepath, sizeof(themepath), Settings.theme_path);
+
+    char * ptr = strrchr(themepath, '/');
+    if(ptr && *ptr != '\0') ptr[1] =  '\0';
+
+    GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
+    GuiImageData settingsbg(Resources::GetFile("settings_background.png"), Resources::GetFileSize("settings_background.png"));
+
+    GuiTrigger trigA;
+    trigA.SetSimpleTrigger( -1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A );
+    GuiTrigger trigB;
+    trigB.SetButtonOnlyTrigger( -1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B );
+
+    GuiText titleTxt(themepath, 24, ( GXColor ) {0, 0, 0, 255} );
+    titleTxt.SetAlignment( ALIGN_CENTRE, ALIGN_MIDDLE );
+    titleTxt.SetPosition( 0, 0 );
+    GuiButton pathBtn( 300, 50 );
+    pathBtn.SetAlignment( ALIGN_CENTRE, ALIGN_TOP );
+    pathBtn.SetPosition( 0, 28 );
+    pathBtn.SetLabel( &titleTxt );
+    pathBtn.SetSoundOver( btnSoundOver );
+    pathBtn.SetSoundClick( btnSoundClick2 );
+    pathBtn.SetTrigger( &trigA );
+    pathBtn.SetEffectGrow();
+
+    GuiImage backgroundImg( &settingsbg );
+    backgroundImg.SetAlignment( ALIGN_LEFT, ALIGN_TOP );
+    backgroundImg.SetPosition( 0, 0 );
+
+    GuiText backBtnTxt( tr( "Back" ) , 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    backBtnTxt.SetMaxWidth( btnOutline.GetWidth() - 30 );
+    GuiImage backBtnImg( &btnOutline );
+    if ( Settings.wsprompt == ON )
+    {
+        backBtnTxt.SetWidescreen( Settings.widescreen );
+        backBtnImg.SetWidescreen( Settings.widescreen );
+    }
+    GuiButton backBtn( btnOutline.GetWidth(), btnOutline.GetHeight() );
+    backBtn.SetAlignment( ALIGN_CENTRE, ALIGN_TOP );
+    backBtn.SetPosition( -190, 400 );
+    backBtn.SetLabel( &backBtnTxt );
+    backBtn.SetImage( &backBtnImg );
+    backBtn.SetSoundOver( btnSoundOver );
+    backBtn.SetSoundClick( btnSoundClick2 );
+    backBtn.SetTrigger( &trigA );
+    backBtn.SetTrigger( &trigB );
+    backBtn.SetEffectGrow();
+
+    GuiText defaultBtnTxt( tr( "Default" ) , 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    defaultBtnTxt.SetMaxWidth( btnOutline.GetWidth() - 30 );
+    GuiImage defaultBtnImg( &btnOutline );
+    if ( Settings.wsprompt == ON )
+    {
+        defaultBtnTxt.SetWidescreen( Settings.widescreen );
+        defaultBtnImg.SetWidescreen( Settings.widescreen );
+    }
+    GuiButton defaultBtn( btnOutline.GetWidth(), btnOutline.GetHeight() );
+    defaultBtn.SetAlignment( ALIGN_CENTRE, ALIGN_TOP );
+    defaultBtn.SetPosition( 190, 400 );
+    defaultBtn.SetLabel( &defaultBtnTxt );
+    defaultBtn.SetImage( &defaultBtnImg );
+    defaultBtn.SetSoundOver( btnSoundOver );
+    defaultBtn.SetSoundClick( btnSoundClick2 );
+    defaultBtn.SetTrigger( &trigA );
+    defaultBtn.SetEffectGrow();
+
+    DirList * Dir = new DirList(themepath, ".them");
+    OptionList options2;
+
+    for ( cnt = 0; cnt < Dir->GetFilecount(); cnt++ )
+    {
+        char filename[64];
+        strlcpy( filename, Dir->GetFilename( cnt ), sizeof( filename ) );
+        char *dot = strchr( filename, '.' );
+        if ( dot ) *dot = '\0';
+        options2.SetName( cnt, "%s", filename );
+        options2.SetValue( cnt, NULL );
+
+    }
+
+    GuiCustomOptionBrowser optionBrowser4( 396, 280, &options2, "bg_options_settings.png");
+    optionBrowser4.SetPosition( 0, 90 );
+    optionBrowser4.SetAlignment( ALIGN_CENTRE, ALIGN_TOP );
+
+    HaltGui();
+    GuiWindow w( screenwidth, screenheight );
+    w.Append( &backgroundImg );
+    w.Append( &pathBtn );
+    w.Append( &backBtn );
+    w.Append( &optionBrowser4 );
+    mainWindow->Append( &w );
+
+    w.SetEffect( EFFECT_FADE, 20 );
+    ResumeGui();
+
+    while ( w.GetEffect() > 0 ) usleep(100);
+
+    while (returnVal == 0)
+    {
+		usleep(100);
+
+        if (shutdown)
+            Sys_Shutdown();
+        else if (reset)
+            Sys_Reboot();
+
+        else if ( backBtn.GetState() == STATE_CLICKED )
+            break;
+
+        else if ( defaultBtn.GetState() == STATE_CLICKED )
+        {
+            choice = WindowPrompt( tr( "Loading default theme." ), 0, tr( "OK" ), tr( "Cancel" ) );
+            if ( choice == 1 )
+            {
+                snprintf(Settings.theme_path, sizeof(Settings.theme_path), "%stheme/", Settings.ConfigPath);
+                Theme::SetDefault();
+                Settings.Save();
+                returnVal = 1;
+            }
+            defaultBtn.ResetState();
+        }
+
+        else if ( pathBtn.GetState() == STATE_CLICKED )
+        {
+            w.Remove( &optionBrowser4 );
+            w.Remove( &backBtn );
+            w.Remove( &pathBtn );
+            w.Remove( &defaultBtn );
+            int result = OnScreenKeyboard( themepath, sizeof(themepath), 0 );
+            w.Append( &optionBrowser4 );
+            w.Append( &pathBtn );
+            w.Append( &backBtn );
+            w.Append( &defaultBtn );
+            if (result == 1)
+            {
+                if (themepath[strlen(themepath)-1] != '/')
+                    strcat(themepath, "/");
+
+                HaltGui();
+                delete Dir;
+                Dir = new DirList(themepath, ".them");
+                options2.ClearList();
+                for ( cnt = 0; cnt < Dir->GetFilecount(); cnt++ )
+                {
+                    char filename[64];
+                    strlcpy( filename, Dir->GetFilename( cnt ), sizeof( filename ) );
+                    char *dot = strchr( filename, '.' );
+                    if ( dot ) *dot = '\0';
+                    options2.SetName( cnt, "%s", filename );
+                    options2.SetValue( cnt, NULL );
+                }
+                titleTxt.SetText(themepath);
+                ResumeGui();
+                WindowPrompt( tr( "Theme path is changed." ), 0, tr( "OK" ) );
+            }
+            pathBtn.ResetState();
+        }
+
+        ret = optionBrowser4.GetClickedOption();
+
+        if (ret >= 0 && ret < Dir->GetFilecount())
+        {
+            choice = WindowPrompt( tr( "Do you want to load this theme?" ), Dir->GetFilename(ret), tr( "Yes" ), tr( "Cancel" ) );
+            if ( choice == 1 )
+            {
+                snprintf(Settings.theme_path, sizeof( Settings.theme_path ), "%s", Dir->GetFilepath(ret));
+                if ( !CheckFile( Settings.theme_path ) )
+                {
+                    WindowPrompt( tr( "File not found." ), tr( "Loading default theme." ), tr( "OK" ) );
+                    Theme::SetDefault();
+                }
+                else
+                {
+                    Theme::Load(Settings.theme_path);
+                }
+                Settings.Save();
+                returnVal = 1;
+                break;
+            }
+            optionBrowser4.SetFocus( 1 );
+        }
+    }
+
+    w.SetEffect( EFFECT_FADE, -20 );
+    while ( w.GetEffect() > 0 ) usleep(100);
+
+    HaltGui();
+    mainWindow->Remove( &w );
+    ResumeGui();
+
+    delete Dir;
+
+    return returnVal;
 }
 

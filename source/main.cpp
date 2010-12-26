@@ -90,7 +90,7 @@ int main(int argc, char *argv[])
     printf("\tLoading language...%s\n", Settings.LoadLanguage(Settings.language_path, CONSOLE_DEFAULT) ? "done" : "failed");
     printf("\tLoading game settings...%s\n", GameSettings.Load(Settings.ConfigPath) ? "done" : "failed");
     printf("\tLoading game statistics...%s\n", GameStatistics.Load(Settings.ConfigPath) ? "done" : "failed");
-    printf("\tLoading theme...%s\n", Theme.Load(Settings.theme_path) ? "done" : "failed (using default)");
+    printf("\tLoading theme...%s\n", Theme::Load(Settings.theme_path) ? "done" : "failed (using default)");
     printf("\tLoading font system...%s\n", SetupDefaultFont(Settings.theme_path) ? "done" : "failed (using default)");
 
     VIDEO_SetWidescreen(Settings.widescreen);

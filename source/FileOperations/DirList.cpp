@@ -55,9 +55,9 @@ bool DirList::LoadPath(const char * folder, const char *filter, u32 flags)
 	std::string folderpath = folder;
 
 	if(folderpath[folderpath.size()-1] == '/')
-        folderpath[folderpath.size()-1] = '\0';
+        folderpath.erase(folderpath.size()-1, 1);
 
-	const char * notRoot = strrchr(folderpath.c_str(), '/');
+	const char * notRoot = strchr(folderpath.c_str(), '/');
 	if(!notRoot)
 	    folderpath += '/';
 

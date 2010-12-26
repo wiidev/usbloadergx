@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-17 18:50+0100\n"
+"POT-Creation-Date: 2010-12-26 16:16+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: omercigingelini\n"
 "Language-Team: omercigingelini\n"
@@ -25,53 +25,14 @@ msgstr " kaydedildi. Metin doğrulanmadı. Bazı kodlar birlikteyken doğru çal
 msgid " is not on the server."
 msgstr " sunucuda mevcut değil"
 
-msgid "0 (Everyone)"
-msgstr "0 (Herkes)"
-
-msgid "0 (Locked and Unlocked Games)"
-msgstr ""
-
-msgid "1 (Child 7+)"
-msgstr "1 (Çocuk 7+)"
-
-msgid "1 (Unlocked Games Only)"
-msgstr ""
-
-msgid "1 hour"
-msgstr "1 saat"
-
-msgid "10 min"
-msgstr "10 dakika"
-
-msgid "2 (Teen 12+)"
-msgstr "2 (Genç 12+)"
-
-msgid "20 min"
-msgstr "20 dakika"
-
 msgid "2D Cover Path"
 msgstr "2D Kapak Yolu"
-
-msgid "3 (Mature 16+)"
-msgstr "3 (Yetişkin 16+)"
-
-msgid "3 min"
-msgstr "3 dakika"
-
-msgid "30 min"
-msgstr "30 dakika"
 
 msgid "3D Cover Path"
 msgstr "3D Kapak Yolu"
 
 msgid "3D Covers"
 msgstr "3B Kapaklar"
-
-msgid "4 (Adults Only 18+)"
-msgstr "4 (Sadece Yetişkin 18+)"
-
-msgid "5 min"
-msgstr "5 dakika"
 
 msgid ">> Deleting tickets..."
 msgstr ">> Biletler siliniyor"
@@ -136,19 +97,13 @@ msgstr "USB Loader GX'in tüm özellikleri kilitli."
 msgid "Alternate DOL"
 msgstr "Alternatif DOL"
 
-msgid "An Error occured"
-msgstr "Bir Hata oluştu"
-
-msgid "Anti"
-msgstr ""
-
 msgid "App Language"
 msgstr "Program Lisani"
 
 msgid "Apr"
 msgstr "Nis"
 
-msgid "Are you sure you want to enable Parent Control?"
+msgid "Are you sure you want to lock USB Loader GX?"
 msgstr ""
 
 msgid "Are you sure you want to reset?"
@@ -165,9 +120,6 @@ msgstr "Yazar:"
 
 msgid "AutoInit Network"
 msgstr "Ağı ototanımla"
-
-msgid "AutoPatch"
-msgstr "OtoYama"
 
 msgid "BCA Codes Path"
 msgstr "BCA Kod Yolu"
@@ -199,9 +151,6 @@ msgstr "Boot/Standart"
 msgid "Boot?"
 msgstr "Başlat?"
 
-msgid "Both"
-msgstr "İkisi de"
-
 msgid "Can't be formatted"
 msgstr "Biçimlendirilemiyor"
 
@@ -225,9 +174,6 @@ msgstr ""
 
 msgid "Cheatfile is blank"
 msgstr "Hile dosyası boş"
-
-msgid "Checking for Updates"
-msgstr "Güncellemeler kontrol ediliyor"
 
 msgid "Clear"
 msgstr ""
@@ -260,9 +206,6 @@ msgstr ""
 msgid "Console"
 msgstr "Konsol"
 
-msgid "Console Default"
-msgstr "Konsol Ayari"
-
 msgid "Console Locked"
 msgstr "Konsol Kilitli"
 
@@ -283,6 +226,10 @@ msgstr ""
 
 msgid "Could not create GCT file"
 msgstr "GCT dosyası oluşturulamadı"
+
+#, c-format
+msgid "Could not create path: %s"
+msgstr ""
 
 msgid "Could not find info for this game in the wiitdb.xml."
 msgstr ""
@@ -313,9 +260,6 @@ msgstr "Emekçiler"
 
 msgid "Custom Paths"
 msgstr "Kişisel Yollar"
-
-msgid "Customs/Original"
-msgstr "Kişisel/Orjinal"
 
 msgid "DOL Path"
 msgstr "DOL Yolu"
@@ -365,14 +309,8 @@ msgstr "Disk Görseli Indirme"
 msgid "Disc Artwork Path"
 msgstr "Disk Görsel Yolu"
 
-msgid "Disc Default"
-msgstr "Disk Varsayılanı"
-
 msgid "Disc Images"
 msgstr "Disk Resimleri"
-
-msgid "DiskFlip"
-msgstr "DiskÇevir"
 
 msgid "Display"
 msgstr "Görüntü"
@@ -404,6 +342,9 @@ msgstr "Bu temayı indirmek istiyor musunuz?"
 msgid "Do you want to format:"
 msgstr "Formatlamak istiyor musunuz:"
 
+msgid "Do you want to load this theme?"
+msgstr ""
+
 msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "Doğru olduğu bilinen alternatif DOL ü kullanmak ister misiniz?"
 
@@ -434,11 +375,14 @@ msgstr "Indirme tamamlandı"
 msgid "Download request failed."
 msgstr "İndirme isteği başarısız"
 
-msgid "Downloading"
-msgstr "Indiriliyor"
-
 msgid "Downloading Page List:"
 msgstr "İndirilen Sayfa Listesi:"
+
+msgid "Downloading covers"
+msgstr ""
+
+msgid "Downloading custom Discarts"
+msgstr ""
 
 msgid "Downloading file"
 msgstr "Indirilen dosya"
@@ -446,14 +390,11 @@ msgstr "Indirilen dosya"
 msgid "Downloading file..."
 msgstr ""
 
-msgid "Downloading files"
-msgstr ""
-
 msgid "Downloading image:"
 msgstr "İndirilen resim:"
 
-msgid "Dutch"
-msgstr "Flaman"
+msgid "Downloading original Discarts"
+msgstr ""
 
 msgid "ERROR"
 msgstr "HATA"
@@ -464,9 +405,6 @@ msgstr "HATA:"
 msgid "ERROR: Can't set up theme."
 msgstr ""
 
-msgid "English"
-msgstr "Ingilizce"
-
 msgid "Error"
 msgstr "Hata"
 
@@ -476,14 +414,23 @@ msgstr "Hata !"
 msgid "Error 002 fix"
 msgstr "Error 002 düzeltmesi"
 
+msgid "Error opening downloaded file"
+msgstr ""
+
 msgid "Error reading Disc"
 msgstr "Disk Okuma Hatası"
+
+msgid "Error while downloding file"
+msgstr ""
 
 msgid "Error while opening the zip."
 msgstr ""
 
 msgid "Error while transfering data."
 msgstr "Veri iletiminde hata."
+
+msgid "Error while updating USB Loader GX."
+msgstr ""
 
 msgid "Error writing the data."
 msgstr ""
@@ -509,6 +456,9 @@ msgstr "Çıkartma başarısız"
 msgid "Failed to open partition"
 msgstr "Bölüm açılamadı"
 
+msgid "Failed updating"
+msgstr ""
+
 msgid "Feb"
 msgstr "Şub"
 
@@ -527,15 +477,6 @@ msgstr ""
 msgid "Flip-X"
 msgstr "Çevir-X"
 
-msgid "Force NTSC"
-msgstr ""
-
-msgid "Force PAL50"
-msgstr ""
-
-msgid "Force PAL60"
-msgstr ""
-
 msgid "Format"
 msgstr "Biçimlendir"
 
@@ -545,14 +486,8 @@ msgstr "Biçimlendiriliyor, bekleyiniz..."
 msgid "Free Space"
 msgstr "Boş Yer"
 
-msgid "French"
-msgstr "Fransızca"
-
 msgid "Full Shutdown"
 msgstr "Tam Kapama"
-
-msgid "GAMEID_Gamename"
-msgstr ""
 
 msgid "GCT Cheatcodes Path"
 msgstr "GCT Hile Yolu"
@@ -566,9 +501,6 @@ msgstr "GUI Ayarları"
 msgid "GXtheme.cfg not found in any subfolder."
 msgstr ""
 
-msgid "Game ID"
-msgstr "Oyun ID"
-
 msgid "Game IOS"
 msgstr ""
 
@@ -580,9 +512,6 @@ msgstr "Oyun Yükle"
 
 msgid "Game Lock"
 msgstr ""
-
-msgid "Game Region"
-msgstr "Oyun Bölgesi"
 
 msgid "Game Size"
 msgstr "Oyun Boyutu"
@@ -599,17 +528,11 @@ msgstr "Oyun zaten kurulu:"
 msgid "Game partition"
 msgstr ""
 
-msgid "Gamename [GAMEID]"
-msgstr ""
-
 msgid "Games"
 msgstr "Oyunlar"
 
 msgid "GamesLevel"
 msgstr ""
-
-msgid "German"
-msgstr "Almanca"
 
 msgid "Gerne:"
 msgstr ""
@@ -664,9 +587,6 @@ msgstr "Bu seçeneği kullanmak için SD takın."
 msgid "Install"
 msgstr "Kur"
 
-msgid "Install 1:1 Copy"
-msgstr ""
-
 msgid "Install Error!"
 msgstr "Kurulum Hatasi!"
 
@@ -691,20 +611,11 @@ msgstr "Başlık kuruluyor.. OK!"
 msgid "Installing wad"
 msgstr "Wad kuruluyor"
 
-msgid "Invalid PIN code"
-msgstr ""
-
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
 msgstr "İşimize yarabilecek bilgilere sahip gibi gözüküyorsunuz. Lütfen bu bilgiyi Geliştirme takımına iletin."
 
-msgid "Italian"
-msgstr "Italyanca"
-
 msgid "Jan"
 msgstr "Oca"
-
-msgid "Japanese"
-msgstr "Japonca"
 
 msgid "July"
 msgstr "Tem"
@@ -718,9 +629,6 @@ msgstr "Sakla"
 msgid "Keyboard"
 msgstr "Klavye"
 
-msgid "Korean"
-msgstr "Korece"
-
 msgid "Language File"
 msgstr "Dil dosyası"
 
@@ -733,17 +641,8 @@ msgstr ""
 msgid "Languagepath changed."
 msgstr "Dil dosya yolu değişti."
 
-msgid "Left"
-msgstr "Sol"
-
-msgid "Like SysMenu"
-msgstr "Sistem Menüsü Gibi"
-
 msgid "Load"
 msgstr "Yükle"
-
-msgid "Load From SD/USB"
-msgstr "SD/USB den yükle"
 
 #, c-format
 msgid "Load file from: %s ?"
@@ -751,6 +650,9 @@ msgstr "Dosya %s 'ten yüklensin mi?"
 
 msgid "Load this DOL as alternate DOL?"
 msgstr "Bu DOL alternatif DOL olarak mı yüklensin?"
+
+msgid "Loading default theme."
+msgstr ""
 
 msgid "Loading standard language."
 msgstr "Standart dil yükleniyor."
@@ -761,17 +663,8 @@ msgstr "Standart müzik yükleniyor."
 msgid "Lock Console"
 msgstr "Konsolu Kilitle"
 
-msgid "Locked"
-msgstr "Kilitlendi"
-
-msgid "Loop Directory"
+msgid "Lock USB Loader GX"
 msgstr ""
-
-msgid "Loop Music"
-msgstr ""
-
-msgid "Loop Sound"
-msgstr "Döngüdeki Ses"
 
 msgid "Mar"
 msgstr ""
@@ -794,14 +687,11 @@ msgstr ""
 msgid "Music Volume"
 msgstr "Ses Seviyesi"
 
-msgid "Neither"
-msgstr "Hiçbiri"
+msgid "Network is not initiated."
+msgstr ""
 
 msgid "New Disc Detected"
 msgstr "Yeni Disk Bulundu"
-
-msgid "Next"
-msgstr "Ileri"
 
 msgid "No"
 msgstr "Hayır"
@@ -838,12 +728,6 @@ msgstr "Güncelleme yok"
 
 msgid "No themes found on the site."
 msgstr "Bu sitede tema bulunamadı"
-
-msgid "None"
-msgstr ""
-
-msgid "Normal"
-msgstr ""
 
 msgid "Not a WAD file."
 msgstr ""
@@ -884,9 +768,6 @@ msgstr "KAPALI"
 msgid "OK"
 msgstr ""
 
-msgid "ON"
-msgstr "AÇIK"
-
 msgid "Ocarina"
 msgstr ""
 
@@ -899,23 +780,8 @@ msgstr "Resmi Site:"
 msgid "Offset"
 msgstr ""
 
-msgid "Only Customs"
-msgstr "Sadece Kişiseller"
-
-msgid "Only Original"
-msgstr "Sadece Orjinal"
-
-msgid "Only for Install"
-msgstr "Sadece Kurulum için"
-
-msgid "Original/Customs"
-msgstr "Orjinal/Kişisel"
-
 msgid "Parental Control"
 msgstr "Ebeveyn kontrolü"
-
-msgid "Parental Control disabled"
-msgstr ""
 
 msgid "Partition"
 msgstr "Bölüm"
@@ -947,9 +813,6 @@ msgstr "Oynama Sayısı"
 msgid "Play Next"
 msgstr ""
 
-msgid "Play Once"
-msgstr ""
-
 msgid "Play Previous"
 msgstr ""
 
@@ -962,9 +825,6 @@ msgstr "Lütfen bekleyin.."
 msgid "Power off the Wii"
 msgstr "Wii'yi kapat"
 
-msgid "Prev"
-msgstr "Önceki"
-
 msgid "Prompts Buttons"
 msgstr "Hız ve Butonlar"
 
@@ -973,9 +833,6 @@ msgstr "Yayıncı"
 
 msgid "Quick Boot"
 msgstr "Hızlı Başlatma"
-
-msgid "Random Directory Music"
-msgstr ""
 
 msgid "Reading WAD data... Ok!"
 msgstr "Wad verisi okunuyor..OK!"
@@ -1016,14 +873,8 @@ msgstr ""
 msgid "Return to Wii Menu"
 msgstr "Wii Menü ye Dön"
 
-msgid "Right"
-msgstr "Sağ"
-
 msgid "Rumble"
 msgstr "Titreşim"
-
-msgid "SChinese"
-msgstr "Basitleştirilmis Çince"
 
 msgid "SFX Volume"
 msgstr "Efekt Seviyesi"
@@ -1051,9 +902,6 @@ msgstr ""
 
 msgid "Select a DOL"
 msgstr "Bir DOL seç"
-
-msgid "Select a DOL from Game"
-msgstr ""
 
 msgid "Sept"
 msgstr "Eyl"
@@ -1085,15 +933,6 @@ msgstr "Ses"
 msgid "Sound Settings"
 msgstr ""
 
-msgid "Sound+BGM"
-msgstr "Ses+BGM"
-
-msgid "Sound+Quiet"
-msgstr "Ses+Quiet"
-
-msgid "Spanish"
-msgstr "Ispanyolca"
-
 msgid "Special thanks to:"
 msgstr "Özel tesekkürler"
 
@@ -1121,24 +960,18 @@ msgstr "Tema başarıyla çıkarıldı."
 msgid "Successfully installed:"
 msgstr "Başarıyla kuruldu:"
 
-msgid "System Default"
-msgstr "Sistem Varsayılanı"
-
-msgid "TChinese"
-msgstr "Geleneksel Çince"
-
 msgid "TXT Cheatcodes Path"
 msgstr "TXT Hile Yolu"
 
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "Girilen klasör mevcut değil. Oluşturmak ister misin?"
 
-msgid "The wad file was installed.  But It could not be deleted from the SD card."
-msgstr "Wad dosyası kuruldu. Fakat SD den silinemedi"
+msgid "The wad file was installed"
+msgstr ""
 
 #, c-format
-msgid "The wad installation failed with error %ld"
-msgstr "Wad kurulumu %ld hatasıyla başarısız oldu"
+msgid "The wad installation failed with error %i"
+msgstr ""
 
 msgid "Theme Download Path"
 msgstr "Tema İndirme Yolu"
@@ -1151,6 +984,9 @@ msgstr "Tema Yolu"
 
 msgid "Theme Title:"
 msgstr "Tema Başlığı:"
+
+msgid "Theme path is changed."
+msgstr ""
 
 msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
 msgstr ""
@@ -1176,15 +1012,17 @@ msgstr ""
 msgid "Transfer failed."
 msgstr "Transfer başarısız"
 
+msgid "Trying custom Discarts"
+msgstr ""
+
+msgid "Trying original Discarts"
+msgstr ""
+
 msgid "USB Device not found"
 msgstr "USB Aygıtı bulunamadı"
 
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX koruma altında"
-
-#, c-format
-msgid "Unable to open the wad that was just downloaded (%s)."
-msgstr "Az önce indirilen wad açılamıyor(%s)"
 
 msgid "Uninstall"
 msgstr "Kaldır"
@@ -1201,14 +1039,11 @@ msgstr "Wad Kaldırılıyor"
 msgid "Unknown"
 msgstr ""
 
-msgid "Unlock Parental Control"
+msgid "Unlock USB Loader GX"
 msgstr ""
 
 msgid "Unlock console to use this option."
 msgstr "Bu seçeneği kullanmak için konsol kilidini açın"
-
-msgid "Unlocked"
-msgstr "Kilit açıldı"
 
 msgid "Unsupported format, try to extract manually."
 msgstr "Desteklenmeyen format,elle çıkartmayı deneyin"
@@ -1234,20 +1069,11 @@ msgstr "Tüm Dil Dosyalarını Güncelle"
 msgid "Update failed"
 msgstr "Güncelleme başarısız"
 
-msgid "Update to"
-msgstr "Güncellenecek"
-
-msgid "Updating"
-msgstr "Güncelleniyor"
-
-msgid "Updating Language Files..."
-msgstr "Dil Dosyaları Güncelleniyor..."
+msgid "Update successfull"
+msgstr ""
 
 msgid "Updating Language Files:"
 msgstr "Güncellenen Dil Dosyaları:"
-
-msgid "Updating WiiTDB.zip"
-msgstr "WiiTDB.zip güncelleniyor"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "ZIp dosyası homebrew klasörüne kuruldu"
@@ -1280,9 +1106,6 @@ msgstr "Neyi güncelleme istiyorsun?"
 msgid "WiFi Features"
 msgstr "WiFi Özellikleri"
 
-msgid "Widescreen Fix"
-msgstr "Genişekran Çözümü"
-
 msgid "Wii Menu"
 msgstr "Wii Menü"
 
@@ -1308,9 +1131,6 @@ msgid "Yes"
 msgstr "Evet"
 
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
-msgstr ""
-
-msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr ""
 
 msgid "You need to select or format a partition"
@@ -1376,6 +1196,180 @@ msgstr "./"
 
 msgid "seconds left"
 msgstr "saniye kaldı"
+
+#~ msgid "0 (Everyone)"
+#~ msgstr "0 (Herkes)"
+
+#~ msgid "1 (Child 7+)"
+#~ msgstr "1 (Çocuk 7+)"
+
+#~ msgid "1 hour"
+#~ msgstr "1 saat"
+
+#~ msgid "10 min"
+#~ msgstr "10 dakika"
+
+#~ msgid "2 (Teen 12+)"
+#~ msgstr "2 (Genç 12+)"
+
+#~ msgid "20 min"
+#~ msgstr "20 dakika"
+
+#~ msgid "3 (Mature 16+)"
+#~ msgstr "3 (Yetişkin 16+)"
+
+#~ msgid "3 min"
+#~ msgstr "3 dakika"
+
+#~ msgid "30 min"
+#~ msgstr "30 dakika"
+
+#~ msgid "4 (Adults Only 18+)"
+#~ msgstr "4 (Sadece Yetişkin 18+)"
+
+#~ msgid "5 min"
+#~ msgstr "5 dakika"
+
+#~ msgid "An Error occured"
+#~ msgstr "Bir Hata oluştu"
+
+#~ msgid "AutoPatch"
+#~ msgstr "OtoYama"
+
+#~ msgid "Both"
+#~ msgstr "İkisi de"
+
+#~ msgid "Checking for Updates"
+#~ msgstr "Güncellemeler kontrol ediliyor"
+
+#~ msgid "Console Default"
+#~ msgstr "Konsol Ayari"
+
+#~ msgid "Customs/Original"
+#~ msgstr "Kişisel/Orjinal"
+
+#~ msgid "Disc Default"
+#~ msgstr "Disk Varsayılanı"
+
+#~ msgid "DiskFlip"
+#~ msgstr "DiskÇevir"
+
+#~ msgid "Downloading"
+#~ msgstr "Indiriliyor"
+
+#~ msgid "Dutch"
+#~ msgstr "Flaman"
+
+#~ msgid "English"
+#~ msgstr "Ingilizce"
+
+#~ msgid "French"
+#~ msgstr "Fransızca"
+
+#~ msgid "Game ID"
+#~ msgstr "Oyun ID"
+
+#~ msgid "Game Region"
+#~ msgstr "Oyun Bölgesi"
+
+#~ msgid "German"
+#~ msgstr "Almanca"
+
+#~ msgid "Italian"
+#~ msgstr "Italyanca"
+
+#~ msgid "Japanese"
+#~ msgstr "Japonca"
+
+#~ msgid "Korean"
+#~ msgstr "Korece"
+
+#~ msgid "Left"
+#~ msgstr "Sol"
+
+#~ msgid "Like SysMenu"
+#~ msgstr "Sistem Menüsü Gibi"
+
+#~ msgid "Load From SD/USB"
+#~ msgstr "SD/USB den yükle"
+
+#~ msgid "Locked"
+#~ msgstr "Kilitlendi"
+
+#~ msgid "Loop Sound"
+#~ msgstr "Döngüdeki Ses"
+
+#~ msgid "Neither"
+#~ msgstr "Hiçbiri"
+
+#~ msgid "Next"
+#~ msgstr "Ileri"
+
+#~ msgid "ON"
+#~ msgstr "AÇIK"
+
+#~ msgid "Only Customs"
+#~ msgstr "Sadece Kişiseller"
+
+#~ msgid "Only Original"
+#~ msgstr "Sadece Orjinal"
+
+#~ msgid "Only for Install"
+#~ msgstr "Sadece Kurulum için"
+
+#~ msgid "Original/Customs"
+#~ msgstr "Orjinal/Kişisel"
+
+#~ msgid "Prev"
+#~ msgstr "Önceki"
+
+#~ msgid "Right"
+#~ msgstr "Sağ"
+
+#~ msgid "SChinese"
+#~ msgstr "Basitleştirilmis Çince"
+
+#~ msgid "Sound+BGM"
+#~ msgstr "Ses+BGM"
+
+#~ msgid "Sound+Quiet"
+#~ msgstr "Ses+Quiet"
+
+#~ msgid "Spanish"
+#~ msgstr "Ispanyolca"
+
+#~ msgid "System Default"
+#~ msgstr "Sistem Varsayılanı"
+
+#~ msgid "TChinese"
+#~ msgstr "Geleneksel Çince"
+
+#~ msgid "The wad file was installed.  But It could not be deleted from the SD card."
+#~ msgstr "Wad dosyası kuruldu. Fakat SD den silinemedi"
+
+#~ msgid "The wad installation failed with error %ld"
+#~ msgstr "Wad kurulumu %ld hatasıyla başarısız oldu"
+
+#~ msgid "Unable to open the wad that was just downloaded (%s)."
+#~ msgstr "Az önce indirilen wad açılamıyor(%s)"
+
+#~ msgid "Unlocked"
+#~ msgstr "Kilit açıldı"
+
+#~ msgid "Update to"
+#~ msgstr "Güncellenecek"
+
+#~ msgid "Updating"
+#~ msgstr "Güncelleniyor"
+
+#~ msgid "Updating Language Files..."
+#~ msgstr "Dil Dosyaları Güncelleniyor..."
+
+#~ msgid "Updating WiiTDB.zip"
+#~ msgstr "WiiTDB.zip güncelleniyor"
+
+#~ msgid "Widescreen Fix"
+#~ msgstr "Genişekran Çözümü"
 
 #~ msgid "%s : %s May not boot correctly if your System Menu is not up to date."
 #~ msgstr "%s: Sisteminiz güncel değil %s doğru şekilde başlatılamayabilir"

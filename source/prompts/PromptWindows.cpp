@@ -74,7 +74,7 @@ int OnScreenNumpad(char * var, u32 maxlen)
     GuiTrigger trigB;
     trigB.SetSimpleTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 
-    GuiText okBtnTxt(tr( "OK" ), 22, Theme.prompttext);
+    GuiText okBtnTxt(tr( "OK" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     GuiImage okBtnImg(&btnOutline);
     if (Settings.wsprompt)
     {
@@ -83,7 +83,7 @@ int OnScreenNumpad(char * var, u32 maxlen)
     }
     GuiButton okBtn(&okBtnImg, &okBtnImg, 0, 4, 5, -15, &trigA, btnSoundOver, btnSoundClick2, 1);
     okBtn.SetLabel(&okBtnTxt);
-    GuiText cancelBtnTxt(tr( "Cancel" ), 22, Theme.prompttext);
+    GuiText cancelBtnTxt(tr( "Cancel" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     GuiImage cancelBtnImg(&btnOutline);
     if (Settings.wsprompt)
     {
@@ -147,7 +147,7 @@ int OnScreenKeyboard(char * var, u32 maxlen, int min)
     GuiTrigger trigB;
     trigB.SetSimpleTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 
-    GuiText okBtnTxt(tr( "OK" ), 22, Theme.prompttext);
+    GuiText okBtnTxt(tr( "OK" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     GuiImage okBtnImg(&btnOutline);
     if (Settings.wsprompt)
     {
@@ -156,7 +156,7 @@ int OnScreenKeyboard(char * var, u32 maxlen, int min)
     }
     GuiButton okBtn(&okBtnImg, &okBtnImg, 0, 4, 5, 15, &trigA, btnSoundOver, btnSoundClick2, 1);
     okBtn.SetLabel(&okBtnTxt);
-    GuiText cancelBtnTxt(tr( "Cancel" ), 22, Theme.prompttext);
+    GuiText cancelBtnTxt(tr( "Cancel" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     GuiImage cancelBtnImg(&btnOutline);
     if (Settings.wsprompt)
     {
@@ -518,15 +518,15 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label, cons
         dialogBoxImg.SetWidescreen(Settings.widescreen);
     }
 
-    GuiText titleTxt(title, 26, Theme.prompttext);
+    GuiText titleTxt(title, 26, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     titleTxt.SetPosition(0, 55);
-    GuiText msgTxt(msg, 22, Theme.prompttext);
+    GuiText msgTxt(msg, 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     msgTxt.SetPosition(0, -40);
     msgTxt.SetMaxWidth(430);
 
-    GuiText btn1Txt(btn1Label, 22, Theme.prompttext);
+    GuiText btn1Txt(btn1Label, 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     GuiImage btn1Img(&btnOutline);
     if (Settings.wsprompt)
     {
@@ -538,7 +538,7 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label, cons
     btn1.SetLabel(&btn1Txt);
     btn1.SetState(STATE_SELECTED);
 
-    GuiText btn2Txt(btn2Label, 22, Theme.prompttext);
+    GuiText btn2Txt(btn2Label, 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     GuiImage btn2Img(&btnOutline);
     if (Settings.wsprompt)
     {
@@ -549,7 +549,7 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label, cons
     btn2.SetLabel(&btn2Txt);
     if (!btn3Label && !btn4Label) btn2.SetTrigger(&trigB);
 
-    GuiText btn3Txt(btn3Label, 22, Theme.prompttext);
+    GuiText btn3Txt(btn3Label, 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     GuiImage btn3Img(&btnOutline);
     if (Settings.wsprompt)
     {
@@ -560,7 +560,7 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label, cons
     btn3.SetLabel(&btn3Txt);
     if (!btn4Label) btn3.SetTrigger(&trigB);
 
-    GuiText btn4Txt(btn4Label, 22, Theme.prompttext);
+    GuiText btn4Txt(btn4Label, 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     GuiImage btn4Img(&btnOutline);
     if (Settings.wsprompt)
     {
@@ -1097,15 +1097,15 @@ int DiscWait(const char *title, const char *msg, const char *btn1Label, const ch
         dialogBoxImg.SetWidescreen(Settings.widescreen);
     }
 
-    GuiText titleTxt(title, 26, Theme.prompttext);
+    GuiText titleTxt(title, 26, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     titleTxt.SetPosition(0, 60);
-    GuiText msgTxt(msg, 22, Theme.prompttext);
+    GuiText msgTxt(msg, 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     msgTxt.SetPosition(0, -40);
     msgTxt.SetMaxWidth(430);
 
-    GuiText btn1Txt(btn1Label, 22, Theme.prompttext);
+    GuiText btn1Txt(btn1Label, 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     GuiImage btn1Img(&btnOutline);
     if (Settings.wsprompt)
     {
@@ -1129,7 +1129,7 @@ int DiscWait(const char *title, const char *msg, const char *btn1Label, const ch
     btn1.SetTrigger(&trigB);
     btn1.SetState(STATE_SELECTED);
 
-    GuiText btn2Txt(btn2Label, 22, Theme.prompttext);
+    GuiText btn2Txt(btn2Label, 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     GuiImage btn2Img(&btnOutline);
     if (Settings.wsprompt)
     {
@@ -1155,7 +1155,7 @@ int DiscWait(const char *title, const char *msg, const char *btn1Label, const ch
         }
     }
 
-    GuiText timerTxt((char*) NULL, 26, Theme.prompttext);
+    GuiText timerTxt((char*) NULL, 26, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     timerTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     timerTxt.SetPosition(0, 160);
 
@@ -1246,7 +1246,7 @@ int FormatingPartition(const char *title, partitionEntry *entry)
         dialogBoxImg.SetWidescreen(Settings.widescreen);
     }
 
-    GuiText titleTxt(title, 26, Theme.prompttext);
+    GuiText titleTxt(title, 26, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     titleTxt.SetPosition(0, 60);
 
@@ -1317,16 +1317,16 @@ bool NetworkInitPrompt()
         dialogBoxImg.SetWidescreen(Settings.widescreen);
     }
 
-    GuiText titleTxt(tr( "Initializing Network" ), 26, Theme.prompttext);
+    GuiText titleTxt(tr( "Initializing Network" ), 26, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     titleTxt.SetPosition(0, 60);
 
     char msg[20] = " ";
-    GuiText msgTxt(msg, 22, Theme.prompttext);
+    GuiText msgTxt(msg, 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     msgTxt.SetPosition(0, -40);
 
-    GuiText btn1Txt(tr( "Cancel" ), 22, Theme.prompttext);
+    GuiText btn1Txt(tr( "Cancel" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     GuiImage btn1Img(&btnOutline);
     if (Settings.wsprompt)
     {
@@ -1411,20 +1411,20 @@ int CodeDownload(const char *id)
 
     char title[50];
     sprintf(title, "%s", tr( "Code Download" ));
-    GuiText titleTxt(title, 26, Theme.prompttext);
+    GuiText titleTxt(title, 26, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     titleTxt.SetPosition(0, 50);
     char msg[50];
     sprintf(msg, "%s", tr( "Initializing Network" ));
-    GuiText msgTxt(msg, 26, Theme.prompttext);
+    GuiText msgTxt(msg, 26, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     msgTxt.SetPosition(0, 140);
     char msg2[50] = " ";
-    GuiText msg2Txt(msg2, 26, Theme.prompttext);
+    GuiText msg2Txt(msg2, 26, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     msg2Txt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     msg2Txt.SetPosition(0, 50);
 
-    GuiText btn1Txt(tr( "Cancel" ), 22, Theme.prompttext);
+    GuiText btn1Txt(tr( "Cancel" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     GuiImage btn1Img(&btnOutline);
     if (Settings.wsprompt)
     {
@@ -1613,28 +1613,28 @@ int HBCWindowPrompt(const char *name, const char *coder, const char *version, co
     whiteBoxImg.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     whiteBoxImg.SetSkew(0, 0, 0, 0, 0, -120, 0, -120);
 
-    GuiText nameTxt(name, 30, Theme.prompttext);
+    GuiText nameTxt(name, 30, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     nameTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     nameTxt.SetPosition(0, -15);
     nameTxt.SetMaxWidth(430, SCROLL_HORIZONTAL);
 
-    GuiText coderTxt(fmt(tr( "Coded by: %s" ), coder), 16, Theme.prompttext);
+    GuiText coderTxt(fmt(tr( "Coded by: %s" ), coder), 16, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     coderTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     coderTxt.SetPosition(180, 30);
     coderTxt.SetMaxWidth(280);
 
-    GuiText versionTxt(fmt(tr( "Version: %s" ), version), 16, Theme.prompttext);
+    GuiText versionTxt(fmt(tr( "Version: %s" ), version), 16, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     versionTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     versionTxt.SetPosition(40, 65);
     versionTxt.SetMaxWidth(430);
 
-    GuiText release_dateTxt(release_date, 16, Theme.prompttext);
+    GuiText release_dateTxt(release_date, 16, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     release_dateTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     release_dateTxt.SetPosition(40, 85);
     release_dateTxt.SetMaxWidth(430);
 
     int pagesize = 6;
-    Text long_descriptionTxt(long_description, 20, Theme.prompttext);
+    Text long_descriptionTxt(long_description, 20, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     long_descriptionTxt.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     long_descriptionTxt.SetPosition(46, 117);
     long_descriptionTxt.SetMaxWidth(360);
@@ -1650,11 +1650,11 @@ int HBCWindowPrompt(const char *name, const char *coder, const char *version, co
     if (filesize > 1048576.0)
         snprintf(filesizeCH, sizeof(filesizeCH), "%0.2f MB", filesize / 1048576.0);
 
-    GuiText filesizeTxt(filesizeCH, 16, Theme.prompttext);
+    GuiText filesizeTxt(filesizeCH, 16, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     filesizeTxt.SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
     filesizeTxt.SetPosition(-40, 12);
 
-    GuiText btn1Txt(tr( "Load" ), 22, Theme.prompttext);
+    GuiText btn1Txt(tr( "Load" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     GuiImage btn1Img(&btnOutline);
     if (Settings.wsprompt)
     {
@@ -1666,7 +1666,7 @@ int HBCWindowPrompt(const char *name, const char *coder, const char *version, co
     btn1.SetLabel(&btn1Txt);
     btn1.SetState(STATE_SELECTED);
 
-    GuiText btn2Txt(tr( "Back" ), 22, Theme.prompttext);
+    GuiText btn2Txt(tr( "Back" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     GuiImage btn2Img(&btnOutline);
     if (Settings.wsprompt)
     {

@@ -114,7 +114,7 @@ static void * UpdateGUI(void *arg)
         }
 
         mainWindow->Draw();
-        if (Settings.tooltips == ON && Theme.show_tooltip != 0 && mainWindow->GetState() != STATE_DISABLED) mainWindow->DrawTooltip();
+        if (Settings.tooltips == ON && Theme::ShowTooltips && mainWindow->GetState() != STATE_DISABLED) mainWindow->DrawTooltip();
 
         for (i = 3; i >= 0; i--)
         {

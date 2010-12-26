@@ -107,7 +107,6 @@ class CSettings
         short marknewtitles;
         short FatInstallToDir;
         u32 InstallPartitions;
-        short fullcopy;
         short beta_upgrades;
         char returnTo[20];
     protected:

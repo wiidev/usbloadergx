@@ -31,7 +31,6 @@ SettingsMenu::SettingsMenu(const char * title, OptionList * opts, int returnTo)
 {
     Options = opts;
     returnToMenu = returnTo;
-    backBtn = NULL;
     trigA = NULL;
     trigB = NULL;
     backBtnTxt = NULL;

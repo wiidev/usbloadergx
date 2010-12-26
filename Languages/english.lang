@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-17 18:50+0100\n"
+"POT-Creation-Date: 2010-12-26 16:16+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -25,52 +25,13 @@ msgstr ""
 msgid " is not on the server."
 msgstr ""
 
-msgid "0 (Everyone)"
-msgstr ""
-
-msgid "0 (Locked and Unlocked Games)"
-msgstr ""
-
-msgid "1 (Child 7+)"
-msgstr ""
-
-msgid "1 (Unlocked Games Only)"
-msgstr ""
-
-msgid "1 hour"
-msgstr ""
-
-msgid "10 min"
-msgstr ""
-
-msgid "2 (Teen 12+)"
-msgstr ""
-
-msgid "20 min"
-msgstr ""
-
 msgid "2D Cover Path"
-msgstr ""
-
-msgid "3 (Mature 16+)"
-msgstr ""
-
-msgid "3 min"
-msgstr ""
-
-msgid "30 min"
 msgstr ""
 
 msgid "3D Cover Path"
 msgstr ""
 
 msgid "3D Covers"
-msgstr ""
-
-msgid "4 (Adults Only 18+)"
-msgstr ""
-
-msgid "5 min"
 msgstr ""
 
 msgid ">> Deleting tickets..."
@@ -136,19 +97,13 @@ msgstr ""
 msgid "Alternate DOL"
 msgstr ""
 
-msgid "An Error occured"
-msgstr ""
-
-msgid "Anti"
-msgstr ""
-
 msgid "App Language"
 msgstr ""
 
 msgid "Apr"
 msgstr ""
 
-msgid "Are you sure you want to enable Parent Control?"
+msgid "Are you sure you want to lock USB Loader GX?"
 msgstr ""
 
 msgid "Are you sure you want to reset?"
@@ -164,9 +119,6 @@ msgid "Author:"
 msgstr ""
 
 msgid "AutoInit Network"
-msgstr ""
-
-msgid "AutoPatch"
 msgstr ""
 
 msgid "BCA Codes Path"
@@ -199,9 +151,6 @@ msgstr ""
 msgid "Boot?"
 msgstr ""
 
-msgid "Both"
-msgstr ""
-
 msgid "Can't be formatted"
 msgstr ""
 
@@ -224,9 +173,6 @@ msgid "Change Play Path"
 msgstr ""
 
 msgid "Cheatfile is blank"
-msgstr ""
-
-msgid "Checking for Updates"
 msgstr ""
 
 msgid "Clear"
@@ -260,9 +206,6 @@ msgstr ""
 msgid "Console"
 msgstr ""
 
-msgid "Console Default"
-msgstr ""
-
 msgid "Console Locked"
 msgstr ""
 
@@ -282,6 +225,10 @@ msgid "Could not connect to the server."
 msgstr ""
 
 msgid "Could not create GCT file"
+msgstr ""
+
+#, c-format
+msgid "Could not create path: %s"
 msgstr ""
 
 msgid "Could not find info for this game in the wiitdb.xml."
@@ -312,9 +259,6 @@ msgid "Credits"
 msgstr ""
 
 msgid "Custom Paths"
-msgstr ""
-
-msgid "Customs/Original"
 msgstr ""
 
 msgid "DOL Path"
@@ -365,13 +309,7 @@ msgstr ""
 msgid "Disc Artwork Path"
 msgstr ""
 
-msgid "Disc Default"
-msgstr ""
-
 msgid "Disc Images"
-msgstr ""
-
-msgid "DiskFlip"
 msgstr ""
 
 msgid "Display"
@@ -404,6 +342,9 @@ msgstr ""
 msgid "Do you want to format:"
 msgstr ""
 
+msgid "Do you want to load this theme?"
+msgstr ""
+
 msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr ""
 
@@ -434,10 +375,13 @@ msgstr ""
 msgid "Download request failed."
 msgstr ""
 
-msgid "Downloading"
+msgid "Downloading Page List:"
 msgstr ""
 
-msgid "Downloading Page List:"
+msgid "Downloading covers"
+msgstr ""
+
+msgid "Downloading custom Discarts"
 msgstr ""
 
 msgid "Downloading file"
@@ -446,13 +390,10 @@ msgstr ""
 msgid "Downloading file..."
 msgstr ""
 
-msgid "Downloading files"
-msgstr ""
-
 msgid "Downloading image:"
 msgstr ""
 
-msgid "Dutch"
+msgid "Downloading original Discarts"
 msgstr ""
 
 msgid "ERROR"
@@ -464,9 +405,6 @@ msgstr ""
 msgid "ERROR: Can't set up theme."
 msgstr ""
 
-msgid "English"
-msgstr ""
-
 msgid "Error"
 msgstr ""
 
@@ -476,13 +414,22 @@ msgstr ""
 msgid "Error 002 fix"
 msgstr ""
 
+msgid "Error opening downloaded file"
+msgstr ""
+
 msgid "Error reading Disc"
+msgstr ""
+
+msgid "Error while downloding file"
 msgstr ""
 
 msgid "Error while opening the zip."
 msgstr ""
 
 msgid "Error while transfering data."
+msgstr ""
+
+msgid "Error while updating USB Loader GX."
 msgstr ""
 
 msgid "Error writing the data."
@@ -509,6 +456,9 @@ msgstr ""
 msgid "Failed to open partition"
 msgstr ""
 
+msgid "Failed updating"
+msgstr ""
+
 msgid "Feb"
 msgstr ""
 
@@ -527,15 +477,6 @@ msgstr ""
 msgid "Flip-X"
 msgstr ""
 
-msgid "Force NTSC"
-msgstr ""
-
-msgid "Force PAL50"
-msgstr ""
-
-msgid "Force PAL60"
-msgstr ""
-
 msgid "Format"
 msgstr ""
 
@@ -545,13 +486,7 @@ msgstr ""
 msgid "Free Space"
 msgstr ""
 
-msgid "French"
-msgstr ""
-
 msgid "Full Shutdown"
-msgstr ""
-
-msgid "GAMEID_Gamename"
 msgstr ""
 
 msgid "GCT Cheatcodes Path"
@@ -566,9 +501,6 @@ msgstr ""
 msgid "GXtheme.cfg not found in any subfolder."
 msgstr ""
 
-msgid "Game ID"
-msgstr ""
-
 msgid "Game IOS"
 msgstr ""
 
@@ -579,9 +511,6 @@ msgid "Game Load"
 msgstr ""
 
 msgid "Game Lock"
-msgstr ""
-
-msgid "Game Region"
 msgstr ""
 
 msgid "Game Size"
@@ -599,16 +528,10 @@ msgstr ""
 msgid "Game partition"
 msgstr ""
 
-msgid "Gamename [GAMEID]"
-msgstr ""
-
 msgid "Games"
 msgstr ""
 
 msgid "GamesLevel"
-msgstr ""
-
-msgid "German"
 msgstr ""
 
 msgid "Gerne:"
@@ -664,9 +587,6 @@ msgstr ""
 msgid "Install"
 msgstr ""
 
-msgid "Install 1:1 Copy"
-msgstr ""
-
 msgid "Install Error!"
 msgstr ""
 
@@ -691,19 +611,10 @@ msgstr ""
 msgid "Installing wad"
 msgstr ""
 
-msgid "Invalid PIN code"
-msgstr ""
-
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
 msgstr ""
 
-msgid "Italian"
-msgstr ""
-
 msgid "Jan"
-msgstr ""
-
-msgid "Japanese"
 msgstr ""
 
 msgid "July"
@@ -718,9 +629,6 @@ msgstr ""
 msgid "Keyboard"
 msgstr ""
 
-msgid "Korean"
-msgstr ""
-
 msgid "Language File"
 msgstr ""
 
@@ -733,16 +641,7 @@ msgstr ""
 msgid "Languagepath changed."
 msgstr ""
 
-msgid "Left"
-msgstr ""
-
-msgid "Like SysMenu"
-msgstr ""
-
 msgid "Load"
-msgstr ""
-
-msgid "Load From SD/USB"
 msgstr ""
 
 #, c-format
@@ -750,6 +649,9 @@ msgid "Load file from: %s ?"
 msgstr ""
 
 msgid "Load this DOL as alternate DOL?"
+msgstr ""
+
+msgid "Loading default theme."
 msgstr ""
 
 msgid "Loading standard language."
@@ -761,16 +663,7 @@ msgstr ""
 msgid "Lock Console"
 msgstr ""
 
-msgid "Locked"
-msgstr ""
-
-msgid "Loop Directory"
-msgstr ""
-
-msgid "Loop Music"
-msgstr ""
-
-msgid "Loop Sound"
+msgid "Lock USB Loader GX"
 msgstr ""
 
 msgid "Mar"
@@ -794,13 +687,10 @@ msgstr ""
 msgid "Music Volume"
 msgstr ""
 
-msgid "Neither"
+msgid "Network is not initiated."
 msgstr ""
 
 msgid "New Disc Detected"
-msgstr ""
-
-msgid "Next"
 msgstr ""
 
 msgid "No"
@@ -837,12 +727,6 @@ msgid "No new updates."
 msgstr ""
 
 msgid "No themes found on the site."
-msgstr ""
-
-msgid "None"
-msgstr ""
-
-msgid "Normal"
 msgstr ""
 
 msgid "Not a WAD file."
@@ -884,9 +768,6 @@ msgstr ""
 msgid "OK"
 msgstr ""
 
-msgid "ON"
-msgstr ""
-
 msgid "Ocarina"
 msgstr ""
 
@@ -899,22 +780,7 @@ msgstr ""
 msgid "Offset"
 msgstr ""
 
-msgid "Only Customs"
-msgstr ""
-
-msgid "Only Original"
-msgstr ""
-
-msgid "Only for Install"
-msgstr ""
-
-msgid "Original/Customs"
-msgstr ""
-
 msgid "Parental Control"
-msgstr ""
-
-msgid "Parental Control disabled"
 msgstr ""
 
 msgid "Partition"
@@ -947,9 +813,6 @@ msgstr ""
 msgid "Play Next"
 msgstr ""
 
-msgid "Play Once"
-msgstr ""
-
 msgid "Play Previous"
 msgstr ""
 
@@ -962,9 +825,6 @@ msgstr ""
 msgid "Power off the Wii"
 msgstr ""
 
-msgid "Prev"
-msgstr ""
-
 msgid "Prompts Buttons"
 msgstr ""
 
@@ -972,9 +832,6 @@ msgid "Published by"
 msgstr ""
 
 msgid "Quick Boot"
-msgstr ""
-
-msgid "Random Directory Music"
 msgstr ""
 
 msgid "Reading WAD data... Ok!"
@@ -1016,13 +873,7 @@ msgstr ""
 msgid "Return to Wii Menu"
 msgstr ""
 
-msgid "Right"
-msgstr ""
-
 msgid "Rumble"
-msgstr ""
-
-msgid "SChinese"
 msgstr ""
 
 msgid "SFX Volume"
@@ -1050,9 +901,6 @@ msgid "Select DOL Offset"
 msgstr ""
 
 msgid "Select a DOL"
-msgstr ""
-
-msgid "Select a DOL from Game"
 msgstr ""
 
 msgid "Sept"
@@ -1085,15 +933,6 @@ msgstr ""
 msgid "Sound Settings"
 msgstr ""
 
-msgid "Sound+BGM"
-msgstr ""
-
-msgid "Sound+Quiet"
-msgstr ""
-
-msgid "Spanish"
-msgstr ""
-
 msgid "Special thanks to:"
 msgstr ""
 
@@ -1121,23 +960,17 @@ msgstr ""
 msgid "Successfully installed:"
 msgstr ""
 
-msgid "System Default"
-msgstr ""
-
-msgid "TChinese"
-msgstr ""
-
 msgid "TXT Cheatcodes Path"
 msgstr ""
 
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr ""
 
-msgid "The wad file was installed.  But It could not be deleted from the SD card."
+msgid "The wad file was installed"
 msgstr ""
 
 #, c-format
-msgid "The wad installation failed with error %ld"
+msgid "The wad installation failed with error %i"
 msgstr ""
 
 msgid "Theme Download Path"
@@ -1150,6 +983,9 @@ msgid "Theme Path"
 msgstr ""
 
 msgid "Theme Title:"
+msgstr ""
+
+msgid "Theme path is changed."
 msgstr ""
 
 msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
@@ -1176,14 +1012,16 @@ msgstr ""
 msgid "Transfer failed."
 msgstr ""
 
+msgid "Trying custom Discarts"
+msgstr ""
+
+msgid "Trying original Discarts"
+msgstr ""
+
 msgid "USB Device not found"
 msgstr ""
 
 msgid "USB Loader GX is protected"
-msgstr ""
-
-#, c-format
-msgid "Unable to open the wad that was just downloaded (%s)."
 msgstr ""
 
 msgid "Uninstall"
@@ -1201,13 +1039,10 @@ msgstr ""
 msgid "Unknown"
 msgstr ""
 
-msgid "Unlock Parental Control"
+msgid "Unlock USB Loader GX"
 msgstr ""
 
 msgid "Unlock console to use this option."
-msgstr ""
-
-msgid "Unlocked"
 msgstr ""
 
 msgid "Unsupported format, try to extract manually."
@@ -1234,19 +1069,10 @@ msgstr ""
 msgid "Update failed"
 msgstr ""
 
-msgid "Update to"
-msgstr ""
-
-msgid "Updating"
-msgstr ""
-
-msgid "Updating Language Files..."
+msgid "Update successfull"
 msgstr ""
 
 msgid "Updating Language Files:"
-msgstr ""
-
-msgid "Updating WiiTDB.zip"
 msgstr ""
 
 msgid "Uploaded ZIP file installed to homebrew directory."
@@ -1280,9 +1106,6 @@ msgstr ""
 msgid "WiFi Features"
 msgstr ""
 
-msgid "Widescreen Fix"
-msgstr ""
-
 msgid "Wii Menu"
 msgstr ""
 
@@ -1308,9 +1131,6 @@ msgid "Yes"
 msgstr ""
 
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
-msgstr ""
-
-msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr ""
 
 msgid "You need to select or format a partition"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-17 18:50+0100\n"
+"POT-Creation-Date: 2010-12-26 16:16+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: nextos@korea.com\n"
 "Language-Team: \n"
@@ -25,53 +25,14 @@ msgstr " 저장됨. 문자는 검증되지 않았음. 몇몇의 코드는 정상
 msgid " is not on the server."
 msgstr " 은 서버에 없어요."
 
-msgid "0 (Everyone)"
-msgstr "0 (모두다)"
-
-msgid "0 (Locked and Unlocked Games)"
-msgstr ""
-
-msgid "1 (Child 7+)"
-msgstr "1 (7세 이상)"
-
-msgid "1 (Unlocked Games Only)"
-msgstr ""
-
-msgid "1 hour"
-msgstr "1 시간"
-
-msgid "10 min"
-msgstr "10 분"
-
-msgid "2 (Teen 12+)"
-msgstr "2 (12세 이상)"
-
-msgid "20 min"
-msgstr "20 분"
-
 msgid "2D Cover Path"
 msgstr "2D 표지 경로"
-
-msgid "3 (Mature 16+)"
-msgstr "3 (16세 이상)"
-
-msgid "3 min"
-msgstr "3 분"
-
-msgid "30 min"
-msgstr "30 분"
 
 msgid "3D Cover Path"
 msgstr "3D 표지 경로"
 
 msgid "3D Covers"
 msgstr "3D 커버"
-
-msgid "4 (Adults Only 18+)"
-msgstr "4 (성인 18세 이상)"
-
-msgid "5 min"
-msgstr "5 분"
 
 msgid ">> Deleting tickets..."
 msgstr ">> 티켓 삭제중..."
@@ -136,19 +97,13 @@ msgstr "모든 USB로더 GX 기능 잠금 해제."
 msgid "Alternate DOL"
 msgstr "Alternate DOL"
 
-msgid "An Error occured"
-msgstr "에러 발생"
-
-msgid "Anti"
-msgstr ""
-
 msgid "App Language"
 msgstr "USB 로더 언어"
 
 msgid "Apr"
 msgstr "4월"
 
-msgid "Are you sure you want to enable Parent Control?"
+msgid "Are you sure you want to lock USB Loader GX?"
 msgstr ""
 
 msgid "Are you sure you want to reset?"
@@ -165,9 +120,6 @@ msgstr ""
 
 msgid "AutoInit Network"
 msgstr "자동네트웍설정"
-
-msgid "AutoPatch"
-msgstr "자동 패치"
 
 msgid "BCA Codes Path"
 msgstr ""
@@ -199,9 +151,6 @@ msgstr "기본 부팅설정"
 msgid "Boot?"
 msgstr "부팅?"
 
-msgid "Both"
-msgstr "둘다"
-
 msgid "Can't be formatted"
 msgstr "포맷할 수 없습니다."
 
@@ -225,9 +174,6 @@ msgstr ""
 
 msgid "Cheatfile is blank"
 msgstr "치트화일 내용없음"
-
-msgid "Checking for Updates"
-msgstr "업데이트 확인"
 
 msgid "Clear"
 msgstr ""
@@ -260,9 +206,6 @@ msgstr ""
 msgid "Console"
 msgstr "콘솔"
 
-msgid "Console Default"
-msgstr "콘솔 기본값"
-
 msgid "Console Locked"
 msgstr "콘솔 잠김"
 
@@ -283,6 +226,10 @@ msgstr ""
 
 msgid "Could not create GCT file"
 msgstr "GCT 파일을 생성할수 없음"
+
+#, c-format
+msgid "Could not create path: %s"
+msgstr ""
 
 msgid "Could not find info for this game in the wiitdb.xml."
 msgstr ""
@@ -313,9 +260,6 @@ msgstr "Credits"
 
 msgid "Custom Paths"
 msgstr "Custom Paths"
-
-msgid "Customs/Original"
-msgstr "커스텀/오리지널"
 
 msgid "DOL Path"
 msgstr "DOL 패치"
@@ -365,14 +309,8 @@ msgstr "디스크 이미지 다운로드"
 msgid "Disc Artwork Path"
 msgstr "디스크 이미지 경로"
 
-msgid "Disc Default"
-msgstr "디스크 기본값"
-
 msgid "Disc Images"
 msgstr "디스크 이미지"
-
-msgid "DiskFlip"
-msgstr "디스크 플립"
 
 msgid "Display"
 msgstr "화면 표시"
@@ -404,6 +342,9 @@ msgstr ""
 msgid "Do you want to format:"
 msgstr "포맷하겠습니까:"
 
+msgid "Do you want to load this theme?"
+msgstr ""
+
 msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "정말로 Alt. DOL을 사용할까요?"
 
@@ -434,10 +375,13 @@ msgstr "다운로드 완료"
 msgid "Download request failed."
 msgstr ""
 
-msgid "Downloading"
-msgstr "다운로딩중"
-
 msgid "Downloading Page List:"
+msgstr ""
+
+msgid "Downloading covers"
+msgstr ""
+
+msgid "Downloading custom Discarts"
 msgstr ""
 
 msgid "Downloading file"
@@ -446,14 +390,11 @@ msgstr "파일 다운로드 중:"
 msgid "Downloading file..."
 msgstr ""
 
-msgid "Downloading files"
-msgstr ""
-
 msgid "Downloading image:"
 msgstr ""
 
-msgid "Dutch"
-msgstr "네덜란드어"
+msgid "Downloading original Discarts"
+msgstr ""
 
 msgid "ERROR"
 msgstr "에러"
@@ -464,9 +405,6 @@ msgstr "에러:"
 msgid "ERROR: Can't set up theme."
 msgstr ""
 
-msgid "English"
-msgstr "영어"
-
 msgid "Error"
 msgstr "에러"
 
@@ -476,14 +414,23 @@ msgstr "에러 !"
 msgid "Error 002 fix"
 msgstr "Error 002 fix"
 
+msgid "Error opening downloaded file"
+msgstr ""
+
 msgid "Error reading Disc"
 msgstr "디스크 읽기 오류"
+
+msgid "Error while downloding file"
+msgstr ""
 
 msgid "Error while opening the zip."
 msgstr ""
 
 msgid "Error while transfering data."
 msgstr "데이터 전송중 에러."
+
+msgid "Error while updating USB Loader GX."
+msgstr ""
 
 msgid "Error writing the data."
 msgstr ""
@@ -509,6 +456,9 @@ msgstr ""
 msgid "Failed to open partition"
 msgstr "파티션 열기 실패"
 
+msgid "Failed updating"
+msgstr ""
+
 msgid "Feb"
 msgstr "2월"
 
@@ -527,15 +477,6 @@ msgstr ""
 msgid "Flip-X"
 msgstr "좌/우 설정"
 
-msgid "Force NTSC"
-msgstr ""
-
-msgid "Force PAL50"
-msgstr ""
-
-msgid "Force PAL60"
-msgstr ""
-
 msgid "Format"
 msgstr "포맷"
 
@@ -545,14 +486,8 @@ msgstr "포맷 중. 기다려 주세요..."
 msgid "Free Space"
 msgstr "여유 공간"
 
-msgid "French"
-msgstr "불어"
-
 msgid "Full Shutdown"
 msgstr "완전히 끄기"
-
-msgid "GAMEID_Gamename"
-msgstr ""
 
 msgid "GCT Cheatcodes Path"
 msgstr "치트코드 경로"
@@ -566,9 +501,6 @@ msgstr "GUI 설정"
 msgid "GXtheme.cfg not found in any subfolder."
 msgstr ""
 
-msgid "Game ID"
-msgstr "게임 ID"
-
 msgid "Game IOS"
 msgstr ""
 
@@ -580,9 +512,6 @@ msgstr "게임 로드"
 
 msgid "Game Lock"
 msgstr ""
-
-msgid "Game Region"
-msgstr "지역"
 
 msgid "Game Size"
 msgstr "게임 용량"
@@ -599,17 +528,11 @@ msgstr "게임이 이미 설치되어 있습니다."
 msgid "Game partition"
 msgstr ""
 
-msgid "Gamename [GAMEID]"
-msgstr ""
-
 msgid "Games"
 msgstr "게임"
 
 msgid "GamesLevel"
 msgstr ""
-
-msgid "German"
-msgstr "독일어"
 
 msgid "Gerne:"
 msgstr ""
@@ -664,9 +587,6 @@ msgstr "이 옵션을 사용할 SD카드를 넣으세요."
 msgid "Install"
 msgstr "설치"
 
-msgid "Install 1:1 Copy"
-msgstr ""
-
 msgid "Install Error!"
 msgstr "설치 에러!"
 
@@ -691,20 +611,11 @@ msgstr "타이틀 설치중... Ok!"
 msgid "Installing wad"
 msgstr "Wad 설치중"
 
-msgid "Invalid PIN code"
-msgstr ""
-
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
 msgstr "우리를 도울수 있는 정보를 가지고 있군요. 이정보를 DEV 팀에 전달해주세요."
 
-msgid "Italian"
-msgstr "이태리어"
-
 msgid "Jan"
 msgstr "1월"
-
-msgid "Japanese"
-msgstr "일본어"
 
 msgid "July"
 msgstr "7월"
@@ -718,9 +629,6 @@ msgstr "보관"
 msgid "Keyboard"
 msgstr "키보드"
 
-msgid "Korean"
-msgstr "한국어"
-
 msgid "Language File"
 msgstr "언어화일"
 
@@ -733,17 +641,8 @@ msgstr ""
 msgid "Languagepath changed."
 msgstr "언어경로 변경됨."
 
-msgid "Left"
-msgstr "왼쪽"
-
-msgid "Like SysMenu"
-msgstr "시스템 메뉴처럼"
-
 msgid "Load"
 msgstr "로드"
-
-msgid "Load From SD/USB"
-msgstr ""
 
 #, c-format
 msgid "Load file from: %s ?"
@@ -751,6 +650,9 @@ msgstr "화일 로드는 %s 에서?"
 
 msgid "Load this DOL as alternate DOL?"
 msgstr "이 DOL화일을 alternate DOL로 로딩할까요?"
+
+msgid "Loading default theme."
+msgstr ""
 
 msgid "Loading standard language."
 msgstr "표준 언어로 로딩."
@@ -761,16 +663,7 @@ msgstr "표중 음악으로 로딩."
 msgid "Lock Console"
 msgstr "콘솔 잠금"
 
-msgid "Locked"
-msgstr "잠김"
-
-msgid "Loop Directory"
-msgstr ""
-
-msgid "Loop Music"
-msgstr ""
-
-msgid "Loop Sound"
+msgid "Lock USB Loader GX"
 msgstr ""
 
 msgid "Mar"
@@ -794,14 +687,11 @@ msgstr ""
 msgid "Music Volume"
 msgstr "음량"
 
-msgid "Neither"
-msgstr "표시 없음"
+msgid "Network is not initiated."
+msgstr ""
 
 msgid "New Disc Detected"
 msgstr ""
-
-msgid "Next"
-msgstr "다음"
 
 msgid "No"
 msgstr "아니오"
@@ -838,12 +728,6 @@ msgstr "새로운 업데이트 없음."
 
 msgid "No themes found on the site."
 msgstr ""
-
-msgid "None"
-msgstr ""
-
-msgid "Normal"
-msgstr "일반"
 
 msgid "Not a WAD file."
 msgstr ""
@@ -884,9 +768,6 @@ msgstr "꺼짐"
 msgid "OK"
 msgstr "확인"
 
-msgid "ON"
-msgstr "켜짐"
-
 msgid "Ocarina"
 msgstr ""
 
@@ -899,23 +780,8 @@ msgstr "공식 사이트:"
 msgid "Offset"
 msgstr ""
 
-msgid "Only Customs"
-msgstr "사용자 설정만"
-
-msgid "Only Original"
-msgstr "원본만"
-
-msgid "Only for Install"
-msgstr "인스톨만"
-
-msgid "Original/Customs"
-msgstr "원본/사용자설정"
-
 msgid "Parental Control"
 msgstr "자녀보호기능"
-
-msgid "Parental Control disabled"
-msgstr ""
 
 msgid "Partition"
 msgstr "파티션"
@@ -947,9 +813,6 @@ msgstr "실행 횟수"
 msgid "Play Next"
 msgstr ""
 
-msgid "Play Once"
-msgstr ""
-
 msgid "Play Previous"
 msgstr ""
 
@@ -962,9 +825,6 @@ msgstr ""
 msgid "Power off the Wii"
 msgstr "Wii 전원 끄기"
 
-msgid "Prev"
-msgstr "이전"
-
 msgid "Prompts Buttons"
 msgstr "프롬프트/버튼"
 
@@ -973,9 +833,6 @@ msgstr "출판자"
 
 msgid "Quick Boot"
 msgstr "게임 바로실행"
-
-msgid "Random Directory Music"
-msgstr ""
 
 msgid "Reading WAD data... Ok!"
 msgstr "WAD 데이터 읽기... 성공!"
@@ -1016,14 +873,8 @@ msgstr ""
 msgid "Return to Wii Menu"
 msgstr "위 메뉴로 돌아가기"
 
-msgid "Right"
-msgstr "오른쪽"
-
 msgid "Rumble"
 msgstr "진동"
-
-msgid "SChinese"
-msgstr "중국어(간체)"
 
 msgid "SFX Volume"
 msgstr "SFX 볼륨"
@@ -1050,9 +901,6 @@ msgid "Select DOL Offset"
 msgstr ""
 
 msgid "Select a DOL"
-msgstr ""
-
-msgid "Select a DOL from Game"
 msgstr ""
 
 msgid "Sept"
@@ -1085,15 +933,6 @@ msgstr "소리"
 msgid "Sound Settings"
 msgstr ""
 
-msgid "Sound+BGM"
-msgstr ""
-
-msgid "Sound+Quiet"
-msgstr ""
-
-msgid "Spanish"
-msgstr "스페인어"
-
 msgid "Special thanks to:"
 msgstr "Special thanks to:"
 
@@ -1121,24 +960,18 @@ msgstr ""
 msgid "Successfully installed:"
 msgstr "설치 성공:"
 
-msgid "System Default"
-msgstr "시스템 기본값"
-
-msgid "TChinese"
-msgstr "중국어(번체)"
-
 msgid "TXT Cheatcodes Path"
 msgstr "TXT 치트코드 경로"
 
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr ""
 
-msgid "The wad file was installed.  But It could not be deleted from the SD card."
-msgstr "WAD화일이 인스톨됨. 하지만 SD 카드에서 삭제할수 없음."
+msgid "The wad file was installed"
+msgstr ""
 
 #, c-format
-msgid "The wad installation failed with error %ld"
-msgstr "WAD 인스톨 실패 에러 %ld"
+msgid "The wad installation failed with error %i"
+msgstr ""
 
 msgid "Theme Download Path"
 msgstr ""
@@ -1150,6 +983,9 @@ msgid "Theme Path"
 msgstr "테마 경로"
 
 msgid "Theme Title:"
+msgstr ""
+
+msgid "Theme path is changed."
 msgstr ""
 
 msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
@@ -1176,15 +1012,17 @@ msgstr ""
 msgid "Transfer failed."
 msgstr ""
 
+msgid "Trying custom Discarts"
+msgstr ""
+
+msgid "Trying original Discarts"
+msgstr ""
+
 msgid "USB Device not found"
 msgstr "USB 장치가 없습니다."
 
 msgid "USB Loader GX is protected"
 msgstr "USB 로더 GX 잠김 상태"
-
-#, c-format
-msgid "Unable to open the wad that was just downloaded (%s)."
-msgstr "방금 다운로드한 wad화일(%s)을 열수가 없음."
 
 msgid "Uninstall"
 msgstr "제거"
@@ -1201,14 +1039,11 @@ msgstr "WAD 언인스톨"
 msgid "Unknown"
 msgstr ""
 
-msgid "Unlock Parental Control"
+msgid "Unlock USB Loader GX"
 msgstr ""
 
 msgid "Unlock console to use this option."
 msgstr "이 옵션을 사용하기 위해 콘솔을 잠금해제"
-
-msgid "Unlocked"
-msgstr "잠금해제"
 
 msgid "Unsupported format, try to extract manually."
 msgstr ""
@@ -1234,20 +1069,11 @@ msgstr "모든 언어화일 업데이트"
 msgid "Update failed"
 msgstr "업데이트 실패"
 
-msgid "Update to"
-msgstr "감사"
-
-msgid "Updating"
-msgstr "업데이트중"
-
-msgid "Updating Language Files..."
-msgstr "언어화일 업데이트중..."
+msgid "Update successfull"
+msgstr ""
 
 msgid "Updating Language Files:"
 msgstr "언어화일 업데이트중:"
-
-msgid "Updating WiiTDB.zip"
-msgstr "WiiTDB.zip 업데이트중"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr ""
@@ -1280,9 +1106,6 @@ msgstr "무엇을 업데이트 할까요?"
 msgid "WiFi Features"
 msgstr "WiFi 형태"
 
-msgid "Widescreen Fix"
-msgstr "와이드 스크린에 맞춤"
-
 msgid "Wii Menu"
 msgstr "Wii 메뉴로"
 
@@ -1308,9 +1131,6 @@ msgid "Yes"
 msgstr "예"
 
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
-msgstr ""
-
-msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 msgstr ""
 
 msgid "You need to select or format a partition"
@@ -1376,6 +1196,171 @@ msgstr "중"
 
 msgid "seconds left"
 msgstr "초 남았습니다"
+
+#~ msgid "0 (Everyone)"
+#~ msgstr "0 (모두다)"
+
+#~ msgid "1 (Child 7+)"
+#~ msgstr "1 (7세 이상)"
+
+#~ msgid "1 hour"
+#~ msgstr "1 시간"
+
+#~ msgid "10 min"
+#~ msgstr "10 분"
+
+#~ msgid "2 (Teen 12+)"
+#~ msgstr "2 (12세 이상)"
+
+#~ msgid "20 min"
+#~ msgstr "20 분"
+
+#~ msgid "3 (Mature 16+)"
+#~ msgstr "3 (16세 이상)"
+
+#~ msgid "3 min"
+#~ msgstr "3 분"
+
+#~ msgid "30 min"
+#~ msgstr "30 분"
+
+#~ msgid "4 (Adults Only 18+)"
+#~ msgstr "4 (성인 18세 이상)"
+
+#~ msgid "5 min"
+#~ msgstr "5 분"
+
+#~ msgid "An Error occured"
+#~ msgstr "에러 발생"
+
+#~ msgid "AutoPatch"
+#~ msgstr "자동 패치"
+
+#~ msgid "Both"
+#~ msgstr "둘다"
+
+#~ msgid "Checking for Updates"
+#~ msgstr "업데이트 확인"
+
+#~ msgid "Console Default"
+#~ msgstr "콘솔 기본값"
+
+#~ msgid "Customs/Original"
+#~ msgstr "커스텀/오리지널"
+
+#~ msgid "Disc Default"
+#~ msgstr "디스크 기본값"
+
+#~ msgid "DiskFlip"
+#~ msgstr "디스크 플립"
+
+#~ msgid "Downloading"
+#~ msgstr "다운로딩중"
+
+#~ msgid "Dutch"
+#~ msgstr "네덜란드어"
+
+#~ msgid "English"
+#~ msgstr "영어"
+
+#~ msgid "French"
+#~ msgstr "불어"
+
+#~ msgid "Game ID"
+#~ msgstr "게임 ID"
+
+#~ msgid "Game Region"
+#~ msgstr "지역"
+
+#~ msgid "German"
+#~ msgstr "독일어"
+
+#~ msgid "Italian"
+#~ msgstr "이태리어"
+
+#~ msgid "Japanese"
+#~ msgstr "일본어"
+
+#~ msgid "Korean"
+#~ msgstr "한국어"
+
+#~ msgid "Left"
+#~ msgstr "왼쪽"
+
+#~ msgid "Like SysMenu"
+#~ msgstr "시스템 메뉴처럼"
+
+#~ msgid "Locked"
+#~ msgstr "잠김"
+
+#~ msgid "Neither"
+#~ msgstr "표시 없음"
+
+#~ msgid "Next"
+#~ msgstr "다음"
+
+#~ msgid "Normal"
+#~ msgstr "일반"
+
+#~ msgid "ON"
+#~ msgstr "켜짐"
+
+#~ msgid "Only Customs"
+#~ msgstr "사용자 설정만"
+
+#~ msgid "Only Original"
+#~ msgstr "원본만"
+
+#~ msgid "Only for Install"
+#~ msgstr "인스톨만"
+
+#~ msgid "Original/Customs"
+#~ msgstr "원본/사용자설정"
+
+#~ msgid "Prev"
+#~ msgstr "이전"
+
+#~ msgid "Right"
+#~ msgstr "오른쪽"
+
+#~ msgid "SChinese"
+#~ msgstr "중국어(간체)"
+
+#~ msgid "Spanish"
+#~ msgstr "스페인어"
+
+#~ msgid "System Default"
+#~ msgstr "시스템 기본값"
+
+#~ msgid "TChinese"
+#~ msgstr "중국어(번체)"
+
+#~ msgid "The wad file was installed.  But It could not be deleted from the SD card."
+#~ msgstr "WAD화일이 인스톨됨. 하지만 SD 카드에서 삭제할수 없음."
+
+#~ msgid "The wad installation failed with error %ld"
+#~ msgstr "WAD 인스톨 실패 에러 %ld"
+
+#~ msgid "Unable to open the wad that was just downloaded (%s)."
+#~ msgstr "방금 다운로드한 wad화일(%s)을 열수가 없음."
+
+#~ msgid "Unlocked"
+#~ msgstr "잠금해제"
+
+#~ msgid "Update to"
+#~ msgstr "감사"
+
+#~ msgid "Updating"
+#~ msgstr "업데이트중"
+
+#~ msgid "Updating Language Files..."
+#~ msgstr "언어화일 업데이트중..."
+
+#~ msgid "Updating WiiTDB.zip"
+#~ msgstr "WiiTDB.zip 업데이트중"
+
+#~ msgid "Widescreen Fix"
+#~ msgstr "와이드 스크린에 맞춤"
 
 #~ msgid "Back to Wii Menu"
 #~ msgstr "Wii 메뉴로 놀아가기"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-17 18:50+0100\n"
+"POT-Creation-Date: 2010-12-26 16:16+0100\n"
 "PO-Revision-Date: 2010-02-21 08:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe, Cambo\n"
@@ -25,53 +25,14 @@ msgstr " è stato salvato. Parte del codice potrebbe non funzionare correttament
 msgid " is not on the server."
 msgstr " non è disponibile sul server."
 
-msgid "0 (Everyone)"
-msgstr "0 (Tutti)"
-
-msgid "0 (Locked and Unlocked Games)"
-msgstr ""
-
-msgid "1 (Child 7+)"
-msgstr "1 (Bambini 7+)"
-
-msgid "1 (Unlocked Games Only)"
-msgstr ""
-
-msgid "1 hour"
-msgstr "1 ora"
-
-msgid "10 min"
-msgstr "10 minuti"
-
-msgid "2 (Teen 12+)"
-msgstr "2 (Ragazzini 12+)"
-
-msgid "20 min"
-msgstr "20 minuti"
-
 msgid "2D Cover Path"
 msgstr "Percorso Copertine 2D"
-
-msgid "3 (Mature 16+)"
-msgstr "3 (Ragazzi 16+)"
-
-msgid "3 min"
-msgstr "3 minuti"
-
-msgid "30 min"
-msgstr "30 minuti"
 
 msgid "3D Cover Path"
 msgstr "Percorso Copertine 3D"
 
 msgid "3D Covers"
 msgstr "Copertine 3D"
-
-msgid "4 (Adults Only 18+)"
-msgstr "4 (Maggiorenni 18+)"
-
-msgid "5 min"
-msgstr "5 minuti"
 
 msgid ">> Deleting tickets..."
 msgstr ">> Eliminazione ticket..."
@@ -136,20 +97,14 @@ msgstr "Tutte le funzioni di USB Loader GX sono sbloccate."
 msgid "Alternate DOL"
 msgstr "DOL Alternativo"
 
-msgid "An Error occured"
-msgstr "C'è stato un errore"
-
-msgid "Anti"
-msgstr ""
-
 msgid "App Language"
 msgstr "Percorso Lingua"
 
 msgid "Apr"
 msgstr "aprile"
 
-msgid "Are you sure you want to enable Parent Control?"
-msgstr "Sei sicuro di voler attivare il Controllo Genitori?"
+msgid "Are you sure you want to lock USB Loader GX?"
+msgstr ""
 
 msgid "Are you sure you want to reset?"
 msgstr ""
@@ -165,9 +120,6 @@ msgstr "Autore:"
 
 msgid "AutoInit Network"
 msgstr "Inizializz. Rete Automatica"
-
-msgid "AutoPatch"
-msgstr "Correzione automatica"
 
 msgid "BCA Codes Path"
 msgstr "Percorso Codici BCA"
@@ -199,9 +151,6 @@ msgstr "Riavvio/Standard"
 msgid "Boot?"
 msgstr "Vuoi riavviare?"
 
-msgid "Both"
-msgstr "Entrambi"
-
 msgid "Can't be formatted"
 msgstr "Non si può formattare"
 
@@ -225,9 +174,6 @@ msgstr "Modifica Percorso Suoni"
 
 msgid "Cheatfile is blank"
 msgstr "il file dei trucchi è vuoto"
-
-msgid "Checking for Updates"
-msgstr "Verifica Aggiornamenti"
 
 msgid "Clear"
 msgstr ""
@@ -260,9 +206,6 @@ msgstr "Connessione persa..."
 msgid "Console"
 msgstr "Terminale"
 
-msgid "Console Default"
-msgstr "Predefinita Console"
-
 msgid "Console Locked"
 msgstr "Console Bloccata"
 
@@ -283,6 +226,10 @@ msgstr ""
 
 msgid "Could not create GCT file"
 msgstr "Non è stato possibile creare il file GCT"
+
+#, c-format
+msgid "Could not create path: %s"
+msgstr ""
 
 msgid "Could not find info for this game in the wiitdb.xml."
 msgstr ""
@@ -313,9 +260,6 @@ msgstr ""
 
 msgid "Custom Paths"
 msgstr "Impostazione Percorsi (Directory)"
-
-msgid "Customs/Original"
-msgstr "Modific./Origin."
 
 msgid "DOL Path"
 msgstr "Percorso File DOL"
@@ -365,14 +309,8 @@ msgstr "Scaricamento Imm. Disco"
 msgid "Disc Artwork Path"
 msgstr "Percorso Imm. Disco"
 
-msgid "Disc Default"
-msgstr "Predefinita Disco"
-
 msgid "Disc Images"
 msgstr "Immagini Disco"
-
-msgid "DiskFlip"
-msgstr "Gira i dischi"
 
 msgid "Display"
 msgstr "Visualizza"
@@ -404,6 +342,9 @@ msgstr "Vuoi scaricare questo tema?"
 msgid "Do you want to format:"
 msgstr "Vuoi formattare:"
 
+msgid "Do you want to load this theme?"
+msgstr ""
+
 msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "Vuoi utilizzare il DOL alternativo funzionante?"
 
@@ -434,11 +375,14 @@ msgstr "Ho finito di scaricare"
 msgid "Download request failed."
 msgstr "Richiesta di download fallita."
 
-msgid "Downloading"
-msgstr "Sto scaricando"
-
 msgid "Downloading Page List:"
 msgstr "Sto scaricando l'elenco:"
+
+msgid "Downloading covers"
+msgstr ""
+
+msgid "Downloading custom Discarts"
+msgstr ""
 
 msgid "Downloading file"
 msgstr "Sto scaricando il file"
@@ -446,14 +390,11 @@ msgstr "Sto scaricando il file"
 msgid "Downloading file..."
 msgstr ""
 
-msgid "Downloading files"
-msgstr ""
-
 msgid "Downloading image:"
 msgstr "Sto scaricando l'immagine:"
 
-msgid "Dutch"
-msgstr "Olandese"
+msgid "Downloading original Discarts"
+msgstr ""
 
 msgid "ERROR"
 msgstr "ERRORE"
@@ -464,9 +405,6 @@ msgstr "ERRORE:"
 msgid "ERROR: Can't set up theme."
 msgstr "ERRORE: Impossibile configurare il tema."
 
-msgid "English"
-msgstr "Inglese"
-
 msgid "Error"
 msgstr "Errore"
 
@@ -476,14 +414,23 @@ msgstr "Errore !"
 msgid "Error 002 fix"
 msgstr "Correzione Error002"
 
+msgid "Error opening downloaded file"
+msgstr ""
+
 msgid "Error reading Disc"
 msgstr "Errore Lettura Disco"
+
+msgid "Error while downloding file"
+msgstr ""
 
 msgid "Error while opening the zip."
 msgstr ""
 
 msgid "Error while transfering data."
 msgstr "Errore durante il trasferimento dei dati."
+
+msgid "Error while updating USB Loader GX."
+msgstr ""
 
 msgid "Error writing the data."
 msgstr ""
@@ -509,6 +456,9 @@ msgstr "Scompattamento fallito."
 msgid "Failed to open partition"
 msgstr "Non si accede alla partizione"
 
+msgid "Failed updating"
+msgstr ""
+
 msgid "Feb"
 msgstr "febbraio"
 
@@ -527,15 +477,6 @@ msgstr ""
 msgid "Flip-X"
 msgstr "Scorrimento Dischi"
 
-msgid "Force NTSC"
-msgstr ""
-
-msgid "Force PAL50"
-msgstr ""
-
-msgid "Force PAL60"
-msgstr ""
-
 msgid "Format"
 msgstr "Formatta"
 
@@ -545,14 +486,8 @@ msgstr "Sto Formattando, prego attendere..."
 msgid "Free Space"
 msgstr "Spazio libero"
 
-msgid "French"
-msgstr "Francese"
-
 msgid "Full Shutdown"
 msgstr "Completo"
-
-msgid "GAMEID_Gamename"
-msgstr "IDGIOCO_Nomegioco"
 
 msgid "GCT Cheatcodes Path"
 msgstr "Percorso Trucchi in GCT"
@@ -566,9 +501,6 @@ msgstr "Impostazioni Loader"
 msgid "GXtheme.cfg not found in any subfolder."
 msgstr "Nessuna sottocartella contiene il file GXtheme.cfg."
 
-msgid "Game ID"
-msgstr "ID Gioco"
-
 msgid "Game IOS"
 msgstr ""
 
@@ -580,9 +512,6 @@ msgstr "Impostazioni Giochi"
 
 msgid "Game Lock"
 msgstr ""
-
-msgid "Game Region"
-msgstr "Regione Gioco"
 
 msgid "Game Size"
 msgstr "Dimensione Gioco"
@@ -599,17 +528,11 @@ msgstr "Gioco già installato:"
 msgid "Game partition"
 msgstr "Partizione gioco"
 
-msgid "Gamename [GAMEID]"
-msgstr "Nomegioco [IDGIOCO]"
-
 msgid "Games"
 msgstr "Giochi"
 
 msgid "GamesLevel"
 msgstr ""
-
-msgid "German"
-msgstr "Tedesco"
 
 msgid "Gerne:"
 msgstr ""
@@ -664,9 +587,6 @@ msgstr "Inserire scheda SD per questa opzione"
 msgid "Install"
 msgstr "Installa"
 
-msgid "Install 1:1 Copy"
-msgstr "Installa copia 1:1"
-
 msgid "Install Error!"
 msgstr "Errore Installazione!"
 
@@ -691,20 +611,11 @@ msgstr "Sto installando il titolo... Ok!"
 msgid "Installing wad"
 msgstr "Sto installando il WAD"
 
-msgid "Invalid PIN code"
-msgstr "Codice PIN non valido"
-
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
 msgstr "Hai informazioni che potrebbero esserci utili. Per favore, comunicale al team di sviluppo."
 
-msgid "Italian"
-msgstr "Italiano"
-
 msgid "Jan"
 msgstr "gennaio"
-
-msgid "Japanese"
-msgstr "Giapponese"
 
 msgid "July"
 msgstr "luglio"
@@ -718,9 +629,6 @@ msgstr "Mantieni"
 msgid "Keyboard"
 msgstr "Tastiera"
 
-msgid "Korean"
-msgstr "Coreano"
-
 msgid "Language File"
 msgstr "File Lingue"
 
@@ -733,17 +641,8 @@ msgstr ""
 msgid "Languagepath changed."
 msgstr "Percorso Lingue modificato"
 
-msgid "Left"
-msgstr "Sinistra"
-
-msgid "Like SysMenu"
-msgstr "Come SysMenu"
-
 msgid "Load"
 msgstr "Carica"
-
-msgid "Load From SD/USB"
-msgstr "Caricamento da SD/USB"
 
 #, c-format
 msgid "Load file from: %s ?"
@@ -751,6 +650,9 @@ msgstr "Vuoi caricare il file da: %s ?"
 
 msgid "Load this DOL as alternate DOL?"
 msgstr "Vuoi caricare questo DOL come DOL alternativo?"
+
+msgid "Loading default theme."
+msgstr ""
 
 msgid "Loading standard language."
 msgstr "Caricamento Lingua Standard."
@@ -761,17 +663,8 @@ msgstr "Caricamento Musica std."
 msgid "Lock Console"
 msgstr "Blocco Console"
 
-msgid "Locked"
-msgstr "Bloccato"
-
-msgid "Loop Directory"
-msgstr "Cartella Cicli"
-
-msgid "Loop Music"
-msgstr "Musica Ripetuta"
-
-msgid "Loop Sound"
-msgstr "Suono Ripetuto"
+msgid "Lock USB Loader GX"
+msgstr ""
 
 msgid "Mar"
 msgstr "marzo"
@@ -794,14 +687,11 @@ msgstr "Modalità Musica Ripetuta"
 msgid "Music Volume"
 msgstr "Volume"
 
-msgid "Neither"
-msgstr "Nessuno"
+msgid "Network is not initiated."
+msgstr ""
 
 msgid "New Disc Detected"
 msgstr "Trovato Nuovo Disco"
-
-msgid "Next"
-msgstr "Avanti"
 
 msgid "No"
 msgstr ""
@@ -838,12 +728,6 @@ msgstr "Nessun Aggiornamento."
 
 msgid "No themes found on the site."
 msgstr "Nessun tema trovato sul sito."
-
-msgid "None"
-msgstr "Nessuno"
-
-msgid "Normal"
-msgstr "Normale"
 
 msgid "Not a WAD file."
 msgstr "Non è un file WAD."
@@ -884,9 +768,6 @@ msgstr "Disattivato"
 msgid "OK"
 msgstr ""
 
-msgid "ON"
-msgstr "Attivato"
-
 msgid "Ocarina"
 msgstr ""
 
@@ -899,23 +780,8 @@ msgstr "Sito Ufficiale:"
 msgid "Offset"
 msgstr ""
 
-msgid "Only Customs"
-msgstr "Modificate"
-
-msgid "Only Original"
-msgstr "Originali"
-
-msgid "Only for Install"
-msgstr "Installa Solamente"
-
-msgid "Original/Customs"
-msgstr "Origin./Modific."
-
 msgid "Parental Control"
 msgstr "Controllo Genitori"
-
-msgid "Parental Control disabled"
-msgstr "Controllo Genitori disabilitato"
 
 msgid "Partition"
 msgstr "Partizione"
@@ -947,9 +813,6 @@ msgstr "Giocati"
 msgid "Play Next"
 msgstr "Suona Successiva"
 
-msgid "Play Once"
-msgstr "Suona una volta"
-
 msgid "Play Previous"
 msgstr "Suona Precedente"
 
@@ -962,9 +825,6 @@ msgstr "Attendere prego..."
 msgid "Power off the Wii"
 msgstr "Spegnimento Wii"
 
-msgid "Prev"
-msgstr "Indietro"
-
 msgid "Prompts Buttons"
 msgstr "Pulsanti"
 
@@ -973,9 +833,6 @@ msgstr "Pubblicato da"
 
 msgid "Quick Boot"
 msgstr "Avvio Veloce"
-
-msgid "Random Directory Music"
-msgstr "Cartella Musica Casuale"
 
 msgid "Reading WAD data... Ok!"
 msgstr "Sto leggendo i dati del WAD... Ok!"
@@ -1016,14 +873,8 @@ msgstr ""
 msgid "Return to Wii Menu"
 msgstr "Torna al Menu Wii"
 
-msgid "Right"
-msgstr "Destra"
-
 msgid "Rumble"
 msgstr "Vibrazione"
-
-msgid "SChinese"
-msgstr "Cinese Moderno"
 
 msgid "SFX Volume"
 msgstr "Volume SFX"
@@ -1051,9 +902,6 @@ msgstr ""
 
 msgid "Select a DOL"
 msgstr "Seleziona un file DOL"
-
-msgid "Select a DOL from Game"
-msgstr ""
 
 msgid "Sept"
 msgstr "settembre"
@@ -1085,15 +933,6 @@ msgstr "Audio"
 msgid "Sound Settings"
 msgstr ""
 
-msgid "Sound+BGM"
-msgstr "Suono+BGM"
-
-msgid "Sound+Quiet"
-msgstr "Suono+Silenzio"
-
-msgid "Spanish"
-msgstr "Spagnolo"
-
 msgid "Special thanks to:"
 msgstr "Un ringraziamento speciale a:"
 
@@ -1121,24 +960,18 @@ msgstr "Tema scompattato con successo."
 msgid "Successfully installed:"
 msgstr "Installato con successo:"
 
-msgid "System Default"
-msgstr "Predefinita Sistema"
-
-msgid "TChinese"
-msgstr "Cinese Tradizionale"
-
 msgid "TXT Cheatcodes Path"
 msgstr "Percorso Trucchi in TXT"
 
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "La cartella indicata non esiste. Vuoi crearla?"
 
-msgid "The wad file was installed.  But It could not be deleted from the SD card."
-msgstr "File Wad installato. Non si può però eliminare dalla scheda SD."
+msgid "The wad file was installed"
+msgstr ""
 
 #, c-format
-msgid "The wad installation failed with error %ld"
-msgstr "L'installazione del WAD è fallita con errore %ld"
+msgid "The wad installation failed with error %i"
+msgstr ""
 
 msgid "Theme Download Path"
 msgstr "Percorso Download Temi"
@@ -1151,6 +984,9 @@ msgstr "Percorso Tema"
 
 msgid "Theme Title:"
 msgstr "Titolo del tema:"
+
+msgid "Theme path is changed."
+msgstr ""
 
 msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
 msgstr ""
@@ -1176,15 +1012,17 @@ msgstr ""
 msgid "Transfer failed."
 msgstr "Trasferimento fallito."
 
+msgid "Trying custom Discarts"
+msgstr ""
+
+msgid "Trying original Discarts"
+msgstr ""
+
 msgid "USB Device not found"
 msgstr "Dispositivo USB non Trovato"
 
 msgid "USB Loader GX is protected"
 msgstr "USB Loader GX è Protetto"
-
-#, c-format
-msgid "Unable to open the wad that was just downloaded (%s)."
-msgstr "Non riesco ad aprire il wad da poco scaricato (%s)."
 
 msgid "Uninstall"
 msgstr "Disinstalla"
@@ -1201,14 +1039,11 @@ msgstr "Disinstalla WAD"
 msgid "Unknown"
 msgstr ""
 
-msgid "Unlock Parental Control"
-msgstr "Sblocca Controllo Genitori"
+msgid "Unlock USB Loader GX"
+msgstr ""
 
 msgid "Unlock console to use this option."
 msgstr "Sblocca la Console per usare questa opzione."
-
-msgid "Unlocked"
-msgstr "Sbloccato"
 
 msgid "Unsupported format, try to extract manually."
 msgstr "Formato non supportato, provare a scompattare manualmente."
@@ -1234,20 +1069,11 @@ msgstr "Aggiorna tutti i file delle lingue"
 msgid "Update failed"
 msgstr "Aggiornamento Fallito"
 
-msgid "Update to"
-msgstr "Aggiornamento alla"
-
-msgid "Updating"
-msgstr "Aggiornamento"
-
-msgid "Updating Language Files..."
-msgstr "Aggiornamento file delle lingue..."
+msgid "Update successfull"
+msgstr ""
 
 msgid "Updating Language Files:"
 msgstr "Aggiornamento file delle lingue:"
-
-msgid "Updating WiiTDB.zip"
-msgstr "Aggiornamento file WiiTDB.zip"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "File ZIP installato nella cartella Homebrew"
@@ -1280,9 +1106,6 @@ msgstr "Che cosa vuoi aggiornare?"
 msgid "WiFi Features"
 msgstr "Caratteristiche WiFi"
 
-msgid "Widescreen Fix"
-msgstr "Widescreen"
-
 msgid "Wii Menu"
 msgstr "Menu Wii"
 
@@ -1309,9 +1132,6 @@ msgstr "Sì"
 
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr ""
-
-msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
-msgstr "Il Controllo Genitori non è attivo. Se vuoi utilizzare il Controllo Genitori abilitalo nelle Impostazioni della Wii."
 
 msgid "You need to select or format a partition"
 msgstr "Occorre selezionare o formattare una partizione"
@@ -1376,6 +1196,222 @@ msgstr "di"
 
 msgid "seconds left"
 msgstr "secondi mancanti"
+
+#~ msgid "Install 1:1 Copy"
+#~ msgstr "Installa copia 1:1"
+
+#~ msgid "0 (Everyone)"
+#~ msgstr "0 (Tutti)"
+
+#~ msgid "1 (Child 7+)"
+#~ msgstr "1 (Bambini 7+)"
+
+#~ msgid "1 hour"
+#~ msgstr "1 ora"
+
+#~ msgid "10 min"
+#~ msgstr "10 minuti"
+
+#~ msgid "2 (Teen 12+)"
+#~ msgstr "2 (Ragazzini 12+)"
+
+#~ msgid "20 min"
+#~ msgstr "20 minuti"
+
+#~ msgid "3 (Mature 16+)"
+#~ msgstr "3 (Ragazzi 16+)"
+
+#~ msgid "3 min"
+#~ msgstr "3 minuti"
+
+#~ msgid "30 min"
+#~ msgstr "30 minuti"
+
+#~ msgid "4 (Adults Only 18+)"
+#~ msgstr "4 (Maggiorenni 18+)"
+
+#~ msgid "5 min"
+#~ msgstr "5 minuti"
+
+#~ msgid "An Error occured"
+#~ msgstr "C'è stato un errore"
+
+#~ msgid "Are you sure you want to enable Parent Control?"
+#~ msgstr "Sei sicuro di voler attivare il Controllo Genitori?"
+
+#~ msgid "AutoPatch"
+#~ msgstr "Correzione automatica"
+
+#~ msgid "Both"
+#~ msgstr "Entrambi"
+
+#~ msgid "Checking for Updates"
+#~ msgstr "Verifica Aggiornamenti"
+
+#~ msgid "Console Default"
+#~ msgstr "Predefinita Console"
+
+#~ msgid "Customs/Original"
+#~ msgstr "Modific./Origin."
+
+#~ msgid "Disc Default"
+#~ msgstr "Predefinita Disco"
+
+#~ msgid "DiskFlip"
+#~ msgstr "Gira i dischi"
+
+#~ msgid "Downloading"
+#~ msgstr "Sto scaricando"
+
+#~ msgid "Dutch"
+#~ msgstr "Olandese"
+
+#~ msgid "English"
+#~ msgstr "Inglese"
+
+#~ msgid "French"
+#~ msgstr "Francese"
+
+#~ msgid "GAMEID_Gamename"
+#~ msgstr "IDGIOCO_Nomegioco"
+
+#~ msgid "Game ID"
+#~ msgstr "ID Gioco"
+
+#~ msgid "Game Region"
+#~ msgstr "Regione Gioco"
+
+#~ msgid "Gamename [GAMEID]"
+#~ msgstr "Nomegioco [IDGIOCO]"
+
+#~ msgid "German"
+#~ msgstr "Tedesco"
+
+#~ msgid "Invalid PIN code"
+#~ msgstr "Codice PIN non valido"
+
+#~ msgid "Italian"
+#~ msgstr "Italiano"
+
+#~ msgid "Japanese"
+#~ msgstr "Giapponese"
+
+#~ msgid "Korean"
+#~ msgstr "Coreano"
+
+#~ msgid "Left"
+#~ msgstr "Sinistra"
+
+#~ msgid "Like SysMenu"
+#~ msgstr "Come SysMenu"
+
+#~ msgid "Load From SD/USB"
+#~ msgstr "Caricamento da SD/USB"
+
+#~ msgid "Locked"
+#~ msgstr "Bloccato"
+
+#~ msgid "Loop Directory"
+#~ msgstr "Cartella Cicli"
+
+#~ msgid "Loop Music"
+#~ msgstr "Musica Ripetuta"
+
+#~ msgid "Loop Sound"
+#~ msgstr "Suono Ripetuto"
+
+#~ msgid "Neither"
+#~ msgstr "Nessuno"
+
+#~ msgid "Next"
+#~ msgstr "Avanti"
+
+#~ msgid "None"
+#~ msgstr "Nessuno"
+
+#~ msgid "Normal"
+#~ msgstr "Normale"
+
+#~ msgid "ON"
+#~ msgstr "Attivato"
+
+#~ msgid "Only Customs"
+#~ msgstr "Modificate"
+
+#~ msgid "Only Original"
+#~ msgstr "Originali"
+
+#~ msgid "Only for Install"
+#~ msgstr "Installa Solamente"
+
+#~ msgid "Original/Customs"
+#~ msgstr "Origin./Modific."
+
+#~ msgid "Parental Control disabled"
+#~ msgstr "Controllo Genitori disabilitato"
+
+#~ msgid "Play Once"
+#~ msgstr "Suona una volta"
+
+#~ msgid "Prev"
+#~ msgstr "Indietro"
+
+#~ msgid "Random Directory Music"
+#~ msgstr "Cartella Musica Casuale"
+
+#~ msgid "Right"
+#~ msgstr "Destra"
+
+#~ msgid "SChinese"
+#~ msgstr "Cinese Moderno"
+
+#~ msgid "Sound+BGM"
+#~ msgstr "Suono+BGM"
+
+#~ msgid "Sound+Quiet"
+#~ msgstr "Suono+Silenzio"
+
+#~ msgid "Spanish"
+#~ msgstr "Spagnolo"
+
+#~ msgid "System Default"
+#~ msgstr "Predefinita Sistema"
+
+#~ msgid "TChinese"
+#~ msgstr "Cinese Tradizionale"
+
+#~ msgid "The wad file was installed.  But It could not be deleted from the SD card."
+#~ msgstr "File Wad installato. Non si può però eliminare dalla scheda SD."
+
+#~ msgid "The wad installation failed with error %ld"
+#~ msgstr "L'installazione del WAD è fallita con errore %ld"
+
+#~ msgid "Unable to open the wad that was just downloaded (%s)."
+#~ msgstr "Non riesco ad aprire il wad da poco scaricato (%s)."
+
+#~ msgid "Unlock Parental Control"
+#~ msgstr "Sblocca Controllo Genitori"
+
+#~ msgid "Unlocked"
+#~ msgstr "Sbloccato"
+
+#~ msgid "Update to"
+#~ msgstr "Aggiornamento alla"
+
+#~ msgid "Updating"
+#~ msgstr "Aggiornamento"
+
+#~ msgid "Updating Language Files..."
+#~ msgstr "Aggiornamento file delle lingue..."
+
+#~ msgid "Updating WiiTDB.zip"
+#~ msgstr "Aggiornamento file WiiTDB.zip"
+
+#~ msgid "Widescreen Fix"
+#~ msgstr "Widescreen"
+
+#~ msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
+#~ msgstr "Il Controllo Genitori non è attivo. Se vuoi utilizzare il Controllo Genitori abilitalo nelle Impostazioni della Wii."
 
 #~ msgid "%s : %s May not boot correctly if your System Menu is not up to date."
 #~ msgstr "%s : %s Potrebbe non essere caricato correttamente se il tuo System Menu non è aggiornato."
