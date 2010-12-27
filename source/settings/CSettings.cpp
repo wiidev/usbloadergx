@@ -105,6 +105,7 @@ void CSettings::SetDefault()
     FatInstallToDir = 0;
     InstallPartitions = ONLY_GAME_PARTITION;
     beta_upgrades = 0;
+    PlaylogUpdate = 1;
     widescreen = (CONF_GetAspectRatio() == CONF_ASPECT_16_9);
 
     Theme::SetDefault(); //! We need to move this later
@@ -213,6 +214,7 @@ bool CSettings::Save()
     fprintf(file, "FatInstallToDir = %d\n ", FatInstallToDir);
     fprintf(file, "InstallPartitions = %08X\n ", InstallPartitions);
     fprintf(file, "beta_upgrades = %d\n ", beta_upgrades);
+    fprintf(file, "PlaylogUpdate = %d\n ", PlaylogUpdate);
     fprintf(file, "returnTo = %s\n ", returnTo);
     fclose(file);
 
@@ -439,6 +441,11 @@ bool CSettings::SetSetting(char *name, char *value)
     else if (strcmp(name, "beta_upgrades") == 0)
     {
         if (sscanf(value, "%d", &i) == 1) beta_upgrades = i;
+        return true;
+    }
+    else if (strcmp(name, "PlaylogUpdate") == 0)
+    {
+        if (sscanf(value, "%d", &i) == 1) PlaylogUpdate = i;
         return true;
     }
     else if (strcmp(name, "InstallPartitions") == 0)

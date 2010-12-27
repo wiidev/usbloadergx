@@ -42,7 +42,6 @@
 #include "language/UpdateLanguage.h"
 #include "gecko.h"
 #include "lstub.h"
-#include "bannersound.h"
 #include "buildtype.h"
 
 /*** Extern variables ***/

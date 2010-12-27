@@ -1,4 +1,5 @@
 #include "nandtitle.h"
+#include "usbloader/playlog.h"
 #include "gecko.h"
 
 NandTitle NandTitles;
@@ -93,6 +94,8 @@ s32 NandTitle::Get()
     }
 
     ISFS_Deinitialize();
+    //If not started from SystemMenu, create playlog while we got nand access.
+    Playlog_Create();
     MagicPatches(0);
     return 1;
 }

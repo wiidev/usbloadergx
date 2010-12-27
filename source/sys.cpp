@@ -8,6 +8,7 @@
 #include "language/gettext.h"
 #include "network/networkops.h"
 #include "utils/ResourceManager.h"
+#include "usbloader/playlog.h"
 #include "FontSystem.h"
 #include "audio.h"
 #include "fatmounter.h"
@@ -97,6 +98,9 @@ void ExitApp(void)
     UnmountEXT();
     SDCard_deInit();
     USBDevice_deInit();
+    USB_Deinitialize();
+    if(Settings.PlaylogUpdate)
+        Playlog_Delete(); // Don't show USB Loader GX in the Wii message board
 }
 
 void Sys_Reboot(void)

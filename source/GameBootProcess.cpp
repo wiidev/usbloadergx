@@ -10,11 +10,13 @@
 #include "settings/CGameSettings.h"
 #include "usbloader/frag.h"
 #include "usbloader/wbfs.h"
+#include "usbloader/playlog.h"
 #include "settings/newtitles.h"
 #include "patches/fst.h"
 #include "patches/gamepatches.h"
 #include "patches/wip.h"
 #include "system/IosLoader.h"
+#include "banner/OpeningBNR.hpp"
 #include "wad/nandtitle.h"
 #include "menu/menus.h"
 #include "memory/memory.h"
@@ -211,6 +213,10 @@ int BootGame(const char * gameID)
         UnmountEXT();
         SDCard_deInit();
         USBDevice_deInit();
+        USB_Deinitialize();
+
+        if(Settings.PlaylogUpdate)
+            Playlog_Update((char *) Disc_ID, BNRInstance::Instance()->GetIMETTitle(CONF_GetLanguage()));
 
         gprintf("Jumping to game entrypoint: 0x%08X.\n", AppEntrypoint);
 

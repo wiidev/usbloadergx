@@ -108,6 +108,7 @@ class CSettings
         short FatInstallToDir;
         u32 InstallPartitions;
         short beta_upgrades;
+        short PlaylogUpdate;
         char returnTo[20];
     protected:
         bool SetSetting(char *name, char *value);

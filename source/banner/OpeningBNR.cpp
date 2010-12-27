@@ -1,0 +1,159 @@
+#include <malloc.h>
+#include <stdio.h>
+#include "usbloader/disc.h"
+#include "usbloader/wbfs.h"
+#include "utils/uncompress.h"
+#include "OpeningBNR.hpp"
+
+typedef struct _IMD5Header
+{
+    u32 fcc;
+    u32 filesize;
+    u8 zeroes[8];
+    u8 crypto[16];
+} __attribute__((packed)) IMD5Header;
+
+typedef struct _U8Header
+{
+    u32 fcc;
+    u32 rootNodeOffset;
+    u32 headerSize;
+    u32 dataOffset;
+    u8 zeroes[16];
+} __attribute__((packed)) U8Header;
+
+typedef struct _U8Entry
+{
+    struct
+    {
+        u32 fileType :8;
+        u32 nameOffset :24;
+    };
+    u32 fileOffset;
+    union
+    {
+        u32 fileLength;
+        u32 numEntries;
+    };
+} __attribute__( ( packed ) ) U8Entry;
+
+
+static inline const char * u8Filename(const U8Entry *fst, int i)
+{
+    return (char *) (fst + fst[0].numEntries) + fst[i].nameOffset;
+}
+
+BNRInstance * BNRInstance::instance = NULL;
+
+OpeningBNR::OpeningBNR()
+    : imetHdr(0)
+{
+	memset(gameID, 0, sizeof(gameID));
+}
+
+OpeningBNR::~OpeningBNR()
+{
+    if(imetHdr)
+        free(imetHdr);
+}
+
+bool OpeningBNR::Load(const u8 * discid)
+{
+    if(!discid)
+        return false;
+
+    if(memcmp(gameID, discid, 6) == 0)
+        return true;
+
+    if(imetHdr)
+        free(imetHdr);
+    imetHdr = NULL;
+    snprintf(gameID, sizeof(gameID), (const char *) discid);
+
+    wbfs_disc_t *disc = WBFS_OpenDisc((u8 *) gameID);
+    if (!disc)
+        return false;
+
+    wiidisc_t *wdisc = wd_open_disc((int(*)(void *, u32, u32, void *)) wbfs_disc_read, disc);
+    if (!wdisc)
+    {
+        WBFS_CloseDisc(disc);
+        return false;
+    }
+
+    imetHdr = (IMETHeader*) wd_extract_file(wdisc, ALL_PARTITIONS, (char *) "opening.bnr");
+
+    wd_close_disc(wdisc);
+    WBFS_CloseDisc(disc);
+
+    if(!imetHdr)
+        return false;
+
+    if (imetHdr->fcc != 'IMET')
+    {
+        free(imetHdr);
+        imetHdr = NULL;
+        return false;
+    }
+
+    return true;
+}
+
+const u16 * OpeningBNR::GetIMETTitle(int lang)
+{
+    if(!imetHdr || lang < 0 || lang >= 10)
+        return NULL;
+
+    if(imetHdr->names[lang][0] == 0)
+        lang = CONF_LANG_ENGLISH;
+
+    return imetHdr->names[lang];
+}
+
+const u8 * OpeningBNR::GetBannerSound(u32 * size)
+{
+    if(!imetHdr)
+        return NULL;
+
+    const U8Header *bnrArcHdr = (U8Header *) (imetHdr + 1);
+    const U8Entry *fst = (const U8Entry *) (((const u8 *) bnrArcHdr) + bnrArcHdr->rootNodeOffset);
+
+    u32 i;
+    for (i = 1; i < fst[0].numEntries; ++i)
+        if (fst[i].fileType == 0 && strcasecmp(u8Filename(fst, i), "sound.bin") == 0) break;
+
+    if (i >= fst[0].numEntries)
+    {
+        return NULL;
+    }
+
+    const u8 *sound_bin = ((const u8 *) bnrArcHdr) + fst[i].fileOffset;
+    if (((IMD5Header *) sound_bin)->fcc != 'IMD5')
+    {
+        return NULL;
+    }
+    const u8 *soundChunk = sound_bin + sizeof(IMD5Header);
+    u32 soundChunkSize = fst[i].fileLength - sizeof(IMD5Header);
+
+    if (*((u32*) soundChunk) == 'LZ77')
+    {
+        u32 uncSize = 0;
+        u8 * uncompressed_data = uncompressLZ77(soundChunk, soundChunkSize, &uncSize);
+        if (!uncompressed_data)
+        {
+            return NULL;
+        }
+        if (size) *size = uncSize;
+
+        return uncompressed_data;
+    }
+
+    u8 *out = (u8 *) malloc(soundChunkSize);
+    if (out)
+    {
+        memcpy(out, soundChunk, soundChunkSize);
+        if (size) *size = soundChunkSize;
+    }
+
+    return out;
+}

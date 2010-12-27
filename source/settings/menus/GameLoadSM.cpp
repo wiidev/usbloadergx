@@ -115,6 +115,7 @@ GameLoadSM::GameLoadSM()
     Options->SetName(Idx++, "%s", tr( "Error 002 fix" ));
     Options->SetName(Idx++, "%s", tr( "Install partitions" ));
     Options->SetName(Idx++, "%s", tr( "Return To" ));
+    Options->SetName(Idx++, "%s", tr( "Messageboard Update" ));
 
     SetOptionValues();
 
@@ -195,6 +196,9 @@ void GameLoadSM::SetOptionValues()
         TitleName = NandTitles.NameFromIndex(haveTitle);
     TitleName = TitleName ? TitleName : strlen(Settings.returnTo) > 0 ? Settings.returnTo : tr(OnOffText[0]);
     Options->SetValue(Idx++, "%s", TitleName);
+
+    //! Settings: Messageboard Update
+    Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.PlaylogUpdate] ));
 }
 
 int GameLoadSM::GetMenuInternal()
@@ -318,6 +322,12 @@ int GameLoadSM::GetMenuInternal()
         bool getChannel = TitleSelector(tidChar);
         if (getChannel)
             snprintf(Settings.returnTo, sizeof(Settings.returnTo), "%s", tidChar);
+    }
+
+    //! Settings: Messageboard Update
+    else if (ret == ++Idx )
+    {
+        if (++Settings.PlaylogUpdate >= MAX_ON_OFF) Settings.PlaylogUpdate = 0;
     }
 
     SetOptionValues();

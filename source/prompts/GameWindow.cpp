@@ -12,7 +12,7 @@
 #include "prompts/PromptWindows.h"
 #include "language/gettext.h"
 #include "menu/menus.h"
-#include "bannersound.h"
+#include "banner/OpeningBNR.hpp"
 
 #define NONE            0
 #define LEFT            1
@@ -272,7 +272,7 @@ void GameWindow::LoadGameSound(const u8 * id)
     }
 
     u32 gameSoundDataLen;
-    const u8 *gameSoundData = LoadBannerSound(id, &gameSoundDataLen);
+    const u8 *gameSoundData = BNRInstance::Instance()->GetBannerSound(id, &gameSoundDataLen);
     if (gameSoundData)
     {
         gameSound = new GuiSound(gameSoundData, gameSoundDataLen, Settings.gamesoundvolume, true);
