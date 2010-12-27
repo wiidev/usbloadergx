@@ -674,14 +674,14 @@ bool ntfsSetVolumeName (const char *name, const char *volumeName)
 
         // It does, resize it to match the length of the new volume name
         if (ntfs_attr_truncate(na, ulabel_len)) {
-            ntfs_free(ulabel);
+            free(ulabel);
             ntfsUnlock(vd);
             return false;
         }
 
         // Write the new volume name
         if (ntfs_attr_pwrite(na, 0, ulabel_len, ulabel) != ulabel_len) {
-            ntfs_free(ulabel);
+            free(ulabel);
             ntfsUnlock(vd);
             return false;
         }
@@ -690,7 +690,7 @@ bool ntfsSetVolumeName (const char *name, const char *volumeName)
 
         // It doesn't, create it now
         if (ntfs_attr_add(vd->vol->vol_ni, AT_VOLUME_NAME, NULL, 0, (u8*)ulabel, ulabel_len)) {
-            ntfs_free(ulabel);
+            free(ulabel);
             ntfsUnlock(vd);
             return false;
         }
@@ -706,13 +706,13 @@ bool ntfsSetVolumeName (const char *name, const char *volumeName)
 
     // Sync the volume node
     if (ntfs_inode_sync(vd->vol->vol_ni)) {
-        ntfs_free(ulabel);
+        free(ulabel);
         ntfsUnlock(vd);
         return false;
     }
 
     // Clean up
-    ntfs_free(ulabel);
+    free(ulabel);
 
     // Unlock
     ntfsUnlock(vd);

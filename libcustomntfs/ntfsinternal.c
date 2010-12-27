@@ -316,7 +316,8 @@ ntfs_inode *ntfsParseEntry (ntfs_vd *vd, const char *path, int reparseLevel)
             ni = ntfsParseEntry(vd, target, reparseLevel++);
 
             // Clean up
-            ntfs_free(target);
+            // use free because the value was not allocated with ntfs_alloc
+            free(target);
 
         }
     }
@@ -459,11 +460,12 @@ cleanup:
     if(dir_ni)
         ntfsCloseEntry(vd, dir_ni);
 
+    // use free because the value was not allocated with ntfs_alloc
     if(utarget)
-        ntfs_free(utarget);
+        free(utarget);
 
     if(uname)
-        ntfs_free(uname);
+        free(uname);
 
     if(dir)
         ntfs_free(dir);
@@ -561,8 +563,9 @@ cleanup:
     if(ni)
         ntfsCloseEntry(vd, ni);
 
+    // use free because the value was not allocated with ntfs_alloc
     if(uname)
-        ntfs_free(uname);
+        free(uname);
 
     if(dir)
         ntfs_free(dir);
@@ -657,8 +660,9 @@ cleanup:
     if(ni)
         ntfsCloseEntry(vd, ni);
 
+    // use free because the value was not allocated with ntfs_alloc
     if(uname)
-        ntfs_free(uname);
+        free(uname);
 
     if(dir)
         ntfs_free(dir);
@@ -806,14 +810,33 @@ int ntfsUnicodeToLocal (const ntfschar *ins, const int ins_len, char **outs, int
     if (!ins || !ins_len || !outs)
         return 0;
 
-    // Convert the unicode string to our current local
-    len = ntfs_ucstombs(ins, ins_len, outs, outs_len);
-    if (len == -1 && errno == EILSEQ) {
+    char * ucstombs_out = NULL;
 
+    // Convert the unicode string to our current local
+    len = ntfs_ucstombs(ins, ins_len, &ucstombs_out, outs_len);
+
+    if(ucstombs_out)
+    {
+        //use proper allocation
+        *outs = (char *) ntfs_alloc(strlen(ucstombs_out) + 1);
+        if(!*outs)
+        {
+            errno = ENOMEM;
+            return -1;
+        }
+        strcpy(*outs, ucstombs_out);
+        free(ucstombs_out);
+        ucstombs_out = NULL;
+    }
+
+    if (len == -1 && errno == EILSEQ)
+    {
         // The string could not be converted to the current local,
         // do it manually by replacing non-ASCII characters with underscores
-        if (!*outs || outs_len >= ins_len) {
-            if (!*outs) {
+        if (!*outs || outs_len >= ins_len)
+        {
+            if (!*outs)
+            {
                 *outs = (char *) ntfs_alloc(ins_len + 1);
                 if (!*outs) {
                     errno = ENOMEM;
@@ -829,7 +852,6 @@ int ntfsUnicodeToLocal (const ntfschar *ins, const int ins_len, char **outs, int
             *outs[ins_len] = (ntfschar)'\0';
             len = ins_len;
         }
-
     }
 
     return len;
