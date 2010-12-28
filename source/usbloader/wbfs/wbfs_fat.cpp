@@ -10,10 +10,13 @@
 #include <fcntl.h>
 #include <sys/statvfs.h>
 #include <ctype.h>
+#include <fat.h>
 
 #include "settings/CSettings.h"
 #include "settings/GameTitles.h"
 #include "usbloader/disc.h"
+#include "usbloader/usbstorage2.h"
+#include "libs/libfat/fatfile_frag.h"
 #include "fatmounter.h"
 #include "wbfs_fat.h"
 #include "prompts/ProgressWindow.h"
@@ -26,42 +29,57 @@
 
 using namespace std;
 
+sec_t fat_wbfs_sec = 0;
+
 char Wbfs_Fat::wbfs_fs_drive[16];
 char Wbfs_Fat::wbfs_fat_dir[16] = "/wbfs";
 char Wbfs_Fat::invalid_path[] = "/\\:|<>?*\"'";
 struct discHdr *Wbfs_Fat::fat_hdr_list = NULL;
 u32 Wbfs_Fat::fat_hdr_count = 0;
-
-extern "C"
-{
-    int _FAT_get_fragments(const char *path, _frag_append_t append_fragment, void *callback_data);
-    extern FragList *frag_list;
-}
-
 u32 Wbfs_Fat::fat_sector_size = 512;
 
 Wbfs_Fat::Wbfs_Fat(u32 device, u32 lba, u32 size) :
-    Wbfs(device, lba, size)
+    Wbfs(device, lba, size), Mounted(false)
 {
 }
 
 s32 Wbfs_Fat::Open()
 {
+    Close();
+
     if (device == WBFS_DEVICE_USB && lba == fat_usb_sec)
     {
         strcpy(wbfs_fs_drive, "USB:");
-    }
-    else if (device == WBFS_DEVICE_SDHC && lba == fat_sd_sec)
-    {
-        strcpy(wbfs_fs_drive, "SD:");
+        Mounted = true;
     }
     else
     {
-        if (WBFSDevice_Init(lba)) return -1;
-        strcpy(wbfs_fs_drive, "WBFS:");
+        //closing all open Files write back the cache and then shutdown em!
+        fatUnmount("FAT32:/");
+
+        Mounted = fatMount("FAT32", &__io_usbstorage2, lba, CACHE_SIZE, CACHED_SECTORS);
+        if (!Mounted)
+            return -1;
+
+        fat_wbfs_sec = lba;
+
+        strcpy(wbfs_fs_drive, "FAT32:");
     }
 
     return 0;
+}
+
+void Wbfs_Fat::Close()
+{
+    if (hdd)
+    {
+        wbfs_close(hdd);
+        hdd = NULL;
+    }
+
+    fatUnmount("FAT32:/");
+    Mounted = false;
+    fat_wbfs_sec = 0;
 }
 
 wbfs_disc_t* Wbfs_Fat::OpenDisc(u8 *discid)

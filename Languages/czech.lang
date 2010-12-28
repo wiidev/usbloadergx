@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-26 16:16+0100\n"
+"POT-Creation-Date: 2010-12-27 21:34+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) \n"
 "Language-Team: r823 - last version on http://djelinek.sweb.cz/_USBLoderGX/czech.lang \n"
@@ -674,6 +674,9 @@ msgstr ""
 
 msgid "May"
 msgstr "Kvet"
+
+msgid "Messageboard Update"
+msgstr ""
 
 msgid "Missing files"
 msgstr "Chybející soubory"

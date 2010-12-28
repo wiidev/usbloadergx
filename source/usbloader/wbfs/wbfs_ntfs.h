@@ -12,8 +12,9 @@ class Wbfs_Ntfs: public Wbfs_Fat
         }
 
         virtual s32 Open();
+        virtual void Close();
 
-        bool ShowFreeSpace(void);
+        bool ShowFreeSpace(void) { return true; };
 };
 
 #endif //_WBFS_NTFS_H

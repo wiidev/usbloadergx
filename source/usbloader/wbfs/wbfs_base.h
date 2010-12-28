@@ -5,6 +5,9 @@
 #include "usbloader/utils.h"
 #include "usbloader/frag.h"
 
+#define CACHE_SIZE      32
+#define CACHED_SECTORS  64
+
 class Wbfs
 {
     public:
@@ -12,7 +15,6 @@ class Wbfs
 
         void GetProgressValue(s32 * d, s32 * m);
         static s32 Init(u32);
-        void Close();
         s32 CheckGame(u8 *);
         s32 GameSize(u8 *, f32 *);
         wbfs_t *GetHddInfo(void);
@@ -21,6 +23,7 @@ class Wbfs
         virtual bool ShowFreeSpace(void);
 
         virtual s32 Open() = 0;
+        virtual void Close() = 0;
         virtual wbfs_disc_t* OpenDisc(u8 *discid) = 0;
         virtual void CloseDisc(wbfs_disc_t *disc) = 0;
         virtual s32 Format();

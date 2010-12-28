@@ -71,17 +71,6 @@ s32 Wbfs::Init(u32 device)
     return 0;
 }
 
-void Wbfs::Close()
-{
-    if (hdd)
-    {
-        wbfs_close(hdd);
-        hdd = NULL;
-    }
-
-    WBFSDevice_deInit();
-}
-
 // Default behavior: can't format
 s32 Wbfs::Format()
 {

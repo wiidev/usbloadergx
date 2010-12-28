@@ -13,12 +13,8 @@ class Wbfs_Ext: public Wbfs_Fat
         {
         }
 
-        virtual s32 Open()
-        {
-            strcpy(wbfs_fs_drive, "EXT:");
-            return MountEXT(lba);
-        };
-
+        virtual s32 Open();
+        virtual void Close();
         bool ShowFreeSpace(void) { return true; };
 };
 

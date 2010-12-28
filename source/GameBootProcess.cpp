@@ -21,7 +21,6 @@
 #include "menu/menus.h"
 #include "memory/memory.h"
 #include "fatmounter.h"
-#include "FontSystem.h"
 #include "sys.h"
 
 //appentrypoint has to be global because of asm
@@ -209,8 +208,7 @@ int BootGame(const char * gameID)
         }
 
         shadow_mload();
-        UnmountNTFS();
-        UnmountEXT();
+        WBFS_Close();
         SDCard_deInit();
         USBDevice_deInit();
         USB_Deinitialize();

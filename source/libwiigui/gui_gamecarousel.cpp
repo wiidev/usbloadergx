@@ -47,7 +47,7 @@ static GuiImageData *GameCarouselLoadCoverImage(void * Arg)
  * Constructor for the GuiGameCarousel class.
  */
 GuiGameCarousel::GuiGameCarousel(int w, int h, const char *themePath, const u8 *imagebg, int imagebgsize, int selectedGame) :
-    noCover(nocover_png, nocover_png_size)
+    noCover(Resources::GetFile("nocover.png"), Resources::GetFileSize("nocover.png"))
 {
     width = w;
     height = h;

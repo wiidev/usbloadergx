@@ -40,15 +40,6 @@ sec_t fat_sd_sec = 0; // u32
 int fat_usb_mount = 0;
 sec_t fat_usb_sec = 0;
 
-int fat_wbfs_mount = 0;
-sec_t fat_wbfs_sec = 0;
-
-int fs_ntfs_mount = 0;
-sec_t fs_ntfs_sec = 0;
-
-int fs_ext_mount = 0;
-sec_t fs_ext_sec = 0;
-
 int USBDevice_Init()
 {
     //closing all open Files write back the cache and then shutdown em!
@@ -124,30 +115,6 @@ void USBDevice_deInit()
     fat_usb_sec = 0;
 }
 
-int WBFSDevice_Init(u32 sector)
-{
-    //closing all open Files write back the cache and then shutdown em!
-    fatUnmount("WBFS:/");
-
-    if (!fatMount("WBFS", &__io_usbstorage2, 0, CACHE, SECTORS))
-    {
-        return -1;
-    }
-
-    fat_wbfs_mount = 1;
-    fat_wbfs_sec = _FAT_startSector;
-
-    return 0;
-}
-
-void WBFSDevice_deInit()
-{
-    fatUnmount("WBFS:/");
-
-    fat_wbfs_mount = 0;
-    fat_wbfs_sec = 0;
-}
-
 int isInserted(const char *path)
 {
     if (!strncmp(path, "USB:", 4)) return 1;
@@ -188,84 +155,4 @@ void SDCard_deInit()
 
     fat_sd_mount = MOUNT_NONE;
     fat_sd_sec = 0;
-}
-
-s32 MountNTFS(u32 sector)
-{
-    s32 ret;
-
-    if (fs_ntfs_mount)
-        return 0;
-
-    if (wbfsDev == WBFS_DEVICE_USB)
-    {
-        ret = ntfsMount("NTFS", &__io_usbstorage2, sector, CACHE, SECTORS, NTFS_SHOW_HIDDEN_FILES | NTFS_RECOVER);
-        if (!ret)
-            return -2;
-    }
-    else if (wbfsDev == WBFS_DEVICE_SDHC)
-    {
-        if (sdhc_mode_sd == 0)
-        {
-            ret = ntfsMount("NTFS", &__io_sdhc, 0, CACHE, SECTORS, NTFS_SHOW_HIDDEN_FILES | NTFS_RECOVER);
-        }
-        else
-        {
-            ret = ntfsMount("NTFS", &__io_sdhc, 0, CACHE, SECTORS_SD, NTFS_SHOW_HIDDEN_FILES | NTFS_RECOVER);
-        }
-        if (!ret)
-        {
-            return -5;
-        }
-    }
-
-    // ntfsInit() resets locals
-    // which breaks unicode in console
-    // so we change it back to C-UTF-8
-    setlocale(LC_CTYPE, "C-UTF-8");
-    setlocale(LC_MESSAGES, "C-UTF-8");
-
-    fs_ntfs_mount = 1;
-    fs_ntfs_sec = sector;
-
-    return 0;
-}
-
-s32 UnmountNTFS(void)
-{
-    /* Unmount device */
-    ntfsUnmount("NTFS:/", true);
-
-    fs_ntfs_mount = 0;
-    fs_ntfs_sec = 0;
-
-    return 0;
-}
-
-s32 MountEXT(u32 sector)
-{
-    s32 ret;
-
-    if (fs_ext_mount)
-        return 0;
-
-    ret = ext2Mount("EXT", &__io_usbstorage2, sector, CACHE, SECTORS, EXT2_FLAG_DEFAULT);
-    if (!ret)
-        return -2;
-
-    fs_ext_mount = 1;
-    fs_ext_sec = sector;
-
-    return 0;
-}
-
-s32 UnmountEXT(void)
-{
-    /* Unmount device */
-    ext2Unmount("EXT:/");
-
-    fs_ext_mount = 0;
-    fs_ext_sec = 0;
-
-    return 0;
 }

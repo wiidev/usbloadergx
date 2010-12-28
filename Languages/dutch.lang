@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-26 16:16+0100\n"
+"POT-Creation-Date: 2010-12-27 21:34+0100\n"
 "PO-Revision-Date: 2010-04-12 07:37+0100\n"
 "Last-Translator: glowy\n"
 "Language-Team: tj_cool, glowy\n"
@@ -674,6 +674,9 @@ msgstr "Markeer nieuwe spellen"
 
 msgid "May"
 msgstr "Mei"
+
+msgid "Messageboard Update"
+msgstr ""
 
 msgid "Missing files"
 msgstr "Missende bestanden"

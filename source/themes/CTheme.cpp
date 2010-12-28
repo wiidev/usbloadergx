@@ -28,29 +28,44 @@
 
 #include "CTheme.h"
 #include "libwiigui/gui.h"
+#include "FileOperations/fileops.h"
+#include "FreeTypeGX.h"
+
+FreeTypeGX * fontSystem = NULL;
+static FT_Byte * MainFont = (FT_Byte *) font_ttf;
+static u32 MainFontSize = font_ttf_size;
 
 bool Theme::ShowTooltips = true;
 
-void Theme::SetDefault()
+void Theme::CleanUp()
 {
-    Theme::ShowTooltips = true;
     ThemeCleanUp();
     Resources::Clear();
+    ClearFontData();
+}
+
+void Theme::SetDefault()
+{
+    ShowTooltips = true;
+    CleanUp();
+    LoadFont("");
 }
 
 bool Theme::Load(const char * theme_file_path)
 {
-    bool result = LoadTheme(theme_file_path);
-    if(!result)
-        return result;
-
-    Theme::ShowTooltips = (thInt("1 - Enable tooltips: 0 for off and 1 for on") != 0);
-
     char theme_path[300];
     snprintf(theme_path, sizeof(theme_path), theme_file_path);
 
     char * ptr = strrchr(theme_path, '/');
     if(ptr) *ptr = '\0';
+
+    Theme::LoadFont(theme_path); //! support old font style
+
+    bool result = LoadTheme(theme_file_path);
+    if(!result)
+        return result;
+
+    Theme::ShowTooltips = (thInt("1 - Enable tooltips: 0 for off and 1 for on") != 0);
 
     FILE * file = fopen(theme_file_path, "rb");
     if(!file)
@@ -85,5 +100,62 @@ bool Theme::Load(const char * theme_file_path)
     snprintf(theme_path, sizeof(theme_path), "%s/%s", theme_path, Foldername);
     Resources::LoadFiles(theme_path);
 
+    //! Override font.ttf with the theme font.ttf if it exists in the image folder
+    char FontPath[300];
+    snprintf(FontPath, sizeof(FontPath), "%s/font.ttf", theme_path);
+
+    if(CheckFile(FontPath))
+        Theme::LoadFont(theme_path);
+
     return result;
+}
+
+bool Theme::LoadFont(const char *path)
+{
+    char FontPath[300];
+    bool result = false;
+    FILE *pfile = NULL;
+
+    ClearFontData();
+
+    snprintf(FontPath, sizeof(FontPath), "%s/font.ttf", path);
+
+    pfile = fopen(FontPath, "rb");
+
+    if (pfile)
+    {
+        fseek(pfile, 0, SEEK_END);
+        MainFontSize = ftell(pfile);
+        rewind(pfile);
+
+        MainFont = new (std::nothrow) FT_Byte[MainFontSize];
+        if (!MainFont)
+        {
+            MainFont = (FT_Byte *) font_ttf;
+            MainFontSize = font_ttf_size;
+        }
+        else
+        {
+            fread(MainFont, 1, MainFontSize, pfile);
+            result = true;
+        }
+        fclose(pfile);
+    }
+
+    fontSystem = new FreeTypeGX(MainFont, MainFontSize);
+
+    return result;
+}
+
+void Theme::ClearFontData()
+{
+    if (fontSystem) delete fontSystem;
+    fontSystem = NULL;
+
+    if (MainFont != (FT_Byte *) font_ttf)
+    {
+        if (MainFont != NULL) delete [] MainFont;
+        MainFont = (FT_Byte *) font_ttf;
+        MainFontSize = font_ttf_size;
+    }
 }

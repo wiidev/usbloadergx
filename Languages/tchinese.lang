@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-26 16:16+0100\n"
+"POT-Creation-Date: 2010-12-27 21:34+0100\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
 "Last-Translator: Jane.H\n"
 "Language-Team: kyogc, Miller, Mika Li, Jane.H\n"
@@ -674,6 +674,9 @@ msgstr "標示新遊戲"
 
 msgid "May"
 msgstr "五月"
+
+msgid "Messageboard Update"
+msgstr ""
 
 msgid "Missing files"
 msgstr "缺少的文件"

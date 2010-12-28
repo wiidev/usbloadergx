@@ -272,14 +272,13 @@ int MenuLanguageSelect()
             w.Append( &pathBtn );
             w.Append( &backBtn );
             w.Append( &defaultBtn );
-            if ( result == 1 )
+            if (result == 1)
             {
-                int len = ( strlen( entered ) - 1 );
-                if ( entered[len] != '/' )
-                    strncat ( entered, "/", 1 );
-                strlcpy( Settings.languagefiles_path, entered, sizeof( Settings.languagefiles_path ) );
-                WindowPrompt( tr( "Languagepath changed." ), 0, tr( "OK" ) );
-                if ( isInserted( Settings.BootDevice ) )
+                if (entered[strlen(entered)-1] != '/')
+                    strcat (entered, "/");
+                snprintf(Settings.languagefiles_path, sizeof(Settings.languagefiles_path), entered);
+                WindowPrompt(tr("Languagepath changed."), 0, tr("OK"));
+                if (isInserted(Settings.BootDevice))
                 {
                     Settings.Save();
                     returnhere = 1;
@@ -299,19 +298,19 @@ int MenuLanguageSelect()
 
         ret = optionBrowser4.GetClickedOption();
 
-        if ( ret >= 0 )
+        if (ret >= 0)
         {
             choice = WindowPrompt( tr( "Do you want to change language?" ), 0, tr( "Yes" ), tr( "Cancel" ) );
-            if ( choice == 1 )
+            if (choice == 1)
             {
                 char newLangPath[150];
-                snprintf( Settings.languagefiles_path, sizeof( Settings.languagefiles_path ), "%s", Dir.GetFilepath(ret));
+                snprintf(Settings.languagefiles_path, sizeof( Settings.languagefiles_path ), "%s", Dir.GetFilepath(ret));
                 char * ptr = strrchr(Settings.languagefiles_path, '/');
                 if(ptr) ptr[1] = 0;
-                snprintf( newLangPath, sizeof( newLangPath ), "%s", Dir.GetFilepath(ret));
-                if ( !CheckFile( newLangPath ) )
+                snprintf(newLangPath, sizeof(newLangPath), "%s", Dir.GetFilepath(ret));
+                if (!CheckFile(newLangPath))
                 {
-                    WindowPrompt( tr( "File not found." ), tr( "Loading standard language." ), tr( "OK" ) );
+                    WindowPrompt(tr("File not found."), tr("Loading standard language."), tr("OK"));
                     Settings.LoadLanguage(NULL, APP_DEFAULT);
                 }
                 else
@@ -521,7 +520,9 @@ int MenuThemeSelect()
                 }
                 else
                 {
+                    HaltGui();
                     Theme::Load(Settings.theme_path);
+                    ResumeGui();
                 }
                 Settings.Save();
                 returnVal = 1;

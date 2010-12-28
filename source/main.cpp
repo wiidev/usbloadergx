@@ -23,8 +23,6 @@
 #include "language/gettext.h"
 #include "mload/mload.h"
 #include "mload/mload_modules.h"
-#include "FreeTypeGX.h"
-#include "FontSystem.h"
 #include "video.h"
 #include "audio.h"
 #include "menu/menus.h"
@@ -91,7 +89,6 @@ int main(int argc, char *argv[])
     printf("\tLoading game settings...%s\n", GameSettings.Load(Settings.ConfigPath) ? "done" : "failed");
     printf("\tLoading game statistics...%s\n", GameStatistics.Load(Settings.ConfigPath) ? "done" : "failed");
     printf("\tLoading theme...%s\n", Theme::Load(Settings.theme_path) ? "done" : "failed (using default)");
-    printf("\tLoading font system...%s\n", SetupDefaultFont(Settings.theme_path) ? "done" : "failed (using default)");
 
     VIDEO_SetWidescreen(Settings.widescreen);
 

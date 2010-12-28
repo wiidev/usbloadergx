@@ -472,9 +472,6 @@ int GameWindow::MainLoop()
     }
     else if (gameBtn->GetState() == STATE_CLICKED)
     {
-		struct discHdr * header = (mountMethod ? dvdheader : gameList[gameSelected]);
-        GameStatistics.SetPlayCount(header->id, GameStatistics.GetPlayCount(header->id)+1);
-        GameStatistics.Save();
         returnVal = 1;
     }
     else if (backBtn->GetState() == STATE_CLICKED) //back

@@ -69,7 +69,7 @@ int SelectPartitionMenu()
     exitBtnImg.SetWidescreen(Settings.widescreen);
     exitBtnImgOver.SetWidescreen(Settings.widescreen);
     GuiButton exitBtn(&exitBtnImg, &exitBtnImgOver, 0, 3,
-						thInt("489 - home menu btn pos x"), thInt("371 - home menu btn pos x"),
+						thInt("489 - home menu btn pos x"), thInt("371 - home menu btn pos y"),
 						&trigA, btnSoundOver, btnSoundClick2, 1);
     exitBtn.SetTrigger(&trigHome);
 

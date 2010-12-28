@@ -166,7 +166,7 @@ GameBrowseMenu::GameBrowseMenu()
     homeBtnImgOver = new GuiImage(btnhomeOver);
     homeBtnImgOver->SetWidescreen(Settings.widescreen);
     homeBtn = new GuiButton(homeBtnImg, homeBtnImgOver, 0, 3,
-                            thInt("489 - home menu btn pos x"), thInt("371 - home menu btn pos x"),
+                            thInt("489 - home menu btn pos x"), thInt("371 - home menu btn pos y"),
                             trigA, btnSoundOver, btnSoundClick2, 1, homeBtnTT, 15, -30, 1, 5);
     homeBtn->RemoveSoundClick();
     homeBtn->SetTrigger(trigHome);

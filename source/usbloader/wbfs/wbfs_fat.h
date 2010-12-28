@@ -13,6 +13,7 @@ class Wbfs_Fat: public Wbfs
         ~Wbfs_Fat();
 
         virtual s32 Open();
+        virtual void Close();
         wbfs_disc_t* OpenDisc(u8 *);
         void CloseDisc(wbfs_disc_t *);
 
@@ -34,6 +35,7 @@ class Wbfs_Fat: public Wbfs
 
     protected:
         static char wbfs_fs_drive[16];
+        bool Mounted;
     private:
         split_info_t split;
 

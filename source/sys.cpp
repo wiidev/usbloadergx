@@ -9,7 +9,8 @@
 #include "network/networkops.h"
 #include "utils/ResourceManager.h"
 #include "usbloader/playlog.h"
-#include "FontSystem.h"
+#include "usbloader/wbfs.h"
+#include "themes/CTheme.h"
 #include "audio.h"
 #include "fatmounter.h"
 #include "lstub.h"
@@ -77,7 +78,7 @@ void AppCleanUp(void)
 
     gettextCleanUp();
     CloseXMLDatabase();
-    ClearFontData();
+    Theme::CleanUp();
     NewTitles::DestroyInstance();
     DeinitNetwork();
 
@@ -94,8 +95,7 @@ void AppCleanUp(void)
 void ExitApp(void)
 {
     AppCleanUp();
-    UnmountNTFS();
-    UnmountEXT();
+    WBFS_Close();
     SDCard_deInit();
     USBDevice_deInit();
     USB_Deinitialize();

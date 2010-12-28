@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-26 16:16+0100\n"
+"POT-Creation-Date: 2010-12-27 21:34+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: omercigingelini\n"
 "Language-Team: omercigingelini\n"
@@ -673,6 +673,9 @@ msgid "Mark new games"
 msgstr "Yeni oyunlari imle"
 
 msgid "May"
+msgstr ""
+
+msgid "Messageboard Update"
 msgstr ""
 
 msgid "Missing files"

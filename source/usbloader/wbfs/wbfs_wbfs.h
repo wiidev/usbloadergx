@@ -13,6 +13,7 @@ class Wbfs_Wbfs: public Wbfs
         }
 
         s32 Open();
+        virtual void Close();
         wbfs_disc_t* OpenDisc(u8 *);
         void CloseDisc(wbfs_disc_t *);
 

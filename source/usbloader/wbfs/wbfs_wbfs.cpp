@@ -23,6 +23,15 @@ s32 Wbfs_Wbfs::Open()
     return 0;
 }
 
+void Wbfs_Wbfs::Close()
+{
+    if (hdd)
+    {
+        wbfs_close(hdd);
+        hdd = NULL;
+    }
+}
+
 wbfs_disc_t* Wbfs_Wbfs::OpenDisc(u8 *discid)
 {
     /* No device open */

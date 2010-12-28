@@ -18,8 +18,8 @@
 
 #define SAFE_FREE(x) if(x) { free(x); x = NULL; }
 
-extern sec_t fs_ntfs_sec;
-extern sec_t fs_ext_sec;
+extern sec_t ntfs_wbfs_sec;
+extern sec_t ext_wbfs_sec;
 
 static FragList *frag_list = NULL;
 
@@ -212,7 +212,7 @@ int get_frag_list_for_file(char *fname, u8 *id)
 			}
 			// offset to start of partition
 			for (j=0; j<fs->num; j++) {
-				fs->frag[j].sector += fs_ntfs_sec;
+				fs->frag[j].sector += ntfs_wbfs_sec;
 			}
 		} else if (wbfs_part_fs == PART_FS_EXT) {
 			ret = _EXT2_get_fragments(fname, &_frag_append, fs);
@@ -222,7 +222,7 @@ int get_frag_list_for_file(char *fname, u8 *id)
 			}
 			// offset to start of partition
 			for (j=0; j<fs->num; j++) {
-				fs->frag[j].sector += fs_ext_sec;
+				fs->frag[j].sector += ext_wbfs_sec;
 			}
 		}
 		frag_concat(fa, fs);
