@@ -40,7 +40,7 @@ void ext2fs_numeric_progress_init(ext2_filsys fs,
 	memset(spaces, ' ', sizeof(spaces)-1);
 	spaces[sizeof(spaces)-1] = 0;
 	memset(backspaces, '\b', sizeof(backspaces)-1);
-	spaces[sizeof(backspaces)-1] = 0;
+	backspaces[sizeof(backspaces)-1] = 0;
 	progress->skip_progress = 0;
 	if (getenv("E2FSPROGS_SKIP_PROGRESS"))
 		progress->skip_progress++;

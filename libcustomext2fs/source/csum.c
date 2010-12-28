@@ -159,6 +159,8 @@ errcode_t ext2fs_set_gdt_csum(ext2_filsys fs)
 }
 
 #ifdef DEBUG
+#include "e2p/e2p.h"
+
 void print_csum(const char *msg, ext2_filsys fs, dgrp_t group)
 {
 	__u16 crc1, crc2, crc3;
@@ -195,9 +197,9 @@ void print_csum(const char *msg, ext2_filsys fs, dgrp_t group)
 	if (offset < size)
 		crc3 = ext2fs_crc16(crc3, (char *)desc + offset, size - offset);
 
-	printf("%s: UUID %016Lx%016Lx(%04x), grp %u(%04x): %04x=%04x\n",
-	       msg, *(long long *)&sb->s_uuid, *(long long *)&sb->s_uuid[8],
-	       crc1, group, crc2, crc3, ext2fs_group_desc_csum(fs, group));
+	printf("%s: UUID %s(%04x), grp %u(%04x): %04x=%04x\n",
+	       msg, e2p_uuid2str(sb->s_uuid), crc1, group, crc2, crc3,
+	       ext2fs_group_desc_csum(fs, group));
 }
 
 unsigned char sb_uuid[16] = { 0x4f, 0x25, 0xe8, 0xcf, 0xe7, 0x97, 0x48, 0x23,

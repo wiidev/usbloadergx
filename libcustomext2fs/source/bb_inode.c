@@ -65,8 +65,7 @@ errcode_t ext2fs_update_bb_inode(ext2_filsys fs, ext2_badblocks_list bb_list)
 	if (!fs->block_map)
 		return EXT2_ET_NO_BLOCK_BITMAP;
 
-	rec.bad_block_count = 0;
-	rec.ind_blocks_size = rec.ind_blocks_ptr = 0;
+	memset(&rec, 0, sizeof(rec));
 	rec.max_ind_blocks = 10;
 	retval = ext2fs_get_array(rec.max_ind_blocks, sizeof(blk_t),
 				&rec.ind_blocks);

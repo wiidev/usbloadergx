@@ -218,7 +218,7 @@ int ext2fs_unmark_generic_bitmap(ext2fs_generic_bitmap bitmap,
 	if (!EXT2FS_IS_32_BITMAP(bitmap)) {
 		if (EXT2FS_IS_64_BITMAP(bitmap)) {
 			ext2fs_warn_bitmap32(bitmap, __func__);
-			return ext2fs_mark_generic_bmap(bitmap, bitno);
+			return ext2fs_unmark_generic_bmap(bitmap, bitno);
 		}
 #ifndef OMIT_COM_ERR
 		com_err(0, EXT2_ET_MAGIC_GENERIC_BITMAP,

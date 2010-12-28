@@ -110,7 +110,7 @@ static int block_iterate_ind(blk_t *ind_block, blk_t ref_block,
 	} else {
 		for (i = 0; i < limit; i++, ctx->bcount++, block_nr++) {
 			if (*block_nr == 0)
-				continue;
+				goto skip_sparse;
 			blk64 = *block_nr;
 			flags = (*ctx->func)(ctx->fs, &blk64, ctx->bcount,
 					     *ind_block, offset,
@@ -121,6 +121,7 @@ static int block_iterate_ind(blk_t *ind_block, blk_t ref_block,
 				ret |= BLOCK_ABORT;
 				break;
 			}
+		skip_sparse:
 			offset += sizeof(blk_t);
 		}
 	}

@@ -36,7 +36,6 @@
 #endif
 
 #include "ext2_fs.h"
-#include "e2p/e2p.h"
 #include "ext2fs.h"
 #include "jfs_user.h"
 
@@ -379,6 +378,7 @@ static errcode_t write_journal_inode(ext2_filsys fs, ext2_ino_t journal_ino,
 	ext2fs_mark_super_dirty(fs);
 
 errout:
+    ext2fs_zero_blocks2(0, 0, 0, 0, 0);
 	ext2fs_free_mem(&buf);
 	return retval;
 }

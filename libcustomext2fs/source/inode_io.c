@@ -163,9 +163,10 @@ static errcode_t inode_open(const char *name, int flags, io_channel *channel)
 	return 0;
 
 cleanup:
-	if (data) {
+	if (io->name)
+		ext2fs_free_mem(&io->name);
+	if (data)
 		ext2fs_free_mem(&data);
-	}
 	if (io)
 		ext2fs_free_mem(&io);
 	return retval;
