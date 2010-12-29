@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-27 21:34+0100\n"
+"POT-Creation-Date: 2010-12-29 11:19+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: knife.hu kavid\n"
 "Language-Team: kavid\n"
@@ -85,10 +85,10 @@ msgstr ">> 读取 WAD 数据... 成功!"
 msgid "AUTO"
 msgstr "自动"
 
-msgid "All images downloaded successfully."
+msgid "All Partitions"
 msgstr ""
 
-msgid "All partitions"
+msgid "All images downloaded successfully."
 msgstr ""
 
 msgid "All the features of USB Loader GX are unlocked."
@@ -525,9 +525,6 @@ msgstr ""
 msgid "Game is already installed:"
 msgstr "已安装的游戏:"
 
-msgid "Game partition"
-msgstr ""
-
 msgid "Games"
 msgstr "游戏"
 
@@ -781,6 +778,9 @@ msgid "Official Site:"
 msgstr "官方网址:"
 
 msgid "Offset"
+msgstr ""
+
+msgid "Only Game Partition"
 msgstr ""
 
 msgid "Parental Control"

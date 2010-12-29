@@ -86,58 +86,60 @@ void __Disc_SetVMode(u8 videoselected)
 
     switch (videoselected)
     {
-	case VIDEO_MODE_PAL50:
+        case VIDEO_MODE_PAL50:
             vmode = &TVPal528IntDf;
             vmode_reg = (vmode->viTVMode) >> 2;
             break;
-	case VIDEO_MODE_PAL60:
+
+        case VIDEO_MODE_PAL60:
             vmode = (progressive) ? &TVNtsc480Prog : &TVEurgb60Hz480IntDf;
             vmode_reg = (vmode->viTVMode) >> 2;
             break;
-	case VIDEO_MODE_NTSC:
+
+        case VIDEO_MODE_NTSC:
             vmode = (progressive) ? &TVNtsc480Prog : &TVNtsc480IntDf;
             vmode_reg = (vmode->viTVMode) >> 2;
             break;
-	case VIDEO_MODE_SYSDEFAULT:
+
+        default:
+        case VIDEO_MODE_SYSDEFAULT:
             //       vmode     = VIDEO_GetPreferredMode(NULL);
             break;
-	case VIDEO_MODE_DISCDEFAULT:
-	default:
-	    /* Select video mode */
-	    switch (diskid[3])
-	    {
-		/* PAL */
-		case 'P':
-		case 'D':
-		case 'F':
-		case 'I':
-		case 'S':
-		case 'H':
-		case 'X':
-		case 'Y':
-		case 'Z':
-		    if (tvmode != CONF_VIDEO_PAL)
-		    {
-			vmode_reg = 5;
-			vmode = (progressive) ? &TVNtsc480Prog : &TVEurgb60Hz480IntDf;
-		    }
 
-		    break;
+        case VIDEO_MODE_DISCDEFAULT:
+            /* Select video mode */
+            switch (diskid[3])
+            {
+                /* PAL */
+                case 'P':
+                case 'D':
+                case 'F':
+                case 'I':
+                case 'S':
+                case 'H':
+                case 'X':
+                case 'Y':
+                case 'Z':
+                    if (tvmode != CONF_VIDEO_PAL)
+                    {
+                        vmode_reg = 5;
+                        vmode = (progressive) ? &TVNtsc480Prog : &TVEurgb60Hz480IntDf;
+                    }
+                    break;
 
-		    /* NTSC or unknown */
-		case 'E':
-		case 'J':
-		case 'K':
-		case 'W':
-		    if (tvmode != CONF_VIDEO_NTSC)
-		    {
-			vmode_reg = 0;
-			vmode = (progressive) ? &TVNtsc480Prog : &TVNtsc480IntDf;
-		    }
-
-		    break;
-	    }
-	    break;
+                    /* NTSC or unknown */
+                case 'E':
+                case 'J':
+                case 'K':
+                case 'W':
+                    if (tvmode != CONF_VIDEO_NTSC)
+                    {
+                        vmode_reg = 0;
+                        vmode = (progressive) ? &TVNtsc480Prog : &TVNtsc480IntDf;
+                    }
+                    break;
+            }
+            break;
 	}
 
     /* Set video mode register */

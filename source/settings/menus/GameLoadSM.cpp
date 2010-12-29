@@ -48,18 +48,16 @@ static const char * OnOffText[MAX_ON_OFF] =
 
 static const char * VideoModeText[VIDEO_MODE_MAX] =
 {
-    trNOOP( "Disc Default" ),
     trNOOP( "System Default" ),
-    trNOOP( "AutoPatch" ),
+    trNOOP( "Disc Default" ),
     trNOOP( "Force PAL50" ),
     trNOOP( "Force PAL60" ),
-    trNOOP( "Force NTSC" )
+    trNOOP( "Force NTSC" ),
+    trNOOP( "Region Patch" ),
 };
 
 static const char * LanguageText[MAX_LANGUAGE] =
 {
-    trNOOP( "Disc Default" ),
-    trNOOP( "Console Default" ),
     trNOOP( "Japanese" ),
     trNOOP( "English" ),
     trNOOP( "German" ),
@@ -69,7 +67,8 @@ static const char * LanguageText[MAX_LANGUAGE] =
     trNOOP( "Dutch" ),
     trNOOP( "SChinese" ),
     trNOOP( "TChinese" ),
-    trNOOP( "Korean" )
+    trNOOP( "Korean" ),
+    trNOOP( "Console Default" )
 };
 
 static const char * InstallToText[INSTALL_TO_MAX] =
@@ -183,9 +182,9 @@ void GameLoadSM::SetOptionValues()
 
     //! Settings: Install partitions
     if(Settings.InstallPartitions == ONLY_GAME_PARTITION)
-        Options->SetValue(Idx++, "%s", tr("Game partition"));
+        Options->SetValue(Idx++, "%s", tr("Only Game Partition"));
     else if(Settings.InstallPartitions == ALL_PARTITIONS)
-        Options->SetValue(Idx++, "%s", tr("All partitions"));
+        Options->SetValue(Idx++, "%s", tr("All Partitions"));
     else if(Settings.InstallPartitions == REMOVE_UPDATE_PARTITION)
         Options->SetValue(Idx++, "%s", tr("Remove update"));
 

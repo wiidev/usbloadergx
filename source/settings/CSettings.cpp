@@ -72,7 +72,7 @@ void CSettings::SetDefault()
     strcpy(returnTo, "");
 
     godmode = 1;
-    videomode = VIDEO_MODE_DISCDEFAULT;
+    videomode = VIDEO_MODE_SYSDEFAULT;
     videopatch = OFF;
     language = CONSOLE_DEFAULT;
     ocarina = OFF;
@@ -545,32 +545,41 @@ bool CSettings::SetSetting(char *name, char *value)
 bool CSettings::FindConfig()
 {
     bool found = false;
+    char CheckDevice[10];
     char CheckPath[300];
-    strcpy(BootDevice, "SD:");
+    strcpy(CheckDevice, "SD:");
 
     for (int i = 0; i < 2; ++i)
     {
-        if (i == 1) strcpy(BootDevice, "USB:");
+        if (i == 1) strcpy(CheckDevice, "USB:");
 
-        snprintf(ConfigPath, sizeof(ConfigPath), "%s/apps/usbloader_gx/", BootDevice);
-        snprintf(CheckPath, sizeof(CheckPath), "%sGXGlobal.cfg", ConfigPath);
-        if ((found = CheckFile(CheckPath))) break;
-
-        snprintf(ConfigPath, sizeof(ConfigPath), "%s/config/", BootDevice);
-        snprintf(CheckPath, sizeof(CheckPath), "%sGXGlobal.cfg", ConfigPath);
-        if ((found = CheckFile(CheckPath))) break;
+        if(!found)
+        {
+            strcpy(BootDevice, CheckDevice);
+            snprintf(ConfigPath, sizeof(ConfigPath), "%s/apps/usbloader_gx/", BootDevice);
+            snprintf(CheckPath, sizeof(CheckPath), "%sGXGlobal.cfg", ConfigPath);
+            found = CheckFile(CheckPath);
+        }
+        if(!found)
+        {
+            strcpy(BootDevice, CheckDevice);
+            snprintf(ConfigPath, sizeof(ConfigPath), "%s/config/", BootDevice);
+            snprintf(CheckPath, sizeof(CheckPath), "%sGXGlobal.cfg", ConfigPath);
+            found = CheckFile(CheckPath);
+        }
     }
 
     if (!found)
     {
         FILE * testFp = NULL;
-        strcpy(BootDevice, "SD:");
+        strcpy(CheckDevice, "SD:");
         //! No existing config so try to find a place where we can write it too
         for (int i = 0; i < 2; ++i)
         {
-            if (i == 1) strcpy(BootDevice, "USB:");
+            if (i == 1) strcpy(CheckDevice, "USB:");
             if (!found)
             {
+                strcpy(BootDevice, CheckDevice);
                 snprintf(ConfigPath, sizeof(ConfigPath), "%s/apps/usbloader_gx/", BootDevice);
                 snprintf(CheckPath, sizeof(CheckPath), "%sGXGlobal.cfg", ConfigPath);
                 testFp = fopen(CheckPath, "wb");
@@ -579,6 +588,7 @@ bool CSettings::FindConfig()
             }
             if (!found)
             {
+                strcpy(BootDevice, CheckDevice);
                 snprintf(ConfigPath, sizeof(ConfigPath), "%s/config/", BootDevice);
                 CreateSubfolder(ConfigPath);
                 snprintf(CheckPath, sizeof(CheckPath), "%sGXGlobal.cfg", ConfigPath);
@@ -623,36 +633,6 @@ void CSettings::TrimLine(char *dest, char *src, int size)
     dest[len] = 0;
 }
 
-//! Get the language code from CONF
-static inline const char * GetLangCode(int langid)
-{
-    switch (langid)
-    {
-        case CONF_LANG_JAPANESE:
-            return "JA";
-        case CONF_LANG_ENGLISH:
-            return "EN";
-        case CONF_LANG_GERMAN:
-            return "DE";
-        case CONF_LANG_FRENCH:
-            return "FR";
-        case CONF_LANG_SPANISH:
-            return "ES";
-        case CONF_LANG_ITALIAN:
-            return "IT";
-        case CONF_LANG_DUTCH:
-            return "NL";
-        case CONF_LANG_SIMP_CHINESE:
-            return "ZHCN";
-        case CONF_LANG_TRAD_CHINESE:
-            return "ZHTW";
-        case CONF_LANG_KOREAN:
-            return "KO";
-        default:
-            return "EN";
-    }
-}
-
 //! Get language code from the selected language file
 //! eg. german.lang = DE and default to EN
 static inline const char * GetLangCode(const char * langpath)
@@ -687,13 +667,13 @@ static inline const char * GetLangCode(const char * langpath)
     return "EN";
 }
 
-bool CSettings::LoadLanguage(const char *path, int language)
+bool CSettings::LoadLanguage(const char *path, int lang)
 {
     bool ret = false;
 
-    if (language >= 0 || !path || strlen(path) == 0)
+    if (lang >= 0 || !path || strlen(path) == 0)
     {
-        if (language < 0) return false;
+        if (lang < 0) return false;
 
         char filepath[150];
         char langpath[150];
@@ -708,55 +688,49 @@ bool CSettings::LoadLanguage(const char *path, int language)
             }
         }
 
-        if (language == APP_DEFAULT)
+        if (lang == CONSOLE_DEFAULT)
         {
-            strcpy(language_path, "");
-            gettextCleanUp();
-            return true;
+            return LoadLanguage(NULL, CONF_GetLanguage());
         }
-        else if (language == CONSOLE_DEFAULT)
-        {
-            return LoadLanguage(NULL, CONF_GetLanguage() + 2);
-        }
-        else if (language == JAPANESE)
+        else if (lang == JAPANESE)
         {
             snprintf(filepath, sizeof(filepath), "%s/japanese.lang", langpath);
         }
-        else if (language == ENGLISH)
+        else if (lang == ENGLISH)
         {
             snprintf(filepath, sizeof(filepath), "%s/english.lang", langpath);
         }
-        else if (language == GERMAN)
+        else if (lang == GERMAN)
         {
             snprintf(filepath, sizeof(filepath), "%s/german.lang", langpath);
         }
-        else if (language == FRENCH)
+        else if (lang == FRENCH)
         {
             snprintf(filepath, sizeof(filepath), "%s/french.lang", langpath);
         }
-        else if (language == SPANISH)
+        else if (lang == SPANISH)
         {
             snprintf(filepath, sizeof(filepath), "%s/spanish.lang", langpath);
         }
-        else if (language == ITALIAN)
+        else if (lang == ITALIAN)
         {
             snprintf(filepath, sizeof(filepath), "%s/italian.lang", langpath);
         }
-        else if (language == DUTCH)
+        else if (lang == DUTCH)
         {
             snprintf(filepath, sizeof(filepath), "%s/dutch.lang", langpath);
         }
-        else if (language == S_CHINESE)
+        else if (lang == S_CHINESE)
         {
             snprintf(filepath, sizeof(filepath), "%s/schinese.lang", langpath);
         }
-        else if (language == T_CHINESE)
+        else if (lang == T_CHINESE)
         {
             snprintf(filepath, sizeof(filepath), "%s/tchinese.lang", langpath);
         }
-        else if (language == KOREAN)
+        else if (lang == KOREAN)
         {
-            snprintf(filepath, sizeof(filepath), "%s%s/korean.lang", BootDevice, langpath);
+            snprintf(filepath, sizeof(filepath), "%s/korean.lang", langpath);
         }
 
         ret = gettextLoadLanguage(filepath);
@@ -768,7 +742,7 @@ bool CSettings::LoadLanguage(const char *path, int language)
     }
     else if (strlen(path) < 3)
     {
-        return LoadLanguage(NULL, CONF_GetLanguage() + 2);
+        return LoadLanguage(NULL, CONSOLE_DEFAULT);
     }
     else
     {

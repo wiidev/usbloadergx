@@ -148,9 +148,9 @@ int GameList::FilterList(const wchar_t * gameFilter)
 
         GameCFG * GameConfig = GameSettings.GetGameCFG(header);
 
-        if (Settings.parentalcontrol && !Settings.godmode)
+        if (Settings.parentalcontrol != 4 && !Settings.godmode)
         {
-            if (GameConfig && GameConfig->parentalcontrol >= Settings.parentalcontrol)
+            if (GameConfig && GameConfig->parentalcontrol > Settings.parentalcontrol)
                 continue;
         }
 

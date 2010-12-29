@@ -234,7 +234,7 @@ int MenuLanguageSelect()
             choice = WindowPrompt( tr( "Loading standard language." ), 0, tr( "OK" ), tr( "Cancel" ) );
             if ( choice == 1 )
             {
-                Settings.LoadLanguage(NULL, APP_DEFAULT);
+                Settings.LoadLanguage(NULL, CONSOLE_DEFAULT);
                 Settings.Save();
                 returnhere = 2;
             }
@@ -311,7 +311,7 @@ int MenuLanguageSelect()
                 if (!CheckFile(newLangPath))
                 {
                     WindowPrompt(tr("File not found."), tr("Loading standard language."), tr("OK"));
-                    Settings.LoadLanguage(NULL, APP_DEFAULT);
+                    Settings.LoadLanguage(NULL, CONSOLE_DEFAULT);
                 }
                 else
                 {

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-27 21:34+0100\n"
+"POT-Creation-Date: 2010-12-29 11:19+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: omercigingelini\n"
 "Language-Team: omercigingelini\n"
@@ -85,10 +85,10 @@ msgstr ">> WAD Bilgisi okunuyor..OK!"
 msgid "AUTO"
 msgstr "OTOMATIK"
 
-msgid "All images downloaded successfully."
+msgid "All Partitions"
 msgstr ""
 
-msgid "All partitions"
+msgid "All images downloaded successfully."
 msgstr ""
 
 msgid "All the features of USB Loader GX are unlocked."
@@ -525,9 +525,6 @@ msgstr "Oyun Ses Düzeyi"
 msgid "Game is already installed:"
 msgstr "Oyun zaten kurulu:"
 
-msgid "Game partition"
-msgstr ""
-
 msgid "Games"
 msgstr "Oyunlar"
 
@@ -781,6 +778,9 @@ msgid "Official Site:"
 msgstr "Resmi Site:"
 
 msgid "Offset"
+msgstr ""
+
+msgid "Only Game Partition"
 msgstr ""
 
 msgid "Parental Control"

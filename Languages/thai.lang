@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-27 21:34+0100\n"
+"POT-Creation-Date: 2010-12-29 11:19+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Nitro_subzero \n"
 "Language-Team: Nitro_subzero\n"
@@ -85,10 +85,10 @@ msgstr ">> กำลังอ่านข้อมูล WAD...สำเร็�
 msgid "AUTO"
 msgstr "อัตโนมัติ"
 
-msgid "All images downloaded successfully."
+msgid "All Partitions"
 msgstr ""
 
-msgid "All partitions"
+msgid "All images downloaded successfully."
 msgstr ""
 
 msgid "All the features of USB Loader GX are unlocked."
@@ -525,9 +525,6 @@ msgstr "ระดับเสียงในเกมส์"
 msgid "Game is already installed:"
 msgstr "เกมส์นี้ถูกติดตั้งอยู่แล้ว:"
 
-msgid "Game partition"
-msgstr ""
-
 msgid "Games"
 msgstr "เกมส์"
 
@@ -781,6 +778,9 @@ msgid "Official Site:"
 msgstr "เวบไซต์อย่างเป็นทางการ:"
 
 msgid "Offset"
+msgstr ""
+
+msgid "Only Game Partition"
 msgstr ""
 
 msgid "Parental Control"

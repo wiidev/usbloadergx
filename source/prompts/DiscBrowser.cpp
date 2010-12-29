@@ -242,15 +242,21 @@ int autoSelectDol(const char *id, bool force)
     if (strcmp(id, "RSXP69") == 0) return 377;//previous value was 337
     if (strcmp(id, "RSXE69") == 0) return 377;//previous value was 337
 
-    //Wii Sports Resort, needs alt dol one time only, to show the Motion Plus video
-    //if (strcmp(id,"RZTP01") == 0 && CheckForSave(id4)==0) return 952;//from isostar
-    //if (strcmp(id,"RZTE01") == 0 && CheckForSave(id4)==0) return 674;//from starstremr
-    //as well as Grand Slam Tennis, Tiger Woods 10, Virtual Tennis 2009
+    //Madden NFL 07
+    if (strcmp(id, "RMDE69") == 0) return 39; //from TwEbErIs
+
+    //Madden NFL 08
+    if (strcmp(id, "RNFE69") == 0) return 1079; //from TwEbErIs
+
+    //Super Swing Golf
+    if (strcmp(id, "RPYE9B") == 0) return 10617; //from TwEbErIs
+
+    //NBA Live 08
+    if (strcmp(id, "RNBE69") == 0) return 936; //from TwEbErIs
 
     ///// games that can't be forced (alt dol is not always needed)
     if (!force)
     {
-
         //Grand Slam Tennis
         if (strcmp(id, "R5TP69") == 0) return 1493;//from isostar
         if (strcmp(id, "R5TE69") == 0) return 1493;//starstremr

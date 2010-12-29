@@ -324,53 +324,49 @@ void langpatcher(void *addr, u32 len, u8 languageChoice)
     u8 ocarinaLangPatchByte = 1;
     switch (languageChoice)
     {
-	case JAPANESE:
-	    ocarinaLangPatchByte = 0x00;
-	    break;
-	case ENGLISH:
-	    ocarinaLangPatchByte = 0x01;
-	    break;
-	case GERMAN:
-	    ocarinaLangPatchByte = 0x02;
-	    break;
-	case FRENCH:
-	    ocarinaLangPatchByte = 0x03;
-	    break;
-	case SPANISH:
-	    ocarinaLangPatchByte = 0x04;
-	    break;
-	case ITALIAN:
-	    ocarinaLangPatchByte = 0x05;
-	    break;
-	case DUTCH:
-	    ocarinaLangPatchByte = 0x06;
-	    break;
-	case S_CHINESE:
-	    ocarinaLangPatchByte = 0x07;
-	    break;
-	case T_CHINESE:
-	    ocarinaLangPatchByte = 0x08;
-	    break;
-	case KOREAN:
-	    ocarinaLangPatchByte = 0x09;
-	    break;
-	case CONSOLE_DEFAULT:
-	default:
-	    return;
-	    break;
+        case JAPANESE:
+            ocarinaLangPatchByte = 0x00;
+            break;
+        case ENGLISH:
+            ocarinaLangPatchByte = 0x01;
+            break;
+        case GERMAN:
+            ocarinaLangPatchByte = 0x02;
+            break;
+        case FRENCH:
+            ocarinaLangPatchByte = 0x03;
+            break;
+        case SPANISH:
+            ocarinaLangPatchByte = 0x04;
+            break;
+        case ITALIAN:
+            ocarinaLangPatchByte = 0x05;
+            break;
+        case DUTCH:
+            ocarinaLangPatchByte = 0x06;
+            break;
+        case S_CHINESE:
+            ocarinaLangPatchByte = 0x07;
+            break;
+        case T_CHINESE:
+            ocarinaLangPatchByte = 0x08;
+            break;
+        case KOREAN:
+            ocarinaLangPatchByte = 0x09;
+            break;
+        default:
+            return;
     }
 
-
-
-    void *addr_start = addr;
-    void *addr_end = addr + len;
+    u8 * addr_start = addr;
+    u8 * addr_end = addr + len;
 
     while (addr_start < addr_end)
     {
 
         if (memcmp(addr_start, langpatch, sizeof(langpatch)) == 0)
         {
-	    langvipatch((u32) addr_start, len, ocarinaLangPatchByte);
+            langvipatch((u32) addr_start, len, ocarinaLangPatchByte);
         }
         addr_start += 4;
     }

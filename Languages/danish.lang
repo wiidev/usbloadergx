@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-27 21:34+0100\n"
+"POT-Creation-Date: 2010-12-29 11:19+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: dorf[dk]\n"
 "Language-Team: dorf[dk]\n"
@@ -85,11 +85,11 @@ msgstr ">> Læser WAD-data...Ok!"
 msgid "AUTO"
 msgstr ""
 
-msgid "All images downloaded successfully."
+msgid "All Partitions"
 msgstr ""
 
-msgid "All partitions"
-msgstr "Alle partitioner"
+msgid "All images downloaded successfully."
+msgstr ""
 
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "Alle USB Loader GX's funktioner er låst op."
@@ -525,9 +525,6 @@ msgstr "Spillyd lydstyrke"
 msgid "Game is already installed:"
 msgstr "Dette spil er allerede installeret:"
 
-msgid "Game partition"
-msgstr "Spilpartition"
-
 msgid "Games"
 msgstr "Spil"
 
@@ -781,6 +778,9 @@ msgid "Official Site:"
 msgstr "Officiel side:"
 
 msgid "Offset"
+msgstr ""
+
+msgid "Only Game Partition"
 msgstr ""
 
 msgid "Parental Control"
@@ -1199,6 +1199,12 @@ msgstr "af"
 
 msgid "seconds left"
 msgstr "sekunder tilbage"
+
+#~ msgid "All partitions"
+#~ msgstr "Alle partitioner"
+
+#~ msgid "Game partition"
+#~ msgstr "Spilpartition"
 
 #~ msgid "Install 1:1 Copy"
 #~ msgstr "Installér 1:1-kopi"

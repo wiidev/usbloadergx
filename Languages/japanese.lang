@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-27 21:34+0100\n"
+"POT-Creation-Date: 2010-12-29 11:19+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
@@ -85,11 +85,11 @@ msgstr ">> WADﾃﾞｰﾀの読み込み...成功!"
 msgid "AUTO"
 msgstr "自動"
 
-msgid "All images downloaded successfully."
+msgid "All Partitions"
 msgstr ""
 
-msgid "All partitions"
-msgstr "全領域"
+msgid "All images downloaded successfully."
+msgstr ""
 
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "GXの使用者制限が解除されました"
@@ -525,9 +525,6 @@ msgstr "サウンドの音量"
 msgid "Game is already installed:"
 msgstr "このｹﾞｰﾑは既にｲﾝｽﾄｰﾙされています:"
 
-msgid "Game partition"
-msgstr "ゲーム領域のみ"
-
 msgid "Games"
 msgstr "総ゲーム数"
 
@@ -781,6 +778,9 @@ msgid "Official Site:"
 msgstr "公式サイト:"
 
 msgid "Offset"
+msgstr ""
+
+msgid "Only Game Partition"
 msgstr ""
 
 msgid "Parental Control"
@@ -1199,6 +1199,12 @@ msgstr "中"
 
 msgid "seconds left"
 msgstr "秒で完了"
+
+#~ msgid "All partitions"
+#~ msgstr "全領域"
+
+#~ msgid "Game partition"
+#~ msgstr "ゲーム領域のみ"
 
 #~ msgid "Install 1:1 Copy"
 #~ msgstr "フルコピー"

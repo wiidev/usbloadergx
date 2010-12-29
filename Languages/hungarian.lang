@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-27 21:34+0100\n"
+"POT-Creation-Date: 2010-12-29 11:19+0100\n"
 "PO-Revision-Date: 2009-12-29 11:05+0100\n"
 "Last-Translator: Springdale\n"
 "Language-Team: Tusk, Springdale\n"
@@ -85,11 +85,11 @@ msgstr ">> WAD adatok olvasása...Ok!"
 msgid "AUTO"
 msgstr ""
 
-msgid "All images downloaded successfully."
+msgid "All Partitions"
 msgstr ""
 
-msgid "All partitions"
-msgstr "Minden partíció"
+msgid "All images downloaded successfully."
+msgstr ""
 
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "Az USB Loader GX minden funkciója elérhetõ."
@@ -525,9 +525,6 @@ msgstr "Játék Banner hangerő"
 msgid "Game is already installed:"
 msgstr "A játék már fel van telepítve:"
 
-msgid "Game partition"
-msgstr "Játék partíció"
-
 msgid "Games"
 msgstr "Játékok"
 
@@ -781,6 +778,9 @@ msgid "Official Site:"
 msgstr "Hivatalos oldal:"
 
 msgid "Offset"
+msgstr ""
+
+msgid "Only Game Partition"
 msgstr ""
 
 msgid "Parental Control"
@@ -1199,6 +1199,12 @@ msgstr "./"
 
 msgid "seconds left"
 msgstr "hátralévõ másodperc"
+
+#~ msgid "All partitions"
+#~ msgstr "Minden partíció"
+
+#~ msgid "Game partition"
+#~ msgstr "Játék partíció"
 
 #~ msgid "Install 1:1 Copy"
 #~ msgstr "1:1 másolat telepítése"

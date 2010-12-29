@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-27 21:34+0100\n"
+"POT-Creation-Date: 2010-12-29 11:19+0100\n"
 "PO-Revision-Date: 2010-04-12 07:37+0100\n"
 "Last-Translator: glowy\n"
 "Language-Team: tj_cool, glowy\n"
@@ -85,11 +85,11 @@ msgstr ">> WAD data lezen...Ok!"
 msgid "AUTO"
 msgstr ""
 
-msgid "All images downloaded successfully."
+msgid "All Partitions"
 msgstr ""
 
-msgid "All partitions"
-msgstr "Alle partities"
+msgid "All images downloaded successfully."
+msgstr ""
 
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "Alle functies van USB Loader GX zijn vrijgegeven."
@@ -525,9 +525,6 @@ msgstr "Spel geluid volume"
 msgid "Game is already installed:"
 msgstr "Spel is al geïnstalleerd:"
 
-msgid "Game partition"
-msgstr "Spel partitie"
-
 msgid "Games"
 msgstr "Spellen"
 
@@ -781,6 +778,9 @@ msgid "Official Site:"
 msgstr "Officiële site:"
 
 msgid "Offset"
+msgstr ""
+
+msgid "Only Game Partition"
 msgstr ""
 
 msgid "Parental Control"
@@ -1199,6 +1199,12 @@ msgstr "van"
 
 msgid "seconds left"
 msgstr "seconden over"
+
+#~ msgid "All partitions"
+#~ msgstr "Alle partities"
+
+#~ msgid "Game partition"
+#~ msgstr "Spel partitie"
 
 #~ msgid "Install 1:1 Copy"
 #~ msgstr "Installeer 1:1 kopie"
