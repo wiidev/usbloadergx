@@ -17,7 +17,8 @@ extern __inline__ void* mem_align (size_t a, size_t size) {
 }
 
 extern __inline__ void mem_free (void* mem) {
-    MEM2_free(mem);
+    //using normal free, it will decide which free to use (just to be on the safe side)
+    free(mem);
 }
 
 #endif /* _MEM_ALLOCATE_H */

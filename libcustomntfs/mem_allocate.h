@@ -38,7 +38,8 @@ static inline void* ntfs_align (size_t size)
 
 static inline void ntfs_free (void* mem)
 {
-    MEM2_free(mem);
+    //using normal free, it will decide which free to use (just to be on the safe side)
+    free(mem);
 }
 
 #endif /* _MEM_ALLOCATE_H */
