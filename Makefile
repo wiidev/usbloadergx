@@ -259,7 +259,7 @@ export PATH		:=	$(PROJECTDIR)/gettext-bin:$(PATH)
 %.pot: $(CFILES) $(CPPFILES)
 	@echo Updating Languagefiles ...
 	@touch $(PROJECTDIR)/Languages/$(TARGET).pot
-	@xgettext -C -cTRANSLATORS --from-code=utf-8 --sort-output --no-wrap --no-location -ktr -o$(PROJECTDIR)/Languages/$(TARGET).pot -p $@ $^
+	@xgettext -C -cTRANSLATORS --from-code=utf-8 --sort-output --no-wrap --no-location -ktr -ktrNOOP -o$(PROJECTDIR)/Languages/$(TARGET).pot -p $@ $^
 	@echo Updating Themefiles ...
 	@touch $(PROJECTDIR)/Themes/$(TARGET).pot
 	@xgettext -C -cTRANSLATORS --from-code=utf-8 -F --no-wrap --add-location -kthInt -kthColor -kthAlign -o$(PROJECTDIR)/Themes/$(TARGET).pot -p $@ $^

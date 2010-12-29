@@ -78,6 +78,13 @@ static const char * InstallToText[INSTALL_TO_MAX] =
     trNOOP( "Gamename [GAMEID]" )
 };
 
+static const char * SplitSizeText[INSTALL_TO_MAX] =
+{
+    trNOOP( "No Splitting" ),
+    trNOOP( "Split each 2GB" ),
+    trNOOP( "Split each 4GB" ),
+};
+
 static const char * Error002Text[3] =
 {
     trNOOP( "No" ),
@@ -109,7 +116,8 @@ GameLoadSM::GameLoadSM()
     Options->SetName(Idx++, "%s", tr( "Ocarina" ));
     Options->SetName(Idx++, "%s", tr( "Boot/Standard" ));
     Options->SetName(Idx++, "%s", tr( "Partition" ));
-    Options->SetName(Idx++, "%s", tr( "FAT: Use directories" ));
+    Options->SetName(Idx++, "%s", tr( "Install directories" ));
+    Options->SetName(Idx++, "%s", tr( "Game Split Size" ));
     Options->SetName(Idx++, "%s", tr( "Quick Boot" ));
     Options->SetName(Idx++, "%s", tr( "Error 002 fix" ));
     Options->SetName(Idx++, "%s", tr( "Install partitions" ));
@@ -171,8 +179,11 @@ void GameLoadSM::SetOptionValues()
     Options->SetValue(Idx++, "%s%d (%.2fGB)", pInfo.fs_type == FS_TYPE_FAT32 ? "FAT"
             : pInfo.fs_type == FS_TYPE_NTFS ? "NTFS" : pInfo.fs_type == FS_TYPE_EXT ? "LINUX" : "WBFS", pInfo.index, partition_size);
 
-    //! Settings: FAT: Use directories
-    Options->SetValue(Idx++, "%s", tr( InstallToText[Settings.FatInstallToDir] ));
+    //! Settings: Install directories
+    Options->SetValue(Idx++, "%s", tr( InstallToText[Settings.InstallToDir] ));
+
+    //! Settings: Game Split Size
+    Options->SetValue(Idx++, "%s", tr( SplitSizeText[Settings.GameSplit] ));
 
     //! Settings: Quick Boot
     Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.quickboot] ));
@@ -276,12 +287,27 @@ int GameLoadSM::GetMenuInternal()
             fs_type = partitions.pinfo[Settings.partition].fs_type;
         }
         while (!IsValidPartition(fs_type, ios));
+
+        if(fs_type == FS_TYPE_FAT32 && Settings.GameSplit == GAMESPLIT_NONE)
+            Settings.GameSplit = GAMESPLIT_4GB;
     }
 
-    //! Settings: FAT: Use directories
+    //! Settings: Install directories
     else if (ret == ++Idx)
     {
-        if (++Settings.FatInstallToDir >= INSTALL_TO_MAX) Settings.FatInstallToDir = 0;
+        if (++Settings.InstallToDir >= INSTALL_TO_MAX) Settings.InstallToDir = 0;
+    }
+
+    //! Settings: Game Split Size
+    else if (ret == ++Idx)
+    {
+        if (++Settings.GameSplit >= GAMESPLIT_MAX)
+        {
+            if(partitions.pinfo[Settings.partition].fs_type == FS_TYPE_FAT32)
+                Settings.GameSplit = GAMESPLIT_2GB;
+            else
+                Settings.GameSplit = GAMESPLIT_NONE;
+        }
     }
 
     //! Settings: Quick Boot

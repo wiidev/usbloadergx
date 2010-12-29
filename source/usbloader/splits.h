@@ -22,9 +22,6 @@ extern "C"
             int max_split;
     } split_info_t;
 
-    // 1 sector less than 4gb
-    extern u64 OPT_split_size;
-
     void split_get_fname(split_info_t *s, int idx, char *fname);
     //FILE *split_open_file(split_info_t *s, int idx);
     //FILE *split_get_file(split_info_t *s, u32 lba, u32 *sec_count, int fill);

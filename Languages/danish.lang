@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-29 11:19+0100\n"
+"POT-Creation-Date: 2010-12-29 16:38+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: dorf[dk]\n"
 "Language-Team: dorf[dk]\n"
@@ -25,14 +25,53 @@ msgstr " er blevet gemt. Koderne er ikke blevet kontrolleret. Nogle af koderne v
 msgid " is not on the server."
 msgstr " er ikke på serveren."
 
+msgid "0 (Everyone)"
+msgstr "0 (Alle)"
+
+msgid "0 (Locked and Unlocked Games)"
+msgstr ""
+
+msgid "1 (Child 7+)"
+msgstr "1 (Børn 7+)"
+
+msgid "1 (Unlocked Games Only)"
+msgstr ""
+
+msgid "1 hour"
+msgstr "1 time"
+
+msgid "10 min"
+msgstr "10 min."
+
+msgid "2 (Teen 12+)"
+msgstr "2 (Unge teenagere 12+)"
+
+msgid "20 min"
+msgstr "20 min."
+
 msgid "2D Cover Path"
 msgstr "Sti til 2-d covers"
+
+msgid "3 (Mature 16+)"
+msgstr "3 (Modne teenagere 16+)"
+
+msgid "3 min"
+msgstr "3 min."
+
+msgid "30 min"
+msgstr "30 min."
 
 msgid "3D Cover Path"
 msgstr "Sti til 3-d covers"
 
 msgid "3D Covers"
 msgstr "3D-Covers"
+
+msgid "4 (Adults Only 18+)"
+msgstr "4 (Voksne 18+)"
+
+msgid "5 min"
+msgstr "5 min."
 
 msgid ">> Deleting tickets..."
 msgstr ">> Sletter tickets..."
@@ -97,6 +136,9 @@ msgstr "Alle USB Loader GX's funktioner er låst op."
 msgid "Alternate DOL"
 msgstr "Alternativ DOL"
 
+msgid "Anti"
+msgstr ""
+
 msgid "App Language"
 msgstr "Programsprog"
 
@@ -133,9 +175,6 @@ msgstr "Tilbage"
 msgid "Back to HBC or Wii Menu"
 msgstr "Tilbage til HBC eller Wii-menuen"
 
-msgid "Back to Loader"
-msgstr "Tilbage til Loaderen"
-
 msgid "Backgroundmusic"
 msgstr "Baggrundsmusik"
 
@@ -150,6 +189,9 @@ msgstr ""
 
 msgid "Boot?"
 msgstr "Genstart?"
+
+msgid "Both"
+msgstr "Begge"
 
 msgid "Can't be formatted"
 msgstr "Kan ikke formatteres"
@@ -206,6 +248,9 @@ msgstr "Forbindelsen er væk..."
 msgid "Console"
 msgstr "Konsol"
 
+msgid "Console Default"
+msgstr "Konsol-standard"
+
 msgid "Console Locked"
 msgstr "Konsollen er låst"
 
@@ -261,6 +306,9 @@ msgstr "Lavet af:"
 msgid "Custom Paths"
 msgstr "Sti-indstillinger"
 
+msgid "Customs/Original"
+msgstr "Tilpassede/Originale"
+
 msgid "DOL Path"
 msgstr "Stil til DOL"
 
@@ -309,8 +357,14 @@ msgstr "Download DVD-billeder"
 msgid "Disc Artwork Path"
 msgstr "Sti til DVD-billeder"
 
+msgid "Disc Default"
+msgstr "Spillets standard"
+
 msgid "Disc Images"
 msgstr "DVD-billeder"
+
+msgid "DiskFlip"
+msgstr ""
 
 msgid "Display"
 msgstr "Spilinfo."
@@ -396,6 +450,9 @@ msgstr "Downloader billede:"
 msgid "Downloading original Discarts"
 msgstr ""
 
+msgid "Dutch"
+msgstr "Hollandsk"
+
 msgid "ERROR"
 msgstr "FEJL"
 
@@ -405,6 +462,9 @@ msgstr "FEJL:"
 msgid "ERROR: Can't set up theme."
 msgstr "FEJL: Temaet kan ikke bruges."
 
+msgid "English"
+msgstr "Engelsk"
+
 msgid "Error"
 msgstr "Fejl"
 
@@ -413,6 +473,10 @@ msgstr "Fejl!"
 
 msgid "Error 002 fix"
 msgstr "Error 002 fix"
+
+#, c-format
+msgid "Error creating path: %s"
+msgstr ""
 
 msgid "Error opening downloaded file"
 msgstr ""
@@ -441,11 +505,14 @@ msgstr "Fejl..."
 msgid "Error:"
 msgstr "Fejl:"
 
+msgid "Exit"
+msgstr ""
+
+msgid "Exit to where?"
+msgstr ""
+
 msgid "Extracting files..."
 msgstr "Pakker filer ud..."
-
-msgid "FAT: Use directories"
-msgstr "FAT: Brug mapper"
 
 msgid "Failed formating"
 msgstr "Formateringen mislykkedes"
@@ -477,6 +544,15 @@ msgstr ""
 msgid "Flip-X"
 msgstr ""
 
+msgid "Force NTSC"
+msgstr ""
+
+msgid "Force PAL50"
+msgstr ""
+
+msgid "Force PAL60"
+msgstr ""
+
 msgid "Format"
 msgstr "Formater"
 
@@ -486,8 +562,17 @@ msgstr "Formaterer, vent venligst..."
 msgid "Free Space"
 msgstr "Ledig plads"
 
+msgid "French"
+msgstr "Fransk"
+
 msgid "Full Shutdown"
 msgstr "Sluk helt"
+
+msgid "Full shutdown"
+msgstr ""
+
+msgid "GAMEID_Gamename"
+msgstr ""
 
 msgid "GCT Cheatcodes Path"
 msgstr "Sti til cheatcodes"
@@ -501,6 +586,9 @@ msgstr "Konfigurér GUI"
 msgid "GXtheme.cfg not found in any subfolder."
 msgstr "GXtheme.cfg blev ikke fundet i nogle undermapper"
 
+msgid "Game ID"
+msgstr "Spil-ID"
+
 msgid "Game IOS"
 msgstr ""
 
@@ -513,6 +601,9 @@ msgstr "Spilindstillinger"
 msgid "Game Lock"
 msgstr ""
 
+msgid "Game Region"
+msgstr "Region"
+
 msgid "Game Size"
 msgstr "Spilstørrelse"
 
@@ -522,14 +613,23 @@ msgstr "Spillyd"
 msgid "Game Sound Volume"
 msgstr "Spillyd lydstyrke"
 
+msgid "Game Split Size"
+msgstr ""
+
 msgid "Game is already installed:"
 msgstr "Dette spil er allerede installeret:"
+
+msgid "Gamename [GAMEID]"
+msgstr ""
 
 msgid "Games"
 msgstr "Spil"
 
 msgid "GamesLevel"
 msgstr ""
+
+msgid "German"
+msgstr "Tysk"
 
 msgid "Gerne:"
 msgstr ""
@@ -542,6 +642,9 @@ msgstr ""
 
 msgid "Homebrew Apps Path"
 msgstr "Sti til homebrew-programmer"
+
+msgid "Homebrew Channel"
+msgstr ""
 
 msgid "Homebrew Launcher"
 msgstr "Homebrew-starter"
@@ -590,6 +693,9 @@ msgstr "Installationsfejl!"
 msgid "Install a game"
 msgstr "Installér nyt spil"
 
+msgid "Install directories"
+msgstr ""
+
 msgid "Install partitions"
 msgstr "Installationspartitioner"
 
@@ -611,8 +717,14 @@ msgstr "Installerer WAD"
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
 msgstr "Det ser ud til, at du har information, der vil kunne hjælpe os. Vær rar at sende denne information til udviklerne."
 
+msgid "Italian"
+msgstr "Italiensk"
+
 msgid "Jan"
 msgstr ""
+
+msgid "Japanese"
+msgstr "Japansk"
 
 msgid "July"
 msgstr "Juli"
@@ -626,6 +738,9 @@ msgstr "Behold"
 msgid "Keyboard"
 msgstr "Tastatur"
 
+msgid "Korean"
+msgstr "Koreansk"
+
 msgid "Language File"
 msgstr "Sprog Fil"
 
@@ -638,8 +753,17 @@ msgstr ""
 msgid "Languagepath changed."
 msgstr "Sti til sprogfiler ændret."
 
+msgid "Left"
+msgstr "Venstre"
+
+msgid "Like SysMenu"
+msgstr "Ligesom wii-menuen"
+
 msgid "Load"
 msgstr "Indlæs"
+
+msgid "Load From SD/USB"
+msgstr "Indlæs fra SD/USB"
 
 #, c-format
 msgid "Load file from: %s ?"
@@ -662,6 +786,18 @@ msgstr "Lås konsol"
 
 msgid "Lock USB Loader GX"
 msgstr ""
+
+msgid "Locked"
+msgstr "Låst"
+
+msgid "Loop Directory"
+msgstr "Afspil mappe i løkke"
+
+msgid "Loop Music"
+msgstr "Afspil musik i løkke"
+
+msgid "Loop Sound"
+msgstr "Afspil lyd i løkke"
 
 msgid "Mar"
 msgstr ""
@@ -687,11 +823,17 @@ msgstr "Musik i løkke"
 msgid "Music Volume"
 msgstr "Lydstyrke"
 
+msgid "Neither"
+msgstr "Ingen"
+
 msgid "Network is not initiated."
 msgstr ""
 
 msgid "New Disc Detected"
 msgstr "Har opdaget ny DVD"
+
+msgid "Next"
+msgstr "Næste"
 
 msgid "No"
 msgstr "Nej"
@@ -704,6 +846,9 @@ msgstr "Der blev ikke fundet nogle DOL-filer på DVDen."
 
 msgid "No SD-Card inserted!"
 msgstr "Intet SD-kort fundet!"
+
+msgid "No Splitting"
+msgstr ""
 
 msgid "No URL or Path specified."
 msgstr ""
@@ -728,6 +873,12 @@ msgstr "Ingen nye opdateringer."
 
 msgid "No themes found on the site."
 msgstr "Der blev ikke fundet nogle temaer på denne site."
+
+msgid "None"
+msgstr "Ingen"
+
+msgid "Normal"
+msgstr "Normal"
 
 msgid "Not a WAD file."
 msgstr "Ikke en WAD-fil."
@@ -768,6 +919,9 @@ msgstr "Fra"
 msgid "OK"
 msgstr ""
 
+msgid "ON"
+msgstr "Til"
+
 msgid "Ocarina"
 msgstr ""
 
@@ -780,8 +934,20 @@ msgstr "Officiel side:"
 msgid "Offset"
 msgstr ""
 
+msgid "Only Customs"
+msgstr "Kun tilpassede"
+
 msgid "Only Game Partition"
 msgstr ""
+
+msgid "Only Original"
+msgstr "Kun originaler"
+
+msgid "Only for Install"
+msgstr "Kun til installering"
+
+msgid "Original/Customs"
+msgstr "Originale/Tilpassede"
 
 msgid "Parental Control"
 msgstr "Børnelås"
@@ -816,6 +982,9 @@ msgstr "Spiltæller"
 msgid "Play Next"
 msgstr "Afspil næste"
 
+msgid "Play Once"
+msgstr "Afspil én gang"
+
 msgid "Play Previous"
 msgstr "Afspil forrige"
 
@@ -828,6 +997,9 @@ msgstr "Vent venligst..."
 msgid "Power off the Wii"
 msgstr "Sluk Wiien"
 
+msgid "Prev"
+msgstr "Forrige"
+
 msgid "Prompts Buttons"
 msgstr "Knaptekster"
 
@@ -837,11 +1009,17 @@ msgstr "Udgivet af"
 msgid "Quick Boot"
 msgstr "Hurtig opstart"
 
+msgid "Random Directory Music"
+msgstr "Musik fra tilfældig mappe"
+
 msgid "Reading WAD data... Ok!"
 msgstr "Læser WAD-data... Ok!"
 
 msgid "Receiving file from:"
 msgstr "Henter fil fra:"
+
+msgid "Region Patch"
+msgstr ""
 
 msgid "Released"
 msgstr "Udkommet"
@@ -876,8 +1054,14 @@ msgstr ""
 msgid "Return to Wii Menu"
 msgstr "Tilbage til Wii-menuen"
 
+msgid "Right"
+msgstr "Højre"
+
 msgid "Rumble"
 msgstr "Vibration"
+
+msgid "SChinese"
+msgstr "Kinesisk (std.)"
 
 msgid "SFX Volume"
 msgstr "Lydstyrke for effekter"
@@ -906,6 +1090,9 @@ msgstr ""
 msgid "Select a DOL"
 msgstr "Vælg en DOL"
 
+msgid "Select a DOL from Game"
+msgstr ""
+
 msgid "Sept"
 msgstr ""
 
@@ -918,8 +1105,14 @@ msgstr "Indstillinger"
 msgid "Shutdown System"
 msgstr "Sluk (rødt lys)"
 
+msgid "Shutdown Wii"
+msgstr ""
+
 msgid "Shutdown to Idle"
 msgstr "Standby"
+
+msgid "Shutdown?"
+msgstr ""
 
 msgid "Sort alphabetically"
 msgstr "Sortér alfabetisk"
@@ -936,8 +1129,26 @@ msgstr "Lyd"
 msgid "Sound Settings"
 msgstr ""
 
+msgid "Sound+BGM"
+msgstr "Lyd+BGM"
+
+msgid "Sound+Quiet"
+msgstr "Lyd+Stille"
+
+msgid "Spanish"
+msgstr "Spansk"
+
 msgid "Special thanks to:"
 msgstr "Specielt tak til:"
+
+msgid "Split each 2GB"
+msgstr ""
+
+msgid "Split each 4GB"
+msgstr ""
+
+msgid "Standby"
+msgstr ""
 
 msgid "Success"
 msgstr "Succes"
@@ -962,6 +1173,12 @@ msgstr "Udpakning af tema lykkedes."
 
 msgid "Successfully installed:"
 msgstr "Installationen lykkedes:"
+
+msgid "System Default"
+msgstr "System-standard"
+
+msgid "TChinese"
+msgstr "Kinesisk (trad.)"
 
 msgid "TXT Cheatcodes Path"
 msgstr "Sti til TXTCheatcodes"
@@ -1048,6 +1265,9 @@ msgstr ""
 msgid "Unlock console to use this option."
 msgstr "Lås op for konsollen for at benytte denne indstilling."
 
+msgid "Unlocked"
+msgstr "Låst op"
+
 msgid "Unsupported format, try to extract manually."
 msgstr "Formatet er ikke understøttet - prøv at udpakke manuelt."
 
@@ -1108,6 +1328,9 @@ msgstr "Hvad skal opdateres?"
 
 msgid "WiFi Features"
 msgstr "WiFi-indstillinger"
+
+msgid "Widescreen Fix"
+msgstr "Bredformat-fix"
 
 msgid "Wii Menu"
 msgstr ""
@@ -1200,6 +1423,12 @@ msgstr "af"
 msgid "seconds left"
 msgstr "sekunder tilbage"
 
+#~ msgid "Back to Loader"
+#~ msgstr "Tilbage til Loaderen"
+
+#~ msgid "FAT: Use directories"
+#~ msgstr "FAT: Brug mapper"
+
 #~ msgid "All partitions"
 #~ msgstr "Alle partitioner"
 
@@ -1209,173 +1438,23 @@ msgstr "sekunder tilbage"
 #~ msgid "Install 1:1 Copy"
 #~ msgstr "Installér 1:1-kopi"
 
-#~ msgid "0 (Everyone)"
-#~ msgstr "0 (Alle)"
-
-#~ msgid "1 (Child 7+)"
-#~ msgstr "1 (Børn 7+)"
-
-#~ msgid "1 hour"
-#~ msgstr "1 time"
-
-#~ msgid "10 min"
-#~ msgstr "10 min."
-
-#~ msgid "2 (Teen 12+)"
-#~ msgstr "2 (Unge teenagere 12+)"
-
-#~ msgid "20 min"
-#~ msgstr "20 min."
-
-#~ msgid "3 (Mature 16+)"
-#~ msgstr "3 (Modne teenagere 16+)"
-
-#~ msgid "3 min"
-#~ msgstr "3 min."
-
-#~ msgid "30 min"
-#~ msgstr "30 min."
-
-#~ msgid "4 (Adults Only 18+)"
-#~ msgstr "4 (Voksne 18+)"
-
-#~ msgid "5 min"
-#~ msgstr "5 min."
-
 #~ msgid "An Error occured"
 #~ msgstr "Der skete en fejl"
 
 #~ msgid "Are you sure you want to enable Parent Control?"
 #~ msgstr "Skal børnelåsen slås til?"
 
-#~ msgid "Both"
-#~ msgstr "Begge"
-
 #~ msgid "Checking for Updates"
 #~ msgstr "Leder efter opdateringer"
-
-#~ msgid "Console Default"
-#~ msgstr "Konsol-standard"
-
-#~ msgid "Customs/Original"
-#~ msgstr "Tilpassede/Originale"
-
-#~ msgid "Disc Default"
-#~ msgstr "Spillets standard"
 
 #~ msgid "Downloading"
 #~ msgstr "Downloader"
 
-#~ msgid "Dutch"
-#~ msgstr "Hollandsk"
-
-#~ msgid "English"
-#~ msgstr "Engelsk"
-
-#~ msgid "French"
-#~ msgstr "Fransk"
-
-#~ msgid "Game ID"
-#~ msgstr "Spil-ID"
-
-#~ msgid "Game Region"
-#~ msgstr "Region"
-
-#~ msgid "German"
-#~ msgstr "Tysk"
-
 #~ msgid "Invalid PIN code"
 #~ msgstr "Forkert PIN-kode"
 
-#~ msgid "Italian"
-#~ msgstr "Italiensk"
-
-#~ msgid "Japanese"
-#~ msgstr "Japansk"
-
-#~ msgid "Korean"
-#~ msgstr "Koreansk"
-
-#~ msgid "Left"
-#~ msgstr "Venstre"
-
-#~ msgid "Like SysMenu"
-#~ msgstr "Ligesom wii-menuen"
-
-#~ msgid "Load From SD/USB"
-#~ msgstr "Indlæs fra SD/USB"
-
-#~ msgid "Locked"
-#~ msgstr "Låst"
-
-#~ msgid "Loop Directory"
-#~ msgstr "Afspil mappe i løkke"
-
-#~ msgid "Loop Music"
-#~ msgstr "Afspil musik i løkke"
-
-#~ msgid "Loop Sound"
-#~ msgstr "Afspil lyd i løkke"
-
-#~ msgid "Neither"
-#~ msgstr "Ingen"
-
-#~ msgid "Next"
-#~ msgstr "Næste"
-
-#~ msgid "None"
-#~ msgstr "Ingen"
-
-#~ msgid "Normal"
-#~ msgstr "Normal"
-
-#~ msgid "ON"
-#~ msgstr "Til"
-
-#~ msgid "Only Customs"
-#~ msgstr "Kun tilpassede"
-
-#~ msgid "Only Original"
-#~ msgstr "Kun originaler"
-
-#~ msgid "Only for Install"
-#~ msgstr "Kun til installering"
-
-#~ msgid "Original/Customs"
-#~ msgstr "Originale/Tilpassede"
-
 #~ msgid "Parental Control disabled"
 #~ msgstr "Børnelåsen er slået fra"
-
-#~ msgid "Play Once"
-#~ msgstr "Afspil én gang"
-
-#~ msgid "Prev"
-#~ msgstr "Forrige"
-
-#~ msgid "Random Directory Music"
-#~ msgstr "Musik fra tilfældig mappe"
-
-#~ msgid "Right"
-#~ msgstr "Højre"
-
-#~ msgid "SChinese"
-#~ msgstr "Kinesisk (std.)"
-
-#~ msgid "Sound+BGM"
-#~ msgstr "Lyd+BGM"
-
-#~ msgid "Sound+Quiet"
-#~ msgstr "Lyd+Stille"
-
-#~ msgid "Spanish"
-#~ msgstr "Spansk"
-
-#~ msgid "System Default"
-#~ msgstr "System-standard"
-
-#~ msgid "TChinese"
-#~ msgstr "Kinesisk (trad.)"
 
 #~ msgid "The wad file was installed.  But It could not be deleted from the SD card."
 #~ msgstr "WAD-filen blev installeret. Den kunne ikke slettes fra SD-kortet."
@@ -1389,9 +1468,6 @@ msgstr "sekunder tilbage"
 #~ msgid "Unlock Parental Control"
 #~ msgstr "Lås børnelåsen op"
 
-#~ msgid "Unlocked"
-#~ msgstr "Låst op"
-
 #~ msgid "Update to"
 #~ msgstr "Opdatér til"
 
@@ -1403,9 +1479,6 @@ msgstr "sekunder tilbage"
 
 #~ msgid "Updating WiiTDB.zip"
 #~ msgstr "Opdaterer WiiTDB.zip"
-
-#~ msgid "Widescreen Fix"
-#~ msgstr "Bredformat-fix"
 
 #~ msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 #~ msgstr "Børnelåsen er ikke slået til. Hvis børnelåsen skal bruges, skal den slås til i Wiiens indstillinger."

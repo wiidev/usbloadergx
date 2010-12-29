@@ -58,10 +58,10 @@ void CSettings::SetDefault()
     snprintf(update_path, sizeof(update_path), "%s/apps/usbloader_gx/", BootDevice);
     snprintf(theme_downloadpath, sizeof(theme_downloadpath), "%sthemes/", ConfigPath);
     snprintf(homebrewapps_path, sizeof(homebrewapps_path), "%s/apps/", BootDevice);
-    snprintf(Cheatcodespath, sizeof(Cheatcodespath), "%scodes/", ConfigPath);
-    snprintf(TxtCheatcodespath, sizeof(TxtCheatcodespath), "%stxtcodes/", ConfigPath);
-    snprintf(BcaCodepath, sizeof(BcaCodepath), "%sbca/", ConfigPath);
-    snprintf(WipCodepath, sizeof(WipCodepath), "%swip/", ConfigPath);
+    snprintf(Cheatcodespath, sizeof(Cheatcodespath), "%s/codes/", BootDevice);
+    snprintf(TxtCheatcodespath, sizeof(TxtCheatcodespath), "%s/txtcodes/", BootDevice);
+    snprintf(BcaCodepath, sizeof(BcaCodepath), "%s/bca/", BootDevice);
+    snprintf(WipCodepath, sizeof(WipCodepath), "%s/wip/", BootDevice);
     snprintf(theme_path, sizeof(theme_path), "%stheme/", ConfigPath);
     snprintf(dolpath, sizeof(dolpath), "%s/", BootDevice);
     strcpy(language_path, "");
@@ -102,7 +102,8 @@ void CSettings::SetDefault()
     musicloopmode = 1;
     partition = -1;
     marknewtitles = 1;
-    FatInstallToDir = 0;
+    InstallToDir = 0;
+    GameSplit = GAMESPLIT_4GB;
     InstallPartitions = ONLY_GAME_PARTITION;
     beta_upgrades = 0;
     PlaylogUpdate = 1;
@@ -211,7 +212,8 @@ bool CSettings::Save()
     fprintf(file, "discart = %d\n ", discart);
     fprintf(file, "partition = %d\n ", partition);
     fprintf(file, "marknewtitles = %d\n ", marknewtitles);
-    fprintf(file, "FatInstallToDir = %d\n ", FatInstallToDir);
+    fprintf(file, "InstallToDir = %d\n ", InstallToDir);
+    fprintf(file, "GameSplit = %d\n ", GameSplit);
     fprintf(file, "InstallPartitions = %08X\n ", InstallPartitions);
     fprintf(file, "beta_upgrades = %d\n ", beta_upgrades);
     fprintf(file, "PlaylogUpdate = %d\n ", PlaylogUpdate);
@@ -433,9 +435,14 @@ bool CSettings::SetSetting(char *name, char *value)
         if (sscanf(value, "%d", &i) == 1) autonetwork = i;
         return true;
     }
-    else if (strcmp(name, "FatInstallToDir") == 0)
+    else if (strcmp(name, "InstallToDir") == 0)
     {
-        if (sscanf(value, "%d", &i) == 1) FatInstallToDir = i;
+        if (sscanf(value, "%d", &i) == 1) InstallToDir = i;
+        return true;
+    }
+    else if (strcmp(name, "GameSplit") == 0)
+    {
+        if (sscanf(value, "%d", &i) == 1) GameSplit = i;
         return true;
     }
     else if (strcmp(name, "beta_upgrades") == 0)
@@ -671,10 +678,19 @@ bool CSettings::LoadLanguage(const char *path, int lang)
 {
     bool ret = false;
 
-    if (lang >= 0 || !path || strlen(path) == 0)
+    if (path && strlen(path) > 3)
     {
-        if (lang < 0) return false;
-
+        ret = gettextLoadLanguage(path);
+        if (ret)
+        {
+            strncpy(language_path, path, sizeof(language_path));
+            strcpy(db_language, GetLangCode(language_path));
+        }
+        else
+            return LoadLanguage(NULL, CONSOLE_DEFAULT);
+    }
+    else if (lang >= 0)
+    {
         char filepath[150];
         char langpath[150];
         snprintf(langpath, sizeof(langpath), "%s", language_path);
@@ -737,19 +753,6 @@ bool CSettings::LoadLanguage(const char *path, int lang)
         if (ret)
         {
             strncpy(language_path, filepath, sizeof(language_path));
-            strcpy(db_language, GetLangCode(language_path));
-        }
-    }
-    else if (strlen(path) < 3)
-    {
-        return LoadLanguage(NULL, CONSOLE_DEFAULT);
-    }
-    else
-    {
-        ret = gettextLoadLanguage(path);
-        if (ret)
-        {
-            strncpy(language_path, path, sizeof(language_path));
             strcpy(db_language, GetLangCode(language_path));
         }
     }

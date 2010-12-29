@@ -779,6 +779,8 @@ int WindowExitPrompt()
 {
     gprintf("WindowExitPrompt()\n");
 
+    bgMusic->Pause();
+
     GuiSound * homein = NULL;
     homein = new GuiSound(menuin_ogg, menuin_ogg_size, Settings.sfxvolume);
     homein->SetVolume(Settings.sfxvolume);
@@ -881,7 +883,7 @@ int WindowExitPrompt()
     GuiButton btn1(&btn1Img, &btn1OverImg, 0, 3, 0, 0, &trigA, btnSoundOver, btnSoundClick2, 0);
     btn1.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
 
-    GuiText btn2Txt(tr( "Back to Loader" ), 28, ( GXColor ) {0, 0, 0, 255});
+    GuiText btn2Txt(tr( "Exit" ), 28, ( GXColor ) {0, 0, 0, 255});
     GuiImage btn2Img(&button);
     if (Settings.wsprompt)
     {
@@ -894,7 +896,7 @@ int WindowExitPrompt()
     btn2.SetRumble(false);
     btn2.SetPosition(-150, 0);
 
-    GuiText btn3Txt(tr( "Wii Menu" ), 28, ( GXColor ) {0, 0, 0, 255});
+    GuiText btn3Txt(tr( "Shutdown Wii" ), 28, ( GXColor ) {0, 0, 0, 255});
     GuiImage btn3Img(&button);
     if (Settings.wsprompt)
     {
@@ -975,12 +977,14 @@ int WindowExitPrompt()
             }
         }
 
-        if (shutdown == 1)
+        if (shutdown)
         {
             wiilight(0);
             Sys_Shutdown();
         }
-        if (reset == 1) Sys_Reboot();
+        if (reset)
+            Sys_Reboot();
+
         if (btn1.GetState() == STATE_CLICKED)
         {
             choice = 1;
@@ -1002,9 +1006,11 @@ int WindowExitPrompt()
         }
         else if (btn2.GetState() == STATE_CLICKED)
         {
-            ret = WindowPrompt(tr( "Are you sure?" ), 0, tr( "Yes" ), tr( "No" ));
+            ret = WindowPrompt(tr( "Exit to where?" ), 0, tr( "Homebrew Channel" ), tr( "Wii Menu" ), tr( "Cancel" ));
             if (ret == 1)
-                choice = 2;
+                Sys_LoadHBC();
+            else if(ret == 2)
+                Sys_LoadMenu();
             HaltGui();
             mainWindow->SetState(STATE_DISABLED);
             promptWindow.SetState(STATE_DEFAULT);
@@ -1014,9 +1020,11 @@ int WindowExitPrompt()
         }
         else if (btn3.GetState() == STATE_CLICKED)
         {
-            ret = WindowPrompt(tr( "Are you sure?" ), 0, tr( "Yes" ), tr( "No" ));
+            ret = WindowPrompt(tr( "Shutdown?" ), 0, tr( "Full shutdown" ), tr( "Standby" ), tr("Cancel"));
             if (ret == 1)
-                choice = 3;
+                Sys_ShutdownToStandby();
+            else if(ret == 2)
+                Sys_ShutdownToIdle();
             HaltGui();
             mainWindow->SetState(STATE_DISABLED);
             promptWindow.SetState(STATE_DEFAULT);
@@ -1068,6 +1076,8 @@ int WindowExitPrompt()
     }
 
     ResumeGui();
+    bgMusic->Resume();
+
     return choice;
 }
 

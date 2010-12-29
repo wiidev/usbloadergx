@@ -785,14 +785,7 @@ int GameBrowseMenu::MainLoop()
     else if (homeBtn->GetState() == STATE_CLICKED)
     {
         gprintf("\thomeBtn clicked\n");
-        bgMusic->Pause();
-        int choice = WindowExitPrompt();
-        bgMusic->Resume();
-
-        if (choice == 3)
-            Sys_LoadMenu(); // Back to System Menu
-        else if (choice == 2)
-            Sys_BackToLoader();
+        WindowExitPrompt();
 
         homeBtn->ResetState();
     }
@@ -809,9 +802,12 @@ int GameBrowseMenu::MainLoop()
         gprintf("\tsdCardBtn Clicked\n");
         HaltGui();
         bgMusic->Pause();
+        Settings.Save();
         SDCard_Init();
         Settings.Load();
         bgMusic->Resume();
+        wString oldFilter(gameList.GetCurrentFilter());
+        gameList.FilterList(oldFilter.c_str());
         ReloadBrowser();
         ResumeGui();
         sdcardBtn->ResetState();

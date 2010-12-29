@@ -12,14 +12,18 @@
 #include <ctype.h>
 #include <fat.h>
 
+#include "FileOperations/fileops.h"
 #include "settings/CSettings.h"
 #include "settings/GameTitles.h"
 #include "usbloader/disc.h"
 #include "usbloader/usbstorage2.h"
+#include "language/gettext.h"
 #include "libs/libfat/fatfile_frag.h"
+#include "utils/ShowError.h"
 #include "fatmounter.h"
 #include "wbfs_fat.h"
 #include "prompts/ProgressWindow.h"
+#include "usbloader/wbfs.h"
 #include "wbfs_rw.h"
 
 #include "gecko.h"
@@ -29,6 +33,7 @@
 
 using namespace std;
 
+extern int wbfs_part_fs;
 sec_t fat_wbfs_sec = 0;
 
 char Wbfs_Fat::wbfs_fs_drive[16];
@@ -690,11 +695,11 @@ void Wbfs_Fat::GetDir(struct discHdr *header, char *path)
 {
     strcpy(path, wbfs_fs_drive);
     strcat(path, wbfs_fat_dir);
-    if (Settings.FatInstallToDir)
+    if (Settings.InstallToDir)
     {
         strcat(path, "/");
         int layout = 0;
-        if (Settings.FatInstallToDir == 2) layout = 1;
+        if (Settings.InstallToDir == 2) layout = 1;
         mk_gameid_title(header, path + strlen(path), 0, layout);
     }
 }
@@ -707,10 +712,23 @@ wbfs_t* Wbfs_Fat::CreatePart(u8 *id, char *path)
     u32 n_sector = size / 512;
     int ret;
 
-    //printf("CREATE PART %s %lld %d\n", id, size, n_sector);
-    snprintf(fname, sizeof(fname), "%s%s", wbfs_fs_drive, wbfs_fat_dir);
-    mkdir(fname, 0777); // base usb:/wbfs
-    mkdir(path, 0777); // game subdir
+    if(!CreateSubfolder(path)) // game subdir
+    {
+        ProgressStop();
+        ShowError(tr("Error creating path: %s"), path);
+        return NULL;
+    }
+
+    // 1 cluster less than 4gb
+    u64 OPT_split_size = 4LL * 1024 * 1024 * 1024 - 32 * 1024;
+
+    if(Settings.GameSplit == GAMESPLIT_NONE && wbfs_part_fs != PART_FS_FAT)
+        OPT_split_size = (u64) 100LL * 1024 * 1024 * 1024 - 32 * 1024;
+
+    else if(Settings.GameSplit == GAMESPLIT_2GB)
+        // 1 cluster less than 2gb
+        OPT_split_size = (u64)2LL * 1024 * 1024 * 1024 - 32 * 1024;
+
     Filename(id, fname, sizeof(fname), path);
     printf("Writing to %s\n", fname);
     ret = split_create(&split, fname, OPT_split_size, size, true);
@@ -755,12 +773,11 @@ void Wbfs_Fat::mk_title_txt(struct discHdr *header, char *path)
 void Wbfs_Fat::mk_gameid_title(struct discHdr *header, char *name, int re_space, int layout)
 {
     int i, len;
-    char title[65];
-    char id[8];
+    char title[100];
+    char id[7];
 
-    memcpy(name, header->id, 6);
-    name[6] = 0;
-    strncpy(title, GameTitles.GetTitle(header), sizeof(title));
+    snprintf(id, sizeof(id), (char *) header->id);
+    snprintf(title, sizeof(title), GameTitles.GetTitle(header));
     title_filename(title);
 
     if (layout == 0)

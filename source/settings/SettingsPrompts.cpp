@@ -475,7 +475,7 @@ int MenuThemeSelect()
             w.Remove( &backBtn );
             w.Remove( &pathBtn );
             w.Remove( &defaultBtn );
-            int result = OnScreenKeyboard( themepath, sizeof(themepath), 0 );
+            int result = BrowseDevice(themepath, sizeof(themepath), FB_DEFAULT, noFILES);
             w.Append( &optionBrowser4 );
             w.Append( &pathBtn );
             w.Append( &backBtn );

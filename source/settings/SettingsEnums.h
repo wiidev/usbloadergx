@@ -112,6 +112,14 @@ enum
 
 enum
 {
+    GAMESPLIT_NONE,
+    GAMESPLIT_2GB,
+    GAMESPLIT_4GB,
+    GAMESPLIT_MAX
+};
+
+enum
+{
     LIST_MODE,
     GRID_MODE,
     CAROUSEL_MODE

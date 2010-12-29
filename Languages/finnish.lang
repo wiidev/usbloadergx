@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-29 11:19+0100\n"
+"POT-Creation-Date: 2010-12-29 16:38+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: c64rmx\n"
 "Language-Team: \n"
@@ -25,14 +25,53 @@ msgstr ""
 msgid " is not on the server."
 msgstr "Tiedostoa ei löydy serveriltä"
 
+msgid "0 (Everyone)"
+msgstr "0 (Kaikille)"
+
+msgid "0 (Locked and Unlocked Games)"
+msgstr ""
+
+msgid "1 (Child 7+)"
+msgstr "1 (Lapset 7+)"
+
+msgid "1 (Unlocked Games Only)"
+msgstr ""
+
+msgid "1 hour"
+msgstr " 1 tunti"
+
+msgid "10 min"
+msgstr ""
+
+msgid "2 (Teen 12+)"
+msgstr "2 (Teinit 12+)"
+
+msgid "20 min"
+msgstr ""
+
 msgid "2D Cover Path"
 msgstr "2D Kansien polku"
+
+msgid "3 (Mature 16+)"
+msgstr "3 (Teinit 16+)"
+
+msgid "3 min"
+msgstr ""
+
+msgid "30 min"
+msgstr ""
 
 msgid "3D Cover Path"
 msgstr "3D Kansien polku"
 
 msgid "3D Covers"
 msgstr "3D Kannet"
+
+msgid "4 (Adults Only 18+)"
+msgstr "4 (K18)"
+
+msgid "5 min"
+msgstr ""
 
 msgid ">> Deleting tickets..."
 msgstr ">> Tuhotaan lipukkeita..."
@@ -97,6 +136,9 @@ msgstr "Kaikki asetukset on nyt käytettävissä."
 msgid "Alternate DOL"
 msgstr "Vaihtoehto DOL"
 
+msgid "Anti"
+msgstr ""
+
 msgid "App Language"
 msgstr "Ohjelman kieli"
 
@@ -133,9 +175,6 @@ msgstr "Takaisin"
 msgid "Back to HBC or Wii Menu"
 msgstr "Takaisin HBC:hen tai Wii Menuun"
 
-msgid "Back to Loader"
-msgstr "HBC"
-
 msgid "Backgroundmusic"
 msgstr "Taustamusiikki"
 
@@ -150,6 +189,9 @@ msgstr "Käynnistys/Standardi"
 
 msgid "Boot?"
 msgstr "Boottaa?"
+
+msgid "Both"
+msgstr "Molemmat"
 
 msgid "Can't be formatted"
 msgstr "Ei voida formatoida"
@@ -206,6 +248,9 @@ msgstr ""
 msgid "Console"
 msgstr "Konsoli"
 
+msgid "Console Default"
+msgstr "Konsolin oletus"
+
 msgid "Console Locked"
 msgstr "Konsoli lukittu"
 
@@ -261,6 +306,9 @@ msgstr "Tekijät"
 msgid "Custom Paths"
 msgstr "Omat polut"
 
+msgid "Customs/Original"
+msgstr "Omat/Alkuperäiset"
+
 msgid "DOL Path"
 msgstr "DOL:in polku"
 
@@ -309,8 +357,14 @@ msgstr "Levykuvien lataus"
 msgid "Disc Artwork Path"
 msgstr "Levykuvien polku"
 
+msgid "Disc Default"
+msgstr "Pelin oletus"
+
 msgid "Disc Images"
 msgstr "Levykuvat"
+
+msgid "DiskFlip"
+msgstr "Levynvaihto"
 
 msgid "Display"
 msgstr "Näyttö"
@@ -396,6 +450,9 @@ msgstr ""
 msgid "Downloading original Discarts"
 msgstr ""
 
+msgid "Dutch"
+msgstr "Hollanti"
+
 msgid "ERROR"
 msgstr "VIRHE"
 
@@ -405,6 +462,9 @@ msgstr "VIRHE:"
 msgid "ERROR: Can't set up theme."
 msgstr ""
 
+msgid "English"
+msgstr "Englanti"
+
 msgid "Error"
 msgstr "Virhe"
 
@@ -413,6 +473,10 @@ msgstr "Virhe !"
 
 msgid "Error 002 fix"
 msgstr "Virhe 002 fix"
+
+#, c-format
+msgid "Error creating path: %s"
+msgstr ""
 
 msgid "Error opening downloaded file"
 msgstr ""
@@ -441,10 +505,13 @@ msgstr "Virhe..."
 msgid "Error:"
 msgstr "Virhe:"
 
-msgid "Extracting files..."
+msgid "Exit"
 msgstr ""
 
-msgid "FAT: Use directories"
+msgid "Exit to where?"
+msgstr ""
+
+msgid "Extracting files..."
 msgstr ""
 
 msgid "Failed formating"
@@ -477,6 +544,15 @@ msgstr ""
 msgid "Flip-X"
 msgstr "Käännä-X"
 
+msgid "Force NTSC"
+msgstr ""
+
+msgid "Force PAL50"
+msgstr ""
+
+msgid "Force PAL60"
+msgstr ""
+
 msgid "Format"
 msgstr "Formatoi"
 
@@ -486,8 +562,17 @@ msgstr "Formatoi, odota..."
 msgid "Free Space"
 msgstr "Vapaata tilaa"
 
+msgid "French"
+msgstr "Ranska"
+
 msgid "Full Shutdown"
 msgstr "Täysi sammutus"
+
+msgid "Full shutdown"
+msgstr ""
+
+msgid "GAMEID_Gamename"
+msgstr ""
 
 msgid "GCT Cheatcodes Path"
 msgstr "GCT Koodien polku"
@@ -501,6 +586,9 @@ msgstr "GUI asetukset"
 msgid "GXtheme.cfg not found in any subfolder."
 msgstr ""
 
+msgid "Game ID"
+msgstr "Peli ID"
+
 msgid "Game IOS"
 msgstr ""
 
@@ -513,6 +601,9 @@ msgstr "Pelin lataus"
 msgid "Game Lock"
 msgstr ""
 
+msgid "Game Region"
+msgstr "Alue"
+
 msgid "Game Size"
 msgstr "Pelin koko"
 
@@ -522,14 +613,23 @@ msgstr ""
 msgid "Game Sound Volume"
 msgstr ""
 
+msgid "Game Split Size"
+msgstr ""
+
 msgid "Game is already installed:"
 msgstr "Peli on jo asennettu:"
+
+msgid "Gamename [GAMEID]"
+msgstr ""
 
 msgid "Games"
 msgstr "Pelejä"
 
 msgid "GamesLevel"
 msgstr ""
+
+msgid "German"
+msgstr "Saksa"
 
 msgid "Gerne:"
 msgstr ""
@@ -542,6 +642,9 @@ msgstr ""
 
 msgid "Homebrew Apps Path"
 msgstr "Homebrew Apps polku"
+
+msgid "Homebrew Channel"
+msgstr ""
 
 msgid "Homebrew Launcher"
 msgstr ""
@@ -590,6 +693,9 @@ msgstr "Asennusvirhe!"
 msgid "Install a game"
 msgstr "Asenna peli"
 
+msgid "Install directories"
+msgstr ""
+
 msgid "Install partitions"
 msgstr ""
 
@@ -611,8 +717,14 @@ msgstr "Asennetaan wadia"
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
 msgstr "Näyttää että sinulla on tietoa joka on hyödyllistä meille. Ole ystävällinen ja välitä se kehitystiimille."
 
+msgid "Italian"
+msgstr "Italia"
+
 msgid "Jan"
 msgstr "tammi"
+
+msgid "Japanese"
+msgstr "Japani"
 
 msgid "July"
 msgstr "heinä"
@@ -626,6 +738,9 @@ msgstr "Pidä"
 msgid "Keyboard"
 msgstr "Näppäimistö"
 
+msgid "Korean"
+msgstr "Korea"
+
 msgid "Language File"
 msgstr "KieliTiedosto"
 
@@ -638,8 +753,17 @@ msgstr ""
 msgid "Languagepath changed."
 msgstr "Kielen polku vaihdettu"
 
+msgid "Left"
+msgstr "Vasen"
+
+msgid "Like SysMenu"
+msgstr "Kuin wii-menu"
+
 msgid "Load"
 msgstr "Lataa"
+
+msgid "Load From SD/USB"
+msgstr "Lataa SD:ltä/USB:ltä"
 
 #, c-format
 msgid "Load file from: %s ?"
@@ -661,6 +785,18 @@ msgid "Lock Console"
 msgstr "Lukitse konsoli"
 
 msgid "Lock USB Loader GX"
+msgstr ""
+
+msgid "Locked"
+msgstr "Lukittu"
+
+msgid "Loop Directory"
+msgstr ""
+
+msgid "Loop Music"
+msgstr ""
+
+msgid "Loop Sound"
 msgstr ""
 
 msgid "Mar"
@@ -687,11 +823,17 @@ msgstr ""
 msgid "Music Volume"
 msgstr "Voimakkuus"
 
+msgid "Neither"
+msgstr "Ei kumpikaan"
+
 msgid "Network is not initiated."
 msgstr ""
 
 msgid "New Disc Detected"
 msgstr ""
+
+msgid "Next"
+msgstr "Seuraava"
 
 msgid "No"
 msgstr "Ei"
@@ -704,6 +846,9 @@ msgstr "Levyltä ei löydy dol tiedostoa"
 
 msgid "No SD-Card inserted!"
 msgstr "SD-korttia ei ole asetettu wiihin!"
+
+msgid "No Splitting"
+msgstr ""
 
 msgid "No URL or Path specified."
 msgstr ""
@@ -728,6 +873,12 @@ msgstr "Ei uusia päivityksiä"
 
 msgid "No themes found on the site."
 msgstr ""
+
+msgid "None"
+msgstr ""
+
+msgid "Normal"
+msgstr "Normaali"
 
 msgid "Not a WAD file."
 msgstr ""
@@ -768,6 +919,9 @@ msgstr "Pois"
 msgid "OK"
 msgstr ""
 
+msgid "ON"
+msgstr "Päälle"
+
 msgid "Ocarina"
 msgstr ""
 
@@ -780,8 +934,20 @@ msgstr "Virallinen sivusto:"
 msgid "Offset"
 msgstr ""
 
+msgid "Only Customs"
+msgstr "Vain omatekoiset"
+
 msgid "Only Game Partition"
 msgstr ""
+
+msgid "Only Original"
+msgstr "Vain alkuperäinen"
+
+msgid "Only for Install"
+msgstr "Ainoastaan asennusta varten"
+
+msgid "Original/Customs"
+msgstr "Alkuperäinen/Omatekoinen"
 
 msgid "Parental Control"
 msgstr "Valvonta"
@@ -816,6 +982,9 @@ msgstr "Pelauksen määrä"
 msgid "Play Next"
 msgstr ""
 
+msgid "Play Once"
+msgstr ""
+
 msgid "Play Previous"
 msgstr ""
 
@@ -828,6 +997,9 @@ msgstr ""
 msgid "Power off the Wii"
 msgstr "Sammuta Wii"
 
+msgid "Prev"
+msgstr "Edellinen"
+
 msgid "Prompts Buttons"
 msgstr "Napit"
 
@@ -837,11 +1009,17 @@ msgstr "Julkaisu:"
 msgid "Quick Boot"
 msgstr ""
 
+msgid "Random Directory Music"
+msgstr ""
+
 msgid "Reading WAD data... Ok!"
 msgstr "Luetaan WAD:ia... Ok!"
 
 msgid "Receiving file from:"
 msgstr "Ladataan tiedostoa:"
+
+msgid "Region Patch"
+msgstr ""
 
 msgid "Released"
 msgstr "Julkaistu"
@@ -876,8 +1054,14 @@ msgstr ""
 msgid "Return to Wii Menu"
 msgstr "Palaa Wii menuun"
 
+msgid "Right"
+msgstr "Oikea"
+
 msgid "Rumble"
 msgstr "Värinä"
+
+msgid "SChinese"
+msgstr "SKiina"
 
 msgid "SFX Volume"
 msgstr "Ääniefektien voimakkuus"
@@ -906,6 +1090,9 @@ msgstr ""
 msgid "Select a DOL"
 msgstr "Valitse DOL"
 
+msgid "Select a DOL from Game"
+msgstr ""
+
 msgid "Sept"
 msgstr "syys"
 
@@ -918,8 +1105,14 @@ msgstr "Asetukset"
 msgid "Shutdown System"
 msgstr "Sammuta järjestelmä"
 
+msgid "Shutdown Wii"
+msgstr ""
+
 msgid "Shutdown to Idle"
 msgstr "Valmiustila"
+
+msgid "Shutdown?"
+msgstr ""
 
 msgid "Sort alphabetically"
 msgstr "Järjestä aakkosittain"
@@ -936,8 +1129,26 @@ msgstr "Ääni"
 msgid "Sound Settings"
 msgstr ""
 
+msgid "Sound+BGM"
+msgstr ""
+
+msgid "Sound+Quiet"
+msgstr ""
+
+msgid "Spanish"
+msgstr "Espanja"
+
 msgid "Special thanks to:"
 msgstr "Erityiskiitokset"
+
+msgid "Split each 2GB"
+msgstr ""
+
+msgid "Split each 4GB"
+msgstr ""
+
+msgid "Standby"
+msgstr ""
 
 msgid "Success"
 msgstr "Onnistui"
@@ -962,6 +1173,12 @@ msgstr ""
 
 msgid "Successfully installed:"
 msgstr "Asennettu onnistuneesti:"
+
+msgid "System Default"
+msgstr "Wiin oletus"
+
+msgid "TChinese"
+msgstr "TKiina"
 
 msgid "TXT Cheatcodes Path"
 msgstr "TXT koodien polku"
@@ -1048,6 +1265,9 @@ msgstr ""
 msgid "Unlock console to use this option."
 msgstr "Avaa konsoli käyttääksesi tätä vaihtoehtoa"
 
+msgid "Unlocked"
+msgstr "Avattu"
+
 msgid "Unsupported format, try to extract manually."
 msgstr ""
 
@@ -1108,6 +1328,9 @@ msgstr "Mitä haluat päivittää?"
 
 msgid "WiFi Features"
 msgstr "WiFi ominaisuudet"
+
+msgid "Widescreen Fix"
+msgstr "Laajakuva korjaus"
 
 msgid "Wii Menu"
 msgstr "Wii Menu"
@@ -1200,128 +1423,17 @@ msgstr "josta"
 msgid "seconds left"
 msgstr "sekuntia jäljellä"
 
-#~ msgid "0 (Everyone)"
-#~ msgstr "0 (Kaikille)"
-
-#~ msgid "1 (Child 7+)"
-#~ msgstr "1 (Lapset 7+)"
-
-#~ msgid "1 hour"
-#~ msgstr " 1 tunti"
-
-#~ msgid "2 (Teen 12+)"
-#~ msgstr "2 (Teinit 12+)"
-
-#~ msgid "3 (Mature 16+)"
-#~ msgstr "3 (Teinit 16+)"
-
-#~ msgid "4 (Adults Only 18+)"
-#~ msgstr "4 (K18)"
+#~ msgid "Back to Loader"
+#~ msgstr "HBC"
 
 #~ msgid "An Error occured"
 #~ msgstr "Tapahtui virhe"
 
-#~ msgid "Both"
-#~ msgstr "Molemmat"
-
 #~ msgid "Checking for Updates"
 #~ msgstr "Tarkastetaan päivityksiä"
 
-#~ msgid "Console Default"
-#~ msgstr "Konsolin oletus"
-
-#~ msgid "Customs/Original"
-#~ msgstr "Omat/Alkuperäiset"
-
-#~ msgid "Disc Default"
-#~ msgstr "Pelin oletus"
-
-#~ msgid "DiskFlip"
-#~ msgstr "Levynvaihto"
-
 #~ msgid "Downloading"
 #~ msgstr "Lataa"
-
-#~ msgid "Dutch"
-#~ msgstr "Hollanti"
-
-#~ msgid "English"
-#~ msgstr "Englanti"
-
-#~ msgid "French"
-#~ msgstr "Ranska"
-
-#~ msgid "Game ID"
-#~ msgstr "Peli ID"
-
-#~ msgid "Game Region"
-#~ msgstr "Alue"
-
-#~ msgid "German"
-#~ msgstr "Saksa"
-
-#~ msgid "Italian"
-#~ msgstr "Italia"
-
-#~ msgid "Japanese"
-#~ msgstr "Japani"
-
-#~ msgid "Korean"
-#~ msgstr "Korea"
-
-#~ msgid "Left"
-#~ msgstr "Vasen"
-
-#~ msgid "Like SysMenu"
-#~ msgstr "Kuin wii-menu"
-
-#~ msgid "Load From SD/USB"
-#~ msgstr "Lataa SD:ltä/USB:ltä"
-
-#~ msgid "Locked"
-#~ msgstr "Lukittu"
-
-#~ msgid "Neither"
-#~ msgstr "Ei kumpikaan"
-
-#~ msgid "Next"
-#~ msgstr "Seuraava"
-
-#~ msgid "Normal"
-#~ msgstr "Normaali"
-
-#~ msgid "ON"
-#~ msgstr "Päälle"
-
-#~ msgid "Only Customs"
-#~ msgstr "Vain omatekoiset"
-
-#~ msgid "Only Original"
-#~ msgstr "Vain alkuperäinen"
-
-#~ msgid "Only for Install"
-#~ msgstr "Ainoastaan asennusta varten"
-
-#~ msgid "Original/Customs"
-#~ msgstr "Alkuperäinen/Omatekoinen"
-
-#~ msgid "Prev"
-#~ msgstr "Edellinen"
-
-#~ msgid "Right"
-#~ msgstr "Oikea"
-
-#~ msgid "SChinese"
-#~ msgstr "SKiina"
-
-#~ msgid "Spanish"
-#~ msgstr "Espanja"
-
-#~ msgid "System Default"
-#~ msgstr "Wiin oletus"
-
-#~ msgid "TChinese"
-#~ msgstr "TKiina"
 
 #~ msgid "The wad file was installed.  But It could not be deleted from the SD card."
 #~ msgstr "Wad tiedostoa ei asennettu mutta sitä ei voitu tuhota SD-kortilta"
@@ -1331,9 +1443,6 @@ msgstr "sekuntia jäljellä"
 
 #~ msgid "Unable to open the wad that was just downloaded (%s)."
 #~ msgstr "Wadia (%s) jonka juuri latasit ei voitu avata."
-
-#~ msgid "Unlocked"
-#~ msgstr "Avattu"
 
 #~ msgid "Update to"
 #~ msgstr "Päivitä:"
@@ -1346,9 +1455,6 @@ msgstr "sekuntia jäljellä"
 
 #~ msgid "Updating WiiTDB.zip"
 #~ msgstr "Päivittää WiiTDB.zip"
-
-#~ msgid "Widescreen Fix"
-#~ msgstr "Laajakuva korjaus"
 
 #~ msgid "Back to Wii Menu"
 #~ msgstr "Takaisin Wii Menuun"

@@ -105,7 +105,8 @@ class CSettings
         short discart;
         short gamesound;
         short marknewtitles;
-        short FatInstallToDir;
+        short InstallToDir;
+        short GameSplit;
         u32 InstallPartitions;
         short beta_upgrades;
         short PlaylogUpdate;

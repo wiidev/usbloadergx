@@ -13,6 +13,7 @@ void Sys_ShutdownToIdle(void);
 void Sys_ShutdownToStandby(void);
 void Sys_LoadMenu(void);
 void Sys_BackToLoader(void);
+void Sys_LoadHBC(void);
 void ScreenShot();
 
 #endif

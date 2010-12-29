@@ -411,13 +411,7 @@ int FlyingButtonsMenu::MainLoop()
     {
         Settings.Save();
         if(CurrentMenu) CurrentMenu->SetState(STATE_DISABLED);
-        bgMusic->Pause();
-        int choice = WindowExitPrompt();
-        bgMusic->Resume();
-        if (choice == 3)
-            Sys_LoadMenu(); // Back to System Menu
-        else if (choice == 2)
-            Sys_BackToLoader();
+        WindowExitPrompt();
         homeBtn->ResetState();
         if(CurrentMenu) CurrentMenu->SetState(STATE_DEFAULT);
     }

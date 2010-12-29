@@ -166,7 +166,27 @@ void Sys_BackToLoader(void)
     if (hbcStubAvailable())
         exit(0);
     // Channel Version
-    Sys_LoadMenu();
+    SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
+}
+
+#define HBC_HAXX    0x0001000148415858LL
+#define HBC_JODI    0x000100014A4F4449LL
+#define HBC_1_0_7   0x00010001AF1BF516LL
+
+void Sys_LoadHBC(void)
+{
+    ExitApp();
+
+    WII_Initialize();
+
+    int ret = WII_LaunchTitle(HBC_1_0_7);
+    if(ret < 0)
+        WII_LaunchTitle(HBC_JODI);
+    if(ret < 0)
+        WII_LaunchTitle(HBC_HAXX);
+
+    //Back to system menu if all fails
+    SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
 }
 
 void ScreenShot()
