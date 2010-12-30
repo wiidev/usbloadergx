@@ -50,10 +50,10 @@ GuiImageData *LoadCoverImage(struct discHdr *header, bool Prefere3D, bool noCove
         flag = Prefere3D;
         for (int i = 0; i < 2; ++i)
         {
-            flag = !flag;
             delete Cover;
             Cover = Resources::GetImageData(flag ? "nocover.png" : "nocoverFlat.png");
             if (Cover && Cover->GetImage()) break;
+            flag = !flag;
         }
     }
     if (Cover && !Cover->GetImage())

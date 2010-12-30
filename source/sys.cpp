@@ -3,6 +3,7 @@
 #include <wiiuse/wpad.h>
 
 #include "mload/mload.h"
+#include "Controls/DeviceHandler.hpp"
 #include "settings/CSettings.h"
 #include "settings/newtitles.h"
 #include "language/gettext.h"
@@ -12,7 +13,6 @@
 #include "usbloader/wbfs.h"
 #include "themes/CTheme.h"
 #include "audio.h"
-#include "fatmounter.h"
 #include "lstub.h"
 #include "menu.h"
 #include "video.h"
@@ -96,8 +96,7 @@ void ExitApp(void)
 {
     AppCleanUp();
     WBFS_Close();
-    SDCard_deInit();
-    USBDevice_deInit();
+    DeviceHandler::DestroyInstance();
     USB_Deinitialize();
     if(Settings.PlaylogUpdate)
         Playlog_Delete(); // Don't show USB Loader GX in the Wii message board

@@ -33,26 +33,6 @@ u8 * gameScreenTex = NULL; // a GX texture screen capture of the game
 u8 * gameScreenTex2 = NULL; // a GX texture screen capture of the game (copy)
 
 /****************************************************************************
- * StartGX
- *
- * Initialises GX and sets it up for use
- ***************************************************************************/
-static void StartGX()
-{
-    GXColor background = { 0, 0, 0, 0xff };
-
-    /*** Clear out FIFO area ***/
-    memset(&gp_fifo, 0, DEFAULT_FIFO_SIZE);
-
-    /*** Initialise GX ***/
-    GX_Init(&gp_fifo, DEFAULT_FIFO_SIZE);
-    GX_SetCopyClear(background, 0x00ffffff);
-
-    GX_SetDispCopyGamma(GX_GM_1_0);
-    GX_SetCullMode(GX_CULL_NONE);
-}
-
-/****************************************************************************
  * ResetVideo_Menu
  *
  * Reset the video/rendering mode for the menu
@@ -132,6 +112,13 @@ void InitVideo()
     VIDEO_Init();
     vmode = VIDEO_GetPreferredMode(NULL); // get default video mode
 
+    if (CONF_GetAspectRatio() == CONF_ASPECT_16_9)
+    {
+        // widescreen fix
+        vmode->viWidth = VI_MAX_WIDTH_PAL - 12;
+        vmode->viXOrigin = ((VI_MAX_WIDTH_PAL - vmode->viWidth) / 2) + 2;
+    }
+
     VIDEO_Configure(vmode);
 
     screenheight = 480;
@@ -146,17 +133,25 @@ void InitVideo()
     VIDEO_ClearFrameBuffer(vmode, xfb[1], COLOR_BLACK);
     VIDEO_SetNextFramebuffer(xfb[0]);
 
-    VIDEO_SetBlack(FALSE);
     VIDEO_Flush();
     VIDEO_WaitVSync();
     if (vmode->viTVMode & VI_NON_INTERLACE) VIDEO_WaitVSync();
 
-    StartGX();
+	// Initialize GX
+	GXColor background = { 0, 0, 0, 0xff };
+	memset (&gp_fifo, 0, DEFAULT_FIFO_SIZE);
+	GX_Init (&gp_fifo, DEFAULT_FIFO_SIZE);
+	GX_SetCopyClear (background, 0x00ffffff);
+	GX_SetDispCopyGamma (GX_GM_1_0);
+	GX_SetCullMode (GX_CULL_NONE);
+
     ResetVideo_Menu();
+
+    VIDEO_SetBlack(FALSE);
     // Finally, the video is up and ready for use :)
 
     // A console is always useful while debugging
-    console_init(xfb[0], 80, 100, 500, 350, vmode->fbWidth * 2);
+    //console_init(xfb[0], 80, 100, 500, 350, vmode->fbWidth * 2);
 }
 
 void VIDEO_SetWidescreen(bool widescreen)

@@ -12,6 +12,7 @@
 #include <ctype.h>
 #include <fat.h>
 
+#include "Controls/DeviceHandler.hpp"
 #include "FileOperations/fileops.h"
 #include "settings/CSettings.h"
 #include "settings/GameTitles.h"
@@ -20,7 +21,6 @@
 #include "language/gettext.h"
 #include "libs/libfat/fatfile_frag.h"
 #include "utils/ShowError.h"
-#include "fatmounter.h"
 #include "wbfs_fat.h"
 #include "prompts/ProgressWindow.h"
 #include "usbloader/wbfs.h"
@@ -33,8 +33,7 @@
 
 using namespace std;
 
-extern int wbfs_part_fs;
-sec_t fat_wbfs_sec = 0;
+int wbfs_part_fs;
 
 char Wbfs_Fat::wbfs_fs_drive[16];
 char Wbfs_Fat::wbfs_fat_dir[16] = "/wbfs";
@@ -44,7 +43,7 @@ u32 Wbfs_Fat::fat_hdr_count = 0;
 u32 Wbfs_Fat::fat_sector_size = 512;
 
 Wbfs_Fat::Wbfs_Fat(u32 device, u32 lba, u32 size) :
-    Wbfs(device, lba, size), Mounted(false)
+    Wbfs(device, lba, size)
 {
 }
 
@@ -52,26 +51,19 @@ s32 Wbfs_Fat::Open()
 {
     Close();
 
-    if (device == WBFS_DEVICE_USB && lba == fat_usb_sec)
+    PartitionHandle * usbHandle = DeviceHandler::Instance()->GetUSBHandle();
+
+    for(int i = 0; i < usbHandle->GetPartitionCount(); ++i)
     {
-        strcpy(wbfs_fs_drive, "USB:");
-        Mounted = true;
-    }
-    else
-    {
-        //closing all open Files write back the cache and then shutdown em!
-        fatUnmount("FAT32:/");
-
-        Mounted = fatMount("FAT32", &__io_usbstorage2, lba, CACHE_SIZE, CACHED_SECTORS);
-        if (!Mounted)
-            return -1;
-
-        fat_wbfs_sec = lba;
-
-        strcpy(wbfs_fs_drive, "FAT32:");
+        if (device == WBFS_DEVICE_USB && lba == usbHandle->GetLBAStart(i))
+        {
+            sprintf(wbfs_fs_drive, "%s:", usbHandle->MountName(i));
+            wbfs_part_fs = PART_FS_FAT;
+            return 0;
+        }
     }
 
-    return 0;
+    return -1;
 }
 
 void Wbfs_Fat::Close()
@@ -82,9 +74,8 @@ void Wbfs_Fat::Close()
         hdd = NULL;
     }
 
-    fatUnmount("FAT32:/");
-    Mounted = false;
-    fat_wbfs_sec = 0;
+    wbfs_part_fs = -1;
+    memset(wbfs_fs_drive, 0, sizeof(wbfs_fs_drive));
 }
 
 wbfs_disc_t* Wbfs_Fat::OpenDisc(u8 *discid)

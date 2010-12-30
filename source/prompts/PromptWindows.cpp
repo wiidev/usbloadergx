@@ -7,9 +7,9 @@
 #include <time.h>
 #include <stdlib.h>
 
+#include "Controls/DeviceHandler.hpp"
 #include "usbloader/wbfs.h"
 #include "usbloader/wdvd.h"
-#include "usbloader/partition_usbloader.h"
 #include "usbloader/usbstorage2.h"
 #include "usbloader/GameList.h"
 #include "usbloader/utils.h"
@@ -27,7 +27,6 @@
 #include "themes/CTheme.h"
 #include "utils/StringTools.h"
 #include "mload/mload.h"
-#include "fatmounter.h"
 #include "FileOperations/fileops.h"
 #include "menu.h"
 #include "menu.h"
@@ -525,7 +524,7 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label, cons
     msgTxt.SetPosition(0, -40);
     msgTxt.SetMaxWidth(430);
 
-    GuiText btn1Txt(btn1Label, 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    GuiText btn1Txt(btn1Label, 20, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     GuiImage btn1Img(&btnOutline);
     if (Settings.wsprompt)
     {
@@ -537,7 +536,7 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label, cons
     btn1.SetLabel(&btn1Txt);
     btn1.SetState(STATE_SELECTED);
 
-    GuiText btn2Txt(btn2Label, 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    GuiText btn2Txt(btn2Label, 20, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     GuiImage btn2Img(&btnOutline);
     if (Settings.wsprompt)
     {
@@ -548,7 +547,7 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label, cons
     btn2.SetLabel(&btn2Txt);
     if (!btn3Label && !btn4Label) btn2.SetTrigger(&trigB);
 
-    GuiText btn3Txt(btn3Label, 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    GuiText btn3Txt(btn3Label, 20, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     GuiImage btn3Img(&btnOutline);
     if (Settings.wsprompt)
     {
@@ -559,7 +558,7 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label, cons
     btn3.SetLabel(&btn3Txt);
     if (!btn4Label) btn3.SetTrigger(&trigB);
 
-    GuiText btn4Txt(btn4Label, 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    GuiText btn4Txt(btn4Label, 20, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     GuiImage btn4Img(&btnOutline);
     if (Settings.wsprompt)
     {
@@ -1194,8 +1193,8 @@ int DiscWait(const char *title, const char *msg, const char *btn1Label, const ch
             if (ret >= 0) break;
 
             timerTxt.SetTextf("%i %s", (int) (30-(timenow-starttime)), tr( "seconds left" ));
-            USBDevice_deInit();
-            USBDevice_Init();
+			DeviceHandler::Instance()->UnMountAllUSB();
+			DeviceHandler::Instance()->MountAllUSB();
             timenow = time(0);
         }
         while (timenow-starttime < 30);
@@ -1228,12 +1227,12 @@ int DiscWait(const char *title, const char *msg, const char *btn1Label, const ch
 /****************************************************************************
  * FormatingPartition
  ***************************************************************************/
-int FormatingPartition(const char *title, partitionEntry *entry)
+int FormatingPartition(const char *title, int part_num)
 {
-    extern PartList partitions;
+    PartitionHandle * usbHandle = DeviceHandler::Instance()->GetUSBHandle();
 
     char text[255];
-    sprintf(text, "%s: %.2fGB", tr( "Partition" ), entry->size * (partitions.sector_size / GB_SIZE));
+    sprintf(text, "%s: %.2fGB", tr( "Partition" ), usbHandle->GetSize(part_num) / GB_SIZE);
     int choice = WindowPrompt(tr( "Do you want to format:" ), text, tr( "Yes" ), tr( "No" ));
     if (choice == 0)
         return -666;
@@ -1270,7 +1269,7 @@ int FormatingPartition(const char *title, partitionEntry *entry)
     ResumeGui();
 
     VIDEO_WaitVSync();
-    ret = WBFS_Format(entry->sector, entry->size);
+    ret = WBFS_Format(usbHandle->GetLBAStart(part_num), usbHandle->GetSecCount(part_num));
 
     if (ret < 0)
     {
@@ -1278,8 +1277,11 @@ int FormatingPartition(const char *title, partitionEntry *entry)
     }
     else
     {
+		PartitionFS * partition = usbHandle->GetPartitionRecord(part_num);
+		partition->PartitionType = 0xBF;
+		partition->FSName = "WBFS";
         sleep(1);
-        ret = WBFS_Open();
+        ret = WBFS_OpenPart(part_num);
         sprintf(text, "%s %s", text, tr( "formatted!" ));
         WindowPrompt(tr( "Success:" ), text, tr( "OK" ));
         if (ret < 0)

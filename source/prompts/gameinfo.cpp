@@ -15,7 +15,6 @@
 #include "filelist.h"
 #include "sys.h"
 #include "wpad.h"
-#include "fatmounter.h"
 #include "FileOperations/fileops.h"
 #include "prompts/PromptWindows.h"
 #include "themes/CTheme.h"

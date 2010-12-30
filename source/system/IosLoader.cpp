@@ -1,7 +1,7 @@
 #include <gctypes.h>
 
 #include "IosLoader.h"
-#include "../fatmounter.h"
+#include "Controls/DeviceHandler.hpp"
 #include "../usbloader/usbstorage2.h"
 #include "../usbloader/disc.h"
 #include "../usbloader/wbfs.h"
@@ -52,10 +52,6 @@ s32 IosLoader::LoadAppCios()
     if((int) activeCios == Settings.cios)
         return 0;
 
-    // Unmount fat before reloading IOS.
-    SDCard_deInit();
-    USBDevice_deInit();
-
     u32 ciosLoadPriority[] = { 250, 249, 222, Settings.cios }; // Descending.
 
 
@@ -95,14 +91,12 @@ s32 IosLoader::LoadGameCios(s32 ios)
     // Unmount fat before reloading IOS.
     WBFS_Close();
     WDVD_Close();
-    SDCard_deInit();
-    USBDevice_deInit();
+    DeviceHandler::Instance()->UnMountAll();
 
     ret = ReloadIosSafe(ios);
 
     // Remount devices after reloading IOS.
-    SDCard_Init();
-    USBDevice_Init_Loop();
+    DeviceHandler::Instance()->MountAll();
     Disc_Init();
 
     return ret;

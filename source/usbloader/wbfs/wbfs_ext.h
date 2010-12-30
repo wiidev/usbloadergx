@@ -3,7 +3,6 @@
 
 #include <ext2.h>
 #include "wbfs_fat.h"
-#include "fatmounter.h"
 
 class Wbfs_Ext: public Wbfs_Fat
 {
@@ -14,7 +13,6 @@ class Wbfs_Ext: public Wbfs_Fat
         }
 
         virtual s32 Open();
-        virtual void Close();
         bool ShowFreeSpace(void) { return true; };
 };
 

@@ -20,7 +20,6 @@
 #include "prompts/PromptWindows.h"
 #include "language/gettext.h"
 #include "menu.h"
-#include "fatmounter.h"
 
 #include <string.h>
 #include <math.h>

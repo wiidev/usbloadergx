@@ -12,13 +12,13 @@ let "a+=0"
 while [ "$a" ]; do
 	[ "$a" -gt "$rev_new" ] && rev_new=$a
 	rev_new_raw=$(echo -n $rev_new_raw | sed 's/[0-9]*[^0-9]*\([0-9]*\)\(.*\)/\1 \2/')
-	a=$(echo $rev_new_raw | sed 's/\([0-9]*\).*/\1/') 
+	a=$(echo $rev_new_raw | sed 's/\([0-9]*\).*/\1/')
 done
 
 rev_old=$(cat ./source/svnrev.c 2>/dev/null | tr -d '\n' | sed 's/[^0-9]*\([0-9]*\).*/\1/')
 
 if [ "$rev_new" != "$rev_old" ] || [ ! -f ./source/svnrev.c ]; then
-	
+
 	cat <<EOF > ./source/svnrev.c
 #define SVN_REV "$rev_new"
 
@@ -37,7 +37,7 @@ EOF
 
 	rev_new=`expr $rev_new + 1`
 	rev_date=`date +%Y%m%d%H%M -u`
-	
+
 	cat <<EOF > ./HBC/META.XML
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 	<app version="1">
@@ -45,6 +45,7 @@ EOF
 		<coder>USB Loader GX Team</coder>
 		<version>1.0 r$rev_new</version>
 		<release_date>$rev_date</release_date>
+		<no_ios_reload/>
 		<short_description>Loads games from USB-devices</short_description>
 		<long_description>USB Loader GX is a libwiigui based USB iso loader with a wii-like GUI. You can install games to your HDDs and boot them with shorter loading times.
 The interactive GUI is completely controllable with WiiMote, Classic Controller or GC Controller.

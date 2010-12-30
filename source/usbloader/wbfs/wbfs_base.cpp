@@ -6,7 +6,6 @@
 
 #include "usbloader/sdhc.h"
 #include "usbloader/usbstorage2.h"
-#include "fatmounter.h"
 #include "wbfs_rw.h"
 
 #include "wbfs_base.h"
@@ -120,12 +119,6 @@ wbfs_t *Wbfs::GetHddInfo()
 {
     return hdd;
 }
-
-bool Wbfs::Mounted()
-{
-    return hdd == NULL;
-}
-
 
 bool Wbfs::ShowFreeSpace(void)
 {

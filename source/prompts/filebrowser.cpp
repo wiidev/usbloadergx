@@ -282,7 +282,6 @@ int ParseDirectory(int Device, int Flags, FILTERCASCADE *Filter)
  * BrowseDevice
  * Displays a list of files on the selected path
  ***************************************************************************/
-
 int BrowseDevice(char * Path, int Path_size, int Flags, FILTERCASCADE *Filter/*=NULL*/)
 {
     int result = -1;

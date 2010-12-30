@@ -1,9 +1,11 @@
 #include "wbfs_wbfs.h"
 #include "prompts/ProgressWindow.h"
 #include "settings/CSettings.h"
+#include "usbloader/wbfs.h"
 #include "wbfs_rw.h"
 
 extern u32 sector_size;
+extern int wbfs_part_fs;
 
 s32 Wbfs_Wbfs::Open()
 {
@@ -20,6 +22,8 @@ s32 Wbfs_Wbfs::Open()
     // Save the new sector size, so it will be used in read and write calls
     sector_size = 1 << hdd->head->hd_sec_sz_s;
 
+    wbfs_part_fs = PART_FS_WBFS;
+
     return 0;
 }
 
@@ -30,6 +34,8 @@ void Wbfs_Wbfs::Close()
         wbfs_close(hdd);
         hdd = NULL;
     }
+
+    wbfs_part_fs = -1;
 }
 
 wbfs_disc_t* Wbfs_Wbfs::OpenDisc(u8 *discid)

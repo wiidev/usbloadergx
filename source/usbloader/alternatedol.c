@@ -4,7 +4,6 @@
 #include <string.h>
 #include <malloc.h>
 
-#include "fatmounter.h"
 #include "apploader.h"
 #include "wdvd.h"
 #include "fstfile.h"

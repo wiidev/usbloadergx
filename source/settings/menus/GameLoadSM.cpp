@@ -23,6 +23,7 @@
  ***************************************************************************/
 #include <unistd.h>
 #include "GameLoadSM.hpp"
+#include "Controls/DeviceHandler.hpp"
 #include "settings/CSettings.h"
 #include "prompts/PromptWindows.h"
 #include "language/gettext.h"
@@ -35,10 +36,6 @@
 #include "settings/GameTitles.h"
 #include "xml/xml.h"
 #include "menu.h"
-
-extern PartList partitions;
-extern char game_partition[6];
-extern u8 load_from_fs;
 
 static const char * OnOffText[MAX_ON_OFF] =
 {
@@ -96,11 +93,11 @@ static inline bool IsValidPartition(int fs_type, int cios)
 {
     if (IosLoader::IsWaninkokoIOS() && NandTitles.VersionOf(TITLE_ID(1, cios)) < 18)
     {
-        return fs_type == FS_TYPE_WBFS;
+        return fs_type == PART_FS_WBFS;
     }
     else
     {
-        return fs_type == FS_TYPE_WBFS || fs_type == FS_TYPE_FAT32 || fs_type == FS_TYPE_NTFS || fs_type == FS_TYPE_EXT;
+        return fs_type == PART_FS_WBFS || fs_type == PART_FS_FAT || fs_type == PART_FS_NTFS || fs_type == PART_FS_EXT;
     }
 }
 
@@ -134,10 +131,7 @@ GameLoadSM::~GameLoadSM()
     //! if partition has changed, Reinitialize it
     if (Settings.partition != OldSettingsPartition)
     {
-        PartInfo pinfo = partitions.pinfo[Settings.partition];
-        partitionEntry pentry = partitions.pentry[Settings.partition];
-        WBFS_OpenPart(pinfo.part_fs, pinfo.index, pentry.sector, pentry.size, (char *) &game_partition);
-        load_from_fs = pinfo.part_fs;
+        WBFS_OpenPart(Settings.partition);
 
         //! Reload the new game titles
         gameList.ReadGameList();
@@ -171,13 +165,9 @@ void GameLoadSM::SetOptionValues()
         Options->SetValue(Idx++, "********");
 
     //! Settings: Partition
-    PartInfo pInfo = partitions.pinfo[Settings.partition];
-    f32 partition_size = partitions.pentry[Settings.partition].size
-            * (partitions.sector_size / GB_SIZE);
-
+    PartitionHandle * usbHandle = DeviceHandler::Instance()->GetUSBHandle();
     // Get the partition name and it's size in GB's
-    Options->SetValue(Idx++, "%s%d (%.2fGB)", pInfo.fs_type == FS_TYPE_FAT32 ? "FAT"
-            : pInfo.fs_type == FS_TYPE_NTFS ? "NTFS" : pInfo.fs_type == FS_TYPE_EXT ? "LINUX" : "WBFS", pInfo.index, partition_size);
+    Options->SetValue(Idx++, "%s (%.2fGB)", usbHandle->GetFSName(Settings.partition), usbHandle->GetSize(Settings.partition)/GB_SIZE);
 
     //! Settings: Install directories
     Options->SetValue(Idx++, "%s", tr( InstallToText[Settings.InstallToDir] ));
@@ -279,16 +269,16 @@ int GameLoadSM::GetMenuInternal()
     else if (ret == ++Idx)
     {
         // Select the next valid partition, even if that's the same one
-        int fs_type = partitions.pinfo[Settings.partition].fs_type;
+        int fs_type = 0;
         int ios = IOS_GetVersion();
         do
         {
-            Settings.partition = (Settings.partition + 1) % partitions.num;
-            fs_type = partitions.pinfo[Settings.partition].fs_type;
+            Settings.partition = (Settings.partition + 1) % DeviceHandler::Instance()->GetUSBHandle()->GetPartitionCount();
+			fs_type = DeviceHandler::GetUSBFilesystemType(Settings.partition);
         }
         while (!IsValidPartition(fs_type, ios));
 
-        if(fs_type == FS_TYPE_FAT32 && Settings.GameSplit == GAMESPLIT_NONE)
+        if(fs_type == PART_FS_FAT && Settings.GameSplit == GAMESPLIT_NONE)
             Settings.GameSplit = GAMESPLIT_4GB;
     }
 
@@ -303,7 +293,7 @@ int GameLoadSM::GetMenuInternal()
     {
         if (++Settings.GameSplit >= GAMESPLIT_MAX)
         {
-            if(partitions.pinfo[Settings.partition].fs_type == FS_TYPE_FAT32)
+            if(DeviceHandler::GetUSBFilesystemType(Settings.partition) == PART_FS_FAT)
                 Settings.GameSplit = GAMESPLIT_2GB;
             else
                 Settings.GameSplit = GAMESPLIT_NONE;

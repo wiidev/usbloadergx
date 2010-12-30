@@ -14,7 +14,6 @@
 #include "FileOperations/fileops.h"
 #include "FileOperations/DirList.h"
 #include "main.h"
-#include "fatmounter.h"
 #include "filelist.h"
 #include "prompts/filebrowser.h"
 #include "sys.h"
@@ -278,16 +277,6 @@ int MenuLanguageSelect()
                     strcat (entered, "/");
                 snprintf(Settings.languagefiles_path, sizeof(Settings.languagefiles_path), entered);
                 WindowPrompt(tr("Languagepath changed."), 0, tr("OK"));
-                if (isInserted(Settings.BootDevice))
-                {
-                    Settings.Save();
-                    returnhere = 1;
-                    break;
-                }
-                else
-                {
-                    WindowPrompt( tr( "No SD-Card inserted!" ), tr( "Insert an SD-Card to save." ), tr( "OK" ) );
-                }
             }
             if ( Dir.GetFilecount() > 0 )
             {
@@ -342,15 +331,9 @@ int MenuLanguageSelect()
  ***************************************************************************/
 int MenuThemeSelect()
 {
-    char themepath[250];
     int cnt = 0;
     int ret = 0, choice = 0;
     int returnVal = 0;
-
-    snprintf(themepath, sizeof(themepath), Settings.theme_path);
-
-    char * ptr = strrchr(themepath, '/');
-    if(ptr && *ptr != '\0') ptr[1] =  '\0';
 
     GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
     GuiImageData settingsbg(Resources::GetFile("settings_background.png"), Resources::GetFileSize("settings_background.png"));
@@ -360,7 +343,7 @@ int MenuThemeSelect()
     GuiTrigger trigB;
     trigB.SetButtonOnlyTrigger( -1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B );
 
-    GuiText titleTxt(themepath, 24, ( GXColor ) {0, 0, 0, 255} );
+    GuiText titleTxt(Settings.theme_path, 24, ( GXColor ) {0, 0, 0, 255} );
     titleTxt.SetAlignment( ALIGN_CENTRE, ALIGN_MIDDLE );
     titleTxt.SetPosition( 0, 0 );
     GuiButton pathBtn( 300, 50 );
@@ -413,7 +396,7 @@ int MenuThemeSelect()
     defaultBtn.SetTrigger( &trigA );
     defaultBtn.SetEffectGrow();
 
-    DirList * Dir = new DirList(themepath, ".them");
+    DirList * Dir = new DirList(Settings.theme_path, ".them");
     OptionList options2;
 
     for ( cnt = 0; cnt < Dir->GetFilecount(); cnt++ )
@@ -462,6 +445,7 @@ int MenuThemeSelect()
             if ( choice == 1 )
             {
                 snprintf(Settings.theme_path, sizeof(Settings.theme_path), "%stheme/", Settings.ConfigPath);
+                strcpy(Settings.theme, "");
                 Theme::SetDefault();
                 Settings.Save();
                 returnVal = 1;
@@ -475,19 +459,19 @@ int MenuThemeSelect()
             w.Remove( &backBtn );
             w.Remove( &pathBtn );
             w.Remove( &defaultBtn );
-            int result = BrowseDevice(themepath, sizeof(themepath), FB_DEFAULT, noFILES);
+            int result = BrowseDevice(Settings.theme_path, sizeof(Settings.theme_path), FB_DEFAULT, noFILES);
             w.Append( &optionBrowser4 );
             w.Append( &pathBtn );
             w.Append( &backBtn );
             w.Append( &defaultBtn );
             if (result == 1)
             {
-                if (themepath[strlen(themepath)-1] != '/')
-                    strcat(themepath, "/");
+                if (Settings.theme_path[strlen(Settings.theme_path)-1] != '/')
+                    strcat(Settings.theme_path, "/");
 
                 HaltGui();
                 delete Dir;
-                Dir = new DirList(themepath, ".them");
+                Dir = new DirList(Settings.theme_path, ".them");
                 options2.ClearList();
                 for ( cnt = 0; cnt < Dir->GetFilecount(); cnt++ )
                 {
@@ -498,7 +482,7 @@ int MenuThemeSelect()
                     options2.SetName( cnt, "%s", filename );
                     options2.SetValue( cnt, NULL );
                 }
-                titleTxt.SetText(themepath);
+                titleTxt.SetText(Settings.theme_path);
                 ResumeGui();
                 WindowPrompt( tr( "Theme path is changed." ), 0, tr( "OK" ) );
             }
@@ -512,16 +496,17 @@ int MenuThemeSelect()
             choice = WindowPrompt( tr( "Do you want to load this theme?" ), Dir->GetFilename(ret), tr( "Yes" ), tr( "Cancel" ) );
             if ( choice == 1 )
             {
-                snprintf(Settings.theme_path, sizeof( Settings.theme_path ), "%s", Dir->GetFilepath(ret));
-                if ( !CheckFile( Settings.theme_path ) )
+                snprintf(Settings.theme, sizeof( Settings.theme ), "%s", Dir->GetFilepath(ret));
+                if ( !CheckFile( Settings.theme ) )
                 {
                     WindowPrompt( tr( "File not found." ), tr( "Loading default theme." ), tr( "OK" ) );
                     Theme::SetDefault();
+                    strcpy(Settings.theme, "");
                 }
                 else
                 {
                     HaltGui();
-                    Theme::Load(Settings.theme_path);
+                    Theme::Load(Settings.theme);
                     ResumeGui();
                 }
                 Settings.Save();

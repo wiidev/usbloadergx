@@ -18,15 +18,12 @@ extern "C"
 #define WBFS_MIN_DEVICE         1
 #define WBFS_MAX_DEVICE         2
 
-    extern s32 wbfsDev;
-    extern int wbfs_part_fs;
-    extern u32 wbfs_part_idx;
-    extern u32 wbfs_part_lba;
-    extern char wbfs_fs_drive[16];
+	extern int wbfs_part_fs;
+	extern s32 wbfsDev;
+	extern u32 wbfs_part_idx;
 
     /* Prototypes */
     s32 WBFS_Init(u32);
-    s32 WBFS_Open(void);
     s32 WBFS_Format(u32, u32);
     s32 WBFS_GetCount(u32 *);
     s32 WBFS_GetHeaders(struct discHdr *, u32, u32);
@@ -48,9 +45,7 @@ extern "C"
      s32 __WBFS_WriteUSB(void *fp, u32 lba, u32 count, void *iobuf);
      */
 
-    s32 WBFS_OpenPart(u32 part_fat, u32 part_idx, u32 part_lba, u32 part_size, char *partition);
-    s32 WBFS_OpenNamed(char *partition);
-    s32 WBFS_OpenLBA(u32 lba, u32 size);
+    s32 WBFS_OpenPart(int part_num);
     wbfs_disc_t* WBFS_OpenDisc(u8 *discid);
     void WBFS_CloseDisc(wbfs_disc_t *disc);
     bool WBFS_Close();

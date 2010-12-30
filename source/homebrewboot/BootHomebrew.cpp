@@ -8,11 +8,11 @@
 #include <wiiuse/wpad.h>
 #include <vector>
 #include <string>
+#include "Controls/DeviceHandler.hpp"
 #include "../lstub.h"
 #include "../sys.h"
 #include "../gecko.h"
 
-#include "fatmounter.h"
 #include "dolloader.h"
 
 static u8 *homebrewbuffer = (u8 *) 0x92000000;
@@ -146,8 +146,7 @@ int BootHomebrew(const char * filepath)
     {
         fclose(file);
         free(buffer);
-        SDCard_deInit();
-        USBDevice_deInit();
+        DeviceHandler::DestroyInstance();
         Sys_BackToLoader();
     }
 

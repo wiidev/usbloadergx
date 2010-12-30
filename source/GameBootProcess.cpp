@@ -2,6 +2,7 @@
 #include "mload/mload.h"
 #include "mload/mload_modules.h"
 #include "system/IosLoader.h"
+#include "Controls/DeviceHandler.hpp"
 #include "usbloader/disc.h"
 #include "usbloader/apploader.h"
 #include "usbloader/wdvd.h"
@@ -11,6 +12,7 @@
 #include "usbloader/frag.h"
 #include "usbloader/wbfs.h"
 #include "usbloader/playlog.h"
+#include "usbloader/MountGamePartition.h"
 #include "settings/newtitles.h"
 #include "patches/fst.h"
 #include "patches/gamepatches.h"
@@ -20,7 +22,6 @@
 #include "wad/nandtitle.h"
 #include "menu/menus.h"
 #include "memory/memory.h"
-#include "fatmounter.h"
 #include "sys.h"
 
 //appentrypoint has to be global because of asm
@@ -209,8 +210,7 @@ int BootGame(const char * gameID)
 
         shadow_mload();
         WBFS_Close();
-        SDCard_deInit();
-        USBDevice_deInit();
+        DeviceHandler::DestroyInstance();
         USB_Deinitialize();
 
         if(Settings.PlaylogUpdate)

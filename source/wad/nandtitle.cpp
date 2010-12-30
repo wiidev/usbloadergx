@@ -129,7 +129,7 @@ bool NandTitle::GetName(u64 tid, int language, wchar_t* name)
 {
     if (TITLE_UPPER( tid ) != 0x10001 && TITLE_UPPER( tid ) != 0x10002 && TITLE_UPPER( tid ) != 0x10004) return false;
     //gprintf("GetName( %016llx ): ", tid );
-    char app[ISFS_MAXPATH];
+    char app[ISFS_MAXPATH] ATTRIBUTE_ALIGN(32);
     IMET *imet = (IMET*) memalign(32, sizeof(IMET));
 
     tmd* titleTmd = GetTMD(tid);
@@ -225,7 +225,7 @@ bool NandTitle::GetName(u64 tid, int language, wchar_t* name)
 
 bool NandTitle::Exists(u64 tid)
 {
-    char app[ISFS_MAXPATH];
+    char app[ISFS_MAXPATH] ATTRIBUTE_ALIGN(32);
     tmd* titleTmd = GetTMD(tid);
     if (!titleTmd) return false;
 

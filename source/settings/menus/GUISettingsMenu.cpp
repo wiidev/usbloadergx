@@ -29,7 +29,6 @@
 #include "settings/SettingsPrompts.h"
 #include "settings/GameTitles.h"
 #include "xml/xml.h"
-#include "fatmounter.h"
 
 static const char * OnOffText[MAX_ON_OFF] =
 {
@@ -200,11 +199,6 @@ int GuiSettingsMenu::GetMenuInternal()
     //! Settings: App Language
     if (ret == ++Idx)
     {
-        if (!isInserted(Settings.BootDevice))
-        {
-            WindowPrompt(tr( "No SD-Card inserted!" ), tr( "Insert an SD-Card to use this option." ), tr( "OK" ));
-            return MENU_NONE;
-        }
         if (!Settings.godmode)
         {
             WindowPrompt(tr( "Language change:" ), tr( "Console should be unlocked to modify it." ), tr( "OK" ));

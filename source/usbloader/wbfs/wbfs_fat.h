@@ -4,6 +4,7 @@
 #include <ogcsys.h>
 
 #include "usbloader/splits.h"
+#include "usbloader/wbfs.h"
 #include "wbfs_base.h"
 
 class Wbfs_Fat: public Wbfs
@@ -35,7 +36,6 @@ class Wbfs_Fat: public Wbfs
 
     protected:
         static char wbfs_fs_drive[16];
-        bool Mounted;
     private:
         split_info_t split;
 

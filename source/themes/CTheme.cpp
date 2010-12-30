@@ -28,6 +28,7 @@
 
 #include "CTheme.h"
 #include "libwiigui/gui.h"
+#include "settings/CSettings.h"
 #include "FileOperations/fileops.h"
 #include "FreeTypeGX.h"
 
@@ -48,19 +49,12 @@ void Theme::SetDefault()
 {
     ShowTooltips = true;
     CleanUp();
+    strcpy(Settings.theme, "");
     LoadFont("");
 }
 
 bool Theme::Load(const char * theme_file_path)
 {
-    char theme_path[300];
-    snprintf(theme_path, sizeof(theme_path), theme_file_path);
-
-    char * ptr = strrchr(theme_path, '/');
-    if(ptr) *ptr = '\0';
-
-    Theme::LoadFont(theme_path); //! support old font style
-
     bool result = LoadTheme(theme_file_path);
     if(!result)
         return result;
@@ -96,6 +90,12 @@ bool Theme::Load(const char * theme_file_path)
 
     if(!Foldername)
         return result;
+
+    char theme_path[300];
+    snprintf(theme_path, sizeof(theme_path), theme_file_path);
+
+    char * ptr = strrchr(theme_path, '/');
+    if(ptr) *ptr = '\0';
 
     snprintf(theme_path, sizeof(theme_path), "%s/%s", theme_path, Foldername);
     Resources::LoadFiles(theme_path);

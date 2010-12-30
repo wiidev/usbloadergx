@@ -29,6 +29,7 @@
 #include "CSettings.h"
 #include "CGameSettings.h"
 #include "CGameStatistics.h"
+#include "Controls/DeviceHandler.hpp"
 #include "language/gettext.h"
 #include "themes/CTheme.h"
 #include "FileOperations/fileops.h"
@@ -39,7 +40,7 @@ CSettings Settings;
 CSettings::CSettings()
 {
     CONF_Init();
-    strcpy(BootDevice, "SD:");
+    strcpy(BootDevice, "sd:");
     snprintf(ConfigPath, sizeof(ConfigPath), "%s/config/", BootDevice);
     this->SetDefault();
 }
@@ -64,6 +65,7 @@ void CSettings::SetDefault()
     snprintf(WipCodepath, sizeof(WipCodepath), "%s/wip/", BootDevice);
     snprintf(theme_path, sizeof(theme_path), "%stheme/", ConfigPath);
     snprintf(dolpath, sizeof(dolpath), "%s/", BootDevice);
+    strcpy(theme, "");
     strcpy(language_path, "");
     strcpy(ogg_path, "");
     strcpy(unlockCode, "");
@@ -187,6 +189,7 @@ bool CSettings::Save()
     fprintf(file, "covers_path = %s\n ", covers_path);
     fprintf(file, "covers2d_path = %s\n ", covers2d_path);
     fprintf(file, "theme_path = %s\n ", theme_path);
+    fprintf(file, "theme = %s\n ", theme);
     fprintf(file, "disc_path = %s\n ", disc_path);
     fprintf(file, "language_path = %s\n ", language_path);
     fprintf(file, "languagefiles_path = %s\n ", languagefiles_path);
@@ -475,6 +478,11 @@ bool CSettings::SetSetting(char *name, char *value)
         strcpy(theme_path, value);
         return true;
     }
+    else if (strcmp(name, "theme") == 0)
+    {
+        strcpy(theme, value);
+        return true;
+    }
     else if (strcmp(name, "disc_path") == 0)
     {
         strcpy(disc_path, value);
@@ -554,11 +562,10 @@ bool CSettings::FindConfig()
     bool found = false;
     char CheckDevice[10];
     char CheckPath[300];
-    strcpy(CheckDevice, "SD:");
 
-    for (int i = 0; i < 2; ++i)
+    for (int i = SD; i < MAXDEVICES; ++i)
     {
-        if (i == 1) strcpy(CheckDevice, "USB:");
+        sprintf(CheckDevice, "%s:", DeviceName[i]);
 
         if(!found)
         {
@@ -579,11 +586,11 @@ bool CSettings::FindConfig()
     if (!found)
     {
         FILE * testFp = NULL;
-        strcpy(CheckDevice, "SD:");
         //! No existing config so try to find a place where we can write it too
-        for (int i = 0; i < 2; ++i)
+        for (int i = SD; i < MAXDEVICES; ++i)
         {
-            if (i == 1) strcpy(CheckDevice, "USB:");
+            sprintf(CheckDevice, "%s:", DeviceName[i]);
+
             if (!found)
             {
                 strcpy(BootDevice, CheckDevice);

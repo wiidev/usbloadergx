@@ -7,7 +7,6 @@
 #include "prompts/PromptWindows.h"
 #include "language/gettext.h"
 #include "themes/CTheme.h"
-#include "fatmounter.h"
 #include "FileOperations/fileops.h"
 #include "menu.h"
 #include "filelist.h"

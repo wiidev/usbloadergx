@@ -18,7 +18,6 @@
 #include "wbfs.h"
 #include "../settings/SettingsEnums.h"
 #include "../gecko.h"
-#include "../fatmounter.h"
 
 /* Constants */
 #define PTABLE_OFFSET   0x40000

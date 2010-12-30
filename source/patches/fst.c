@@ -29,7 +29,6 @@
 
 #include "fst.h"
 #include "dvd_broadway.h"
-#include "fatmounter.h"
 #include "mload/mload.h"
 #include "mload/mload_modules.h"
 #include "gecko.h"
@@ -129,11 +128,11 @@ void app_loadgameconfig(char *discid)
 
     if (!fp)
     {
-        snprintf(filepath, sizeof(filepath), "SD:/gameconfig.txt");
+        snprintf(filepath, sizeof(filepath), "sd:/gameconfig.txt");
         fp = fopen(filepath, "rb");
         if (!fp)
         {
-            snprintf(filepath, sizeof(filepath), "USB:/gameconfig.txt");
+            snprintf(filepath, sizeof(filepath), "usb:/gameconfig.txt");
             fp = fopen(filepath, "rb");
         }
     }
@@ -852,7 +851,7 @@ u32 do_bca_code(u8 *gameid)
                 bcaCode[0x33] = 1;
             }
         }
-		
+
 		Set_DIP_BCA_Datas(bcaCode);
     }
     return 0;

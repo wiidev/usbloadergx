@@ -82,6 +82,7 @@ class CSettings
         char covers_path[100];
         char covers2d_path[100];
         char theme_path[100];
+        char theme[100];
         char theme_downloadpath[100];
         char disc_path[100];
         char titlestxt_path[100];

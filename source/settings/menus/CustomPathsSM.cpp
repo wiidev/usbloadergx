@@ -66,7 +66,7 @@ void CustomPathsSM::SetOptionValues()
     Options->SetValue(Idx++, Settings.disc_path);
 
     //! Settings: Theme Path
-    Options->SetValue(Idx++, Settings.theme_path);
+    Options->SetValue(Idx++, strlen(Settings.theme) == 0 ? tr("Default") : Settings.theme);
 
     //! Settings: WiiTDB Path
     Options->SetValue(Idx++, Settings.titlestxt_path);

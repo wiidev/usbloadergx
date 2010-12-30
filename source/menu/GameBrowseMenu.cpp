@@ -1,5 +1,6 @@
 #include <unistd.h>
 #include "GameBrowseMenu.hpp"
+#include "Controls/DeviceHandler.hpp"
 #include "libwiigui/LoadCoverImage.h"
 #include "prompts/PromptWindows.h"
 #include "prompts/gameinfo.h"
@@ -25,7 +26,6 @@
 #include "utils/ShowError.h"
 #include "utils/tools.h"
 #include "utils/PasswordCheck.h"
-#include "fatmounter.h"
 #include "gecko.h"
 #include "menus.h"
 #include "wpad.h"
@@ -803,7 +803,7 @@ int GameBrowseMenu::MainLoop()
         HaltGui();
         bgMusic->Pause();
         Settings.Save();
-        SDCard_Init();
+        DeviceHandler::Instance()->MountSD();
         Settings.Load();
         bgMusic->Resume();
         wString oldFilter(gameList.GetCurrentFilter());

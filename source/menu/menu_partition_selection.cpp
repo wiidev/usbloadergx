@@ -1,14 +1,12 @@
 #include <unistd.h>
 
 #include "menus.h"
-#include "fatmounter.h"
 #include "usbloader/usbstorage2.h"
 #include "usbloader/utils.h"
 #include "usbloader/wbfs.h"
 #include "libwiigui/gui_customoptionbrowser.h"
+#include "Controls/DeviceHandler.hpp"
 #include "themes/CTheme.h"
-
-extern PartList partitions;
 
 /****************************************************************************
  * SelectPartitionMenu
@@ -18,21 +16,21 @@ int SelectPartitionMenu()
     bool ExitSelect = false;
     OptionList options;
 
-    u32 cnt, counter = 0;
+    u32 counter = 0;
     int choice = -1;
     int ret = -1;
 
-    //create the partitionlist
-    for (cnt = 0; cnt < (u32) partitions.num; cnt++)
-    {
-        partitionEntry *entry = &partitions.pentry[cnt];
+    PartitionHandle * usbHandle = DeviceHandler::Instance()->GetUSBHandle();
 
+    //create the partitionlist
+    for (int cnt = 0; cnt < usbHandle->GetPartitionCount(); cnt++)
+    {
         /* Calculate size in gigabytes */
-        f32 size = entry->size * (partitions.sector_size / GB_SIZE);
+        f32 size = usbHandle->GetSize(cnt) / GB_SIZE;
 
         if (size)
         {
-            options.SetName(counter, "%s %d:", tr( "Partition" ), cnt + 1);
+            options.SetName(counter, "%s %d %s: ", tr( "Partition" ), cnt + 1, usbHandle->GetFSName(cnt));
             options.SetValue(counter, "%.2fGB", size);
         }
         else
@@ -100,8 +98,7 @@ int SelectPartitionMenu()
 
         if (ret >= 0)
         {
-            partitionEntry *entry = &partitions.pentry[ret];
-            if (entry->size)
+            if (usbHandle->GetSize(ret))
             {
                 choice = ret;
                 ExitSelect = true;
