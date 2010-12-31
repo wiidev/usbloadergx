@@ -38,14 +38,15 @@ extern struct discHdr *dvdheader;
 extern int cntMissFiles;
 
 static int lastSelectedGame = 0;
+static int Exiting = false;
 
 GameBrowseMenu::GameBrowseMenu()
     : GuiWindow(screenwidth, screenheight)
 {
-    float freespace = 0.0, used = 0.0;
     returnMenu = MENU_NONE;
     gameSelectedOld = -1;
     lastrawtime = 0;
+    Exiting = false;
     show_searchwindow = false;
     gameBrowser = NULL;
     gameGrid = NULL;
@@ -59,9 +60,6 @@ GameBrowseMenu::GameBrowseMenu()
     WDVD_GetCoverStatus(&DiscDriveCoverOld);
     wString oldFilter(gameList.GetCurrentFilter());
     gameList.FilterList(oldFilter.c_str());
-
-    if (WBFS_ShowFreeSpace())
-        WBFS_DiskSpace(&used, &freespace);
 
     btnInstall = Resources::GetImageData("button_install.png");
     btnInstallOver = Resources::GetImageData("button_install_over.png");
@@ -106,26 +104,12 @@ GameBrowseMenu::GameBrowseMenu()
     trig1 = new GuiTrigger;
     trig1->SetButtonOnlyTrigger(-1, WPAD_BUTTON_1 | WPAD_CLASSIC_BUTTON_Y, 0);
 
-    char spaceinfo[30];
-    if (load_from_fs == PART_FS_FAT)
-    {
-        memset(spaceinfo, 0, 30);
-    }
-    else
-    {
-        if (strcmp(Settings.db_language, "JA") == 0)
-        {
-            // needs to be "total...used" for Japanese
-            sprintf(spaceinfo, "%.2fGB %s %.2fGB %s", (freespace + used), tr( "of" ), freespace, tr( "free" ));
-        }
-        else
-        {
-            sprintf(spaceinfo, "%.2fGB %s %.2fGB %s", freespace, tr( "of" ), (freespace + used), tr( "free" ));
-        }
-    }
-    usedSpaceTxt = new GuiText(spaceinfo, 18, thColor("r=55 g=190 b=237 a=255 - hdd info color"));
+    usedSpaceTxt = new GuiText(" ", 18, thColor("r=55 g=190 b=237 a=255 - hdd info color"));
     usedSpaceTxt->SetAlignment(thAlign("center - hdd info align ver"), thAlign("top - hdd info align hor"));
     usedSpaceTxt->SetPosition(thInt("0 - hdd info pos x"), thInt("400 - hdd info pos y"));
+    HDDSizeCallback.SetCallback(this, &GameBrowseMenu::UpdateFreeSpace);
+    ThreadedTask::Instance()->AddCallback(&HDDSizeCallback);
+    ThreadedTask::Instance()->Execute();
 
     gamecntTxt = new GuiText((char *) NULL, 18, thColor("r=55 g=190 b=237 a=255 - game count color"));
     gamecntBtn = new GuiButton(100, 18);
@@ -328,6 +312,7 @@ GameBrowseMenu::GameBrowseMenu()
 
 GameBrowseMenu::~GameBrowseMenu()
 {
+    Exiting = true;
     ResumeGui();
 
     SetEffect(EFFECT_FADE, -20);
@@ -1368,4 +1353,30 @@ void GameBrowseMenu::UpdateCallback(void * e)
             break;
         }
     }
+}
+
+void GameBrowseMenu::UpdateFreeSpace(void * arg)
+{
+    char spaceinfo[30];
+    memset(spaceinfo, 0, 30);
+
+    if(Settings.ShowFreeSpace)
+    {
+        float freespace = 0.0, used = 0.0;
+        WBFS_DiskSpace(&used, &freespace);
+        if (strcmp(Settings.db_language, "JA") == 0)
+        {
+            // needs to be "total...used" for Japanese
+            sprintf(spaceinfo, "%.2fGB %s %.2fGB %s", (freespace + used), tr( "of" ), freespace, tr( "free" ));
+        }
+        else
+        {
+            sprintf(spaceinfo, "%.2fGB %s %.2fGB %s", freespace, tr( "of" ), (freespace + used), tr( "free" ));
+        }
+    }
+
+    if(Exiting)
+        return;
+
+    usedSpaceTxt->SetText(spaceinfo);
 }

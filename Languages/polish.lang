@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-29 16:38+0100\n"
+"POT-Creation-Date: 2010-12-31 14:05+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: ziom666 (zadania_prog@vp.pl)\n"
 "Language-Team: \n"
@@ -678,12 +678,6 @@ msgstr "Wloz plyte"
 msgid "Insert a Wii Disc!"
 msgstr "Wloz plyte Wii!"
 
-msgid "Insert an SD-Card to save."
-msgstr "Wloz karte SD, aby zapisac"
-
-msgid "Insert an SD-Card to use this option."
-msgstr "Wloz karte SD, aby uzyc tej opcji"
-
 msgid "Install"
 msgstr "Zainstaluj"
 
@@ -843,9 +837,6 @@ msgstr "Nie znaleziono plikow z kodami"
 
 msgid "No DOL file found on disc."
 msgstr "Brak plikow DOL na dysku"
-
-msgid "No SD-Card inserted!"
-msgstr "Nie wlozono karty SD!"
 
 msgid "No Splitting"
 msgstr ""
@@ -1102,6 +1093,9 @@ msgstr "Ustaw filtr wyszukiwania"
 msgid "Settings"
 msgstr "Ustawienia"
 
+msgid "Show Free Space"
+msgstr ""
+
 msgid "Shutdown System"
 msgstr "Wylacz"
 
@@ -1314,9 +1308,6 @@ msgstr "Tryb video"
 msgid "WIP Patches Path"
 msgstr "Sciezka patchy WIP"
 
-msgid "Waiting for USB Device"
-msgstr "Oczekiwanie na urzadzenie USB"
-
 msgid "Waiting..."
 msgstr "Oczekiwanie..."
 
@@ -1422,6 +1413,18 @@ msgstr "z"
 
 msgid "seconds left"
 msgstr "sekund pozostalo"
+
+#~ msgid "Insert an SD-Card to save."
+#~ msgstr "Wloz karte SD, aby zapisac"
+
+#~ msgid "Insert an SD-Card to use this option."
+#~ msgstr "Wloz karte SD, aby uzyc tej opcji"
+
+#~ msgid "No SD-Card inserted!"
+#~ msgstr "Nie wlozono karty SD!"
+
+#~ msgid "Waiting for USB Device"
+#~ msgstr "Oczekiwanie na urzadzenie USB"
 
 #~ msgid "Back to Loader"
 #~ msgstr "Powrot do HBC"

@@ -69,8 +69,8 @@ class DeviceHandler
 
         //! Individual Mounts/UnMounts...
 		bool MountSD();
-		bool MountAllUSB();
-		bool MountUSB(int part);
+		bool MountAllUSB(bool spinUp = true);
+		bool MountUSB(int part, bool spinUp = true);
 		bool SD_Inserted() { if(sd) return sd->IsInserted(); return false; };
 		bool USB_Inserted() { if(usb) return usb->IsInserted(); return false; };
 		void UnMountSD() { if(sd) delete sd; sd = NULL; };

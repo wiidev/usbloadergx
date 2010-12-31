@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-29 16:38+0100\n"
+"POT-Creation-Date: 2010-12-31 14:05+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: knife.hu kavid\n"
 "Language-Team: kavid\n"
@@ -678,12 +678,6 @@ msgstr "插入光盘"
 msgid "Insert a Wii Disc!"
 msgstr "插入 Wii 光盘!"
 
-msgid "Insert an SD-Card to save."
-msgstr "插入 SD卡以保存."
-
-msgid "Insert an SD-Card to use this option."
-msgstr "插入 SD 卡使用此功能."
-
 msgid "Install"
 msgstr "安装"
 
@@ -843,9 +837,6 @@ msgstr "作弊码文件没找到"
 
 msgid "No DOL file found on disc."
 msgstr "光盘中未找到 DOL 文件."
-
-msgid "No SD-Card inserted!"
-msgstr "未插入 SD 卡!"
 
 msgid "No Splitting"
 msgstr ""
@@ -1102,6 +1093,9 @@ msgstr "设置搜索过滤器"
 msgid "Settings"
 msgstr "设置"
 
+msgid "Show Free Space"
+msgstr ""
+
 msgid "Shutdown System"
 msgstr "关闭系统"
 
@@ -1314,9 +1308,6 @@ msgstr "视频制式"
 msgid "WIP Patches Path"
 msgstr ""
 
-msgid "Waiting for USB Device"
-msgstr "等待 USB 设备"
-
 msgid "Waiting..."
 msgstr "等待中..."
 
@@ -1422,6 +1413,18 @@ msgstr "的"
 
 msgid "seconds left"
 msgstr "剩余秒数"
+
+#~ msgid "Insert an SD-Card to save."
+#~ msgstr "插入 SD卡以保存."
+
+#~ msgid "Insert an SD-Card to use this option."
+#~ msgstr "插入 SD 卡使用此功能."
+
+#~ msgid "No SD-Card inserted!"
+#~ msgstr "未插入 SD 卡!"
+
+#~ msgid "Waiting for USB Device"
+#~ msgstr "等待 USB 设备"
 
 #~ msgid "Back to Loader"
 #~ msgstr "返回 Loader"

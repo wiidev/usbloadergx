@@ -24,6 +24,7 @@
 #include "wbfs_fat.h"
 #include "prompts/ProgressWindow.h"
 #include "usbloader/wbfs.h"
+#include "usbloader/GameList.h"
 #include "wbfs_rw.h"
 
 #include "gecko.h"
@@ -239,19 +240,35 @@ s32 Wbfs_Fat::RemoveGame(u8 *discid)
 
 s32 Wbfs_Fat::DiskSpace(f32 *used, f32 *free)
 {
+    static f32 used_cached = 0.0;
+    static f32 free_cached = 0.0;
+    static int game_count = 0;
+
+    //! Since it's freaken slow, only refresh on new gamecount
+    if(used_cached == 0.0 || game_count != gameList.GameCount())
+    {
+        game_count = gameList.GameCount();
+    }
+    else
+    {
+        *used = used_cached;
+        *free = free_cached;
+        return 0;
+    }
+
     f32 size;
     int ret;
     struct statvfs wbfs_fat_vfs;
 
-    *used = 0;
-    *free = 0;
+    *used = used_cached = 0.0;
+    *free = free_cached = 0.0;
     ret = statvfs(wbfs_fs_drive, &wbfs_fat_vfs);
     if (ret) return -1;
 
     /* FS size in GB */
     size = (f32) wbfs_fat_vfs.f_frsize * (f32) wbfs_fat_vfs.f_blocks / GB_SIZE;
-    *free = (f32) wbfs_fat_vfs.f_frsize * (f32) wbfs_fat_vfs.f_bfree / GB_SIZE;
-    *used = size - *free;
+    *free = free_cached = (f32) wbfs_fat_vfs.f_frsize * (f32) wbfs_fat_vfs.f_bfree / GB_SIZE;
+    *used = used_cached = size - *free;
 
     return 0;
 }

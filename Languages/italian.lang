@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-29 16:38+0100\n"
+"POT-Creation-Date: 2010-12-31 14:05+0100\n"
 "PO-Revision-Date: 2010-02-21 08:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe, Cambo\n"
@@ -678,12 +678,6 @@ msgstr "Inserisci Disco"
 msgid "Insert a Wii Disc!"
 msgstr "Inserisci un Disco nella Wii!"
 
-msgid "Insert an SD-Card to save."
-msgstr "Inserisci una scheda SD per Salvare."
-
-msgid "Insert an SD-Card to use this option."
-msgstr "Inserire scheda SD per questa opzione"
-
 msgid "Install"
 msgstr "Installa"
 
@@ -843,9 +837,6 @@ msgstr "Nessun file trucchi trovato"
 
 msgid "No DOL file found on disc."
 msgstr "Nessun file DOL trovato sul disco."
-
-msgid "No SD-Card inserted!"
-msgstr "Nessuna scheda SD inserita!"
 
 msgid "No Splitting"
 msgstr ""
@@ -1102,6 +1093,9 @@ msgstr "Cerca Gioco"
 msgid "Settings"
 msgstr "Impostazioni"
 
+msgid "Show Free Space"
+msgstr ""
+
 msgid "Shutdown System"
 msgstr "Spegnimento"
 
@@ -1314,9 +1308,6 @@ msgstr "Modalità Video"
 msgid "WIP Patches Path"
 msgstr "Percorso Patch WIP"
 
-msgid "Waiting for USB Device"
-msgstr "Caricamento Dispositivo USB"
-
 msgid "Waiting..."
 msgstr "Caricamento..."
 
@@ -1422,6 +1413,18 @@ msgstr "di"
 
 msgid "seconds left"
 msgstr "secondi mancanti"
+
+#~ msgid "Insert an SD-Card to save."
+#~ msgstr "Inserisci una scheda SD per Salvare."
+
+#~ msgid "Insert an SD-Card to use this option."
+#~ msgstr "Inserire scheda SD per questa opzione"
+
+#~ msgid "No SD-Card inserted!"
+#~ msgstr "Nessuna scheda SD inserita!"
+
+#~ msgid "Waiting for USB Device"
+#~ msgstr "Caricamento Dispositivo USB"
 
 #~ msgid "Back to Loader"
 #~ msgstr "Canale HomeBrew"

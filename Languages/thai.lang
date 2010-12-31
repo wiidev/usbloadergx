@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-29 16:38+0100\n"
+"POT-Creation-Date: 2010-12-31 14:05+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Nitro_subzero \n"
 "Language-Team: Nitro_subzero\n"
@@ -678,12 +678,6 @@ msgstr "ใส่แผ่น"
 msgid "Insert a Wii Disc!"
 msgstr "ใส่แผ่น Wii !"
 
-msgid "Insert an SD-Card to save."
-msgstr "ใส่ SD card เพื่อบันทึก"
-
-msgid "Insert an SD-Card to use this option."
-msgstr "ใส่ SD card เพื่อใช้ตัวเลือกนี้ "
-
 msgid "Install"
 msgstr "ติดตั้ง"
 
@@ -843,9 +837,6 @@ msgstr "ไม่พบไฟล์โกงเกมส์"
 
 msgid "No DOL file found on disc."
 msgstr "ไม่มีไฟล์ DOL ในแผ่น"
-
-msgid "No SD-Card inserted!"
-msgstr "ไม่ได้เสียบ SD card!"
 
 msgid "No Splitting"
 msgstr ""
@@ -1102,6 +1093,9 @@ msgstr "กำหนดเงื่อนไขการค้นหา"
 msgid "Settings"
 msgstr "กำหนดค่า"
 
+msgid "Show Free Space"
+msgstr ""
+
 msgid "Shutdown System"
 msgstr "ปิดระบบ"
 
@@ -1314,9 +1308,6 @@ msgstr "โหมดการแสดงผลภาพ"
 msgid "WIP Patches Path"
 msgstr ""
 
-msgid "Waiting for USB Device"
-msgstr "กำลังรออุปกรณ์ USB"
-
 msgid "Waiting..."
 msgstr "กำลังรอ..."
 
@@ -1422,6 +1413,18 @@ msgstr "จาก"
 
 msgid "seconds left"
 msgstr "วินาทีที่เหลือ"
+
+#~ msgid "Insert an SD-Card to save."
+#~ msgstr "ใส่ SD card เพื่อบันทึก"
+
+#~ msgid "Insert an SD-Card to use this option."
+#~ msgstr "ใส่ SD card เพื่อใช้ตัวเลือกนี้ "
+
+#~ msgid "No SD-Card inserted!"
+#~ msgstr "ไม่ได้เสียบ SD card!"
+
+#~ msgid "Waiting for USB Device"
+#~ msgstr "กำลังรออุปกรณ์ USB"
 
 #~ msgid "Back to Loader"
 #~ msgstr "กลับไปที่ Loader"

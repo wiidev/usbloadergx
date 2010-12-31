@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-29 16:38+0100\n"
+"POT-Creation-Date: 2010-12-31 14:05+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) \n"
 "Language-Team: r823 - last version on http://djelinek.sweb.cz/_USBLoderGX/czech.lang \n"
@@ -678,12 +678,6 @@ msgstr "Vložte disk"
 msgid "Insert a Wii Disc!"
 msgstr "Vložte Wii disk"
 
-msgid "Insert an SD-Card to save."
-msgstr "Vložte SD kartu pro uložení."
-
-msgid "Insert an SD-Card to use this option."
-msgstr "Vložte SD kartu pro tuto možnost"
-
 msgid "Install"
 msgstr "Instalace"
 
@@ -843,9 +837,6 @@ msgstr "Nebyl nalezen soubor s cheaty"
 
 msgid "No DOL file found on disc."
 msgstr "Na disku nebyl nalezen DOL soubor."
-
-msgid "No SD-Card inserted!"
-msgstr "Není vložena SD karta"
 
 msgid "No Splitting"
 msgstr ""
@@ -1102,6 +1093,9 @@ msgstr "Nastavit vyhledávací filtr"
 msgid "Settings"
 msgstr "Nastavení"
 
+msgid "Show Free Space"
+msgstr ""
+
 msgid "Shutdown System"
 msgstr "Ukoncit systém"
 
@@ -1314,9 +1308,6 @@ msgstr "Video mód"
 msgid "WIP Patches Path"
 msgstr ""
 
-msgid "Waiting for USB Device"
-msgstr "Cekám na zarízení USB"
-
 msgid "Waiting..."
 msgstr "Cekám..."
 
@@ -1422,6 +1413,18 @@ msgstr "z "
 
 msgid "seconds left"
 msgstr "sekund zbývá"
+
+#~ msgid "Insert an SD-Card to save."
+#~ msgstr "Vložte SD kartu pro uložení."
+
+#~ msgid "Insert an SD-Card to use this option."
+#~ msgstr "Vložte SD kartu pro tuto možnost"
+
+#~ msgid "No SD-Card inserted!"
+#~ msgstr "Není vložena SD karta"
+
+#~ msgid "Waiting for USB Device"
+#~ msgstr "Cekám na zarízení USB"
 
 #~ msgid "Back to Loader"
 #~ msgstr "Zpet do spouštece"

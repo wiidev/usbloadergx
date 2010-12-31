@@ -178,7 +178,7 @@ bool WBFS_ShowFreeSpace(void)
 int MountWBFS(bool ShowGUI)
 {
     if(ShowGUI)
-        return DiscWait(tr( "Waiting for USB Device" ), 0, 0, 0, 1);
+        return WBFS_Init(WBFS_DEVICE_USB);
 
     int ret = -1;
     time_t currTime = time(0);
@@ -189,9 +189,9 @@ int MountWBFS(bool ShowGUI)
         printf("%i...", int(time(0) - currTime));
         if (ret < 0)
             sleep(1);
-        else 
+        else
 			break;
-		
+
         DeviceHandler::Instance()->UnMountAllUSB();
         DeviceHandler::Instance()->MountAllUSB();
     }

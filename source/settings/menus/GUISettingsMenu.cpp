@@ -113,6 +113,7 @@ GuiSettingsMenu::GuiSettingsMenu()
     Options->SetName(Idx++, "%s", tr( "Titles from WiiTDB" ));
     Options->SetName(Idx++, "%s", tr( "Screensaver" ));
     Options->SetName(Idx++, "%s", tr( "Mark new games" ));
+    Options->SetName(Idx++, "%s", tr( "Show Free Space" ));
 
     SetOptionValues();
 
@@ -185,6 +186,9 @@ void GuiSettingsMenu::SetOptionValues()
 
     //! Settings: Mark new games
     Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.marknewtitles] ));
+
+    //! Settings: Show Free Space
+    Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.ShowFreeSpace] ));
 }
 
 int GuiSettingsMenu::GetMenuInternal()
@@ -318,6 +322,12 @@ int GuiSettingsMenu::GetMenuInternal()
     else if (ret == ++Idx)
     {
         if (++Settings.marknewtitles >= MAX_ON_OFF) Settings.marknewtitles = 0;
+    }
+
+    //! Settings: Show Free Space
+    else if (ret == ++Idx)
+    {
+        if (++Settings.ShowFreeSpace >= MAX_ON_OFF) Settings.ShowFreeSpace = 0;
     }
 
     SetOptionValues();

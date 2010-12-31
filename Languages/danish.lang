@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-29 16:38+0100\n"
+"POT-Creation-Date: 2010-12-31 14:05+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: dorf[dk]\n"
 "Language-Team: dorf[dk]\n"
@@ -678,12 +678,6 @@ msgstr "Indsæt en DVD"
 msgid "Insert a Wii Disc!"
 msgstr "Indsæt en Wii-DVD!"
 
-msgid "Insert an SD-Card to save."
-msgstr "Indsæt et SD-kort for at gemme."
-
-msgid "Insert an SD-Card to use this option."
-msgstr "Indsæt et SD-kort for at bruge denne indstilling."
-
 msgid "Install"
 msgstr "Installér"
 
@@ -843,9 +837,6 @@ msgstr "Cheat-fil ikke fundet"
 
 msgid "No DOL file found on disc."
 msgstr "Der blev ikke fundet nogle DOL-filer på DVDen."
-
-msgid "No SD-Card inserted!"
-msgstr "Intet SD-kort fundet!"
 
 msgid "No Splitting"
 msgstr ""
@@ -1102,6 +1093,9 @@ msgstr "Søgefilter"
 msgid "Settings"
 msgstr "Indstillinger"
 
+msgid "Show Free Space"
+msgstr ""
+
 msgid "Shutdown System"
 msgstr "Sluk (rødt lys)"
 
@@ -1314,9 +1308,6 @@ msgstr "Video-mode"
 msgid "WIP Patches Path"
 msgstr "Sti til WIP patches"
 
-msgid "Waiting for USB Device"
-msgstr "Venter på USB-enhed"
-
 msgid "Waiting..."
 msgstr "Venter..."
 
@@ -1422,6 +1413,18 @@ msgstr "af"
 
 msgid "seconds left"
 msgstr "sekunder tilbage"
+
+#~ msgid "Insert an SD-Card to save."
+#~ msgstr "Indsæt et SD-kort for at gemme."
+
+#~ msgid "Insert an SD-Card to use this option."
+#~ msgstr "Indsæt et SD-kort for at bruge denne indstilling."
+
+#~ msgid "No SD-Card inserted!"
+#~ msgstr "Intet SD-kort fundet!"
+
+#~ msgid "Waiting for USB Device"
+#~ msgstr "Venter på USB-enhed"
 
 #~ msgid "Back to Loader"
 #~ msgstr "Tilbage til Loaderen"

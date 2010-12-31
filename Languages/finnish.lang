@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-29 16:38+0100\n"
+"POT-Creation-Date: 2010-12-31 14:05+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: c64rmx\n"
 "Language-Team: \n"
@@ -678,12 +678,6 @@ msgstr "Aseta levy Wiihin"
 msgid "Insert a Wii Disc!"
 msgstr "Aseta Wii-levy!"
 
-msgid "Insert an SD-Card to save."
-msgstr "Aseta SD-kortti tallentaaksesi asetuksia."
-
-msgid "Insert an SD-Card to use this option."
-msgstr "Aseta SD-kortti käyttääksesi tätä vaihtoehtoa"
-
 msgid "Install"
 msgstr "Asenna"
 
@@ -843,9 +837,6 @@ msgstr "Kooditiedostoa ei löydy"
 
 msgid "No DOL file found on disc."
 msgstr "Levyltä ei löydy dol tiedostoa"
-
-msgid "No SD-Card inserted!"
-msgstr "SD-korttia ei ole asetettu wiihin!"
 
 msgid "No Splitting"
 msgstr ""
@@ -1102,6 +1093,9 @@ msgstr ""
 msgid "Settings"
 msgstr "Asetukset"
 
+msgid "Show Free Space"
+msgstr ""
+
 msgid "Shutdown System"
 msgstr "Sammuta järjestelmä"
 
@@ -1314,9 +1308,6 @@ msgstr "Videotila"
 msgid "WIP Patches Path"
 msgstr ""
 
-msgid "Waiting for USB Device"
-msgstr "Odottaa USB-laitetta..."
-
 msgid "Waiting..."
 msgstr "Odottaa..."
 
@@ -1422,6 +1413,18 @@ msgstr "josta"
 
 msgid "seconds left"
 msgstr "sekuntia jäljellä"
+
+#~ msgid "Insert an SD-Card to save."
+#~ msgstr "Aseta SD-kortti tallentaaksesi asetuksia."
+
+#~ msgid "Insert an SD-Card to use this option."
+#~ msgstr "Aseta SD-kortti käyttääksesi tätä vaihtoehtoa"
+
+#~ msgid "No SD-Card inserted!"
+#~ msgstr "SD-korttia ei ole asetettu wiihin!"
+
+#~ msgid "Waiting for USB Device"
+#~ msgstr "Odottaa USB-laitetta..."
 
 #~ msgid "Back to Loader"
 #~ msgstr "HBC"

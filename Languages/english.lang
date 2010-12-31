@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-29 16:38+0100\n"
+"POT-Creation-Date: 2010-12-31 14:05+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -678,12 +678,6 @@ msgstr ""
 msgid "Insert a Wii Disc!"
 msgstr ""
 
-msgid "Insert an SD-Card to save."
-msgstr ""
-
-msgid "Insert an SD-Card to use this option."
-msgstr ""
-
 msgid "Install"
 msgstr ""
 
@@ -842,9 +836,6 @@ msgid "No Cheatfile found"
 msgstr ""
 
 msgid "No DOL file found on disc."
-msgstr ""
-
-msgid "No SD-Card inserted!"
 msgstr ""
 
 msgid "No Splitting"
@@ -1102,6 +1093,9 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
+msgid "Show Free Space"
+msgstr ""
+
 msgid "Shutdown System"
 msgstr ""
 
@@ -1312,9 +1306,6 @@ msgid "Video Mode"
 msgstr ""
 
 msgid "WIP Patches Path"
-msgstr ""
-
-msgid "Waiting for USB Device"
 msgstr ""
 
 msgid "Waiting..."

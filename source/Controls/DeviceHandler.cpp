@@ -130,11 +130,30 @@ bool DeviceHandler::MountSD()
     }
 
     //! Mount only one SD Partition
-    return sd->Mount(0, DeviceName[SD]);
+    return sd->Mount(0, DeviceName[SD], true);
 }
 
-bool DeviceHandler::MountUSB(int pos)
+static inline bool USBSpinUp()
 {
+    bool started = false;
+    int retries = 400;
+    // wait 20 sec for the USB to spin up...stupid slow ass HDD
+    do
+    {
+        started = __io_usbstorage2.startup();
+        if(started) break;
+        usleep(50000);
+    }
+    while(--retries > 0);
+
+    return started;
+}
+
+bool DeviceHandler::MountUSB(int pos, bool spinup)
+{
+    if(spinup && !USBSpinUp())
+        return false;
+
     if(!usb)
         usb = new PartitionHandle(&__io_usbstorage2);
 
@@ -151,8 +170,11 @@ bool DeviceHandler::MountUSB(int pos)
     return usb->Mount(pos, DeviceName[USB1+pos]);
 }
 
-bool DeviceHandler::MountAllUSB()
+bool DeviceHandler::MountAllUSB(bool spinup)
 {
+    if(spinup && !USBSpinUp())
+        return false;
+
     if(!usb)
         usb = new PartitionHandle(&__io_usbstorage2);
 
@@ -160,7 +182,7 @@ bool DeviceHandler::MountAllUSB()
 
     for(int i = 0; i < usb->GetPartitionCount(); i++)
     {
-        if(MountUSB(i))
+        if(MountUSB(i, false))
             result = true;
     }
 

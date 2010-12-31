@@ -111,6 +111,7 @@ class CSettings
         u32 InstallPartitions;
         short beta_upgrades;
         short PlaylogUpdate;
+        short ShowFreeSpace;
         char returnTo[20];
     protected:
         bool SetSetting(char *name, char *value);

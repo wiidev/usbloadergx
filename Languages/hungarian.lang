@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-29 16:38+0100\n"
+"POT-Creation-Date: 2010-12-31 14:05+0100\n"
 "PO-Revision-Date: 2009-12-29 11:05+0100\n"
 "Last-Translator: Springdale\n"
 "Language-Team: Tusk, Springdale\n"
@@ -678,12 +678,6 @@ msgstr "Helyezz be egy lemezt"
 msgid "Insert a Wii Disc!"
 msgstr "Helyezz be Wii lemezt!"
 
-msgid "Insert an SD-Card to save."
-msgstr "Helyezz be egy SD Kártyát, hogy ments,"
-
-msgid "Insert an SD-Card to use this option."
-msgstr "Helyezz be egy SD Kártyát, hogy használhasd ezt a lehetõséget."
-
 msgid "Install"
 msgstr "Telepítés"
 
@@ -843,9 +837,6 @@ msgstr "Kód nem található"
 
 msgid "No DOL file found on disc."
 msgstr "Nem található DOL fájl a lemezen."
-
-msgid "No SD-Card inserted!"
-msgstr "Nincs SD kártya behelyezve!"
 
 msgid "No Splitting"
 msgstr ""
@@ -1102,6 +1093,9 @@ msgstr "Keresés"
 msgid "Settings"
 msgstr "Beállítások"
 
+msgid "Show Free Space"
+msgstr ""
+
 msgid "Shutdown System"
 msgstr "Leállítás"
 
@@ -1314,9 +1308,6 @@ msgstr "Videó Mód"
 msgid "WIP Patches Path"
 msgstr "WIP Patch útvonal"
 
-msgid "Waiting for USB Device"
-msgstr "Várakozás az USB Meghajtóra"
-
 msgid "Waiting..."
 msgstr "Várakozás..."
 
@@ -1422,6 +1413,18 @@ msgstr "./"
 
 msgid "seconds left"
 msgstr "hátralévõ másodperc"
+
+#~ msgid "Insert an SD-Card to save."
+#~ msgstr "Helyezz be egy SD Kártyát, hogy ments,"
+
+#~ msgid "Insert an SD-Card to use this option."
+#~ msgstr "Helyezz be egy SD Kártyát, hogy használhasd ezt a lehetõséget."
+
+#~ msgid "No SD-Card inserted!"
+#~ msgstr "Nincs SD kártya behelyezve!"
+
+#~ msgid "Waiting for USB Device"
+#~ msgstr "Várakozás az USB Meghajtóra"
 
 #~ msgid "Back to Loader"
 #~ msgstr "HBC"

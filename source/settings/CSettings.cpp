@@ -104,7 +104,8 @@ void CSettings::SetDefault()
     musicloopmode = 1;
     partition = -1;
     marknewtitles = 1;
-    InstallToDir = 0;
+    ShowFreeSpace = 1;
+    InstallToDir = INSTALL_TO_NAME_GAMEID;
     GameSplit = GAMESPLIT_4GB;
     InstallPartitions = ONLY_GAME_PARTITION;
     beta_upgrades = 0;
@@ -215,6 +216,7 @@ bool CSettings::Save()
     fprintf(file, "discart = %d\n ", discart);
     fprintf(file, "partition = %d\n ", partition);
     fprintf(file, "marknewtitles = %d\n ", marknewtitles);
+    fprintf(file, "ShowFreeSpace = %d\n ", ShowFreeSpace);
     fprintf(file, "InstallToDir = %d\n ", InstallToDir);
     fprintf(file, "GameSplit = %d\n ", GameSplit);
     fprintf(file, "InstallPartitions = %08X\n ", InstallPartitions);
@@ -416,6 +418,11 @@ bool CSettings::SetSetting(char *name, char *value)
     else if (strcmp(name, "marknewtitles") == 0)
     {
         if (sscanf(value, "%d", &i) == 1) marknewtitles = i;
+        return true;
+    }
+    else if (strcmp(name, "ShowFreeSpace") == 0)
+    {
+        if (sscanf(value, "%d", &i) == 1) ShowFreeSpace = i;
         return true;
     }
     else if (strcmp(name, "patchcountrystrings") == 0)

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-29 16:38+0100\n"
+"POT-Creation-Date: 2010-12-31 14:05+0100\n"
 "PO-Revision-Date: 2010-01-19 17:39+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -678,12 +678,6 @@ msgstr "Sätt i en skiva"
 msgid "Insert a Wii Disc!"
 msgstr "Sätt i en Wii-skiva!"
 
-msgid "Insert an SD-Card to save."
-msgstr "Sätt i ett SD-kort för att spara."
-
-msgid "Insert an SD-Card to use this option."
-msgstr "Sätt i ett SD-kort för att använda denna inställning"
-
 msgid "Install"
 msgstr "Installera"
 
@@ -843,9 +837,6 @@ msgstr "Ingen fuskfil hittades"
 
 msgid "No DOL file found on disc."
 msgstr "Ingen DOL-fil hittades på skivan."
-
-msgid "No SD-Card inserted!"
-msgstr "Inget SD-kort isatt!"
 
 msgid "No Splitting"
 msgstr ""
@@ -1102,6 +1093,9 @@ msgstr "Ställ in sök-filter"
 msgid "Settings"
 msgstr "Inställningar"
 
+msgid "Show Free Space"
+msgstr ""
+
 msgid "Shutdown System"
 msgstr "Stäng av helt"
 
@@ -1314,9 +1308,6 @@ msgstr "Video-läge"
 msgid "WIP Patches Path"
 msgstr "WIP patchssökväg"
 
-msgid "Waiting for USB Device"
-msgstr "Väntar på USB-enhet"
-
 msgid "Waiting..."
 msgstr "Väntar..."
 
@@ -1422,6 +1413,18 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder kvar"
+
+#~ msgid "Insert an SD-Card to save."
+#~ msgstr "Sätt i ett SD-kort för att spara."
+
+#~ msgid "Insert an SD-Card to use this option."
+#~ msgstr "Sätt i ett SD-kort för att använda denna inställning"
+
+#~ msgid "No SD-Card inserted!"
+#~ msgstr "Inget SD-kort isatt!"
+
+#~ msgid "Waiting for USB Device"
+#~ msgstr "Väntar på USB-enhet"
 
 #~ msgid "Back to Loader"
 #~ msgstr "Tillbaka till loader"

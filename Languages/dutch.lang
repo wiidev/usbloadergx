@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-29 16:38+0100\n"
+"POT-Creation-Date: 2010-12-31 14:05+0100\n"
 "PO-Revision-Date: 2010-04-12 07:37+0100\n"
 "Last-Translator: glowy\n"
 "Language-Team: tj_cool, glowy\n"
@@ -678,12 +678,6 @@ msgstr "Voer een disk in"
 msgid "Insert a Wii Disc!"
 msgstr "Voer een Wii disk in!"
 
-msgid "Insert an SD-Card to save."
-msgstr "Voer een SD kaart in om op te slaan."
-
-msgid "Insert an SD-Card to use this option."
-msgstr "Voer een SD kaart in om deze optie te gebruiken."
-
 msgid "Install"
 msgstr "Installeer"
 
@@ -843,9 +837,6 @@ msgstr "Geen cheatbestand gevonden"
 
 msgid "No DOL file found on disc."
 msgstr "Geen DOL bestand gevonden op disk."
-
-msgid "No SD-Card inserted!"
-msgstr "Geen SD kaart gevonden!"
 
 msgid "No Splitting"
 msgstr ""
@@ -1102,6 +1093,9 @@ msgstr "Zoekfilter instellen"
 msgid "Settings"
 msgstr "Instellingen"
 
+msgid "Show Free Space"
+msgstr ""
+
 msgid "Shutdown System"
 msgstr "Systeem uitzetten"
 
@@ -1314,9 +1308,6 @@ msgstr ""
 msgid "WIP Patches Path"
 msgstr "Locatie WIP patches"
 
-msgid "Waiting for USB Device"
-msgstr "Wachten op USB apparaat"
-
 msgid "Waiting..."
 msgstr "Wachten..."
 
@@ -1422,6 +1413,18 @@ msgstr "van"
 
 msgid "seconds left"
 msgstr "seconden over"
+
+#~ msgid "Insert an SD-Card to save."
+#~ msgstr "Voer een SD kaart in om op te slaan."
+
+#~ msgid "Insert an SD-Card to use this option."
+#~ msgstr "Voer een SD kaart in om deze optie te gebruiken."
+
+#~ msgid "No SD-Card inserted!"
+#~ msgstr "Geen SD kaart gevonden!"
+
+#~ msgid "Waiting for USB Device"
+#~ msgstr "Wachten op USB apparaat"
 
 #~ msgid "Back to Loader"
 #~ msgstr "Terug naar lader"

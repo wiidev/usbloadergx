@@ -6,6 +6,7 @@
 #include "libwiigui/gui_gamegrid.h"
 #include "libwiigui/gui_gamecarousel.h"
 #include "libwiigui/gui_searchbar.h"
+#include "utils/ThreadedTask.hpp"
 
 class GameBrowseMenu : public GuiWindow
 {
@@ -24,8 +25,25 @@ class GameBrowseMenu : public GuiWindow
         void CheckAlternativeDOL(const char * IDfull);
         void CheckOcarina(const char * IDfull);
         void CheckDiscSlotUpdate();
+        void UpdateFreeSpace(void *arg);
         void UpdateClock();
         static void UpdateCallback(void * e);
+
+        TCallback<GameBrowseMenu> HDDSizeCallback;
+        u32 DiscDriveCoverOld;
+        int returnMenu;
+        int gameSelectedOld;
+        int gameClicked;
+        time_t lastrawtime;
+        time_t ScreensaverTimer;
+        bool show_searchwindow;
+        wchar_t searchChar;
+        std::vector<GuiButton *> ToolBar;
+
+        GuiGameBrowser * gameBrowser;
+        GuiGameGrid * gameGrid;
+        GuiGameCarousel * gameCarousel;
+        GuiSearchBar * searchBar;
 
         GuiImageData * btnInstall;
         GuiImageData * btnInstallOver;
@@ -138,20 +156,6 @@ class GameBrowseMenu : public GuiWindow
         GuiTooltip * homebrewBtnTT;
         GuiTooltip * DownloadBtnTT;
         GuiTooltip * IDBtnTT;
-
-        GuiGameBrowser * gameBrowser;
-        GuiGameGrid * gameGrid;
-        GuiGameCarousel * gameCarousel;
-        GuiSearchBar * searchBar;
-        u32 DiscDriveCoverOld;
-        int returnMenu;
-        int gameSelectedOld;
-        int gameClicked;
-        time_t lastrawtime;
-        time_t ScreensaverTimer;
-        bool show_searchwindow;
-        wchar_t searchChar;
-        std::vector<GuiButton *> ToolBar;
 };
 
 #endif

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-29 16:38+0100\n"
+"POT-Creation-Date: 2010-12-31 14:05+0100\n"
 "PO-Revision-Date: 2009-10-23 18:52+0200\n"
 "Last-Translator: aniemotion\n"
 "Language-Team: boto12, aniemotion\n"
@@ -678,12 +678,6 @@ msgstr "Insira o Disco"
 msgid "Insert a Wii Disc!"
 msgstr "Insira um Disco do Wii!"
 
-msgid "Insert an SD-Card to save."
-msgstr "Insira um cartão SD para salvar."
-
-msgid "Insert an SD-Card to use this option."
-msgstr "Insira um cartão SD para usar esta funcionalidade."
-
 msgid "Install"
 msgstr "Instalar"
 
@@ -843,9 +837,6 @@ msgstr "Arquivo de truques não encontrado"
 
 msgid "No DOL file found on disc."
 msgstr "Não foi encontrado nenhum arquivo dol no disco"
-
-msgid "No SD-Card inserted!"
-msgstr "Cartão SD não inserido!"
 
 msgid "No Splitting"
 msgstr ""
@@ -1102,6 +1093,9 @@ msgstr "Usar filtro de busca"
 msgid "Settings"
 msgstr "Configurações"
 
+msgid "Show Free Space"
+msgstr ""
+
 msgid "Shutdown System"
 msgstr "Desligar"
 
@@ -1314,9 +1308,6 @@ msgstr "Modo de Vídeo"
 msgid "WIP Patches Path"
 msgstr "Caminho WIP Patches"
 
-msgid "Waiting for USB Device"
-msgstr "Aguardando pelo Dispositivo USB"
-
 msgid "Waiting..."
 msgstr "Aguardando..."
 
@@ -1422,6 +1413,18 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
+
+#~ msgid "Insert an SD-Card to save."
+#~ msgstr "Insira um cartão SD para salvar."
+
+#~ msgid "Insert an SD-Card to use this option."
+#~ msgstr "Insira um cartão SD para usar esta funcionalidade."
+
+#~ msgid "No SD-Card inserted!"
+#~ msgstr "Cartão SD não inserido!"
+
+#~ msgid "Waiting for USB Device"
+#~ msgstr "Aguardando pelo Dispositivo USB"
 
 #~ msgid "Back to Loader"
 #~ msgstr "Loader"

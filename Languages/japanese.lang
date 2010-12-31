@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-29 16:38+0100\n"
+"POT-Creation-Date: 2010-12-31 14:05+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
@@ -678,12 +678,6 @@ msgstr "ﾃﾞｨｽｸを入れてください"
 msgid "Insert a Wii Disc!"
 msgstr "Wiiﾃﾞｨｽｸを挿入して下さい!"
 
-msgid "Insert an SD-Card to save."
-msgstr "保存するためにSDを挿入して下さい"
-
-msgid "Insert an SD-Card to use this option."
-msgstr "このｵﾌﾟｼｮﾝを使用するためSDｶｰﾄﾞを挿入して下さい"
-
 msgid "Install"
 msgstr "ｲﾝｽﾄｰﾙ"
 
@@ -843,9 +837,6 @@ msgstr "ﾁｰﾄﾌｧｲﾙが見つかりません"
 
 msgid "No DOL file found on disc."
 msgstr "ﾃﾞｨｽｸ内に.DOLがありません"
-
-msgid "No SD-Card inserted!"
-msgstr "SDｶｰﾄﾞが挿入されていません!"
 
 msgid "No Splitting"
 msgstr ""
@@ -1102,6 +1093,9 @@ msgstr "検索"
 msgid "Settings"
 msgstr "設定"
 
+msgid "Show Free Space"
+msgstr ""
+
 msgid "Shutdown System"
 msgstr "シャットダウン"
 
@@ -1314,9 +1308,6 @@ msgstr "映像の出力方法"
 msgid "WIP Patches Path"
 msgstr "WIPパッチのパス"
 
-msgid "Waiting for USB Device"
-msgstr "USBﾃﾞﾊﾞｲｽの応答待ち"
-
 msgid "Waiting..."
 msgstr "待機中…"
 
@@ -1422,6 +1413,18 @@ msgstr "中"
 
 msgid "seconds left"
 msgstr "秒で完了"
+
+#~ msgid "Insert an SD-Card to save."
+#~ msgstr "保存するためにSDを挿入して下さい"
+
+#~ msgid "Insert an SD-Card to use this option."
+#~ msgstr "このｵﾌﾟｼｮﾝを使用するためSDｶｰﾄﾞを挿入して下さい"
+
+#~ msgid "No SD-Card inserted!"
+#~ msgstr "SDｶｰﾄﾞが挿入されていません!"
+
+#~ msgid "Waiting for USB Device"
+#~ msgstr "USBﾃﾞﾊﾞｲｽの応答待ち"
 
 #~ msgid "Back to Loader"
 #~ msgstr "HBCへ"

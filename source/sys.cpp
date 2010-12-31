@@ -12,6 +12,7 @@
 #include "usbloader/playlog.h"
 #include "usbloader/wbfs.h"
 #include "themes/CTheme.h"
+#include "utils/ThreadedTask.hpp"
 #include "audio.h"
 #include "lstub.h"
 #include "menu.h"
@@ -80,6 +81,7 @@ void AppCleanUp(void)
     CloseXMLDatabase();
     Theme::CleanUp();
     NewTitles::DestroyInstance();
+    ThreadedTask::DestroyInstance();
     DeinitNetwork();
 
     StopGX();

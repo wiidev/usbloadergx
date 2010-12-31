@@ -103,7 +103,7 @@ bool PartitionHandle::IsMounted(int pos)
     return true;
 }
 
-bool PartitionHandle::Mount(int pos, const char * name)
+bool PartitionHandle::Mount(int pos, const char * name, bool forceFAT)
 {
     if(!valid(pos))
         return false;
@@ -117,6 +117,20 @@ bool PartitionHandle::Mount(int pos, const char * name)
         MountNameList.resize(GetPartitionCount());
 
     MountNameList[pos] = name;
+
+    //! Some stupid partition manager think they don't need to edit the freaken MBR.
+    //! So we need to check the first 64 sectors and see if some partition is there.
+    //! libfat does that by default so let's use it.
+    //! We do that only on sd not on usb.
+    if(forceFAT && (!GetFSName(pos) || strcmp(GetFSName(pos), "Unknown") == 0))
+    {
+        if (fatMount(MountNameList[pos].c_str(), interface, 0, CACHE, SECTORS))
+        {
+            extern sec_t _FAT_startSector;
+            AddPartition("FAT", _FAT_startSector, 0xdeadbeaf, true, 0x0c, 0);
+            return true;
+        }
+    }
 
     if(strncmp(GetFSName(pos), "FAT", 3) == 0 || strcmp(GetFSName(pos), "GUID-Entry") == 0)
     {

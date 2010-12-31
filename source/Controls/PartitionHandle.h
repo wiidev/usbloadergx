@@ -124,7 +124,7 @@ class PartitionHandle
         //! Is the partition Mounted
         bool IsMounted(int pos);
         //! Mount a specific Partition
-        bool Mount(int pos, const char * name);
+        bool Mount(int pos, const char * name, bool forceFAT = false);
         //! UnMount a specific Partition
         void UnMount(int pos);
         //! UnMount all Partition

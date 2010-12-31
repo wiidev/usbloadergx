@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-29 16:38+0100\n"
+"POT-Creation-Date: 2010-12-31 14:05+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: nikolai_ca\n"
 "Language-Team: Kir, alendit, nikolai_ca\n"
@@ -678,12 +678,6 @@ msgstr "Вставьте диск"
 msgid "Insert a Wii Disc!"
 msgstr "Вставьте диск Wii!"
 
-msgid "Insert an SD-Card to save."
-msgstr "Для сохранения вставьте SD карту."
-
-msgid "Insert an SD-Card to use this option."
-msgstr "Для использования этой функции нужна SD карта"
-
 msgid "Install"
 msgstr "Установка"
 
@@ -843,9 +837,6 @@ msgstr "Не найден файл с читами"
 
 msgid "No DOL file found on disc."
 msgstr "DOL-файл не найден на диске."
-
-msgid "No SD-Card inserted!"
-msgstr "SD карта не вставлена!"
 
 msgid "No Splitting"
 msgstr ""
@@ -1102,6 +1093,9 @@ msgstr "Установить фильтр для поиска"
 msgid "Settings"
 msgstr "Установки"
 
+msgid "Show Free Space"
+msgstr ""
+
 msgid "Shutdown System"
 msgstr "Выключить систему"
 
@@ -1314,9 +1308,6 @@ msgstr "Видео режим"
 msgid "WIP Patches Path"
 msgstr "Путь к патчам QIP"
 
-msgid "Waiting for USB Device"
-msgstr "Ожидание USB устройства"
-
 msgid "Waiting..."
 msgstr "Ожидание..."
 
@@ -1422,6 +1413,18 @@ msgstr "из"
 
 msgid "seconds left"
 msgstr "секунд осталось"
+
+#~ msgid "Insert an SD-Card to save."
+#~ msgstr "Для сохранения вставьте SD карту."
+
+#~ msgid "Insert an SD-Card to use this option."
+#~ msgstr "Для использования этой функции нужна SD карта"
+
+#~ msgid "No SD-Card inserted!"
+#~ msgstr "SD карта не вставлена!"
+
+#~ msgid "Waiting for USB Device"
+#~ msgstr "Ожидание USB устройства"
 
 #~ msgid "Back to Loader"
 #~ msgstr "Вернуться в загрузчик"

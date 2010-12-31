@@ -13,6 +13,7 @@
 #include "../settings/CSettings.h"
 #include "gui_customoptionbrowser.h"
 #include "themes/CTheme.h"
+#include "utils/tools.h"
 #include "menu.h"
 
 #include <unistd.h>
@@ -340,7 +341,7 @@ void GuiCustomOptionBrowser::Update(GuiTrigger * t)
     int next, prev, length = options->GetLength();
     int old_listOffset = listOffset;
 
-    if (length < PAGESIZE)
+    if (scrollbaron)
     {
         // update the location of the scroll box based on the position in the option list
         arrowUpBtn->Update(t);
@@ -485,9 +486,11 @@ void GuiCustomOptionBrowser::Update(GuiTrigger * t)
     {
         scrollbarBoxBtn->SetPosition(width / 2 - 18 + 7, 0);
 
-        int position = t->wpad.ir.y - 50 - scrollbarBoxBtn->GetTop();
+        int position = t->wpad.ir.y - scrollbarBoxBtn->GetHeight()/2 - scrollbarBoxBtn->GetTop();
+        position = cut_bounds(position, 0, 237);
 
-        listOffset = (position * length) / 180 - selectedItem;
+        listOffset = (int) (((float) position / 237.0f)*length);
+        selectedItem = (int) (((float) listOffset / (float) length)*(PAGESIZE-1));
 
         if (listOffset <= 0)
         {
@@ -497,7 +500,6 @@ void GuiCustomOptionBrowser::Update(GuiTrigger * t)
         else if (listOffset + PAGESIZE >= length)
         {
             listOffset = length - PAGESIZE;
-            selectedItem = PAGESIZE - 1;
         }
     }
     int positionbar = 237 * (listOffset + selectedItem) / length;

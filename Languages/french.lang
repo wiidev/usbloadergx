@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-29 16:38+0100\n"
+"POT-Creation-Date: 2010-12-31 14:05+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Kin8\n"
 "Language-Team: Badablek, Amour, ikya & Kin8\n"
@@ -678,12 +678,6 @@ msgstr "Insérez un disque"
 msgid "Insert a Wii Disc!"
 msgstr "Insérez un disque Wii !"
 
-msgid "Insert an SD-Card to save."
-msgstr "Insérez une carte SD pour enregistrer."
-
-msgid "Insert an SD-Card to use this option."
-msgstr "Insérez une carte SD pour utiliser cette option."
-
 msgid "Install"
 msgstr "Installer"
 
@@ -843,9 +837,6 @@ msgstr "Aucun fichier de triche trouvé"
 
 msgid "No DOL file found on disc."
 msgstr "Aucun DOL trouvé dans ce jeu."
-
-msgid "No SD-Card inserted!"
-msgstr "Aucune carte SD insérée !"
 
 msgid "No Splitting"
 msgstr ""
@@ -1102,6 +1093,9 @@ msgstr "Filtre de Recherche"
 msgid "Settings"
 msgstr "Paramètres"
 
+msgid "Show Free Space"
+msgstr ""
+
 msgid "Shutdown System"
 msgstr "Arrêt"
 
@@ -1314,9 +1308,6 @@ msgstr "Mode vidéo"
 msgid "WIP Patches Path"
 msgstr "Dossier Patchs WIP"
 
-msgid "Waiting for USB Device"
-msgstr "Attente d'un périphérique USB"
-
 msgid "Waiting..."
 msgstr "En attente..."
 
@@ -1422,6 +1413,18 @@ msgstr "sur"
 
 msgid "seconds left"
 msgstr "secondes restantes"
+
+#~ msgid "Insert an SD-Card to save."
+#~ msgstr "Insérez une carte SD pour enregistrer."
+
+#~ msgid "Insert an SD-Card to use this option."
+#~ msgstr "Insérez une carte SD pour utiliser cette option."
+
+#~ msgid "No SD-Card inserted!"
+#~ msgstr "Aucune carte SD insérée !"
+
+#~ msgid "Waiting for USB Device"
+#~ msgstr "Attente d'un périphérique USB"
 
 #~ msgid "Back to Loader"
 #~ msgstr "Chaîne Homebrew"

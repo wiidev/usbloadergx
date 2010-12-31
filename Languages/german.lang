@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-29 16:38+0100\n"
+"POT-Creation-Date: 2010-12-31 14:05+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: ZEN.13\n"
 "Language-Team: Snoozer, wishmasterf, Bertilax, ZEN.13\n"
@@ -678,12 +678,6 @@ msgstr "Disc einlegen"
 msgid "Insert a Wii Disc!"
 msgstr "Eine Wii Disc einlegen!"
 
-msgid "Insert an SD-Card to save."
-msgstr "SD Karte einlegen um zu Speichern."
-
-msgid "Insert an SD-Card to use this option."
-msgstr "SD Karte einlegen um diese Option zu nutzen."
-
 msgid "Install"
 msgstr "Installieren"
 
@@ -843,9 +837,6 @@ msgstr "Keine Cheatdatei gefunden."
 
 msgid "No DOL file found on disc."
 msgstr "Keine DOL auf der Disc gefunden."
-
-msgid "No SD-Card inserted!"
-msgstr "Keine SD Karte eingelegt!"
 
 msgid "No Splitting"
 msgstr ""
@@ -1102,6 +1093,9 @@ msgstr "Suche"
 msgid "Settings"
 msgstr "Einstellungen"
 
+msgid "Show Free Space"
+msgstr ""
+
 msgid "Shutdown System"
 msgstr "System herunterfahren"
 
@@ -1314,9 +1308,6 @@ msgstr "Videomodus"
 msgid "WIP Patches Path"
 msgstr "WIP Patches"
 
-msgid "Waiting for USB Device"
-msgstr "Warte auf USB Gerät"
-
 msgid "Waiting..."
 msgstr "Warte..."
 
@@ -1422,6 +1413,18 @@ msgstr "von"
 
 msgid "seconds left"
 msgstr "Sekunden verbleiben"
+
+#~ msgid "Insert an SD-Card to save."
+#~ msgstr "SD Karte einlegen um zu Speichern."
+
+#~ msgid "Insert an SD-Card to use this option."
+#~ msgstr "SD Karte einlegen um diese Option zu nutzen."
+
+#~ msgid "No SD-Card inserted!"
+#~ msgstr "Keine SD Karte eingelegt!"
+
+#~ msgid "Waiting for USB Device"
+#~ msgstr "Warte auf USB Gerät"
 
 #~ msgid "Back to Loader"
 #~ msgstr "Homebrew Kanal"

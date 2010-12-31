@@ -94,7 +94,7 @@ bool StartUpProcess::USBSpinUp()
     // wait 10 sec for the USB to spin up...stupid slow ass HDD
     do
     {
-        started = (__io_usbstorage2.startup() && __io_usbstorage2.isInserted());
+        started = __io_usbstorage2.startup();
         usleep(50000);
 
         if(retries < 400 && retries % 20 == 0)
@@ -139,7 +139,7 @@ bool StartUpProcess::Execute()
 
     SetTextf("Initialize usb device\n");
     USBSpinUp();
-    DeviceHandler::Instance()->MountAllUSB();
+    DeviceHandler::Instance()->MountAllUSB(false);
 
     SetTextf("Loading config files");
     gprintf("\tLoading config...%s\n", Settings.Load() ? "done" : "failed");
