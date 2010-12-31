@@ -19,6 +19,7 @@
 #include "video.h"
 #include "input.h"
 #include "libwiigui/gui.h"
+#include "sys.h"
 
 int rumbleRequest[4] = { 0, 0, 0, 0 };
 GuiTrigger userInput[4];
@@ -49,6 +50,12 @@ void UpdatePads()
         userInput[i].pad.triggerR = PAD_TriggerR(i);
 
         if (Settings.rumble == ON) DoRumble(i);
+
+        if(userInput[i].wpad.exp.type == WPAD_EXP_NUNCHUK)
+        {
+            if(userInput[i].wpad.btns_h & WPAD_NUNCHUK_BUTTON_Z && userInput[i].wpad.btns_d & WPAD_NUNCHUK_BUTTON_C)
+                ScreenShot();
+		}
     }
 }
 

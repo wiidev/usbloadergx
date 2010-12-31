@@ -154,17 +154,9 @@ bool TitleSelector(char output[])
     optionBrowser4.SetPosition(0, 90);
     optionBrowser4.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
 
-    GuiTrigger trigZ;
-    trigZ.SetButtonOnlyTrigger(-1, WPAD_NUNCHUK_BUTTON_Z | WPAD_CLASSIC_BUTTON_ZL, PAD_TRIGGER_Z);
-
-    GuiButton screenShotBtn(0, 0);
-    screenShotBtn.SetPosition(0, 0);
-    screenShotBtn.SetTrigger(&trigZ);
-
     HaltGui();
     GuiWindow w(screenwidth, screenheight);
     w.Append(&settingsbackgroundbtn);
-    w.Append(&screenShotBtn);
     w.Append(&cancelBtn);
     w.Append(&optionBrowser4);
     mainWindow->SetState(STATE_DISABLED);
@@ -197,11 +189,6 @@ bool TitleSelector(char output[])
         {
             //break the loop and end the function
             exit = true;
-        }
-        else if (screenShotBtn.GetState() == STATE_CLICKED)
-        {
-            screenShotBtn.ResetState();
-            ScreenShot();
         }
     }
 
@@ -395,16 +382,8 @@ int TitleBrowser()
     wifiBtn.SetAlpha(80);
     wifiBtn.SetTrigger(&trigA);
 
-    GuiTrigger trigZ;
-    trigZ.SetButtonOnlyTrigger(-1, WPAD_NUNCHUK_BUTTON_Z | WPAD_CLASSIC_BUTTON_ZL, PAD_TRIGGER_Z);
-
-    GuiButton screenShotBtn(0, 0);
-    screenShotBtn.SetPosition(0, 0);
-    screenShotBtn.SetTrigger(&trigZ);
-
     HaltGui();
     GuiWindow w(screenwidth, screenheight);
-    w.Append(&screenShotBtn);
     w.Append(&settingsbackgroundbtn);
     w.Append(&titleTxt);
     w.Append(&cancelBtn);
@@ -660,11 +639,6 @@ int TitleBrowser()
             //break the loop and end the function
             exit = true;
             ret = -10;
-        }
-        else if (screenShotBtn.GetState() == STATE_CLICKED)
-        {
-            screenShotBtn.ResetState();
-            ScreenShot();
         }
     }
 

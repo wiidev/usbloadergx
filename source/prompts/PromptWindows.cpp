@@ -233,7 +233,7 @@ void WindowCredits()
     starImg.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     starImg.SetPosition(505, 350);
 
-    int numEntries = 21;
+    int numEntries = 24;
     GuiText * txt[numEntries];
 
     txt[i] = new GuiText(tr( "Credits" ), 26, ( GXColor )
@@ -265,7 +265,7 @@ void WindowCredits()
     txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     txt[i]->SetPosition(0, y);
     i++;
-    y += 26;
+    y += 24;
 
     txt[i] = new GuiText(tr( "Official Site:" ), 20, ( GXColor )
     {   255, 255, 255, 255});
@@ -278,26 +278,26 @@ void WindowCredits()
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     txt[i]->SetPosition(160, y);
     i++;
-    y += 26;
+    y += 22;
 
-    GuiText::SetPresets(22, ( GXColor ) {255, 255, 255, 255}, 3000, FTGX_JUSTIFY_LEFT | FTGX_ALIGN_TOP, ALIGN_LEFT, ALIGN_TOP);
+    GuiText::SetPresets(20, ( GXColor ) {255, 255, 255, 255}, 3000, FTGX_JUSTIFY_LEFT | FTGX_ALIGN_TOP, ALIGN_LEFT, ALIGN_TOP);
 
     txt[i] = new GuiText(tr( "Coding:" ));
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     txt[i]->SetPosition(10, y);
     i++;
 
-    txt[i] = new GuiText("dimok / nIxx / giantpune / ardi");
+    txt[i] = new GuiText("Dimok / nIxx / giantpune / ardi");
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     txt[i]->SetPosition(160, y);
     i++;
-    y += 22;
+    y += 20;
 
     txt[i] = new GuiText("hungyip84 / DrayX7 / lustar / r-win");
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     txt[i]->SetPosition(160, y);
     i++;
-    y += 26;
+    y += 22;
 
     char text[100];
 
@@ -310,7 +310,24 @@ void WindowCredits()
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     txt[i]->SetPosition(160, y);
     i++;
-    y += 26;
+    y += 22;
+
+    txt[i] = new GuiText(tr( "Issue manager /" ));
+    txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+    txt[i]->SetPosition(10, y);
+    i++;
+    y += 20;
+
+    txt[i] = new GuiText(tr( "Main tester:" ));
+    txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+    txt[i]->SetPosition(10, y);
+    i++;
+
+    txt[i] = new GuiText("Cyan");
+    txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+    txt[i]->SetPosition(160, y);
+    i++;
+    y += 22;
 
     txt[i] = new GuiText(tr( "Big thanks to:" ));
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
@@ -322,69 +339,69 @@ void WindowCredits()
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     txt[i]->SetPosition(160, y);
     i++;
-    y += 22;
+    y += 20;
 
     sprintf(text, "CorneliousJD %s", tr( "for hosting the update files" ));
     txt[i] = new GuiText(text);
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     txt[i]->SetPosition(160, y);
     i++;
-    y += 22;
+    y += 20;
 
-    sprintf(text, "Kinyo %s", tr( "and translaters for language files updates" ));
+    sprintf(text, "Kinyo %s", tr( "and translators for language files updates" ));
     txt[i] = new GuiText(text);
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     txt[i]->SetPosition(160, y);
     i++;
-    y += 22;
+    y += 20;
 
     sprintf(text, "Deak Phreak %s", tr( "for hosting the themes" ));
     txt[i] = new GuiText(text);
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     txt[i]->SetPosition(160, y);
     i++;
-    y += 26;
+    y += 22;
 
     txt[i] = new GuiText(tr( "Special thanks to:" ));
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     txt[i]->SetPosition(10, y);
     i++;
-    y += 22;
+    y += 20;
 
     sprintf(text, "Waninkoko, Kwiirk & Hermes %s", tr( "for the USB Loader source" ));
     txt[i] = new GuiText(text);
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     txt[i]->SetPosition(60, y);
     i++;
-    y += 22;
+    y += 20;
 
     sprintf(text, "Tantric %s", tr( "for his awesome tool LibWiiGui" ));
     txt[i] = new GuiText(text);
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     txt[i]->SetPosition(60, y);
     i++;
-    y += 22;
+    y += 20;
 
     sprintf(text, "Fishears/Nuke %s", tr( "for Ocarina" ));
     txt[i] = new GuiText(text);
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     txt[i]->SetPosition(60, y);
     i++;
-    y += 22;
+    y += 20;
 
     sprintf(text, "WiiPower %s", tr( "for diverse patches" ));
     txt[i] = new GuiText(text);
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     txt[i]->SetPosition(60, y);
     i++;
-    y += 22;
+    y += 20;
 
     sprintf(text, "Oggzee %s", tr( "for FAT/NTFS support" ));
     txt[i] = new GuiText(text);
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     txt[i]->SetPosition(60, y);
     i++;
-    y += 22;
+    y += 20;
 
     for (i = 0; i < numEntries; i++)
         creditsWindowBox.Append(txt[i]);
@@ -690,17 +707,9 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label, cons
 
     }
 
-    GuiTrigger trigZ;
-    trigZ.SetButtonOnlyTrigger(-1, WPAD_NUNCHUK_BUTTON_Z | WPAD_CLASSIC_BUTTON_ZL, PAD_TRIGGER_Z);
-
-    GuiButton screenShotBtn(0, 0);
-    screenShotBtn.SetPosition(0, 0);
-    screenShotBtn.SetTrigger(&trigZ);
-
     promptWindow.Append(&dialogBoxImg);
     promptWindow.Append(&titleTxt);
     promptWindow.Append(&msgTxt);
-    promptWindow.Append(&screenShotBtn);
 
     if (btn1Label) promptWindow.Append(&btn1);
     if (btn2Label) promptWindow.Append(&btn2);
@@ -742,11 +751,6 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label, cons
         else if (btn4.GetState() == STATE_CLICKED)
         {
             choice = 0;
-        }
-        else if (screenShotBtn.GetState() == STATE_CLICKED)
-        {
-            screenShotBtn.ResetState();
-            ScreenShot();
         }
         if (count > 0) count--;
         if (count == 0) choice = 1;
@@ -1693,14 +1697,6 @@ int HBCWindowPrompt(const char *name, const char *coder, const char *version, co
     btn2.SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
     btn2.SetPosition(-40, 2);
 
-    GuiTrigger trigZ;
-    trigZ.SetButtonOnlyTrigger(-1, WPAD_NUNCHUK_BUTTON_Z | WPAD_CLASSIC_BUTTON_ZL, PAD_TRIGGER_Z);
-
-    GuiButton screenShotBtn(0, 0);
-    screenShotBtn.SetPosition(0, 0);
-    screenShotBtn.SetTrigger(&trigZ);
-    promptWindow.Append(&screenShotBtn);
-
     promptWindow.Append(&dialogBoxImg);
     promptWindow.Append(&whiteBoxImg);
     promptWindow.Append(&scrollbarImg);
@@ -1744,13 +1740,6 @@ int HBCWindowPrompt(const char *name, const char *coder, const char *version, co
         else if (btn2.GetState() == STATE_CLICKED)
             choice = 0;
 
-        else if (screenShotBtn.GetState() == STATE_CLICKED)
-        {
-            gprintf("\n\tscreenShotBtn clicked");
-            screenShotBtn.ResetState();
-            ScreenShot();
-            gprintf("...It's easy, mmmmmmKay");
-        }
         else if (arrowUpBtn.GetState() == STATE_CLICKED || arrowUpBtn.GetState() == STATE_HELD)
         {
             long_descriptionTxt.PreviousLine();

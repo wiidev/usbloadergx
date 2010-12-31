@@ -4,6 +4,7 @@
 
 #include "mload/mload.h"
 #include "Controls/DeviceHandler.hpp"
+#include "FileOperations/fileops.h"
 #include "settings/CSettings.h"
 #include "settings/newtitles.h"
 #include "language/gettext.h"
@@ -202,6 +203,12 @@ void ScreenShot()
     //USBLoader_GX_ScreenShot-Month_Day_Hour_Minute_Second_Year.png
     strftime(buffer, 80, "USBLoader_GX_ScreenShot-%b%d%H%M%S%y.png", timeinfo);
     sprintf(buffer2, "%s%s", Settings.ConfigPath, buffer);
+
+    if(!CreateSubfolder(Settings.ConfigPath))
+    {
+        gprintf("Can't create screenshot folder\n");
+        return;
+    }
 
     TakeScreenshot(buffer2);
 }

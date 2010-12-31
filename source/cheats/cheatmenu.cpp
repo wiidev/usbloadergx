@@ -85,7 +85,7 @@ int CheatMenu(const char * gameID)
             titleTxt.SetMaxWidth(350, SCROLL_HORIZONTAL);
             titleTxt.SetPosition(12, 40);
 
-            for (int i = 0; i <= cntcheats; i++)
+            for (int i = 0; i < cntcheats; i++)
             {
                 cheatslst.SetValue(i, "%s", c.getCheatName(i).c_str());
                 cheatslst.SetName(i, "OFF");
@@ -128,7 +128,7 @@ int CheatMenu(const char * gameID)
                     {
                         int selectednrs[30];
                         int x = 0;
-                        for (int i = 0; i <= cntcheats; i++)
+                        for (int i = 0; i < cntcheats; i++)
                         {
                             const char *strCheck = cheatslst.GetName(i);
                             if (strncmp(strCheck, "ON", 2) == 0)
