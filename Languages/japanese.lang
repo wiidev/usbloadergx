@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-31 14:05+0100\n"
+"POT-Creation-Date: 2011-01-01 13:24+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
@@ -708,6 +708,9 @@ msgstr "ﾀｲﾄﾙをｲﾝｽﾄｰﾙ...成功！"
 msgid "Installing wad"
 msgstr "WADをｲﾝｽﾄｰﾙします"
 
+msgid "Issue manager /"
+msgstr ""
+
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
 msgstr "この情報は開発者までお知らせください"
 
@@ -792,6 +795,9 @@ msgstr "ループさせる"
 
 msgid "Loop Sound"
 msgstr "ループさせる"
+
+msgid "Main tester:"
+msgstr ""
 
 msgid "Mar"
 msgstr "3月"
@@ -1357,8 +1363,8 @@ msgstr "領域を選択するか初期化してください"
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 msgstr "%sWiiTDB_URL.txtにURLを保存しました"
 
-msgid "and translaters for language files updates"
-msgstr "/ K-M …日本語への翻訳"
+msgid "and translators for language files updates"
+msgstr ""
 
 msgid "available"
 msgstr "があります"
@@ -1413,6 +1419,9 @@ msgstr "中"
 
 msgid "seconds left"
 msgstr "秒で完了"
+
+#~ msgid "and translaters for language files updates"
+#~ msgstr "/ K-M …日本語への翻訳"
 
 #~ msgid "Insert an SD-Card to save."
 #~ msgstr "保存するためにSDを挿入して下さい"

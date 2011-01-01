@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-31 14:05+0100\n"
+"POT-Creation-Date: 2011-01-01 13:24+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: knife.hu kavid\n"
 "Language-Team: kavid\n"
@@ -708,6 +708,9 @@ msgstr "安装 title... 完成!"
 msgid "Installing wad"
 msgstr "安裝 WAD"
 
+msgid "Issue manager /"
+msgstr ""
+
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
 msgstr "看來你有一些能帮到我们的信息.请将这些信息发送给开发团队.%s - %i"
 
@@ -791,6 +794,9 @@ msgid "Loop Music"
 msgstr ""
 
 msgid "Loop Sound"
+msgstr ""
+
+msgid "Main tester:"
 msgstr ""
 
 msgid "Mar"
@@ -1357,8 +1363,8 @@ msgstr ""
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 msgstr "链接已写入 %sWiiTDB_URL.txt 文件."
 
-msgid "and translaters for language files updates"
-msgstr "和所有语言包更新的翻译者"
+msgid "and translators for language files updates"
+msgstr ""
 
 msgid "available"
 msgstr "允许"
@@ -1413,6 +1419,9 @@ msgstr "的"
 
 msgid "seconds left"
 msgstr "剩余秒数"
+
+#~ msgid "and translaters for language files updates"
+#~ msgstr "和所有语言包更新的翻译者"
 
 #~ msgid "Insert an SD-Card to save."
 #~ msgstr "插入 SD卡以保存."

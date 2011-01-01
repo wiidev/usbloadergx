@@ -140,7 +140,7 @@ static inline bool USBSpinUp()
     // wait 20 sec for the USB to spin up...stupid slow ass HDD
     do
     {
-        started = __io_usbstorage2.startup();
+        started = (__io_usbstorage2.startup() && __io_usbstorage2.isInserted());
         if(started) break;
         usleep(50000);
     }

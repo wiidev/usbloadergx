@@ -105,7 +105,7 @@ GameBrowseMenu::GameBrowseMenu()
     trig1->SetButtonOnlyTrigger(-1, WPAD_BUTTON_1 | WPAD_CLASSIC_BUTTON_Y, 0);
 
     usedSpaceTxt = new GuiText(" ", 18, thColor("r=55 g=190 b=237 a=255 - hdd info color"));
-    usedSpaceTxt->SetAlignment(thAlign("center - hdd info align ver"), thAlign("top - hdd info align hor"));
+    usedSpaceTxt->SetAlignment(thAlign("center - hdd info align hor"), thAlign("top - hdd info align ver"));
     usedSpaceTxt->SetPosition(thInt("0 - hdd info pos x"), thInt("400 - hdd info pos y"));
 
     if(Settings.ShowFreeSpace)
@@ -117,7 +117,7 @@ GameBrowseMenu::GameBrowseMenu()
 
     gamecntTxt = new GuiText((char *) NULL, 18, thColor("r=55 g=190 b=237 a=255 - game count color"));
     gamecntBtn = new GuiButton(100, 18);
-    gamecntBtn->SetAlignment(thAlign("center - game count align ver"), thAlign("top - game count align hor"));
+    gamecntBtn->SetAlignment(thAlign("center - game count align hor"), thAlign("top - game count align ver"));
     gamecntBtn->SetPosition(thInt("0 - game count pos x"), thInt("420 - game count pos y"));
     gamecntBtn->SetLabel(gamecntTxt);
     gamecntBtn->SetEffectGrow();
@@ -292,12 +292,12 @@ GameBrowseMenu::GameBrowseMenu()
 
     GXColor clockColor = thColor("r=138 g=138 b=138 a=240 - clock color");
     clockTimeBack = new GuiText("88:88", 40, (GXColor) {clockColor.r, clockColor.g, clockColor.b, clockColor.a / 6});
-    clockTimeBack->SetAlignment(thAlign("left - clock align ver"), thAlign("top - clock align hor"));
+    clockTimeBack->SetAlignment(thAlign("left - clock align hor"), thAlign("top - clock align ver"));
     clockTimeBack->SetPosition(thInt("275 - clock pos x"), thInt("275 - clock pos y"));
     clockTimeBack->SetFont(clock_ttf, clock_ttf_size);
 
     clockTime = new GuiText("", 40, clockColor);
-    clockTime->SetAlignment(thAlign("left - clock align ver"), thAlign("top - clock align hor"));
+    clockTime->SetAlignment(thAlign("left - clock align hor"), thAlign("top - clock align ver"));
     clockTime->SetPosition(thInt("275 - clock pos x"), thInt("275 - clock pos y"));
     clockTime->SetFont(clock_ttf, clock_ttf_size);
 

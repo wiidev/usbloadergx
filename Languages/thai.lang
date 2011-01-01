@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-31 14:05+0100\n"
+"POT-Creation-Date: 2011-01-01 13:24+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Nitro_subzero \n"
 "Language-Team: Nitro_subzero\n"
@@ -708,6 +708,9 @@ msgstr "ติดตั้ง Title... สำเร็จ!"
 msgid "Installing wad"
 msgstr "ติดตั้ง WAD"
 
+msgid "Issue manager /"
+msgstr ""
+
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
 msgstr "ดูเหมือนว่าคุณมีข้อมูลที่จำเป็นต่อการพัฒนาโปรแกรม กรุณาส่งข้อมูลนั้นให้ทีมพัฒนาด้วย."
 
@@ -792,6 +795,9 @@ msgstr ""
 
 msgid "Loop Sound"
 msgstr "เล่นเสียงซ้ำ"
+
+msgid "Main tester:"
+msgstr ""
 
 msgid "Mar"
 msgstr "มีค."
@@ -1357,8 +1363,8 @@ msgstr ""
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 msgstr "URL ของคุณถูกบันทึกใน %sWiiTDB_URL.txt."
 
-msgid "and translaters for language files updates"
-msgstr "และผู้แปลภาษาสำหรับการอัพเดท"
+msgid "and translators for language files updates"
+msgstr ""
 
 msgid "available"
 msgstr "ว่างอยู่"
@@ -1413,6 +1419,9 @@ msgstr "จาก"
 
 msgid "seconds left"
 msgstr "วินาทีที่เหลือ"
+
+#~ msgid "and translaters for language files updates"
+#~ msgstr "และผู้แปลภาษาสำหรับการอัพเดท"
 
 #~ msgid "Insert an SD-Card to save."
 #~ msgstr "ใส่ SD card เพื่อบันทึก"

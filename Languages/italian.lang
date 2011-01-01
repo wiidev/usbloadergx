@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-31 14:05+0100\n"
+"POT-Creation-Date: 2011-01-01 13:24+0100\n"
 "PO-Revision-Date: 2010-02-21 08:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: FoxeJoe, Cambo\n"
@@ -708,6 +708,9 @@ msgstr "Sto installando il titolo... Ok!"
 msgid "Installing wad"
 msgstr "Sto installando il WAD"
 
+msgid "Issue manager /"
+msgstr ""
+
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
 msgstr "Hai informazioni che potrebbero esserci utili. Per favore, comunicale al team di sviluppo."
 
@@ -792,6 +795,9 @@ msgstr "Musica Ripetuta"
 
 msgid "Loop Sound"
 msgstr "Suono Ripetuto"
+
+msgid "Main tester:"
+msgstr ""
 
 msgid "Mar"
 msgstr "marzo"
@@ -1357,8 +1363,8 @@ msgstr "Occorre selezionare o formattare una partizione"
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 msgstr "L'indirizzo (URL) è stato salvato in %sWiiTDB_URL.txt."
 
-msgid "and translaters for language files updates"
-msgstr "ed i traduttori per la localizzazione del loader"
+msgid "and translators for language files updates"
+msgstr ""
 
 msgid "available"
 msgstr "disponibile"
@@ -1413,6 +1419,9 @@ msgstr "di"
 
 msgid "seconds left"
 msgstr "secondi mancanti"
+
+#~ msgid "and translaters for language files updates"
+#~ msgstr "ed i traduttori per la localizzazione del loader"
 
 #~ msgid "Insert an SD-Card to save."
 #~ msgstr "Inserisci una scheda SD per Salvare."

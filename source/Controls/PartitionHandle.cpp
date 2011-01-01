@@ -333,6 +333,21 @@ void PartitionHandle::AddPartition(const char * name, u64 lba_start, u64 sec_cou
         name = "WBFS";
         part_type = 0xBF;   //Override partition type on WBFS
     }
+    else if(*((u16 *) (buffer + 0x1FE)) == 0x55AA)
+    {
+        //! Partition typ can be missleading the correct partition format. Stupid lazy ass Partition Editors.
+        if((memcmp(buffer + 0x36, "FAT", 3) == 0 || memcmp(buffer + 0x52, "FAT", 3) == 0) &&
+            strncmp(PartFromType(part_type), "FAT", 3) != 0)
+        {
+            name = "FAT32";
+            part_type = 0x0c;
+        }
+        if (memcmp(buffer + 0x03, "NTFS", 4) == 0)
+        {
+            name = "NTFS";
+            part_type = 0x07;
+        }
+    }
 
     PartitionFS PartitionEntrie;
     PartitionEntrie.FSName = name;

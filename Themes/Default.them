@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-27 22:39+0100\n"
+"POT-Creation-Date: 2011-01-01 13:24+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -47,10 +47,10 @@ msgstr ""
 msgid "r=55 g=190 b=237 a=255 - hdd info color"
 msgstr ""
 
-msgid "center - hdd info align ver"
+msgid "center - hdd info align hor"
 msgstr ""
 
-msgid "top - hdd info align hor"
+msgid "top - hdd info align ver"
 msgstr ""
 
 msgid "0 - hdd info pos x"
@@ -62,10 +62,10 @@ msgstr ""
 msgid "r=55 g=190 b=237 a=255 - game count color"
 msgstr ""
 
-msgid "center - game count align ver"
+msgid "center - game count align hor"
 msgstr ""
 
-msgid "top - game count align hor"
+msgid "top - game count align ver"
 msgstr ""
 
 msgid "0 - game count pos x"
@@ -125,10 +125,10 @@ msgstr ""
 msgid "r=138 g=138 b=138 a=240 - clock color"
 msgstr ""
 
-msgid "left - clock align ver"
+msgid "left - clock align hor"
 msgstr ""
 
-msgid "top - clock align hor"
+msgid "top - clock align ver"
 msgstr ""
 
 msgid "275 - clock pos x"

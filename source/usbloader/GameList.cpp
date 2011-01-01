@@ -173,16 +173,17 @@ int GameList::FilterList(const wchar_t * gameFilter)
         {
             if (wcsnicmp(gameName, GameFilter.c_str(), GameFilter.size()) != 0)
             {
-                delete[] gameName;
+                delete [] gameName;
                 continue;
             }
         }
 
         if (gameName)
         {
-            if (wcslen(gameName) > GameFilter.size() && AvailableSearchChars.find(gameName[GameFilter.size()])
-                    == std::string::npos) AvailableSearchChars.push_back(gameName[GameFilter.size()]);
-            delete[] gameName;
+            if (wcslen(gameName) > GameFilter.size() && AvailableSearchChars.find(gameName[GameFilter.size()]) == std::string::npos)
+                AvailableSearchChars.push_back(gameName[GameFilter.size()]);
+
+            delete [] gameName;
         }
 
         FilteredList.push_back(header);

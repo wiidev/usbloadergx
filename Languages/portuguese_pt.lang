@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-31 14:05+0100\n"
+"POT-Creation-Date: 2011-01-01 13:24+0100\n"
 "PO-Revision-Date: 2010-03-22 10:55-0000\n"
 "Last-Translator: Sky8000\n"
 "Language-Team: Sky8000 <sky8000@hotmail.com>\n"
@@ -708,6 +708,9 @@ msgstr "Instalando título... Ok!"
 msgid "Installing wad"
 msgstr "Instalando wad"
 
+msgid "Issue manager /"
+msgstr ""
+
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
 msgstr "Parece que tem informação que pode ser útil. Por favor envie esta informação à equipa de desenvolvimento."
 
@@ -792,6 +795,9 @@ msgstr "Repetir Música"
 
 msgid "Loop Sound"
 msgstr "Repetir Sons"
+
+msgid "Main tester:"
+msgstr ""
 
 msgid "Mar"
 msgstr ""
@@ -1357,8 +1363,8 @@ msgstr "Necessita seleccionar ou formatar uma partição"
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 msgstr "O URL foi guardado em %sWiiTDB_URL.txt."
 
-msgid "and translaters for language files updates"
-msgstr "e aos tradutores pela actualização dos idiomas"
+msgid "and translators for language files updates"
+msgstr ""
 
 msgid "available"
 msgstr "disponível"
@@ -1413,6 +1419,9 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
+
+#~ msgid "and translaters for language files updates"
+#~ msgstr "e aos tradutores pela actualização dos idiomas"
 
 #~ msgid "Insert an SD-Card to save."
 #~ msgstr "Insira um cartão SD para guardar."

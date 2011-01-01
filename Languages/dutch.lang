@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-31 14:05+0100\n"
+"POT-Creation-Date: 2011-01-01 13:24+0100\n"
 "PO-Revision-Date: 2010-04-12 07:37+0100\n"
 "Last-Translator: glowy\n"
 "Language-Team: tj_cool, glowy\n"
@@ -708,6 +708,9 @@ msgstr "Titel installeren... Ok!"
 msgid "Installing wad"
 msgstr "Wad installeren"
 
+msgid "Issue manager /"
+msgstr ""
+
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
 msgstr "Je hebt informatie gevonden die ons kan helpen. Geeft u alstublieft deze info door aan ons ontwikkelingsteam."
 
@@ -792,6 +795,9 @@ msgstr "Herhaal Muziek"
 
 msgid "Loop Sound"
 msgstr "Geluid herhalen"
+
+msgid "Main tester:"
+msgstr ""
 
 msgid "Mar"
 msgstr "Mrt"
@@ -1357,8 +1363,8 @@ msgstr "Je moet een partitie selecteren of formatteren"
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 msgstr "Je URL is opgeslagen in %sWiiTDB_URL.txt."
 
-msgid "and translaters for language files updates"
-msgstr "en vertalers voor taalbestand updates"
+msgid "and translators for language files updates"
+msgstr ""
 
 msgid "available"
 msgstr "beschikbaar"
@@ -1413,6 +1419,9 @@ msgstr "van"
 
 msgid "seconds left"
 msgstr "seconden over"
+
+#~ msgid "and translaters for language files updates"
+#~ msgstr "en vertalers voor taalbestand updates"
 
 #~ msgid "Insert an SD-Card to save."
 #~ msgstr "Voer een SD kaart in om op te slaan."

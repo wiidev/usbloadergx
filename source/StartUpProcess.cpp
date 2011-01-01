@@ -94,7 +94,7 @@ bool StartUpProcess::USBSpinUp()
     // wait 10 sec for the USB to spin up...stupid slow ass HDD
     do
     {
-        started = __io_usbstorage2.startup();
+        started = (__io_usbstorage2.startup() && __io_usbstorage2.isInserted());
         usleep(50000);
 
         if(retries < 400 && retries % 20 == 0)

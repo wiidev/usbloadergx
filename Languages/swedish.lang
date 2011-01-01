@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-31 14:05+0100\n"
+"POT-Creation-Date: 2011-01-01 13:24+0100\n"
 "PO-Revision-Date: 2010-01-19 17:39+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -708,6 +708,9 @@ msgstr "Installerar titel... Ok!"
 msgid "Installing wad"
 msgstr "Installerar wad"
 
+msgid "Issue manager /"
+msgstr ""
+
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
 msgstr "Det verkar som om du har information som kan vara till nytta för oss. Vänligen skicka informationen vidare till DEV team."
 
@@ -792,6 +795,9 @@ msgstr ""
 
 msgid "Loop Sound"
 msgstr "Loopa ljudet"
+
+msgid "Main tester:"
+msgstr ""
 
 msgid "Mar"
 msgstr ""
@@ -1357,8 +1363,8 @@ msgstr "Du måste välja eller formatera en partition"
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 msgstr "Din URL har sparats som %sWiiTDB_URL.txt."
 
-msgid "and translaters for language files updates"
-msgstr "och översättarna."
+msgid "and translators for language files updates"
+msgstr ""
 
 msgid "available"
 msgstr "tillgänglig"
@@ -1413,6 +1419,9 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder kvar"
+
+#~ msgid "and translaters for language files updates"
+#~ msgstr "och översättarna."
 
 #~ msgid "Insert an SD-Card to save."
 #~ msgstr "Sätt i ett SD-kort för att spara."
