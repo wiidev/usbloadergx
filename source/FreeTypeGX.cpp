@@ -21,6 +21,7 @@
  */
 
 #include "FreeTypeGX.h"
+#include "memory/mem2.h"
 
 using namespace std;
 
@@ -228,7 +229,7 @@ void FreeTypeGX::loadGlyphData(FT_Bitmap *bmp, ftgxCharData *charData)
 {
     int length = ((((charData->textureWidth + 3) >> 2) * ((charData->textureHeight + 3) >> 2) * 32 * 2 + 31) & ~31);
 
-    uint8_t * glyphData = (uint8_t *) memalign(32, length);
+    uint8_t * glyphData = (uint8_t *) MEM2_alloc(length);
     if (!glyphData) return;
 
     memset(glyphData, 0x00, length);

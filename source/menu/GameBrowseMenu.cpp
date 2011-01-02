@@ -108,13 +108,6 @@ GameBrowseMenu::GameBrowseMenu()
     usedSpaceTxt->SetAlignment(thAlign("center - hdd info align hor"), thAlign("top - hdd info align ver"));
     usedSpaceTxt->SetPosition(thInt("0 - hdd info pos x"), thInt("400 - hdd info pos y"));
 
-    if(Settings.ShowFreeSpace)
-    {
-        HDDSizeCallback.SetCallback(this, &GameBrowseMenu::UpdateFreeSpace);
-        ThreadedTask::Instance()->AddCallback(&HDDSizeCallback);
-        ThreadedTask::Instance()->Execute();
-    }
-
     gamecntTxt = new GuiText((char *) NULL, 18, thColor("r=55 g=190 b=237 a=255 - game count color"));
     gamecntBtn = new GuiButton(100, 18);
     gamecntBtn->SetAlignment(thAlign("center - game count align hor"), thAlign("top - game count align ver"));
@@ -715,6 +708,13 @@ void GameBrowseMenu::ReloadBrowser()
 int GameBrowseMenu::Show()
 {
     int menu = MENU_NONE;
+
+    if(Settings.ShowFreeSpace)
+    {
+        HDDSizeCallback.SetCallback(this, &GameBrowseMenu::UpdateFreeSpace);
+        ThreadedTask::Instance()->AddCallback(&HDDSizeCallback);
+        ThreadedTask::Instance()->Execute();
+    }
 
     while(menu == MENU_NONE)
     {

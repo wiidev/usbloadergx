@@ -13,6 +13,7 @@
 #include "usbloader/playlog.h"
 #include "usbloader/wbfs.h"
 #include "themes/CTheme.h"
+#include "SoundOperations/SoundHandler.hpp"
 #include "utils/ThreadedTask.hpp"
 #include "audio.h"
 #include "lstub.h"
@@ -67,11 +68,12 @@ void AppCleanUp(void)
     Settings.Save();
 
     ExitGUIThreads();
+    StopGX();
 
-    delete bgMusic;
     delete btnSoundClick;
     delete btnSoundOver;
     delete btnSoundClick2;
+    delete bgMusic;
     delete background;
     delete bgImg;
     delete mainWindow;
@@ -83,9 +85,9 @@ void AppCleanUp(void)
     Theme::CleanUp();
     NewTitles::DestroyInstance();
     ThreadedTask::DestroyInstance();
+    SoundHandler::DestroyInstance();
     DeinitNetwork();
 
-    StopGX();
     ShutdownAudio();
 
     ResourceManager::DestroyInstance();

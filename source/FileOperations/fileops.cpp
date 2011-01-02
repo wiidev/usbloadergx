@@ -146,7 +146,7 @@ extern "C" bool CheckFile(const char * filepath)
     char dirnoslash[strlen(filepath)+2];
     snprintf(dirnoslash, sizeof(dirnoslash), "%s", filepath);
 
-    if(dirnoslash[strlen(dirnoslash)-1] == '/')
+    while(dirnoslash[strlen(dirnoslash)-1] == '/')
         dirnoslash[strlen(dirnoslash)-1] = '\0';
 
 	char * notRoot = strrchr(dirnoslash, '/');

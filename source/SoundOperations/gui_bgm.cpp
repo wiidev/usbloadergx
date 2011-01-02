@@ -24,7 +24,6 @@ GuiBGM::~GuiBGM()
 
     ClearList();
 }
-;
 
 void GuiBGM::SetLoop(u8 l)
 {

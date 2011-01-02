@@ -5,11 +5,8 @@
 #define __MEM2_H_
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
-
-#include <gctypes.h>
 
 void MEM2_init(unsigned int mem2Size);
 void MEM2_cleanup(void);

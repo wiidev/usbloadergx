@@ -47,7 +47,7 @@ ThemeDownloader::ThemeDownloader()
 
     urlTxt = new GuiText(tr( "Themes by www.spiffy360.com" ), 22, (GXColor) {255, 255, 255, 255});
     urlTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-    urlTxt->SetPosition(350, 3);
+    urlTxt->SetPosition(350, 12);
     Append(urlTxt);
 
     for(int i = 0; i < 4; ++i)
