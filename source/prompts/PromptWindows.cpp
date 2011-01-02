@@ -454,9 +454,9 @@ void WindowCredits()
  ***************************************************************************/
 int WindowScreensaver()
 {
-    //! 5 Seconds delay in case the wiimote shutdown was pressed
+    //! 2 Seconds delay in case the wiimote shutdown was pressed
     time_t start = time(0);
-    while(time(0)-start < 5)
+    while(time(0)-start < 2)
     {
         usleep(100);
 
