@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-01 13:24+0100\n"
+"POT-Creation-Date: 2011-01-01 21:47+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Kin8\n"
 "Language-Team: Badablek, Amour, ikya & Kin8\n"
@@ -199,8 +199,9 @@ msgstr "Formatage impossible"
 msgid "Can't create directory"
 msgstr "Création du répertoire impossible"
 
-msgid "Can't create file"
-msgstr "Création du fichier impossible"
+#, c-format
+msgid "Can't create path: %s"
+msgstr ""
 
 msgid "Can't delete:"
 msgstr "Impossible de supprimer:"
@@ -241,9 +242,6 @@ msgstr "Développé par: %s"
 
 msgid "Coding:"
 msgstr "Développement:"
-
-msgid "Connection lost..."
-msgstr "Connexion perdue..."
 
 msgid "Console"
 msgstr ""
@@ -420,17 +418,8 @@ msgstr "Télécharger labels DVD ?"
 msgid "Download Now"
 msgstr "Télécharger"
 
-msgid "Download failed."
-msgstr "Téléchargement échoué."
-
 msgid "Download finished"
 msgstr "Téléchargement terminé"
-
-msgid "Download request failed."
-msgstr "Demande de téléchargement échouée"
-
-msgid "Downloading Page List:"
-msgstr "Chargement Prévisualisations:"
 
 msgid "Downloading covers"
 msgstr ""
@@ -448,6 +437,9 @@ msgid "Downloading image:"
 msgstr "Téléchargement de l'image:"
 
 msgid "Downloading original Discarts"
+msgstr ""
+
+msgid "Downloading pagelist:"
 msgstr ""
 
 msgid "Dutch"
@@ -483,6 +475,10 @@ msgstr ""
 
 msgid "Error reading Disc"
 msgstr "Erreur à la lecture du disque"
+
+#, c-format
+msgid "Error when downloading file: %i"
+msgstr ""
 
 msgid "Error while downloding file"
 msgstr ""
@@ -531,6 +527,10 @@ msgstr "Fév"
 
 msgid "File not found."
 msgstr "Fichier introuvable."
+
+#, c-format
+msgid "Filesize is %i Byte."
+msgstr ""
 
 msgid "Filesize is 0 Byte."
 msgstr ""
@@ -1193,9 +1193,6 @@ msgstr ""
 msgid "The wad installation failed with error %i"
 msgstr ""
 
-msgid "Theme Download Path"
-msgstr "Dossier Thèmes Téléch."
-
 msgid "Theme Downloader"
 msgstr "Téléchargements Thèmes"
 
@@ -1206,6 +1203,9 @@ msgid "Theme Title:"
 msgstr "Titre du Thème:"
 
 msgid "Theme path is changed."
+msgstr ""
+
+msgid "Themes by www.spiffy360.com"
 msgstr ""
 
 msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
@@ -1228,9 +1228,6 @@ msgstr "Info-bulles"
 
 msgid "Transfer failed"
 msgstr ""
-
-msgid "Transfer failed."
-msgstr "Echec Transfert"
 
 msgid "Trying custom Discarts"
 msgstr ""
@@ -1268,8 +1265,8 @@ msgstr "Cette option requiert le déverrouillage de l'interface."
 msgid "Unlocked"
 msgstr "Clic pour verrouiller"
 
-msgid "Unsupported format, try to extract manually."
-msgstr "Format non supporté, essayez d'extraire manuellement."
+msgid "Unsupported format, try to extract manually TempTheme.zip."
+msgstr ""
 
 msgid "Update"
 msgstr "Mise à Jour"
@@ -1419,6 +1416,30 @@ msgstr "sur"
 
 msgid "seconds left"
 msgstr "secondes restantes"
+
+#~ msgid "Can't create file"
+#~ msgstr "Création du fichier impossible"
+
+#~ msgid "Connection lost..."
+#~ msgstr "Connexion perdue..."
+
+#~ msgid "Download failed."
+#~ msgstr "Téléchargement échoué."
+
+#~ msgid "Download request failed."
+#~ msgstr "Demande de téléchargement échouée"
+
+#~ msgid "Downloading Page List:"
+#~ msgstr "Chargement Prévisualisations:"
+
+#~ msgid "Theme Download Path"
+#~ msgstr "Dossier Thèmes Téléch."
+
+#~ msgid "Transfer failed."
+#~ msgstr "Echec Transfert"
+
+#~ msgid "Unsupported format, try to extract manually."
+#~ msgstr "Format non supporté, essayez d'extraire manuellement."
 
 #~ msgid "and translaters for language files updates"
 #~ msgstr "et traducteurs pour les MàJ fichiers langues"

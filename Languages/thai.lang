@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-01 13:24+0100\n"
+"POT-Creation-Date: 2011-01-01 21:47+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Nitro_subzero \n"
 "Language-Team: Nitro_subzero\n"
@@ -199,8 +199,9 @@ msgstr "ไม่สามารถฟอร์แมตได้"
 msgid "Can't create directory"
 msgstr "ไม่สามารถสร้างไดเรคทอรี่ได้"
 
-msgid "Can't create file"
-msgstr "สร้างไฟล์ไม่ได้"
+#, c-format
+msgid "Can't create path: %s"
+msgstr ""
 
 msgid "Can't delete:"
 msgstr "ไม่สามารถลบได้:"
@@ -241,9 +242,6 @@ msgstr "โค๊ดโดย: %s"
 
 msgid "Coding:"
 msgstr "โค๊ด:"
-
-msgid "Connection lost..."
-msgstr ""
 
 msgid "Console"
 msgstr "คอนโซล"
@@ -420,17 +418,8 @@ msgstr "ดาวน์โหลดภาพแผ่น ?"
 msgid "Download Now"
 msgstr "เริ่มการดาวน์โหลด"
 
-msgid "Download failed."
-msgstr "ดาวน์โหลดไม่ได้"
-
 msgid "Download finished"
 msgstr "ดาวน์โหลดเสร็จแล้ว"
-
-msgid "Download request failed."
-msgstr "ดาวน์โหลดไม่ได้"
-
-msgid "Downloading Page List:"
-msgstr "รายการที่กำลังดาวน์โหลด:"
 
 msgid "Downloading covers"
 msgstr ""
@@ -448,6 +437,9 @@ msgid "Downloading image:"
 msgstr "ภาพที่กำลังดาวน์โหลด:"
 
 msgid "Downloading original Discarts"
+msgstr ""
+
+msgid "Downloading pagelist:"
 msgstr ""
 
 msgid "Dutch"
@@ -483,6 +475,10 @@ msgstr ""
 
 msgid "Error reading Disc"
 msgstr "อ่านแผ่นไม่ได้"
+
+#, c-format
+msgid "Error when downloading file: %i"
+msgstr ""
 
 msgid "Error while downloding file"
 msgstr ""
@@ -531,6 +527,10 @@ msgstr "กพ."
 
 msgid "File not found."
 msgstr "ไม่พบไฟล์"
+
+#, c-format
+msgid "Filesize is %i Byte."
+msgstr ""
 
 msgid "Filesize is 0 Byte."
 msgstr ""
@@ -1193,9 +1193,6 @@ msgstr ""
 msgid "The wad installation failed with error %i"
 msgstr ""
 
-msgid "Theme Download Path"
-msgstr "ตำแหน่งที่ดาวน์โหลดธีม"
-
 msgid "Theme Downloader"
 msgstr "ตัวช่วยดาวน์โหลดธีม"
 
@@ -1206,6 +1203,9 @@ msgid "Theme Title:"
 msgstr "ชื่อธีม:"
 
 msgid "Theme path is changed."
+msgstr ""
+
+msgid "Themes by www.spiffy360.com"
 msgstr ""
 
 msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
@@ -1228,9 +1228,6 @@ msgstr "คำแนะนำ"
 
 msgid "Transfer failed"
 msgstr ""
-
-msgid "Transfer failed."
-msgstr "ถ่ายโอนไม่ได้"
 
 msgid "Trying custom Discarts"
 msgstr ""
@@ -1268,8 +1265,8 @@ msgstr "ปลดล๊อค Console ก่อน เพื่อใช้ต�
 msgid "Unlocked"
 msgstr "ปลดล๊อค"
 
-msgid "Unsupported format, try to extract manually."
-msgstr "ไม่สนับสนุนไฟล์นี้ ลองขยายไฟล์เอง"
+msgid "Unsupported format, try to extract manually TempTheme.zip."
+msgstr ""
 
 msgid "Update"
 msgstr "อัพเดท"
@@ -1419,6 +1416,27 @@ msgstr "จาก"
 
 msgid "seconds left"
 msgstr "วินาทีที่เหลือ"
+
+#~ msgid "Can't create file"
+#~ msgstr "สร้างไฟล์ไม่ได้"
+
+#~ msgid "Download failed."
+#~ msgstr "ดาวน์โหลดไม่ได้"
+
+#~ msgid "Download request failed."
+#~ msgstr "ดาวน์โหลดไม่ได้"
+
+#~ msgid "Downloading Page List:"
+#~ msgstr "รายการที่กำลังดาวน์โหลด:"
+
+#~ msgid "Theme Download Path"
+#~ msgstr "ตำแหน่งที่ดาวน์โหลดธีม"
+
+#~ msgid "Transfer failed."
+#~ msgstr "ถ่ายโอนไม่ได้"
+
+#~ msgid "Unsupported format, try to extract manually."
+#~ msgstr "ไม่สนับสนุนไฟล์นี้ ลองขยายไฟล์เอง"
 
 #~ msgid "and translaters for language files updates"
 #~ msgstr "และผู้แปลภาษาสำหรับการอัพเดท"

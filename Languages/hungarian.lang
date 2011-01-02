@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-01 13:24+0100\n"
+"POT-Creation-Date: 2011-01-01 21:47+0100\n"
 "PO-Revision-Date: 2009-12-29 11:05+0100\n"
 "Last-Translator: Springdale\n"
 "Language-Team: Tusk, Springdale\n"
@@ -199,8 +199,9 @@ msgstr "Nem Formázható"
 msgid "Can't create directory"
 msgstr "Mappa nem hozható létre"
 
-msgid "Can't create file"
-msgstr "A fájl nem hozható létre."
+#, c-format
+msgid "Can't create path: %s"
+msgstr ""
 
 msgid "Can't delete:"
 msgstr "Nem törölhetõ"
@@ -241,9 +242,6 @@ msgstr "Kódolás: %s"
 
 msgid "Coding:"
 msgstr "Kódolás:"
-
-msgid "Connection lost..."
-msgstr "A kapcsolat megszakadt..."
 
 msgid "Console"
 msgstr "Konzol"
@@ -420,17 +418,8 @@ msgstr "Lemezfotó letöltése?"
 msgid "Download Now"
 msgstr "Letöltés most"
 
-msgid "Download failed."
-msgstr "Sikertelen letöltés."
-
 msgid "Download finished"
 msgstr "Letöltés kész"
-
-msgid "Download request failed."
-msgstr "Sikertelen letöltési kérelem."
-
-msgid "Downloading Page List:"
-msgstr "Lista letöltése:"
 
 msgid "Downloading covers"
 msgstr ""
@@ -448,6 +437,9 @@ msgid "Downloading image:"
 msgstr "Kép letöltése:"
 
 msgid "Downloading original Discarts"
+msgstr ""
+
+msgid "Downloading pagelist:"
 msgstr ""
 
 msgid "Dutch"
@@ -483,6 +475,10 @@ msgstr ""
 
 msgid "Error reading Disc"
 msgstr "Lemezolvasási hiba"
+
+#, c-format
+msgid "Error when downloading file: %i"
+msgstr ""
 
 msgid "Error while downloding file"
 msgstr ""
@@ -531,6 +527,10 @@ msgstr ""
 
 msgid "File not found."
 msgstr "Fájl nem található"
+
+#, c-format
+msgid "Filesize is %i Byte."
+msgstr ""
 
 msgid "Filesize is 0 Byte."
 msgstr ""
@@ -1193,9 +1193,6 @@ msgstr ""
 msgid "The wad installation failed with error %i"
 msgstr ""
 
-msgid "Theme Download Path"
-msgstr "Téma Letöltés Útvonal"
-
 msgid "Theme Downloader"
 msgstr "Témák Letöltése"
 
@@ -1206,6 +1203,9 @@ msgid "Theme Title:"
 msgstr "Téma címe:"
 
 msgid "Theme path is changed."
+msgstr ""
+
+msgid "Themes by www.spiffy360.com"
 msgstr ""
 
 msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
@@ -1228,9 +1228,6 @@ msgstr "Súgók"
 
 msgid "Transfer failed"
 msgstr ""
-
-msgid "Transfer failed."
-msgstr "Átviteli hiba."
 
 msgid "Trying custom Discarts"
 msgstr ""
@@ -1268,8 +1265,8 @@ msgstr "Zárolva a program, ezt nem használhatod."
 msgid "Unlocked"
 msgstr "Feloldva"
 
-msgid "Unsupported format, try to extract manually."
-msgstr "Nem támogatott formátum, próbáld manuálisan kicsomagolni."
+msgid "Unsupported format, try to extract manually TempTheme.zip."
+msgstr ""
 
 msgid "Update"
 msgstr "Frissítés"
@@ -1419,6 +1416,30 @@ msgstr "./"
 
 msgid "seconds left"
 msgstr "hátralévõ másodperc"
+
+#~ msgid "Can't create file"
+#~ msgstr "A fájl nem hozható létre."
+
+#~ msgid "Connection lost..."
+#~ msgstr "A kapcsolat megszakadt..."
+
+#~ msgid "Download failed."
+#~ msgstr "Sikertelen letöltés."
+
+#~ msgid "Download request failed."
+#~ msgstr "Sikertelen letöltési kérelem."
+
+#~ msgid "Downloading Page List:"
+#~ msgstr "Lista letöltése:"
+
+#~ msgid "Theme Download Path"
+#~ msgstr "Téma Letöltés Útvonal"
+
+#~ msgid "Transfer failed."
+#~ msgstr "Átviteli hiba."
+
+#~ msgid "Unsupported format, try to extract manually."
+#~ msgstr "Nem támogatott formátum, próbáld manuálisan kicsomagolni."
 
 #~ msgid "and translaters for language files updates"
 #~ msgstr "valamint minden fordító"

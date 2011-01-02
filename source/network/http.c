@@ -124,12 +124,15 @@ struct block read_message(s32 connection)
         if (offset >= buffer.size)
         {
             buffer.size += HTTP_BUFFER_GROWTH;
-            buffer.data = realloc(buffer.data, buffer.size);
+            u8 * tmp = realloc(buffer.data, buffer.size);
 
-            if (buffer.data == NULL)
+            if (tmp == NULL)
             {
+                free(buffer.data);
                 return emptyblock;
             }
+            else
+                buffer.data = tmp;
         }
     }
 
@@ -196,8 +199,7 @@ struct block downloadfile(const char *url)
 
     //Form a nice request header to send to the webserver
     char* headerformat = "GET %s HTTP/1.0\r\nHost: %s\r\nReferer: %s\r\nUser-Agent: USBLoaderGX r%s\r\n\r\n";
-    ;
-    char header[strlen(headerformat) + strlen(path) + strlen(domain) + strlen(domain)];
+    char header[strlen(headerformat) + strlen(path) + strlen(domain)*2 + 100];
     sprintf(header, headerformat, path, domain, domain, GetRev());
 
     //Do the request and get the response

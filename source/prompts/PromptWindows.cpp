@@ -236,8 +236,7 @@ void WindowCredits()
     int numEntries = 24;
     GuiText * txt[numEntries];
 
-    txt[i] = new GuiText(tr( "Credits" ), 26, ( GXColor )
-    {   255, 255, 255, 255});
+    txt[i] = new GuiText(tr( "Credits" ), 26, ( GXColor ) {255, 255, 255, 255});
     txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     txt[i]->SetPosition(0, 12);
     i++;
@@ -253,28 +252,24 @@ void WindowCredits()
     snprintf(SvnRev, sizeof(SvnRev), "Rev%s   IOS%u (Rev %u)", GetRev(), IOS_GetVersion(), IOS_GetRevision());
 #endif
 
-    txt[i] = new GuiText(SvnRev, 16, ( GXColor )
-    {   255, 255, 255, 255});
+    txt[i] = new GuiText(SvnRev, 16, ( GXColor ) {255, 255, 255, 255});
     txt[i]->SetAlignment(ALIGN_RIGHT, ALIGN_TOP);
     txt[i]->SetPosition(0, y);
     i++;
     y += 34;
 
-    txt[i] = new GuiText("USB Loader GX", 24, ( GXColor )
-    {   255, 255, 255, 255});
+    txt[i] = new GuiText("USB Loader GX", 24, ( GXColor ) {255, 255, 255, 255});
     txt[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     txt[i]->SetPosition(0, y);
     i++;
     y += 24;
 
-    txt[i] = new GuiText(tr( "Official Site:" ), 20, ( GXColor )
-    {   255, 255, 255, 255});
+    txt[i] = new GuiText(tr( "Official Site:" ), 20, ( GXColor ) {255, 255, 255, 255});
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     txt[i]->SetPosition(10, y);
     i++;
 
-    txt[i] = new GuiText("http://code.google.com/p/usbloader-gui/", 20, ( GXColor )
-    {   255, 255, 255, 255});
+    txt[i] = new GuiText("http://code.google.com/p/usbloader-gui/", 20, ( GXColor ) {255, 255, 255, 255});
     txt[i]->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     txt[i]->SetPosition(160, y);
     i++;
@@ -418,12 +413,19 @@ void WindowCredits()
 
     while (!exit)
     {
+        usleep(12000);
+
+        if (shutdown)
+            Sys_Shutdown();
+        if (reset)
+            Sys_Reboot();
+
         angle++;
         if (angle > 360) angle = 0;
-        usleep(12000);
         starImg.SetAngle(angle);
-        if (ButtonsPressed() != 0) exit = true;
 
+        if (ButtonsPressed() != 0)
+            exit = true;
     }
 
     creditsMusic->Stop();
@@ -452,6 +454,16 @@ void WindowCredits()
  ***************************************************************************/
 int WindowScreensaver()
 {
+    //! 5 Seconds delay in case the wiimote shutdown was pressed
+    time_t start = time(0);
+    while(time(0)-start < 5)
+    {
+        usleep(100);
+
+        if(shutdown)
+            return 0;
+    }
+
     gprintf("WindowScreenSaver()\n");
     bool exit = false;
 
@@ -479,6 +491,11 @@ int WindowScreensaver()
 
     while (!exit)
     {
+        if (shutdown)
+            Sys_Shutdown();
+        if (reset)
+            Sys_Reboot();
+
         if (IsWpadConnected())
         {
             exit = true;

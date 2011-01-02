@@ -44,7 +44,6 @@ CustomPathsSM::CustomPathsSM()
     Options->SetName(Idx++, tr("TXT Cheatcodes Path"));
     Options->SetName(Idx++, tr("DOL Path"));
     Options->SetName(Idx++, tr("Homebrew Apps Path"));
-    Options->SetName(Idx++, tr("Theme Download Path"));
     Options->SetName(Idx++, tr("BCA Codes Path"));
     Options->SetName(Idx++, tr("WIP Patches Path"));
     Options->SetName(Idx++, tr("Languagefiles Path"));
@@ -85,9 +84,6 @@ void CustomPathsSM::SetOptionValues()
 
     //! Settings: Homebrew Apps Path
     Options->SetValue(Idx++, Settings.homebrewapps_path);
-
-    //! Settings: Theme Download Path
-    Options->SetValue(Idx++, Settings.theme_downloadpath);
 
     //! Settings: BCA Codes Path
     Options->SetValue(Idx++, Settings.BcaCodepath);
@@ -204,13 +200,6 @@ int CustomPathsSM::GetMenuInternal()
     {
         titleTxt->SetText(tr( "Homebrew Apps Path" ));
         ChangePath(Settings.homebrewapps_path, sizeof(Settings.homebrewapps_path));
-    }
-
-    //! Settings: Theme Download Path
-    else if (ret == ++Idx)
-    {
-        titleTxt->SetText(tr( "Theme Download Path" ));
-        ChangePath(Settings.theme_downloadpath, sizeof(Settings.theme_downloadpath));
     }
 
     //! Settings: BCA Codes Path

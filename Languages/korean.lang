@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-01 13:24+0100\n"
+"POT-Creation-Date: 2011-01-01 21:47+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: nextos@korea.com\n"
 "Language-Team: \n"
@@ -199,7 +199,8 @@ msgstr "포맷할 수 없습니다."
 msgid "Can't create directory"
 msgstr "디렉토리를 만들 수 없습니다"
 
-msgid "Can't create file"
+#, c-format
+msgid "Can't create path: %s"
 msgstr ""
 
 msgid "Can't delete:"
@@ -241,9 +242,6 @@ msgstr "Coded by: %s"
 
 msgid "Coding:"
 msgstr "코디:"
-
-msgid "Connection lost..."
-msgstr ""
 
 msgid "Console"
 msgstr "콘솔"
@@ -420,17 +418,8 @@ msgstr "디스크이미지를 다운로드 할까요?"
 msgid "Download Now"
 msgstr "다운로드 시작"
 
-msgid "Download failed."
-msgstr ""
-
 msgid "Download finished"
 msgstr "다운로드 완료"
-
-msgid "Download request failed."
-msgstr ""
-
-msgid "Downloading Page List:"
-msgstr ""
 
 msgid "Downloading covers"
 msgstr ""
@@ -448,6 +437,9 @@ msgid "Downloading image:"
 msgstr ""
 
 msgid "Downloading original Discarts"
+msgstr ""
+
+msgid "Downloading pagelist:"
 msgstr ""
 
 msgid "Dutch"
@@ -483,6 +475,10 @@ msgstr ""
 
 msgid "Error reading Disc"
 msgstr "디스크 읽기 오류"
+
+#, c-format
+msgid "Error when downloading file: %i"
+msgstr ""
 
 msgid "Error while downloding file"
 msgstr ""
@@ -531,6 +527,10 @@ msgstr "2월"
 
 msgid "File not found."
 msgstr "파일을 찾을수가 없네요."
+
+#, c-format
+msgid "Filesize is %i Byte."
+msgstr ""
 
 msgid "Filesize is 0 Byte."
 msgstr ""
@@ -1193,9 +1193,6 @@ msgstr ""
 msgid "The wad installation failed with error %i"
 msgstr ""
 
-msgid "Theme Download Path"
-msgstr ""
-
 msgid "Theme Downloader"
 msgstr ""
 
@@ -1206,6 +1203,9 @@ msgid "Theme Title:"
 msgstr ""
 
 msgid "Theme path is changed."
+msgstr ""
+
+msgid "Themes by www.spiffy360.com"
 msgstr ""
 
 msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
@@ -1227,9 +1227,6 @@ msgid "Tooltips"
 msgstr "Tooltips"
 
 msgid "Transfer failed"
-msgstr ""
-
-msgid "Transfer failed."
 msgstr ""
 
 msgid "Trying custom Discarts"
@@ -1268,7 +1265,7 @@ msgstr "이 옵션을 사용하기 위해 콘솔을 잠금해제"
 msgid "Unlocked"
 msgstr "잠금해제"
 
-msgid "Unsupported format, try to extract manually."
+msgid "Unsupported format, try to extract manually TempTheme.zip."
 msgstr ""
 
 msgid "Update"

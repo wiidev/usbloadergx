@@ -98,7 +98,20 @@ bool Theme::Load(const char * theme_file_path)
     if(ptr) *ptr = '\0';
 
     snprintf(theme_path, sizeof(theme_path), "%s/%s", theme_path, Foldername);
-    Resources::LoadFiles(theme_path);
+    if(!Resources::LoadFiles(theme_path))
+    {
+        const char * ThemeFilename = strrchr(theme_file_path, '/')+1;
+        char Filename[255];
+        snprintf(Filename, sizeof(Filename), ThemeFilename);
+
+        char * fileext = strrchr(Filename, '.');
+        if(fileext) *fileext = 0;
+
+        char * ptr = strrchr(theme_path, '/');
+        *ptr = 0;
+        snprintf(theme_path, sizeof(theme_path), "%s/%s", theme_path, Filename);
+        Resources::LoadFiles(theme_path)
+    }
 
     //! Override font.ttf with the theme font.ttf if it exists in the image folder
     char FontPath[300];

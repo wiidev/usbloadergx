@@ -60,6 +60,39 @@ void UpdatePads()
 }
 
 /****************************************************************************
+ * SetWPADTimeout
+ ***************************************************************************/
+void SetWPADTimeout()
+{
+    switch (Settings.screensaver)
+    {
+        case 0:
+            WPAD_SetIdleTimeout(0xFFFFFF);
+            break;
+        case 1:
+            WPAD_SetIdleTimeout(180);
+            break;
+        case 2:
+            WPAD_SetIdleTimeout(300);
+            break;
+        case 3:
+            WPAD_SetIdleTimeout(600);
+            break;
+        case 4:
+            WPAD_SetIdleTimeout(1200);
+            break;
+        case 5:
+            WPAD_SetIdleTimeout(1800);
+            break;
+        case 6:
+            WPAD_SetIdleTimeout(3600);
+            break;
+        default:
+            break;
+    }
+}
+
+/****************************************************************************
  * SetupPads
  *
  * Sets up userInput triggers for use
@@ -77,6 +110,8 @@ void SetupPads()
     {
         userInput[i].chan = i;
     }
+
+    SetWPADTimeout();
 }
 
 /****************************************************************************

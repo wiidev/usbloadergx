@@ -38,7 +38,8 @@ extern struct discHdr *dvdheader;
 extern int cntMissFiles;
 
 static int lastSelectedGame = 0;
-static int Exiting = false;
+static bool WiiMoteInitiated = false;
+static bool Exiting = false;
 
 GameBrowseMenu::GameBrowseMenu()
     : GuiWindow(screenwidth, screenheight)
@@ -56,7 +57,6 @@ GameBrowseMenu::GameBrowseMenu()
     gameCoverImg = NULL;
     GameIDTxt = NULL;
     GameRegionTxt = NULL;
-    ScreensaverTimer = 0;
     WDVD_GetCoverStatus(&DiscDriveCoverOld);
     wString oldFilter(gameList.GetCurrentFilter());
     gameList.FilterList(oldFilter.c_str());
@@ -293,12 +293,12 @@ GameBrowseMenu::GameBrowseMenu()
     GXColor clockColor = thColor("r=138 g=138 b=138 a=240 - clock color");
     clockTimeBack = new GuiText("88:88", 40, (GXColor) {clockColor.r, clockColor.g, clockColor.b, clockColor.a / 6});
     clockTimeBack->SetAlignment(thAlign("left - clock align hor"), thAlign("top - clock align ver"));
-    clockTimeBack->SetPosition(thInt("275 - clock pos x"), thInt("275 - clock pos y"));
+    clockTimeBack->SetPosition(thInt("275 - clock pos x"), thInt("335 - clock pos y"));
     clockTimeBack->SetFont(clock_ttf, clock_ttf_size);
 
     clockTime = new GuiText("", 40, clockColor);
     clockTime->SetAlignment(thAlign("left - clock align hor"), thAlign("top - clock align ver"));
-    clockTime->SetPosition(thInt("275 - clock pos x"), thInt("275 - clock pos y"));
+    clockTime->SetPosition(thInt("275 - clock pos x"), thInt("335 - clock pos y"));
     clockTime->SetFont(clock_ttf, clock_ttf_size);
 
     ToolBar.push_back(favoriteBtn);
@@ -1031,16 +1031,13 @@ int GameBrowseMenu::MainLoop()
         OpenClickedGame();
     }
 
-    if (!IsWpadConnected() && Settings.screensaver != 0)
+    if (!IsWpadConnected())
     {
-        if(ScreensaverTimer == 0)
-            ScreensaverTimer = time(0);
-         //30s delay to not start screensaver on startup
-        if(time(0)-ScreensaverTimer > 30)
+        if(Settings.screensaver != 0 && WiiMoteInitiated)
             WindowScreensaver();
     }
-    else
-        ScreensaverTimer = 0;
+    else if(!WiiMoteInitiated)
+        WiiMoteInitiated = true;
 
 	return returnMenu;
 }

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-01 13:24+0100\n"
+"POT-Creation-Date: 2011-01-01 21:47+0100\n"
 "PO-Revision-Date: 2010-01-19 17:39+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -199,8 +199,9 @@ msgstr "Kan inte formateras"
 msgid "Can't create directory"
 msgstr "Kan inte skapa mapp"
 
-msgid "Can't create file"
-msgstr "Kunde inte skapa fil"
+#, c-format
+msgid "Can't create path: %s"
+msgstr ""
 
 msgid "Can't delete:"
 msgstr "Kunde inte radera:"
@@ -241,9 +242,6 @@ msgstr "Kodad av: %s"
 
 msgid "Coding:"
 msgstr "Kodning:"
-
-msgid "Connection lost..."
-msgstr "Uppkoppling förlorad..."
 
 msgid "Console"
 msgstr "Konsol"
@@ -420,17 +418,8 @@ msgstr "Ladda ner skivbild?"
 msgid "Download Now"
 msgstr "Ladda ner nu"
 
-msgid "Download failed."
-msgstr "Nedladdning misslyckades."
-
 msgid "Download finished"
 msgstr "Nedladdning klar"
-
-msgid "Download request failed."
-msgstr "Nedladdnings begäran misslyckades."
-
-msgid "Downloading Page List:"
-msgstr "Laddar ner lista:"
 
 msgid "Downloading covers"
 msgstr ""
@@ -448,6 +437,9 @@ msgid "Downloading image:"
 msgstr "Laddar ner bild:"
 
 msgid "Downloading original Discarts"
+msgstr ""
+
+msgid "Downloading pagelist:"
 msgstr ""
 
 msgid "Dutch"
@@ -483,6 +475,10 @@ msgstr ""
 
 msgid "Error reading Disc"
 msgstr "Fel vid läsning av skiva"
+
+#, c-format
+msgid "Error when downloading file: %i"
+msgstr ""
 
 msgid "Error while downloding file"
 msgstr ""
@@ -531,6 +527,10 @@ msgstr ""
 
 msgid "File not found."
 msgstr "Kunde inte hitta fil"
+
+#, c-format
+msgid "Filesize is %i Byte."
+msgstr ""
 
 msgid "Filesize is 0 Byte."
 msgstr ""
@@ -1193,9 +1193,6 @@ msgstr ""
 msgid "The wad installation failed with error %i"
 msgstr ""
 
-msgid "Theme Download Path"
-msgstr "Tema-mapp nedladdade"
-
 msgid "Theme Downloader"
 msgstr "Tema Nedladdare"
 
@@ -1206,6 +1203,9 @@ msgid "Theme Title:"
 msgstr "Tema titel:"
 
 msgid "Theme path is changed."
+msgstr ""
+
+msgid "Themes by www.spiffy360.com"
 msgstr ""
 
 msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
@@ -1228,9 +1228,6 @@ msgstr "Verktygstips"
 
 msgid "Transfer failed"
 msgstr ""
-
-msgid "Transfer failed."
-msgstr "Flytt misslyckades."
 
 msgid "Trying custom Discarts"
 msgstr ""
@@ -1268,8 +1265,8 @@ msgstr "Lås upp konsolen för denna inställning."
 msgid "Unlocked"
 msgstr "Upplåst"
 
-msgid "Unsupported format, try to extract manually."
-msgstr "Format stöds inte, försök extrahera manuelt."
+msgid "Unsupported format, try to extract manually TempTheme.zip."
+msgstr ""
 
 msgid "Update"
 msgstr "Uppdatera"
@@ -1419,6 +1416,30 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder kvar"
+
+#~ msgid "Can't create file"
+#~ msgstr "Kunde inte skapa fil"
+
+#~ msgid "Connection lost..."
+#~ msgstr "Uppkoppling förlorad..."
+
+#~ msgid "Download failed."
+#~ msgstr "Nedladdning misslyckades."
+
+#~ msgid "Download request failed."
+#~ msgstr "Nedladdnings begäran misslyckades."
+
+#~ msgid "Downloading Page List:"
+#~ msgstr "Laddar ner lista:"
+
+#~ msgid "Theme Download Path"
+#~ msgstr "Tema-mapp nedladdade"
+
+#~ msgid "Transfer failed."
+#~ msgstr "Flytt misslyckades."
+
+#~ msgid "Unsupported format, try to extract manually."
+#~ msgstr "Format stöds inte, försök extrahera manuelt."
 
 #~ msgid "and translaters for language files updates"
 #~ msgstr "och översättarna."

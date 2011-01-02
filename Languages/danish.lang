@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-01 13:24+0100\n"
+"POT-Creation-Date: 2011-01-01 21:47+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: dorf[dk]\n"
 "Language-Team: dorf[dk]\n"
@@ -199,8 +199,9 @@ msgstr "Kan ikke formatteres"
 msgid "Can't create directory"
 msgstr "Kan ikke lave ny mappe"
 
-msgid "Can't create file"
-msgstr "Kan ikke oprette fil"
+#, c-format
+msgid "Can't create path: %s"
+msgstr ""
 
 msgid "Can't delete:"
 msgstr "Kan ikke slettes:"
@@ -241,9 +242,6 @@ msgstr "Programmeret af: %s"
 
 msgid "Coding:"
 msgstr "Programmering:"
-
-msgid "Connection lost..."
-msgstr "Forbindelsen er væk..."
 
 msgid "Console"
 msgstr "Konsol"
@@ -420,17 +418,8 @@ msgstr "Download DVD-billede?"
 msgid "Download Now"
 msgstr "Download nu"
 
-msgid "Download failed."
-msgstr "Download mislykkedes."
-
 msgid "Download finished"
 msgstr "Download færdig"
-
-msgid "Download request failed."
-msgstr "Anmodning om download mislykkedes."
-
-msgid "Downloading Page List:"
-msgstr "Downloader side:"
 
 msgid "Downloading covers"
 msgstr ""
@@ -448,6 +437,9 @@ msgid "Downloading image:"
 msgstr "Downloader billede:"
 
 msgid "Downloading original Discarts"
+msgstr ""
+
+msgid "Downloading pagelist:"
 msgstr ""
 
 msgid "Dutch"
@@ -483,6 +475,10 @@ msgstr ""
 
 msgid "Error reading Disc"
 msgstr "DVDen kunne ikke læses"
+
+#, c-format
+msgid "Error when downloading file: %i"
+msgstr ""
 
 msgid "Error while downloding file"
 msgstr ""
@@ -531,6 +527,10 @@ msgstr ""
 
 msgid "File not found."
 msgstr "Fil ikke fundet."
+
+#, c-format
+msgid "Filesize is %i Byte."
+msgstr ""
 
 msgid "Filesize is 0 Byte."
 msgstr ""
@@ -1193,9 +1193,6 @@ msgstr ""
 msgid "The wad installation failed with error %i"
 msgstr ""
 
-msgid "Theme Download Path"
-msgstr "Sti til download af temaer"
-
 msgid "Theme Downloader"
 msgstr "Tema-downloader"
 
@@ -1206,6 +1203,9 @@ msgid "Theme Title:"
 msgstr "Tematitel:"
 
 msgid "Theme path is changed."
+msgstr ""
+
+msgid "Themes by www.spiffy360.com"
 msgstr ""
 
 msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
@@ -1228,9 +1228,6 @@ msgstr "Værktøjstips"
 
 msgid "Transfer failed"
 msgstr ""
-
-msgid "Transfer failed."
-msgstr "Overførslen mislykkedes"
 
 msgid "Trying custom Discarts"
 msgstr ""
@@ -1268,8 +1265,8 @@ msgstr "Lås op for konsollen for at benytte denne indstilling."
 msgid "Unlocked"
 msgstr "Låst op"
 
-msgid "Unsupported format, try to extract manually."
-msgstr "Formatet er ikke understøttet - prøv at udpakke manuelt."
+msgid "Unsupported format, try to extract manually TempTheme.zip."
+msgstr ""
 
 msgid "Update"
 msgstr "Opdatér"
@@ -1419,6 +1416,30 @@ msgstr "af"
 
 msgid "seconds left"
 msgstr "sekunder tilbage"
+
+#~ msgid "Can't create file"
+#~ msgstr "Kan ikke oprette fil"
+
+#~ msgid "Connection lost..."
+#~ msgstr "Forbindelsen er væk..."
+
+#~ msgid "Download failed."
+#~ msgstr "Download mislykkedes."
+
+#~ msgid "Download request failed."
+#~ msgstr "Anmodning om download mislykkedes."
+
+#~ msgid "Downloading Page List:"
+#~ msgstr "Downloader side:"
+
+#~ msgid "Theme Download Path"
+#~ msgstr "Sti til download af temaer"
+
+#~ msgid "Transfer failed."
+#~ msgstr "Overførslen mislykkedes"
+
+#~ msgid "Unsupported format, try to extract manually."
+#~ msgstr "Formatet er ikke understøttet - prøv at udpakke manuelt."
 
 #~ msgid "and translaters for language files updates"
 #~ msgstr "og oversætterne for opdateringer til sprogfilerne"

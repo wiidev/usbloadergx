@@ -329,6 +329,7 @@ void FlyingButtonsMenu::ShowButtonsEffects(int effect, int effect_speed)
     for(int i = FirstItem; i < (int) MainButton.size() && i < FirstItem+DISPLAY_BUTTONS; ++i)
     {
         MainButton[i]->StopEffect();
+        MainButton[i]->SetEffectGrow();
         MainButton[i]->SetEffect(effect, effect_speed);
     }
 

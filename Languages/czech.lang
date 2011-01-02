@@ -1,14 +1,14 @@
 # USB Loader GX language source file.
-# czech.lang - r828
+# czech.lang - r1000
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-01 13:24+0100\n"
+"POT-Creation-Date: 2011-01-02 10:19+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
-"Last-Translator: David Jelinek (djelinek@hotmail.com) \n"
-"Language-Team: r823 - last version on http://djelinek.sweb.cz/_USBLoderGX/czech.lang \n"
+"Last-Translator: David Jelinek (djelinek@hotmail.com) e->e,r->r,u->u, c->c \n"
+"Language-Team: r1000 - last version on http://djelinek.sweb.cz/_USBLoderGX/czech.lang \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -164,10 +164,10 @@ msgid "AutoInit Network"
 msgstr "Automatický start síte"
 
 msgid "BCA Codes Path"
-msgstr ""
+msgstr "Cesta pro BCA kódy"
 
 msgid "BETA revisions"
-msgstr ""
+msgstr "BETA revize"
 
 msgid "Back"
 msgstr "Zpet"
@@ -199,8 +199,9 @@ msgstr "Nelze naformátovat"
 msgid "Can't create directory"
 msgstr "Nelze vytvorit adresár"
 
-msgid "Can't create file"
-msgstr "Nelze vytvořit soubor"
+#, c-format
+msgid "Can't create path: %s"
+msgstr ""
 
 msgid "Can't delete:"
 msgstr "Nelze smazat:"
@@ -212,7 +213,7 @@ msgid "Cannot write to destination."
 msgstr ""
 
 msgid "Change Play Path"
-msgstr ""
+msgstr "Zmena cesty prehrávání"
 
 msgid "Cheatfile is blank"
 msgstr "Soubor s cheaty je prázdný"
@@ -241,9 +242,6 @@ msgstr "Naprogramoval: %s"
 
 msgid "Coding:"
 msgstr "Programování:"
-
-msgid "Connection lost..."
-msgstr ""
 
 msgid "Console"
 msgstr "Konzole"
@@ -385,7 +383,7 @@ msgid "Do you really want to delete:"
 msgstr "Opravdu smazat:"
 
 msgid "Do you want to apply it now?"
-msgstr ""
+msgstr "Prejete si aplikovat zmeny hned?"
 
 msgid "Do you want to change language?"
 msgstr "Prejete si zmenit jazyk?"
@@ -420,17 +418,8 @@ msgstr "Stáhnout potisk DVD?"
 msgid "Download Now"
 msgstr "Stáhnout nyní"
 
-msgid "Download failed."
-msgstr "Stažení selhalo."
-
 msgid "Download finished"
 msgstr "Stažení dokonceno"
-
-msgid "Download request failed."
-msgstr "Požadavek na stažení selhal."
-
-msgid "Downloading Page List:"
-msgstr "Stahuji stránku seznamu:"
 
 msgid "Downloading covers"
 msgstr ""
@@ -450,6 +439,9 @@ msgstr "Stahuji obrázek:"
 msgid "Downloading original Discarts"
 msgstr ""
 
+msgid "Downloading pagelist:"
+msgstr ""
+
 msgid "Dutch"
 msgstr "Dánsky"
 
@@ -460,7 +452,7 @@ msgid "ERROR:"
 msgstr "CHYBA:"
 
 msgid "ERROR: Can't set up theme."
-msgstr ""
+msgstr "CHYBA: Nelze nastavit téma."
 
 msgid "English"
 msgstr "Anglicky"
@@ -483,6 +475,10 @@ msgstr ""
 
 msgid "Error reading Disc"
 msgstr "Nelze císt disk"
+
+#, c-format
+msgid "Error when downloading file: %i"
+msgstr ""
 
 msgid "Error while downloding file"
 msgstr ""
@@ -532,6 +528,10 @@ msgstr "Ún"
 msgid "File not found."
 msgstr "Soubor nenalezen"
 
+#, c-format
+msgid "Filesize is %i Byte."
+msgstr ""
+
 msgid "Filesize is 0 Byte."
 msgstr ""
 
@@ -572,7 +572,7 @@ msgid "Full shutdown"
 msgstr ""
 
 msgid "GAMEID_Gamename"
-msgstr ""
+msgstr "IdHry_NazevHry"
 
 msgid "GCT Cheatcodes Path"
 msgstr "Cesta pro cheat kódy"
@@ -584,7 +584,7 @@ msgid "GUI Settings"
 msgstr "Nastavení GUI"
 
 msgid "GXtheme.cfg not found in any subfolder."
-msgstr ""
+msgstr "GXtheme.cfg nenalezen v žádném adresári."
 
 msgid "Game ID"
 msgstr "ID hry"
@@ -620,7 +620,7 @@ msgid "Game is already installed:"
 msgstr "Hra je již nainstalována:"
 
 msgid "Gamename [GAMEID]"
-msgstr ""
+msgstr "Název hry [IdHry]"
 
 msgid "Games"
 msgstr "Hry"
@@ -659,7 +659,7 @@ msgid "How to Shutdown?"
 msgstr "Jakým zpusobem ukoncit?"
 
 msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
-msgstr ""
+msgstr "Pokud nemáte WiFi, stisknete 1 pro získání URL k WiiTDB.zip"
 
 #, c-format
 msgid "Incoming file %0.2fKB"
@@ -691,7 +691,7 @@ msgid "Install directories"
 msgstr ""
 
 msgid "Install partitions"
-msgstr ""
+msgstr "Instalacní oddíly"
 
 msgid "Installing content... Ok!"
 msgstr "Instaluji obsah... Ok!"
@@ -788,13 +788,13 @@ msgid "Locked"
 msgstr "Zamceno"
 
 msgid "Loop Directory"
-msgstr ""
+msgstr "Adresárová smycka"
 
 msgid "Loop Music"
-msgstr ""
+msgstr "Hudební smycka"
 
 msgid "Loop Sound"
-msgstr "Zvuková smyčka"
+msgstr "Zvuková smycka"
 
 msgid "Main tester:"
 msgstr ""
@@ -803,7 +803,7 @@ msgid "Mar"
 msgstr "Brez"
 
 msgid "Mark new games"
-msgstr ""
+msgstr "Oznacir nové hry"
 
 msgid "May"
 msgstr "Kvet"
@@ -815,10 +815,10 @@ msgid "Missing files"
 msgstr "Chybející soubory"
 
 msgid "Mount DVD drive"
-msgstr "Pripojit DVD mechaniku"
+msgstr "Spustit z DVD"
 
 msgid "Music Loop Mode"
-msgstr ""
+msgstr "Mód hudební smycky"
 
 msgid "Music Volume"
 msgstr "Hlasitost hudby"
@@ -872,13 +872,13 @@ msgid "No themes found on the site."
 msgstr "Žádné téma nebylo nalezeno na serveru."
 
 msgid "None"
-msgstr ""
+msgstr "Žádný"
 
 msgid "Normal"
 msgstr "Normální"
 
 msgid "Not a WAD file."
-msgstr ""
+msgstr "Nejedná se o WAD soubor."
 
 msgid "Not a Wii Disc"
 msgstr "Toto není Wii disk"
@@ -977,16 +977,16 @@ msgid "Play Count"
 msgstr "Spušteno"
 
 msgid "Play Next"
-msgstr ""
+msgstr "Prehrát další"
 
 msgid "Play Once"
-msgstr ""
+msgstr "Prehrát jednou"
 
 msgid "Play Previous"
-msgstr ""
+msgstr "Prehrát predchozí"
 
 msgid "Playing Music:"
-msgstr ""
+msgstr "Prehrávání hudby:"
 
 msgid "Please wait..."
 msgstr "Cekejte prosím..."
@@ -1007,7 +1007,7 @@ msgid "Quick Boot"
 msgstr "Rychlé zavedení"
 
 msgid "Random Directory Music"
-msgstr ""
+msgstr "Náhodné prehrávání hudby"
 
 msgid "Reading WAD data... Ok!"
 msgstr "Nacítám WAD data... Ok!"
@@ -1025,13 +1025,13 @@ msgid "Reload SD"
 msgstr "Znovunactení SD"
 
 msgid "Remove update"
-msgstr ""
+msgstr "Odstranit aktualizaci"
 
 msgid "Rename Game on WBFS"
 msgstr "Prejmenovat hru na WBFS"
 
 msgid "Reset BG Music"
-msgstr ""
+msgstr "Obnovit hudbu na pozadí"
 
 msgid "Reset Playcounter"
 msgstr "Vynulovat cítac spuštení"
@@ -1079,7 +1079,7 @@ msgid "Screensaver"
 msgstr "Sporic obrazovky"
 
 msgid "Select"
-msgstr ""
+msgstr "Vyber"
 
 msgid "Select DOL Offset"
 msgstr ""
@@ -1163,7 +1163,7 @@ msgid "Successfully Updated"
 msgstr "Úspešne zaktualizováno"
 
 msgid "Successfully Updated thanks to www.techjawa.com"
-msgstr ""
+msgstr "Úspešne zaktualizováno díky www.techjawa.com"
 
 msgid "Successfully deleted:"
 msgstr "Úspešne smazáno:"
@@ -1193,9 +1193,6 @@ msgstr ""
 msgid "The wad installation failed with error %i"
 msgstr ""
 
-msgid "Theme Download Path"
-msgstr "Cesta pro uložení témat"
-
 msgid "Theme Downloader"
 msgstr "Stahování témat"
 
@@ -1208,6 +1205,9 @@ msgstr "Název tématu"
 msgid "Theme path is changed."
 msgstr ""
 
+msgid "Themes by www.spiffy360.com"
+msgstr ""
+
 msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
 msgstr ""
 
@@ -1215,7 +1215,7 @@ msgid "This IOS was not found on the titles list. If you are sure you have it in
 msgstr ""
 
 msgid "Time left:"
-msgstr "Zbývající cas:"
+msgstr "Zbývá:"
 
 msgid "Title Launcher"
 msgstr "Spouštec kanálu"
@@ -1228,9 +1228,6 @@ msgstr "Popisky"
 
 msgid "Transfer failed"
 msgstr ""
-
-msgid "Transfer failed."
-msgstr "Prenos selhal"
 
 msgid "Trying custom Discarts"
 msgstr ""
@@ -1268,8 +1265,8 @@ msgstr "Odemknete konzoli pro tuto akci."
 msgid "Unlocked"
 msgstr "Odemceno"
 
-msgid "Unsupported format, try to extract manually."
-msgstr "Nepodporovaný formát"
+msgid "Unsupported format, try to extract manually TempTheme.zip."
+msgstr ""
 
 msgid "Update"
 msgstr "Aktualizace"
@@ -1312,7 +1309,7 @@ msgid "Video Mode"
 msgstr "Video mód"
 
 msgid "WIP Patches Path"
-msgstr ""
+msgstr "Cesta k WIP patchum"
 
 msgid "Waiting..."
 msgstr "Cekám..."
@@ -1357,7 +1354,7 @@ msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 1
 msgstr ""
 
 msgid "You need to select or format a partition"
-msgstr ""
+msgstr "Musíte vybrat nebo naformátovat oddíl"
 
 #, c-format
 msgid "Your URL has been saved in %sWiiTDB_URL.txt."
@@ -1382,7 +1379,7 @@ msgid "files not found on the server!"
 msgstr "souboru nenalezeno na serveru"
 
 msgid "for FAT/NTFS support"
-msgstr ""
+msgstr "pro FAT/NTFS podporu"
 
 msgid "for Ocarina"
 msgstr "za Ocarina"
@@ -1420,56 +1417,29 @@ msgstr "z "
 msgid "seconds left"
 msgstr "sekund zbývá"
 
-#~ msgid "and translaters for language files updates"
-#~ msgstr "a prekladatele pro aktualizaci jazykových souborů"
+#~ msgid "%s : %s May not boot correctly if your System Menu is not up to date."
+#~ msgstr "%s : %s Nemusí nabehnout správne pokud System Menu není aktuální."
 
-#~ msgid "Insert an SD-Card to save."
-#~ msgstr "Vložte SD kartu pro uložení."
-
-#~ msgid "Insert an SD-Card to use this option."
-#~ msgstr "Vložte SD kartu pro tuto možnost"
-
-#~ msgid "No SD-Card inserted!"
-#~ msgstr "Není vložena SD karta"
-
-#~ msgid "Waiting for USB Device"
-#~ msgstr "Cekám na zarízení USB"
-
-#~ msgid "Back to Loader"
-#~ msgstr "Zpet do spouštece"
+#~ msgid "All partitions"
+#~ msgstr "Všechny oddíly"
 
 #~ msgid "An Error occured"
 #~ msgstr "Došlo k chybe"
 
-#~ msgid "Checking for Updates"
-#~ msgstr "Zjištuji dostupné aktualiazce"
+#~ msgid "Are you sure you want to enable Parent Control?"
+#~ msgstr "Prejete si povolit Rodicovskou kontrolu"
 
-#~ msgid "Downloading"
-#~ msgstr "Stahování"
+#~ msgid "BCA Codes Path changed"
+#~ msgstr "Cesta pro BCA kódy zmenena"
 
-#~ msgid "The wad file was installed.  But It could not be deleted from the SD card."
-#~ msgstr "WAD soubor byl nainstalován, ale nelze smazat z SD karty"
-
-#~ msgid "The wad installation failed with error %ld"
-#~ msgstr "Instalace WAD souboru selhala s chybou %ld"
-
-#~ msgid "Unable to open the wad that was just downloaded (%s)."
-#~ msgstr "Nelze otevrít WAD, který byl nyní stažen (%s)."
-
-#~ msgid "Update to"
-#~ msgstr "Aktualizováno na"
-
-#~ msgid "Updating"
-#~ msgstr "Aktualizuji"
-
-#~ msgid "Updating Language Files..."
-#~ msgstr "Aktualizuji jazykové soubory..."
-
-#~ msgid "Updating WiiTDB.zip"
-#~ msgstr "Aktualizuji WiiTDB.zip"
+#~ msgid "Back to Loader"
+#~ msgstr "Zpet do spouštece"
 
 #~ msgid "Back to Wii Menu"
-#~ msgstr "Zpet do Wii nabídky"
+#~ msgstr "Zpet do Wii Menu"
+
+#~ msgid "Can't create file"
+#~ msgstr "Nelze vytvorit soubor"
 
 #~ msgid "Channels"
 #~ msgstr "Kanály"
@@ -1477,8 +1447,14 @@ msgstr "sekund zbývá"
 #~ msgid "Checking existing artwork"
 #~ msgstr "Kontroluji existující kresby"
 
+#~ msgid "Checking for Updates"
+#~ msgstr "Zjištuji dostupné aktualiazce"
+
 #~ msgid "Confirm"
 #~ msgstr "Potvrdit"
+
+#~ msgid "Connection lost..."
+#~ msgstr "Spojení prerušeno ..."
 
 #~ msgid "Could not find a WBFS partition."
 #~ msgstr "Nemohu nalézt WBFS oddíl."
@@ -1507,17 +1483,53 @@ msgstr "sekund zbývá"
 #~ msgid "Do you want to retry for 30 secs?"
 #~ msgstr "Chcete to zkusit znovu za 30 sekund?"
 
+#~ msgid "Download failed."
+#~ msgstr "Stažení selhalo."
+
+#~ msgid "Download request failed."
+#~ msgstr "Požadavek na stažení selhal."
+
+#~ msgid "Downloading"
+#~ msgstr "Stahování"
+
+#~ msgid "Downloading Page List:"
+#~ msgstr "Stahuji stránku seznamu:"
+
+#~ msgid "Enable Parental Control"
+#~ msgstr "Polit rodicovskou kontrolu"
+
+#~ msgid "FAT: Use directories"
+#~ msgstr "FAT: Použít adresáre"
+
 #~ msgid "Force"
 #~ msgstr "Síla"
 
 #~ msgid "GCT Cheatcodes Path changed"
 #~ msgstr "Cesta pro cheat kódy zmenena"
 
+#~ msgid "Game partition"
+#~ msgstr "Oddíl s hrama"
+
 #~ msgid "Homebrew Appspath changed"
 #~ msgstr "Cesta pro Homebrew aplikace zmenena"
 
 #~ msgid "Insert an SD-Card to download images."
 #~ msgstr "Vložte SD kartu pro stažení potisku DVD."
+
+#~ msgid "Insert an SD-Card to save."
+#~ msgstr "Vložte SD kartu pro uložení."
+
+#~ msgid "Insert an SD-Card to use this option."
+#~ msgstr "Vložte SD kartu pro tuto možnost"
+
+#~ msgid "Install 1:1 Copy"
+#~ msgstr "Instalovat kopii 1:1"
+
+#~ msgid "Install not possible"
+#~ msgstr "Instalace není možná"
+
+#~ msgid "Invalid PIN code"
+#~ msgstr "Špatný PIN kód"
 
 #~ msgid "Most likely it has dimensions that are not evenly divisible by 4."
 #~ msgstr "Nejspíše má velikost, která není delitelná 4."
@@ -1531,11 +1543,17 @@ msgstr "sekund zbývá"
 #~ msgid "No Favorites"
 #~ msgstr "Žádné oblíbené"
 
+#~ msgid "No SD-Card inserted!"
+#~ msgstr "Není vložena SD karta"
+
 #~ msgid "No USB Device"
 #~ msgstr "Žádné zarízení USB"
 
 #~ msgid "No USB Device found."
 #~ msgstr "Nebylo nalezeno zarízení USB"
+
+#~ msgid "No WBFS or FAT/NTFS partition found"
+#~ msgstr "Nebyl nalezen oddíl WBFS nebo FAT/NTFS"
 
 #~ msgid "Normal Covers"
 #~ msgstr "Normální obaly"
@@ -1546,6 +1564,12 @@ msgstr "sekund zbývá"
 #~ msgid "Not a DOL/ELF file."
 #~ msgstr "To není DOL/ELF soubor."
 
+#~ msgid "Parental Control disabled"
+#~ msgstr "Rodicovská kontrola neaktivní"
+
+#~ msgid "Reset to standard BGM?"
+#~ msgstr "Obnovit puvodní hudbu ns pozadí"
+
 #~ msgid "Save Failed"
 #~ msgstr "Uložení selhalo"
 
@@ -1555,14 +1579,56 @@ msgstr "sekund zbývá"
 #~ msgid "TXT Cheatcodes Path changed"
 #~ msgstr "Cesta k TXT cheatum zmenena"
 
+#~ msgid "The wad file was installed.  But It could not be deleted from the SD card."
+#~ msgstr "WAD soubor byl nainstalován, ale nelze smazat z SD karty"
+
+#~ msgid "The wad installation failed with error %ld"
+#~ msgstr "Instalace WAD souboru selhala s chybou %ld"
+
+#~ msgid "Theme Download Path"
+#~ msgstr "Cesta pro uložení témat"
+
 #~ msgid "Theme Download Path changed"
 #~ msgstr "Cesta pro uložení témat zmenena"
 
 #~ msgid "Theme Path Changed"
 #~ msgstr "Cesta k tématum zmenena"
 
+#~ msgid "Transfer failed."
+#~ msgstr "Prenos selhal"
+
+#~ msgid "USB Loader GX will only run with Hermes CIOS rev 4! Please make sure you have revision 4 installed!"
+#~ msgstr "USB Loader GX funguje pouze s Hermes CIOS rev 4! Ujistete se, že máte nainstalovanou revizi 4!"
+
+#~ msgid "Unable to open the wad that was just downloaded (%s)."
+#~ msgstr "Nelze otevrít WAD, který byl nyní stažen (%s)."
+
+#~ msgid "Unlock Parental Control"
+#~ msgstr "Odemnknout rodicovskou kontrolu"
+
+#~ msgid "Unsupported format, try to extract manually."
+#~ msgstr "Nepodporovaný formát"
+
 #~ msgid "Update Path changed."
 #~ msgstr "Cesta pro aktualizaci zmenena"
+
+#~ msgid "Update to"
+#~ msgstr "Aktualizováno na"
+
+#~ msgid "Updating"
+#~ msgstr "Aktualizuji"
+
+#~ msgid "Updating Language Files..."
+#~ msgstr "Aktualizuji jazykové soubory..."
+
+#~ msgid "Updating WiiTDB.zip"
+#~ msgstr "Aktualizuji WiiTDB.zip"
+
+#~ msgid "WIP Patches Path changed"
+#~ msgstr "Cesta k WIP patchum zmenena"
+
+#~ msgid "Waiting for USB Device"
+#~ msgstr "Cekám na zarízení USB"
 
 #~ msgid "WiiTDB Path changed."
 #~ msgstr "Cesta k WiiTDB zmenena"
@@ -1573,8 +1639,17 @@ msgstr "sekund zbývá"
 #~ msgid "You are choosing to display favorites and you do not have any selected."
 #~ msgstr "Vybíráte zobrazení oblíbených, ale žádné jste dosud nevybral"
 
+#~ msgid "You are using NTFS filesystem. Due to possible write errors to a NTFS partition, installing a game is not possible."
+#~ msgstr "Používáte systém souboru NTFS. Kvuli možným problémum pri zápisu není možná instalace her."
+
+#~ msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
+#~ msgstr "Nemáte povolenou rodicovskou kontrolu. Jestliže ji chcete používat, musíte ji povolit ve Wii nastavení."
+
 #~ msgid "You have attempted to load a bad image"
 #~ msgstr "Pokusili jste se nahrát špatný obraz"
+
+#~ msgid "and translaters for language files updates"
+#~ msgstr "a prekladatele pro aktualizaci jazykových souboru"
 
 #~ msgid "does not exist!  You Messed something up, Idiot."
 #~ msgstr "neexistuje. Neco jsi zvoral ty pako."

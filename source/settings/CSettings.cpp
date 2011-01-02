@@ -57,7 +57,6 @@ void CSettings::SetDefault()
     snprintf(titlestxt_path, sizeof(titlestxt_path), "%s", ConfigPath);
     snprintf(languagefiles_path, sizeof(languagefiles_path), "%slanguage/", ConfigPath);
     snprintf(update_path, sizeof(update_path), "%s/apps/usbloader_gx/", BootDevice);
-    snprintf(theme_downloadpath, sizeof(theme_downloadpath), "%sthemes/", ConfigPath);
     snprintf(homebrewapps_path, sizeof(homebrewapps_path), "%s/apps/", BootDevice);
     snprintf(Cheatcodespath, sizeof(Cheatcodespath), "%s/codes/", BootDevice);
     snprintf(TxtCheatcodespath, sizeof(TxtCheatcodespath), "%s/txtcodes/", BootDevice);
@@ -202,7 +201,6 @@ bool CSettings::Save()
     fprintf(file, "wiilight = %d\n ", wiilight);
     fprintf(file, "gameDisplay = %d\n ", gameDisplay);
     fprintf(file, "update_path = %s\n ", update_path);
-    fprintf(file, "theme_downloadpath = %s\n ", theme_downloadpath);
     fprintf(file, "homebrewapps_path = %s\n ", homebrewapps_path);
     fprintf(file, "Cheatcodespath = %s\n ", Cheatcodespath);
     fprintf(file, "BcaCodepath = %s\n ", BcaCodepath);
@@ -528,11 +526,6 @@ bool CSettings::SetSetting(char *name, char *value)
     else if (strcmp(name, "update_path") == 0)
     {
         strcpy(update_path, value);
-        return true;
-    }
-    else if (strcmp(name, "theme_downloadpath") == 0)
-    {
-        strcpy(theme_downloadpath, value);
         return true;
     }
     else if (strcmp(name, "homebrewapps_path") == 0)

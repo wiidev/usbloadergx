@@ -190,11 +190,12 @@ void Resources::Clear()
     }
 }
 
-void Resources::LoadFiles(const char * path)
+bool Resources::LoadFiles(const char * path)
 {
     if(!path)
-        return;
+        return false;
 
+    bool result = false;
     Clear();
 
     char fullpath[1024];
@@ -212,8 +213,11 @@ void Resources::LoadFiles(const char * path)
 
             RecourceFiles[i].CustomFile = buffer;
             RecourceFiles[i].CustomFileSize = (u32) filesize;
+            result = true;
         }
     }
+
+    return result;
 }
 
 const u8 * Resources::GetFile(const char * filename)

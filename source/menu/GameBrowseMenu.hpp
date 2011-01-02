@@ -35,7 +35,6 @@ class GameBrowseMenu : public GuiWindow
         int gameSelectedOld;
         int gameClicked;
         time_t lastrawtime;
-        time_t ScreensaverTimer;
         bool show_searchwindow;
         wchar_t searchChar;
         std::vector<GuiButton *> ToolBar;

@@ -6,15 +6,17 @@
 #ifndef ___THEMELIST_H_
 #define ___THEMELIST_H_
 
+#include <vector>
+#include <string>
 #include "network/networkops.h"
 #include "network/http.h"
 
 typedef struct _theme_info
 {
-        char *themetitle;
-        char *author;
-        char *imagelink;
-        char *downloadlink;
+        std::string themetitle;
+        std::string author;
+        std::string imagelink;
+        std::string downloadlink;
         u8 rating;
 } Theme_Info;
 
@@ -26,29 +28,24 @@ class Theme_List
         Theme_List(const char *url);
         //!Destructor
         ~Theme_List();
-        //!Get Themes into a struct from the XML file amount
-        bool ParseXML(const u8 * xmlfile);
-        //!Get Theme amount
-        int CountThemes(const u8 * xmlfile);
         //! Get the a theme title
         //!\param list index
-        const char * GetThemeTitle(int index);
+        const char * GetThemeTitle(int index) const;
         //! Get the author of the theme
         //!\param list index
-        const char * GetThemeAuthor(int index);
+        const char * GetThemeAuthor(int index) const;
         //! Get the author of the theme
         //!\param list index
-        const char * GetImageLink(int index);
+        const char * GetImageLink(int index) const;
         //! Get the download link of the theme
         //!\param list index
-        const char * GetDownloadLink(int index);
+        const char * GetDownloadLink(int index) const;
         //! Get the number of links counted
-        int GetThemeCount();
-        //! Sort list
-        void SortList();
+        int GetThemeCount() const { return ThemesList.size(); };
     protected:
-        int themescount;
-        Theme_Info *Theme;
+        //!Get Themes into a struct from the XML file amount
+        bool ParseXML(const u8 * xmlfile);
+        std::vector<Theme_Info> ThemesList;
 };
 
 #endif

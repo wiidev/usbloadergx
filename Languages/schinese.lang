@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-01 13:24+0100\n"
+"POT-Creation-Date: 2011-01-01 21:47+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: knife.hu kavid\n"
 "Language-Team: kavid\n"
@@ -199,7 +199,8 @@ msgstr "无法格式化"
 msgid "Can't create directory"
 msgstr "无法建立目录"
 
-msgid "Can't create file"
+#, c-format
+msgid "Can't create path: %s"
 msgstr ""
 
 msgid "Can't delete:"
@@ -241,9 +242,6 @@ msgstr "编程: %s"
 
 msgid "Coding:"
 msgstr "编程:"
-
-msgid "Connection lost..."
-msgstr ""
 
 msgid "Console"
 msgstr "控制台"
@@ -420,17 +418,8 @@ msgstr "下载光盘图片?"
 msgid "Download Now"
 msgstr "现在下载"
 
-msgid "Download failed."
-msgstr ""
-
 msgid "Download finished"
 msgstr "下载完成"
-
-msgid "Download request failed."
-msgstr ""
-
-msgid "Downloading Page List:"
-msgstr ""
 
 msgid "Downloading covers"
 msgstr ""
@@ -448,6 +437,9 @@ msgid "Downloading image:"
 msgstr ""
 
 msgid "Downloading original Discarts"
+msgstr ""
+
+msgid "Downloading pagelist:"
 msgstr ""
 
 msgid "Dutch"
@@ -483,6 +475,10 @@ msgstr ""
 
 msgid "Error reading Disc"
 msgstr "读取光盘错误"
+
+#, c-format
+msgid "Error when downloading file: %i"
+msgstr ""
 
 msgid "Error while downloding file"
 msgstr ""
@@ -531,6 +527,10 @@ msgstr "二月"
 
 msgid "File not found."
 msgstr "找不到文件"
+
+#, c-format
+msgid "Filesize is %i Byte."
+msgstr ""
 
 msgid "Filesize is 0 Byte."
 msgstr ""
@@ -1193,9 +1193,6 @@ msgstr ""
 msgid "The wad installation failed with error %i"
 msgstr ""
 
-msgid "Theme Download Path"
-msgstr ""
-
 msgid "Theme Downloader"
 msgstr ""
 
@@ -1206,6 +1203,9 @@ msgid "Theme Title:"
 msgstr ""
 
 msgid "Theme path is changed."
+msgstr ""
+
+msgid "Themes by www.spiffy360.com"
 msgstr ""
 
 msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
@@ -1227,9 +1227,6 @@ msgid "Tooltips"
 msgstr "提示信息"
 
 msgid "Transfer failed"
-msgstr ""
-
-msgid "Transfer failed."
 msgstr ""
 
 msgid "Trying custom Discarts"
@@ -1268,7 +1265,7 @@ msgstr "请解锁后使用此功能"
 msgid "Unlocked"
 msgstr "已解锁"
 
-msgid "Unsupported format, try to extract manually."
+msgid "Unsupported format, try to extract manually TempTheme.zip."
 msgstr ""
 
 msgid "Update"

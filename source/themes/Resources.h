@@ -17,7 +17,7 @@ class Resources
 {
     public:
         static void Clear();
-        static void LoadFiles(const char * path);
+        static bool LoadFiles(const char * path);
         static const u8 * GetFile(const char * filename);
         static const u32 GetFileSize(const char * filename);
         static GuiImageData * GetImageData(const char * filename);

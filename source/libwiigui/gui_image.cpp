@@ -229,10 +229,17 @@ void GuiImage::SetImage(GuiImageData * img)
         image = NULL;
     }
 
-    image = img->GetImage();
-    width = img->GetWidth();
-    height = img->GetHeight();
+    image = NULL;
+    width = NULL;
+    height = NULL;
     imgType = IMAGE_DATA;
+
+    if(img)
+    {
+        image = img->GetImage();
+        width = img->GetWidth();
+        height = img->GetHeight();
+    }
 }
 
 void GuiImage::SetImage(u8 * img, int w, int h)

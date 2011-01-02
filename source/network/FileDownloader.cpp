@@ -205,16 +205,16 @@ int DownloadFileToPath(const char *orig_url, const char *dest, bool UseFilename)
     char filename[255];
     memset(filename, 0, sizeof(filename));
 
-    u32 filesize = network_request(connection, header, (char *) &filename);
+    int filesize = network_request(connection, header, (char *) &filename);
 
-    if(!filesize)
+    if(filesize <= 0)
     {
         net_close(connection);
-        ShowError(tr("Filesize is 0 Byte."));
+        ShowError(tr("Filesize is %i Byte."), filesize);
         return -5;
     }
 
-    u32 blocksize = 10*1024;
+    int blocksize = 10*1024;
 
     u8 *buffer = (u8 *) malloc(blocksize);
     if(!buffer)
@@ -252,7 +252,7 @@ int DownloadFileToPath(const char *orig_url, const char *dest, bool UseFilename)
         return -7;
     }
 
-    u32 done = 0;
+    int done = 0;
 
     while(done < filesize)
     {

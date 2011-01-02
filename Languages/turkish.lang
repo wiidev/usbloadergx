@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-01 13:24+0100\n"
+"POT-Creation-Date: 2011-01-01 21:47+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: omercigingelini\n"
 "Language-Team: omercigingelini\n"
@@ -199,8 +199,9 @@ msgstr "Biçimlendirilemiyor"
 msgid "Can't create directory"
 msgstr "Klasör olusturulamiyor"
 
-msgid "Can't create file"
-msgstr "Dosya oluşturulamıyor"
+#, c-format
+msgid "Can't create path: %s"
+msgstr ""
 
 msgid "Can't delete:"
 msgstr "Silinemiyor"
@@ -241,9 +242,6 @@ msgstr "%s tarafından kodlandı"
 
 msgid "Coding:"
 msgstr "Kodlama:"
-
-msgid "Connection lost..."
-msgstr ""
 
 msgid "Console"
 msgstr "Konsol"
@@ -420,17 +418,8 @@ msgstr "Disk resmi indirilsin mi?"
 msgid "Download Now"
 msgstr "Şimdi indir"
 
-msgid "Download failed."
-msgstr "İndirme başarısız"
-
 msgid "Download finished"
 msgstr "Indirme tamamlandı"
-
-msgid "Download request failed."
-msgstr "İndirme isteği başarısız"
-
-msgid "Downloading Page List:"
-msgstr "İndirilen Sayfa Listesi:"
 
 msgid "Downloading covers"
 msgstr ""
@@ -448,6 +437,9 @@ msgid "Downloading image:"
 msgstr "İndirilen resim:"
 
 msgid "Downloading original Discarts"
+msgstr ""
+
+msgid "Downloading pagelist:"
 msgstr ""
 
 msgid "Dutch"
@@ -483,6 +475,10 @@ msgstr ""
 
 msgid "Error reading Disc"
 msgstr "Disk Okuma Hatası"
+
+#, c-format
+msgid "Error when downloading file: %i"
+msgstr ""
 
 msgid "Error while downloding file"
 msgstr ""
@@ -531,6 +527,10 @@ msgstr "Şub"
 
 msgid "File not found."
 msgstr "Dosya bulunamadı"
+
+#, c-format
+msgid "Filesize is %i Byte."
+msgstr ""
 
 msgid "Filesize is 0 Byte."
 msgstr ""
@@ -1193,9 +1193,6 @@ msgstr ""
 msgid "The wad installation failed with error %i"
 msgstr ""
 
-msgid "Theme Download Path"
-msgstr "Tema İndirme Yolu"
-
 msgid "Theme Downloader"
 msgstr "Tema İndirici"
 
@@ -1206,6 +1203,9 @@ msgid "Theme Title:"
 msgstr "Tema Başlığı:"
 
 msgid "Theme path is changed."
+msgstr ""
+
+msgid "Themes by www.spiffy360.com"
 msgstr ""
 
 msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
@@ -1228,9 +1228,6 @@ msgstr "Yardımlar"
 
 msgid "Transfer failed"
 msgstr ""
-
-msgid "Transfer failed."
-msgstr "Transfer başarısız"
 
 msgid "Trying custom Discarts"
 msgstr ""
@@ -1268,8 +1265,8 @@ msgstr "Bu seçeneği kullanmak için konsol kilidini açın"
 msgid "Unlocked"
 msgstr "Kilit açıldı"
 
-msgid "Unsupported format, try to extract manually."
-msgstr "Desteklenmeyen format,elle çıkartmayı deneyin"
+msgid "Unsupported format, try to extract manually TempTheme.zip."
+msgstr ""
 
 msgid "Update"
 msgstr "Güncelleme"
@@ -1419,6 +1416,27 @@ msgstr "./"
 
 msgid "seconds left"
 msgstr "saniye kaldı"
+
+#~ msgid "Can't create file"
+#~ msgstr "Dosya oluşturulamıyor"
+
+#~ msgid "Download failed."
+#~ msgstr "İndirme başarısız"
+
+#~ msgid "Download request failed."
+#~ msgstr "İndirme isteği başarısız"
+
+#~ msgid "Downloading Page List:"
+#~ msgstr "İndirilen Sayfa Listesi:"
+
+#~ msgid "Theme Download Path"
+#~ msgstr "Tema İndirme Yolu"
+
+#~ msgid "Transfer failed."
+#~ msgstr "Transfer başarısız"
+
+#~ msgid "Unsupported format, try to extract manually."
+#~ msgstr "Desteklenmeyen format,elle çıkartmayı deneyin"
 
 #~ msgid "and translaters for language files updates"
 #~ msgstr "ve dil dosya güncellemelerinin çevirmenleri"

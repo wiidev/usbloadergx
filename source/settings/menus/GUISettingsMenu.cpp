@@ -316,6 +316,8 @@ int GuiSettingsMenu::GetMenuInternal()
     else if (ret == ++Idx)
     {
         if (++Settings.screensaver >= SCREENSAVER_MAX) Settings.screensaver = 0;
+
+        SetWPADTimeout();
     }
 
     //! Settings: Mark new games

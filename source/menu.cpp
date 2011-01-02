@@ -21,7 +21,7 @@
 #include "settings/Settings.h"
 #include "settings/CGameSettings.h"
 #include "themes/CTheme.h"
-#include "themes/Theme_Downloader.h"
+#include "themes/ThemeDownloader.h"
 #include "usbloader/disc.h"
 #include "usbloader/GameList.h"
 #include "usbloader/MountGamePartition.h"
@@ -135,29 +135,7 @@ static void * UpdateGUI(void *arg)
             mainWindow->Update(&userInput[i]);
 
         if (bgMusic) bgMusic->UpdateState();
-
-        switch (Settings.screensaver)
-        {
-            case 1:
-                WPad_SetIdleTime(180);
-                break;
-            case 2:
-                WPad_SetIdleTime(300);
-                break;
-            case 3:
-                WPad_SetIdleTime(600);
-                break;
-            case 4:
-                WPad_SetIdleTime(1200);
-                break;
-            case 5:
-                WPad_SetIdleTime(1800);
-                break;
-            case 6:
-                WPad_SetIdleTime(3600);
-                break;
-        }
-    }
+	}
 
     for (i = 5; i < 255; i += 10)
     {
@@ -250,7 +228,7 @@ int MainMenu(int menu)
                 currentMenu = MenuSettings();
                 break;
             case MENU_THEMEDOWNLOADER:
-                currentMenu = Theme_Downloader();
+                currentMenu = ThemeDownloader::Run();
                 break;
             case MENU_HOMEBREWBROWSE:
                 currentMenu = MenuHomebrewBrowse();

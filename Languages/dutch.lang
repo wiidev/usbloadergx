@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-01 13:24+0100\n"
+"POT-Creation-Date: 2011-01-01 21:47+0100\n"
 "PO-Revision-Date: 2010-04-12 07:37+0100\n"
 "Last-Translator: glowy\n"
 "Language-Team: tj_cool, glowy\n"
@@ -199,8 +199,9 @@ msgstr "Kan niet geformatteerd worden"
 msgid "Can't create directory"
 msgstr "Kan map niet aanmaken"
 
-msgid "Can't create file"
-msgstr "Kan bestand niet aanmaken"
+#, c-format
+msgid "Can't create path: %s"
+msgstr ""
 
 msgid "Can't delete:"
 msgstr "Kan niet verwijderen:"
@@ -241,9 +242,6 @@ msgstr "Geprogrammeerd door: %s"
 
 msgid "Coding:"
 msgstr "Codering:"
-
-msgid "Connection lost..."
-msgstr "Verbinding verbroken..."
 
 msgid "Console"
 msgstr ""
@@ -420,17 +418,8 @@ msgstr "Disk label downloaden?"
 msgid "Download Now"
 msgstr "Download nu"
 
-msgid "Download failed."
-msgstr "Download mislukt."
-
 msgid "Download finished"
 msgstr "Download voltooid"
-
-msgid "Download request failed."
-msgstr "Download aanvraag mislukt."
-
-msgid "Downloading Page List:"
-msgstr "Download pagina lijst:"
 
 msgid "Downloading covers"
 msgstr ""
@@ -448,6 +437,9 @@ msgid "Downloading image:"
 msgstr "Afbeelding downloaden:"
 
 msgid "Downloading original Discarts"
+msgstr ""
+
+msgid "Downloading pagelist:"
 msgstr ""
 
 msgid "Dutch"
@@ -483,6 +475,10 @@ msgstr ""
 
 msgid "Error reading Disc"
 msgstr "Fout bij lezen disk"
+
+#, c-format
+msgid "Error when downloading file: %i"
+msgstr ""
 
 msgid "Error while downloding file"
 msgstr ""
@@ -531,6 +527,10 @@ msgstr ""
 
 msgid "File not found."
 msgstr "Bestand niet gevonden."
+
+#, c-format
+msgid "Filesize is %i Byte."
+msgstr ""
 
 msgid "Filesize is 0 Byte."
 msgstr ""
@@ -1193,9 +1193,6 @@ msgstr ""
 msgid "The wad installation failed with error %i"
 msgstr ""
 
-msgid "Theme Download Path"
-msgstr "Thema download locatie"
-
 msgid "Theme Downloader"
 msgstr "Thema downloader"
 
@@ -1206,6 +1203,9 @@ msgid "Theme Title:"
 msgstr "Thema Titel:"
 
 msgid "Theme path is changed."
+msgstr ""
+
+msgid "Themes by www.spiffy360.com"
 msgstr ""
 
 msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
@@ -1228,9 +1228,6 @@ msgstr "Knopinfo"
 
 msgid "Transfer failed"
 msgstr ""
-
-msgid "Transfer failed."
-msgstr "Overdracht mislukt."
 
 msgid "Trying custom Discarts"
 msgstr ""
@@ -1268,8 +1265,8 @@ msgstr "Console moet worden vrijgegeven."
 msgid "Unlocked"
 msgstr "Vrijgegeven"
 
-msgid "Unsupported format, try to extract manually."
-msgstr "Niet ondersteund formaat, probeer handmatig uit te pakken."
+msgid "Unsupported format, try to extract manually TempTheme.zip."
+msgstr ""
 
 msgid "Update"
 msgstr "Updaten"
@@ -1419,6 +1416,30 @@ msgstr "van"
 
 msgid "seconds left"
 msgstr "seconden over"
+
+#~ msgid "Can't create file"
+#~ msgstr "Kan bestand niet aanmaken"
+
+#~ msgid "Connection lost..."
+#~ msgstr "Verbinding verbroken..."
+
+#~ msgid "Download failed."
+#~ msgstr "Download mislukt."
+
+#~ msgid "Download request failed."
+#~ msgstr "Download aanvraag mislukt."
+
+#~ msgid "Downloading Page List:"
+#~ msgstr "Download pagina lijst:"
+
+#~ msgid "Theme Download Path"
+#~ msgstr "Thema download locatie"
+
+#~ msgid "Transfer failed."
+#~ msgstr "Overdracht mislukt."
+
+#~ msgid "Unsupported format, try to extract manually."
+#~ msgstr "Niet ondersteund formaat, probeer handmatig uit te pakken."
 
 #~ msgid "and translaters for language files updates"
 #~ msgstr "en vertalers voor taalbestand updates"

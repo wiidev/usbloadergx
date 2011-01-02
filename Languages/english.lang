@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-01 13:24+0100\n"
+"POT-Creation-Date: 2011-01-01 21:47+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -199,7 +199,8 @@ msgstr ""
 msgid "Can't create directory"
 msgstr ""
 
-msgid "Can't create file"
+#, c-format
+msgid "Can't create path: %s"
 msgstr ""
 
 msgid "Can't delete:"
@@ -240,9 +241,6 @@ msgid "Coded by: %s"
 msgstr ""
 
 msgid "Coding:"
-msgstr ""
-
-msgid "Connection lost..."
 msgstr ""
 
 msgid "Console"
@@ -420,16 +418,7 @@ msgstr ""
 msgid "Download Now"
 msgstr ""
 
-msgid "Download failed."
-msgstr ""
-
 msgid "Download finished"
-msgstr ""
-
-msgid "Download request failed."
-msgstr ""
-
-msgid "Downloading Page List:"
 msgstr ""
 
 msgid "Downloading covers"
@@ -448,6 +437,9 @@ msgid "Downloading image:"
 msgstr ""
 
 msgid "Downloading original Discarts"
+msgstr ""
+
+msgid "Downloading pagelist:"
 msgstr ""
 
 msgid "Dutch"
@@ -482,6 +474,10 @@ msgid "Error opening downloaded file"
 msgstr ""
 
 msgid "Error reading Disc"
+msgstr ""
+
+#, c-format
+msgid "Error when downloading file: %i"
 msgstr ""
 
 msgid "Error while downloding file"
@@ -530,6 +526,10 @@ msgid "Feb"
 msgstr ""
 
 msgid "File not found."
+msgstr ""
+
+#, c-format
+msgid "Filesize is %i Byte."
 msgstr ""
 
 msgid "Filesize is 0 Byte."
@@ -1193,9 +1193,6 @@ msgstr ""
 msgid "The wad installation failed with error %i"
 msgstr ""
 
-msgid "Theme Download Path"
-msgstr ""
-
 msgid "Theme Downloader"
 msgstr ""
 
@@ -1206,6 +1203,9 @@ msgid "Theme Title:"
 msgstr ""
 
 msgid "Theme path is changed."
+msgstr ""
+
+msgid "Themes by www.spiffy360.com"
 msgstr ""
 
 msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
@@ -1227,9 +1227,6 @@ msgid "Tooltips"
 msgstr ""
 
 msgid "Transfer failed"
-msgstr ""
-
-msgid "Transfer failed."
 msgstr ""
 
 msgid "Trying custom Discarts"
@@ -1268,7 +1265,7 @@ msgstr ""
 msgid "Unlocked"
 msgstr ""
 
-msgid "Unsupported format, try to extract manually."
+msgid "Unsupported format, try to extract manually TempTheme.zip."
 msgstr ""
 
 msgid "Update"
