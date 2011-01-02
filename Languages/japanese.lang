@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-02 10:20+0100\n"
+"POT-Creation-Date: 2011-01-02 19:00+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
@@ -565,9 +565,6 @@ msgstr "空き"
 msgid "French"
 msgstr "フランス語"
 
-msgid "Full Shutdown"
-msgstr "シャットダウン"
-
 msgid "Full shutdown"
 msgstr "シャットダウン"
 
@@ -582,9 +579,6 @@ msgstr "GCTファイルを作成しました"
 
 msgid "GUI Settings"
 msgstr "基本設定"
-
-msgid "GXtheme.cfg not found in any subfolder."
-msgstr "設定ファイルが見つかりません"
 
 msgid "Game ID"
 msgstr "IDのみ"
@@ -628,11 +622,11 @@ msgstr "総ゲーム数"
 msgid "GamesLevel"
 msgstr "ゲームの制限"
 
+msgid "Genre:"
+msgstr ""
+
 msgid "German"
 msgstr "ドイツ語"
-
-msgid "Gerne:"
-msgstr "ジャンル:"
 
 msgid "Global Settings"
 msgstr "基本設定"
@@ -657,9 +651,6 @@ msgstr "どう更新しますか？"
 
 msgid "How to Shutdown?"
 msgstr "どう終了しますか？"
-
-msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
-msgstr "1ボタンを押すと WiiTDB.zip のURLを保存します"
 
 #, c-format
 msgid "Incoming file %0.2fKB"
@@ -961,9 +952,6 @@ msgstr "暗証番号の変更"
 msgid "Password has been changed"
 msgstr "暗証番号を変更しました"
 
-msgid "Paste it into your browser to get your WiiTDB.zip."
-msgstr "ブラウザに貼付けるとWiiTDB.zipをダウンロードできます。"
-
 msgid "Patch Country Strings"
 msgstr "日本語パッチ"
 
@@ -1108,12 +1096,6 @@ msgstr "シャットダウン"
 msgid "Shutdown Wii"
 msgstr "シャットダウン"
 
-msgid "Shutdown to Idle"
-msgstr "スタンバイ"
-
-msgid "Shutdown?"
-msgstr "電源を切りますか?"
-
 msgid "Sort alphabetically"
 msgstr "名前順に並び替え"
 
@@ -1182,6 +1164,9 @@ msgstr "繁体中国語"
 
 msgid "TXT Cheatcodes Path"
 msgstr "TXTコードのパス"
+
+msgid "The .them file was not found in the zip."
+msgstr ""
 
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "ﾃﾞｨﾚｸﾄﾘがありません。作りますか？"
@@ -1356,10 +1341,6 @@ msgstr "FAT32/NTFS/EXT領域をcIOS249rev18以前で選ぼうとしています�
 msgid "You need to select or format a partition"
 msgstr "領域を選択するか初期化してください"
 
-#, c-format
-msgid "Your URL has been saved in %sWiiTDB_URL.txt."
-msgstr "%sWiiTDB_URL.txtにURLを保存しました"
-
 msgid "and translators for language files updates"
 msgstr ""
 
@@ -1416,6 +1397,30 @@ msgstr "中"
 
 msgid "seconds left"
 msgstr "秒で完了"
+
+#~ msgid "Full Shutdown"
+#~ msgstr "シャットダウン"
+
+#~ msgid "GXtheme.cfg not found in any subfolder."
+#~ msgstr "設定ファイルが見つかりません"
+
+#~ msgid "Gerne:"
+#~ msgstr "ジャンル:"
+
+#~ msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
+#~ msgstr "1ボタンを押すと WiiTDB.zip のURLを保存します"
+
+#~ msgid "Paste it into your browser to get your WiiTDB.zip."
+#~ msgstr "ブラウザに貼付けるとWiiTDB.zipをダウンロードできます。"
+
+#~ msgid "Shutdown to Idle"
+#~ msgstr "スタンバイ"
+
+#~ msgid "Shutdown?"
+#~ msgstr "電源を切りますか?"
+
+#~ msgid "Your URL has been saved in %sWiiTDB_URL.txt."
+#~ msgstr "%sWiiTDB_URL.txtにURLを保存しました"
 
 #~ msgid "Can't create file"
 #~ msgstr "ファイルを作れませんでした"

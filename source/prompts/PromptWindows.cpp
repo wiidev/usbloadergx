@@ -1040,7 +1040,7 @@ int WindowExitPrompt()
         }
         else if (btn3.GetState() == STATE_CLICKED)
         {
-            ret = WindowPrompt(tr( "Shutdown?" ), 0, tr( "Full shutdown" ), tr( "Standby" ), tr("Cancel"));
+            ret = WindowPrompt(tr( "How to Shutdown?" ), 0, tr( "Full shutdown" ), tr( "Standby" ), tr("Cancel"));
             if (ret == 1)
                 Sys_ShutdownToStandby();
             else if(ret == 2)

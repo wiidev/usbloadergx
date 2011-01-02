@@ -414,7 +414,7 @@ int ThemeDownloader::DownloadTheme(const char *url, const char *title)
 
     if(Filename[0] == 0)
     {
-        WindowPrompt(tr( "ERROR: Can't set up theme." ), tr( "GXtheme.cfg not found in any subfolder." ), tr( "OK" ));
+        WindowPrompt(tr( "ERROR: Can't set up theme." ), tr( "The .them file was not found in the zip." ), tr( "OK" ));
         return -1;
     }
 

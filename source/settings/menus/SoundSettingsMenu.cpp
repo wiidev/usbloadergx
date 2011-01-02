@@ -109,20 +109,12 @@ int SoundSettingsMenu::GetMenuInternal()
     //! Settings: Backgroundmusic
     if (ret == ++Idx)
     {
-        SetEffect(EFFECT_FADE, -20);
-        while (GetEffect() > 0) usleep(100);
-        HaltGui();
         GuiWindow * parent = (GuiWindow *) parentElement;
         if(parent) parent->SetState(STATE_DISABLED);
-        ResumeGui();
 
         MenuBackgroundMusic();
 
-        HaltGui();
-        SetEffect(EFFECT_FADE, 20);
         if(parent) parent->SetState(STATE_DEFAULT);
-        ResumeGui();
-        while (GetEffect() > 0) usleep(100);
     }
 
     //! Settings: Music Volume

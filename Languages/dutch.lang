@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-01 21:47+0100\n"
+"POT-Creation-Date: 2011-01-02 19:00+0100\n"
 "PO-Revision-Date: 2010-04-12 07:37+0100\n"
 "Last-Translator: glowy\n"
 "Language-Team: tj_cool, glowy\n"
@@ -565,9 +565,6 @@ msgstr "Vrije ruimte"
 msgid "French"
 msgstr "Frans"
 
-msgid "Full Shutdown"
-msgstr "Volledig uitzetten"
-
 msgid "Full shutdown"
 msgstr ""
 
@@ -582,9 +579,6 @@ msgstr "GCT bestand aangemaakt"
 
 msgid "GUI Settings"
 msgstr "Menu opties"
-
-msgid "GXtheme.cfg not found in any subfolder."
-msgstr "GXtheme.cfg in geen enkele submap gevonden."
 
 msgid "Game ID"
 msgstr "Spel ID"
@@ -628,11 +622,11 @@ msgstr "Spellen"
 msgid "GamesLevel"
 msgstr ""
 
+msgid "Genre:"
+msgstr ""
+
 msgid "German"
 msgstr "Duits"
-
-msgid "Gerne:"
-msgstr ""
 
 msgid "Global Settings"
 msgstr ""
@@ -657,9 +651,6 @@ msgstr "Hoe wil je updaten?"
 
 msgid "How to Shutdown?"
 msgstr "Hoe uitzetten?"
-
-msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
-msgstr "Als je geen WiFi hebt, druk dan op 1 om een URL voor je WiiTDB.zip te krijgen"
 
 #, c-format
 msgid "Incoming file %0.2fKB"
@@ -961,9 +952,6 @@ msgstr "Wachtwoord gewijzigd"
 msgid "Password has been changed"
 msgstr "Wachtwoord is gewijzigd"
 
-msgid "Paste it into your browser to get your WiiTDB.zip."
-msgstr "Plak het in je webbrowser om WiiTDB.zip te downloaden."
-
 msgid "Patch Country Strings"
 msgstr "Regio's herstellen"
 
@@ -1108,12 +1096,6 @@ msgstr "Systeem uitzetten"
 msgid "Shutdown Wii"
 msgstr ""
 
-msgid "Shutdown to Idle"
-msgstr "Slaapstand"
-
-msgid "Shutdown?"
-msgstr ""
-
 msgid "Sort alphabetically"
 msgstr "Alfabetisch sorteren"
 
@@ -1182,6 +1164,9 @@ msgstr "Chinees Trad."
 
 msgid "TXT Cheatcodes Path"
 msgstr "Locatie TXT cheats"
+
+msgid "The .them file was not found in the zip."
+msgstr ""
 
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "De opgegeven map bestaat niet. Wil je deze aanmaken?"
@@ -1356,10 +1341,6 @@ msgstr ""
 msgid "You need to select or format a partition"
 msgstr "Je moet een partitie selecteren of formatteren"
 
-#, c-format
-msgid "Your URL has been saved in %sWiiTDB_URL.txt."
-msgstr "Je URL is opgeslagen in %sWiiTDB_URL.txt."
-
 msgid "and translators for language files updates"
 msgstr ""
 
@@ -1416,6 +1397,24 @@ msgstr "van"
 
 msgid "seconds left"
 msgstr "seconden over"
+
+#~ msgid "Full Shutdown"
+#~ msgstr "Volledig uitzetten"
+
+#~ msgid "GXtheme.cfg not found in any subfolder."
+#~ msgstr "GXtheme.cfg in geen enkele submap gevonden."
+
+#~ msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
+#~ msgstr "Als je geen WiFi hebt, druk dan op 1 om een URL voor je WiiTDB.zip te krijgen"
+
+#~ msgid "Paste it into your browser to get your WiiTDB.zip."
+#~ msgstr "Plak het in je webbrowser om WiiTDB.zip te downloaden."
+
+#~ msgid "Shutdown to Idle"
+#~ msgstr "Slaapstand"
+
+#~ msgid "Your URL has been saved in %sWiiTDB_URL.txt."
+#~ msgstr "Je URL is opgeslagen in %sWiiTDB_URL.txt."
 
 #~ msgid "Can't create file"
 #~ msgstr "Kan bestand niet aanmaken"

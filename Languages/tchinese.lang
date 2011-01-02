@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-02 10:21+0100\n"
+"POT-Creation-Date: 2011-01-02 19:00+0100\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
 "Last-Translator: Jane.H\n"
 "Language-Team: kyogc, Miller, Mika Li, Jane.H\n"
@@ -565,9 +565,6 @@ msgstr "剩餘空間"
 msgid "French"
 msgstr "法文"
 
-msgid "Full Shutdown"
-msgstr "關機"
-
 msgid "Full shutdown"
 msgstr "關機"
 
@@ -582,9 +579,6 @@ msgstr "GCT 檔案已產生"
 
 msgid "GUI Settings"
 msgstr "介面設定"
-
-msgid "GXtheme.cfg not found in any subfolder."
-msgstr "無法在任何子目錄找到 GXtheme.cfg 檔案"
 
 msgid "Game ID"
 msgstr "遊戲 ID"
@@ -628,11 +622,11 @@ msgstr "遊戲數量"
 msgid "GamesLevel"
 msgstr "遊戲級別"
 
+msgid "Genre:"
+msgstr ""
+
 msgid "German"
 msgstr "德文"
-
-msgid "Gerne:"
-msgstr "類型："
 
 msgid "Global Settings"
 msgstr "整體設定"
@@ -657,9 +651,6 @@ msgstr "是否執行更新？"
 
 msgid "How to Shutdown?"
 msgstr "關機選項？"
-
-msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
-msgstr "若無WiFi連線，請按1以取得WiiTDB.zip檔案之網址"
 
 #, c-format
 msgid "Incoming file %0.2fKB"
@@ -961,9 +952,6 @@ msgstr "密碼已變更"
 msgid "Password has been changed"
 msgstr "密碼已被變更"
 
-msgid "Paste it into your browser to get your WiiTDB.zip."
-msgstr "複製這網址到瀏覽器來下載 WiiTDB.zip 檔。"
-
 msgid "Patch Country Strings"
 msgstr "修改國別設定"
 
@@ -1108,12 +1096,6 @@ msgstr "關閉系統"
 msgid "Shutdown Wii"
 msgstr "關閉Wii主機"
 
-msgid "Shutdown to Idle"
-msgstr "進入待機狀態"
-
-msgid "Shutdown?"
-msgstr "關機嗎？"
-
 msgid "Sort alphabetically"
 msgstr "以字母順序排序"
 
@@ -1182,6 +1164,9 @@ msgstr "繁體中文"
 
 msgid "TXT Cheatcodes Path"
 msgstr "TXT 金手指檔案路徑"
+
+msgid "The .them file was not found in the zip."
+msgstr ""
 
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "所輸入的目錄不存在。是否要建立一個目錄嗎？"
@@ -1356,10 +1341,6 @@ msgstr "你嘗試用高於 cIOS 249 版本18去選取 FAT32/NTFS/EXT 磁區。�
 msgid "You need to select or format a partition"
 msgstr "選擇你要格式化的磁區"
 
-#, c-format
-msgid "Your URL has been saved in %sWiiTDB_URL.txt."
-msgstr "網址已儲存於 %sWiiTDB_URL.txt 檔。"
-
 msgid "and translators for language files updates"
 msgstr ""
 
@@ -1416,6 +1397,30 @@ msgstr "的"
 
 msgid "seconds left"
 msgstr "剩餘秒數"
+
+#~ msgid "Full Shutdown"
+#~ msgstr "關機"
+
+#~ msgid "GXtheme.cfg not found in any subfolder."
+#~ msgstr "無法在任何子目錄找到 GXtheme.cfg 檔案"
+
+#~ msgid "Gerne:"
+#~ msgstr "類型："
+
+#~ msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
+#~ msgstr "若無WiFi連線，請按1以取得WiiTDB.zip檔案之網址"
+
+#~ msgid "Paste it into your browser to get your WiiTDB.zip."
+#~ msgstr "複製這網址到瀏覽器來下載 WiiTDB.zip 檔。"
+
+#~ msgid "Shutdown to Idle"
+#~ msgstr "進入待機狀態"
+
+#~ msgid "Shutdown?"
+#~ msgstr "關機嗎？"
+
+#~ msgid "Your URL has been saved in %sWiiTDB_URL.txt."
+#~ msgstr "網址已儲存於 %sWiiTDB_URL.txt 檔。"
 
 #~ msgid "All partitions"
 #~ msgstr "所有磁區"

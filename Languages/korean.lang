@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-01 21:47+0100\n"
+"POT-Creation-Date: 2011-01-02 19:00+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: nextos@korea.com\n"
 "Language-Team: \n"
@@ -565,9 +565,6 @@ msgstr "여유 공간"
 msgid "French"
 msgstr "불어"
 
-msgid "Full Shutdown"
-msgstr "완전히 끄기"
-
 msgid "Full shutdown"
 msgstr ""
 
@@ -582,9 +579,6 @@ msgstr "GCT 파일 생성됨"
 
 msgid "GUI Settings"
 msgstr "GUI 설정"
-
-msgid "GXtheme.cfg not found in any subfolder."
-msgstr ""
 
 msgid "Game ID"
 msgstr "게임 ID"
@@ -628,11 +622,11 @@ msgstr "게임"
 msgid "GamesLevel"
 msgstr ""
 
+msgid "Genre:"
+msgstr ""
+
 msgid "German"
 msgstr "독일어"
-
-msgid "Gerne:"
-msgstr ""
 
 msgid "Global Settings"
 msgstr ""
@@ -657,9 +651,6 @@ msgstr "업데이트 할까요?"
 
 msgid "How to Shutdown?"
 msgstr "어떻게 종료할까요?"
-
-msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
-msgstr "WiFi가 없다면 WiiTDB.zip을 없기위한 URL을 위하여 1을 누르세요"
 
 #, c-format
 msgid "Incoming file %0.2fKB"
@@ -961,9 +952,6 @@ msgstr "비밀번호 변경됨"
 msgid "Password has been changed"
 msgstr "비밀번호가 변경되었습니다"
 
-msgid "Paste it into your browser to get your WiiTDB.zip."
-msgstr "WiiTDB.zip파일을 얻으려면 이것을 브라우져로 붙이세요."
-
 msgid "Patch Country Strings"
 msgstr "패치 컨트리 스트링"
 
@@ -1108,12 +1096,6 @@ msgstr "시스템 종료"
 msgid "Shutdown Wii"
 msgstr ""
 
-msgid "Shutdown to Idle"
-msgstr "대기 상태로"
-
-msgid "Shutdown?"
-msgstr ""
-
 msgid "Sort alphabetically"
 msgstr "알파벳순으로 정렬"
 
@@ -1182,6 +1164,9 @@ msgstr "중국어(번체)"
 
 msgid "TXT Cheatcodes Path"
 msgstr "TXT 치트코드 경로"
+
+msgid "The .them file was not found in the zip."
+msgstr ""
 
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr ""
@@ -1356,10 +1341,6 @@ msgstr ""
 msgid "You need to select or format a partition"
 msgstr ""
 
-#, c-format
-msgid "Your URL has been saved in %sWiiTDB_URL.txt."
-msgstr "당신의 URL은 %sWiiTDB_URL.txt 에 저장되었어요."
-
 msgid "and translators for language files updates"
 msgstr ""
 
@@ -1416,6 +1397,21 @@ msgstr "중"
 
 msgid "seconds left"
 msgstr "초 남았습니다"
+
+#~ msgid "Full Shutdown"
+#~ msgstr "완전히 끄기"
+
+#~ msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
+#~ msgstr "WiFi가 없다면 WiiTDB.zip을 없기위한 URL을 위하여 1을 누르세요"
+
+#~ msgid "Paste it into your browser to get your WiiTDB.zip."
+#~ msgstr "WiiTDB.zip파일을 얻으려면 이것을 브라우져로 붙이세요."
+
+#~ msgid "Shutdown to Idle"
+#~ msgstr "대기 상태로"
+
+#~ msgid "Your URL has been saved in %sWiiTDB_URL.txt."
+#~ msgstr "당신의 URL은 %sWiiTDB_URL.txt 에 저장되었어요."
 
 #~ msgid "Insert an SD-Card to save."
 #~ msgstr "저장할 SD카드를 넣으세요."

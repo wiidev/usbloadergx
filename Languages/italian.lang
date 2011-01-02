@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-02 10:19+0100\n"
+"POT-Creation-Date: 2011-01-02 19:00+0100\n"
 "PO-Revision-Date: 2010-12-30 08:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: Cambo\n"
@@ -565,9 +565,6 @@ msgstr "Spazio libero"
 msgid "French"
 msgstr "Francese"
 
-msgid "Full Shutdown"
-msgstr "Spegni Tutto"
-
 msgid "Full shutdown"
 msgstr "Spegni yutto"
 
@@ -582,9 +579,6 @@ msgstr "File GCT creato"
 
 msgid "GUI Settings"
 msgstr "Impostazioni Loader"
-
-msgid "GXtheme.cfg not found in any subfolder."
-msgstr "Nessuna sottocartella contiene il file GXtheme.cfg."
 
 msgid "Game ID"
 msgstr "ID Gioco"
@@ -628,11 +622,11 @@ msgstr "Giochi"
 msgid "GamesLevel"
 msgstr "Livelli"
 
+msgid "Genre:"
+msgstr ""
+
 msgid "German"
 msgstr "Tedesco"
-
-msgid "Gerne:"
-msgstr "Genere:"
 
 msgid "Global Settings"
 msgstr "Impostazioni Generali"
@@ -657,9 +651,6 @@ msgstr "Come Vuoi Aggiornare ?"
 
 msgid "How to Shutdown?"
 msgstr "Spegnimento Wii?"
-
-msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
-msgstr "Se non hai una connessione WiFi, premi 1 per ottenere un URL dal quale ottenere il file WiiTDB.zip"
 
 #, c-format
 msgid "Incoming file %0.2fKB"
@@ -961,9 +952,6 @@ msgstr "Password modificata"
 msgid "Password has been changed"
 msgstr "Password è stata modificata"
 
-msgid "Paste it into your browser to get your WiiTDB.zip."
-msgstr "Copialo nel tuo browser per scaricare il file WiiTDB.zip."
-
 msgid "Patch Country Strings"
 msgstr "Cod. Patch Regione"
 
@@ -1108,12 +1096,6 @@ msgstr "Spegnimento"
 msgid "Shutdown Wii"
 msgstr "Spegni Wii"
 
-msgid "Shutdown to Idle"
-msgstr "Preaccensione"
-
-msgid "Shutdown?"
-msgstr "Vuoi Spegnere?"
-
 msgid "Sort alphabetically"
 msgstr "Ordine alfabetico"
 
@@ -1182,6 +1164,9 @@ msgstr "Cinese Tradizionale"
 
 msgid "TXT Cheatcodes Path"
 msgstr "Percorso Trucchi in TXT"
+
+msgid "The .them file was not found in the zip."
+msgstr ""
 
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "La cartella indicata non esiste. Vuoi crearla?"
@@ -1356,10 +1341,6 @@ msgstr "Stai cercando di accedere ad una partizione FAT32/NTFS/EXT con un cIOS 2
 msgid "You need to select or format a partition"
 msgstr "Occorre selezionare o formattare una partizione"
 
-#, c-format
-msgid "Your URL has been saved in %sWiiTDB_URL.txt."
-msgstr "L'indirizzo (URL) è stato salvato in %sWiiTDB_URL.txt."
-
 msgid "and translators for language files updates"
 msgstr ""
 
@@ -1416,6 +1397,30 @@ msgstr "di"
 
 msgid "seconds left"
 msgstr "secondi mancanti"
+
+#~ msgid "Full Shutdown"
+#~ msgstr "Spegni Tutto"
+
+#~ msgid "GXtheme.cfg not found in any subfolder."
+#~ msgstr "Nessuna sottocartella contiene il file GXtheme.cfg."
+
+#~ msgid "Gerne:"
+#~ msgstr "Genere:"
+
+#~ msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
+#~ msgstr "Se non hai una connessione WiFi, premi 1 per ottenere un URL dal quale ottenere il file WiiTDB.zip"
+
+#~ msgid "Paste it into your browser to get your WiiTDB.zip."
+#~ msgstr "Copialo nel tuo browser per scaricare il file WiiTDB.zip."
+
+#~ msgid "Shutdown to Idle"
+#~ msgstr "Preaccensione"
+
+#~ msgid "Shutdown?"
+#~ msgstr "Vuoi Spegnere?"
+
+#~ msgid "Your URL has been saved in %sWiiTDB_URL.txt."
+#~ msgstr "L'indirizzo (URL) è stato salvato in %sWiiTDB_URL.txt."
 
 #~ msgid "Can't create file"
 #~ msgstr "Impossibile creare il file"

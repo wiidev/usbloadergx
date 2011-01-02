@@ -130,8 +130,6 @@ int showGameInfo(char *ID)
     GuiText ** genreTxt = NULL;
     GuiText ** wifiTxt = NULL;
     GuiText * wiitdb1Txt = NULL;
-    GuiText * wiitdb2Txt = NULL;
-    GuiText * wiitdb3Txt = NULL;
     GuiText * memTxt = NULL;
 
     GuiWindow gameinfoWindow(600, 308);
@@ -188,12 +186,6 @@ int showGameInfo(char *ID)
     GuiButton homeBtn(0, 0);
     homeBtn.SetPosition(0, 0);
     homeBtn.SetTrigger(&trigH);
-
-    // button to save the url for the zip file for poor people without wifi
-    GuiButton urlBtn(0, 0);
-    urlBtn.SetPosition(0, 0);
-    urlBtn.SetTrigger(&trig1);
-    gameinfoWindow.Append(&urlBtn);
 
     char linebuf2[100] = "";
 
@@ -686,7 +678,7 @@ int showGameInfo(char *ID)
     int genreY = marginY;
     if(GameInfo.GenreList.size() > 0)
     {
-        genreTitleTxt = new GuiText(tr("Gerne:"), 16, ( GXColor ) {0, 0, 0, 255});
+        genreTitleTxt = new GuiText(tr("Genre:"), 16, ( GXColor ) {0, 0, 0, 255});
         genreTitleTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
         genreTitleTxt->SetPosition(205, 12 + genreY);
         genreY += 20;
@@ -781,16 +773,6 @@ int showGameInfo(char *ID)
     wiitdb1Txt->SetPosition(40, -15);
     gameinfoWindow.Append(wiitdb1Txt);
 
-    wiitdb2Txt = new GuiText(tr( "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip" ), 14, ( GXColor ) {0, 0, 0, 255});
-    wiitdb2Txt->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-    wiitdb2Txt->SetPosition(202, -15);
-    gameinfoWindow.Append(wiitdb2Txt);
-
-    wiitdb3Txt = new GuiText(" ", 14, ( GXColor ) {0, 0, 0, 255});
-    wiitdb3Txt->SetAlignment(ALIGN_LEFT, ALIGN_BOTTOM);
-    wiitdb3Txt->SetPosition(202, -4);
-    gameinfoWindow.Append(wiitdb3Txt);
-
     gameinfoWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_IN, 100);
 
     HaltGui();
@@ -798,8 +780,6 @@ int showGameInfo(char *ID)
     mainWindow->Append(&gameinfoWindow);
     mainWindow->ChangeFocus(&gameinfoWindow);
     ResumeGui();
-
-    bool savedURL = false;
 
     while (choice == -1)
     {
@@ -910,27 +890,6 @@ int showGameInfo(char *ID)
                 page = 1;
             }
         }
-        else if (urlBtn.GetState() == STATE_CLICKED && !savedURL)
-        {
-            wiitdb2Txt->SetText(tr( "Please wait..." ));
-            gameinfoWindow.Append(wiitdb2Txt);
-            if (save_XML_URL())
-            {
-                snprintf(linebuf2, sizeof(linebuf2), tr( "Your URL has been saved in %sWiiTDB_URL.txt." ), Settings.update_path);
-                wiitdb2Txt->SetText(linebuf2);
-                gameinfoWindow.Append(wiitdb2Txt);
-
-                wiitdb3Txt->SetText(tr( "Paste it into your browser to get your WiiTDB.zip." ));
-                gameinfoWindow.Append(wiitdb3Txt);
-                savedURL = true;
-            }
-            else
-            {
-                wiitdb2Txt->SetText(tr( "Could not save." ));
-                gameinfoWindow.Append(wiitdb2Txt);
-            }
-            urlBtn.ResetState();
-        }
     }
 
     gameinfoWindow.SetEffect(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, 100);
@@ -992,8 +951,6 @@ int showGameInfo(char *ID)
     delete synopsisTxt;
     delete genreTitleTxt;
     delete wiitdb1Txt;
-    delete wiitdb2Txt;
-    delete wiitdb3Txt;
     delete memTxt;
     for (u32 i = 0; i < GameInfo.GenreList.size(); ++i)
         delete genreTxt[i];
@@ -1005,8 +962,6 @@ int showGameInfo(char *ID)
     delete [] wifiTxt;
 
     ResumeGui();
-
-    if (savedURL) return 3;
 
     return choice;
 }
@@ -1091,69 +1046,9 @@ bool save_gamelist(int txt) // save gamelist
     return true;
 }
 
-bool save_XML_URL() // save xml url as as txt file for people without wifi
-{
-    char tmp[200];
-    sprintf(tmp, "%s", Settings.update_path);
-    struct stat st;
-    if (stat(tmp, &st) != 0)
-    {
-        mkdir(tmp, 0777);
-    }
-    FILE *f;
-    sprintf(tmp, "%sWiiTDB_URL.txt", Settings.update_path);
-    f = fopen(tmp, "w");
-    if (!f)
-    {
-        sleep(1);
-        return false;
-    }
-
-    char XMLurl[3540];
-    build_XML_URL(XMLurl, sizeof(XMLurl));
-
-    fprintf(f, "# USB Loader Has Saved this file\n");
-    fprintf(f, "# This URL was created based on your list of games and language settings.\n");
-    fclose(f);
-    // Closing and reopening because of a write issue we are having right now
-    f = fopen(tmp, "w");
-    fprintf(f, "# USB Loader Has Saved this file\n");
-    fprintf(f, "# This URL was created based on your list of games and language settings.\n");
-    fprintf(f,
-            "# Copy and paste this URL into your web browser and you should get a zip file that will work for you.\n");
-    fprintf(f, "%s\n\n\n ", XMLurl);
-
-    fclose(f);
-
-    return true;
-}
-
 void MemInfoPrompt()
 {
     char meminfotxt[200];
     strlcpy(meminfotxt, MemInfo(), sizeof(meminfotxt));
     WindowPrompt(0, meminfotxt, tr( "OK" ));
-}
-
-void build_XML_URL(char *XMLurl, int XMLurlsize)
-{
-    gameList.LoadUnfiltered();
-    // NET_BUFFER_SIZE in http.c needs to be set to size of XMLurl + headerformat
-    char url[3540];
-    char filename[10];
-    snprintf(url, sizeof(url), "http://wiitdb.com/wiitdb.zip?LANG=%s&ID=", Settings.db_language);
-    int i;
-    for (i = 0; i < gameList.size(); i++)
-    {
-        struct discHdr* header = gameList[i];
-        if (i < 500)
-        {
-            snprintf(filename, sizeof(filename), "%c%c%c%c%c%c", header->id[0], header->id[1], header->id[2],
-                    header->id[3], header->id[4], header->id[5]);
-            strncat(url, filename, 6);
-            if ((i != gameList.size() - 1) && (i < 500)) strncat(url, ",", 1);
-        }
-    }
-    strlcpy(XMLurl, url, XMLurlsize);
-    gameList.FilterList();
 }

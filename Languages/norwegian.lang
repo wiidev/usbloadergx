@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-01 21:47+0100\n"
+"POT-Creation-Date: 2011-01-02 19:00+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: raschi\n"
 "Language-Team: raschi\n"
@@ -565,9 +565,6 @@ msgstr "Ledig plass"
 msgid "French"
 msgstr "Fransk"
 
-msgid "Full Shutdown"
-msgstr "Skru helt av"
-
 msgid "Full shutdown"
 msgstr ""
 
@@ -582,9 +579,6 @@ msgstr "GCT fil opprettet"
 
 msgid "GUI Settings"
 msgstr "GUI innstillinger"
-
-msgid "GXtheme.cfg not found in any subfolder."
-msgstr ""
 
 msgid "Game ID"
 msgstr "Spill ID"
@@ -628,11 +622,11 @@ msgstr "Spill"
 msgid "GamesLevel"
 msgstr ""
 
+msgid "Genre:"
+msgstr ""
+
 msgid "German"
 msgstr "Tysk"
-
-msgid "Gerne:"
-msgstr ""
 
 msgid "Global Settings"
 msgstr ""
@@ -657,9 +651,6 @@ msgstr "Hvordan vil du oppdatere?"
 
 msgid "How to Shutdown?"
 msgstr "Hvordan skru av?"
-
-msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
-msgstr "Hvis du ikke har WiFi, klikk 1 for å få en URL til din WiiTDB.zip"
 
 #, c-format
 msgid "Incoming file %0.2fKB"
@@ -961,9 +952,6 @@ msgstr "Passord endret"
 msgid "Password has been changed"
 msgstr "Passord har blitt endret"
 
-msgid "Paste it into your browser to get your WiiTDB.zip."
-msgstr "Lim den inn i nettleseren din for å få WiiTDB.zip."
-
 msgid "Patch Country Strings"
 msgstr "Patch land strenger"
 
@@ -1108,12 +1096,6 @@ msgstr "Skru helt av"
 msgid "Shutdown Wii"
 msgstr ""
 
-msgid "Shutdown to Idle"
-msgstr "Skru av"
-
-msgid "Shutdown?"
-msgstr ""
-
 msgid "Sort alphabetically"
 msgstr "Sortér alfabetisk"
 
@@ -1182,6 +1164,9 @@ msgstr "T.Kinesisk"
 
 msgid "TXT Cheatcodes Path"
 msgstr "TXTjuksekode sti"
+
+msgid "The .them file was not found in the zip."
+msgstr ""
 
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "Valgt mappe finnes ikke. Vil du opprette den?"
@@ -1356,10 +1341,6 @@ msgstr ""
 msgid "You need to select or format a partition"
 msgstr ""
 
-#, c-format
-msgid "Your URL has been saved in %sWiiTDB_URL.txt."
-msgstr "Din URL ble lagret i %sWiiTDB_URL.txt."
-
 msgid "and translators for language files updates"
 msgstr ""
 
@@ -1416,6 +1397,21 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder gjenstår"
+
+#~ msgid "Full Shutdown"
+#~ msgstr "Skru helt av"
+
+#~ msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
+#~ msgstr "Hvis du ikke har WiFi, klikk 1 for å få en URL til din WiiTDB.zip"
+
+#~ msgid "Paste it into your browser to get your WiiTDB.zip."
+#~ msgstr "Lim den inn i nettleseren din for å få WiiTDB.zip."
+
+#~ msgid "Shutdown to Idle"
+#~ msgstr "Skru av"
+
+#~ msgid "Your URL has been saved in %sWiiTDB_URL.txt."
+#~ msgstr "Din URL ble lagret i %sWiiTDB_URL.txt."
 
 #~ msgid "Can't create file"
 #~ msgstr "Kan ikke opprette fil"

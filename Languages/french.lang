@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-01 21:47+0100\n"
+"POT-Creation-Date: 2011-01-02 19:00+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Kin8\n"
 "Language-Team: Badablek, Amour, ikya & Kin8\n"
@@ -29,13 +29,13 @@ msgid "0 (Everyone)"
 msgstr "0 (Tous 3+)"
 
 msgid "0 (Locked and Unlocked Games)"
-msgstr ""
+msgstr "0 (Jeux verouillés et non verouillés)"
 
 msgid "1 (Child 7+)"
 msgstr "1 (Enfants 7+)"
 
 msgid "1 (Unlocked Games Only)"
-msgstr ""
+msgstr "1 (Seulement les jeux deverouillés)"
 
 msgid "1 hour"
 msgstr "1 heure"
@@ -125,10 +125,10 @@ msgid "AUTO"
 msgstr ""
 
 msgid "All Partitions"
-msgstr ""
+msgstr "Toutes les partitions"
 
 msgid "All images downloaded successfully."
-msgstr ""
+msgstr "Images correctement telechargées"
 
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "Toutes les fonctionnalités sont déverrouillées."
@@ -146,10 +146,10 @@ msgid "Apr"
 msgstr "Avr"
 
 msgid "Are you sure you want to lock USB Loader GX?"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir verouiller USB loader GX ?"
 
 msgid "Are you sure you want to reset?"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir réinitialiser ?"
 
 msgid "Are you sure?"
 msgstr "Êtes-vous sûr ?"
@@ -201,7 +201,7 @@ msgstr "Création du répertoire impossible"
 
 #, c-format
 msgid "Can't create path: %s"
-msgstr ""
+msgstr "Impossible de créer: %s"
 
 msgid "Can't delete:"
 msgstr "Impossible de supprimer:"
@@ -210,7 +210,7 @@ msgid "Cancel"
 msgstr "Annuler"
 
 msgid "Cannot write to destination."
-msgstr ""
+msgstr "Ecriture impossible."
 
 msgid "Change Play Path"
 msgstr "Changer Dossier"
@@ -219,7 +219,7 @@ msgid "Cheatfile is blank"
 msgstr "Fichier de triche vide"
 
 msgid "Clear"
-msgstr ""
+msgstr "Effacer"
 
 msgid "Click to Download Covers"
 msgstr "Téléchargement des jaquettes"
@@ -265,17 +265,17 @@ msgid "Correct Password"
 msgstr "Mot de passe correct"
 
 msgid "Could not connect to the server."
-msgstr ""
+msgstr "Connexion au serveur impossible"
 
 msgid "Could not create GCT file"
 msgstr "Impossible de créer le fichier GCT"
 
 #, c-format
 msgid "Could not create path: %s"
-msgstr ""
+msgstr "Impossible de créer: %s"
 
 msgid "Could not find info for this game in the wiitdb.xml."
-msgstr ""
+msgstr "Pas dinformation pour ce jeu dans wiitdb.xml."
 
 msgid "Could not initialize DIP module!"
 msgstr "Initialisation module DIP impossible !"
@@ -287,7 +287,7 @@ msgid "Could not open Disc"
 msgstr "Ouverture DVD impossible"
 
 msgid "Could not open wiitdb.xml."
-msgstr ""
+msgstr "Impossible d'ouvrir wiitdb.xml."
 
 msgid "Could not save."
 msgstr "Sauvegarde impossible"
@@ -377,7 +377,7 @@ msgid "Display as a list"
 msgstr "Liste"
 
 msgid "Display favorites only"
-msgstr ""
+msgstr "Seulement les favoris"
 
 msgid "Do you really want to delete:"
 msgstr "Voulez-vous vraiment supprimer ?"
@@ -395,7 +395,7 @@ msgid "Do you want to format:"
 msgstr "Voulez-vous formater ?"
 
 msgid "Do you want to load this theme?"
-msgstr ""
+msgstr "Voulez-vous charger ce thème ?"
 
 msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "Voulez-vous utiliser le DOL Alternatif actuellement connu comme correct ?"
@@ -422,22 +422,22 @@ msgid "Download finished"
 msgstr "Téléchargement terminé"
 
 msgid "Downloading covers"
-msgstr ""
+msgstr "Téléchargement des jaquettes"
 
 msgid "Downloading custom Discarts"
-msgstr ""
+msgstr "Téléchargement des labels DVD perso"
 
 msgid "Downloading file"
 msgstr "Téléchargement du fichier"
 
 msgid "Downloading file..."
-msgstr ""
+msgstr "Téléchargement du fichier..."
 
 msgid "Downloading image:"
 msgstr "Téléchargement de l'image:"
 
 msgid "Downloading original Discarts"
-msgstr ""
+msgstr "Téléchargement des labels DVD originaux"
 
 msgid "Downloading pagelist:"
 msgstr ""
@@ -468,32 +468,32 @@ msgstr "Correctif Erreur 002"
 
 #, c-format
 msgid "Error creating path: %s"
-msgstr ""
+msgstr "Erreur lors de la création du chemin: %s"
 
 msgid "Error opening downloaded file"
-msgstr ""
+msgstr "Erreur la l'ouverure du fichier téléchargé"
 
 msgid "Error reading Disc"
 msgstr "Erreur à la lecture du disque"
 
 #, c-format
 msgid "Error when downloading file: %i"
-msgstr ""
+msgstr "Erreur lors du téléchargement de: %i"
 
 msgid "Error while downloding file"
-msgstr ""
+msgstr "Erreur lors du téléchargement du fichier"
 
 msgid "Error while opening the zip."
-msgstr ""
+msgstr "Erreur à l'ouverture du fichier zip."
 
 msgid "Error while transfering data."
 msgstr "Erreur durant le transfert de données."
 
 msgid "Error while updating USB Loader GX."
-msgstr ""
+msgstr "Erreur lors de la mise a jour de USB Loader GX."
 
 msgid "Error writing the data."
-msgstr ""
+msgstr "Erreur d'ecriture des données"
 
 msgid "Error..."
 msgstr "Erreur..."
@@ -502,10 +502,10 @@ msgid "Error:"
 msgstr "Erreur:"
 
 msgid "Exit"
-msgstr ""
+msgstr "Sortir"
 
 msgid "Exit to where?"
-msgstr ""
+msgstr "Sortir où"
 
 msgid "Extracting files..."
 msgstr "Extraction des fichiers..."
@@ -520,7 +520,7 @@ msgid "Failed to open partition"
 msgstr "Échec accès partition"
 
 msgid "Failed updating"
-msgstr ""
+msgstr "Echec de la mise à jour"
 
 msgid "Feb"
 msgstr "Fév"
@@ -530,10 +530,10 @@ msgstr "Fichier introuvable."
 
 #, c-format
 msgid "Filesize is %i Byte."
-msgstr ""
+msgstr "Taille du ficher: %i Byte."
 
 msgid "Filesize is 0 Byte."
-msgstr ""
+msgstr "Fichier de taille 0 Byte"
 
 msgid "Finishing installation... Ok!"
 msgstr "Finalisation de l'installation... OK!"
@@ -565,11 +565,8 @@ msgstr "Espace restant"
 msgid "French"
 msgstr "Français"
 
-msgid "Full Shutdown"
-msgstr "Éteindre"
-
 msgid "Full shutdown"
-msgstr ""
+msgstr "Éteindre"
 
 msgid "GAMEID_Gamename"
 msgstr "IDJEU_NomJeu"
@@ -583,14 +580,11 @@ msgstr "Fichier GCT créé"
 msgid "GUI Settings"
 msgstr "Configuration GUI"
 
-msgid "GXtheme.cfg not found in any subfolder."
-msgstr "GXtheme.cfg non trouvé dans aucun sous-dossier."
-
 msgid "Game ID"
 msgstr "ID du jeu"
 
 msgid "Game IOS"
-msgstr ""
+msgstr "IOS du jeu"
 
 msgid "Game Language"
 msgstr "Langue du jeu"
@@ -628,23 +622,23 @@ msgstr "Jeux"
 msgid "GamesLevel"
 msgstr ""
 
+msgid "Genre:"
+msgstr ""
+
 msgid "German"
 msgstr "Allemand"
 
-msgid "Gerne:"
-msgstr ""
-
 msgid "Global Settings"
-msgstr ""
+msgstr "Paramètres"
 
 msgid "HOME Menu"
 msgstr "Menu HOME"
 
 msgid "Homebrew Apps Path"
-msgstr "Dossier Homebrew Apps"
+msgstr "Dossier Apps Homebrew"
 
 msgid "Homebrew Channel"
-msgstr ""
+msgstr "Chaîne Homebrew"
 
 msgid "Homebrew Launcher"
 msgstr "Menu Homebrew"
@@ -657,9 +651,6 @@ msgstr "Comment faire la Mise à Jour ?"
 
 msgid "How to Shutdown?"
 msgstr "Arrêt de la Wii ?"
-
-msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
-msgstr "Pressez 1 pour obtenir un lien personnalisé pour votre WiiTDB.zip"
 
 #, c-format
 msgid "Incoming file %0.2fKB"
@@ -688,7 +679,7 @@ msgid "Install a game"
 msgstr "Installer un jeu"
 
 msgid "Install directories"
-msgstr ""
+msgstr "Repertoires d'installation"
 
 msgid "Install partitions"
 msgstr "Installation"
@@ -745,7 +736,7 @@ msgid "Language change:"
 msgstr "Changement Langue:"
 
 msgid "Languagefiles Path"
-msgstr ""
+msgstr "Dossier Langue"
 
 msgid "Languagepath changed."
 msgstr "Dossier Langue changé"
@@ -770,7 +761,7 @@ msgid "Load this DOL as alternate DOL?"
 msgstr "Charger comme DOL alternatif ?"
 
 msgid "Loading default theme."
-msgstr ""
+msgstr "Chargement theme par défaut."
 
 msgid "Loading standard language."
 msgstr "Chargement langue par défaut."
@@ -782,7 +773,7 @@ msgid "Lock Console"
 msgstr "Verrouiller la console"
 
 msgid "Lock USB Loader GX"
-msgstr ""
+msgstr "Verrouiller USB Loader GX"
 
 msgid "Locked"
 msgstr "Clic pour déverrouiller"
@@ -797,7 +788,7 @@ msgid "Loop Sound"
 msgstr "Son en boucle"
 
 msgid "Main tester:"
-msgstr ""
+msgstr "Testeurs principaux:"
 
 msgid "Mar"
 msgstr "Mars"
@@ -809,7 +800,7 @@ msgid "May"
 msgstr "Mai"
 
 msgid "Messageboard Update"
-msgstr ""
+msgstr "Mise à jour carnet Wii"
 
 msgid "Missing files"
 msgstr "Fichier(s) manquant(s)"
@@ -827,7 +818,7 @@ msgid "Neither"
 msgstr "Aucun"
 
 msgid "Network is not initiated."
-msgstr ""
+msgstr "Reseau non initialisé"
 
 msgid "New Disc Detected"
 msgstr "Nouveau DVD Détecté"
@@ -845,13 +836,13 @@ msgid "No DOL file found on disc."
 msgstr "Aucun DOL trouvé dans ce jeu."
 
 msgid "No Splitting"
-msgstr ""
+msgstr "Pas de découpage"
 
 msgid "No URL or Path specified."
-msgstr ""
+msgstr "Pas d'adresse ou de chemin spécifié"
 
 msgid "No WBFS or FAT/NTFS/EXT partition found"
-msgstr ""
+msgstr "Pas de partition WBFS or FAT/NTFS/EXT trouvé"
 
 msgid "No cheats were selected"
 msgstr "Aucune selection de triche"
@@ -860,7 +851,7 @@ msgid "No data could be read."
 msgstr "Lecture des données impossible."
 
 msgid "No favorites selected."
-msgstr ""
+msgstr "Pas de favoris selectionné"
 
 msgid "No file missing!"
 msgstr "Aucun fichier manquant !"
@@ -884,13 +875,13 @@ msgid "Not a Wii Disc"
 msgstr "Ce n'est pas un jeu Wii"
 
 msgid "Not a valid URL"
-msgstr ""
+msgstr "URL non valide"
 
 msgid "Not a valid URL path"
-msgstr ""
+msgstr "Chemin URL non valide"
 
 msgid "Not a valid domain"
-msgstr ""
+msgstr "Domaine non valide"
 
 msgid "Not enough free memory."
 msgstr "Mémoire libre insuffisante !"
@@ -899,10 +890,10 @@ msgid "Not enough free space!"
 msgstr "Espace libre insuffisant !"
 
 msgid "Not enough memory."
-msgstr ""
+msgstr "Mémoire insuffisante."
 
 msgid "Not required"
-msgstr ""
+msgstr "Non requis"
 
 msgid "Not supported format!"
 msgstr "Format non supporté !"
@@ -935,7 +926,7 @@ msgid "Only Customs"
 msgstr "Personnalisés"
 
 msgid "Only Game Partition"
-msgstr ""
+msgstr "Uniquement la partition de jeu"
 
 msgid "Only Original"
 msgstr "Originaux"
@@ -961,14 +952,11 @@ msgstr "Mot de passe modifié"
 msgid "Password has been changed"
 msgstr "Le mot de passe a été modifié"
 
-msgid "Paste it into your browser to get your WiiTDB.zip."
-msgstr "Collez ce lien dans votre navigateur pour télécharger."
-
 msgid "Patch Country Strings"
 msgstr "Patch Jeux Import"
 
 msgid "Path Changed"
-msgstr ""
+msgstr "Chemin changé"
 
 msgid "Pick from a list"
 msgstr "Sélectionner"
@@ -1031,13 +1019,13 @@ msgid "Rename Game on WBFS"
 msgstr "Renommer un jeu"
 
 msgid "Reset BG Music"
-msgstr "Reset"
+msgstr "Reinitialisé le fond sonore"
 
 msgid "Reset Playcounter"
 msgstr "Reset Utilisation du Jeu"
 
 msgid "Reset to default BGM?"
-msgstr ""
+msgstr "Reinitialisé le fond sonore aux valeurs par defaut ?"
 
 msgid "Restarting..."
 msgstr "Redémarrage..."
@@ -1046,7 +1034,7 @@ msgid "Return"
 msgstr "Retour"
 
 msgid "Return To"
-msgstr ""
+msgstr "Revenir à:"
 
 msgid "Return to Wii Menu"
 msgstr "Retourner au menu Wii"
@@ -1067,7 +1055,7 @@ msgid "Save"
 msgstr "Enregistrer"
 
 msgid "Save Failed. No device inserted?"
-msgstr ""
+msgstr "Echec de la sauvegarde. Pas de périférique inséré ?"
 
 msgid "Save Game List to"
 msgstr "Sauvegarder la liste des jeux sous"
@@ -1082,13 +1070,13 @@ msgid "Select"
 msgstr "Choisir"
 
 msgid "Select DOL Offset"
-msgstr ""
+msgstr "Sélectionner l'offset du DOL"
 
 msgid "Select a DOL"
 msgstr "Choisir un DOL"
 
 msgid "Select a DOL from Game"
-msgstr ""
+msgstr "Selectionner un DOL a partir du jeu"
 
 msgid "Sept"
 msgstr ""
@@ -1100,19 +1088,13 @@ msgid "Settings"
 msgstr "Paramètres"
 
 msgid "Show Free Space"
-msgstr ""
+msgstr "Montrer l'espace libre"
 
 msgid "Shutdown System"
 msgstr "Arrêt"
 
 msgid "Shutdown Wii"
-msgstr ""
-
-msgid "Shutdown to Idle"
-msgstr "Veille"
-
-msgid "Shutdown?"
-msgstr ""
+msgstr "Eteindre la Wii"
 
 msgid "Sort alphabetically"
 msgstr "Ordre Alphabétique"
@@ -1127,7 +1109,7 @@ msgid "Sound"
 msgstr "Sons"
 
 msgid "Sound Settings"
-msgstr ""
+msgstr "Reglages du son"
 
 msgid "Sound+BGM"
 msgstr "Son + Fond sonore"
@@ -1142,13 +1124,13 @@ msgid "Special thanks to:"
 msgstr "Remerciements spéciaux à:"
 
 msgid "Split each 2GB"
-msgstr ""
+msgstr "Découper tous les 2GB"
 
 msgid "Split each 4GB"
-msgstr ""
+msgstr "Découper tous les 4GB"
 
 msgid "Standby"
-msgstr ""
+msgstr "Veille"
 
 msgid "Success"
 msgstr "Succès"
@@ -1183,15 +1165,18 @@ msgstr "Chinois traditionnel"
 msgid "TXT Cheatcodes Path"
 msgstr "Dossier TXT de Triche"
 
+msgid "The .them file was not found in the zip."
+msgstr ""
+
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "Répertoire indiqué inexistant. Souhaitez-vous le créer ?"
 
 msgid "The wad file was installed"
-msgstr ""
+msgstr "Le fichier wad a été installé"
 
 #, c-format
 msgid "The wad installation failed with error %i"
-msgstr ""
+msgstr "L'installation du wad a échoué avec l'erreur %i"
 
 msgid "Theme Downloader"
 msgstr "Téléchargements Thèmes"
@@ -1203,16 +1188,16 @@ msgid "Theme Title:"
 msgstr "Titre du Thème:"
 
 msgid "Theme path is changed."
-msgstr ""
+msgstr "Dossier theme changé"
 
 msgid "Themes by www.spiffy360.com"
-msgstr ""
+msgstr "Themes par www.spiffy360.com"
 
 msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
-msgstr ""
+msgstr "Cet IOS est l'IOS de BootMii. Si vous étes certain que ce n'est pas BootMii, ignorez ce warning"
 
 msgid "This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."
-msgstr ""
+msgstr "Cet IOS n'a pas été trouvé dans la liste des titres. Si vous êtes certain de l'avoir installé, ignorez ce warning"
 
 msgid "Time left:"
 msgstr "Fini dans:"
@@ -1227,7 +1212,7 @@ msgid "Tooltips"
 msgstr "Info-bulles"
 
 msgid "Transfer failed"
-msgstr ""
+msgstr "Echec du transfert"
 
 msgid "Trying custom Discarts"
 msgstr ""
@@ -1254,10 +1239,10 @@ msgid "Uninstalling wad"
 msgstr "Désinstallation wad"
 
 msgid "Unknown"
-msgstr ""
+msgstr "Inconnu"
 
 msgid "Unlock USB Loader GX"
-msgstr ""
+msgstr "Déverouiller USB Loader GX"
 
 msgid "Unlock console to use this option."
 msgstr "Cette option requiert le déverrouillage de l'interface."
@@ -1266,7 +1251,7 @@ msgid "Unlocked"
 msgstr "Clic pour verrouiller"
 
 msgid "Unsupported format, try to extract manually TempTheme.zip."
-msgstr ""
+msgstr "Format non supporté, essayez d'extraire manuellement TempTheme.zip."
 
 msgid "Update"
 msgstr "Mise à Jour"
@@ -1290,7 +1275,7 @@ msgid "Update failed"
 msgstr "Mise à Jour échouée"
 
 msgid "Update successfull"
-msgstr ""
+msgstr "Mise à jour réussie"
 
 msgid "Updating Language Files:"
 msgstr "Mise à Jour Fichiers Langue:"
@@ -1339,7 +1324,7 @@ msgid "WiiTDB Path"
 msgstr "Dossier WiiTDB"
 
 msgid "WiiTDB is up to date."
-msgstr ""
+msgstr "WiiTDB est à jour."
 
 msgid "Wiilight"
 msgstr "Illumination Wii"
@@ -1351,17 +1336,13 @@ msgid "Yes"
 msgstr "Oui"
 
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
-msgstr ""
+msgstr "Vous éssayez de sélectinner une partition FAT32/NTFS/EXT avec un cIOS 249 Rev < 18 (non supporté). Continuez a vos risques"
 
 msgid "You need to select or format a partition"
 msgstr "Vous devez choisir ou formater une partition"
 
-#, c-format
-msgid "Your URL has been saved in %sWiiTDB_URL.txt."
-msgstr "Sauvegarde de l'URL sous %sWiiTDB_URL.txt."
-
 msgid "and translators for language files updates"
-msgstr ""
+msgstr "et les traducteurs pour la mise a jour des fichiers langue"
 
 msgid "available"
 msgstr "disponible"
@@ -1416,6 +1397,27 @@ msgstr "sur"
 
 msgid "seconds left"
 msgstr "secondes restantes"
+
+#~ msgid "Full Shutdown"
+#~ msgstr "Éteindre"
+
+#~ msgid "GXtheme.cfg not found in any subfolder."
+#~ msgstr "GXtheme.cfg non trouvé dans aucun sous-dossier."
+
+#~ msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
+#~ msgstr "Pressez 1 pour obtenir un lien personnalisé pour votre WiiTDB.zip"
+
+#~ msgid "Paste it into your browser to get your WiiTDB.zip."
+#~ msgstr "Collez ce lien dans votre navigateur pour télécharger."
+
+#~ msgid "Shutdown to Idle"
+#~ msgstr "Veille"
+
+#~ msgid "Shutdown?"
+#~ msgstr "Eteindre ?"
+
+#~ msgid "Your URL has been saved in %sWiiTDB_URL.txt."
+#~ msgstr "Sauvegarde de l'URL sous %sWiiTDB_URL.txt."
 
 #~ msgid "Can't create file"
 #~ msgstr "Création du fichier impossible"

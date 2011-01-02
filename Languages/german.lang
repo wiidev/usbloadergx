@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-02 10:19+0100\n"
+"POT-Creation-Date: 2011-01-02 19:00+0100\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: ZEN.13\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13\n"
@@ -565,9 +565,6 @@ msgstr "Freier Speicher"
 msgid "French"
 msgstr "Französisch"
 
-msgid "Full Shutdown"
-msgstr "WiiConnect24 aus"
-
 msgid "Full shutdown"
 msgstr ""
 
@@ -582,9 +579,6 @@ msgstr "GCT Datei erstellt"
 
 msgid "GUI Settings"
 msgstr "GUI Einstellungen"
-
-msgid "GXtheme.cfg not found in any subfolder."
-msgstr "GXtheme.cfg in keinem Unterordner gefunden."
 
 msgid "Game ID"
 msgstr "Spiel ID"
@@ -628,11 +622,11 @@ msgstr "Spiele"
 msgid "GamesLevel"
 msgstr ""
 
+msgid "Genre:"
+msgstr ""
+
 msgid "German"
 msgstr "Deutsch"
-
-msgid "Gerne:"
-msgstr ""
 
 msgid "Global Settings"
 msgstr ""
@@ -657,9 +651,6 @@ msgstr "Was soll aktualisiert werden?"
 
 msgid "How to Shutdown?"
 msgstr "Wie soll ausgeschaltet werden?"
-
-msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
-msgstr "Wenn du kein WiFi hast, drücke 1 um eine URL zu generieren."
 
 #, c-format
 msgid "Incoming file %0.2fKB"
@@ -961,9 +952,6 @@ msgstr "Passwort geändert"
 msgid "Password has been changed"
 msgstr "Passwort wurde geändert"
 
-msgid "Paste it into your browser to get your WiiTDB.zip."
-msgstr "Füge sie in deinen Browser ein, um die WiiTDB.zip zu erhalten."
-
 msgid "Patch Country Strings"
 msgstr "Country Strings patchen"
 
@@ -1108,12 +1096,6 @@ msgstr "System herunterfahren"
 msgid "Shutdown Wii"
 msgstr ""
 
-msgid "Shutdown to Idle"
-msgstr "WiiConnect24 an"
-
-msgid "Shutdown?"
-msgstr ""
-
 msgid "Sort alphabetically"
 msgstr "Alphabetisch ordnen"
 
@@ -1182,6 +1164,9 @@ msgstr "Traditionelles Chinesisch"
 
 msgid "TXT Cheatcodes Path"
 msgstr "TXT Cheatdateien"
+
+msgid "The .them file was not found in the zip."
+msgstr ""
 
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "Das eingegebene Verzeichnis existiert nicht. Möchtest du es erstellen?"
@@ -1356,10 +1341,6 @@ msgstr ""
 msgid "You need to select or format a partition"
 msgstr "Du must eine Partition auswählen oder formatieren."
 
-#, c-format
-msgid "Your URL has been saved in %sWiiTDB_URL.txt."
-msgstr "Deine URL wurde in %sWiiTDB_URL.txt gespeichert."
-
 msgid "and translators for language files updates"
 msgstr ""
 
@@ -1416,6 +1397,24 @@ msgstr "von"
 
 msgid "seconds left"
 msgstr "Sekunden verbleiben"
+
+#~ msgid "Full Shutdown"
+#~ msgstr "WiiConnect24 aus"
+
+#~ msgid "GXtheme.cfg not found in any subfolder."
+#~ msgstr "GXtheme.cfg in keinem Unterordner gefunden."
+
+#~ msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
+#~ msgstr "Wenn du kein WiFi hast, drücke 1 um eine URL zu generieren."
+
+#~ msgid "Paste it into your browser to get your WiiTDB.zip."
+#~ msgstr "Füge sie in deinen Browser ein, um die WiiTDB.zip zu erhalten."
+
+#~ msgid "Shutdown to Idle"
+#~ msgstr "WiiConnect24 an"
+
+#~ msgid "Your URL has been saved in %sWiiTDB_URL.txt."
+#~ msgstr "Deine URL wurde in %sWiiTDB_URL.txt gespeichert."
 
 #~ msgid "%s : %s May not boot correctly if your System Menu is not up to date."
 #~ msgstr "%s : %s startet evtl. nicht richtig, falls dein System Menü nicht aktuell ist."

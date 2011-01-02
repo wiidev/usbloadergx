@@ -145,7 +145,7 @@ void CoverDownload()
     if (!IsNetworkInit() && !NetworkInitPrompt())
         return;
 
-    const char * PromptText = choice == 3 ? tr("Download Boxart image?") : tr("Download Discart image?");
+    const char * PromptText = choice == 3 ? tr("Download Discart image?") : tr("Download Boxart image?");
 
     char tempCnt[80];
     snprintf(tempCnt, sizeof(tempCnt), "%i %s", MissingFilesList.size(), tr( "Missing files" ));

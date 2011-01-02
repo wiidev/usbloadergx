@@ -21,7 +21,7 @@
  */
 
 #include "FreeTypeGX.h"
-#include "memory/mem2.h"
+#include "utils/tools.h"
 
 using namespace std;
 
@@ -172,8 +172,12 @@ ftgxCharData * FreeTypeGX::cacheGlyphData(wchar_t charCode, int16_t pixelSize)
         {
             FT_Bitmap *glyphBitmap = &ftFace->glyph->bitmap;
 
-            textureWidth = glyphBitmap->width + (4 - glyphBitmap->width % 4) % 4;
-            textureHeight = glyphBitmap->rows + (4 - glyphBitmap->rows % 4) % 4;
+            textureWidth = ALIGN(glyphBitmap->width);
+            textureHeight = ALIGN(glyphBitmap->rows);
+            if(textureWidth == 0)
+                textureWidth = 4;
+            if(textureHeight == 0)
+                textureHeight = 4;
 
             fontData[pixelSize][charCode].renderOffsetX = (int16_t) ftFace->glyph->bitmap_left;
             fontData[pixelSize][charCode].glyphAdvanceX = (uint16_t) (ftFace->glyph->advance.x >> 6);
@@ -227,9 +231,9 @@ uint16_t FreeTypeGX::cacheGlyphDataComplete(int16_t pixelSize)
  */
 void FreeTypeGX::loadGlyphData(FT_Bitmap *bmp, ftgxCharData *charData)
 {
-    int length = ((((charData->textureWidth + 3) >> 2) * ((charData->textureHeight + 3) >> 2) * 32 * 2 + 31) & ~31);
+    int length = ALIGN32(((charData->textureWidth+3)>>2)*((charData->textureHeight+3)>>2)*32*2);
 
-    uint8_t * glyphData = (uint8_t *) MEM2_alloc(length);
+    uint8_t * glyphData = (uint8_t *) memalign(32, length);
     if (!glyphData) return;
 
     memset(glyphData, 0x00, length);
@@ -241,8 +245,7 @@ void FreeTypeGX::loadGlyphData(FT_Bitmap *bmp, ftgxCharData *charData)
     {
         for (int imagePosX = 0; imagePosX < bmp->width; ++imagePosX)
         {
-            offset = ((((imagePosY >> 2) * (charData->textureWidth >> 2) + (imagePosX >> 2)) << 5) + ((imagePosY & 3)
-                    << 2) + (imagePosX & 3)) << 1;
+            offset = (((((imagePosY >> 2) * (charData->textureWidth >> 2) + (imagePosX >> 2)) << 5) + ((imagePosY & 3) << 2) + (imagePosX & 3)) << 1);
             glyphData[offset] = *src;
             glyphData[offset + 1] = *src;
             glyphData[offset + 32] = *src;

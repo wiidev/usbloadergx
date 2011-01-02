@@ -146,8 +146,6 @@ bool StartUpProcess::Execute()
     gprintf("\tLoading language...%s\n", Settings.LoadLanguage(Settings.language_path, CONSOLE_DEFAULT) ? "done" : "failed");
     gprintf("\tLoading game settings...%s\n", GameSettings.Load(Settings.ConfigPath) ? "done" : "failed");
     gprintf("\tLoading game statistics...%s\n", GameStatistics.Load(Settings.ConfigPath) ? "done" : "failed");
-    gprintf("\tLoading font...%s\n", Theme::LoadFont(Settings.theme_path) ? "done" : "failed (using default)");
-    gprintf("\tLoading theme...%s\n", Theme::Load(Settings.theme) ? "done" : "failed (using default)");
 
     if(Settings.cios != IOS_GetVersion())
     {
@@ -164,6 +162,9 @@ bool StartUpProcess::Execute()
     }
     else
         SetTextf("Loaded cIOS %i R%i\n", IOS_GetVersion(), IOS_GetRevision());
+
+    gprintf("\tLoading font...%s\n", Theme::LoadFont(Settings.theme_path) ? "done" : "failed (using default)");
+    gprintf("\tLoading theme...%s\n", Theme::Load(Settings.theme) ? "done" : "failed (using default)");
 
     //! Init the rest of the System
     Sys_Init();

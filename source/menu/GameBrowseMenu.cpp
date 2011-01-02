@@ -749,7 +749,7 @@ int GameBrowseMenu::MainLoop()
     else if (poweroffBtn->GetState() == STATE_CLICKED)
     {
         gprintf("\tpoweroffBtn clicked\n");
-        int choice = WindowPrompt(tr( "How to Shutdown?" ), 0, tr( "Full Shutdown" ), tr( "Shutdown to Idle" ), tr( "Cancel" ));
+        int choice = WindowPrompt(tr( "How to Shutdown?" ), 0, tr( "Full shutdown" ), tr( "Standby" ), tr( "Cancel" ));
         if (choice == 2)
             Sys_ShutdownToIdle();
         else if (choice == 1)
