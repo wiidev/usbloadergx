@@ -785,7 +785,7 @@ void Wbfs_Fat::mk_gameid_title(struct discHdr *header, char *name, int re_space,
     char id[7];
 
     snprintf(id, sizeof(id), (char *) header->id);
-    snprintf(title, sizeof(title), GameTitles.GetTitle(header));
+    snprintf(title, sizeof(title), header->title);
     title_filename(title);
 
     if (layout == 0)

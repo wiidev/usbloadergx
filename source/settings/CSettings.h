@@ -113,13 +113,13 @@ class CSettings
         short ShowFreeSpace;
         char returnTo[20];
     protected:
+        bool ValidVersion(FILE * file);
         bool SetSetting(char *name, char *value);
         //!Find the config file in the default paths
         bool FindConfig();
 
         void ParseLine(char *line);
         void TrimLine(char *dest, char *src, int size);
-        FILE * file;
 };
 
 extern CSettings Settings;

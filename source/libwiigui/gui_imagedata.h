@@ -35,7 +35,8 @@ class GuiImageData
 		//!Constructor
 		//!\param img Image data
 		//!\param imgSize The image size
-		GuiImageData(const u8 * img, int imgSize);
+		//!\param cache True if the resource manager should cache that address
+		GuiImageData(const u8 * img, int imgSize, bool cache = true);
 		//!Overload
         GuiImageData(const char * filepath);
 		//!Destructor

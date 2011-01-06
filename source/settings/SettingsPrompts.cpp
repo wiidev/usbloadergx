@@ -9,6 +9,7 @@
 #include "libwiigui/gui.h"
 #include "libwiigui/gui_customoptionbrowser.h"
 #include "settings/CSettings.h"
+#include "settings/Gametitles.h"
 #include "themes/CTheme.h"
 #include "network/URL_List.h"
 #include "FileOperations/fileops.h"
@@ -89,6 +90,8 @@ int MenuLanguageSelect()
     int cnt = 0;
     int ret = 0, choice = 0;
     int returnhere = 0;
+    char OldLangCode[10];
+    snprintf(OldLangCode, sizeof(OldLangCode), Settings.db_language);
 
     GuiImageData btnOutline(Resources::GetFile("button_dialogue_box.png"), Resources::GetFileSize("button_dialogue_box.png"));
     GuiImageData settingsbg(Resources::GetFile("settings_background.png"), Resources::GetFileSize("settings_background.png"));
@@ -313,6 +316,12 @@ int MenuLanguageSelect()
             optionBrowser4.SetFocus( 1 );
         }
 
+    }
+
+    //! Reload game list in new language
+    if(strcmp(Settings.db_language, OldLangCode) != 0)
+    {
+        GameTitles.LoadTitlesFromWiiTDB(Settings.titlestxt_path);
     }
 
     w.SetEffect( EFFECT_FADE, -20 );

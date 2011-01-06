@@ -53,26 +53,29 @@ GuiImageData::GuiImageData(const char * filepath)
         free(buffer);
 }
 
-GuiImageData::GuiImageData(const u8 * img, int imgSize)
+GuiImageData::GuiImageData(const u8 * img, int imgSize, bool cache)
 {
 	data = NULL;
 	width = 0;
 	height = 0;
 	format = GX_TF_RGBA8;
 
-    ImageData * Image = ResourceManager::GetImageData(img);
-    if(Image != NULL && Image->data != NULL)
+    if(cache)
     {
-        data = Image->data;
-        width = Image->width;
-        height = Image->height;
-        format = Image->format;
-        return;
+        ImageData * Image = ResourceManager::GetImageData(img);
+        if(Image != NULL && Image->data != NULL)
+        {
+            data = Image->data;
+            width = Image->width;
+            height = Image->height;
+            format = Image->format;
+            return;
+        }
     }
 
     LoadImage(img, imgSize);
 
-    if(data)
+    if(data && cache)
     {
         ImageData NewImage;
         NewImage.data = data;

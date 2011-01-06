@@ -1,13 +1,13 @@
 # USB Loader GX language source file.
-# French V13.1 r931
+# French V13.2 r1031
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-02 19:00+0100\n"
+"POT-Creation-Date: 2011-01-06 19:58+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
-"Last-Translator: Kin8\n"
+"Last-Translator: Cyan\n"
 "Language-Team: Badablek, Amour, ikya & Kin8\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -29,13 +29,13 @@ msgid "0 (Everyone)"
 msgstr "0 (Tous 3+)"
 
 msgid "0 (Locked and Unlocked Games)"
-msgstr "0 (Jeux verouillés et non verouillés)"
+msgstr "0 (Affiche les jeux verrouillés et non verrouillés)"
 
 msgid "1 (Child 7+)"
 msgstr "1 (Enfants 7+)"
 
 msgid "1 (Unlocked Games Only)"
-msgstr "1 (Seulement les jeux deverouillés)"
+msgstr "1 (Affiche seulement les jeux déverrouillés)"
 
 msgid "1 hour"
 msgstr "1 heure"
@@ -146,10 +146,10 @@ msgid "Apr"
 msgstr "Avr"
 
 msgid "Are you sure you want to lock USB Loader GX?"
-msgstr "Êtes-vous sûr de vouloir verouiller USB loader GX ?"
+msgstr "Êtes-vous sûr de vouloir verrouiller USB loader GX ?"
 
 msgid "Are you sure you want to reset?"
-msgstr "Êtes-vous sûr de vouloir réinitialiser ?"
+msgstr "Voulez-vous vraiment réinitialiser ?"
 
 msgid "Are you sure?"
 msgstr "Êtes-vous sûr ?"
@@ -191,7 +191,7 @@ msgid "Boot?"
 msgstr "Lancer ?"
 
 msgid "Both"
-msgstr "Tous"
+msgstr "Les deux"
 
 msgid "Can't be formatted"
 msgstr "Formatage impossible"
@@ -210,7 +210,7 @@ msgid "Cancel"
 msgstr "Annuler"
 
 msgid "Cannot write to destination."
-msgstr "Ecriture impossible."
+msgstr "Écriture impossible."
 
 msgid "Change Play Path"
 msgstr "Changer Dossier"
@@ -275,7 +275,7 @@ msgid "Could not create path: %s"
 msgstr "Impossible de créer: %s"
 
 msgid "Could not find info for this game in the wiitdb.xml."
-msgstr "Pas dinformation pour ce jeu dans wiitdb.xml."
+msgstr "Pas d'information pour ce jeu dans wiitdb.xml."
 
 msgid "Could not initialize DIP module!"
 msgstr "Initialisation module DIP impossible !"
@@ -320,7 +320,7 @@ msgid "Default Gamesettings"
 msgstr "Reset Paramètres Jeu"
 
 msgid "Default Settings"
-msgstr "Reset Paramètres"
+msgstr "Réinitialiser Paramètres"
 
 msgid "Delete"
 msgstr "Supprimer"
@@ -368,7 +368,7 @@ msgid "Display"
 msgstr "Affichage"
 
 msgid "Display as a carousel"
-msgstr "Carousselle"
+msgstr "Caroussel"
 
 msgid "Display as a grid"
 msgstr "Grille"
@@ -454,6 +454,9 @@ msgstr "ERREUR:"
 msgid "ERROR: Can't set up theme."
 msgstr "ERREUR: Configuration thème impossible."
 
+msgid "Enabling this option on a FAT partition might slow the startup of the loader."
+msgstr ""
+
 msgid "English"
 msgstr "Anglais"
 
@@ -471,7 +474,7 @@ msgid "Error creating path: %s"
 msgstr "Erreur lors de la création du chemin: %s"
 
 msgid "Error opening downloaded file"
-msgstr "Erreur la l'ouverure du fichier téléchargé"
+msgstr "Erreur à l'ouverure du fichier téléchargé"
 
 msgid "Error reading Disc"
 msgstr "Erreur à la lecture du disque"
@@ -490,10 +493,10 @@ msgid "Error while transfering data."
 msgstr "Erreur durant le transfert de données."
 
 msgid "Error while updating USB Loader GX."
-msgstr "Erreur lors de la mise a jour de USB Loader GX."
+msgstr "Erreur lors de la mise à jour de USB Loader GX."
 
 msgid "Error writing the data."
-msgstr "Erreur d'ecriture des données"
+msgstr "Erreur d'écriture des données"
 
 msgid "Error..."
 msgstr "Erreur..."
@@ -502,10 +505,10 @@ msgid "Error:"
 msgstr "Erreur:"
 
 msgid "Exit"
-msgstr "Sortir"
+msgstr "Quitter"
 
 msgid "Exit to where?"
-msgstr "Sortir où"
+msgstr "Quitter vers où?"
 
 msgid "Extracting files..."
 msgstr "Extraction des fichiers..."
@@ -539,7 +542,7 @@ msgid "Finishing installation... Ok!"
 msgstr "Finalisation de l'installation... OK!"
 
 msgid "Flat Covers"
-msgstr ""
+msgstr "Jaquettes 2D"
 
 msgid "Flip-X"
 msgstr "Inversion-X"
@@ -593,7 +596,7 @@ msgid "Game Load"
 msgstr "Chargement Jeux"
 
 msgid "Game Lock"
-msgstr ""
+msgstr "Verrouiller le jeu"
 
 msgid "Game Region"
 msgstr "Région"
@@ -608,7 +611,7 @@ msgid "Game Sound Volume"
 msgstr "Volume Son des Jeux"
 
 msgid "Game Split Size"
-msgstr ""
+msgstr "Découpage des jeux"
 
 msgid "Game is already installed:"
 msgstr "Le jeu est déjà installé:"
@@ -620,10 +623,10 @@ msgid "Games"
 msgstr "Jeux"
 
 msgid "GamesLevel"
-msgstr ""
+msgstr "Niv. verrou"
 
 msgid "Genre:"
-msgstr ""
+msgstr "Genre:"
 
 msgid "German"
 msgstr "Allemand"
@@ -679,7 +682,7 @@ msgid "Install a game"
 msgstr "Installer un jeu"
 
 msgid "Install directories"
-msgstr "Repertoires d'installation"
+msgstr "Dossier d'installation"
 
 msgid "Install partitions"
 msgstr "Installation"
@@ -700,7 +703,7 @@ msgid "Installing wad"
 msgstr "Installation WAD"
 
 msgid "Issue manager /"
-msgstr ""
+msgstr "Gestion des erreurs/"
 
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
 msgstr "SVP, faîtes passer cette information qui serait très utile à la Team USB Loader GX."
@@ -761,7 +764,7 @@ msgid "Load this DOL as alternate DOL?"
 msgstr "Charger comme DOL alternatif ?"
 
 msgid "Loading default theme."
-msgstr "Chargement theme par défaut."
+msgstr "Chargement thème par défaut."
 
 msgid "Loading standard language."
 msgstr "Chargement langue par défaut."
@@ -788,7 +791,7 @@ msgid "Loop Sound"
 msgstr "Son en boucle"
 
 msgid "Main tester:"
-msgstr "Testeurs principaux:"
+msgstr "Testeur principal:"
 
 msgid "Mar"
 msgstr "Mars"
@@ -818,7 +821,7 @@ msgid "Neither"
 msgstr "Aucun"
 
 msgid "Network is not initiated."
-msgstr "Reseau non initialisé"
+msgstr "Réseau non initialisé"
 
 msgid "New Disc Detected"
 msgstr "Nouveau DVD Détecté"
@@ -842,16 +845,16 @@ msgid "No URL or Path specified."
 msgstr "Pas d'adresse ou de chemin spécifié"
 
 msgid "No WBFS or FAT/NTFS/EXT partition found"
-msgstr "Pas de partition WBFS or FAT/NTFS/EXT trouvé"
+msgstr "Pas de partition WBFS ou FAT/NTFS/EXT trouvé"
 
 msgid "No cheats were selected"
-msgstr "Aucune selection de triche"
+msgstr "Aucune sélection de triche"
 
 msgid "No data could be read."
 msgstr "Lecture des données impossible."
 
 msgid "No favorites selected."
-msgstr "Pas de favoris selectionné"
+msgstr "Pas de favoris sélectionné"
 
 msgid "No file missing!"
 msgstr "Aucun fichier manquant !"
@@ -932,7 +935,7 @@ msgid "Only Original"
 msgstr "Originaux"
 
 msgid "Only for Install"
-msgstr "Jeu installé seulement"
+msgstr "Uniquement à l'installation"
 
 msgid "Original/Customs"
 msgstr "Originaux/Persos"
@@ -1019,13 +1022,13 @@ msgid "Rename Game on WBFS"
 msgstr "Renommer un jeu"
 
 msgid "Reset BG Music"
-msgstr "Reinitialisé le fond sonore"
+msgstr "Fond sonore par defaut"
 
 msgid "Reset Playcounter"
-msgstr "Reset Utilisation du Jeu"
+msgstr "Réinitialiser le compteur d'utilisation"
 
 msgid "Reset to default BGM?"
-msgstr "Reinitialisé le fond sonore aux valeurs par defaut ?"
+msgstr "Réinitialiser le fond sonore ?"
 
 msgid "Restarting..."
 msgstr "Redémarrage..."
@@ -1055,7 +1058,7 @@ msgid "Save"
 msgstr "Enregistrer"
 
 msgid "Save Failed. No device inserted?"
-msgstr "Echec de la sauvegarde. Pas de périférique inséré ?"
+msgstr "Echec de la sauvegarde. Pas de périphérique inséré ?"
 
 msgid "Save Game List to"
 msgstr "Sauvegarder la liste des jeux sous"
@@ -1076,7 +1079,7 @@ msgid "Select a DOL"
 msgstr "Choisir un DOL"
 
 msgid "Select a DOL from Game"
-msgstr "Selectionner un DOL a partir du jeu"
+msgstr "Sélectionner un DOL a partir du jeu"
 
 msgid "Sept"
 msgstr ""
@@ -1109,7 +1112,7 @@ msgid "Sound"
 msgstr "Sons"
 
 msgid "Sound Settings"
-msgstr "Reglages du son"
+msgstr "Réglages du son"
 
 msgid "Sound+BGM"
 msgstr "Son + Fond sonore"
@@ -1166,7 +1169,7 @@ msgid "TXT Cheatcodes Path"
 msgstr "Dossier TXT de Triche"
 
 msgid "The .them file was not found in the zip."
-msgstr ""
+msgstr "Fichier .them introuvable dans le zip."
 
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "Répertoire indiqué inexistant. Souhaitez-vous le créer ?"
@@ -1179,7 +1182,7 @@ msgid "The wad installation failed with error %i"
 msgstr "L'installation du wad a échoué avec l'erreur %i"
 
 msgid "Theme Downloader"
-msgstr "Téléchargements Thèmes"
+msgstr "Téléchargement Thèmes"
 
 msgid "Theme Path"
 msgstr "Dossier Thème"
@@ -1188,16 +1191,16 @@ msgid "Theme Title:"
 msgstr "Titre du Thème:"
 
 msgid "Theme path is changed."
-msgstr "Dossier theme changé"
+msgstr "Dossier thème changé"
 
 msgid "Themes by www.spiffy360.com"
-msgstr "Themes par www.spiffy360.com"
+msgstr "Thèmes par www.spiffy360.com"
 
 msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
-msgstr "Cet IOS est l'IOS de BootMii. Si vous étes certain que ce n'est pas BootMii, ignorez ce warning"
+msgstr "Cet IOS est l'IOS de BootMii. Si vous étes certain que ce n'est pas BootMii, ignorez cet avertissement."
 
 msgid "This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."
-msgstr "Cet IOS n'a pas été trouvé dans la liste des titres. Si vous êtes certain de l'avoir installé, ignorez ce warning"
+msgstr "Cet IOS n'a pas été trouvé dans la liste des titres. Si vous êtes certain de l'avoir installé, ignorez cet avertissement."
 
 msgid "Time left:"
 msgstr "Fini dans:"
@@ -1212,13 +1215,13 @@ msgid "Tooltips"
 msgstr "Info-bulles"
 
 msgid "Transfer failed"
-msgstr "Echec du transfert"
+msgstr "Échec du transfert"
 
 msgid "Trying custom Discarts"
-msgstr ""
+msgstr "Essai labels DVD persos"
 
 msgid "Trying original Discarts"
-msgstr ""
+msgstr "Essai labels DVD originaux"
 
 msgid "USB Device not found"
 msgstr "Périphérique USB introuvable"
@@ -1300,7 +1303,7 @@ msgid "Waiting..."
 msgstr "En attente..."
 
 msgid "Warning:"
-msgstr ""
+msgstr "Attention:"
 
 msgid "What do you want to update?"
 msgstr "Choix Mise à Jour"
@@ -1336,13 +1339,13 @@ msgid "Yes"
 msgstr "Oui"
 
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
-msgstr "Vous éssayez de sélectinner une partition FAT32/NTFS/EXT avec un cIOS 249 Rev < 18 (non supporté). Continuez a vos risques"
+msgstr "Vous éssayez de sélectionner une partition FAT32/NTFS/EXT avec un cIOS 249 Rev < 18 (non supporté). Continuez à vos risques."
 
 msgid "You need to select or format a partition"
 msgstr "Vous devez choisir ou formater une partition"
 
 msgid "and translators for language files updates"
-msgstr "et les traducteurs pour la mise a jour des fichiers langue"
+msgstr "et les traducteurs pour la mise à jour des fichiers langue"
 
 msgid "available"
 msgstr "disponible"

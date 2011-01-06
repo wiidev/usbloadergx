@@ -43,7 +43,7 @@ s32 WBFS_Init(u32 device)
 s32 WBFS_OpenPart(int part_num)
 {
     PartitionHandle * usbHandle = DeviceHandler::Instance()->GetUSBHandle();
-    if(part_num < 0 || part_num > usbHandle->GetPartitionCount())
+    if(part_num < 0 || part_num >= usbHandle->GetPartitionCount())
         return -1;
 
     // close

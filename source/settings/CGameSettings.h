@@ -56,6 +56,7 @@ class CGameSettings
     protected:
         bool ReadGameID(const char * src, char * GameID, int size);
         bool SetSetting(GameCFG & game, char *name, char *value);
+        bool ValidVersion(FILE * file);
         //!Find the config file in the default paths
         bool FindConfig();
 

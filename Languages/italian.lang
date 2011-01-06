@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-# italian.lang - v62 - r1023
+# italian.lang - v63 - r1031
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-02 19:00+0100\n"
-"PO-Revision-Date: 2010-12-30 08:00+0200\n"
+"POT-Creation-Date: 2011-01-06 19:58+0100\n"
+"PO-Revision-Date: 2011-01-03 01:30+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: Cambo\n"
 "MIME-Version: 1.0\n"
@@ -29,13 +29,13 @@ msgid "0 (Everyone)"
 msgstr "0 (Tutti)"
 
 msgid "0 (Locked and Unlocked Games)"
-msgstr "0 (Giochi Bloccati e Non)"
+msgstr "0 (Tutti i Giochi)"
 
 msgid "1 (Child 7+)"
 msgstr "1 (Bambini 7+)"
 
 msgid "1 (Unlocked Games Only)"
-msgstr "1 (Solo Giochi Non Bloccati)"
+msgstr "1 (Giochi Non Bloccati)"
 
 msgid "1 hour"
 msgstr "1 ora"
@@ -50,7 +50,7 @@ msgid "20 min"
 msgstr "20 minuti"
 
 msgid "2D Cover Path"
-msgstr "Percorso Copertine 2D"
+msgstr "Cart. Copertine 2D"
 
 msgid "3 (Mature 16+)"
 msgstr "3 (Ragazzi 16+)"
@@ -62,7 +62,7 @@ msgid "30 min"
 msgstr "30 minuti"
 
 msgid "3D Cover Path"
-msgstr "Percorso Copertine 3D"
+msgstr "Cart. Copertine 3D"
 
 msgid "3D Covers"
 msgstr "Copertine 3D"
@@ -125,7 +125,7 @@ msgid "AUTO"
 msgstr "Automatico"
 
 msgid "All Partitions"
-msgstr "Tutte le Partizioni"
+msgstr "Tutte"
 
 msgid "All images downloaded successfully."
 msgstr "Immagini scaricate tutte correttamente."
@@ -140,7 +140,7 @@ msgid "Anti"
 msgstr ""
 
 msgid "App Language"
-msgstr "Percorso Lingua"
+msgstr "Lingua Utilizzata"
 
 msgid "Apr"
 msgstr "aprile"
@@ -164,7 +164,7 @@ msgid "AutoInit Network"
 msgstr "Inizializz. Rete Automatica"
 
 msgid "BCA Codes Path"
-msgstr "Percorso Codici BCA"
+msgstr "Cart. Codici BCA"
 
 msgid "BETA revisions"
 msgstr "Versioni BETA"
@@ -201,7 +201,7 @@ msgstr "Impossibile creare la cartella"
 
 #, c-format
 msgid "Can't create path: %s"
-msgstr ""
+msgstr "Impossibile creare cartella: %s"
 
 msgid "Can't delete:"
 msgstr "Impossibile eliminare:"
@@ -213,7 +213,7 @@ msgid "Cannot write to destination."
 msgstr "Impossibile scrivere nella destinazione."
 
 msgid "Change Play Path"
-msgstr "Modifica Percorso Suoni"
+msgstr "Modifica Cartella Suoni"
 
 msgid "Cheatfile is blank"
 msgstr "il file dei trucchi è vuoto"
@@ -272,7 +272,7 @@ msgstr "Impossibile creare il file GCT"
 
 #, c-format
 msgid "Could not create path: %s"
-msgstr "Impossibile creare il percorso: %s"
+msgstr "Impossibile creare la cartella: %s"
 
 msgid "Could not find info for this game in the wiitdb.xml."
 msgstr "Non sono disponibili informazioni su questo gioco nel file wiitdb.xml."
@@ -299,22 +299,22 @@ msgid "Create"
 msgstr "Crea"
 
 msgid "Credits"
-msgstr ""
+msgstr "Ringraziamenti"
 
 msgid "Custom Paths"
-msgstr "Impostazione Percorsi (Directory)"
+msgstr "Impostazioni Cartelle"
 
 msgid "Customs/Original"
 msgstr "Modific./Origin."
 
 msgid "DOL Path"
-msgstr "Percorso File DOL"
+msgstr "Cart. File DOL"
 
 msgid "Dec"
 msgstr "dicembre"
 
 msgid "Default"
-msgstr "Default"
+msgstr "Predefinita"
 
 msgid "Default Gamesettings"
 msgstr "Impostaz. Predefinite Gioco"
@@ -353,7 +353,7 @@ msgid "Disc Artwork Download"
 msgstr "Scaricamento Imm. Disco"
 
 msgid "Disc Artwork Path"
-msgstr "Percorso Imm. Disco"
+msgstr "Cart. Imm. Disco"
 
 msgid "Disc Default"
 msgstr "Predefinita Disco"
@@ -365,7 +365,7 @@ msgid "DiskFlip"
 msgstr "Gira i dischi"
 
 msgid "Display"
-msgstr "Visualizza"
+msgstr "Visualizza Info Gioco"
 
 msgid "Display as a carousel"
 msgstr "Visualizzazione a Carosello"
@@ -440,7 +440,7 @@ msgid "Downloading original Discarts"
 msgstr "Sto scaricando le imm. disco originali"
 
 msgid "Downloading pagelist:"
-msgstr ""
+msgstr "Sto scaricando la lista:"
 
 msgid "Dutch"
 msgstr "Olandese"
@@ -453,6 +453,9 @@ msgstr "ERRORE:"
 
 msgid "ERROR: Can't set up theme."
 msgstr "ERRORE: Impossibile configurare il tema."
+
+msgid "Enabling this option on a FAT partition might slow the startup of the loader."
+msgstr ""
 
 msgid "English"
 msgstr "Inglese"
@@ -468,7 +471,7 @@ msgstr "Correzione Error002"
 
 #, c-format
 msgid "Error creating path: %s"
-msgstr "Errore nella creazione del percorso: %s"
+msgstr "Errore nella creazione della cartella: %s"
 
 msgid "Error opening downloaded file"
 msgstr "Errore nell'apertura del file scaricato"
@@ -478,7 +481,7 @@ msgstr "Errore Lettura Disco"
 
 #, c-format
 msgid "Error when downloading file: %i"
-msgstr ""
+msgstr "Errore scaricando il file: %i"
 
 msgid "Error while downloding file"
 msgstr "Errore durante lo scaricamento del file"
@@ -530,7 +533,7 @@ msgstr "File non trovato."
 
 #, c-format
 msgid "Filesize is %i Byte."
-msgstr ""
+msgstr "La dimensione del file è %i Byte."
 
 msgid "Filesize is 0 Byte."
 msgstr "La dimensione del file è 0 Byte."
@@ -572,7 +575,7 @@ msgid "GAMEID_Gamename"
 msgstr "IDGIOCO_Nomegioco"
 
 msgid "GCT Cheatcodes Path"
-msgstr "Percorso Trucchi in GCT"
+msgstr "Cart. Trucchi in GCT"
 
 msgid "GCT File created"
 msgstr "File GCT creato"
@@ -623,7 +626,7 @@ msgid "GamesLevel"
 msgstr "Livelli"
 
 msgid "Genre:"
-msgstr ""
+msgstr "Genere:"
 
 msgid "German"
 msgstr "Tedesco"
@@ -635,7 +638,7 @@ msgid "HOME Menu"
 msgstr "Menu HOME"
 
 msgid "Homebrew Apps Path"
-msgstr "Percorso Applic. Homebrew"
+msgstr "Cart. Applic. Homebrew"
 
 msgid "Homebrew Channel"
 msgstr "Canale Homebrew"
@@ -679,10 +682,10 @@ msgid "Install a game"
 msgstr "Installa un gioco"
 
 msgid "Install directories"
-msgstr "Installa cartelle"
+msgstr "Installa Cartelle"
 
 msgid "Install partitions"
-msgstr "Installa partizioni"
+msgstr "Installa Partizioni"
 
 msgid "Installing content... Ok!"
 msgstr "Sto installando il contenuto... Ok!"
@@ -700,7 +703,7 @@ msgid "Installing wad"
 msgstr "Sto installando il WAD"
 
 msgid "Issue manager /"
-msgstr ""
+msgstr "Gestore problemi /"
 
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
 msgstr "Hai informazioni che potrebbero esserci utili. Per favore, comunicale al team di sviluppo."
@@ -730,16 +733,16 @@ msgid "Korean"
 msgstr "Coreano"
 
 msgid "Language File"
-msgstr "File Lingue"
+msgstr "File Traduzioni"
 
 msgid "Language change:"
 msgstr "Modifica Lingua:"
 
 msgid "Languagefiles Path"
-msgstr "Percorso Traduzioni"
+msgstr "Cart. File Traduzioni"
 
 msgid "Languagepath changed."
-msgstr "Percorso Traduzioni modificato"
+msgstr "Cartella Traduzioni Modificata"
 
 msgid "Left"
 msgstr "Sinistra"
@@ -779,28 +782,28 @@ msgid "Locked"
 msgstr "Bloccato"
 
 msgid "Loop Directory"
-msgstr "Cartella Cicli"
+msgstr "Sequenza Brani"
 
 msgid "Loop Music"
-msgstr "Musica Ripetuta"
+msgstr "Ripeti Brano"
 
 msgid "Loop Sound"
 msgstr "Suono Ripetuto"
 
 msgid "Main tester:"
-msgstr ""
+msgstr "Tester principale:"
 
 msgid "Mar"
 msgstr "marzo"
 
 msgid "Mark new games"
-msgstr "Evidenzia i nuovi giochi"
+msgstr "Evidenzia Nuovi Giochi"
 
 msgid "May"
 msgstr "maggio"
 
 msgid "Messageboard Update"
-msgstr "Aggiornamento Messaggi"
+msgstr "Aggiorna Messaggi"
 
 msgid "Missing files"
 msgstr "File Mancante/i"
@@ -809,7 +812,7 @@ msgid "Mount DVD drive"
 msgstr "Avvia DVD"
 
 msgid "Music Loop Mode"
-msgstr "Modalità Musica Ripetuta"
+msgstr "Ripetizione Musica Sottof."
 
 msgid "Music Volume"
 msgstr "Volume"
@@ -836,10 +839,10 @@ msgid "No DOL file found on disc."
 msgstr "Nessun file DOL trovato sul disco."
 
 msgid "No Splitting"
-msgstr "Nessuno Spezzettamento"
+msgstr "Non Suddividere"
 
 msgid "No URL or Path specified."
-msgstr "Nessun percorso o URL specificato."
+msgstr "Nessuna cartella o URL specificata."
 
 msgid "No WBFS or FAT/NTFS/EXT partition found"
 msgstr "Nessuna partizione WBFS o FAT/NTFS/EXT trovata"
@@ -878,7 +881,7 @@ msgid "Not a valid URL"
 msgstr "Non è un URL valido"
 
 msgid "Not a valid URL path"
-msgstr "Non è un percorso URL valido"
+msgstr "Non è un indirizzo URL valido"
 
 msgid "Not a valid domain"
 msgstr "Non è un dominio valido"
@@ -926,7 +929,7 @@ msgid "Only Customs"
 msgstr "Modificate"
 
 msgid "Only Game Partition"
-msgstr "Partizione Solo Giochi"
+msgstr "Solo Giochi"
 
 msgid "Only Original"
 msgstr "Originali"
@@ -956,7 +959,7 @@ msgid "Patch Country Strings"
 msgstr "Cod. Patch Regione"
 
 msgid "Path Changed"
-msgstr "Percorso Modificato"
+msgstr "Cartella Modificata"
 
 msgid "Pick from a list"
 msgstr "Seleziona da un elenco"
@@ -995,7 +998,7 @@ msgid "Quick Boot"
 msgstr "Avvio Veloce"
 
 msgid "Random Directory Music"
-msgstr "Cartella Musica Casuale"
+msgstr "Brano Casuale"
 
 msgid "Reading WAD data... Ok!"
 msgstr "Sto leggendo i dati del WAD... Ok!"
@@ -1013,19 +1016,19 @@ msgid "Reload SD"
 msgstr "Ricarica SD"
 
 msgid "Remove update"
-msgstr "Rimuovi aggiornamento"
+msgstr "Rimuovi Agg."
 
 msgid "Rename Game on WBFS"
 msgstr "Rinomina Gioco su WBFS"
 
 msgid "Reset BG Music"
-msgstr "Azzera Musica BG"
+msgstr "Resetta Musica Sottof."
 
 msgid "Reset Playcounter"
 msgstr "Azzera contatore"
 
 msgid "Reset to default BGM?"
-msgstr "Torna a BGM predefinito?"
+msgstr "Torna a Musica Sottofondo Predefinita?"
 
 msgid "Restarting..."
 msgstr "Premere OK per riavviare..."
@@ -1088,7 +1091,7 @@ msgid "Settings"
 msgstr "Impostazioni"
 
 msgid "Show Free Space"
-msgstr ""
+msgstr "Mostra Spazio Libero"
 
 msgid "Shutdown System"
 msgstr "Spegnimento"
@@ -1097,22 +1100,22 @@ msgid "Shutdown Wii"
 msgstr "Spegni Wii"
 
 msgid "Sort alphabetically"
-msgstr "Ordine alfabetico"
+msgstr "Ordine Alfabetico"
 
 msgid "Sort by rank"
-msgstr "Ordine di preferenza"
+msgstr "Ordine Preferenza"
 
 msgid "Sort order by most played"
 msgstr "Mostra i più giocati"
 
 msgid "Sound"
-msgstr "Audio"
+msgstr "Impostazioni Audio"
 
 msgid "Sound Settings"
-msgstr "Imposta Suono"
+msgstr "Impostazioni Audio"
 
 msgid "Sound+BGM"
-msgstr "Suono+BGM"
+msgstr "Suono+Sottof."
 
 msgid "Sound+Quiet"
 msgstr "Suono+Silenzio"
@@ -1163,10 +1166,10 @@ msgid "TChinese"
 msgstr "Cinese Tradizionale"
 
 msgid "TXT Cheatcodes Path"
-msgstr "Percorso Trucchi in TXT"
+msgstr "Cart. Trucchi in TXT"
 
 msgid "The .them file was not found in the zip."
-msgstr ""
+msgstr "Il file .them non è stato trovato nel file zip."
 
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "La cartella indicata non esiste. Vuoi crearla?"
@@ -1182,16 +1185,16 @@ msgid "Theme Downloader"
 msgstr "Scaricamento Temi"
 
 msgid "Theme Path"
-msgstr "Percorso Tema"
+msgstr "Cart. Temi"
 
 msgid "Theme Title:"
 msgstr "Titolo del tema:"
 
 msgid "Theme path is changed."
-msgstr "Percorso temi modificato."
+msgstr "Cartella Temi Modificata."
 
 msgid "Themes by www.spiffy360.com"
-msgstr ""
+msgstr "Temi da www.spiffy360.com"
 
 msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
 msgstr "Questo IOS è quello del BootMii. Se hai installato qualcos'altro al suo posto e sei sicuro di quel che fai ignora questo avvertimento."
@@ -1251,7 +1254,7 @@ msgid "Unlocked"
 msgstr "Sbloccato"
 
 msgid "Unsupported format, try to extract manually TempTheme.zip."
-msgstr ""
+msgstr "Formato non supportato, provare a scompattare manualmente il file TempTheme.zip."
 
 msgid "Update"
 msgstr "Aggiornamento"
@@ -1266,7 +1269,7 @@ msgid "Update Files"
 msgstr "Aggiorna File"
 
 msgid "Update Path"
-msgstr "Percorso Aggiornamento"
+msgstr "Cart. Aggiornamento"
 
 msgid "Update all Language Files"
 msgstr "Aggiorna tutti i file delle lingue"
@@ -1294,7 +1297,7 @@ msgid "Video Mode"
 msgstr "Modalità Video"
 
 msgid "WIP Patches Path"
-msgstr "Percorso Patch WIP"
+msgstr "Cart. Patch WIP"
 
 msgid "Waiting..."
 msgstr "Caricamento..."
@@ -1321,7 +1324,7 @@ msgid "WiiTDB Files"
 msgstr "File WiiTDB"
 
 msgid "WiiTDB Path"
-msgstr "Percorso Archivio WiiTDB"
+msgstr "Cart. Archivio WiiTDB"
 
 msgid "WiiTDB is up to date."
 msgstr "WiiTDB è aggiornato."
@@ -1342,7 +1345,7 @@ msgid "You need to select or format a partition"
 msgstr "Occorre selezionare o formattare una partizione"
 
 msgid "and translators for language files updates"
-msgstr ""
+msgstr "ed ai traduttori per l'aggiornamento dei file per la localizzazione"
 
 msgid "available"
 msgstr "disponibile"
@@ -1390,7 +1393,7 @@ msgid "free"
 msgstr "liberi"
 
 msgid "not set"
-msgstr "non inserita"
+msgstr "Non Inserita"
 
 msgid "of"
 msgstr "di"

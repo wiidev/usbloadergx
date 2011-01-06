@@ -85,16 +85,16 @@ int DownloadFileToMem(const char *url, u8 **inbuffer, u32 *size)
     char filename[255];
     memset(filename, 0, sizeof(filename));
 
-    u32 filesize = network_request(connection, header, (char *) &filename);
+    int filesize = network_request(connection, header, (char *) &filename);
 
-    if(!filesize)
+    if(filesize <= 0)
     {
         net_close(connection);
         ShowError(tr("Filesize is 0 Byte."));
         return -5;
     }
 
-    u32 blocksize = 10*1024;
+    int blocksize = 10*1024;
 
     u8 * buffer = (u8 *) malloc(filesize);
     if(!buffer)
@@ -104,7 +104,7 @@ int DownloadFileToMem(const char *url, u8 **inbuffer, u32 *size)
         return -6;
     }
 
-    u32 done = 0;
+    int done = 0;
 
     while(done < filesize)
     {

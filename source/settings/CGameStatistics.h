@@ -59,6 +59,7 @@ class CGameStatistics
     protected:
         bool ReadGameID(const char * src, char * GameID, int size);
         bool SetSetting(GameStatus & game, char *name, char *value);
+        bool ValidVersion(FILE * file);
 
         void ParseLine(char *line);
         void TrimLine(char *dest, const char *src, int size);

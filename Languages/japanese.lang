@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-02 19:00+0100\n"
+"POT-Creation-Date: 2011-01-06 19:58+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
@@ -26,16 +26,16 @@ msgid " is not on the server."
 msgstr "はｻｰﾊﾞｰにありません"
 
 msgid "0 (Everyone)"
-msgstr "0(セットしない)"
+msgstr "セットしない"
 
 msgid "0 (Locked and Unlocked Games)"
-msgstr "0(セットしない)"
+msgstr "セットしない"
 
 msgid "1 (Child 7+)"
-msgstr "1(C以上を制限)"
+msgstr "7歳以上を制限"
 
 msgid "1 (Unlocked Games Only)"
-msgstr "1(ロックされていないゲームのみ表示)"
+msgstr "ロックされているゲームを非表示"
 
 msgid "1 hour"
 msgstr "1時間"
@@ -44,7 +44,7 @@ msgid "10 min"
 msgstr "10分"
 
 msgid "2 (Teen 12+)"
-msgstr "2(D以上を制限)"
+msgstr "12歳以上を制限"
 
 msgid "20 min"
 msgstr "20分"
@@ -53,7 +53,7 @@ msgid "2D Cover Path"
 msgstr "2Dカバーのパス"
 
 msgid "3 (Mature 16+)"
-msgstr "3(Z以上を制限)"
+msgstr "16歳以上を制限"
 
 msgid "3 min"
 msgstr "3分"
@@ -68,7 +68,7 @@ msgid "3D Covers"
 msgstr "3Dカバー"
 
 msgid "4 (Adults Only 18+)"
-msgstr "4(Zを制限)"
+msgstr "CERO Zを制限"
 
 msgid "5 min"
 msgstr "5分"
@@ -201,7 +201,7 @@ msgstr "ディレクトリを作成できません"
 
 #, c-format
 msgid "Can't create path: %s"
-msgstr ""
+msgstr "パスを作成できません: %s"
 
 msgid "Can't delete:"
 msgstr "削除できません"
@@ -440,7 +440,7 @@ msgid "Downloading original Discarts"
 msgstr "公式カバーをダウンロード中"
 
 msgid "Downloading pagelist:"
-msgstr ""
+msgstr "リストをダウンロード中:"
 
 msgid "Dutch"
 msgstr "オランダ語"
@@ -453,6 +453,9 @@ msgstr "エラー："
 
 msgid "ERROR: Can't set up theme."
 msgstr "テーマを適用できませんでした"
+
+msgid "Enabling this option on a FAT partition might slow the startup of the loader."
+msgstr ""
 
 msgid "English"
 msgstr "英語"
@@ -478,7 +481,7 @@ msgstr "読み込みに失敗しました"
 
 #, c-format
 msgid "Error when downloading file: %i"
-msgstr ""
+msgstr "ダウンロードに失敗: %i"
 
 msgid "Error while downloding file"
 msgstr "ダウンロードに失敗しました"
@@ -530,7 +533,7 @@ msgstr "ファイルが見つかりません"
 
 #, c-format
 msgid "Filesize is %i Byte."
-msgstr ""
+msgstr "ファイルサイズが%iバイトです"
 
 msgid "Filesize is 0 Byte."
 msgstr "ファイルサイズが0バイトです"
@@ -623,7 +626,7 @@ msgid "GamesLevel"
 msgstr "ゲームの制限"
 
 msgid "Genre:"
-msgstr ""
+msgstr "ジャンル:"
 
 msgid "German"
 msgstr "ドイツ語"
@@ -700,7 +703,7 @@ msgid "Installing wad"
 msgstr "WADをｲﾝｽﾄｰﾙします"
 
 msgid "Issue manager /"
-msgstr ""
+msgstr "問題マネージャー/"
 
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
 msgstr "この情報は開発者までお知らせください"
@@ -788,7 +791,7 @@ msgid "Loop Sound"
 msgstr "ループさせる"
 
 msgid "Main tester:"
-msgstr ""
+msgstr "メインテスター:"
 
 msgid "Mar"
 msgstr "3月"
@@ -1088,7 +1091,7 @@ msgid "Settings"
 msgstr "設定"
 
 msgid "Show Free Space"
-msgstr ""
+msgstr "空き容量を表示"
 
 msgid "Shutdown System"
 msgstr "シャットダウン"
@@ -1166,7 +1169,7 @@ msgid "TXT Cheatcodes Path"
 msgstr "TXTコードのパス"
 
 msgid "The .them file was not found in the zip."
-msgstr ""
+msgstr ".themファイルがzip内にありません"
 
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "ﾃﾞｨﾚｸﾄﾘがありません。作りますか？"
@@ -1191,7 +1194,7 @@ msgid "Theme path is changed."
 msgstr "テーマのパスが変更されました"
 
 msgid "Themes by www.spiffy360.com"
-msgstr ""
+msgstr "テーマ…www.spiffy360.com"
 
 msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
 msgstr "このIOSはBootMiiIOSです"
@@ -1251,7 +1254,7 @@ msgid "Unlocked"
 msgstr "ロック無し"
 
 msgid "Unsupported format, try to extract manually TempTheme.zip."
-msgstr ""
+msgstr "非対応の形式なのでTempTheme.zipを自己解凍してください"
 
 msgid "Update"
 msgstr "更新"
@@ -1342,7 +1345,7 @@ msgid "You need to select or format a partition"
 msgstr "領域を選択するか初期化してください"
 
 msgid "and translators for language files updates"
-msgstr ""
+msgstr "/ K-M …日本語への翻訳"
 
 msgid "available"
 msgstr "があります"
@@ -1397,30 +1400,6 @@ msgstr "中"
 
 msgid "seconds left"
 msgstr "秒で完了"
-
-#~ msgid "Full Shutdown"
-#~ msgstr "シャットダウン"
-
-#~ msgid "GXtheme.cfg not found in any subfolder."
-#~ msgstr "設定ファイルが見つかりません"
-
-#~ msgid "Gerne:"
-#~ msgstr "ジャンル:"
-
-#~ msgid "If you don't have WiFi, press 1 to get an URL to get your WiiTDB.zip"
-#~ msgstr "1ボタンを押すと WiiTDB.zip のURLを保存します"
-
-#~ msgid "Paste it into your browser to get your WiiTDB.zip."
-#~ msgstr "ブラウザに貼付けるとWiiTDB.zipをダウンロードできます。"
-
-#~ msgid "Shutdown to Idle"
-#~ msgstr "スタンバイ"
-
-#~ msgid "Shutdown?"
-#~ msgstr "電源を切りますか?"
-
-#~ msgid "Your URL has been saved in %sWiiTDB_URL.txt."
-#~ msgstr "%sWiiTDB_URL.txtにURLを保存しました"
 
 #~ msgid "Can't create file"
 #~ msgstr "ファイルを作れませんでした"

@@ -147,14 +147,19 @@ GuiImageData * ThemeDownloader::GetImageData(int theme)
         CreateSubfolder(storepath);
         if (file.data)
         {
+            ImageData = new GuiImageData(file.data, file.size, false);
+
             FILE *storefile = fopen(filepath, "wb");
-            fwrite(file.data, 1, file.size, storefile);
-            fclose(storefile);
+            if(storefile)
+            {
+                fwrite(file.data, 1, file.size, storefile);
+                fclose(storefile);
+            }
             free(file.data);
         }
     }
-
-    ImageData = new GuiImageData(filepath);
+    else
+        ImageData = new GuiImageData(filepath);
 
     return ImageData;
 }

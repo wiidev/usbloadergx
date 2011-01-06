@@ -23,12 +23,14 @@
  ***************************************************************************/
 #include <unistd.h>
 #include "GUISettingsMenu.hpp"
+#include "Controls/DeviceHandler.hpp"
 #include "settings/CSettings.h"
 #include "prompts/PromptWindows.h"
 #include "language/gettext.h"
 #include "settings/SettingsPrompts.h"
 #include "settings/GameTitles.h"
 #include "xml/xml.h"
+#include "usbloader/wbfs.h"
 
 static const char * OnOffText[MAX_ON_OFF] =
 {
@@ -330,6 +332,11 @@ int GuiSettingsMenu::GetMenuInternal()
     else if (ret == ++Idx)
     {
         if (++Settings.ShowFreeSpace >= MAX_ON_OFF) Settings.ShowFreeSpace = 0;
+
+        if(Settings.ShowFreeSpace && DeviceHandler::GetUSBFilesystemType(Settings.partition) == PART_FS_FAT)
+        {
+            WindowPrompt(tr("Warning:"), tr("Enabling this option on a FAT partition might slow the startup of the loader."), tr("OK"));
+        }
     }
 
     SetOptionValues();

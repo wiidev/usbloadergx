@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-02 19:00+0100\n"
+"POT-Creation-Date: 2011-01-06 19:58+0100\n"
 "PO-Revision-Date: 2010-04-12 07:37+0100\n"
 "Last-Translator: glowy\n"
 "Language-Team: tj_cool, glowy\n"
@@ -453,6 +453,9 @@ msgstr "FOUT:"
 
 msgid "ERROR: Can't set up theme."
 msgstr "FOUT: Kan thema niet instellen"
+
+msgid "Enabling this option on a FAT partition might slow the startup of the loader."
+msgstr ""
 
 msgid "English"
 msgstr "Engels"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-02 19:00+0100\n"
+"POT-Creation-Date: 2011-01-06 19:58+0100\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
 "Last-Translator: Jane.H\n"
 "Language-Team: kyogc, Miller, Mika Li, Jane.H\n"
@@ -125,7 +125,7 @@ msgid "AUTO"
 msgstr "自動"
 
 msgid "All Partitions"
-msgstr ""
+msgstr "所有磁區"
 
 msgid "All images downloaded successfully."
 msgstr "所有圖片已下載成功。"
@@ -201,7 +201,7 @@ msgstr "無法建立目錄"
 
 #, c-format
 msgid "Can't create path: %s"
-msgstr ""
+msgstr "無法建立路徑： %s"
 
 msgid "Can't delete:"
 msgstr "無法刪除："
@@ -440,7 +440,7 @@ msgid "Downloading original Discarts"
 msgstr "下載原始光碟圖片"
 
 msgid "Downloading pagelist:"
-msgstr ""
+msgstr "下載頁面清單："
 
 msgid "Dutch"
 msgstr "荷蘭文"
@@ -453,6 +453,9 @@ msgstr "錯誤："
 
 msgid "ERROR: Can't set up theme."
 msgstr "錯誤：無法設定佈景主題。"
+
+msgid "Enabling this option on a FAT partition might slow the startup of the loader."
+msgstr ""
 
 msgid "English"
 msgstr "英文"
@@ -478,7 +481,7 @@ msgstr "讀取光碟錯誤"
 
 #, c-format
 msgid "Error when downloading file: %i"
-msgstr ""
+msgstr "下載檔案時產生錯誤： %i"
 
 msgid "Error while downloding file"
 msgstr "下載檔案過程錯誤"
@@ -530,7 +533,7 @@ msgstr "找不到該檔案。"
 
 #, c-format
 msgid "Filesize is %i Byte."
-msgstr ""
+msgstr "檔案大小是 %i Byte。"
 
 msgid "Filesize is 0 Byte."
 msgstr "檔案大小是0 Byte。"
@@ -614,7 +617,7 @@ msgid "Game is already installed:"
 msgstr "已安裝過遊戲:"
 
 msgid "Gamename [GAMEID]"
-msgstr ""
+msgstr "遊戲名稱 [GAMEID]"
 
 msgid "Games"
 msgstr "遊戲數量"
@@ -623,7 +626,7 @@ msgid "GamesLevel"
 msgstr "遊戲級別"
 
 msgid "Genre:"
-msgstr ""
+msgstr "類型："
 
 msgid "German"
 msgstr "德文"
@@ -700,7 +703,7 @@ msgid "Installing wad"
 msgstr "安裝 WAD"
 
 msgid "Issue manager /"
-msgstr ""
+msgstr "問題管理者 /"
 
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
 msgstr "請將這些訊息傳送至開發小組以幫助本軟體開發"
@@ -788,7 +791,7 @@ msgid "Loop Sound"
 msgstr "重複音樂"
 
 msgid "Main tester:"
-msgstr ""
+msgstr "主要測試者："
 
 msgid "Mar"
 msgstr "三月"
@@ -1088,7 +1091,7 @@ msgid "Settings"
 msgstr "設定"
 
 msgid "Show Free Space"
-msgstr ""
+msgstr "顯示可用空間"
 
 msgid "Shutdown System"
 msgstr "關閉系統"
@@ -1166,7 +1169,7 @@ msgid "TXT Cheatcodes Path"
 msgstr "TXT 金手指檔案路徑"
 
 msgid "The .them file was not found in the zip."
-msgstr ""
+msgstr "在zip中找不到 .them檔。"
 
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "所輸入的目錄不存在。是否要建立一個目錄嗎？"
@@ -1191,7 +1194,7 @@ msgid "Theme path is changed."
 msgstr "佈景主題路徑已變更。"
 
 msgid "Themes by www.spiffy360.com"
-msgstr ""
+msgstr "佈景主題由www.spiffy360.com提供"
 
 msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
 msgstr "這IOS是BootMii的ios。若你確定不是BootMii的IOS而你在這安裝其他的程式，請忽略這警告。"
@@ -1251,7 +1254,7 @@ msgid "Unlocked"
 msgstr "已解鎖"
 
 msgid "Unsupported format, try to extract manually TempTheme.zip."
-msgstr ""
+msgstr "不支援格式，請嘗試手動提取TempTheme.zip。"
 
 msgid "Update"
 msgstr "更新"
@@ -1342,7 +1345,7 @@ msgid "You need to select or format a partition"
 msgstr "選擇你要格式化的磁區"
 
 msgid "and translators for language files updates"
-msgstr ""
+msgstr "及對所有語言檔更新的翻譯者"
 
 msgid "available"
 msgstr "可取得"
