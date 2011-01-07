@@ -20,14 +20,12 @@ extern "C"
 
 	extern int wbfs_part_fs;
 	extern s32 wbfsDev;
-	extern u32 wbfs_part_idx;
 
     /* Prototypes */
     s32 WBFS_Init(u32);
     s32 WBFS_Format(u32, u32);
     s32 WBFS_GetCount(u32 *);
     s32 WBFS_GetHeaders(struct discHdr *, u32, u32);
-    //    s32 __WBFS_ReadDVD(void *fp, u32 lba, u32 len, void *iobuf);
     wbfs_t *GetHddInfo(void);
     s32 WBFS_CheckGame(u8 *);
     s32 WBFS_AddGame(void);
@@ -40,10 +38,6 @@ extern "C"
     f32 WBFS_EstimeGameSize(void);
 
     int WBFS_GetFragList(u8 *id);
-    /*
-     s32 __WBFS_ReadUSB(void *fp, u32 lba, u32 count, void *iobuf);
-     s32 __WBFS_WriteUSB(void *fp, u32 lba, u32 count, void *iobuf);
-     */
 
     s32 WBFS_OpenPart(int part_num);
     wbfs_disc_t* WBFS_OpenDisc(u8 *discid);

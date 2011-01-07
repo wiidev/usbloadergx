@@ -181,3 +181,10 @@ f32 Wbfs_Wbfs::EstimateGameSize()
     partition_selector_t part_sel = (partition_selector_t) Settings.InstallPartitions;
     return wbfs_estimate_disc(hdd, __ReadDVD, NULL, part_sel);
 }
+
+s32 Wbfs_Wbfs::GetFragList(u8 *id)
+{
+    //! Doesn't have to be called ".iso" just something different than .wbfs but with a dot.
+    //! So that the code doesn't fail.
+    return get_frag_list_for_file((char *) ".iso", id);
+}

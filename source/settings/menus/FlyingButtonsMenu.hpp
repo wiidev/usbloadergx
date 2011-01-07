@@ -51,6 +51,7 @@ class FlyingButtonsMenu : public GuiWindow
         int currentPage;
         int returnMenu;
         int ParentMenu;
+        int FirstIndicator;
         std::string MenuTitle;
         enum
         {

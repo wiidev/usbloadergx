@@ -10,6 +10,7 @@ class ThemeDownloader : public FlyingButtonsMenu
         ThemeDownloader();
         ~ThemeDownloader();
         static int Run();
+        int MainLoop();
     protected:
         void CreateSettingsMenu(int index) { MainButtonClicked(index); };
         void MainButtonClicked(int button);
@@ -21,6 +22,9 @@ class ThemeDownloader : public FlyingButtonsMenu
 
         Theme_List * ThemeList;
         GuiText * urlTxt;
+        GuiText * defaultBtnTxt;
+        GuiImage * defaultBtnImg;
+        GuiButton * defaultBtn;
         GuiImageData * ThemePreviews[4];
         std::string ThemeListURL;
 };

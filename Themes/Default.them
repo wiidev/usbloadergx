@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-01 21:47+0100\n"
+"POT-Creation-Date: 2011-01-07 14:09+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -237,7 +237,7 @@ msgstr ""
 msgid "256 - grid layout search btn pos x widescreen"
 msgstr ""
 
-msgid "13 - grid layout search btn pos x"
+msgid "13 - grid layout search btn pos y"
 msgstr ""
 
 msgid "280 - grid layout abc/sort btn pos x"
@@ -315,7 +315,7 @@ msgstr ""
 msgid "256 - carousel layout search btn pos x widescreen"
 msgstr ""
 
-msgid "13 - carousel layout search btn pos x"
+msgid "13 - carousel layout search btn pos y"
 msgstr ""
 
 msgid "280 - carousel layout abc/sort btn pos x"
@@ -378,10 +378,10 @@ msgstr ""
 msgid "640 - game carousel layout width"
 msgstr ""
 
-msgid "-20 - game carousel layout pos y"
+msgid "0 - game carousel layout pos x"
 msgstr ""
 
-msgid "0 - game carousel layout pos x"
+msgid "0 - game carousel layout pos y"
 msgstr ""
 
 msgid "1 - show hdd info: 1 for on and 0 for off"
@@ -396,7 +396,7 @@ msgstr ""
 msgid "r=55 g=190 b=237 a=255 - region info text color"
 msgstr ""
 
-msgid "30 - region info text pos x"
+msgid "30 - region info text pos y"
 msgstr ""
 
 msgid "68 - region info text pos x"

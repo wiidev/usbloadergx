@@ -224,6 +224,13 @@ int get_frag_list_for_file(char *fname, u8 *id)
 			for (j=0; j<fs->num; j++) {
 				fs->frag[j].sector += ext_wbfs_sec;
 			}
+		} else if (wbfs_part_fs == PART_FS_WBFS) {
+            // if wbfs file format, remap.
+            wbfs_disc_t *d = WBFS_OpenDisc(id);
+            if (!d) { ret_val = -4; WBFS_CloseDisc(d); goto out; }
+            ret = wbfs_get_fragments(d, &_frag_append, fs);
+            WBFS_CloseDisc(d);
+            if (ret) { ret_val = -5; goto out; }
 		}
 		frag_concat(fa, fs);
 	}
@@ -267,21 +274,25 @@ int get_frag_list(u8 *id)
 
 int set_frag_list(u8 *id)
 {
-	if (wbfs_part_fs == PART_FS_WBFS) return 1;
 	if (frag_list == NULL) {
 		return -2;
 	}
 
 	// (+1 for header which is same size as fragment)
 	int size = sizeof(Fragment) * (frag_list->num + 1);
-	int ret;
-	DCFlushRange(frag_list, size);
+
+	u8 * FragListAligned = (u8 *) memalign(32, (size+31)&(~31));
+	memcpy(FragListAligned, frag_list, size);
+
+	free(frag_list);
+	frag_list = NULL;
 
 	gprintf("Calling WDVD_SetFragList, frag list size %d\n", size);
-	ret = WDVD_SetFragList(wbfsDev, frag_list, size);
-	if (ret) {
+	int ret = WDVD_SetFragList(wbfsDev, FragListAligned, size);
+	free(FragListAligned);
+
+	if (ret)
 		return ret;
-	}
 
 	// verify id matches
 	char discid[8];

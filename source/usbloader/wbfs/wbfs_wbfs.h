@@ -30,6 +30,7 @@ class Wbfs_Wbfs: public Wbfs
         s32 ReIDGame(u8 *, const void *);
 
         f32 EstimateGameSize();
+        int GetFragList(u8 *id);
 };
 
 #endif //_WBFS_WBFS_H

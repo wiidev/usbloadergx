@@ -52,6 +52,28 @@ ThemeDownloader::ThemeDownloader()
 
     for(int i = 0; i < 4; ++i)
         ThemePreviews[i] = NULL;
+
+
+    defaultBtnTxt = new GuiText(tr( "Default" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    defaultBtnTxt->SetMaxWidth(btnOutline->GetWidth() - 30);
+    defaultBtnImg = new GuiImage(btnOutline);
+    if (Settings.wsprompt)
+    {
+        defaultBtnTxt->SetWidescreen(Settings.widescreen);
+        defaultBtnImg->SetWidescreen(Settings.widescreen);
+    }
+    defaultBtn = new GuiButton(btnOutline->GetWidth(), btnOutline->GetHeight());
+    defaultBtn->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
+    defaultBtn->SetPosition(-20, 400);
+    defaultBtn->SetLabel(defaultBtnTxt);
+    defaultBtn->SetImage(defaultBtnImg);
+    defaultBtn->SetSoundOver(btnSoundOver);
+    defaultBtn->SetSoundClick(btnSoundClick2);
+    defaultBtn->SetTrigger(trigA);
+    defaultBtn->SetEffectGrow();
+    Append(defaultBtn);
+
+    backBtn->SetPosition(-205, 400);
 }
 
 ThemeDownloader::~ThemeDownloader()
@@ -60,8 +82,12 @@ ThemeDownloader::~ThemeDownloader()
     for(u32 i = 0; i < MainButton.size(); ++i)
         Remove(MainButton[i]);
     Remove(urlTxt);
+    Remove(defaultBtn);
 
     delete urlTxt;
+    delete defaultBtn;
+    delete defaultBtnTxt;
+    delete defaultBtnImg;
     delete ThemeList;
     for(int i = 0; i < 4; ++i)
         delete ThemePreviews[i];
@@ -81,6 +107,39 @@ int ThemeDownloader::Run()
     delete Menu;
 
     return returnMenu;
+}
+
+int ThemeDownloader::MainLoop()
+{
+    if(defaultBtn->GetState() == STATE_CLICKED)
+    {
+        int choice = WindowPrompt(0, tr("Do you want to load the default theme?"), tr("Yes"), tr("Cancel"));
+        if(choice)
+        {
+            HaltGui();
+            Theme::SetDefault();
+            mainWindow->Remove(bgImg);
+            if(pointer[0]) delete pointer[0];
+            if(pointer[1]) delete pointer[1];
+            if(pointer[2]) delete pointer[2];
+            if(pointer[3]) delete pointer[3];
+            pointer[0] = Resources::GetImageData("player1_point.png");
+            pointer[1] = Resources::GetImageData("player2_point.png");
+            pointer[2] = Resources::GetImageData("player3_point.png");
+            pointer[3] = Resources::GetImageData("player4_point.png");
+            if(background) delete background;
+            background = Resources::GetImageData(Settings.widescreen ? "wbackground.png" : "background.png");
+            if(bgImg) delete bgImg;
+            bgImg = new GuiImage(background);
+            mainWindow->Append(bgImg);
+            ResumeGui();
+            return MENU_THEMEDOWNLOADER;
+        }
+
+        defaultBtn->ResetState();
+    }
+
+    return FlyingButtonsMenu::MainLoop();
 }
 
 void ThemeDownloader::SetMainButton(int position, const char * ButtonText, GuiImageData * imageData, GuiImageData * themeImg)
@@ -323,7 +382,7 @@ void ThemeDownloader::MainButtonClicked(int button)
             {
                 result = DownloadTheme(downloadlink, title);
                 if (result == 2)
-                    returnMenu = MENU_THEMEDOWNLOADER;;
+                    returnMenu = MENU_THEMEDOWNLOADER;
             }
             mainWindow->SetState(STATE_DISABLED);
             promptWindow.SetState(STATE_DEFAULT);

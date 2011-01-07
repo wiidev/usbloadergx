@@ -732,7 +732,7 @@ bool CSettings::LoadLanguage(const char *path, int lang)
     {
         char filepath[150];
         char langpath[150];
-        snprintf(langpath, sizeof(langpath), "%s", language_path);
+        snprintf(langpath, sizeof(langpath), "%s", languagefiles_path);
         if (langpath[strlen(langpath) - 1] != '/')
         {
             char * ptr = strrchr(langpath, '/');

@@ -268,15 +268,19 @@ int GameLoadSM::GetMenuInternal()
     //! Settings: Partition
     else if (ret == ++Idx)
     {
+        if(DeviceHandler::Instance()->GetUSBHandle()->GetPartitionCount() < 2)
+            return MENU_NONE;
+
         // Select the next valid partition, even if that's the same one
         int fs_type = 0;
         int ios = IOS_GetVersion();
+        int retries = 20;
         do
         {
             Settings.partition = (Settings.partition + 1) % DeviceHandler::Instance()->GetUSBHandle()->GetPartitionCount();
 			fs_type = DeviceHandler::GetUSBFilesystemType(Settings.partition);
         }
-        while (!IsValidPartition(fs_type, ios));
+        while (!IsValidPartition(fs_type, ios) && --retries > 0);
 
         if(fs_type == PART_FS_FAT && Settings.GameSplit == GAMESPLIT_NONE)
             Settings.GameSplit = GAMESPLIT_4GB;

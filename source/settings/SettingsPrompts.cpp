@@ -9,7 +9,7 @@
 #include "libwiigui/gui.h"
 #include "libwiigui/gui_customoptionbrowser.h"
 #include "settings/CSettings.h"
-#include "settings/Gametitles.h"
+#include "settings/GameTitles.h"
 #include "themes/CTheme.h"
 #include "network/URL_List.h"
 #include "FileOperations/fileops.h"

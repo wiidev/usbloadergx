@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-06 19:58+0100\n"
+"POT-Creation-Date: 2011-01-07 14:00+0100\n"
 "PO-Revision-Date: 2009-10-23 18:52+0200\n"
 "Last-Translator: aniemotion\n"
 "Language-Team: boto12, aniemotion\n"
@@ -393,6 +393,9 @@ msgstr "Deseja baixar este tema?"
 
 msgid "Do you want to format:"
 msgstr "Deseja FORMATAR:"
+
+msgid "Do you want to load the default theme?"
+msgstr ""
 
 msgid "Do you want to load this theme?"
 msgstr ""

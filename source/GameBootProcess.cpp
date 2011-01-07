@@ -146,13 +146,21 @@ int BootGame(const char * gameID)
 
     if (!mountMethod)
     {
-        gprintf("Loading fragment list...");
-        ret = get_frag_list(gameHeader.id);
-        gprintf("%d\n", ret);
-
-        ret = Disc_SetUSB(gameHeader.id);
-        if (ret < 0) Sys_BackToLoader();
-        gprintf("\tUSB set to game\n");
+        if(IosLoader::IsWaninkokoIOS() && IOS_GetRevision() < 18)
+        {
+            gprintf("Disc_SetUSB...");
+            ret = Disc_SetUSB(gameHeader.id);
+            gprintf("%d\n", ret);
+        }
+        else
+        {
+            gprintf("Loading fragment list...");
+            ret = get_frag_list(gameHeader.id);
+            gprintf("%d\n", ret);
+            ret = set_frag_list(gameHeader.id);
+            if (ret < 0) Sys_BackToLoader();
+            gprintf("\tUSB set to game\n");
+        }
     }
     else
     {

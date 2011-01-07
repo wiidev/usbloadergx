@@ -18,7 +18,6 @@
 static Wbfs *current = NULL;
 /* WBFS device */
 s32 wbfsDev = WBFS_MIN_DEVICE;
-u32 wbfs_part_idx = 0;
 
 wbfs_disc_t* WBFS_OpenDisc(u8 *discid)
 {
@@ -73,8 +72,6 @@ s32 WBFS_OpenPart(int part_num)
         current = NULL;
         return -1;
     }
-
-    wbfs_part_idx = usbHandle->GetPartitionNum(part_num);
 
     return 0;
 }

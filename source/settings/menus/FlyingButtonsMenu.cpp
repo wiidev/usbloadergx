@@ -34,6 +34,7 @@
 #define FADE_SPEED 20
 #define SLIDE_SPEED 35
 #define DISPLAY_BUTTONS    4
+#define MAX_INDICATORS     5
 
 FlyingButtonsMenu::FlyingButtonsMenu(const char * menu_title)
     :   GuiWindow(screenwidth, screenheight)
@@ -150,20 +151,31 @@ void FlyingButtonsMenu::SetPageIndicators()
 
     int IndicatorCount = ceil(MainButton.size()/(1.0f*DISPLAY_BUTTONS));
 
-    for(int i = 0; i < IndicatorCount; ++i)
+    FirstIndicator = 0;
+    if(currentPage > (int) floor(MAX_INDICATORS/2.0f))
+    {
+        if(IndicatorCount-MAX_INDICATORS < currentPage - (int) floor(MAX_INDICATORS/2.0f))
+            FirstIndicator = IndicatorCount-MAX_INDICATORS;
+        else
+            FirstIndicator = currentPage - (int) floor(MAX_INDICATORS/2.0f);
+    }
+
+    int DisplayedIndicators = IndicatorCount > MAX_INDICATORS ? MAX_INDICATORS : IndicatorCount;
+
+    for(int i = 0, n = FirstIndicator; i < MAX_INDICATORS && n < IndicatorCount; ++i, ++n)
     {
         PageindicatorImg.push_back(new GuiImage(PageindicatorImgData));
-        PageindicatorTxt.push_back(new GuiText(fmt("%i", i+1), 22, ( GXColor ) {0, 0, 0, 255}));
+        PageindicatorTxt.push_back(new GuiText(fmt("%i", n+1), 22, ( GXColor ) {0, 0, 0, 255}));
         PageIndicatorBtn.push_back(new GuiButton(PageindicatorImgData->GetWidth(), PageindicatorImgData->GetHeight()));
         PageIndicatorBtn[i]->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
-        PageIndicatorBtn[i]->SetPosition(270-IndicatorCount*35+35*i, 400);
+        PageIndicatorBtn[i]->SetPosition(270-DisplayedIndicators*35+35*i, 400);
         PageIndicatorBtn[i]->SetImage(PageindicatorImg[i]);
         PageIndicatorBtn[i]->SetLabel(PageindicatorTxt[i]);
         PageIndicatorBtn[i]->SetSoundOver(btnSoundOver);
         PageIndicatorBtn[i]->SetSoundClick(btnSoundClick);
         PageIndicatorBtn[i]->SetTrigger(trigA);
         PageIndicatorBtn[i]->SetEffectGrow();
-        PageIndicatorBtn[i]->SetAlpha(i == currentPage ? 255 : 50);
+        PageIndicatorBtn[i]->SetAlpha(n == currentPage ? 255 : 50);
         Append(PageIndicatorBtn[i]);
     }
 }
@@ -428,17 +440,17 @@ int FlyingButtonsMenu::MainLoop()
         if(PageIndicatorBtn[i]->GetState() != STATE_CLICKED)
             continue;
 
-        if(i < (u32) currentPage)
+        if(FirstIndicator+i < (u32) currentPage)
         {
             ShowButtonsEffects(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_OUT, SLIDE_SPEED);
-            currentPage = i;
+            currentPage = FirstIndicator+i;
             AddMainButtons();
             ShowButtonsEffects(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_IN, SLIDE_SPEED);
         }
-        else if(i > (u32) currentPage)
+        else if(FirstIndicator+i > (u32) currentPage)
         {
             ShowButtonsEffects(EFFECT_SLIDE_LEFT | EFFECT_SLIDE_OUT, SLIDE_SPEED);
-            currentPage = i;
+            currentPage = FirstIndicator+i;
             AddMainButtons();
             ShowButtonsEffects(EFFECT_SLIDE_RIGHT | EFFECT_SLIDE_IN, SLIDE_SPEED);
         }

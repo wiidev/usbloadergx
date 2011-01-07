@@ -602,7 +602,7 @@ void GameBrowseMenu::ReloadBrowser()
         favoriteBtn->SetPosition(Settings.widescreen ? thInt("224 - grid layout favorite btn pos x widescreen") : thInt("200 - grid layout favorite btn pos x"),
                                 thInt("13 - grid layout favorite btn pos y"));
         searchBtn->SetPosition(Settings.widescreen ? thInt("256 - grid layout search btn pos x widescreen") : thInt("240 - grid layout search btn pos x"),
-                                thInt("13 - grid layout search btn pos x"));
+                                thInt("13 - grid layout search btn pos y"));
         sortBtn->SetPosition(Settings.widescreen ? thInt("288 - grid layout abc/sort btn pos x widescreen") : thInt("280 - grid layout abc/sort btn pos x"),
                                 thInt("13 - grid layout abc/sort btn pos y"));
         listBtn->SetPosition(Settings.widescreen ? thInt("320 - grid layout list btn pos x widescreen") : thInt("320 - grid layout list btn pos x"),
@@ -635,7 +635,7 @@ void GameBrowseMenu::ReloadBrowser()
         favoriteBtn->SetPosition(Settings.widescreen ? thInt("224 - carousel layout favorite btn pos x widescreen") : thInt("200 - carousel layout favorite btn pos x"),
                                 thInt("13 - carousel layout favorite btn pos y"));
         searchBtn->SetPosition(Settings.widescreen ? thInt("256 - carousel layout search btn pos x widescreen") : thInt("240 - carousel layout search btn pos x"),
-                                thInt("13 - carousel layout search btn pos x"));
+                                thInt("13 - carousel layout search btn pos y"));
         sortBtn->SetPosition(Settings.widescreen ? thInt("288 - carousel layout abc/sort btn pos x widescreen") : thInt("280 - carousel layout abc/sort btn pos x"),
                                 thInt("13 - carousel layout abc/sort btn pos y"));
         listBtn->SetPosition(Settings.widescreen ? thInt("320 - carousel layout list btn pos x widescreen") : thInt("320 - carousel layout list btn pos x"),
@@ -650,7 +650,7 @@ void GameBrowseMenu::ReloadBrowser()
                                 thInt("13 - carousel layout dvd btn pos y"));
 
         gameCarousel = new GuiGameCarousel(thInt("640 - game carousel layout width"), thInt("400 - game carousel layout height"), Settings.theme_path, bg_options_png, lastSelectedGame);
-        gameCarousel->SetPosition(thInt("0 - game carousel layout pos x"), thInt("-20 - game carousel layout pos y"));
+        gameCarousel->SetPosition(thInt("0 - game carousel layout pos x"), thInt("0 - game carousel layout pos y"));
         gameCarousel->SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
     }
 
@@ -1203,7 +1203,7 @@ void GameBrowseMenu::UpdateGameInfoText(const u8 * gameId)
         delete GameRegionTxt;
         GameRegionTxt = new GuiText(gameregion, 22, thColor("r=55 g=190 b=237 a=255 - region info text color"));
         GameRegionTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-        GameRegionTxt->SetPosition(thInt("68 - region info text pos x"), thInt("30 - region info text pos x"));
+        GameRegionTxt->SetPosition(thInt("68 - region info text pos x"), thInt("30 - region info text pos y"));
         GameRegionTxt->SetEffect(EFFECT_FADE, 20);
         Append(GameRegionTxt);
     }
@@ -1284,10 +1284,10 @@ int GameBrowseMenu::OpenClickedGame()
         else if (choice == 2)
         {
             ReloadBrowser();
-            rockout(2, GetSelectedGame());
         }
     }
 
+    rockout(-1, -1);
     mountMethod = 0;
 
     if (searchBar)

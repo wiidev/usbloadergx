@@ -53,13 +53,16 @@
 const char * CheatFilepath = NULL;
 static const char * BCAFilepath = NULL;
 
-static u8 *codelistend;
-void *codelist;
+static u8 *codelistend = NULL;
+static void *codelist = NULL;
 
-u32 gameconfsize = 0;
-u32 *gameconf = NULL;
+static u8 *code_buf = NULL;
+static int code_size = 0;
 
-u8 debuggerselect;
+static u32 gameconfsize = 0;
+static u32 *gameconf = NULL;
+
+static u8 debuggerselect = 0;
 
 extern const u32 viwiihooks[4];
 extern const u32 kpadhooks[4];
@@ -526,9 +529,6 @@ void app_loadgameconfig(char *discid)
     free(tempgameconf);
     //tempcodelist = ((u8 *) gameconf) + gameconfsize;
 }
-
-u8 *code_buf = NULL;
-int code_size = 0;
 
 int ocarina_load_code(u8 *id)
 {
