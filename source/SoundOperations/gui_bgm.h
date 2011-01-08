@@ -27,14 +27,12 @@ class GuiBGM: public GuiSound
         bool PlayNext();
         bool PlayPrevious();
         bool PlayRandom();
-        void SetLoop(u8 l);
         void UpdateState();
     protected:
         void AddEntrie(const char * filename);
         void ClearList();
 
         int currentPlaying;
-        int loopMode;
         char * currentPath;
         std::vector<char *> PlayList;
 };

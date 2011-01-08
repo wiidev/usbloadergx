@@ -14,14 +14,7 @@
 #include "libwiigui/gui.h"
 #include "language/gettext.h"
 #include "menu.h"
-#include "filelist.h"
 #include "themes/CTheme.h"
-
-/*** Extern functions ***/
-extern void ResumeGui();
-extern void HaltGui();
-/*** Extern variables ***/
-extern GuiWindow * mainWindow;
 
 /* 'WAD Header' structure */
 typedef struct

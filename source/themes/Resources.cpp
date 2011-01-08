@@ -172,6 +172,16 @@ RecourceFile Resources::RecourceFiles[] =
     {"unlock.png", unlock_png, unlock_png_size, NULL, 0},
     {"unlock_gray.png", unlock_gray_png, unlock_gray_png_size, NULL, 0},
     {"Channel_btn.png", Channel_btn_png, Channel_btn_png_size, NULL, 0},
+    {"button_click.wav", button_click_wav, button_click_wav_size, NULL, 0},
+    {"button_click2.wav", button_click2_wav, button_click2_wav_size, NULL, 0},
+    {"button_over.wav", button_over_wav, button_over_wav_size, NULL, 0},
+    {"bg_music.ogg", bg_music_ogg, bg_music_ogg_size, NULL, 0},
+    {"credits_music.ogg", credits_music_ogg, credits_music_ogg_size, NULL, 0},
+    {"menuin.ogg", menuin_ogg, menuin_ogg_size, NULL, 0},
+    {"menuout.ogg", menuout_ogg, menuout_ogg_size, NULL, 0},
+    {"success.ogg", success_ogg, success_ogg_size, NULL, 0},
+    {"font.ttf", font_ttf, font_ttf_size, NULL, 0},
+    {"clock.ttf", clock_ttf, clock_ttf_size, NULL, 0},
     {NULL, NULL, 0, NULL, 0}
 };
 

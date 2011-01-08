@@ -15,7 +15,6 @@
 #include "FileOperations/fileops.h"
 #include "FileOperations/DirList.h"
 #include "main.h"
-#include "filelist.h"
 #include "prompts/filebrowser.h"
 #include "sys.h"
 #include "menu/menus.h"

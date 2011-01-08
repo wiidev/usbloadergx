@@ -13,6 +13,7 @@
 #include "../settings/CSettings.h"
 #include <stdio.h>
 #include <string.h>
+#include "themes/CTheme.h"
 #include "menu.h"
 /**
  * Constructor for the GuiKeyboard class.
@@ -118,7 +119,7 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
         memcpy(keys, thekeys, sizeof(thekeys));
     }
 
-    keyTextbox = new GuiImageData(keyboard_textbox_png, keyboard_textbox_png_size);
+    keyTextbox = Resources::GetImageData("keyboard_textbox.png");
     keyTextboxImg = new GuiImage(keyTextbox);
     keyTextboxImg->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     keyTextboxImg->SetPosition(0, 40);//(0,0);
@@ -130,12 +131,10 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
     kbText->SetPosition(0, 53);//(0, 13);
     this->Append(kbText);
 
-    key = new GuiImageData(keyboard_key_png, keyboard_key_png_size);
-    keyOver = new GuiImageData(keyboard_key_over_png, keyboard_key_over_png_size);
-    keyMedium = new GuiImageData(keyboard_mediumkey_over_png, keyboard_mediumkey_over_png_size);
-    keyMediumOver = new GuiImageData(keyboard_mediumkey_over_png, keyboard_mediumkey_over_png_size);
-    keyLarge = new GuiImageData(keyboard_largekey_over_png, keyboard_largekey_over_png_size);
-    keyLargeOver = new GuiImageData(keyboard_largekey_over_png, keyboard_largekey_over_png_size);
+    key = Resources::GetImageData("keyboard_key.png");
+    keyOver = Resources::GetImageData("keyboard_key_over.png");
+    keyMedium = Resources::GetImageData("keyboard_mediumkey_over.png");
+    keyLarge = Resources::GetImageData("keyboard_largekey_over.png");
 
     trigA = new GuiTrigger;
     trigA->SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
@@ -149,7 +148,7 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
     }
 
     keyBackImg = new GuiImage(keyMedium);
-    keyBackOverImg = new GuiImage(keyMediumOver);
+    keyBackOverImg = new GuiImage(keyMedium);
     if (mode == 3)
     {
         keyBackText = new GuiText("Retour", 20, ( GXColor )
@@ -182,7 +181,7 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
     this->Append(keyBack);
 
     keyClearImg = new GuiImage(keyMedium);
-    keyClearOverImg = new GuiImage(keyMediumOver);
+    keyClearOverImg = new GuiImage(keyMedium);
     if (mode == 3)
     {
         keyClearText = new GuiText("Effacer", 20, ( GXColor )
@@ -207,7 +206,7 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
     this->Append(keyClear);
 
     keyAltImg = new GuiImage(keyMedium);
-    keyAltOverImg = new GuiImage(keyMediumOver);
+    keyAltOverImg = new GuiImage(keyMedium);
     keyAltText = new GuiText("Alt Gr", 20, ( GXColor )
     {   0, 0, 0, 0xff});
     keyAlt = new GuiButton(keyAltImg, keyAltOverImg, 0, 3, 84 + eurocheck, 4 * 42 + 120, trigA, btnSoundOver,
@@ -227,7 +226,7 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
     }
 
     keyAlt2Img = new GuiImage(keyMedium);
-    keyAlt2OverImg = new GuiImage(keyMediumOver);
+    keyAlt2OverImg = new GuiImage(keyMedium);
     keyAlt2Text = new GuiText("Accent", 20, ( GXColor )
     {   0, 0, 0, 0xff});
     keyAlt2 = new GuiButton(keyAlt2Img, keyAlt2OverImg, 0, 3, (8 * 42 + 40) + eurocheck, 4 * 42 + 120, trigA,
@@ -247,7 +246,7 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
     }
 
     keyCapsImg = new GuiImage(keyMedium);
-    keyCapsOverImg = new GuiImage(keyMediumOver);
+    keyCapsOverImg = new GuiImage(keyMedium);
     keyCapsText = new GuiText("Caps", 20, ( GXColor )
     {   0, 0, 0, 0xff});
     keyCaps = new GuiButton(keyCapsImg, keyCapsOverImg, 0, 3, 0 + eurocheck, 2 * 42 + 120, trigA, btnSoundOver,
@@ -264,7 +263,7 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
     this->Append(keyCaps);
 
     keyShiftImg = new GuiImage(keyMedium);
-    keyShiftOverImg = new GuiImage(keyMediumOver);
+    keyShiftOverImg = new GuiImage(keyMedium);
     keyShiftText = new GuiText("Shift", 20, ( GXColor )
     {   0, 0, 0, 0xff});
     keyShift = new GuiButton(keyShiftImg, keyShiftOverImg, 0, 3, 21 + eurocheck, 3 * 42 + 120, trigA, btnSoundOver,
@@ -281,7 +280,7 @@ GuiKeyboard::GuiKeyboard(char * t, u32 max, int min, int lang)
     this->Append(keyShift);
 
     keySpaceImg = new GuiImage(keyLarge);
-    keySpaceOverImg = new GuiImage(keyLargeOver);
+    keySpaceOverImg = new GuiImage(keyLarge);
     keySpace = new GuiButton(keySpaceImg, keySpaceOverImg, 2, 3, 0 + eurocheck, 4 * 42 + 120, trigA, btnSoundOver,
             btnSoundClick, 1);
     //keySpace = new GuiButton(keyLarge->GetWidth(), keyLarge->GetHeight());
@@ -360,9 +359,7 @@ GuiKeyboard::~GuiKeyboard()
     delete key;
     delete keyOver;
     delete keyMedium;
-    delete keyMediumOver;
     delete keyLarge;
-    delete keyLargeOver;
     delete trigA;
     delete trigB;
 

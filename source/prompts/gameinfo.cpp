@@ -12,7 +12,6 @@
 #include "xml/xml.h"
 #include "menu.h"
 #include "menu/menus.h"
-#include "filelist.h"
 #include "sys.h"
 #include "wpad.h"
 #include "FileOperations/fileops.h"

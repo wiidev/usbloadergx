@@ -287,12 +287,12 @@ GameBrowseMenu::GameBrowseMenu()
     clockTimeBack = new GuiText("88:88", 40, (GXColor) {clockColor.r, clockColor.g, clockColor.b, clockColor.a / 6});
     clockTimeBack->SetAlignment(thAlign("left - clock align hor"), thAlign("top - clock align ver"));
     clockTimeBack->SetPosition(thInt("275 - clock pos x"), thInt("335 - clock pos y"));
-    clockTimeBack->SetFont(clock_ttf, clock_ttf_size);
+    clockTimeBack->SetFont(Resources::GetFile("clock.ttf"), Resources::GetFileSize("clock.ttf"));
 
     clockTime = new GuiText("", 40, clockColor);
     clockTime->SetAlignment(thAlign("left - clock align hor"), thAlign("top - clock align ver"));
     clockTime->SetPosition(thInt("275 - clock pos x"), thInt("335 - clock pos y"));
-    clockTime->SetFont(clock_ttf, clock_ttf_size);
+    clockTime->SetFont(Resources::GetFile("clock.ttf"), Resources::GetFileSize("clock.ttf"));
 
     ToolBar.push_back(favoriteBtn);
     ToolBar.push_back(searchBtn);
@@ -616,7 +616,7 @@ void GameBrowseMenu::ReloadBrowser()
         dvdBtn->SetPosition(Settings.widescreen ? thInt("448 - grid layout dvd btn pos x widescreen") : thInt("480 - grid layout dvd btn pos x"),
                                 thInt("13 - grid layout dvd btn pos y"));
 
-        gameGrid = new GuiGameGrid(thInt("640 - game grid layout width"), thInt("400 - game grid layout height"), Settings.theme_path, bg_options_png, lastSelectedGame);
+        gameGrid = new GuiGameGrid(thInt("640 - game grid layout width"), thInt("400 - game grid layout height"), Settings.theme_path, lastSelectedGame);
         gameGrid->SetPosition(thInt("0 - game grid layout pos x"), thInt("20 - game grid layout pos y"));
         gameGrid->SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
     }
@@ -649,8 +649,8 @@ void GameBrowseMenu::ReloadBrowser()
         dvdBtn->SetPosition(Settings.widescreen ? thInt("448 - carousel layout dvd btn pos x widescreen") : thInt("480 - carousel layout dvd btn pos x"),
                                 thInt("13 - carousel layout dvd btn pos y"));
 
-        gameCarousel = new GuiGameCarousel(thInt("640 - game carousel layout width"), thInt("400 - game carousel layout height"), Settings.theme_path, bg_options_png, lastSelectedGame);
-        gameCarousel->SetPosition(thInt("0 - game carousel layout pos x"), thInt("0 - game carousel layout pos y"));
+        gameCarousel = new GuiGameCarousel(thInt("640 - game carousel layout width"), thInt("400 - game carousel layout height"), Settings.theme_path, lastSelectedGame);
+        gameCarousel->SetPosition(thInt("0 - game carousel layout pos x"), thInt("-20 - game carousel layout pos y"));
         gameCarousel->SetAlignment(ALIGN_LEFT, ALIGN_CENTRE);
     }
 

@@ -48,23 +48,12 @@ GuiSound *btnSoundClick = NULL;
 GuiSound *btnSoundClick2 = NULL;
 GuiSound *btnSoundOver = NULL;
 
-int currentMenu;
+int currentMenu = 0;
 u8 mountMethod = 0;
-
-char game_partition[6];
-int load_from_fs;
-
-/*** Variables used only in the menus ***/
-bool altdoldefault = true;
 
 static lwp_t guithread = LWP_THREAD_NULL;
 static bool guiHalt = true;
 static bool ExitRequested = false;
-
-/*** Extern variables ***/
-extern u8 shutdown;
-extern u8 reset;
-extern s32 gameSelected, gameStart;
 
 /****************************************************************************
  * ResumeGui
@@ -190,9 +179,9 @@ int MainMenu(int menu)
     if (Settings.autonetwork)
         ResumeNetworkThread();
 
-    btnSoundClick = new GuiSound(button_click_wav, button_click_wav_size, Settings.sfxvolume);
-    btnSoundClick2 = new GuiSound(button_click2_wav, button_click2_wav_size, Settings.sfxvolume);
-    btnSoundOver = new GuiSound(button_over_wav, button_over_wav_size, Settings.sfxvolume);
+    btnSoundClick = new GuiSound(Resources::GetFile("button_click.wav"), Resources::GetFileSize("button_click.wav"), Settings.sfxvolume);
+    btnSoundClick2 = new GuiSound(Resources::GetFile("button_click2.wav"), Resources::GetFileSize("button_click2.wav"), Settings.sfxvolume);
+    btnSoundOver = new GuiSound(Resources::GetFile("button_over.wav"), Resources::GetFileSize("button_over.wav"), Settings.sfxvolume);
 
     pointer[0] = Resources::GetImageData("player1_point.png");
     pointer[1] = Resources::GetImageData("player2_point.png");
@@ -208,7 +197,7 @@ int MainMenu(int menu)
 
     ResumeGui();
 
-    bgMusic = new GuiBGM(bg_music_ogg, bg_music_ogg_size, Settings.volume);
+    bgMusic = new GuiBGM(Resources::GetFile("bg_music.ogg"), Resources::GetFileSize("bg_music.ogg"), Settings.volume);
     bgMusic->SetLoop(Settings.musicloopmode); //loop music
     bgMusic->Load(Settings.ogg_path);
     bgMusic->Play();

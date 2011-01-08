@@ -456,20 +456,6 @@ int GameWindow::MainLoop()
         wiilight(0);
         Sys_Reboot();
     }
-    else if (reducedVol)
-    {
-        if (gameSound)
-        {
-            if (Settings.gamesound == 1 && !gameSound->IsPlaying())
-                bgMusic->SetVolume(Settings.volume);
-        }
-        else
-        {
-            bgMusic->SetVolume(Settings.volume);
-        }
-
-        reducedVol = false;
-    }
     else if (gameBtn->GetState() == STATE_CLICKED)
     {
         returnVal = 1;
@@ -577,6 +563,23 @@ int GameWindow::MainLoop()
         }
 
         btnLeft->ResetState();
+    }
+
+    if (reducedVol)
+    {
+        if (gameSound)
+        {
+            if (Settings.gamesound == 1 && !gameSound->IsPlaying())
+            {
+                bgMusic->SetVolume(Settings.volume);
+                reducedVol = false;
+            }
+        }
+        else
+        {
+            bgMusic->SetVolume(Settings.volume);
+            reducedVol = false;
+        }
     }
 
     for(int i = 0; i < FAVORITE_STARS; ++i)

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-07 14:00+0100\n"
+"POT-Creation-Date: 2011-01-08 13:01+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: knife.hu kavid emul8ion\n"
 "Language-Team: kavid\n"
@@ -395,7 +395,7 @@ msgid "Do you want to format:"
 msgstr "是否格式化:"
 
 msgid "Do you want to load the default theme?"
-msgstr ""
+msgstr "要加载默认主题吗?"
 
 msgid "Do you want to load this theme?"
 msgstr "是否载入这个主题？"
@@ -458,7 +458,7 @@ msgid "ERROR: Can't set up theme."
 msgstr "错误: 无法设置主题."
 
 msgid "Enabling this option on a FAT partition might slow the startup of the loader."
-msgstr ""
+msgstr "在FAT分区启用这个选项会使Loader启动变慢."
 
 msgid "English"
 msgstr "英文"
@@ -644,10 +644,10 @@ msgid "Homebrew Apps Path"
 msgstr "自制程序路径"
 
 msgid "Homebrew Channel"
-msgstr "Homebrew 频道"
+msgstr "Homebrew频道"
 
 msgid "Homebrew Launcher"
-msgstr "Homebrew 管理器"
+msgstr "Homebrew管理器"
 
 msgid "Hour"
 msgstr "小时"
@@ -1348,7 +1348,7 @@ msgid "You need to select or format a partition"
 msgstr "你需要选择或者格式化一个分区"
 
 msgid "and translators for language files updates"
-msgstr ""
+msgstr "以及翻译人员的语言文件更新"
 
 msgid "available"
 msgstr "允许"

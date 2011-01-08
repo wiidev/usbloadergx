@@ -28,7 +28,7 @@
 u32 AppEntrypoint = 0;
 
 struct discHdr *dvdheader = NULL;
-extern int load_from_fs;
+extern int wbfs_part_fs;
 extern int mountMethod;
 
 
@@ -181,7 +181,7 @@ int BootGame(const char * gameID)
     if (reloadblock == ON && IosLoader::IsHermesIOS())
     {
         enable_ES_ioctlv_vector();
-        if (load_from_fs == PART_FS_WBFS)
+        if (wbfs_part_fs == PART_FS_WBFS)
             mload_close();
     }
 

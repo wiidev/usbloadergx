@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-# italian.lang - v63 - r1031
+# italian.lang - v65 - r1033
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-01-07 14:00+0100\n"
-"PO-Revision-Date: 2011-01-03 01:30+0200\n"
+"PO-Revision-Date: 2011-01-08 08:30+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: Cambo\n"
 "MIME-Version: 1.0\n"
@@ -182,7 +182,7 @@ msgid "Big thanks to:"
 msgstr "Grazie mille a:"
 
 msgid "Block IOS Reload"
-msgstr "Ricarica l'IOS"
+msgstr "Blocca Ricarica IOS"
 
 msgid "Boot/Standard"
 msgstr "Riavvio/Standard"
@@ -395,7 +395,7 @@ msgid "Do you want to format:"
 msgstr "Vuoi formattare:"
 
 msgid "Do you want to load the default theme?"
-msgstr ""
+msgstr "Vuoi caricare il tema predefinito?"
 
 msgid "Do you want to load this theme?"
 msgstr "Vuoi caricare questo tema?"
@@ -458,7 +458,7 @@ msgid "ERROR: Can't set up theme."
 msgstr "ERRORE: Impossibile configurare il tema."
 
 msgid "Enabling this option on a FAT partition might slow the startup of the loader."
-msgstr ""
+msgstr "Abilitando questa opzione su una partizione FAT potresti rallentare l'avvio del loader."
 
 msgid "English"
 msgstr "Inglese"
@@ -596,7 +596,7 @@ msgid "Game Language"
 msgstr "Lingua Gioco"
 
 msgid "Game Load"
-msgstr "Impostazioni Giochi"
+msgstr "Impostazioni Gioco"
 
 msgid "Game Lock"
 msgstr "Bloccaggio Gioco"
@@ -1239,7 +1239,7 @@ msgid "Uninstall Game"
 msgstr "Disinstalla il gioco"
 
 msgid "Uninstall Menu"
-msgstr "Disinstalla Menu"
+msgstr "Menu Disinstallazioni"
 
 msgid "Uninstalling wad"
 msgstr "Disinstalla WAD"

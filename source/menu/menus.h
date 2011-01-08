@@ -6,7 +6,6 @@
 #include "prompts/PromptWindows.h"
 #include "menu.h"
 #include "gecko.h"
-#include "filelist.h"
 #include "sys.h"
 
 extern u8 shutdown;

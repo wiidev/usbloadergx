@@ -8,7 +8,7 @@ class GuiImageAsync;
 class GuiGameCarousel: public GuiElement
 {
     public:
-        GuiGameCarousel(int w, int h, const char *themePath, const u8 *imagebg, int imagebgsize, int selectedGame = 0);
+        GuiGameCarousel(int w, int h, const char *themePath, int selectedGame = 0);
         ~GuiGameCarousel();
         int FindMenuItem(int c, int d);
         int GetClickedOption();

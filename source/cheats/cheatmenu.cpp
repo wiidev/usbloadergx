@@ -9,16 +9,8 @@
 #include "themes/CTheme.h"
 #include "FileOperations/fileops.h"
 #include "menu.h"
-#include "filelist.h"
 #include "sys.h"
 #include "gct.h"
-
-/*** Extern functions ***/
-extern void ResumeGui();
-extern void HaltGui();
-
-/*** Extern variables ***/
-extern GuiWindow * mainWindow;
 
 /****************************************************************************
  * CheatMenu

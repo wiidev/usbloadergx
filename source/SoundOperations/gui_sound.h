@@ -40,7 +40,7 @@ class GuiSound
 		//!Destructor
 		~GuiSound();
 		//!Load a file and replace the old one
-		bool Load(const char * filepath);
+		virtual bool Load(const char * filepath);
 		//!Load a file and replace the old one
 		bool Load(const u8 * sound, int filesize, bool allocated = true);
 		//!For quick playback of the internal soundeffects
@@ -62,7 +62,7 @@ class GuiSound
 		//!\param v Sound volume (0-100)
 		void SetVolume(int v);
 		//!\param l Loop (true to loop)
-		void SetLoop(u8 l);
+		virtual void SetLoop(u8 l);
 		//!Special sound case for sound.bin
         void UncompressSoundbin(const u8 * snd, int len, bool isallocated);
 	protected:

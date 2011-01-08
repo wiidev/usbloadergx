@@ -201,7 +201,7 @@ static GuiImageData *GameGridLoadCoverImage(void * Arg)
 /**
  * Constructor for the GuiGamegrid class.
  */
-GuiGameGrid::GuiGameGrid(int w, int h, const char *themePath, const u8 *imagebg, int selectedGame) :
+GuiGameGrid::GuiGameGrid(int w, int h, const char *themePath, int selectedGame) :
     noCover(Resources::GetFile("nocoverFlat.png"), Resources::GetFileSize("nocoverFlat.png"))
 {
     width = w;

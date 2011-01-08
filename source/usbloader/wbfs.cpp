@@ -66,6 +66,11 @@ s32 WBFS_OpenPart(int part_num)
     {
         current = new Wbfs_Wbfs(wbfsDev, usbHandle->GetLBAStart(part_num), usbHandle->GetSecCount(part_num));
     }
+    else
+    {
+        return -1;
+    }
+
     if (current->Open())
     {
         delete current;

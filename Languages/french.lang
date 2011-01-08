@@ -1,26 +1,26 @@
 # USB Loader GX language source file.
-# French V13.2 r1031
+# French V14 r1033
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-07 14:00+0100\n"
+"POT-Creation-Date: 2011-01-06 19:58+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
-"Last-Translator: Cyan\n"
+"Last-Translator: Andresayang, Cyan, jero\n"
 "Language-Team: Badablek, Amour, ikya & Kin8\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid " Wad Saved as:"
-msgstr "WAD Sauvegardé sous:"
+msgstr " WAD sauvegardé sous:"
 
 msgid " could not be downloaded."
 msgstr " ne peut pas être téléchargé."
 
 msgid " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information."
-msgstr " sauvegardé. Certains codes ne peuvent fonctionner conjointement. En cas de mauvais résultats, ouvrez-le avec un réel éditeur de texte pour obtenir plus d'informations."
+msgstr " sauvegardé. Certains codes ne peuvent fonctionner conjointement. En cas de mauvais résultats, ouvrez-le avec un éditeur de texte pour obtenir plus d'informations."
 
 msgid " is not on the server."
 msgstr " indisponible sur le serveur."
@@ -35,7 +35,7 @@ msgid "1 (Child 7+)"
 msgstr "1 (Enfants 7+)"
 
 msgid "1 (Unlocked Games Only)"
-msgstr "1 (Affiche seulement les jeux déverrouillés)"
+msgstr "1 (Affiche seulement les jeux non verrouillés)"
 
 msgid "1 hour"
 msgstr "1 heure"
@@ -50,7 +50,7 @@ msgid "20 min"
 msgstr "20 min."
 
 msgid "2D Cover Path"
-msgstr "Dossier Jaquettes 2D"
+msgstr "Dossier jaquettes 2D"
 
 msgid "3 (Mature 16+)"
 msgstr "3 (Matures 16+)"
@@ -62,7 +62,7 @@ msgid "30 min"
 msgstr "30 min."
 
 msgid "3D Cover Path"
-msgstr "Dossier Jaquettes 3D"
+msgstr "Dossier jaquettes 3D"
 
 msgid "3D Covers"
 msgstr "Jaquettes 3D"
@@ -128,13 +128,13 @@ msgid "All Partitions"
 msgstr "Toutes les partitions"
 
 msgid "All images downloaded successfully."
-msgstr "Images correctement telechargées"
+msgstr "Images correctement téléchargées"
 
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "Toutes les fonctionnalités sont déverrouillées."
 
 msgid "Alternate DOL"
-msgstr "DOL Alternatif"
+msgstr "DOL alternatif"
 
 msgid "Anti"
 msgstr ""
@@ -161,10 +161,10 @@ msgid "Author:"
 msgstr "Auteur:"
 
 msgid "AutoInit Network"
-msgstr "AutoInit Réseau"
+msgstr "AutoInit réseau"
 
 msgid "BCA Codes Path"
-msgstr "Dossier Codes BCA"
+msgstr "Dossier codes BCA"
 
 msgid "BETA revisions"
 msgstr "Révisions BETA"
@@ -182,7 +182,7 @@ msgid "Big thanks to:"
 msgstr "Grand merci à:"
 
 msgid "Block IOS Reload"
-msgstr "Bloquer IOS Reload"
+msgstr "Bloquer IOS reload"
 
 msgid "Boot/Standard"
 msgstr ""
@@ -213,7 +213,7 @@ msgid "Cannot write to destination."
 msgstr "Écriture impossible."
 
 msgid "Change Play Path"
-msgstr "Changer Dossier"
+msgstr "Changer dossier"
 
 msgid "Cheatfile is blank"
 msgstr "Fichier de triche vide"
@@ -225,7 +225,7 @@ msgid "Click to Download Covers"
 msgstr "Téléchargement des jaquettes"
 
 msgid "Click to change game ID"
-msgstr "Changer l'ID du Jeu"
+msgstr "Changer l'ID du jeu"
 
 msgid "Clock"
 msgstr "Horloge"
@@ -234,7 +234,7 @@ msgid "Close"
 msgstr "Fermer"
 
 msgid "Code Download"
-msgstr "Téléchargement Codes"
+msgstr "Téléchargement codes"
 
 #, c-format
 msgid "Coded by: %s"
@@ -278,7 +278,7 @@ msgid "Could not find info for this game in the wiitdb.xml."
 msgstr "Pas d'information pour ce jeu dans wiitdb.xml."
 
 msgid "Could not initialize DIP module!"
-msgstr "Initialisation module DIP impossible !"
+msgstr "Initialisation du module DIP impossible !"
 
 msgid "Could not initialize network!"
 msgstr "Initialisation réseau impossible !"
@@ -290,10 +290,10 @@ msgid "Could not open wiitdb.xml."
 msgstr "Impossible d'ouvrir wiitdb.xml."
 
 msgid "Could not save."
-msgstr "Sauvegarde impossible"
+msgstr "Sauvegarde impossible."
 
 msgid "Cover Download"
-msgstr "Téléchargement Jaquettes"
+msgstr "Téléchargement jaquettes"
 
 msgid "Create"
 msgstr "Créer"
@@ -302,13 +302,13 @@ msgid "Credits"
 msgstr "Crédits"
 
 msgid "Custom Paths"
-msgstr "Personnalisation Dossiers"
+msgstr "Personnalisation des dossiers"
 
 msgid "Customs/Original"
 msgstr "Persos/Originaux"
 
 msgid "DOL Path"
-msgstr "Dossier DOL Alternatif"
+msgstr "Dossier DOL alternatif"
 
 msgid "Dec"
 msgstr "Déc"
@@ -317,10 +317,10 @@ msgid "Default"
 msgstr "Par défaut"
 
 msgid "Default Gamesettings"
-msgstr "Reset Paramètres Jeu"
+msgstr "Réinitialiser les paramètres du jeu"
 
 msgid "Default Settings"
-msgstr "Réinitialiser Paramètres"
+msgstr "Réinitialiser les paramètres"
 
 msgid "Delete"
 msgstr "Supprimer"
@@ -329,16 +329,16 @@ msgid "Delete ?"
 msgstr "Supprimer ?"
 
 msgid "Delete Cheat GCT"
-msgstr "Supprimer GCT de Triche"
+msgstr "Supprimer GCT de triche"
 
 msgid "Delete Cheat TXT"
-msgstr "Supprimer TXT de Triche"
+msgstr "Supprimer TXT de triche"
 
 msgid "Delete Cover Artwork"
-msgstr "Supprimer la Jaquette"
+msgstr "Supprimer la jaquette"
 
 msgid "Delete Disc Artwork"
-msgstr "Supprimer le Label DVD"
+msgstr "Supprimer le label DVD"
 
 msgid "Design:"
 msgstr "Graphisme:"
@@ -350,10 +350,10 @@ msgid "Directory does not exist!"
 msgstr "Répertoire inexistant!"
 
 msgid "Disc Artwork Download"
-msgstr "Téléch. Labels DVD"
+msgstr "Téléch. labels DVD"
 
 msgid "Disc Artwork Path"
-msgstr "Dossier Labels DVD"
+msgstr "Dossier labels DVD"
 
 msgid "Disc Default"
 msgstr "Disque par défaut"
@@ -362,13 +362,13 @@ msgid "Disc Images"
 msgstr "Labels DVD"
 
 msgid "DiskFlip"
-msgstr "Inversion Disque"
+msgstr "Inversion disque"
 
 msgid "Display"
 msgstr "Affichage"
 
 msgid "Display as a carousel"
-msgstr "Caroussel"
+msgstr "Carrousel"
 
 msgid "Display as a grid"
 msgstr "Grille"
@@ -380,7 +380,7 @@ msgid "Display favorites only"
 msgstr "Seulement les favoris"
 
 msgid "Do you really want to delete:"
-msgstr "Voulez-vous vraiment supprimer ?"
+msgstr "Voulez-vous vraiment supprimer:"
 
 msgid "Do you want to apply it now?"
 msgstr "L'appliquer maintenant ?"
@@ -392,16 +392,16 @@ msgid "Do you want to download this theme?"
 msgstr "Voulez-vous télécharger ce thème ?"
 
 msgid "Do you want to format:"
-msgstr "Voulez-vous formater ?"
+msgstr "Voulez-vous formater:"
 
 msgid "Do you want to load the default theme?"
-msgstr ""
+msgstr "Voulez vous charger le thème par défaut ?"
 
 msgid "Do you want to load this theme?"
 msgstr "Voulez-vous charger ce thème ?"
 
 msgid "Do you want to use the alternate DOL that is known to be correct?"
-msgstr "Voulez-vous utiliser le DOL Alternatif actuellement connu comme correct ?"
+msgstr "Voulez-vous utiliser le DOL alternatif actuellement connu comme correct ?"
 
 msgid "Do you wish to update/download all language files?"
 msgstr "Voulez-vous actualiser/télécharger tous les fichiers langue ?"
@@ -416,7 +416,7 @@ msgid "Download Boxart image?"
 msgstr "Télécharger les jaquettes ?"
 
 msgid "Download Discart image?"
-msgstr "Télécharger labels DVD ?"
+msgstr "Télécharger les labels DVD ?"
 
 msgid "Download Now"
 msgstr "Télécharger"
@@ -428,7 +428,7 @@ msgid "Downloading covers"
 msgstr "Téléchargement des jaquettes"
 
 msgid "Downloading custom Discarts"
-msgstr "Téléchargement des labels DVD perso"
+msgstr "Téléchargement des labels DVD persos"
 
 msgid "Downloading file"
 msgstr "Téléchargement du fichier"
@@ -443,7 +443,7 @@ msgid "Downloading original Discarts"
 msgstr "Téléchargement des labels DVD originaux"
 
 msgid "Downloading pagelist:"
-msgstr ""
+msgstr "Téléchargement de la liste:"
 
 msgid "Dutch"
 msgstr "Néerlandais"
@@ -458,7 +458,7 @@ msgid "ERROR: Can't set up theme."
 msgstr "ERREUR: Configuration thème impossible."
 
 msgid "Enabling this option on a FAT partition might slow the startup of the loader."
-msgstr ""
+msgstr "Activer cette option sur une partition FAT peut ralentir le démarrage du loader."
 
 msgid "English"
 msgstr "Anglais"
@@ -496,7 +496,7 @@ msgid "Error while transfering data."
 msgstr "Erreur durant le transfert de données."
 
 msgid "Error while updating USB Loader GX."
-msgstr "Erreur lors de la mise à jour de USB Loader GX."
+msgstr "Erreur lors de la MàJ de USB Loader GX."
 
 msgid "Error writing the data."
 msgstr "Erreur d'écriture des données"
@@ -511,7 +511,7 @@ msgid "Exit"
 msgstr "Quitter"
 
 msgid "Exit to where?"
-msgstr "Quitter vers où?"
+msgstr "Quitter vers où ?"
 
 msgid "Extracting files..."
 msgstr "Extraction des fichiers..."
@@ -520,13 +520,13 @@ msgid "Failed formating"
 msgstr "Échec du formatage"
 
 msgid "Failed to extract."
-msgstr "Extraction échouée."
+msgstr "Échec de l'extraction"
 
 msgid "Failed to open partition"
 msgstr "Échec accès partition"
 
 msgid "Failed updating"
-msgstr "Echec de la mise à jour"
+msgstr "Échec de la mise à jour"
 
 msgid "Feb"
 msgstr "Fév"
@@ -536,10 +536,10 @@ msgstr "Fichier introuvable."
 
 #, c-format
 msgid "Filesize is %i Byte."
-msgstr "Taille du ficher: %i Byte."
+msgstr "Taille du ficher: %i Octets."
 
 msgid "Filesize is 0 Byte."
-msgstr "Fichier de taille 0 Byte"
+msgstr "Fichier de taille 0 Octet."
 
 msgid "Finishing installation... Ok!"
 msgstr "Finalisation de l'installation... OK!"
@@ -551,13 +551,13 @@ msgid "Flip-X"
 msgstr "Inversion-X"
 
 msgid "Force NTSC"
-msgstr ""
+msgstr "Forcer NTSC"
 
 msgid "Force PAL50"
-msgstr ""
+msgstr "Forcer PAL50"
 
 msgid "Force PAL60"
-msgstr ""
+msgstr "Forcer PAL60"
 
 msgid "Format"
 msgstr "Formater"
@@ -566,7 +566,7 @@ msgid "Formatting, please wait..."
 msgstr "Formatage en cours, veuillez patienter..."
 
 msgid "Free Space"
-msgstr "Espace restant"
+msgstr "Espace libre"
 
 msgid "French"
 msgstr "Français"
@@ -578,7 +578,7 @@ msgid "GAMEID_Gamename"
 msgstr "IDJEU_NomJeu"
 
 msgid "GCT Cheatcodes Path"
-msgstr "Dossier GCT de Triche"
+msgstr "Dossier GCT de triche"
 
 msgid "GCT File created"
 msgstr "Fichier GCT créé"
@@ -596,7 +596,7 @@ msgid "Game Language"
 msgstr "Langue du jeu"
 
 msgid "Game Load"
-msgstr "Chargement Jeux"
+msgstr "Chargement des jeux"
 
 msgid "Game Lock"
 msgstr "Verrouiller le jeu"
@@ -608,10 +608,10 @@ msgid "Game Size"
 msgstr "Taille du jeu"
 
 msgid "Game Sound Mode"
-msgstr "Mode Son des Jeux"
+msgstr "Son de présentation"
 
 msgid "Game Sound Volume"
-msgstr "Volume Son des Jeux"
+msgstr "Volume du son des jeux"
 
 msgid "Game Split Size"
 msgstr "Découpage des jeux"
@@ -629,7 +629,7 @@ msgid "GamesLevel"
 msgstr "Niv. verrou"
 
 msgid "Genre:"
-msgstr "Genre:"
+msgstr ""
 
 msgid "German"
 msgstr "Allemand"
@@ -653,18 +653,18 @@ msgid "Hour"
 msgstr "heures"
 
 msgid "How do you want to update?"
-msgstr "Comment faire la Mise à Jour ?"
+msgstr "Comment faire la Mise à jour ?"
 
 msgid "How to Shutdown?"
 msgstr "Arrêt de la Wii ?"
 
 #, c-format
 msgid "Incoming file %0.2fKB"
-msgstr "Fichier entrant %0.2fKB"
+msgstr "Fichier entrant %0.2fKo"
 
 #, c-format
 msgid "Incoming file %0.2fMB"
-msgstr "Fichier entrant %0.2fMB"
+msgstr "Fichier entrant %0.2fMo"
 
 msgid "Initializing Network"
 msgstr "Initialisation du réseau"
@@ -685,7 +685,7 @@ msgid "Install a game"
 msgstr "Installer un jeu"
 
 msgid "Install directories"
-msgstr "Dossier d'installation"
+msgstr "Dossiers d'installation"
 
 msgid "Install partitions"
 msgstr "Installation"
@@ -736,16 +736,16 @@ msgid "Korean"
 msgstr "Coréen"
 
 msgid "Language File"
-msgstr "Langues"
+msgstr "Fichier de langue"
 
 msgid "Language change:"
-msgstr "Changement Langue:"
+msgstr "Changement de langue:"
 
 msgid "Languagefiles Path"
-msgstr "Dossier Langue"
+msgstr "Dossier langue"
 
 msgid "Languagepath changed."
-msgstr "Dossier Langue changé"
+msgstr "Dossier langue changé"
 
 msgid "Left"
 msgstr "Gauche"
@@ -757,7 +757,7 @@ msgid "Load"
 msgstr "Charger"
 
 msgid "Load From SD/USB"
-msgstr "Charger sur SD/USB"
+msgstr "Charger depuis SD/USB"
 
 #, c-format
 msgid "Load file from: %s ?"
@@ -785,22 +785,22 @@ msgid "Locked"
 msgstr "Clic pour déverrouiller"
 
 msgid "Loop Directory"
-msgstr "Répéter Dossier"
+msgstr "Répéter dossier"
 
 msgid "Loop Music"
-msgstr "Répéter Musique"
+msgstr "Répéter musique"
 
 msgid "Loop Sound"
 msgstr "Son en boucle"
 
 msgid "Main tester:"
-msgstr "Testeur principal:"
+msgstr "Testeur:"
 
 msgid "Mar"
 msgstr "Mars"
 
 msgid "Mark new games"
-msgstr "Marqueur nouveau jeu"
+msgstr "Marquer les nouveaux jeux"
 
 msgid "May"
 msgstr "Mai"
@@ -815,10 +815,10 @@ msgid "Mount DVD drive"
 msgstr "Lancer DVD"
 
 msgid "Music Loop Mode"
-msgstr "Mode Boucle Musique"
+msgstr "Type de boucle"
 
 msgid "Music Volume"
-msgstr "Volume Musique"
+msgstr "Volume musique"
 
 msgid "Neither"
 msgstr "Aucun"
@@ -827,7 +827,7 @@ msgid "Network is not initiated."
 msgstr "Réseau non initialisé"
 
 msgid "New Disc Detected"
-msgstr "Nouveau DVD Détecté"
+msgstr "Nouveau DVD détecté"
 
 msgid "Next"
 msgstr "Suivant"
@@ -842,13 +842,13 @@ msgid "No DOL file found on disc."
 msgstr "Aucun DOL trouvé dans ce jeu."
 
 msgid "No Splitting"
-msgstr "Pas de découpage"
+msgstr "Aucun"
 
 msgid "No URL or Path specified."
 msgstr "Pas d'adresse ou de chemin spécifié"
 
 msgid "No WBFS or FAT/NTFS/EXT partition found"
-msgstr "Pas de partition WBFS ou FAT/NTFS/EXT trouvé"
+msgstr "Partition WBFS ou FAT/NTFS/EXT non trouvée"
 
 msgid "No cheats were selected"
 msgstr "Aucune sélection de triche"
@@ -857,13 +857,13 @@ msgid "No data could be read."
 msgstr "Lecture des données impossible."
 
 msgid "No favorites selected."
-msgstr "Pas de favoris sélectionné"
+msgstr "Pas de favoris sélectionnés"
 
 msgid "No file missing!"
 msgstr "Aucun fichier manquant !"
 
 msgid "No new updates."
-msgstr "Pas de nouvelle Mise à Jour."
+msgstr "Pas de nouvelle mise à jour."
 
 msgid "No themes found on the site."
 msgstr "Aucun thème trouvé sur le site."
@@ -923,7 +923,7 @@ msgid "Oct"
 msgstr ""
 
 msgid "Official Site:"
-msgstr "Site Officiel:"
+msgstr "Site officiel:"
 
 msgid "Offset"
 msgstr ""
@@ -944,7 +944,7 @@ msgid "Original/Customs"
 msgstr "Originaux/Persos"
 
 msgid "Parental Control"
-msgstr "Contrôle Parental"
+msgstr "Contrôle parental"
 
 msgid "Partition"
 msgstr ""
@@ -959,7 +959,7 @@ msgid "Password has been changed"
 msgstr "Le mot de passe a été modifié"
 
 msgid "Patch Country Strings"
-msgstr "Patch Jeux Import"
+msgstr "Patch jeux import"
 
 msgid "Path Changed"
 msgstr "Chemin changé"
@@ -968,19 +968,19 @@ msgid "Pick from a list"
 msgstr "Sélectionner"
 
 msgid "Play Count"
-msgstr "Utilisation"
+msgstr "Utilisations"
 
 msgid "Play Next"
-msgstr "Jouer Suiv."
+msgstr "Jouer suiv."
 
 msgid "Play Once"
 msgstr "Jouer 1 fois"
 
 msgid "Play Previous"
-msgstr "Jouer Précéd."
+msgstr "Jouer précéd."
 
 msgid "Playing Music:"
-msgstr "Musique Actuelle:"
+msgstr "Musique actuelle:"
 
 msgid "Please wait..."
 msgstr "Veuillez patienter..."
@@ -1010,7 +1010,7 @@ msgid "Receiving file from:"
 msgstr "Réception du fichier de:"
 
 msgid "Region Patch"
-msgstr ""
+msgstr "Région patch"
 
 msgid "Released"
 msgstr "Date de sortie"
@@ -1019,7 +1019,7 @@ msgid "Reload SD"
 msgstr "Recharger la SD"
 
 msgid "Remove update"
-msgstr "Supprimer Mise à Jour"
+msgstr "Supprimer MàJ"
 
 msgid "Rename Game on WBFS"
 msgstr "Renommer un jeu"
@@ -1028,10 +1028,10 @@ msgid "Reset BG Music"
 msgstr "Fond sonore par defaut"
 
 msgid "Reset Playcounter"
-msgstr "Réinitialiser le compteur d'utilisation"
+msgstr "Remise à zéro du compteur d'utilisations"
 
 msgid "Reset to default BGM?"
-msgstr "Réinitialiser le fond sonore ?"
+msgstr "Remettre le fond sonore par defaut ?"
 
 msgid "Restarting..."
 msgstr "Redémarrage..."
@@ -1040,7 +1040,7 @@ msgid "Return"
 msgstr "Retour"
 
 msgid "Return To"
-msgstr "Revenir à:"
+msgstr "Retourner vers"
 
 msgid "Return to Wii Menu"
 msgstr "Retourner au menu Wii"
@@ -1082,7 +1082,7 @@ msgid "Select a DOL"
 msgstr "Choisir un DOL"
 
 msgid "Select a DOL from Game"
-msgstr "Sélectionner un DOL a partir du jeu"
+msgstr "Sélectionner un DOL à partir du jeu"
 
 msgid "Sept"
 msgstr ""
@@ -1100,13 +1100,13 @@ msgid "Shutdown System"
 msgstr "Arrêt"
 
 msgid "Shutdown Wii"
-msgstr "Eteindre la Wii"
+msgstr "Éteindre la Wii"
 
 msgid "Sort alphabetically"
-msgstr "Ordre Alphabétique"
+msgstr "Ordre alphabétique"
 
 msgid "Sort by rank"
-msgstr "Classement Favoris"
+msgstr "Classement favoris"
 
 msgid "Sort order by most played"
 msgstr "Les plus joués"
@@ -1130,10 +1130,10 @@ msgid "Special thanks to:"
 msgstr "Remerciements spéciaux à:"
 
 msgid "Split each 2GB"
-msgstr "Découper tous les 2GB"
+msgstr "2Go"
 
 msgid "Split each 4GB"
-msgstr "Découper tous les 4GB"
+msgstr "4Go"
 
 msgid "Standby"
 msgstr "Veille"
@@ -1148,10 +1148,10 @@ msgid "Successfully Saved"
 msgstr "Enregistré avec succès"
 
 msgid "Successfully Updated"
-msgstr "Mise à Jour terminée"
+msgstr "Mise à jour terminée"
 
 msgid "Successfully Updated thanks to www.techjawa.com"
-msgstr "Mise à Jour terminée. Merci www.techjawa.com"
+msgstr "Mise à jour terminée. Merci à www.techjawa.com"
 
 msgid "Successfully deleted:"
 msgstr "Supprimé avec succès:"
@@ -1163,16 +1163,16 @@ msgid "Successfully installed:"
 msgstr "Installé avec succès:"
 
 msgid "System Default"
-msgstr "Système par défaut"
+msgstr "Console par défaut"
 
 msgid "TChinese"
 msgstr "Chinois traditionnel"
 
 msgid "TXT Cheatcodes Path"
-msgstr "Dossier TXT de Triche"
+msgstr "Dossier TXT de triches"
 
 msgid "The .them file was not found in the zip."
-msgstr "Fichier .them introuvable dans le zip."
+msgstr "Fichier .them non trouvé dans le zip."
 
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "Répertoire indiqué inexistant. Souhaitez-vous le créer ?"
@@ -1185,13 +1185,13 @@ msgid "The wad installation failed with error %i"
 msgstr "L'installation du wad a échoué avec l'erreur %i"
 
 msgid "Theme Downloader"
-msgstr "Téléchargement Thèmes"
+msgstr "Téléchargement des thèmes"
 
 msgid "Theme Path"
-msgstr "Dossier Thème"
+msgstr "Dossier thème"
 
 msgid "Theme Title:"
-msgstr "Titre du Thème:"
+msgstr "Titre du thème:"
 
 msgid "Theme path is changed."
 msgstr "Dossier thème changé"
@@ -1236,10 +1236,10 @@ msgid "Uninstall"
 msgstr "Désinstaller"
 
 msgid "Uninstall Game"
-msgstr "Désinstaller le Jeu"
+msgstr "Désinstaller le jeu"
 
 msgid "Uninstall Menu"
-msgstr "Menu Suppression"
+msgstr "Menu suppression"
 
 msgid "Uninstalling wad"
 msgstr "Désinstallation wad"
@@ -1248,7 +1248,7 @@ msgid "Unknown"
 msgstr "Inconnu"
 
 msgid "Unlock USB Loader GX"
-msgstr "Déverouiller USB Loader GX"
+msgstr "Déverrouiller USB Loader GX"
 
 msgid "Unlock console to use this option."
 msgstr "Cette option requiert le déverrouillage de l'interface."
@@ -1260,7 +1260,7 @@ msgid "Unsupported format, try to extract manually TempTheme.zip."
 msgstr "Format non supporté, essayez d'extraire manuellement TempTheme.zip."
 
 msgid "Update"
-msgstr "Mise à Jour"
+msgstr "Mise à jour"
 
 msgid "Update All"
 msgstr "Totale"
@@ -1272,19 +1272,19 @@ msgid "Update Files"
 msgstr "MàJ Fichiers"
 
 msgid "Update Path"
-msgstr "Dossier Mise à Jour"
+msgstr "Dossier de mise à jour"
 
 msgid "Update all Language Files"
-msgstr "Mise à Jour tous fichiers Langue"
+msgstr "Mise à jour des fichiers de langue"
 
 msgid "Update failed"
-msgstr "Mise à Jour échouée"
+msgstr "Échec de la mise à jour"
 
 msgid "Update successfull"
 msgstr "Mise à jour réussie"
 
 msgid "Updating Language Files:"
-msgstr "Mise à Jour Fichiers Langue:"
+msgstr "Mise à jour du fichier de langue:"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Fichier ZIP envoyé et installé dans le répertoire homebrew."
@@ -1300,7 +1300,7 @@ msgid "Video Mode"
 msgstr "Mode vidéo"
 
 msgid "WIP Patches Path"
-msgstr "Dossier Patchs WIP"
+msgstr "Dossier patchs WIP"
 
 msgid "Waiting..."
 msgstr "En attente..."
@@ -1309,7 +1309,7 @@ msgid "Warning:"
 msgstr "Attention:"
 
 msgid "What do you want to update?"
-msgstr "Choix Mise à Jour"
+msgstr "Choix de la mise à jour"
 
 msgid "WiFi Features"
 msgstr "Connexion WiFi"
@@ -1324,7 +1324,7 @@ msgid "Wii Settings"
 msgstr "Paramètres Wii"
 
 msgid "WiiTDB Files"
-msgstr "WiiTDB"
+msgstr "Fichier WiiTDB"
 
 msgid "WiiTDB Path"
 msgstr "Dossier WiiTDB"
@@ -1342,13 +1342,13 @@ msgid "Yes"
 msgstr "Oui"
 
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
-msgstr "Vous éssayez de sélectionner une partition FAT32/NTFS/EXT avec un cIOS 249 Rev < 18 (non supporté). Continuez à vos risques."
+msgstr "Vous essayez de sélectionner une partition FAT32/NTFS/EXT avec un cIOS 249 Rev < 18 (non supporté). Continuez à vos risques."
 
 msgid "You need to select or format a partition"
 msgstr "Vous devez choisir ou formater une partition"
 
 msgid "and translators for language files updates"
-msgstr "et les traducteurs pour la mise à jour des fichiers langue"
+msgstr "et les traducteurs pour la MàJ des fichiers langue"
 
 msgid "available"
 msgstr "disponible"
@@ -1420,7 +1420,7 @@ msgstr "secondes restantes"
 #~ msgstr "Veille"
 
 #~ msgid "Shutdown?"
-#~ msgstr "Eteindre ?"
+#~ msgstr "Éteindre ?"
 
 #~ msgid "Your URL has been saved in %sWiiTDB_URL.txt."
 #~ msgstr "Sauvegarde de l'URL sous %sWiiTDB_URL.txt."
@@ -1486,7 +1486,7 @@ msgstr "secondes restantes"
 #~ msgstr "Confirmation activation du Contrôle Parental ?"
 
 #~ msgid "Checking for Updates"
-#~ msgstr "Recherche de Mise à Jour"
+#~ msgstr "Recherche de Mise à jour"
 
 #~ msgid "Downloading"
 #~ msgstr "Téléchargement"
@@ -1513,13 +1513,13 @@ msgstr "secondes restantes"
 #~ msgstr "vers la"
 
 #~ msgid "Updating"
-#~ msgstr "Mise à Jour"
+#~ msgstr "Mise à jour"
 
 #~ msgid "Updating Language Files..."
-#~ msgstr "Mise à Jour Fichiers Langue..."
+#~ msgstr "Mise à jour des fichiers Langue..."
 
 #~ msgid "Updating WiiTDB.zip"
-#~ msgstr "Mise à Jour WiiTDB.zip"
+#~ msgstr "Mise à jour de WiiTDB.zip"
 
 #~ msgid "You don't have Parental Control enabled. If you wish to use Parental Control, enable it in the Wii Settings."
 #~ msgstr "Contrôle Parental désactivé. Si vous voulez l'utiliser, activez-le dans les Paramètres de votre Wii."
@@ -1642,7 +1642,7 @@ msgstr "secondes restantes"
 #~ msgstr "USB Loader GX fonctionne avec le CIOS d'Hermès rev4 seulement! Assurez-vous qu'il soit installé!"
 
 #~ msgid "Update Path changed."
-#~ msgstr "Dossier de Mise à Jour modifié."
+#~ msgstr "Dossier de mise à jour modifié."
 
 #~ msgid "WIP Patches Path changed"
 #~ msgstr "Dossier Patchs WIP modifié"

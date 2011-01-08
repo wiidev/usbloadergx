@@ -332,6 +332,8 @@ void PartitionHandle::AddPartition(const char * name, u64 lba_start, u64 sec_cou
     {
         name = "WBFS";
         part_type = 0xBF;   //Override partition type on WBFS
+        sec_count = wbfs_ntohl(head->n_hd_sec);
+
     }
     else if(*((u16 *) (buffer + 0x1FE)) == 0x55AA)
     {

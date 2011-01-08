@@ -34,7 +34,7 @@
 
 using namespace std;
 
-int wbfs_part_fs;
+int wbfs_part_fs = -1;
 
 char Wbfs_Fat::wbfs_fs_drive[16];
 char Wbfs_Fat::wbfs_fat_dir[16] = "/wbfs";
@@ -571,6 +571,10 @@ s32 Wbfs_Fat::GetHeadersCount()
         // succes: add tmpHdr to list:
         add_hdr: memset(&st, 0, sizeof(st));
         //printf("added: %.6s %.20s\n", tmpHdr.id, tmpHdr.title); Wpad_WaitButtons();
+        //! First allocate before reallocating
+        if(!fat_hdr_list)
+            fat_hdr_list = (struct discHdr *) malloc(sizeof(struct discHdr));
+
         fat_hdr_count++;
         fat_hdr_list = (struct discHdr *) realloc(fat_hdr_list, fat_hdr_count * sizeof(struct discHdr));
         memcpy(&fat_hdr_list[fat_hdr_count - 1], &tmpHdr, sizeof(struct discHdr));

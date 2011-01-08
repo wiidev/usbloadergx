@@ -9,7 +9,6 @@
 #include "libwiigui/gui.h"
 #include "libwiigui/gui_customoptionbrowser.h"
 #include "prompts/PromptWindows.h"
-#include "filelist.h"
 #include "menu.h"
 #include "usbloader/disc.h"
 #include "usbloader/fstfile.h"

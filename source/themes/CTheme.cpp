@@ -33,8 +33,8 @@
 #include "FreeTypeGX.h"
 
 FreeTypeGX * fontSystem = NULL;
-static FT_Byte * MainFont = (FT_Byte *) font_ttf;
-static u32 MainFontSize = font_ttf_size;
+static FT_Byte * MainFont = NULL;
+static u32 MainFontSize = 0;
 
 bool Theme::ShowTooltips = true;
 
@@ -142,12 +142,7 @@ bool Theme::LoadFont(const char *path)
         rewind(pfile);
 
         MainFont = new (std::nothrow) FT_Byte[MainFontSize];
-        if (!MainFont)
-        {
-            MainFont = (FT_Byte *) font_ttf;
-            MainFontSize = font_ttf_size;
-        }
-        else
+        if (MainFont)
         {
             fread(MainFont, 1, MainFontSize, pfile);
             result = true;
@@ -155,20 +150,21 @@ bool Theme::LoadFont(const char *path)
         fclose(pfile);
     }
 
-    fontSystem = new FreeTypeGX(MainFont, MainFontSize);
+    FT_Byte * loadedFont = MainFont ? MainFont : (FT_Byte *) Resources::GetFile("font.ttf");
+    u32 loadedFontSize = MainFont ? MainFontSize : Resources::GetFileSize("font.ttf");
+
+    fontSystem = new FreeTypeGX(loadedFont, loadedFontSize);
 
     return result;
 }
 
 void Theme::ClearFontData()
 {
-    if (fontSystem) delete fontSystem;
+    if (fontSystem)
+        delete fontSystem;
     fontSystem = NULL;
 
-    if (MainFont != (FT_Byte *) font_ttf)
-    {
-        if (MainFont != NULL) delete [] MainFont;
-        MainFont = (FT_Byte *) font_ttf;
-        MainFontSize = font_ttf_size;
-    }
+    if (MainFont)
+        delete [] MainFont;
+    MainFont = NULL;
 }

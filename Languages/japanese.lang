@@ -395,7 +395,7 @@ msgid "Do you want to format:"
 msgstr "初期化しますか?"
 
 msgid "Do you want to load the default theme?"
-msgstr ""
+msgstr "標準のテーマを読み込みますか?"
 
 msgid "Do you want to load this theme?"
 msgstr "このテーマを読み込みますか?"
@@ -458,7 +458,7 @@ msgid "ERROR: Can't set up theme."
 msgstr "テーマを適用できませんでした"
 
 msgid "Enabling this option on a FAT partition might slow the startup of the loader."
-msgstr ""
+msgstr "FAT領域でこれを有効にするとローダーの起動が遅くなります"
 
 msgid "English"
 msgstr "英語"

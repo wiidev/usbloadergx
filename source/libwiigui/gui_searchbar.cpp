@@ -31,7 +31,9 @@ class cSearchButton
 
 GuiSearchBar::GuiSearchBar(const wchar_t *SearchChars) :
     inSide(0), text((char *) NULL, 22, ( GXColor )
-    {   0, 0, 0, 255}), buttons(0), keyImageData(keyboard_key_png, keyboard_key_png_size), keyOverImageData(keyboard_key_over_png, keyboard_key_over_png_size)
+    {   0, 0, 0, 255}), buttons(0),
+	keyImageData(Resources::GetFile("keyboard_key.png"), Resources::GetFileSize("keyboard_key.png")),
+	keyOverImageData(Resources::GetFile("keyboard_key_over.png"), Resources::GetFileSize("keyboard_key_over.png"))
 {
     trig.SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
     SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);

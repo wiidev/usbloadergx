@@ -43,7 +43,6 @@
 #include "gui_imagedata.h"
 #include "FreeTypeGX.h"
 #include "video.h"
-#include "filelist.h"
 #include "input.h"
 #include "OptionList.hpp"
 #include "SoundOperations/gui_sound.h"
@@ -750,9 +749,12 @@ class GuiTooltip: public GuiElement
         void Draw();
 
     protected:
-        GuiImage leftImage; //!< Tooltip left-image
-        GuiImage tileImage; //!< Tooltip tile-image
-        GuiImage rightImage; //!< Tooltip right-image
+        GuiImageData * tooltipLeft;
+        GuiImageData * tooltipTile;
+        GuiImageData * tooltipRight;
+        GuiImage * leftImage; //!< Tooltip left-image
+        GuiImage * tileImage; //!< Tooltip tile-image
+        GuiImage * rightImage; //!< Tooltip right-image
         GuiText *text;
 };
 
@@ -932,9 +934,7 @@ class GuiKeyboard: public GuiWindow
         GuiImageData * key;
         GuiImageData * keyOver;
         GuiImageData * keyMedium;
-        GuiImageData * keyMediumOver;
         GuiImageData * keyLarge;
-        GuiImageData * keyLargeOver;
         GuiTrigger * trigA;
         GuiTrigger * trigB;
 };
@@ -967,7 +967,6 @@ class GuiNumpad: public GuiWindow
         GuiText * keyTxt[11];
         GuiImageData * keyTextbox;
         GuiImageData * keyMedium;
-        GuiImageData * keyMediumOver;
         GuiTrigger * trigA;
         GuiTrigger * trigB;
 };

@@ -27,7 +27,6 @@
 #include <gccore.h>
 
 #include "libwiigui/gui.h"
-#include "filelist.h"
 
 #include <map>
 

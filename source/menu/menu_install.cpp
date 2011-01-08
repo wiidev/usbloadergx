@@ -100,7 +100,7 @@ int MenuInstall()
                 gameList.FilterList();
                 GuiSound * instsuccess = NULL;
                 bgMusic->Pause();
-                instsuccess = new GuiSound(success_ogg, success_ogg_size, Settings.sfxvolume);
+                instsuccess = new GuiSound(Resources::GetFile("success.ogg"), Resources::GetFileSize("success.ogg"), Settings.sfxvolume);
                 instsuccess->SetVolume(Settings.sfxvolume);
                 instsuccess->SetLoop(0);
                 instsuccess->Play();

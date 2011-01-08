@@ -5,14 +5,13 @@
  * Backgroundmusic
  ***************************************************************************/
 #include <sys/dir.h>
+#include "themes/CTheme.h"
 #include "gui_bgm.h"
 #include "menu.h"
 
 GuiBGM::GuiBGM(const u8 *s, int l, int v) :
     GuiSound(s, l, v, false, 0)
 {
-    loop = 0;
-    loopMode = ONCE;
     currentPath = NULL;
     currentPlaying = 0;
     voice = 0;
@@ -23,13 +22,6 @@ GuiBGM::~GuiBGM()
     if (currentPath) delete[] currentPath;
 
     ClearList();
-}
-
-void GuiBGM::SetLoop(u8 l)
-{
-    loopMode = l;
-
-    GuiSound::SetLoop(l == LOOP);
 }
 
 bool GuiBGM::Load(const char *path)
@@ -65,7 +57,7 @@ bool GuiBGM::LoadStandard()
 
     strcpy(Settings.ogg_path, "");
 
-    bool ret = GuiSound::Load(bg_music_ogg, bg_music_ogg_size, false);
+    bool ret = GuiSound::Load(Resources::GetFile("bg_music.ogg"), Resources::GetFileSize("bg_music.ogg"), false);
 
     if (ret) Play();
 
@@ -211,11 +203,11 @@ void GuiBGM::UpdateState()
 {
     if (!IsPlaying())
     {
-        if (loopMode == DIR_LOOP)
+        if (loop == DIR_LOOP)
         {
             PlayNext();
         }
-        else if (loopMode == RANDOM_BGM)
+        else if (loop == RANDOM_BGM)
         {
             PlayRandom();
         }

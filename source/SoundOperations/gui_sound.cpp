@@ -86,7 +86,7 @@ GuiSound::GuiSound(const char * filepath)
 
     volume = 255;
 	SoundEffectLength = 0;
-	loop = false;
+	loop = 0;
 	allocated = false;
 	Load(filepath);
 }
@@ -105,7 +105,7 @@ GuiSound::GuiSound(const u8 * snd, s32 len, int vol, bool isallocated, int v)
 
     volume = vol;
 	SoundEffectLength = 0;
-	loop = false;
+	loop = 0;
 	allocated = false;
 	Load(snd, len, isallocated);
 }

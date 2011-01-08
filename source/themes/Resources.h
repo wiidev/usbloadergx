@@ -2,7 +2,6 @@
 #define RECOURCES_H_
 
 #include "libwiigui/gui_imagedata.h"
-#include "filelist.h"
 
 typedef struct _RecourceFile
 {

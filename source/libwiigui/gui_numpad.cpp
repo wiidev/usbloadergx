@@ -17,8 +17,6 @@
  * Constructor for the GuiNumpad class.
  */
 
-#define SAFEFREE(p) if(p){free(p);p=NULL;}
-
 GuiNumpad::GuiNumpad(char * t, u32 max)
 {
     width = 400;
@@ -35,7 +33,7 @@ GuiNumpad::GuiNumpad(char * t, u32 max)
     char thekeys[11] = { '1', '2', '3', '4', '5', '6', '7', '8', '9', '\0', '0' };
     memcpy(keys, thekeys, sizeof(thekeys));
 
-    keyTextbox = new GuiImageData(keyboard_textbox_png, keyboard_textbox_png_size);
+    keyTextbox = new GuiImageData("keyboard_textbox.png");
     keyTextboxImg = new GuiImage(keyTextbox);
     keyTextboxImg->SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     keyTextboxImg->SetPosition(0, 40);//(0,0);
@@ -48,8 +46,7 @@ GuiNumpad::GuiNumpad(char * t, u32 max)
     kbText->SetPassChar('*');
     this->Append(kbText);
 
-    keyMedium = new GuiImageData(keyboard_mediumkey_over_png, keyboard_mediumkey_over_png_size);
-    keyMediumOver = new GuiImageData(keyboard_mediumkey_over_png, keyboard_mediumkey_over_png_size);
+    keyMedium = new GuiImageData("keyboard_mediumkey_over.png");
 
     trigA = new GuiTrigger;
     trigA->SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
@@ -57,7 +54,7 @@ GuiNumpad::GuiNumpad(char * t, u32 max)
     trigB->SetButtonOnlyTrigger(-1, WPAD_BUTTON_B | WPAD_CLASSIC_BUTTON_B, PAD_BUTTON_B);
 
     keyBackImg = new GuiImage(keyMedium);
-    keyBackOverImg = new GuiImage(keyMediumOver);
+    keyBackOverImg = new GuiImage(keyMedium);
     keyBackText = new GuiText("Back", 20, ( GXColor )
     {   0, 0, 0, 0xff});
 
@@ -67,7 +64,7 @@ GuiNumpad::GuiNumpad(char * t, u32 max)
     this->Append(keyBack);
 
     keyClearImg = new GuiImage(keyMedium);
-    keyClearOverImg = new GuiImage(keyMediumOver);
+    keyClearOverImg = new GuiImage(keyMedium);
     keyClearText = new GuiText("Clear", 20, ( GXColor )
     {   0, 0, 0, 0xff});
     keyClear = new GuiButton(keyClearImg, keyClearOverImg, ALIGN_CENTRE, ALIGN_MIDDLE, -90, 80, trigA, btnSoundOver, btnSoundClick, 1);
@@ -83,7 +80,7 @@ GuiNumpad::GuiNumpad(char * t, u32 max)
             int row = i / 3;
 
             keyImg[i] = new GuiImage(keyMedium);
-            keyImgOver[i] = new GuiImage(keyMediumOver);
+            keyImgOver[i] = new GuiImage(keyMedium);
             txt[0] = keys[i];
             keyTxt[i] = new GuiText(txt, 20, ( GXColor )
             {   0, 0, 0, 0xff});
@@ -103,30 +100,29 @@ GuiNumpad::GuiNumpad(char * t, u32 max)
  */
 GuiNumpad::~GuiNumpad()
 {
-    SAFEFREE( kbText )
-    SAFEFREE( keyTextbox )
-    SAFEFREE( keyTextboxImg )
-    SAFEFREE( keyBackText )
-    SAFEFREE( keyBackImg )
-    SAFEFREE( keyBackOverImg )
-    SAFEFREE( keyBack )
-    SAFEFREE( keyClear )
-    SAFEFREE( keyClearImg )
-    SAFEFREE( keyClearOverImg )
-    SAFEFREE( keyClearText )
-    SAFEFREE( keyMedium )
-    SAFEFREE( keyMediumOver )
-    SAFEFREE( trigA )
-    SAFEFREE( trigB )
+    delete kbText;
+    delete keyTextbox;
+    delete keyTextboxImg;
+    delete keyBackText;
+    delete keyBackImg;
+    delete keyBackOverImg;
+    delete keyBack;
+    delete keyClear;
+    delete keyClearImg;
+    delete keyClearOverImg;
+    delete keyClearText;
+    delete keyMedium;
+    delete trigA;
+    delete trigB;
 
     for (int i = 0; i < 11; i++)
     {
         if (keys[i] != '\0')
         {
-            SAFEFREE( keyImg[i] )
-            SAFEFREE( keyImgOver[i] )
-            SAFEFREE( keyTxt[i] )
-            SAFEFREE( keyBtn[i] )
+            delete keyImg[i];
+            delete keyImgOver[i];
+            delete keyTxt[i];
+            delete keyBtn[i];
         }
     }
 }

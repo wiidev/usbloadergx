@@ -30,7 +30,6 @@
 #include "FileOperations/fileops.h"
 #include "menu.h"
 #include "menu.h"
-#include "filelist.h"
 #include "sys.h"
 #include "wpad.h"
 #include "wad/wad.h"
@@ -209,7 +208,7 @@ void WindowCredits()
 
     bgMusic->Pause();
 
-    creditsMusic = new GuiSound(credits_music_ogg, credits_music_ogg_size, 55);
+    creditsMusic = new GuiSound(Resources::GetFile("credits_music.ogg"), Resources::GetFileSize("credits_music.ogg"), 55);
     creditsMusic->SetVolume(60);
     creditsMusic->SetLoop(1);
     creditsMusic->Play();
@@ -222,12 +221,12 @@ void WindowCredits()
     GuiWindow creditsWindowBox(580, 448);
     creditsWindowBox.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
 
-    GuiImageData creditsBox(credits_bg_png, credits_bg_png_size);
+    GuiImageData creditsBox(Resources::GetFile("credits_bg.png"), Resources::GetFileSize("credits_bg.png"));
     GuiImage creditsBoxImg(&creditsBox);
     creditsBoxImg.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     creditsWindowBox.Append(&creditsBoxImg);
 
-    GuiImageData star(little_star_png, little_star_png_size);
+    GuiImageData star(Resources::GetFile("little_star.png"), Resources::GetFileSize("little_star.png"));
     GuiImage starImg(&star);
     starImg.SetWidescreen(Settings.widescreen); //added
     starImg.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
@@ -802,13 +801,13 @@ int WindowExitPrompt()
     bgMusic->Pause();
 
     GuiSound * homein = NULL;
-    homein = new GuiSound(menuin_ogg, menuin_ogg_size, Settings.sfxvolume);
+    homein = new GuiSound(Resources::GetFile("menuin.ogg"), Resources::GetFileSize("menuin.ogg"), Settings.sfxvolume);
     homein->SetVolume(Settings.sfxvolume);
     homein->SetLoop(0);
     homein->Play();
 
     GuiSound * homeout = NULL;
-    homeout = new GuiSound(menuout_ogg, menuout_ogg_size, Settings.sfxvolume);
+    homeout = new GuiSound(Resources::GetFile("menuout.ogg"), Resources::GetFileSize("menuout.ogg"), Settings.sfxvolume);
     homeout->SetVolume(Settings.sfxvolume);
     homeout->SetLoop(0);
 
@@ -821,13 +820,13 @@ int WindowExitPrompt()
     GuiWindow promptWindow(640, 480);
     promptWindow.SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     promptWindow.SetPosition(0, 0);
-    GuiImageData top(exit_top_png, exit_top_png_size);
-    GuiImageData topOver(exit_top_over_png, exit_top_over_png_size);
-    GuiImageData bottom(exit_bottom_png, exit_bottom_png_size);
-    GuiImageData bottomOver(exit_bottom_over_png, exit_bottom_over_png_size);
-    GuiImageData button(exit_button_png, exit_button_png_size);
-    GuiImageData wiimote(wiimote_png, wiimote_png_size);
-    GuiImageData close(closebutton_png, closebutton_png_size);
+    GuiImageData top(Resources::GetFile("exit_top.png"), Resources::GetFileSize("exit_top.png"));
+    GuiImageData topOver(Resources::GetFile("exit_top_over.png"), Resources::GetFileSize("exit_top_over.png"));
+    GuiImageData bottom(Resources::GetFile("exit_bottom.png"), Resources::GetFileSize("exit_bottom.png"));
+    GuiImageData bottomOver(Resources::GetFile("exit_bottom_over.png"), Resources::GetFileSize("exit_bottom_over.png"));
+    GuiImageData button(Resources::GetFile("exit_button.png"), Resources::GetFileSize("exit_button.png"));
+    GuiImageData wiimote(Resources::GetFile("wiimote.png"), Resources::GetFileSize("wiimote.png"));
+    GuiImageData close(Resources::GetFile("closebutton.png"), Resources::GetFileSize("closebutton.png"));
 
     GuiImageData battery(Resources::GetFile("battery_white.png"), Resources::GetFileSize("battery_white.png"));
     GuiImageData batteryBar(Resources::GetFile("battery_bar_white.png"), Resources::GetFileSize("battery_bar_white.png"));
