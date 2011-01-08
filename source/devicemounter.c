@@ -53,29 +53,28 @@ int USBDevice_Init()
 
     int i;
     MASTER_BOOT_RECORD mbr;
-    char ntfsBootSector[512];
+    char BootSector[512];
 
     __io_usbstorage.readSectors(0, 1, &mbr);
 
     for(i = 0; i < 4; ++i)
     {
-        switch(mbr.partitions[i].type)
+        if(mbr.partitions[i].type == 0)
+            continue;
+
+        __io_usbstorage.readSectors(le32(mbr.partitions[i].lba_start), 1, BootSector);
+
+        if(*((u16 *) (BootSector + 0x1FE)) == 0x55AA)
         {
-            case 0x01:
-            case 0x04:
-            case 0x06:
-            case 0x0b:
-            case 0x0c:
-            case 0x0e:
+            //! Partition typ can be missleading the correct partition format. Stupid lazy ass Partition Editors.
+            if(memcmp(BootSector + 0x36, "FAT", 3) == 0 || memcmp(BootSector + 0x52, "FAT", 3) == 0)
+            {
                 fatMount(DeviceName[USB1+i], &__io_usbstorage, le32(mbr.partitions[i].lba_start), CACHE, SECTORS);
-                break;
-            case 0x07:
-                __io_usbstorage.readSectors(le32(mbr.partitions[i].lba_start), 1, ntfsBootSector);
-                if(strncmp(&ntfsBootSector[0x03], "NTFS", 4) == 0)
-                    ntfsMount(DeviceName[USB1+i], &__io_usbstorage, le32(mbr.partitions[i].lba_start), CACHE, SECTORS, NTFS_SHOW_HIDDEN_FILES | NTFS_RECOVER | NTFS_IGNORE_CASE);
-                break;
-            default:
-                break;
+            }
+            else if (memcmp(BootSector + 0x03, "NTFS", 4) == 0)
+            {
+                ntfsMount(DeviceName[USB1+i], &__io_usbstorage, le32(mbr.partitions[i].lba_start), CACHE, SECTORS, NTFS_SHOW_HIDDEN_FILES | NTFS_RECOVER | NTFS_IGNORE_CASE);
+            }
         }
     }
 
