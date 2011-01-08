@@ -48,7 +48,7 @@
 
 /*
  * Plenty possibilities for big optimizations all over in the cluster
- * allocation, however at the moment the dominant bottleneck (~ 90%) is 
+ * allocation, however at the moment the dominant bottleneck (~ 90%) is
  * the update of the mapping pairs which converges to the cubic Faulhaber's
  * formula as the function of the number of extents (fragments, runs).
  */
@@ -74,7 +74,7 @@ static void ntfs_cluster_set_zone_pos(LCN start, LCN end, LCN *pos, LCN tc)
 static void ntfs_cluster_update_zone_pos(ntfs_volume *vol, u8 zone, LCN tc)
 {
 	ntfs_log_trace("tc = %lld, zone = %d\n", (long long)tc, zone);
-	
+
 	if (zone == ZONE_MFT)
 		ntfs_cluster_set_zone_pos(vol->mft_lcn, vol->mft_zone_end,
 					  &vol->mft_zone_pos, tc);
@@ -82,7 +82,7 @@ static void ntfs_cluster_update_zone_pos(ntfs_volume *vol, u8 zone, LCN tc)
 		ntfs_cluster_set_zone_pos(vol->mft_zone_end, vol->nr_clusters,
 					  &vol->data1_zone_pos, tc);
 	else /* zone == ZONE_DATA2 */
-		ntfs_cluster_set_zone_pos(0, vol->mft_zone_start, 
+		ntfs_cluster_set_zone_pos(0, vol->mft_zone_start,
 					  &vol->data2_zone_pos, tc);
 }
 
@@ -112,15 +112,15 @@ static void update_full_status(ntfs_volume *vol, LCN lcn)
 			}
 		}
 }
- 
+
 static s64 max_empty_bit_range(unsigned char *buf, int size)
 {
 	int i, j, run = 0;
 	int max_range = 0;
 	s64 start_pos = -1;
-	
+
 	ntfs_log_trace("Entering\n");
-	
+
 	i = 0;
 	while (i < size) {
 		switch (*buf) {
@@ -144,42 +144,42 @@ static s64 max_empty_bit_range(unsigned char *buf, int size)
 			break;
 		default :
 			for (j = 0; j < 8; j++) {
-			
+
 				int bit = *buf & (1 << j);
-		
+
 				if (bit) {
 					if (run > max_range) {
 						max_range = run;
 						start_pos = (s64)i * 8 + (j - run);
 					}
 					run = 0;
-				} else 
+				} else
 					run++;
 			}
 			i++;
 			buf++;
-		
+
 		}
 	}
-	
+
 	if (run > max_range)
 		start_pos = (s64)i * 8 - run;
-	
+
 	return start_pos;
 }
 
-static int bitmap_writeback(ntfs_volume *vol, s64 pos, s64 size, void *b, 
+static int bitmap_writeback(ntfs_volume *vol, s64 pos, s64 size, void *b,
 			    u8 *writeback)
 {
 	s64 written;
-	
+
 	ntfs_log_trace("Entering\n");
-	
+
 	if (!*writeback)
 		return 0;
-	
+
 	*writeback = 0;
-	
+
 	written = ntfs_attr_pwrite(vol->lcnbmp_na, pos, size, b);
 	if (written != size) {
 		if (!written)
@@ -220,16 +220,16 @@ static int bitmap_writeback(ntfs_volume *vol, s64 pos, s64 size, void *b,
  * expanded to cover the start of the volume in order to reserve space for the
  * mft bitmap attribute.
  *
- * The complexity stems from the need of implementing the mft vs data zoned 
- * approach and from the fact that we have access to the lcn bitmap via up to 
- * NTFS_LCNALLOC_BSIZE bytes at a time, so we need to cope with crossing over 
- * boundaries of two buffers. Further, the fact that the allocator allows for 
- * caller supplied hints as to the location of where allocation should begin 
- * and the fact that the allocator keeps track of where in the data zones the 
- * next natural allocation should occur, contribute to the complexity of the 
- * function. But it should all be worthwhile, because this allocator: 
+ * The complexity stems from the need of implementing the mft vs data zoned
+ * approach and from the fact that we have access to the lcn bitmap via up to
+ * NTFS_LCNALLOC_BSIZE bytes at a time, so we need to cope with crossing over
+ * boundaries of two buffers. Further, the fact that the allocator allows for
+ * caller supplied hints as to the location of where allocation should begin
+ * and the fact that the allocator keeps track of where in the data zones the
+ * next natural allocation should occur, contribute to the complexity of the
+ * function. But it should all be worthwhile, because this allocator:
  *   1) implements MFT zone reservation
- *   2) causes reduction in fragmentation. 
+ *   2) causes reduction in fragmentation.
  * The code is not optimized for speed.
  */
 runlist *ntfs_cluster_alloc(ntfs_volume *vol, VCN start_vcn, s64 count,
@@ -251,12 +251,12 @@ runlist *ntfs_cluster_alloc(ntfs_volume *vol, VCN start_vcn, s64 count,
 	ntfs_log_enter("Entering with count = 0x%llx, start_lcn = 0x%llx, "
 		       "zone = %s_ZONE.\n", (long long)count, (long long)
 		       start_lcn, zone == MFT_ZONE ? "MFT" : "DATA");
-	
+
 	if (!vol || count < 0 || start_lcn < -1 || !vol->lcnbmp_na ||
 			(s8)zone < FIRST_ZONE || zone > LAST_ZONE) {
 		errno = EINVAL;
-		ntfs_log_perror("%s: vcn: %lld, count: %lld, lcn: %lld", 
-				__FUNCTION__, (long long)start_vcn, 
+		ntfs_log_perror("%s: vcn: %lld, count: %lld, lcn: %lld",
+				__FUNCTION__, (long long)start_vcn,
 				(long long)count, (long long)start_lcn);
 		goto out;
 	}
@@ -281,7 +281,7 @@ runlist *ntfs_cluster_alloc(ntfs_volume *vol, VCN start_vcn, s64 count,
 	 */
 	has_guess = 1;
 	zone_start = start_lcn;
-	
+
 	if (zone_start < 0) {
 		if (zone == DATA_ZONE)
 			zone_start = vol->data1_zone_pos;
@@ -289,13 +289,13 @@ runlist *ntfs_cluster_alloc(ntfs_volume *vol, VCN start_vcn, s64 count,
 			zone_start = vol->mft_zone_pos;
 		has_guess = 0;
 	}
-	
+
 	used_zone_pos = has_guess ? 0 : 1;
-	
+
 	if (!zone_start || zone_start == vol->mft_zone_start ||
 			zone_start == vol->mft_zone_end)
 		pass = 2;
-		
+
 	if (zone_start < vol->mft_zone_start) {
 		zone_end = vol->mft_zone_start;
 		search_zone = ZONE_DATA2;
@@ -306,7 +306,7 @@ runlist *ntfs_cluster_alloc(ntfs_volume *vol, VCN start_vcn, s64 count,
 		zone_end = vol->nr_clusters;
 		search_zone = ZONE_DATA1;
 	}
-	
+
 	bmp_pos = zone_start;
 
 	/* Loop until all clusters are allocated. */
@@ -317,7 +317,7 @@ runlist *ntfs_cluster_alloc(ntfs_volume *vol, VCN start_vcn, s64 count,
 		if (search_zone & vol->full_zones)
 			goto zone_pass_done;
 		last_read_pos = bmp_pos >> 3;
-		br = ntfs_attr_pread(vol->lcnbmp_na, last_read_pos, 
+		br = ntfs_attr_pread(vol->lcnbmp_na, last_read_pos,
 				     NTFS_LCNALLOC_BSIZE, buf);
 		if (br <= 0) {
 			if (!br)
@@ -334,7 +334,7 @@ runlist *ntfs_cluster_alloc(ntfs_volume *vol, VCN start_vcn, s64 count,
 		lcn = bmp_pos & 7;
 		bmp_pos &= ~7;
 		writeback = 0;
-		
+
 		while (lcn < buf_size) {
 			byte = buf + (lcn >> 3);
 			bit = 1 << (lcn & 7);
@@ -352,11 +352,11 @@ runlist *ntfs_cluster_alloc(ntfs_volume *vol, VCN start_vcn, s64 count,
 			}
 
 			/* First free bit is at lcn + bmp_pos. */
-			 
+
 			/* Reallocate memory if necessary. */
 			if ((rlpos + 2) * (int)sizeof(runlist) >= rlsize) {
 				rlsize += 4096;
-				trl = realloc(rl, rlsize);
+				trl = MEM2_realloc(rl, rlsize);
 				if (!trl) {
 					err = ENOMEM;
 					ntfs_log_perror("realloc() failed");
@@ -364,17 +364,17 @@ runlist *ntfs_cluster_alloc(ntfs_volume *vol, VCN start_vcn, s64 count,
 				}
 				rl = trl;
 			}
-			
+
 			/* Allocate the bitmap bit. */
 			*byte |= bit;
 			writeback = 1;
-			if (vol->free_clusters <= 0) 
+			if (vol->free_clusters <= 0)
 				ntfs_log_error("Non-positive free clusters "
 					       "(%lld)!\n",
 						(long long)vol->free_clusters);
-			else	
-				vol->free_clusters--; 
-			
+			else
+				vol->free_clusters--;
+
 			/*
 			 * Coalesce with previous run if adjacent LCNs.
 			 * Otherwise, append a new run.
@@ -382,9 +382,9 @@ runlist *ntfs_cluster_alloc(ntfs_volume *vol, VCN start_vcn, s64 count,
 			if (prev_lcn == lcn + bmp_pos - prev_run_len && rlpos) {
 				ntfs_log_debug("Cluster coalesce: prev_lcn: "
 					       "%lld  lcn: %lld  bmp_pos: %lld  "
-					       "prev_run_len: %lld\n", 
-					       (long long)prev_lcn, 
-					       (long long)lcn, (long long)bmp_pos, 
+					       "prev_run_len: %lld\n",
+					       (long long)prev_lcn,
+					       (long long)lcn, (long long)bmp_pos,
 					       (long long)prev_run_len);
 				rl[rlpos - 1].length = ++prev_run_len;
 			} else {
@@ -393,54 +393,54 @@ runlist *ntfs_cluster_alloc(ntfs_volume *vol, VCN start_vcn, s64 count,
 							prev_run_len;
 				else {
 					rl[rlpos].vcn = start_vcn;
-					ntfs_log_debug("Start_vcn: %lld\n", 
+					ntfs_log_debug("Start_vcn: %lld\n",
 						       (long long)start_vcn);
 				}
-				
+
 				rl[rlpos].lcn = prev_lcn = lcn + bmp_pos;
 				rl[rlpos].length = prev_run_len = 1;
 				rlpos++;
 			}
-			
-			ntfs_log_debug("RUN:   %-16lld %-16lld %-16lld\n", 
-				       (long long)rl[rlpos - 1].vcn, 
-				       (long long)rl[rlpos - 1].lcn, 
+
+			ntfs_log_debug("RUN:   %-16lld %-16lld %-16lld\n",
+				       (long long)rl[rlpos - 1].vcn,
+				       (long long)rl[rlpos - 1].lcn,
 				       (long long)rl[rlpos - 1].length);
 			/* Done? */
 			if (!--clusters) {
 				if (used_zone_pos)
-					ntfs_cluster_update_zone_pos(vol, 
+					ntfs_cluster_update_zone_pos(vol,
 						search_zone, lcn + bmp_pos + 1 +
 							NTFS_LCNALLOC_SKIP);
 				goto done_ret;
 			}
-			
+
 			lcn++;
 		}
-		
+
 		if (bitmap_writeback(vol, last_read_pos, br, buf, &writeback)) {
 			err = errno;
 			goto err_ret;
 		}
-		
+
 		if (!used_zone_pos) {
-			
+
 			used_zone_pos = 1;
-			
+
 			if (search_zone == ZONE_MFT)
 				zone_start = vol->mft_zone_pos;
 			else if (search_zone == ZONE_DATA1)
 				zone_start = vol->data1_zone_pos;
 			else
 				zone_start = vol->data2_zone_pos;
-			
+
 			if (!zone_start || zone_start == vol->mft_zone_start ||
 					zone_start == vol->mft_zone_end)
 				pass = 2;
 			bmp_pos = zone_start;
 		} else
 			bmp_pos += buf_size;
-		
+
 		if (bmp_pos < zone_end)
 			continue;
 
@@ -449,22 +449,22 @@ zone_pass_done:
 		if (pass == 1) {
 			pass = 2;
 			zone_end = zone_start;
-			
+
 			if (search_zone == ZONE_MFT)
 				zone_start = vol->mft_zone_start;
 			else if (search_zone == ZONE_DATA1)
 				zone_start = vol->mft_zone_end;
 			else
 				zone_start = 0;
-			
+
 			/* Sanity check. */
 			if (zone_end < zone_start)
 				zone_end = zone_start;
-			
+
 			bmp_pos = zone_start;
-			
+
 			continue;
-		} 
+		}
 		/* pass == 2 */
 done_zones_check:
 		done_zones |= search_zone;
@@ -473,14 +473,14 @@ done_zones_check:
 			ntfs_log_trace("Switching zone.\n");
 			pass = 1;
 			if (rlpos) {
-				LCN tc = rl[rlpos - 1].lcn + 
+				LCN tc = rl[rlpos - 1].lcn +
 				      rl[rlpos - 1].length + NTFS_LCNALLOC_SKIP;
-				
+
 				if (used_zone_pos)
-					ntfs_cluster_update_zone_pos(vol, 
+					ntfs_cluster_update_zone_pos(vol,
 						search_zone, tc);
 			}
-			
+
 			switch (search_zone) {
 			case ZONE_MFT:
 				ntfs_log_trace("Zone switch: mft -> data1\n");
@@ -511,17 +511,17 @@ switch_to_data1_zone:		search_zone = ZONE_DATA1;
 					pass = 2;
 				break;
 			}
-			
+
 			bmp_pos = zone_start;
-			
+
 			if (zone_start == zone_end) {
 				ntfs_log_trace("Empty zone, skipped.\n");
 				goto done_zones_check;
 			}
-			
+
 			continue;
 		}
-		
+
 		ntfs_log_trace("All zones are finished, no space on device.\n");
 		err = ENOSPC;
 		goto err_ret;
@@ -543,7 +543,7 @@ done_err_ret:
 		ntfs_log_perror("Failed to allocate clusters");
 		rl = NULL;
 	}
-out:	
+out:
 	ntfs_log_leave("\n");
 	return rl;
 
@@ -585,26 +585,26 @@ int ntfs_cluster_free_from_rl(ntfs_volume *vol, runlist *rl)
 		ntfs_log_trace("Dealloc lcn 0x%llx, len 0x%llx.\n",
 			       (long long)rl->lcn, (long long)rl->length);
 
-		if (rl->lcn >= 0) { 
+		if (rl->lcn >= 0) {
 			update_full_status(vol,rl->lcn);
-			if (ntfs_bitmap_clear_run(vol->lcnbmp_na, rl->lcn, 
+			if (ntfs_bitmap_clear_run(vol->lcnbmp_na, rl->lcn,
 						  rl->length)) {
 				ntfs_log_perror("Cluster deallocation failed "
 					       "(%lld, %lld)",
-						(long long)rl->lcn, 
+						(long long)rl->lcn,
 						(long long)rl->length);
 				goto out;
 			}
-			nr_freed += rl->length ; 
+			nr_freed += rl->length ;
 		}
 	}
 
 	ret = 0;
 out:
-	vol->free_clusters += nr_freed; 
+	vol->free_clusters += nr_freed;
 	if (vol->free_clusters > vol->nr_clusters)
 		ntfs_log_error("Too many free clusters (%lld > %lld)!",
-			       (long long)vol->free_clusters, 
+			       (long long)vol->free_clusters,
 			       (long long)vol->nr_clusters);
 	return ret;
 }
@@ -623,24 +623,24 @@ int ntfs_cluster_free_basic(ntfs_volume *vol, s64 lcn, s64 count)
 	ntfs_log_trace("Dealloc lcn 0x%llx, len 0x%llx.\n",
 			       (long long)lcn, (long long)count);
 
-	if (lcn >= 0) { 
+	if (lcn >= 0) {
 		update_full_status(vol,lcn);
-		if (ntfs_bitmap_clear_run(vol->lcnbmp_na, lcn, 
+		if (ntfs_bitmap_clear_run(vol->lcnbmp_na, lcn,
 						  count)) {
 			ntfs_log_perror("Cluster deallocation failed "
 				       "(%lld, %lld)",
-					(long long)lcn, 
+					(long long)lcn,
 					(long long)count);
 				goto out;
 		}
-		nr_freed += count; 
+		nr_freed += count;
 	}
 	ret = 0;
 out:
 	vol->free_clusters += nr_freed;
 	if (vol->free_clusters > vol->nr_clusters)
 		ntfs_log_error("Too many free clusters (%lld > %lld)!",
-			       (long long)vol->free_clusters, 
+			       (long long)vol->free_clusters,
 			       (long long)vol->nr_clusters);
 	return ret;
 }
@@ -673,7 +673,7 @@ int ntfs_cluster_free(ntfs_volume *vol, ntfs_attr *na, VCN start_vcn, s64 count)
 		errno = EINVAL;
 		return -1;
 	}
-	
+
 	ntfs_log_enter("Entering for inode 0x%llx, attr 0x%x, count 0x%llx, "
 		       "vcn 0x%llx.\n", (unsigned long long)na->ni->mft_no,
 		       na->type, (long long)count, (long long)start_vcn);
@@ -687,7 +687,7 @@ int ntfs_cluster_free(ntfs_volume *vol, ntfs_attr *na, VCN start_vcn, s64 count)
 
 	if (rl->lcn < 0 && rl->lcn != LCN_HOLE) {
 		errno = EIO;
-		ntfs_log_perror("%s: Unexpected lcn (%lld)", __FUNCTION__, 
+		ntfs_log_perror("%s: Unexpected lcn (%lld)", __FUNCTION__,
 				(long long)rl->lcn);
 		goto leave;
 	}
@@ -707,7 +707,7 @@ int ntfs_cluster_free(ntfs_volume *vol, ntfs_attr *na, VCN start_vcn, s64 count)
 					  to_free))
 			goto leave;
 		nr_freed = to_free;
-	} 
+	}
 
 	/* Go to the next run and adjust the number of clusters left to free. */
 	++rl;
@@ -724,7 +724,7 @@ int ntfs_cluster_free(ntfs_volume *vol, ntfs_attr *na, VCN start_vcn, s64 count)
 		if (rl->lcn < 0 && rl->lcn != LCN_HOLE) {
 			// FIXME: Eeek! We need rollback! (AIA)
 			errno = EIO;
-			ntfs_log_perror("%s: Invalid lcn (%lli)", 
+			ntfs_log_perror("%s: Invalid lcn (%lli)",
 					__FUNCTION__, (long long)rl->lcn);
 			goto out;
 		}
@@ -760,12 +760,12 @@ int ntfs_cluster_free(ntfs_volume *vol, ntfs_attr *na, VCN start_vcn, s64 count)
 
 	ret = nr_freed;
 out:
-	vol->free_clusters += nr_freed ; 
+	vol->free_clusters += nr_freed ;
 	if (vol->free_clusters > vol->nr_clusters)
 		ntfs_log_error("Too many free clusters (%lld > %lld)!",
-			       (long long)vol->free_clusters, 
+			       (long long)vol->free_clusters,
 			       (long long)vol->nr_clusters);
-leave:	
+leave:
 	ntfs_log_leave("\n");
 	return ret;
 }

@@ -28,7 +28,7 @@
  * this was put into public domain in 1988 by Haruhiko OKUMURA).
  *
  * LZHUF.C English version 1.0
- * Based on Japanese version 29-NOV-1988   
+ * Based on Japanese version 29-NOV-1988
  * LZSS coded by Haruhiko OKUMURA
  * Adaptive Huffman Coding coded by Haruyasu YOSHIZAKI
  * Edited and translated to English by Kenji RIKITAKE
@@ -164,7 +164,7 @@ static void ntfs_new_node (struct COMPRESS_CONTEXT *pctx,
 			}
 			if (i >= THRESHOLD) {
 				if (i > pctx->match_length) {
-					pctx->match_position = 
+					pctx->match_position =
 						r - pp + 2*NTFS_SB_SIZE - 1;
 					if ((pctx->match_length = i) > mxl) {
 						i = pctx->rson[pp];
@@ -267,7 +267,7 @@ static unsigned int ntfs_compress_block(const char *inbuf,
 	unsigned int xout;
 	unsigned int ntag;
 
-	pctx = (struct COMPRESS_CONTEXT*)malloc(sizeof(struct COMPRESS_CONTEXT));
+	pctx = (struct COMPRESS_CONTEXT*)ntfs_malloc(sizeof(struct COMPRESS_CONTEXT));
 	if (pctx) {
 		pctx->inbuf = (const unsigned char*)inbuf;
 		ntfs_init_compress_tree(pctx);
@@ -543,7 +543,7 @@ return_overflow:
  * code.  Might be a bit confusing to debug but there really should never be
  * errors coming from here.
  */
-static BOOL ntfs_is_cb_compressed(ntfs_attr *na, runlist_element *rl, 
+static BOOL ntfs_is_cb_compressed(ntfs_attr *na, runlist_element *rl,
 				  VCN cb_start_vcn, int cb_clusters)
 {
 	/*
@@ -663,12 +663,12 @@ s64 ntfs_compressed_attr_pread(ntfs_attr *na, s64 pos, s64 count, void *b)
 	cb_size = na->compression_block_size;
 	cb_size_mask = cb_size - 1UL;
 	cb_clusters = na->compression_block_clusters;
-	
+
 	/* Need a temporary buffer for each loaded compression block. */
 	cb = (u8*)ntfs_malloc(cb_size);
 	if (!cb)
 		return -1;
-	
+
 	/* Need a temporary buffer for each uncompressed block. */
 	dest = (u8*)ntfs_malloc(cb_size);
 	if (!dest) {

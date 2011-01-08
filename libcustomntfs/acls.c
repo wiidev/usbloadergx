@@ -880,7 +880,7 @@ BOOL ntfs_valid_posix(const struct POSIX_SECURITY *pxdesc)
 		}
 	}
 	if ((pxdesc->acccnt > 0)
-	   && ((checks[0].owners != 1) || (checks[0].groups != 1) 
+	   && ((checks[0].owners != 1) || (checks[0].groups != 1)
 		|| (checks[0].others != 1)))
 		ok = FALSE;
 		/* do not check owner, group or other are present in */
@@ -1082,7 +1082,7 @@ struct POSIX_SECURITY *ntfs_replace_acl(const struct POSIX_SECURITY *oldpxdesc,
 	else
 		newsize = sizeof(struct POSIX_SECURITY)
 			+ (oldpxdesc->defcnt + count)*sizeof(struct POSIX_ACE);
-	newpxdesc = (struct POSIX_SECURITY*)malloc(newsize);
+	newpxdesc = (struct POSIX_SECURITY*)ntfs_malloc(newsize);
 	if (newpxdesc) {
 		if (deflt) {
 			offset = oldpxdesc->acccnt;
@@ -1147,7 +1147,7 @@ struct POSIX_SECURITY *ntfs_build_inherited_posix(
 			count = pxdesc->defcnt + 3;
 	} else
 		count = 3;
-	pydesc = (struct POSIX_SECURITY*)malloc(
+	pydesc = (struct POSIX_SECURITY*)ntfs_malloc(
 		sizeof(struct POSIX_SECURITY) + count*sizeof(struct POSIX_ACE));
 	if (pydesc) {
 			/*
@@ -1330,7 +1330,7 @@ struct POSIX_SECURITY *ntfs_merge_descr_posix(const struct POSIX_SECURITY *first
 	size = sizeof(struct POSIX_SECURITY)
 		+ (first->acccnt + first->defcnt
 			+ second->acccnt + second->defcnt)*sizeof(struct POSIX_ACE);
-	pxdesc = (struct POSIX_SECURITY*)malloc(size);
+	pxdesc = (struct POSIX_SECURITY*)ntfs_malloc(size);
 	if (pxdesc) {
 			/*
 			 * merge access ACEs
@@ -1806,7 +1806,7 @@ static BOOL build_group_denials_grant(ACL *pacl,
  *	- grants to owner (always present - first grant)
  *        + grants to designated user
  *        + mask denial to group (unless mask allows all)
- *	- denials to group (preventing grants to world to apply) 
+ *	- denials to group (preventing grants to world to apply)
  *	- grants to group (unless group has no more than world rights)
  *        + mask denials to designated group (unless mask allows all)
  *        + grants to designated group
@@ -3490,7 +3490,7 @@ struct POSIX_SECURITY *ntfs_build_permissions_posix(
 		 * and 2 more for other
 		 */
 	alloccnt = acecnt + 6;
-	pxdesc = (struct POSIX_SECURITY*)malloc(
+	pxdesc = (struct POSIX_SECURITY*)ntfs_malloc(
 				sizeof(struct POSIX_SECURITY)
 				+ alloccnt*sizeof(struct POSIX_ACE));
 	k = 0;

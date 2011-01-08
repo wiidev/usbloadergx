@@ -434,18 +434,18 @@ void ntfs_file_value_upcase(FILE_NAME_ATTR *file_name_attr,
    so this patch fixes the resulting issues for systems which use
    UTF-8 and for others, specifying the locale in fstab brings them
    the encoding which they want.
-  
+
    If no locale is defined or there was a problem with setting one
    up and whenever nl_langinfo(CODESET) returns a sting starting with
    "ANSI", use an internal UCS-2LE <-> UTF-8 codeset converter to fix
    the bug where NTFS-3G does not show any path names which include
    international characters!!! (and also fails on creating them) as result.
-  
+
    Author: Bernhard Kaindl <bk@suse.de>
    Jean-Pierre Andre made it compliant with RFC3629/RFC2781.
 */
- 
-/* 
+
+/*
  * Return the amount of 8-bit elements in UTF-8 needed (without the terminating
  * null) to store a given UTF-16LE string.
  *
@@ -464,7 +464,7 @@ static int utf16_to_utf8_size(const ntfschar *ins, const int ins_len, int outs_l
 			if ((c >= 0xdc00) && (c < 0xe000)) {
 				surrog = FALSE;
 				count += 4;
-			} else 
+			} else
 				goto fail;
 		} else
 			if (c < 0x80)
@@ -481,14 +481,14 @@ static int utf16_to_utf8_size(const ntfschar *ins, const int ins_len, int outs_l
 			else if (c >= 0xe000)
 #endif
 				count += 3;
-			else 
+			else
 				goto fail;
 		if (count > outs_len) {
 			errno = ENAMETOOLONG;
 			goto out;
 		}
 	}
-	if (surrog) 
+	if (surrog)
 		goto fail;
 
 	ret = count;
@@ -550,7 +550,7 @@ static int ntfs_utf16_to_utf8(const ntfschar *ins, const int ins_len,
 				*t++ = 0x80 + ((c >> 6) & 15) + ((halfpair & 3) << 4);
 				*t++ = 0x80 + (c & 63);
 				halfpair = 0;
-			} else 
+			} else
 				goto fail;
 		} else if (c < 0x80) {
 			*t++ = c;
@@ -568,12 +568,12 @@ static int ntfs_utf16_to_utf8(const ntfschar *ins, const int ins_len,
 				*t++ = 0xe0 | (c >> 12);
 				*t++ = 0x80 | ((c >> 6) & 0x3f);
 			        *t++ = 0x80 | (c & 0x3f);
-			} else 
+			} else
 				goto fail;
 	        }
 	}
 	*t = '\0';
-	
+
 #if defined(__APPLE__) || defined(__DARWIN__)
 #ifdef ENABLE_NFCONV
 	if(nfconvert_utf8 && (t - *outs) > 0) {
@@ -602,7 +602,7 @@ static int ntfs_utf16_to_utf8(const ntfschar *ins, const int ins_len,
 	}
 #endif /* ENABLE_NFCONV */
 #endif /* defined(__APPLE__) || defined(__DARWIN__) */
-	
+
 	ret = t - *outs;
 out:
 	return ret;
@@ -611,8 +611,8 @@ fail:
 	goto out;
 }
 
-/* 
- * Return the amount of 16-bit elements in UTF-16LE needed 
+/*
+ * Return the amount of 16-bit elements in UTF-16LE needed
  * (without the terminating null) to store given UTF-8 string.
  *
  * Return -1 with errno set if it's longer than PATH_MAX or string is invalid.
@@ -627,22 +627,22 @@ static int utf8_to_utf16_size(const char *s)
 	size_t count = 0;
 
 	while ((byte = *((const unsigned char *)s++))) {
-		if (++count >= PATH_MAX) 
+		if (++count >= PATH_MAX)
 			goto fail;
 		if (byte >= 0xc0) {
 			if (byte >= 0xF5) {
 				errno = EILSEQ;
 				goto out;
 			}
-			if (!*s) 
+			if (!*s)
 				break;
-			if (byte >= 0xC0) 
+			if (byte >= 0xC0)
 				s++;
-			if (!*s) 
+			if (!*s)
 				break;
-			if (byte >= 0xE0) 
+			if (byte >= 0xE0)
 				s++;
-			if (!*s) 
+			if (!*s)
 				break;
 			if (byte >= 0xF0) {
 				s++;
@@ -658,11 +658,11 @@ fail:
 	errno = ENAMETOOLONG;
 	goto out;
 }
-/* 
+/*
  * This converts one UTF-8 sequence to cpu-endian Unicode value
  * within range U+0 .. U+10ffff and excluding U+D800 .. U+DFFF
  *
- * Return the number of used utf8 bytes or -1 with errno set 
+ * Return the number of used utf8 bytes or -1 with errno set
  * if sequence is invalid.
  */
 static int utf8_to_unicode(u32 *wc, const char *s)
@@ -728,7 +728,7 @@ fail:
  * @ins:	input multibyte string buffer
  * @outs:	on return contains the (allocated) output utf16 string
  * @outs_len:	length of output buffer in utf16 characters
- * 
+ *
  * Return -1 with errno set.
  */
 static int ntfs_utf8_to_utf16(const char *ins, ntfschar **outs)
@@ -789,7 +789,7 @@ static int ntfs_utf8_to_utf16(const char *ins, ntfschar **outs)
 		}
 		t += m;
 	}
-	
+
 	ret = --outpos - *outs;
 fail:
 #if defined(__APPLE__) || defined(__DARWIN__)
@@ -932,7 +932,7 @@ err_out:
  * Convert the input multibyte string @ins, from the current locale into the
  * corresponding little endian, 2-byte Unicode string.
  *
- * The function allocates the string and the caller is responsible for calling 
+ * The function allocates the string and the caller is responsible for calling
  * free(*@outs); when finished with it.
  *
  * On success the function returns the number of Unicode characters written to
@@ -963,7 +963,7 @@ int ntfs_mbstoucs(const char *ins, ntfschar **outs)
 		errno = EINVAL;
 		return -1;
 	}
-	
+
 	if (use_utf8)
 		return ntfs_utf8_to_utf16(ins, outs);
 
@@ -1013,7 +1013,7 @@ int ntfs_mbstoucs(const char *ins, ntfschar **outs)
 		if (o >= ucs_len) {
 			ntfschar *tc;
 			ucs_len = (ucs_len * sizeof(ntfschar) + 64) & ~63;
-			tc = realloc(ucs, ucs_len);
+			tc = MEM2_realloc(ucs, ucs_len);
 			if (!tc)
 				goto err_out;
 			ucs = tc;
@@ -1227,12 +1227,12 @@ ntfschar *ntfs_locase_table_build(const ntfschar *uc, u32 uc_cnt)
  * @len:	length of output buffer in Unicode characters
  *
  * Convert the input @s string into the corresponding little endian,
- * 2-byte Unicode string. The length of the converted string is less 
+ * 2-byte Unicode string. The length of the converted string is less
  * or equal to the maximum length allowed by the NTFS format (255).
  *
  * If @s is NULL then return AT_UNNAMED.
  *
- * On success the function returns the Unicode string in an allocated 
+ * On success the function returns the Unicode string in an allocated
  * buffer and the caller is responsible to free it when it's not needed
  * anymore.
  *
@@ -1371,7 +1371,7 @@ int ntfs_macosx_normalize_filenames(int normalize) {
 #else
 	return -1;
 #endif /* ENABLE_NFCONV */
-} 
+}
 
 int ntfs_macosx_normalize_utf8(const char *utf8_string, char **target,
  int composed) {
@@ -1383,14 +1383,14 @@ int ntfs_macosx_normalize_utf8(const char *utf8_string, char **target,
 	CFIndex requiredBufferLength;
 	char *result = NULL;
 	int resultLength = -1;
-	
+
 	/* Convert the UTF-8 string to a CFString. */
 	cfSourceString = CFStringCreateWithCString(kCFAllocatorDefault, utf8_string, kCFStringEncodingUTF8);
 	if(cfSourceString == NULL) {
 		ntfs_log_error("CFStringCreateWithCString failed!\n");
 		return -2;
 	}
-	
+
 	/* Create a mutable string from cfSourceString that we are free to modify. */
 	cfMutableString = CFStringCreateMutableCopy(kCFAllocatorDefault, 0, cfSourceString);
 	CFRelease(cfSourceString); /* End-of-life. */
@@ -1398,16 +1398,16 @@ int ntfs_macosx_normalize_utf8(const char *utf8_string, char **target,
 		ntfs_log_error("CFStringCreateMutableCopy failed!\n");
 		return -3;
 	}
-  
+
 	/* Normalize the mutable string to the desired normalization form. */
 	CFStringNormalize(cfMutableString, (composed != 0 ? kCFStringNormalizationFormC : kCFStringNormalizationFormD));
-	
+
 	/* Store the resulting string in a '\0'-terminated UTF-8 encoded char* buffer. */
 	rangeToProcess = CFRangeMake(0, CFStringGetLength(cfMutableString));
 	if(CFStringGetBytes(cfMutableString, rangeToProcess, kCFStringEncodingUTF8, 0, false, NULL, 0, &requiredBufferLength) > 0) {
 		resultLength = sizeof(char)*(requiredBufferLength + 1);
 		result = ntfs_calloc(resultLength);
-		
+
 		if(result != NULL) {
 			if(CFStringGetBytes(cfMutableString, rangeToProcess, kCFStringEncodingUTF8,
 					    0, false, (UInt8*)result, resultLength-1, &requiredBufferLength) <= 0) {
@@ -1422,9 +1422,9 @@ int ntfs_macosx_normalize_utf8(const char *utf8_string, char **target,
 	else
 		ntfs_log_error("Could not perform check for required length of UTF-8 conversion of normalized CFMutableString.\n");
 
-	
+
 	CFRelease(cfMutableString);
-	
+
 	if(result != NULL) {
 	 	*target = result;
 		return resultLength - 1;
