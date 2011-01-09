@@ -47,7 +47,10 @@
 #include "prompts/PromptWindows.h"
 #include "FileOperations/fileops.h"
 #include "xml/WiiTDB.hpp"
+#include "wad/nandtitle.h"
+#include "wad/wad.h"
 #include "buildtype.h"
+#include "sys.h"
 #include "svnrev.h"
 
 static const char * WiiTDB_URL = "http://wiitdb.com/wiitdb.zip";
@@ -256,7 +259,7 @@ static int ApplicationDownload(int newrev)
     else
     {
     #ifdef FULLCHANNEL
-        FILE * wadFile = fopen(realpath, "rb");
+        FILE * wadFile = fopen(tmppath, "rb");
         if(!wadFile)
         {
             update_error = true;
@@ -273,7 +276,7 @@ static int ApplicationDownload(int newrev)
         else
             WindowPrompt(tr( "Success" ), tr( "The wad file was installed" ), tr( "OK" ));
 
-        RemoveFile(realpath);
+        RemoveFile(tmppath);
     #else
         gprintf("%s\n%s\n", realpath, tmppath);
         RemoveFile(realpath);

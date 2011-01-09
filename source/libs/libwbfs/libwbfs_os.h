@@ -2,6 +2,7 @@
 #define LIBWBFS_GLUE_H
 
 #include <gctypes.h>
+#include "memory/mem2.h"
 
 #define debug_printf(fmt, ...);
 
@@ -12,9 +13,9 @@
 #include <stdlib.h>
 #include <malloc.h>
 
-#define wbfs_malloc(x)      malloc(x)
+#define wbfs_malloc(x)      MEM2_alloc(x)
 #define wbfs_free(x)        free(x)
-#define wbfs_ioalloc(x)     memalign(32, ((x) + 31) & ~31)
+#define wbfs_ioalloc(x)     MEM2_alloc(((x) + 31) & ~31)
 #define wbfs_iofree(x)      free(x)
 #define wbfs_be16(x)        (*((u16*)(x)))
 #define wbfs_be32(x)        (*((u32*)(x)))
