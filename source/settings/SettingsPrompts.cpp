@@ -396,7 +396,7 @@ int MenuThemeSelect()
     }
     GuiButton defaultBtn( btnOutline.GetWidth(), btnOutline.GetHeight() );
     defaultBtn.SetAlignment( ALIGN_CENTRE, ALIGN_TOP );
-    defaultBtn.SetPosition( 190, 400 );
+    defaultBtn.SetPosition( 0, 400 );
     defaultBtn.SetLabel( &defaultBtnTxt );
     defaultBtn.SetImage( &defaultBtnImg );
     defaultBtn.SetSoundOver( btnSoundOver );
@@ -427,6 +427,7 @@ int MenuThemeSelect()
     w.Append( &backgroundImg );
     w.Append( &pathBtn );
     w.Append( &backBtn );
+    w.Append( &defaultBtn );
     w.Append( &optionBrowser4 );
     mainWindow->Append( &w );
 
@@ -449,12 +450,13 @@ int MenuThemeSelect()
 
         else if ( defaultBtn.GetState() == STATE_CLICKED )
         {
-            choice = WindowPrompt( tr( "Loading default theme." ), 0, tr( "OK" ), tr( "Cancel" ) );
+            choice = WindowPrompt(0, tr( "Do you want to load the default theme?" ), tr( "OK" ), tr( "Cancel" ) );
             if ( choice == 1 )
             {
-                snprintf(Settings.theme_path, sizeof(Settings.theme_path), "%stheme/", Settings.ConfigPath);
-                strcpy(Settings.theme, "");
+                HaltGui();
                 Theme::SetDefault();
+                Theme::Reload();
+                ResumeGui();
                 Settings.Save();
                 returnVal = 1;
             }
@@ -508,13 +510,16 @@ int MenuThemeSelect()
                 if ( !CheckFile( Settings.theme ) )
                 {
                     WindowPrompt( tr( "File not found." ), tr( "Loading default theme." ), tr( "OK" ) );
+                    HaltGui();
                     Theme::SetDefault();
-                    strcpy(Settings.theme, "");
+                    Theme::Reload();
+                    ResumeGui();
                 }
                 else
                 {
                     HaltGui();
                     Theme::Load(Settings.theme);
+                    Theme::Reload();
                     ResumeGui();
                 }
                 Settings.Save();

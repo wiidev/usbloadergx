@@ -191,9 +191,6 @@ extern const u32 settings_button_png_size;
 extern const u8 settings_button_over_png[];
 extern const u32 settings_button_over_png_size;
 
-extern const u8 settings_menu_button_png[];
-extern const u32 settings_menu_button_png_size;
-
 extern const u8 wiimote_poweroff_png[];
 extern const u32 wiimote_poweroff_png_size;
 
@@ -275,15 +272,6 @@ extern const u32 battery_red_png_size;
 extern const u8 battery_bar_red_png[];
 extern const u32 battery_bar_red_png_size;
 
-extern const u8 arrow_next_png[];
-extern const u32 arrow_next_png_size;
-
-extern const u8 arrow_previous_png[];
-extern const u32 arrow_previous_png_size;
-
-extern const u8 mp3_pause_png[];
-extern const u32 mp3_pause_png_size;
-
 extern const u8 exit_top_png[];
 extern const u32 exit_top_png_size;
 
@@ -298,9 +286,6 @@ extern const u32 exit_bottom_over_png_size;
 
 extern const u8 exit_button_png[];
 extern const u32 exit_button_png_size;
-
-extern const u8 mp3_stop_png[];
-extern const u32 mp3_stop_png_size;
 
 extern const u8 favorite_png[];
 extern const u32 favorite_png_size;

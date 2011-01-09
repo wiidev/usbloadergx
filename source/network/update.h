@@ -29,6 +29,7 @@
 #ifndef _UPDATEOPS_H_
 #define _UPDATEOPS_H_
 
+int CheckUpdate();
 int CheckForBetaUpdate();
 int UpdateWiiTDB();
 int UpdateApp();

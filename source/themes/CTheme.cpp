@@ -30,6 +30,7 @@
 #include "libwiigui/gui.h"
 #include "settings/CSettings.h"
 #include "FileOperations/fileops.h"
+#include "menu/menus.h"
 #include "FreeTypeGX.h"
 
 FreeTypeGX * fontSystem = NULL;
@@ -37,6 +38,31 @@ static FT_Byte * MainFont = NULL;
 static u32 MainFontSize = 0;
 
 bool Theme::ShowTooltips = true;
+
+void Theme::Reload()
+{
+    HaltGui();
+    mainWindow->Remove(bgImg);
+    for(int i = 0; i < 4; ++i)
+    {
+        char image[50];
+        snprintf(image, sizeof(image), "player%i_point.png", i+1);
+        delete pointer[i];
+        pointer[i] = Resources::GetImageData(image);
+    }
+    delete btnSoundClick;
+    delete btnSoundClick2;
+    delete btnSoundOver;
+    btnSoundClick = new GuiSound(Resources::GetFile("button_click.wav"), Resources::GetFileSize("button_click.wav"), Settings.sfxvolume);
+    btnSoundClick2 = new GuiSound(Resources::GetFile("button_click2.wav"), Resources::GetFileSize("button_click2.wav"), Settings.sfxvolume);
+    btnSoundOver = new GuiSound(Resources::GetFile("button_over.wav"), Resources::GetFileSize("button_over.wav"), Settings.sfxvolume);
+    delete background;
+    background = Resources::GetImageData(Settings.widescreen ? "wbackground.png" : "background.png");
+    delete bgImg;
+    bgImg = new GuiImage(background);
+    mainWindow->Append(bgImg);
+    ResumeGui();
+}
 
 void Theme::CleanUp()
 {

@@ -18,7 +18,6 @@
 #include "main.h"
 #include "http.h"
 #include "svnrev.h"
-#include "buildtype.h"
 #include "gecko.h"
 #include "update.h"
 
@@ -363,35 +362,6 @@ int NetworkWait()
     }
 
     return 1;
-}
-
-/****************************************************************************
- * Update check
- ***************************************************************************/
-int CheckUpdate()
-{
-    if (!networkinitialized)
-        return -1;
-
-    int revnumber = 0;
-    int currentrev = atoi(GetRev());
-
-#ifdef FULLCHANNEL
-    struct block file = downloadfile( "http://www.techjawa.com/usbloadergx/wadrev.txt" );
-#else
-    struct block file = downloadfile("http://www.techjawa.com/usbloadergx/rev.txt");
-#endif
-
-    if (file.data != NULL)
-    {
-        revnumber = atoi((char *) file.data);
-        free(file.data);
-    }
-
-    if (revnumber > currentrev)
-        return revnumber;
-
-    return -1;
 }
 
 /****************************************************************************

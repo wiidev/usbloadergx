@@ -230,8 +230,8 @@ void GuiImage::SetImage(GuiImageData * img)
     }
 
     image = NULL;
-    width = NULL;
-    height = NULL;
+    width = 0;
+    height = 0;
     imgType = IMAGE_DATA;
 
     if(img)

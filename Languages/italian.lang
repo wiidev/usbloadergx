@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-# italian.lang - v65 - r1033
+# italian.lang - v66 - r1035
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-07 14:00+0100\n"
-"PO-Revision-Date: 2011-01-08 08:30+0200\n"
+"POT-Creation-Date: 2011-01-09 11:32+0100\n"
+"PO-Revision-Date: 2011-01-09 02:30+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: Cambo\n"
 "MIME-Version: 1.0\n"
@@ -182,10 +182,10 @@ msgid "Big thanks to:"
 msgstr "Grazie mille a:"
 
 msgid "Block IOS Reload"
-msgstr "Blocca Ricarica IOS"
+msgstr "Blocca Ricarica cIOS"
 
 msgid "Boot/Standard"
-msgstr "Riavvio/Standard"
+msgstr "cIOS Predefinito"
 
 msgid "Boot?"
 msgstr "Vuoi riavviare?"
@@ -584,19 +584,19 @@ msgid "GCT File created"
 msgstr "File GCT creato"
 
 msgid "GUI Settings"
-msgstr "Impostazioni Loader"
+msgstr "Interfaccia Grafica"
 
 msgid "Game ID"
 msgstr "ID Gioco"
 
 msgid "Game IOS"
-msgstr "IOS Gioco"
+msgstr "cIOS Gioco"
 
 msgid "Game Language"
 msgstr "Lingua Gioco"
 
 msgid "Game Load"
-msgstr "Impostazioni Gioco"
+msgstr "Caricamento Giochi"
 
 msgid "Game Lock"
 msgstr "Bloccaggio Gioco"
@@ -765,6 +765,9 @@ msgstr "Vuoi caricare il file da: %s ?"
 
 msgid "Load this DOL as alternate DOL?"
 msgstr "Vuoi caricare questo DOL come DOL alternativo?"
+
+msgid "Loader Settings"
+msgstr ""
 
 msgid "Loading default theme."
 msgstr "Sto caricando il tema predefinito."

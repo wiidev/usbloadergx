@@ -27,7 +27,7 @@
 #include "network/update.h"
 #include "language/gettext.h"
 #include "GUISettingsMenu.hpp"
-#include "GameLoadSM.hpp"
+#include "LoaderSettings.hpp"
 #include "ParentalControlSM.hpp"
 #include "SoundSettingsMenu.hpp"
 #include "CustomPathsSM.hpp"
@@ -52,7 +52,7 @@ void GlobalSettings::SetupMainButtons()
     int pos = 0;
 
     SetMainButton(pos++, tr( "GUI Settings" ), MainButtonImgData, MainButtonImgOverData);
-    SetMainButton(pos++, tr( "Game Load" ), MainButtonImgData, MainButtonImgOverData);
+    SetMainButton(pos++, tr( "Loader Settings" ), MainButtonImgData, MainButtonImgOverData);
     SetMainButton(pos++, tr( "Parental Control" ), MainButtonImgData, MainButtonImgOverData);
     SetMainButton(pos++, tr( "Sound" ), MainButtonImgData, MainButtonImgOverData);
     SetMainButton(pos++, tr( "Custom Paths" ), MainButtonImgData, MainButtonImgOverData);
@@ -82,7 +82,7 @@ void GlobalSettings::CreateSettingsMenu(int menuNr)
     {
         HideMenu();
         ResumeGui();
-        CurrentMenu = new GameLoadSM();
+        CurrentMenu = new LoaderSettings();
         Append(CurrentMenu);
     }
     //! Parental Control
@@ -179,8 +179,8 @@ void GlobalSettings::DeleteSettingsMenu()
         case CGUISettingsMenu:
             delete ((GuiSettingsMenu *) CurrentMenu);
             break;
-        case CGameLoadSM:
-            delete ((GameLoadSM *) CurrentMenu);
+        case CLoaderSettings:
+            delete ((LoaderSettings *) CurrentMenu);
             break;
         case CParentalControlSM:
             delete ((ParentalControlSM *) CurrentMenu);

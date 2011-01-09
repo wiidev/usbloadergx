@@ -1,4 +1,4 @@
-/****************************************************************************
+ /****************************************************************************
  * Copyright (C) 2010
  * by Dimok
  *
@@ -22,20 +22,14 @@
  * distribution.
  ***************************************************************************/
 #include <unistd.h>
-#include "GameLoadSM.hpp"
-#include "Controls/DeviceHandler.hpp"
+#include <gccore.h>
 #include "settings/CSettings.h"
+#include "themes/CTheme.h"
 #include "prompts/PromptWindows.h"
+#include "prompts/DiscBrowser.h"
 #include "language/gettext.h"
 #include "wad/nandtitle.h"
-#include "prompts/TitleBrowser.h"
-#include "usbloader/GameList.h"
-#include "usbloader/wbfs.h"
-#include "usbloader/utils.h"
-#include "system/IosLoader.h"
-#include "settings/GameTitles.h"
-#include "xml/xml.h"
-#include "menu.h"
+#include "GameLoadSM.hpp"
 
 static const char * OnOffText[MAX_ON_OFF] =
 {
@@ -65,21 +59,7 @@ static const char * LanguageText[MAX_LANGUAGE] =
     trNOOP( "SChinese" ),
     trNOOP( "TChinese" ),
     trNOOP( "Korean" ),
-    trNOOP( "Console Default" )
-};
-
-static const char * InstallToText[INSTALL_TO_MAX] =
-{
-    trNOOP( "None" ),
-    trNOOP( "GAMEID_Gamename" ),
-    trNOOP( "Gamename [GAMEID]" )
-};
-
-static const char * SplitSizeText[INSTALL_TO_MAX] =
-{
-    trNOOP( "No Splitting" ),
-    trNOOP( "Split each 2GB" ),
-    trNOOP( "Split each 4GB" ),
+    trNOOP( "Console Default" ),
 };
 
 static const char * Error002Text[3] =
@@ -89,20 +69,87 @@ static const char * Error002Text[3] =
     trNOOP( "Anti" )
 };
 
-static inline bool IsValidPartition(int fs_type, int cios)
+static const char * ParentalText[5] =
 {
-    if (IosLoader::IsWaninkokoIOS() && NandTitles.VersionOf(TITLE_ID(1, cios)) < 18)
+    trNOOP( "0 (Everyone)" ),
+    trNOOP( "1 (Child 7+)" ),
+    trNOOP( "2 (Teen 12+)" ),
+    trNOOP( "3 (Mature 16+)" ),
+    trNOOP( "4 (Adults Only 18+)" )
+};
+
+static const char * AlternateDOLText[] =
+{
+    trNOOP( "OFF" ),
+    trNOOP( "Select a DOL from Game" ),
+    trNOOP( "Load From SD/USB" ),
+};
+
+GameLoadSM::GameLoadSM(const char * GameID)
+    : SettingsMenu(tr("Game Load"), &GuiOptions, MENU_NONE)
+{
+    //! Setup default settings from global settings
+    snprintf(GameConfig.id, sizeof(GameConfig.id), "%s", (char *) GameID);
+    SetDefaultConfig();
+
+    GameCFG * existCFG = GameSettings.GetGameCFG(GameID);
+
+    //! Overwrite with existing if available
+	if (existCFG)
+	    memcpy(&GameConfig, existCFG, sizeof(GameCFG));
+
+    if(!btnOutline)
+        btnOutline = Resources::GetImageData("button_dialogue_box.png");
+    if(!trigA)
+        trigA = new GuiTrigger();
+    trigA->SetSimpleTrigger(-1, WPAD_BUTTON_A | WPAD_CLASSIC_BUTTON_A, PAD_BUTTON_A);
+
+    saveBtnTxt = new GuiText(tr( "Save" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
+    saveBtnTxt->SetMaxWidth(btnOutline->GetWidth() - 30);
+    saveBtnImg = new GuiImage (btnOutline);
+    if (Settings.wsprompt == ON)
     {
-        return fs_type == PART_FS_WBFS;
+        saveBtnTxt->SetWidescreen(Settings.widescreen);
+        saveBtnImg->SetWidescreen(Settings.widescreen);
     }
-    else
-    {
-        return fs_type == PART_FS_WBFS || fs_type == PART_FS_FAT || fs_type == PART_FS_NTFS || fs_type == PART_FS_EXT;
-    }
+    saveBtn = new GuiButton(saveBtnImg, saveBtnImg, 2, 3, 180, 400, trigA, btnSoundOver, btnSoundClick2, 1);
+    saveBtn->SetLabel(saveBtnTxt);
+    Append(saveBtn);
+
+    SetOptionNames();
+    SetOptionValues();
 }
 
-GameLoadSM::GameLoadSM()
-    : SettingsMenu(tr("Game Load"), &GuiOptions, MENU_NONE)
+GameLoadSM::~GameLoadSM()
+{
+    HaltGui();
+    //! The rest is destroyed in SettingsMenu.cpp
+    Remove(saveBtn);
+    delete saveBtnTxt;
+    delete saveBtnImg;
+    delete saveBtn;
+    ResumeGui();
+}
+
+void GameLoadSM::SetDefaultConfig()
+{
+    GameConfig.video = Settings.videomode;
+    GameConfig.language = Settings.language;
+    GameConfig.ocarina = Settings.ocarina;
+    GameConfig.vipatch = Settings.videopatch;
+    GameConfig.ios = Settings.cios;
+    GameConfig.parentalcontrol = 0;
+    GameConfig.errorfix002 = Settings.error002;
+    GameConfig.patchcountrystrings = Settings.patchcountrystrings;
+    GameConfig.loadalternatedol = OFF;
+    GameConfig.alternatedolstart = 0;
+    GameConfig.iosreloadblock = OFF;
+    strcpy(GameConfig.alternatedolname, "");
+    GameConfig.returnTo = 1;
+    GameConfig.Locked = 0;
+}
+
+void GameLoadSM::SetOptionNames()
 {
     int Idx = 0;
 
@@ -111,32 +158,14 @@ GameLoadSM::GameLoadSM()
     Options->SetName(Idx++, "%s", tr( "Game Language" ));
     Options->SetName(Idx++, "%s", tr( "Patch Country Strings" ));
     Options->SetName(Idx++, "%s", tr( "Ocarina" ));
-    Options->SetName(Idx++, "%s", tr( "Boot/Standard" ));
-    Options->SetName(Idx++, "%s", tr( "Partition" ));
-    Options->SetName(Idx++, "%s", tr( "Install directories" ));
-    Options->SetName(Idx++, "%s", tr( "Game Split Size" ));
-    Options->SetName(Idx++, "%s", tr( "Quick Boot" ));
+    Options->SetName(Idx++, "%s", tr( "Game IOS" ));
+    Options->SetName(Idx++, "%s", tr( "Parental Control" ));
     Options->SetName(Idx++, "%s", tr( "Error 002 fix" ));
-    Options->SetName(Idx++, "%s", tr( "Install partitions" ));
     Options->SetName(Idx++, "%s", tr( "Return To" ));
-    Options->SetName(Idx++, "%s", tr( "Messageboard Update" ));
-
-    SetOptionValues();
-
-    OldSettingsPartition = Settings.partition;
-}
-
-GameLoadSM::~GameLoadSM()
-{
-    //! if partition has changed, Reinitialize it
-    if (Settings.partition != OldSettingsPartition)
-    {
-        WBFS_OpenPart(Settings.partition);
-
-        //! Reload the new game titles
-        gameList.ReadGameList();
-        GameTitles.LoadTitlesFromWiiTDB(Settings.titlestxt_path);
-    }
+    Options->SetName(Idx++, "%s", tr( "Alternate DOL" ));
+    Options->SetName(Idx++, "%s", tr( "Select DOL Offset" ));
+    Options->SetName(Idx++, "%s", tr( "Block IOS Reload" ));
+    Options->SetName(Idx++, "%s", tr( "Game Lock" ));
 }
 
 void GameLoadSM::SetOptionValues()
@@ -144,65 +173,79 @@ void GameLoadSM::SetOptionValues()
     int Idx = 0;
 
     //! Settings: Video Mode
-    Options->SetValue(Idx++, "%s", tr(VideoModeText[Settings.videomode]));
+    Options->SetValue(Idx++, "%s", tr(VideoModeText[GameConfig.video]));
 
     //! Settings: VIDTV Patch
-    Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.videopatch] ));
+    Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.vipatch]));
 
     //! Settings: Game Language
-    Options->SetValue(Idx++, "%s", tr( LanguageText[Settings.language] ));
+    Options->SetValue(Idx++, "%s", tr(LanguageText[GameConfig.language]));
 
     //! Settings: Patch Country Strings
-    Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.patchcountrystrings] ));
+    Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.patchcountrystrings]));
 
     //! Settings: Ocarina
-    Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.ocarina] ));
+    Options->SetValue(Idx++, "%s", tr(OnOffText[GameConfig.ocarina]));
 
-    //! Settings: Boot/Standard
-    if (Settings.godmode)
-        Options->SetValue(Idx++, "IOS %i", Settings.cios);
-    else
-        Options->SetValue(Idx++, "********");
+    //! Settings: Game IOS
+    Options->SetValue(Idx++, "%i", GameConfig.ios);
 
-    //! Settings: Partition
-    PartitionHandle * usbHandle = DeviceHandler::Instance()->GetUSBHandle();
-    // Get the partition name and it's size in GB's
-    Options->SetValue(Idx++, "%s (%.2fGB)", usbHandle->GetFSName(Settings.partition), usbHandle->GetSize(Settings.partition)/GB_SIZE);
-
-    //! Settings: Install directories
-    Options->SetValue(Idx++, "%s", tr( InstallToText[Settings.InstallToDir] ));
-
-    //! Settings: Game Split Size
-    Options->SetValue(Idx++, "%s", tr( SplitSizeText[Settings.GameSplit] ));
-
-    //! Settings: Quick Boot
-    Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.quickboot] ));
+    //! Settings: Parental Control
+    Options->SetValue(Idx++, "%s", tr(ParentalText[GameConfig.parentalcontrol]));
 
     //! Settings: Error 002 fix
-    Options->SetValue(Idx++, "%s", tr( Error002Text[Settings.error002] ));
-
-    //! Settings: Install partitions
-    if(Settings.InstallPartitions == ONLY_GAME_PARTITION)
-        Options->SetValue(Idx++, "%s", tr("Only Game Partition"));
-    else if(Settings.InstallPartitions == ALL_PARTITIONS)
-        Options->SetValue(Idx++, "%s", tr("All Partitions"));
-    else if(Settings.InstallPartitions == REMOVE_UPDATE_PARTITION)
-        Options->SetValue(Idx++, "%s", tr("Remove update"));
+    Options->SetValue(Idx++, "%s", tr(Error002Text[GameConfig.errorfix002]));
 
     //! Settings: Return To
-    const char* TitleName = NULL;
-    int haveTitle = NandTitles.FindU32(Settings.returnTo);
-    if (haveTitle >= 0)
-        TitleName = NandTitles.NameFromIndex(haveTitle);
-    TitleName = TitleName ? TitleName : strlen(Settings.returnTo) > 0 ? Settings.returnTo : tr(OnOffText[0]);
-    Options->SetValue(Idx++, "%s", TitleName);
+    if(GameConfig.returnTo)
+    {
+        const char* TitleName = NULL;
+        int haveTitle = NandTitles.FindU32(Settings.returnTo);
+        if (haveTitle >= 0)
+            TitleName = NandTitles.NameFromIndex(haveTitle);
+        Options->SetValue(Idx++, "%s", TitleName ? TitleName : strlen(Settings.returnTo) > 0 ?
+                                        Settings.returnTo : tr( OnOffText[0] ));
+    }
+    else
+    {
+        Options->SetValue(Idx++, "%s", tr( OnOffText[0] ));
+    }
 
-    //! Settings: Messageboard Update
-    Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.PlaylogUpdate] ));
+    //! Settings: Alternate DOL
+    Options->SetValue(Idx++, "%s", tr( AlternateDOLText[GameConfig.loadalternatedol] ));
+
+    //! Settings: Select DOL Offset
+    if(GameConfig.loadalternatedol != 1)
+        Options->SetValue(Idx++, tr("Not required"));
+    else
+    {
+        if(strcmp(GameConfig.alternatedolname, "") != 0)
+            Options->SetValue(Idx++, "%i <%s>", GameConfig.alternatedolstart, GameConfig.alternatedolname);
+        else
+            Options->SetValue(Idx++, "%i", GameConfig.alternatedolstart);
+    }
+
+    //! Settings: Block IOS Reload
+    Options->SetValue(Idx++, "%s", tr( OnOffText[GameConfig.iosreloadblock] ));
+
+    //! Settings: Game Lock
+    Options->SetValue(Idx++, "%s", tr( OnOffText[GameConfig.Locked] ));
 }
 
 int GameLoadSM::GetMenuInternal()
 {
+    if (saveBtn->GetState() == STATE_CLICKED)
+    {
+        if (GameSettings.AddGame(GameConfig) && GameSettings.Save())
+        {
+            WindowPrompt(tr( "Successfully Saved" ), 0, tr( "OK" ));
+        }
+        else
+            WindowPrompt(tr( "Save Failed. No device inserted?" ), 0, tr( "OK" ));
+
+        saveBtn->ResetState();
+    }
+
     int ret = optionBrowser->GetClickedOption();
 
     if (ret < 0)
@@ -213,140 +256,148 @@ int GameLoadSM::GetMenuInternal()
     //! Settings: Video Mode
     if (ret == ++Idx)
     {
-        if (++Settings.videomode >= VIDEO_MODE_MAX) Settings.videomode = 0;
+        if (++GameConfig.video >= VIDEO_MODE_MAX) GameConfig.video = 0;
     }
 
     //! Settings: VIDTV Patch
     else if (ret == ++Idx)
     {
-        if (++Settings.videopatch >= MAX_ON_OFF) Settings.videopatch = 0;
+        if (++GameConfig.vipatch >= MAX_ON_OFF) GameConfig.vipatch = 0;
     }
 
     //! Settings: Game Language
     else if (ret == ++Idx)
     {
-        if (++Settings.language >= MAX_LANGUAGE) Settings.language = 0;
+        if (++GameConfig.language >= MAX_LANGUAGE) GameConfig.language = 0;
     }
 
     //! Settings: Patch Country Strings
     else if (ret == ++Idx)
     {
-        if (++Settings.patchcountrystrings >= MAX_ON_OFF) Settings.patchcountrystrings = 0;
+        if (++GameConfig.patchcountrystrings >= MAX_ON_OFF) GameConfig.patchcountrystrings = 0;
     }
 
     //! Settings: Ocarina
     else if (ret == ++Idx)
     {
-        if (++Settings.ocarina >= MAX_ON_OFF) Settings.ocarina = 0;
+        if (++GameConfig.ocarina >= MAX_ON_OFF) GameConfig.ocarina = 0;
     }
 
-    //! Settings: Boot/Standard
+    //! Settings: Game IOS
     else if (ret == ++Idx)
     {
-        if(!Settings.godmode)
-            return MENU_NONE;
-
         char entered[4];
-        snprintf(entered, sizeof(entered), "%i", Settings.cios);
+        snprintf(entered, sizeof(entered), "%i", GameConfig.ios);
         if(OnScreenKeyboard(entered, sizeof(entered), 0))
         {
-            Settings.cios = atoi(entered);
-            if(Settings.cios < 200) Settings.cios = 200;
-            else if(Settings.cios > 255) Settings.cios = 255;
+            GameConfig.ios = atoi(entered);
+            if(GameConfig.ios < 200) GameConfig.ios = 200;
+            else if(GameConfig.ios > 255) GameConfig.ios = 255;
 
-            if(NandTitles.IndexOf(TITLE_ID(1, Settings.cios)) < 0)
+            if(NandTitles.IndexOf(TITLE_ID(1, GameConfig.ios)) < 0)
             {
                 WindowPrompt(tr("Warning:"), tr("This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."), tr("OK"));
             }
-            else if(Settings.cios == 254)
+            else if(GameConfig.ios == 254)
             {
                 WindowPrompt(tr("Warning:"), tr("This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."), tr("OK"));
             }
         }
     }
 
-    //! Settings: Partition
+    //! Settings: Parental Control
     else if (ret == ++Idx)
     {
-        if(DeviceHandler::Instance()->GetUSBHandle()->GetPartitionCount() < 2)
-            return MENU_NONE;
-
-        // Select the next valid partition, even if that's the same one
-        int fs_type = 0;
-        int ios = IOS_GetVersion();
-        int retries = 20;
-        do
-        {
-            Settings.partition = (Settings.partition + 1) % DeviceHandler::Instance()->GetUSBHandle()->GetPartitionCount();
-			fs_type = DeviceHandler::GetUSBFilesystemType(Settings.partition);
-        }
-        while (!IsValidPartition(fs_type, ios) && --retries > 0);
-
-        if(fs_type == PART_FS_FAT && Settings.GameSplit == GAMESPLIT_NONE)
-            Settings.GameSplit = GAMESPLIT_4GB;
-    }
-
-    //! Settings: Install directories
-    else if (ret == ++Idx)
-    {
-        if (++Settings.InstallToDir >= INSTALL_TO_MAX) Settings.InstallToDir = 0;
-    }
-
-    //! Settings: Game Split Size
-    else if (ret == ++Idx)
-    {
-        if (++Settings.GameSplit >= GAMESPLIT_MAX)
-        {
-            if(DeviceHandler::GetUSBFilesystemType(Settings.partition) == PART_FS_FAT)
-                Settings.GameSplit = GAMESPLIT_2GB;
-            else
-                Settings.GameSplit = GAMESPLIT_NONE;
-        }
-    }
-
-    //! Settings: Quick Boot
-    else if (ret == ++Idx)
-    {
-        if (++Settings.quickboot >= MAX_ON_OFF) Settings.quickboot = 0;
+        if (++GameConfig.parentalcontrol >= 5) GameConfig.parentalcontrol = 0;
     }
 
     //! Settings: Error 002 fix
-    else if (ret == ++Idx )
-    {
-        if (++Settings.error002 >= 3) Settings.error002 = 0;
-    }
-
-    //! Settings: Install partitions
     else if (ret == ++Idx)
     {
-        switch(Settings.InstallPartitions)
-        {
-            case ONLY_GAME_PARTITION:
-                Settings.InstallPartitions = ALL_PARTITIONS;
-                break;
-            case ALL_PARTITIONS:
-                Settings.InstallPartitions = REMOVE_UPDATE_PARTITION;
-                break;
-            default:
-            case REMOVE_UPDATE_PARTITION:
-                Settings.InstallPartitions = ONLY_GAME_PARTITION;
-                break;
-        }
+        if (++GameConfig.errorfix002 >= 3) GameConfig.errorfix002 = 0;
     }
 
     //! Settings: Return To
     else if (ret == ++Idx)
     {
-        char tidChar[10];
-        bool getChannel = TitleSelector(tidChar);
-        if (getChannel)
-            snprintf(Settings.returnTo, sizeof(Settings.returnTo), "%s", tidChar);
+        if (++GameConfig.returnTo >= MAX_ON_OFF) GameConfig.returnTo = 0;
     }
 
-    //! Settings: Messageboard Update
-    else if (ret == ++Idx )
+    //! Settings: Alternate DOL
+    else if (ret == ++Idx)
     {
-        if (++Settings.PlaylogUpdate >= MAX_ON_OFF) Settings.PlaylogUpdate = 0;
+        if (++GameConfig.loadalternatedol > 2)
+            GameConfig.loadalternatedol = 0;
+    }
+
+    //! Settings: Select DOL Offset from Game
+    else if (ret == ++Idx && GameConfig.loadalternatedol == 1)
+    {
+        char filename[10];
+        snprintf(filename, 7, "%s", GameConfig.id);
+
+        //alt dol menu for games that require more than a single alt dol
+        int autodol = autoSelectDolMenu(filename, false);
+
+        if (autodol > 0)
+        {
+            GameConfig.alternatedolstart = autodol;
+            snprintf(GameConfig.alternatedolname, sizeof(GameConfig.alternatedolname), "%s <%i>", tr( "AUTO" ), autodol);
+            SetOptionValues();
+            return MENU_NONE;
+        }
+        else if (autodol == 0)
+        {
+            GameConfig.loadalternatedol = 0;
+            SetOptionValues();
+            return MENU_NONE;
+        }
+
+        //check to see if we already know the offset of the correct dol
+        autodol = autoSelectDol(filename, false);
+        //if we do know that offset ask if they want to use it
+        if (autodol > 0)
+        {
+            int dolchoice = WindowPrompt(0, tr( "Do you want to use the alternate DOL that is known to be correct?" ),
+                                            tr( "Yes" ), tr( "Pick from a list" ), tr( "Cancel" ));
+            if (dolchoice == 1)
+            {
+                GameConfig.alternatedolstart = autodol;
+                snprintf(GameConfig.alternatedolname, sizeof(GameConfig.alternatedolname), "%s <%i>", tr( "AUTO" ), autodol);
+            }
+            else if (dolchoice == 2) //they want to search for the correct dol themselves
+            {
+                int res = DiscBrowse(GameConfig.id, GameConfig.alternatedolname, sizeof(GameConfig.alternatedolname));
+                if (res >= 0)
+                    GameConfig.alternatedolstart = res;
+            }
+        }
+        else
+        {
+            int res = DiscBrowse(GameConfig.id, GameConfig.alternatedolname, sizeof(GameConfig.alternatedolname));
+            if (res >= 0)
+            {
+                GameConfig.alternatedolstart = res;
+                char tmp[170];
+                snprintf(tmp, sizeof(tmp), "%s %s - %i", tr( "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team." ), filename, GameConfig.alternatedolstart);
+                WindowPrompt(0, tmp, tr( "OK" ));
+            }
+        }
+
+        if(GameConfig.alternatedolstart == 0)
+            GameConfig.loadalternatedol = 0;
+    }
+
+    //! Settings: Block IOS Reload
+    else if (ret == ++Idx)
+    {
+        if (++GameConfig.iosreloadblock >= MAX_ON_OFF) GameConfig.iosreloadblock = 0;
+    }
+
+    //! Settings: Game Lock
+    else if (ret == ++Idx)
+    {
+        if (++GameConfig.Locked >= MAX_ON_OFF) GameConfig.Locked = 0;
     }
 
     SetOptionValues();

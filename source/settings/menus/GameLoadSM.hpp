@@ -1,4 +1,4 @@
-/****************************************************************************
+ /****************************************************************************
  * Copyright (C) 2010
  * by Dimok
  *
@@ -21,24 +21,30 @@
  * 3. This notice may not be removed or altered from any source
  * distribution.
  ***************************************************************************/
-#ifndef GAMELOADSM_HPP_
-#define GAMELOADSM_HPP_
+#ifndef GAMELOAD_SM_HPP
+#define GAMELOAD_SM_HPP
 
 #include "SettingsMenu.hpp"
+#include "settings/CGameSettings.h"
 
 class GameLoadSM : public SettingsMenu
 {
     public:
-        GameLoadSM();
+        GameLoadSM(const char * GameID);
         ~GameLoadSM();
         virtual int GetType() { return CGameLoadSM; };
     protected:
+        void SetDefaultConfig();
+        void SetOptionNames();
         void SetOptionValues();
         int GetMenuInternal();
 
-        int OldSettingsPartition;
-
+        GameCFG GameConfig;
         OptionList GuiOptions;
+
+        GuiText * saveBtnTxt;
+        GuiImage * saveBtnImg;
+        GuiButton * saveBtn;
 };
 
 

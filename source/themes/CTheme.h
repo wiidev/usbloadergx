@@ -16,6 +16,8 @@ class Theme
         static bool Load(const char * path);
         //!Load font data
         static bool LoadFont(const char *path);
+        //!Reload the main images/sounds for the new theme
+        static void Reload();
         //!Clear all image/font/theme data and free the memory
         static void CleanUp();
 

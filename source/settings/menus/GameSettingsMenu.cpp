@@ -28,7 +28,7 @@
 #include "language/gettext.h"
 #include "wad/nandtitle.h"
 #include "cheats/cheatmenu.h"
-#include "IndGameLoadSM.hpp"
+#include "GameLoadSM.hpp"
 #include "UninstallSM.hpp"
 
 GameSettingsMenu::GameSettingsMenu(struct discHdr * header)
@@ -65,7 +65,7 @@ void GameSettingsMenu::CreateSettingsMenu(int menuNr)
     {
         HideMenu();
         ResumeGui();
-        CurrentMenu = new IndGameLoadSM((const char *) DiscHeader->id);
+        CurrentMenu = new GameLoadSM((const char *) DiscHeader->id);
         Append(CurrentMenu);
     }
 
@@ -107,8 +107,8 @@ void GameSettingsMenu::DeleteSettingsMenu()
 
     switch(type)
     {
-        case CIndGameLoadSM:
-            delete ((IndGameLoadSM *) CurrentMenu);
+        case CGameLoadSM:
+            delete ((GameLoadSM *) CurrentMenu);
             break;
         case CUninstallSM:
             delete ((UninstallSM *) CurrentMenu);

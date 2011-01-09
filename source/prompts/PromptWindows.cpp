@@ -241,14 +241,11 @@ void WindowCredits()
     i++;
 
 #ifdef FULLCHANNEL
-    char svnTmp[4];//did this to hide the M after the rev# that is made by altering it
-    //to be ready to be in a full channel
-    snprintf( svnTmp, sizeof( svnTmp ), "%s", GetRev() );
     char SvnRev[30];
-    snprintf( SvnRev, sizeof( SvnRev ), "Rev%sc   IOS%u (Rev %u)", svnTmp, IOS_GetVersion(), IOS_GetRevision() );
+    snprintf( SvnRev, sizeof( SvnRev ), "V2.0c   IOS%u (Rev %u)", IOS_GetVersion(), IOS_GetRevision() );
 #else
     char SvnRev[30];
-    snprintf(SvnRev, sizeof(SvnRev), "Rev%s   IOS%u (Rev %u)", GetRev(), IOS_GetVersion(), IOS_GetRevision());
+    snprintf(SvnRev, sizeof(SvnRev), "V2.0   IOS%u (Rev %u)", IOS_GetVersion(), IOS_GetRevision());
 #endif
 
     txt[i] = new GuiText(SvnRev, 16, ( GXColor ) {255, 255, 255, 255});

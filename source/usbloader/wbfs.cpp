@@ -102,7 +102,9 @@ bool WBFS_Mounted()
 
 s32 WBFS_Format(u32 lba, u32 size)
 {
-    return current->Format();
+    Wbfs_Wbfs Part(wbfsDev, lba, size);
+
+    return Part.Format();
 }
 
 s32 WBFS_GetCount(u32 *count)

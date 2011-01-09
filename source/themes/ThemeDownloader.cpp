@@ -118,20 +118,7 @@ int ThemeDownloader::MainLoop()
         {
             HaltGui();
             Theme::SetDefault();
-            mainWindow->Remove(bgImg);
-            if(pointer[0]) delete pointer[0];
-            if(pointer[1]) delete pointer[1];
-            if(pointer[2]) delete pointer[2];
-            if(pointer[3]) delete pointer[3];
-            pointer[0] = Resources::GetImageData("player1_point.png");
-            pointer[1] = Resources::GetImageData("player2_point.png");
-            pointer[2] = Resources::GetImageData("player3_point.png");
-            pointer[3] = Resources::GetImageData("player4_point.png");
-            if(background) delete background;
-            background = Resources::GetImageData(Settings.widescreen ? "wbackground.png" : "background.png");
-            if(bgImg) delete bgImg;
-            bgImg = new GuiImage(background);
-            mainWindow->Append(bgImg);
+            Theme::Reload();
             ResumeGui();
             return MENU_THEMEDOWNLOADER;
         }

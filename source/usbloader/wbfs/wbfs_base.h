@@ -35,18 +35,9 @@ class Wbfs
         virtual s32 RenameGame(u8 *, const void *) = 0;
         virtual s32 ReIDGame(u8 *discid, const void *newID) = 0;
         virtual f32 EstimateGameSize(void) = 0;
-
-        /*
-         static s32 OpenPart(u32 part_fat, u32 part_idx, u32 part_lba, u32 part_size, char *partition);
-         static s32 OpenNamed(char *partition);
-         static s32 OpenLBA(u32 lba, u32 size);
-         */
     protected:
         static u32 nb_sectors;
-
-        /* WBFS HDD */
         wbfs_t *hdd;
-
         u32 device, lba, size;
     private:
 

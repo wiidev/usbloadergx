@@ -47,6 +47,8 @@
 #include "prompts/PromptWindows.h"
 #include "FileOperations/fileops.h"
 #include "xml/WiiTDB.hpp"
+#include "buildtype.h"
+#include "svnrev.h"
 
 static const char * WiiTDB_URL = "http://wiitdb.com/wiitdb.zip";
 
@@ -194,6 +196,32 @@ static void UpdateMetaXml()
         }
         free(file.data);
     }
+}
+
+int CheckUpdate()
+{
+    if (!IsNetworkInit())
+        return -1;
+
+    int revnumber = 0;
+    int currentrev = atoi(GetRev());
+
+#ifdef FULLCHANNEL
+    struct block file = downloadfile( "http://www.techjawa.com/usbloadergx/wadrev.txt" );
+#else
+    struct block file = downloadfile("http://www.techjawa.com/usbloadergx/rev.txt");
+#endif
+
+    if (file.data != NULL)
+    {
+        revnumber = atoi((char *) file.data);
+        free(file.data);
+    }
+
+    if (revnumber > currentrev)
+        return revnumber;
+
+    return -1;
 }
 
 static int ApplicationDownload(int newrev)

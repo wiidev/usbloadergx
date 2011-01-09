@@ -32,11 +32,11 @@ enum
 {
     CSettingsMenu = 0,
     CGUISettingsMenu,
-    CGameLoadSM,
+    CLoaderSettings,
     CParentalControlSM,
     CSoundSettingsMenu,
     CCustomPathsSM,
-    CIndGameLoadSM,
+    CGameLoadSM,
     CUninstallSM,
 };
 

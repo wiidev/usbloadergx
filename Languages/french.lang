@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-06 19:58+0100\n"
+"POT-Creation-Date: 2011-01-09 11:32+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Andresayang, Cyan, jero\n"
 "Language-Team: Badablek, Amour, ikya & Kin8\n"
@@ -765,6 +765,9 @@ msgstr "Charger le fichier de: %s ?"
 
 msgid "Load this DOL as alternate DOL?"
 msgstr "Charger comme DOL alternatif ?"
+
+msgid "Loader Settings"
+msgstr ""
 
 msgid "Loading default theme."
 msgstr "Chargement thème par défaut."

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-08 09:04+0100\n"
+"POT-Creation-Date: 2011-01-09 11:32+0100\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
 "Last-Translator: Jane.H\n"
 "Language-Team: kyogc, Miller, Mika Li, Jane.H\n"
@@ -395,7 +395,7 @@ msgid "Do you want to format:"
 msgstr "是否格式化："
 
 msgid "Do you want to load the default theme?"
-msgstr ""
+msgstr "是否要載入預設佈景主題嗎？"
 
 msgid "Do you want to load this theme?"
 msgstr "是否要載入這佈景主題嗎？"
@@ -765,6 +765,9 @@ msgstr "檔案載入位置： %s"
 
 msgid "Load this DOL as alternate DOL?"
 msgstr "載入這個 DOL 作為替代 DOL？"
+
+msgid "Loader Settings"
+msgstr ""
 
 msgid "Loading default theme."
 msgstr "正在載入預設主題。"
