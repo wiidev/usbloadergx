@@ -49,8 +49,6 @@ void gamepatches( u8 * dst, int len, u8 videoSelected, u8 languageChoice, u8 pat
     if ( patchcountrystring == 1 )
         PatchCountryStrings( dst, len );
 
-    NSMBPatch( dst, len );
-
     do_wip_code( ( u8 * ) dst, len );
 
     if ( fix002 == 2 )

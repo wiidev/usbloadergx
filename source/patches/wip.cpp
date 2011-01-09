@@ -108,6 +108,8 @@ extern "C" int load_wip_code(u8 *gameid)
 
     if (!fp) return -1;
 
+    free_wip();
+
     char line[255];
     gprintf("\nLoading WIP code from %s.\n", filepath);
 

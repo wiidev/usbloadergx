@@ -15,61 +15,101 @@ bool Anti_002_fix(u8 * Address, int Size)
             sizeof(PatchData));
 }
 
-/** Thanks to WiiPower **/
-bool NSMBPatch(u8 * Address, int Size)
+bool NSMBPatch()
 {
-    if (IOS_GetVersion() == 222 || IOS_GetVersion() == 223) return false; // Don't use this when using Hermes, it'll use the BCA fix instead...
+    WIP_Code * CodeList = NULL;
 
-    if (memcmp("SMNE", (char *) 0x80000000, 4) == 0)
+    if (memcmp("SMNE01", (char *) 0x80000000, 6) == 0)
     {
-        u8 SearchPattern[32] = { 0x94, 0x21, 0xFF, 0xD0, 0x7C, 0x08, 0x02, 0xA6, 0x90, 0x01, 0x00, 0x34, 0x39, 0x61,
-                0x00, 0x30, 0x48, 0x12, 0xD7, 0x89, 0x7C, 0x7B, 0x1B, 0x78, 0x7C, 0x9C, 0x23, 0x78, 0x7C, 0xBD, 0x2B,
-                0x78 };
-        u8 PatchData[32] = { 0x4E, 0x80, 0x00, 0x20, 0x7C, 0x08, 0x02, 0xA6, 0x90, 0x01, 0x00, 0x34, 0x39, 0x61, 0x00,
-                0x30, 0x48, 0x12, 0xD7, 0x89, 0x7C, 0x7B, 0x1B, 0x78, 0x7C, 0x9C, 0x23, 0x78, 0x7C, 0xBD, 0x2B, 0x78 };
-        return PatchDOL(Address, Size, (const u8 *) &SearchPattern, sizeof(SearchPattern), (const u8 *) &PatchData,
-                sizeof(PatchData));
+        CodeList = malloc(3 * sizeof(WIP_Code));
+        if(!CodeList)
+            return false;
+
+        CodeList[0].offset = 0x001AB610;
+        CodeList[0].srcaddress = 0x9421FFD0;
+        CodeList[0].dstaddress = 0x4E800020;
+        CodeList[1].offset = 0x001CED53;
+        CodeList[1].srcaddress = 0xDA000000;
+        CodeList[1].dstaddress = 0x71000000;
+        CodeList[2].offset = 0x001CED6B;
+        CodeList[2].srcaddress = 0xDA000000;
+        CodeList[2].dstaddress = 0x71000000;
 
     }
-    else if (memcmp("SMN", (char *) 0x80000000, 3) == 0)
+    else if (memcmp("SMNP01", (char *) 0x80000000, 6) == 0)
     {
-        u8 SearchPattern[4] = { 0x7A, 0x6B, 0x6F, 0x6A };
-        u8 PatchData[32] = { 0x4E, 0x80, 0x00, 0x20, 0x7C, 0x08, 0x02, 0xA6, 0x90, 0x01, 0x00, 0x34, 0x39, 0x61, 0x00,
-                0x30, 0x48, 0x12, 0xD9, 0x39, 0x7C, 0x7B, 0x1B, 0x78, 0x7C, 0x9C, 0x23, 0x78, 0x7C, 0xBD, 0x2B, 0x78 };
-        return PatchDOL(Address, Size, (const u8 *) &SearchPattern, sizeof(SearchPattern), (const u8 *) &PatchData,
-                sizeof(PatchData));
+        CodeList = malloc(3 * sizeof(WIP_Code));
+        if(!CodeList)
+            return false;
+
+        CodeList[0].offset = 0x001AB750;
+        CodeList[0].srcaddress = 0x9421FFD0;
+        CodeList[0].dstaddress = 0x4E800020;
+        CodeList[1].offset = 0x001CEE90;
+        CodeList[1].srcaddress = 0x38A000DA;
+        CodeList[1].dstaddress = 0x38A00071;
+        CodeList[2].offset = 0x001CEEA8;
+        CodeList[2].srcaddress = 0x388000DA;
+        CodeList[2].dstaddress = 0x38800071;
     }
-    return false;
+    else if (memcmp("SMNJ01", (char *) 0x80000000, 6) == 0)
+    {
+        CodeList = malloc(3 * sizeof(WIP_Code));
+        if(!CodeList)
+            return false;
+
+        CodeList[0].offset = 0x001AB420;
+        CodeList[0].srcaddress = 0x9421FFD0;
+        CodeList[0].dstaddress = 0x4E800020;
+        CodeList[1].offset = 0x001CEB63;
+        CodeList[1].srcaddress = 0xDA000000;
+        CodeList[1].dstaddress = 0x71000000;
+        CodeList[2].offset = 0x001CEB7B;
+        CodeList[2].srcaddress = 0xDA000000;
+        CodeList[2].dstaddress = 0x71000000;
+    }
+
+    if (CodeList && set_wip_list(CodeList, 3) == false)
+    {
+        free(CodeList);
+        CodeList = NULL;
+        return false;
+    }
+
+
+    return CodeList != NULL;
 }
 
 bool PoPPatch()
 {
-    if (memcmp("SPX", (char *) 0x80000000, 3) == 0 || memcmp("RPW", (char *) 0x80000000, 3) == 0)
-    {
-        WIP_Code * CodeList = malloc(5 * sizeof(WIP_Code));
-        CodeList[0].offset = 0x007AAC6A;
-        CodeList[0].srcaddress = 0x7A6B6F6A;
-        CodeList[0].dstaddress = 0x6F6A7A6B;
-        CodeList[1].offset = 0x007AAC75;
-        CodeList[1].srcaddress = 0x7C7A6939;
-        CodeList[1].dstaddress = 0x69397C7A;
-        CodeList[2].offset = 0x007AAC82;
-        CodeList[2].srcaddress = 0x7376686B;
-        CodeList[2].dstaddress = 0x686B7376;
-        CodeList[3].offset = 0x007AAC92;
-        CodeList[3].srcaddress = 0x80717570;
-        CodeList[3].dstaddress = 0x75708071;
-        CodeList[4].offset = 0x007AAC9D;
-        CodeList[4].srcaddress = 0x82806F3F;
-        CodeList[4].dstaddress = 0x6F3F8280;
+    if (memcmp("SPX", (char *) 0x80000000, 3) != 0 && memcmp("RPW", (char *) 0x80000000, 3) != 0)
+        return false;
 
-        if (set_wip_list(CodeList, 5) == false)
-        {
-            free(CodeList);
-            CodeList = NULL;
-        }
+    WIP_Code * CodeList = malloc(5 * sizeof(WIP_Code));
+    CodeList[0].offset = 0x007AAC6A;
+    CodeList[0].srcaddress = 0x7A6B6F6A;
+    CodeList[0].dstaddress = 0x6F6A7A6B;
+    CodeList[1].offset = 0x007AAC75;
+    CodeList[1].srcaddress = 0x7C7A6939;
+    CodeList[1].dstaddress = 0x69397C7A;
+    CodeList[2].offset = 0x007AAC82;
+    CodeList[2].srcaddress = 0x7376686B;
+    CodeList[2].dstaddress = 0x686B7376;
+    CodeList[3].offset = 0x007AAC92;
+    CodeList[3].srcaddress = 0x80717570;
+    CodeList[3].dstaddress = 0x75708071;
+    CodeList[4].offset = 0x007AAC9D;
+    CodeList[4].srcaddress = 0x82806F3F;
+    CodeList[4].dstaddress = 0x6F3F8280;
+
+    if (set_wip_list(CodeList, 5) == false)
+    {
+        free(CodeList);
+        CodeList = NULL;
+        return false;
     }
-    return false;
+
+    return true;
 }
 
 /** Insert the individual gamepatches above with the patterns and patch data **/

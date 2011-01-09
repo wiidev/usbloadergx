@@ -54,6 +54,7 @@ static u32 BootPartition(char * dolpath, u8 videoselected, u8 languageChoice, u8
 
     /* If a wip file is loaded for this game this does nothing - Dimok */
     PoPPatch();
+    NSMBPatch();
 
     /* Setup low memory */
     __Disc_SetLowMem();
