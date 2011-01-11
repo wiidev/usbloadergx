@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-09 11:32+0100\n"
+"POT-Creation-Date: 2011-01-10 21:54+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: knife.hu kavid emul8ion\n"
 "Language-Team: kavid\n"
@@ -767,7 +767,7 @@ msgid "Load this DOL as alternate DOL?"
 msgstr "加载这个 DOL 作为 ALT DOL?"
 
 msgid "Loader Settings"
-msgstr ""
+msgstr "Loader设置"
 
 msgid "Loading default theme."
 msgstr "正在加载默认主题."
@@ -1133,10 +1133,10 @@ msgid "Special thanks to:"
 msgstr "特别感谢:"
 
 msgid "Split each 2GB"
-msgstr "每个2GB"
+msgstr "每个分割为2GB"
 
 msgid "Split each 4GB"
-msgstr "每个4GB"
+msgstr "每个分割为4GB"
 
 msgid "Standby"
 msgstr "待机"
@@ -1260,7 +1260,7 @@ msgid "Unlocked"
 msgstr "已解锁"
 
 msgid "Unsupported format, try to extract manually TempTheme.zip."
-msgstr ""
+msgstr "不支持的格式,请手动解压缩TempTheme.zip."
 
 msgid "Update"
 msgstr "升级"
@@ -1312,7 +1312,7 @@ msgid "Warning:"
 msgstr "警告:"
 
 msgid "What do you want to update?"
-msgstr "要升级什吗?"
+msgstr "要升级什么?"
 
 msgid "WiFi Features"
 msgstr "WiFi 功能"

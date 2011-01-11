@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-# italian.lang - v66 - r1035
+# italian.lang - v67 - r1039
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-01-09 11:32+0100\n"
-"PO-Revision-Date: 2011-01-09 02:30+0200\n"
+"PO-Revision-Date: 2011-01-09 22:30+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: Cambo\n"
 "MIME-Version: 1.0\n"
@@ -308,7 +308,7 @@ msgid "Customs/Original"
 msgstr "Modific./Origin."
 
 msgid "DOL Path"
-msgstr "Cart. File DOL"
+msgstr "Cart. ALT-DOL"
 
 msgid "Dec"
 msgstr "dicembre"
@@ -317,7 +317,7 @@ msgid "Default"
 msgstr "Predefinita"
 
 msgid "Default Gamesettings"
-msgstr "Impostaz. Predefinite Gioco"
+msgstr "Torna a Impost. Predefinite"
 
 msgid "Default Settings"
 msgstr "Impostazioni Predefinite"
@@ -572,7 +572,7 @@ msgid "French"
 msgstr "Francese"
 
 msgid "Full shutdown"
-msgstr "Spegni yutto"
+msgstr "Completo"
 
 msgid "GAMEID_Gamename"
 msgstr "IDGIOCO_Nomegioco"
@@ -596,7 +596,7 @@ msgid "Game Language"
 msgstr "Lingua Gioco"
 
 msgid "Game Load"
-msgstr "Caricamento Giochi"
+msgstr "Impostazioni Gioco"
 
 msgid "Game Lock"
 msgstr "Bloccaggio Gioco"
@@ -767,7 +767,7 @@ msgid "Load this DOL as alternate DOL?"
 msgstr "Vuoi caricare questo DOL come DOL alternativo?"
 
 msgid "Loader Settings"
-msgstr ""
+msgstr "Impostazioni Loader"
 
 msgid "Loading default theme."
 msgstr "Sto caricando il tema predefinito."

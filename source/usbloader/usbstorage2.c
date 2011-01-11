@@ -93,7 +93,7 @@ s32 USBStorage2_Init(void)
     if (ret < 0) goto err;
 
     /* Get device capacity */
-    if (USBStorage2_GetCapacity(&sector_size) == 0 || sector_size != 512)
+    if (USBStorage2_GetCapacity(&sector_size) == 0)
     {
         ret = IPC_ENOENT;
         goto err;

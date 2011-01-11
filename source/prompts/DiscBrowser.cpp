@@ -9,7 +9,7 @@
 #include "libwiigui/gui.h"
 #include "libwiigui/gui_customoptionbrowser.h"
 #include "prompts/PromptWindows.h"
-#include "menu.h"
+#include "menu/menus.h"
 #include "usbloader/disc.h"
 #include "usbloader/fstfile.h"
 #include "usbloader/wdvd.h"
@@ -23,15 +23,6 @@
 #include "themes/CTheme.h"
 #include "memory/memory.h"
 #include "gecko.h"
-
-/*** Extern functions ***/
-extern void ResumeGui();
-extern void HaltGui();
-
-/*** Extern variables ***/
-extern GuiWindow * mainWindow;
-extern u8 shutdown;
-extern u8 reset;
 
 /********************************************************************************
  *Disk Browser
@@ -284,26 +275,6 @@ int autoSelectDol(const char *id, bool force)
 int autoSelectDolMenu(const char *id, bool force)
 {
 
-    /*
-     char id4[10];
-     sprintf(id4,"%c%c%c%c",id[0],id[1],id[2],id[3]);
-
-     switch (CheckForSave(id4)) {
-     case 0:
-     WindowPrompt(tr("NO save"),0,tr("OK"));
-     break;
-     case 1:
-     WindowPrompt(tr("save"),0,tr("OK"));
-     break;
-     default:
-     char test[10];
-     sprintf(test,"%d",CheckForSave(id4));
-     WindowPrompt(test,0,tr("OK"));
-     break;
-     }
-     return -1;
-     */
-
     //Indiana Jones and the Staff of Kings (Fate of Atlantis)
     if (strcmp(id, "RJ8E64") == 0)
     {
@@ -367,13 +338,6 @@ int autoSelectDolMenu(const char *id, bool force)
     //Metroid Prime Trilogy
     if (strcmp(id, "R3ME01") == 0)
     {
-        //do not use any alt dol if there is no save game in the nand
-        /*
-         if (CheckForSave(id4)==0 && force) {
-         WindowPrompt(0,tr("You need to start this game one time to create a save file, then exit and start it again."),tr("OK"));
-         return -1;
-         }
-         */
         int choice = WindowPrompt(tr( "Select a DOL" ), 0, "Metroid Prime", "Metroid Prime 2", "Metroid Prime 3", tr( "Cancel" ));
         switch (choice)
         {
@@ -394,12 +358,6 @@ int autoSelectDolMenu(const char *id, bool force)
     }
     if (strcmp(id, "R3MP01") == 0)
     {
-        /*
-         if (CheckForSave(id4)==0 && force) {
-         WindowPrompt(0,tr("You need to start this game one time to create a save file, then exit and start it again."),tr("OK"));
-         return -1;
-         }
-         */
         int choice = WindowPrompt(tr( "Select a DOL" ), 0, "Metroid Prime", "Metroid Prime 2", "Metroid Prime 3", tr( "Cancel" ));
         switch (choice)
         {
@@ -481,7 +439,7 @@ u8 DiscMount(struct discHdr * header)
     int ret;
     HaltGui();
 
-    u8 *tmpBuff = (u8 *) malloc(0x60);
+    u8 tmpBuff[0x60];
     memcpy(tmpBuff, g_diskID, 0x60); // Make a backup of the first 96 bytes at 0x80000000
 
     Disc_SetUSB(NULL);
@@ -499,7 +457,6 @@ u8 DiscMount(struct discHdr * header)
 
     memcpy(header, g_diskID, 0x60);
     memcpy(g_diskID, tmpBuff, 0x60); // Put the backup back, or games won't load
-    free(tmpBuff);
 
     ResumeGui();
 

@@ -24,6 +24,92 @@ static void AbortCallback(void)
     AbortRequested = true;
 }
 
+static inline struct block DownloadImage(const char * url, const char * gameID)
+{
+    char CheckedRegion[10];
+    char downloadURL[512];
+    bool PAL = false;
+
+    //Creates URL depending from which Country the game is
+    switch (gameID[3])
+    {
+        case 'J':
+            sprintf(downloadURL, "%sJA/%s.png", url, gameID);
+            sprintf(CheckedRegion, "JA");
+            break;
+        case 'W':
+            sprintf(downloadURL, "%sZH/%s.png", url, gameID);
+            sprintf(CheckedRegion, "ZH");
+            break;
+        case 'K':
+            sprintf(downloadURL, "%sKO/%s.png", url, gameID);
+            sprintf(CheckedRegion, "KO");
+            break;
+        case 'P':
+        case 'D':
+        case 'F':
+        case 'I':
+        case 'S':
+        case 'H':
+        case 'U':
+        case 'X':
+        case 'Y':
+        case 'Z':
+            sprintf(downloadURL, "%s%s/%s.png", url, Settings.db_language, gameID);
+            sprintf(CheckedRegion, "%s", Settings.db_language);
+            PAL = true;
+            break;
+        case 'E':
+            sprintf(downloadURL, "%sUS/%s.png", url, gameID);
+            sprintf(CheckedRegion, "US");
+            break;
+        default:
+            strcpy(downloadURL, "");
+            strcpy(CheckedRegion, "");
+            break;
+    }
+
+    struct block file = downloadfile(downloadURL);
+    if(VALID_IMAGE(file))
+        return file;
+
+    free(file.data);
+    file.data = NULL;
+
+    if(PAL && strcmp(CheckedRegion, "EN") != 0)
+    {
+        snprintf(downloadURL, sizeof(downloadURL), "%sEN/%s.png", url, gameID);
+        file = downloadfile(downloadURL);
+        if(VALID_IMAGE(file))
+            return file;
+    }
+    else if(strcmp(CheckedRegion, "") == 0)
+    {
+        const char * lang = Settings.db_language;
+
+        if(strcmp(lang, "EN") == 0 && CONF_GetRegion() == CONF_REGION_US)
+            lang = "US";
+
+        snprintf(downloadURL, sizeof(downloadURL), "%s%s/%s.png", url, lang, gameID);
+        file = downloadfile(downloadURL);
+        if(VALID_IMAGE(file))
+            return file;
+
+        free(file.data);
+
+        snprintf(downloadURL, sizeof(downloadURL), "%sOTHER/%s.png", url, gameID);
+        file = downloadfile(downloadURL);
+        if(VALID_IMAGE(file))
+            return file;
+    }
+
+    free(file.data);
+
+    memset(&file, 0, sizeof(struct block));
+
+    return file;
+}
+
 static int CoverDownloadWithProgress(const char * url, const char * progressTitle, const char * writepath, std::vector<std::string> & MissingFilesList)
 {
     if(!url || !writepath)
@@ -35,7 +121,6 @@ static int CoverDownloadWithProgress(const char * url, const char * progressTitl
         return -1;
     }
 
-    char downloadURL[512];
     char progressMsg[255];
     int FilesSkipped = MissingFilesList.size();
     ProgressSetAbortCallback(AbortCallback);
@@ -52,50 +137,9 @@ static int CoverDownloadWithProgress(const char * url, const char * progressTitl
         if(MissingFilesList[i].size() < 4)
             continue;
 
-        //Creates URL depending from which Country the game is
-        switch (MissingFilesList[i][3])
-        {
-            case 'J':
-                sprintf(downloadURL, "%sJA/%s.png", url, MissingFilesList[i].c_str());
-                break;
-            case 'W':
-                sprintf(downloadURL, "%sZH/%s.png", url, MissingFilesList[i].c_str());
-                break;
-            case 'K':
-                sprintf(downloadURL, "%sKO/%s.png", url, MissingFilesList[i].c_str());
-                break;
-            case 'P':
-            case 'D':
-            case 'F':
-            case 'I':
-            case 'S':
-            case 'H':
-            case 'U':
-            case 'X':
-            case 'Y':
-            case 'Z':
-                sprintf(downloadURL, "%s%s/%s.png", url, Settings.db_language, MissingFilesList[i].c_str());
-                break;
-            case 'E':
-                sprintf(downloadURL, "%sUS/%s.png", url, MissingFilesList[i].c_str());
-                break;
-        }
-
-        struct block file = downloadfile(downloadURL);
-        if(!VALID_IMAGE(file))
-        {
-            if(file.data)
-                free(file.data);
-
-            snprintf(downloadURL, sizeof(downloadURL), "%sEN/%s.png", url, MissingFilesList[i].c_str());
-            file = downloadfile(downloadURL);
-            if(!VALID_IMAGE(file))
-            {
-                if(file.data)
-                    free(file.data);
-                continue;
-            }
-        }
+        struct block file = DownloadImage(url, MissingFilesList[i].c_str());
+        if(!file.data)
+            continue;
 
         char imgPath[200];
         snprintf(imgPath, sizeof(imgPath), "%s/%s.png", writepath, MissingFilesList[i].c_str());

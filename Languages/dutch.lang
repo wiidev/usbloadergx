@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-# dutch.lang - r929
+# dutch.lang - r1039
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-09 11:32+0100\n"
-"PO-Revision-Date: 2010-04-12 07:37+0100\n"
+"POT-Creation-Date: 2010-04-11 06:03+0200\n"
+"PO-Revision-Date: 2011-01-11 07:37+0100\n"
 "Last-Translator: glowy\n"
 "Language-Team: tj_cool, glowy\n"
 "MIME-Version: 1.0\n"
@@ -29,13 +29,13 @@ msgid "0 (Everyone)"
 msgstr "0 (Iedereen 3+)"
 
 msgid "0 (Locked and Unlocked Games)"
-msgstr ""
+msgstr "0 (Vergrendelde en Ontgrendelde spellen)"
 
 msgid "1 (Child 7+)"
 msgstr "1 (Kinderen 7+)"
 
 msgid "1 (Unlocked Games Only)"
-msgstr ""
+msgstr "1 (Alleen ontgrendelde spellen"
 
 msgid "1 hour"
 msgstr "1 uur"
@@ -125,10 +125,10 @@ msgid "AUTO"
 msgstr ""
 
 msgid "All Partitions"
-msgstr ""
+msgstr "Alle partities"
 
 msgid "All images downloaded successfully."
-msgstr ""
+msgstr "Alle plaatje succesvol gedownload."
 
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "Alle functies van USB Loader GX zijn vrijgegeven."
@@ -146,10 +146,10 @@ msgid "Apr"
 msgstr ""
 
 msgid "Are you sure you want to lock USB Loader GX?"
-msgstr ""
+msgstr "Weet je zeker dat je USB Loader GX wilt vergrendelen"
 
 msgid "Are you sure you want to reset?"
-msgstr ""
+msgstr "Wet je zeker dat je wilt resetten?"
 
 msgid "Are you sure?"
 msgstr "Zeker weten?"
@@ -201,7 +201,7 @@ msgstr "Kan map niet aanmaken"
 
 #, c-format
 msgid "Can't create path: %s"
-msgstr ""
+msgstr "Kan pad niet maken: %s"
 
 msgid "Can't delete:"
 msgstr "Kan niet verwijderen:"
@@ -210,7 +210,7 @@ msgid "Cancel"
 msgstr "Annuleren"
 
 msgid "Cannot write to destination."
-msgstr ""
+msgstr "Kan niet naar bestemming schrijven."
 
 msgid "Change Play Path"
 msgstr "Verander afspeel locatie"
@@ -219,7 +219,7 @@ msgid "Cheatfile is blank"
 msgstr "Cheatbestand is leeg"
 
 msgid "Clear"
-msgstr ""
+msgstr "Wissen"
 
 msgid "Click to Download Covers"
 msgstr "Klik om hoesjes te downloaden"
@@ -265,17 +265,17 @@ msgid "Correct Password"
 msgstr "Juiste Wachtwoord"
 
 msgid "Could not connect to the server."
-msgstr ""
+msgstr "Kan geen verbinding met de server maken."
 
 msgid "Could not create GCT file"
 msgstr "Kan GCT bestand niet aanmaken"
 
 #, c-format
 msgid "Could not create path: %s"
-msgstr ""
+msgstr "Kan pad niet maken: %s"
 
 msgid "Could not find info for this game in the wiitdb.xml."
-msgstr ""
+msgstr "Kan geen info over dit spel vinden in de wiitdb.xml"
 
 msgid "Could not initialize DIP module!"
 msgstr "Kan DIP module niet initialiseren!"
@@ -287,7 +287,7 @@ msgid "Could not open Disc"
 msgstr "Kan disk niet openen"
 
 msgid "Could not open wiitdb.xml."
-msgstr ""
+msgstr "Kan wiitdb.xml niet openen."
 
 msgid "Could not save."
 msgstr "Kan niet opslaan."
@@ -377,7 +377,7 @@ msgid "Display as a list"
 msgstr "Lijstweergave"
 
 msgid "Display favorites only"
-msgstr ""
+msgstr "Alleen favorieten weergeven"
 
 msgid "Do you really want to delete:"
 msgstr "Wil je echt verwijderen:"
@@ -395,10 +395,10 @@ msgid "Do you want to format:"
 msgstr "Wil je formatteren:"
 
 msgid "Do you want to load the default theme?"
-msgstr ""
+msgstr "Wil je het standaard thema laden?"
 
 msgid "Do you want to load this theme?"
-msgstr ""
+msgstr "Wil je dit thema laden?"
 
 msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "Wil je de alt DOL gebruiken waarvan is bevestigd dat deze werkt?"
@@ -425,25 +425,25 @@ msgid "Download finished"
 msgstr "Download voltooid"
 
 msgid "Downloading covers"
-msgstr ""
+msgstr "Covers downloaden"
 
 msgid "Downloading custom Discarts"
-msgstr ""
+msgstr "Aangepaste disc afbeeldingen downloaden"
 
 msgid "Downloading file"
 msgstr "Bestand downloaden"
 
 msgid "Downloading file..."
-msgstr ""
+msgstr "Bestand downloaden..."
 
 msgid "Downloading image:"
 msgstr "Afbeelding downloaden:"
 
 msgid "Downloading original Discarts"
-msgstr ""
+msgstr "Originele disc afbeeldingen downloaden"
 
 msgid "Downloading pagelist:"
-msgstr ""
+msgstr "Paginalijst downloaden:"
 
 msgid "Dutch"
 msgstr "Nederlands"
@@ -458,7 +458,7 @@ msgid "ERROR: Can't set up theme."
 msgstr "FOUT: Kan thema niet instellen"
 
 msgid "Enabling this option on a FAT partition might slow the startup of the loader."
-msgstr ""
+msgstr "Het aanzetten van deze functie op een FAT partitie kan het opstarten van de lader vertragen."
 
 msgid "English"
 msgstr "Engels"
@@ -474,32 +474,32 @@ msgstr "Herstel fout 002"
 
 #, c-format
 msgid "Error creating path: %s"
-msgstr ""
+msgstr "Kan pad niet maken: %s"
 
 msgid "Error opening downloaded file"
-msgstr ""
+msgstr "Fout bij het openen van gedownload bestand"
 
 msgid "Error reading Disc"
 msgstr "Fout bij lezen disk"
 
 #, c-format
 msgid "Error when downloading file: %i"
-msgstr ""
+msgstr "Fout bij het downloaden van bestand: %i"
 
 msgid "Error while downloding file"
-msgstr ""
+msgstr "Fout tijdens bestand downloaden"
 
 msgid "Error while opening the zip."
-msgstr ""
+msgstr "Fout bij het openen van de zip."
 
 msgid "Error while transfering data."
 msgstr "Fout bij overplaatsen van data."
 
 msgid "Error while updating USB Loader GX."
-msgstr ""
+msgstr "Fout bij het updaten van USB Loader GX"
 
 msgid "Error writing the data."
-msgstr ""
+msgstr "Fout bij het schrijven van de data."
 
 msgid "Error..."
 msgstr "Fout..."
@@ -508,10 +508,10 @@ msgid "Error:"
 msgstr "Fout:"
 
 msgid "Exit"
-msgstr ""
+msgstr "Stoppen"
 
 msgid "Exit to where?"
-msgstr ""
+msgstr "Stoppen naar?"
 
 msgid "Extracting files..."
 msgstr "Bestanden uitpakken..."
@@ -526,7 +526,7 @@ msgid "Failed to open partition"
 msgstr "Partitie openen mislukt"
 
 msgid "Failed updating"
-msgstr ""
+msgstr "Updaten mislukt"
 
 msgid "Feb"
 msgstr ""
@@ -536,28 +536,28 @@ msgstr "Bestand niet gevonden."
 
 #, c-format
 msgid "Filesize is %i Byte."
-msgstr ""
+msgstr "Bestandsgrootte is %i Byte."
 
 msgid "Filesize is 0 Byte."
-msgstr ""
+msgstr "Bestandsgrootte is 0 Byte."
 
 msgid "Finishing installation... Ok!"
 msgstr "Installatie afronden... Ok!"
 
 msgid "Flat Covers"
-msgstr ""
+msgstr "Platte hoesjes"
 
 msgid "Flip-X"
 msgstr "X omwisselen"
 
 msgid "Force NTSC"
-msgstr ""
+msgstr "Forceer NTSC"
 
 msgid "Force PAL50"
-msgstr ""
+msgstr "Forceer PAL50"
 
 msgid "Force PAL60"
-msgstr ""
+msgstr "Forceer PAL60"
 
 msgid "Format"
 msgstr "Formatteer"
@@ -572,7 +572,7 @@ msgid "French"
 msgstr "Frans"
 
 msgid "Full shutdown"
-msgstr ""
+msgstr "Volledig uitzetten"
 
 msgid "GAMEID_Gamename"
 msgstr "SPELID_Spelnaam"
@@ -590,7 +590,7 @@ msgid "Game ID"
 msgstr "Spel ID"
 
 msgid "Game IOS"
-msgstr ""
+msgstr "Spel IOS"
 
 msgid "Game Language"
 msgstr "Spel taal"
@@ -599,7 +599,7 @@ msgid "Game Load"
 msgstr "Spel opties"
 
 msgid "Game Lock"
-msgstr ""
+msgstr "Spel vergrendelen"
 
 msgid "Game Region"
 msgstr "Spel Regio"
@@ -614,7 +614,7 @@ msgid "Game Sound Volume"
 msgstr "Spel geluid volume"
 
 msgid "Game Split Size"
-msgstr ""
+msgstr "Spel splits grootte"
 
 msgid "Game is already installed:"
 msgstr "Spel is al geïnstalleerd:"
@@ -635,7 +635,7 @@ msgid "German"
 msgstr "Duits"
 
 msgid "Global Settings"
-msgstr ""
+msgstr "Globale instellingen"
 
 msgid "HOME Menu"
 msgstr ""
@@ -685,7 +685,7 @@ msgid "Install a game"
 msgstr "Spel installeren"
 
 msgid "Install directories"
-msgstr ""
+msgstr "Installeer mappen"
 
 msgid "Install partitions"
 msgstr "Installatie partitie"
@@ -742,7 +742,7 @@ msgid "Language change:"
 msgstr "Taal wijzigen:"
 
 msgid "Languagefiles Path"
-msgstr ""
+msgstr "Taalbestanden pad"
 
 msgid "Languagepath changed."
 msgstr "Locatie taal gewijzigd."
@@ -767,10 +767,10 @@ msgid "Load this DOL as alternate DOL?"
 msgstr "Deze DOL als alt DOL gebruiken?"
 
 msgid "Loader Settings"
-msgstr ""
+msgstr "Loader Instellingen"
 
 msgid "Loading default theme."
-msgstr ""
+msgstr "Standaard thema laden."
 
 msgid "Loading standard language."
 msgstr "Standaardtaal laden."
@@ -782,7 +782,7 @@ msgid "Lock Console"
 msgstr "Console vergrendelen"
 
 msgid "Lock USB Loader GX"
-msgstr ""
+msgstr "Vergrendel USB Loader GX"
 
 msgid "Locked"
 msgstr "Vergrendeld"
@@ -797,7 +797,7 @@ msgid "Loop Sound"
 msgstr "Geluid herhalen"
 
 msgid "Main tester:"
-msgstr ""
+msgstr "Hoofd tester:"
 
 msgid "Mar"
 msgstr "Mrt"
@@ -827,7 +827,7 @@ msgid "Neither"
 msgstr "Geen"
 
 msgid "Network is not initiated."
-msgstr ""
+msgstr "Netwerk is niet gestart."
 
 msgid "New Disc Detected"
 msgstr "Nieuwe disk gevonden"
@@ -845,13 +845,13 @@ msgid "No DOL file found on disc."
 msgstr "Geen DOL bestand gevonden op disk."
 
 msgid "No Splitting"
-msgstr ""
+msgstr "Niet splitsen"
 
 msgid "No URL or Path specified."
-msgstr ""
+msgstr "Geen URL of pad gespecificeerd."
 
 msgid "No WBFS or FAT/NTFS/EXT partition found"
-msgstr ""
+msgstr "Geen WBFS of FAT/NTFS/EXT partitie gevonden"
 
 msgid "No cheats were selected"
 msgstr "Geen cheats geselecteerd"
@@ -860,7 +860,7 @@ msgid "No data could be read."
 msgstr "Data kon niet gelezen worden."
 
 msgid "No favorites selected."
-msgstr ""
+msgstr "Geen favorieten geselecteerd."
 
 msgid "No file missing!"
 msgstr "Geen missende bestanden!"
@@ -884,13 +884,13 @@ msgid "Not a Wii Disc"
 msgstr "Geen Wii disk"
 
 msgid "Not a valid URL"
-msgstr ""
+msgstr "Geen geldige URL"
 
 msgid "Not a valid URL path"
-msgstr ""
+msgstr "Geen geldig URL pad"
 
 msgid "Not a valid domain"
-msgstr ""
+msgstr "Geen geldig domein"
 
 msgid "Not enough free memory."
 msgstr "Niet genoeg vrije ruimte."
@@ -899,10 +899,10 @@ msgid "Not enough free space!"
 msgstr "Niet genoeg vrije ruimte!"
 
 msgid "Not enough memory."
-msgstr ""
+msgstr "Onvoldoende geheugen."
 
 msgid "Not required"
-msgstr ""
+msgstr "Niet nodig"
 
 msgid "Not supported format!"
 msgstr "Formaat niet ondersteund!"
@@ -935,7 +935,7 @@ msgid "Only Customs"
 msgstr "Enkel aangepast"
 
 msgid "Only Game Partition"
-msgstr ""
+msgstr "Alleen Spel Partitie"
 
 msgid "Only Original"
 msgstr "Enkel origineel"
@@ -965,7 +965,7 @@ msgid "Patch Country Strings"
 msgstr "Regio's herstellen"
 
 msgid "Path Changed"
-msgstr ""
+msgstr "Pad gewijzigd"
 
 msgid "Pick from a list"
 msgstr "Kiezen van lijst"
@@ -1013,7 +1013,7 @@ msgid "Receiving file from:"
 msgstr "Bestand ontvangen van:"
 
 msgid "Region Patch"
-msgstr ""
+msgstr "Regio Patch"
 
 msgid "Released"
 msgstr "Uitgegeven"
@@ -1034,7 +1034,7 @@ msgid "Reset Playcounter"
 msgstr "Speeltellers resetten"
 
 msgid "Reset to default BGM?"
-msgstr ""
+msgstr "Reset naar standaard achtergrond muziek?"
 
 msgid "Restarting..."
 msgstr "Herstarten..."
@@ -1043,7 +1043,7 @@ msgid "Return"
 msgstr "Terug"
 
 msgid "Return To"
-msgstr ""
+msgstr "Terug naar"
 
 msgid "Return to Wii Menu"
 msgstr "Terug naar Wii menu"
@@ -1064,7 +1064,7 @@ msgid "Save"
 msgstr "Opslaan"
 
 msgid "Save Failed. No device inserted?"
-msgstr ""
+msgstr "Opslaan Mislukt. Geen media aanwezig?"
 
 msgid "Save Game List to"
 msgstr "Spellenlijst opslaan in"
@@ -1079,13 +1079,13 @@ msgid "Select"
 msgstr "Selecteer"
 
 msgid "Select DOL Offset"
-msgstr ""
+msgstr "Selecteer DOL Offset"
 
 msgid "Select a DOL"
-msgstr "Kies een DOL"
+msgstr "Selecteer een DOL"
 
 msgid "Select a DOL from Game"
-msgstr ""
+msgstr "Selecteer een DOL van Spel"
 
 msgid "Sept"
 msgstr "Sep"
@@ -1097,13 +1097,13 @@ msgid "Settings"
 msgstr "Instellingen"
 
 msgid "Show Free Space"
-msgstr ""
+msgstr "Vrije ruimte weergeven"
 
 msgid "Shutdown System"
 msgstr "Systeem uitzetten"
 
 msgid "Shutdown Wii"
-msgstr ""
+msgstr "Wii uitzetten"
 
 msgid "Sort alphabetically"
 msgstr "Alfabetisch sorteren"
@@ -1118,7 +1118,7 @@ msgid "Sound"
 msgstr "Geluid"
 
 msgid "Sound Settings"
-msgstr ""
+msgstr "Geluids Instellingen"
 
 msgid "Sound+BGM"
 msgstr "Geluid+Achtergrondmuziek"
@@ -1133,10 +1133,10 @@ msgid "Special thanks to:"
 msgstr "Speciale dank aan:"
 
 msgid "Split each 2GB"
-msgstr ""
+msgstr "Splits iedere 2GB"
 
 msgid "Split each 4GB"
-msgstr ""
+msgstr "Splits iedere 4GB"
 
 msgid "Standby"
 msgstr ""
@@ -1175,17 +1175,17 @@ msgid "TXT Cheatcodes Path"
 msgstr "Locatie TXT cheats"
 
 msgid "The .them file was not found in the zip."
-msgstr ""
+msgstr "Het .them bestand is niet gevonden in het zip bestand."
 
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "De opgegeven map bestaat niet. Wil je deze aanmaken?"
 
 msgid "The wad file was installed"
-msgstr ""
+msgstr "Het wad bestand is geïnstalleerd."
 
 #, c-format
 msgid "The wad installation failed with error %i"
-msgstr ""
+msgstr "De wad installatie is mislukt met fout %i"
 
 msgid "Theme Downloader"
 msgstr "Thema downloader"
@@ -1197,16 +1197,16 @@ msgid "Theme Title:"
 msgstr "Thema Titel:"
 
 msgid "Theme path is changed."
-msgstr ""
+msgstr "Thema pad is gewijzigd."
 
 msgid "Themes by www.spiffy360.com"
-msgstr ""
+msgstr "Thema's door www.spiffy360.com"
 
 msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
-msgstr ""
+msgstr "Deze IOS is de BootMii IOS. Als je zeker weet dat dit niet BootMii is en daar iets anders hebt geïnstalleerd kun je deze waarschuwing negeren."
 
 msgid "This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."
-msgstr ""
+msgstr "Deze IOS is niet gevonden in de titel lijst. Als je zeker weet dat deze geïnstalleerd is kun je deze waarschuwing negeren."
 
 msgid "Time left:"
 msgstr "Tijd over:"
@@ -1221,13 +1221,13 @@ msgid "Tooltips"
 msgstr "Knopinfo"
 
 msgid "Transfer failed"
-msgstr ""
+msgstr "Overdracht mislukt."
 
 msgid "Trying custom Discarts"
-msgstr ""
+msgstr "Aangepaste disc afbeeldingen proberen"
 
 msgid "Trying original Discarts"
-msgstr ""
+msgstr "Origninele disc afbeeldingen proberen"
 
 msgid "USB Device not found"
 msgstr "USB Apparaat niet gevonden"
@@ -1248,10 +1248,10 @@ msgid "Uninstalling wad"
 msgstr "Wad verwijderen"
 
 msgid "Unknown"
-msgstr ""
+msgstr "Onbekend"
 
 msgid "Unlock USB Loader GX"
-msgstr ""
+msgstr "Ontgrendel USB Loader GX"
 
 msgid "Unlock console to use this option."
 msgstr "Console moet worden vrijgegeven."
@@ -1260,7 +1260,7 @@ msgid "Unlocked"
 msgstr "Vrijgegeven"
 
 msgid "Unsupported format, try to extract manually TempTheme.zip."
-msgstr ""
+msgstr "Niet ondersteund formaat, probeer TempTheme.zip handmatig uit te pakken."
 
 msgid "Update"
 msgstr "Updaten"
@@ -1284,7 +1284,7 @@ msgid "Update failed"
 msgstr "Update mislukt"
 
 msgid "Update successfull"
-msgstr ""
+msgstr "Succesvol"
 
 msgid "Updating Language Files:"
 msgstr "Taalbestanden updaten:"
@@ -1309,7 +1309,7 @@ msgid "Waiting..."
 msgstr "Wachten..."
 
 msgid "Warning:"
-msgstr ""
+msgstr "Waarschuwing:"
 
 msgid "What do you want to update?"
 msgstr "Wat wil je updaten?"
@@ -1345,13 +1345,13 @@ msgid "Yes"
 msgstr "Ja"
 
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
-msgstr ""
+msgstr "Je probeert een FAT32/NTFS/EXT partitie te selecteren met cIOS 249 Rev < 18. Dit word niet ondersteund. Verder gaan is op eigen risico."
 
 msgid "You need to select or format a partition"
 msgstr "Je moet een partitie selecteren of formatteren"
 
 msgid "and translators for language files updates"
-msgstr ""
+msgstr "en vertalers voor taalbestand updates"
 
 msgid "available"
 msgstr "beschikbaar"

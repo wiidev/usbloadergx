@@ -981,7 +981,6 @@ bool save_gamelist(int txt) // save gamelist
     f = fopen(tmp, "w");
     if (!f)
     {
-        sleep(1);
         mainWindow->SetState(STATE_DEFAULT);
         return false;
     }
@@ -1024,7 +1023,6 @@ bool save_gamelist(int txt) // save gamelist
     }
     else
     {
-
         fprintf(f, "\"ID\",\"Size(GB)\",\"Name\"\n");
 
         for (i = 0; i < gameList.size(); i++)

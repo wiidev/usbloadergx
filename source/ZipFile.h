@@ -33,7 +33,7 @@
 typedef struct
 {
         u64 offset; // ZipFile offset
-        u64 length; // uncompressed file length in 64 bytes for sizes higher than 4GB
+        u64 length; // uncompressed file length in 64 bits for sizes higher than 4GB
         bool isdir; // 0 - file, 1 - directory
         char filename[256]; // full filename
 } FileStructure;
