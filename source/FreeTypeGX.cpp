@@ -67,7 +67,7 @@ FreeTypeGX::FreeTypeGX(const uint8_t* fontBuffer, FT_Long bufferSize)
     FT_New_Memory_Face(ftLibrary, (FT_Byte *) fontBuffer, bufferSize, 0, &ftFace);
 
     setVertexFormat(GX_VTXFMT1);
-    ftKerningEnabled = FT_HAS_KERNING( ftFace );
+    ftKerningEnabled = false;
 }
 
 /**
@@ -329,6 +329,7 @@ int16_t FreeTypeGX::getStyleOffsetHeight(int16_t format, uint16_t pixelSize)
  * @param textStyle Flags which specify any styling which should be applied to the rendered string.
  * @return The number of characters printed.
  */
+
 uint16_t FreeTypeGX::drawText(int16_t x, int16_t y, int16_t z, const wchar_t *text, int16_t pixelSize, GXColor color,
         uint16_t textStyle, uint16_t textWidth, uint16_t widthLimit)
 {

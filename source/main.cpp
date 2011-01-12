@@ -39,22 +39,6 @@ extern "C"
 
 static int QuickGameBoot(const char * gameID)
 {
-    //if a ID was passed via args copy it and try to boot it after the partition is mounted
-    //its not really a headless mode.  more like hairless.
-    if (IosLoader::LoadAppCios() < 0)
-    {
-        printf("\n\tWARNING!\n");
-        printf("\tUSB Loader GX needs unstubbed cIOS 222 v4+ or 249 v9+\n\n");
-
-        printf("\tWe cannot determine the versions on your system,\n\tsince you have no patched ios 36 or 236 installed.\n");
-        printf("\tTherefor, if loading of USB Loader GX fails, you\n\tprobably have installed the 4.2 update,\n");
-        printf("\tand you should go figure out how to get some cios action going on\n\tin your Wii.\n");
-
-        printf("\tERROR: No cIOS could be loaded. Exiting....\n");
-        sleep(10);
-        Sys_BackToLoader();
-    }
-
     DeviceHandler::Instance()->MountAll();
     Settings.Load();
 
@@ -64,10 +48,14 @@ static int QuickGameBoot(const char * gameID)
 
 int main(int argc, char *argv[])
 {
+    if(IOS_GetVersion() != 58)
+        IOS_ReloadIOS(58);
+
     MEM2_init(48);
     __exception_setreload(20);
     InitVideo();
     InitGecko();
+    USBGeckoOutput();
     NandTitles.Get();
     setlocale(LC_ALL, "en.UTF-8");
 

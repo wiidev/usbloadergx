@@ -91,15 +91,16 @@ bool StartUpProcess::USBSpinUp()
 {
     bool started = false;
     int retries = 400;
+    const DISC_INTERFACE * handle = DeviceHandler::GetUSBInterface();
     // wait 10 sec for the USB to spin up...stupid slow ass HDD
     do
     {
-        started = (__io_usbstorage2.startup() && __io_usbstorage2.isInserted());
+        started = (handle->startup() && handle->isInserted());
         usleep(50000);
 
         if(retries < 400 && retries % 20 == 0)
         {
-            messageTxt->SetTextf("Waiting for slow HDD: %i sec left\n", retries/20);
+            messageTxt->SetTextf("Waiting for HDD: %i sec left\n", retries/20);
             Draw();
         }
     }
@@ -117,23 +118,6 @@ bool StartUpProcess::Run()
 
 bool StartUpProcess::Execute()
 {
-    //! Now we startup the GUI so no need for console prints. Output only to gecko.
-    USBGeckoOutput();
-
-    // Let's try loading some cIOS
-    if (IosLoader::LoadAppCios() < 0)
-    {
-        titleTxt->SetText("WARNING!");
-        messageTxt->SetMaxWidth(400, WRAP);
-        messageTxt->SetText("USB Loader GX needs unstubbed cIOS 222 v4+ or 249 v9+. \
-                             We cannot determine the versions on your system, since you have no patched ios 36 or 236 installed. \
-                             Therefor, if loading of USB Loader GX fails, you probably have installed the 4.2 update, \
-                             and you should go figure out how to get some cios action going on\n\tin your Wii. \
-                             ERROR: No cIOS could be loaded. Exiting....");
-        sleep(10);
-        Sys_BackToLoader();
-    }
-
     SetTextf("Initialize sd card\n");
     DeviceHandler::Instance()->MountSD();
 
@@ -147,21 +131,21 @@ bool StartUpProcess::Execute()
     gprintf("\tLoading game settings...%s\n", GameSettings.Load(Settings.ConfigPath) ? "done" : "failed");
     gprintf("\tLoading game statistics...%s\n", GameStatistics.Load(Settings.ConfigPath) ? "done" : "failed");
 
-    if(Settings.cios != IOS_GetVersion())
+    if(!Settings.UseIOS58 && Settings.cios != IOS_GetVersion())
     {
         SetTextf("Loading cIOS %i\n", Settings.cios);
 
-        DeviceHandler::Instance()->UnMountAll();
+        DeviceHandler::DestroyInstance();
 
         // Loading now the cios setup in the settings
         IosLoader::LoadAppCios();
 
         SetTextf("Loaded cIOS %i R%i\n", IOS_GetVersion(), IOS_GetRevision());
 
-        DeviceHandler::Instance()->MountAll();
+        DeviceHandler::Instance()->MountSD();
+        USBSpinUp();
+        DeviceHandler::Instance()->MountAllUSB(false);
     }
-    else
-        SetTextf("Loaded cIOS %i R%i\n", IOS_GetVersion(), IOS_GetRevision());
 
     gprintf("\tLoading font...%s\n", Theme::LoadFont(Settings.theme_path) ? "done" : "failed (using default)");
     gprintf("\tLoading theme...%s\n", Theme::Load(Settings.theme) ? "done" : "failed (using default)");

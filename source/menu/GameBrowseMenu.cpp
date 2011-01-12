@@ -793,7 +793,12 @@ int GameBrowseMenu::MainLoop()
         bgMusic->Pause();
         Settings.Save();
         DeviceHandler::Instance()->MountSD();
-        Settings.Load();
+        gprintf("\tLoading config...%s\n", Settings.Load() ? "done" : "failed");
+        gprintf("\tLoading language...%s\n", Settings.LoadLanguage(Settings.language_path, CONSOLE_DEFAULT) ? "done" : "failed");
+        gprintf("\tLoading game settings...%s\n", GameSettings.Load(Settings.ConfigPath) ? "done" : "failed");
+        gprintf("\tLoading game statistics...%s\n", GameStatistics.Load(Settings.ConfigPath) ? "done" : "failed");
+        gprintf("\tLoading font...%s\n", Theme::LoadFont(Settings.theme_path) ? "done" : "failed (using default)");
+        gprintf("\tLoading theme...%s\n", Theme::Load(Settings.theme) ? "done" : "failed (using default)");
         bgMusic->Resume();
         wString oldFilter(gameList.GetCurrentFilter());
         gameList.FilterList(oldFilter.c_str());

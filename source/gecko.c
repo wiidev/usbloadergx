@@ -20,9 +20,7 @@ void gprintf(const char *format, ...)
 	va_start(va, format);
 	if((vasprintf(&tmp, format, va) >= 0) && tmp)
 	{
-        u32 level = IRQ_Disable();
         usb_sendbuffer(1, tmp, strlen(tmp));
-        IRQ_Restore(level);
 	}
 	va_end(va);
 
@@ -36,11 +34,11 @@ bool InitGecko()
     if (geckoattached)
     {
         usb_flush(EXI_CHANNEL_1);
-        CON_EnableGecko(1, false);
         geckoinit = true;
         return true;
     }
-    else return false;
+
+    return false;
 }
 
 char ascii(char s)
@@ -79,12 +77,7 @@ void hexdump(void *d, int len)
 static ssize_t __out_write(struct _reent *r, int fd, const char *ptr, size_t len)
 {
     if(geckoinit && ptr)
-	{
-	    u32 level;
-        level = IRQ_Disable();
         usb_sendbuffer(1, ptr, len);
-        IRQ_Restore(level);
-	}
 
 	return len;
 }

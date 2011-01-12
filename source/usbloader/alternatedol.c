@@ -253,7 +253,7 @@ u32 Load_Dol_from_disc(u32 doloffset, u8 videoSelected, u8 languageChoice, u8 pa
         {
             ret = WDVD_Read(offset, len, (doloffset << 2) + pos);
 
-	    gamepatches(offset, len, videoSelected, languageChoice, patchcountrystring, vipatch, cheat, returnTo, fix002);
+            gamepatches(offset, len, videoSelected, languageChoice, patchcountrystring, vipatch, cheat, returnTo, fix002);
 
             Remove_001_Protection(offset, len);
 

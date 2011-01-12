@@ -13,6 +13,7 @@
 u32 sector_size = 512;
 rw_sector_callback_t readCallback = NULL;
 rw_sector_callback_t writeCallback = NULL;
+const DISC_INTERFACE * currentHandle = NULL;
 
 void SetSectorSize(u32 size)
 {
@@ -82,8 +83,8 @@ s32 __ReadUSB(void *fp, u32 lba, u32 count, void *iobuf)
         if (sectors > MAX_NB_SECTORS) sectors = MAX_NB_SECTORS;
 
         /* USB read */
-        ret = USBStorage2_ReadSectors(lba + cnt, sectors, ptr);
-        if (ret < 0) return ret;
+        ret = currentHandle->readSectors(lba + cnt, sectors, ptr);
+        if (!ret) return -1;
 
         /* Increment counter */
         cnt += sectors;
@@ -107,8 +108,8 @@ s32 __WriteUSB(void *fp, u32 lba, u32 count, void *iobuf)
         if (sectors > MAX_NB_SECTORS) sectors = MAX_NB_SECTORS;
 
         /* USB write */
-        ret = USBStorage2_WriteSectors(lba + cnt, sectors, ptr);
-        if (ret < 0) return ret;
+        ret = currentHandle->writeSectors(lba + cnt, sectors, ptr);
+        if (!ret) return -1;
 
         /* Increment counter */
         cnt += sectors;

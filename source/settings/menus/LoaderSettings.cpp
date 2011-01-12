@@ -111,6 +111,7 @@ LoaderSettings::LoaderSettings()
     Options->SetName(Idx++, "%s", tr( "Game Language" ));
     Options->SetName(Idx++, "%s", tr( "Patch Country Strings" ));
     Options->SetName(Idx++, "%s", tr( "Ocarina" ));
+    Options->SetName(Idx++, "%s", tr( "Use IOS58" ));
     Options->SetName(Idx++, "%s", tr( "Boot/Standard" ));
     Options->SetName(Idx++, "%s", tr( "Partition" ));
     Options->SetName(Idx++, "%s", tr( "Install directories" ));
@@ -157,6 +158,12 @@ void LoaderSettings::SetOptionValues()
 
     //! Settings: Ocarina
     Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.ocarina] ));
+
+    //! Settings: Use IOS58
+    if (Settings.godmode)
+        Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.UseIOS58] ));
+    else
+        Options->SetValue(Idx++, "********");
 
     //! Settings: Boot/Standard
     if (Settings.godmode)
@@ -238,6 +245,15 @@ int LoaderSettings::GetMenuInternal()
     else if (ret == ++Idx)
     {
         if (++Settings.ocarina >= MAX_ON_OFF) Settings.ocarina = 0;
+    }
+
+    //! Settings: Use IOS58
+    else if (ret == ++Idx)
+    {
+        if(!Settings.godmode)
+            return MENU_NONE;
+
+        if (++Settings.UseIOS58 >= MAX_ON_OFF) Settings.UseIOS58 = 0;
     }
 
     //! Settings: Boot/Standard

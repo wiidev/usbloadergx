@@ -4,6 +4,7 @@
 #include <ogcsys.h>
 #include <errno.h>
 
+#include "Controls/DeviceHandler.hpp"
 #include "usbloader/sdhc.h"
 #include "usbloader/usbstorage2.h"
 #include "wbfs_rw.h"
@@ -31,24 +32,23 @@ void Wbfs::GetProgressValue(s32 * d, s32 * m)
 s32 Wbfs::Init(u32 device)
 {
     s32 ret;
+	const DISC_INTERFACE * handle = DeviceHandler::GetUSBInterface();
 
     switch (device)
     {
         case WBFS_DEVICE_USB:
             /* Initialize USB storage */
-            ret = USBStorage2_Init();
-            if (ret >= 0)
+            ret = handle->startup();
+            if (ret)
             {
+                currentHandle = handle;
                 /* Setup callbacks */
                 readCallback = __ReadUSB;
                 writeCallback = __WriteUSB;
-                /* Device info */
-                /* Get USB capacity */
-                nb_sectors = USBStorage2_GetCapacity(&sector_size);
-                if (!nb_sectors) return -1;
             }
-            else return ret;
-            break;
+            else
+				return -1;
+			break;
         case WBFS_DEVICE_SDHC:
             /* Initialize SDHC */
             ret = SDHC_Init();

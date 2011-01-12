@@ -6,6 +6,7 @@
 #include "Controls/DeviceHandler.hpp"
 #include "FileOperations/fileops.h"
 #include "settings/CSettings.h"
+#include "settings/GameTitles.h"
 #include "settings/newtitles.h"
 #include "language/gettext.h"
 #include "network/networkops.h"
@@ -81,12 +82,12 @@ void AppCleanUp(void)
         delete pointer[i];
 
     gettextCleanUp();
-    CloseXMLDatabase();
     Theme::CleanUp();
     NewTitles::DestroyInstance();
     ThreadedTask::DestroyInstance();
     SoundHandler::DestroyInstance();
     DeinitNetwork();
+    GameTitles.SetDefault();
 
     ShutdownAudio();
 

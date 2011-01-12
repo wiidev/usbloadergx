@@ -112,9 +112,8 @@ void CSettings::SetDefault()
     InstallPartitions = ONLY_GAME_PARTITION;
     beta_upgrades = 0;
     PlaylogUpdate = 1;
+    UseIOS58 = 1;
     widescreen = (CONF_GetAspectRatio() == CONF_ASPECT_16_9);
-
-    Theme::SetDefault(); //! We need to move this later
 }
 
 bool CSettings::Load()
@@ -252,6 +251,7 @@ bool CSettings::Save()
     fprintf(file, "InstallPartitions = %08X\n ", InstallPartitions);
     fprintf(file, "beta_upgrades = %d\n ", beta_upgrades);
     fprintf(file, "PlaylogUpdate = %d\n ", PlaylogUpdate);
+    fprintf(file, "UseIOS58 = %d\n ", UseIOS58);
     fprintf(file, "returnTo = %s\n ", returnTo);
     fclose(file);
 
@@ -493,6 +493,11 @@ bool CSettings::SetSetting(char *name, char *value)
     else if (strcmp(name, "PlaylogUpdate") == 0)
     {
         if (sscanf(value, "%d", &i) == 1) PlaylogUpdate = i;
+        return true;
+    }
+    else if (strcmp(name, "UseIOS58") == 0)
+    {
+        if (sscanf(value, "%d", &i) == 1) UseIOS58 = i;
         return true;
     }
     else if (strcmp(name, "InstallPartitions") == 0)

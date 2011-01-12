@@ -402,8 +402,7 @@ void GuiText::ScrollText()
         {
             textDyn[pos][i] = text[i];
 
-            currentWidth
-                    += (font ? font : fontSystem)->getCharWidth(text[i], currentSize, i > 0 ? text[i - 1] : 0x0000);
+            currentWidth += (font ? font : fontSystem)->getCharWidth(text[i], currentSize, i > 0 ? text[i - 1] : 0x0000);
 
             ++i;
         }

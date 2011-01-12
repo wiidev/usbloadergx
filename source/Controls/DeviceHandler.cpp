@@ -133,14 +133,24 @@ bool DeviceHandler::MountSD()
     return sd->Mount(0, DeviceName[SD], true);
 }
 
+const DISC_INTERFACE * DeviceHandler::GetUSBInterface()
+{
+    if(IOS_GetVersion() < 200)
+        return &__io_usbstorage;
+
+    return &__io_usbstorage2;
+}
+
 static inline bool USBSpinUp()
 {
     bool started = false;
     int retries = 400;
+
+    const DISC_INTERFACE * handle = DeviceHandler::GetUSBInterface();
     // wait 20 sec for the USB to spin up...stupid slow ass HDD
     do
     {
-        started = (__io_usbstorage2.startup() && __io_usbstorage2.isInserted());
+        started = (handle->startup() && handle->isInserted());
         if(started) break;
         usleep(50000);
     }
@@ -155,7 +165,7 @@ bool DeviceHandler::MountUSB(int pos, bool spinup)
         return false;
 
     if(!usb)
-        usb = new PartitionHandle(&__io_usbstorage2);
+        usb = new PartitionHandle(GetUSBInterface());
 
     if(usb->GetPartitionCount() < 1)
     {
@@ -176,7 +186,7 @@ bool DeviceHandler::MountAllUSB(bool spinup)
         return false;
 
     if(!usb)
-        usb = new PartitionHandle(&__io_usbstorage2);
+        usb = new PartitionHandle(GetUSBInterface());
 
     bool result = false;
 

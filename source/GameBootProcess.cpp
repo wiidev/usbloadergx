@@ -106,6 +106,9 @@ int BootGame(const char * gameID)
 
     delete dvdheader;
     dvdheader = NULL;
+
+    gameList.clear();
+
     int ret = 0;
 
     u8 videoChoice = Settings.videomode;

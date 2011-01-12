@@ -111,6 +111,7 @@ class CSettings
         short beta_upgrades;
         short PlaylogUpdate;
         short ShowFreeSpace;
+        short UseIOS58;
         char returnTo[20];
     protected:
         bool ValidVersion(FILE * file);

@@ -76,12 +76,13 @@ class DeviceHandler
 		void UnMountSD() { if(sd) delete sd; sd = NULL; };
 		void UnMountUSB(int pos);
 		void UnMountAllUSB();
-		PartitionHandle * GetSDHandle() { return sd; };
-		PartitionHandle * GetUSBHandle() { return usb; };
+		PartitionHandle * GetSDHandle() const { return sd; };
+		PartitionHandle * GetUSBHandle() const { return usb; };
 		static int GetUSBFilesystemType(int part);
 		static int PathToDriveType(const char * path);
         static const char * GetFSName(int dev);
         static const char * PathToFSName(const char * path) { return GetFSName(PathToDriveType(path)); };
+        static const DISC_INTERFACE * GetUSBInterface();
     private:
         DeviceHandler() : sd(0), usb(0) { };
         ~DeviceHandler();
