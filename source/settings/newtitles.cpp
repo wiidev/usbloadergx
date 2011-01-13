@@ -5,28 +5,10 @@
 #include "settings/CGameStatistics.h"
 #include "newtitles.h"
 
-#define NEW_SECONDS 24 * 60 * 60
-#define GAMETITLES  "gametitles.txt"
+#define NEW_SECONDS (24 * 60 * 60)
+#define GAMETITLES  "GameTimestamps.txt"
 
 NewTitles *NewTitles::instance = NULL;
-
-NewTitles* NewTitles::Instance()
-{
-    if (instance == NULL)
-    {
-        instance = new NewTitles();
-    }
-    return instance;
-}
-
-void NewTitles::DestroyInstance()
-{
-    if (instance != NULL)
-    {
-        delete instance;
-        instance = NULL;
-    }
-}
 
 NewTitles::NewTitles()
 {
@@ -35,46 +17,51 @@ NewTitles::NewTitles()
 
     // Read the text file
     char path[255];
-    strcpy(path, Settings.titlestxt_path);
-    path[strlen(Settings.titlestxt_path) - 1] = '/';
-    strcat(path, GAMETITLES);
+    snprintf(path, sizeof(path), Settings.titlestxt_path);
+    if(path[strlen(path)-1] != '/')
+        strcat(path, "/");
 
-    char line[20];
-    FILE *fp = fopen(path, "r");
-    if (fp != NULL)
-    {
-        while (fgets(line, sizeof(line), fp))
-        {
-            // This is one line
-            if (line[0] != '#' || line[0] != ';')
-            {
-                Title *title = new Title();
-                if (sscanf(line, "%6c:%ld", (u8 *) &title->titleId, &title->timestamp) == 2)
-                {
-                    if (firstTitle == NULL)
-                    {
-                        firstTitle = title;
-                        lastTitle = title;
-                    }
-                    else
-                    {
-                        lastTitle->next = title;
-                        lastTitle = title;
-                    }
-                }
-                else
-                {
-                    delete title; // Invalid title entry, ignore
-                }
-            }
-        }
+    snprintf(path, sizeof(path), "%s%s", path, GAMETITLES);
 
-        fclose(fp);
-    }
-    else
+    char line[50];
+    FILE *fp = fopen(path, "rb");
+    if (!fp)
     {
         isNewFile = true;
+        return;
     }
+
+    time_t currenttime = time(0);
+
+    while (fgets(line, sizeof(line), fp))
+    {
+        // This is one line
+        if (line[0] == '#' || line[0] == ';')
+            continue;
+
+        Title *title = new Title();
+        if (sscanf(line, "%6c:%lu", title->titleId, &title->timestamp) != 2)
+        {
+            delete title; // Invalid title entry, ignore
+            continue;
+        }
+
+        title->next = NULL;
+        title->isNew = ((currenttime - title->timestamp) < NEW_SECONDS);
+
+        if (firstTitle == NULL)
+        {
+            firstTitle = title;
+            lastTitle = title;
+        }
+        else
+        {
+            lastTitle->next = title;
+            lastTitle = title;
+        }
+    }
+
+    fclose(fp);
 }
 
 NewTitles::~NewTitles()
@@ -84,38 +71,43 @@ NewTitles::~NewTitles()
     Title *t = firstTitle;
     while (t != NULL)
     {
-        Title *temp = (Title *) t->next;
+        Title *temp = t->next;
         delete t;
         t = temp;
     }
     firstTitle = lastTitle = NULL;
 }
 
-void NewTitles::CheckGame(u8 *titleid)
+void NewTitles::CheckGame(const u8 *titleid)
 {
     if (titleid == NULL || strlen((char *) titleid) == 0)
-    {
         return;
-    }
 
     Title *t = firstTitle;
     while (t != NULL)
     {
         // Loop all titles, search for the correct titleid
-        if (strcmp((const char *) titleid, (const char *) t->titleId) == 0)
-        {
+        if (memcmp(titleid, t->titleId, 6) == 0)
             return; // Game found, which is excellent
-        }
-        t = (Title *) t->next;
+
+        t = t->next;
     }
 
     // Not found, add it
-    t = new Title();
-    strncpy((char *) t->titleId, (char *) titleid, 6);
-    t->timestamp = time(NULL);
+    t = new Title;
+    snprintf(t->titleId, sizeof(t->titleId), (char *) titleid);
+    t->timestamp = time(0);
+    t->next = NULL;
+
     if (isNewFile)
     {
+        t->isNew = false;
         t->timestamp -= (NEW_SECONDS + 1); // Mark all games as not new if this is a new file
+    }
+    else
+    {
+        GameStatus *Status = GameStatistics.GetGameStatus(titleid);
+        t->isNew = (Status == NULL || Status->PlayCount == 0);
     }
 
     if (firstTitle == NULL)
@@ -125,64 +117,50 @@ void NewTitles::CheckGame(u8 *titleid)
     }
     else
     {
-        lastTitle -> next = t;
+        lastTitle->next = t;
         lastTitle = t;
     }
     isDirty = true;
 }
 
-bool NewTitles::IsNew(u8 *titleid)
+bool NewTitles::IsNew(const u8 *titleid) const
 {
-    if (titleid == NULL || strlen((char *) titleid) == 0) return false;
+    if (!titleid) return false;
 
     Title *t = firstTitle;
 
-    while (t != NULL)
+    while(t != NULL)
     {
         // Loop all titles, search for the correct titleid
-        if (strcmp((const char *) titleid, (const char *) t->titleId) == 0)
-        {
-            // This title is less than 24 hours old
-            if ((time(NULL) - t->timestamp) < NEW_SECONDS)
-            {
-                // Only count the game as new when it's never been played through GX
-                GameStatus *gnum = GameStatistics.GetGameStatus(titleid);
-                return gnum == NULL || gnum->PlayCount == 0;
-            }
-            return false;
-        }
-        t = (Title *) t->next;
-    }
-    // We should never get here, since all files should be added by now!
-    CheckGame(titleid);
+        if (memcmp(titleid, t->titleId, 6) == 0)
+            return t->isNew;
 
-    return !isNewFile; // If this is a new file, return false
+        t = t->next;
+    }
+
+    return false;
 }
 
-void NewTitles::Remove(u8 *titleid)
+void NewTitles::Remove(const u8 *titleid)
 {
-    if (titleid == NULL || strlen((char *) titleid) == 0) return;
+    if (titleid == NULL) return;
 
     Title *t = firstTitle, *prev = NULL;
     while (t != NULL)
     {
-        if (strcmp((const char *) titleid, (const char *) t->titleId) == 0)
+        if (memcmp(titleid, t->titleId, 6) == 0)
         {
             if (prev == NULL)
-            {
-                firstTitle = (Title *) t->next;
-            }
+                firstTitle = t->next;
             else
-            {
                 prev->next = t->next;
-            }
+
             delete t;
             isDirty = true;
-
             return;
         }
         prev = t;
-        t = (Title *) t->next;
+        t = t->next;
     }
 }
 
@@ -191,19 +169,21 @@ void NewTitles::Save()
     if (!isDirty) return;
 
     char path[255];
-    strcpy(path, Settings.titlestxt_path);
-    path[strlen(Settings.titlestxt_path) - 1] = '/';
-    strcat(path, GAMETITLES);
+    snprintf(path, sizeof(path), Settings.titlestxt_path);
+    if(path[strlen(path)-1] != '/')
+        strcat(path, "/");
 
-    FILE *fp = fopen(path, "w");
-    if (fp != NULL)
+    snprintf(path, sizeof(path), "%s%s", path, GAMETITLES);
+
+    FILE *fp = fopen(path, "wb");
+    if (fp == NULL)
+        return;
+
+    Title *t = firstTitle;
+    while (t != NULL && strlen(t->titleId) > 0)
     {
-        Title *t = firstTitle;
-        while (t != NULL && strlen((char *) t->titleId) > 0)
-        {
-            fprintf(fp, "%s:%ld\n", t->titleId, t->timestamp);
-            t = (Title *) t->next;
-        }
-        fclose(fp);
+        fprintf(fp, "%s:%lu\n", t->titleId, t->timestamp);
+        t = t->next;
     }
+    fclose(fp);
 }

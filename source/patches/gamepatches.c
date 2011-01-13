@@ -11,8 +11,7 @@ bool Anti_002_fix(u8 * Address, int Size)
 {
     u8 SearchPattern[12] = { 0x2C, 0x00, 0x00, 0x00, 0x48, 0x00, 0x02, 0x14, 0x3C, 0x60, 0x80, 0x00 };
     u8 PatchData[12] = { 0x2C, 0x00, 0x00, 0x00, 0x40, 0x82, 0x02, 0x14, 0x3C, 0x60, 0x80, 0x00 };
-    return PatchDOL(Address, Size, (const u8 *) &SearchPattern, sizeof(SearchPattern), (const u8 *) &PatchData,
-            sizeof(PatchData));
+    return PatchDOL(Address, Size, (const u8 *) SearchPattern, sizeof(SearchPattern), (const u8 *) PatchData, sizeof(PatchData));
 }
 
 bool NSMBPatch()

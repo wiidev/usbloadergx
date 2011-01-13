@@ -20,7 +20,7 @@ CGameStatistics::~CGameStatistics()
 {
 }
 
-GameStatus * CGameStatistics::GetGameStatus(const char * id)
+GameStatus * CGameStatistics::GetGameStatus(const char * id) const
 {
     if(!id)
         return NULL;
@@ -29,7 +29,7 @@ GameStatus * CGameStatistics::GetGameStatus(const char * id)
     {
         if(strncmp(id, GameList[i].id, 6) == 0)
         {
-            return &GameList[i];
+            return (GameStatus *) &GameList[i];
         }
     }
 
@@ -208,7 +208,7 @@ bool CGameStatistics::ReadGameID(const char * src, char * GameID, int size)
 
     return true;
 }
-#include "gecko.h"
+
 void CGameStatistics::ParseLine(char *line)
 {
     char name[1024], value[1024];
@@ -238,7 +238,6 @@ void CGameStatistics::ParseLine(char *line)
         this->TrimLine(name, LinePtr, sizeof(name));
         this->TrimLine(value, eq + 1, sizeof(value));
 
-	//gprintf("ID: %s, Name = %s, Value = %s\n", GameID, name, value);
         SetSetting(NewGame, name, value);
 
         LinePtr = strchr(LinePtr, ';');
@@ -304,7 +303,7 @@ void CGameStatistics::SetFavoriteRank(const char * id, int rank)
     AddGame(NewStatus);
 }
 
-int CGameStatistics::GetPlayCount(const char * id)
+int CGameStatistics::GetPlayCount(const char * id) const
 {
     if(!id)
         return 0;
@@ -316,7 +315,7 @@ int CGameStatistics::GetPlayCount(const char * id)
     return 0;
 }
 
-int CGameStatistics::GetFavoriteRank(const char * id)
+int CGameStatistics::GetFavoriteRank(const char * id) const
 {
     if(!id)
         return 0;

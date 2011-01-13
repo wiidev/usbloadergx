@@ -34,7 +34,7 @@ void CGameTitles::SetGameTitle(const char * id, const char * title)
     TitleList.push_back(newTitle);
 }
 
-const char * CGameTitles::GetTitle(const char * id)
+const char * CGameTitles::GetTitle(const char * id) const
 {
     if(!id)
         return NULL;
@@ -48,7 +48,7 @@ const char * CGameTitles::GetTitle(const char * id)
     return NULL;
 }
 
-const char * CGameTitles::GetTitle(const struct discHdr *header)
+const char * CGameTitles::GetTitle(const struct discHdr *header) const
 {
     if(!header)
         return NULL;
@@ -62,7 +62,7 @@ const char * CGameTitles::GetTitle(const struct discHdr *header)
     return header->title;
 }
 
-int CGameTitles::GetParentalRating(const char * id)
+int CGameTitles::GetParentalRating(const char * id) const
 {
     if(!id)
         return -1;

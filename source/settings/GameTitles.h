@@ -23,14 +23,14 @@ class CGameTitles
         void SetGameTitle(const u8 * id, const char * title) { SetGameTitle((const char *) id, title); };
 
         //! Get a game title
-        const char * GetTitle(const char * id);
+        const char * GetTitle(const char * id) const;
         //! Overload
-        const char * GetTitle(const u8 * id) { return GetTitle((const char *) id); };
+        const char * GetTitle(const u8 * id) const { return GetTitle((const char *) id); };
         //! Overload
-        const char * GetTitle(const struct discHdr *header);
+        const char * GetTitle(const struct discHdr *header) const;
 
         //! Get game parental rating
-        int GetParentalRating(const char * id);
+        int GetParentalRating(const char * id) const;
 
         //! Load Game Titles from WiiTDB
         void LoadTitlesFromWiiTDB(const char * path);

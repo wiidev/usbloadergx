@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <di/di.h>
 #include <malloc.h>
 #include <ogcsys.h>
 #include "gecko.h"
@@ -34,16 +35,22 @@ static u32 inbuf[8]  ATTRIBUTE_ALIGN(32);
 static u32 outbuf[8] ATTRIBUTE_ALIGN(32);
 
 static const char di_fs[] ATTRIBUTE_ALIGN(32) = "/dev/di";
-static s32 di_fd = -1;
+static s32 _di_fd = -1;
+
+static s32 currentIOS = -1;
 
 
 s32 WDVD_Init(void)
 {
+	currentIOS = IOS_GetVersion();
+	if(currentIOS < 200)
+        return DI_Init();
+
 	/* Open "/dev/di" */
-	if (di_fd < 0) {
-		di_fd = IOS_Open(di_fs, 0);
-		if (di_fd < 0)
-			return di_fd;
+	if (_di_fd < 0) {
+		_di_fd = IOS_Open(di_fs, 0);
+		if (_di_fd < 0)
+			return _di_fd;
 	}
 
 	return 0;
@@ -51,10 +58,16 @@ s32 WDVD_Init(void)
 
 s32 WDVD_Close(void)
 {
+	if(currentIOS < 200)
+	{
+	    DI_Close();
+	    return 0;
+	}
+
 	/* Close "/dev/di" */
-	if (di_fd >= 0) {
-		IOS_Close(di_fd);
-		di_fd = -1;
+	if (_di_fd >= 0) {
+		IOS_Close(_di_fd);
+		_di_fd = -1;
 	}
 
 	return 0;
@@ -62,14 +75,20 @@ s32 WDVD_Close(void)
 
 s32 WDVD_GetHandle(void)
 {
+	if(currentIOS < 200)
+        return -1;
+
 	/* Return di handle */
-	return di_fd;
+	return _di_fd;
 }
 
 s32 WDVD_Reset(void)
 {
-    if (di_fd < 0)
-        return di_fd;
+	if(currentIOS < 200)
+        return DI_Reset();
+
+    if (_di_fd < 0)
+        return _di_fd;
 
 	s32 ret;
 
@@ -80,7 +99,7 @@ s32 WDVD_Reset(void)
 	inbuf[1] = 1;
 
 
-	ret = IOS_Ioctl(di_fd, IOCTL_DI_RESET, inbuf, sizeof(inbuf), outbuf, sizeof(outbuf));
+	ret = IOS_Ioctl(_di_fd, IOCTL_DI_RESET, inbuf, sizeof(inbuf), outbuf, sizeof(outbuf));
 	if (ret < 0)
 		return ret;
 
@@ -89,8 +108,11 @@ s32 WDVD_Reset(void)
 
 s32 WDVD_ReadDiskId(void *id)
 {
-    if (di_fd < 0)
-        return di_fd;
+	if(currentIOS < 200)
+        return DI_ReadDiscID((u64 *) id);
+
+    if (_di_fd < 0)
+        return _di_fd;
 
 	s32 ret;
 
@@ -99,7 +121,7 @@ s32 WDVD_ReadDiskId(void *id)
 	/* Read disc ID */
 	inbuf[0] = IOCTL_DI_READID << 24;
 
-	ret = IOS_Ioctl(di_fd, IOCTL_DI_READID, inbuf, sizeof(inbuf), outbuf, sizeof(outbuf));
+	ret = IOS_Ioctl(_di_fd, IOCTL_DI_READID, inbuf, sizeof(inbuf), outbuf, sizeof(outbuf));
 	if (ret < 0)
 		return ret;
 
@@ -113,8 +135,11 @@ s32 WDVD_ReadDiskId(void *id)
 
 s32 WDVD_Seek(u64 offset)
 {
-    if (di_fd < 0)
-        return di_fd;
+	if(currentIOS < 200)
+        return -1;
+
+    if (_di_fd < 0)
+        return _di_fd;
 
 	s32 ret;
 
@@ -124,7 +149,7 @@ s32 WDVD_Seek(u64 offset)
 	inbuf[0] = IOCTL_DI_SEEK << 24;
 	inbuf[1] = (u32)(offset >> 2);
 
-	ret = IOS_Ioctl(di_fd, IOCTL_DI_SEEK, inbuf, sizeof(inbuf), outbuf, sizeof(outbuf));
+	ret = IOS_Ioctl(_di_fd, IOCTL_DI_SEEK, inbuf, sizeof(inbuf), outbuf, sizeof(outbuf));
 	if (ret < 0)
 		return ret;
 
@@ -134,8 +159,11 @@ s32 WDVD_Seek(u64 offset)
 
 s32 WDVD_Offset(u64 offset)
 {
-    if (di_fd < 0)
-        return di_fd;
+	if(currentIOS < 200)
+        return -1;
+
+    if (_di_fd < 0)
+        return _di_fd;
 
     //u32 *off = (u32 *)((void *)&offset);
 	union { u64 off64; u32 off32[2]; } off;off.off64 = offset;
@@ -148,7 +176,7 @@ s32 WDVD_Offset(u64 offset)
     inbuf[1] = (off.off32[0]) ? 1: 0;
     inbuf[2] = (off.off32[1] >> 2);
 
-    ret = IOS_Ioctl(di_fd, IOCTL_DI_OFFSET, inbuf, sizeof(inbuf), outbuf, sizeof(outbuf));
+    ret = IOS_Ioctl(_di_fd, IOCTL_DI_OFFSET, inbuf, sizeof(inbuf), outbuf, sizeof(outbuf));
     if (ret < 0)
         return ret;
 
@@ -157,8 +185,11 @@ s32 WDVD_Offset(u64 offset)
 
 s32 WDVD_StopLaser(void)
 {
-    if (di_fd < 0)
-        return di_fd;
+	if(currentIOS < 200)
+        return -1;
+
+    if (_di_fd < 0)
+        return _di_fd;
 
 	s32 ret;
 
@@ -167,7 +198,7 @@ s32 WDVD_StopLaser(void)
 	/* Stop laser */
 	inbuf[0] = IOCTL_DI_STOPLASER << 24;
 
-	ret = IOS_Ioctl(di_fd, IOCTL_DI_STOPLASER, inbuf, sizeof(inbuf), outbuf, sizeof(outbuf));
+	ret = IOS_Ioctl(_di_fd, IOCTL_DI_STOPLASER, inbuf, sizeof(inbuf), outbuf, sizeof(outbuf));
 	if (ret < 0)
 		return ret;
 
@@ -176,8 +207,11 @@ s32 WDVD_StopLaser(void)
 
 s32 WDVD_StopMotor(void)
 {
-    if (di_fd < 0)
-        return di_fd;
+	if(currentIOS < 200)
+        return -1;
+
+    if (_di_fd < 0)
+        return _di_fd;
 
 	s32 ret;
 
@@ -186,7 +220,7 @@ s32 WDVD_StopMotor(void)
 	/* Stop motor */
 	inbuf[0] = IOCTL_DI_STOPMOTOR << 24;
 
-	ret = IOS_Ioctl(di_fd, IOCTL_DI_STOPMOTOR, inbuf, sizeof(inbuf), outbuf, sizeof(outbuf));
+	ret = IOS_Ioctl(_di_fd, IOCTL_DI_STOPMOTOR, inbuf, sizeof(inbuf), outbuf, sizeof(outbuf));
 	if (ret < 0)
 		return ret;
 
@@ -195,8 +229,11 @@ s32 WDVD_StopMotor(void)
 
 s32 WDVD_OpenPartition(u64 offset)
 {
-    if (di_fd < 0)
-        return di_fd;
+	if(currentIOS < 200)
+        return DI_OpenPartition(offset >> 2);
+
+    if (_di_fd < 0)
+        return _di_fd;
 
     static u8 Tmd_Buffer[0x4A00] ATTRIBUTE_ALIGN(32);
 	static ioctlv Vectors[5] ATTRIBUTE_ALIGN(32);
@@ -219,7 +256,7 @@ s32 WDVD_OpenPartition(u64 offset)
 	Vectors[4].data		= outbuf;
 	Vectors[4].len		= 0x20;
 
-	ret = IOS_Ioctlv(di_fd, IOCTL_DI_OPENPART, 3, 2, (ioctlv *)Vectors);
+	ret = IOS_Ioctlv(_di_fd, IOCTL_DI_OPENPART, 3, 2, (ioctlv *)Vectors);
 
 	if (ret < 0)
 		return ret;
@@ -229,8 +266,11 @@ s32 WDVD_OpenPartition(u64 offset)
 
 s32 WDVD_ClosePartition(void)
 {
-    if (di_fd < 0)
-        return di_fd;
+	if(currentIOS < 200)
+        return DI_ClosePartition();
+
+    if (_di_fd < 0)
+        return _di_fd;
 
 	s32 ret;
 
@@ -239,7 +279,7 @@ s32 WDVD_ClosePartition(void)
 	/* Close partition */
 	inbuf[0] = IOCTL_DI_CLOSEPART << 24;
 
-	ret = IOS_Ioctl(di_fd, IOCTL_DI_CLOSEPART, inbuf, sizeof(inbuf), NULL, 0);
+	ret = IOS_Ioctl(_di_fd, IOCTL_DI_CLOSEPART, inbuf, sizeof(inbuf), NULL, 0);
 	if (ret < 0)
 		return ret;
 
@@ -248,8 +288,11 @@ s32 WDVD_ClosePartition(void)
 
 s32 WDVD_UnencryptedRead(void *buf, u32 len, u64 offset)
 {
-    if (di_fd < 0)
-        return di_fd;
+	if(currentIOS < 200)
+        return DI_UnencryptedRead(buf, len, offset >> 2);
+
+    if (_di_fd < 0)
+        return _di_fd;
 
 	s32 ret;
 
@@ -260,7 +303,7 @@ s32 WDVD_UnencryptedRead(void *buf, u32 len, u64 offset)
 	inbuf[1] = len;
 	inbuf[2] = (u32)(offset >> 2);
 
-	ret = IOS_Ioctl(di_fd, IOCTL_DI_UNENCREAD, inbuf, sizeof(inbuf), buf, len);
+	ret = IOS_Ioctl(_di_fd, IOCTL_DI_UNENCREAD, inbuf, sizeof(inbuf), buf, len);
 	if (ret < 0)
 		return ret;
 
@@ -269,8 +312,11 @@ s32 WDVD_UnencryptedRead(void *buf, u32 len, u64 offset)
 
 s32 WDVD_Read(void *buf, u32 len, u64 offset)
 {
-    if (di_fd < 0)
-        return di_fd;
+	if(currentIOS < 200)
+        return DI_Read(buf, len, offset >> 2);
+
+    if (_di_fd < 0)
+        return _di_fd;
 
 	s32 ret;
 
@@ -281,7 +327,7 @@ s32 WDVD_Read(void *buf, u32 len, u64 offset)
 	inbuf[1] = len;
 	inbuf[2] = (u32)(offset >> 2);
 
-	ret = IOS_Ioctl(di_fd, IOCTL_DI_READ, inbuf, sizeof(inbuf), buf, len);
+	ret = IOS_Ioctl(_di_fd, IOCTL_DI_READ, inbuf, sizeof(inbuf), buf, len);
 	if (ret < 0)
 		return ret;
 
@@ -290,8 +336,11 @@ s32 WDVD_Read(void *buf, u32 len, u64 offset)
 
 s32 WDVD_WaitForDisc(void)
 {
-    if (di_fd < 0)
-        return di_fd;
+	if(currentIOS < 200)
+        return -1;
+
+    if (_di_fd < 0)
+        return _di_fd;
 
 	s32 ret;
 
@@ -300,7 +349,7 @@ s32 WDVD_WaitForDisc(void)
 	/* Wait for disc */
 	inbuf[0] = IOCTL_DI_WAITCVRCLOSE << 24;
 
-	ret = IOS_Ioctl(di_fd, IOCTL_DI_WAITCVRCLOSE, inbuf, sizeof(inbuf), outbuf, sizeof(outbuf));
+	ret = IOS_Ioctl(_di_fd, IOCTL_DI_WAITCVRCLOSE, inbuf, sizeof(inbuf), outbuf, sizeof(outbuf));
 	if (ret < 0)
 		return ret;
 
@@ -309,8 +358,11 @@ s32 WDVD_WaitForDisc(void)
 
 s32 WDVD_GetCoverStatus(u32 *status)
 {
-    if (di_fd < 0)
-        return di_fd;
+	if(currentIOS < 200)
+        return DI_GetCoverRegister(status);
+
+    if (_di_fd < 0)
+        return _di_fd;
 
 	s32 ret;
 
@@ -319,7 +371,7 @@ s32 WDVD_GetCoverStatus(u32 *status)
 	/* Get cover status */
 	inbuf[0] = IOCTL_DI_GETCOVER << 24;
 
-	ret = IOS_Ioctl(di_fd, IOCTL_DI_GETCOVER, inbuf, sizeof(inbuf), outbuf, sizeof(outbuf));
+	ret = IOS_Ioctl(_di_fd, IOCTL_DI_GETCOVER, inbuf, sizeof(inbuf), outbuf, sizeof(outbuf));
 	if (ret < 0)
 		return ret;
 
@@ -335,8 +387,11 @@ s32 WDVD_GetCoverStatus(u32 *status)
 
 s32 WDVD_SetUSBMode(const u8 *id, s32 partition)
 {
-    if (di_fd < 0)
-        return di_fd;
+	if(currentIOS < 200)
+        return 0;
+
+    if (_di_fd < 0)
+        return _di_fd;
 
     s32 ret;
 
@@ -354,12 +409,12 @@ s32 WDVD_SetUSBMode(const u8 *id, s32 partition)
 		}
     }
 
-    ret = IOS_Ioctl(di_fd, IOCTL_DI_SETWBFSMODE, inbuf, sizeof(inbuf), outbuf, sizeof(outbuf));
+    ret = IOS_Ioctl(_di_fd, IOCTL_DI_SETWBFSMODE, inbuf, sizeof(inbuf), outbuf, sizeof(outbuf));
     if (ret!=1) {
         // Try old cIOS 222
         /* Set USB mode */
         inbuf[0] = DI_SETWBFSMODE << 24;
-        ret = IOS_Ioctl(di_fd, DI_SETWBFSMODE, inbuf, sizeof(inbuf), outbuf, sizeof(outbuf));
+        ret = IOS_Ioctl(_di_fd, DI_SETWBFSMODE, inbuf, sizeof(inbuf), outbuf, sizeof(outbuf));
     }
 
     if (ret < 0)
@@ -370,8 +425,11 @@ s32 WDVD_SetUSBMode(const u8 *id, s32 partition)
 
 s32 WDVD_Read_Disc_BCA(void *buf)
 {
-    if (di_fd < 0)
-        return di_fd;
+	if(currentIOS < 200)
+        return DI_Read_BCA(buf);
+
+    if (_di_fd < 0)
+        return _di_fd;
 
 	s32 ret;
 
@@ -381,7 +439,7 @@ s32 WDVD_Read_Disc_BCA(void *buf)
 	inbuf[0] = IOCTL_DI_DISC_BCA << 24;
 	//inbuf[1] = 64;
 
-	ret = IOS_Ioctl(di_fd, IOCTL_DI_DISC_BCA, inbuf, sizeof(inbuf), buf, 64);
+	ret = IOS_Ioctl(_di_fd, IOCTL_DI_DISC_BCA, inbuf, sizeof(inbuf), buf, 64);
 	if (ret < 0)
 		return ret;
 
@@ -392,8 +450,11 @@ s32 WDVD_Read_Disc_BCA(void *buf)
 
 s32 WDVD_SetFragList(int device, void *fraglist, int size)
 {
-    if (di_fd < 0)
-        return di_fd;
+	if(currentIOS < 200)
+        return 0;
+
+    if (_di_fd < 0)
+        return _di_fd;
 
 	s32 ret;
 
@@ -407,7 +468,7 @@ s32 WDVD_SetFragList(int device, void *fraglist, int size)
 	inbuf[3] = size;
 
 	DCFlushRange(fraglist, size);
-	ret = IOS_Ioctl(di_fd, IOCTL_DI_SETFRAG, inbuf, sizeof(inbuf), outbuf, sizeof(outbuf));
+	ret = IOS_Ioctl(_di_fd, IOCTL_DI_SETFRAG, inbuf, sizeof(inbuf), outbuf, sizeof(outbuf));
 
 	if (ret < 0)
 		return ret;
@@ -417,8 +478,11 @@ s32 WDVD_SetFragList(int device, void *fraglist, int size)
 
 s32 WDVD_Eject(void)
 {
-    if (di_fd < 0)
-        return di_fd;
+	if(currentIOS < 200)
+        return DI_Eject();
+
+    if (_di_fd < 0)
+        return _di_fd;
 
 	s32 ret;
 
@@ -429,7 +493,7 @@ s32 WDVD_Eject(void)
 	/* Eject DVD */
 	inbuf[1] = 1;
 
-	ret = IOS_Ioctl(di_fd, IOCTL_DI_STOPMOTOR, inbuf, sizeof(inbuf), outbuf, sizeof(outbuf));
+	ret = IOS_Ioctl(_di_fd, IOCTL_DI_STOPMOTOR, inbuf, sizeof(inbuf), outbuf, sizeof(outbuf));
 	if (ret < 0)
 		return ret;
 

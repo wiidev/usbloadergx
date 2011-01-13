@@ -37,11 +37,6 @@
 
 GameList gameList;
 
-GameList::GameList()
-{
-
-}
-
 void GameList::clear()
 {
     GameFilter.clear();
@@ -53,14 +48,7 @@ void GameList::clear()
     std::vector<struct discHdr>().swap(FullGameList);
 }
 
-struct discHdr * GameList::at(int i)
-{
-    if (i < 0 || i >= (int) FilteredList.size()) return NULL;
-
-    return FilteredList[i];
-}
-
-struct discHdr * GameList::GetDiscHeader(const char * gameID)
+struct discHdr * GameList::GetDiscHeader(const char * gameID) const
 {
     for (u32 i = 0; i < FilteredList.size(); ++i)
     {
@@ -148,15 +136,12 @@ int GameList::FilterList(const wchar_t * gameFilter)
 
         GameCFG * GameConfig = GameSettings.GetGameCFG(header);
 
+        /* Rating based parental control method */
         if (Settings.parentalcontrol != 4 && !Settings.godmode)
         {
             if (GameConfig && GameConfig->parentalcontrol > Settings.parentalcontrol)
                 continue;
-        }
 
-        /* Rating based parental control method */
-        if (Settings.parentalcontrol != 4 && Settings.godmode == 0)
-        {
             // Check game rating in WiiTDB, since the default Wii parental control setting is enabled
             int rating = GameTitles.GetParentalRating((char *) header->id);
             if (rating > Settings.parentalcontrol)
@@ -168,7 +153,6 @@ int GameList::FilterList(const wchar_t * gameFilter)
             continue;
 
         wchar_t *gameName = charToWideChar(GameTitles.GetTitle(header));
-
         if (gameName && *GameFilter.c_str())
         {
             if (wcsnicmp(gameName, GameFilter.c_str(), GameFilter.size()) != 0)
@@ -193,7 +177,8 @@ int GameList::FilterList(const wchar_t * gameFilter)
 
     AvailableSearchChars.push_back(L'\0');
 
-    if (FilteredList.size() < 2) AvailableSearchChars.clear();
+    if (FilteredList.size() < 2)
+        AvailableSearchChars.clear();
 
     SortList();
 
@@ -218,8 +203,8 @@ int GameList::LoadUnfiltered()
         wchar_t *gameName = charToWideChar(GameTitles.GetTitle(header));
         if (gameName)
         {
-            if (wcslen(gameName) > GameFilter.size() && AvailableSearchChars.find(gameName[GameFilter.size()])
-                    == std::string::npos) AvailableSearchChars.push_back(gameName[GameFilter.size()]);
+            if (wcslen(gameName) > GameFilter.size() && AvailableSearchChars.find(gameName[GameFilter.size()]) == std::string::npos)
+                AvailableSearchChars.push_back(gameName[GameFilter.size()]);
             delete[] gameName;
         }
 
@@ -230,7 +215,8 @@ int GameList::LoadUnfiltered()
 
     AvailableSearchChars.push_back(L'\0');
 
-    if (FilteredList.size() < 2) AvailableSearchChars.clear();
+    if (FilteredList.size() < 2)
+        AvailableSearchChars.clear();
 
     SortList();
 
@@ -254,8 +240,8 @@ void GameList::SortList()
         std::sort(FilteredList.begin(), FilteredList.end(), NameSortCallback);
     }
 
-    if (AvailableSearchChars.size() > 1) std::sort(AvailableSearchChars.begin(), AvailableSearchChars.end(),
-            WCharSortCallback);
+    if (AvailableSearchChars.size() > 1)
+        std::sort(AvailableSearchChars.begin(), AvailableSearchChars.end(), WCharSortCallback);
 
 }
 

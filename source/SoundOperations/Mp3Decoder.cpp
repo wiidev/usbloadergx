@@ -91,7 +91,7 @@ void Mp3Decoder::OpenFile()
     }
 
     u8 dummybuff[4096];
-    int ret = Read((u8 *) &dummybuff, 4096, 0);
+    int ret = Read(dummybuff, 4096, 0);
     if(ret <= 0)
     {
         if(file_fd)

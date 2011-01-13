@@ -6,13 +6,13 @@
 class NewTitles
 {
     public:
-        static NewTitles *Instance();
-        static void DestroyInstance();
+        static NewTitles *Instance() { if(!instance) instance = new NewTitles(); return instance; }
+        static void DestroyInstance() { delete instance; instance = NULL; }
 
         void Save();
-        void CheckGame(u8 *titleid);
-        bool IsNew(u8 *titleid);
-        void Remove(u8 *titleid);
+        void CheckGame(const u8 *titleid);
+        bool IsNew(const u8 *titleid) const;
+        void Remove(const u8 *titleid);
     private:
         NewTitles();
         ~NewTitles();
@@ -22,9 +22,10 @@ class NewTitles
         class Title
         {
             public:
-                u8 titleId[6];
+                char titleId[7];
                 time_t timestamp;
-                void *next;
+                Title *next;
+                bool isNew;
         };
 
         Title *firstTitle;

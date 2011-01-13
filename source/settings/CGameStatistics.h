@@ -38,23 +38,23 @@ class CGameStatistics
         void SetPlayCount(const u8 * id, int count) { SetPlayCount((const char *) id, count); };
         void SetPlayCount(const struct discHdr * game, int count) { if(!game) return; SetPlayCount(game->id, count); };
         //!Overloads for get playcount
-        int GetPlayCount(const char * id);
-        int GetPlayCount(const u8 * id) { return GetPlayCount((const char *) id); };
-        int GetPlayCount(const struct discHdr * game) { if(!game) return 0; else return GetPlayCount(game->id); };
+        int GetPlayCount(const char * id) const;
+        int GetPlayCount(const u8 * id) const { return GetPlayCount((const char *) id); };
+        int GetPlayCount(const struct discHdr * game) const { if(!game) return 0; else return GetPlayCount(game->id); };
         //!Overloads for set FavoriteRank
         void SetFavoriteRank(const char * id, int rank);
         void SetFavoriteRank(const u8 * id, int rank) { SetFavoriteRank((const char *) id, rank); };
         void SetFavoriteRank(const struct discHdr * game, int rank) { if(!game) return; SetFavoriteRank(game->id, rank); };
         //!Overloads for get FavoriteRank
-        int GetFavoriteRank(const char * id);
-        int GetFavoriteRank(const u8 * id) { return GetFavoriteRank((const char *) id); };
-        int GetFavoriteRank(const struct discHdr * game) { if(!game) return 0; else return GetFavoriteRank(game->id); };
+        int GetFavoriteRank(const char * id) const;
+        int GetFavoriteRank(const u8 * id) const { return GetFavoriteRank((const char *) id); };
+        int GetFavoriteRank(const struct discHdr * game) const { if(!game) return 0; else return GetFavoriteRank(game->id); };
         //!Get GameStatus
-        GameStatus * GetGameStatus(const char * id);
+        GameStatus * GetGameStatus(const char * id) const;
         //!Overload
-        GameStatus * GetGameStatus(const u8 * id) { return GetGameStatus((const char *) id); };
+        GameStatus * GetGameStatus(const u8 * id) const { return GetGameStatus((const char *) id); };
         //!Overload
-        GameStatus * GetGameStatus(const struct discHdr * game) { if(!game) return NULL; else return GetGameStatus(game->id); };
+        GameStatus * GetGameStatus(const struct discHdr * game) const { if(!game) return NULL; else return GetGameStatus(game->id); };
 
     protected:
         bool ReadGameID(const char * src, char * GameID, int size);
