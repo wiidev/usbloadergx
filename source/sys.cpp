@@ -23,6 +23,11 @@
 #include "gecko.h"
 #include "xml/xml.h"
 
+extern "C"
+{
+    extern s32 MagicPatches(s32);
+}
+
 extern char game_partition[6];
 extern u8 load_from_fs;
 
@@ -106,6 +111,8 @@ void ExitApp(void)
     USB_Deinitialize();
     if(Settings.PlaylogUpdate)
         Playlog_Delete(); // Don't show USB Loader GX in the Wii message board
+
+    MagicPatches(0);
 }
 
 void Sys_Reboot(void)

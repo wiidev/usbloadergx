@@ -4,11 +4,6 @@
 
 NandTitle NandTitles;
 
-extern "C"
-{
-    extern s32 MagicPatches(s32);
-}
-
 static u8 tmd_buf[MAX_SIGNED_TMD_SIZE] ATTRIBUTE_ALIGN( 32 );
 
 //based on one from comex's nand formatter
@@ -77,7 +72,6 @@ s32 NandTitle::Get()
 
     free(list);
 
-    MagicPatches(1);
     int language = CONF_GetLanguage();
     ISFS_Initialize();
 
@@ -96,7 +90,6 @@ s32 NandTitle::Get()
     ISFS_Deinitialize();
     //If not started from SystemMenu, create playlog while we got nand access.
     Playlog_Create();
-    MagicPatches(0);
     return 1;
 }
 

@@ -186,7 +186,7 @@ s32 Wbfs_Fat::AddGame(void)
 
     wbfs_t *old_hdd = hdd;
     hdd = part; // used by spinner
-    ret = wbfs_add_disc(hdd, __ReadDVD, NULL, ProgressCallback, part_sel, 0);
+    ret = wbfs_add_disc(hdd, __ReadDVD, NULL, ShowProgress, part_sel, 0);
     hdd = old_hdd;
     wbfs_trim(part);
     ClosePart(part);

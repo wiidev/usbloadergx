@@ -34,6 +34,7 @@
 
 extern "C"
 {
+    extern s32 MagicPatches(s32);
     void __exception_setreload(int t);
 }
 
@@ -53,6 +54,7 @@ int main(int argc, char *argv[])
 
     MEM2_init(48);
     __exception_setreload(20);
+    MagicPatches(1);
     InitVideo();
     InitGecko();
     USBGeckoOutput();

@@ -103,7 +103,7 @@ bool ZipFile::ExtractAll(const char *dest)
 
                 do
                 {
-                    ShowProgress(tr( "Extracting files..." ), 0, pointer + 1, done, uncompressed_size);
+                    ShowProgress(tr( "Extracting files..." ), 0, pointer + 1, done, uncompressed_size, true);
 
                     if (uncompressed_size - done < blocksize) blocksize = uncompressed_size - done;
 

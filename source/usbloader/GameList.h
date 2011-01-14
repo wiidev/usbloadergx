@@ -25,8 +25,8 @@ class GameList
         //! Gamelist scrolling operators
         int operator+=(int i) { return (selectedGame = (selectedGame+i) % FilteredList.size()); }
         int operator-=(int i) { return (selectedGame = (selectedGame-i+FilteredList.size()) % FilteredList.size()); }
-        int operator++() { return (selectedGame = (++selectedGame) % FilteredList.size()); }
-        int operator--() { return (selectedGame = ((--selectedGame)+FilteredList.size()) % FilteredList.size()); }
+        int operator++() { return (selectedGame = (selectedGame+1) % FilteredList.size()); }
+        int operator--() { return (selectedGame = (selectedGame-1+FilteredList.size()) % FilteredList.size()); }
         int operator++(int i) { return operator++(); }
         int operator--(int i) { return operator--(); }
         struct discHdr * GetCurrentSelected() const { return operator[](selectedGame); }

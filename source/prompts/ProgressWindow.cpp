@@ -18,101 +18,186 @@
 #include "usbloader/wbfs.h"
 #include "usbloader/utils.h"
 #include "themes/CTheme.h"
+#include "utils/timer.h"
 
 /*** Variables used only in this file ***/
 static lwp_t progressthread = LWP_THREAD_NULL;
+static mutex_t ProgressMutex = LWP_MUTEX_NULL;
 static ProgressAbortCallback AbortCallback = NULL;
-static char progressTitle[100];
+static const char * progressTitle = NULL;
 static const char * progressMsg1 = NULL;
 static const char * progressMsg2 = NULL;
-static char progressTime[80];
-static char progressSizeLeft[80];
-static char progressSpeed[15];
+static Timer ProgressTimer;
 static int showProgress = 0;
-static f32 progressDone = 0.0;
+static s64 progressDone = -1;
+static s64 progressTotal = -1;
 static bool showTime = false;
 static bool showSize = false;
 static bool changed = true;
-static s64 gameinstalldone = 0;
-static s64 gameinstalltotal = -1;
-static time_t start;
 
-/*** Extern variables ***/
-extern GuiWindow * mainWindow;
 extern float gamesize;
 
-/*** Extern functions ***/
-extern void ResumeGui();
-extern void HaltGui();
-
 /****************************************************************************
- * ProgressCallback mainly for gameinstallation. Can be used for other C app.
+ * StartProgress
  ***************************************************************************/
-extern "C" void ProgressCallback(s64 done, s64 total)
+extern "C" void StartProgress(const char * title, const char * msg1, const char * msg2, bool swSize, bool swTime)
 {
-    gameinstalldone = done;
-    gameinstalltotal = total;
+    progressTitle = title;
+    progressMsg1 = msg1;
+    progressMsg2 = msg2;
+    showSize = swSize;
+    showTime = swTime;
+    showProgress = 1;
+    ProgressTimer.reset();
+
+    LWP_ResumeThread(progressthread);
 }
 
 /****************************************************************************
- * GameInstallProgress
- * GameInstallValue updating function
+ * ShowProgress
+ *
+ * Callbackfunction for updating the progress values
+ * Use this function as standard callback
  ***************************************************************************/
-static void GameInstallProgress()
+extern "C" void ShowProgress(s64 done, s64 total)
 {
-    if (gameinstalltotal <= 0) return;
-
-    if (gameinstalldone > gameinstalltotal) gameinstalldone = gameinstalltotal;
-
-    static u32 expected = 300;
-
-    u32 elapsed, h, m, s;
-    f32 speed = 0;
-
-    //Elapsed time
-    elapsed = time(0) - start;
-
-    //Calculate speed in MB/s
-    if (elapsed > 0) speed = KB_SIZE * gamesize * gameinstalldone / (gameinstalltotal * elapsed);
-
-    if (gameinstalldone != gameinstalltotal)
+    LWP_MutexLock(ProgressMutex);
+    progressDone = done;
+    progressTotal = total;
+    if(!done)
     {
-        //Expected time
-        if (elapsed) expected = (expected * 3 + elapsed * gameinstalltotal / gameinstalldone) / 4;
+        ProgressTimer.reset();
+        LWP_ResumeThread(progressthread);
+        showProgress = 1;
+    }
+    changed = true;
+    LWP_MutexUnlock(ProgressMutex);
+}
 
-        //Remaining time
-        elapsed = (expected > elapsed) ? (expected - elapsed) : 0;
+void ShowProgress(const char *title, const char *msg1, const char *msg2, s64 done, s64 total, bool swSize, bool swTime)
+{
+    if (total <= 0)
+        return;
+
+    else if (done > total)
+        done = total;
+
+    LWP_MutexLock(ProgressMutex);
+
+    progressDone = done;
+    progressTotal = total;
+
+    progressTitle = title;
+    progressMsg1 = msg1;
+    progressMsg2 = msg2;
+
+    showSize = swSize;
+    showTime = swTime;
+
+    if(!done)
+    {
+        ProgressTimer.reset();
+        LWP_ResumeThread(progressthread);
+        showProgress = 1;
     }
 
-    //Calculate time values
-    h = elapsed / 3600;
-    m = (elapsed / 60) % 60;
-    s = elapsed % 60;
-
-    progressDone = 100.0 * gameinstalldone / gameinstalltotal;
-
-    snprintf(progressTime, sizeof(progressTime), "%s %d:%02d:%02d", tr( "Time left:" ), h, m, s);
-    snprintf(progressSizeLeft, sizeof(progressSizeLeft), "%.2fGB/%.2fGB",
-            gamesize * gameinstalldone / gameinstalltotal, gamesize);
-    snprintf(progressSpeed, sizeof(progressSpeed), "%.1fMB/s", speed);
-
     changed = true;
+
+    LWP_MutexUnlock(ProgressMutex);
 }
 
 /****************************************************************************
- * SetupGameInstallProgress
+ * ProgressStop
  ***************************************************************************/
-void SetupGameInstallProgress(char * title, char * game)
+extern "C" void ProgressStop()
 {
+    showProgress = 0;
+	progressTitle = NULL;
+	progressMsg1 = NULL;
+	progressMsg2 = NULL;
+    progressDone = -1;
+    progressTotal = -1;
+    showTime = false;
+    showSize = false;
 
-    strlcpy(progressTitle, title, sizeof(progressTitle));
-    progressMsg1 = game;
-    gameinstalltotal = 1;
-    showProgress = 1;
-    showSize = true;
-    showTime = true;
-    LWP_ResumeThread(progressthread);
-    start = time(0);
+    // wait for thread to finish
+    while (!LWP_ThreadIsSuspended(progressthread))
+        usleep(100);
+}
+
+/****************************************************************************
+ * ProgressSetAbortCallback
+ *
+ * Set a callback for the cancel button
+ ***************************************************************************/
+extern "C" void ProgressSetAbortCallback(ProgressAbortCallback callback)
+{
+    AbortCallback = callback;
+}
+
+/****************************************************************************
+ * UpdateProgressValues
+ ***************************************************************************/
+static void UpdateProgressValues(GuiImage *progressbarImg, GuiText *prTxt, GuiText *timeTxt, GuiText *speedTxt, GuiText *sizeTxt)
+{
+    if(!changed)
+        return;
+
+    LWP_MutexLock(ProgressMutex);
+    changed = false;
+    s64 done = progressDone;
+    s64 total = progressTotal;
+    u32 speed = 0;
+
+    if(gamesize > 0.0f)
+    {
+        done = (s64) ((float) done / (float) total * gamesize * GB_SIZE);
+        total = (s64) (gamesize * GB_SIZE);
+    }
+
+    //Calculate speed in KB/s
+    if (ProgressTimer.elapsed() > 0.0f)
+        speed = (u32) (done/ProgressTimer.elapsed());
+
+    LWP_MutexUnlock(ProgressMutex);
+
+    u32 TimeLeft = 0;
+    if(speed > 0)
+        TimeLeft = (total-done)/speed;
+
+    u32 h =  TimeLeft / 3600;
+    u32 m = (TimeLeft / 60) % 60;
+    u32 s =  TimeLeft % 60;
+
+    float progressPercent = 100.0 * done / total;
+
+    prTxt->SetTextf("%.2f", progressPercent);
+
+    if (Settings.widescreen && Settings.wsprompt)
+        progressbarImg->SetSkew(0, 0, static_cast<int> (progressbarImg->GetWidth() * progressPercent * 0.8)
+                - progressbarImg->GetWidth(), 0, static_cast<int> (progressbarImg->GetWidth() * progressPercent
+                * 0.8) - progressbarImg->GetWidth(), 0, 0, 0);
+    else
+        progressbarImg->SetSkew(0, 0, static_cast<int> (progressbarImg->GetWidth() * progressPercent)
+            - progressbarImg->GetWidth(), 0, static_cast<int> (progressbarImg->GetWidth() * progressPercent)
+            - progressbarImg->GetWidth(), 0, 0, 0);
+
+    if (showTime == true)
+    {
+        timeTxt->SetTextf("%s %d:%02d:%02d", tr( "Time left:" ), h, m, s);
+    }
+
+    if (showSize == true)
+    {
+        if (total < MB_SIZE)
+            sizeTxt->SetTextf("%0.2fKB/%0.2fKB", done / KB_SIZE, total / KB_SIZE);
+        else if (total > MB_SIZE && total < GB_SIZE)
+            sizeTxt->SetTextf("%0.2fMB/%0.2fMB", done / MB_SIZE, total / MB_SIZE);
+        else
+            sizeTxt->SetTextf("%0.2fGB/%0.2fGB", done / GB_SIZE, total / GB_SIZE);
+
+        speedTxt->SetTextf("%dKB/s", (int) (speed/KB_SIZE));
+    }
 }
 
 /****************************************************************************
@@ -255,42 +340,18 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
     mainWindow->ChangeFocus(&promptWindow);
     ResumeGui();
 
-    while (promptWindow.GetEffect() > 0)
-        usleep(100);
+    while (promptWindow.GetEffect() > 0) usleep(100);
 
-    int tmp;
     while (showProgress)
     {
         usleep(100000);
 
-        GameInstallProgress();
-
         if (changed)
         {
-            changed = false;
-
-            tmp = static_cast<int> (progressbarImg.GetWidth() * progressDone);
-
-            if (Settings.widescreen && Settings.wsprompt)
-                progressbarImg.SetSkew(0, 0, static_cast<int> (progressbarImg.GetWidth() * progressDone * 0.8)
-                        - progressbarImg.GetWidth(), 0, static_cast<int> (progressbarImg.GetWidth() * progressDone
-                        * 0.8) - progressbarImg.GetWidth(), 0, 0, 0);
-            else progressbarImg.SetSkew(0, 0, static_cast<int> (progressbarImg.GetWidth() * progressDone)
-                    - progressbarImg.GetWidth(), 0, static_cast<int> (progressbarImg.GetWidth() * progressDone)
-                    - progressbarImg.GetWidth(), 0, 0, 0);
-
-            prTxt.SetTextf("%.2f", progressDone);
-
-            if (showSize)
-            {
-                sizeTxt.SetText(progressSizeLeft);
-                speedTxt.SetText(progressSpeed);
-            }
-
-            if (showTime) timeTxt.SetText(progressTime);
-
             if (progressMsg1) msg1Txt.SetText(progressMsg1);
             if (progressMsg2) msg2Txt.SetText(progressMsg2);
+
+            UpdateProgressValues(&progressbarImg, &prTxt, &timeTxt, &speedTxt, &sizeTxt);
         }
 
         if(cancelBtn.GetState() == STATE_CLICKED)
@@ -301,8 +362,7 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
     }
 
     promptWindow.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 50);
-    while (promptWindow.GetEffect() > 0)
-        usleep(100);
+    while (promptWindow.GetEffect() > 0) usleep(100);
 
     HaltGui();
     mainWindow->Remove(&promptWindow);
@@ -313,7 +373,6 @@ static void ProgressWindow(const char *title, const char *msg1, const char *msg2
 /****************************************************************************
  * ProgressThread
  ***************************************************************************/
-
 static void * ProgressThread(void *arg)
 {
     while (1)
@@ -327,113 +386,13 @@ static void * ProgressThread(void *arg)
 }
 
 /****************************************************************************
- * ProgressStop
- ***************************************************************************/
-void ProgressStop()
-{
-    showProgress = 0;
-	strcpy(progressTitle, "");
-	progressMsg1 = NULL;
-	progressMsg2 = NULL;
-    gameinstalltotal = -1;
-
-    // wait for thread to finish
-    while (!LWP_ThreadIsSuspended(progressthread))
-        usleep(100);
-}
-
-/****************************************************************************
- * ShowProgress
- *
- * Callbackfunction for updating the progress values
- * Use this function as standard callback
- ***************************************************************************/
-void ShowProgress(const char *title, const char *msg1, const char *msg2, f32 done, f32 total, bool swSize, bool swTime)
-{
-    if (total <= 0)
-        return;
-
-    else if (done > total) done = total;
-
-    showSize = swSize;
-    showTime = swTime;
-
-    if (title) strlcpy(progressTitle, title, sizeof(progressTitle));
-    progressMsg1 = msg1;
-    progressMsg2 = msg2;
-
-    static u32 expected;
-
-    u32 elapsed, h, m, s, speed = 0;
-
-    if (!done)
-    {
-        start = time(0);
-        expected = 300;
-        LWP_ResumeThread(progressthread);
-    }
-
-    //Elapsed time
-    elapsed = time(0) - start;
-
-    //Calculate speed in KB/s
-    if (elapsed > 0) speed = done / (elapsed * KB_SIZE);
-
-    if (done != total)
-    {
-        //Expected time
-        if (elapsed) expected = (expected * 3 + elapsed * total / done) / 4;
-
-        //Remaining time
-        elapsed = (expected > elapsed) ? (expected - elapsed) : 0;
-    }
-
-    //Calculate time values
-    h = elapsed / 3600;
-    m = (elapsed / 60) % 60;
-    s = elapsed % 60;
-
-    if (swTime == true)
-    {
-        snprintf(progressTime, sizeof(progressTime), "%s %d:%02d:%02d", tr( "Time left:" ), h, m, s);
-    }
-
-    if (swSize == true)
-    {
-        if (total < MB_SIZE)
-            snprintf(progressSizeLeft, sizeof(progressSizeLeft), "%0.2fKB/%0.2fKB", done * done / total / KB_SIZE,
-                    total / KB_SIZE);
-        else if (total > MB_SIZE && total < GB_SIZE)
-            snprintf(progressSizeLeft, sizeof(progressSizeLeft), "%0.2fMB/%0.2fMB", done * done / total / MB_SIZE,
-                    total / MB_SIZE);
-        else snprintf(progressSizeLeft, sizeof(progressSizeLeft), "%0.2fGB/%0.2fGB", done * done / total / GB_SIZE,
-                total / GB_SIZE);
-
-        snprintf(progressSpeed, sizeof(progressSpeed), "%dKB/s", speed);
-    }
-
-    showProgress = 1;
-    progressDone = 100.0 * done / total;
-    changed = true;
-}
-
-/****************************************************************************
- * ProgressSetAbortCallback
- *
- * Set a callback for the cancel button
- ***************************************************************************/
-void ProgressSetAbortCallback(ProgressAbortCallback callback)
-{
-    AbortCallback = callback;
-}
-
-/****************************************************************************
  * InitProgressThread
  *
  * Startup Progressthread in idle prio
  ***************************************************************************/
 void InitProgressThread()
 {
+    LWP_MutexInit(&ProgressMutex, true);
     LWP_CreateThread(&progressthread, ProgressThread, NULL, NULL, 16384, 80);
 }
 
@@ -446,4 +405,6 @@ void ExitProgressThread()
 {
     LWP_JoinThread(progressthread, NULL);
     progressthread = LWP_THREAD_NULL;
+    LWP_MutexUnlock(ProgressMutex);
+    LWP_MutexDestroy(ProgressMutex);
 }

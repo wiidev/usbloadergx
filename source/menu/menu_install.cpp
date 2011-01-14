@@ -7,7 +7,7 @@
 #include "prompts/ProgressWindow.h"
 #include "themes/CTheme.h"
 
-float gamesize;
+float gamesize = -1.0f;
 
 /****************************************************************************
  * MenuInstall
@@ -79,12 +79,11 @@ int MenuInstall()
             char errortxt[50];
             sprintf(errortxt, "%s: %.2fGB, %s: %.2fGB", tr( "Game Size" ), gamesize, tr( "Free Space" ), freespace);
             WindowPrompt(tr( "Not enough free space!" ), errortxt, tr( "OK" ));
-            return MENU_DISCLIST;
         }
         else
         {
             USBStorage2_Watchdog(0);
-            SetupGameInstallProgress(gametxt, name);
+			StartProgress(gametxt, name, 0, true, true);
             ret = WBFS_AddGame();
             ProgressStop();
             USBStorage2_Watchdog(1);
@@ -92,7 +91,6 @@ int MenuInstall()
             if (ret != 0)
             {
                 WindowPrompt(tr( "Install Error!" ), 0, tr( "Back" ));
-                return MENU_DISCLIST;
             }
             else
             {
@@ -108,15 +106,13 @@ int MenuInstall()
                 instsuccess->Stop();
                 delete instsuccess;
                 bgMusic->Resume();
-                return MENU_DISCLIST;
             }
         }
     }
-    else
-        return MENU_DISCLIST;
 
     //Turn off the WiiLight
     wiilight(0);
+    gamesize = -1.0f;
 
     return MENU_DISCLIST;
 }

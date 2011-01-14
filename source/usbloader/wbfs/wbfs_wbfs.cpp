@@ -111,7 +111,7 @@ s32 Wbfs_Wbfs::AddGame()
     partition_selector_t part_sel = (partition_selector_t) Settings.InstallPartitions;
 
     /* Add game to device */
-    ret = wbfs_add_disc(hdd, __ReadDVD, NULL, ProgressCallback, part_sel, 0);
+    ret = wbfs_add_disc(hdd, __ReadDVD, NULL, ShowProgress, part_sel, 0);
     if (ret < 0) return ret;
 
     return 0;

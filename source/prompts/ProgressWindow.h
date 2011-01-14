@@ -10,20 +10,20 @@
 
 typedef void (*ProgressAbortCallback)(void);
 
+#ifdef __cplusplus
+
 void InitProgressThread();
 void ExitProgressThread();
-void SetupGameInstallProgress(char * titl, char * game);
-void ShowProgress(const char *title, const char *msg1, const char *msg2, f32 done, f32 total, bool swSize = false,
-        bool swTime = false);
-void ProgressStop();
-void ProgressSetAbortCallback(ProgressAbortCallback callback);
+void ShowProgress(const char *title, const char *msg1, const char *msg2, s64 done, s64 total, bool swSize = false, bool swTime = false);
 
-#ifdef __cplusplus
 extern "C"
 {
 #endif
 
-    void ProgressCallback(s64 gameinstalldone, s64 gameinstalltotal);
+void StartProgress(const char * title, const char * msg1, const char * msg2, bool swSize, bool swTime);
+void ShowProgress(s64 done, s64 total);
+void ProgressSetAbortCallback(ProgressAbortCallback callback);
+void ProgressStop();
 
 #ifdef __cplusplus
 }
