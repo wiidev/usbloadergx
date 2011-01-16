@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-09 11:32+0100\n"
+"POT-Creation-Date: 2011-01-16 14:42+0100\n"
 "PO-Revision-Date: 2009-12-29 11:05+0100\n"
 "Last-Translator: Springdale\n"
 "Language-Team: Tusk, Springdale\n"
@@ -400,6 +400,9 @@ msgstr ""
 msgid "Do you want to load this theme?"
 msgstr ""
 
+msgid "Do you want to sync free space info sector on all FAT32 partitions?"
+msgstr ""
+
 msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "Köztudottan működõ alternatív DOL használata?"
 
@@ -752,6 +755,9 @@ msgstr "Balra"
 
 msgid "Like SysMenu"
 msgstr "Mint a Rendszermenü"
+
+msgid "List on Gamelaunch"
+msgstr ""
 
 msgid "Load"
 msgstr "Betöltés"
@@ -1165,6 +1171,12 @@ msgstr "Téma kicsomagolva."
 msgid "Successfully installed:"
 msgstr "Sikeresen telepítve:"
 
+msgid "Sync FAT32 FS Info"
+msgstr ""
+
+msgid "Synchronizing..."
+msgstr ""
+
 msgid "System Default"
 msgstr "Rendszer Alapértelmezett"
 
@@ -1292,6 +1304,9 @@ msgstr "Nyelvi fájlok frissítése:"
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Feltöltött ZIP fájl telepítve a Homebrew mappába."
 
+msgid "Use IOS58"
+msgstr ""
+
 msgid "VIDTV Patch"
 msgstr ""
 
@@ -1301,6 +1316,9 @@ msgstr "Verzió: %s"
 
 msgid "Video Mode"
 msgstr "Videó Mód"
+
+msgid "WDM Files Path"
+msgstr ""
 
 msgid "WIP Patches Path"
 msgstr "WIP Patch útvonal"

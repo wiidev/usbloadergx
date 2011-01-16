@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-09 11:32+0100\n"
+"POT-Creation-Date: 2011-01-16 14:42+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Nitro_subzero \n"
 "Language-Team: Nitro_subzero\n"
@@ -400,6 +400,9 @@ msgstr ""
 msgid "Do you want to load this theme?"
 msgstr ""
 
+msgid "Do you want to sync free space info sector on all FAT32 partitions?"
+msgstr ""
+
 msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "ต้องการจะใช้ alt DOL เฉพาะที่รู้ว่าถูกต้อง?"
 
@@ -752,6 +755,9 @@ msgstr "ซ้าย"
 
 msgid "Like SysMenu"
 msgstr "คล้าย SysMenu"
+
+msgid "List on Gamelaunch"
+msgstr ""
 
 msgid "Load"
 msgstr "โหลด"
@@ -1165,6 +1171,12 @@ msgstr "ขยายไฟล์ธีมสำเร็จ."
 msgid "Successfully installed:"
 msgstr "ติดตั้งสำเร็จ:"
 
+msgid "Sync FAT32 FS Info"
+msgstr ""
+
+msgid "Synchronizing..."
+msgstr ""
+
 msgid "System Default"
 msgstr "ค่าเริ่มต้นของระบบ"
 
@@ -1292,6 +1304,9 @@ msgstr "กำลังอัพเดทไฟล์ภาษา:"
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "อัพโหลดไฟล์ zip ไปที่ไดเรคทอรี่ homebrew"
 
+msgid "Use IOS58"
+msgstr ""
+
 msgid "VIDTV Patch"
 msgstr "ปรับแก้ VIDTV"
 
@@ -1301,6 +1316,9 @@ msgstr "เวอร์ชั่น: %s"
 
 msgid "Video Mode"
 msgstr "โหมดการแสดงผลภาพ"
+
+msgid "WDM Files Path"
+msgstr ""
 
 msgid "WIP Patches Path"
 msgstr ""

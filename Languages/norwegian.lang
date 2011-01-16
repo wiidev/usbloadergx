@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-09 11:32+0100\n"
+"POT-Creation-Date: 2011-01-16 14:42+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: raschi\n"
 "Language-Team: raschi\n"
@@ -400,6 +400,9 @@ msgstr ""
 msgid "Do you want to load this theme?"
 msgstr ""
 
+msgid "Do you want to sync free space info sector on all FAT32 partitions?"
+msgstr ""
+
 msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "Vil du bruke alt DOL filen som er kjent for å være riktig?"
 
@@ -752,6 +755,9 @@ msgstr "Venstre"
 
 msgid "Like SysMenu"
 msgstr "Lik Systemmeny"
+
+msgid "List on Gamelaunch"
+msgstr ""
 
 msgid "Load"
 msgstr "Start"
@@ -1165,6 +1171,12 @@ msgstr "Vellykket utpakking av tema."
 msgid "Successfully installed:"
 msgstr "Vellykket installering:"
 
+msgid "Sync FAT32 FS Info"
+msgstr ""
+
+msgid "Synchronizing..."
+msgstr ""
+
 msgid "System Default"
 msgstr "System Standard"
 
@@ -1292,6 +1304,9 @@ msgstr "Oppdaterer språkfiler:"
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Opplastet ZIP fil installert i homebrew mappen."
 
+msgid "Use IOS58"
+msgstr ""
+
 msgid "VIDTV Patch"
 msgstr ""
 
@@ -1301,6 +1316,9 @@ msgstr "Versjon: %s"
 
 msgid "Video Mode"
 msgstr "Video modus"
+
+msgid "WDM Files Path"
+msgstr ""
 
 msgid "WIP Patches Path"
 msgstr ""

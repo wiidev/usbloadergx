@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-09 11:32+0100\n"
+"POT-Creation-Date: 2011-01-16 14:42+0100\n"
 "PO-Revision-Date: 2009-10-23 18:52+0200\n"
 "Last-Translator: aniemotion\n"
 "Language-Team: boto12, aniemotion\n"
@@ -400,6 +400,9 @@ msgstr ""
 msgid "Do you want to load this theme?"
 msgstr ""
 
+msgid "Do you want to sync free space info sector on all FAT32 partitions?"
+msgstr ""
+
 msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "Deseja usar o DOL alternativo que pensa ser o correcto?"
 
@@ -752,6 +755,9 @@ msgstr "Esquerda"
 
 msgid "Like SysMenu"
 msgstr "Igual ao Menu do Wii"
+
+msgid "List on Gamelaunch"
+msgstr ""
 
 msgid "Load"
 msgstr "Carregar"
@@ -1165,6 +1171,12 @@ msgstr "Tema extraido com sucesso."
 msgid "Successfully installed:"
 msgstr "Instalado com Sucesso:"
 
+msgid "Sync FAT32 FS Info"
+msgstr ""
+
+msgid "Synchronizing..."
+msgstr ""
+
 msgid "System Default"
 msgstr "Padrão do Sistema"
 
@@ -1292,6 +1304,9 @@ msgstr "Atualizando arquivos de Idioma:"
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Arquivo ZIP enviado y instalado no diretório homebrew."
 
+msgid "Use IOS58"
+msgstr ""
+
 msgid "VIDTV Patch"
 msgstr "Patch VIDTV"
 
@@ -1301,6 +1316,9 @@ msgstr "Versão: %s"
 
 msgid "Video Mode"
 msgstr "Modo de Vídeo"
+
+msgid "WDM Files Path"
+msgstr ""
 
 msgid "WIP Patches Path"
 msgstr "Caminho WIP Patches"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-09 11:32+0100\n"
+"POT-Creation-Date: 2011-01-16 14:42+0100\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
 "Last-Translator: Jane.H\n"
 "Language-Team: kyogc, Miller, Mika Li, Jane.H\n"
@@ -400,6 +400,9 @@ msgstr "是否要載入預設佈景主題嗎？"
 msgid "Do you want to load this theme?"
 msgstr "是否要載入這佈景主題嗎？"
 
+msgid "Do you want to sync free space info sector on all FAT32 partitions?"
+msgstr ""
+
 msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "是否要使用這個已知是正確的 Alt DOL 檔案嗎？"
 
@@ -752,6 +755,9 @@ msgstr "左"
 
 msgid "Like SysMenu"
 msgstr "同系統選單"
+
+msgid "List on Gamelaunch"
+msgstr ""
 
 msgid "Load"
 msgstr "載入"
@@ -1165,6 +1171,12 @@ msgstr "成功獲取主題。"
 msgid "Successfully installed:"
 msgstr "成功安裝："
 
+msgid "Sync FAT32 FS Info"
+msgstr ""
+
+msgid "Synchronizing..."
+msgstr ""
+
 msgid "System Default"
 msgstr "系統預設值"
 
@@ -1292,6 +1304,9 @@ msgstr "正在更新語言檔案："
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "已更新安裝在Homebrew目錄的ZIP檔案"
 
+msgid "Use IOS58"
+msgstr ""
+
 msgid "VIDTV Patch"
 msgstr "VIDTV 修改"
 
@@ -1301,6 +1316,9 @@ msgstr "版本: %s"
 
 msgid "Video Mode"
 msgstr "視訊格式"
+
+msgid "WDM Files Path"
+msgstr ""
 
 msgid "WIP Patches Path"
 msgstr "WIP 修正檔路徑"

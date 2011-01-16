@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-09 11:32+0100\n"
+"POT-Creation-Date: 2011-01-16 14:42+0100\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: TheRealVisitor\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
@@ -400,6 +400,9 @@ msgstr "Soll das DEFAULT Theme geladen werden?"
 msgid "Do you want to load this theme?"
 msgstr "Soll dieses Theme geladen werden?"
 
+msgid "Do you want to sync free space info sector on all FAT32 partitions?"
+msgstr ""
+
 msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "Die bekannte Alternative DOL verwenden?"
 
@@ -752,6 +755,9 @@ msgstr "Links"
 
 msgid "Like SysMenu"
 msgstr "System Menü"
+
+msgid "List on Gamelaunch"
+msgstr ""
 
 msgid "Load"
 msgstr "Laden"
@@ -1165,6 +1171,12 @@ msgstr "Theme erfolgreich entpackt."
 msgid "Successfully installed:"
 msgstr "Erfolgreich installiert:"
 
+msgid "Sync FAT32 FS Info"
+msgstr ""
+
+msgid "Synchronizing..."
+msgstr ""
+
 msgid "System Default"
 msgstr "Konsolenstandard"
 
@@ -1292,6 +1304,9 @@ msgstr "Aktualisiere Sprachdateien:"
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Die hochgeladene ZIP Datei wurde ins Homebrew Verzeichnis installiert."
 
+msgid "Use IOS58"
+msgstr ""
+
 msgid "VIDTV Patch"
 msgstr "VIDTV Patch"
 
@@ -1301,6 +1316,9 @@ msgstr "Version: %s"
 
 msgid "Video Mode"
 msgstr "Videomodus"
+
+msgid "WDM Files Path"
+msgstr ""
 
 msgid "WIP Patches Path"
 msgstr "WIP Patches"

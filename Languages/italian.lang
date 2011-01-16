@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-09 11:32+0100\n"
+"POT-Creation-Date: 2011-01-16 14:42+0100\n"
 "PO-Revision-Date: 2011-01-09 22:30+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: Cambo\n"
@@ -400,6 +400,9 @@ msgstr "Vuoi caricare il tema predefinito?"
 msgid "Do you want to load this theme?"
 msgstr "Vuoi caricare questo tema?"
 
+msgid "Do you want to sync free space info sector on all FAT32 partitions?"
+msgstr ""
+
 msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "Vuoi utilizzare il DOL alternativo funzionante?"
 
@@ -752,6 +755,9 @@ msgstr "Sinistra"
 
 msgid "Like SysMenu"
 msgstr "Come SysMenu"
+
+msgid "List on Gamelaunch"
+msgstr ""
 
 msgid "Load"
 msgstr "Carica"
@@ -1165,6 +1171,12 @@ msgstr "Tema scompattato correttamente."
 msgid "Successfully installed:"
 msgstr "Installato correttamente:"
 
+msgid "Sync FAT32 FS Info"
+msgstr ""
+
+msgid "Synchronizing..."
+msgstr ""
+
 msgid "System Default"
 msgstr "Predefinita Sistema"
 
@@ -1292,6 +1304,9 @@ msgstr "Aggiornamento file delle lingue:"
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "File ZIP installato nella cartella Homebrew"
 
+msgid "Use IOS58"
+msgstr ""
+
 msgid "VIDTV Patch"
 msgstr "Video Forzato"
 
@@ -1301,6 +1316,9 @@ msgstr "Versione: %s"
 
 msgid "Video Mode"
 msgstr "Modalità Video"
+
+msgid "WDM Files Path"
+msgstr ""
 
 msgid "WIP Patches Path"
 msgstr "Cart. Patch WIP"

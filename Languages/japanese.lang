@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-09 11:32+0100\n"
+"POT-Creation-Date: 2011-01-16 14:42+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
@@ -400,6 +400,9 @@ msgstr "標準のテーマを読み込みますか?"
 msgid "Do you want to load this theme?"
 msgstr "このテーマを読み込みますか?"
 
+msgid "Do you want to sync free space info sector on all FAT32 partitions?"
+msgstr ""
+
 msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "既知の代替DOLを利用しますか？"
 
@@ -752,6 +755,9 @@ msgstr "左ボタンで"
 
 msgid "Like SysMenu"
 msgstr "Wiiメニュー風"
+
+msgid "List on Gamelaunch"
+msgstr ""
 
 msgid "Load"
 msgstr "はじめる"
@@ -1165,6 +1171,12 @@ msgstr "テーマの解凍を完了しました."
 msgid "Successfully installed:"
 msgstr "このｹﾞｰﾑをｲﾝｽﾄｰﾙしました"
 
+msgid "Sync FAT32 FS Info"
+msgstr ""
+
+msgid "Synchronizing..."
+msgstr ""
+
 msgid "System Default"
 msgstr "Wiiのデフォルト"
 
@@ -1292,6 +1304,9 @@ msgstr "言語ファイルを更新中:"
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "ｲﾝｽﾄｰﾙ済みﾃﾞｨﾚｸﾄﾘにZIPを送信しました"
 
+msgid "Use IOS58"
+msgstr ""
+
 msgid "VIDTV Patch"
 msgstr "映像パッチ"
 
@@ -1301,6 +1316,9 @@ msgstr "バージョン: %s"
 
 msgid "Video Mode"
 msgstr "映像の出力方法"
+
+msgid "WDM Files Path"
+msgstr ""
 
 msgid "WIP Patches Path"
 msgstr "WIPパッチのパス"

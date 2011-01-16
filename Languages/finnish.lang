@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-09 11:32+0100\n"
+"POT-Creation-Date: 2011-01-16 14:42+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: c64rmx\n"
 "Language-Team: \n"
@@ -400,6 +400,9 @@ msgstr ""
 msgid "Do you want to load this theme?"
 msgstr ""
 
+msgid "Do you want to sync free space info sector on all FAT32 partitions?"
+msgstr ""
+
 msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "Haluatko käyttää vaihtoehtoista DOL tiedostoa jonka tiedetään toimivan?"
 
@@ -752,6 +755,9 @@ msgstr "Vasen"
 
 msgid "Like SysMenu"
 msgstr "Kuin wii-menu"
+
+msgid "List on Gamelaunch"
+msgstr ""
 
 msgid "Load"
 msgstr "Lataa"
@@ -1165,6 +1171,12 @@ msgstr ""
 msgid "Successfully installed:"
 msgstr "Asennettu onnistuneesti:"
 
+msgid "Sync FAT32 FS Info"
+msgstr ""
+
+msgid "Synchronizing..."
+msgstr ""
+
 msgid "System Default"
 msgstr "Wiin oletus"
 
@@ -1292,6 +1304,9 @@ msgstr "Päivittää kielitiedostoja:"
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr ""
 
+msgid "Use IOS58"
+msgstr ""
+
 msgid "VIDTV Patch"
 msgstr "VIDTV korjaus"
 
@@ -1301,6 +1316,9 @@ msgstr "Versio: %s"
 
 msgid "Video Mode"
 msgstr "Videotila"
+
+msgid "WDM Files Path"
+msgstr ""
 
 msgid "WIP Patches Path"
 msgstr ""

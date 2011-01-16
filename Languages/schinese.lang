@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-10 21:54+0100\n"
+"POT-Creation-Date: 2011-01-16 14:42+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: knife.hu kavid emul8ion\n"
 "Language-Team: kavid\n"
@@ -400,6 +400,9 @@ msgstr "要加载默认主题吗?"
 msgid "Do you want to load this theme?"
 msgstr "是否载入这个主题？"
 
+msgid "Do you want to sync free space info sector on all FAT32 partitions?"
+msgstr ""
+
 msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "使用这个已知是正确的 Alt DOL 文件?"
 
@@ -752,6 +755,9 @@ msgstr "左"
 
 msgid "Like SysMenu"
 msgstr "同系统选单"
+
+msgid "List on Gamelaunch"
+msgstr ""
 
 msgid "Load"
 msgstr "载入"
@@ -1165,6 +1171,12 @@ msgstr "解压主题成功"
 msgid "Successfully installed:"
 msgstr "成功安装:"
 
+msgid "Sync FAT32 FS Info"
+msgstr ""
+
+msgid "Synchronizing..."
+msgstr ""
+
 msgid "System Default"
 msgstr "系统默认"
 
@@ -1292,6 +1304,9 @@ msgstr "正在升级语言文件:"
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "上传已安装Zip文件到自制程序目录"
 
+msgid "Use IOS58"
+msgstr ""
+
 msgid "VIDTV Patch"
 msgstr "VIDTV修改"
 
@@ -1301,6 +1316,9 @@ msgstr "版本: %s"
 
 msgid "Video Mode"
 msgstr "视频制式"
+
+msgid "WDM Files Path"
+msgstr ""
 
 msgid "WIP Patches Path"
 msgstr "WIP补丁路径"

@@ -377,7 +377,7 @@ int LoaderSettings::GetMenuInternal()
         int choice = WindowPrompt(0, tr("Do you want to sync free space info sector on all FAT32 partitions?"), tr("Yes"), tr("Cancel"));
         if(choice)
         {
-            StartProgress(tr("Synchornizing..."), tr("Please wait..."), 0, false, false);
+            StartProgress(tr("Synchronizing..."), tr("Please wait..."), 0, false, false);
             PartitionHandle * usb = DeviceHandler::Instance()->GetUSBHandle();
             for(int i = 0; i < usb->GetPartitionCount(); ++i)
             {
