@@ -35,8 +35,6 @@ static bool showTime = false;
 static bool showSize = false;
 static bool changed = true;
 
-extern float gamesize;
-
 /****************************************************************************
  * StartProgress
  ***************************************************************************/
@@ -143,16 +141,18 @@ static void UpdateProgressValues(GuiImage *progressbarImg, GuiText *prTxt, GuiTe
     if(!changed)
         return;
 
+    extern u64 gamesize;
+
     LWP_MutexLock(ProgressMutex);
     changed = false;
     s64 done = progressDone;
     s64 total = progressTotal;
     u32 speed = 0;
 
-    if(gamesize > 0.0f)
+    if(gamesize > 0)
     {
-        done = (s64) ((float) done / (float) total * gamesize * GB_SIZE);
-        total = (s64) (gamesize * GB_SIZE);
+        done = (s64) ((double) done / (double) total * (double) gamesize);
+        total = (s64) gamesize;
     }
 
     //Calculate speed in KB/s
@@ -161,13 +161,16 @@ static void UpdateProgressValues(GuiImage *progressbarImg, GuiText *prTxt, GuiTe
 
     LWP_MutexUnlock(ProgressMutex);
 
-    u32 TimeLeft = 0;
+    u32 TimeLeft = 0, h = 0, m = 0, s = 0;
     if(speed > 0)
         TimeLeft = (total-done)/speed;
 
-    u32 h =  TimeLeft / 3600;
-    u32 m = (TimeLeft / 60) % 60;
-    u32 s =  TimeLeft % 60;
+    if(TimeLeft > 0)
+    {
+        h =  TimeLeft / 3600;
+        m = (TimeLeft / 60) % 60;
+        s =  TimeLeft % 60;
+    }
 
     float progressPercent = 100.0 * done / total;
 

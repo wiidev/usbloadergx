@@ -10,15 +10,11 @@
 /* Constants */
 #define MAX_NB_SECTORS  32
 
-u32 sector_size = 512;
 rw_sector_callback_t readCallback = NULL;
 rw_sector_callback_t writeCallback = NULL;
 const DISC_INTERFACE * currentHandle = NULL;
 
-void SetSectorSize(u32 size)
-{
-    sector_size = size;
-}
+static const u32 sector_size = 512;
 
 s32 __ReadDVD(void *fp, u32 lba, u32 len, void *iobuf)
 {

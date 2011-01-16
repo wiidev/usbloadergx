@@ -95,6 +95,7 @@ class CSettings
         char TxtCheatcodespath[100];
         char BcaCodepath[100];
         char WipCodepath[100];
+        char WDMpath[100];
         short error002;
         short titlesOverride; // db_titles
         char db_url[200];

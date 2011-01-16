@@ -318,7 +318,7 @@ s32 Wbfs_Fat::ReIDGame(u8 *discid, const void *newID)
     return ret;
 }
 
-f32 Wbfs_Fat::EstimateGameSize()
+u64 Wbfs_Fat::EstimateGameSize()
 {
     wbfs_t *part = NULL;
     u64 size = (u64) 143432 * 2 * 0x8000ULL;
@@ -332,7 +332,12 @@ f32 Wbfs_Fat::EstimateGameSize()
     wii_sec_sz = part->wii_sec_sz;
 
     partition_selector_t part_sel = (partition_selector_t) Settings.InstallPartitions;
-    return wbfs_estimate_disc(part, __ReadDVD, NULL, part_sel);
+
+    u64 estimated_size = wbfs_estimate_disc(part, __ReadDVD, NULL, part_sel);
+
+    wbfs_close(part);
+
+    return estimated_size;
 }
 
 // TITLE [GAMEID]

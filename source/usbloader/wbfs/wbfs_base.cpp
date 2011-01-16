@@ -61,7 +61,6 @@ s32 Wbfs::Init(u32 device)
 
                 /* Device info */
                 nb_sectors = 0;
-                sector_size = SDHC_SECTOR_SIZE;
             }
             else return -1;
             break;

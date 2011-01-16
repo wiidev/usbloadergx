@@ -47,6 +47,7 @@ CustomPathsSM::CustomPathsSM()
     Options->SetName(Idx++, tr("BCA Codes Path"));
     Options->SetName(Idx++, tr("WIP Patches Path"));
     Options->SetName(Idx++, tr("Languagefiles Path"));
+    Options->SetName(Idx++, tr("WDM Files Path"));
 
     SetOptionValues();
 }
@@ -93,6 +94,9 @@ void CustomPathsSM::SetOptionValues()
 
     //! Settings: Languagefiles Path
     Options->SetValue(Idx++, Settings.languagefiles_path);
+
+    //! Settings: WDM Files Path
+    Options->SetValue(Idx++, Settings.WDMpath);
 }
 
 int CustomPathsSM::GetMenuInternal()
@@ -203,6 +207,13 @@ int CustomPathsSM::GetMenuInternal()
     {
         titleTxt->SetText(tr( "Languagefiles Path" ));
         ChangePath(Settings.languagefiles_path, sizeof(Settings.languagefiles_path));
+    }
+
+    //! Settings: WDM Files Path
+    else if (ret == ++Idx)
+    {
+        titleTxt->SetText(tr( "WDM Files Path" ));
+        ChangePath(Settings.WDMpath, sizeof(Settings.WDMpath));
     }
 
     //! Global set back of the titleTxt after a change

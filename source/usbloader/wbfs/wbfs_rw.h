@@ -8,7 +8,6 @@ extern "C"
 
 #include "libs/libwbfs/libwbfs.h"
 
-    extern u32 sector_size;
     extern rw_sector_callback_t readCallback;
     extern rw_sector_callback_t writeCallback;
     extern const DISC_INTERFACE * currentHandle;

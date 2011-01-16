@@ -1,4 +1,5 @@
 #include "menu/menus.h"
+#include "menu/WDMMenu.hpp"
 #include "mload/mload.h"
 #include "mload/mload_modules.h"
 #include "system/IosLoader.h"
@@ -35,7 +36,7 @@ extern int mountMethod;
 static u32 BootPartition(char * dolpath, u8 videoselected, u8 languageChoice, u8 cheat, u8 vipatch, u8 patchcountrystring,
 	u8 alternatedol, u32 alternatedoloffset, u32 returnTo, u8 fix002)
 {
-    gprintf("booting partition IOS %u v%u\n", IOS_GetVersion(), IOS_GetRevision());
+    gprintf("booting partition IOS %u r%u\n", IOS_GetVersion(), IOS_GetRevision());
     entry_point p_entry;
     s32 ret;
     u64 offset;
@@ -140,6 +141,9 @@ int BootGame(const char * gameID)
         returnToLoaderGV = game_cfg->returnTo;
     }
 
+    if(alternatedol == 3)
+        alternatedoloffset = WDMMenu::GetAlternateDolOffset();
+
     if(iosChoice != IOS_GetVersion())
     {
         gprintf("Reloading into game cIOS: %i...\n", iosChoice);
@@ -230,7 +234,7 @@ int BootGame(const char * gameID)
 
         gprintf("Jumping to game entrypoint: 0x%08X.\n", AppEntrypoint);
 
-        return Disc_JumpToEntrypoint(videoChoice, enablecheat);
+        return Disc_JumpToEntrypoint(videoChoice, enablecheat, WDMMenu::GetDolParameter());
     }
 
     WDVD_ClosePartition();

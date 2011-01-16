@@ -130,7 +130,7 @@ s32 Apploader_Run(entry_point *entry, char * dolpath, u8 cheat, u8 videoSelected
 
         if (dolbuffer) free(dolbuffer);
     }
-    else if (alternatedol == 1)
+    else if ((alternatedol == 1 || alternatedol == 3) && alternatedoloffset != 0)
     {
         wip_reset_counter();
         FST_ENTRY *fst = (FST_ENTRY *) *(u32 *) 0x80000038;

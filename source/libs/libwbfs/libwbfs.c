@@ -631,8 +631,7 @@ u32 wbfs_extract_disc(wbfs_disc_t*d, rw_sector_callback_t write_dst_wii_sector, 
     error: return 1;
 }
 
-float wbfs_estimate_disc(wbfs_t *p, read_wiidisc_callback_t read_src_wii_disc, void *callback_data,
-        partition_selector_t sel)
+u64 wbfs_estimate_disc(wbfs_t *p, read_wiidisc_callback_t read_src_wii_disc, void *callback_data, partition_selector_t sel)
 {
     u8 *b;
     int i;
@@ -664,8 +663,6 @@ float wbfs_estimate_disc(wbfs_t *p, read_wiidisc_callback_t read_src_wii_disc, v
     b = (u8 *) info;
     read_src_wii_disc(callback_data, 0, 0x100, info->disc_header_copy);
 
-    //fprintf(stderr, "estimating %c%c%c%c%c%c %s...\n",b[0], b[1], b[2], b[3], b[4], b[5], b + 0x20);
-
     for (i = 0; i < p->n_wbfs_sec_per_disc; i++)
     {
         if (block_used(used, i, wii_sec_per_wbfs_sect))
@@ -673,16 +670,15 @@ float wbfs_estimate_disc(wbfs_t *p, read_wiidisc_callback_t read_src_wii_disc, v
             tot++;
         }
     }
-    //memcpy(header, b,0x100);
 
-    error: if (d) wd_close_disc(d);
-
+    error:
+    if (d) wd_close_disc(d);
     if (used) wbfs_free( used );
-
     if (info) wbfs_iofree( info );
 
-    return tot * (((p->wbfs_sec_sz * 1.0) / p->hd_sec_sz) * 512);
+    return (u64) tot * (u64) p->wbfs_sec_sz;
 }
+
 u32 wbfs_size_disc(wbfs_t*p, read_wiidisc_callback_t read_src_wii_disc, void *callback_data, partition_selector_t sel,
         u32 *comp_size, u32 *real_size)
 {

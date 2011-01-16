@@ -22,9 +22,11 @@
  * distribution.
  ***************************************************************************/
 #include <unistd.h>
+#include <sys/statvfs.h>
 #include "LoaderSettings.hpp"
 #include "Controls/DeviceHandler.hpp"
 #include "settings/CSettings.h"
+#include "prompts/ProgressWindow.h"
 #include "prompts/PromptWindows.h"
 #include "language/gettext.h"
 #include "wad/nandtitle.h"
@@ -121,6 +123,7 @@ LoaderSettings::LoaderSettings()
     Options->SetName(Idx++, "%s", tr( "Install partitions" ));
     Options->SetName(Idx++, "%s", tr( "Return To" ));
     Options->SetName(Idx++, "%s", tr( "Messageboard Update" ));
+    Options->SetName(Idx++, "%s", tr( "Sync FAT32 FS Info" ));
 
     SetOptionValues();
 
@@ -206,6 +209,9 @@ void LoaderSettings::SetOptionValues()
 
     //! Settings: Messageboard Update
     Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.PlaylogUpdate] ));
+
+    //! Settings: Sync FAT32 FS Info
+    Options->SetValue(Idx++, " ");
 }
 
 int LoaderSettings::GetMenuInternal()
@@ -363,6 +369,31 @@ int LoaderSettings::GetMenuInternal()
     else if (ret == ++Idx )
     {
         if (++Settings.PlaylogUpdate >= MAX_ON_OFF) Settings.PlaylogUpdate = 0;
+    }
+
+    //! Settings: Sync FAT32 FS Info
+    else if (ret == ++Idx )
+    {
+        int choice = WindowPrompt(0, tr("Do you want to sync free space info sector on all FAT32 partitions?"), tr("Yes"), tr("Cancel"));
+        if(choice)
+        {
+            StartProgress(tr("Synchornizing..."), tr("Please wait..."), 0, false, false);
+            PartitionHandle * usb = DeviceHandler::Instance()->GetUSBHandle();
+            for(int i = 0; i < usb->GetPartitionCount(); ++i)
+            {
+                ShowProgress(i, usb->GetPartitionCount());
+                if(strncmp(usb->GetFSName(i), "FAT", 3) == 0)
+                {
+                    struct statvfs stats;
+                    char drive[20];
+                    snprintf(drive, sizeof(drive), "%s:/", usb->MountName(i));
+                    memset(&stats, 0, sizeof(stats));
+                    memcpy(&stats.f_flag, "SCAN", 4);
+                    statvfs(drive, &stats);
+                }
+            }
+            ProgressStop();
+        }
     }
 
     SetOptionValues();

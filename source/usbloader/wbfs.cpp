@@ -164,7 +164,7 @@ s32 WBFS_ReIDGame(u8 *discid, const void *newID)
     return retval;
 }
 
-f32 WBFS_EstimeGameSize(void)
+u64 WBFS_EstimeGameSize(void)
 {
     return current->EstimateGameSize();
 }

@@ -76,9 +76,6 @@ int DiscBrowse(const char * GameID, char * alternatedname, int alternatedname_si
         const char * fileext = NULL;
 
         if(filename)
-            gprintf("%s\n", filename);
-
-        if(filename)
             fileext = strrchr(filename, '.');
 
         if (fileext && strcasecmp(fileext, ".dol") == 0)

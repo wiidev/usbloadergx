@@ -269,7 +269,7 @@ s32 Disc_IsWii(void)
     return 0;
 }
 
-s32 Disc_JumpToEntrypoint(u8 videoselected, bool enablecheat)
+s32 Disc_JumpToEntrypoint(u8 videoselected, bool enablecheat, u32 dolparameter)
 {
     /* Set an appropiate video mode */
     __Disc_SetVMode(videoselected);
@@ -289,6 +289,9 @@ s32 Disc_JumpToEntrypoint(u8 videoselected, bool enablecheat)
     u32 level = IRQ_Disable();
     __IOS_ShutdownSubsystems();
     __exception_closeall();
+
+     /* Originally from tueidj - taken from NeoGamme (thx) */
+	*(vu32*)0xCC003024 = dolparameter != 0 ? dolparameter : 1;
 
     if (enablecheat)
     {

@@ -83,6 +83,7 @@ static const char * AlternateDOLText[] =
     trNOOP( "OFF" ),
     trNOOP( "Select a DOL from Game" ),
     trNOOP( "Load From SD/USB" ),
+    trNOOP( "List on Gamelaunch" ),
 };
 
 GameLoadSM::GameLoadSM(const char * GameID)
@@ -326,7 +327,7 @@ int GameLoadSM::GetMenuInternal()
     //! Settings: Alternate DOL
     else if (ret == ++Idx)
     {
-        if (++GameConfig.loadalternatedol > 2)
+        if (++GameConfig.loadalternatedol > 3)
             GameConfig.loadalternatedol = 0;
     }
 

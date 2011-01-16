@@ -26,6 +26,7 @@
 #include "utils/ShowError.h"
 #include "utils/tools.h"
 #include "utils/PasswordCheck.h"
+#include "WDMMenu.hpp"
 #include "gecko.h"
 #include "menus.h"
 #include "wpad.h"
@@ -569,7 +570,7 @@ void GameBrowseMenu::ReloadBrowser()
         favoriteBtn->SetPosition(Settings.widescreen ? thInt("288 - list layout favorite btn pos x widescreen") : thInt("260 - list layout favorite btn pos x"),
                                 thInt("13 - list layout favorite btn pos y"));
         searchBtn->SetPosition(Settings.widescreen ? thInt("320 - list layout search btn pos x widescreen") : thInt("300 - list layout search btn pos x"),
-                                thInt("13 - list layout search btn pos x"));
+                                thInt("13 - list layout search btn pos y"));
         sortBtn->SetPosition(Settings.widescreen ? thInt("352 - list layout abc/sort btn pos x widescreen") : thInt("340 - list layout abc/sort btn pos x"),
                                 thInt("13 - list layout abc/sort btn pos y"));
         listBtn->SetPosition(Settings.widescreen ? thInt("384 - list layout list btn pos x widescreen") : thInt("380 - list layout list btn pos x"),
@@ -1238,13 +1239,6 @@ int GameBrowseMenu::OpenClickedGame()
     u8 alternatedol = OFF;
     u8 ocarinaChoice = Settings.ocarina;
 
-    GameCFG* game_cfg = GameSettings.GetGameCFG(header->id);
-    if (game_cfg)
-    {
-        alternatedol = game_cfg->loadalternatedol;
-        ocarinaChoice = game_cfg->ocarina;
-    }
-
     bool returnHere = true;// prompt to start game
     int choice = -1;
 
@@ -1273,18 +1267,37 @@ int GameBrowseMenu::OpenClickedGame()
 
         if (choice == 1)
         {
+            bool RunGame = true;
+            wiilight(0);
+
+            GameCFG* game_cfg = GameSettings.GetGameCFG(header->id);
+            if (game_cfg)
+            {
+                alternatedol = game_cfg->loadalternatedol;
+                ocarinaChoice = game_cfg->ocarina;
+            }
+
+            if(alternatedol == 3)
+                if(WDMMenu::Show(header) == 0)
+                {
+                    RunGame = false;
+                    returnHere = true;
+                }
+
             if (alternatedol == 2)
                 CheckAlternativeDOL(IDfull);
 
-            if (ocarinaChoice != OFF)
+            if (RunGame && ocarinaChoice != OFF)
                 CheckOcarina(IDfull);
 
-            wiilight(0);
-            GameStatistics.SetPlayCount(header->id, GameStatistics.GetPlayCount(header->id)+1);
-            GameStatistics.Save();
+            if(RunGame)
+            {
+                GameStatistics.SetPlayCount(header->id, GameStatistics.GetPlayCount(header->id)+1);
+                GameStatistics.Save();
 
-            //Just calling that shuts down everything and starts game
-            BootGame(IDfull);
+                //Just calling that shuts down everything and starts game
+                BootGame(IDfull);
+            }
         }
         else if (choice == 2)
         {

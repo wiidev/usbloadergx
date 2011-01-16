@@ -29,7 +29,7 @@ class Wbfs_Fat: public Wbfs
         s32 RenameGame(u8 *, const void *);
         s32 ReIDGame(u8 *, const void *);
 
-        f32 EstimateGameSize();
+        u64 EstimateGameSize();
 
         int GetFragList(u8 *);
         virtual bool ShowFreeSpace(void);

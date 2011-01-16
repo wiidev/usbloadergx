@@ -169,7 +169,7 @@ static void do_files(wiidisc_t*d)
 
         if(get_fst && !d->extracted_buffer)
         {
-            d->extracted_buffer = malloc(fst_size);
+            d->extracted_buffer = wbfs_ioalloc(fst_size);
             memcpy(d->extracted_buffer, fst, fst_size);
         }
 
@@ -264,6 +264,7 @@ static void do_disc(wiidisc_t*d)
     magic = _be32(b + 24);
     if (magic != 0x5D1C9EA3)
     {
+        wbfs_iofree( b );
         wbfs_error( "not a wii disc" );
         return;
     }

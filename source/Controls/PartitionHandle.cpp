@@ -332,7 +332,8 @@ void PartitionHandle::AddPartition(const char * name, u64 lba_start, u64 sec_cou
     {
         name = "WBFS";
         part_type = 0xBF;   //Override partition type on WBFS
-        sec_count = wbfs_ntohl(head->n_hd_sec);
+        //! correct sector size in physical sectors (512 bytes per sector)
+        sec_count = (u64) head->n_hd_sec * (u64) (1 << head->hd_sec_sz_s) / (u64) BYTES_PER_SECTOR;
 
     }
     else if(*((u16 *) (buffer + 0x1FE)) == 0x55AA)

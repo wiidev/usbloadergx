@@ -127,7 +127,15 @@ int GameList::FilterList(const wchar_t * gameFilter)
         if (Settings.GameSort & SORT_FAVORITE)
         {
             GameStatus * GameStats = GameStatistics.GetGameStatus(header->id);
-            if (!GameStats || GameStats->FavoriteRank == 0) continue;
+            if (Settings.marknewtitles)
+            {
+                bool isNew = NewTitles::Instance()->IsNew(header->id);
+                if (!isNew && (!GameStats || GameStats->FavoriteRank == 0)) continue;
+            }
+            else
+            {
+                if (!GameStats || GameStats->FavoriteRank == 0) continue;
+            }
         }
 
         //ignore uLoader cfg "iso".  i was told it is "__CFG_"  but not confirmed

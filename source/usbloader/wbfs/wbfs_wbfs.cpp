@@ -4,23 +4,30 @@
 #include "usbloader/wbfs.h"
 #include "wbfs_rw.h"
 
-extern u32 sector_size;
 extern int wbfs_part_fs;
 
 s32 Wbfs_Wbfs::Open()
 {
     wbfs_t *part = NULL;
 
+    u8 buffer[512];
+    memset(buffer, 0, sizeof(buffer));
+
+    wbfs_head_t *head = (wbfs_head_t *) buffer;
+
+    if(readCallback(NULL, lba, 1, buffer) < 0)
+        return -1;
+
+    if (head->magic != wbfs_htonl(WBFS_MAGIC))
+        return -1;
+
     /* Open partition */
-    part = wbfs_open_partition(readCallback, writeCallback, NULL, sector_size, size, lba, 0);
+    part = wbfs_open_partition(readCallback, writeCallback, NULL, 512, head->n_hd_sec, lba, 0);
     if (!part) return -1;
 
     /* Close current hard disk */
     Close();
     hdd = part;
-
-    // Save the new sector size, so it will be used in read and write calls
-    sector_size = 1 << hdd->head->hd_sec_sz_s;
 
     wbfs_part_fs = PART_FS_WBFS;
 
@@ -61,7 +68,7 @@ s32 Wbfs_Wbfs::Format()
     wbfs_t *partition = NULL;
 
     /* Reset partition */
-    partition = wbfs_open_partition(readCallback, writeCallback, NULL, sector_size, size, lba, 1);
+    partition = wbfs_open_partition(readCallback, writeCallback, NULL, 512, size, lba, 1);
     if (!partition) return -1;
 
     /* Free memory */
@@ -176,7 +183,7 @@ s32 Wbfs_Wbfs::ReIDGame(u8 *discid, const void *newID)
     return 0;
 }
 
-f32 Wbfs_Wbfs::EstimateGameSize()
+u64 Wbfs_Wbfs::EstimateGameSize()
 {
     partition_selector_t part_sel = (partition_selector_t) Settings.InstallPartitions;
     return wbfs_estimate_disc(hdd, __ReadDVD, NULL, part_sel);

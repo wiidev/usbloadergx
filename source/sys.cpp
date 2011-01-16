@@ -68,6 +68,11 @@ void Sys_Init(void)
 
 void AppCleanUp(void)
 {
+    static bool app_clean = false;
+    if(app_clean)
+        return;
+
+    app_clean = true;
 	extern u8 mountMethod;
     gprintf("Exiting main GUI.  mountMethod = %d\n", mountMethod);
 

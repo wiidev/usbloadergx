@@ -65,6 +65,7 @@ void CSettings::SetDefault()
     snprintf(TxtCheatcodespath, sizeof(TxtCheatcodespath), "%s/txtcodes/", BootDevice);
     snprintf(BcaCodepath, sizeof(BcaCodepath), "%s/bca/", BootDevice);
     snprintf(WipCodepath, sizeof(WipCodepath), "%s/wip/", BootDevice);
+    snprintf(WDMpath, sizeof(WDMpath), "%s/wdm/", BootDevice);
     snprintf(theme_path, sizeof(theme_path), "%stheme/", ConfigPath);
     snprintf(dolpath, sizeof(dolpath), "%s/", BootDevice);
     strcpy(theme, "");
@@ -112,7 +113,7 @@ void CSettings::SetDefault()
     InstallPartitions = ONLY_GAME_PARTITION;
     beta_upgrades = 0;
     PlaylogUpdate = 1;
-    UseIOS58 = 1;
+    UseIOS58 = 0;
     widescreen = (CONF_GetAspectRatio() == CONF_ASPECT_16_9);
 }
 
@@ -236,6 +237,7 @@ bool CSettings::Save()
     fprintf(file, "Cheatcodespath = %s\n ", Cheatcodespath);
     fprintf(file, "BcaCodepath = %s\n ", BcaCodepath);
     fprintf(file, "WipCodepath = %s\n ", WipCodepath);
+    fprintf(file, "WDMpath = %s\n ", WDMpath);
     fprintf(file, "titlesOverride = %d\n ", titlesOverride);
     fprintf(file, "patchcountrystrings = %d\n ", patchcountrystrings);
     fprintf(file, "screensaver = %d\n ", screensaver);
@@ -583,6 +585,11 @@ bool CSettings::SetSetting(char *name, char *value)
     else if (strcmp(name, "WipCodepath") == 0)
     {
         strcpy(WipCodepath, value);
+        return true;
+    }
+    else if (strcmp(name, "WDMpath") == 0)
+    {
+        strcpy(WDMpath, value);
         return true;
     }
     else if (strcmp(name, "returnTo") == 0)

@@ -215,7 +215,7 @@ extern "C"
     // remove some sanity checks
     void wbfs_set_force_mode(int force);
 
-    float wbfs_estimate_disc(wbfs_t *p, read_wiidisc_callback_t read_src_wii_disc, void *callback_data,
+    u64 wbfs_estimate_disc(wbfs_t *p, read_wiidisc_callback_t read_src_wii_disc, void *callback_data,
             partition_selector_t sel);
     // compressed and real size
     u32 wbfs_size_disc(wbfs_t*p, read_wiidisc_callback_t read_src_wii_disc, void *callback_data,

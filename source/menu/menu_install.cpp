@@ -7,7 +7,7 @@
 #include "prompts/ProgressWindow.h"
 #include "themes/CTheme.h"
 
-float gamesize = -1.0f;
+u64 gamesize = 0;
 
 /****************************************************************************
  * MenuInstall
@@ -61,11 +61,11 @@ int MenuInstall()
     f32 freespace, used;
 
     WBFS_DiskSpace(&used, &freespace);
-    gamesize = WBFS_EstimeGameSize() / GB_SIZE;
+    gamesize = WBFS_EstimeGameSize();
 
     char gametxt[50];
 
-    sprintf(gametxt, "%s : %.2fGB", name, gamesize);
+    sprintf(gametxt, "%s : %.2fGB", name, gamesize/GB_SIZE);
 
     wiilight(1);
     choice = WindowPrompt(tr( "Continue to install game?" ), gametxt, tr( "OK" ), tr( "Cancel" ));
@@ -74,10 +74,10 @@ int MenuInstall()
     {
         sprintf(gametxt, "%s", tr( "Installing game:" ));
 
-        if (gamesize > freespace)
+        if (gamesize/GB_SIZE > freespace)
         {
             char errortxt[50];
-            sprintf(errortxt, "%s: %.2fGB, %s: %.2fGB", tr( "Game Size" ), gamesize, tr( "Free Space" ), freespace);
+            sprintf(errortxt, "%s: %.2fGB, %s: %.2fGB", tr( "Game Size" ), gamesize/GB_SIZE, tr( "Free Space" ), freespace);
             WindowPrompt(tr( "Not enough free space!" ), errortxt, tr( "OK" ));
         }
         else
@@ -112,7 +112,7 @@ int MenuInstall()
 
     //Turn off the WiiLight
     wiilight(0);
-    gamesize = -1.0f;
+    gamesize = 0;
 
     return MENU_DISCLIST;
 }
