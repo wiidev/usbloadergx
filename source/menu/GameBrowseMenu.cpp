@@ -1147,13 +1147,13 @@ void GameBrowseMenu::UpdateGameInfoText(const u8 * gameId)
 {
     if(!gameId)
     {
-        Remove(GameIDTxt);
-        delete GameIDTxt;
-        GameIDTxt = NULL;
         Remove(GameRegionTxt);
         delete GameRegionTxt;
         GameRegionTxt = NULL;
+        Remove(idBtn);
         idBtn->SetLabel(NULL);
+        delete GameIDTxt;
+        GameIDTxt = NULL;
         return;
     }
 

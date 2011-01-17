@@ -25,7 +25,7 @@ WDMFile::WDMFile(const char * path)
 
     while (fgets(line, sizeof(line), file))
     {
-        if(line[0] == '#')
+        if(line[0] == '#' || line[0] == '\0')
             continue;
 
         entry_number++;

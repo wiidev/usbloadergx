@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-16 14:42+0100\n"
+"POT-Creation-Date: 2011-01-17 19:24+0100\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
 "Last-Translator: Jane.H\n"
 "Language-Team: kyogc, Miller, Mika Li, Jane.H\n"
@@ -459,9 +459,6 @@ msgstr "錯誤："
 
 msgid "ERROR: Can't set up theme."
 msgstr "錯誤：無法設定佈景主題。"
-
-msgid "Enabling this option on a FAT partition might slow the startup of the loader."
-msgstr "在FAT磁區開啟這選項可能造成loader啟動緩慢。"
 
 msgid "English"
 msgstr "英文"
@@ -1192,6 +1189,9 @@ msgstr "在zip中找不到 .them檔。"
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "所輸入的目錄不存在。是否要建立一個目錄嗎？"
 
+msgid "The game installation is disabled under this IOS because of instability in usb write."
+msgstr ""
+
 msgid "The wad file was installed"
 msgstr "wad檔已安裝"
 
@@ -1362,6 +1362,9 @@ msgstr "密碼錯誤"
 msgid "Yes"
 msgstr "是"
 
+msgid "You are currently using IOS"
+msgstr ""
+
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr "你嘗試用高於 cIOS 249 版本18去選取 FAT32/NTFS/EXT 磁區。這格式不支援。繼續請自行承擔風險。"
 
@@ -1424,6 +1427,9 @@ msgstr "的"
 
 msgid "seconds left"
 msgstr "剩餘秒數"
+
+#~ msgid "Enabling this option on a FAT partition might slow the startup of the loader."
+#~ msgstr "在FAT磁區開啟這選項可能造成loader啟動緩慢。"
 
 #~ msgid "Full Shutdown"
 #~ msgstr "關機"

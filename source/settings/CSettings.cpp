@@ -107,7 +107,7 @@ void CSettings::SetDefault()
     musicloopmode = 1;
     partition = -1;
     marknewtitles = 1;
-    ShowFreeSpace = 0;
+    ShowFreeSpace = 1;
     InstallToDir = INSTALL_TO_NAME_GAMEID;
     GameSplit = GAMESPLIT_4GB;
     InstallPartitions = ONLY_GAME_PARTITION;

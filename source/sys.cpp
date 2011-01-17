@@ -103,8 +103,6 @@ void AppCleanUp(void)
 
     ResourceManager::DestroyInstance();
 
-    WPAD_Flush(0);
-    WPAD_Disconnect(0);
     WPAD_Shutdown();
 }
 

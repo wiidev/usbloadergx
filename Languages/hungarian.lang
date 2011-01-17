@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-16 14:42+0100\n"
+"POT-Creation-Date: 2011-01-17 19:24+0100\n"
 "PO-Revision-Date: 2009-12-29 11:05+0100\n"
 "Last-Translator: Springdale\n"
 "Language-Team: Tusk, Springdale\n"
@@ -459,9 +459,6 @@ msgstr "HIBA:"
 
 msgid "ERROR: Can't set up theme."
 msgstr "HIBA: Téma nem állítható be"
-
-msgid "Enabling this option on a FAT partition might slow the startup of the loader."
-msgstr ""
 
 msgid "English"
 msgstr "Angol"
@@ -1192,6 +1189,9 @@ msgstr ""
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "A megadott könyvtár nem létezik. Létrehozzuk?"
 
+msgid "The game installation is disabled under this IOS because of instability in usb write."
+msgstr ""
+
 msgid "The wad file was installed"
 msgstr ""
 
@@ -1361,6 +1361,9 @@ msgstr "Hibás Jelszó"
 
 msgid "Yes"
 msgstr "Igen"
+
+msgid "You are currently using IOS"
+msgstr ""
 
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr ""

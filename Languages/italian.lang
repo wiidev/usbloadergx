@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-16 14:42+0100\n"
+"POT-Creation-Date: 2011-01-17 19:24+0100\n"
 "PO-Revision-Date: 2011-01-09 22:30+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: Cambo\n"
@@ -459,9 +459,6 @@ msgstr "ERRORE:"
 
 msgid "ERROR: Can't set up theme."
 msgstr "ERRORE: Impossibile configurare il tema."
-
-msgid "Enabling this option on a FAT partition might slow the startup of the loader."
-msgstr "Abilitando questa opzione su una partizione FAT potresti rallentare l'avvio del loader."
 
 msgid "English"
 msgstr "Inglese"
@@ -1192,6 +1189,9 @@ msgstr "Il file .them non è stato trovato nel file zip."
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "La cartella indicata non esiste. Vuoi crearla?"
 
+msgid "The game installation is disabled under this IOS because of instability in usb write."
+msgstr ""
+
 msgid "The wad file was installed"
 msgstr "File wad installato"
 
@@ -1362,6 +1362,9 @@ msgstr "Password Errata"
 msgid "Yes"
 msgstr "Sì"
 
+msgid "You are currently using IOS"
+msgstr ""
+
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr "Stai cercando di accedere ad una partizione FAT32/NTFS/EXT con un cIOS 249 di versione inferiore alla rev18. Ciò è non supportato. Continua a tuo rischio."
 
@@ -1424,6 +1427,9 @@ msgstr "di"
 
 msgid "seconds left"
 msgstr "secondi mancanti"
+
+#~ msgid "Enabling this option on a FAT partition might slow the startup of the loader."
+#~ msgstr "Abilitando questa opzione su una partizione FAT potresti rallentare l'avvio del loader."
 
 #~ msgid "Full Shutdown"
 #~ msgstr "Spegni Tutto"

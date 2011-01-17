@@ -31,7 +31,7 @@ int mload_init()
 {
     int n;
 
-	if(hid<0) hid = iosCreateHeap(0x800);
+	if(hid<0) hid = iosCreateHeap(0x8000);
 
 	if(hid<0)
 		{
@@ -57,16 +57,6 @@ int mload_init()
 		usleep(250*1000);
 	}
 
-	if(mload_fd<0)
-		{
-
-		if(hid>=0)
-			{
-			iosDestroyHeap(hid);
-			hid=-1;
-			}
-		}
-
     return mload_fd;
 }
 
@@ -77,12 +67,6 @@ int mload_init()
 int mload_close()
 {
     int ret;
-
-	if(hid>=0)
-		{
-		iosDestroyHeap(hid);
-		hid=-1;
-		}
 
 	if(mload_fd<0) return -1;
 
@@ -133,40 +117,18 @@ int mload_module(void *addr, int len)
     int ret;
     void *buf=NULL;
 
-
-	if(mload_init()<0) return -1;
-
-    if(hid>=0)
-		{
-		iosDestroyHeap(hid);
-		hid=-1;
-		}
-
-	hid = iosCreateHeap(len+0x800);
-
-	if(hid<0) return hid;
-
 	buf= iosAlloc(hid, len);
 
-	if(!buf) {ret= -1;goto out;}
-
+	if(!buf)
+		return -1;
 
 	memcpy(buf, addr,len);
 
 	ret = IOS_IoctlvFormat(hid, mload_fd, MLOAD_LOAD_MODULE, ":d", buf, len);
-
-	if(ret<0) goto out;
+	if(ret<0)
+		return ret;
 
 	ret=IOS_IoctlvFormat(hid, mload_fd, MLOAD_RUN_MODULE, ":");
-
-	if(ret<0) {ret= -666;goto out;}
-
-out:
-	if(hid>=0)
-		{
-		iosDestroyHeap(hid);
-		hid=-1;
-		}
 
     return ret;
 }

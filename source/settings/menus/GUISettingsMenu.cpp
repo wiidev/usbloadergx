@@ -332,11 +332,6 @@ int GuiSettingsMenu::GetMenuInternal()
     else if (ret == ++Idx)
     {
         if (++Settings.ShowFreeSpace >= MAX_ON_OFF) Settings.ShowFreeSpace = 0;
-
-        if(Settings.ShowFreeSpace && DeviceHandler::GetUSBFilesystemType(Settings.partition) == PART_FS_FAT)
-        {
-            WindowPrompt(tr("Warning:"), tr("Enabling this option on a FAT partition might slow the startup of the loader."), tr("OK"));
-        }
     }
 
     SetOptionValues();

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-16 14:42+0100\n"
+"POT-Creation-Date: 2011-01-17 19:24+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi\n"
@@ -459,9 +459,6 @@ msgstr "エラー："
 
 msgid "ERROR: Can't set up theme."
 msgstr "テーマを適用できませんでした"
-
-msgid "Enabling this option on a FAT partition might slow the startup of the loader."
-msgstr "FAT領域でこれを有効にするとローダーの起動が遅くなります"
 
 msgid "English"
 msgstr "英語"
@@ -1192,6 +1189,9 @@ msgstr ".themファイルがzip内にありません"
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "ﾃﾞｨﾚｸﾄﾘがありません。作りますか？"
 
+msgid "The game installation is disabled under this IOS because of instability in usb write."
+msgstr ""
+
 msgid "The wad file was installed"
 msgstr "wadがインストールされました"
 
@@ -1362,6 +1362,9 @@ msgstr "暗証番号を間違えています"
 msgid "Yes"
 msgstr "はい"
 
+msgid "You are currently using IOS"
+msgstr ""
+
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr "FAT32/NTFS/EXT領域をcIOS249rev18以前で選ぼうとしています。rev18以前では対応していません。"
 
@@ -1424,6 +1427,9 @@ msgstr "中"
 
 msgid "seconds left"
 msgstr "秒で完了"
+
+#~ msgid "Enabling this option on a FAT partition might slow the startup of the loader."
+#~ msgstr "FAT領域でこれを有効にするとローダーの起動が遅くなります"
 
 #~ msgid "Can't create file"
 #~ msgstr "ファイルを作れませんでした"

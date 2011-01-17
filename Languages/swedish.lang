@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-16 14:42+0100\n"
+"POT-Creation-Date: 2011-01-17 19:24+0100\n"
 "PO-Revision-Date: 2010-01-19 17:39+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -459,9 +459,6 @@ msgstr "FEL:"
 
 msgid "ERROR: Can't set up theme."
 msgstr "FEL: Kan inte ställa in tema"
-
-msgid "Enabling this option on a FAT partition might slow the startup of the loader."
-msgstr ""
 
 msgid "English"
 msgstr "Engelska"
@@ -1192,6 +1189,9 @@ msgstr ""
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "Den angivna katalogen existerar inte. Vill du skapa den?"
 
+msgid "The game installation is disabled under this IOS because of instability in usb write."
+msgstr ""
+
 msgid "The wad file was installed"
 msgstr ""
 
@@ -1361,6 +1361,9 @@ msgstr "Fel Lösenord"
 
 msgid "Yes"
 msgstr "Ja"
+
+msgid "You are currently using IOS"
+msgstr ""
 
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr ""

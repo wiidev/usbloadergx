@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-16 14:42+0100\n"
+"POT-Creation-Date: 2011-01-17 19:24+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Nitro_subzero \n"
 "Language-Team: Nitro_subzero\n"
@@ -458,9 +458,6 @@ msgid "ERROR:"
 msgstr "ผิดพลาด:"
 
 msgid "ERROR: Can't set up theme."
-msgstr ""
-
-msgid "Enabling this option on a FAT partition might slow the startup of the loader."
 msgstr ""
 
 msgid "English"
@@ -1192,6 +1189,9 @@ msgstr ""
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "ไม่พบไดเรคทอรี่นี้ ต้องการสร้างใหม่รึไม่ ?"
 
+msgid "The game installation is disabled under this IOS because of instability in usb write."
+msgstr ""
+
 msgid "The wad file was installed"
 msgstr ""
 
@@ -1361,6 +1361,9 @@ msgstr "รหัสผ่านผิดพลาด"
 
 msgid "Yes"
 msgstr "ใช่"
+
+msgid "You are currently using IOS"
+msgstr ""
 
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr ""

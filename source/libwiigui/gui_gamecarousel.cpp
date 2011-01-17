@@ -74,13 +74,11 @@ GuiGameCarousel::GuiGameCarousel(int w, int h, const char *themePath, int select
     imgLeft = Resources::GetImageData("startgame_arrow_left.png");
     imgRight = Resources::GetImageData("startgame_arrow_right.png");
 
-    int btnHeight = (int) lround(sqrt(RADIUS * RADIUS - 90000) - RADIUS - 50);
-
     btnLeftImg = new GuiImage(imgLeft);
     if (Settings.wsprompt == ON) btnLeftImg->SetWidescreen(Settings.widescreen);
     btnLeft = new GuiButton(imgLeft->GetWidth(), imgLeft->GetHeight());
-    btnLeft->SetAlignment(ALIGN_LEFT, ALIGN_MIDDLE);
-    btnLeft->SetPosition(20, btnHeight);
+    btnLeft->SetAlignment(thAlign("left - carousel layout left arrow align hor"), thAlign("top - carousel layout left arrow align ver"));
+    btnLeft->SetPosition(thInt("20 - carousel layout left arrow pos x"), thInt("65 - carousel layout left arrow pos y"));
     btnLeft->SetParent(this);
     btnLeft->SetImage(btnLeftImg);
     btnLeft->SetSoundOver(btnSoundOver);
@@ -93,8 +91,8 @@ GuiGameCarousel::GuiGameCarousel(int w, int h, const char *themePath, int select
     if (Settings.wsprompt == ON) btnRightImg->SetWidescreen(Settings.widescreen);
     btnRight = new GuiButton(imgRight->GetWidth(), imgRight->GetHeight());
     btnRight->SetParent(this);
-    btnRight->SetAlignment(ALIGN_RIGHT, ALIGN_MIDDLE);
-    btnRight->SetPosition(-20, btnHeight);
+    btnRight->SetAlignment(thAlign("right - carousel layout right arrow align hor"), thAlign("top - carousel layout right arrow align ver"));
+    btnRight->SetPosition(thInt("-20 - carousel layout right arrow pos x"), thInt("65 - carousel layout right arrow pos y"));
     btnRight->SetImage(btnRightImg);
     btnRight->SetSoundOver(btnSoundOver);
     btnRight->SetTrigger(trigA);
