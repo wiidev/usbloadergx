@@ -1,11 +1,11 @@
 # USB Loader GX
-# german language source file - r938
+# german language source file - r1046
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-17 19:24+0100\n"
+"POT-Creation-Date: 2011-01-20 15:41+0100\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: TheRealVisitor\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
@@ -28,14 +28,8 @@ msgstr " ist nicht auf dem Server."
 msgid "0 (Everyone)"
 msgstr "0 (Jeder)"
 
-msgid "0 (Locked and Unlocked Games)"
-msgstr "0 (Gesperrte und nichtgesperrte Spiele)"
-
 msgid "1 (Child 7+)"
 msgstr "1 (Kinder 6+) "
-
-msgid "1 (Unlocked Games Only)"
-msgstr "1 (Nur nichtgesperrte Spiele)"
 
 msgid "1 hour"
 msgstr "1 Stunde"
@@ -166,9 +160,6 @@ msgstr "Autoinit. Netzwerk"
 msgid "BCA Codes Path"
 msgstr "BCA Codes"
 
-msgid "BETA revisions"
-msgstr "BETA Revisionen"
-
 msgid "Back"
 msgstr "Zurück"
 
@@ -181,8 +172,56 @@ msgstr "Hintergrundmusik"
 msgid "Big thanks to:"
 msgstr "Großen Dank an:"
 
+msgid "Block Cover Downloads"
+msgstr ""
+
+msgid "Block Custom Paths"
+msgstr ""
+
+msgid "Block Game Install"
+msgstr ""
+
+msgid "Block Game Settings"
+msgstr ""
+
+msgid "Block GameID Change"
+msgstr ""
+
+msgid "Block Global Settings"
+msgstr ""
+
+msgid "Block Gui Settings"
+msgstr ""
+
+msgid "Block HBC Menu"
+msgstr ""
+
 msgid "Block IOS Reload"
 msgstr "IOS Reload blocken"
+
+msgid "Block Loader Settings"
+msgstr ""
+
+msgid "Block Parental Settings"
+msgstr ""
+
+msgid "Block Reset Settings"
+msgstr ""
+
+msgid "Block Sound Settings"
+msgstr ""
+
+msgid "Block Theme Downloader"
+msgstr ""
+
+msgid "Block Theme Menu"
+msgstr ""
+
+msgid "Block Title Launcher"
+msgstr ""
+
+msgid "Block Updates"
+msgstr ""
 
 msgid "Boot/Standard"
 msgstr "Bootstandard (cIOS)"
@@ -251,6 +290,9 @@ msgstr "Konsolenstandard"
 
 msgid "Console Locked"
 msgstr "Konsole gesperrt"
+
+msgid "Console must be unlocked for this option."
+msgstr ""
 
 msgid "Console should be unlocked to modify it."
 msgstr "Konsole muss zum Bearbeiten entsperrt werden."
@@ -511,7 +553,7 @@ msgid "Exit"
 msgstr "Beenden"
 
 msgid "Exit to where?"
-msgstr "Beenden zu..."
+msgstr "Beenden zum..."
 
 msgid "Extracting files..."
 msgstr "Entpacke Dateien..."
@@ -624,9 +666,6 @@ msgstr "Spielname [SPIELID]"
 
 msgid "Games"
 msgstr "Spiele"
-
-msgid "GamesLevel"
-msgstr "Spiele Level"
 
 msgid "Genre:"
 msgstr "Genre:"
@@ -970,6 +1009,9 @@ msgstr "Country Strings patchen"
 msgid "Path Changed"
 msgstr "Pfad geändert"
 
+msgid "Permission denied."
+msgstr ""
+
 msgid "Pick from a list"
 msgstr "Wähle aus der Liste"
 
@@ -1169,10 +1211,10 @@ msgid "Successfully installed:"
 msgstr "Erfolgreich installiert:"
 
 msgid "Sync FAT32 FS Info"
-msgstr ""
+msgstr "Synchronisiere FAT32 FS Info"
 
 msgid "Synchronizing..."
-msgstr ""
+msgstr "Synchronisiere..."
 
 msgid "System Default"
 msgstr "Konsolenstandard"
@@ -1190,7 +1232,7 @@ msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "Das eingegebene Verzeichnis existiert nicht. Möchtest du es erstellen?"
 
 msgid "The game installation is disabled under this IOS because of instability in usb write."
-msgstr ""
+msgstr "Das Installieren von Spielen ist bei Verwendung dieses IOS wegen Instabilität beim USB-Schreiben deaktiviert."
 
 msgid "The wad file was installed"
 msgstr "Die Wad Datei wurde installiert"
@@ -1265,9 +1307,6 @@ msgstr "Unbekannt"
 msgid "Unlock USB Loader GX"
 msgstr "Entsperre USB Loader GX"
 
-msgid "Unlock console to use this option."
-msgstr "Entsperre den Loader, um diese Option zu nutzen."
-
 msgid "Unlocked"
 msgstr "Entsperrt"
 
@@ -1305,7 +1344,7 @@ msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "Die hochgeladene ZIP Datei wurde ins Homebrew Verzeichnis installiert."
 
 msgid "Use IOS58"
-msgstr ""
+msgstr "Benutze IOS58"
 
 msgid "VIDTV Patch"
 msgstr "VIDTV Patch"
@@ -1318,7 +1357,7 @@ msgid "Video Mode"
 msgstr "Videomodus"
 
 msgid "WDM Files Path"
-msgstr ""
+msgstr "WDM Dateien"
 
 msgid "WIP Patches Path"
 msgstr "WIP Patches"
@@ -1363,7 +1402,7 @@ msgid "Yes"
 msgstr "Ja"
 
 msgid "You are currently using IOS"
-msgstr ""
+msgstr "Du benutzt zur Zeit das IOS"
 
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr "Es wird versucht eine FAT32/NTFS/EXT Partition mit dem cIOS 249 Rev < 18 auszuwählen. Das wird nicht unterstützt. Weiter auf eigene Gefahr."
@@ -1427,6 +1466,21 @@ msgstr "von"
 
 msgid "seconds left"
 msgstr "Sekunden verbleiben"
+
+#~ msgid "0 (Locked and Unlocked Games)"
+#~ msgstr "0 (Gesperrte und nichtgesperrte Spiele)"
+
+#~ msgid "1 (Unlocked Games Only)"
+#~ msgstr "1 (Nur nichtgesperrte Spiele)"
+
+#~ msgid "BETA revisions"
+#~ msgstr "BETA Revisionen"
+
+#~ msgid "GamesLevel"
+#~ msgstr "Spiele Level"
+
+#~ msgid "Unlock console to use this option."
+#~ msgstr "Entsperre den Loader, um diese Option zu nutzen."
 
 #~ msgid "Enabling this option on a FAT partition might slow the startup of the loader."
 #~ msgstr "Das Aktivieren dieser Option auf einer FAT Partition könnte das Starten des Loaders verlangsamen."

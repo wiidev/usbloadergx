@@ -1,4 +1,4 @@
- /****************************************************************************
+/****************************************************************************
  * Copyright (C) 2010
  * by Dimok
  *
@@ -139,7 +139,7 @@ void GameLoadSM::SetDefaultConfig()
     GameConfig.ocarina = Settings.ocarina;
     GameConfig.vipatch = Settings.videopatch;
     GameConfig.ios = Settings.cios;
-    GameConfig.parentalcontrol = 0;
+    GameConfig.parentalcontrol = PARENTAL_LVL_EVERYONE;
     GameConfig.errorfix002 = Settings.error002;
     GameConfig.patchcountrystrings = Settings.patchcountrystrings;
     GameConfig.loadalternatedol = OFF;
@@ -147,7 +147,7 @@ void GameLoadSM::SetDefaultConfig()
     GameConfig.iosreloadblock = OFF;
     strcpy(GameConfig.alternatedolname, "");
     GameConfig.returnTo = 1;
-    GameConfig.Locked = 0;
+    GameConfig.Locked = OFF;
 }
 
 void GameLoadSM::SetOptionNames()

@@ -72,7 +72,6 @@ void CSettings::SetDefault()
     strcpy(language_path, "");
     strcpy(ogg_path, "");
     strcpy(unlockCode, "");
-    strcpy(db_url, "");
     strcpy(db_language, "");
     strcpy(returnTo, "");
 
@@ -89,31 +88,29 @@ void CSettings::SetDefault()
     sfxvolume = 80;
     gamesoundvolume = 80;
     tooltips = ON;
-    gamesound = 1;
-    parentalcontrol = 4;
-    lockedgames = 0;
+    gamesound = ON;
+    parentalcontrol = PARENTAL_LVL_ADULT;
     cios = 249;
-    xflip = XFLIP_NO;
-    quickboot = OFF;
-    wiilight = 1;
-    autonetwork = 0;
-    discart = 0;
-    patchcountrystrings = 0;
     gridRows = 3;
     error002 = 2;
-    titlesOverride = 1;
-    db_JPtoEN = 0;
-    screensaver = 3;
-    musicloopmode = 1;
     partition = -1;
-    marknewtitles = 1;
-    ShowFreeSpace = 1;
+    discart = DISCARTS_ORIGINALS;
+    xflip = XFLIP_NO;
+    quickboot = OFF;
+    wiilight = WIILIGHT_ON;
+    autonetwork = OFF;
+    patchcountrystrings = OFF;
+    titlesOverride = ON;
+    screensaver = SCREENSAVER_10_MIN;
+    musicloopmode = ON;
+    marknewtitles = ON;
+    ShowFreeSpace = ON;
+    PlaylogUpdate = ON;
+    UseIOS58 = OFF;
+    ParentalBlocks = BLOCK_ALL;
     InstallToDir = INSTALL_TO_NAME_GAMEID;
     GameSplit = GAMESPLIT_4GB;
     InstallPartitions = ONLY_GAME_PARTITION;
-    beta_upgrades = 0;
-    PlaylogUpdate = 1;
-    UseIOS58 = 0;
     widescreen = (CONF_GetAspectRatio() == CONF_ASPECT_16_9);
 }
 
@@ -217,7 +214,6 @@ bool CSettings::Save()
     fprintf(file, "quickboot = %d\n ", quickboot);
     fprintf(file, "wsprompt = %d\n ", wsprompt);
     fprintf(file, "parentalcontrol = %d\n ", parentalcontrol);
-    fprintf(file, "lockedgames = %d\n ", lockedgames);
     fprintf(file, "covers_path = %s\n ", covers_path);
     fprintf(file, "covers2d_path = %s\n ", covers2d_path);
     fprintf(file, "theme_path = %s\n ", theme_path);
@@ -251,9 +247,9 @@ bool CSettings::Save()
     fprintf(file, "InstallToDir = %d\n ", InstallToDir);
     fprintf(file, "GameSplit = %d\n ", GameSplit);
     fprintf(file, "InstallPartitions = %08X\n ", InstallPartitions);
-    fprintf(file, "beta_upgrades = %d\n ", beta_upgrades);
     fprintf(file, "PlaylogUpdate = %d\n ", PlaylogUpdate);
     fprintf(file, "UseIOS58 = %d\n ", UseIOS58);
+    fprintf(file, "ParentalBlocks = %08X\n ", ParentalBlocks);
     fprintf(file, "returnTo = %s\n ", returnTo);
     fclose(file);
 
@@ -417,11 +413,6 @@ bool CSettings::SetSetting(char *name, char *value)
         if (sscanf(value, "%d", &i) == 1) parentalcontrol = i;
         return true;
     }
-    else if (strcmp(name, "lockedgames") == 0)
-    {
-        if (sscanf(value, "%d", &i) == 1) lockedgames = i;
-        return true;
-    }
     else if (strcmp(name, "screensaver") == 0)
     {
         if (sscanf(value, "%d", &i) == 1) screensaver = i;
@@ -487,11 +478,6 @@ bool CSettings::SetSetting(char *name, char *value)
         if (sscanf(value, "%d", &i) == 1) GameSplit = i;
         return true;
     }
-    else if (strcmp(name, "beta_upgrades") == 0)
-    {
-        if (sscanf(value, "%d", &i) == 1) beta_upgrades = i;
-        return true;
-    }
     else if (strcmp(name, "PlaylogUpdate") == 0)
     {
         if (sscanf(value, "%d", &i) == 1) PlaylogUpdate = i;
@@ -505,6 +491,11 @@ bool CSettings::SetSetting(char *name, char *value)
     else if (strcmp(name, "InstallPartitions") == 0)
     {
         InstallPartitions = strtoul(value, 0, 16);
+        return true;
+    }
+    else if (strcmp(name, "ParentalBlocks") == 0)
+    {
+        ParentalBlocks = strtoul(value, 0, 16);
         return true;
     }
     else if (strcmp(name, "covers_path") == 0)

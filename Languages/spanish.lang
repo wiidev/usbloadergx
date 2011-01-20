@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-17 19:24+0100\n"
+"POT-Creation-Date: 2011-01-20 15:43+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: SirPalax\n"
 "Language-Team: Penn, SirPalax\n"
@@ -28,14 +28,8 @@ msgstr " no existe en el servidor."
 msgid "0 (Everyone)"
 msgstr "0 (Todos)"
 
-msgid "0 (Locked and Unlocked Games)"
-msgstr ""
-
 msgid "1 (Child 7+)"
 msgstr "1 (Niños 7+)"
-
-msgid "1 (Unlocked Games Only)"
-msgstr ""
 
 msgid "1 hour"
 msgstr "1 hora"
@@ -166,9 +160,6 @@ msgstr "AutoIniciar la Red"
 msgid "BCA Codes Path"
 msgstr "Ruta Códigos BCA"
 
-msgid "BETA revisions"
-msgstr "Revisiones BETA"
-
 msgid "Back"
 msgstr "Atrás"
 
@@ -181,8 +172,56 @@ msgstr "Música de fondo"
 msgid "Big thanks to:"
 msgstr "Gracias a:"
 
+msgid "Block Cover Downloads"
+msgstr ""
+
+msgid "Block Custom Paths"
+msgstr ""
+
+msgid "Block Game Install"
+msgstr ""
+
+msgid "Block Game Settings"
+msgstr ""
+
+msgid "Block GameID Change"
+msgstr ""
+
+msgid "Block Global Settings"
+msgstr ""
+
+msgid "Block Gui Settings"
+msgstr ""
+
+msgid "Block HBC Menu"
+msgstr ""
+
 msgid "Block IOS Reload"
 msgstr "Impedir recarga IOS"
+
+msgid "Block Loader Settings"
+msgstr ""
+
+msgid "Block Parental Settings"
+msgstr ""
+
+msgid "Block Reset Settings"
+msgstr ""
+
+msgid "Block Sound Settings"
+msgstr ""
+
+msgid "Block Theme Downloader"
+msgstr ""
+
+msgid "Block Theme Menu"
+msgstr ""
+
+msgid "Block Title Launcher"
+msgstr ""
+
+msgid "Block Updates"
+msgstr ""
 
 msgid "Boot/Standard"
 msgstr "Inicio/Estándar"
@@ -251,6 +290,9 @@ msgstr "Pred. Consola"
 
 msgid "Console Locked"
 msgstr "Consola Bloqueada"
+
+msgid "Console must be unlocked for this option."
+msgstr ""
 
 msgid "Console should be unlocked to modify it."
 msgstr "Debes desbloquear la consola para modificar."
@@ -625,9 +667,6 @@ msgstr "NombreDelJuego [IDdelJuego]"
 msgid "Games"
 msgstr "Juegos"
 
-msgid "GamesLevel"
-msgstr ""
-
 msgid "Genre:"
 msgstr ""
 
@@ -970,6 +1009,9 @@ msgstr "Parchear País"
 msgid "Path Changed"
 msgstr ""
 
+msgid "Permission denied."
+msgstr ""
+
 msgid "Pick from a list"
 msgstr "Elegir de una lista"
 
@@ -1265,9 +1307,6 @@ msgstr ""
 msgid "Unlock USB Loader GX"
 msgstr ""
 
-msgid "Unlock console to use this option."
-msgstr "Desbloquea la consola para usar esta opción."
-
 msgid "Unlocked"
 msgstr "Desbloqueada"
 
@@ -1427,6 +1466,12 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
+
+#~ msgid "BETA revisions"
+#~ msgstr "Revisiones BETA"
+
+#~ msgid "Unlock console to use this option."
+#~ msgstr "Desbloquea la consola para usar esta opción."
 
 #~ msgid "Full Shutdown"
 #~ msgstr "Apagado Total"

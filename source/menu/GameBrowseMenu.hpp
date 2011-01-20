@@ -26,7 +26,7 @@ class GameBrowseMenu : public GuiWindow
         void CheckOcarina(const char * IDfull);
         void CheckDiscSlotUpdate();
         void UpdateFreeSpace(void *arg);
-        void UpdateClock();
+        void UpdateClock(time_t &rawtime);
         static void UpdateCallback(void * e);
 
         TCallback<GameBrowseMenu> HDDSizeCallback;

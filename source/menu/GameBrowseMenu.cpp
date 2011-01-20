@@ -276,13 +276,20 @@ GameBrowseMenu::GameBrowseMenu()
     DownloadBtn = new GuiButton (0, 0);
     DownloadBtn->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     DownloadBtn->SetPosition(thInt("26 - cover/download btn pos x"), thInt("58 - cover/download btn pos y"));
+    DownloadBtn->SetSoundOver(btnSoundOver);
+    DownloadBtn->SetTrigger(0, trigA);
+    DownloadBtn->SetTrigger(1, trig1);
+    DownloadBtn->SetToolTip(DownloadBtnTT, 205, -30);
 
     IDBtnTT = new GuiTooltip(tr( "Click to change game ID" ));
     if (Settings.wsprompt) IDBtnTT->SetWidescreen(Settings.widescreen);
     IDBtnTT->SetAlpha(thInt("255 - tooltip alpha"));
     idBtn = new GuiButton(60, 23);
-    idBtn->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
     idBtn->SetPosition(thInt("68 - gameID btn pos x"), thInt("305 - gameID btn pos y"));
+    idBtn->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
+    idBtn->SetSoundOver(btnSoundOver);
+    idBtn->SetTrigger(0, trigA);
+    idBtn->SetToolTip(IDBtnTT, 205, -30);
 
     GXColor clockColor = thColor("r=138 g=138 b=138 a=240 - clock color");
     clockTimeBack = new GuiText("88:88", 40, (GXColor) {clockColor.r, clockColor.g, clockColor.b, clockColor.a / 6});
@@ -508,27 +515,6 @@ void GameBrowseMenu::ReloadBrowser()
         searchBtn->SetImageOver(searchBtnImg_g);
     }
 
-    if (Settings.godmode == 1) //only make the button have trigger & tooltip if in godmode
-    {
-        DownloadBtn->SetSoundOver(btnSoundOver);
-        DownloadBtn->SetTrigger(0, trigA);
-        DownloadBtn->SetTrigger(1, trig1);
-        DownloadBtn->SetToolTip(DownloadBtnTT, 205, -30);
-        idBtn->SetSoundOver(btnSoundOver);
-        idBtn->SetTrigger(0, trigA);
-        idBtn->SetToolTip(IDBtnTT, 205, -30);
-    }
-    else
-    {
-        DownloadBtn->SetToolTip(NULL, 0, 0);
-        DownloadBtn->SetSoundOver(NULL);
-        DownloadBtn->SetTrigger(0, NULL);
-        DownloadBtn->SetTrigger(1, NULL);
-        idBtn->SetSoundOver(NULL);
-        idBtn->SetTrigger(0, NULL);
-        idBtn->SetToolTip(NULL, 0, 0);
-    }
-
     if (Settings.godmode)
     {
         GuiImage * unlockImage = strcmp(Settings.unlockCode, "") == 0 ? unlockBtnImg_g : unlockBtnImg;
@@ -663,12 +649,18 @@ void GameBrowseMenu::ReloadBrowser()
     Append(sdcardBtn);
     Append(poweroffBtn);
     Append(gameInfo);
-    if (Settings.godmode) Append(installBtn);
     Append(homeBtn);
     Append(settingsBtn);
-    Append(DownloadBtn);
-    Append(idBtn);
     Append(homebrewBtn);
+
+    if (Settings.godmode || !(Settings.ParentalBlocks & BLOCK_GAME_INSTALL))
+        Append(installBtn);
+
+    if (Settings.godmode || !(Settings.ParentalBlocks & BLOCK_COVER_DOWNLOADS))
+        Append(DownloadBtn);
+
+    if (Settings.godmode || !(Settings.ParentalBlocks & BLOCK_GAMEID_CHANGE))
+        Append(idBtn);
 
     Append(favoriteBtn);
     Append(searchBtn);
@@ -735,8 +727,12 @@ int GameBrowseMenu::Show()
 
 int GameBrowseMenu::MainLoop()
 {
-    UpdateClock();
-    CheckDiscSlotUpdate();
+    time_t rawtime = time(0);
+    if(rawtime != lastrawtime) //! Only update every 1 second
+    {
+        UpdateClock(rawtime);
+        CheckDiscSlotUpdate();
+    }
 
     if (updateavailable == true)
     {
@@ -1058,7 +1054,15 @@ void GameBrowseMenu::CheckDiscSlotUpdate()
         gprintf("\tNew Disc Detected\n");
         int choice = WindowPrompt(tr( "New Disc Detected" ), 0, tr( "Install" ), tr( "Mount DVD drive" ), tr( "Cancel" ));
         if (choice == 1)
+        {
+            if(!Settings.godmode && (Settings.ParentalBlocks & BLOCK_GAME_INSTALL))
+            {
+                WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
+                return;
+            }
+
             returnMenu = MENU_INSTALL;
+        }
         else if (choice == 2)
             dvdBtn->SetState(STATE_CLICKED);
     }
@@ -1084,19 +1088,16 @@ void GameBrowseMenu::CheckDiscSlotUpdate()
     }
 }
 
-void GameBrowseMenu::UpdateClock()
+void GameBrowseMenu::UpdateClock(time_t &rawtime)
 {
-    if(Settings.hddinfo != CLOCK_HR12 && Settings.hddinfo != CLOCK_HR24)
-        return;
+    lastrawtime = rawtime;
 
-    time_t rawtime = time(0);
-    if(rawtime == lastrawtime) //! Only update every 1 second
+    if(Settings.hddinfo != CLOCK_HR12 && Settings.hddinfo != CLOCK_HR24)
         return;
 
     char theTime[50];
     theTime[0] = 0;
 
-    lastrawtime = rawtime;
     struct tm * timeinfo = localtime(&rawtime);
     if (Settings.hddinfo == CLOCK_HR12)
     {
@@ -1192,15 +1193,24 @@ void GameBrowseMenu::UpdateGameInfoText(const u8 * gameId)
     }
 
     HaltGui();
-    if ((Settings.sinfo == GAMEINFO_ID) || (Settings.sinfo == GAMEINFO_BOTH))
+    if (Settings.sinfo == GAMEINFO_ID || Settings.sinfo == GAMEINFO_BOTH)
     {
         Remove(GameIDTxt);
         delete GameIDTxt;
         GameIDTxt = new GuiText(IDfull, 22, thColor("r=55 g=190 b=237 a=255 - game id text color"));
         GameIDTxt->SetAlignment(ALIGN_LEFT, ALIGN_TOP);
-        idBtn->SetEffect(EFFECT_FADE, 20);
-        idBtn->SetLabel(GameIDTxt);
-        Append(idBtn);
+        if(Settings.godmode || !(Settings.ParentalBlocks & BLOCK_GAMEID_CHANGE))
+        {
+            idBtn->SetEffect(EFFECT_FADE, 20);
+            idBtn->SetLabel(GameIDTxt);
+            Append(idBtn);
+        }
+        else
+        {
+            GameIDTxt->SetPosition(thInt("68 - gameID btn pos x"), thInt("305 - gameID btn pos y"));
+            GameIDTxt->SetEffect(EFFECT_FADE, 20);
+            Append(GameIDTxt);
+        }
     }
     //don't try to show region for channels because all the custom channels wont follow the rules
     if ((Settings.sinfo == GAMEINFO_REGION) || (Settings.sinfo == GAMEINFO_BOTH))

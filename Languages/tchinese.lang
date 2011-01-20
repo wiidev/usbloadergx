@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-17 19:24+0100\n"
+"POT-Creation-Date: 2011-01-20 15:43+0100\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
 "Last-Translator: Jane.H\n"
 "Language-Team: kyogc, Miller, Mika Li, Jane.H\n"
@@ -28,14 +28,8 @@ msgstr "不在伺服器上"
 msgid "0 (Everyone)"
 msgstr "0 (全年齡)"
 
-msgid "0 (Locked and Unlocked Games)"
-msgstr "0 (鎖上及解鎖遊戲)"
-
 msgid "1 (Child 7+)"
 msgstr "1 (7歲以上)"
-
-msgid "1 (Unlocked Games Only)"
-msgstr "1 (只鎖上遊戲)"
 
 msgid "1 hour"
 msgstr "1 小時"
@@ -166,9 +160,6 @@ msgstr "自動檢查網路"
 msgid "BCA Codes Path"
 msgstr "BAC代碼路徑"
 
-msgid "BETA revisions"
-msgstr "測試版本"
-
 msgid "Back"
 msgstr "返回"
 
@@ -181,8 +172,56 @@ msgstr "背景音樂"
 msgid "Big thanks to:"
 msgstr "非常感謝:"
 
+msgid "Block Cover Downloads"
+msgstr ""
+
+msgid "Block Custom Paths"
+msgstr ""
+
+msgid "Block Game Install"
+msgstr ""
+
+msgid "Block Game Settings"
+msgstr ""
+
+msgid "Block GameID Change"
+msgstr ""
+
+msgid "Block Global Settings"
+msgstr ""
+
+msgid "Block Gui Settings"
+msgstr ""
+
+msgid "Block HBC Menu"
+msgstr ""
+
 msgid "Block IOS Reload"
 msgstr "阻止 IOS 重新載入"
+
+msgid "Block Loader Settings"
+msgstr ""
+
+msgid "Block Parental Settings"
+msgstr ""
+
+msgid "Block Reset Settings"
+msgstr ""
+
+msgid "Block Sound Settings"
+msgstr ""
+
+msgid "Block Theme Downloader"
+msgstr ""
+
+msgid "Block Theme Menu"
+msgstr ""
+
+msgid "Block Title Launcher"
+msgstr ""
+
+msgid "Block Updates"
+msgstr ""
 
 msgid "Boot/Standard"
 msgstr "啟動/標準"
@@ -251,6 +290,9 @@ msgstr "主機預設值"
 
 msgid "Console Locked"
 msgstr "控制台已上鎖"
+
+msgid "Console must be unlocked for this option."
+msgstr ""
 
 msgid "Console should be unlocked to modify it."
 msgstr "控制台須解鎖才可變更設定。"
@@ -401,7 +443,7 @@ msgid "Do you want to load this theme?"
 msgstr "是否要載入這佈景主題嗎？"
 
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
-msgstr ""
+msgstr "是否要同步所有FAT32磁區可用空間資訊？"
 
 msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "是否要使用這個已知是正確的 Alt DOL 檔案嗎？"
@@ -625,9 +667,6 @@ msgstr "遊戲名稱 [GAMEID]"
 msgid "Games"
 msgstr "遊戲數量"
 
-msgid "GamesLevel"
-msgstr "遊戲級別"
-
 msgid "Genre:"
 msgstr "類型："
 
@@ -754,7 +793,7 @@ msgid "Like SysMenu"
 msgstr "同系統選單"
 
 msgid "List on Gamelaunch"
-msgstr ""
+msgstr "遊戲啟動時列出清單"
 
 msgid "Load"
 msgstr "載入"
@@ -970,6 +1009,9 @@ msgstr "修改國別設定"
 msgid "Path Changed"
 msgstr "路徑已變更"
 
+msgid "Permission denied."
+msgstr ""
+
 msgid "Pick from a list"
 msgstr "從清單中選取"
 
@@ -1169,10 +1211,10 @@ msgid "Successfully installed:"
 msgstr "成功安裝："
 
 msgid "Sync FAT32 FS Info"
-msgstr ""
+msgstr "同步FAT32檔案系統資訊"
 
 msgid "Synchronizing..."
-msgstr ""
+msgstr "正在同步..."
 
 msgid "System Default"
 msgstr "系統預設值"
@@ -1190,7 +1232,7 @@ msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "所輸入的目錄不存在。是否要建立一個目錄嗎？"
 
 msgid "The game installation is disabled under this IOS because of instability in usb write."
-msgstr ""
+msgstr "用此IOS遊戲安裝選項會被關閉，因為USB寫入資料不穩定。"
 
 msgid "The wad file was installed"
 msgstr "wad檔已安裝"
@@ -1265,9 +1307,6 @@ msgstr "未知的"
 msgid "Unlock USB Loader GX"
 msgstr "USB Loader GX解鎖"
 
-msgid "Unlock console to use this option."
-msgstr "控制台解鎖以進行設定"
-
 msgid "Unlocked"
 msgstr "已解鎖"
 
@@ -1305,7 +1344,7 @@ msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "已更新安裝在Homebrew目錄的ZIP檔案"
 
 msgid "Use IOS58"
-msgstr ""
+msgstr "使用 IOS58"
 
 msgid "VIDTV Patch"
 msgstr "VIDTV 修改"
@@ -1318,7 +1357,7 @@ msgid "Video Mode"
 msgstr "視訊格式"
 
 msgid "WDM Files Path"
-msgstr ""
+msgstr "WDM檔案路徑"
 
 msgid "WIP Patches Path"
 msgstr "WIP 修正檔路徑"
@@ -1363,7 +1402,7 @@ msgid "Yes"
 msgstr "是"
 
 msgid "You are currently using IOS"
-msgstr ""
+msgstr "目前你使用中的IOS"
 
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr "你嘗試用高於 cIOS 249 版本18去選取 FAT32/NTFS/EXT 磁區。這格式不支援。繼續請自行承擔風險。"
@@ -1427,6 +1466,21 @@ msgstr "的"
 
 msgid "seconds left"
 msgstr "剩餘秒數"
+
+#~ msgid "0 (Locked and Unlocked Games)"
+#~ msgstr "0 (鎖上及解鎖遊戲)"
+
+#~ msgid "1 (Unlocked Games Only)"
+#~ msgstr "1 (只鎖上遊戲)"
+
+#~ msgid "BETA revisions"
+#~ msgstr "測試版本"
+
+#~ msgid "GamesLevel"
+#~ msgstr "遊戲級別"
+
+#~ msgid "Unlock console to use this option."
+#~ msgstr "控制台解鎖以進行設定"
 
 #~ msgid "Enabling this option on a FAT partition might slow the startup of the loader."
 #~ msgstr "在FAT磁區開啟這選項可能造成loader啟動緩慢。"

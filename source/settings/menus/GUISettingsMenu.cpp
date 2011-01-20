@@ -111,7 +111,6 @@ GuiSettingsMenu::GuiSettingsMenu()
     Options->SetName(Idx++, "%s", tr( "Wiilight" ));
     Options->SetName(Idx++, "%s", tr( "Rumble" ));
     Options->SetName(Idx++, "%s", tr( "AutoInit Network" ));
-    Options->SetName(Idx++, "%s", tr( "BETA revisions" ));
     Options->SetName(Idx++, "%s", tr( "Titles from WiiTDB" ));
     Options->SetName(Idx++, "%s", tr( "Screensaver" ));
     Options->SetName(Idx++, "%s", tr( "Mark new games" ));
@@ -176,9 +175,6 @@ void GuiSettingsMenu::SetOptionValues()
 
     //! Settings: AutoInit Network
     Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.autonetwork] ));
-
-    //! Settings: BETA revisions
-    Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.beta_upgrades] ));
 
     //! Settings: Titles from WiiTDB
     Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.titlesOverride] ));
@@ -300,12 +296,6 @@ int GuiSettingsMenu::GetMenuInternal()
     else if (ret == ++Idx)
     {
         if (++Settings.autonetwork >= MAX_ON_OFF) Settings.autonetwork = 0;
-    }
-
-    //! Settings: BETA revisions
-    else if (ret == ++Idx)
-    {
-        if (++Settings.beta_upgrades >= MAX_ON_OFF) Settings.beta_upgrades = 0;
     }
 
     //! Settings: Titles from WiiTDB

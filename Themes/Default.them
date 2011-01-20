@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-16 14:42+0100\n"
+"POT-Creation-Date: 2011-01-20 15:51+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -32,6 +32,30 @@ msgid "r=0 g=0 b=0 a=255 - game browser list text color"
 msgstr ""
 
 msgid "r=0 g=0 b=0 a=255 - game browser list text color over"
+msgstr ""
+
+msgid "left - carousel layout left arrow align hor"
+msgstr ""
+
+msgid "top - carousel layout left arrow align ver"
+msgstr ""
+
+msgid "20 - carousel layout left arrow pos x"
+msgstr ""
+
+msgid "65 - carousel layout left arrow pos y"
+msgstr ""
+
+msgid "right - carousel layout right arrow align hor"
+msgstr ""
+
+msgid "top - carousel layout right arrow align ver"
+msgstr ""
+
+msgid "-20 - carousel layout right arrow pos x"
+msgstr ""
+
+msgid "65 - carousel layout right arrow pos y"
 msgstr ""
 
 msgid "r=55 g=190 b=237 a=255 - carousel game name text color"
@@ -371,30 +395,6 @@ msgid "480 - carousel layout dvd btn pos x"
 msgstr ""
 
 msgid "13 - carousel layout dvd btn pos y"
-msgstr ""
-
-msgid "left - carousel layout left arrow align hor"
-msgstr ""
-
-msgid "top - carousel layout left arrow align ver"
-msgstr ""
-
-msgid "20 - carousel layout left arrow pos x"
-msgstr ""
-
-msgid "65 - carousel layout left arrow pos y"
-msgstr ""
-
-msgid "right - carousel layout right arrow align hor"
-msgstr ""
-
-msgid "top - carousel layout right arrow align ver"
-msgstr ""
-
-msgid "-20 - carousel layout right arrow pos x"
-msgstr ""
-
-msgid "65 - carousel layout right arrow pos y"
 msgstr ""
 
 msgid "400 - game carousel layout height"

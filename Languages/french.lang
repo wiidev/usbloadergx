@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-17 19:24+0100\n"
+"POT-Creation-Date: 2011-01-20 15:41+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan\n"
 "Language-Team: Badablek, Amour, ikya & Kin8\n"
@@ -28,14 +28,8 @@ msgstr " indisponible sur le serveur."
 msgid "0 (Everyone)"
 msgstr "0 (Tous 3+)"
 
-msgid "0 (Locked and Unlocked Games)"
-msgstr "0 (Affiche les jeux verrouillés et non verrouillés)"
-
 msgid "1 (Child 7+)"
 msgstr "1 (Enfants 7+)"
-
-msgid "1 (Unlocked Games Only)"
-msgstr "1 (Affiche seulement les jeux non verrouillés)"
 
 msgid "1 hour"
 msgstr "1 heure"
@@ -166,9 +160,6 @@ msgstr "AutoInit réseau"
 msgid "BCA Codes Path"
 msgstr "Dossier codes BCA"
 
-msgid "BETA revisions"
-msgstr "Révisions BETA"
-
 msgid "Back"
 msgstr "Retour"
 
@@ -181,8 +172,56 @@ msgstr "Fond sonore"
 msgid "Big thanks to:"
 msgstr "Grand merci à:"
 
+msgid "Block Cover Downloads"
+msgstr ""
+
+msgid "Block Custom Paths"
+msgstr ""
+
+msgid "Block Game Install"
+msgstr ""
+
+msgid "Block Game Settings"
+msgstr ""
+
+msgid "Block GameID Change"
+msgstr ""
+
+msgid "Block Global Settings"
+msgstr ""
+
+msgid "Block Gui Settings"
+msgstr ""
+
+msgid "Block HBC Menu"
+msgstr ""
+
 msgid "Block IOS Reload"
 msgstr "Bloquer IOS reload"
+
+msgid "Block Loader Settings"
+msgstr ""
+
+msgid "Block Parental Settings"
+msgstr ""
+
+msgid "Block Reset Settings"
+msgstr ""
+
+msgid "Block Sound Settings"
+msgstr ""
+
+msgid "Block Theme Downloader"
+msgstr ""
+
+msgid "Block Theme Menu"
+msgstr ""
+
+msgid "Block Title Launcher"
+msgstr ""
+
+msgid "Block Updates"
+msgstr ""
 
 msgid "Boot/Standard"
 msgstr ""
@@ -251,6 +290,9 @@ msgstr "Console par défaut"
 
 msgid "Console Locked"
 msgstr "Console verrouillée"
+
+msgid "Console must be unlocked for this option."
+msgstr ""
 
 msgid "Console should be unlocked to modify it."
 msgstr "La console doit être déverrouillée."
@@ -625,9 +667,6 @@ msgstr "NomJeu [IDJEU]"
 msgid "Games"
 msgstr "Jeux"
 
-msgid "GamesLevel"
-msgstr "Niv. verrou"
-
 msgid "Genre:"
 msgstr ""
 
@@ -970,6 +1009,9 @@ msgstr "Patch jeux import"
 msgid "Path Changed"
 msgstr "Chemin changé"
 
+msgid "Permission denied."
+msgstr ""
+
 msgid "Pick from a list"
 msgstr "Sélectionner"
 
@@ -1265,9 +1307,6 @@ msgstr "Inconnu"
 msgid "Unlock USB Loader GX"
 msgstr "Déverrouiller USB Loader GX"
 
-msgid "Unlock console to use this option."
-msgstr "Cette option requiert le déverrouillage de l'interface."
-
 msgid "Unlocked"
 msgstr "Clic pour verrouiller"
 
@@ -1427,6 +1466,21 @@ msgstr "sur"
 
 msgid "seconds left"
 msgstr "secondes restantes"
+
+#~ msgid "0 (Locked and Unlocked Games)"
+#~ msgstr "0 (Affiche les jeux verrouillés et non verrouillés)"
+
+#~ msgid "1 (Unlocked Games Only)"
+#~ msgstr "1 (Affiche seulement les jeux non verrouillés)"
+
+#~ msgid "BETA revisions"
+#~ msgstr "Révisions BETA"
+
+#~ msgid "GamesLevel"
+#~ msgstr "Niv. verrou"
+
+#~ msgid "Unlock console to use this option."
+#~ msgstr "Cette option requiert le déverrouillage de l'interface."
 
 #~ msgid "Enabling this option on a FAT partition might slow the startup of the loader."
 #~ msgstr "Activer cette option sur une partition FAT peut ralentir le démarrage du loader."

@@ -72,14 +72,26 @@ void GlobalSettings::CreateSettingsMenu(int menuNr)
     //! GUI Settings
     if(menuNr == Idx++)
     {
+        if(!Settings.godmode && (Settings.ParentalBlocks & BLOCK_GUI_SETTINGS))
+        {
+            WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
+            return;
+        }
+
         HideMenu();
         ResumeGui();
         CurrentMenu = new GuiSettingsMenu();
         Append(CurrentMenu);
     }
-    //! Game Load
+    //! Loader Settings
     else if(menuNr == Idx++)
     {
+        if(!Settings.godmode && (Settings.ParentalBlocks & BLOCK_LOADER_SETTINGS))
+        {
+            WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
+            return;
+        }
+
         HideMenu();
         ResumeGui();
         CurrentMenu = new LoaderSettings();
@@ -88,6 +100,12 @@ void GlobalSettings::CreateSettingsMenu(int menuNr)
     //! Parental Control
     else if(menuNr == Idx++)
     {
+        if(!Settings.godmode && (Settings.ParentalBlocks & BLOCK_PARENTAL_SETTINGS))
+        {
+            WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
+            return;
+        }
+
         HideMenu();
         ResumeGui();
         CurrentMenu = new ParentalControlSM();
@@ -96,6 +114,12 @@ void GlobalSettings::CreateSettingsMenu(int menuNr)
     //! Sound
     else if(menuNr == Idx++)
     {
+        if(!Settings.godmode && (Settings.ParentalBlocks & BLOCK_SOUND_SETTINGS))
+        {
+            WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
+            return;
+        }
+
         HideMenu();
         ResumeGui();
         CurrentMenu = new SoundSettingsMenu();
@@ -104,51 +128,53 @@ void GlobalSettings::CreateSettingsMenu(int menuNr)
     //! Custom Paths
     else if(menuNr == Idx++)
     {
-        if(Settings.godmode)
+        if(!Settings.godmode && (Settings.ParentalBlocks & BLOCK_CUSTOMPATH_SETTINGS))
         {
-            HideMenu();
-            ResumeGui();
-            CurrentMenu = new CustomPathsSM();
-            Append(CurrentMenu);
+            WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
+            return;
         }
-        else
-            WindowPrompt(tr( "Console Locked" ), tr( "Unlock console to use this option." ), tr( "OK" ));
 
+        HideMenu();
+        ResumeGui();
+        CurrentMenu = new CustomPathsSM();
+        Append(CurrentMenu);
     }
     //! Update
     else if(menuNr == Idx++)
     {
-        if (Settings.godmode)
+        if(!Settings.godmode && (Settings.ParentalBlocks & BLOCK_UPDATES))
         {
-            HideMenu();
-            Remove(backBtn);
-            ResumeGui();
-            int ret = UpdateApp();
-            if (ret < 0)
-                WindowPrompt(tr( "Update failed" ), 0, tr( "OK" ));
-            Append(backBtn);
-            ShowMenu();
+            WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
+            return;
         }
-        else
-            WindowPrompt(tr( "Console Locked" ), tr( "Unlock console to use this option." ), tr( "OK" ));
+
+        HideMenu();
+        Remove(backBtn);
+        ResumeGui();
+        int ret = UpdateApp();
+        if (ret < 0)
+            WindowPrompt(tr( "Update failed" ), 0, tr( "OK" ));
+        Append(backBtn);
+        ShowMenu();
     }
     //! Default Settings
     else if(menuNr == Idx++)
     {
-        if (Settings.godmode)
+        if(!Settings.godmode && (Settings.ParentalBlocks & BLOCK_RESET_SETTINGS))
         {
-            int choice = WindowPrompt(tr( "Are you sure you want to reset?" ), 0, tr( "Yes" ), tr( "Cancel" ));
-            if (choice == 1)
-            {
-                HaltGui();
-                gettextCleanUp();
-                Settings.Reset();
-                returnMenu = MENU_SETTINGS;
-                ResumeGui();
-            }
+            WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
+            return;
         }
-        else
-            WindowPrompt(tr( "Console Locked" ), tr( "Unlock console to use this option." ), tr( "OK" ));
+
+        int choice = WindowPrompt(tr( "Are you sure you want to reset?" ), 0, tr( "Yes" ), tr( "Cancel" ));
+        if (choice == 1)
+        {
+            HaltGui();
+            gettextCleanUp();
+            Settings.Reset();
+            returnMenu = MENU_SETTINGS;
+            ResumeGui();
+        }
     }
     //! Credits
     else if(menuNr == Idx++)
@@ -163,6 +189,12 @@ void GlobalSettings::CreateSettingsMenu(int menuNr)
     //! Theme Downloader
     else if(menuNr == Idx++)
     {
+        if(!Settings.godmode && (Settings.ParentalBlocks & BLOCK_THEME_DOWNLOADER))
+        {
+            WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
+            return;
+        }
+
         returnMenu = MENU_THEMEDOWNLOADER;
     }
 }

@@ -145,7 +145,7 @@ int GameList::FilterList(const wchar_t * gameFilter)
         GameCFG * GameConfig = GameSettings.GetGameCFG(header);
 
         /* Rating based parental control method */
-        if (Settings.parentalcontrol != 4 && !Settings.godmode)
+        if (Settings.parentalcontrol != PARENTAL_LVL_ADULT && !Settings.godmode)
         {
             if (GameConfig && GameConfig->parentalcontrol > Settings.parentalcontrol)
                 continue;
@@ -157,7 +157,7 @@ int GameList::FilterList(const wchar_t * gameFilter)
         }
 
         //! Per game lock method
-        if(!Settings.godmode && Settings.lockedgames && GameConfig && GameConfig->Locked)
+        if(!Settings.godmode && GameConfig && GameConfig->Locked)
             continue;
 
         wchar_t *gameName = charToWideChar(GameTitles.GetTitle(header));

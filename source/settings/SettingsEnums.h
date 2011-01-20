@@ -5,7 +5,7 @@
 
 enum
 {
-    JAPANESE = 0,
+    JAPANESE,
     ENGLISH,
     GERMAN,
     FRENCH,
@@ -21,7 +21,7 @@ enum
 
 enum
 {
-    VIDEO_MODE_SYSDEFAULT = 0,
+    VIDEO_MODE_SYSDEFAULT,
     VIDEO_MODE_DISCDEFAULT,
     VIDEO_MODE_PAL50,
     VIDEO_MODE_PAL60,
@@ -32,7 +32,7 @@ enum
 
 enum
 {
-    OFF = 0,
+    OFF,
     ON,
     MAX_ON_OFF
 };
@@ -47,7 +47,7 @@ enum
 
 enum
 {
-    WIILIGHT_OFF = 0,
+    WIILIGHT_OFF,
     WIILIGHT_ON,
     WIILIGHT_INSTALL,
     WIILIGHT_MAX
@@ -76,7 +76,7 @@ enum
 
 enum
 {
-    XFLIP_NO = 0,
+    XFLIP_NO,
     XFLIP_YES,
     XFLIP_SYSMENU,
     XFLIP_WTF,
@@ -87,14 +87,14 @@ enum
 enum
 {
     //! Sorting should be used as AND to allow favorite ABC/RANK
-    SORT_ABC = 0x01,
-    SORT_PLAYCOUNT = 0x02,
-    SORT_RANKING = 0x04,
-    SORT_FAVORITE = 0x08,
+    SORT_ABC        = 0x01,
+    SORT_PLAYCOUNT  = 0x02,
+    SORT_RANKING    = 0x04,
+    SORT_FAVORITE   = 0x08,
 };
 enum
 {
-    KEYBOARD_QWERTY = 0,
+    KEYBOARD_QWERTY,
     KEYBOARD_DVORAK,
     KEYBOARD_QWERTZ,
     KEYBOARD_AZERTY,
@@ -123,6 +123,45 @@ enum
     LIST_MODE,
     GRID_MODE,
     CAROUSEL_MODE
+};
+
+enum
+{
+    DISCARTS_ORIGINALS,
+    DISCARTS_CUSTOMS,
+    DISCARTS_ORIGINALS_CUSTOMS,
+    DISCARTS_CUSTOMS_ORIGINALS,
+};
+
+enum
+{
+    PARENTAL_LVL_EVERYONE,
+    PARENTAL_LVL_CHILD,
+    PARENTAL_LVL_TEEN,
+    PARENTAL_LVL_MATURE,
+    PARENTAL_LVL_ADULT,
+};
+
+enum
+{
+    BLOCK_NONE                  = 0x00,
+    BLOCK_GLOBAL_SETTINGS       = 0x01,
+    BLOCK_GUI_SETTINGS          = 0x02,
+    BLOCK_LOADER_SETTINGS       = 0x04,
+    BLOCK_PARENTAL_SETTINGS     = 0x08,
+    BLOCK_SOUND_SETTINGS        = 0x10,
+    BLOCK_CUSTOMPATH_SETTINGS   = 0x20,
+    BLOCK_UPDATES               = 0x40,
+    BLOCK_RESET_SETTINGS        = 0x80,
+    BLOCK_THEME_DOWNLOADER      = 0x0100,
+    BLOCK_THEME_MENU            = 0x0200,
+    BLOCK_GAME_SETTINGS         = 0x0400,
+    BLOCK_HBC_MENU              = 0x0800,
+    BLOCK_TITLE_LAUNCHER_MENU   = 0x1000,
+    BLOCK_COVER_DOWNLOADS       = 0x2000,
+    BLOCK_GAME_INSTALL          = 0x4000,
+    BLOCK_GAMEID_CHANGE         = 0x8000,
+    BLOCK_ALL                   = 0xFFFFFFFF,
 };
 
 #endif

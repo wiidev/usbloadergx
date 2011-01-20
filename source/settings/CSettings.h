@@ -50,7 +50,27 @@ class CSettings
 
         /** Variables **/
         char BootDevice[10];
+        char unlockCode[20];
+        char db_language[20];
+        char returnTo[20];
         char ConfigPath[80];
+        char covers_path[100];
+        char covers2d_path[100];
+        char theme_path[100];
+        char theme[100];
+        char disc_path[100];
+        char titlestxt_path[100];
+        char language_path[100];
+        char languagefiles_path[100];
+        char ogg_path[150];
+        char Cheatcodespath[100];
+        char TxtCheatcodespath[100];
+        char BcaCodepath[100];
+        char WipCodepath[100];
+        char dolpath[100];
+        char update_path[100];
+        char homebrewapps_path[100];
+        char WDMpath[100];
         short videomode;
         short language;
         short ocarina;
@@ -59,13 +79,11 @@ class CSettings
         short hddinfo;
         short rumble;
         short xflip;
-        int volume;
-        int sfxvolume;
-        int gamesoundvolume;
+        short volume;
+        short sfxvolume;
+        short gamesoundvolume;
         short tooltips;
-        char unlockCode[20];
         short parentalcontrol;
-        short lockedgames;
         short cios;
         short quickboot;
         short wsprompt;
@@ -79,28 +97,8 @@ class CSettings
         short musicloopmode;
         short widescreen;
         short godmode;
-        char covers_path[100];
-        char covers2d_path[100];
-        char theme_path[100];
-        char theme[100];
-        char disc_path[100];
-        char titlestxt_path[100];
-        char language_path[100];
-        char languagefiles_path[100];
-        char ogg_path[250];
-        char dolpath[150];
-        char update_path[150];
-        char homebrewapps_path[150];
-        char Cheatcodespath[100];
-        char TxtCheatcodespath[100];
-        char BcaCodepath[100];
-        char WipCodepath[100];
-        char WDMpath[100];
         short error002;
         short titlesOverride; // db_titles
-        char db_url[200];
-        char db_language[20];
-        short db_JPtoEN;
         short gridRows;
         short autonetwork;
         short discart;
@@ -108,12 +106,11 @@ class CSettings
         short marknewtitles;
         short InstallToDir;
         short GameSplit;
-        u32 InstallPartitions;
-        short beta_upgrades;
         short PlaylogUpdate;
         short ShowFreeSpace;
         short UseIOS58;
-        char returnTo[20];
+        u32 InstallPartitions;
+        u32 ParentalBlocks;
     protected:
         bool ValidVersion(FILE * file);
         bool SetSetting(char *name, char *value);

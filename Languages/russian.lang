@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-17 19:24+0100\n"
+"POT-Creation-Date: 2011-01-20 15:43+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: nikolai_ca\n"
 "Language-Team: Kir, alendit, nikolai_ca\n"
@@ -28,14 +28,8 @@ msgstr " не найден на сервере"
 msgid "0 (Everyone)"
 msgstr "0 (Для всех)"
 
-msgid "0 (Locked and Unlocked Games)"
-msgstr ""
-
 msgid "1 (Child 7+)"
 msgstr "1 (Дети 7+)"
-
-msgid "1 (Unlocked Games Only)"
-msgstr ""
 
 msgid "1 hour"
 msgstr "1 час"
@@ -166,9 +160,6 @@ msgstr "АвтоИнициализация Сети"
 msgid "BCA Codes Path"
 msgstr "Путь к кодам BCA"
 
-msgid "BETA revisions"
-msgstr "BETA-версии"
-
 msgid "Back"
 msgstr "Назад"
 
@@ -181,8 +172,56 @@ msgstr "Фоновая музыка"
 msgid "Big thanks to:"
 msgstr "Большое спасибо:"
 
+msgid "Block Cover Downloads"
+msgstr ""
+
+msgid "Block Custom Paths"
+msgstr ""
+
+msgid "Block Game Install"
+msgstr ""
+
+msgid "Block Game Settings"
+msgstr ""
+
+msgid "Block GameID Change"
+msgstr ""
+
+msgid "Block Global Settings"
+msgstr ""
+
+msgid "Block Gui Settings"
+msgstr ""
+
+msgid "Block HBC Menu"
+msgstr ""
+
 msgid "Block IOS Reload"
 msgstr "Блокировать перезагрузку IOS"
+
+msgid "Block Loader Settings"
+msgstr ""
+
+msgid "Block Parental Settings"
+msgstr ""
+
+msgid "Block Reset Settings"
+msgstr ""
+
+msgid "Block Sound Settings"
+msgstr ""
+
+msgid "Block Theme Downloader"
+msgstr ""
+
+msgid "Block Theme Menu"
+msgstr ""
+
+msgid "Block Title Launcher"
+msgstr ""
+
+msgid "Block Updates"
+msgstr ""
 
 msgid "Boot/Standard"
 msgstr "Загрузка/Стандарт"
@@ -251,6 +290,9 @@ msgstr "По умолчанию (консоль)"
 
 msgid "Console Locked"
 msgstr "Консоль заблокирована"
+
+msgid "Console must be unlocked for this option."
+msgstr ""
 
 msgid "Console should be unlocked to modify it."
 msgstr "Для изменения консоль должна быть разблокирована."
@@ -625,9 +667,6 @@ msgstr ""
 msgid "Games"
 msgstr "Игры"
 
-msgid "GamesLevel"
-msgstr ""
-
 msgid "Genre:"
 msgstr ""
 
@@ -970,6 +1009,9 @@ msgstr "Патчить строки страны"
 msgid "Path Changed"
 msgstr ""
 
+msgid "Permission denied."
+msgstr ""
+
 msgid "Pick from a list"
 msgstr "Выберите из списка"
 
@@ -1265,9 +1307,6 @@ msgstr ""
 msgid "Unlock USB Loader GX"
 msgstr ""
 
-msgid "Unlock console to use this option."
-msgstr "Для изменения параметра разблокируйте консоль."
-
 msgid "Unlocked"
 msgstr "Разблокировано"
 
@@ -1427,6 +1466,12 @@ msgstr "из"
 
 msgid "seconds left"
 msgstr "секунд осталось"
+
+#~ msgid "BETA revisions"
+#~ msgstr "BETA-версии"
+
+#~ msgid "Unlock console to use this option."
+#~ msgstr "Для изменения параметра разблокируйте консоль."
 
 #~ msgid "Full Shutdown"
 #~ msgstr "Полное отключение"

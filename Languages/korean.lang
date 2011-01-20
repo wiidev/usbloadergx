@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-17 19:24+0100\n"
+"POT-Creation-Date: 2011-01-20 15:43+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: nextos@korea.com\n"
 "Language-Team: \n"
@@ -28,14 +28,8 @@ msgstr " 은 서버에 없어요."
 msgid "0 (Everyone)"
 msgstr "0 (모두다)"
 
-msgid "0 (Locked and Unlocked Games)"
-msgstr ""
-
 msgid "1 (Child 7+)"
 msgstr "1 (7세 이상)"
-
-msgid "1 (Unlocked Games Only)"
-msgstr ""
 
 msgid "1 hour"
 msgstr "1 시간"
@@ -166,9 +160,6 @@ msgstr "자동네트웍설정"
 msgid "BCA Codes Path"
 msgstr ""
 
-msgid "BETA revisions"
-msgstr ""
-
 msgid "Back"
 msgstr "뒤로"
 
@@ -181,8 +172,56 @@ msgstr "배경음악"
 msgid "Big thanks to:"
 msgstr "감사 :"
 
+msgid "Block Cover Downloads"
+msgstr ""
+
+msgid "Block Custom Paths"
+msgstr ""
+
+msgid "Block Game Install"
+msgstr ""
+
+msgid "Block Game Settings"
+msgstr ""
+
+msgid "Block GameID Change"
+msgstr ""
+
+msgid "Block Global Settings"
+msgstr ""
+
+msgid "Block Gui Settings"
+msgstr ""
+
+msgid "Block HBC Menu"
+msgstr ""
+
 msgid "Block IOS Reload"
 msgstr "IOS 재로딩 막음"
+
+msgid "Block Loader Settings"
+msgstr ""
+
+msgid "Block Parental Settings"
+msgstr ""
+
+msgid "Block Reset Settings"
+msgstr ""
+
+msgid "Block Sound Settings"
+msgstr ""
+
+msgid "Block Theme Downloader"
+msgstr ""
+
+msgid "Block Theme Menu"
+msgstr ""
+
+msgid "Block Title Launcher"
+msgstr ""
+
+msgid "Block Updates"
+msgstr ""
 
 msgid "Boot/Standard"
 msgstr "기본 부팅설정"
@@ -251,6 +290,9 @@ msgstr "콘솔 기본값"
 
 msgid "Console Locked"
 msgstr "콘솔 잠김"
+
+msgid "Console must be unlocked for this option."
+msgstr ""
 
 msgid "Console should be unlocked to modify it."
 msgstr "변경하려면 콘솔 잠김을 해제하세요."
@@ -625,9 +667,6 @@ msgstr ""
 msgid "Games"
 msgstr "게임"
 
-msgid "GamesLevel"
-msgstr ""
-
 msgid "Genre:"
 msgstr ""
 
@@ -970,6 +1009,9 @@ msgstr "패치 컨트리 스트링"
 msgid "Path Changed"
 msgstr ""
 
+msgid "Permission denied."
+msgstr ""
+
 msgid "Pick from a list"
 msgstr "리스트로 부터 고르기"
 
@@ -1265,9 +1307,6 @@ msgstr ""
 msgid "Unlock USB Loader GX"
 msgstr ""
 
-msgid "Unlock console to use this option."
-msgstr "이 옵션을 사용하기 위해 콘솔을 잠금해제"
-
 msgid "Unlocked"
 msgstr "잠금해제"
 
@@ -1427,6 +1466,9 @@ msgstr "중"
 
 msgid "seconds left"
 msgstr "초 남았습니다"
+
+#~ msgid "Unlock console to use this option."
+#~ msgstr "이 옵션을 사용하기 위해 콘솔을 잠금해제"
 
 #~ msgid "Full Shutdown"
 #~ msgstr "완전히 끄기"

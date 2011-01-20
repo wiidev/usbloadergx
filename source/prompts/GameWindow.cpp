@@ -114,16 +114,8 @@ GameWindow::GameWindow(int Selected)
     backBtn = new GuiButton(backBtnImg, backBtnImg, 1, 5, 0, 0, trigA, btnSoundOver, btnSoundClick2, 1);
     backBtn->SetLabel(backBtnTxt);
     backBtn->SetTrigger(trigB);
-    if (Settings.godmode == 1 && mountMethod != 2)
-    {
-        backBtn->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
-        backBtn->SetPosition(-50, -40);
-    }
-    else
-    {
-        backBtn->SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
-        backBtn->SetPosition(0, -40);
-    }
+    backBtn->SetAlignment(ALIGN_CENTRE, ALIGN_BOTTOM);
+    backBtn->SetPosition(0, -40);
 
     settingsBtnTxt = new GuiText(tr( "Settings" ), 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     settingsBtnImg = new GuiImage(btnOutline);
@@ -177,8 +169,10 @@ GameWindow::GameWindow(int Selected)
             Append(FavoriteBtn[i]);
     }
     //check if unlocked
-    if (Settings.godmode == 1 && mountMethod != 2)
+    if (mountMethod != 2 && (Settings.godmode || !(Settings.ParentalBlocks & BLOCK_GAME_INSTALL)))
     {
+        backBtn->SetAlignment(ALIGN_RIGHT, ALIGN_BOTTOM);
+        backBtn->SetPosition(-50, -40);
         Append(settingsBtn);
     }
 

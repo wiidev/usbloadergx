@@ -1,12 +1,12 @@
 # USB Loader GX language source file.
-# italian.lang - v67 - r1039
+# italian.lang - v68 - r1045
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-17 19:24+0100\n"
-"PO-Revision-Date: 2011-01-09 22:30+0200\n"
+"POT-Creation-Date: 2011-01-20 15:41+0100\n"
+"PO-Revision-Date: 2011-01-16 16:00+0200\n"
 "Last-Translator: Cambo \n"
 "Language-Team: Cambo\n"
 "MIME-Version: 1.0\n"
@@ -28,14 +28,8 @@ msgstr " non è disponibile sul server."
 msgid "0 (Everyone)"
 msgstr "0 (Tutti)"
 
-msgid "0 (Locked and Unlocked Games)"
-msgstr "0 (Tutti i Giochi)"
-
 msgid "1 (Child 7+)"
 msgstr "1 (Bambini 7+)"
-
-msgid "1 (Unlocked Games Only)"
-msgstr "1 (Giochi Non Bloccati)"
 
 msgid "1 hour"
 msgstr "1 ora"
@@ -166,9 +160,6 @@ msgstr "Inizializz. Rete Automatica"
 msgid "BCA Codes Path"
 msgstr "Cart. Codici BCA"
 
-msgid "BETA revisions"
-msgstr "Versioni BETA"
-
 msgid "Back"
 msgstr "Indietro"
 
@@ -181,8 +172,56 @@ msgstr "Musica Sottofondo"
 msgid "Big thanks to:"
 msgstr "Grazie mille a:"
 
+msgid "Block Cover Downloads"
+msgstr ""
+
+msgid "Block Custom Paths"
+msgstr ""
+
+msgid "Block Game Install"
+msgstr ""
+
+msgid "Block Game Settings"
+msgstr ""
+
+msgid "Block GameID Change"
+msgstr ""
+
+msgid "Block Global Settings"
+msgstr ""
+
+msgid "Block Gui Settings"
+msgstr ""
+
+msgid "Block HBC Menu"
+msgstr ""
+
 msgid "Block IOS Reload"
 msgstr "Blocca Ricarica cIOS"
+
+msgid "Block Loader Settings"
+msgstr ""
+
+msgid "Block Parental Settings"
+msgstr ""
+
+msgid "Block Reset Settings"
+msgstr ""
+
+msgid "Block Sound Settings"
+msgstr ""
+
+msgid "Block Theme Downloader"
+msgstr ""
+
+msgid "Block Theme Menu"
+msgstr ""
+
+msgid "Block Title Launcher"
+msgstr ""
+
+msgid "Block Updates"
+msgstr ""
 
 msgid "Boot/Standard"
 msgstr "cIOS Predefinito"
@@ -251,6 +290,9 @@ msgstr "Predefinita Console"
 
 msgid "Console Locked"
 msgstr "Console Bloccata"
+
+msgid "Console must be unlocked for this option."
+msgstr ""
 
 msgid "Console should be unlocked to modify it."
 msgstr "Sbloccare la Console per Modificarla."
@@ -401,7 +443,7 @@ msgid "Do you want to load this theme?"
 msgstr "Vuoi caricare questo tema?"
 
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
-msgstr ""
+msgstr "Vuoi sincronizzare le informazioni sullo spazio libero in tutte le partizioni FAT32?"
 
 msgid "Do you want to use the alternate DOL that is known to be correct?"
 msgstr "Vuoi utilizzare il DOL alternativo funzionante?"
@@ -625,9 +667,6 @@ msgstr "Nomegioco [IDGIOCO]"
 msgid "Games"
 msgstr "Giochi"
 
-msgid "GamesLevel"
-msgstr "Livelli"
-
 msgid "Genre:"
 msgstr "Genere:"
 
@@ -754,7 +793,7 @@ msgid "Like SysMenu"
 msgstr "Come SysMenu"
 
 msgid "List on Gamelaunch"
-msgstr ""
+msgstr "Lista all'Avvio"
 
 msgid "Load"
 msgstr "Carica"
@@ -970,6 +1009,9 @@ msgstr "Cod. Patch Regione"
 msgid "Path Changed"
 msgstr "Cartella Modificata"
 
+msgid "Permission denied."
+msgstr ""
+
 msgid "Pick from a list"
 msgstr "Seleziona da un elenco"
 
@@ -1169,10 +1211,10 @@ msgid "Successfully installed:"
 msgstr "Installato correttamente:"
 
 msgid "Sync FAT32 FS Info"
-msgstr ""
+msgstr "Sincr. Info Spazio Lib."
 
 msgid "Synchronizing..."
-msgstr ""
+msgstr "Sto sincronizzando..."
 
 msgid "System Default"
 msgstr "Predefinita Sistema"
@@ -1265,9 +1307,6 @@ msgstr "Sconosciuto"
 msgid "Unlock USB Loader GX"
 msgstr "Sblocca USB Loader GX"
 
-msgid "Unlock console to use this option."
-msgstr "Sblocca la Console per usare questa opzione."
-
 msgid "Unlocked"
 msgstr "Sbloccato"
 
@@ -1305,7 +1344,7 @@ msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "File ZIP installato nella cartella Homebrew"
 
 msgid "Use IOS58"
-msgstr ""
+msgstr "Usa IOS58"
 
 msgid "VIDTV Patch"
 msgstr "Video Forzato"
@@ -1318,7 +1357,7 @@ msgid "Video Mode"
 msgstr "Modalità Video"
 
 msgid "WDM Files Path"
-msgstr ""
+msgstr "Cart. File WDM"
 
 msgid "WIP Patches Path"
 msgstr "Cart. Patch WIP"
@@ -1428,8 +1467,23 @@ msgstr "di"
 msgid "seconds left"
 msgstr "secondi mancanti"
 
+#~ msgid "0 (Locked and Unlocked Games)"
+#~ msgstr "0 (Tutti i Giochi)"
+
+#~ msgid "1 (Unlocked Games Only)"
+#~ msgstr "1 (Giochi Non Bloccati)"
+
+#~ msgid "BETA revisions"
+#~ msgstr "Versioni BETA"
+
 #~ msgid "Enabling this option on a FAT partition might slow the startup of the loader."
 #~ msgstr "Abilitando questa opzione su una partizione FAT potresti rallentare l'avvio del loader."
+
+#~ msgid "GamesLevel"
+#~ msgstr "Livelli"
+
+#~ msgid "Unlock console to use this option."
+#~ msgstr "Sblocca la Console per usare questa opzione."
 
 #~ msgid "Full Shutdown"
 #~ msgstr "Spegni Tutto"
