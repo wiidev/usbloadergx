@@ -71,7 +71,8 @@ HomebrewBrowser::HomebrewBrowser()
     channelBtn->SetSoundClick(btnSoundClick2);
     channelBtn->SetEffectGrow();
     channelBtn->SetTrigger(trigA);
-    Append(channelBtn);
+    if (Settings.godmode || !(Settings.ParentalBlocks & BLOCK_TITLE_LAUNCHER_MENU))
+        Append(channelBtn);
 
     MainButtonDesc.resize(HomebrewList->GetFilecount());
     MainButtonDescOver.resize(HomebrewList->GetFilecount());

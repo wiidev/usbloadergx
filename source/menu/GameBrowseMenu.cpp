@@ -651,7 +651,9 @@ void GameBrowseMenu::ReloadBrowser()
     Append(gameInfo);
     Append(homeBtn);
     Append(settingsBtn);
-    Append(homebrewBtn);
+
+    if (Settings.godmode || !(Settings.ParentalBlocks & BLOCK_HBC_MENU))
+        Append(homebrewBtn);
 
     if (Settings.godmode || !(Settings.ParentalBlocks & BLOCK_GAME_INSTALL))
         Append(installBtn);

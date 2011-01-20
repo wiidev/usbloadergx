@@ -88,32 +88,50 @@ int UninstallSM::GetMenuInternal()
     //! Settings: Uninstall Game
     if (ret == ++Idx)
     {
-        int choice = WindowPrompt(tr( "Do you really want to delete:" ), GameTitles.GetTitle(DiscHeader), tr( "Yes" ), tr( "Cancel" ));
-        if (choice == 1)
+        int choice = WindowPrompt(GameTitles.GetTitle(DiscHeader), tr( "What should be deleted for this game title:" ), tr( "Game Only" ), tr("Uninstall all"), tr( "Cancel" ));
+        if (choice == 0)
+            return MENU_NONE;
+
+        char GameID[7];
+        snprintf(GameID, sizeof(GameID), "%s", (char *) DiscHeader->id);
+
+        std::string Title = GameTitles.GetTitle(DiscHeader);
+        GameSettings.Remove(DiscHeader->id);
+        GameSettings.Save();
+        GameStatistics.Remove(DiscHeader->id);
+        GameStatistics.Save();
+        int ret = 0;
+        if(!mountMethod)
+            ret = WBFS_RemoveGame(DiscHeader->id);
+
+        if(ret >= 0)
         {
-            std::string Title = GameTitles.GetTitle(DiscHeader);
-            GameSettings.Remove(DiscHeader->id);
-            GameSettings.Save();
-            GameStatistics.Remove(DiscHeader->id);
-            GameStatistics.Save();
-            int ret = 0;
-            if(!mountMethod)
-                ret = WBFS_RemoveGame(DiscHeader->id);
-
-            if(ret >= 0)
-            {
-                wString oldFilter(gameList.GetCurrentFilter());
-                gameList.ReadGameList();
-                gameList.FilterList(oldFilter.c_str());
-            }
-
-            if (ret < 0)
-                WindowPrompt(tr( "Can't delete:" ), Title.c_str(), tr( "OK" ));
-            else
-                WindowPrompt(tr( "Successfully deleted:" ), Title.c_str(), tr( "OK" ));
-
-            return MENU_DISCLIST;
+            wString oldFilter(gameList.GetCurrentFilter());
+            gameList.ReadGameList();
+            gameList.FilterList(oldFilter.c_str());
         }
+
+        if(choice == 2)
+        {
+            char filepath[200];
+            snprintf(filepath, sizeof(filepath), "%s%s.png", Settings.covers_path, GameID);
+            if (CheckFile(filepath)) remove(filepath);
+            snprintf(filepath, sizeof(filepath), "%s%s.png", Settings.covers2d_path, GameID);
+            if (CheckFile(filepath)) remove(filepath);
+            snprintf(filepath, sizeof(filepath), "%s%s.png", Settings.disc_path, GameID);
+            if (CheckFile(filepath)) remove(filepath);
+            snprintf(filepath, sizeof(filepath), "%s%s.txt", Settings.TxtCheatcodespath, GameID);
+            if (CheckFile(filepath)) remove(filepath);
+            snprintf(filepath, sizeof(filepath), "%s%s.gct", Settings.Cheatcodespath, GameID);
+            if (CheckFile(filepath)) remove(filepath);
+        }
+
+        if (ret < 0)
+            WindowPrompt(tr( "Can't delete:" ), Title.c_str(), tr( "OK" ));
+        else
+            WindowPrompt(tr( "Successfully deleted:" ), Title.c_str(), tr( "OK" ));
+
+        return MENU_DISCLIST;
     }
 
     //! Settings: Reset Playcounter
@@ -130,14 +148,17 @@ int UninstallSM::GetMenuInternal()
     //! Settings: Delete Cover Artwork
     else if (ret == ++Idx)
     {
+        int choice = WindowPrompt(tr( "Delete" ), tr("Are you sure?"), tr( "Yes" ), tr( "No" ));
+        if (choice != 1)
+            return MENU_NONE;
+
         char GameID[7];
         snprintf(GameID, sizeof(GameID), "%s", (char *) DiscHeader->id);
         char filepath[200];
         snprintf(filepath, sizeof(filepath), "%s%s.png", Settings.covers_path, GameID);
-
-        int choice = WindowPrompt(tr( "Delete" ), filepath, tr( "Yes" ), tr( "No" ));
-        if (choice == 1)
-            if (CheckFile(filepath)) remove(filepath);
+        if (CheckFile(filepath)) remove(filepath);
+        snprintf(filepath, sizeof(filepath), "%s%s.png", Settings.covers2d_path, GameID);
+        if (CheckFile(filepath)) remove(filepath);
     }
 
     //! Settings: Delete Disc Artwork

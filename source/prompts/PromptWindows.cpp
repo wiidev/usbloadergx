@@ -549,6 +549,7 @@ int WindowPrompt(const char *title, const char *msg, const char *btn1Label, cons
     GuiText titleTxt(title, 26, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     titleTxt.SetAlignment(ALIGN_CENTRE, ALIGN_TOP);
     titleTxt.SetPosition(0, 55);
+    titleTxt.SetMaxWidth(430, DOTTED);
     GuiText msgTxt(msg, 22, thColor("r=0 g=0 b=0 a=255 - prompt windows text color"));
     msgTxt.SetAlignment(ALIGN_CENTRE, ALIGN_MIDDLE);
     msgTxt.SetPosition(0, -40);
