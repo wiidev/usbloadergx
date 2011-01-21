@@ -133,9 +133,12 @@ void app_loadgameconfig(char *discid)
     {
         snprintf(filepath, sizeof(filepath), "sd:/gameconfig.txt");
         fp = fopen(filepath, "rb");
-        if (!fp)
+
+        for(i = 1; i <= 8; ++i)
         {
-            snprintf(filepath, sizeof(filepath), "usb:/gameconfig.txt");
+            if(fp) break;
+
+            snprintf(filepath, sizeof(filepath), "usb%i:/gameconfig.txt", i);
             fp = fopen(filepath, "rb");
         }
     }
@@ -544,7 +547,7 @@ int ocarina_load_code(u8 *id)
     gprintf("Ocarina: Searching codes...");
     gprintf("\n");
 
-    sprintf(filepath, "%s%s", CheatFilepath, (char *) id);
+    sprintf(filepath, "%s%.6s", CheatFilepath, (char *) id);
     filepath[strlen(CheatFilepath) + 6] = 0x2E;
     filepath[strlen(CheatFilepath) + 7] = 0x67;
     filepath[strlen(CheatFilepath) + 8] = 0x63;

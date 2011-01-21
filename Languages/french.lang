@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-20 15:41+0100\n"
+"POT-Creation-Date: 2011-01-21 19:48+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan\n"
 "Language-Team: Badablek, Amour, ikya & Kin8\n"
@@ -421,9 +421,6 @@ msgstr "Liste"
 msgid "Display favorites only"
 msgstr "Seulement les favoris"
 
-msgid "Do you really want to delete:"
-msgstr "Voulez-vous vraiment supprimer:"
-
 msgid "Do you want to apply it now?"
 msgstr "L'appliquer maintenant ?"
 
@@ -444,9 +441,6 @@ msgstr "Voulez-vous charger ce thème ?"
 
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr "Voulez-vous synchroniser l'information d'espace libre disponible sur toutes les partitions FAT32 ?"
-
-msgid "Do you want to use the alternate DOL that is known to be correct?"
-msgstr "Voulez-vous utiliser le DOL alternatif actuellement connu comme correct ?"
 
 msgid "Do you wish to update/download all language files?"
 msgstr "Voulez-vous actualiser/télécharger tous les fichiers langue ?"
@@ -642,6 +636,9 @@ msgstr "Paramètres du jeu"
 
 msgid "Game Lock"
 msgstr "Verrouiller le jeu"
+
+msgid "Game Only"
+msgstr ""
 
 msgid "Game Region"
 msgstr "Région"
@@ -855,6 +852,9 @@ msgstr "Mise à jour carnet Wii"
 
 msgid "Missing files"
 msgstr "Fichier(s) manquant(s)"
+
+msgid "Motion+ Video"
+msgstr ""
 
 msgid "Mount DVD drive"
 msgstr "Lancer DVD"
@@ -1298,6 +1298,9 @@ msgstr "Désinstaller le jeu"
 msgid "Uninstall Menu"
 msgstr "Menu suppression"
 
+msgid "Uninstall all"
+msgstr ""
+
 msgid "Uninstalling wad"
 msgstr "Désinstallation wad"
 
@@ -1370,6 +1373,9 @@ msgstr "Attention:"
 
 msgid "What do you want to update?"
 msgstr "Choix de la mise à jour"
+
+msgid "What should be deleted for this game title:"
+msgstr ""
 
 msgid "WiFi Features"
 msgstr "Connexion WiFi"
@@ -1466,6 +1472,12 @@ msgstr "sur"
 
 msgid "seconds left"
 msgstr "secondes restantes"
+
+#~ msgid "Do you really want to delete:"
+#~ msgstr "Voulez-vous vraiment supprimer:"
+
+#~ msgid "Do you want to use the alternate DOL that is known to be correct?"
+#~ msgstr "Voulez-vous utiliser le DOL alternatif actuellement connu comme correct ?"
 
 #~ msgid "0 (Locked and Unlocked Games)"
 #~ msgstr "0 (Affiche les jeux verrouillés et non verrouillés)"

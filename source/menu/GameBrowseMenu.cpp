@@ -11,6 +11,7 @@
 #include "usbloader/wbfs.h"
 #include "usbloader/wdvd.h"
 #include "usbloader/GameList.h"
+#include "usbloader/AlternateDOLOffsets.h"
 #include "network/networkops.h"
 #include "network/update.h"
 #include "network/CoverDownload.h"
@@ -452,6 +453,37 @@ GameBrowseMenu::~GameBrowseMenu()
     ResumeGui();
 }
 
+int GameBrowseMenu::Execute()
+{
+    int retMenu = MENU_NONE;
+
+    GameBrowseMenu * Menu = new GameBrowseMenu();
+    mainWindow->Append(Menu);
+
+    if(Settings.ShowFreeSpace)
+    {
+        Menu->HDDSizeCallback.SetCallback(Menu, &GameBrowseMenu::UpdateFreeSpace);
+        ThreadedTask::Instance()->AddCallback(&Menu->HDDSizeCallback);
+        ThreadedTask::Instance()->Execute();
+    }
+
+    while(retMenu == MENU_NONE)
+    {
+        usleep(100);
+
+        if (shutdown)
+            Sys_Shutdown();
+        if (reset)
+            Sys_Reboot();
+
+        retMenu = Menu->MainLoop();
+    }
+
+    delete Menu;
+
+    return retMenu;
+}
+
 void GameBrowseMenu::ReloadBrowser()
 {
     ResumeGui();
@@ -699,33 +731,6 @@ void GameBrowseMenu::ReloadBrowser()
 
     while(parentElement && this->GetEffect() > 0) usleep(100);
 }
-
-int GameBrowseMenu::Show()
-{
-    int menu = MENU_NONE;
-
-    if(Settings.ShowFreeSpace)
-    {
-        HDDSizeCallback.SetCallback(this, &GameBrowseMenu::UpdateFreeSpace);
-        ThreadedTask::Instance()->AddCallback(&HDDSizeCallback);
-        ThreadedTask::Instance()->Execute();
-    }
-
-    while(menu == MENU_NONE)
-    {
-        usleep(100);
-
-        if (shutdown)
-            Sys_Shutdown();
-        if (reset)
-            Sys_Reboot();
-
-        menu = MainLoop();
-    }
-
-    return menu;
-}
-
 
 int GameBrowseMenu::MainLoop()
 {
@@ -1289,15 +1294,15 @@ int GameBrowseMenu::OpenClickedGame()
                 ocarinaChoice = game_cfg->ocarina;
             }
 
-            if(alternatedol == 3)
-                if(WDMMenu::Show(header) == 0)
-                {
-                    RunGame = false;
-                    returnHere = true;
-                }
-
             if (alternatedol == 2)
                 CheckAlternativeDOL(IDfull);
+            else if(alternatedol == 3 && WDMMenu::Show(header) == 0)
+            {
+                RunGame = false;
+                returnHere = true;
+            }
+            else if(alternatedol == 4)
+                defaultDolPrompt((char *) header->id);
 
             if (RunGame && ocarinaChoice != OFF)
                 CheckOcarina(IDfull);

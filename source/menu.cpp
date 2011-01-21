@@ -13,6 +13,7 @@
 #include "homebrewboot/BootHomebrew.h"
 #include "homebrewboot/HomebrewBrowse.h"
 #include "prompts/ProgressWindow.h"
+#include "menu/GameBrowseMenu.hpp"
 #include "menu/menus.h"
 #include "mload/mload.h"
 #include "mload/mload_modules.h"
@@ -224,7 +225,7 @@ int MainMenu(int menu)
                 break;
             case MENU_DISCLIST:
             default: // unrecognized menu
-                currentMenu = MenuDiscList();
+                currentMenu = GameBrowseMenu::Execute();
                 break;
         }
     }

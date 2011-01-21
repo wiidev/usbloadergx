@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-20 15:43+0100\n"
+"POT-Creation-Date: 2011-01-21 19:48+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Nitro_subzero \n"
 "Language-Team: Nitro_subzero\n"
@@ -421,9 +421,6 @@ msgstr "แสดงผลแบบ รายการ"
 msgid "Display favorites only"
 msgstr ""
 
-msgid "Do you really want to delete:"
-msgstr "ต้องการที่จะลบใช่ไหม:"
-
 msgid "Do you want to apply it now?"
 msgstr ""
 
@@ -444,9 +441,6 @@ msgstr ""
 
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr ""
-
-msgid "Do you want to use the alternate DOL that is known to be correct?"
-msgstr "ต้องการจะใช้ alt DOL เฉพาะที่รู้ว่าถูกต้อง?"
 
 msgid "Do you wish to update/download all language files?"
 msgstr "ต้องการอัพเดทหรือดาวน์โหลด ไฟล์ภาษา ทั้งหมด?"
@@ -641,6 +635,9 @@ msgid "Game Load"
 msgstr "โหลดเกมส์"
 
 msgid "Game Lock"
+msgstr ""
+
+msgid "Game Only"
 msgstr ""
 
 msgid "Game Region"
@@ -855,6 +852,9 @@ msgstr ""
 
 msgid "Missing files"
 msgstr "ไฟล์ที่หาไม่พบ"
+
+msgid "Motion+ Video"
+msgstr ""
 
 msgid "Mount DVD drive"
 msgstr "เชื่อม DVD ไดร์ฟ"
@@ -1298,6 +1298,9 @@ msgstr "ถอนการติดตั้ง"
 msgid "Uninstall Menu"
 msgstr "ถอนการติดตั้ง"
 
+msgid "Uninstall all"
+msgstr ""
+
 msgid "Uninstalling wad"
 msgstr "ถอนการติดตั้ง wad"
 
@@ -1370,6 +1373,9 @@ msgstr ""
 
 msgid "What do you want to update?"
 msgstr "คุณต้องการอัพเดทอะไร ?"
+
+msgid "What should be deleted for this game title:"
+msgstr ""
 
 msgid "WiFi Features"
 msgstr "ความสามารถของ Wi Fi"
@@ -1466,6 +1472,12 @@ msgstr "จาก"
 
 msgid "seconds left"
 msgstr "วินาทีที่เหลือ"
+
+#~ msgid "Do you really want to delete:"
+#~ msgstr "ต้องการที่จะลบใช่ไหม:"
+
+#~ msgid "Do you want to use the alternate DOL that is known to be correct?"
+#~ msgstr "ต้องการจะใช้ alt DOL เฉพาะที่รู้ว่าถูกต้อง?"
 
 #~ msgid "Unlock console to use this option."
 #~ msgstr "ปลดล๊อค Console ก่อน เพื่อใช้ตัวเลือกนี้"

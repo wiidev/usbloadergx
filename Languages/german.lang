@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-20 15:41+0100\n"
+"POT-Creation-Date: 2011-01-21 19:48+0100\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: TheRealVisitor\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
@@ -421,9 +421,6 @@ msgstr "Listen-Ansicht"
 msgid "Display favorites only"
 msgstr "Zeige nur Favoriten"
 
-msgid "Do you really want to delete:"
-msgstr "Löschvorgang bestätigen:"
-
 msgid "Do you want to apply it now?"
 msgstr "Jetzt übernehmen?"
 
@@ -444,9 +441,6 @@ msgstr "Soll dieses Theme geladen werden?"
 
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr ""
-
-msgid "Do you want to use the alternate DOL that is known to be correct?"
-msgstr "Die bekannte Alternative DOL verwenden?"
 
 msgid "Do you wish to update/download all language files?"
 msgstr "Alle Sprachdateien aktualisieren?"
@@ -642,6 +636,9 @@ msgstr "Spieleinstellungen"
 
 msgid "Game Lock"
 msgstr "Spielsprerre"
+
+msgid "Game Only"
+msgstr ""
 
 msgid "Game Region"
 msgstr "Region"
@@ -855,6 +852,9 @@ msgstr "Nachrichtenboard Update"
 
 msgid "Missing files"
 msgstr "Fehlende Dateien"
+
+msgid "Motion+ Video"
+msgstr ""
 
 msgid "Mount DVD drive"
 msgstr "Spiel starten"
@@ -1298,6 +1298,9 @@ msgstr "Spiel deinstallieren"
 msgid "Uninstall Menu"
 msgstr "Deinstallationsmenü"
 
+msgid "Uninstall all"
+msgstr ""
+
 msgid "Uninstalling wad"
 msgstr "Deinstalliere WAD"
 
@@ -1370,6 +1373,9 @@ msgstr "Warnung:"
 
 msgid "What do you want to update?"
 msgstr "Was möchtest du aktualisieren?"
+
+msgid "What should be deleted for this game title:"
+msgstr ""
 
 msgid "WiFi Features"
 msgstr "WiFi Fähigkeiten"
@@ -1466,6 +1472,12 @@ msgstr "von"
 
 msgid "seconds left"
 msgstr "Sekunden verbleiben"
+
+#~ msgid "Do you really want to delete:"
+#~ msgstr "Löschvorgang bestätigen:"
+
+#~ msgid "Do you want to use the alternate DOL that is known to be correct?"
+#~ msgstr "Die bekannte Alternative DOL verwenden?"
 
 #~ msgid "0 (Locked and Unlocked Games)"
 #~ msgstr "0 (Gesperrte und nichtgesperrte Spiele)"

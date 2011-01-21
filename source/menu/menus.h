@@ -12,7 +12,6 @@ extern u8 shutdown;
 extern u8 reset;
 
 int MenuInstall();
-int MenuDiscList();
 int SelectPartitionMenu();
 
 #endif // _MENUS_H

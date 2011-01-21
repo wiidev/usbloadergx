@@ -53,6 +53,8 @@ class CGameSettings
         GameCFG * GetGameCFG(const struct discHdr * game) { if(!game) return NULL; else return GetGameCFG(game->id); };
         //!Quick settings to PEGI conversion
         static int GetPartenalPEGI(int parentalsetting);
+        //!Get the default configuration block
+        GameCFG * GetDefault();
     protected:
         bool ReadGameID(const char * src, char * GameID, int size);
         bool SetSetting(GameCFG & game, char *name, char *value);
@@ -64,6 +66,7 @@ class CGameSettings
         void TrimLine(char *dest, const char *src, int size);
         std::string ConfigPath;
         std::vector<GameCFG> GameList;
+        GameCFG DefaultConfig;
 };
 
 extern CGameSettings GameSettings;

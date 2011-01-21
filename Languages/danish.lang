@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-20 15:43+0100\n"
+"POT-Creation-Date: 2011-01-21 19:48+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Fox88[dk]\n"
 "Language-Team: [dk]\n"
@@ -421,9 +421,6 @@ msgstr "Vis som liste"
 msgid "Display favorites only"
 msgstr "Vis kun favoritter"
 
-msgid "Do you really want to delete:"
-msgstr "Vil du slette:"
-
 msgid "Do you want to apply it now?"
 msgstr "Skal det aktiveres nu?"
 
@@ -444,9 +441,6 @@ msgstr "Vil du indlæse dette tema?"
 
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr "Vil du synkronisere fri plads info sector på alle FAT32 Partitioner?"
-
-msgid "Do you want to use the alternate DOL that is known to be correct?"
-msgstr "Skal den alternative DOL, der med sikkerhed er korrekt, bruges?"
 
 msgid "Do you wish to update/download all language files?"
 msgstr "Skal alle sprogfiler opdateres/downloades?"
@@ -642,6 +636,9 @@ msgstr "Spilindstillinger"
 
 msgid "Game Lock"
 msgstr "Spil låst"
+
+msgid "Game Only"
+msgstr ""
 
 msgid "Game Region"
 msgstr "Region"
@@ -855,6 +852,9 @@ msgstr "Messageboard opdatering"
 
 msgid "Missing files"
 msgstr "Manglende filer"
+
+msgid "Motion+ Video"
+msgstr ""
 
 msgid "Mount DVD drive"
 msgstr "Mount DVD-drev"
@@ -1298,6 +1298,9 @@ msgstr "Afinstallér spil"
 msgid "Uninstall Menu"
 msgstr "Afinstallationsmenu"
 
+msgid "Uninstall all"
+msgstr ""
+
 msgid "Uninstalling wad"
 msgstr "Afinstallerer WAD"
 
@@ -1370,6 +1373,9 @@ msgstr "Advarsel:"
 
 msgid "What do you want to update?"
 msgstr "Hvad skal opdateres?"
+
+msgid "What should be deleted for this game title:"
+msgstr ""
 
 msgid "WiFi Features"
 msgstr "WiFi-indstillinger"
@@ -1466,6 +1472,12 @@ msgstr "af"
 
 msgid "seconds left"
 msgstr "sekunder tilbage"
+
+#~ msgid "Do you really want to delete:"
+#~ msgstr "Vil du slette:"
+
+#~ msgid "Do you want to use the alternate DOL that is known to be correct?"
+#~ msgstr "Skal den alternative DOL, der med sikkerhed er korrekt, bruges?"
 
 #~ msgid "0 (Locked and Unlocked Games)"
 #~ msgstr "0 (låste og oplåste spil)"

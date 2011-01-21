@@ -14,6 +14,7 @@
 #include "usbloader/wbfs.h"
 #include "usbloader/playlog.h"
 #include "usbloader/MountGamePartition.h"
+#include "usbloader/AlternateDOLOffsets.h"
 #include "settings/newtitles.h"
 #include "patches/fst.h"
 #include "patches/gamepatches.h"
@@ -112,37 +113,32 @@ int BootGame(const char * gameID)
 
     int ret = 0;
 
-    u8 videoChoice = Settings.videomode;
-    u8 languageChoice = Settings.language;
-    u8 ocarinaChoice = Settings.ocarina;
-    u8 viChoice = Settings.videopatch;
-    u8 iosChoice = Settings.cios;
-    u8 fix002 = Settings.error002;
-    u8 countrystrings = Settings.patchcountrystrings;
-    u8 alternatedol = OFF;
-    u32 alternatedoloffset = 0;
-    u8 reloadblock = OFF;
-    u8 returnToLoaderGV = 1;
-
     GameCFG * game_cfg = GameSettings.GetGameCFG(gameHeader.id);
+    if(!game_cfg)
+        game_cfg = GameSettings.GetDefault();
 
-    if (game_cfg)
+    u8 videoChoice = game_cfg->video;
+    u8 languageChoice = game_cfg->language;
+    u8 ocarinaChoice = game_cfg->ocarina;
+    u8 viChoice = game_cfg->vipatch;
+    u8 iosChoice = game_cfg->ios;
+    u8 fix002 = game_cfg->errorfix002;
+    u8 countrystrings = game_cfg->patchcountrystrings;
+    u8 alternatedol = game_cfg->loadalternatedol;
+    u32 alternatedoloffset = game_cfg->alternatedolstart;
+    u8 reloadblock = game_cfg->iosreloadblock;
+    u8 returnToLoaderGV = game_cfg->returnTo;
+
+    if(alternatedol == ALT_DOL_ON_LAUNCH)
     {
-        videoChoice = game_cfg->video;
-        languageChoice = game_cfg->language;
-        ocarinaChoice = game_cfg->ocarina;
-        viChoice = game_cfg->vipatch;
-        fix002 = game_cfg->errorfix002;
-        iosChoice = game_cfg->ios;
-        countrystrings = game_cfg->patchcountrystrings;
-        alternatedol = game_cfg->loadalternatedol;
-        alternatedoloffset = game_cfg->alternatedolstart;
-        reloadblock = game_cfg->iosreloadblock;
-        returnToLoaderGV = game_cfg->returnTo;
-    }
-
-    if(alternatedol == 3)
+        alternatedol = ALT_DOL_FROM_GAME;
         alternatedoloffset = WDMMenu::GetAlternateDolOffset();
+    }
+    else if(alternatedol == ALT_DOL_DEFAULT)
+    {
+        alternatedol = ALT_DOL_FROM_GAME;
+        alternatedoloffset = defaultAltDol((char *) gameHeader.id);
+    }
 
     if(iosChoice != IOS_GetVersion())
     {
@@ -210,34 +206,33 @@ int BootGame(const char * gameID)
     AppEntrypoint = BootPartition(Settings.dolpath, videoChoice, languageChoice, ocarinaChoice, viChoice, countrystrings,
                         alternatedol, alternatedoloffset, channel, fix002);
 
-    if(AppEntrypoint != 0)
+    if(AppEntrypoint == 0)
     {
-        bool enablecheat = false;
-
-        if (ocarinaChoice)
-        {
-            // OCARINA STUFF - FISHEARS
-            if (ocarina_load_code((u8 *) Disc_ID) > 0)
-            {
-                ocarina_do_code();
-                enablecheat = true;
-            }
-        }
-
-        shadow_mload();
-        WBFS_Close();
-        DeviceHandler::DestroyInstance();
-        USB_Deinitialize();
-
-        if(Settings.PlaylogUpdate)
-            Playlog_Update((char *) Disc_ID, BNRInstance::Instance()->GetIMETTitle(CONF_GetLanguage()));
-
-        gprintf("Jumping to game entrypoint: 0x%08X.\n", AppEntrypoint);
-
-        return Disc_JumpToEntrypoint(videoChoice, enablecheat, WDMMenu::GetDolParameter());
+        WDVD_ClosePartition();
+        Sys_BackToLoader();
     }
 
-    WDVD_ClosePartition();
+    bool enablecheat = false;
 
-    return -1;
+    if (ocarinaChoice)
+    {
+        // OCARINA STUFF - FISHEARS
+        if (ocarina_load_code((u8 *) Disc_ID) > 0)
+        {
+            ocarina_do_code();
+            enablecheat = true;
+        }
+    }
+
+    shadow_mload();
+    WBFS_Close();
+    DeviceHandler::DestroyInstance();
+    USB_Deinitialize();
+
+    if(Settings.PlaylogUpdate)
+        Playlog_Update((char *) Disc_ID, BNRInstance::Instance()->GetIMETTitle(CONF_GetLanguage()));
+
+    gprintf("Jumping to game entrypoint: 0x%08X.\n", AppEntrypoint);
+
+    return Disc_JumpToEntrypoint(videoChoice, enablecheat, WDMMenu::GetDolParameter());
 }

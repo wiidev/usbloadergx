@@ -14,6 +14,7 @@
 #include "patches/wip.h"
 #include "patches/dolpatcher.h"
 #include "patches/gamepatches.h"
+#include "settings/SettingsEnums.h"
 
 extern bool geckoinit;
 
@@ -116,27 +117,31 @@ s32 Apploader_Run(entry_point *entry, char * dolpath, u8 cheat, u8 videoSelected
     *entry = appldr_final();
 
     /** Load alternate dol if set **/
-    if (alternatedol == 2)
+    if (alternatedol == ALT_DOL_FROM_SD_USB)
     {
         wip_reset_counter();
         void *dolbuffer = NULL;
         int dollen = 0;
 
-        bool dolloaded = Load_Dol(&dolbuffer, &dollen, dolpath, videoSelected, languageChoice, patchcountrystring, vipatch, cheat, returnTo);
+        bool dolloaded = Load_Dol(&dolbuffer, &dollen, dolpath);
         if (dolloaded)
         {
-            *entry = (entry_point) load_dol_image(dolbuffer);
+            *entry = (entry_point) load_dol_image(dolbuffer, videoSelected, languageChoice, patchcountrystring, vipatch, cheat, fix002, returnTo);
         }
 
         if (dolbuffer) free(dolbuffer);
     }
-    else if ((alternatedol == 1 || alternatedol == 3) && alternatedoloffset != 0)
+    else if (alternatedol == ALT_DOL_FROM_GAME && alternatedoloffset != 0)
     {
         wip_reset_counter();
         FST_ENTRY *fst = (FST_ENTRY *) *(u32 *) 0x80000038;
 
+        //! Check if it's inside the limits
+        if(alternatedoloffset >= fst[0].filelen)
+            return 0;
+
         *entry = (entry_point) Load_Dol_from_disc(fst[alternatedoloffset].fileoffset, videoSelected, languageChoice,
-		patchcountrystring, vipatch, cheat, returnTo);
+                                                  patchcountrystring, vipatch, cheat, fix002, returnTo);
     }
 
     return 0;

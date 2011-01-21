@@ -26,6 +26,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "CSettings.h"
 #include "CGameSettings.h"
 #include "FileOperations/fileops.h"
 #include "svnrev.h"
@@ -401,4 +402,25 @@ int CGameSettings::GetPartenalPEGI(int parental)
 		case 4: return 18;
 		default: return -1;
 	}
+}
+
+GameCFG * CGameSettings::GetDefault()
+{
+    memset(DefaultConfig.id, 0, sizeof(DefaultConfig.id));
+    DefaultConfig.video = Settings.videomode;
+    DefaultConfig.language = Settings.language;
+    DefaultConfig.ocarina = Settings.ocarina;
+    DefaultConfig.vipatch = Settings.videopatch;
+    DefaultConfig.ios = Settings.cios;
+    DefaultConfig.parentalcontrol = PARENTAL_LVL_EVERYONE;
+    DefaultConfig.errorfix002 = Settings.error002;
+    DefaultConfig.patchcountrystrings = Settings.patchcountrystrings;
+    DefaultConfig.loadalternatedol = ALT_DOL_DEFAULT;
+    DefaultConfig.alternatedolstart = 0;
+    DefaultConfig.iosreloadblock = OFF;
+    memset(DefaultConfig.alternatedolname, 0, sizeof(DefaultConfig.alternatedolname));
+    DefaultConfig.returnTo = 1;
+    DefaultConfig.Locked = OFF;
+
+    return &DefaultConfig;
 }

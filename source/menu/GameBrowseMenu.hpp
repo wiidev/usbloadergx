@@ -13,7 +13,7 @@ class GameBrowseMenu : public GuiWindow
     public:
         GameBrowseMenu();
         ~GameBrowseMenu();
-        int Show();
+        static int Execute();
     protected:
         int MainLoop();
         void ReloadBrowser();

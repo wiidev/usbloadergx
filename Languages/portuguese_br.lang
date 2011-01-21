@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-20 15:43+0100\n"
+"POT-Creation-Date: 2011-01-21 19:48+0100\n"
 "PO-Revision-Date: 2009-10-23 18:52+0200\n"
 "Last-Translator: aniemotion\n"
 "Language-Team: boto12, aniemotion\n"
@@ -421,9 +421,6 @@ msgstr "Mostrar como lista"
 msgid "Display favorites only"
 msgstr ""
 
-msgid "Do you really want to delete:"
-msgstr "Tem a certeza que quer eliminar o jogo:"
-
 msgid "Do you want to apply it now?"
 msgstr "Deseja aplicar agora?"
 
@@ -444,9 +441,6 @@ msgstr ""
 
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr ""
-
-msgid "Do you want to use the alternate DOL that is known to be correct?"
-msgstr "Deseja usar o DOL alternativo que pensa ser o correcto?"
 
 msgid "Do you wish to update/download all language files?"
 msgstr "Deseja atualizar todos os arquivos de idioma?"
@@ -641,6 +635,9 @@ msgid "Game Load"
 msgstr "Carregando Jogos"
 
 msgid "Game Lock"
+msgstr ""
+
+msgid "Game Only"
 msgstr ""
 
 msgid "Game Region"
@@ -855,6 +852,9 @@ msgstr ""
 
 msgid "Missing files"
 msgstr "Faltando arquivos"
+
+msgid "Motion+ Video"
+msgstr ""
 
 msgid "Mount DVD drive"
 msgstr "Carregar leitor DVD"
@@ -1298,6 +1298,9 @@ msgstr "Desinstalar jogo"
 msgid "Uninstall Menu"
 msgstr "Menu de Desinstalação"
 
+msgid "Uninstall all"
+msgstr ""
+
 msgid "Uninstalling wad"
 msgstr "Desinstalando wad"
 
@@ -1370,6 +1373,9 @@ msgstr ""
 
 msgid "What do you want to update?"
 msgstr "O que deseja atualizar?"
+
+msgid "What should be deleted for this game title:"
+msgstr ""
 
 msgid "WiFi Features"
 msgstr "Rede sem fios"
@@ -1466,6 +1472,12 @@ msgstr "de"
 
 msgid "seconds left"
 msgstr "segundos restantes"
+
+#~ msgid "Do you really want to delete:"
+#~ msgstr "Tem a certeza que quer eliminar o jogo:"
+
+#~ msgid "Do you want to use the alternate DOL that is known to be correct?"
+#~ msgstr "Deseja usar o DOL alternativo que pensa ser o correcto?"
 
 #~ msgid "BETA revisions"
 #~ msgstr "Revisões BETA"

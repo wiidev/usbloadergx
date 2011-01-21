@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-20 15:43+0100\n"
+"POT-Creation-Date: 2011-01-21 19:48+0100\n"
 "PO-Revision-Date: 2010-01-19 17:39+0200\n"
 "Last-Translator: Katsurou\n"
 "Language-Team: Katsurou, pirateX\n"
@@ -421,9 +421,6 @@ msgstr "Visa som en lista"
 msgid "Display favorites only"
 msgstr ""
 
-msgid "Do you really want to delete:"
-msgstr "Vill du verkligen radera:"
-
 msgid "Do you want to apply it now?"
 msgstr "Vill du tillämpa det nu?"
 
@@ -444,9 +441,6 @@ msgstr ""
 
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr ""
-
-msgid "Do you want to use the alternate DOL that is known to be correct?"
-msgstr "Vill du använda en alternativ DOL som är känd att fungera?"
 
 msgid "Do you wish to update/download all language files?"
 msgstr "Vill du uppdatera/ladda ner alla språkfiler?"
@@ -641,6 +635,9 @@ msgid "Game Load"
 msgstr "Spelinställningar"
 
 msgid "Game Lock"
+msgstr ""
+
+msgid "Game Only"
 msgstr ""
 
 msgid "Game Region"
@@ -855,6 +852,9 @@ msgstr ""
 
 msgid "Missing files"
 msgstr "Filer som saknas"
+
+msgid "Motion+ Video"
+msgstr ""
 
 msgid "Mount DVD drive"
 msgstr "Montera DVD läsare"
@@ -1298,6 +1298,9 @@ msgstr "Avinstallera spel"
 msgid "Uninstall Menu"
 msgstr "Avinstallerings meny"
 
+msgid "Uninstall all"
+msgstr ""
+
 msgid "Uninstalling wad"
 msgstr "Avinstallerar wad"
 
@@ -1370,6 +1373,9 @@ msgstr ""
 
 msgid "What do you want to update?"
 msgstr "Vad vill du uppdatera?"
+
+msgid "What should be deleted for this game title:"
+msgstr ""
 
 msgid "WiFi Features"
 msgstr "WiFi funktioner"
@@ -1466,6 +1472,12 @@ msgstr "av"
 
 msgid "seconds left"
 msgstr "sekunder kvar"
+
+#~ msgid "Do you really want to delete:"
+#~ msgstr "Vill du verkligen radera:"
+
+#~ msgid "Do you want to use the alternate DOL that is known to be correct?"
+#~ msgstr "Vill du använda en alternativ DOL som är känd att fungera?"
 
 #~ msgid "BETA revisions"
 #~ msgstr "BETA version"

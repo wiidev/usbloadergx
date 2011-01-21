@@ -101,52 +101,52 @@ void ParentalControlSM::SetOptionValues()
     Options->SetValue(Idx++, "%s", tr(ParentalText[Settings.parentalcontrol]));
 
     //! Settings: Block Global Settings
-    Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.ParentalBlocks & BLOCK_GLOBAL_SETTINGS]));
+    Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_GLOBAL_SETTINGS) != 0)]));
 
     //! Settings: Block Gui Settings
-    Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.ParentalBlocks & BLOCK_GUI_SETTINGS]));
+    Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_GUI_SETTINGS) != 0)]));
 
     //! Settings: Block Loader Settings
-    Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.ParentalBlocks & BLOCK_LOADER_SETTINGS]));
+    Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_LOADER_SETTINGS) != 0)]));
 
     //! Settings: Block Parental Settings
-    Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.ParentalBlocks & BLOCK_PARENTAL_SETTINGS]));
+    Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_PARENTAL_SETTINGS) != 0)]));
 
     //! Settings: Block Sound Settings
-    Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.ParentalBlocks & BLOCK_SOUND_SETTINGS]));
+    Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_SOUND_SETTINGS) != 0)]));
 
     //! Settings: Block Custom Paths
-    Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.ParentalBlocks & BLOCK_CUSTOMPATH_SETTINGS]));
+    Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_CUSTOMPATH_SETTINGS) != 0)]));
 
     //! Settings: Block Updates
-    Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.ParentalBlocks & BLOCK_UPDATES]));
+    Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_UPDATES) != 0)]));
 
     //! Settings: Block Reset Settings
-    Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.ParentalBlocks & BLOCK_RESET_SETTINGS]));
+    Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_RESET_SETTINGS) != 0)]));
 
     //! Settings: Block Theme Downloader
-    Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.ParentalBlocks & BLOCK_THEME_DOWNLOADER]));
+    Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_THEME_DOWNLOADER) != 0)]));
 
     //! Settings: Block Theme Menu
-    Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.ParentalBlocks & BLOCK_THEME_MENU]));
+    Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_THEME_MENU) != 0)]));
 
     //! Settings: Block Game Settings
-    Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.ParentalBlocks & BLOCK_GAME_SETTINGS]));
+    Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_GAME_SETTINGS) != 0)]));
 
     //! Settings: Block HBC Menu
-    Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.ParentalBlocks & BLOCK_HBC_MENU]));
+    Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_HBC_MENU) != 0)]));
 
     //! Settings: Block Title Launcher
-    Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.ParentalBlocks & BLOCK_TITLE_LAUNCHER_MENU]));
+    Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_TITLE_LAUNCHER_MENU) != 0)]));
 
     //! Settings: Block Cover Downloads
-    Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.ParentalBlocks & BLOCK_COVER_DOWNLOADS]));
+    Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_COVER_DOWNLOADS) != 0)]));
 
     //! Settings: Block Game Install
-    Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.ParentalBlocks & BLOCK_GAME_INSTALL]));
+    Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_GAME_INSTALL) != 0)]));
 
     //! Settings: Block GameID Change
-    Options->SetValue(Idx++, "%s", tr(OnOffText[Settings.ParentalBlocks & BLOCK_GAMEID_CHANGE]));
+    Options->SetValue(Idx++, "%s", tr(OnOffText[((Settings.ParentalBlocks & BLOCK_GAMEID_CHANGE) != 0)]));
 }
 
 int ParentalControlSM::GetMenuInternal()

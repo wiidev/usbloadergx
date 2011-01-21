@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-20 15:43+0100\n"
+"POT-Creation-Date: 2011-01-21 19:48+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: ziom666 (zadania_prog@vp.pl)\n"
 "Language-Team: \n"
@@ -421,9 +421,6 @@ msgstr "Wyswietl jako liste"
 msgid "Display favorites only"
 msgstr ""
 
-msgid "Do you really want to delete:"
-msgstr "Na pewno usunac: "
-
 msgid "Do you want to apply it now?"
 msgstr "Czy chcesz to teraz zastosowac?"
 
@@ -444,9 +441,6 @@ msgstr ""
 
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr ""
-
-msgid "Do you want to use the alternate DOL that is known to be correct?"
-msgstr "Uzyc alternatywnego pliku DOL?"
 
 msgid "Do you wish to update/download all language files?"
 msgstr "Zaktualizowac wszystkie pliki jezykowe?"
@@ -641,6 +635,9 @@ msgid "Game Load"
 msgstr "Zaladuj gre"
 
 msgid "Game Lock"
+msgstr ""
+
+msgid "Game Only"
 msgstr ""
 
 msgid "Game Region"
@@ -855,6 +852,9 @@ msgstr ""
 
 msgid "Missing files"
 msgstr "Brakuje plikow"
+
+msgid "Motion+ Video"
+msgstr ""
 
 msgid "Mount DVD drive"
 msgstr "Uruchom naped DVD"
@@ -1298,6 +1298,9 @@ msgstr "Odinstaluj gre"
 msgid "Uninstall Menu"
 msgstr "Odinstaluj Menu"
 
+msgid "Uninstall all"
+msgstr ""
+
 msgid "Uninstalling wad"
 msgstr "Odinstalowywanie wad"
 
@@ -1370,6 +1373,9 @@ msgstr ""
 
 msgid "What do you want to update?"
 msgstr "Rodzaj aktualizacji"
+
+msgid "What should be deleted for this game title:"
+msgstr ""
 
 msgid "WiFi Features"
 msgstr "Opcje WiFi"
@@ -1466,6 +1472,12 @@ msgstr "z"
 
 msgid "seconds left"
 msgstr "sekund pozostalo"
+
+#~ msgid "Do you really want to delete:"
+#~ msgstr "Na pewno usunac: "
+
+#~ msgid "Do you want to use the alternate DOL that is known to be correct?"
+#~ msgstr "Uzyc alternatywnego pliku DOL?"
 
 #~ msgid "BETA revisions"
 #~ msgstr "Wersje beta"

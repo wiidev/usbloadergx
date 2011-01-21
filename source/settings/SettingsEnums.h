@@ -164,4 +164,13 @@ enum
     BLOCK_ALL                   = 0xFFFFFFFF,
 };
 
+enum
+{
+    ALT_DOL_OFF,
+    ALT_DOL_FROM_GAME,
+    ALT_DOL_FROM_SD_USB,
+    ALT_DOL_ON_LAUNCH,
+    ALT_DOL_DEFAULT,
+};
+
 #endif

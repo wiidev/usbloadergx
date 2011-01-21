@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-20 15:43+0100\n"
+"POT-Creation-Date: 2011-01-21 19:48+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: David Jelinek (djelinek@hotmail.com) e->e,r->r,u->u, c->c \n"
 "Language-Team: r1043 - last version on http://djelinek.sweb.cz/_USBLoderGX/czech.lang \n"
@@ -421,9 +421,6 @@ msgstr "Zobrait jako seznam"
 msgid "Display favorites only"
 msgstr "Zobrazit pouze oblíbené"
 
-msgid "Do you really want to delete:"
-msgstr "Opravdu smazat:"
-
 msgid "Do you want to apply it now?"
 msgstr "Prejete si aplikovat zmeny hned?"
 
@@ -444,9 +441,6 @@ msgstr "Prejete si nahrát toto téma?"
 
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr ""
-
-msgid "Do you want to use the alternate DOL that is known to be correct?"
-msgstr "Prejete si použít jiný DOL, který je správný?"
 
 msgid "Do you wish to update/download all language files?"
 msgstr "Prejete si zaktualizovat vsechny jazykové soubory?"
@@ -642,6 +636,9 @@ msgstr "Nahrání hry"
 
 msgid "Game Lock"
 msgstr "Zámek hry"
+
+msgid "Game Only"
+msgstr ""
 
 msgid "Game Region"
 msgstr "Region hry"
@@ -855,6 +852,9 @@ msgstr "Aktualizace nástenky"
 
 msgid "Missing files"
 msgstr "Chybející soubory"
+
+msgid "Motion+ Video"
+msgstr ""
 
 msgid "Mount DVD drive"
 msgstr "Spustit z DVD"
@@ -1298,6 +1298,9 @@ msgstr "Odinstalace hry"
 msgid "Uninstall Menu"
 msgstr "Menu odinstalací"
 
+msgid "Uninstall all"
+msgstr ""
+
 msgid "Uninstalling wad"
 msgstr "Odinstalace WAD"
 
@@ -1370,6 +1373,9 @@ msgstr "Varování:"
 
 msgid "What do you want to update?"
 msgstr "Co si prejete zaktualizovat?"
+
+msgid "What should be deleted for this game title:"
+msgstr ""
 
 msgid "WiFi Features"
 msgstr "WiFi možnosti"
@@ -1466,6 +1472,12 @@ msgstr "z "
 
 msgid "seconds left"
 msgstr "sekund zbývá"
+
+#~ msgid "Do you really want to delete:"
+#~ msgstr "Opravdu smazat:"
+
+#~ msgid "Do you want to use the alternate DOL that is known to be correct?"
+#~ msgstr "Prejete si použít jiný DOL, který je správný?"
 
 #~ msgid "0 (Locked and Unlocked Games)"
 #~ msgstr "0 (Zamcené a odemcené hry)"

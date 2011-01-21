@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-20 15:43+0100\n"
+"POT-Creation-Date: 2011-01-21 19:48+0100\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
 "Last-Translator: Jane.H\n"
 "Language-Team: kyogc, Miller, Mika Li, Jane.H\n"
@@ -421,9 +421,6 @@ msgstr "表單模式"
 msgid "Display favorites only"
 msgstr "只顯示最愛模式"
 
-msgid "Do you really want to delete:"
-msgstr "確定刪除："
-
 msgid "Do you want to apply it now?"
 msgstr "要套用設定嗎？"
 
@@ -444,9 +441,6 @@ msgstr "是否要載入這佈景主題嗎？"
 
 msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr "是否要同步所有FAT32磁區可用空間資訊？"
-
-msgid "Do you want to use the alternate DOL that is known to be correct?"
-msgstr "是否要使用這個已知是正確的 Alt DOL 檔案嗎？"
 
 msgid "Do you wish to update/download all language files?"
 msgstr "是否要更新/下載所有語言檔案嗎？"
@@ -642,6 +636,9 @@ msgstr "遊戲載入設定"
 
 msgid "Game Lock"
 msgstr "遊戲上鎖"
+
+msgid "Game Only"
+msgstr ""
 
 msgid "Game Region"
 msgstr "遊戲區碼"
@@ -855,6 +852,9 @@ msgstr "留言板更新"
 
 msgid "Missing files"
 msgstr "缺少的檔案"
+
+msgid "Motion+ Video"
+msgstr ""
 
 msgid "Mount DVD drive"
 msgstr "掛載DVD光碟"
@@ -1298,6 +1298,9 @@ msgstr "刪除遊戲"
 msgid "Uninstall Menu"
 msgstr "刪除選單"
 
+msgid "Uninstall all"
+msgstr ""
+
 msgid "Uninstalling wad"
 msgstr "移除 WAD"
 
@@ -1370,6 +1373,9 @@ msgstr "警告："
 
 msgid "What do you want to update?"
 msgstr "更新何者？"
+
+msgid "What should be deleted for this game title:"
+msgstr ""
 
 msgid "WiFi Features"
 msgstr "WiFi功能設定"
@@ -1466,6 +1472,12 @@ msgstr "的"
 
 msgid "seconds left"
 msgstr "剩餘秒數"
+
+#~ msgid "Do you really want to delete:"
+#~ msgstr "確定刪除："
+
+#~ msgid "Do you want to use the alternate DOL that is known to be correct?"
+#~ msgstr "是否要使用這個已知是正確的 Alt DOL 檔案嗎？"
 
 #~ msgid "0 (Locked and Unlocked Games)"
 #~ msgstr "0 (鎖上及解鎖遊戲)"

@@ -12,8 +12,6 @@
 #include "usbloader/disc.h"
 
 int DiscBrowse(const char * GameID, char * dolname, int dolname_size);
-int autoSelectDol(const char *id, bool force);
-int autoSelectDolMenu(const char *id, bool force);
 u8 DiscMount(struct discHdr * header);
 
 #endif

@@ -27,6 +27,7 @@
 #include "themes/CTheme.h"
 #include "prompts/PromptWindows.h"
 #include "prompts/DiscBrowser.h"
+#include "usbloader/AlternateDOLOffsets.h"
 #include "language/gettext.h"
 #include "wad/nandtitle.h"
 #include "GameLoadSM.hpp"
@@ -84,6 +85,7 @@ static const char * AlternateDOLText[] =
     trNOOP( "Select a DOL from Game" ),
     trNOOP( "Load From SD/USB" ),
     trNOOP( "List on Gamelaunch" ),
+    trNOOP( "Default" ),
 };
 
 GameLoadSM::GameLoadSM(const char * GameID)
@@ -134,20 +136,10 @@ GameLoadSM::~GameLoadSM()
 
 void GameLoadSM::SetDefaultConfig()
 {
-    GameConfig.video = Settings.videomode;
-    GameConfig.language = Settings.language;
-    GameConfig.ocarina = Settings.ocarina;
-    GameConfig.vipatch = Settings.videopatch;
-    GameConfig.ios = Settings.cios;
-    GameConfig.parentalcontrol = PARENTAL_LVL_EVERYONE;
-    GameConfig.errorfix002 = Settings.error002;
-    GameConfig.patchcountrystrings = Settings.patchcountrystrings;
-    GameConfig.loadalternatedol = OFF;
-    GameConfig.alternatedolstart = 0;
-    GameConfig.iosreloadblock = OFF;
-    strcpy(GameConfig.alternatedolname, "");
-    GameConfig.returnTo = 1;
-    GameConfig.Locked = OFF;
+    char id[7];
+    snprintf(id, sizeof(id), GameConfig.id);
+    memcpy(&GameConfig, GameSettings.GetDefault(), sizeof(GameCFG));
+    snprintf(GameConfig.id, sizeof(GameConfig.id), id);
 }
 
 void GameLoadSM::SetOptionNames()
@@ -327,18 +319,17 @@ int GameLoadSM::GetMenuInternal()
     //! Settings: Alternate DOL
     else if (ret == ++Idx)
     {
-        if (++GameConfig.loadalternatedol > 3)
+        if (++GameConfig.loadalternatedol > 4)
             GameConfig.loadalternatedol = 0;
     }
 
     //! Settings: Select DOL Offset from Game
     else if (ret == ++Idx && GameConfig.loadalternatedol == 1)
     {
-        char filename[10];
-        snprintf(filename, 7, "%s", GameConfig.id);
-
         //alt dol menu for games that require more than a single alt dol
-        int autodol = autoSelectDolMenu(filename, false);
+        int autodol = autoSelectDolPrompt((char *) GameConfig.id);
+        if(autodol == 0)
+            return MENU_NONE; //Cancel Button pressed
 
         if (autodol > 0)
         {
@@ -347,42 +338,14 @@ int GameLoadSM::GetMenuInternal()
             SetOptionValues();
             return MENU_NONE;
         }
-        else if (autodol == 0)
-        {
-            GameConfig.loadalternatedol = 0;
-            SetOptionValues();
-            return MENU_NONE;
-        }
 
-        //check to see if we already know the offset of the correct dol
-        autodol = autoSelectDol(filename, false);
-        //if we do know that offset ask if they want to use it
-        if (autodol > 0)
+        int res = DiscBrowse(GameConfig.id, GameConfig.alternatedolname, sizeof(GameConfig.alternatedolname));
+        if (res >= 0)
         {
-            int dolchoice = WindowPrompt(0, tr( "Do you want to use the alternate DOL that is known to be correct?" ),
-                                            tr( "Yes" ), tr( "Pick from a list" ), tr( "Cancel" ));
-            if (dolchoice == 1)
-            {
-                GameConfig.alternatedolstart = autodol;
-                snprintf(GameConfig.alternatedolname, sizeof(GameConfig.alternatedolname), "%s <%i>", tr( "AUTO" ), autodol);
-            }
-            else if (dolchoice == 2) //they want to search for the correct dol themselves
-            {
-                int res = DiscBrowse(GameConfig.id, GameConfig.alternatedolname, sizeof(GameConfig.alternatedolname));
-                if (res >= 0)
-                    GameConfig.alternatedolstart = res;
-            }
-        }
-        else
-        {
-            int res = DiscBrowse(GameConfig.id, GameConfig.alternatedolname, sizeof(GameConfig.alternatedolname));
-            if (res >= 0)
-            {
-                GameConfig.alternatedolstart = res;
-                char tmp[170];
-                snprintf(tmp, sizeof(tmp), "%s %s - %i", tr( "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team." ), filename, GameConfig.alternatedolstart);
-                WindowPrompt(0, tmp, tr( "OK" ));
-            }
+            GameConfig.alternatedolstart = res;
+            char tmp[170];
+            snprintf(tmp, sizeof(tmp), "%s %.6s - %i", tr( "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team." ), (char *) GameConfig.id, GameConfig.alternatedolstart);
+            WindowPrompt(0, tmp, tr( "OK" ));
         }
 
         if(GameConfig.alternatedolstart == 0)
