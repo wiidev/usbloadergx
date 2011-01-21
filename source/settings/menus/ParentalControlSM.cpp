@@ -232,6 +232,12 @@ int ParentalControlSM::GetMenuInternal()
         Settings.ParentalBlocks ^= BLOCK_LOADER_SETTINGS;
     }
 
+    //! Settings: Block Parental Settings
+    else if (ret == ++Idx)
+    {
+        Settings.ParentalBlocks ^= BLOCK_PARENTAL_SETTINGS;
+    }
+
     //! Settings: Block Sound Settings
     else if (ret == ++Idx)
     {

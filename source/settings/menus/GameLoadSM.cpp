@@ -91,15 +91,7 @@ static const char * AlternateDOLText[] =
 GameLoadSM::GameLoadSM(const char * GameID)
     : SettingsMenu(tr("Game Load"), &GuiOptions, MENU_NONE)
 {
-    //! Setup default settings from global settings
-    snprintf(GameConfig.id, sizeof(GameConfig.id), "%s", (char *) GameID);
-    SetDefaultConfig();
-
-    GameCFG * existCFG = GameSettings.GetGameCFG(GameID);
-
-    //! Overwrite with existing if available
-	if (existCFG)
-	    memcpy(&GameConfig, existCFG, sizeof(GameCFG));
+    memcpy(&GameConfig, GameSettings.GetGameCFG(GameID), sizeof(GameCFG));
 
     if(!btnOutline)
         btnOutline = Resources::GetImageData("button_dialogue_box.png");

@@ -114,9 +114,6 @@ int BootGame(const char * gameID)
     int ret = 0;
 
     GameCFG * game_cfg = GameSettings.GetGameCFG(gameHeader.id);
-    if(!game_cfg)
-        game_cfg = GameSettings.GetDefault();
-
     u8 videoChoice = game_cfg->video;
     u8 languageChoice = game_cfg->language;
     u8 ocarinaChoice = game_cfg->ocarina;

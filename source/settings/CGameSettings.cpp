@@ -46,7 +46,7 @@ CGameSettings::~CGameSettings()
 GameCFG * CGameSettings::GetGameCFG(const char * id)
 {
     if(!id)
-        return NULL;
+        return GetDefault();
 
     for(u32 i = 0; i < GameList.size(); ++i)
     {
@@ -56,7 +56,10 @@ GameCFG * CGameSettings::GetGameCFG(const char * id)
         }
     }
 
-    return NULL;
+    GameCFG *defaultCFG = GetDefault();
+    memcpy(defaultCFG->id, id, 6);
+
+    return defaultCFG;
 }
 
 bool CGameSettings::AddGame(const GameCFG & NewGame)
@@ -418,7 +421,7 @@ GameCFG * CGameSettings::GetDefault()
     DefaultConfig.loadalternatedol = ALT_DOL_DEFAULT;
     DefaultConfig.alternatedolstart = 0;
     DefaultConfig.iosreloadblock = OFF;
-    memset(DefaultConfig.alternatedolname, 0, sizeof(DefaultConfig.alternatedolname));
+    DefaultConfig.alternatedolname[0] = '\0';
     DefaultConfig.returnTo = 1;
     DefaultConfig.Locked = OFF;
 

@@ -282,6 +282,10 @@ GameBrowseMenu::GameBrowseMenu()
     DownloadBtn->SetTrigger(1, trig1);
     DownloadBtn->SetToolTip(DownloadBtnTT, 205, -30);
 
+    gameCoverImg = new GuiImage();
+    gameCoverImg->SetPosition(thInt("26 - cover/download btn pos x"), thInt("58 - cover/download btn pos y"));
+    gameCoverImg->SetWidescreen(Settings.widescreen);
+
     IDBtnTT = new GuiTooltip(tr( "Click to change game ID" ));
     if (Settings.wsprompt) IDBtnTT->SetWidescreen(Settings.widescreen);
     IDBtnTT->SetAlpha(thInt("255 - tooltip alpha"));
@@ -608,7 +612,6 @@ void GameBrowseMenu::ReloadBrowser()
     }
     else if (Settings.gameDisplay == GRID_MODE)
     {
-        DownloadBtn->SetImage(NULL);
         DownloadBtn->SetSize(0, 0);
         UpdateGameInfoText(NULL);
         gridBtn->SetImage(gridBtnImg);
@@ -641,7 +644,6 @@ void GameBrowseMenu::ReloadBrowser()
     }
     else if (Settings.gameDisplay == CAROUSEL_MODE)
     {
-        DownloadBtn->SetImage(NULL);
         DownloadBtn->SetSize(0, 0);
         UpdateGameInfoText(NULL);
         carouselBtn->SetImage(carouselBtnImg);
@@ -683,6 +685,7 @@ void GameBrowseMenu::ReloadBrowser()
     Append(gameInfo);
     Append(homeBtn);
     Append(settingsBtn);
+    Append(gameCoverImg);
 
     if (Settings.godmode || !(Settings.ParentalBlocks & BLOCK_HBC_MENU))
         Append(homebrewBtn);
@@ -1253,9 +1256,6 @@ int GameBrowseMenu::OpenClickedGame()
     char IDfull[7];
     snprintf(IDfull, sizeof(IDfull), "%s", (char *) header->id);
 
-    u8 alternatedol = OFF;
-    u8 ocarinaChoice = Settings.ocarina;
-
     bool returnHere = true;// prompt to start game
     int choice = -1;
 
@@ -1288,23 +1288,18 @@ int GameBrowseMenu::OpenClickedGame()
             wiilight(0);
 
             GameCFG* game_cfg = GameSettings.GetGameCFG(header->id);
-            if (game_cfg)
-            {
-                alternatedol = game_cfg->loadalternatedol;
-                ocarinaChoice = game_cfg->ocarina;
-            }
 
-            if (alternatedol == 2)
+            if (game_cfg->loadalternatedol == 2)
                 CheckAlternativeDOL(IDfull);
-            else if(alternatedol == 3 && WDMMenu::Show(header) == 0)
+            else if(game_cfg->loadalternatedol == 3 && WDMMenu::Show(header) == 0)
             {
                 RunGame = false;
                 returnHere = true;
             }
-            else if(alternatedol == 4)
+            else if(game_cfg->loadalternatedol == 4)
                 defaultDolPrompt((char *) header->id);
 
-            if (RunGame && ocarinaChoice != OFF)
+            if (RunGame && game_cfg->ocarina != OFF)
                 CheckOcarina(IDfull);
 
             if(RunGame)
@@ -1337,19 +1332,12 @@ int GameBrowseMenu::OpenClickedGame()
 
 void GameBrowseMenu::LoadCover(struct discHdr *header)
 {
-    DownloadBtn->SetImage(NULL);
-    if(gameCover)
-        delete gameCover;
+    gameCoverImg->SetImage(NULL);
 
+    delete gameCover;
     gameCover = LoadCoverImage(header);
 
-    if (gameCoverImg)
-        delete gameCoverImg;
-
-    gameCoverImg = new GuiImage(gameCover);
-    gameCoverImg->SetWidescreen(Settings.widescreen);
-
-    DownloadBtn->SetImage(gameCoverImg);// put the new image on the download button
+    gameCoverImg->SetImage(gameCover);// put the new image on the download button
 }
 
 void GameBrowseMenu::CheckOcarina(const char * IDfull)
