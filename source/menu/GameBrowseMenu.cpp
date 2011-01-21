@@ -581,6 +581,7 @@ void GameBrowseMenu::ReloadBrowser()
 
     if (Settings.gameDisplay == LIST_MODE)
     {
+        Append(gameCoverImg);
         DownloadBtn->SetSize(160, 224);
         listBtn->SetImage(listBtnImg);
         listBtn->SetImageOver(listBtnImg);
@@ -685,7 +686,6 @@ void GameBrowseMenu::ReloadBrowser()
     Append(gameInfo);
     Append(homeBtn);
     Append(settingsBtn);
-    Append(gameCoverImg);
 
     if (Settings.godmode || !(Settings.ParentalBlocks & BLOCK_HBC_MENU))
         Append(homebrewBtn);
