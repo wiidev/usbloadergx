@@ -5,9 +5,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-21 19:48+0100\n"
+"POT-Creation-Date: 2011-01-22 16:56+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
-"Last-Translator: papa\n"
+"Last-Translator: hosigumayuugi\n"
 "Language-Team: hosigumayuugi, papa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -20,16 +20,16 @@ msgid " could not be downloaded."
 msgstr "ﾀﾞｳﾝﾛｰﾄﾞできませんでした"
 
 msgid " has been Saved.  The text has not been verified.  Some of the code may not work right with each other.  If you experience trouble, open the text in a real text editor for more information."
-msgstr "に保存されました。使用は自己責任です。"
+msgstr "に保存されました。使用は 自己責任でお願いします。"
 
 msgid " is not on the server."
-msgstr "はｻｰﾊﾞｰにありません。"
+msgstr "はｻｰﾊﾞｰにありません"
 
 msgid "0 (Everyone)"
-msgstr "誰でも"
+msgstr "セットしない"
 
 msgid "1 (Child 7+)"
-msgstr "幼児用"
+msgstr "7歳以上を制限"
 
 msgid "1 hour"
 msgstr "1時間"
@@ -38,16 +38,16 @@ msgid "10 min"
 msgstr "10分"
 
 msgid "2 (Teen 12+)"
-msgstr "小学生以下"
+msgstr "12歳以上を制限"
 
 msgid "20 min"
 msgstr "20分"
 
 msgid "2D Cover Path"
-msgstr "２Ｄカバー"
+msgstr "2Dカバー"
 
 msgid "3 (Mature 16+)"
-msgstr "中学生以下"
+msgstr "16歳以上を制限"
 
 msgid "3 min"
 msgstr "3分"
@@ -56,13 +56,13 @@ msgid "30 min"
 msgstr "30分"
 
 msgid "3D Cover Path"
-msgstr "３Ｄカバー"
+msgstr "3Dカバー"
 
 msgid "3D Covers"
-msgstr "３Ｄカバー"
+msgstr "3Dカバー"
 
 msgid "4 (Adults Only 18+)"
-msgstr "未成年向け"
+msgstr "CERO Zを制限"
 
 msgid "5 min"
 msgstr "5分"
@@ -119,10 +119,10 @@ msgid "AUTO"
 msgstr "自動"
 
 msgid "All Partitions"
-msgstr ""
+msgstr "全領域"
 
 msgid "All images downloaded successfully."
-msgstr "全ての画像を取得しました"
+msgstr "全ての画像をダウンロードしました"
 
 msgid "All the features of USB Loader GX are unlocked."
 msgstr "GXの使用制限が解除されました"
@@ -134,19 +134,19 @@ msgid "Anti"
 msgstr "アンチ"
 
 msgid "App Language"
-msgstr "言語"
+msgstr "使用言語"
 
 msgid "Apr"
 msgstr "4月"
 
 msgid "Are you sure you want to lock USB Loader GX?"
-msgstr "使用制限を使いますか？"
+msgstr "USB Loader GXをロックしますか?"
 
 msgid "Are you sure you want to reset?"
-msgstr "再起動しますか？"
+msgstr "リセットしますか?"
 
 msgid "Are you sure?"
-msgstr "実行しますか？"
+msgstr "よろしいですか？"
 
 msgid "Aug"
 msgstr "8月"
@@ -155,16 +155,16 @@ msgid "Author:"
 msgstr "制作者:"
 
 msgid "AutoInit Network"
-msgstr "ﾈｯﾄﾜｰｸ自動接続"
+msgstr "自動ネット接続"
 
 msgid "BCA Codes Path"
-msgstr "ＢＣＡコード"
+msgstr "BCAコード"
 
 msgid "Back"
 msgstr "もどる"
 
 msgid "Back to HBC or Wii Menu"
-msgstr "HBC/Wiiﾒﾆｭｰへ"
+msgstr "HOMEボタンメニューへ"
 
 msgid "Backgroundmusic"
 msgstr "BGM"
@@ -173,58 +173,58 @@ msgid "Big thanks to:"
 msgstr "協力:"
 
 msgid "Block Cover Downloads"
-msgstr ""
+msgstr "カバーのダウンロードを制限"
 
 msgid "Block Custom Paths"
-msgstr ""
+msgstr "パスの変更を制限"
 
 msgid "Block Game Install"
-msgstr ""
+msgstr "ゲームの追加を制限"
 
 msgid "Block Game Settings"
-msgstr ""
+msgstr "ゲーム設定を制限"
 
 msgid "Block GameID Change"
-msgstr ""
+msgstr "ゲームIDの変更を制限"
 
 msgid "Block Global Settings"
-msgstr ""
+msgstr "基本設定を制限"
 
 msgid "Block Gui Settings"
-msgstr ""
+msgstr "GUI設定を制限"
 
 msgid "Block HBC Menu"
-msgstr ""
+msgstr "HBCメニューを制限"
 
 msgid "Block IOS Reload"
-msgstr "IOSの再ﾛｰﾄﾞ阻止"
+msgstr "IOSの再読み込みを制限"
 
 msgid "Block Loader Settings"
-msgstr ""
+msgstr "読み込み設定を制限"
 
 msgid "Block Parental Settings"
-msgstr ""
+msgstr "使用制限設定を制限"
 
 msgid "Block Reset Settings"
-msgstr ""
+msgstr "初期化設定をを制限"
 
 msgid "Block Sound Settings"
-msgstr ""
+msgstr "サウンド設定を制限"
 
 msgid "Block Theme Downloader"
-msgstr ""
+msgstr "テーマのダウンロードを制限"
 
 msgid "Block Theme Menu"
-msgstr ""
+msgstr "テーマメニューを制限"
 
 msgid "Block Title Launcher"
-msgstr ""
+msgstr "タイトル起動を制限"
 
 msgid "Block Updates"
-msgstr ""
+msgstr "更新を制限"
 
 msgid "Boot/Standard"
-msgstr "使用cIOS"
+msgstr "使用するcIOS"
 
 msgid "Boot?"
 msgstr "起動しますか？"
@@ -240,7 +240,7 @@ msgstr "フォルダを作れません"
 
 #, c-format
 msgid "Can't create path: %s"
-msgstr ""
+msgstr "パスを作成できません: %s"
 
 msgid "Can't delete:"
 msgstr "削除できません:"
@@ -255,16 +255,16 @@ msgid "Change Play Path"
 msgstr "パスの変更"
 
 msgid "Cheatfile is blank"
-msgstr "ﾁｰﾄﾌｧｲﾙがありません"
+msgstr "チートファイルがありません"
 
 msgid "Clear"
 msgstr "クリア"
 
 msgid "Click to Download Covers"
-msgstr "ｸﾘｯｸでｶﾊﾞｰをﾀﾞｳﾝﾛｰﾄﾞ"
+msgstr "クリックでカバーをダウンロード"
 
 msgid "Click to change game ID"
-msgstr "ｸﾘｯｸでｹﾞｰﾑIDを変更"
+msgstr "クリックでゲームIDを変更"
 
 msgid "Clock"
 msgstr "時計の表示"
@@ -273,7 +273,7 @@ msgid "Close"
 msgstr "とじる"
 
 msgid "Code Download"
-msgstr "ｺｰﾄﾞをﾀﾞｳﾝﾛｰﾄﾞ"
+msgstr "コードをダウンロード"
 
 #, c-format
 msgid "Coded by: %s"
@@ -289,13 +289,13 @@ msgid "Console Default"
 msgstr "初期値"
 
 msgid "Console Locked"
-msgstr "GXはﾛｯｸされています"
+msgstr "GXはロックされています"
 
 msgid "Console must be unlocked for this option."
-msgstr ""
+msgstr "変更にはロックの解除が必要です"
 
 msgid "Console should be unlocked to modify it."
-msgstr "GXのロックを解除してください"
+msgstr "変更にはロックの解除が必要です"
 
 msgid "Continue to install game?"
 msgstr "このｹﾞｰﾑをｲﾝｽﾄｰﾙしますか？"
@@ -307,35 +307,35 @@ msgid "Correct Password"
 msgstr "正しい暗証番号です"
 
 msgid "Could not connect to the server."
-msgstr "ｻｰﾊﾞに接続できません"
+msgstr "サーバーに再接続できません"
 
 msgid "Could not create GCT file"
-msgstr "GCTﾌｧｲﾙを作成できません"
+msgstr "GCTﾌｧｲﾙを作成できませんでした"
 
 #, c-format
 msgid "Could not create path: %s"
-msgstr "ﾊﾟｽを作れません： %s"
+msgstr "パスを作成できません: %s"
 
 msgid "Could not find info for this game in the wiitdb.xml."
-msgstr "wiitdb.xml内にこのｹﾞｰﾑの情報が含まれていません"
+msgstr "wiitdb.xmlにこのゲームの情報が見つかりませんでした"
 
 msgid "Could not initialize DIP module!"
 msgstr "DIPﾓｼﾞｭｰﾙを初期化できません!"
 
 msgid "Could not initialize network!"
-msgstr "ﾈｯﾄﾜｰｸを初期化できません!"
+msgstr "ネットに接続できませんでした!"
 
 msgid "Could not open Disc"
-msgstr "ﾃﾞｨｽｸを開けません"
+msgstr "ﾃﾞｨｽｸを開けませんでした"
 
 msgid "Could not open wiitdb.xml."
-msgstr "wiitdb.xmlを開けません"
+msgstr "wiitdb.xmlを開けませんでした"
 
 msgid "Could not save."
-msgstr "保存できません"
+msgstr "保存できませんでした"
 
 msgid "Cover Download"
-msgstr "どれをﾀﾞｳﾝﾛｰﾄﾞしますか"
+msgstr "どれをダウンロードしますか"
 
 msgid "Create"
 msgstr "作成"
@@ -347,10 +347,10 @@ msgid "Custom Paths"
 msgstr "パスを変更"
 
 msgid "Customs/Original"
-msgstr "ｶｽﾀﾑを優先"
+msgstr "カスタムを優先"
 
 msgid "DOL Path"
-msgstr "代理DOL"
+msgstr "代替DOL"
 
 msgid "Dec"
 msgstr "12月"
@@ -383,7 +383,7 @@ msgid "Delete Disc Artwork"
 msgstr "ディスク画像を削除"
 
 msgid "Design:"
-msgstr "ﾃﾞｻﾞｲﾝ:"
+msgstr "デザイン:"
 
 msgid "Developed by"
 msgstr "開発者："
@@ -392,49 +392,49 @@ msgid "Directory does not exist!"
 msgstr "フォルダがありません"
 
 msgid "Disc Artwork Download"
-msgstr "ﾃﾞｨｽｸ画像のﾀﾞｳﾝﾛｰﾄﾞ"
+msgstr "使用するディスク画像"
 
 msgid "Disc Artwork Path"
 msgstr "ディスク画像"
 
 msgid "Disc Default"
-msgstr "ﾃﾞｨｽｸの初期値"
+msgstr "ディスクの初期値"
 
 msgid "Disc Images"
-msgstr "ﾃﾞｨｽｸ画像"
+msgstr "ディスク画像"
 
 msgid "DiskFlip"
-msgstr "ﾃﾞｨｽｸ画像の回転"
+msgstr "ディスクの回転風"
 
 msgid "Display"
 msgstr "ゲーム情報"
 
 msgid "Display as a carousel"
-msgstr "回転ﾄﾚｲ風"
+msgstr "回転トレイ風に表示"
 
 msgid "Display as a grid"
-msgstr "格子風"
+msgstr "格子風に表示"
 
 msgid "Display as a list"
 msgstr "リスト表示"
 
 msgid "Display favorites only"
-msgstr "お気に入り"
+msgstr "お気に入りのみ表示"
 
 msgid "Do you want to apply it now?"
-msgstr "適用しますか？"
+msgstr "適用しますか?"
 
 msgid "Do you want to change language?"
 msgstr "言語を変更しますか？"
 
 msgid "Do you want to download this theme?"
-msgstr "このﾃｰﾏをﾀﾞｳﾝﾛｰﾄﾞしますか？"
+msgstr "ダウンロードしますか?"
 
 msgid "Do you want to format:"
-msgstr "初期化しますか:"
+msgstr "初期化しますか?"
 
 msgid "Do you want to load the default theme?"
-msgstr ""
+msgstr "標準のテーマを読み込みますか?"
 
 msgid "Do you want to load this theme?"
 msgstr "このテーマに変更しますか？"
@@ -443,7 +443,7 @@ msgid "Do you want to sync free space info sector on all FAT32 partitions?"
 msgstr "全てのFAT32領域のセクタで空き容量情報を同期しますか？"
 
 msgid "Do you wish to update/download all language files?"
-msgstr "すべての言語をﾀﾞｳﾝﾛｰﾄﾞしますか？"
+msgstr "すべての言語をダウンロードしますか？"
 
 msgid "Done!"
 msgstr "完了！"
@@ -452,40 +452,40 @@ msgid "Download"
 msgstr "ダウンロード"
 
 msgid "Download Boxart image?"
-msgstr "ｶﾊﾞｰをﾀﾞｳﾝﾛｰﾄﾞしますか？"
+msgstr "画像をﾀﾞｳﾝﾛｰﾄﾞしますか？"
 
 msgid "Download Discart image?"
-msgstr "ﾚｰﾍﾞﾙをﾀﾞｳﾝﾛｰﾄﾞしますか？"
+msgstr "画像をﾀﾞｳﾝﾛｰﾄﾞしますか？"
 
 msgid "Download Now"
-msgstr "今すぐﾀﾞｳﾝﾛｰﾄﾞ"
+msgstr "ダウンロード"
 
 msgid "Download finished"
-msgstr "ﾀﾞｳﾝﾛｰﾄﾞが終了しました"
+msgstr "ダウンロードが終了しました"
 
 msgid "Downloading covers"
-msgstr "ｶﾊﾞｰをﾀﾞｳﾝﾛｰﾄﾞ中"
+msgstr "カバーをダウンロード中"
 
 msgid "Downloading custom Discarts"
-msgstr "ｶｽﾀﾑﾚｰﾍﾞﾙをﾀﾞｳﾝﾛｰﾄﾞ中"
+msgstr "カスタムカバーをダウンロード中"
 
 msgid "Downloading file"
-msgstr "ﾌｧｲﾙをﾀﾞｳﾝﾛｰﾄﾞ中:"
+msgstr "ファイルをダウンロード中"
 
 msgid "Downloading file..."
-msgstr "ﾌｧｲﾙをﾀﾞｳﾝﾛｰﾄﾞ中…"
+msgstr "ダウンロード中です..."
 
 msgid "Downloading image:"
-msgstr "画像をﾀﾞｳﾝﾛｰﾄﾞ中ﾞ:"
+msgstr "画像をダウンロード中"
 
 msgid "Downloading original Discarts"
-msgstr "純正ﾚｰﾍﾞﾙをﾀﾞｳﾝﾛｰﾄﾞ中"
+msgstr "公式カバーをダウンロード中"
 
 msgid "Downloading pagelist:"
-msgstr ""
+msgstr "リストをダウンロード中:"
 
 msgid "Dutch"
-msgstr "ｵﾗﾝﾀﾞ語"
+msgstr "オランダ語"
 
 msgid "ERROR"
 msgstr "エラー"
@@ -494,7 +494,7 @@ msgid "ERROR:"
 msgstr "エラー："
 
 msgid "ERROR: Can't set up theme."
-msgstr "ｴﾗｰ:ﾃｰﾏを適用できませんでした"
+msgstr "テーマを適用できませんでした"
 
 msgid "English"
 msgstr "英語"
@@ -510,90 +510,90 @@ msgstr "Error002対策"
 
 #, c-format
 msgid "Error creating path: %s"
-msgstr "ﾊﾟｽの作成ｴﾗｰ: %s"
+msgstr "パスの作成エラー: %s"
 
 msgid "Error opening downloaded file"
-msgstr "ﾀﾞｳﾝﾛｰﾄﾞﾌｧｲﾙを開けません"
+msgstr "ダウンロードしたファイルを開けません"
 
 msgid "Error reading Disc"
 msgstr "読み込みに失敗しました"
 
 #, c-format
 msgid "Error when downloading file: %i"
-msgstr "ﾌｧｲﾙのﾀﾞｳﾝﾛｰﾄﾞｴﾗｰ: %i"
+msgstr "ダウンロードに失敗: %i"
 
 msgid "Error while downloding file"
-msgstr "ﾌｧｲﾙをﾀﾞｳﾝﾛｰﾄﾞできません"
+msgstr "ダウンロードに失敗しました"
 
 msgid "Error while opening the zip."
-msgstr "zipﾌｧｲﾙを開けません"
+msgstr "zipファイルを開けません"
 
 msgid "Error while transfering data."
-msgstr "ﾃﾞｰﾀ転送中にｴﾗｰが発生しました"
+msgstr "転送中にエラーが発生しました"
 
 msgid "Error while updating USB Loader GX."
-msgstr "GXの更新中にｴﾗｰが発生しました"
+msgstr "更新中にエラーが発生しました"
 
 msgid "Error writing the data."
-msgstr "ﾃﾞｰﾀの書込み中にｴﾗｰが発生しました"
+msgstr "データの書き込み中にエラーが発生しました"
 
 msgid "Error..."
-msgstr "エラー …"
+msgstr "エラー…"
 
 msgid "Error:"
 msgstr "エラー:"
 
 msgid "Exit"
-msgstr "GXをやめる"
+msgstr "終了"
 
 msgid "Exit to where?"
-msgstr "どこへ戻りますか"
+msgstr "どこに移動しますか?"
 
 msgid "Extracting files..."
-msgstr "ﾌｧｲﾙを解凍中 …"
+msgstr "解凍中です…"
 
 msgid "Failed formating"
 msgstr "初期化に失敗しました"
 
 msgid "Failed to extract."
-msgstr "ﾌｧｲﾙの解凍に失敗しました"
+msgstr "解凍に失敗しました"
 
 msgid "Failed to open partition"
 msgstr "領域を開けませんでした"
 
 msgid "Failed updating"
-msgstr "更新できませんでした"
+msgstr "更新に失敗しました"
 
 msgid "Feb"
 msgstr "2月"
 
 msgid "File not found."
-msgstr "ﾌｧｲﾙが見つかりません"
+msgstr "ファイルが見つかりません"
 
 #, c-format
 msgid "Filesize is %i Byte."
-msgstr "ﾌｧｲﾙｻｲｽﾞが %i ﾊﾞｲﾄです"
+msgstr "ファイルサイズが%iバイトです"
 
 msgid "Filesize is 0 Byte."
-msgstr "ﾌｧｲﾙｻｲｽﾞが0ﾊﾞｲﾄです"
+msgstr "ファイルサイズが0バイトです"
 
 msgid "Finishing installation... Ok!"
-msgstr "ｲﾝｽﾄｰﾙの完了 … 成功！"
+msgstr "ｲﾝｽﾄｰﾙの完了...完了しました"
 
 msgid "Flat Covers"
-msgstr "ｶﾊﾞｰ"
+msgstr "正面カバー"
 
 msgid "Flip-X"
-msgstr "ｹﾞｰﾑﾘｽﾄの回転"
+msgstr "ゲームリストの回転"
 
 msgid "Force NTSC"
-msgstr "NTSC(強制)"
+msgstr "NTSCに強制"
 
 msgid "Force PAL50"
-msgstr "PAL50(強制)"
+msgstr "PAL50に強制"
 
 msgid "Force PAL60"
-msgstr "PAL60(強制)"
+msgstr "PAL60に強制"
 
 msgid "Format"
 msgstr "初期化"
@@ -605,19 +605,22 @@ msgid "Free Space"
 msgstr "空き"
 
 msgid "French"
-msgstr "ﾌﾗﾝｽ語"
+msgstr "フランス語"
+
+msgid "Full Menu"
+msgstr ""
 
 msgid "Full shutdown"
-msgstr "ｼｬｯﾄﾀﾞｳﾝ"
+msgstr "シャットダウン"
 
 msgid "GAMEID_Gamename"
-msgstr "ID_名前"
+msgstr "ゲームID_ゲーム名"
 
 msgid "GCT Cheatcodes Path"
-msgstr "ＧＣＴチート"
+msgstr "GCTファイルのパス"
 
 msgid "GCT File created"
-msgstr "GCTﾌｧｲﾙを作成しました"
+msgstr "GCTファイルを作成しました"
 
 msgid "GUI Settings"
 msgstr "基本設定"
@@ -626,52 +629,52 @@ msgid "Game ID"
 msgstr "IDのみ"
 
 msgid "Game IOS"
-msgstr "IOS"
+msgstr "使用するIOS"
 
 msgid "Game Language"
 msgstr "ゲームの言語"
 
 msgid "Game Load"
-msgstr "ゲームの起動方法"
+msgstr "読み込みの設定"
 
 msgid "Game Lock"
 msgstr "ロック"
 
 msgid "Game Only"
-msgstr ""
+msgstr "ゲームのみ"
 
 msgid "Game Region"
-msgstr "ﾘｰｼﾞｮﾝのみ"
+msgstr "リージョンのみ"
 
 msgid "Game Size"
 msgstr "容量"
 
 msgid "Game Sound Mode"
-msgstr "音声モード"
+msgstr "サウンドモード"
 
 msgid "Game Sound Volume"
 msgstr "音量"
 
 msgid "Game Split Size"
-msgstr "分割ｻｲｽﾞ"
+msgstr "ゲームの分割サイズ"
 
 msgid "Game is already installed:"
 msgstr "このｹﾞｰﾑは既にｲﾝｽﾄｰﾙされています:"
 
 msgid "Gamename [GAMEID]"
-msgstr "名前 [ID]"
+msgstr "ゲーム名 [ゲームID]"
 
 msgid "Games"
 msgstr "ゲーム総数"
 
 msgid "Genre:"
-msgstr ""
+msgstr "ジャンル:"
 
 msgid "German"
-msgstr "ﾄﾞｲﾂ語"
+msgstr "ドイツ語"
 
 msgid "Global Settings"
-msgstr "設定"
+msgstr "基本設定"
 
 msgid "HOME Menu"
 msgstr "HOMEﾎﾞﾀﾝﾒﾆｭｰ"
@@ -680,7 +683,7 @@ msgid "Homebrew Apps Path"
 msgstr "Homebrew"
 
 msgid "Homebrew Channel"
-msgstr "ＨＢＣへ"
+msgstr "HBCへ"
 
 msgid "Homebrew Launcher"
 msgstr "Homebrewランチャー"
@@ -689,10 +692,10 @@ msgid "Hour"
 msgstr "時間"
 
 msgid "How do you want to update?"
-msgstr "更新方法の選択"
+msgstr "どう更新しますか？"
 
 msgid "How to Shutdown?"
-msgstr "終了方法の選択"
+msgstr "どう終了しますか？"
 
 #, c-format
 msgid "Incoming file %0.2fKB"
@@ -703,52 +706,52 @@ msgid "Incoming file %0.2fMB"
 msgstr "ﾌｧｲﾙを受信中 %0.2fMB"
 
 msgid "Initializing Network"
-msgstr "接続中…"
+msgstr "接続中･･･"
 
 msgid "Insert Disk"
 msgstr "ﾃﾞｨｽｸを入れてください"
 
 msgid "Insert a Wii Disc!"
-msgstr "Wiiﾃﾞｨｽｸを入れて下さい!"
+msgstr "Wiiディスクを入れて下さい!"
 
 msgid "Install"
 msgstr "ｲﾝｽﾄｰﾙ"
 
 msgid "Install Error!"
-msgstr "ｲﾝｽﾄｰﾙ ｴﾗｰ!"
+msgstr "インストールエラー!"
 
 msgid "Install a game"
-msgstr "ｹﾞｰﾑをｲﾝｽﾄｰﾙ"
+msgstr "ゲームをインストール"
 
 msgid "Install directories"
-msgstr "ｲﾝｽﾄｰﾙするﾌｫﾙﾀﾞ"
+msgstr "インストールフォルダ"
 
 msgid "Install partitions"
-msgstr "ｲﾝｽﾄｰﾙする領域"
+msgstr "保存する領域"
 
 msgid "Installing content... Ok!"
-msgstr ""
+msgstr "ｺﾝﾃﾝﾂをｲﾝｽﾄｰﾙ...成功！"
 
 msgid "Installing game:"
 msgstr "ｹﾞｰﾑをｲﾝｽﾄｰﾙ中:"
 
 msgid "Installing ticket... Ok!"
-msgstr "ﾁｹｯﾄをｲﾝｽﾄｰﾙ … 成功！"
+msgstr "ﾁｹｯﾄをｲﾝｽﾄｰﾙ...成功！"
 
 msgid "Installing title... Ok!"
-msgstr "ﾀｲﾄﾙをｲﾝｽﾄｰﾙ … 成功！"
+msgstr "ﾀｲﾄﾙをｲﾝｽﾄｰﾙ...成功！"
 
 msgid "Installing wad"
 msgstr "WADをｲﾝｽﾄｰﾙします"
 
 msgid "Issue manager /"
-msgstr "課題管理者:"
+msgstr "問題管理者:"
 
 msgid "It seems that you have some information that will be helpful to us. Please pass this information along to the DEV team."
-msgstr "開発のため、この情報を開発者までお知らせください。"
+msgstr "この情報は開発者までお知らせください"
 
 msgid "Italian"
-msgstr "ｲﾀﾘｱ語"
+msgstr "イタリア語"
 
 msgid "Jan"
 msgstr "1月"
@@ -772,13 +775,13 @@ msgid "Korean"
 msgstr "韓国語"
 
 msgid "Language File"
-msgstr "言語ﾌｧｲﾙ"
+msgstr "言語ファイル"
 
 msgid "Language change:"
 msgstr "言語の変更"
 
 msgid "Languagefiles Path"
-msgstr "言語設定ﾌｧｲﾙ"
+msgstr "言語ファイル"
 
 msgid "Languagepath changed."
 msgstr "言語のパスを変更しました"
@@ -787,10 +790,10 @@ msgid "Left"
 msgstr "左ボタンで"
 
 msgid "Like SysMenu"
-msgstr "Wiiメニュー式"
+msgstr "Wiiメニュー風"
 
 msgid "List on Gamelaunch"
-msgstr "Gamelaunchリスト"
+msgstr "ゲーム起動時にリスト"
 
 msgid "Load"
 msgstr "はじめる"
@@ -806,55 +809,55 @@ msgid "Load this DOL as alternate DOL?"
 msgstr "このDOLを代替DOLとしてﾛｰﾄﾞしますか？"
 
 msgid "Loader Settings"
-msgstr "ゲームの起動方法"
+msgstr "ローダーの設定"
 
 msgid "Loading default theme."
-msgstr "標準テーマに変更しますか"
+msgstr "標準のテーマにしますか?"
 
 msgid "Loading standard language."
 msgstr "標準の言語に変更しますか"
 
 msgid "Loading standard music."
-msgstr "標準のBGMに戻しますか"
+msgstr "初期設定に戻しますか"
 
 msgid "Lock Console"
-msgstr "GXをﾛｯｸ"
+msgstr "GXをロック"
 
 msgid "Lock USB Loader GX"
-msgstr "GXをﾛｯｸ"
+msgstr "ロックする"
 
 msgid "Locked"
-msgstr "ﾛｯｸされています"
+msgstr "ロック中"
 
 msgid "Loop Directory"
 msgstr "フォルダ内でループ"
 
 msgid "Loop Music"
-msgstr "ループ"
+msgstr "ループさせる"
 
 msgid "Loop Sound"
-msgstr "ループ"
+msgstr "ループさせる"
 
 msgid "Main tester:"
-msgstr "ﾒｲﾝ ﾃｽﾀｰ:"
+msgstr "メインテスター:"
 
 msgid "Mar"
 msgstr "3月"
 
 msgid "Mark new games"
-msgstr "新ｹﾞｰﾑの[New]表示"
+msgstr "Newマークの表示機能"
 
 msgid "May"
 msgstr "5月"
 
 msgid "Messageboard Update"
-msgstr "Wii伝言板"
+msgstr "Wii伝言板の更新"
 
 msgid "Missing files"
 msgstr "個の画像"
 
 msgid "Motion+ Video"
-msgstr ""
+msgstr "モーション＋の映像"
 
 msgid "Mount DVD drive"
 msgstr "DVDを起動"
@@ -869,7 +872,7 @@ msgid "Neither"
 msgstr "非表示"
 
 msgid "Network is not initiated."
-msgstr "ﾈｯﾄﾜｰｸに接続していません"
+msgstr "ネットワークに接続されていません"
 
 msgid "New Disc Detected"
 msgstr "新しいディスクが検出されました"
@@ -890,16 +893,16 @@ msgid "No Splitting"
 msgstr "分割しない"
 
 msgid "No URL or Path specified."
-msgstr "URL又はﾊﾟｽが既定されていません"
+msgstr "URLかパスが指定されていません"
 
 msgid "No WBFS or FAT/NTFS/EXT partition found"
-msgstr "使用可能な領域が見つかりません"
+msgstr "WBFS/FAT/NTFS/EXT領域が見つかりません"
 
 msgid "No cheats were selected"
-msgstr "ﾁｰﾄが選択されていません"
+msgstr "何も選ばれていません"
 
 msgid "No data could be read."
-msgstr "ﾃﾞｰﾀ読込に失敗しました"
+msgstr "読み込みに失敗しました"
 
 msgid "No favorites selected."
 msgstr "お気に入りはありません"
@@ -911,7 +914,7 @@ msgid "No new updates."
 msgstr "更新はありません"
 
 msgid "No themes found on the site."
-msgstr "ﾃｰﾏが見つかりません"
+msgstr "テーマが見つかりません"
 
 msgid "None"
 msgstr "なし"
@@ -929,10 +932,10 @@ msgid "Not a valid URL"
 msgstr "無効なURLです"
 
 msgid "Not a valid URL path"
-msgstr "無効なﾊﾟｽです"
+msgstr "無効なパスです"
 
 msgid "Not a valid domain"
-msgstr "無効なﾄﾞﾒｲﾝです"
+msgstr "無効なドメインです"
 
 msgid "Not enough free memory."
 msgstr "空ﾒﾓﾘが不足しています"
@@ -941,13 +944,13 @@ msgid "Not enough free space!"
 msgstr "空容量が不足しています!"
 
 msgid "Not enough memory."
-msgstr "ﾒﾓﾘが不足しています"
+msgstr "メモリが足りません"
 
 msgid "Not required"
-msgstr "不要です"
+msgstr "必要なし"
 
 msgid "Not supported format!"
-msgstr "未対応の形式です!"
+msgstr "対応していない形式です!"
 
 msgid "Nov"
 msgstr "11月"
@@ -962,7 +965,7 @@ msgid "ON"
 msgstr "使う"
 
 msgid "Ocarina"
-msgstr ""
+msgstr "改造コード"
 
 msgid "Oct"
 msgstr "10月"
@@ -974,16 +977,16 @@ msgid "Offset"
 msgstr "代替"
 
 msgid "Only Customs"
-msgstr "ｶｽﾀﾑのみ"
+msgstr "カスタムのみ"
 
 msgid "Only Game Partition"
-msgstr "ｹﾞｰﾑの領域のみ"
+msgstr "ゲーム領域のみ"
 
 msgid "Only Original"
 msgstr "公式のみ"
 
 msgid "Only for Install"
-msgstr "ｲﾝｽﾄｰﾙ時のみ"
+msgstr "インストール中のみ"
 
 msgid "Original/Customs"
 msgstr "公式を優先"
@@ -992,7 +995,7 @@ msgid "Parental Control"
 msgstr "使用制限の設定"
 
 msgid "Partition"
-msgstr "使用領域"
+msgstr "使用する領域"
 
 msgid "Password"
 msgstr "暗証番号"
@@ -1004,16 +1007,16 @@ msgid "Password has been changed"
 msgstr "暗証番号を変更しました"
 
 msgid "Patch Country Strings"
-msgstr "国コードパッチ"
+msgstr "日本語パッチ"
 
 msgid "Path Changed"
-msgstr "ﾊﾟｽが変更されました"
+msgstr "パスが変更されました"
 
 msgid "Permission denied."
-msgstr ""
+msgstr "アクセスが拒否されました"
 
 msgid "Pick from a list"
-msgstr "ﾘｽﾄから選択"
+msgstr "リストから選択"
 
 msgid "Play Count"
 msgstr "プレイ回数"
@@ -1040,37 +1043,40 @@ msgid "Prev"
 msgstr "左へ"
 
 msgid "Prompts Buttons"
-msgstr "ﾒｯｾｰｼﾞ画面の大きさ"
+msgstr "ウインドウサイズ"
 
 msgid "Published by"
-msgstr "公開者："
+msgstr "発売元："
 
 msgid "Quick Boot"
-msgstr "クイック起動"
+msgstr "ワンボタン起動"
 
 msgid "Random Directory Music"
-msgstr "ランダムに再生"
+msgstr "フォルダ内でランダム再生"
 
 msgid "Reading WAD data... Ok!"
-msgstr "WADﾃﾞｰﾀの読込...成功！"
+msgstr "WADﾃﾞｰﾀの読み込み...成功！"
 
 msgid "Receiving file from:"
-msgstr "ﾌｧｲﾙを受信中:"
+msgstr "ファイルを受信中:"
 
 msgid "Region Patch"
-msgstr "ﾘｰｼﾞｮﾝﾊﾟｯﾁ"
+msgstr "リージョンパッチ"
 
 msgid "Released"
-msgstr "公表日"
+msgstr "発売日"
 
 msgid "Reload SD"
-msgstr "ＳＤ再読込"
+msgstr "SDを再読み込み"
 
 msgid "Remove update"
-msgstr "更新の除去"
+msgstr "更新を取り除く"
 
 msgid "Rename Game on WBFS"
-msgstr "WBFS内のｹﾞｰﾑ名変更"
+msgstr "WBFS内のゲーム名を変更"
+
+msgid "Reset"
+msgstr ""
 
 msgid "Reset BG Music"
 msgstr "BGMをリセット"
@@ -1079,19 +1085,19 @@ msgid "Reset Playcounter"
 msgstr "プレイ回数をリセット"
 
 msgid "Reset to default BGM?"
-msgstr "BGMを初期設定に戻しますか?"
+msgstr "BGMを初期状態に戻しますか?"
 
 msgid "Restarting..."
-msgstr "再起動します…"
+msgstr "再起動します"
 
 msgid "Return"
 msgstr "もどる"
 
 msgid "Return To"
-msgstr "終了後の復帰先"
+msgstr "戻り先"
 
 msgid "Return to Wii Menu"
-msgstr "Wiiﾒﾆｭｰへもどる"
+msgstr "Wiiメニューへもどる"
 
 msgid "Right"
 msgstr "右ボタンで"
@@ -1112,13 +1118,13 @@ msgid "Save Failed. No device inserted?"
 msgstr "保存に失敗しました"
 
 msgid "Save Game List to"
-msgstr "ｹﾞｰﾑﾘｽﾄを保存しますか"
+msgstr "リストを保存しますか"
 
 msgid "Saved"
 msgstr "保存しました"
 
 msgid "Screensaver"
-msgstr "スクリーンセーバー"
+msgstr "画面焼け軽減機能"
 
 msgid "Select"
 msgstr "選択"
@@ -1130,7 +1136,7 @@ msgid "Select a DOL"
 msgstr "DOLを選択"
 
 msgid "Select a DOL from Game"
-msgstr "ｹﾞｰﾑからDOLを選択"
+msgstr "ゲームからDOLを選択"
 
 msgid "Sept"
 msgstr "9月"
@@ -1145,19 +1151,19 @@ msgid "Show Free Space"
 msgstr "空き容量の表示"
 
 msgid "Shutdown System"
-msgstr "電源を切る"
+msgstr "シャットダウン"
 
 msgid "Shutdown Wii"
-msgstr "電源を切る"
+msgstr "シャットダウン"
 
 msgid "Sort alphabetically"
-msgstr "ｱﾙﾌｧﾍﾞｯﾄ順に並替"
+msgstr "名前順に並び替え"
 
 msgid "Sort by rank"
-msgstr "ﾗﾝｸ順に並替"
+msgstr "ランク順に並び替え"
 
 msgid "Sort order by most played"
-msgstr "ﾌﾟﾚｲ回数順に並替"
+msgstr "プレイ回数が多い順に並び替え"
 
 msgid "Sound"
 msgstr "サウンド"
@@ -1172,16 +1178,16 @@ msgid "Sound+Quiet"
 msgstr "サウンドのみ"
 
 msgid "Spanish"
-msgstr "ｽﾍﾟｲﾝ語"
+msgstr "スペイン語"
 
 msgid "Special thanks to:"
-msgstr "以下の方々に特に感謝します:"
+msgstr "スペシャルサンクス:"
 
 msgid "Split each 2GB"
-msgstr "2GB毎に分割"
+msgstr "2GBごとに分割"
 
 msgid "Split each 4GB"
-msgstr "4GB毎に分割"
+msgstr "4GBごとに分割"
 
 msgid "Standby"
 msgstr "スタンバイ"
@@ -1193,28 +1199,28 @@ msgid "Success:"
 msgstr "成功:"
 
 msgid "Successfully Saved"
-msgstr "保存に成功しました:"
+msgstr "保存に成功しました"
 
 msgid "Successfully Updated"
 msgstr "更新しました"
 
 msgid "Successfully Updated thanks to www.techjawa.com"
-msgstr "更新成功！ www.techjawa.comに感謝します。"
+msgstr "更新しました www.techjawa.comに感謝!"
 
 msgid "Successfully deleted:"
-msgstr "削除に成功しました:"
+msgstr "削除に成功しました"
 
 msgid "Successfully extracted theme."
-msgstr ""
+msgstr "テーマの解凍を完了しました."
 
 msgid "Successfully installed:"
-msgstr "このｹﾞｰﾑをｲﾝｽﾄｰﾙしました:"
+msgstr "このｹﾞｰﾑをｲﾝｽﾄｰﾙしました"
 
 msgid "Sync FAT32 FS Info"
-msgstr "FAT32ｼｽﾃﾑ情報の同期"
+msgstr "FAT32FS情報を同期"
 
 msgid "Synchronizing..."
-msgstr "同期しています…"
+msgstr "同期中です..."
 
 msgid "System Default"
 msgstr "Wiiの初期値"
@@ -1223,26 +1229,26 @@ msgid "TChinese"
 msgstr "繁体中国語"
 
 msgid "TXT Cheatcodes Path"
-msgstr "ＴＸＴチート"
+msgstr "テキストコード"
 
 msgid "The .them file was not found in the zip."
-msgstr ""
+msgstr ".themファイルがzip内にありません"
 
 msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "フォルダがありません。作成しますか？"
 
 msgid "The game installation is disabled under this IOS because of instability in usb write."
-msgstr "このIOSではｹﾞｰﾑのｲﾝｽﾄｰﾙはできません"
+msgstr "このIOSでのゲームの追加は不安定なため無効になっています"
 
 msgid "The wad file was installed"
-msgstr "WADﾌｧｲﾙをｲﾝｽﾄｰﾙしました"
+msgstr "wadがインストールされました"
 
 #, c-format
 msgid "The wad installation failed with error %i"
-msgstr ""
+msgstr "WADのｲﾝｽﾄｰﾙはｴﾗｰ%iで失敗しました"
 
 msgid "Theme Downloader"
-msgstr "ﾃｰﾏのﾀﾞｳﾝﾛｰﾄﾞ"
+msgstr "テーマをダウンロード"
 
 msgid "Theme Path"
 msgstr "テーマ"
@@ -1251,37 +1257,37 @@ msgid "Theme Title:"
 msgstr "テーマ名:"
 
 msgid "Theme path is changed."
-msgstr "ﾃｰﾏのﾊﾟｽを変更しました"
+msgstr "テーマのパスが変更されました"
 
 msgid "Themes by www.spiffy360.com"
-msgstr "ｶｽﾀﾑﾃｰﾏの提供… www.spiffy360.com"
+msgstr "テーマ…www.spiffy360.com"
 
 msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
-msgstr "このIOSは BootMiiのIOSです"
+msgstr "このIOSはBootMiiのIOSです"
 
 msgid "This IOS was not found on the titles list. If you are sure you have it installed than ignore this warning."
-msgstr "このIOSは ｹﾞｰﾑ名のﾘｽﾄにありません"
+msgstr "このIOSはタイトルリストにありませんでした"
 
 msgid "Time left:"
 msgstr "残り時間:"
 
 msgid "Title Launcher"
-msgstr "ランチャー"
+msgstr "チャンネルランチャー"
 
 msgid "Titles from WiiTDB"
-msgstr "ｹﾞｰﾑ名の日本語化"
+msgstr "ゲーム名のリスト"
 
 msgid "Tooltips"
 msgstr "ヒントバルーン"
 
 msgid "Transfer failed"
-msgstr "転送できませんでした"
+msgstr "転送に失敗しました"
 
 msgid "Trying custom Discarts"
-msgstr "ｶｽﾀﾑﾚｰﾍﾞﾙを取得します"
+msgstr "カスタムを試行中"
 
 msgid "Trying original Discarts"
-msgstr "純正ﾚｰﾍﾞﾙを取得します"
+msgstr "公式を試行中"
 
 msgid "USB Device not found"
 msgstr "USB機器が見つかりません"
@@ -1293,13 +1299,13 @@ msgid "Uninstall"
 msgstr "ｱﾝｲﾝｽﾄｰﾙ"
 
 msgid "Uninstall Game"
-msgstr "ｹﾞｰﾑをｱﾝｲﾝｽﾄｰﾙ"
+msgstr "ゲームをｱﾝｲﾝｽﾄｰﾙ"
 
 msgid "Uninstall Menu"
 msgstr "アンインストール"
 
 msgid "Uninstall all"
-msgstr ""
+msgstr "全てアンインストール"
 
 msgid "Uninstalling wad"
 msgstr "WADをｱﾝｲﾝｽﾄｰﾙ"
@@ -1308,56 +1314,56 @@ msgid "Unknown"
 msgstr "不明"
 
 msgid "Unlock USB Loader GX"
-msgstr "使用制限機能の解除"
+msgstr "ロックを解除"
 
 msgid "Unlocked"
-msgstr "ﾛｯｸされていません"
+msgstr "ロック無し"
 
 msgid "Unsupported format, try to extract manually TempTheme.zip."
-msgstr "未対応の形式のため、自動解凍できません。"
+msgstr "非対応の形式なのでTempTheme.zipを自己解凍してください"
 
 msgid "Update"
-msgstr "更　新"
+msgstr "更新"
 
 msgid "Update All"
-msgstr "すべて"
+msgstr "全て"
 
 msgid "Update DOL"
 msgstr "DOLのみ"
 
 msgid "Update Files"
-msgstr "ﾌｧｲﾙを更新"
+msgstr "すべて更新"
 
 msgid "Update Path"
-msgstr "ＧＸ本体"
+msgstr "GXのdol"
 
 msgid "Update all Language Files"
-msgstr "全言語を更新"
+msgstr "全言語ファイルを更新"
 
 msgid "Update failed"
 msgstr "更新に失敗しました"
 
 msgid "Update successfull"
-msgstr "更新は成功しました"
+msgstr "更新しました"
 
 msgid "Updating Language Files:"
-msgstr "言語設定を更新中:"
+msgstr "言語ファイルを更新中:"
 
 msgid "Uploaded ZIP file installed to homebrew directory."
 msgstr "ｲﾝｽﾄｰﾙ済みﾃﾞｨﾚｸﾄﾘにZIPを送信しました"
 
 msgid "Use IOS58"
-msgstr "IOS58(USB2.0)"
+msgstr "IOS58を使う"
 
 msgid "VIDTV Patch"
 msgstr "映像パッチ"
 
 #, c-format
 msgid "Version: %s"
-msgstr "ﾊﾞｰｼﾞｮﾝ: %s"
+msgstr "バージョン: %s"
 
 msgid "Video Mode"
-msgstr "ビデオ形式"
+msgstr "映像の出力方法"
 
 msgid "WDM Files Path"
 msgstr "WDMファイル"
@@ -1372,16 +1378,16 @@ msgid "Warning:"
 msgstr "警告:"
 
 msgid "What do you want to update?"
-msgstr "更新の選択"
+msgstr "何を更新しますか？"
 
 msgid "What should be deleted for this game title:"
-msgstr ""
+msgstr "このゲームの何を削除しますか:"
 
 msgid "WiFi Features"
-msgstr "WiFi機能"
+msgstr "ネットワーク対応"
 
 msgid "Widescreen Fix"
-msgstr "ふつう"
+msgstr "普通"
 
 msgid "Wii Menu"
 msgstr "Wiiメニューへ"
@@ -1390,16 +1396,16 @@ msgid "Wii Settings"
 msgstr "データ管理"
 
 msgid "WiiTDB Files"
-msgstr "ｹﾞｰﾑの名前"
+msgstr "ゲーム名リスト"
 
 msgid "WiiTDB Path"
-msgstr "WiiTDB"
+msgstr "ゲーム名リスト"
 
 msgid "WiiTDB is up to date."
-msgstr "WiiTDBは最新です"
+msgstr "WiiTDBが更新されました"
 
 msgid "Wiilight"
-msgstr "スロットイルミ"
+msgstr "スロット点灯機能"
 
 msgid "Wrong Password"
 msgstr "暗証番号が違います"
@@ -1408,16 +1414,16 @@ msgid "Yes"
 msgstr "はい"
 
 msgid "You are currently using IOS"
-msgstr "このIOSを使用中です"
+msgstr "使用中のIOS:IOS"
 
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
-msgstr "rev17以前のcIOS249でのFAT32/NTFS/EXTはｻﾎﾟｰﾄしていません"
+msgstr "rev17以前のcIOS249ではFAT32/NTFS/EXTに対応していません"
 
 msgid "You need to select or format a partition"
 msgstr "領域を選択するか初期化してください"
 
 msgid "and translators for language files updates"
-msgstr "and translators"
+msgstr "/ K-M …日本語への翻訳"
 
 msgid "available"
 msgstr "があります"
@@ -1426,16 +1432,16 @@ msgid "does not exist!"
 msgstr "存在しません!"
 
 msgid "does not exist!  Loading game without cheats."
-msgstr "存在しないためﾁｰﾄなしでｹﾞｰﾑを起動します。"
+msgstr "存在しないので チートなしで起動します"
 
 msgid "files left"
-msgstr "個で完了"
+msgstr "個未完了"
 
 msgid "files not found on the server!"
-msgstr "個はｻｰﾊﾞｰにありませんでした…"
+msgstr "個ｻｰﾊﾞｰにありませんでした…"
 
 msgid "for FAT/NTFS support"
-msgstr "…FAT/NTFSﾗｲﾌﾞﾗﾘを制作"
+msgstr "…FATとNTFSへの対応"
 
 msgid "for Ocarina"
 msgstr "…Ocarinaを制作"
@@ -1447,7 +1453,7 @@ msgid "for diverse patches"
 msgstr "…様々なパッチを制作"
 
 msgid "for his awesome tool LibWiiGui"
-msgstr "…GUIﾗｲﾌﾞﾗﾘを制作"
+msgstr "…LibWiiGuiを制作"
 
 msgid "for hosting the themes"
 msgstr "…テーマを配布"
@@ -1465,7 +1471,7 @@ msgid "free"
 msgstr "空き"
 
 msgid "not set"
-msgstr "ｾｯﾄされていません"
+msgstr "セットされていません"
 
 msgid "of"
 msgstr "中"
@@ -1474,7 +1480,7 @@ msgid "seconds left"
 msgstr "秒で完了"
 
 #~ msgid "Do you really want to delete:"
-#~ msgstr "本当に削除しますか:"
+#~ msgstr "本当に削除しますか?"
 
 #~ msgid "Do you want to use the alternate DOL that is known to be correct?"
 #~ msgstr "既知の代替DOLを利用しますか？"

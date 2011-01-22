@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-21 19:48+0100\n"
-"PO-Revision-Date: 2011-01-18 11:19+0100\n"
+"POT-Creation-Date: 2011-01-22 16:54+0100\n"
+"PO-Revision-Date: 2011-01-21 13:52+0100\n"
 "Last-Translator: glowy\n"
 "Language-Team: tj_cool, glowy\n"
 "MIME-Version: 1.0\n"
@@ -173,55 +173,55 @@ msgid "Big thanks to:"
 msgstr "Grote dank aan:"
 
 msgid "Block Cover Downloads"
-msgstr ""
+msgstr "Blokkeer Downloads van Hoesjes"
 
 msgid "Block Custom Paths"
-msgstr ""
+msgstr "Blokkeer Aangepaste Paden"
 
 msgid "Block Game Install"
-msgstr ""
+msgstr "Blokkeer Spel Installatie"
 
 msgid "Block Game Settings"
-msgstr ""
+msgstr "Blokkeer Spel Instellingen"
 
 msgid "Block GameID Change"
-msgstr ""
+msgstr "Blokkeer SpelID Wijzigen"
 
 msgid "Block Global Settings"
-msgstr ""
+msgstr "Blokkeer Globale Instellingen"
 
 msgid "Block Gui Settings"
-msgstr ""
+msgstr "Blokkeer GUI Instellingen"
 
 msgid "Block HBC Menu"
-msgstr ""
+msgstr "Blokkeer HBC Menu"
 
 msgid "Block IOS Reload"
 msgstr "Stop IOS herladen"
 
 msgid "Block Loader Settings"
-msgstr ""
+msgstr "Blokkeer Loader Instellingen"
 
 msgid "Block Parental Settings"
-msgstr ""
+msgstr "Blokkeer Ouderlijk toezicht instellingen"
 
 msgid "Block Reset Settings"
-msgstr ""
+msgstr "Blokkeer Reset Instellingen"
 
 msgid "Block Sound Settings"
-msgstr ""
+msgstr "Blokkeer Geluid Instellingen"
 
 msgid "Block Theme Downloader"
-msgstr ""
+msgstr "Blokkeer Thema Downloader"
 
 msgid "Block Theme Menu"
-msgstr ""
+msgstr "Blokkeer Thema Menu"
 
 msgid "Block Title Launcher"
-msgstr ""
+msgstr "Blokkeer Titel Launcher"
 
 msgid "Block Updates"
-msgstr ""
+msgstr "Blokkeer Updates"
 
 msgid "Boot/Standard"
 msgstr "Start/Standaard"
@@ -292,7 +292,7 @@ msgid "Console Locked"
 msgstr "Console vergrendeld"
 
 msgid "Console must be unlocked for this option."
-msgstr ""
+msgstr "Console moet ontgrendeld zijn voor deze optie."
 
 msgid "Console should be unlocked to modify it."
 msgstr "Console moet worden vrijgegeven om te wijzigen."
@@ -606,6 +606,9 @@ msgstr "Vrije ruimte"
 
 msgid "French"
 msgstr "Frans"
+
+msgid "Full Menu"
+msgstr ""
 
 msgid "Full shutdown"
 msgstr "Volledig uitzetten"
@@ -1010,7 +1013,7 @@ msgid "Path Changed"
 msgstr "Pad gewijzigd"
 
 msgid "Permission denied."
-msgstr ""
+msgstr "Toegang geweigerd."
 
 msgid "Pick from a list"
 msgstr "Kiezen van lijst"
@@ -1071,6 +1074,9 @@ msgstr "Verwijder update"
 
 msgid "Rename Game on WBFS"
 msgstr "Spel hernoemen op WBFS"
+
+msgid "Reset"
+msgstr ""
 
 msgid "Reset BG Music"
 msgstr "Reset achtergrond muziek"

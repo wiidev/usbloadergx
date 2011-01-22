@@ -134,7 +134,7 @@ int BootHomebrew(const char * filepath)
 
     FILE *file = fopen(filepath, "rb");
 
-    if (!file) Sys_BackToLoader();
+    if (!file) return -1;
 
     fseek(file, 0, SEEK_END);
     filesize = ftell(file);

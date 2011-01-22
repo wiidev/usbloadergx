@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-21 19:48+0100\n"
+"POT-Creation-Date: 2011-01-22 15:31+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -607,6 +607,9 @@ msgstr ""
 msgid "French"
 msgstr ""
 
+msgid "Full Menu"
+msgstr ""
+
 msgid "Full shutdown"
 msgstr ""
 
@@ -1070,6 +1073,9 @@ msgid "Remove update"
 msgstr ""
 
 msgid "Rename Game on WBFS"
+msgstr ""
+
+msgid "Reset"
 msgstr ""
 
 msgid "Reset BG Music"

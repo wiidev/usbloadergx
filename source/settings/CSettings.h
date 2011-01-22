@@ -109,6 +109,7 @@ class CSettings
         short PlaylogUpdate;
         short ShowFreeSpace;
         short UseIOS58;
+        short HomeMenu;
         u32 InstallPartitions;
         u32 ParentalBlocks;
     protected:

@@ -302,13 +302,7 @@ static int ApplicationDownload(int newrev)
     if (update_choice > 0)
     {
         WindowPrompt(tr( "Restarting..." ), tr( "Successfully Updated thanks to www.techjawa.com" ), 0, 0, 0, 0, 150);
-        #ifdef FULLCHANNEL
-            ExitApp();
-            WII_Initialize();
-            WII_LaunchTitle(TITLE_ID( 0x00010001, 0x554c4e52 ));
-        #else
-            BootHomebrew(realpath);
-        #endif
+        RebootApp();
     }
 
     return 0;

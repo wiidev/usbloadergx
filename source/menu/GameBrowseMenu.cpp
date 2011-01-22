@@ -62,6 +62,7 @@ GameBrowseMenu::GameBrowseMenu()
     WDVD_GetCoverStatus(&DiscDriveCoverOld);
     wString oldFilter(gameList.GetCurrentFilter());
     gameList.FilterList(oldFilter.c_str());
+    HDDSizeCallback.SetCallback(this, &GameBrowseMenu::UpdateFreeSpace);
 
     btnInstall = Resources::GetImageData("button_install.png");
     btnInstallOver = Resources::GetImageData("button_install_over.png");
@@ -466,7 +467,6 @@ int GameBrowseMenu::Execute()
 
     if(Settings.ShowFreeSpace)
     {
-        Menu->HDDSizeCallback.SetCallback(Menu, &GameBrowseMenu::UpdateFreeSpace);
         ThreadedTask::Instance()->AddCallback(&Menu->HDDSizeCallback);
         ThreadedTask::Instance()->Execute();
     }
@@ -824,6 +824,13 @@ int GameBrowseMenu::MainLoop()
 
     else if (settingsBtn->GetState() == STATE_CLICKED)
     {
+        if (!Settings.godmode && (Settings.ParentalBlocks & BLOCK_GLOBAL_SETTINGS))
+        {
+            WindowPrompt(tr( "Permission denied." ), tr( "Console must be unlocked for this option." ), tr( "OK" ));
+            settingsBtn->ResetState();
+            return MENU_NONE;
+        }
+
         return MENU_SETTINGS;
     }
 
@@ -1056,7 +1063,7 @@ int GameBrowseMenu::MainLoop()
 
 void GameBrowseMenu::CheckDiscSlotUpdate()
 {
-    u32 DiscDriveCover;
+    u32 DiscDriveCover = 0;
     WDVD_GetCoverStatus(&DiscDriveCover);//for detecting if i disc has been inserted
 
     if ((DiscDriveCover & 0x02) && (DiscDriveCover != DiscDriveCoverOld))
@@ -1314,6 +1321,11 @@ int GameBrowseMenu::OpenClickedGame()
         else if (choice == 2)
         {
             ReloadBrowser();
+            if(Settings.ShowFreeSpace)
+            {
+                ThreadedTask::Instance()->AddCallback(&HDDSizeCallback);
+                ThreadedTask::Instance()->Execute();
+            }
         }
     }
 

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-21 19:48+0100\n"
+"POT-Creation-Date: 2011-01-22 16:54+0100\n"
 "PO-Revision-Date: 2009-12-29 11:05+0100\n"
 "Last-Translator: Springdale\n"
 "Language-Team: Tusk, Springdale\n"
@@ -607,6 +607,9 @@ msgstr "Szabad Hely"
 msgid "French"
 msgstr "Francia"
 
+msgid "Full Menu"
+msgstr ""
+
 msgid "Full shutdown"
 msgstr ""
 
@@ -1071,6 +1074,9 @@ msgstr ""
 
 msgid "Rename Game on WBFS"
 msgstr "WBFS játék átnevezése"
+
+msgid "Reset"
+msgstr ""
 
 msgid "Reset BG Music"
 msgstr ""

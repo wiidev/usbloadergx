@@ -173,4 +173,11 @@ enum
     ALT_DOL_DEFAULT,
 };
 
+enum
+{
+    HOME_MENU_SYSTEM,
+    HOME_MENU_FULL,
+    HOME_MENU_DEFAULT,
+};
+
 #endif

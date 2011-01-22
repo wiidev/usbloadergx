@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-21 19:48+0100\n"
+"POT-Creation-Date: 2011-01-22 16:56+0100\n"
 "PO-Revision-Date: 2010-02-15 21:00+0800\n"
 "Last-Translator: Jane.H\n"
 "Language-Team: kyogc, Miller, Mika Li, Jane.H\n"
@@ -173,55 +173,55 @@ msgid "Big thanks to:"
 msgstr "非常感謝:"
 
 msgid "Block Cover Downloads"
-msgstr ""
+msgstr "阻止封面下載"
 
 msgid "Block Custom Paths"
-msgstr ""
+msgstr "阻止自訂路徑"
 
 msgid "Block Game Install"
-msgstr ""
+msgstr "阻止遊戲安裝"
 
 msgid "Block Game Settings"
-msgstr ""
+msgstr "阻止遊戲設定"
 
 msgid "Block GameID Change"
-msgstr ""
+msgstr "阻止遊戲ID更改"
 
 msgid "Block Global Settings"
-msgstr ""
+msgstr "阻止整體設定"
 
 msgid "Block Gui Settings"
-msgstr ""
+msgstr "阻止介面設定"
 
 msgid "Block HBC Menu"
-msgstr ""
+msgstr "阻止 HBC 選單"
 
 msgid "Block IOS Reload"
 msgstr "阻止 IOS 重新載入"
 
 msgid "Block Loader Settings"
-msgstr ""
+msgstr "阻止 Loader 設定"
 
 msgid "Block Parental Settings"
-msgstr ""
+msgstr "阻止親子設定"
 
 msgid "Block Reset Settings"
-msgstr ""
+msgstr "阻止重置設定"
 
 msgid "Block Sound Settings"
-msgstr ""
+msgstr "阻止音效設定"
 
 msgid "Block Theme Downloader"
-msgstr ""
+msgstr "阻止主題下載"
 
 msgid "Block Theme Menu"
-msgstr ""
+msgstr "阻止主題選單"
 
 msgid "Block Title Launcher"
-msgstr ""
+msgstr "阻止 Title 啟動"
 
 msgid "Block Updates"
-msgstr ""
+msgstr "阻止更新"
 
 msgid "Boot/Standard"
 msgstr "啟動/標準"
@@ -292,7 +292,7 @@ msgid "Console Locked"
 msgstr "控制台已上鎖"
 
 msgid "Console must be unlocked for this option."
-msgstr ""
+msgstr "控制台必須解鎖才可使用此選項。"
 
 msgid "Console should be unlocked to modify it."
 msgstr "控制台須解鎖才可變更設定。"
@@ -606,6 +606,9 @@ msgstr "剩餘空間"
 
 msgid "French"
 msgstr "法文"
+
+msgid "Full Menu"
+msgstr ""
 
 msgid "Full shutdown"
 msgstr "關機"
@@ -1010,7 +1013,7 @@ msgid "Path Changed"
 msgstr "路徑已變更"
 
 msgid "Permission denied."
-msgstr ""
+msgstr "沒有權限。"
 
 msgid "Pick from a list"
 msgstr "從清單中選取"
@@ -1071,6 +1074,9 @@ msgstr "移除更新"
 
 msgid "Rename Game on WBFS"
 msgstr "變更WBFS上的遊戲名稱"
+
+msgid "Reset"
+msgstr ""
 
 msgid "Reset BG Music"
 msgstr "重設 BG 音樂"

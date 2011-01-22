@@ -13,6 +13,9 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+msgid " "
+msgstr ""
+
 msgid " Wad Saved as:"
 msgstr "WAD 保存为:"
 
@@ -173,55 +176,55 @@ msgid "Big thanks to:"
 msgstr "非常感谢:"
 
 msgid "Block Cover Downloads"
-msgstr ""
+msgstr "禁止下载封面"
 
 msgid "Block Custom Paths"
-msgstr ""
+msgstr "禁止自制路径"
 
 msgid "Block Game Install"
-msgstr ""
+msgstr "禁止安装游戏"
 
 msgid "Block Game Settings"
-msgstr ""
+msgstr "禁止设置游戏"
 
 msgid "Block GameID Change"
-msgstr ""
+msgstr "禁止更改游戏ID"
 
 msgid "Block Global Settings"
-msgstr ""
+msgstr "禁止全局设置"
 
 msgid "Block Gui Settings"
-msgstr ""
+msgstr "禁止图形界面设置"
 
 msgid "Block HBC Menu"
-msgstr ""
+msgstr "禁止HBC菜单"
 
 msgid "Block IOS Reload"
 msgstr "阻止IOS重新载入"
 
 msgid "Block Loader Settings"
-msgstr ""
+msgstr "禁止Loader设置"
 
 msgid "Block Parental Settings"
-msgstr ""
+msgstr "禁止家长控制设置"
 
 msgid "Block Reset Settings"
-msgstr ""
+msgstr "禁止重置设置"
 
 msgid "Block Sound Settings"
-msgstr ""
+msgstr "禁止声音设置"
 
 msgid "Block Theme Downloader"
-msgstr ""
+msgstr "禁止主题下载"
 
 msgid "Block Theme Menu"
-msgstr ""
+msgstr "禁止主题菜单"
 
 msgid "Block Title Launcher"
-msgstr ""
+msgstr "禁止Title启动"
 
 msgid "Block Updates"
-msgstr ""
+msgstr "禁止更新"
 
 msgid "Boot/Standard"
 msgstr "启动/标准"
@@ -292,7 +295,7 @@ msgid "Console Locked"
 msgstr "主机已锁定"
 
 msgid "Console must be unlocked for this option."
-msgstr ""
+msgstr "需解锁以开启设定功能."
 
 msgid "Console should be unlocked to modify it."
 msgstr "需解锁以开启设定功能."
@@ -638,7 +641,7 @@ msgid "Game Lock"
 msgstr "锁定游戏"
 
 msgid "Game Only"
-msgstr ""
+msgstr "仅游戏"
 
 msgid "Game Region"
 msgstr "游戏区域"
@@ -787,7 +790,7 @@ msgid "Left"
 msgstr "左"
 
 msgid "Like SysMenu"
-msgstr "同系统选单"
+msgstr "同系统菜单"
 
 msgid "List on Gamelaunch"
 msgstr "游戏启动时选择"
@@ -854,7 +857,7 @@ msgid "Missing files"
 msgstr "缺少的文件"
 
 msgid "Motion+ Video"
-msgstr ""
+msgstr "移动+视频"
 
 msgid "Mount DVD drive"
 msgstr "挂载DVD光驱"
@@ -1010,7 +1013,7 @@ msgid "Path Changed"
 msgstr "路径已变更"
 
 msgid "Permission denied."
-msgstr ""
+msgstr "没有权限."
 
 msgid "Pick from a list"
 msgstr "从列表中选取"
@@ -1299,7 +1302,7 @@ msgid "Uninstall Menu"
 msgstr "删除菜单"
 
 msgid "Uninstall all"
-msgstr ""
+msgstr "卸载所有"
 
 msgid "Uninstalling wad"
 msgstr "卸载 WAD"
@@ -1375,7 +1378,7 @@ msgid "What do you want to update?"
 msgstr "要升级什么?"
 
 msgid "What should be deleted for this game title:"
-msgstr ""
+msgstr "要删除这个游戏的什么:"
 
 msgid "WiFi Features"
 msgstr "WiFi 功能"

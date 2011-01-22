@@ -1,11 +1,11 @@
 # USB Loader GX
-# german language source file - r1046
+# german language source file - r1052
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-21 19:48+0100\n"
+"POT-Creation-Date: 2011-01-22 16:54+0100\n"
 "PO-Revision-Date: 2010-07-03 17:35-0800\n"
 "Last-Translator: TheRealVisitor\n"
 "Language-Team: Bertilax, Snoozer, wishmasterf, ZEN.13, TheRealVisitor\n"
@@ -173,55 +173,55 @@ msgid "Big thanks to:"
 msgstr "Großen Dank an:"
 
 msgid "Block Cover Downloads"
-msgstr ""
+msgstr "Blocke Cover Downloads"
 
 msgid "Block Custom Paths"
-msgstr ""
+msgstr "Blocke eigene Pfade"
 
 msgid "Block Game Install"
-msgstr ""
+msgstr "Blocke Spiele Installation"
 
 msgid "Block Game Settings"
-msgstr ""
+msgstr "Blocke Spiele Optionen"
 
 msgid "Block GameID Change"
-msgstr ""
+msgstr "Blocke SpieleID Änderung"
 
 msgid "Block Global Settings"
-msgstr ""
+msgstr "Blocke globale Optionen"
 
 msgid "Block Gui Settings"
-msgstr ""
+msgstr "Blocke GUI Optionen"
 
 msgid "Block HBC Menu"
-msgstr ""
+msgstr "Blocke HBC Menü"
 
 msgid "Block IOS Reload"
-msgstr "IOS Reload blocken"
+msgstr "Blocke IOS Neuladen"
 
 msgid "Block Loader Settings"
-msgstr ""
+msgstr "Blocke Loaderoptionen"
 
 msgid "Block Parental Settings"
-msgstr ""
+msgstr "Blocke Altersoptionen"
 
 msgid "Block Reset Settings"
-msgstr ""
+msgstr "Blocke Reset Optionen"
 
 msgid "Block Sound Settings"
-msgstr ""
+msgstr "Blocke Sound Optionen"
 
 msgid "Block Theme Downloader"
-msgstr ""
+msgstr "Blocke Theme Downloader"
 
 msgid "Block Theme Menu"
-msgstr ""
+msgstr "Blocke Theme Menü"
 
 msgid "Block Title Launcher"
-msgstr ""
+msgstr "Blocke Title Launcher"
 
 msgid "Block Updates"
-msgstr ""
+msgstr "Blocke Updates"
 
 msgid "Boot/Standard"
 msgstr "Bootstandard (cIOS)"
@@ -292,7 +292,7 @@ msgid "Console Locked"
 msgstr "Konsole gesperrt"
 
 msgid "Console must be unlocked for this option."
-msgstr ""
+msgstr "Gerät muss für diese Option entsperrt werden."
 
 msgid "Console should be unlocked to modify it."
 msgstr "Konsole muss zum Bearbeiten entsperrt werden."
@@ -506,7 +506,7 @@ msgid "Error !"
 msgstr "Fehler !"
 
 msgid "Error 002 fix"
-msgstr "ERROR #002 beheben"
+msgstr "Fehler 002 fix"
 
 #, c-format
 msgid "Error creating path: %s"
@@ -607,6 +607,9 @@ msgstr "Freier Speicher"
 msgid "French"
 msgstr "Französisch"
 
+msgid "Full Menu"
+msgstr ""
+
 msgid "Full shutdown"
 msgstr "Komplett ausschalten"
 
@@ -638,7 +641,7 @@ msgid "Game Lock"
 msgstr "Spielsprerre"
 
 msgid "Game Only"
-msgstr ""
+msgstr "Nur Spiel"
 
 msgid "Game Region"
 msgstr "Region"
@@ -721,10 +724,10 @@ msgid "Install a game"
 msgstr "Spiel installieren"
 
 msgid "Install directories"
-msgstr "Verzeichnis installieren"
+msgstr "Installationsart"
 
 msgid "Install partitions"
-msgstr "Partitionen installieren"
+msgstr "Partitionen installier."
 
 msgid "Installing content... Ok!"
 msgstr "Installiere Inhalt... OK!"
@@ -842,19 +845,19 @@ msgid "Mar"
 msgstr "März"
 
 msgid "Mark new games"
-msgstr "Neue Spiele markieren"
+msgstr "Neue Spiele mark."
 
 msgid "May"
 msgstr "Mai"
 
 msgid "Messageboard Update"
-msgstr "Nachrichtenboard Update"
+msgstr "Forum Update"
 
 msgid "Missing files"
 msgstr "Fehlende Dateien"
 
 msgid "Motion+ Video"
-msgstr ""
+msgstr "Motion+ Video"
 
 msgid "Mount DVD drive"
 msgstr "Spiel starten"
@@ -1004,13 +1007,13 @@ msgid "Password has been changed"
 msgstr "Passwort wurde geändert"
 
 msgid "Patch Country Strings"
-msgstr "Country Strings patchen"
+msgstr "Ländercode patchen"
 
 msgid "Path Changed"
 msgstr "Pfad geändert"
 
 msgid "Permission denied."
-msgstr ""
+msgstr "Erlaubnis verweigert"
 
 msgid "Pick from a list"
 msgstr "Wähle aus der Liste"
@@ -1071,6 +1074,9 @@ msgstr "Update entfernen"
 
 msgid "Rename Game on WBFS"
 msgstr "Spiel umbenennen"
+
+msgid "Reset"
+msgstr ""
 
 msgid "Reset BG Music"
 msgstr "Musik zurücksetzen"
@@ -1142,7 +1148,7 @@ msgid "Settings"
 msgstr "Einstellungen"
 
 msgid "Show Free Space"
-msgstr "Zeige freien Speicher"
+msgstr "Zeige frei. Speicher"
 
 msgid "Shutdown System"
 msgstr "System herunterfahren"
@@ -1211,7 +1217,7 @@ msgid "Successfully installed:"
 msgstr "Erfolgreich installiert:"
 
 msgid "Sync FAT32 FS Info"
-msgstr "Synchronisiere FAT32 FS Info"
+msgstr "Sync. FAT32 FS Info"
 
 msgid "Synchronizing..."
 msgstr "Synchronisiere..."
@@ -1299,7 +1305,7 @@ msgid "Uninstall Menu"
 msgstr "Deinstallationsmenü"
 
 msgid "Uninstall all"
-msgstr ""
+msgstr "Alles deinstallieren"
 
 msgid "Uninstalling wad"
 msgstr "Deinstalliere WAD"
@@ -1375,7 +1381,7 @@ msgid "What do you want to update?"
 msgstr "Was möchtest du aktualisieren?"
 
 msgid "What should be deleted for this game title:"
-msgstr ""
+msgstr "Was sollte bei diesem Spiel gelöscht werden:"
 
 msgid "WiFi Features"
 msgstr "WiFi Fähigkeiten"

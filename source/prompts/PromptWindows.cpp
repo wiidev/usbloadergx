@@ -900,7 +900,15 @@ int WindowExitPrompt()
     GuiButton btn1(&btn1Img, &btn1OverImg, 0, 3, 0, 0, &trigA, btnSoundOver, btnSoundClick2, 0);
     btn1.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_IN, 50);
 
-    GuiText btn2Txt(tr( "Exit" ), 28, ( GXColor ) {0, 0, 0, 255});
+    GuiText btn2Txt(tr( "Homebrew Channel" ), 28, ( GXColor ) {0, 0, 0, 255});
+    if (Settings.HomeMenu == HOME_MENU_SYSTEM)
+    {
+        btn2Txt.SetText(tr( "Wii Menu" ));
+    }
+    else if (Settings.HomeMenu == HOME_MENU_FULL)
+    {
+        btn2Txt.SetText(tr( "Exit" ));
+    }
     GuiImage btn2Img(&button);
     if (Settings.wsprompt)
     {
@@ -913,7 +921,15 @@ int WindowExitPrompt()
     btn2.SetRumble(false);
     btn2.SetPosition(-150, 0);
 
-    GuiText btn3Txt(tr( "Shutdown Wii" ), 28, ( GXColor ) {0, 0, 0, 255});
+    GuiText btn3Txt(tr( "Wii Menu" ), 28, ( GXColor ) {0, 0, 0, 255});
+    if (Settings.HomeMenu == HOME_MENU_SYSTEM)
+    {
+       btn3Txt.SetText(tr( "Reset" ));
+    }
+    else if (Settings.HomeMenu == HOME_MENU_FULL)
+    {
+        btn3Txt.SetText(tr( "Shutdown Wii" ));
+    }
     GuiImage btn3Img(&button);
     if (Settings.wsprompt)
     {
@@ -1023,11 +1039,20 @@ int WindowExitPrompt()
         }
         else if (btn2.GetState() == STATE_CLICKED)
         {
-            ret = WindowPrompt(tr( "Exit to where?" ), 0, tr( "Homebrew Channel" ), tr( "Wii Menu" ), tr( "Cancel" ));
-            if (ret == 1)
-                Sys_LoadHBC();
-            else if(ret == 2)
+            if (Settings.HomeMenu == HOME_MENU_SYSTEM)
                 Sys_LoadMenu();
+            else if (Settings.HomeMenu == HOME_MENU_DEFAULT)
+                Sys_LoadHBC();
+            else if (Settings.HomeMenu == HOME_MENU_FULL)
+            {
+                ret = WindowPrompt(tr( "Exit to where?" ), 0, tr( "Homebrew Channel" ), tr( "Wii Menu" ), tr( "Reset" ), tr( "Cancel" ));
+                if (ret == 1)
+                    Sys_LoadHBC();
+                else if(ret == 2)
+                    Sys_LoadMenu();
+                else if(ret == 3)
+                    RebootApp();
+            }
             HaltGui();
             mainWindow->SetState(STATE_DISABLED);
             promptWindow.SetState(STATE_DEFAULT);
@@ -1037,11 +1062,18 @@ int WindowExitPrompt()
         }
         else if (btn3.GetState() == STATE_CLICKED)
         {
-            ret = WindowPrompt(tr( "How to Shutdown?" ), 0, tr( "Full shutdown" ), tr( "Standby" ), tr("Cancel"));
-            if (ret == 1)
-                Sys_ShutdownToStandby();
-            else if(ret == 2)
-                Sys_ShutdownToIdle();
+            if (Settings.HomeMenu == HOME_MENU_SYSTEM)
+                RebootApp();
+            else if (Settings.HomeMenu == HOME_MENU_DEFAULT)
+                Sys_LoadMenu();
+            else if (Settings.HomeMenu == HOME_MENU_FULL)
+            {
+                ret = WindowPrompt(tr( "How to Shutdown?" ), 0, tr( "Full shutdown" ), tr( "Standby" ), tr("Cancel"));
+                if (ret == 1)
+                    Sys_ShutdownToStandby();
+                else if(ret == 2)
+                    Sys_ShutdownToIdle();
+            }
             HaltGui();
             mainWindow->SetState(STATE_DISABLED);
             promptWindow.SetState(STATE_DEFAULT);

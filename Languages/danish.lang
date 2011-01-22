@@ -1,13 +1,13 @@
 # USB Loader GX language source file.
-# danish.lang - r937
+# danish.lang - r1048
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-21 19:48+0100\n"
+"POT-Creation-Date: 2011-01-22 16:54+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
-"Last-Translator: Fox88[dk]\n"
+"Last-Translator: Fox888[dk]\n"
 "Language-Team: [dk]\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -173,55 +173,55 @@ msgid "Big thanks to:"
 msgstr "En stor tak til:"
 
 msgid "Block Cover Downloads"
-msgstr ""
+msgstr "Bloker Cover downloads"
 
 msgid "Block Custom Paths"
-msgstr ""
+msgstr "Bloker brugdefineret sti"
 
 msgid "Block Game Install"
-msgstr ""
+msgstr "Bloker spil installering"
 
 msgid "Block Game Settings"
-msgstr ""
+msgstr "Bloker Spil indstillinger"
 
 msgid "Block GameID Change"
-msgstr ""
+msgstr "Bloker Spil ID ændringer"
 
 msgid "Block Global Settings"
-msgstr ""
+msgstr "Bloker hoved indstillinger"
 
 msgid "Block Gui Settings"
-msgstr ""
+msgstr "Bloker Gui indstillinger"
 
 msgid "Block HBC Menu"
-msgstr ""
+msgstr "Bloker HBC menu"
 
 msgid "Block IOS Reload"
 msgstr "Blokér IOS-reload"
 
 msgid "Block Loader Settings"
-msgstr ""
+msgstr "Bloker loader indstillinger"
 
 msgid "Block Parental Settings"
-msgstr ""
+msgstr "Bloker forældre indstillinger"
 
 msgid "Block Reset Settings"
-msgstr ""
+msgstr "Bloker nulstils indstillinger"
 
 msgid "Block Sound Settings"
-msgstr ""
+msgstr "Bloker lyd indstillinger"
 
 msgid "Block Theme Downloader"
-msgstr ""
+msgstr "Bloker tema downloader"
 
 msgid "Block Theme Menu"
-msgstr ""
+msgstr "Bloker tema menu"
 
 msgid "Block Title Launcher"
-msgstr ""
+msgstr "Bloker indlæsning af titler"
 
 msgid "Block Updates"
-msgstr ""
+msgstr "Bloker opdateringer"
 
 msgid "Boot/Standard"
 msgstr ""
@@ -292,7 +292,7 @@ msgid "Console Locked"
 msgstr "Konsollen er låst"
 
 msgid "Console must be unlocked for this option."
-msgstr ""
+msgstr "Konsollen skal være oplåst for denne mulighed."
 
 msgid "Console should be unlocked to modify it."
 msgstr "Konsollen skal være låst op for ændre dette."
@@ -350,7 +350,7 @@ msgid "Customs/Original"
 msgstr "Tilpassede/Originale"
 
 msgid "DOL Path"
-msgstr "Stil til DOL"
+msgstr "Sti til DOL"
 
 msgid "Dec"
 msgstr ""
@@ -523,7 +523,7 @@ msgid "Error when downloading file: %i"
 msgstr "Fejl kunne ikke download fil: %i"
 
 msgid "Error while downloding file"
-msgstr ""
+msgstr "Fejl under hentning af fil"
 
 msgid "Error while opening the zip."
 msgstr "Fejl under udpakning af zip fil."
@@ -599,13 +599,16 @@ msgid "Format"
 msgstr "Formater"
 
 msgid "Formatting, please wait..."
-msgstr "Formaterer, vent venligst..."
+msgstr "Formatere, vent venligst..."
 
 msgid "Free Space"
 msgstr "Ledig plads"
 
 msgid "French"
 msgstr "Fransk"
+
+msgid "Full Menu"
+msgstr ""
 
 msgid "Full shutdown"
 msgstr "Luk helt ned"
@@ -790,7 +793,7 @@ msgid "Like SysMenu"
 msgstr "Ligesom wii-menuen"
 
 msgid "List on Gamelaunch"
-msgstr ""
+msgstr "Vis ved opstart af spil"
 
 msgid "Load"
 msgstr "Indlæs"
@@ -869,7 +872,7 @@ msgid "Neither"
 msgstr "Ingen"
 
 msgid "Network is not initiated."
-msgstr "Netvaærk er ikke initialiseret."
+msgstr "Netværk er ikke initialiseret."
 
 msgid "New Disc Detected"
 msgstr "Har opdaget ny DVD"
@@ -980,7 +983,7 @@ msgid "Only Game Partition"
 msgstr "Kun spil Partition"
 
 msgid "Only Original"
-msgstr "Kun originaler"
+msgstr "Kun originale"
 
 msgid "Only for Install"
 msgstr "Kun til installering"
@@ -1010,7 +1013,7 @@ msgid "Path Changed"
 msgstr "Sti er ændret"
 
 msgid "Permission denied."
-msgstr ""
+msgstr "Tilladelse nægtet."
 
 msgid "Pick from a list"
 msgstr "Vælg fra en liste"
@@ -1072,6 +1075,9 @@ msgstr "Fjern opdatering"
 msgid "Rename Game on WBFS"
 msgstr "Omdøb spil på WBFS"
 
+msgid "Reset"
+msgstr ""
+
 msgid "Reset BG Music"
 msgstr "Nulstil BG-musik"
 
@@ -1118,7 +1124,7 @@ msgid "Saved"
 msgstr "Gemt"
 
 msgid "Screensaver"
-msgstr "Screensaver"
+msgstr "Pauseskærm"
 
 msgid "Select"
 msgstr "Vælg"
@@ -1232,7 +1238,7 @@ msgid "The entered directory does not exist. Would you like to create it?"
 msgstr "Den angivne mappe eksisterer ikke. Skal den oprettes?"
 
 msgid "The game installation is disabled under this IOS because of instability in usb write."
-msgstr ""
+msgstr "Spil installering er ikke aktiveret med denne IOS, på grund af ustabil skrivning til usb enheder."
 
 msgid "The wad file was installed"
 msgstr "Wad fil var installeret"
@@ -1254,7 +1260,7 @@ msgid "Theme path is changed."
 msgstr "Sti til temaer er ændret."
 
 msgid "Themes by www.spiffy360.com"
-msgstr ""
+msgstr "Temaer af www.spiffy360.com"
 
 msgid "This IOS is the BootMii ios. If you are sure it is not BootMii and you have something else installed there than ignore this warning."
 msgstr "Denne IOS er BootMii ios. Hvis du er sikker på at det ikke er BootMii og du har noget andet installeret der, ignorer denne advarsel."
@@ -1408,7 +1414,7 @@ msgid "Yes"
 msgstr "Ja"
 
 msgid "You are currently using IOS"
-msgstr ""
+msgstr "Du brug i øjeblikket IOS"
 
 msgid "You are trying to select a FAT32/NTFS/EXT partition with cIOS 249 Rev < 18. This is not supported. Continue on your own risk."
 msgstr "Du prøver at vælge en FAT32/NTFS/EXT partition med cIOS 249 Rev < 18. Dette er ikke understøttet. Fortsætte er på egen risiko"

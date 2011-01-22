@@ -96,6 +96,13 @@ static const char *ScreensaverText[SCREENSAVER_MAX] =
     trNOOP( "1 hour" )
 };
 
+static const char * HomeMenuText[3] =
+{
+    trNOOP( "System Default" ),
+    trNOOP( "Full Menu" ),
+    trNOOP( "Default" )
+};
+
 GuiSettingsMenu::GuiSettingsMenu()
     : SettingsMenu(tr("GUI Settings"), &GuiOptions, MENU_NONE)
 {
@@ -115,6 +122,7 @@ GuiSettingsMenu::GuiSettingsMenu()
     Options->SetName(Idx++, "%s", tr( "Screensaver" ));
     Options->SetName(Idx++, "%s", tr( "Mark new games" ));
     Options->SetName(Idx++, "%s", tr( "Show Free Space" ));
+    Options->SetName(Idx++, "%s", tr( "HOME Menu" ));
 
     SetOptionValues();
 
@@ -187,6 +195,9 @@ void GuiSettingsMenu::SetOptionValues()
 
     //! Settings: Show Free Space
     Options->SetValue(Idx++, "%s", tr( OnOffText[Settings.ShowFreeSpace] ));
+
+    //! Settings: Home Menu style
+    Options->SetValue(Idx++, "%s", tr( HomeMenuText[Settings.HomeMenu] ));
 }
 
 int GuiSettingsMenu::GetMenuInternal()
@@ -322,6 +333,12 @@ int GuiSettingsMenu::GetMenuInternal()
     else if (ret == ++Idx)
     {
         if (++Settings.ShowFreeSpace >= MAX_ON_OFF) Settings.ShowFreeSpace = 0;
+    }
+
+    //! Settings: Home Menu Style
+    else if (ret == ++Idx)
+    {
+        if (++Settings.HomeMenu >= 3) Settings.HomeMenu = 0;
     }
 
     SetOptionValues();

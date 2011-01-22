@@ -112,6 +112,7 @@ void CSettings::SetDefault()
     GameSplit = GAMESPLIT_4GB;
     InstallPartitions = ONLY_GAME_PARTITION;
     widescreen = (CONF_GetAspectRatio() == CONF_ASPECT_16_9);
+    HomeMenu = HOME_MENU_DEFAULT;
 }
 
 bool CSettings::Load()
@@ -251,6 +252,7 @@ bool CSettings::Save()
     fprintf(file, "UseIOS58 = %d\n ", UseIOS58);
     fprintf(file, "ParentalBlocks = %08X\n ", ParentalBlocks);
     fprintf(file, "returnTo = %s\n ", returnTo);
+    fprintf(file, "HomeMenu = %d\n ", HomeMenu);
     fclose(file);
 
     return true;
@@ -446,6 +448,11 @@ bool CSettings::SetSetting(char *name, char *value)
     else if (strcmp(name, "ShowFreeSpace") == 0)
     {
         if (sscanf(value, "%d", &i) == 1) ShowFreeSpace = i;
+        return true;
+    }
+    else if (strcmp(name, "HomeMenu") == 0)
+    {
+        if (sscanf(value, "%d", &i) == 1) HomeMenu = i;
         return true;
     }
     else if (strcmp(name, "patchcountrystrings") == 0)

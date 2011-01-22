@@ -1,11 +1,11 @@
 # USB Loader GX language source file.
-# French.lang for r1046
+# French.lang for r1053
 # don't delete/change this line (é).
 msgid ""
 msgstr ""
 "Project-Id-Version: USB Loader GX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-21 19:48+0100\n"
+"POT-Creation-Date: 2011-01-22 15:31+0100\n"
 "PO-Revision-Date: 2009-10-01 01:00+0200\n"
 "Last-Translator: Cyan\n"
 "Language-Team: Badablek, Amour, ikya & Kin8\n"
@@ -173,55 +173,55 @@ msgid "Big thanks to:"
 msgstr "Grand merci à:"
 
 msgid "Block Cover Downloads"
-msgstr ""
+msgstr "Bloquer Téléch. jaquettes"
 
 msgid "Block Custom Paths"
-msgstr ""
+msgstr "Bloquer Person. dossiers"
 
 msgid "Block Game Install"
-msgstr ""
+msgstr "Bloquer Installation jeu"
 
 msgid "Block Game Settings"
-msgstr ""
+msgstr "Bloquer Paramètres jeu"
 
 msgid "Block GameID Change"
-msgstr ""
+msgstr "Bloquer Modif. IDJEU"
 
 msgid "Block Global Settings"
-msgstr ""
+msgstr "Bloquer Paramètres"
 
 msgid "Block Gui Settings"
-msgstr ""
+msgstr "Bloquer Config. GUI"
 
 msgid "Block HBC Menu"
-msgstr ""
+msgstr "Bloquer Menu HBC"
 
 msgid "Block IOS Reload"
 msgstr "Bloquer IOS reload"
 
 msgid "Block Loader Settings"
-msgstr ""
+msgstr "Bloquer Param. du Loader"
 
 msgid "Block Parental Settings"
-msgstr ""
+msgstr "Bloquer Contrôle parental"
 
 msgid "Block Reset Settings"
-msgstr ""
+msgstr "Bloquer Réinit. paramètres"
 
 msgid "Block Sound Settings"
-msgstr ""
+msgstr "Bloquer Sons"
 
 msgid "Block Theme Downloader"
-msgstr ""
+msgstr "Bloquer Télech. thèmes"
 
 msgid "Block Theme Menu"
-msgstr ""
+msgstr "Bloquer Thèmes"
 
 msgid "Block Title Launcher"
-msgstr ""
+msgstr "Bloquer Menu Chaînes"
 
 msgid "Block Updates"
-msgstr ""
+msgstr "Bloquer Mise à jour"
 
 msgid "Boot/Standard"
 msgstr ""
@@ -292,7 +292,7 @@ msgid "Console Locked"
 msgstr "Console verrouillée"
 
 msgid "Console must be unlocked for this option."
-msgstr ""
+msgstr "La console doit être déverrouillée."
 
 msgid "Console should be unlocked to modify it."
 msgstr "La console doit être déverrouillée."
@@ -607,6 +607,9 @@ msgstr "Espace libre"
 msgid "French"
 msgstr "Français"
 
+msgid "Full Menu"
+msgstr "Menu complet"
+
 msgid "Full shutdown"
 msgstr "Éteindre"
 
@@ -638,7 +641,7 @@ msgid "Game Lock"
 msgstr "Verrouiller le jeu"
 
 msgid "Game Only"
-msgstr ""
+msgstr "Seulement le jeu"
 
 msgid "Game Region"
 msgstr "Région"
@@ -854,7 +857,7 @@ msgid "Missing files"
 msgstr "Fichier(s) manquant(s)"
 
 msgid "Motion+ Video"
-msgstr ""
+msgstr "Vidéo Motion+"
 
 msgid "Mount DVD drive"
 msgstr "Lancer DVD"
@@ -1010,7 +1013,7 @@ msgid "Path Changed"
 msgstr "Chemin changé"
 
 msgid "Permission denied."
-msgstr ""
+msgstr "Permission refusée."
 
 msgid "Pick from a list"
 msgstr "Sélectionner"
@@ -1071,6 +1074,9 @@ msgstr "Supprimer MàJ"
 
 msgid "Rename Game on WBFS"
 msgstr "Renommer un jeu"
+
+msgid "Reset"
+msgstr "Réinitialisation"
 
 msgid "Reset BG Music"
 msgstr "Fond sonore par defaut"
@@ -1299,7 +1305,7 @@ msgid "Uninstall Menu"
 msgstr "Menu suppression"
 
 msgid "Uninstall all"
-msgstr ""
+msgstr "Tout supprimer"
 
 msgid "Uninstalling wad"
 msgstr "Désinstallation wad"
@@ -1375,7 +1381,7 @@ msgid "What do you want to update?"
 msgstr "Choix de la mise à jour"
 
 msgid "What should be deleted for this game title:"
-msgstr ""
+msgstr "Que voulez-vous supprimer pour ce titre?"
 
 msgid "WiFi Features"
 msgstr "Connexion WiFi"

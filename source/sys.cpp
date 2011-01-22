@@ -5,6 +5,7 @@
 #include "mload/mload.h"
 #include "Controls/DeviceHandler.hpp"
 #include "FileOperations/fileops.h"
+#include "homebrewboot/BootHomebrew.h"
 #include "settings/CSettings.h"
 #include "settings/GameTitles.h"
 #include "settings/newtitles.h"
@@ -22,6 +23,8 @@
 #include "video.h"
 #include "gecko.h"
 #include "xml/xml.h"
+#include "wad/nandtitle.h"
+#include "buildtype.h"
 
 extern "C"
 {
@@ -202,6 +205,19 @@ void Sys_LoadHBC(void)
 
     //Back to system menu if all fails
     SYS_ResetSystem(SYS_RETURNTOMENU, 0, 0);
+}
+
+bool RebootApp(void)
+{
+#ifdef FULLCHANNEL
+	ExitApp();
+	WII_Initialize();
+	return !(WII_LaunchTitle(TITLE_ID(0x00010001, 0x554c4e52)) < 0);
+#else
+	char filepath[255];
+	snprintf(filepath, sizeof(filepath), "%s/boot.dol", Settings.update_path);
+	return !(BootHomebrew(filepath) < 0);
+#endif
 }
 
 void ScreenShot()
