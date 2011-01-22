@@ -24,6 +24,7 @@
 #include "wad/nandtitle.h"
 #include "menu/menus.h"
 #include "memory/memory.h"
+#include "GameBooter.hpp"
 #include "sys.h"
 
 //appentrypoint has to be global because of asm
@@ -33,9 +34,17 @@ struct discHdr *dvdheader = NULL;
 extern int wbfs_part_fs;
 extern int mountMethod;
 
+int GameBooter::BootGCMode()
+{
+    ExitApp();
+    gprintf("\nLoading BC for GameCube");
+    WII_Initialize();
+    return WII_LaunchTitle(0x0000000100000100ULL);
+}
 
-static u32 BootPartition(char * dolpath, u8 videoselected, u8 languageChoice, u8 cheat, u8 vipatch, u8 patchcountrystring,
-	u8 alternatedol, u32 alternatedoloffset, u32 returnTo, u8 fix002)
+
+u32 GameBooter::BootPartition(char * dolpath, u8 videoselected, u8 languageChoice, u8 cheat, u8 vipatch, u8 patchcountrystring,
+                              u8 alternatedol, u32 alternatedoloffset, u32 returnTo, u8 fix002)
 {
     gprintf("booting partition IOS %u r%u\n", IOS_GetVersion(), IOS_GetRevision());
     entry_point p_entry;
@@ -73,24 +82,8 @@ static u32 BootPartition(char * dolpath, u8 videoselected, u8 languageChoice, u8
     return (u32) p_entry;
 }
 
-int BootGame(const char * gameID)
+int GameBooter::FindDiscHeader(const char * gameID, struct discHdr &gameHeader)
 {
-    if(!gameID || strlen(gameID) < 3)
-        return -1;
-
-    if (mountMethod == 2)
-    {
-        ExitApp();
-        gprintf("\nLoading BC for GameCube");
-        WII_Initialize();
-        return WII_LaunchTitle(0x0000000100000100ULL);
-    }
-
-    AppCleanUp();
-
-    gprintf("\tSettings.partition: %d\n", Settings.partition);
-
-    struct discHdr gameHeader;
     gameList.LoadUnfiltered();
 
     if(mountMethod == 0 && !gameList.GetDiscHeader(gameID))
@@ -111,8 +104,92 @@ int BootGame(const char * gameID)
 
     gameList.clear();
 
-    int ret = 0;
+    return 0;
+}
 
+void GameBooter::SetupAltDOL(u8 * gameID, u8 &alternatedol, u32 &alternatedoloffset)
+{
+    if(alternatedol == ALT_DOL_ON_LAUNCH)
+    {
+        alternatedol = ALT_DOL_FROM_GAME;
+        alternatedoloffset = WDMMenu::GetAlternateDolOffset();
+    }
+    else if(alternatedol == ALT_DOL_DEFAULT)
+    {
+        alternatedol = ALT_DOL_FROM_GAME;
+        alternatedoloffset = defaultAltDol((char *) gameID);
+    }
+
+    if(alternatedol == ALT_DOL_FROM_GAME && alternatedoloffset == 0)
+        alternatedol = OFF;
+}
+
+int GameBooter::SetupDisc(u8 * gameID)
+{
+    if (mountMethod)
+    {
+        gprintf("\tloading DVD\n");
+        return Disc_Open();
+    }
+
+    int ret = -1;
+
+    if(IosLoader::IsWaninkokoIOS() && IOS_GetRevision() < 18)
+    {
+        gprintf("Disc_SetUSB...");
+        ret = Disc_SetUSB(gameID);
+        gprintf("%d\n", ret);
+        if(ret < 0) return ret;
+    }
+    else
+    {
+        gprintf("Loading fragment list...");
+        ret = get_frag_list(gameID);
+        gprintf("%d\n", ret);
+        if(ret < 0) return ret;
+        ret = set_frag_list(gameID);
+        if(ret < 0) return ret;
+        gprintf("\tUSB set to game\n");
+    }
+
+    gprintf("Disc_Open()...");
+    ret = Disc_Open();
+    gprintf("%d\n", ret);
+
+    return ret;
+}
+
+bool GameBooter::LoadOcarina(u8 *gameID)
+{
+    if (ocarina_load_code(gameID) > 0)
+    {
+        ocarina_do_code();
+        return true;
+    }
+
+    return false;
+}
+
+int GameBooter::BootGame(const char * gameID)
+{
+    if(!gameID || strlen(gameID) < 3)
+        return -1;
+
+    if (mountMethod == 2)
+        return BootGCMode();
+
+    AppCleanUp();
+
+    gprintf("\tSettings.partition: %d\n", Settings.partition);
+
+    struct discHdr gameHeader;
+
+    //! Find disc header in the game list first
+    int ret = FindDiscHeader(gameID, gameHeader);
+    if(ret < 0)
+        return ret;
+
+    //! Setup game configuration from game settings. If no game settings exist use global/default.
     GameCFG * game_cfg = GameSettings.GetGameCFG(gameHeader.id);
     u8 videoChoice = game_cfg->video;
     u8 languageChoice = game_cfg->language;
@@ -126,17 +203,22 @@ int BootGame(const char * gameID)
     u8 reloadblock = game_cfg->iosreloadblock;
     u8 returnToLoaderGV = game_cfg->returnTo;
 
-    if(alternatedol == ALT_DOL_ON_LAUNCH)
+    //! Prepare alternate dol settings
+    SetupAltDOL(gameHeader.id, alternatedol, alternatedoloffset);
+
+    //! Setup the return to Loader option
+    u32 channel = 0;
+    if (returnToLoaderGV)
     {
-        alternatedol = ALT_DOL_FROM_GAME;
-        alternatedoloffset = WDMMenu::GetAlternateDolOffset();
-    }
-    else if(alternatedol == ALT_DOL_DEFAULT)
-    {
-        alternatedol = ALT_DOL_FROM_GAME;
-        alternatedoloffset = defaultAltDol((char *) gameHeader.id);
+        int idx = NandTitles.FindU32(Settings.returnTo);
+        if (idx >= 0) channel = TITLE_LOWER( NandTitles.At( idx ) );
     }
 
+    //! This is temporary - C <-> C++ transfer
+    SetCheatFilepath(Settings.Cheatcodespath);
+    SetBCAFilepath(Settings.BcaCodepath);
+
+    //! Reload game settings cIOS for this game
     if(iosChoice != IOS_GetVersion())
     {
         gprintf("Reloading into game cIOS: %i...\n", iosChoice);
@@ -145,40 +227,17 @@ int BootGame(const char * gameID)
             return -1;
     }
 
-    if (!mountMethod)
-    {
-        if(IosLoader::IsWaninkokoIOS() && IOS_GetRevision() < 18)
-        {
-            gprintf("Disc_SetUSB...");
-            ret = Disc_SetUSB(gameHeader.id);
-            gprintf("%d\n", ret);
-        }
-        else
-        {
-            gprintf("Loading fragment list...");
-            ret = get_frag_list(gameHeader.id);
-            gprintf("%d\n", ret);
-            ret = set_frag_list(gameHeader.id);
-            if (ret < 0) Sys_BackToLoader();
-            gprintf("\tUSB set to game\n");
-        }
-    }
-    else
-    {
-        gprintf("\tUSB not set, loading DVD\n");
-    }
-
-    gprintf("Disc_Open()...");
-    ret = Disc_Open();
-    gprintf("%d\n", ret);
-
+    //! Setup disc in cIOS and open it
+    ret = SetupDisc(gameHeader.id);
     if (ret < 0)
         Sys_BackToLoader();
 
+    //! Load BCA data for the game
     gprintf("Loading BCA data...");
     ret = do_bca_code(gameHeader.id);
     gprintf("%d\n", ret);
 
+    //! Setup IOS reload block - only possible on Hermes cIOS
     if (reloadblock == ON && IosLoader::IsHermesIOS())
     {
         enable_ES_ioctlv_vector();
@@ -186,50 +245,36 @@ int BootGame(const char * gameID)
             mload_close();
     }
 
-    u32 channel = 0;
-    if (returnToLoaderGV)
-    {
-        int idx = NandTitles.FindU32(Settings.returnTo);
-        if (idx >= 0) channel = TITLE_LOWER( NandTitles.At( idx ) );
-    }
-
-    //This is temporary
-    SetCheatFilepath(Settings.Cheatcodespath);
-    SetBCAFilepath(Settings.BcaCodepath);
-
+    //! Load main.dol or alternative dol into memory, start the game apploader and get game entrypoint
     gprintf("\tDisc_wiiBoot\n");
-
-    /* Boot partition */
     AppEntrypoint = BootPartition(Settings.dolpath, videoChoice, languageChoice, ocarinaChoice, viChoice, countrystrings,
                         alternatedol, alternatedoloffset, channel, fix002);
 
+    //! No entrypoint found...back to HBC/SystemMenu
     if(AppEntrypoint == 0)
     {
         WDVD_ClosePartition();
         Sys_BackToLoader();
     }
 
+    //! Load Ocarina codes
     bool enablecheat = false;
-
     if (ocarinaChoice)
-    {
-        // OCARINA STUFF - FISHEARS
-        if (ocarina_load_code((u8 *) Disc_ID) > 0)
-        {
-            ocarina_do_code();
-            enablecheat = true;
-        }
-    }
+        enablecheat = LoadOcarina(gameHeader.id);
 
+    //! Shadow mload - Only needed on some games with Hermes v5.1 (Check is inside the function)
     shadow_mload();
+
+    //! Flush all caches and close up all devices
     WBFS_Close();
     DeviceHandler::DestroyInstance();
     USB_Deinitialize();
 
+    //! Modify Wii Message Board to display the game starting here
     if(Settings.PlaylogUpdate)
-        Playlog_Update((char *) Disc_ID, BNRInstance::Instance()->GetIMETTitle(CONF_GetLanguage()));
+        Playlog_Update((char *) gameHeader.id, BNRInstance::Instance()->GetIMETTitle(CONF_GetLanguage()));
 
+    //! Jump to the entrypoint of the game - the last function of the USB Loader
     gprintf("Jumping to game entrypoint: 0x%08X.\n", AppEntrypoint);
-
     return Disc_JumpToEntrypoint(videoChoice, enablecheat, WDMMenu::GetDolParameter());
 }

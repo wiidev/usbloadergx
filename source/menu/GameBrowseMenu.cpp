@@ -12,6 +12,7 @@
 #include "usbloader/wdvd.h"
 #include "usbloader/GameList.h"
 #include "usbloader/AlternateDOLOffsets.h"
+#include "usbloader/GameBooter.hpp"
 #include "network/networkops.h"
 #include "network/update.h"
 #include "network/CoverDownload.h"
@@ -22,7 +23,6 @@
 #include "settings/CGameSettings.h"
 #include "settings/GameTitles.h"
 #include "utils/StringTools.h"
-#include "GameBootProcess.h"
 #include "utils/rockout.h"
 #include "utils/ShowError.h"
 #include "utils/tools.h"
@@ -1308,7 +1308,7 @@ int GameBrowseMenu::OpenClickedGame()
                 GameStatistics.Save();
 
                 //Just calling that shuts down everything and starts game
-                BootGame(IDfull);
+                GameBooter::BootGame(IDfull);
             }
         }
         else if (choice == 2)

@@ -28,8 +28,8 @@
 #include "wad/nandtitle.h"
 #include "system/IosLoader.h"
 #include "usbloader/MountGamePartition.h"
+#include "usbloader/GameBooter.hpp"
 #include "StartUpProcess.h"
-#include "GameBootProcess.h"
 #include "sys.h"
 
 extern "C"
@@ -44,7 +44,7 @@ static int QuickGameBoot(const char * gameID)
     Settings.Load();
 
     MountGamePartition(false);
-    return BootGame(gameID);
+    return GameBooter::BootGame(gameID);
 }
 
 int main(int argc, char *argv[])
